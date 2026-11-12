@@ -168,7 +168,7 @@ check('BRIDGE: the three cuts are 6, 6 and 12; draw 0 has rank 6, reaching the m
 await pick('narrow'); s = await state(); q = checkInstance(s);
 check('NARROW: (1, 5, 1, 5), the bridges carry only 3 and the rank of the 5 × 5 flow matrix is 3', s.dims.join() === '1,5,1,5' && s.cuts.min === 3 && s.cuts.bridges === 3 && s.rank === 3 && q.rank === 3 && !s.cone && q.svOK && s.sv.length === 5 && s.sv[3] < 1e-6 * s.sv[0]);
 let gq = drawnCuts(await D(() => window.HORIZON_DEBUG.geometry), s.dims);
-check('NARROW: the four cuts of the whole graph are a·d = 5, b·c = 5, 3·a·c = 3 and 3·b·d = 75 (one per placement of M and N); the amber one crosses leg a, the three bridges and leg c', s.cuts.bridgesBD === 75 && s.cuts.full === 3 && gq.lo === 3 && gq.ok
+check('NARROW: the four cuts of the whole graph are a·d = 5, b·c = 5, 3·a·c = 3 and 3·b·d = 75 (one per placement of M and N); the magenta one crosses leg a, the three bridges and leg c', s.cuts.bridgesBD === 75 && s.cuts.full === 3 && gq.lo === 3 && gq.ok
   && placements(1, 5, 1, 5).map((x) => `${x.edges}:${x.cap}`).sort().join(' ') === 'a,bond,c:3 a,d:5 b,bond,d:75 b,c:5' && (await D(() => window.HORIZON_DEBUG.geometry)).cuts.filter((z) => z.hot).map((z) => z.id).join() === 'ac', gq.bad.join(' | '));
 // the theorem is about the greatest rank: on the same dimensions draw 0 reaches 3 and draw 10 has only 2 (exact, over ℚ)
 const n0 = s; s = await seek(10); q = checkInstance(s);
@@ -203,7 +203,7 @@ for (let a = 1; a <= 6; a++) for (let b = 1; b <= 6; b++) for (let c = 1; c <= 6
 }
 check(`all ${settings} settings of the sliders (${range.map((x) => x.join('…')).join(', ')}): the page’s cuts are the four placements counted here, QMinCut keeps its three terms, the readouts say so, and the rank stays under the least cut`, domOK && settings === 1296 && range.every((x) => x.join() === '1,6,1'), domBad);
 check(`…on ${apart} of those settings the fourth cut 3·b·d is smaller than QMinCut, so the minimal cut of the whole graph is not QMinCut there`, apart > 0 && apart < settings);
-check('…and on every one of them each dashed line crosses exactly the legs and bridges of its placement, keeps clear of both tensors, carries that capacity, and is amber exactly when it is a minimal cut', geoOK, geoBad);
+check('…and on every one of them each dashed line crosses exactly the legs and bridges of its placement, keeps clear of both tensors, carries that capacity, and is magenta exactly when it is a minimal cut', geoOK, geoBad);
 // the supported setting where the two minima part: (5, 1, 5, 1), draw 0
 await setRange('da', 5); await setRange('db', 1); await setRange('dc', 5); await setRange('dd', 1); s = await seek(0);
 const G5 = await D(() => window.HORIZON_DEBUG.geometry);
@@ -222,7 +222,7 @@ check('the fourth cut is labelled ARGUED (by hand, not formalized) in both langu
 await setRange('da', 1); await setRange('db', 1); await setRange('dc', 1); await setRange('dd', 5); s = await seek(0);
 const G1 = await D(() => window.HORIZON_DEBUG.geometry), caps1 = placements(1, 1, 1, 5).map((x) => x.cap).sort((x, y) => x - y);
 const w1 = { note: await page.textContent('#roNote'), sub: await page.textContent('#hudSub'), keySub: await page.textContent('#roKeySub') };
-check('(1, 1, 1, 5), outside the cone: the four placements give 1, 3, 5, 15, the least is b·c = 1 (not the three bridges, 3), it is the amber line, and this draw’s exact rank stays under it',
+check('(1, 1, 1, 5), outside the cone: the four placements give 1, 3, 5, 15, the least is b·c = 1 (not the three bridges, 3), it is the magenta line, and this draw’s exact rank stays under it',
   s.dims.join() === '1,1,1,5' && !s.cone && caps1.join() === '1,3,5,15' && graphMin(1, 1, 1, 5) === 1 && s.cuts.rows === 5 && s.cuts.cols === 1 && s.cuts.bridges === 3 && s.cuts.bridgesBD === 15 && s.cuts.min === 1 && s.cuts.full === 1
   && rankQ(flowOf(s)) === s.rank && s.rank <= 1 && G1.cuts.filter((z) => z.hot).map((z) => z.id).join() === 'bc' && drawnCuts(G1, [1, 1, 1, 5]).ok, JSON.stringify([s.cuts, s.rank]));
 check('(1, 1, 1, 5): the readouts name the minimal cut 1 and Lean’s QMinCut 1 and call no bridge a bottleneck', /最小割 1：/.test(w1.sub) && /QMinCut = min\(3ac, ad, bc\) = 1/.test(w1.keySub) && /Lean 只保证秩不超过 QMinCut = min\(3ac, ad, bc\) = 1/.test(w1.note) && !/瓶颈/.test(w1.note + w1.sub) && !/第四道/.test(w1.note), JSON.stringify(w1));
@@ -260,11 +260,13 @@ check('the bridge controls do not claim one rank for every draw (both languages)
 }
 
 /* ---------- the modes ---------- */
-await pick('plateau'); s = await state();
-const spec = { plateau: (j) => 1 / (1 + Math.exp((j - 7.5) / 0.55)), geometric: (j) => 0.82 ** j, power: (j) => 1 / (1 + j * 0.5) ** 2 };
+await pick('geometric'); s = await state();
+const spec = { plateau: (j) => 1 / (1 + Math.exp((j - 7.5) / 0.55)), geometric: (j) => 1 / 2 ** (j + 1), power: (j) => 1 / (1 + j * 0.5) ** 2 };
 const lamOK = await D((fns) => Object.keys(fns).every((k) => [0, 1, 5, 12, 39].every((j) => Math.abs(window.HORIZON_DEBUG.lambda(k, j) - fns[k][j]) < 1e-12)), Object.fromEntries(Object.entries(spec).map(([k, f]) => [k, Object.fromEntries([0, 1, 5, 12, 39].map((j) => [j, f(j)]))])));
-const sum = (f) => { let t = 0; for (let j = 0; j < 400000; j++) t += f(j); return t; }, cnt = (f, th) => { let n = 0; for (let j = 0; j < 400000; j++) if (f(j) >= th) n++; return n; };
-check('PLATEAU: τ = 0.5, eight modes reach it and the wall stands at RW/(πτ) = 16', s.scene === 'modes' && near(s.theta, 0.5, 1e-9) && s.count === 8 && cnt(spec.plateau, 0.5) === 8 && near(s.total, sum(spec.plateau), 1e-6) && near(s.wall, 16, 0.01) && lamOK);
+const sum = (f) => { let t = 0; for (let j = 0; j < 400000; j++) t += f(j); return t; }, cnt = (f, th) => { let n = 0; for (let j = 0; j < 400000; j++) if (f(j) >= th - 1e-12) n++; return n; };
+// the chapter's example step 5, by exact fractions: λⱼ = 2^−(j+1) ≥ 1/8 ⇔ j + 1 ≤ 3, and Σ 2^−(j+1) = 1 = RW/π
+const exact = [0, 1, 2, 3, 4].filter((j) => 2 ** (j + 1) <= 8).length;
+check('HALVES: τ = 1/8, exactly three modes (j = 0, 1, 2) reach it and the wall stands at RW/(πτ) = 8, as in the example', s.scene === 'modes' && s.prof === 'geometric' && near(s.theta, 0.125, 1e-12) && s.count === 3 && exact === 3 && cnt(spec.geometric, 0.125) === 3 && near(s.total, 1, 1e-12) && near(s.wall, 8, 1e-9) && lamOK, JSON.stringify([s.theta, s.count, s.total, s.wall]));
 let modeOK = true, modeBad = '';
 for (const prof of ['plateau', 'geometric', 'power']) {
   await page.click(`#profChips [data-prof="${prof}"]`); await settle(page, 40);
@@ -275,22 +277,17 @@ for (const prof of ['plateau', 'geometric', 'power']) {
   }
 }
 check('three spectra × six thresholds: the count and the total match direct summation, and count × τ ≤ RW/π every time', modeOK, modeBad);
-check('the geometric spectrum sums to 1/(1 − 0.82) and the power law to 4(π²/6 − 1)', near(sum(spec.geometric), 1 / 0.18, 1e-9) && Math.abs(sum(spec.power) - 4 * (Math.PI ** 2 / 6 - 1)) < 1e-4);
-await pick('tail'); s = await state();
-check('TAIL plays the threshold downward on the power law', s.prof === 'power' && (s.playing || s.t > 0));
-s = await seek(1); check('at τ = 0.02 thirteen modes of the power law reach the threshold, far below the wall at 129', s.count === 13 && near(s.wall, 4 * (Math.PI ** 2 / 6 - 1) / 0.02, 0.05));
+check('the geometric spectrum sums to 1 and the power law to 4(π²/6 − 1)', near(sum(spec.geometric), 1, 1e-12) && Math.abs(sum(spec.power) - 4 * (Math.PI ** 2 / 6 - 1)) < 1e-4);
+await page.click('#profChips [data-prof="power"]'); s = await seek(1);
+check('at τ = 0.02 thirteen modes of the power law reach the threshold, far below the wall at 129', s.count === 13 && near(s.wall, 4 * (Math.PI ** 2 / 6 - 1) / 0.02, 0.05));
 // the printed stills of the two chapter-12 cards speak the chapter's notation (τ, RW/π) with the suite's own numbers,
 // and no page-side numerical check wears the green of the Lean boxes
 {
-  const shot = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=tail', await T.newPage());
+  const shot = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=geometric', await T.newPage());
   const look = async () => { await settle(shot); return shot.evaluate(() => ({ s: window.HORIZON_DEBUG.state, big: document.getElementById('hudBig').textContent, sub: document.getElementById('hudSub').textContent, green: Array.from(document.querySelectorAll('.okmark')).filter((e) => e.offsetParent).length })); };
-  let v = await look();
-  const tauT = Math.max(0.02, 1 - 0.98 * v.s.t), budgetT = sum(spec.power), nT = cnt(spec.power, tauT);
-  check('TAIL still: τ = 0.069, six modes clear it and the wall stands at RW/(πτ) = 37.4, as the caption says', near(v.s.theta, tauT, 1e-12) && tauT.toFixed(3) === '0.069' && nT === 6 && (budgetT / tauT).toFixed(1) === '37.4'
-    && v.big === `模态 · τ = ${tauT.toFixed(3)}` && v.sub === `不小于 τ 的模态有 ${nT} 个，上界 RW/(πτ) = ${(budgetT / tauT).toFixed(1)}` && !/θ|T\//.test(v.big + v.sub), `${v.big} / ${v.sub}`);
-  await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=plateau', shot); v = await look();
-  const nP = cnt(spec.plateau, 0.5), wallP = sum(spec.plateau) / 0.5;
-  check('PLATEAU still: τ = 0.5, the HUD gives the count and the wall the suite sums', v.sub === `不小于 τ 的模态有 ${nP} 个，上界 RW/(πτ) = ${wallP.toFixed(1)}` && nP === 8 && wallP.toFixed(0) === '16', v.sub);
+  const v = await look();
+  check('HALVES still: τ = 1/8, three modes clear it and the wall stands at 8, in the chapter\'s notation', near(v.s.theta, 0.125, 1e-12) && v.s.count === cnt(spec.geometric, 0.125)
+    && v.big === '模态 · τ = 1/8' && v.sub === '不小于 τ 的模态有 3 个，上界 RW/(πτ) = 8.0' && !/θ|T\//.test(v.big + v.sub), `${v.big} / ${v.sub}`);
   check('no green check mark on the page\'s own numerical checks', v.green === 0);
   await shot.close();
 }

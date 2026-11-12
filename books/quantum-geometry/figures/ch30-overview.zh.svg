@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch30-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 272" width="740" height="272" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：琥珀色的箭头 P₀ 是观察者的态，三支墨色箭头是 n = 2、4、8 时隐藏的目标，一支比一支更贴近竖直的 90° 视界，投到 P₀ 上的青色影子越来越短。第二栏：横轴 log₂ n，青色的示意曲线先升后降，与品红的水平线 0.386 交于 log₂ n ≈ 558，远在灰色阴影（可观测宇宙，log₂ n ≤ 266）之外。第三栏：两根竖直的涡管，左边短而粗，右边被拉长、变细；青色的环量回路在两根上相同，品红的涡度箭头在细的那根上更长；下方写着 A → 0？并有红色的 OPEN 标记。">
-<title>三栏。第一栏：琥珀色的箭头 P₀ 是观察者的态，三支墨色箭头是 n = 2、4、8 时隐藏的目标，一支比一支更贴近竖直的 90° 视界，投到 P₀ 上的青色影子越来越短。第二栏：横轴 log₂ n，青色的示意曲线先升后降，与品红的水平线 0.386 交于 log₂ n ≈ 558，远在灰色阴影（可观测宇宙，log₂ n ≤ 266）之外。第三栏：两根竖直的涡管，左边短而粗，右边被拉长、变细；青色的环量回路在两根上相同，品红的涡度箭头在细的那根上更长；下方写着 A → 0？并有红色的 OPEN 标记。</title>
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch30-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 272" width="740" height="272" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：琥珀色的箭头 P₀ 是观察者的态，三支墨色箭头是 n = 2、4、8 时隐藏的目标，一支比一支更贴近竖直的 90° 视界，投到 P₀ 上的青色影子越来越短。第二栏：五边形 0—1—2—3—4—0 的顶点按颜色 c = (0, 1, 0, 1, 2) 摆在三条横线上，每条边的箭头都朝上，青色标出最长的线 2 → 3 → 4，三个顶点；旁边有绿色的 LEAN ✓ 标记。第三栏：两根竖直的涡管，左边短而粗，右边被拉长、变细；青色的环量回路在两根上相同，品红的涡度箭头在细的那根上更长；下方写着 A → 0？并有红色的 OPEN 标记。">
+<title>三栏。第一栏：琥珀色的箭头 P₀ 是观察者的态，三支墨色箭头是 n = 2、4、8 时隐藏的目标，一支比一支更贴近竖直的 90° 视界，投到 P₀ 上的青色影子越来越短。第二栏：五边形 0—1—2—3—4—0 的顶点按颜色 c = (0, 1, 0, 1, 2) 摆在三条横线上，每条边的箭头都朝上，青色标出最长的线 2 → 3 → 4，三个顶点；旁边有绿色的 LEAN ✓ 标记。第三栏：两根竖直的涡管，左边短而粗，右边被拉长、变细；青色的环量回路在两根上相同，品红的涡度箭头在细的那根上更长；下方写着 A → 0？并有红色的 OPEN 标记。</title>
 <style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
 <svg class="tr-fig-panel" x="0" y="0" width="236" height="272" viewBox="0 0 236 272">
 <text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I　90° 视界</text>
@@ -27,23 +27,36 @@
 <text class="tf-ink" x="138" y="85.84" font-size="14" font-weight="600"><tspan font-style="italic">S</tspan>*</text>
 </svg>
 <svg class="tr-fig-panel" x="252" y="0" width="236" height="272" viewBox="0 0 236 272">
-<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II　交叉点在视界之外</text>
-<path d="M34 214 L34 46 L103.46 46 L103.46 214Z" class="tf-dim" fill-opacity="0.12"/>
-<line x1="34" y1="157.61" x2="222" y2="157.61" class="ts-magenta" stroke-width="2" fill="none"/>
-<path d="M34.52 110.7 L35.69 59.28 L36.87 61.59 L38.04 67.23 L39.21 72.76 L40.38 77.74 L41.55 82.15 L42.72 86.06 L43.9 89.56 L45.07 92.71 L46.24 95.56 L47.41 98.17 L48.58 100.55 L49.75 102.76 L50.93 104.8 L52.1 106.7 L53.27 108.47 L54.44 110.14 L55.61 111.7 L56.79 113.17 L57.96 114.57 L59.13 115.89 L60.3 117.14 L61.47 118.33 L62.64 119.47 L63.82 120.55 L64.99 121.59 L66.16 122.59 L67.33 123.54 L68.5 124.46 L69.67 125.34 L70.85 126.18 L72.02 127 L73.19 127.79 L74.36 128.55 L75.53 129.29 L76.7 130 L77.88 130.69 L79.05 131.36 L80.22 132 L81.39 132.63 L82.56 133.24 L83.74 133.83 L84.91 134.41 L86.08 134.97 L87.25 135.52 L88.42 136.05 L89.59 136.57 L90.77 137.07 L91.94 137.57 L93.11 138.05 L94.28 138.52 L95.45 138.97 L96.62 139.42 L97.8 139.86 L98.97 140.29 L100.14 140.71 L101.31 141.12 L102.48 141.52 L103.65 141.91 L104.83 142.3 L106 142.68 L107.17 143.05 L108.34 143.41 L109.51 143.77 L110.69 144.12 L111.86 144.46 L113.03 144.79 L114.2 145.12 L115.37 145.45 L116.54 145.77 L117.72 146.08 L118.89 146.39 L120.06 146.69 L121.23 146.99 L122.4 147.28 L123.57 147.57 L124.75 147.85 L125.92 148.13 L127.09 148.41 L128.26 148.68 L129.43 148.94 L130.6 149.21 L131.78 149.46 L132.95 149.72 L134.12 149.97 L135.29 150.22 L136.46 150.46 L137.63 150.7 L138.81 150.94 L139.98 151.17 L141.15 151.4 L142.32 151.63 L143.49 151.85 L144.67 152.07 L145.84 152.29 L147.01 152.5 L148.18 152.72 L149.35 152.93 L150.52 153.13 L151.7 153.34 L152.87 153.54 L154.04 153.74 L155.21 153.94 L156.38 154.13 L157.55 154.32 L158.73 154.51 L159.9 154.7 L161.07 154.89 L162.24 155.07 L163.41 155.25 L164.58 155.43 L165.76 155.61 L166.93 155.78 L168.1 155.95 L169.27 156.13 L170.44 156.3 L171.62 156.46 L172.79 156.63 L173.96 156.79 L175.13 156.96 L176.3 157.12 L177.47 157.28 L178.65 157.43 L179.82 157.59 L180.99 157.74 L182.16 157.9 L183.33 158.05 L184.5 158.2 L185.68 158.34 L186.85 158.49 L188.02 158.64 L189.19 158.78 L190.36 158.92 L191.53 159.06 L192.71 159.2 L193.88 159.34 L195.05 159.48 L196.22 159.62 L197.39 159.75 L198.57 159.88 L199.74 160.02 L200.91 160.15 L202.08 160.28 L203.25 160.41 L204.42 160.53 L205.6 160.66 L206.77 160.79 L207.94 160.91 L209.11 161.03 L210.28 161.16 L211.45 161.28 L212.63 161.4 L213.8 161.52 L214.97 161.63 L216.14 161.75 L217.31 161.87 L218.48 161.98 L219.66 162.1 L220.83 162.21 L222 162.32" class="ts-cyan" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
-<line x1="34" y1="214" x2="222" y2="214" class="ts-dim" stroke-width="1.3" fill="none"/>
-<line x1="34" y1="214" x2="34" y2="219" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="34" y="232" font-size="13" text-anchor="middle">0</text>
-<line x1="103.46" y1="214" x2="103.46" y2="219" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="103.46" y="232" font-size="13" text-anchor="middle">266</text>
-<line x1="179.7" y1="214" x2="179.7" y2="219" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="179.7" y="232" font-size="13" text-anchor="middle">558</text>
-<line x1="34" y1="214" x2="34" y2="46" class="ts-dim" stroke-width="1.3" fill="none"/>
-<circle cx="179.98" cy="157.61" r="4.4" class="ts-bg tf-ink" stroke-width="1.4"/>
-<text class="tf-dim" x="68.73" y="195.31" font-size="13" text-anchor="middle">可观测宇宙</text>
-<text class="tf-magenta" x="222" y="148.61" font-size="13" text-anchor="end">0.386</text>
-<text class="tf-dim" x="222" y="254" font-size="13" text-anchor="end">log₂ <tspan font-style="italic">n</tspan></text>
-<text class="tf-cyan" x="156.72" y="123.43" font-size="14" text-anchor="middle"><tspan font-style="italic">r</tspan>(<tspan font-style="italic">n</tspan>)</text>
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II　颜色定下箭头</text>
+<line x1="30" y1="214" x2="228" y2="214" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="22" y="218.68" font-size="13" text-anchor="end">0</text>
+<line x1="30" y1="160" x2="228" y2="160" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="22" y="164.68" font-size="13" text-anchor="end">1</text>
+<line x1="30" y1="106" x2="228" y2="106" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="22" y="110.68" font-size="13" text-anchor="end">2</text>
+<text class="tf-dim" x="22" y="76" font-size="14" text-anchor="middle"><tspan font-style="italic">c</tspan></text>
+<line x1="97.53" y1="206.9" x2="123.07" y2="174.05" class="ts-ink" stroke-width="1.6" fill="none"/>
+<path d="M127.25 168.68 L124.99 177.06 L119.68 172.93Z" class="tf-ink"/>
+<line x1="170.47" y1="206.9" x2="144.93" y2="174.05" class="ts-ink" stroke-width="1.6" fill="none"/>
+<path d="M140.75 168.68 L148.32 172.93 L143.01 177.06Z" class="tf-ink"/>
+<line x1="181.53" y1="206.9" x2="207.07" y2="174.05" class="ts-cyan" stroke-width="3" fill="none"/>
+<path d="M211.25 168.68 L208.99 177.06 L203.68 172.93Z" class="tf-cyan"/>
+<path d="M218 160 L213.8 155.38 L209.6 150.94 L205.4 146.65 L201.2 142.54 L197 138.59 L192.8 134.81 L188.6 131.2 L184.4 127.76 L180.2 124.48 L176 121.38 L171.8 118.43 L167.6 115.66 L163.4 113.05 L159.2 110.61 L155 108.34 L150.8 106.24 L146.6 104.3 L142.4 102.53 L138.2 100.93 L134 99.5 L129.8 98.23 L125.6 97.14 L121.4 96.2 L117.2 95.44 L113 94.84 L108.8 94.42 L104.6 94.15 L100.4 94.06 L96.2 94.13 L92 94.38 L87.8 94.78 L83.6 95.36 L79.4 96.1 L75.2 97.02 L71 98.09 L66.8 99.34" class="ts-cyan" stroke-width="3" stroke-linejoin="round" fill="none"/>
+<path d="M66.8 99.34 L73.51 93.84 L75.43 100.29Z" class="tf-cyan"/>
+<line x1="88.74" y1="205.61" x2="56.45" y2="122.59" class="ts-ink" stroke-width="1.6" fill="none"/>
+<path d="M53.99 116.25 L60.02 122.49 L53.75 124.93Z" class="tf-ink"/>
+<circle cx="92" cy="214" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="92" y="218.68" font-size="13" text-anchor="middle" font-weight="600">0</text>
+<circle cx="134" cy="160" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="134" y="164.68" font-size="13" text-anchor="middle" font-weight="600">1</text>
+<circle cx="176" cy="214" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="176" y="218.68" font-size="13" text-anchor="middle" font-weight="600">2</text>
+<circle cx="218" cy="160" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="218" y="164.68" font-size="13" text-anchor="middle" font-weight="600">3</text>
+<circle cx="50" cy="106" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="50" y="110.68" font-size="13" text-anchor="middle" font-weight="600">4</text>
+<rect x="89.4" y="242" width="57.2" height="21" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-ok tr-fig-mono" x="96.4" y="258" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓</text>
 </svg>
 <svg class="tr-fig-panel" x="504" y="0" width="236" height="272" viewBox="0 0 236 272">
 <text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III　涡管越拉越细</text>

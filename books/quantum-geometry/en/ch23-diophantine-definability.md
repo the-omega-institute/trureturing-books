@@ -58,7 +58,7 @@ For any integers $t, P, Q, x, y \in \mathbb{Z}$, define:
 At first glance, as the parameter $t \in \mathbb{Z}$ varies over infinitely many integers, the coefficients of $\operatorname{Qform}(t, P, Q) = P^2 - (2t+1)PQ + (t^2+t+1)Q^2$ grow quadratically in $t$, appearing to define infinitely many distinct quadratic forms. Viewed through the geometry of unimodular shear transformations in $\mathrm{SL}_2(\mathbb{Z})$, however, this entire infinite family is **the exact same hexagonal norm sphere** viewed in sheared bases!
 
 ::: {.viz src="norm-lattice" preset="skew" height="500"}
-**The same points, read askew.** In the integer coordinates $(P, Q)$ with $t = 2$ the form becomes $P^2 - 5PQ + 7Q^2$, the norm-7 circle is stretched into a long, slanted cyan ellipse, and the amber point lands at $(8, 3)$; switch back to the complex plane and the ellipse is a circle again, with $(8, 3)$ back at $(-1, 3)$ ([@thm-qform-eq-eisnorm]).
+**The same points, read askew.** In the integer coordinates $(P, Q)$ with $t = 2$ the form becomes $P^2 - 5PQ + 7Q^2$, the norm-7 circle is stretched into a long, slanted cyan ellipse, and the amber point lands at $(8, 3)$. The faint dots and the dashed cyan circle are the same points in the complex plane: switched back, the ellipse is a circle again, and thin lines join each point's two places, $(8, 3)$ to $(-1, 3)$ ([@thm-qform-eq-eisnorm]).
 :::
 
 ## 23.2 Formal Proofs of Eisenstein Shear Invariance and the Golden Pell Identity {#sec-ch23-2}
@@ -208,10 +208,6 @@ For every $t \in \mathbb{Z}$, the represented values remain locked onto the Lös
 | $5$ | $(3, 5)$ | $-1$ | $2(3)+5 = 11$ | $5$ | $11^2 - 5(5)^2 = -4$ |
 
 Pinning the golden norm to $\operatorname{norm}(g) = \pm 1$ via [@prop-pell-form-eq-four-mul-norm] locks $(x, y) = (2a + b, b)$ onto the discrete Lucas–Fibonacci lattice $(L_n, F_n)$!
-:::
-
-::: {.viz src="pythagoras-number-escape" preset="golden" height="500"}
-**$d = 5$: Lucas and Fibonacci.** The convergents close in on the line $m = \sqrt{5}\,n$, cyan above it and magenta below. The green rings mark the lattice points $(n, m) = (F_k, L_k)$ with a Fibonacci denominator and a Lucas numerator; all of them lie on $m^2 - 5n^2 = \pm 4$. Up to signs, these pairs are exactly the integer solutions of that equation ([`pell_pm_four_iff_signed_lucas_fib`](lean:D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib)).
 :::
 
 ::: {.viz src="norm-lattice" height="560"}

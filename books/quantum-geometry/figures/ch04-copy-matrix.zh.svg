@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch04-copy-matrix" data-lang="zh" data-wrap="1" viewBox="0 0 676 340" width="676" height="340" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="左右两张 4×4 方格，行列都按 00、01、10、11 排列，细框把每张分成四个 2×2 块。偏迹只读每块对角线上的两格，这八格画了青色的边。左边是受控拷贝之前的 B(ρ)：四个角里的 ½ 在 (00,00) 与 (10,10)，标着 ±½ 的品红方块在 (00,10) 与 (10,00)，落在青色的格里，偏迹读得到，给出 |±⟩⟨±|。右边是拷贝之后的 R(ρ)：±½ 搬到了 (00,11) 与 (11,00)，不在任何一块的对角线上，偏迹交出的都是 ½ I；底下写着用 U*_copy 倒推回去即复原。">
+<title>左右两张 4×4 方格，行列都按 00、01、10、11 排列，细框把每张分成四个 2×2 块。偏迹只读每块对角线上的两格，这八格画了青色的边。左边是受控拷贝之前的 B(ρ)：四个角里的 ½ 在 (00,00) 与 (10,10)，标着 ±½ 的品红方块在 (00,10) 与 (10,00)，落在青色的格里，偏迹读得到，给出 |±⟩⟨±|。右边是拷贝之后的 R(ρ)：±½ 搬到了 (00,11) 与 (11,00)，不在任何一块的对角线上，偏迹交出的都是 ½ I；底下写着用 U*_copy 倒推回去即复原。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="330" height="340" viewBox="0 0 330 340">
+<text class="tf-ink" x="165" y="22" font-size="14" text-anchor="middle" font-weight="600">拷贝之前 <tspan font-style="italic">B</tspan>(<tspan font-style="italic">ρ</tspan>)</text>
+<text class="tf-dim" x="78" y="54" font-size="13" text-anchor="middle">00</text>
+<text class="tf-dim" x="42" y="95" font-size="13" text-anchor="end">00</text>
+<text class="tf-dim" x="130" y="54" font-size="13" text-anchor="middle">01</text>
+<text class="tf-dim" x="42" y="147" font-size="13" text-anchor="end">01</text>
+<text class="tf-dim" x="182" y="54" font-size="13" text-anchor="middle">10</text>
+<text class="tf-dim" x="42" y="199" font-size="13" text-anchor="end">10</text>
+<text class="tf-dim" x="234" y="54" font-size="13" text-anchor="middle">11</text>
+<text class="tf-dim" x="42" y="251" font-size="13" text-anchor="end">11</text>
+<rect x="52" y="64" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="104" y="64" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="156" y="64" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="208" y="64" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="52" y="116" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="104" y="116" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="156" y="116" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="208" y="116" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="52" y="168" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="104" y="168" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="156" y="168" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="208" y="168" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="52" y="220" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="104" y="220" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="156" y="220" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="208" y="220" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="54" y="66" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="158" y="66" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="106" y="118" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="210" y="118" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="54" y="170" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="158" y="170" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="106" y="222" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="210" y="222" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<line x1="52" y1="64" x2="52" y2="272" class="ts-dim" stroke-width="1.8" fill="none"/>
+<line x1="52" y1="64" x2="260" y2="64" class="ts-dim" stroke-width="1.8" fill="none"/>
+<line x1="156" y1="64" x2="156" y2="272" class="ts-dim" stroke-width="1.8" fill="none"/>
+<line x1="52" y1="168" x2="260" y2="168" class="ts-dim" stroke-width="1.8" fill="none"/>
+<line x1="260" y1="64" x2="260" y2="272" class="ts-dim" stroke-width="1.8" fill="none"/>
+<line x1="52" y1="272" x2="260" y2="272" class="ts-dim" stroke-width="1.8" fill="none"/>
+<rect x="62.8" y="74.8" width="30.4" height="30.4" class="ts-ink tf-ink" stroke-width="1.2"/>
+<text class="tf-bg" x="78" y="95" font-size="13" text-anchor="middle" font-weight="600">½</text>
+<rect x="166.8" y="74.8" width="30.4" height="30.4" class="ts-magenta tf-magenta" stroke-width="1.2"/>
+<text class="tf-bg" x="182" y="95" font-size="13" text-anchor="middle" font-weight="600">±½</text>
+<rect x="62.8" y="178.8" width="30.4" height="30.4" class="ts-magenta tf-magenta" stroke-width="1.2"/>
+<text class="tf-bg" x="78" y="199" font-size="13" text-anchor="middle" font-weight="600">±½</text>
+<rect x="166.8" y="178.8" width="30.4" height="30.4" class="ts-ink tf-ink" stroke-width="1.2"/>
+<text class="tf-bg" x="182" y="199" font-size="13" text-anchor="middle" font-weight="600">½</text>
+<text class="tf-ink" x="165" y="302" font-size="14" text-anchor="middle">偏迹读到 ±½：|±⟩⟨±|</text>
+</svg>
+<svg class="tr-fig-panel" x="346" y="0" width="330" height="340" viewBox="0 0 330 340">
+<text class="tf-ink" x="165" y="22" font-size="14" text-anchor="middle" font-weight="600">拷贝之后 <tspan font-style="italic">R</tspan>(<tspan font-style="italic">ρ</tspan>) = <tspan font-style="italic">U</tspan> <tspan font-style="italic">B</tspan> <tspan font-style="italic">U</tspan><tspan dy="-0.42em" font-size="72%">∗</tspan><tspan dy="0.3em">​</tspan></text>
+<text class="tf-dim" x="78" y="54" font-size="13" text-anchor="middle">00</text>
+<text class="tf-dim" x="42" y="95" font-size="13" text-anchor="end">00</text>
+<text class="tf-dim" x="130" y="54" font-size="13" text-anchor="middle">01</text>
+<text class="tf-dim" x="42" y="147" font-size="13" text-anchor="end">01</text>
+<text class="tf-dim" x="182" y="54" font-size="13" text-anchor="middle">10</text>
+<text class="tf-dim" x="42" y="199" font-size="13" text-anchor="end">10</text>
+<text class="tf-dim" x="234" y="54" font-size="13" text-anchor="middle">11</text>
+<text class="tf-dim" x="42" y="251" font-size="13" text-anchor="end">11</text>
+<rect x="52" y="64" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="104" y="64" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="156" y="64" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="208" y="64" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="52" y="116" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="104" y="116" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="156" y="116" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="208" y="116" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="52" y="168" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="104" y="168" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="156" y="168" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="208" y="168" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="52" y="220" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="104" y="220" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="156" y="220" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="208" y="220" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="54" y="66" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="158" y="66" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="106" y="118" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="210" y="118" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="54" y="170" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="158" y="170" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="106" y="222" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<rect x="210" y="222" width="48" height="48" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<line x1="52" y1="64" x2="52" y2="272" class="ts-dim" stroke-width="1.8" fill="none"/>
+<line x1="52" y1="64" x2="260" y2="64" class="ts-dim" stroke-width="1.8" fill="none"/>
+<line x1="156" y1="64" x2="156" y2="272" class="ts-dim" stroke-width="1.8" fill="none"/>
+<line x1="52" y1="168" x2="260" y2="168" class="ts-dim" stroke-width="1.8" fill="none"/>
+<line x1="260" y1="64" x2="260" y2="272" class="ts-dim" stroke-width="1.8" fill="none"/>
+<line x1="52" y1="272" x2="260" y2="272" class="ts-dim" stroke-width="1.8" fill="none"/>
+<rect x="62.8" y="74.8" width="30.4" height="30.4" class="ts-ink tf-ink" stroke-width="1.2"/>
+<text class="tf-bg" x="78" y="95" font-size="13" text-anchor="middle" font-weight="600">½</text>
+<rect x="218.8" y="74.8" width="30.4" height="30.4" class="ts-magenta tf-magenta" stroke-width="1.2"/>
+<text class="tf-bg" x="234" y="95" font-size="13" text-anchor="middle" font-weight="600">±½</text>
+<rect x="62.8" y="230.8" width="30.4" height="30.4" class="ts-magenta tf-magenta" stroke-width="1.2"/>
+<text class="tf-bg" x="78" y="251" font-size="13" text-anchor="middle" font-weight="600">±½</text>
+<rect x="218.8" y="230.8" width="30.4" height="30.4" class="ts-ink tf-ink" stroke-width="1.2"/>
+<text class="tf-bg" x="234" y="251" font-size="13" text-anchor="middle" font-weight="600">½</text>
+<text class="tf-ink" x="165" y="302" font-size="14" text-anchor="middle">偏迹只剩 ½ <tspan font-style="italic" font-family="'Noto Serif SC', 'Noto Serif', 'Times New Roman', serif">I</tspan>；<tspan font-style="italic">U</tspan><tspan dy="-0.42em" font-size="72%">∗</tspan><tspan dy="0.3em"> 倒推即复原</tspan></text>
+</svg>
+</svg>

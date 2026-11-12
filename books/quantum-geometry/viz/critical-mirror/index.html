@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//MIRROR · The mirror and the Cayley circle · zeros come in fours, and pair up only on the line">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//MIRROR 镜子与凯莱圆 · 零点四个一组，在线上才缩成一对</title>
+<meta name="description" content="ξ 的反射与共轭让零点四个一组出现，只有在临界线上才两两重合；凯莱比把临界线卷成单位圆，反射变成关于圆的反演；一个同样对称的四次式说明对称本身锁不住零点。The reflection and conjugation symmetries of ξ group zeros in fours that pair up only on the critical line; the Cayley ratio rolls the line into the unit circle, where the reflection becomes inversion; a quartic with the same symmetries shows that symmetry alone does not pin the zeros down.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="critical-mirror">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//MIRROR">ORTHO<b>//</b>MIRROR</h1>
+      <div class="tagline">
+        <span class="zh">镜子与凯莱圆 · <em>零点四个一组，只有站在镜面上才缩成一对</em></span>
+        <span class="en">The mirror and the Cayley circle · <em>zeros come in fours, and pair up only on the mirror</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillDelta"><span class="zh">离镜面</span><span class="en">OFF MIRROR</span> δ <strong>—</strong></span>
+      <span class="pill hot" id="pillCount"><span class="zh">点数</span><span class="en">POINTS</span> <strong>4</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="quartet" aria-pressed="false"><span class="code">QUARTET</span><span class="cn zh">四个一组：离镜面就分开</span><span class="cn en">Fours: apart, off the mirror</span></button>
+        <button class="preset" data-preset="cayley" aria-pressed="false"><span class="code">CAYLEY</span><span class="cn zh">临界线卷成单位圆</span><span class="cn en">The line rolled into the circle</span></button>
+        <button class="preset" data-preset="thin" aria-pressed="false"><span class="code">THIN</span><span class="cn zh">高处的带：贴着圆周的薄膜</span><span class="cn en">High up: a film on the circle</span></button>
+        <button class="preset" data-preset="quartic" aria-pressed="false"><span class="code">QUARTIC</span><span class="cn zh">对称锁不住零点</span><span class="cn en">Symmetry does not pin the zeros</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">点 ρ</span><span class="en">The point ρ</span><span class="aside">½ ± δ + iγ</span></h2>
+      <div class="field">
+        <label for="gamma"><span class="zh">高度 γ</span><span class="en">Height γ</span><small class="zh">也可以在左边直接拖动 ρ</small><small class="en">or drag ρ on the left</small></label><output id="oGamma" for="gamma">2.00</output>
+        <input type="range" id="gamma" min="0.5" max="35" step="0.01" value="2">
+      </div>
+      <p class="note"><span class="zh">时间轴是 ρ 到镜面 Re s = ½ 的距离 δ，播放时它走向 0。</span><span class="en">The rail is the distance δ from ρ to the mirror Re s = ½; playing runs it down to 0.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="左：临界带里的点与它的三个镜像；右：凯莱坐标里的单位圆，或沿临界线的两条曲线" data-aria-en="Left: a point in the critical strip and its three mirror images; right: the unit circle in Cayley coordinates, or two curves along the critical line">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="mirror" aria-pressed="true"><span class="zh">镜子</span><span class="en">Mirror</span></button>
+        <button class="chip" data-scene="quartic" aria-pressed="false"><span class="zh">四次式</span><span class="en">Quartic</span></button>
+      </div>
+      <div class="hud-bl">
+        <span><i class="sw am"></i><span class="zh">ρ 与它的像 w</span><span class="en">ρ and its image w</span></span>
+        <span><i class="sw mg"></i><span class="zh">离镜面的伴</span><span class="en">partners off the mirror</span></span>
+        <span><i class="sw cy"></i><span class="zh">镜面与单位圆</span><span class="en">the mirror and the unit circle</span></span>
+        <span><i class="sw dm"></i><span class="zh">前五个零点（数值）</span><span class="en">first five zeros (numerical)</span></span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">越高越贴近圆周</span><span class="en">Higher up, closer to the circle</span></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="离镜面 δ 的点，凯莱比偏出圆周的量 |ln|w|| 随高度的变化" data-aria-en="How far the Cayley ratio of a point δ off the mirror leaves the circle, |ln|w||, against the height"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">w = (s − 1)/s</span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">镜像与共轭给出</span><span class="en">mirror and conjugation give</span></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt>ρ</dt><dd id="ro1">—</dd></div>
+        <div><dt><span class="zh">像的模 |w|</span><span class="en">modulus of the image |w|</span></dt><dd id="ro2">—</dd></div>
+        <div class="m"><dt><span class="zh">对数径向亏量 ln|w|</span><span class="en">log radial defect ln|w|</span></dt><dd id="ro3">—</dd></div>
+        <div><dt><span class="zh">|w| · |1/w̄| 之积</span><span class="en">product |w| · |1/w̄|</span></dt><dd id="ro4">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">ξ 的反射对称：对一切 s 有 ξ(1 − s) = ξ(s)。已冻结：</span><span class="en">The reflection symmetry of ξ: ξ(1 − s) = ξ(s) for every s. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Zeros/CompletedZeta.xi_reading_reflection" href="#" target="_blank" rel="noopener"><code>xi_reading_reflection</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">反射叠上共轭：对一切 s 有 ξ(1 − s̄) = conj ξ(s)，所以零点 ρ 带来 1 − ρ̄。已冻结：</span><span class="en">Reflection combined with conjugation: ξ(1 − s̄) = conj ξ(s) for every s, so a zero ρ brings 1 − ρ̄ with it. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj" href="#" target="_blank" rel="noopener"><code>xi_reading_one_sub_conj</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">凯莱比的模为 1 当且仅当 Re s = ½：临界线就是单位圆。已冻结：</span><span class="en">The Cayley ratio has modulus 1 exactly when Re s = ½: the critical line is the unit circle. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line" href="#" target="_blank" rel="noopener"><code>cayley_ratio_norm_one_iff_critical_line</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">δ ≠ 0、γ ≠ 0 时，四次式 F = offCriticalQuartic δ γ 处处可微、具有完全 ζ 对称性，零点恰是 ½ ± δ ± iγ 四点，没有一个在临界线上：对称性推不出零点在线上。已冻结：</span><span class="en">For δ ≠ 0 and γ ≠ 0 the quartic F = offCriticalQuartic δ γ is differentiable everywhere, has the full ζ symmetry, and its zeros are exactly the four points ½ ± δ ± iγ, none on the critical line: symmetry does not imply that zeros lie on the line. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization" href="#" target="_blank" rel="noopener"><code>full_symmetry_not_fixed_line_localization</code></a></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">前五个零点的高度、|w|、ln|w|、F 与 ξ(½ + it) 都是页面按双精度实算的数值（ξ 用欧拉—麦克劳林求 ζ、斯特林求 Γ）；有限的数值不是证明。</span><span class="en">The heights of the first five zeros, |w|, ln|w|, F and ξ(½ + it) are computed by the page in double precision (ζ by Euler–Maclaurin, Γ by Stirling); finite numbers are not proofs.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="45" step="any" value="35" aria-label="离镜面的距离 δ" data-aria-en="Distance δ from the mirror">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">δ 每次 0.01</span><span class="en">δ by 0.01</span> · <kbd>1</kbd> <kbd>2</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">第二十二章 §22.4 说：ξ 的反射对称 ξ(1 − s) = ξ(s) 与共轭对称合起来，零点按 ρ、ρ̄、1 − ρ、1 − ρ̄ 四个一组出现，这四点两两重合的充要条件正是 Re ρ = ½。本页让读者拖动一个点 ρ，看它的四点轨道；再换到凯莱坐标 w = (s − 1)/s，临界线成了单位圆，s ↦ 1 − s̄ 成了关于圆的反演。本页是数值演示，不是证明，也不画“全部零点”。</p>
+      <ol>
+        <li><b>镜子。</b>左边是临界带 0 &lt; Re s &lt; 1（纵向压缩），虚线是 Re s = ½，叉是 ζ 的极点 s = 1。琥珀色的 ρ 与品红的三个伴组成矩形；δ = 0 时它们两两重合成青色的两点。</li>
+        <li><b>凯莱圆。</b>右边 w = (s − 1)/s：临界线是单位圆，反射 s ↦ 1 − s 成为 w ↦ 1/w，共轭成为 w ↦ w̄，合起来 w ↦ 1/w̄ 是关于圆的反演。四个像两个在圆内、两个在圆外；|w|² − 1 = (1 − 2σ)/(σ² + t²)，所以越往高处，离线的点越贴近圆周，左下的放大镜把角度与 ln|w| 拉开来看。</li>
+        <li><b>四次式。</b>F(s) = ((s − ½ − δ)² + γ²)((s − ½ + δ)² + γ²) 有同样的两种对称，零点恰是 ½ ± δ ± iγ。沿临界线 F(½ + it) = (δ² + γ² − t²)² + 4δ²t² 是正实数，最小值 4δ²γ²；ξ(½ + it) 也是实数，却在 14 与 15 之间变号。对称只保证取实值，不保证变号。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch22-primes-euler-products-and-zeros.html#sec-ch22-4" target="_top">第二十二章 §22.4 · 临界对称轴与黎曼猜想的认识论边界</a> · <a href="../../zh/ch22-primes-euler-products-and-zeros.html#thm-xi-reading-entire-reflection" target="_top">ξ 读数的四条性质</a> · <a href="../../zh/ch22-primes-euler-products-and-zeros.html#thm-cayley-critical-line-criterion" target="_top">凯莱比与临界线</a> · <a href="../../zh/ch22-primes-euler-products-and-zeros.html#thm-full-symmetry-not-localization" target="_top">完全对称性不足以定线</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Zeros/CompletedZeta.lean" href="#" target="_blank" rel="noopener">CompletedZeta.lean</a> · <a data-trureturing-path="D5/S3/Midline/CayleyCriticalLine.lean" href="#" target="_blank" rel="noopener">CayleyCriticalLine.lean</a> · <a data-trureturing-path="D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.lean" href="#" target="_blank" rel="noopener">FullSymmetryNonlocalization.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Chapter 22 §22.4 says that the reflection symmetry ξ(1 − s) = ξ(s), together with conjugation, makes zeros come in fours, ρ, ρ̄, 1 − ρ, 1 − ρ̄, and that the four coincide in pairs exactly when Re ρ = ½. The page lets the reader drag a point ρ and watch its four-point orbit; in the Cayley coordinate w = (s − 1)/s the critical line becomes the unit circle and s ↦ 1 − s̄ becomes inversion in it. The page is a numerical illustration, not a proof, and it does not draw "all the zeros".</p>
+      <ol>
+        <li><b>The mirror.</b> On the left, the critical strip 0 &lt; Re s &lt; 1 (vertical scale compressed); the dashed line is Re s = ½ and the cross is the pole of ζ at s = 1. The amber ρ and its three magenta partners form a rectangle; at δ = 0 they merge in pairs into two cyan points.</li>
+        <li><b>The Cayley circle.</b> On the right, w = (s − 1)/s: the critical line is the unit circle, the reflection s ↦ 1 − s becomes w ↦ 1/w and conjugation becomes w ↦ w̄, so together w ↦ 1/w̄ is inversion in the circle. Two images lie inside and two outside; |w|² − 1 = (1 − 2σ)/(σ² + t²), so the higher up, the closer an off-line point comes to the circle, and the magnifier at the lower left stretches angle and ln|w| apart.</li>
+        <li><b>The quartic.</b> F(s) = ((s − ½ − δ)² + γ²)((s − ½ + δ)² + γ²) has the same two symmetries, and its zeros are exactly ½ ± δ ± iγ. Along the critical line F(½ + it) = (δ² + γ² − t²)² + 4δ²t² is a positive real number with minimum 4δ²γ²; ξ(½ + it) is real too, yet it changes sign between 14 and 15. Symmetry guarantees real values, not sign changes.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch22-primes-euler-products-and-zeros.html#sec-ch22-4" target="_top">Chapter 22 §22.4 · The critical line and the epistemic boundary of the Riemann hypothesis</a> · <a href="../../en/ch22-primes-euler-products-and-zeros.html#thm-xi-reading-entire-reflection" target="_top">Four properties of the ξ reading</a> · <a href="../../en/ch22-primes-euler-products-and-zeros.html#thm-cayley-critical-line-criterion" target="_top">The Cayley ratio and the critical line</a> · <a href="../../en/ch22-primes-euler-products-and-zeros.html#thm-full-symmetry-not-localization" target="_top">Full symmetry does not localize</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Zeros/CompletedZeta.lean" href="#" target="_blank" rel="noopener">CompletedZeta.lean</a> · <a data-trureturing-path="D5/S3/Midline/CayleyCriticalLine.lean" href="#" target="_blank" rel="noopener">CayleyCriticalLine.lean</a> · <a data-trureturing-path="D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.lean" href="#" target="_blank" rel="noopener">FullSymmetryNonlocalization.lean</a></p>
+    </div>
+    <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">黎曼猜想：临界带内 ζ 的每个零点是否都在 Re s = ½ 上（等价地，凯莱比的模是否都为 1）仍是开放问题。本页不画“全部零点”，灰点只是前五个零点的数值位置。</span><span class="en">The Riemann hypothesis, whether every zero of ζ in the critical strip lies on Re s = ½ (equivalently, whether every Cayley ratio has modulus 1), is open. The page does not draw "all the zeros"; the grey dots are only the numerical positions of the first five.</span></span></div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -18,12 +18,12 @@ ALT = {
     "zh": "三栏。第一栏：横轴每走一步乘 2，竖轴每走一步乘 3，格点上标着 1、2、4、8、3、6、12、24、9、18、36、72；两支青色箭头"
           "先横走两步、再竖走一步，到达 12 = 2² × 3。第二栏：1 到 30 排成方格，能只用 2、3、5 乘出来的格子是青色，其余是品红，"
           "第一个品红格是 7。第三栏：竖着的临界带夹在 σ = 0 与 σ = 1 之间，中间是虚线 σ = ½，s = 1 处打着叉（极点）；"
-          "十个零点从下往上都落在虚线上；虚线两侧同一高度各有一个红色虚线圈和问号，用红色细虚线连着，表示离线零点若有，必成对出现；下方的红色标签写着“开放问题”。",
+          "十个灰色的零点从下往上都落在虚线上；虚线两侧同一高度各有一个红色虚线圈和问号，用红色细虚线连着，表示离线零点若有，必成对出现；下方的红色标签写着“开放问题”。",
     "en": "Three panels. Panel I: each step right multiplies by 2, each step up by 3; the lattice points read 1, 2, 4, 8, 3, 6, "
           "12, 24, 9, 18, 36, 72, and two cyan arrows go two steps right and one step up to reach 12 = 2² × 3. Panel II: the "
           "numbers 1 to 30 in a grid; those that are products of 2, 3 and 5 alone are cyan, the rest magenta, and the first "
           "magenta cell is 7. Panel III: the vertical critical strip between σ = 0 and σ = 1 with the dashed line σ = ½ in "
-          "the middle and a cross at s = 1 (the pole); ten zeros climb the dashed line. Two red dashed circles with question "
+          "the middle and a cross at s = 1 (the pole); ten grey zeros climb the dashed line. Two red dashed circles with question "
           "marks sit at one height on either side of the line, joined by a thin red dashed line: an off-line zero could "
           "only come as such a pair. A red tag reads “open”.",
 }
@@ -91,7 +91,7 @@ def draw(fig):
     three.cross(sx(1), ty(0), 6, "dim", 2)
     three.text(sx(1) + 10, ty(0) + 4, "*s* = 1", size=13, color="dim")
     for t in ZEROS:
-        three.dot(sx(0.5), ty(t), 3.6, "ink", ring="bg")
+        three.dot(sx(0.5), ty(t), 3.8, "dim", ring="bg")
     # an off-line zero could only come in a mirror pair σ ± it ↔ 1 − σ + it (reflection with conjugation), so the
     # open question is drawn as two question marks at one height, joined across the line
     qy = ty(36)

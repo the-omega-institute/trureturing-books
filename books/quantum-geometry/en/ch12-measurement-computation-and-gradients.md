@@ -185,6 +185,8 @@ When we scale from a single qubit to $n$ qubits with dimension $d = 2^n$, why do
 **On the ordinary sphere the heights of points are spread evenly.** At $d = 3$ the dots spread up and down the circle, and on the right the exact density is a vertical straight line at $1/2$; the equator belt with $\varepsilon = 0.1$ holds 10% of the uniform measure; of the 1500 sampled points shown, 142 are cyan (about 9.47%) and the rest are magenta. The even spread of heights is a classical result of Archimedes, not formalized in this book.
 :::
 
+As the dimension rises from $d = 3$, the same belt with $\varepsilon = 0.1$ holds more and more of the points.
+
 ::: {.viz src="equator-concentration" preset="width" height="500"}
 **The higher the dimension, the more the points crowd onto the equator.** The rail raises the dimension from $d = 2$ to $d = 2^{10}$: the dots crowd onto the equator perpendicular to the measured axis, the bump on the right grows narrower and taller, and the two short ticks at $\pm 1/\sqrt{d}$ close in with it; at $d = 1024$ only 0.13% lies outside, and the bump is too thin to see, so the magnifier at the upper right enlarges the equator 32 times: there it is still $\pm 1/\sqrt{d}$ wide. The width $1/\sqrt{d}$ comes from $\mathbb{E}[x_1^2] = 1/d$ ([@rem-sphere-equator-markov-literature]).
 :::
@@ -200,8 +202,10 @@ At $n = 20$ qubits ($d = 1{,}048{,}576$) and $\varepsilon = 0.1$, at least $99.9
 :::
 
 ::: {.viz src="equator-concentration" preset="bound" height="500"}
-**The Markov bound always lies above the actual share.** At $d = 2^7 = 128$ and $\varepsilon = 0.2$ the magenta outside share is 0.023, and the bound $1/(d\varepsilon^2) = 0.195$ lies above it, more than eight times larger ([@rem-sphere-equator-markov-literature]).
+**The Markov bound always lies above the actual share.** With $\varepsilon = 0.2$, $n = \log_2 d$ across and a log scale up the side: the solid magenta line is the exact outside share and the dashed magenta line the bound $1/(d\varepsilon^2)$, lying above the solid one everywhere. The amber line stops at $d = 2^7 = 128$: share 0.023, bound 0.195, more than eight times larger ([@rem-sphere-equator-markov-literature]).
 :::
+
+At $d = 2^{20}$, with the belt narrowed to $\varepsilon = 0.1$, this bound is the $9.54 \times 10^{-5}$ of the remark above.
 
 ::: {.viz src="equator-concentration" preset="twenty" height="500"}
 **Twenty qubits: every point lies in the narrow equator belt.** At $d = 2^{20}$ and $\varepsilon = 0.1$ every dot lands on the equator and the density shrinks to a thin needle there; the magnifier at the upper right enlarges the equator 1024 times, and the needle turns out to be a bump $\pm 1/\sqrt{d}$ wide, with the belt edges $\pm\varepsilon$ far outside the window. The Markov bound gives $9.54 \times 10^{-5}$; the exact share, computed by the page from the incomplete beta function, is about $3 \times 10^{-2291}$. This is concentration of measure on the restricted real-amplitude model, not a law for circuit gradients ([@rem-mbqc-gradients-literature]).
@@ -228,12 +232,8 @@ $$
 Summability of $\lambda$ with $\tau > 0$ implies that only finitely many indices $j \in \mathbb{N}$ can satisfy $\tau \le \lambda_j$. Summing $\tau \le \lambda_j$ over the finite set $S_\tau$ gives $\operatorname{ncard}(S_\tau)\,\tau \le \sum_{j \in S_\tau} \lambda_j \le \sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$, and dividing by $\tau > 0$ yields the stated bound. The full proof is checked by the Lean kernel.
 :::
 
-::: {.viz src="eth-horizon-crossover" preset="plateau" height="500"}
-**A plateau: few modes carry the weight.** The first few modes are close to $1$, and from the ninth on the spectrum drops to zero. At the amber threshold $\tau = 0.5$, eight cyan modes clear the line while the magenta wall stands at $RW/(\pi\tau) = 16$ (the spectrum on the page sums to the trace budget $RW/\pi$): the count stays short of the wall, which is [@cor-finite-trace-mode-budget].
-:::
-
-::: {.viz src="eth-horizon-crossover" preset="tail" height="500"}
-**Lower threshold: more modes, never past the wall.** Switch to a power law with a long tail and lower the amber threshold all the way: more and more cyan bars clear the line, the magenta wall $RW/(\pi\tau)$ retreats as well, and the bars never reach it (at $\tau = 0.069$, six modes clear the line and the wall stands at $37.4$).
+::: {.viz src="eth-horizon-crossover" preset="geometric" height="500"}
+**The geometric spectrum: three clear the line, the wall stands at 8.** The geometric spectrum $\lambda_j = 2^{-(j+1)}$ of step 5 of [@ex-cluster-shift-and-gradient], whose total is the trace budget $RW/\pi = 1$. At the amber threshold $\tau = \frac{1}{8}$ three cyan bars clear the line, $j = 0, 1, 2$, each with an amber notch at the height $\tau$ to show that it pays at least $\tau$; the notches add up to no more than the whole budget, so the count $3$ stays short of the magenta wall $RW/(\pi\tau) = 8$, which is [@cor-finite-trace-mode-budget].
 :::
 
 Note that [@cor-finite-trace-mode-budget] does not separately assume $R > 0$ or $W > 0$ (the trace identity $\sum_j \lambda_j = RW/\pi$ with $\lambda_j \ge 0$ implies only that the product satisfies $R W \ge 0$, not that $R \ge 0$ and $W \ge 0$ individually — for instance, $R = -\pi$ and $W = -1$ satisfy all hypotheses), and it concerns a sufficient spectral superlevel counting bound rather than learnability, uniform sphere measure, random-circuit gradients, or a barren-plateau tail bound.

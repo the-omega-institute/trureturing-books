@@ -67,12 +67,44 @@ const still = await page.evaluate(() => Array.from({ length: 11 }, (_, i) => win
 check('POLE: after θ = 180° the point is the south pole and the full twist never moves it', still.every((p) => vclose(p, [0, 0, -1], 1e-12)));
 check('POLE: only the flag turns (by 0.6 × 360° at t = 1.6)', agrees(s) < 1e-12 && close(Math.acos(Math.max(-1, Math.min(1, dot(s.flag, wordAt(s.word, 90, 1).flag)))) / DEG, 144, 1e-6));
 
-await pick('collinear'); s = await seek(2.5);
-const stuck = await page.evaluate(() => Array.from({ length: 41 }, (_, i) => window.ANGLES_DEBUG.at(i / 10).p));
-check('COLLINEAR: with α = 0 every turn fixes N: the point never leaves it', s.alpha === 0 && stuck.every((p) => vclose(p, [0, 0, 1], 1e-12)) && agrees(s) < 1e-12);
-check('COLLINEAR: the flag stays in the horizontal plane while it turns', close(s.flag[2], 0, 1e-12) && !vclose(s.flag, [1, 0, 0], 1e-6));
-await setRange('theta', 70); s = await state();
-check('collinear axes and a target off N: the page builds no word', s.unreachable && s.word.length === 0 && (await page.textContent('#roWord')).includes('共线'));
+await pick('narrow'); await setRange('alpha', 0); await setRange('theta', 70); s = await state();
+check('collinear axes (α slider at 0) and a target off N: the page builds no word', s.alpha === 0 && s.unreachable && s.word.length === 0 && (await page.textContent('#roWord')).includes('共线'));
+
+// Lie–Trotter: P_n = (R_a(θ/n) R_b(θ/n))ⁿ, θ = 90°, a = e₃, b = e₂, against a turn by √2·θ about (0, 1, 1)/√2.
+// Test-side: quaternion powers, matrices from quaternions, and the operator norm by power iteration on MᵀM.
+const qmat = (q) => { const [w, x, y, z] = q; return [[1 - 2 * (y * y + z * z), 2 * (x * y - w * z), 2 * (x * z + w * y)], [2 * (x * y + w * z), 1 - 2 * (x * x + z * z), 2 * (y * z - w * x)], [2 * (x * z - w * y), 2 * (y * z + w * x), 1 - 2 * (x * x + y * y)]]; };
+function opNorm(M) {
+  const MtM = [0, 1, 2].map((i) => [0, 1, 2].map((j) => M[0][i] * M[0][j] + M[1][i] * M[1][j] + M[2][i] * M[2][j]));
+  let v = [0.3, 0.5, 0.8], lam = 0;
+  for (let k = 0; k < 400; k++) { const w = MtM.map((r) => r[0] * v[0] + r[1] * v[1] + r[2] * v[2]); lam = Math.hypot(...w); if (lam < 1e-300) return 0; v = w.map((c) => c / lam); }
+  return Math.sqrt(lam);
+}
+function trotterTest(n) {
+  const step = qmul(qaxis([0, 0, 1], Math.PI / 2 / n), qaxis([0, 1, 0], Math.PI / 2 / n));
+  let q = [1, 0, 0, 0]; for (let k = 0; k < n; k++) q = qmul(step, q);
+  if (q[0] < 0) q = q.map((c) => -c);
+  const angle = 2 * Math.acos(Math.min(1, q[0])) / DEG, axis = [q[1], q[2], q[3]].map((c) => c / Math.hypot(q[1], q[2], q[3]));
+  const A = qmat(q), B = qmat(qaxis([0, 1, 1], Math.SQRT2 * Math.PI / 2));
+  const err = opNorm(A.map((r, i) => r.map((c, j) => c - B[i][j])));
+  return { angle, axis, err, end: qapply(q, [0, 0, 1]) };
+}
+// the chapter's table (x → a = e₃, y → b = e₂, z → −e₁): n, error, angle, axis (x, y, z) of the example
+const TABLE = [[1, 1.0353, 120.00, [0.5774, 0.5774, 0.5774]], [2, 0.5037, 125.60, [0.6786, 0.6786, 0.2811]], [4, 0.2496, 126.87, [0.7002, 0.7002, 0.1393]], [16, 0.0622, 127.25, [0.7067, 0.7067, 0.0347]], [256, 0.0039, 127.28, [0.7071, 0.7071, 0.0022]]];
+await pick('trotter'); s = await seek(1e9);
+check('TROTTER: the card plays n = 4, a word of 8 turns by 22.5°, alternating about b and a', s.trot === 4 && s.word.length === 8 && s.word.every((f, i) => f.ax === (i % 2 ? 'a' : 'b') && close(f.deg, 22.5, 1e-12)) && vclose(s.b, [0, 1, 0], 1e-12));
+for (const [n, err, ang, ax] of TABLE) {
+  await page.click(`#trotChips [data-trot="${n}"]`); s = await seek(1e9);
+  const t = trotterTest(n), mapped = [-ax[2], ax[1], ax[0]];
+  check(`TROTTER n = ${n}: angle ${ang}°, error ${err}, n × error ${(n * err).toFixed(4)} (quaternions, power iteration; the chapter's table)`,
+    s.trot === n && close(s.trotInfo.angle, t.angle, 1e-7) && close(s.trotInfo.err, t.err, 1e-7) && close(s.trotInfo.nErr, n * t.err, 1e-5)
+    && close(t.angle, ang, 0.005) && close(t.err, err, 0.00005) && close(n * t.err, Number((n * err).toFixed(4)), n * 0.00005 + 1e-4), `${s.trotInfo.angle} ${s.trotInfo.err}`);
+  check(`TROTTER n = ${n}: the violet axis of Pₙ is the table's axis carried by x → e₃, y → e₂, z → −e₁`, vclose(s.trotInfo.axis, t.axis, 1e-7) && vclose(t.axis, mapped, 0.00006));
+  check(`TROTTER n = ${n}: the amber zigzag ends at Pₙ N`, vclose(s.p, t.end, 1e-9) && agrees(s) < 1e-9);
+}
+const axisZs = TABLE.map(([n]) => Math.abs(trotterTest(n).axis[0]));
+check('TROTTER: the axis of Pₙ moves monotonically onto the bisector (0, 1, 1)/√2 as n grows', axisZs.every((z, i) => i === 0 || z < axisZs[i - 1]) && axisZs[4] < 0.003);
+await setRange('theta', 50); s = await state();
+check('moving a slider leaves the Lie–Trotter mode', s.trot === 0 && s.preset === null && (await page.getAttribute('#trotChips [data-trot="0"]', 'aria-pressed')) === 'true');
 
 for (const [card, alpha, k] of [['skew', 30, 2], ['narrow', 10, 6]]) {
   await pick(card); s = await seek(1e9);
@@ -176,10 +208,9 @@ await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=pole', shot); s = await shotState
 const flagTurn = Math.acos(Math.max(-1, Math.min(1, dot(wordAt(s.word, 90, s.t).flag, wordAt(s.word, 90, 1).flag)))) / DEG;
 const twist = Math.abs(s.word[1].deg) * (s.t - 1);
 check('POLE still: the twist has run its full turn, the point sits at the south pole and the flag readout says one whole turn', close(s.t, s.max) && vclose(wordAt(s.word, 90, s.t).p, [0, 0, -1], 1e-9) && close(flagTurn, 0, 1e-5) && close(await spinTag(), Math.round(twist), 1e-9) && close(twist, 360, 1e-9), `t ${s.t}, flag tag ${await spinTag()}`);
-await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=collinear', shot); s = await shotState();
-qp = wordAt(s.word, 0, s.t).p;
-const lastTurn = Math.abs(s.word[s.word.length - 1].deg);
-check('COLLINEAR still: the whole word has played, N never moved, and the flag readout is the last turn', close(s.t, s.max) && vclose(qp, [0, 0, 1], 1e-9) && close(await hudPolar(), 0, 1e-9) && close(await spinTag(), Math.round(lastTurn), 1e-9) && close(wordAt(s.word, 0, s.t).flag[2], 0, 1e-12), `t ${s.t}, tag ${await spinTag()}`);
+await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=trotter', shot); s = await shotState();
+const hud = await shot.textContent('#hudSub'), tt = trotterTest(4);
+check('TROTTER still: the zigzag has played to its end, and the stage reads 126.87°, 0.2496 and 0.9984 as the caption and the table say', close(s.t, s.max) && s.max === 8 && hud.includes('126.87°') && hud.includes('0.2496') && hud.includes(`${(4 * tt.err).toFixed(4)}`) && (4 * tt.err).toFixed(4) === '0.9984', hud);
 await shot.close();
 
 // language

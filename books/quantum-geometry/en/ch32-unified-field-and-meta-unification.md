@@ -94,7 +94,7 @@ External continuum geometric-algebra, real-analytic fixed-point, and polyhedral 
 :::
 
 ::: {.viz src="unified-field-slice" preset="fixedpoint" height="500"}
-**The one angle whose arc equals its shadow.** The amber point on the circle stops at θ* ≈ 0.739: the violet arc length θ is exactly as long as the cyan shadow cos θ, and the magenta height sin θ* ≈ 0.674 is the local contraction rate of item 2 in the box above, not a speed here; the light line and the hyperbola behind it belong to the Clock scene that shares this stage.
+**The one angle whose arc equals its shadow.** The amber point on the circle stops at θ* ≈ 0.739: the violet arc length θ is exactly as long as the cyan shadow cos θ, and the magenta height sin θ* ≈ 0.674 is the local contraction rate of item 2 in the box above. The stage holds only the unit circle; nothing on it is read as a speed.
 :::
 
 Crucially, this unified-field interpretive architecture (`MODEL`) maintains an explicit boundary and pairing between machine-checked anchors and attributed literature notes: at the **formal axiomatic layer**, every discrete-automaton, fixed-point, and linear-algebraic backbone is checked with `0 sorry` by the Lean 4 kernel ([Appendix C](appendix-c.md)), while companion algebraic-encoding literature notes and executable reference scripts are archived in [Chapter 25](ch25-rewriting-and-xor.md) ([@rem-clifford-stabilizer-literature]) and [Appendix B](appendix-b.md).
@@ -118,14 +118,14 @@ Extending the bridges built in Part V ([Chapter 17](ch17-lorentz-geometry.md)–
    Minkowski null-cone rigidity (Conjunct 1 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] below, `LEAN ✓`) proves that fixing null-cone rays determines the entire Lorentzian quadratic form up to a single scalar factor! In our geometric model (`MODEL`), we interpret rest mass as collinear inner-product self-locking along an observer's proper-time axis and the limiting propagation speed as a $90^\circ$ orthogonal horizon (external continuum proper-time rearrangement and first-order spinor wave-equation formulations are recorded in Item 1 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
 
 ::: {.viz src="unified-field-slice" preset="photon" height="500"}
-**Pushed towards light, the point on the circle creeps up to 90°.** The rapidity η goes from ln 2 to 4: the worldline hugs the white light line and the amber point on the circle approaches θ = 90°; the cyan line (the proper-time rate) shrinks to 0.04 and the magenta height (the speed v/c) nears 1 without reaching it. Reading 90° as an orthogonal horizon is this book's interpretation (`MODEL`).
+**Pushed towards light, the point on the circle creeps up to 90°.** The rapidity η goes from ln 2 to 4: the worldline hugs the white light line and the amber point on the circle approaches θ = 90°; the cyan line (the proper-time rate) shrinks to 0.04 and the magenta height (the speed v/c) nears 1 without reaching it. The card starts from η = ln 2, where the cyan line is cos θ = 0.8 = 1/γ and the magenta height sin θ = 0.6, and 0.8² + 0.6² = 1 is the (dτ/dt)² + (v/c)² = 1 of item 1 in the box above. Reading 90° as an orthogonal horizon is this book's interpretation (`MODEL`).
 :::
 
 2. **Gauge Interactions and the Orthogonal Sphere Ladder (Loop Alignment Residuals, `MODEL` + `LEAN ✓`)**:
    On finite directed graphs, `trureturing`'s **anchored phase classification theorem** (Conjunct 2 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] below, `LEAN ✓`) proves that circle-valued edge phases modulo anchored coboundaries are classified isomorphically by $m + 1 - n$ off-tree chord holonomies together with $k - 1$ relative anchor phases. Building on this discrete theorem and [Chapter 31](ch31-quantum-fairness.md)'s **Seat Fairness**, our interpretive layer proposes a heuristic **local-frame alignment and sphere-ladder hypothesis (`MODEL`)**, reading non-canceling loop alignment residuals as geometric interaction sources and organizing single-plane circle phases and higher orthogonal frame symmetries into an internal symmetry ladder (external continuum gauge-connection, non-Abelian field-strength, and Standard Model gauge-group literature and boundaries are recorded in Item 2 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
 
 ::: {.viz src="unified-field-slice" preset="plaquette" height="500"}
-**Back and forth in two planes leaves a turn behind.** Turns of 60° about e₁ and about e₂, applied as R₂⁻¹, R₁⁻¹, R₂, R₁: the amber arrow does not get home, the magenta arc is the gap, and the violet line is the axis of the turn left over; U = R₁R₂R₁⁻¹R₂⁻¹ leaves a turn of 57.9°, with its bivector mostly in the e₁e₂ plane (for the literature on commutator curvature see item 2 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
+**Back and forth in two planes leaves a turn behind.** Turns of 60° about e₁ and about e₂, applied as R₂⁻¹, R₁⁻¹, R₂, R₁: the amber arrow does not get home, the magenta arc is the gap, and the violet line is the axis of the turn left over; U = R₁R₂R₁⁻¹R₂⁻¹ leaves a turn of 57.9°, with its bivector mostly in the e₁e₂ plane (for the literature on commutator curvature see item 2 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below). Put both turns about one axis (one plane) and the four steps cancel: the arrow comes home and U = 1.
 :::
 
 3. **Holographic Thermodynamic Gravity and Endogenous Horizon Curvature (Bridge Flow–Cut Duality and Horizon Hypothesis, `MODEL` + `LEAN ✓`)**:
@@ -166,8 +166,8 @@ Across the frozen null-cone-certificate, agency-holonomy, and bridge-graph tenso
 Conjunct 1 polarizes $S$ across null pairs $(\pm\|w\|, w)$ to eliminate time–space cross terms and lock $S(0, w) = -S(1, 0)\|w\|^2$; Conjunct 2 transports phases uniquely along the spanning tree to split $(E \to \mathrm{Circle})/N$ into $(m+1-n) + (k-1) = m + k - n$ circle factors; Conjunct 3 combines `QMaxFlow_le_QMinCut` with width-two rational witnesses and castling strong-induction descent `cone_descent`. The full proof is checked by the Lean kernel.
 :::
 
-::: {.viz src="unified-field-slice" preset="abelian" height="500"}
-**Back and forth in one plane comes home.** Both rotors turn by 60° about e₃: the amber arrow goes two steps back and two steps forward along one parallel and ends where it started, U = 1. With a single plane of rotation the order of the turns can be swapped; Conjunct 2 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] classifies exactly such circle phases in one plane.
+::: {.viz src="lattice-gauge-loop" preset="anchor" height="500"}
+**The tree-path phase between two anchors cannot be twisted.** On four squares, the root $r$ and the top-right corner $a$ are locked squares and every other corner turns freely: each edge along the tree path $r \to a$ (the cyan band) moves (the faint arcs are the angles swept), yet the path phase shown by the cyan hand on the right stays put. What survives these twists is exactly the loop phases on the chords outside the tree and the path phase between the anchors: the classification of item 2 of [@thm-ch32-null-cone-holonomy-and-holographic-cut].
 :::
 
 The continuum special-relativistic spinor, non-Abelian gauge curvature, and horizon-thermodynamic gravitational field equations paired with this section are recorded below:
@@ -184,10 +184,6 @@ The continuum special-relativistic spinor, non-Abelian gauge curvature, and hori
    $$
 
    where $\Lambda$ enters Jacobson's derivation as an integration constant (identifying $\Lambda > 0$ with a finite observer's $90^\circ$ equatorial horizon curvature is our `MODEL` hypothesis).
-:::
-
-::: {.viz src="unified-field-slice" preset="gudermann" height="500"}
-**The clock and the speed on one angle.** At rapidity η = ln 2 the worldline crosses t = 1 at height tanh η = 0.6; carried across to the unit circle it lands at θ = gd(η) = 36.87°. The cyan line cos θ = 0.8 = 1/γ is the proper-time rate and the magenta height sin θ = 0.6 is the speed v/c: 0.8² + 0.6² = 1 is exactly (dτ/dt)² + (v/c)² = 1 from item 1 of the box above.
 :::
 
 Bringing all thirty-two chapters onto a single canvas, one set of orthogonal primitives establishes a six-domain holographic isomorphism across **geometry/topology, quantum gauge fields, relativistic holography, arithmetic number theory, complexity/hydrodynamics, and observer dynamics**:

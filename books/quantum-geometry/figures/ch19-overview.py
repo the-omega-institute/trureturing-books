@@ -5,7 +5,8 @@ width-three bridge graph, and log-capacity facets stitched along a seam.
 Panel I is an ordinary binary tree over 8 boundary legs (not the MERA-style network of the
 layered-network-cut cards): the interval of legs 2–5 is cut off by two bonds (counted by the script). Panel II is the worked example (a, b, c, d) = (2, 3, 2, 3)
 with its two outer min cuts of capacity 6. Panel III is the slice a = 2, b = 3, c = 2 of the
-log-capacity envelope with the lattice points d = 2, 3, 4.
+log-capacity envelope with the lattice points d = 2, 3, 4. The cut ad is solid magenta and the cut bc dashed
+magenta in both panels II and III.
 """
 
 import math
@@ -17,15 +18,15 @@ WRAP = True
 ALT = {
     "zh": "三栏。第一栏：一棵普通的二叉树（不是后面实验卡里的层级网络），底边 8 条腿，往上每层两两合并到一个张量，直到顶上一个；底边第 3 到第 6 条腿是琥珀色的区间，"
           "把它切下来只需割断品红标出的两条键，而不是四条腿。"
-          "第二栏：宽度三桥图，张量 M、N 之间三条桥，腿 a = 2、b = 3、c = 2、d = 3；上下两道品红的虚线是最小割 ad = bc = 6，下面一枚绿色的 LEAN ✓ 标签：流 = 割 = 6。"
-          "第三栏：对数容量图，蓝色的斜线 ln ad 与橙色的水平线 ln bc 在竖直虚线（接缝）处拼成一条折线，折线上三个格点 d = 2、3、4；右下一枚紫色标签：RT · 文献。",
+          "第二栏：宽度三桥图，张量 M、N 之间三条桥，腿 a = 2、b = 3、c = 2、d = 3；上面一道品红实线 ad 与下面一道品红虚线 bc 是最小割 ad = bc = 6，下面一枚绿色的 LEAN ✓ 标签：流 = 割 = 6。"
+          "第三栏：对数容量图，品红实线的斜线 ln ad 与品红虚线的水平线 ln bc 在竖直虚线（接缝）处拼成一条折线，折线上三个格点 d = 2、3、4。",
     "en": "Three panels. Panel I: an ordinary binary tree (not the layered network of the later experiment cards) with 8 legs along the bottom, merging in pairs into one tensor per "
           "step up to a single tensor at the top; legs 3 to 6 are the amber interval, and cutting it off takes only the two "
           "bonds marked magenta, not four legs. Panel II: the width-three bridge graph, three bridges between tensors M and N, "
-          "legs a = 2, b = 3, c = 2, d = 3; the two magenta dashed lines above and below are the min cut ad = bc = 6, with a "
-          "green LEAN ✓ tag beneath: flow = cut = 6. Panel III: a log-capacity plot; the blue sloping line ln ad and the "
-          "orange horizontal line ln bc join into one bent line at the dashed vertical seam, with three lattice points "
-          "d = 2, 3, 4 on it; a violet tag at the bottom right: RT · literature.",
+          "legs a = 2, b = 3, c = 2, d = 3; the solid magenta line ad above and the dashed magenta line bc below are the min cut ad = bc = 6, with a "
+          "green LEAN ✓ tag beneath: flow = cut = 6. Panel III: a log-capacity plot; the solid magenta sloping line ln ad and the "
+          "dashed magenta horizontal line ln bc join into one bent line at the dashed vertical seam, with three lattice points "
+          "d = 2, 3, 4 on it.",
 }
 
 
@@ -84,8 +85,9 @@ def draw(fig):
     assert qmincut(2, 3, 2, 3) == 6
     g = bridge(two, 118, 140, gap=92, leg=40, dims=dims, size=13)
     top, bot, _ = cut_lines(g, pad=30)
-    for (x1, y1), (x2, y2) in (top, bot):
-        two.line(x1, y1, x2, y2, "area", 2.6, dash="7 5")
+    for ((x1, y1), (x2, y2)), dash, name in ((top, None, "*ad*"), (bot, "7 5", "*bc*")):
+        two.line(x1, y1, x2, y2, "area", 2.6, dash=dash)
+        two.text(x2 + 5, y1, name, size=14, color="area", middle=True)
     two.chip(118, 280, two.t("LEAN ✓ 流 = 割 = 6", "LEAN ✓ flow = cut = 6"), "lean", anchor="middle")
 
     # ---- III: facets stitched along a seam
@@ -95,13 +97,12 @@ def draw(fig):
     ax.yaxis()
     zl, zr = ax.xr
     seam = math.log(3)
-    ax.path([(zl, math.log(2) + zl), (seam, math.log(6))], color="blue", width=3.4)
-    ax.path([(seam, math.log(6)), (zr, math.log(6))], color="orange", width=3.4)
+    ax.path([(zl, math.log(2) + zl), (seam, math.log(6))], color="area", width=3.4)          # the ad facet: solid, as the top cut of panel II
+    ax.path([(seam, math.log(6)), (zr, math.log(6))], color="area", width=3.4, dash="7 5")   # the bc facet: dashed, as the bottom cut
     ax.vline(seam, "dim", 1.4, dash="3 4")
     ax.text(seam, math.log(8.6), three.t("接缝", "seam"), dx=6, size=13, color="dim")
-    ax.text(math.log(2.1), math.log(4.2) + 0.05, "*ad*", dx=-6, size=14, color="blue", anchor="end")
-    ax.text(zr, math.log(6), "*bc*", dx=-2, dy=-10, size=14, color="orange", anchor="end")
+    ax.text(math.log(2.1), math.log(4.2) + 0.05, "*ad*", dx=-6, size=14, color="area", anchor="end")
+    ax.text(zr, math.log(6), "*bc*", dx=-2, dy=-10, size=14, color="area", anchor="end")
     for d in (2, 3, 4):
         x, y = ax.pt(math.log(d), envelope(d))
         three.dot(x, y, 5, "ink", ring="bg")
-    three.chip(three.width - 6, 280, three.t("RT · 文献", "RT · literature"), "argued", anchor="end")

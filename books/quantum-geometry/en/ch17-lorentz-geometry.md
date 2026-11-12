@@ -231,10 +231,6 @@ $$
 with **strict inequality** $\Delta\tau < \Delta t$ (time dilation) whenever the spatial displacement is nonzero ($\Delta w \neq 0$, or $\Delta x \neq 0$ in $1+1$ dimensions) and **equality** $\Delta\tau = \Delta t$ along a rest worldline ($\Delta w = 0$). By contrast, a photon propagates along a nonzero null displacement $\Delta w \neq 0$ on the null cone $q(\Delta v) = 0$ (where $\Delta\tau = 0$, the singular limit $\eta \to \pm\infty$) and possesses no comoving inertial rest frame. See R. P. Feynman, R. B. Leighton & M. Sands, *The Feynman Lectures on Physics*, Vol. I, chs. 15–17 (Addison–Wesley, 1963); and D. Hestenes, *Space-Time Algebra* (Gordon and Breach, 1966).
 :::
 
-::: {.viz src="rapidity-lightcone" preset="light" height="500"}
-**Along the cone, no proper time.** Drag the turning point $A$ to $(5, 5)$: both legs of the cyan path run along the edges of the white diamond with $t^2 - x^2 = 0$ and carry not a single tick, so $\tau = 0$; the thick white rest worldline carries all 10.
-:::
-
 ## Worldline segments and proper time {#sec-proper-time-segments}
 
 In axiomatic treatments of spacetime geometry, [@prop-null-cone-rigidity] is frequently packaged in existential form: any real quadratic form vanishing on the Minkowski null cone is a scalar multiple of $\operatorname{minkowski}_d$.
@@ -296,14 +292,16 @@ Segment-by-segment invariance of $q$ guarantees that every inertial frame comput
 **Bent 4 + 4 = 8, rest 10.** The turning point $A$ moves from $(5, 0)$ to $(5, 3)$: the ticks on the cyan path drop from 10 to 8 (4 per leg), while the thick white rest worldline keeps all 10; each tick of the outbound leg sits on one of the faint cyan hyperbolas centred at $O$.
 :::
 
+The null displacement at the end of the example can be laid out on the same diagram: push the turning point $A$ onto the light cone, and $q$ of both legs drops to $0$.
+
+::: {.viz src="rapidity-lightcone" preset="light" height="500"}
+**Along the cone, no proper time.** Drag the turning point $A$ to $(5, 5)$: both legs of the cyan path run along the edges of the white diamond with $t^2 - x^2 = 0$ and carry not a single tick, so $\tau = 0$; the thick white rest worldline carries all 10.
+:::
+
 The example's remark that every inertial frame computes $8$ and $10$ can be seen directly: boost into the outbound traveller's frame and count the ticks again.
 
 ::: {.viz src="rapidity-lightcone" preset="frames" height="500"}
 **Another frame, still 8 and 10.** Boost into the outbound traveller's frame ($\eta = \ln 2$): every event slides along the faint cyan hyperbolas, the outbound leg becomes the vertical $(4, 0)$ and the return leg $(8.5, -7.5)$; both worldlines lean over, yet not one tick is gained or lost.
-:::
-
-::: {.viz src="rapidity-lightcone" height="560"}
-The full rapidity-and-light-cone lab: four scenes (compare, boost, caliper, worldlines) on one rail; the green boxes are reserved for the three Lean-verified results of this chapter ([@thm-hyperbolic-norm], [@lemma-null-cone-spatial], [@prop-null-cone-rigidity]).
 :::
 
 With the hyperbolic identity $|\cosh r|^2 - |\sinh r|^2 = 1$ ([@thm-hyperbolic-norm]) and the null-cone rigidity chain ([@lemma-null-cone-spatial], [@prop-null-cone-rigidity], and [@cor-null-cone-proportionality]) in place, the metric skeleton of special relativity is fully demystified.
@@ -313,3 +311,7 @@ With the hyperbolic identity $|\cosh r|^2 - |\sinh r|^2 = 1$ ([@thm-hyperbolic-n
 :::
 
 In the next chapter ([Dirac Spinors and Gauge Fields](ch18-spinors-and-gauge-curvature.md)), we take the matrix square root of relativistic dispersion and trace how anticommuting Pauli operators and closed-loop phases on graphs give rise to spinor coupling and gauge holonomy.
+
+::: {.viz src="rapidity-lightcone" height="560"}
+The full rapidity-and-light-cone lab: four scenes (compare, boost, caliper, worldlines) on one rail; the green boxes are reserved for the three Lean-verified results of this chapter ([@thm-hyperbolic-norm], [@lemma-null-cone-spatial], [@prop-null-cone-rigidity]).
+:::

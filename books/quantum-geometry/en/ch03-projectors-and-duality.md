@@ -175,6 +175,10 @@ which equals $\frac{2}{3}$ for $j = k$ and $\frac{2}{3}\cdot\frac{1}{4} = \frac{
 | $9$ | $8$ | $\frac{8}{9}$ | no |
 :::
 
+::: {.figure src="ch03-trine-records"}
+**Two dimensions shared among three records: at best two thirds read correctly.** On the left, three cyan arrows $\psi_0, \psi_1, \psi_2$ lie on one great circle of the Bloch sphere, $120^\circ$ apart; on the right is the table of readings of $E_k = \frac{2}{3}\lvert\psi_k\rangle\langle\psi_k\rvert$, each square's area following the reading: $\frac{2}{3}$ on the three diagonal cells and $\frac{1}{6}$ on the other six. With $N = 3 > d = 2$ the records cannot all be read correctly ([@prop-record-capacity]); the bound $d/N$ is the text's hand derivation, not formalized in this book.
+:::
+
 The state space of a qubit is a whole sphere, with a continuum of points on it; yet only two of them at a time can serve as records that are read back without error. An "existence line" may point in any direction, but the number of slots in the ledger is set by the dimension.
 
 ## 3.2 The Inseparable Fate of Line and Plane (Hodge Duality) {#sec-ch03-2}
@@ -451,12 +455,12 @@ This classical limit is not formalized in this book and is not part of the finit
 
 [@ex-malus-three-polarizers] brings out the operational geometry of sequential record conditioning: a chain of recorded laboratory measurements is not a conveyor belt carrying pre-labeled pebbles past passive checkpoints, but a **sequence of conditional idempotent re-basings** $P(\tau_1), P(\tau_2), P(\tau_3)$ in which each retained outcome resets the conditioned state for the next probe (while the global fate of unmonitored branches and the thermodynamic cost of erasing records are established by unitary dilation in Chapter 4 and Landauer's principle in Chapter 8, respectively).
 
-One last mystery of Part I now demands an answer. In [@def-record-measurement] and [@thm-pinching-idempotent], what happens when an interaction *does* record which branch occurred, yet our gaze turns away — when the record flies off into an unmonitored environment so that we retain only the unread mixture $\operatorname{unreadState}(P, \rho)$, whose Bloch vector shrinks inside the ball ($\norm{\vv{r}} < 1$)? Where did the missing length $1 - \norm{\vv{r}}$ go, and is quantum information ever truly destroyed? Let us enter [Chapter 4](ch04-decoherence.md).
-
-::: {.viz src="repeated-projection" preset="once" height="500"}
-**One press, and the arrow is shorter.** The amber arrow starts out pointing at the sphere (dashed); one press along the cyan line, result unread, drops it to its shadow on the line. The magenta part is gone and the tip leaves the sphere for the inside of the ball.
+::: {.viz src="repeated-projection" preset="chain" height="500"}
+**Read the result: the state stays on the skin, and the price goes into the weight.** The north pole is the $0^\circ$ sheet and the south pole the $90^\circ$ sheet; three middle sheets divide the meridian evenly, and the cyan lines are their measurement lines. At every hop the amber state lands on the end of the next line and stays on the skin ([@thm-conditional-state-valid]); the cyan bar on the right is the total weight passed, multiplied by $\cos^2 22.5^\circ$ at each hop, and after four hops it stops at the dashed $w_3 \approx 0.531$ ([@thm-rank-one-chain-trace]).
 :::
 
+One last mystery of Part I now demands an answer. In [@def-record-measurement] and [@thm-pinching-idempotent], what happens when an interaction *does* record which branch occurred, yet our gaze turns away — when the record flies off into an unmonitored environment so that we retain only the unread mixture $\operatorname{unreadState}(P, \rho)$, whose Bloch vector shrinks inside the ball ($\norm{\vv{r}} < 1$)? Where did the missing length $1 - \norm{\vv{r}}$ go, and is quantum information ever truly destroyed? Let us enter [Chapter 4](ch04-decoherence.md).
+
 ::: {.viz src="repeated-projection" height="560"}
-The full lab for repeated projection: drag the arrow, change the measurement line, set the arrow's length, and press "Project". Project along Z, then switch to X and project again: the arrow goes to zero.
+**The full lab.** The amber arrow starts on the sphere (dashed); one press along the cyan line, result unread, and the magenta part is gone and the tip has moved inside the ball: the next chapter asks where that length went. Drag the arrow, change the measurement line, set its length and press "Project": project along Z, then switch to X and project again, and the arrow goes to zero; move "Middle sheets N" to switch to the polarizer chain, where the result is read.
 :::

@@ -234,7 +234,11 @@
     const near = new Set(); for (let s = 0; s < S.r && S.r <= S.Q; s++) near.add(Math.round(s * S.Q / S.r) % S.Q);
     const nearSum = [...near].reduce((a, k) => a + fin[k], 0);
     $('hudBig').innerHTML = L(`Q = ${S.Q} · 周期 ${S.r} · 扫到 x = ${cell}`, `Q = ${S.Q} · period ${S.r} · swept to x = ${cell}`);
-    $('hudSub').innerHTML = `<span class="c-cy">P(k = ${S.k}) = ${fix(prob(S.k, t), 5)}</span> · ${L(`梳子 ${n} 格`, `${n} comb cells`)}${done || !clock.playing ? '' : L('（扫描中）', ' (sweeping)')}`;
+    // a comb through 0 with r | Q is the subgroup H of ZMod Q: |H| = Q/r cells, |H⊥| = r frequencies, peaks Q/r apart
+    const sub = S.Q % S.r === 0 && S.x0 === 0;
+    $('hudSub').innerHTML = `<span class="c-cy">P(k = ${S.k}) = ${fix(prob(S.k, t), 5)}</span> · `
+      + (sub ? `|H| = ${n} · |H⊥| = ${S.r} · ${L('峰距', 'peak spacing')} Q/r = ${S.Q / S.r}` : L(`梳子 ${n} 格`, `${n} comb cells`))
+      + `${done || !clock.playing ? '' : L('（扫描中）', ' (sweeping)')}`;
     $('ro').innerHTML = `<div class="key"><dt>${L(`扫完后频率 k = ${S.k} 的概率`, `Probability of k = ${S.k} after the full sweep`)}</dt><dd><b>${fix(pk, 6)}</b></dd></div>`
       + row('', '寄存器 Q · 周期 r · 起点 x₀', 'Register Q · period r · offset x₀', `${S.Q} · ${S.r} · ${S.x0}`)
       + row('c', '梳齿数 n', 'Comb cells n', String(n))
@@ -305,6 +309,7 @@
     basis: { Q: 8, r: 8, x0: 5, k: 7, read: false, to: 5 },
     cancel: { Q: 16, r: 4, x0: 0, k: 1, read: false, to: 15 },
     four: { Q: 16, r: 4, x0: 0, k: 4, read: false, to: 15 },
+    dual: { Q: 32, r: 8, x0: 0, k: 4, read: false, to: 31 },
     read: { Q: 16, r: 4, x0: 0, k: 8, read: true, to: 15 },
     leak: { Q: 64, r: 6, x0: 0, k: 11, read: true, to: 63 }
   };
@@ -312,6 +317,7 @@
     basis: ['Q = 8，只有一格 x = 5。时间轴走到 5 时，三只紫色齿轮停在 π、π/2、5π/4（每格转 1/2、1/4、1/8 圈）；k = 7 用上全部三只，链上唯一一支青色箭头指向它们的和 3π/4。谱是平的：每根柱子都是 1/8。', 'Q = 8 with the single cell x = 5. When the rail reaches 5 the three violet gears rest at π, π/2 and 5π/4 (turning 1/2, 1/4 and 1/8 of a turn per cell); k = 7 uses all three, and the one cyan arrow of the chain points at their sum, 3π/4. The spectrum is flat: every bar is 1/8.'],
     cancel: ['Q = 16，梳子 {0, 4, 8, 12}，看 k = 1：只有最慢的那只齿轮亮着，每过一格梳齿转 90°。四支青色箭头 1、i、−1、−i 首尾相接围成正方形，回到原点；第 1 根柱子扫描中先长出来，最后缩回 0。', 'Q = 16, comb {0, 4, 8, 12}, following k = 1: only the slowest gear is lit, turning 90° from one tooth of the comb to the next. The four cyan arrows 1, i, −1, −i close into a square and return to the start; bar 1 grows during the sweep and shrinks back to 0 at the end.'],
     four: ['同一把梳子，看 k = 4：四支箭头全部朝右，链长 4。扫完之后谱上只剩 0、4、8、12 四根等高的柱子，每根 1/4，正好落在品红的 sQ/r 上；其余十二根都是 0。', 'The same comb, following k = 4: all four arrows point right and the chain has length 4. After the sweep only the four bars at 0, 4, 8 and 12 remain, each 1/4, right on the magenta marks sQ/r; the other twelve are 0.'],
+    dual: ['Q = 32、周期 r = 8：寄存器上青色的梳子 H = {0, 8, 16, 24} 只有 4 格，间距 8。看 k = 4：四支箭头全部朝右，链长 4。扫完之后谱上留下 8 根等高的柱子，每根 1/8，落在 0、4、8、…、28，也就是 H⊥ 的 8 个频率：峰距是 Q/r = 4，不是 r = 8；4 × 8 = 32 = Q。', 'Q = 32 and period r = 8: the cyan comb H = {0, 8, 16, 24} on the register has only 4 cells, 8 apart. Following k = 4, all four arrows point right and the chain has length 4. After the sweep the spectrum keeps 8 equal bars, each 1/8, at 0, 4, 8, …, 28, the 8 frequencies of H⊥: the peaks are Q/r = 4 apart, not r = 8, and 4 × 8 = 32 = Q.'],
     read: ['从峰读出阶：k = 4 与 12 给出 4/16 = 1/4、12/16 = 3/4，分母是阶 4；琥珀色框住的 k = 8 只给出 1/2，分母 2 是阶的真因子，要再检验；k = 0 不含信息。', 'Reading the order from the peaks: k = 4 and 12 give 4/16 = 1/4 and 12/16 = 3/4, whose denominator is the order 4; the amber-framed k = 8 only gives 1/2, and 2 is a proper divisor of the order that must be checked again; k = 0 carries nothing.'],
     leak: ['Q = 64，周期 6 不整除 Q。品红的 sQ/r 除 0 与 32 外都落在整数之间（10.67、21.33 …）；扫完后峰摊到相邻格：k = 11 高 0.115、k = 10 只有 0.026，离 sQ/r 最近的六格合计 0.80。k = 11 的连分数读出 1/6，得到阶 6。', 'Q = 64 and the period 6 does not divide Q. Apart from 0 and 32, the magenta marks sQ/r fall between integers (10.67, 21.33, …); after the full sweep the peaks spread: k = 11 has 0.115, k = 10 only 0.026, and the six cells nearest sQ/r carry 0.80 together. The continued fraction of k = 11 reads 1/6, giving the order 6.']
   };

@@ -1,28 +1,37 @@
-"""第二十四章地图：余弦蛛网绕向 θ*、有限集合一路收缩后停下、1 + 1/x 与 y = x 只交于 φ。
-Chapter 24 at a glance: the cosine cobweb winding into θ*, a finite set shrinking until it stops, and
-1 + 1/x meeting y = x only at φ.
+"""第二十四章地图：1 + 1/x 与 y = x 只交于 φ、余弦蛛网绕向 θ*、扭过的对角线落回表里时落点是扭转的不动点。
+Chapter 24 at a glance: 1 + 1/x meets y = x only at φ, the cosine cobweb winds into θ*, and when the twisted
+diagonal lands back on the list its landing value is a fixed point of the twist.
 
-Panel I: y = cos x and y = x with the cobweb from x₀ = 0; θ* is computed (≈ 0.739). Panel II: the
-example S₀ = {0, 1, 2} → {0, 1} → {0} → {0} of the chapter, as boxes that lose an element per step
-until two neighbours agree. Panel III: y = 1 + 1/x and y = x for x > 0; their only crossing is φ,
-the green point (the chapter cites the uniqueness with lean=).
+Panel I (§24.3): y = 1 + 1/x and y = x for x > 0; their only crossing is φ, the green point (the chapter cites the
+uniqueness with lean=). Panel II (§24.4–24.5): y = cos x and y = x with the cobweb from x₀ = 0, and the short magenta
+tangent of slope −sin θ* at θ*; θ* is computed (≈ 0.739). Panel III (§24.7): the listing g of the chapter's 3×3
+example with the twist f₁ = 0↦1, 1↦2, 2↦2; the twisted diagonal (1, 2, 2) is row 1, and the value 2 at the landing
+spot is the fixed point of f₁ (green: lemma diagonal_landing_fixed, cited with lean=).
 """
 
 import math
 
-from _ch24 import PHI, THETA, cobweb, set_capsule
+from _ch24 import LAM, PHI, THETA, cobweb
 
 SIZE = (740, 280)
 WRAP = True
 ALT = {
-    "zh": "三栏。第一栏：青色的余弦曲线 y = cos x 与灰色的对角线 y = x，从 0 出发的蛛网折线一圈圈绕向交点 θ* ≈ 0.739。"
-          "第二栏：三个盒子自上而下，候选集 {0, 1, 2} 每步删掉一个元素，变成 {0, 1}、{0}，再下一步仍是 {0}，在这里停下。"
-          "第三栏：青色的曲线 y = 1 + 1/x 与灰色的对角线 y = x 在正半轴上只交于一点，绿色的点 φ ≈ 1.618。",
-    "en": "Three panels. Panel I: the cyan cosine curve y = cos x and the grey diagonal y = x; the cobweb from 0 winds "
-          "into their crossing θ* ≈ 0.739. Panel II: three boxes from top to bottom; the candidate set {0, 1, 2} loses one "
-          "element per step, becoming {0, 1}, then {0}, and the next step is {0} again, where it stops. Panel III: the cyan "
-          "curve y = 1 + 1/x and the grey diagonal y = x cross only once for x > 0, at the green point φ ≈ 1.618.",
+    "zh": "三栏。第一栏：青色的曲线 y = 1 + 1/x 与灰色的对角线 y = x 在正半轴上只交于一点，绿色的点 φ ≈ 1.618。"
+          "第二栏：青色的余弦曲线 y = cos x 与灰色的对角线 y = x，从 0 出发的蛛网折线一圈圈绕向交点 θ* ≈ 0.739，"
+          "交点处一小段品红的切线，斜率是 −sin θ*。第三栏：一张三行三列的列表，第 0 行 0 1 2，第 1 行 1 2 2，第 2 行 2 2 2，"
+          "对角线三格加了粗框；表下是用 f₁ 扭过的对角线 1 2 2，与青色的第 1 行一模一样，落点那一格的 2 套着绿圈，是 f₁ 的不动点。",
+    "en": "Three panels. Panel I: the cyan curve y = 1 + 1/x and the grey diagonal y = x cross only once for x > 0, at "
+          "the green point φ ≈ 1.618. Panel II: the cyan cosine curve y = cos x and the grey diagonal y = x; the cobweb "
+          "from 0 winds into their crossing θ* ≈ 0.739, where a short magenta tangent has slope −sin θ*. Panel III: a "
+          "three-by-three listing, row 0 is 0 1 2, row 1 is 1 2 2, row 2 is 2 2 2, with the diagonal cells outlined; under "
+          "it, the diagonal twisted by f₁ reads 1 2 2, exactly the cyan row 1, and the 2 at the landing spot has a green "
+          "ring: it is the fixed point of f₁.",
 }
+
+G = [(0, 1, 2), (1, 2, 2), (2, 2, 2)]
+F1 = {0: 1, 1: 2, 2: 2}
+D1 = tuple(F1[G[a][a]] for a in range(3))
+assert D1 == (1, 2, 2) == G[1] and F1[G[1][1]] == G[1][1] == 2
 
 
 def title(p, zh, en):
@@ -32,38 +41,9 @@ def title(p, zh, en):
 def draw(fig):
     one, two, three = fig.row([236, 236, 236], 280, gap=16)
 
-    # ---- I: the cosine cobweb
-    title(one, "I　余弦蛛网 → θ*", "I  cosine cobweb → θ*")
-    ax = one.axes(30, 46, 190, 190, (0, 1.05), (0, 1.05))
-    ax.xaxis(ticks=[0, 1], labels=["0", "1"], size=13)
-    ax.yaxis(ticks=[1], labels=["1"], size=13)
-    ax.plot(lambda x: x, color="faint", width=1.4, dash="4 3")
-    ax.plot(math.cos, color="line", width=2.2)
-    xs = cobweb(ax, math.cos, 0.0, 14, width=1.3)
-    assert abs(xs[-1] - THETA) < 1e-2
-    ax.points([(THETA, THETA)], "ink", r=5.0, ring="bg")
-    ax.text(0.2, math.cos(0.2), "cos *x*", dx=0, dy=24, size=13, color="line")
-    ax.vline(THETA, "faint", 1.0, dash="2 3")
-    one.text(ax.X(THETA), 268, "*θ*^{∗} ≈ 0.739", size=13, color="dim", anchor="middle")
-
-    # ---- II: a finite set shrinks and stops
-    title(two, "II　有限集合：筛到停下", "II  finite set: sift, then stop")
-    steps = [{0, 1, 2}, {0, 1}, {0}, {0}]
-    for a, b in zip(steps, steps[1:]):
-        assert b <= a                                   # U(A) ⊆ A
-    n_change = sum(1 for a, b in zip(steps, steps[1:]) if a != b)
-    assert n_change == 2 <= len(steps[0])
-    ys = [64, 124, 184, 244]
-    for k, (s, y) in enumerate(zip(steps, ys)):
-        w = set_capsule(two, 70, y, s, r=15, outline="dim" if k < 3 else "line")
-        two.text(58, y, f"*S*_{{{k}}}", size=15, color="ink", anchor="end", middle=True)
-        if k < 3:
-            two.arrow(70 + w / 2, y + 22, 70 + w / 2, ys[k + 1] - 22, "dim", 1.4, head=7)
-    two.text(70 + 117 / 2 + 22, 214, two.t("不再变", "no change"), size=13, color="line", middle=True)
-
-    # ---- III: the golden lock
-    title(three, "III　黄金锁：只交于 φ", "III  golden lock: only φ")
-    ax3 = three.axes(30, 46, 190, 190, (0, 3.2), (0, 3.2))
+    # ---- I: the golden lock
+    title(one, "I　黄金锁：只交于 φ", "I  golden lock: only φ")
+    ax3 = one.axes(30, 46, 190, 190, (0, 3.2), (0, 3.2))
     ax3.xaxis(ticks=[0, 1, 2, 3], size=13)
     ax3.yaxis(ticks=[1, 2, 3], size=13)
     ax3.plot(lambda x: x, color="faint", width=1.4, dash="4 3")
@@ -75,5 +55,42 @@ def draw(fig):
     ax3.text(PHI, PHI, "*φ*", dx=10, dy=24, size=16, color="lean", weight=600, halo=True)
     ax3.text(3.2, 1 + 1 / 3.2, "1 + 1/*x*", dx=-2, dy=18, size=13, color="line", anchor="end")
     ax3.text(3.2, 3.2, "*y* = *x*", dx=-4, dy=14, size=13, color="dim", anchor="end")
-    three.text(ax3.X(PHI), 268, "*φ* ≈ 1.618", size=13, color="dim", anchor="middle")
+    one.text(ax3.X(PHI), 268, "*φ* ≈ 1.618", size=13, color="dim", anchor="middle")
     ax3.vline(PHI, "faint", 1.0, dash="2 3")
+
+    # ---- II: the cosine cobweb, with the slope at θ*
+    title(two, "II　余弦蛛网 → θ*", "II  cosine cobweb → θ*")
+    ax = two.axes(30, 46, 190, 190, (0, 1.05), (0, 1.05))
+    ax.xaxis(ticks=[0, 1], labels=["0", "1"], size=13)
+    ax.yaxis(ticks=[1], labels=["1"], size=13)
+    ax.plot(lambda x: x, color="faint", width=1.4, dash="4 3")
+    ax.plot(math.cos, color="line", width=2.2)
+    xs = cobweb(ax, math.cos, 0.0, 14, width=1.3)
+    assert abs(xs[-1] - THETA) < 1e-2
+    h = 0.17
+    assert abs(-math.sin(THETA) + LAM) < 1e-15
+    ax.path([(THETA - h, THETA + LAM * h), (THETA + h, THETA - LAM * h)], "area", 2.4)
+    ax.points([(THETA, THETA)], "ink", r=5.0, ring="bg")
+    ax.text(0.2, math.cos(0.2), "cos *x*", dx=0, dy=24, size=13, color="line")
+    ax.text(THETA + h, THETA - LAM * h, two.t("斜率 −sin *θ*^{∗}", "slope −sin *θ*^{∗}"), dx=-4, dy=34, size=13, color="area", anchor="middle", halo=True)
+    ax.vline(THETA, "faint", 1.0, dash="2 3")
+    two.text(ax.X(THETA), 268, "*θ*^{∗} ≈ 0.739", size=13, color="dim", anchor="middle")
+
+    # ---- III: the diagonal lands on a fixed point
+    title(three, "III　对角线落点即不动点", "III  the landing is a fixed point")
+    x0, y0, c = 82, 52, 36
+    for a in range(3):
+        three.text(x0 - 12, y0 + a * c + c / 2, f"*g* {a}", size=13, color="dim", anchor="end", middle=True)
+        row_hit = G[a] == D1
+        for b in range(3):
+            x, y = x0 + b * c, y0 + a * c
+            three.rect(x, y, c, c, color="edge", fill="line" if row_hit else None, fill_opacity=0.14, width=1.0)
+            three.text(x + c / 2, y + c / 2, str(G[a][b]), size=15, color="line" if row_hit else "ink", anchor="middle", middle=True)
+        three.rect(x0 + a * c + 2, y0 + a * c + 2, c - 4, c - 4, color="ink", width=1.8)
+    yd = y0 + 3 * c + 22
+    three.text(x0 - 12, yd + c / 2, three.t("扭过", "twisted"), size=13, color="line", anchor="end", middle=True)
+    for b in range(3):
+        three.rect(x0 + b * c, yd, c, c, color="line", fill="line", fill_opacity=0.14, width=1.6)
+        three.text(x0 + b * c + c / 2, yd + c / 2, str(D1[b]), size=15, color="line", anchor="middle", middle=True, weight=600)
+    three.circle(x0 + c + c / 2, y0 + c + c / 2, 15, color="lean", width=2.4)
+    three.text(118, 268, three.t("= 第 1 行；2 = *f*_{1}(2)", "= row 1; 2 = *f*_{1}(2)"), size=13, color="lean", anchor="middle")

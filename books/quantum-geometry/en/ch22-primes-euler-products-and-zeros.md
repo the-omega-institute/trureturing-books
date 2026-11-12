@@ -17,7 +17,7 @@ Look at the geometric structure of that correspondence: unique prime factorizati
 Guided by this geometric realization of primes as orthogonal axes, this chapter establishes the Lean-verified identities linking the **Dirichlet natural-number series**, the **simple-pole residue at $s = 1$**, and the **Euler prime product** on the half-plane of absolute convergence $\operatorname{Re}(s) > 1$, examines the "polyhedral prime sieve" remainder under finite truncation, and demarcates the exact epistemic boundary separating these proved theorems from the open **Riemann Hypothesis**.
 
 ::: {.figure src="ch22-overview"}
-**Figure 22.** The chapter at a glance. Panel I: each step right multiplies by $2$ and each step up by $3$, so every integer is a lattice point on the prime axes; the cyan arrows walk to $12 = 2^2 \times 3$. Panel II: among $1$ to $30$, the cells that are products of $2, 3, 5$ alone are cyan and the rest magenta; the first magenta cell is $7$ ([@ex-prime-log-orthogonality-and-sieve]). Panel III: the dashed line down the middle of the critical strip $0 < \operatorname{Re}(s) < 1$ is $\sigma = \frac{1}{2}$; the first ten zeros (a numerical result) all sit on it, and the cross at $s = 1$ is the pole. The red question marks and tag mark the open problem: whether every nontrivial zero lies on this line ([@conj-riemann-hypothesis]). The question marks come as a pair on either side of the line, because an off-line zero could only appear mirrored about $\sigma = \frac{1}{2}$ ([@thm-xi-reading-entire-reflection], [@prop-zeta-conjugation-covariance]).
+**Figure 22.** The chapter at a glance. Panel I: each step right multiplies by $2$ and each step up by $3$, so every integer is a lattice point on the prime axes; the cyan arrows walk to $12 = 2^2 \times 3$. Panel II: among $1$ to $30$, the cells that are products of $2, 3, 5$ alone are cyan and the rest magenta; the first magenta cell is $7$ ([@ex-prime-log-orthogonality-and-sieve]). Panel III: the dashed line down the middle of the critical strip $0 < \operatorname{Re}(s) < 1$ is $\sigma = \frac{1}{2}$; the first ten zeros, in grey (a numerical result), all sit on it, and the cross at $s = 1$ is the pole. The red question marks and tag mark the open problem: whether every nontrivial zero lies on this line ([@conj-riemann-hypothesis]). The question marks come as a pair on either side of the line, because an off-line zero could only appear mirrored about $\sigma = \frac{1}{2}$ ([@thm-xi-reading-entire-reflection], [@prop-zeta-conjugation-covariance]).
 :::
 
 ## 22.1 Orthogonal Prime Axes and Canceling Infinity by Factorization {#sec-ch22-1}
@@ -119,11 +119,7 @@ Under `hs : 1 < s.re`, transitivity of equality combines [@prop-riemann-zeta-dir
 :::
 
 ::: {.viz src="euler-product-sieve" preset="all" height="500"}
-**Every cell cyan, the gap still there.** Primes join the list one by one up to $97$: every cell from $1$ to $96$ turns cyan, so each of these integers appears in the expansion of the product, and at $s = 2$ the cyan curve comes within $0.0030$ of the ink $\zeta$. The magenta gap in the magnifier remains, with $101^{-s}$ as its lowest slice. Only with every prime multiplied in does the product equal the whole series ([@cor-dirichlet-sum-eq-euler-product]).
-:::
-
-::: {.viz src="sphere-escape" preset="euclid" height="500"}
-**Multiply, add one.** Each time the list gains a prime, multiply them all and add one to get $Q$. Every dial has $p$ ticks and its hand points at the remainder of $Q$ divided by $p$: all of them point at $1$ and none at the red $0$, so any prime dividing $Q$ is not on the list (Euclid's argument, a literature result). Opened full screen, the plot below shows how far the Euler product over finitely many primes still is from $\zeta(2)$ ([@thm-riemann-zeta-euler-product] with $s = 2$).
+**Every cell cyan, the gap still wide.** Primes join the list one by one up to $97$: every cell from $1$ to $96$ turns cyan, so each of these integers appears in the expansion of the product. The amber line stands at $s = 1.2$: the cyan product is only $4.37$ against the ink $\zeta(1.2) = 5.59$, and the magenta gap of $1.23$ is still more than a fifth of $\zeta$, with $101^{-s}$ as its lowest slice in the magnifier. Only with every prime multiplied in does the product equal the whole series ([@cor-dirichlet-sum-eq-euler-product]).
 :::
 
 **The same trick for sums.** The Euler product rests on multiplicative decomposition: every $n$ is uniquely a product of prime powers, and each prime axis contributes its own geometric series. Replace “multiply” by “add” and the trick still works. Split $N$ into a sum of positive parts, ignoring order. Each part size $n$ is an axis, and the number of times it occurs, $m_n$, is the coordinate on that axis; summing along the axis is again a geometric series $1 + x^n + x^{2n} + \cdots = (1 - x^n)^{-1}$. If parts of size $n$ come in $c_n$ colours, and parts of the same size and colour are indistinguishable, the axis splits into $c_n$ axes and the factor becomes $(1 - x^n)^{-c_n}$. The following theorem pins this down on genuine finite sets: the left side is a coefficient of a formal power series, the right side is the number of elements of a finite type, and the two are defined independently of each other.
@@ -316,11 +312,7 @@ The strictly positive discrepancy $R_{> 5}(2) = \zeta(2) - P_{\le 5}(2) \approx 
 :::
 
 ::: {.viz src="euler-product-sieve" preset="five" height="500"}
-**The first to slip through is 7.** The list is $2, 3, 5$: the cyan cells $1, 2, 3, 4, 5, 6, 8, 9, 10, 12, \dots$ are the terms the product expands into, and $7$ is the first magenta cell. At $s = 2$ the cyan curve sits at $\frac{25}{16} = 1.5625$ against the ink $\zeta(2) = 1.6449$; the magnifier splits the gap of $0.0824$, from the bottom up, into $7^{-2}$, $11^{-2}$, $13^{-2}$ and ever thinner slices, each the $n^{-2}$ of one magenta cell.
-:::
-
-::: {.viz src="euler-product-sieve" preset="remainder" height="500"}
-**The remainder always rests on $7^{-s}$.** The list is still $2, 3, 5$, and the amber line sweeps from $s = 4$ down to $s = 1.3$: the magenta gap keeps widening, and the lowest slice in the magnifier is always $7^{-s}$. The dashed magenta curve between the ink and the cyan is the product plus $7^{-s}$, and the gap never gets narrower than that: $R_{>5}(s) > 7^{-s}$ (a literature result, checked by the page only at the points it draws).
+**The first to slip through is 7.** The list is $2, 3, 5$: the cyan cells $1, 2, 3, 4, 5, 6, 8, 9, 10, 12, \dots$ are the terms the product expands into, and $7$ is the first magenta cell. At $s = 2$ the cyan curve sits at $\frac{25}{16} = 1.5625$ against the ink $\zeta(2) = 1.6449$; the magnifier splits the gap of $0.0824$, from the bottom up, into $7^{-2}$, $11^{-2}$, $13^{-2}$ and ever thinner slices, each the $n^{-2}$ of one magenta cell. The dashed magenta curve between the ink and the cyan is the product plus $7^{-s}$, and at every $s$ drawn the gap is wider than that: $R_{>5}(s) > 7^{-s}$ (a literature result, checked by the page only at the points it draws). Click the card and the amber line sweeps from $s = 4$ down to $s = 1.3$, with $7^{-s}$ always the lowest slice in the magnifier.
 :::
 
 Notice the exact structural parallel between [@ex-prime-log-orthogonality-and-sieve] and the Euclidean–Gödelian escape of [Chapter 21](ch21-diagonalization-and-escape.md): any finite prime sieve spanned by $K$ prime axes $\{p_1, \dots, p_K\}$ is an arithmetic polytope whose remainder series $R_{> p_K}(s)$ leaks immediately at $n = p_{K+1}$ (and is strictly positive, $R_{> p_K}(s) > p_{K+1}^{-s} > 0$, for every real $s > 1$). Eliminating that leading term requires adjoining $p_{K+1}$ as a new orthogonal axis — and because the primes are inexhaustible, no finite truncation ever seals the arithmetic sphere.
@@ -389,6 +381,10 @@ Claim 1 substitutes Mathlib's identity `completedRiemannZeta_eq` ($\Lambda(s) = 
 
 Claim 3 of [@thm-xi-reading-entire-reflection] has an immediate consequence (a one-line manual derivation): if $\operatorname{xiReading}\ \rho = 0$ then $\operatorname{xiReading}\ (1 - \rho) = 0$. The map $s \mapsto 1 - s$ is the half-turn of the complex plane about the point $s = \frac{1}{2}$, so zeros come in pairs with respect to that point. Adding the conjugation symmetry $\xi(\overline{s}) = \overline{\xi(s)}$ (see [@prop-zeta-conjugation-covariance] below), zeros come in groups of four, $\rho,\ \overline{\rho},\ 1 - \rho,\ 1 - \overline{\rho}$; for non-real $\rho$ the four points coincide in pairs and shrink to a single pair exactly when $\operatorname{Re}(\rho) = \frac{1}{2}$ (the zeros of $\xi$ are exactly the zeros of $\zeta$ in the critical strip, see [@prop-xi-zeros-strip-zeros], and none of them is real, see [@prop-zeta-real-axis-sign]). The Riemann hypothesis says precisely that every group has shrunk to a pair.
 
+::: {.viz src="critical-mirror" preset="quartet" height="500"}
+**Four together, apart once off the mirror.** The amber $\rho = 0.6 + 2i$ and its three magenta partners $\overline{\rho}$, $1 - \rho$, $1 - \overline{\rho}$ form a rectangle around $s = \frac{1}{2}$; the dashed cyan line is the mirror $\operatorname{Re}(s) = \frac{1}{2}$. On the right are their images under $w = (s - 1)/s$, two inside the unit circle and two outside. Drag the rail to push $\rho$ onto the mirror, and the four points merge in pairs into two cyan points ([@thm-xi-reading-entire-reflection], [@prop-zeta-conjugation-covariance]).
+:::
+
 The reflection symmetry pairs up values that look entirely unrelated.
 
 ::: {.example #ex-xi-mirror-values title="One Number on Both Sides of the Mirror: ζ(2) and ζ(−1), ζ(4) and ζ(−3)"}
@@ -422,7 +418,7 @@ The fourth row is claim 4 of [@thm-xi-reading-entire-reflection]; the fifth row 
 :::
 
 ::: {.figure src="ch22-critical-line"}
-**Walking up the critical line, $\lvert\zeta\rvert$ keeps dropping to zero.** The ink curve is $\lvert\zeta(\frac{1}{2} + it)\rvert$ for $0 \le t \le 50$; the ten magenta dots are where it touches zero, the first at $t \approx 14.13$, consistent with the sign change of $\xi$ between $t = 14$ and $t = 15$ in the example above. The curve and the zero positions are numerical; the red tag asks the open question of whether every nontrivial zero lies on this line ([@conj-riemann-hypothesis]).
+**Walking up the critical line, $\lvert\zeta\rvert$ keeps dropping to zero.** The ink curve is $\lvert\zeta(\frac{1}{2} + it)\rvert$ for $0 \le t \le 50$; the ten grey dots are where it touches zero, the first at $t \approx 14.13$, consistent with the sign change of $\xi$ between $t = 14$ and $t = 15$ in the example above. The curve and the zero positions are numerical; the red tag asks the open question of whether every nontrivial zero lies on this line ([@conj-riemann-hypothesis]).
 :::
 
 The position of the mirror, $\operatorname{Re}(s) = \frac{1}{2}$, is kernel-checked by [@thm-xi-reading-entire-reflection]; whether every nontrivial zero stands on the mirror remains the open conjecture stated at the end of this section.
@@ -613,6 +609,10 @@ At $x = 10^6$, $\psi(x)/x$ is within $0.00041$ of $1$, while $\pi(x)\ln x/x$ is 
 The error bound the theorem guarantees closes very slowly. Even with $c = 1$, $(\ln x)^{1/10}$ is only $1.3003$ at $x = 10^6$, a relative error bound of $e^{-1.3003} = 0.2725$, and at $x = 10^{100}$ it is still $e^{-1.7227} = 0.1786$. The actual relative error $\lvert\psi(x)/x - 1\rvert$ at $x = 10^6$ is only $0.00041$. For a comparison of shapes, the classical error term of de la Vallée Poussin, $x e^{-c\sqrt{\ln x}}$ (literature result, not formalized in this book), gives the relative value $0.0243$ at $x = 10^6$ with $c = 1$. What the frozen version buys is a proof that can be checked line by line, not the best error term.
 :::
 
+::: {.figure src="ch22-chebyshev-psi"}
+**$\psi(x)$ hugs $x$, while $\pi(x)\ln x/x$ falls slowly.** Top: the cyan staircase is $\psi(x)$, which jumps by $\ln p$ at each prime power $p^k$ and climbs close to the ink line $y = x$. Bottom (logarithmic axis, $10 \le x \le 10^6$): the cyan $\psi(x)/x - 1$ soon lies on the zero line, while the grey $\pi(x)\ln x/x - 1$ is still $0.08$ at $10^6$. The curves are numerical results; [@thm-medium-pnt] is an asymptotic statement with no explicit constants, and a finite plot only shows what it says; the prime number theorem in its $\pi(x)$ form is a literature result.
+:::
+
 The prime number theorem needs only that the line $\operatorname{Re}(s) = 1$ is free of zeros; the Riemann Hypothesis asks about something deeper inside: whether all zeros in the critical strip lie on $\operatorname{Re}(s) = \frac{1}{2}$. Back to the wording question from the start.
 
 ::: {.theorem #thm-right-half-strip-rh-forms title="The Riemann Hypothesis Reduces to the Right Half-Strip; Mathlib's Nontrivial Zeros Lie in the Critical Strip, and the Two Formulations Agree" lean="D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh D5/S3/Zeros/ActualZeroGeometry.rh_iff_nontrivial_zeros_on_line D5/S3/Weil/Mertens/Cryptids/VonMangoldtCount/Foundation.mem_criticalStrip_of_isNontrivialZetaZero"}
@@ -651,6 +651,10 @@ $$
 |w|^2 - 1 \;=\; \frac{1 - 2\sigma}{\sigma^2 + t^2} .
 $$
 
+::: {.viz src="critical-mirror" preset="cayley" height="500"}
+**The critical line rolled into the unit circle.** $\rho = \frac{1}{2} + 14.134725\,i$ is on the mirror, and its image $w$ lies on the cyan unit circle at an angle of $4.05^\circ$; the grey dots are the first five zeros (numerical) in both planes, all on the circle near $w = 1$ on the right. Here $s \mapsto 1 - \overline{s}$ is inversion in the circle, which leaves the circle's own points fixed ([@thm-cayley-critical-line-criterion]).
+:::
+
 ::: {.example #ex-cayley-unit-circle-zeros title="Where the First Five Zeros Sit on the Unit Circle, and How Far an Off-Line Point Leaves It"}
 **Points on the critical line.** For $s = \frac{1}{2} + it$ one has $s - 1 = -\overline{s}$, hence $w = -\overline{s}/s$ and $|w| = 1$. For $t > 0$, $\arg s = \arctan(2t)$, so
 
@@ -675,6 +679,10 @@ The zero of smallest imaginary part in the upper half-plane is $t_1$, so all non
 **A few reference points.** $s = 2 \mapsto w = \frac{1}{2}$ (inside the circle), and its reflection $s = -1 \mapsto w = 2$ (outside), reciprocals of each other; $s = 1 \mapsto w = 0$; $s = \frac{1}{2} \mapsto w = -1$.
 
 **Off-line points.** Take $s = 0.6 + 14i$: $|w|^2 - 1 = \dfrac{1 - 1.2}{0.36 + 196} = -1.0185\times10^{-3}$ and $|w| = 0.999491$. Its mirror image $1 - \overline{s} = 0.4 + 14i$ gives $|w|^2 - 1 = \dfrac{1 - 0.8}{0.16 + 196} = +1.0196\times10^{-3}$ and $|w| = 1.000510$. The product of the two norms is $1$, as inversion requires. At height $14$, leaving the critical line by $0.1$ moves the norm of the Cayley ratio away from $1$ by only about five parts in ten thousand: in the coordinate $w$, the high part of the critical strip is squeezed into a thin film hugging the circle.
+:::
+
+::: {.viz src="critical-mirror" preset="thin" height="500"}
+**High up, the critical strip is a thin film on the circle.** $\rho = 0.6 + 14i$ is $0.1$ off the mirror, and its image leaves the circle by only about five parts in ten thousand: $\lvert w\rvert = 0.999491$, with the inverted image at $1.000510$. The magnifier at the lower left stretches the angle and $\ln\lvert w\rvert$ apart: the cyan circle becomes a straight line, and the four images sit on either side of it at the corners of a rectangle (the numbers are those of [@ex-cayley-unit-circle-zeros]).
 :::
 
 **Symmetry alone does not pin the zeros.** Since $\xi$ has both the reflection and the conjugation symmetry, could these two symmetries by themselves force the zeros onto the mirror? They cannot, and a quartic polynomial suffices as a counterexample. The module `D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization` at the pinned commit writes it down.
@@ -728,7 +736,15 @@ The value is real — a necessary consequence of full symmetry, for the same rea
 Compare [@ex-xi-mirror-values]: $\xi$ is likewise real along the critical line, but it changes sign between $t = 14$ and $t = 15$. Symmetry guarantees "real on the mirror"; it does not guarantee "changes sign on the mirror".
 :::
 
+::: {.viz src="critical-mirror" preset="quartic" height="500"}
+**Symmetry does not pin the zeros.** The mock quartet $\frac{1}{2} \pm \frac{1}{4} \pm 14i$ lies entirely off the mirror (left). Top right: the quartic with the same symmetries along the critical line, $F(\frac{1}{2} + it)$, real and positive everywhere, its lowest point $49$ in amber. Bottom right: $\xi(\frac{1}{2} + it)$, crossing zero between $14$ and $15$ (the grey dot is the first zero, a numerical result). Each curve has its own scale ([@thm-full-symmetry-not-localization]).
+:::
+
 Hence the information needed to prove the Riemann Hypothesis must come from outside these two symmetries. That much is guaranteed by [@thm-full-symmetry-not-localization]; what the extra information is — for instance the arithmetic structure carried by the Euler product in the first half of this chapter — this book does not assert.
+
+::: {.viz src="critical-mirror" height="560"}
+**The mirror and the Cayley circle: the full laboratory.** Two scenes share one rail, the distance $\delta$ from $\rho$ to the mirror: the mirror scene puts the critical strip beside the Cayley coordinate $w = (s - 1)/s$, and the quartic scene puts the quartic with the same symmetries beside $\xi$ along the critical line. Drag $\rho$ on the left to move it. The page does not draw "all the zeros"; the Riemann Hypothesis is marked as open only in the drawer ([@conj-riemann-hypothesis]).
+:::
 
 **Reading the Euler product at $s = 1$: Robin's inequality.** Between the arithmetic of the Euler product and the zeros runs a one-way channel that the kernel has already checked, and its integer end needs no complex numbers at all. Take a positive integer $n$ and divide the sum $\sigma(n)$ of all its divisors by $n$. By the prime-axis factorization of Section 22.1 (a manual derivation), $\sigma(n)/n = \sum_{d \mid n} 1/d$ is a finite truncation of the Euler product at $s = 1$: only the prime axes that $n$ actually occupies are switched on, and the geometric series on each axis is cut off at the exponent $v_p(n)$. For $n \ge 2$,
 
@@ -805,6 +821,10 @@ Claim 2 of [@thm-robin-at-most-eight-primes] says that after $5040$ there is not
 Right after the threshold, $5041 = 71^2$ sits on a single large prime axis and reaches only $26.6\%$ of the ruler. The dangerous integers are those that occupy the first few axes starting from $2$ with exponents that never increase from one axis to the next: $10080$, $55440$ and $720720$ reach $98.6\%$, $98.3\%$ and $97.3\%$ of the ruler, which is exactly why the proof moves the larger exponents onto the smaller primes. $223092870$ occupies nine axes but goes only one step along each, reaching $71.2\%$ of the ruler; that it satisfies the inequality is a numerical fact, and neither claim covers it. $3491888400$ is larger than $223092870$ but occupies only eight axes, so Claim 1 covers it.
 
 **Why the saturation bound suffices above $10^{12}$.** With all eight axes $2, 3, \dots, 19$ filled, $\prod_{p \le 19}\frac{p}{p-1} = 5.8471318$, while $\ln\ln 10^{12} = 3.3189391$ and $e^{\gamma}\ln\ln 10^{12} = 5.9112709$: above $10^{12}$, an integer on at most eight axes cannot reach the ruler, however large its exponents. Each additional axis multiplies the saturated value by one more factor $\frac{p}{p-1} > 1$, which is why the proof must cap the number of axes.
+:::
+
+::: {.figure src="ch22-robin-ruler"}
+**Every integer above the ruler lies left of 5040.** The axis across is $n$ on a logarithmic scale and the ink curve is Robin's ruler $e^{\gamma}\ln\ln n$; for $3 \le n \le 5040$, $26$ magenta dots lie above it, the last being $5040$. Right of the dashed line only a pale cyan cloud remains below the ruler (only integers within $15\%$ of it are drawn), and the cyan rings, $10080$, $55440$ and $720720$, come up close to the ruler from below. The green arrow marks the range covered by [@thm-robin-at-most-eight-primes]: no $n$ with $5040 < n < 223092870$ reaches it. The dots are numerical results; Robin's criterion is a literature result ([@rem-robin-criterion-literature]), and whether the inequality holds for every $n > 5040$ is still open.
 :::
 
 **The other direction: an off-line zero leaves evidence in the integers.** [@thm-robin-at-most-eight-primes] checks one fragment: the integers on at most eight prime axes. On the other side stands an implication: if $\zeta$ has a single zero to the right of the critical line, then some integer above $5040$ violates Robin's inequality, and its shape is prescribed — it is the least common multiple of $1, 2, \dots, \lfloor t\rfloor$, which occupies every prime axis below $t$.

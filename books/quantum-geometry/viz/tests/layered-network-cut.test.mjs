@@ -154,6 +154,19 @@ for (const [a, b] of [[[2, 6], [9, 14]], [[0, 10], [12, 28]], [[20, 23], [4, 18]
 }
 check('together never needs more than apart (four more pairs, by Ford–Fulkerson here)', subOK);
 
+/* ---------- numeric ticks are not green: green is kept for the Lean evidence box ---------- */
+for (const m of ['one', 'two']) {
+  await page.click(`#modeChips [data-mode="${m}"]`); await settle(page, 60);
+  check(`readout check marks with ${m} interval${m === 'one' ? '' : 's'} carry no green`, await D(() => {
+    const ok = getComputedStyle(document.documentElement).getPropertyValue('--ok').trim();
+    const marks = [...document.querySelectorAll('.chk')];
+    const probe = document.createElement('span'); probe.style.color = ok; document.body.appendChild(probe);
+    const green = getComputedStyle(probe).color; probe.remove();
+    return document.querySelectorAll('.okmark').length === 0 && marks.length === 1 && /✓/.test(marks[0].textContent)
+      && marks.every((el) => getComputedStyle(el).color !== green);
+  }));
+}
+
 /* ---------- labels, language ---------- */
 check('the evidence: MERA and RT as literature, the network as a model, the bridge-graph bound in green', await D(() => {
   const argued = [...document.querySelectorAll('.lean.argued')].map((b) => b.textContent).join(' ');

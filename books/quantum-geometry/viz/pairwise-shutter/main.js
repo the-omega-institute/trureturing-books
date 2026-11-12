@@ -338,7 +338,8 @@
   const NORTH = [0, 0, 1];
   const PRESETS = {
     clicks: { A: NORTH, B: v3.sph(70 * DEG, 30 * DEG), mode: 'fixed', turn: false, n: 24, play: true },
-    sixty: { A: v3.sph(60 * DEG, 0), B: v3.sph(120 * DEG, 0), mode: 'fixed', turn: false, n: 4000, play: true },
+    // the opening view of the full page (not a card): the 60° worked example of chapter 2, its whole run done
+    open: { A: v3.sph(60 * DEG, 0), B: v3.sph(120 * DEG, 0), mode: 'fixed', turn: false, n: 4000, play: false },
     right: { A: NORTH, B: v3.sph(90 * DEG, 40 * DEG), mode: 'fixed', turn: false, n: 4000, play: true },
     same: { A: NORTH, B: NORTH, mode: 'fixed', turn: false, n: 400, play: true },
     opposite: { A: NORTH, B: [0, 0, -1], mode: 'fixed', turn: false, n: 400, play: true },
@@ -347,11 +348,10 @@
   };
   const NOTES = {
     clicks: ['琥珀色的 B 离青色的 A 70°，可以指向任何方向；快门每次只报一端：A 这一端 +1 “过”，对面一端 −1 “不过”。右上一排方块是每一次的读数，实心青色是过，空心灰色是不过；哪一次过，事先说不准。', 'The amber B is 70° from the cyan A and could point anywhere; each shot reports only one end: +1 “pass” at A, −1 “fail” at the far end. The row of squares at the top right is shot by shot, solid cyan for a pass and hollow grey for a fail; which shot passes cannot be foretold.'],
-    sixty: ['A 离北极 60°，B 离北极 120°，两者之间只有一个角 θ = 60°。青色虚线是权重 3/4；细曲线是数出来的比例，开头乱跳，按到四千次已贴在虚线旁。', 'A is 60° from the north pole and B 120°; between them there is just one angle, θ = 60°. The dashed cyan line is the weight 3/4; the thin curve is the counted share, jumpy at first and hugging the line by four thousand shots.'],
     right: ['B 与 A 垂直，权重 1/2：过与不过一样多。浅色带在这里最宽，细曲线在 1/2 上下摆得最厉害，但还是一路收窄。', 'B is perpendicular to A, weight 1/2: as many passes as fails. The pale band is widest here and the thin curve wobbles most around 1/2, yet it still narrows all the way.'],
     same: ['B 与 A 重合，青色的一段占满整条直径，权重 1：每一次都过，方块全是实心，曲线从第一次起就贴在 1 上。', 'B coincides with A and the cyan stretch fills the whole diameter, weight 1: every shot passes, every square is solid, and the curve sits on 1 from the first shot.'],
     opposite: ['B 在 A 的对面，青色的一段缩成一点，权重 0：一次也不过，方块全是空心，曲线从第一次起就贴在 0 上。', 'B is opposite A and the cyan stretch shrinks to a point, weight 0: not a single pass, every square is hollow, and the curve sits on 0 from the first shot.'],
-    turn: ['与 60° 那张卡同一对箭头、同一串随机数，只是每按一次快门之前，两支箭头绕紫色的轴一起转一点。虚线是两支箭尖走过的路，灰色虚线箭头是出发时的那一对；夹角一直是 60°，权重一直是 3/4，数出来的曲线与不转时一模一样。', 'The same pair and the same random numbers as the 60° card, except that before each shot both arrows turn a little about the violet axis. The dashed paths are where the tips have been and the grey dashed arrows are the pair as it started; the angle stays 60°, the weight stays 3/4, and the counted curve is exactly the one without turning.'],
+    turn: ['A 离北极 60°，B 离北极 120°，两者之间只有一个角 θ = 60°，青色虚线是权重 3/4；细曲线是数出来的比例，开头乱跳，按得越多越贴近虚线。每按一次快门之前，两支箭头绕紫色的轴一起转一点：虚线是两支箭尖走过的路，灰色虚线箭头是出发时的那一对。夹角一直是 60°，权重一直是 3/4，同一串随机数数出来的曲线与不转时一模一样。', 'A is 60° from the north pole and B 120°; between them there is just one angle, θ = 60°, and the dashed cyan line is the weight 3/4. The thin curve is the counted share, jumpy at first and closing in on the line as the shots add up. Before each shot both arrows turn a little about the violet axis: the dashed paths are where the tips have been and the grey dashed arrows are the pair as it started. The angle stays 60°, the weight stays 3/4, and with the same random numbers the counted curve is exactly the one without turning.'],
     random: ['每按一次快门，B 换一个球面上均匀随机的方向，灰点是已经取过的方向。右边把它们的权重分成十段计数：开头高低不齐，越数越平，每段都向 1/10 的青色虚线靠拢。', 'For each shot B takes a fresh uniformly random direction on the sphere; the grey dots are the directions so far. On the right their weights are counted in ten bins: ragged at first, flatter as they fill, each bin closing in on the dashed cyan line at 1/10.']
   };
   let booting = true, moving = null;
@@ -402,8 +402,9 @@
     /** Viewport coordinates of the tips of B and A. */
     tips: () => { const c = now(clock.t), r = cv.getBoundingClientRect(), qb = stage.p(c.b), qa = stage.p(c.a); return { B: [r.left + qb[0], r.top + qb[1]], A: [r.left + qa[0], r.top + qa[1]] }; }
   };
-  window.TRV_THUMB = () => { applyPreset('sixty'); cards.mark('sixty'); clock.set(clock.max); paint.now(); };
-  cards.pick(cards.initial('sixty'));
+  window.TRV_THUMB = () => { applyPreset('open'); cards.mark(null); clock.set(clock.max); paint.now(); };
+  const first = cards.initial(null);
+  if (first) cards.pick(first); else { applyPreset('open'); cards.mark(null); }
   booting = false;
   paint();
 })();
