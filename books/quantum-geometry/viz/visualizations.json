@@ -91,8 +91,8 @@
       "code": "ORTHO//ESCAPE",
       "title": "球外之球 · 有限的清单总留下一点在外面",
       "title_en": "The sphere beyond the sphere · a finite list always leaves something outside",
-      "summary": "四个场景画同一件事：有限步之后总有东西留在外面。对角线：逐行翻转对角元得到的串 d 与第 k 行在第 k 位不同，所以不在清单里；把 d 收编进去，新的对角线又翻出一个。割圆：内接正 n 边形（n = 6·2ᵏ，从刘徽的 6 边到祖冲之的 24576 边）与圆弧之间的缝 1 − cos(π/n) 永远大于零，放大镜一直把它放大到看得见。余弦：xₖ₊₁ = cos xₖ 的误差按等比缩小却不为零。素数：p₁⋯pₖ + 1 除以清单里每个素数都余 1，它的素因子都在清单之外。舞台下方的图画出“留在外面的量”随步数的变化。",
-      "summary_en": "Four scenes of one fact: after finitely many steps something is still outside. The diagonal: the string d obtained by flipping the diagonal bit of each row differs from row k in place k, so it is not on the list; absorb d and the new diagonal flips out another. The polygon: the gap 1 − cos(π/n) between the inscribed regular n-gon (n = 6·2ᵏ, from Liu Hui's 6 sides to Zu Chongzhi's 24576) and the arc is always positive, and a magnifier keeps it large enough to see. The cosine: the error of xₖ₊₁ = cos xₖ shrinks geometrically and is never zero. The primes: p₁⋯pₖ + 1 leaves remainder 1 on every listed prime, so its prime factors are off the list. The plots under the stage show what is left outside, step by step.",
+      "summary": "六个场景画同一件事：有限步之后总有东西留在外面。对角线：逐行翻转对角元得到的串 d 与第 k 行在第 k 位不同，所以不在清单里；把 d 收编进去，新的对角线又翻出一个。纤维：四个地址的解码目录是满射，无论潜坐标怎么排，对角线 g 都劈开一根纤维，把 g 立成第二根轴后块数增加。割圆：内接正 n 边形（n = 6·2ᵏ，从刘徽的 6 边到祖冲之的 24576 边）与圆弧之间的缝 1 − cos(π/n) 永远大于零，放大镜一直把它放大到看得见。指针：N + 1 格的记录指针平移 ℓ 格后与自己的重叠不超过正 (⌊N/ℓ⌋ + 2) 边形的边心距，到不了 1。余弦：xₖ₊₁ = cos xₖ 的误差按等比缩小却不为零。素数：p₁⋯pₖ + 1 除以清单里每个素数都余 1，它的素因子都在清单之外。舞台下方的图画出“留在外面的量”随步数的变化。",
+      "summary_en": "Six scenes of one fact: after finitely many steps something is still outside. The diagonal: the string d obtained by flipping the diagonal bit of each row differs from row k in place k, so it is not on the list; absorb d and the new diagonal flips out another. The fibres: the four-address catalog is surjective, so however the latent coordinates are arranged the diagonal g splits a fibre, and raising g as a second axis adds blocks. The polygon: the gap 1 − cos(π/n) between the inscribed regular n-gon (n = 6·2ᵏ, from Liu Hui's 6 sides to Zu Chongzhi's 24576) and the arc is always positive, and a magnifier keeps it large enough to see. The pointer: a record pointer on N + 1 cells, shifted by ℓ, overlaps itself by at most the apothem of the regular (⌊N/ℓ⌋ + 2)-gon, never 1. The cosine: the error of xₖ₊₁ = cos xₖ shrinks geometrically and is never zero. The primes: p₁⋯pₖ + 1 leaves remainder 1 on every listed prime, so its prime factors are off the list. The plots under the stage show what is left outside, step by step.",
       "path": "sphere-escape/",
       "thumbnail": "sphere-escape/thumb.jpg",
       "status": "live",
@@ -163,6 +163,9 @@
           "gid": "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine"
         },
         {
+          "gid": "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction"
+        },
+        {
           "gid": "D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product"
         },
         {
@@ -178,8 +181,8 @@
       "code": "ORTHO//PYTHAGORAS",
       "title": "±1 接缝 · 佩尔的一格、线素数与面素数、模 p 数点",
       "title_en": "The ±1 seam · Pell's one cell, line primes and plane primes, points mod p",
-      "summary": "沿着 ±1 接缝走一遍的三个场景。佩尔接缝：√d（无平方因子 2 ≤ d ≤ 37）的渐近分数 m/n 在格点上沿直线越贴越近，|m/n − √d| 趋于零，m² − d·n² 却是非零整数；两条色带末端的放大镜显示它们永远差着整数格，差值的符号来回翻转，连分数周期为奇数时才取得到 −1（d = 5 时绿圈标出已由 Lean 验证的全部 ±4 解）。线素数与面素数：半径 √p 的圆上有格点当且仅当 p ≡ 1 (mod 4)，这时 a + bi 的平方给出整数直角三角形；格点的方向角 θ 是希尔伯特夹角，平方后的三角形转过布洛赫极角 2θ。模 p 数点：自旋环把勒让德符号 χₚ(f(x)) 画成一圈青色 +1、品红 −1 与中性 0，点数是 p + 1 + Σχ；曲线 y² = x³ − x 在 𝔽ₚ 上的 aₚ 被哈塞界 ±2√p 关住，线素数恰在零上，面素数的余弦等于高斯三角形的余弦；换成 y² = x³ − x + 1，余弦的分布贴近半圆律，p = 23 处明确标出坏约化（Δ = −368 = −2⁴·23）。",
-      "summary_en": "Three scenes along the ±1 seam. The Pell seam: on the lattice the convergents m/n of √d (squarefree 2 ≤ d ≤ 37) hug the line ever more closely, |m/n − √d| goes to zero, yet m² − d·n² is a nonzero integer; a magnifier on the ends of two bands shows that they always differ by whole cells, the sign of the gap flips back and forth, and −1 is reached only when the period of the continued fraction is odd (for d = 5 the green rings mark all the ±4 solutions, as verified in Lean). Line primes and plane primes: the circle of radius √p passes through lattice points exactly when p ≡ 1 (mod 4), and then the square of a + bi gives an integer right triangle; the direction θ of the lattice point is the Hilbert angle, and the squared triangle turns through the Bloch polar angle 2θ. Points mod p: a ring of spins draws the Legendre symbols χₚ(f(x)) as cyan +1, magenta −1 and neutral 0, and the count is p + 1 + Σχ; for the curve y² = x³ − x over 𝔽ₚ, aₚ is held inside Hasse's bound ±2√p, line primes sit exactly at zero and the cosine of a plane prime equals the cosine of its Gaussian triangle; for y² = x³ − x + 1 the cosines follow the semicircle law, and p = 23 is flagged as a prime of bad reduction (Δ = −368 = −2⁴·23).",
+      "summary": "沿着 ±1 接缝走一遍的三个场景。佩尔接缝：√d（无平方因子 2 ≤ d ≤ 37）的渐近分数 m/n 在格点上沿直线越贴越近，|m/n − √d| 趋于零，m² − d·n² 却是非零整数；两条色带末端的放大镜显示它们永远差着整数格，差值的符号来回翻转，连分数周期为奇数时才取得到 −1（d = 5 时灰圈标出落在 m² − 5n² = ±4 上的 (Fₖ, Lₖ)）。线素数与面素数：半径 √p 的圆上有格点当且仅当 p ≡ 1 (mod 4)，这时 a + bi 的平方给出整数直角三角形；格点的方向角 θ 是希尔伯特夹角，平方后的三角形转过布洛赫极角 2θ。模 p 数点：自旋环把勒让德符号 χₚ(f(x)) 画成一圈青色 +1、品红 −1 与中性 0，点数是 p + 1 + Σχ；曲线 y² = x³ − x 在 𝔽ₚ 上的 aₚ 被哈塞界 ±2√p 关住，线素数恰在零上，面素数的余弦等于高斯三角形的余弦；换成 y² = x³ − x + 1，余弦的分布贴近半圆律，p = 23 处明确标出坏约化（Δ = −368 = −2⁴·23）。",
+      "summary_en": "Three scenes along the ±1 seam. The Pell seam: on the lattice the convergents m/n of √d (squarefree 2 ≤ d ≤ 37) hug the line ever more closely, |m/n − √d| goes to zero, yet m² − d·n² is a nonzero integer; a magnifier on the ends of two bands shows that they always differ by whole cells, the sign of the gap flips back and forth, and −1 is reached only when the period of the continued fraction is odd (for d = 5 grey rings mark the pairs (Fₖ, Lₖ) on m² − 5n² = ±4). Line primes and plane primes: the circle of radius √p passes through lattice points exactly when p ≡ 1 (mod 4), and then the square of a + bi gives an integer right triangle; the direction θ of the lattice point is the Hilbert angle, and the squared triangle turns through the Bloch polar angle 2θ. Points mod p: a ring of spins draws the Legendre symbols χₚ(f(x)) as cyan +1, magenta −1 and neutral 0, and the count is p + 1 + Σχ; for the curve y² = x³ − x over 𝔽ₚ, aₚ is held inside Hasse's bound ±2√p, line primes sit exactly at zero and the cosine of a plane prime equals the cosine of its Gaussian triangle; for y² = x³ − x + 1 the cosines follow the semicircle law, and p = 23 is flagged as a prime of bad reduction (Δ = −368 = −2⁴·23).",
       "path": "pythagoras-number-escape/",
       "thumbnail": "pythagoras-number-escape/thumb.jpg",
       "status": "live",
@@ -238,9 +241,6 @@
         }
       ],
       "lean": [
-        {
-          "gid": "D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib"
-        },
         {
           "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
         },
@@ -2800,6 +2800,56 @@
       "lean": [
         {
           "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"
+        }
+      ]
+    },
+    {
+      "id": "critical-mirror",
+      "code": "ORTHO//MIRROR",
+      "title": "镜子与凯莱圆 · 零点四个一组，在线上才缩成一对",
+      "title_en": "The mirror and the Cayley circle · zeros come in fours, and pair up only on the line",
+      "summary": "两个平面并排。左边是临界带：拖动一点 ρ，ξ 的反射 s ↦ 1 − s 与共轭给出它的三个伴，四点 ρ、ρ̄、1 − ρ、1 − ρ̄ 绕 ½ 成组，只有 Re ρ = ½ 时两两重合。右边是凯莱坐标 w = (s − 1)/s：临界线是单位圆，s ↦ 1 − s̄ 是关于圆的反演，离线点的四个像两个在圆内、两个在圆外，高处只偏出圆周一层薄膜（放大镜拉开 ln|w|）。四次式场景用同样对称、零点 ½ ± δ ± iγ 的多项式说明：它沿临界线取正实数从不变号，而 ξ 在 14 与 15 之间变号，对称本身锁不住零点。",
+      "summary_en": "Two planes side by side. On the left, the critical strip: drag a point ρ, and the reflection s ↦ 1 − s of ξ together with conjugation give it three partners, the four points ρ, ρ̄, 1 − ρ, 1 − ρ̄ grouping around ½ and coinciding in pairs only when Re ρ = ½. On the right, the Cayley coordinate w = (s − 1)/s: the critical line is the unit circle and s ↦ 1 − s̄ is inversion in it; an off-line point has two images inside and two outside, and high up they leave the circle by only a thin film (a magnifier stretches ln|w|). The quartic scene uses a polynomial with the same symmetries and zeros ½ ± δ ± iγ: along the critical line it takes positive real values and never changes sign, while ξ changes sign between 14 and 15, so symmetry alone does not pin the zeros down.",
+      "path": "critical-mirror/",
+      "thumbnail": "critical-mirror/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "临界线",
+        "反射对称",
+        "凯莱比",
+        "单位圆反演",
+        "黎曼猜想",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Critical line",
+        "Reflection symmetry",
+        "Cayley ratio",
+        "Inversion in the circle",
+        "Riemann hypothesis",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十二章 §22.4 · 临界对称轴与黎曼猜想的认识论边界",
+          "label_en": "Chapter 22 §22.4 · The critical line and the epistemic boundary of the Riemann hypothesis",
+          "href": "../zh/ch22-primes-euler-products-and-zeros.html#sec-ch22-4",
+          "href_en": "../en/ch22-primes-euler-products-and-zeros.html#sec-ch22-4"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_reflection"
+        },
+        {
+          "gid": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization"
         }
       ]
     }
