@@ -75,33 +75,53 @@
   }
 
   /* ---------- tube: Γ = ωA ---------- */
-  /** Cross-section, vorticity and material stretch at time t for a mode ('flat' | 'strain' | 'self') and viscosity ν. */
+  // The core is a Gaussian of radius R: ω(r) = ω_max e^(−r²/R²) with ω_max = Γ/(πR²), so A = πR² and ω_max = Γ/A.
+  // Under a steady axial strain α (the Burgers setting) R² obeys dR²/dt = 4ν − αR², whose exact smooth solution is
+  // R(t)² = R∞² + (R₀² − R∞²) e^(−αt) with R∞ = √(4ν/α); without viscosity R = R₀ e^(−αt/2) and ω_max = ω₀ e^(αt).
+  const R0SQ = A0 / Math.PI, rInf = (nu) => Math.sqrt(4 * nu / ALPHA);
+  /** Cross-section, core radius, peak vorticity and material stretch at time t for a mode ('flat' | 'strain' | 'self') and viscosity ν. */
   function tube(mode, nu, t) {
     const visc = 4 * Math.PI * nu; let A, len;
     if (mode === 'flat') { A = A0 + visc * t; len = 1; }
-    else if (mode === 'strain') { const Ainf = visc / ALPHA; A = Ainf + (A0 - Ainf) * Math.exp(-ALPHA * t); len = Math.exp(ALPHA * t); }
+    else if (mode === 'strain') { const ri2 = 4 * nu / ALPHA; A = Math.PI * (ri2 + (R0SQ - ri2) * Math.exp(-ALPHA * t)); len = Math.exp(ALPHA * t); }
     else { const c = KAPPA * GAMMA - visc; A = Math.max(1e-6, A0 - c * t); len = Math.abs(c) < 1e-9 ? Math.exp(KAPPA * GAMMA * t / A0) : Math.pow(A0 / A, KAPPA * GAMMA / c); }
-    return { A, w: GAMMA / A, len };
+    return { A, R: Math.sqrt(A / Math.PI), w: GAMMA / A, len };
+  }
+  /* K41 statistics of homogeneous isotropic turbulence, a separate fact from the Burgers core: with UL = 1, Re = 1/ν,
+     η_K/L = Re^(−3/4), N_DOF ~ (L/η_K)³ = Re^(9/4), and the model spectrum E(k) ∝ k^(−5/3) e^(−β kη_K). */
+  const BETA = 2;
+  function k41(nu) {
+    if (!(nu > 0)) return { re: Infinity, eta: 0, ndof: Infinity, E: (k) => Math.pow(k, -5 / 3) };
+    const re = 1 / nu, eta = Math.pow(re, -0.75);
+    return { re, eta, ndof: Math.pow(re, 2.25), E: (k) => Math.pow(k, -5 / 3) * Math.exp(-BETA * k * eta) };
   }
   const tStar = (nu) => { const c = KAPPA * GAMMA - 4 * Math.PI * nu; return c > 1e-9 ? A0 / c : Infinity; };
   const tubeMax = () => (S.mode === 'self' && isFinite(tStar(S.nu)) ? Math.min(6, tStar(S.nu) * 0.985) : 6);
   /** ∫₀ᵗ ω/2 dt: how far a particle of the core has gone around. */
   function swirl(t) { let a = 0; const n = 160; for (let i = 0; i < n; i++) a += tube(S.mode, S.nu, t * (i + 0.5) / n).w * (t / n) / 2; return a; }
+  // The tube lies along the world x-axis, which the camera shows nearly level, so stretching uses the width of the stage.
+  const TUBE_CAM = { yaw: -0.42, pitch: 0.3, zoom: 1 }, RD0 = 0.8, HL0 = 0.95;
+  const ax = (z, r, a) => [z, r * Math.cos(a), r * Math.sin(a)], X = [1, 0, 0];
   function drawTube(t) {
     st.begin();
-    const d = tube(S.mode, S.nu, t), R0 = 0.5, r = R0 * Math.sqrt(d.A / A0), hl = Math.min(1.08, 0.42 * d.len), open = 0.42 * d.len > 1.08;
+    const d = tube(S.mode, S.nu, t), sx = Math.max(0.3, Math.abs(Math.cos(st.cam.yaw)));
+    const hlMax = Math.min(2.4, 0.84 * (st.W / 2) / st.unit / sx - 0.4), r1 = RD0 * Math.sqrt(d.A / A0), k = Math.min(1, 1.02 / r1, hlMax / HL0);
+    const R0 = RD0 * k, h0 = HL0 * k, r = r1 * k, hl = Math.min(hlMax, h0 * d.len), open = h0 * d.len > hlMax, wall = TRV.thumbMode ? 1.4 : 1.7;
     // the tube as it started (dashed), to compare with
-    for (const z of [-0.42, 0.42]) st.circle([0, 0, z], [0, 0, 1], R0, { color: P.dim, width: 1, alpha: 0.5, dash: [3, 4], n: 48 });
-    for (let k = 0; k < 4; k++) { const a = kit.TAU * (k + 0.5) / 4; st.line([R0 * Math.cos(a), R0 * Math.sin(a), -0.42], [R0 * Math.cos(a), R0 * Math.sin(a), 0.42], { color: P.dim, width: 1, alpha: 0.4, dash: [3, 4] }); }
-    for (let i = -5; i <= 5; i++) { const z = i * 0.084 * d.len; if (Math.abs(z) <= hl + 1e-9) st.circle([0, 0, z], [0, 0, 1], r, { color: i === 0 ? P.cyan : P.lineHot, width: i === 0 ? 2.4 : 1, alpha: i === 0 ? 1 : 0.8, n: 48 }); }
-    for (let k = 0; k < 8; k++) { const a = kit.TAU * k / 8; st.line([r * Math.cos(a), r * Math.sin(a), -hl], [r * Math.cos(a), r * Math.sin(a), hl], { color: P.lineHot, width: 1, alpha: open ? 0.75 : 0.9 }); }
+    for (const z of [-h0, h0]) st.circle([z, 0, 0], X, R0, { color: P.dim, width: 1.2, alpha: 0.6, dash: [4, 4], n: 64 });
+    for (let j = 0; j < 4; j++) { const a = kit.TAU * (j + 0.5) / 4; st.line(ax(-h0, R0, a), ax(h0, R0, a), { color: P.dim, width: 1.2, alpha: 0.5, dash: [4, 4] }); }
+    // the wall: material rings that ride apart with the stretch, and lines along the tube
+    for (let i = -8; i <= 8; i++) { const z = i * 0.24 * k * d.len; if (Math.abs(z) <= hl + 1e-9 && i) st.circle([z, 0, 0], X, r, { color: P.dim, width: wall * 0.8, alpha: 0.85, n: 64 }); }
+    for (let j = 0; j < 12; j++) { const a = kit.TAU * j / 12; st.line(ax(-hl, r, a), ax(hl, r, a), { color: P.dim, width: wall, alpha: open ? 0.8 : 0.95 }); }
+    st.circle([0, 0, 0], X, r, { color: P.cyan, width: 3, alpha: 1, n: 72 });
     const ang = swirl(t);
-    for (let k = 0; k < 3; k++) { const a = ang + kit.TAU * k / 3; st.dot([r * Math.cos(a), r * Math.sin(a), 0], 4, P.cyan, { glow: 8 }); }
-    st.arrow([0, 0, -hl - 0.12], [0, 0, hl + 0.16], { color: P.magenta, width: clamp(1.6 * Math.cbrt(d.w), 1.6, 7), glow: 8, headSize: 12 });
-    st.tag('w', [0, 0, hl + 0.16], `ω = ${fix(d.w, d.w < 100 ? 2 : 0)}`, 'mg raw', { dx: 44 });
-    st.tag('g', [r + 0.02, 0, 0], `Γ = ωA = ${fix(d.w * d.A, 2)}`, 'cy raw', { dx: 62, dy: -4 });
-    st.tag('a', [-r, 0, 0], `A = ${fix(d.A, 3)}`, 'raw ink', { dx: -46, dy: 14 });
-    st.tag('a0', [-R0, 0, -0.42], 'A₀ = 1', 'raw', { dx: -34, dy: 12 });
+    for (let j = 0; j < 3; j++) st.dot(ax(0, r, ang + kit.TAU * j / 3), 4.5, P.cyan, { glow: 8 });
+    const tip = [hl + 0.22, 0, 0];
+    st.arrow([-hl - 0.16, 0, 0], tip, { color: P.magenta, width: clamp(1.8 * Math.cbrt(d.w), 1.8, 7), glow: 8, headSize: 13 });
+    st.tag('w', tip, `ω = ${fix(d.w, d.w < 100 ? 2 : 0)}`, 'mg raw', { dx: -24, dy: -30 });
+    st.tag('g', ax(0, r, Math.PI / 2), `Γ = ωA = ${fix(d.w * d.A, 2)}`, 'cy raw', { dx: 0, dy: -18 });
+    st.tag('a', ax(0, r, -Math.PI / 2), `A = ${fix(d.A, 3)}`, 'raw ink', { dx: 0, dy: 18 });
+    st.tag('a0', ax(-h0, Math.max(R0, r), -2.4), 'A₀ = 1', 'raw', r > R0 ? { dx: -38, dy: 8 } : { dx: 4, dy: 22 });
     st.end();
   }
 
@@ -126,7 +146,7 @@
 
   /* ---------- the stage ---------- */
   const box = { top: 70, bottom: 44 };
-  const st = kit.stage3($('stage'), { canvas: $('cv'), yaw: -0.62, pitch: 0.3, zoom: 1, radius: 0.3, wheel: false, onChange: () => paint(),
+  const st = kit.stage3($('stage'), { canvas: $('cv'), yaw: TUBE_CAM.yaw, pitch: TUBE_CAM.pitch, zoom: TUBE_CAM.zoom, radius: 0.3, wheel: false, onChange: () => paint(),
     onPick: (ev) => { if (S.scene === 'tube') return false; leave(); drag(ev); return true; }, onDrag: (ev) => drag(ev) });
   function drag(ev) {
     if (!view) return;
@@ -158,16 +178,23 @@
       const T = clock.max, g = kit.plot(A, { x: [0, T], y: [0.01, 200], pad: [38, 12, 10, 20], logY: true }), aa = [], ww = [];
       for (let i = 0; i <= 120; i++) { const t = T * i / 120, d = tube(S.mode, S.nu, t); aa.push([t, clamp(d.A, 0.01, 200)]); ww.push([t, clamp(d.w, 0.01, 200)]); }
       g.axes({ yTicks: [[0.01, '0.01'], [0.1, '0.1'], [1, '1'], [10, '10'], [100, '100']], xTicks: [0, +(T / 2).toFixed(1), +T.toFixed(1)], xLabel: 't' });
-      g.line(aa, P.cyan); g.line(ww, P.magenta); g.hline(1, P.amber, { dash: [4, 3], alpha: 0.7 }); g.vline(clock.t, P.amber, { alpha: 0.8 });
-      g.legend([[P.cyan, L('截面 A', 'cross-section A')], [P.magenta, L('涡度 ω', 'vorticity ω')], [P.amber, 'Γ = ωA = 1', 'dash']], { right: false, bottom: true });
-      $('pATitle').textContent = L('一个变小，另一个就变大', 'As one shrinks the other grows'); $('pAMeta').textContent = L('对数坐标', 'log scale');
-      const h = kit.plot(B, { x: [0, 6], y: [0.01, 4], pad: [38, 12, 10, 20], logY: true });
-      h.axes({ yTicks: [[0.01, '0.01'], [0.1, '0.1'], [1, '1']], xTicks: [0, 2, 4, 6], xLabel: 't' });
-      for (const [m, lab] of [['flat', L('二维', '2D')], ['strain', L('恒定拉伸', 'steady strain')], ['self', L('自拉伸', 'self-stretching')]]) {
-        const pts = [], end = m === 'self' ? Math.min(6, tStar(S.nu)) : 6; for (let i = 0; i <= 150; i++) { const t = end * i / 150; pts.push([t, clamp(tube(m, S.nu, t).A, 0.01, 4)]); }
-        h.line(pts, m === S.mode ? P.cyan : P.dim, { width: m === S.mode ? 2.2 : 1.2 }); h.text(pts[pts.length - 1][0], pts[pts.length - 1][1], lab, m === S.mode ? P.cyan : P.dim, { align: 'right', dx: -4, dy: -8, face: 'body' });
+      for (const m of ['flat', 'strain', 'self']) {                     // the cross-section in the other two kinds of stretching, for comparison
+        if (m === S.mode) continue;
+        const pts = [], end = m === 'self' ? Math.min(T, tStar(S.nu)) : T; for (let i = 0; i <= 120; i++) { const t = end * i / 120; pts.push([t, clamp(tube(m, S.nu, t).A, 0.01, 200)]); }
+        g.line(pts, P.dim, { width: 1.1, alpha: 0.8 });
       }
-      $('pBTitle').textContent = L('截面 A 的三种命运', 'Three fates of the cross-section'); $('pBMeta').textContent = `ν = ${fix(S.nu, 3)}`;
+      g.line(aa, P.cyan, { width: 2 }); g.line(ww, P.magenta, { width: 2 }); g.hline(1, P.ink, { dash: [4, 3], alpha: 0.6 }); g.vline(clock.t, P.amber, { alpha: 0.8 });
+      g.legend([[P.cyan, L('截面 A', 'cross-section A')], [P.magenta, L('涡度 ω', 'vorticity ω')], [P.dim, L('另两种拉伸的 A', 'A, other two kinds')]], { right: false });
+      $('pATitle').textContent = L('一个变小，另一个就变大', 'As one shrinks the other grows'); $('pAMeta').textContent = L('对数坐标 · 虚线 Γ = ωA = 1', 'log scale · dashed Γ = ωA = 1');
+      // K41: a statistical scaling of homogeneous turbulence, not the Burgers core; drawn on its own
+      const K = k41(S.nu), kmax = 1000, h = kit.plot(B, { x: [1, kmax], y: [1e-6, 1.5], pad: [38, 12, 10, 20], logX: true, logY: true }), sp = [], ref = [];
+      for (let i = 0; i <= 160; i++) { const kk = Math.pow(kmax, i / 160); ref.push([kk, Math.pow(kk, -5 / 3)]); const e = K.E(kk); if (e > 1e-6) sp.push([kk, e]); }
+      h.axes({ xTicks: [[1, '1'], [10, '10'], [100, '100'], [1000, '1000']], yTicks: [[1e-6, '10⁻⁶'], [1e-3, '10⁻³'], [1, '1']], xLabel: 'kL' });
+      h.line(ref, P.dim, { width: 1, dash: [4, 3], alpha: 0.8 }); h.line(sp, P.violet, { width: 2 });
+      if (K.eta > 0 && 1 / K.eta < kmax) h.vline(1 / K.eta, P.ink, { dash: [3, 3], alpha: 0.7 });
+      h.legend([[P.violet, L('模型能谱 E(k)', 'model spectrum E(k)')], [P.dim, 'k⁻⁵ᐟ³', 'dash']].concat(K.eta > 0 ? [[P.ink, 'kη = 1', 'dash']] : []), { right: true });
+      $('pBTitle').textContent = L('另一回事：K41 湍流统计', 'A different matter: K41 statistics');
+      $('pBMeta').textContent = K.eta > 0 ? `Re = ${fix(K.re, 0)} · η/L = Re⁻³ᐟ⁴ = ${fix(K.eta, 3)} · N ~ Re⁹ᐟ⁴ ≈ ${K.ndof < 1e5 ? fix(K.ndof, 0) : K.ndof.toExponential(1)}` : L('ν = 0：Re → ∞，没有耗散截断', 'ν = 0: Re → ∞, no dissipative cutoff');
     } else {
       const y = clock.t - 1, g = kit.plot(A, { x: [-1, 1], y: [-1.3, 1.3], pad: [30, 12, 10, 20] }), ln = [], mx = [], sf = [], tot = [];
       for (let i = 0; i <= 80; i++) { const yy = -1 + i / 40, q = terms(X0, yy); ln.push([yy, q.lin]); mx.push([yy, -q.mix]); sf.push([yy, -q.self]); tot.push([yy, q.lin - q.mix - q.self]); }
@@ -212,11 +239,12 @@
       hud = S.mode === 'flat' ? L('二维：没有拉伸项，涡管不变细；粘性只会让它慢慢变粗', 'two dimensions: no stretching term, the tube does not thin; viscosity can only widen it slowly')
         : S.mode === 'strain' ? (S.nu ? L(`恒定拉伸，粘性把截面拦在 4πν/α = ${fix(visc / ALPHA, 3)}`, `steady strain; viscosity holds the cross-section at 4πν/α = ${fix(visc / ALPHA, 3)}`) : L('恒定拉伸，没有粘性：截面一直变细，涡度一直变大', 'steady strain, no viscosity: the cross-section keeps shrinking and the vorticity keeps growing'))
           : isFinite(ts) ? L(`自拉伸：κΓ = ${fix(KAPPA * GAMMA, 2)} 大于 4πν = ${fix(visc, 3)}，截面在 t* = ${fix(ts, 2)} 归零`, `self-stretching: κΓ = ${fix(KAPPA * GAMMA, 2)} exceeds 4πν = ${fix(visc, 3)}; the cross-section vanishes at t* = ${fix(ts, 2)}`) : L(`自拉伸：4πν = ${fix(visc, 3)} 不小于 κΓ，粘性赢了`, `self-stretching: 4πν = ${fix(visc, 3)} is at least κΓ, and viscosity wins`);
-      $('roKeyL').textContent = L('涡度 ω = Γ/A', 'vorticity ω = Γ/A'); $('roKey').innerHTML = `<span class="c-mg">${fix(d.w, d.w < 100 ? 2 : 0)}</span>`; $('roKeySub').textContent = L(`是开始时的 ${fix(d.w * A0 / GAMMA, d.w < 100 ? 2 : 0)} 倍`, `${fix(d.w * A0 / GAMMA, d.w < 100 ? 2 : 0)} times its starting value`);
-      set(1, L('截面 A', 'cross-section A'), fix(d.A, 4)); set(2, L('涡度 ω', 'vorticity ω'), fix(d.w, d.w < 100 ? 3 : 0));
+      $('roKeyL').textContent = L('涡核中心的涡度 ω = Γ/A', 'vorticity at the core centre ω = Γ/A'); $('roKey').innerHTML = `<span class="c-mg">${fix(d.w, d.w < 100 ? 2 : 0)}</span>`; $('roKeySub').textContent = L(`是开始时的 ${fix(d.w * A0 / GAMMA, d.w < 100 ? 2 : 0)} 倍`, `${fix(d.w * A0 / GAMMA, d.w < 100 ? 2 : 0)} times its starting value`);
+      set(1, L('截面 A = πR²', 'cross-section A = πR²'), fix(d.A, 4)); set(2, L('涡核半径 R', 'core radius R'), fix(d.R, 4));
       set(3, L('环量 Γ = ωA', 'circulation Γ = ωA'), `${fix(d.w * d.A, 3)} <span class="okmark">✓</span>`);
-      set(4, S.mode === 'self' ? L('夹断时刻 t*', 'pinch time t*') : S.mode === 'strain' ? L('伯格斯截面 4πν/α', 'Burgers cross-section 4πν/α') : L('拉伸项 (ω·∇)u', 'stretching term (ω·∇)u'), S.mode === 'self' ? (isFinite(ts) ? fix(ts, 3) : L('不夹断', 'no pinch')) : S.mode === 'strain' ? fix(visc / ALPHA, 4) : '0');
-      $('roNote').textContent = L('环量不变是无粘流体的开尔文定理；这里把它用在一根均匀的涡管上，粘性只通过截面的扩散进来。', 'A fixed circulation is Kelvin’s theorem for inviscid flow; here it is applied to one uniform tube, and viscosity enters only through the spreading of the cross-section.');
+      set(4, S.mode === 'self' ? L('夹断时刻 t*', 'pinch time t*') : S.mode === 'strain' ? L('伯格斯涡核 R∞ = √(4ν/α)', 'Burgers core R∞ = √(4ν/α)') : L('拉伸项 (ω·∇)u', 'stretching term (ω·∇)u'), S.mode === 'self' ? (isFinite(ts) ? fix(ts, 3) : L('不夹断', 'no pinch')) : S.mode === 'strain' ? fix(rInf(S.nu), 4) : '0');
+      $('roNote').textContent = S.mode === 'strain' ? L('恒定拉伸下涡核半径按精确解 R² = R∞² + (R₀² − R∞²)e^(−αt) 光滑地趋向 R∞，R∞ ∝ ν^½ ∝ Re^(−½)；ν = 0 时 R = R₀e^(−αt/2)，ω = ω₀e^(αt)。', 'Under steady strain the core radius follows the exact solution R² = R∞² + (R₀² − R∞²)e^(−αt) smoothly down to R∞, with R∞ ∝ ν^½ ∝ Re^(−½); at ν = 0, R = R₀e^(−αt/2) and ω = ω₀e^(αt).')
+        : L('环量不变是无粘流体的开尔文定理；这里把它用在一根高斯涡核上（A = πR²，ω 是核心的峰值），粘性只通过涡核的扩散进来。', 'A fixed circulation is Kelvin’s theorem for inviscid flow; here it is applied to one Gaussian core (A = πR², ω its peak), and viscosity enters only through the spreading of the core.');
       what = `t = ${fix(t, 2)}`; key = `ω = ${fix(d.w, d.w < 100 ? 2 : 0)}`;
     } else {
       const y = clock.t - 1, q = terms(X0, y), gap = seen(X0, y) - seen(X0, 0), ok = isClosed();
@@ -280,6 +308,7 @@
     const p = PRESETS[id];
     if (p.mode) { S.mode = p.mode; modeChips.set(p.mode, true); S.nu = p.nu; fNu.set(p.nu); }
     if (p.leaks) { [S.lin, S.self, S.mix] = p.leaks; fLin.set(S.lin); fSelf.set(S.self); fMix.set(S.mix); }
+    if (p.scene === 'tube') Object.assign(st.cam, TUBE_CAM);
     setScene(p.scene, Math.min(p.at, SC[p.scene].max()));
     if (!p.play || TRV.still || (booting && !TRV.embed)) return;
     clock.set(0);
@@ -295,15 +324,16 @@
     get state() {
       const d = split(clock.t, S.probe[0], S.probe[1]), tb = tube(S.mode, S.nu, clock.t), y = clock.t - 1;
       return { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, probe: S.probe.slice(), lamb: d,
-        mode: S.mode, nu: S.nu, tube: tb, tStar: tStar(S.nu), floor: 4 * Math.PI * S.nu / ALPHA, leaks: [S.lin, S.self, S.mix], y, x: X0, seen: [seen(X0, 0), seen(X0, y)], terms: terms(X0, y), closed: isClosed(),
-        consts: { alpha: ALPHA, kappa: KAPPA, gamma: GAMMA, a0: A0 } };
+        mode: S.mode, nu: S.nu, tube: tb, tStar: tStar(S.nu), floor: 4 * Math.PI * S.nu / ALPHA, rInf: rInf(S.nu), k41: (({ re, eta, ndof }) => ({ re, eta, ndof }))(k41(S.nu)), leaks: [S.lin, S.self, S.mix], y, x: X0, seen: [seen(X0, 0), seen(X0, y)], terms: terms(X0, y), closed: isClosed(),
+        consts: { alpha: ALPHA, kappa: KAPPA, gamma: GAMMA, a0: A0, beta: BETA } };
     },
     seek: (t) => { clock.pause(); clock.set(t); },
-    seen: (x, y) => seen(x, y), tube: (mode, nu, t) => tube(mode, nu, t), split: (s, x, y) => split(s, x, y),
+    seen: (x, y) => seen(x, y), tube: (mode, nu, t) => tube(mode, nu, t), rInf: (nu) => rInf(nu),
+    k41: (nu, ks) => { const K = k41(nu); return { re: K.re, eta: K.eta, ndof: K.ndof, E: (ks || []).map(K.E) }; }, split: (s, x, y) => split(s, x, y),
     /** Viewport coordinates of a data point of the current 2D scene (for pointer tests). */
     at: (x, y) => { const b = $('cv').getBoundingClientRect(); return [b.left + view.X(x), b.top + view.Y(y)]; }
   };
-  window.TRV_THUMB = () => { S.mode = 'strain'; S.nu = 0; modeChips.set('strain', true); fNu.set(0); st.cam.zoom = 1.55; setScene('tube', 1.5); paint.now(); };
+  window.TRV_THUMB = () => { S.mode = 'strain'; S.nu = 0; modeChips.set('strain', true); fNu.set(0); Object.assign(st.cam, TUBE_CAM); setScene('tube', 1.5); paint.now(); };
   cards.pick(cards.initial('strain'));
   booting = false;
   paint();
