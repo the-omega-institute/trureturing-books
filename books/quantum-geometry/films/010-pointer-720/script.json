@@ -1,0 +1,38 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen"},
+  "music": {"bpm": 74, "progression": "d-minor"},
+  "scenes": [
+    {"id": "regress", "name": "WHO READS THE TABLE", "lead": 1.8, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["A pointer reads memory through a page table. But the table lives in memory too.", "指针要查页表才能读到内存；可页表本身也住在内存里。"],
+      ["Who translates the table's own address? A bigger table needs another, and another, without end.", "页表自己的地址由谁来翻译？请来更大的一张表，它又要再上一张，没有尽头。"]
+    ]},
+    {"id": "walk", "name": "SLOT ZERO", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.6, 0.7, 0.0, 0.3], "lines": [
+      ["Instead, write the directory's own address into its slot zero.", "换个办法：把页目录自己的地址写进它的零号槽。"],
+      ["Index one, two takes two hops: through the directory, through a leaf table, to a data frame.", "索引 [1, 2] 走两跳：穿过页目录、穿过叶页表，落到数据帧。"],
+      ["Index zero, one loops back once, so the second hop hands back the leaf table itself, as data.", "索引 [0, 1] 先原地绕回一次，第二跳交出来的就是叶页表本身，当作数据。"],
+      ["Index zero, zero: every hop comes home. The address and what it holds are one number. p equals star p.", "索引 [0, 0]：每一跳都回到原处。地址与它存着的内容是同一个数：p = *p。"]
+    ], "cues": [{"line": 3, "at": 2.2, "kind": "chime"}]},
+    {"id": "diag", "name": "DIAGONAL", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.8, 0.8, 0.5, 0.4], "lines": [
+      ["Why does this work? Take any table g and a map f. Read the diagonal and apply f: that is a new row.", "为什么行得通？任取一张表 g 和一个映射 f：沿对角线读下来再作用 f，得到新的一行。"],
+      ["If f moves every value, as flipping a bit does, the new row differs from row a at entry a. It escapes every table.", "若 f 处处挪动取值（比如翻转一个比特），新行在第 a 格就与第 a 行不同：它逃出每一张表。"],
+      ["If instead some row a-nought is the diagonal, then the cell a-nought, a-nought is a fixed point of f.", "反过来，若某一行 a₀ 正是这条对角线，那么格子 (a₀, a₀) 就是 f 的不动点。"],
+      ["Lean has checked both statements, for any types, finite or not.", "这两条都已由 Lean 内核检验，对任意类型成立，有限无限都一样。"]
+    ], "cues": [{"line": 1, "at": 3.2, "kind": "impact"}, {"line": 3, "at": 0.8, "kind": "stamp"}]},
+    {"id": "turn", "name": "HALF TURN", "lead": 0.5, "tail": 0.5, "music": [1.0, 0.8, 0.9, 0.6, 0.5], "lines": [
+      ["One loop closes the table. Now turn a spinor through a full circle in a plane.", "一圈回环就合上了页表。现在让一个旋量在一个平面里转满一整圈。"],
+      ["The current J, made from psi and its reverse, comes all the way back. Psi itself has turned only half way: its sign is minus one.", "由 ψ 与其反序夹出的流向量 J 完整地转了回来；ψ 自己却只转了一半，符号成了 −1。"],
+      ["On the circle, squaring is a double cover. Lift one full turn from one, and the only continuous lift ends at minus one.", "在圆周上，平方映射是双覆叠。从 1 出发提升绕一整圈，唯一的连续提升停在 −1。"],
+      ["A second turn, seven hundred and twenty degrees in all, brings it home to plus one.", "再转一圈，合计 720°，它才回到 +1。"]
+    ], "cues": [{"line": 2, "at": 3.4, "kind": "chime"}]},
+    {"id": "seam", "name": "NO SECTION", "lead": 0.5, "tail": 0.8, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
+      ["Could we choose one square root for every point, continuously, and dodge the flip?", "能不能给每一点连续地选定一个平方根，躲开这次翻转？"],
+      ["Plant a root every thirty degrees, each next to the last. Back at the start, the last one points the other way.", "每隔 30° 插一面小旗，每一面都挨着上一面；回到起点时，最后一面与第一面方向相反。"],
+      ["Lean has checked it: the squaring cover of the circle has no continuous global section.", "这一条已由 Lean 内核检验：圆周的平方覆叠没有连续的全局截面。"]
+    ], "cues": [{"line": 1, "at": 4.6, "kind": "impact"}, {"line": 2, "at": 0.6, "kind": "stamp"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.2, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, part ten, chapters thirty-eight and thirty-nine.", "《量子计算的几何直觉》· 第十部 · 第三十八、三十九章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}
