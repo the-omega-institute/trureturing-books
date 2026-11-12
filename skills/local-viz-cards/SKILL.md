@@ -36,7 +36,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `repeated-projection` | 投一次，箭头只剩线上的影子；再投多少次，影子都不再动 | `once` `twice` `fixed` `perp` `sum` |
 | `bloch-noise` | 噪声把球往里压、往北推，却从不把球里的两个点拉开 | `shorten` `pinch` `dephase` `amp` `wide` `distance` `centre` |
 | `double-slit-marker` | 路径记得越清，条纹越淡；两者落在同一个圆上，怎么读标记可以等落点到了再定 | `wave` `partial` `which` `delayed` `erase` `mixed` |
-| `erasure-ledger` | 转动不记账；抹掉横着的那一份，系统的熵就多出这一份；把比特复位，这笔熵要化成热付给环境，只能多付，不能少付 | `pinch` `steps` `cycle` `bath` `copy` |
+| `erasure-ledger` | 转动不记账；抹掉横着的那一份，系统的熵就多出这一份；把比特复位，这笔熵要化成热付给环境，只能多付，不能少付 | `pinch` `steps` `cycle` `bath` `copy` `dpi` |
 | `speed-limit-zeno` | 翻过 90° 的墙快不过能量涨落；看得越勤越走不掉，可平均还是两步回来一次 | `equal` `three` `unequal` `strobe4` `strobe16` `mean` |
 | `two-angle-addressing` | 先倾一次、再拧一次，就到得了球面上任何一点；两根轴斜着，只是要多转几次 | `tilt` `address` `pole` `skew` `collinear` `narrow` `three` `six` |
 | `berry-loop` | 走一圈回来，箭头转过圈住的面积，内积连乘的相位只记下一半；整颗球上总有梳不平的一点 | `order` `octant` `equator` `reverse` `comb` |
@@ -85,7 +85,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `double-slit-marker` 的绿色框只给纯态标记的 $D^2 + V^2 = 1$（`pure_record_distinguishability_coherence_complementarity`）与捏合去掉的相干质量（`pinching_discarded_coherence_mass`）；混合标记落在圆内用迹距离可辨度，是 Englert 不等式（`ARGUED`）；屏上的高斯包络、二维实向量标记与两种读法是示意模型（`MODEL`）。这一页的青色是条纹对比度 $V$（影子）与擦除后分拣出的两行，品红是路径可辨度 $D$（高）与按路径分拣出的两行。
 
-`erasure-ledger` 的账本按第八章的分层标注：捏合的熵增等于 D、双账本 ln 2、兰道尔账目恒等式及其取等/严格判据、受控拷贝的可撤回与约化态重合是绿色；阶段 B 的热量换算（兰道尔原理、Reeb–Wolf 两条平衡式）是文献结果（`ARGUED`）；“理想复位”把 I = D = 0 当作理想极限记账，是示意模型（`MODEL`）；单比特热浴交换的各项都实算（`NUM`），并与第八章的数值表逐行一致。账本两栏用中性灰（不占用青、品红），品红只给箭头横着的那一份（相干）。
+`erasure-ledger` 的账本按第八章的分层标注：捏合的熵增等于 D、双账本 ln 2、兰道尔账目恒等式及其取等/严格判据、受控拷贝的可撤回与约化态重合是绿色；阶段 B 的热量换算（兰道尔原理、Reeb–Wolf 两条平衡式）是文献结果（`ARGUED`）；“理想复位”把 I = D = 0 当作理想极限记账，是示意模型（`MODEL`）；单比特热浴交换的各项都实算（`NUM`），并与第八章的数值表逐行一致。账本两栏用中性灰（不占用青、品红），品红只给箭头横着的那一份（相干）。`copy` 另画灰色虚线的 σ（对角与 ρ 相同、相干相反），拷贝后两支箭头在局部重合。`dpi`（“两个态”一幕）把 ρ = |0⟩（琥珀）与 σ = |+⟩（灰色虚线）送进同一串去极化 λ = 0.5、绕 y 转 0.7 弧度、Z 基捏合、再去极化两次，右边每步一根中性灰的 D(ρ ‖ σ) 柱；绿色框给 `extended_quantum_relative_entropy_channel_dpi`，转动不变与反复作用不回升是第八章的手工推论（`NUM` 框里写明）。
 
 `speed-limit-zeno` 的速度线与墙上的 MT、ML 刻度按 Mandelstam–Tamm、Margolus–Levitin 公式画出，芝诺冻结的极限是 Misra–Sudarshan 定理，三者都是文献结果（`ARGUED`）；“平均返回时间恒为 2”是第七章例子的手算与页面的数值核对（`NUM`）；绿色框只给第七章引用的两条定理：`record_time_lower_bound` 与 `monitored_return_conservation`。
 
@@ -192,6 +192,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第四章 | §4.2 末（“可分辨性只会丢”） | `bloch-noise` · `distance` |
 | 第四章 | §4.3 开头一段之后 | `bloch-noise` · `centre` |
 | 第四章 | 例 `ex-maximally-mixed-center` 之后、第一部小结之前 | `bloch-noise` 完整实验室 |
+| 第五章 | §5.2 三明治积两条推导（$v_\perp$ 不动、$v_\parallel$ 合成整角）之后、“这里需要严守”之前 | `zyz-compile` · `sandwich` |
 | 第五章 | §5.2 定理 `thm-circle-double-cover-history-lift` 译回旋子的列表（“两整圈”）之后、例 `ex-rotor-two-turns` 之前 | `qubit-geometry` · `turn2` |
 | 第五章 | §5.2 末（旋子） | `qubit-geometry` · `turn1` |
 | 第五章 | §5.3 全局相位与相对相位的对照之后 | `qubit-geometry` · `phase` |
@@ -200,20 +201,18 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第五章 | 章末、转入第六章之前 | `qubit-geometry` 完整实验室 |
 | 第六章 | §6.1 末 | `qubit-geometry` · `half` |
 | 第六章 | §6.3 可见度 $V$ 与可区分度 $D$ 的两条定义之后 | `double-slit-marker` · `partial` |
-| 第六章 | §6.3 定理 `thm-record-coherence-complementarity` 的证明之后 | `double-slit-marker` · `which` |
-| 第六章 | §6.3 `which` 之后一句（“性质 3 是另一端”）之后 | `double-slit-marker` · `wave` |
-| 第六章 | §6.3 `wave` 之后一句（“回到 6.1 节的那一颗比特”）之后、捏合推论引言之前 | `qubit-geometry` · `area` |
-| 第六章 | §6.3 惠勒延迟选择算例 `ex-wheeler-delayed-choice-tradeoff` 之后、文献注记之前 | `double-slit-marker` · `delayed`、`erase` |
+| 第六章 | §6.3 “性质 3 是另一端”与“回到 6.1 节的那一颗比特”两句之后、捏合推论引言之前 | `qubit-geometry` · `area` |
+| 第六章 | §6.3 惠勒延迟选择算例 `ex-wheeler-delayed-choice-tradeoff` 之后、文献注记之前（这张卡先按路径读、再擦除重读，`delayed` 只留在完整实验室里） | `double-slit-marker` · `erase` |
 | 第六章 | §6.3 文献注记 `rem-englert-greenberger-literature` 之后 | `double-slit-marker` · `mixed` |
-| 第六章 | §6.3 末（`mixed` 之后、§6.4 之前） | `double-slit-marker` 完整实验室 |
 | 第六章 | §6.4 | `qubit-geometry` 完整实验室 |
+| 第六章 | §6.4 `qubit-geometry` 完整实验室之后，隔一句介绍 `SLIT//MARKER` 的过渡句 | `double-slit-marker` 完整实验室 |
 | 第七章 | §7.2 例 `ex-orthogonalization-times` 之前（“把它换成具体哈密顿量的能量涨落”一段末） | `speed-limit-zeno` · `equal` |
-| 第七章 | §7.2 例 `ex-orthogonalization-times` 之后 | `speed-limit-zeno` · `three`、`unequal` |
-| 第七章 | §7.3 一阶小量与二阶小量一段末 | `speed-limit-zeno` · `strobe16` |
+| 第七章 | §7.2 例 `ex-orthogonalization-times` 之后，两卡之间隔一句（“三能级的态虽然晚到”） | `speed-limit-zeno` · `three`、`unequal` |
 | 第七章 | §7.3 例 `ex-zeno-strobe-freezing` 之后 | `speed-limit-zeno` · `strobe4` |
-| 第七章 | §7.3 例 `ex-first-return-qubit` 之后 | `speed-limit-zeno` · `mean` |
+| 第七章 | §7.3 例 `ex-first-return-qubit` 之后（柱子是 δ = 45°，品红虚线台阶是 δ = 90° 的同一本账；`strobe16` 只留在完整实验室里） | `speed-limit-zeno` · `mean` |
 | 第七章 | §7.3 末、转入 §7.4 之前 | `speed-limit-zeno` 完整实验室 |
 | 第八章 | §8.1 末（单比特 ln 2 特例之后） | `erasure-ledger` · `pinch` |
+| 第八章 | §8.1 例 `ex-channel-data-processing-qubit` 之后、文献注记 `rem-channel-dpi-literature` 之前 | `erasure-ledger` · `dpi` |
 | 第八章 | §8.2 定理 `thm-entropy-production-coherence-deletion` 后的解读段末、例 `ex-landauer-one-bit-ledger` 之前 | `erasure-ledger` · `steps` |
 | 第八章 | 例 `ex-landauer-one-bit-ledger` 之后、文献注记 `rem-density-matrix-balance-inputs-literature` 之前 | `erasure-ledger` · `cycle` |
 | 第八章 | 例 `ex-one-qubit-reservoir-swap-erasure` 之后（§8.2 末） | `erasure-ledger` · `bath` |

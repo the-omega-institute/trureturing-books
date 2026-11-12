@@ -34,6 +34,12 @@ function strobeSurvival(N) {
   for (let k = 0; k < N; k++) { v = stepU(PI / N, v); v = [v[0], [0, 0]]; }   // evolve, then keep the "yes" component
   return cabs2(v[0]);
 }
+/** Monitored return by stepping the state: evolve one step, the |0⟩ part is the first return, keep only the rest. */
+function returnP(d, n) {
+  let v = [[1, 0], [0, 0]], p = 0;
+  for (let k = 1; k <= n; k++) { v = stepU(d, v); p = cabs2(v[0]); v = [[0, 0], v[1]]; }
+  return p;
+}
 const closedP = (d, n) => { const c2 = Math.cos(d / 2) ** 2, s2 = 1 - c2; return n === 1 ? c2 : s2 * s2 * c2 ** (n - 2); };
 const closedS = (d, n) => { const c2 = Math.cos(d / 2) ** 2, s2 = 1 - c2; return n === 0 ? 1 : s2 * c2 ** (n - 1); };
 
@@ -141,6 +147,12 @@ check('RETURN: s₀ = 1, pₙ₊₁ = sₙ − sₙ₊₁ and Σp + s_N = 1 on e
 check('RETURN: δ = π/4 row of §7.3: p₁ 0.853553, p₂ 0.021447, p₃ 0.018306, s₃ 0.106694', close(s.ret.p[1], 0.853553, 5e-7) && close(s.ret.p[2], 0.021447, 5e-7) && close(s.ret.p[3], 0.018306, 5e-7) && close(s.ret.s[3], 0.106694, 5e-7));
 let meanClosed = 0; for (let n = 1; n <= 20000; n++) meanClosed += n * closedP(d45, n);
 check('RETURN: the mean return time is 2 (page: Σ sₙ and Σ n·pₙ; suite: Σ n·pₙ of the closed form)', close(s.ret.mean, 2, 1e-9) && close(s.ret.meanNp, 2, 1e-9) && close(meanClosed, 2, 1e-9) && close(s.ret.sumP, 1, 1e-12));
+// the dashed staircase is the same ledger for a second step size (90°), computed here by stepping the state vector
+{
+  const st = await page.evaluate(() => window.ZENO_DEBUG.seek(40)).then(() => state());
+  let back = 0, area = 0; for (let n = 0; n <= st.ret.j; n++) { if (n >= 1) back += returnP(90 * DEG, n); area += n === 0 ? 1 : 1 - Array.from({ length: n }, (_, k) => returnP(90 * DEG, k + 1)).reduce((a, b) => a + b, 0); }
+  check('RETURN: the dashed staircase is δ = 90°; its returned part and magenta area match a direct simulation, and the area is 2.000 at step 40', st.ret.cmp && st.ret.cmp.delta === 90 && close(st.ret.cmp.returned, back, 1e-9) && close(st.ret.cmp.area, area, 1e-9) && st.ret.cmp.area.toFixed(3) === '2.000' && s.ret.mean.toFixed(3) === '2.000', JSON.stringify(st.ret.cmp));
+}
 check('RETURN: the key readout prints 2.000000', (await page.textContent('#ro .key')).includes('2.000000'));
 const curve = await page.evaluate(() => window.ZENO_DEBUG.meanCurve());
 check('the small plot: the mean is 2 for every δ from 45° to 180°, and 1 + 1/s² matches', curve.length === 136 && curve.every(([d, m, after]) => close(m, 2, 1e-6) && close(after, 1 + 1 / Math.sin(d * DEG / 2) ** 2, 1e-9)));

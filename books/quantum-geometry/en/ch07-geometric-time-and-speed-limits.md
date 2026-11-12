@@ -96,6 +96,10 @@ Conjugate symmetry of $\rho_t, H, P$ implies that $i\Tr(\rho_t(HP - PH))$ equals
 
 In particular, when $\psi$ is an energy eigenstate ($H\psi = E\psi$), theorems [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) and [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) in `Quantum/Dynamics/EnergyEigenstateStationarity` prove that its energy variance vanishes and $\psi(t) = e^{-itE/\hbar}\psi$ acquires only an unobservable global phase, leaving its rank-one projector and all expectation values stationary for all $t \in \mathbb{R}$! **Without a nonzero commutator bivector area $[H, P] \neq 0$, no classical tick can ever register along the line $P$!**
 
+::: {.figure src="ch07-commutator-flow"}
+**The shadow moves only when the axis and the ruler are not parallel.** The one-qubit special case: the ruler $P = \lvert 0\rangle\langle 0\rvert$ is the cyan vertical axis, and the violet axis $H$ is tilted $40^\circ$ from the vertical. The amber state starts at the north pole and goes once round a dashed small circle about the violet axis, and its shadow on the cyan axis moves up and down; on the right the cyan curve is the probability $p(t)$ of staying in $\lvert 0\rangle$, swinging between $1$ and $0.59$. When the axis and the ruler coincide, $[H, P] = 0$ and the grey $p(t)$ stays at $1$ ([@prop-projection-probability-flow]; the one-qubit curves are a hand derivation and numerics).
+:::
+
 ## 7.2 Quantum Speed Limits (Mandelstam–Tamm and Margolus–Levitin): The Minimum Time to Cross a $90^\circ$ Orthogonal Wall {#sec-quantum-speed-limit}
 
 If "the line is classical time and the area is quantum time," **what is the minimum duration required to convert continuous two-dimensional quantum rotation into two genuinely distinguishable ticks of a classical clock?**
@@ -219,6 +223,8 @@ By the counting bound of [@thm-fubini-study-record-time] with $\mathrm{energy} =
 **Three even levels: a bent path and a late arrival.** On the left three cyan arrows close into a triangle at $t = \frac{2\pi}{3}$ and the amber dot returns to the magenta centre. On the right the cyan curve bends below the dashed speed line: the speed line reaches the wall at MT $1.924$, the curve touches the magenta wall only at $\tau_\perp = 2.094$, and the ML mark sits at $1.571$. Both bounds are literature results, not formalized in this book.
 :::
 
+The three-level state arrives late but does reach the wall; once the two-level weights leave the even split, say at $\alpha = 30^\circ$, the angle rises no higher than $2\alpha = 60^\circ$.
+
 ::: {.viz src="speed-limit-zeno" preset="unequal" height="500"}
 **Uneven weights: the wall is out of reach.** Weight angle $\alpha = 30^\circ$: on the left a long cyan arrow of $0.75$ and a short one of $0.25$ never cancel, and the amber dot comes no closer to the magenta centre than $0.5 = \lvert\cos 2\alpha\rvert$. On the right the angle rises to $2\alpha = 60^\circ$ at most and never touches the magenta wall.
 :::
@@ -233,10 +239,6 @@ In our line-and-area geometry, the mechanism is completely elementary: **over a 
 
 ::: {.figure src="ch07-zeno-n"}
 **The more often you measure, the closer the chance of staying in $\lvert 0\rangle$ comes to $1$.** Against the number of measurements $N$ (log scale), the cyan curve is $P_N = \bigl[\cos^2\frac{\pi}{2N}\bigr]^N$, and the cyan points mark $N = 1, 4, 16, 64$ at $0$, $0.531$, $0.857$ and $0.962$; the grey dashed curve is the approximation $1 - \frac{\pi^2}{4N}$, which hugs the cyan curve as $N$ grows: the gap shrinks like $\frac{1}{N}$. The values come from the closed form in [@ex-zeno-strobe-freezing].
-:::
-
-::: {.viz src="speed-limit-zeno" preset="strobe16" height="500"}
-**Sixteen strobes: it hardly gets away.** The arrow is pulled back to $\lvert 0\rangle$ after every $11.25^\circ$: the magenta part, first order in the step, is cut off as soon as it shows, and the cyan shadow hardly shortens. The frame stops half-way through the last turn: on the right the cyan survival nearly fills the plot, with $0.863$ left now and $0.857$ at the ring for $N = 16$ at the end; the dashed line is the unwatched path.
 :::
 
 ::: {.example #ex-zeno-strobe-freezing title="Analytical Formula and Numerical Ledger (N = 1, 4, 16, 64) for Stroboscopic Quantum Zeno Freezing"}
@@ -340,7 +342,7 @@ The entry $p_1 = 0.853553$ in the row $\delta = \frac{\pi}{4}$ is the single-ste
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="mean" height="500"}
-**First return: always 2 steps on average.** With $\delta = 45^\circ$ each column is the ledger after one more step: cyan is the probability of having returned, magenta of not yet, and every column reaches exactly the line at $1$ ([@prop-monitored-return-conservation]). The total magenta area is the mean return time; step by step it grows from $1$ towards $2$ ([@ex-first-return-qubit]).
+**First return: always 2 steps on average.** With $\delta = 45^\circ$ each column is the ledger after one more step: cyan is the probability of having returned, magenta of not yet, and every column reaches exactly the line at $1$ ([@prop-monitored-return-conservation]). The total magenta area is the mean return time; step by step it grows from $1$ towards $2$ ([@ex-first-return-qubit]). The dashed magenta staircase is the same ledger for the step $\delta = 90^\circ$: half comes back at the first step, a quite different shape, yet its magenta area also reaches $2$.
 :::
 
 The Zeno effect says that if one looks often enough, the state cannot leave. The first-return ledger supplies the other half: however often one looks, the fact that it comes back once every two steps on average does not change, because what this number counts is not time but how many directions this qubit has to go.
