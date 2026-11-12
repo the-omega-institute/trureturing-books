@@ -2,7 +2,7 @@
 # 01 封面
 theme: ../../../../theme/slides
 title: "量子计算的几何直觉 · 全书概览"
-info: "《量子计算的几何直觉》全书概览：四重盲区与升维阶梯，八部各自的核心图景、主要的 Lean 已验证定理、文献结果与开放问题，三层依据的条数，以及全书依赖导图。"
+info: "《量子计算的几何直觉》全书概览：四重盲区与十部三十九章升维阶梯，第一至第八部各自的核心图景、主要的 Lean 已验证定理、文献结果与开放问题，全书十部三层依据的条数，以及全书三十九章依赖导图。"
 htmlAttrs:
   lang: "zh-CN"
 deck:
@@ -10,13 +10,13 @@ deck:
   book: "量子计算的几何直觉"
   title: "全书概览"
   version: "0.1.0"
-  blurb: "从两子丈量到球外之球：八部三十二章的核心图景、主要定理与三层依据，三十九页看完全书。"
+  blurb: "从两子丈量到球外之球：十部三十九章的核心图景、主要定理与三层依据，三十九页看完全书。"
 layout: cover
 ---
 
 <p class="kicker">量子计算的几何直觉 · 全书概览</p>
 <h1 class="display">从两子丈量<br>到 <em>ψ = ψ(ψ)</em></h1>
-<p class="lead">八部三十二章，沿“点 → 线 → 面 → 球 → 球外之球”的阶梯，把量子计算还原为可以手算的几何。书负责解释为什么如此，Lean 内核负责担保确实如此。</p>
+<p class="lead">十部三十九章，沿“点 → 线 → 面 → 球 → 球外之球”的阶梯，把量子计算还原为可以手算的几何。书负责解释为什么如此，Lean 内核负责担保确实如此。</p>
 
 ---
 # 02 全书一句话
@@ -48,15 +48,15 @@ section: "四重盲区"
 <Source>序曲 图 0（prelude-overview）</Source>
 
 ---
-# 04 八部是一架阶梯
-section: "八部导读"
+# 04 十部是一架阶梯
+section: "十部导读"
 ---
 
 <div class="body">
-  <p class="kicker">Eight parts, thirty-two chapters</p>
-  <h2 class="t">八部是一架阶梯，<em>一部比一部高一维</em></h2>
-  <img src="./img/prelude-eight-parts.zh.svg" alt="八条横条，每条是一部，横跨它所含的章，一部比一部高一级。" style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
-  <p class="lead mt-s">八部各四章：点 → 线、线 → 面、面 → 球、多球共振、时空之球、球外之球、铸器与验证、贯通。</p>
+  <p class="kicker">Ten parts, thirty-nine chapters</p>
+  <h2 class="t">十部是一架阶梯，<em>一部比一部高一维</em></h2>
+  <img src="./img/prelude-eight-parts.zh.svg" alt="十条横条，每条是一部，横跨它所含的章，一部比一部高一级。" style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
+  <p class="lead mt-s">前九部各四章、第十部三章：点 → 线、线 → 面、面 → 球、多球共振、时空之球、球外之球、铸器与验证、贯通、互照、不二。</p>
 </div>
 <Source>序曲“全书导读与形式化验证契约”（prelude-eight-parts）</Source>
 
@@ -665,14 +665,14 @@ section: "三层依据"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">三层依据，<em>三种颜色</em>，从不越级</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 184，紫色 127，红色 6；绿色下注锁文件里 308 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 210，紫色 164，红色 6；绿色下注锁文件里 313 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="186" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
-        <Stat value="127" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
+        <Stat value="210" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
+        <Stat value="164" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
         <Stat value="6" label="开放猜想，标为 OPEN，不带 Lean 引用" tone="warn" />
       </div>
-      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <PinnedCommit />，共 441 项声明，其中 310 项是 Lean theorem。</p>
+      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <PinnedCommit />，共 444 项声明，其中 313 项是 Lean theorem。</p>
     </div>
   </div>
 </div>
@@ -691,15 +691,15 @@ section: "依赖导图"
       <h2 class="t">哪一章<em>依赖</em>哪一章</h2>
       <p class="lead">指向每一章的弧形箭头，来自它回头引用最多的那一章；引用越多，箭头越粗。</p>
       <ul class="plain mt">
-        <li><b>物理直觉：</b>序曲 → 第 1–12 章 → 第 17–19 章</li>
-        <li><b>算法编译：</b>第 2 章 → 第 13–16 章 → 第 25–27 章</li>
-        <li><b>逻辑与数论：</b>第 10 章 → 第 21–24 章 → 第 29–32 章</li>
+        <li><b>物理直觉：</b>序曲 → 第 1–12 章 → 第 17–19 章 → 第 33–34 章</li>
+        <li><b>算法编译：</b>第 2 章 → 第 13–16 章 → 第 25–27 章 → 第 38 章</li>
+        <li><b>逻辑与数论：</b>第 10 章 → 第 21–24 章 → 第 29–39 章</li>
         <li><b>内核审计：</b>序曲 → 第 25–28 章 → 附录 C</li>
       </ul>
     </div>
   </div>
 </div>
-<Source>终章“全书八部曲三十二章阅读与依赖导图”（coda-dependency-tree）</Source>
+<Source>终章“全书十部曲三十九章阅读与依赖导图”（coda-dependency-tree）</Source>
 
 ---
 # 39 结尾
@@ -708,5 +708,5 @@ layout: cover
 
 <p class="kicker">Read · Verify · Watch</p>
 <h1 class="display">书负责解释，<br><em>Lean</em> 负责成立</h1>
-<p class="lead">在线阅读，下载 PDF 与 EPUB；152 张静态图、36 个交互实验室，八部各一部讲解视频；每一条定理都能在所钉的 trureturing 提交上逐条核对。</p>
+<p class="lead">在线阅读，下载 PDF 与 EPUB；150 张静态图、36 个交互实验室，十部三十九章配八部讲解视频；每一条定理都能在所钉的 trureturing 提交上逐条核对。</p>
 <p class="lead mt mono hl-cyan">序曲 → 第一章 · 附录 C：锁定声明完整索引</p>
