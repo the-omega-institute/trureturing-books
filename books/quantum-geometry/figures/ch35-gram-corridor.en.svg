@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch35-gram-corridor" data-lang="en" viewBox="0 0 460 200" width="460" height="200" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Three groups side by side. In each, an ink unit arrow a is the old anchor, an amber unit arrow b is the next candidate state, and the magenta parallelogram is the area they span. Left: c = 1, b lies on a, the area is zero and det G₂ = 0. Middle: c = 1/2, an angle of 60°, det G₂ = 3/4. Right: c = 0, b is perpendicular to a, the area is the whole unit square and det G₂ = 1.">
+<title>Three groups side by side. In each, an ink unit arrow a is the old anchor, an amber unit arrow b is the next candidate state, and the magenta parallelogram is the area they span. Left: c = 1, b lies on a, the area is zero and det G₂ = 0. Middle: c = 1/2, an angle of 60°, det G₂ = 3/4. Right: c = 0, b is perpendicular to a, the area is the whole unit square and det G₂ = 1.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<line x1="44" y1="116" x2="107.5" y2="116" class="ts-ink" stroke-width="2.6" fill="none"/>
+<path d="M116 116 L106 120.2 L106 111.8Z" class="tf-ink"/>
+<line x1="44" y1="111" x2="107.5" y2="111" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M116 111 L106 115.2 L106 106.8Z" class="tf-amber"/>
+<text class="tf-amber" x="100" y="102" font-size="14"><tspan font-style="italic">b</tspan></text>
+<text class="tf-ink" x="120" y="136" font-size="14" text-anchor="end"><tspan font-style="italic">a</tspan></text>
+<circle cx="44" cy="116" r="3.6" class="tf-ink"/>
+<text class="tf-dim" x="94" y="164" font-size="14" text-anchor="middle"><tspan font-style="italic">c</tspan> = 1</text>
+<text class="tf-magenta" x="94" y="186" font-size="14" text-anchor="middle" font-weight="600">det <tspan font-style="italic">G</tspan>₂ = 0</text>
+<path d="M192 116 L264 116 L300 53.65 L228 53.65Z" class="ts-magenta tf-magenta" stroke-width="1.4" stroke-linejoin="round" fill-opacity="0.22"/>
+<line x1="192" y1="116" x2="255.5" y2="116" class="ts-ink" stroke-width="2.6" fill="none"/>
+<path d="M264 116 L254 120.2 L254 111.8Z" class="tf-ink"/>
+<line x1="192" y1="116" x2="223.75" y2="61.01" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M228 53.65 L226.64 64.41 L219.36 60.21Z" class="tf-amber"/>
+<text class="tf-amber" x="222" y="49.65" font-size="14" text-anchor="end"><tspan font-style="italic">b</tspan></text>
+<text class="tf-ink" x="268" y="136" font-size="14" text-anchor="end"><tspan font-style="italic">a</tspan></text>
+<circle cx="192" cy="116" r="3.6" class="tf-ink"/>
+<text class="tf-dim" x="242" y="164" font-size="14" text-anchor="middle"><tspan font-style="italic">c</tspan> = 1/2</text>
+<text class="tf-magenta" x="242" y="186" font-size="14" text-anchor="middle" font-weight="600">det <tspan font-style="italic">G</tspan>₂ = 3/4</text>
+<path d="M340 116 L412 116 L412 44 L340 44Z" class="ts-magenta tf-magenta" stroke-width="1.4" stroke-linejoin="round" fill-opacity="0.22"/>
+<line x1="340" y1="116" x2="403.5" y2="116" class="ts-ink" stroke-width="2.6" fill="none"/>
+<path d="M412 116 L402 120.2 L402 111.8Z" class="tf-ink"/>
+<line x1="340" y1="116" x2="340" y2="52.5" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M340 44 L344.2 54 L335.8 54Z" class="tf-amber"/>
+<text class="tf-amber" x="334" y="40" font-size="14" text-anchor="end"><tspan font-style="italic">b</tspan></text>
+<text class="tf-ink" x="416" y="136" font-size="14" text-anchor="end"><tspan font-style="italic">a</tspan></text>
+<circle cx="340" cy="116" r="3.6" class="tf-ink"/>
+<text class="tf-dim" x="390" y="164" font-size="14" text-anchor="middle"><tspan font-style="italic">c</tspan> = 0</text>
+<text class="tf-magenta" x="390" y="186" font-size="14" text-anchor="middle" font-weight="600">det <tspan font-style="italic">G</tspan>₂ = 1</text>
+</svg>
