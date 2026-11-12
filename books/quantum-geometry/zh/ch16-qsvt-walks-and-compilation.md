@@ -432,7 +432,7 @@ $$
 :::
 
 ::: {.viz src="gate-word-polytope" preset="shrink" height="500"}
-**最大的缺口一级级缩小，却补不上。** 门长从 $0$ 走到 $20$：青色的可达点一层层变密，品红虚线圈出的最大空球冠从 $180^\circ$ 缩到 $\varepsilon_{20} = 9.10^\circ$，有几层一点也不缩；到 $L = 20$ 有 $971$ 个点，洞仍然在。曲线是页面对每个 $L$ 实算的覆盖半径，不拟合任何渐近速率；渐近字长是 [@rem-solovay-kitaev-literature] 的文献结果。
+**最大的缺口一级级缩小，却补不上。** 门长从 $0$ 走到 $20$：青色的可达点一层层变密，品红虚线圈出的最大空球冠从 $180^\circ$ 缩到 $\varepsilon_{20} = 9.10^\circ$，有几层一点也不缩；到 $L = 20$ 有 $971$ 个点，洞仍然在。旁边品红的台阶是页面对每个 $L$ 实算的覆盖半径 $\varepsilon_L$（琥珀色的是 $L = 20$），不拟合任何渐近速率；渐近字长是 [@rem-solovay-kitaev-literature] 的文献结果。
 :::
 
 ::: {.viz src="gate-word-polytope" height="560"}

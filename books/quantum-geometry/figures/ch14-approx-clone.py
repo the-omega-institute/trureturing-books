@@ -73,5 +73,6 @@ def draw(fig):
     fig.dot(cx, cy, 3.2, "dim")
 
     fig.text(tip[0] + 10, tip[1] + 2, t("输入 *r*", "input *r*"), size=14, color="now")
-    fig.text(two3[0] + 20, two3[1] + 26, t("克隆体 ×2：2/3", "clone ×2: 2/3"), size=14, color="line", halo=True)
+    # above and to the left of the arrow head, between the dashed 2/3 circle and the shell, clear of the amber line
+    fig.text(two3[0] - 12, two3[1] - 21, t("克隆体 ×2：2/3", "clone ×2: 2/3"), size=14, color="line", anchor="end", halo=True)
     fig.text(m[0] - 10, m[1] + 18, t("机器：−1/3", "machine: −1/3"), size=14, color="area", anchor="end", halo=True)

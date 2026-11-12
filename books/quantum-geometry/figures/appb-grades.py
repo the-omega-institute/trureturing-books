@@ -72,11 +72,15 @@ def draw(fig):
                 a, b = [bit for bit in E if m & bit]
                 pts = [o, corner(o, a), corner(o, a | b), corner(o, b)]
                 p.polygon(pts, "area", fill_opacity=0.16, color="area", width=1.4)
-            p.text(*corner((o[0] + 4, o[1] + 22), 1), NAME[3], size=13, color="area", anchor="end")
-            cx, cy = corner(o, 5)
-            p.text(o[0] + 40, o[1] - 10, NAME[5], size=13, color="area", anchor="middle", halo=True)
-            x, y = corner(o, 6)
-            p.text(x + 4, y + 2, NAME[6], size=13, color="area")
+            # each label sits outside its own face, beside the middle of an edge no other face shares
+            x1, y1 = corner(o, 1)
+            x3, y3 = corner(o, 3)
+            p.text((x1 + x3) / 2 + 8, (y1 + y3) / 2 + 12, NAME[3], size=13, color="area", halo=True)   # e₁₂: the floor, right of its far edge
+            x5, y5 = corner(o, 5)
+            p.text(x5 + 5, y5 + 16, NAME[5], size=13, color="area", halo=True)            # e₁₃: the front, right of its right edge
+            x4, y4 = corner(o, 4)
+            x6, y6 = corner(o, 6)
+            p.text((x4 + x6) / 2 - 2, (y4 + y6) / 2 - 10, NAME[6], size=13, color="area", anchor="end", halo=True)   # e₂₃: the side, above its top edge
         else:
             for m in range(8):
                 for bit in E:
