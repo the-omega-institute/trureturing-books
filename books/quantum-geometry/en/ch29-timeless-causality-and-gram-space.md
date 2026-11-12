@@ -247,6 +247,10 @@ In the Lean file, part 1 is a single wrapper: $p \bmod 4 = 1$ gives $p \bmod 4 \
 
 Geometrically, $p = a^2 + b^2$ says that the circle of radius $\sqrt{p}$ passes through the lattice point $(a, b)$; part 2 writes this as the product of a conjugate pair of vectors in the Gaussian plane, $p = (a + bi)(a - bi)$. Read $i$ as the bivector generator $\hat{\mathbf{I}}$ introduced above, and the prime $p$ spans an orthogonal face: hence the name "plane prime." A line prime, in turn, has an even stronger rigidity: not only is it not a sum of two squares itself, but as soon as it divides a sum of two squares it must divide both legs.
 
+::: {.viz src="pythagoras-number-escape" preset="five" height="500"}
+**Plane primes and line primes.** When the circle of radius $\sqrt{p}$ passes through a lattice point, $p = a^2 + b^2$ is a plane prime, and squaring $a + bi$ gives an integer right triangle; step through the odd primes with the rail under the figure, and for $p \equiv 3 \pmod 4$ the circle touches no lattice point at all.
+:::
+
 ::: {.lemma #lem-ch29-line-prime-descent title="A Prime Congruent to 3 Modulo 4 That Divides a Sum of Two Squares Divides Both Bases" lean="D5/S3/PrimeForms/ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq"}
 Let $q$ be a prime with $q \bmod 4 = 3$, and let $a, b$ be natural numbers. If $q \mid a^2 + b^2$, then $q \mid a$ and $q \mid b$.
 :::
@@ -332,10 +336,6 @@ which are exactly the two legs read off from the Gaussian product $(1 + i)(22 + 
    $$
 
    In this book's geometric reading, a $-1$ chiral twist can never arise in isolation on a single prime axis; it must cancel in pairs across places, an arithmetic echo of the principle of Chapter 10 that "pairwise comparison is always consistent and order-independent."
-:::
-
-::: {.viz src="pythagoras-number-escape" preset="five" height="500"}
-**Plane primes and line primes.** When the circle of radius $\sqrt{p}$ passes through a lattice point, $p = a^2 + b^2$ is a plane prime, and squaring $a + bi$ gives an integer right triangle; step through the odd primes with the rail under the figure, and for $p \equiv 3 \pmod 4$ the circle touches no lattice point at all.
 :::
 
 ### Pillar 2: Intersecting Two Quadratic Seams ($2 \times 2 = 4$)—From a Single Quadric to the Congruent-Number Elliptic Curve Torus {#sec-coda-congruent-elliptic-torus}
@@ -666,7 +666,7 @@ If the global time field is a timeless geometric crystal and local causality pos
    - Once $\mathbf{P}_{k+1}^*$ is chosen, the dihedral angle $\phi_k$ solidifies into a new 1D inner-product coordinate (the verb `liáng` crystallizing into the noun `liàng`), immediately framing the compatible bubble for step $k + 2$.
 
 ::: {.viz src="gram-causal-elliptope" preset="narrow" height="500"}
-**One more step remembered, one ring narrower.** The rail adds history from $M = 1$ to $M = 5$: each older anchor adds a magenta ellipse to the slice, nested inside the last, and the cyan window through the amber $\mathbf{Q}$ narrows with it, from all of $[-1, 1]$ to less than a fifth of that, with $\mathbf{Q}$ inside throughout. The events live in $\mathbb{R}^6$, so every depth keeps an inside; reading the compatible space as a finite observer's room for choice is this book's interpretation (`MODEL`).
+**One more step remembered, one ring narrower.** The rail adds history from $M = 1$ to $M = 5$: each older anchor adds a magenta ellipse to the slice, nested inside the last, and the cyan window through the amber $\mathbf{Q}$ narrows with it, from all of $[-1, 1]$ to about a quarter of that, with $\mathbf{Q}$ inside throughout. The events live in $\mathbb{R}^6$, so every depth keeps an inside; reading the compatible space as a finite observer's room for choice is this book's interpretation (`MODEL`).
 :::
 
 Conversely, if the new inner-product coordinates are forced outside the bubble, the Gram table stops being positive semidefinite and fits in no inner-product space:

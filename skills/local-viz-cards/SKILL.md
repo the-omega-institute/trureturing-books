@@ -355,9 +355,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十八章 | 第四至六部审计表之后、数值算例的引言之前 | `lean-declaration-map` · `table28` |
 | 第二十九章 | 第二幕末 | `pythagoras-number-escape` · `hippasus` |
 | 第二十九章 | 第一座桥“表盘立刻说明线素数写不成两平方和”一段之后 | `pythagoras-number-escape` · `seven` |
+| 第二十九章 | 定理 `thm-ch29-face-prime-two-squares` 证明后“几何上，p = a² + b² 说的是半径 √p 的圆穿过格点”一段之后 | `pythagoras-number-escape` · `five` |
 | 第二十九章 | 第一座桥手工推导 3（线素数的负佩尔方程无解）之后 | `pythagoras-number-escape` · `locked` |
 | 第二十九章 | 例 `ex-ch29-face-and-line-primes` 之后、文献注记 `rem-ch29-pell-primes-hilbert-literature` 之前 | `pythagoras-number-escape` · `minus` |
-| 第二十九章 | 第一座桥末 | `pythagoras-number-escape` · `five` |
 | 第二十九章 | 第二座桥文献注记 `rem-ch29-elliptic-torus-literature` 之后 | `hairy-ball-normal-escape` · `torus` |
 | 第二十九章 | 第三座桥文献注记 `rem-ch29-hasse-gauss-literature` 之后 | `pythagoras-number-escape` · `count` |
 | 第二十九章 | 文献注记 `rem-ch29-arithmetic-geometry-literature` 之后 | `pythagoras-number-escape` · `sato` |
