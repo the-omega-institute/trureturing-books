@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="prelude-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 270" width="740" height="270" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：左边一只眼睛，一根青色的射线 A 从右边迎面射进眼里，琥珀色的视线 O 与它在同一条直线上，标着 O·A = 1；下方一个小圆是眼睛看到的样子：正中只有一个亮点。第二栏：两支单位箭头 A（灰）与 B（琥珀）从同一点出发，夹角 θ，按带箭头的小圈 Î 所示的方向从 A 转到 B；它们张成的平行四边形涂成品红，标着 A∧B = sin θ Î。第三栏：一个球，赤道画成青色，标着 S^{n−1}；球的轮廓标着 S^{n}；一根紫色的竖轴穿过两极，两极标着 ±e_{n+1}。">
-<title>三栏。第一栏：左边一只眼睛，一根青色的射线 A 从右边迎面射进眼里，琥珀色的视线 O 与它在同一条直线上，标着 O·A = 1；下方一个小圆是眼睛看到的样子：正中只有一个亮点。第二栏：两支单位箭头 A（灰）与 B（琥珀）从同一点出发，夹角 θ，按带箭头的小圈 Î 所示的方向从 A 转到 B；它们张成的平行四边形涂成品红，标着 A∧B = sin θ Î。第三栏：一个球，赤道画成青色，标着 S^{n−1}；球的轮廓标着 S^{n}；一根紫色的竖轴穿过两极，两极标着 ±e_{n+1}。</title>
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="prelude-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 270" width="740" height="270" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：左边一只眼睛，青色的入射光沿 −A 从右边迎面射进眼里；A 是从眼睛指向光源的单位几何方向，与琥珀色的视线 O 同向，标着 O·A = 1；下方一个小圆是眼睛看到的样子：正中只有一个亮点。第二栏：两支单位箭头 A（灰）与 B（琥珀）从同一点出发，夹角 θ，按带箭头的小圈 Î 所示的方向从 A 转到 B；它们张成的平行四边形涂成品红，标着 A∧B = sin θ Î。第三栏：一个球，赤道画成青色，标着 S^{n−1}；球的轮廓标着 S^{n}；一根紫色的竖轴穿过两极，两极标着 ±e_{n+1}。">
+<title>三栏。第一栏：左边一只眼睛，青色的入射光沿 −A 从右边迎面射进眼里；A 是从眼睛指向光源的单位几何方向，与琥珀色的视线 O 同向，标着 O·A = 1；下方一个小圆是眼睛看到的样子：正中只有一个亮点。第二栏：两支单位箭头 A（灰）与 B（琥珀）从同一点出发，夹角 θ，按带箭头的小圈 Î 所示的方向从 A 转到 B；它们张成的平行四边形涂成品红，标着 A∧B = sin θ Î。第三栏：一个球，赤道画成青色，标着 S^{n−1}；球的轮廓标着 S^{n}；一根紫色的竖轴穿过两极，两极标着 ±e_{n+1}。</title>
 <style>.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}</style>
 <svg class="tr-fig-panel" x="0" y="0" width="236" height="270" viewBox="0 0 236 270">
 <text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I　点其实是线</text>
@@ -8,7 +8,7 @@
 <circle cx="46" cy="92" r="4" class="tf-ink"/>
 <line x1="222" y1="92" x2="66" y2="92" class="ts-cyan" stroke-width="3.2" fill="none"/>
 <path d="M160 92 L172 86.96 L172 97.04Z" class="tf-cyan"/>
-<text class="tf-cyan" x="206" y="78" font-size="15" text-anchor="middle"><tspan font-style="italic">A</tspan></text>
+<text class="tf-cyan" x="206" y="78" font-size="15" text-anchor="middle">−<tspan font-style="italic">A</tspan></text>
 <line x1="64" y1="92" x2="117.2" y2="92" class="ts-amber" stroke-width="2" fill="none"/>
 <path d="M124 92 L116 95.36 L116 88.64Z" class="tf-amber"/>
 <text class="tf-amber" x="96" y="114" font-size="15" text-anchor="middle"><tspan font-style="italic">O</tspan></text>

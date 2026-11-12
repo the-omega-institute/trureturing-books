@@ -438,7 +438,7 @@ Reading items 3 and 4 together illuminates the topological backdrop of [Chapter 
 :::
 
 ::: {.figure src="ch21-angle-defect"}
-**For flat triangles to close into a sphere, the vertex defects must add up to $4\pi$.** On the left, five equilateral triangles laid flat around one vertex: five corners of $60^\circ$ make only $300^\circ$, and the magenta gap below is the $60^\circ$ angular defect. On the right, each of the icosahedron's twelve magenta vertices is short by $60^\circ$, for a total of $12 \times 60^\circ = 720^\circ = 4\pi$ (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
+**Every vertex of the regular icosahedron leaves a gap.** On the left, five equilateral triangles laid flat around one vertex: five corners of $60^\circ$ make only $300^\circ$, and the magenta gap below is the $60^\circ$ angular defect. On the right, each of the icosahedron's twelve magenta vertices is short by $60^\circ$, for a total of $12 \times 60^\circ = 720^\circ = 4\pi$ (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
 :::
 
 The figure has only twelve vertices. Cut each triangular face into $\nu^2$ smaller triangles and push the new vertices out onto the sphere (a geodesic dome): the vertices grow from $12$ to $42$, $92$ and $162$, each one short by less and less, and yet the shortfalls always add up to $4\pi$:

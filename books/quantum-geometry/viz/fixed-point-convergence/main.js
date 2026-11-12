@@ -1,7 +1,12 @@
 /* FIXED//CONVERGE · 不动点的收束: how an iteration closes in on its fixed point, and how fast, on the cobweb plane.
      iter    x_{k+1} = f(x_k) for f = cos or f = 1 + 1/x: the path goes to the curve and back to the line y = x; near
              the fixed point x* the error is multiplied by f′(x*) at each step (−sin θ* ≈ −0.6736, −1/φ² ≈ −0.382)
-     newton  x_{k+1} = x_k − (x_k − f(x_k))/(1 − f′(x_k)): follow the tangent of the curve to the line; digits double
+     newton  x_{k+1} = x_k − (x_k − f(x_k))/(1 − f′(x_k)): follow the tangent of the curve to the line; near the fixed point, digits double asymptotically.
+             The quadratic law is local: with F(x) = x − f(x), on the neighbourhood |x − x*| ≤ NB_RHO = 0.5 Taylor's remainder
+             gives |δₖ₊₁| ≤ C·δₖ², C = max|F″| / (2 min|F′|) (≈ 0.393 for cos, ≈ 0.585 for 1 + 1/x) and C·NB_RHO < 1, so an
+             orbit that enters stays and |δₖ₊₁|/δₖ² → |F″(x*)/(2F′(x*))| (M.quad). Outside it (e.g. cos from x₀ near −π/2,
+             where 1 + sin x₀ ≈ 0) a step can jump far and the page claims no quadratic law for that step; the step formula
+             itself is defined at every step of every supported start (1 − f′(xₖ) ≠ 0, FPC_DEBUG.state.newton.denMin).
      read    the convergents a/b of θ*: the residual |cos q − q| is the drop from the line to the curve at q; it stays
              in the wedge between slope 0 and slope −sin 1 through the fixed point, and b²·|cos q − q| < 1 + sin 1
    All orbits and residuals are computed with 70-digit fixed-point BigInt arithmetic; the stage is drawn in coordinates
@@ -55,10 +60,22 @@
   const XS = num(THETA), LAMd = num(LAM), PHId = num(PHI), SIN1 = Math.sin(1);
   const MAPS = {
     cos: { f: cosB, fp: (x) => -sinB(x), star: THETA, s: XS, slope: -LAMd, name: ['余弦', 'COSINE'], curve: 'y = cos x', sym: 'θ*', range: [-1.5, 3],
-      g: (u) => -2 * XS * Math.sin(u / 2) ** 2 - LAMd * Math.sin(u), gp: (u) => -(LAMd * Math.cos(u) + XS * Math.sin(u)), quad: XS / (2 * (1 + LAMd)) },
+      g: (u) => -2 * XS * Math.sin(u / 2) ** 2 - LAMd * Math.sin(u), gp: (u) => -(LAMd * Math.cos(u) + XS * Math.sin(u)), quad: XS / (2 * (1 + LAMd)),
+      // on [θ* − ρ, θ* + ρ] ⊂ (0, π/2): |F″| = cos x is largest and F′ = 1 + sin x smallest at the left end
+      nbC: (rho) => Math.cos(XS - rho) / (2 * (1 + Math.sin(XS - rho))) },
     golden: { f: (x) => ONE + div(ONE, x), fp: (x) => -div(ONE, mul(x, x)), star: PHI, s: PHId, slope: -1 / (PHId * PHId), name: ['1 + 1/x', '1 + 1/x'], curve: 'y = 1 + 1/x', sym: 'φ', range: [0.2, 5],
-      g: (u) => (PHId + u > 1e-9 ? -u / (PHId * (PHId + u)) : null), gp: (u) => -1 / (PHId + u) ** 2, quad: -1 / (PHId * (PHId * PHId + 1)) }
+      g: (u) => (PHId + u > 1e-9 ? -u / (PHId * (PHId + u)) : null), gp: (u) => -1 / (PHId + u) ** 2, quad: -1 / (PHId * (PHId * PHId + 1)),
+      // on [φ − ρ, φ + ρ] ⊂ (0, ∞): |F″| = 2/x³ is largest at the left end, F′ = 1 + 1/x² smallest at the right end
+      nbC: (rho) => (2 / (PHId - rho) ** 3) / (2 * (1 + 1 / (PHId + rho) ** 2)) }
   };
+  /** Newton's local neighbourhood |x − x*| ≤ NB_RHO: there |δₖ₊₁| ≤ C·δₖ² with C·NB_RHO < 1 (see the header). */
+  const NB_RHO = 0.5;
+  for (const M of Object.values(MAPS)) M.nb = { rho: NB_RHO, C: M.nbC(NB_RHO) };
+  /** Whether Newton step j started inside the neighbourhood, i.e. the quadratic law governs |δⱼ| / δⱼ₋₁². */
+  const newtonLocal = (O, j) => j > 0 && Math.abs(O.u[j - 1]) <= NB_RHO;
+  /** Below RES the 70-digit arithmetic no longer resolves an error, so |δⱼ| ÷ δⱼ₋₁² is reported only above it. */
+  const RES = 1e-60;
+  const newtonRatio = (O, j) => (j > 0 && O.u[j - 1] !== 0 && Math.abs(O.u[j]) >= RES ? Math.abs(O.u[j]) / (O.u[j - 1] * O.u[j - 1]) : null);
 
   /* ---------- orbits (cached) ---------- */
   const KMAX = { iter: 60, newton: 5 };
@@ -66,13 +83,14 @@
   function orbit(map, x0c, kind, K) {
     const key = `${map}|${x0c}|${kind}|${K}`;
     if (cache.has(key)) return cache.get(key);
-    const M = MAPS[map], xs = [big(x0c, 100)], fs = [];
+    const M = MAPS[map], xs = [big(x0c, 100)], fs = [], den = [];
     for (let k = 0; k < K; k++) {
       const x = xs[k], y = M.f(x); fs.push(y);
-      if (kind === 'newton') { const d = ONE - M.fp(x); xs.push(d === 0n ? x : x - div(x - y, d)); } else xs.push(y);
+      // 1 − f′(xₖ) is never 0 on a supported start (den records it); the guard only keeps a division by zero out
+      if (kind === 'newton') { const d = ONE - M.fp(x); den.push(num(d)); xs.push(d === 0n ? x : x - div(x - y, d)); } else xs.push(y);
     }
     fs.push(M.f(xs[K]));
-    const o = { xs, u: xs.map((x) => num(x - M.star)), v: fs.map((y) => num(y - M.star)) };
+    const o = { xs, den, u: xs.map((x) => num(x - M.star)), v: fs.map((y) => num(y - M.star)) };
     if (cache.size > 40) cache.clear();
     cache.set(key, o);
     return o;
@@ -285,14 +303,18 @@
         $('hudBig').textContent = L(`牛顿 · 第 ${kk} 步`, `NEWTON · STEP ${kk}`);
         $('hudSub').textContent = L(`离 ${M.sym} 还差 ${sci(e)}；正确位数 ${trail}；单纯迭代要走 ${ps[kk] == null ? '300 多' : ps[kk]} 步才到这么近`, `${sci(e)} from ${M.sym}; correct digits ${trail}; the plain iteration needs ${ps[kk] == null ? 'over 300' : ps[kk]} steps to get this close`) + zoom;
         $('roKeyL').textContent = L(`|δ${sub(kk)}| ÷ δ${sub(Math.max(kk - 1, 0))}²`, `|δ${sub(kk)}| ÷ δ${sub(Math.max(kk - 1, 0))}²`);
-        $('roKey').innerHTML = kk > 0 && O.u[kk - 1] !== 0 ? fix(Math.abs(O.u[kk]) / (O.u[kk - 1] * O.u[kk - 1]), 6) : '—';
-        $('roKeySub').textContent = L(`→ ${fix(Math.abs(M.quad), 4)}：误差每步约平方一次`, `→ ${fix(Math.abs(M.quad), 4)}: the error is roughly squared at each step`);
+        const nr = newtonRatio(O, kk);
+        $('roKey').innerHTML = nr != null ? fix(nr, 6) : kk > 0 ? L('低于 70 位分辨率', 'below 70-digit resolution') : '—';
+        const law = L(`→ ${fix(Math.abs(M.quad), 4)}：进入不动点邻域后误差渐近地每步平方`, `→ ${fix(Math.abs(M.quad), 4)}: near the fixed point, the error is asymptotically squared each step`), nb = M.nb;
+        $('roKeySub').textContent = kk > 0 && !newtonLocal(O, kk)
+          ? L(`上一步 |δ${sub(kk - 1)}| = ${sci(Math.abs(O.u[kk - 1]))} > ${nb.rho}，还在邻域 |δ| ≤ ${nb.rho} 之外，这一步不受二次律约束 · `, `the previous |δ${sub(kk - 1)}| = ${sci(Math.abs(O.u[kk - 1]))} > ${nb.rho}, outside the neighbourhood |δ| ≤ ${nb.rho}: no quadratic law governs this step · `) + law
+          : law + L(`（邻域 |δ| ≤ ${nb.rho} 内比值 ≤ ${fix(nb.C, 3)}）`, ` (inside |δ| ≤ ${nb.rho} the ratio is at most ${fix(nb.C, 3)})`);
         set(1, L(`当前读数 x${sub(kk)}`, `current reading x${sub(kk)}`), str(O.xs[kk], 24));
         set(2, L('离不动点 |δₖ|', 'distance |δₖ|'), sci(e));
         set(3, L('正确的十进制位数', 'correct decimal digits'), String(digits));
         set(4, L('单纯迭代要走几步', 'plain iteration needs'), ps[kk] == null ? '> 300' : `${ps[kk]}${L(' 步', ' steps')}`);
         set(5, L(`切线的斜率 f′(x${sub(kk)})`, `slope of the tangent, f′(x${sub(kk)})`), fix(num(MAPS[S.map].fp(O.xs[kk])), 6));
-        $('roNote').textContent = L('牛顿每一步除了读曲线的高度，还读它的斜率（对余弦就是 sin xₖ）；沿切线走到直线 y = x，正确位数每步约翻一倍。', 'Besides the height of the curve, each Newton step reads its slope (sin xₖ for the cosine); following the tangent to the line y = x roughly doubles the correct digits at each step.');
+        $('roNote').textContent = L('进入不动点邻域后，牛顿每一步除了读曲线的高度，还读它的斜率（对余弦就是 −sin xₖ）；沿切线走到直线 y = x，正确位数渐近地约翻一倍。', 'Once the orbit is near the fixed point, each Newton step reads the curve height and its slope (−sin xₖ for the cosine); following the tangent to y = x then asymptotically doubles the correct digits.');
       }
       pill = sci(e);
     }
@@ -362,12 +384,13 @@
       g.line(nd, P.magenta); nd.forEach((p) => g.dot(p[0], p[1], p[0] === kk ? P.amber : P.magenta, p[0] === kk ? 4.5 : 3));
       g.legend([[P.magenta, L('牛顿', 'Newton')], [P.cyan, L('单纯迭代', 'plain iteration')]], { right: false });
       $('pATitle').textContent = L('正确的位数', 'Correct digits'); $('pAMeta').textContent = `${Math.floor(nd[kk][1])}`;
-      const q = []; for (let j = 0; j < K; j++) q.push(O.u[j] !== 0 && O.u[j + 1] !== 0 ? [j + 1, Math.abs(O.u[j + 1]) / (O.u[j] * O.u[j])] : null);
+      const q = []; for (let j = 0; j < K; j++) { const r = newtonRatio(O, j + 1); q.push(r != null ? [j + 1, r] : null); }
       const qm = Math.max(Math.abs(M.quad) * 2, ...q.filter(Boolean).map((p) => p[1])) * 1.1;
       const g2 = kit.plot(B, { x: [0.5, K + 0.5], y: [0, Math.min(qm, 5)], pad: [40, 10, 10, 22] });
       g2.axes({ yTicks: [0, [Math.abs(M.quad), fix(Math.abs(M.quad), 3)]], xTicks: [1, 2, 3, 4, 5] });
       g2.hline(Math.abs(M.quad), P.magenta, { dash: [5, 4] });
-      q.forEach((p) => p && g2.dot(p[0], Math.min(p[1], 5), p[0] === kk ? P.amber : P.sigma, p[0] === kk ? 4.5 : 3));
+      // only steps that started inside the neighbourhood |δ| ≤ NB_RHO are held to the quadratic law; the others are dimmed
+      q.forEach((p) => p && g2.dot(p[0], Math.min(p[1], 5), p[0] === kk ? P.amber : newtonLocal(O, p[0]) ? P.sigma : P.dim, p[0] === kk ? 4.5 : 3));
       $('pBTitle').textContent = L('误差 ÷ 上一步误差的平方', 'Error over the previous error squared'); $('pBMeta').textContent = `→ ${fix(Math.abs(M.quad), 4)}`;
     }
   }
@@ -432,10 +455,10 @@
   const NOTES = {
     golden: ['从 x₀ = 1 反复按 1 + 1/x：折线依次落在 2、3/2、5/3、8/5……，一左一右夹住青色曲线与灰线的交点 φ ≈ 1.618。每一圈的宽度约是上一圈的 0.382 倍，正是品红切线斜率的大小。', 'Press 1 + 1/x again and again from x₀ = 1: the path lands on 2, 3/2, 5/3, 8/5, …, closing on φ ≈ 1.618, where the cyan curve meets the grey line, from alternating sides. Each turn is about 0.382 times as wide as the one before, the size of the slope of the magenta tangent.'],
     far: ['从很远的 x₀ = 3 出发反复取余弦：第一步就落进 [−1, 1]（cos 3 ≈ −0.990），此后一圈圈绕向同一个 θ* ≈ 0.739。终点与起点无关。', 'Take the cosine again and again from a far start, x₀ = 3: the first step already lands in [−1, 1] (cos 3 ≈ −0.990), and from there the path winds in on the same θ* ≈ 0.739. The end does not depend on the start.'],
-    rate: ['从 θ₀ = 1 反复取余弦，画面跟着误差放大。放大之后曲线与品红切线重合，每一圈的形状都一样：误差每步乘以约 −0.674，比灰色虚线（最陡的 −sin 1 ≈ −0.84）平缓。', 'Take the cosine again and again from θ₀ = 1 while the view zooms with the error. Zoomed in, the curve lies on the magenta tangent and every turn has the same shape: the error is multiplied by about −0.674 per step, gentler than the dashed grey line (the steepest, −sin 1 ≈ −0.84).'],
+    rate: ['从 θ₀ = 1 反复取余弦，画面跟着误差放大。放大之后曲线与品红切线重合，每一圈的形状都一样：近点时相邻两圈的误差之比趋于约 −0.674（切线斜率 −sin θ*），比灰色虚线（全局常数 −sin 1 ≈ −0.84）平缓。', 'Take the cosine again and again from θ₀ = 1 while the view zooms with the error. Zoomed in, the curve lies on the magenta tangent and every turn has the same shape: near the fixed point the ratio of successive errors tends to about −0.674 (the tangent slope −sin θ*), gentler than the dashed grey line (the global constant −sin 1 ≈ −0.84).'],
     circle: ['同一张图加上单位圆。圆上的点 P = (θ*, sin θ*)：青色的横坐标是蛛网收进去的位置 θ*，品红的高度 λ = sin θ* ≈ 0.674 是每步缩小的比例，也是品红切线斜率的大小。', 'The same plane with the unit circle. The point P = (θ*, sin θ*) on it: its cyan abscissa is θ*, where the cobweb closes in, and its magenta height λ = sin θ* ≈ 0.674 is the ratio by which each step shrinks the error, the size of the slope of the magenta tangent.'],
-    newton: ['同样从 θ₀ = 1 出发，每一步先竖着读曲线的高度，再沿品红切线走到灰线。画面跟着放大，停在第 2 步：视野宽约 10⁻⁴，琥珀色的 x₂ 刚沿上一步的品红切线落到灰线上，正确位数 0 → 1 → 4，误差约每步平方一次。拖时间轴看第 3、4 步：9 位、20 位。', 'Again from θ₀ = 1: each step reads the height of the curve, then follows the magenta tangent to the grey line. The view zooms along and stops at step 2, about 10⁻⁴ wide: the amber x₂ has just come down the magenta tangent of the previous step onto the grey line; correct digits 0 → 1 → 4, the error roughly squared at each step. Scrub the rail for steps 3 and 4: 9 and 20 digits.'],
-    rational: ['θ* 的渐近分数 2/3、3/4、14/19、17/23、694/939……一个个落在灰线上（琥珀色是当前这个）。品红竖线是到余弦曲线的落差，即残差 |cos q − q|：它总停在两条灰色虚线张成的楔形里，画面放大了千万倍，它仍在。', 'The convergents of θ*, 2/3, 3/4, 14/19, 17/23, 694/939, …, land one by one on the grey line (amber is the current one). The magenta upright is the drop to the cosine curve, the residual |cos q − q|: it always stays inside the wedge of the two dashed grey lines, and with the view magnified ten million times it is still there.'],
+    newton: ['同样从 θ₀ = 1 出发，每一步先竖着读曲线的高度，再沿品红切线走到灰线。进入不动点邻域后画面跟着放大，停在第 2 步：视野宽约 10⁻⁴，琥珀色的 x₂ 刚沿上一步的品红切线落到灰线上，正确位数 0 → 1 → 4，误差渐近地每步平方一次。拖时间轴看第 3、4 步：9 位、20 位。', 'Again from θ₀ = 1: each step reads the height of the curve, then follows the magenta tangent to the grey line. Once it is near the fixed point, the view zooms along and stops at step 2, about 10⁻⁴ wide: the amber x₂ has just come down the magenta tangent of the previous step onto the grey line; correct digits 0 → 1 → 4, with the error asymptotically squared at each step. Scrub the rail for steps 3 and 4: 9 and 20 digits.'],
+    rational: ['θ* 的渐近分数 2/3、3/4、14/19、17/23、694/939……一个个落在灰线上（琥珀色是当前这个）。品红竖线是到余弦曲线的落差，即残差 |cos q − q|：它在余弦曲线上的端点总停在两条灰色虚线张成的楔形里，画面放大了千万倍，它仍在。', 'The convergents of θ*, 2/3, 3/4, 14/19, 17/23, 694/939, …, land one by one on the grey line (amber is the current one). The magenta upright is the drop to the cosine curve, the residual |cos q − q|: its endpoint on the cosine curve always stays inside the wedge of the two dashed grey lines, and with the view magnified ten million times it is still there.'],
     ruler: ['琥珀色的 17/23 与虚线标出的尺子读数 739/1000 并排：一千等分的尺子离 θ* 最近的一格，残差约是二十三等分那一格的两倍。', 'The amber 17/23 next to the dashed ruler reading 739/1000: the tick nearest θ* on a ruler of a thousand divisions leaves about twice the residual of the tick on a ruler of twenty-three.']
   };
   let booting = true;
@@ -463,7 +486,9 @@
       const k = step(), V = view(), base = { scene: S.scene, map: S.map, cam: S.cam, x0: S.x0c / 100, D: S.D, step: k, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, viewHalf: V.h, xstar: str(THETA, 60), lambda: str(LAM, 60), phi: str(PHI, 60) };
       if (S.scene === 'read') { const r = READS[Math.min(k, NR - 1)]; return Object.assign(base, { reading: r, reads: READS.map((x) => `${x.a}/${x.b}`), quotients: CF.quot.slice(0, 14), ruler: rulerReading(S.D) }); }
       const O = orb(), kk = Math.min(k, O.u.length - 1);
-      return Object.assign(base, { xk: str(O.xs[kk], 60), u: O.u.slice(), uk: O.u[kk], ratio: kk > 0 ? O.u[kk] / O.u[kk - 1] : null, slope: MAPS[S.map].slope, picardSteps: S.scene === 'newton' ? picardSteps(S.map, S.x0c) : null });
+      const M = MAPS[S.map], newton = S.scene === 'newton' ? { rho: M.nb.rho, C: M.nb.C, Crho: M.nb.C * M.nb.rho, quad: Math.abs(M.quad), den: O.den.slice(), denMin: Math.min(...O.den.map(Math.abs)),
+        local: O.u.map((_, j) => newtonLocal(O, j)), ratio: O.u.map((_, j) => newtonRatio(O, j)), res: RES } : null;
+      return Object.assign(base, { xk: str(O.xs[kk], 60), u: O.u.slice(), uk: O.u[kk], ratio: kk > 0 ? O.u[kk] / O.u[kk - 1] : null, slope: M.slope, picardSteps: S.scene === 'newton' ? picardSteps(S.map, S.x0c) : null, newton });
     },
     seek: (t) => { stopAt = null; clock.pause(); clock.set(t); },
     /** Screen point of the actual value x on the line y = x (for pointer tests). */

@@ -116,6 +116,30 @@ W = walk(9, 20, STAR);
 check('RING: p = 9, n = 20 matches the matrix power on ZMod 9', s.p === 9 && s.n === 20 && gap(s.q, W.q) < 1e-12 && gap(s.k, classical(9, 20)) < 1e-15);
 check('RING: still a mirror image, P(x) = P(−x), no lopsidedness', s.imbalance < 1e-12 && W.q.every((v, x) => close(v, W.q[(9 - x) % 9], 1e-12)));
 
+// RING in the width scene: before the wrap (2n < p) the widths are those of the line; after it both stay below p/2
+const tags = () => page.$$eval('.stage .tag', (ts) => ts.filter((t) => !t.hidden).map((t) => t.textContent.trim()));
+await page.click('#sceneChips [data-scene="width"]'); s = await seek(4);
+const line4 = width(walk(121, 4, STAR).q, 121).sigma;
+check('RING, width scene, n = 4 (2n < p, not yet wrapped): the quantum σ is the line walk\'s and the classical σ is √4 = 2', s.scene === 'width' && s.p === 9 && s.n === 4
+  && close(s.sigmaQ, width(walk(9, 4, STAR).q, 9).sigma, 1e-9) && close(s.sigmaQ, line4, 1e-9) && close(s.sigmaC, 2, 1e-12), `${s.sigmaQ} ${line4}`);
+s = await seek(60);
+const ringQ = width(walk(9, 60, STAR).q, 9).sigma, ringC = width(classical(9, 60), 9).sigma;
+check('RING, width scene, n = 60 (wrapped): quantum σ = 2.2649 and classical σ = 2.5828 (matrix power; binomial folded mod 9)', s.n === 60
+  && close(s.sigmaQ, ringQ, 1e-9) && close(ringQ, 2.2648592075, 1e-9) && close(s.sigmaC, ringC, 1e-9) && close(ringC, 2.5828186904, 1e-9), `${s.sigmaQ} ${s.sigmaC}`);
+check('RING: both widths stay at most 4 = ⌊9/2⌋ at every step: after the wrap neither √n (√60 ≈ 7.75) nor 0.54·n applies', s.widths.length === 61 && s.widths.every(([q, c]) => q <= 4 + 1e-12 && c <= 4 + 1e-12) && Math.sqrt(60) > 4);
+const tg = await tags();
+check('RING, width scene: the curves are labelled “量子宽度” and “经典宽度”, with no straight-line or √n law on the stage', tg.includes('量子宽度') && tg.includes('经典宽度') && !tg.some((t) => /直线|√n/.test(t)), JSON.stringify(tg));
+// the coefficient 0.54 belongs to the symmetric coin on a line: the same scene on p = 121 at n = 60
+await setRange('pp', 121); s = await state();
+const lim = Math.sqrt(1 - Math.SQRT1_2);
+check('line p = 121, n = 60, coin c*: σ ÷ n = 0.541, next to the large-n limit √(1 − 1/√2) (matrix power)', s.scene === 'width' && s.p === 121 && s.n === 60
+  && close(s.sigmaQ, width(walk(121, 60, STAR).q, 121).sigma, 1e-9) && close(s.sigmaQ / 60, lim, 0.003), `${s.sigmaQ / 60}`);
+await setRange('phi', 0); s = await state();
+const realW = width(walk(121, 60, REAL).q, 121);
+check('line p = 121, n = 60, coin (1, 1)/√2: the walk leans left and its width about the mean is narrower, σ ÷ n < 0.52 (matrix power)', s.phi === 0
+  && close(s.sigmaQ, realW.sigma, 1e-9) && realW.mean < 0 && s.sigmaQ / 60 < 0.52 && s.sigmaQ / 60 < lim - 0.03, `${s.sigmaQ / 60}`);
+await pick('ring'); s = await seek(20);
+
 // the mechanism of the proof sketch, test-side, for many cycles and steps
 let balOK = true, sumOK = true;
 for (const p of [3, 4, 5, 8, 11, 16]) for (const n of [0, 1, 2, 5, 9, 14]) {
@@ -168,6 +192,15 @@ check('scrubbing the rail shows the whole step reached (n = 23)', s.n === 23 && 
 // language
 await page.click('[data-lang-set="en"]'); await settle(page);
 check('the stage title follows the language', (await page.textContent('#hudBig')).startsWith('Spread'));
+await page.click('#sceneChips [data-scene="width"]'); await settle(page);
+const tgEn = await tags();
+check('English: the width curves are labelled “quantum width” and “classical width”, with no straight-line or √n law', tgEn.includes('quantum width') && tgEn.includes('classical width') && !tgEn.some((t) => /straight line|√n/.test(t)), JSON.stringify(tgEn));
+const drawerZh = await page.textContent('#drawer .sheet > div.zh'), drawerEn = await page.textContent('#drawer .sheet > div.en');
+check('the drawer keeps √n to the line before the wrap, the linear width to the line at large n, 0.54 to the symmetric coin, and bounds the widths after the wrap (both languages)',
+  drawerZh.includes('2n < p') && drawerZh.includes('n 很大时近似线性增长') && drawerZh.includes('只属于对称硬币') && drawerZh.includes('文献结果，未在本书形式化') && drawerZh.includes('不是指数的')
+  && drawerZh.includes('2n ≥ p') && drawerZh.includes('受圈长限制') && drawerZh.includes('线上的增长律不再适用')
+  && drawerEn.includes('2n < p') && drawerEn.includes('roughly linearly for large n') && drawerEn.includes('belongs to the symmetric coin only') && drawerEn.includes('not formalized in this book') && drawerEn.includes('not exponential')
+  && drawerEn.includes('2n ≥ p') && drawerEn.includes('bounded by the size of the cycle') && drawerEn.includes('growth laws of the line no longer apply'));
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

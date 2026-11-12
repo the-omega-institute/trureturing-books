@@ -301,31 +301,236 @@
     $('hudSub').textContent = (S.zoom === 'follow' ? L(`画面放大 ×${sci(base / h)} · `, `View zoomed ×${sci(base / h)} · `) : '') + L(`离不动点还差 ${sci(Math.abs(xs[k] - XSTAR))}`, `still ${sci(Math.abs(xs[k] - XSTAR))} from the fixed point`);
   }
 
+  /* ---------- prime: the layout of the stage ----------
+     Four bands, each set from measured ink and no two touching, for every reachable step k = 0 … PRIMES.length at the
+     current canvas size W × H:
+       1. the k listed dials (number inside, remainder under each), or at k = 0 the sentence about the empty list;
+       2. the equation Q = p₁⋯pₖ + 1 = …;
+       3. its factorization (or “… is itself prime”);
+       4. the dial of the least prime factor of Q, hand on 0 (its number moves into the caption when it does not fit).
+     The free part of the canvas runs from under the shown HUD title and scene chips to above the shown legend and any
+     later block of the page laid over the canvas (hudFree). The bands are stacked top to bottom, each separated from the
+     next by z.bandGap ('stack'). Only if no stacked arrangement fits under the minimums z do the dials take a left column
+     with bands 2–4 stacked in a right column beside them, z.colGap apart ('split'). Every string is measured with
+     measureText and set at the largest size, up to its scale, that fits the width; nothing is clipped, hidden or
+     abbreviated beyond eqLine. Of all scales the layout takes the one whose weaker part (dial radius against PR.rRef,
+     text and least-prime dial against full size) is largest, then the caption under that dial, then larger dials. If
+     nothing fits at the PR minimums, all minimums shrink together by the largest t ≥ PR.tMin that fits (text never
+     below PR.textFloor px); if even that fails, the stack at t = PR.tMin is pinned under the HUD (fallback).
+     ESCAPE_DEBUG.prime reports the box of every band and the separation of every pair of bands (canvas CSS px). */
+  const PR = { rMin: 14, rMax: 74, rRef: 40, numMin: 9, cap: 11, capGap: 7, tick: 3, eq: 18, fac: 16, eqMin: 11, facMin: 10, lpf: 36, lpfMin: 14,
+    margin: 10, hudGap: 8, bandGap: 10, colGap: 18, gx: 8, gy: 6, emptyFont: 13, emptyMin: 10, textFloor: 7, tMin: 0.3, t: 1 };
+  const PR_SCALES = [1, 0.92, 0.84, 0.76, 0.68, 0.6, 0.52, 0.45, 0.4];
+  /** The minimums shrunk together by t; no text below PR.textFloor px, no band gap below 4 px. */
+  const shrunk = (t) => Object.assign({}, PR, { t, rMin: PR.rMin * t, lpfMin: PR.lpfMin * t, numMin: Math.max(PR.textFloor - 1, PR.numMin * t),
+    cap: Math.max(PR.textFloor, PR.cap * t), capGap: PR.capGap * t, eqMin: Math.max(PR.textFloor, PR.eqMin * t), facMin: Math.max(PR.textFloor, PR.facMin * t),
+    emptyMin: Math.max(PR.textFloor, PR.emptyMin * t), bandGap: Math.max(4, PR.bandGap * t), colGap: Math.max(8, PR.colGap * t), gx: PR.gx * t, gy: PR.gy * t });
+  let primeLast = null;
+  const fontOf = (px, w, fam) => `${w || 400} ${px}px ${fam || TRV.fonts.data}`;
+  const dataFont = (px, w) => fontOf(px, w);
+  const inkCache = new Map();
+  /** The measured ink of one string set left-aligned on an alphabetic baseline: advance w, ink from x0 to x1 (ew wide)
+      relative to the start, asc above and desc below the baseline. Cached for one layout. */
+  function ink(c, s, px, w, fam) {
+    const key = `${w || 400}|${px}|${fam || ''}|${s}`;
+    if (inkCache.has(key)) return inkCache.get(key);
+    c.font = fontOf(px, w, fam); c.textAlign = 'left'; c.textBaseline = 'alphabetic';
+    const m = c.measureText(s), fin = (v) => Number.isFinite(v);
+    const x0 = Math.min(0, fin(m.actualBoundingBoxLeft) ? -m.actualBoundingBoxLeft : 0), x1 = Math.max(m.width, fin(m.actualBoundingBoxRight) ? m.actualBoundingBoxRight : m.width);
+    const v = { w: m.width, x0, x1, ew: x1 - x0, asc: fin(m.actualBoundingBoxAscent) && m.actualBoundingBoxAscent > 0 ? m.actualBoundingBoxAscent : px * 0.8,
+      desc: fin(m.actualBoundingBoxDescent) ? Math.max(0, m.actualBoundingBoxDescent) : px * 0.25 };
+    inkCache.set(key, v);
+    return v;
+  }
+  /** The largest size from px down to min (1 px steps) at which s is at most maxW wide; null if not even min fits,
+      unless `force`, which returns min anyway (the pinned fallback). */
+  function fitText(c, s, px, min, maxW, w, fam, force) {
+    px = Math.max(min, px);
+    let m = ink(c, s, px, w, fam);
+    while (m.ew > maxW && px > min) { px = Math.max(min, px - 1); m = ink(c, s, px, w, fam); }
+    return m.ew <= maxW || force ? { px, m, fits: m.ew <= maxW } : null;
+  }
+  /** One dial of radius r for the prime p under the minimums z: its number inside when it fits at ≥ z.numMin px, else in
+      the caption; the caption (remainder) under the dial, or on its right with `beside`. Extents run from the centre. */
+  function dialSpec(c, z, r, p, rem, beside) {
+    const label = String(p), inner = (w) => Math.max(r * 0.36, Math.min(r * 0.55, w / 2 + 3));
+    let f = Math.max(z.numMin, Math.round(r * 0.36)), t = ink(c, label, f, 600);
+    while (t.ew + 4 > 2 * inner(t.ew) && f > z.numMin) { f = Math.max(z.numMin, f - 1); t = ink(c, label, f, 600); }
+    const inside = t.ew + 4 <= 2 * inner(t.ew), cap = `${inside ? '' : `${label} · `}${L('余', 'rem')} ${rem}`, m = ink(c, cap, z.cap), capH = m.asc + m.desc;
+    const d = { r, p, rem, f: inside ? f : 0, inner: inside ? inner(t.ew) : r * 0.36, cap, capFont: z.cap, capGap: z.capGap, capAsc: m.asc, capDesc: m.desc, capW: m.ew, capX0: m.x0, capX1: m.x1, beside: !!beside };
+    if (beside) return Object.assign(d, { up: Math.max(r + PR.tick, capH / 2), down: Math.max(r + PR.tick, capH / 2), left: r + PR.tick, right: r + PR.tick + z.capGap + m.ew });
+    const half = Math.max(r + PR.tick, m.ew / 2);
+    return Object.assign(d, { up: r + PR.tick, down: r + z.capGap + capH, left: half, right: half });
+  }
+  /** The free part of the canvas (CSS px): below the shown HUD title and chips, above the shown legend and above any
+      later block of the page (plots, tour, rail) that is laid over the canvas, as hit-testing at its top edge shows. */
+  function hudFree(H) {
+    const stage = $('stage'), cv = $('cv').getBoundingClientRect(), shown = (el) => {
+      if (!el || !el.textContent.trim()) return null;
+      const r = el.getBoundingClientRect(), st = getComputedStyle(el);
+      return r.width > 0 && r.height > 0 && st.opacity !== '0' && st.visibility !== 'hidden' ? r : null;
+    };
+    let top = PR.margin, bottom = H - PR.margin;
+    for (const el of [document.querySelector('#stage .hud-tl'), $('sceneChips')]) { const r = shown(el); if (r) top = Math.max(top, r.bottom - cv.top + PR.hudGap); }
+    const lg = shown($('legend')); if (lg) bottom = Math.min(bottom, lg.top - cv.top - PR.hudGap);
+    for (const el of [...stage.parentElement.children, $('rail')]) {
+      if (!el || el === stage) continue;
+      const r = el.getBoundingClientRect();
+      if (!(r.width > 0 && r.height > 0) || r.top <= cv.top || r.top >= cv.bottom || r.right <= cv.left || r.left >= cv.right) continue;
+      const hit = document.elementFromPoint((Math.max(r.left, cv.left) + Math.min(r.right, cv.right)) / 2, Math.min(r.top + 2, cv.bottom - 1));
+      if (hit && stage.contains(hit)) continue;   // the stage is on top there (a still or a cover is fixed over the page)
+      bottom = Math.min(bottom, r.top - cv.top - PR.hudGap);
+    }
+    return { top, bottom };
+  }
+  /** Q = p₁⋯pₖ + 1 and its factorization, as drawn. */
+  const eqLine = (k) => `Q = ${k > 7 ? `p₁⋯p${k < 10 ? '₀₁₂₃₄₅₆₇₈₉'[k] : '₁' + '₀₁₂₃₄₅₆₇₈₉'[k - 10]}` : (k ? PRIMES.slice(0, k).join('·') : '1')} + 1 = ${EUCLID[k].Q}`;
+  const facLine = (k) => { const E = EUCLID[k]; return E.factors.length === 1 ? L(`${E.Q} 本身是素数`, `${E.Q} is itself prime`) : `= ${E.factors.join(' × ')}`; };
+  const emptyLine = () => L('清单是空的：空乘积是 1', 'The list is empty: the empty product is 1');
+  /** Bands 2–4 at scale s under the minimums z, each at most maxW wide: Q, its factorization, the least-prime dial.
+      h is their stacked height with z.bandGap between neighbours. */
+  function primeText(c, z, k, s, maxW, beside, force) {
+    const E = EUCLID[k], eqS = eqLine(k), facS = facLine(k);
+    const lpf = dialSpec(c, z, Math.max(z.lpfMin, PR.lpf * s * z.t), E.factors[0], 0, beside);
+    if (lpf.left + lpf.right > maxW && !force) return null;
+    const e = fitText(c, eqS, Math.round(PR.eq * s * z.t), z.eqMin, maxW, 600, null, force), f = fitText(c, facS, Math.round(PR.fac * s * z.t), z.facMin, maxW, 600, null, force);
+    if (!e || !f) return null;
+    const hE = e.m.asc + e.m.desc, hF = f.m.asc + f.m.desc, hL = lpf.up + lpf.down;
+    return { s, beside: !!beside, eqS, facS, e, f, lpf, hE, hF, hL, w: Math.max(e.m.ew, f.m.ew, lpf.left + lpf.right), h: hE + z.bandGap + hF + z.bandGap + hL,
+      score: Math.min(e.px / PR.eq, f.px / PR.fac, lpf.r / PR.lpf) };
+  }
+  /** The largest dial radius (and its columns) at which the k listed dials with their captions fit in gw × gh. */
+  function primeGrid(c, z, k, gw, gh) {
+    const E = EUCLID[k], ps = PRIMES.slice(0, k);
+    let rLo = z.rMin;
+    while (rLo < PR.rMax && ps.some((p) => !dialSpec(c, z, rLo, p, E.Q % p).f)) rLo = Math.min(PR.rMax, rLo + 0.5);
+    const cap = ps.reduce((a, p) => { const m = ink(c, `${L('余', 'rem')} ${E.Q % p}`, z.cap); return { w: Math.max(a.w, m.ew), h: Math.max(a.h, m.asc + m.desc) }; }, { w: 0, h: 0 });
+    const geo = (r) => ({ half: Math.max(r + PR.tick, cap.w / 2), up: r + PR.tick, down: r + z.capGap + cap.h, gx: Math.max(z.gx, r * 0.5 - 6), gy: Math.max(z.gy, r * 0.3) });
+    const size = (cols, rows, r) => { const d = geo(r); return { w: cols * 2 * d.half + (cols - 1) * d.gx, h: rows * (d.up + d.down) + (rows - 1) * d.gy }; };
+    let best = null;
+    for (let cols = 1; cols <= k; cols++) {
+      const rows = Math.ceil(k / cols), fits = (r) => { const sz = size(cols, rows, r); return sz.w <= gw && sz.h <= gh; };
+      if (!fits(rLo)) continue;
+      let lo = rLo, hi = PR.rMax;
+      if (fits(hi)) lo = hi; else for (let i = 0; i < 20; i++) { const mid = (lo + hi) / 2; if (fits(mid)) lo = mid; else hi = mid; }
+      if (!best || lo > best.r + 0.5 || (Math.abs(lo - best.r) <= 0.5 && rows < best.rows)) best = { cols, rows, r: lo };
+    }
+    return { best, rLo, geo, size };
+  }
+  /** Band 1 in gw × gh under the minimums z: the dial grid with the largest radius, or the empty-list sentence. With
+      `force`, the smallest grid that is no wider than gw (or the sentence at its minimum size), whatever its height. */
+  function primeDials(c, z, k, gw, gh, force) {
+    if (!k) {
+      const t = fitText(c, emptyLine(), Math.round(PR.emptyFont * z.t), z.emptyMin, gw, 400, TRV.fonts.body, force);
+      if (!t || (t.m.asc + t.m.desc > gh && !force)) return null;
+      return { t, r: null, cols: 0, rows: 0, w: t.m.ew, h: t.m.asc + t.m.desc, score: t.px / PR.emptyFont };
+    }
+    const G = primeGrid(c, z, k, gw, gh);
+    let r, cols;
+    if (G.best) ({ r, cols } = G.best);
+    else if (force) { r = G.rLo; cols = k; while (cols > 1 && G.size(cols, Math.ceil(k / cols), r).w > gw) cols--; }
+    else return null;
+    const rows = Math.ceil(k / cols), sz = G.size(cols, rows, r);
+    return { G, r, cols, rows, w: sz.w, h: sz.h, score: r / PR.rRef };
+  }
+  /** The best arrangement under the minimums z, or ok: false when none fits. */
+  function primePlan(c, z, k, W, free) {
+    const aw = W - 2 * PR.margin, ah = free.bottom - free.top, stack = [], split = [];
+    const narrowest = k ? 2 * Math.max(z.rMin + PR.tick, ink(c, `${L('余', 'rem')} 1`, z.cap).ew / 2) : ink(c, emptyLine(), z.emptyMin, 400, TRV.fonts.body).ew;
+    for (const s of PR_SCALES) for (const beside of [false, true]) {
+      const T = primeText(c, z, k, s, aw, beside);
+      if (T) { const D = primeDials(c, z, k, aw, ah - T.h - z.bandGap); if (D) stack.push({ mode: 'stack', T, D, score: Math.min(T.score, D.score) }); }
+      if (stack.length) continue;
+      const T2 = primeText(c, z, k, s, aw - z.colGap - narrowest, beside);
+      if (T2 && T2.h <= ah) { const D = primeDials(c, z, k, aw - z.colGap - T2.w, ah); if (D) split.push({ mode: 'split', T: T2, D, score: Math.min(T2.score, D.score) }); }
+    }
+    // better: a larger weaker part; then the caption under the least-prime dial; then larger dials
+    const better = (x, a) => { const d = x.score - a.score; if (Math.abs(d) > 1e-9) return d > 0; if (x.T.beside !== a.T.beside) return !x.T.beside; return (x.D.r || 0) > (a.D.r || 0) + 1e-9; };
+    const pool = stack.length ? stack : split;
+    return pool.length ? { ok: true, z, pick: pool.reduce((a, x) => (better(x, a) ? x : a)) } : { ok: false, z };
+  }
+  function primeLayout(c, W, H, k) {
+    inkCache.clear();
+    const free = hudFree(H), aw = W - 2 * PR.margin, ah = free.bottom - free.top;
+    let plan = primePlan(c, PR, k, W, free), fallback = false;
+    if (!plan.ok) {
+      let lo = PR.tMin, hi = 1;
+      const low = primePlan(c, shrunk(lo), k, W, free);
+      if (low.ok) { plan = low; for (let i = 0; i < 8; i++) { const mid = (lo + hi) / 2, p = primePlan(c, shrunk(mid), k, W, free); if (p.ok) { lo = mid; plan = p; } else hi = mid; } }
+    }
+    if (!plan.ok) {   // nothing fits even shrunk: the most compact stack, pinned under the HUD
+      const z = shrunk(PR.tMin), sMin = PR_SCALES[PR_SCALES.length - 1];
+      const T = primeText(c, z, k, sMin, aw, true, true), D = primeDials(c, z, k, aw, ah - T.h - z.bandGap, true);
+      plan = { ok: false, z, pick: { mode: 'stack', T, D, score: Math.min(T.score, D.score) } };
+      fallback = true;
+    }
+    const z = plan.z, { mode, T, D } = plan.pick, gap = z.bandGap;
+    // where the bands go: one centred column ('stack'), or the dials beside a column of bands 2–4 ('split')
+    let dc, dTop, tc, tTop;
+    if (mode === 'stack') {
+      const total = D.h + gap + T.h, top = free.top + Math.max(0, (ah - total) / 2);
+      dc = W / 2; dTop = top; tc = W / 2; tTop = top + D.h + gap;
+    } else {
+      const left = (W - (D.w + z.colGap + T.w)) / 2;
+      dc = left + D.w / 2; dTop = free.top + Math.max(0, (ah - D.h) / 2);
+      tc = left + D.w + z.colGap + T.w / 2; tTop = free.top + Math.max(0, (ah - T.h) / 2);
+    }
+    // band 1: the listed dials, or the sentence about the empty list
+    const dials = [];
+    let empty = null;
+    if (k) {
+      const d = D.G.geo(D.r);
+      for (let i = 0; i < k; i++) {
+        const row = Math.floor(i / D.cols), col = i % D.cols, n = Math.min(D.cols, k - row * D.cols), p = PRIMES[i];
+        const x = dc + (col - (n - 1) / 2) * (2 * d.half + d.gx), y = dTop + d.up + row * (d.up + d.down + d.gy), spec = dialSpec(c, z, D.r, p, EUCLID[k].Q % p);
+        dials.push({ x, y, spec, box: [x - spec.left, y - spec.up, x + spec.right, y + spec.down] });
+      }
+    } else {
+      const m = D.t.m, start = dc - (m.x0 + m.x1) / 2, base = dTop + m.asc;
+      empty = { text: emptyLine(), font: fontOf(D.t.px, 400, TRV.fonts.body), px: D.t.px, x: dc, start, base, box: [start + m.x0, base - m.asc, start + m.x1, base + m.desc] };
+    }
+    const union = (bs) => bs.reduce((a, b) => [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[2], b[2]), Math.max(a[3], b[3])]);
+    const gridBox = k ? union(dials.map((d) => d.box)) : empty.box;
+    // bands 2–4: Q, its factorization, the least-prime dial, top to bottom
+    const line = (str, fit, top) => { const m = fit.m, start = tc - (m.x0 + m.x1) / 2, base = top + m.asc; return { text: str, x: tc, start, base, font: fit.px, box: [start + m.x0, base - m.asc, start + m.x1, base + m.desc] }; };
+    const eq = line(T.eqS, T.e, tTop), fac = line(T.facS, T.f, tTop + T.hE + gap);
+    const lTop = tTop + T.hE + gap + T.hF + gap, lx = tc - (T.lpf.left + T.lpf.right) / 2 + T.lpf.left, ly = lTop + T.lpf.up;
+    const lpf = { x: lx, y: ly, spec: T.lpf, box: [lx - T.lpf.left, ly - T.lpf.up, lx + T.lpf.right, ly + T.lpf.down] };
+    // separation of two boxes: positive iff they are disjoint (the larger of the horizontal and the vertical clearance)
+    const sep = (a, b) => Math.max(b[0] - a[2], a[0] - b[2], b[1] - a[3], a[1] - b[3]);
+    const bands = { dials: gridBox, eq: eq.box, fac: fac.box, lpf: lpf.box }, names = Object.keys(bands), pairs = {};
+    for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++) pairs[`${names[i]}|${names[j]}`] = sep(bands[names[i]], bands[names[j]]);
+    return { W, H, k, primes: PRIMES.length, free, fallback, shrink: z.t, mode, scale: T.s, eqFont: T.e.px, facFont: T.f.px, r: k ? D.r : null, lpfR: T.lpf.r,
+      cols: D.cols, rows: D.rows, dials, empty, gridBox, eq, fac, lpf, bands, pairs, bandGap: gap,
+      gaps: { gridToBand: sep(gridBox, union([eq.box, fac.box, lpf.box])), eqToFac: sep(eq.box, fac.box), textToLpf: sep(union([eq.box, fac.box]), lpf.box), min: Math.min(...Object.values(pairs)) } };
+  }
+
   function drawPrime(g) {
     const c = g.ctx, W = g.W, H = g.H, k = step(), E = EUCLID[k], q = E.factors[0];
-    const cols = Math.max(1, Math.min(k, 6)), rowsN = Math.max(1, Math.ceil(k / 6)), areaW = W - 60, areaH = H - 78 - 150;
-    const r = Math.min(areaW / (cols * 2.5), areaH / (rowsN * 2.55), 74), top = 78 + Math.max(0, (areaH - rowsN * r * 2.55) / 2);
-    const dial = (x, y, rad, p, rem, col, big) => {
+    // the HUD text first: its measured box is part of the layout
+    $('hudBig').textContent = L(`清单里有 ${k} 个素数`, `${k} PRIME${k === 1 ? '' : 'S'} ON THE LIST`);
+    $('hudSub').textContent = L(`每只钟的指针都指着 1，没有一只指着红色的 0；Q 的最小素因子 ${q} 不在清单里`, `Every hand points at 1 and none at the red 0; the least prime factor ${q} of Q is not on the list`);
+    const Lay = primeLayout(c, W, H, k);
+    primeLast = Lay;
+    const dial = (x, y, d, col) => {
+      const rad = d.r, p = d.p, rem = d.rem;
       c.strokeStyle = TRV.alpha(col, 0.55); c.lineWidth = 1.2; c.beginPath(); c.arc(x, y, rad, 0, kit.TAU); c.stroke();
       if (p <= 64) for (let t = 0; t < p; t++) { const a = -Math.PI / 2 + kit.TAU * t / p; c.fillStyle = t === 0 ? P.warn : TRV.alpha(col, 0.7); c.beginPath(); c.arc(x + rad * Math.cos(a), y + rad * Math.sin(a), t === 0 ? 3 : 1.8, 0, kit.TAU); c.fill(); }
       else { c.fillStyle = P.warn; c.beginPath(); c.arc(x, y - rad, 3, 0, kit.TAU); c.fill(); }
       const a = -Math.PI / 2 + kit.TAU * rem / p; c.save(); c.shadowColor = col; c.shadowBlur = 8; c.strokeStyle = col; c.lineWidth = 2.2; c.beginPath(); c.moveTo(x, y); c.lineTo(x + rad * 0.86 * Math.cos(a), y + rad * 0.86 * Math.sin(a)); c.stroke(); c.restore();
-      c.fillStyle = P.void; c.beginPath(); c.arc(x, y, rad * 0.36, 0, kit.TAU); c.fill();
-      c.fillStyle = col; c.font = `600 ${Math.round(rad * (big ? 0.3 : 0.36))}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(String(p), x, y + 1);
-      c.fillStyle = rem === 0 ? P.magenta : P.dim; c.font = `11px ${TRV.fonts.data}`; c.textBaseline = 'top'; c.fillText(`${L('余', 'rem')} ${rem}`, x, y + rad + 7);
+      c.fillStyle = P.void; c.beginPath(); c.arc(x, y, d.inner, 0, kit.TAU); c.fill();
+      c.textAlign = 'center';
+      if (d.f) { c.fillStyle = col; c.font = dataFont(d.f, 600); c.textBaseline = 'middle'; c.fillText(String(p), x, y + 1); }
+      c.fillStyle = rem === 0 ? P.magenta : P.dim; c.font = dataFont(d.capFont); c.textBaseline = 'alphabetic';
+      if (d.beside) { c.textAlign = 'left'; c.fillText(d.cap, x + rad + PR.tick + d.capGap - d.capX0, y + (d.capAsc - d.capDesc) / 2); } else { c.textAlign = 'left'; c.fillText(d.cap, x - (d.capX0 + d.capX1) / 2, y + rad + d.capGap + d.capAsc); }
     };
-    for (let i = 0; i < k; i++) { const col = i % 6, row = Math.floor(i / 6), n = Math.min(6, k - row * 6); dial(W / 2 + (col - (n - 1) / 2) * r * 2.5, top + r + 6 + row * r * 2.55, r, PRIMES[i], E.Q % PRIMES[i], P.cyan); }
-    if (!k) { c.fillStyle = P.dim; c.font = `13px ${TRV.fonts.body}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(L('清单是空的：空乘积是 1', 'The list is empty: the empty product is 1'), W / 2, top + areaH / 2); }
-    // Q and its factorization; the least prime factor gets its own dial, hand on 0
-    const by = H - 96, rr = Math.min(36, r);
-    c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = P.ink; c.font = `600 ${W < 520 ? 14 : 18}px ${TRV.fonts.data}`;
-    const prodText = k ? PRIMES.slice(0, k).join('·') : '1', line = `Q = ${k > 7 ? `p₁⋯p${k < 10 ? '₀₁₂₃₄₅₆₇₈₉'[k] : '₁' + '₀₁₂₃₄₅₆₇₈₉'[k - 10]}` : prodText} + 1 = ${E.Q}`;
-    c.fillText(line, W / 2 - rr - 20, by - 14);
-    c.fillStyle = P.magenta; c.font = `600 ${W < 520 ? 13 : 16}px ${TRV.fonts.data}`;
-    c.fillText(E.factors.length === 1 ? L(`${E.Q} 本身是素数`, `${E.Q} is itself prime`) : `= ${E.factors.join(' × ')}`, W / 2 - rr - 20, by + 14);
-    dial(Math.min(W - rr - 30, W / 2 + c.measureText(line).width / 2 + rr + 40), by - 8, rr, q, 0, P.magenta, q > 999);
-    $('hudBig').textContent = L(`清单里有 ${k} 个素数`, `${k} PRIME${k === 1 ? '' : 'S'} ON THE LIST`);
-    $('hudSub').textContent = L(`每只钟的指针都指着 1，没有一只指着红色的 0；Q 的最小素因子 ${q} 不在清单里`, `Every hand points at 1 and none at the red 0; the least prime factor ${q} of Q is not on the list`);
+    for (const d of Lay.dials) dial(d.x, d.y, d.spec, P.cyan);
+    c.textAlign = 'left'; c.textBaseline = 'alphabetic';
+    if (Lay.empty) { c.fillStyle = P.dim; c.font = Lay.empty.font; c.fillText(Lay.empty.text, Lay.empty.start, Lay.empty.base); }
+    // Q, then its factorization, then the least prime factor on its own dial, hand on 0
+    c.fillStyle = P.ink; c.font = dataFont(Lay.eq.font, 600); c.fillText(Lay.eq.text, Lay.eq.start, Lay.eq.base);
+    c.fillStyle = P.magenta; c.font = dataFont(Lay.fac.font, 600); c.fillText(Lay.fac.text, Lay.fac.start, Lay.fac.base);
+    dial(Lay.lpf.x, Lay.lpf.y, Lay.lpf.spec, P.magenta);
   }
 
   /* ---------- the two plots under the stage ---------- */
@@ -481,9 +686,11 @@
     if ($('legend')._h !== html) { $('legend').innerHTML = html; $('legend')._h = html; }
   }
 
+  // readouts and legend first: the prime stage measures the legend it has to keep clear of
   const paint = kit.painter(() => {
+    drawText();
     if (S.scene === 'cos') drawCos(); else { const g = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }); ({ diag: drawDiag, fiber: drawFiber, poly: drawPoly, ptr: drawPtr, prime: drawPrime })[S.scene](g); }
-    drawPlots(); drawText();
+    drawPlots();
   }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
@@ -573,6 +780,8 @@
         hamming: S.rows.map((r) => hamming(r, d)), n: sides(Math.min(k, 12)), gap: gap(sides(Math.min(k, 12))), x0: S.x0, xk: xs[Math.min(k, KCOS)], xstar: XSTAR, zoom: S.zoom, euclid: EUCLID[Math.min(k, PRIMES.length)], tpoint: S.tpoint,
         lat: S.lat.join(''), fiber: fiberFacts(S.lat), pN: S.pN, shape: S.shape, ell: ell(), c: pointer(S.pN, S.shape), gammaAbs: Math.abs(gamma(pointer(S.pN, S.shape), ell())), bound: apothem(S.pN, ell()) };
     },
+    /** The last prime-stage layout: free band, sizes, the box of every dial, of Q, its factorization and the least-prime-factor dial, and the gaps between the bands (canvas CSS px). */
+    get prime() { return S.scene === 'prime' && primeLast ? JSON.parse(JSON.stringify(primeLast)) : null; },
     seek: (t) => { clock.pause(); clock.set(t); }, taylor, node: (a) => { const b = $('cv').getBoundingClientRect(), h = fiberHit[a]; return [b.left + h.x, b.top + h.y]; }, cell: (i, j) => { const b = $('cv').getBoundingClientRect(); return [b.left + hit.gx + (j + 0.5) * hit.s, b.top + hit.gy + (i + 0.5) * hit.s]; }
   };
   window.TRV_THUMB = () => { S.N = 8; S.seed = 5; S.rows = makeList(8, 5); setScene('diag', 8); paint.now(); };

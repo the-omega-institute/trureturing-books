@@ -221,5 +221,88 @@ await page.click('[data-lang-set="en"]'); await pick('rational'); await seek(3);
 check('English HUD names the convergent', (await text('#hudBig')) === 'CONVERGENT 17/23');
 await page.click('[data-lang-set="zh"]');
 
+/* ---------- Newton over every supported start: the local law, the denominators, the ratios ---------- */
+// The start slider is swept in hundredths over its whole range for each map, through the slider's own input event, and
+// FPC_DEBUG.state.newton is read at every start. Recomputed here: the 90-digit Newton orbit and 1 − f′(xₖ) at each step;
+// C = max|F″| / (2 min|F′|) for F(x) = x − f(x) by sampling the closed interval [x* − ρ, x* + ρ] in doubles (the page
+// evaluates the two ends in closed form); which steps start inside |δ| ≤ ρ; and |δⱼ| / δⱼ₋₁² wherever |δⱼ| ≥ RES.
+const RHO = 0.5, RES = 1e-60, DEN_FLOOR = 1e-9, PHd = toNum(PH);
+const FF = { cos: { s: THd, F1: (x) => 1 + Math.sin(x), F2: (x) => Math.cos(x) }, golden: { s: PHd, F1: (x) => 1 + 1 / (x * x), F2: (x) => -2 / x ** 3 } };
+const localC = (map, rho) => { const { s, F1, F2 } = FF[map]; let hi = 0, lo = Infinity; for (let i = 0; i <= 20000; i++) { const x = s - rho + (2 * rho * i) / 20000; hi = Math.max(hi, Math.abs(F2(x))); lo = Math.min(lo, Math.abs(F1(x))); } return hi / (2 * lo); };
+const quadAt = (map) => { const { s, F1, F2 } = FF[map]; return Math.abs(F2(s) / (2 * F1(s))); };
+const near = (a, b, r = 1e-9, z = 1e-62) => Number.isFinite(a) && Math.abs(a - b) <= r * Math.abs(b) + z;
+const sweep = async (map) => {
+  await page.click(`#mapChips [data-map="${map}"]`); await settle(page);
+  const out = await page.evaluate(() => {
+    const el = document.getElementById('x0'), lo = Math.round(Number(el.min) * 100), hi = Math.round(Number(el.max) * 100), rows = [];
+    for (let c = lo; c <= hi; c++) {
+      el.value = String(c / 100); el.dispatchEvent(new Event('input', { bubbles: true }));
+      const s = window.FPC_DEBUG.state; rows.push({ c, x0: s.x0, scene: s.scene, map: s.map, u: s.u, newton: s.newton });
+    }
+    return { lo, hi, rows };
+  });
+  await settle(page);
+  return out;
+};
+await page.click('#sceneChips [data-scene="newton"]'); await settle(page);
+for (const map of ['cos', 'golden']) {
+  const { lo, hi, rows } = await sweep(map), C = localC(map, RHO), M = FX[map];
+  check(`Newton, ${map}: the sweep covers every start of the slider in hundredths (${lo / 100} … ${hi / 100}), on the Newton scene`,
+    rows.length === hi - lo + 1 && rows.length > 400 && rows.every((r) => r.scene === 'newton' && r.map === map && Math.round(r.x0 * 100) === r.c && r.newton), `${rows.length} rows`);
+  const bad = { bound: [], orbit: [], den: [], local: [], ratio: [], law: [] };
+  let denMin = Infinity, denAt = null, nulls = 0, present = 0, governed = 0;
+  for (const r of rows) {
+    const N = r.newton, tag = `x₀=${(r.c / 100).toFixed(2)}`;
+    if (!N) { bad.bound.push(`${tag}: no newton state`); continue; }
+    // the neighbourhood and its constant
+    if (!(N.rho === RHO && near(N.C, C) && near(N.Crho, C * RHO) && N.Crho < 1 && N.res === RES && near(N.quad, quadAt(map)) && N.quad <= N.C)) bad.bound.push(`${tag}: ρ ${N.rho}, C ${N.C} vs ${C}, Cρ ${N.Crho}, res ${N.res}, quad ${N.quad} vs ${quadAt(map)}`);
+    // the orbit and the denominator 1 − f′(xₖ) at every step, from the 90-digit arithmetic
+    const o = orbit(map, r.c, 'newton', 5), den = o.xs.slice(0, 5).map((x) => toNum(ONE - M.fp(x)));
+    if (!(r.u.length === 6 && r.u.every((u, j) => near(u, o.d[j])))) bad.orbit.push(`${tag}: ${r.u.map((u) => u.toExponential(3))} vs ${o.d.map((u) => u.toExponential(3))}`);
+    const dmin = Math.min(...N.den.map(Math.abs));
+    if (!(N.den.length === 5 && N.den.every((d, j) => Number.isFinite(d) && Math.abs(d) >= DEN_FLOOR && near(d, den[j]) && (map !== 'golden' || d > 1)) && N.denMin === dmin)) bad.den.push(`${tag}: ${N.den} vs ${den}, denMin ${N.denMin}`);
+    if (dmin < denMin) { denMin = dmin; denAt = tag; }
+    // which steps the quadratic law governs: those that start inside |δ| ≤ ρ
+    const inside = o.d.map((_, j) => j > 0 && Math.abs(o.d[j - 1]) <= RHO);
+    if (!(N.local.length === 6 && N.local.every((f, j) => f === inside[j]))) bad.local.push(`${tag}: ${N.local} vs ${inside}`);
+    for (let j = 1; j < 6; j++) {
+      const a = Math.abs(o.d[j]), q = N.ratio[j];
+      if (Math.abs(Math.log10(a / RES)) < 1e-3) continue;   // at RES itself either answer is honest
+      if (a < RES) { if (q !== null) bad.ratio.push(`${tag}: step ${j} |δ| = ${a.toExponential(2)} < RES but ratio ${q}`); else nulls++; continue; }
+      const want = a / o.d[j - 1] ** 2;
+      if (!(typeof q === 'number' && q > 0 && near(q, want, a >= 1e-50 ? 1e-6 : 1e-3, 0))) { bad.ratio.push(`${tag}: step ${j} ratio ${q} vs ${want}`); continue; }
+      present++;
+      // inside the neighbourhood the step obeys |δⱼ| ≤ C·δⱼ₋₁², and C·ρ < 1 keeps the next start inside too
+      if (inside[j]) { governed++; if (!(q <= C * (1 + 1e-9) && (j === 5 || inside[j + 1]))) bad.law.push(`${tag}: step ${j} ratio ${q} > C ${C} or left the neighbourhood`); }
+    }
+    if (N.ratio.length !== 6 || N.ratio[0] !== null) bad.ratio.push(`${tag}: ratio ${N.ratio}`);
+  }
+  check(`Newton, ${map}: ρ = 0.5 at every start; C = ${C.toFixed(4)} and C·ρ = ${(C * RHO).toFixed(4)} < 1 match max|F″| / (2 min|F′|) sampled on [x* − ρ, x* + ρ]; the limit |F″(x*)/(2F′(x*))| ≤ C`, bad.bound.length === 0, bad.bound.slice(0, 2).join(' | '));
+  check(`Newton, ${map}: at every start the six errors δ₀ … δ₅ agree with the 90-digit orbit (relative 1e-9)`, bad.orbit.length === 0, bad.orbit.slice(0, 2).join(' | '));
+  check(`Newton, ${map}: at every start every 1 − f′(xₖ) is finite, agrees with the 90-digit value and is at least 10⁻⁹ in size${map === 'golden' ? ' (above 1, since x > 0)' : ''}; denMin is the smallest`, bad.den.length === 0 && denMin >= DEN_FLOOR, `${bad.den.slice(0, 2).join(' | ')} smallest ${denMin} at ${denAt}`);
+  check(`Newton, ${map}: a step is marked local exactly when the previous error has |δ| ≤ ρ`, bad.local.length === 0, bad.local.slice(0, 2).join(' | '));
+  check(`Newton, ${map}: |δⱼ| / δⱼ₋₁² is absent below RES = 10⁻⁶⁰ and present and correct above it (both cases occur)`, bad.ratio.length === 0 && nulls > 0 && present > 0, `${bad.ratio.slice(0, 2).join(' | ')} (null ${nulls}, present ${present})`);
+  check(`Newton, ${map}: every local step obeys |δⱼ| ≤ C·δⱼ₋₁² and its successor starts inside again (${governed} steps)`, bad.law.length === 0 && governed > 0, bad.law.slice(0, 2).join(' | '));
+}
+// the start with the smallest denominator throws the orbit far away: the stage still draws it
+await page.click('#mapChips [data-map="cos"]'); await setRange('x0', -0.8); s = await state();
+check('Newton from x₀ = −0.80 (the smallest 1 − f′ of any start) draws, and its errors agree', s.scene === 'newton' && s.x0 === -0.8 && s.u.every((u, k) => near(u, orbit('cos', -80, 'newton', 5).d[k])));
+
+/* the plain iteration is untouched by the Newton bookkeeping */
+await page.click('#sceneChips [data-scene="iter"]'); await settle(page);
+let plainOk = true; const plainBad = [];
+for (const [map, starts] of [['cos', [-150, 100, 300]], ['golden', [20, 100, 500]]]) {
+  await page.click(`#mapChips [data-map="${map}"]`); await settle(page);
+  for (const c of starts) {
+    await setRange('x0', c / 100); s = await seek(30);
+    const o = orbit(map, c, 'iter', 60);
+    const ok = s.scene === 'iter' && s.map === map && s.newton === null && s.picardSteps === null && s.max === 60 && s.u.length === 61 && s.u.every((u, k) => near(u, o.d[k])) && near(s.ratio, o.d[30] / o.d[29], 1e-9, 0);
+    if (!ok) plainBad.push(`${map} x₀=${c / 100}: newton ${JSON.stringify(s.newton)}, max ${s.max}, u[30] ${s.u[30]} vs ${o.d[30]}`);
+    plainOk = plainOk && ok;
+  }
+}
+check('the plain iteration is unchanged: no Newton state, 60 steps, the 90-digit orbit and the step ratio, for both maps from both ends of the slider and from 1', plainOk, plainBad.slice(0, 2).join(' | '));
+await page.click('#mapChips [data-map="cos"]');
+
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

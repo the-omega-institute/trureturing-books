@@ -407,13 +407,13 @@ The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-d
 1. Close to $\theta^*$, by how much does one press of the cosine key actually shrink the error?
 
 ::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
-**Each press multiplies the error by −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line; every step is closer, yet no step lands exactly on $\theta^*$ ($\theta_0 = 1$ lies in $[0, 1]$ and is not $\theta^*$, so the error ratio tends to $-\sqrt{1 - (\theta^*)^2}$, an application of existing results, clauses 22–23 of [@ex-ch33-mutual-cosine-monotonic-lock]; the decimals are numerical).
+**Near the fixed point, the error ratio tends to about −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line; every step is closer, yet no step lands exactly on $\theta^*$ ($\theta_0 = 1$ lies in $[0, 1]$ and is not $\theta^*$, so the error ratio tends to $-\sqrt{1 - (\theta^*)^2}$, an application of existing results, clauses 22–23 of [@ex-ch33-mutual-cosine-monotonic-lock]; the decimals are numerical).
 :::
 
 2. If the ruler reads not only the projection $\cos\theta$ but also the orthogonal component $\sin\theta$, how much faster does the loop close?
 
 ::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
-**Follow the tangent, double the digits.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. The view zooms along and stops at step $2$, about $10^{-4}$ wide. The amber $x_2$ has just come down the magenta tangent of the previous step onto the grey line, $2.78\times10^{-5}$ from the white ring $\theta^*$; at this magnification the cyan curve is already too straight to tell from its tangent. The correct decimal digits run $0$, $1$, $4$, the error being roughly squared at each step; the plain iteration needs $24$ steps to match this step (numerical check in [@ex-dottie-rate-newton-rational]).
+**Follow the tangent: near the fixed point, digits double asymptotically.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. Once it is near the fixed point, the view zooms along and stops at step $2$, about $10^{-4}$ wide. The amber $x_2$ has just come down the magenta tangent of the previous step onto the grey line, $2.78\times10^{-5}$ from the white ring $\theta^*$; at this magnification the cyan curve is already too straight to tell from its tangent. The correct decimal digits run $0$, $1$, $4$, with the error asymptotically squared at each step; the plain iteration needs $24$ steps to match this step (numerical check in [@ex-dottie-rate-newton-rational]).
 :::
 
 3. How close to $\cos q = q$ can a ruler with finitely many rational tick marks get?
@@ -457,7 +457,7 @@ $$
 \delta_{k+1} \;=\; \frac{\theta^*}{2\,(1 + \lambda)}\,\delta_k^2 + O(\delta_k^3), \qquad \frac{\theta^*}{2\,(1 + \lambda)} \approx 0.2208054 .
 $$
 
-Picard iteration adds a fixed number of digits per step; Newton's iteration roughly doubles the number of correct digits per step.
+Picard iteration adds a fixed number of digits per step; once it is near the fixed point, Newton's iteration asymptotically doubles the number of correct digits.
 
 **Third question: the residual is the distance to the fixed point.** For $q \in [0, 1]$, apply the mean value theorem to $F$ and use $F(\theta^*) = 0$: there is some $\xi$ between $q$ and $\theta^*$ with
 
@@ -532,7 +532,7 @@ Every entry of the last column is below $1 + \sin 1 \approx 1.84$, in agreement 
 :::
 
 ::: {.viz src="fixed-point-convergence" preset="rational" height="500"}
-**The seam narrows but never closes.** The convergents $2/3, 3/4, 14/19, 17/23, 694/939, \dots$ of $\theta^*$ land one by one on the grey line (amber marks the current one), and the magenta upright is the drop from there to the cosine curve, the residual $\lvert\cos q - q\rvert$. The upright always stays inside the wedge of the two dashed grey lines (slopes $0$ and $-\sin 1$); with the view magnified ten million times, it is still there.
+**The seam narrows but never closes.** The convergents $2/3, 3/4, 14/19, 17/23, 694/939, \dots$ of $\theta^*$ land one by one on the grey line (amber marks the current one), and the magenta upright is the drop from there to the cosine curve, the residual $\lvert\cos q - q\rvert$. Its endpoint on the cosine curve always stays inside the wedge of the two dashed grey lines (slopes $0$ and $-\sin 1$); with the view magnified ten million times, it is still there.
 :::
 
 The last table of [@ex-dottie-rate-newton-rational] shows that refining the tick marks does not automatically buy a better reading. What sets the width of the seam is not the size of the denominator but its arithmetic relation to $\theta^*$: a ruler with twenty-three divisions happens to line up almost exactly at its seventeenth mark, and a ruler with a thousand divisions does not.
@@ -916,7 +916,7 @@ So two statements hold together without contradiction: analytically, each of $\p
 **Where the fixed point lives: the half-time of a cycloid.** How the auxiliary equation $\eta + \sin\eta = \pi/2$ appears in Kepler's equation and Newtonian radial free fall is worked out in [@ex-dottie-free-fall].
 
 ::: {.example #ex-dottie-free-fall title="Half-Time Free Fall: When Half the Fall Time Has Elapsed, the Distance Remaining Is (1 + sin θ*)/2"}
-**Literature result, not formalized in this book.** Substituting $E = \pi - \eta$ into $\eta + \sin\eta = \pi/2$ from [@ex-dottie-pi-series] yields Kepler's equation $E - \sin E = \frac{\pi}{2}$ at eccentricity $e = 1$ and mean anomaly $M = \pi/2$, solved by $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$. A Kepler orbit of eccentricity $1$ degenerates into a radial segment, corresponding in Newtonian mechanics to a particle falling radially from rest at distance $r_0$ in the gravitational field of a central mass $M$. Energy conservation gives $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$, whose solution is the cycloid parametrization:
+**Literature result, not formalized in this book.** Substituting $E = \pi - \eta$ into $\eta + \sin\eta = \pi/2$ from [@ex-dottie-pi-series] yields Kepler's equation $E - \sin E = \frac{\pi}{2}$ at eccentricity $e = 1$ and mean anomaly $M = \pi/2$, solved by $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$. Here we take the zero-angular-momentum limit of a bound ellipse ($e \to 1$), which degenerates into a radial segment; the motion along it is the Newtonian radial free fall from rest at distance $r_0$ in the gravitational field of a central mass $M$. Energy conservation gives $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$, whose solution is the cycloid parametrization:
 
 $$
 r(\eta) \;=\; \frac{r_0}{2}\,(1 + \cos\eta), \qquad t(\eta) \;=\; \frac{t_{\mathrm{ff}}}{\pi}\,(\eta + \sin\eta), \qquad \eta \in [0, \pi],

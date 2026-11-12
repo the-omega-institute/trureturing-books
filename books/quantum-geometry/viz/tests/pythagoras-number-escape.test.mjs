@@ -51,6 +51,10 @@ check('each convergent is closer to √d than every fraction with a smaller deno
 check('m² − d·n² = −1: the page agrees with an exhaustive search for every d, and with the parity of the period', negOk, `${minusSeen} of 23 solvable`);
 await pick('locked'); s = await state();
 check('LOCKED: d = 7 has an even period, gaps −3, +2, −3, +1, and no solution of −1', s.d === 7 && s.period === 4 && s.deltas.slice(0, 4).join() === '-3,2,-3,1' && s.negPell === null && !s.deltas.includes('-1'));
+// an even period restricts the gap only among ±1: of the two values ±1 only +1 occurs, while the gap itself also takes −3 and +2
+const lockedNote = await page.textContent('#roNote'), pellDrawer = await page.evaluate(() => ['zh', 'en'].map((l) => document.querySelector(`#drawer .sheet > div.${l}`).textContent));
+check('LOCKED: the readout and both drawers state the even-period case as “of ±1 only +1”, not as an unrestricted “only +1”', s.deltas.slice(0, 4).some((v) => v !== '1' && v !== '-1')
+  && /±1 两个值里只出现 \+1/.test(lockedNote) && /±1 两个值里只出现 \+1/.test(pellDrawer[0]) && /of the two values ±1 only \+1 occurs/.test(pellDrawer[1]) && !/只能取到 \+1/.test(pellDrawer[0]) && !/only \+1 does/.test(pellDrawer[1]) && !/只在 \+1 这一支上/.test(lockedNote), lockedNote);
 await setRange('dsel', DS.indexOf(5)); s = await state();
 check('d = 5: the legend names the grey rings on m² − 5n² = ±4', s.d === 5 && (await page.textContent('#legend')).includes('±4'));
 {
