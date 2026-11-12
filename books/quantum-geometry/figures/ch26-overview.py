@@ -69,7 +69,11 @@ def panel_sandwich(p):
     sp.arrow(v, "dim", 2.0)
     sp.arrow(w, "now", 2.6)
     sp.label(v, "*v*", dx=-8, dy=4, size=14, color="dim", anchor="end", halo=True)
-    sp.label(w, "*RvR̃*", dx=6, dy=-6, size=14, color="now", weight=600)
+    sp.label(w, "*RvR*", dx=6, dy=-6, size=14, color="now", weight=600)
+    # Draw the reverse tilde above the final R as a curve, also in PDF.
+    x, y = sp.xy(w)
+    x, y = x + 6 + figkit.text_width("Rv", 14) + 1, y - 18
+    p.path(f"M{x} {y} c2 -3 4 3 7 0", "now", 1.2)
     p.text(118, 280, p.t("半角 + 半角 = θ", "half + half = θ"), size=13, color="area", anchor="middle")
 
 
@@ -97,7 +101,10 @@ def panel_zyz(p):
     sp.dot(start, "ink", 4.6, ring="bg")
     sp.label(start, "*e*_{1}", dx=-10, dy=6, size=14, color="ink", anchor="end")
     sp.arrow(end, "now", 2.6)
-    sp.label(end, "*Re*_{1}*R̃*", dx=8, dy=-4, size=14, color="now", weight=600)
+    sp.label(end, "*Re*_{1}*R*", dx=8, dy=-4, size=14, color="now", weight=600)
+    x, y = sp.xy(end)
+    x, y = x + 8 + figkit.text_width("Re", 14) + figkit.text_width("1", 14 * 0.72) + 1, y - 16
+    p.path(f"M{x} {y} c2 -3 4 3 7 0", "now", 1.2)
     p.text(118, 280, "(α, β, γ) = (0.37, −0.81, 0.52)", size=13, color="dim", anchor="middle")
 
 
