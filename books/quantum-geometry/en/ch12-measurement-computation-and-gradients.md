@@ -117,9 +117,19 @@ $$
 Geometrically, instead of nudging the sphere by a tiny angle $\delta\theta \ll 1$, the observer evaluates the expectation value at two **orthogonal $90^\circ$ shifts** on the sphere. Keep the boundary explicit: [@prop-measurement-gradient-flow] certifies the infinitesimal commutator derivative and its realness, whereas the finite $\pm\pi/2$ shift rule relies additionally on the single-gate involutory Pauli frequency expansion ([@rem-mbqc-gradients-literature]).
 :::
 
+Once the two settings sit only a small step $\pm h$ apart instead of $90^\circ$, the difference is no longer exact: for $f = \cos\theta$, the chord through $\theta \pm h$ has $\sin h / h$ times the slope of the tangent, about $4.5\%$ short at $h = 30^\circ$; making $h$ smaller shrinks this gap like $h^2$, but divides the same shot noise by a smaller $2h$ (the comparison at the start of this chapter).
+
+::: {.viz src="parameter-shift" preset="step" height="500"}
+**A small-step difference always falls a little short.** The same $f = \cos\theta$, with the amber point at $\theta = 60^\circ$; the magenta chord through the points $\pm 30^\circ$ away is flatter than the dashed tangent, and on the gauge the magenta bar is $4.5\%$ shorter than the tangent ($\sin h / h = 0.955$), while the cyan bar (half the difference a quarter turn each way) sits on the tangent.
+:::
+
+The two-point rule with a quarter turn each way has no such gap: it is an identity for a first harmonic, at any angle and on any such curve.
+
 ::: {.viz src="parameter-shift" preset="anywhere" height="500"}
 **Another angle, another curve: still exact.** A tilted state and measured axis give the curve $f = c + a\cos\theta + b\sin\theta$, raised by the constant $c$ and shifted in phase. As $\theta$ sweeps a full turn, the cyan bar on the gauge stays on the dashed tangent line while the magenta bar (the $\pm 30^\circ$ small-step difference) always falls short; the constant $c$ cancels in the difference ([@rem-parameter-shift-rule-literature]).
 :::
+
+The curve and the shots come together in the full lab below: the smaller $h$, the smaller the truncation gap and the wider the shot-noise scatter.
 
 ::: {.viz src="parameter-shift" height="560"}
 **The parameter-shift rule: the full lab.** Two scenes on one rail: the curve (drag the curve or the arrow in the dial to set the angle, switch the curve, change the small step $h$) and the shots (change the number of shots $N$ per setting and watch how the two scatters change with $N$ and $h$).
