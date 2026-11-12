@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 BOOK = ROOT / "books" / "quantum-geometry"
 
-SIZE = (548, 300)
+SIZE = (500, 300)    # labels of 14 at most 500 wide: 10 px or more in a phone column of 358
 
 
 def reading_order():
@@ -90,7 +90,7 @@ ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 
 def draw(fig):
     t = fig.t
-    ax = fig.axes(56, 62, 470, 180, (0.4, 40.6), (0, 38))
+    ax = fig.axes(46, 62, 446, 180, (0.4, 40.6), (0, 38))
     # part bands
     parts = {}
     for i, (_, part, _) in enumerate(ROWS, start=1):
@@ -101,17 +101,22 @@ def draw(fig):
         if part % 2 == 1 and roman:
             fig.rect(x0, ax.y, x1 - x0, ax.h, color=None, fill="faint", fill_opacity=0.22)
         if roman:
-            fig.text((x0 + x1) / 2, ax.y - 6, roman, size=12, color="dim", anchor="middle")
+            fig.text((x0 + x1) / 2, ax.y - 6, roman, size=14, color="dim", anchor="middle")
     ax.grid(ys=(10, 20, 30))
+    heights = [n for _, _, n in ROWS]
     for i, (label, _, n) in enumerate(ROWS, start=1):
         x0, x1 = ax.X(i - 0.34), ax.X(i + 0.34)
         fig.rect(x0, ax.Y(n), x1 - x0, ax.Y(0) - ax.Y(n), color="lean", fill="lean", fill_opacity=0.45, width=1.1)
         if n >= 13:
-            fig.text((x0 + x1) / 2, ax.Y(n) - 5, str(n), size=13, color="lean", anchor="middle", weight=600)
+            # a number wider than its bar leans away from a taller neighbour
+            right = heights[i] if i < len(heights) else 0
+            left = heights[i - 2] if i >= 2 else 0
+            x, anchor = ((x1, "end") if right > n else (x0, "start") if left > n else ((x0 + x1) / 2, "middle"))
+            fig.text(x, ax.Y(n) - 5, str(n), size=14, color="lean", anchor=anchor, weight=600)
     ticks = [1, 5, 10, 15, 20, 25, 30, 35, 40]
-    ax.xaxis(ticks=ticks, labels=[str(v) for v in ticks[:-1]] + [t("终", "C")], size=12)
-    fig.text(ax.x + ax.w / 2, ax.Y(0) + 38, t("章", "chapter"), size=13, color="dim", anchor="middle")
-    ax.yaxis(ticks=(0, 10, 20, 30), size=12)
+    ax.xaxis(ticks=ticks, labels=[str(v) for v in ticks[:-1]] + [t("终", "C")], size=14)
+    fig.text(ax.x + ax.w / 2, ax.Y(0) + 40, t("章", "chapter"), size=14, color="dim", anchor="middle")
+    ax.yaxis(ticks=(0, 10, 20, 30), size=14)
     fig.text(8, 20, t("定理环境里 lean= 引用的冻结定理", "frozen theorems cited with lean= in theorem environments"),
-             size=13, color="dim")
+             size=14, color="dim")
     fig.text(fig.width - 8, 20, t(f"合计 {TOTAL}", f"total {TOTAL}"), size=14, color="lean", weight=600, anchor="end")
