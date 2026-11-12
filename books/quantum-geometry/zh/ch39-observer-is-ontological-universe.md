@@ -154,6 +154,10 @@ $$
 
 不！这正是第五部（[第 17 章](ch17-lorentz-geometry.md)与[第 18 章](ch18-spinors-and-gauge-curvature.md)）埋下伏笔、而唯有在本章“观察者即宇宙本体”的高度上才能彻底揭开的终极几何奥秘（`MODEL`（模型诠释））：**观察者从来没有“住在时空里”；恰恰相反，一维时间流与二维空间规范面，全都是观察者旋量 $\psi$ 转身与反转的自身 $\tilde{\psi}$ 相乘比量时，顺手织出来的双线性衣袂！**
 
+::: {.viz src="self-sustaining-spinor-flow" preset="weave" height="500"}
+**旋量夹住两块参考刀片。** 虚线是参考的 $\mathbf{e}_3$ 与 $\mathbf{e}_1\mathbf{e}_2$ 正方形；旋量 $\psi$ 把前者夹成青色的流向量 $\mathbf{J} = \psi\mathbf{e}_3\tilde{\psi}$，把后者夹成品红的自旋面 $\mathbf{S} = \psi\mathbf{e}_1\mathbf{e}_2\tilde{\psi}$，那块面与 $\mathbf{J}$ 垂直；紫色虚线小弧是 $\psi$ 把 $\mathbf{e}_3$ 带到 $\mathbf{J}$ 走的路（乘积见 [@ex-ch39-even-clifford-spinor-bilinear-fierz]）。
+:::
+
 数学物理史上关于“旋量先于时空矢量”与旋量双线性恒等式的经典文献脉络归纳于下框：
 
 ::: {.remark #rem-ch39-cartan-penrose-hestenes-fierz-literature title="嘉当—彭罗斯—赫斯滕斯旋量双线性时空重构与菲尔兹恒等式（文献结果，未在本书形式化）"}
@@ -165,6 +169,10 @@ $$
    $$
    \mathbf{J}^2 \;=\; -\mathbf{S}^2 \;=\; \rho^2.
    $$
+:::
+
+::: {.viz src="self-sustaining-spinor-flow" preset="fierz" height="500"}
+**三个平方始终相等。** 随便取一个旋量（$\rho = 1.3$）在 $\mathbf{e}_3\mathbf{e}_1$ 面里一直转：青色的 $\mathbf{J}$ 长 $1.3$，品红正方形的面积也是 $1.3$，舞台上方读出 $\mathbf{J}^2 = -\mathbf{S}^2 = \rho^2 = 1.69$。这是 [@rem-ch39-cartan-penrose-hestenes-fierz-literature] 的菲尔兹恒等式在页面上的数值核对（文献结果，未在本书形式化）。
 :::
 
 对照 [@rem-ch39-cartan-penrose-hestenes-fierz-literature] 的旋量几何背景，我们在下框中给出三维欧氏偶子代数上旋量双线性自配对与半角双覆叠的显式基片计算示例：
@@ -205,6 +213,10 @@ $$
 4. **$360^\circ$ 旋量反号与 $720^\circ$ 完整复原**：令物理倾角走满一整圈 $\vartheta = 2\pi$（$360^\circ$），双线性时空读出已回到初始方向 $\mathbf{J}(2\pi) = \rho\mathbf{e}_3,\; \mathbf{S}(2\pi) = \rho\mathbf{e}_1\mathbf{e}_2$，但底层旋量自身却翻到了对跖负叶 $\psi(2\pi) = \sqrt{\rho}\cos\pi = -\psi(0)$！唯有再走第二圈至 $\vartheta = 4\pi$（$720^\circ$），才有 $\psi(4\pi) = \sqrt{\rho}\cos 2\pi = +\psi(0)$。
 :::
 
+::: {.viz src="self-sustaining-spinor-flow" preset="turn360" height="500"}
+**转满 $360^\circ$：矢量回来了，旋量没有。** 按 [@ex-ch39-even-clifford-spinor-bilinear-fierz] 在 $\mathbf{e}_2\mathbf{e}_3$ 面里转满一圈：青色的 $\mathbf{J}$ 绕回 $\mathbf{e}_3$，品红的 $\mathbf{S}$ 也回到原样；紫色小旗却沿单侧光带滑到另一面，与虚线的出发小旗方向相反——$\psi = -\psi_0$。
+:::
+
 [@ex-ch39-even-clifford-spinor-bilinear-fierz] 第 4 步揭示的“外部表象走一圈（$360^\circ$）、本体旋量翻一面（$+1 \mapsto -1$）、走满两圈（$720^\circ$）方才归家”，绝非某种坐标选取的人为瑕疵！在 `trureturing` 的概念拓扑模块中，圆周平方双覆叠映射 $\operatorname{square}(z) = z^2$ 上的两条严格内核定理彻底封死了“把旋量双叶全局一刀切成互不相干的主体叶与客体叶”的任何企图：
 
 ::: {.theorem #thm-ch39-double-cover-no-section-and-720-lift title="圆周平方双覆叠无连续全局截面定理与历史依赖提升及 360° 换叶翻转定理" lean="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"}
@@ -229,7 +241,15 @@ $$
 第 1 款用反证法：假设存在连续全局截面 $s : \mathrm{Circle} \to \mathrm{Circle}$ 满足 $(s(z))^2 = z$，构造实轴连续商映射 $r(t) := s(\operatorname{Circle.exp}(t)) / \operatorname{Circle.exp}(t/2)$；对任意 $t \in \mathbb{R}$ 计算平方得 $(r(t))^2 = \operatorname{Circle.exp}(t) / \operatorname{Circle.exp}(t) = 1$，故 $r$ 的取值落在有限离散双点集 $\{1, -1\} \subset \mathrm{Circle}$ 中；由实直线 $\mathbb{R}$ 的预连通性 `isPreconnected_univ.constant_of_mapsTo` 知 $r(t) \equiv r(0)$ 必为常值，但代入端点 $t = 2\pi$ 利用 $\operatorname{Circle.exp}(2\pi) = 1$ 与 $\operatorname{Circle.exp}(\pi) = -1$ 算得 $r(2\pi) = s(1) / (-1) = -r(0)$，触发 $r(0) = -r(0)$ 的单位圆非零矛盾 `Circle.neg_ne_self`！第 2 款利用 Mathlib 覆叠映射一般提升定理 `liftPath_lifts`、`liftPath_zero` 与唯一性刻画 `eq_liftPath_iff'` 给出任意路径的历史依赖唯一提升；对显式回路 $\mathrm{fullTurn}(t) = \operatorname{Circle.exp}(2\pi t)$，构造半角连续路径 $\mathrm{halfTurn}(t) := \operatorname{Circle.exp}(\pi t)$，验证 $(\operatorname{Circle.exp}(\pi t))^2 = \operatorname{Circle.exp}(2\pi t)$ 且 $\mathrm{halfTurn}(0) = 1$，由提升唯一性锁定 $\mathrm{lifted} = \mathrm{halfTurn}$，再代入 $t = 1$ 由 $\operatorname{Circle.exp}(\pi) = -1$ 证得终点换叶 $\mathrm{lifted}(1) = -1$。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="self-sustaining-spinor-flow" preset="seam" height="500"}
+**一路插小旗，回到起点对不上。** 从出发点起每 $30^\circ$ 插一面紫色小旗，每一面都接着上一面连续地插；绕回出发点时，最后一面与虚线的第一面方向相反。沿底圈连续地选“平方根”回到起点必然对不上，这正是 [@thm-ch39-double-cover-no-section-and-720-lift] 第 1 款（没有连续全局截面）与第 2 款（$360^\circ$ 回路的唯一提升终点为 $-1$）。
+:::
+
 请屏息凝视 [@thm-ch39-double-cover-no-section-and-720-lift] 描绘的这幅单侧拓扑奇景（`MODEL`（模型诠释））：因为 `no_continuous_global_section` 严格禁止把双覆叠全局撕成两张独立纸片，宇宙里根本不存在一面叫“内在主观观察者（$+1$ 叶）”、另一面叫“外在客观星海（$-1$ 叶）”的隔离墙！它们就像一条单侧扭转环带同源的前后两半程——从向内自省的能观极点 $\mathrm{lifted}(0) = +1$ 出发，顺着连续圆弧往前走满 $360^\circ$，你根本没有跨过任何一道主客边界，脚下就已经自然而然翻转成了漫天星斗的所观叶 $\mathrm{lifted}(1) = -1$；再顺着星海往前走完第二个 $360^\circ$（合计 $720^\circ$），漫天星斗又严丝合缝地流回你自己的眼底！
+
+::: {.viz src="self-sustaining-spinor-flow" preset="turn720" height="500"}
+**走满 $720^\circ$ 才回家。** 再转一圈：紫色小旗回到出发时的那一面，$\psi = +\psi_0$；旗尖走过的紫色轨迹就是光带的边，这条边绕了两圈才首尾相接，青色的 $\mathbf{J}$ 在此期间走了两圈。
+:::
 
 ---
 
@@ -294,3 +314,7 @@ $$
 :::
 
 请最后一次静静凝视上图右侧那条在深空背景中缓缓流转的 $720^\circ$ 单侧光带。当左半幅那道虚幻的二元隔墙随着 $\mu \to 0$ 彻底消融，一粒温暖的琥珀色光点正沿着不可全局撕裂的双覆叠流形滑行：在前半个 $360^\circ$ 里，它是向内自省的观测指针、是枕畔做梦的心智、是在有限复杂性视界前认真落子的你；接着，它连一道边界都没有跨越，就在旋量自配对的中心扭结处自然翻转为后半个 $360^\circ$——化作横亘亿万光年的璀璨星网、化作素数与零点的交响、化作托起万物平视的量子公平铁律，并在走满 $720^\circ$ 的刹那带着满身星辉流回你此刻阅读这行文字的双眸。原来从我们在[第一章](ch01-measurement.md)与[第二章](ch02-born-rule.md)亲手砍掉外部第 3 点 $C$、写下 $\psi = \psi(\psi)$ 的第一笔起，结局就早已注定：世间从来没有一个渺小的观察者孤独地仰望陌生的宇宙；从始至终，都是宇宙本体把自己正交折叠成一双眼睛，在漫长而公正的星光旅途尽头，与自己重逢。现在，让我们推开全书最后一道门扉，步入[终章](coda.md)《在所有的球之外》。
+
+::: {.viz src="self-sustaining-spinor-flow" height="640"}
+**自持旋量流实验室。** 改变密度 $\rho$、转动所在的平面，或拖动 $\mathbf{J}$ 的箭头尖换一个旋量：读数栏里的三个平方 $\mathbf{J}^2$、$-\mathbf{S}^2$、$\rho^2$ 始终相等；沿时间轴，青色曲线一圈回到 $1$，紫色曲线要两圈。
+:::
