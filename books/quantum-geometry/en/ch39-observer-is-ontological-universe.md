@@ -263,6 +263,12 @@ Pause before the one-sided topology of [@thm-ch39-double-cover-no-section-and-72
 **Home only after $720^\circ$.** One more turn: the violet flag is back on its first side, $\psi = +\psi_0$; the violet trail of the flag’s tip is the band’s edge, which closes only after going round twice, while the cyan $\mathbf{J}$ goes round twice.
 :::
 
+The film below walks through these steps in order: first how slot zero of the previous chapter's page directory makes `p = *p` hold, then why a spinor that has turned a full circle is still one turn from home.
+
+::: {.film src="010-pointer-720"}
+**p = \*p: pointers, page tables and 720° (2:06).** On the four-slot page directory of [chapter 38](ch38-observer-memory-pointer-and-ontological-qram.md), index [1, 2] reaches the data frame 0x9000 in two hops, [0, 1] hands back the leaf table T₁ itself as data, and every hop of [0, 0] returns to the directory; on a small $4 \times 4$ table, the magenta row that a map $f$ without fixed points builds along the diagonal differs from every row, while a row that captures the diagonal lands on a fixed point of $f$ in its diagonal cell ([@thm-ch38-self-mapped-diagonal-fixed-point]). Then the cyan $\mathbf{J}$ turns through $360^\circ$ and is back where it started, while the violet lift goes from $w = +1$ to $w = -1$ and needs a second turn to reach $+1$; square-root flags planted continuously every $30^\circ$ come back to the start pointing the other way ([@thm-ch39-double-cover-no-section-and-720-lift]). The self-mapped page table and the spinor bilinears are literature results; every number in the film is computed on screen.
+:::
+
 ---
 
 ## 39.4 Dissolving the Solipsistic Illusion: Orthogonal Self-Folding and the Four-Stage Endgame Eliminating Point C
