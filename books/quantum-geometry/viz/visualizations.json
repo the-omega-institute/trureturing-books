@@ -2433,6 +2433,58 @@
           "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
         }
       ]
+    },
+    {
+      "id": "forgetting-rebirth-attractor",
+      "code": "ORTHO//SAMSARA",
+      "title": "轮回与视界阶梯",
+      "title_en": "Samsara and the horizon staircase",
+      "summary": "单位开圆盘上的双曲视界阶梯：从 θ* 出发、内禀快度等步 η_k = η₀ + kΔη，Beltrami–Klein 半径 tanh η_k（直弦）与庞加莱半径 tanh(η_k/2)（正交圆弧）一格格逼近边界，放大镜一直把那道缝放大，它对每个有限步都不为零；按外部角度尺等步走，几步就撞上边界、回到圆心重来，绕成一只轮子，按周期折叠只剩几个点；分式变换 (s − 1)/s 把直线 Re s = c 送成圆内的圆，Re s = 1/2 送成单位圆。",
+      "summary_en": "The hyperbolic horizon staircase on the open unit disk: from θ*, equal rapidity steps η_k = η₀ + kΔη creep toward the rim at Beltrami–Klein radius tanh η_k (chords) or Poincaré radius tanh(η_k/2) (orthogonal arcs), and a magnifier keeps blowing up the gap, which is nonzero at every finite step; equal steps on the outside angle ruler hit the rim in a few steps and fall back to the centre, turning a wheel that folds by its period into a few points; the fractional map (s − 1)/s sends the lines Re s = c to circles inside the disk and Re s = 1/2 to the unit circle.",
+      "path": "forgetting-rebirth-attractor/",
+      "thumbnail": "forgetting-rebirth-attractor/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "双曲圆盘",
+        "快度",
+        "庞加莱圆盘",
+        "Beltrami–Klein",
+        "捏合",
+        "商空间",
+        "轮回"
+      ],
+      "tags_en": [
+        "hyperbolic disk",
+        "rapidity",
+        "Poincaré disk",
+        "Beltrami–Klein",
+        "pinching",
+        "quotient",
+        "rebirth"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十六章",
+          "label_en": "Chapter 36",
+          "href": "../zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.html",
+          "href_en": "../en/ch36-hyperbolic-steps-and-quotienting-reincarnation.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        }
+      ]
     }
   ]
 }

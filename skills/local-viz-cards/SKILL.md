@@ -66,6 +66,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `quantum-fairness-ledger` | 没有特权的座位：照见是相互的，得一分就失一分，满额的纠缠与副本分不出第二份，从哪里出发都分到同样的份额 | `haar` `tradeoff` `cloning` `bell` `wstate` `ghz` `ergodic` |
 | `spherical-degeneracy-radar` | 转一次与转两次，终点不同，有的观察者却读出同一个数；把这些读不出差别的人收集起来，只剩极轴上的那一对 | `meridian` `sweep` `tilted` `hops` `equator` `frames` |
 | `unified-field-slice` | 时钟与速度是同一个圆上的线与面积；在两个平面里来回转一圈回不到原处；视界割断几条边，跨界的纠缠就封顶在那里 | `polytope` `fixedpoint` `gudermann` `photon` `abelian` `plaquette` `horizon` |
+| `forgetting-rebirth-attractor` | 按内禀快度等步走，一格格逼近圆盘边界却永远到不了；按外部角度尺等步走，几步就撞上边界、擦表重来，绕成一只轮子 | `staircase` `horizon_gap` `klein_vs_poincare` `erase_reset` `quotient_fold` `cayley` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -138,6 +139,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `spherical-degeneracy-radar` 与 `two-angle-addressing` 的 `address`、`pole` 及 `berry-loop` 的 `octant` 分工：那几张讲从北极出发的两角寻址、极点的方位角冗余与八分球回路的面积和相位，本页讲第三十四章的“读不出差别的观察者在哪里”：琥珀色是观察者探针 O 与它的轴，青色是两个结果落在观察者轴上的影子（读数）与青色虚线的盲圈（读数相同的观察者所在的大圆），淡青色是走过的盲圈，品红是第二次转动扫过的横向面、两个结果之差与两面小旗的夹角，紫色是极轴 ±e₃ 与差旋子 D 的小盘；实心点是一次（一步）的结果，空心圈是两次（两步）的结果。旋子按该章算例在 Cl(3,0) 里逐项相乘：R₁ = (1 − e₁e₃)/√2，R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) = exp(−π/4 e₁e₂) R₁（左乘），两者都把 +e₁ 送到 +e₃。绿色框只给第三十四章用 `lean=` 引用的三条：`unit_perpendicular_pair`（与两根差向量都正交的单位向量）、`partition_inseparable_iff_kernel`（读数相同即同一纤维）与 `covariant_commutator_formula`（D 与 e₃ 对易、与 e₁ 不对易）；“简并处反演出观察者站位”标 `MODEL`；Berry—Pancharatnam 相位与虚拟 Z 门标 `ARGUED`，页面不计算；旋子乘积、读数与盲圈实算（`NUM`）。路线图候选的赤道反射轴族、`chirality`、`virtual_z` 未做：正文没有反射轴族的句子，后两者分别是 `berry-loop` 的 `reverse` 与 `pulse-area-virtual-z` 的 `vz`。
 
 `unified-field-slice` 只覆盖第三十二章上半篇（§32.1–32.2；下半篇的八纲领罗盘是 `meta-unification-compass`）。三个场景共用一条时间轴：“时钟”是单位圆加双曲线 t² − x² = 1，θ = gd(η)，青色的线是 cos θ = 1/γ（固有时率），品红的高是 sin θ = tanh η（速度），紫色是弧长 θ（`fixedpoint` 卡里弧长等于影子）；“回路”是球面上的旋子换位子 U = R₁R₂R₁⁻¹R₂⁻¹，琥珀色只给参考箭头的尖端，品红是没合上的缺口，紫色是转轴；“视界”是内接于球的正二十面体，青色是视界以内的边，品红是割断的边与每个顶点缺的 60°，琥珀是视界 λ。绿色框只给本章用 `lean=` 引用的三条：`eq_smul_minkowski_of_null`、`anchored_phase_classification`（只管单一平面的圆周相位，页面写明两个平面的换位子不在其内）、`QuantumMaxFlowMinCut.result`（桥图，页面写明二十面体不是它的实例）；Gudermann 恒等式、Dottie 不动点、720° 角亏、换位子曲率与秩 ≤ D^|∂A| 标 `ARGUED`，线/面积/视界/相互作用源的读法标 `MODEL`。路线图候选 `mincut`（桥图）与第三十章 `eth-horizon-crossover` · `bridge` 同一画面，改为二十面体上的 `horizon`；`generations`（内部空间三轴世代）在上半篇正文里没有可引用的句子，未做。
+
+`forgetting-rebirth-attractor` 的舞台是单位开圆盘（两轴等比），白色圆周是第三十六章的纯光视界 θ = 90°；三个场景画在同一张圆盘上。“阶梯”：从 θ*（cos θ = θ 的根）出发，η<sub>k</sub> = η₀ + kΔη，η₀ = gd⁻¹(θ*) ≈ 0.8173；Beltrami–Klein 半径 r = sin θ = tanh η、测地线是直弦，庞加莱半径 ρ = tan(θ/2) = tanh(η/2)、测地线是与圆周正交的圆弧，两者由径向等距 ρ = r/(1 + √(1 − r²)) 连续变形；两种固有时率 √(1 − r²) 与 (1 − ρ²)/(1 + ρ²) 都等于 sech η。右侧（窄屏在右下角）的放大镜按 10 的整数次幂缩小视野，品红的缝 1 − r 按 2/(e<sup>2η</sup> + 1) 直接算，不经 1 − tanh。“轮回”：外部角度尺每步加 Δθ = θ₁ − θ*（阶梯的第一步），越过 90° 的那一步记作恰在圆周上，下一步回到圆心；一圈一根辐条，折叠后第一次撞边之后的步按“步号模周期 p”落到 p 个位置。“分式”：w = (s − 1)/s 下直线 Re s = c 的像圆。青色是阶梯的点、过每一级的测地线、角度尺走过的路与像圆，品红只给到边界的缝与撞上圆周的那一步（以及小图里被捏掉的相干 ½s²），琥珀只给当前一步与当前的像圆；回到圆心的虚线与辐条是中性灰。绿色框只给第三十六章用 `lean=` 引用的四条：`pinching_hilbert_schmidt_pythagorean` 与 `pinching_discarded_coherence_mass`（轮回场景，取 ρ = ½[[1 + c, s], [s, 1 − c]]）、`target_factors_iff_continuous_partition`（折叠：读出 = 步号模 p，目标 = 角度）、`cayley_ratio_norm_one_iff_critical_line`（分式场景）；逆古德曼变换、两种圆盘的度规与等距标 `ARGUED`；阶梯、擦表、轮子与“约去轮回”的读法标 `MODEL`；各数实算（`NUM`）。路线图候选的 `pinching_vonNeumannEntropy_ge`、`lorentz_boost_preserves_minkowski`、`conditionalState_isState` 不在本章的 `lean=` 引用里，未上页面；兰道尔下界 k<sub>B</sub>T ln 2 本章正文没有提到，未上页面；候选卡 `attractor_return` 与终章 `spatial-attractor-deja-vu` 重复、本章没有对应的句子，未做；正文讲到的分式临界圆补做成 `cayley`。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -383,6 +386,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十五章 | “在实轴一维投影模型……”一段之后、定理 `thm-ch35-lawvere-diagonal-and-homoiconic-closure` 之前 | `self-referential-table` · `heal` |
 | 第三十五章 | 末节“若记忆只以这条轴的偏置读出……”一段之后 | `self-referential-table` · `orthogonal_zero` |
 | 第三十五章 | 末节加粗的追问之后、转入第三十六章之前 | `self-referential-table` 完整实验室 |
+| 第三十六章 | §“无穷离散步阻断化光”开头“想象你正走向一道悬崖”一段之后、定理 `thm-ch36-taylor-tail-and-cayley-boundary` 之前 | `forgetting-rebirth-attractor` · `erase_reset` |
+| 第三十六章 | 注记 `rem-ch36-hyperbolic-staircase-figure` 之后的解读段（分式变换与单位圆）之后 | `forgetting-rebirth-attractor` · `cayley` |
+| 第三十六章 | 例 `ex-ch36-inverse-gudermannian-discrete-staircase` 之后 | `forgetting-rebirth-attractor` · `staircase` |
+| 第三十六章 | 例之后的解读段（“几何防火墙”）之后、文献注记引言之前 | `forgetting-rebirth-attractor` · `horizon_gap` |
+| 第三十六章 | 文献注记 `rem-ch36-poincare-disk-gudermannian-literature` 之后 | `forgetting-rebirth-attractor` · `klein_vs_poincare` |
+| 第三十六章 | 定理 `thm-ch36-quotient-annihilator-and-factorization` 后的三条解读列表之后 | `forgetting-rebirth-attractor` · `quotient_fold` |
+| 第三十六章 | 注记 `rem-ch36-samsara-exit-table` 之后、第九部收束段之前 | `forgetting-rebirth-attractor` 完整实验室 |
 | 终章 | 空间吸引子 · 一 末 | `spatial-attractor-deja-vu` · `butterfly` |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed`、`cycle` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget`、`dimension` |

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//SAMSARA · Samsara and the horizon staircase">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//SAMSARA 轮回与视界阶梯</title>
+<meta name="description" content="单位开圆盘上的双曲视界阶梯：内禀快度等步 η_k = η₀ + kΔη（η₀ = gd⁻¹(θ*) ≈ 0.8173），Beltrami–Klein 半径 tanh η_k、庞加莱半径 tanh(η_k/2)，一格格逼近边界却永远到不了；按外部角度尺等步走，有限步就撞上边界、擦表、回到圆心，绕成一只轮子；把轮子按周期折叠，只剩几个点；分式变换 (s − 1)/s 把直线 Re s = c 送成圆内的圆，Re s = 1/2 送成单位圆。The hyperbolic horizon staircase on the open unit disk: equal rapidity steps η_k = η₀ + kΔη (η₀ = gd⁻¹(θ*) ≈ 0.8173) at Beltrami–Klein radius tanh η_k or Poincaré radius tanh(η_k/2) creep toward the rim and never reach it; equal steps on the outside angle ruler hit the rim in finitely many steps, wipe the table and fall back to the centre, turning a wheel; folding the wheel by its period leaves a handful of points; the fractional map (s − 1)/s sends the lines Re s = c to circles inside the disk and Re s = 1/2 to the unit circle.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="forgetting-rebirth-attractor">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//SAMSARA">ORTHO<b>//</b>SAMSARA</h1>
+      <div class="tagline">
+        <span class="zh">轮回与视界阶梯 · <em>按内禀快度等步走，一格格逼近圆盘边界却永远到不了；按外部角度尺等步走，几步就撞上边界、擦表重来，绕成一只轮子</em></span>
+        <span class="en">Samsara and the horizon staircase · <em>equal steps in rapidity creep toward the rim of the disk and never reach it; equal steps on the outside angle ruler hit the rim in a few steps, wipe the table and start again, turning a wheel</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><span id="pillKeyName"></span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="staircase" aria-pressed="false"><span class="code">STAIRCASE</span><span class="cn zh">快度等步：一格格逼近边界</span><span class="cn en">Equal rapidity steps creep toward the rim</span></button>
+        <button class="preset" data-preset="horizon_gap" aria-pressed="false"><span class="code">HORIZON GAP</span><span class="cn zh">放大镜一直放大，缝一直在</span><span class="cn en">The magnifier keeps zooming; the gap stays open</span></button>
+        <button class="preset" data-preset="klein_vs_poincare" aria-pressed="false"><span class="code">KLEIN → POINCARÉ</span><span class="cn zh">直弦弯成正交圆弧，固有时率不变</span><span class="cn en">Straight chords bend into orthogonal arcs; dτ/dt stays</span></button>
+        <button class="preset" data-preset="erase_reset" aria-pressed="false"><span class="code">ANGLE RULER</span><span class="cn zh">角度等步：撞上边界，擦表回到圆心</span><span class="cn en">Equal angle steps hit the rim and fall back to the centre</span></button>
+        <button class="preset" data-preset="quotient_fold" aria-pressed="false"><span class="code">FOLD THE WHEEL</span><span class="cn zh">按周期折叠：一圈圈只剩几个点</span><span class="cn en">Fold by the period: the rounds leave a few points</span></button>
+        <button class="preset" data-preset="cayley" aria-pressed="false"><span class="code">(s − 1)/s</span><span class="cn zh">直线 Re s = c 变成圆内的圆</span><span class="cn en">The lines Re s = c become circles inside the disk</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="stair samsara">
+      <h2><span class="zh">圆盘模型</span><span class="en">Disk model</span><span class="aside">r(η)</span></h2>
+      <div class="chips" id="modelChips" role="group" aria-label="圆盘模型" data-aria-en="Disk model">
+        <button class="chip" data-model="klein" aria-pressed="true"><span class="zh">Beltrami–Klein · 直弦</span><span class="en">Beltrami–Klein · chords</span></button>
+        <button class="chip" data-model="poincare" aria-pressed="false"><span class="zh">庞加莱 · 正交圆弧</span><span class="en">Poincaré · orthogonal arcs</span></button>
+      </div>
+      <p class="note"><span class="zh">Beltrami–Klein：r = sin θ = tanh η；庞加莱：ρ = tan(θ/2) = tanh(η/2)。</span><span class="en">Beltrami–Klein: r = sin θ = tanh η; Poincaré: ρ = tan(θ/2) = tanh(η/2).</span></p>
+      <div class="field">
+        <label for="dEta"><span class="zh">步长 Δη</span><span class="en">Step Δη</span><small class="zh">内禀快度每步增加多少；角度尺的一步取同样的第一步</small><small class="en">how much rapidity each step adds; the angle ruler takes the same first step</small></label><output id="oDEta" for="dEta">1.00</output>
+        <input type="range" id="dEta" min="0.25" max="1.5" step="0.05" value="1">
+      </div>
+    </section>
+
+    <section class="panel sec" data-scenes="samsara" hidden>
+      <h2><span class="zh">轮子</span><span class="en">The wheel</span><span class="aside">mod p</span></h2>
+      <div class="chips" id="foldChips" role="group" aria-label="展开或折叠" data-aria-en="Unrolled or folded">
+        <button class="chip" data-fold="0" aria-pressed="true"><span class="zh">展开：一圈一根辐条</span><span class="en">Unrolled: one spoke per round</span></button>
+        <button class="chip" data-fold="1" aria-pressed="false"><span class="zh">按周期折叠</span><span class="en">Folded by the period</span></button>
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：单位开圆盘，白色的圆周是视界；青色的阶梯点与过每一级的测地线，琥珀色是当前一步；右边的放大镜把当前点与边界之间品红的缝放大；或按角度尺走的轮子；或分式变换下的像圆" data-aria-en="Stage: the open unit disk with the white rim as the horizon; cyan staircase points and the geodesic through each step, the current step in amber; the magnifier on the right blows up the magenta gap between the current point and the rim; or the wheel walked with the angle ruler; or the image circles of the fractional map">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="stair" aria-pressed="true"><span class="zh">阶梯</span><span class="en">Staircase</span></button>
+        <button class="chip" data-scene="samsara" aria-pressed="false"><span class="zh">轮回</span><span class="en">Wheel</span></button>
+        <button class="chip" data-scene="cayley" aria-pressed="false"><span class="zh">分式</span><span class="en">(s − 1)/s</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="本场景的小图" data-aria-en="The small plot of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro" id="ro"></dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean" data-scenes="samsara" hidden><span class="ok">LEAN ✓</span><span><span class="zh">对任意二阶复方阵 ρ，‖ρ‖² = ‖pinching ρ‖² + ‖ρ − pinching ρ‖²（迹内积），且被丢掉的那一份等于 |ρ₀₁|² + |ρ₁₀|²。页面取 ρ = ½[[1 + c, s], [s, 1 − c]]，c = cos θ，s = sin θ：½ + ½c² 留在对角，½s² 被丢掉。已冻结：</span><span class="en">For every 2 × 2 complex matrix ρ, ‖ρ‖² = ‖pinching ρ‖² + ‖ρ − pinching ρ‖² (trace inner product), and the discarded part equals |ρ₀₁|² + |ρ₁₀|². The page takes ρ = ½[[1 + c, s], [s, 1 − c]] with c = cos θ, s = sin θ: ½ + ½c² stays on the diagonal and ½s² is discarded. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean" href="#" target="_blank" rel="noopener"><code>pinching_hilbert_schmidt_pythagorean</code></a> · <a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass" href="#" target="_blank" rel="noopener"><code>pinching_discarded_coherence_mass</code></a></span></div>
+      <div class="lean" data-scenes="samsara" hidden><span class="ok">LEAN ✓</span><span><span class="zh">源空间非空时，目标概念能经读出分解（target = factor ∘ readout）当且仅当它在读出的划分拓扑下连续，也就是在每条读出纤维上取常值。页面取读出 = 第一次擦表之后的步号模周期 p，目标 = 这一步的角度 θ，并逐条纤维核对它取常值。已冻结：</span><span class="en">On a nonempty source, a target concept factors through a readout (target = factor ∘ readout) if and only if it is continuous for the readout's partition topology, that is, constant on every readout fibre. The page takes readout = the step number after the first wipe modulo the period p and target = the angle θ of that step, and checks fibre by fibre that it is constant. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition" href="#" target="_blank" rel="noopener"><code>target_factors_iff_continuous_partition</code></a></span></div>
+      <div class="lean" data-scenes="cayley" hidden><span class="ok">LEAN ✓</span><span><span class="zh">对任意复数 s，cayleyRatio(s) = (s − 1)/s 的模等于 1 当且仅当 Re s = 1/2（s = 0 时按 Lean 的除法约定取 0，两边都不成立）。白色的单位圆就是直线 Re s = 1/2 的像。已冻结：</span><span class="en">For every complex s, cayleyRatio(s) = (s − 1)/s has modulus 1 if and only if Re s = 1/2 (at s = 0 Lean's division gives 0 and both sides fail). The white unit circle is the image of the line Re s = 1/2. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line" href="#" target="_blank" rel="noopener"><code>cayley_ratio_norm_one_iff_critical_line</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：逆古德曼变换 η = ∫₀^θ sec α dα，sin θ = tanh η，cos θ = sech η，tan(θ/2) = tanh(η/2)；Beltrami–Klein 圆盘里从圆心到半径 r 的双曲距离是 artanh r，测地线是直弦；庞加莱圆盘 ds² = 4|dz|²/(1 − |z|²)² 里是 2 artanh ρ，测地线是与边界正交的圆弧；两种圆盘由 ρ = r/(1 + √(1 − r²)) 等距对应（Lambert、Gudermann、Beltrami、Klein、Poincaré）。</span><span class="en">Literature result, not formalized in this book: the inverse Gudermannian η = ∫₀^θ sec α dα with sin θ = tanh η, cos θ = sech η, tan(θ/2) = tanh(η/2); in the Beltrami–Klein disk the hyperbolic distance from the centre to radius r is artanh r and geodesics are straight chords; in the Poincaré disk ds² = 4|dz|²/(1 − |z|²)² it is 2 artanh ρ and geodesics are arcs orthogonal to the rim; the two disks correspond isometrically by ρ = r/(1 + √(1 − r²)) (Lambert, Gudermann, Beltrami, Klein, Poincaré).</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">本书第三十六章的诠释：把快度阶梯读作观察者防失忆的离散步，把撞上边界读作“化光”擦表、回到圆心读作带着空白新表重来，把按周期折叠读作“约去轮回”。舞台上的轮子（一圈一根辐条）只是为看清周期而选的画法。</span><span class="en">The reading of Chapter 36: the rapidity staircase as an observer's discrete steps that keep it from forgetting, hitting the rim as the “turning into light” that wipes the table, falling back to the centre as starting again with a blank table, and folding by the period as “quotienting out the rounds of rebirth”. The wheel on the stage (one spoke per round) is only a drawing chosen to make the period visible.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都按双精度实时算出：η₀ 由 cos θ = θ 的数值根求得，缝 1 − r 用 2/(e<sup>2η</sup> + 1) 与 2/(e<sup>η</sup> + 1) 直接算，免得 1 − tanh 被舍入成 0；像圆上各点的 |w| 也逐点算出。这是数值演示，不是证明。</span><span class="en">Every number on the page is computed live in double precision: η₀ from the numerical root of cos θ = θ, the gap 1 − r directly as 2/(e<sup>2η</sup> + 1) and 2/(e<sup>η</sup> + 1) so that 1 − tanh is never rounded to 0, and |w| point by point on the image circles. A numerical illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：阶梯的步数 k、轮回的步数 n 或直线的位置" data-aria-en="Rail: the staircase step k, the wheel step n or the position of the line">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>3</kbd> <span class="zh">场景</span><span class="en">scenes</span> · <kbd>M</kbd> <span class="zh">换模型</span><span class="en">model</span> · <span class="zh">沿射线拖动琥珀色的点</span><span class="en">drag the amber point along the ray</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是单位开圆盘，白色的圆周是第三十六章的“纯光视界” θ = 90°。页面上的每个数都实时算出；本页是数值演示与诠释模型，不是证明。</p>
+      <ol>
+        <li><b>阶梯。</b>θ* 是 cos θ = θ 的根（≈ 0.739085），η₀ = gd⁻¹(θ*) = ln tan(θ*/2 + π/4) ≈ 0.817326。第 k 级 η<sub>k</sub> = η₀ + kΔη。Beltrami–Klein 圆盘里它在半径 r = tanh η<sub>k</sub> = sin θ<sub>k</sub> 处，庞加莱圆盘里在 ρ = tanh(η<sub>k</sub>/2) = tan(θ<sub>k</sub>/2) 处，ρ = r/(1 + √(1 − r²))。两种画法里固有时率都是 dτ/dt = √(1 − r²) = (1 − ρ²)/(1 + ρ²) = sech η<sub>k</sub>。过每一级画一条与射线垂直的测地线：Klein 里是直弦，庞加莱里是与圆周正交的圆弧；相邻两条的双曲距离都是 Δη。</li>
+        <li><b>缝。</b>到边界还差 1 − r = 2/(e<sup>2η</sup> + 1)（Klein）或 1 − ρ = 2/(e<sup>η</sup> + 1)（庞加莱）：对每个有限的 k 都大于 0，按指数缩小。放大镜按 10 的整数次幂放大，把这道品红的缝一直放大到看得见。</li>
+        <li><b>角度尺。</b>换成外部角度尺：每步把 θ 加上同样的 Δθ = θ₁ − θ*（与阶梯的第一步相同）。有限步后 θ 越过 90°，点落到圆周上（页面把这一步记成恰在 90°），然后回到圆心 θ = 0 重新走：这是本章的“化光—擦表—重来”模型（MODEL）。小图画出 ρ = ½[[1 + c, s], [s, 1 − c]] 的捏合账：对角里的轴向偏置 ½c²（青色）与被丢掉的相干 ½s²（品红），两者之和恒为 ½；撞上边界那一步青色归零。</li>
+        <li><b>折叠。</b>第一次擦表之后，步号 n 与 n + p 的角度相同，p 是一圈的步数。轮子把每一圈画成一根辐条；折叠把所有辐条转到同一个方向，每个位置上叠着同一个角度：目标“角度”在“步号模 p”这条读出的每条纤维上取常值，于是经它分解。</li>
+        <li><b>分式。</b>w = (s − 1)/s = 1 − 1/s 把竖直线 Re s = c（c > 1/2）送成圆心 1 − 1/(2c)、半径 1/(2c) 的圆，都在单位圆里面、都在 w = 1 处与它相切；c 越接近 1/2，像圆越贴近单位圆；Re s = 1/2 的像就是单位圆，而 w = 1 本身不是任何有限 s 的像。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#ex-ch36-inverse-gudermannian-discrete-staircase" target="_top">第三十六章 · 无穷离散渐近阶梯</a> · <a href="../../zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#rem-ch36-poincare-disk-gudermannian-literature" target="_top">庞加莱圆盘与古德曼函数</a> · <a href="../../zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#thm-ch36-pinching-skeleton-and-discarded-coherence" target="_top">捏合的正交质量分解</a> · <a href="../../zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#thm-ch36-quotient-annihilator-and-factorization" target="_top">商分解与生成元</a> · <a href="../../zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#thm-ch36-taylor-tail-and-cayley-boundary" target="_top">单位圆临界边界</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is the open unit disk; the white rim is Chapter 36's “horizon of pure light”, θ = 90°. Every number on the page is computed live; the page is a numerical illustration and an interpretive model, not a proof.</p>
+      <ol>
+        <li><b>Staircase.</b> θ* is the root of cos θ = θ (≈ 0.739085) and η₀ = gd⁻¹(θ*) = ln tan(θ*/2 + π/4) ≈ 0.817326. Step k has η<sub>k</sub> = η₀ + kΔη. In the Beltrami–Klein disk it sits at radius r = tanh η<sub>k</sub> = sin θ<sub>k</sub>, in the Poincaré disk at ρ = tanh(η<sub>k</sub>/2) = tan(θ<sub>k</sub>/2), with ρ = r/(1 + √(1 − r²)). In both drawings the proper-time rate is dτ/dt = √(1 − r²) = (1 − ρ²)/(1 + ρ²) = sech η<sub>k</sub>. Through each step runs the geodesic perpendicular to the ray: a straight chord in Klein, an arc orthogonal to the rim in Poincaré; neighbouring ones are Δη apart in hyperbolic distance.</li>
+        <li><b>The gap.</b> What is left to the rim is 1 − r = 2/(e<sup>2η</sup> + 1) (Klein) or 1 − ρ = 2/(e<sup>η</sup> + 1) (Poincaré): positive for every finite k, and shrinking exponentially. The magnifier zooms by integer powers of 10 and keeps this magenta gap visible.</li>
+        <li><b>Angle ruler.</b> Switch to the outside angle ruler: each step adds the same Δθ = θ₁ − θ* to θ (the staircase's own first step). After finitely many steps θ passes 90° and the point lands on the rim (the page records that step as exactly 90°), then falls back to the centre θ = 0 and walks again: the chapter's model of turning into light, wiping the table and starting over (MODEL). The strip plots the pinching ledger of ρ = ½[[1 + c, s], [s, 1 − c]]: the axial bias ½c² kept on the diagonal (cyan) and the discarded coherence ½s² (magenta), which always add up to ½; at the step on the rim the cyan part is zero.</li>
+        <li><b>Folding.</b> After the first wipe, steps n and n + p have the same angle, where p is the number of steps in a round. The wheel draws each round as a spoke; folding turns all spokes to one direction, and every position carries one and the same angle: the target “angle” is constant on every fibre of the readout “step number mod p”, so it factors through it.</li>
+        <li><b>Fractional map.</b> w = (s − 1)/s = 1 − 1/s sends the vertical line Re s = c (c > 1/2) to the circle with centre 1 − 1/(2c) and radius 1/(2c); all of them lie inside the unit circle and touch it at w = 1; the closer c is to 1/2, the closer the image hugs the unit circle; the image of Re s = 1/2 is the unit circle itself, while w = 1 is the image of no finite s.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#ex-ch36-inverse-gudermannian-discrete-staircase" target="_top">Chapter 36 · the infinite discrete staircase</a> · <a href="../../en/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#rem-ch36-poincare-disk-gudermannian-literature" target="_top">the Poincaré disk and the Gudermannian</a> · <a href="../../en/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#thm-ch36-pinching-skeleton-and-discarded-coherence" target="_top">the orthogonal split of pinching</a> · <a href="../../en/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#thm-ch36-quotient-annihilator-and-factorization" target="_top">quotients and generators</a> · <a href="../../en/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#thm-ch36-taylor-tail-and-cayley-boundary" target="_top">the unit-circle boundary</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
