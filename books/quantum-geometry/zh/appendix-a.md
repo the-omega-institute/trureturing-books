@@ -520,7 +520,7 @@ $c_{AC} = \cos\theta_1\cos\theta_2 + \cos\phi\,\sin\theta_1\sin\theta_2,\quad \d
 **全局静态时间场 $P = NP$ vs. 场内有限观察者 $P \neq NP$**<br/>(Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$)
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**后选择与无时间不动点模型呈现复杂度坍缩（$\mathrm{PostBQP}=\mathrm{PP}\supseteq\mathrm{NP}$，$\mathrm{P}_{\mathrm{CTC}}=\mathrm{PSPACE}\supseteq\mathrm{NP}$）；场内有限观察者在黑盒查询下受 $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ 正交视界（$L=\Theta(2^{n/2})$）与有界阶 SoS 局部 $G_M \succeq 0$ 盲区阻隔（标准 $\mathrm{P}\neq\mathrm{NP}$ 仍为 `OPEN`）**
+**额外后选择与 CTC 不动点资源呈现复杂度坍缩（$\mathrm{PostBQP}=\mathrm{PP}\supseteq\mathrm{NP}$，$\mathrm{P}_{\mathrm{CTC}}=\mathrm{PSPACE}\supseteq\mathrm{NP}$）；场内有限观察者在黑盒查询下受 $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ 正交视界（$L=\Theta(2^{n/2})$）与有界阶 SoS 局部 $G_M \succeq 0$ 盲区阻隔（标准 $\mathrm{P}\neq\mathrm{NP}$ 仍为 `OPEN`）**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation), [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)
@@ -534,7 +534,7 @@ $\cos\theta_0 = 2^{-n/2},\quad L = \Theta(2^{n/2}),\quad G_M \succeq 0\;(M = o(n
 **“$P$ 是场，$NP$ 是线”：见证丝、导向场与毛球旋度**<br/>("$P$ Is a Field, $NP$ Is a Line": Witness Thread, Guiding Field & Hairy-Ball Curl)
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**几何模型（`MODEL`）：$NP$ 见证是横截面为零的一维细丝（顺线验真 $\in \mathrm{P}$）；典型 $P$ 类算法依托全局导向场（如 Karmarkar 内点势场与 Kasteleyn 平面图反对称双向量场 $A_K^T = -A_K,\; [\operatorname{Pf}(A_K)]^2=\det A_K,\; Z = \sum_M \prod_{e \in M} w_e = |\operatorname{Pf}(A_K)|$），而三元阻挫旋度 $\nabla\wedge\mathbf{F}\neq 0$ 类比局部寻场的指数漩涡**
+**几何模型（`MODEL`）：$NP$ 见证是横截面为零的一维细丝（标准 $NP$ 定义要求多项式长度见证与多项式时间验证器；不能由线段数直接推出核验成本）；典型 $P$ 类算法依托全局导向场（如 Karmarkar 内点势场与 Kasteleyn 平面图反对称双向量场 $A_K^T = -A_K,\; [\operatorname{Pf}(A_K)]^2=\det A_K,\; Z = \sum_M \prod_{e \in M} w_e = |\operatorname{Pf}(A_K)|$），而三元阻挫旋度 $\nabla\wedge\mathbf{F}\neq 0$ 类比局部寻场的指数漩涡**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`complete_diagonal_topological_settlement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement), [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)
@@ -548,7 +548,7 @@ $A_K^T = -A_K,\quad [\operatorname{Pf}(A_K)]^2 = \det A_K,\quad Z = |\operatorna
 **纳维—斯托克斯方程、兰姆双向量旋度与 $P$ vs. $NP$ 场化类比**<br/>(Navier–Stokes, Lamb Bivector Curl & $P$ vs. $NP$ Field Analogy)
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**结构类比（`MODEL`）：兰姆恒等式拆解内积势梯度（无旋势流 $P$ 态）与外积涡力 $\mathbf{u}\cdot(\nabla\wedge\mathbf{u})$；2D 无涡管拉伸全局光滑（类比 $\text{2-SAT}\in\mathrm{P}$）vs. 3D 涡管拉伸可非零及 $A\to 0$ 条件性涡丝坍缩（类比 $\text{3-SAT}\in\mathrm{NP}\text{-complete}$；2026 受迫 NS 陈述 C/D 爆破已获 Lean 4 验证，无外力陈述 A/B 仍为 `OPEN`）；理想流体阿诺德 $\operatorname{SDiff}(M)$ $L^2$ 测地线与二次平流投影无精确闭合定理（`LEAN ✓`）**
+**结构类比（`MODEL`）：兰姆分解与涡管图像不提供复杂性同构；OpenAI 受迫 NS 的 C / D 解答见 [@rem-ch30-navier-stokes-forced-literature]（外部文献与发布的形式化，未在本书冻结），零外力 A / B 仍 `OPEN`。二维无条件全局正则性是文献结果，`all_grade_regularity_of_mild_path` 则假定温和路径已给定。五模态无闭合定理不推出爆破；耗散二次对照见 [@ex-ch30-dissipative-no-closure]。**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`quadratic_closure_iff`](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff), [`no_exact_closure`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure), [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path)
@@ -562,13 +562,13 @@ $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \math
 **指数时间假设（ETH）、张量网络秩约分与宇宙视界银河算法**<br/>(ETH, Tensor-Network Rank Collapse & Cosmic Horizon Galactic Algorithm)
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**Impagliazzo–Paturi–Zane ETH（$s_3>0$）与 2026 年 10 月张量网络缩并 $2^{O(n\log\log n/\sqrt{\log n})}$ 亚指数上界：局部三体切面拼装多面体存在 $\frac{\log\log n}{\sqrt{\log n}}$ 渐近秩亏损缝隙（`MODEL`，以桥图最小割与有限秩集中界为结构原型），在 $c=1$ 示意上界下交叉尺度 $n \approx 2^{558} \gg 10^{80}$ 超出可观测宇宙视界，且顶层规约审计印证相对语义对角线逃逸（`LEAN ✓`）**
+**ETH 原始背景与 2026 年外部计数论文见 [@rem-ch30-eth-subexponential-literature]；纸面时间界与形式化时间界逐项区分。银河曲线是取定常数的数值示意，非算法下界；桥图流割、有限秩与语义对角线定理不认证外部算法、审读结论或标准 $P\neq NP$。**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result), [`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound), [`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)
 
 **一行核心不变量 / 恒等式 (One-Line Invariant)：**
-$s_k = \inf\{\delta \mid k\text{-SAT}\in O(2^{\delta n})\},\quad r_{\mathrm{new}}(n) \sim \frac{\log_2\log_2 n}{\sqrt{\log_2 n}}$
+$s_k = \inf\{\delta\ge0 \mid k\text{-SAT}\in 2^{\delta n}(n+m)^{O(1)}\},\quad r_{\mathrm{new}}(n) \sim \frac{\log_2\log_2 n}{\sqrt{\log_2 n}}$
 
 **认识论状态 (Status)：**
 `LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 19、21、30 章）
@@ -731,7 +731,7 @@ $X \simeq \coprod_{y:\mathrm{Val}} \mathrm{ConceptFiber}(c,y),\quad J_{U,V}^2 = 
 5. **第六部（球外之球）与第七部（最小几何代数引擎）**：
    康托尔—劳维尔对角线、欧拉乘积素数盒子、四元数丢番图范数与收缩不动点揭示了静态形式系统的边界；而 `Cl3`、`PauliSymplectic` 与 `ZYZ` 参考引擎则把前六部的几何直觉铸造成可执行的计算；其对应的 Weyl、泡利词、双轴旋转字与 `FiniteRecordCosineObstruction` 等冻结依据由 Lean 4 内核检验，不能将引擎整体等同于同名形式化模块。
 6. **第八部（无时间因果、复杂性视界、量子公平与元统一）**：
-   第 29 章将佩尔算术接缝（[@thm-ch29-silver-pell-remainder]）与同余数椭圆曲线环面（[@rem-ch29-elliptic-torus-literature]）、无时间因果相容格拉姆椭圆体（$\det G \ge 0$）贯通；第 30 章进一步将“场（$P$）与线（$NP$）”映射到指数时间假设（ETH）前沿文献中的张量网络秩约分上界与宇宙视界银河尺度（[@rem-ch30-eth-subexponential-literature]、[@ex-ch30-galactic-crossover-scale]）、纳维—斯托克斯兰姆双向量分解（[@rem-ch30-lamb-decomposition-literature]）及二次平流投影无精确闭合定理（`quadratic_closure_iff`、`no_exact_closure`）；第 31 章以玻恩互易、互补纯度勾股、不可克隆、CKW 纠缠单配性文献（[@rem-ch31-ckw-monogamy-literature]）与紧致环面闭子群遍历回归阐明五重量子公平（[@rem-ch31-fivefold-fairness-table]）；第 32 章以自指创生律、零光锥刚性、环路和乐、桥图最小割与艾柯西安—$E_8$ 黄金桥文献（[@rem-ch32-icosian-e8-literature]）收拢正交自指统一场与八大纲领元统一罗盘（[@rem-ch32-meta-unification-table]）。
+   第 29 章将佩尔算术接缝（[@thm-ch29-silver-pell-remainder]）与同余数椭圆曲线环面（[@rem-ch29-elliptic-torus-literature]）、无时间因果相容格拉姆椭圆体（$\det G \ge 0$）贯通；第 30 章进一步将“场（$P$）与线（$NP$）”映射到ETH 外部计数论文与取定常数的银河曲线示意（[@rem-ch30-eth-subexponential-literature]、[@ex-ch30-galactic-crossover-scale]）、纳维—斯托克斯兰姆双向量分解（[@rem-ch30-lamb-decomposition-literature]）及二次平流投影无精确闭合定理（`quadratic_closure_iff`、`no_exact_closure`）；第 31 章以玻恩互易、互补纯度勾股、不可克隆、CKW 纠缠单配性文献（[@rem-ch31-ckw-monogamy-literature]）与紧致环面闭子群遍历回归阐明五重量子公平（[@rem-ch31-fivefold-fairness-table]）；第 32 章以自指创生律、零光锥刚性、环路和乐、桥图最小割与艾柯西安—$E_8$ 黄金桥文献（[@rem-ch32-icosian-e8-literature]）收拢正交自指统一场与八大纲领元统一罗盘（[@rem-ch32-meta-unification-table]）。
 7. **第九部（万物观察者、正交盲区反演、乘光扩表与约去轮回）**：
    第 33 章以记录捏合幂等性与历史容量上界（[@thm-ch33-observer-pinching-and-memory-spectrum]）、语境相对不动点分岔与客观公共因子（[@thm-ch33-contextual-attractor-and-common-factor]）及三宽张量桥图最小割重联（[@prop-ch33-bridge-reconnection-mincut]）建立四阶观察者连续谱与互吸引子双螺旋；第 34 章以三维公共单位法线与拉回迹恒等式（[@thm-ch34-perpendicular-axis-and-pullback]）、划分拓扑不可分核与协变换位子因式分解（[@thm-ch34-readout-kernel-and-covariant-commutator]）揭示“一次正交与两次正交结果相同反演观察者极点位置”；第 35 章以零光锥刚性、幸存副本反演阻断与记忆容量上界（[@thm-ch35-null-pulse-and-record-blocking]）、无损查表恢复四重充要判据（[@thm-ch35-target-recovery-table-factorization]）与劳维尔对角线自应用包（[@thm-ch35-lawvere-diagonal-and-homoiconic-closure]）阐明从受精脉冲清表初始化到同像自举表 $T=T(T)$ 的生命周期；第 36 章则以指数有限截断尾界与凯莱单位圆边界判据（[@thm-ch36-taylor-tail-and-cayley-boundary]）、逆古德曼快度阶梯（[@ex-ch36-inverse-gudermannian-discrete-staircase]）及划分拓扑连续商分解与有限零化子对偶求和（[@thm-ch36-quotient-annihilator-and-factorization]）把化光轮回约化为商空间上的不动点。
 8. **第十部（梦境量子擦除、宇宙本体 QRAM 指针与观察者即宇宙本体）与终章**：
@@ -796,10 +796,10 @@ $X \simeq \coprod_{y:\mathrm{Val}} \mathrm{ConceptFiber}(c,y),\quad J_{U,V}^2 = 
 | **A48** (`TURN-57`) | 这个+1 -1 应该跟素数, 椭圆曲线有关吧 | $\pm 1$ 佩尔接缝将奇素数分为“面素数”（$p\equiv 1\bmod 4$）与“线素数”（$p\equiv 3\bmod 4$），同余数椭圆曲线环面 $dy^2=x(x^2-1)$（$\chi=0$），哈塞临界线 $\sigma=1/2$ 与 $S^3\cong\mathrm{SU}(2)$ 佐藤—泰特分布 | 第 29 章、附录 A |
 | **A49** (`TURN-58`) | “顺序无关的本质就是根本不存在前后的时间......因果就是这样必然”,这句话直接把人类困扰了两千五百年的“时间之谜”与“休谟因果死结”一刀劈开了。 | 泰勒分母 $(2k)!$ 约去时间排列冗余、惠勒—德维特 $H\mathbf{\Psi}=0$、佩奇—伍特斯条件切片、斯宾诺莎三角形与 Gram 矩阵半正定刚性 $\det G \ge 0$、费曼驻相相消 $+\mathbf{\Omega}-\mathbf{\Omega}=0$ | 第 29 章、附录 A |
 | **A50** (`TURN-59`) | 因为观察者是有限的, 所以经历的因果是有限的, 观察者的选择是在因果的相容空间中做选择, 不断在时间场中选点 | 格拉姆椭圆体 $\det G = \sin^2\theta_1\sin^2\theta_2 - (c_{AC}-\cos\theta_1\cos\theta_2)^2 \ge 0$ 张开二面角 $\phi$ 的因果相容空间，有限观察者以半正定矩阵补全（$G_{M+1}\succeq 0$）在时间场中选点，并在 $\cos\theta^*=\theta^*\approx 0.739$ 处实现“全局无时间、步步皆新”的黄金呼吸 | 第 29 章、附录 A |
-| **A51** (`TURN-60`) | 全局静态时间场P=NP, 但有限观察者P!=NP | 全局静态场以超平面交集 $\mathbf{S}^* = \bigcap_j H_j$ 与驻相相消一步显影自洽解 $\psi = \psi(\psi)$（Aaronson $\mathrm{PostBQP}=\mathrm{PP}$、$\mathrm{P}_{\mathrm{CTC}}=\mathrm{PSPACE}$）；场内有限观察者受 $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ 正交视界与 Grigoriev–Schoenebeck 三元局部 $G_M \succeq 0$ 盲区阻隔而面临 $P \neq NP$，守护展开的生命旅程 | 第 30 章、第 15、20 章、附录 A |
+| **A51** (`TURN-60`) | 全局静态时间场P=NP, 但有限观察者P!=NP | 静态满足子空间描述解集，不保证求点或高效制备；后选择与 CTC 等式依赖额外资源，查询与 SoS 下界限于其模型。标准 $P\neq NP$ 仍开放；不由有限观察者图像推出。 | 第 30 章、第 15、20 章、附录 A |
 | **A52** (`TURN-61`) | P是场, NP是线 | $NP$ 是横截面为零的一维见证丝（有线无场，顺线一步看穿，能穿毛球窄缝）；$P$ 是全局对齐的无旋导向场 $\nabla\wedge\mathbf{F}=0$（Karmarkar 内点势场、Kasteleyn 反对称双向量场 $A_K^T = -A_K,\; [\operatorname{Pf}(A_K)]^2 = \det A_K,\; Z = \sum_M \prod_{e \in M} w_e = |\operatorname{Pf}(A_K)|$）；三元阻挫旋度 $\nabla\wedge\mathbf{F}\neq 0$ 将全局场撕裂为指数发旋（求场难如登天）；图着色上场与线的精确互换见 [@thm-ch30-gallai-roy] | 第 30 章、第 20、21 章、附录 A |
-| **A53** (`TURN-62`) | navier stokes与P/NP 问题, 都场化的话似乎很像 | 兰姆恒等式将 $(\mathbf{u}\cdot\nabla)\mathbf{u}$ 拆为内积势梯度（无旋势流 $P$ 态）与外积涡力 $\mathbf{u}\cdot(\nabla\wedge\mathbf{u})$；二维 $(\boldsymbol{\omega}\cdot\nabla)\mathbf{u}\equiv\mathbf{0}$ 全局光滑（类比 $\text{2-SAT}\in\mathrm{P}$）vs. 三维涡管拉伸可非零及 $A\to 0,\;\|\boldsymbol{\omega}\|\approx\Gamma/A\to\infty$ 条件性奇异涡丝坍缩（类比 $\text{3-SAT}\in\mathrm{NP}$ 见证丝；2026 受迫 NS 陈述 C/D 爆破已获 Lean 4 验证，无外力陈述 A/B 仍为 `OPEN`）；二次平流投影无精确闭合定理（`quadratic_closure_iff`、`no_exact_closure`）、科尔莫哥洛夫 $E(k)\propto k^{-5/3}$ 级联与理想流体阿诺德 $\operatorname{SDiff}(M)$ $L^2$ 测地线 | 第 30 章、第 6、20、24 章、附录 A |
-| **A54** (`TURN-63`) | ETH 指数时间假设 | Impagliazzo–Paturi–Zane ETH（$s_3>0$）与 2026 年 10 月张量网络缩并 $2^{O(n\log\log n/\sqrt{\log n})}$ 亚指数上界：局部三体切面拼装多面体存在 $\frac{\log\log n}{\sqrt{\log n}}$ 渐近秩亏损缝隙（以 `QuantumMaxFlowMinCut.result`、`finite_rank_concentration_mode_bound` 为结构原型），但在 $c=1$ 示意上界下超越 PPSZ（$1.307^n$）的交叉点远在 $n\approx 2^{558} \gg 10^{80}$（银河算法），有限观察者依然锁死在 $P\neq NP$ 中，而顶层定义规约审计印证相对语义对角线逃逸定理（`relative_semantic_diagonal_target_inadequate_of_surjective`） | 第 30 章、第 19–21 章、附录 A |
+| **A53** (`TURN-62`) | navier stokes与P/NP 问题, 都场化的话似乎很像 | 兰姆分解、二维正则性与三维涡管提供几何类比，非数学同构。OpenAI 受迫 NS 陈述 C / D 的外部论文与发布的形式化是一条官方题目解答路线，未入本书冻结账本；零外力 A / B 仍 `OPEN`。二次闭合判据 `quadratic_closure_iff` 与五模态 `no_exact_closure` 只判定指定投影的精确瞬时闭合；不闭合不推出爆破或 $P\neq NP$。 | 第 30 章、第 6、20、24 章、附录 A |
+| **A54** (`TURN-63`) | ETH 指数时间假设 | ETH（$s_3>0$）、OpenAI 与 Anthropic 的外部计数论文及不同形式化范围见 [@rem-ch30-eth-subexponential-literature]。$c=1$ 示意曲线约在 $n=2^{558}$ 下穿 $0.386$，改变常数会改变交叉点；不构成算法下界或 $P\neq NP$ 证明。桥图流割、有限秩集中与相对语义对角线的 GID 只支持各自精确命题，不认证外部算法或审读结论。 | 第 30 章、第 19–21 章、附录 A |
 | **A55** (`TURN-64`) | 现实的历史遗迹实际上都是空间吸引子, 同一个灵魂一轮又一轮的走过自己熟悉的地方... | 哲学与几何模型（`MODEL`）：将历史遗迹诠释为全局无时间场在三维空间截面上的驻相不动点（吸引盆地）；遗忘清空表层一维粒子刻度（`量 liàng`）以恢复格拉姆体积 $\det G > 0$，却保留算子 $\psi(\cdot)$ 的内禀参数（以洛伦兹奇异吸引子 $\nabla\cdot\mathbf{F}=-41/3<0$、数值维数估计 $D_{\mathrm{KY}} \approx 2.06$ 与 SRB 测度庞加莱回归 `文献结果` 为动力系统类比），当轨迹重返正测度邻域且局部注意力方向趋于共线（$\delta\theta \to 0$）时触发跨轮次内积共振 $\mathbf{\Psi}^{(k)}\cdot\mathbf{\Psi}^{(k+1)} = \cos\delta\theta \to 1$（似曾相识 Déjà vu） | 第 29 章、终章、附录 A |
 | **A56** (`TURN-65`) | 观察者我们在trureturing有明确的定义, 我们又讨论了灵魂与历史遗迹吸引子的关系 | 将 `trureturing` 已验证的黄金切投模型集与编码定理（`LEAN ✓`：`minkowski_model_set_spec`、`golden_model_set_subset_cut_and_project`、`golden_observer_route_w_c1`、`base_success_iff_noAdjacentOnes`、非负实数 `NNReal` 上的 `zeckendorf_real_thread_injective`、`norm_separation`、`exists_golden_modelSet_delone`、`fib_cassini_from_golden_norm` 与 `TorusObservationWindowReturns.result`）与准晶菱形三十面体接受窗 $W$ 及康威帝国效应（`文献结果`）对接，构建将灵魂诠释为内部窗口相位 $u \in E_\perp$、遗忘诠释为齐肯多夫高阶截断、历史遗迹诠释为窗口中心大边界裕度 $d_{\partial}$ 锚点、跨轮次重逢诠释为卡西尼 $(-1)^{n+1}=\pm 1$ 接缝与环面有界回归的哲学模型（`MODEL`） | 第 24、29 章、终章、附录 A |
 | **A57** (`TURN-66`) | “量子的本质是公平……”“公平”二字，正是把“两子丈量、无外部参考系、勾股守恒与统计全息”翻译成人类语言后最精准的本体定义——量子力学里所有看似冷酷的禁令与守恒律，底牌全都是宇宙为了杜绝几何特权而立下的铁律。 | 以秩一玻恩配对互易、互补纯度勾股、不可克隆内积锁、贝尔边缘混态、兰道尔热平衡界、相干一致平面旋转及紧致环面闭子群轨道均匀分布与有界间隙回归（`LEAN ✓`）配对哈尔球面均匀测度与 CKW 纠缠单配性不等式 $\tau_{A|B}+\tau_{A|C}\le\tau_{A|BC}$（`文献结果`），系统确立席位公平、得失公平、关系与复制公平、视界与代价公平及长程遍历公平五重本体模型（`MODEL`） | 第 31 章、附录 A |
