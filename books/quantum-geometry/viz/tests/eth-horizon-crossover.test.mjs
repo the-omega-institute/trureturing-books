@@ -134,11 +134,13 @@ check('→ draws another instance: other matrices, the same rank', s.seed === 1 
 }
 
 /* ---------- the modes ---------- */
-await pick('plateau'); s = await state();
-const spec = { plateau: (j) => 1 / (1 + Math.exp((j - 7.5) / 0.55)), geometric: (j) => 0.82 ** j, power: (j) => 1 / (1 + j * 0.5) ** 2 };
+await pick('geometric'); s = await state();
+const spec = { plateau: (j) => 1 / (1 + Math.exp((j - 7.5) / 0.55)), geometric: (j) => 1 / 2 ** (j + 1), power: (j) => 1 / (1 + j * 0.5) ** 2 };
 const lamOK = await D((fns) => Object.keys(fns).every((k) => [0, 1, 5, 12, 39].every((j) => Math.abs(window.HORIZON_DEBUG.lambda(k, j) - fns[k][j]) < 1e-12)), Object.fromEntries(Object.entries(spec).map(([k, f]) => [k, Object.fromEntries([0, 1, 5, 12, 39].map((j) => [j, f(j)]))])));
-const sum = (f) => { let t = 0; for (let j = 0; j < 400000; j++) t += f(j); return t; }, cnt = (f, th) => { let n = 0; for (let j = 0; j < 400000; j++) if (f(j) >= th) n++; return n; };
-check('PLATEAU: τ = 0.5, eight modes reach it and the wall stands at RW/(πτ) = 16', s.scene === 'modes' && near(s.theta, 0.5, 1e-9) && s.count === 8 && cnt(spec.plateau, 0.5) === 8 && near(s.total, sum(spec.plateau), 1e-6) && near(s.wall, 16, 0.01) && lamOK);
+const sum = (f) => { let t = 0; for (let j = 0; j < 400000; j++) t += f(j); return t; }, cnt = (f, th) => { let n = 0; for (let j = 0; j < 400000; j++) if (f(j) >= th - 1e-12) n++; return n; };
+// the chapter's example step 5, by exact fractions: λⱼ = 2^−(j+1) ≥ 1/8 ⇔ j + 1 ≤ 3, and Σ 2^−(j+1) = 1 = RW/π
+const exact = [0, 1, 2, 3, 4].filter((j) => 2 ** (j + 1) <= 8).length;
+check('HALVES: τ = 1/8, exactly three modes (j = 0, 1, 2) reach it and the wall stands at RW/(πτ) = 8, as in the example', s.scene === 'modes' && s.prof === 'geometric' && near(s.theta, 0.125, 1e-12) && s.count === 3 && exact === 3 && cnt(spec.geometric, 0.125) === 3 && near(s.total, 1, 1e-12) && near(s.wall, 8, 1e-9) && lamOK, JSON.stringify([s.theta, s.count, s.total, s.wall]));
 let modeOK = true, modeBad = '';
 for (const prof of ['plateau', 'geometric', 'power']) {
   await page.click(`#profChips [data-prof="${prof}"]`); await settle(page, 40);
@@ -149,22 +151,17 @@ for (const prof of ['plateau', 'geometric', 'power']) {
   }
 }
 check('three spectra × six thresholds: the count and the total match direct summation, and count × τ ≤ RW/π every time', modeOK, modeBad);
-check('the geometric spectrum sums to 1/(1 − 0.82) and the power law to 4(π²/6 − 1)', near(sum(spec.geometric), 1 / 0.18, 1e-9) && Math.abs(sum(spec.power) - 4 * (Math.PI ** 2 / 6 - 1)) < 1e-4);
-await pick('tail'); s = await state();
-check('TAIL plays the threshold downward on the power law', s.prof === 'power' && (s.playing || s.t > 0));
-s = await seek(1); check('at τ = 0.02 thirteen modes of the power law reach the threshold, far below the wall at 129', s.count === 13 && near(s.wall, 4 * (Math.PI ** 2 / 6 - 1) / 0.02, 0.05));
+check('the geometric spectrum sums to 1 and the power law to 4(π²/6 − 1)', near(sum(spec.geometric), 1, 1e-12) && Math.abs(sum(spec.power) - 4 * (Math.PI ** 2 / 6 - 1)) < 1e-4);
+await page.click('#profChips [data-prof="power"]'); s = await seek(1);
+check('at τ = 0.02 thirteen modes of the power law reach the threshold, far below the wall at 129', s.count === 13 && near(s.wall, 4 * (Math.PI ** 2 / 6 - 1) / 0.02, 0.05));
 // the printed stills of the two chapter-12 cards speak the chapter's notation (τ, RW/π) with the suite's own numbers,
 // and no page-side numerical check wears the green of the Lean boxes
 {
-  const shot = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=tail', await T.newPage());
+  const shot = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=geometric', await T.newPage());
   const look = async () => { await settle(shot); return shot.evaluate(() => ({ s: window.HORIZON_DEBUG.state, big: document.getElementById('hudBig').textContent, sub: document.getElementById('hudSub').textContent, green: Array.from(document.querySelectorAll('.okmark')).filter((e) => e.offsetParent).length })); };
-  let v = await look();
-  const tauT = Math.max(0.02, 1 - 0.98 * v.s.t), budgetT = sum(spec.power), nT = cnt(spec.power, tauT);
-  check('TAIL still: τ = 0.07, six modes clear it and the wall stands at RW/(πτ) = 37.4, as the caption says', near(v.s.theta, tauT, 1e-12) && tauT.toFixed(2) === '0.07' && nT === 6 && (budgetT / tauT).toFixed(1) === '37.4'
-    && v.big === `模态 · τ = ${tauT.toFixed(2)}` && v.sub === `不小于 τ 的模态有 ${nT} 个，上界 RW/(πτ) = ${(budgetT / tauT).toFixed(1)}` && !/θ|T\//.test(v.big + v.sub), `${v.big} / ${v.sub}`);
-  await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=plateau', shot); v = await look();
-  const nP = cnt(spec.plateau, 0.5), wallP = sum(spec.plateau) / 0.5;
-  check('PLATEAU still: τ = 0.5, the HUD gives the count and the wall the suite sums', v.sub === `不小于 τ 的模态有 ${nP} 个，上界 RW/(πτ) = ${wallP.toFixed(1)}` && nP === 8 && wallP.toFixed(0) === '16', v.sub);
+  const v = await look();
+  check('HALVES still: τ = 1/8, three modes clear it and the wall stands at 8, in the chapter\'s notation', near(v.s.theta, 0.125, 1e-12) && v.s.count === cnt(spec.geometric, 0.125)
+    && v.big === '模态 · τ = 1/8' && v.sub === '不小于 τ 的模态有 3 个，上界 RW/(πτ) = 8.0' && !/θ|T\//.test(v.big + v.sub), `${v.big} / ${v.sub}`);
   check('no green check mark on the page\'s own numerical checks', v.green === 0);
   await shot.close();
 }

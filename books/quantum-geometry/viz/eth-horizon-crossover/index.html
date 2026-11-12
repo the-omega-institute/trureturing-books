@@ -43,8 +43,7 @@
         <button class="preset" data-preset="constant" aria-pressed="false"><span class="code">CONSTANT</span><span class="cn zh">常数减半：交叉点回到视界内</span><span class="cn en">Half the constant: the crossover comes inside</span></button>
         <button class="preset" data-preset="bridge" aria-pressed="false"><span class="code">BRIDGE</span><span class="cn zh">桥图 (2, 3, 2, 3)：秩 = 最小割 6</span><span class="cn en">Bridge (2, 3, 2, 3): rank = min cut 6</span></button>
         <button class="preset" data-preset="narrow" aria-pressed="false"><span class="code">NARROW</span><span class="cn zh">桥太窄：三条桥成了瓶颈</span><span class="cn en">Bridges too narrow: they are the bottleneck</span></button>
-        <button class="preset" data-preset="plateau" aria-pressed="false"><span class="code">PLATEAU</span><span class="cn zh">平台谱：承重的模态屈指可数</span><span class="cn en">A plateau: few modes carry the weight</span></button>
-        <button class="preset" data-preset="tail" aria-pressed="false"><span class="code">TAIL</span><span class="cn zh">阈值降低：个数涨，仍不过墙</span><span class="cn en">Lower threshold: more modes, never past the wall</span></button>
+        <button class="preset" data-preset="geometric" aria-pressed="false"><span class="code">HALVES</span><span class="cn zh">几何谱 τ = 1/8：三根过线，墙在 8</span><span class="cn en">Halving spectrum at τ = 1/8: three clear it, the wall at 8</span></button>
       </div>
       <p class="note" id="presetNote"></p>
     </section>
@@ -68,7 +67,7 @@
       <h2><span class="zh">谱的形状</span><span class="en">Shape of the spectrum</span><span class="aside">λⱼ ≥ 0 · Σλⱼ = T</span></h2>
       <div class="chips" id="profChips" role="group" aria-label="谱的形状" data-aria-en="Shape of the spectrum">
         <button class="chip" data-prof="plateau" aria-pressed="true"><span class="zh">平台</span><span class="en">Plateau</span></button>
-        <button class="chip" data-prof="geometric" aria-pressed="false"><span class="zh">几何</span><span class="en">Geometric</span></button>
+        <button class="chip" data-prof="geometric" aria-pressed="false"><span class="zh">几何 2⁻⁽ʲ⁺¹⁾</span><span class="en">Geometric 2⁻⁽ʲ⁺¹⁾</span></button>
         <button class="chip" data-prof="power" aria-pressed="false"><span class="zh">幂律</span><span class="en">Power law</span></button>
       </div>
       <p class="note"><span class="zh">时间轴把阈值 τ 从 1 降到 0.02。也可以在舞台上直接拖那条琥珀色的线。</span><span class="en">The rail lowers the threshold τ from 1 to 0.02. Or drag the amber line on the stage.</span></p>
