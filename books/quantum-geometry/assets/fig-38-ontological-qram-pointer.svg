@@ -153,7 +153,7 @@
     <rect x="492" y="250" width="212" height="126" rx="8" fill="#050c16" stroke="#ff8a3c" stroke-width="1.4"/>
     <text x="598" y="268" text-anchor="middle" fill="#ff8a3c" font-size="9.2" font-weight="600">A · 未自映射越界 / NULL RESET</text>
     <text x="502" y="286" fill="#d4efff" font-size="8.2">栈溢出 det G → 0 滑入 θ = 90°</text>
-    <text x="502" y="302" fill="#ff8a3c" font-size="8.6" font-weight="600">cos 90° = 0 ⟹ ptr = NULL</text>
+    <text font-family="New Computer Modern Math,JetBrains Mono,monospace" x="502" y="302" fill="#ff8a3c" font-size="8.6" font-weight="600">cos 90° = 0 ⟹ ptr = NULL</text>
     <text x="502" y="318" fill="#9d8cff" font-size="8.1">MODEL: GC Wipe 清空私有快表 T</text>
     <text x="502" y="334" fill="#cfe3ff" font-size="8">0x0000 冷启动重分配 (受精闪光)</text>
     <text x="502" y="350" fill="#6f8ea5" font-size="7.7">Dangling null pointer triggers</text>
