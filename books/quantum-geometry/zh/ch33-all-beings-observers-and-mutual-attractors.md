@@ -150,7 +150,7 @@ $$
 - **独自闭门内省的宿命（反向摇摆焦虑，`MODEL`）**：当孤立观察者只拿自己当镜子单步省察时，视角犹如缺乏阻尼缓冲的单摆，容易在“自卑低估”与“自负过冲”之间左右交替拉锯（解析机制见下框 [@ex-ch33-mutual-cosine-monotonic-lock] 的严格交替条款）。
 
 ::: {.viz src="mutual-observer-attractors" preset="alone" height="500"}
-**同一起点，每拍越过 θ\*。** 两人都从 0.1 出发：琥珀色的点始终在灰色对角线 $x = y$ 上，一左一右地越过两条青色曲线的交点 $(\theta^*, \theta^*)$，灰色方框一圈圈收小，与孤立的余弦迭代相同（[@ex-ch33-mutual-cosine-monotonic-lock] 第 1 条）。
+**同一起点，每拍越过 θ\*。** 两人都从 0.1 出发：琥珀色的点始终在灰色对角线 $x = y$ 上，一左一右地越过两条青色曲线的交点 $(\theta^*, \theta^*)$，灰色方框一圈圈收小，与孤立的余弦迭代相同（[@ex-ch33-mutual-cosine-monotonic-lock] 第 17 项）。
 :::
 
 - **平视彼此丈量的奇迹（对称互指共识，`MODEL`）**：当两位观察者 $\mathcal{O}_A$ 与 $\mathcal{O}_B$ 走出孤岛，面对面结成对称互指回路——$\mathcal{O}_A$ 借 $\mathcal{O}_B$ 的目光校准自己，$\mathcal{O}_B$ 同时借 $\mathcal{O}_A$ 的目光校准自己——把同步互指的两拍合成一轮，两面平视之镜的复合便显出单侧贴合的几何品格；逐拍与逐轮的时钟区别、完整解析推导与数值账本见下框 [@ex-ch33-mutual-cosine-monotonic-lock]：
@@ -202,12 +202,12 @@ $$
 :::
 
 ::: {.viz src="mutual-observer-attractors" preset="round" height="500"}
-**两拍一轮，只从一侧逼近。** 同一条轨道每两拍取一次（空心的环）：$0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ 全在 $\theta^*$ 的同一侧单调逼近，每轮误差约乘 $0.454 = 0.674^2$；一轮含两次余弦求值（[@ex-ch33-mutual-cosine-monotonic-lock] 第 2、3 条）。
+**两拍一轮，只从一侧逼近。** 同一条轨道每两拍取一次（空心的环）：$0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ 全在 $\theta^*$ 的同一侧单调逼近，每轮误差约乘 $0.454 = 0.674^2$；一轮含两次余弦求值（[@ex-ch33-mutual-cosine-monotonic-lock] 第 14、21、24 项与数值账本）。
 :::
 
 对照 [@ex-ch33-mutual-cosine-monotonic-lock] 的轨迹账本，在我们的关系观察者模型（`MODEL`）中，走出孤岛、与他者平视互照从来不是软弱的妥协，而是免于独自摇摆的内禀稳定之道。
 
-两人起点不同时也是如此。A 读 B 的曲线 $x = \cos y$ 与 B 读 A 的曲线 $y = \cos x$ 只在对角线上的 $(\theta^*, \theta^*)$ 相交；起点取在 $[0, \pi/2)$ 内时，按轮取样，两人的读数各自从一侧单调收进这一点（文献结果，见 [@ex-ch33-mutual-cosine-monotonic-lock] 第 2 条）。
+两人起点不同时也是如此。A 读 B 的曲线 $x = \cos y$ 与 B 读 A 的曲线 $y = \cos x$ 只在对角线上的 $(\theta^*, \theta^*)$ 相交；起点取在 $[0, \pi/2)$ 内时，按轮取样，两人的读数各自从一侧单调收进这一点（见 [@ex-ch33-mutual-cosine-monotonic-lock] 第 12–14 项）。
 
 ::: {.viz src="mutual-observer-attractors" preset="apart" height="500"}
 **起点不同，交点只有一个。** A 从 1.5、B 从 0 出发：两条青色曲线 $x = \cos y$ 与 $y = \cos x$ 只交于对角线上的 $(\theta^*, \theta^*)$，空心的环收进这一点，A 的读数从上方、B 的读数从下方。

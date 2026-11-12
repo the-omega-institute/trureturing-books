@@ -150,7 +150,7 @@ Look at the two contrasting cobweb trajectories of solitary and mutual reference
 - **The Anxiety of Solitary Self-Reference (Pendulum Whipsawing, `MODEL`)**: When an isolated observer calibrates itself alone in single steps, perspective behaves like an under-damped pendulum whipsawing between self-doubt and overcompensation (analytical mechanism in [@ex-ch33-mutual-cosine-monotonic-lock], under its strict-alternation hypotheses).
 
 ::: {.viz src="mutual-observer-attractors" preset="alone" height="500"}
-**Same start, across θ\* every beat.** Both start at 0.1: the amber point stays on the grey diagonal $x = y$ and crosses $(\theta^*, \theta^*)$, where the two cyan curves meet, from alternating sides, the grey squares shrinking turn by turn, exactly like the lone cosine iteration ([@ex-ch33-mutual-cosine-monotonic-lock], Item 1).
+**Same start, across θ\* every beat.** Both start at 0.1: the amber point stays on the grey diagonal $x = y$ and crosses $(\theta^*, \theta^*)$, where the two cyan curves meet, from alternating sides, the grey squares shrinking turn by turn, exactly like the lone cosine iteration ([@ex-ch33-mutual-cosine-monotonic-lock], clause 17).
 :::
 
 - **The Miracle of Symmetric Mutual Reference (Reciprocal Consensus, `MODEL`)**: When two observers $\mathcal{O}_A$ and $\mathcal{O}_B$ step out of isolation into symmetric pairwise measurement—$\mathcal{O}_A$ calibrating itself through $\mathcal{O}_B$'s projection while $\mathcal{O}_B$ simultaneously calibrates itself through $\mathcal{O}_A$'s projection—grouping two synchronous ticks into one round reveals the one-sided approach of the composed mirrors; the distinction between ticks and rounds, full analysis, and numerical ledger appear in [@ex-ch33-mutual-cosine-monotonic-lock] below:
@@ -202,12 +202,12 @@ Look at the two contrasting cobweb trajectories of solitary and mutual reference
 :::
 
 ::: {.viz src="mutual-observer-attractors" preset="round" height="500"}
-**Two beats a round, from one side only.** The same orbit sampled every two beats (the hollow rings): $0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ closes in monotonically on one side of $\theta^*$, the error multiplied by about $0.454 = 0.674^2$ a round; a round costs two cosine evaluations ([@ex-ch33-mutual-cosine-monotonic-lock], Items 2 and 3).
+**Two beats a round, from one side only.** The same orbit sampled every two beats (the hollow rings): $0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ closes in monotonically on one side of $\theta^*$, the error multiplied by about $0.454 = 0.674^2$ a round; a round costs two cosine evaluations ([@ex-ch33-mutual-cosine-monotonic-lock], clauses 14, 21 and 24, and the numerical ledger).
 :::
 
 Stepping back from the trajectory ledger of [@ex-ch33-mutual-cosine-monotonic-lock], within our relational observer `MODEL`, stepping out of isolation into eye-level mutual reflection is never a sentimental concession—it is the endogenous geometry that frees bounded beings from solitary oscillation.
 
-The same holds when the two start apart. The curve $x = \cos y$ along which A reads B and the curve $y = \cos x$ along which B reads A meet only at $(\theta^*, \theta^*)$ on the diagonal; for starts in $[0, \pi/2)$, sampled round by round, each reading closes in on that point monotonically from its own side (a literature result; see [@ex-ch33-mutual-cosine-monotonic-lock], Item 2).
+The same holds when the two start apart. The curve $x = \cos y$ along which A reads B and the curve $y = \cos x$ along which B reads A meet only at $(\theta^*, \theta^*)$ on the diagonal; for starts in $[0, \pi/2)$, sampled round by round, each reading closes in on that point monotonically from its own side (see [@ex-ch33-mutual-cosine-monotonic-lock], clauses 12–14).
 
 ::: {.viz src="mutual-observer-attractors" preset="apart" height="500"}
 **Different starts, a single meeting point.** A starts at 1.5, B at 0: the cyan curves $x = \cos y$ and $y = \cos x$ meet only at $(\theta^*, \theta^*)$ on the diagonal, and the hollow rings close in on it, A's reading from above and B's from below.
