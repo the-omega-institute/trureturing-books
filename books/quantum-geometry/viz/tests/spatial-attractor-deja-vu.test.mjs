@@ -29,7 +29,19 @@ const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await se
 
 /* ---------- two rounds ---------- */
 let s = await state();
-check('opens on BUTTERFLY: ρ = 28, both rounds drawn to t = 40', s.preset === 'butterfly' && s.scene === 'rounds' && s.rho === 28 && s.seed === 0 && s.t === 40 && !s.playing);
+check('opens on FORGET: ρ = 28, seed 3, both rounds drawn to t = 40', s.preset === 'forget' && s.scene === 'rounds' && s.rho === 28 && s.seed === 3 && s.t === 40 && !s.playing);
+check('the card BUTTERFLY is gone (it drew the same picture as FORGET)', (await D(() => document.querySelectorAll('[data-preset="butterfly"]').length)) === 0);
+{ // FORGET: the line above the figure gives, for each round, the share of the steps 1 … 4000 above the height ρ − 1 of
+  // C₊ and C₋, counted here over the page's own orbit points (a chaotic orbit re-integrated here drifts away from
+  // the page's after t ≈ 30 through rounding alone; the orbits themselves are checked against RK4 up to t = 15 below)
+  const share = await D(() => [0, 1].map((k) => { let n = 0; for (let i = 1; i <= 4000; i++) if (window.ATTRACTOR_DEBUG.point(k, i)[2] > 27) n++; return n / 4000; }));
+  const line = await page.textContent('#hudSub2');
+  check('FORGET: the shares of time above C₊ and C₋ (counted here) are printed above the figure and nearly agree', (() => { const m = line.match(/0\.\d\d/g) || []; return m.length >= 2 && Math.abs(Number(m[0]) - share[0]) < 0.006 && Math.abs(Number(m[1]) - share[1]) < 0.006; })() && Math.abs(share[0] - share[1]) < 0.03 && share.every((v) => v > 0.3 && v < 0.4) && line.includes(s.gap.toFixed(1)), JSON.stringify([share, line]));
+}
+await page.click('#rhoChips [data-rho="14"]'); await settle(page);
+check('the share of time above C₊ and C₋ is shown only for ρ = 28', await D(() => document.getElementById('hudSub2').hidden));
+await page.click('[data-preset="return"]'); await settle(page, 60); s = await seek(40);
+check('RETURN at t = 40 is seed 0 with ρ = 28', s.preset === 'return' && s.seed === 0 && s.rho === 28 && near(s.t, 40));
 check('the two starts are far apart', dist(s.starts[0], s.starts[1]) > 40, String(dist(s.starts[0], s.starts[1])));
 let orbitOK = true, orbitBad = '';
 for (const k of [0, 1]) { let p = s.starts[k]; for (const i of [100, 400, 900, 1500]) { p = run(s.starts[k], i, 28); const q = await D(([a, b]) => window.ATTRACTOR_DEBUG.point(a, b), [k, i]); if (dist(p, q) > 1e-5) { orbitOK = false; orbitBad = JSON.stringify([k, i, p, q]); } } }
@@ -93,6 +105,7 @@ check('the arcs do not coincide: no passage of one round goes through the same p
 check('the two rounds are out of step at the end', s.gap > 1, String(s.gap));
 await pick('return'); s = await state();
 check('RETURN: stopped at t = 22 with both rounds past the ruin', near(s.t, 22) && s.counts[0] >= 1 && s.counts[1] >= 1 && s.cos > 0.97 && /方向夹角/.test(await page.textContent('#hudSub')));
+check('RETURN: the line above the figure prints cos δθ too, and the ruin is labelled on the magnifier', (await page.textContent('#hudSub')).includes(`cos δθ = ${s.cos.toFixed(4)}`) && await D(() => [...document.querySelectorAll('#stage .tag')].some((t) => !t.hidden && /遗迹的邻域 · 放大 \d+×/.test(t.textContent))));
 { // the card's caption reads the angle off the line above the figure and says its cosine is close to 1
   const want = await expectedReturn(s), ang = want && Math.acos(dot3(unitF(want.a.x), unitF(want.b.x))) * 180 / Math.PI;
   check('RETURN: the line above the figure prints the angle of the latest return, and its cosine (recomputed here) is above 0.99', want && (await page.textContent('#hudSub')).includes(`${ang.toFixed(1)}°`) && Math.cos(ang * Math.PI / 180) > 0.99, JSON.stringify([ang, await page.textContent('#hudSub')]));
@@ -120,7 +133,7 @@ const c0 = await D(() => window.ATTRACTOR_DEBUG.cloudPoint(7, 0)), c1 = await D(
 check('the points of the cloud follow the same system (one of them, to t = 0.5)', dist(run(c0, 50, 28), c1) < 1e-6);
 s = await seek(2);
 check('at t = 2 about 10⁻¹² of the volume is left and the cloud has lost nearly all its thickness', near(s.t, 2) && s.exact < 2e-12 && s.exact > 1e-12 && s.thickness < 0.12, JSON.stringify([s.exact, s.thickness]));
-check('the card SHEET is gone (it was cited nowhere)', (await D(() => document.querySelectorAll('[data-preset="sheet"]').length)) === 0 && (await D(() => document.querySelectorAll('#presets [data-preset]').length)) === 7);
+check('the card SHEET is gone (it was cited nowhere)', (await D(() => document.querySelectorAll('[data-preset="sheet"]').length)) === 0 && (await D(() => document.querySelectorAll('#presets [data-preset]').length)) === 6);
 
 /* ---------- dimension ---------- */
 await pick('dimension'); s = await state();
@@ -157,11 +170,11 @@ await page.click('#rhoChips [data-rho="28"]'); s = await state();
 check('leaving the card (another ρ) draws the whole orbit bright again', s.settle === 0 && s.preset === null);
 
 /* ---------- camera, keyboard, language ---------- */
-await pick('butterfly'); await seek(40);
+await pick('forget'); await seek(40);
 const box = await page.$eval('#stage', (el) => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; });
 const shot0 = await D(() => document.getElementById('cv').toDataURL().length);
 await page.mouse.move(box[0], box[1]); await page.mouse.down(); await page.mouse.move(box[0] + 140, box[1] + 30, { steps: 5 }); await page.mouse.up(); await settle(page);
-check('dragging the stage turns the attractor (the picture changes, the card stays)', (await D(() => document.getElementById('cv').toDataURL().length)) !== shot0 && (await state()).preset === 'butterfly');
+check('dragging the stage turns the attractor (the picture changes, the card stays)', (await D(() => document.getElementById('cv').toDataURL().length)) !== shot0 && (await state()).preset === 'forget');
 await page.click('body', { position: { x: 5, y: 5 } });
 for (const [key, sc] of [['2', 'shrink'], ['3', 'dimension'], ['1', 'rounds']]) { await page.keyboard.press(key); check(`key ${key} switches to the scene ${sc}`, (await state()).scene === sc); }
 await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); check('Home and → step the rail by one unit of time', near((await state()).t, 1));
