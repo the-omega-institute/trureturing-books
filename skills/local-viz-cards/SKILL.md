@@ -290,9 +290,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十七章 | 引理 `lemma-null-cone-spatial` 证明后的解读段（“双向卡尺”）之后 | `rapidity-lightcone` · `caliper` |
 | 第十七章 | §17.3 边界列表第 2 条的保形比例公式之后、“必须额外独立施加尺度归一化条件”一段之前 | `rapidity-lightcone` · `cone` |
 | 第十七章 | “必须额外独立施加尺度归一化条件”一段之后、格言之前 | `rapidity-lightcone` · `scale` |
-| 第十七章 | 文献注记 `rem-lorentz-rotor-literature` 之后、§17.4 之前 | `rapidity-lightcone` · `light` |
 | 第十七章 | 例 `ex-two-worldline-segments` 之后 | `rapidity-lightcone` · `twins` |
-| 第十七章 | `twins` 之后一句（“推到去程旅行者的参考系，再数一遍刻度”）之后 | `rapidity-lightcone` · `frames`，随后完整实验室 |
+| 第十七章 | `twins` 之后一句（“例末沿光锥零线的那种位移……”）之后 | `rapidity-lightcone` · `light` |
+| 第十七章 | `light` 之后一句（“推到去程旅行者的参考系，再数一遍刻度”）之后 | `rapidity-lightcone` · `frames` |
+| 第十七章 | 章末“在下一章……”一段之后（视频在“至此……”一段之后） | `rapidity-lightcone` 完整实验室 |
 | 第十八章 | 选定生成树一节规范变换公式之后、“为什么单个边相位……”一段之前 | `lattice-gauge-loop` · `twist` |
 | 第十八章 | 闭合回路一节列表第 1 条（弦的基本闭合回路）之后、第 2 条之前 | `lattice-gauge-loop` · `chord` |
 | 第十八章 | 闭合回路一节“开放树路径相位也……成为严格的规范不变量”一段之后 | `lattice-gauge-loop` · `anchor` |
