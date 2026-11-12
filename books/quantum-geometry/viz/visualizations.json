@@ -2693,6 +2693,56 @@
           "gid": "D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate"
         }
       ]
+    },
+    {
+      "id": "meta-unification-compass",
+      "code": "ORTHO//COMPASS",
+      "title": "元统一罗盘与黄金四元数桥",
+      "title_en": "The meta-unification compass and the golden quaternion bridge",
+      "summary": "第三十二章下半篇的两个画面：§32.3 的三根诊断轴（阶数 θ、分辨率 η、观察者 λ）张成立方体，§32.4 的八家统一纲领按总表原话落在各轴的三段之一（本书的比较诊断坐标），时间轴逐个读四大阵营；二元二十面体群 2I 的 120 个单位四元数在 ℤ[φ] 里精确算出，加上 φ⁻¹·2I 恰得 Q(q) = 2(a + b) = 2 的 240 个根，两两的 B 为整数、各有 56 个邻居、格拉姆行列式为 1，纯虚的 60 个从 E∥ 转到 E⊥ 时里外两层对调。",
+      "summary_en": "Two pictures from the second half of Chapter 32: the three diagnostic axes of §32.3 (grade θ, resolution η, observer λ) span a cube in which the eight unification programmes of §32.4 sit in one of three bands of each axis, by the words of the table (the book's comparative diagnostic coordinates), and the rail reads the four camps one by one; the 120 unit quaternions of the binary icosahedral group 2I are computed exactly in ℤ[φ], and with φ⁻¹·2I they give exactly the 240 vectors with Q(q) = 2(a + b) = 2, every B between them an integer, 56 neighbours each and Gram determinant 1, while the 60 pure ones swap shells when the projection turns from E∥ to E⊥.",
+      "path": "meta-unification-compass/",
+      "thumbnail": "meta-unification-compass/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "统一纲领",
+        "诊断坐标",
+        "二元二十面体群",
+        "艾柯西安环",
+        "E₈",
+        "四元数",
+        "黄金比",
+        "准晶切投"
+      ],
+      "tags_en": [
+        "unification programmes",
+        "diagnostic coordinates",
+        "binary icosahedral group",
+        "icosian ring",
+        "E₈",
+        "quaternions",
+        "golden ratio",
+        "quasicrystal cut and project"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十二章 · §32.3–32.4",
+          "label_en": "Chapter 32 · §32.3–32.4",
+          "href": "../zh/ch32-unified-field-and-meta-unification.html",
+          "href_en": "../en/ch32-unified-field-and-meta-unification.html"
+        },
+        {
+          "label": "Lean · 黄金不动点",
+          "label_en": "Lean · the golden fixed point",
+          "href": "{trureturing}/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
+        }
+      ]
     }
   ]
 }
