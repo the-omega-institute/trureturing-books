@@ -10,11 +10,12 @@ In [Chapter 7](ch07-geometric-time-and-speed-limits.md), we uncovered the dualit
 
 Place these two faces of time side by side, however, and Loschmidt's classic reversibility paradox confronts us immediately: **if the underlying unitary rotation $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$ is $100\%$ reversible — reversed without residue by turning through the opposite angle $R(-\theta) = R(\theta)^\dagger$ — why do macroscopic experience and observer memory obey an unyielding, one-way thermodynamic arrow of time? Why can we remember yesterday but never tomorrow?**
 
-Closing Part II (*Unfolding Wings — From Line to Plane*), this chapter settles the information-theoretic and thermodynamic ledger of flattening a two-dimensional area into a one-dimensional line through six formal results verified in the Lean 4 kernel:
+Closing Part II (*Unfolding Wings — From Line to Plane*), this chapter settles the information-theoretic and thermodynamic ledger of flattening a two-dimensional area into a one-dimensional line through seven formal results verified in the Lean 4 kernel:
 
 1. **Unitary rotation produces zero entropy; only basis pinching of off-diagonal area produces entropy**: Across any unitary rotation $U$ followed by computational-basis diagonal pinching $\Pi$, the system von Neumann entropy production $\Delta S_{\mathrm{pinch}} = S(\Pi(U\rho U^*)) - S(\rho)$ equals the exact quantum relative entropy of deleted coherence $D(U\rho U^* \,\|\, \Pi(U\rho U^*)) \ge 0$;
-2. **Flattening a $1$-bit orthogonal area produces $\ln 2$ nats of system entropy, kept cleanly distinct from non-unital Landauer reset**: Pinching a $d$-dimensional $Z$-record state in a mutually unbiased $X$-basis (a unital operation) drives it straight to the maximally mixed center $I_d/d$ at relative-entropy and von Neumann entropy-increase cost $\ln d - S(\rho)$ ($\ln 2 \approx 0.6931\text{ nats} = 1\text{ bit}$ for a pure qubit); how a subsequent non-unital reset step expels that system mixture into an external thermal bath is isolated in the thermodynamic literature notes [@rem-landauer-stage-b-statement-literature] and [@rem-landauer-thermodynamic-bridge-literature];
-3. **Not even the observer is exempt**: Under the specified conjugated-overlap reversal protocol and restricted access, if the other copies are unimodular, the surviving overlap differs from $1$, and the selected $\rho_{ij} \neq 0$, that surviving copy blocks restoration of that selected coherence entry.
+2. **No physical process makes two states more distinguishable**: for every completely positive, trace-preserving finite-dimensional quantum channel $\Phi$, $D(\Phi\rho \,\|\, \Phi\sigma) \le D(\rho \,\|\, \sigma)$ (the data processing inequality); unitary processes attain equality, which is why they are reversible;
+3. **Flattening a $1$-bit orthogonal area produces $\ln 2$ nats of system entropy, kept cleanly distinct from non-unital Landauer reset**: Pinching a $d$-dimensional $Z$-record state in a mutually unbiased $X$-basis (a unital operation) drives it straight to the maximally mixed center $I_d/d$ at relative-entropy and von Neumann entropy-increase cost $\ln d - S(\rho)$ ($\ln 2 \approx 0.6931\text{ nats} = 1\text{ bit}$ for a pure qubit); how a subsequent non-unital reset step expels that system mixture into an external thermal bath is isolated in the thermodynamic literature notes [@rem-landauer-stage-b-statement-literature] and [@rem-landauer-thermodynamic-bridge-literature];
+4. **Not even the observer is exempt**: Under the specified conjugated-overlap reversal protocol and restricted access, if the other copies are unimodular, the surviving overlap differs from $1$, and the selected $\rho_{ij} \neq 0$, that surviving copy blocks restoration of that selected coherence entry.
 
 ::: {.figure src="ch08-overview"}
 **Figure 8.** The chapter at a glance. Panel I: two arrows $\rho$ and $\sigma$ with the same diagonal but different coherences sit at the same height; the partial trace removes their magenta sideways parts and both land on the same cyan point of the vertical axis. Panel II: the amber arrow $\lvert +\rangle$ is pinched, its magenta sideways part is removed and it shrinks to the cyan point at the centre, while the entropy column rises from $0$ to $\ln 2$. Panel III: under the conjugated-overlap reversal protocol specified in this section, the system is linked to five environment copies; four are rewound (cyan), and the one left over, $k$, is magenta. The other copies satisfy $|c_l| = 1$ ($l \neq k$), with $c_k \neq 1$ and $\rho_{01} \neq 0$, so the rewind gives only $c_k\rho_{01} \neq \rho_{01}$.
@@ -66,6 +67,61 @@ $$
 ::: {.viz src="erasure-ledger" preset="pinch" height="500"}
 **Turn, then pinch: ln 2 more entropy.** During the 90° turn the amber arrow swings from |0⟩ to lying flat and the “system S” column on the right does not move; at the pinch the magenta sideways part is wiped out, the arrow shrinks to the centre, the entropy column rises to the dashed ln 2 line, and the heat paid is still 0 ([@thm-dual-account-full]).
 :::
+
+**Not only pinching: no process makes two states more distinguishable.** [@thm-dual-account-full] keeps the ledger for one particular operation, basis pinching. Widen the question. Send two states $\rho$ and $\sigma$ through the same physical process (noise, a measurement whose result is thrown away, a coupling to an environment that is then discarded). What happens to the relative entropy between them? The answer is the same for **every** finite-dimensional quantum channel: it can only go down.
+
+::: {.theorem #thm-channel-data-processing title="The Data Processing Inequality: Quantum Channels Do Not Increase Relative Entropy" lean="D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi"}
+Let $a$ and $b$ be nonempty finite index sets and $\Phi$ a finite-dimensional quantum channel from complex $a \times a$ matrices to complex $b \times b$ matrices, that is, a completely positive, trace-preserving linear map. For density states (positive semidefinite matrices of trace $1$) $\rho$ and $\sigma$ on $a$, write the relative entropy with its support convention as
+
+$$
+D(\rho \,\|\, \sigma) =
+\begin{cases}
+\operatorname{Tr}\bigl(\rho(\log\rho - \log\sigma)\bigr), & \operatorname{supp}\rho \subseteq \operatorname{supp}\sigma, \\
++\infty, & \text{otherwise},
+\end{cases}
+$$
+
+where $\log$ is the natural logarithm (taken as $0$ on zero eigenvalues) and $\operatorname{supp}\rho \subseteq \operatorname{supp}\sigma$ means that every vector annihilated by $\sigma$ is also annihilated by $\rho$. Then
+
+$$
+D\bigl(\Phi(\rho) \,\|\, \Phi(\sigma)\bigr) \le D(\rho \,\|\, \sigma).
+$$
+:::
+
+::: proof
+If the support of $\rho$ is not inside that of $\sigma$, the right-hand side is $+\infty$ and there is nothing to prove. Otherwise Lean writes the channel in Kraus form $\Phi(X) = \sum_c K_c X K_c^\dagger$ ($\sum_c K_c^\dagger K_c = I$) and puts the spectra of the two states together into Petz's "relative modular operator" data. On each side, the relative entropy becomes minus the quadratic form, on a unit vector, of the logarithm of a diagonal "ratio operator" (ratios of eigenvalues). The Kraus operators assemble into a contraction $V$ ($V^\dagger V \le I$) that carries the unit vector of one side to that of the other and, sandwiching the two ratio operators, satisfies an operator inequality. The logarithm is operator monotone and operator concave, so the contraction cannot push one quadratic form past the other; changing sign gives the theorem. The full proof is checked by the Lean kernel.
+:::
+
+Two consequences follow from the theorem by hand:
+
+- **Unitary processes keep relative entropy (manual derivation).** $\rho \mapsto U\rho U^\dagger$ is a channel, and so is its inverse $\rho \mapsto U^\dagger\rho U$. Applying [@thm-channel-data-processing] in both directions gives $D(U\rho U^\dagger \,\|\, U\sigma U^\dagger) \le D(\rho \,\|\, \sigma) \le D(U\rho U^\dagger \,\|\, U\sigma U^\dagger)$, so equality holds. Not a bit of distinguishability is lost, which is exactly what §8.1 means by "reversible".
+- **A quantum H-theorem (manual derivation).** If a channel has a fixed state, $\Phi(\sigma) = \sigma$, then for every $\rho$, $D(\Phi^{n+1}\rho \,\|\, \sigma) = D(\Phi(\Phi^n\rho) \,\|\, \Phi(\sigma)) \le D(\Phi^n\rho \,\|\, \sigma)$: repeating the same process never lets the relative entropy to the fixed state climb back up.
+
+::: {.example #ex-channel-data-processing-qubit title="One Qubit: Relative Entropy Under Depolarizing, Pinching and Rotation"}
+Natural logarithms throughout; values are rounded to the digits shown and computed directly from eigendecompositions of $2 \times 2$ matrices.
+
+**Depolarizing towards $I/2$.** Take $\rho = \operatorname{diag}(0.9, 0.1)$ (Bloch vector $(0, 0, 0.8)$) and $\sigma = I/2$. The depolarizing channel $\Phi_\lambda(X) = \lambda X + (1 - \lambda)\operatorname{Tr}(X)\, I/2$ shrinks Bloch vectors by the factor $\lambda$ and leaves $I/2$ fixed. Since $D(\rho \,\|\, I/2) = \ln 2 - S(\rho)$ (manual derivation),
+
+| $\lambda$ | $1$ | $0.75$ | $0.5$ | $0.25$ | $0$ |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| $D(\Phi_\lambda\rho \,\|\, I/2)$ | $0.3681$ | $0.1927$ | $0.0823$ | $0.0201$ | $0$ |
+
+Applying $\Phi_{1/2}$ again and again, $n = 0, 1, 2, 3, 4$ times, gives $0.36806$, $0.08228$, $0.02014$, $0.00501$, $0.00125$: the quantum H-theorem above.
+
+**From infinity to finite.** $\lvert 0\rangle\langle 0\rvert$ and $\lvert +\rangle\langle +\rvert$ are two different pure states whose supports do not contain each other, so their relative entropy is $+\infty$. After depolarizing, both have full rank and the relative entropy is finite: $1.325$ at $\lambda = 0.9$, $0.2747$ at $\lambda = 0.5$, $0.0100$ at $\lambda = 0.1$.
+
+**Pinching can erase every difference.** $\lvert +\rangle\langle +\rvert$ and $\lvert -\rangle\langle -\rvert$ are also at $+\infty$; pinched in the $Z$ basis (keeping only the diagonal) both become $I/2$, and the relative entropy is $0$: an observer who records only $Z$-basis readings can no longer tell them apart.
+
+**Rotation keeps it, pinching lowers it.** For two general states with Bloch vectors $(0.3, 0.2, 0.5)$ and $(-0.1, 0.4, 0.2)$, the relative entropy is $0.1602$; after a rotation by $0.7$ radians about the $y$-axis it is still $0.1602$; after pinching in the $Z$ basis it drops to $0.0499$.
+:::
+
+The following are **literature results, not formalized in this book**:
+
+- the monotonicity was first proved by G. Lindblad (1975) for completely positive trace-preserving maps and by A. Uhlmann (1977) in a more general setting;
+- the quantum Stein lemma gives relative entropy its operational meaning as the optimal error exponent for telling $\rho$ from $\sigma$, so "$D$ only goes down" reads "no preprocessing makes the hypothesis test easier";
+- the monotonicity also holds for trace-preserving maps that are merely positive, not completely positive (A. Müller-Hermes and D. Reeb, 2017).
+
+> A process can only erase differences, never create them.
 
 ## 8.2 Two-Stage Geometric Picture of Coherence-Deletion Entropy Production and Landauer's Principle {#sec-landauer-principle-geometry}
 
@@ -311,7 +367,7 @@ These Stage B physical conversion formulas involving $k_B$, bath Hamiltonians $H
 
 ## 8.4 Part II Summary and Bridge: When a Single Plane Cannot Hold Three Orthogonal Bifurcations, Leap to the Three-Dimensional Sphere {#sec-part2-summary-bridge}
 
-Across the four chapters of Part II (*Unfolding Wings — From Line to Plane*), backed by twenty-one Lean-verified theorems, lemmas, propositions, and corollaries (five in each of Chapters 5, 6 and 7, and six in Chapter 8), we have unfolded the geometry of two-dimensional oriented area:
+Across the four chapters of Part II (*Unfolding Wings — From Line to Plane*), backed by twenty-two Lean-verified theorems, lemmas, propositions, and corollaries (five in each of Chapters 5, 6 and 7, and seven in Chapter 8), we have unfolded the geometry of two-dimensional oriented area:
 
 - **Chapter 5** demystified the imaginary unit $i$, deriving the skew-adjoint relative complex structure $J := 2AB^*$ satisfying $J^2 = -I$ from a balanced unitary sum $S = A + B$ ([@thm-balanced-sum-skew-adjoint], [@lemma-skew-adjoint-unitary-square], [@thm-relative-complex-structure-square]) alongside the phase-locked real factorization ([@prop-phase-locked-overlap]), showing through the double cover of the circle ([@thm-circle-double-cover-history-lift]) that the sign reversal of a rotor after a full turn is a topological fact, and turning all standard single-qubit gates into three-dimensional Clifford rotors $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$;
 - **Chapter 6** unified wave–particle duality and the five textbook postulates through the geometric product $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$, anchored by the Lagrange–Gram identity ([@thm-lagrange-gram-identity]), the Robertson–Schrödinger conservation identity ([@thm-robertson-schrodinger]) and its mixed-state inequality ([@thm-mixed-state-robertson]), the pure-record complementarity circle $D^2 + V^2 = 1$ ([@thm-record-coherence-complementarity]), the Hilbert–Schmidt pinching Pythagorean split ([@cor-pinching-pythagorean]), and the live interactive laboratory `ORTHO//QUBIT`;
