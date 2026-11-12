@@ -31,8 +31,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `timeless-causal-crystal` | 两条余弦锁住第三条的窗口，观察者只能在窗口里选点 | `window` `impossible` `right` `crystal` `field` `thread` `sos` `wilderness` |
 | `navier-stokes-p-np` | 对流项拆成梯度与兰姆两半；涡管被拉细（伯格斯涡核按精确解趋向 R∞ ∝ Re^(−½)，条带小图另画 K41 统计标度，两者不互推）；只看一部分的观察者得不到闭合 | `potential` `vortex` `flat` `strain` `burgers` `runaway` `closed` `mixed` |
 | `eth-horizon-crossover` | 渐近更好的曲线要到视界之外才追上；单次抽样流矩阵的秩与四道割比较；过线的模态数有墙 | `human` `atoms` `cross` `constant` `bridge` `narrow` `plateau` `tail` |
-| `spatial-attractor-deja-vu` | 忘掉起点，轨道还是落回同一对翅膀，一次次经过同一处 | `butterfly` `forget` `return` `shrink` `dimension` `fixed` `cycle` |
-| `golden-cut-observer` | 窗口挪一挪，贴边的点翻转，深处的点留在原地 | `cut` `phason` `empire` `cassini` `returns` `narrow` `window` `edge` |
+| `spatial-attractor-deja-vu` | 忘掉起点，轨道还是落回同一对翅膀，一次次经过同一处 | `forget` `return` `shrink` `dimension` `fixed` `cycle` |
+| `golden-cut-observer` | 窗口挪一挪，贴边的点翻转，深处的点留在原地 | `cut` `phason` `empire` `cassini` `returns` `narrow` `window` `gaps` `pi` |
 | `repeated-projection` | 投一次，箭头只剩线上的影子；再投多少次，影子都不再动 | `once` `twice` `fixed` `perp` `sum` |
 | `bloch-noise` | 噪声把球往里压、往北推，却从不把球里的两个点拉开 | `shorten` `pinch` `dephase` `amp` `wide` `distance` `centre` |
 | `double-slit-marker` | 路径记得越清，条纹越淡；两者落在同一个圆上，怎么读标记可以等落点到了再定 | `wave` `partial` `which` `delayed` `erase` `mixed` |
@@ -77,7 +77,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ### 各页面的依据分层、用语与分工
 
-`navier-stokes-p-np`、`eth-horizon-crossover`、`spatial-attractor-deja-vu`、`golden-cut-observer` 四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`spatial-attractor-deja-vu` 不引用任何 Lean 定理：重返（两轮各一次经过、两点相距 ‖x₁(t<sub>a</sub>) − x₂(t<sub>b</sub>)‖ < ε）处单位切向的内积 cos δθ = v̂₁·v̂₂ 标 `NUM` 与 `MODEL`，舞台上画成青色与品红的两支箭头；Tucker 的奇异吸引子定理与卡普兰—约克公式标 `ARGUED`；两个非零平衡点 C₊、C₋ 的 x、y 同号（ρ = 28 时是不稳定的鞍焦点），画成中性色空心圈；ρ = 14 时两点都稳定，同样的参数下每一轮落进哪一个由起点所在的吸引域决定（`fixed` 卡的两轮落进相反的两点），标签写“稳定点 C₊/C₋”、按落进它的那一轮着青色或品红，点在窄屏画布边外时标签收进画布并带箭头指向它；页面自己的数值核对不用绿色 ✓。
+`navier-stokes-p-np`、`eth-horizon-crossover`、`spatial-attractor-deja-vu`、`golden-cut-observer` 四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`spatial-attractor-deja-vu` 不引用任何 Lean 定理：重返（两轮各一次经过、两点相距 ‖x₁(t<sub>a</sub>) − x₂(t<sub>b</sub>)‖ < ε）处单位切向的内积 cos δθ = v̂₁·v̂₂ 标 `NUM` 与 `MODEL`，舞台上画成青色与品红的两支箭头；Tucker 的奇异吸引子定理与卡普兰—约克公式标 `ARGUED`；两个非零平衡点 C₊、C₋ 的 x、y 同号（ρ = 28 时是不稳定的鞍焦点），画成中性色空心圈；ρ = 14 时两点都稳定，同样的参数下每一轮落进哪一个由起点所在的吸引域决定（`fixed` 卡的两轮落进相反的两点），标签写“稳定点 C₊/C₋”、按落进它的那一轮着青色或品红，点在窄屏画布边外时标签收进画布并带箭头指向它；页面自己的数值核对不用绿色 ✓。`forget` 的说明条第二行是两轮到此刻为止高过 C₊、C₋（z > ρ − 1）的时间比例与两轮此刻的距离（`NUM`）：讲“忘掉的是起点，留下的是比例”；`return` 在右下角开一个放大 4 倍的小窗，画遗迹邻域、两段弧与两支长的单位切向，说明条给出 δθ 与 cos δθ。`golden-cut-observer` 的场景“缝”画旋转的前 N 个点在长为 1 的圆周上切出的弧，按长度分类上色（最短青、中间紫、最长品红，琥珀只给最新的点），绿色框只给终章用 `lean=` 引用的三距离定理与黄金赫尔维茨界，“每段弧长于 1/(√5 N)”是正文的手工推导（`ARGUED`），各个 N 的读数标 `NUM`；Delone 集定理在终章只以行内链接出现，页面上写成不带颜色的说明。
 
 `repeated-projection` 的箭头是布洛赫矢量，“投一次”是沿测量线的未读测量 $P_+\rho P_+ + P_-\rho P_-$，不是第三章偏振片例题里的选择性条件更新（那里 $0^\circ$ 与 $90^\circ$ 偏振片在布洛赫球上是同一条线的两端）；“一投等于投到线上的影子”是页面的数值核对（`NUM`），绿色框只给本章引用的三条定理：捏合幂等、不动点判据、互补勾股。
 
@@ -473,21 +473,22 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十九章 | 定理 `thm-ch39-double-cover-no-section-and-720-lift` 的证明之后 | `self-sustaining-spinor-flow` · `seam` |
 | 第三十九章 | 该定理之后的“请屏息凝视”一段之后、§39.4 之前 | `self-sustaining-spinor-flow` · `turn720` |
 | 第三十九章 | 章末（最后一段之后） | `self-sustaining-spinor-flow` 完整实验室 |
-| 终章 | 空间吸引子 · 一 末 | `spatial-attractor-deja-vu` · `butterfly` |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget` |
 | 终章 | 空间吸引子 · 二 “回到洛伦兹”一段中“吸引子的体积为零”一句之后 | `spatial-attractor-deja-vu` · `shrink` |
 | 终章 | 空间吸引子 · 三 第 1 条（$1$ 维死板闭环）之后 | `spatial-attractor-deja-vu` · `cycle` |
 | 终章 | 空间吸引子 · 三 第 2 条（分形横截叶层）之后 | `spatial-attractor-deja-vu` · `dimension` |
-| 终章 | 空间吸引子一节末 | `spatial-attractor-deja-vu` · `return`，随后完整实验室 |
+| 终章 | 空间吸引子一节末 | `spatial-attractor-deja-vu` · `return`，隔一句引出语后是完整实验室 |
 | 终章 | 黄金切投 · 一 第 1 条（全窗口 Delone 集）之后、第 2 条之前 | `golden-cut-observer` · `cut` |
 | 终章 | 黄金切投 · 二 末 | `golden-cut-observer` · `phason` |
-| 终章 | 黄金切投 · 三 第 2 条（贴边与深处的点）之后 | `golden-cut-observer` · `window`、`edge` |
+| 终章 | 黄金切投 · 三 第 2 条（贴边与深处的点）之后 | `golden-cut-observer` · `window`（深处的点与同一条线上贴边的点同在一张卡里） |
 | 终章 | 黄金切投 · 三 末（第 3 条之后） | `golden-cut-observer` · `empire` |
 | 终章 | 黄金切投 · 四 第 1 条（卡西尼恒等式）之后、第 2 条之前 | `golden-cut-observer` · `cassini` |
 | 终章 | 黄金切投 · 四 第 3 条之后、定理 `thm-coda-golden-cut-observer-cassini` 之前 | `golden-cut-observer` · `returns` |
 | 终章 | 定理 `thm-coda-golden-cut-observer-cassini` 的证明之后、完整实验室之前 | `golden-cut-observer` · `narrow` |
-| 终章 | 该定理的证明之后 | `golden-cut-observer` 完整实验室 |
+| 终章 | 例 `ex-coda-golden-three-gap` 之后、“为什么黄金角不会切出极短的弧”之前 | `golden-cut-observer` · `gaps` |
+| 终章 | “每一段弧都长于 1/(√5 N)”之后的数值段落之后 | `golden-cut-observer` · `pi` |
+| 终章 | 黄金切投 · 四 末（格言之后） | `golden-cut-observer` 完整实验室 |
 | 附录 C | 开篇三类账目列表之后、C.1 之前 | `lean-declaration-map` · `all` |
 | 附录 C | C.2.1 行内声明表之后、C.3 之前 | `lean-declaration-map` · `inline` |
 | 附录 C | C.4 核验清单之后、注记 `rem-appendix-c-epistemic-boundary` 之前 | `lean-declaration-map` · `theorems` |
