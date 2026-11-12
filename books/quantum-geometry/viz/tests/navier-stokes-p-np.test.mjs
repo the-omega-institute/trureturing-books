@@ -5,7 +5,7 @@
 // equation with Runge–Kutta, the Burgers core radius by integrating dR²/dτ = −αR² + 4ν with Heun steps, the K41 scaling
 // by log-log slopes, and the closure criterion by brute force over all 27 settings of the three leaks. The tube scene
 // is a lit solid (kit.solid); its drawn radius, ends, loop and colour are checked against the same integration.
-import { session, stageFirstChecks, solidChecks, settle, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, settle, until as untilOn, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'navier-stokes-p-np';
 const T = await session();
@@ -30,7 +30,23 @@ check('opens on STRETCH: the tube under steady strain, without viscosity, at the
 const { alpha, kappa, gamma, a0 } = s.consts;
 
 /* ---------- the tube is a lit solid (the scenes of the other cards are 2D plots) ---------- */
-await solidChecks(T, BOOK, ID, page);
+await solidChecks(T, BOOK, ID, page, { rest: false });
+{
+  // inside a book the card plays from t = 0 once it is in view and keeps its context while it plays; rather than wait for
+  // the whole rail on a slow runner, wait until it has started, move it to its last frame (which pauses it), and then the
+  // context must be given back after the rest, the frame staying on the page as a picture; a touch takes it back
+  const em = await T.open(BOOK, ID, '?embed=1&lang=zh', { viewport: { width: 740, height: 620 } });
+  await settle(em);
+  await untilOn(em, () => window.VORTEX_DEBUG.state.playing || window.VORTEX_DEBUG.state.t > 0, null, 60000);
+  await em.evaluate(() => window.VORTEX_DEBUG.seek(window.VORTEX_DEBUG.state.max));
+  const parked = await untilOn(em, () => window.TRV.solids[0].parked(), null, 60000);
+  const shown = await em.evaluate(() => { const sc = window.TRV.solids[0], st = sc.el.querySelector('#cv'); return { gl: !!sc.el.querySelector('canvas.solid-gl'), still: !!st && st.style.visibility === 'visible', tube: window.VORTEX_DEBUG.state.scene === 'tube' }; });
+  check('solid: inside a book the WebGL context is given back after a rest, the frame stays as a picture', parked && shown.tube && !shown.gl && shown.still, JSON.stringify(shown));
+  const box = await em.evaluate(() => { const r = window.TRV.solids[0].el.getBoundingClientRect(); return [r.left + 8, r.top + r.height - 8]; });
+  await em.mouse.move(box[0], box[1]); await em.mouse.down(); await em.mouse.up(); await settle(em);
+  check('solid: a touch takes the context back', await em.evaluate(() => !window.TRV.solids[0].parked()));
+  await em.context().close();
+}
 
 /* ---------- the two halves of advection ---------- */
 await pick('vortex'); s = await seek(0);
