@@ -2433,6 +2433,65 @@
           "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
         }
       ]
+    },
+    {
+      "id": "hairy-ball-normal-escape",
+      "code": "ORTHO//HAIRY",
+      "title": "毛球、环面与法向逃逸",
+      "title_en": "Hairy balls, tori and the normal escape",
+      "summary": "可转动的球面与环面上铺满连续的切向箭头，品红的环圈出箭头为零的点。球面上的纬向场 (−y, x, 0) 在南北两极各有一个指标 +1 的零点；用立体投影拉回的一族场把南极的零点沿经线推到北极，两个合成偶极切场 w = (((1 − z)² − x² + y²)/2, −xy, x(1 − z)) 唯一的、指标 +2 的零点，指标之和始终是 2。环面 ((R + r cos θ) cos φ, (R + r cos θ) sin φ, r sin θ) 上的单位切场 ê_φ 处处长 1，没有零点。正二十面体逐级切成测地穹顶，ν = 1 到 6 的顶点角亏之和都是 4π。让箭头沿外法向抬起，w̃_λ = (1 − λ)w + λ(1 + z)/2·x 在 0 < λ < 1 时处处不为零，‖w̃₁(N)‖ = 1；λ = 1 时南极又成了零点。庞加莱—霍普夫与笛卡尔定理是文献结果，抬升的读法是诠释模型；六张实验卡可在第二十一、二十九章正文里单独引用。",
+      "summary_en": "Continuous tangent arrows cover a sphere and a torus that can be turned by hand; magenta rings circle the points where they vanish. The zonal field (−y, x, 0) has a zero of index +1 at each pole; a family pulled back by stereographic projection pushes the southern zero up a meridian into the North Pole, where the two become the single zero, of index +2, of the dipole field w = (((1 − z)² − x² + y²)/2, −xy, x(1 − z)); the indices always add up to 2. On the torus ((R + r cos θ) cos φ, (R + r cos θ) sin φ, r sin θ) the unit field ê_φ has length 1 everywhere and no zero. The icosahedron cut into geodesic domes keeps a total vertex defect of 4π for ν = 1 to 6. Lifted along the outward normal, w̃_λ = (1 − λ)w + λ(1 + z)/2·x vanishes nowhere for 0 < λ < 1 and ‖w̃₁(N)‖ = 1, while at λ = 1 the South Pole becomes a zero. Poincaré–Hopf and Descartes are literature results and the reading of the lift is an interpretation; each of the six experiment cards can be cited on its own from Chapters 21 and 29.",
+      "path": "hairy-ball-normal-escape/",
+      "thumbnail": "hairy-ball-normal-escape/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "毛球定理",
+        "庞加莱—霍普夫",
+        "欧拉示性数",
+        "环面",
+        "笛卡尔角亏",
+        "法向逃逸"
+      ],
+      "tags_en": [
+        "Hairy ball theorem",
+        "Poincaré–Hopf",
+        "Euler characteristic",
+        "Torus",
+        "Descartes defect",
+        "Normal escape"
+      ],
+      "theory": [
+        {
+          "label": "第二十一章 · 毛球定理、角亏与 Adams 球面",
+          "label_en": "Chapter 21 · Hairy ball, angle defect and Adams spheres",
+          "href": "../zh/ch21-diagonalization-and-escape.html#sec-ch21-4",
+          "href_en": "../en/ch21-diagonalization-and-escape.html#sec-ch21-4"
+        },
+        {
+          "label": "第二十九章 · 同余数椭圆曲线环面",
+          "label_en": "Chapter 29 · The congruent-number elliptic torus",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#rem-ch29-elliptic-torus-literature",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#rem-ch29-elliptic-torus-literature"
+        },
+        {
+          "label": "终章 · 多面体近似与不可抹平的几何余项",
+          "label_en": "End chapter · Polyhedral approximation and its remainder",
+          "href": "../zh/coda.html#sec-coda-polyhedral-remainder",
+          "href_en": "../en/coda.html#sec-coda-polyhedral-remainder"
+        },
+        {
+          "label": "trureturing · DiagonalTopologicalEscape.lean",
+          "label_en": "trureturing · DiagonalTopologicalEscape.lean",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean",
+          "href_en": "{trureturing}/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"
+        }
+      ]
     }
   ]
 }
