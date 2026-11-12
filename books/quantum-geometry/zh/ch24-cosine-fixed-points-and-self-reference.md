@@ -696,10 +696,6 @@ $f_1$ 的平均很快趋于 $0$：几何和给出界 $\frac{1}{N\lvert\sin(\thet
 **左边蛛网围方格，右边光滑双螺旋按步数对照收束。** 共用步数指标 $k = 8$：左栏从 $\theta_0 = 0$ 已完成 $8$ 次历史 Picard 递推 $Q_0 \dots Q_7$（每次走两段等长直角臂转 $180^\circ$，绕满四整圈）并以琥珀色走出步指标 $k = 8$ 的当前递推 $Q_8$（画面共显示 $9$ 次递推、$4.5$ 圈回旋方格与分段 $90^\circ$ 圆弧导引线）；右栏停在极坐标步指标 $k = 8$（$\phi_8 = 4\pi$，每步转 $90^\circ$ 共两整圈，琥珀色射线与圆点），叠画灰色虚线正圆、紫色蛛网双步螺旋（每 $90^\circ$ 乘 $0.8207$）、青色 $\theta^*$ 正交螺旋（$0.6736$）与品红斐波那契黄金螺旋（$0.6180$）。
 :::
 
-::: {.viz src="dottie-fibonacci-spirals" height="580"}
-**余弦不动点与斐波那契双螺旋：完整实验室。** 三个场景共用同一根步数轴 $k = 0 \dots 20$：双栏对照（可切换 $\cos\theta$、$1/(1+x)$ 或双映射叠画，并拖动起点 $x_0$）、蛛网回旋方格（全程或跟随放大）与向心径向切角及守恒对偶。定性余弦收敛见 [@ex-ch33-mutual-cosine-monotonic-lock]，导数、向心切角公式与守恒式是文献结果（[@rem-dottie-fibonacci-spiral-literature]），克利福德转向、连续对数螺旋插值与双螺旋分工是本书模型（`MODEL`），绿色框只给五条已验证的 Lean 定理。
-:::
-
 ## 24.6 “$\pi$ 是 $\theta$ 的一个投影？”：互逆的两条级数、开普勒方程与半程落体 {#sec-ch24-6}
 
 作者手稿里的追问 *“$\pi$ 是 $\theta$ 的一个投影？”* 在 [@conj-schanuel-dottie] 处得到的是一个否定方向的条件性回答：在沙努埃尔猜想之下，$\theta^*$ 与 $\pi$ 之间没有任何整系数多项式关系。但“没有代数关系”不等于“没有关系”。肯定方向的回答就藏在不动点方程里，一步就能读出来。
@@ -1089,3 +1085,7 @@ $$
 - **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）、正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）、正五边形的黄金余弦（[@prop-pentagon-golden-cosines]）、对角线落点即扭转不动点与无不动点扭转的普遍逃逸及其有限计数（[@lem-diagonal-landing-fixed]、[@thm-self-application-fragment-package]、[@prop-escaped-listing-card]）、标准单纯形上的布劳威尔不动点定理（[@thm-brouwer-standard-simplex]）、无理旋转轨道平均趋于 Haar 平均（[@lem-irrational-rotation-equidistribution]），指定有理复合逆在 $\pi$ 处的绝对收敛及唯一正实余弦不动点值（[@thm-dottie-rational-inverse-endpoint]），以及反正弦展开所用的归一化中心二项系数界与二项核级数（[@lem-arcsin-binomial-kernel]），并在经典不动点与数论文献评注（[@rem-banach-dottie-hairy-ball-literature]）及开放沙努埃尔猜想（[@conj-schanuel-dottie]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
 
 既然前六部的几何直觉与理论大厦已经合拢，在接下来的**第七部《铸器·构造与验证：异或代数、旋子编译与 Lean 4 公理圣殿》**中，我们将把这一切几何定理直接铸造成可运行、零复数矩阵黑箱的位掩码克利福德引擎与 ZYZ 旋转器编译器，并走进 Lean 4 形式化公理圣殿的内部，对支撑全书的机器形式化声明展开逐行审计，随后在**第八部**与**终章**中完成全书八部曲的总合拢！
+
+::: {.viz src="dottie-fibonacci-spirals" height="580"}
+**余弦不动点与斐波那契双螺旋：完整实验室。** 三个场景共用同一根步数轴 $k = 0 \dots 20$：双栏对照（可切换 $\cos\theta$、$1/(1+x)$ 或双映射叠画，并拖动起点 $x_0$）、蛛网回旋方格（全程或跟随放大）与向心径向切角及守恒对偶。定性余弦收敛见 [@ex-ch33-mutual-cosine-monotonic-lock]，导数、向心切角公式与守恒式是文献结果（[@rem-dottie-fibonacci-spiral-literature]），克利福德转向、连续对数螺旋插值与双螺旋分工是本书模型（`MODEL`），绿色框只给五条已验证的 Lean 定理。
+:::

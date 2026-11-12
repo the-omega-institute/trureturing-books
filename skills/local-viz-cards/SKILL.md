@@ -362,7 +362,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十四章 | §24.5 双螺旋对应小节 · 一维加法与二维勾股守恒对偶一段之后 | `dottie-fibonacci-spirals` · `pythagoras` |
 | 第二十四章 | §24.5 双螺旋对应小节 · 向心径向切角 α 一段之后 | `dottie-fibonacci-spirals` · `tilt` |
 | 第二十四章 | §24.5 双螺旋对应小节 · 渐近自相似放大一段之后 | `dottie-fibonacci-spirals` · `zoom` |
-| 第二十四章 | §24.5 末（转入 §24.6 之前） | `dottie-fibonacci-spirals` · `twin`，随后完整实验室 |
+| 第二十四章 | §24.5 末（转入 §24.6 之前） | `dottie-fibonacci-spirals` · `twin` |
+| 第二十四章 | 章末（第六部小结最后一段之后） | `dottie-fibonacci-spirals` 完整实验室 |
 | 第二十五章 | §三比特刀片掩码一节的掩码表之后、“在这套 3 比特编码下”之前 | `blade-multiplication` · `square` |
 | 第二十五章 | 两条位运算定律的列表之后、“请特别注意”之前 | `blade-multiplication` · `e2e1` |
 | 第二十五章 | “请特别注意”下第一条（伪标量 $I_3$）之后、第二条（两比特辛泡利字）之前 | `blade-multiplication` · `pseudo` |
