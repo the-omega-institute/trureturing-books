@@ -397,6 +397,81 @@ const order = (txt, li) => { const at = ['two', 'lam', 'det', 'gauss', 'none'].m
 check('the drawer states every comparison\'s condition in the page\'s order, two > λ ≠ 0 > Δ ≠ 0 > Gaussian > none, with when equality holds (zh, en, as shown)',
   order(dz.text, 0) && order(de.text, 1) && Object.values(EQW).every(([zh, en]) => dz.text.includes(zh) && de.text.includes(en)), `${dz.text.slice(0, 120)} | ${de.text.slice(0, 120)}`);
 
+// The drawer's example of a swap that changes nothing: two π/2 pulses with phases 180° apart, which the example promises
+// coincide at zero detuning (zero detuning is sufficient, not claimed necessary). At Δ = 0 a pulse at phase φ has the generator ½Ω(t) n_φ·σ with n_φ = (cos φ, sin φ, 0); its values commute,
+// so U_φ = exp(−(i/2)A n_φ·σ) for either envelope (A the area), and n_{φ+180°} = −n_φ gives U_{φ+180°} = U_φ⁻¹: both orders
+// are the identity, from any start, for any area and duration, and a common shift of both phases by ∓λ (either sign)
+// keeps them 180° apart. With Δ ≠ 0, H₀ = ½(ΩX + ΔZ) and H₁₈₀ = ½(−ΩX + ΔZ) are no longer negatives of each other: the
+// SWAP-ORDER program with 5 MHz is the counterexample. Expected ends come from the requested inputs alone (area π/2 over
+// 25 ns, 5 MHz, phases 0° and 180°, north start), by products of exponentials assembled from the Pauli matrices and by
+// RK4; the page is driven through its card, chips, sliders and rail and read as displayed.
+const AP_OM = PI / 2 / 25;   // area π/2 over 25 ns, in rad/ns
+/** A square pulse of 25 ns at phase phDeg and detuning detMHz: one constant generator, so one Pauli exponential. */
+const apSquare = (phDeg, detMHz) => { const h = [AP_OM * Math.cos(phDeg * DEG), AP_OM * Math.sin(phDeg * DEG), detMHz * MHZ], n = Math.hypot(...h); return pauliTurn(h.map((x) => x / n), n * 25); };
+const apNorth = [[1, 0], [0, 0]];
+const apEnds = (det) => ({ m: blochOf(inOrder([apSquare(0, det), apSquare(180, det)], apNorth)), g: blochOf(inOrder([apSquare(180, det), apSquare(0, det)], apNorth)) });
+const AP_DET = [0.7230491170, 0.4164627173, 0.5511431570];
+const apRes = apEnds(0), apDet = apEnds(5);
+const apRK = { res: [run(prog({ two: true, phi2: 180 }), 'main', 50), run(prog({ two: true, phi2: 180 }), 'two', 50)],
+  det: [run(prog({ two: true, phi2: 180, det: 5 }), 'main', 50), run(prog({ two: true, phi2: 180, det: 5 }), 'two', 50)] };
+check('independent: two square π/2 pulses at 0° and 180° from the north pole return there in both orders at resonance, but at 5 MHz end at (0.7230, 0.4165, 0.5511) and its mirror (−x, −y), 113.109° apart, P(0) = 0.7756 both (Pauli exponentials and RK4 agree)',
+  vdist(apRes.m, [0, 0, 1]) < 1e-12 && vdist(apRes.g, [0, 0, 1]) < 1e-12 && vdist(apDet.m, AP_DET) < 1e-8 && vdist(apDet.g, [-AP_DET[0], -AP_DET[1], AP_DET[2]]) < 1e-8
+  && Math.abs(sepT(apDet.m, apDet.g) - 113.1090525815) < 1e-6 && close(P0T(apDet.m), 0.7755715785, 1e-8) && close(P0T(apDet.g), P0T(apDet.m), 1e-12)
+  && vdist(apRK.res[0], apRes.m) < 1e-9 && vdist(apRK.res[1], apRes.g) < 1e-9 && vdist(apRK.det[0], apDet.m) < 1e-9 && vdist(apRK.det[1], apDet.g) < 1e-9,
+  JSON.stringify({ apDet, gap: sepT(apDet.m, apDet.g) }));
+// the class invariant, sampled (this supplements the algebra above, it does not prove it): at Δ = 0 the RK4 propagator of
+// the pulse at φ + 180° inverts the one at φ, for either envelope, any area and duration; at 5 MHz it does not
+const apProp = (p) => { const c0 = rk4([[1, 0], [0, 0]], p, p.T, 4000), c1 = rk4([[0, 0], [1, 0]], p, p.T, 4000); return [[c0[0], c1[0]], [c0[1], c1[1]]]; };
+const apPulse = (shape, areaPi, T, phDeg, detMHz) => ({ T, shape, A: areaPi * PI / simpson((t) => SHAPE[shape](t, T), 0, T), phi: phDeg * DEG, det: detMHz * MHZ });
+const apInv = (shape, areaPi, T, phDeg, detMHz) => { const U = apProp(apPulse(shape, areaPi, T, phDeg, detMHz)), V = apProp(apPulse(shape, areaPi, T, phDeg + 180, detMHz)); return Math.max(mdiff(mm(V, U), ID2), mdiff(mm(U, V), ID2)); };
+const apClass = [['square', 0.5, 25, 0], ['gauss', 0.5, 25, -90], ['gauss', 1.37, 7.3, 105], ['square', 0.83, 33.1, -150]].map(([sh, a, T, ph]) => apInv(sh, a, T, ph, 0));
+const apBreak = [apInv('square', 0.5, 25, 0, 5), apInv('gauss', 0.5, 25, 0, 5)];
+check('sampled invariant: at resonance the pulse at φ + 180° undoes the pulse at φ in either order (RK4 propagators, square and Gaussian, four areas/durations/phases); at 5 MHz it does not',
+  apClass.every((e) => e < 1e-8) && apBreak.every((e) => e > 0.1), JSON.stringify({ apClass, apBreak }));
+// the same programs on the page, set by the SWAP-ORDER card, its controls and the rail, read in both languages
+const apOk = (a, b) => Math.abs(((a - b) % 360 + 540) % 360 - 180) < 1e-9;
+async function apRun(det) {
+  await lang('zh'); await pick('order'); await setRange('phase2', 180); await setRange('det', det);
+  await chip('#shapeChips [data-shape="square"]'); await setRange('area', 0.5); await setRange('dur', 25); await setRange('lam', 0);
+  await setRange('now', 50);
+  const st = await state(), out = { st, E: endsT(st), N: await notes(), ro: {}, leg: {}, card: {} };
+  for (const l of ['zh', 'en']) { await lang(l); out.ro[l] = p0Pair(await page.textContent('#roP0')); out.leg[l] = await page.textContent('#legend'); out.card[l] = await page.textContent('#presetNote'); }
+  await lang('zh');
+  return out;
+}
+const apProgOk = (st, det) => st.two && st.ghost === 'two' && st.shape === 'square' && close(st.det, det) && close(st.lam, 0) && close(st.t, 50) && close(st.max, 50) && close(st.T, 25)
+  && close(st.peak, AP_OM, 1e-12) && vdist(st.r0, [0, 0, 1]) < 1e-12 && st.phys.length === 2 && apOk(st.phys[0], 0) && apOk(st.phys[1], 180) && st.preset === null;
+const apSeenOk = (o, want) => ['zh', 'en'].every((l, li) => o.ro[l] && o.ro[l][1] != null && Math.abs(o.ro[l][0] - P0T(want.m)) <= TOL_P && Math.abs(o.ro[l][1] - P0T(want.g)) <= TOL_P
+  && o.leg[l].includes(['虚线：两个脉冲换序', 'dashed: the two pulses swapped'][li]) && !o.card[l].includes(['次序一换，终点就不同', 'end elsewhere'][li]));
+const apR = await apRun(0);
+let apM = both(apR.N, apR.st, apR.E);
+check('SWAP-ORDER set to 180°, resonant, rail at 50 ns: the page compares the swap of the 0°/180° program, both ends sit on the north pole as the Pauli products give, P(0) reads 1.0000 · dashed 1.0000, and the full-program note says 0.0° apart (zh, en)',
+  apProgOk(apR.st, 0) && vdist(apR.st.r, apRes.m) < 1e-9 && vdist(apR.st.ghostState.r, apRes.g) < 1e-9 && err(apR.st) < 1e-8 && apSeenOk(apR, apRes) && apM[0]
+  && apR.N.zh.includes('相距 0.0°') && apR.N.en.includes('0.0° apart') && !apR.N.zh.includes('不对易') && !apR.N.en.includes('commute'), `${apM[1]} | ${JSON.stringify({ r: apR.st.r, g: apR.st.ghostState && apR.st.ghostState.r, ro: apR.ro })}`);
+const apD = await apRun(5);
+apM = both(apD.N, apD.st, apD.E);
+check('…and with 5 MHz of detuning the same swap does not coincide: solid (0.7230, 0.4165, 0.5511), dashed (−0.7230, −0.4165, 0.5511), as the Pauli products give; both P(0) read 0.7756 and the full-program note says 113.1° apart and that the turns do not commute (zh, en)',
+  apProgOk(apD.st, 5) && vdist(apD.st.r, apDet.m) < 1e-8 && vdist(apD.st.ghostState.r, apDet.g) < 1e-8 && err(apD.st) < 1e-6 && apSeenOk(apD, apDet) && apM[0]
+  && ['zh', 'en'].every((l) => apD.ro[l][0] === 0.7756 && apD.ro[l][1] === 0.7756)
+  && apD.N.zh.includes('相距 113.1°') && apD.N.en.includes('113.1° apart') && apD.N.zh.includes('不对易') && apD.N.en.includes('do not commute'), `${apM[1]} | ${JSON.stringify({ r: apD.st.r, g: apD.st.ghostState && apD.st.ghostState.r, ro: apD.ro })}`);
+// one more supported resonant program: Gaussian, from |+⟩ (VIRTUAL-Z card), λ = 45° with the wrong sign, other area and duration
+await pick('vz'); await chip('#shapeChips [data-shape="gauss"]'); await setRange('area', 0.7); await setRange('dur', 20); await setRange('phase', 30); await setRange('det', 0);
+await setRange('lam', 45); await chip('#signChips [data-sign="-1"]'); await chip('#twoChips [data-two="1"]'); await setRange('phase2', -150); await setRange('now', 40);
+s = await state(); E = endsT(s); N = await notes(); M = both(N, s, E);
+check('resonant Gaussian pair 180° apart from |+⟩ with λ = 45° (φ + λ): the sent phases 75° and −105° stay 180° apart, RK4 returns both orders to |+⟩, the page agrees and the note says 0.0° apart (zh, en)',
+  s.ghost === 'two' && s.shape === 'gauss' && close(s.det, 0) && s.sign === -1 && close(s.t, 40) && apOk(s.phys[0], 75) && apOk(s.phys[1], -105) && vdist(s.r0, [1, 0, 0]) < 1e-12
+  && vdist(E.m, [1, 0, 0]) < 1e-8 && vdist(E.g, [1, 0, 0]) < 1e-8 && vdist(s.r, E.m) < 1e-8 && vdist(s.ghostState.r, E.g) < 1e-8 && M[0] && N.zh.includes('相距 0.0°') && N.en.includes('0.0° apart'), M[1]);
+// the drawer as a reader sees it in this state: the 180° example carries zero detuning in both languages
+const apDz = await drawerSeen('zh'), apDe = await drawerSeen('en'); await lang('zh');
+const apClause = (d, lng, re) => clauses(d.text, lng).filter((c) => re.test(c));
+const apZh = apClause(apDz, 'zh', /相位相差 180°/), apEn = apClause(apDe, 'en', /phases 180° apart/);
+check('the drawer, opened and read as shown (zh, en): the swap that coincides is two π/2 pulses 180° apart at resonance, with zero detuning, and the unqualified example is gone',
+  [apDz, apDe].every((d) => d.open && d.visible && d.otherHidden && d.closed)
+  && apDz.text.includes('可能不同，也可能相同（例如不失谐、即共振时，两个相位相差 180° 的 π/2 脉冲）') && !apDz.text.includes('（例如两个相位相差 180° 的 π/2 脉冲）')
+  && apDe.text.includes('(two π/2 pulses with phases 180° apart, for instance, coincide at resonance, with zero detuning)') && !apDe.text.includes('180° apart, for instance, coincide)')
+  && apZh.length === 1 && /不失谐/.test(apZh[0]) && /共振/.test(apZh[0]) && apEn.length === 1 && /at resonance/.test(apEn[0]) && /zero detuning/.test(apEn[0]),
+  `${apZh.join(' | ')} || ${apEn.join(' | ')}`);
+
 // Conflicting settings, set through the controls from |+⟩ (VIRTUAL-Z card): the experimental programs below are
 // written down from the case alone, run by RK4, and the page's dashed path must be exactly the one the order names
 // and none of the other comparisons whose condition also holds; its legend, readout and the drawer's words follow.
