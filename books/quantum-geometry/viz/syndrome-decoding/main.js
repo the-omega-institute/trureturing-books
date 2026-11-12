@@ -124,7 +124,7 @@
     const sm = summary(), brs = sm.brs, mix = S.noise === 'mix', th = TRV.thumbMode ? 1.8 : 1;
     const errIn = t >= 1 ? 1 : ease(t);                 // errors appear over step 0 → 1
     const lit = t >= 2 ? 1 : (t >= 1 ? ease(u) : 0);    // checks light over step 1 → 2
-    const fixOn = t >= 2;                                // the decoder acts over step 2 → 3
+    const fixOn = t > 2;                                 // the decoder acts over step 2 → 3 (at t = 2 the checks are read, nothing flipped yet)
 
     // the probability that each check is lit (1 or 0 for one error; a weight for the mixture)
     const pLit = [0, 1].map((g) => brs.reduce((a, br) => a + br.w * br.syn[g], 0));
@@ -234,7 +234,7 @@
     $('hudBig').textContent = L(`${STEP[step][0]} · 综合征 ${t >= 2 ? synTxt(br.syn) : '?'}`, `${STEP[step][1]} · syndrome ${t >= 2 ? synTxt(br.syn) : '?'}`);
     const lost = sm.fid < 1 - 1e-9;
     $('hudSub').innerHTML = t < 1 ? L(`α|000⟩ + β|111⟩，α = ${fix(amps()[0], 3)}，β = ${fix(amps()[1], 3)}`, `α|000⟩ + β|111⟩ with α = ${fix(amps()[0], 3)}, β = ${fix(amps()[1], 3)}`)
-      : t < 2 ? L(`错误 ${name(br.err)}：柱子搬进 ${ROOM_E[roomOfSyn(br.syn)]} 那间房`, `error ${name(br.err)}: the bars move to room ${ROOM_E[roomOfSyn(br.syn)]}`)
+      : t <= 2 ? L(`错误 ${name(br.err)}：柱子搬进 ${ROOM_E[roomOfSyn(br.syn)]} 那间房`, `error ${name(br.err)}: the bars move to room ${ROOM_E[roomOfSyn(br.syn)]}`)
         : t < 3 ? L(`灯指向 ${ROOM_E[roomOfSyn(br.syn)]}，解码器照着翻回`, `the lights point at ${ROOM_E[roomOfSyn(br.syn)]}; the decoder flips that back`)
           : lost ? L(`回到码空间，却与虚线对不上：重合 ${fix(sm.fid, 3)}`, `back in the code space, but off the dashed outline: overlap ${fix(sm.fid, 3)}`)
             : L('回到码空间，与虚线重合：重合 1', 'back in the code space, on the dashed outline: overlap 1');

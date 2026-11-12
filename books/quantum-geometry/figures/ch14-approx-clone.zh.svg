@@ -13,6 +13,6 @@
 <path d="M185.91 194.4 L188.66 181.68 L196.92 187.47Z" class="tf-magenta"/>
 <circle cx="210" cy="160" r="3.2" class="tf-dim"/>
 <text class="tf-amber" x="292.27" y="58.79" font-size="14">输入 <tspan font-style="italic">r</tspan></text>
-<text class="tf-cyan ts-bg" x="278.18" y="117.19" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">克隆体 ×2：2/3</text>
+<text class="tf-cyan ts-bg" x="246.18" y="70.19" font-size="14" text-anchor="end" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">克隆体 ×2：2/3</text>
 <text class="tf-magenta ts-bg" x="175.91" y="212.4" font-size="14" text-anchor="end" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">机器：−1/3</text>
 </svg>
