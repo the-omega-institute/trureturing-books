@@ -222,7 +222,7 @@ Since $\norm{a_i}^2 = 5$ and $\norm{x}^2 = 1$ on $\mathrm{UnitSphere}$, the homo
 - Yet **no two vectors inside the same $\operatorname{color}(i)$ can ever be orthogonal** ($\langle x, y\rangle_{\mathbb{R}} \neq 0$), because every vector in $\operatorname{color}(i)$ has more than half of its squared norm aligned with the single line $\mathbb{R}a_i$, leaving strictly less than half of its squared norm in the two-dimensional orthogonal plane $a_i^\perp$.
 
 ::: {.viz src="two-angle-addressing" preset="three" height="500"}
-**The caps of the three coordinate axes leave gaps on the diagonals.** With only the $45^\circ$ caps around $\pm\vv{e}_1, \pm\vv{e}_2, \pm\vv{e}_3$, the amber point reaches the octant diagonal $(1, 1, 1)/\sqrt{3}$, where none of the three grey pairs of circles holds it: it sits in the magenta gap, where $\langle x, \vv{e}_j\rangle_{\mathbb{R}}^2 = 1/3 < 1/2$. The magenta dots are the gaps the page finds by sampling a grid on the sphere.
+**The caps of the three coordinate axes leave gaps on the diagonals.** With only the $45^\circ$ caps around $\pm\vv{e}_1, \pm\vv{e}_2, \pm\vv{e}_3$, the amber point reaches the octant diagonal $(1, 1, 1)/\sqrt{3}$, where none of the three grey pairs of caps holds it: it sits in the magenta gap that shows between them, where $\langle x, \vv{e}_j\rangle_{\mathbb{R}}^2 = 1/3 < 1/2$. Wherever the magenta ball shows through, no cap covers the sphere.
 :::
 
 ::: {.proposition #prop-rational-six-axis-cover title="Rational Six-Axis Orthogonality-Free Open Cover of the Two-Sphere" lean="D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"}
