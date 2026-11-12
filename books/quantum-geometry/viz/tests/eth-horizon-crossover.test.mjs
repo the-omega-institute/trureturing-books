@@ -124,6 +124,15 @@ check(`inside the cone (${cones} sets of dimensions) the best of three draws att
 await pick('bridge'); const r0 = (await state()).rank; await page.click('body', { position: { x: 5, y: 5 } }); await page.keyboard.press('ArrowRight'); s = await state();
 check('→ draws another instance: other matrices, the same rank', s.seed === 1 && s.rank === r0 && /第 1 次抽样/.test(await page.textContent('#hudBig')));
 
+// the verified flow–cut theorem is kept apart from the unaudited 3-SAT preprint: the bridge card and its Lean box say so
+{
+  await pick('bridge');
+  const sep = await D(() => ({ note: document.getElementById('presetNote').textContent,
+    box: Array.from(document.querySelectorAll('.lean[data-scenes="cut"]')).filter((e) => !e.hidden).map((e) => ({ ok: e.querySelector('.ok').textContent, text: e.textContent })) }));
+  check('BRIDGE: the card note says the theorem neither tests nor supports the preprint', sep.note.includes('预印本') && sep.note.includes('既不检验也不支持'), sep.note);
+  check('BRIDGE: the green box is the flow–cut theorem alone, and it marks the preprint as unaudited and not formalized', sep.box.length === 1 && sep.box[0].ok === 'LEAN ✓' && sep.box[0].text.includes('未经审计') && sep.box[0].text.includes('未在本书形式化'), JSON.stringify(sep.box));
+}
+
 /* ---------- the modes ---------- */
 await pick('plateau'); s = await state();
 const spec = { plateau: (j) => 1 / (1 + Math.exp((j - 7.5) / 0.55)), geometric: (j) => 0.82 ** j, power: (j) => 1 / (1 + j * 0.5) ** 2 };
