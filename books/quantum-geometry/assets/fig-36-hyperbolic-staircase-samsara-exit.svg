@@ -119,7 +119,7 @@
 
     <!-- Polytope Gap Annotation at k = 1 & k = 2 -->
     <line x1="634.0" y1="237.1" x2="634.0" y2="284.0" stroke="#9d8cff" stroke-width="1.3" stroke-dasharray="2,2"/>
-    <text x="642" y="262" fill="#9d8cff" font-size="8.2">cos θ₁ = 0.3166 &gt; 0 (δ₁ = 18.46°)</text>
+    <text x="642" y="229" fill="#9d8cff" font-size="8.2">cos θ₁ = 0.3166 &gt; 0 (δ₁ = 18.46°)</text>
     <text x="556" y="170" fill="#ffc83d" font-size="8.2">now: θ* (0.7391)</text>
     <text x="652" y="156" fill="#19f0ff" font-size="8.4">sin θ_k = tanh(η₀ + k) → 1⁻</text>
     <text x="730" y="258" fill="#ff2fd0" font-size="8.4">cos θ_k = sech(η₀ + k) &gt; 0</text>
