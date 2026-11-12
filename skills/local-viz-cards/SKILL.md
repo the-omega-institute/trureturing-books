@@ -66,6 +66,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `quantum-fairness-ledger` | 没有特权的座位：照见是相互的，得一分就失一分，满额的纠缠与副本分不出第二份，从哪里出发都分到同样的份额 | `haar` `tradeoff` `cloning` `bell` `wstate` `ghz` `ergodic` |
 | `spherical-degeneracy-radar` | 转一次与转两次，终点不同，有的观察者却读出同一个数；把这些读不出差别的人收集起来，只剩极轴上的那一对 | `meridian` `sweep` `tilted` `hops` `equator` `frames` |
 | `unified-field-slice` | 时钟与速度是同一个圆上的线与面积；在两个平面里来回转一圈回不到原处；视界割断几条边，跨界的纠缠就封顶在那里 | `polytope` `fixedpoint` `gudermann` `photon` `abelian` `plaquette` `horizon` |
+| `meta-unification-compass` | 八家统一纲领在三根轴上各偏一侧；120 个转动加上它们的黄金缩小版，恰是 E₈ 的 240 个根，Q 全都等于 2 | `cube` `camps` `crystal` `icosians` `e8` `fold` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -136,6 +137,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `spherical-degeneracy-radar` 与 `two-angle-addressing` 的 `address`、`pole` 及 `berry-loop` 的 `octant` 分工：那几张讲从北极出发的两角寻址、极点的方位角冗余与八分球回路的面积和相位，本页讲第三十四章的“读不出差别的观察者在哪里”：琥珀色是观察者探针 O 与它的轴，青色是两个结果落在观察者轴上的影子（读数）与青色虚线的盲圈（读数相同的观察者所在的大圆），淡青色是走过的盲圈，品红是第二次转动扫过的横向面、两个结果之差与两面小旗的夹角，紫色是极轴 ±e₃ 与差旋子 D 的小盘；实心点是一次（一步）的结果，空心圈是两次（两步）的结果。旋子按该章算例在 Cl(3,0) 里逐项相乘：R₁ = (1 − e₁e₃)/√2，R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) = exp(−π/4 e₁e₂) R₁（左乘），两者都把 +e₁ 送到 +e₃。绿色框只给第三十四章用 `lean=` 引用的三条：`unit_perpendicular_pair`（与两根差向量都正交的单位向量）、`partition_inseparable_iff_kernel`（读数相同即同一纤维）与 `covariant_commutator_formula`（D 与 e₃ 对易、与 e₁ 不对易）；“简并处反演出观察者站位”标 `MODEL`；Berry—Pancharatnam 相位与虚拟 Z 门标 `ARGUED`，页面不计算；旋子乘积、读数与盲圈实算（`NUM`）。路线图候选的赤道反射轴族、`chirality`、`virtual_z` 未做：正文没有反射轴族的句子，后两者分别是 `berry-loop` 的 `reverse` 与 `pulse-area-virtual-z` 的 `vz`。
 
 `unified-field-slice` 只覆盖第三十二章上半篇（§32.1–32.2；下半篇的八纲领罗盘是 `meta-unification-compass`）。三个场景共用一条时间轴：“时钟”是单位圆加双曲线 t² − x² = 1，θ = gd(η)，青色的线是 cos θ = 1/γ（固有时率），品红的高是 sin θ = tanh η（速度），紫色是弧长 θ（`fixedpoint` 卡里弧长等于影子）；“回路”是球面上的旋子换位子 U = R₁R₂R₁⁻¹R₂⁻¹，琥珀色只给参考箭头的尖端，品红是没合上的缺口，紫色是转轴；“视界”是内接于球的正二十面体，青色是视界以内的边，品红是割断的边与每个顶点缺的 60°，琥珀是视界 λ。绿色框只给本章用 `lean=` 引用的三条：`eq_smul_minkowski_of_null`、`anchored_phase_classification`（只管单一平面的圆周相位，页面写明两个平面的换位子不在其内）、`QuantumMaxFlowMinCut.result`（桥图，页面写明二十面体不是它的实例）；Gudermann 恒等式、Dottie 不动点、720° 角亏、换位子曲率与秩 ≤ D^|∂A| 标 `ARGUED`，线/面积/视界/相互作用源的读法标 `MODEL`。路线图候选 `mincut`（桥图）与第三十章 `eth-horizon-crossover` · `bridge` 同一画面，改为二十面体上的 `horizon`；`generations`（内部空间三轴世代）在上半篇正文里没有可引用的句子，未做。
+
+`meta-unification-compass` 只覆盖第三十二章下半篇（§32.3–32.4）。两个场景共用一条时间轴：“罗盘”是立方体 [0, 1]³，三根轴照 §32.3 的定义（θ 阶数：青色的“线”一端到品红的“面积”一端；η 分辨率：光滑到多面体；λ 观察者：球外 C 到场内），八家纲领按 §32.4 总表原话落在每根轴的三段之一（点明哪一端就落在那一端，没点明或两端都有落在中段，同格的在中段里错开），整只立方体与“本书的位置”都标 `MODEL`，页面写明不是测量、不是对学科的评判、本书没有形式化地取代哪一家；时间轴逐个读四大阵营，琥珀色只给正在读的那一对与选中的一家。“黄金桥”在 ℤ[φ] 里精确算 2I 的 120 个元素（去掉实部投到三维，青色）与 φ⁻¹·2I（品红），Q(q) = 2(a + b) = 2 的 240 个根、两两 B ∈ {−2…2}、56 个邻居、𝓘 的格拉姆行列式 1，纯虚的 60 个按带权坐标 (√(2φ/√5) q, √(2φ⁻¹/√5) q^σ) 从 E∥ 转到 E⊥；琥珀色只给选中的元素。纯虚子模配上 Q 的格拉姆行列式是 4（D₆ 格），页面照实写，不称它为带标准内积的 ℤ⁶。绿色框只给本章 `lean=` 引用的 `golden_fixed_point_unique`（页面坐标里的 φ）；2I、(𝓘, Q) ≅ E₈ 与准晶切投母格标 `ARGUED`，ℤ[φ] 里的核对标 `NUM`。路线图候选 `strings_lqg`、`holography_twistor`、`ncg_langlands` 合为一张 `camps`：§32.4 只有一处可引用，且正文把非对易几何与 Wolfram 超图配成一个阵营、朗兰兹与熵引力配成一个阵营。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -381,6 +384,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十二章 | 定理 `thm-ch32-null-cone-holonomy-and-holographic-cut` 的证明之后 | `unified-field-slice` · `abelian` |
 | 第三十二章 | 文献注记 `rem-ch32-dirac-yang-mills-jacobson-literature` 之后 | `unified-field-slice` · `gudermann` |
 | 第三十二章 | §32.2 末（文献注记 `rem-ch32-six-domain-isomorphism-table` 之后、§32.3 之前；上半篇末尾） | `unified-field-slice` 完整实验室 |
+| 第三十二章 | §32.3 三根诊断轴列表之后、“在逐一检阅四大理论阵营之前”之前 | `meta-unification-compass` · `cube` |
+| 第三十二章 | 文献注记 `rem-ch32-icosian-e8-literature` 之后，各隔一句承上启下的话 | `meta-unification-compass` · `icosians`、`e8`、`fold` |
+| 第三十二章 | 文献注记 `rem-ch32-eight-programs-literature` 之后（隔一句话）、“最后，我们将这八条……”之前 | `meta-unification-compass` · `camps` |
+| 第三十二章 | 全章末段“……看见了整座宇宙。”之后、“接下来，第九部……”之前 | `meta-unification-compass` · `crystal` |
+| 第三十二章 | 全章末尾 | `meta-unification-compass` 完整实验室 |
 | 终章 | 空间吸引子 · 一 末 | `spatial-attractor-deja-vu` · `butterfly` |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed`、`cycle` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget`、`dimension` |
