@@ -78,5 +78,5 @@ def draw(fig):
     mid = figkit.slerp((0, 0, 1), s, 0.5)
     sp.label(mid, "*θ*", dx=-16, dy=16, size=16, color="dim")
     sp.label(figkit.sph(90, PHI / 2), "*φ*", dx=-4, dy=20, size=16, color="dim", anchor="middle")
-    sp.label(s, "*a*", dx=10, dy=-2, size=17, color="now")
+    sp.label(s, "***a***", dx=10, dy=-2, size=17, color="now")   # bold: the Bloch vector, not the amplitude α beside it
     right.text(150, 292, right.t("一支箭头 = 两个角度", "one arrow = two angles"), size=14, color="dim", anchor="middle")

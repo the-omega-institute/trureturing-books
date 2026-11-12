@@ -277,7 +277,14 @@
     seg.blocks.forEach((d, i) => {
       const yA = V(acc), yB = V(Math.min(acc + d, a.S + 1e-12));
       if (acc > 1e-6 && a.S > acc + 1e-6) { c.beginPath(); c.moveTo(x1 - cw / 2, yA); c.lineTo(x1 + cw / 2, yA); c.stroke(); }
-      if (labels && a.S >= acc + d - 1e-6 && yA - yB > 17) st.tag(`d${i}`, [x1, (yA + yB) / 2], `D${'₁₂₃₄₅₆₇₈₉'[i] || ''} ${fix(d, 2)}`, 'num', { screen: true });
+      if (labels && a.S >= acc + d - 1e-6 && d > 1e-6) {
+        const name = `D${'₁₂₃₄₅₆₇₈₉'[i] || ''} ${fix(d, 2)}`, ym = (yA + yB) / 2;
+        if (yA - yB > 17) st.tag(`d${i}`, [x1, ym], name, 'num', { screen: true });
+        else {   // a block too thin to hold its name: the name goes outside, on the right, with a leader line
+          c.save(); c.strokeStyle = P.sigma; c.lineWidth = 1 * thick; c.beginPath(); c.moveTo(x1 + cw / 2, ym); c.lineTo(x1 + cw / 2 + 16, ym); c.stroke(); c.restore();
+          st.tag(`d${i}`, [x1 + cw / 2 + 50, ym], name, 'num', { screen: true });
+        }
+      }
       acc += d;
     });
     c.strokeStyle = P.sigma; c.lineWidth = 1.4 * thick; c.strokeRect(x1 - cw / 2, Math.min(top, y0), cw, Math.abs(y0 - top));
@@ -290,7 +297,7 @@
       const yf = V(a.floor);
       c.strokeStyle = P.ink; c.lineWidth = 2 * thick; c.beginPath(); c.moveTo(x2 - cw / 2 - 7, yf); c.lineTo(x2 + cw / 2 + 7, yf); c.stroke();
       if (labels) st.tag('fl', [x2, yf + 10], L('下界', 'floor'), 'num', { screen: true });
-      if (labels && hf - hq > 34) st.tag('ex', [x2, (hq + hf) / 2 - 2], L('多付', 'extra'), 'num', { screen: true });
+      if (labels && hf - hq > 34) st.tag('ex', [x2, (hq + hf) / 2 - 2], `${L('多付', 'extra')} ${fix(a.heat - a.floor, 3)}`, 'num', { screen: true });
     }
     // the baseline
     c.strokeStyle = P.lineHot; c.lineWidth = 1.2; c.beginPath(); c.moveTo(x1 - cw * 0.9, y0); c.lineTo(x2 + cw * 0.9, y0); c.stroke();
@@ -327,7 +334,7 @@
     const a = at(clock.t), cur = a.f > 0 ? a.k + 1 : a.k, h = hist[cur], step = cur ? h.step : null;
     const ap = a.f > 0 ? '≈ ' : '';
     $('roKey').innerHTML = `${ap}${fix(a.heat, 3)} = ${fix(a.floor, 3)} + ${fix(a.extra, 3)}`;
-    $('roKeySub').textContent = L('βQ = −ΔS + (I + D)，累计；βQ = Q/(k_BT) 无量纲，与以奈特计的熵直接相比', 'βQ = −ΔS + (I + D), running totals; βQ = Q/(k_BT) is dimensionless, set beside S in nats');
+    $('roKeySub').innerHTML = L('βQ = −ΔS + (I + D)，累计；βQ = Q/(k<sub>B</sub>T) 无量纲，与以奈特计的熵直接相比', 'βQ = −ΔS + (I + D), running totals; βQ = Q/(k<sub>B</sub>T) is dimensionless, set beside S in nats');
     $('roS').textContent = ap + fix(a.S, 3);
     $('roX').textContent = fix(Math.abs(a.bloch[0]), 3);
     $('roStep').innerHTML = !step ? '—'

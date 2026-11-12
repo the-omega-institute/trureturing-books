@@ -226,5 +226,29 @@ for (const lang of ['en', 'zh']) {
 await page.click('[data-lang-set="en"]'); await pick('pinch'); await played(2); await settle(page);
 check('English: the HUD reads “Step 2 · pinch Π”', (await page.textContent('#hudBig')).trim() === 'Step 2 · pinch Π');
 
+// the stills that chapter 8 prints: every label its caption names is on the frame
+const shot = await T.newPage();
+const still = async (id) => { await T.goto(BOOK, ID, `?shot=1&lang=zh&preset=${id}`, shot); await settle(shot);
+  const st = await shot.evaluate(() => window.ERASE_DEBUG.state);
+  const tags = await shot.evaluate(() => [...document.querySelectorAll('#stage .tags .tag')].filter((e) => !e.hidden).map((e) => { const r = e.getBoundingClientRect(); return [e.textContent.trim(), r.left, r.top, r.right, r.bottom]; }));
+  return { st, tags }; };
+{
+  const { st, tags } = await still('steps');
+  // three turns of 50° and three pinches, from |0⟩, recomputed on the Bloch arrow: each block is that pinch's D
+  let r = [0, 1]; const Ds = [];
+  for (let k = 0; k < 3; k++) { const t = turn(r, 50 * DEG), q = pinch(t); Ds.push(Sq(q) - Sq(t)); r = q; }
+  const names = Ds.map((d, i) => `D${'₁₂₃'[i]} ${d.toFixed(2)}`), found = names.map((n) => tags.find((t) => t[0] === n));
+  check('still STEPS: stops after the third pinch, with three blocks D₁ D₂ D₃ equal to the recomputed D', st.t === 6 && st.hist[6].seg.blocks.length === 3 && st.hist[6].seg.blocks.every((d, i) => close(d, Ds[i], 1e-9)), JSON.stringify(st.hist[6].seg.blocks));
+  check('still STEPS: all three block labels are on the frame, D₃ too', found.every(Boolean), JSON.stringify([names, tags.map((t) => t[0])]));
+  const hit = (p, q) => p[1] < q[3] && q[1] < p[3] && p[2] < q[4] && q[2] < p[4];
+  check('still STEPS: the three block labels do not overlap', found.every(Boolean) && !hit(found[0], found[1]) && !hit(found[1], found[2]) && !hit(found[0], found[2]));
+}
+{
+  const { st, tags } = await still('bath');
+  const row = swapRow(0.9), extra = row.Q - row.drop;   // βQ − (−ΔS) = I + D, and I = 0 for a fresh bath qubit
+  check('still BATH: the hatched piece is labelled with its size, βQ − floor = 0.511 = D', close(st.now.heat - st.now.floor, extra, 1e-9) && close(extra, row.D, 1e-9) && extra.toFixed(3) === '0.511'
+    && tags.some((t) => t[0] === `多付 ${extra.toFixed(3)}`), JSON.stringify(tags.map((t) => t[0])));
+}
+
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

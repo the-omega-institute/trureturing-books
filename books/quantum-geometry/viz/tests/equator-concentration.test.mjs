@@ -54,8 +54,17 @@ await stageFirstChecks(T, BOOK, ID);
 /* ---------- page-specific checks ---------- */
 const page = await T.goto(BOOK, ID, '?lang=zh');
 const state = async () => { await settle(page); return page.evaluate(() => window.EQUATOR_DEBUG.state); };
-const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page); };
-const plays = () => until(page, () => { const s = window.EQUATOR_DEBUG.state; return s.playing && s.t > 0; });
+// A card's sweep can be over before the test starts looking: d = 3 runs 0.585 of a rail step, about a fifth of a second.
+// So "it played" is recorded inside the page, by a watcher armed before the click, and plays() reads that record.
+const pick = async (id) => {
+  await page.evaluate(() => {
+    const me = window.__playWatch = (window.__playWatch || 0) + 1; window.__played = false;
+    const tick = () => { if (window.__playWatch !== me) return; const s = window.EQUATOR_DEBUG.state; if (s.playing && s.t > 0) window.__played = true; else requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  });
+  await page.click(`[data-preset="${id}"]`); await settle(page);
+};
+const plays = () => until(page, () => window.__played);
 const stops = () => until(page, () => !window.EQUATOR_DEBUG.state.playing);
 const seek = async (t) => { await page.evaluate((x) => window.EQUATOR_DEBUG.seek(x), t); await settle(page); };
 const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };

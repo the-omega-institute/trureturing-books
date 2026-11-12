@@ -18,12 +18,12 @@ Raise Occam's razor and **cut out the third point $C$**.
 
 Compare the two routes on a concrete classroom calculation. Suppose two arrows lie on the same meridian of the sphere: state $A$ tilted at $\theta_A = 60^\circ$ from the laboratory ceiling, and probe $B$ tilted at $\theta_B = 120^\circ$ from the laboratory ceiling.
 
-- **The redundant Point-$C$ coordinate detour**: Treating the ceiling as an external $Z$ axis, you first write $\lvert\psi_A\rangle = \binom{\cos 30^\circ}{\sin 30^\circ} = \binom{\sqrt{3}/2}{1/2}$, next write $\lvert\psi_B\rangle = \binom{\cos 60^\circ}{\sin 60^\circ} = \binom{1/2}{\sqrt{3}/2}$, multiply four components to get $\langle\psi_B\mid\psi_A\rangle = \frac{\sqrt{3}}{4} + \frac{\sqrt{3}}{4} = \frac{\sqrt{3}}{2}$, and square to obtain $\frac{3}{4}$ — and if azimuthal angles $\phi_A, \phi_B$ are nonzero as well, eight trigonometric products and complex exponentials flood the page!
-- **The zero-redundancy self-referential shortcut**: What does the ceiling have to do with these two arrows? When only a known premise state $A$ and a target state $B$ exist, what deserves to serve as the principal axis? **State $A$ itself!** Align your zero-degree reference directly along $A$; then $B$ sits at the single intrinsic angle $\theta = 120^\circ - 60^\circ = 60^\circ$, and half a second of mental arithmetic gives $\cos^2(60^\circ/2) = \cos^2 30^\circ = \frac{3}{4}$!
-
 ::: {.figure src="ch02-cut-c"}
 **The same pair of arrows: two angles, or one.** On the left, the grey dashed ceiling $Z$ plays the third point $C$: the cyan $A$ is $60^\circ$ from it and the amber $B$ is $120^\circ$ from it, and both angles must be turned into coordinates and multiplied out. On the right, the ceiling is gone and the cyan $A$ is its own axis: $B$ is a single angle $\theta = 60^\circ$ away, giving the weight $\cos^2 30^\circ = \frac{3}{4}$, the same number as on the left.
 :::
+
+- **The redundant Point-$C$ coordinate detour**: Treating the ceiling as an external $Z$ axis, you first write $\lvert\psi_A\rangle = \binom{\cos 30^\circ}{\sin 30^\circ} = \binom{\sqrt{3}/2}{1/2}$, next write $\lvert\psi_B\rangle = \binom{\cos 60^\circ}{\sin 60^\circ} = \binom{1/2}{\sqrt{3}/2}$, multiply four components to get $\langle\psi_B\mid\psi_A\rangle = \frac{\sqrt{3}}{4} + \frac{\sqrt{3}}{4} = \frac{\sqrt{3}}{2}$, and square to obtain $\frac{3}{4}$ — and if azimuthal angles $\phi_A, \phi_B$ are nonzero as well, eight trigonometric products and complex exponentials flood the page!
+- **The zero-redundancy self-referential shortcut**: What does the ceiling have to do with these two arrows? When only a known premise state $A$ and a target state $B$ exist, what deserves to serve as the principal axis? **State $A$ itself!** Align your zero-degree reference directly along $A$; then $B$ sits at the single intrinsic angle $\theta = 120^\circ - 60^\circ = 60^\circ$, and half a second of mental arithmetic gives $\cos^2(60^\circ/2) = \cos^2 30^\circ = \frac{3}{4}$!
 
 ::: {.viz src="pairwise-shutter" preset="sixty" height="500"}
 **Run the worked example through the shutter and count.** The cyan $A$ and the amber $B$ are a single angle $\theta = 60^\circ$ apart; the dashed cyan line is the weight $\frac{3}{4}$, the thin curve is the share of passes $k/N$, and the horizontal axis counts shots on a log scale. The share jumps about for the first few shots and hugs the line by four thousand; the pale band is the reference scale $p \pm 2\sqrt{p(1-p)/N}$. A sampling demonstration; for the weight itself see [@thm-rank-one-born-pairing].
@@ -32,7 +32,7 @@ Compare the two routes on a concrete classroom calculation. Suppose two arrows l
 In finite-dimensional matrix algebra, which operation natively erases every trace of an external basis $C$? Literally the **matrix trace** ($\Tr X = \sum_i X_{ii}$). By cyclicity, $\Tr(U^{-1} X U) = \Tr(X U U^{-1}) = \Tr(X)$ for every invertible basis change $U$: twist the external scaffolding $C$ however you please, and the trace pairing $\Tr(\rho P)$ between a state $\rho$ and a projector $P$ never flickers! Zero-redundancy comparison between $\rho$ and $P$ is therefore naturally expressed via the canonical basis-free trace pairing.
 
 ::: {.viz src="pairwise-shutter" preset="turn" height="500"}
-**Turn both arrows together and the weight stays put.** The same pair and the same random numbers as in the previous figure, except that before each shot $A$ and $B$ turn a little together about the violet axis; the dashed paths are where the tips have been. The angle stays $60^\circ$, the dashed cyan line stays at $\frac{3}{4}$, and the thin curve is exactly the one without turning.
+**Turn both arrows together and the weight stays put.** The same pair and the same random numbers as in the previous figure, except that before each shot $A$ and $B$ turn a little together about the violet axis; the dashed paths are where the tips have been, and the grey dashed arrows are the pair as it started. The angle stays $60^\circ$, the dashed cyan line stays at $\frac{3}{4}$, and the thin curve is exactly the one without turning.
 :::
 
 ::: {.definition #def-born-probability title="Finite-Dimensional Born Trace Weight" lean="D5/S3/Quantum/FiniteDimensional.bornProbability"}
@@ -253,6 +253,11 @@ Every piece of the puzzle clicks into place:
 :::
 
 2. **Spatial orthogonality ($\theta = 90^\circ$, e.g., North $\lvert 0\rangle$ tested along East $\lvert +\rangle$)**: $\vv{a} \cdot \vv{b} = 0$, zero directional bias, giving the fair-coin midpoint $\frac{1 + 0}{2} = \frac{1}{2}$;
+
+::: {.viz src="pairwise-shutter" preset="right" height="500"}
+**Case 2, the $90^\circ$ angle, counted with the shutter.** The amber $B$ is perpendicular to the cyan $A$, the cyan stretch is exactly half the diameter, and the weight is $\frac{1}{2}$. The white curve wobbles around $\frac{1}{2}$ more than at $60^\circ$ and the pale band is at its widest, yet it narrows all the way.
+:::
+
 3. **Spatial opposition ($\theta = 180^\circ$, e.g., North $\lvert 0\rangle$ tested along South $\lvert 1\rangle$)**: in three-dimensional space, two opposite outcomes point antipodally ($\theta = 180^\circ$, $\cos 180^\circ = -1$), whereas in probability and inner-product geometry, mutual exclusion requires zero overlap ($\cos 90^\circ = 0$). The affine rescaling $x \mapsto \frac{1 + x}{2}$ maps $[-1, +1]$ onto $[0, 1]$, which trigonometrically halves $\theta$ into $\cos^2(\theta/2)$!
 
 ::: {.viz src="pairwise-shutter" preset="opposite" height="500"}
@@ -272,10 +277,6 @@ For ready reference in later chapters, the benchmark angles across both pictures
 
 ::: {.viz src="qubit-geometry" preset="line" height="500"}
 **Start with the first row of the table.** The amber arrow $B$ points along the cyan ruler $A$: the cyan line has length $1$ and the magenta area is zero, matching $\theta = 0^\circ$ and weight $1$. Drag $B$ to the equator and then to the south pole, and compare the displayed angle with the $90^\circ$ and $180^\circ$ rows above.
-:::
-
-::: {.viz src="pairwise-shutter" preset="right" height="500"}
-**The $90^\circ$ row of the table, counted with the shutter.** The amber $B$ is perpendicular to the cyan $A$, the cyan stretch is exactly half the diameter, and the weight is $\frac{1}{2}$. The white curve wobbles around $\frac{1}{2}$ more than at $60^\circ$ and the pale band is at its widest, yet it narrows all the way.
 :::
 
 The table above goes angle by angle. Ask a different question: if the direction of the target state $\vv{b}$ is random, uniformly distributed on the sphere, how is the compatibility weight $p = \cos^2\frac{\theta}{2}$ distributed? Intuition may guess that it favours the middle, or the two ends. Neither is right.
@@ -482,7 +483,7 @@ The full lab: drag the amber $B$ or the cyan $A$ and watch the cyan stretch and 
 :::
 
 ::: {.film src="002-pairwise-born"}
-**Pairwise measurement: from two arrows to the Born weight (1 min 26 s).** Two arrows $60^\circ$ apart read their own angle from the two diagonals of their parallelogram ([@thm-parallelogram-norm-law]); with $A$ as its own axis, the foot $C$ becomes the cyan shadow $\cos\theta$ that $B$ casts on $A$; squeezing that shadow from $[-1, 1]$ into $[0, 1]$ gives the weight $\cos^2(\theta/2)$ ([@thm-born-modulus-square]); only squares let a shutter and its complement share the whole weight ([@thm-born-probability-skeleton]); finally an environment records the branch, and the arrow shrinks to a short line on the vertical axis inside the ball ([@thm-nonselective-marginal]).
+**Pairwise measurement: from two arrows to the Born weight (1 min 26 s).** Two arrows $60^\circ$ apart read their own angle from the two diagonals of their parallelogram ([@thm-parallelogram-norm-law]); with $A$ as its own axis, the foot $C$ becomes the cyan shadow $\cos\theta$ that $B$ casts on $A$; squeezing that shadow from $[-1, 1]$ into $[0, 1]$ gives the weight $\cos^2(\theta/2)$ ([@thm-born-modulus-square]); only squares let a shutter and its complement share the whole weight ([@thm-born-probability-skeleton]); finally an environment records the branch, and the arrow shrinks to a short line on the vertical axis inside the ball (see [Chapter 4](ch04-decoherence.md)).
 :::
 
 Having eliminated the external third point $C$ and derived $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$ from pure trace geometry, we now turn the spotlight onto the ruler itself — the **idempotent projector** $P^2 = P$ that appeared in every theorem of this chapter. Why do "detecting a particle," "naming a logical concept," and "experiencing a tick of classical linear time" all reduce to the single equation $P^2 = P$? Let us step into [Chapter 3](ch03-projectors-and-duality.md).
