@@ -621,7 +621,7 @@ This monograph consists of the **[Prelude](README.md)**, **Ten Parts (39 Chapter
 │ • Context fixpoints & mutual attractors │   │ • Joint coherent record erasure & Delone│
 │ • Single/double orthogonality & 3-axis  │   │ • QRAM copied-address & self page table │
 │ • Light-pulse pinching & T=T(T) loop    │   │ • Fiber decomposition & 720° spinor fold│
-│ • Hyperbolic steps & quotienting loops  │   │ • Coda & Appendices: A · B · 448 Index C│
+│ • Hyperbolic steps & quotienting loops  │   │ • Coda & Appendices: A · B · 457 Index C│
 └─────────────────────────────────────────┘   └─────────────────────────────────────────┘
 ```
 
@@ -644,7 +644,7 @@ Readers can navigate the book along four self-contained tracks tailored to their
 3. **Mathematical Logic, Number Theory, and Epistemology Track**:
    [Prelude](README.md) $\to$ Chapter 10 (Gram matrices and order independence) $\to$ Chapters 19–20 (discrete polyhedral facet cones and open-conjecture boundaries) $\to$ Chapters 21–24 (diagonal escape, Euler products, quaternion Diophantine norms, and cosine self-reference) $\to$ [Chapter 29](ch29-timeless-causality-and-gram-space.md)–[Chapter 39](ch39-observer-is-ontological-universe.md) (the four-tier Pythagorean escape of number, timeless causality, the ETH horizon, fluid vortex filaments, quantum fairness, meta-unification, context fixed points, Lawvere homoiconic table expansion $T = T(T)$, quotienting out reincarnation, concept fiber decomposition, and Zeckendorf real threads) $\to$ Coda (golden cut-and-project spatial attractors and [@thm-coda-fixed-point-anchor]).
 4. **Lean 4 Formal Verification and Kernel Audit Track**:
-   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $245$ environment/media frozen theorems, $89$ auxiliary definitions, and $114$ inline declarations — $448$ unique locked declarations in total — at `trureturing@dev` commit [{commit}](trureturing:)).
+   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $251$ environment/media frozen theorems, $95$ auxiliary definitions, and $111$ inline declarations — $457$ unique locked declarations in total — at `trureturing@dev` commit [{commit}](trureturing:)).
 
 ### Quick Register of the 55 Core Chapter Theorem Anchors in Parts VI–X (Chapters 21–39) {#sec-coda-part6-part7-register}
 
@@ -708,4 +708,4 @@ As a bridge between the closing five parts of the monograph and the complete led
 | **Chapter 39**<br/>Observer Is the Ontological Universe | T39.1 | `D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition` | Disjoint-union decomposition of a concept space into observable-signature fibers |
 | **Chapter 39** | T39.2 | `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective` | Strict injectivity of the multi-scale Zeckendorf coding thread on nonnegative real numbers |
 
-Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $334$ formal environment and media `trureturing@dev` declarations ($448$ unique locked declarations including inline references).
+Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $346$ formal environment and media `trureturing@dev` declarations ($457$ unique locked declarations including inline references).
