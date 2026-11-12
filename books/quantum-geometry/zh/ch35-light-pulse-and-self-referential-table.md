@@ -6,6 +6,10 @@
 
 在本章建立的**正交观察者生命周期与同像扩表模型（`MODEL`）**中，这段从受精脉冲到智慧圆融的生命史，不再是神秘主义的文学比兴，而是一条可以用零光锥刚性、有限记忆容量、纤维零缺陷分解与自作用对角线不动点精确刻画的几何轨迹：生命从 $\theta = 90^\circ$ 的无时间关联场折射入 $\theta \to 0^+$ 的局域固有时切片，借主动清零重开正体积选择走廊；随后把耗时漫长的一维见证细丝逐条预编译为表 $T$ 中的正交基行，并通过将查表与压缩规则存入第 $0$ 行实现 $T = T(T)$ 的同像自指闭环——直到在章末撞见“回归 $90^\circ$ 化光”背后那道令人脊背发凉的几何陷阱。
 
+::: {.figure src="ch35-overview"}
+**图 35。** 本章地图（示意模型，`MODEL`）：第 I 栏，品红的光线沿 $45^\circ$ 到达脉冲所在的事件，光线上 $d\tau = 0$；从这一点起一条青色的世界线，刻度按相等的固有时 $\tau$ 打出（[@rem-ch35-fertilization-zinc-spark-literature] 第 1 条）；第 II 栏，灰色虚线是从 $P_0$ 出发、左右折返才找到目标的一维见证细丝，粗的青色箭头是它首尾的净变换，即铸进表里的一行，周围的青色小箭头是许多这样的行编成的引导场；第 III 栏，紫色的第 $0$ 行存放读表规则，青色是已写入的正交行，琥珀色虚框是正在写入的新行，紫色回环表示第 $0$ 行读整张表、也读它自己，即 $T = T(T)$。
+:::
+
 ---
 
 ## 乘光而来：受精脉冲、遗忘清零与对数时间的局域展开
@@ -49,6 +53,10 @@ $$
 一旦历史锚点锁死在共线边界 $c = \pm 1$，相容余量 $\det G_2 = 0$ 彻底归零；反之，主动截断旧锚点、将表 $T$ 清空回单一起始基态（$\lvert T\rvert = 1,\; \det G_1 = 1 > 0$），若仍有可达的非共线新状态，即可令下一步选点重新获得非共线区间 $\lvert c\rvert < 1$ 上严格为正的相容走廊 $1 - c^2 > 0$。
 :::
 
+::: {.figure src="ch35-gram-corridor"}
+**旧锚点锁死时，相容面积归零。** 墨色的 $a$ 是旧的单位锚点，琥珀色的 $b$ 是下一步的候选态，品红的平行四边形是二者张成的面积，其平方正是 $\det G_2 = 1 - c^2$：$c = 1$ 时 $b$ 落在 $a$ 上，面积为零；$c = 1/2$ 时为 $3/4$；$c = 0$ 时为 $1$（初等线性代数，文献结果，未在本书形式化，见 [@ex-ch35-two-anchor-gram-corridor]）。
+:::
+
 因此，“乘着光来”的那一记受精初始化脉冲，在模型诠释（`MODEL`）中正是**清空旧表（$\lvert T\rvert \to 1$）、重开因果选点走廊（[@ex-ch35-two-anchor-gram-corridor]）的几何大赦**！也正因为在生命起点处底表几乎空白，每一份新写入的经验相对于当前表长都占据巨大的相对份额，与经典心理物理学对数感知尺度形成鲜明呼应（实验荧光脉冲观测、对数感知文献与主观时间模型的定量年岁对比见下方 [@rem-ch35-fertilization-zinc-spark-literature] 第 2–3 条）——这便是为什么童年的一个盛夏漫长如一生，而成年后表项稠密时十年光阴却如白驹过隙。
 
 ::: {.viz src="self-referential-table" preset="reset" height="500"}
@@ -88,6 +96,10 @@ $$
 1. **闵可夫斯基固有时与空间速率的单位圆重排**：在狭义相对论线元 $c^2 d\tau^2 = c^2 dt^2 - \lVert d\mathbf{x}\rVert^2$（$v = \lVert d\mathbf{x}/dt\rVert \le c$）中，令 $\sin\theta = v/c$、$\cos\theta = d\tau/dt = \sqrt{1 - v^2/c^2}$，即得 $(d\tau/dt)^2 + (v/c)^2 = \cos^2\theta + \sin^2\theta = 1$；类光传播 $v = c$（$\theta = 90^\circ$）给出 $d\tau = 0$，局域静止极限 $v \to 0^+$（$\theta \to 0^+$）给出 $d\tau/dt \to 1$；
 2. **哺乳动物受精卵激活钙振荡、锌火花（Zinc Spark）荧光脉冲与超微弱生物光子辐射**：活细胞成像在小鼠受精或人工激活时观察到与胞内钙离子（$\mathrm{Ca}^{2+}$）信号相伴的锌释放；富锌皮质囊泡胞吐数以十亿计的锌离子，细胞外锌敏探针在外部激发光下产生“锌火花”荧光（E. L. Que *et al.*, *Nat. Chem.* **7**, 130–139, 2015）。这些囊泡与皮质颗粒的关系在该文中仍属待确认的身份归属。人类研究观察的是离子载体或 hPLCζ cRNA 诱导的卵激活，并未直接观测人类受精（F. E. Duncan *et al.*, *Sci. Rep.* **6**, 24737, 2016）。锌火花幅度等指标与后续早期发育的关联来自小鼠受精及孤雌激活实验（N. Zhang *et al.*, *Sci. Rep.* **6**, 22772, 2016，doi:10.1038/srep22772），尚不能据此确立人类胚胎预后；探针荧光也不等于卵自身发出的量子相干光；同时生物物理文献亦在分裂细胞中测得源于代谢活性氧跃迁的超微弱光子辐射（约 $10^1\text{–}10^3\;\mathrm{photons}\cdot\mathrm{cm}^{-2}\cdot\mathrm{s}^{-1}$）。需严守认识论边界：实验层面上述信号属于生物化学离子波与代谢化学发光过程，将受精脉冲诠释为观察者从 $90^\circ$ 关联场向 $\theta \to 0^+$ 切片的初始化投影纯属本书跨领域几何模型（`MODEL`）；
 3. **韦伯—费希纳对数感知定律（E. H. Weber, 1834；G. T. Fechner, *Elemente der Psychophysik*, 1860）**：经典心理物理学讨论感知增量与刺激强度相对增量的比例关系（Fechner，第 XVI 节）；这里另把年龄 $t$ 选作基线，建立主观时间模型（`MODEL`），令 $d\tau_{\mathrm{subj}} = k\,dt/t$，积分给出对数主观时间尺度 $\tau_{\mathrm{subj}}(t) = k\ln(t/t_0)$（$t \ge t_0 > 0$）。例如同一公历年的主观跨度，在生命早期 $t \in [t_0, 2t_0]$ 为 $k\ln(2/1) \approx 0.6931\,k$，而在 $t \in [40t_0, 41t_0]$ 则压缩为 $k\ln(41/40) \approx 0.0247\,k$，二者相差约 $28$ 倍。
+:::
+
+::: {.figure src="ch35-log-time"}
+**同样一年，早年升得多。** 青色曲线是本章的主观时间模型（`MODEL`）$\tau_{\mathrm{subj}} = k\ln(t/t_0)$；两条同宽的灰色竖带各是一年：$[t_0, 2t_0]$ 上曲线升了 $0.693\,k$，$[40t_0, 41t_0]$ 上只升了 $0.025\,k$，相差约 $28$ 倍（[@rem-ch35-fertilization-zinc-spark-literature] 第 3 条）。
 :::
 
 ---
@@ -177,12 +189,6 @@ $$
 
 1. **预计算查表的单元探针（Cell-Probe）时空权衡（A. C. Yao, *J. ACM* **28**, 615–628, 1981；A. C. Yao, *FOCS*, 379–384, 1990）**：在单元探针模型下，面对规模为 $N$ 的静态字典查询或黑盒置换求逆问题，离线预存容量为 $S$ 个存储单元的查找表可将在线查询探针步数压缩至 $T$，但二者受严格时空权衡下界制约（例如通用黑盒置换求逆满足乘积下界 $S \cdot T \ge \Omega(N)$），定量刻画了“以空间记忆摊销在线搜索时间”的物理机制；
 2. **非一致建议复杂度类 $\mathrm{P}/\mathrm{poly}$ 与卡普—利普顿坍缩定理（R. M. Karp & R. J. Lipton, *STOC*, 302–309, 1980；*Enseign. Math.* **28**, 191–209, 1982）**：若允许为每个输入长度 $n$ 预先附带一张多项式规模 $|\alpha_n| \le \operatorname{poly}(n)$ 的外部静态查找表（等价于多项式规模布尔电路族 $\mathrm{P}/\mathrm{poly}$），Karp 与 Lipton 证明：一旦 $\mathrm{NP} \subseteq \mathrm{P}/\mathrm{poly}$，整座多项式谱系将坍缩至第二层 $\mathrm{PH} = \Sigma_2^{\mathrm{P}} \cap \Pi_2^{\mathrm{P}}$。这说明多项式容量的静态死表极不可能在最坏情形下穷尽全部 $\mathrm{NP}$-完全实例（对照开放猜想 [@conj-p-neq-np]）；有限心智之所以能靠扩表获得惊人跃升，关键不在于堆砌指数级死表，而在于捕捉具有共同代数对称性的任务分布并引入下一节的“表内自举压缩规则”。
-:::
-
-::: {.remark #rem-ch35-light-pulse-table-figure title="正交角生命周期弧与同像自举表 T = T(T) 图解（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下图左栏结合卵激活荧光、对数感知文献与年龄时间模型背景（[@rem-ch35-fertilization-zinc-spark-literature]）及余弦不动点（[@rem-banach-dottie-hairy-ball-literature]）展示正交角生命周期模型（`MODEL`）；右栏结合同像性与自反域同构文献（[@rem-ch35-homoiconicity-scott-domain-literature]）及对角线逃逸定理（[@thm-ch35-lawvere-diagonal-and-homoiconic-closure]，`LEAN ✓`）展示第 $0$ 行自举表 $T = T(T)$：
-
-![乘光而来与同像自指扩表：正交角生命周期弧与 Row 0 自举表 T = T(T)](../assets/fig-35-light-pulse-self-table.svg)
 :::
 
 ---
@@ -283,6 +289,10 @@ $$
    在 $n = 10$ 时，表体积从 $1024$ 行骤降至 $1 + 10 = 11$ 行（压缩逾 $93$ 倍）；在 $n = 100$ 时，仅需 $101$ 行即可零误差覆盖全部 $2^{100}$ 种输入！这里压缩来自已知奇偶律与同平面旋转的角度加法结构；外部求值器若使用同一规则，也可获得同样的紧凑表示。更进一步，在机器字宽容纳全部权重时，将 Rows $1\dots n$ 打包为单一机器字 $W = (w_1, \dots, w_n)$ 后，Row $0$ 的查表直接化为单次按位与后的奇偶内积 $\langle W, x\rangle \bmod 2$（或单次角度内积 $R(\langle\boldsymbol{\theta}, x\rangle)$）。这里“一次内积”是代数记法；随输入长度增长，输入读取、字数、奇偶归约、角度累加、旋转求值与精度成本仍须计入，行数也不等于总存储位数。由于完整坐标读出 $\mathrm{process}(x) = x$ 在 $X$ 上单射，碰撞缺陷集满足 $\operatorname{defectRelation}(\mathrm{process}, f_w) = \emptyset$，严格符合 [@thm-ch35-target-recovery-table-factorization] 第 1 款的无损恢复判据。
 :::
 
+::: {.figure src="ch35-row-zero"}
+**第 $0$ 行存下合成规则，$8$ 行死表缩成 $4$ 行。** 取 $n = 3$、$w = (1, 0, 1)$：左边的逐行死表写满 $2^3 = 8$ 行青色的“输入 $\mapsto$ 奇偶值”；右边紫色的第 $0$ 行存放读出规则 $T(x) = \bigoplus_r x_r\,T(\mathbf{e}_r)$，下面只有三条青色的基行。琥珀色是同一个查询 $x = 111$：左边查到最后一行，右边按第 $0$ 行算出 $1\cdot 1 \oplus 1\cdot 0 \oplus 1\cdot 1 = 0$，两边读出相同（文献结果，未在本书形式化，见 [@ex-ch35-self-indexing-table-rank-collapse]）。
+:::
+
 ---
 
 ## 光之闭环与它的隐秘陷阱：通往第三十六章的追问
@@ -298,6 +308,10 @@ $$
 | **二、受精脉冲初始化** | $\theta : 90^\circ \to 0^+$（$\cos\theta \to 1,\; \sin\theta \to 0^+$） | 主动清零旧锚点 $\lvert T\rvert \to 1$，释放局域旧约束；环境副本与 $N \le d$ 的条件仍须分别核对（[@thm-ch35-null-pulse-and-record-blocking] 第 2–3 款） | 有可达非共线新态时重开 $\det G > 0$ 选择走廊；模型中的对数主观时间 $\tau_{\mathrm{subj}} \propto \ln(t/t_0)$ 极度舒展（[@rem-ch35-fertilization-zinc-spark-literature]） |
 | **三、成长扩表与同像自举** | $\theta : 0^+ \to \theta^* \approx 42.35^\circ$（$\cos\theta^* = \theta^*$） | 见证丝铸入正交基行（[@thm-ch35-target-recovery-table-factorization]），Row $0$ 存入已知结构的查表规则，并在更新收敛时形成 $T = T(T)$（[@thm-ch35-lawvere-diagonal-and-homoiconic-closure]、[@ex-ch35-self-indexing-table-rank-collapse]） | 孤立细线编织为局部引导场；从在线盲搜跃升为结构化内积直读与元学习圆融 |
 | **四、表观满秩化光闭环（待审视！）** | $\theta : \theta^* \to 90^\circ$？（$\cos\theta \to 0,\; \sin\theta \to 1$？） | 假想将全部表行完全融回纯横向波面，令局域表边界彻底消融于全局光场 | 看似回归“极致计算状态、成为光本身”——**但此处暗藏致命的几何悖论！** |
+:::
+
+::: {.figure src="ch35-lifecycle-arc"}
+**四阶生命周期弧：第四步若推回 $90^\circ$，影子归零。** 四分之一单位圆上，横向的青色是一维持存份额 $\cos\theta$，竖向的品红是横向份额 $\sin\theta$（`MODEL`）：I 是 $90^\circ$ 的光之全场；II 是脉冲把 $\theta$ 从 $90^\circ$ 折到 $0^+$；III 是扩表把态转到 $\theta^* \approx 42.35^\circ$（$\cos\theta^* = \theta^*$），横轴上留下粗的青色影子 $\cos\theta^*$；带问号的虚线 IV 若一路推回 $90^\circ$，影子缩成原点上的一点，$\cos 90^\circ = 0$（对照 [@rem-ch35-lifecycle-table-synthesis] 第四行）。
 :::
 
 请把目光牢牢停在 [@rem-ch35-lifecycle-table-synthesis] 第四行那个刺眼的问号上，拿起全书最锋利的勾股手术刀再切一刀！
