@@ -74,7 +74,7 @@ $$
 
 第 4 条边界说，[@thm-no-cloning-overlap] 只是必要条件。那么反过来问：既然精确克隆做不到，近似克隆在文献中如何构造，代价又落在哪里（[@rem-buzek-hillery-isometry-literature]）？
 
-::: {.remark #rem-buzek-hillery-isometry-literature title="Bužek–Hillery 通用 1→2 克隆等距（文献结果，未在本书形式化）"}
+::: {.remark #rem-buzek-hillery-isometry-literature title="Bužek–Hillery 通用 1→2 克隆等距与最优性的外部形式化边界"}
 **文献结果，未在本书形式化。** Bužek 与 Hillery（1996）构造了一台对一切输入一视同仁的 $1 \to 2$ 克隆机（其单拷贝最优保真度由 Gisin 与 Massar 于 1997 年证明；出处见 [@ex-buzek-hillery-three-marginals]）。它用三个量子比特：输入、空白副本，以及一个辅助的“机器”比特 $M$。对单位向量 $\psi$，记 $\psi^\perp$ 为与它正交的单位向量；克隆等距把输入送到
 
 $$
@@ -82,6 +82,67 @@ $$
 $$
 
 三个因子依次是克隆体一、克隆体二与机器比特。对两个克隆体求偏迹，机器比特落在约化态 $\frac{1}{3}\lvert\psi\rangle\langle\psi\rvert + \frac{2}{3}\lvert\psi^\perp\rangle\langle\psi^\perp\rvert$ 上。
+
+**通用 $5/6$ 上界的外部形式来源。** JD Jones 的 [qubit-cloning-lean 固定版本](https://github.com/JD-Jones-ASES/qubit-cloning-lean/tree/f619a52e67849f80205127e3ba7877f7f7658e50)（MIT 许可）给出这一最优性的外部 Lean 证明。其 [Defs.lean](https://github.com/JD-Jones-ASES/qubit-cloning-lean/blob/f619a52e67849f80205127e3ba7877f7f7658e50/QubitCloning/Defs.lean) 中，信道由任意有限个 $4\times2$ 复 Kraus 矩阵表示：
+
+$$
+\begin{aligned}
+\mathcal{E}_K(\rho)&=\sum_{i=0}^{r-1}K_i\rho K_i^*,\\
+\sum_{i=0}^{r-1}K_i^*K_i&=I_2.
+\end{aligned}
+$$
+
+第二式就是 `IsChannel K` 的保迹条件；Kraus 形式已保证完全正性，不预设两个输出对称或信道旋转协变。对每个单位输入 $\psi\in\mathbb{C}^2$，令 $P_\psi=\lvert\psi\rangle\langle\psi\rvert$，$\rho_1=\Tr_2\mathcal{E}_K(P_\psi)$、$\rho_2=\Tr_1\mathcal{E}_K(P_\psi)$。源码的两个保真度为
+
+$$
+\begin{aligned}
+F_j(K,\psi)&=\operatorname{Re}\Tr(P_\psi\rho_j)\\
+&=\langle\psi\rvert\rho_j\lvert\psi\rangle,\qquad j=1,2.
+\end{aligned}
+$$
+
+这是纯态重叠，也就是**平方保真度约定**；若使用取平方根的保真度约定，相应数值为 $\sqrt{5/6}$。
+
+取六个泡利本征输入 $\mathcal{S}=\{\lvert0\rangle,\lvert1\rangle,\lvert+\rangle,\lvert-\rangle,\lvert+i\rangle,\lvert-i\rangle\}$，其中 $\lvert\pm\rangle=(\lvert0\rangle\pm\lvert1\rangle)/\sqrt2$、$\lvert\pm i\rangle=(\lvert0\rangle\pm i\lvert1\rangle)/\sqrt2$，记 $A_j(K)=\frac16\sum_{\psi\in\mathcal{S}}F_j(K,\psi)$。[Form.lean](https://github.com/JD-Jones-ASES/qubit-cloning-lean/blob/f619a52e67849f80205127e3ba7877f7f7658e50/QubitCloning/Form.lean) 的 `sixAvg_le_internal` 断言
+
+$$
+\begin{aligned}
+\frac{A_1(K)+A_2(K)}{2}
+&=\frac1{12}\sum_{\psi\in\mathcal{S}}\bigl(F_1(K,\psi)+F_2(K,\psi)\bigr)\\
+&\le\frac56.
+\end{aligned}
+$$
+
+这个平均同时计入两克隆体，共十二个数。其代数机制是一个平方和证书：按输出基 $00,01,10,11$ 排列，把 $K_i$ 写成
+
+$$
+K_i=\begin{pmatrix}a_i&b_i\\c_i&d_i\\e_i&f_i\\g_i&h_i\end{pmatrix},
+$$
+
+则源码中的 `form_sos` 经 Kraus 求和给出
+
+$$
+\begin{aligned}
+q_i={}&|a_i-d_i-f_i|^2+2|c_i-h_i/2|^2\\
+&+2|e_i-h_i/2|^2+3|g_i|^2\\
+&+3|b_i|^2+|d_i-f_i|^2\ge0,\\
+6(A_1+A_2)&=5\sum_i\norm{K_i}_{\mathrm F}^2-\sum_iq_i.
+\end{aligned}
+$$
+
+这里 $\norm{K_i}_{\mathrm F}^2$ 是全部矩阵元模平方之和。对保迹条件取迹，有 $\sum_i\norm{K_i}_{\mathrm F}^2=\Tr I_2=2$，于是 $6(A_1+A_2)\le10$，除以 $12$ 即得上界。
+
+同文件的 `exists_unit_min_le_internal` 因而给出精确的最坏情形结论：**对每个上述有限 Kraus 保迹信道，都存在一个单位纯输入**使
+
+$$
+\min\{F_1(K,\psi),F_2(K,\psi)\}\le\frac56.
+$$
+
+理由也可直接从有限平均看出：若每个单位输入的两个保真度都严格大于 $5/6$，六个泡利输入上的十二个数就都严格大于 $5/6$，与平均上界矛盾。这里限制的是两个克隆体对所有纯输入能**共同保证**的质量；它不声称非对称装置的每个克隆体都各自受逐点 $5/6$ 上界限制，也没有断言球面的 Haar 平均恒等式。
+
+[Unique.lean](https://github.com/JD-Jones-ASES/qubit-cloning-lean/blob/f619a52e67849f80205127e3ba7877f7f7658e50/QubitCloning/Unique.lean) 的 `isGreatest_cloning_fidelity_internal` 还包含可达性：在“存在有限 Kraus 保迹信道，使每个单位输入都满足 $t\le F_1$ 且 $t\le F_2$”的所有实数 $t$ 中，$5/6$ 是最大元。其构造给出两算子的 Bužek–Hillery 信道，对所有单位输入都有 $F_1=F_2=5/6$；因此这里的 $5/6$ 是达到的共同保证，而非仅有上界。
+
+**验证边界。** 这份外部源码使用 Lean `4.35.0-rc2` 与 mathlib [`06535612`](https://github.com/leanprover-community/mathlib4/tree/065356127b1dc0016f66b7283ce0ce2c4055aa55)，本书所钉 trureturing 使用 Lean `4.35.0` 与 mathlib [`56a00585`](https://github.com/leanprover-community/mathlib4/tree/56a005855ea17e0b0958f73ec801ae140b0a1679)。上述外部证明尚未移植、编译或冻结到本书所用的 trureturing 版本中；此处引用其明确陈述与证明源码，不主张本书工具链已独立完成内核复核。下文 [@thm-cloning-machine-spectrum] 的本地形式化范围仍是所定义机器约化态的谱与熵；克隆等距及三个边缘态的文献说明保持各自的适用边界。
 :::
 
 Lean 模块 `D5/S3/Quantum/CloningMachine` 直接把这一候选机器约化态矩阵定义出来，并证明它的谱与输入无关。

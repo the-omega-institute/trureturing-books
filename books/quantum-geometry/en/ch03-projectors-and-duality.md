@@ -365,7 +365,63 @@ H_X+H_Y+H_Z&\ge(3-x^2-y^2-z^2)\ln2\\
 \end{aligned}
 $$
 
-The six coordinate-axis unit states $(\pm1,0,0)$, $(0,\pm1,0)$, and $(0,0,\pm1)$ have entropy triples that are permutations of $(0,\ln2,\ln2)$. They therefore attain $2\ln2$, so this uniform lower bound cannot be increased. This is an application of existing theorems; we do not classify all equality states here or treat the numerical grid as a uniqueness proof.
+**Why are these exactly the six equality directions?** Set $L=\ln2>0$ and use the squared coordinate as a separate variable:
+
+$$
+\begin{aligned}
+f(u)&=h\!\left(\frac{1+\sqrt{u}}{2}\right),\\
+g(u)&=f(u)-(1-u)L,\qquad 0\le u\le1.
+\end{aligned}
+$$
+
+The proof of the same contraction theorem establishes concavity of $f$ on all of $[0,1]$, including both endpoints, with $f(0)=L$ and $f(1)=0$. Subtracting the endpoint chord $(1-u)L$ leaves a concave function $g$ with $g(0)=g(1)=0$; concavity gives $g(u)\ge0$. To determine where the chord gap is strictly positive, first evaluate one interior point:
+
+$$
+\begin{aligned}
+h(3/4)&=2L-\frac34\ln3,\\
+g(1/4)&=\frac{5L-3\ln3}{4}\\
+&=\frac{\ln32-\ln27}{4}>0.
+\end{aligned}
+$$
+
+The strict sign follows from $0<27<32$ and strict increase of the natural logarithm on positive numbers. Two chords now spread this positive gap through the interior. For $0<u\le1/4$,
+
+$$
+\begin{aligned}
+u&=(1-4u)\,0+(4u)\,\frac14,\\
+g(u)&\ge4u\,g(1/4)>0.
+\end{aligned}
+$$
+
+For $1/4<u<1$,
+
+$$
+\begin{aligned}
+u&=\frac{4(1-u)}{3}\,\frac14+\frac{4u-1}{3}\,1,\\
+g(u)&\ge\frac{4(1-u)}{3}\,g(1/4)>0.
+\end{aligned}
+$$
+
+In both convex combinations the weights are nonnegative and sum to $1$. Thus the existing concavity and one positive chord gap imply $g(u)>0$ for every $0<u<1$, without a separate strict-concavity assumption.
+
+For every $r\in[-1,1]$, the identity $\sqrt{r^2}=|r|$ and binary-entropy symmetry give
+
+$$
+h\!\left(\frac{1+r}{2}\right)-(1-r^2)L=g(r^2).
+$$
+
+The coordinate gap therefore vanishes exactly when $r^2\in\{0,1\}$: $r=0$ gives entropy $L$, while $r=1$ and $r=-1$ give $h(1)=0$ and $h(0)=0$, respectively. Every other coordinate value has a strictly positive gap. Write $H=H_X+H_Y+H_Z$ and $s=x^2+y^2+z^2\le1$. The total slack decomposes exactly as
+
+$$
+\begin{aligned}
+H-2L={}&(1-s)L\\
+&+g(x^2)+g(y^2)+g(z^2).
+\end{aligned}
+$$
+
+All four terms on the right are nonnegative. If $H=2L$, then $L>0$ forces $s=1$ and all three coordinate gaps vanish. Hence each of $x^2,y^2,z^2$ is $0$ or $1$, and their sum being $1$ forces exactly one to be $1$. Conversely, the six coordinate-axis unit states $(\pm1,0,0)$, $(0,\pm1,0)$, and $(0,0,\pm1)$ have entropy triples that are permutations of $(0,L,L)$ and attain equality. Thus, on the **entire closed Bloch ball**, $H\ge2\ln2$ with equality if and only if the state is one of these six. Every interior point $s<1$ satisfies a strict inequality because $(1-s)L>0$.
+
+This classification follows the derivation in the contraction module's [explanatory narrative](https://github.com/the-omega-institute/trureturing/blob/a2cb467f6c498757ce2975a8878a017a2b59d1b1/Blueprint/D5/S3/Quantum/Information/QubitEntropyContraction.md). It is a manual application of the existing scalar concavity, contraction result, and spectral entropy formula, with no additional standalone Lean declaration or claim of novelty. The finite grid above still reports only sampled values; the global lower bound and equality classification rest on this analytic derivation.
 
 Where does the collision-entropy derivation lose this precision? The first step replaces the Shannon entropy by the collision entropy, and for a two-outcome distribution this loses nothing only in the uniform and the deterministic cases; an axis state has exactly one deterministic and two uniform contexts, so the first step is lossless. The loss occurs in the second application of Jensen's inequality, because the three collision probabilities $1, \frac{1}{2}, \frac{1}{2}$ are not equal.
 :::
