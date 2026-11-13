@@ -12,7 +12,8 @@
 //            {(T + 1)α + u'} − {α + u'} (Hecke–Kesten for an interval of length 1 − α), run to T = 10⁵
 // Accuracy regressions: the finite seeded cap count is not axis-invariant and the centroid is not monotone in N (the
 // exact invariant is the Haar measure, said apart from the sample; the HAAR note stays short enough to leave the ball
-// ≥ 220 px in a 315 × 500 phone frame); the gain note at r = 0 has no direction and uses
+// ≥ 220 px in a 315 × 500 phone frame, where only that note scrolls, inside its two-line bar, to its last line); the gain
+// note at r = 0 has no direction and uses
 // exact words only at 0°, 90° and 180°, shares of r² elsewhere, in both languages; the random comparison is drawn point
 // for point, untruncated (read by wrapping kit.plot for plotB); every green box carries only its frozen statement and the
 // hand applications sit next to it in NUM boxes, side panel and drawer alike.
@@ -251,17 +252,48 @@ check('opens on HAAR in the seat scene with all 600 points', s.preset === 'haar'
 }
 
 // HAAR cited in a chapter on a phone (a 315 × 500 iframe): the card's note shares the frame with the ball, so it must stay
-// short enough to leave the stage ≥ 220 px tall, still say every idea of the card, and never scroll inside the frame.
+// short enough to leave the stage ≥ 220 px tall and still say every idea of the card. Nothing scrolls or clips inside the
+// frame (the frame, the body, the stage or any other box) except the note of the current card: since template 0.9.1 the
+// shared theme bounds .tour .tour-note of a cited card to two lines and lets the reader scroll it inside the bar. That note
+// may scroll, and only up and down: it stays two lines tall with nothing out at the side, holds the card's whole text, and
+// a wheel over it reaches its last line while the frame, the stage and the bar stay where they were.
+const haarFrame = () => {
+  const de = document.documentElement, st = document.getElementById('stage'), bar = document.querySelector('.tour');
+  const note = bar ? bar.querySelector(':scope > .what > .tour-note') : null, pressed = document.querySelector('[data-preset][aria-pressed="true"]');
+  const rect = (el) => { const r = el.getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom, w: r.width, h: r.height }; };
+  // every box that scrolls or clips what it holds, in either direction; for the note of the current card, sideways only
+  const over = [...document.querySelectorAll('body *')].filter((e) => {
+    const s = getComputedStyle(e), x = s.overflowX !== 'visible' && e.scrollWidth > e.clientWidth + 1, y = s.overflowY !== 'visible' && e.scrollHeight > e.clientHeight + 1;
+    return x || (y && e !== note);
+  }).map((e) => (e.id ? `#${e.id}` : e.className || e.tagName.toLowerCase()));
+  const sb = rect(st), tb = rect(bar);
+  const g = { h: sb.h, top: sb.t, bottom: sb.b, tourBottom: tb.b, vh: innerHeight, stageBox: sb, tourBox: tb, scrollY,
+    docScroll: de.scrollHeight - de.clientHeight, docScrollX: de.scrollWidth - de.clientWidth, bodyScroll: document.body.scrollHeight - document.body.clientHeight,
+    over, notes: document.querySelectorAll('.tour-note').length, current: !!note, preset: window.FAIRNESS_DEBUG.state.preset, pressed: pressed ? pressed.dataset.preset : null,
+    note: note ? note.textContent : '', card: document.getElementById('presetNote').textContent };
+  if (!note) return g;
+  // each character of the note: whether it stays inside the width of the note, and whether all of it is in sight (in the
+  // note's scrollport and in the frame). The glyph box at line-height 1.4 stands up to a pixel over its line, so allow
+  // 2px; a line hidden by the scroller is a whole line (~17px) away.
+  const n = rect(note), cs = getComputedStyle(note), lh = parseFloat(cs.lineHeight), tol = 2;
+  const port = { l: n.l + note.clientLeft, t: n.t + note.clientTop, r: n.l + note.clientLeft + note.clientWidth, b: n.t + note.clientTop + note.clientHeight };
+  const glyphs = [], walk = document.createTreeWalker(note, NodeFilter.SHOW_TEXT);
+  for (let t = walk.nextNode(); t; t = walk.nextNode()) for (const m of t.data.matchAll(/\S/gu)) {
+    const r = document.createRange(); r.setStart(t, m.index); r.setEnd(t, m.index + m[0].length);
+    glyphs.push([...r.getClientRects()].filter((q) => q.width > 0 && q.height > 0).pop() || null);
+  }
+  const seen = (q) => !!q && q.top >= port.t - tol && q.bottom <= port.b + tol && q.left >= port.l - tol && q.right <= port.r + tol
+    && q.top >= -tol && q.bottom <= innerHeight + tol && q.left >= -tol && q.right <= innerWidth + tol;
+  return { ...g, lines: n.h / lh, cap: parseFloat(cs.maxHeight) / lh, sideways: note.scrollWidth - note.clientWidth,
+    side: glyphs.filter((q) => !q || q.left < port.l - tol || q.right > port.r + tol).length, glyphs: glyphs.length,
+    inBar: n.l >= tb.l - 0.5 && n.r <= tb.r + 0.5 && n.t >= tb.t - 0.5 && n.b <= tb.b + 0.5,
+    scrollTop: note.scrollTop, scrollMax: note.scrollHeight - note.clientHeight, first: seen(glyphs[0]), last: seen(glyphs[glyphs.length - 1]) };
+};
+const sameBox = (a, b) => ['l', 't', 'r', 'b'].every((k) => Math.abs(a[k] - b[k]) <= 0.5);
 for (const lg of ['zh', 'en']) {
   const fp = await T.open(BOOK, ID, `?embed=1&lang=${lg}&preset=haar`, { viewport: { width: 315, height: 500 }, locale: lg === 'zh' ? 'zh-CN' : 'en-US', reducedMotion: 'reduce' });
   await settle(fp, 300); await fp.evaluate(() => window.FAIRNESS_DEBUG.seek(600)); await settle(fp, 200);
-  const g = await fp.evaluate(() => {
-    const st = document.getElementById('stage').getBoundingClientRect(), tour = document.querySelector('.tour').getBoundingClientRect(), what = document.querySelector('.tour .what');
-    const inner = [...document.querySelectorAll('body *')].filter((e) => /(auto|scroll)/.test(getComputedStyle(e).overflowY) && e.scrollHeight > e.clientHeight + 1).map((e) => e.id || e.className);
-    const de = document.documentElement;
-    return { h: st.height, top: st.top, bottom: st.bottom, tourBottom: tour.bottom, vh: innerHeight, docScroll: de.scrollHeight - de.clientHeight, bodyScroll: document.body.scrollHeight - document.body.clientHeight,
-      clipped: what.scrollHeight - what.clientHeight, inner, note: what.textContent, preset: window.FAIRNESS_DEBUG.state.preset };
-  });
+  const g = await fp.evaluate(haarFrame);
   const ideas = lg === 'zh'
     ? [/哈尔测度）?，?文献结果/, '未在本书形式化', '恰占四分之一', '固定种子', '接近四分之一', '青色的影子一样长', 'ψ 量 φ', 'φ 量 ψ']
     : ['Haar measure', 'literature result', 'not formalized in this book', 'exactly a quarter', 'fixed-seed', 'close to a quarter', 'cyan shadows are equal', 'ψ measuring φ', 'φ measuring ψ'];
@@ -269,8 +301,26 @@ for (const lg of ['zh', 'en']) {
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): the stage stays ≥ 220 px tall and inside the frame`, g.preset === 'haar' && g.h >= 220 && g.top >= 0 && g.bottom <= g.tourBottom && g.tourBottom <= g.vh + 1,
     JSON.stringify({ h: Math.round(g.h), top: Math.round(g.top), tourBottom: Math.round(g.tourBottom), vh: g.vh }));
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): the note keeps the Haar attribution, the exact quarter, the finite count and reciprocity`, lost.length === 0, lost.join(' / '));
-  check(`HAAR cited in a 315 × 500 phone frame (${lg}): nothing scrolls inside the frame`, g.docScroll <= 0 && g.bodyScroll <= 0 && g.clipped <= 1 && g.inner.length === 0,
-    JSON.stringify({ doc: g.docScroll, body: g.bodyScroll, clipped: g.clipped, inner: g.inner.slice(0, 3) }));
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): the frame, the body, the stage and every other box neither scroll nor clip; only the card's note scrolls, up and down`,
+    g.docScroll <= 0 && g.docScrollX <= 0 && g.bodyScroll <= 0 && g.scrollY === 0 && g.over.length === 0,
+    JSON.stringify({ doc: g.docScroll, docX: g.docScrollX, body: g.bodyScroll, scrollY: g.scrollY, over: g.over.slice(0, 3) }));
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): the bar holds the HAAR card's whole note, bounded to two lines, nothing out at the side, its first line in sight`,
+    g.current && g.notes === 1 && g.pressed === 'haar' && g.note.length > 0 && g.note === g.card && Math.abs(g.cap - 2) <= 0.05 && g.lines <= 2.05 && (g.scrollMax <= 0 || g.lines >= 1.95)
+      && g.sideways <= 0 && g.side === 0 && g.inBar && g.scrollTop === 0 && g.first,
+    JSON.stringify({ current: g.current, notes: g.notes, pressed: g.pressed, whole: g.note === g.card, lines: g.lines, cap: g.cap, sideways: g.sideways, side: g.side, glyphs: g.glyphs, inBar: g.inBar, scrollTop: g.scrollTop, scrollMax: g.scrollMax, first: g.first }));
+  // a reader's wheel over the note, as far as it goes
+  const nb = g.current ? await fp.locator('.tour .tour-note').boundingBox() : null;
+  let reached = false;
+  if (nb) {
+    await fp.mouse.move(nb.x + nb.width / 2, nb.y + nb.height / 2); await fp.mouse.wheel(0, 4000);
+    reached = await until(fp, () => { const n = document.querySelector('.tour .tour-note'); return n.scrollHeight - n.clientHeight - n.scrollTop <= 1; });
+    await settle(fp, 60);
+  }
+  const e = await fp.evaluate(haarFrame);
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): a wheel over the note reaches its last line, and the frame, the stage and the bar stay where they were`,
+    reached && e.current && e.last && e.scrollTop >= e.scrollMax - 1 && e.note === g.note && e.preset === 'haar' && e.lines <= 2.05 && e.side === 0
+      && e.docScroll <= 0 && e.docScrollX <= 0 && e.bodyScroll <= 0 && e.scrollY === 0 && e.over.length === 0 && sameBox(e.stageBox, g.stageBox) && sameBox(e.tourBox, g.tourBox),
+    JSON.stringify({ reached, last: e.last, scrollTop: e.scrollTop, scrollMax: e.scrollMax, lines: e.lines, scrollY: e.scrollY, over: (e.over || []).slice(0, 3), stage: [g.stageBox.t, e.stageBox.t], bar: [g.tourBox.h, e.tourBox.h] }));
   const cn = await fp.evaluate(() => ({ c: window.FAIRNESS_DEBUG.centre(), o: window.FAIRNESS_DEBUG.overlay() }));
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): the narrow stage centres the ball and leaves #flat blank (no ledger column)`, cn.c.W <= 600 && Math.abs(cn.c.x - 0.5 * cn.c.W) < 1e-6 && cn.o.ink === 0, JSON.stringify(cn));
   await fp.context().close();
