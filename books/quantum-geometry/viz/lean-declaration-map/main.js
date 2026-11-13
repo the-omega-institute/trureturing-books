@@ -98,12 +98,23 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":49,"units":[{"file":
     }
     if (!thumb) {
       ctx.font = `${narrow ? 9 : 10.5}px ${TRV.fonts.data}`; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-      const every = cw >= 15 ? 1 : 5;
-      COLS.forEach((u, c) => {
-        const s = DATA.units[u].s[0], num = /^\d+$/.test(s) ? +s : null;
-        if (every > 1 && num != null && num % every !== 0 && num !== 1) return;
+      // column names, claimed in this order: the chosen column, both ends, chapter 1 and every fifth chapter (every
+      // chapter on wide columns), the coda and appendices, then the sections of a chapter (wide columns only); a name
+      // is drawn only where its measured width keeps 2 px clear of every name already drawn
+      const every = cw >= 15 ? 1 : 5, drawn = [];
+      const rank = (c) => {
+        const s = DATA.units[COLS[c]].s[0];
+        if (c === S.src) return 0;
+        if (c === 0 || c === NC - 1) return 1;
+        if (/^\d+$/.test(s)) return +s % every === 0 || +s === 1 ? 2 : null;
+        return s.includes('.') ? (every > 1 ? null : 4) : 3;
+      };
+      COLS.map((u, c) => [rank(c), c]).filter(([r]) => r != null).sort((a, b) => a[0] - b[0] || a[1] - b[1]).forEach(([, c]) => {
+        const lab = unitShort(COLS[c]), w = ctx.measureText(lab).width, x = g.X(c);
+        if (drawn.some(([a, b]) => x - w / 2 < b + 2 && x + w / 2 > a - 2)) return;
+        drawn.push([x - w / 2, x + w / 2]);
         ctx.fillStyle = c === S.src ? P.cyan : c < Math.floor(t) || (c === Math.floor(t) && t % 1 > 0) ? P.ink : P.dim;
-        ctx.fillText(unitShort(u), g.X(c), g.pt + g.ih + 6);
+        ctx.fillText(lab, x, g.pt + g.ih + 6);
       });
       // what a column counts: each declaration once, in the chapter that cites it first
       ctx.font = `${narrow ? 9.5 : 10.5}px ${TRV.fonts.body}`; ctx.textAlign = 'left'; ctx.fillStyle = P.dim;
