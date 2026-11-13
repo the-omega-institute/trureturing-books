@@ -2,28 +2,28 @@
 
 本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 [{commit}](trureturing:)）中接受逐条核验：
 
-1. **C.1 冻结定理总索引（291 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
-2. **C.2 形式化定义与代数载体总索引（97 项唯一声明：88 项 `def` + 9 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.2.1 行内辅助定理与定义索引（161 项声明：109 项 `theorem` + 52 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **549 项唯一声明**（$291 + 97 + 161 = 549$）。媒体引用在各行末尾另列，不改变上述分区。
+1. **C.1 冻结定理总索引（293 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
+2. **C.2 形式化定义与代数载体总索引（97 项唯一声明：88 项 `def` + 9 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.2.1 行内辅助定理与定义索引（161 项声明：109 项 `theorem` + 52 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **551 项唯一声明**（$293 + 97 + 161 = 551$）。媒体引用在各行末尾另列，不改变上述分区。
 3. **C.3 开放问题与未形式化前沿边界台账（11 项：6 个 `conjecture` + 3 个 `problem` 环境 + 2 项文献边界 `remark`）**：9 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**549 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：400 格是定理，149 格是定义或归纳类型；388 个实心格被环境头以 `lean=` 引用，161 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
+**551 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：402 格是定理，149 格是定义或归纳类型；390 个实心格被环境头以 `lean=` 引用，161 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
 :::
 
 ---
 
-## C.1 已验证并冻结的 Lean 4 定理总索引（291 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
+## C.1 已验证并冻结的 Lean 4 定理总索引（293 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
 
-下表按 GID 的模块路径字母顺序列出 **291 条至少被一个 `:::` 环境头以 `lean=` 引用的唯一冻结定理**。第一至第三十九章与终章合计引用这些定理 403 次（同一 GID 每章计一次）；这 403 次引用分布在 253 个定理、引理、命题与推论环境及 2 个形式化 `example` 环境（`#ex-ch35-two-anchor-gram-corridor`、`#ex-ch37-gram-constraint-release`，共 255 个 `:::` 环境头）中。行内引用与媒体消费者另列在最后一栏，不增加柱高。
+下表按 GID 的模块路径字母顺序列出 **293 条至少被一个 `:::` 环境头以 `lean=` 引用的唯一冻结定理**。第一至第三十九章与终章合计引用这些定理 405 次（同一 GID 每章计一次）；这 405 次引用分布在 255 个定理、引理、命题与推论环境及 2 个形式化 `example` 环境（`#ex-ch35-two-anchor-gram-corridor`、`#ex-ch37-gram-constraint-release`，共 257 个 `:::` 环境头）中。行内引用与媒体消费者另列在最后一栏，不增加柱高。
 
 ::: {.figure src="appc-theorems-by-chapter"}
-**每一章带 `lean=` 的环境头引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，共 40 根绿色柱子，按第 I–X 部加浅色底纹。第二十二章最高，$35$ 条；其次第二十九章 $27$ 条、第三十章 $23$ 条、第三十三与第三十七章各 $19$ 条、第三十八章 $18$ 条。第四、三十六章各 $17$ 条；第二十四、三十九章各 $16$ 条；第三十一章 $15$ 条；第十四章 $14$ 条、终章 $13$ 条；其余 27 章各 $4$ 到 $9$ 条。柱高合计 $403$，由脚本从中文章节与锁文件算出，并与下表最后一栏的环境锚点逐章核对；本节全部 $291$ 条定理均至少出现在一根柱子中。实心下段是在该章第一次出场的定理，共 $280$ 条；空心上段是此前已出场、在该章再次引用的定理，共 $123$ 条。同一条定理在不同章重复计，定义与仅有行内引用的声明不计。
+**每一章带 `lean=` 的环境头引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，共 40 根绿色柱子，按第 I–X 部加浅色底纹。第二十二章最高，$35$ 条；其次第二十九章 $27$ 条、第三十章 $23$ 条、第三十三与第三十七章各 $19$ 条、第三十八章 $18$ 条。第四、三十六章各 $17$ 条；第二十四、三十九章各 $16$ 条；第三十一章 $15$ 条；第十四章 $14$ 条、终章 $13$ 条；其余 27 章各 $4$ 到 $9$ 条。柱高合计 $405$，由脚本从中文章节与锁文件算出，并与下表最后一栏的环境锚点逐章核对；本节全部 $293$ 条定理均至少出现在一根柱子中。实心下段是在该章第一次出场的定理，共 $282$ 条；空心上段是此前已出场、在该章再次引用的定理，共 $123$ 条。同一条定理在不同章重复计，定义与仅有行内引用的声明不计。
 :::
 
-下表按模块路径排序，这 $291$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族最大，占 $86$ 条；`FluidDynamics` 的 $18$ 条全在第八部。
+下表按模块路径排序，这 $293$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族最大，占 $86$ 条；`FluidDynamics` 的 $18$ 条全在第八部。
 
 ::: {.figure src="appc-modules-by-part"}
-**C.1 的 $291$ 条定理按模块族与首次出场的部分组。** 行是模块路径的前三段，较小的族合并为末行；列是第一至第十部与终章、附录。每条定理只计一次，放在中文正文最先引用它的部分；格中数字为条数，底色越深条数越多，空格为零。图不表示模块间的证明依赖。
+**C.1 的 $293$ 条定理按模块族与首次出场的部分组。** 行是模块路径的前三段，较小的族合并为末行；列是第一至第十部与终章、附录。每条定理只计一次，放在中文正文最先引用它的部分；格中数字为条数，底色越深条数越多，空格为零。图不表示模块间的证明依赖。
 :::
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
@@ -109,6 +109,8 @@
 | `T079` | [`D5.S3.ConceptDynamics.Topology.CircleDoubleCoverNoSection.no_continuous_global_section`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section) | [{source}](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section) | `theorem` | Ch 5 `#thm-circle-double-cover-history-lift`, Ch 27, Ch 31, Ch 39 `#thm-ch39-double-cover-no-section-and-720-lift`, 附录 A; media `viz/visualizations.json`, `viz/self-sustaining-spinor-flow/index.html`, `films/010-pointer-720/film.json`, `slides/overview/slides.en.md`, `slides/overview/slides.md` |
 | `T080` | [`D5.S3.Constants.Irrationality.LogNaturalIrrationality.irrational_log_natCast`](lean:D5/S3/Constants/Irrationality/LogNaturalIrrationality.irrational_log_natCast) | [{source}](lean:D5/S3/Constants/Irrationality/LogNaturalIrrationality.irrational_log_natCast) | `theorem` | Ch 22 `#lem-log-natural-irrational` |
 | `T081` | [`D5.S3.Constants.PentagonCosines.pentagon_golden_cosines`](lean:D5/S3/Constants/PentagonCosines.pentagon_golden_cosines) | [{source}](lean:D5/S3/Constants/PentagonCosines.pentagon_golden_cosines) | `theorem` | Ch 24 `#prop-pentagon-golden-cosines`, Ch 28 |
+| `T292` | [`D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_phase_unitary_completion`](lean:D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_phase_unitary_completion) | [{source}](lean:D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_phase_unitary_completion) | `theorem` | Ch 16 `#thm-phase-unitary-completion` |
+| `T293` | [`D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_sumsq_decomposition`](lean:D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_sumsq_decomposition) | [{source}](lean:D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_sumsq_decomposition) | `theorem` | Ch 16 `#thm-interval-sumsq-decomposition` |
 | `T082` | [`D5.S3.DivergenceSupport.LandauerBound.landauer_bound_of_balance`](lean:D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance) | [{source}](lean:D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance) | `theorem` | Ch 8 `#cor-landauer-bound-saturation`, Ch 31 `#thm-ch31-horizon-landauer-ergodic-fairness`, Ch 38, 附录 A; media `viz/visualizations.json`, `viz/pnp-lookup-degradation/index.html` |
 | `T083` | [`D5.S3.DivergenceSupport.LandauerIdentity.landauer_identity_from_balances`](lean:D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances) | [{source}](lean:D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances) | `theorem` | Ch 8 `#prop-landauer-identity-from-balances`, Ch 27; media `viz/visualizations.json`, `viz/erasure-ledger/index.html` |
 | `T084` | [`D5.S3.DivergenceSupport.LandauerSaturation.landauer_saturation_iff`](lean:D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff) | [{source}](lean:D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff) | `theorem` | Ch 8 `#cor-landauer-bound-saturation`, Ch 27; media `viz/visualizations.json`, `viz/erasure-ledger/index.html` |
@@ -324,7 +326,7 @@
 
 ## C.2 形式化定义、结构与归纳类型索引（97 项唯一声明） {#sec-appendix-c-definitions}
 
-下表列出被中文正文 `definition` 与 `example` 环境头以 `lean=` 引用的 **97 项唯一声明（88 项 `def`、9 项 `inductive`）**；它们与 C.1 的 291 条定理共同构成 **388 项被环境头引用的锁定声明**。媒体消费者在最后一栏另列，不决定分区。
+下表列出被中文正文 `definition` 与 `example` 环境头以 `lean=` 引用的 **97 项唯一声明（88 项 `def`、9 项 `inductive`）**；它们与 C.1 的 293 条定理共同构成 **390 项被环境头引用的锁定声明**。媒体消费者在最后一栏另列，不决定分区。
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -430,7 +432,7 @@
 
 ## C.2.1 行内引用的辅助定理与定义索引（161 项唯一声明） {#sec-appendix-c-inline}
 
-除 C.1 与 C.2 的 388 项环境引用声明外，另有 **161 项声明（109 项定理、52 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **549 项唯一声明**（$291 + 97 + 161 = 549$）。
+除 C.1 与 C.2 的 390 项环境引用声明外，另有 **161 项声明（109 项定理、52 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **551 项唯一声明**（$293 + 97 + 161 = 551$）。
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -633,22 +635,22 @@
 | :--- | :--- | :--- | :---: |
 | **上游仓库与分支** | `the-omega-institute/trureturing` 分支 `dev` | `site.toml` `[trureturing]` 配置与 `git merge-base --is-ancestor` | `PASS` |
 | **所钉提交 SHA** | [{commit}](trureturing:) | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
-| **冻结定理总数** | `291` 项环境引用定理（含行内共 `400` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
+| **冻结定理总数** | `293` 项环境引用定理（含行内共 `402` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
 | **辅助定义与结构数** | `97` 项环境定义/归纳类型；含行内共 `149` 项（`140` `def` + `9` `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s)`） | `PASS` |
 
 ::: {.figure src="appc-ledger"}
-**$549$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $291 + 7 + 102 = 400$，定义一行 $97 + 0 + 52 = 149$。虚线框按本附录的环境引用分区：C.1 $= 291$，C.2 $= 97$，C.2.1 $= 7 + 102 + 0 + 52 = 161$；媒体消费者不改变索引分区。
+**$551$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $293 + 7 + 102 = 402$，定义一行 $97 + 0 + 52 = 149$。虚线框按本附录的环境引用分区：C.1 $= 293$，C.2 $= 97$，C.2.1 $= 7 + 102 + 0 + 52 = 161$；媒体消费者不改变索引分区。
 :::
 
-这张账的第一行在声明地图上是 $400$ 格绿色：被环境头引用的 $291$ 格画成实心，其余 $7 + 102 = 109$ 格空心。
+这张账的第一行在声明地图上是 $402$ 格绿色：被环境头引用的 $293$ 格画成实心，其余 $7 + 102 = 109$ 格空心。
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 400 格：291 个实心格被环境头以 `lean=` 引用，109 个空心格只在中文正文的行内链接里出现。
+**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 402 格：293 个实心格被环境头以 `lean=` 引用，109 个空心格只在中文正文的行内链接里出现。
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-本附录 C.1 的 291 条环境引用定理、C.2 的 97 项环境引用定义/归纳类型与 C.2.1 的 161 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 549 项声明（400 项 `theorem` + 140 项 `def` + 9 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.3 的 9 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
+本附录 C.1 的 293 条环境引用定理、C.2 的 97 项环境引用定义/归纳类型与 C.2.1 的 161 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 551 项声明（402 项 `theorem` + 140 项 `def` + 9 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.3 的 9 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}

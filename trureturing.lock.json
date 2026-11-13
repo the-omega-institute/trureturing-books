@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "e526f0f5e3a1e84b05f05c0c009eab920bc3a06f",
-  "pinned_at": "2026-11-13T05:52:11Z",
+  "commit": "bb452a18f3e77a2c4e50864d2d7bce34fb73a040",
+  "pinned_at": "2026-11-13T09:02:25Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1468,6 +1468,22 @@
       "statement_id": "sha256:038cd8610f04ca79d22518cdee753555520de8a2c93fd7b411d397fa70b6ba42",
       "line": 45,
       "signature": "theorem pentagon_golden_cosines : 2 * Real.cos (Real.pi / 5) = Real.goldenRatio ∧ 2 * Real.cos (2 * Real.pi / 5) = Real.goldenRatio⁻¹ ∧ 2 * Real.cos (Real.pi / 5) + 2 * Real.cos (2 * Real.pi / 5) = Real.sqrt 5 ∧ Irrational (2 * Real.cos (2 * Real.pi / 5))"
+    },
+    "D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_phase_unitary_completion": {
+      "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
+      "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_phase_unitary_completion",
+      "kind": "theorem",
+      "statement_id": "sha256:3d5c36d02ba847fd3cb583bb5a14c5d8c8838cdcc3689ceabcf9697df8805f81",
+      "line": 912,
+      "signature": "theorem exists_phase_unitary_completion (k : ℕ) (p : ℝ[X]) (hp : p.natDegree ≤ k) (hpar : HasParity (p.map (algebraMap ℝ ℂ)) k) (hbound : ∀ x ∈ Set.Icc (-1 : ℝ) 1, p.eval x ^ 2 ≤ 1) : ∃ (B C : ℝ[X]) (U : CyclicObservable 2), 1 - p ^ 2 = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1) ∧ U = phaseCompletion p B C ∧ star U * U = 1 ∧ U * star U = 1 ∧ (∀ t, (U t).det = 1) ∧ (∀ t, (U t 0 0).re = p.eval (windingPhase t).re)"
+    },
+    "D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_sumsq_decomposition": {
+      "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
+      "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_sumsq_decomposition",
+      "kind": "theorem",
+      "statement_id": "sha256:3d5c36d02ba847fd3cb583bb5a14c5d8c8838cdcc3689ceabcf9697df8805f81",
+      "line": 845,
+      "signature": "theorem exists_sumsq_decomposition (k : ℕ) (A : ℝ[X]) (hAe : IsEven (A.map (algebraMap ℝ ℂ))) (hAd : A.natDegree ≤ 2 * k) (hA : ∀ x ∈ Set.Icc (-1 : ℝ) 1, 0 ≤ A.eval x) : ∃ B C : ℝ[X], A = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1)"
     },
     "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance": {
       "module": "D5/S3/DivergenceSupport/LandauerBound",
