@@ -482,7 +482,7 @@ function cobweb(steps, a, o = {}) {
 }
 SCENES.cosine = S => {
   const u = S.u, out = clamp((S.d - u) / 0.6);
-  badgeQ(S, [[0, null, 'computed'], [2, 'Lean checks', 'lean'], [3, 'Near it', 'argued']]);
+  badgeQ(S, [[0, null, 'computed'], [2, 'Lean checks', 'lean'], [3, 'once close', 'argued']]);
   const L1 = lineAt(S, 1);
   const steps = 0.02 + 11.98 * clamp((u - L1.s - 0.2) / Math.max(1, (L1.e - L1.s) * 1.1)) + 8 * at(S, 2, 6);
   const ca = at(S, 0, 0.8, -0.3) * out;

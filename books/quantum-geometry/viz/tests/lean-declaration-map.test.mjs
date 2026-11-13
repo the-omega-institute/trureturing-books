@@ -203,5 +203,54 @@ await page.click('[data-lang-set="en"]'); await pick('table28');
 check('English note of CH28-TABLE carries the same numbers', (await note()).includes(`cites ${a28.length} declarations`) && (await note()).includes(`${in46} of them land in Parts IV–VI`), await note());
 await page.click('[data-lang-set="zh"]');
 
+// the column names under the stage, read from the fillText calls on #cv and measured there: at the narrowest phone,
+// phone and desktop width, in both languages, with no column chosen and with section 30.4 chosen, no two names touch,
+// each stands at the foot of its own column and reads as derived here from the file name; both ends and every fifth
+// chapter keep their names, the coda-and-appendices group keeps at least two, and only the chosen column carries its
+// name, in full, in cyan
+const shortName = (f, en) => f === 'README.md' ? '0' : f === 'coda.md' ? (en ? 'Co' : '终') : f.startsWith('appendix-') ? f[9].toUpperCase()
+  : f.replace(/^ch(\d+)(?:-s(\d+))?-.*$/, (m, a, b) => (b ? `${+a}.${+b}` : String(+a)));
+await page.evaluate(() => {
+  const ctx = document.getElementById('cv').getContext('2d'), R = window.__axisRec = { on: false, texts: [] };
+  const orig = ctx.fillText;
+  ctx.fillText = function (text, x, y) {
+    if (R.on) { const m = this.getTransform(), k = devicePixelRatio; R.texts.push({ text: String(text), x: (m.a * x + m.e) / k, y: (m.d * y + m.f) / k, w: this.measureText(String(text)).width * m.a / k, align: this.textAlign, style: this.fillStyle }); }
+    return orig.apply(this, arguments);
+  };
+});
+const axisNames = () => page.evaluate((n) => {
+  const R = window.__axisRec, b = document.getElementById('cv').getBoundingClientRect();
+  R.texts = []; R.on = true; window.TRV.kit.flush(); R.on = false;
+  const feet = Array.from({ length: n }, (_, c) => window.LEANMAP_DEBUG.footAt(c).map((v, i) => v - (i ? b.top : b.left)));
+  const norm = (v) => { const s = document.createElement('canvas').getContext('2d'); s.fillStyle = v; return s.fillStyle; };
+  return { names: R.texts.filter((t) => t.align === 'center' && Math.abs(t.y - feet[0][1]) <= 8).map((t) => ({ ...t, cyan: norm(t.style) === norm(window.TRV.palette.cyan) })), feet };
+}, NC);
+const S304 = columns.indexOf('ch30-s04-navier-stokes.md'), groupFrom = columns.indexOf('coda.md');
+const setSrc = (v) => page.evaluate((x) => { const el = document.getElementById('src'); el.value = String(x); el.dispatchEvent(new Event('input', { bubbles: true })); }, v);
+for (const [vw, vh] of [[334, 720], [390, 844], [1440, 900]]) {
+  await page.setViewportSize({ width: vw, height: vh }); await settle(page, 60);
+  for (const lang of ['zh', 'en']) {
+    await page.click(`[data-lang-set="${lang}"]`);
+    for (const chosen of [null, S304]) {
+      await setSrc(chosen == null ? -1 : chosen); await settle(page);
+      const { names, feet } = await axisNames(), at = {}, bad = [];
+      for (const t of names) {
+        const c = feet.findIndex((f) => Math.abs(f[0] - t.x) < 0.5);
+        if (c < 0 || t.text !== shortName(columns[c], lang === 'en') || at[c]) bad.push(t.text); else at[c] = t;
+      }
+      const row = [...names].sort((p, q) => p.x - q.x);
+      const touch = row.slice(1).map((t, i) => [row[i], t]).filter(([p, q]) => (q.x - q.w / 2) - (p.x + p.w / 2) < 1).map(([p, q]) => `${p.text}|${q.text}`);
+      const keep = [0, NC - 1, ...[5, 10, 15, 20, 25, 30, 35].map((k) => columns.findIndex((f) => f.startsWith(`ch${String(k).padStart(2, '0')}-`)))].filter((c) => c !== chosen && !at[c]);
+      const group = Object.keys(at).filter((c) => +c >= groupFrom).length;
+      const cyan = names.filter((t) => t.cyan).map((t) => t.text);
+      const tag = `${vw}px ${lang}${chosen == null ? '' : ', 30.4 chosen'}`;
+      check(`column names (${tag}): each at its own column's foot, named from its file, none touching`, !bad.length && !touch.length, JSON.stringify({ bad, touch }));
+      check(`column names (${tag}): both ends, every fifth chapter and two names of the coda group stay`, !keep.length && group >= 2, JSON.stringify({ missing: keep.map((c) => columns[c]), group }));
+      check(`column names (${tag}): ${chosen == null ? 'no name is cyan' : 'the chosen section reads 30.4 in cyan, the only cyan name'}`, chosen == null ? !cyan.length : JSON.stringify(cyan) === '["30.4"]' && at[chosen] && at[chosen].cyan, JSON.stringify(cyan));
+    }
+  }
+}
+await setSrc(-1); await page.click('[data-lang-set="zh"]'); await page.setViewportSize({ width: 1440, height: 900 }); await settle(page, 60);
+
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();
