@@ -5,10 +5,13 @@
 /* ---------- a cited figure (?embed=1&preset=…, `::: {.viz src=… preset=…}`): 500 px high, 760 wide in a book page and
    about 334 on a phone. The card's note keeps to a few lines and scrolls inside its bar (a cyan shade at its top or
    bottom edge says there is more; it disappears at the end), so a long note never takes the stage's height. The full
-   note, the scene buttons and every panel stay in the full laboratory ("open full screen" under the figure). */
+   note, the scene buttons and every panel stay in the full laboratory ("open full screen" under the figure). The shared
+   tour bar lays the note out across the full width of the bar (.what is display: contents there, so it cannot bound or
+   scroll anything); this frame keeps the card's name and its note together in one bounded box between ◀ and ▶. */
 :root[data-embed][data-figure] .lab .tour { background: var(--panel-solid); }
+:root[data-embed][data-figure] .lab .tour .what b { display: block; }
 :root[data-embed][data-figure] .lab .tour .what {
-  max-height: 52px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line-hot) transparent;
+  display: block; grid-column: 2; grid-row: 1; max-height: 52px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line-hot) transparent;
   background:
     linear-gradient(var(--panel-solid) 40%, transparent) top / 100% 16px no-repeat local,
     linear-gradient(transparent, var(--panel-solid) 60%) bottom / 100% 16px no-repeat local,
