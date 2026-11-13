@@ -8,7 +8,7 @@ when one of the core targets needs it:
 check          Python ≥ 3.11, trureturing.lock.json, trureturing access (checkout or network),
                the pinned commit on the site.toml trureturing branch
 html           mdBook 0.5.x, Node ≥ 22.12, KaTeX in node_modules
-pdf            pypandoc (Pandoc 3.9), typst; fonts are optional (Typst falls back)
+pdf            pypandoc (Pandoc 3.9), typst, pikepdf; fonts are optional (Typst falls back)
 epub           pypandoc; epubcheck + Java are optional (validation is skipped without them)
 site           whatever html/pdf/epub need (it assembles their outputs)
 =============  ===========================================================================
@@ -192,6 +192,15 @@ def check_typst(report: Report) -> None:
     report.add(Check(f"typst {version} (Python module)", True, "", _pip_hint(), targets=("pdf",)))
 
 
+def check_pikepdf(report: Report) -> None:
+    try:
+        importlib.import_module("pikepdf")
+    except ImportError:
+        report.add(Check("pikepdf", False, "not installed", _pip_hint(), targets=("pdf",)))
+        return
+    report.add(Check(f"pikepdf {_dist_version('pikepdf') or '?'}", True, "", _pip_hint(), targets=("pdf",)))
+
+
 def check_epubcheck(report: Report) -> None:
     try:
         importlib.import_module("epubcheck")
@@ -302,6 +311,59 @@ def check_ffmpeg(report: Report) -> None:
     exe = film.ffmpeg_path()  # $FFMPEG, else ffmpeg on PATH: what the film build uses
     report.add(Check("ffmpeg", bool(exe), exe or "not on PATH and FFMPEG not set",
                      "sudo apt-get install ffmpeg (or set FFMPEG)", targets=("films",)))
+
+
+def check_tectonic(report: Report) -> None:
+    from . import academic
+    try:
+        executable = academic.engine()
+        report.add(Check(f"Tectonic {academic.ENGINE_VERSION}", True, executable, targets=("slides",)))
+    except RuntimeError as exc:
+        report.add(Check(f"Tectonic {academic.ENGINE_VERSION} (academic slides)", False, str(exc),
+                         "see theme/beamer/README.md; TECTONIC may point to a local binary", targets=("slides",)))
+
+
+# Whether theme/film/lib.js's Chromium can create a WebGL context (solid shots): prints the renderer, or nothing.
+_WEBGL_PROBE = """
+const { launch } = await import(process.argv[1]);
+const b = await launch();
+try {
+  const p = await b.newPage();
+  const r = await p.evaluate(() => { const c = document.createElement('canvas');
+    const g = c.getContext('webgl2', { antialias: true, alpha: true, preserveDrawingBuffer: true });
+    if (!g) return ''; const d = g.getExtension('WEBGL_debug_renderer_info');
+    return String(g.getParameter(g.VERSION)) + (d ? ' · ' + g.getParameter(d.UNMASKED_RENDERER_WEBGL) : ''); });
+  console.log(r);
+} finally { await b.close(); }
+"""
+
+
+def film_webgl() -> tuple[bool | None, str]:
+    """(ok, detail) of a WebGL context in the Chromium the film pipeline launches (theme/film/lib.js); ok is None
+    when node, Playwright or a Chromium is missing (reported by their own checks)."""
+    node = shutil.which("node")
+    if not node or not chromium_path() or not any((paths.ROOT / "node_modules" / p).is_dir()
+                                                  for p in ("playwright-chromium", "playwright")):
+        return None, "needs node, Playwright and a Chromium"
+    lib = (paths.THEME / "film" / "lib.js").resolve().as_uri()
+    try:
+        r = subprocess.run([node, "--input-type=module", "-e", _WEBGL_PROBE, lib], capture_output=True, text=True,
+                           timeout=90, cwd=paths.ROOT)
+    except (OSError, subprocess.SubprocessError) as exc:
+        return False, f"the probe did not run: {exc}"
+    out = r.stdout.strip()
+    if r.returncode != 0:
+        return False, (r.stderr.strip().splitlines() or ["the probe failed"])[-1][:200]
+    return (True, out) if out else (False, "Chromium starts but creates no WebGL context")
+
+
+def check_film_webgl(report: Report) -> None:
+    ok, detail = film_webgl()
+    if ok is None:
+        return
+    report.add(Check("WebGL for solid shots (films)", ok, detail,
+                     "films with \"solid\": true need WebGL; theme/film/lib.js starts Chromium with "
+                     "--enable-unsafe-swiftshader (SwiftShader, no GPU needed)", targets=("films",)))
 
 
 def _fc_families() -> set[str] | None:
@@ -459,12 +521,15 @@ def collect() -> Report:
     check_trureturing(report, pinned)
     check_pandoc(report)
     check_typst(report)
+    check_pikepdf(report)
     check_epubcheck(report)
     check_mdbook(report)
     check_node(report)
     check_node_modules(report)
     check_chromium(report)
+    check_tectonic(report)
     check_ffmpeg(report)
+    check_film_webgl(report)
     check_fonts(report)
     check_lean(report)
     return report
