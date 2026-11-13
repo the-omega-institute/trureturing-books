@@ -543,6 +543,9 @@
     const big = $('hudBig'), chips = $('sceneChips'), tl = big.parentElement;
     big.textContent = full; tl.style.marginTop = '';
     if (TRV.thumbMode || TRV.shot || chips.offsetParent === null) return;
+    // measure in the title's own row: where a title still met the buttons, the theme (TRV.hudFit, after each draw) has
+    // set the stage .hud-stack and put the title under them, where the full title never meets them and would stay
+    $('stage').classList.remove('hud-stack');
     const b = chips.getBoundingClientRect(), ink = () => { const r = document.createRange(); r.selectNodeContents(big); return r.getBoundingClientRect(); };
     if (!overlaps(ink(), b)) return;
     big.textContent = short;
