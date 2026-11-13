@@ -768,7 +768,39 @@ $$
 Here $s,m$ are nonnegative integers, and the constant $128$ is independent of $j$ and the hopping parameter $\rho$. This gives explicit choices of the constants and windows in [@thm-ch39-p2e-aligned-tribonacci-windows].
 :::
 
-Constructing a word window and estimating the spectrum of the whole chain are separate steps. Embedding the local inverse into the inverse of the whole prefix, and converting the mass bound into operator-norm and spectral-gap estimates, still require proofs. In particular, it remains open here whether, for every fixed $\rho\in(0,1)$, there are $C_\rho>0$ and an integer $J_\rho\ge1$ such that $\delta_{\rho,j}\le C_\rho/N_j$ for every $j\ge J_\rho$. Such a bound would imply the preceding open-chain limit; the fractal entropy-scaling problem would still remain.
+::: {.example #ex-ch39-p2e-full-inverse-euclidean title="From Local Mass to a Euclidean Estimate for the Full Inverse"}
+Take a positive hopping sequence $t$ bounded above by $1$, and let $G=L(t,n)^{-1}$ be the full inverse of the bidiagonal block above. Suppose integers $q\ge1$ and $a\ge0$ satisfy $a+2q+1\le n$ and
+
+$$
+t\bigl(2a+i+(2q+1)\bigr)=t(2a+i)\qquad(0\le i<2q).
+$$
+
+Set $x=(1,\ldots,1)\in\mathbb R^n$ and $v=x/\sqrt n$. With Euclidean norms throughout,
+
+$$
+\|v\|_2=1,\qquad q(q+1)\le 2n\|Gv\|_2.
+$$
+
+This inverse retains all exterior sites on both sides of the window. The forward-substitution inverse formula shows that shifting both indices of the local inverse by $a$ gives exactly the corresponding entry of $G$. All entries of $G$ are nonnegative, so each of the two triangular regions in [@thm-ch39-p2e-odd-repeat-inverse-mass] embeds into the full matrix, giving
+
+$$
+q(q+1)\le2\sum_{i,j=0}^{n-1}G_{ij}.
+$$
+
+The factor $2$ lets us bound the two regions separately without an additional disjointness argument. Meanwhile, Cauchy–Schwarz gives
+
+$$
+\begin{aligned}
+\sum_{i,j=0}^{n-1}G_{ij}&=\langle x,Gx\rangle,\\
+&\le\|x\|_2\|Gx\|_2,\\
+&=n\|Gv\|_2.
+\end{aligned}
+$$
+
+Combining the inequalities proves the estimate. For the preceding window, the parameter correspondence is $m=2q+1$, $s=2a$, $N_j=2n$. This derivation explains how a general repeated window controls the full bidiagonal inverse. Its formalization candidate is not yet included in this book's pin, so this example carries no Lean verification badge.
+:::
+
+This estimate does not yet prove the spectral conclusion for the physical full chain. The actual Tribonacci hoppings, sublattice reordering and sign conjugation still need an exact correspondence, followed by the relation between the full symmetric matrix's eigenvalues and the bidiagonal block's singular values, and treatment of the initial short prefixes. In particular, it remains open here whether, for every fixed $\rho\in(0,1)$, there are $C_\rho>0$ and an integer $J_\rho\ge1$ such that $\delta_{\rho,j}\le C_\rho/N_j$ for every $j\ge J_\rho$. Such a bound would imply the preceding open-chain limit; the fractal entropy-scaling problem would still remain.
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`, shift entropy and Abramov's formula carry status `Literature`, and fractal area scaling carries status `OPEN`.
