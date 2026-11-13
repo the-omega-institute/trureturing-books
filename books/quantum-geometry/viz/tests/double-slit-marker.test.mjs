@@ -137,7 +137,10 @@ check('DELAYED: half the hits are read as “left”, as the law gives', near(p1
 check('DELAYED: neither row shows fringes', Math.abs(estimate(rowsOf(hits, 0))) < 0.2 && Math.abs(estimate(rowsOf(hits, 1))) < 0.2);
 await pick('erase'); s = await state();
 check('ERASER: the marker again waits for the hits, to be read for the path first and to erase afterwards', s.hold && s.reader === 'path' && s.then === 'erase');
-s = await seek(NMAX); hits = await D(() => window.SLIT_DEBUG.hits());
+// The card goes on by itself in real time (a pause, then it gathers the hits back and reads them to erase), so the
+// reader and the hits are read together, in the frame where the last hit lands, not in two round trips that a busy
+// runner can spread across that step.
+({ s, hits } = await D((n) => { window.SLIT_DEBUG.seek(n); window.TRV.kit.flush(); return { s: window.SLIT_DEBUG.state, hits: window.SLIT_DEBUG.hits() }; }, NMAX));
 check('ERASER: once the hits are in, they are first sorted by the path reading, none moved', s.reader === 'path' && hits.every((h, i) => h.x === unreadX[i]) && Math.abs(estimate(rowsOf(hits, 0))) < 0.2 && Math.abs(estimate(rowsOf(hits, 1))) < 0.2);
 check('ERASER: then, by itself, the card gathers them back and reads them again to erase', await until(page, () => { const d = window.SLIT_DEBUG.state; return d.reader === 'erase' && d.split === 1 && d.then === null; }));
 await settle(page); s = await state(); hits = await D(() => window.SLIT_DEBUG.hits());
