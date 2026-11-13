@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "3b3ab5883295803c705670de0d118219db346f94",
-  "pinned_at": "2026-11-12T23:59:58Z",
+  "commit": "384c61d71934fd11bdf110e6bcda42ee881b2fd6",
+  "pinned_at": "2026-11-13T03:18:34Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -804,6 +804,30 @@
       "statement_id": "sha256:dbf7c2a7836c7330538b443a6fbc66e43e2a7f9dc0e8fd55e98f7cdab4ee22af",
       "line": 272,
       "signature": "theorem golden_resource_unique_optimum {n : ℕ} (hn : 1 ≤ n) : goldenResourceObjective (1 / 25) n ≤ goldenResourceObjective (1 / 25) 5040 ∧ (goldenResourceObjective (1 / 25) n = goldenResourceObjective (1 / 25) 5040 ↔ n = 5040)"
+    },
+    "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_invariant": {
+      "module": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient",
+      "name": "D5.S3.Arith.RepeatingDecimal.RepeatingDecimalQuotient.long_division_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:5abc9a924c79bebaaa007bb67ce76a5f19dc06d6f32a6afd8e03bb1e61e6ef59",
+      "line": 39,
+      "signature": "theorem long_division_invariant (b p q n : ℕ) : q * longDivisionPrefix b p q n + remainder b p q n = b ^ n * p"
+    },
+    "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_period": {
+      "module": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient",
+      "name": "D5.S3.Arith.RepeatingDecimal.RepeatingDecimalQuotient.long_division_period",
+      "kind": "theorem",
+      "statement_id": "sha256:5abc9a924c79bebaaa007bb67ce76a5f19dc06d6f32a6afd8e03bb1e61e6ef59",
+      "line": 125,
+      "signature": "theorem long_division_period {b p q : ℕ} (hb : 1 < b) (hp : p < q) (L : ℕ) (hL : q ∣ b ^ L - 1) : Function.Periodic (digit b p q) L ∧ ((b : ℝ) ^ L - 1) * ((p : ℝ) / q) = (longDivisionPrefix b p q L : ℝ)"
+    },
+    "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_value": {
+      "module": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient",
+      "name": "D5.S3.Arith.RepeatingDecimal.RepeatingDecimalQuotient.long_division_value",
+      "kind": "theorem",
+      "statement_id": "sha256:5abc9a924c79bebaaa007bb67ce76a5f19dc06d6f32a6afd8e03bb1e61e6ef59",
+      "line": 88,
+      "signature": "theorem long_division_value {b p q : ℕ} (hb : 1 < b) (hp : p < q) : HasSum (fun n => (digit b p q n : ℝ) / (b : ℝ) ^ (n + 1)) ((p : ℝ) / q) ∧ Tendsto (fun n => (longDivisionPrefix b p q n : ℝ) / (b : ℝ) ^ n) atTop (𝓝 ((p : ℝ) / q))"
     },
     "D5/S3/Arith/Robin/CompleteMertensPeak.U": {
       "module": "D5/S3/Arith/Robin/CompleteMertensPeak",
