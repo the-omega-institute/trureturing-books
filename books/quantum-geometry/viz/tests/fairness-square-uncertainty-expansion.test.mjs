@@ -228,6 +228,31 @@ for (const [kind, width, height] of [['desktop', 1440, 900], ['mobile', 390, 844
   }
 }
 
+// The cited fair-square frame in a narrow chapter column: the long card note under the stage leaves it short. Measure
+// the labels the page actually placed, not its layout rules: every label stays inside the canvas, and the two gauge
+// labels touch neither another label nor the text of the title and the legend.
+const overlap = (a, b) => Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1;
+for (const width of [334, 390]) for (const lang of ['zh', 'en']) {
+  const p = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=fair-square`, { viewport: { width, height: 500 }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+  await p.waitForFunction(() => !!window.FAIRNESS_EXPANSION_DEBUG); await pause(p);
+  const m = await p.evaluate(() => {
+    const box = (el) => { const r = el.getBoundingClientRect(); return { left: r.left, right: r.right, top: r.top, bottom: r.bottom }; };
+    const shown = (el) => !!el.offsetParent && getComputedStyle(el).visibility !== 'hidden' && el.textContent.trim().length > 0;
+    const s = window.FAIRNESS_EXPANSION_DEBUG.state;
+    return { preset: s.preset, scene: s.scene, canvas: box(document.querySelector('#cv')),
+      labels: [...document.querySelectorAll('#stage .tag')].filter(shown).map((el) => ({ text: el.textContent.trim(), ...box(el) })),
+      words: [...document.querySelectorAll('#hudBig, #hudSub, #legend > span')].filter(shown).map(box) };
+  });
+  const tag = `cited fair-square ${width}×500 ${lang}`, c = m.canvas;
+  const outside = m.labels.filter((r) => r.left < c.left - 1 || r.right > c.right + 1 || r.top < c.top - 1 || r.bottom > c.bottom + 1);
+  const gauges = m.labels.filter((r) => /^\|cos θ\| \+ \|sin θ\| = |^cos²θ \+ sin²θ = /.test(r.text));
+  const struck = gauges.flatMap((g) => [...m.labels.filter((r) => r !== g), ...m.words].filter((r) => overlap(g, r)).map((r) => `${g.text} × ${r.text || 'title/legend'}`));
+  check(`${tag}: the card stays selected on the square scene`, m.preset === 'fair-square' && m.scene === 'square', JSON.stringify([m.preset, m.scene]));
+  check(`${tag}: every stage label lies inside the canvas`, outside.length === 0, JSON.stringify({ canvas: c, outside }));
+  check(`${tag}: both gauge labels are clear of the other labels, the title and the legend`, gauges.length === 2 && struck.length === 0, JSON.stringify({ gauges: gauges.length, struck }));
+  await p.context().close();
+}
+
 // Pointer manipulation and rail/keyboard transitions use state predicates, never elapsed time.
 for (const [id, start] of [['horizon-limit', 30], ['fair-square', 30], ['uncertainty-wedge', 30]]) {
   await pick(id); s = await seek(start);

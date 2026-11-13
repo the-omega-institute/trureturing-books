@@ -312,8 +312,34 @@
   }
 
   /* ---------- scene 3 · squares and rotors ---------- */
+  const GAUGE_MIN = 112;   // a gauge this long keeps its label (about 130 px, centred over it) inside the stage
   function drawSquare(ctx, W, H, D) {
-    const pal = TRV.palette, q = D.square, R0 = regions(W, H), a = R0.a, b = R0.b;
+    const pal = TRV.palette, q = D.square, R0 = regions(W, H);
+    let a = R0.a, b = R0.b;
+    // right: the rotor circle beside (a wide panel) or above (a tall panel) the two gauges
+    const beside = b.w / b.h > 1;
+    let rc, rr, gx, gw, gy, gap;
+    if (beside) {
+      rr = Math.min(b.w * 0.15, b.h * 0.3); rc = [b.x + rr * 1.3 + 6, b.y + b.h * 0.45];
+      gx = b.x + rr * 2.6 + 40; gw = b.x + b.w - gx - 14; gap = Math.min(64, b.h * 0.36); gy = b.y + b.h / 2 - gap / 2 + 6;
+    } else {
+      rr = Math.max(26, Math.min(b.w * 0.2, (b.h - 170) / 2.6)); rc = [b.x + b.w / 2, b.y + rr * 1.3 + 10];
+      gx = b.x + 12; gw = b.w - 34; gap = 62; gy = rc[1] + rr * 1.3 + 70;
+    }
+    // A narrow stage short enough to be split side by side (a cited frame with a long note under it) leaves the right
+    // half too narrow for gauges as long as their labels, or too short for the rotor above them. Then the three pieces
+    // stand in three columns, square · rotor · gauges: the rotor shrinks, the square gives the gauges the width they need,
+    // the gauge block is centred in the band with the √2 mark beside its tick, clear of the second label, and the
+    // product sits below the reach of the AB and BA labels (which turn on a circle of radius rr + 16).
+    const packed = R0.wide && (gw < GAUGE_MIN || gy + gap + 36 > b.y + b.h + 8);
+    if (packed) {
+      const x0 = a.x, x1 = b.x + b.w, h = b.h, col = 12;
+      rr = clamp(h * 0.16, 14, 22);
+      const rest = x1 - x0 - col - (rr * 2.6 + 54), aw = Math.max(0, Math.min(h, rest / 2, rest - GAUGE_MIN));
+      a = { x: x0, y: a.y, w: aw, h: a.h }; b = { x: x0 + aw + col, y: b.y, w: x1 - x0 - aw - col, h };
+      rc = [b.x + rr * 1.3 + 6, b.y + h * 0.4];
+      gx = b.x + rr * 2.6 + 40; gw = b.x + b.w - gx - 14; gap = clamp(h * 0.36, 47, 64); gy = b.y + h / 2 - (gap + 3) / 2;
+    }
     const R = Math.min(a.w, a.h) / 3.05, O = [a.x + a.w / 2, a.y + a.h / 2];
     const S = (x, y) => [O[0] + R * x, O[1] - R * y];
     const c = q.c, s = q.s, F = [c, 0], B = [c, s];
@@ -333,16 +359,7 @@
     tag('B', S(1.16 * c - 0.04 * s, 1.16 * s + 0.04 * c), 'B', 'hot raw');
     if (Math.abs(c) * R > 34) tag('c2', S(c / 2, dn * Math.abs(c) / 2), fix(q.c2, 2), 'cy num');
     if (Math.abs(s) * R > 34) tag('s2', S(c + e * Math.abs(s) / 2, s / 2), fix(q.s2, 2), 'mg num');
-    // right: the rotor circle beside (a wide panel) or above (a tall panel) the two gauges
-    const beside = b.w / b.h > 1;
-    let rc, rr, gx, gw, gy, gap;
-    if (beside) {
-      rr = Math.min(b.w * 0.15, b.h * 0.3); rc = [b.x + rr * 1.3 + 6, b.y + b.h * 0.45];
-      gx = b.x + rr * 2.6 + 40; gw = b.x + b.w - gx - 14; gap = Math.min(64, b.h * 0.36); gy = b.y + b.h / 2 - gap / 2 + 6;
-    } else {
-      rr = Math.max(26, Math.min(b.w * 0.2, (b.h - 170) / 2.6)); rc = [b.x + b.w / 2, b.y + rr * 1.3 + 10];
-      gx = b.x + 12; gw = b.w - 34; gap = 62; gy = rc[1] + rr * 1.3 + 70;
-    }
+    // right: the rotor circle and the two gauges, placed above
     ln(ctx, [rc[0] - rr * 1.3, rc[1]], [rc[0] + rr * 1.3, rc[1]], pal.dim, 1, 0.5);
     ln(ctx, [rc[0], rc[1] + rr * 1.3], [rc[0], rc[1] - rr * 1.3], pal.dim, 1, 0.35);
     ring(ctx, rc, rr, pal.violet, 1.3, 0.6);
@@ -356,7 +373,7 @@
     const up = q.AB[1] >= 0 ? -9 : 9;
     tag('ab', out(q.AB, up), 'AB', 'vi raw');
     tag('ba', out(q.BA, -up), 'BA', 'vi raw');
-    tag('pr', [rc[0], rc[1] + rr * 1.3 + 14], '(AB)(BA) = 1', 'vi raw');
+    tag('pr', [rc[0], rc[1] + (packed ? rr + 43 : rr * 1.3 + 14)], '(AB)(BA) = 1', 'vi raw');
     const X = (v) => gx + gw * v / 1.5, bh = 13;
     const gauge = (y, parts, key, label) => {
       ln(ctx, [X(0), y], [X(1.5), y], pal.dim, 1, 0.6);
@@ -371,7 +388,8 @@
     ln(ctx, [X(1), gy - 22], [X(1), gy + gap + 20], pal.sigma, 1.2, 0.8, [4, 4]);
     ln(ctx, [X(Math.SQRT2), gy - 8], [X(Math.SQRT2), gy + 8], pal.dim, 1.2, 0.9);
     txt(ctx, [X(1), gy + gap + 30], '1', pal.dim, 10.5);
-    txt(ctx, [X(Math.SQRT2), gy + 18], '√2', pal.dim, 10.5);
+    if (packed) txt(ctx, [X(1.5) + 4, gy], '√2', pal.dim, 10.5, 'left');
+    else txt(ctx, [X(Math.SQRT2), gy + 18], '√2', pal.dim, 10.5);
   }
 
   /* ---------- scene 4 · phase on the Bloch sphere ---------- */
