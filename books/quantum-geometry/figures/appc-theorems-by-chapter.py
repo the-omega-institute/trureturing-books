@@ -87,28 +87,28 @@ def index_counts():
 ROWS = counts()
 TOTAL = sum(n for _, _, n, _ in ROWS)
 NEW = sum(a for _, _, _, a in ROWS)
-assert (TOTAL, NEW) == (335, 243)
+assert (TOTAL, NEW) == (336, 244)
 N_INDEX, INDEX = index_counts()
-assert len(ROWS) == 40 and N_INDEX == 257
+assert len(ROWS) == 40 and N_INDEX == 258
 assert {k: n for k, _, n, _ in ROWS} == dict(INDEX), (ROWS, INDEX)
-assert TOTAL == sum(INDEX.values()) == 335
+assert TOTAL == sum(INDEX.values()) == 336
 BY = sorted(ROWS, key=lambda r: -r[2])
 TOP, SECOND, THIRD, FOURTH = BY[:4]
-assert [r[0] for r in BY[:4]] == ["22", "30", "4", "24"] and len({r[2] for r in BY[:4]}) == 4
-TIED = BY[4:7]                                           # three bars of equal height
-assert [r[0] for r in TIED] == ["14", "29", "coda"] and len({r[2] for r in TIED}) == 1 and TIED[0][2] < FOURTH[2]
+assert [r[0] for r in BY[:5]] == ["22", "30", "4", "24", "14"] and len({r[2] for r in BY[:5]}) == 5
+TIED = BY[5:7]                                           # the final two bars have equal height
+assert [r[0] for r in TIED] == ["29", "coda"] and len({r[2] for r in TIED}) == 1 and TIED[0][2] < FOURTH[2]
 TYPICAL = sorted(n for _, _, n, _ in ROWS)[:-7]            # every other chapter
 assert min(TYPICAL) == 4 and max(TYPICAL) == 10 < TIED[0][2]
 
 ALT = {
     "zh": f"柱状图：横轴是第一章到第三十九章与终章，纵轴是这一章的定理环境用 lean= 引用的冻结定理条数，同一条定理在几章被引用就各计一次，柱子都是绿色。"
           f"浅色底纹按部分组，标着罗马数字 I 到 X。最高的是第 {TOP[0]} 章，{TOP[2]} 条；其次第 {SECOND[0]} 章 {SECOND[2]} 条，"
-          f"第 {THIRD[0]} 章 {THIRD[2]} 条，第 {FOURTH[0]} 章 {FOURTH[2]} 条；第 14 章、第 29 章与终章各 {TIED[0][2]} 条；其余各章 4 到 10 条。"
+          f"第 {THIRD[0]} 章 {THIRD[2]} 条，第 {FOURTH[0]} 章 {FOURTH[2]} 条；第 14 章 {BY[4][2]} 条，第 29 章与终章各 {TIED[0][2]} 条；其余各章 4 到 10 条。"
           f"40 根柱子合计 {TOTAL} 条，与附录 C 的 C.1 索引逐章一致。每根柱子分两段：实心的下段是在这一章第一次出场的定理，合计 {NEW} 条；空心的上段是前面已出场、这一章再引用的，合计 {TOTAL - NEW} 条，越往后的部分上段越高。",
     "en": f"Bar chart: the horizontal axis runs over chapters 1 to 39 and the coda (C), the vertical axis is the number of frozen "
           f"theorems the chapter's theorem environments cite with lean=, a theorem counted again in each chapter that cites it; all bars are green. Light bands group the chapters "
           f"by part, marked I to X. The tallest is chapter {TOP[0]} with {TOP[2]}; then chapter {SECOND[0]} with "
-          f"{SECOND[2]}, chapter {THIRD[0]} with {THIRD[2]}, chapter {FOURTH[0]} with {FOURTH[2]}; chapters 14 and 29 and the coda with {TIED[0][2]} each; "
+          f"{SECOND[2]}, chapter {THIRD[0]} with {THIRD[2]}, chapter {FOURTH[0]} with {FOURTH[2]}; chapter 14 with {BY[4][2]}; chapters 29 and the coda with {TIED[0][2]} each; "
           f"every other chapter has 4 to 10. The 40 bars add up to {TOTAL}, chapter by chapter the same as the C.1 index "
           f"of appendix C. Each bar has two parts: the solid lower part counts the theorems that first appear in that chapter, {NEW} in all; "
           f"the hollow upper part those seen earlier and cited there again, {TOTAL - NEW} in all, growing in the later parts.",

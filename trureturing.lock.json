@@ -3005,6 +3005,14 @@
       "line": 214,
       "signature": "theorem uniform_operator_rotation (J : Matrix l s ℂ) (C P : Matrix l l ℂ) (p : ℝ) (hJ : Jᴴ * J = 1) (hC : Cᴴ * C = 1) (hP : Pᴴ = P) (hPP : P * P = P) (hA : (P * (C * J))ᴴ * (P * (C * J)) = (p : ℂ) • (1 : Matrix s s ℂ)) (hp : 0 < p) (hple : p ≤ 1) : let U"
     },
+    "D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse": {
+      "module": "D5/S3/Quantum/Recovery/FiniteKrausReversibility",
+      "name": "D5.S3.Quantum.Recovery.FiniteKrausReversibility.scalar_products_construct_left_inverse",
+      "kind": "theorem",
+      "statement_id": "sha256:d60d51c3e368805b95d4b276500065241b891930acd0cc9aac33415c9fc6a877",
+      "line": 99,
+      "signature": "theorem scalar_products_construct_left_inverse (E : s → Matrix n d ℂ) (hTP : (∑ a, (E a)ᴴ * E a) = 1) (v : d) (c : Matrix s s ℂ) (hE : ∀ a b, (E a)ᴴ * E b = c a b • (1 : Matrix d d ℂ)) : ∃ r : ℕ, ∃ A : Fin r → Matrix d n ℂ, (∑ b, (A b)ᴴ * A b) = 1 ∧ ∀ X : Matrix d d ℂ, (∑ b, A b * (∑ a, E a * X * (E a)ᴴ) * (A b)ᴴ) = X"
+    },
     "D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery": {
       "module": "D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding",
       "name": "D5.S3.Quantum.Recovery.OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery",
@@ -3453,6 +3461,30 @@
       "line": 22,
       "signature": "theorem inner_product_norm_parallelogram_law {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (x y : E) : ‖x + y‖ ^ 2 + ‖x - y‖ ^ 2 = 2 * (‖x‖ ^ 2 + ‖y‖ ^ 2)"
     },
+    "D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.twoAnchorGram",
+      "kind": "def",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 18,
+      "signature": "def twoAnchorGram {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : Matrix (Fin 2) (Fin 2) ℝ"
+    },
+    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 23,
+      "signature": "theorem two_anchor_gram_det_formula {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : (twoAnchorGram u v).det = ‖u‖ ^ 2 * ‖v‖ ^ 2 - (⟪u, v⟫_ℝ) ^ 2"
+    },
+    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_pos_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 31,
+      "signature": "theorem two_anchor_gram_det_pos_iff {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : 0 < (twoAnchorGram u v).det ↔ LinearIndependent ℝ ![u, v]"
+    },
     "D5/S3/QuantumStates/PhaseLockedOverlap.phase_locked_overlap_is_rotated_real": {
       "module": "D5/S3/QuantumStates/PhaseLockedOverlap",
       "name": "D5.S3.QuantumStates.PhaseLockedOverlap.phase_locked_overlap_is_rotated_real",
@@ -3868,30 +3900,6 @@
       "statement_id": "sha256:d42c4a0a6d7c0e9779156a97b715482e15a2795cac7aabc19ec834f7af06ef2e",
       "line": 25,
       "signature": "theorem riemann_zeta_dirichlet_sum_eq_euler_product (s : ℂ) (hs : 1 < s.re) : (∑' n : ℕ, (n : ℂ) ^ (-s)) = ∏' p : Nat.Primes, (1 - (p : ℂ) ^ (-s))⁻¹"
-    },
-    "D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram": {
-      "module": "D5/S3/QuantumContext/TwoAnchorGram",
-      "name": "D5.S3.QuantumContext.TwoAnchorGram.twoAnchorGram",
-      "kind": "def",
-      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
-      "line": 18,
-      "signature": "def twoAnchorGram {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : Matrix (Fin 2) (Fin 2) ℝ"
-    },
-    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula": {
-      "module": "D5/S3/QuantumContext/TwoAnchorGram",
-      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_formula",
-      "kind": "theorem",
-      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
-      "line": 23,
-      "signature": "theorem two_anchor_gram_det_formula {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : (twoAnchorGram u v).det = ‖u‖ ^ 2 * ‖v‖ ^ 2 - (⟪u, v⟫_ℝ) ^ 2"
-    },
-    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff": {
-      "module": "D5/S3/QuantumContext/TwoAnchorGram",
-      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_pos_iff",
-      "kind": "theorem",
-      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
-      "line": 31,
-      "signature": "theorem two_anchor_gram_det_pos_iff {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : 0 < (twoAnchorGram u v).det ↔ LinearIndependent ℝ ![u, v]"
     }
   }
 }

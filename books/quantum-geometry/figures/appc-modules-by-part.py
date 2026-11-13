@@ -1,5 +1,5 @@
-"""C.1 的 257 条定理按模块族与部分组：全书站在哪几块模块上（附录 C §C.1）。
-The 257 theorems of C.1 by module family and by part: which parts of trureturing the book stands on.
+"""C.1 的 258 条定理按模块族与部分组：全书站在哪几块模块上（附录 C §C.1）。
+The 258 theorems of C.1 by module family and by part: which parts of trureturing the book stands on.
 
 Nothing is typed by hand. The rows of the C.1 index of appendix C (serial T…) give the theorems; a theorem's module
 family is the first three segments of its GID (D5/S3/Quantum, …). Its part is the part of the unit in which it
@@ -48,7 +48,7 @@ def data():
                 first[g] = file
     index = (BOOK / "zh" / "appendix-c.md").read_text(encoding="utf-8")
     gids = re.findall(r"^\| `T\d+` \| \[[^\]]*\]\(lean:([^)\s]+)\)", index, re.M)
-    assert len(gids) == len(set(gids)) == 257 and all(lock[g]["kind"] == "theorem" for g in gids)
+    assert len(gids) == len(set(gids)) == 258 and all(lock[g]["kind"] == "theorem" for g in gids)
     fam = lambda g: "/".join(g.split(".")[0].split("/")[:3])
     sizes = Counter(fam(g) for g in gids)
     top = [f for f, _ in sizes.most_common(ROWS_SHOWN)]
@@ -61,8 +61,8 @@ def data():
 
 
 TOP, GRID, SIZES = data()
-assert TOP[0] == "D5/S3/Quantum" and SIZES[TOP[0]] == 79 and GRID["D5/S3/FluidDynamics"] == Counter({7: 19})
-assert sum(sum(c.values()) for c in GRID.values()) == 257
+assert TOP[0] == "D5/S3/Quantum" and SIZES[TOP[0]] == 80 and GRID["D5/S3/FluidDynamics"] == Counter({7: 19})
+assert sum(sum(c.values()) for c in GRID.values()) == 258
 COLS = Counter()
 for c in GRID.values():
     COLS.update(c)
@@ -72,12 +72,12 @@ ALT = {
     "zh": f"一张计数格：行是 trureturing 的模块族，从上到下是 {'、'.join(f.split('/')[-1] for f in TOP)} 与其余各族；"
           f"列是第一至第十部与“终章、附录”。每格写着这一族里在这一部第一次出场的定理条数，底色越深条数越多，空格为零。"
           f"Quantum 一族最大，{SIZES[TOP[0]]} 条，分布在第一至第七部；FluidDynamics 的 19 条全在第八部；Zeros、Weil 只在第六部。"
-          f"合计 257 条，即附录 C 的 C.1 索引。",
+          f"合计 258 条，即附录 C 的 C.1 索引。",
     "en": f"A grid of counts: the rows are module families of trureturing, from top to bottom {', '.join(f.split('/')[-1] for f in TOP)} "
           f"and all others; the columns are Parts I to X and the coda with the appendices. Each cell gives how many theorems of that "
           f"family first appear in that part, the darker the more, blank for none. The Quantum family is the largest, "
           f"{SIZES[TOP[0]]} theorems, spread over Parts I to VII; all 19 of FluidDynamics are in Part VIII; Zeros and Weil appear "
-          f"only in Part VI. They add up to 257, the C.1 index of appendix C.",
+          f"only in Part VI. They add up to 258, the C.1 index of appendix C.",
 }
 
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
@@ -114,4 +114,4 @@ def draw(fig):
     fig.text(X0 - 8, y, "Σ", size=15, color="dim", anchor="end", middle=True)
     for j in range(11):
         fig.text(X0 + j * CW + CW / 2, y, str(COLS[j]), size=15, color="dim", anchor="middle", middle=True)
-    fig.text(X0 + 11 * CW + 8, y, "257", size=15, color="lean", weight=600, middle=True)
+    fig.text(X0 + 11 * CW + 8, y, "258", size=15, color="lean", weight=600, middle=True)
