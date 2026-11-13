@@ -2,6 +2,12 @@
 
 本文件记录 trureturing-books-template 的版本变化，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。下游升级时请阅读跨越的所有版本，处理标为“需要手动操作”的条目。
 
+## [Unreleased]
+
+### 变更
+
+- 新书库初始化与新增语言的技能步骤改为先自动检查和构建，导出页面按 `book-export` 的条件按需查看，补齐普通导出验收策略在新建流程中的入口。
+
 ## [0.9.2] - 2026-11-14
 
 ### 变更
