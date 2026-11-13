@@ -74,7 +74,7 @@ Four precise boundaries govern [@thm-no-cloning-overlap]:
 
 Boundary 4 says that [@thm-no-cloning-overlap] is only a necessary condition. So ask the converse question: since exact cloning is impossible, how is universal approximate cloning constructed in the literature, and where does the cost land ([@rem-buzek-hillery-isometry-literature])?
 
-::: {.remark #rem-buzek-hillery-isometry-literature title="The Bužek–Hillery Universal 1→2 Cloning Isometry (Literature Result, Not Formalized in This Book)"}
+::: {.remark #rem-buzek-hillery-isometry-literature title="The Bužek–Hillery Universal 1→2 Cloning Isometry and the External Formalization of Optimality"}
 **Literature result, not formalized in this book.** Bužek and Hillery (1996) constructed a $1 \to 2$ cloning machine that treats every input alike (with single-copy optimality proved by Gisin and Massar, 1997; see [@ex-buzek-hillery-three-marginals] for citations). It uses three qubits: the input, a blank copy, and an auxiliary "machine" qubit $M$. For a unit vector $\psi$, let $\psi^\perp$ be a unit vector orthogonal to it; the cloning isometry sends the input to
 
 $$
@@ -82,6 +82,67 @@ $$
 $$
 
 where the three factors are clone one, clone two, and the machine qubit. Tracing out the two clones leaves the machine qubit in $\frac{1}{3}\lvert\psi\rangle\langle\psi\rvert + \frac{2}{3}\lvert\psi^\perp\rangle\langle\psi^\perp\rvert$.
+
+**External formal source for the universal $5/6$ bound.** JD Jones's [fixed version of qubit-cloning-lean](https://github.com/JD-Jones-ASES/qubit-cloning-lean/tree/f619a52e67849f80205127e3ba7877f7f7658e50), under the MIT license, supplies an external Lean proof of this optimality. In its [Defs.lean](https://github.com/JD-Jones-ASES/qubit-cloning-lean/blob/f619a52e67849f80205127e3ba7877f7f7658e50/QubitCloning/Defs.lean), a channel is represented by any finite family of complex $4\times2$ Kraus matrices:
+
+$$
+\begin{aligned}
+\mathcal{E}_K(\rho)&=\sum_{i=0}^{r-1}K_i\rho K_i^*,\\
+\sum_{i=0}^{r-1}K_i^*K_i&=I_2.
+\end{aligned}
+$$
+
+The second equation is the trace-preservation condition `IsChannel K`; complete positivity is built into the Kraus form. Neither symmetry between the outputs nor rotational covariance is assumed. For each unit input $\psi\in\mathbb{C}^2$, set $P_\psi=\lvert\psi\rangle\langle\psi\rvert$, $\rho_1=\Tr_2\mathcal{E}_K(P_\psi)$, and $\rho_2=\Tr_1\mathcal{E}_K(P_\psi)$. The source defines the two fidelities as
+
+$$
+\begin{aligned}
+F_j(K,\psi)&=\operatorname{Re}\Tr(P_\psi\rho_j)\\
+&=\langle\psi\rvert\rho_j\lvert\psi\rangle,\qquad j=1,2.
+\end{aligned}
+$$
+
+This is pure-state overlap, the **squared-fidelity convention**. Under the convention that takes its square root, the corresponding value is $\sqrt{5/6}$.
+
+Take the six Pauli eigenstate inputs $\mathcal{S}=\{\lvert0\rangle,\lvert1\rangle,\lvert+\rangle,\lvert-\rangle,\lvert+i\rangle,\lvert-i\rangle\}$, where $\lvert\pm\rangle=(\lvert0\rangle\pm\lvert1\rangle)/\sqrt2$ and $\lvert\pm i\rangle=(\lvert0\rangle\pm i\lvert1\rangle)/\sqrt2$, and write $A_j(K)=\frac16\sum_{\psi\in\mathcal{S}}F_j(K,\psi)$. The statement `sixAvg_le_internal` in [Form.lean](https://github.com/JD-Jones-ASES/qubit-cloning-lean/blob/f619a52e67849f80205127e3ba7877f7f7658e50/QubitCloning/Form.lean) is
+
+$$
+\begin{aligned}
+\frac{A_1(K)+A_2(K)}{2}
+&=\frac1{12}\sum_{\psi\in\mathcal{S}}\bigl(F_1(K,\psi)+F_2(K,\psi)\bigr)\\
+&\le\frac56.
+\end{aligned}
+$$
+
+This mean includes both clones, twelve numbers in all. Its algebraic mechanism is a sum-of-squares certificate. In output basis order $00,01,10,11$, write
+
+$$
+K_i=\begin{pmatrix}a_i&b_i\\c_i&d_i\\e_i&f_i\\g_i&h_i\end{pmatrix}.
+$$
+
+Summing the source's identity `form_sos` over the Kraus operators gives
+
+$$
+\begin{aligned}
+q_i={}&|a_i-d_i-f_i|^2+2|c_i-h_i/2|^2\\
+&+2|e_i-h_i/2|^2+3|g_i|^2\\
+&+3|b_i|^2+|d_i-f_i|^2\ge0,\\
+6(A_1+A_2)&=5\sum_i\norm{K_i}_{\mathrm F}^2-\sum_iq_i.
+\end{aligned}
+$$
+
+Here $\norm{K_i}_{\mathrm F}^2$ is the sum of the squared moduli of all matrix entries. Taking the trace of the channel normalization gives $\sum_i\norm{K_i}_{\mathrm F}^2=\Tr I_2=2$. Hence $6(A_1+A_2)\le10$; dividing by $12$ yields the bound.
+
+The same file's `exists_unit_min_le_internal` therefore gives the precise worst-case conclusion: **for every finite-Kraus trace-preserving channel above, there is a unit pure input** such that
+
+$$
+\min\{F_1(K,\psi),F_2(K,\psi)\}\le\frac56.
+$$
+
+The finite mean explains the implication directly. If both fidelities were strictly above $5/6$ on every unit input, all twelve numbers on the six Pauli inputs would be strictly above $5/6$, contradicting the mean bound. This restricts the quality that both clones can **jointly guarantee** on all pure inputs. It does not impose a separate pointwise $5/6$ upper bound on each clone of an asymmetric device, and it asserts no identity for a Haar average over the sphere.
+
+The statement `isGreatest_cloning_fidelity_internal` in [Unique.lean](https://github.com/JD-Jones-ASES/qubit-cloning-lean/blob/f619a52e67849f80205127e3ba7877f7f7658e50/QubitCloning/Unique.lean) also includes attainability. Among all real $t$ for which some finite-Kraus trace-preserving channel satisfies both $t\le F_1$ and $t\le F_2$ on every unit input, $5/6$ is the greatest element. Its construction supplies a two-operator Bužek–Hillery channel with $F_1=F_2=5/6$ for every unit input. Thus $5/6$ is an attained common guarantee as well as an upper bound.
+
+**Verification boundary.** The external source uses Lean `4.35.0-rc2` and mathlib [`06535612`](https://github.com/leanprover-community/mathlib4/tree/065356127b1dc0016f66b7283ce0ce2c4055aa55); the trureturing version pinned by this book uses Lean `4.35.0` and mathlib [`56a00585`](https://github.com/leanprover-community/mathlib4/tree/56a005855ea17e0b0958f73ec801ae140b0a1679). The external proof has not been ported, compiled, or frozen in that trureturing version. This passage cites its exact statements and proof source; it does not claim independent kernel verification with this book's toolchain. The local formal scope of [@thm-cloning-machine-spectrum] below remains the spectrum and entropy of the defined machine reduced state. The literature accounts of the cloning isometry and its three marginals retain their respective scope boundaries.
 :::
 
 The Lean module `D5/S3/Quantum/CloningMachine` defines this candidate machine reduced-state matrix directly and proves that its spectrum does not depend on the input.
