@@ -250,17 +250,30 @@ check('opens on HAAR in the seat scene with all 600 points', s.preset === 'haar'
     JSON.stringify(s.psi));
 }
 
-// HAAR cited in a chapter on a phone (a 315 × 500 iframe): the card's note shares the frame with the ball, so it must stay
-// short enough to leave the stage ≥ 220 px tall, still say every idea of the card, and never scroll inside the frame.
+// HAAR cited in a chapter on a phone (a 315 × 500 iframe): the card's note shares the frame with the ball. The frame
+// itself never scrolls; the shared tour bar keeps the whole note, shows it two lines at a time and lets it scroll inside
+// the bar (and nowhere else) to its last line, so the stage stays ≥ 220 px tall and the note still says every idea.
 for (const lg of ['zh', 'en']) {
   const fp = await T.open(BOOK, ID, `?embed=1&lang=${lg}&preset=haar`, { viewport: { width: 315, height: 500 }, locale: lg === 'zh' ? 'zh-CN' : 'en-US', reducedMotion: 'reduce' });
   await settle(fp, 300); await fp.evaluate(() => window.FAIRNESS_DEBUG.seek(600)); await settle(fp, 200);
   const g = await fp.evaluate(() => {
     const st = document.getElementById('stage').getBoundingClientRect(), tour = document.querySelector('.tour').getBoundingClientRect(), what = document.querySelector('.tour .what');
-    const inner = [...document.querySelectorAll('body *')].filter((e) => /(auto|scroll)/.test(getComputedStyle(e).overflowY) && e.scrollHeight > e.clientHeight + 1).map((e) => e.id || e.className);
-    const de = document.documentElement;
-    return { h: st.height, top: st.top, bottom: st.bottom, tourBottom: tour.bottom, vh: innerHeight, docScroll: de.scrollHeight - de.clientHeight, bodyScroll: document.body.scrollHeight - document.body.clientHeight,
-      clipped: what.scrollHeight - what.clientHeight, inner, note: what.textContent, preset: window.FAIRNESS_DEBUG.state.preset };
+    const note = document.querySelector('.tour .tour-note'), cs = getComputedStyle(note), de = document.documentElement;
+    const scrollers = [...document.querySelectorAll('body *')].filter((e) => /(auto|scroll)/.test(getComputedStyle(e).overflowY) && e.scrollHeight > e.clientHeight + 1);
+    // the note scrolled to its end: its last character lies inside the note's own visible box, the bar and the frame
+    const inside = (r, b) => r.width > 0 && r.top >= b.top - 0.5 && r.bottom <= b.bottom + 0.5 && r.left >= b.left - 0.5 && r.right <= b.right + 0.5;
+    const lastChar = () => {
+      let t = null; const w = document.createTreeWalker(note, NodeFilter.SHOW_TEXT);
+      for (let n = w.nextNode(); n; n = w.nextNode()) if (n.nodeValue.trim()) t = n;
+      const end = t.nodeValue.trimEnd().length, rg = document.createRange(); rg.setStart(t, end - 1); rg.setEnd(t, end); return rg.getBoundingClientRect();
+    };
+    const was = note.scrollTop; note.scrollTop = note.scrollHeight;
+    const nb = note.getBoundingClientRect(), view = { top: nb.top + note.clientTop, bottom: nb.top + note.clientTop + note.clientHeight, left: nb.left, right: nb.right }, last = lastChar();
+    const reached = note.scrollTop + note.clientHeight >= note.scrollHeight - 1 && inside(last, view) && inside(last, tour) && inside(last, { top: 0, bottom: innerHeight, left: 0, right: innerWidth });
+    note.scrollTop = was;
+    return { h: st.height, top: st.top, bottom: st.bottom, tourBottom: tour.bottom, tourH: tour.height, vh: innerHeight, docScroll: de.scrollHeight - de.clientHeight, bodyScroll: document.body.scrollHeight - document.body.clientHeight,
+      others: scrollers.filter((e) => e !== note).map((e) => e.id || e.className), whole: note.textContent.trim() === document.getElementById('presetNote').textContent.trim(),
+      lines: note.clientHeight / parseFloat(cs.lineHeight), overflows: note.scrollHeight > note.clientHeight + 1, oy: cs.overflowY, reached, note: what.textContent, preset: window.FAIRNESS_DEBUG.state.preset };
   });
   const ideas = lg === 'zh'
     ? [/哈尔测度）?，?文献结果/, '未在本书形式化', '恰占四分之一', '固定种子', '接近四分之一', '青色的影子一样长', 'ψ 量 φ', 'φ 量 ψ']
@@ -269,8 +282,9 @@ for (const lg of ['zh', 'en']) {
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): the stage stays ≥ 220 px tall and inside the frame`, g.preset === 'haar' && g.h >= 220 && g.top >= 0 && g.bottom <= g.tourBottom && g.tourBottom <= g.vh + 1,
     JSON.stringify({ h: Math.round(g.h), top: Math.round(g.top), tourBottom: Math.round(g.tourBottom), vh: g.vh }));
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): the note keeps the Haar attribution, the exact quarter, the finite count and reciprocity`, lost.length === 0, lost.join(' / '));
-  check(`HAAR cited in a 315 × 500 phone frame (${lg}): nothing scrolls inside the frame`, g.docScroll <= 0 && g.bodyScroll <= 0 && g.clipped <= 1 && g.inner.length === 0,
-    JSON.stringify({ doc: g.docScroll, body: g.bodyScroll, clipped: g.clipped, inner: g.inner.slice(0, 3) }));
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): the frame and everything but the note stay put; the bar (≤ 120 px) holds the card's whole note, at most two lines tall, which the reader scrolls inside the bar to its last line`,
+    g.docScroll <= 0 && g.bodyScroll <= 0 && g.others.length === 0 && g.whole && g.lines <= 2.05 && g.tourH <= 120 && (!g.overflows || /(auto|scroll)/.test(g.oy)) && g.reached,
+    JSON.stringify({ doc: g.docScroll, body: g.bodyScroll, others: g.others.slice(0, 3), whole: g.whole, lines: +g.lines.toFixed(2), bar: Math.round(g.tourH), overflowY: g.oy, reached: g.reached }));
   const cn = await fp.evaluate(() => ({ c: window.FAIRNESS_DEBUG.centre(), o: window.FAIRNESS_DEBUG.overlay() }));
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): the narrow stage centres the ball and leaves #flat blank (no ledger column)`, cn.c.W <= 600 && Math.abs(cn.c.x - 0.5 * cn.c.W) < 1e-6 && cn.o.ink === 0, JSON.stringify(cn));
   await fp.context().close();
