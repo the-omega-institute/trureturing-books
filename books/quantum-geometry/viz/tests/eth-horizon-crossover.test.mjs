@@ -7,7 +7,7 @@
 // intersecting their dashed lines with the legs and bridges, the PPSZ rate of k-SAT by a closed form and by its series, and
 // the counts by direct summation.
 import { readFileSync } from 'node:fs';
-import { session, stageFirstChecks, settle, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, settle, cjkLeftovers, until as untilIn } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'eth-horizon-crossover';
 const T = await session();
@@ -15,6 +15,43 @@ const { check } = T;
 const near = (a, b, tol = 1e-9) => Math.abs(a - b) <= tol;
 
 await stageFirstChecks(T, BOOK, ID);
+
+/* ---------- a cited bridge figure whose frame loses its room ---------- */
+// While a chapter loads, scrolls or resizes, the frame of a cited card can be hidden or squeezed until the stage leaves no
+// room for the diagram (w = W − 36 ≤ 0 or h = H − top − bottom ≤ 0, where top ≥ 56 and bottom ≥ 18). The page must then
+// draw no diagram, report no geometry and throw nothing; once the room is back its own ResizeObserver redraw brings back
+// the very same diagram. Checked in a 733 × 500 frame in both languages.
+for (const lang of ['zh', 'en']) {
+  const mark = T.errors.length;
+  const fig = await T.open(BOOK, ID, `?embed=1&preset=bridge&lang=${lang}`, { viewport: { width: 733, height: 500 }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+  const look = () => fig.evaluate(() => { const cv = document.getElementById('cv'), d = window.HORIZON_DEBUG, s = d.state; return { W: cv.clientWidth, H: cv.clientHeight, geo: d.geometry, scene: s.scene, preset: s.preset, dims: s.dims.join() }; });
+  const redraw = () => settle(fig).then(() => '', (e) => String(e.message).split('\n')[0]);   // what a forced redraw throws, if anything
+  const restyle = (css) => fig.evaluate((c) => { document.getElementById('stage').style.cssText = c; }, css);
+  const cutsOf = (g) => (g ? g.cuts.map((z) => `${z.id}=${z.value}${z.hot ? '*' : ''}`).join() : 'none');
+  const css0 = await fig.evaluate(() => document.getElementById('stage').style.cssText);
+  // the first redraw lays out the stage's text; once the fonts it asked for are in, the reference frame is final
+  await redraw(); await fig.evaluate(() => document.fonts.ready.then(() => true)); await redraw();
+  const v = await look(), G = v.geo;
+  check(`bridge figure (${lang}): opens on (2, 3, 2, 3) with two tensors of positive radius, three bridges and the four cuts, both 6s magenta`,
+    v.scene === 'cut' && v.preset === 'bridge' && v.dims === '2,3,2,3' && !!G && G.r > 0 && G.bridges.length === 3 && cutsOf(G) === 'ad=6*,bc=6*,ac=12,bd=27', JSON.stringify({ W: v.W, H: v.H, r: G && G.r, cuts: cutsOf(G) }));
+  for (const [what, css, roomless] of [
+    ['hidden', 'display: none', (a) => a.W === 0 && a.H === 0],
+    ['30 px wide', 'max-width: 30px', (a) => a.W <= 36],                  // w = W − 36 ≤ 0
+    ['60 px high', 'max-height: 60px', (a) => a.W > 36 && a.H <= 74]      // w > 0, h ≤ H − 56 − 18 ≤ 0
+  ]) {
+    await restyle(`${css0}${css0 ? '; ' : ''}${css}`);
+    const cleared = await untilIn(fig, () => window.HORIZON_DEBUG.geometry === null);   // the page's own redraw on resize
+    const err = await redraw(), a = await look();
+    check(`bridge figure (${lang}), stage ${what}: no room, so no diagram and no stale geometry, and no redraw throws`, roomless(a) && cleared && !err && a.geo === null, JSON.stringify({ W: a.W, H: a.H, cleared, err, stale: cutsOf(a.geo) }));
+    await restyle(css0);
+    const back = await untilIn(fig, () => window.HORIZON_DEBUG.geometry !== null);
+    const err2 = await redraw(), b = await look();
+    check(`bridge figure (${lang}), stage ${what} → restored: the page redraws the same diagram by itself, bridges and cuts in place`, back && !err2 && b.W === v.W && b.H === v.H && JSON.stringify(b.geo) === JSON.stringify(G), JSON.stringify({ back, err: err2, W: [v.W, b.W], H: [v.H, b.H], cuts: cutsOf(b.geo) }));
+  }
+  const thrown = T.errors.slice(mark);
+  check(`bridge figure (${lang}): no page error while the frame lost and regained its room`, thrown.length === 0, thrown.slice(0, 3).join(' | '));
+  await fig.context().close();
+}
 
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);

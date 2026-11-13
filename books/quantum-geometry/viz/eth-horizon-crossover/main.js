@@ -116,6 +116,9 @@
   function drawCut() {
     const g = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g.ctx, W = g.W, H = g.H, I = fresh(), k = cuts(I.a, I.b, I.c, I.d), words = !TRV.thumbMode;
     const x0 = 18, y0 = box.top, w = W - 36, h = H - box.top - box.bottom, wide = w > 560, dw = wide ? w * 0.44 : w, dh = wide ? h : h * 0.42;
+    // no room for the diagram (a frame still loading, hidden or in mid-resize): the canvas stays as kit.plot cleared it and
+    // there is no geometry to report; the painter's ResizeObserver draws the diagram again once the stage has its room back
+    if (!(w > 0 && h > 0)) { cutGeo = null; return; }
     // the diagram: two nodes, the bond of three bridges, four outer legs (a and b on M, d and c on N); the four cuts as dashed lines
     const mx = x0 + dw * 0.3, nx = x0 + dw * 0.7, cy = y0 + dh * 0.5, r = Math.min(38, dh * 0.13, dw * 0.085), mid = (mx + nx) / 2;
     const leg = (xa, ya, xb, yb, col, wd) => { ctx.strokeStyle = col; ctx.lineWidth = wd; ctx.beginPath(); ctx.moveTo(xa, ya); ctx.lineTo(xb, yb); ctx.stroke(); };
@@ -359,7 +362,8 @@
         dims: [I.a, I.b, I.c, I.d], seed: I.seed, rank: I.rank, cuts: k, cone: inCone(I.a, I.b, I.c, I.d), sv: I.sv.slice(), flow: I.F.map((r) => r.slice()), M: I.M, N: I.N,
         prof: S.prof, theta: th, total: T, count: countAbove(th), wall: T / th };
     },
-    /** The bridge diagram as last drawn, in CSS pixels of the stage canvas: tensors (centre, radius r), legs, bridges and cuts. */
+    /** The bridge diagram as last drawn, in CSS pixels of the stage canvas: tensors (centre, radius r), legs, bridges and cuts
+        (null when the last frame of the bridge had no room for it). */
     get geometry() { return cutGeo && JSON.parse(JSON.stringify(cutGeo)); },
     seek: (t) => { clock.pause(); clock.set(t); }, rate: (c, l) => rate(c, l), crossoverOf: (c) => crossover(c), ppszOf: (k) => ppsz(k), lambda: (prof, j) => SPEC[prof](j),
     at: (j, v) => { const b = $('cv').getBoundingClientRect(); return [b.left + view.X(j), b.top + view.Y(v)]; }

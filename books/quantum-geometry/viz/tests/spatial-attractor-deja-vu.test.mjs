@@ -4,8 +4,10 @@
 // Lorenz system integrated with its own Runge–Kutta code, the divergence by finite differences, the contraction of a
 // tiny tetrahedron carried by four orbits, the largest Lyapunov exponent by the two-orbit method of Benettin, the
 // characteristic polynomial of the Jacobian at C₊ and C₋ by Faddeev–LeVerrier with its roots by Durand–Kerner, and the
-// unit tangents at each return recomputed by integrating both rounds on their own over the last 5 time units.
-import { session, stageFirstChecks, settle, until, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
+// unit tangents at each return recomputed by integrating both rounds on their own over the last 5 time units. The
+// contraction scene is a lit solid (kit.solid): the surface of a cube carried by the flow, whose vertices are
+// re-integrated here and whose enclosed volume (signed tetrahedra, computed here) follows e^(−41t/3).
+import { session, stageFirstChecks, solidChecks, settle, until, cjkLeftovers, inkShare } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'spatial-attractor-deja-vu';
 const T = await session();
@@ -108,12 +110,14 @@ check('the two rounds are out of step at the end', s.gap > 1, String(s.gap));
 await pick('return'); s = await state();
 check('RETURN: stopped at t = 22 with both rounds past the ruin', near(s.t, 22) && s.counts[0] >= 1 && s.counts[1] >= 1 && s.cos > 0.97 && /方向夹角/.test(await page.textContent('#hudSub')));
 check('RETURN: the line above the figure prints cos δθ too, and the ruin is labelled on the magnifier', (await page.textContent('#hudSub')).includes(`cos δθ = ${s.cos.toFixed(4)}`) && await D(() => [...document.querySelectorAll('#stage .tag')].some((t) => !t.hidden && /遗迹的邻域 · 放大 \d+×/.test(t.textContent))));
+check('RETURN: the magnifier is drawn on the flat overlay #flat, shown over the solid stage', s.flat && !(await D(() => document.getElementById('flat').hidden)) && (await inkShare(page, '#flat')) > 0.05);
 { // the card's caption reads the angle off the line above the figure and says its cosine is close to 1
   const want = await expectedReturn(s), ang = want && Math.acos(dot3(unitF(want.a.x), unitF(want.b.x))) * 180 / Math.PI;
   check('RETURN: the line above the figure prints the angle of the latest return, and its cosine (recomputed here) is above 0.99', want && (await page.textContent('#hudSub')).includes(`${ang.toFixed(1)}°`) && Math.cos(ang * Math.PI / 180) > 0.99, JSON.stringify([ang, await page.textContent('#hudSub')]));
 }
 s = await seek(0.5); check('before either round has passed, no inner product is shown', s.cos === null && (await page.textContent('#roKey')).trim() === '—');
 await pick('forget'); const sf = await seek(40);
+check('FORGET: no magnifier, the flat overlay #flat is hidden', !sf.flat && await D(() => document.getElementById('flat').hidden));
 check('FORGET: other starts (seed 3), the same parameters, and again both rounds pass by the ruin', sf.seed === 3 && sf.rho === 28 && dist(sf.starts[0], s.starts[0]) > 1 && sf.counts[0] >= 1 && sf.counts[1] >= 1 && sf.cos > 0.9, JSON.stringify([sf.counts, sf.cos]));
 const wf = await expectedReturn(sf);
 check('FORGET: the return and its cos δθ agree with the independent recomputation for these starts too', wf && sf.ret && near(sf.ret.ta, wf.a.t) && near(sf.ret.tb, wf.b.t) && near(sf.cos, dot3(unitF(wf.a.x), unitF(wf.b.x)), 1e-6), JSON.stringify([sf.ret, wf && [wf.a.t, wf.b.t]]));
@@ -126,6 +130,28 @@ let divOK = true; for (const p of [[1, 2, 3], [-8, 7, 30], [12, -3, 41]]) { cons
 check('the divergence of the Lorenz field is −41/3 everywhere (finite differences)', divOK && near(s.div, -41 / 3, 1e-12));
 await pick('shrink'); s = await seek(0.6);
 check('SHRINK: at t = 0.6 the volume factor is e^(−41·0.6/3)', s.scene === 'shrink' && near(s.exact, Math.exp(-41 * 0.6 / 3), 1e-12));
+check('SHRINK: no magnifier, the flat overlay #flat is hidden', !s.flat && await D(() => document.getElementById('flat').hidden));
+await solidChecks(T, BOOK, ID, page, { rest: false });   // the cube's surface at t = 0.6: a lit sheet
+await D(() => window.ATTRACTOR_DEBUG.resetView()); s = await state();
+check('the camera is back where the page opens after the solid checks', near(s.camera.yaw, -0.42, 1e-12) && near(s.camera.pitch, 0.14, 1e-12) && near(s.camera.zoom, 1, 1e-12) && near(s.t, 0.6, 1e-9), JSON.stringify(s.camera));
+{ // the surface of a cube of half-side side/2 around the centre of the cloud, carried by the flow
+  const a = 0.5 * 0.75 * s.half, c = s.centre, n = s.meshCount, faces = await D(() => window.ATTRACTOR_DEBUG.meshFaces());
+  const at = (f) => D(([cnt, ff]) => Array.from({ length: cnt }, (_, k) => window.ATTRACTOR_DEBUG.meshPoint(k, ff)), [n, f]);
+  const seeds = await at(0);
+  const cheb = (p) => Math.max(...p.map((v, i) => Math.abs(v - c[i])));
+  check('SHEET: the mesh starts on the surface of a cube of half-side 0.375 × half, centred on the cloud (x = y = 0)', near(s.cube, a, 1e-9) && near(s.side, 0.75 * s.half, 1e-9) && c[0] === 0 && c[1] === 0 && seeds.every((p) => near(cheb(p), a, 1e-9)) && n >= 6 * 16 + 2, JSON.stringify([s.cube, a, n]));
+  // closed and consistently oriented: every directed edge of a face appears once, and its reverse once
+  const edges = new Map(); for (const fc of faces) fc.forEach((u, k) => { const key = `${u},${fc[(k + 1) % fc.length]}`; edges.set(key, (edges.get(key) || 0) + 1); });
+  check('SHEET: a closed surface, every edge shared by two faces in opposite directions', faces.length === s.meshFaces && [...edges].every(([key, m]) => m === 1 && edges.get(key.split(',').reverse().join(',')) === 1));
+  // its vertices follow the Lorenz system, integrated here on their own (t = 0.5 and t = 1)
+  let meshOK = true, meshBad = '';
+  for (const [f, steps, tol] of [[25, 50, 1e-6], [50, 100, 1e-5]]) { const got = await at(f); for (let k = 0; k < n; k += 7) { const want = run(seeds[k], steps, 28); if (dist(want, got[k]) > tol) { meshOK = false; meshBad = JSON.stringify([k, f, want, got[k]]); } } }
+  check('SHEET: its vertices are carried by the same flow (re-integrated here by RK4 to t = 0.5 and t = 1)', meshOK, meshBad);
+  // the volume it encloses (signed tetrahedra from the centre, each face fanned from its first vertex) shrinks like e^(−41t/3)
+  const enclosed = (P) => faces.reduce((acc, fc) => { let v = 0; for (let k = 1; k + 1 < fc.length; k++) { const [A, B, C] = [fc[0], fc[k], fc[k + 1]].map((i) => P[i].map((x, j) => x - c[j])); v += (A[0] * (B[1] * C[2] - B[2] * C[1]) - A[1] * (B[0] * C[2] - B[2] * C[0]) + A[2] * (B[0] * C[1] - B[1] * C[0])) / 6; } return acc + v; }, 0);
+  const v0 = enclosed(seeds), v2 = enclosed(await at(2));
+  check('SHEET: the closed mesh encloses (2a)³ at t = 0 and e^(−41·0.04/3) of it at t = 0.04 (within 2%)', near(v0 / (8 * a ** 3), 1, 1e-9) && Math.abs(v2 / v0 / Math.exp(-41 * 0.04 / 3) - 1) < 0.02, JSON.stringify([v0 / (8 * a ** 3), v2 / v0, Math.exp(-41 * 0.04 / 3)]));
+}
 let detOK = true; for (const t of [0.1, 0.5, 1, 1.5, 2]) { const q = await seek(t); if (Math.abs(q.det / Math.exp(-41 * t / 3) - 1) > 2e-3) detOK = false; }
 check('the determinant of the tangent map follows e^(−41t/3) to within two parts in a thousand, up to t = 2', detOK);
 const vol = (a, b, c, d) => { const u = b.map((v, i) => v - a[i]), v = c.map((x, i) => x - a[i]), w = d.map((x, i) => x - a[i]); return Math.abs(u[0] * (v[1] * w[2] - v[2] * w[1]) - u[1] * (v[0] * w[2] - v[2] * w[0]) + u[2] * (v[0] * w[1] - v[1] * w[0])) / 6; };
@@ -226,9 +252,12 @@ check('leaving the card (another ρ) draws the whole orbit bright again', s.sett
 /* ---------- camera, keyboard, language ---------- */
 await pick('forget'); await seek(40);
 const box = await page.$eval('#stage', (el) => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; });
-const shot0 = await D(() => document.getElementById('cv').toDataURL().length);
+// the picture is on the WebGL canvas of the solid stage (#cv only keeps a copy while the context rests in a book)
+const picture = () => D(() => (document.querySelector('#stage canvas.solid-gl') || document.getElementById('cv')).toDataURL());
+const cam0 = (await state()).camera, shot0 = await picture();
 await page.mouse.move(box[0], box[1]); await page.mouse.down(); await page.mouse.move(box[0] + 140, box[1] + 30, { steps: 5 }); await page.mouse.up(); await settle(page);
-check('dragging the stage turns the attractor (the picture changes, the card stays)', (await D(() => document.getElementById('cv').toDataURL().length)) !== shot0 && (await state()).preset === 'forget');
+const cam1 = (await state()).camera;
+check('dragging the stage turns the attractor (the camera turns, the picture changes, the card stays)', cam1.yaw !== cam0.yaw && (await picture()) !== shot0 && (await state()).preset === 'forget', JSON.stringify([cam0, cam1]));
 await page.click('body', { position: { x: 5, y: 5 } });
 for (const [key, sc] of [['2', 'shrink'], ['3', 'dimension'], ['1', 'rounds']]) { await page.keyboard.press(key); check(`key ${key} switches to the scene ${sc}`, (await state()).scene === sc); }
 await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); check('Home and → step the rail by one unit of time', near((await state()).t, 1));

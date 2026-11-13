@@ -6,7 +6,9 @@
 //   loop     the rotors as 2 × 2 SU(2) matrices acting on spinors and by Rodrigues' formula on vectors (the page uses quaternions);
 //   horizon  an icosahedron built from the cyclic permutations of (0, ±1, ±φ), turned so that a vertex is the observer,
 //            and the rank of random factorizations through the cut edges by exact elimination modulo a prime.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+// The loop and the horizon are lit solids (kit.solid): solidChecks on PLAQUETTE, POLYTOPE and HORIZON, and on POLYTOPE the
+// twelve vertex marks, some in front of the solid and some hidden behind it.
+import { session, stageFirstChecks, solidChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'unified-field-slice';
 const T = await session();
@@ -141,6 +143,7 @@ check('PLAQUETTE: U = R₁R₂R₁⁻¹R₂⁻¹ equals the SU(2) matrix commuta
 check('PLAQUETTE: U ≠ 1: w = 0.875, bivector part (0.2165, −0.2165, 0.375), left-over 57.9°', close(s.loop.U[0], 0.875, 1e-12) && vclose(s.loop.U.slice(1), [Math.sqrt(3) / 8, -Math.sqrt(3) / 8, 0.375], 1e-12) && close(s.loop.phi * 180 / Math.PI, 57.91, 0.01));
 check('PLAQUETTE: the arrow ends where Rodrigues puts it, away from its start', vclose(s.loop.r, ind.r, 1e-12) && Math.acos(dot(s.loop.r, s.loop.p0)) > 0.1);
 check('PLAQUETTE: the page reads U as a left-over turn (toast)', (await page.textContent('#toast')).includes('57.9'));
+await solidChecks(T, BOOK, ID, page, { rest: false });
 // half-way through the loop, the arrow is where the first steps put it
 s = await seek(1.5);
 const e60 = Math.PI / 3, mid = rod(rod(s.loop.p0, AX.e2, -e60), AX.e1, -e60 / 2);
@@ -183,11 +186,19 @@ for (let v = 0; v < 12; v++) {
   total += 2 * Math.PI - sum;
 }
 check('POLYTOPE: each vertex misses 60° and the total is 720° = 4π (here and on the page)', close(total, 4 * Math.PI, 1e-10) && s.horizon.deficit.every((d) => close(d, Math.PI / 3, 1e-12)));
+await solidChecks(T, BOOK, ID, page, { rest: false });
+{
+  await settle(page);
+  const vm = await page.evaluate(() => window.TRV.solids[0].marks().filter((m) => /^v\d+$/.test(m.key)).map((m) => ({ key: m.key, hidden: m.hidden })));
+  const keys = new Set(vm.map((m) => m.key)), all12 = vm.length === 12 && Array.from({ length: 12 }, (_, i) => `v${i}`).every((k) => keys.has(k));
+  check('POLYTOPE: the 12 vertices v0…v11 are marks on the solid, some in front of it and some hidden behind it', all12 && vm.some((m) => !m.hidden) && vm.some((m) => m.hidden), vm.map((m) => `${m.key}${m.hidden ? ' (hidden)' : ''}`).join(', '));
+}
 
 s = await pick('horizon');
 check('HORIZON: the card plays the horizon down', await until(page, () => window.UNIFIED_DEBUG.state.playing || window.UNIFIED_DEBUG.state.t > 0));
 check('HORIZON: it stops at λ = 90°', await ended(90)); s = await state();
 check('HORIZON: at 90° the pole and one ring are inside and 10 edges are cut; bound 2¹⁰', s.horizon.lam === 90 && s.horizon.cut === 10 && s.horizon.nA === 6 && s.horizon.inside === 10 && s.horizon.bound === 1024);
+await solidChecks(T, BOOK, ID, page, { rest: false });
 let cuts = true, bad = '';
 for (let lam = 0; lam <= 180; lam += 7.5) { s = await seek(lam); const c = cutIndep(lam); if (s.horizon.cut !== c.cut || s.horizon.nA !== c.nA) { cuts = false; bad = `${lam}: ${s.horizon.cut}/${c.cut}`; } }
 check('HORIZON: the cut |∂A| and the vertices inside agree with an independently built icosahedron at 25 angles', cuts, bad);

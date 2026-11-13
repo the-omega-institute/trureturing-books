@@ -6,6 +6,8 @@
           to a reference arrow, so one round is U = R₁R₂R₁⁻¹R₂⁻¹: 1 in one plane, a left-over turn in two planes.
    Horizon: a regular icosahedron in the unit sphere with a vertex (the observer) at the north pole; its angle
           deficits, and the edges cut by the horizon at polar angle λ.
+   The loop and the horizon are lit solids (kit.solid): an opaque ball, an opaque icosahedron; the clock and the fixed
+   point are flat plots on the canvas #flat above it.
    Read-only probe for the browser suite: window.UNIFIED_DEBUG. */
 (() => {
   'use strict';
@@ -102,38 +104,35 @@
   };
   const LEGEND = {
     clock: [['cy', '线 cos θ = 1/γ：固有时率', 'line cos θ = 1/γ: proper-time rate'], ['mg', '面积 sin θ = tanh η：速度 v/c', 'area sin θ = tanh η: speed v/c'], ['vi', '弧长 θ', 'arc length θ'], ['am', '当前的点', 'the current point']],
-    loop: [['am', '箭头的尖端', 'tip of the arrow'], ['vi', '转轴', 'axis of a turn'], ['mg', '没合上的缺口', 'the gap left open']],
+    loop: [['am', '箭头与它的尖端', 'the arrow and its tip'], ['cy', '起点与尖端走过的路', 'the start and the path of the tip'], ['vi', '转轴', 'axis of a turn'], ['mg', '没合上的缺口', 'the gap left open']],
     // the fixed-point scene has only the unit circle: nothing on it is a speed
     fixed: [['vi', '弧长 θ（下方拉直）', 'arc length θ (straightened below)'], ['cy', '影子 cos θ', 'the shadow cos θ'], ['mg', '高 sin θ：在 θ* 处是局部压缩率', 'height sin θ: at θ* the local contraction rate'], ['am', '圆上当前的点', 'the current point on the circle']],
     // with no horizon pushed in (λ = 0) only the polytope and its angle deficits are on the stage
-    polytope: [['mg', '每个顶点的角亏 60°', 'the 60° angle deficit at each vertex'], ['dm', '正二十面体的边', 'edges of the icosahedron']],
-    horizon: [['cy', '视界以内的边', 'edges inside the horizon'], ['mg', '割断的边 · 角亏', 'cut edges · angle deficits'], ['am', '视界 λ', 'the horizon λ'], ['dm', '视界以外', 'beyond the horizon']]
+    polytope: [['mg', '每个顶点缺的 60°', 'the 60° missing at each vertex'], ['cy', '正二十面体的面与顶点', 'faces and vertices of the icosahedron']],
+    horizon: [['cy', '视界以内', 'inside the horizon'], ['mg', '割断的边 · 角亏', 'cut edges · angle deficits'], ['vi', '跨视界的面', 'faces across the horizon'], ['am', '视界 λ', 'the horizon λ'], ['dm', '视界以外', 'beyond the horizon']]
   };
 
-  /* ---------- the stage ---------- */
-  let G = null;   // the 2D plot of the clock scene, for pointer picking
-  const stage = kit.stage3($('stage'), {
-    canvas: $('cv'), radius: TRV.thumbMode ? 0.42 : 0.36, cy: TRV.figure ? 0.53 : 0.55,
-    onChange: () => paint(),
-    onPick: (ev) => { if (S.scene === 'clock') dragClock(ev); else if (S.scene === 'fixed') dragFixed(ev); else return false; return true; },
-    onDrag: (ev) => (S.scene === 'fixed' ? dragFixed(ev) : dragClock(ev))
+  /* ---------- the stage: lit solids for the loop and the horizon; the clock and the fixed point on #flat ---------- */
+  let G = null;   // the 2D plot of the clock and fixed-point scenes, for pointer picking
+  const stage3 = kit.solid($('stage'), {
+    canvas: $('cv'), radius: 0.36, cy: 0.52, yaw: -0.62, pitch: 0.36,
+    onChange: () => { if (S.scene === 'loop' || S.scene === 'horizon') paint(); },
+    onPick: (ev) => { if (S.scene === 'loop' || S.scene === 'horizon') return false; dragCircle(ev); return true; },
+    onDrag: (ev) => dragCircle(ev)
   });
-  function dragClock(ev) {
+  /** Drag the point on the circle: the clock works η back from θ, the fixed-point scene takes θ itself. */
+  function dragCircle(ev) {
     if (!G) return;
-    const b = $('cv').getBoundingClientRect(), x = G.invX(ev.clientX - b.left), y = G.invY(ev.clientY - b.top);
-    const th = kit.clamp(Math.atan2(y, x), 0, gd(ETA_MAX));
-    clock.pause(); cards.mark(null); clock.set(kit.clamp(gdInv(th), 0, ETA_MAX));
+    const b = $('flat').getBoundingClientRect(), x = G.invX(ev.clientX - b.left), y = G.invY(ev.clientY - b.top);
+    clock.pause(); cards.mark(null);
+    if (S.scene === 'fixed') clock.set(kit.clamp(Math.atan2(y, x), 0, TH_MAX));
+    else clock.set(kit.clamp(gdInv(kit.clamp(Math.atan2(y, x), 0, gd(ETA_MAX))), 0, ETA_MAX));
   }
 
-  function dragFixed(ev) {
-    if (!G) return;
-    const b = $('cv').getBoundingClientRect(), x = G.invX(ev.clientX - b.left), y = G.invY(ev.clientY - b.top);
-    clock.pause(); cards.mark(null); clock.set(kit.clamp(Math.atan2(y, x), 0, TH_MAX));
-  }
-
-  /** The fixed point on its own: the unit circle, the arc θ, the shadow cos θ and the height sin θ. */
+  /** The fixed point on its own: the unit circle, the arc θ, the shadow cos θ and the height sin θ. The solid stage
+      is begun and ended with nothing in it, so the WebGL canvas is clear while this frame's labels are kept. */
   function drawFixed() {
-    const st = stage, cv = $('cv');
+    const st = stage3, cv = $('flat');
     st.begin();
     const w = cv.clientWidth, h = cv.clientHeight, thumb = TRV.thumbMode, lw = thumb ? 1.8 : 1;
     const g = G = kit.plot(cv, { x: [-0.22, 1.62], y: [-0.36, 1.14], equal: true, pad: [24, 24, h < 420 ? 62 : 74, 44] });
@@ -165,7 +164,7 @@
   }
 
   function drawClock() {
-    const st = stage, cv = $('cv');
+    const st = stage3, cv = $('flat');
     st.begin();
     const w = cv.clientWidth, h = cv.clientHeight, thumb = TRV.thumbMode, lw = thumb ? 1.8 : 1;
     const g = G = kit.plot(cv, { x: [-0.3, 2.35], y: [-0.36, 1.62], equal: true, pad: [24, 24, h < 420 ? 62 : 74, 44] });
@@ -215,67 +214,89 @@
     st.end();
   }
 
-  function drawLoop() {
-    const st = stage, c = st.begin(), now = loopAt(S.tau), lg = legs(), R = loopU(), done = S.tau >= 4 - 1e-9;
-    st.sphere(1, { lat: [0], lon: 2, alpha: 0.4 });
-    [[E1, 'e₁'], [E2, 'e₂'], [E3, 'e₃']].forEach(([e, n], i) => { st.line(v3.scale(e, -1.2), v3.scale(e, 1.2), { color: P.faint, width: 1, alpha: 0.9, back: 0.5 }); st.tag('e' + i, v3.scale(e, 1.3), n, 'num'); });
-    const path = (a, b) => { const pts = []; for (let i = 0, m = Math.max(2, Math.ceil((b - a) * 48)); i <= m; i++) pts.push(loopAt(a + (b - a) * i / m).r); return pts; };
-    if (S.tau < 4) st.path(path(S.tau, 4), { color: P.amber, width: 1.2, alpha: 0.45, dash: [3, 5], back: 0.35 });
-    if (S.tau > 0) st.path(path(0, S.tau), { color: P.amber, width: 2.2, alpha: 0.9, back: 0.35 });
+  /** The loop on an opaque ball, shaded from dim (far from the start) to cyan (at the start), so that turning the
+      ball shows another side; every mark is lifted a little off the surface. */
+  function drawLoop(tau) {
+    const st = stage3, now = loopAt(tau), lg = legs(), R = loopU(), done = tau >= 4 - 1e-9;
+    st.begin();
+    st.surface('ball', (u, v) => v3.sph(u, v), {
+      u: [0, Math.PI], v: [0, kit.TAU], nu: 64, nv: 36, colors: [P.dim, P.cyan], range: [-1, 1],
+      value: (u, v) => v3.dot(v3.sph(u, v), P0), grid: { every: [8, 6], color: P.ink, alpha: 0.2 }, id: 'ball'
+    });
+    // the axes of the turns, through the ball and out of it
+    [[E1, 'e₁'], [E2, 'e₂'], [E3, 'e₃']].forEach(([e, n], i) => { st.line([v3.scale(e, -1.25), v3.scale(e, 1.25)], { color: P.faint, width: 1, alpha: 0.9 }); st.tag('e' + i, v3.scale(e, 1.34), n, 'num', i === 1 ? { dx: 16, dy: 12 } : {}); });
     // the turn in progress: its axis and the circle the tip rides on
     if (!done) {
-      const [n] = lg[now.k], d = v3.dot(n, now.r);
-      st.line(v3.scale(n, -1.12), v3.scale(n, 1.12), { color: P.violet, width: 1.6, dash: [6, 4], back: 0.45 });
-      st.circle(v3.scale(n, d), n, Math.sqrt(Math.max(0, 1 - d * d)), { color: P.violet, width: 1, alpha: 0.5, back: 0.3 });
+      const [n] = lg[now.k], d = v3.dot(n, now.r), rho = Math.sqrt(Math.max(0, 1 - d * d));
+      const a = v3.unit(v3.cross(n, Math.abs(n[2]) < 0.9 ? E3 : E1)), b = v3.cross(n, a), ring = [];
+      for (let i = 0; i < 96; i++) { const t = kit.TAU * i / 96; ring.push(v3.scale(v3.add(v3.scale(n, d), v3.add(v3.scale(a, rho * Math.cos(t)), v3.scale(b, rho * Math.sin(t)))), 1.006)); }
+      st.line([v3.scale(n, -1.25), v3.scale(n, 1.25)], { color: P.violet, width: 1.8, dash: [6, 4] });
+      if (rho > 1e-3) st.line(ring, { color: P.violet, width: 1, alpha: 0.6, close: true });
     }
+    // the whole loop of the tip (dashed) and the part already travelled
+    const path = (a, b) => { const pts = []; for (let i = 0, m = Math.max(2, Math.ceil((b - a) * 48)); i <= m; i++) pts.push(loopAt(a + (b - a) * i / m).r); return pts; };
+    st.line(path(0, 4).map((p) => v3.scale(p, 1.01)), { color: P.ink, width: 1.2, dash: [4, 4], alpha: 0.55 });
+    if (tau > 1e-6) st.tube('path', path(0, tau).map((p) => v3.scale(p, 1.012)), { color: P.cyan, width: 2.8, glow: 0.7 });
     // the left-over turn and the gap
     if (done && R.phi > 1e-6 && R.axis) {
-      st.line(v3.scale(R.axis, -1.12), v3.scale(R.axis, 1.12), { color: P.violet, width: 2.2, back: 0.45 });
-      st.tag('Uax', v3.scale(R.axis, 1.22), L(`U 的转轴 · ${fix(R.phi / DEG, 1)}°`, `axis of U · ${fix(R.phi / DEG, 1)}°`), 'raw c-vi');
+      st.line([v3.scale(R.axis, -1.25), v3.scale(R.axis, 1.25)], { color: P.violet, width: 2.2 });
+      st.tag('Uax', v3.scale(R.axis, 1.32), L(`U 的转轴 · ${fix(R.phi / DEG, 1)}°`, `axis of U · ${fix(R.phi / DEG, 1)}°`), 'raw c-vi');
     }
     const gap = Math.acos(kit.clamp(v3.dot(P0, now.r), -1, 1));
-    if (done && gap > 1e-4) {
-      c.save(); c.shadowColor = P.magenta; c.shadowBlur = 10;
-      st.arc(P0, now.r, { color: P.magenta, width: 3.4, back: 0.5 }, 1);
-      c.restore();
+    if (tau >= 3.98 && R.phi > 1e-3 && gap > 1e-4) {
+      const gapPts = []; for (let i = 0; i <= 48; i++) gapPts.push(v3.scale(v3.slerp(P0, now.r, i / 48), 1.014));
+      st.tube('gap', gapPts, { color: P.magenta, width: 3.4, glow: 0.9 });
       st.tag('gap', v3.scale(v3.unit(v3.add(P0, now.r)), 1.12), L(`缺口 ${fix(gap / DEG, 1)}°`, `gap ${fix(gap / DEG, 1)}°`), 'raw c-mg', { dx: 62, dy: -16 });
     }
-    st.dot(P0, 5, P.ink, { ring: true });
-    st.tag('p0', P0, L('起点', 'start'), 'raw ink', { dx: -30, dy: 14 });
-    st.arrow([0, 0, 0], now.r, { color: P.amber, width: 2.6, glow: 12, headSize: 12, fade: false });
-    st.dot(now.r, 5.5, P.amber, { glow: 14, fade: false });
+    // the start (and, on the far side, the point opposite it), the arrow and its tip
+    st.ring(v3.scale(P0, 1.016), { r: 6.5, color: P.cyan, normal: P0, key: 'start' });
+    st.bead(v3.scale(P0, -1.016), { r: 3, color: P.dim, key: 'anti' });
+    st.tag('p0', v3.scale(P0, 1.016), L('起点', 'start'), 'raw c-cy', { dx: -30, dy: 14 });
+    st.arrow([0, 0, 0], v3.scale(now.r, 1.16), { color: P.amber, width: 2.8, headSize: 11 });
+    st.bead(v3.scale(now.r, 1.018), { r: 6, color: P.amber, glow: 1, key: 'now' });
     st.end();
   }
 
-  function drawHorizon() {
-    const st = stage, c = st.begin(), H = horizonAt(S.lam), V = ICO.V, cap = S.lam > 1e-9 && S.lam < 180 - 1e-9;
-    st.sphere(1, { lat: [0], lon: 0, alpha: 0.25, shade: 0.06 });
-    // the edges, beyond / inside / cut
-    ICO.E.forEach(([i, j], e) => { if (H.kind[e] === 'out') st.line(V[i], V[j], { color: P.dim, width: 1, alpha: 0.7, back: 0.45 }); });
-    ICO.E.forEach(([i, j], e) => { if (H.kind[e] === 'in') st.line(V[i], V[j], { color: P.cyan, width: 2.2, back: 0.4 }); });
-    c.save(); c.shadowColor = P.magenta; c.shadowBlur = 8;
-    ICO.E.forEach(([i, j], e) => { if (H.kind[e] === 'cut') st.line(V[i], V[j], { color: P.magenta, width: 3, back: 0.45 }); });
-    c.restore();
-    // the angle deficit at every vertex: five 60° corners laid flat, and the 60° that is missing
-    const fanAlpha = S.lam > 1e-9 ? 0.35 : 1, rr = 0.15;
-    const order = V.map((v, i) => [i, st.p(v)[2]]).sort((a, b) => a[1] - b[1]);
-    for (const [i, depth] of order) {
-      const v = V[i], f = ICO.fans[i], fa = fanAlpha * (depth < 0 ? 0.3 : 1);
-      const pt = (a) => v3.add(v3.scale(v, 1.005), v3.add(v3.scale(f.t1, rr * Math.cos(a)), v3.scale(f.t2, rr * Math.sin(a))));
-      const sector = (a0, a1) => { const pts = [v3.scale(v, 1.005)]; for (let s = 0; s <= 12; s++) pts.push(pt(a0 + (a1 - a0) * s / 12)); return pts; };
-      for (let s = 0; s < 5; s++) st.poly(sector(f.start + s * Math.PI / 3, f.start + (s + 1) * Math.PI / 3), { fill: P.ink, alpha: 0.12 * fa, color: P.dim, strokeAlpha: 0.5 * fa, width: 0.8 });
-      st.poly(sector(f.start + 5 * Math.PI / 3, f.start + 2 * Math.PI), { fill: P.magenta, alpha: 0.6 * fa, color: P.magenta, strokeAlpha: 0.9 * fa, width: 1 });
+  /** The icosahedron as an opaque flat-shaded solid in a faint glass ball: faces inside the horizon cyan, across it
+      violet, beyond it dim (all cyan while no horizon is pushed in); the edges, the 60° wedges and the vertices just
+      outside the faces, so that the solid itself hides the far side. */
+  function drawHorizon(lamDeg) {
+    const st = stage3, H = horizonAt(lamDeg), V = ICO.V, poly = lamDeg < 1e-9, cap = !poly && lamDeg > 0 && lamDeg < 180 - 1e-9;
+    st.begin();
+    const D = st.facing();
+    const faceColors = ICO.F.map(([a, b, c]) => (poly ? P.cyan : H.inA[a] && H.inA[b] && H.inA[c] ? P.cyan : H.inA[a] || H.inA[b] || H.inA[c] ? P.violet : P.dim));
+    st.poly('ico', { vertices: V, faces: ICO.F }, { colors: faceColors, edges: false, id: 'ico' });
+    st.glass('ball', [0, 0, 0], 1.002, { color: P.cyan, alpha: 0.05, rim: 0.3 });
+    // the edges: cut (magenta tubes), inside, beyond
+    ICO.E.forEach(([i, j], e) => {
+      const ab = [v3.scale(V[i], 1.004), v3.scale(V[j], 1.004)], kind = H.kind[e];
+      if (kind === 'cut') st.tube('cut' + e, ab, { color: P.magenta, width: 3.2, glow: 0.85 });
+      else if (kind === 'in') st.line(ab, { color: P.cyan, width: 1.8, alpha: 0.9 });
+      else st.line(ab, { color: P.ink, width: 1.1, alpha: poly ? 0.65 : 0.45 });
+    });
+    // the angle deficit at every vertex: the 60° wedge that is missing once the five corners are laid flat
+    const rr = 0.15;
+    V.forEach((v, i) => {
+      const f = ICO.fans[i], a0 = f.start + 5 * Math.PI / 3, fan = [v];
+      for (let s = 0; s <= 12; s++) { const a = a0 + (Math.PI / 3) * s / 12; fan.push(v3.add(v, v3.add(v3.scale(f.t1, rr * Math.cos(a)), v3.scale(f.t2, rr * Math.sin(a))))); }
+      st.fan(fan.map((p) => v3.scale(p, 1.008)), { fill: P.magenta, alpha: poly ? 0.5 : 0.34, color: P.magenta, width: 1.2, strokeAlpha: 0.85 });
+    });
+    // every vertex, front and back (the solid hides those behind it); the observer at the pole
+    V.forEach((v, i) => {
+      const inA = H.inA[i];
+      st.bead(v3.scale(v, 1.014), { r: i === 0 ? 6.5 : poly || inA ? 4.5 : 3.5, color: poly || inA ? P.cyan : P.dim, glow: i === 0 ? 0.9 : 0.3, key: 'v' + i });
+    });
+    if (v3.dot(V[0], D) >= 0) {
+      st.tag('v0', v3.scale(V[0], 1.014), L('观察者', 'observer'), 'raw c-cy', { dy: -22 });
+      if (poly) st.tag('def', v3.scale(V[0], 1.014), L('缺 60°', '60° missing'), 'raw c-mg', { dx: 58, dy: 4 });
     }
-    V.forEach((v, i) => st.dot(v, H.inA[i] ? 4.5 : 3.2, H.inA[i] ? P.cyan : P.dim));
-    // the horizon at polar angle λ and the observer at the pole
-    if (cap) st.circle([0, 0, Math.cos(S.lam * DEG)], E3, Math.sin(S.lam * DEG), { color: P.amber, width: 2, dash: [6, 4], back: 0.35, n: 96 });
-    st.dot(V[0], 8, P.ink, { ring: true, width: 1.6, fade: false });
-    st.tag('obs', V[0], L('观察者', 'observer'), 'raw ink', { dy: -22 });
-    if (S.lam < 1e-9) st.tag('def', V[0], L('缺 60°', '60° missing'), 'raw c-mg', { dx: 58, dy: 4 });
+    // the horizon at polar angle λ, and its count on the side that faces the viewer
     if (cap) {
-      // put the count on the side of the horizon that faces the viewer
-      const D = st.facing(), a = Math.atan2(D[1], D[0]), s = Math.sin(S.lam * DEG), z = Math.cos(S.lam * DEG);
-      st.tag('cut', [s * Math.cos(a), s * Math.sin(a), z], `|∂A| = ${H.cut}`, 'num c-am', { dy: 18 });
+      const z = Math.cos(lamDeg * DEG), s = Math.sin(lamDeg * DEG), horizonPts = [];
+      for (let k = 0; k <= 129; k++) { const a = kit.TAU * k / 128; horizonPts.push([1.006 * s * Math.cos(a), 1.006 * s * Math.sin(a), 1.006 * z]); }
+      st.tube('horizon', horizonPts, { color: P.amber, width: 2.6, glow: 0.8 });
+      const a = Math.atan2(D[1], D[0]);
+      st.tag('cut', [1.006 * s * Math.cos(a), 1.006 * s * Math.sin(a), 1.006 * z], `|∂A| = ${H.cut}`, 'num c-am', { dy: 18 });
     }
     st.end();
   }
@@ -416,7 +437,11 @@
     $('legend').innerHTML = LEGEND[leg].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
   }
 
-  function drawStage() { if (S.scene === 'clock') drawClock(); else if (S.scene === 'fixed') drawFixed(); else if (S.scene === 'loop') drawLoop(); else drawHorizon(); }
+  function drawStage() {
+    $('flat').hidden = S.scene === 'loop' || S.scene === 'horizon';
+    if (S.scene === 'loop') drawLoop(S.tau); else if (S.scene === 'horizon') drawHorizon(S.lam);
+    else if (S.scene === 'fixed') drawFixed(); else drawClock();
+  }
   const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail ---------- */
@@ -509,10 +534,10 @@
     },
     seek: (t) => { clock.pause(); clock.set(t); },
     /** Viewport coordinates of the data point (x, y) on the clock stage, for pointer tests. */
-    point: (x, y) => { const b = $('cv').getBoundingClientRect(); return G ? [b.left + G.X(x), b.top + G.Y(y)] : null; },
-    camera: () => Object.assign({}, stage.cam)
+    point: (x, y) => { const b = $('flat').getBoundingClientRect(); return G ? [b.left + G.X(x), b.top + G.Y(y)] : null; },
+    camera: () => Object.assign({}, stage3.cam)
   };
-  window.TRV_THUMB = () => { applyPreset('plaquette'); cards.mark('plaquette'); clock.pause(); clock.set(4); stage.cam.yaw = -0.5; stage.cam.pitch = 0.32; paint.now(); };
+  window.TRV_THUMB = () => { applyPreset('plaquette'); cards.mark('plaquette'); clock.pause(); clock.set(4); stage3.cam.yaw = -0.5; stage3.cam.pitch = 0.32; paint.now(); };
   cards.pick(cards.initial('photon'));
   booting = false;
   paint();
