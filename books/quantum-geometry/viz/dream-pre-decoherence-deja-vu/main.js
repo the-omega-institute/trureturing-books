@@ -793,8 +793,10 @@
           !c.match.version && L('上下文版本不符', 'the context version differs'),
           !c.match.address && L('地址不符（Address_Tag）', 'the address differs (Address_Tag)')].filter(Boolean);
         const whyEn = why.length > 1 ? `${why.slice(0, -1).join(', ')} and ${why[why.length - 1]}` : why.join('');
+        // A hit on a pure saved state (θ = 0° or 90°) has state entropy 0 and surprisals 0 and ∞; only a mixed one keeps them nonzero.
         $('roNote').textContent = pass2 && done
-          ? (c.hit ? L('再投影保持保存的态不变：新增熵与残差都是 0；态熵与惊讶度没有变成 0。', 'The re-projection leaves the saved state unchanged: added entropy and residual are 0; the state entropy and the surprisals are not 0.')
+          ? (c.hit ? (nm.existing > 0 ? L('再投影保持保存的态不变：新增熵与残差都是 0；态熵与惊讶度没有变成 0。', 'The re-projection leaves the saved state unchanged: added entropy and residual are 0; the state entropy and the surprisals are not 0.')
+              : L('再投影保持保存的态不变：新增熵与残差都是 0；保存的是纯态，态熵本来就是 0，惊讶度一个是 0、一个是 ∞。', 'The re-projection leaves the saved state unchanged: added entropy and residual are 0; the saved state is pure, so the state entropy was already 0, and one surprisal is 0, the other ∞.'))
             : kept ? L(`再投影没有改变保存的态：新增熵与残差都是 0；缓存不命中只因${why.join('、')}。`, `The re-projection leaves the saved state as it was: added entropy and residual are 0; the cache misses only because ${whyEn}.`)
             : L('再投影改变了保存的态：新增熵与残差不为 0，缓存不命中。', 'The re-projection changes the saved state: added entropy and residual are not 0, and the cache misses.'))
           : L('第一次完整未读捏合：横跨尺子的部分缩到 0，两个结果的权重一分不少。', 'The first complete unread pinching: the part across the ruler shrinks to 0, and both outcome weights are kept in full.');
