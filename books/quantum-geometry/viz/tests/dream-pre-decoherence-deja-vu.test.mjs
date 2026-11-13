@@ -161,6 +161,10 @@ for (const theta of angles) {
       && matrixNear(s.cacheEntry.payload, saved) && s.cacheEntry.valid === 1 && s.cacheMatch.payload === unchanged
       && s.cacheHit === unchanged && s.untaggedFamiliarity === unchanged && matrixNear(pinching(s.rho, beta), s.rho)
       && near(await readNumber('ro4'), 0));
+    // The HUD may only report what the state does; a nonzero residual does show that β differs from the saved β = 0°.
+    const sub = await text('hudSub');
+    check(`repeat grid θ=${theta}, β=${beta}: HUD reports the state property, not ruler identity`, sub.includes(`β = ${beta}°`)
+      && !sub.includes('同一把尺子') && (unchanged ? sub.startsWith('再投影保持态不变') : sub.startsWith('换了尺子') && beta !== s.snapshot.beta), sub);
   }
 }
 // A maximally mixed snapshot (θ=45°) is fixed by every ruler; a changed ruler need not imply a miss there.
@@ -221,6 +225,68 @@ check('panel fact switch while ON: distinguishing fact immediately invalidates t
 s = await click('[data-fact="dup"]');
 check('panel fact switch back to redundant: original state and hit return', s.redundantMode && s.contextVersion === 0
   && s.flush === 0 && s.cacheHit && matrixNear(s.rho, sigma) && JSON.stringify(s.snapshot) === immutable);
+
+// A fixed state does not identify the ruler. At θ = 45° the saved snapshot is I/2, which the pinchings with β = 0° and
+// β = 90° both leave alone although the two maps differ; drive the real controls (arrow keys on the sliders, the stage
+// switch) and require the HUD to report the state property only.
+const keysOn = async (p, selector, key, n) => {
+  await p.focus(selector); for (let k = 0; k < n; k++) await p.keyboard.press(key);
+  await p.evaluate(() => document.activeElement?.blur()); await settle(p);
+  return p.evaluate(() => window.DEJAVU_SANDTABLE_DEBUG.state);
+};
+const mixedSaved = pinching(pure(45), 0), channelGap = Math.max(...pinching(pure(45), 0).flat().map((x, i) => Math.abs(x - pinching(pure(45), 90).flat()[i])));
+check('θ=45° certificate: Π at 0° and 90° differ by 1/2 on the input, yet both fix the saved I/2', matrixNear(mixedSaved, half)
+  && near(channelGap, 1 / 2) && matrixNear(pinching(mixedSaved, 90), mixedSaved) && matrixNear(pinching(mixedSaved, 0), mixedSaved));
+const fixedHudZh = '再投影保持态不变，β = 90°，态熵仍是 1.000 bit', fixedHudEn = 'Π(σ) = σ, β = 90°; state entropy still 1.000 bit';
+s = await card('deja-vu-hit', 2);
+check('deja-vu-hit HUD at the card: state unchanged under β = 0°', await text('hudSub') === '再投影保持态不变，β = 0°，态熵仍是 0.811 bit');
+s = await keysOn(page, '#theta', 'ArrowRight', 15);
+check('θ=45° by arrow keys: saved snapshot I/2 under the dream ruler, hit', s.theta === 45 && near(s.beta, 0)
+  && matrixNear(s.snapshot.sigma, mixedSaved) && s.cacheHit && await text('oTheta') === '45°');
+s = await keysOn(page, '#beta', 'ArrowRight', 18);
+frameChecks('fixed state, ruler turned to 90° by arrow keys', s, mixedSaved, mixedSaved);
+let hud = await text('hudSub'), note = await text('roNote');
+check('fixed state, ruler turned: current β 90° ≠ saved β 0°, state unchanged, hit', near(s.beta, 90) && s.snapshot.beta === 0
+  && matrixNear(s.rho, s.before) && s.cacheMatch.payload && s.cacheHit && await text('oBeta') === '90°');
+check('fixed state, ruler turned: visible HUD reports only that the state is unchanged', await page.locator('#hudSub').isVisible()
+  && hud === fixedHudZh && !/同一把尺子/.test(hud + note), `${hud} | ${note}`);
+s = await card('deja-vu-hit', 2);
+await keysOn(page, '#theta', 'ArrowRight', 15);
+s = await click('[data-up="on"]');
+frameChecks('fixed state, upgrade turns the ruler to 90°', s, mixedSaved, mixedSaved);
+hud = await text('hudSub'); note = await text('roNote');
+check('fixed state, upgrade: β 90° ≠ saved β 0°, flush and MISS while the state stays', s.logicUpgrade && near(s.beta, 90)
+  && s.snapshot.beta === 0 && s.flush === 1 && s.cacheEntry.valid === 0 && s.cacheMatch.payload && !s.cacheHit && await text('ro5') === 'MISS');
+check('fixed state, upgrade: visible HUD reports only that the state is unchanged', await page.locator('#hudSub').isVisible()
+  && hud === fixedHudZh && !/同一把尺子/.test(hud + note), `${hud} | ${note}`);
+const english = await T.open(BOOK, ID, '?lang=en&preset=deja-vu-hit');
+await settle(english);
+await keysOn(english, '#theta', 'ArrowRight', 15);
+let q = await keysOn(english, '#beta', 'ArrowRight', 18);
+hud = await english.locator('#hudSub').innerText(); note = await english.locator('#roNote').innerText();
+check('English, ruler turned: β 90° ≠ saved 0°, fixed I/2 state, HUD reports only the state', near(q.beta, 90) && q.snapshot.beta === 0
+  && matrixNear(q.rho, mixedSaved) && q.cacheHit && await english.locator('#hudSub').isVisible() && hud === fixedHudEn
+  && !/same ruler/i.test(hud + note), `${hud} | ${note}`);
+await english.click('[data-up="on"]'); await settle(english);
+q = await english.evaluate(() => window.DEJAVU_SANDTABLE_DEBUG.state);
+hud = await english.locator('#hudSub').innerText(); note = await english.locator('#roNote').innerText();
+check('English, upgrade: flush and MISS with the state unchanged, HUD reports only the state', q.logicUpgrade && near(q.beta, 90)
+  && q.flush === 1 && !q.cacheHit && matrixNear(q.rho, mixedSaved) && hud === fixedHudEn && !/same ruler/i.test(hud + note), `${hud} | ${note}`);
+await english.context().close();
+// At the narrowest phone width the widest reading (β = 175°) stays on one visible line inside the stage.
+for (const [lang, expected] of [['zh', '再投影保持态不变，β = 175°，态熵仍是 1.000 bit'], ['en', 'Π(σ) = σ, β = 175°; state entropy still 1.000 bit']]) {
+  const narrow = await T.open(BOOK, ID, `?lang=${lang}&preset=deja-vu-hit`, { viewport: { width: 334, height: 720 }, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+  await settle(narrow);
+  await keysOn(narrow, '#theta', 'ArrowRight', 15);
+  q = await keysOn(narrow, '#beta', 'ArrowRight', 35);
+  const g = await narrow.evaluate(() => {
+    const el = document.getElementById('hudSub'), r = el.getBoundingClientRect(), st = document.getElementById('stage').getBoundingClientRect();
+    return { text: el.innerText, lines: Math.round(r.height / parseFloat(getComputedStyle(el).lineHeight)), inside: r.left >= st.left && r.right <= st.right && r.top >= st.top };
+  });
+  check(`${lang} 334 px, β = 175°: fixed I/2 state, HUD on one line inside the stage`, near(q.beta, 175) && q.snapshot.beta === 0 && q.cacheHit
+    && matrixNear(q.rho, mixedSaved) && g.text === expected && g.lines === 1 && g.inside && await narrow.locator('#hudSub').isVisible(), JSON.stringify(g));
+  await narrow.context().close();
+}
 
 // Gram geometry: derive the feasible band from unit vectors, independently of the displayed determinant.
 const detGram = (z) => 81 / 625 - (z - 16 / 25) ** 2;
@@ -421,4 +487,188 @@ check('embedded upgrade figure: OFF restores the saved prior and state', !reset.
 await figure.context().close();
 
 check('all regression interactions: zero console, page and request errors', T.errors.length === 0, T.errors.join(' | '));
+
+// The hit note may claim only what the saved state and the current ruler give. Ground truth below is the Bloch vector
+// of the saved state, r = (0, cos 2θ), projected on n = (sin β, cos β): the entropy from |r|, the outcome weights from
+// r·n, the residual from |Δr|²/2 (no page function, no matrix product). The sweep drives the real sliders over the whole
+// supported grid (θ = 0…90° in steps of 1°, β = 0…175° in steps of 5°) in both languages; at the pure endpoints
+// θ = 0° and 90° a hit has zero state entropy and outcome surprisals 0 and ∞. Then the switch, the learned fact, the
+// lookup address, the keyboard, an in-place language change and the narrowest phone width are driven in turn.
+{
+  const check = T.check, RD = Math.PI / 180, ZERO = 1e-12, errorsAtStart = T.errors.length;
+  const h2 = (p) => [p, 1 - p].reduce((sum, x) => (x > 0 ? sum - x * Math.log2(x) : sum), 0);
+  const truthAt = (theta, beta, o = {}) => {
+    const flush = !!o.flush, addressOk = o.addressOk !== false, b = flush ? 90 : beta;
+    const rz = Math.cos(2 * theta * RD), nx = Math.sin(b * RD), nz = Math.cos(b * RD), along = rz * nz;
+    const after = [along * nx, along * nz], gap = Math.hypot(after[0], after[1] - rz), unchanged = gap <= ZERO;
+    const H = h2((1 + Math.abs(along)) / 2), H0 = h2((1 + Math.abs(rz)) / 2), weights = [(1 + along) / 2, (1 - along) / 2];
+    const ofBloch = (x, z) => [[(1 + z) / 2, x / 2], [x / 2, (1 - z) / 2]];
+    return {
+      theta, beta: b, unchanged, hit: unchanged && !flush && addressOk, H, added: H - H0, mass: gap * gap / 2, weights,
+      surprisal: weights.map((p) => (p > 0 ? -Math.log2(p) + 0 : Infinity)), before: ofBloch(0, rz), after: ofBloch(after[0], after[1])
+    };
+  };
+  const close = (A, B) => Array.isArray(A) && A.every((row, i) => row.every((x, j) => Math.abs(x - B[i][j]) <= ZERO));
+  const shown = (x) => (Number.isFinite(x) ? (Math.abs(x) < 5e-5 ? '0.0000' : x.toFixed(4)) : '∞');
+  const num = (s) => (s.trim() === '∞' ? Infinity : Number(s.replace(/bit/g, '').replaceAll('−', '-').replace('+', '').trim()));
+  const pair = (s) => s.replace(/bit/g, '').split('·').map(num);
+  const within = (a, b, tol = 5.1e-5) => (Number.isFinite(b) ? Math.abs(a - b) <= tol : a === b);
+  // What a note asserts, read from its words in either language: zero or nonzero added entropy, nonzero state quantities,
+  // a zero state entropy, surprisals 0 and ∞, and the identity of a ruler or of a labelled outcome.
+  const claims = (note) => {
+    const n = note.replace(/\s+/g, ' ');
+    return {
+      addedZero: /新增熵[^；;。]*?(?<![不没非])(都是|是|为)\s*0(?!\.?\d)|added entropy[^;.]*?\b(are|is)\s+0(?!\.?\d)/i.test(n),
+      addedNonzero: /新增熵[^；;。]*?(不为|不是|没有变成)\s*0(?!\.?\d)|added entropy[^;.]*?\b(are|is)\s+not\s+0(?!\.?\d)/i.test(n),
+      mentionsState: /态熵|state entropy/i.test(n),
+      stateNonzero: /(态熵|惊讶度)[^；;。]*?(没有变成|不是|不为|并非)\s*0(?!\.?\d)|(state entropy|surprisal)[^;.]*?\b(are|is|were|was)\s+not\s+0(?!\.?\d)|(state entropy|surprisal)[^;.]*?\bnonzero/i.test(n),
+      entropyZero: /态熵[^；;。，,]*?(?<![不没非])(就是|是|为|等于)\s*0(?!\.?\d)|state entropy[^;.,]*?\b(is|was|equals)(\s+already)?\s+0(?!\.?\d)/i.test(n),
+      surprisalZeroInf: /惊讶度[^；;。]*?\b0\b[^；;。]*?∞|惊讶度[^；;。]*?∞[^；;。]*?\b0\b|surprisal[^;.]*?\b0\b[^;.]*?∞|surprisal[^;.]*?∞[^;.]*?\b0\b/i.test(n),
+      identity: /同一把尺子|同一个算子|same ruler|same operator|same map/i.test(n),
+      labelled: /p₊|p₋|同一个结果|same outcome|common outcome/i.test(n)
+    };
+  };
+  const readoutProblems = (r, tr) => {
+    const bad = [];
+    if (Number(r.inTheta) !== tr.theta || r.theta !== tr.theta || Number(r.inBeta) !== tr.beta || Math.abs(r.beta - tr.beta) > ZERO) bad.push(`controls θ=${r.theta} β=${r.beta}`);
+    if (r.t !== 2 || r.pass !== 2) bad.push(`rail t=${r.t}`);
+    if (!close(r.before, tr.before) || !close(r.rho, tr.after)) bad.push('matrices');
+    if (r.hit !== tr.hit || r.ro5 !== (tr.hit ? 'HIT' : 'MISS')) bad.push(`cache ${r.ro5}, independent ${tr.hit ? 'HIT' : 'MISS'}`);
+    if (!within(num(r.ro1), tr.H)) bad.push(`state entropy ${r.ro1} vs ${shown(tr.H)}`);
+    if (!within(num(r.key), tr.added) || !within(num(r.ro2), tr.mass)) bad.push(`added ${r.key} / residual ${r.ro2} vs ${shown(tr.added)} / ${shown(tr.mass)}`);
+    const s = pair(r.ro3);
+    if (s.length !== 2 || !s.every((x, i) => within(x, tr.surprisal[i]))) bad.push(`surprisals ${r.ro3} vs ${tr.surprisal.map(shown).join(' · ')}`);
+    const hudNumbers = (r.sub.match(/-?\d+\.\d+/g) || []).map(Number);
+    if (!r.sub.includes(`β = ${tr.beta}°`) || !(tr.unchanged ? within(hudNumbers[hudNumbers.length - 1], tr.H, 5.1e-4) : within(hudNumbers[hudNumbers.length - 1], tr.mass)))
+      bad.push(`HUD ${r.sub}`);
+    return bad;
+  };
+  const claimProblems = (r, tr) => {
+    const c = claims(r.note), bad = [], finitePositive = tr.surprisal.every((x) => Number.isFinite(x) && x > 0);
+    const sorted = tr.surprisal.slice().sort((a, b) => a - b);
+    if (c.identity) bad.push('names a ruler or operator identity');
+    if (c.labelled) bad.push('names a labelled outcome');
+    if (c.addedZero && !(Math.abs(tr.added) <= ZERO && tr.mass <= ZERO)) bad.push(`claims zero added entropy and residual; independent ${tr.added}, ${tr.mass}`);
+    if (c.addedNonzero && !(tr.added > ZERO && tr.mass > ZERO)) bad.push(`claims nonzero added entropy and residual; independent ${tr.added}, ${tr.mass}`);
+    if (c.stateNonzero && !(tr.H > 0 && finitePositive)) bad.push(`claims nonzero state entropy and surprisals; independent H = ${shown(tr.H)} bit, surprisals ${tr.surprisal.map(shown).join(' · ')}`);
+    if (c.entropyZero && tr.H !== 0) bad.push(`claims zero state entropy; independent H = ${tr.H}`);
+    if (c.surprisalZeroInf && !(sorted[0] === 0 && sorted[1] === Infinity)) bad.push(`claims surprisals 0 and ∞; independent ${tr.surprisal.map(shown).join(' · ')}`);
+    if (c.stateNonzero && (c.entropyZero || c.surprisalZeroInf)) bad.push('contradicts itself');
+    if (c.stateNonzero && (r.ro1.startsWith('0.0000') || r.ro3.includes('∞') || /(^|· )0\.0000/.test(r.ro3))) bad.push(`contradicts the readouts ${r.ro1} | ${r.ro3}`);
+    if (c.entropyZero && !r.ro1.startsWith('0.0000')) bad.push(`contradicts the readout ${r.ro1}`);
+    if (tr.hit && !(c.addedZero && c.mentionsState)) bad.push('a hit note must keep the added entropy apart from the state entropy');
+    return bad;
+  };
+  const readRow = (p) => p.evaluate(() => {
+    const q = window.DEJAVU_SANDTABLE_DEBUG.state, el = (id) => document.getElementById(id), t = (id) => el(id).innerText;
+    return { theta: q.theta, beta: q.beta, t: q.t, pass: q.pass, hit: q.cacheHit, rho: q.rho, before: q.before, inTheta: el('theta').value, inBeta: el('beta').value,
+      note: t('roNote'), ro1: t('ro1'), ro2: t('ro2'), ro3: t('ro3'), ro5: t('ro5'), key: t('roKey'), sub: t('hudSub') };
+  });
+  const sweepRow = (p, theta, betas) => p.evaluate(async ([th, bs]) => {
+    const kit = window.TRV.kit; if (kit.ready) await kit.ready();
+    const el = (id) => document.getElementById(id), t = (id) => el(id).innerText;
+    const set = (id, v) => { el(id).value = String(v); el(id).dispatchEvent(new Event('input', { bubbles: true })); kit.flush(); };
+    set('theta', th);
+    return bs.map((b) => {
+      set('beta', b);
+      const q = window.DEJAVU_SANDTABLE_DEBUG.state;
+      return { theta: q.theta, beta: q.beta, t: q.t, pass: q.pass, hit: q.cacheHit, rho: q.rho, before: q.before, inTheta: el('theta').value, inBeta: el('beta').value,
+        note: t('roNote'), ro1: t('ro1'), ro2: t('ro2'), ro3: t('ro3'), ro5: t('ro5'), key: t('roKey'), sub: t('hudSub') };
+    });
+  }, [theta, betas]);
+
+  const thetas = Array.from({ length: 91 }, (_, k) => k), betas = Array.from({ length: 36 }, (_, k) => 5 * k);
+  const independentHits = [], pureHits = [], observedHits = { zh: [], en: [] };
+  for (const theta of thetas) for (const beta of betas) {
+    const tr = truthAt(theta, beta);
+    if (tr.hit) { independentHits.push(`${theta},${beta}`); if (tr.H === 0) pureHits.push(`${theta},${beta}`); }
+  }
+  for (const lang of ['zh', 'en']) {
+    const p = await T.open(BOOK, ID, `?lang=${lang}&preset=deja-vu-hit`, { locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+    await settle(p);
+    for (const theta of thetas) {
+      const rows = await sweepRow(p, theta, betas), readouts = [], notes = [];
+      rows.forEach((r, k) => {
+        const tr = truthAt(theta, betas[k]);
+        if (r.hit) observedHits[lang].push(`${r.theta},${r.beta}`);
+        const a = readoutProblems(r, tr), b = claimProblems(r, tr);
+        if (a.length) readouts.push(`β=${betas[k]}°: ${a.join('; ')}`);
+        if (b.length) notes.push(`β=${betas[k]}°: ${b.join('; ')} | ${r.note}`);
+      });
+      check(`R-A sweep ${lang} θ=${theta}°: cache verdict, matrices and readouts equal the Bloch computation for all 36 rulers`, readouts.length === 0, readouts.slice(0, 3).join(' || '));
+      check(`R-A sweep ${lang} θ=${theta}°: every claim of the note about added entropy, state entropy and surprisals holds for all 36 rulers`, notes.length === 0, notes.slice(0, 3).join(' || '));
+    }
+    await p.context().close();
+  }
+  check('R-A domain: 91 × 36 = 3276 supported states; the hits are β = 0° or θ = 45° (126 states); only (0°, 0°) and (90°, 0°) are pure; both languages show exactly this hit set',
+    independentHits.length === 126 && JSON.stringify(pureHits) === JSON.stringify(['0,0', '90,0'])
+    && independentHits.every((k) => { const [th, b] = k.split(',').map(Number); return b === 0 || th === 45; })
+    && JSON.stringify(observedHits.zh) === JSON.stringify(independentHits) && JSON.stringify(observedHits.en) === JSON.stringify(independentHits),
+  `${independentHits.length} ${pureHits.join(' ')} ${observedHits.zh.length} ${observedHits.en.length}`);
+
+  // Precedence: the card, the keyboard on the sliders, the switch and the learned fact, the lookup address, a language
+  // change in place. Each step is compared with its own independent state.
+  const press = async (p, selector, key, n = 1) => {
+    await p.focus(selector); for (let k = 0; k < n; k++) await p.keyboard.press(key);
+    await p.evaluate(() => document.activeElement?.blur()); await settle(p); return readRow(p);
+  };
+  const tap = async (p, selector) => { await p.click(selector); await settle(p); return readRow(p); };
+  const lookup = async (p, a) => { await p.evaluate((v) => window.DEJAVU_SANDTABLE_DEBUG.setAddress(v), a); await settle(p); return readRow(p); };
+  const step = (label, r, tr, ok) => {
+    const bad = [...readoutProblems(r, tr), ...claimProblems(r, tr)];
+    check(`R-A precedence: ${label}`, bad.length === 0 && ok, `${bad.join('; ')} | ${r.ro1} | ${r.ro3} | ${r.note}`);
+  };
+  const pageP = await T.open(BOOK, ID, '?lang=zh&preset=deja-vu-hit');
+  await settle(pageP);
+  let r = await readRow(pageP);
+  step('card θ = 30°, β = 0° (interior hit): the state quantities stay nonzero and the note says so', r, truthAt(30, 0), r.hit && claims(r.note).stateNonzero);
+  r = await press(pageP, '#theta', 'Home');
+  step('Home on θ → 0° (pure endpoint hit): H = 0, surprisals 0 · ∞, no nonzero claim', r, truthAt(0, 0),
+    r.hit && r.ro1 === '0.0000 bit' && r.ro3 === '0.0000 · ∞ bit' && !claims(r.note).stateNonzero);
+  r = await tap(pageP, '[data-up="on"]');
+  step('switch ON with the distinguishing fact at θ = 0°: flush, β = 90°, the state changes, MISS', r, truthAt(0, 90, { flush: true }), !r.hit && r.ro5 === 'MISS');
+  r = await tap(pageP, '[data-fact="dup"]');
+  step('redundant fact while ON: β back to 0°, hit at the pure endpoint again', r, truthAt(0, 0), r.hit && !claims(r.note).stateNonzero);
+  r = await press(pageP, '#beta', 'ArrowRight');
+  step('ArrowRight on β → 5° at θ = 0°: the state changes, MISS', r, truthAt(0, 5), !r.hit);
+  await press(pageP, '#beta', 'ArrowLeft');
+  r = await lookup(pageP, 'event-1');
+  step('address mismatch at the pure endpoint: MISS with the state kept', r, truthAt(0, 0, { addressOk: false }), !r.hit && r.ro5 === 'MISS');
+  await lookup(pageP, 'event-0');
+  r = await press(pageP, '#theta', 'End');
+  step('End on θ → 90° (the other pure endpoint): H = 0, surprisals ∞ · 0, no nonzero claim', r, truthAt(90, 0),
+    r.hit && r.ro1 === '0.0000 bit' && r.ro3 === '∞ · 0.0000 bit' && !claims(r.note).stateNonzero);
+  const zhState = JSON.stringify(await pageP.evaluate(() => window.DEJAVU_SANDTABLE_DEBUG.state));
+  r = await tap(pageP, '[data-lang-set="en"]');
+  step('language switched in place at θ = 90°: same state, English note, still no nonzero claim', r, truthAt(90, 0),
+    r.hit && !/[㐀-鿿]/u.test(r.note) && !claims(r.note).stateNonzero
+    && JSON.stringify(await pageP.evaluate(() => window.DEJAVU_SANDTABLE_DEBUG.state)) === zhState);
+  await press(pageP, '#theta', 'ArrowLeft', 45);
+  r = await press(pageP, '#beta', 'ArrowRight', 18);
+  step('θ = 45°, β = 90° by arrow keys (mixed I/2 alias): hit, H = 1 and both surprisals 1, no ruler identity', r, truthAt(45, 90),
+    r.hit && within(num(r.ro1), 1) && r.ro3 === '1.0000 · 1.0000 bit' && claims(r.note).stateNonzero);
+  r = await tap(pageP, '[data-fact="novel"]');
+  step('distinguishing fact at the I/2 alias: flush, MISS although the state is kept', r, truthAt(45, 90, { flush: true }), !r.hit && claims(r.note).addedZero);
+  r = await tap(pageP, '[data-up="off"]');
+  step('switch OFF at θ = 45°: β = 0°, hit again on the mixed state', r, truthAt(45, 0), r.hit && claims(r.note).stateNonzero);
+  await pageP.context().close();
+
+  // The narrowest phone width keeps the endpoint note inside the page without sideways scrolling.
+  for (const lang of ['zh', 'en']) {
+    const narrow = await T.open(BOOK, ID, `?lang=${lang}&preset=deja-vu-hit`, { viewport: { width: 334, height: 720 }, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+    await settle(narrow);
+    for (const [key, theta] of [['Home', 0], ['End', 90]]) {
+      const q = await press(narrow, '#theta', key);
+      const g = await narrow.evaluate(() => {
+        const el = document.getElementById('roNote'), b = el.getBoundingClientRect();
+        return { overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, left: b.left, right: b.right, width: innerWidth };
+      });
+      const bad = [...readoutProblems(q, truthAt(theta, 0)), ...claimProblems(q, truthAt(theta, 0))];
+      check(`R-A ${lang} 334 px, θ = ${theta}°: endpoint hit note true and inside the width`, bad.length === 0 && q.hit && g.overflow <= 0
+        && g.left >= 0 && g.right <= g.width && await narrow.locator('#roNote').isVisible(), `${bad.join('; ')} ${JSON.stringify(g)} | ${q.note}`);
+    }
+    await narrow.context().close();
+  }
+  check('R-A checks: zero console, page and request errors', T.errors.length === errorsAtStart, T.errors.slice(errorsAtStart).join(' | '));
+}
 await T.finish();

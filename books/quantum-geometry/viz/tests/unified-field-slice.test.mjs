@@ -165,6 +165,59 @@ check('the ε slider sets the turn; the left-over angle matches SU(2) and is ≈
 s = await state();
 check('at ε = 90° the left-over turn is 120°', close(s.loop.phi * 180 / Math.PI, 120, 1e-9));
 
+// the title of the loop strip names what is plotted and asserts no growth: in one plane nothing is left over at any ε.
+// One plane at the slider's min, middle and max, two planes on a grid, each against SU(2) and Rodrigues; the title is
+// read in both languages after every control, after a scene change and after the PLAQUETTE card and a slider over it.
+{
+  const R = await page.$eval('#eps', (el) => ({ min: el.min === '' ? 0 : +el.min, max: el.max === '' ? 100 : +el.max, step: +el.step || 1 }));
+  const snap = (v) => Math.min(R.max, Math.max(R.min, R.min + Math.round((v - R.min) / R.step) * R.step));
+  const mid = snap((R.min + R.max) / 2);
+  const title = () => page.textContent('#plotTitle');
+  const metaPhi = async () => { const m = /φ = ([0-9.]+)°/.exec((await page.textContent('#plotMeta')) || ''); return m ? +m[1] : NaN; };
+  const GROWS_ZH = /越大|越小|越多|越少|增大|变大|增长|单调/, GROWS_EN = /bigger|larger|greater|grows|growing|increas|monoton|the more/i;
+  const titleOk = ([zh, en]) => /回路/.test(zh) && /余下的转角/.test(zh) && !GROWS_ZH.test(zh) && /loop/i.test(en) && /turn left over/i.test(en) && !GROWS_EN.test(en);
+  const both = async () => {
+    const zh = await title(); await page.click('[data-lang-set="en"]'); await settle(page);
+    const en = await title(); await page.click('[data-lang-set="zh"]'); await settle(page);
+    return [zh, en];
+  };
+  const titles = new Set();
+  let ok = true, why = '';
+  await page.click('#planeChips [data-plane="one"]');
+  for (const e of [R.min, mid, R.max]) {
+    await setRange('eps', e); s = await seek(4);
+    const q = loopIndep('one', s.eps, s.loop.p0), t = await both(), m = await metaPhi(); titles.add(t.join(' | '));
+    const good = s.plane === 'one' && close(s.eps, e, 1e-9) && vclose(s.loop.U, q.q, 1e-12) && close(Math.abs(s.loop.U[0]), 1, 1e-12) && q.phi < 1e-6 && s.loop.phi < 1e-6
+      && vclose(s.loop.r, s.loop.p0, 1e-12) && Math.abs(m) < 0.005 && titleOk(t);
+    if (!good) { ok = false; why = `ε = ${e}: φ = ${s.loop.phi}, strip φ = ${m}, ${t.join(' | ')}`; }
+  }
+  check(`ONE PLANE at ε = ${R.min}°, ${mid}°, ${R.max}°: U = 1 (SU(2) and page), the arrow comes home, the strip reads φ = 0.00°, and its title (中/EN) claims no growth`, ok, why);
+  ok = true; why = '';
+  await page.click('#planeChips [data-plane="two"]');
+  const grid = [...new Set([R.min, 15, 30, mid, 60, 75, R.max].map(snap))];
+  for (const e of grid) {
+    await setRange('eps', e); s = await seek(4);
+    const q = loopIndep('two', s.eps, s.loop.p0), t = await both(), m = await metaPhi(); titles.add(t.join(' | '));
+    const good = s.plane === 'two' && close(s.eps, e, 1e-9) && vclose(s.loop.U, q.q, 1e-12) && close(s.loop.phi, q.phi, 1e-12) && vclose(s.loop.r, q.r, 1e-12)
+      && Math.abs(m - q.phi * 180 / Math.PI) <= 0.0051 && titleOk(t);
+    if (!good) { ok = false; why = `ε = ${e}: φ = ${s.loop.phi} vs ${q.phi}, strip φ = ${m}, ${t.join(' | ')}`; }
+  }
+  check(`TWO PLANES at ε = ${grid.join('°, ')}°: U, φ and the arrow match SU(2) and Rodrigues, the strip reads that φ, and its title (中/EN) claims no growth`, ok, why);
+  check('the loop strip carries one title for both planes and every ε', titles.size === 1, [...titles].join(' / '));
+  const loopTitle = [...titles][0];
+  await page.click('#sceneChips [data-scene="clock"]'); s = await state();
+  const other = await title();
+  await page.click('#sceneChips [data-scene="loop"]'); s = await state();
+  const back = await both();
+  check('scene change: the clock strip has its own title, and back in the loop the loop title is the neutral one again', s.scene === 'loop' && other !== back[0] && titleOk(back) && back.join(' | ') === loopTitle, `${other} | ${back.join(' | ')}`);
+  s = await pick('plaquette'); s = await seek(4);
+  const onCard = await both();
+  await setRange('eps', mid); s = await state();
+  const over = await both();
+  check('PLAQUETTE, then the ε slider over it: the title stays the neutral loop title in both languages', s.preset === null && s.plane === 'two' && close(s.eps, mid, 1e-9)
+    && titleOk(onCard) && titleOk(over) && onCard.join(' | ') === loopTitle && over.join(' | ') === loopTitle, `${onCard.join(' | ')} / ${over.join(' | ')}`);
+}
+
 /* ---------- horizon ---------- */
 s = await pick('polytope');
 check('POLYTOPE: horizon scene with λ = 0', s.scene === 'horizon' && s.horizon.lam === 0 && s.horizon.cut === 0);

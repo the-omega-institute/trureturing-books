@@ -2,7 +2,7 @@
 Chapter 34 at a glance: every point of a latitude circle casts one shadow on the polar axis; the
 hidden plane and its normal axis; the golden slice and the internal direction it cannot see.
 
-Panel I: the latitude circle at θ = 60°; v₁ (φ = 0, filled) and v₂(φ) for φ = 90°, 180°, 270°
+Panel I: the latitude circle at polar angle θ = 60°; v₁ (φ = 0, filled) and v₂(φ) for φ = 90°, 180°, 270°
 (hollow) all project to the one point cos θ = 1/2 on the polar axis (asserted in _ch34). Panel II:
 the equatorial disc e₁∧e₂ with the 90° turn of the octant holonomy, and its normal +e₃ where the
 observer stands. Panel III: the golden cut-and-project scheme in the lattice plane Z² (b right, a
@@ -16,12 +16,12 @@ from _ch34 import golden_slice, hidden_plane, shadow_sphere
 SIZE = (740, 262)
 WRAP = True
 ALT = {
-    "zh": "三栏。第一栏：一颗球，紫色竖轴上站着琥珀色的观察者 O；纬度 60° 的品红纬圈上有一个实心点和三个空心圈，"
+    "zh": "三栏。第一栏：一颗球，紫色竖轴上站着琥珀色的观察者 O；极角 θ = 60° 的品红纬圈上有一个实心点和三个空心圈，"
           "四条青色虚线都汇到竖轴上同一个青色点 cos θ。第二栏：同一颗球，赤道面是一块品红的圆盘，盘里一段品红弧从 e₁ 转到 e₂，标着 90°；"
           "琥珀色的观察者 O 站在圆盘的法轴顶端。第三栏：方格点阵上一条琥珀色的斜线 E∥，两侧是一条青色的窄带；带里的点是青色的，"
           "各自沿品红短线落到斜线上，品红虚线是与斜线垂直的内部方向 E⊥。",
     "en": "Three panels. Panel I: a sphere with the amber observer O on the violet vertical axis; on the magenta latitude "
-          "circle at 60° sit one filled dot and three hollow rings, and four cyan dashed lines all meet at the one cyan "
+          "circle at polar angle θ = 60° sit one filled dot and three hollow rings, and four cyan dashed lines all meet at the one cyan "
           "point cos θ on the axis. Panel II: the same sphere with the equatorial plane as a magenta disc; a magenta arc "
           "inside it turns from e₁ to e₂, marked 90°; the amber observer O stands at the top of the disc's normal axis. "
           "Panel III: a square lattice with an amber slanted line E∥ inside a narrow cyan strip; the points in the strip "

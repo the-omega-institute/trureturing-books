@@ -12,25 +12,31 @@
   const sieve = (N) => { const s = new Uint8Array(N + 1), out = []; for (let i = 2; i <= N; i++) { if (!s[i]) { out.push(i); for (let j = i * i; j <= N; j += i) s[j] = 1; } } return out; };
   const ODD = sieve(97).slice(1), ALL = sieve(3000).slice(1);
   const S = { scene: 'pell', d: 2, curve: 'cm', sato: false };
-  const sci = (x) => { if (x === 0) return '0'; const e = Math.floor(Math.log10(Math.abs(x))), m = x / Math.pow(10, e); return Math.abs(e) < 3 ? x.toPrecision(3) : `${m.toFixed(2)}×10${String(e).replace('-', '−').split('').map((c) => ({ '−': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }[c])).join('')}`; };
+  const sup = (e) => String(e).replace('-', '−').split('').map((c) => ({ '−': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }[c])).join('');
+  const sci = (x) => { if (x === 0) return '0'; const e = Math.floor(Math.log10(Math.abs(x))), m = x / Math.pow(10, e); return Math.abs(e) < 3 ? x.toPrecision(3) : `${m.toFixed(2)}×10${sup(e)}`; };
   const signed = (v) => (v > 0 ? '+' : '−') + String(v < 0 ? -v : v);
 
   /* ---------- pell: continued fraction of √d, exact ---------- */
   const KP = 14;
   function isqrt(n) { let x = BigInt(Math.floor(Math.sqrt(Number(n)))); while (x * x > n) x--; while ((x + 1n) * (x + 1n) <= n) x++; return x; }
+  /** The error along the line, |m/n − √d|, read from the exact gap: m/n − √d = (m² − d·n²) / (n·(m + n·√d)). Subtracting
+      m/n and √d as floating-point numbers cancels every digit once they agree to double precision (35 of the 345
+      convergents here would read exactly 0); this quotient keeps full relative precision, and its numerator is never 0. */
+  const lineError = (m, n, delta, root) => Math.abs(Number(delta)) / (Number(n) * (Number(m) + Number(n) * root));
   const pellCache = {};
   function pell(d) {
     if (pellCache[d]) return pellCache[d];
-    const D = BigInt(d), a0 = isqrt(D), quot = [a0], list = [];
+    const D = BigInt(d), a0 = isqrt(D), quot = [a0], list = [], root = Math.sqrt(d);
+    const entry = (k, m, n) => { const delta = m * m - D * n * n; return { k, m, n, delta, err: lineError(m, n, delta, root) }; };
     let mm = 0n, den = 1n, a = a0, p1 = 1n, p0 = a0, q1 = 0n, q0 = 1n, period = 0;
-    list.push({ k: 0, m: p0, n: q0, delta: p0 * p0 - D * q0 * q0 });
+    list.push(entry(0, p0, q0));
     for (let k = 1; k <= KP + 12; k++) {
       mm = den * a - mm; den = (D - mm * mm) / den; a = (a0 + mm) / den; quot.push(a);
       if (!period && a === 2n * a0) period = k;
       [p1, p0] = [p0, a * p0 + p1]; [q1, q0] = [q0, a * q0 + q1];
-      if (k <= KP) list.push({ k, m: p0, n: q0, delta: p0 * p0 - D * q0 * q0 });
+      if (k <= KP) list.push(entry(k, p0, q0));
     }
-    return (pellCache[d] = { d, list, quot: quot.map(Number), period, root: Math.sqrt(d) });
+    return (pellCache[d] = { d, list, quot: quot.map(Number), period, root });
   }
   /** Least solution of m² − d·n² = −1, or null when the period is even (then none exists). */
   function negativePell(d) { const c = pell(d); if (c.period % 2 === 0) return null; const s = c.list.find((x) => x.delta === -1n); return s ? [s.m, s.n] : null; }
@@ -118,7 +124,7 @@
       if (!TRV.thumbMode) { c.fillStyle = P.dim; c.font = `11.5px ${TRV.fonts.body}`; c.fillText(L(`两条色带的末端，放大到一格一格：差 ${diff > 0 ? diff : -diff} 格`, `the ends of the two bands, cell by cell: ${diff > 0 ? diff : -diff} cell${Math.abs(diff) === 1 ? '' : 's'} apart`), x0 + bw / 2, my + 2 * cs + 72); }
     }
     $('hudBig').textContent = `√${S.d} ≈ ${cur.m}/${cur.n}`;
-    $('hudSub').textContent = L(`第 ${k} 个渐近分数：沿线量差 ${sci(Math.abs(Number(cur.m) / Number(cur.n) - C.root))}，按面积量差 ${signed(cur.delta)} 格`, `Convergent ${k}: ${sci(Math.abs(Number(cur.m) / Number(cur.n) - C.root))} off along the line, ${signed(cur.delta)} cell${cur.delta === 1n || cur.delta === -1n ? '' : 's'} off in area`);
+    $('hudSub').textContent = L(`第 ${k} 个渐近分数：沿线量差 ${sci(cur.err)}，按面积量差 ${signed(cur.delta)} 格`, `Convergent ${k}: ${sci(cur.err)} off along the line, ${signed(cur.delta)} cell${cur.delta === 1n || cur.delta === -1n ? '' : 's'} off in area`);
   }
 
   function drawSplit() {
@@ -262,9 +268,13 @@
   function drawPlots() {
     const k = step(), A = $('plotA'), B = $('plotB');
     if (S.scene === 'pell') {
-      const C = pell(S.d), g = kit.plot(A, { x: [0, KP], y: [1e-13, 100], logY: true, pad: [44, 10, 10, 22] });
-      g.axes({ yTicks: [[1, '1'], [1e-4, '10⁻⁴'], [1e-8, '10⁻⁸'], [1e-12, '10⁻¹²']], xTicks: [0, 2, 4, 6, 8, 10, 12, 14] });
-      const err = C.list.map((q) => [q.k, Math.max(Math.abs(Number(q.m) / Number(q.n) - C.root), 1e-16)]), del = C.list.map((q) => [q.k, Math.abs(Number(q.delta))]);
+      const C = pell(S.d), err = C.list.map((q) => [q.k, q.err]), del = C.list.map((q) => [q.k, Math.abs(Number(q.delta))]);
+      // the axis is read off this d's data over the whole rail: a decade below the smallest error, two above the largest gap
+      const vals = err.concat(del).map((q) => q[1]), lo = Math.floor(Math.log10(Math.min(...vals))) - 1, hi = Math.floor(Math.log10(Math.max(...vals))) + 2;
+      const every = [1, 2, 4, 5, 8, 10, 15, 20].find((s) => Math.floor(-lo / s) <= 3) || Math.ceil(-lo / 3), yTicks = [];
+      for (let e = 0; e >= lo; e -= every) yTicks.push([Math.pow(10, e), e ? `10${sup(e)}` : '1']);
+      const g = kit.plot(A, { x: [0, KP], y: [Math.pow(10, lo), Math.pow(10, hi)], logY: true, pad: [44, 10, 10, 22] });
+      g.axes({ yTicks, xTicks: [0, 2, 4, 6, 8, 10, 12, 14] });
       g.hline(1, P.amber, { dash: [4, 3], alpha: 0.7 }); g.line(err, P.cyan); g.line(del, P.magenta); del.forEach((q) => g.dot(q[0], q[1], P.magenta, 2.6)); g.vline(k, P.amber); g.dot(k, err[k][1], P.cyan, 4.5); g.dot(k, del[k][1], P.magenta, 4.5);
       g.legend([[P.magenta, L('面积缺口 |m² − d·n²|', 'area gap |m² − d·n²|')], [P.cyan, L('线上误差 |m/n − √d|', 'error on the line |m/n − √d|')]], { bottom: true, right: false });
       $('pATitle').textContent = L('线上趋于零，面积上不低于 1', 'To zero on the line, never below 1 in area'); $('pAMeta').textContent = '';
@@ -315,7 +325,7 @@
       const C = pell(S.d), q = C.list[k], neg = negativePell(S.d);
       $('roKeyL').textContent = L('面积上的缺口 m² − d·n²', 'the gap in area, m² − d·n²');
       $('roKey').innerHTML = `<span class="${q.delta > 0n ? 'c-cy' : 'c-mg'}">${signed(q.delta)}</span> <span class="chk">${L('不是 0', 'not 0')} ✓</span>`; $('roKeySub').textContent = `${q.m}² − ${S.d}·${q.n}²`;
-      set(1, L('渐近分数 m/n', 'convergent m/n'), `${q.m}/${q.n}`); set(2, L('线上误差 |m/n − √d|', 'error on the line |m/n − √d|'), sci(Math.abs(Number(q.m) / Number(q.n) - C.root)));
+      set(1, L('渐近分数 m/n', 'convergent m/n'), `${q.m}/${q.n}`); set(2, L('线上误差 |m/n − √d|', 'error on the line |m/n − √d|'), sci(q.err));
       set(3, L('连分数', 'continued fraction'), `[${C.quot[0]}; ${C.quot.slice(1, C.period + 1).join(', ')}, …] <small>${L('周期', 'period')} ${C.period}</small>`);
       set(4, 'm² − d·n² = −1', neg ? `${neg[0]}² − ${S.d}·${neg[1]}² <span class="chk">✓</span>` : L('无解', 'no solution'));
       $('roNote').textContent = neg ? L(`周期 ${C.period} 是奇数：差值能取到 −1，再走一个周期翻回 +1。`, `The period ${C.period} is odd: the gap reaches −1, and one more period flips it back to +1.`) : L(`周期 ${C.period} 是偶数：±1 两个值里只出现 +1，差值永远到不了 −1。`, `The period ${C.period} is even: of the two values ±1 only +1 occurs; the gap never reaches −1.`);
@@ -421,7 +431,7 @@
   window.PYTHAGORAS_DEBUG = {
     get state() {
       const k = step(), C = pell(S.d), q = C.list[Math.min(k, KP)], p = prime(), E = count(S.curve, p), neg = negativePell(S.scene === 'pell' ? S.d : p);
-      return { satoStage: satoMode(), hudBig: $('hudBig').textContent, scene: S.scene, step: k, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, d: S.d, m: String(q.m), n: String(q.n), delta: String(q.delta), period: C.period,
+      return { satoStage: satoMode(), hudBig: $('hudBig').textContent, scene: S.scene, step: k, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, d: S.d, m: String(q.m), n: String(q.n), delta: String(q.delta), err: q.err, errs: C.list.map((x) => x.err), period: C.period,
         deltas: C.list.map((x) => String(x.delta)), quot: C.quot.slice(0, 12), negPell: neg ? neg.map(String) : null, p, two: twoSquares(p), roots: rootsOfMinusOne(p), curve: S.curve, count: E.n, a: E.a, cos: E.cos, npoints: points(S.curve, p).length,
         chi: spins(S.curve, p), bad: isBad(S.curve, p), singular: isBad(S.curve, p) ? singular(S.curve, p) : null, angles: angles(p) };
     },
