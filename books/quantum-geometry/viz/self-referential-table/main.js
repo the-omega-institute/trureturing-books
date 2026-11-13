@@ -20,6 +20,7 @@
   'use strict';
   const { kit, L } = TRV, { clamp, fix, v3, TAU } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
+  const setText = (id, value) => { const el = $(id); if (el.textContent !== value) el.textContent = value; };
   const MINUS = '−', M = 8, DEG = Math.PI / 180, HEAL_SAFE = (Math.sqrt(3) - 1) / 2;
 
   /* ---------- linear algebra ---------- */
@@ -486,7 +487,9 @@
   /** The three boxes of the stage (CSS pixels of the canvas): the ball on the left (wide) or on top (narrow). */
   function layoutOf(W, H, words) {
     if (!words) return { mode: 'cover', solid: { x: W * 0.02, y: H * 0.08, w: W * 0.36, h: H * 0.84 }, table: { x: W * 0.4, y: H * 0.08, w: W * 0.33, h: H * 0.84 }, panel: { x: W * 0.76, y: H * 0.1, w: W * 0.21, h: H * 0.8 } };
-    const st = $('stage').getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
+    const stEl = $('stage');
+    stEl.classList.remove('legend-right');
+    const st = stEl.getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
     if (compact()) {                          // a phone's cited figure: the ball as large as the width allows on the left,
       // the table over its side panel in the column on the right, between the title and the legend
       const top = below($('hudBig').parentElement) + 6, bottom = $('legend').offsetHeight + 22;
@@ -494,8 +497,6 @@
       const w3 = Math.round(bx.w * 0.6), rx = bx.x + w3 + 8, rw = bx.w - w3 - 8, side = Math.min(rw, bx.h * 0.56);
       return { mode: 'compact', solid: { x: bx.x, y: bx.y, w: w3, h: bx.h }, table: { x: rx, y: bx.y, w: rw, h: side }, panel: { x: rx, y: bx.y + side + 8, w: rw, h: bx.h - side - 8 } };
     }
-    const stEl = $('stage');
-    stEl.classList.remove('legend-right');    // the legend is measured across the whole stage first
     const top = Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10, bottom = Math.max(18, $('legend').offsetHeight + 20);
     const bx = { x: 18, y: top, w: W - 36, h: Math.max(80, H - top - bottom) };
     const wide = bx.w >= 520 && bx.w >= bx.h * 1.2;
@@ -577,10 +578,10 @@
 
   /* ---------- words ---------- */
   const LEGEND = {
-    read: [['cy box', '正的格、正的乘积；圆盘上行读为正的一半', 'positive cells and products; the half disc the row reads as positive'], ['mg box', '负的格、负的乘积；读为负的一半', 'negative cells and products; the half read as negative'], ['am', '选中的格、刚加进来的一项；列在行上的影子', 'the chosen cell, the term just added; the column’s shadow on the row'], ['dm', '虚线：行（尺子）与列（被量）', 'dashed: the row (ruler) and the column (measured)']],
-    rank: [['cy box', '正的格、对角格（越亮越大）；球里：像', 'positive cells, diagonal cells (brighter is larger); in the ball: the image'], ['mg box', '负的格；读成 0 的方向', 'negative cells; directions read as 0'], ['am', '对角格之和（迹）；刚写进的一行', 'the sum of the diagonal (trace); the newest row'], ['dm', '虚线框：对角线', 'dashed: the diagonal']],
+    read: [['cy box', '正的格、正的乘积；圆盘上行读为正的一半', 'positive cells/products; positive half disc'], ['mg box', '负的格、负的乘积；读为负的一半', 'negative cells/products; negative half disc'], ['am', '选中的格、刚加进来的一项；列在行上的影子', 'chosen cell/term; column’s shadow on row'], ['dm', '虚线：行（尺子）与列（被量）', 'dashed: row ruler, measured column']],
+    rank: [['cy box', '正的格、对角格（越亮越大）；球里：像', 'positive/diagonal cells; brighter = larger; ball: image'], ['mg box', '负的格；读成 0 的方向', 'negative cells; directions read as 0'], ['am', '对角格之和（迹）；刚写进的一行', 'the sum of the diagonal (trace); the newest row'], ['dm', '虚线框：对角线', 'dashed: the diagonal']],
     heal: [['cy box', '正的格；½ 以上的本征值及其方向', 'positive cells; eigenvalues above ½, their directions'], ['mg box', '负的格；½ 以下的本征值及其方向', 'negative cells; eigenvalues below ½, their directions'], ['am', '被碰的格、当前这一步', 'the knocked cell, the current step']],
-    perp: [['cy box', '读出 Tψ、留在表里的 cos θ；圆盘：像', 'the reading Tψ, the cos θ kept by the table; the disc: the image'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']]
+    perp: [['cy box', '读出 Tψ、留在表里的 cos θ；圆盘：像', 'Tψ = cos θ in the image; disc: image'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']]
   };
   const setLabel = (id, zh, en) => { const h = `<span class="zh">${zh}</span><span class="en">${en}</span>`; if ($(id)._h !== h) { $(id).innerHTML = h; $(id)._h = h; } };
   const ex = (x) => (x === 0 ? '0' : x.toExponential(1).replace('-', MINUS));
@@ -629,7 +630,7 @@
     setLabel('ro3Label', '迹（舞台上这张表）', 'Trace (the table on the stage)'); $('ro3').textContent = fix(trace(A), 4);
     setLabel('ro4Label', '‖T² − T‖ · ‖T − Tᵀ‖（舞台上这张表）', '‖T² − T‖ · ‖T − Tᵀ‖ (the table on the stage)'); $('ro4').textContent = `${ex(idemErr(A))} · ${ex(symErr(A))}`;
     $('roAside').textContent = sc === 'heal' ? 'Tₘ₊₁ = 3Tₘ² − 2Tₘ³' : 'T² = T, Tᵀ = T';
-    $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note;
+    setText('hudBig', big); setText('hudSub', hud); $('roNote').textContent = note;
     $('pillSize').querySelector('strong').textContent = `${S.N} × ${S.r}`;
     $('pillErr').querySelector('strong').textContent = ex(idemErr(A));
     const leg = LEGEND[sc].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
@@ -637,7 +638,7 @@
     $('oRank').textContent = String(S.r);
   }
 
-  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail ---------- */
   const RAIL = {

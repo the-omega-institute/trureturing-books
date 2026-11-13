@@ -21,6 +21,7 @@
   'use strict';
   const { kit, L } = TRV, { fix, sgn, clamp } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
+  const setText = (id, value) => { const el = $(id); if (el.textContent !== value) el.textContent = value; };
   const DEG = Math.PI / 180, TAU = Math.PI * 2;
   const S = { scene: 'anchor', fam: 'fine', w: 0.4, path: [0, 1], lamDream: 0.1, r: 1, phi: 90 };
   const SC = {
@@ -557,7 +558,7 @@
     if (S.scene === 'anchor') {
       const lam = lamNow(), c0 = crossNorm(anchored(0, S.fam), S.fam), c = crossNorm(m.rho, S.fam), ent = H(eig);
       setHud(L(`锚点 · λ = ${fix(lam, 2)}`, `Anchors · λ = ${fix(lam, 2)}`), `λ = ${fix(lam, 2)}`);
-      $('hudSub').textContent = L(`${S.fam === 'fine' ? '锚点：逐个位置' : '锚点：躯体 | 其余三处'} · 跨块相干剩 ${fix(100 * (1 - lam), 0)}% · 对角不动 · 熵 S = ${fix(ent, 2)}`, `${S.fam === 'fine' ? 'anchors: every place' : 'anchors: body | the other three'} · ${fix(100 * (1 - lam), 0)}% of the cross-block coherence left · diagonal fixed · entropy S = ${fix(ent, 2)}`);
+      setText('hudSub', L(`${S.fam === 'fine' ? '锚点：逐个位置' : '锚点：躯体 | 其余三处'} · 跨块相干剩 ${fix(100 * (1 - lam), 0)}% · 对角不动 · 熵 S = ${fix(ent, 2)}`, `${S.fam === 'fine' ? 'anchors: every place' : 'anchors: body | the other three'} · ${fix(100 * (1 - lam), 0)}% of the cross-block coherence left · diagonal fixed · entropy S = ${fix(ent, 2)}`));
       $('roKeyL').textContent = L('跨块相干的模长', 'modulus of the cross-block coherence');
       $('roKey').textContent = fix(c, 3); $('roKeySub').textContent = L(` = (1 − λ) × 出发时的 ${fix(c0, 3)}`, ` = (1 − λ) × ${fix(c0, 3)} at the start`);
       setRo(1, '锚点强度 λ', 'anchor strength λ', fix(lam, 3));
@@ -574,7 +575,7 @@
       const z = m.rho[0][1], k = Math.min(4, Math.floor(clock.t + 1e-9)), c = overlap(), prod = cmul(z, [2, 0]);
       setHud(L(`记录 · ρ₀₁ = ${fmtC(z, 2)}`, `Records · ρ₀₁ = ${fmtC(z, 2)}`), `ρ₀₁ = ${fmtC(z, 2)}`);
       const stepNow = clock.t <= 1e-9 ? 0 : Math.min(4, Math.ceil(clock.t - 1e-9));
-      $('hudSub').textContent = `${L(...STEP_TEXT[stepNow])} · ${L(`每份记录的重叠 c = ${fmtC(c, 2)}`, `overlap of each record c = ${fmtC(c, 2)}`)}`;
+      setText('hudSub', `${L(...STEP_TEXT[stepNow])} · ${L(`每份记录的重叠 c = ${fmtC(c, 2)}`, `overlap of each record c = ${fmtC(c, 2)}`)}`);
       $('roKeyL').textContent = L('非对角元 ρ₀₁', 'off-diagonal entry ρ₀₁');
       $('roKey').textContent = fmtC(z, 3); $('roKeySub').textContent = L(' 出发时 1/2', ' 1/2 at the start');
       setRo(1, '已完成的步数', 'steps done', `${k} / 4`);
@@ -591,7 +592,7 @@
     } else {
       const s = clock.t, keep = m.rho[0][0][0], pf = 1 - keep, pAt = (l) => 1 - anchored(l, 'fine')[0][0][0];
       setHud(L(`醒来 · 遗忘 ${fix(pf, 2)}`, `Waking · forgotten ${fix(pf, 2)}`), L(`遗忘 ${fix(pf, 2)}`, `forgotten ${fix(pf, 2)}`));
-      $('hudSub').textContent = L(`读出 P₀ = |x₀⟩⟨x₀| · 进度 ${fix(100 * s, 0)}% · 梦中 λ = ${fix(S.lamDream, 2)}`, `readout P₀ = |x₀⟩⟨x₀| · ${fix(100 * s, 0)}% done · dream λ = ${fix(S.lamDream, 2)}`);
+      setText('hudSub', L(`读出 P₀ = |x₀⟩⟨x₀| · 进度 ${fix(100 * s, 0)}% · 梦中 λ = ${fix(S.lamDream, 2)}`, `readout P₀ = |x₀⟩⟨x₀| · ${fix(100 * s, 0)}% done · dream λ = ${fix(S.lamDream, 2)}`));
       $('roKeyL').textContent = L('遗忘的权重 1 − Tr(P₀ρ)', 'forgotten weight 1 − Tr(P₀ρ)');
       $('roKey').textContent = fix(pf, 3); $('roKeySub').textContent = L(' = 1 − |⟨x₀|Ψ⟩|²', ' = 1 − |⟨x₀|Ψ⟩|²');
       setRo(1, '读出进度', 'readout progress', `${fix(100 * s, 0)}%`);
@@ -607,7 +608,7 @@
     const leg = LEG[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
   }
-  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plotA')]);
+  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plotA')]);
 
   /* ---------- controls ---------- */
   let stopAt = null;

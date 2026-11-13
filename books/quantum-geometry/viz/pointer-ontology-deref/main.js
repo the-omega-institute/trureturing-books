@@ -19,6 +19,7 @@
   'use strict';
   const { kit, L } = TRV, { clamp } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
+  const setText = (id, value) => { const el = $(id); if (el.textContent !== value) el.textContent = value; };
 
   /* ---------- the three address spaces ---------- */
   const n = 6, N = 1 << n;                                   // 64 cells, depth 6
@@ -546,7 +547,7 @@
     setLabel('ro3Label', '树的深度 log₂N', 'Depth of the tree log₂N'); $('ro3').textContent = String(depthOf(N));
     setLabel('ro4Label', `页表 ${idxStr()}：已走的跳`, `Page table ${idxStr()}: hops walked`);
     $('ro4').textContent = hops.slice(0, done).map((h) => `${hex(h.base)}[${h.slot}] → ${hex(h.value)}`).join(' · ') || '—';
-    $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note;
+    setText('hudBig', big); setText('hudSub', hud); $('roNote').textContent = note;
     $('pillSteps').querySelector('strong').textContent = String(s);
     const leg = (S.scene === 'table' ? LEGEND_TABLE : LEGEND).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
@@ -561,7 +562,7 @@
     get cx() { return LAY.W ? LAY.cx / LAY.W : 0.5; }, get cy() { return LAY.H ? LAY.cy / LAY.H : 0.5; },
     get radius() { return LAY.W ? LAY.unit / Math.min(LAY.W, LAY.H) : 0.36; }
   });
-  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail: steps ---------- */
   const RAIL = { scan: () => ({ max: scanSteps(), rate: Math.max(1.5, scanSteps() / 6) }), tree: () => ({ max: n, rate: 1.3 }), table: () => ({ max: S.idx.length, rate: 0.9 }) };
