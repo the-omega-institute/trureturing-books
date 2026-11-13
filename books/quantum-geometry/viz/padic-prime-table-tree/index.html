@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//PADIC · p-adic zero-carry lookup trees, prime observer expansion &amp; blocking samsara">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//PADIC p 进零进位查表树 · 素数观察者扩表与阻断化光轮回</title>
+<meta name="description" content="p 进数作为零进位前缀查表树 Z/p^k Z：在目标状态空间 N = 1024 = 2^10 上，观察者素数 p 从 2 扩表至 1031 时，水平扇出 p 展宽、串行查表深度 K(p) = ⌈10/log₂ p⌉ 从 10 压平至 1、首层逃逸碰撞对归零；配合 BigInt 亨泽尔 O(1) 提根、阿代尔乘积守恒 |x|_∞·∏|x|_p = 1 与欧几里得无穷离散素数阶梯阻断 p_∞ 连续进位轮回。p-adic numbers as zero-carry prefix lookup trees Z/p^k Z: across N = 1024 = 2^10 states, expanding observer prime p from 2 to 1031 widens fan-out p, collapses serial lookup depth K(p) = ⌈10/log₂ p⌉ from 10 to 1, and zeroes first-layer collisions, paired with exact BigInt Hensel O(1) root lifting, Adelic product balance |x|_∞·∏|x|_p = 1, and Euclid's infinite discrete prime ladder blocking the continuous p_∞ carry cliff.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="padic-prime-table-tree">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//PADIC">ORTHO<b>//</b>PADIC</h1>
+      <div class="tagline">
+        <span class="zh">p 进零进位查表树 · <em>素数 p 扩大即扩表：树宽展平树深，无穷离散素数阶梯阻断 p<sub>∞</sub> 连续进位轮回</em></span>
+        <span class="en">p-adic lookup trees · <em>expanding prime p widens fan-out, collapses serial depth &amp; blocks the p<sub>∞</sub> carry cliff</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="pillPrime"><span class="zh">观察者</span><span class="en">PRIME</span> <strong>p = 7</strong></span>
+      <span class="pill" id="pillDepth"><span class="zh">树深</span><span class="en">DEPTH</span> <strong>K = 4</strong></span>
+      <span class="pill" id="pillEscape"><span class="zh">首层碰撞</span><span class="en">COLLISIONS</span> <strong>74,387</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="cleavage" aria-pressed="false"><span class="code">BINARY-CLEAVAGE</span><span class="cn zh">胚胎二分卵裂：p=2 十层与分歧奇异枝</span><span class="cn en">Binary cleavage: p=2, K=10 &amp; ramified root</span></button>
+        <button class="preset" data-preset="hensel" aria-pressed="true"><span class="code">HENSEL-LIFT</span><span class="cn zh">亨泽尔零进位查表：p=7 逐层 O(1) 提根</span><span class="cn en">Hensel lift: p=7 O(1) digit lookup for x²=2</span></button>
+        <button class="preset" data-preset="flatten" aria-pressed="false"><span class="code">FANOUT-FLATTEN</span><span class="cn zh">扩表压平树深：p=31 展宽扇出至 K=3</span><span class="cn en">Widening fan-out: p=31 flattens tree to K=3</span></button>
+        <button class="preset" data-preset="unramified" aria-pressed="false"><span class="code">DIRECT-READ</span><span class="cn zh">越过 N=1024：p=1031 单层零碰撞直读</span><span class="cn en">Past N=1024: p=1031 K=1 zero-escape read</span></button>
+        <button class="preset" data-preset="adelic" aria-pressed="false"><span class="code">ADELIC-LEDGER</span><span class="cn zh">多素数解耦与阿代尔乘积守恒 ≡ 1</span><span class="cn en">CRT decoupling &amp; Adelic product ≡ 1</span></button>
+        <button class="preset" data-preset="euclid" aria-pressed="false"><span class="code">EUCLID-VS-CLIFF</span><span class="cn zh">欧几里得无穷素数梯 vs p_∞ 进位轮回崖</span><span class="cn en">Euclid prime ladder vs p_∞ carry cliff</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">素数观察者与亨泽尔提根</span><span class="en">Prime observer &amp; Hensel lift</span><span class="aside">Z/pᵏZ</span></h2>
+      <div class="chips prime-grid" id="primeChips" role="group" aria-label="观察者素数选择" data-aria-en="Prime observer selector">
+        <button class="chip" data-prime="0" aria-pressed="false"><span class="m">2</span></button>
+        <button class="chip" data-prime="1" aria-pressed="false"><span class="m">3</span></button>
+        <button class="chip" data-prime="2" aria-pressed="false"><span class="m">5</span></button>
+        <button class="chip" data-prime="3" aria-pressed="true"><span class="m">7</span></button>
+        <button class="chip" data-prime="4" aria-pressed="false"><span class="m">11</span></button>
+        <button class="chip" data-prime="5" aria-pressed="false"><span class="m">13</span></button>
+        <button class="chip" data-prime="6" aria-pressed="false"><span class="m">17</span></button>
+        <button class="chip" data-prime="7" aria-pressed="false"><span class="m">23</span></button>
+        <button class="chip" data-prime="8" aria-pressed="false"><span class="m">31</span></button>
+        <button class="chip" data-prime="9" aria-pressed="false"><span class="m">97</span></button>
+        <button class="chip" data-prime="10" aria-pressed="false"><span class="m">257</span></button>
+        <button class="chip" data-prime="11" aria-pressed="false"><span class="m">1031</span></button>
+        <button class="chip cliff-chip" data-prime="12" aria-pressed="false"><span class="m">p<sub>∞</sub></span> <span class="zh">连续崖</span><span class="en">cliff</span></button>
+      </div>
+      <div class="chips" id="polyChips" role="group" aria-label="检验多项式 f(x)" data-aria-en="Polynomial f(x) for Hensel inspector">
+        <button class="chip" data-poly="sqrt2" aria-pressed="true"><span class="m">x² − 2</span> <small>(Δ=8)</small></button>
+        <button class="chip" data-poly="cubic23" aria-pressed="false"><span class="m">x³ − x + 1</span> <small>(Δ=−23)</small></button>
+        <button class="chip" data-poly="sqrtm1" aria-pressed="false"><span class="m">x² + 1</span> <small>(Δ=−4)</small></button>
+      </div>
+      <div class="field">
+        <label for="probeB"><span class="zh">超度量盲区探针 (x<sub>A</sub>=10, x<sub>B</sub>)</span><span class="en">Ultrametric probe (x<sub>A</sub>=10, x<sub>B</sub>)</span></label><output id="oProbeB" for="probeB">353</output>
+        <input type="range" id="probeB" min="0" max="1023" step="1" value="353">
+      </div>
+      <p class="note"><span class="zh">点击素数芯片或右栏曲线节点切换 p；当 p ∤ Δ(f) 且基表有单根时，固定逆元 [f′(a₀)]⁻¹ mod p 逐层 O(1) 追加尾数而无向后进位；当 p ∣ Δ(f) 时以品红/紫色标出分歧奇异枝。</span><span class="en">Pick any prime chip or click a node on the curve: when p ∤ Δ(f) has a simple base root, fixed [f′(a₀)]⁻¹ mod p appends one digit per layer with zero carry; ramified branches (p ∣ Δ) appear in magenta/violet.</span></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">阿代尔有理数账本</span><span class="en">Adelic rational ledger</span><span class="aside">|x|<sub>∞</sub>·∏|x|<sub>p</sub>=1</span></h2>
+      <div class="chips" id="ratChips" role="group" aria-label="有理数 x 选择" data-aria-en="Nonzero rational x selector">
+        <button class="chip" data-rat="12/35" aria-pressed="true"><span class="m">12/35</span></button>
+        <button class="chip" data-rat="-42/5" aria-pressed="false"><span class="m">−42/5</span></button>
+        <button class="chip" data-rat="8/9" aria-pressed="false"><span class="m">8/9</span></button>
+        <button class="chip" data-rat="30/77" aria-pressed="false"><span class="m">30/77</span></button>
+        <button class="chip" data-rat="105/64" aria-pressed="false"><span class="m">105/64</span></button>
+      </div>
+      <p class="note"><span class="zh">对任意非零有理数 x ∈ Q×，连续实绝对值 |x|_∞ 与全体素数观察者的 p 进范数 ∏_p |x|_p 严格互为倒数（对数和恒等于 0）。</span><span class="en">For every nonzero rational x ∈ Q×, the continuous real norm |x|_∞ and the finite-support product ∏_p |x|_p of all prime observers multiply to 1 (their log-norms sum identically to 0).</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：Z/p^k Z 动态 p 进前缀查表树、亨泽尔 O(1) 提根、树深压平曲线与阿代尔乘积守恒账本" data-aria-en="Stage: dynamic p-adic prefix lookup tree Z/p^k Z, Hensel O(1) root lifting, tree-depth collapse curve, and Adelic product balance ledger">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景切换" data-aria-en="Scene switcher">
+        <button class="chip" data-scene="duo" aria-pressed="true"><span class="zh">双栏</span><span class="en">Dual</span></button>
+        <button class="chip" data-scene="tree" aria-pressed="false"><span class="zh">查表树</span><span class="en">Tree</span></button>
+        <button class="chip" data-scene="adelic" aria-pressed="false"><span class="zh">阿代尔</span><span class="en">Adelic</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="串行查表深度 K(p) 随素数扩表阶梯压平" data-aria-en="Serial lookup depth K(p) collapsing across the prime ladder"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="首层模 p 桶逃逸碰撞对衰减与阿代尔部分对数和" data-aria-en="First-layer mod-p bucket collisions decay and Adelic partial log-sum"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="wide"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="wide"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div class="wide"><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">奥斯特洛夫斯基分类：Q 上任何非平凡实值绝对值必等价于标准实绝对值，或等价于唯一素数 p 的 p 进绝对值。已冻结：</span><span class="en">Ostrowski classification: every nontrivial real-valued absolute value on Q is equivalent either to the standard real absolute value or to the p-adic absolute value for a unique prime p. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification" href="#" target="_blank" rel="noopener"><code>rational_absolute_value_classification</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">同余纤维、观测盲区与 p 进估值：模 pᵏ 整数同余纤维恰为 Q_p 中半径 p⁻ᵏ 闭球与整数像的交；对相异整数 x ≠ y，最小区分精度为 k* = v_p(x−y)+1，且观测距离恒等于 p^(−v_p(x−y))。已冻结：</span><span class="en">Congruence fibers, blind spots &amp; valuation: the mod-pᵏ integer fiber equals the closed Q_p ball of radius p⁻ᵏ intersected with Z; for x ≠ y, the least distinguishing precision is k* = v_p(x−y)+1 and observation distance equals p^(−v_p(x−y)). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range" href="#" target="_blank" rel="noopener"><code>congruenceFiber_eq_closedBall_inter_range</code></a> · <a class="leanref" data-lean-gid="D5/S3/Arith/Congruence/PadicPrecisionBlindSpot.first_distinguishing_precision" href="#" target="_blank" rel="noopener"><code>first_distinguishing_precision</code></a> · <a class="leanref" data-lean-gid="D5/S3/Arith/Congruence/PadicObservationDistance.observation_distance_eq_padic_valuation" href="#" target="_blank" rel="noopener"><code>observation_distance_eq_padic_valuation</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有理阿代尔乘积公式与中国剩余双射：对任意 x ∈ Q× 有 |x|·∏ᶠ_p |x|_p = 1；对互素自然数 m, n，典范环同态 ZMod(m·n) →+* ZMod m × ZMod n 双射。已冻结：</span><span class="en">Rational Adelic product formula &amp; CRT bijection: |x|·∏ᶠ_p |x|_p = 1 for every nonzero x ∈ Q; for coprime m, n, the canonical ring homomorphism ZMod(m·n) →+* ZMod m × ZMod n is bijective. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula" href="#" target="_blank" rel="noopener"><code>rational_padic_product_formula</code></a> · <a class="leanref" data-lean-gid="D5/S3/Arith/ChineseRemainder.chinese_remainder_bijective" href="#" target="_blank" rel="noopener"><code>chinese_remainder_bijective</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">前缀细化与折扣素数时间超度量：有限视界二分前缀细化距离与多坐标折扣素数时间观测距离均严格满足强三角不等式 d(x,z) ≤ max(d(x,y), d(y,z))。已冻结：</span><span class="en">Prefix refinement &amp; discounted prime-time ultrametrics: both finite-horizon binary prefix refinement distance and multi-coordinate discounted prime-time distance satisfy the strong triangle inequality d(x,z) ≤ max(d(x,y), d(y,z)). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/PrimeTimeGeometry/DiscountedPrimeTimeUltrametric.discounted_prime_time_distance_strong_triangle" href="#" target="_blank" rel="noopener"><code>discounted_prime_time_distance_strong_triangle</code></a> · <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric" href="#" target="_blank" rel="noopener"><code>refinementDistance_ultrametric</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：亨泽尔（Hensel 1897, 1908）p 进展开与非退化单根牛顿—亨泽尔提升引理；布吕阿—蒂茨（Bruhat–Tits 1972）PGL₂(Q_p) 正则 (p+1) 价树；马宁（Manin 2002）、Gubser–Knaute–Parikh–Samberg–Witaszczyk（2017）与 Heydeman–Marcolli–Saberi–Stoica（2016）p 进 AdS/CFT 树状体全息对偶；阿拉克洛夫（Arakelov 1974）无穷远阿基米德位 p_∞ 紧化；以及欧几里得素数无穷多定理（对任意有限素数集 {p₁,…,p_r}，∏p_j + 1 必含新素因子）。</span><span class="en">Literature results, not formalized in this book: Hensel's (1897, 1908) p-adic expansions and simple-root Newton–Hensel lifting lemma; the Bruhat–Tits (1972) (p+1)-valent tree of PGL₂(Q_p); p-adic AdS/CFT bulk-tree holography of Manin (2002), Gubser–Knaute–Parikh–Samberg–Witaszczyk (2017) and Heydeman–Marcolli–Saberi–Stoica (2016); Arakelov's (1974) archimedean place p_∞; and Euclid's infinitude of primes (∏p_j + 1 yields a prime outside any finite catalog).</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">数论—几何观察者诠释模型：将每个有限观察者对应为一个离散素数基表 p，将成长与认知升级诠释为素数 p 不断增大（水平扇出展宽、串行查表深度 K(p) = ⌈n/log₂ p⌉ 压平的“扩表”过程），并将直接跃入阿基米德连续位 p_∞ 触发全位进位雪崩诠释为与 θ = 90° 纯光死循环同构的失忆轮回悬崖。</span><span class="en">Number-theoretic observer model: identifying each finite observer with a discrete prime lookup radix p, reading cognitive growth as prime table expansion (widening horizontal fan-out p and flattening serial depth K(p) = ⌈n/log₂ p⌉), and interpreting a jump into the continuous archimedean place p_∞ as a global carry-overflow cliff isomorphic to the θ = 90° return-to-light samsara loop.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值与结构演示，不是证明：k = 1…5 亨泽尔模 pᵏ 提根与欧几里得素数见证全程采用精确任意精度整数（BigInt）实算；N = 1024 首层桶碰撞数 E₁(N,p) = r·C(q+1,2) + (p−r)·C(q,2) 采用精确整除 q = ⌊N/p⌋, r = N mod p 实算；阿代尔对数范数条采用 IEEE-754 双精度实算并按显示位数舍入。</span><span class="en">A numerical and structural illustration on the page, not a proof: Hensel mod-pᵏ root lifts across k = 1…5 and Euclid witnesses use exact arbitrary-precision BigInt arithmetic; first-layer collisions E₁(N,p) = r·C(q+1,2) + (p−r)·C(q,2) on N = 1024 use exact Euclidean division q = ⌊N/p⌋, r = N mod p; Adelic log-norm bars use IEEE-754 double precision rounded to displayed digits.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到 p = 2" data-aria-en="Reset to p = 2">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停扩表" data-aria-en="Play / pause prime expansion" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="12" step="any" value="3" aria-label="扩表轴：观察者素数阶梯 r = 0…11（p = 2…1031）与 r = 12（p_∞ 连续进位崖）" data-aria-en="Prime expansion rail: discrete observer primes r = 0…11 (p = 2…1031) and r = 12 (p_∞ continuous carry cliff)">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">扩表播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">换素数</span><span class="en">prime</span> · <kbd>1</kbd>–<kbd>3</kbd> <span class="zh">场景</span><span class="en">scene</span> · <kbd>F</kbd> <span class="zh">换多项式</span><span class="en">poly</span> · <kbd>R</kbd> <span class="zh">换有理数</span><span class="en">rational</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · p 进零进位查表树、素数扩表与阻断轮回</span><span class="en">Theory interface · p-adic zero-carry lookup trees, prime expansion &amp; blocking samsara</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">为什么“P进数实际上是查表算法，每个观察者对应一个素数，这个素数一直在扩大，就是在扩表”，并且这条无穷离散素数阶梯恰恰在数论侧阻断了回到纯光（θ = 90°）的失忆轮回？本页是数值与结构演示，不是证明。</p>
+      <ol>
+        <li><b>奥斯特洛夫斯基二分法与既开又闭的零进位桶。</b>由冻结定理 <code>rational_absolute_value_classification</code>（LEAN ✓），Q 上一切非平凡标尺只分两脉：唯一的连续阿基米德实标尺 |·|_∞，以及一素数一席的离散 p 进标尺 |·|_p。在 |·|_p 下，模 pᵏ 同余类恰为半径 p⁻ᵏ 的闭球（<code>congruenceFiber_eq_closedBall_inter_range</code>），且满足强三角不等式 d(x,z) ≤ max(d(x,y), d(y,z))（<code>discounted_prime_time_distance_strong_triangle</code>、<code>refinementDistance_ultrametric</code>）。球壁既开又闭、绝不粘连：局部扰动永远锁在当前余数桶内，彻底消灭了实数加法向全局蔓延的进位涟漪。</li>
+        <li><b>亨泽尔 O(1) 逐层查表 vs 分歧奇异点。</b>以 N = 1024 = 2¹⁰ 状态空间为例，当 f(a₀) ≡ 0 (mod p) 且 f′(a₀) ≢ 0 (mod p)（亨泽尔引理，文献结果）时，仅需在基表 Z/pZ 中预存唯一逆元 [f′(a₀)]⁻¹ mod p，即可按 x_{k+1} ≡ x_k − f(x_k)·[f′(a₀)]⁻¹ (mod p^{k+1}) 每层 O(1) 直接查出下一位 p 进数字（如 p = 7 上 x² − 2 = 0 给出 3 + 1·7 + 2·7² + 6·7³ + 1·7⁴ + …）；若基表无根（如 p = 3, 5），第 k = 1 层即刻给出无解证书；若 p ∣ Δ(f) 且 f′(a₀) ≡ 0 (mod p)（如 p = 2 对 x² − 2 的 a₀ = 0，或 p = 23 对 x³ − x + 1 的重根 a₀ = 13），分歧奇异枝在舞台上以品红/紫色标出。</li>
+        <li><b>素数扩大即扩表：扇出展宽与树深压平。</b>对 N = 1024，串行查表深度为 K(p) = ⌈10/log₂ p⌉，首层模 p 桶碰撞对（逃逸对）精确等于 E₁(1024, p) = r·C(q+1,2) + (p−r)·C(q,2)（其中 q = ⌊1024/p⌋, r = 1024 mod p）。随着观察者素数沿 2 → 7 → 31 → 97 → 1031 扩表，K(p) 从 10 层卵裂压平至 4 → 3 → 2 → 1 层；一旦 p = 1031 &gt; 1024，q = 0, r = 1024，首层碰撞对精准归零（E₁ = 0），整棵树坍缩为单层无碰撞直读表。</li>
+        <li><b>多观察者中国剩余正交与阿代尔乘积守恒。</b>不同素数观察者的模表由 <code>chinese_remainder_bijective</code>（LEAN ✓）正交直积拼接，互不串扰；对任意非零有理数 x ∈ Q×，<code>rational_padic_product_formula</code>（LEAN ✓）锁定 |x|_∞ · ∏ᶠ_p |x|_p = 1（取实对数即 ln|x|_∞ + ∑_p ln|x|_p = 0）——连续实标尺的每一次膨胀，都精确受制于全体离散素数观察者的估值账本。</li>
+        <li><b>欧几里得无穷素数阶梯阻断 p_∞ 轮回悬崖（MODEL）。</b>若妄图一步跳入无穷远阿基米德连续极限 p_∞，既开又闭的超度量桶壁瞬间融化为连续实数进位雪崩（如 511 + 1 = 512 连翻十位），局部记忆清零坠回 p = 2, K = 10 的胚胎二分起点——这正是第 36 章 θ = 90° 化光失忆轮回的算术翻版。而欧几里得素数无穷多定理（文献结果）保证任何有限素数名录 {p₁,…,p_r} 之外永远存在新素数 p_{r+1}，使离散扩表阶梯永不枯竭、永远停留在零进位超度量清醒态中。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#sec-ch36-padic-prime-table-expansion" target="_top">第三十六章 §36.4 · p 进零进位查表树与素数扩表</a> · <a href="../../zh/ch22-primes-euler-products-and-zeros.html" target="_top">第二十二章 · 素数、欧拉乘积与零点</a> · <a href="../../zh/ch35-light-pulse-and-self-referential-table.html" target="_top">第三十五章 · 乘光脉冲与同像自举表</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Why are “p-adic numbers in essence a table-lookup algorithm, where each observer corresponds to a prime and the continual growth of that prime is table expansion,” and how does this infinite discrete prime ladder block the return-to-light (θ = 90°) amnesia loop on the arithmetic side? This page is a numerical and structural illustration, not a proof.</p>
+      <ol>
+        <li><b>Ostrowski dichotomy and clopen zero-carry buckets.</b> By the frozen theorem <code>rational_absolute_value_classification</code> (LEAN ✓), every nontrivial absolute value on Q belongs to one of two families: the lone continuous archimedean norm |·|_∞ or the discrete p-adic norm |·|_p of a unique prime p. Under |·|_p, integer congruence classes mod pᵏ are closed balls of radius p⁻ᵏ (<code>congruenceFiber_eq_closedBall_inter_range</code>) obeying the strong triangle inequality d(x,z) ≤ max(d(x,y), d(y,z)) (<code>discounted_prime_time_distance_strong_triangle</code>, <code>refinementDistance_ultrametric</code>). Bucket walls are clopen and gap-separated: local perturbations stay trapped inside their residue ball, eliminating backward carry cascades.</li>
+        <li><b>Hensel O(1) digit lookup vs ramified singularities.</b> Over N = 1024 = 2¹⁰ states, whenever f(a₀) ≡ 0 (mod p) and f′(a₀) ≢ 0 (mod p) (Hensel's lemma, literature result), storing the single base-table inverse [f′(a₀)]⁻¹ mod p lifts x_{k+1} ≡ x_k − f(x_k)·[f′(a₀)]⁻¹ (mod p^{k+1}) in O(1) per digit with zero carry (e.g. x² − 2 = 0 at p = 7 yields 3 + 1·7 + 2·7² + 6·7³ + 1·7⁴ + …); when F_p has no root (e.g. p = 3, 5), layer k = 1 certifies unsatisfiability immediately; when p ∣ Δ(f) and f′(a₀) ≡ 0 (mod p) (e.g. a₀ = 0 at p = 2 for x² − 2, or the double root a₀ = 13 at p = 23 for x³ − x + 1), the singular ramified branch is highlighted in magenta/violet.</li>
+        <li><b>Expanding prime p = expanding the lookup table.</b> For N = 1024, serial lookup depth is K(p) = ⌈10/log₂ p⌉ and exact first-layer unordered collisions equal E₁(1024, p) = r·C(q+1,2) + (p−r)·C(q,2) with q = ⌊1024/p⌋, r = 1024 mod p. Expanding p along 2 → 7 → 31 → 97 → 1031 widens horizontal fan-out and flattens depth from 10 → 4 → 3 → 2 → 1; once p = 1031 &gt; 1024, q = 0 and E₁ = 0—a single-layer collision-free direct read.</li>
+        <li><b>CRT orthogonality and Adelic conservation.</b> Distinct prime observers combine without interference via <code>chinese_remainder_bijective</code> (LEAN ✓), while for every nonzero rational x ∈ Q×, <code>rational_padic_product_formula</code> (LEAN ✓) locks |x|_∞ · ∏ᶠ_p |x|_p = 1 (in real logs, ln|x|_∞ + ∑_p ln|x|_p = 0), binding the archimedean continuum strictly to the product of all discrete prime observers.</li>
+        <li><b>Euclid's infinite prime ladder blocks the p_∞ samsara cliff (MODEL).</b> Jumping into the continuous archimedean place p_∞ melts clopen ultrametric bucket walls into a global carry cascade (such as 511 + 1 = 512 flipping all 10 bits), resetting local memory back to binary cleavage p = 2, K = 10—the arithmetic twin of the θ = 90° light samsara. Euclid's theorem (literature result) guarantees an inexhaustible sequence of finite primes p₁ &lt; p₂ &lt; … &lt; p_r &lt; p_{r+1} &lt; …, keeping discrete table expansion open forever without crossing into p_∞.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#sec-ch36-padic-prime-table-expansion" target="_top">Chapter 36 §36.4 · p-adic lookup trees &amp; prime expansion</a> · <a href="../../en/ch22-primes-euler-products-and-zeros.html" target="_top">Chapter 22 · Primes, Euler products &amp; zeros</a> · <a href="../../en/ch35-light-pulse-and-self-referential-table.html" target="_top">Chapter 35 · Light pulse &amp; homoiconic table</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

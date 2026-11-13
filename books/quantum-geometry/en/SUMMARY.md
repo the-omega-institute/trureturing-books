@@ -77,3 +77,4 @@
 - [Appendix A: Dictionary of Conventional vs. Geometric Quantum Terms](appendix-a.md)
 - [Appendix B: Clifford Algebra Cheat Sheet](appendix-b.md)
 - [Appendix C: Complete Index of Locked trureturing Declarations](appendix-c.md)
+- [Appendix D: Six Classical Open Quantum Puzzles and the Five-Interpretation Geometric Duel](appendix-d.md)

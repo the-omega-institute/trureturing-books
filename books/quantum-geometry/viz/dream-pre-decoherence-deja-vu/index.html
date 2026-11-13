@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//DEJAVU · Dream precompile and déjà vu · repeating the same projection leaves the state unchanged; changing the logic can invalidate the compiled projection">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//DEJAVU 梦的预编译与似曾相识 · 同一把尺子再量一次，态不再改变；换了逻辑，旧投影就须重编</title>
+<meta name="description" content="第 37 章补节的一张投影沙盘，三个场景。尺子：同一个输入态在 β = 0° 与 β = 90° 两条测量轴上给出不同的结果权重（0.750 与 0.933）；梦中的第一次完整未读捏合把非对角 √3/4 剪成 0，态熵升到 0.811 bit，丢弃的希尔伯特—施密特质量 3/8；用同一把尺子再投影一次，态不动，新增熵 0、残差 0（捏合幂等与不动点判据由 Lean 验证，零新增熵是手工特化）。漏斗：硬锚 x = y = 4/5 定下 det G 的拱形，先验窗口逐层收窄到 [0.76, 0.82]，示意路径走到 0.80；梦后学到区分性事实，旧目标被排除，新窗口 [0.28, 0.52] 里选 0.40。记录：两份重叠为 −i 的相位记录把 ρ₀₁ 从 1/2 转到 −1/2，逆转一份得 −i/2，两份都逆转回到 1/2。One projection sandtable for the chapter 37 supplement, in three scenes. Ruler: one input state gives different outcome weights on the axes β = 0° and β = 90° (0.750 and 0.933); the first complete unread pinching in the dream cuts the off-diagonal √3/4 to 0, the state entropy rises to 0.811 bit and the discarded Hilbert–Schmidt mass is 3/8; projecting again with the same ruler leaves the state where it is, with zero added entropy and zero residual (pinching idempotence and its fixed-point criterion are verified in Lean; the zero added entropy is a manual specialization). Funnel: the hard anchors x = y = 4/5 fix the arch of det G, the prior windows narrow to [0.76, 0.82] and an illustrative path reaches 0.80; a distinguishing fact learned after the dream excludes the old target and 0.40 is chosen in the new window [0.28, 0.52]. Records: two phase records of overlap −i take ρ₀₁ from 1/2 to −1/2, reversing one gives −i/2, reversing both restores 1/2.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="dream-pre-decoherence-deja-vu">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//DEJAVU">ORTHO<b>//</b>DEJAVU</h1>
+      <div class="tagline">
+        <span class="zh">梦的预编译与似曾相识 · <em>同一把尺子再量一次，态不再改变；换了逻辑，旧投影就须重编</em></span>
+        <span class="en">Dream precompile and déjà vu · <em>repeating the same projection leaves the state unchanged; changing the logic can invalidate the compiled projection</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillStage"><span class="zh">现在</span><span class="en">NOW</span> <strong>—</strong></span>
+      <span class="pill" id="pillCtx"><span class="zh">上下文</span><span class="en">CONTEXT</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="choose-context" aria-pressed="false"><span class="code">CHOOSE-CONTEXT</span><span class="cn zh">选尺子：同一个输入，两条轴，两组权重</span><span class="cn en">Choose the ruler: one input, two axes, two sets of weights</span></button>
+        <button class="preset" data-preset="dream-precompile" aria-pressed="false"><span class="code">PRECOMPILE</span><span class="cn zh">梦中预编译：非对角归零，熵 +0.811 bit</span><span class="cn en">Dream precompile: the off-diagonal goes to zero, +0.811 bit</span></button>
+        <button class="preset" data-preset="gram-funnel" aria-pressed="false"><span class="code">GRAM-FUNNEL</span><span class="cn zh">兼容漏斗：窗口收窄，走到 0.80</span><span class="cn en">Compatible funnel: the window narrows, the path reaches 0.80</span></button>
+        <button class="preset" data-preset="logic-upgrade-flush" aria-pressed="false"><span class="code">LOGIC-FLUSH</span><span class="cn zh">梦后逻辑升级：旧目标失效，改选 0.40</span><span class="cn en">Post-dream logic upgrade: the old target fails, 0.40 is chosen</span></button>
+        <button class="preset" data-preset="unimodular-reversal" aria-pressed="false"><span class="code">UNIMODULAR</span><span class="cn zh">两份 −i 记录：写入、逆转一份、全部逆转</span><span class="cn en">Two −i records: write, reverse one, reverse both</span></button>
+        <button class="preset" data-preset="deja-vu-hit" aria-pressed="false"><span class="code">DEJA-VU-HIT</span><span class="cn zh">同一把尺子再量：新增熵 0，命中</span><span class="cn en">The same ruler again: zero added entropy, a hit</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="basis records">
+      <h2><span class="zh">输入态与尺子</span><span class="en">The input and the ruler</span><span class="aside">θ · β</span></h2>
+      <div class="field">
+        <label for="theta"><span class="zh">输入角 θ</span><span class="en">Input angle θ</span><small class="zh">|ψ⟩ = (cos θ, sin θ)；布洛赫向量与竖轴成 2θ</small><small class="en">|ψ⟩ = (cos θ, sin θ); its Bloch vector makes 2θ with the vertical axis</small></label><output id="oTheta" for="theta">30°</output>
+        <input type="range" id="theta" min="0" max="90" step="1" value="30">
+      </div>
+      <div class="field" data-scenes="basis">
+        <label for="beta"><span class="zh">尺子的方向 β</span><span class="en">Direction of the ruler β</span><small class="zh">测量轴 n = (sin β, 0, cos β)；也可以在圆盘上直接拖尺子，拖箭头尖改 θ</small><small class="en">measurement axis n = (sin β, 0, cos β); or drag the ruler on the disc, and the arrow tip to change θ</small></label><output id="oBeta" for="beta">0°</output>
+        <input type="range" id="beta" min="0" max="175" step="5" value="0">
+      </div>
+      <p class="note" data-scenes="basis"><span class="zh">梦里的第一次编译固定用 β = 0° 的尺子（保存的快照不随后面的操作改写）；第二次投影用这里的 β。</span><span class="en">The first compile in the dream always uses the ruler β = 0° (the saved snapshot is never rewritten afterwards); the second projection uses the β set here.</span></p>
+      <p class="note" data-scenes="records" hidden><span class="zh">记录场景的非对角元 ρ₀₁ = sin 2θ / 2；θ = 45° 时正是 Lean 证书里的等幅叠加 ρ₀₁ = 1/2。</span><span class="en">In the Records scene the off-diagonal entry is ρ₀₁ = sin 2θ / 2; at θ = 45° it is the equal superposition ρ₀₁ = 1/2 of the Lean certificate.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="basis funnel">
+      <h2><span class="zh">梦后学到的事实</span><span class="en">What is learned after the dream</span><span class="aside">f</span></h2>
+      <div class="chips" id="factChips" role="group" aria-label="学到的新事实" data-aria-en="The fact that is learned">
+        <button class="chip" data-fact="novel" aria-pressed="true"><span class="zh">f₁ = 1（区分性）</span><span class="en">f₁ = 1 (distinguishing)</span></button>
+        <button class="chip" data-fact="dup" aria-pressed="false"><span class="zh">f_dup = 0（冗余）</span><span class="en">f_dup = 0 (redundant)</span></button>
+      </div>
+      <p class="note"><span class="zh">舞台上的开关“梦后逻辑升级 / 流水线冲刷”学进这条事实。区分性的 f₁ 排除梦里的猜测 00：上下文升到 v1，旧缓存作废，先验窗口换成 [0.28, 0.52]，尺子转到 β = 90°。冗余的 f_dup 什么也不分开：上下文不变，不冲刷。关掉开关是重置演示，不是“忘掉”事实。</span><span class="en">The switch “Post-Dream Logic Upgrade / Pipeline Flush” on the stage learns this fact. The distinguishing f₁ rules out the dream's guess 00: the context goes to v1, the old cache entry is invalidated, the prior window is replaced by [0.28, 0.52] and the ruler turns to β = 90°. The redundant f_dup separates nothing: the context stays, nothing is flushed. Switching off resets the demonstration; it does not unlearn the fact.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="records" hidden>
+      <h2><span class="zh">两份相位记录</span><span class="en">Two phase records</span><span class="aside">γ</span></h2>
+      <p class="note"><span class="zh">每份记录给地址 0 写 (1, 0)，给地址 1 写 (i, 0)，重叠 γ = −i；写入一份让 ρ₀₁ 乘 γ，逆转一份乘 γ* = i。时间轴四站：输入、两份都写入、只逆转副本 0、两份都逆转。舞台上的开关可以换成“重叠为 0”的对照：地址 1 写 (0, 1)，两条路被完全分开。</span><span class="en">Each record writes (1, 0) for address 0 and (i, 0) for address 1, so its overlap is γ = −i; writing a copy multiplies ρ₀₁ by γ, reversing one by γ* = i. Four stops on the rail: input, both written, copy 0 reversed, both reversed. The switch on the stage swaps in the comparison “overlap 0”: address 1 writes (0, 1), and the two paths are told apart completely.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：布洛赫圆盘上的态与尺子、格拉姆行列式的拱形与先验窗口，或复平面上的相位箭头" data-aria-en="Stage: the state and the ruler on the Bloch disc, the arch of the Gram determinant with the prior windows, or the phase arrow in the complex plane">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="basis" aria-pressed="true"><span class="zh">尺子</span><span class="en">Ruler</span></button>
+        <button class="chip" data-scene="funnel" aria-pressed="false"><span class="zh">漏斗</span><span class="en">Funnel</span></button>
+        <button class="chip" data-scene="records" aria-pressed="false"><span class="zh">记录</span><span class="en">Records</span></button>
+      </div>
+      <div class="stagectl thumb-hide" id="upCtl" data-scenes="basis funnel">
+        <span class="cap"><span class="zh">梦后逻辑升级 / 流水线冲刷</span><span class="en">Post-Dream Logic Upgrade / Pipeline Flush</span></span>
+        <span class="chips" id="upChips" role="group" aria-label="梦后逻辑升级开关" data-aria-en="Post-dream logic upgrade switch">
+          <button class="chip" data-up="off" aria-pressed="true"><span class="zh">关</span><span class="en">OFF</span></button>
+          <button class="chip" data-up="on" aria-pressed="false"><span class="zh">开</span><span class="en">ON</span></button>
+        </span>
+      </div>
+      <div class="stagectl thumb-hide" id="ovCtl" data-scenes="records" hidden>
+        <span class="cap"><span class="zh">每份记录的重叠 γ</span><span class="en">Overlap γ of each record</span></span>
+        <span class="chips" id="ovChips" role="group" aria-label="记录重叠" data-aria-en="Record overlap">
+          <button class="chip" data-ov="unit" aria-pressed="true">−i<span class="paren"><span class="zh">（模长 1）</span><span class="en"> (modulus 1)</span></span></button>
+          <button class="chip" data-ov="zero" aria-pressed="false">0<span class="paren"><span class="zh">（正交）</span><span class="en"> (orthogonal)</span></span></button>
+        </span>
+      </div>
+      <div class="lean model cachecard thumb-hide" id="cacheCard" hidden><span class="ok">MODEL</span><span id="cacheBody"></span></div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景沿时间轴变化与不变的量" data-aria-en="What changes and what does not along the rail in this scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div class="wide"><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean" data-scenes="basis funnel"><span class="ok">LEAN ✓</span><span><span class="zh">对一组记录测量投影 {Pₖ}（自伴、幂等、两两正交、加起来是 I），未读捏合 Π_P(X) = Σₖ PₖXPₖ 对每个矩阵都满足 Π_P ∘ Π_P = Π_P；并且 Π_P(ρ) = ρ 当且仅当对一切 k ≠ l 都有 PₖρPₗ = 0。舞台上：用同一把尺子第二次投影，箭头不再移动。已冻结：</span><span class="en">For a family of record-measurement projections {Pₖ} (self-adjoint, idempotent, pairwise orthogonal, summing to I), the unread pinching Π_P(X) = Σₖ PₖXPₖ satisfies Π_P ∘ Π_P = Π_P on every matrix; and Π_P(ρ) = ρ exactly when PₖρPₗ = 0 for all k ≠ l. On the stage: a second projection with the same ruler no longer moves the arrow. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent" href="#" target="_blank" rel="noopener"><code>finite_record_pinching_idempotent</code></a> · <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.unreadState_fixed_iff" href="#" target="_blank" rel="noopener"><code>unreadState_fixed_iff</code></a></span></div>
+      <div class="lean" data-scenes="basis funnel"><span class="ok">LEAN ✓</span><span><span class="zh">对任意幺正 U 与满足 ρₖ₊₁ = 𝒫(UρₖU*) 的密度态轨道（𝒫 是计算基捏合），每一步 S(ρₖ₊₁) − S(ρₖ) = D(UρₖU* ‖ 𝒫(UρₖU*)) ≥ 0，N 步的熵增等于各步之和。熵用自然对数（奈特）；页面除以 ln 2 写成 bit。已冻结：</span><span class="en">For every unitary U and every density-state trajectory with ρₖ₊₁ = 𝒫(UρₖU*) (𝒫 the computational-basis pinching), each step has S(ρₖ₊₁) − S(ρₖ) = D(UρₖU* ‖ 𝒫(UρₖU*)) ≥ 0, and over N steps the entropy gains add up. Entropy is in natural logarithms (nats); the page divides by ln 2 to write bits. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" href="#" target="_blank" rel="noopener"><code>entropy_production_coherence_deletion_identity</code></a></span></div>
+      <div class="lean" data-scenes="basis funnel records"><span class="ok">LEAN ✓</span><span><span class="zh">对任意 2 × 2 复矩阵 ρ，计算基捏合去掉的部分满足 ⟨ρ − 𝒫(ρ), ρ − 𝒫(ρ)⟩_HS = |ρ₀₁|² + |ρ₁₀|²。这是希尔伯特—施密特平方残差，没有 bit 这个单位。已冻结：</span><span class="en">For every complex 2 × 2 matrix ρ, the part that computational-basis pinching removes has ⟨ρ − 𝒫(ρ), ρ − 𝒫(ρ)⟩_HS = |ρ₀₁|² + |ρ₁₀|². It is a squared Hilbert–Schmidt residual and carries no unit of bits. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass" href="#" target="_blank" rel="noopener"><code>pinching_discarded_coherence_mass</code></a></span></div>
+      <div class="lean" data-scenes="basis"><span class="ok">LEAN ✓</span><span><span class="zh">希尔伯特空间的任一闭子空间 M，记 P = P_M、Q = P_{M⊥}：Q = I − P，P∘P = P，Q∘Q = Q，P∘Q = 0，Q∘P = 0，P + Q = I。若闭子空间 S 的正交补不为零，则存在单位向量 e ∈ S⊥，P_S e = 0，到 S 的距离为 1，且 ‖I − P_S‖ = 1（只断言存在）。舞台上：尺子的两端 Q₊、Q₋ 是一对互补投影的方向。已冻结：</span><span class="en">For any closed subspace M of a Hilbert space, with P = P_M and Q = P_{M⊥}: Q = I − P, P∘P = P, Q∘Q = Q, P∘Q = 0, Q∘P = 0, P + Q = I. If a closed subspace S has a nonzero orthogonal complement, there is a unit vector e ∈ S⊥ with P_S e = 0, distance 1 to S and ‖I − P_S‖ = 1 (existence only). On the stage: the two ends Q₊, Q₋ of the ruler are the directions of a complementary pair of projections. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities" href="#" target="_blank" rel="noopener"><code>orthogonal_complement_projection_identities</code></a> · <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>finite_layer_projection_escape</code></a></span></div>
+      <div class="lean" data-scenes="basis"><span class="ok">LEAN ✓</span><span><span class="zh">两个显式定义的二元解读语境 c₀、c₁：文本与解读规则相同，读者准入、背景与评价目标三项两两不同；(0, 0, 0) 是 c₀ 的不动意义，(1, 1, 1) 是 c₁ 的不动意义，两者不同。把它读成“选尺子”是示意模型。已冻结：</span><span class="en">Two explicitly defined binary interpretation contexts c₀, c₁ share their text and interpretation rule and differ in reader admission, background and evaluation goal; (0, 0, 0) is a fixed meaning of c₀, (1, 1, 1) one of c₁, and the two differ. Reading this as “choosing a ruler” is a model. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points" href="#" target="_blank" rel="noopener"><code>context_parameters_can_select_distinct_fixed_points</code></a></span></div>
+      <div class="lean" data-scenes="basis"><span class="ok">LEAN ✓</span><span><span class="zh">有限维 V、Y 与线性映射 T: V → V、C: V → Y：可观测克雷洛夫子空间 Oₘ 严格增长的步数至多是 dim V − rank C。“选尺子”卡的小图（V = ℝ³，rank C = 1）：维数 1 → 2 → 3，恰好两步。已冻结：</span><span class="en">For finite-dimensional V, Y and linear maps T: V → V, C: V → Y, the observable Krylov subspace Oₘ grows strictly at no more than dim V − rank C steps. The inset of the “choose the ruler” card (V = ℝ³, rank C = 1): dimensions 1 → 2 → 3, exactly two steps. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound" href="#" target="_blank" rel="noopener"><code>observable_krylov_strict_growth_bound</code></a></span></div>
+      <div class="lean" data-scenes="basis"><span class="ok">LEAN ✓</span><span><span class="zh">两份副本地址记录的定义作为函数完全相等；若整行 g(a₀) 等于扭曲对角 a ↦ f(g(a, a))，则 f(g(a₀, a₀)) = g(a₀, a₀)。它们只说两种记录实现相同、整行落地给出不动点；缓存卡里的 Valid、Time_Tag 与熟悉感都不在这两条定理里。已冻结：</span><span class="en">Two definitions of the copied-address record are equal as functions; and if the entire row g(a₀) equals the twisted diagonal a ↦ f(g(a, a)), then f(g(a₀, a₀)) = g(a₀, a₀). They say only that the two record implementations agree and that a whole-row landing gives a fixed point; the Valid bit, the Time_Tag and the familiarity of the cache card are not in these theorems. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior" href="#" target="_blank" rel="noopener"><code>canonical_copied_address_record_eq_prior</code></a> · <a class="leanref" data-lean-gid="D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed" href="#" target="_blank" rel="noopener"><code>diagonal_landing_fixed</code></a></span></div>
+      <div class="lean" data-scenes="funnel" hidden><span class="ok">LEAN ✓</span><span><span class="zh">复希尔伯特空间上的有界算子 Q：Q ≥ 0 当且仅当存在 O 使 Q = O*O，且对一切 x、y 有 ⟨Qx, y⟩ = ⟨Ox, Oy⟩。有限实坐标族 u、v：(Σu²)(Σv²) − (Σuv)² = ½ ΣᵢΣⱼ (uᵢvⱼ − uⱼvᵢ)²，两向量的格拉姆余项。舞台上三向量的 det G 展开与区间 [0.28, 1] 是手工推导，不在这两条定理里。已冻结：</span><span class="en">For a bounded operator Q on a complex Hilbert space: Q ≥ 0 exactly when Q = O*O for some O with ⟨Qx, y⟩ = ⟨Ox, Oy⟩ for all x, y. For finite real coordinate families u, v: (Σu²)(Σv²) − (Σuv)² = ½ ΣᵢΣⱼ (uᵢvⱼ − uⱼvᵢ)², the two-vector Gram remainder. The three-vector expansion of det G on the stage and the interval [0.28, 1] are manual derivations, not part of these two theorems. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/GramRealizability.gram_realizability" href="#" target="_blank" rel="noopener"><code>gram_realizability</code></a> · <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+      <div class="lean" data-scenes="funnel" hidden><span class="ok">LEAN ✓</span><span><span class="zh">自然数输入的黄金模型集嵌入后落在黄金切投集里：内部坐标落在整窗 W = [−1/φ², 1/φ] 的格点的平行投影。只有包含，没有反向，也不涉及更窄的窗口。小图里 s = 1 的窗口正是 W。已冻结：</span><span class="en">The golden model set on natural-number inputs, once embedded, lies in the golden cut-and-project set: the physical projections of lattice points whose internal coordinate lies in the full window W = [−1/φ², 1/φ]. Inclusion only: no converse, and nothing about narrower windows. In the inset the window at s = 1 is exactly W. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project" href="#" target="_blank" rel="noopener"><code>golden_model_set_subset_cut_and_project</code></a></span></div>
+      <div class="lean" data-scenes="funnel" hidden><span class="ok">LEAN ✓</span><span><span class="zh">非退化（至少两个状态）的有限竞技场与目录中的一项 i：去掉 i 后逃逸率上升，即 E(C) &lt; E(C∖{i})，当且仅当 i 的独有捕获数 Uᵢ &gt; 0，也当且仅当 i 的一致核不能由其余各项的共同一致推出。小图：四个世界里 f₁ 的 U = 4，重复的 f_dup 的 U = 0。已冻结：</span><span class="en">For a nondegenerate finite arena (at least two states) and a catalogue entry i: removing i raises the escape rate, E(C) &lt; E(C∖{i}), exactly when its unique-capture count Uᵢ &gt; 0, and exactly when its agreement kernel cannot be inferred from the joint agreement of the other entries. Inset: in the four worlds U = 4 for f₁ and U = 0 for the duplicate f_dup. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos" href="#" target="_blank" rel="noopener"><code>lowersEscape_iff_uniqueCaptureCount_pos</code></a> · <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_not_mem_semanticClosureWithout" href="#" target="_blank" rel="noopener"><code>lowersEscape_iff_not_mem_semanticClosureWithout</code></a></span></div>
+      <div class="lean" data-scenes="funnel" hidden><span class="ok">LEAN ✓</span><span><span class="zh">三个世界 {0, 1, 2}，A = {0}，P = {1, 2}，Q = {0, 1}，冲突即重置的修正：Rev_P(A) = P，Rev_Q(A) = A，Rev_Q(Rev_P(A)) = {1}，Rev_P(Rev_Q(A)) = P，后两者不同：先后顺序改变结果。这是一个独立的显式例子，它的世界不是四世界小图里的世界。已冻结：</span><span class="en">Three worlds {0, 1, 2}, A = {0}, P = {1, 2}, Q = {0, 1}, with reset-on-conflict revision: Rev_P(A) = P, Rev_Q(A) = A, Rev_Q(Rev_P(A)) = {1}, Rev_P(Rev_Q(A)) = P, and the last two differ: the order changes the result. A separate explicit example; its worlds are not those of the four-world inset. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation" href="#" target="_blank" rel="noopener"><code>revision_conflict_noncommutation</code></a></span></div>
+      <div class="lean" data-scenes="records" hidden><span class="ok">LEAN ✓</span><span><span class="zh">前提：每一份记录在 (i, j) 处的重叠 γ 都满足 γ*·γ = 1。则把正向多副本记录信道的输出再送进全部副本的逆转信道，第 (i, j) 元精确复原。另有显式证书：等幅叠加、两份相位记录（γ = −i）时，ρ₀₁ 依次为 1/2、−1/2；只逆转副本 0 得 −i/2，两份都逆转得 1/2。已冻结：</span><span class="en">Premise: every record overlap γ at (i, j) satisfies γ*·γ = 1. Then sending the output of the forward multi-copy record channel through the reversal of every copy restores entry (i, j) exactly. An explicit certificate adds: for the equal superposition and two phase records (γ = −i), ρ₀₁ is 1/2, then −1/2; reversing copy 0 only gives −i/2, reversing both gives 1/2. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal" href="#" target="_blank" rel="noopener"><code>joint_coherent_reversal</code></a> · <a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate" href="#" target="_blank" rel="noopener"><code>two_copy_joint_reversal_certificate</code></a></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：2 × 2 矩阵按 Q₊ρQ₊ + Q₋ρQ₋ 逐项相乘，本征值、熵（bit）、希尔伯特—施密特残差、结果权重与惊讶度、det G 与它的主子式、黄金格点的计数（|a|, |b| ≤ 12，边界容差 10⁻¹²）、四个世界的 12 个有序对与相位记录的乘积都实时算出。“新增熵 0.0000”是同一张图上的数值零；它不是态的熵为零，也不是结果的惊讶度为零。</span><span class="en">A numerical illustration on the page, not a proof: the 2 × 2 matrices are multiplied out entry by entry as Q₊ρQ₊ + Q₋ρQ₋, and the eigenvalues, entropies (bits), Hilbert–Schmidt residuals, outcome weights and surprisals, det G with its principal minors, the golden lattice counts (|a|, |b| ≤ 12, boundary tolerance 10⁻¹²), the 12 ordered pairs of the four worlds and the products of the phase records are all computed live. “Added entropy 0.0000” is a numerical zero on this picture; it does not mean the state has zero entropy, nor that an outcome carries zero surprisal.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">手工推导，未作为独立声明在本书形式化：同一捏合再做一次时，第二次残差是零矩阵、新增熵为零（由捏合幂等、不动点判据与熵产恒等式取 U = I 手工特化）；布洛赫捏合公式 Π_β(ρ) = ½(I + (r·n) n·σ)；奈特换成 bit；三向量格拉姆行列式 det G = 81/625 − (z − 16/25)² 与可行区间 [0.28, 1]；窗口嵌套时选出的点也嵌套。</span><span class="en">Manual derivation, not a separately formalized declaration in this book: repeating the same pinching leaves a second residual that is the zero matrix and adds zero entropy (a manual specialization of pinching idempotence, the fixed-point criterion and the entropy-production identity at U = I); the Bloch pinching formula Π_β(ρ) = ½(I + (r·n) n·σ); converting nats to bits; the three-vector Gram determinant det G = 81/625 − (z − 16/25)² and its feasible interval [0.28, 1]; nested windows select nested points.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果或经验理论，未在本书形式化：惠勒的延迟选择（Wheeler 1978）；分支预测、推测执行与流水线冲刷，以及 TLB 的地址与进程上下文标签（Hennessy &amp; Patterson 2017；Intel SDM 第 3A 卷）；康威的“帝国效应”（Senechal 1995；Baake &amp; Grimm 2013）；似曾相识的认知研究（Brown 2003；Moulin 2018）。页面只借这些作背景，不计算它们。</span><span class="en">Literature results or empirical theories, not formalized in this book: Wheeler's delayed choice (Wheeler 1978); branch prediction, speculative execution and pipeline flushes, and the address and process-context tags of a TLB (Hennessy &amp; Patterson 2017; Intel SDM Vol. 3A); Conway's “Empire effect” (Senechal 1995; Baake &amp; Grimm 2013); cognitive research on déjà vu (Brown 2003; Moulin 2018). The page borrows them as background and computes none of them.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">为画面选定的规则与本书的诠释：把第一次捏合读成“梦中预编译”，把选尺子读成“选统计截面而不是偷看一个写好的未来”，把示意路径读成“醒来被漏斗收拢”，把学到新事实连到换尺子、换先验与“流水线冲刷”，以及缓存卡的 Valid、Context_Version、Time_Tag 与“无时间标签的熟悉感”。这些连接不是任何定理推出来的，也不是神经科学结论；“精确签名”只是这张沙盘模型的签名。</span><span class="en">Rules chosen for the picture and this book's interpretation: reading the first pinching as a “dream precompile”, choosing a ruler as “choosing a statistical cross-section rather than peeking at a future already written”, the illustrative path as “waking drawn in by the funnel”, wiring a learned fact to a new ruler, a new prior and a “pipeline flush”, and the cache card's Valid, Context_Version, Time_Tag and “untagged familiarity”. None of these connections follows from a theorem, and none is a finding of neuroscience; the “exact signature” is the signature of this sandtable model only.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：尺子的方向、投影的进度、先验收窄的阶段或记录的站点" data-aria-en="Rail: the direction of the ruler, the progress of the projections, the stage of the narrowing priors or the record stop">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <span class="zh">场景</span><span class="en">scene</span> · <kbd>U</kbd> <span class="zh">逻辑升级</span><span class="en">upgrade</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">一张投影沙盘，三个场景。尺子：实二维量子比特 |ψ⟩ = (cos θ, sin θ) 的布洛赫圆盘，测量轴 n = (sin β, 0, cos β) 是一把尺子。漏斗：三个单位向量的格拉姆行列式 det G 随第三个余弦 z 变化的拱形与先验窗口。记录：非对角元 ρ₀₁ 在复平面上的箭头。本页是数值演示，不是证明；绿色框只给 Lean 已验证的陈述本身。</p>
+      <ol>
+        <li><b>选尺子。</b>Q±(β) = ½(I ± n·σ)，结果权重 p± = (1 ± r·n)/2。同一个输入 θ = 30°：β = 0° 时 p₊ = 3/4，β = 90° 时 p₊ = (2 + √3)/4 ≈ 0.933。转动的是测量的问法，没有改写任何已经记下的事件，也没有往过去传任何信号；“延迟选择”只是演示里何时转尺子。小图：V = ℝ³、S = span(e₁, e₂)、e = e₃ 是一条剩余方向；T 循环 e₁ → e₂ → e₃ → e₁、C(v) = v₁ 时 O₀、O₁、O₂ 的维数为 1、2、3，严格增长两步 = 3 − rank C。扩大环境空间本身是模型动作，不是克雷洛夫定理的结论。</li>
+        <li><b>梦中预编译。</b>完整未读捏合 Π_β(ρ) = Q₊ρQ₊ + Q₋ρQ₋ = ½(I + (r·n) n·σ)，保留全部结果权重，不选出某一个结果。θ = 30°、β = 0°：ρ_in 的非对角 √3/4 归零，σ = diag(3/4, 1/4)，态熵 h₂(3/4) ≈ 0.811 bit，丢弃的希尔伯特—施密特质量 3/8（没有 bit 单位）。把它读成梦的“预编译”是本书的诠释（MODEL）。</li>
+        <li><b>兼容漏斗。</b>B = (1, 0, 0)，A = (4/5, 3/5, 0)，C(φ) = (4/5, (3/5)cos φ, (3/5)sin φ)：硬锚 x = A·B = 4/5，y = B·C = 4/5，z = A·C = 16/25 + (9/25)cos φ，det G = 81/625 − (z − 16/25)²（手工推导），可行 z ∈ [0.28, 1]。先验依次把 q = cos φ 限制在 [−1, 1]、[0, 2/3]、[1/3, 1/2]，z 的窗口 [0.28, 1] ⊇ [0.64, 0.88] ⊇ [0.76, 0.82]；目标 z = 0.80（q = 4/9，det G = 13/125）。示意路径 z(t) = 19/25 + t/25 是模型选的，窗口的嵌套并不强迫它，也不唯一决定终点。黄金小图：(a, b) ∈ {−12, …, 12}²，内部坐标 a + b(1 − φ)，窗口中心 φ − 3/2、宽 s：s = 1、1/2、1/4 时选中 26、11、7 个点（闭区间，容差 10⁻¹²）。</li>
+        <li><b>梦后逻辑升级。</b>四个世界 {00, 01, 10, 11}：旧特征 f₀(a, b) = a 留下 4 个分不开的有序对，逃逸率 4/12 = 1/3；区分性的 f₁(a, b) = b 独有地分开这 4 对（U = 4），逃逸率降到 0；冗余的 f_dup = f₀ 的 U = 0。梦里的猜测是 00；学到 f₁ = 1 选出 01，与旧先验 {00, 01} 相容，却推翻了猜测——所以作废的是编译出来的投影，不是整个先验。开关打开时，模型规则把可撤销的先验 q ∈ [1/3, 1/2] 换成 q ∈ [−1, −1/3]（硬锚不动），窗口变成 [0.28, 0.52]，旧目标 0.80 被排除，新目标 z = 0.40（q = −2/3，det G = 9/125）；尺子转到 β = 90°，保存的 σ 再投影成 I/2，新增熵 ≈ 0.189 bit，残差 1/8。“学到新事实 → 换尺子、换先验、冲刷缓存”是选定的模型规则，不是第 14–16 条定理的推论；修正不可交换的三世界例子是另一个独立的显式例子。关掉开关是从不变的快照重置演示，不是忘掉事实，也不是找回被删掉的相干。</li>
+        <li><b>相位记录与逆转。</b>θ = 45° 时 ρ₀₁ = 1/2。两份记录各给地址 0 写 (1, 0)、给地址 1 写 (i, 0)，重叠 γ = −i：两份都写入后 ρ₀₁ = −1/2，只逆转副本 0 得 −i/2，两份都逆转回到 1/2（Lean 证书的四个值；站点之间的转动只是动画）。复原定理的前提是每份记录 γ*·γ = 1；重叠为 0 的对照里两条路被完全分开，前提不成立，逆转救不回来。这些相位信道也不能拿来复原已经捏合过的 σ：被删掉的非对角在局部已经没有了。</li>
+        <li><b>似曾相识。</b>对同一把尺子，Π(Π(ρ)) = Π(ρ)：第二次残差是零矩阵，新增熵 0（手工特化，ARGUED）。这个零是“同一映射再做一次的新增态熵”，不是态本身的熵（仍是 0.811 bit），也不是结果的惊讶度（−log₂ 3/4 ≈ 0.415 与 −log₂ 1/4 = 2 bit），更不是热力学的零功、CPU 的能耗或大脑的代谢。缓存卡是虚构的情节记录：命中 = Valid ∧ 地址相符 ∧ 上下文版本相符 ∧ 再投影不改变保存的态；“无时间标签的熟悉感” = 命中 ∧ Time_Tag = NULL。Time_Tag 是情节时间戳，不是地址标签；单凭有效位确立不了命中。这不是字面意义的无标签 TLB，也不是测得的人脑似曾相识机制（MODEL）。</li>
+        <li><b>不是什么。</b>“梦见过，所以必然发生”不从幂等、格拉姆半正定、切投包含或对角落地中推出；页面没有任何定理断言预知梦、时间旅行或神经缓存。</li>
+      </ol>
+      <p class="lede refs">文献（ARGUED）：J. A. Wheeler, “The ‘Past’ and the ‘Delayed-Choice’ Double-Slit Experiment”, in <i>Mathematical Foundations of Quantum Theory</i>, A. R. Marlow (ed.), 1978, pp. 9–48 · J. L. Hennessy &amp; D. A. Patterson, <i>Computer Architecture: A Quantitative Approach</i>, 6th ed., 2017 · Intel <i>64 and IA-32 Architectures Software Developer's Manual</i>, Vol. 3A（TLB、PCID）· M. Senechal, <i>Quasicrystals and Geometry</i>, 1995 · M. Baake &amp; U. Grimm, <i>Aperiodic Order</i>, Vol. 1, 2013 · A. S. Brown, “A review of the déjà vu experience”, <i>Psychological Bulletin</i> 129(3), 2003, 394–413 · C. Moulin, <i>The Cognitive Neuropsychology of Déjà Vu</i>, Routledge, 2018。</p>
+      <p class="lede refs">书中：<a href="../../zh/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#sec-ch37-dream-pre-decoherence-deja-vu" target="_top">第 37 章 · 梦的预退相干与似曾相识</a> · <a href="../../zh/ch29-timeless-causality-and-gram-space.html" target="_top">第 29 章 · 格拉姆空间</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.lean" href="#" target="_blank" rel="noopener">FiniteRecordPinchingIdempotence.lean</a> · <a data-trureturing-path="D5/S3/ObserverMemory/JointCoherentReversal.lean" href="#" target="_blank" rel="noopener">JointCoherentReversal.lean</a> · <a data-trureturing-path="D5/S3/ConceptDynamics/InformationEscape/ExactRate.lean" href="#" target="_blank" rel="noopener">ExactRate.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">One projection sandtable in three scenes. Ruler: the Bloch disc of a real qubit |ψ⟩ = (cos θ, sin θ), with the measurement axis n = (sin β, 0, cos β) as a ruler. Funnel: the arch traced by the Gram determinant det G of three unit vectors as their third cosine z varies, with the prior windows. Records: the arrow of the off-diagonal entry ρ₀₁ in the complex plane. The page is a numerical illustration, not a proof; the green boxes carry only the statements verified in Lean.</p>
+      <ol>
+        <li><b>Choosing the ruler.</b> Q±(β) = ½(I ± n·σ), with outcome weights p± = (1 ± r·n)/2. For the same input θ = 30°: p₊ = 3/4 at β = 0° and p₊ = (2 + √3)/4 ≈ 0.933 at β = 90°. What turns is the question the measurement asks; no recorded event is rewritten and no signal goes to the past; “delayed choice” is only when the ruler is set in the demonstration. Inset: in V = ℝ³ with S = span(e₁, e₂), e = e₃ is a residual direction; with T cycling e₁ → e₂ → e₃ → e₁ and C(v) = v₁, O₀, O₁, O₂ have dimensions 1, 2, 3: two strict growth steps = 3 − rank C. Enlarging the ambient space is itself a model action, not a conclusion of the Krylov theorem.</li>
+        <li><b>Dream precompile.</b> The complete unread pinching Π_β(ρ) = Q₊ρQ₊ + Q₋ρQ₋ = ½(I + (r·n) n·σ) keeps every outcome weight and selects no outcome. At θ = 30°, β = 0°: the off-diagonal √3/4 of ρ_in goes to zero, σ = diag(3/4, 1/4), the state entropy is h₂(3/4) ≈ 0.811 bit and the discarded Hilbert–Schmidt mass is 3/8 (no unit of bits). Reading this as the dream's “precompile” is this book's interpretation (MODEL).</li>
+        <li><b>Compatible funnel.</b> B = (1, 0, 0), A = (4/5, 3/5, 0), C(φ) = (4/5, (3/5)cos φ, (3/5)sin φ): hard anchors x = A·B = 4/5, y = B·C = 4/5, and z = A·C = 16/25 + (9/25)cos φ, det G = 81/625 − (z − 16/25)² (manual derivation), feasible for z ∈ [0.28, 1]. The priors restrict q = cos φ to [−1, 1], [0, 2/3], [1/3, 1/2] in turn, so the z windows are [0.28, 1] ⊇ [0.64, 0.88] ⊇ [0.76, 0.82]; the target is z = 0.80 (q = 4/9, det G = 13/125). The illustrative path z(t) = 19/25 + t/25 is chosen by the model; the nesting of the windows neither forces it nor fixes its end uniquely. Golden inset: (a, b) ∈ {−12, …, 12}², internal coordinate a + b(1 − φ), window centred at φ − 3/2 with width s: s = 1, 1/2, 1/4 select 26, 11, 7 points (closed intervals, tolerance 10⁻¹²).</li>
+        <li><b>Post-dream logic upgrade.</b> Four worlds {00, 01, 10, 11}: the old feature f₀(a, b) = a leaves 4 ordered pairs it cannot tell apart, an escape rate of 4/12 = 1/3; the distinguishing f₁(a, b) = b alone separates those 4 pairs (U = 4) and the escape rate drops to 0; the redundant f_dup = f₀ has U = 0. The dream's guess is 00; learning f₁ = 1 selects 01, consistent with the old prior {00, 01} but contradicting the guess, so what is invalidated is the compiled projection, not the whole prior. With the switch on, the model rule replaces the defeasible prior q ∈ [1/3, 1/2] by q ∈ [−1, −1/3] (the hard anchors stay), the window becomes [0.28, 0.52], the old target 0.80 is excluded and the new target is z = 0.40 (q = −2/3, det G = 9/125); the ruler turns to β = 90°, the saved σ projects to I/2, the added entropy is ≈ 0.189 bit and the residual 1/8. “A learned fact → a new ruler, a new prior, a flushed cache” is a chosen model rule, not a consequence of theorems 14–16; the three-world example of non-commuting revision is a separate explicit example. Switching off resets the demonstration from the unchanged snapshot; it neither unlearns the fact nor recovers deleted coherence.</li>
+        <li><b>Phase records and reversal.</b> At θ = 45°, ρ₀₁ = 1/2. Each of two records writes (1, 0) for address 0 and (i, 0) for address 1, with overlap γ = −i: with both written ρ₀₁ = −1/2, reversing copy 0 only gives −i/2, and reversing both returns it to 1/2 (the four values of the Lean certificate; the turning between stops is animation only). The restoration theorem assumes γ*·γ = 1 for every record; in the comparison with overlap 0 the two paths are told apart completely, the premise fails and reversal cannot restore anything. Nor can these phase channels restore the already pinched σ: its deleted off-diagonal entry is no longer there locally.</li>
+        <li><b>Déjà vu.</b> For the same ruler, Π(Π(ρ)) = Π(ρ): the second residual is the zero matrix and the added entropy is 0 (a manual specialization, ARGUED). This zero is “the state entropy added by applying the same map again”; it is not the entropy of the state (still 0.811 bit), nor the surprisal of an outcome (−log₂ 3/4 ≈ 0.415 and −log₂ 1/4 = 2 bit), nor zero thermodynamic work, CPU energy or brain metabolism. The cache card is a fictional episode record: hit = Valid ∧ address matches ∧ context version matches ∧ re-projection leaves the saved state unchanged; “untagged familiarity” = hit ∧ Time_Tag = NULL. Time_Tag is an episodic timestamp, not an address tag; a valid bit alone establishes no hit. This is not literal tagless TLB addressing, nor a measured mechanism of human déjà vu (MODEL).</li>
+        <li><b>What it is not.</b> “Dreamed once, therefore bound to happen” follows from none of idempotence, Gram positivity, the cut-and-project inclusion or diagonal landing; no theorem on this page asserts precognitive dreams, time travel or a neural cache.</li>
+      </ol>
+      <p class="lede refs">Literature (ARGUED): J. A. Wheeler, “The ‘Past’ and the ‘Delayed-Choice’ Double-Slit Experiment”, in <i>Mathematical Foundations of Quantum Theory</i>, A. R. Marlow (ed.), 1978, pp. 9–48 · J. L. Hennessy &amp; D. A. Patterson, <i>Computer Architecture: A Quantitative Approach</i>, 6th ed., 2017 · Intel <i>64 and IA-32 Architectures Software Developer's Manual</i>, Vol. 3A (TLBs, PCIDs) · M. Senechal, <i>Quasicrystals and Geometry</i>, 1995 · M. Baake &amp; U. Grimm, <i>Aperiodic Order</i>, Vol. 1, 2013 · A. S. Brown, “A review of the déjà vu experience”, <i>Psychological Bulletin</i> 129(3), 2003, 394–413 · C. Moulin, <i>The Cognitive Neuropsychology of Déjà Vu</i>, Routledge, 2018.</p>
+      <p class="lede refs">In the book: <a href="../../en/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#sec-ch37-dream-pre-decoherence-deja-vu" target="_top">Chapter 37 · Dream pre-decoherence and déjà vu</a> · <a href="../../en/ch29-timeless-causality-and-gram-space.html" target="_top">Chapter 29 · Gram space</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.lean" href="#" target="_blank" rel="noopener">FiniteRecordPinchingIdempotence.lean</a> · <a data-trureturing-path="D5/S3/ObserverMemory/JointCoherentReversal.lean" href="#" target="_blank" rel="noopener">JointCoherentReversal.lean</a> · <a data-trureturing-path="D5/S3/ConceptDynamics/InformationEscape/ExactRate.lean" href="#" target="_blank" rel="noopener">ExactRate.lean</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

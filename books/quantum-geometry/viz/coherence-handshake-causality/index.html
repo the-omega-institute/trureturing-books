@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//HANDSHAKE · Coherence handshake: a zero is not an absence, a probability is a handshake">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//HANDSHAKE 相干握手 · 零不等于没有，概率是一次握手</title>
+<meta name="description" content="六个场景：同一个零可以来自正交、反相干涉或退相干捏掉；去程振幅乘回程振幅锁住与相位无关的权重；有限路径扇只在驻相处对齐；未来选基改不动过去的总分布；对调过去与未来，格拉姆行列式不动；回路里一个相对负号让悖论端口变暗。Six scenes: one zero can come from orthogonality, opposite-phase interference or a decoherent pinch; a forward amplitude times its echo locks a phase-free weight; a finite fan of paths lines up only where the phase is stationary; a future basis choice cannot move the past total; swapping past and future leaves the Gram determinant unchanged; one relative sign in a loop darkens the paradox port.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="coherence-handshake-causality">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//HANDSHAKE">ORTHO<b>//</b>HANDSHAKE</h1>
+      <div class="tagline">
+        <span class="zh">相干握手 · <em>零不等于没有：它可以藏在正交里、抵消在干涉里、捏掉在退相干里；概率是去程振幅乘回程振幅的一次握手</em></span>
+        <span class="en">Coherence handshake · <em>a zero is not an absence: it can hide in orthogonality, cancel in interference or be pinched away by decoherence; a probability is the handshake of a forward amplitude with its echo</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill" id="pillWhat"><strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="boolean-illusion" aria-pressed="false"><span class="code">THREE ZEROS</span><span class="cn zh">三种零：藏起、抵消、捏掉</span><span class="cn en">Three zeros: hidden, cancelled, pinched</span></button>
+        <button class="preset" data-preset="born-handshake" aria-pressed="false"><span class="code">HANDSHAKE</span><span class="cn zh">去程乘回程，相位锁住</span><span class="cn en">Forward times echo, the phase locks</span></button>
+        <button class="preset" data-preset="feynman-stationary" aria-pressed="false"><span class="code">PATH FAN</span><span class="cn zh">路径扇只在驻相处对齐</span><span class="cn en">A fan of paths lines up only where stationary</span></button>
+        <button class="preset" data-preset="tsvf-eraser" aria-pressed="false"><span class="code">ERASER</span><span class="cn zh">未来选基，过去的总数不动</span><span class="cn en">A future basis choice, the past total unmoved</span></button>
+        <button class="preset" data-preset="gram-symmetry" aria-pressed="false"><span class="code">GRAM SWAP</span><span class="cn zh">对调过去与未来，行列式不动</span><span class="cn en">Swap past and future, the determinant stays</span></button>
+        <button class="preset" data-preset="paradox-cancel" aria-pressed="false"><span class="code">LOOP</span><span class="cn zh">回路翻一个负号，悖论端口变暗</span><span class="cn en">One sign flip in the loop darkens the paradox port</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="boolean-illusion">
+      <h2><span class="zh">三种零</span><span class="en">Three zeros</span><span class="aside">θ · ξ · Δ · γ</span></h2>
+      <div class="field">
+        <label for="fTh"><span class="zh">B 与 A 的夹角 θ</span><span class="en">Angle θ between B and A</span><small class="zh">也可以拖 B 的箭头</small><small class="en">or drag the tip of B</small></label><output id="oTh" for="fTh">—</output>
+        <input type="range" id="fTh" min="0" max="180" step="1" value="90">
+      </div>
+      <div class="field">
+        <label for="fXi"><span class="zh">两臂振幅 a = cos ξ，b = sin ξ</span><span class="en">Arm amplitudes a = cos ξ, b = sin ξ</span></label><output id="oXi" for="fXi">—</output>
+        <input type="range" id="fXi" min="0" max="90" step="1" value="45">
+      </div>
+      <div class="field">
+        <label for="fDelta"><span class="zh">两臂的相对相位 Δ</span><span class="en">Relative phase Δ of the arms</span><small class="zh">也可以拖紫色箭头</small><small class="en">or drag the violet arrow</small></label><output id="oDelta" for="fDelta">—</output>
+        <input type="range" id="fDelta" min="0" max="360" step="1" value="180">
+      </div>
+      <div class="chips" id="boolSnaps" role="group" aria-label="三种操作" data-aria-en="Three operations">
+        <button class="chip" data-snap="orth"><span class="zh">正交 θ = 90°</span><span class="en">orthogonal θ = 90°</span></button>
+        <button class="chip" data-snap="anti"><span class="zh">反相 Δ = 180°</span><span class="en">opposite phase Δ = 180°</span></button>
+        <button class="chip" data-snap="pinch"><span class="zh">捏掉 γ = 0</span><span class="en">pinch γ = 0</span></button>
+      </div>
+      <p class="note"><span class="zh">时间轴把相干保留率 γ 从 1 捏到 0。三个按钮各只做一件事：转成正交、调成反相、捏掉相干，互不替代。</span><span class="en">The rail pinches the coherence retention γ from 1 to 0. The three buttons each do one thing only: make the vectors orthogonal, put the arms in opposite phase, pinch the coherence. None stands in for another.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="born-handshake" hidden>
+      <h2><span class="zh">两条射线</span><span class="en">Two rays</span><span class="aside">ψ · φ</span></h2>
+      <div class="field">
+        <label for="fThB"><span class="zh">球面上的夹角 θ</span><span class="en">Separation θ on the sphere</span><small class="zh">也可以在球上拖 |φ⟩</small><small class="en">or drag |φ⟩ on the sphere</small></label><output id="oThB" for="fThB">—</output>
+        <input type="range" id="fThB" min="0" max="180" step="1" value="90">
+      </div>
+      <div class="field">
+        <label for="fChiPhi"><span class="zh">|φ⟩ 的整体相位 χ_φ</span><span class="en">Global phase χ_φ of |φ⟩</span></label><output id="oChiPhi" for="fChiPhi">—</output>
+        <input type="range" id="fChiPhi" min="0" max="360" step="1" value="0">
+      </div>
+      <div class="chips" id="bornSnaps" role="group" aria-label="夹角" data-aria-en="Separation">
+        <button class="chip" data-snap="0">θ = 0</button><button class="chip" data-snap="90">θ = 90°</button><button class="chip" data-snap="180">θ = 180°</button>
+      </div>
+      <p class="note"><span class="zh">时间轴转动 |ψ⟩ 的整体相位 χ_ψ 一整圈。|ψ⟩ = e^{iχ_ψ}(1, 0)，|φ⟩ = e^{iχ_φ}(cos(θ/2), sin(θ/2))；θ 是球面上的夹角，希尔伯特空间里的夹角是 θ/2。</span><span class="en">The rail turns the global phase χ_ψ of |ψ⟩ through a full turn. |ψ⟩ = e^{iχ_ψ}(1, 0) and |φ⟩ = e^{iχ_φ}(cos(θ/2), sin(θ/2)); θ is the angle on the sphere, the angle in Hilbert space is θ/2.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="feynman-stationary" hidden>
+      <h2><span class="zh">路径扇</span><span class="en">The path fan</span><span class="aside">k₀ · n₁ · n₂ · M</span></h2>
+      <div class="field">
+        <label for="fK0"><span class="zh">波数 k₀ = 2π/λ</span><span class="en">Wave number k₀ = 2π/λ</span><small class="zh">即 1/ħ 的标度</small><small class="en">the scale of 1/ħ</small></label><output id="oK0" for="fK0">—</output>
+        <input type="range" id="fK0" min="6.3" max="125.6" step="0.1" value="25.1">
+      </div>
+      <div class="field">
+        <label for="fN1"><span class="zh">上方介质的折射率 n₁</span><span class="en">Refractive index n₁ above</span></label><output id="oN1" for="fN1">—</output>
+        <input type="range" id="fN1" min="1" max="2.5" step="0.05" value="1">
+      </div>
+      <div class="field">
+        <label for="fN2"><span class="zh">下方介质的折射率 n₂</span><span class="en">Refractive index n₂ below</span></label><output id="oN2" for="fN2">—</output>
+        <input type="range" id="fN2" min="1" max="2.5" step="0.05" value="1.5">
+      </div>
+      <div class="field">
+        <label><span class="zh">路径数 M</span><span class="en">Number of paths M</span><small class="zh">自动：相邻相位差 ≤ π/4 的最小网格</small><small class="en">auto: the coarsest mesh with phase steps ≤ π/4</small></label>
+        <span class="chips" id="mChips" role="group" aria-label="路径数" data-aria-en="Number of paths">
+          <button class="chip" data-mesh="auto" aria-pressed="true"><span class="zh">自动</span><span class="en">auto</span></button><button class="chip" data-mesh="257" aria-pressed="false">257</button><button class="chip" data-mesh="513" aria-pressed="false">513</button><button class="chip" data-mesh="1025" aria-pressed="false">1025</button><button class="chip" data-mesh="2049" aria-pressed="false">2049</button><button class="chip" data-mesh="4097" aria-pressed="false">4097</button>
+        </span>
+      </div>
+      <div class="field">
+        <label><span class="zh">画哪一种扇</span><span class="en">Which fan</span></label>
+        <span class="chips" id="fanChips" role="group" aria-label="路径扇" data-aria-en="Fan">
+          <button class="chip" data-fan="exact" aria-pressed="true"><span class="zh">真实光程</span><span class="en">exact optical</span></button><button class="chip" data-fan="quadratic" aria-pressed="false"><span class="zh">二次近似</span><span class="en">quadratic approx.</span></button><button class="chip" data-fan="roots" aria-pressed="false"><span class="zh">单位根校准</span><span class="en">roots of unity</span></button>
+        </span>
+      </div>
+      <p class="note"><span class="zh">时间轴把路径按界面交点 s 的顺序一条条加进来；也可以沿界面拖琥珀色的交点。A = (0, 1)，B = (1, −1)，界面 y = 0，s 取 [−2, 3] 的中点网格。</span><span class="en">The rail adds the paths one by one in the order of their crossing s; you can also drag the amber crossing along the interface. A = (0, 1), B = (1, −1), interface y = 0, s on the midpoint grid of [−2, 3].</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="tsvf-eraser" hidden>
+      <h2><span class="zh">擦除与弱值</span><span class="en">Eraser and weak value</span><span class="aside">β · V · η</span></h2>
+      <div class="field">
+        <label for="fV"><span class="zh">标记的相干可见度 V</span><span class="en">Marker coherence visibility V</span></label><output id="oV" for="fV">—</output>
+        <input type="range" id="fV" min="0" max="1" step="0.01" value="1">
+      </div>
+      <div class="chips" id="tsvfSnaps" role="group" aria-label="未来标记基" data-aria-en="Future marker basis">
+        <button class="chip" data-snap="which"><span class="zh">测路径 β = 0</span><span class="en">which-path β = 0</span></button><button class="chip" data-snap="erase"><span class="zh">擦除 β = 90°</span><span class="en">eraser β = 90°</span></button>
+      </div>
+      <div class="field">
+        <label for="fEta"><span class="zh">后选态的角度 η</span><span class="en">Postselection angle η</span><small class="zh">|Φ_η⟩ = cos η|+⟩ + sin η|−⟩</small><small class="en">|Φ_η⟩ = cos η|+⟩ + sin η|−⟩</small></label><output id="oEta" for="fEta">—</output>
+        <input type="range" id="fEta" min="-90" max="90" step="1" value="60">
+      </div>
+      <p class="note"><span class="zh">时间轴把未来的标记测量基从 Z（β = 0，测路径）转到 X（β = 90°，擦除）。屏幕有 128 格，qⱼ = 1/128，φⱼ = 2π(j + ½)/128。</span><span class="en">The rail turns the future marker basis from Z (β = 0, which-path) to X (β = 90°, eraser). The screen has 128 bins, qⱼ = 1/128, φⱼ = 2π(j + ½)/128.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="gram-symmetry" hidden>
+      <h2><span class="zh">三个事件</span><span class="en">Three events</span><span class="aside">x · y · z</span></h2>
+      <div class="field">
+        <label for="fX"><span class="zh">x = A_past · B_now</span><span class="en">x = A_past · B_now</span></label><output id="oX" for="fX">—</output>
+        <input type="range" id="fX" min="-1" max="1" step="0.01" value="0.2">
+      </div>
+      <div class="field">
+        <label for="fY"><span class="zh">y = B_now · C_future</span><span class="en">y = B_now · C_future</span></label><output id="oY" for="fY">—</output>
+        <input type="range" id="fY" min="-1" max="1" step="0.01" value="0.6">
+      </div>
+      <div class="chips" id="gramSnaps" role="group" aria-label="快照" data-aria-en="Snapshots">
+        <button class="chip" data-snap="swap" aria-pressed="false"><span class="zh">对调 A_past ↔ C_future</span><span class="en">swap A_past ↔ C_future</span></button>
+        <button class="chip" data-snap="default"><span class="zh">不对称 x = 0.2, y = 0.6</span><span class="en">asymmetric x = 0.2, y = 0.6</span></button>
+        <button class="chip" data-snap="symmetric"><span class="zh">对称 x = y = 0.5</span><span class="en">symmetric x = y = 0.5</span></button>
+        <button class="chip" data-snap="ortho"><span class="zh">两两正交</span><span class="en">orthonormal</span></button>
+        <button class="chip" data-snap="flat"><span class="zh">共面</span><span class="en">coplanar</span></button>
+        <button class="chip" data-snap="invalid"><span class="zh">试填 (1, 1, −1)</span><span class="en">try (1, 1, −1)</span></button>
+      </div>
+      <p class="note"><span class="zh">B = (0, 0, 1)，A 在 xz 平面里，C 绕 B 的转角 φ 由时间轴给出，所以 z = A·C = xy + √((1−x²)(1−y²)) cos φ 总落在窗口里。</span><span class="en">B = (0, 0, 1), A lies in the xz plane, and the angle φ of C about B comes from the rail, so z = A·C = xy + √((1−x²)(1−y²)) cos φ always falls inside the window.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="paradox-cancel" hidden>
+      <h2><span class="zh">回路相位</span><span class="en">Loop phase</span><span class="aside">δ = πτ</span></h2>
+      <div class="chips" id="loopSnaps" role="group" aria-label="回路相位" data-aria-en="Loop phase">
+        <button class="chip" data-snap="0">δ = 0</button><button class="chip" data-snap="1">δ = π</button><button class="chip" data-snap="2">δ = 2π</button>
+      </div>
+      <p class="note"><span class="zh">时间轴走底圆的圈数 τ ∈ [0, 2]；底圆转 τ 圈，提升到双覆盖上只转 τ/2 圈，回路臂相对参考臂的相位 δ = πτ。也可以拖紫色的回路箭头。</span><span class="en">The rail runs the number of base turns τ ∈ [0, 2]; τ base turns lift to τ/2 turns on the double cover, and the loop arm's phase relative to the reference arm is δ = πτ. You can also drag the violet loop arrow.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：本场景的几何对象（向量、相位箭头、密度矩阵、路径扇、屏幕直方图、格拉姆矩阵或回路端口）；在可拖动的对象上拖动，三维场景里拖动空白处旋转" data-aria-en="Stage: the geometric objects of the scene (vectors, phase arrows, a density matrix, a path fan, a screen histogram, a Gram matrix or the loop ports); drag a draggable object, and in the 3D scenes drag empty space to rotate">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景的第一张小图" data-aria-en="First small plot of the scene"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="本场景的第二张小图" data-aria-en="Second small plot of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="m"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+
+      <div class="lean" data-scenes="boolean-illusion"><span class="ok">LEAN ✓</span><span><span class="zh">正交补投影恒等式：完备内积空间里闭子空间 M 的投影与正交补的投影满足 P_{M⊥} = I − P_M，两者都幂等，彼此相乘为零，相加为恒等。所以 B 在 A 线上的影子为零时，补空间的投影就是整个 B。定理不谈面积，也不谈存在与否。已冻结：</span><span class="en">Orthogonal-complement projections: for a closed subspace M of a complete inner-product space, P_{M⊥} = I − P_M, both are idempotent, their products vanish and their sum is the identity. So when the shadow of B on the line of A is zero, the complementary projection is all of B. The theorem says nothing about area or about existence. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities" href="#" target="_blank" rel="noopener"><code>orthogonal_complement_projection_identities</code></a></span></div>
+      <div class="lean" data-scenes="boolean-illusion"><span class="ok">LEAN ✓</span><span><span class="zh">拉格朗日—格拉姆恒等式：对有限指标上的实数 u、v，(Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)²，不要求归一。取平面单位向量 A、B，就是 (A·B)² + (A∧B)² = 1：线的平方加面积的平方。它是 2 × 2 格拉姆余项，不是三阶行列式公式。已冻结：</span><span class="en">The Lagrange–Gram identity: for real u, v over a finite index set, (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)², with no normalization needed. For unit planar A, B it reads (A·B)² + (A∧B)² = 1: line squared plus area squared. It is the 2 × 2 Gram remainder, not the 3 × 3 determinant formula. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+      <div class="lean" data-scenes="boolean-illusion"><span class="ok">LEAN ✓</span><span><span class="zh">有限记录捏合的幂等性：有限、完备、两两正交的自伴记录族 P 给出的未读映射满足 unreadState P ∘ unreadState P = unreadState P。这是信道的性质；捏过一次再捏，什么也不变。它不说输出的密度矩阵自乘不变：等权时 Π(ρ) = I/2，而 (I/2)² ≠ I/2。已冻结：</span><span class="en">Idempotence of finite record pinching: a finite, complete, pairwise orthogonal self-adjoint record family P gives an unread map with unreadState P ∘ unreadState P = unreadState P. This is a property of the channel: pinching twice changes nothing more. It does not say the output density matrix squares to itself: at equal weights Π(ρ) = I/2, and (I/2)² ≠ I/2. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent" href="#" target="_blank" rel="noopener"><code>finite_record_pinching_idempotent</code></a></span></div>
+      <div class="lean" data-scenes="boolean-illusion"><span class="ok">LEAN ✓</span><span><span class="zh">捏合的希尔伯特—施密特勾股：对任意复 2 × 2 矩阵 ρ 与标准基捏合 Π，⟨ρ, ρ⟩ = ⟨Πρ, Πρ⟩ + ⟨ρ − Πρ, ρ − Πρ⟩。ρ 是密度矩阵时，纯度 Tr ρ² 正好分成留下的对角质量与被捏掉的相干质量。它不说被捏掉的相干能在本地找回。已冻结：</span><span class="en">Hilbert–Schmidt Pythagoras for pinching: for every complex 2 × 2 matrix ρ and the standard-basis pinching Π, ⟨ρ, ρ⟩ = ⟨Πρ, Πρ⟩ + ⟨ρ − Πρ, ρ − Πρ⟩. For a density matrix the purity Tr ρ² splits exactly into the diagonal mass kept and the coherence mass pinched away. It does not say the pinched coherence can be recovered locally. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean" href="#" target="_blank" rel="noopener"><code>pinching_hilbert_schmidt_pythagorean</code></a></span></div>
+
+      <div class="lean" data-scenes="born-handshake" hidden><span class="ok">LEAN ✓</span><span><span class="zh">秩一纯态的模方约化：若 P_k = φφ*、ρ = ψψ*，则记录权重 Tr(ρ P_k) = |φ*ψ|²。这是一个数的等式，定理本身不要求归一（页面用的是单位向量）；它也不是夹心式 P_ψ P_φ P_ψ = w P_ψ，后者由页面直接用矩阵算出。已冻结：</span><span class="en">Modulus-square reduction for rank-one pure states: if P_k = φφ* and ρ = ψψ*, the record weight Tr(ρ P_k) equals |φ*ψ|². It is an equality of numbers and does not itself assume normalization (the page uses unit vectors); nor is it the sandwich P_ψ P_φ P_ψ = w P_ψ, which the page computes directly from the matrices. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction" href="#" target="_blank" rel="noopener"><code>rank_one_pure_state_modulus_square_reduction</code></a></span></div>
+      <div class="lean" data-scenes="born-handshake" hidden><span class="ok">LEAN ✓</span><span><span class="zh">秩一玻恩配对权重：在完备的记录测量与半正定、迹为 1 的态之下，取秩一记录与纯态，权重同时等于 |φ*ψ|² 与 Tr(ρ P_k)，并且未读态等于各条件态按权重的和。页面用 I − P_φ 把测量补完整。已冻结：</span><span class="en">Rank-one Born pairing weight: under a complete record measurement and a positive semidefinite trace-one state, for a rank-one record and a pure state the weight equals both |φ*ψ|² and Tr(ρ P_k), and the unread state is the weighted sum of the conditional states. The page completes the measurement with I − P_φ. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="#" target="_blank" rel="noopener"><code>rank_one_born_pairing_weight</code></a></span></div>
+      <div class="lean" data-scenes="born-handshake" hidden><span class="ok">LEAN ✓</span><span><span class="zh">共同相位多项式定理：z 与 z̄ 的多项式在所有坐标共同转相位时不变，当且仅当它是平衡的，即由 zᵢz̄ⱼ 生成；非常数的不变多项式次数至少为 2；实值、齐二次的不变量是唯一的厄米形式 z*Hz，非负当且仅当 H ⪰ 0。只有一个复数时只剩 c|a|²，取 c = 1 是额外的标定。它不唯一选出玻恩规则，也不证明超前波。已冻结：</span><span class="en">The common-phase polynomial theorem: a polynomial in z and z̄ is invariant under the common phase rotation of every coordinate iff it is balanced, i.e. generated by zᵢz̄ⱼ; a nonconstant invariant has degree at least 2; a real homogeneous quadratic invariant is a unique Hermitian form z*Hz, nonnegative iff H ⪰ 0. For a single complex number only c|a|² remains, and c = 1 is an extra calibration. It does not single out the Born rule, nor prove advanced waves. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem" href="#" target="_blank" rel="noopener"><code>complete_common_phase_polynomial_theorem</code></a></span></div>
+
+      <div class="lean" data-scenes="tsvf-eraser" hidden><span class="ok">LEAN ✓</span><span><span class="zh">联合相干逆转：对选定的矩阵元，若每一份环境记录的重叠 γ 都是单位模（|γ| = 1），把全部记录逆转就恢复这一项。|γ| &lt; 1 时取共轭只得到 |γ|²，重叠为零时无法撤销。它不是万能擦除器。已冻结：</span><span class="en">Joint coherent reversal: for a chosen matrix entry, if every environment record overlap γ is unimodular (|γ| = 1), reversing all the records restores that entry. When |γ| &lt; 1 conjugation only yields |γ|², and a zero overlap cannot be undone. It is not a universal eraser. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal" href="#" target="_blank" rel="noopener"><code>joint_coherent_reversal</code></a></span></div>
+      <div class="lean" data-scenes="tsvf-eraser" hidden><span class="ok">LEAN ✓</span><span><span class="zh">约化的不可逆是访问缺陷：两个对角相同、相干不同的量子比特矩阵经复制酉变换后，迹掉环境的约化记录完全一样，联合态却不同；不存在从约化数据同时恢复两个联合态的映射，而联合酉变换的逆把两者都还原。它不是关于影响传回过去的定理。已冻结：</span><span class="en">Reduced irreversibility is an access defect: two qubit matrices with equal diagonals but different coherence have identical environment-traced records after the copy unitary, while their joint states differ; no map recovers both joint states from the reduced datum, and the inverse joint unitary restores both. It is not a theorem about influences travelling to the past. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect" href="#" target="_blank" rel="noopener"><code>reduced_irreversibility_is_access_defect</code></a></span></div>
+      <div class="lean" data-scenes="tsvf-eraser" hidden><span class="ok">LEAN ✓</span><span><span class="zh">局部边缘的关联盲区：m × n 两体系统的零迹厄米算子实空间（实数域 ℝ 上 BipartiteHermitian m n 的零迹子空间）正交地分成局部部分（实维数 (m²−1) + (n²−1)）与关联部分（实维数 (m²−1)(n²−1)），两量子比特时为 6 + 9 = 15；贝尔态与经典关联态的两个边缘完全相同，本身却不同。边缘看不见关联。它本身不是一般的不可通信定理，后者由页面从测量的完备性推出。已冻结：</span><span class="en">The correlation blind spot of local marginals: the real space of trace-zero Hermitian operators of an m × n bipartite system (the trace-zero subspace of BipartiteHermitian m n over the real scalars ℝ) splits orthogonally into local sectors (real dimension (m²−1) + (n²−1)) and the correlation sector (real dimension (m²−1)(n²−1)), i.e. 6 + 9 = 15 for two qubits; a Bell state and a classically correlated state have identical marginals yet differ. Marginals do not see correlations. It is not by itself the general no-signalling theorem, which the page derives from the completeness of the instrument. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot" href="#" target="_blank" rel="noopener"><code>local_marginal_correlation_blind_spot</code></a></span></div>
+
+      <div class="lean" data-scenes="gram-symmetry" hidden><span class="ok">LEAN ✓</span><span><span class="zh">拉格朗日—格拉姆恒等式：(Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)²。取两个单位向量，左边就是二阶主子式 1 − c²：一块面积的平方，所以 1 − x²、1 − y²、1 − z² 都非负。三阶行列式的展开与置换恒等式是页面另做的初等计算，不在这条定理里。已冻结：</span><span class="en">The Lagrange–Gram identity: (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)². For two unit vectors the left side is the 2 × 2 principal minor 1 − c², the square of an area, so 1 − x², 1 − y² and 1 − z² are all nonnegative. The 3 × 3 determinant expansion and the permutation identity are elementary calculations done separately on the page, not part of this theorem. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+      <div class="lean" data-scenes="gram-symmetry" hidden><span class="ok">LEAN ✓</span><span><span class="zh">格拉姆可实现性：复希尔伯特空间上的连续算子 Q 为正，当且仅当存在 O 使 Q = O*O，从而 ⟨Qx, y⟩ = ⟨Ox, Oy⟩：正算子恰好是一组格拉姆配对。它没有直接写出 3 × 3 实椭圆体公式，也不是任何置换或时间定理。已冻结：</span><span class="en">Gram realizability: a continuous operator Q on a complex Hilbert space is positive iff Q = O*O for some O, so that ⟨Qx, y⟩ = ⟨Ox, Oy⟩: positive operators are exactly Gram pairings. It does not state the 3 × 3 real elliptope formula, nor any permutation or time theorem. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/GramRealizability.gram_realizability" href="#" target="_blank" rel="noopener"><code>gram_realizability</code></a></span></div>
+
+      <div class="lean" data-scenes="paradox-cancel" hidden><span class="ok">LEAN ✓</span><span><span class="zh">圆的双覆盖与历史提升：沿平方映射 z ↦ z²，给定底路径与它起点上方的一个初始点，提升路径存在且唯一；不存在连续的全局平方根；从 +1 出发、底路径转满一圈的提升终点是 −1。这是一次符号交换；只有和相干的参考臂比较，它才变成相消干涉。已冻结：</span><span class="en">The circle double cover and history lift: along the squaring map z ↦ z², a base path and an initial point over its start give a unique lifted path; there is no continuous global square root; the lift of one full turn starting at +1 ends at −1. This is a sign exchange; only compared with a coherent reference arm does it become destructive interference. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift" href="#" target="_blank" rel="noopener"><code>circle_double_cover_history_lift</code></a></span></div>
+      <div class="lean" data-scenes="paradox-cancel" hidden><span class="ok">LEAN ✓</span><span><span class="zh">自应用的四种命运：系数 a, b, c, d ∈ Fin 2 且 ad − bc ≠ 0 的分式映射 x ↦ (ax + b)/(cx + d)，按不动点多项式 cx² + (d − a)x − b 恰有空、死、塌缩、活四种命运之一；“活”（判别式 5）恰好是两族黄金映射。它只分类这六个映射，不分类因果回路，也不分类余弦映射。已冻结：</span><span class="en">The four fates of self-application: a fractional map x ↦ (ax + b)/(cx + d) with a, b, c, d ∈ Fin 2 and ad − bc ≠ 0 has, through its fixed polynomial cx² + (d − a)x − b, exactly one of four fates: empty, dead, collapse, live; live (discriminant 5) holds exactly for the two golden families. It classifies only these six maps, not causal loops and not the cosine map. Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Diagonal/SelfApplicationFates.self_application_four_fates" href="#" target="_blank" rel="noopener"><code>self_application_four_fates</code></a></span></div>
+      <div class="lean" data-scenes="paradox-cancel" hidden><span class="ok">LEAN ✓</span><span><span class="zh">余弦不动点与有理逆级数的端点：存在 θ，0 &lt; θ &lt; 1 且 cos θ = θ，它在正实数里唯一，并且是一个有理系数、绝对可和的级数在 π 处的和。这不说 θ 是有理数，也不是关于多伊奇闭合类时曲线的定理。已冻结：</span><span class="en">The cosine fixed point as a rational inverse-series endpoint: there is θ with 0 &lt; θ &lt; 1 and cos θ = θ, unique among positive reals, and it is the sum at π of an absolutely summable series with rational coefficients. This does not say θ is rational, and it is not a theorem about Deutsch's closed timelike curves. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint" href="#" target="_blank" rel="noopener"><code>rational_inverse_endpoint</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean model" data-scenes="boolean-illusion"><span class="ok">MODEL</span><span><span class="zh">为画面选定的模型：平衡合束器的两个端口振幅 b± = (a ± b e^{iΔ})/√2，p₊ + p₋ = 1；退相干族 ρ_γ 把非对角项乘上 γ ∈ [0, 1]。反相相消 p₊ = 0 只在两臂等幅（a = b）时成立；纯量恒等式 e^{iu} + e^{i(u+π)} = 0 直接来自 e^{iπ} = −1。“零不等于不存在、只有相干与退相干”是本书的诠释：页面只演示在这个受控模型里零的背后各有非零的分量，不声称每一个零都证明了隐藏的存在。</span><span class="en">Chosen for the picture: a balanced recombiner with port amplitudes b± = (a ± b e^{iΔ})/√2 and p₊ + p₋ = 1; the decoherence family ρ_γ multiplies the off-diagonal entries by γ ∈ [0, 1]. The anti-phase zero p₊ = 0 holds only for equal arms (a = b); the scalar identity e^{iu} + e^{i(u+π)} = 0 comes straight from e^{iπ} = −1. “Zero is not non-existence, there is only coherence and decoherence” is this book's interpretation: the page only shows that behind each zero of this controlled model there are nonzero components, and does not claim that every zero proves a hidden existence.</span></span></div>
+      <div class="lean argued" data-scenes="born-handshake" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：克拉默的交易诠释（Rev. Mod. Phys. 58 (1986) 647）把 ⟨φ|ψ⟩ 读作“推迟的要约波”、⟨ψ|φ⟩ 读作“超前的确认回波”，两者相乘成为一次“握手”。共轭对称 ⟨ψ|φ⟩ = conj⟨φ|ψ⟩ 推出 |⟨φ|ψ⟩|² = |⟨ψ|φ⟩|²；归一时 P_ψ P_φ P_ψ = |⟨φ|ψ⟩|² P_ψ 是直接的秩一代数。</span><span class="en">Literature, not formalized in this book: Cramer's transactional interpretation (Rev. Mod. Phys. 58 (1986) 647) reads ⟨φ|ψ⟩ as a retarded offer wave and ⟨ψ|φ⟩ as an advanced confirmation echo whose product is a “handshake”. Conjugate symmetry ⟨ψ|φ⟩ = conj⟨φ|ψ⟩ gives |⟨φ|ψ⟩|² = |⟨ψ|φ⟩|²; for unit vectors P_ψ P_φ P_ψ = |⟨φ|ψ⟩|² P_ψ is direct rank-one algebra.</span></span></div>
+      <div class="lean model" data-scenes="born-handshake" hidden><span class="ok">MODEL</span><span><span class="zh">把去程乘回程读作过去与未来之间的“因果驻波锁定”，是本书的诠释。页面只演示这个乘积是实数、并且在两边各自转相位时不变；它不说明有信号从未来传来，不给出时间箭头，也不把关联等同于因果。</span><span class="en">Reading forward times echo as a “causal standing-wave lock” between past and future is this book's interpretation. The page only shows that the product is real and stays put when either side is rephased; it does not show a signal arriving from the future, give an arrow of time, or equate correlation with causation.</span></span></div>
+      <div class="lean argued" data-scenes="feynman-stationary" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：费曼—希布斯的路径和与驻相近似；费马原理与斯涅尔定律 n₁ sin θ₁ = n₂ sin θ₂。没有哪条选定的冻结定理证明路径积分的驻相极限。</span><span class="en">Literature, not formalized in this book: the Feynman–Hibbs path sum and its stationary-phase approximation; Fermat's principle and Snell's law n₁ sin θ₁ = n₂ sin θ₂. No selected frozen theorem proves the stationary-phase limit of a path integral.</span></span></div>
+      <div class="lean model" data-scenes="feynman-stationary" hidden><span class="ok">MODEL</span><span><span class="zh">有限求积模型，不是连续路径积分的数值值：A_M = M^{−½} Σ e^{ik₀L(s_k)} 是原始振幅，|A_M|² ≤ M，不是归一的探测概率；C = |A_M|²/M ∈ [0, 1] 是有界的相干得分。离驻点的抵消一般只是近似，有限孔径的边缘贡献仍在。时间标签 A(t₁)、B(t₂) 只是边界条件，不是信号机制。</span><span class="en">A finite quadrature model, not a numerical value of a continuum path integral: A_M = M^{−½} Σ e^{ik₀L(s_k)} is a raw amplitude with |A_M|² ≤ M, not a normalized detection probability; C = |A_M|²/M ∈ [0, 1] is a bounded coherence score. Cancellation away from the stationary point is generally approximate, and finite-aperture edge contributions remain. The time labels A(t₁), B(t₂) are boundary conditions, not a signalling mechanism.</span></span></div>
+      <div class="lean argued" data-scenes="tsvf-eraser" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：阿哈罗诺夫—伯格曼—勒博维茨（1964）的前后选择；阿哈罗诺夫—阿尔伯特—魏德曼（Phys. Rev. Lett. 60 (1988) 1351）的弱值；斯卡利—德吕尔（1982）与金等（Phys. Rev. Lett. 84 (2000) 1）的延迟选择擦除。弱值一般是复数，可以落在 [−1, 1] 之外，不是概率；页面只画它的代数，不画校准过的指针分布。</span><span class="en">Literature, not formalized in this book: Aharonov–Bergmann–Lebowitz (1964) pre- and post-selection; the weak values of Aharonov–Albert–Vaidman (Phys. Rev. Lett. 60 (1988) 1351); the delayed-choice erasure of Scully–Drühl (1982) and Kim et al. (Phys. Rev. Lett. 84 (2000) 1). A weak value is in general complex, may lie outside [−1, 1], and is not a probability; the page draws its algebra, not a calibrated meter distribution.</span></span></div>
+      <div class="lean model" data-scenes="tsvf-eraser" hidden><span class="ok">MODEL</span><span><span class="zh">有限擦除模型：ρ_PM = ½(|00⟩⟨00| + |11⟩⟨11| + V|00⟩⟨11| + V|11⟩⟨00|)，屏幕元 Eⱼ = qⱼ[[1, e^{−iφⱼ}], [e^{iφⱼ}, 1]]，联合概率由 4 × 4 迹实算。不可通信在这里是一行推导：对任何完备的未来仪器 ΣKᵣ†Kᵣ = I，迹的循环性给出 Σᵣ Tr[(I⊗Kᵣ)ρ(I⊗Kᵣ†)(Eⱼ⊗I)] = Tr[ρ(Eⱼ⊗I)]。把它读作“过去的记录不被改写”是本书的诠释；前后选择与超前边界的读法是文献诠释，不是已证实的逆因果。</span><span class="en">A finite eraser model: ρ_PM = ½(|00⟩⟨00| + |11⟩⟨11| + V|00⟩⟨11| + V|11⟩⟨00|), screen elements Eⱼ = qⱼ[[1, e^{−iφⱼ}], [e^{iφⱼ}, 1]], and the joint probabilities are actual 4 × 4 traces. No-signalling here is a one-line derivation: for any complete future instrument ΣKᵣ†Kᵣ = I, cyclicity of the trace gives Σᵣ Tr[(I⊗Kᵣ)ρ(I⊗Kᵣ†)(Eⱼ⊗I)] = Tr[ρ(Eⱼ⊗I)]. Reading this as “the past record is not rewritten” is this book's interpretation; pre/post-selection and advanced-boundary readings are literature interpretations, not certified retrocausation.</span></span></div>
+      <div class="lean argued" data-scenes="gram-symmetry" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：实对称表是一组单位向量的格拉姆矩阵，当且仅当它半正定；三元情形 G ⪰ 0 ⟺ |x|, |y|, |z| ≤ 1 且 det G = 1 − x² − y² − z² + 2xyz ≥ 0。置换 P₁₃ 给出 G′ = P₁₃ G P₁₃ᵀ，det G′ = (det P₁₃)² det G = det G，谱与秩不变；G′ = G 当且仅当 x = y。</span><span class="en">Literature, not formalized in this book: a real symmetric table is the Gram matrix of unit vectors iff it is positive semidefinite; for three elements G ⪰ 0 ⟺ |x|, |y|, |z| ≤ 1 and det G = 1 − x² − y² − z² + 2xyz ≥ 0. The permutation P₁₃ gives G′ = P₁₃ G P₁₃ᵀ with det G′ = (det P₁₃)² det G = det G, and the same spectrum and rank; G′ = G iff x = y.</span></span></div>
+      <div class="lean model" data-scenes="gram-symmetry" hidden><span class="ok">MODEL</span><span><span class="zh">把三根向量叫作过去、现在、未来，并把对调读作“时间的对称”，是本书的诠释。对调只是运动学的重新标号：它不证明动力学的时间反演不变，不逆转熵，也不让人看见未来。带符号的三重积 A·(B × C) 在对调时变号，只有它的平方不变。</span><span class="en">Calling the three vectors past, now and future, and reading the swap as a “symmetry of time”, is this book's interpretation. The swap is a kinematic relabelling: it does not prove dynamical time-reversal invariance, reverse entropy, or give access to the future. The signed triple product A·(B × C) changes sign under the swap; only its square stays.</span></span></div>
+      <div class="lean argued" data-scenes="paradox-cancel" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：多伊奇（Phys. Rev. D 44 (1991) 3197）的密度矩阵自洽条件。这里只取 X 一个门的简化例子：X(I/2)X† = I/2 是一个混态不动点，但不唯一，所有 (I + rₓX)/2（−1 ≤ rₓ ≤ 1）都满足，包括纯态 |±⟩。翻转比特的 X 不是整体相位 −I；后者让每个密度矩阵都不动。这个例子与悖论端口的后选模型不是同一个模型。</span><span class="en">Literature, not formalized in this book: Deutsch's density-matrix consistency condition (Phys. Rev. D 44 (1991) 3197). Only the simplified one-gate X example is drawn: X(I/2)X† = I/2 is one mixed fixed point, but not the only one: every (I + rₓX)/2 with −1 ≤ rₓ ≤ 1 satisfies it, including the pure |±⟩. The bit flip X is not the global phase −I, which fixes every density matrix. This example and the post-selected paradox port are different models.</span></span></div>
+      <div class="lean model" data-scenes="paradox-cancel" hidden><span class="ok">MODEL</span><span><span class="zh">把“自我否定的祖父回路被抵消”读作干涉，是本书选择的诠释，不是禁止闭合类时曲线的定理。π 翻转必须相对于相干的参考臂：孤立的 ψ 与 −ψ 是同一条射线、同一个密度矩阵，整体负号不是悖论、不是毁灭，也不是零态。δ = 0 的单位权重与 cos θ* = θ* 是两个不同的自洽例子，不是同一个约束。</span><span class="en">Reading “the self-negating grandfather loop is cancelled” as interference is the interpretation this book chooses, not a theorem excluding closed timelike curves. The π flip must be relative to a coherent reference arm: an isolated ψ and −ψ are the same ray and the same density matrix, and an overall minus sign is no paradox, no destruction and no zero state. The unit weight at δ = 0 and cos θ* = θ* are two different examples of consistency, not one constraint.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都是按双精度从真实的向量与矩阵实时算出的数值演示，不是证明：投影、外积与迹、128 格屏幕的 4 × 4 迹、通用 3 × 3 行列式与三重积、雅可比特征值、二分法求根。矩阵与概率恒等式的容差 10⁻¹⁰（长相位和 10⁻⁹），低于 10⁻¹² 的数显示为零，分母小于 10⁻⁸ 时标为无定义；原始残差照实显示。</span><span class="en">Every number on the page is computed live in double precision from actual vectors and matrices, an illustration and not a proof: projections, outer products and traces, 4 × 4 traces on a 128-bin screen, a generic 3 × 3 determinant and triple product, Jacobi eigenvalues, bisection roots. Matrix and probability identities use tolerance 10⁻¹⁰ (10⁻⁹ for long phasor sums), values below 10⁻¹² display as zero, and a denominator below 10⁻⁸ is marked undefined; raw residuals are shown as they are.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴" data-aria-en="Rail">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>6</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">第 29 章说：布尔式的“0 / 1”只是读数，读到 0 不等于什么都没有；一次概率是去程振幅与回程振幅的握手。本页把这句话拆成六个互相独立的场景，每个场景只算它自己的模型。数学事实、文献结果与本书的诠释分开标注：绿色框是 Lean 已验证的冻结定理，ARGUED 是文献结果，MODEL 是为画面选定的模型与诠释，NUM 是页面算出的数。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>三种零。</b>A = (1, 0)，B = (cos θ, sin θ)，M = span(A)：B∥ = (cos θ, 0)，B⊥ = (0, sin θ)，‖B∥‖² + ‖B⊥‖² = 1。θ = 90° 时 A·B = 0，B 的全部长度平方都在补空间里，A∧B = sin θ 的平方为 1；正交的单位向量 ‖A + B‖² = 2，不是相消。两臂 a = cos ξ、b = sin ξ 经平衡合束器：b± = (a ± b e^{iΔ})/√2，p₊ + p₋ = 1；Δ = π 时 p₊ = (a − b)²/2，只有 a = b 才为零。退相干族 ρ_γ = [[a², γab e^{−iΔ}], [γab e^{iΔ}, b²]] 半正定、迹为 1，p± = ½(1 ± 2γab cos Δ)，纯度 a⁴ + b⁴ + 2γ²a²b²，被捏掉的相干质量 2γ²a²b²。γ = 0 时两端口都是 ½。三件事是三种不同的操作：零本身分不出原因，空输入、正交与相消都会读出零。</li>
+        <li><b>握手。</b>|ψ⟩ = e^{iχ_ψ}(1, 0)，|φ⟩ = e^{iχ_φ}(cos(θ/2), sin(θ/2))，r = cos(θ/2)。去程 ⟨φ|ψ⟩ = r e^{i(χ_ψ − χ_φ)}，回程 ⟨ψ|φ⟩ = r e^{−i(χ_ψ − χ_φ)} = conj⟨φ|ψ⟩，乘积 w = r² = Tr(P_φP_ψ) = Tr(P_ψP_φ) = cos²(θ/2)。页面另用外积矩阵算出两个迹与夹心式 P_ψP_φP_ψ = wP_ψ 的残差。两边各自转相位 u、v 时去程多出 e^{i(u−v)}，回程多出它的倒数，乘积不变；两边一起转，重叠本身就不变。θ = 180° 的零来自正交的射线，不是相消。</li>
+        <li><b>驻相。</b>A = (0, 1)，B = (1, −1)，界面 y = 0，光程 L(s) = n₁√(s² + 1) + n₂√((1 − s)² + 1)。L″ &gt; 0，所以 L′(s*) = 0 的根唯一，是最小值，60 步二分在 [0, 1] 上求出，它就是斯涅尔定律。s 取 [−2, 3] 的中点网格，A_M = M^{−½}Σe^{ik₀L(s_k)}，C = |A_M|²/M。自动选的 M 是 {257, 513, 1025, 2049, 4097} 里第一个使相邻相位差都 ≤ π/4 的值，并与下一级网格的平均相量比较。|k₀(L(s) − L(s*))| ≤ π/4 的路径标为驻相邻域。单位根校准：M 个 e^{2πik/M} 之和为零（M &gt; 1），一对 Ω、−Ω 之和为零。二次近似 L(s*) + ½L″(s*)(s − s*)² 给出科纽型螺旋，与真实光程的扇分开标注。</li>
+        <li><b>擦除。</b>p(j, ±) = Tr[ρ_PM(Eⱼ ⊗ F±)] = (qⱼ/2)(1 ± V sin β cos φⱼ)，p(±) = ½；条件分布 p(j | ±) = qⱼ(1 ± V sin β cos φⱼ)；无条件边缘 p(j) = p(j, +) + p(j, −) = qⱼ。小图里的 F±(j) = p(j, ±)/qⱼ = ½(1 ± V sin β cos φⱼ) 是放缩后的条纹轮廓，两者之和为 1，但不是归一的屏幕概率。改变未来的选择，过去的总数组一格不变，只有联合的分法与条件数组重算；巧合计数需要普通的通信。弱值：|Ψ⟩ = |+⟩，|Φ_η⟩ = cos η|+⟩ + sin η|−⟩，Z_w = ⟨Φ_η|Z|Ψ⟩/⟨Φ_η|Ψ⟩ = tan η，后选概率 cos²η；η = ±90° 时分母为零，标为“无定义”，不是 ∞。</li>
+        <li><b>格拉姆对调。</b>x = A·B，y = B·C，z = A·C，G = [[1, x, z], [x, 1, y], [z, y, 1]]，det G = 1 − x² − y² − z² + 2xyz。构造 B = (0, 0, 1)，A = (√(1 − x²), 0, x)，C = (√(1 − y²) cos φ, √(1 − y²) sin φ, y)，于是 z = xy + √((1 − x²)(1 − y²)) cos φ，det G = (1 − x²)(1 − y²) sin²φ = (A·(B × C))²。P₁₃ 对调第一与第三个事件：G′ = P₁₃GP₁₃ᵀ = [[1, y, z], [y, 1, x], [z, x, 1]]。默认 x = 0.2、y = 0.6、z = 0.1，det = 0.614，G′ ≠ G；对称快照 x = y = 0.5、z = 0.2，det = 0.56，G′ = G。(1, 1, −1) 的 det = −4，不是格拉姆矩阵，被拒绝。</li>
+        <li><b>回路。</b>A_loop(δ) = ½(1 + e^{iδ})，A_other(δ) = ½(1 − e^{iδ})，|A_loop|² = cos²(δ/2)，|A_other|² = sin²(δ/2)，和为 1。δ = π 来自双覆盖：底圆转满一圈，提升的点从 +1 走到 −1。多伊奇插图：X(I/2)X† = I/2，固定集是整条 (I + rₓX)/2。标量插图：在 [0, 1] 上 50 步二分 cos θ − θ，得到 θ* ≈ 0.7390851332，并显示括号与真实残差。四种命运：Fin 2 上六个非退化分式映射，页面逐一算出不动点多项式与判别式。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch29-timeless-causality-and-gram-space.html#sec-ch29-coherence-handshake-causality" target="_top">第 29 章 · 相干握手与因果</a>。文献：费曼—希布斯；Cramer, Rev. Mod. Phys. 58 (1986) 647；Aharonov–Bergmann–Lebowitz (1964)；Aharonov–Albert–Vaidman, Phys. Rev. Lett. 60 (1988) 1351；Scully–Drühl (1982)；Kim et al., Phys. Rev. Lett. 84 (2000) 1；Deutsch, Phys. Rev. D 44 (1991) 3197。</p>
+    </div>
+    <div class="en">
+      <p class="lede">Chapter 29 says: a Boolean “0 / 1” is only a readout, and reading 0 does not mean there is nothing; a probability is the handshake of a forward amplitude with its echo. This page splits that sentence into six independent scenes, each computing only its own model. Mathematical facts, literature results and this book's interpretations are labelled apart: green boxes are frozen theorems verified by Lean, ARGUED marks literature results, MODEL the models chosen for the picture and the interpretations, NUM the numbers the page computes. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Three zeros.</b> A = (1, 0), B = (cos θ, sin θ), M = span(A): B∥ = (cos θ, 0), B⊥ = (0, sin θ), ‖B∥‖² + ‖B⊥‖² = 1. At θ = 90°, A·B = 0, all of the squared length of B lies in the complement, and A∧B = sin θ squares to 1; orthogonal unit vectors have ‖A + B‖² = 2, which is no cancellation. Arms a = cos ξ, b = sin ξ through a balanced recombiner: b± = (a ± b e^{iΔ})/√2, p₊ + p₋ = 1; at Δ = π, p₊ = (a − b)²/2, zero only when a = b. The decoherence family ρ_γ = [[a², γab e^{−iΔ}], [γab e^{iΔ}, b²]] is positive semidefinite with trace one, p± = ½(1 ± 2γab cos Δ), purity a⁴ + b⁴ + 2γ²a²b², pinched coherence mass 2γ²a²b². At γ = 0 both ports give ½. These are three different operations: a zero alone cannot name its cause, since an empty input, orthogonality and cancellation all read zero.</li>
+        <li><b>The handshake.</b> |ψ⟩ = e^{iχ_ψ}(1, 0), |φ⟩ = e^{iχ_φ}(cos(θ/2), sin(θ/2)), r = cos(θ/2). Forward ⟨φ|ψ⟩ = r e^{i(χ_ψ − χ_φ)}, echo ⟨ψ|φ⟩ = r e^{−i(χ_ψ − χ_φ)} = conj⟨φ|ψ⟩, product w = r² = Tr(P_φP_ψ) = Tr(P_ψP_φ) = cos²(θ/2). The page also computes both traces and the residual of the sandwich P_ψP_φP_ψ = wP_ψ from the outer-product matrices. Rephasing the two sides by u and v multiplies the forward amplitude by e^{i(u−v)} and the echo by its inverse, so the product stays; rephasing both together leaves the overlap itself unchanged. The zero at θ = 180° comes from orthogonal rays, not from cancellation.</li>
+        <li><b>Stationary phase.</b> A = (0, 1), B = (1, −1), interface y = 0, optical length L(s) = n₁√(s² + 1) + n₂√((1 − s)² + 1). Since L″ &gt; 0 the root of L′(s*) = 0 is unique and a minimum; 60 bisection steps on [0, 1] find it, and it is Snell's law. s runs over the midpoint grid of [−2, 3], A_M = M^{−½}Σe^{ik₀L(s_k)}, C = |A_M|²/M. The automatic M is the first of {257, 513, 1025, 2049, 4097} whose adjacent phase steps are all ≤ π/4, and its averaged phasor is compared with the next mesh. Paths with |k₀(L(s) − L(s*))| ≤ π/4 are marked as the stationary neighbourhood. Roots-of-unity calibration: the M values e^{2πik/M} sum to zero (M &gt; 1), and a pair Ω, −Ω sums to zero. The quadratic approximation L(s*) + ½L″(s*)(s − s*)² gives a Cornu-type spiral, labelled apart from the exact optical fan.</li>
+        <li><b>The eraser.</b> p(j, ±) = Tr[ρ_PM(Eⱼ ⊗ F±)] = (qⱼ/2)(1 ± V sin β cos φⱼ), p(±) = ½; the conditionals p(j | ±) = qⱼ(1 ± V sin β cos φⱼ); the unconditional marginal p(j) = p(j, +) + p(j, −) = qⱼ. The small plot's F±(j) = p(j, ±)/qⱼ = ½(1 ± V sin β cos φⱼ) are scaled fringe profiles: they sum to 1 but are not normalized screen probabilities. Changing the future choice leaves the past total array exactly as it was; only the joint split and the conditional arrays are recomputed, and coincidence labels need ordinary communication. Weak value: |Ψ⟩ = |+⟩, |Φ_η⟩ = cos η|+⟩ + sin η|−⟩, Z_w = ⟨Φ_η|Z|Ψ⟩/⟨Φ_η|Ψ⟩ = tan η, postselection probability cos²η; at η = ±90° the denominator vanishes and the page writes “undefined”, not ∞.</li>
+        <li><b>The Gram swap.</b> x = A·B, y = B·C, z = A·C, G = [[1, x, z], [x, 1, y], [z, y, 1]], det G = 1 − x² − y² − z² + 2xyz. With B = (0, 0, 1), A = (√(1 − x²), 0, x), C = (√(1 − y²) cos φ, √(1 − y²) sin φ, y), z = xy + √((1 − x²)(1 − y²)) cos φ and det G = (1 − x²)(1 − y²) sin²φ = (A·(B × C))². P₁₃ exchanges the first and third events: G′ = P₁₃GP₁₃ᵀ = [[1, y, z], [y, 1, x], [z, x, 1]]. By default x = 0.2, y = 0.6, z = 0.1, det = 0.614, G′ ≠ G; the symmetric snapshot x = y = 0.5, z = 0.2 has det = 0.56 and G′ = G. (1, 1, −1) has det = −4, is not a Gram matrix, and is rejected.</li>
+        <li><b>The loop.</b> A_loop(δ) = ½(1 + e^{iδ}), A_other(δ) = ½(1 − e^{iδ}), |A_loop|² = cos²(δ/2), |A_other|² = sin²(δ/2), summing to 1. δ = π comes from the double cover: one full base turn lifts the point from +1 to −1. Deutsch inset: X(I/2)X† = I/2, and the fixed set is the whole segment (I + rₓX)/2. Scalar inset: 50 bisection steps of cos θ − θ on [0, 1] give θ* ≈ 0.7390851332, shown with its bracket and actual residual. Four fates: the six nondegenerate fractional maps over Fin 2, each with its fixed polynomial and discriminant computed on the page.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch29-timeless-causality-and-gram-space.html#sec-ch29-coherence-handshake-causality" target="_top">Chapter 29 · the coherence handshake and causality</a>. Literature: Feynman–Hibbs; Cramer, Rev. Mod. Phys. 58 (1986) 647; Aharonov–Bergmann–Lebowitz (1964); Aharonov–Albert–Vaidman, Phys. Rev. Lett. 60 (1988) 1351; Scully–Drühl (1982); Kim et al., Phys. Rev. Lett. 84 (2000) 1; Deutsch, Phys. Rev. D 44 (1991) 3197.</p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
