@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//CONSENSUS · Observer consensus and decoherence: shared axes, redundant records and new directions">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//CONSENSUS 观察者共识与去相干 · 共享的轴、冗余的记录与新方向</title>
+<meta name="description" content="四个场景、一条时间轴：许多观察者各带一根无向的测量轴，共识张量 M = Σ wⱼnⱼnⱼᵀ 决定布洛赫球被压成什么形状——各向同性的雾没有指针轴，整体缩向中心；共用一根轴时两端留下、横向的相干按 (cos α)ᵏ 删去；翻转轴端张量纹丝不动；十六份冗余记录给出一比特的互信息平台；两个局部气泡的未读更新对易而选读冲突，局部友好分数在 v ≈ 0.847 越过 6；先驱轴把张量从平面撑成立体。Four scenes on one rail: many observers each carry an unoriented measurement axis, and the consensus tensor M = Σ wⱼnⱼnⱼᵀ decides what shape the Bloch ball is pressed into. Isotropic fog has no pointer axis and shrinks as a whole; one shared axis keeps its poles while transverse coherence is deleted by (cos α)ᵏ; flipping axis ends leaves the tensor untouched; sixteen redundant records give a one-bit plateau of mutual information; two local bubbles commute when unread but clash when selected, and the Local Friendliness score crosses 6 at v ≈ 0.847; a pioneer axis lifts the tensor from a plane into a solid.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="observer-consensus-decoherence">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//CONSENSUS">ORTHO<b>//</b>CONSENSUS</h1>
+      <div class="tagline">
+        <span class="zh">观察者共识与去相干 · <em>同一根轴能留下两端，散开的轴会把球一起压向中心。</em></span>
+        <span class="en">Observer consensus and decoherence · <em>A shared axis preserves its poles; dispersed axes contract the ball toward its centre.</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill" id="pillNow"><span class="zh">时间轴</span><span class="en">RAIL</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><span class="zh">卡</span><span class="en">CARD</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="isotropic-fog" aria-pressed="false"><span class="code">ISO-FOG</span><span class="cn zh">各向同性的雾：没有哪根轴胜出</span><span class="cn en">Isotropic fog: no axis wins</span></button>
+        <button class="preset" data-preset="axis-consensus" aria-pressed="false"><span class="code">SHARED-AXIS</span><span class="cn zh">共用一根轴：两端留下，横向缩短</span><span class="cn en">One shared axis: the poles stay</span></button>
+        <button class="preset" data-preset="phase-gauge" aria-pressed="false"><span class="code">SIGN-GAUGE</span><span class="cn zh">翻转轴端：张量纹丝不动</span><span class="cn en">Flip axis ends: the tensor stays</span></button>
+        <button class="preset" data-preset="darwinism-plateau" aria-pressed="false"><span class="code">PLATEAU</span><span class="cn zh">冗余记录：一比特的平台</span><span class="cn en">Redundant records: a one-bit plateau</span></button>
+        <button class="preset" data-preset="dual-wigner-bubbles" aria-pressed="false"><span class="code">TWO-BUBBLES</span><span class="cn zh">两个气泡：未读对易，选读冲突</span><span class="cn en">Two bubbles: unread commute, selected clash</span></button>
+        <button class="preset" data-preset="new-axis-pioneers" aria-pressed="false"><span class="code">PIONEER</span><span class="cn zh">先驱新轴：逃出旧平面</span><span class="cn en">A pioneer axis leaves the old plane</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="tensor">
+      <h2><span class="zh">轴与信道</span><span class="en">Axes and channel</span><span class="aside">K(n, α)</span></h2>
+      <div class="chips" id="setChips" role="group" aria-label="观察者的轴" data-aria-en="Observer axes">
+        <button class="chip" data-axisset="fog" aria-pressed="false"><span class="zh">六轴雾</span><span class="en">Six-axis fog</span></button>
+        <button class="chip" data-axisset="consensus" aria-pressed="true"><span class="zh">共用一轴</span><span class="en">One shared axis</span></button>
+        <button class="chip" data-axisset="gauge" aria-pressed="false"><span class="zh">八根无向轴</span><span class="en">Eight unsigned axes</span></button>
+      </div>
+      <div class="chips" id="modeChips" role="group" aria-label="信道的算法" data-aria-en="How the channel is formed">
+        <button class="chip" data-mode="ordered" aria-pressed="true"><span class="zh">按时间顺序</span><span class="en">Ordered product</span></button>
+        <button class="chip" data-mode="mean" aria-pressed="false"><span class="zh">均值信道</span><span class="en">Mean channel</span></button>
+        <button class="chip" data-mode="weak-limit" aria-pressed="false"><span class="zh">弱极限</span><span class="en">Weak limit</span></button>
+      </div>
+      <div class="field">
+        <label for="alpha"><span class="zh">每次相遇的强度</span><span class="en">Strength of one encounter</span><small class="zh">0 到 90°，横向每次乘 cos α</small><small class="en">0 to 90°; across is multiplied by cos α</small></label><output id="oAlpha" for="alpha">0.400</output>
+        <input type="range" id="alpha" min="0" max="1.5707963267948966" step="any" value="0.4">
+      </div>
+      <div class="chips">
+        <button class="chip" id="pinchBtn" aria-pressed="false"><span class="zh">完全捏合</span><span class="en">Full pinching</span> <span class="m">α = π/2</span></button>
+      </div>
+      <p class="note"><span class="zh">按时间顺序：第一位观察者作用在乘积的最右边，算的是真实的 3×3 乘积。均值信道：每次相遇按权重随机选轴的平均，K̄ = cos α·I + (1 − cos α)·M。弱极限：exp[−t(I − M)]，t = kα²/2。三者分开计算、分开标注。最大与次大特征值之差小于 ε = 10⁻⁸ 时不画指针轴。在球面上拖琥珀色的环换起点，拖其他地方转视角。</span><span class="en">Ordered product: the first observer acts at the right; the page multiplies the actual 3×3 matrices. Mean channel: the average over axes drawn by weight at each encounter, K̄ = cos α·I + (1 − cos α)·M. Weak limit: exp[−t(I − M)] with t = kα²/2. The three are computed and labelled separately. When the top two eigenvalues differ by less than ε = 10⁻⁸ no pointer axis is drawn. Drag the amber ring on the sphere to change the start; drag elsewhere to turn the view.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="records" hidden>
+      <h2><span class="zh">记录与擦除</span><span class="en">Records and erasure</span><span class="aside">U<sub>j</sub>†</span></h2>
+      <div class="field">
+        <label for="p0"><span class="zh">分支权重</span><span class="en">Branch weight</span><small>p₀</small></label><output id="oP0" for="p0">0.50</output>
+        <input type="range" id="p0" min="0" max="1" step="0.01" value="0.5">
+      </div>
+      <div class="field">
+        <label for="ovl"><span class="zh">每份记录的重叠</span><span class="en">Overlap of each record</span><small>c = cos α<sub>j</sub></small></label><output id="oOvl" for="ovl">0.30</output>
+        <input type="range" id="ovl" min="-1" max="1" step="0.01" value="0.3">
+      </div>
+      <div class="access" id="access" role="group" aria-label="可以擦除的记录" data-aria-en="Records that can be erased"></div>
+      <div class="chips">
+        <button class="chip" id="eraseAll"><span class="zh">全部擦除</span><span class="en">Erase all</span></button>
+        <button class="chip" id="keepAll"><span class="zh">全部保留</span><span class="en">Keep all</span></button>
+      </div>
+      <p class="note"><span class="zh">点一份记录（这里或舞台上），就对它施加受控的 U<sub>j</sub>†，把它擦回空白；没被擦的记录仍带着分支信息。时间轴选前 m 份记录作片段。</span><span class="en">Tap a record (here or on the stage) to apply its controlled U<sub>j</sub>† and return it to blank; records not erased keep the branch information. The rail picks the first m records as the fragment.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="bubbles" hidden>
+      <h2><span class="zh">两个气泡</span><span class="en">Two bubbles</span><span class="aside">Z · X</span></h2>
+      <div class="chips">
+        <button class="chip" id="obliqueBtn" aria-pressed="false"><span class="zh">加一根倾斜</span><span class="en">Add a tilted axis</span> <span class="m">45°</span></button>
+      </div>
+      <p class="note"><span class="zh">左：两个气泡在布洛赫球的 XZ 截面里。右：局部友好分数，时间轴是白噪声下的可见度 v。默认的 90° 不变；加一根 45° 的轴只是对照。</span><span class="en">Left: the two bubbles in the XZ cross-section of the Bloch ball. Right: the Local Friendliness score; the rail is the visibility v under white noise. The 90° default stays; the 45° axis is only a control.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="pioneer" hidden>
+      <h2><span class="zh">先驱的权重</span><span class="en">Pioneer weight</span><span class="aside">η</span></h2>
+      <div class="field">
+        <label for="eta"><span class="zh">新轴分到的权重</span><span class="en">Weight given to the new axis</span><small class="zh">旧的权重乘以 1 − η</small><small class="en">old weights times 1 − η</small></label><output id="oEta" for="eta">0.15</output>
+        <input type="range" id="eta" min="0" max="1" step="0.01" value="0.15">
+      </div>
+      <p class="note"><span class="zh">时间轴把先驱轴从 x 抬到 z（β 从 0 到 90°）；也可以在舞台上拖它的琥珀色端点。η = 0 或 β = 0 时仍在旧平面里；η = 1 时只剩先驱一根轴。</span><span class="en">The rail tilts the pioneer axis from x up to z (β from 0 to 90°); you can also drag its amber end on the stage. With η = 0 or β = 0 it stays in the old plane; with η = 1 only the pioneer axis is left.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：布洛赫球与观察者的轴，记录的弧与互信息曲线，两个气泡与局部友好分数，或旧平面与先驱轴" data-aria-en="Stage: the Bloch ball and the observers' axes, the arc of records and the mutual-information curve, two bubbles and the Local Friendliness score, or the old plane and the pioneer axis">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="tensor" aria-pressed="true"><span class="zh">张量</span><span class="en">Tensor</span></button>
+        <button class="chip" data-scene="records" aria-pressed="false"><span class="zh">记录</span><span class="en">Records</span></button>
+        <button class="chip" data-scene="bubbles" aria-pressed="false"><span class="zh">气泡</span><span class="en">Bubbles</span></button>
+        <button class="chip" data-scene="pioneer" aria-pressed="false"><span class="zh">先驱</span><span class="en">Pioneer</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景的第一张小图" data-aria-en="First small plot of the scene"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="本场景的第二张小图" data-aria-en="Second small plot of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div class="wide"><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean" data-scenes="tensor"><span class="ok">LEAN ✓</span><span><span class="zh">对每个 2×2 复矩阵 ρ：‖ρ‖²<sub>HS</sub> = ‖Pρ‖²<sub>HS</sub> + ‖ρ − Pρ‖²<sub>HS</sub>，P 是计算基的捏合（不需要正性或迹一）。舞台的指针轴是 z，即计算基；读数里的“非对角 HS 质量”就是最后一项。这是范数平方的恒等式，不是熵公式。已冻结：</span><span class="en">For every complex 2×2 matrix ρ: ‖ρ‖²<sub>HS</sub> = ‖Pρ‖²<sub>HS</sub> + ‖ρ − Pρ‖²<sub>HS</sub>, with P the computational-basis pinching (no positivity or trace-one hypothesis). The pointer axis on the stage is z, the computational basis; the “off-diagonal HS mass” readout is the last term. A norm-square identity, not an entropy formula. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean" href="#" target="_blank" rel="noopener"><code>pinching_hilbert_schmidt_pythagorean</code></a></span></div>
+      <div class="lean" data-scenes="tensor"><span class="ok">LEAN ✓</span><span><span class="zh">若对同一个酉 U 每一步都有 ρ(k + 1) = 基捏合(Uρ(k)U†)，则每一步的熵增等于 D(Uρ(k)U† ‖ 它的捏合) ≥ 0，N 步的总熵增等于这些相对熵之和（自然对数；页面除以 ln 2 用比特）。只在“完全捏合”打开（α = π/2、U = I、轴全为 ±z）时引用；第一步之后增益为零。部分强度的去相位不在它的范围里。已冻结：</span><span class="en">If ρ(k + 1) = basis pinching of Uρ(k)U† for one fixed unitary U at every step, each entropy increment equals D(Uρ(k)U† ‖ its pinching) ≥ 0, and the total over N steps is the sum of these relative entropies (natural logarithms; the page divides by ln 2 for bits). Cited only with “full pinching” on (α = π/2, U = I, all axes ±z); after the first step the gain is zero. Partial-strength dephasing is outside it. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" href="#" target="_blank" rel="noopener"><code>entropy_production_coherence_deletion_identity</code></a></span></div>
+      <div class="lean" data-scenes="tensor bubbles"><span class="ok">LEAN ✓</span><span><span class="zh">对有限的完备投影记录测量 P：未读态 Σₖ PₖρPₖ = ρ，当且仅当每个交叉块 PₖρPₗ（k ≠ l）为零。对 qubit 的两个秩一记录，这就是在指针基里对角：完全捏合（α = π/2）之后的态正是这样的不动点。它不说测量选出了单一结果。已冻结：</span><span class="en">For a finite complete projective record measurement P: the unread state Σₖ PₖρPₖ equals ρ exactly when every cross block PₖρPₗ (k ≠ l) vanishes. For two rank-one qubit records this is diagonality in the pointer basis: the states left by full pinching (α = π/2) are such fixed points. It does not say the measurement selects a single outcome. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.unreadState_fixed_iff" href="#" target="_blank" rel="noopener"><code>unreadState_fixed_iff</code></a></span></div>
+      <div class="lean" data-scenes="tensor"><span class="ok">LEAN ✓</span><span><span class="zh">复多项式在公共相位 z ↦ e<sup>iθ</sup>z 下不变，当且仅当它电荷平衡，也当且仅当它属于二次生成元代数；实值的齐二次不变式恰为 z*Hz，H 是唯一的厄米矩阵，非负当且仅当 H 半正定。页面只把它用于 ket 的公共相位（八根无向轴时右下角的小图）；测量轴反向 n ↦ −n 是另一件事，nnᵀ 逐项不变是初等计算。已冻结：</span><span class="en">A complex polynomial is invariant under a common phase z ↦ e<sup>iθ</sup>z exactly when it is charge-balanced, and exactly when it lies in the algebra of quadratic generators; a real-valued homogeneous quadratic invariant is z*Hz for a unique Hermitian H, nonnegative exactly when H is positive semidefinite. The page uses it only for the common phase of a ket (the inset with the eight unsigned axes); reversing a measurement axis n ↦ −n is a different matter, and nnᵀ staying put entry by entry is an elementary calculation. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem" href="#" target="_blank" rel="noopener"><code>complete_common_phase_polynomial_theorem</code></a></span></div>
+      <div class="lean" data-scenes="tensor"><span class="ok">LEAN ✓</span><span><span class="zh">复完备内积空间上的连续算子 Q 为正，当且仅当存在同一空间上的 O 使 Q = O†O，且 ⟨Qx, y⟩ = ⟨Ox, Oy⟩。共识张量 M = BᵀB（B[j, a] = √wⱼ·nⱼ[a]）是它在复化之后对有限实矩阵的初等应用，不是它的字面陈述；半正定的 M 一般不是投影。已冻结：</span><span class="en">A continuous operator Q on a complete complex inner-product space is positive exactly when Q = O†O for some O on the same space, with ⟨Qx, y⟩ = ⟨Ox, Oy⟩. The consensus tensor M = BᵀB (B[j, a] = √wⱼ·nⱼ[a]) is an elementary application to finite real matrices after complexification, not its literal statement; a positive semidefinite M is in general not a projection. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/GramRealizability.gram_realizability" href="#" target="_blank" rel="noopener"><code>gram_realizability</code></a></span></div>
+      <div class="lean" data-scenes="tensor pioneer"><span class="ok">LEAN ✓</span><span><span class="zh">闭子空间 M 的正交补投影等于 I − P<sub>M</sub>；P<sub>M</sub> 与 P<sub>M⊥</sub> 都幂等，两种次序的交叉复合都为零，两者相加为 I。单根轴的 nnᵀ 是秩一投影，它们的凸平均（青色的张量）一般不是投影，只有谱为 (1, 0, 0) 时才是；先驱场景把几何投影 P<sub>S</sub> = diag(1, 1, 0) 与张量 M₀ = diag(0.7, 0.3, 0) 分开画。已冻结：</span><span class="en">The projection onto the orthogonal complement of a closed subspace M is I − P<sub>M</sub>; P<sub>M</sub> and P<sub>M⊥</sub> are idempotent, both cross compositions vanish, and they add up to I. A single axis nnᵀ is a rank-one projection, but their convex average (the cyan tensor) is in general not one, only when its spectrum is (1, 0, 0); the pioneer scene draws the geometric projection P<sub>S</sub> = diag(1, 1, 0) apart from the tensor M₀ = diag(0.7, 0.3, 0). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities" href="#" target="_blank" rel="noopener"><code>orthogonal_complement_projection_identities</code></a></span></div>
+      <div class="lean" data-scenes="records"><span class="ok">LEAN ✓</span><span><span class="zh">固定一个非零项 ρᵢⱼ 与一份对该项重叠 ≠ 1 的记录 k；若其余每份记录的重叠都满足 c̄c = 1，则只对其余记录施加反向记录通道，该项仍不能复原（剩下 c<sub>k</sub>ρᵢⱼ）。反向通道是共轭记录振幅，不是任意相互作用的伴随；对 |c| &lt; 1 的记录它只乘以 |c|²，所以舞台上的擦除用的是受控 U<sub>j</sub>†（MODEL），不是这条定理。已冻结：</span><span class="en">Fix a nonzero entry ρᵢⱼ and a record k whose overlap for it differs from 1; if every other record's overlap satisfies c̄c = 1, applying the reverse-record channels to all the other records still cannot restore the entry (c<sub>k</sub>ρᵢⱼ is left). The reverse channel conjugates record amplitudes; it is not the adjoint of an arbitrary interaction, and for a record with |c| &lt; 1 it only multiplies by |c|², so the erasure on the stage uses the controlled U<sub>j</sub>† (MODEL), not this theorem. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal" href="#" target="_blank" rel="noopener"><code>surviving_copy_blocks_reversal</code></a></span></div>
+      <div class="lean" data-scenes="records"><span class="ok">LEAN ✓</span><span><span class="zh">等幅叠加态的 (0, 1) 项从 1/2 出发：两份相位记录（条件振幅 1 与 i）之后为 −1/2，只反转第 0 份为 −i/2，两份都反转回到 1/2。舞台右下角的小圆只画这四个值；两份记录只差相位，这不是冗余经典信息的例子。已冻结：</span><span class="en">The (0, 1) entry of the equal superposition starts at 1/2; after two phase records (conditional amplitudes 1 and i) it is −1/2, after reversing only copy 0 it is −i/2, and after reversing both it is 1/2 again. The small circle at the bottom right of the stage draws exactly these four values; the two records differ only by phase, so this is not an example of redundant classical information. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate" href="#" target="_blank" rel="noopener"><code>two_copy_joint_reversal_certificate</code></a></span></div>
+      <div class="lean" data-scenes="records bubbles"><span class="ok">LEAN ✓</span><span><span class="zh">受控复制是酉的，并为 ρ、σ 各写下一份记录；若 ρ、σ 对角相同而某个非对角元不同，则对记录求迹后两者的约化矩阵相同，联合记录态却不同；没有任何只吃约化矩阵的函数能同时恢复两个联合态；对联合态施加复制的伴随则复原两个原始输入。阻碍在于“只看约化态”，不禁止能相干访问全部记录时的全局逆转。已冻结：</span><span class="en">The controlled copy is unitary and writes a record for ρ and for σ; if ρ and σ share their diagonal but differ off it, tracing out the record leaves equal reduced matrices while the joint record states differ; no function of the reduced matrix alone recovers both joint states; applying the adjoint of the copy to the joint states restores both original inputs. The obstruction is about looking at the reduced state only; it does not forbid a global reversal when every record is coherently accessible. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect" href="#" target="_blank" rel="noopener"><code>reduced_irreversibility_is_access_defect</code></a></span></div>
+      <div class="lean" data-scenes="records bubbles"><span class="ok">LEAN ✓</span><span><span class="zh">在读出 r 的划分拓扑里，两点拓扑不可分，当且仅当 r 给它们相同的值。用到乘积读出 R = (r₁, …, r<sub>N</sub>) 上，就是各个观察者不可分关系的交。这里的“核”是读出的等值关系，不是张量 M 的零空间；所有观察者共有的公共因子（共同知识）是另一种构造。已冻结：</span><span class="en">In the partition topology of a readout r, two points are topologically inseparable exactly when r gives them the same value. Applied to the product readout R = (r₁, …, r<sub>N</sub>) it is the intersection of the observers' inseparability relations. “Kernel” here is the equality relation of a readout, not the nullspace of the tensor M; a common factor shared by all observers (common knowledge) is a further construction. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>partition_inseparable_iff_kernel</code></a></span></div>
+      <div class="lean" data-scenes="bubbles"><span class="ok">LEAN ✓</span><span><span class="zh">取 A = {0}、P = {1, 2}、Q = {0, 1}，revision P A 在 A ∩ P 非空时为 A ∩ P，否则为 P：先 P 后 Q 得 {1}，先 Q 后 P 得 {1, 2}，两种次序的结果不同。这是经典的“冲突即重置”反例，只画在舞台右下角的集合插图里；它不说 Z/X 未读去相位不对易，它们对易。已冻结：</span><span class="en">With A = {0}, P = {1, 2}, Q = {0, 1}, where revision P A is A ∩ P when that is nonempty and P otherwise: P then Q gives {1}, Q then P gives {1, 2}, and the two orders differ. A classical reset-on-conflict counterexample, drawn only in the set inset at the bottom right of the stage; it does not say that unread Z/X dephasings fail to commute: they commute. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation" href="#" target="_blank" rel="noopener"><code>revision_conflict_noncommutation</code></a></span></div>
+      <div class="lean" data-scenes="pioneer" hidden><span class="ok">LEAN ✓</span><span><span class="zh">若闭子空间 S 的正交补不为零，则 S⊥ 里有单位向量 e：P<sub>S</sub>e = 0，e 到 S 的距离恰为 1，且 ‖I − P<sub>S</sub>‖ = 1。舞台上 S = span(x, y)、e = z。它不说出现了物理上的新自由度，也不说这个方向能躲开已有观察者的去相位：旧的 z 模恰恰衰减最快。已冻结：</span><span class="en">If the orthogonal complement of a closed subspace S is nonzero, S⊥ contains a unit vector e with P<sub>S</sub>e = 0, at distance exactly 1 from S, and ‖I − P<sub>S</sub>‖ = 1. On the stage S = span(x, y) and e = z. It does not say that a physical new degree of freedom appears, nor that this direction escapes the dephasing of the existing observers: the old z mode decays fastest of all. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>finite_layer_projection_escape</code></a></span></div>
+      <div class="lean argued" data-scenes="records" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：量子达尔文主义把“许多片段各自带着同一份指针信息”读作客观性的来源（W. H. Zurek, Nature Physics 5, 181–188 (2009)；R. Blume-Kohout &amp; W. H. Zurek, Foundations of Physics 35, 1857–1876 (2005)）。页面只算所设纯分支模型里的互信息，不推出“单一客观结果”。</span><span class="en">Literature result, not formalized in this book: Quantum Darwinism reads “many fragments each carrying the same pointer information” as the origin of objectivity (W. H. Zurek, Nature Physics 5, 181–188 (2009); R. Blume-Kohout &amp; W. H. Zurek, Foundations of Physics 35, 1857–1876 (2005)). The page only computes mutual information in the stated pure branching model and does not conclude a single objective outcome.</span></span></div>
+      <div class="lean argued" data-scenes="bubbles" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：真正的局部友好不等式 F<sub>LF</sub> ≤ 6（K.-W. Bong 等，Nature Physics 16, 1199–1205 (2020)，arXiv:1907.05607 式 (2)、附录 (S.12a)），前提是观测事件的绝对性、局部性（参数独立）与无超决定论，且设置 1 读朋友的结果。页面用一个显式见证（A₁ = Z、B′₁ = X）算出 F = √5 + 3 + √(2 + √2) ≈ 7.084；它不是量子最优值，也不是 CHSH。</span><span class="en">Literature result, not formalized in this book: the genuine Local Friendliness inequality F<sub>LF</sub> ≤ 6 (K.-W. Bong et al., Nature Physics 16, 1199–1205 (2020), arXiv:1907.05607 Eq. (2) and supplement (S.12a)), assuming Absoluteness of Observed Events, Locality (parameter independence) and No-Superdeterminism, with setting 1 reading the friend's outcome. The page computes F = √5 + 3 + √(2 + √2) ≈ 7.084 for an explicit witness (A₁ = Z, B′₁ = X); it is not the quantum optimum, and it is not CHSH.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：张量、谱、κ、间隙、信道乘积、熵、互信息、4×4 概率与特征值都按双精度实时算出。有限次的真实乘积、均值信道与弱极限是三种不同的构造，从不用等号连起来。</span><span class="en">A numerical illustration on the page, not a proof: the tensor, its spectrum, κ, the gap, channel products, entropies, mutual information, the 4×4 probabilities and the eigenvalues are computed live in double precision. A finite actual product, the mean channel and the weak limit are three different constructions and are never joined by an equals sign.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">四种模型各有假设：axis-channel（每次相遇是 Pauli 信道 K(n, α)）、branching-qnd（共同指针基上的纯两分支乘积记录，擦除用受控 U<sub>j</sub>†）、logical-lf（两个逻辑实验室，理想的相干控制）、linear-escape（固定三维空间里的张量秩）。把它们读成“观察者”“共识”“气泡”“先驱”，是本书的诠释。</span><span class="en">Four models, each with its assumptions: axis-channel (each encounter is the Pauli channel K(n, α)), branching-qnd (pure two-branch product records in a common pointer basis, erased with the controlled U<sub>j</sub>†), logical-lf (two logical laboratories under ideal coherent control), linear-escape (tensor rank in a fixed three-dimensional space). Reading them as “observers”, “consensus”, “bubbles” and “pioneers” is this book's interpretation.</span></span></div>
+      <div class="lean open" data-scenes="pioneer" hidden><span class="ok">OPEN</span><span><span class="zh">开放问题：把“D → D + 1”读成物理希尔伯特空间真的长出一个新维度，是本书的开放设想，上面任何一条都没有证明。舞台只演示固定三维空间里所表示的张量从秩 2 长到秩 3。</span><span class="en">Open question: reading “D → D + 1” as a physical Hilbert space actually growing a new dimension is an open proposal of this book that none of the statements above proves. The stage only shows the represented tensor growing from rank 2 to rank 3 inside a fixed three-dimensional space.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：相遇次数、翻转的轴端数、片段大小、可见度或先驱轴的倾角" data-aria-en="Rail: encounters, flipped axis ends, fragment size, visibility or the pioneer's tilt">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>4</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">四个场景回答第 33 章的同一个问题：许多观察者各自丈量同一个系统时，什么留下、什么被删去。本页是数值演示，不是证明；每个数都在页面上实时算出，每种模型的假设写在下面。</p>
+      <ol>
+        <li><b>共识张量。</b>每位观察者带一根单位轴 nⱼ 与权重 wⱼ（显式归一化），M = Σ wⱼnⱼnⱼᵀ。(−n)(−n)ᵀ = nnᵀ，所以只有无向的轴算数。M 对称、半正定、迹为 1，M = BᵀB（B[j, a] = √wⱼ·nⱼ[a]）。特征值降序 λ₁ ≥ λ₂ ≥ λ₃，κ = (3λ₁ − 1)/2 ∈ [0, 1] 只量集中度，不单独保证唯一的轴：diag(½, ½, 0) 的 κ = ¼ 却没有唯一主轴。λ₁ − λ₂ &lt; ε = 10⁻⁸ 时页面写“无唯一指针主轴”、不画指针轴，这是显示约定，不是物理常数；λ₁ − λ₂ ≥ ε 时画出的是一条无向的线，箭头方向的选择不是物理。</li>
+        <li><b>一次相遇。</b>Kraus 算子 cos(α/2)·I 与 sin(α/2)·n·σ 给出 Pauli 信道，布洛赫矩阵 K(n, α) = cos α·I + (1 − cos α)·nnᵀ：沿 n 的分量不变，两个横向分量乘以 cos α。页面把 α 限在 [0, π/2]，在这个范围里横向单调衰减；α = π/2 是完全的秩一捏合。</li>
+        <li><b>三种构造，三个名字。</b>按时间顺序的真实乘积 K<sub>k</sub>⋯K₁（第一位在最右，一般不对称，也不只由 M 决定）；每次按权重随机选轴的均值信道 K̄ᵏ，K̄ = cos α·I + (1 − cos α)·M，模因子 [λᵢ + (1 − λᵢ)cos α]ᵏ；弱相互作用极限 exp[−t(I − M)]，t = kα²/2，模因子 e<sup>−t(1 − λᵢ)</sup>。各向同性的雾：均值缩放 [(1 + 2cos α)/3]ᵏ，k = 16、α = 0.4 时为 0.4211，弱极限 e<sup>−kα²/3</sup> 为 0.4260；共用一轴：有限的横向因子 (cos α)ᵏ = 0.2683，弱极限 e<sup>−kα²/2</sup> = 0.2780。两者只在 α → 0 时渐近相同。M 各向同性并不保证每一段有限的历史都各向同性：在“六轴雾”里换成按时间顺序就能看到。</li>
+        <li><b>纵向与横向。</b>在指针基 |±e⟩ 里 ρ₊₋ = (r₂ − i·r₃)/2、ρ₊₊ − ρ₋₋ = r₁：横向的布洛赫分量就是非对角相干的两个正交分量，被删掉的 HS 质量是 ‖ρ − Πρ‖²<sub>HS</sub> = (r₂² + r₃²)/2。只有 λ₁ = 1（所有轴共线）时纵向才严格保留；λ₁ &lt; 1 时最终都趋向 I/2，最慢衰减的方向只是有限时间里相对优先的方向。</li>
+        <li><b>轴端与相位。</b>翻转一根轴的端点只是交换它的两个结果标签，nnᵀ 逐项不变；它不把布洛赫球上相对的两个纯态（彼此正交）当成同一个态。ket 乘一个公共相位 e<sup>iθ</sup> 不改变 |ψ⟩⟨ψ|，这是另一种变换，右下角的小图单独画它，θ 随时间轴转动只是为了演示。</li>
+        <li><b>冗余记录。</b>共同指针基，p₀ + p₁ = 1，每份记录 |φ<sub>j</sub><sup>(0)</sup>⟩、|φ<sub>j</sub><sup>(1)</sup>⟩ 的重叠为 c<sub>j</sub>，全局态是纯的两分支乘积态。任一片段 F 的约化态秩不超过 2，S(ρ<sub>F</sub>) = h(Π<sub>F</sub>)，h(q) = H₂((1 − d)/2)，d = √(1 − 4p₀p₁(1 − |q|²))，于是 I(S : O<sub>m</sub>) = S(ρ<sub>S</sub>) + S(ρ<sub>O<sub>m</sub></sub>) − S(ρ<sub>O<sub>N−m</sub></sub>)：m = 0 为 0，m = N 为 2S(ρ<sub>S</sub>)。c = 0.3、N = 16 时 m = 3…13 与 S(ρ<sub>S</sub>) 之差小于 0.000526 比特。最后升到 2S 的部分含完整纯化的量子关联，不是“两倍的经典客观信息”。这个闭式只对所设的纯分支模型成立。</li>
+        <li><b>擦除。</b>对能访问的记录施加受控 U<sub>j</sub>† 把它们送回空白，剩下的系统相干是 √(p₀p₁)·|Π<sub>未控制</sub> c<sub>j</sub>|；只要有一份 |c| &lt; 1 的记录访问不到，相干就回不来。这是所设受控酉模型里的计算，与 T09 的访问阻碍一致；右下角的相位证书（1/2 → −1/2 → −i/2 → 1/2）是另一件事。</li>
+        <li><b>两个气泡。</b>Z 气泡与 X 气泡的完全捏合在布洛赫坐标里是 diag(0, 0, 1) 与 diag(1, 0, 0)，两种次序都把一切送到 I/2：未读的去相位对易（任意强度也对易），尽管可观测量 X、Z 不对易。两者合起来的张量 ½(xxᵀ + zzᵀ) 谱为 (½, ½, 0)，没有唯一的主轴。真正依赖次序的是选读：从 I/2 出发，先 Z⁺ 后 X⁺ 得 P<sub>X+</sub>/4，先 X⁺ 后 Z⁺ 得 P<sub>Z+</sub>/4，迹都是 1/4，HS 距离 1/4。倾斜的轴 m 与 n 之间 [K<sub>n</sub>, K<sub>m</sub>] = (1 − c<sub>n</sub>)(1 − c<sub>m</sub>)(n·m)(nmᵀ − mnᵀ)，平行与垂直时为零，45° 时不为零。</li>
+        <li><b>局部友好。</b>两个逻辑实验室，状态 (I ⊗ U<sub>B</sub>)|Φ⁺⟩，U<sub>B</sub> = exp(−iθY/2)，θ = atan2(−1, −2)，同时旋转 Bob 的观测量，使 A₁ = Z、B′₁ = X，所有关联不变。P(a, b | x, y) 由 4×4 矩阵实际求迹得到，36 个概率都非负且无信号。白噪声 ρ<sub>v</sub> = v·|ψ′⟩⟨ψ′| + (1 − v)·I/4 下 F = v·7.0838…，在 v &gt; 6/7.0838… ≈ 0.8470 时越界。页面也枚举了这个二元 3 × 3 情形的 96 个 LF 顶点，最大值恰为 6。这里的逻辑实验室不说人类朋友或宏观环境可以被逆转。</li>
+        <li><b>先驱。</b>旧平面 S = span(x, y)，几何投影 P<sub>S</sub> = diag(1, 1, 0) 与张量 M₀ = diag(0.7, 0.3, 0) 是两样东西（迹分别是 2 与 1）。新轴 n(β) = cos β·x + sin β·z 以权重 η 加入：残差 ‖(I − P<sub>S</sub>)n‖ = sin β，M<sub>η</sub> = (1 − η)M₀ + η·nnᵀ，det M<sub>η</sub> = (1 − η)²·0.7·0.3·η·sin²β；0 &lt; η &lt; 1 且 sin β ≠ 0 时秩从 2 变成 3（数值秩阈值 10⁻⁸）。在旧的生成元 I − M₀ 下，z 方向的布洛赫分量按 e<sup>−t</sup> 衰减，最快：M₀ 的零空间不是免于去相干的方向。</li>
+      </ol>
+      <h3 class="evh">十二条已冻结的声明</h3>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T01 · 公共相位不变 ⇔ 电荷平衡 ⇔ 属于二次生成元代数；实值齐二次不变式由唯一厄米矩阵给出。<a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem" href="#" target="_blank" rel="noopener"><code>CommonPhasePolynomial</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T02 · 复完备内积空间上 Q ≥ 0 ⇔ Q = O†O 且 ⟨Qx, y⟩ = ⟨Ox, Oy⟩。<a class="leanref" data-lean-gid="D5/S3/QuantumBounds/GramRealizability.gram_realizability" href="#" target="_blank" rel="noopener"><code>GramRealizability</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T03 · P<sub>M⊥</sub> = I − P<sub>M</sub>，两者幂等、交叉复合为零、相加为 I（M 闭）。<a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities" href="#" target="_blank" rel="noopener"><code>OrthogonalProjectionComplement</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T04 · 每个 2×2 复矩阵：‖ρ‖² = ‖Pρ‖² + ‖ρ − Pρ‖²（HS 范数，计算基捏合）。<a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean" href="#" target="_blank" rel="noopener"><code>PinchingProjection</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T05 · 同一酉 U 后完全捏合的序列：每步熵增 = 相对熵 ≥ 0，总熵增 = 相对熵之和。<a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" href="#" target="_blank" rel="noopener"><code>EntropyProductionCoherenceDeletionIdentity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T06 · 完备投影记录测量：未读态 = ρ ⇔ 所有交叉块为零。<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.unreadState_fixed_iff" href="#" target="_blank" rel="noopener"><code>Conditioning</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T07 · 其余记录重叠为单位模、第 k 份 ≠ 1、ρᵢⱼ ≠ 0 时，反转其余记录不能复原 ρᵢⱼ。<a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal" href="#" target="_blank" rel="noopener"><code>JointCoherentReversal · surviving</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T08 · 两份相位记录：1/2 → −1/2 → −i/2 → 1/2。<a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate" href="#" target="_blank" rel="noopener"><code>JointCoherentReversal · two_copy</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T09 · 受控复制：约化矩阵相同、联合态不同，只凭约化矩阵无法同时恢复；伴随复原原输入。<a class="leanref" data-lean-gid="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect" href="#" target="_blank" rel="noopener"><code>ReducedRecordAccessDefect</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T10 · 划分拓扑里不可分 ⇔ 读出值相等。<a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>PartitionTopologyKernel</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T11 · A = {0}、P = {1, 2}、Q = {0, 1}：先 P 后 Q 得 {1}，先 Q 后 P 得 {1, 2}。<a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation" href="#" target="_blank" rel="noopener"><code>RevisionConflictNoncommutation</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T12 · S⊥ ≠ 0 时存在单位 e ∈ S⊥：P<sub>S</sub>e = 0、到 S 的距离为 1、‖I − P<sub>S</sub>‖ = 1。<a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>FiniteLayerProjectionEscape</code></a></span></div>
+      <p class="lede refs">书中：<a href="../../zh/ch33-all-beings-observers-and-mutual-attractors.html#sec-ch33-consensus-decoherence-pointer" target="_top">第 33 章 · 共识、去相干与指针轴</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Four scenes answer one question of chapter 33: when many observers each measure the same system, what stays and what is deleted. The page is a numerical illustration, not a proof; every number is computed live on the page, and each model's assumptions are written below.</p>
+      <ol>
+        <li><b>The consensus tensor.</b> Each observer carries a unit axis nⱼ and a weight wⱼ (normalized explicitly), M = Σ wⱼnⱼnⱼᵀ. Since (−n)(−n)ᵀ = nnᵀ only the unoriented axis counts. M is symmetric, positive semidefinite, of trace 1, and M = BᵀB (B[j, a] = √wⱼ·nⱼ[a]). With eigenvalues sorted λ₁ ≥ λ₂ ≥ λ₃, κ = (3λ₁ − 1)/2 ∈ [0, 1] measures concentration only and does not by itself certify a unique axis: diag(½, ½, 0) has κ = ¼ and no unique top axis. When λ₁ − λ₂ &lt; ε = 10⁻⁸ the page writes “No unique pointer axis” and draws none: a display convention, not a physical constant. When λ₁ − λ₂ ≥ ε it draws an unoriented line; the choice of arrow direction is not physics.</li>
+        <li><b>One encounter.</b> The Kraus operators cos(α/2)·I and sin(α/2)·n·σ give a Pauli channel with Bloch matrix K(n, α) = cos α·I + (1 − cos α)·nnᵀ: the component along n stays, both transverse components are multiplied by cos α. The page keeps α in [0, π/2], where the transverse decay is monotone; α = π/2 is the complete rank-one pinching.</li>
+        <li><b>Three constructions, three names.</b> The actual ordered product K<sub>k</sub>⋯K₁ (the first observer at the right; in general not symmetric and not determined by M alone); the mean channel K̄ᵏ of axes drawn by weight at every encounter, K̄ = cos α·I + (1 − cos α)·M, with mode factors [λᵢ + (1 − λᵢ)cos α]ᵏ; the weak-interaction limit exp[−t(I − M)], t = kα²/2, with mode factors e<sup>−t(1 − λᵢ)</sup>. Isotropic fog: mean scale [(1 + 2cos α)/3]ᵏ, 0.4211 at k = 16 and α = 0.4, weak limit e<sup>−kα²/3</sup> = 0.4260; one shared axis: the finite transverse factor (cos α)ᵏ = 0.2683, weak limit e<sup>−kα²/2</sup> = 0.2780. They agree only asymptotically as α → 0. An isotropic M does not make every finite history isotropic: switch the six-axis fog to the ordered product to see it.</li>
+        <li><b>Along and across.</b> In the pointer basis |±e⟩, ρ₊₋ = (r₂ − i·r₃)/2 and ρ₊₊ − ρ₋₋ = r₁: the transverse Bloch components are the two quadratures of off-diagonal coherence, and the deleted HS mass is ‖ρ − Πρ‖²<sub>HS</sub> = (r₂² + r₃²)/2. The longitudinal part is preserved exactly only when λ₁ = 1 (all axes collinear); for λ₁ &lt; 1 everything eventually tends to I/2, and the slowest-damped direction is only preferred for a finite time.</li>
+        <li><b>Axis ends and phases.</b> Flipping the end of an axis only swaps its two outcome labels and leaves nnᵀ unchanged entry by entry; it does not identify the two opposite pure states on the Bloch sphere (they are orthogonal). Multiplying a ket by a common phase e<sup>iθ</sup> leaves |ψ⟩⟨ψ| unchanged: a different transformation, drawn on its own in the inset, where θ follows the rail only for display.</li>
+        <li><b>Redundant records.</b> A common pointer basis, p₀ + p₁ = 1, records |φ<sub>j</sub><sup>(0)</sup>⟩ and |φ<sub>j</sub><sup>(1)</sup>⟩ with overlap c<sub>j</sub>, and a pure two-branch product state overall. The reduced state of any fragment F has rank at most 2, S(ρ<sub>F</sub>) = h(Π<sub>F</sub>) with h(q) = H₂((1 − d)/2), d = √(1 − 4p₀p₁(1 − |q|²)), so I(S : O<sub>m</sub>) = S(ρ<sub>S</sub>) + S(ρ<sub>O<sub>m</sub></sub>) − S(ρ<sub>O<sub>N−m</sub></sub>): 0 at m = 0 and 2S(ρ<sub>S</sub>) at m = N. With c = 0.3 and N = 16, m = 3…13 stays within 0.000526 bits of S(ρ<sub>S</sub>). The final rise to 2S contains quantum correlations of the complete purification; it is not “twice the classical objective information”. The closed form holds only for the stated pure branching model.</li>
+        <li><b>Erasure.</b> Applying the controlled U<sub>j</sub>† to accessible records returns them to blank, and the system coherence left is √(p₀p₁)·|Π<sub>uncontrolled</sub> c<sub>j</sub>|; one inaccessible record with |c| &lt; 1 is enough to keep the coherence from coming back. This is a calculation in the stated controlled-unitary model, consistent with the access obstruction of T09; the phase certificate at the bottom right (1/2 → −1/2 → −i/2 → 1/2) is a separate matter.</li>
+        <li><b>Two bubbles.</b> In Bloch coordinates the full pinchings of the Z bubble and the X bubble are diag(0, 0, 1) and diag(1, 0, 0), and either order sends everything to I/2: the unread dephasings commute (at any strength), although the observables X and Z do not. Their joint tensor ½(xxᵀ + zzᵀ) has spectrum (½, ½, 0) and no unique top axis. What does depend on order is the selected update: from I/2, Z⁺ then X⁺ gives P<sub>X+</sub>/4 and X⁺ then Z⁺ gives P<sub>Z+</sub>/4, both of trace 1/4, at HS distance 1/4. For a tilted axis m against n, [K<sub>n</sub>, K<sub>m</sub>] = (1 − c<sub>n</sub>)(1 − c<sub>m</sub>)(n·m)(nmᵀ − mnᵀ): zero when parallel or perpendicular, nonzero at 45°.</li>
+        <li><b>Local Friendliness.</b> Two logical laboratories in the state (I ⊗ U<sub>B</sub>)|Φ⁺⟩, U<sub>B</sub> = exp(−iθY/2), θ = atan2(−1, −2), with Bob's observables rotated along so that A₁ = Z and B′₁ = X and every correlation is unchanged. P(a, b | x, y) comes from actual traces of 4×4 matrices; all 36 probabilities are nonnegative and no-signalling. Under white noise ρ<sub>v</sub> = v·|ψ′⟩⟨ψ′| + (1 − v)·I/4, F = v·7.0838…, which exceeds 6 for v &gt; 6/7.0838… ≈ 0.8470. The page also enumerates the 96 LF vertices of this binary 3 × 3 scenario; their maximum is exactly 6. These logical laboratories say nothing about reversing a human friend or a macroscopic environment.</li>
+        <li><b>Pioneer.</b> Old plane S = span(x, y): the geometric projection P<sub>S</sub> = diag(1, 1, 0) and the tensor M₀ = diag(0.7, 0.3, 0) are different things (traces 2 and 1). A new axis n(β) = cos β·x + sin β·z joins with weight η: the residual ‖(I − P<sub>S</sub>)n‖ = sin β, M<sub>η</sub> = (1 − η)M₀ + η·nnᵀ, det M<sub>η</sub> = (1 − η)²·0.7·0.3·η·sin²β; for 0 &lt; η &lt; 1 and sin β ≠ 0 the rank grows from 2 to 3 (numerical rank threshold 10⁻⁸). Under the old generator I − M₀ the z component of the Bloch vector decays as e<sup>−t</sup>, the fastest of all: the nullspace of M₀ is not a decoherence-free direction.</li>
+      </ol>
+      <h3 class="evh">Twelve frozen declarations</h3>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T01 · Invariant under a common phase ⇔ charge-balanced ⇔ in the quadratic-generator algebra; a real homogeneous quadratic invariant comes from a unique Hermitian matrix. <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem" href="#" target="_blank" rel="noopener"><code>CommonPhasePolynomial</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T02 · On a complete complex inner-product space, Q ≥ 0 ⇔ Q = O†O with ⟨Qx, y⟩ = ⟨Ox, Oy⟩. <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/GramRealizability.gram_realizability" href="#" target="_blank" rel="noopener"><code>GramRealizability</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T03 · P<sub>M⊥</sub> = I − P<sub>M</sub>; both idempotent, cross compositions zero, sum I (M closed). <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities" href="#" target="_blank" rel="noopener"><code>OrthogonalProjectionComplement</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T04 · Every complex 2×2 matrix: ‖ρ‖² = ‖Pρ‖² + ‖ρ − Pρ‖² (HS norm, computational pinching). <a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean" href="#" target="_blank" rel="noopener"><code>PinchingProjection</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T05 · A sequence of full pinchings after one fixed unitary U: each entropy increment = relative entropy ≥ 0, total = sum of relative entropies. <a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" href="#" target="_blank" rel="noopener"><code>EntropyProductionCoherenceDeletionIdentity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T06 · Complete projective record measurement: unread state = ρ ⇔ every cross block vanishes. <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.unreadState_fixed_iff" href="#" target="_blank" rel="noopener"><code>Conditioning</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T07 · Other overlaps of unit modulus, record k ≠ 1, ρᵢⱼ ≠ 0: reversing the other records cannot restore ρᵢⱼ. <a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal" href="#" target="_blank" rel="noopener"><code>JointCoherentReversal · surviving</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T08 · Two phase records: 1/2 → −1/2 → −i/2 → 1/2. <a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate" href="#" target="_blank" rel="noopener"><code>JointCoherentReversal · two_copy</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T09 · Controlled copy: equal reduced matrices, different joint states, no recovery of both from the reduced matrix alone; the adjoint restores the inputs. <a class="leanref" data-lean-gid="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect" href="#" target="_blank" rel="noopener"><code>ReducedRecordAccessDefect</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T10 · Inseparable in the partition topology ⇔ equal readout values. <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>PartitionTopologyKernel</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T11 · A = {0}, P = {1, 2}, Q = {0, 1}: P then Q gives {1}, Q then P gives {1, 2}. <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation" href="#" target="_blank" rel="noopener"><code>RevisionConflictNoncommutation</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T12 · S⊥ ≠ 0 gives a unit e ∈ S⊥ with P<sub>S</sub>e = 0, distance 1 from S, and ‖I − P<sub>S</sub>‖ = 1. <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>FiniteLayerProjectionEscape</code></a></span></div>
+      <p class="lede refs">In the book: <a href="../../en/ch33-all-beings-observers-and-mutual-attractors.html#sec-ch33-consensus-decoherence-pointer" target="_top">Chapter 33 · Consensus, decoherence and the pointer axis</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

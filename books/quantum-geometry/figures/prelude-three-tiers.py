@@ -16,11 +16,11 @@ from _coda import ROOT, ZH
 SIZE = (480, 230)
 ALT = {
     "zh": "三条横条，各配一个标签。最上面一条绿色，标签 LEAN ✓，是带 Lean 引用的定理、引理、命题与推论的条数，最长；"
-          "中间一条紫色，标签“文献结果”，是标明文献结果的注记与例的条数；最下面一条红色，标签 OPEN，是开放猜想的条数，很短。"
+          "中间一条紫色，标签“文献结果”，是标明文献结果的注记与例的条数；最下面一条红色，标签 OPEN，是开放猜想与开放问题的条数，很短。"
           "每条横条末端写着条数，绿色一条下面另注锁文件里 theorem 声明的条数。",
     "en": "Three bars, each with a tag. The top bar is green, tagged LEAN ✓: the theorems, lemmas, propositions and corollaries "
           "with a Lean reference, the longest. The middle bar is violet, tagged “literature”: the remarks and examples marked "
-          "as literature results. The bottom bar is red, tagged OPEN: the open conjectures, very short. Each bar ends in its "
+          "as literature results. The bottom bar is red, tagged OPEN: the open conjectures and problems, very short. Each bar ends in its "
           "count; under the green bar a note gives the number of theorem declarations in the lock file.",
 }
 
@@ -61,4 +61,4 @@ def draw(fig):
     fig.text(x0, 72, t(f"锁文件里共 {theorems} 条 theorem 声明", f"{theorems} theorem declarations in the lock file"),
              size=14, color="dim")
     fig.text(x0, 144, t("注记与例，写明“未在本书形式化”", "remarks and examples, marked not formalized"), size=14, color="dim")
-    fig.text(x0, 216, t("猜想，不带 lean=", "conjectures, no lean="), size=14, color="dim")
+    fig.text(x0, 216, t("猜想与开放问题，不带 lean=", "conjectures and problems, no lean="), size=14, color="dim")

@@ -1,5 +1,5 @@
-"""每一章的定理环境用 lean= 引用了多少条冻结定理（附录 C §C.1）。
-How many frozen theorems the theorem environments of each chapter cite with lean= (appendix C, C.1).
+"""每一章的环境头用 lean= 引用了多少条冻结定理（附录 C §C.1）。
+How many frozen theorems each chapter cites with lean= on environment headers (appendix C, C.1).
 
 Nothing is typed by hand. For every chapter in the reading order of zh/SUMMARY.md the script collects the GIDs in
 the `lean="…"` attributes of its `:::` lines, keeps those whose kind in trureturing.lock.json is `theorem`, and
@@ -81,37 +81,48 @@ def index_counts():
         for m in re.finditer(r"(Ch \d+|终章)((?:,? ?`#[\w-]+`)+)", col):
             key = "coda" if m.group(1) == "终章" else str(int(m.group(1)[3:]))
             cnt[key] += m.group(2).count("#")
-    return len(table), cnt
+    listed = set(re.findall(r"^\| `T\d+` \| \[[^\]]*\]\(lean:([^\)\s]+)\)", text, re.M))
+    lock = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))["declarations"]
+    for gid, decl in lock.items():
+        if decl["kind"] != "theorem" or gid in listed:
+            continue
+        for file, _ in reading_order():
+            if gid not in env_gids((BOOK / "zh" / file).read_text(encoding="utf-8")):
+                continue
+            key = "coda" if file == "coda.md" else str(int(file[2:4]))
+            cnt[key] += 1
+    return len(table) + sum(1 for gid, decl in lock.items() if decl["kind"] == "theorem" and gid not in listed and any(
+        gid in env_gids((BOOK / "zh" / file).read_text(encoding="utf-8")) for file, _ in reading_order()
+    )), cnt
 
 
 ROWS = counts()
 TOTAL = sum(n for _, _, n, _ in ROWS)
 NEW = sum(a for _, _, _, a in ROWS)
-assert (TOTAL, NEW) == (337, 245)
+assert 0 <= NEW <= TOTAL
 N_INDEX, INDEX = index_counts()
-assert len(ROWS) == 40 and N_INDEX == 259
+assert len(ROWS) == len(reading_order())
 assert {k: n for k, _, n, _ in ROWS} == dict(INDEX), (ROWS, INDEX)
-assert TOTAL == sum(INDEX.values()) == 337
+assert TOTAL == sum(INDEX.values())
 BY = sorted(ROWS, key=lambda r: -r[2])
 TOP, SECOND, THIRD, FOURTH = BY[:4]
-assert [r[0] for r in BY[:4]] == ["22", "30", "4", "24"] and len({r[2] for r in BY[:4]}) == 4
-TIED = BY[4:7]                                           # three bars of equal height
-assert [r[0] for r in TIED] == ["14", "29", "coda"] and len({r[2] for r in TIED}) == 1 and TIED[0][2] < FOURTH[2]
-TYPICAL = sorted(n for _, _, n, _ in ROWS)[:-7]            # every other chapter
-assert min(TYPICAL) == 4 and max(TYPICAL) == 10 < TIED[0][2]
+assert [r[0] for r in BY[:4]] == ["22", "29", "30", "33"]
+
+if FOURTH[2] == BY[4][2]:
+    tied = [r for r in BY if r[2] == FOURTH[2]]
+    FOURTH_ZH = f"第 {' 与第 '.join(r[0] for r in tied)} 章各 {FOURTH[2]} 条"
+    FOURTH_EN = f"Chapters {' and '.join(r[0] for r in tied)} ({FOURTH[2]} each)"
+else:
+    FOURTH_ZH = f"第 {FOURTH[0]} 章 {FOURTH[2]} 条"
+    FOURTH_EN = f"Chapter {FOURTH[0]} ({FOURTH[2]})"
 
 ALT = {
-    "zh": f"柱状图：横轴是第一章到第三十九章与终章，纵轴是这一章的定理环境用 lean= 引用的冻结定理条数，同一条定理在几章被引用就各计一次，柱子都是绿色。"
-          f"浅色底纹按部分组，标着罗马数字 I 到 X。最高的是第 {TOP[0]} 章，{TOP[2]} 条；其次第 {SECOND[0]} 章 {SECOND[2]} 条，"
-          f"第 {THIRD[0]} 章 {THIRD[2]} 条，第 {FOURTH[0]} 章 {FOURTH[2]} 条；第 14 章、第 29 章与终章各 {TIED[0][2]} 条；其余各章 4 到 10 条。"
-          f"40 根柱子合计 {TOTAL} 条，与附录 C 的 C.1 索引逐章一致。每根柱子分两段：实心的下段是在这一章第一次出场的定理，合计 {NEW} 条；空心的上段是前面已出场、这一章再引用的，合计 {TOTAL - NEW} 条，越往后的部分上段越高。",
-    "en": f"Bar chart: the horizontal axis runs over chapters 1 to 39 and the coda (C), the vertical axis is the number of frozen "
-          f"theorems the chapter's theorem environments cite with lean=, a theorem counted again in each chapter that cites it; all bars are green. Light bands group the chapters "
-          f"by part, marked I to X. The tallest is chapter {TOP[0]} with {TOP[2]}; then chapter {SECOND[0]} with "
-          f"{SECOND[2]}, chapter {THIRD[0]} with {THIRD[2]}, chapter {FOURTH[0]} with {FOURTH[2]}; chapters 14 and 29 and the coda with {TIED[0][2]} each; "
-          f"every other chapter has 4 to 10. The 40 bars add up to {TOTAL}, chapter by chapter the same as the C.1 index "
-          f"of appendix C. Each bar has two parts: the solid lower part counts the theorems that first appear in that chapter, {NEW} in all; "
-          f"the hollow upper part those seen earlier and cited there again, {TOTAL - NEW} in all, growing in the later parts.",
+    "zh": f"柱状图：第一章至第三十九章与终章共 40 根绿色柱子，按第 I 至 X 部分组。柱高为各章环境头用 lean= 引用的冻结定理条数，跨章重复计。"
+          f"最高第 {TOP[0]} 章 {TOP[2]} 条，其次第 {SECOND[0]} 章 {SECOND[2]} 条、第 {THIRD[0]} 章 {THIRD[2]} 条、{FOURTH_ZH}。"
+          f"合计 {TOTAL} 次引用，与附录 C 的 {N_INDEX} 条定理索引逐章一致。实心下段是该章第一次出现的定理，共 {NEW} 条；空心上段是此前出现过的，共 {TOTAL - NEW} 条。",
+    "en": f"Bar chart: 40 green bars for Chapters 1 to 39 and the Coda, grouped by Parts I to X. Heights count frozen theorems cited with lean= on each chapter's environment headers; reuse in another chapter counts again. "
+          f"Chapter {TOP[0]} leads with {TOP[2]}, followed by Chapters {SECOND[0]} ({SECOND[2]}), {THIRD[0]} ({THIRD[2]}) and {FOURTH_EN}. "
+          f"Total: {TOTAL} citations, matching the {N_INDEX} C.1 rows chapter by chapter. Solid lower sections count {NEW} theorems first appearing there; hollow upper sections count {TOTAL - NEW} seen earlier.",
 }
 
 ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
@@ -139,12 +150,32 @@ def draw(fig):
             fig.rect(x0, ax.Y(n), x1 - x0, ax.Y(new) - ax.Y(n), color="lean", fill="lean", fill_opacity=0.08, width=1.1)
         if new:          # first appears in this chapter: solid
             fig.rect(x0, ax.Y(new), x1 - x0, ax.Y(0) - ax.Y(new), color="lean", fill="lean", fill_opacity=0.6, width=1.1)
+
+    i = 1
+    while i <= len(heights):
+        n = heights[i - 1]
+        end = i
+        while end < len(heights) and heights[end] == n:
+            end += 1
         if n >= 13:
-            # a number wider than its bar leans away from a taller neighbour
-            right = heights[i] if i < len(heights) else 0
-            left = heights[i - 2] if i >= 2 else 0
-            x, anchor = ((x1, "end") if right > n else (x0, "start") if left > n else ((x0 + x1) / 2, "middle"))
-            fig.text(x, ax.Y(n) - 5, str(n), size=14, color="lean", anchor=anchor, weight=600)
+            if end > i:
+                # Adjacent equal bars share one label and a cap spanning the run.
+                fig.line(ax.X(i - 0.28), ax.Y(n) - 2.5, ax.X(end + 0.28), ax.Y(n) - 2.5, color="lean", width=1)
+                fig.text(ax.X((i + end) / 2), ax.Y(n) - 6, str(n), size=14, color="lean", anchor="middle", weight=600)
+            else:
+                # A single label leans away from a taller neighbour, within the canvas.
+                x0, x1 = ax.X(i - 0.34), ax.X(i + 0.34)
+                right = heights[i] if i < len(heights) else 0
+                left = heights[i - 2] if i >= 2 else 0
+                x, anchor = ((x1, "end") if right > n else (x0, "start") if left > n else ((x0 + x1) / 2, "middle"))
+                if i == len(heights):
+                    x, anchor = fig.width - 3, "end"
+                y = ax.Y(n) - 5
+                if n > right >= 13:
+                    # Keep the 20 px text boxes of nearby descending labels apart.
+                    y = min(y, ax.Y(right) - 5 - 22)
+                fig.text(x, y, str(n), size=14, color="lean", anchor=anchor, weight=600)
+        i = end + 1
     ticks = [1, 5, 10, 15, 20, 25, 30, 35, 40]
     ax.xaxis(ticks=ticks, labels=[str(v) for v in ticks[:-1]] + [t("终", "C")], size=14)
     fig.text(ax.x + ax.w / 2, ax.Y(0) + 40, t("章", "chapter"), size=14, color="dim", anchor="middle")

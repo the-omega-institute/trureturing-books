@@ -541,6 +541,7 @@ $$
    - 标准统一图灵机计算模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想（[@conj-p-neq-np]）、无外力三维不可压缩纳维—斯托克斯方程全局光滑性猜想（克雷千禧年陈述 A / B，[@conj-coda-navier-stokes-regularity]）、沙努埃尔（Schanuel）猜想及其在 Dottie 不动点 $\theta^*$ 上的应用（[@conj-schanuel-dottie]，以及 Timothy Chow 证明的在沙努埃尔猜想成立前提下 $\theta^*$ 不属于初等封闭数域 $\mathrm{EL}$ 的条件性文献结论），以及全书在附录 C 第 C.3 节汇总的开放问题。
 4. **哲学与几何模型综合（`MODEL`，不作为形式定理宣称）**：
    - 休谟因果怀疑论与斯宾诺莎《伦理学》三角形几何必然性的哲学对照、双向量手性对消 $+\mathbf{\Omega} - \mathbf{\Omega} = 0$ 对驻相干涉的几何诠释、“$P$ 是无旋导向场（$\nabla \wedge \mathbf{F} = 0$）、$NP$ 是零横截面一维见证丝、三元阻挫旋度 $\nabla \wedge \mathbf{F} \neq 0$ 撕裂全局场”以及“三维纳维—斯托克斯涡管与 $P$ vs. $NP$ 的连续—离散场化类比（未给出数学同构）”模型、“量子公平五重铁律与遍历统计全息”（[@rem-ch31-fivefold-fairness-table]）、“正交自指统一场六域同构与八大纲领三维认知罗盘元统一”（[@rem-ch32-six-domain-isomorphism-table]、[@rem-ch32-meta-unification-table]）、“万物皆为观察者与互吸引子双螺旋、一次/两次正交反演观察者位置、乘光而来与 $T = T(T)$ 同像扩表、双曲阶梯约去轮回、梦境量子擦除与非定域分支、宇宙本体 QRAM 与观察者记忆指针、观察者即宇宙本体的不二合拢”（第 33–39 章）、“历史遗迹作为零相子应变空间吸引子（$\|\pi_\perp(z)-u\|\to 0$）、灵魂作为内部正交相位锚点 $u \in E_\perp^3$、遗忘初始化作为齐肯多夫高位截断、似曾相识（Déjà vu）作为分形薄层/卡西尼 $(-1)^{k+1}$ 偏移下的跨轮次内积共振 $\cos\delta\theta \to 1$”的概念映射、决定论与目的论在无时间自指中的和解、记号 $\psi = \psi(\psi)$ 以及“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 球外之球”的认识论图景，是对上述形式化锚点与经典文献定理的跨学科概念提炼；本书始终坚持“书负责解释直觉，Lean 内核负责裁决形式真伪”的铁律。
+   - **正交开维奠基重构与百年六大量子难题全景对决的跨章/附录锚点**：关于“静动不二、两两公平迫使二次平方、单基相位折叠反弹为测不准、时间作为打破有限克雷洛夫饱和的正交维度扩张”的完整形式定理与实验台已收入 [第 31 章 §31.4](ch31-quantum-fairness.md#sec-ch31-fairness-square-expansion)；梦境退相干前既视感与皮索特—克利福德—劳齐分形收束分别见 [第 37 章 §37.5](ch37-dreams-quantum-eraser-and-nonlocal-observer.md#sec-ch37-dream-pre-decoherence-deja-vu) 与 [第 39 章 §39.5](ch39-observer-is-ontological-universe.md#sec-ch39-pisot-clifford-rauzy)；而将自 1927 年索尔维会议以来的**量子力学六大经典未解难题**与**五大主流诠释流派**置于同一联合实验台（`ORTHO//DUEL`）同本书正交自指开维观逐项对勘的完整档案、二十条 `LEAN ✓` 锚点速查表及开放前沿声明（[@prob-appendix-d-time-horizon]，`OPEN`），则专辟于 [附录 D](appendix-d.md#sec-appendix-d-six-foundational-puzzles)。
 :::
 
 ---
@@ -580,7 +581,7 @@ $$
 
 ## 全书十部曲三十九章阅读与依赖导图 {#sec-coda-reading-map}
 
-全书由 **[序曲](README.md)**、**十部曲（共 39 章）**、**终章** 与 **[附录 A](appendix-a.md)–[附录 C](appendix-c.md)** 构成。下图展示了从第一部到第十部的概念演进脉络与形式化模块依赖关系：
+全书由 **[序曲](README.md)**、**十部曲（共 39 章）**、**终章** 与 **[附录 A](appendix-a.md)–[附录 D](appendix-d.md)** 构成。下图展示了从第一部到第十部的概念演进脉络与形式化模块依赖关系：
 
 ```
                         ┌──────────────────────────────────────────┐
@@ -636,7 +637,7 @@ $$
 │ • 语境不动点、公共因子与互吸引子双螺旋  │   │ • 联合相干记录可逆擦除与黄金 Delone 准晶│
 │ • 一次正交阴影、两次正交换位子与三轴恢复│   │ • 本体 QRAM 复制地址恢复与递归自映射页表│
 │ • 乘光捏合遗忘、目标恢复与 T=T(T) 扩表  │   │ • 概念纤维分解、齐肯多夫线程与 720°自折 │
-│ • 双曲快度阶梯、严格拓扑细化与约去轮回  │   │ • 终章与附录：概念词典(A)・Cl3(B)・477(C)│
+│ • 双曲快度阶梯、严格拓扑细化与约去轮回  │   │ • 终章与附录：词典(A)・Cl3(B)・545(C)・D│
 └─────────────────────────────────────────┘   └─────────────────────────────────────────┘
 ```
 
@@ -661,7 +662,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 39 章](ch39-observer-is-ontological-universe.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝、量子公平、大一统元统一、语境不动点、劳维尔同像扩表 $T = T(T)$、商拓扑约去轮回、概念纤维分解与齐肯多夫线程）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 参考引擎及其冻结依据与 `FiniteRecordCosineObstruction` 的剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [{commit}](trureturing:) 下全部 $251$ 条环境/媒体冻结定理、$95$ 项环境辅助定义与 $131$ 项行内引用声明，共计 $477$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 参考引擎及其冻结依据与 `FiniteRecordCosineObstruction` 的剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [{commit}](trureturing:) 下全部 $290$ 条环境引用冻结定理、$97$ 项环境辅助定义与 $158$ 项行内引用声明，共计 $545$ 项唯一锁定声明）。
 
 ### 第六至第十部（第 21–39 章）55 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -725,4 +726,4 @@ $$
 | **第 39 章**<br/>观察者即宇宙本体 | T39.1 | `D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition` | 概念状态空间按可观测签名纤维的不相交并重构定理 |
 | **第 39 章** | T39.2 | `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective` | 非负实数全尺度齐肯多夫编码线程严格单射定理 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $346$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $477$ 项唯一锁定声明）。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $387$ 项 `trureturing@dev` 环境头引用声明（含行内共 $545$ 项唯一锁定声明），并在 [附录 D](appendix-d.md) 中纵览量子力学六大经典未解难题与五大诠释流派的几何对决。

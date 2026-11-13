@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//LOOKUP · 7-stage degradation of a P=NP lookup oracle and the spacetime–gravity trade-off">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//LOOKUP 查表退化阶梯 · P=NP 全息预言机与七阶时空引力权衡</title>
+<meta name="description" content="假设存在一种查表算法可以 P=NP，逐级剥除全息自指与非定域特权：从 d=0 自映射预言机 p=*p（r=0），经 d=1 静态多项式建议表（越过 n→n+1 视界失效）、d=2 齐肯多夫进位屏障与 Frougny 串行进位波、d=3 贝肯斯坦—霍金引力全息半径与光锥线延迟极值（σ*=2/3 时 r_min=1/3）、d=4 二维量子叠加指针（模型包络 r_Q=(1−σ)/2，σ=0 处 Grover r=0.500 与全空间线延迟相等）、d=5 一维退相干指针与兰道尔擦除热，直至 d=6 无记忆盲搜（r=1.000）。Seven-stage degradation of a hypothetical P=NP lookup oracle from d=0 self-mapped p=*p (r=0) through d=1 static advice, d=2 Zeckendorf carry barrier &amp; Frougny serial carry wave, d=3 Bekenstein–Hawking holographic radius &amp; light-cone wire floor (r_min=1/3 at σ*=2/3), d=4 2D quantum superposition pointer (model envelope r_Q=(1−σ)/2; Grover r=0.500 at σ=0 equals the σ=1 wire delay), and d=5 1D classical pointer with Landauer heat, down to d=6 memoryless blind search (r=1.000).">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="pnp-lookup-degradation">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//LOOKUP">ORTHO<b>//</b>LOOKUP</h1>
+      <div class="tagline">
+        <span class="zh">查表退化阶梯 · <em>逐级剥除全息自指特权：引力撑开空间半径，进位催生因果时间，擦除兑付热学账单</em></span>
+        <span class="en">Lookup degradation · <em>stripping oracle privileges births spatial radius, causal carry time, quantum phase and Landauer heat</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillStage"><span class="zh">退化阶</span><span class="en">STAGE</span> <strong>d=3</strong></span>
+      <span class="pill" id="pillSigma"><span class="zh">表率</span><span class="en">SPACE</span> <strong>σ=0.67</strong></span>
+      <span class="pill hot" id="pillRate"><span class="zh">时间指数</span><span class="en">RATE</span> <strong>r=0.333</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language" data-aria-en="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="oracle" aria-pressed="false"><span class="code">STAGE-0 · ORACLE</span><span class="cn zh">全息自指预言机：p = *p 与双向量相消</span><span class="cn en">Holographic oracle: p = *p &amp; bivector cancel</span></button>
+        <button class="preset" data-preset="frougny" aria-pressed="false"><span class="code">STAGE-2 · ZECKENDORF</span><span class="cn zh">齐肯多夫下穿屏障与 Frougny 进位波</span><span class="cn en">Zeckendorf barrier &amp; Frougny carry wave</span></button>
+        <button class="preset" data-preset="bekenstein" aria-pressed="true"><span class="code">STAGE-3 · BEKENSTEIN</span><span class="cn zh">模型：全息半径与光锥线延迟包络极值 r = 1/3</span><span class="cn en">Model: holographic radius &amp; wire-envelope floor r = 1/3</span></button>
+        <button class="preset" data-preset="grover" aria-pressed="false"><span class="code">STAGE-4 · GROVER</span><span class="cn zh">二维量子叠加指针：模型包络 (1−σ)/2 与线延迟相等</span><span class="cn en">2D quantum pointer: model envelope (1−σ)/2 meets wire delay</span></button>
+        <button class="preset" data-preset="landauer" aria-pressed="false"><span class="code">STAGE-5 · LANDAUER</span><span class="cn zh">一维退相干指针、冲突快表与擦除热账单</span><span class="cn en">1D classical pointer, TLB &amp; Landauer heat</span></button>
+        <button class="preset" data-preset="ladder" aria-pressed="false"><span class="code">STAGES 0→6 · LADDER</span><span class="cn zh">七阶退化全景阶梯与生命逆向建表</span><span class="cn en">Full 7-stage ladder &amp; life table-building</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">退化阶与表容量</span><span class="en">Degradation &amp; table space</span><span class="aside">d · σ</span></h2>
+      <div class="chips" id="stageChips" role="group" aria-label="退化阶段选择" data-aria-en="Degradation stage">
+        <button class="chip" data-d="0" aria-pressed="false"><span class="m">d=0</span></button>
+        <button class="chip" data-d="1" aria-pressed="false"><span class="m">d=1</span></button>
+        <button class="chip" data-d="2" aria-pressed="false"><span class="m">d=2</span></button>
+        <button class="chip" data-d="3" aria-pressed="true"><span class="m">d=3</span></button>
+        <button class="chip" data-d="4" aria-pressed="false"><span class="m">d=4</span></button>
+        <button class="chip" data-d="5" aria-pressed="false"><span class="m">d=5</span></button>
+        <button class="chip" data-d="6" aria-pressed="false"><span class="m">d=6</span></button>
+        <button class="chip" data-d="ladder" aria-pressed="false"><span class="m">0→6</span></button>
+      </div>
+      <div class="field">
+        <label for="sigma"><span class="zh">表空间指数率 σ = (log₂S)/n</span><span class="en">Space fraction σ = (log₂S)/n</span><small class="zh">右侧相图内可直接拖动</small><small class="en">or drag inside phase plot</small></label><output id="oSigma" for="sigma">0.67</output>
+        <input type="range" id="sigma" min="0" max="1" step="0.01" value="0.67">
+      </div>
+      <p class="note"><span class="zh">S = 2^{σn} 为物理查找表容量，T = 2^{r·n} 为解引用总耗时。d=0 自指压缩无需指数外存；d=6 失忆清零强制 σ = 0。</span><span class="en">S = 2^{σn} is physical table size and T = 2^{r·n} is total lookup time. Stage d=0 self-compresses without exponential memory; d=6 memoryless reset locks σ = 0.</span></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">问题结构与布线</span><span class="en">Instance &amp; wire mode</span><span class="aside">REGIME</span></h2>
+      <div class="chips" id="regimeChips" role="group" aria-label="问题结构模型" data-aria-en="Instance regime">
+        <button class="chip" data-regime="blackbox" aria-pressed="true"><span class="zh">黑箱无结构 2ⁿ</span><span class="en">Black-box 2ⁿ</span></button>
+        <button class="chip" data-regime="sat3" aria-pressed="false"><span class="zh">三元结构 3-SAT</span><span class="en">Structured 3-SAT</span></button>
+      </div>
+      <div class="chips" id="wireChips" role="group" aria-label="光锥布线调度" data-aria-en="Relativistic wire mode">
+        <button class="chip" data-wire="pipelined" aria-pressed="true"><span class="zh">全息流水线 <span class="m">max(1−σ, σ/2)</span></span><span class="en">Pipelined <span class="m">max(1−σ, σ/2)</span></span></button>
+        <button class="chip" data-wire="serial" aria-pressed="false"><span class="zh">串行往返 <span class="m">1 − σ/2</span></span><span class="en">Serial <span class="m">1 − σ/2</span></span></button>
+      </div>
+      <p class="note"><span class="zh">MODEL（球形装填与光速查询包络）：设 S = 2^{σn} 比特的表按全息界 S ≲ A/(4ℓ_P² ln 2) 比特装进球内，则在该模型中表球半径 R ∝ 2^{σn/2}，单次光速往返 T_wire = 2R/c ∝ 2^{σn/2}；r_min = 1/3（σ* = 2/3）是该模型流水线包络 max(1 − σ, σ/2) 的极小值，不是无条件的物理下界。</span><span class="en">MODEL (spherical packing and light-speed query envelope): if an S = 2^{σn}-bit table is packed into a ball under the holographic bound S ≲ A/(4ℓ_P² ln 2) bits, this model gives radius R ∝ 2^{σn/2} and light-speed round trip T_wire = 2R/c ∝ 2^{σn/2}; r_min = 1/3 (σ* = 2/3) is the minimum of this model's pipelined envelope max(1 − σ, σ/2), not an unconditional physical lower bound.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：左侧为 d=0..6 七阶查表物理路由形态，右侧为表空间率 σ 对有效时间指数率 r_eff(σ) 的时空—引力权衡相图" data-aria-en="Stage: physical lookup routing morphology across stages d=0..6 on the left, and the σ versus r_eff(σ) spacetime–gravity trade-off phase diagram on the right">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景切换" data-aria-en="Scene switcher">
+        <button class="chip" data-scene="duo" aria-pressed="true"><span class="zh">双栏</span><span class="en">Twin</span></button>
+        <button class="chip" data-scene="morph" aria-pressed="false"><span class="zh">路由</span><span class="en">Routing</span></button>
+        <button class="chip" data-scene="phase" aria-pressed="false"><span class="zh">相图</span><span class="en">Phase</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="七阶查表退化有效时间指数阶梯图" data-aria-en="7-stage lookup degradation effective time-exponent staircase"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="当前退化阶的物理限制诊断小图" data-aria-en="Physical limiter diagnostic plot for the active stage"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="wide"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="wide"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div class="wide"><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对角线整行捕获：记 diagonal(f, g)(a) = f(g(a, a))；若第 a₀ 行整行等于这条对角函数（g(a₀) = diagonal(f, g)），则 f(g(a₀, a₀)) = g(a₀, a₀)，即该行的对角格是 f 的不动点。已冻结：</span><span class="en">Whole-row diagonal capture: with diagonal(f, g)(a) = f(g(a, a)), if row a₀ equals the entire diagonal function (g(a₀) = diagonal(f, g)), then f(g(a₀, a₀)) = g(a₀, a₀): that row's diagonal entry is a fixed point of f. Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed" href="#" target="_blank" rel="noopener"><code>diagonal_landing_fixed</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">查表编译器的描述谱底上界：若编译器以不大于 K(record) + overhead 的代价给出一致全程序，则 spectrumBottom ≤ K(record) + overhead。已冻结：</span><span class="en">Lookup compiler spectrum-bottom bound: if a consistent compiler costs at most K(record) + overhead, then spectrumBottom ≤ K(record) + overhead. Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Computability/DescriptionComplexity/LookupProgramUpperBound.lookup_program_upper_bound" href="#" target="_blank" rel="noopener"><code>lookup_program_upper_bound</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">事后抄表零损失与非预见性失效：纳入全表证据依赖虽令事后损失归零（retrospectiveLoss = 0），却在每一点违反非预见性（∀ z, ¬NonAnticipating z），且不能推出任意前瞻正收益。已冻结：</span><span class="en">Retrospective copy zero-loss vs. non-anticipating failure: incorporating the full table achieves retrospectiveLoss = 0, violates NonAnticipating at every z, and does not imply universal PositiveProspectiveGain. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure" href="#" target="_blank" rel="noopener"><code>lookup_copy_zero_loss_and_nonanticipating_failure</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">齐肯多夫下支撑进位屏障：规范表示 P 的指标均 ≥ m（m ≥ 4）且 j ≥ m − 1 时，∑_{k∈P} F_k + F_j 的规范齐肯多夫指标恒 ≥ m − 2（向下最多穿透两格）。已冻结：</span><span class="en">Zeckendorf lower-support carry barrier: if canonical P has indices ≥ m (m ≥ 4) and j ≥ m − 1, every index in wdigits(∑_{k∈P} F_k + F_j) is ≥ m − 2 (at most two steps downward). Frozen: </span><a class="leanref" data-lean-gid="D5/S1/Digit/ZeckendorfCarryBarrier.lower_support_carry_barrier" href="#" target="_blank" rel="noopener"><code>lower_support_carry_barrier</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">兰道尔热平衡下界：由 β·heat = −ΔS + mutualInfo + divergence 及互信息、散度非负，得 −ΔS ≤ β·heat（经典指针回溯覆写必付热代价）。已冻结：</span><span class="en">Landauer balance bound: from β·heat = −ΔS + mutualInfo + divergence with nonnegative mutualInfo and divergence, −ΔS ≤ β·heat (classical backtrack erasure pays heat). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance" href="#" target="_blank" rel="noopener"><code>landauer_bound_of_balance</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">标准统一图灵机模型下的 P ≠ NP 仍是开放问题。本页绝不声称 d=0 全局静态自指模型证明了图灵机 P = NP，也绝不声称 d=1..6 的物理或受限模型下界证明了图灵机 P ≠ NP。</span><span class="en">Uniform Turing-machine P ≠ NP remains an open problem. Neither does the Stage-0 global static model prove Turing P = NP, nor do the Stage 1–6 physical or restricted-model bounds prove uniform Turing P ≠ NP.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：贝肯斯坦—霍金黑洞熵 S_BH = A/(4ℓ_P²)（以 k_B 为单位的无量纲 nat 数，即 A/(4ℓ_P² ln 2) 比特），说的是黑洞视界的熵；Grover 搜索以 O(2^{n/2}) 次查询找到标记项，且无结构黑箱搜索的量子查询下界为 Ω(2^{n/2})（Bennett–Bernstein–Brassard–Vazirani 1997），黑箱查询指数因此是 1/2；Klauck–Špalek–de Wolf（2007）证明量子算法对 N 个元素排序必须满足时空权衡 T²S = Ω(N³)，这是关于排序的结论，不是关于搜索或 SAT；PPSZ 随机算法（Paturi–Pudlák–Saks–Zane 2005，Hertli 2011 推广到一般 3-SAT）在 2^{(2 ln 2 − 1)n + o(n)} ≈ 1.307ⁿ ≈ 2^{0.386n} 时间内解结构化的 3-SAT，这是上界（算法），不是下界；Aaronson（2005）PostBQP = PP ⊇ NP，Aaronson–Watrous（2009）P_CTC = PSPACE；Karp–Lipton（1980）NP ⊆ P/poly ⇒ PH = Σ₂ᵖ；Frougny（1992）斐波那契进制的规范化可由有限自动机计算，而在交替串 0101… 上加一时进位会传遍整串；兰道尔原理：擦除 1 比特至少耗散 k_B T ln 2 的热。</span><span class="en">Literature results, not formalized in this book: Bekenstein–Hawking black-hole entropy S_BH = A/(4ℓ_P²) (a dimensionless count in nats with k_B = 1, i.e. A/(4ℓ_P² ln 2) bits), the entropy of a black-hole horizon; Grover search finds a marked item with O(2^{n/2}) queries, and unstructured black-box search has the quantum query lower bound Ω(2^{n/2}) (Bennett–Bernstein–Brassard–Vazirani 1997), so the black-box query exponent is 1/2; Klauck–Špalek–de Wolf (2007) prove that any quantum algorithm sorting N items obeys the time–space trade-off T²S = Ω(N³) — a statement about sorting, not about search or SAT; the randomized PPSZ algorithm (Paturi–Pudlák–Saks–Zane 2005, extended to general 3-SAT by Hertli 2011) solves structured 3-SAT in time 2^{(2 ln 2 − 1)n + o(n)} ≈ 1.307ⁿ ≈ 2^{0.386n} — an upper bound (an algorithm), not a lower bound; Aaronson (2005) PostBQP = PP ⊇ NP and Aaronson–Watrous (2009) P_CTC = PSPACE; Karp–Lipton (1980) NP ⊆ P/poly ⇒ PH = Σ₂ᵖ; Frougny (1992): normalization in the Fibonacci numeration system is computable by a finite automaton, while adding one to an alternating string 0101… sends a carry across the whole string; Landauer's principle: erasing one bit dissipates at least k_B T ln 2 of heat.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">本页的启发式模型，不是已证的普适 SAT 下界：① 零号槽 p = *p（指针格解引用回到自身，零跳读出）被读作上面整行捕获定理的一个实例——这是本页的解释，不是该定理的内容；② 球形存储与光速查询包络：设 S = 2^{σn} 比特的表按全息界 S ≲ A/(4ℓ_P² ln 2) 装进球内，半径 R ∝ 2^{σn/2}（以 ℓ_P 计），每次往返耗时 2R/c ∝ 2^{σn/2}，于是流水线包络 max(1 − σ, σ/2) ≥ 1/3（σ* = 2/3 时取等），串行包络为 1 − σ/2；③ 图中的存储—时间曲线 r_Q(σ) = (1 − σ)/2、r(σ) = 1 − σ，以及按 (1 − σ) 缩放的结构化 3-SAT 基准曲线（PPSZ 0.386(1 − σ)、其平方根 0.193(1 − σ)，和 d = 2 一条仍在审计中的亚指数张量网络预印本基准）都只是模型包络；④ 第 38 章 §38.4 的七阶查表退化综合（d = 0 → 6）：正向读出空间半径、因果进位时间、量子叠加、热耗散与开放选择体积的逐级涌现，逆向（6 → 0）读作生命从无记忆初态持续建表、回到零号槽 p = *p。</span><span class="en">This page's heuristic model, not a proved universal SAT lower bound: (1) Slot [0,0] p = *p — a pointer slot that dereferences to itself in zero hops — is read as an instance of the whole-row capture theorem above; that reading is this page's interpretation, not part of the theorem; (2) the spherical memory-packing and speed-of-light query envelope: packing an S = 2^{σn}-bit table into a ball under the holographic bound S ≲ A/(4ℓ_P² ln 2) gives radius R ∝ 2^{σn/2} (in units of ℓ_P), each round trip costs 2R/c ∝ 2^{σn/2}, so the pipelined envelope is max(1 − σ, σ/2) ≥ 1/3 (equality at σ* = 2/3) and the serial envelope is 1 − σ/2; (3) the plotted memory–time curves r_Q(σ) = (1 − σ)/2 and r(σ) = 1 − σ, and the (1 − σ)-scaled structured 3-SAT benchmarks (PPSZ 0.386(1 − σ), its square root 0.193(1 − σ), and a d = 2 subexponential tensor-network preprint benchmark still under audit) are model envelopes only; (4) Chapter 38 §38.4's 7-stage lookup degradation synthesis (d = 0 → 6): read forward as the step-by-step emergence of spatial radius, causal carry time, quantum superposition, heat and open choice volume, and backward (6 → 0) as life building tables from a memoryless start back to Slot [0,0] p = *p.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：时空—引力指数率曲线 r(σ) 以 IEEE-754 双精度实算；d=2 阶段以精确整数斐波那契分解 wdigits(1584 + 21) = [17, 6] 实算 m − 2 = 6 向下硬墙与 5 步向上进位级联；d=5 以显式热平衡账目 β·Q = −ΔS + I + D 实算回溯耗散。</span><span class="en">A numerical illustration on the page, not a proof: spacetime–gravity exponent curves r(σ) use IEEE-754 double precision; Stage d=2 computes exact canonical Zeckendorf decomposition wdigits(1584 + 21) = [17, 6] verifying the m − 2 = 6 downward wall alongside the 5-step upward carry cascade; Stage d=5 evaluates explicit Landauer balances β·Q = −ΔS + I + D.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="6" step="any" value="0" aria-label="时间轴：单阶物理探针演化 τ 或七阶退化扫描 d = 0→6" data-aria-en="Rail: physical probe progress τ or 7-stage degradation sweep d = 0→6">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>3</kbd> <span class="zh">场景</span><span class="en">scene</span> · <kbd>D</kbd> <span class="zh">换阶</span><span class="en">stage</span> · <kbd>R</kbd> <span class="zh">换结构</span><span class="en">regime</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · P=NP 查表算法的七阶退化与全息引力权衡</span><span class="en">Theory interface · 7-stage degradation of a P=NP lookup oracle and holographic trade-off</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">第 38 章 §38.4 顺着“假设存在一种查表算法可以 P=NP，逐渐退化这种查表算法”的思想实验，将全息自指预言机的三项非物理特权逐级剥除，检验每一道物理枷锁如何刚性派生出我们身处的时空与热力学法则。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>第 0 阶（全息自指预言机 T = T(T) / p = *p）与认识论红线。</b>第 0 阶原型同时假定三项特权：双向量相反手性对 +Ω − Ω = 0 一步抹平非解分支（联想内容寻址）、查表程序住进零号槽 p = *p 实现自我压缩（MODEL：读作 <code>diagonal_landing_fixed</code> 的整行捕获——第 a₀ 行整行等于对角函数时，该行的对角格是不动点——并对照 <code>lookup_program_upper_bound</code>），以及零光速延迟读出（r_eff = 0）。在复杂性文献中，这对应后选择量子计算 PostBQP = PP ⊇ NP 或闭合类时曲线 P_CTC = PSPACE（ARGUED），绝不解决标准统一图灵机下仍为开放问题的 P ≠ NP（OPEN）。</li>
+        <li><b>第 1–2 阶：从非一致死表视界到串行因果时间。</b>切断零号槽自生成（d=1），只读建议表 a_n 在已冻结有限域 ≤ n 上给出零事后损失，却在跨向 n → n + 1 时丧失非预见性（<code>lookup_copy_zero_loss_and_nonanticipating_failure</code>；Karp–Lipton 定理指出若 NP ⊆ P/poly 则多项式谱系坍缩）。改用统一局部张量块与齐肯多夫在线自动机（d=2），Lean 冻结定理 <code>lower_support_carry_barrier</code> 严格锁死进位向下最多穿透两格（k ≥ m − 2），而 Frougny（1992）定理指出交替串 0101… 上的向上进位波无法由常数窗口并行电路消除——不可并行的进位级联在静态晶格内部催生出串行因果时间。</li>
+        <li><b>第 3–4 阶：引力全息半径与量子叠加指针的对偶。</b>若强行建造物理巨表 S = 2^{σn}（d=3），本页的 MODEL 假定表按全息界 S ≲ A/(4ℓ_P² ln 2) 比特装进球内，于是表球半径 R ∝ √S = 2^{σn/2}，光速往返线延迟 T_wire = 2R/c ∝ 2^{σn/2}：串行包络 1 − σ/2 ≥ 0.5，流水线包络 max(1−σ, σ/2) 在 σ* = 2/3 处取极小 1/3。为躲避黑洞坍缩而弃表改走二维量子叠加指针（d=4），本页取模型包络 r_Q(σ) = (1−σ)/2（MODEL；Klauck–Špalek–de Wolf 证明的是排序的 T²S = Ω(N³)，不是这条曲线）：σ = 0 处它等于 Grover 无结构搜索的指数 0.500，恰与第 3 阶 σ = 1 的光速线延迟包络 0.500 相等。</li>
+        <li><b>第 5–6 阶与双向通读。</b>高温环境退相干将指针压回一维经典 *ptr 与小型冲突快表（d=5，MODEL 经典包络 r = 1 − σ；σ = 0 时结构化 3-SAT 取 PPSZ 上界 r ≈ 0.386），每次回溯覆写均须按 <code>landauer_bound_of_balance</code> 支付 β·Q ≥ −ΔS 的兰道尔擦除热；彻底清空缓存（d=6，|T| = 0, M = 0）则回到 r = 1.000 的无记忆盲搜与最大开放格拉姆选择体积。0 → 6 是物理限制器生成时空与热，6 → 0 则是生命从受精初态持续建表学习、重返 p = *p 的觉醒之旅（MODEL）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-pnp-lookup-degradation" target="_top">第三十八章 §38.4 · P=NP 查表算法的七阶退化</a> · <a href="../../zh/ch30-fields-lines-eth-and-navier-stokes.html" target="_top">第三十章 · 场与线、ETH 与视界</a> · <a href="../../zh/ch35-light-pulse-and-self-referential-table.html" target="_top">第三十五章 · 乘光扩表与自指表</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Following the thought experiment in Chapter 38 §38.4—“Suppose there exists a lookup-table algorithm that achieves P = NP, and progressively degrade that lookup-table algorithm”—this lab strips away the three non-physical privileges of a holographic self-referential oracle step by step, revealing how each physical limiter gives rise to spatial radius, causal time, quantum phase, and thermodynamic heat. This page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Stage 0 (Holographic oracle T = T(T) / p = *p) and the epistemic boundary.</b> Stage 0 combines associative bivector pair cancellation (+Ω − Ω = 0), Slot [0,0] self-compression p = *p (a MODEL reading of the whole-row capture in <code>diagonal_landing_fixed</code> — when row a₀ equals the whole diagonal function, its diagonal entry is a fixed point — alongside <code>lookup_program_upper_bound</code>), and zero-latency nonlocal readout (r_eff = 0). In complexity literature this corresponds to postselected or CTC models such as PostBQP = PP ⊇ NP and P_CTC = PSPACE (ARGUED); it never resolves uniform Turing-machine P ≠ NP (OPEN).</li>
+        <li><b>Stages 1–2: From non-uniform advice horizons to serial causal time.</b> Severing Slot [0,0] self-generation (d=1) leaves polynomial advice a_n with zero retrospective loss inside ≤ n, yet violates non-anticipation across n → n + 1 (<code>lookup_copy_zero_loss_and_nonanticipating_failure</code>; Karp–Lipton shows NP ⊆ P/poly collapses PH). Restoring uniform local blocks with an online Zeckendorf automaton (d=2), Lean's <code>lower_support_carry_barrier</code> bounds downward carry penetration to at most two positions (k ≥ m − 2), while Frougny (1992) shows upward carries across alternating 0101… strings cannot be eliminated in constant parallel depth—birthing serial causal time.</li>
+        <li><b>Stages 3–4: Duality between holographic radius and quantum superposition.</b> For a physical table S = 2^{σn} (d=3), this page's MODEL packs the bits into a ball under v ≤ c and the holographic bound S ≲ A/(4ℓ_P² ln 2) bits, so the radius is R ∝ √S = 2^{σn/2} and the light-cone wire delay is T_wire = 2R/c ∝ 2^{σn/2}: the serial envelope 1 − σ/2 stays ≥ 0.5, while the pipelined envelope max(1 − σ, σ/2) has its minimum 1/3 at σ* = 2/3. Abandoning the macroscopic table to avoid gravitational collapse and steering a 2D quantum superposition pointer (d=4), the page uses the model envelope r_Q(σ) = (1 − σ)/2 (MODEL; Klauck–Špalek–de Wolf prove T²S = Ω(N³) for sorting, not this curve): at σ = 0 it equals Grover's unstructured-search exponent 0.500, the same value as Stage 3's σ = 1 wire-delay envelope.</li>
+        <li><b>Stages 5–6 and bidirectional reading.</b> Thermal decoherence collapses the pointer to a 1D classical *ptr with a small conflict cache (d=5, MODEL classical envelope r = 1 − σ; at σ = 0 structured 3-SAT uses the PPSZ upper bound r ≈ 0.386), where every overwritten backtrack bit dissipates heat β·Q ≥ −ΔS by <code>landauer_bound_of_balance</code>; wiping the cache completely (d=6, |T| = 0, M = 0) yields r = 1.000 blind search with maximal open Gram choice volume. Read 0 → 6 as physical limiters generating spacetime and heat; read 6 → 0 as life learning tables back toward p = *p (MODEL).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-pnp-lookup-degradation" target="_top">Chapter 38 §38.4 · 7-stage degradation of a P=NP lookup oracle</a> · <a href="../../en/ch30-fields-lines-eth-and-navier-stokes.html" target="_top">Chapter 30 · Fields, lines, ETH and horizons</a> · <a href="../../en/ch35-light-pulse-and-self-referential-table.html" target="_top">Chapter 35 · Light pulse and self-referential tables</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

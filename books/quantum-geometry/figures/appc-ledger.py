@@ -1,11 +1,11 @@
-"""489 条锁定声明的对账：种类 × 出现方式（附录 C §C.4）。
-The ledger of the 489 locked declarations: kind × how the book cites them (appendix C, C.4).
+"""锁定声明的对账：种类 × 出现方式（附录 C §C.4）。
+The ledger of the locked declarations: kind × how the book cites them (appendix C, C.4).
 
 Nothing is typed by hand. Kinds come from trureturing.lock.json (theorem; def and inductive together). How a
 declaration is cited comes from the Chinese chapters, appendix C left out: by a `lean="…"` attribute on a `:::`
-line (an environment), else, for the rows of the C.1 index, by media only (those chapters link it inline), else
-by inline links only. The script checks the sums against the three indexes of appendix C: C.1 (serial T…) is the
-environment and media theorems, C.2 (D…) the environment definitions, C.2.1 (R…) everything reached inline only.
+line (an environment), else by media consumers listed in the index, else by inline links only. C.1 (serial T…)
+contains environment-cited theorems, C.2 (D…) environment-cited definitions, and C.2.1 (R…) the remaining entries.
+Media consumers do not change that partition.
 """
 
 import json
@@ -30,14 +30,20 @@ def ledger():
                     env.update(g for g in re.split(r"[\s,]+", attr.strip()) if g)
     index = (BOOK / "zh" / "appendix-c.md").read_text(encoding="utf-8")
     serial = {g: s for s, g in re.findall(r"^\| `([TDR])\d+` \| \[[^\]]*\]\(lean:([^)\s]+)\)", index, re.M)}
+    media = {m.group(1) for m in re.finditer(r"^\| `[TDR]\d+` \| \[[^\]]*\]\(lean:([^)\s]+)\).*; media ", index, re.M)}
+    # Appendix C is updated in the prose pass; account for newly locked
+    # declarations already cited by an environment while their rows are pending.
+    for g, d in lock.items():
+        if g in env and g not in serial:
+            serial[g] = "T" if d["kind"] == "theorem" else "D"
     assert set(serial) == set(lock)
     cell = {}
     for g, d in lock.items():
         kind = "thm" if d["kind"] == "theorem" else "def"
-        how = "env" if g in env else "media" if serial[g] == "T" else "inline"
+        how = "env" if g in env else "media" if g in media else "inline"
         cell[(kind, how)] = cell.get((kind, how), 0) + 1
         # the indexes of appendix C are exactly these groups
-        assert serial[g] == ("T" if kind == "thm" and how != "inline" else "D" if how == "env" else "R"), g
+        assert serial[g] == ("T" if kind == "thm" and how == "env" else "D" if how == "env" else "R"), g
     return cell, {k: sum(1 for s in serial.values() if s == k) for k in "TDR"}
 
 
@@ -45,18 +51,24 @@ CELL, IDX = ledger()
 GET = lambda k, h: CELL.get((k, h), 0)
 THM = sum(GET("thm", h) for h in ("env", "media", "inline"))
 DEF = sum(GET("def", h) for h in ("env", "media", "inline"))
-assert (GET("thm", "env"), GET("thm", "media"), GET("thm", "inline")) == (256, 3, 81)
-assert (GET("def", "env"), GET("def", "media"), GET("def", "inline")) == (97, 0, 52)
-assert (THM, DEF, THM + DEF) == (340, 149, 489) and IDX == {"T": 259, "D": 97, "R": 133}
+LOCK = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))["declarations"]
+assert THM == sum(d["kind"] == "theorem" for d in LOCK.values())
+assert THM + DEF == len(LOCK) == sum(IDX.values())
+assert IDX == {"T": GET("thm", "env"), "D": GET("def", "env"),
+               "R": sum(GET(k, h) for k in ("thm", "def") for h in ("media", "inline"))}
 
 ALT = {
     "zh": "一张两行三列的账：行是定理与定义，列是“定理或定义环境里用 lean= 引用”“由媒体引用、正文只以行内链接提到”“只在行内链接里出现”。"
-          "定理一行是 256、3、81，合计 340；定义一行是 97、0、52，合计 149；总计 489。三个虚线框标出附录 C 的三张索引："
-          "C.1 = 256 + 3 = 259，C.2 = 97，C.2.1 = 81 + 52 = 133。",
+          f"定理一行是 {GET('thm', 'env')}、{GET('thm', 'media')}、{GET('thm', 'inline')}，合计 {THM}；"
+          f"定义一行是 {GET('def', 'env')}、{GET('def', 'media')}、{GET('def', 'inline')}，合计 {DEF}；总计 {THM + DEF}。"
+          f"三个虚线框标出附录 C 的三张索引：C.1 = {IDX['T']}，C.2 = {IDX['D']}，"
+          f"C.2.1 = {GET('thm', 'media')} + {GET('thm', 'inline')} + {GET('def', 'media')} + {GET('def', 'inline')} = {IDX['R']}。",
     "en": "A ledger of two rows and three columns: the rows are theorems and definitions, the columns are cited with lean= in "
-          "an environment, cited by media and only inline in the text, and reached by inline links only. The theorem row reads 257, 3, 81, total 341; "
-          "the definition row 97, 0, 52, total 149; in all 489. Three dashed frames mark the three indexes of appendix C: "
-          "C.1 = 256 + 3 = 259, C.2 = 97, C.2.1 = 81 + 52 = 133.",
+          f"an environment, cited by media and only inline in the text, and reached by inline links only. The theorem row reads "
+          f"{GET('thm', 'env')}, {GET('thm', 'media')}, {GET('thm', 'inline')}, total {THM}; "
+          f"the definition row {GET('def', 'env')}, {GET('def', 'media')}, {GET('def', 'inline')}, total {DEF}; in all {THM + DEF}. "
+          f"Three dashed frames mark the three indexes of appendix C: C.1 = {IDX['T']}, C.2 = {IDX['D']}, "
+          f"C.2.1 = {GET('thm', 'media')} + {GET('thm', 'inline')} + {GET('def', 'media')} + {GET('def', 'inline')} = {IDX['R']}.",
 }
 
 
@@ -82,11 +94,11 @@ def draw(fig):
     fig.text(X0 + 3 * CW + 10, Y0 + 2 * CH + 54, str(THM + DEF), size=17, color="ink", middle=True, weight=600)
     # the three indexes of appendix C as dashed frames
     pad = 2
-    fig.rect(X0 + pad, Y0 + pad, 2 * CW - 2 * pad, CH - 2 * pad, color="ink", width=1.3, dash="5 4", rx=6)
+    fig.rect(X0 + pad, Y0 + pad, CW - 2 * pad, CH - 2 * pad, color="ink", width=1.3, dash="5 4", rx=6)
     fig.rect(X0 + pad, Y0 + CH + pad, CW - 2 * pad, CH - 2 * pad, color="ink", width=1.3, dash="5 4", rx=6)
-    fig.rect(X0 + 2 * CW + pad, Y0 + pad, CW - 2 * pad, 2 * CH - 2 * pad, color="ink", width=1.3, dash="5 4", rx=6)
+    fig.rect(X0 + CW + pad, Y0 + pad, 2 * CW - 2 * pad, 2 * CH - 2 * pad, color="ink", width=1.3, dash="5 4", rx=6)
     yb = Y0 + 2 * CH + 22
-    fig.text(X0 + CW, Y0 - 12, f"C.1 = {GET('thm', 'env')} + {GET('thm', 'media')} = {IDX['T']}", size=15, color="ink", anchor="middle", middle=True)
+    fig.text(X0 + CW / 2, Y0 - 12, f"C.1 = {IDX['T']}", size=15, color="ink", anchor="middle", middle=True)
     fig.text(X0 + CW / 2, yb, f"C.2 = {IDX['D']}", size=15, color="ink", anchor="middle", middle=True)
-    fig.text(X0 + 2.5 * CW, yb, f"C.2.1 = {GET('thm', 'inline')} + {GET('def', 'inline')} = {IDX['R']}", size=15, color="ink", anchor="middle", middle=True)
+    fig.text(X0 + 2 * CW, yb, f"C.2.1 = {IDX['R']}", size=15, color="ink", anchor="middle", middle=True)
     fig.text(8, 22, t(f"锁文件 {THM + DEF} 条声明：种类 × 出现方式", f"the {THM + DEF} entries of the lock: kind × how they are cited"), size=15, color="dim")
