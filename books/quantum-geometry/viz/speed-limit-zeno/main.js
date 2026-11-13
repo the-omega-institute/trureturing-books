@@ -465,7 +465,7 @@
     clock.pause();
     moving = kit.tween(420, (e) => { S.alpha = Math.round(a0 + (a1 - a0) * e); S.delta = Math.round(d0 + (d1 - d0) * e); refresh(); paint(); }, land);
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、拖时间轴、改权重、频闪次数或步长。随时可以再选一张卡。', 'Free play: switch scenes, drag the rail, change the weights, the strobe or the step. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

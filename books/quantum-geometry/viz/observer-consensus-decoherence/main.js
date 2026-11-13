@@ -1076,7 +1076,7 @@
     if (c.scene === 'bubbles') { S.trace = 0; traceTween = kit.tween(1600, (e) => { S.trace = e; paint(); }, () => { traceTween = null; }); }
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: CARDS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景，换轴、信道与强度，拖琥珀色的起点，点记录把它擦掉，拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, change the axes, the channel and the strength, drag the amber start, tap records to erase them, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

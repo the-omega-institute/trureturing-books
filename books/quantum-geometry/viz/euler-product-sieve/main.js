@@ -267,11 +267,11 @@
 
   /* ---------- experiment cards ---------- */
   const CARDS = {
-    two: { K: 1, s: 2 },
-    near: { K: 11, s: 1.1 },
-    all: { K: 25, s: 1.2 },
-    five: { K: 3, s: 2, sweep: [4, 1.3] },
-    thirtyone: { K: 11, s: 2 }
+    two: { K: 1, s: 2, still: 1 },
+    near: { K: 11, s: 1.1, still: 11 },
+    all: { K: 25, s: 1.2, still: 25 },
+    five: { K: 3, s: 2, sweep: [4, 1.3], still: 3 },
+    thirtyone: { K: 11, s: 2, still: 11 }
   };
   const NOTES = {
     two: ['清单上只有 2。青色曲线是这一根轴上的等比级数 1 + 2⁻ˢ + 4⁻ˢ + … = (1 − 2⁻ˢ)⁻¹，在 s = 2 处是 4/3；下方只有 2 的幂 1、2、4、8、16、32、64 是青色，其余全是品红，第一个是 3。',
@@ -290,13 +290,13 @@
     const c = CARDS[id];
     stopAt = null; clock.pause();
     if (sTween) sTween.cancel();
-    if (TRV.still || (booting && !TRV.embed)) { setS(c.s, true); clock.set(c.K); return; }
+    if (TRV.still || (booting && !TRV.embed)) { setS(c.s, true); clock.set(c.still); return; }
     if (c.sweep && !booting) { clock.set(c.K, true); setS(c.sweep[0], true); tweenS(c.sweep[0], c.sweep[1], 2600); paint(); return; }
     if (booting) setS(c.s, true); else tweenS(S.s, c.s, 500);
     clock.set(0); stopAt = c.K;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: CARDS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖时间轴加减素数，拖琥珀色竖线改 s，点一个品红格把它的最大素因子放进清单。', 'Free play: scrub the rail to add or drop primes, drag the amber line to move s, click a magenta cell to put its largest prime factor on the list.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

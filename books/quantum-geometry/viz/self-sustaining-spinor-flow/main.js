@@ -422,7 +422,7 @@
     }
     paint();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: (id) => { S.ref = false; applyPreset(id); },
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: (id) => { S.ref = false; applyPreset(id); },
     idle: ['自由探索：拖动 J 的箭头尖换一个 ψ₀，改密度 ρ 或转动的平面，拖时间轴。随时可以再选一张卡。', 'Free play: drag the tip of J to choose another ψ₀, change the density ρ or the plane of the turn, scrub the rail. Pick a card again at any time.'] });
   // leaving a card clears the reference blades it showed
   const mark0 = cards.mark;

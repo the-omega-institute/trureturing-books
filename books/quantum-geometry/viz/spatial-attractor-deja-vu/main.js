@@ -377,9 +377,9 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    forget: { scene: 'rounds', rho: 28, seed: 3, at: TR, play: true }, return: { scene: 'rounds', rho: 28, seed: 0, at: 22 },
-    shrink: { scene: 'shrink', rho: 28, at: 1, play: true }, dimension: { scene: 'dimension', rho: 28, at: TD },
-    fixed: { scene: 'rounds', rho: 14, seed: 0, at: TR, play: true }, cycle: { scene: 'rounds', rho: 160, seed: 0, at: TR, play: true, settle: 30 }
+    forget: { scene: 'rounds', rho: 28, seed: 3, play: true, still: TR }, return: { scene: 'rounds', rho: 28, seed: 0, at: 22 },
+    shrink: { scene: 'shrink', rho: 28, play: true, still: 1 }, dimension: { scene: 'dimension', rho: 28, at: TD },
+    fixed: { scene: 'rounds', rho: 14, seed: 0, play: true, still: TR }, cycle: { scene: 'rounds', rho: 160, seed: 0, play: true, still: TR, settle: 30 }
   };
   const NOTES = {
     forget: ['换一对完全不同的起点：前面走过的路全忘了。参数没变，轨道还是落回同一对翅膀，照样一次次经过同一处。', 'Take two entirely different starts: everything walked before is forgotten. The parameters are the same, and the orbits fall back onto the same wings and pass the same place again and again.'],
@@ -394,11 +394,14 @@
     const p = PRESETS[id];
     S.card = id; S.rho = p.rho; rhoChips.set(String(p.rho), true); if (p.seed != null) S.seed = p.seed; S.settle = p.settle || 0;
     setScene(p.scene, p.at);
-    if (!p.play || TRV.still || (booting && !TRV.embed)) return;
+    // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
+    // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
+    if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still === 'end' ? clock.max : p.still); return; }
+    if (!p.play) return;
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换参数、换起点、换场景、拖时间轴，或拖动舞台转动吸引子。随时可以再选一张卡。', 'Free play: change the parameter, the starts or the scene, scrub the rail, or drag the stage to turn the attractor. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

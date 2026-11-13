@@ -6,12 +6,11 @@
 #kChips .chip, #pChips .chip { text-transform: none; letter-spacing: 0.04em; }
 .kchips { gap: 4px; }
 .kchips .chip { padding: 4px 7px; }
-.hud-tl { top: 48px; left: 14px; max-width: calc(100% - 28px); }
+.hud-tl { left: 14px; max-width: calc(100% - 28px); }
 .sub { display: flex; flex-direction: column; gap: 8px; }
 .field label small.c-cy, .field label small.c-mg, .field label small.c-vi { font-family: var(--font-data); font-size: 12px; }
-/* phones: the scene chips keep their short names on one row, and the stage title sits under them */
+/* phones: the scene chips keep their short names on one row (theme/viz/shell.js puts the stage title under them) */
 @media (max-width: 600px) {
   .hud-tr .lg { display: none; }
   .hud-tr { left: 12px; right: 12px; justify-content: flex-start; }
-  .hud-tl { top: 44px; left: 14px; max-width: calc(100% - 28px); }
 }

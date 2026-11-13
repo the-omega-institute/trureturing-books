@@ -431,8 +431,8 @@
     $('stage').classList.toggle('still', !!SC[sc].flat);
     if (!booting) stage.view(SC[sc].view); else { const v = { iso: [-0.62, 0.34], front: [0, 0.06] }[SC[sc].view]; stage.cam.yaw = v[0]; stage.cam.pitch = v[1]; }
   }
-  /** Start a card: play for the reader, or jump to the frame that a still should show. */
-  function run(play, still) { if (TRV.still || (booting && !TRV.embed)) clock.set(still == null ? clock.max : still); else if (play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); } }
+  /** Start a card that plays: play for the reader, or jump to the frame its still shows (its `still` in PRESETS). */
+  function run(id) { const still = PRESETS[id].still; if (TRV.still || (booting && !TRV.embed)) clock.set(still === 'end' ? clock.max : still); else if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
   const leave = () => cards.mark(null);
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); setScene(v); });
   const fTh1 = kit.field($('th1'), { fmt: (v) => `${v}°`, onInput: (v) => { S.th1 = v; S.wish = null; leave(); paint(); } });
@@ -455,6 +455,8 @@
   kit.keys({ 1: () => { leave(); setScene('window'); }, 2: () => { leave(); setScene('pages'); }, 3: () => { leave(); setScene('field'); }, 4: () => { leave(); setScene('line'); }, 5: () => { leave(); setScene('sos'); }, 6: () => { leave(); setScene('wild'); } });
 
   /* ---------- experiment cards ---------- */
+  // the cards that play, with the frame their still shows (kit.cards writes it onto the card as data-still)
+  const PRESETS = { window: { still: 70 }, right: { still: 120 }, crystal: { still: 3 }, field: { still: 1.6 }, thread: { still: 6 }, sos: { still: ORD.hi }, wilderness: { still: 6.4 } };
   const NOTES = {
     window: ['A 与 B 夹 60°，B 与 C 夹 45°。让 C 绕 B 转一圈：A·C 只在 cos 105° 与 cos 15° 之间来回，出不了这个窗口；贴上窗边时三根共面，体积为零。这三根是实向量，det G = 1 − c²_AB − c²_BC − c²_AC + 2c_AB c_BC c_AC 是实截面（Bargmann 相位 Φ 只取 0 或 π）；复态的末项要换成 2|c_AB||c_BC||c_AC| cos Φ。', 'A and B are 60° apart, B and C 45°. Let C go once around B: A·C only swings between cos 105° and cos 15° and cannot leave that window; at its edges the three are coplanar and the volume is zero. These are real vectors, and det G = 1 − c²_AB − c²_BC − c²_AC + 2c_AB c_BC c_AC is the real section (Bargmann phase Φ only 0 or π); for complex states the last term becomes 2|c_AB||c_BC||c_AC| cos Φ.'],
     impossible: ['A 与 B 只夹 30°，B 与 C 只夹 40°，却要求 A 与 C 接近反向（A·C = −0.5）。det G 变成负数：没有任何三根向量能做到。', 'A and B are only 30° apart and B and C only 40°, yet A and C are asked to be nearly opposite (A·C = −0.5). det G turns negative: no three vectors can do this.'],
@@ -468,17 +470,17 @@
   function applyPreset(id) {
     S.wish = null;
     const win = (a, b, phi) => { S.th1 = a; S.th2 = b; fTh1.set(a); fTh2.set(b); setScene('window', phi); };
-    if (id === 'window') { win(60, 45, 0); run(true, 70); }
+    if (id === 'window') { win(60, 45, 0); run(id); }
     else if (id === 'impossible') { win(30, 40, 180); ask(-0.5, TRV.still || booting); $('wish').value = '-0.5'; fWish.show(); }
-    else if (id === 'right') { win(90, 90, 0); run(true, 120); }
-    else if (id === 'crystal') { S.N = 12; S.tilt = 35; fN.set(12); fTilt.set(35); setScene('pages', 0); run(true, 3); }
-    else if (id === 'field') { S.alpha0 = 150; fA0.set(150); setScene('field', 0); run(true, 1.6); }
-    else if (id === 'thread') { S.n = 8; fQ.set(8); setScene('line', 0); run(true, 6); }
-    else if (id === 'sos') { S.M = 8; fOrd.set(8); setScene('sos', ORD.lo); run(true, ORD.hi); }
-    else if (id === 'wilderness') { S.eps = 0.15; S.user = null; fEps.set(0.15); setScene('wild', 0); run(true, 6.4); }
+    else if (id === 'right') { win(90, 90, 0); run(id); }
+    else if (id === 'crystal') { S.N = 12; S.tilt = 35; fN.set(12); fTilt.set(35); setScene('pages', 0); run(id); }
+    else if (id === 'field') { S.alpha0 = 150; fA0.set(150); setScene('field', 0); run(id); }
+    else if (id === 'thread') { S.n = 8; fQ.set(8); setScene('line', 0); run(id); }
+    else if (id === 'sos') { S.M = 8; fOrd.set(8); setScene('sos', ORD.lo); run(id); }
+    else if (id === 'wilderness') { S.eps = 0.15; S.user = null; fEps.set(0.15); setScene('wild', 0); run(id); }
     if (id !== 'impossible') fWish.show();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、拖滑块、在球上拖动 C、在荒野里点一下放一根探针。随时可以再选一张卡。', 'Free play: switch scenes, move the sliders, drag C on the sphere, click the wilderness to drop a probe. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

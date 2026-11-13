@@ -475,7 +475,7 @@
     if (c.at != null) { setScene(c.scene, c.at); return; }
     run(c.scene, c.to, c.still);
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: CARDS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换映射、拖起点、换镜头、拖时间轴。随时可以再选一张卡。', 'Free play: switch the map, drag the start, change the camera, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

@@ -306,12 +306,12 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    basis: { Q: 8, r: 8, x0: 5, k: 7, read: false, to: 5 },
-    cancel: { Q: 16, r: 4, x0: 0, k: 1, read: false, to: 15 },
-    four: { Q: 16, r: 4, x0: 0, k: 4, read: false, to: 15 },
-    dual: { Q: 32, r: 8, x0: 0, k: 4, read: false, to: 31 },
-    read: { Q: 16, r: 4, x0: 0, k: 8, read: true, to: 15 },
-    leak: { Q: 64, r: 6, x0: 0, k: 11, read: true, to: 63 }
+    basis: { Q: 8, r: 8, x0: 5, k: 7, read: false, to: 5, still: 5 },
+    cancel: { Q: 16, r: 4, x0: 0, k: 1, read: false, to: 15, still: 15 },
+    four: { Q: 16, r: 4, x0: 0, k: 4, read: false, to: 15, still: 15 },
+    dual: { Q: 32, r: 8, x0: 0, k: 4, read: false, to: 31, still: 31 },
+    read: { Q: 16, r: 4, x0: 0, k: 8, read: true, to: 15, still: 15 },
+    leak: { Q: 64, r: 6, x0: 0, k: 11, read: true, to: 63, still: 63 }
   };
   const NOTES = {
     basis: ['Q = 8，只有一格 x = 5。时间轴走到 5 时，三只紫色齿轮停在 π、π/2、5π/4（每格转 1/2、1/4、1/8 圈）；k = 7 用上全部三只，链上唯一一支青色箭头指向它们的和 3π/4。谱是平的：每根柱子都是 1/8。', 'Q = 8 with the single cell x = 5. When the rail reaches 5 the three violet gears rest at π, π/2 and 5π/4 (turning 1/2, 1/4 and 1/8 of a turn per cell); k = 7 uses all three, and the one cyan arrow of the chain points at their sum, 3π/4. The spectrum is flat: every bar is 1/8.'],
@@ -327,12 +327,12 @@
     clock.pause(); stopAt = null;
     Object.assign(S, { r: p.r, x0: p.x0, k: p.k, read: p.read });
     setQ(p.Q, true);
-    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.to); return; }
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still); return; }
     clock.set(0);
     stopAt = p.to < clock.max - 1e-9 ? p.to : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换 Q、周期 r 与起点，点谱上的柱子选频率 k，点寄存器的格挪动起点；打开“由峰读出阶”看连分数。随时可以再选一张卡。', 'Free play: change Q, the period r and the offset, click a bar to choose the frequency k or a cell to move the offset, and switch on “Read the order” for the continued fractions. Pick a card again at any time.'] });
   kit.keys({ k: () => { leave(); setK((S.k + 1) % S.Q); } });
 

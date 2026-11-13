@@ -530,8 +530,9 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    cut: { scene: 'cut', u: 0 }, phason: { scene: 'cut', u: 0.3, play: true }, empire: { scene: 'cut', u: 0.15, patch: true, at: 0.5, play: true },
-    cassini: { scene: 'cassini', at: 3, play: true }, returns: { scene: 'returns', wc: 0.5, ww: 0.6, at: 88, play: true }, narrow: { scene: 'returns', wc: 0.5, ww: 0.1, at: NMAX - 1, play: true },
+    cut: { scene: 'cut', u: 0 }, phason: { scene: 'cut', u: 0.3, play: true, still: 0.8 }, empire: { scene: 'cut', u: 0.15, patch: true, at: 0.5, play: true, still: 0.5 },
+    cassini: { scene: 'cassini', at: 3, play: true, still: 3 }, returns: { scene: 'returns', wc: 0.5, ww: 0.6, at: 88, play: true, still: 88 },
+    narrow: { scene: 'returns', wc: 0.5, ww: 0.1, at: NMAX - 1, play: true, still: NMAX - 1 },
     window: { scene: 'window3', at: 0.15 },
     gaps: { scene: 'gaps', rot: 'golden', at: 13 - GMIN }, pi: { scene: 'gaps', rot: 'pi', at: 114 - GMIN }
   };
@@ -555,11 +556,13 @@
     if (p.scene === 'window3') Object.assign(st.cam, WIN_CAM);      // the card looks in through the cut
     setScene(p.scene, p.scene === 'cut' ? p.u + 0.5 : p.at);
     if (p.patch) { setPatch(true, p.u); clock.set(p.at); }
-    if (!p.play || TRV.still || (booting && !TRV.embed)) return;
+    // a still (cover, cited figure shot) and the opening view of the full page show the card's declared frame
+    if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still); return; }
+    if (!p.play) return;
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：上下拖动窗口，拖时间轴，换场景，固定一小片，或改观测窗。随时可以再选一张卡。', 'Free play: drag the window up and down, scrub the rail, change the scene, fix a patch or change the observation window. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

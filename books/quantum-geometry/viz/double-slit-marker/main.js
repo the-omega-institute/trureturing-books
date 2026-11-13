@@ -277,12 +277,12 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    wave: { alpha: 0, lambda: 1, reader: 'none' },
-    partial: { alpha: 60, lambda: 1, reader: 'none' },
-    which: { alpha: 90, lambda: 1, reader: 'none' },
-    delayed: { alpha: 90, lambda: 1, reader: 'path', late: true },
-    erase: { alpha: 90, lambda: 1, reader: 'path', late: true, then: 'erase' },
-    mixed: { alpha: 60, lambda: 0.5, reader: 'none' }
+    wave: { alpha: 0, lambda: 1, reader: 'none', still: 'end' },
+    partial: { alpha: 60, lambda: 1, reader: 'none', still: 'end' },
+    which: { alpha: 90, lambda: 1, reader: 'none', still: 'end' },
+    delayed: { alpha: 90, lambda: 1, reader: 'path', late: true, still: 'end' },
+    erase: { alpha: 90, lambda: 1, reader: 'path', late: true, then: 'erase', still: 'end' },
+    mixed: { alpha: 60, lambda: 0.5, reader: 'none', still: 'end' }
   };
   const NOTES = {
     wave: ['α = 0°：两支箭头重合，影子是整条半径，高为零。落点一个个堆出满对比度的条纹：暗纹处几乎没有落点。', 'α = 0°: the two arrows coincide, the shadow is the whole radius and the height is zero. The hits pile up into fringes of full contrast: almost none land in the dark fringes.'],
@@ -301,15 +301,16 @@
     angTween = kit.tween(TRV.still || booting ? 0 : 650, (e) => { S.alpha = a0 + (p.alpha - a0) * e; S.lambda = l0 + (p.lambda - l0) * e; fA.set(Math.round(S.alpha)); fL.set(+S.lambda.toFixed(2)); paint(); }, () => { angTween = null; });
     const settled = TRV.still || (booting && !TRV.embed);
     if (settled) {
-      // a still and the opening view of the full page show the telling frame: every hit in, the marker already read
-      stopSequence(); setReader(p.then || p.reader, false); if (splitTween) splitTween.cancel(); S.split = p.reader === 'none' ? 0 : 1; clock.set(NMAX);
+      // a still and the opening view of the full page show the declared frame: every hit in (the end of the rail), the
+      // marker already read
+      stopSequence(); setReader(p.then || p.reader, false); if (splitTween) splitTween.cancel(); S.split = p.reader === 'none' ? 0 : 1; clock.set(p.still === 'end' ? clock.max : p.still);
       return;
     }
     stopSequence(); setReader(p.reader, p.late); S.then = p.then || null;
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：在圆上拖琥珀色的箭头，调标记的纯态权重 λ，换一种读法，或拖动时间轴。随时可以再选一张卡。', 'Free play: drag the amber arrow on the circle, change the marker\'s pure-state weight λ, read it another way, or scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

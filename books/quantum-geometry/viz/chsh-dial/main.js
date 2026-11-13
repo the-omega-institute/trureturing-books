@@ -346,13 +346,16 @@
     const im = Math.sin(a0 * DEG) + Math.sin((a0 + b) * DEG) + Math.sin(a1 * DEG) - Math.sin((a1 + b) * DEG);
     return Math.atan2(im, re) / DEG;
   }
+  // from, to: the φ a card plays from and to; still: the rail value (φ + 180°) its still shows, and where a card that
+  // does not play stands
+  const railOf = (phi) => phi + 180;
   const PRESETS = {
-    collinear: { scene: 'dial', a0: 0, a1: 0, beta: 60, from: -90, to: 90, still: -40 },
-    sixty: { scene: 'dial', a0: 0, a1: 60, beta: 60, from: 0, to: bestPhi(0, 60, 60), still: 0 },
-    sweep: { scene: 'dial', a0: 0, a1: 90, beta: 90, from: 0, to: 90, still: 20 },
-    tsirelson: { scene: 'dial', a0: 0, a1: 90, beta: 90, still: 45 },
-    hidden: { scene: 'hidden', a0: 0, a1: 90, beta: 90, from: 0, to: 180, still: 120 },
-    arc: { scene: 'arc', a0: 0, a1: 90, beta: 90, still: 45 }
+    collinear: { scene: 'dial', a0: 0, a1: 0, beta: 60, from: -90, to: 90, still: railOf(-40) },
+    sixty: { scene: 'dial', a0: 0, a1: 60, beta: 60, from: 0, to: bestPhi(0, 60, 60), still: railOf(0) },
+    sweep: { scene: 'dial', a0: 0, a1: 90, beta: 90, from: 0, to: 90, still: railOf(20) },
+    tsirelson: { scene: 'dial', a0: 0, a1: 90, beta: 90, still: railOf(45) },
+    hidden: { scene: 'hidden', a0: 0, a1: 90, beta: 90, from: 0, to: 180, still: railOf(120) },
+    arc: { scene: 'arc', a0: 0, a1: 90, beta: 90, still: railOf(45) }
   };
   const NOTES = {
     collinear: ['Alice 的两支实线箭头重合在 Z 上，她那块品红面积缩成一条线，量尺上品红的刻度落到 2，和经典上界的虚线重合。时间轴转动 Bob 的一对虚线箭头：琥珀色的横线按 2 cos φ 起落，在 φ = 0° 碰到 2，从不越过；停在 φ = −40° 时它是 1.532，在品红的刻度之下。', 'Alice\'s two solid arrows coincide on Z; her magenta area shrinks to a line, and the magenta mark on the gauge drops to 2, onto the dashed classical bound. The rail turns Bob\'s dashed pair: the amber bar rises and falls as 2 cos φ, touches 2 at φ = 0° and never goes past; stopped at φ = −40° it reads 1.532, below the magenta mark.'],
@@ -368,7 +371,7 @@
     if (tw) { tw.cancel(); tw = null; }
     clock.pause(); stopAt = null;
     setScene(p.scene);
-    const startPhi = (TRV.still || (booting && !TRV.embed) || p.from == null) ? p.still : p.from;
+    const startPhi = (TRV.still || (booting && !TRV.embed) || p.from == null) ? p.still - 180 : p.from;
     const go = () => {
       syncFields();
       // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
@@ -377,7 +380,7 @@
       stopAt = p.to + 180;
       if (booting) kit.autoplay(clock, $('stage')); else clock.play();
     };
-    if (booting || TRV.still) { S.a0 = p.a0; S.a1 = p.a1; S.beta = p.beta; clock.set(startPhi + 180); go(); return; }
+    if (booting || TRV.still) { S.a0 = p.a0; S.a1 = p.a1; S.beta = p.beta; clock.set(TRV.still ? p.still : startPhi + 180); go(); return; }
     // a click: the arrows swing to the card's directions, then the card plays
     const s0 = { a0: S.a0, a1: S.a1, beta: S.beta, phi: S.phi }, s1 = { a0: p.a0, a1: p.a1, beta: p.beta, phi: startPhi };
     const shortest = (u, v) => u + wrap(v - u);
@@ -387,7 +390,7 @@
       clock.set(wrap(s0.phi + (t1.phi - s0.phi) * e) + 180);
     }, () => { tw = null; S.a0 = p.a0; S.a1 = p.a1; S.beta = p.beta; clock.set(startPhi + 180); go(); });
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动盘上的任何一支箭头，改两侧的张角，或用时间轴转动 Bob 的一对方向。随时可以再选一张卡。', 'Free play: drag any arrow on the dial, change the two openings, or turn Bob\'s pair with the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

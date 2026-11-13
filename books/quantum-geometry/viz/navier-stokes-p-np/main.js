@@ -315,11 +315,12 @@
   kit.keys({ 1: () => { leave(); setScene('lamb'); }, 2: () => { leave(); setScene('tube'); }, 3: () => { leave(); setScene('closure'); } });
 
   /* ---------- experiment cards ---------- */
+  // still: the rail value a card's still (and the opening of the full page) shows; a click plays the rail from 0
   const PRESETS = {
-    vortex: { scene: 'lamb', at: 0.8, play: true },
-    flat: { scene: 'tube', mode: 'flat', nu: 0.02, at: 4, play: true }, strain: { scene: 'tube', mode: 'strain', nu: 0, at: 1.8, play: true },
-    burgers: { scene: 'tube', mode: 'strain', nu: 0.02, at: 5.5, play: true }, runaway: { scene: 'tube', mode: 'self', nu: 0.012, at: 2.4, play: true },
-    mixed: { scene: 'closure', leaks: [0, 0, 1], at: 1.7, play: true }
+    vortex: { scene: 'lamb', still: 0.8, play: true },
+    flat: { scene: 'tube', mode: 'flat', nu: 0.02, still: 4, play: true }, strain: { scene: 'tube', mode: 'strain', nu: 0, still: 1.8, play: true },
+    burgers: { scene: 'tube', mode: 'strain', nu: 0.02, still: 5.5, play: true }, runaway: { scene: 'tube', mode: 'self', nu: 0.012, still: 2.4, play: true },
+    mixed: { scene: 'closure', leaks: [0, 0, 1], still: 1.7, play: true }
   };
   const NOTES = {
     vortex: ['让 s 从 0 走到 1：涡度 ω = 2s 出现，对流项多出一支品红箭头 ω × u，白 = 青 + 品红。s 过了 ½，流线从双曲线合拢成椭圆。', 'Let s go from 0 to 1: the vorticity ω = 2s appears and the advection term gains a magenta arrow ω × u, white = cyan + magenta. Past s = ½ the streamlines close from hyperbolas into ellipses.'],
@@ -335,12 +336,12 @@
     if (p.mode) { S.mode = p.mode; modeChips.set(p.mode, true); S.nu = p.nu; fNu.set(p.nu); }
     if (p.leaks) { [S.lin, S.self, S.mix] = p.leaks; fLin.set(S.lin); fSelf.set(S.self); fMix.set(S.mix); }
     if (p.scene === 'tube') Object.assign(st.cam, TUBE_CAM);
-    setScene(p.scene, Math.min(p.at, SC[p.scene].max()));
+    setScene(p.scene, Math.min(p.still, SC[p.scene].max()));
     if (!p.play || TRV.still || (booting && !TRV.embed)) return;
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、拖探针、调粘性与泄漏、拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, drag the probe, change the viscosity and the leaks, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

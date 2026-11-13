@@ -339,22 +339,24 @@
     flat: ['把同一段历史压回三维（只留 E∥）：时间轴从记两步走到记五步。四根以上的向量撑不出体积，记到第三层，品红的泡泡只剩虚线的边界，琥珀色的 Q 被钉在窗口边上；记到第四、五层，能实现的只剩孤立的点，z 的窗口缩成一个值，Q 就钉在那里，det G = 0。', 'The same history squeezed back into three dimensions (only E∥): the rail goes from two steps remembered to five. Four or more vectors span no volume: at the third depth the magenta bubble keeps only its dashed edge and the amber Q is pinned to the edge of the window; at the fourth and fifth only isolated points can be realized, the window for z shrinks to one value with Q pinned there, and det G = 0.'],
     violate: ['记住五步，却把 z 填在第三圈之内、第四圈之外：琥珀色的 Q 成了空心圈，仍躺在紫色体的切面上。阶梯上 D₁ 到 D₄ 都还非负，D₅ 先变负，正是加粗的第四圈（记到 P₋₃ 时）拒绝了它；这张表装不进任何内积空间。', 'Five steps remembered, but z filled in inside the third ring and outside the fourth: the amber Q becomes a hollow ring, still lying on the violet cut face. On the ladder D₁ to D₄ are still nonnegative and D₅ turns negative first: the thickened fourth ring (memory reaching P₋₃) is the one that refuses it. This table fits in no inner-product space.']
   };
+  // the cards that play by themselves, and the frame their still shows (rail value: depth of memory − 1)
+  const PRESETS = { narrow: { play: true, still: MMAX - 1 }, flat: { play: true, still: MMAX - 1 } };
   let booting = true;
-  function run(play, still) { if (TRV.still || (booting && !TRV.embed)) clock.set(still); else if (play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); } }
+  function run(p) { if (TRV.still || (booting && !TRV.embed)) clock.set(p.still); else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); } }
   function applyPreset(id) {
     clock.pause();
     if (S.space !== 'r6') setSpace('r6');
     const ms = TRV.still || booting ? 0 : 500, s = HOME;
     if (id === 'elliptope') { setQ(s.y, s.z, ms); clock.set(1); }
-    else if (id === 'narrow') { setQ(s.y, s.z, ms); clock.set(0); run(true, MMAX - 1); }
-    else if (id === 'flat') { setSpace('r3'); clock.set(1); run(true, MMAX - 1); }
+    else if (id === 'narrow') { setQ(s.y, s.z, ms); clock.set(0); run(PRESETS.narrow); }
+    else if (id === 'flat') { setSpace('r3'); clock.set(1); run(PRESETS.flat); }
     else if (id === 'violate') {
       setQ(s.y, zViolate(), ms); clock.set(MMAX - 1);
       if (!TRV.still && !booting) TRV.toast($('toast'), L('D₅ < 0：第四层记忆拒绝了这个候选', 'D₅ < 0: the fourth depth of memory refuses this candidate'));
     }
     if (!TRV.still && !booting) stage.view(VIEW);
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：在截面里拖动琥珀色的 Q，或拖滑块、换记忆深度、换空间。拖动空白处旋转舞台。随时可以再选一张卡。', 'Free play: drag the amber Q in the slice, or move the sliders, change the depth of memory or the space. Drag empty space to rotate the stage. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
