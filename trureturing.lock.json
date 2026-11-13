@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "bb452a18f3e77a2c4e50864d2d7bce34fb73a040",
-  "pinned_at": "2026-11-13T09:02:25Z",
+  "commit": "772250d546bdc282efc9f03367e63ee784c04ddb",
+  "pinned_at": "2026-11-13T10:46:28Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1473,7 +1473,7 @@
       "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
       "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_phase_unitary_completion",
       "kind": "theorem",
-      "statement_id": "sha256:3d5c36d02ba847fd3cb583bb5a14c5d8c8838cdcc3689ceabcf9697df8805f81",
+      "statement_id": "sha256:18f8185ca10253a41a37d89014cec95bd0a3612bd4086744ca09836a0bb91913",
       "line": 912,
       "signature": "theorem exists_phase_unitary_completion (k : ℕ) (p : ℝ[X]) (hp : p.natDegree ≤ k) (hpar : HasParity (p.map (algebraMap ℝ ℂ)) k) (hbound : ∀ x ∈ Set.Icc (-1 : ℝ) 1, p.eval x ^ 2 ≤ 1) : ∃ (B C : ℝ[X]) (U : CyclicObservable 2), 1 - p ^ 2 = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1) ∧ U = phaseCompletion p B C ∧ star U * U = 1 ∧ U * star U = 1 ∧ (∀ t, (U t).det = 1) ∧ (∀ t, (U t 0 0).re = p.eval (windingPhase t).re)"
     },
@@ -1481,9 +1481,65 @@
       "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
       "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_sumsq_decomposition",
       "kind": "theorem",
-      "statement_id": "sha256:3d5c36d02ba847fd3cb583bb5a14c5d8c8838cdcc3689ceabcf9697df8805f81",
+      "statement_id": "sha256:18f8185ca10253a41a37d89014cec95bd0a3612bd4086744ca09836a0bb91913",
       "line": 845,
       "signature": "theorem exists_sumsq_decomposition (k : ℕ) (A : ℝ[X]) (hAe : IsEven (A.map (algebraMap ℝ ℂ))) (hAd : A.natDegree ≤ 2 * k) (hA : ∀ x ∈ Set.Icc (-1 : ℝ) 1, 0 ≤ A.eval x) : ∃ B C : ℝ[X], A = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1)"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.exists_phase_factorization": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.exists_phase_factorization",
+      "kind": "theorem",
+      "statement_id": "sha256:1fb93959a30ac72821b085428ebb1f4049059b20fe17f58ee6ab2348d845752a",
+      "line": 395,
+      "signature": "theorem exists_phase_factorization (k : ℕ) (p : ℝ[X]) (hp : p.natDegree ≤ k) (hpar : HasParity (p.map (algebraMap ℝ ℂ)) k) (hbound : ∀ x ∈ Set.Icc (-1 : ℝ) 1, p.eval x ^ 2 ≤ 1) : ∃ (B C : ℝ[X]) (U : CyclicObservable 2) (φ₀ : ℝ) (Φ : List ℝ), 1 - p ^ 2 = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1) ∧ U = phaseCompletion p B C ∧ star U * U = 1 ∧ U * star U = 1 ∧ (∀ t, (U t).det = 1) ∧ (∀ t, (U t 0 0).re = p.eval (windingPhase t).re) ∧ Φ.length = k ∧ qspPolyW φ₀ Φ = (p.map "
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.exists_phases": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.exists_phases",
+      "kind": "theorem",
+      "statement_id": "sha256:1fb93959a30ac72821b085428ebb1f4049059b20fe17f58ee6ab2348d845752a",
+      "line": 247,
+      "signature": "theorem exists_phases (k : ℕ) (P Q : ℂ[X]) (hP : P.natDegree ≤ k) (hQ : Q.natDegree ≤ k - 1) (hQ0 : k = 0 → Q = 0) (hPpar : HasParity P k) (hQpar : HasParity Q (k - 1)) (hunit : P * conjP P + (1 - X ^ 2) * Q * conjP Q = 1) : ∃ φ₀ : ℝ, ∃ Φ : List ℝ, Φ.length = k ∧ qspPolyW φ₀ Φ = (P, Q)"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.phaseDiagonal": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.phaseDiagonal",
+      "kind": "def",
+      "statement_id": "sha256:1fb93959a30ac72821b085428ebb1f4049059b20fe17f58ee6ab2348d845752a",
+      "line": 313,
+      "signature": "noncomputable def phaseDiagonal (φ : ℝ) : CyclicObservable 2"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.phaseProduct": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.phaseProduct",
+      "kind": "def",
+      "statement_id": "sha256:1fb93959a30ac72821b085428ebb1f4049059b20fe17f58ee6ab2348d845752a",
+      "line": 317,
+      "signature": "noncomputable def phaseProduct (φ₀ : ℝ) (Φ : List ℝ) : CyclicObservable 2"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.qspPolyW": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.qspPolyW",
+      "kind": "def",
+      "statement_id": "sha256:1fb93959a30ac72821b085428ebb1f4049059b20fe17f58ee6ab2348d845752a",
+      "line": 97,
+      "signature": "noncomputable def qspPolyW (φ₀ : ℝ) (Φ : List ℝ) : ℂ[X] × ℂ[X]"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.stepW": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.stepW",
+      "kind": "def",
+      "statement_id": "sha256:1fb93959a30ac72821b085428ebb1f4049059b20fe17f58ee6ab2348d845752a",
+      "line": 93,
+      "signature": "noncomputable def stepW (φ : ℝ) (PQ : ℂ[X] × ℂ[X]) : ℂ[X] × ℂ[X]"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.unstepW": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.unstepW",
+      "kind": "def",
+      "statement_id": "sha256:1fb93959a30ac72821b085428ebb1f4049059b20fe17f58ee6ab2348d845752a",
+      "line": 106,
+      "signature": "noncomputable def unstepW (φ : ℝ) (PQ : ℂ[X] × ℂ[X]) : ℂ[X] × ℂ[X]"
     },
     "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance": {
       "module": "D5/S3/DivergenceSupport/LandauerBound",
