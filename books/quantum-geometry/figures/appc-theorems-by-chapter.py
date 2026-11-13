@@ -18,6 +18,8 @@ import re
 from collections import Counter
 from pathlib import Path
 
+from tbook.summary import parse_summary
+
 ROOT = Path(__file__).resolve().parents[3]
 BOOK = ROOT / "books" / "quantum-geometry"
 
@@ -25,14 +27,15 @@ SIZE = (500, 300)    # labels of 14 at most 500 wide: 10 px or more in a phone c
 
 
 def reading_order():
-    """[(file, part index)] for the numbered chapters and the coda, from zh/SUMMARY.md."""
-    out, part = [], 0
-    for line in (BOOK / "zh" / "SUMMARY.md").read_text(encoding="utf-8").splitlines():
-        if line.startswith("# ") and line != "# Summary":
-            part += 1
-        m = re.search(r"\]\(((ch\d\d)-[^)]*|coda)\.md\)", line)
-        if m:
-            out.append((m.group(1) + ".md", part))
+    """[(file, part index, main chapter)] including every descendant in reading order."""
+    summary = parse_summary(BOOK / "zh" / "SUMMARY.md")
+    roots = summary.top_level()
+    parts = list(dict.fromkeys(ch.part for ch in summary.chapters if ch.part))
+    out = []
+    for ch in summary.chapters:
+        root = roots[ch.top]
+        if ch.path and root.path and (re.match(r"ch\d+-", root.path) or root.path == "coda.md"):
+            out.append((ch.path, parts.index(ch.part) + 1, root.path))
     return out
 
 
@@ -47,7 +50,8 @@ def env_gids(text):
 
 def first_units(lock):
     """GID -> the index, in the reading order of zh/SUMMARY.md, of the first unit citing it (appendix C left out)."""
-    units = [m.group(1) for m in re.finditer(r"\]\(([^)]+\.md)\)", (BOOK / "zh" / "SUMMARY.md").read_text(encoding="utf-8"))]
+    units = parse_summary(BOOK / "zh" / "SUMMARY.md").files()
+    owners = {file: root for file, _, root in reading_order()}
     first = {}
     for ui, file in enumerate(units):
         if file == "appendix-c.md":
@@ -56,16 +60,25 @@ def first_units(lock):
         inline = {m.group(1) or m.group(2) for m in re.finditer(r"\(lean:([^)\s]+)\)|<lean:([^>\s]+)>", text)}
         for g in env_gids(text) | inline:
             if g in lock and g not in first:
-                first[g] = file
+                first[g] = owners.get(file, file)
     return first
+
+
+def chapter_citations():
+    grouped = {}
+    for file, part, root in reading_order():
+        if root not in grouped:
+            grouped[root] = (part, set())
+        grouped[root][1].update(env_gids((BOOK / "zh" / file).read_text(encoding="utf-8")))
+    return grouped
 
 
 def counts():
     lock = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))["declarations"]
     first = first_units(lock)
     rows = []
-    for file, part in reading_order():
-        cited = {g for g in env_gids((BOOK / "zh" / file).read_text(encoding="utf-8")) if lock[g]["kind"] == "theorem"}
+    for file, (part, gids) in chapter_citations().items():
+        cited = {g for g in gids if lock[g]["kind"] == "theorem"}
         new = sum(1 for g in cited if first[g] == file)
         label = "coda" if file == "coda.md" else str(int(file[2:4]))
         rows.append((label, part, len(cited), new))
@@ -75,6 +88,7 @@ def counts():
 def index_counts():
     """Anchors per chapter in the last column of the C.1 table of appendix C."""
     text = (BOOK / "zh" / "appendix-c.md").read_text(encoding="utf-8")
+    citations = chapter_citations()
     table = re.findall(r"^\| `T\d+` \|.*\| ([^|]*) \|$", text, re.M)
     cnt = Counter()
     for col in table:
@@ -86,13 +100,13 @@ def index_counts():
     for gid, decl in lock.items():
         if decl["kind"] != "theorem" or gid in listed:
             continue
-        for file, _ in reading_order():
-            if gid not in env_gids((BOOK / "zh" / file).read_text(encoding="utf-8")):
+        for file, (_, gids) in citations.items():
+            if gid not in gids:
                 continue
             key = "coda" if file == "coda.md" else str(int(file[2:4]))
             cnt[key] += 1
     return len(table) + sum(1 for gid, decl in lock.items() if decl["kind"] == "theorem" and gid not in listed and any(
-        gid in env_gids((BOOK / "zh" / file).read_text(encoding="utf-8")) for file, _ in reading_order()
+        gid in gids for _, gids in citations.values()
     )), cnt
 
 
@@ -101,7 +115,7 @@ TOTAL = sum(n for _, _, n, _ in ROWS)
 NEW = sum(a for _, _, _, a in ROWS)
 assert 0 <= NEW <= TOTAL
 N_INDEX, INDEX = index_counts()
-assert len(ROWS) == len(reading_order())
+assert len(ROWS) == len(chapter_citations())
 assert {k: n for k, _, n, _ in ROWS} == dict(INDEX), (ROWS, INDEX)
 assert TOTAL == sum(INDEX.values())
 BY = sorted(ROWS, key=lambda r: -r[2])

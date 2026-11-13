@@ -1,8 +1,9 @@
 """``./tbook check``: structure, bilingual parity and the Lean verification rule.
 
 The rule this enforces: every theorem / lemma / proposition / corollary cites at least
-one Lean declaration (``lean="<GID>"``) that is recorded in ``trureturing.lock.json`` and
-that, at the pinned commit, is listed in trureturing's ``Golden/Frozen/state`` with kind
+one Lean declaration (``lean="<GID>"``), unless explicitly marked status="written-proof"
+with a proof block in every edition and no lean attribute. A Lean citation must be recorded
+in ``trureturing.lock.json`` and, at the pinned commit, listed in trureturing's ``Golden/Frozen/state`` with kind
 ``theorem`` — i.e. kernel-verified and frozen. The pinned commit must be on the site.toml
 branch, where trureturing's CI enforces the freeze rule. Conjectures and open problems must
 not cite Lean. Editions of a book (zh, en, …) must agree item by item, and their SUMMARY.md
@@ -16,8 +17,8 @@ import re
 import subprocess
 from pathlib import Path
 
-from . import config, lean, mdscan, paths, render
-from .model import (DEFINITION, FORMAL, MEDIA, NUMBERED, OPEN, PROOF, EditionModel, Issue, load_book_models, kind_of,
+from . import config, evidence, lean, mdscan, paths, render, viz
+from .model import (DEFINITION, FORMAL, MEDIA, NUMBERED, OPEN, PROOF, WRITTEN_PROOF, EditionModel, Issue, load_book_models, kind_of,
                     media_cited_gids)
 from .summary import Chapter, Summary, chapter_prefix
 
@@ -48,10 +49,40 @@ def check_env_policy(model: EditionModel, issues: list[Issue]) -> None:
                 _err(issues, *where, f"#{env.id}: ids use letters, digits, '-', '_' or ':' and start with a letter")
             if env.kind in FORMAL + DEFINITION + OPEN and not env.id:
                 _err(issues, *where, f"{env.kind} needs an id, e.g. {{.{env.kind} #{env.kind[:3]}-name}}")
-            if env.kind in FORMAL and not env.lean:
+            status = env.attrs.get("status")
+            if "status" in env.attrs.kv and status != WRITTEN_PROOF:
+                _err(issues, *where, f'unknown result status {status!r}; use status="written-proof" or omit status')
+            if status == WRITTEN_PROOF:
+                doi = env.attrs.get("doi")
+                repository = env.attrs.get("repository")
+                if "doi" in env.attrs.kv and not doi:
+                    _err(issues, *where, 'omit doi="" when the source has no DOI; use repository="https://…"')
+                if doi and not evidence.doi_url(doi):
+                    _err(issues, *where, 'doi="…" must be one bare DOI (10.<registrant>/<suffix>), not a URL or malformed identifier')
+                if not evidence.doi_url(doi) and not evidence.repository_url(repository):
+                    _err(issues, *where, 'a written-proof result requires either doi="10.<registrant>/<suffix>" or repository="https://…" for a source with no DOI')
+                if repository and not evidence.repository_url(repository):
+                    _err(issues, *where, 'repository="…" must be an absolute HTTPS source repository URL')
+                if not evidence.source_location(env.attrs.get("source")):
+                    _err(issues, *where, 'a written-proof result requires source="<original theorem number or section/page>"')
+                if evidence.request_number(env.attrs.get("request")) is None:
+                    _err(issues, *where, 'a written-proof result requires request="' + evidence.REQUEST_PREFIX + '<number>"; reuse an existing issue or create one')
+                if env.kind not in FORMAL:
+                    _err(issues, *where, 'status="written-proof" is only for theorem/lemma/proposition/corollary, not open items or other environments')
+                if "lean" in env.attrs.kv:
+                    _err(issues, *where, 'a written-proof result must not also have lean; a related declaration does not verify it')
+                proof = model.envs.get(env.attrs.get("proof"))
+                if proof is None or proof.kind != "proof":
+                    _err(issues, *where, f'written-proof #{env.id} needs proof="<id>" naming a proof block in this edition')
+                elif not proof.div or not any(
+                        _COMMENT_RE.sub("", text).strip()
+                        for _, text, _ in mdscan.iter_text(proof.div.children)):
+                    _err(issues, *where, f'written-proof #{env.id}: proof #{proof.id} is empty')
+            if env.kind in FORMAL and not env.lean and status != WRITTEN_PROOF:
                 _err(issues, *where,
                      f"{env.kind} #{env.id or '?'} cites no Lean declaration. Every {env.kind} must be "
-                     "kernel-verified in trureturing: add lean=\"<module path>.<name>\". If it is not proved yet, "
+                     "kernel-verified in trureturing: add lean=\"<module path>.<name>\", or use status=\"written-proof\" "
+                     "with proof=\"<proof-block-id>\" for a written proof. If it is not proved yet, "
                      "write it as a conjecture or problem instead.")
             if env.kind in OPEN and env.lean:
                 _err(issues, *where, f"{env.kind} #{env.id}: open items must not cite Lean; if it is proved, make it a theorem")
@@ -245,35 +276,41 @@ def check_drawn_images(book: config.Book, models: dict[str, EditionModel], issue
 
 
 _COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
-MEDIA_RUN = 3  # this many media blocks in a row with no prose between them are reported
+def _media_label(node: "mdscan.Div") -> str:
+    """How a warning names one media block: its kind, ``src`` and (for a card) ``preset``."""
+    label = f'{kind_of(node)} "{node.attrs.get("src") or "?"}"'
+    if node.attrs.get("preset"):
+        label += f' preset "{node.attrs.get("preset")}"'
+    elif kind_of(node) == "viz":
+        label += " (the full lab)"
+    return label
 
 
 def check_media_runs(model: EditionModel, issues: list[Issue]) -> None:
-    """Three or more media blocks (figure, viz, film, slides) with nothing but blank lines between
-    them (a warning, from the third block on): a reader meets a stack of pictures and cannot tell
-    which sentence each one belongs to. Cite each next to the sentence it shows."""
+    """Two media blocks (figure, viz, film, slides) with nothing but blank lines or HTML comments between
+    them (a warning, on the second block of every such pair): a reader meets a stack of pictures and cannot
+    tell which sentence each one belongs to. Cite each next to the sentence it shows, with prose between."""
     for doc in model.chapters:
         for nodes in [doc.blocks] + [n.children for n in mdscan.walk(doc.blocks) if isinstance(n, mdscan.Div)]:
-            run: list[tuple[str, int]] = []
-
-            def flush() -> None:
-                if len(run) >= MEDIA_RUN:
-                    later = ", ".join(f"line {line}" for _kind, line in run[MEDIA_RUN - 1:])
-                    _warn(issues, doc.path, run[MEDIA_RUN - 1][1],
-                          f"{len(run)} media blocks in a row ({' → '.join(k for k, _l in run)}, from line {run[0][1]}) "
-                          f"with no text between them ({later}): cite each next to the sentence it shows, with "
-                          "prose between them")
-                run.clear()
-
+            prev: "mdscan.Div | None" = None
             for node in nodes:
                 if isinstance(node, mdscan.Div) and kind_of(node) in MEDIA:
-                    run.append((kind_of(node), node.start))
+                    if prev is not None:
+                        msg = (f"{_media_label(prev)} (line {prev.start}) and {_media_label(node)} (line {node.start}) "
+                               "sit next to each other with no text between them: cite each next to the sentence "
+                               "it shows, with prose between the two")
+                        if (kind_of(prev) == kind_of(node) == "viz" and prev.attrs.get("preset")
+                                and not node.attrs.get("preset") and prev.attrs.get("src") == node.attrs.get("src")):
+                            msg += ("; the full lab right after the last card of the same page: move the lab after "
+                                    "the last paragraph at the end of the chapter, or put a sentence between the two "
+                                    "that says what the lab adds")
+                        _warn(issues, doc.path, node.start, msg)
+                    prev = node
                 elif isinstance(node, mdscan.Comment) or (isinstance(node, mdscan.Text) and not _COMMENT_RE.sub(
                         "", "\n".join(node.lines)).strip()):  # blank lines and HTML comments show nothing
                     continue
                 else:
-                    flush()
-            flush()
+                    prev = None
 
 
 def check_unused_figures(book: config.Book, models: dict[str, EditionModel], issues: list[Issue]) -> None:
@@ -307,7 +344,7 @@ def check_unused_assets(book: config.Book, models: dict[str, EditionModel], site
         d = book.dir / sub
         if d.is_dir():
             for p in d.rglob("*"):
-                if p.is_file() and p.suffix.lower() in (".md", ".html", ".js", ".json", ".vue", ".css") and "node_modules" not in p.parts:
+                if p.is_file() and p.suffix.lower() in (".md", ".html", ".js", ".json", ".vue", ".css", ".tex", ".toml") and "node_modules" not in p.parts:
                     try:
                         elsewhere += p.read_text(encoding="utf-8", errors="ignore")
                     except OSError:
@@ -329,10 +366,12 @@ def check_footnotes(model: EditionModel, issues: list[Issue]) -> None:
             _warn(issues, doc.path, line, msg)
 
 
-def _env_signature(model: EditionModel) -> list[tuple[str, list[tuple[str, str, tuple[str, ...]]]]]:
+def _env_signature(model: EditionModel) -> list:
     sig = []
     for ch in model.chapters:
-        items = [(e.kind, e.id, tuple(e.lean)) for e in ch.envs if e.kind in NUMBERED + PROOF]
+        items = [(e.kind, e.id, tuple(e.lean), e.attrs.get("status"), e.attrs.get("proof"),
+                  e.attrs.get("doi"), e.attrs.get("source"), e.attrs.get("repository"), e.attrs.get("request"))
+                 for e in ch.envs if e.kind in NUMBERED + PROOF]
         # a cited card (viz preset=…) is part of the citation: every edition cites the same card at the same place
         items += [(e.kind, e.attrs.get("src"), (e.attrs.get("preset"),) if e.attrs.get("preset") else ()) for e in ch.media]
         sig.append((ch.chapter.path or "", items))
@@ -405,7 +444,8 @@ def check_parity(book: config.Book, models: dict[str, EditionModel], issues: lis
                     def fmt(x):
                         if x is None:
                             return "nothing"
-                        return f"{x[0]} #{x[1]}" + (f" lean={' '.join(x[2])}" if x[2] else "")
+                        return (f"{x[0]} #{x[1]}" + (f" lean={' '.join(x[2])}" if x[2] else "")
+                                + (f" status={x[3]} proof={x[4]}" if len(x) > 3 and (x[3] or x[4]) else ""))
                     _err(issues, ch_path, 0,
                          f"item {k + 1} differs between editions: {book.languages[0]} has {fmt(a)}, {lang} has {fmt(b)}")
                     break
@@ -586,6 +626,7 @@ def run(books: list[config.Book], *, offline: bool = False) -> list[Issue]:
         check_drawn_images(book, models, issues)
         check_unused_figures(book, models, issues)
         check_unused_assets(book, models, site, issues)
+        issues.extend(viz.check_frozen(book, models))
         for kind in MEDIA:
             try:
                 mod = importlib.import_module(f"tbook.{kind}")
@@ -593,6 +634,8 @@ def run(books: list[config.Book], *, offline: bool = False) -> list[Issue]:
             except NotImplementedError:
                 pass
     extra = [c for book in books for c in media_cited_gids(book)]
+    from . import requests
+    issues.extend(requests.check((m for editions in models_by_book.values() for m in editions.values()), site, offline=offline))
     check_cache(issues)
     check_lean(models_by_book, lock, site, issues, offline=offline, extra_cited=extra,
                cited_elsewhere=_cited_by_other_books(books))

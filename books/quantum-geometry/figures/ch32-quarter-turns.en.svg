@@ -20,5 +20,5 @@
 <text class="tf-ink" x="232" y="60" font-size="15" font-weight="600"><tspan font-style="italic">R e</tspan></text>
 <text class="tf-ink" x="122" y="138" font-size="15" text-anchor="end" font-weight="600"><tspan font-style="italic">R</tspan>²<tspan font-style="italic">e</tspan> = −<tspan font-style="italic">e</tspan></text>
 <rect x="185.7" y="273" width="68.6" height="22" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
-<text class="tf-ok tr-fig-mono" x="192.7" y="290" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">R² = −I</text>
+<text class="tf-ok tr-fig-mono" x="192.7" y="290" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">R² = <tspan class="tr-fig-sans" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif">−</tspan>I</text>
 </svg>

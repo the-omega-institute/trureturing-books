@@ -55,6 +55,12 @@
 
 - [第二十九章 无时间因果与格拉姆相容空间：从毕达哥拉斯佩尔接缝到椭圆曲线环面](ch29-timeless-causality-and-gram-space.md)
 - [第三十章 场（$P$）与线（$NP$）：从指数时间假设（ETH）到纳维—斯托克斯涡丝](ch30-fields-lines-eth-and-navier-stokes.md)
+  - [全局静态时间场 $P = NP$ vs. 场内有限观察者 $P \neq NP$——正交视界与生命旅程的防火墙](ch30-s01-global-field.md)
+  - [“$P$ 是场，$NP$ 是线”——见证丝、导向场与毛球旋度的终极分野](ch30-s02-witness-lines.md)
+  - [指数时间假设（ETH）、2026 张量网络秩约分与宇宙学视界：上界曲线的尺度与诠释边界](ch30-s03-eth-and-horizons.md)
+  - [纳维—斯托克斯（Navier–Stokes）与 $P$ vs. $NP$ 的场化类比——兰姆双向量、三维涡管拉伸与阿诺德测地线](ch30-s04-navier-stokes.md)
+  - [“量子纠缠、P=NP、熵”——偏迹视界、勾股守恒与张量割键维的正交三位一体](ch30-s05-entanglement-and-entropy.md)
+  - [本章小结：离散逻辑场与连续流体场的正交合龙](ch30-s06-summary.md)
 - [第三十一章 量子的本质是公平：五重几何特权的废除与遍历统计全息](ch31-quantum-fairness.md)
 - [第三十二章 正交自指统一场与万流归宗：人类大一统纲领的元统一](ch32-unified-field-and-meta-unification.md)
 

@@ -83,10 +83,31 @@ def cmd_pin(args) -> int:
 def cmd_build(args) -> int:
     from . import build
 
-    result = build.build(args.targets or ["all"], _books(args), args.lang or None, pdf_variants=args.variant or None)
+    result = build.build(args.targets or ["all"], _books(args), args.lang or None, pdf_variants=args.variant or None,
+                         films=args.film or None)
     for f in result.failures:
         print(f"FAILED {f}", file=sys.stderr)
     return 1 if result.failures else 0
+
+
+def cmd_requests(args) -> int:
+    from . import model, requests
+
+    groups = requests.collect(m for book in _books(args) for m in model.load_book_models(book).values())
+    if args.json:
+        print(json.dumps(groups, ensure_ascii=False, indent=2))
+    else:
+        for group in groups:
+            print(f'{group["book_count"]} book(s), {group["result_count"]} result(s): {group["request"] or "MISSING ISSUE"}')
+            for source in group["sources"]:
+                citation = f'DOI:{source["doi"]}' if source.get("doi") else "No DOI"
+                print(f'  {citation} | {source["source"]}')
+                if source.get("repository"):
+                    print(f'  Source repository: {source["repository"]}')
+            for use in group["uses"]:
+                print(f'  {use["book"]}/{use["chapter"]}#{use["id"]}')
+        print(f'{len(groups)} formalization request(s)')
+    return 0
 
 
 def cmd_cache(args) -> int:
@@ -181,7 +202,7 @@ def cmd_new_book(args) -> int:
 def cmd_new_chapter(args) -> int:
     from . import newbook
 
-    for p in newbook.new_chapter(args.book, args.name, _langs_titles(args.title)):
+    for p in newbook.new_chapter(args.book, args.name, _langs_titles(args.title), parent=args.parent):
         print(f"created {paths.rel(p)}")
     return 0
 
@@ -248,6 +269,11 @@ def parser() -> argparse.ArgumentParser:
     c.add_argument("--strict", action="store_true", help="fail on warnings too")
     c.set_defaults(fn=cmd_check)
 
+    c = sub.add_parser("requests", help="list formalization requests, grouped by issue and counted once per book/result")
+    c.add_argument("--book", action="append")
+    c.add_argument("--json", action="store_true", help="emit DOI/repository, source, issue and book/result usage counts as JSON")
+    c.set_defaults(fn=cmd_requests)
+
     c = sub.add_parser("pin", help="pin a trureturing commit and resolve cited declarations")
     c.add_argument("ref", nargs="?", help="commit SHA (full or abbreviated), branch or tag; it must be on the "
                                           "site.toml branch (default: that branch's head)")
@@ -263,6 +289,9 @@ def parser() -> argparse.ArgumentParser:
     c.add_argument("--book", action="append")
     c.add_argument("--lang", action="append", help="limit to an edition language (repeatable)")
     c.add_argument("--variant", action="append", choices=list(config.PDF_VARIANTS), help="limit PDF variants")
+    c.add_argument("--film", action="append", metavar="NNN-NAME",
+                   help="with `build films`: render or restore only this film (repeatable); the others are only "
+                        "restored from the build cache")
     c.set_defaults(fn=cmd_build)
 
     c = sub.add_parser("theme", help="regenerate theme/generated/* from theme/tokens.json")
@@ -281,6 +310,7 @@ def parser() -> argparse.ArgumentParser:
     c = sub.add_parser("new-chapter", help="add a chapter to every edition of a book")
     c.add_argument("book")
     c.add_argument("name", help="file name without .md, e.g. ch02-deficit")
+    c.add_argument("--parent", help="existing numbered chapter path, with or without .md; add a nested child")
     c.add_argument("--title", action="append", required=True, help="LANG=TITLE, once per edition")
     c.set_defaults(fn=cmd_new_chapter)
 
@@ -304,14 +334,25 @@ def parser() -> argparse.ArgumentParser:
 
     c = sub.add_parser("template", help="template version: status, update, manifest")
     tsub = c.add_subparsers(dest="template_cmd", required=True)
+    t = tsub.add_parser("list", help="list upstream and installed layers (for template-sync)")
+    t.add_argument("--json", action="store_true")
     t = tsub.add_parser("status", help="show the template version and local changes to managed files")
+    t.add_argument("--layer", help="upstream or layer name (default: all)")
     t = tsub.add_parser("update", help="update managed files to a template release")
+    t.add_argument("--layer", help="upstream or layer name (default: all)")
     t.add_argument("--to", help="template version or git ref (default: latest release)")
     t.add_argument("--source", help="local path or git URL of the template (default: template.toml repo)")
     t.add_argument("--dry-run", action="store_true")
     t.add_argument("--force", action="store_true", help="overwrite managed files with local changes")
     t = tsub.add_parser("manifest", help="(template repo) regenerate or check template-manifest.json")
     t.add_argument("--check", action="store_true")
+    t.add_argument("--layer", help="layer name (default: upstream)")
+    t = tsub.add_parser("install", help="install a layer from a local path or git source")
+    t.add_argument("layer", help="layer name")
+    t.add_argument("--source", required=True)
+    t.add_argument("--to", help="version or git ref (default: latest release)")
+    t.add_argument("--dry-run", action="store_true")
+    t.add_argument("--force", action="store_true")
     c.set_defaults(fn=cmd_template)
 
     c = sub.add_parser("cache", help="build cache: status, key, prune, export (see docs/ARCHITECTURE.md)")
@@ -347,7 +388,7 @@ def parser() -> argparse.ArgumentParser:
 
     for kind in ("viz", "slides", "film"):
         c = sub.add_parser(kind, help=f"{kind} helpers (new, list, …)")
-        c.add_argument("action", choices=["new", "list"])
+        c.add_argument("action", choices=["new", "list", "snapshots"] if kind == "slides" else ["new", "list"])
         c.add_argument("rest", nargs=argparse.REMAINDER)
         c.set_defaults(fn=cmd_media, kind=kind)
     return p
