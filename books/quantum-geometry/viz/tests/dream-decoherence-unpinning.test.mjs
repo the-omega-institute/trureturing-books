@@ -431,9 +431,10 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
   for (const [tag, vp, lang, cards] of [['phone frame 334 × 500', { width: 334, height: 500 }, 'en', FIG], ['phone frame 334 × 500', { width: 334, height: 500 }, 'zh', ['half_erase', 'unpin_body']], ['book page 760 × 500', { width: 760, height: 500 }, 'en', FIG]]) {
     const bad = { frame: [], note: [], words: [], solid: [], labels: [], share: [], read: [] };
     for (const card of cards) {
-      const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${card}`, { viewport: vp, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+      const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${card}`, { viewport: vp, locale: lang === 'en' ? 'en-US' : 'zh-CN', reducedMotion: 'reduce' });
       await until(pg, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000);
-      await until(pg, (d) => !window[d].state.playing, 'DREAM_DEBUG', 120000);
+      // Inspect the ending frame directly; the card controls have separate playback checks.
+      await pg.evaluate((d) => window[d].seek(window[d].state.max), 'DREAM_DEBUG');
       await settle(pg);
       const f = await facts(pg), id = `${card} (${lang})`;
       if (f.docScroll > 0 || f.docWide > 0 || f.stageH < 0.72 * f.vp.h) bad.frame.push(`${id}: scroll ${f.docScroll}/${f.docWide}, stage ${Math.round(f.stageH)} px`);
