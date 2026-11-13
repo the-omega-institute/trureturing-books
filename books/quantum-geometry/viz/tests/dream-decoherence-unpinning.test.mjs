@@ -341,6 +341,26 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
     check(`${what}: the apparatus fills its box, runs under no flat panel or words, and the grid stays ≥ 80 px`, clear(r) && lab >= 80, JSON.stringify([r, lab]));
     await pg.context().close();
   }
+  /* another machine's font metrics: on a phone the second line of the title runs right under the scene buttons, and
+     the theme (TRV.hudFit) moves the whole title block under the buttons as soon as any of its lines meets one. On the
+     CI runner it once did so after the page had laid the apparatus out under the block where it was, and the
+     apparatus ran under the second line. With the buttons 2 px taller than here the title keeps its row, its second
+     line keeps clear of the buttons, the apparatus starts under it and runs under no words, and the grid stays ≥ 80 px. */
+  for (const [what, q] of [['390 phone, scene buttons 2 px taller', '?lang=en&preset=unpin_body'], ['390 phone, records, scene buttons 2 px taller', '?lang=zh&preset=quantum_eraser']]) {
+    const pg = await T.open(BOOK, ID, q, { viewport: { width: 390, height: 844 } });
+    await pg.addStyleTag({ content: '#sceneChips .chip { padding-bottom: 6px; }' });
+    await pg.evaluate(() => window.dispatchEvent(new Event('resize')));
+    await settle(pg, 120);
+    const r = await clearOfPanels(pg);
+    const lay = await pg.evaluate(() => {
+      const st = document.getElementById('stage'), sr = st.getBoundingClientRect(), rg = document.createRange(), P = window.DREAM_DEBUG.panels;
+      rg.selectNodeContents(document.getElementById('hudSub'));
+      return { stacked: st.classList.contains('hud-stack'), subBottom: rg.getBoundingClientRect().bottom - sr.top, top: P.r3.y, grid: P.grid.size };
+    });
+    check(`${what}: the title keeps its row, the apparatus starts under its second line and runs under no flat panel or words, and the grid stays ≥ 80 px`,
+      clear(r) && !lay.stacked && lay.top >= lay.subBottom && lay.grid >= 80, JSON.stringify([r, lay]));
+    await pg.context().close();
+  }
 
   /* marks on both faces of the plate: the plate hides one face's beads, whichever way the camera turns */
   await pick('waking'); await seek(0);
