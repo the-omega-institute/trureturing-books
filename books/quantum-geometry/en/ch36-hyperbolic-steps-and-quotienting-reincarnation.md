@@ -231,17 +231,26 @@ Why? If avoiding amnesia required climbing an endless staircase forever, would c
 
 No! The discrete hyperbolic staircase supplies the **defensive guardrail** preventing accidental table erasure at $90^\circ$; the **ultimate liberation** arrives the moment you comprehend the generating law of the timeless lattice and **quotient out redundant cycles once and for all in generator space**!
 
-::: {.example #ex-ch36-repeating-decimal-quotient title="Repeating-Decimal Shift Quotient Parable (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The infinite decimal geometric-series reduction below is an elementary arithmetic identity not formalized as a base-10 expansion theorem in `trureturing@dev`:
-
 Consider the infinite repeating decimal
 
 $$
-0.\overline{142857} \;=\; 0.142857\,142857\,142857\dots
+0.\overline{142857} = 0.142857\,142857\,142857\dots.
 $$
 
-An unawakened runner imagines that "experiencing the whole truth" means sprinting blindfolded around the six-digit millstone `1-4-2-8-5-7` for lap $10{,}001$ and lap $100{,}000{,}002$—wiping memory at every boundary and starting over at `1` in solemn earnest. Yet once one recognizes its shift self-similarity ($10^6 x - x = 142857$) and divides out the period kernel $999{,}999$, the entire infinite repeating tail **reduces in a single stroke to the finite rational generator $1/7$**—holding the generator renders blind extra laps informationally vacuous.
+An unawakened runner imagines that "experiencing the whole truth" means sprinting blindfolded around the six-digit millstone `1-4-2-8-5-7` for lap $10{,}001$ and lap $100{,}000{,}002$—wiping memory at every boundary and starting over at `1` in solemn earnest. The arithmetic shift and quotient relations have a finite certificate:
+
+::: {.theorem #ex-ch36-repeating-decimal-quotient title="Six-Digit Repeating-Decimal Shift and Quotient Certificate" lean="D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.repeating_decimal_142857_shift_quotient"}
+Over the rational numbers, both equalities hold:
+
+$$
+\begin{aligned}
+10^6\cdot\frac{1}{7}-\frac{1}{7} &= 142857, \\
+\frac{142857}{999999} &= \frac{1}{7}.
+\end{aligned}
+$$
 :::
+
+This pair records exactly the relation between the period kernel $999{,}999$ and the finite rational generator $1/7$. **Literature result, not formalized in this book:** identifying that rational number with the infinite repeating decimal above still requires a separate semantic bridge for the decimal series; that bridge is outside the cited declaration.
 
 In `trureturing`, the three mathematical pillars of "factoring out redundant fibers via partition topology," "collapsing periodic subgroup sums onto dual annihilators" (echoing period extraction in [Chapter 15](ch15-grover-qft-and-period-finding.md) and generator cancellation in [Chapter 22](ch22-primes-euler-products-and-zeros.md)), and "encoding long-run orbit averages entirely inside the invariant measure of a single torus generator" (echoing [Chapter 31](ch31-quantum-fairness.md)) are united in the four formal theorems below:
 
