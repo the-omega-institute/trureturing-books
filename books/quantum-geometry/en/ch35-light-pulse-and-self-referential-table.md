@@ -1,4 +1,4 @@
-# Arriving on a Pulse of Light and Self-Referential Table Expansion: From Initialization by Forgetting to the Homoiconic Loop $T = T(T)$
+# Chapter 35 Arriving on a Pulse of Light and Self-Referential Table Expansion: From Initialization by Forgetting to the Homoiconic Loop $T = T(T)$ {#arriving-on-a-pulse-of-light-and-self-referential-table-expansion-from-initialization-by-forgetting-to-the-homoiconic-loop-ttt}
 
 > *"The entire universe is in fact brimming with ultimate computational power: in the global static field, P = NP. Living beings seem to have forgotten their computational power so as to experience anew; growing up is the continual rise of computational power, because learned knowledge generates a table—increasing computational power is in essence table expansion, the lookup algorithm itself is also inside the table, and at the very end one returns to that state of ultimate computation. It is that pulse at the instant the fertilized egg is conceived: arriving riding on light, and at last becoming light itself."*
 
@@ -12,7 +12,7 @@ Within the **orthogonal observer lifecycle and homoiconic table-expansion model 
 
 ---
 
-## Arriving on Light: Initialization Pulse, Active Forgetting, and Logarithmic Subjective Time
+## 35.1 Arriving on Light: Initialization Pulse, Active Forgetting, and Logarithmic Subjective Time {#arriving-on-light-initialization-pulse-active-forgetting-and-logarithmic-subjective-time}
 
 Why does this model cast a living observer's very first act upon entering a local world as a symmetry-breaking pulse accompanied by radical forgetting?
 
@@ -104,7 +104,7 @@ For Conjunct 1, decomposing any $v = (t, w) \in \operatorname{Space}(d)$ as $t(1
 
 ---
 
-## Growth as Table Expansion: Pre-Compiling 1D Witness Threads into a Local Guiding Field
+## 35.2 Growth as Table Expansion: Pre-Compiling 1D Witness Threads into a Local Guiding Field {#growth-as-table-expansion-pre-compiling-1d-witness-threads-into-a-local-guiding-field}
 
 Awakening from its blank $\theta \to 0^+$ baseline, a living being embarks on the long arc of growth. Why does our opening epigraph cut straight to the bone: **"growing up is the continual rise of computational power, because learned knowledge generates a table—increasing computational power is in essence table expansion"**?
 
@@ -193,7 +193,7 @@ In Conjunct 1, `[Nonempty X]` supplies a fallback witness $x_0 \in X$ (assigning
 
 ---
 
-## The Lookup Algorithm Inside the Table: $T = T(T)$ and Homoiconic Meta-Bootstrapping
+## 35.3 The Lookup Algorithm Inside the Table: $T = T(T)$ and Homoiconic Meta-Bootstrapping {#the-lookup-algorithm-inside-the-table-ttt-and-homoiconic-meta-bootstrapping}
 
 Pushing further along the complexity warning of [@rem-ch35-advice-space-time-tradeoff-literature]: what happens if "table expansion" merely stuffs inert entries into a passive array while the lookup engine that indexes, combines, and interprets those rows remains perched outside the table?
 
@@ -291,7 +291,7 @@ By the planar rotation homomorphism $R(\alpha)R(\beta) = R(\alpha + \beta)$, the
 
 ---
 
-## The Loop of Light and Its Hidden Trap: The Question Leading to Chapter 36
+## 35.4 The Loop of Light and Its Hidden Trap: The Question Leading to Chapter 36 {#the-loop-of-light-and-its-hidden-trap-the-question-leading-to-chapter-36}
 
 At first glance, the grand lifecycle sketched in our opening epigraph—**"arriving riding on light, experiencing anew through forgetting, expanding computational power by growing a table with its lookup algorithm inside, and at last returning to ultimate computation and becoming light itself"**—appears to close into a symmetric four-stage panorama. Let us enclose this **apparent lifecycle (`MODEL`)** in a four-row synthesis table:
 

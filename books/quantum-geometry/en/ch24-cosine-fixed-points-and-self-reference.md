@@ -608,7 +608,7 @@ Within a hundred steps, the orbit with step $\theta^*$ looks almost indistinguis
 **How fixed points close in: the full lab.** Three scenes on one cobweb plane: iteration ($\cos x$ or $1 + 1/x$, with a draggable start and three cameras), Newton's method, and rational readings (with an adjustable ruler). Qualitative cosine convergence and conditional asymptotic factors follow from the reuse derivation in [@ex-ch33-mutual-cosine-monotonic-lock]; Newton's method, numerical values, and residual bounds retain their literature or numerical boundaries; the green boxes cite only [@cor-golden-fixed-point-unique] and [@thm-dottie-rational-inverse-endpoint].
 :::
 
-### Twin-Spiral Correspondence: From the One-Dimensional Golden Continued Fraction to Two-Dimensional Cosine Whirling Squares {#sec-ch24-dottie-fibonacci-spirals}
+### 24.5.1 Twin-Spiral Correspondence: From the One-Dimensional Golden Continued Fraction to Two-Dimensional Cosine Whirling Squares {#sec-ch24-dottie-fibonacci-spirals}
 
 Looking back at the two tables computed side by side in [@ex-dottie-and-golden-iterations] — the golden reciprocal continued-fraction iteration and the cosine fixed-point iteration — the author recorded an observation in the manuscript that goes straight to the geometric core: *"Approaching $\theta$ is very much like a Fibonacci spiral."*（“逼近 $\theta$ 的过程很像斐波那契螺旋。”） Far from a loose visual metaphor, this expresses a structural correspondence and continuous spiral interpolation model (`MODEL`) of the same negative-slope turning mechanism acting first on a flat one-dimensional ruler and then on a curved two-dimensional circular arc.
 
@@ -1068,12 +1068,12 @@ Take $n = 2$; the simplex is the segment $\{(p, 1 - p) \mid p \in [0, 1]\}$. Sin
 The two mechanisms divide the work, and the diagonal adds a third piece. A continuous self-map of the standard simplex has a fixed point; a contraction self-map of a nonempty complete metric space also gives uniqueness and convergence of iteration. If a listing captures its twisted diagonal, the value of the landing row at its own name is fixed by the twist. This last conclusion retains the capture hypothesis and does not guarantee capture for an arbitrary listing.
 
 ::: {.film src="006-sphere-beyond-spheres"}
-**Spheres beyond spheres: the diagonal escape and the cosine fixed point (2:28).** The film plays the whole chase through: flipping the diagonal of a list gives a string that escapes the list; in the four-address catalog it splits an old fiber, and raised as a new axis at right angles it turns two pieces into three ([@cor-complete-diagonal-topological-settlement]); seen from outside, the closed shadow circle is an open helix. The chase stops only where a list catches its own twisted diagonal, and there the landing value is a fixed point of the twist ([@lem-diagonal-landing-fixed]); with cosine as the twist, the cobweb from $1$ radian closes in on the one positive solution $\theta^* \approx 0.739$ ([@thm-dottie-rational-inverse-endpoint]).
+**Spheres beyond spheres: the diagonal escape and the cosine fixed point (2:31).** The film plays the whole chase through: flipping the diagonal of a list gives a string that escapes the list; in the four-address catalog it splits an old fiber, and raised as a new axis at right angles it turns two pieces into three ([@cor-complete-diagonal-topological-settlement]); seen from outside, the closed shadow circle is an open helix. The chase stops only where a list catches its own twisted diagonal, and there the landing value is a fixed point of the twist ([@lem-diagonal-landing-fixed]); with cosine as the twist, the cobweb from $1$ radian closes in on the one positive solution $\theta^* \approx 0.739$ ([@thm-dottie-rational-inverse-endpoint]).
 :::
 
 ---
 
-### Summary of Part VI: From Spheres Beyond Spheres to $\psi = \psi(\psi)$ — Ready to Forge the Mechanical Canon
+### 24.7.1 Summary of Part VI: From Spheres Beyond Spheres to $\psi = \psi(\psi)$ — Ready to Forge the Mechanical Canon {#summary-of-part-vi-from-spheres-beyond-spheres-to-ψψψ--ready-to-forge-the-mechanical-canon}
 
 Across the four chapters of Part VI, backed by **forty-four Lean-verified theorem blocks** (seven in Chapter 21, nineteen in Chapter 22, four in Chapter 23, and fourteen in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
 

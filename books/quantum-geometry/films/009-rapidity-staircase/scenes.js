@@ -191,12 +191,64 @@ function rsWebBase(P, a) {
 }
 
 /* ---- chapter 36: the curve θ = gd(η) with its wall at 90° ---- */
-function rsGdPlot() { return rsPlot(200, 230, 680, 330, 0, 9.4, 0, 90); }
-function rsGdBase(P, a, o = {}) {
-  rsFrame(P, a, [[0, '0'], [2, '2'], [4, '4'], [6, '6'], [8, '8']], [[0, '0°'], [45, '45°'], [90, '90°']], 'η', 'θ');
-  line(P.X(0), P.Y(90), P.X(9.4), P.Y(90), C.mag, a, 3);
-  txt(o.wall || '90° · 墙 wall', P.X(9.4), P.Y(90) - 12, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.mag, a });
-  curve(s => { const e = 9.4 * s; return [P.X(e), P.Y(RM.gd(e) / RS_DEG)]; }, 160, C.cyan, a * (o.curve == null ? 1 : o.curve), 3);
+/* The staircase as a solid, with the objects of the lab page forgetting-rebirth-attractor (viz/forgetting-rebirth-
+   attractor/model.js, QG_SAMSARA): the lit hyperboloid t² − x² − y² = 1 of unit rapidity vectors, cut open towards the
+   viewer, inside the glass light cone t = √(x² + y²). The steps η_k = η(θ*) + k walk out along one meridian of the
+   hyperboloid; seen from the apex, step k crosses the slice t = 1 (the page's Klein disk) at radius tanh η_k = sin θ_k,
+   and the rim of that slice, where the cone crosses it, is the wall θ = 90°. The gap 1 − tanh η_k is the distance from
+   that crossing to the rim (magenta). Only η ≤ RS_ETA_TOP is drawn: the later steps leave the top of the picture, and
+   only their crossings of the slice stay in view, crowding toward the rim. */
+const RS_ETA_TOP = 1.86, RS_T_TOP = Math.cosh(1.86);
+const RS_VIEW = { yaw: -0.5, pitch: 0.55 };
+/* the bearing that faces the viewer (the horizontal part of the camera's direction); the steps walk along the meridian a
+   quarter turn from it, the hyperboloid's right-hand outline, so that the hyperbola and the cone's generator beside it
+   are seen side on, and the surface is cut open over the front so that the slice t = 1 inside shows */
+const RS_OPEN = Math.atan2(-Math.cos(RS_VIEW.yaw), -Math.sin(RS_VIEW.yaw)), RS_PATH = RS_OPEN + Math.PI / 2;
+function rsStairShot(key, r, a, kN, o = {}) {
+  const M = QG_SAMSARA, sh = solid(key, Object.assign({ x: r[0], y: r[1], w: r[2], h: r[3], unit: r[4], cy: r[5] == null ? 0.5 : r[5] }, RS_VIEW));
+  const open = RS_OPEN, half = 1.2;   // the half-width of the cut
+  sh.begin();
+  /* the hyperboloid, cut open over the bearings facing the viewer, and the glass light cone */
+  sh.surface('sheet', (u, v) => M.hyperboloid(v, u), { u: [open + half, open - half + TAU], v: [0, RS_ETA_TOP], nu: 72, nv: 26, color: C.blue, grid: { every: [6, 2], color: C.cyan, alpha: 0.3 } });
+  sh.surface('cone', (u, v) => M.cone(v, u), { u: [0, TAU], v: [0, RS_T_TOP], nu: 72, nv: 6, color: C.cyan, alpha: 0.11, pick: false, occlude: false });
+  sh.line(Array.from({ length: 97 }, (_, i) => M.cone(RS_T_TOP, TAU * i / 96)), { color: C.cyan, width: 1.2, alpha: 0.45 });
+  sh.line([[0, 0, 0], [0, 0, RS_T_TOP + 0.3]], { color: C.dim, width: 1.2, alpha: 0.7, dash: [6, 6] });
+  /* the slice t = 1 and its rim, the wall θ = 90° */
+  const rim = Array.from({ length: 121 }, (_, i) => [Math.cos(TAU * i / 120), Math.sin(TAU * i / 120), 1]);
+  sh.fan(rim.slice(0, 120), { fill: C.cyan, alpha: 0.08 });
+  sh.line(rim, { color: C.white, width: 2.6, alpha: 0.95 });
+  /* the cone's generator beside the path, the wall the hyperbola hugs */
+  sh.line([[0, 0, 0], M.cone(RS_T_TOP, RS_PATH)], { color: C.white, width: 1.6, alpha: 0.6 });
+  /* the meridian the steps walk along, and the steps so far */
+  const ki = Math.floor(kN + 1e-9), mer = [];
+  for (let i = 0; i <= 60; i++) mer.push(M.hyperboloid(RS_ETA_TOP * i / 60, RS_PATH));
+  sh.tube('meridian', mer, { color: C.cyan, width: 3, alpha: 0.85, glow: 0.4 });
+  for (let k = 0; k <= ki; k++) {
+    const e = RS_STEPS[k].e, cur = k === ki, col = cur ? C.now : C.cyan, kp = M.klein(e, RS_PATH);
+    if (e <= RS_ETA_TOP) sh.bead(M.hyperboloid(e, RS_PATH), { color: col, r: cur ? 9 : 6 });
+    sh.bead(kp, { color: col, r: cur ? 7 : 4.5 });
+    if (cur) {
+      /* the ray from the apex through the step, and the gap from its crossing to the rim */
+      const top = e > RS_ETA_TOP ? RS_T_TOP : Math.cosh(e);
+      sh.line([[0, 0, 0], kp.map(v => v * top)], { color: C.now, width: 1.6, alpha: 0.8, dash: [6, 5] });
+      sh.line([kp, [Math.cos(RS_PATH), Math.sin(RS_PATH), 1]], { color: C.mag, width: 4, alpha: o.gap == null ? 1 : o.gap });
+    }
+  }
+  sh.end(a);
+  const st = RS_STEPS[ki], front = [Math.cos(open), Math.sin(open), 1];
+  return {
+    sh, now: sh.anchor(st.e <= RS_ETA_TOP ? M.hyperboloid(st.e, RS_PATH) : M.klein(st.e, RS_PATH)), k0: sh.anchor(M.hyperboloid(RS_STEPS[0].e, RS_PATH)),
+    rim: sh.anchor(front), cone: sh.anchor(M.cone(2.3, RS_PATH + Math.PI)), sheet: sh.anchor(M.hyperboloid(1.3, RS_PATH))
+  };
+}
+function rsStairLabels(b, a, kN) {
+  if (a <= 0.003) return;
+  const ki = Math.floor(kN + 1e-9), s = RS_STEPS[ki];
+  txt(`k = ${ki} · θ = ${(s.th / RS_DEG).toFixed(ki > 3 ? 3 : 1)}°`, b.now.x + 18, b.now.y - 16, { size: 22, fam: F.mono, w: 700, c: C.now, a });
+  if (ki > 0) txt('k = 0 · θ*', b.k0.x - 18, b.k0.y - 12, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.cyan, a: a * (b.k0.hidden ? 0.4 : 1) });
+  txt('θ = 90° · 墙 wall', b.rim.x + 10, b.rim.y + 34, { size: 20, fam: F.zh, w: 700, c: C.white, a });
+  txt('light cone · 光锥', b.cone.x - 14, b.cone.y, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.cyan, a: a * 0.9 });
+  txt('t² − x² − y² = 1', b.sheet.x + 18, b.sheet.y + 8, { size: 22, fam: F.math, w: 700, c: C.white, a: a * 0.85 });
 }
 
 /* ======================================================================= */
@@ -448,19 +500,12 @@ SCENES.ruler = S => {
 /* ======================================================================= */
 function rsStairK(S) { const L0 = lineAt(S, 0), L2 = lineAt(S, 2); return clamp((S.u - L0.s - 1.2) / Math.max(1, L2.e - L0.s - 1.2) * 8, 0, 8); }
 function rsGapPlot() { return rsPlot(200, 640, 680, 170, -0.5, 8.5, -8, 0); }
-function rsStairs(P, G, a, kN) {
+function rsStairs(G, a, kN) {
+  /* the gap 1 − tanh η_k on a log scale: a bar that keeps going down and never reaches the bottom */
   const ki = Math.floor(kN + 1e-9);
   for (let k = 0; k <= ki; k++) {
-    const s = RS_STEPS[k], cur = k === ki, col = cur ? C.now : C.cyan;
-    rsDash(P.X(s.e), P.Y(0), P.X(s.e), P.Y(s.th / RS_DEG), col, a * (cur ? 0.9 : 0.5), 1.4, [4, 5]);
-    rsDash(P.X(0), P.Y(s.th / RS_DEG), P.X(s.e), P.Y(s.th / RS_DEG), col, a * (cur ? 0.9 : 0.4), 1.4, [4, 5]);
-    line(P.X(0) - 10, P.Y(s.th / RS_DEG), P.X(0) + 10, P.Y(s.th / RS_DEG), col, a, 2.5);
-    dot(P.X(s.e), P.Y(s.th / RS_DEG), cur ? 14 : 9, cur ? 'g' : 'c', a);
-    /* the gap 1 − tanh η_k on a log scale: a bar that keeps going down and never reaches the bottom */
-    if (G) {
-      const g = Math.log10(s.gap), bx = G.X(k);
-      fillBox(bx - 16, G.Y(0), 32, G.Y(g) - G.Y(0), C.mag, a * (cur ? 0.85 : 0.45));
-    }
+    const s = RS_STEPS[k], cur = k === ki, g = Math.log10(s.gap), bx = G.X(k);
+    fillBox(bx - 16, G.Y(0), 32, G.Y(g) - G.Y(0), C.mag, a * (cur ? 0.85 : 0.45));
   }
 }
 function rsGapFrame(G, a) {
@@ -474,11 +519,12 @@ SCENES.stairs = S => {
   const u = S.u, a = clamp(u / 0.5) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  const P = rsGdPlot(), G = rsGapPlot(), kN = rsStairK(S);
-  rsGdBase(P, a);
+  const G = rsGapPlot(), kN = rsStairK(S);
+  /* the solid first: the hyperboloid, the cone and the steps; the 2D plot, labels and panel go on top */
+  rsStairLabels(rsStairShot('stairs', [120, 170, 820, 440, 90, 0.95], a, kN, { gap: Math.max(0.35, Q(S, 3, 'the gap', 0.6)) }), a, kN);
   const qg = Q(S, 3, 'the gap', 0.6) * a;
   rsGapFrame(G, Math.max(qg, at(S, 2, 0.6) * a));
-  rsStairs(P, at(S, 2, 0.6) > 0 ? G : null, a, kN);
+  rsStairs(G, a, at(S, 2, 0.6) > 0 ? kN : -1);
   const ki = Math.floor(kN + 1e-9), s8 = RS_STEPS[8];
   if (qg > 0) {
     txt(rsSci(s8.gap), G.X(8) - 30, G.Y(Math.log10(s8.gap)) + 4, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.mag, a: qg });
@@ -590,9 +636,7 @@ FILM.poster = () => {
   const t = 60.0, si = 4;
   background(t, TL.scenes[si], si, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.3, a: 0.16, cx: 1380, cy: 420, camZ: 7, lw: 1.3, dots: false });
-  const P = rsPlot(170, 300, 640, 420, 0, 9.4, 0, 90);
-  rsGdBase(P, 1);
-  rsStairs(P, null, 1, 8);
+  rsStairLabels(rsStairShot('poster', [40, 260, 800, 540, 98, 0.92], 1, 8), 1, 8);
   const cx = 1340;
   txt('从互指锁死', cx, 250, { size: 92, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('到快度阶梯', cx, 360, { size: 92, fam: F.zh, w: 900, align: 'center', c: C.cyan, ab: 3 });

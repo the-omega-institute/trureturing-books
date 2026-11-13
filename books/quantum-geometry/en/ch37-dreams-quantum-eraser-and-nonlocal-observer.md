@@ -1,4 +1,4 @@
-# Dream Quantum Erasure, Known-Data Decoherence, and the Nonlocal Observer
+# Chapter 37 Dream Quantum Erasure, Known-Data Decoherence, and the Nonlocal Observer {#dream-quantum-erasure-known-data-decoherence-and-the-nonlocal-observer}
 
 > "Dreams allow an observer to experience the parts missed through subjective choice; the essence of observation is decoherence using known data. When a dream forgets part of that information, distinctive vistas open up; in dreams one often forgets one's own body—everything is in truth a rendering of appearances. We discover that the observer actually emerges across multiple positions rather than being confined to direct five-sense perception..."
 

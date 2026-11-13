@@ -1,10 +1,10 @@
-# "Quantum Entanglement, P=NP, Entropy" — The Orthogonal Triad of Partial-Trace Horizons, Pythagorean Conservation, and Tensor-Cut Bond Dimension {#sec-ch30-entanglement-entropy-complexity-triad}
+# 30.5 "Quantum Entanglement, P=NP, Entropy" — The Orthogonal Triad of Partial-Trace Horizons, Pythagorean Conservation, and Tensor-Cut Bond Dimension {#sec-ch30-entanglement-entropy-complexity-triad}
 
 > **Author's Words**: *"Quantum entanglement, P=NP, entropy."*（“量子纠缠、P=NP、熵”）
 
 Placed inside one Clifford orthogonal frame, **“量子纠缠、P=NP、熵”** (*quantum entanglement, P=NP, entropy*) cease to be isolated terms from quantum information, computational complexity, and thermodynamics, and lock together around a single **partial-trace horizon** (`MODEL`): cross-cut exterior bivector area $\mathbf{e}_A \wedge \mathbf{e}_{\bar{A}}$ supplies **quantum entanglement**; tracing out the inaccessible partner sector $\bar{A}$ via $\rho_A = \Tr_{\bar{A}}\bigl(\lvert\Psi\rangle\langle\Psi\rvert\bigr)$ converts that severed off-cut coherence into local marginal **entropy**; and the exact Schmidt rank $\chi_{\mathrm{exact}}$ needed to carry correlations across the cut—bounded below by the entropy effective dimension $\chi_{\mathrm{eff}} = 2^{S_{\mathrm{cut}}} \le \chi_{\mathrm{exact}}$—separates Area-Law guiding fields from exponential Volume-Law walls (contrasted with the open Turing-machine conjecture [@conj-p-neq-np], `OPEN`).
 
-## 1. Exact Two-Body Pythagorean Conservation and Marginal Entropy Under Partial Trace (`LEAN ✓` Anchors + Exact Identities)
+## 30.5.1 Exact Two-Body Pythagorean Conservation and Marginal Entropy Under Partial Trace (`LEAN ✓` Anchors + Exact Identities) {#1-exact-two-body-pythagorean-conservation-and-marginal-entropy-under-partial-trace-lean--anchors--exact-identities}
 
 Consider the canonical two-qubit pure state parameterized by the orthogonal Schmidt angle $\theta \in [0, \pi/2]$:
 
@@ -43,7 +43,7 @@ At $\theta = 90^\circ$ ($\pi/2$), $\lvert\psi(\pi/2)\rangle = \lvert\Phi^+\rangl
 **Two-body Pythagorean conservation and the partial-trace blind spot.** At $\theta = 53.13^\circ$ (the classic $3\text{-}4\text{-}5$ right triangle), observer $A$'s cyan Bloch arrow has length $\cos\theta = 0.600$ and cross-cut concurrence is $\sin\theta = 0.800$, satisfying $0.360 + 0.640 = 1.000$. The lowered magenta/violet partial-trace blade dims the dual sector $\bar{A}$ and turns off-cut bivector area into $A$'s marginal entropy halo ($S_L = \tau = 0.640$, $S_{\mathrm{vN}} \approx 0.722\text{ bits}$).
 :::
 
-## 2. The Entanglement-Topology Watershed: Area-Law Guiding Fields vs. Volume-Law Bond-Dimension Walls (`MODEL` + Literature Boundary)
+## 30.5.2 The Entanglement-Topology Watershed: Area-Law Guiding Fields vs. Volume-Law Bond-Dimension Walls (`MODEL` + Literature Boundary) {#2-the-entanglement-topology-watershed-area-law-guiding-fields-vs-volume-law-bond-dimension-walls-model--literature-boundary}
 
 Extending from one pair to an $n$-qubit tensor network (staged at $n = 16$ in the lab, with $8$ observer qubits in $A$ and $8$ dual qubits in $\bar{A}$), Chapter 19's discrete bridge-graph quantum max-flow min-cut theorem [@thm-bridge-quantum-maxflow-mincut] bounds the rank across a cut $A \mid \bar{A}$ by cut capacity. Here two quantities must be kept strictly distinct: the **exact Schmidt rank** $\chi_{\mathrm{exact}} := \operatorname{rank}(\rho_A)$ (the minimum bond dimension required for an exact, un-truncated decomposition across $A \mid \bar{A}$) and the **entropy effective dimension** $\chi_{\mathrm{eff}} := 2^{S_{\mathrm{vN}}(\rho_A)}$ (plotted directly on the laboratory stage as $\chi_{\mathrm{eff}} = 2^{S_{\mathrm{cut}}}$). Every finite-dimensional density operator satisfies $S_{\mathrm{vN}}(\rho_A) \le \log_2 \operatorname{rank}(\rho_A) = \log_2 \chi_{\mathrm{exact}}$, so
 
@@ -68,7 +68,7 @@ Keeping the single-pair Schmidt angle fixed at $\theta = 60^\circ$ while switchi
 **Volume law: eight expander bridges at the same angle erect an exponential wall.** At the exact same angle $\theta = 60^\circ$, routing all $k_{\mathrm{cut}} = 8$ non-local expander bridges across the cut quadruples cut entropy to $S_{\mathrm{cut}} \approx 6.490\text{ bits}$ and drives the entropy effective dimension up to $\chi_{\mathrm{eff}} = 2^{S_{\mathrm{cut}}} = 4^8 / 3^6 \approx 89.90 \le \chi_{\mathrm{exact}} = 2^8 = 256$.
 :::
 
-## 3. The Double-Edged Sword of Entanglement: Local Monogamy Firewalls vs. Global Coherent Readout (`Literature` + `OPEN`)
+## 30.5.3 The Double-Edged Sword of Entanglement: Local Monogamy Firewalls vs. Global Coherent Readout (`Literature` + `OPEN`) {#3-the-double-edged-sword-of-entanglement-local-monogamy-firewalls-vs-global-coherent-readout-literature--open}
 
 Across computational complexity, quantum entanglement acts as a striking double-edged sword: locally, monogamy and partial-trace scrambling erect an exponential decoding barrier for bounded observers; globally or interactively, extra postselection or shared-entanglement resources collapse verification far beyond classical limits. The underlying external theorems and their exact hypotheses are isolated in the following remark:
 
@@ -98,7 +98,7 @@ Conversely, lifting the partial-trace blade without altering $|\Psi\rangle$ leav
 **Blade lifted: the global pure density operator satisfies $r_{\mathrm{global}} = 1$ and $S(\rho_{AB}) = 0$.** Holding the state $|\Psi\rangle$ fixed (so its exact bipartition Schmidt rank $\chi_{\mathrm{exact}} = 256$ and marginal entropy $S(\rho_A) = 8\text{ bits}$ across $A \mid \bar{A}$ remain invariant), lifting the magenta/violet partial-trace blade displays all eight $A \leftrightarrow \bar{A}$ bivector bridges on the global pure state $\rho_{AB} = |\Psi\rangle\langle\Psi|$ of global rank $r_{\mathrm{global}} = 1$ and global entropy $S(\rho_{AB}) = 0\text{ bits}$ (comparing marginal blind spots against unitary preparation or extra-resource regimes is an interpretive `MODEL`; see [@rem-ch30-entanglement-entropy-complexity-literature]).
 :::
 
-## 4. Three Characteristic Orthogonal Angles $\theta \in \{0^\circ,\, \theta^* \approx 42.35^\circ,\, 90^\circ\}$ and the Living Observer Balance (`MODEL`)
+## 30.5.4 Three Characteristic Orthogonal Angles $\theta \in \{0^\circ,\, \theta^* \approx 42.35^\circ,\, 90^\circ\}$ and the Living Observer Balance (`MODEL`) {#4-three-characteristic-orthogonal-angles-θ0θ423590-and-the-living-observer-balance-model}
 
 Between $\theta = 0^\circ$ (an isolated classical product point with zero entanglement and zero marginal entropy) and $\theta = 90^\circ$ (the Bell horizon where local direction vanishes completely, $\|\mathbf{r}_A\| = 0$, into maximal $1\text{-bit}$ marginal fog), where does a finite living observer—who must simultaneously retain local memory orientation and sustain cross-boundary entanglement exchange—reside? In our orthogonal self-referential model (`MODEL`), that poised intermediate regime sits at the unique positive cosine fixed point $\cos\theta^* = \theta^* \approx 0.7391\text{ rad}$ ($42.35^\circ$) verified in Chapter 24 [@thm-dottie-rational-inverse-endpoint]: here the local Bloch length equals the Schmidt angle in radians itself ($\|\mathbf{r}_A\| = \cos\theta^* = \theta^*$), local determinacy $\|\mathbf{r}_A\|^2 \approx 0.5462$ and cross-cut 2-tangle $\tau = S_L \approx 0.4538$ (concurrence $\mathcal{C} = \sin\theta^* \approx 0.6736$) sum to $1$, and single-qubit von Neumann entropy stabilizes at $S_{\mathrm{vN}}(\rho_A) \approx 0.559\text{ bits}$ ($0.55869\text{ bits}$ to five decimals). The table below contrasts the three angles:
 

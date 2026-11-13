@@ -12,7 +12,7 @@
   const { kit, L } = TRV, { v3, fix } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
   const DEG = Math.PI / 180, BASIS = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
-  const AXIS = { z: [0, 0, 1], y: [0, 1, 0], x: [1, 0, 0] };
+  const AXIS = QG_ZYZ.AXIS;   // the sweep geometry is shared with film 007 (model.js, QG_ZYZ)
 
   /* ---------- Cl(3,0) on blade masks ---------- */
   const pop = (m) => (m & 1) + ((m >> 1) & 1) + ((m >> 2) & 1);
@@ -124,16 +124,13 @@
     let halfTag = false;
     if (live) {
       const u = AXIS[live.ax], f = share(t, k), w0 = apply(partial(k), S.v0), th = live.ang * f;
-      const c = v3.scale(u, v3.dot(w0, u)), r = v3.len(v3.sub(w0, c));
+      const sw = QG_ZYZ.sweep(w0, u, th, 3 * DEG), { c, r, fan, mid } = sw;
       if (v3.len(c) > 0.02) { st.line([0, 0, 0], c, { color: P.cyan, width: 3.2 * thick, alpha: 0.95, back: 0.6 }); st.dot(c, 3.6, P.cyan, { fade: false }); }
       if (r > 0.02) {
         st.circle(c, u, r, { color: P.magenta, width: 1 * thick, alpha: 0.55, dash: [4, 4], back: 0.3 });
-        const n = Math.max(2, Math.ceil(Math.abs(th) / (3 * DEG))), fan = [c];
-        for (let i = 0; i <= n; i++) fan.push(v3.add(c, v3.rot(v3.sub(w0, c), u, th * i / n)));
         if (Math.abs(th) > 1e-6) {
           st.poly(fan, { fill: P.magenta, alpha: 0.2 });
-          st.path(fan.slice(1), { color: P.magenta, width: 2 * thick, alpha: 0.95, back: 0.45 });
-          const mid = v3.add(c, v3.rot(v3.sub(w0, c), u, th / 2));
+          st.path(sw.arc, { color: P.magenta, width: 2 * thick, alpha: 0.95, back: 0.45 });
           st.line(c, mid, { color: P.magenta, width: 1 * thick, alpha: 0.7, dash: [3, 3], back: 0.4 });
           if (Math.abs(th) > 25 * DEG && !TRV.thumbMode) {
             const h = fix(Math.abs(th) / 2 / DEG, 1);
@@ -151,8 +148,7 @@
     if (S.fold && aa.n) {
       st.line(v3.scale(aa.n, -1.3), v3.scale(aa.n, 1.3), { color: P.violet, width: 2 * thick, alpha: 0.95, dash: [8, 5], back: 0.45 });
       st.tag('n', v3.scale(aa.n, 1.45), 'n', 'num c-vi', {});
-      const arc = [], m = Math.max(8, Math.ceil(aa.phi / (3 * DEG)));
-      for (let i = 0; i <= m; i++) arc.push(v3.rot(S.v0, aa.n, aa.phi * i / m));
+      const arc = QG_ZYZ.arcAbout(S.v0, aa.n, aa.phi, 3 * DEG);
       st.path(arc, { color: P.violet, width: 2 * thick, alpha: 0.9, dash: [5, 4], back: 0.4 });
     }
     // the road travelled and the start ring

@@ -523,7 +523,7 @@
   function layoutOf(W, H, words) {
     if (!words) return { mode: 'cover', solid: { x: W * 0.02, y: H * 0.08, w: W * 0.36, h: H * 0.84 }, table: { x: W * 0.4, y: H * 0.08, w: W * 0.33, h: H * 0.84 }, panel: { x: W * 0.76, y: H * 0.1, w: W * 0.21, h: H * 0.8 } };
     const stEl = $('stage');
-    stEl.classList.remove('legend-right');
+    stEl.classList.remove('legend-right');    // the legend is measured across the whole stage first (also in a frame that was wide)
     const st = stEl.getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
     if (compact()) {                          // a phone's cited figure: the ball as large as the width allows on the left,
       // the table over its side panel in the column on the right, between the title and the legend

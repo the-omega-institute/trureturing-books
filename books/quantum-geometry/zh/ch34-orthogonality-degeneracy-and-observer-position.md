@@ -1,4 +1,4 @@
-# 正交简并盲区：一次正交与两次正交如何反演观察者位置
+# 第三十四章 正交简并盲区：一次正交与两次正交如何反演观察者位置 {#正交简并盲区一次正交与两次正交如何反演观察者位置}
 
 > *“一次正交与两次正交结果相同, 恰恰反映了观察者的位置。”*
 
@@ -18,7 +18,7 @@
 
 ---
 
-## 球面寻址中的二次正交隐身：对称子午线与极点法向反演 {#sec-ch34-spherical-addressing-inversion}
+## 34.1 球面寻址中的二次正交隐身：对称子午线与极点法向反演 {#sec-ch34-spherical-addressing-inversion}
 
 ::: {.example #ex-ch34-spherical-addressing-preview title="平直地板斜边与单位球面两步正交寻址读数反演导览（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 下述欧氏平面勾股斜边对比与单位球面 $S^2 \subset \mathbb{R}^3$ 两步球坐标寻址的初等内积反演属经典欧氏几何结论（完整代数消元见下文 [@ex-ch34-spherical-addressing-and-octant-rotors] 第 1 部分），未作为独立连续球坐标引理包含在本书锁定的形式化声明集中：
@@ -88,7 +88,7 @@
 
 ---
 
-## 八分球面与旋子曲率：看不见哪块面积，你就站在哪根轴上 {#sec-ch34-octant-rotor-holonomy}
+## 34.2 八分球面与旋子曲率：看不见哪块面积，你就站在哪根轴上 {#sec-ch34-octant-rotor-holonomy}
 
 如果说球面点寻址还只是“静态向量投影”，那么当我们把目光投向图 34 第 II 栏的**八分球面正交回路模型（`MODEL`）**（一步路径与两步路径的旋子乘积、和乐差异与赤道测试态对比完整封装于下文归属算例 [@ex-ch34-spherical-addressing-and-octant-rotors] 第 2 部分，连续几何相位文献背景见 [@rem-ch34-virtual-z-berry-relativity-literature]）时，“一次正交 vs. 两次正交”的反演威力更会上升到**算子读出核与换位子盲区**的层面。
 
@@ -213,7 +213,7 @@
 
 ---
 
-## 从单平面、相对论同时面到六维黄金切片：普适观察者定位律 {#sec-ch34-universal-observer-localization}
+## 34.3 从单平面、相对论同时面到六维黄金切片：普适观察者定位律 {#sec-ch34-universal-observer-localization}
 
 一旦看破了“读数简并即法向站位”这道几何机关，我们便能跳出三维球面，把目光投向更广阔的时空度规与高维切投母格：在四维相对论时空中，观察者凭什么断定两件空间正交事件“发生在同一时刻”？在切投模型集几何（文献背景见[第三十二章](ch32-unified-field-and-meta-unification.md) [@rem-ch32-icosian-e8-literature]）中，物理观察者又凭什么锚定自身三维世界切片在六维超立方母格中的倾角？
 

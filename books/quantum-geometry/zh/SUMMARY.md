@@ -1,6 +1,6 @@
 # Summary
 
-[序曲：点、线、面、球，与球外的人](README.md)
+[序曲 点、线、面、球，与球外的人](README.md)
 
 # 第一部 破妄·从点到线：两子丈量与零冗余投影
 
@@ -49,18 +49,18 @@
 - [第二十五章 把矩阵还原为异或：3 比特刀片与 XOR–Pauli 几何代数引擎](ch25-rewriting-and-xor.md)
 - [第二十六章 单量子比特旋转器编译：布洛赫几何定理与 ZYZ 欧拉角编译器](ch26-single-qubit-rotor-compilation.md)
 - [第二十七章 走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录挤压](ch27-reading-frozen-proofs-i.md)
-- [第二十八章 走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到 $\psi = \psi(\psi)$ 的终极合拢](ch28-reading-frozen-proofs-ii.md)
+- [第二十八章 走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到未读不动点与 $\psi = \psi(\psi)$](ch28-reading-frozen-proofs-ii.md)
 
 # 第八部 贯通·无时间因果、复杂性视界、量子公平与元统一
 
 - [第二十九章 无时间因果与格拉姆相容空间：从毕达哥拉斯佩尔接缝到椭圆曲线环面](ch29-timeless-causality-and-gram-space.md)
 - [第三十章 场（$P$）与线（$NP$）：从指数时间假设（ETH）到纳维—斯托克斯涡丝](ch30-fields-lines-eth-and-navier-stokes.md)
-  - [全局静态时间场 $P = NP$ vs. 场内有限观察者 $P \neq NP$——正交视界与生命旅程的防火墙](ch30-s01-global-field.md)
-  - [“$P$ 是场，$NP$ 是线”——见证丝、导向场与毛球旋度的终极分野](ch30-s02-witness-lines.md)
-  - [指数时间假设（ETH）、2026 张量网络秩约分与宇宙学视界：上界曲线的尺度与诠释边界](ch30-s03-eth-and-horizons.md)
-  - [纳维—斯托克斯（Navier–Stokes）与 $P$ vs. $NP$ 的场化类比——兰姆双向量、三维涡管拉伸与阿诺德测地线](ch30-s04-navier-stokes.md)
-  - [“量子纠缠、P=NP、熵”——偏迹视界、勾股守恒与张量割键维的正交三位一体](ch30-s05-entanglement-and-entropy.md)
-  - [本章小结：离散逻辑场与连续流体场的正交合龙](ch30-s06-summary.md)
+  - [30.1 全局静态时间场 $P = NP$ vs. 场内有限观察者 $P \neq NP$——正交视界与生命旅程的防火墙](ch30-s01-global-field.md)
+  - [30.2 “$P$ 是场，$NP$ 是线”——见证丝、导向场与毛球旋度的终极分野](ch30-s02-witness-lines.md)
+  - [30.3 指数时间假设（ETH）、2026 张量网络秩约分与宇宙学视界：上界曲线的尺度与诠释边界](ch30-s03-eth-and-horizons.md)
+  - [30.4 纳维—斯托克斯（Navier–Stokes）与 $P$ vs. $NP$ 的场化类比——兰姆双向量、三维涡管拉伸与阿诺德测地线](ch30-s04-navier-stokes.md)
+  - [30.5 “量子纠缠、P=NP、熵”——偏迹视界、勾股守恒与张量割键维的正交三位一体](ch30-s05-entanglement-and-entropy.md)
+  - [30.6 本章小结：离散逻辑场与连续流体场的正交合龙](ch30-s06-summary.md)
 - [第三十一章 量子的本质是公平：五重几何特权的废除与遍历统计全息](ch31-quantum-fairness.md)
 - [第三十二章 正交自指统一场与万流归宗：人类大一统纲领的元统一](ch32-unified-field-and-meta-unification.md)
 
@@ -79,8 +79,8 @@
 
 # 终章与附录
 
-- [终章：在所有的球之外](coda.md)
-- [附录 A：传统量子力学与几何语言对照词典](appendix-a.md)
-- [附录 B：克利福德代数速查手册](appendix-b.md)
-- [附录 C：trureturing 锁定声明完整索引](appendix-c.md)
-- [附录 D：量子力学六大经典未解问题与五大诠释几何对决](appendix-d.md)
+- [终章 在所有的球之外](coda.md)
+- [附录 A 传统量子力学与几何语言对照词典](appendix-a.md)
+- [附录 B 克利福德代数速查手册](appendix-b.md)
+- [附录 C Lean 4 形式化定理总索引与开放问题台账](appendix-c.md)
+- [附录 D 量子力学六大经典未解问题与五大诠释几何对决](appendix-d.md)

@@ -18,7 +18,9 @@
               Clifford algebra Cl(3, 0); then the squaring double cover of the circle and its lift w = e^{iϑ/2}
               (CircleDoubleCoverHistoryLift.circle_double_cover_history_lift: the lift of the full turn from 1 is
               unique and ends at −1, thm-ch39-double-cover-no-section-and-720-lift). The second turn back to +1 is
-              computed here.
+              computed here. The cover is drawn as a solid: the one-sided band of the lab page
+              self-sustaining-spinor-flow, from the same model (viz/self-sustaining-spinor-flow/model.js), its centre
+              line the circle of z and the flag of ψ the lift w; labels fade where the band hides their point.
      SEAM     square roots chosen continuously every 30° (each the root nearest the last) come back reversed:
               CircleDoubleCoverNoSection.no_continuous_global_section (same theorem box of chapter 39).
    On load, FILM.init recomputes every number printed on screen and checks the citations; any disagreement is pushed
@@ -484,44 +486,57 @@ function ptTheta(S) {
   const k3 = ease(clamp((S.u - L3.s - 0.1) / Math.max(1, L3.e - L3.s + 0.2)));
   return 360 * k1 + 360 * k3;
 }
-/* the cover drawn as a (2, 1) torus curve over the base circle: angle s ∈ [0, 4π) is w = e^{is/2} over z = e^{is} */
-const PT_CV = { cx: 1360, cy: 720, R: 260, k: 0.28, r: 60, H: 200 };
-function ptBase(s) { return [PT_CV.cx + PT_CV.R * Math.cos(s), PT_CV.cy + PT_CV.R * Math.sin(s) * PT_CV.k]; }
-function ptCover(s) {
-  const rad = PT_CV.R + PT_CV.r * Math.cos(s / 2), h = PT_CV.H + PT_CV.r * Math.sin(s / 2);
-  return [PT_CV.cx + rad * Math.cos(s), PT_CV.cy + rad * Math.sin(s) * PT_CV.k - h];
+/* The double cover as a solid: the one-sided band of the lab page self-sustaining-spinor-flow, drawn by the same model
+   (viz/self-sustaining-spinor-flow/model.js, QG_SPINOR_BAND). The band is laid level (the page's e₁e₂ plane, axis
+   n = e₃) and starts at the front, so its centre line at bearing a₀ + ϑ is the circle of z = e^{iϑ} (cyan) and the flag
+   of ψ planted there runs along w = cos(ϑ/2) n + sin(ϑ/2) r, the lift w = e^{iϑ/2}: up at the start (w = +1), down
+   over the same point after 360° (w = −1), up again after 720°. */
+const PT_PL = { a: [1, 0, 0], b: [0, 1, 0], n: [0, 0, 1] }, PT_A0 = -1.5;
+const PT_BAND_VIEW = { yaw: -0.6, pitch: 0.42 };
+/* the band shot in the rectangle r = { x, y, w, h, unit } at the lift angle th (degrees); returns the 2D anchors */
+function ptBandShot(key, r, a, th) {
+  const B = QG_SPINOR_BAND, t = Math.min(th * PT_DEG, 2 * TAU - 1e-9);
+  const sh = solid(key, Object.assign({}, PT_BAND_VIEW, r));
+  sh.begin();
+  B.draw(sh, PT_PL, PT_A0, 0, { color: C.vio, grid: { every: [4, 2] } });
+  /* the circle of z: the band's centre line, a cyan tube a little thicker than the slab, seen on either face */
+  const base = [];
+  for (let i = 0; i <= 120; i++) base.push(B.frame(PT_PL, TAU * i / 120, PT_A0).c);
+  sh.tube('base', base, { color: C.cyan, r: B.TH * 1.3, glow: 0.45 });
+  sh.line([[0, 0, -1.1], [0, 0, 1.1]], { color: C.dim, width: 1.4, alpha: 0.7, dash: [8, 6] });
+  /* the edge the flag's tip has run along (solid) and still has to run along (dashed) */
+  const edge = u => B.edgeAt(PT_PL, Math.min(u, 2 * TAU - 1e-9), PT_A0, 0, 0.012).p;
+  if (t > 1e-3) { const tr = [], k = Math.max(2, Math.ceil(t / (2 * PT_DEG))); for (let j = 0; j <= k; j++) tr.push(edge(t * j / k)); sh.tube('trail', tr, { color: C.argued, width: 5, glow: 1.1 }); }
+  if (t < 2 * TAU - 1e-3) { const rest = [], k = Math.max(2, Math.ceil((2 * TAU - t) / (2 * PT_DEG))); for (let j = 0; j <= k; j++) rest.push(edge(t + (2 * TAU - t) * j / k)); sh.line(rest, { color: C.argued, width: 1.6, alpha: 0.55, dash: [4, 6] }); }
+  /* the flags of ψ: at the start (dashed) and now */
+  const f0 = t > 0.05 ? B.flag(sh, PT_PL, 0, PT_A0, 0, { color: C.argued, width: 2.6, dash: [6, 5] }) : null;
+  const f = B.flag(sh, PT_PL, t, PT_A0, 0, { color: C.argued, width: 4 });
+  /* the two points over z = 1, the point z = w² now, and the tip of the lift now */
+  const plus = B.edgeAt(PT_PL, 0, PT_A0, 0, 0.05).p, minus = B.edgeAt(PT_PL, TAU, PT_A0, 0, 0.05).p;
+  sh.bead(plus, { color: C.white, r: 6 }); sh.bead(minus, { color: C.white, r: 6 });
+  const z = B.frame(PT_PL, t, PT_A0).c, tip = B.edgeAt(PT_PL, t, PT_A0, 0, 0.03).p;
+  sh.bead(z, { color: C.cyan, r: 8 });
+  sh.bead(tip, { color: C.now, r: 9 });
+  sh.end(a);
+  /* z lies inside the slab, on the cyan tube: hidden only when another part of the band is in front of it */
+  return { sh, f0, f, plus: sh.anchor(plus), minus: sh.anchor(minus), z: sh.anchor(z, 0.12), tip: sh.anchor(tip) };
 }
-function ptCoverDraw(a, th) {
-  /* base circle (cyan: where z = e^{iϑ}, the direction of J, can be) */
-  curve(t => ptBase(TAU * t), 96, C.cyan, 0.7 * a, 2);
-  /* the whole cover, faint violet, front brighter */
-  for (let i = 0; i < 160; i++) {
-    const s0 = 2 * TAU * i / 160, s1 = 2 * TAU * (i + 1) / 160, front = Math.sin((s0 + s1) / 2) > 0;
-    const p = ptCover(s0), q = ptCover(s1);
-    line(p[0], p[1], q[0], q[1], C.argued, a * (front ? 0.45 : 0.2), 2);
-  }
-  /* the lift travelled so far, bright violet */
-  const s = th * PT_DEG;
-  if (s > 0.01) curve(t => ptCover(s * t), Math.max(8, Math.ceil(th / 4)), C.argued, a, 4);
-  /* the two points over z = 1 */
-  const pP = ptCover(0), pM = ptCover(TAU);
-  dot(pP[0], pP[1], 9, 'w', a); dot(pM[0], pM[1], 9, 'w', a);
-  txt('w = +1', pP[0] + 22, pP[1] - 6, { size: 24, fam: F.math, w: 700, c: C.white, a });
-  txt('w = −1', pM[0] - 120, pM[1] + 10, { size: 24, fam: F.math, w: 700, c: C.white, a });
-  /* the current point and its square */
-  const w = ptCover(s), z = ptBase(s);
-  dashed(w[0], w[1], z[0], z[1], C.dim, 0.8 * a, 1.6);
-  dot(z[0], z[1], 13, 'c', a);
-  dot(w[0], w[1], 15, 'g', a);
-  txt('z = w²', z[0] + 20, z[1] + 34, { size: 24, fam: F.math, w: 700, c: C.cyan, a });
-  txt('square · 平方', PT_CV.cx - PT_CV.R - 90, PT_CV.cy - PT_CV.H / 2, { size: 20, fam: F.zh, w: 700, c: C.dim, a });
-  arrow(PT_CV.cx - PT_CV.R - 30, PT_CV.cy - PT_CV.H + 40, PT_CV.cx - PT_CV.R - 30, PT_CV.cy - 30, C.dim, a * 0.8, 2);
+/* the 2D labels of the band shot, faded where the band hides their point */
+function ptBandLabels(B, a) {
+  if (a <= 0) return;
+  const vis = q => (q.hidden ? 0.35 : 1);
+  txt('w = +1', B.plus.x - 22, B.plus.y - 6, { size: 24, fam: F.math, w: 700, align: 'right', c: C.white, a: a * vis(B.plus) });
+  txt('w = −1', B.minus.x - 22, B.minus.y + 20, { size: 24, fam: F.math, w: 700, align: 'right', c: C.white, a: a * vis(B.minus) });
+  txt('z = w²', B.z.x + 22, B.z.y + 34, { size: 24, fam: F.math, w: 700, c: C.cyan, a: a * vis(B.z) });
 }
 SCENES.turn = S => {
   const u = S.u, a = clamp(u / 0.5) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [2, 'Lift one full turn', 'lean'], [3, null, 'computed']]);
   const th = ptTheta(S), t = th * PT_DEG;
+  /* right, first (the 2D labels go on top): the band, the circle of z and the flag of ψ */
+  const ab = a * Q(S, 0, 'turn a spinor', 0.8);
+  const band = ab > 0.003 ? ptBandShot('band', { x: 960, y: 380, w: 860, h: 470, unit: 172 }, ab, th) : null;
   /* left: the e₂e₃ plane and the current J = cos ϑ e₃ − sin ϑ e₂ (Cl(3, 0), recomputed every frame) */
   const cx = 430, cy = 520, R = 220, J = CL.J(t);
   ring(cx, cy, R, C.cyan, 0.35 * a, 1.5);
@@ -538,8 +553,7 @@ SCENES.turn = S => {
   ptTag(120, 228, 'LITERATURE · 文献结果', a);
   ptTag(120, 278, 'MODEL · 模型诠释', a * (1 - Q(S, 1, 'The vector J', 0.5)));
 
-  /* right: the cover */
-  ptCoverDraw(a * Q(S, 0, 'turn a spinor', 0.8), th);
+  if (band) ptBandLabels(band, ab);
   /* readouts */
   const rx = 960, ry = 205;
   const c2 = Math.cos(t / 2), jUp = Math.cos(t);
@@ -617,11 +631,8 @@ FILM.poster = () => {
   const t = 60.0, si = 3;
   background(t, TL.scenes[si], si, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.3, a: 0.16, cx: 1360, cy: 420, camZ: 7, lw: 1.3, dots: false });
-  /* the cover with half a lift drawn, under the title */
-  const keep = Object.assign({}, PT_CV);
-  Object.assign(PT_CV, { cx: 560, cy: 820, R: 250, r: 56, H: 200 });
-  ptCoverDraw(1, 300);
-  Object.assign(PT_CV, keep);
+  /* the band with most of a first turn of the lift drawn, under the title */
+  ptBandLabels(ptBandShot('poster', { x: 120, y: 520, w: 880, h: 440, unit: 168 }, 1, 300), 1);
   /* the self-mapped directory */
   const keepP = PT_LAY[0x1000];
   PT_LAY[0x1000] = { x: 1340, y: 560, name: 'P' };
