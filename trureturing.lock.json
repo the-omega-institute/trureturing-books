@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "9b6270e9795ed74542ab38e06a271f706174239c",
-  "pinned_at": "2026-11-12T21:13:23Z",
+  "commit": "3b3ab5883295803c705670de0d118219db346f94",
+  "pinned_at": "2026-11-12T23:59:58Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -3453,6 +3453,54 @@
       "line": 22,
       "signature": "theorem inner_product_norm_parallelogram_law {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (x y : E) : ‖x + y‖ ^ 2 + ‖x - y‖ ^ 2 = 2 * (‖x‖ ^ 2 + ‖y‖ ^ 2)"
     },
+    "D5/S3/QuantumContext/ThreeAnchorGram.threeAnchorGram": {
+      "module": "D5/S3/QuantumContext/ThreeAnchorGram",
+      "name": "D5.S3.QuantumContext.ThreeAnchorGram.threeAnchorGram",
+      "kind": "def",
+      "statement_id": "sha256:5382fe3c8588b957db5e4a18e2cb9472114976d2d28d9fccbe743483c9ced0e0",
+      "line": 20,
+      "signature": "def threeAnchorGram {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v w : E) : Matrix (Fin 3) (Fin 3) ℝ"
+    },
+    "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula": {
+      "module": "D5/S3/QuantumContext/ThreeAnchorGram",
+      "name": "D5.S3.QuantumContext.ThreeAnchorGram.three_anchor_gram_det_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:5382fe3c8588b957db5e4a18e2cb9472114976d2d28d9fccbe743483c9ced0e0",
+      "line": 25,
+      "signature": "theorem three_anchor_gram_det_formula {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v w : E) : (threeAnchorGram u v w).det = ‖u‖ ^ 2 * ‖v‖ ^ 2 * ‖w‖ ^ 2 + 2 * ⟪u, v⟫_ℝ * ⟪u, w⟫_ℝ * ⟪v, w⟫_ℝ - ‖u‖ ^ 2 * ⟪v, w⟫_ℝ ^ 2 - ‖v‖ ^ 2 * ⟪u, w⟫_ℝ ^ 2 - ‖w‖ ^ 2 * ⟪u, v⟫_ℝ ^ 2"
+    },
+    "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff": {
+      "module": "D5/S3/QuantumContext/ThreeAnchorGram",
+      "name": "D5.S3.QuantumContext.ThreeAnchorGram.three_anchor_gram_det_pos_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:5382fe3c8588b957db5e4a18e2cb9472114976d2d28d9fccbe743483c9ced0e0",
+      "line": 38,
+      "signature": "theorem three_anchor_gram_det_pos_iff {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v w : E) : 0 < (threeAnchorGram u v w).det ↔ LinearIndependent ℝ ![u, v, w]"
+    },
+    "D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.twoAnchorGram",
+      "kind": "def",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 18,
+      "signature": "def twoAnchorGram {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : Matrix (Fin 2) (Fin 2) ℝ"
+    },
+    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 23,
+      "signature": "theorem two_anchor_gram_det_formula {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : (twoAnchorGram u v).det = ‖u‖ ^ 2 * ‖v‖ ^ 2 - (⟪u, v⟫_ℝ) ^ 2"
+    },
+    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_pos_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 31,
+      "signature": "theorem two_anchor_gram_det_pos_iff {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : 0 < (twoAnchorGram u v).det ↔ LinearIndependent ℝ ![u, v]"
+    },
     "D5/S3/QuantumStates/PhaseLockedOverlap.phase_locked_overlap_is_rotated_real": {
       "module": "D5/S3/QuantumStates/PhaseLockedOverlap",
       "name": "D5.S3.QuantumStates.PhaseLockedOverlap.phase_locked_overlap_is_rotated_real",
@@ -3868,30 +3916,6 @@
       "statement_id": "sha256:d42c4a0a6d7c0e9779156a97b715482e15a2795cac7aabc19ec834f7af06ef2e",
       "line": 25,
       "signature": "theorem riemann_zeta_dirichlet_sum_eq_euler_product (s : ℂ) (hs : 1 < s.re) : (∑' n : ℕ, (n : ℂ) ^ (-s)) = ∏' p : Nat.Primes, (1 - (p : ℂ) ^ (-s))⁻¹"
-    },
-    "D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram": {
-      "module": "D5/S3/QuantumContext/TwoAnchorGram",
-      "name": "D5.S3.QuantumContext.TwoAnchorGram.twoAnchorGram",
-      "kind": "def",
-      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
-      "line": 18,
-      "signature": "def twoAnchorGram {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : Matrix (Fin 2) (Fin 2) ℝ"
-    },
-    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula": {
-      "module": "D5/S3/QuantumContext/TwoAnchorGram",
-      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_formula",
-      "kind": "theorem",
-      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
-      "line": 23,
-      "signature": "theorem two_anchor_gram_det_formula {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : (twoAnchorGram u v).det = ‖u‖ ^ 2 * ‖v‖ ^ 2 - (⟪u, v⟫_ℝ) ^ 2"
-    },
-    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff": {
-      "module": "D5/S3/QuantumContext/TwoAnchorGram",
-      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_pos_iff",
-      "kind": "theorem",
-      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
-      "line": 31,
-      "signature": "theorem two_anchor_gram_det_pos_iff {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : 0 < (twoAnchorGram u v).det ↔ LinearIndependent ℝ ![u, v]"
     }
   }
 }

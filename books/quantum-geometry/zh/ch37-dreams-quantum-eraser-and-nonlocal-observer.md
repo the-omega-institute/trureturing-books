@@ -103,8 +103,8 @@ $$
 
 当入睡后的心智暂时挂起若干条白天严防死守的刚性约束行（例如暂时遗忘“此刻身在何年”“两座城市相隔千里”“某位故人早已远行”），留存约束的相容几何与跨层寻址走廊将发生怎样的重构？下面的归属算例给出了三阶与二阶格拉姆主子式及反事实斜切的显式推演：
 
-::: {.example #ex-ch37-gram-constraint-release title="局部约束卸载扩增格拉姆相容行列式与反事实斜切走廊的三阶显式算例（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下述三阶与二阶单位对角格拉姆行列式展开及主子式平方和差值恒等式属标准初等线性代数结果（与[第 29 章](ch29-timeless-causality-and-gram-space.md#sec-coda-hume-spinoza-gram) [@thm-ch29-gram-rigidity-and-pell] 对齐），未作为独立三阶主子式定理包含在本书锁定的形式化声明集中：
+::: {.example #ex-ch37-gram-constraint-release title="局部约束卸载扩增格拉姆相容行列式与反事实斜切走廊的三阶显式算例（已形式化）" lean="D5/S3/QuantumContext/ThreeAnchorGram.threeAnchorGram D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"}
+**已形式化。** `trureturing@dev` 已冻结三锚点格拉姆矩阵、其行列式展开，以及行列式严格为正当且仅当三向量线性无关的精确声明（[`threeAnchorGram`](lean:D5/S3/QuantumContext/ThreeAnchorGram.threeAnchorGram)、[`three_anchor_gram_det_formula`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula)、[`three_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff)）。下述走廊数值是单位锚点与 $c_{12}=x_1=4/5$ 的特例；Lean 覆盖格拉姆恒等式与独立性判据，梦境诠释仍属于模型应用。
 
 考虑实内积空间中三条归一化向量构成的相容性测试：记 $\mathbf{u}_1$ 为观察者的“深层情感相位锚”（$\lVert\mathbf{u}_1\rVert = 1$），$\mathbf{u}_2$ 为白天的“物理时空连续性刚性锚”（$\lVert\mathbf{u}_2\rVert = 1$），二者在日常经验中高度绑定，内积重叠为 $c_{12} = \langle\mathbf{u}_1, \mathbf{u}_2\rangle = \frac{4}{5} = 0.8$；另记候选体验态 $\mathbf{v}$（$\lVert\mathbf{v}\rVert = 1$）与两枚锚点的内积分别为 $x_1 = \langle\mathbf{u}_1, \mathbf{v}\rangle$ 与 $x_2 = \langle\mathbf{u}_2, \mathbf{v}\rangle$。
 
@@ -134,7 +134,7 @@ $$
 :::
 
 ::: {.figure src="ch37-constraint-release"}
-**挂起时空锚 $\mathbf{u}_2$，相容行列式从 $0.104$ 升到 $0.36$，且不再含 $x_2$。** 取 $c_{12} = x_1 = \frac{4}{5}$：墨色的抛物线是三锚俱在时的 $\det G_3$，只在 $x_2 \in [0.28, 1]$ 的清醒窄窗里不小于 $0$（圆点是 $x_2 = 0.8$ 处的 $0.104$），在 $x_2 = 0$ 处为 $-0.28$，被打叉；青色的水平虚线是挂起 $\mathbf{u}_2$ 后只剩 $\mathbf{u}_1$ 与 $\mathbf{v}$ 的 $\det G_2 = 0.36$，青色箭头是这一步跃升。挂起只是让 $x_2$ 退出约束，$x_2 = 0$ 的三元组仍不是可实现的格拉姆矩阵，所以那个叉还在。初等线性代数，文献结果，未在本书形式化，见 [@ex-ch37-gram-constraint-release]。
+**挂起时空锚 $\mathbf{u}_2$，相容行列式从 $0.104$ 升到 $0.36$，且不再含 $x_2$。** 取 $c_{12} = x_1 = \frac{4}{5}$：墨色的抛物线是三锚俱在时的 $\det G_3$，只在 $x_2 \in [0.28, 1]$ 的清醒窄窗里不小于 $0$（圆点是 $x_2 = 0.8$ 处的 $0.104$），在 $x_2 = 0$ 处为 $-0.28$，被打叉；青色的水平虚线是挂起 $\mathbf{u}_2$ 后只剩 $\mathbf{u}_1$ 与 $\mathbf{v}$ 的 $\det G_2 = 0.36$，青色箭头是这一步跃升。挂起只是让 $x_2$ 退出约束，$x_2 = 0$ 的三元组仍不是可实现的格拉姆矩阵，所以那个叉还在。行列式恒等式与正性边界由 [@ex-ch37-gram-constraint-release] 的三锚点冻结声明覆盖，图中数值是本章的应用。
 :::
 
 [@ex-ch37-gram-constraint-release] 一下子解开了梦境最迷人的结构之谜：梦里的荒诞拼贴绝不是杂乱无章的故障，而是当编年史坐标 $\mathbf{u}_2$ 退隐后，切片超平面改按**内禀情感与结构同构相位 $x_1$** 执行斜向跨层寻址——十年前的老街、千里外的面孔与白天未曾选中的 $\sin\theta$ 人生岔路，因为共享同一组内禀相位而在同一个梦境切片里重逢！
