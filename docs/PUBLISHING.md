@@ -10,7 +10,7 @@
 | PDF 学术预印本版（A4 单栏） | `./tbook build pdf --variant academic`（书中须先启用） | `build/dist/<slug>/<slug>-<version>-<lang>-academic.pdf` |
 | EPUB 3（Apple Books） | `./tbook build epub` | `build/dist/<slug>/<slug>-<version>-<lang>.epub` |
 | 演示文稿 | `./tbook build slides` | `build/slides/<slug>/`（PDF：`<deck>-<lang>.pdf`） |
-| 视频 | `./tbook build films` | `build/films/<slug>/<film id>/`（`film.json` 的 `outputs` 所列文件），并重新发布到已有站点的 `_site/<slug>/films/` |
+| 视频 | `./tbook build films`（`--film <NNN>-<name>` 只渲染这几部） | `build/films/<slug>/<film id>/`（`film.json` 的 `outputs` 所列文件），并重新发布到已有站点的 `_site/<slug>/films/` |
 | 可视化 | `./tbook build viz` | 重新发布到已有的 `_site/<slug>/viz/`（`viz`、`films` 加 `--book` 只重发选定的书，首页与 manifest 保留其他书） |
 | 站点（含可视化、视频） | `./tbook build site` | `_site/` |
 | 全部 | `./tbook build all` | 以上全部 |
@@ -135,3 +135,18 @@ tag（标签）是给某一个提交起的固定名字。分支（如 `main`）�
 - 不要在 GitHub 网页上用 “Draft a new release” 建发布。那样会先发布一个没有附件的 Release，随后运行的工作流遇到已发布的 Release 只更新标题与说明，PDF 与缓存文件就附不上去。
 - tag 打错了（名字或提交不对）而 Release 还没发布时，删掉重打：`git push origin :refs/tags/<tag>` 删除远端 tag，`git tag -d <tag>` 删除本地 tag，并在 Releases 页删除留下的草稿。已发布的版本不要复用 tag，发一个新的补丁版本。
 - 推送 tag 需要对仓库有写权限；只能推送分支的环境（例如受限的自动化会话）推不了 tag，由有权限的人推送。
+
+## 7. 学术报告 PDF
+
+`./tbook build slides --book <slug>` 同时构建 Slidev 与学术演示稿。后者用固定 **Tectonic 0.16.9** 与 `default_bundle_v33.tar`，输出 `build/slides/<slug>/<deck>-<lang>.pdf`（听众版，隐藏备注）和 `<deck>-<lang>-notes.pdf`（报告页与演讲备注）。站点在 `<slug>/slides/<deck>/` 下发布两个下载文件与按语言的 PDF 入口页；幻灯片索引、书的落地页与章节卡片包含两种链接，书库 Release 附上两种 PDF。`TBOOK_SLIDES_NO_PDF`/`NO_CHECK` 仍只控制 Slidev 的浏览器导出。
+
+引擎由 `./tbook doctor` 核对精确版本，Linux 安装脚本 `tools/install-tectonic.sh DESTINATION` 校验发布包 SHA-256；容器预装引擎与需要的 TeX 资源，普通托管运行器只在包含学术稿配置的媒体/浏览器作业中安装到本地缓存目录。默认运行器与现有必需检查保持不变。引擎、资源包、固定时间基准、书的章节/图件/可视化、主题与自有主题文件均进入幻灯片缓存键。构建的可复现设置和冷启动联网要求见 [Beamer 说明](../theme/beamer/README.md)。本地可以用 `TECTONIC` 指向已有的同版本引擎。
+
+## 8. 站点构建后命令
+
+书库可在自有的 `site.toml` 中设置 `[site].post_build = ["python3", "docs/project/site.py"]`。
+站点成功组装后（包括只更新媒体的情况），构建工具在仓库根目录直接执行这个参数数组，
+不经过 shell。环境变量 `TBOOK_SITE_OUT` 指向已组装输出目录的绝对路径。
+命令以非零状态退出时构建失败，Pages 不会部署这份产物。
+该命令与构建过程一样，属于受信任的仓库代码，可以生成书库特有的清单，
+或把书库索引替换为跳转页，同时保留各书的目录与现有 URL。仅在显式配置时执行。

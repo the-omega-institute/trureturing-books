@@ -1340,3 +1340,25 @@ EPUB、EPUBCheck 与 PDF 阅读尺度子集未完成：本次可用的命名系�
 
 
 第37–39章既有原生输出补完已收齐：六PDF／两EPUB构建通过、EPUBCheck均0／0、受影响实际页与静帧已查看，原生阅读器、字体／横向溢出与实验室布局限制保留。结果归属冻结输入45687dfb，不称新主线整书验收。PR210已正常整合main75fb，唯一台账追加冲突保留双方；正式pin9b6270e9／486项，26条相关正文锁记录不变。首次三席、当前CI／合入／Pages仍待；详见[三项修订记录](CONTENT-ACCURACY-CH37-CH39-20261113.md)。
+
+
+## 2026-11-13：模板 0.8.2 的受支持采纳（源码验证）
+
+输入为主线 `13dfca931d4060ac2b6a4863038e1c2f1ced91d1`，工作分支 `template-update/0.8.2-accuracy-20261113`；当前每语45单元、549项声明，pin `3b3ab5883295803c705670de0d118219db346f94`／dev 保持不变。读取全部目标修订与跨版说明后，先运行 `./tbook template update --dry-run --to v0.8.2`，再仅执行一次同目标的受支持更新。正式发布对应 `85e533c20bad105dbb6999b2919bda2a6ddcb1d1`：新增20、更新83、删除0、冲突0，无迁移或自有内容迁移。全部241项托管清单逐项核对发布源码的摘要、种类、权限与符号链接，版本及清单文件也逐字节相同。保留0.8.0全部工具变化、0.8.1的 pikepdf／QPDF 无损对象与 Flate 流压缩，以及0.8.2在保留适宽逻辑下设置行内数学字形上下边界的修复；未手改托管文件。
+
+工具全套单元测试一次运行：1074 tests，`OK (skipped=112)`，0失败／0错误；跳过涉及隐藏示例、浏览器／幻灯片依赖、外部源码 checkout 与平台条件。编译器启用的 PDF 数学20项与版式6项包含中英文 Example 22.27 分式字形边界、320／180 pt 窄宽度与既有适宽行为；这些是合成夹具，不是本书实际页面验收。逐例记录器漏收了多行说明及类初始化跳过行，保留官方总数与该限制；分式夹具的通过由完整成功运行、同类其余五项的明确通过和该方法无跳过路径对应，未重复测试。任务局部 Python 环境使用 Typst 包0.15.2（嵌入引擎0.15.1）、Pandoc 3.9、pikepdf 10.0.2／QPDF 12.2.0；Pandoc wheel 的二进制架构不适用，改用已存在 ARM64 3.9 的任务局部副本。KaTeX与字体包只读复用并核对版本；无全局安装或设置修改。
+
+`template status` 一致；`doctor` 退出0，0项必需依赖缺失、7项可选缺失（根目录虚拟环境、幻灯片／浏览器／Tectonic及字体）。最终环境下新鲜 `./tbook check` 退出1：6错误／15警告。六张自有SVG过期：`ch20-overview`、`ch20-parity-labels`、`ch32-quarter-turns` 各中英文；升级说明中的重出义务保留，本次额度不允许重出或修改。旧9警告为未引用 prelude-parts 与八部影片的历史 subject_commit；新增6警告为 eth-horizon-crossover:275、blade-multiplication:294／311／315 的绿色勾号，dream-pre-decoherence-deja-vu:104 的依据类名，以及影片006 scenes.js:485 的短语定位。0.8.0相邻两媒体即报警的规则已读，本次实际相邻媒体警告为0；未为消警告改段落或移动媒体。`git diff --check` 通过。
+
+本次仅留下未提交的受支持更新及本段追加；自有书文、题记、站点、锁、SUMMARY与本地准确性技能保持字节不变，旧账本前缀保全。源码更新额度总1／已用1／剩余0，实际书籍导出、媒体制作、浏览器媒体检查与新增审查均为0；最终整书输出采纳保留1未用。六项源码校验错误仍阻塞零错误交付；调用方仍负责有限后续处理、独立下游审查、当前实际受影响双语academic PDF阅读，以及CI／PR／合入／Pages生命周期。旧PR211／214／220／226／227缺口与已耗额度不重置；不据夹具或模板示例产物宣布本书PDF像素、内容或整书准确性通过。
+
+
+## 2026-11-13：六张自有静态图的受支持重出（源码与浏览器画面）
+
+本次限定 followup 绑定主线 `13dfca931d4060ac2b6a4863038e1c2f1ced91d1`、模板发布 `v0.8.2`（`85e533c20bad105dbb6999b2919bda2a6ddcb1d1`）及其现有三个生产器 `ch20-overview.py`、`ch20-parity-labels.py`、`ch32-quarter-turns.py`。按 `skills/book-figure` 仅运行标准命令重出中英文六个 SVG；没有手改 SVG、生产器、正文、图注、颜色角色、公式或标签。六个文件均为完整 XML；对比重出前字节，文字序列与几何属性保持不变，唯一内容差异是发布版画图库把 Lean 徽章中的 Unicode 减号包入正文无衬线字体 `tspan`，以保持减号的字形，语义与版式意图不变。逐文件前后 SHA-256、XML 元素／文字／几何／样式摘要见任务证据根的 `svg-delta.json`。
+
+`./tbook fig build --book quantum-geometry --check` 报告 212 张图、0 过期、0 错误；随后新鲜 `./tbook check` 退出 0，0 错误、15 条警告。9 条旧警告仍是未引用 `prelude-parts` 与八部影片的历史 `subject_commit`；6 条新增警告仍逐条保留在 `eth-horizon-crossover:275`、`blade-multiplication:294/311/315`、`dream-pre-decoherence-deja-vu:104` 与 `films/006-sphere-beyond-spheres/scenes.js:485`，本次没有静音、移动或改写它们。
+
+按 `./tbook fig shots` 生成并实际查看了中英文各三图的 dark、light、phone、print 四种 live SVG/Chromium 画面，共 24 个单图画面（证据根 `fig-shots/`）。22 个画面文字、线条、颜色角色和主体清楚；中英文 `ch20-parity-labels` 的 print 画面各有同一既有生产器边界：右栏标题与绿色徽章在画布右缘被截断。该限制已记录，未以任意布局或字体修补掩盖。手机最小标签由 `fig list` 给出：`ch20-overview` 12.0 px、`ch20-parity-labels` 12.5 px、`ch32-quarter-turns` 10.6 px。浏览器画面不是实际 HTML/PDF/EPUB/native 书籍导出；本次实际书籍导出、原生阅读器与下游独立审查仍待调用方完成。
+
+画面运行时为任务局部只读复用的 Playwright Chromium（`--use-angle=swiftshader`）；`fig-shots` 注入并加载 `@fontsource/noto-sans-sc`（400/500/700）与 `@fontsource/jetbrains-mono`（400/600），SVG 声明的其余 CJK／等宽候选作为 fallback 保留，未修改全局字体或设置。完整 2166 项显式输入清单无缺项、无增删；除上述六个 SVG 外，其余清单 SHA／种类／链接目标保持，发布托管对应仍以既有 `caller-source-published-conservation.json` 为准。旧 PDF Example 22.27 分式碰撞、受影响 HTML/PDF/EPUB/native 输出、独立下游审查、CI/PR 合入与 Pages 仍未结；本段不构成整书批准。
