@@ -21,6 +21,10 @@
   "lean": [
     "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
   ],
+  "solid": true,
+  "scripts": [
+    "viz/forgetting-rebirth-attractor/model.js"
+  ],
   "outputs": {
     "narrated_720p": "quantum-geometry_009_720p_narrated.mp4",
     "cover": "quantum-geometry_009_cover.jpg"

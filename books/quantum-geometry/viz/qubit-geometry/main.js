@@ -10,7 +10,7 @@
   const DEG = Math.PI / 180;
 
   /* ---------- model ---------- */
-  const AXES = { x: [1, 0, 0], y: [0, 1, 0], z: [0, 0, 1], h: [Math.SQRT1_2, 0, Math.SQRT1_2] };
+  const AXES = QG_QUBIT.AXES;   // shared with film 001 (model.js)
   const AXIS_NAME = { x: 'x̂', y: 'ŷ', z: 'ẑ', h: 'ĥ' };
   const GATES = { X: ['x', 180], Y: ['y', 180], Z: ['z', 180], H: ['h', 180], S: ['z', 90], T: ['z', 45] };
   const PERP = { z: [[1, 0, 0], [0, 1, 0]], x: [[0, 1, 0], [0, 0, 1]], y: [[0, 0, 1], [1, 0, 0]] };   // fringe-phase frame about A
@@ -41,7 +41,7 @@
   }
   /** Everything the page reads off (A, B). */
   function read(tau) {
-    const s = at(tau), A = AXES[S.axis], line = v3.dot(A, s.r), foot = v3.scale(A, line), perp = v3.sub(s.r, foot), area = v3.len(perp);
+    const s = at(tau), A = AXES[S.axis], { line, foot, perp, area } = QG_QUBIT.split(A, s.r);   // the line and the area (model.js)
     const [e1, e2] = PERP[S.axis], phase = Math.atan2(v3.dot(perp, e2), v3.dot(perp, e1));
     return Object.assign(s, { A, line, foot, perp, area, phase, p0: (1 + line) / 2, p1: (1 - line) / 2, angle: Math.acos(kit.clamp(line, -1, 1)) / DEG, sheet: sheetOf(s.q) });
   }

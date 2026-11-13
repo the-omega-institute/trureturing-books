@@ -154,7 +154,7 @@ $$
 这里需要严守概念与形式化边界：本书的 [@lemma-skew-adjoint-unitary-square] 与 [@thm-relative-complex-structure-square] 在 Lean 内核中严格证明的是 $n \times n$ 复矩阵层面的核心代数恒等式 $R^2 = -I_n$ 与 $J^2 = -I_n$；而将三维欧氏空间的完整克利福德代数识别为泡利复矩阵代数 $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$（实维数 $8$）、将其**偶次子代数**识别为四元数代数 $\mathrm{Cl}^+_{3,0}(\mathbb{R}) \cong \mathbb{H}$（实维数 $4$，其单位球面 $S^3 \cong \mathrm{SU}(2)$ 由旋子构成）并用三明治积 $\vv{v}' = R(\theta)\vv{v}R(\theta)^\dagger$ 导出三维罗德里格斯旋转公式的历史与经典定理，则在章末的文献注记 [@rem-clifford-rotor-literature] 中专门界定。
 
 ::: {.film src="001-qubit-bloch-rotor"}
-**半角旋子与布洛赫球（50 秒）。** 球面上的箭头是一个纯态；几何积把它与量尺的关系分成沿线的 $\cos\theta$ 与张成面积的 $\sin\theta$；旋子从两侧各转半角，箭头转过 $360^\circ$ 回到原处时旋子差一个负号，转满 $720^\circ$ 才回来。
+**半角旋子与布洛赫球（47 秒）。** 球面上的箭头是一个纯态；几何积把它与量尺的关系分成沿线的 $\cos\theta$ 与张成面积的 $\sin\theta$；旋子从两侧各转半角，箭头转过 $360^\circ$ 回到原处时旋子差一个负号，转满 $720^\circ$ 才回来。
 :::
 
 半角还留下一个问题。$R(2\pi) = \cos\pi - \vv{B}\sin\pi = -1$：物体转回原位，旋子却没有回来。这是 $\theta/2$ 这种写法带来的记号瑕疵，换一种更聪明的参数化就能消除，还是无论怎样都躲不开？固定一个旋转平面 $\vv{B}$，这个问题可以完全回答。绕该平面的旋子 $\cos\alpha - \vv{B}\sin\alpha$ 在乘法下构成一个圆；上面的夹乘计算 $R\,\vv{v}_\parallel R^\dagger = R^2\,\vv{v}_\parallel$ 说明，旋子 $R$ 引起的平面内旋转就是 $R^2$。所以“旋子 $\mapsto$ 旋转”在一个固定平面内正是单位圆上的平方映射 $z \mapsto z^2$，而它的拓扑性质已在所钉仓库的模块 `D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift` 中冻结。

@@ -24,6 +24,10 @@
     "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift",
     "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"
   ],
+  "solid": true,
+  "scripts": [
+    "viz/self-sustaining-spinor-flow/model.js"
+  ],
   "outputs": {
     "narrated_720p": "quantum-geometry_010_720p_narrated.mp4",
     "cover": "quantum-geometry_010_cover.jpg"

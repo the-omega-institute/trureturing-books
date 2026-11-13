@@ -554,7 +554,10 @@
     setScene(p.scene, p.at);
     if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still); } else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
   }
-  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const FIGURE_NOTES = {
+    haar: ['哈尔测度，文献结果，未在本书形式化：任意轴的 60° 球冠恰占四分之一；固定种子计数接近四分之一；青色的影子一样长：ψ 量 φ = φ 量 ψ。', 'Haar measure (literature result, not formalized in this book): any 60° cap is exactly a quarter; fixed-seed counts are close to a quarter; cyan shadows are equal: ψ measuring φ = φ measuring ψ.']
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、拖动琥珀色或白色的箭头、拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, drag the amber or white arrows, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

@@ -26,6 +26,11 @@
     "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
     "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
   ],
+  "solid": true,
+  "scripts": [
+    "viz/two-angle-addressing/model.js",
+    "viz/qubit-geometry/model.js"
+  ],
   "outputs": {
     "narrated_720p": "quantum-geometry_001_720p_narrated.mp4",
     "cover": "quantum-geometry_001_cover.jpg"
