@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "9b6270e9795ed74542ab38e06a271f706174239c",
-  "pinned_at": "2026-11-12T21:13:23Z",
+  "commit": "3b3ab5883295803c705670de0d118219db346f94",
+  "pinned_at": "2026-11-12T23:59:58Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -3468,6 +3468,30 @@
       "statement_id": "sha256:b5f8dcc99110316f0bf42a48eff539f0ae4728b825b2e078ccda8269c36afcc2",
       "line": 22,
       "signature": "theorem inner_product_norm_parallelogram_law {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (x y : E) : ‖x + y‖ ^ 2 + ‖x - y‖ ^ 2 = 2 * (‖x‖ ^ 2 + ‖y‖ ^ 2)"
+    },
+    "D5/S3/QuantumContext/ThreeAnchorGram.threeAnchorGram": {
+      "module": "D5/S3/QuantumContext/ThreeAnchorGram",
+      "name": "D5.S3.QuantumContext.ThreeAnchorGram.threeAnchorGram",
+      "kind": "def",
+      "statement_id": "sha256:5382fe3c8588b957db5e4a18e2cb9472114976d2d28d9fccbe743483c9ced0e0",
+      "line": 20,
+      "signature": "def threeAnchorGram {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v w : E) : Matrix (Fin 3) (Fin 3) ℝ"
+    },
+    "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula": {
+      "module": "D5/S3/QuantumContext/ThreeAnchorGram",
+      "name": "D5.S3.QuantumContext.ThreeAnchorGram.three_anchor_gram_det_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:5382fe3c8588b957db5e4a18e2cb9472114976d2d28d9fccbe743483c9ced0e0",
+      "line": 25,
+      "signature": "theorem three_anchor_gram_det_formula {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v w : E) : (threeAnchorGram u v w).det = ‖u‖ ^ 2 * ‖v‖ ^ 2 * ‖w‖ ^ 2 + 2 * ⟪u, v⟫_ℝ * ⟪u, w⟫_ℝ * ⟪v, w⟫_ℝ - ‖u‖ ^ 2 * ⟪v, w⟫_ℝ ^ 2 - ‖v‖ ^ 2 * ⟪u, w⟫_ℝ ^ 2 - ‖w‖ ^ 2 * ⟪u, v⟫_ℝ ^ 2"
+    },
+    "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff": {
+      "module": "D5/S3/QuantumContext/ThreeAnchorGram",
+      "name": "D5.S3.QuantumContext.ThreeAnchorGram.three_anchor_gram_det_pos_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:5382fe3c8588b957db5e4a18e2cb9472114976d2d28d9fccbe743483c9ced0e0",
+      "line": 38,
+      "signature": "theorem three_anchor_gram_det_pos_iff {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v w : E) : 0 < (threeAnchorGram u v w).det ↔ LinearIndependent ℝ ![u, v, w]"
     },
     "D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram": {
       "module": "D5/S3/QuantumContext/TwoAnchorGram",

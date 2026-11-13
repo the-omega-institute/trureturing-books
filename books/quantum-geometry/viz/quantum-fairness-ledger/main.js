@@ -16,7 +16,8 @@
               azimuths of length 2 − φ = 1 − α, counted half-open (left end in); hits − T(2 − φ) stays in (−1, 1)
               (Hecke–Kesten); the comparison is a fixed-seed independent random walk, plotted untruncated
    The rail is the number of points (seat), the tilt in degrees (gain), the path parameter (bonds), M − 1 (copies) or
-   the step count T (ergodic). Read-only probe for the browser suite: window.FAIRNESS_DEBUG. */
+   the step count T (ergodic). The ball is drawn with kit.solid (a glass shell with lit solids in it); the ledger bars
+   are flat, on the 2D canvas #flat over the stage. Read-only probe for the browser suite: window.FAIRNESS_DEBUG. */
 (() => {
   'use strict';
   const { kit, L } = TRV, { v3, fix } = kit, P = TRV.palette;
@@ -114,9 +115,14 @@
     ergodic: { max: TMAX, rate: 34, step: 1, start: 233, view: [-0.62, 0.62], name: ['遍历', 'HISTORY'] }
   };
 
-  /* ---------- stage ---------- */
-  const SO = { canvas: $('cv'), radius: TRV.thumbMode ? 0.4 : 0.32, cy: 0.54, onChange: () => paint() };
-  let grab = null;
+  /* ---------- stage: one glass Bloch ball with lit solids in it (kit.solid); the ledger bars on the flat canvas ----------
+     The outer ball is a glass shell; the cap, the gain triangle, the three-way face, the copy's ball and the window are
+     opaque lit surfaces or polyhedra, shadows, bonds and lost parts are lit tubes, points and partners are beads. The
+     centre of the ball moves left on wide stages to leave room for the ledger column: drawStage sets stage.cx before
+     each frame, and the construction options only read it back. */
+  const PI = Math.PI, E3 = [0, 0, 1];
+  let grab = null, stage;
+  const SO = { canvas: $('cv'), radius: TRV.thumbMode ? 0.4 : 0.32, cy: 0.54, onChange: () => paint(), get cx() { return stage ? stage.cx : 0.5; } };
   SO.onPick = (ev, st) => {
     const near = (v) => st.near(ev, v) < 24;
     grab = null;
@@ -132,7 +138,25 @@
     cards.mark(null); paint();
   };
   SO.onDrop = () => { grab = null; };
-  const stage = kit.stage3($('stage'), SO);
+  stage = kit.solid($('stage'), SO);
+
+  /* page geometry: sampled circles, drawn with the stage's own line and tube */
+  /** Two unit vectors completing the unit vector n to an orthonormal frame. */
+  const frameOf = (n) => { const e1 = v3.unit(v3.cross(n, Math.abs(n[2]) < 0.9 ? E3 : [1, 0, 0])); return [e1, v3.cross(n, e1)]; };
+  /** k + 1 points round the circle of centre c, unit normal n and radius r (closed: the last point is the first). */
+  function circlePts(c, n, r, k = 144) {
+    const [e1, e2] = frameOf(n), pts = [];
+    for (let i = 0; i <= k; i++) { const a = TAU * i / k; pts.push(v3.add(c, v3.add(v3.scale(e1, r * Math.cos(a)), v3.scale(e2, r * Math.sin(a))))); }
+    return pts;
+  }
+  /** A straight line from a to b, skipped where the two ends meet. */
+  const seg = (st, a, b, s) => { if (v3.len(v3.sub(b, a)) > 1e-6) st.line([a, b], s); };
+  /** A lit rod (a keyed tube) from a to b, skipped where the two ends meet. */
+  const rod = (st, key, a, b, s) => { if (v3.len(v3.sub(b, a)) > 1e-6) st.tube(key, [a, b], s); };
+  /** Lines lying on the opaque patches of the sphere sit a hair above them. */
+  const LIFT = 1.006;
+  /** Radius of the partners B and C, in world units. */
+  const PARTNER = 0.17;
 
   /** A vertical bar of the ledger, in CSS pixels: segments [value, colour, alpha] stacked from the bottom; total 1. */
   function bar(c, x, y0, w, h, segs, s) {
@@ -155,21 +179,23 @@
 
   function drawSeat(st, c) {
     const R = seatRead(), thick = TRV.thumbMode ? 1.6 : 1, ca = Math.cos(S.cap * DEG);
-    st.sphere(1, { lat: [0], lon: 2, shade: 0.05, alpha: 0.35 });
-    // the cap around the chosen axis: its rim, and the points inside it
-    const rimC = v3.scale(S.axis, ca), rimR = Math.sin(S.cap * DEG);
-    st.circle(rimC, S.axis, rimR, { color: P.amber, width: 1.3 * thick, alpha: 0.8, dash: [5, 4], back: 0.35 });
-    for (let i = 0; i < R.n; i++) { const p = HAAR[i], inside = v3.dot(p, S.axis) >= ca; st.dot(p, inside ? 2.6 : 1.9, inside ? P.cyan : P.dim, { alpha: inside ? 0.95 : 0.6 }); }
-    st.line([0, 0, 0], v3.scale(S.axis, 1.1), { color: P.amber, width: 1.6 * thick, back: 0.6 });
-    st.dot(S.axis, 6.5, P.amber, { glow: 12, fade: false });
+    // the cap around the chosen axis: a lit patch of the sphere of half-angle α, its rim, and the points inside it
+    const [e1, e2] = frameOf(S.axis);
+    st.surface('cap', (u, v) => v3.add(v3.scale(S.axis, Math.cos(u)), v3.add(v3.scale(e1, Math.sin(u) * Math.cos(v)), v3.scale(e2, Math.sin(u) * Math.sin(v)))),
+      { u: [0, S.cap * DEG], v: [0, TAU], nu: 18, nv: 96, color: P.amber, id: 'cap' });
+    const rimC = v3.scale(S.axis, ca * LIFT), rimR = Math.sin(S.cap * DEG) * LIFT;
+    st.line(circlePts(rimC, S.axis, rimR), { color: P.amber, width: 1.3 * thick, alpha: 0.8, dash: [5, 4] });
+    for (let i = 0; i < R.n; i++) { const p = HAAR[i], inside = v3.dot(p, S.axis) >= ca; st.bead(p, { r: inside ? 2.6 : 1.9, color: inside ? P.cyan : P.dim, glow: inside ? 0.55 : 0.3, key: 'h' + i }); }
+    rod(st, 'axis', [0, 0, 0], v3.scale(S.axis, 1.1), { width: 1.6 * thick, color: P.amber });
+    st.bead(S.axis, { r: 6.5, color: P.amber, key: 'axis' });
     // ψ and φ: each one's shadow on the other's diameter has the same length
     const d = v3.dot(S.psi, S.phi);
-    st.line(v3.scale(S.phi, -1), S.phi, { color: P.faint, width: 1, alpha: 0.7 });
-    st.line(v3.scale(S.psi, -1), S.psi, { color: P.faint, width: 1, alpha: 0.7 });
-    st.line([0, 0, 0], v3.scale(S.phi, d), { color: P.cyan, width: 4 * thick, alpha: 0.9 });
-    st.line([0, 0, 0], v3.scale(S.psi, d), { color: P.cyan, width: 4 * thick, alpha: 0.9 });
-    st.line(S.psi, v3.scale(S.phi, d), { color: P.dim, width: 1, dash: [3, 3] });
-    st.line(S.phi, v3.scale(S.psi, d), { color: P.dim, width: 1, dash: [3, 3] });
+    st.line([v3.scale(S.phi, -1), S.phi], { color: P.faint, width: 1, alpha: 0.7 });
+    st.line([v3.scale(S.psi, -1), S.psi], { color: P.faint, width: 1, alpha: 0.7 });
+    rod(st, 'shadowPhi', [0, 0, 0], v3.scale(S.phi, d), { width: 4 * thick, color: P.cyan });
+    rod(st, 'shadowPsi', [0, 0, 0], v3.scale(S.psi, d), { width: 4 * thick, color: P.cyan });
+    seg(st, S.psi, v3.scale(S.phi, d), { color: P.dim, width: 1, dash: [3, 3] });
+    seg(st, S.phi, v3.scale(S.psi, d), { color: P.dim, width: 1, dash: [3, 3] });
     st.arrow([0, 0, 0], S.psi, { color: P.ink, width: 2.2, headSize: 10 });
     st.arrow([0, 0, 0], S.phi, { color: P.ink, width: 2.2, headSize: 10 });
     st.tag('psi', S.psi, 'ψ', 'num big', { dx: 12, dy: -10 }); st.tag('phi', S.phi, 'φ', 'num big', { dx: 12, dy: -10 });
@@ -189,18 +215,23 @@
 
   function drawGain(st, c) {
     const R = gainRead(), v = R.v, thick = TRV.thumbMode ? 1.6 : 1, foot = [0, 0, v[2]];
-    st.sphere(1, { lat: [0], lon: 2, shade: 0.05, alpha: 0.35 });
-    if (R.r < 0.995) st.sphere(Math.max(R.r, 0.001), { lat: [0], lon: 0, shade: 0, alpha: 0.25, color: P.faint });
-    st.line([0, 0, -1.2], [0, 0, 1.2], { color: P.ink, width: 1.2, alpha: 0.75, back: 0.5 });
+    if (R.r < 0.995) {
+      // the ball of radius r the arrow can reach: its outline as seen, and its equator
+      const rr = Math.max(R.r, 0.001);
+      st.line(circlePts([0, 0, 0], st.facing(), rr), { color: P.faint, width: 1, alpha: 0.5 });
+      st.line(circlePts([0, 0, 0], E3, rr), { color: P.faint, width: 1, alpha: 0.4 });
+    }
+    st.line([[0, 0, -1.2], [0, 0, 1.2]], { color: P.ink, width: 1.2, alpha: 0.75 });
     st.tag('k0', [0, 0, 1.12], '|0⟩', 'num', { dx: -22 }); st.tag('k1', [0, 0, -1.12], '|1⟩', 'num', { dx: -22 });
     // the budget circle in the plane of the arrow: radius r
     const e = [Math.cos(S.az), Math.sin(S.az), 0], circ = [];
     for (let i = 0; i <= 96; i++) { const a = TAU * i / 96; circ.push(v3.add(v3.scale(e, R.r * Math.sin(a)), [0, 0, R.r * Math.cos(a)])); }
-    st.path(circ, { color: P.dim, width: 1, alpha: 0.6, dash: [4, 4] });
-    st.poly([[0, 0, 0], foot, v], { fill: P.magenta, alpha: 0.12 });
-    st.line([0, 0, 0], foot, { color: P.cyan, width: 5 * thick, alpha: 0.95, fade: false });
-    st.line(foot, v, { color: P.magenta, width: 3.5 * thick, alpha: 0.95, fade: false });
-    st.arrow([0, 0, 0], v, { color: P.amber, width: 2.6, glow: 12, headSize: 11, fade: false });
+    if (R.r > 1e-6) st.line(circ, { color: P.dim, width: 1, alpha: 0.6, dash: [4, 4] });
+    // the right triangle origin – foot – tip: a lit face, the line D along the axis and the area V across it
+    if (R.D > 1e-6 && R.V > 1e-6) st.poly('gainTri', { vertices: [[0, 0, 0], foot, v], faces: [[0, 1, 2]] }, { color: P.magenta, edges: false, id: 'gainTri' });
+    rod(st, 'lineD', [0, 0, 0], foot, { width: 5 * thick, color: P.cyan });
+    rod(st, 'areaV', foot, v, { width: 3.5 * thick, color: P.magenta });
+    st.arrow([0, 0, 0], v, { color: P.amber, width: 2.6, headSize: 11 });
     if (Math.abs(v[2]) > 0.12) st.tag('D', v3.scale(foot, 0.5), `D ${fix(R.D, 2)}`, 'num c-cy', { dx: 34 });
     if (R.V > 0.12) st.tag('V', v3.lerp(foot, v, 0.5), `V ${fix(R.V, 2)}`, 'num c-mg', { dy: v[2] >= 0 ? -14 : 14 });
     const col = column(1);
@@ -217,17 +248,20 @@
 
   function drawBonds(st, c) {
     const R = bondsRead(), thick = TRV.thumbMode ? 1.6 : 1, rA = R.rA;
-    st.sphere(1, { lat: [0], lon: 2, shade: 0.05, alpha: 0.35 });
-    // partners B and C as small balls; a bond's width is its tangle, the violet face is the three-way tangle
+    // partners B and C as lit balls; a bond's width is its tangle, the violet face is the three-way tangle: it grows
+    // from the edge B–C towards A as τ₃ goes from 0 to 1
     const B = [1.55, 0.2, 0.75], C = [1.55, 0.2, -0.75], A0 = [0, 0, 0];
-    if (R.t3 > 1e-6) st.poly([[0.62, 0.08, 0.3], B, C, [0.62, 0.08, -0.3]], { fill: P.violet, alpha: 0.12 + 0.45 * R.t3, color: P.violet, strokeAlpha: 0.4 + 0.6 * R.t3, width: 1 });
-    const bond = (to, tau) => { if (tau > 1e-6) st.line(v3.scale(v3.unit(to), 1.0), to, { color: P.magenta, width: (1 + 9 * tau) * thick, alpha: 0.35 + 0.65 * tau, fade: false }); else st.line(v3.scale(v3.unit(to), 1.0), to, { color: P.faint, width: 1, alpha: 0.6, dash: [3, 4], fade: false }); };
-    bond(B, R.tAB); bond(C, R.tAC);
-    for (const [p, name] of [[B, 'B'], [C, 'C']]) { st.circle(p, st.facing(), 0.17, { color: P.ink, width: 1.4, alpha: 0.85, fade: false }); st.tag('n' + name, p, name, 'num big', { dx: 34, dy: -14 }); }
+    if (R.t3 > 1e-6) {
+      const near = (q, edge) => v3.lerp(edge, q, R.t3);
+      st.poly('tangle3', { vertices: [near([0.62, 0.08, 0.3], B), B, C, near([0.62, 0.08, -0.3], C)], faces: [[0, 1, 2, 3]] }, { color: P.violet, edges: false, id: 'tangle3' });
+    }
+    const bond = (key, to, tau) => { const from = v3.unit(to); if (tau > 1e-6) rod(st, key, from, to, { width: (1 + 9 * tau) * thick, color: P.magenta }); else st.line([from, to], { color: P.faint, width: 1, alpha: 0.6, dash: [3, 4] }); };
+    bond('bondB', B, R.tAB); bond('bondC', C, R.tAC);
+    for (const [p, name] of [[B, 'B'], [C, 'C']]) { st.bead(p, { r: PARTNER * st.unit / st.lw, color: P.ink, glow: 0.12, key: name }); st.tag('n' + name, p, name, 'num big', { dx: 34, dy: -14 }); }
     // A's own arrow: only the part it keeps
-    st.line([0, 0, -1.15], [0, 0, 1.15], { color: P.faint, width: 1, alpha: 0.7, back: 0.5 });
-    if (Math.abs(rA[2]) > 0.004) { st.line(A0, rA, { color: P.cyan, width: 5 * thick, alpha: 0.9, fade: false }); st.arrow(A0, rA, { color: P.amber, width: 2.6, glow: 12, headSize: 11, fade: false }); }
-    st.dot(A0, 5.5, P.amber, { glow: 12, fade: false });
+    st.line([[0, 0, -1.15], [0, 0, 1.15]], { color: P.faint, width: 1, alpha: 0.7 });
+    if (Math.abs(rA[2]) > 0.004) { rod(st, 'keepA', A0, rA, { width: 5 * thick, color: P.cyan }); st.arrow(A0, rA, { color: P.amber, width: 2.6, headSize: 11 }); }
+    st.bead(A0, { r: 5.5, color: P.amber, key: 'A' });
     st.tag('nA', [0, 0, 1.08], 'A', 'num big', { dx: -20 });
     const col = column(1);
     if (col) {
@@ -242,15 +276,14 @@
 
   function drawCopies(st, c) {
     const M = copiesM(), et = eta(M), thick = TRV.thumbMode ? 1.6 : 1, p = S.psi;
-    st.sphere(1, { lat: [0], lon: 2, shade: 0.05, alpha: 0.35 });
-    st.sphere(et, { lat: [0], lon: 0, shade: 0.06, alpha: 0.5, color: P.cyan });
-    st.sphere(1 / 3, { lat: [], lon: 0, shade: 0, alpha: 0.3, color: P.faint });
+    // what each copy can reach: a lit ball of radius η inside the glass; its arrow ends on that ball
+    st.surface('copyBall', (u, v) => v3.scale(v3.sph(u, v), et), { u: [0, PI], v: [0, TAU], nu: 36, nv: 72, color: P.cyan, id: 'copyBall' });
     // the orthogonal pair at the poles can be copied exactly
-    for (const z of [1, -1]) st.dot([0, 0, z], 5, P.ink, { ring: true, width: 1.6 });
-    st.line([0, 0, -1.12], [0, 0, 1.12], { color: P.faint, width: 1, alpha: 0.7, back: 0.5 });
-    st.line(v3.scale(p, et), p, { color: P.magenta, width: 3.5 * thick, alpha: 0.95, fade: false });
-    st.arrow([0, 0, 0], v3.scale(p, et), { color: P.cyan, width: 4.5 * thick, headSize: 12, fade: false });
-    st.dot(p, 6, P.amber, { glow: 12, fade: false });
+    for (const z of [1, -1]) st.ring([0, 0, z], { r: 5, color: P.ink, key: z > 0 ? 'pole0' : 'pole1' });
+    st.line([[0, 0, -1.12], [0, 0, 1.12]], { color: P.faint, width: 1, alpha: 0.7 });
+    rod(st, 'lost', v3.scale(p, et), p, { width: 3.5 * thick, color: P.magenta });
+    st.arrow([0, 0, 0], v3.scale(p, et), { color: P.cyan, width: 4.5 * thick, headSize: 12 });
+    st.bead(p, { r: 6, color: P.amber, key: 'psi' });
     st.tag('psi', p, 'ψ', 'num c-am big', { dx: 14, dy: -12 });
     st.tag('k0', [0, 0, 1], '|0⟩', 'num', { dx: -24 }); st.tag('k1', [0, 0, -1], '|1⟩', 'num', { dx: -24 });
     const col = column(M);
@@ -266,22 +299,20 @@
 
   function drawErgodic(st, c) {
     const E = ergodicRead(), T = E.T, thick = TRV.thumbMode ? 1.6 : 1, a0 = TAU * (S.c - WIN / 2), a1 = TAU * (S.c + WIN / 2);
-    st.sphere(1, { lat: [], lon: 0, shade: 0.05, alpha: 0.35 });
-    // the window: the lune of azimuths between two meridians
-    const mer = (a) => { const pts = []; for (let i = 0; i <= 40; i++) { const th = Math.PI * i / 40; pts.push([Math.sin(th) * Math.cos(a), Math.sin(th) * Math.sin(a), Math.cos(th)]); } return pts; };
-    const Df = st.facing(), lune = mer(a0).concat(mer(a1).reverse()), front = Math.cos((a0 + a1) / 2) * Df[0] + Math.sin((a0 + a1) / 2) * Df[1] >= 0;
-    st.poly(lune, { fill: P.cyan, alpha: front ? 0.16 : 0.07 });
-    st.path(mer(a0), { color: P.cyan, width: 1.6 * thick, alpha: 0.85, back: 0.3 }); st.path(mer(a1), { color: P.cyan, width: 1.6 * thick, alpha: 0.85, back: 0.3 });
-    const ring = (lat) => { const pts = []; for (let i = 0; i <= 96; i++) { const a = TAU * i / 96; pts.push([Math.sin(lat) * Math.cos(a), Math.sin(lat) * Math.sin(a), Math.cos(lat)]); } return pts; };
-    st.path(ring(S.lat1), { color: P.faint, width: 1, alpha: 0.8 }); st.path(ring(S.lat2), { color: P.faint, width: 1, alpha: 0.8 });
+    // the window: the lune of azimuths between two meridians, a lit patch of the sphere, and its two edges
+    st.surface('lune', (u, v) => v3.sph(u, v), { u: [0, PI], v: [a0, a1], nu: 36, nv: 48, color: P.cyan, id: 'lune' });
+    const mer = (a) => { const pts = []; for (let i = 0; i <= 40; i++) { const th = PI * i / 40; pts.push(v3.scale([Math.sin(th) * Math.cos(a), Math.sin(th) * Math.sin(a), Math.cos(th)], LIFT)); } return pts; };
+    st.line(mer(a0), { color: P.cyan, width: 1.6 * thick, alpha: 0.85 }); st.line(mer(a1), { color: P.cyan, width: 1.6 * thick, alpha: 0.85 });
+    st.line(circlePts([0, 0, Math.cos(S.lat1)], E3, Math.sin(S.lat1)), { color: P.faint, width: 1, alpha: 0.8 });
+    st.line(circlePts([0, 0, Math.cos(S.lat2)], E3, Math.sin(S.lat2)), { color: P.faint, width: 1, alpha: 0.8 });
     const at = (lat, x) => [Math.sin(lat) * Math.cos(TAU * x), Math.sin(lat) * Math.sin(TAU * x), Math.cos(lat)];
-    E.o1.xs.forEach((x, i) => st.dot(at(S.lat1, x), E.o1.hit[i] ? 2.2 : 1.5, E.o1.hit[i] ? P.cyan : P.dim, { alpha: E.o1.hit[i] ? 0.95 : 0.65 }));
-    E.o2.xs.forEach((x, i) => st.dot(at(S.lat2, x), E.o2.hit[i] ? 2.2 : 1.5, E.o2.hit[i] ? P.cyan : P.dim, { alpha: E.o2.hit[i] ? 0.95 : 0.65 }));
-    st.line([0, 0, -1.15], [0, 0, 1.15], { color: P.violet, width: 1.4, alpha: 0.8, back: 0.5 });
+    E.o1.xs.forEach((x, i) => st.bead(at(S.lat1, x), { r: E.o1.hit[i] ? 2.2 : 1.5, color: E.o1.hit[i] ? P.cyan : P.dim, glow: E.o1.hit[i] ? 0.8 : 0.3, key: 'o1_' + i }));
+    E.o2.xs.forEach((x, i) => st.bead(at(S.lat2, x), { r: E.o2.hit[i] ? 2.2 : 1.5, color: E.o2.hit[i] ? P.cyan : P.dim, glow: E.o2.hit[i] ? 0.8 : 0.3, key: 'o2_' + i }));
+    rod(st, 'axis', [0, 0, -1.15], [0, 0, 1.15], { width: 1.4, color: P.violet });
     if (T > 0) {
       const p1 = at(S.lat1, E.o1.xs[T - 1]), p2 = at(S.lat2, E.o2.xs[T - 1]);
-      st.arrow([0, 0, Math.cos(S.lat1)], p1, { color: P.amber, width: 2.2, glow: 10, headSize: 9, fade: false });
-      st.dot(p2, 6, P.ink, { ring: true, width: 2, fade: false });
+      st.arrow([0, 0, Math.cos(S.lat1)], p1, { color: P.amber, width: 2.2, headSize: 9 });
+      st.ring(p2, { r: 6, color: P.ink, key: 'now2' });
       st.tag('o1', p1, '①', 'num c-am', { dx: 14, dy: -10 }); st.tag('o2', p2, '②', 'num', { dx: 14, dy: -10 });
     }
     const col = column(2);
@@ -298,10 +329,18 @@
   }
 
   function drawStage() {
-    SO.cx = wide() ? 0.4 : 0.5;
-    const st = stage, c = st.begin();
+    stage.cx = wide() ? 0.4 : 0.5;
+    const st = stage, flat = $('flat');
+    st.begin();
+    // the flat overlay of the ledger bars, cleared on every frame
+    const dpr = TRV.fitCanvas(flat), c = flat.getContext('2d');
+    c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, flat.width, flat.height); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    st.glass('bloch', [0, 0, 0], 1, { color: P.cyan, alpha: 0.08, rim: 0.55 });
+    st.line(circlePts([0, 0, 0], E3, 1), { color: P.lineHot, width: 1.1, alpha: 0.55 });   // the equator
     ({ seat: drawSeat, gain: drawGain, bonds: drawBonds, copies: drawCopies, ergodic: drawErgodic })[S.scene](st, c);
     st.end();
+    const hud = $('hudSub').parentElement;
+    $('stage').style.setProperty('--scene-top', `${hud.offsetTop + hud.offsetHeight + 8}px`);
   }
 
   /* ---------- strip ---------- */
@@ -535,6 +574,14 @@
     bonds: (t) => bondsRead(t),
     /** Viewport coordinates of a world point on the stage (for pointer tests). */
     at: (v) => { const b = $('cv').getBoundingClientRect(), q = stage.p(v); return [b.left + q[0], b.top + q[1]]; },
+    /** Where the centre of the ball is drawn (CSS pixels in the stage), the stage's size and its scale. */
+    centre: () => { const q = stage.p([0, 0, 0]); return { x: q[0], y: q[1], W: $('cv').clientWidth, H: $('cv').clientHeight, unit: stage.unit }; },
+    /** The flat overlay: what precedes it, its size and how many of its pixels are drawn on. */
+    overlay: () => {
+      const f = $('flat'), d = f.getContext('2d').getImageData(0, 0, f.width, f.height).data;
+      let ink = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 0) ink++;
+      return { hidden: f.hidden, after: f.previousElementSibling && f.previousElementSibling.id, w: f.clientWidth, h: f.clientHeight, ink };
+    },
     arrow: () => gainRead().v
   };
   window.TRV_THUMB = () => { setScene('bonds', 2.5); stage.view([-0.35, 0.18], 0); kit.flush(); paint.now(); };

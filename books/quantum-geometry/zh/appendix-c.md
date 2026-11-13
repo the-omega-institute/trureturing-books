@@ -2,28 +2,28 @@
 
 本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 [{commit}](trureturing:)）中接受逐条核验：
 
-1. **C.1 冻结定理总索引（258 条唯一 `theorem` 声明）**：凡在正文中置于 `theorem`、`lemma`、`proposition`、`corollary` 环境或交互沙盒/短片/讲义 `lean:` 锚点中的命题，其 `lean="<GID>"` 必须解析为 `trureturing` 仓库 `Golden/Frozen/state/<module>.lean.json` 中已由 Lean 4 内核验证且无 `sorry` 的 `theorem` 声明；
-2. **C.2 形式化定义与代数载体总索引（96 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（134 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **488 项唯一声明**（`258 + 96 + 134 = 488`）；
+1. **C.1 冻结定理总索引（260 条唯一 `theorem` 声明）**：凡在正文中置于 `theorem`、`lemma`、`proposition`、`corollary` 环境或交互沙盒/短片/讲义 `lean:` 锚点中的命题，其 `lean="<GID>"` 必须解析为 `trureturing` 仓库 `Golden/Frozen/state/<module>.lean.json` 中已由 Lean 4 内核验证且无 `sorry` 的 `theorem` 声明；
+2. **C.2 形式化定义与代数载体总索引（97 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（134 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **491 项唯一声明**（`260 + 97 + 134 = 491`）；
 3. **C.3 开放问题与未形式化前沿边界台账（8 项：6 个 `conjecture` / `OPEN` 环境 + 2 项前沿文献边界 `remark`）**：尚未在 `trureturing` 中完成内核形式化或属于数学物理前沿未决猜想的命题，在全书中一律以无 `lean` 属性的 `conjecture`（红色 `OPEN` 徽章）或带明确文献说明的 `remark` 环境隔离呈现，绝不冒充已验证定理。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**488 格，一格一条锁定声明。** 时间轴从序曲读到附录 B，每一章第一次引用的声明落进这一章的柱子：绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。读完正文，地图上的格数与 `trureturing.lock.json` 的条目数相同。每条声明只在第一次引用它的那一章计一格，后面的章再引用不再计，定义与行内链接也各占一格；所以这里的柱高与下文 C.1 那张按章的柱状图不同，那张图只数定理环境里的定理，跨章重复计。
+**491 格，一格一条锁定声明。** 时间轴从序曲读到附录 B，每一章第一次引用的声明落进这一章的柱子：绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。读完正文，地图上的格数与 `trureturing.lock.json` 的条目数相同。每条声明只在第一次引用它的那一章计一格，后面的章再引用不再计，定义与行内链接也各占一格；所以这里的柱高与下文 C.1 那张按章的柱状图不同，那张图只数定理环境里的定理，跨章重复计。
 :::
 
 ---
 
-## C.1 已验证并冻结的 Lean 4 定理总索引（258 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
+## C.1 已验证并冻结的 Lean 4 定理总索引（260 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
 
-下表按模块路径字母顺序列出全书正式数学环境与媒体组件引用的全部 **258 条唯一冻结定理**（跨章节环境复用后共构成 336 处定理级形式化锚点）。点击每条声明名称可直接跳转至对应的 Lean 4 源码树与冻结状态摘要：
+下表按模块路径字母顺序列出全书正式数学环境与媒体组件引用的全部 **260 条唯一冻结定理**（跨章节环境复用后共构成 338 处定理级形式化锚点）。点击每条声明名称可直接跳转至对应的 Lean 4 源码树与冻结状态摘要：
 
 ::: {.figure src="appc-theorems-by-chapter"}
-**每一章的定理环境用 `lean=` 引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，浅色底纹按部分组（I–X）；每根绿色柱子是这一章引用的已验证定理条数，同一条定理在几章各被引用就各计一次，定义与只在行内链接里出现的声明不计。每根柱子分两段：实心的下段是在这一章第一次出场的定理（与上面声明地图同一规则：中文正文第一次引用它的那一章），合计 $244$ 条，它们都是地图上这一章柱子里的绿格；空心的上段是前面已出场、这一章再引用的，合计 $92$ 条，第九、十部各章以它为主。地图的柱子还含定义与只在行内链接里出现的声明，所以比这里的实心段高。第二十二章最高，$35$ 条；其次第三十章 $23$ 条，第四章 $17$ 条、第二十四章 $16$ 条，第十四章 $14$ 条，第二十九章与终章各 $13$ 条；其余各章 $4$ 到 $10$ 条。柱高合计 $336$，由脚本从 `trureturing.lock.json` 与中文章节算出，并与下表最后一栏逐章核对；下表 $255$ 条冻结定理至少出现在一根柱子中；另三条 `T035`、`T066`、`T112` 由媒体引用，正文只以行内链接引用，不计入柱高（`T046` 同时被第三十五章定理环境与 `viz/sphere-escape` 引用）。
+**每一章的定理环境用 `lean=` 引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，浅色底纹按部分组（I–X）；每根绿色柱子是这一章引用的已验证定理条数，同一条定理在几章各被引用就各计一次，定义与只在行内链接里出现的声明不计。每根柱子分两段：实心的下段是在这一章第一次出场的定理（与上面声明地图同一规则：中文正文第一次引用它的那一章），合计 $246$ 条，它们都是地图上这一章柱子里的绿格；空心的上段是前面已出场、这一章再引用的，合计 $92$ 条，第九、十部各章以它为主。地图的柱子还含定义与只在行内链接里出现的声明，所以比这里的实心段高。第二十二章最高，$35$ 条；其次第三十章 $23$ 条，第四章 $17$ 条、第二十四章 $16$ 条，第十四章 $14$ 条，第二十九章与终章各 $13$ 条；其余各章 $4$ 到 $10$ 条。柱高合计 $338$，由脚本从 `trureturing.lock.json` 与中文章节算出，并与下表最后一栏逐章核对；下表 $257$ 条冻结定理至少出现在一根柱子中；另三条 `T035`、`T066`、`T112` 由媒体引用，正文只以行内链接引用，不计入柱高（`T046` 同时被第三十五章定理环境与 `viz/sphere-escape` 引用）。
 :::
 
-下表按模块路径排序，这 $258$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族独占 $80$ 条，`FluidDynamics` 的 $19$ 条全在第八部。
+下表按模块路径排序，这 $260$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族独占 $80$ 条，`FluidDynamics` 的 $19$ 条全在第八部。
 
 ::: {.figure src="appc-modules-by-part"}
-**C.1 的 $258$ 条定理落在哪几块模块上。** 行是 trureturing 的模块族（模块路径的前三段，这里都在 `D5/S3/` 下），较小的各族并成最后一行；列是第一至第十部与“终”（终章与附录 A、B），按上面声明地图的同一规则，取每条定理在中文正文里第一次出场的部。每格是条数，底色越深条数越多，空格为零；右边一列与最下一行是合计。`Quantum` 一族 $80$ 条，分布在第一至第七部；`FluidDynamics` 的 $19$ 条全在第八部，`Zeros` 与 `Weil` 只在第六部。这里只数条目，不表示模块之间的证明依赖；数字由脚本从锁文件、中文章节与下表算出。
+**C.1 的 $260$ 条定理落在哪几块模块上。** 行是 trureturing 的模块族（模块路径的前三段，这里都在 `D5/S3/` 下），较小的各族并成最后一行；列是第一至第十部与“终”（终章与附录 A、B），按上面声明地图的同一规则，取每条定理在中文正文里第一次出场的部。每格是条数，底色越深条数越多，空格为零；右边一列与最下一行是合计。`Quantum` 一族 $80$ 条，分布在第一至第七部；`FluidDynamics` 的 $19$ 条全在第八部，`Zeros` 与 `Weil` 只在第六部。这里只数条目，不表示模块之间的证明依赖；数字由脚本从锁文件、中文章节与下表算出。
 :::
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
@@ -222,7 +222,6 @@
 | `T192` | [`D5.S3.Quantum.QubitWitnesses.phaseDampingIterate_apply`](lean:D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply) | [{source}](lean:D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply) | `theorem` | Ch 4 `#prop-phase-damping-decay`; media `viz/visualizations.json`, `viz/bloch-noise/index.html`, `films/001-qubit-bloch-rotor/film.json` |
 | `T193` | [`D5.S3.Quantum.Recovery.CoherentUniformAmplification.exact_coherent_amplification`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.exact_coherent_amplification) | [{source}](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.exact_coherent_amplification) | `theorem` | Ch 16 `#cor-exact-source-query-count` |
 | `T194` | [`D5.S3.Quantum.Recovery.CoherentUniformAmplification.uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation) | [{source}](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation) | `theorem` | Ch 15 `#thm-grover-uniform-rotation`, Ch 30, Ch 31 `#thm-ch31-horizon-landauer-ergodic-fairness`, 附录 A; media `viz/visualizations.json`, `viz/timeless-causal-crystal/index.html`, `viz/grover-reflections/index.html` |
-| `T258` | [`D5.S3.Quantum.Recovery.FiniteKrausReversibility.scalar_products_construct_left_inverse`](lean:D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse) | [{source}](lean:D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse) | `theorem` | Ch 14 `#thm-finite-kraus-recovery-sufficiency` |
 | `T195` | [`D5.S3.Quantum.Recovery.OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery`](lean:D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery) | [{source}](lean:D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery) | `theorem` | Ch 14 `#prop-orthogonal-syndrome-recovery`, Ch 28; media `viz/visualizations.json`, `viz/syndrome-decoding/index.html` |
 | `T196` | [`D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC_CAR`](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR) | [{source}](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR) | `theorem` | Ch 14 `#thm-jordan-wigner-car` |
 | `T197` | [`D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC_anticomm_of_lt`](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_anticomm_of_lt) | [{source}](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_anticomm_of_lt) | `theorem` | Ch 14 `#thm-jordan-wigner-car` |
@@ -284,14 +283,17 @@
 | `T253` | [`D5.S0.Diagonal.SechPath.discrete_sech_path_positive`](lean:D5/S0/Diagonal/SechPath.discrete_sech_path_positive) | [{source}](lean:D5/S0/Diagonal/SechPath.discrete_sech_path_positive) | `theorem` | Ch 38 `#thm-ch38-discrete-sech-positive` |
 | `T254` | [`D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredContraction.cyclic_future_kernel_eq_bot`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot) | [{source}](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot) | `theorem` | Ch 7 `#rem-monitored-cyclic-observability` |
 | `T255` | [`D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredPowerBound.cyclic_power_contraction`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction) | [{source}](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction) | `theorem` | Ch 7 `#rem-monitored-cyclic-power-contraction` |
-| `T256` | [`D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_formula`](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula) | [{source}](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula) | `theorem` | Ch 35 `#ex-ch35-two-anchor-gram-corridor` |
-| `T257` | [`D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff) | [{source}](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff) | `theorem` | Ch 35 `#ex-ch35-two-anchor-gram-corridor` |
+| `T256` | [`D5.S3.QuantumContext.ThreeAnchorGram.three_anchor_gram_det_formula`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula) | [{source}](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula) | `theorem` | Ch 37 `#ex-ch37-gram-constraint-release` |
+| `T257` | [`D5.S3.QuantumContext.ThreeAnchorGram.three_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff) | [{source}](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff) | `theorem` | Ch 37 `#ex-ch37-gram-constraint-release` |
+| `T258` | [`D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_formula`](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula) | [{source}](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula) | `theorem` | Ch 35 `#ex-ch35-two-anchor-gram-corridor` |
+| `T259` | [`D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff) | [{source}](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff) | `theorem` | Ch 35 `#ex-ch35-two-anchor-gram-corridor` |
+| `T260` | [`D5.S3.Quantum.Recovery.FiniteKrausReversibility.scalar_products_construct_left_inverse`](lean:D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse) | [{source}](lean:D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse) | `theorem` | Ch 14 `#thm-finite-kraus-recovery-sufficiency` |
 
 ---
 
-## C.2 形式化定义、结构与归纳类型索引（96 项唯一声明） {#sec-appendix-c-definitions}
+## C.2 形式化定义、结构与归纳类型索引（97 项唯一声明） {#sec-appendix-c-definitions}
 
-下表列出全书 `definition` 环境与媒体组件锁定的 **96 项唯一基础定义、代数结构与归纳类型**（它们与 C.1 的 258 条定理共同构成全书正式环境与媒体锁定的 **354 项核心声明**）：
+下表列出全书 `definition` 环境与媒体组件锁定的 **97 项唯一基础定义、代数结构与归纳类型**（它们与 C.1 的 260 条定理共同构成全书正式环境与媒体锁定的 **357 项核心声明**）：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -390,13 +392,14 @@
 | `D093` | [`D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.offCriticalQuartic`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.offCriticalQuartic) | [{source}](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.offCriticalQuartic) | `def` | Ch 22 `#def-off-critical-quartic` |
 | `D094` | [`D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.sourceZeros`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.sourceZeros) | [{source}](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.sourceZeros) | `def` | Ch 22 `#def-off-critical-quartic` |
 | `D095` | [`D5.S3.Zeros.ZetaUpgrade.HasUniqueSimplePoleWithResidue`](lean:D5/S3/Zeros/ZetaUpgrade.HasUniqueSimplePoleWithResidue) | [{source}](lean:D5/S3/Zeros/ZetaUpgrade.HasUniqueSimplePoleWithResidue) | `def` | Ch 22 `#def-classical-zeta` |
-| `D096` | [`D5.S3.QuantumContext.TwoAnchorGram.twoAnchorGram`](lean:D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram) | [{source}](lean:D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram) | `def` | Ch 35 `#ex-ch35-two-anchor-gram-corridor` |
+| `D096` | [`D5.S3.QuantumContext.ThreeAnchorGram.threeAnchorGram`](lean:D5/S3/QuantumContext/ThreeAnchorGram.threeAnchorGram) | [{source}](lean:D5/S3/QuantumContext/ThreeAnchorGram.threeAnchorGram) | `def` | Ch 37 `#ex-ch37-gram-constraint-release` |
+| `D097` | [`D5.S3.QuantumContext.TwoAnchorGram.twoAnchorGram`](lean:D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram) | [{source}](lean:D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram) | `def` | Ch 35 `#ex-ch35-two-anchor-gram-corridor` |
 
 ---
 
 ## C.2.1 行内引用的辅助定理与定义索引（134 项唯一声明） {#sec-appendix-c-inline}
 
-除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 354 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **134 项辅助定理与构造定义**。将这 134 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **488 项唯一锁定声明**（`258 + 96 + 134 = 488`）：
+除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 357 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **134 项辅助定理与构造定义**。将这 134 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **491 项唯一锁定声明**（`260 + 97 + 134 = 491`）：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -569,22 +572,22 @@
 | :--- | :--- | :--- | :---: |
 | **上游仓库与分支** | `the-omega-institute/trureturing` 分支 `dev` | `site.toml` `[trureturing]` 配置与 `git merge-base --is-ancestor` | `PASS` |
 | **所钉提交 SHA** | [{commit}](trureturing:) | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
-| **冻结定理总数** | `258` 项环境/媒体定理（含行内共 `340` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
-| **辅助定义与结构数** | `96` 项环境定义（含行内共 `148` 项 `kind` 为 `def` 或 `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
+| **冻结定理总数** | `260` 项环境/媒体定理（含行内共 `342` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
+| **辅助定义与结构数** | `97` 项环境定义（含行内共 `149` 项 `kind` 为 `def` 或 `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s)`） | `PASS` |
 
 ::: {.figure src="appc-ledger"}
-**$488$ 条锁定声明的对账：种类 × 出现方式。** 行是锁文件里的种类（定理；定义与归纳类型合为一行），列是它在中文正文里怎样被引用：在某个定理或定义环境里用 `lean=` 引用；由媒体引用、正文只以行内链接提到；只在行内链接里出现。定理一行 $255 + 3 + 82 = 340$，定义一行 $96 + 0 + 52 = 148$，合计 $488$。三个虚线框是本附录的三张索引：C.1 $= 255 + 3 = 258$，C.2 $= 96$，C.2.1 $= 82 + 52 = 134$。数字由脚本从锁文件、中文章节与三张索引算出并相互核对。
+**$491$ 条锁定声明的对账：种类 × 出现方式。** 行是锁文件里的种类（定理；定义与归纳类型合为一行），列是它在中文正文里怎样被引用：在某个定理或定义环境里用 `lean=` 引用；由媒体引用、正文只以行内链接提到；只在行内链接里出现。定理一行 $257 + 3 + 82 = 342$，定义一行 $97 + 0 + 52 = 149$，合计 $491$。三个虚线框是本附录的三张索引：C.1 $= 257 + 3 = 260$，C.2 $= 97$，C.2.1 $= 82 + 52 = 134$。数字由脚本从锁文件、中文章节与三张索引算出并相互核对。
 :::
 
-这张账的第一行在声明地图上是 $340$ 格绿色：被定理环境引用的 $255$ 格画成实心，其余 $3 + 82 = 85$ 格空心。
+这张账的第一行在声明地图上是 $342$ 格绿色：被定理环境引用的 $257$ 格画成实心，其余 $3 + 82 = 85$ 格空心。
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**只看定理。** 地图只留锁文件里种类为 theorem 的 340 格，全是绿色：实心的 255 格被定理环境用 `lean=` 引用，空心的 85 格只出现在行内链接里。
+**只看定理。** 地图只留锁文件里种类为 theorem 的 342 格，全是绿色：实心的 257 格被定理环境用 `lean=` 引用，空心的 85 格只出现在行内链接里。
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-本附录第 C.1 节所列的 258 条正式环境与媒体定理、第 C.2 节所列的 96 项环境定义/结构以及第 C.2.1 节所列的 134 项行内交叉引用声明（总计 488 项形式化声明：340 项定理 + 148 项定义/结构）均已在 `trureturing@dev` 提交 [{commit}](trureturing:) 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
+本附录第 C.1 节所列的 260 条正式环境与媒体定理、第 C.2 节所列的 97 项环境定义/结构以及第 C.2.1 节所列的 134 项行内交叉引用声明（总计 491 项形式化声明：342 项定理 + 149 项定义/结构）均已在 `trureturing@dev` 提交 [{commit}](trureturing:) 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}

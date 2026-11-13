@@ -5,8 +5,9 @@
             signed area Fₖ·Fₖ₊₂ − Fₖ₊₁² = (−1)ᵏ⁺¹, and no other lattice point lies between the hyperbolas x·x′ = ±1
    returns  the rotation by the golden angle seen through h(x) = cos 2πx: visits to (u₁, u₂) over the first N steps; the
             longest gap between two visits so far and its reciprocal are sample statistics, not the theorem's M
-   window3  the rhombic triacontahedron as the zonohedron of the six fivefold axes; the margin d∂ of a point inside, and
-            for comparison a point near the boundary on the same ray
+   window3  the rhombic triacontahedron as the zonohedron of the six fivefold axes, a lit solid cut open towards the card's
+            camera so that the inside shows; the margin d∂ of a point inside, and for comparison a point near the boundary
+            on the same ray
    gaps     the first N points {ia} of a rotation on a circle of length 1: the arcs between neighbours have at most three
             lengths (the three-gap theorem); a = 1/φ² (the golden angle) or π − 3
    The rail is the shift u (cut), k (cassini), the number of steps N (returns), the position of the point (window3) or
@@ -75,7 +76,7 @@
   }
   const uOf = (t) => (S.patch ? S.patch.lo + (S.patch.hi - S.patch.lo) * (0.01 + 0.98 * t) : t - 0.5);
   const tOf = (u) => (S.patch ? ((u - S.patch.lo) / (S.patch.hi - S.patch.lo) - 0.01) / 0.98 : u + 0.5);
-  const halfX = () => (TRV.thumbMode ? 6.4 : clamp(($('cv').clientWidth || 720) / 76, 5.2, 9.6));
+  const halfX = () => (TRV.thumbMode ? 6.4 : clamp(($('stage').clientWidth || 720) / 76, 5.2, 9.6));
   function cutState(t) {
     const u = uOf(t), half = halfX(), sel = NEAR.filter((p) => inWin(p.c, u)), gaps = [];
     for (let i = 1; i < sel.length; i++) gaps.push(sel[i].x - sel[i - 1].x);
@@ -92,7 +93,7 @@
   }
   function drawCut(q) {
     const words = !TRV.thumbMode, u = q.u, K = words ? 1 : 2.2;      // the cover is drawn bolder: it is read at card size
-    const g = kit.plot($('cv'), { x: [-q.half, q.half], y: [MID - 1.9, MID + 1.9], pad: [words ? 30 : 8, 10, box.top, box.bottom + (words ? 46 : 36)] }), ctx = g.ctx; view = g;
+    const g = kit.plot($('flat'), { x: [-q.half, q.half], y: [MID - 1.9, MID + 1.9], pad: [words ? 30 : 8, 10, box.top, box.bottom + (words ? 46 : 36)] }), ctx = g.ctx; view = g;
     const lo = LO + u, hi = HI + u, rowY = g.pt + g.ih + 15, rowH = words ? 12 : 22, inView = (p) => p.x >= g.x0 && p.x <= g.x1 && p.c >= g.y0 && p.c <= g.y1;
     g.rect(g.x0, lo, g.x1, hi, P.amber, { alpha: words ? 0.09 : 0.14 });
     if (q.emp) g.rect(g.x0, q.emp[0], g.x1, q.emp[1], P.cyan, { alpha: 0.13 });
@@ -138,7 +139,7 @@
   const power = (k) => [fibN(k) + fibN(k + 1) * PHI, fibN(k) + fibN(k + 1) * PSI];        // φ^(k+1) = F_k + F_(k+1)·φ as the lattice point (itself, conjugate)
   const sub = (n) => String(n).replace(/\d/g, (d) => '₀₁₂₃₄₅₆₇₈₉'[d]), sup = (n) => String(n).replace(/\d/g, (d) => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
   function drawCassini(k) {
-    const words = !TRV.thumbMode, g = kit.plot($('cv'), { x: [-2, 31], y: [-1.3, 1.3], pad: [words ? 30 : 8, 12, box.top, box.bottom + (words ? 20 : 4)] }), ctx = g.ctx; view = g;
+    const words = !TRV.thumbMode, g = kit.plot($('flat'), { x: [-2, 31], y: [-1.3, 1.3], pad: [words ? 30 : 8, 12, box.top, box.bottom + (words ? 20 : 4)] }), ctx = g.ctx; view = g;
     if (words) g.axes({ xTicks: [0, 5, 10, 15, 20, 25, 30], yTicks: [[-1, '−1'], [0, '0'], [1, '1']], frame: false });
     g.hline(0, P.ink, { alpha: 0.45 }); g.vline(0, P.faint, { alpha: 0.7 });
     for (const sg of [1, -1]) { const col = sg > 0 ? P.cyan : P.magenta, right = [], left = []; for (let i = 0; i <= 200; i++) { const x = 1 / 1.3 + (31 - 1 / 1.3) * Math.pow(i / 200, 2); right.push([x, sg / x]); } for (let i = 0; i <= 40; i++) { const x = -2 + (2 - 1 / 1.3) * i / 40; left.push([x, sg / x]); } g.line(right, col, { width: 1.1, alpha: 0.5 }); g.line(left, col, { width: 1.1, alpha: 0.5 }); }
@@ -173,7 +174,7 @@
     return { N, u1, u2, hits, waits, longest, open, share: hits.length / N, ratio: longest ? 1 / longest : null, measure, kinds: [...new Set(waits)].sort((a, b) => a - b) };
   }
   function drawReturns(q) {
-    const cv = $('cv'), W = cv.clientWidth, H = cv.clientHeight, words = !TRV.thumbMode;
+    const cv = $('flat'), W = cv.clientWidth, H = cv.clientHeight, words = !TRV.thumbMode;
     let top = box.top + 6, bottom = box.bottom + 22; const spare = H - top - bottom - 2.3 * W * 0.2;
     if (spare > 0) { top += spare / 2; bottom += spare / 2; }
     const R = (H - top - bottom) / 2.3, cx = 14 + R * 1.1, nView = Math.max(55, q.N);
@@ -225,7 +226,7 @@
   /** Colours of the kinds: with two kinds cyan (short) and magenta (long); with three, violet in the middle. */
   const kindColor = (q, k) => (k === 0 ? P.cyan : k === q.kinds.length - 1 ? P.magenta : P.violet);
   function drawGaps(q) {
-    const cv = $('cv'), W = cv.clientWidth, H = cv.clientHeight, words = !TRV.thumbMode, ctx = cv.getContext('2d');
+    const cv = $('flat'), W = cv.clientWidth, H = cv.clientHeight, words = !TRV.thumbMode, ctx = kit.plot(cv, { x: [0, 1], y: [0, 1] }).ctx;   // fitted and cleared
     const top = box.top + 4, bottom = box.bottom + 8, R = Math.max(40, Math.min((H - top - bottom) / 2 - 14, W / 2 - 40)), cx = W / 2, cy = top + (H - top - bottom) / 2;
     const ang = (x) => -Math.PI / 2 + TAU * x, at = (x, r) => [cx + r * Math.cos(ang(x)), cy + r * Math.sin(ang(x))];
     ctx.strokeStyle = P.lineHot; ctx.lineWidth = 1; ctx.globalAlpha = 0.5; ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.stroke(); ctx.globalAlpha = 1;
@@ -282,32 +283,58 @@
     if (s < EDGE_S - 0.1) { const pe = v3.scale(TRIA.dir, EDGE_S * TRIA.exit); out.edgePt = { s: EDGE_S, p: pe, d: depth(pe).d }; }
     return out;
   }
-  function drawWindow(q) {
-    const ctx = st.begin(), D = st.facing(), k = 1 / TRIA.rout, sc = (p) => v3.scale(p, k), words = !TRV.thumbMode;
-    const front = (f) => v3.dot(f.n, D) > 0;
-    for (const e of TRIA.edges) if (!e.faces.some(front)) st.line(sc(TRIA.verts[e.a].p), sc(TRIA.verts[e.b].p), { color: P.lineHot, width: 1, alpha: 0.32, fade: false });
-    for (const f of TRIA.faces) if (!front(f)) st.poly(f.v.map(sc), { fill: P.cyan, alpha: 0.035 });
-    if (!front(q.face)) st.poly(q.face.v.map(sc), { fill: P.magenta, alpha: 0.22, color: P.magenta, width: 1.5 });
-    const c = st.p(sc(q.p));
-    if (q.inside) {
-      const r = q.d * k * st.unit, foot = v3.add(q.p, v3.scale(q.face.n, q.d));
-      ctx.fillStyle = P.amber; ctx.globalAlpha = 0.14; ctx.beginPath(); ctx.arc(c[0], c[1], r, 0, TAU); ctx.fill();
-      ctx.globalAlpha = 0.9; ctx.strokeStyle = P.amber; ctx.lineWidth = 1.3; ctx.beginPath(); ctx.arc(c[0], c[1], r, 0, TAU); ctx.stroke(); ctx.globalAlpha = 1;
-      st.line(sc(q.p), sc(foot), { color: P.magenta, width: 1.6, dash: [4, 3], fade: false });
-      st.dot(sc(foot), 3, P.magenta, { fade: false });
+  /* The solid is lit and opaque, so the card's camera looks into it through a cut: the faces whose outward normal leans
+     towards OPEN_DIR (the direction the card looks from, fixed in the world) are left open and only their edges drawn;
+     the rest is a bowl that turns with the solid when the camera turns, so its faces catch the light differently. */
+  const WIN_CAM = { yaw: -0.55, pitch: 0.32, zoom: 1 };
+  const OPEN_DIR = v3.unit([Math.sin(0.55) * Math.cos(0.32), -Math.cos(0.55) * Math.cos(0.32), Math.sin(0.32)]);
+  const isOpen = (f) => v3.dot(f.n, OPEN_DIR) > 0.18;
+  /** The vertex indices of a face in order around its outward normal. */
+  const outward = (f) => (v3.dot(v3.cross(v3.sub(f.v[1], f.v[0]), v3.sub(f.v[2], f.v[0])), f.n) > 0 ? f.i : f.i.slice().reverse());
+  /** The vertex at the bottom of the bowl, farthest from the cut. */
+  const BACK_V = TRIA.verts.reduce((m, v, j) => (v3.dot(v.p, OPEN_DIR) < v3.dot(TRIA.verts[m].p, OPEN_DIR) ? j : m), 0);
+  /** n points on the circle of radius r about c in the plane normal to the unit vector u. */
+  function circlePts(c, u, r, n) {
+    const a = v3.unit(v3.cross(u, Math.abs(u[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0])), b = v3.cross(u, a), out = [];
+    n = n || 72;
+    for (let i = 0; i < n; i++) { const t = TAU * i / n; out.push(v3.add(c, v3.add(v3.scale(a, r * Math.cos(t)), v3.scale(b, r * Math.sin(t))))); }
+    return out;
+  }
+  function drawWindow3(q) {
+    st.begin();
+    const D = st.facing(), k = 1 / TRIA.rout, sc = (p) => v3.scale(p, k), words = !TRV.thumbMode;
+    const V = TRIA.verts.map((v) => sc(v.p)), nV = V.length;
+    // the bowl: each face twice, the inner wall wound towards the centre and the outer wall a hair outside it
+    const faces = [], colors = [];
+    for (const f of TRIA.faces) {
+      if (isOpen(f)) continue;
+      const ring = outward(f), col = f === q.face ? P.magenta : P.dim;
+      faces.push(ring.slice().reverse(), ring.map((j) => j + nV)); colors.push(col, col);
     }
-    st.line([0, 0, 0], sc(v3.scale(TRIA.dir, TRIA.exit)), { color: P.ink, width: 1, alpha: 0.35, dash: [2, 4], fade: false });
-    st.dot(sc(q.p), 5.5, q.inside ? P.amber : P.magenta, q.inside ? { glow: 12, fade: false } : { ring: true, width: 2, fade: false });
-    for (const f of TRIA.faces) if (front(f)) st.poly(f.v.map(sc), { fill: P.cyan, alpha: 0.045 });
-    if (front(q.face)) st.poly(q.face.v.map(sc), { fill: P.magenta, alpha: 0.2, color: P.magenta, width: 1.5 });
-    for (const e of TRIA.edges) if (e.faces.some(front)) st.line(sc(TRIA.verts[e.a].p), sc(TRIA.verts[e.b].p), { color: P.lineHot, width: 1.3, alpha: 0.95, fade: false });
-    for (const v of TRIA.verts) if (v3.dot(v.p, D) > -0.05) st.dot(sc(v.p), v.deg === 5 ? 3.6 : 2.2, v.deg === 5 ? P.cyan : P.ink, { fade: false });
-    if (words) st.tag('p', sc(q.p), q.inside ? `d∂ = ${fix(q.d, 3)}` : L('已在窗口之外', 'outside the window'), q.inside ? 'hot raw' : 'mg raw', { dy: -16, fade: false });
-    if (q.edgePt) {     // for comparison: a point on the same ray near the boundary, with its small ball
-      const e = q.edgePt, ce = st.p(sc(e.p));
-      ctx.strokeStyle = P.magenta; ctx.lineWidth = 1.4; ctx.globalAlpha = 0.95; ctx.beginPath(); ctx.arc(ce[0], ce[1], Math.max(2.5, e.d * k * st.unit), 0, TAU); ctx.stroke(); ctx.globalAlpha = 1;
-      st.dot(sc(e.p), 4.5, P.magenta, { fade: false });
-      if (words) st.tag('pe', sc(e.p), `d∂ ≈ ${fix(e.d, 2)}`, 'mg raw', { dy: -30, fade: false });
+    st.poly('bowl', { vertices: V.concat(V.map((p) => v3.scale(p, 1.003))), faces }, { colors, edges: P.ink, id: 'bowl' });
+    if (isOpen(q.face)) st.fan(q.face.i.map((j) => V[j]), { fill: P.magenta, alpha: 0.28, color: P.magenta, width: 2 });
+    // the whole frame: 60 edges, 12 fivefold vertices (cyan) and 20 threefold ones
+    for (const e of TRIA.edges) st.line([V[e.a], V[e.b]], { color: P.cyan, width: 1.15, alpha: 0.65 });
+    TRIA.verts.forEach((v, j) => st.bead(V[j], v.deg === 5 ? { color: P.cyan, r: 3.6, key: `v${j}` } : { color: P.ink, r: 2.2, glow: 0.3, key: `v${j}` }));
+    st.bead(v3.scale(V[BACK_V], 1.02), { color: P.dim, r: 2.5, key: 'backV' });     // just outside the bottom of the bowl
+    st.line([[0, 0, 0], sc(v3.scale(TRIA.dir, TRIA.exit))], { color: P.ink, width: 1.2, dash: [3, 3], alpha: 0.6 });
+    if (q.inside && q.d > 1e-3) {      // the largest ball about the point inside the window
+      st.glass('margin', sc(q.p), q.d * k, { color: P.amber, alpha: 0.18, rim: 0.7 });
+      st.line(circlePts(sc(q.p), D, q.d * k), { color: P.amber, width: 1.6, dash: [4, 3], alpha: 0.9, close: true });
+    }
+    if (q.inside) {
+      const foot = v3.add(q.p, v3.scale(q.face.n, q.d));
+      st.line([sc(q.p), sc(foot)], { color: P.magenta, width: 2.2 });
+      st.bead(sc(foot), { color: P.magenta, r: 4, key: 'foot' });
+    }
+    st.bead(sc(q.p), { color: q.inside ? P.amber : P.magenta, r: 6.5, glow: 1, key: 'p' });
+    if (words) st.tag('p', sc(q.p), q.inside ? `d∂ = ${fix(q.d, 3)}` : L('已在窗口之外', 'outside the window'), q.inside ? 'hot raw' : 'mg raw', { dy: -16 });
+    if (q.edgePt) {     // for comparison: a point on the same ray near the boundary, with its small ball and its way to the face
+      const e = q.edgePt, ne = depth(e.p), ef = v3.add(e.p, v3.scale(ne.f.n, ne.d));
+      st.line(circlePts(sc(e.p), D, e.d * k, 40), { color: P.magenta, width: 1.4, alpha: 0.95, close: true });
+      st.line([sc(e.p), sc(ef)], { color: P.magenta, width: 1.6 });
+      st.bead(sc(e.p), { color: P.magenta, r: 5.5, glow: 0.8, key: 'edgePt' });
+      if (words) st.tag('edge', sc(e.p), `d∂ ≈ ${fix(e.d, 2)}`, 'mg raw', { dy: -30 });
     }
     st.end();
   }
@@ -315,11 +342,12 @@
   /* ---------- the stage ---------- */
   const box = { top: 70, bottom: 44 };
   let view = null;
-  const st = kit.stage3($('stage'), { canvas: $('cv'), yaw: -0.5, pitch: 0.32, zoom: 1, radius: 0.4, wheel: false, onChange: () => paint(),
+  // the triacontahedron is a lit solid (kit.solid on #cv); the other four scenes are flat plots on #flat, laid over it
+  const st = kit.solid($('stage'), { canvas: $('cv'), yaw: WIN_CAM.yaw, pitch: WIN_CAM.pitch, zoom: WIN_CAM.zoom, radius: 0.34, cy: 0.52, wheel: false, onChange: () => paint(),
     onPick: (ev) => { if (S.scene === 'window3') return false; if (S.scene !== 'cassini') { leave(); drag(ev); } return true; }, onDrag: (ev) => { if (S.scene !== 'cassini') drag(ev); } });
   function drag(ev) {
     if (!view) return;
-    const y = view.invY(ev.clientY - $('cv').getBoundingClientRect().top);
+    const y = view.invY(ev.clientY - $('flat').getBoundingClientRect().top);
     if (S.scene === 'cut') { clock.pause(); clock.set(tOf(clamp(y - MID, -0.5, 0.5))); } else { S.wc = clamp(Math.round(y * 20) / 20, -0.9, 0.9); fWC.set(S.wc); paint(); }
   }
   const cassiniState = (t) => { const k = kOf(t), [x, y] = power(k); return { k, x, y, value: Number(cassini(k)) }; };
@@ -327,7 +355,8 @@
   function drawStage(q) {
     const sr = $('stage').getBoundingClientRect(), below = (el) => el.getBoundingClientRect().bottom - sr.top;
     box.top = TRV.thumbMode ? 26 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10; box.bottom = TRV.thumbMode ? 26 : Math.max(18, $('legend').offsetHeight + 20);
-    if (S.scene === 'window3') return drawWindow(q);
+    $('flat').hidden = S.scene === 'window3';
+    if (S.scene === 'window3') return drawWindow3(q);
     st.begin(); st.end();
     if (S.scene === 'cut') drawCut(q); else if (S.scene === 'cassini') drawCassini(q.k); else if (S.scene === 'gaps') drawGaps(q); else drawReturns(q);
   }
@@ -405,7 +434,7 @@
       : S.scene === 'returns' ? [['am', '观测窗与此刻的点', 'the window and the current point'], ['cy', '落在窗口里的步', 'steps inside the window'], ['mg', '目前最长的间隔（只是样本）', 'the longest gap so far (sample only)']]
         : S.scene === 'gaps' ? (q.kinds.length === 3 ? [['cy', '最短的一种弧', 'the shortest kind of arc'], ['vi', '中间的一种', 'the middle kind'], ['mg', '最长的一种 = 另两种之和', 'the longest kind = the sum of the other two'], ['am', '最新的点', 'the newest point']]
           : [['cy', '短的一种弧', 'the short kind of arc'], ['mg', '长的一种', 'the long kind'], ['am', '最新的点', 'the newest point']])
-          : [['cy', '12 个五重顶点', '12 fivefold vertices'], ['am', '窗口里的点与半径 d∂ 的球', 'the point and the ball of radius d∂'], ['mg', q.edgePt ? '离它最近的面，与贴近这个面的点' : '离它最近的面', q.edgePt ? 'the face nearest to it, and a point close to that face' : 'the face nearest to it']]);
+          : [['cy', '棱与 12 个五重顶点（圆点）', 'the edges, and the 12 fivefold vertices (dots)'], ['dm', '后半个壳；前半切开，露出里面', 'the back half of the shell; the front half is cut away to show the inside'], ['am', '窗口里的点与半径 d∂ 的球', 'the point and the ball of radius d∂'], ['mg', q.edgePt ? '离它最近的面，与贴近这个面的点' : '离它最近的面', q.edgePt ? 'the face nearest to it, and a point close to that face' : 'the face nearest to it']]);
   function drawText(q) {
     const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
     const keyRO = (lab, val, subText) => { $('roKeyL').textContent = lab; $('roKey').innerHTML = val; $('roKeySub').textContent = subText; };
@@ -523,6 +552,7 @@
     S.patch = null; patchChips.set('off', true);
     if (p.rot) { S.rot = p.rot; rotChips.set(p.rot, true); }
     if (p.wc != null) { S.wc = p.wc; S.ww = p.ww; fWC.set(p.wc); fWW.set(p.ww); }
+    if (p.scene === 'window3') Object.assign(st.cam, WIN_CAM);      // the card looks in through the cut
     setScene(p.scene, p.scene === 'cut' ? p.u + 0.5 : p.at);
     if (p.patch) { setPatch(true, p.u); clock.set(p.at); }
     if (!p.play || TRV.still || (booting && !TRV.embed)) return;

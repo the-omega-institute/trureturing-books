@@ -13,7 +13,7 @@
   'use strict';
   const { kit, L } = TRV, { fix, clamp } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
-  const SIG = 10, BETA = 8 / 3, H = 0.01, EPS = 2, TR = 40, TS = 2, TD = 100, NP = 500, DIV = -(SIG + 1 + BETA);
+  const SIG = 10, BETA = 8 / 3, H = 0.01, EPS = 2, TR = 40, TS = 2, TD = 100, NP = 500, MESH_N = 8, DIV = -(SIG + 1 + BETA);
   const S = { scene: 'rounds', rho: 28, seed: 0, settle: 0, card: null };   // card: the card last picked (null after free play)   // settle: the time before which the rounds are drawn faint (a card's choice)
   const F = (p, rho) => [SIG * (p[1] - p[0]), p[0] * (rho - p[2]) - p[1], p[0] * p[1] - BETA * p[2]];
   function rk4(p, h, rho) {
@@ -68,12 +68,24 @@
     });
     return (W.rounds[seed] = out);
   }
-  /** 500 points from a cube, stored every 0.02 up to TS; and the tangent map along one orbit (determinant and stretches). */
+  /** 500 points from a cube, stored every 0.02 up to TS; the surface of a smaller cube (half-side side/2, the same
+      centre) cut into MESH_N × MESH_N squares per face, its vertices carried by the same RK4 and stored at the same
+      times; and the tangent map along one orbit (determinant and stretches). */
   function cloud(W) {
     if (W.cloud) return W.cloud;
     const rng = TRV.mulberry32(4242), n = Math.round(TS / 0.02), frames = [[]], side = 0.75 * W.half;
     for (let k = 0; k < NP; k++) frames[0].push([W.c[0] + (rng() * 2 - 1) * side, W.c[1] + (rng() * 2 - 1) * side, W.c[2] + (rng() * 2 - 1) * side]);
     for (let f = 1; f <= n; f++) frames.push(frames[f - 1].map((p) => rk4(rk4(p, H, W.rho), H, W.rho)));
+    // the cube's surface: grid vertices shared along the cube's edges, each face's squares wound outwards
+    const cube = 0.5 * side, ids = new Map(), seeds = [], faces = [];
+    const vid = (g) => { const k = g.join(','); if (!ids.has(k)) { ids.set(k, seeds.length); seeds.push(g.map((v, a) => W.c[a] + cube * (2 * v / MESH_N - 1))); } return ids.get(k); };
+    for (const ax of [0, 1, 2]) for (const s of [0, MESH_N]) for (let i = 0; i < MESH_N; i++) for (let j = 0; j < MESH_N; j++) {
+      const at = (u, v) => { const g = [0, 0, 0]; g[ax] = s; g[(ax + 1) % 3] = u; g[(ax + 2) % 3] = v; return vid(g); };
+      const q = [at(i, j), at(i + 1, j), at(i + 1, j + 1), at(i, j + 1)];
+      faces.push(s ? q : q.reverse());
+    }
+    const mesh = [seeds];
+    for (let f = 1; f <= n; f++) mesh.push(mesh[f - 1].map((p) => rk4(rk4(p, H, W.rho), H, W.rho)));
     // the tangent map along one orbit: three tangent vectors by RK4, re-orthonormalized every step; the determinant of
     // the map is the product of the lengths taken out (the raw 3 × 3 determinant would cancel catastrophically)
     let p = [W.c[0] + 0.2 * side, W.c[1] - 0.1 * side, W.c[2] + 0.1 * side], Q = [[1, 0, 0], [0, 1, 0], [0, 0, 1]], logdet = 0; const det = [1];
@@ -83,7 +95,7 @@
       det.push(Math.exp(logdet));
     }
     const thick = []; for (let f = 0; f < frames.length; f += 2) thick.push(thickness(frames[f]));
-    return (W.cloud = { frames, side, det, thick });
+    return (W.cloud = { frames, side, det, thick, cube, mesh, faces });
   }
   const jac = (p, rho) => [[-SIG, SIG, 0], [rho - p[2], -1, -p[0]], [p[1], p[0], -BETA]];
   const mv = (A, v) => [A[0][0] * v[0] + A[0][1] * v[1] + A[0][2] * v[2], A[1][0] * v[0] + A[1][1] * v[1] + A[1][2] * v[2], A[2][0] * v[0] + A[2][1] * v[1] + A[2][2] * v[2]];
@@ -116,12 +128,14 @@
 
   /* ---------- the stage ---------- */
   const EQ_R = 4.5, EQ_PAD = 8;   // px: the ring of an equilibrium C₊ or C₋, and the margin its label keeps from the canvas edge
-  const st = kit.stage3($('stage'), { canvas: $('cv'), yaw: -0.42, pitch: 0.14, zoom: 1, radius: 0.44, wheel: false, onChange: () => paint() });
-  /** An orbit up to step upTo; the steps before `from` (the transient a card wants out of the way) are drawn faint. */
-  const trail = (W, pts, upTo, color, width, from = 0) => {
+  const CAM = { yaw: -0.42, pitch: 0.14, zoom: 1 };
+  const st = kit.solid($('stage'), { canvas: $('cv'), yaw: CAM.yaw, pitch: CAM.pitch, zoom: CAM.zoom, radius: 0.44, wheel: false, onChange: () => paint() });
+  /** An orbit up to step upTo as a lit tube (key); the steps before `from` (the transient a card wants out of the way)
+      are a faint thin line. */
+  const trail = (W, pts, upTo, color, key, from = 0) => {
     const n = Math.min(pts.length, upTo + 1), cut = Math.min(n, Math.max(0, from)), out = []; for (let i = 0; i < n; i++) out.push(toStage(W, pts[i]));
-    if (cut > 1) st.path(out.slice(0, cut + (cut < n ? 1 : 0)), { color, width: width * 0.8, back: 0.45, alpha: 0.16 });
-    if (n - cut > 1) st.path(out.slice(cut), { color, width, back: 0.45 });
+    if (cut > 1) st.line(out.slice(0, cut + (cut < n ? 1 : 0)), { color, width: 0.9, alpha: 0.16 });
+    if (n - cut > 1) st.tube(key, out.slice(cut), { r: 0.0085, color, sides: 8, id: key });
   };
   /** Where an equilibrium falls on the canvas: [x, y] in CSS pixels and the side (−1 left, 1 right, 0 neither) on which its ring is not wholly inside. */
   const eqView = (v) => { const p = st.p(v); return { x: p[0], y: p[1], off: p[0] < EQ_R ? -1 : p[0] > st.W - EQ_R ? 1 : 0 }; };
@@ -132,10 +146,10 @@
     const stable = !!ends, at = eqView(v), dy = stable ? 26 : -13, key = `eq${k}`;
     const name = stable ? L(`稳定点 ${e.name}`, `stable point ${e.name}`) : e.name, text = at.off < 0 ? `← ${name}` : at.off > 0 ? `${name} →` : name;
     const cls = !stable ? 'num ink' : ends[0] === e.name ? 'cy raw' : ends[1] === e.name ? 'mg raw' : 'raw';
-    st.tag(key, v, text, cls, { dy, fade: false });
+    st.tag(key, v, text, cls, { dy, occlude: false });
     const el = [...$('stage').querySelectorAll('.tags .tag')].find((t) => !t.hidden && t.textContent === text); if (!el) return;
     const w = el.offsetWidth / 2 + EQ_PAD, h = el.offsetHeight / 2 + EQ_PAD, x = clamp(at.x, w, Math.max(w, st.W - w)), y = clamp(at.y + dy, h, Math.max(h, st.H - h));
-    if (x !== at.x || y !== at.y + dy) st.tag(key, v, text, cls, { dx: x - at.x, dy: y - at.y, fade: false });
+    if (x !== at.x || y !== at.y + dy) st.tag(key, v, text, cls, { dx: x - at.x, dy: y - at.y, occlude: false });
   }
   const state = () => {      // what the current frame shows, for the picture, the words and the probe
     const W = world(S.rho);
@@ -159,11 +173,24 @@
   };
   /** The magnifier: a square in the lower right corner that shows the neighbourhood of the ruin (the amber circle of
       radius ε) enlarged, the two arcs of the latest return through it and their unit tangents as long arrows. The
-      enlargement is the screen projection around the ruin scaled by `mag`, so the arrows point as on the stage. */
-  function inset(ctx, q, rp, rr) {
-    const W = q.W, s = Math.round(Math.min(st.W, st.H) * 0.36), x = st.W - s - 14, y = st.H - s - 44;
-    if (s < 90 || x < st.W * 0.45) return null;
-    const mag = 4, cx = x + s / 2, cy = y + s / 2;
+      enlargement is the screen projection around the ruin scaled by `mag`, so the arrows point as on the stage. It is
+      drawn on the flat canvas #flat laid over the solid stage (never on the WebGL canvas); insetBox() places it, or
+      returns null when the stage is too small for it. */
+  function insetBox() {
+    const s = Math.round(Math.min(st.W, st.H) * 0.36), x = st.W - s - 14, y = st.H - s - 44;
+    return s < 90 || x < st.W * 0.45 ? null : { x, y, s, mag: 4 };
+  }
+  /** Show #flat with the magnifier on it when there is one, hide it otherwise. */
+  function drawFlat(q, box, rp, rr) {
+    const cv = $('flat');
+    cv.hidden = !box;
+    if (!box) return;
+    const dpr = TRV.fitCanvas(cv), ctx = cv.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, cv.clientWidth, cv.clientHeight);
+    inset(ctx, q, rp, rr, box);
+  }
+  function inset(ctx, q, rp, rr, box) {
+    const W = q.W, { x, y, s, mag } = box, cx = x + s / 2, cy = y + s / 2;
     const to = (p) => { const a = st.p(toStage(W, p)); return [cx + (a[0] - rp[0]) * mag, cy + (a[1] - rp[1]) * mag]; };
     ctx.save();
     ctx.strokeStyle = P.amber; ctx.globalAlpha = 0.45; ctx.lineWidth = 1; ctx.setLineDash([3, 4]);
@@ -184,30 +211,41 @@
       ctx.beginPath(); ctx.arc(a[0], a[1], 4.5, 0, kit.TAU); ctx.fill();
     });
     ctx.restore();
-    return { x, y, s, mag };
   }
   function drawStage(q) {
-    const ctx = st.begin(), W = q.W, words = !TRV.thumbMode;
+    st.begin();
+    const W = q.W, words = !TRV.thumbMode;
+    let box = null, rp = null, rr = 0;
     if (S.scene === 'rounds') {
-      const from = Math.round(S.settle / H); trail(W, q.R[0].pts, q.i, P.cyan, 1.1, from); trail(W, q.R[1].pts, q.i, P.magenta, 1.1, from);
-      const rp = st.p(toStage(W, W.ruin)), rr = EPS / W.half * st.unit;
-      ctx.strokeStyle = P.amber; ctx.lineWidth = 2; ctx.shadowColor = P.amber; ctx.shadowBlur = 10; ctx.beginPath(); ctx.arc(rp[0], rp[1], Math.max(rr, 5), 0, kit.TAU); ctx.stroke(); ctx.shadowBlur = 0;
-      q.eq.pts.forEach((e) => st.dot(toStage(W, e.p), 4.5, P.ink, { ring: true, fade: false }));
-      if (q.ret) [[q.ret.a, 0], [q.ret.b, 1]].forEach(([v, k]) => { const x = q.R[k].pts[v.i], L0 = 2.5 * EPS; st.arrow(toStage(W, x), toStage(W, [x[0] + L0 * v.dir[0], x[1] + L0 * v.dir[1], x[2] + L0 * v.dir[2]]), { color: k ? P.magenta : P.cyan, width: 2, headSize: 8, fade: false }); });
-      q.R.forEach((r, k) => { r.visits.filter((v) => v.i <= q.i).forEach((v) => st.dot(toStage(W, r.pts[v.i]), 2.6, P.amber, { fade: false })); st.dot(toStage(W, r.start), 4, k ? P.magenta : P.cyan, { ring: true, fade: false }); st.dot(toStage(W, q.now[k]), 5, k ? P.magenta : P.cyan, { glow: 12, fade: false }); });
-      const box = words && q.ret && !['forget', 'fixed', 'cycle'].includes(S.card) ? inset(ctx, q, rp, rr) : null;   // the magnifier serves RETURN and free play
+      const from = Math.round(S.settle / H); trail(W, q.R[0].pts, q.i, P.cyan, 'orb0', from); trail(W, q.R[1].pts, q.i, P.magenta, 'orb1', from);
+      // the ruin: a glass ball of radius ε around it, the ruin itself an amber ring
+      const ruin = toStage(W, W.ruin); rp = st.p(ruin); rr = EPS / W.half * st.unit;
+      st.glass('ruin', ruin, EPS / W.half, { color: P.amber, alpha: 0.18, rim: 0.72 });
+      st.ring(ruin, { r: 5, color: P.amber, key: 'ruin' });
+      q.eq.pts.forEach((e, k) => st.ring(toStage(W, e.p), { r: EQ_R, color: P.ink, key: `eq${k}` }));
+      if (q.ret) [[q.ret.a, 0], [q.ret.b, 1]].forEach(([v, k]) => { const x = q.R[k].pts[v.i], L0 = 2.5 * EPS; st.arrow(toStage(W, x), toStage(W, [x[0] + L0 * v.dir[0], x[1] + L0 * v.dir[1], x[2] + L0 * v.dir[2]]), { color: k ? P.magenta : P.cyan, width: 2, headSize: 8 }); });
+      q.R.forEach((r, k) => {
+        r.visits.filter((v) => v.i <= q.i).forEach((v) => st.bead(toStage(W, r.pts[v.i]), { r: 2.6, color: P.amber }));
+        st.ring(toStage(W, r.start), { r: 4, color: k ? P.magenta : P.cyan, key: `start${k}` });
+        st.bead(toStage(W, q.now[k]), { r: 5, color: k ? P.magenta : P.cyan, glow: 1, key: `now${k}` });
+      });
+      box = words && q.ret && !['forget', 'fixed', 'cycle'].includes(S.card) ? insetBox() : null;   // the magnifier serves RETURN and free play
       if (words) { if (box) st.tag('ruin', [box.x + box.s / 2, box.y - 11], L(`遗迹的邻域 · 放大 ${box.mag}×`, `around the ruin · ${box.mag}× enlarged`), 'hot raw', { screen: true });
-        else st.tag('ruin', toStage(W, W.ruin), L('遗迹的邻域', 'around the ruin'), 'hot raw', { dx: Math.max(rr, 5) + 46, dy: -Math.max(rr, 5) - 18, fade: false }); st.tag('s0', toStage(W, q.R[0].start), L('第 k 轮起点', 'start of round k'), 'cy raw', { dy: 14 }); st.tag('s1', toStage(W, q.R[1].start), L('第 k+1 轮起点', 'start of round k+1'), 'mg raw', { dy: -14 }); q.eq.pts.forEach((e, k) => eqTag(k, e, toStage(W, e.p), q.ends)); }
+        else st.tag('ruin', ruin, L('遗迹的邻域', 'around the ruin'), 'hot raw', { dx: Math.max(rr, 5) + 46, dy: -Math.max(rr, 5) - 18, occlude: false }); st.tag('s0', toStage(W, q.R[0].start), L('第 k 轮起点', 'start of round k'), 'cy raw', { dy: S.seed === 3 ? -18 : 14, dx: S.seed === 3 ? -44 : 0 }); st.tag('s1', toStage(W, q.R[1].start), L('第 k+1 轮起点', 'start of round k+1'), 'mg raw', { dy: -14 }); q.eq.pts.forEach((e, k) => eqTag(k, e, toStage(W, e.p), q.ends)); }
     } else if (S.scene === 'shrink') {
-      const c = q.C, s = c.side, corner = (a, b, d) => toStage(W, [W.c[0] + a * s, W.c[1] + b * s, W.c[2] + d * s]);
-      for (const [a, b] of [[-1, -1], [-1, 1], [1, -1], [1, 1]]) { st.line(corner(a, b, -1), corner(a, b, 1), { color: P.dim, width: 1, dash: [3, 4], alpha: 0.7 }); st.line(corner(a, -1, b), corner(a, 1, b), { color: P.dim, width: 1, dash: [3, 4], alpha: 0.7 }); st.line(corner(-1, a, b), corner(1, a, b), { color: P.dim, width: 1, dash: [3, 4], alpha: 0.7 }); }
-      for (const p of c.frames[q.frame]) st.dot(toStage(W, p), 2.1, P.cyan, { alpha: 0.9 });
+      // the cube's surface carried by the flow: a lit sheet; around it the 500 points and the cube they start in
+      const c = q.C, s = c.side, corner = (a, b, d) => toStage(W, [W.c[0] + a * s, W.c[1] + b * s, W.c[2] + d * s]), dash = { color: P.dim, width: 1, dash: [3, 4], alpha: 0.7 };
+      for (const [a, b] of [[-1, -1], [-1, 1], [1, -1], [1, 1]]) { st.line([corner(a, b, -1), corner(a, b, 1)], dash); st.line([corner(a, -1, b), corner(a, 1, b)], dash); st.line([corner(-1, a, b), corner(1, a, b)], dash); }
+      st.poly('sheet', { vertices: c.mesh[q.frame].map((p) => toStage(W, p)), faces: c.faces }, { color: P.cyan, edges: false, id: 'sheet' });
+      for (const p of c.frames[q.frame]) st.bead(toStage(W, p), { r: 2.1, color: P.cyan });
       if (words) st.tag('cube', corner(-1, -1, 1), L('出发时的立方体', 'the cube they start in'), 'raw', { dy: -12 });
     } else {
-      trail(W, q.Ly.orbit, Math.round(q.T / (2 * H)), P.cyan, 0.9);
-      st.dot(toStage(W, q.Ly.orbit[Math.min(q.Ly.orbit.length - 1, Math.round(q.T / (2 * H)))]), 5, P.amber, { glow: 12, fade: false });
+      const k = Math.min(q.Ly.orbit.length - 1, Math.round(q.T / (2 * H)));
+      trail(W, q.Ly.orbit, k, P.cyan, 'orbit');
+      st.bead(toStage(W, q.Ly.orbit[k]), { r: 5, color: P.amber, glow: 1, key: 'now' });
     }
     st.end();
+    drawFlat(q, box, rp, rr);
   }
 
   /* ---------- strips ---------- */
@@ -273,7 +311,7 @@
   };
   const LEGEND = {
     rounds: [['cy', '第 k 轮', 'round k'], ['mg', '第 k+1 轮', 'round k+1'], ['am', '遗迹的邻域与每次经过', 'around the ruin, and each passage']],
-    shrink: [['cy', '500 个点', '500 points'], ['dm', '出发时的立方体', 'the cube they start in']],
+    shrink: [['cy', '500 个点与随流走的立方体面', '500 points and a cube’s surface carried by the flow'], ['dm', '出发时的立方体', 'the cube they start in']],
     dimension: [['cy', '一条长轨道', 'one long orbit'], ['am', '此刻', 'now']]
   };
   const kind = (rho) => (rho === 28 ? L('奇异吸引子', 'a strange attractor') : rho === 14 ? L('两个稳定不动点之一', 'one of two stable fixed points') : L('闭合的环', 'a closed loop'));
@@ -368,18 +406,23 @@
 
   window.ATTRACTOR_DEBUG = {
     get state() {
-      const q = state(), out = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, rho: S.rho, seed: S.seed, settle: S.settle, ruin: q.W.ruin.slice(), half: q.W.half, eps: EPS, div: DIV };
+      const q = state(), out = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, rho: S.rho, seed: S.seed, settle: S.settle, ruin: q.W.ruin.slice(), half: q.W.half, eps: EPS, div: DIV, flat: !$('flat').hidden, camera: { yaw: st.cam.yaw, pitch: st.cam.pitch, zoom: st.cam.zoom } };
       if (S.scene === 'rounds') Object.assign(out, { ends: q.ends, eqViews: q.eq.pts.map((e) => eqView(toStage(q.W, e.p))), canvas: [st.W, st.H], counts: q.counts, cos: q.cos, angle: q.angle, gap: q.gap, now: q.now, starts: q.R.map((r) => r.start), visits: q.R.map((r) => r.visits.map((v) => ({ t: v.t, d: v.d, dir: v.dir }))),
         ret: q.ret && { ta: q.ret.a.t, tb: q.ret.b.t, sep: q.ret.sep, dirs: [q.ret.a.dir, q.ret.b.dir] }, equilibria: q.eq.pts.map((e) => ({ name: e.name, p: e.p.slice() })), eig: q.eq.eig, unstable: q.eq.unstable, focus: q.eq.focus,
         labels: [...document.querySelectorAll('#stage .tag')].filter((t) => !t.hidden).map((t) => (t.textContent.match(/C[₊₋]/) || [])[0]).filter(Boolean) });
-      else if (S.scene === 'shrink') Object.assign(out, { exact: q.exact, det: q.det, frame: q.frame, thickness: q.C.thick[Math.round(q.frame / 2)] / q.C.thick[0] });
+      else if (S.scene === 'shrink') Object.assign(out, { exact: q.exact, det: q.det, frame: q.frame, thickness: q.C.thick[Math.round(q.frame / 2)] / q.C.thick[0], centre: q.W.c.slice(), side: q.C.side, cube: q.C.cube, meshCount: q.C.mesh[0].length, meshFaces: q.C.faces.length });
       else Object.assign(out, { lyap: q.l, sum: q.sum, dky: q.dky });
       return out;
     },
     seek: (t) => { clock.pause(); clock.set(t); },
     /** The point of round k at step i (the suite integrates the same system on its own and compares). */
     point: (k, i) => rounds(world(S.rho), S.seed)[k].pts[i],
-    cloudPoint: (k, f) => cloud(world(S.rho)).frames[f][k]
+    cloudPoint: (k, f) => cloud(world(S.rho)).frames[f][k],
+    /** Vertex k of the cube's surface mesh at frame f (every 0.02), and the faces (outward quads of vertex indices). */
+    meshPoint: (k, f) => cloud(world(S.rho)).mesh[f][k],
+    meshFaces: () => cloud(world(S.rho)).faces.map((f) => f.slice()),
+    /** Put the camera back where the page opens (the suite turns it in its solid checks). */
+    resetView: () => { Object.assign(st.cam, CAM); paint(); }
   };
   window.TRV_THUMB = () => { S.rho = 28; S.seed = 0; S.settle = 0; rhoChips.set('28', true); st.cam.zoom = 1.25; setScene('rounds', TR); paint.now(); };
   cards.pick(cards.initial('forget'));
