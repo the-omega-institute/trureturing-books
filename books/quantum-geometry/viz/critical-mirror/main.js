@@ -12,6 +12,12 @@
   const $ = (id) => document.getElementById(id);
   const DMAX = 0.45, RAIL = 45;                       // the rail runs δ from 0.45 down to 0 in steps of 0.01
   const GMIN = 0.3, GMAX = 40;                        // the heights γ that dragging, the slider and its readout share
+  /** γ as text, never claiming another value: the digits of γ (its shortest decimal), padded to at least `min` places;
+      past `max` places the digits shown are cut and an ellipsis marks that more follow. */
+  const gText = (v, min, max = 9) => {
+    const [i, f = ''] = String(v).split('.');
+    return f.length <= max ? `${i}.${f.padEnd(min, '0')}` : `${i}.${f.slice(0, max)}…`;
+  };
   const S = { scene: 'mirror', side: 1, gamma: 2 };
   const delta = () => Math.max(0, (RAIL - clock.t) / 100);
   const railOf = (d) => RAIL - 100 * d;
@@ -177,10 +183,10 @@
     const d = delta(), w = O[0].w, n = distinct(O);
     if (S.scene === 'mirror') {
       $('hudBig').textContent = d > 1e-9 ? L(`四个点 · |w| = ${cabs(w).toFixed(6)}`, `FOUR POINTS · |w| = ${cabs(w).toFixed(6)}`) : L(`两个点 · |w| = 1`, `TWO POINTS · |w| = 1`);
-      $('hudSub').textContent = L(`ρ = ${fix(O[0].s.re, 2)} + ${fix(S.gamma, 4)}i：镜像与共轭给出 ${n} 个点；w 的辐角 ${fix(Math.atan2(w.im, w.re) * 180 / Math.PI, 2)}°，ln|w| = ${sci(Math.log(cabs(w)))}`,
-        `ρ = ${fix(O[0].s.re, 2)} + ${fix(S.gamma, 4)}i: mirror and conjugation give ${n} points; arg w = ${fix(Math.atan2(w.im, w.re) * 180 / Math.PI, 2)}°, ln|w| = ${sci(Math.log(cabs(w)))}`);
+      $('hudSub').textContent = L(`ρ = ${fix(O[0].s.re, 2)} + ${gText(S.gamma, 4)}i：镜像与共轭给出 ${n} 个点；w 的辐角 ${fix(Math.atan2(w.im, w.re) * 180 / Math.PI, 2)}°，ln|w| = ${sci(Math.log(cabs(w)))}`,
+        `ρ = ${fix(O[0].s.re, 2)} + ${gText(S.gamma, 4)}i: mirror and conjugation give ${n} points; arg w = ${fix(Math.atan2(w.im, w.re) * 180 / Math.PI, 2)}°, ln|w| = ${sci(Math.log(cabs(w)))}`);
     } else {
-      const fmin = quarticMin(d, S.gamma).f, gs = fix(S.gamma, 2);
+      const fmin = quarticMin(d, S.gamma).f, gs = gText(S.gamma, 2);
       $('hudBig').textContent = L(`伪造的四点组 · F 在线上最低 ${fmtF(fmin)}`, `MOCK QUARTET · F ON THE LINE AT LEAST ${fmtF(fmin)}`);
       // δ = 0 is on the rail: there the zeros are ½ ± iγ, each double, and F = (γ² − t²)² touches 0 at t = ±γ
       $('hudSub').textContent = d > 1e-9
@@ -205,7 +211,7 @@
     const d = delta(), O = orbit(d, S.side, S.gamma), w = O[0].w, n = distinct(O);
     $('roKey').textContent = n === 4 ? L('四个点', 'four points') : L('两个点', 'two points');
     $('roKeySub').textContent = n === 4 ? 'ρ, ρ̄, 1 − ρ, 1 − ρ̄' : L('Re ρ = ½：ρ = 1 − ρ̄', 'Re ρ = ½: ρ = 1 − ρ̄');
-    $('ro1').textContent = `${fix(O[0].s.re, 2)} + ${fix(S.gamma, 4)}i`;
+    $('ro1').textContent = `${fix(O[0].s.re, 2)} + ${gText(S.gamma, 4)}i`;
     $('ro2').textContent = cabs(w).toFixed(6);
     $('ro3').textContent = sci(Math.log(cabs(w)));
     $('ro4').textContent = (cabs(O[0].w) * cabs(O[3].w)).toFixed(9);
@@ -224,10 +230,30 @@
     onChange: () => paint()
   });
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { cards.mark(null); S.scene = v; paint(); });
-  const fGamma = kit.field($('gamma'), { fmt: (v) => fix(v, 2), onInput: (v) => { cards.mark(null); S.gamma = v; paint(); } });
-  /** Move ρ to height v: the state and the slider take the same legal value, on the slider's grid of 0.01 inside
-      [GMIN, GMAX]. A card may keep a finer height (the first zero's), which the slider and its readout show to 0.01. */
-  const setGamma = (v, exact) => { S.gamma = exact ? v : Math.min(GMAX, Math.max(GMIN, Math.round(v * 100) / 100)); fGamma.set(S.gamma); };
+  /* γ has one value, held by the slider itself: S.gamma is only ever read back from the slider after a write, so the
+     state, the slider and its readout cannot disagree. The slider steps by 0.01 for its own keys and pointer; a height
+     between those steps (a drag of ρ, the first zero's card) is kept as it is, with the step lifted while it is shown.
+     Touching the slider puts the step back first, so its keys and pointer move on the 0.01 grid as before. */
+  const gIn = $('gamma'), GSTEP = gIn.getAttribute('step');
+  const fGamma = kit.field(gIn, { fmt: (v) => gText(v, 2), onInput: (v) => { cards.mark(null); setGamma(v); paint(); } });
+  /** Move ρ to height v, held inside [GMIN, GMAX]; the slider's own reading of it becomes the state. */
+  function setGamma(v) {
+    if (!Number.isFinite(v)) return;
+    gIn.step = 'any'; gIn.value = String(Math.min(GMAX, Math.max(GMIN, v)));
+    const x = parseFloat(gIn.value);   // the slider's own reading of the height
+    gIn.step = GSTEP; gIn.value = String(x);
+    if (parseFloat(gIn.value) !== x) { gIn.step = 'any'; gIn.value = String(x); }
+    S.gamma = parseFloat(gIn.value); fGamma.show();
+  }
+  const SLIDER_KEYS = new Set(['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End']);
+  const gridSlider = () => {
+    if (gIn.step === GSTEP) return;
+    gIn.step = GSTEP;   // the slider rounds its value to the 0.01 grid; the state follows it
+    const v = parseFloat(gIn.value);
+    if (v !== S.gamma) { cards.mark(null); S.gamma = v; fGamma.show(); paint(); }
+  };
+  gIn.addEventListener('keydown', (ev) => { if (SLIDER_KEYS.has(ev.key)) gridSlider(); });
+  gIn.addEventListener('pointerdown', gridSlider);
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
   // drag ρ in the s plane
   let dragging = false;
@@ -269,7 +295,7 @@
   let booting = true;
   function applyPreset(id) {
     const p = PRESETS[id];
-    clock.pause(); S.scene = p.scene; sceneChips.set(p.scene, true); S.side = p.side || 1; setGamma(p.gamma, true);
+    clock.pause(); S.scene = p.scene; sceneChips.set(p.scene, true); S.side = p.side || 1; setGamma(p.gamma);
     clock.set(railOf(p.d));
     if (TRV.still || (booting && !TRV.embed) || !p.play) { paint(); return; }
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();

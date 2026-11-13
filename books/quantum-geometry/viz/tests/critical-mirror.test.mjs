@@ -187,35 +187,78 @@ for (const lang of ['zh', 'en']) {
 }
 
 /* ---------- γ: one value for the state, the slider and its readout, through every control ---------- */
-const gAgree = async (exact = true) => {
-  await settle(page);
-  const st = await page.evaluate(() => window.MIRROR_DEBUG.state), v = parseFloat(await page.$eval('#gamma', (el) => el.value)), o = await page.textContent('#oGamma');
-  const ok = st.gamma >= 0.3 && st.gamma <= 40 && o === st.gamma.toFixed(2) && (exact ? v === st.gamma : Math.abs(v - st.gamma) <= 0.005 + 1e-12);
-  return { st, v, o, ok };
-};
+// The page's ways to set γ (main.js): a press or drag of ρ on the stage, the slider's own keys and pointer, the cards
+// (by click, by the tour arrows, by ?preset=), and the cover's TRV_THUMB; the rail, rewind, play and the scene chips
+// and keys leave γ alone. Every route must leave ONE value: the state, the slider's native value and the readouts
+// all say the same γ. Nothing here reuses the page's formatter: a readout is accepted only if its number IS γ, or, when
+// it ends in "…", if its digits are a leading part of γ's decimal digits (so 0.31 for γ = 0.31415… is a failure).
+const onGrid = (g) => Math.abs(g * 100 - Math.round(g * 100)) < 1e-9 && Number(g.toFixed(2)) === g;
+function claims(text, g) {
+  if (typeof text !== 'string' || !/^[0-9]+\.[0-9]+…?$/.test(text)) return false;
+  if (!text.endsWith('…')) return Number(text) === g;
+  const digits = text.slice(0, -1);
+  return Number(digits) !== g && String(g).startsWith(digits) && digits.split('.')[1].length >= 2;
+}
+async function gInv(p) {
+  await settle(p);
+  const st = await p.evaluate(() => window.MIRROR_DEBUG.state);
+  const [raw, step] = await p.$eval('#gamma', (el) => [el.value, el.step]);
+  const o = await p.textContent('#oGamma'), ro1 = await p.textContent('#ro1'), v = parseFloat(raw), g = st.gamma, why = [];
+  if (!(g >= 0.3 && g <= 40)) why.push(`γ ${g} outside [0.3, 40]`);
+  if (v !== g) why.push(`slider value ${raw} ≠ state ${g}`);
+  if (!(step === '0.01' || step === 'any') || (step === '0.01' && !onGrid(g))) why.push(`slider step ${step} for γ ${g}`);
+  if (!claims(o, g)) why.push(`readout "${o}" for γ ${g}`);
+  if (!onGrid(g) && o === g.toFixed(2)) why.push(`readout "${o}" is γ rounded to 0.01`);
+  const m = /\+ ([0-9.…]+)i$/.exec(ro1 || '');
+  if (!m || !claims(m[1], g)) why.push(`ρ readout "${ro1}" for γ ${g}`);
+  return { st, v, step, o, ro1, ok: why.length === 0, why: why.join('; ') };
+}
+const gAgree = () => gInv(page);
+/** Press the stage at the s-plane point (σ, t), record the pointer event the page receives, and compute independently
+    the height that pointer denotes: the plot is linear, so two reference points of the drawn axis give the scale. */
+async function pressAt(p, sigma, t) {
+  const [, y0] = await p.evaluate(() => window.MIRROR_DEBUG.at(0.5, 0)), [, y1] = await p.evaluate(() => window.MIRROR_DEBUG.at(0.5, 1));
+  const to = await p.evaluate(([a, b]) => window.MIRROR_DEBUG.at(a, b), [sigma, t]);
+  await p.evaluate(() => { window.__press = null; document.getElementById('cv').addEventListener('pointerdown', (e) => { window.__press = [e.clientX, e.clientY]; }, { capture: true, once: true }); });
+  await p.mouse.click(to[0], to[1]); await settle(p);
+  const rec = await p.evaluate(() => window.__press);
+  return { rec, want: rec && Math.min(40, Math.max(0.3, Math.abs((y0 - rec[1]) / (y0 - y1)))) };
+}
 check('the γ slider spans the whole drag domain 0.3 … 40 in steps of 0.01', await page.$eval('#gamma', (el) => [el.min, el.max, el.step].join()) === '0.3,40,0.01');
 s = await pick('quartic');
 await page.click('#rew'); await settle(page);
 check('rewind in QUARTIC: δ = 0.45, γ still 14', near((await state()).delta, 0.45, 1e-12) && (await state()).gamma === 14);
-let to2 = await page.evaluate(() => window.MIRROR_DEBUG.at(0.95, 0.3));
-await page.mouse.click(to2[0], to2[1]);
+let pr = await pressAt(page, 0.95, 0.3);
 let ga = await gAgree();
 const wantNear = leastF(ga.st.delta, ga.st.gamma);
-check('click at σ = 0.95, γ = 0.30 (δ = 0.45): ρ moves there, and the state, the slider and its readout agree on γ', ga.ok && ga.st.side === 1 && near(ga.st.delta, 0.45, 1e-12) && near(ga.st.gamma, 0.3, 0.011), JSON.stringify([ga.st.gamma, ga.v, ga.o]));
+check('click at σ = 0.95, γ ≈ 0.30 (δ = 0.45): ρ moves to the height the pointer denotes, and the state, the slider and its readouts say the same γ', ga.ok && ga.st.side === 1 && near(ga.st.delta, 0.45, 1e-12) && near(ga.st.gamma, pr.want, 1e-12), JSON.stringify([pr, ga.st.gamma, ga.v, ga.o, ga.why]));
 check('there γ < δ: the least value of F is at t = 0, equal to a numerical minimization, plotted in view, and the HUD prints it', ga.st.gamma < ga.st.delta && ga.st.tmin === 0 && near(ga.st.fmin, wantNear.f, 1e-12) && wantNear.t === 0 && shows(hudNumber(await page.textContent('#hudBig')), wantNear.f)
   && (await page.evaluate(() => { const q = window.MIRROR_DEBUG.quarticPlot; return q.t === 0 && q.t0 === 0; })), JSON.stringify([ga.st.fmin, wantNear]));
-to2 = await page.evaluate(() => window.MIRROR_DEBUG.at(0.95, 0.05));
-await page.mouse.click(to2[0], to2[1]); ga = await gAgree();
-check('a click below the lowest height holds ρ at γ = 0.3: slider 0.3, readout 0.30', ga.ok && ga.st.gamma === 0.3 && ga.v === 0.3 && ga.o === '0.30', JSON.stringify([ga.st.gamma, ga.v, ga.o]));
+pr = await pressAt(page, 0.95, 0.05); ga = await gAgree();
+check('a click below the lowest height holds ρ at γ = 0.3: slider 0.3, readout 0.30', ga.ok && ga.st.gamma === 0.3 && ga.v === 0.3 && ga.o === '0.30' && ga.step === '0.01', JSON.stringify([ga.st.gamma, ga.v, ga.o, ga.why]));
 check('at δ = 0.45, γ = 0.3 the page reads the least value 0.0856 (HUD 0.086), not 0.0729', near(ga.st.fmin, 0.08555625, 1e-12) && /最低 0\.086$/.test(await page.textContent('#hudBig')), await page.textContent('#hudBig'));
+// recorded presses across the whole strip, on and off the 0.01 grid: every one lands at the height it denotes
+{
+  const bad = []; let off = 0;
+  for (const t of [0.3, 0.3141592823685695, 0.37, 0.5, 1.2345, 2, 3.05, 5.5555, 9.87654, 14.134725142, 18.2, 22.22, 29.9, 35.1, 39.999, 40]) {
+    await page.evaluate(() => window.MIRROR_DEBUG.seek(10));
+    // seed a height that puts t on the drawn strip (Y = max(1.3γ, 3.2)), then press at t
+    await setGamma(Math.min(40, Math.max(0.3, Math.ceil(t / 1.2 * 100) / 100))); await settle(page);
+    const q = await pressAt(page, 0.62, t), r = await gAgree();
+    if (!onGrid(r.st.gamma)) off++;
+    if (!(q.rec && r.ok && near(r.st.gamma, q.want, 1e-12 * Math.max(1, q.want)))) bad.push(`t=${t}: pointer ${q.want}, state ${r.st.gamma}, slider ${r.v}, readout ${r.o} ${r.why}`);
+  }
+  check('16 recorded presses from γ = 0.3 to 40: the state is the height each pointer denotes (not rounded to 0.01), and the slider value and both readouts say that same γ', bad.length === 0 && off >= 10, `${off} off the grid; ${bad.slice(0, 3).join(' | ')}`);
+}
 // drag ρ upwards past the top of the strip: the height climbs to the top of the domain, and the slider follows
 const from = await page.evaluate(() => window.MIRROR_DEBUG.at(0.7, 2));
 await page.mouse.move(from[0], from[1]); await page.mouse.down();
-for (let k = 0; k < 40 && (await state()).gamma < 40; k++) { await page.mouse.move(from[0], 2 + (k % 2)); await settle(page); }
+let dragOk = true;
+for (let k = 0; k < 40 && (await state()).gamma < 40; k++) { await page.mouse.move(from[0], 2 + (k % 2)); await settle(page); dragOk = dragOk && (await gAgree()).ok; }
 ga = await gAgree();
-check('dragging ρ far above the strip stops at γ = 40, and the slider and readout show 40.00 (not 35)', ga.ok && ga.st.gamma === 40 && ga.v === 40 && ga.o === '40.00', JSON.stringify([ga.st.gamma, ga.v, ga.o]));
+check('dragging ρ far above the strip stops at γ = 40, and the slider and readout show 40.00 (not 35); every step of the drag agrees', dragOk && ga.ok && ga.st.gamma === 40 && ga.v === 40 && ga.o === '40.00', JSON.stringify([ga.st.gamma, ga.v, ga.o, ga.why]));
 await page.mouse.up();
-// the slider itself: keyboard and pointer
+// the slider itself: keyboard and pointer, on its 0.01 grid
 await page.focus('#gamma');
 await page.keyboard.press('Home'); ga = await gAgree();
 check('slider, Home: γ = 0.3 in the state, the slider and the readout', ga.ok && ga.st.gamma === 0.3 && ga.o === '0.30');
@@ -230,19 +273,84 @@ await page.mouse.click(box.x + 1, box.y + box.height / 2); ga = await gAgree();
 check('slider, a click at its left end: γ = 0.3 everywhere', ga.ok && ga.st.gamma === 0.3, JSON.stringify([ga.st.gamma, ga.v, ga.o]));
 await page.mouse.click(box.x + box.width - 1, box.y + box.height / 2); ga = await gAgree();
 check('slider, a click at its right end: γ = 40 everywhere', ga.ok && ga.st.gamma === 40, JSON.stringify([ga.st.gamma, ga.v, ga.o]));
+// from a height between the slider's steps, the slider's own controls still move on the 0.01 grid
+await page.locator('body').click({ position: { x: 5, y: 5 } }); await page.keyboard.press('1');
+await setGamma(2); await settle(page);
+pr = await pressAt(page, 0.6, 1.2345); ga = await gAgree();
+const offG = ga.st.gamma;
+check('a press at γ ≈ 1.2345 keeps that height between the slider\'s steps, and all three agree', ga.ok && !onGrid(offG) && near(offG, pr.want, 1e-12) && ga.step === 'any', JSON.stringify([pr, ga.st.gamma, ga.v, ga.o, ga.why]));
+await page.focus('#gamma'); await page.keyboard.press('ArrowRight'); ga = await gAgree();
+const upG = Math.round((Math.floor(offG * 100 + 1e-9) + 1)) / 100, dnG = Math.round(Math.floor(offG * 100 + 1e-9) - 1) / 100;
+check(`then slider → steps on the 0.01 grid (γ = ${upG}), with the step 0.01 back on the slider`, ga.ok && ga.st.gamma === upG && ga.step === '0.01', JSON.stringify([ga.st.gamma, ga.v, ga.o, ga.step, ga.why]));
+pr = await pressAt(page, 0.6, 1.2345); ga = await gAgree();
+await page.focus('#gamma'); await page.keyboard.press('ArrowLeft'); ga = await gAgree();
+check(`and slider ← from there steps down on the grid (γ = ${dnG})`, ga.ok && ga.st.gamma === dnG && ga.step === '0.01', JSON.stringify([ga.st.gamma, ga.v, ga.o, ga.step, ga.why]));
+pr = await pressAt(page, 0.6, 1.2345); ga = await gAgree();
+await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2); ga = await gAgree();
+check('and a pointer click on the slider lands on its 0.01 grid, all three agreeing', ga.ok && onGrid(ga.st.gamma) && ga.step === '0.01' && ga.st.gamma > 15 && ga.st.gamma < 25, JSON.stringify([ga.st.gamma, ga.v, ga.o, ga.step, ga.why]));
 // cards
-s = await pick('cayley'); ga = await gAgree(false);
-check('CAYLEY keeps the first zero\'s height γ = 14.134725142; the slider sits on 14.13 and the readout shows 14.13', ga.ok && ga.st.gamma === 14.134725142 && ga.v === 14.13 && ga.o === '14.13' && (await page.textContent('#hudSub')).includes('14.1347i') && (ga.st.argW * 180 / Math.PI).toFixed(2) === '4.05');
+s = await pick('cayley'); ga = await gAgree();
+check('CAYLEY keeps the first zero\'s height γ = 14.134725142, and the slider and its readout say exactly that (not 14.13)', ga.ok && ga.st.gamma === 14.134725142 && ga.v === 14.134725142 && ga.o === '14.134725142' && ga.ro1 === '0.50 + 14.134725142i'
+  && (await page.textContent('#hudSub')).includes('14.134725142i') && (ga.st.argW * 180 / Math.PI).toFixed(2) === '4.05', JSON.stringify([ga.st.gamma, ga.v, ga.o, ga.ro1, ga.why]));
+await page.focus('#gamma'); await page.keyboard.press('ArrowRight'); ga = await gAgree();
+check('from CAYLEY, slider → moves to 14.14 on the slider\'s grid and leaves the card', ga.ok && ga.st.gamma === 14.14 && ga.o === '14.14' && ga.st.preset === null, JSON.stringify([ga.st.gamma, ga.v, ga.o, ga.st.preset]));
 s = await pick('quartic'); ga = await gAgree();
 check('QUARTIC card: γ = 14 everywhere, δ = ¼, least value 49 = 4δ²γ²', ga.ok && ga.st.gamma === 14 && near(ga.st.delta, 0.25, 1e-12) && near(ga.st.fmin, leastF(0.25, 14).f, 1e-9) && near(ga.st.fmin, 49, 1e-9));
-// the rail and rewind move δ only
+// the tour arrows (shown in the book's embedded card view) reach the cards too
+await page.evaluate(() => document.querySelector('#tour [data-tour="prev"]').click()); ga = await gAgree();
+check('tour ◀ from QUARTIC opens THIN: γ = 14 everywhere', ga.ok && ga.st.preset === 'thin' && ga.st.gamma === 14);
+await page.evaluate(() => document.querySelector('#tour [data-tour="prev"]').click()); ga = await gAgree();
+check('tour ◀ again opens CAYLEY: γ = 14.134725142 everywhere', ga.ok && ga.st.preset === 'cayley' && ga.st.gamma === 14.134725142 && ga.o === '14.134725142');
+// the rail, rewind, play and the scene chips move δ or the scene only
+const cay0 = ga.st.gamma; let keep = true;
 await page.locator('body').click({ position: { x: 5, y: 5 } });
+for (const key of ['End', 'Home', '2', 'ArrowRight', '1']) { await page.keyboard.press(key); ga = await gAgree(); keep = keep && ga.ok && ga.st.gamma === cay0; }
+await page.click('#rew'); ga = await gAgree(); keep = keep && ga.ok && ga.st.gamma === cay0;
+await page.click('#sceneChips [data-scene="quartic"]'); ga = await gAgree(); keep = keep && ga.ok && ga.st.gamma === cay0 && (await page.textContent('#hudSub')).includes('14.134725142i');
+await page.click('#play'); await until(page, () => window.MIRROR_DEBUG.state.delta < 0.4); await page.click('#play'); ga = await gAgree(); keep = keep && ga.ok && ga.st.gamma === cay0;
+check('from CAYLEY: rail End/Home/→, keys 1/2, rewind, the scene chip and play leave γ = 14.134725142 and still agreed', keep, JSON.stringify([ga.st.gamma, ga.o, ga.why]));
+s = await pick('quartic'); await page.locator('body').click({ position: { x: 5, y: 5 } });
 await page.keyboard.press('End'); ga = await gAgree();
 check('rail End (δ = 0): γ unchanged and still agreed', ga.ok && ga.st.delta === 0 && ga.st.gamma === 14);
 await page.keyboard.press('Home'); ga = await gAgree();
 check('rail Home (δ = 0.45): γ unchanged and still agreed', ga.ok && near(ga.st.delta, 0.45, 1e-12) && ga.st.gamma === 14);
 await page.click('#rew'); ga = await gAgree();
 check('rewind: γ unchanged and still agreed', ga.ok && near(ga.st.delta, 0.45, 1e-12) && ga.st.gamma === 14);
+await page.evaluate(() => window.TRV_THUMB()); ga = await gAgree();
+check('the cover state (TRV_THUMB): γ = 2 everywhere', ga.ok && ga.st.gamma === 2 && ga.o === '2.00');
+
+/* ---------- γ between the slider's steps, as a reader reaches it, in both languages ---------- */
+for (const lang of ['zh', 'en']) {
+  const opts = { locale: lang === 'en' ? 'en-US' : 'zh-CN' };
+  // a recorded press at the reviewers' height γ ≈ 0.3141592823685695, at δ = 0.45
+  let p = await T.open('quantum-geometry', 'critical-mirror', `?lang=${lang}`, opts);
+  await settle(p, 200);
+  const q = await pressAt(p, 0.95, 0.3141592823685695); let r = await gInv(p);
+  check(`${lang}: a recorded press at γ ≈ 0.31416 puts ρ at the height the pointer denotes, not 0.31; slider value, readout and ρ readout agree`, q.rec && r.ok && !onGrid(r.st.gamma) && near(r.st.gamma, q.want, 1e-12) && r.o !== '0.31' && r.o.startsWith('0.314') && r.step === 'any',
+    JSON.stringify([q, r.st.gamma, r.v, r.o, r.ro1, r.why]));
+  const sub = await p.textContent('#hudSub'), m = /\+ ([0-9.…]+)i/.exec(sub);
+  check(`${lang}: the mirror HUD names that same γ`, m && claims(m[1], r.st.gamma), sub);
+  await p.locator('body').click({ position: { x: 5, y: 5 } }); await p.keyboard.press('2'); r = await gInv(p);
+  const wq = leastF(r.st.delta, r.st.gamma), qsub = await p.textContent('#hudSub'), qbig = await p.textContent('#hudBig');
+  const mq = /± ([0-9.…]+)i/.exec(qsub.split('½ ± 0.45')[1] || '');
+  check(`${lang}: in QUARTIC at δ = 0.45, γ ≈ 0.314 (γ < δ) the least value of F is at t = 0 and equals a numerical minimization; the HUD prints it and names the same γ`,
+    r.ok && r.st.gamma < r.st.delta && r.st.tmin === 0 && wq.t === 0 && near(r.st.fmin, wq.f, 1e-12) && shows(hudNumber(qbig), wq.f) && mq && claims(mq[1], r.st.gamma), JSON.stringify([r.st.gamma, r.st.fmin, wq, qbig, qsub]));
+  await p.focus('#gamma'); await p.keyboard.press('ArrowLeft'); r = await gInv(p);
+  check(`${lang}: then slider ← steps on the 0.01 grid to γ = 0.3, all agreeing`, r.ok && r.st.gamma === 0.3 && r.o === '0.30' && r.step === '0.01', JSON.stringify([r.st.gamma, r.v, r.o, r.why]));
+  await p.keyboard.press('ArrowRight'); r = await gInv(p);
+  check(`${lang}: and → steps to γ = 0.31`, r.ok && r.st.gamma === 0.31 && r.o === '0.31', JSON.stringify([r.st.gamma, r.v, r.o, r.why]));
+  await p.context().close();
+  // the CAYLEY card as cited in the chapter (?preset=cayley)
+  p = await T.open('quantum-geometry', 'critical-mirror', `?lang=${lang}&preset=cayley`, opts);
+  await settle(p, 200);
+  r = await gInv(p);
+  const csub = await p.textContent('#hudSub');
+  check(`${lang}: ?preset=cayley: γ = 14.134725142 in the state, the slider value, its readout and the ρ readout (not 14.13)`, r.ok && r.st.preset === 'cayley' && r.st.gamma === 14.134725142 && r.v === 14.134725142 && r.o === '14.134725142' && r.ro1 === '0.50 + 14.134725142i' && csub.includes('14.134725142i')
+    && near(r.st.argW, Math.PI - 2 * Math.atan(2 * 14.134725142), 1e-12), JSON.stringify([r.st.gamma, r.v, r.o, r.ro1, csub, r.why]));
+  await p.click('[data-lang-set="' + (lang === 'zh' ? 'en' : 'zh') + '"]'); r = await gInv(p);
+  check(`${lang}: switching the language keeps γ = 14.134725142 and its readout`, r.ok && r.st.gamma === 14.134725142 && r.o === '14.134725142', JSON.stringify([r.st.gamma, r.o, r.why]));
+  await p.context().close();
+}
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();
