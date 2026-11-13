@@ -444,17 +444,18 @@
   kit.keys({ 1: () => { leave(); setScene('orbit', true); }, 2: () => { leave(); setScene('boost', true); }, 3: () => { leave(); setScene('caliper', true); }, 4: () => { leave(); setScene('paths', true); } });
 
   /* ---------- experiment cards ----------
-     scene, the rail's start and stop (play), the frame a still shows (still), and what else the card sets.
+     scene, the rail's start and stop (play) and the value a still shows (at), all in the scene's own quantity (s, η or w),
+     the same frame as a clock time (still: at − the scene's lo, the clock's origin), and what else the card sets.
      apexFrom/apexTo: the card moves the turning point instead of the rail. */
   const PRESETS = {
-    circle: { scene: 'orbit', from: 0, to: 1.5, still: 1.5 },
-    boost: { scene: 'boost', k: 1, from: 0, to: LN2, still: LN2 },
-    caliper: { scene: 'caliper', from: -5, to: 3, still: 3 },
-    cone: { scene: 'boost', k: 1, from: -0.6, to: 1, still: 1, ghost: true },
-    scale: { scene: 'boost', k: 1.5, from: 0, to: LN2, still: LN2 },
+    circle: { scene: 'orbit', from: 0, to: 1.5, at: 1.5, still: 1.5 - SCENES.orbit.lo },
+    boost: { scene: 'boost', k: 1, from: 0, to: LN2, at: LN2, still: LN2 - SCENES.boost.lo },
+    caliper: { scene: 'caliper', from: -5, to: 3, at: 3, still: 3 - SCENES.caliper.lo },
+    cone: { scene: 'boost', k: 1, from: -0.6, to: 1, at: 1, still: 1 - SCENES.boost.lo, ghost: true },
+    scale: { scene: 'boost', k: 1.5, from: 0, to: LN2, at: LN2, still: LN2 - SCENES.boost.lo },
     light: { scene: 'paths', eta: 0, apexFrom: [5, 3], apexTo: [5, 5] },
     twins: { scene: 'paths', eta: 0, apexFrom: [5, 0], apexTo: [5, 3] },
-    frames: { scene: 'paths', apex: [5, 3], from: 0, to: LN2, still: LN2 }
+    frames: { scene: 'paths', apex: [5, 3], from: 0, to: LN2, at: LN2, still: LN2 - SCENES.paths.lo }
   };
   const NOTES = {
     circle: ['同一个事件 v = (5, 3)，一边转动、一边推动。品红的点沿品红的圆走，t² + x² 保持 34；青色的点沿青色的双曲线走，t² − x² 保持 16。s 走到 1.5 时，品红的点已经穿过白色的光锥跑到外面，青色的点贴着光锥，却始终在里面。', 'One event v = (5, 3), turned on one side and boosted on the other. The magenta point runs along the magenta circle with t² + x² held at 34; the cyan point runs along the cyan hyperbola with t² − x² held at 16. By s = 1.5 the magenta point has crossed the white light cone to the outside, while the cyan one hugs the cone and stays inside.'],
@@ -488,12 +489,12 @@
     if (p.k != null) { S.k = p.k; fK.set(p.k); }
     if (p.apex) S.apex = p.apex.slice();
     if (p.eta != null) S.etaP = p.eta;
-    if (p.still != null) setPar(p.scene, p.still);
+    if (p.at != null) setPar(p.scene, p.at);
     if (p.apexTo) S.apex = p.apexTo.slice();
     setScene(p.scene, !booting);
     // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-    if (TRV.still || (booting && !TRV.embed)) return;
+    if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still); return; }
     const cf = SCENES[p.scene];
     if (p.apexTo) {
       const player = apexPlayer(p.apexFrom, p.apexTo);
@@ -505,7 +506,7 @@
     stopAt = p.to - cf.lo < clock.max - 1e-9 ? p.to - cf.lo : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动琥珀色的点（或在“对照”里拖任一个点），用时间轴推动快度，在“推动”里改比例 k，在“世界线”里拖折返点 A。随时可以再选一张卡。', 'Free play: drag the amber point (or either point in Compare), push the rapidity with the rail, change the scale k in Boost, or drag the turning point A in Worldlines. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

@@ -271,7 +271,7 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    quartet: { scene: 'mirror', d: 0.1, gamma: 2, play: true },
+    quartet: { scene: 'mirror', d: 0.1, gamma: 2, play: true, still: railOf(0.1) },   // the still: the quartet before the push
     cayley: { scene: 'mirror', d: 0, gamma: 14.134725142 },
     thin: { scene: 'mirror', d: 0.1, gamma: 14 },
     quartic: { scene: 'quartic', d: 0.25, gamma: 14, side: -1 }
@@ -291,10 +291,12 @@
     const p = PRESETS[id];
     clock.pause(); S.scene = p.scene; sceneChips.set(p.scene, true); S.side = p.side || 1; S.gamma = p.gamma; fGamma.set(Math.round(p.gamma * 100) / 100);
     clock.set(railOf(p.d));
-    if (TRV.still || (booting && !TRV.embed) || !p.play) { paint(); return; }
+    // a still (cover, cited figure shot) and the opening view of the full page show the card's declared frame
+    if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still); paint(); return; }
+    if (!p.play) { paint(); return; }
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：在左边拖动 ρ，或拖动时间轴把它推向镜面。随时可以再选一张卡。', 'Free play: drag ρ on the left, or scrub the rail to push it towards the mirror. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

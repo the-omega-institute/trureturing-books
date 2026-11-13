@@ -391,7 +391,7 @@
   const row = (cls, zh, en, val) => `<div class="${cls}"><dt>${L(zh, en)}</dt><dd>${val}</dd></div>`;
   const LEGEND = {
     growth: [['dm', '白线：已用的门数', 'white line: gates used'], ['mg', '预期复杂度（模型）', 'expected complexity (model)'], ['cy', '半链纠缠熵', 'half-chain entanglement entropy'], ['dm', '灰色台阶：2 × 跨割门数', 'grey steps: 2 × gates across the cut']],
-    depth: [['cy', '门（已执行）', 'gates (done)'], ['am', '正在执行的层', 'the layer running now'], ['mg', '折返点 S', 'turning points S'], ['dm', '白线：定理的最少层数 · 灰色虚线：旧公式', 'white line: minimum by the theorem · grey dashed: old formula']]
+    depth: [['cy', '门（已执行）', 'gates (done)'], ['am', '正在执行的层', 'the layer running now'], ['mg', '折返点 S', 'turning points S'], ['dm', '白线：定理的最少层数 · 灰色虚线：旧公式', 'white: theorem minimum; dashed grey: old formula']]
   };
   function drawText() {
     let big, sub, key, keyName, rows, note, aside, pill;
@@ -478,7 +478,7 @@
     saturate: { scene: 'growth', cv: false, from: 0, to: 14, still: 14, rate: 3 },
     ceiling: { scene: 'growth', cv: false, from: 14, to: TMAX, still: TMAX, rate: 10 },
     cv: { scene: 'growth', cv: true, from: 10, to: 60, still: 60, rate: 8 },
-    floor: { scene: 'depth', N: 11, cuts: [4, 8], path: FLOOR_PATH },
+    floor: { scene: 'depth', N: 11, cuts: [4, 8], path: FLOOR_PATH, still: 'end' },
     eight: { scene: 'depth', N: 8, cuts: [3, 6], from: 0, to: 3, still: 3 },
     eleven: { scene: 'depth', N: 11, cuts: [4, 8], from: 0, to: 4, still: 4 }
   };
@@ -514,7 +514,11 @@
     if (p.scene === 'growth' && p.still != null) S.t = p.still;
     if (p.scene === 'depth') { S.lt = depthOf(S.N, S.cuts); if (p.path) S.hold = 9; }
     setScene(p.scene);
-    if (TRV.still || (booting && !TRV.embed)) { if (p.path) { S.hold = 9; S.ghost = p.path[0].slice(); } paint(); return; }
+    if (TRV.still || (booting && !TRV.embed)) {
+      if (p.still != null) clock.set(p.still === 'end' ? clock.max : p.still);
+      if (p.path) { S.hold = 9; S.ghost = p.path[0].slice(); }
+      paint(); return;
+    }
     if (p.path) {
       const player = floorPlayer(p.path);
       S.cuts = new Set(p.path[0]); S.hold = 9; refitDepth(true);
@@ -526,7 +530,7 @@
     stopAt = p.to < clock.max - 1e-9 ? p.to : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖时间轴看电路一层层走；在“深度”里改 N 与 κ，或直接点格点挪动折返点。随时可以再选一张卡。', 'Free play: drag the rail to run the circuit layer by layer; in Depth change N and κ, or click sites to move the turning points. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

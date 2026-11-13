@@ -12,3 +12,8 @@
   :root[data-embed][data-figure] .hud-tl .sub, :root[data-embed][data-figure] .hud-bl { line-height: 1.3; }
   :root[data-embed][data-figure] .hud-bl { row-gap: 1px; }
 }
+
+/* The tour bar selects the scene in a narrow cited figure. */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}

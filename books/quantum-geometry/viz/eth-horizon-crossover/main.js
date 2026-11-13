@@ -331,7 +331,8 @@
       const I = fresh(), k = cuts(I.a, I.b, I.c, I.d), cone = inCone(I.a, I.b, I.c, I.d);
       big = L(`桥图 (${I.a}, ${I.b}, ${I.c}, ${I.d}) · 第 ${I.seed} 次抽样`, `Bridge (${I.a}, ${I.b}, ${I.c}, ${I.d}) · draw ${I.seed}`);
       hud = L(`这个实例的秩 ${I.rank}，最小割 ${k.full}：${I.rank === k.full ? '相等' : '秩更小'}`, `rank of this instance ${I.rank}, minimal cut ${k.full}: ${I.rank === k.full ? 'equal' : 'the rank is smaller'}`);
-      // the neutral mark is the page's numerical check of this draw against QMinCut (green stays in the Lean box); the fourth cut is shown beside it, not under the mark
+      // the page compares this instance's rank with the frozen bound QMinCut (QMaxFlow ≤ QMinCut) itself: a neutral mark, the
+      // green ✓ stays in the LEAN ✓ box; the fourth cut is shown beside it, not under the mark
       $('roKeyL').textContent = L('这个随机实例的秩', 'rank of this random instance'); $('roKey').innerHTML = `<span class="c-cy">${I.rank}</span> <span class="nummark">${I.rank <= k.min ? `≤ ${k.min} ✓` : '✗'}</span>`; $('roKeySub').textContent = L(`Lean 的 QMinCut = min(3ac, ad, bc) = ${k.min}；四道割最小 ${k.full}`, `Lean's QMinCut = min(3ac, ad, bc) = ${k.min}; smallest of the four cuts ${k.full}`);
       set(1, L('行数 a·d', 'rows a·d'), String(k.rows)); set(2, L('列数 b·c', 'columns b·c'), String(k.cols)); set(3, L('穿桥的割 3·a·c、3·b·d', 'cuts through the bridges, 3·a·c and 3·b·d'), L(`${k.bridges}、${k.bridgesBD}`, `${k.bridges}, ${k.bridgesBD}`));
       set(4, L('在定理的锥域内？', 'inside the cone of the theorem?'), cone ? L('是', 'yes') : L('否', 'no'));
@@ -385,7 +386,7 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    human: { scene: 'rates', c: 1, k: 3, at: 16 }, atoms: { scene: 'rates', c: 1, k: 3, at: 266 }, cross: { scene: 'rates', c: 1, k: 3, at: 558, play: true, from: 2 }, constant: { scene: 'rates', c: 0.5, k: 3, at: 57 },
+    human: { scene: 'rates', c: 1, k: 3, at: 16 }, atoms: { scene: 'rates', c: 1, k: 3, at: 266 }, cross: { scene: 'rates', c: 1, k: 3, play: true, from: 2, still: 558 }, constant: { scene: 'rates', c: 0.5, k: 3, at: 57 },
     bridge: { scene: 'cut', dims: [2, 3, 2, 3], at: 0 }, narrow: { scene: 'cut', dims: [1, 5, 1, 5], at: 0 },
     geometric: { scene: 'modes', prof: 'geometric', at: (1 - 1 / 8) / 0.98 }
   };
@@ -406,11 +407,24 @@
     if (p.dims) { S.dims = p.dims.slice(); dimFields.forEach((f, i) => f.set(p.dims[i])); }
     if (p.prof) { S.prof = p.prof; profChips.set(p.prof, true); }
     setScene(p.scene, p.at);
-    if (!p.play || TRV.still || (booting && !TRV.embed)) return;
+    // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
+    // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
+    if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still === 'end' ? clock.max : p.still); return; }
+    if (!p.play) return;
     clock.set(p.from || 0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "human": ["c = 1、n = 2¹⁶：示意曲线才降到穷举指数 1，PPSZ 指数为 0.386。", "At c = 1 and n = 2¹⁶, the schematic exponent only reaches brute force’s 1; PPSZ pays 0.386."],
+    "atoms": ["n = 2²⁶⁶ 时示意指数约 0.494，仍高于 PPSZ 的 0.386。", "At n = 2²⁶⁶, the schematic exponent is still 0.494, above PPSZ’s 0.386."],
+    "cross": ["c = 1 时示意曲线直到 n ≈ 2⁵⁵⁸ 才与 0.386 相交。", "For c = 1, the schematic curve meets 0.386 only at n ≈ 2⁵⁵⁸."],
+    "constant": ["c 减半，示意交叉点从 2⁵⁵⁸ 移至约 2⁵⁷；大 O 不决定这个常数。", "Halving c moves the schematic crossover from 2⁵⁵⁸ to about 2⁵⁷; big O does not fix c."],
+    "bridge": ["桥图锥域内最大秩等于最小割 6；单次抽样可更低，此定理不支持 3-SAT 算法主张。", "In the bridge-graph cone, maximum rank equals min-cut 6; samples may be lower, and this gives no 3-SAT algorithm."],
+    "narrow": ["外割为 5，三桥只容 3：5 × 5 流矩阵的秩至多为 3，这组维数在锥域外。", "Outer cuts are 5, but bridges carry only 3: the 5 × 5 flow matrix has rank at most 3, outside the cone."],
+    "geometric": ["λⱼ = 2^−(j+1)、τ = 1/8：三根柱过线，总预算 1 给出柱数上界 8。", "For λⱼ = 2^−(j+1) and τ = 1/8, three bars clear the line; budget 1 bounds their count by 8."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、调常数、换子句宽度 k、改维数、拖阈值。随时可以再选一张卡。', 'Free play: switch scenes, change the constant or the clause width k, change the dimensions, drag the threshold. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

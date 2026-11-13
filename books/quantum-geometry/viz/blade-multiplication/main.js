@@ -388,9 +388,9 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    e2e1: { scene: 'cl3', pair: [2, 1], play: true },
-    square: { scene: 'cl3', pair: [3, 3], hl: 'diag', play: true }, pseudo: { scene: 'cl3', pair: [7, 7], hl: 'pseudo', play: true },
-    pauli: { scene: 'pauli', pair: [2, 1], play: true }, vector: { scene: 'vector', play: true }
+    e2e1: { scene: 'cl3', pair: [2, 1], play: true, still: 'end' },
+    square: { scene: 'cl3', pair: [3, 3], hl: 'diag', play: true, still: 'end' }, pseudo: { scene: 'cl3', pair: [7, 7], hl: 'pseudo', play: true, still: 'end' },
+    pauli: { scene: 'pauli', pair: [2, 1], play: true, still: 'end' }, vector: { scene: 'vector', play: true, still: 'end' }
   };
   const NOTES = {
     e2e1: ['e₂ · e₁ 与 e₁ · e₂：两种次序的掩码异或都是 001₂ ⊕ 010₂ = 011₂，即 e₁₂。e₁ · e₂ 已按 e₁ e₂ e₃ 的顺序排好，不用交换，乘积是 +e₁₂，表里那一格是青色；反过来 e₂ · e₁ 右边的 e₁ 要越过左边的 e₂，两条线交叉一次，符号变成 −，这一格是品红，与 e₁ · e₂ 那一格关于对角线对称。', 'e₂ · e₁ and e₁ · e₂: in either order the masks XOR to 001₂ ⊕ 010₂ = 011₂, that is e₁₂. In e₁ · e₂ the factors are already in the order e₁ e₂ e₃, no swap is needed, the product is +e₁₂, and that cell is cyan; the other way round, in e₂ · e₁ the e₁ on the right must move past the e₂ on the left, the two lines cross once, the sign becomes −, and this cell is magenta, the mirror image of the e₁ · e₂ cell across the diagonal.'],
@@ -405,13 +405,14 @@
     S.hl = p.hl || null;
     if (p.pair) { S.l = p.pair[0]; S.r = p.pair[1]; }
     setScene(p.scene);
-    // a still (cover, cited figure for PDF/EPUB) and the opening view of the full page show the finished product;
-    // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-    if (!p.play || TRV.still || (booting && !TRV.embed) || K() < 1) return;
+    // a still (cover, cited figure for PDF/EPUB) and the opening view of the full page show the declared frame (the
+    // finished product); inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
+    if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still === 'end' ? clock.max : p.still); return; }
+    if (!p.play || K() < 1) return;
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：点表里的一格、换场景、拖时间轴。随时可以再选一张卡。', 'Free play: click a cell of the table, switch scenes, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

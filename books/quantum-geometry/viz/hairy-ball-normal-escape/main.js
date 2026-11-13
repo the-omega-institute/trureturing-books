@@ -484,7 +484,7 @@
     else { S.stop = p.stop == null ? null : p.stop; if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
     paint();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换一个场景，拖动零点或时间轴，转动球面与环面。随时可以再选一张卡。', 'Free play: change the scene, drag the zero or the rail, turn the sphere and the torus. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

@@ -1858,6 +1858,7 @@
   }
 
   const cards = kit.cards($('presets'), {
+    presets: CARDS,
     notes: NOTES,
     noteEl: $('presetNote'),
     tour: $('tour'),

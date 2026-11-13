@@ -1653,7 +1653,7 @@
   }
 
   const cards = kit.cards($('presets'), {
-    notes: NOTES,
+    presets: CARDS, notes: NOTES,
     noteEl: $('presetNote'),
     tour: $('tour'),
     onPick: applyPreset,

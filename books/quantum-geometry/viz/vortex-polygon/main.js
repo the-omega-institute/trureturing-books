@@ -267,10 +267,10 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    rest: { m: 3, mode: 'rest', play: true },
-    radius: { m: 3, mode: 'radius', play: true },
-    hexagon: { m: 3, mode: 'unstable', play: true },
-    drift: { m: 2, mode: 'drift', play: true }
+    rest: { m: 3, mode: 'rest', play: true, still: 'end' },
+    radius: { m: 3, mode: 'radius', play: true, still: 'end' },
+    hexagon: { m: 3, mode: 'unstable', play: true, still: 'end' },
+    drift: { m: 2, mode: 'drift', play: true, still: 'end' }
   };
   const NOTES = {
     rest: ['六个涡旋正负相间排在半径 R = 1 的圆上：每个涡旋的进动与其余涡旋吹来的速度恰好相抵，整圈一动不动。', 'Six vortices of alternating sign on the circle of radius R = 1: each one\'s precession exactly cancels the velocity the others blow on it, and the ring does not move.'],
@@ -284,11 +284,12 @@
     stopAt = null; clock.pause();
     S.m = p.m; S.mode = p.mode;
     rebuild(0);
-    if (TRV.still || (booting && !TRV.embed)) { clock.set(run.tmax); return; }
+    // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still === 'end' ? clock.max : p.still); return; }
     if (!p.play) return;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换涡旋个数与推法，拖时间轴。随时可以再选一张卡。', 'Free play: change the number of vortices and the push, and scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

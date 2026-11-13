@@ -419,7 +419,7 @@
       pages: [['cy', '全部书页', 'all the pages'], ['am', '读头所在的页', 'the page under the head'], ['vi', '翻页轴', 'the paging axis']],
       field: [['cy', '各处出发的流线', 'flow lines from everywhere'], ['am', '选中的那条', 'the chosen one'], ['dm', '场为零的对面点', 'the opposite point, where the field is zero']],
       line: [['cy', '走过的每一步', 'every step taken'], ['am', '当前的态', 'the current state'], ['dm', '起点附近的“其余”轴', 'the “rest” axis near the start']],
-      sos: [['cy', '2-SAT：消解闭包的阶（实心：推出空子句；空心：可满足）', '2-SAT: order of the resolution closure (filled: empty clause derived; hollow: satisfiable)'], ['mg', '3-XOR：示意的阶数阈值', '3-XOR: schematic order threshold'], ['am', '观察者的阶 M', 'the observer\'s order M']],
+      sos: [['cy', '2-SAT：消解闭包的阶', '2-SAT: resolution closure order'], ['cy', '实心：推出空子句；空心：可满足', 'filled: empty clause; hollow: satisfiable'], ['mg', '3-XOR：示意的阶数阈值', '3-XOR: schematic order threshold'], ['am', '观察者的阶 M', 'the observer\'s order M']],
       wild: [['cy', '见证丝与丝上的探针', 'the thread and the probe on it'], ['mg', '涡旋与通道外的探针', 'the vortices and the probes off the channel'], ['am', '探针此刻的位置', 'where the probes are now']]
     };
     const html = LEG[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
@@ -442,8 +442,8 @@
     $('stage').classList.toggle('still', !!SC[sc].flat);
     if (!booting) stage.view(SC[sc].view); else { const v = { iso: [-0.62, 0.34], front: [0, 0.06] }[SC[sc].view]; stage.cam.yaw = v[0]; stage.cam.pitch = v[1]; }
   }
-  /** Start a card: play for the reader, or jump to the frame that a still should show. */
-  function run(play, still) { if (TRV.still || (booting && !TRV.embed)) clock.set(still == null ? clock.max : still); else if (play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); } }
+  /** Start a card that plays: play for the reader, or jump to the frame its still shows (its `still` in PRESETS). */
+  function run(id) { const still = PRESETS[id].still; if (TRV.still || (booting && !TRV.embed)) clock.set(still === 'end' ? clock.max : still); else if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
   const leave = () => cards.mark(null);
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); setScene(v); });
   const fTh1 = kit.field($('th1'), { fmt: (v) => `${v}°`, onInput: (v) => { S.th1 = v; S.wish = null; leave(); paint(); } });
@@ -466,6 +466,8 @@
   kit.keys({ 1: () => { leave(); setScene('window'); }, 2: () => { leave(); setScene('pages'); }, 3: () => { leave(); setScene('field'); }, 4: () => { leave(); setScene('line'); }, 5: () => { leave(); setScene('sos'); }, 6: () => { leave(); setScene('wild'); } });
 
   /* ---------- experiment cards ---------- */
+  // the cards that play, with the frame their still shows (kit.cards writes it onto the card as data-still)
+  const PRESETS = { window: { still: 70 }, right: { still: 120 }, crystal: { still: 3 }, field: { still: 1.6 }, thread: { still: 6 }, sos: { still: ORD.hi }, wilderness: { still: 6.4 } };
   const NOTES = {
     window: ['A 与 B 夹 60°，B 与 C 夹 45°。让 C 绕 B 转一圈：A·C 只在 cos 105° 与 cos 15° 之间来回，出不了这个窗口；贴上窗边时三根共面，体积为零。这三根是实向量，det G = 1 − c²_AB − c²_BC − c²_AC + 2c_AB c_BC c_AC 是实截面（Bargmann 相位 Φ 只取 0 或 π）；复态的末项要换成 2|c_AB||c_BC||c_AC| cos Φ。', 'A and B are 60° apart, B and C 45°. Let C go once around B: A·C only swings between cos 105° and cos 15° and cannot leave that window; at its edges the three are coplanar and the volume is zero. These are real vectors, and det G = 1 − c²_AB − c²_BC − c²_AC + 2c_AB c_BC c_AC is the real section (Bargmann phase Φ only 0 or π); for complex states the last term becomes 2|c_AB||c_BC||c_AC| cos Φ.'],
     impossible: ['A 与 B 只夹 30°，B 与 C 只夹 40°，却要求 A 与 C 接近反向（A·C = −0.5）。det G 变成负数：没有任何三根向量能做到。', 'A and B are only 30° apart and B and C only 40°, yet A and C are asked to be nearly opposite (A·C = −0.5). det G turns negative: no three vectors can do this.'],
@@ -479,17 +481,23 @@
   function applyPreset(id) {
     S.wish = null;
     const win = (a, b, phi) => { S.th1 = a; S.th2 = b; fTh1.set(a); fTh2.set(b); setScene('window', phi); };
-    if (id === 'window') { win(60, 45, 0); run(true, 70); }
+    if (id === 'window') { win(60, 45, 0); run(id); }
     else if (id === 'impossible') { win(30, 40, 180); ask(-0.5, TRV.still || booting); $('wish').value = '-0.5'; fWish.show(); }
-    else if (id === 'right') { win(90, 90, 0); run(true, 120); }
-    else if (id === 'crystal') { S.N = 12; S.tilt = 35; fN.set(12); fTilt.set(35); setScene('pages', 0); run(true, 3); }
-    else if (id === 'field') { S.alpha0 = 150; fA0.set(150); setScene('field', 0); run(true, 1.6); }
-    else if (id === 'thread') { S.n = 8; fQ.set(8); setScene('line', 0); run(true, 6); }
-    else if (id === 'sos') { S.M = 8; fOrd.set(8); setScene('sos', ORD.lo); run(true, ORD.hi); }
-    else if (id === 'wilderness') { S.eps = 0.15; S.user = null; fEps.set(0.15); setScene('wild', 0); run(true, 6.4); }
+    else if (id === 'right') { win(90, 90, 0); run(id); }
+    else if (id === 'crystal') { S.N = 12; S.tilt = 35; fN.set(12); fTilt.set(35); setScene('pages', 0); run(id); }
+    else if (id === 'field') { S.alpha0 = 150; fA0.set(150); setScene('field', 0); run(id); }
+    else if (id === 'thread') { S.n = 8; fQ.set(8); setScene('line', 0); run(id); }
+    else if (id === 'sos') { S.M = 8; fOrd.set(8); setScene('sos', ORD.lo); run(id); }
+    else if (id === 'wilderness') { S.eps = 0.15; S.user = null; fEps.set(0.15); setScene('wild', 0); run(id); }
     if (id !== 'impossible') fWish.show();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "window": ["实向量夹角 60° 与 45° 固定时，A·C 只能在 cos 105° 与 cos 15° 之间，边界共面。", "For real vectors with angles 60° and 45° fixed, A·C stays between cos 105° and cos 15°; edges are coplanar."],
+    "sos": ["2-SAT 消解闭包停在阶 2；随机 3-XOR/3-SAT 的文献平方和下界不推出 P ≠ NP。", "2-SAT resolution closes at order 2; literature sum-of-squares lower bounds for random 3-XOR/3-SAT do not settle P ≠ NP."],
+    "wilderness": ["青色探针沿丝到达目标，通道外的品红探针被涡旋困住；这是示意模型。", "The cyan probe follows the thread to the target; magenta probes outside the channel are trapped: a schematic model."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、拖滑块、在球上拖动 C、在荒野里点一下放一根探针。随时可以再选一张卡。', 'Free play: switch scenes, move the sliders, drag C on the sphere, click the wilderness to drop a probe. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

@@ -393,7 +393,7 @@
     else if (booting) kit.autoplay(clock, $('stage'));
     else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动边上的指针改相位，拖动顶点的紫色指针做规范变换，再拖时间轴从变换前看到变换后。', 'Free play: drag a hand on an edge to change its phase, drag the violet hand at a corner to make a gauge transformation, then scrub the rail from before the change to after it.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
