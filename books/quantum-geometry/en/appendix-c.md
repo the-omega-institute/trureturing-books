@@ -664,7 +664,7 @@ Every build and release of this book mechanically enforces the following five ve
 | :--- | :--- | :--- | :---: |
 | **Upstream Repository & Branch** | `the-omega-institute/trureturing` branch `dev` | `site.toml` `[trureturing]` config & `git merge-base --is-ancestor` check | `PASS` |
 | **Pinned Commit SHA** | [{commit}](trureturing:) | Locked in `trureturing.lock.json` `commit` field | `PASS` |
-| **Frozen Theorem Count** | `299` environment-cited theorems (`409` total entries of `kind == "theorem"` including inline references) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices and `statement_id` digests | `PASS` |
+| **Frozen Theorem Count** | `301` environment-cited theorems (`411` total entries of `kind == "theorem"` including inline references) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices and `statement_id` digests | `PASS` |
 | **Auxiliary Definition / Structure Count** | `114` environment-cited definitions/inductive types; `167` in total (`157` `def` + `10` `inductive`) including inline references | Kept in C.2 and never counted as `theorem / lemma / proposition / corollary` boxes | `PASS` |
 | **Bilingual Structural Alignment** | 100% parity between `zh` and `en` chapter order, env IDs, and Lean citations | Checked item-by-item by `./tbook check` (`0 error(s)`) | `PASS` |
 
