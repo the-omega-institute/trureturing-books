@@ -1,11 +1,11 @@
-# A Field Analogy Between Navier–Stokes and $P$ vs. $NP$ — Lamb Bivectors, 3D Vortex Stretching, and Arnold Geodesics {#sec-coda-navier-stokes-and-p-vs-np}
+# 30.4 A Field Analogy Between Navier–Stokes and $P$ vs. $NP$ — Lamb Bivectors, 3D Vortex Stretching, and Arnold Geodesics {#sec-coda-navier-stokes-and-p-vs-np}
 
 > **Author's original words**: "When both the Navier–Stokes problem and the $P$/$NP$ problem are cast into field form, they look strikingly alike."
 > （“navier stokes与P/NP 问题, 都场化的话似乎很像”）
 
 Placing **Navier–Stokes (NS) existence and smoothness** alongside **$P$ vs. $NP$** lets us compare global states, local observations, and quadratic feedback (`MODEL`). No map from fluid solutions to Boolean instances is supplied, nor any proof that such a map preserves evolution, solvability, or computational cost. This comparison supplies no mathematical isomorphism. A slender fluid core and a line drawn to represent witness checking do not identify the two problems; neither fluid blow-up nor failure of projected closure implies $P\neq NP$.
 
-## 1. Clifford Separation of Inner-Product Potential Flow and Exterior Bivector Vorticity (`MODEL`)
+## 30.4.1 Clifford Separation of Inner-Product Potential Flow and Exterior Bivector Vorticity (`MODEL`) {#1-clifford-separation-of-inner-product-potential-flow-and-exterior-bivector-vorticity-model}
 
 ::: {.remark #rem-ch30-lamb-decomposition-literature title="Literature Note on the Incompressible Navier–Stokes Equations and Lamb's Convective Decomposition"}
 **Literature result, not formalized in this book.** Both the continuum incompressible Navier–Stokes PDE system and H. Lamb's classical vector–bivector convective decomposition belong to the external mathematical-physics literature and are not formalized at the continuum PDE level in this book (the discrete 5-mode Fourier advection closure obstruction and 2D Fourier mild-path theorem verified in this book appear in [@thm-coda-quadratic-advection-no-closure] below): the incompressible Navier–Stokes equations read
@@ -29,7 +29,7 @@ Mapping the irrotational and rotational regimes recorded in [@rem-ch30-lamb-deco
 **The two halves of the advection term.** Streamlines of the plane flow $\mathbf{u} = (1 - s)(x, -y) + s(-y, x)$ at $s = 0.8$, with vorticity $\omega = 2s = 1.6$. At the amber probe the white arrow is the advection term $(\mathbf{u}\cdot\nabla)\mathbf{u}$, the sum of the cyan gradient half $\nabla(\|\mathbf{u}\|^2/2)$ and the magenta Lamb half $\boldsymbol{\omega}\times\mathbf{u}$; turn $s$ back to $0$ (the irrotational stagnation flow) and the magenta arrow vanishes while the white arrow falls on the cyan one: the whole advection term is a gradient and joins the pressure. The probe can be dragged.
 :::
 
-## 2. Why Both Problems Undergo a Phase Transition at Dimension $2 \to 3$ (Geometric Analogy `MODEL` & Open-Conjecture Boundary)
+## 30.4.2 Why Both Problems Undergo a Phase Transition at Dimension $2 \to 3$ (Geometric Analogy `MODEL` & Open-Conjecture Boundary) {#2-why-both-problems-undergo-a-phase-transition-at-dimension-23-geometric-analogy-model--open-conjecture-boundary}
 
 ::: {.remark #rem-ch30-vorticity-transport-literature title="Literature Note on the Vorticity Transport Equation, Vortex Stretching, and Slender-Tube Circulation Scaling"}
 **Literature result, not formalized in this book.** Taking the exterior curl of the momentum equation in [@rem-ch30-lamb-decomposition-literature] yields the classical hydrodynamic transport equation for vorticity $\boldsymbol{\omega} = \star(\nabla\wedge\mathbf{u})$:
@@ -240,7 +240,7 @@ For every smooth, divergence-free ($\nabla\cdot\mathbf{u}_0 = 0$) initial veloci
 **Thinner and thinner (a schematic model).** The circulation $\Gamma = \omega A$ of the cyan loop stays fixed; the faint shadow with its dashed circles is the tube as it started. Here the strain is taken proportional to the vorticity itself ($\alpha = \kappa\omega$, a schematic closure and not a solution of the Navier–Stokes equations): $\kappa\Gamma = 0.50$ exceeds $4\pi\nu = 0.151$, so by $t = 2.4$ the cross-section is down to $0.162$ and the magenta vorticity up to $6.18$, and the cross-section reaches zero at $t^* = 2.86$. Whether a real three-dimensional fluid does this is the open problem stated just above (`MODEL`).
 :::
 
-## 3. Self-Reference of the Field and the Quadratic Advection Closure Obstruction (`LEAN ✓`)
+## 30.4.3 Self-Reference of the Field and the Quadratic Advection Closure Obstruction (`LEAN ✓`) {#3-self-reference-of-the-field-and-the-quadratic-advection-closure-obstruction-lean-}
 
 Why is the quadratic convective coupling in [@rem-ch30-lamb-decomposition-literature] so formidable? Because in our geometric interpretation (`MODEL`), it is the **continuum field incarnation of Chapter 24's meta-self-reference $\psi(\psi)$** — whereas linear PDEs separate the operator from the state, in fluid advection **the velocity field $\mathbf{u}$ is simultaneously the state being transported and the differential operator performing the transport**! In Fourier space, quadratic self-coupling adds wavevectors ($\mathbf{k}_1 + \mathbf{k}_2 \to \mathbf{k}_3$), transferring energy across scales. For a finite observer restricted to an idempotent low-mode projection $P$ ($P^2 = P$), this cross-scale quadratic coupling directly shatters autonomous local closure — a fact mechanically verified in `trureturing@dev` by the **Quadratic Observation Closure Criterion and 5-Mode Fluid Advection Non-Closure Theorem**:
 
@@ -286,7 +286,7 @@ Necessity evaluates the increment on the opposite hidden pair $\pm b$ (isolating
 **The unseen variable leaks in.** An observer of $x$ alone: each curve shows, for one fixed $x$, how the seen acceleration $P(V)$ changes with the unseen $y$. With the mixed term on, the curves fan out: for the same $x = 0.5$, cyan marks the acceleration at $y = 0$, the amber point the acceleration at the current $y$, and the amber bar their difference. Where that difference is not zero there is no exact closure depending on $x$ alone (a schematic instance on $\mathbb{R}^2$; the general criterion and the five-mode instance are the theorem above). Turn all three leaks off and every curve becomes a level line, the amber point falling on the cyan one: the "if" half of the criterion.
 :::
 
-## 4. Viscous Landauer Erasure, High-Dimensional Geodesics, and the Six-Row Continuum–Discrete Analogy (`MODEL`)
+## 30.4.4 Viscous Landauer Erasure, High-Dimensional Geodesics, and the Six-Row Continuum–Discrete Analogy (`MODEL`) {#4-viscous-landauer-erasure-high-dimensional-geodesics-and-the-six-row-continuumdiscrete-analogy-model}
 
 Three classical literature results concerning turbulent dissipation scales, averaged fluid logic-gate blow-up, and infinite-dimensional diffeomorphism geodesics are isolated in the following remark:
 
@@ -318,7 +318,7 @@ Combining [@thm-coda-quadratic-advection-no-closure] with the literature context
 
 :::
 
-## 5. Three Hand Calculations: Energy, Feedback, and Nonclosure
+## 30.4.5 Three Hand Calculations: Energy, Feedback, and Nonclosure {#5-three-hand-calculations-energy-feedback-and-nonclosure}
 
 ::: {.example #ex-ch30-core-energy-scaling title="Unbounded Local Speed with Vanishing Core Energy: A Scaling Calculation"}
 **Hand calculation, not formalized in this book.** Use the characteristic core scales from Section 2 of the NS paper, with $\tau=1-t$ and $0<h<1/100$:
@@ -336,7 +336,7 @@ $$
 Meanwhile $U$ tends to infinity: an integral energy bound does not automatically bound local speed. This estimates orders of magnitude in the characteristic core, not the paper's full global energy proof, which also controls the exterior field and correction terms. Both lengths shrink; $\ell_r/\ell_z\asymp\tau^h\to0$ means increasing relative slenderness, not growing axial length or a whole curve of singular points.
 :::
 
-### Applying the Visible–Hidden Split to a PDE: Commutation Assumptions {#sec-ch30-projected-feedback}
+### 30.4.5.1 Applying the Visible–Hidden Split to a PDE: Commutation Assumptions {#sec-ch30-projected-feedback}
 
 ::: {.remark #rem-ch30-projected-feedback title="Leray Projection, Fourier Truncation, and Missing Quadratic Feedback"}
 **Hand derivation, not formalized in this book.** On $\Omega=\mathbb T^3$ or $\mathbb R^3$, fix $s>5/2$. On every compact time interval $I$ before blow-up, assume divergence-free velocity $u\in C(I;H^s(\Omega;\mathbb R^3))\cap C^1(I;H^{s-2})$, original force $f\in C(I;H^{s-2})$, and the NS equation in $H^{s-2}$. Assume pressure is a distribution on $\Omega$ (periodic on the torus), with $\nabla p\in H^{s-2}$ and $\mathbb P\nabla p=0$. Let $\mathbb P$ be the Leray projection onto divergence-free fields and set $F=\mathbb P f$, $L=\nu\Delta$, and $B(v,w)=\mathbb P((v\cdot\nabla)w)$. Then $\partial_tu=Lu-B(u,u)+F$. The projected force $F$ need not inherit compact support from the original force $f$.

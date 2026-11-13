@@ -1,4 +1,4 @@
-# Quantum Gates in Hardware: Microwave Pulse Area and Zero-Duration Virtual Z Gates
+# Chapter 11 Quantum Gates in Hardware: Microwave Pulse Area and Zero-Duration Virtual Z Gates {#quantum-gates-in-hardware-microwave-pulse-area-and-zero-duration-virtual-z-gates}
 
 > *"A quantum state is a direction, and a quantum gate turns that direction; perhaps a gate can be understood as a geometric structure with area."*
 
@@ -15,7 +15,7 @@ This chapter builds the bridge between exact formal dynamics and hardware pulse 
 **Figure 11.** The chapter at a glance: Panel I is the rotating frame that turns with the carrier, Panel II is the area under the envelope equalling the turning angle on the sphere, and Panel III is a virtual $Z$ that sends no pulse and only shifts the phase of the pulses after it. Panel I looks down on the equatorial plane: the grey $x'$ axis turns about $z$ by $\omega_0 t$ (violet curved arrow) and the amber state rides along it, still in the rotating frame; in Panel II the magenta area under the envelope and the magenta sector are both $\pi/2$; in Panel III the violet dashed line is the $X$ written in the circuit, the solid violet line the $-Y$ actually sent, and the amber curved arrow the phase shift $-\lambda$, costing $0\,\mathrm{ns}$. The area law and virtual-$Z$ scheduling are literature results, not formalized in this book ([@rem-rwa-pulse-area-literature], [@rem-virtual-z-scheduling-literature]).
 :::
 
-## Rotating Frames and Carrier Removal {#sec-rotating-frame-calibration}
+## 11.1 Rotating Frames and Carrier Removal {#sec-rotating-frame-calibration}
 
 In a superconducting quantum processor, a qubit begins with a static energy-splitting Hamiltonian (setting $\hbar = 1$):
 
@@ -93,7 +93,7 @@ where the frame term $-\frac{1}{2}\omega_0 Z = -H_0$ cancels the $5\,\mathrm{GHz
 **In the lab frame the equator spins and the poles stay.** With no drive, the amber state leaves $\lvert +\rangle$ and goes round the violet $z$ axis once every $0.2\,\mathrm{ns}$, while the two white dots at the north and south poles do not move: they are the energy eigenstates of [@thm-hermitian-eigenstate-stationary]. The dashed line on the left is the carrier reference $\cos\omega_0 t$, which also runs through two cycles in $0.4\,\mathrm{ns}$.
 :::
 
-## Resonant Drives and Pulse Area {#sec-resonant-pulse-area}
+## 11.2 Resonant Drives and Pulse Area {#sec-resonant-pulse-area}
 
 With the background carrier removed, the standard reduction of a resonant transverse microwave drive under the rotating-wave approximation (RWA) to a fixed-axis pulse-area integral is recorded below (Panel II of Figure 11; [@rem-rwa-pulse-area-literature]).
 
@@ -131,7 +131,7 @@ This effective hardware picture echoes the epigraph's geometric intuition (`MODE
 **Area $\pi/2$, a quarter turn.** A square pulse of $10\,\mathrm{MHz}$ for $25\,\mathrm{ns}$: the magenta area on the left is $\pi/2$; on the right the amber state leaves the north pole and turns about the violet $X$ axis through a magenta sector of the same size, stopping on the equator with $P(0) = 1/2$. The area law is a literature result ([@rem-rwa-pulse-area-literature]), not formalized in this book.
 :::
 
-## Ordered Pulses and an Error Bound {#sec-ordered-pulse-control}
+## 11.3 Ordered Pulses and an Error Bound {#sec-ordered-pulse-control}
 
 When three distinct generators $A, B, C$ are applied sequentially in finite steps $t > 0$ rather than along a single commuting axis, higher-order noncommuting corrections appear.
 
@@ -187,7 +187,7 @@ Notice the geometric reason why the trace error scales as $O(t^2)$ rather than $
 **The first-order drift is all imaginary; the real deviation starts at second order.** On log-log axes, the magenta line is the imaginary part of the trace of the three ordered pulse kernels, growing like $t$ for small $t$, with slope tending to $1$ as $t \to 0$; the cyan line is the deviation of the real part from $\Tr(ABC)$, growing like $t^2$ for small $t$, with slope tending to $2$ as $t \to 0$; the dashed green line is the bound $\frac{5}{4}L^5 t^2$ of [@prop-ordered-pulse-error], and the cyan line stays below it. The matrices are three real symmetric $2\times 2$ matrices of Frobenius norm $1$ ($L = 1$); the two curves are numerical results.
 :::
 
-## Virtual Z and Phase-Reference Updates {#sec-virtual-z-phase-reference}
+## 11.4 Virtual Z and Phase-Reference Updates {#sec-virtual-z-phase-reference}
 
 In contrast to equatorial rotations implemented via nonzero-duration microwave envelopes ([@rem-rwa-pulse-area-literature]), superconducting hardware executes **virtual $Z$ gates** with zero additional analog pulse duration via axial conjugation and a software phase register (Panel III of Figure 11; the conjugation identities and sign conventions are recorded in [@rem-virtual-z-scheduling-literature]).
 

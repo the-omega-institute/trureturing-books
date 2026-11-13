@@ -378,6 +378,8 @@
     $('stage').classList.remove('legend-right');
     const cv = $('flat'), st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
     const thumb = TRV.thumbMode, W = cv.clientWidth, H = cv.clientHeight;
+    // the legend is measured across the whole stage first (also when a frame that was wide has become a phone's)
+    $('stage').classList.remove('legend-right');
     if (compact()) {
       // a phone's cited figure: the solid on the left, the disk over its magnifier in a column on the right (narrower
       // beside the staircase, whose sheet is wide and low)

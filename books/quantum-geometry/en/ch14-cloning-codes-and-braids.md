@@ -1,4 +1,4 @@
-# Hiding Fragile Lines in Higher-Dimensional Areas: Quantum Error-Correcting Codes and Anyonic Topological Braids
+# Chapter 14 Hiding Fragile Lines in Higher-Dimensional Areas: Quantum Error-Correcting Codes and Anyonic Topological Braids {#hiding-fragile-lines-in-higher-dimensional-areas-quantum-error-correcting-codes-and-anyonic-topological-braids}
 
 > *"Area is wave, and particle is line. If line and area are both projections of a state, this seems a promising explanation of wave–particle duality."*
 
@@ -10,7 +10,7 @@ In classical digital hardware, protecting information against noise is straightf
 **Figure 14.** The chapter at a glance. Panel I: on the real overlap slice, the cyan diagonal $y = z$ is what an isometry must output and the dim parabola $y = z^2$ is what cloning outputs; they meet only at $0$ and $1$, with a magenta gap between them. Panel II: the four syndrome rooms of the three-qubit code; the cyan code state lives in the $(+,+)$ room, the magenta $X_2$ carries it whole into the $(-,-)$ room, and the amber arrow brings it back. Panel III: in the plane, a loop around a particle (dim dashed) cannot be undone; through the violet third direction $e_3$ it can be lifted over (a sketch; literature result, not formalized in this book).
 :::
 
-## No Cloning: Preserving an Overlap and Squaring It {#sec-no-cloning-overlap}
+## 14.1 No Cloning: Preserving an Overlap and Squaring It {#sec-no-cloning-overlap}
 
 Why can a classical xerox machine copy a printed page effortlessly, whereas no unitary machine can duplicate an arbitrary unknown quantum state $\psi$ into $\psi \otimes \psi$?
 
@@ -212,7 +212,7 @@ Thus, whereas exact cloning is obstructed by the $z = z^2$ criterion of [@thm-no
 **The price of approximate cloning: each clone shrinks to 2/3, and the machine carries away 1/3 the other way.** The amber point on the shell is the input $\vv{r}$; the cyan arrow is the Bloch vector $\frac{2}{3}\vv{r}$ of each clone, ending on the cyan dashed circle; the magenta arrow is the machine qubit's $-\frac{1}{3}\vv{r}$, ending on the magenta dashed circle of radius $\frac{1}{3}$. All three vectors are computed by partial traces of the cloning isometry. Literature result, not formalized in this book; for the machine's spectrum see [@thm-cloning-machine-spectrum].
 :::
 
-## Pauli Words and Stabilizer Syndromes {#sec-pauli-syndrome-parity}
+## 14.2 Pauli Words and Stabilizer Syndromes {#sec-pauli-syndrome-parity}
 
 If [@thm-no-cloning-overlap] forbids duplicating an unknown superposition $\alpha\lvert 0\rangle + \beta\lvert 1\rangle$ into $(\alpha\lvert 0\rangle + \beta\lvert 1\rangle)^{\otimes 3}$, how does quantum error correction protect quantum information?
 
@@ -272,7 +272,7 @@ Two critical points in [@lemma-pauli-word-phase] must be observed:
 **One light points at the flipped qubit.** The two checks of the three-qubit repetition code, $g_1 = Z_1Z_2$ and $g_2 = Z_2Z_3$, sit over neighbouring pairs of qubits. When the first qubit flips (the magenta X), only $g_1$, which sits over it, lights up (magenta) and $g_2$ stays dark: $X_1$ anticommutes with $g_1$ and commutes with $g_2$, exactly the parity mod $2$ above, with the cross phase coming from [@lemma-pauli-word-phase]. The decoder follows the light and flips the first qubit back (amber); the cyan bars return to the code space and land on the dashed outline.
 :::
 
-## Logical Recovery from Orthogonal Syndromes {#sec-orthogonal-syndrome-recovery}
+## 14.3 Logical Recovery from Orthogonal Syndromes {#sec-orthogonal-syndrome-recovery}
 
 Once environmental errors kick an encoded logical state $\rho \in M_d(\mathbb{C})$ into distinct error channels, how does recovery strip away the error matrix $\sigma$ and restore $\rho$ intact?
 
@@ -390,7 +390,7 @@ $$
 
 The parenthesized term is the physical $n\times n$ output; after the $A_t$ sandwich, $X$ is the logical $d\times d$ output. The two boundaries must not be conflated into an identity on the physical space.
 
-## Planar Braids and the Third Orthogonal Direction {#sec-braids-and-third-axis}
+## 14.4 Planar Braids and the Third Orthogonal Direction {#sec-braids-and-third-axis}
 
 Beyond active syndrome measurement, nature offers a passive topological mechanism for fault-tolerant gates: **braiding particle worldlines in $(2+1)$-dimensional spacetime**.
 
@@ -524,7 +524,7 @@ The following are **literature results, not formalized in this book**:
 
 > The fermion's minus sign does not live in the particle; it lives in the parity string to its left.
 
-## Closing the Braid: Markov Stabilization and Coloring Counts {#sec-markov-stabilization-coloring-count}
+## 14.5 Closing the Braid: Markov Stabilization and Coloring Counts {#sec-markov-stabilization-coloring-count}
 
 Item 2 of [@rem-braid-knot-topology-literature] says that a trefoil in three-dimensional space stays knotted, and that colorings are the classical tool for telling it apart. How is the tool used? [@cor-braid-yang-baxter] is about a piece of braid: a row of loose ends on top, a row below, and colors carried from one row to the other. A knot has no loose ends. Bend the braid around and join the $k$-th bottom end to the $k$-th top end; only then do the strands form closed loops. This is the **closure** of the braid. Once the ends are joined, "the color at the top" and "the color at the bottom" are colors of one and the same piece of string, so a coloring of the closed braid has a single condition left to meet: carried once through the braid, the colors must come back unchanged. **A coloring of a closed braid is a fixed point of the coloring transport.**
 

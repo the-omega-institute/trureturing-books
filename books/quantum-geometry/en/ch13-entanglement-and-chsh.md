@@ -1,4 +1,4 @@
-# Quantum Entanglement and the Bell 45° Violation: How the Cosine Arc Defeats the Classical Polygonal Line
+# Chapter 13 Quantum Entanglement and the Bell 45° Violation: How the Cosine Arc Defeats the Classical Polygonal Line {#quantum-entanglement-and-the-bell-45-violation-how-the-cosine-arc-defeats-the-classical-polygonal-line}
 
 > *"Point C is not actually a known quantity; it is a projection onto a point of compatibility. A single definite quantum state determines only a line; a collection of quantum states is needed to determine an area."*
 
@@ -12,7 +12,7 @@ This chapter opens Part IV, *Higher-Dimensional Spheres — Entanglement, Topolo
 **Figure 13.** The chapter at a glance. Panel I: on the 4 × 4 board of the two-qubit Pauli ledger, $3 + 3$ cyan local-line cells and $9$ magenta correlation cells. Panel II: in the two balls of the Bell state both amber points sit at the centre ($\vv{r} = \vv{s} = \vv{0}$), and the magenta correlation spans the space between them. Panel III: the cyan cosine arc and the dim toy line meet at $0^\circ$, $90^\circ$ and $180^\circ$; at $45^\circ$ the arc stands a magenta gap above the line.
 :::
 
-## Local Lines and Correlation Areas: 6 + 9 = 15 {#sec-pauli-local-correlation}
+## 13.1 Local Lines and Correlation Areas: 6 + 9 = 15 {#sec-pauli-local-correlation}
 
 Why can "an arrow $\vv{r} \in \mathbb{R}^3$ on Alice's sphere" plus "an arrow $\vv{s} \in \mathbb{R}^3$ on Bob's sphere" never account for a bipartite quantum state? Let us begin with a rigorous audit of real dimensions and orthogonal operator subspaces.
 
@@ -123,7 +123,7 @@ Two strict mathematical boundaries in [@thm-local-correlation-sectors] must be k
 **Same marginals, different correlation cells.** Each cell holds $\Tr\bigl(\rho(\sigma_p \otimes \sigma_q)\bigr)$, computed from the two $4\times 4$ density matrices. For the classical correlated state on the left and the Bell state $\lvert\Phi^+\rangle$ on the right, all six cyan local cells in the first row and column are empty, so both have marginals $\frac{1}{2}I_2$; among the magenta correlation cells the classical state fills only $(Z, Z)$, while the Bell state fills $(X, X)$, $(Y, Y)$ and $(Z, Z)$ with $+1$, $-1$, $+1$ ([@thm-local-correlation-sectors], items 7 and 8).
 :::
 
-## Bell States: Central Marginals and Shared Correlations {#sec-bell-local-zero}
+## 13.2 Bell States: Central Marginals and Shared Correlations {#sec-bell-local-zero}
 
 Let us now zoom in on the Bell pure state $\mathrm{bellVector} = \lvert\Phi^+\rangle = \frac{1}{\sqrt{2}}(\lvert 00\rangle + \lvert 11\rangle)$ and its density matrix $\mathrm{bellDensity} = \lvert\Phi^+\rangle\langle\Phi^+\rvert$ from [@thm-local-correlation-sectors].
 
@@ -178,7 +178,7 @@ When applying [@lemma-bell-mixed-marginal], two precise boundaries must be respe
    While $\lvert\Psi^-\rangle$ exhibits isotropic anti-correlation $\langle(\vv{n}\cdot\vv{\sigma})\otimes(\vv{n}\cdot\vv{\sigma})\rangle_{\Psi^-} = -1$ along every shared axis $\vv{n} \in S^2$, $\lvert\Phi^+\rangle$ exhibits positive correlation $+1$ along every shared axis in the real $(Z, X)$ meridian plane ($n_y = 0$) and $-1$ along the $Y$ axis. The Pauli signs of $\lvert\Phi^+\rangle$ and $\lvert\Psi^-\rangle$ are converted into one another by the local rotation $-i\sigma_Y = \sigma_X \sigma_Z$ on Bob's qubit (or $i\sigma_Y = \sigma_Z \sigma_X$ on Alice's qubit) and must never be conflated.
 2. **A vanishing local Bloch line ($\frac{1}{2}I_2$) does not by itself imply entanglement for arbitrary states**: Only when the global state is already known to be **pure** ($\operatorname{rank}\rho = 1$, $\Tr(\rho^2) = 1$) does a maximally mixed marginal $\frac{1}{2}I_2$ certify maximal two-qubit entanglement. For general mixed states — such as $\mathrm{classicalCorrelatedDensity} = \frac{1}{4}(I_4 + \sigma_Z \otimes \sigma_Z)$ ($T = \operatorname{diag}(0,0,1)$) in [@thm-local-correlation-sectors] or the completely maximally mixed state $\frac{1}{4}I_4$ ($T = 0$) — the local marginals are also $\frac{1}{2}I_2$ without any entanglement whatsoever.
 
-## The CHSH Square: Its Commutator Area Term {#sec-chsh-commutator-area}
+## 13.3 The CHSH Square: Its Commutator Area Term {#sec-chsh-commutator-area}
 
 Since the classical mixture $\mathrm{classicalCorrelatedDensity}$ also has local marginals $\frac{1}{2}I_2$ and occupies the $\sigma_Z \otimes \sigma_Z$ cell of the correlation sector, how can a CHSH experiment compare this classical state's one-dimensional correlation line with the coherent correlations of the Bell state $\lvert\Phi^+\rangle$ along several directions?
 
@@ -374,7 +374,7 @@ Setting $d = 2$ is a manual derivation: $\omega_2 = e^{i\pi} = -1$, the four coe
 ::: {.figure src="ch13-unit-circle-bound"}
 **The block bound reaches the ceiling at the right angle on the unit circle.** On the left is the unit circle; the amber point is $z = e^{i\alpha}$ (here $\alpha = 60^\circ$), and two cyan chords join it to $+1$ and $-1$, meeting at a right angle at $z$, with lengths $\lvert 1 - z\rvert = 2\sin(\alpha/2)$ and $\lvert 1 + z\rvert = 2\cos(\alpha/2)$; the hollow point at the top is $z = i$, where the two chords are equal. On the right the cyan curve is the sum of the two chords, $2\sqrt{1 + \sin\alpha}$: $2$ at both ends, $2.732$ at the amber point at $60^\circ$, touching the green dashed line $2\sqrt{2}$ only at $\alpha = 90^\circ$. The green dashed line is the bound of [@thm-unitary-bell-bound] at $d = 2$ (the substitution is a manual derivation); the curve is the hand calculation in the text.
 :::
-## The 45° Cosine and the Fixed CHSH Maximum {#sec-bell-45-tsirelson}
+## 13.4 The 45° Cosine and the Fixed CHSH Maximum {#sec-bell-45-tsirelson}
 
 To reach the positive peak $\sqrt{8} = 2\sqrt{2}$ on this chapter's Bell state $\lvert\Phi^+\rangle$ using measurements in the real $(Z, X)$ plane, how should Bob orient his orthogonal cross when Alice's axes are fixed at $Z, X$?
 
