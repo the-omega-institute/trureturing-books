@@ -1,6 +1,7 @@
 ---
 # 01 Cover
 theme: ../../../../theme/slides
+preloadImages: false
 title: "Geometric Intuition of Quantum Computing · Overview"
 info: "An overview of Geometric Intuition of Quantum Computing: the four blind spots and the ten-part, thirty-nine-chapter dimensional ladder; for each of the ten parts its core picture, main Lean-verified theorems, literature results and open problems; the counts of the three tiers of warrant; and the full thirty-nine-chapter dependency map."
 htmlAttrs:
