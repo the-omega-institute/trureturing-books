@@ -40,3 +40,11 @@ $$
 这一结果消去的是射线分组下独立的严格重叠假设。归一化记录、指定的受控耦合和反复施加同一约化信道仍是模型前提。新鲜且初始无相关的环境可以实现该重复信道；复用或相关环境需要另行导出多步动力学。此处没有实验识别结果，也不据此宣称模型获得经验验证。
 
 一般量子信道保留旋转分量的现象已有文献：Victor V. Albert, *Asymptotics of quantum channels: conserved quantities, an adiabatic limit, and matrix product states*, Quantum **3**, 151，DOI [10.22331/q-2019-06-06-151](https://doi.org/10.22331/q-2019-06-06-151)，[arXiv:1803.00109](https://arxiv.org/abs/1803.00109)，第 2 节的旋转点与渐近投影。该文说明一般背景；此处有限记录的具体范数界按上述代表构造与既有收缩结果推导，不作新颖性声明。
+
+## 验证、交付与接续
+
+上游的应用说明与 Scribe 投影见 [trureturing PR #30071](https://github.com/the-omega-institute/trureturing/pull/30071)，双语第四章、研究笔记和泛化 skill 的修订见 [书库 PR #248](https://github.com/the-omega-institute/trureturing-books/pull/248)。两者的合并状态、当前候选检查与部署结果以各 PR 和对应工作流为准。这里复用既有冻结声明，不新增 `lean=` 引用，合法钉版仍可沿用；不能把临时应用检查称作新增冻结定理。
+
+书稿已通过零错误的结构检查，另有 14 项既有警告；双语 HTML、三种 PDF 与 EPUB 已构建，新公式经桌面、手机与深浅主题检查。首次中文学术 PDF 构建缺少锁定版本的压缩依赖，补齐后针对性重建成功。发布 CI 另外发现了既有可视化的短动画采样竞争和说明栏、图例布局问题；共享根因经 [模板 PR #71](https://github.com/the-omega-institute/trureturing-books-template/pull/71) 修复，页面自身的问题仍须通过最终候选的浏览器检查。构建证据不替代合并与线上部署证据。
+
+下一项数学问题可沿上述残余前提推进：从实际多步系统与环境耦合导出约化演化，核对何时确实等于同一信道的迭代；若只近似相等，则先明确误差范数和相关性参数，再研究误差如何随步数累计。不能先把多步演化定义成信道幂，再据此声称已证明新鲜环境或无记忆前提。
