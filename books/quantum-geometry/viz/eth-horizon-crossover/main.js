@@ -55,7 +55,8 @@
       const atomsLab = L('宇宙原子数 2²⁶⁶ 以内', 'within the atoms of the universe, 2²⁶⁶'); g.ctx.font = `11.5px ${TRV.fonts.body}`;
       const atomsFits = g.ctx.measureText(atomsLab).width + 16 <= g.X(ATOMS) - g.X(0);   // on a narrow stage it starts at the axis instead
       g.text(atomsFits ? ATOMS : 0, g.y1, atomsLab, P.ink, { align: atomsFits ? 'right' : 'left', base: 'top', dx: atomsFits ? -8 : 8, dy: 26, face: 'body', size: 11.5, alpha: 0.9 });   // below the axis label
-      g.text(LMAX, PPSZ(), `PPSZ ${S.k}-SAT ${fix(PPSZ(), 3)}`, P.magenta, { align: 'right', base: 'bottom', dx: -6, dy: -5, size: 11.5 });
+      const ppszLab = `PPSZ ${S.k}-SAT ${fix(PPSZ(), 3)}`;
+      g.text(LMAX, PPSZ(), ppszLab, P.magenta, { align: 'right', base: 'bottom', dx: -6, dy: -5, size: 11.5 });
       g.text(LMAX, 1, L('穷举 2ⁿ：r = 1', 'brute force 2ⁿ: r = 1'), P.dim, { align: 'right', base: 'bottom', dx: -6, dy: -4, face: 'body', size: 11 });
       // at the foot of the crossover line: the curve stays above r ≈ 0.13 on the drawn range for every c with a crossover
       if (x != null && x <= LMAX) {
@@ -63,7 +64,14 @@
         const crossLab = L(`交叉 n ≈ 2${sup(Math.round(x))}`, `crossover n ≈ 2${sup(Math.round(x))}`), left = g.X(x) + 8 + g.ctx.measureText(crossLab).width + 60 > g.X(LMAX);   // keep clear of the axis name at the right end
         g.text(x, g.y0, crossLab, P.ink, { align: left ? 'right' : 'left', base: 'bottom', dx: left ? -8 : 8, dy: -8, face: 'body', size: 11.5, halo: true });
       }
-      g.text(l, rate(S.c, l), fix(rate(S.c, l), 3), P.amber, { align: l > 700 ? 'right' : 'left', base: 'bottom', dx: l > 700 ? -10 : 10, dy: -8, size: 12.5, weight: 600, halo: true });
+      // the current value sits just above its dot; where that box would cover the PPSZ label (the dot at the crossover on a
+      // narrow stage), it is lifted to the line above that label instead
+      const curLab = fix(rate(S.c, l), 3), curRight = l > 700, curY = g.Y(rate(S.c, l));
+      g.ctx.font = `11.5px ${TRV.fonts.data}`; const pR = g.X(LMAX) - 6, pL = pR - g.ctx.measureText(ppszLab).width, pB = g.Y(PPSZ()) - 5, pT = pB - 13;
+      g.ctx.font = `12.5px ${TRV.fonts.data}`; const cW = g.ctx.measureText(curLab).width, cX = g.X(l) + (curRight ? -10 : 10), cL = curRight ? cX - cW : cX, cR = curRight ? cX : cX + cW;
+      let curDy = -8;
+      if (cL < pR + 4 && cR > pL - 4 && curY + curDy > pT - 3 && curY + curDy - 14 < pB + 3) curDy = pT - 4 - curY;
+      g.text(l, rate(S.c, l), curLab, P.amber, { align: curRight ? 'right' : 'left', base: 'bottom', dx: curRight ? -10 : 10, dy: curDy, size: 12.5, weight: 600, halo: true });
     }
   }
 
@@ -153,7 +161,19 @@
     const n = I.sv.length, by = oy + cell * rows + 46, bw = Math.min(26, (cell * cols) / n), smax = I.sv[0] || 1;
     for (let i = 0; i < n; i++) { const hh = 34 * I.sv[i] / smax, on = i < I.rank; ctx.fillStyle = on ? P.cyan : P.faint; ctx.fillRect(ox + i * bw, by - Math.max(hh, 1.5), Math.max(2, bw - 3), Math.max(hh, 1.5)); }
     ctx.strokeStyle = P.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(ox + I.rank * bw - 1.5, by - 40); ctx.lineTo(ox + I.rank * bw - 1.5, by + 3); ctx.stroke();
-    if (words) text(ctx, L(`奇异值：前 ${I.rank} 个非零`, `singular values: the first ${I.rank} are nonzero`), ox + n * bw + 8, by - 14, P.dim, { size: 11, face: 'body' });
+    if (words) {
+      // to the right of the bars when it fits there (wide stages); otherwise on the wider free side of the bars, wrapped
+      // at its spaces into as many lines as that side needs, beside the bars and inside the stage
+      const svLab = L(`奇异值：前 ${I.rank} 个非零`, `singular values: the first ${I.rank} are nonzero`), sz = 11, right = ox + n * bw + 8, left = ox - 8, edge = x0 + w;
+      ctx.font = `${sz}px ${TRV.fonts.body}`;
+      if (right + ctx.measureText(svLab).width <= edge) text(ctx, svLab, right, by - 14, P.dim, { size: sz, face: 'body' });
+      else {
+        const onRight = edge - right >= left - x0, room = Math.max(40, onRight ? edge - right : left - x0), lines = [];
+        for (const word of svLab.split(' ')) { const cand = lines.length ? `${lines[lines.length - 1]} ${word}` : word; if (lines.length && ctx.measureText(cand).width <= room) lines[lines.length - 1] = cand; else lines.push(word); }
+        const lh = 12, y1 = by - 14 - (lines.length - 1) * lh / 2;
+        lines.forEach((s, i) => text(ctx, s, onRight ? right : left, y1 + i * lh, P.dim, { size: sz, face: 'body', align: onRight ? 'left' : 'right' }));
+      }
+    }
   }
 
   /* ---------- modes ---------- */

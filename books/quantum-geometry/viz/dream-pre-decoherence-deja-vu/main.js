@@ -315,6 +315,28 @@
     return ok ? h : 0;
   }
   const measure = (el, o) => (TRV.thumbMode || el.hidden ? 0 : place(el, -9999, 0, o));
+  /** Narrow frames, repeat program (the cards PRECOMPILE and DEJA-VU-HIT) when the disc cannot sit on top: the disc on
+      the left with the switch under it, the two grids stacked in the right column, and the result lines and the cache
+      card across the frame under both. The grids take the largest size (110 px down) that still leaves the verdict and
+      three result lines above the card; from 68 px up their cells carry their numbers. Kept per frame, language and card. */
+  let pileMemo = null;
+  function pileLayout(R, ctl, card) {
+    const cardH = measure(card, { w: R.w }), key = [R.x, R.y, R.w, R.h, cardH, L('zh', 'en')].join('|');
+    if (pileMemo && pileMemo.key === key) return pileMemo.out;
+    let pick = null;
+    for (let gs = 110; gs >= 40; gs -= 4) {
+      const pairH = 16 + 2 * gs + 30, top = Math.min(R.w - 12 - gs - 8, R.w * 0.52);
+      let D = top;
+      for (let k = 0; k < 2; k++) D = clamp(pairH - 8 - measure(ctl, { max: D }), Math.min(96, top), top);
+      const ch = measure(ctl, { max: D }), rowH = Math.max(pairH, D + 8 + ch);
+      pick = { gs, D, rowH };
+      if (Math.floor((R.h - rowH - 8 - (cardH ? cardH + 2 : 0) - 24) / 17) >= 3) break;
+    }
+    const { gs, D, rowH } = pick;
+    const out = { disc: { x: R.x, y: R.y, s: D }, col: { x: R.x + D + 12, y: R.y, w: R.w - D - 12, gs, ctl: { x: R.x, y: R.y + D + 8, w: D }, below: { x: R.x, y: R.y + rowH + 8, w: R.w } } };
+    pileMemo = { key, out };
+    return out;
+  }
 
   function drawBasis(ctx, R) {
     const fr = basisFrame(clock.t), nm = basisNumbers(fr), thumb = TRV.thumbMode, words = !thumb, repeat = S.prog === 'repeat';
@@ -332,6 +354,7 @@
       const rest = repeat ? 18 + gs + 8 + ctlH + 10 + (words ? 18 + 4 * 17 + 8 : 0) + measure(card, { w: R.w }) : 22 + 2 * 41 + 10 + ctlH + 10 + 100;
       const Dt = Math.min(R.w * 0.86, R.h - rest - 12);
       if (Dt >= Math.min(210, R.w * 0.62)) { disc = { x: R.x + (R.w - Dt) / 2, y: R.y, s: Dt }; col = { x: R.x, y: R.y + Dt + 6, w: R.w, gs }; regime = 'stack'; }
+      else if (repeat && words) { const p = pileLayout(R, ctl, card); disc = p.disc; col = p.col; regime = 'pile'; }
       else { const D = Math.min(R.w * 0.52, R.h); disc = { x: R.x, y: R.y, s: D }; col = { x: R.x + D + 12, y: R.y, w: R.w - D - 12, below: { x: R.x, y: R.y + D + 8, w: R.w } }; regime = 'compact'; }
     }
     drawDisc(ctx, disc, fr, R.W, R.H);
@@ -375,6 +398,16 @@
       const hc = fit(ctl, col.x, y, { max: col.w }, yEnd); y += hc ? hc + 10 : 0;
       y += lines(col.x, y, 4, 11);
       fit(card, col.x, y, { w: col.w }, yEnd);
+    } else if (regime === 'pile') {
+      // the grids stacked in the right column, the switch under the disc, then the result lines and the card across the
+      // frame below both: each block starts under the one above it, so none is drawn over another
+      drawPair(ctx, fr, col.x + Math.max(0, (col.w - col.gs) / 2), col.y + 16, col.gs, true);
+      fit(ctl, col.ctl.x, col.ctl.y, { max: col.ctl.w }, yEnd);
+      let y = col.below.y;
+      // the card keeps its place when it fits at all; the result lines take what is left above it (fourth row first to go)
+      const cardH = measure(card, { w: col.below.w }), reserve = cardH && yEnd - y >= cardH + 2 ? cardH + 2 : 0, room = yEnd - y - reserve;
+      if (room >= 24) y += lines(col.below.x, y, clamp(Math.floor((room - 24) / 17), 0, 4), 11);
+      fit(card, col.below.x, y, { w: col.below.w }, yEnd);
     } else {
       const gs = clamp(Math.min(col.w - 8, (R.h - 50) / 2), 30, 100);
       drawPair(ctx, fr, col.x + Math.max(0, (col.w - gs) / 2), col.y + 16, gs, true);
@@ -514,7 +547,14 @@
       if (!fr.learned) { text(ctx, L(`目标 z = 0.80 · det G = ${fix(detG(Z_DREAM), 3)}`, `target z = 0.80 · det G = ${fix(detG(Z_DREAM), 3)}`), tx + 8, r2, P.ink, { align: 'right', size: 11 }); lead(tx, r2 + 7, ty - 11, P.ink); }
       else {
         const nx = g.X(Z_NEW), ny = g.Y(detG(Z_NEW));
-        text(ctx, L(`新目标 z = 0.40 · det G = ${fix(detG(Z_NEW), 3)}`, `new target z = 0.40 · det G = ${fix(detG(Z_NEW), 3)}`), nx - 8, r1, P.amber, { align: 'left', size: 11 }); lead(nx, r1 + 7, ny - 9, P.amber);
+        // the label starts just left of its leader; on a narrow stage it moves left (still over the leader, clear of the
+        // axis name "det G") and, if it must, steps down to 10px so that its end stays inside the stage
+        const newLab = L(`新目标 z = 0.40 · det G = ${fix(detG(Z_NEW), 3)}`, `new target z = 0.40 · det G = ${fix(detG(Z_NEW), 3)}`);
+        ctx.font = `10.5px ${TRV.fonts.data}`; const nLo = g.pl + 4 + ctx.measureText('det G').width + 8, nHi = g.pl + g.iw + 10;
+        let nSize = 11; ctx.font = `${nSize}px ${TRV.fonts.data}`; let nW = ctx.measureText(newLab).width;
+        if (nW > nHi - nLo) { nSize = Math.max(10, 11 * (nHi - nLo) / nW); ctx.font = `${nSize}px ${TRV.fonts.data}`; nW = ctx.measureText(newLab).width; }
+        const nX = nx - 8 + nW <= nHi ? nx - 8 : Math.min(nx - 8, Math.max(nLo, nHi - nW));
+        text(ctx, newLab, nX, r1, P.amber, { align: 'left', size: nSize }); lead(nx, r1 + 7, ny - 9, P.amber);
         if (g.ih >= 160) { text(ctx, L('旧目标 0.80 · Valid 0 · flush 1', 'old target 0.80 · Valid 0 · flush 1'), tx + 8, r2, P.magenta, { align: 'right', size: 11 }); lead(tx, r2 + 7, ty - 11, P.magenta); }
       }
       text(ctx, 'det G', g.pl + 4, g.Y(0.168), P.dim, { size: 10.5 });

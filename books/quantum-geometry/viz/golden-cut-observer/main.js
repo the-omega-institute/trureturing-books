@@ -139,7 +139,13 @@
     text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 6, g.pt + g.ih - 9, P.dim, { align: 'right', size: 10.5, face: 'body' });
     text(ctx, L('↑ 共轭 a + bψ', '↑ the conjugate a + bψ'), g.X(0) + 6, g.pt + 8, P.dim, { size: 10.5, face: 'body' });
     if (S.patch) text(ctx, L(`固定的一小片 |x| ≤ ${PATCH}`, `the fixed patch |x| ≤ ${PATCH}`), g.X(0), g.pt + g.ih - 10, P.ink, { align: 'center', size: 11, face: 'body' });
-    else if (q.deep) text(ctx, L(`最深的点 · 离边 ${fix(margin(q.deep.c, u), 2)}`, `deepest point · ${fix(margin(q.deep.c, u), 2)} from the edge`), clamp(g.X(q.deep.x), g.pl + 70, g.pl + g.iw - 70), g.Y(q.deep.c) - 15 * K - 8, P.cyan, { align: 'center', size: 11, face: 'body' });
+    else if (q.deep) {
+      // centred over the deepest point, kept inside the stage by its own half-width (the English label is the longer one)
+      const deepLab = L(`最深的点 · 离边 ${fix(margin(q.deep.c, u), 2)}`, `deepest point · ${fix(margin(q.deep.c, u), 2)} from the edge`);
+      ctx.font = `11px ${TRV.fonts.body}`; const dh = ctx.measureText(deepLab).width / 2 + 4;
+      const dLo = Math.max(g.pl + 70, dh), dHi = Math.min(g.pl + g.iw - 70, g.W - dh);
+      text(ctx, deepLab, dLo <= dHi ? clamp(g.X(q.deep.x), dLo, dHi) : g.W / 2, g.Y(q.deep.c) - 15 * K - 8, P.cyan, { align: 'center', size: 11, face: 'body' });
+    }
   }
 
   /* ---------- cassini: the powers of φ in the same lattice ---------- */
@@ -188,15 +194,17 @@
   }
   function drawReturns(q) {
     const cv = $('flat'), W = cv.clientWidth, H = cv.clientHeight, words = !TRV.thumbMode;
-    const b = fitBand(H, box.top, box.bottom, 6 + MIN_H + 22);
-    let top = b.top + 6, bottom = b.bottom + 22; const spare = H - top - bottom - 2.3 * W * 0.2;
+    // a narrow stage leaves the chart beside the circle too small to carry its axis name inside: that name gets a line of
+    // its own above the chart (8 more pixels on top), so it no longer sits on the dots, the top tick or the window's label
+    const narrow = words && W < 520, b = fitBand(H, box.top, box.bottom, 6 + MIN_H + 22 + (narrow ? 8 : 0));
+    let top = b.top + 6 + (narrow ? 8 : 0), bottom = b.bottom + 22; const spare = H - top - bottom - 2.3 * W * 0.2;
     if (spare > 0) { top += spare / 2; bottom += spare / 2; }
     const R = (H - top - bottom) / 2.3, cx = 14 + R * 1.1, nView = Math.max(55, q.N);
     const g = kit.plot(cv, { x: [0, nView + 1], y: [-1.15, 1.15], pad: [cx + R * 1.1 + 34, 16, top, bottom], minHeight: MIN_H }), ctx = g.ctx, cy = g.Y(0); view = g;
     const y1 = g.Y(clamp(q.u1, -1.15, 1.15)), y2 = g.Y(clamp(q.u2, -1.15, 1.15));
     ctx.fillStyle = P.amber; ctx.globalAlpha = 0.11; ctx.fillRect(cx - R - 8, y2, g.pl + g.iw - (cx - R - 8), y1 - y2); ctx.globalAlpha = 1;
     ctx.strokeStyle = P.amber; ctx.lineWidth = 1.3; for (const y of [y1, y2]) { ctx.beginPath(); ctx.moveTo(cx - R - 8, Math.round(y) + 0.5); ctx.lineTo(g.pl + g.iw, Math.round(y) + 0.5); ctx.stroke(); }
-    g.axes({ yTicks: [-1, 0, 1], xTicks: [1, 21, 55, 89, 144, 233].filter((v) => v <= nView), xLabel: 'n', yLabel: words ? 'e(n) = cos 2πnφ' : '' });
+    g.axes({ yTicks: [-1, 0, 1], xTicks: [1, 21, 55, 89, 144, 233].filter((v) => v <= nView), xLabel: 'n', yLabel: words && !narrow ? 'e(n) = cos 2πnφ' : '' });
     const pts = []; for (let n = 1; n <= q.N; n++) pts.push([n, obs(n)]);
     g.line(pts, P.dim, { width: 1, alpha: 0.28 });
     const isHit = new Set(q.hits);
@@ -213,7 +221,21 @@
     ctx.fillStyle = P.amber; ctx.shadowColor = P.amber; ctx.shadowBlur = 10; ctx.beginPath(); ctx.arc(px, py, 5, 0, TAU); ctx.fill(); ctx.shadowBlur = 0;
     g.dot(q.N, obs(q.N), P.amber, 4.5, { glow: 8 });
     if (!words) return;
-    text(ctx, `(${fix(q.u1, 2)}, ${fix(q.u2, 2)})`, g.pl + g.iw - 4, y2 - 9, P.amber, { align: 'right', size: 11 });
+    const winLab = `(${fix(q.u1, 2)}, ${fix(q.u2, 2)})`;
+    let winY = y2 - 9;
+    if (narrow) {
+      // the axis name on its own line above the chart; the window's label stays above the band's upper edge inside the
+      // chart, or, when that edge is too close to the top, on the axis name's line at the right end (if both fit there),
+      // or else just under that edge
+      const nameY = g.pt - 9, nameLab = 'e(n) = cos 2πnφ';
+      text(ctx, nameLab, g.pl, nameY, P.dim, { size: 10.5, face: 'body', halo: false });
+      if (y2 - 16 < g.pt) {
+        ctx.font = `10.5px ${TRV.fonts.body}`; const nameW = ctx.measureText(nameLab).width;
+        ctx.font = `11px ${TRV.fonts.data}`; const winW = ctx.measureText(winLab).width;
+        winY = g.pl + nameW + 10 <= g.pl + g.iw - 4 - winW ? nameY : y2 + 10;
+      }
+    }
+    text(ctx, winLab, g.pl + g.iw - 4, winY, P.amber, { align: 'right', size: 11 });
     if (q.waits.length) {
       const i = q.waits.indexOf(Math.max(...q.waits)), a = q.hits[i], b = q.hits[i + 1], y = g.pt + g.ih - 15;
       ctx.strokeStyle = P.magenta; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(g.X(a), y + 4); ctx.lineTo(g.X(a), y); ctx.lineTo(g.X(b), y); ctx.lineTo(g.X(b), y + 4); ctx.stroke();

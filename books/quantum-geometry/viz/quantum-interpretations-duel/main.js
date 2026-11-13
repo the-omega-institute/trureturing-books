@@ -145,10 +145,14 @@
     'grw-collapse': { name: ['客观坍缩', 'Objective collapse'], short: ['客观坍缩', 'GRW collapse'],
       keeps: () => ['无需观察者的坍缩', 'observer-free collapse'],
       adds: (D) => [`新的随机动力学；q ≈ ${sci(D.grw)}`, `new stochastic dynamics; q ≈ ${sci(D.grw)}`],
+      // a narrow duel row that cannot hold the line above wrapped (the same claim and the same q, fewer words)
+      addsNarrow: (D) => [`新的随机动力学；q ≈ ${sci(D.grw)}`, `new dynamics; q ≈ ${sci(D.grw)}`],
       long: (D) => [`真正改写动力学，与退相干不同。示意参数 λ = 10⁻¹⁶ s⁻¹、t = 1 s：q = −expm1(−Nλt) = ${sci(D.grw)}。N = 10⁶ 时也只有 10⁻¹⁰，要 N ≳ 10¹⁶–10²³ 才快；按 p、1 − p 选一支是模型规定（MODEL）。`, `A real change of the dynamics, unlike decoherence. Illustrative λ = 10⁻¹⁶ s⁻¹, t = 1 s: q = −expm1(−Nλt) = ${sci(D.grw)}. Even at N = 10⁶ it is only 10⁻¹⁰; it takes N ≳ 10¹⁶–10²³ to be fast. Picking a branch with weights p, 1 − p is a model prescription (MODEL).`] },
     'ortho-open-dim': { name: ['正交开维', 'Orthogonal open dimension'], short: ['正交开维', 'Open dimension'],
       keeps: () => ['二次读数、纤维、余量方向', 'quadratic readouts, fibers, residual directions'],
       adds: () => ['时间 = 新维度：开放提议', 'time = a new dimension: an open proposal'],
+      // a narrow duel row: the wording of the OPEN box of the horizon card, beside this row's own red OPEN tag
+      addsNarrow: () => ['时间 = 新维度：开放提议', 'time = a new dimension? (open)'],
       long: () => ['保留有限观察者的读数、看不见的纤维、公因子的义务与余量方向（紫色箭头）。“时间是正交维的扩张”是作者的模型与开放提议：这些有限的代数结果不解决确定结果、ψ 本体、洛伦兹协变、量子引力或黑洞信息问题。', 'Keeps the finite observer\'s readouts, the unseen fibers, the common-factor obligation and the residual direction (violet arrow). "Time as orthogonal expansion" is the author\'s model and open proposal: these finite algebraic results do not solve definite outcomes, ψ-ontology, Lorentz covariance, quantum gravity or black-hole information.'] }
   };
   const lensName = (id) => L(...LENSES[id].name);
@@ -487,7 +491,11 @@
     T(b.x, by - 8, `r² = ${fix(D.r2, 3)}`, P.cyan, { size: fs, face: 'data' });
     T(b.x + bw, by - 8, `τ = ${fix(D.tangle, 3)}`, P.magenta, { align: 'right', size: fs, face: 'data' });
     T(b.x, by + bh + 12, L(`纯度 Tr ρ² = ${fix(D.purity, 3)}`, `purity Tr ρ² = ${fix(D.purity, 3)}`), P.ink, { size: fs, face: 'data', max: b.w });
-    T(b.x, by + bh + 28, L(`可见度 V = ${fix(D.vis, 3)} · 相干质量 C = ${fix(D.deleted, 3)}`, `visibility V = ${fix(D.vis, 3)} · coherence mass C = ${fix(D.deleted, 3)}`), P.magenta, { size: fs - 1, face: 'data', max: b.w });
+    // visibility and coherence mass on one line; in a narrow panel that line does not fit, so each gets its own
+    const visTxt = `${L('可见度', 'visibility')} V = ${fix(D.vis, 3)}`, cohTxt = `${L('相干质量', 'coherence mass')} C = ${fix(D.deleted, 3)}`, visCoh = `${visTxt} · ${cohTxt}`;
+    ctx.font = font(fs - 1, 'data');
+    if (!nar || ctx.measureText(visCoh).width <= b.w) T(b.x, by + bh + 28, visCoh, P.magenta, { size: fs - 1, face: 'data', max: b.w });
+    else { T(b.x, by + bh + 28, visTxt, P.magenta, { size: fs - 1, face: 'data', max: b.w }); T(b.x, by + bh + 41, cohTxt, P.magenta, { size: fs - 1, face: 'data', max: b.w }); }
     if (!nar) TW(b.x, by + bh + 44, L('青色：留在实验室里的长度；品红：搬进环境的关联。', 'Cyan: the length left in the lab; magenta: the correlation moved into the environment.'), P.dim, b.w, { size: 10 });
     const c = frame(...C, L('“或”：抽出一行（模型）', 'OR: draw one row (model)'), nar);
     const cw = nar ? 34 : Math.min(48, c.w * 0.2), ch = nar ? Math.min(46, c.h - 40) : Math.min(c.h * 0.48, 70), cx = c.x + (nar ? 8 : c.w * 0.1), cy = c.y + (nar ? 6 : 10);
@@ -747,10 +755,31 @@
         records(id, D, { x: gx, y: gy, w: gw, h: gh }, { x: gx + gw + 4, y: gy, w: gw, h: gh },
           { from: [gx - 10, gy + gh / 2], size: 8.5, gauge: { x: gx - 2, y: gy + gh + 1, w: 2 * gw + 8, h: 3 }, gaugeLabel: false, escape: Math.min(16, h * 0.5), escapeLabel: false });
         const tx = gx + 2 * gw + 18, tw = x + w - tx - 6;
-        T(tx, y + h * 0.32, `${L('守住', 'Keeps')}: ${L(...lens.keeps(D))}`, P.ink, { size: 9.5, max: tw });
-        T(tx, y + h * 0.7, `${L('多付', 'Adds')}: ${L(...lens.adds(D))}`, P.dim, { size: 9.5, max: tw });
+        duelRowText(tx, y, tw, h, lens, D);
       }
     });
+  }
+  /** The text of a narrow duel row: "Keeps: …" (ink) and "Adds: …" (dim), each wrapped at its words inside the row's
+      text column and centred in the row, at 9.5, 9 or 8.5 px. Only where the row cannot hold that does a lens's shorter
+      equivalent of its "Adds" line (addsNarrow) come in, and only then the two shrinking single lines of before. */
+  function duelRowText(tx, y, tw, h, lens, D) {
+    if (TRV.thumbMode) return;
+    const keeps = `${L('守住', 'Keeps')}: ${L(...lens.keeps(D))}`, addsOf = (f) => `${L('多付', 'Adds')}: ${L(...f(D))}`;
+    const cands = [[keeps, addsOf(lens.adds)]].concat(lens.addsNarrow ? [[keeps, addsOf(lens.addsNarrow)]] : []);
+    for (const [k, a] of cands) {
+      for (const size of [9.5, 9, 8.5]) {
+        const lh = Math.round(size * 1.15), maxL = Math.floor((h - 3) / lh), kl = wrap(k, tw, size), al = wrap(a, tw, size);
+        ctx.font = font(size);
+        if (kl.length + al.length > maxL || kl.concat(al).some((s) => ctx.measureText(s).width > tw + 0.5)) continue;
+        const y0 = y + (h - (kl.length + al.length) * lh) / 2;
+        kl.forEach((s, i) => T(tx, y0 + i * lh, s, P.ink, { size, base: 'top' }));
+        al.forEach((s, i) => T(tx, y0 + (kl.length + i) * lh, s, P.dim, { size, base: 'top' }));
+        return;
+      }
+    }
+    const [k, a] = cands[cands.length - 1];
+    T(tx, y + h * 0.32, k, P.ink, { size: 9.5, max: tw });
+    T(tx, y + h * 0.7, a, P.dim, { size: 9.5, max: tw });
   }
   const FOCUS_DRAW = { cut: focusCut, andor: focusAndOr, born: focusBorn, bell: focusBell, horizon: focusHorizon, duel: focusDuel };
 

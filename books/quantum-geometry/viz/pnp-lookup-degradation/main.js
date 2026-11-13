@@ -726,8 +726,14 @@
 
   // d = 4: 2D coherent quantum superposition pointer in span{|s⊥⟩, |x*⟩} rotating under Grover reflections (MODEL envelope (1 − σ)/2)
   function drawMorphD4(ctx, B, lw, u, sig) {
-    const cx = B.bx + B.bw * 0.48, cy = B.by + B.bh * 0.64;
-    const R = Math.min(B.bw * 0.62, B.bh * 0.54);
+    // The line on the meeting endpoints: one line where the panel is wide enough; otherwise (a narrow frame) it breaks
+    // after its colon into two lines, and the quarter circle sits below the three lines of text instead of under them.
+    const meetLab = L('两端相等: r_Grover(0) = r_wire(1) = 0.500', 'Endpoints meet: r_Grover(0) = r_wire(1) = 0.500');
+    ctx.font = font(10, 'data', 600);
+    const meetWrap = !TRV.thumbMode && ctx.measureText(meetLab).width > B.bw - 16;
+    const cx = B.bx + B.bw * 0.48;
+    let cy = B.by + B.bh * 0.64, R = Math.min(B.bw * 0.62, B.bh * 0.54);
+    if (meetWrap) { cy = B.by + B.bh - 20; R = Math.max(18, Math.min(R, cy - B.by - 52)); }
     const theta0 = 0.16; // initial overlap angle
     const kRot = clamp(Math.floor(u * 5 + 1e-9), 0, 4); // 0..4 Grover reflection steps -> (2k+1)theta0
     const thetaCur = Math.min(Math.PI / 2, (2 * u * 4.5 + 1) * theta0);
@@ -789,7 +795,11 @@
       ctx.fillStyle = P.cyan;
       ctx.fillText('MODEL r_Q(σ) = (1 − σ)/2', B.bx + 8, B.by + 6);
       ctx.fillStyle = P.violet;
-      ctx.fillText(L('两端相等: r_Grover(0) = r_wire(1) = 0.500', 'Endpoints meet: r_Grover(0) = r_wire(1) = 0.500'), B.bx + 8, B.by + 20);
+      if (meetWrap) {
+        const cut = meetLab.indexOf(': ');
+        ctx.fillText(meetLab.slice(0, cut + 1), B.bx + 8, B.by + 20);
+        ctx.fillText(meetLab.slice(cut + 2), B.bx + 8, B.by + 34);
+      } else ctx.fillText(meetLab, B.bx + 8, B.by + 20);
       ctx.fillStyle = P.cyan;
       ctx.fillText('|x*⟩', cx + 6, cy - R - 2);
       ctx.fillStyle = P.dim;

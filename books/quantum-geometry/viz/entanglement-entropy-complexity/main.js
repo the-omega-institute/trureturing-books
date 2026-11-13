@@ -618,6 +618,15 @@
     return [cx, cy, zTop + 0.08];
   }
 
+  // The stage tags here are all .tag.num (11.5px data face, no capitals): the width of the text as drawn, so that a
+  // centred tag is clamped by its own half-width and never runs past the edge of the stage on a narrow frame.
+  let tagCtx = null;
+  function tagTextWidth(html) {
+    if (!tagCtx) tagCtx = document.createElement('canvas').getContext('2d');
+    tagCtx.font = `11.5px ${(TRV.fonts && TRV.fonts.data) || 'monospace'}`;
+    return Math.ceil(tagCtx.measureText(String(html).replace(/<[^>]*>/g, '')).width);
+  }
+
   function placeNonOverlappingTags(items) {
     if (TRV.thumbMode) return;
     const W = stage.W, H = stage.H;
@@ -627,7 +636,10 @@
     const placed = [];
     for (const it of items) {
       const q = stage.p(it.world);
-      let x = clamp(q[0] + (it.dx || 0), 74, W - 74);
+      const half = 0.5 * Math.max(it.w, tagTextWidth(it.html)) + 8;
+      const xLo = Math.max(74, half), xHi = Math.min(W - 74, W - half);
+      const clampX = (v) => (xLo <= xHi ? clamp(v, xLo, xHi) : 0.5 * W);
+      let x = clampX(q[0] + (it.dx || 0));
       let y = clamp(q[1] + (it.dy || 0), topSafe, botSafe);
       for (let pass = 0; pass < 6; pass++) {
         for (const p of placed) {
@@ -636,7 +648,7 @@
           if (ox < minX && oy < minY) {
             y = y >= p.y ? Math.min(botSafe, p.y + minY) : Math.max(topSafe, p.y - minY);
             if (Math.abs(y - p.y) < minY - 2) {
-              x = x >= p.x ? Math.min(W - 74, p.x + minX * 0.65) : Math.max(74, p.x - minX * 0.65);
+              x = clampX(x >= p.x ? p.x + minX * 0.65 : p.x - minX * 0.65);
             }
           }
         }

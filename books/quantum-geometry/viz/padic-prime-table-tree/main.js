@@ -335,6 +335,24 @@
     return `${weight} ${px}px ${v}`;
   }
 
+  /* Narrow stacked frames (a cited figure in a narrow column, phones): drawStage sets this before the panels draw. There
+     the panels place their rows, captions and readout lines one under another and wrap long text onto lines of its own,
+     instead of squeezing it into one line; wide frames keep their layout. */
+  let narrowStage = false;
+  /** Lines of str no wider than maxW in the current font: breaks at spaces, and between Chinese characters. */
+  function wrapLines(ctx, str, maxW) {
+    const tokens = String(str).match(/[⺀-鿿＀-￯]\s*|[^\s⺀-鿿＀-￯]+\s*|\s+/g) || [];
+    const lines = [];
+    let cur = '';
+    for (const tk of tokens) {
+      const next = cur + tk;
+      if (cur.trim() && ctx.measureText(next.trimEnd()).width > maxW) { lines.push(cur.trimEnd()); cur = tk.trimStart(); } else cur = next;
+    }
+    if (cur.trim()) lines.push(cur.trimEnd());
+    return lines;
+  }
+
+  /** The panel and its title; returns the y under the title (narrow frames: the title steps down to 9px, then wraps). */
   function panelFrame(ctx, rect, lw, titleZh, titleEn, accent = false) {
     ctx.save();
     ctx.fillStyle = TRV.alpha(P.panelSolid || P.stage, 0.56);
@@ -342,14 +360,23 @@
     ctx.lineWidth = 1.1 * lw;
     ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
     ctx.strokeRect(rect.x + 0.5, rect.y + 0.5, Math.max(1, rect.w - 1), Math.max(1, rect.h - 1));
+    let bottom = rect.y + 28;
     if (!TRV.thumbMode && titleZh) {
-      ctx.font = font(10.5, 'display', 600);
+      const title = L(titleZh, titleEn), maxW = rect.w - 20;
+      let size = 10.5, lines = [title];
+      ctx.font = font(size, 'display', 600);
+      if (narrowStage) {
+        while (size > 9 && ctx.measureText(title).width > maxW) { size -= 0.5; ctx.font = font(size, 'display', 600); }
+        if (ctx.measureText(title).width > maxW) lines = wrapLines(ctx, title, maxW);
+        bottom = rect.y + 7 + lines.length * (size + 2.5) + 4;
+      }
       ctx.fillStyle = accent ? P.cyan : P.dim;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'top';
-      ctx.fillText(L(titleZh, titleEn), rect.x + 10, rect.y + 7);
+      lines.forEach((s, i) => ctx.fillText(s, rect.x + 10, rect.y + 7 + i * (size + 2.5)));
     }
     ctx.restore();
+    return bottom;
   }
 
   /* ---------- Left Stage: Dynamic p-adic Prefix Lookup Tree Z/p^k Z & Hensel / Cliff ---------- */
@@ -363,7 +390,7 @@
     const H = computeHensel(S.poly, p, 5);
     const Pr = computeProbe(p, PROBE_A, S.probeB);
 
-    panelFrame(
+    const titleBottom = panelFrame(
       ctx,
       rect,
       lw,
@@ -377,12 +404,23 @@
     ctx.rect(rect.x + 2, rect.y + 2, rect.w - 4, rect.h - 4);
     ctx.clip();
 
-    const topPad = TRV.thumbMode ? 18 : 28;
-    const botCardH = TRV.thumbMode ? 24 : (rect.h < 250 ? 52 : 68);
+    const narrow = narrowStage;
+    const topPad = TRV.thumbMode ? 18 : narrow ? Math.max(20, titleBottom - rect.y) : 28;
+    let botCardH = TRV.thumbMode ? 24 : (rect.h < 250 ? 52 : 68);
+    // narrow frames: the inspector's lines wrapped at full size, the card as tall as they are; the buckets line (also in
+    // the curve box and the readouts) gives way first when the tree would be left with fewer than 88 px
+    let inspector = null;
+    if (narrow) {
+      ctx.font = font(9.5, 'data', 600);
+      inspector = inspectorTexts(p, H, Pr).map((g) => ({ color: g.color, lines: wrapLines(ctx, g.text, rect.w - 36) }));
+      const cardOf = (gs) => 10 + gs.reduce((n, g) => n + g.lines.length, 0) * 11;
+      if (rect.h - topPad - 12 - 6 - cardOf(inspector) < 88) inspector = inspector.slice(0, 2);
+      botCardH = cardOf(inspector);
+    }
     const tx = rect.x + 14;
     const tw = Math.max(40, rect.w - 28);
     const ty = rect.y + topPad;
-    const th = Math.max(50, rect.h - topPad - botCardH - 10);
+    const th = Math.max(50, rect.h - topPad - botCardH - (narrow ? 12 : 10));
 
     // Determine visible tree layers
     const K = st.depth;
@@ -399,7 +437,7 @@
 
     // Bottom inspector banner inside Left Panel (Hensel + Ultrametric probe)
     if (!TRV.thumbMode) {
-      drawInspectorCard(ctx, { x: rect.x + 10, y: rect.y + rect.h - botCardH - 6, w: rect.w - 20, h: botCardH }, lw, p, H, Pr);
+      drawInspectorCard(ctx, { x: rect.x + 10, y: rect.y + rect.h - botCardH - 6, w: rect.w - 20, h: botCardH }, lw, p, H, Pr, inspector);
     }
 
     ctx.restore();
@@ -409,15 +447,23 @@
     const K = st.depth;
     const visK = Math.min(K, p === 2 ? 4 : p === 3 ? 3 : p === 5 ? 3 : 3);
     const hasTail = K > visK;
-    const treeW = hasTail ? box.w - (TRV.thumbMode ? 36 : 56) : box.w;
+    const treeW0 = hasTail ? box.w - (TRV.thumbMode ? 36 : 56) : box.w;
     const levels = visK + 1; // k = 0 .. visK
-    const rowY = (k) => box.y + 10 + ((box.h - 22) * k) / Math.max(1, levels - 1 + (hasTail ? 0.55 : 0));
+    // narrow frames: the row names stand in a gutter left of the rows, the ramified caption has the top line of the box
+    // and the amber residue the bottom line, so no caption is drawn across a row of nodes
+    const nar = narrowStage, gut = nar ? 26 : 0;
+    const capTop = nar && visK >= 2 && H.branches.some((b) => b.kind === 'ramified') ? 13 : 0;
+    const capBot = nar && H.branches.some((b) => b.kind === 'simple') ? 14 : 0;
+    const treeX = box.x + gut, treeW = treeW0 - gut;
+    const rowY = nar
+      ? (k) => box.y + capTop + 6 + ((box.h - capTop - capBot - 12) * k) / Math.max(1, levels - 1)
+      : (k) => box.y + 10 + ((box.h - 22) * k) / Math.max(1, levels - 1 + (hasTail ? 0.55 : 0));
 
     // Precompute clopen interval geometry for each node (k, res) where 0 <= res < p^k
     // Important: order children by digit d_k at layer k so x ≡ a0 + d1*p + ... stays geometrically nested inside its parent!
     const nodes = new Map();
     const rootPad = treeW * 0.08;
-    nodes.set('0:0', { x0: box.x + rootPad, x1: box.x + treeW - rootPad, cx: box.x + treeW / 2, y: rowY(0) });
+    nodes.set('0:0', { x0: treeX + rootPad, x1: treeX + treeW - rootPad, cx: treeX + treeW / 2, y: rowY(0) });
 
     for (let k = 1; k <= visK; k++) {
       const pkPrev = Math.pow(p, k - 1);
@@ -462,7 +508,7 @@
         ctx.fillStyle = P.dim;
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
-        ctx.fillText(k === 0 ? 'k=0' : `k=${k}`, box.x, y - barH * 0.95);
+        ctx.fillText(k === 0 ? 'k=0' : `k=${k}`, box.x, nar ? y : y - barH * 0.95);
       }
     }
 
@@ -490,8 +536,8 @@
     const rootNode = nodes.get('0:0');
     if (H.status === 'unsat_k1') {
       const y1 = rowY(1);
-      const ux = box.x + (TRV.thumbMode ? 6 : 28);
-      const uw = Math.max(40, treeW - (ux - box.x) - 4);
+      const ux = treeX + (TRV.thumbMode ? 6 : 28);
+      const uw = Math.max(40, treeW - (ux - treeX) - 4);
       ctx.strokeStyle = P.violet;
       ctx.lineWidth = 1.6 * lw;
       ctx.setLineDash([4 * lw, 3 * lw]);
@@ -551,9 +597,9 @@
               const y2 = rowY(2);
               ctx.font = font(9.5, 'data', 600);
               ctx.fillStyle = P.magenta;
-              ctx.textAlign = 'center';
+              ctx.textAlign = nar ? 'left' : 'center';
               ctx.textBaseline = 'top';
-              ctx.fillText(L(`p∣Δ: f′(${br.a0})≡0 (mod ${p}) 分歧奇异阻断`, `p∣Δ: f′(${br.a0})≡0 (mod ${p}) ramified stall`), n1.cx, y2 + barH * 0.9);
+              ctx.fillText(L(`p∣Δ: f′(${br.a0})≡0 (mod ${p}) 分歧奇异阻断`, `p∣Δ: f′(${br.a0})≡0 (mod ${p}) ramified stall`), nar ? treeX : n1.cx, nar ? box.y : y2 + barH * 0.9);
             }
           }
         } else {
@@ -588,9 +634,9 @@
               if (!TRV.thumbMode) {
                 ctx.font = font(9.5, 'data', 600);
                 ctx.fillStyle = P.amber;
-                ctx.textAlign = cur.cx > box.x + treeW * 0.65 ? 'right' : 'left';
+                ctx.textAlign = cur.cx > treeX + treeW * 0.65 ? 'right' : 'left';
                 ctx.textBaseline = 'top';
-                const dx = cur.cx > box.x + treeW * 0.65 ? -6 : 6;
+                const dx = cur.cx > treeX + treeW * 0.65 ? -6 : 6;
                 ctx.fillText(`x${sub(k)}≡${br.residues[k - 1]} (mod ${p}${sup(k)})`, cur.cx + dx, cur.y + barH * 0.72);
               }
             }
@@ -602,8 +648,8 @@
 
     // Compressed serial depth cascade bar when K(p) > visK (e.g. K(2)=10, K(3)=7, K(5)=5, K(7)=4)
     if (hasTail) {
-      const rx = box.x + treeW + (TRV.thumbMode ? 8 : 12);
-      const rw = Math.max(18, box.w - treeW - (TRV.thumbMode ? 10 : 14));
+      const rx = box.x + treeW0 + (TRV.thumbMode ? 8 : 12);
+      const rw = Math.max(18, box.w - treeW0 - (TRV.thumbMode ? 10 : 14));
       const ry0 = box.y + 8, ry1 = box.y + box.h - (TRV.thumbMode ? 8 : 14);
       const hSeg = Math.max(3 * lw, ((ry1 - ry0) / K) * 0.56);
       for (let k = 1; k <= K; k++) {
@@ -630,11 +676,20 @@
 
   function drawWideFanoutTree(ctx, box, lw, p, st, H, Pr) {
     const K = st.depth; // K = 3 for 11..31, K = 2 for 97, 257
-    const rootY = box.y + 10;
-    const k1Y = box.y + box.h * (K === 2 ? 0.44 : 0.36);
-    const k2Y = box.y + box.h * (K === 2 ? 0.80 : 0.64);
-    const k3Y = box.y + box.h * 0.88;
     const barH = clamp(box.h * 0.06, 6 * lw, 11 * lw);
+    let rootY = box.y + 10;
+    let k1Y = box.y + box.h * (K === 2 ? 0.44 : 0.36);
+    let k2Y = box.y + box.h * (K === 2 ? 0.80 : 0.64);
+    let k3Y = box.y + box.h * 0.88;
+    if (narrowStage) {
+      // narrow frames: each layer under a line of its own for its tag ("k=1: …"), and a last line for the branch label
+      const tagH = 12, labH = 13, nTag = K >= 3 ? 3 : 2;
+      const gapR = Math.max(3, (box.h - 2 - barH - nTag * (tagH + barH) - labH) / nTag);
+      rootY = box.y + 2;
+      k1Y = rootY + barH + gapR + tagH;
+      k2Y = k1Y + barH + gapR + tagH;
+      k3Y = k2Y + barH + gapR + tagH;
+    }
 
     // Root node Z (k = 0)
     const rootW = box.w * 0.36;
@@ -806,17 +861,29 @@
   }
 
   function drawSingleLayerDirectRead(ctx, box, lw, p, st, H, Pr) {
-    const rootY = box.y + 14;
-    const k1Y = box.y + box.h * 0.56;
+    let rootY = box.y + 14;
+    let k1Y = box.y + box.h * 0.56;
     const barH = clamp(box.h * 0.11, 10 * lw, 18 * lw);
+    const cap1 = L('p = 1031 > 1024：K = 1 单层直读（1024 单元素桶 + 7 空桶，E₁ = 0）', 'p = 1031 > 1024: K = 1 direct read (1024 singletons + 7 empty, E₁ = 0)');
+    const cap2 = L('零串行迭代 · 零进位涟漪 · 任意两态 x ≠ y 在 k* = 1 即刻分离', 'Zero serial depth · zero carry · every pair x ≠ y splits at k* = 1');
+    // narrow frames: both captions wrapped at full size under the row of buckets, the row and the root moved up to make room
+    let wrap1 = null, wrap2 = null, rootH = barH * 0.72;
+    if (narrowStage && !TRV.thumbMode) {
+      ctx.font = font(10, 'data', 600); wrap1 = wrapLines(ctx, cap1, box.w - 6);
+      ctx.font = font(9.2, 'data', 600); wrap2 = wrapLines(ctx, cap2, box.w - 6);
+      const capH = 4 + wrap1.length * 11.5 + 2 + wrap2.length * 10.5;
+      rootY = Math.min(rootY, box.y + 2);
+      rootH = Math.min(rootH, 6 * lw);
+      k1Y = Math.min(k1Y, Math.max(rootY + rootH + 8, box.y + box.h - capH - barH));
+    }
 
     const rootW = box.w * 0.42;
     const rootX = box.x + (box.w - rootW) / 2;
     ctx.fillStyle = TRV.alpha(P.cyan, 0.22);
     ctx.strokeStyle = P.cyan;
     ctx.lineWidth = 1.4 * lw;
-    ctx.fillRect(rootX, rootY, rootW, barH * 0.72);
-    ctx.strokeRect(rootX, rootY, rootW, barH * 0.72);
+    ctx.fillRect(rootX, rootY, rootW, rootH);
+    ctx.strokeRect(rootX, rootY, rootW, rootH);
 
     // 56 crisp singleton columns representing the 1024 singleton buckets + 7 empty buckets of Z/1031Z
     const nCols = 56;
@@ -836,7 +903,7 @@
       ctx.strokeStyle = isHensel ? P.cyan : isProbe ? P.violet : TRV.alpha(P.cyan, 0.25);
       ctx.lineWidth = (isHensel || isProbe ? 1.9 : 0.8) * lw;
       ctx.beginPath();
-      ctx.moveTo(box.x + box.w / 2, rootY + barH * 0.72);
+      ctx.moveTo(box.x + box.w / 2, rootY + rootH);
       ctx.lineTo(mid, k1Y);
       ctx.stroke();
 
@@ -853,39 +920,29 @@
       ctx.strokeRect(cx0, k1Y, cw, barH);
     }
 
-    if (!TRV.thumbMode) {
+    if (!TRV.thumbMode && wrap1) {
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      let y = k1Y + barH + 4;
+      ctx.font = font(10, 'data', 600); ctx.fillStyle = P.amber;
+      wrap1.forEach((s) => { ctx.fillText(s, box.x + box.w / 2, y); y += 11.5; });
+      y += 2;
+      ctx.font = font(9.2, 'data', 600); ctx.fillStyle = P.cyan;
+      wrap2.forEach((s) => { ctx.fillText(s, box.x + box.w / 2, y); y += 10.5; });
+    } else if (!TRV.thumbMode) {
       ctx.font = font(10, 'data', 600);
       ctx.fillStyle = P.amber;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
-      ctx.fillText(
-        L('p = 1031 > 1024：K = 1 单层直读（1024 单元素桶 + 7 空桶，E₁ = 0）', 'p = 1031 > 1024: K = 1 direct read (1024 singletons + 7 empty, E₁ = 0)'),
-        box.x + box.w / 2,
-        k1Y + barH + 8,
-        box.w - 6
-      );
+      ctx.fillText(cap1, box.x + box.w / 2, k1Y + barH + 8, box.w - 6);
       ctx.font = font(9.2, 'data', 600);
       ctx.fillStyle = P.cyan;
-      ctx.fillText(
-        L('零串行迭代 · 零进位涟漪 · 任意两态 x ≠ y 在 k* = 1 即刻分离', 'Zero serial depth · zero carry · every pair x ≠ y splits at k* = 1'),
-        box.x + box.w / 2,
-        k1Y + barH + 25,
-        box.w - 6
-      );
+      ctx.fillText(cap2, box.x + box.w / 2, k1Y + barH + 25, box.w - 6);
     }
   }
 
-  function drawInspectorCard(ctx, box, lw, p, H, Pr) {
-    ctx.fillStyle = TRV.alpha(P.void || P.stage, 0.72);
-    ctx.strokeStyle = TRV.alpha(P.lineHot || P.panelEdge, 0.8);
-    ctx.lineWidth = 1 * lw;
-    ctx.fillRect(box.x, box.y, box.w, box.h);
-    ctx.strokeRect(box.x, box.y, box.w, box.h);
-
-    ctx.font = font(9.5, 'data', 600);
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'top';
-
+  /** The inspector's three readouts (Hensel, probe, buckets) and their colours. */
+  function inspectorTexts(p, H, Pr) {
     // Line 1: Hensel lifting status
     let hLine = '', hCol = P.cyan;
     if (H.status === 'unsat_k1') {
@@ -918,31 +975,45 @@
         `Hensel O(1) (${H.expr}): [f′(${b.a0})]⁻¹≡${b.invModP} (mod ${p}) → ${expStr} ≡ ${b.residues[4]}`
       );
     }
-    ctx.fillStyle = hCol;
-    ctx.fillText(hLine, box.x + 8, box.y + 7, box.w - 16);
-
     // Line 2: Ultrametric blind-spot probe
+    const pLine = Pr.firstK == null
+      ? L(`超度量探针: x_A = x_B = ${Pr.xA} → d_${p} = 0`, `Ultrametric probe: x_A = x_B = ${Pr.xA} → d_${p} = 0`)
+      : L(
+        `盲区探针 (${Pr.xA}, ${Pr.xB}): |x_A − x_B| = ${Pr.diff}, v_${p} = ${Pr.val}, 最小区分层 k* = ${Pr.firstK}, d_${p} = ${Pr.distStr}`,
+        `Blind-spot (${Pr.xA}, ${Pr.xB}): |x_A − x_B| = ${Pr.diff}, v_${p} = ${Pr.val}, first split k* = ${Pr.firstK}, d_${p} = ${Pr.distStr}`
+      );
+    // Line 3: the buckets of the first layer
+    const bLine = L(`桶分布: ${stSummary(p, true)}`, `Buckets: ${stSummary(p, false)}`);
+    return [{ text: hLine, color: hCol }, { text: pLine, color: P.ink }, { text: bLine, color: P.dim }];
+  }
+
+  /** The inspector card under the tree: one squeezed line per readout on wide frames; on narrow frames the readouts as
+      wrapped lines (`wrapped`, from drawTreePanel), each line at full size. */
+  function drawInspectorCard(ctx, box, lw, p, H, Pr, wrapped) {
+    ctx.fillStyle = TRV.alpha(P.void || P.stage, 0.72);
+    ctx.strokeStyle = TRV.alpha(P.lineHot || P.panelEdge, 0.8);
+    ctx.lineWidth = 1 * lw;
+    ctx.fillRect(box.x, box.y, box.w, box.h);
+    ctx.strokeRect(box.x, box.y, box.w, box.h);
+
+    ctx.font = font(9.5, 'data', 600);
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    if (wrapped) {
+      let y = box.y + 5;
+      for (const g of wrapped) { ctx.fillStyle = g.color; for (const s of g.lines) { ctx.fillText(s, box.x + 8, y); y += 11; } }
+      return;
+    }
+    const [hensel, probe, buckets] = inspectorTexts(p, H, Pr);
+    ctx.fillStyle = hensel.color;
+    ctx.fillText(hensel.text, box.x + 8, box.y + 7, box.w - 16);
     if (box.h >= 46) {
-      ctx.fillStyle = P.ink;
-      const pLine = Pr.firstK == null
-        ? L(`超度量探针: x_A = x_B = ${Pr.xA} → d_${p} = 0`, `Ultrametric probe: x_A = x_B = ${Pr.xA} → d_${p} = 0`)
-        : L(
-          `盲区探针 (${Pr.xA}, ${Pr.xB}): |x_A − x_B| = ${Pr.diff}, v_${p} = ${Pr.val}, 最小区分层 k* = ${Pr.firstK}, d_${p} = ${Pr.distStr}`,
-          `Blind-spot (${Pr.xA}, ${Pr.xB}): |x_A − x_B| = ${Pr.diff}, v_${p} = ${Pr.val}, first split k* = ${Pr.firstK}, d_${p} = ${Pr.distStr}`
-        );
-      ctx.fillText(pLine, box.x + 8, box.y + 26, box.w - 16);
+      ctx.fillStyle = probe.color;
+      ctx.fillText(probe.text, box.x + 8, box.y + 26, box.w - 16);
     }
     if (box.h >= 62) {
-      ctx.fillStyle = P.dim;
-      ctx.fillText(
-        L(
-          `桶分布: ${stSummary(p, true)}`,
-          `Buckets: ${stSummary(p, false)}`
-        ),
-        box.x + 8,
-        box.y + 45,
-        box.w - 16
-      );
+      ctx.fillStyle = buckets.color;
+      ctx.fillText(buckets.text, box.x + 8, box.y + 45, box.w - 16);
     }
   }
 
@@ -962,7 +1033,7 @@
 
   /* ---------- Cliff Mode (r = 12): Continuous p_∞ Carry Avalanche vs Euclid Infinite Discrete Primes ---------- */
   function drawCliffVsEuclidPanel(ctx, rect, lw) {
-    panelFrame(
+    const titleBottom = panelFrame(
       ctx,
       rect,
       lw,
@@ -977,12 +1048,30 @@
 
     const padX = rect.x + 14, w = Math.max(40, rect.w - 28);
     const topY = rect.y + (TRV.thumbMode ? 18 : 28);
-    const midY = rect.y + rect.h * 0.47;
+    let midY = rect.y + rect.h * 0.47;
     const botY = rect.y + rect.h - 14;
+    const CAP = [
+      L('p_∞ 连续实数极限：桶壁融化，511 + 1 = 512 触发十位全局进位雪崩', 'p_∞ continuum: clopen walls melt; 511 + 1 = 512 triggers 10-bit carry wave'),
+      L('局部记忆清零 → 失忆轮回重置回 p = 2, K = 10（同构于 θ = 90° 纯光轮回）', 'Carry wipes local isolation → resets to p = 2, K = 10 (θ = 90° samsara)'),
+      L('欧几里得无穷素数阶梯：∏pⱼ + 1 永生新素数 p*（如 30031 = 59×509），永不坠入 p_∞', 'Euclid prime ladder: ∏pⱼ + 1 yields new prime p* (e.g. 30031 = 59×509), never p_∞'),
+      L('零进位超度量桶壁在每一级有限素数 p < ∞ 上永久保持闭合隔离', 'Clopen zero-carry bucket walls stay intact at every finite prime p < ∞')
+    ];
+    // narrow frames: the four captions wrapped at full size, and every part one under another: caption, register, reset
+    // line, caption, divider, caption, the p* labels and the steps, the last caption at the bottom
+    let N = null;
+    if (narrowStage && !TRV.thumbMode) {
+      const LH = 10.5;
+      ctx.font = font(9.3, 'data', 600);
+      const ls = CAP.map((c) => wrapLines(ctx, c, w));
+      const t = Math.max(rect.y + 20, titleBottom), regY0 = t + ls[0].length * LH + 9, bitH0 = 13 * lw, loopY0 = regY0 + bitH0 + 7;
+      const c2Y = loopY0 + 5, mid = c2Y + ls[1].length * LH + 3, c3Y = mid + 5, c4Y = rect.y + rect.h - 5 - ls[3].length * LH;
+      N = { LH, ls, t, regY: regY0, bitH: bitH0, loopY: loopY0, c2Y, mid, c3Y, c4Y, base: c4Y - 3, maxStairH: Math.max(10, c4Y - 3 - (c3Y + ls[2].length * LH + 12)) };
+      midY = mid;
+    }
 
     // 1. Upper half: Continuous p_∞ Real Carry Avalanche (511 + 1 = 512 cascading across 10 bits -> amnesia reset to p=2)
-    const regY = topY + (TRV.thumbMode ? 12 : 24);
-    const bitH = clamp((midY - regY) * 0.34, 12 * lw, 22 * lw);
+    const regY = N ? N.regY : topY + (TRV.thumbMode ? 12 : 24);
+    const bitH = N ? N.bitH : clamp((midY - regY) * 0.34, 12 * lw, 22 * lw);
     const bitW = w / 10;
     const bitsBefore = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // 511 = 0111111111_2
     for (let i = 0; i < 10; i++) {
@@ -1012,7 +1101,7 @@
       }
     }
     // Samsara reset arc looping back to p=2, K=10
-    const loopY = regY + bitH + 12;
+    const loopY = N ? N.loopY : regY + bitH + 12;
     ctx.strokeStyle = P.violet;
     ctx.lineWidth = 1.8 * lw;
     ctx.setLineDash([4 * lw, 3 * lw]);
@@ -1029,26 +1118,23 @@
     ctx.closePath();
     ctx.fill();
 
-    if (!TRV.thumbMode) {
+    if (N) {
+      ctx.font = font(9.3, 'data', 600);
+      ctx.textBaseline = 'top';
+      ctx.fillStyle = P.magenta; ctx.textAlign = 'left';
+      N.ls[0].forEach((s, i) => ctx.fillText(s, padX, N.t + i * N.LH));
+      ctx.fillStyle = P.violet; ctx.textAlign = 'center';
+      N.ls[1].forEach((s, i) => ctx.fillText(s, padX + w / 2, N.c2Y + i * N.LH));
+    } else if (!TRV.thumbMode) {
       ctx.font = font(9.3, 'data', 600);
       ctx.fillStyle = P.magenta;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'top';
-      ctx.fillText(
-        L('p_∞ 连续实数极限：桶壁融化，511 + 1 = 512 触发十位全局进位雪崩', 'p_∞ continuum: clopen walls melt; 511 + 1 = 512 triggers 10-bit carry wave'),
-        padX,
-        topY,
-        w
-      );
+      ctx.fillText(CAP[0], padX, topY, w);
       ctx.fillStyle = P.violet;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
-      ctx.fillText(
-        L('局部记忆清零 → 失忆轮回重置回 p = 2, K = 10（同构于 θ = 90° 纯光轮回）', 'Carry wipes local isolation → resets to p = 2, K = 10 (θ = 90° samsara)'),
-        padX + w / 2,
-        loopY + 5,
-        w
-      );
+      ctx.fillText(CAP[1], padX + w / 2, loopY + 5, w);
     }
 
     // Divider
@@ -1062,8 +1148,8 @@
     // 2. Lower half: Euclid's Infinite Discrete Prime Staircase (blocking the jump to p_∞!)
     const nE = EUCLID_STEPS.length;
     const stepW = (w - 8 * (nE - 1)) / nE;
-    const baseStairY = botY - (TRV.thumbMode ? 6 : 18);
-    const maxStairH = Math.max(26, baseStairY - midY - (TRV.thumbMode ? 12 : 34));
+    const baseStairY = N ? N.base : botY - (TRV.thumbMode ? 6 : 18);
+    const maxStairH = N ? N.maxStairH : Math.max(26, baseStairY - midY - (TRV.thumbMode ? 12 : 34));
 
     EUCLID_STEPS.forEach((es, i) => {
       const sx = padX + i * (stepW + 8);
@@ -1090,25 +1176,23 @@
       }
     });
 
-    if (!TRV.thumbMode) {
+    if (N) {
+      ctx.font = font(9.3, 'data', 600);
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      ctx.fillStyle = P.cyan;
+      N.ls[2].forEach((s, i) => ctx.fillText(s, padX, N.c3Y + i * N.LH));
+      ctx.fillStyle = P.dim;
+      N.ls[3].forEach((s, i) => ctx.fillText(s, padX, N.c4Y + i * N.LH));
+    } else if (!TRV.thumbMode) {
       ctx.font = font(9.3, 'data', 600);
       ctx.fillStyle = P.cyan;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'top';
-      ctx.fillText(
-        L('欧几里得无穷素数阶梯：∏pⱼ + 1 永生新素数 p*（如 30031 = 59×509），永不坠入 p_∞', 'Euclid prime ladder: ∏pⱼ + 1 yields new prime p* (e.g. 30031 = 59×509), never p_∞'),
-        padX,
-        midY + 5,
-        w
-      );
+      ctx.fillText(CAP[2], padX, midY + 5, w);
       ctx.fillStyle = P.dim;
       ctx.textBaseline = 'bottom';
-      ctx.fillText(
-        L('零进位超度量桶壁在每一级有限素数 p < ∞ 上永久保持闭合隔离', 'Clopen zero-carry bucket walls stay intact at every finite prime p < ∞'),
-        padX,
-        botY + 2,
-        w
-      );
+      ctx.fillText(CAP[3], padX, botY + 2, w);
     }
 
     ctx.restore();
@@ -1116,7 +1200,7 @@
 
   /* ---------- Right Top Sub-box: Tree-Depth Collapse K(p) & EscapePairs Decay ---------- */
   function drawDepthEscapeBox(ctx, rect, lw) {
-    panelFrame(
+    const titleBottom = panelFrame(
       ctx,
       rect,
       lw,
@@ -1131,8 +1215,9 @@
 
     const pl = TRV.thumbMode ? 20 : 34;
     const pr = TRV.thumbMode ? 18 : 30;
-    const pt = TRV.thumbMode ? 18 : 30;
-    const pb = TRV.thumbMode ? 16 : 26;
+    // narrow frames: the plot starts right under the title as drawn and keeps 16 px under it for the prime labels
+    const pt = TRV.thumbMode ? 18 : narrowStage ? Math.max(18, titleBottom - rect.y - 2) : 30;
+    const pb = TRV.thumbMode ? 16 : narrowStage ? 16 : 26;
     const gx0 = rect.x + pl, gx1 = rect.x + rect.w - pr;
     const gy0 = rect.y + pt, gy1 = rect.y + rect.h - pb;
     const gw = Math.max(20, gx1 - gx0), gh = Math.max(20, gy1 - gy0);
@@ -1151,11 +1236,13 @@
     ctx.moveTo(gx0, gy0); ctx.lineTo(gx0, gy1); ctx.lineTo(gx1, gy1);
     ctx.stroke();
 
+    // where the four tick labels would touch (a flat plot), only the ends 1 and 10 are labelled; all four lines stay
+    const tickRoom = YK(1) - YK(4) >= 10;
     for (const kTick of [1, 4, 7, 10]) {
       const y = YK(kTick);
       ctx.strokeStyle = TRV.alpha(P.dim, 0.18);
       ctx.beginPath(); ctx.moveTo(gx0, y); ctx.lineTo(gx1, y); ctx.stroke();
-      if (!TRV.thumbMode) {
+      if (!TRV.thumbMode && (tickRoom || kTick === 1 || kTick === 10)) {
         ctx.font = font(8.8, 'data', 600);
         ctx.fillStyle = P.cyan;
         ctx.textAlign = 'right';
@@ -1260,7 +1347,7 @@
   /* ---------- Right Bottom Sub-box: Adelic Product Formula & CRT Multi-Observer Balance ---------- */
   function drawAdelicBox(ctx, rect, lw, fullMode = false) {
     const Ad = computeAdelic(S.rat);
-    panelFrame(
+    const titleBottom = panelFrame(
       ctx,
       rect,
       lw,
@@ -1273,11 +1360,14 @@
     ctx.rect(rect.x + 2, rect.y + 2, rect.w - 4, rect.h - 4);
     ctx.clip();
 
+    // the small box of a narrow frame: the product and the log sum each on a line of their own under the bars, and one
+    // label per bar ("p=2: 1/4") on the zero-line side away from the bar
+    const small = narrowStage && !fullMode && !TRV.thumbMode, FL = 11.5;
     const pl = 14, pr = 14;
-    const pt = TRV.thumbMode ? 18 : 28;
-    const pb = TRV.thumbMode ? 16 : (fullMode ? 56 : 40);
+    const pt = TRV.thumbMode ? 18 : small ? Math.max(20, titleBottom - rect.y) + 2 : 28;
+    const pb = TRV.thumbMode ? 16 : small ? 2 * FL + 10 : (fullMode ? 56 : 40);
     const bx0 = rect.x + pl, bw = Math.max(30, rect.w - pl - pr);
-    const by0 = rect.y + pt, bh = Math.max(28, rect.h - pt - pb);
+    const by0 = rect.y + pt, bh = Math.max(small ? 18 : 28, rect.h - pt - pb);
     const zeroY = by0 + bh * 0.5;
 
     const maxLog = Math.max(1.2, ...Ad.places.map((u) => Math.abs(u.logNorm))) * 1.22;
@@ -1312,7 +1402,13 @@
       ctx.fillRect(x, top, barW, h);
       ctx.strokeRect(x, top, barW, h);
 
-      if (!TRV.thumbMode) {
+      if (small) {
+        ctx.font = font(9, 'data', 600);
+        ctx.fillStyle = isSelectedPrime ? P.amber : P.ink;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = plItem.logNorm >= 0 ? 'top' : 'bottom';
+        ctx.fillText(`${plItem.place}: ${plItem.normStr}`, x + barW / 2, plItem.logNorm >= 0 ? zeroY + 2 : zeroY - 2);
+      } else if (!TRV.thumbMode) {
         ctx.font = font(9, 'data', 600);
         ctx.fillStyle = isSelectedPrime ? P.amber : col;
         ctx.textAlign = 'center';
@@ -1325,7 +1421,15 @@
       }
     });
 
-    if (!TRV.thumbMode) {
+    if (small) {
+      const fy = rect.y + rect.h - 4 - 2 * FL;
+      ctx.font = font(9.5, 'data', 600);
+      ctx.fillStyle = P.cyan;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText(`${Ad.places.map((u) => u.normStr).join(' × ')} = ${Ad.productStr}`, rect.x + rect.w / 2, fy, rect.w - 16);
+      ctx.fillText(`ln|x|_∞ + ∑ ln|x|_p = ${fix(Ad.logSum, 4)}`, rect.x + rect.w / 2, fy + FL, rect.w - 16);
+    } else if (!TRV.thumbMode) {
       const fy = rect.y + rect.h - pb + 6;
       ctx.font = font(9.5, 'data', 600);
       ctx.fillStyle = P.cyan;
@@ -1352,6 +1456,7 @@
     const lw = TRV.thumbMode ? 1.9 : 1;
     const stacked = W < 620;
     lastStacked = stacked;
+    narrowStage = stacked && !TRV.thumbMode && S.scene !== 'adelic';   // the adelic scene's two halves keep their layout
     const pt = TRV.thumbMode ? 14 : (stacked ? 102 : 56);
     const pb = TRV.thumbMode ? 14 : (stacked ? 54 : 42);
     const pl = 14, pr = 14;
@@ -1374,9 +1479,12 @@
       // 'duo': Left = Dynamic p-adic Prefix Tree & Hensel/Cliff; Right = Top Depth/Escape + Bottom Adelic Balance
       const gap = 10;
       if (stacked) {
-        const hTree = (inner.h - gap * 2) * 0.48;
-        const hCurve = (inner.h - gap * 2) * 0.27;
-        const hAd = (inner.h - gap * 2) * 0.25;
+        // the tree (or the cliff) is what these cards are about and carries the most rows and captions: on a narrow frame
+        // the curve box and the adelic box keep what their plot, their bars and two footer lines need, the tree the rest
+        const avail = inner.h - gap * 2;
+        const hCurve = narrowStage ? clamp(avail * 0.18, 58, 110) : avail * 0.27;
+        const hAd = narrowStage ? clamp(avail * 0.23, 76, 130) : avail * 0.25;
+        const hTree = avail - hCurve - hAd;
         drawTreePanel(ctx, { x: inner.x, y: inner.y, w: inner.w, h: hTree }, lw);
         drawDepthEscapeBox(ctx, { x: inner.x, y: inner.y + hTree + gap, w: inner.w, h: hCurve }, lw);
         drawAdelicBox(ctx, { x: inner.x, y: inner.y + hTree + hCurve + gap * 2, w: inner.w, h: hAd }, lw, false);
