@@ -185,6 +185,14 @@
     const t = clamp((top + H - bottom - need) / 2, 0, Math.max(0, H - need));
     return { top: t, bottom: Math.max(0, H - t - need) };
   }
+  /* A stage label's row (the line box of its 12px text) and the clear space kept on each side of it. tagSpan measures a
+     label in the font of .tag.raw (the page's body face, Latin first in English) before it is placed. */
+  const ROW = 18, TAG_PAD = 6;
+  const tagSpan = (c, x, text) => {
+    c.save(); c.font = `12px ${getComputedStyle(document.body).fontFamily}`;
+    const w = c.measureText(text).width + 0.48 * text.length; c.restore();   // letter-spacing 0.04em
+    return [x - w / 2 - TAG_PAD, x + w / 2 + TAG_PAD];
+  };
 
   function drawGrowth() {
     const lo = layout(), cv = $('cv'), t = S.t, thumb = TRV.thumbMode;
@@ -250,6 +258,20 @@
     const g = kit.plot(cv, { x: [0.2, N + 0.8], y: [-1.3, top + 0.25], pad: [thumb ? 20 : 54, thumb ? 20 : 22, fb.top, fb.bottom + 6], minHeight: MIN_H });
     G = g; G2 = null;
     const lt = S.lt;
+    /* The labels sit 12px above their lines. The cyan one (these cuts) shares its row with the white one whenever the
+       stack tops out on the white line; on a narrow stage the two do not fit side by side, so it takes the first free
+       row above: clear of the labels already placed and, once moved, off the white and grey lines. */
+    const boxes = [], lines = [d.floor, d.guess].filter((v) => v != null).map((v) => g.Y(v - 0.5));
+    const put = (key, x, y, html, cls, free) => {
+      const [x0, x1] = tagSpan(g.ctx, x, html), y0 = y;
+      for (let i = 0; free && i < 8; i++) {
+        const hit = boxes.find((b) => x0 < b.x1 && b.x0 < x1 && Math.abs(y - b.y) < ROW);
+        const on = y !== y0 ? lines.find((l) => Math.abs(y - l) < ROW / 2) : undefined;
+        if (hit) y = hit.y - ROW; else if (on !== undefined) y = on - 12; else break;
+      }
+      if (free) y = Math.max(y, Math.min(y0, g.pt));
+      boxes.push({ x0, x1, y }); tag(key, x, y, html, cls);
+    };
     g.axes({ yTicks: thumb ? [] : Array.from({ length: Math.min(top, 14) }, (_, i) => [i, String(i)]), xTicks: [], frame: false });
     // site columns and their numbers
     const c = g.ctx;
@@ -275,7 +297,7 @@
         c.strokeRect(g.X(a), g.Y(gl[k] + 0.3), g.X(b) - g.X(a), g.Y(gl[k] - 0.3) - g.Y(gl[k] + 0.3)); c.restore();
       }
       for (const j of S.ghost) g.poly([[j, -0.74], [j - 0.2, -0.42], [j + 0.2, -0.42]], P.magenta, { alpha: 0.3 });
-      if (!thumb) tag('dGhost', g.pl + 70, g.Y(gD - 0.5) - 12, L(`起点 {${S.ghost.join(', ')}}：${gD} 层`, `start {${S.ghost.join(', ')}}: ${gD} layers`), 'raw');
+      if (!thumb) put('dGhost', g.pl + 70, g.Y(gD - 0.5) - 12, L(`起点 {${S.ghost.join(', ')}}：${gD} 层`, `start {${S.ghost.join(', ')}}: ${gD} layers`), 'raw');
     }
     // the gates
     for (let k = 0; k <= N; k++) {
@@ -287,9 +309,9 @@
     }
     if (!thumb) {
       const R = g.pl + g.iw;
-      if (d.floor != null) tag('dFloor', R - 96, g.Y(d.floor - 0.5) - 12, L(`定理：最少 ${d.floor} 层`, `theorem: at least ${d.floor} layers`), 'raw ink');
-      if (d.guess != null && d.guess !== d.floor) tag('dGuess', R - 84, g.Y(d.guess - 0.5) - 12, L(`旧公式：${d.guess} 层`, `old formula: ${d.guess} layers`), 'raw');
-      tag('dDepth', g.pl + 70, g.Y(d.D - 0.5) - 12, L(`这组切点：${d.D} 层`, `these cuts: ${d.D} layers`), 'raw cy');
+      if (d.floor != null) put('dFloor', R - 96, g.Y(d.floor - 0.5) - 12, L(`定理：最少 ${d.floor} 层`, `theorem: at least ${d.floor} layers`), 'raw ink');
+      if (d.guess != null && d.guess !== d.floor) put('dGuess', R - 84, g.Y(d.guess - 0.5) - 12, L(`旧公式：${d.guess} 层`, `old formula: ${d.guess} layers`), 'raw');
+      put('dDepth', g.pl + 70, g.Y(d.D - 0.5) - 12, L(`这组切点：${d.D} 层`, `these cuts: ${d.D} layers`), 'raw cy', true);
     }
     return d;
   }
