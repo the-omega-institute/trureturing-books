@@ -226,6 +226,7 @@ const tableHere = (N, r) => {
   return Array.from({ length: N }, (_, i) => Array.from({ length: N }, (__, j) => v.reduce((s, b) => s + b[i] * b[j], 0)));
 };
 const rowColGap = (A, i, j) => Math.max(...A.map((_, k) => Math.abs(A[i][k] - A[k][j])));
+await page.evaluate(() => window.TRV.kit.pause());
 { const ep = await T.open(BOOK, ID, '?lang=en', { locale: 'en-US' });
   await settle(ep);
   const labels = () => ep.evaluate(() => [...document.querySelectorAll('#stage .tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => t.textContent.trim()));
@@ -244,13 +245,15 @@ const rowColGap = (A, i, j) => Math.max(...A.map((_, k) => Math.abs(A[i][k] - A[
   check('read labels (en, N = 12, rank 1, clicked row 1 / column 5): every cell is 1/12, so row 1 = column 5 is said, and it is true',
     es.r === 1 && es.i === 0 && es.j === 4 && A.flat().every((x) => Math.abs(x - 1 / 12) < 1e-15) && rowColGap(A, 0, 4) < 1e-15 && lab.length === 1 && lab[0] === 'row 1 = column 5', JSON.stringify(lab));
   // every allowed state: N = 4, 8, 12, every rank, every cell
-  const sweep = await ep.evaluate(() => {
+  const sweep = await ep.evaluate(async () => {
     const D = window.TABLE_DEBUG, out = [], seen = () => [...document.querySelectorAll('#stage .tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => t.textContent.trim());
     for (const N of [4, 8, 12]) for (let r = 1; r <= N; r++) for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) {
       if (D.state.N !== N) D.setN(N);
       if (D.state.r !== r) D.setR(r);
       D.select(i, j); window.TRV.kit.flush();
       const s = D.state; out.push([N, r, i, j, s.N === N && s.r === r && s.i === i && s.j === j && s.scene === 'read', seen()]);
+      // Let rendering and DOM observers finish between rows of this exhaustive sweep.
+      if (j === N - 1) await new Promise((resolve) => setTimeout(resolve, 0));
     }
     return out;
   });
@@ -270,6 +273,10 @@ const rowColGap = (A, i, j) => Math.max(...A.map((_, k) => Math.abs(A[i][k] - A[
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 
 /* ---------- the solid: a 3D slice of ℝᴺ and the image of its unit ball ---------- */
+// Start this independent section on a fresh, foreground page after the long rendering sweep.
+await page.bringToFront();
+await T.goto(BOOK, ID, '?lang=en');
+await settle(page);
 const sol = async () => { await settle(page); return page.evaluate(() => window.TABLE_DEBUG.solid()); };
 const orthonormal = (Q) => Q.every((a, i) => Q.every((b, j) => Math.abs(dot(a, b) - (i === j ? 1 : 0)) < 1e-12));
 /** max ‖Aq − λq‖ over the slice: zero exactly when A maps each q of the slice to λq. */
