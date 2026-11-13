@@ -77,3 +77,4 @@
 - [附录 A：传统量子力学与几何语言对照词典](appendix-a.md)
 - [附录 B：克利福德代数速查手册](appendix-b.md)
 - [附录 C：trureturing 锁定声明完整索引](appendix-c.md)
+- [附录 D：量子力学六大经典未解问题与五大诠释几何对决](appendix-d.md)

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//TRIAD · Quantum entanglement, P=NP and entropy: partial-trace horizon and cut bond dimension">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//TRIAD 量子纠缠、P=NP 与熵 · 偏迹视界刀片与张量割复杂度</title>
+<meta name="description" content="“量子纠缠、P=NP、熵”正交三位一体实验室：16 比特张量网络（左半区观察者 A 八比特，右半区对偶 Ā 八比特）上，正交施密特角 θ ∈ [0°, 90°] 满足勾股守恒 ‖r_A‖² + τ(A:Ā) = cos²θ + sin²θ = 1，归一化线性熵 S_L(ρ_A) = 2(1 − Tr(ρ_A²)) ≡ sin²θ，冯·诺依曼熵 S_vN(ρ_A) = H_bin((1 + cos θ)/2)（在 θ* ≈ 42.35° 处 S_vN ≈ 0.559 bits）；切换面积律（2-SAT 边界桥 k_cut = 2）与体积律（3-SAT 扩展图桥 k_cut = 8），对比局部偏迹刀片降下时的指数有效键维墙 χ_eff = 2^{S_cut} 与全局无时间纯态刀片抬起时的 S_global = 0。Orthogonal triad lab of quantum entanglement, P=NP and entropy: on a 16-qubit tensor network (8 observer qubits in A, 8 dual qubits in Ā), the Schmidt angle θ ∈ [0°, 90°] obeys Pythagorean conservation ‖r_A‖² + τ(A:Ā) = cos²θ + sin²θ = 1, normalized linear entropy S_L(ρ_A) = 2(1 − Tr(ρ_A²)) ≡ sin²θ, and von Neumann entropy S_vN(ρ_A) = H_bin((1 + cos θ)/2) (0.559 bits at θ* ≈ 42.35°); toggle Area Law (2-SAT boundary cut k_cut = 2) vs Volume Law (3-SAT expander cut k_cut = 8) and compare the local partial-trace horizon blade (effective bond dimension χ_eff = 2^{S_cut}) against the global pure-state view (S_global = 0).">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="entanglement-entropy-complexity">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//TRIAD">ORTHO<b>//</b>TRIAD</h1>
+      <div class="tagline">
+        <span class="zh">量子纠缠、P=NP 与熵 · <em>双向量跨割桥在局部偏迹刀片下化作混合熵与键维墙，抬起刀片则复归零熵全局纯态</em></span>
+        <span class="en">Entanglement, P=NP &amp; entropy · <em>cross-cut bivector bridges turn into local entropy and bond-dimension walls under partial trace, and return to S = 0 when lifted</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillView">VIEW <strong>—</strong></span>
+      <span class="pill" id="pillRegime">TOPOLOGY <strong>—</strong></span>
+      <span class="pill hot" id="pillTheta">θ <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">6 CARDS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="pythagoras" aria-pressed="true"><span class="code">PYTHAGORAS</span><span class="cn zh">双体勾股：<span class="m">‖r_A‖² + τ = 1</span> 与偏迹</span><span class="cn en">Two-body Pythagoras: <span class="m">‖r_A‖² + τ = 1</span></span></button>
+        <button class="preset" data-preset="dottie" aria-pressed="false"><span class="code">DOTTIE-THETA*</span><span class="cn zh">活体平衡：<span class="m">θ* ≈ 42.35° · 0.559 bits</span></span><span class="cn en">Living balance: <span class="m">θ* ≈ 42.35° · 0.559 bits</span></span></button>
+        <button class="preset" data-preset="arealaw" aria-pressed="false"><span class="code">AREA-LAW</span><span class="cn zh">面积律：2-SAT 边界桥 <span class="m">k_cut = 2</span></span><span class="cn en">Area law: 2-SAT boundary cut <span class="m">k_cut = 2</span></span></button>
+        <button class="preset" data-preset="volumelaw" aria-pressed="false"><span class="code">VOLUME-LAW</span><span class="cn zh">体积律：3-SAT 跨割网 <span class="m">k_cut = 8</span></span><span class="cn en">Volume law: 3-SAT expander cut <span class="m">k_cut = 8</span></span></button>
+        <button class="preset" data-preset="bellcut" aria-pressed="false"><span class="code">BELL-CUT</span><span class="cn zh">90° 偏迹迷雾：<span class="m">r_A = 0 · S_vN = 1 bit</span></span><span class="cn en">90° local cut fog: <span class="m">r_A = 0 · S_vN = 1 bit</span></span></button>
+        <button class="preset" data-preset="globaljoint" aria-pressed="false"><span class="code">GLOBAL-JOINT</span><span class="cn zh">抬起刀片：全局纯态 <span class="m">S_global = 0</span></span><span class="cn en">Lifted blade: global pure <span class="m">S_global = 0</span></span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">观测切片与纠缠拓扑</span><span class="en">Observer slice &amp; topology</span><span class="aside">SLICE · CUT</span></h2>
+      <div class="chips" id="viewChips" role="group" aria-label="观测视角切换" data-aria-en="Observer slice switcher">
+        <button class="chip" data-view="local" aria-pressed="true"><span class="zh">局部偏迹 <span class="m">Tr_Ā</span></span><span class="en">Local cut <span class="m">Tr_Ā</span></span></button>
+        <button class="chip" data-view="global" aria-pressed="false"><span class="zh">全局纯态 <span class="m">HΨ = 0</span></span><span class="en">Global pure <span class="m">HΨ = 0</span></span></button>
+      </div>
+      <div class="chips" id="regimeChips" role="group" aria-label="纠缠拓扑切换" data-aria-en="Entanglement topology switcher">
+        <button class="chip" data-regime="area" aria-pressed="true"><span class="zh">面积律 · 2-SAT (<span class="m">k=2</span>)</span><span class="en">Area law · 2-SAT (<span class="m">k=2</span>)</span></button>
+        <button class="chip" data-regime="volume" aria-pressed="false"><span class="zh">体积律 · 3-SAT (<span class="m">k=8</span>)</span><span class="en">Volume law · 3-SAT (<span class="m">k=8</span>)</span></button>
+      </div>
+      <p class="note"><span class="zh">品红/紫罗兰偏迹视界刀片仅在“局部偏迹”下降下，遮蔽对偶区 Ā 并在 A 上激发出混合熵光晕与键维柱；“全局纯态”抬起刀片，全局 r_global = 1、S(ρ_AB) ≡ 0，跨割有效键维 χ_eff = 2^{S_cut}、精确施密特秩 χ_exact = rank(ρ_A) 与 S_cut 均不变。</span><span class="en">The magenta/violet horizon blade descends only under “Local cut”, ghosting Ā into the blind spot while igniting A's entropy halo and χ_eff column; “Global pure” lifts the blade (global r_global = 1, S(ρ_AB) ≡ 0; the effective bond dimension χ_eff = 2^{S_cut}, the exact Schmidt rank χ_exact = rank(ρ_A) and S_cut are all unchanged).</span></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">正交施密特角与三维视角</span><span class="en">Schmidt angle &amp; 3D camera</span><span class="aside">θ · QUAT</span></h2>
+      <div class="field">
+        <label for="thetaInput"><span class="zh">施密特角 θ</span><span class="en">Schmidt angle θ</span><small class="zh">0° 乘积 → 90° 贝尔</small><small class="en">0° product → 90° Bell</small></label><output id="oTheta" for="thetaInput">53.13°</output>
+        <input type="range" id="thetaInput" min="0" max="90" step="0.05" value="53.13">
+      </div>
+      <div class="chips" id="angleChips" role="group" aria-label="快捷角度锚点" data-aria-en="Quick angle anchors">
+        <button class="chip" data-angle="0" aria-pressed="false"><span class="m">0°</span> <span class="zh">纯点</span><span class="en">Pure</span></button>
+        <button class="chip" data-angle="dottie" aria-pressed="false"><span class="m">θ* ≈ 42.35°</span></button>
+        <button class="chip" data-angle="60" aria-pressed="false"><span class="m">60°</span></button>
+        <button class="chip" data-angle="90" aria-pressed="false"><span class="m">90°</span> <span class="zh">贝尔</span><span class="en">Bell</span></button>
+      </div>
+      <div class="chips" id="camChips" role="group" aria-label="三维相机四元数视角" data-aria-en="3D quaternion camera views">
+        <button class="chip" data-cam="iso" aria-pressed="true"><span class="zh">等轴</span><span class="en">Iso</span></button>
+        <button class="chip" data-cam="cut" aria-pressed="false"><span class="zh">切面</span><span class="en">Cut edge</span></button>
+        <button class="chip" data-cam="top" aria-pressed="false"><span class="zh">俯视</span><span class="en">Top web</span></button>
+        <button class="chip" id="resetBtn" type="button"><span class="zh">重置</span><span class="en">Reset</span></button>
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="三维舞台：16 比特 A|Ā 张量网络、跨割双向量纠缠桥、品红紫罗兰偏迹视界刀片与键维柱" data-aria-en="3D stage: 16-qubit A|Ā tensor network, cross-cut bivector entanglement bridges, magenta/violet partial-trace horizon blade and bond-dimension column">
+      <canvas class="gl" id="gl"></canvas>
+      <div class="tags" id="tags"></div>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl" id="hud"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="stageChips" role="group" aria-label="舞台快捷切换" data-aria-en="Stage quick switches">
+        <button class="chip" data-qview="local" aria-pressed="true"><span class="zh">偏迹刀</span><span class="en">Cut</span></button>
+        <button class="chip" data-qview="global" aria-pressed="false"><span class="zh">全局态</span><span class="en">Joint</span></button>
+        <button class="chip" data-qreg="area" aria-pressed="true"><span class="zh">面积律</span><span class="en">Area</span></button>
+        <button class="chip" data-qreg="volume" aria-pressed="false"><span class="zh">体积律</span><span class="en">Vol</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plot" aria-label="勾股守恒 ‖r_A‖² + τ = 1 与单比特边缘熵曲线" data-aria-en="Pythagorean conservation ‖r_A‖² + τ = 1 and single-qubit marginal entropy curves"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotWall" aria-label="面积律与体积律跨割熵 S_cut 及有效键维 χ_eff 曲线" data-aria-en="Area-law vs volume-law cut entropy S_cut and effective bond dimension χ_eff"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">正交账本</span><span class="en">Orthogonal ledger</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="m"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div class="wide"><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+        <div class="wide"><dt id="roL6"></dt><dd id="ro6">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">双比特贝尔纯态满足单位归一化、半正定、迹 1、秩 1 与全局幂等 ρ² = ρ，而对环境比特求偏迹得最大混合态 ½I₂ 且严格失去纯态幂等性（ρ_A² ≠ ρ_A）。已冻结：</span><span class="en">The two-qubit Bell state is normalized, positive semidefinite, trace 1, rank 1 and globally idempotent (ρ² = ρ), whereas tracing out the partner qubit yields ½I₂ and strictly breaks idempotence (ρ_A² ≠ ρ_A). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal" href="#" target="_blank" rel="noopener"><code>bell_pure_state_has_maximally_mixed_marginal</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">双体无迹厄米空间正交直和分解为局域扇区 (m²−1)+(n²−1) 维与关联扇区 (m²−1)(n²−1) 维；贝尔纯态与经典关联混合态共享完全相同的双侧局部边缘态 ½I₂ 而全局态严格不同。已冻结：</span><span class="en">Bipartite trace-zero Hermitian space decomposes orthogonally into local sectors of dimension (m²−1)+(n²−1) and a correlation sector of dimension (m²−1)(n²−1); the Bell state and classical correlated mixture share identical ½I₂ marginals while differing globally. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot" href="#" target="_blank" rel="noopener"><code>local_marginal_correlation_blind_spot</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">幺正演化后作计算基捏合投影时，单步与 N 步累积冯·诺依曼熵产生精确等于被删除相干性的非负量子相对熵 D(ρ′ ∥ P(ρ′)) ≥ 0。已冻结：</span><span class="en">Under unitary evolution followed by computational-basis pinching, single-step and cumulative von Neumann entropy production equal the nonnegative quantum relative entropy D(ρ′ ∥ P(ρ′)) ≥ 0 of deleted coherence. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" href="#" target="_blank" rel="noopener"><code>entropy_production_coherence_deletion_identity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">存在唯一正实数 θ* ∈ (0, 1) 满足自指余弦方程 cos θ* = θ*（且有理逆幂级数在 π 处绝对收敛到 θ*）。已冻结：</span><span class="en">There exists a unique positive real θ* ∈ (0, 1) satisfying cos θ* = θ* (reached by absolute convergence of the rational inverse power series at π). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint" href="#" target="_blank" rel="noopener"><code>rational_inverse_endpoint</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据与认识论边界</span><span class="en">Epistemic boundaries</span><span class="aside">5 TIERS</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的精确解析与数值实算，不是证明：对双比特纯态 |ψ(θ)⟩ = cos(θ/2)|00⟩ + sin(θ/2)|11⟩，逐点实算 ‖r_A‖² = cos²θ、并发度 C = sin θ、二体纠缠度 τ = S_L(ρ_A) = 2(1 − Tr(ρ_A²)) = sin²θ、勾股和 ‖r_A‖² + τ ≡ 1，以及二元冯·诺依曼熵 S_vN(ρ_A) = H_bin((1 + cos θ)/2)（在 θ* ≈ 42.346° 处 S_vN ≈ 0.55869 bits，按三位小数记作 0.559 bits）与跨割有效键维 χ_eff = 2^{k_cut·S_vN(θ)}（熵的有效维数；0° &lt; θ &lt; 90° 时严格小于精确施密特秩 χ_exact = rank(ρ_A) = 2^{k_cut}）。</span><span class="en">Live numerical evaluation on the page, not a proof: for |ψ(θ)⟩ = cos(θ/2)|00⟩ + sin(θ/2)|11⟩, the page evaluates ‖r_A‖² = cos²θ, concurrence C = sin θ, 2-tangle τ = S_L(ρ_A) = 2(1 − Tr(ρ_A²)) = sin²θ, Pythagorean sum ‖r_A‖² + τ ≡ 1, binary von Neumann entropy S_vN(ρ_A) = H_bin((1 + cos θ)/2) (0.55869 bits, displayed to 3 decimals as 0.559 bits at θ* ≈ 42.346°), and the cut effective bond dimension χ_eff = 2^{k_cut·S_vN(θ)} (an entropy effective dimension; strictly below the exact Schmidt rank χ_exact = rank(ρ_A) = 2^{k_cut} for 0° &lt; θ &lt; 90°).</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：Hastings（2007）一维有能隙基态面积律 S_cut = O(1)，由此一般一维有能隙基态可用多项式键维 MPS 在给定精度内近似（是近似，不是精确的有限秩等式），对照 Page（1993）哈尔随机纯态体积律 S_cut = Θ(n)；Coffman–Kundu–Wootters（2000）三体纠缠单配性 τ(A:B) + τ(A:C) ≤ τ(A:BC)；Harlow–Hayden（2013）的复杂度归约：在他们的模型里，若能在多项式时间内从霍金辐射中解码出伙伴比特，就会得到 QSZK ⊆ BQP，因此在 QSZK ⊄ BQP 的假设下排除多项式时间解码（这一归约不给出指数下界）；Aaronson（2005）后选择定理 PostBQP = PP ⊇ NP 与 Ji 等（2020）共享纠缠多证明者交互验证定理 MIP* = RE（均依赖额外后选择或交互资源，不蕴含 BQP ⊇ NP 或 P = NP）。</span><span class="en">Literature results, not formalized in this book: Hastings's (2007) 1D gapped area law S_cut = O(1), whence a general 1D gapped ground state is approximated to given accuracy by an MPS of polynomial bond dimension (an approximation, not an exact finite-rank identity), vs Page's (1993) Haar-random volume law S_cut = Θ(n); Coffman–Kundu–Wootters (2000) monogamy τ(A:B) + τ(A:C) ≤ τ(A:BC); Harlow–Hayden's (2013) complexity reduction: in their model, a polynomial-time decoder that distills the partner qubit from the Hawking radiation would give QSZK ⊆ BQP, so polynomial-time decoding is excluded assuming QSZK ⊄ BQP (the reduction gives no exponential lower bound); Aaronson's (2005) PostBQP = PP ⊇ NP and Ji et al.'s (2020) shared-entanglement theorem MIP* = RE (both use extra postselection or interactive entanglement resources and do not imply BQP ⊇ NP or P = NP).</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">正交三位一体几何模型：以 k_cut = 2 边界阶梯对比 k_cut = 8 跨割扩展网，演示“量子纠缠（跨割双向量面 e_A ∧ e_Ā）—熵（局部偏迹视界截断）—计算复杂性（局部收缩键维墙 vs 全局相干读取）”的几何对应，并以 θ* ≈ 42.35° 标定局部身份与跨界纠缠共存的活体平衡点。抬起刀片时，全局纯态的秩 r_global = 1、S(ρ_AB) = 0，而跨割 A|Ā 的施密特秩与 S_cut 不变；键维柱所画的“电路制备 / 全局相干读取 vs 跨割缩并”代价对比是本页的模型，不是定理。</span><span class="en">Orthogonal triad geometric model: contrasting k_cut = 2 boundary rails against k_cut = 8 expander bridges to illustrate how cross-cut bivector entanglement (e_A ∧ e_Ā) becomes marginal entropy and bond-dimension walls under partial trace yet remains S_global = 0 globally, with θ* ≈ 42.35° marking the living observer balance. With the blade lifted the global pure state has rank r_global = 1 and S(ρ_AB) = 0, while the A|Ā Schmidt rank and S_cut stay the same; the cost contrast drawn by the bond-dimension column (circuit preparation / global coherent readout vs contraction across the cut) is this page's model, not a theorem.</span></span></div>
+      <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">开放猜想：标准统一图灵机下的 P ≠ NP（第 20 章 @conj-p-neq-np）仍悬而未决；张量网络特定缩并序的体积律键维下界、黑盒查询下界或有界阶 SoS 下界均不构成一般图灵机 P ≠ NP 的证明。Harlow–Hayden 明确提出的猜想——一般的霍金辐射解码需要规模 2^{Ω(S_BH)} 的量子电路——同样未被证明。</span><span class="en">Open conjecture: standard uniform Turing-machine P ≠ NP (Chapter 20 @conj-p-neq-np) remains strictly open; volume-law bond dimensions along a cut, black-box query bounds, and bounded-degree SoS lower bounds do not settle general Turing P ≠ NP. Harlow–Hayden's explicit conjecture — that decoding Hawking radiation in general needs quantum circuits of size 2^{Ω(S_BH)} — is likewise unproved.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到 0°" data-aria-en="Back to 0°">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="90" step="0.05" value="53.13" aria-label="正交施密特角 θ（度，0° 至 90°）" data-aria-en="Orthogonal Schmidt angle θ (degrees, 0° to 90°)">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">调 θ</span><span class="en">step θ</span> · <kbd>V</kbd> <span class="zh">切刀片</span><span class="en">blade</span> · <kbd>T</kbd> <span class="zh">换拓扑</span><span class="en">topology</span> · <kbd>D</kbd> <span class="zh">跳 θ*</span><span class="en">jump θ*</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 量子纠缠、P=NP 与熵的正交三位一体</span><span class="en">Theory interface · orthogonal triad of entanglement, P=NP &amp; entropy</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">为什么把“量子纠缠、P=NP、熵”放进同一座克利福德正交坐标系，三者会严丝合缝地咬合成同一个投影几何的不同切面？本页在 16 比特张量网络（观察者区 A 八比特、对偶区 Ā 八比特）上实时联立偏迹密度矩阵、勾股守恒与跨割键维模型。本页是交互数值演示，不是证明。</p>
+      <ol>
+        <li><b>双体纯态的精确勾股守恒与偏迹盲区。</b>对正交施密特角 θ ∈ [0, π/2] 参数化的典范双比特纯态 |ψ(θ)⟩ = cos(θ/2)|00⟩ + sin(θ/2)|11⟩，对 Ā 求偏迹得约化态 ρ_A = diag((1 + cos θ)/2, (1 − cos θ)/2) = ½(I₂ + cos θ · σ_z)。局部布洛赫向量长度平方为 ‖r_A‖² = cos²θ，而二体纠缠度（2-tangle）τ(A:Ā) = C² = sin²θ 恰等于归一化线性熵 S_L(ρ_A) = 2(1 − Tr(ρ_A²)) = sin²θ，故局部确定性与跨割纠缠严格服从勾股守恒 ‖r_A‖² + τ(A:Ā) = cos²θ + sin²θ = 1；二元冯·诺依曼纠缠熵为 S_vN(ρ_A) = H_bin((1 + cos θ)/2)。当 θ = 90° 时，全局仍为秩一纯态（S_global = 0），局部却缩为球心最大混合态 ½I₂（LEAN ✓：<code>bell_pure_state_has_maximally_mixed_marginal</code>、<code>local_marginal_correlation_blind_spot</code>）。</li>
+        <li><b>面积律（Area Law）对照体积律（Volume Law）的张量割键维分水岭。</b>在由 k_cut 对独立跨割纠缠对构成的 16 比特示范网络中，局部偏迹截断总熵为 S_cut = k_cut · S_vN(θ)，有效键维为 χ_eff = 2^{S_cut}（θ &gt; 0 时精确施密特秩为 χ_exact = rank(ρ_A) = 2^{k_cut}，0° &lt; θ &lt; 90° 时 χ_eff 严格小于它，例如 θ = 60°、k_cut = 8 时 χ_eff ≈ 89.9 而 χ_exact = 256）。面积律模式（k_cut = 2，类比一维有能隙基态与 2-SAT 局部传递链）保持 S_cut = O(1) 与多项式键维（对一般一维有能隙基态，这是多项式键维 MPS 的近似表示，属 ARGUED，不是精确的有限秩等式）；体积律模式（k_cut = 8，类比 3-SAT 扩展图阻挫或晚期霍金辐射）令 S_cut = Θ(n)，使跨越该割的有效键维 χ_eff 与精确施密特秩 χ_exact 都按 2^{Θ(n)} 指数增长（文献背景：Hastings 2007；Page 1993）。</li>
+        <li><b>纠缠的双刃剑：局部单配性防火墙 vs 全局相干读取。</b>对场内有限观察者而言，CKW 单配性不等式 τ(A:B) + τ(A:C) ≤ τ(A:BC) 叠加被偏迹遮蔽的环境相干删除（对照 LEAN ✓：<code>entropy_production_coherence_deletion_identity</code>）与 Harlow–Hayden 的复杂度归约（在 QSZK ⊄ BQP 的假设下排除多项式时间解码；指数规模 2^{Ω(S_BH)} 只是他们的猜想，OPEN），使局部视角面临复杂度高墙；而在抬升偏迹刀片的全局无时间纯态视角下，S_global ≡ 0，额外赋予稀有事件后选择（PostBQP = PP ⊇ NP）或非局域共享纠缠多证明者协议（MIP* = RE，Ji 等 2020）则呈现高阶验证能力。上述定理各有严格资源前提，标准统一图灵机下的 P ≠ NP 仍为开放问题（OPEN）。</li>
+        <li><b>余弦不动点 θ* ≈ 42.35° 的活体观察者平衡（MODEL）。</b>在唯一正余弦不动点 cos θ* = θ* ≈ 0.7391 rad（42.346°，LEAN ✓：<code>rational_inverse_endpoint</code>）处，局部向量长度平方 ‖r_A‖² ≈ 0.5462 与跨割纠缠度 τ = S_L ≈ 0.4538、并发度 C = sin θ* ≈ 0.6736、冯·诺依曼熵 S_vN ≈ 0.559 bits 达到黄金平衡——既保有稳定局部指向，又维持跨界纠缠带宽。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-ch30-entanglement-entropy-complexity-triad" target="_top">第三十章 · 纠缠、P=NP 与熵</a> · <a href="../../zh/ch13-entanglement-and-chsh.html#sec-bell-local-zero" target="_top">第十三章 · 贝尔边缘盲区</a> · <a href="../../zh/ch08-erasure-and-time-arrows.html" target="_top">第八章 · 相干删除熵产</a> · <a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html" target="_top">第二十四章 · 余弦不动点</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Why do “quantum entanglement, P=NP, and entropy” lock together as three orthogonal projections of one geometric structure? On a 16-qubit tensor network (8 observer qubits in A, 8 partner qubits in Ā), this lab couples partial-trace density matrices, exact Pythagorean conservation, and cross-cut bond dimensions in real time. It is an interactive numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Exact two-body Pythagorean conservation and the partial-trace blind spot.</b> For the canonical two-qubit pure state |ψ(θ)⟩ = cos(θ/2)|00⟩ + sin(θ/2)|11⟩ with Schmidt angle θ ∈ [0, π/2], tracing out Ā gives ρ_A = diag((1 + cos θ)/2, (1 − cos θ)/2) = ½(I₂ + cos θ · σ_z). The squared local Bloch length is ‖r_A‖² = cos²θ, while the 2-tangle τ(A:Ā) = C² = sin²θ equals the normalized linear entropy S_L(ρ_A) = 2(1 − Tr(ρ_A²)) = sin²θ, yielding the exact Pythagorean identity ‖r_A‖² + τ(A:Ā) = cos²θ + sin²θ = 1 alongside von Neumann entropy S_vN(ρ_A) = H_bin((1 + cos θ)/2). At θ = 90°, the global state remains rank-1 pure (S_global = 0) while the local marginal collapses to ½I₂ at the sphere center (LEAN ✓: <code>bell_pure_state_has_maximally_mixed_marginal</code>, <code>local_marginal_correlation_blind_spot</code>).</li>
+        <li><b>Area Law vs Volume Law across the tensor cut.</b> Across k_cut independent entangled pairs bridging A and Ā in the 16-qubit benchmark network, local partial-trace cut entropy is S_cut = k_cut · S_vN(θ) with effective bond dimension χ_eff = 2^{S_cut} (the exact Schmidt rank is χ_exact = rank(ρ_A) = 2^{k_cut} for θ &gt; 0, and χ_eff stays strictly below it for 0° &lt; θ &lt; 90° — e.g. χ_eff ≈ 89.9 vs χ_exact = 256 at θ = 60°, k_cut = 8). Area Law (k_cut = 2, modeling 1D gapped chains and 2-SAT implication rails) keeps S_cut = O(1) and χ_eff polynomial (for a general 1D gapped ground state this is a polynomial-bond MPS approximation, ARGUED, not an exact finite-rank identity); Volume Law (k_cut = 8, modeling frustrated 3-SAT expanders or old Hawking radiation) drives S_cut = Θ(n), so both χ_eff and the exact Schmidt rank χ_exact grow as 2^{Θ(n)} (literature: Hastings 2007; Page 1993).</li>
+        <li><b>Double-edged sword of entanglement: local monogamy firewall vs global joint readout.</b> For a finite local observer, CKW monogamy τ(A:B) + τ(A:C) ≤ τ(A:BC), coherence deletion into traced-out sectors (cf. LEAN ✓: <code>entropy_production_coherence_deletion_identity</code>), and the Harlow–Hayden complexity reduction (excluding polynomial-time decoding assuming QSZK ⊄ BQP; the exponential size 2^{Ω(S_BH)} is only their conjecture, OPEN) erect a complexity wall; lifting the partial-trace blade restores S_global ≡ 0, where extra resources such as postselection (PostBQP = PP ⊇ NP) or shared multi-prover entanglement (MIP* = RE, Ji et al. 2020) unlock higher verification classes. Each theorem carries strict resource hypotheses, and standard Turing-machine P ≠ NP remains open (OPEN).</li>
+        <li><b>Living observer balance at Dottie's constant θ* ≈ 42.35° (MODEL).</b> At the unique positive root cos θ* = θ* ≈ 0.7391 rad (42.346°, LEAN ✓: <code>rational_inverse_endpoint</code>), local vector weight ‖r_A‖² ≈ 0.5462 and cross-cut tangle τ = S_L ≈ 0.4538 (concurrence C = sin θ* ≈ 0.6736, S_vN ≈ 0.559 bits) strike a poised balance between local identity and cross-boundary entanglement bandwidth.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-ch30-entanglement-entropy-complexity-triad" target="_top">Chapter 30 · Entanglement, P=NP &amp; entropy</a> · <a href="../../en/ch13-entanglement-and-chsh.html#sec-bell-local-zero" target="_top">Chapter 13 · Bell marginal blind spot</a> · <a href="../../en/ch08-erasure-and-time-arrows.html" target="_top">Chapter 8 · Coherence-deletion entropy</a> · <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html" target="_top">Chapter 24 · Cosine fixed point</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -176,7 +176,7 @@ A 48-slide overview of the whole book: the four blind spots and the dimensional 
 While the prose aims for vivid physical clarity, every mathematical claim obeys a strict three-tier formal verification contract: **the book explains why a truth makes sense; the Lean kernel guarantees that it holds.**
 
 ::: {.figure src="prelude-three-tiers"}
-**Three tiers of warrant, three colours.** Green (`LEAN ✓`) is the theorems, lemmas, propositions and corollaries carrying `lean=`; violet is the remarks and examples marked "Literature result, not formalized in this book"; red (`OPEN`) is the open conjectures. Each bar ends in its count over the Chinese text, and a note under the green bar gives the number of theorem declarations in the lock file.
+**Three tiers of warrant, three colours.** Green (`LEAN ✓`) is the theorems, lemmas, propositions and corollaries carrying `lean=`; violet is the remarks and examples marked "Literature result, not formalized in this book"; red (`OPEN`) is the open conjectures and problems. Each bar ends in its count over the Chinese text, and a note under the green bar gives the number of theorem declarations in the lock file.
 :::
 
 1. **Numbering and Cross-References**: Within each chapter, definitions, theorems, lemmas, propositions, corollaries, examples, and remarks share a single sequential counter (`Theorem 1.1`, `Proposition 4.5`, etc.); items in the Prelude carry prefix `0`, and appendices carry `A, B, …`. All cross-references are live links across HTML, PDF, and EPUB.

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//EXPAND · Fairness, squaring and orthogonal expansion">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//EXPAND 公平、平方与正交扩维</title>
+<meta name="description" content="第三十一章“公平—平方—相位—不确定—扩维”实验室：开口螺旋 h(t) = (cos t, sin t, c·t) 的平面影子闭成一个圆，黄金螺旋每走一步层数加一而整数傅里叶读数不变；有限截断 V_D 对固定向量强收敛，却总留下 ‖I − P_{V_D}‖ = 1 的 90° 余量；一次方 |cos θ| + |sin θ| 随坐标在 1 与 √2 之间摇摆，平方和 cos²θ + sin²θ 与 (AB)(BA) 恒为 1；平方抹去相对相位，|+⟩ 与 |−⟩ 的每个对角读数都是 1/2，X 读出 +1 与 −1；罗伯逊—薛定谔 (ΔA)²(ΔB)² = C² + |K|² + G；有限盒子里的可观测克雷洛夫塔封顶，欧几里得 N<sub>S</sub> = ∏p + 1 给出盒外素数。Lab for Chapter 31: the planar shadow of the open helix h(t) = (cos t, sin t, c·t) closes into a circle while each golden helix step raises the level and leaves every integer Fourier readout unchanged; truncations V_D converge strongly on a fixed vector yet always leave a 90° residual with ‖I − P_{V_D}‖ = 1; the first-order sum |cos θ| + |sin θ| swings between 1 and √2 with the frame while cos²θ + sin²θ and (AB)(BA) stay at 1; squaring erases relative phase, so |+⟩ and |−⟩ read 1/2 on every diagonal observable while X reads +1 and −1; Robertson–Schrödinger (ΔA)²(ΔB)² = C² + |K|² + G; an observable Krylov tower in a finite box tops out, and Euclid's N<sub>S</sub> = ∏p + 1 names a prime outside the list.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="fairness-square-uncertainty-expansion">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//EXPAND">ORTHO<b>//</b>EXPAND</h1>
+      <div class="tagline">
+        <span class="zh">公平、平方与正交扩维 · <em>平方让两两比较公平，也把高度与相位折进影子；要再看见它们，得在盒外立起一根正交轴</em></span>
+        <span class="en">Fairness, squaring and orthogonal expansion · <em>squaring makes a pairwise comparison fair and folds height and phase into a shadow; to see them again, one more orthogonal axis must stand outside the box</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillStep"><span class="zh">当前</span><span class="en">NOW</span> <strong>—</strong></span>
+      <span class="pill" id="pillInv"><span class="zh">不变量</span><span class="en">INVARIANT</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">6 CARDS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="helix-shadow" aria-pressed="false"><span class="code">HELIX-SHADOW</span><span class="cn zh">开口螺旋，闭合的影子</span><span class="cn en">Open helix, closed shadow</span></button>
+        <button class="preset" data-preset="horizon-limit" aria-pressed="false"><span class="code">HORIZON-LIMIT</span><span class="cn zh">90° 视界：影子归零</span><span class="cn en">The 90° horizon: the shadow vanishes</span></button>
+        <button class="preset" data-preset="fair-square" aria-pressed="false"><span class="code">FAIR-SQUARE</span><span class="cn zh">公平比较：平方和恒为 1</span><span class="cn en">Fair comparison: squares sum to 1</span></button>
+        <button class="preset" data-preset="phase-fold" aria-pressed="false"><span class="code">PHASE-FOLD</span><span class="cn zh">平方折叠相位：<span class="m">|+⟩</span> 与 <span class="m">|−⟩</span></span><span class="cn en">Squaring folds phase: <span class="m">|+⟩</span> and <span class="m">|−⟩</span></span></button>
+        <button class="preset" data-preset="uncertainty-wedge" aria-pressed="false"><span class="code">UNCERTAINTY-WEDGE</span><span class="cn zh">不确定度：线² + 面积²</span><span class="cn en">Uncertainty: line² + area²</span></button>
+        <button class="preset" data-preset="time-expand" aria-pressed="false"><span class="code">TIME-EXPAND</span><span class="cn zh">扩维：盒子封顶，盒外有轴</span><span class="cn en">Expansion: the box tops out, an axis waits outside</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" id="controls">
+      <h2><span class="zh">舞台控制</span><span class="en">Stage controls</span><span class="aside" id="ctlAside">—</span></h2>
+      <div class="chips" id="camChips" role="group" aria-label="三维视角" data-aria-en="3D view" data-scenes="helix phase wedge">
+        <button class="chip" data-cam="iso" aria-pressed="true"><span class="zh">立体</span><span class="en">3D</span></button>
+        <button class="chip" data-cam="front" aria-pressed="false"><span class="zh">正面</span><span class="en">Front</span></button>
+        <button class="chip" data-cam="top" aria-pressed="false"><span class="zh">俯视 D = 2</span><span class="en">Top D = 2</span></button>
+      </div>
+      <div class="field" data-scenes="helix">
+        <label for="pitchInput"><span class="zh">螺距 c</span><span class="en">Pitch c</span><small class="zh">c = 0 时螺旋压成圆</small><small class="en">at c = 0 the helix is the circle</small></label><output id="oPitch" for="pitchInput">0.100</output>
+        <input type="range" id="pitchInput" min="0" max="0.16" step="0.002" value="0.1">
+      </div>
+      <div class="field" data-scenes="horizon">
+        <label for="dimInput"><span class="zh">截断维数 D</span><span class="en">Truncation D</span><small class="zh">右侧高亮的那一列</small><small class="en">the highlighted column</small></label><output id="oDim" for="dimInput">4</output>
+        <input type="range" id="dimInput" min="1" max="10" step="1" value="4">
+      </div>
+      <div class="field" data-scenes="wedge">
+        <label for="gammaInput"><span class="zh">两轴夹角 γ</span><span class="en">Angle γ between the axes</span><small class="zh">90° 即 A = X、B = Y</small><small class="en">90° gives A = X, B = Y</small></label><output id="oGamma" for="gammaInput">90°</output>
+        <input type="range" id="gammaInput" min="0" max="180" step="1" value="90">
+      </div>
+      <p class="note" id="ctlNote"></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：开口螺旋与它的平面影子；截断视界；两向量与平方；布洛赫球上的相位与不确定度；有限盒子与盒外的新轴" data-aria-en="Stage: the open helix and its planar shadow; the truncation horizon; two vectors and their squares; phase and uncertainty on the Bloch sphere; the finite box and a new axis outside it">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="tags" id="tags"></div>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="stageCam" role="group" aria-label="舞台视角" data-aria-en="Stage view">
+        <button class="chip" data-qcam="iso" aria-pressed="true"><span class="zh">立体</span><span class="en">3D</span></button>
+        <button class="chip" data-qcam="top" aria-pressed="false"><span class="zh">俯视</span><span class="en">Top</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pTitle"></h2><span id="pMeta"></span></div>
+        <canvas id="plot" aria-label="沿时间轴：哪个量在变，哪个量不变" data-aria-en="Along the rail: what changes and what does not"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="m"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div class="wide"><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean" data-scenes="helix"><span class="ok">LEAN ✓</span><span><span class="zh">黄金螺旋状态 (层 n, 标度 s, 朝向 o) 走一步变成 (n + 1, s + T, ¬o)，T = 2 log φ；对每个整数模 m，傅里叶读数 exp(2πi·m·s/T) 走一步前后相同：图中各层品红点的青色影子落在同一点。已冻结：</span><span class="en">One step of the golden helix state (level n, scale s, orientation o) gives (n + 1, s + T, ¬o) with T = 2 log φ; for every integer mode m the Fourier readout exp(2πi·m·s/T) is the same before and after the step: the cyan shadows of the magenta level dots coincide. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_fourier_readout_step" href="#" target="_blank" rel="noopener"><code>golden_helix_fourier_readout_step</code></a></span></div>
+      <div class="lean" data-scenes="helix"><span class="ok">LEAN ✓</span><span><span class="zh">把层 n 与傅里叶读数放在一起读，(n, 读数) 在每一步前后都不同：多读一个高度坐标，就分辨得出每一步。已冻结：</span><span class="en">Read together with the level, the pair (n, readout) differs before and after every step: one more coordinate, the height, tells every step apart. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.level_fourier_joint_readout_detects_step" href="#" target="_blank" rel="noopener"><code>level_fourier_joint_readout_detects_step</code></a></span></div>
+      <div class="lean" data-scenes="horizon"><span class="ok">LEAN ✓</span><span><span class="zh">完备内积空间中单调递增的子空间 S<sub>0</sub> ⊆ S<sub>1</sub> ⊆ …：对每个向量 x，投影 P<sub>n</sub>x 收敛到累积闭包上的投影；终端余量为零时，P<sub>n</sub> 在逐点（强算子）拓扑下收敛到恒等。已冻结：</span><span class="en">For increasing subspaces S<sub>0</sub> ⊆ S<sub>1</sub> ⊆ … of a complete inner-product space, P<sub>n</sub>x converges for every vector x to the projection onto the closed cumulative span; when the terminal residual is zero, P<sub>n</sub> converges to the identity in the pointwise (strong operator) topology. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Completion/IncreasingProjectionStrongLimit.increasing_projection_strong_limit" href="#" target="_blank" rel="noopener"><code>increasing_projection_strong_limit</code></a></span></div>
+      <div class="lean" data-scenes="horizon"><span class="ok">LEAN ✓</span><span><span class="zh">每个有正交投影的真子空间 S ≠ 全空间都有 ‖I − P<sub>S</sub>‖ = 1；沿任何非平凡的阶段滤子，这些算子范数距离都不趋于 0。已冻结：</span><span class="en">Every proper subspace S ≠ the whole space with an orthogonal projection has ‖I − P<sub>S</sub>‖ = 1; along any nontrivial stage filter these operator-norm distances do not tend to 0. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction" href="#" target="_blank" rel="noopener"><code>uniform_completion_obstruction</code></a></span></div>
+      <div class="lean" data-scenes="square"><span class="ok">LEAN ✓</span><span><span class="zh">实内积空间中 ‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²)（只是正向蕴含，不含逆命题）。已冻结：</span><span class="en">In a real inner-product space ‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²) (the forward implication only, not its converse). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law" href="#" target="_blank" rel="noopener"><code>inner_product_norm_parallelogram_law</code></a></span></div>
+      <div class="lean" data-scenes="square"><span class="ok">LEAN ✓</span><span><span class="zh">记录分支 P = φφ*、态 ρ = ψψ* 都是秩一外积时，记录权重等于 |φ*ψ|²（不以归一化为前提）。已冻结：</span><span class="en">When the record branch P = φφ* and the state ρ = ψψ* are rank-one outer products, the record weight equals |φ*ψ|² (normalization is not a premise). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction" href="#" target="_blank" rel="noopener"><code>rank_one_pure_state_modulus_square_reduction</code></a></span></div>
+      <div class="lean" data-scenes="square"><span class="ok">LEAN ✓</span><span><span class="zh">关于 (z, z̄) 的多项式在公共相位下不变，当且仅当它落在 z<sub>i</sub>z̄<sub>j</sub> 生成的代数里；非常数的不变式次数至少为 2（并非只有 2 次，|z|⁴ 也不变）。已冻结：</span><span class="en">A polynomial in (z, z̄) is invariant under a common phase iff it lies in the algebra generated by the z<sub>i</sub>z̄<sub>j</sub>; a nonconstant invariant has degree at least 2 (not only 2: |z|⁴ is invariant too). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem" href="#" target="_blank" rel="noopener"><code>complete_common_phase_polynomial_theorem</code></a></span></div>
+      <div class="lean" data-scenes="phase"><span class="ok">LEAN ✓</span><span><span class="zh">任意一族对角的量子比特观测量在等权叠加 |+⟩⟨+| 与相对相位翻转后的 Z|+⟩⟨+|Z = |−⟩⟨−| 上读数全同，而两态不同；能分辨它们的观测量必定非对角，X 就分辨得出。已冻结：</span><span class="en">Every family of diagonal qubit observables gives the same readouts on |+⟩⟨+| and on its relative-phase flip Z|+⟩⟨+|Z = |−⟩⟨−|, although the two differ; any observable that tells them apart is non-diagonal, and X does. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase" href="#" target="_blank" rel="noopener"><code>diagonal_prime_observables_cannot_recover_relative_phase</code></a></span></div>
+      <div class="lean" data-scenes="phase"><span class="ok">LEAN ✓</span><span><span class="zh">平方映射 z ↦ z² 在单位圆上：给定起点后路径提升唯一；没有连续的整体平方根；从 1 出发绕一整圈的提升终点是 −1。已冻结：</span><span class="en">For the squaring map z ↦ z² on the unit circle: a path lift is unique once its start is fixed; there is no continuous global square root; the lift of one full turn from 1 ends at −1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift" href="#" target="_blank" rel="noopener"><code>circle_double_cover_history_lift</code></a></span></div>
+      <div class="lean" data-scenes="wedge"><span class="ok">LEAN ✓</span><span><span class="zh">对称线性映射 A、B 与单位向量 ψ，u = (A − ⟨A⟩)ψ、v = (B − ⟨B⟩)ψ：(ΔA)²(ΔB)² = C² + |K|² + G，G ≥ 0，Re⟨u, v⟩ = C，Im⟨u, v⟩ = K。已冻结：</span><span class="en">For symmetric linear maps A, B and a unit vector ψ, with u = (A − ⟨A⟩)ψ and v = (B − ⟨B⟩)ψ: (ΔA)²(ΔB)² = C² + |K|² + G, G ≥ 0, Re⟨u, v⟩ = C and Im⟨u, v⟩ = K. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger" href="#" target="_blank" rel="noopener"><code>robertson_schrodinger</code></a></span></div>
+      <div class="lean" data-scenes="wedge"><span class="ok">LEAN ✓</span><span><span class="zh">坐标形式的拉格朗日恒等式 (Σu<sub>i</sub>²)(Σv<sub>i</sub>²) − (Σu<sub>i</sub>v<sub>i</sub>)² = ½Σ<sub>i,j</sub>(u<sub>i</sub>v<sub>j</sub> − u<sub>j</sub>v<sub>i</sub>)²：线² + 面积² = 长度² 之积。已冻结：</span><span class="en">The coordinate Lagrange identity (Σu<sub>i</sub>²)(Σv<sub>i</sub>²) − (Σu<sub>i</sub>v<sub>i</sub>)² = ½Σ<sub>i,j</sub>(u<sub>i</sub>v<sub>j</sub> − u<sub>j</sub>v<sub>i</sub>)²: line² + area² = product of squared lengths. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+      <div class="lean" data-scenes="expand"><span class="ok">LEAN ✓</span><span><span class="zh">闭子空间 S 的正交补非零时，补里有单位向量 e：P<sub>S</sub>e = 0，到 S 的距离为 1，且 ‖I − P<sub>S</sub>‖ = 1。已冻结：</span><span class="en">If the orthogonal complement of a closed subspace S is nonzero, it contains a unit vector e with P<sub>S</sub>e = 0 and distance 1 from S, and ‖I − P<sub>S</sub>‖ = 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>finite_layer_projection_escape</code></a></span></div>
+      <div class="lean" data-scenes="expand"><span class="ok">LEAN ✓</span><span><span class="zh">有限维空间上，可观测克雷洛夫塔 O<sub>m</sub> 严格变大的次数至多为 dim V − rank C。已冻结：</span><span class="en">On finite-dimensional spaces the observable Krylov tower O<sub>m</sub> grows strictly at most dim V − rank C times. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound" href="#" target="_blank" rel="noopener"><code>observable_krylov_strict_growth_bound</code></a></span></div>
+      <div class="lean" data-scenes="expand"><span class="ok">LEAN ✓</span><span><span class="zh">一旦 O<sub>m</sub> = O<sub>m+1</sub>，此后每一层都等于 O<sub>m</sub>。已冻结：</span><span class="en">Once O<sub>m</sub> = O<sub>m+1</sub>, every later stage equals O<sub>m</sub>. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently" href="#" target="_blank" rel="noopener"><code>observable_krylov_once_stable_permanently</code></a></span></div>
+      <div class="lean" data-scenes="expand"><span class="ok">LEAN ✓</span><span><span class="zh">任意有限素数集 S：N = ∏<sub>p∈S</sub> p + 1 对每个 p ∈ S 都同余于 1，且有素因子 q ∣ N 不在 S 中（不说 N 是素数，也不说 q 是下一个素数）。已冻结：</span><span class="en">For any finite set S of primes, N = ∏<sub>p∈S</sub> p + 1 is ≡ 1 modulo every p ∈ S and has a prime factor q ∣ N outside S (it does not say N is prime, nor that q is the next prime). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Axis/PrimeAxisEscape.prime_axis_escape" href="#" target="_blank" rel="noopener"><code>prime_axis_escape</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据与认识论边界</span><span class="en">Evidence and boundaries</span><span class="aside">LEAN · NUM · ARGUED · MODEL</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都按双精度实时算出，不是证明：螺旋按采样点画；截断柱用 x<sub>k</sub> = √6/(πk) 的部分和；量子比特读数、方差与 G 用 2 × 2 复矩阵直接算；克雷洛夫维数用格拉姆—施密特、容差 10⁻⁹ 判秩；30031 = 59 × 509 用试除分解。</span><span class="en">Every number on the page is computed live in double precision, not a proof: the helix is drawn through sample points; the truncation bars use partial sums of x<sub>k</sub> = √6/(πk); qubit readouts, variances and G come from 2 × 2 complex matrices; Krylov dimensions are ranked by Gram–Schmidt with tolerance 10⁻⁹; 30031 = 59 × 509 is found by trial division.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">手工推导或文献结果，未在本书形式化：h(t) 的平面投影每 2π 重复；单位向量的克利福德积 AB = cos θ + I sin θ，(AB)(BA) = 1；A = X、B = Y、ψ = |0⟩ 时 C = 0、K = 1、G = 0；V<sub>D+1</sub> = V<sub>D</sub> ⊕ span{e<sub>D+1</sub>} 使维数加一。两两互惠本身推不出平方：对每个 p &gt; 0，w<sub>p</sub>(θ) = |cos θ|^p / (|cos θ|^p + |sin θ|^p) 都互惠且互补；要定出 p = 2，还需 Jordan–von Neumann 逆命题或 Gleason 定理（维数 ≥ 3）一类的额外前提（文献结果，未在本书形式化）。</span><span class="en">Hand derivations or literature results, not formalized in this book: the planar projection of h(t) repeats every 2π; for unit vectors the Clifford product is AB = cos θ + I sin θ and (AB)(BA) = 1; for A = X, B = Y, ψ = |0⟩ one has C = 0, K = 1, G = 0; V<sub>D+1</sub> = V<sub>D</sub> ⊕ span{e<sub>D+1</sub>} raises the dimension by one. Pairwise reciprocity alone does not force squaring: for every p &gt; 0, w<sub>p</sub>(θ) = |cos θ|^p / (|cos θ|^p + |sin θ|^p) is reciprocal and complementary; fixing p = 2 needs extra premises such as the Jordan–von Neumann converse or Gleason's theorem (dimension ≥ 3) (literature results, not formalized in this book).</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">本书的诠释模型：把“闭合”读成有限截断的影子、把时间读成正交秩的诞生 D → D + 1、把素数读成 ℓ²(ℙ) 中的坐标轴，都是诠释，不是上面任何一条定理的陈述。有限盒子里的克雷洛夫塔会封顶，幺正演化也不改变固定希尔伯特空间的维数。</span><span class="en">The book's interpretive model: reading closure as the shadow of a finite truncation, time as the birth of orthogonal rank D → D + 1, and primes as coordinate axes of ℓ²(ℙ) are interpretations, not statements of any theorem above. A Krylov tower in a finite box tops out, and unitary evolution does not change the dimension of a fixed Hilbert space.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="3" step="any" value="0" aria-label="时间轴：本场景的参数" data-aria-en="Rail: the parameter of this scene">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>6</kbd> <span class="zh">换卡</span><span class="en">cards</span> · <kbd>V</kbd> <span class="zh">换视角</span><span class="en">view</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 公平、平方、相位、不确定与扩维</span><span class="en">Theory interface · fairness, squaring, phase, uncertainty and expansion</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">六张实验卡沿同一条线索走：读数只看影子时，高度与相位都被折进去；两两公平的比较只剩平方，平方和守住 1；平方抹掉的相位与不可交换的面积一起撑起不确定度；有限盒子会被填满，要再看见什么，就要在盒外立起新的正交轴。本页是交互数值演示，不是证明；每个舞台只为它自己算出的数负责。</p>
+      <ol>
+        <li><b>开口螺旋与闭合影子。</b>h(t) = (cos t, sin t, c·t) 的平面投影每 2π 重复（手工推导）。黄金螺旋 (n, s, o) ↦ (n + 1, s + T, ¬o) 是它的离散版本：整数傅里叶读数 exp(2πi·m·s/T) 走一步不变（LEAN ✓ <code>golden_helix_fourier_readout_step</code>），加上层 n 就分辨得出每一步（LEAN ✓ <code>level_fourier_joint_readout_detects_step</code>）。层不等于物理时间，这一读法是诠释模型。</li>
+        <li><b>截断视界。</b>递增子空间上的投影对每个固定向量收敛（LEAN ✓ <code>increasing_projection_strong_limit</code>），而每个真子空间都有 ‖I − P‖ = 1（LEAN ✓ <code>uniform_completion_obstruction</code>）：强收敛与按算子范数一致收敛是两回事。θ = 90° 时单位向量在 V<sub>D</sub> 上的影子 cos θ 为 0，这是一个读数的消失，不是物理世界的边界。</li>
+        <li><b>公平与平方。</b>一次方 |cos θ| + |sin θ| 随所选的轴在 1 与 √2 之间变化；平方和 cos²θ + sin²θ = 1 与 (AB)(BA) = (A·B)² + ‖A∧B‖² = 1 不随轴与次序变（克利福德包装为手工推导，坐标恒等式见 LEAN ✓ <code>lagrange_gram_identity</code>）。平行四边形律（LEAN ✓ <code>inner_product_norm_parallelogram_law</code>）、秩一模平方归约（LEAN ✓ <code>rank_one_pure_state_modulus_square_reduction</code>）与公共相位多项式定理（LEAN ✓ <code>complete_common_phase_polynomial_theorem</code>）各自只说它们自己的事：互惠本身并不强迫 p = 2。</li>
+        <li><b>平方折叠相位。</b>|+⟩ 与 |−⟩ 在每个对角观测量上读数相同，X 分得开（LEAN ✓ <code>diagonal_prime_observables_cannot_recover_relative_phase</code>）；单位圆上 z ↦ z² 的提升绕一圈停在 −1（LEAN ✓ <code>circle_double_cover_history_lift</code>）。把它读成自旋转 360° 变号是手工特化。</li>
+        <li><b>不确定度。</b>(ΔA)²(ΔB)² = C² + |K|² + G（LEAN ✓ <code>robertson_schrodinger</code>）。在量子比特纯态上，ψ 的正交补只有一维，G = 0，恒等式就是切平面上的拉格朗日恒等式：青色的线 C 与品红的面积 K。这是给定纯态与给定观测量上的等式，不是“只因不知道相位”。</li>
+        <li><b>正交扩维（MODEL）。</b>固定的有限盒子里，可观测克雷洛夫塔严格增长至多 dim V − rank C 次，一旦停住就永远停住（LEAN ✓ <code>observable_krylov_strict_growth_bound</code>、<code>observable_krylov_once_stable_permanently</code>）。补空间非零时，补里有到 V 距离为 1 的单位向量（LEAN ✓ <code>finite_layer_projection_escape</code>）；有限素数表之外总有素因子（LEAN ✓ <code>prime_axis_escape</code>，30031 = 59 × 509 说明它不必是下一个素数）。把 D → D + 1 读成时间，是本书的诠释模型。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch31-quantum-fairness.html#sec-ch31-fairness-square-expansion" target="_top">第三十一章 · 公平、平方与正交扩维</a> · <a href="../../zh/ch01-measurement.html#thm-parallelogram-norm-law" target="_top">第一章 · 平行四边形范数律</a> · <a href="../../zh/ch02-born-rule.html#thm-born-modulus-square" target="_top">第二章 · 模平方归约</a> · <a href="../../zh/ch05-complex-phase-and-rotors.html#thm-circle-double-cover-history-lift" target="_top">第五章 · 圆的二重覆盖</a> · <a href="../../zh/ch06-geometric-product.html#thm-robertson-schrodinger" target="_top">第六章 · 罗伯逊—薛定谔</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The six experiment cards follow one thread: a readout that sees only the shadow folds height and phase into it; a fair pairwise comparison keeps only squares, and the square sum holds at 1; the phase that squaring erases, together with the area of non-commuting observables, holds up the uncertainty; a finite box fills up, and seeing more takes a new orthogonal axis outside it. The page is an interactive numerical illustration, not a proof; each stage answers only for the numbers it computes.</p>
+      <ol>
+        <li><b>Open helix, closed shadow.</b> The planar projection of h(t) = (cos t, sin t, c·t) repeats every 2π (a hand derivation). The golden helix (n, s, o) ↦ (n + 1, s + T, ¬o) is its discrete version: the integer Fourier readout exp(2πi·m·s/T) is unchanged by a step (LEAN ✓ <code>golden_helix_fourier_readout_step</code>), and with the level n added every step is detected (LEAN ✓ <code>level_fourier_joint_readout_detects_step</code>). The level is not physical time; that reading is an interpretive model.</li>
+        <li><b>The truncation horizon.</b> Projections onto increasing subspaces converge on every fixed vector (LEAN ✓ <code>increasing_projection_strong_limit</code>), while every proper subspace has ‖I − P‖ = 1 (LEAN ✓ <code>uniform_completion_obstruction</code>): strong convergence and uniform operator-norm convergence are different things. At θ = 90° the shadow cos θ of a unit vector on V<sub>D</sub> is 0; that is one readout vanishing, not a boundary of the physical world.</li>
+        <li><b>Fairness and squaring.</b> The first-order sum |cos θ| + |sin θ| changes with the chosen axis between 1 and √2; the square sum cos²θ + sin²θ = 1 and (AB)(BA) = (A·B)² + ‖A∧B‖² = 1 change with neither axis nor order (the Clifford packaging is a hand derivation; the coordinate identity is LEAN ✓ <code>lagrange_gram_identity</code>). The parallelogram law (LEAN ✓ <code>inner_product_norm_parallelogram_law</code>), the rank-one modulus-square reduction (LEAN ✓ <code>rank_one_pure_state_modulus_square_reduction</code>) and the common-phase polynomial theorem (LEAN ✓ <code>complete_common_phase_polynomial_theorem</code>) each say only what they say: reciprocity alone does not force p = 2.</li>
+        <li><b>Squaring folds phase.</b> |+⟩ and |−⟩ read the same on every diagonal observable, and X tells them apart (LEAN ✓ <code>diagonal_prime_observables_cannot_recover_relative_phase</code>); the lift of one turn through z ↦ z² on the unit circle ends at −1 (LEAN ✓ <code>circle_double_cover_history_lift</code>). Reading it as a spin changing sign under a 360° turn is a hand specialization.</li>
+        <li><b>Uncertainty.</b> (ΔA)²(ΔB)² = C² + |K|² + G (LEAN ✓ <code>robertson_schrodinger</code>). On a pure qubit state the orthogonal complement of ψ is one-dimensional, G = 0, and the identity is the Lagrange identity on the tangent plane: the cyan line C and the magenta area K. It is an equality for a given pure state and given observables, not "only ignorance of phase".</li>
+        <li><b>Orthogonal expansion (MODEL).</b> In a fixed finite box the observable Krylov tower grows strictly at most dim V − rank C times and, once it stops, stops for good (LEAN ✓ <code>observable_krylov_strict_growth_bound</code>, <code>observable_krylov_once_stable_permanently</code>). When the complement is nonzero it holds a unit vector at distance 1 from V (LEAN ✓ <code>finite_layer_projection_escape</code>); outside any finite list of primes there is a prime factor (LEAN ✓ <code>prime_axis_escape</code>; 30031 = 59 × 509 shows it need not be the next prime). Reading D → D + 1 as time is the book's interpretive model.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch31-quantum-fairness.html#sec-ch31-fairness-square-expansion" target="_top">Chapter 31 · Fairness, squaring and orthogonal expansion</a> · <a href="../../en/ch01-measurement.html#thm-parallelogram-norm-law" target="_top">Chapter 1 · Parallelogram law</a> · <a href="../../en/ch02-born-rule.html#thm-born-modulus-square" target="_top">Chapter 2 · Modulus-square reduction</a> · <a href="../../en/ch05-complex-phase-and-rotors.html#thm-circle-double-cover-history-lift" target="_top">Chapter 5 · Double cover of the circle</a> · <a href="../../en/ch06-geometric-product.html#thm-robertson-schrodinger" target="_top">Chapter 6 · Robertson–Schrödinger</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

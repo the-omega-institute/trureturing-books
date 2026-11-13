@@ -1,0 +1,30 @@
+/* ORTHO//LOOKUP: shared lab layout (../assets/theme.css) carries the page.
+   Only page-specific cursor, legend swatches, compact stage chips, and mobile HUD spacing live here; zero hardcoded hex colours. */
+#cv { cursor: grab; touch-action: none; }
+#cv:active { cursor: grabbing; }
+.sw.ink { background: var(--sigma); }
+.sw.cy { background: var(--cyan); }
+.sw.mg { background: var(--magenta); }
+.sw.vi { background: var(--violet); }
+.sw.am { background: var(--amber); }
+.sw.dash.dm { background: repeating-linear-gradient(90deg, var(--dim) 0 4px, transparent 4px 7px); }
+.sw.dash.sg { background: repeating-linear-gradient(90deg, var(--sigma) 0 4px, transparent 4px 7px); }
+.sw.dash.mg { background: repeating-linear-gradient(90deg, var(--magenta) 0 4px, transparent 4px 7px); }
+.sw.dash.vi { background: repeating-linear-gradient(90deg, var(--violet) 0 4px, transparent 4px 7px); }
+.chip .m { text-transform: none; font-family: var(--font-data); letter-spacing: 0.02em; }
+/* case-sensitive math (d=0, p = *p, aₙ, 2^{σn}, |x⟩, *ptr, r_eff(σ), β·Q) keeps its casing in every language */
+.hud-tl, .hud-tl .big, .hud-tl .sub { text-transform: none; }
+.strip .head h2 { text-transform: none; }
+#stageChips { gap: 5px; }
+#stageChips .chip { padding: 4px 7px; font-size: 11px; }
+:root:not([data-shot]) .hud-tl { max-width: calc(100% - 215px); }
+@media (max-width: 560px) {
+  :root:not([data-embed]):not([data-figure]):not([data-thumb-mode]) .stage { min-height: 565px; }
+  .hud-tr { top: 10px; right: 12px; }
+  #sceneChips { gap: 4px; }
+  #sceneChips .chip { padding: 3px 6px; font-size: 10px; letter-spacing: 0.04em; }
+  :root:not([data-shot]) .hud-tl, .hud-tl { top: 38px; left: 14px; right: 14px; max-width: calc(100% - 28px); }
+  .hud-tl .big { font-size: 12.5px; line-height: 1.18; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.2; }
+  .hud-bl { font-size: 9.8px; gap: 2px 10px; bottom: 8px; }
+}

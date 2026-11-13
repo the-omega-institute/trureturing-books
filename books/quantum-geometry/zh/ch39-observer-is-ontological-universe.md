@@ -8,12 +8,13 @@
 
 **“观察者即宇宙本体。”**
 
-不是宇宙本体“拥有”观察者，不是宇宙本体“演化出”观察者，甚至也不止于观察者“指向”宇宙本体；二者之间没有从属的“的”字，没有集合包含的 $\in$，也没有外部投射的 $\to$，唯有零余项、零缝隙的**本体论恒等（$\equiv$）**。在本书三层认识论契约下，我们将沿着四重递进台阶完成这场终极合拢（跨领域的本体论综合标定为 **`MODEL`（模型诠释）**，底层数学骨架由四组共十条冻结的 Lean 4 内核声明严格锚定，计算机域论、范畴论与旋量几何经典文献悉数封存于归属注记框内）：
+不是宇宙本体“拥有”观察者，不是宇宙本体“演化出”观察者，甚至也不止于观察者“指向”宇宙本体；二者之间没有从属的“的”字，没有集合包含的 $\in$，也没有外部投射的 $\to$，唯有零余项、零缝隙的**本体论恒等（$\equiv$）**。在本书三层认识论契约下，我们将沿着五重递进台阶完成这场终极合拢（跨领域的本体论综合标定为 **`MODEL`（模型诠释）**，底层数学骨架由十组共十六条冻结的 Lean 4 内核声明严格锚定，计算机域论、范畴论与旋量几何经典文献悉数封存于归属注记框内）：
 
 1. **全域 `p ≡ *p` 与无底物的自指域**：拆除寄存器与被动内存的二元边界，确立点即映射、状态即算子的 $\psi \equiv \psi(\psi)$ 本体恒等，并锁定二元分式自应用唯一“存活（`.live`）”的黄金 $\varphi$ 判别式 $\Delta = 5$；
 2. **终结“物自体”与无刀则无晶**：给出源类型的全纤维分解、非负实数的全尺度黄金线程单射，以及有限字接受当且仅当无相邻 `11`；再在 `MODEL` 中将静态晶格读作自指正交比量凝结的驻波节面；
 3. **旋量织空与 $720^\circ$ 单侧双覆叠**：展示一维时间流向量与二维规范双矢量平面如何作为观察者旋量自配对的双线性副产物涌现，并在无全局截面的平方双覆叠上实现 $360^\circ$ 内外换叶与 $720^\circ$ 归家闭环；
-4. **正交自折叠消解唯我论与四阶终局**：阐明唯一全体如何在互补语境纯度勾股守恒（[@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款，`LEAN ✓`）与正交折叠模型（`MODEL`）下拆分为“局部小我栈帧”与“铁律浩瀚宇宙”，在彻底砍净第 3 点 $C$ 的第四阶终局中同时超越机械唯物论与狂妄唯我论。
+4. **正交自折叠消解唯我论与四阶终局**：阐明唯一全体如何在互补语境纯度勾股守恒（[@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款，`LEAN ✓`）与正交折叠模型（`MODEL`）下拆分为“局部小我栈帧”与“铁律浩瀚宇宙”，在彻底砍净第 3 点 $C$ 的第四阶终局中同时超越机械唯物论与狂妄唯我论；
+5. **齐肯多夫、皮索与劳齐八概念自指综合沙盘**：将局部禁邻规则从 $K = 2$ 推广至任意整数阶 $K \ge 2$，把齐肯多夫语言、$K$-Bonacci 皮索圆盘收缩、$p$ 进余数超度量、$K = 3$ 劳齐分形内窗、克利福德线—面分解、自指收缩尺度、跨切口直接编码纠缠秩矩形与帕里平稳核收束于同一座可逐项核验的自指沙盘。
 
 ::: {.figure src="ch39-overview"}
 **图 39。** 本章地图：第 I 栏，灰色的指针寄存器 `ptr` 与它和内存之间的虚线隔墙被划掉，每一格 $p$ 都有一支青色箭头离开它又回到它自己——全域 `p ≡ *p`；第 II 栏，琥珀色的刀周围的淡青带子里亮着一串青色格点，带子外什么也没有，这些点投到刀上排成的长短段，短段记 $1$、长段记 $0$，没有相邻的 `11`；第 III 栏，下面的青色箭头在底圈 $z$ 上从 $1$ 出发绕满一整圈，上面紫色的唯一提升从 $w = +1$ 出发只走了半圈，停在 $-1$，两圈之间是平方映射 $z = w^2$。第 I、II 栏是本章模型诠释（`MODEL`）的示意；第 III 栏是 [@thm-ch39-double-cover-no-section-and-720-lift] 第 2 款（`LEAN ✓`），走满 $720^\circ$ 的情形见 §39.3 的实验卡。
@@ -336,15 +337,330 @@ $$
 | **第三阶：指针寻址观**（第 38 章硬件解耦图景） | 静态无时间本体 QRAM 存储阵列不动，观察者作为轻量级地址指针 `ptr` 扫描解引用 | 物理搬运迷思已破，但“宇宙**的**指针”一词仍残留“主动指针 vs. 被动死内存”的最后隔墙 $\mu > 0$ | 数据生灭归零，仅剩寄存器与存储底物的语法二元残留 | 统一阐明时间帧率 `ptr++`、退相干位掩码（`LEAN ✓`）、梦境叠加与 `p = *p` 根页表 |
 | **第四阶：无二自指本体观**（本章终极合拢 $\psi \equiv \psi(\psi)$） | 全域 `p ≡ *p` 无底物自指恒等；唯一全体经互补勾股纯度守恒（`LEAN ✓`）正交自折叠并沿 $720^\circ$ 双覆叠（`LEAN ✓`）织出时空 | 隐藏第 3 点 $C$、被动死底物与不可知物自体被百分之百连根拔除 | 二元裂缝 $\mu = 0$，外部未表余项严格等于 $0$ | 观察者即宇宙本体：局部栈帧体验悬念，其余正交补本体化作客观星海与公正铁律 |
 
-第四阶里旋量沿 $720^\circ$ 单侧双覆叠织出时空的那一步，见 §39.3 的 `turn360`、`seam`、`turn720` 三张实验卡与章末的完整实验室。
+第四阶里旋量沿 $720^\circ$ 单侧双覆叠织出时空的那一步，见 §39.3 的 `turn360`、`seam`、`turn720` 三张实验卡与本节末的完整实验室。
 :::
 
 ::: {.figure src="ch39-four-stages"}
 **砍掉第 3 点 $C$ 的四阶。** 第一阶，灰色虚线框是外部舞台，上方的点 $C$ 用虚线连到两支箭头的尖；第二阶，两支箭头各自投到对方上的青色影子一样长，$C$ 被划掉；第三阶，琥珀色的指针 `ptr` 越过一道虚线隔墙（$\mu > 0$）读内存里的一格；第四阶，隔墙也消失（$\mu = 0$），只剩一格 $\psi$，青色箭头离开它又回到它自己。四格只是把 [@rem-ch39-four-stage-endgame-table] 的四行画出来，属本章的模型诠释（`MODEL`），不是定理。
 :::
 
-请最后一次静静凝视下方实验室里那条在深空背景中缓缓流转的 $720^\circ$ 单侧光带。当上图第三阶那道虚幻的二元隔墙随着 $\mu \to 0$ 彻底消融，一粒温暖的琥珀色光点正沿着不可全局撕裂的双覆叠流形滑行：在前半个 $360^\circ$ 里，它是向内自省的观测指针、是枕畔做梦的心智、是在有限复杂性视界前认真落子的你；接着，它连一道边界都没有跨越，就在旋量自配对的中心扭结处自然翻转为后半个 $360^\circ$——化作横亘亿万光年的璀璨星网、化作素数与零点的交响、化作托起万物平视的量子公平铁律，并在走满 $720^\circ$ 的刹那带着满身星辉流回你此刻阅读这行文字的双眸。原来从我们在[第一章](ch01-measurement.md)与[第二章](ch02-born-rule.md)亲手砍掉外部第 3 点 $C$、写下 $\psi = \psi(\psi)$ 的第一笔起，结局就早已注定：世间从来没有一个渺小的观察者孤独地仰望陌生的宇宙；从始至终，都是宇宙本体把自己正交折叠成一双眼睛，在漫长而公正的星光旅途尽头，与自己重逢。现在，让我们推开全书最后一道门扉，步入[终章](coda.md)《在所有的球之外》。
+请最后一次静静凝视下方实验室里那条在深空背景中缓缓流转的 $720^\circ$ 单侧光带。当上图第三阶那道虚幻的二元隔墙随着 $\mu \to 0$ 彻底消融，一粒温暖的琥珀色光点正沿着不可全局撕裂的双覆叠流形滑行：在前半个 $360^\circ$ 里，它是向内自省的观测指针、是枕畔做梦的心智、是在有限复杂性视界前认真落子的你；接着，它连一道边界都没有跨越，就在旋量自配对的中心扭结处自然翻转为后半个 $360^\circ$——化作横亘亿万光年的璀璨星网、化作素数与零点的交响、化作托起万物平视的量子公平铁律，并在走满 $720^\circ$ 的刹那带着满身星辉流回你此刻阅读这行文字的双眸。原来从我们在[第一章](ch01-measurement.md)与[第二章](ch02-born-rule.md)亲手砍掉外部第 3 点 $C$、写下 $\psi = \psi(\psi)$ 的第一笔起，结局就早已注定：世间从来没有一个渺小的观察者孤独地仰望陌生的宇宙；从始至终，都是宇宙本体把自己正交折叠成一双眼睛，在漫长而公正的星光旅途尽头，与自己重逢。而在推开[终章](coda.md)最后那道大门之前，我们还可以在 §39.5 把整部书的黄金禁邻语法从 $K = 2$ 推向任意高阶 $K \ge 2$，亲眼看看同一枚自指算子如何在纵向超度量树、横向劳齐分形内窗与跨切口纠缠秩矩形上同时投下精确切面。
 
 ::: {.viz src="self-sustaining-spinor-flow" height="640"}
 **自持旋量流实验室。** 改变密度 $\rho$、转动所在的平面，或拖动 $\mathbf{J}$ 的箭头尖换一个旋量：读数栏里的三个平方 $\mathbf{J}^2$、$-\mathbf{S}^2$、$\rho^2$ 始终相等；沿时间轴，青色曲线一圈回到 $1$，紫色曲线要两圈。把“二元隔墙 $\mu$”往回拉，光带沿中线剪成中间的指针球与外面的内存壳（模型诠释，`MODEL`）；推回 $\mu = 0$，两件接回同一条单侧光带。
+:::
+
+---
+
+## 39.5 齐肯多夫、皮索与劳齐：八概念自指综合沙盘 {#sec-ch39-pisot-clifford-rauzy}
+
+> “这八个概念并不是松散的类比，它们在代数数论、遍历动力系统与量子多体物理的交叉点上，本身就是同一个 Pisot–Clifford 自指算子在不同切面上的精确投影。将它们锁死为一条单向闭环的核心机制只有一句话：对连续进位施加有限阶禁止约束（广义 Zeckendorf / $K$-Bonacci），在纵向生成逼近 $p$-进数的超度量查表树，在横向正交收缩空间投影出 Rauzy 自指分形（$\psi=\psi(\psi)$）；而禁止跨界满载的非局域约束本身就是量子纠缠，它在分形边界上的地址碰撞（`EscapePairs`）直接定出了系统的信息熵。”
+
+在本章 §39.2（[@thm-ch39-fiber-reconstruction-and-zeckendorf-thread]）中，我们通过齐肯多夫黄金读出全线程（[`zeckendorf_real_thread_injective`](lean:D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective)）与阶数 $K = 2$ 的无相邻 `11` 自动机锁死了连续实数，又在 §39.4（[@prop-ch39-orthogonal-folding-and-objective-common-factor]）中完成了正交自折叠与四阶认知终局的合拢；回望第九部与第十部前序章节，[第 36 章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md) §36.4（配合商空间分解 [@thm-ch36-quotient-annihilator-and-factorization]）展示了纵向 $p$ 进素数幂余数查表树，[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5（配合自映射对角不动点 [@thm-ch38-self-mapped-diagonal-fixed-point]）则建立了有限观测竞技场的逃逸对 `EscapePairs` 账本。现在，在推开全书[终章](coda.md)大门之前，我们将局部连续 `1` 的禁戒阶数从 $K = 2$ 推广至任意整数 $K \ge 2$，把散落在全书各部的八项核心结构——齐肯多夫禁邻语言、$K$-Bonacci 皮索主根、$p$ 进余数查表树、$K = 3$ 劳齐分形内窗、克利福德线—面正交分解、自指不动点尺度、跨切口直接编码纠缠秩，以及帕里平稳律与逃逸对计数（原话台账见[附录 A](appendix-a.md#sec-appendix-a-verbatim-ledger) `A71`）——放入同一座可逐项核验的自指综合沙盘。为贯彻全书的形式认识论纪律，本节严格区分递推阶数 $K$、字长 $Q$ 与纠缠秩 $r$，并将每一处 Lean 4 冻结定理（`LEAN ✓`）、经典数学物理文献（`文献结果`）、双精度数值计算（`NUM`）、开放问题（`OPEN`）与跨系统综合词典（`MODEL`）的边界逐一标清。
+
+### 39.5.1 齐肯多夫禁邻语言：从 $K=2$ 防进位编码起步 {#sec-ch39-p2e-zeckendorf}
+
+一切始于最底层的局部防进位规则。在阶数 $K = 2$ 时，二元齐肯多夫自动机处理的字载体为 `List (Fin 2)`：本章 §39.2 已锁定的冻结定理 [`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes)（[@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 第 3 款）证明，该自动机接受一个二元数字列表，当且仅当其中不出现相邻的两个 `1`（`NoAdjacentOnes`）。将局部禁戒窗口从 $2$ 推广到任意阶数 $K \ge 2$，`trureturing` 在函数载体 `Fin Q → Bool` 上定义长度为 $Q$ 且不含连续 $K$ 个 `true` 的合法字类型 `DBonacciName K Q`（从 `List (Fin 2)` 到定长布尔函数需经显式载体转换）。
+
+计数定理 [`dbonacci_name_card`](lean:D5/S0/Tower/DBonacci/Names.dbonacci_name_card) 给出任意阶数 $d \ge 2$ 与字长 $Q \in \mathbb{N}$ 的精确基数归一化：
+
+$$
+\bigl|\operatorname{DBonacciName}(K, Q)\bigr| = \operatorname{dbonacci}(K, Q + 2),
+$$
+
+其递推满足 $C_K(n + K) = \sum_{i=0}^{K-1} C_K(n + i)$。当字长尚未触及禁戒阈值（$Q < K$）时，短前缀定理 [`dbonacci_name_card_of_lt`](lean:D5/S0/Tower/DBonacci/Names.dbonacci_name_card_of_lt) 证明不发生任何截断，合法字数恰为全二元树的 $2^Q$；一旦 $Q \ge K$，满载的 $1^K$ 分支被精确剪除。在 $K = 2$ 时，$Q = 0, 1, 2, 3, 4, 5$ 的合法字数依次为斐波那契数 $F_{Q+2} = 1, 2, 3, 5, 8, 13$；在 $K = 3$（禁 `111`）时，$Q = 0, 1, 2, 3, 4$ 的合法字数依次为 $1, 2, 4, 7, 13$。与此同时，有限名称网格在深度 $Q$ 处呈现 $\min(K, Q)$ 种不同的相邻间隙长度——仅当 $Q \ge K$ 时才稳定展现全部 $K$ 种尺度。
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" preset="zeckendorf" height="500"}
+**齐肯多夫禁邻语言卡（`zeckendorf`）**：展示阶数 $K = 2$ 下长度递增的二元字树。青色节点与路径标出不含相邻 `11` 的合法字，品红叉号标出刚触及 `11` 即被剪除的禁戒分支，琥珀色高亮当前选中的字长层 $Q$ 与对应斐波那契计数 $F_{Q+2}$。自动机等价性（[@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 第 3 款）与精确字数公式属 `LEAN ✓`。
+:::
+
+当观察者把禁戒窗口从 $K = 2$ 放宽到一般的 $K \ge 2$ 时，离散字数的渐近增长率便由一条统一的特征多项式接管。
+
+### 39.5.2 $K$-Bonacci 广义禁戒与皮索共轭圆盘收缩 {#sec-ch39-p2e-kbonacci}
+
+对任意整数阶 $K \ge 2$，令 $K$-Bonacci 特征多项式为
+
+$$
+P_K(X) = X^K - \sum_{j=0}^{K-1} X^j.
+$$
+
+将 $P_K(X)$ 同乘 $(X - 1)$ 可得恒等式 $(X - 1)P_K(X) = X^{K+1} - 2X^K + 1$，因此任何满足 $x \neq 1$ 的根都等价地满足自指代数方程 $x = 2 - x^{-K}$。在实轴区间 $(1, 2)$ 内，$P_K$ 存在唯一实主根 $\beta_K = \operatorname{dbonacciPerronRoot}(K)$；而在复平面上，其余全部 $K - 1$ 个共轭根无一例外地被严格压入开单位圆盘内部：
+
+::: {.theorem #thm-ch39-p2e-kbonacci-pisot title="K-Bonacci 特征多项式的复根定位与共轭单位圆盘收缩" lean="D5/S0/Tower/DBonacci/Irreducibility.dbonacci_complex_root_location"}
+设整数阶数满足 $q \ge 2$，$z \in \mathbb{C}$ 为复系数特征多项式 $X^q - \sum_{i=0}^{q-1} X^i \in \mathbb{C}[X]$ 的任意复根。则
+
+$$
+1 \le \|z\| \iff z = \beta_q,
+$$
+
+其中 $\beta_q = \operatorname{dbonacciPerronRoot}(q)$ 为嵌入 $\mathbb{C}$ 的实佩龙主根。等价地，一切满足 $z \neq \beta_q$ 的复共轭根均严格满足 $\|z\| < 1$。
+:::
+
+::: proof
+由实主根恒等式 [`two_sub_dbonacciPerronRoot_eq_inv_pow`](lean:D5/S0/Tower/DBonacci/PerronRoot.two_sub_dbonacciPerronRoot_eq_inv_pow)，对一切 $q \ge 2$ 有 $2 - \beta_q = \beta_q^{-q}$，故 $\beta_q \in (1, 2)$ 且满足 $\|(\beta_q : \mathbb{C})\| = \beta_q \ge 1$（并由 [`dbonacciPerronRoot_tendsto_two`](lean:D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_tendsto_two) 知当 $q \to \infty$ 时 $\beta_q \to 2$）。反之，设复根 $z$ 满足 $1 \le \|z\|$，将其代入辅助乘积式 $(z - 1)(z^q - \sum_{i=0}^{q-1} z^i) = z^{q+1} - 2z^q + 1 = 0$，等价改写为 $z^q(2 - z) = 1$。若 $\|z\| > 1$，一方面由 $z^q = \sum_{i=0}^{q-1} z^i$ 取三角不等式得 $\|z\|^q \le \sum_{i=0}^{q-1} \|z\|^i$，结合实特征多项式在 $(\beta_q, \infty)$ 上严格为正推出 $\|z\| \le \beta_q < 2$；另一方面由反向三角不等式及 $z^q(2 - z) = 1$ 得 $0 < 2 - \beta_q \le 2 - \|z\| \le \|2 - z\| = \|z\|^{-q}$，即 $\|z\|^q(2 - \|z\|) \le \|z\|^q \|2 - z\| = 1$。在 $(0, \infty)$ 上定义实函数 $f(t) := t - 2 + t^{-q}$：由于 $f(1) = 0$、$f(\beta_q) = 0$（因 $\beta_q^q(2 - \beta_q) = 1$），且对一切 $t > 0$ 有 $f''(t) = q(q + 1)t^{-q - 2} > 0$，故 $f$ 在 $[1, \beta_q]$ 上**严格凸**；因此任意内点 $t = (1 - \lambda)\cdot 1 + \lambda\beta_q \in (1, \beta_q)$（$0 < \lambda < 1$）均满足 $f(t) < (1 - \lambda)f(1) + \lambda f(\beta_q) = 0$，即 $2 - t > t^{-q}$，从而 $t^q(2 - t) > 1$。于是若 $1 < \|z\| < \beta_q$，必有 $\|z\|^q(2 - \|z\|) > 1$，与 $\|z\|^q(2 - \|z\|) \le \|z\|^q \|2 - z\| = 1$ 矛盾；结合 $\|z\| \le \beta_q$ 即迫使 $\|z\| = \beta_q$，再代回 $2 - \|z\| \le \|2 - z\| = \beta_q^{-q} = 2 - \beta_q$ 锁定等号 $\|2 - z\| = 2 - \|z\|$，配合 $\|z\| < 2$ 迫使 $z$ 落在正实轴上，故 $z = \|z\| = \beta_q$。若 $\|z\| = 1$，由 $2z^q = z^{q+1} + 1$ 与 $\|z^{q+1}\| = 1$ 知单位圆上两点之和模长等于 $2$ 迫使 $z^{q+1} = 1$ 进而 $z = 1$，但这与 $1^q - q = 1 - q \neq 0$（$q \ge 2$）矛盾。结合整系数与有理系数双重不可约性定理 [`dbonacci_irreducible`](lean:D5/S0/Tower/DBonacci/Irreducibility.dbonacci_irreducible)，$P_q(X)$ 在 $\mathbb{Z}[X]$ 与 $\mathbb{Q}[X]$ 上均不可约。完整证明由 Lean 内核检查。
+:::
+
+除上述单位圆盘判据外，冻结模块还逐项锁定了 $\beta_2 = \varphi$（[`dbonacciPerronRoot_two_eq_goldenRatio`](lean:D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_two_eq_goldenRatio)）、$\beta_3 = \operatorname{tribonacciConstant}$（[`dbonacciPerronRoot_three_eq_tribonacciConstant`](lean:D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_three_eq_tribonacciConstant)）、阶数上的严格单调递增性 $\beta_2 < \beta_3 < \beta_4 < \cdots$（[`dbonacciPerronRoot_strictMonoOn`](lean:D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_strictMonoOn)）以及主根处导数非零的单根性质（[`dbonacciPerronRoot_simple`](lean:D5/S0/Tower/DBonacci/Irreducibility.dbonacciPerronRoot_simple)）。这组代数结论共同证明：每个 $\beta_K$（$K \ge 2$）都是次数恰为 $K$ 的皮索—维贾雅拉加万数（Pisot–Vijayaraghavan number）。双精度数值求根（`NUM`）给出前三个主根为 $\beta_2 \approx 1.618034$、$\beta_3 \approx 1.839287$、$\beta_4 \approx 1.927562$，余差 $2 - \beta_K = \beta_K^{-K}$ 渐近等价于 $2^{-K}$。需要注意，这些结论是纯粹的多项式代数与根分布定理，本身并不自动推出一般皮索替代系统的几何拼砖定理。
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" preset="kbonacci" height="500"}
+**$K$-Bonacci 皮索根谱卡（`kbonacci`）**：复平面上画出单位圆、实轴区间 $(1, 2)$ 内的青色佩龙主根 $\beta_K$，以及严格落在开单位圆盘内部的共轭根簇；品红标记标示 $1^K$ 禁戒阈值，琥珀色标出当前选定的阶数 $K$。多项式不可约与共轭根模长严格小于 $1$ 属 `LEAN ✓`，具体根坐标小数属 `NUM`。
+:::
+
+当 $K \to \infty$ 时，禁戒窗口 $1^K$ 退向无穷深处，主根 $\beta_K \nearrow 2$ 逼近最小素数基数 $2$。为了严格理解离散查表树的纵向度量结构，我们接下来审视素数幂同余读出与一般有限视界细化超度量。
+
+### 39.5.3 $p$ 进余数树与有限视界细化超度量 {#sec-ch39-p2e-padic}
+
+在算术同余侧，固定素数 $p$，对整数 $x \in \mathbb{Z}$ 定义第 $k$ 层精度读出为 $\operatorname{precisionReading}(p, k, x) = x \bmod p^k$。对任意相异整数 $x \neq y$，最小区分精度定理 [`first_distinguishing_precision`](lean:D5/S3/Arith/Congruence/PadicPrecisionBlindSpot.first_distinguishing_precision) 证明：两者读数首次分叉的最小层级恰为 $k^* = v_p(x - y) + 1$，此前一切 $k \le v_p(x - y)$ 均处于精度盲区。相应地，观测距离恒等式 [`observation_distance_eq_padic_valuation`](lean:D5/S3/Arith/Congruence/PadicObservationDistance.observation_distance_eq_padic_valuation) 将相异整数间的观测距离锁定为 $p^{-v_p(x - y)}$（相等时为 $0$），而同余纤维闭球对应定理 [`congruenceFiber_eq_closedBall_inter_range`](lean:D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range) 证明模 $p^k$ 的整数同余纤维恰好等于 $\mathbb{Q}_p$ 中半径 $p^{-k}$ 的闭球与 $\mathbb{Z} \hookrightarrow \mathbb{Q}_p$ 值域的交集（而非整个完备 $p$ 进闭球）。
+
+在更一般的概念动力学侧，只要状态空间按离散层级依次读出，无需借用素数指数赋值，有限视界细化距离本身就天然服从超度量强三角不等式：
+
+::: {.theorem #thm-ch39-p2e-padic-readout title="有限视界概念细化距离的超度量强三角不等式" lean="D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric"}
+设 $X$ 为任意状态类型，$\mathrm{Coordinate} : \mathbb{N} \to \mathrm{Type}^*$ 为按层级索引的坐标类型族，$\mathrm{readout} : (\ell : \mathbb{N}) \to \operatorname{Concept}(X, \mathrm{Coordinate}(\ell))$ 为逐层概念读出序列，$H \in \mathbb{N}$ 为有限观测视界。记共同深度 $\operatorname{commonDepth}(x, y) \le H$ 为 $x, y$ 从第 $0$ 层起连续保持读数一致的最大前缀层数，并定义有限视界细化距离 $d_H(x, y) = \operatorname{refinementDistance}(\mathrm{Coordinate}, \mathrm{readout}, H, x, y) = H - \operatorname{commonDepth}(x, y)$。则无需任何点分离假设，对任意三元状态 $x, y, z \in X$ 恒有
+
+$$
+d_H(x, z) \le \max\bigl(d_H(x, y),\; d_H(y, z)\bigr).
+$$
+:::
+
+::: proof
+令 $m = \min\bigl(\operatorname{commonDepth}(x, y),\; \operatorname{commonDepth}(y, z)\bigr)$。对任意层级 $\ell < m$，既有 $\ell < \operatorname{commonDepth}(x, y)$ 又有 $\ell < \operatorname{commonDepth}(y, z)$，故在第 $\ell$ 层上 $\mathrm{readout}(\ell)(x) = \mathrm{readout}(\ell)(y)$ 且 $\mathrm{readout}(\ell)(y) = \mathrm{readout}(\ell)(z)$；由等号传递性得 $\mathrm{readout}(\ell)(x) = \mathrm{readout}(\ell)(z)$。因此 $x$ 与 $z$ 至少在前 $m$ 层连续一致，即 $\operatorname{commonDepth}(x, z) \ge m$。两边同被有限视界 $H$ 相减并反转不等号，即得 $H - \operatorname{commonDepth}(x, z) \le H - m = \max\bigl(H - \operatorname{commonDepth}(x, y),\; H - \operatorname{commonDepth}(y, z)\bigr)$。完整证明由 Lean 内核检查。
+:::
+
+这里必须划清一条关键的形式边界：**$p$ 进余数树与 $K$-Bonacci 合法前缀树是两个形式上彼此独立的数学对象**。前者按整数的低位 $p$ 进余数分层，度量采用指数型赋值 $p^{-v_p(x-y)}$；后者按有限二元字的禁 $1^K$ 规则剪枝，[@thm-ch39-p2e-padic-readout] 中的 $d_H = H - \operatorname{commonDepth}$ 是有限视界伪超度量（当读出在视界 $H$ 内分离各点时成为严格超度量），并非按定义等同于指数型 $p$ 进度量，且两个齐肯多夫字的共同前缀长度并不自动等于其解码整数之差的 $p$ 进赋值。将 $K \to \infty$ 时 $\beta_K \nearrow 2$ 的满二元查表极限与素数基数 $p$ 的零进位余数树并置对照（亦可参看[第 36 章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)商空间分解 [@thm-ch36-quotient-annihilator-and-factorization]），属于跨系统的结构诠释词典（`MODEL`），而非自动成立的拓扑共轭定理。
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" preset="padic" height="500"}
+**素数幂余数树与细化超度量卡（`padic`）**：以树状舞台展示模 $p^k$ 同余分层。青色树枝标出两整数共享的低位余数前缀，品红分叉点标出首次区分层级 $k^* = v_p(x-y)+1$，琥珀色高亮当前选定的状态对与视界 $H$。局部同余精度与 `refinementDistance` 强三角不等式属 `LEAN ✓`，与 $K$-Bonacci 树的跨系统对照属 `MODEL`。
+:::
+
+在纵向分层树之外，皮索主根在开单位圆盘内的复共轭根又把同一批合法有限字投影到横向收缩空间中。当阶数从 $K = 2$ 跨入 $K = 3$ 时，原本一维的实共轭线段第一次因一对共轭复根而绽放为二维分形内窗。
+
+### 39.5.4 $K=3$ 劳齐分形内窗：精确前缀自覆盖与零测边界 {#sec-ch39-p2e-rauzy}
+
+固定三阶 Tribonacci 特征多项式 $P_3(X) = X^3 - X^2 - X - 1$，记其实佩龙主根为 $\beta_3 = \operatorname{tribonacciConstant}$，并取上半平面（$\operatorname{Im}\alpha > 0$）的非佩龙复根 $\alpha$。共轭迹与范数恒等式 [`tribonacci_secondary_root_add_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate) 与 [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) 精确锁定了
+
+$$
+\alpha + \overline{\alpha} = 1 - \beta_3,\qquad \alpha \cdot \overline{\alpha} = \beta_3^{-1}.
+$$
+
+由此立即可手算导出实部 $\operatorname{Re}\alpha = (1 - \beta_3)/2$ 与精确模长 $|\alpha| = \beta_3^{-1/2}$；双精度数值求值（`NUM`）给出 $\alpha \approx -0.419643 + 0.606291\,i$、$|\alpha| \approx 0.737353$ 以及旋转辐角 $\arg\alpha \approx 124.69^\circ$。
+
+对任意不含连续三个 `1`（禁 `111`）的有限合法字 $\varepsilon = (\varepsilon_0, \dots, \varepsilon_{Q-1}) \in \{0, 1\}^Q$，采用 `trureturing` 源码的**零次幂起点（exponent-zero）**内部复求值映射：
+
+$$
+c_\alpha(\varepsilon) = \sum_{j=0}^{Q-1} \varepsilon_j \alpha^j,\qquad W(\alpha) = \bigl\{c_\alpha(\varepsilon) : Q \in \mathbb{N},\; \varepsilon \text{ 为禁 } 111 \text{ 合法字}\bigr\},\qquad \mathcal{R}_3(\alpha) = \overline{W(\alpha)}.
+$$
+
+这里 $\mathcal{R}_3(\alpha) = \operatorname{rauzyFractal}(\alpha)$ 是复平面 $\mathbb{C}$ 中的紧子集，包含于闭圆盘 $\overline{B}\bigl(0, (1 - |\alpha|)^{-1}\bigr)$（注意：此零次幂复内窗与采用负 $\beta_3$ 次幂的物理归一化求值及带自然数解码标签的 `conjugateEmbedding` 分属不同表示，未给定显式换标映射时不可混同）。按合法字首段 `1` 的游程长度 $0, 1, 2$，定义三支不等比例仿射前缀收缩映射：
+
+$$
+f_0(w) = \alpha w,\qquad f_{10}(w) = 1 + \alpha^2 w,\qquad f_{110}(w) = 1 + \alpha + \alpha^3 w,
+$$
+
+其相似收缩比依次为 $|\alpha|$、$|\alpha|^2$ 与 $|\alpha|^3$。在非佩龙特征根假设下，这三支仿射映射严格覆盖整个劳齐闭包：
+
+::: {.theorem #thm-ch39-p2e-rauzy-regular-window title="三阶劳齐分形闭包的精确三支前缀自覆盖" lean="D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_prefix_cover"}
+设复数 $z \in \mathbb{C}$ 是三阶特征多项式 $X^3 - X^2 - X - 1$ 的根，且满足 $z \neq \beta_3$（其中 $\beta_3 = \operatorname{tribonacciConstant}$）。令 $\mathcal{R}_3(z) = \operatorname{rauzyFractal}(z)$ 为零次幂内部窗口闭包，$f_0(w) = z w$（`zeroPrefixMap`）、$f_{10}(w) = 1 + z^2 w$（`oneZeroPrefixMap`）与 $f_{110}(w) = 1 + z + z^3 w$（`oneOneZeroPrefixMap`）为三支前缀仿射映射。则成立精确集合等式
+
+$$
+f_0\bigl(\mathcal{R}_3(z)\bigr) \cup f_{10}\bigl(\mathcal{R}_3(z)\bigr) \cup f_{110}\bigl(\mathcal{R}_3(z)\bigr) = \mathcal{R}_3(z).
+$$
+:::
+
+::: proof
+在任意复数 $z$ 上，将有限禁 `111` 字前置 `0`、`10` 或 `110` 仍保持禁 `111` 合法性，取闭包即得左端三支像集的并包含于 $\mathcal{R}_3(z)$。反之，当 $z$ 为异于 $\beta_3$ 的特征根时，一方面对非空合法字按首段 `0`、`10`、`110` 分解（并对仅有短字 `1`、`11` 的退化项利用特征方程 $z^3 = z^2 + z + 1$ 展开为无穷合法尾列），结合 $\mathcal{R}_3(z)$ 的紧致性即可证得反向包含；另一方面，无需引入任何外部拼砖假设，内点非空定理 [`rauzyFractal_interior_nonempty`](lean:D5/S3/Geometry/Rauzy/TribonacciInterior.rauzyFractal_interior_nonempty) 直接证明 $\operatorname{int}\mathcal{R}_3(z) \neq \varnothing$，进而正则闭集定理 [`rauzyFractal_closure_interior`](lean:D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_closure_interior) 给出 $\overline{\operatorname{int}\mathcal{R}_3(z)} = \mathcal{R}_3(z)$，保证整个劳齐集由其非空开内点的闭包精确生成。完整证明由 Lean 内核检查。
+:::
+
+进一步，结合三支收缩映射在二维平面上的面积雅可比比值之和 $|z|^2 + |z|^4 + |z|^6 = \beta_3^{-1} + \beta_3^{-2} + \beta_3^{-3} = 1$ 与非空内点性质，劳齐集拓扑边界的二维平面测度严格归零：
+
+::: {.theorem #thm-ch39-p2e-rauzy-null-boundary title="三阶劳齐分形拓扑边界的二维勒贝格零测度定理" lean="D5/S3/Geometry/Rauzy/TribonacciNullBoundary.rauzyFractal_frontier_volume_zero"}
+设复数 $z \in \mathbb{C}$ 是三阶特征多项式 $X^3 - X^2 - X - 1$ 的根，且满足 $z \neq \beta_3$。记 $\partial\mathcal{R}_3(z) = \operatorname{frontier}\bigl(\operatorname{rauzyFractal}(z)\bigr)$ 为 $\mathcal{R}_3(z)$ 在 $\mathbb{C} \simeq \mathbb{R}^2$ 中的拓扑边界，则其二维勒贝格—哈尔体积测度严格为零：
+
+$$
+\operatorname{vol}_2\bigl(\partial\mathcal{R}_3(z)\bigr) = 0.
+$$
+:::
+
+::: proof
+由 [@thm-ch39-p2e-rauzy-regular-window] 知紧集 $\mathcal{R}_3(z)$ 被三支压缩仿射映射 $f_0, f_{10}, f_{110}$ 精确覆盖，且由 $|z|^2 = \beta_3^{-1}$ 与 $\beta_3^3 = \beta_3^2 + \beta_3 + 1$ 知三支映射对平面二维体积测度的缩放因子 $|z|^2, |z|^4, |z|^6$ 之和恰等于 $1$。因为 $\operatorname{int}\mathcal{R}_3(z)$ 非空开集具有严格正的有限平面体积，自相似覆盖下的测度守恒迫使各支重叠区与拓扑边界 $\partial\mathcal{R}_3(z) = \mathcal{R}_3(z) \setminus \operatorname{int}\mathcal{R}_3(z)$ 的二维平面测度不能携带正质量，从而 $\operatorname{vol}_2\bigl(\partial\mathcal{R}_3(z)\bigr) = 0$。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-ch39-p2e-rauzy-literature title="文献结果：劳齐分形拼砖、拓扑圆盘性质与边界豪斯多夫维数（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 关于三阶劳齐分形的经典动力系统与几何数论文献，起源于 G. Rauzy 对三字母替代系统与环面马尔可夫剖分的奠基工作（*Bull. Soc. Math. France* **110**, 1982, 147–178）及 W. P. Thurston 关于有限自动机与自相似铺砌的讲义（*Groups, Tilings, and Finite State Automata*, 1989）；A. Messaoudi 进一步研究了劳齐分形的算术编码、连通性/单连通拓扑圆盘性质以及分形边界的复数记数刻画（*J. Théorie des Nombres de Bordeaux* **10**(1), 1998, 135–162；*Acta Arithmetica* **95**(3), 2000, 195–224，注意文献常采用指数平移约定，导入拓扑结论前须核对与此处零次幂窗口的仿射对应）。文献给出的三阶劳齐分形边界豪斯多夫维数约为
+
+$$
+D_F = \dim_H\bigl(\partial\mathcal{R}_3(\alpha)\bigr) \approx 1.09336 \quad (\text{文献结果} + \text{NUM})。
+$$
+
+必须严格区分两件事：[@thm-ch39-p2e-rauzy-null-boundary] 证明的 $\operatorname{vol}_2(\partial\mathcal{R}_3) = 0$ 是指**二维平面面积为零**，这既不意味着边界光滑或一维弧长有限，也不单独算出豪斯多夫维数 $1.09336$；反之，可视化画面中的有限深度点云（包括 $K = 4$ 时的内部坐标采样云）属于 `NUM` 数值近似，不能把像素采样当作拼砖、单连通性或 $\mathcal{R}_4$ 拓扑定理的证明，更不能将需要额外重合条件的一般高阶皮索替代猜想当作无条件定理。
+:::
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" preset="rauzy" height="500"}
+**三阶劳齐分形内窗卡（`rauzy`）**：在二维内部复平面 $\mathbb{C}$ 中绘制由三支不等收缩映射 $f_0$、$f_{10}$、$f_{110}$ 生成的有限深度采样点云。青色与紫色区分内部主分支与 $\arg\alpha \approx 124.69^\circ$ 旋转相位，品红描出边界邻域点，琥珀色标出当前选定的合法前缀点。紧致性、非空内点、正则闭集、前缀精确覆盖与二维零测边界属 `LEAN ✓`；有限采样云与 $D_F \approx 1.09336$ 分别属 `NUM` 与 `文献结果`。
+:::
+
+为什么 $K = 2$ 的内部窗口只是一维实轴线段，而 $K = 3$ 却在正交补空间里长出旋转折叠的二维分形？将其放回代数数域的闵可夫斯基嵌入与克利福德等级语言，几何机制便一目了然。
+
+### 39.5.5 克利福德正交分解：一维膨胀轴与二维内禀旋面 {#sec-ch39-p2e-clifford}
+
+对有理系数或整系数的三阶代数编码 $x = a + b\beta_3 + c\beta_3^2$，经典三次闵可夫斯基实线性坐标映射写为
+
+$$
+(a, b, c) \longmapsto \Bigl(a + b\beta_3 + c\beta_3^2,\; \operatorname{Re}(a + b\alpha + c\alpha^2),\; \operatorname{Im}(a + b\alpha + c\alpha^2)\Bigr) \in E_\parallel^1 \oplus E_\perp^2.
+$$
+
+（顺带指出：对一般有理系数 $(a,b,c) \in \mathbb{Q}^3$，三嵌入迹 $(a+b\beta_3+c\beta_3^2) + 2\operatorname{Re}(a+b\alpha+c\alpha^2) = 3a + b + 3c$ 是有理数，仅当系数取整数或特定扫描格点时才必为整数。）在这一分解下，乘以主根 $\beta_3$ 在一维物理方向 $E_\parallel^1$ 上表现为倍率 $\beta_3 > 1$ 的单向拉伸，而在二维内部平面 $E_\perp^2$ 上则由复根乘法 $w \mapsto \alpha w$ 表现为模长 $|\alpha| = \beta_3^{-1/2} < 1$ 的均匀收缩与角度 $\arg\alpha \approx 124.69^\circ$ 的平面旋转之复合。
+
+::: {.remark #rem-ch39-p2e-unification-model title="诠释模型：闵可夫斯基嵌入的克利福德线—面词典（MODEL）"}
+在[第 6 章](ch06-geometric-product.md)建立的三维克利福德代数 $\mathrm{Cl}_{3,0}(\mathbb{R})$ 语言中，我们可以为上述 $E_\parallel^1 \oplus E_\perp^2$ 分解建立一套清晰的几何诠释词典（`MODEL`）：将一维膨胀方向对齐单位一阶向量轴 $\mathbf{e}_1$（粒子式标尺读数轴），将二维内部复平面对齐正交单位双向量面 $B_\perp = \mathbf{e}_2 \wedge \mathbf{e}_3$（满足 $B_\perp^2 = -1$ 的波式相干旋面），则内部单步演化 $w \mapsto \alpha w$ 可写为带阻尼的缩放旋子（scaled rotor）作用
+
+$$
+\mathcal{D}_\perp = \beta_3^{-1/2}\bigl(\cos\vartheta + B_\perp \sin\vartheta\bigr),\qquad \vartheta = \arg\alpha \approx 124.69^\circ,
+$$
+
+而三维行列式（伪标量体积缩放因子）满足 $\beta_3 \cdot \bigl(\beta_3^{-1/2}\bigr)^2 = 1$，体现出“纵向拉伸多少倍，横向双向量面积就精确收缩多少倍”的体积守恒律。在阅读这一词典时须恪守三条形式边界：第一，$(a,b,c) \mapsto (\dots)$ 是代数实线性坐标嵌入，只有在显式选定基与内积度规后才谈得上标准整数格 $\mathbb{Z}^3$ 的正交欧氏投影；第二，劳齐集 $\mathcal{R}_3(\alpha)$ 本身严格栖居在**二维内部平面** $E_\perp^2$ 内，三维沙盘中的立体视角变换只是摄像机观察操作，不会改变 $\mathcal{R}_3(\alpha)$ 的数学维数；第三，将 $E_\parallel^1$ 与 $E_\perp^2$ 诠释为观察者的外部时间轴与内部相位记忆面属于 `MODEL` 综合，此处不宣称存在额外的形式同构定理。
+:::
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" preset="clifford" height="500"}
+**克利福德线—面分解卡（`clifford`）**：三维代数坐标舞台将沿青色一维轴 $E_\parallel$ 的倍率 $\beta_3$ 膨胀，与二维内部平面 $E_\perp$ 上绕双向量轴的紫色旋转收缩 $|\alpha| e^{i\arg\alpha}$ 同台呈现；琥珀色圆点标出当前可拖拽的格点分解位置。坐标求值属 `NUM`，克利福德观察者词典属 `MODEL`。
+:::
+
+既然二维内部旋面上的单步收缩模长定格在 $|\alpha|_{K=3} = \beta_3^{-1/2} \approx 0.737353$，一个自然的数值追问随之浮现：它与[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)和[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md)反复出现的余弦自指不动点 $\theta^* = \cos\theta^* \approx 0.739085$ 究竟是什么关系？
+
+### 39.5.6 自指尺度对照：Dottie 余弦不动点 $\theta^*$ 与内禀收缩模 $|\alpha|$ {#sec-ch39-p2e-self-reference}
+
+在本书不同章节中，“算子作用于自身输出而达成尺度平衡”曾以三种精确但各异的数学方程出现：黄金连分数倒数不动点 $x = 1 + 1/x$（唯一正根 $\varphi$，见 [@cor-golden-fixed-point-unique] 与本章 §39.1 [@thm-ch39-self-application-four-fates-and-diagonal-identity]）、广义 $K$-Bonacci 主根方程 $x = 2 - x^{-K}$（唯一大于 $1$ 实根 $\beta_K$，见 [@thm-ch39-p2e-kbonacci-pisot]），以及实内积投影自指方程 $\cos\theta = \theta$（正实轴端点 $\theta^*$，见[第 24 章](ch24-cosine-fixed-points-and-self-reference.md) [@thm-dottie-rational-inverse-endpoint] 与[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md)全实轴收敛算例 [@ex-ch33-mutual-cosine-monotonic-lock]）。把 $K = 3$ 时的内部收缩模长与余弦不动点放在同一把数值标尺下核对，可以得到如下精细对照：
+
+::: {.example #ex-ch39-p2e-pisot-dottie-numerics title="文献结果与数值算例：Dottie 不动点 θ* 与三阶内空间收缩率 |α| 的近似度与代数分野（含文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化（针对 $\theta^*$ 的超越性判定；端点存在唯一性与三次共轭乘积恒等式已由 Lean 验证）。** 一方面，幂级数反演端点定理 [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)（[@thm-dottie-rational-inverse-endpoint]）证明区间 $(0, 1)$ 内存在唯一正实数 $\theta^*$ 满足 $\cos\theta^* = \theta^*$，且选定的有理系数反演幂级数在 $\pi$ 处绝对收敛于 $\theta^*$；另一方面，由三阶共轭根乘积恒等式 [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) 可直接推出 $|\alpha|_{K=3} = \beta_3^{-1/2}$。独立双精度二分计算（`NUM`）给出两者的十进制数值与相对偏差：
+
+$$
+\theta^* \approx 0.739085,\qquad |\alpha|_{K=3} = \beta_3^{-1/2} \approx 0.737353,\qquad \frac{\bigl|\theta^* - |\alpha|_{K=3}\bigr|}{\theta^*} \approx 0.234\% \quad \left(\frac{\bigl|\theta^* - |\alpha|_{K=3}\bigr|}{|\alpha|_{K=3}} \approx 0.235\%\right).
+$$
+
+在惊叹于两者仅相差约千分之二点三的同时，形式诚实要求我们明确指出：**$\theta^*$ 与 $|\alpha|_{K=3}$ 严格不相等（$\theta^* \neq \beta_3^{-1/2}$），且分属截然不同的数域层级**。这是因为 $|\alpha|_{K=3} = \beta_3^{-1/2}$ 满足整系数六次代数方程 $y^6 + y^4 + y^2 - 1 = 0$，是不折不扣的代数数；而根据林德曼—魏尔斯特拉斯定理（文献结果），任何满足 $\cos\theta^* = \theta^*$ 的非零实数 $\theta^*$ 必为超越数。因此，$\approx 0.234\%$ 是纯粹的数值邻近（`NUM`），绝不能写成代数恒等式或同一物理常数；将 $\cos\theta^* = \theta^*$ 与皮索内窗自相似不动点共同归入符号母题 $\psi = \psi(\psi)$ 之下，属于本书的概念统一模型（`MODEL`）。
+:::
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" preset="self-reference" height="500"}
+**自指尺度对照卡（`self-reference`）**：并列展示余弦迭代收敛至青色不动点 $\theta^* \approx 0.739085$ 的轨迹，以及三阶皮索内空间按模长 $|\alpha| = \beta_3^{-1/2} \approx 0.737353$ 逐拍收缩的螺旋轨迹；琥珀色游标同步标出第 $k$ 步的幅度比与约 $0.234\%$ 的数值间距。端点与共轭乘积恒等式属 `LEAN ✓`，十进制差值属 `NUM`，自指母题并置属 `MODEL`。
+:::
+
+从单点收缩尺度回到多体量子寄存器：当一条禁 $1^K$ 合法字被空间切口一分为二时，左右两半不再能独立任取合法字——切口处的跨界禁戒直接把组合计数转化为可精确刻画的双体纠缠秩矩形。
+
+### 39.5.7 跨切口 $1^K$ 禁戒与直接编码器的可达施密特秩 {#sec-ch39-p2e-entanglement}
+
+设想把长度为 $m_X + m_Y$（$m_X, m_Y \ge 1$）的二元物理寄存器沿切口拆成左半 $X$（长 $m_X$）与右半 $Y$（长 $m_Y$）。即便左字 $x \in \{0, 1\}^{m_X}$ 与右字 $y \in \{0, 1\}^{m_Y}$ 各自内部都不含 $1^K$，拼接字 $xy$ 跨越切口时仍可能拼出连续 $K$ 个 `1`：记 $\tau(x)$ 为 $x$ 末尾连续 `1` 的个数，$\iota(y)$ 为 $y$ 开头连续 `1` 的个数，则跨切口拼接合法的充要条件恰为
+
+$$
+\tau(x) + \iota(y) < K.
+$$
+
+在 `trureturing` 的直接编码器模型中，给定整数 $N \ge 2$ 与阶数 $K \ge 2$，将 $\{0, 1, \dots, N\}$ 按是否为素数划分为非素数逻辑页（$b = \mathrm{false}$，维数 $M_0 > 0$）与素数逻辑页（$b = \mathrm{true}$，维数 $M_1 > 0$）。记 $C_{m, b}$ 为首比特等于 $b$ 的长度 $m$ 禁 $1^K$ 合法字集，其基数为 $c_{m, b} = |C_{m, b}|$；对每个阈值 $0 \le s < K$，定义左端低尾游程累计行数与右端相容邻域字数：
+
+$$
+a_s = \#\bigl\{x \in C_{m_X, 1} : \tau(x) < s\bigr\},\qquad n_s = \#\bigl\{y \in C_{m_Y, 1} : \iota(y) < K - s\bigr\},
+$$
+
+并据此定义两页的组合秩上界：
+
+$$
+R_0 = \min\bigl(c_{m_X, 0},\; \lfloor c_{m_Y, 0} / M_0 \rfloor\bigr),\qquad R_1 = \min\Bigl(c_{m_X, 1},\; \min_{0 \le s < K}\bigl(a_s + \lfloor n_s / M_1 \rfloor\bigr)\Bigr).
+$$
+
+称等距编码矩阵 $J : \mathbb{C}^{\mathrm{Logical}(N)} \to \mathbb{C}^{\{0,1\}^{m_X} \times \{0,1\}^{m_Y}}$ 与左寄存器页密度态 $\sigma_0, \sigma_1$ 满足**直接编码契约**（`directContract`），若：（i）$J^* J = I$；（ii）$X$ 与 $Y$ 两侧的首比特物理页投影均与逻辑页投影 $\Pi_b$ 交织，且 $\sigma_b$ 支撑在 $C_{m_X, b}$ 上；（iii）对一切逻辑算子 $A$ 成立部分迹替换律 $\operatorname{Tr}_Y(J A J^*) = \sum_{b \in \{0,1\}} \operatorname{Tr}(\Pi_b A)\,\sigma_b$；（iv）对一切逻辑输入态 $\psi$，凡跨切口拼接违背禁 $1^K$ 规则的字对 $(x, y)$ 其编码振幅恒为零 $(J\psi)(x, y) = 0$。在这一精确契约下，可达施密特秩与冯·诺依曼纠缠熵由以下充要定理完整锁定：
+
+::: {.theorem #thm-ch39-p2e-direct-encoder-ranks title="K-Bonacci 直接编码器的可达页秩矩形与冯·诺依曼纠缠熵极值定理" lean="D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy"}
+对任意整数 $N \ge 2$、$K \ge 2$ 与块长 $m_X, m_Y \ge 1$，非素数与素数逻辑页维数均严格为正（$M_0 > 0,\; M_1 > 0$）。记页秩 $r_b = \operatorname{rank}(\sigma_b)$（$b \in \{0, 1\}$），$R_0, R_1$ 如上式所定义，则：
+
+1. **秩上界与谱分解必要性**：凡满足 `directContract` 的编码对 $(J, \sigma)$ 必满足 $r_0 \le R_0$、$r_1 \le R_1$ 以及第 $1$ 页的全行谱分解必要条件（`totalRowSpectralNecessity`）；
+2. **可达页秩充要矩形**：对任意自然数对 $(d_0, d_1)$，存在联合选定的 $(J, \sigma)$ 满足 `directContract` 且 $(r_0, r_1) = (d_0, d_1)$，当且仅当 $1 \le d_0 \le R_0$ 且 $1 \le d_1 \le R_1$；特别地，合法直接编码器存在当且仅当 $R_0 \ge 1$ 且 $R_1 \ge 1$；
+3. **页纯态施密特秩恒等式**：若满足 `directContract`，则对完全支撑在第 $b$ 逻辑页内的任意归一化纯态 $\psi$，其编码双体态 $J\psi$ 跨 $X \mid Y$ 切口的施密特秩恒等于页密度矩阵秩 $r_b = \operatorname{rank}(\sigma_b)$；
+4. **冯·诺依曼熵紧上界与联合同时可达性**：凡满足 `directContract` 的 $(J, \sigma)$ 均满足自然对数单位下的熵上界 $S(\sigma_0) \le \ln R_0$ 与 $S(\sigma_1) \le \ln R_1$；且只要 $R_0 \ge 1$ 且 $R_1 \ge 1$，存在同一组联合构造 $(J, \sigma)$ 同时达到四角极值 $r_0 = R_0$、$r_1 = R_1$、$S(\sigma_0) = \ln R_0$ 与 $S(\sigma_1) = \ln R_1$。
+:::
+
+::: proof
+必要性由编码器谱阻塞定理 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) 给出：对任意满足 `directContract` 的给定编码器，在 $\sigma_b$ 的非零本征子空间上分解等距算子 $W$，跨切口禁戒 $\tau(x) + \iota(y) < K$ 迫使凡满足 $\tau(x) \ge s$ 的左端加权行张成的子空间 $V_s$ 在右端只能支撑于基数为 $n_s$ 的合法邻域内；由于 $M_1$ 个正交逻辑态在右端互不重叠，必有 $M_1 \dim V_s \le n_s$，从而 $r_1 \le a_s + \dim V_s \le a_s + \lfloor n_s / M_1 \rfloor$ 对一切 $0 \le s < K$ 成立，第 $0$ 页同理得 $r_0 \le \min(c_{m_X, 0}, \lfloor c_{m_Y, 0}/M_0 \rfloor) = R_0$。充分性与同时极值构造则通过在各游程分层内显式配对正交右端字块并以均匀本征值 $1/d_b$（极值处取 $1/R_b$）组装 $\sigma_b$ 与 $J$ 完成；由支撑秩为 $r_b$ 的密度态最大冯·诺依曼熵不超过 $\ln r_b \le \ln R_b$ 即得紧熵界（这组跨切口秩界与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)指针历史容量界 [@thm-ch38-pointer-width-and-no-deep-copy] 刻画的是不同物理约束）。完整证明由 Lean 内核检查。
+:::
+
+[@thm-ch39-p2e-direct-encoder-ranks] 揭示了一条极易被口号掩盖的关键事实：**直接编码器的施密特秩并不普遍恒等于 $K$！** 只有当参数满足 $1 \le K \le R_b$ 时，秩等于 $K$ 才是可达矩形 $[1, R_0] \times [1, R_1]$ 中的**一个条件性可选值**。以独立枚举的具体参数 $N = 2,\; K = 3,\; m_X = 4,\; m_Y = 5$ 为例（`NUM`）：$\{0, 1, 2\}$ 中非素数页 $\{0, 1\}$ 维数 $M_0 = 2$，素数页 $\{2\}$ 维数 $M_1 = 1$；直接清点禁 `111` 字可得 $c_4 = (7, 6)$、$c_5 = (13, 11)$，且第 $1$ 页各阈值计数值为 $(a_0, a_1, a_2) = (0, 3, 5)$ 与 $(n_0, n_1, n_2) = (11, 7, 0)$，代入公式给出
+
+$$
+R_0 = \min\bigl(7, \lfloor 13 / 2 \rfloor\bigr) = 6,\qquad R_1 = \min\bigl(6, \min(0 + 11,\; 3 + 7,\; 5 + 0)\bigr) = 5.
+$$
+
+此时区间 $1 \le r_0 \le 6$ 与 $1 \le r_1 \le 5$ 内的任意整点秩对均可实现：$r_0 = r_1 = K = 3$ 只是其中一种合法选择，而最大可达秩实为 $(6, 5)$，对应最大页纠缠熵 $(\ln 6, \ln 5)$。
+
+::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="文献结果：斐波那契任意子黄金链与里德堡原子阻塞实验背景（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在凝聚态与原子分子光物理文献中，$K = 2$ 的禁邻 `11` 希尔伯特空间在两类著名多体系统中获得了物理实现或理论建模：其一是 A. E. Feiguin 等人提出的拓扑斐波那契任意子“黄金链”（golden chain）模型（*Phys. Rev. Lett.* **98**, 2007, 160409），其融合规则 $\tau \times \tau = \mathbf{1} + \tau$ 使有限链融合空间维数按斐波那契数增长；其二是里德堡（Rydberg）原子阵列中的偶极/范德瓦耳斯 $1/r^6$ 阻塞机制（理论建模见 I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301；51 原子量子模拟器实验见 H. Bernien et al., *Nature* **551**, 2017, 579–584）。引用这些物理背景时须注意两重边界：第一，最近邻两体里德堡阻塞刚好实现禁相邻激发 $|11\rangle$（对应 $K = 2$ 的 PXP 子空间），但单纯拉大两体阻塞半径只会禁止距离 $R_b$ 内的一切激发对（例如连 `101` 一并禁止），**并不会自动产生 $K > 2$ 的禁连续 $1^K$ 约束**——若要在物理哈密顿量中实现 $K > 2$ 的 $K$-Bonacci 子空间，必须另行设计专门的 $K$ 体局域相互作用；第二，任意子融合空间与有限阻塞比实验哈密顿量均非 [@thm-ch39-p2e-direct-encoder-ranks] 中精确零振幅等距直接编码器的形式同义物。
+:::
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entanglement" height="500"}
+**跨切口禁戒与可达秩矩形卡（`entanglement`）**：左侧展示跨切口拼接检验 $\tau(x) + \iota(y) < K$（青色标出相容拼接字对，品红标出触发 $1^K$ 阻塞的非法拼接），右侧绘制可达页秩矩形 $[1, R_0] \times [1, R_1]$ 与页熵上界 $\ln R_b$，琥珀色标出当前选定的参数与秩点。可达秩矩形与熵界属 `LEAN ✓`，具体参数枚举属 `NUM`，里德堡与任意子物理背景属 `文献结果`。
+:::
+
+最后，当有限长合法字延展为无穷轨道，系统的不确定性与可区分性便同时在马尔可夫平稳核、边界柱集概率与有限观测逃逸对三条轨道上显影。
+
+### 39.5.8 帕里平稳律、逃逸对计数与分形视界熵问题 {#sec-ch39-p2e-entropy}
+
+在讨论“熵”这一极易发生概念滑移的词之前，我们必须先把 `trureturing` 中已由内核锁定的有限/马尔可夫定律，与遍历论文献中的移位拓扑熵及尚未解决的分形纠缠标度猜想逐一拆开。
+
+在马尔可夫链侧，对任意阶数 $k \ge 2$，令互反帕里参数为 $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$。在带绝对符号位与当前连续 `1` 游程长度的有向状态空间 $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ 上，定义后缀权重 $w_j = \operatorname{suffixWeight}(k, p, j) = \sum_{a=0}^{k-j-1} p^{a+1}$、归一化常数 $Z_k = \sum_{j=0}^{k-1} p^j w_j$、符号翻转对合 $\operatorname{flip}(b, j) = (!b, j)$，以及重置转移核 $P_k = \operatorname{kernel}(k, p)$：从状态 $s = (b, j)$ 出发，以概率 $p / w_j$ 翻转符号并重置游程至 $(!b, 0)$，当 $j + 1 < k$ 时以概率 $p\, w_{j+1} / w_j$ 保持符号并推进游程至 $(b, j + 1)$，其余转移概率为 $0$。对应状态分布定义为
+
+$$
+\pi_k(b, j) = \operatorname{parryLaw}\bigl(k, (b, j)\bigr) = \frac{p^j w_j}{2 Z_k}.
+$$
+
+这组有向重置核的随机性、归一化、平稳不变性与正负号对称性已由 Lean 内核完整验证：
+
+::: {.theorem #thm-ch39-p2e-parry-escape-laws title="有向 K-Bonacci 重置链的帕里随机核、平稳分布与符号翻转对称律" lean="D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law"}
+对任意满足 $k \ge 2$ 的自然数阶，令 $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$。则在上述状态空间 $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ 上同时成立：
+
+1. **互反主根范围与幂和归一**：$1/2 < p \le \varphi^{-1}$，且 $\sum_{a=1}^k p^a = 1$；
+2. **后缀权重与归一化界**：对一切 $j \in \operatorname{Fin} k$ 有 $p \le w_j \le 1$，且归一化因子满足 $1 \le Z_k$；
+3. **非负行随机核**：对一切 $s, t \in \operatorname{State}(k)$ 有 $P_k(s, t) \ge 0$，且每一行概率之和满足 $\sum_t P_k(s, t) = 1$；
+4. **平稳不变性与符号翻转公平性**：对一切 $s \in \operatorname{State}(k)$ 有 $\pi_k(s) \ge 0$，$\sum_s \pi_k(s) = 1$；对一切目标态 $t \in \operatorname{State}(k)$ 成立平稳方程 $\sum_s \pi_k(s) P_k(s, t) = \pi_k(t)$；且对一切 $s$ 成立符号翻转不变性 $\pi_k(\operatorname{flip}(s)) = \pi_k(s)$。
+:::
+
+::: proof
+因 $\beta_k$ 在 $k \ge 2$ 上自 $\beta_2 = \varphi$ 严格递增趋向 $2$，其倒数 $p = \beta_k^{-1}$ 严格落在 $(1/2, \varphi^{-1}]$ 内；将特征方程 $\beta_k^k = \sum_{i=0}^{k-1} \beta_k^i$ 两边同乘 $\beta_k^{-k}$ 即得 $\sum_{a=1}^k p^a = 1$。由此可知每个后缀部分和 $w_j = \sum_{a=1}^{k-j} p^a$ 至少包含首项 $p > 0$ 且不超过全和 $1$，并满足末端值 $w_{k-1} = p$ 与向后递推 $w_j = p + p w_{j+1}$（$j + 1 < k$），故 $P_k$ 各元素非负且每行重置项与递增项之和恰为 $(p + p w_{j+1})/w_j = 1$（末端行重置项恰为 $p/p = 1$）。再把左特征幂 $p^j$ 与右特征权重 $w_j$ 相乘并均分给正负两个符号页，流入 $(b, 0)$ 的平稳总质量等于 $\sum_j \frac{p^j w_j}{2 Z_k} \cdot \frac{p}{w_j} = \frac{p}{2 Z_k}\sum_{j=0}^{k-1} p^j = \frac{w_0}{2 Z_k} = \pi_k(b, 0)$，流入 $(b, j+1)$ 的质量亦精确等于 $\frac{p^j w_j}{2 Z_k}\cdot\frac{p w_{j+1}}{w_j} = \pi_k(b, j+1)$，且对合 $\operatorname{flip}$ 仅翻转不影响公式的符号分量。完整证明由 Lean 内核检查。
+:::
+
+在这一平稳律旁，还有两条各自独立的形式化定量定律共同约束边界碰撞与观测盲区：其一是帕里边界柱集上界定理 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)，它对给定的 $n \ge 1$ 组正游程对集合 $C$（每段 `1` 游程 $< k$ 且编码长度不超过视界 $R$）证明，左右边界选定前缀的平稳质量分别不超过 $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ 与 $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$（这是精确概率不等式，而非分形维数或熵值公式）；其二是与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5 一脉相承的有限竞技场信息逃逸率判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，它证明在基数 $q \ge 2$ 的非退化有限状态集上，观测目录 $S$ 无法区分的有序相异状态对集合 $E(S)$ 定义出归一化有理逃逸率 $e(S) = |E(S)|/[q(q-1)]$，而某项观测 $i$ 严格降低逃逸率当且仅当其唯一捕获对计数 $|U_i| > 0$（且差值恰为 $|U_i|/[q(q-1)]$）。有限有序逃逸对比例 $e(S)$、量子态冯·诺依曼熵 $S(\sigma_b)$ 与无限移位系统的遍历熵在数学定义上彼此独立，绝不可混为一谈。
+
+::: {.remark #rem-ch39-p2e-abramov-literature title="文献结果：帕里最大熵马尔可夫测度与阿布拉莫夫诱导回归熵公式（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在遍历论经典文献中，W. Parry（*Trans. Amer. Math. Soc.* **112**, 1964, 55–66）证明不可约拓扑马尔可夫链存在唯一最大熵内禀马尔可夫测度，使禁 $1^K$ 子移位的单步拓扑熵（亦即最大柯尔莫哥洛夫—西奈度量熵）等于 $h_{\mathrm{top}}(\Sigma_K) = \log_2 \beta_K\;\text{bits/step}$（数值计算 `NUM` 给出 $K = 2, 3, 4$ 时依次约为 $0.69424$、$0.87915$、$0.94678\;\text{bits/step}$，随 $\beta_K \nearrow 2$ 单调趋向 $1\;\text{bit/step}$）。另一方面，L. M. Abramov（*Dokl. Akad. Nauk SSSR* **128**, 1959, 647–650）证明：在保概率遍历动力系统 $(X, \mathcal{B}, \mu, T)$ 中，若可测回访集 $A \in \mathcal{B}$ 满足 $\mu(A) > 0$，记 $T_A$ 为 $A$ 上的首次回归诱导映射、$\mu_A$ 为归一化条件测度，则每次回归的诱导熵满足
+
+$$
+h_{\mu_A}(T_A) = \frac{h_\mu(T)}{\mu(A)}.
+$$
+
+引用这两条文献定理时必须区分单位与前提：[@thm-ch39-p2e-parry-escape-laws] 仅在有向重置状态空间上验证了随机核与平稳分布，并未在当前锁定的源码中形式化柯尔莫哥洛夫—西奈移位熵或阿布拉莫夫公式；而将阿布拉莫夫公式用于每次重置回访事件时，必须区分“每次回归熵 $h_{\mu_A}(T_A)$”与“原始每步熵 $h_\mu(T)$”，不能凭类比直接套用到不可逆读出过程或有限 $p$ 进余数树上。
+:::
+
+至于横向内部空间的劳齐分形边界维数 $D_F = \dim_H(\partial\mathcal{R}_K)$ 是否会在量子多体切投态中诱导出反常的分形边界纠缠标度，在严格数学物理中仍是一道悬而未决的开放问题：
+
+::: {.problem #prob-ch39-p2e-fractal-horizon title="开放问题：皮索切投量子多体系统的劳齐分形视界纠缠标度"}
+设阶数 $K \ge 3$ 的皮索切投点集或局域受约束多体哈密顿量，其内部接受窗 $\mathcal{R}_K$ 具有豪斯多夫维数严格大于整数余维的拓扑分形边界（例如 $K = 3$ 时文献结果给出 $D_F = \dim_H(\partial\mathcal{R}_3) \approx 1.09336 > 1$）。是否存在严格构造的一族局域有能隙基态或切投编码量子态，当区域特征尺度 $R \to \infty$ 时，其跨边界双体纠缠熵 $S_{\mathrm{ent}}(R)$ 严格服从由内部劳齐边界维数 $D_F$ 支配的反常标度律（如主项 $S_{\mathrm{ent}}(R) \asymp R^{D_F}$ 或精确锁定系数的对数/次主导分形修正项），并能给出标准余维一面积律失效或保持的充要谱间隙与局域性判据？在本书框架内，任何诸如 $S_{\mathrm{ent}} \propto R^{D_F}$ 的“分形视界面积律”表述均作为待证开放问题（`OPEN`）与启发性物理构想（`MODEL`）列出，绝不作为已证形式定理或引力面积律定理宣称。
+:::
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
+**帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`，移位熵与阿布拉莫夫公式属 `文献结果`，分形面积律属 `OPEN`。
+:::
+
+至此，我们可以把本节审视的全部八项概念汇总在一张无折行认识论总表之中，使每一环的形式内核、文献依托与诠释边界清晰对齐：
+
+| 八概念环节 | 精确数学对象与代表性冻结声明 | 认识论等级与边界定位 |
+| :--- | :--- | :--- |
+| **1. 齐肯多夫禁邻语言** | $K = 2$ 禁相邻 `11` 自动机 [`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes)（[@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 第 3 款）与合法字计数 [`dbonacci_name_card`](lean:D5/S0/Tower/DBonacci/Names.dbonacci_name_card)（$F_{Q+2}$）及短前缀全满律 [`dbonacci_name_card_of_lt`](lean:D5/S0/Tower/DBonacci/Names.dbonacci_name_card_of_lt) | `LEAN ✓`（注意 `List (Fin 2)` 与 `Fin Q → Bool` 载体转换） |
+| **2. $K$-Bonacci 皮索谱** | 特征多项式 $P_K(X)$ 整/有理不可约 [`dbonacci_irreducible`](lean:D5/S0/Tower/DBonacci/Irreducibility.dbonacci_irreducible)、主根恒等式 $2-\beta_K=\beta_K^{-K}$ [`two_sub_dbonacciPerronRoot_eq_inv_pow`](lean:D5/S0/Tower/DBonacci/PerronRoot.two_sub_dbonacciPerronRoot_eq_inv_pow)、极限 $\beta_K \to 2$ [`dbonacciPerronRoot_tendsto_two`](lean:D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_tendsto_two) 与复共轭单位圆盘收缩 [`dbonacci_complex_root_location`](lean:D5/S0/Tower/DBonacci/Irreducibility.dbonacci_complex_root_location)（[@thm-ch39-p2e-kbonacci-pisot]） | `LEAN ✓`（代数根定位定理）；具体小数 $\beta_3 \approx 1.839287$ 属 `NUM` |
+| **3. $p$ 进余数树与超度量** | 模 $p^k$ 首次区分精度 $v_p(x-y)+1$ [`first_distinguishing_precision`](lean:D5/S3/Arith/Congruence/PadicPrecisionBlindSpot.first_distinguishing_precision)、观测距离 [`observation_distance_eq_padic_valuation`](lean:D5/S3/Arith/Congruence/PadicObservationDistance.observation_distance_eq_padic_valuation)、同余纤维交集 [`congruenceFiber_eq_closedBall_inter_range`](lean:D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range) 与有限视界细化超度量 [`refinementDistance_ultrametric`](lean:D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric)（[@thm-ch39-p2e-padic-readout]） | `LEAN ✓`（各自独立成立）；$p$ 进树与 $K$-Bonacci 树的跨系统并置属 `MODEL` |
+| **4. $K=3$ 劳齐分形内窗** | 零次幂内窗非空内点 [`rauzyFractal_interior_nonempty`](lean:D5/S3/Geometry/Rauzy/TribonacciInterior.rauzyFractal_interior_nonempty)、正则闭集 [`rauzyFractal_closure_interior`](lean:D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_closure_interior)、三支前缀精确自覆盖 [`rauzyFractal_prefix_cover`](lean:D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_prefix_cover)（[@thm-ch39-p2e-rauzy-regular-window]）与二维零测边界 [`rauzyFractal_frontier_volume_zero`](lean:D5/S3/Geometry/Rauzy/TribonacciNullBoundary.rauzyFractal_frontier_volume_zero)（[@thm-ch39-p2e-rauzy-null-boundary]） | `LEAN ✓`（集合与平面面积零测）；拼砖、圆盘连通性与 $\dim_H \partial\mathcal{R}_3 \approx 1.09336$ 属 `文献结果` + `NUM`（[@rem-ch39-p2e-rauzy-literature]） |
+| **5. 克利福德线—面分解** | 三次闵可夫斯基实线性坐标嵌入 $E_\parallel^1 \oplus E_\perp^2$ 与内部复平面缩放旋子 $\beta_3^{-1/2}(\cos\vartheta + B_\perp\sin\vartheta)$ | `MODEL`（需显式声明基与度规，观察者线—面词典见 [@rem-ch39-p2e-unification-model]） |
+| **6. 自指收缩尺度对照** | 正实轴余弦端点 $\cos\theta^* = \theta^*$ [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) 与三阶共轭范数 $|\alpha| = \beta_3^{-1/2}$ [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) | `LEAN ✓`（各自端点与恒等式）+ `文献结果`（$\theta^*$ 超越性）+ `NUM`（$\approx 0.234\%$ 数值邻近，严格不等）+ `MODEL`（$\psi=\psi(\psi)$ 母题，[@ex-ch39-p2e-pisot-dottie-numerics]） |
+| **7. 跨切口编码纠缠秩** | 跨切口条件 $\tau(x)+\iota(y)<K$ 下的可达页秩充要矩形 $1 \le r_b \le R_b$ 与最大页熵 $\ln R_b$ [`complete_original_direct_rank_entropy`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy)（[@thm-ch39-p2e-direct-encoder-ranks]）及谱阻塞 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) | `LEAN ✓`（秩等于 $K$ 仅在 $K \le R_b$ 时条件可达，非普适恒等）+ `NUM`（如 $R_0=6, R_1=5$）+ `文献结果`（黄金链与里德堡实验，[@rem-ch39-p2e-rydberg-anyon-literature]） |
+| **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓`（有限与马尔可夫定律）+ `文献结果`（$\log_2\beta_K$ 与阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `OPEN`（分形视界纠缠标度，[@prob-ch39-p2e-fractal-horizon]） |
+
+当我们在下面的综合实验室中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，整章自指本体论 $\psi \equiv \psi(\psi)$ 的多切面几何结构便清清楚楚地浮现出来：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核锁定的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核构成了坚硬的绿色骨架，支撑起周围明确标界的经典文献、数值实验与跨学科几何诠释。至此，全书正文三十九章的攀登已至峰顶——让我们推开最后一道门扉，步入[终章](coda.md)《在所有的球之外》。
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" height="640"}
+**交互实验室 `ORTHO//RAUZY`**：齐肯多夫、皮索与劳齐八概念综合沙盘。自由切换上表对应的八个预设场景、调节阶数 $K$、素数基数 $p$、字长视界与三维观察视角，并直接拖拽物理轴与内部平面上的分解点：实时核对禁 $1^K$ 合法字计数、皮索共轭根单位圆盘收缩、模 $p^k$ 余数树首次区分层级、$K = 3$ 劳齐内窗三支仿射覆盖（及 $K = 4$ 内部坐标采样云）、$\theta^*$ 与 $|\alpha|_{K=3}$ 的数值比对、跨切口可达秩矩形 $[1, R_0] \times [1, R_1]$，以及帕里平稳分布与有限逃逸对账本。绿色依据框严格对应 Lean 已验证定理，文献结论、数值计算、诠释模型与开放问题分别按各自标签独立标示。
 :::

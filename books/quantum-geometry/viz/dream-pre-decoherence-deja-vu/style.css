@@ -1,0 +1,49 @@
+/* ORTHO//DEJAVU: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this visualization
+   lives here: the two switches and the model cache card that sit on the stage (main.js places them in the slots the
+   drawing leaves free), and the book's colour rule (amber marks the current state only). Colours come from the
+   tokens (var(--cyan) …), never from hex values. */
+#cv { cursor: grab; touch-action: none; }
+.tagline em { color: var(--cyan); }
+
+/* the stage title shares its row with the scene chips: keep it clear of them */
+.hud-tl { max-width: calc(100% - 250px); }
+:root[data-shot] .hud-tl { max-width: calc(100% - 40px); }
+.hud-tl .sub { text-transform: none; }
+
+/* switches on the stage: “Post-dream logic upgrade / pipeline flush” and the record overlap */
+.stagectl {
+  position: absolute; left: 0; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px;
+  padding: 5px 8px; border: 1px solid var(--line-hot); background: color-mix(in srgb, var(--void) 80%, transparent);
+}
+.stagectl .cap { font-size: 11px; color: var(--ink); letter-spacing: 0.02em; line-height: 1.25; }
+.stagectl .chips { gap: 4px; flex-wrap: nowrap; }
+.stagectl .chip { padding: 3px 10px; font-size: 11px; text-transform: none; letter-spacing: 0.02em; }
+/* the learned facts are named by lower-case variables (f₁, f_dup): the theme's upper-case chips would change them */
+#factChips .chip { text-transform: none; letter-spacing: 0.02em; }
+.stagectl .chip { white-space: nowrap; }
+/* a narrow free column: the caption above the chips, the chips without their explanations */
+.stagectl.tight { flex-direction: column; align-items: flex-start; }
+.stagectl.tight .paren { display: none; }
+
+/* the episode-cache card: a MODEL box on the stage (the standard .lean.model badge), never green */
+.cachecard {
+  position: absolute; left: 0; top: 0; z-index: 2; background: color-mix(in srgb, var(--void) 84%, transparent);
+  line-height: 1.32; font-size: 11px; padding: 5px 8px;
+}
+.cachecard .row { display: block; font-family: var(--font-data); font-size: 11px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cachecard .row.head { font-family: var(--font-body); color: var(--dim); white-space: normal; }
+.cachecard .row.verdict { font-size: 12px; font-weight: 600; white-space: normal; }
+.cachecard .dim { color: var(--dim); }
+
+@media (max-width: 640px) {
+  .hud-tl { top: 42px; max-width: calc(100% - 32px); left: 14px; }
+  .hud-tl .big { font-size: 12.5px; line-height: 1.2; }
+  .hud-tl .sub { font-size: 11px; line-height: 1.25; }
+  .hud-tr { top: 10px; right: 12px; }
+  .stagectl .cap { font-size: 10.5px; }
+  .stagectl .chip { padding: 3px 8px; font-size: 10.5px; }
+  .cachecard .row { font-size: 10.5px; }
+}
+@media (max-width: 560px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(640px, 84vh) auto auto; }
+}

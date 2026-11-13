@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//LEDGER · Observer escape ledger, preimage fibers and Hilbert–Zeckendorf entropy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//LEDGER 观察者逃逸账本 · 原像纤维与希尔伯特—齐肯多夫熵</title>
+<meta name="description" content="16 态四比特闭合希尔伯特（Moore）空间填充回路上的观察者知识表 T、原像纤维 F_T(y)、有序逃逸对与无序逃逸弦、五引理语义闭包无损压缩（L₅ = b₀⊕b₁ 零新颖度）与四体奇偶校验协同盲区（L₄ = b₀⊕b₁⊕b₂⊕b₃ 缺失弹出 8 条跨格逃逸弦）、贝尔态局部边缘盲区、齐肯多夫黄金信道容量 log₂φ ≈ 0.69424 bits/sym 与清醒擦除热对照梦境等熵复相干。Observer knowledge table T on a 16-state 4-bit closed Hamiltonian Moore/Hilbert loop: preimage fibers F_T(y), ordered escapePairs vs unordered escape chords, zero-novelty semantic-closure compression (L₅ = b₀⊕b₁), 4-body XOR parity synergy escape (8 chords when L₄ drops), Bell local-marginal blind spot, Zeckendorf golden capacity log₂φ ≈ 0.69424 bits/sym, SMB cylinder contraction, and awake Landauer heat vs dream zero-heat recoherence.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="observer-escape-ledger">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//LEDGER">ORTHO<b>//</b>LEDGER</h1>
+      <div class="tagline">
+        <span class="zh">观察者逃逸账本 · <em>闭合希尔伯特回路上的原像纤维、逃逸弦、局部边缘盲区与齐肯多夫黄金容量</em></span>
+        <span class="en">Observer escape ledger · <em>preimage fibers, escape chords, marginal blind spots &amp; Zeckendorf capacity on a closed Hilbert loop</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillFibers"><span class="zh">纤维</span><span class="en">FIBERS</span> <strong>16</strong></span>
+      <span class="pill" id="pillChords"><span class="zh">逃逸弦</span><span class="en">CHORDS</span> <strong>0</strong></span>
+      <span class="pill hot" id="pillEscape">H₂ <strong>0.000b</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="hilbert" aria-pressed="true"><span class="code">CLOSED-HILBERT</span><span class="cn zh">闭合希尔伯特环：五引理零逃逸</span><span class="cn en">Closed Hilbert loop: 5-lemma zero escape</span></button>
+        <button class="preset" data-preset="novelty" aria-pressed="false"><span class="code">ZERO-NOVELTY</span><span class="cn zh">关闭冗余 L₅：零新颖度无损压缩</span><span class="cn en">Drop L₅ = b₀⊕b₁: zero-novelty compression</span></button>
+        <button class="preset" data-preset="escape" aria-pressed="false"><span class="code">XOR-SYNERGY</span><span class="cn zh">关闭四体奇偶 L₄：弹出 8 条逃逸弦</span><span class="cn en">Drop 4-body parity L₄: 8 escape chords</span></button>
+        <button class="preset" data-preset="marginal" aria-pressed="false"><span class="code">BELL-BLIND-SPOT</span><span class="cn zh">局部边缘盲区：贝尔态对照混合态</span><span class="cn en">Marginal blind spot: Bell |Φ⁺⟩ vs ρ_mix</span></button>
+        <button class="preset" data-preset="zeckendorf" aria-pressed="false"><span class="code">GOLDEN-CAPACITY</span><span class="cn zh">齐肯多夫黄金容量与柱集收缩</span><span class="cn en">Zeckendorf log₂φ capacity &amp; SMB cylinders</span></button>
+        <button class="preset" data-preset="dream" aria-pressed="false"><span class="code">DREAM-RECOHERE</span><span class="cn zh">清醒兰道尔擦除热对照梦境复相干</span><span class="cn en">Awake Landauer heat vs dream recoherence</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">观察者引理快表 T</span><span class="en">Observer lemma table T</span><span class="aside">5 LEMMAS · N=16</span></h2>
+      <div class="chips" id="modeChips" role="group" aria-label="左舞台模式" data-aria-en="Left-stage mode">
+        <button class="chip" data-mode="arena" aria-pressed="true"><span class="zh">16 态希尔伯特环</span><span class="en">16-state Hilbert loop</span></button>
+        <button class="chip" data-mode="marginal" aria-pressed="false"><span class="zh">贝尔边缘盲区</span><span class="en">Bell marginal blind spot</span></button>
+      </div>
+      <div class="chips" id="lemmaChips" role="group" aria-label="布尔引理开关 L₁ 至 L₅" data-aria-en="Boolean lemma toggles L₁ to L₅">
+        <button class="chip" data-lemma="0" aria-pressed="true"><span class="m">L₁: b₀</span></button>
+        <button class="chip" data-lemma="1" aria-pressed="true"><span class="m">L₂: b₁</span></button>
+        <button class="chip" data-lemma="2" aria-pressed="true"><span class="m">L₃: b₂</span></button>
+        <button class="chip" data-lemma="3" aria-pressed="true"><span class="m">L₄: ⊕₄b</span></button>
+        <button class="chip" data-lemma="4" aria-pressed="true"><span class="m">L₅: b₀⊕b₁</span></button>
+      </div>
+      <div class="chips" id="qStateChips" role="group" aria-label="二量子比特比较态" data-aria-en="Two-qubit comparison state" hidden>
+        <button class="chip" data-qstate="bell" aria-pressed="true"><span class="m">|Φ⁺⟩⟨Φ⁺|</span></button>
+        <button class="chip" data-qstate="classical" aria-pressed="false"><span class="m">ρ_cl = ½(|00⟩⟨00|+|11⟩⟨11|)</span></button>
+        <button class="chip" data-qstate="mix" aria-pressed="false"><span class="m">ρ_mix = ¼I₄</span></button>
+      </div>
+      <p class="note"><span class="zh">点击开关任意子集 T ⊆ {L₁…L₅}（共 32 种商核）：L₄ 为四体全局异或 b₀⊕b₁⊕b₂⊕b₃；L₅ = b₀⊕b₁ 在 L₁, L₂ 同时开启时落入语义闭包，贡献 0 条唯一捕获弦。</span><span class="en">Toggle any subset T ⊆ {L₁…L₅} (all 32 quotient kernels): L₄ is 4-body parity b₀⊕b₁⊕b₂⊕b₃; L₅ = b₀⊕b₁ lies in the semantic closure of {L₁, L₂}, contributing 0 unique-capture chords when both stay ON.</span></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">柱集裁切与擦除模态</span><span class="en">Cylinder cut &amp; erasure mode</span><span class="aside">SMB · LANDAUER</span></h2>
+      <div class="field">
+        <label for="cutK"><span class="zh">约束卸载深度 Δk</span><span class="en">Constraint cut depth Δk</span><small class="zh">MODEL 基准回弹 2^(+Δk·h_μ)</small><small class="en">MODEL rebound 2^(+Δk·h_μ)</small></label><output id="oCutK" for="cutK">0</output>
+        <input type="range" id="cutK" min="0" max="8" step="1" value="0">
+      </div>
+      <div class="chips" id="rateChips" role="group" aria-label="柱集熵率基准" data-aria-en="Cylinder entropy-rate benchmark">
+        <button class="chip" data-rate="golden" aria-pressed="true"><span class="zh"><span class="m">log₂φ</span> 0.694b</span><span class="en"><span class="m">log₂φ</span> 0.694b</span></button>
+        <button class="chip" data-rate="dottie" aria-pressed="false"><span class="zh"><span class="m">−log₂sin θ*</span> 0.570b</span><span class="en"><span class="m">−log₂sin θ*</span> 0.570b</span></button>
+      </div>
+      <p class="note"><span class="zh">清醒第 5 阶段把丢弃的记录比特排入热浴，至少支付 ΔQ = k_B T ln 2 · N_erase；梦境第 4 阶段保留局部记录相干访问并施加伴随逆演 U_copy†，零热耗散复相干。</span><span class="en">Awake Stage-5 flushes discarded record bits into a bath, paying at least ΔQ = k_B T ln 2 · N_erase; Dream Stage-4 retains coherent record access and applies U_copy† for zero-heat isentropic recoherence.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：4×4 闭合希尔伯特回路、原像纤维与逃逸弦、局部边缘盲区，以及三联信息守恒与齐肯多夫容量账本" data-aria-en="Stage: 4×4 closed Hilbert loop, preimage fibers and escape chords, local-marginal blind spot, and conservation plus Zeckendorf capacity ledger">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景切换" data-aria-en="Scene switcher">
+        <button class="chip" data-scene="duo" aria-pressed="true"><span class="zh">双栏</span><span class="en">Twin</span></button>
+        <button class="chip" data-scene="lattice" aria-pressed="false"><span class="zh">回路</span><span class="en">Loop</span></button>
+        <button class="chip" data-scene="ledger" aria-pressed="false"><span class="zh">账本</span><span class="en">Ledger</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="SMB 柱集测度指数收缩与裁切深度 Δk 回弹曲线" data-aria-en="SMB cylinder measure contraction and Δk cut-rebound plot"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="齐肯多夫 14 比特避碰上界与清醒兰道尔擦除热对照图" data-aria-en="Zeckendorf 14-bit avoidance bound and awake vs dream heat plot"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="wide"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="wide"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div class="wide"><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">删去任一引理 i 后的有序逃逸对集合恒等于全表逃逸对与该引理唯一捕获对的无交并，且唯一捕获对恰为两者集合差。已冻结：</span><span class="en">Removing lemma i decomposes ordered escape pairs into full-catalog escape pairs union its unique-capture pairs, which equal their exact set difference. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union" href="#" target="_blank" rel="noopener"><code>escapePairs_without_eq_union</code></a> · <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/EscapePairs.uniqueCapturePairs_eq_sdiff" href="#" target="_blank" rel="noopener"><code>uniqueCapturePairs_eq_sdiff</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">非退化状态场上，单条引理严格压低逃逸率当且仅当联合商核严格细化（即该引理提供语义闭包之外的严格商核新颖度）。已冻结：</span><span class="en">On any nondegenerate arena, a lemma strictly lowers the escape rate iff inserting its quotient cut strictly refines the joint kernel outside semantic closure. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.structurallyLowersEscape_iff_lowersEscape" href="#" target="_blank" rel="noopener"><code>structurallyLowersEscape_iff_lowersEscape</code></a> · <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty" href="#" target="_blank" rel="noopener"><code>lowersEscape_iff_strict_kernel_novelty</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">二体无迹厄米空间正交直和分解为局部边缘扇区与关联扇区（两量子比特下关联维数占 9/15 = 3/5），贝尔纯态与经典关联混态共享完全相同的 ½I 局部边缘。已冻结：</span><span class="en">Bipartite traceless Hermitian space splits orthogonally into local-marginal and correlation sectors (9/15 = 3/5 for two qubits); Bell and classical correlated states share identical ½I marginals. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot" href="#" target="_blank" rel="noopener"><code>local_marginal_correlation_blind_spot</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">长度 H 的无邻 1 合法二进制字中避开 14 比特语境替换块 B₁ 的字数恒满足非渐近上界 φ^(H+1)·(1 − φ⁻¹⁴)^⌊H/14⌋。已冻结：</span><span class="en">Among length-H binary words with no adjacent ones, those avoiding the 14-bit block B₁ are bounded for every H by φ^(H+1)·(1 − φ⁻¹⁴)^⌊H/14⌋. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/Digit/ZeckendorfAvoidanceCount.uniform_avoidance_count" href="#" target="_blank" rel="noopener"><code>uniform_avoidance_count</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">任意离散概率质量函数下，若细化概念通过因子映射精细于粗糙概念，则对任意目标概念的条件逻辑不纯度单调不增。已冻结：</span><span class="en">Under any discrete PMF, whenever a refined concept factors onto a coarse concept, conditional logical impurity toward any target is monotonically non-increasing. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity.refinement_impurity_monotone" href="#" target="_blank" rel="noopener"><code>refinement_impurity_monotone</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：Shannon–McMillan–Breiman 定理：对遍历的平稳测度 μ，μ-几乎处处有 −(1/k) log₂ μ(Cₖ(x)) → h_μ，即 μ(Cₖ(x)) = 2^(−k h_μ + o(k))（Shannon 1948；McMillan 1953；Breiman 1957）；黄金均值移位最大熵 Parry 平稳测度（Parry 1964），给出容量 log₂φ ≈ 0.69424 bits/symbol 与符号 1 平稳频率 p₁ = 1/(φ√5) ≈ 0.27639，以及 Frougny（1992）有限状态进位正规化；Hilbert（1891）空间填充曲线与 1/d 阶 Hölder 局部性界；兰道尔擦除热力学下界 ΔQ ≥ k_B T ln 2 · N_erase（Landauer 1961）。</span><span class="en">Literature results, not formalized in this book: the Shannon–McMillan–Breiman theorem: for an ergodic stationary measure μ, −(1/k) log₂ μ(Cₖ(x)) → h_μ for μ-almost every x, i.e. μ(Cₖ(x)) = 2^(−k h_μ + o(k)) almost surely (Shannon 1948; McMillan 1953; Breiman 1957); Parry's (1964) maximal-entropy golden-shift measure yielding capacity log₂φ ≈ 0.69424 bits/symbol and 1-density p₁ = 1/(φ√5) ≈ 0.27639, alongside Frougny's (1992) finite-state normalization; Hilbert's (1891) space-filling curve and Hölder-1/d locality bound; Landauer's (1961) erasure heat floor ΔQ ≥ k_B T ln 2 · N_erase.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">观察者记忆指针与逃逸账本诠释模型：将 16 态闭合 Moore/Hilbert 哈密顿回路（每步 d_in = d_out = 1）映射为指针扫描轨迹，在均匀先验下把账本保留信息 I_ledger(T) 与条件 Rényi-2 碰撞逃逸熵 H₂^escape(S|T) = log₂(1 + (N−1)E(T)) 合成为 H_total = 4 bits 守恒；对照清醒第 5 阶段热浴不可逆擦除与梦境第 4 阶段伴随幺正零热复相干，并以 −log₂sin θ* ≈ 0.570 bits/step 对照黄金熵率 0.694 bits/step。图中的直线 log₂ μ = −k h_μ 与有限窗口回弹 2^(+Δk·h_μ) 是基准模型曲线：SMB 只给出几乎处处的渐近斜率（误差 o(k)），不给出有限 k 上的等式。</span><span class="en">Observer pointer and escape-ledger model: mapping the 16-state closed Hamiltonian Moore/Hilbert cycle (d_in = d_out = 1) to pointer traversal, pairing ledger information I_ledger(T) with conditional Rényi-2 collision escape entropy H₂^escape(S|T) = log₂(1 + (N−1)E(T)) in the H_total = 4 bits balance, contrasting Awake Stage-5 thermal erasure with Dream Stage-4 unitary zero-heat recoherence, and comparing −log₂sin θ* ≈ 0.570 bits/step against log₂φ ≈ 0.694 bits/step. The plotted straight line log₂ μ = −k h_μ and the finite-window rebound 2^(+Δk·h_μ) are benchmark model curves: SMB gives only the almost-sure asymptotic slope (error o(k)), not an equality at finite k.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：N = 16 上全部 2⁵ = 32 个布尔引理子集的原像纤维划分、有序逃逸对（总对数 N(N−1) = 240）、无序逃逸弦（总弦数 C(16,2) = 120）、留一唯一捕获数及无邻 1 合法字 DP 计数均为精确整数运算；对数熵 H₂^escape、黄金容量 log₂φ、−log₂sin θ* 与 Parry 概率采用 IEEE-754 双精度实算并按显示位数舍入。</span><span class="en">A numerical illustration on the page, not a proof: preimage fiber partitions, ordered escapePairs (out of N(N−1) = 240), unordered canvas chords (out of C(16,2) = 120), leave-one-out uniqueCapture counts across all 2⁵ = 32 subsets on N = 16, and legal-word DP counts use exact integers; H₂^escape, log₂φ, −log₂sin θ*, and Parry probabilities use IEEE-754 double precision rounded to displayed digits.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到回路起点" data-aria-en="Back to loop start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停指针巡检" data-aria-en="Play / pause pointer scan" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="扫描速度" data-aria-en="Scan speed">
+        <button class="chip" data-speed="0.4" aria-pressed="false">0.4×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="16" step="any" value="0" aria-label="时间轴：闭合希尔伯特回路步进指标 k（0 至 16 闭合回环）" data-aria-en="Rail: closed Hilbert loop step index k (0 to 16 full cycle)">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>3</kbd> <span class="zh">场景</span><span class="en">scene</span> · <kbd>M</kbd> <span class="zh">模式</span><span class="en">mode</span> · <kbd>L</kbd> <span class="zh">切换 L₄</span><span class="en">toggle L₄</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 观察者逃逸对、原像纤维与希尔伯特—齐肯多夫熵账本</span><span class="en">Theory interface · observer escape pairs, preimage fibers and Hilbert–Zeckendorf entropy</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">有限位宽的观察者指针在静态本体 QRAM 上滑行时，不可能把全宇宙状态逐格深拷贝进私有缓存，而只能用一组有限引理快表 T 将状态空间划分为原像纤维 F_T(y)。本页在同一座 16 态四比特闭合希尔伯特（Moore）哈密顿回路上联立展示原像纤维、跨格逃逸弦、五引理语义闭包压缩、局部边缘盲区、齐肯多夫黄金容量与清醒/梦境热账本。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>有序逃逸对、无序逃逸弦与碰撞逃逸熵。</b>在 N = 16（n = 4 bits）状态集 S = {0,1}⁴ 上，非对角有序状态对 (s₁, s₂)（s₁ ≠ s₂）共 N(N−1) = 240 对，画布上的无序弦 {s₁, s₂} 共 C(16,2) = 120 条，恒满足 |EscapePairs_ord(T)| = 2·|EscapeChords_unord(T)|。因此归一化逃逸率 E(T) = |EscapePairs_ord(T)| / 240 = |EscapeChords_unord(T)| / 120 ∈ [0, 1] 在两种约定下完全一致；原像纤维平方和恒满足 ∑_y |F_T(y)|² = N + |EscapePairs_ord(T)| = 16·(1 + 15·E(T))，给出均匀先验下的精确条件 Rényi-2 碰撞逃逸熵 H₂^escape(S|T) = log₂(1 + 15·E(T)) ∈ [0, 4] bits，与账本保留信息 I_ledger(T) = 4 − H₂^escape(S|T) 严格闭合为 H_total = 4.000 bits。</li>
+        <li><b>语义闭包零新颖度压缩 vs 四体异或高阶逃逸。</b>五条显式布尔引理取 L₁(s)=b₀、L₂(s)=b₁、L₃(s)=b₂、四体全局奇偶 L₄(s)=b₀⊕b₁⊕b₂⊕b₃ 与派生引理 L₅(s)=b₀⊕b₁。当 L₁, L₂ 开启时，L₅ 属于其余引理的语义闭包，删去 L₅ 的唯一捕获集为空（uniqueCapturePairs = ∅，StructuralNovelty = 0），逃逸弦保持 0 条（无损秩压缩）；反之，在 {L₁, L₂, L₃, L₄} 中关掉 L₄，8 个单点纤维两两合并为大小 2 的纤维，瞬间弹出恰好 8 条无序跨格逃逸弦（16 个有序逃逸对），H₂^escape 从 0 跃升至 1.000 bit，而全部四个单比特边缘分布仍保持均匀 1/2！这与二量子比特贝尔态 |Φ⁺⟩ 同经典混态共享完全一致的 ½I₂ 局部边缘、把关联藏进占 9/15 = 60% 维数的正交关联扇区（LEAN ✓）同构呼应。</li>
+        <li><b>闭合希尔伯特回路、齐肯多夫黄金容量与 SMB 柱集收缩。</b>左栏 4×4 闭环采用每步曼哈顿距离恒为 1（d_in = d_out = 1）的闭合 Moore/Hilbert 哈密顿圈（Hilbert 1891，1/d 阶 Hölder 局部性，文献结果）。沿闭环无邻 1 约束（w_t·w_{t+1} = 0）编码历史轨迹时，信道容量从原始 1.000 bit/symbol 降至黄金容量 log₂φ ≈ 0.69424 bits/symbol（支付 0.30576 bits 抗共振稳定税；Parry 最大熵测度给出 p₁ = 1/(φ√5) ≈ 0.2764，文献结果），且避开 14 比特替换块 B₁ 的字数受 φ^(H+1)(1 − φ⁻¹⁴)^⌊H/14⌋ 严格约束（LEAN ✓）。按 SMB 定理，μ-几乎处处 −(1/k) log₂ μ(Cₖ(x)) → h_μ（文献结果）；以直线 log₂ μ = −k h_μ 为基准（MODEL），卸载 Δk 层局部约束时相容柱集测度按 2^(+Δk·h_μ) 回弹（MODEL 基准，略去 o(k) 误差）；梦境第 4 阶段以伴随逆演 U_copy† 实现 ΔQ = 0 等熵复相干，区别于清醒第 5 阶段的兰道尔热耗散 ΔQ ≥ k_B T ln 2 · N_erase（MODEL）。</li>
+        <li><b>已验证的部分。</b>逃逸对留一无交并分解、唯一捕获集差恒等式、逃逸率严格下降与商核严格新颖度等价判据、二体局部边缘与关联扇区正交盲区分解、齐肯多夫 14 比特避碰一致上界，以及因子细化下条件逻辑不纯度单调不增，均已由 Lean 4 内核验证并冻结（见右侧五个绿色 LEAN ✓ 框）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-observer-escape-ledger" target="_top">第三十八章 §38.5 · 观察者逃逸账本与齐肯多夫熵</a> · <a href="../../zh/ch13-entanglement-and-chsh.html#thm-local-correlation-sectors" target="_top">第十三章 · 局部边缘盲区定理</a> · <a href="../../zh/ch08-erasure-and-time-arrows.html#sec-landauer-principle-geometry" target="_top">第八章 §8.2 · 兰道尔擦除账本</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">As a finite-width observer pointer glides across static ontological QRAM, it cannot deep-copy the whole universe into private cache; instead, its finite lemma table T partitions state space into preimage fibers F_T(y). On a single 16-state 4-bit closed Hamiltonian Moore/Hilbert loop, this lab unites preimage fibers, cross-lattice escape chords, semantic-closure compression, local-marginal blind spots, Zeckendorf golden capacity, and the awake/dream heat ledger. It is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Ordered escapePairs, unordered chords, and Rényi-2 collision escape entropy.</b> On S = {0,1}⁴ (N = 16, n = 4 bits), off-diagonal ordered pairs (s₁, s₂) total N(N−1) = 240 while unordered canvas chords {s₁, s₂} total C(16,2) = 120, obeying |EscapePairs_ord(T)| = 2·|EscapeChords_unord(T)|. The normalized escape rate E(T) = |EscapePairs_ord(T)| / 240 = |EscapeChords_unord(T)| / 120 ∈ [0, 1] is identical under both conventions, and ∑_y |F_T(y)|² = N + |EscapePairs_ord(T)| = 16·(1 + 15·E(T)) yields the exact uniform-prior conditional Rényi-2 collision escape entropy H₂^escape(S|T) = log₂(1 + 15·E(T)) ∈ [0, 4] bits, closing H_total = I_ledger(T) + H₂^escape(S|T) = 4.000 bits.</li>
+        <li><b>Zero-novelty closure compression vs 4-body XOR synergy escape.</b> Our five concrete boolean lemmas are L₁(s)=b₀, L₂(s)=b₁, L₃(s)=b₂, 4-body global parity L₄(s)=b₀⊕b₁⊕b₂⊕b₃, and derived L₅(s)=b₀⊕b₁. With L₁ and L₂ ON, L₅ lies in the semantic closure of the remaining table, so dropping L₅ has uniqueCapturePairs = ∅ (StructuralNovelty = 0) and adds 0 escape chords (lossless rank compression). Conversely, turning L₄ OFF while {L₁, L₂, L₃} stay ON merges all 8 pairs into size-2 fibers, popping exactly 8 unordered cross-lattice escape chords (16 ordered pairs) and raising H₂^escape from 0 to 1.000 bit while every single-bit marginal stays uniform at 1/2—mirroring how two-qubit Bell |Φ⁺⟩ and classical mixtures share identical ½I₂ marginals while hiding correlations inside the 9/15 = 60% orthogonal correlation sector (LEAN ✓).</li>
+        <li><b>Closed Hilbert loop, Zeckendorf golden capacity, and SMB cylinder rebound.</b> The left 4×4 grid is traversed by a closed Hamiltonian Moore/Hilbert cycle with unit grid steps (d_in = d_out = 1; Hilbert 1891 Hölder-1/d locality, literature). Encoding history words under the Zeckendorf no-adjacent-ones rule (w_t·w_{t+1} = 0) lowers channel capacity from 1.000 bit/symbol to log₂φ ≈ 0.69424 bits/symbol (a 0.30576-bit anti-resonance stability tax, with Parry 1964 stationary 1-density p₁ = 1/(φ√5) ≈ 0.2764, literature), while 14-bit block-B₁ avoidance obeys the exact bound φ^(H+1)(1 − φ⁻¹⁴)^⌊H/14⌋ (LEAN ✓). By the SMB theorem, −(1/k) log₂ μ(Cₖ(x)) → h_μ for μ-almost every x (literature); on the benchmark line log₂ μ = −k h_μ (MODEL), releasing Δk constraints rebounds compatible cylinder measure by 2^(+Δk·h_μ) (a MODEL benchmark that drops the o(k) error); Dream Stage-4 uncomputes local records via U_copy† at zero heat (ΔQ = 0), contrasting Awake Stage-5 Landauer heat ΔQ ≥ k_B T ln 2 · N_erase (MODEL).</li>
+        <li><b>What is verified.</b> Leave-one-out disjoint-union decomposition of escapePairs, the set-difference formula for uniqueCapturePairs, the equivalence between strictly lowering escape rate and strict quotient-kernel novelty, bipartite local-marginal vs correlation orthogonal decomposition, the uniform 14-bit Zeckendorf avoidance bound, and refinement monotonicity of conditional logical impurity are kernel-verified Lean 4 theorems (the five green LEAN ✓ boxes).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-observer-escape-ledger" target="_top">Chapter 38 §38.5 · Observer escape ledger &amp; Zeckendorf entropy</a> · <a href="../../en/ch13-entanglement-and-chsh.html#thm-local-correlation-sectors" target="_top">Chapter 13 · Local-marginal blind spot</a> · <a href="../../en/ch08-erasure-and-time-arrows.html#sec-landauer-principle-geometry" target="_top">Chapter 8 §8.2 · Landauer erasure ledger</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+/* ORTHO//EXPAND: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this
+   visualization alone lives here; colours come from the tokens (var(--cyan) …), never from hex values. */
+#cv { cursor: grab; touch-action: none; }
+.stage.still #cv { cursor: default; touch-action: auto; }
+.m, .chip .m, .tour .what b .m { text-transform: none; font-family: var(--font-data); letter-spacing: 0.02em; }
+.chip { text-transform: none; }
+.sw.ink { background: var(--sigma); }
+.sw.box.hollow { background: transparent; border: 1.5px solid var(--magenta); }
+.sw.box.dm { background: var(--faint); border: 1px solid var(--line-hot); }
+.tag.vi { color: var(--violet); font-size: 12px; }
+.hud-bl b.lb { font-weight: inherit; }
+.preset .m { white-space: nowrap; }
+#readouts dl.ro .key dd b { font-size: 16.5px; }
+.tag sub, .hud-tl sub, dl.ro sub, .hud-bl sub { font-size: 0.72em; line-height: 0; vertical-align: -0.3em; }
+.tag.num sub { font-size: 0.8em; }
+:root:not([data-shot]) .hud-tl { max-width: calc(100% - 170px); }
+@media (max-width: 560px) {
+  .hud-tr { top: 10px; right: 12px; }
+  #stageCam .chip { padding: 3px 7px; font-size: 10.5px; }
+  :root:not([data-shot]) .hud-tl, .hud-tl { top: 12px; left: 14px; right: 14px; max-width: calc(100% - 128px); }
+  .hud-tl .big { font-size: 12.5px; line-height: 1.2; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.25; }
+}

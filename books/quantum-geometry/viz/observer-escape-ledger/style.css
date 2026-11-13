@@ -1,0 +1,20 @@
+/* ORTHO//LEDGER: shared lab layout (../assets/theme.css) carries the page.
+   Only page-specific pointer cursor, legend swatches, and mobile HUD spacing live here; zero hardcoded hex colours. */
+#cv { cursor: pointer; touch-action: manipulation; }
+.sw.cy { background: var(--cyan); }
+.sw.mg { background: var(--magenta); }
+.sw.vi { background: var(--violet); }
+.sw.am { background: var(--amber); }
+.sw.ink { background: var(--sigma); }
+.sw.dash.dm { background: repeating-linear-gradient(90deg, var(--dim) 0 4px, transparent 4px 7px); }
+.chip .m { text-transform: none; font-family: var(--font-data); letter-spacing: 0.02em; }
+:root:not([data-shot]) .hud-tl { max-width: calc(100% - 210px); }
+@media (max-width: 560px) {
+  :root:not([data-embed]):not([data-figure]):not([data-thumb-mode]) .lab .center { grid-template-rows: minmax(590px, 68vh) auto auto; }
+  .hud-tr { top: 10px; right: 12px; }
+  #sceneChips { gap: 4px; }
+  #sceneChips .chip { padding: 3px 6px; font-size: 10px; letter-spacing: 0.04em; }
+  :root:not([data-shot]) .hud-tl, .hud-tl { top: 38px; left: 14px; right: 14px; max-width: calc(100% - 28px); }
+  .hud-tl .big { font-size: 12.5px; line-height: 1.18; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.2; }
+}
