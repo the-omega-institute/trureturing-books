@@ -1362,3 +1362,20 @@ EPUB、EPUBCheck 与 PDF 阅读尺度子集未完成：本次可用的命名系�
 按 `./tbook fig shots` 生成并实际查看了中英文各三图的 dark、light、phone、print 四种 live SVG/Chromium 画面，共 24 个单图画面（证据根 `fig-shots/`）。22 个画面文字、线条、颜色角色和主体清楚；中英文 `ch20-parity-labels` 的 print 画面各有同一既有生产器边界：右栏标题与绿色徽章在画布右缘被截断。该限制已记录，未以任意布局或字体修补掩盖。手机最小标签由 `fig list` 给出：`ch20-overview` 12.0 px、`ch20-parity-labels` 12.5 px、`ch32-quarter-turns` 10.6 px。浏览器画面不是实际 HTML/PDF/EPUB/native 书籍导出；本次实际书籍导出、原生阅读器与下游独立审查仍待调用方完成。
 
 画面运行时为任务局部只读复用的 Playwright Chromium（`--use-angle=swiftshader`）；`fig-shots` 注入并加载 `@fontsource/noto-sans-sc`（400/500/700）与 `@fontsource/jetbrains-mono`（400/600），SVG 声明的其余 CJK／等宽候选作为 fallback 保留，未修改全局字体或设置。完整 2166 项显式输入清单无缺项、无增删；除上述六个 SVG 外，其余清单 SHA／种类／链接目标保持，发布托管对应仍以既有 `caller-source-published-conservation.json` 为准。旧 PDF Example 22.27 分式碰撞、受影响 HTML/PDF/EPUB/native 输出、独立下游审查、CI/PR 合入与 Pages 仍未结；本段不构成整书批准。
+
+
+## 2026-11-13：影片 006 严格短语计时修订（待独立审查）
+
+输入为 PR231 的 `7368ce1f179dd6ef3141814aa3a0cdde2b772a58`，已整合主线 `347ef8d1448e3642b7965b37ee24245ba3eca633`，模板 0.8.2 对应正式发布 `85e533c20bad105dbb6999b2919bda2a6ddcb1d1`；当前 pin 为 `e526f0f5e3a1e84b05f05c0c009eab920bc3a06f`／dev、549 项声明。整书仍为每语 45 单元、90 个语言行。本次只处理影片 006 的已确认计时消费者，不增加内容覆盖或整书批准。
+
+一次原样选片构建 `./tbook build films --book quantum-geometry --film 006-sphere-beyond-spheres` 在严格管线复现失败：旁白、配乐与混音完成后，`build.py` 因 `SCENES.cosine` 第 3 句不含 `Near it` 而以退出码 1 停止，未进入截帧。旧 CI43383048573／job131746875843 的失败阶段为 Films(2/4) 的 Build film shard；本地复现走同一严格检查路径，但未读取旧 CI 原始日志，故不能排除该 shard 中影片 002／010 的其他失败，也不宣称远端原因已完全归属。
+
+仅将 `scenes.js:485` 的 `[3, 'Near it', 'argued']` 改为 `[3, null, 'argued']`，明确以现有旁白第 3 句句首为时刻。该句以 `Starting from one radian` 开始；其“没有一步恰好落上”和渐近误差率均置于紫色论证状态。旧短语的原设计及非严格回退也在句首，因此不移动原有画面时序，不改旁白、字幕、数学、颜色或版式。源码 SHA-256 从 `2e12f5113b35253fa1fb20ba512ba17525a5bb30fb0fbe38922ea77b913f2655` 变为 `cbd5bc4378d276b23db647e40ac8ee7baf8bc09901da2e6214f0ce6d59ac21fa`，权限仍为 `100644`。未关闭或绕过严格检查。
+
+对应的一次选片严格构建退出码 0：4517 帧，720p H.264／30fps、AAC 48 kHz 双声道，成片 150.567 秒、15043241 字节，SHA-256 为 `817d73f8b945e71b7b6f0f7e130791a8cf544d7fd0d6825d0fa8f28ee944bb30`；封面为 1920×1080。静态短语问题为 0，严格引擎检查与余弦场景 1218 帧检查均无 `FILM_ERRORS`，6 句英文及中文字幕与现有文稿对应。正式截图步骤一次检查 121.8／122.3／122.8／125.6 秒和海报：122.139 秒句首前为绿色 Lean 状态，之后为紫色论证状态及收敛率面板。成片也抽看了 121.8／122.8 秒两帧；此证据不等同全片听读或原生播放器验收。
+
+现有 `poster.jpg` 的实际像素已查看并保持原字节；其 pin 戳仍为 `a767dce5`，本次正式海报截图及构建封面为 `e526f0f5`。海报绘制不使用本次余弦计时消费者，故旧戳漂移记为未修建议，不以单点改戳掩盖。`film.json` 标注 2:28 而本次实测约 2:31，也保持未修。历史制作提交 `6cfcf785096782b15084d719ec73c2ca16b6ed29` 原样保留。运行时仅复用已声明的视频缓存、依赖与现有可执行程序；临时依赖链接已移除，未安装任何依赖、字体、模型或工具链，未制作其他影片。
+
+最终一次非媒体 `./tbook check` 为 **0 错误／14 警告**，仅本次已确认的短语警告从原 15 条中关闭，其他警告保留。证据位于 `/private/tmp/qg-template082-film006-strict-phrase-20261113/evidence/` 的 `media-result.json`、`media-invocation-receipt.json`、`final-tbook-check.result.json` 与 `final-conservation.json`；媒体载体诊断保持不透明。完整 2166 路径清单、HEAD／索引与台账前缀按原输入核对，托管文件未手改；最终差异只允许本句计时修订与本台账追加。
+
+本次 assignment 总 1／已用 1／余 0；直接媒体调用、诊断复现、最小修订、对应选片验证渲染、正式截图／海报检查各 1／1，额外任务、安装、整书导出均为 0，最终整书输出保留 1 未使用，旧已花额度不重置。当前独立审查、首次 R1 的仍适用缺口、其余媒体及整书 HTML／PDF／EPUB 与原生阅读、两项 parity-print clipping 限制、远端当前候选 CI、合入及 Pages 仍待相应责任方完成。本记录不作独立审查、整单元、整书或目标完成声明。
