@@ -307,7 +307,7 @@ $$
 
 这条充分性结果比 [@prop-orthogonal-syndrome-recovery] 多做了三件事：系数矩阵 $c$ 可以先有非对角相干，再由谱旋转变成正交房间；零谱权重被明确移除，而不是假设每个错误分支都有正概率；恢复族在物理空间的剩余正交补上补齐，因此归一式确实覆盖整个物理输入。它仍然只是一族**有限** Kraus 矩阵的结论，不声称一般捆绑量子信道都有有限 Kraus 表示，也不给出恢复时间或噪声鲁棒性界。
 
-**普通编码记号下的纸面代入（应用推导，不是新增的 Lean 专门检查）。** 令 $V\in M_{n\times d}(\mathbb{C})$ 满足 $V^*V=I_d$，令物理误差 $E_i\in M_n(\mathbb{C})$ 满足 $\sum_iE_i^*E_i=I_n$，并设 $F_i=E_iV\in M_{n\times d}(\mathbb{C})$。若逻辑 Knill–Laflamme 条件为
+**普通编码记号下的纸面代入（应用推导，不是新增的 Lean 专门检查）。** 设物理维数 $n$ 与逻辑维数 $d$ 都是有限正整数，误差指标集 $s$ 有限。令 $V\in M_{n\times d}(\mathbb{C})$ 满足 $V^*V=I_d$，令物理误差族 $(E_i)_{i\in s}$ 中的 $E_i\in M_n(\mathbb{C})$ 满足 $\sum_iE_i^*E_i=I_n$，并设 $F_i=E_iV\in M_{n\times d}(\mathbb{C})$。若逻辑 Knill–Laflamme 条件为
 
 $$
 V^*E_i^*E_jV=\alpha_{ij}I_d,
@@ -321,7 +321,7 @@ F_i^*F_j=V^*E_i^*E_jV=\alpha_{ij}I_d,
 \sum_iF_i^*F_i=V^*\left(\sum_iE_i^*E_i\right)V=V^*V=I_d.
 $$
 
-于是得到 $A_t\in M_{d\times n}(\mathbb{C})$，并对所有 $X\in M_d(\mathbb{C})$ 有
+取任意逻辑指标 $v\in\{1,\ldots,d\}$ 作为非空见证，于是得到某个有限 $r$ 与恢复族 $(A_t)_{t\in\mathrm{Fin}\,r}$，其中 $A_t\in M_{d\times n}(\mathbb{C})$ 且 $\sum_t A_t^*A_t=I_n$；并对每一个复矩阵 $X\in M_d(\mathbb{C})$ 有
 
 $$
 \sum_tA_t\left(\sum_iE_iVXV^*E_i^*\right)A_t^*=X.
@@ -713,7 +713,7 @@ $$
    P_{\mathcal{C}} E_i^* E_j P_{\mathcal{C}} = \alpha_{ij} P_{\mathcal{C}} \qquad (\forall i, j).
    $$
 
-   将 $\alpha$ 对角化后，即可在可纠子空间上化归为本章 [@prop-orthogonal-syndrome-recovery] 的正交综合征结构 $S_i^* S_j = \delta_{ij} I_d$，并且标量因子 $\alpha_{ij}$ 独立于码空间内的具体逻辑态，从根本上保证了综合征测量不会泄露任何逻辑叠加幅度。 本章的有限、矩形、充分性方向由 [@thm-finite-kraus-recovery-sufficiency] 承担；“对任意已给定 CPTP 恢复的必要性”则可直接查阅冻结源码 [`left_inverse_error_products`](https://github.com/the-omega-institute/trureturing/blob/9b6270e9795ed74542ab38e06a271f706174239c/D5/S3/Quantum/Recovery/KrausLeftInverseNecessity.lean#L82-L115)，本书只作来源说明，不另加定理盒。
+   将 $\alpha$ 对角化后，即可在可纠子空间上化归为本章 [@prop-orthogonal-syndrome-recovery] 的正交综合征结构 $S_i^* S_j = \delta_{ij} I_d$，并且标量因子 $\alpha_{ij}$ 独立于码空间内的具体逻辑态，从根本上保证了综合征测量不会泄露任何逻辑叠加幅度。 本章的有限、矩形、充分性方向由 [@thm-finite-kraus-recovery-sufficiency] 承担；对于非空逻辑空间，已给定有限 Kraus 表示、在整个物理空间上归一且在所有复逻辑矩阵上构成左逆的恢复，其必要性可直接查阅冻结源码 [`left_inverse_error_products`](lean:D5/S3/Quantum/Recovery/KrausLeftInverseNecessity.left_inverse_error_products)，本书只作来源说明，不另加定理盒。
 2. **Gottesman 稳定子码形式体系**（D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, Caltech Ph.D. thesis, 1997, arXiv:quant-ph/9705052）：在 $N$ 比特泡利群 $\mathcal{P}_N$ 中，取由 $N - k$ 个相互独立且两两对易的泡利生成元生成、阶为 $|\mathcal{S}| = 2^{N-k}$ 且不含 $-I^{\otimes N}$ 的阿贝尔子群 $\mathcal{S} \cong (\mathbb{Z}/2\mathbb{Z})^{N-k}$，其公共 $+1$ 特征子空间构成 $2^k$ 维码空间 $\mathcal{C}$。凡与 $\mathcal{S}$ 中某个生成元反对易的泡利错误算子均由二元辛内积唯一标记非零综合征；而在 $\mathcal{S}$ 的正规化子（即中心化子）$N(\mathcal{S})$ 中，商去全局标量相位中心群 $\langle i I^{\otimes N}\rangle = \{\pm I^{\otimes N}, \pm i I^{\otimes N}\}$ 与稳定子群 $\mathcal{S}$ 后，集合 $N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 中的算子代表商群 $N(\mathcal{S}) / (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 中的非平凡逻辑算子（商去标量相位排除了诸如 $-I^{\otimes N}$ 这类仅改变全局相位、泡利权重为 $0$ 的平凡中心元），码距 $d_{\mathrm{code}}$ 则严格定义为全体 $E \in N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 的最小泡利汉明权重。
 3. **二维配置空间辫群与任意子分数统计**（J. M. Leinaas and J. Myrheim, *On the theory of identical particles*, Nuovo Cimento B **37**, 1–23, 1977, doi:10.1007/BF02727953）：对欧氏空间 $M = \mathbb{R}^d$ 上 $n$ 个全同不可碰撞点粒子的配置空间 $\mathrm{Conf}_n(M) = \{(x_1, \dots, x_n) \in M^n : i \neq j \Rightarrow x_i \neq x_j\} / S_n$，当 $d \ge 3$ 时基本群同构于对称群 $\pi_1(\mathrm{Conf}_n(\mathbb{R}^d)) \cong S_n$（在一维幺正交换表示中，单次交换只能给出玻色 $+1$ 或费米 $-1$ 符号）；当 $d = 2$ 时，基本群为 Artin 辫群 $\pi_1(\mathrm{Conf}_n(\mathbb{R}^2)) \cong B_n$，允许连续阿贝尔任意子相位或非阿贝尔高维幺正编织表示。
 4. **非阿贝尔任意子与拓扑容错的物理边界**（C. Nayak, S. H. Simon, A. Stern, M. Freedman, and S. Das Sarma, *Non-Abelian anyons and topological quantum computation*, Rev. Mod. Phys. **80**, 1083–1159, 2008, doi:10.1103/RevModPhys.80.1083）：在具有能隙的二维拓扑物相中，非阿贝尔准粒子的简并融合空间对局域微扰具有随准粒子间距 $L$ 指数衰减的分裂保护 $\Delta E \propto e^{-L/\xi}$，世界线编织在简并子空间上诱导出满足 Yang–Baxter 关系的非平凡幺正门。这里的门操作要求任意子彼此充分分离，运动相对于体能隙保持绝热，同时在操作历时内不分辨有限间距带来的残余能级分裂。但需注意：首先，如正文所述，三维空间中点粒子交换回路可借第三空间轴解开，绝不意味着三维闭合一维绳结（knots）会自动解开；其次，拓扑保护在真实有限温度硬件中仍受热激发准粒子游走（thermal poisoning）与有限尺寸效应限制，并非在物理实现中绝对零错误。
