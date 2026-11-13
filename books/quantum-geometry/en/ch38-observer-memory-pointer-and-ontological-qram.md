@@ -238,7 +238,7 @@ Conjunct 1 evaluates both sides of the function equality $g(a_0) = \operatorname
 To see with complete concrete clarity how writing a page directory's base address into its own Slot `0` turns `p = *p` into pure finite discrete algebra, let us step through an explicit $N$-entry page directory by hand:
 
 ::: {.theorem #thm-ch38-recursive-page-table-walk title="Recursive Page-Table Walk: Data Lookup, Leaf Introspection, and Root Closure" lean="D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk"}
-Let `Address` be any type, let `lookup : Address \to \operatorname{Fin} N \to Address`, and choose a root address, a leaf address, a data address, and indices `selfSlot`, `i`, and `j`. If
+Let `Address` be any type, let `lookup : Address → Fin N → Address`, and choose a root address, a leaf address, a data address, and indices `selfSlot`, `i`, and `j`. If
 
 $$
 \operatorname{lookup}(root,selfSlot)=root,\qquad
