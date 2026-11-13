@@ -11,7 +11,7 @@
 // stage (the healing steps recomputed here from T + Δ), the rank of the 3 × 3 compression QᵀAQ by elimination matches
 // the shape drawn, the arrows are the rows, ψ and Tψ in slice coordinates, the lower pole is behind the plane by a
 // ray–plane intersection; then solidChecks of the testkit (a lit, shaded body; turning; hidden marks; resting).
-import { session, stageFirstChecks, solidChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, solidPixels, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'self-referential-table';
 const T = await session();
@@ -358,5 +358,95 @@ check('solid: a drag across the ball turns it and leaves the chosen cell alone',
 // last: the testkit's solid gates on the 90° card at 45° (they turn the camera, so they come after every check above)
 await pick('orthogonal_zero'); await page.evaluate(() => window.TABLE_DEBUG.seek(45));
 await solidChecks(T, BOOK, ID, page);
+/* ---------- cited figures at the size a chapter shows them ----------
+   A chapter cites a card in an iframe 500 px high: about 334 px wide on a 390 px phone, 760 px in a book page. In the
+   phone's frame a long note once took ~180 px of the 500 and left the stage ~210 px: the 8 × 8 table and its side panel dropped out, and the ball, its caption and the legend ran into each other collided with the
+   captions and the legend, and the lit solid shrank to a few per cent of the stage. These checks look at the frame
+   itself: nothing scrolls; the note bar stays short and its full note scrolls to the last line; the stage keeps most of
+   the frame; no ink of the flat canvas or the WebGL canvas and no label lies under the title, its second line or the
+   legend; the solid draws nothing inside the flat drawings; labels stay on the stage and apart; the lit solid covers
+   ≥ 12 % of the stage at the card's first and last frame; and the table keeps cells ≥ 11 px, the ball a radius ≥ 60 px and the side panel ≥ 90 × 70 px. */
+{
+  const FIG = ['full', 'reset', 'expand_table', 'dual_read', 'heal', 'orthogonal_zero'];
+  /** Everything about the frame, in viewport pixels; `panels` and `read` come from the page's own probe. */
+  const facts = (pg) => pg.evaluate(async () => {
+    const sc = window.TRV.solids[0]; await sc.ready; window.TRV.kit.flush();
+    const st = sc.el, sr = st.getBoundingClientRect(), vp = { w: innerWidth, h: innerHeight };
+    const box = (b) => ({ x: b.left, y: b.top, w: b.width, h: b.height });
+    const textBox = (el) => { const rg = document.createRange(); rg.selectNodeContents(el); return box(rg.getBoundingClientRect()); };
+    const words = [];
+    for (const id of ['hudBig', 'hudSub']) { const el = document.getElementById(id); if (el && el.textContent.trim()) words.push([id, textBox(el)]); }
+    document.querySelectorAll('#legend > span').forEach((el, k) => words.push([`legend ${k + 1}`, box(el.getBoundingClientRect())]));
+    const image = (cv) => {
+      if (!cv) return null;
+      const cp = document.createElement('canvas'); cp.width = cv.width; cp.height = cv.height; const c = cp.getContext('2d'); c.drawImage(cv, 0, 0);
+      const r = cv.getBoundingClientRect(); return { d: c.getImageData(0, 0, cp.width, cp.height).data, w: cp.width, h: cp.height, k: cv.width / r.width, x: r.left, y: r.top };
+    };
+    const flat = image(document.getElementById('flat')), gl = image(st.querySelector('canvas.solid-gl'));
+    const ink = (im, b) => {
+      if (!im) return 0;
+      let n = 0;
+      for (let y = Math.max(0, Math.floor((b.y - im.y) * im.k)); y < Math.min(im.h, Math.ceil((b.y + b.h - im.y) * im.k)); y++)
+        for (let x = Math.max(0, Math.floor((b.x - im.x) * im.k)); x < Math.min(im.w, Math.ceil((b.x + b.w - im.x) * im.k)); x++) if (im.d[4 * (y * im.w + x) + 3] > 8) n++;
+      return n;
+    };
+    const cut = (a, b) => Math.max(0, Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x)) * Math.max(0, Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y));
+    const tags = [...st.querySelectorAll('.tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => [t.textContent.trim(), box(t.getBoundingClientRect())]);
+    const fb = document.getElementById('flat').getBoundingClientRect();
+    const panels = (() => { const L = window.TABLE_DEBUG.layout(); return [['the table', L.table], ['the side panel', L.panel]]; })().map(([what, b]) => [what, { x: fb.left + b.x, y: fb.top + b.y, w: b.w, h: b.h }]);
+    const what = document.querySelector('.tour .what'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
+    const full = what.textContent.trim().endsWith(note.textContent.trim()) && note.textContent.trim().length > 20;
+    const scrolls = what.scrollHeight > what.clientHeight + 1, oy = getComputedStyle(what).overflowY;
+    what.scrollTop = what.scrollHeight; const reached = what.scrollTop + what.clientHeight >= what.scrollHeight - 1; what.scrollTop = 0;
+    const btns = [...tour.querySelectorAll('[data-tour]')].map((b) => b.getBoundingClientRect()).every((b) => b.width > 0 && b.top >= 0 && b.bottom <= vp.h + 0.5 && b.left >= 0 && b.right <= vp.w + 0.5);
+    const out = {
+      vp, docScroll: document.documentElement.scrollHeight - innerHeight, docWide: document.documentElement.scrollWidth - innerWidth,
+      stageH: sr.height, tourH: tour.getBoundingClientRect().height, noteH: what.clientHeight, note: { full, scrolls, scrollable: !scrolls || oy === 'auto' || oy === 'scroll', reached, btns },
+      under: [], solidIn: [], tagOut: [], tagHit: [], read: (() => { const L = window.TABLE_DEBUG.layout(), G = window.TABLE_DEBUG.solid(); return { cell: L.cells.c, n: L.cells.n, unit: G.unit, panel: [L.panel.w, L.panel.h] }; })()
+    };
+    for (const [w, b] of words) {
+      const f = ink(flat, b), g = ink(gl, b);
+      if (f) out.under.push(`flat ink under ${w}: ${f}`);
+      if (g) out.under.push(`solid under ${w}: ${g}`);
+      for (const [t, tb] of tags) if (cut(tb, b) > 1) out.under.push(`label “${t}” on ${w}`);
+    }
+    for (const [w, b] of panels) { const g = ink(gl, b); if (g) out.solidIn.push(`${w}: ${g}`); }
+    for (const [t, b] of tags) if (b.x < sr.left - 1 || b.y < sr.top - 1 || b.x + b.w > sr.right + 1 || b.y + b.h > sr.bottom + 1) out.tagOut.push(t);
+    for (let i = 0; i < tags.length; i++) for (let j = i + 1; j < tags.length; j++) {
+      const a = tags[i][1], b = tags[j][1], c = cut(a, b);
+      if (c > 0.3 * Math.min(a.w * a.h, b.w * b.h)) out.tagHit.push(`${tags[i][0]} / ${tags[j][0]}`);
+    }
+    return out;
+  });
+  const share = async (pg, t) => { await pg.evaluate(([d, x]) => window[d].seek(x), ['TABLE_DEBUG', t]); await settle(pg); return solidPixels(pg); };
+  for (const [tag, vp, lang, cards] of [['phone frame 334 × 500', { width: 334, height: 500 }, 'en', FIG], ['phone frame 334 × 500', { width: 334, height: 500 }, 'zh', ['dual_read', 'heal']], ['book page 760 × 500', { width: 760, height: 500 }, 'en', FIG]]) {
+    const bad = { frame: [], note: [], words: [], solid: [], labels: [], share: [], read: [] };
+    for (const card of cards) {
+      const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${card}`, { viewport: vp, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+      await until(pg, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000);
+      await until(pg, (d) => !window[d].state.playing, 'TABLE_DEBUG', 120000);
+      await settle(pg);
+      const f = await facts(pg), id = `${card} (${lang})`;
+      if (f.docScroll > 0 || f.docWide > 0 || f.stageH < 0.72 * f.vp.h) bad.frame.push(`${id}: scroll ${f.docScroll}/${f.docWide}, stage ${Math.round(f.stageH)} px`);
+      if (f.tourH > 84 || !f.note.full || !f.note.scrollable || !f.note.reached || !f.note.btns) bad.note.push(`${id}: ${Math.round(f.tourH)} px ${JSON.stringify(f.note)}`);
+      if (f.under.length) bad.words.push(`${id}: ${f.under.slice(0, 3).join(', ')}`);
+      if (f.solidIn.length) bad.solid.push(`${id}: ${f.solidIn.join(', ')}`);
+      if (f.tagOut.length || f.tagHit.length) bad.labels.push(`${id}: ${[...f.tagOut.map((t) => `off stage: ${t}`), ...f.tagHit].slice(0, 3).join(', ')}`);
+      if (!(f.read.cell >= 11 && f.read.unit >= 60 && f.read.panel[0] >= 90 && f.read.panel[1] >= 70)) bad.read.push(`${id}: ${JSON.stringify(f.read)}`);
+      const max = await pg.evaluate((d) => window[d].state.max, 'TABLE_DEBUG');
+      for (const t of [0, max]) { const px = await share(pg, t); if (!(px && px.share >= 0.12 && px.spread >= 0.04)) bad.share.push(`${id} at ${+t.toFixed(2)}: ${px ? (px.share * 100).toFixed(1) : '—'} %`); }
+      await pg.context().close();
+    }
+    const what = `${tag}, ${lang}, ${cards.length === FIG.length ? 'every cited card' : cards.join(' + ')}`;
+    check(`cited figure, ${what}: nothing scrolls and the stage keeps ≥ 72 % of the frame`, !bad.frame.length, bad.frame.join(' | '));
+    check(`cited figure, ${what}: the note bar stays ≤ 84 px, holds the card's whole note and scrolls to its last line, ◀ ▶ in the frame`, !bad.note.length, bad.note.join(' | '));
+    check(`cited figure, ${what}: no flat drawing, no solid and no label under the title, its second line or the legend`, !bad.words.length, bad.words.join(' | '));
+    check(`cited figure, ${what}: the solid draws nothing inside the table or its side panel`, !bad.solid.length, bad.solid.join(' | '));
+    check(`cited figure, ${what}: every label stays on the stage, and no two labels sit on each other`, !bad.labels.length, bad.labels.join(' | '));
+    check(`cited figure, ${what}: the lit solid covers ≥ 12 % of the stage at the card's first and last frame`, !bad.share.length, bad.share.join(' | '));
+    check(`cited figure, ${what}: the table keeps cells ≥ 11 px, the ball a radius ≥ 60 px and the side panel ≥ 90 × 70 px`, !bad.read.length, bad.read.join(' | '));
+  }
+}
+
 check('no page error, console error or failed request (solid part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

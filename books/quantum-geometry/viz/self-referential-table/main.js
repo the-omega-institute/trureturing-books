@@ -158,6 +158,25 @@
   const glowRect = (ctx, col, w, x, y, a, b) => { ctx.strokeStyle = col; ctx.lineWidth = w; ctx.shadowColor = col; ctx.shadowBlur = 10; ctx.strokeRect(x, y, a, b); ctx.shadowBlur = 0; };
   const padOf = (b, W, H, l, r, t, bt) => [b.x + l, W - b.x - b.w + r, b.y + t, H - b.y - b.h + bt];
   const lw = (x) => (TRV.thumbMode ? 2 * x : x);
+  /** A cited figure in a phone's frame (about 334 × 500): style.css tightens the same frames with the same query. */
+  const compact = () => TRV.figure && !TRV.still && window.matchMedia('(max-width: 480px)').matches;
+  /** str in lines no wider than w: one line at the largest size from fs down to minFs that fits, else broken at
+      spaces (and between CJK characters) at minFs. Returns { lines, fs }. */
+  function fitLines(ctx, str, w, fs, minFs, f) {
+    const wid = (s, z) => { ctx.font = `${z}px ${face(f || 'body')}`; return ctx.measureText(s).width; };
+    for (let z = fs; z >= minFs - 1e-9; z -= 0.5) if (wid(str, z) <= w) return { lines: [str], fs: z };
+    const lines = []; let cur = '';
+    for (const tk of str.match(/[⺀-鿿＀-￯]|[^\s⺀-鿿＀-￯]+|\s+/g) || []) {
+      const t = cur + tk;
+      if (cur.trim() && wid(t.trim(), minFs) > w) { lines.push(cur.trim()); cur = tk.trim() ? tk : ''; } else cur = t;
+    }
+    if (cur.trim()) lines.push(cur.trim());
+    return { lines, fs: minFs };
+  }
+  /** Lines from fitLines at x (centred unless o.align says otherwise), from y down (or, with o.up, up to y), one line
+      every fs + 2 pixels. */
+  const drawLines = (ctx, fl, x, y, color, o) => fl.lines.forEach((s, k) => text(ctx, s, x, (o && o.up) ? y - (fl.lines.length - 1 - k) * (fl.fs + 2) : y + k * (fl.fs + 2), color,
+    Object.assign({ size: fl.fs, face: 'body', align: 'center', base: (o && o.up) ? 'bottom' : 'top' }, o)));
 
   /* ---------- the table ---------- */
   function drawTable(ctx, box, A, words) {
@@ -200,8 +219,10 @@
   /* ---------- the side panels ---------- */
   function drawRead(cv, b, W, H, words) {
     const T = derive().T, p = products(), n = S.N, k = kOf(), sum = partial(k);
-    const a = Math.max(0.02, ...p.map(Math.abs), Math.abs(T[S.i][S.j]), Math.abs(sum)) * 1.18;
-    const g = kit.plot(cv, { x: [0.3, n + 3.2], y: [-a, a], pad: padOf(b, W, H, words ? 8 : 0, 0, words ? 18 : 0, words ? 22 : 0), clear: false });
+    const a = Math.max(0.02, ...p.map(Math.abs), Math.abs(T[S.i][S.j]), Math.abs(sum)) * 1.18, cmp = words && geo.layout.mode === 'compact';
+    // a phone's narrow panel: the title over it broken into lines that fit, the plot under them
+    const ttl = cmp ? fitLines(cv.getContext('2d'), L(`第 ${S.i + 1} 行 × 第 ${S.j + 1} 列，逐项`, `row ${S.i + 1} × column ${S.j + 1}, term by term`), b.w - 4, 9.5, 8.5) : null;
+    const g = kit.plot(cv, { x: [0.3, n + 3.2], y: [-a, a], pad: padOf(b, W, H, words ? (cmp ? 2 : 8) : 0, 0, cmp ? 6 + ttl.lines.length * (ttl.fs + 2) : words ? 18 : 0, words ? (cmp ? 16 : 22) : 0), clear: false });
     g.hline(0, P.lineHot, { width: 1 });
     for (let q = 0; q < n; q++) {
       const done = q < k, col = p[q] >= 0 ? P.cyan : P.magenta;
@@ -211,35 +232,39 @@
     g.rect(n + 1.05, 0, n + 1.85, sum || 1e-9, P.amber, { alpha: 0.55, stroke: P.amber, width: lw(1.6), glow: 8 });
     g.rect(n + 2.15, 0, n + 2.95, T[S.i][S.j] || 1e-9, P.ink, { fill: false, stroke: P.ink, width: lw(1.4), strokeAlpha: 0.9 });
     if (words) {
-      const fs = clamp(b.w / 34, 9.5, 12);
-      g.text(n / 2 + 0.5, a, L(`第 ${S.i + 1} 行 × 第 ${S.j + 1} 列，逐项`, `row ${S.i + 1} × column ${S.j + 1}, term by term`), P.dim, { align: 'center', base: 'bottom', dy: -4, size: fs, face: 'body' });
+      const fs = cmp ? 9 : clamp(b.w / 34, 9.5, 12);
+      if (cmp) drawLines(g.ctx, ttl, b.x + b.w / 2, g.Y(a) - 3, P.dim, { up: true });
+      else g.text(n / 2 + 0.5, a, L(`第 ${S.i + 1} 行 × 第 ${S.j + 1} 列，逐项`, `row ${S.i + 1} × column ${S.j + 1}, term by term`), P.dim, { align: 'center', base: 'bottom', dy: -4, size: fs, face: 'body' });
       for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0 || q === k - 1) g.text(q + 1, -a, String(q + 1), q === k - 1 ? P.amber : P.dim, { align: 'center', base: 'top', dy: 4, size: fs });
       g.text(n + 1.45, -a, 'Σ', P.amber, { align: 'center', base: 'top', dy: 4, size: fs + 1 });
       g.text(n + 2.55, -a, 'Tᵢⱼ', P.ink, { align: 'center', base: 'top', dy: 4, size: fs + 1, face: 'body' });
     }
   }
   function drawRank(cv, b, W, H, words) {
-    const T = derive().T, n = S.N, d = T.map((row, k) => row[k]), tr = d.reduce((s, x) => s + x, 0);
-    const top = { x: b.x, y: b.y, w: b.w, h: b.h * 0.62 }, bot = { x: b.x, y: b.y + b.h * 0.7, w: b.w, h: b.h * 0.3 };
-    const g = kit.plot(cv, { x: [0.3, n + 0.7], y: [0, 1.12], pad: padOf(top, W, H, words ? 8 : 0, 0, words ? 18 : 0, words ? 18 : 0), clear: false });
+    const T = derive().T, n = S.N, d = T.map((row, k) => row[k]), tr = d.reduce((s, x) => s + x, 0), cmp = words && geo.layout.mode === 'compact';
+    const line = L(`N = ${n} 个地址，占了 r = ${S.r} 个；对角格加起来 = ${fix(tr, 3)}`, `N = ${n} addresses, r = ${S.r} taken; the diagonal adds up to ${fix(tr, 3)}`);
+    // a phone's narrow panel: the sentence under the slots is broken into lines, and the two plots share what is left
+    const fl = cmp ? fitLines(cv.getContext('2d'), line, b.w, 9.5, 8.5) : null, ch = cmp ? b.h - fl.lines.length * (fl.fs + 2) - 4 : b.h;
+    const top = { x: b.x, y: b.y, w: b.w, h: ch * (cmp ? 0.66 : 0.62) }, bot = cmp ? { x: b.x, y: b.y + ch * 0.72, w: b.w, h: ch * 0.28 } : { x: b.x, y: b.y + b.h * 0.7, w: b.w, h: b.h * 0.3 };
+    const g = kit.plot(cv, { x: [0.3, n + 0.7], y: [0, 1.12], pad: padOf(top, W, H, words ? (cmp ? 2 : 8) : 0, 0, words ? (cmp ? 14 : 18) : 0, words ? (cmp ? 14 : 18) : 0), clear: false });
     g.hline(1, P.lineHot, { dash: [4, 3] });
     for (let q = 0; q < n; q++) g.rect(q + 0.62, 0, q + 1.38, d[q], P.cyan, { alpha: 0.8 });
-    const h = kit.plot(cv, { x: [0, n], y: [0, 1], pad: padOf(bot, W, H, words ? 8 : 0, words ? 8 : 0, 0, words ? 18 : 0), clear: false });
+    const h = kit.plot(cv, { x: [0, n], y: [0, 1], pad: padOf(bot, W, H, words ? (cmp ? 2 : 8) : 0, words ? (cmp ? 2 : 8) : 0, 0, words && !cmp ? 18 : 0), clear: false });
     for (let q = 0; q < n; q++) h.rect(q + 0.06, 0.15, q + 0.94, 0.85, q < S.r ? P.cyan : P.dim, { alpha: q < S.r ? 0.75 : 0.1, stroke: q < S.r ? undefined : P.lineHot });
     h.rect(0, 0.04, tr, 0.96, P.amber, { fill: false, stroke: P.amber, width: lw(2), glow: 8 });
     if (words) {
-      const fs = clamp(b.w / 34, 9.5, 12);
+      const fs = cmp ? 9 : clamp(b.w / 34, 9.5, 12);
       g.text((n + 1) / 2, 1.12, L('对角格 Tₖₖ', 'diagonal cells Tₖₖ'), P.dim, { align: 'center', base: 'bottom', dy: -2, size: fs, face: 'body' });
-      for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0) g.text(q + 1, 0, String(q + 1), P.dim, { align: 'center', base: 'top', dy: 4, size: fs });
-      const line = L(`N = ${n} 个地址，占了 r = ${S.r} 个；对角格加起来 = ${fix(tr, 3)}`, `N = ${n} addresses, r = ${S.r} taken; the diagonal adds up to ${fix(tr, 3)}`);
+      for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0) g.text(q + 1, 0, String(q + 1), P.dim, { align: 'center', base: 'top', dy: cmp ? 3 : 4, size: fs });
+      if (cmp) { drawLines(h.ctx, fl, b.x, bot.y + bot.h + 4, P.ink, { align: 'left' }); return; }
       h.ctx.font = `${fs}px ${face('body')}`;
       const wl = h.ctx.measureText(line).width, fit = wl > b.w ? Math.max(8, fs * b.w / wl) : fs;   // shrunk to the width of the panel
       h.text(0, 0, line, P.ink, { base: 'top', dy: 4, size: fit, face: 'body' });
     }
   }
   function drawHeal(cv, b, W, H, words) {
-    const D = derive(), m = mOf();
-    const g = kit.plot(cv, { x: [-0.58, 1.58], y: [-0.6, M + 0.6], pad: padOf(b, W, H, words ? 34 : 0, 4, words ? 18 : 0, words ? 18 : 0), clear: false });
+    const D = derive(), m = mOf(), cmp = words && geo.layout.mode === 'compact';
+    const g = kit.plot(cv, { x: [-0.58, 1.58], y: [-0.6, M + 0.6], pad: padOf(b, W, H, words ? (cmp ? 28 : 34) : 0, 4, words ? (cmp ? 15 : 18) : 0, words ? (cmp ? 14 : 18) : 0), clear: false });
     for (const x of [0, 1]) g.vline(x, P.lineHot, { width: 1.2 });
     g.vline(0.5, P.dim, { dash: [3, 3] });
     const yOf = (q) => M - q;
@@ -247,29 +272,41 @@
     const r = TRV.thumbMode ? 7 : clamp(b.h / 80, 3, 5);
     for (let q = 0; q <= m; q++) for (const x of D.eigs[q]) g.dot(clamp(x, -0.58, 1.58), yOf(q), x > 0.5 ? P.cyan : P.magenta, r, { alpha: q === m ? 1 : 0.5 });
     if (words) {
-      const fs = clamp(b.w / 34, 9.5, 12);
-      for (const [x, s] of [[0, '0'], [0.5, '½'], [1, '1']]) g.text(x, -0.6, s, P.dim, { align: 'center', base: 'top', dy: 4, size: fs });
-      for (let q = 0; q <= M; q++) g.text(-0.58, yOf(q), `m=${q}`, q === m ? P.amber : P.dim, { align: 'right', dx: -4, size: fs - 0.5 });
+      const fs = cmp ? 9 : clamp(b.w / 34, 9.5, 12), every = cmp && Math.abs(g.Y(0) - g.Y(1)) < fs + 2 ? 2 : 1;   // rows too close: every other step named
+      for (const [x, s] of [[0, '0'], [0.5, '½'], [1, '1']]) g.text(x, -0.6, s, P.dim, { align: 'center', base: 'top', dy: cmp ? 2 : 4, size: fs });
+      for (let q = 0; q <= M; q++) if (q % every === 0 || q === m) g.text(-0.58, yOf(q), `m=${q}`, q === m ? P.amber : P.dim, { align: 'right', dx: -4, size: fs - 0.5 });
       g.text(0.5, M + 0.6, L('Tₘ 的本征值', 'eigenvalues of Tₘ'), P.dim, { align: 'center', base: 'bottom', dy: -2, size: fs, face: 'body' });
     }
   }
   function drawPerp(cv, b, W, H, words) {
-    const n = S.N, th = thetaOf(), V = perpVecs();
-    const top = { x: b.x, y: b.y, w: b.w, h: b.h * 0.7 }, bot = { x: b.x, y: b.y + b.h * 0.76, w: b.w, h: b.h * 0.24 };
+    const n = S.N, th = thetaOf(), V = perpVecs(), cmp = words && geo.layout.mode === 'compact';
+    const cap = L('灰：状态 ψ 的分量 · 青：读出 Tψ', 'grey: the entries of ψ · cyan: the reading Tψ');
+    // a phone's narrow panel: the caption in lines over the bars, the two readings in lines of their own under them
+    const ctx0 = cv.getContext('2d'), fcap = cmp ? fitLines(ctx0, cap, b.w - 2, 9.5, 8.5) : null;
+    const rd = cmp ? [fitLines(ctx0, `‖Tψ‖ = cos θ = ${fix(Math.cos(th * DEG), 3)}`, b.w, 9, 8, 'data'), fitLines(ctx0, `‖(I − T)ψ‖ = sin θ = ${fix(Math.sin(th * DEG), 3)}`, b.w, 9, 8, 'data')] : null;
+    const capH = cmp ? fcap.lines.length * (fcap.fs + 2) + 4 : 0, rdH = cmp ? rd.reduce((s, f) => s + f.lines.length * (f.fs + 2), 0) : 0;
+    const top = cmp ? { x: b.x, y: b.y + capH, w: b.w, h: (b.h - capH - rdH - 12) * 0.72 } : { x: b.x, y: b.y, w: b.w, h: b.h * 0.7 };
+    const bot = cmp ? { x: b.x, y: top.y + top.h + 4, w: b.w, h: (b.h - capH - rdH - 12) * 0.28 } : { x: b.x, y: b.y + b.h * 0.76, w: b.w, h: b.h * 0.24 };
     const a = Math.max(0.2, ...V.psi.map(Math.abs), ...V.v.map(Math.abs)) * 1.15;
-    const g = kit.plot(cv, { x: [-a, a], y: [n + 0.6, 0.4], pad: padOf(top, W, H, words ? 22 : 0, 4, words ? 18 : 0, 4), clear: false });
+    const g = kit.plot(cv, { x: [-a, a], y: [n + 0.6, 0.4], pad: padOf(top, W, H, words ? (cmp ? 14 : 22) : 0, 4, words && !cmp ? 18 : 0, cmp ? 0 : 4), clear: false });
     g.vline(0, P.lineHot, { width: 1 });
     for (let q = 0; q < n; q++) {
       g.rect(0, q + 0.62, V.psi[q], q + 0.98, P.ink, { alpha: 0.45 });
       g.rect(0, q + 1.02, V.Tpsi[q], q + 1.38, P.cyan, { alpha: 0.85 });
     }
-    const h = kit.plot(cv, { x: [0, 1.05], y: [0, 3], pad: padOf(bot, W, H, words ? 22 : 0, 4, 0, words ? 2 : 0), clear: false });
+    const h = kit.plot(cv, { x: [0, 1.05], y: [0, 3], pad: padOf(bot, W, H, words ? (cmp ? 14 : 22) : 0, 4, 0, words && !cmp ? 2 : 0), clear: false });
     h.rect(0, 1.75, Math.cos(th * DEG), 2.35, P.cyan, { alpha: 0.85 });
     h.rect(0, 0.2, Math.sin(th * DEG), 0.8, P.magenta, { alpha: 0.85 });
     h.vline(1, P.lineHot, { dash: [3, 3] });
     if (words) {
-      const fs = clamp(b.w / 34, 9.5, 12);
-      const cap = L('灰：状态 ψ 的分量 · 青：读出 Tψ', 'grey: the entries of ψ · cyan: the reading Tψ');
+      const fs = cmp ? 9 : clamp(b.w / 34, 9.5, 12);
+      if (cmp) {
+        drawLines(g.ctx, fcap, b.x + b.w / 2, b.y, P.dim);
+        for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0) g.text(-a, q + 1, String(q + 1), P.dim, { align: 'right', dx: -3, size: fs });
+        let y = bot.y + bot.h + 4;
+        rd.forEach((f, k) => { drawLines(h.ctx, f, b.x, y, k ? P.magenta : P.cyan, { align: 'left', face: 'data' }); y += f.lines.length * (f.fs + 2); });
+        return;
+      }
       g.ctx.font = `${fs}px ${face('body')}`;
       const wc = g.ctx.measureText(cap).width, fc = wc > b.w - 22 ? Math.max(8, fs * (b.w - 22) / wc) : fs;   // shrunk to the width of the panel
       g.text(0, 0.4, cap, P.dim, { align: 'center', base: 'bottom', dy: -2, size: fc, face: 'body' });   // above row 1 (y runs down)
@@ -434,7 +471,9 @@
     for (let fs = 11; fs >= 9; fs -= 0.5) if (fits(str, fs)) return { lines: [str], fs };
     const k = str.lastIndexOf(' · '), two = k > 0 ? [str.slice(0, k), str.slice(k + 3)] : [str];
     for (let fs = 10.5; fs >= 8; fs -= 0.5) if (two.every((s) => fits(s, fs))) return { lines: two, fs };
-    return { lines: two, fs: 8 };
+    // a narrow column (a phone's cited figure): each part broken at its spaces, so no line runs out of the column
+    const lines = two.flatMap((s) => fitLines(ctx, s, w, 8.5, 8.5).lines);
+    return { lines, fs: 8.5 };
   }
 
   /* ---------- the stage: the ball in its own box, the table and the side panel on the flat canvas ---------- */
@@ -442,10 +481,28 @@
   /** The three boxes of the stage (CSS pixels of the canvas): the ball on the left (wide) or on top (narrow). */
   function layoutOf(W, H, words) {
     if (!words) return { mode: 'cover', solid: { x: W * 0.02, y: H * 0.08, w: W * 0.36, h: H * 0.84 }, table: { x: W * 0.4, y: H * 0.08, w: W * 0.33, h: H * 0.84 }, panel: { x: W * 0.76, y: H * 0.1, w: W * 0.21, h: H * 0.8 } };
-    const st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
+    const st = $('stage').getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
+    if (compact()) {                          // a phone's cited figure: the ball as large as the width allows on the left,
+      // the table over its side panel in the column on the right, between the title and the legend
+      const top = below($('hudBig').parentElement) + 6, bottom = $('legend').offsetHeight + 22;
+      const bx = { x: 10, y: top, w: W - 20, h: Math.max(120, H - top - bottom) };
+      const w3 = Math.round(bx.w * 0.6), rx = bx.x + w3 + 8, rw = bx.w - w3 - 8, side = Math.min(rw, bx.h * 0.56);
+      return { mode: 'compact', solid: { x: bx.x, y: bx.y, w: w3, h: bx.h }, table: { x: rx, y: bx.y, w: rw, h: side }, panel: { x: rx, y: bx.y + side + 8, w: rw, h: bx.h - side - 8 } };
+    }
+    const stEl = $('stage');
+    stEl.classList.remove('legend-right');    // the legend is measured across the whole stage first
     const top = Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10, bottom = Math.max(18, $('legend').offsetHeight + 20);
     const bx = { x: 18, y: top, w: W - 36, h: Math.max(80, H - top - bottom) };
     const wide = bx.w >= 520 && bx.w >= bx.h * 1.2;
+    if (wide && bx.w >= bx.h * 2.05 && TRV.figure && !TRV.still) {
+      // a cited figure in a book page: the ball's column runs from under the title to the foot of the stage, and the
+      // legend keeps to the right of it, under the table and the side panel
+      const cb = { x: bx.x, y: bx.y - 6, w: bx.w, h: H - bx.y - 12 };
+      const w3 = Math.round(clamp(cb.h - 20, bx.w * 0.36, bx.w * 0.42)), rx = bx.x + w3 + 16, rw = bx.w - w3 - 16;
+      stEl.style.setProperty('--fig-legend-left', `${rx}px`); stEl.classList.add('legend-right');
+      const bh = Math.max(80, H - top - Math.max(18, $('legend').offsetHeight + 20)), pw = Math.round(bx.w * 0.27), side = Math.min(bh, rw - pw - 22);
+      return { mode: 'columns', solid: { x: cb.x, y: cb.y, w: w3, h: cb.h }, table: { x: rx, y: bx.y, w: side, h: bh }, panel: { x: rx + side + 22, y: bx.y + 4, w: rw - side - 22, h: bh - 8 } };
+    }
     if (wide && bx.w >= bx.h * 2.05) {        // short and wide (a cited figure, a still): ball | table | panel
       // the height decides the ball here: its column takes a little less from the HUD and the legend, and is as wide
       // as the ball can be tall; the side panel keeps its share of the width and the table takes what is left
@@ -471,7 +528,7 @@
     const sl = sliceNow(), shape = shapeOf(sl), cap = words ? captionLines(ctx, captionOf(sl, shape), lay.solid.w) : { lines: [], fs: 0 };
     const capH = cap.lines.length * (cap.fs + 4) + (words ? 6 : 0), ball = { x: lay.solid.x, y: lay.solid.y, w: lay.solid.w, h: lay.solid.h - capH };
     // the glass and anything the image pokes out of it; a short stage lets the ball fill its column almost to the edge
-    const tight = lay.mode === 'columns', unit = Math.max(16, Math.min(ball.w, ball.h) / 2 * Math.min(tight ? 0.97 : 0.9, (tight ? 1 : 0.97) / sl.scale));
+    const tight = lay.mode === 'columns' || lay.mode === 'compact', unit = Math.max(16, Math.min(ball.w, ball.h) / 2 * Math.min(tight ? 0.97 : 0.9, (tight ? 1 : 0.97) / sl.scale));
     geo.ballBox = lay.solid;
     L3.cxF = (ball.x + ball.w / 2) / W; L3.cyF = (ball.y + ball.h / 2) / H; L3.radF = unit / (Math.min(W, H) * stage.cam.zoom);
     stage.begin();

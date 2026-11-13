@@ -225,7 +225,8 @@
   function drawTable(ctx, box, words) {
     const focus = S.scene === 'table' || TRV.thumbMode, A = focus ? 1 : 0.5;
     const hops = walk(S.idx), done = hopsDone(), cur = done < hops.length ? done : -1;
-    const colW = clamp(box.w * 0.3, 54, 150), top0 = Math.min(28, Math.max(20, box.h * 0.12)), sh = clamp((box.h - top0 - 26) / 7.6, 12, 34), fs = clamp(sh * 0.48, 8.5, 12.5);
+    // the rows as tall as the box allows: T₁ (a 22 px head and 4 rows) and the three blocks under it (4.2 rows) end inside it
+    const colW = clamp(box.w * 0.3, 54, 150), top0 = Math.min(28, Math.max(20, box.h * 0.12)), sh = clamp((box.h - top0 - 26) / 8.2, 12, 34), fs = clamp(sh * 0.48, 8.5, 12.5);
     const xP = box.x + box.w * 0.13, xT = box.x + box.w * 0.13 + colW + Math.max(26, box.w * 0.12), y0 = box.y + top0;
     const slotY = (k) => y0 + 22 + k * sh;
     const blocks = {
@@ -328,9 +329,18 @@
     }
     return { orient, yaw, pitch: best.pitch, unit: best.unit, cx: best.cx, cy: best.cy };
   }
+  /** A cited figure in a phone's frame (about 334 × 500): style.css tightens the same frames with the same query. */
+  const compact = () => TRV.figure && !TRV.still && window.matchMedia('(max-width: 480px)').matches;
   function layout(W, H) {
-    const stage = $('stage'), st = stage.getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
+    const stage = $('stage'), st = stage.getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
     if (TRV.thumbMode) return { mode: 'cover', r3: { x: W * 0.02, y: H * 0.05, w: W * 0.42, h: H * 0.9 }, cap: 0 };
+    if (compact()) {   // a phone's cited figure: the die in a band under the title, the drawing the card is about under it
+      stage.classList.remove('col3');
+      // the die takes what the drawing under it can spare: the page tables need 146 px, the routing tree over the memory row 116
+      const top = below($('hudBig').parentElement) + 6, bottom = $('legend').offsetHeight + 22, ah = Math.max(260, H - top - bottom);
+      const h3 = Math.round(S.scene === 'table' ? Math.min(ah * 0.52, ah - 146) : Math.min(ah * 0.58, ah - 116));
+      return { mode: 'band', compact: true, r3: { x: 10, y: top - 2, w: W - 20, h: h3 }, cap: 14, b2: { x: 14, y: top + h3 + 6, w: W - 28, h: ah - h3 - 6 } };
+    }
     const wide = W - 36 >= 560, w3 = clamp(0.85 * (H - 60), 220, W * 0.4), x3 = W - w3 - 8;   // a short stage needs a narrower column
     stage.classList.toggle('col3', wide);
     stage.style.setProperty('--pod-hud-max', `${Math.max(160, x3 - 34)}px`);
@@ -424,7 +434,8 @@
     sc.tag('P', [0.49, 0.35, 0.42], 'P', table ? 'ink' : '');
     sc.tag('T1', [1.37, 0.35, 0.42], 'T₁', table ? 'ink' : '');
     sc.tag('D', [1.37, -0.735, 0.34], 'D₁,₂', table ? 'ink' : '');
-    if (table && rec.loopWalks) sc.tag('loops', LOOP.apex, `×${rec.loopWalks}`, 'cy', { dy: -12 });
+    // the count of the loop over its apex, or beside it (a phone's figure, where the title is just above the die)
+    if (table && rec.loopWalks) sc.tag('loops', LOOP.apex, `×${rec.loopWalks}`, 'cy', lay.compact ? { dx: 18, dy: 0 } : { dy: -12 });
     sc.end();
     G3 = rec;
   }
@@ -450,6 +461,12 @@
     // every flat panel's box is recorded: the solid stays out of them
     const panel = (what, draw) => (c, b, w) => { geo.panels.push(Object.assign({ what }, b)); draw(c, b, w); };
     const mem = panel('memory', drawMemory), tab = panel('table', drawTable), reg = panel('register', drawRegister);
+    if (lay.compact) {                 // a phone's figure: only the drawing the scene is about (the rest is in the full laboratory)
+      if (S.scene !== 'table') mem(ctx, bx, true);
+      else if (S.idx.length === 1) reg(ctx, bx);
+      else tab(ctx, bx, true);
+      return;
+    }
     if (S.scene === 'table') {         // the page table is a notation of its own: the routing tree and scan bus fold away
       const one = S.idx.length === 1, wide = bx.w >= 560;
       if (one && wide) {

@@ -28,6 +28,8 @@
     record: { max: 4, rate: 1.1, step: 1 },
     wake: { max: 1, rate: 0.5, step: 0.25 }
   };
+  /* a phone's cited figure: the share of the height (between the title and the legend) that the apparatus band takes */
+  const CB = { anchor: 0.4, rec: 0.38 };
 
   /* ---------- the mathematics ---------- */
   const amps = () => { const o = Math.sqrt((1 - S.w) / 3); return [Math.sqrt(S.w), o, o, o]; };
@@ -263,7 +265,7 @@
 
   function drawMatrix(ctx, R, m) {
     const n = m.n, words = !TRV.thumbMode, head = words ? 30 : 6, tk = thick();
-    const size = Math.max(40, Math.min(R.w - head, R.h - head - (S.scene === 'record' && words ? 52 : 0)));
+    const size = Math.max(40, Math.min(R.w - head, R.h - head - (S.scene === 'record' && words ? (R.cmp ? 40 : 52) : 0)));   // the record boxes under it (lower in a phone's figure)
     const x0 = R.x + head + Math.max(0, (R.w - head - size) / 2), y0 = R.y + head, cs = size / n;
     grid = { x0, y0, cs, n, size };
     let gmax = 0; m.ghost.forEach((row) => row.forEach((v) => { gmax = Math.max(gmax, v); }));
@@ -304,7 +306,7 @@
       }
       if (S.scene !== 'record' && cs >= 46) text(ctx, L('躯体', 'body'), x0 + 0.5 * cs, y0 - 25, P.dim, { align: 'center', size: 10, face: 'body' });
     }
-    if (S.scene === 'record' && words) drawRecords(ctx, { x: R.recX != null ? R.recX : x0, y: y0 + size + 10, w: R.recW || size });
+    if (S.scene === 'record' && words) drawRecords(ctx, { x: R.recX != null ? R.recX : x0, y: y0 + size + (R.cmp ? 8 : 10), w: R.recW || size, cmp: R.cmp });
   }
 
   /** The path the phase of ρ₀₁ has taken so far, from 0 to clock.t, unwrapped (for the trail on the phase disc). */
@@ -327,7 +329,9 @@
       With c = 0 the arrow shrinks to the centre. */
   function drawDisc(ctx, R) {
     const words = !TRV.thumbMode, tk = thick(), head = words ? 22 : 4;
-    const rad0 = Math.max(24, Math.min(R.w, R.h - head) / 2 - (words ? 26 : 6)), cx = R.x + R.w / 2, cy = R.y + head + (R.h - head) / 2;
+    // a phone's figure: the labels need about 28 px beside the circle and 20 px under it, so the circle takes the rest
+    const rad0 = R.cmp && words ? Math.max(16, Math.min(R.w / 2 - 28, (R.h - head - 22) / 2)) : Math.max(24, Math.min(R.w, R.h - head) / 2 - (words ? 26 : 6));
+    const cx = R.x + R.w / 2, cy = R.cmp && words ? R.y + head + 2 + rad0 : R.y + head + (R.h - head) / 2;
     const sc = rad0 / 0.5, X = (z) => cx + sc * z[0], Y = (z) => cy - sc * z[1];
     disc = { cx, cy, rad: rad0 };
     ctx.save();
@@ -364,7 +368,7 @@
   }
 
   function drawRecords(ctx, R) {
-    const t = clock.t, c = overlap(), gap = 8, bw = (R.w - gap) / 2, bh = 40;
+    const t = clock.t, c = overlap(), gap = 8, bw = (R.w - gap) / 2, bh = R.cmp ? 32 : 40, y1 = R.cmp ? 10 : 12, y2 = R.cmp ? 23 : 28;
     const active = clock.t > 0 && clock.t < 4 ? STEPS[Math.min(3, Math.floor(clock.t - 1e-9))].copy : null;
     for (let k = 0; k < 2; k++) {
       const x = R.x + k * (bw + gap), done = (step) => t >= step - 1e-9;
@@ -375,14 +379,14 @@
       const hot = active === k;
       ctx.strokeStyle = hot ? P.amber : P.lineHot; ctx.lineWidth = hot ? 2 : 1; if (hot) { ctx.shadowColor = P.amber; ctx.shadowBlur = 8; }
       ctx.strokeRect(x + 0.5, R.y + 0.5, bw - 1, bh - 1); ctx.shadowBlur = 0;
-      text(ctx, L(`副本 ${k}`, `copy ${k}`), x + 8, R.y + 12, hot ? P.amber : P.ink, { size: 11.5, face: 'body' });
-      text(ctx, state, x + 8, R.y + 28, rev ? P.cyan : wrote ? P.magenta : P.dim, { size: 10.5 });
+      text(ctx, L(`副本 ${k}`, `copy ${k}`), x + 8, R.y + y1, hot ? P.amber : P.ink, { size: R.cmp ? 11 : 11.5, face: 'body' });
+      text(ctx, state, x + 8, R.y + y2, rev ? P.cyan : wrote ? P.magenta : P.dim, { size: R.cmp ? 10 : 10.5 });
     }
   }
 
   function drawScreen(ctx, R, m) {
-    const sc = SCREEN[m.n], words = !TRV.thumbMode, tk = thick();
-    const g = kit.plot($('flat'), { x: [-1, 1], y: [0, sc.ymax], pad: [R.x, R.W - R.x - R.w, R.y, R.H - R.y - R.h], clear: false });
+    const sc = SCREEN[m.n], words = !TRV.thumbMode, tk = thick(), stack = words && R.cmp;   // a phone's figure: the two words over the plot
+    const g = kit.plot($('flat'), { x: [-1, 1], y: [0, sc.ymax], pad: [R.x, R.W - R.x - R.w, R.y + (stack ? 27 : 0), R.H - R.y - R.h], clear: false });
     g.hline(0, P.lineHot, { width: 1 });
     const N = 360, us = Array.from({ length: N + 1 }, (_, k) => -1 + 2 * k / N), ys = us.map((u) => screen(m.rho, u, m.role));
     const ghostRho = m.ghost.map((row, i) => row.map((v, j) => (S.scene === 'record' ? [i === j ? 0.5 : 0.5, 0] : (S.scene === 'wake' ? anchored(S.lamDream, 'fine')[i][j] : [v, 0]))));
@@ -398,7 +402,12 @@
     g.line(us.map((u, k) => [u, gy[k]]), P.dim, { width: 1.2 * tk, dash: [3, 4], alpha: 0.8 });
     g.line(us.map((u, k) => [u, ys[k].diag]), P.cyan, { width: 2 * tk, dash: [6, 4], glow: 6 });
     g.line(us.map((u, k) => [u, ys[k].all]), P.ink, { width: 2.2 * tk, glow: 8 });
-    if (words) {
+    if (stack) {
+      const s = L('虚线灰：出发时', 'dashed grey: at the start');
+      ctx.font = `10px ${face('body')}`; const fs = Math.max(8, Math.min(10, 10 * R.w / Math.max(1, ctx.measureText(s).width)));
+      text(ctx, L('屏', 'screen'), R.x + 2, R.y + 6, P.dim, { size: 10.5, face: 'body' });
+      text(ctx, s, R.x + 2, R.y + 19, P.dim, { size: fs, face: 'body' });
+    } else if (words) {
       text(ctx, L('屏', 'screen'), R.x + 6, R.y + 10, P.dim, { size: 11, face: 'body' });
       g.text(1, sc.ymax, L('虚线灰：出发时', 'dashed grey: at the start'), P.dim, { align: 'right', base: 'top', size: 10.5, face: 'body', dy: 2 });
     }
@@ -411,13 +420,38 @@
       height, which leaves the panels at least 150 px, 172 px in the record scene, so the grid stays ≥ 80 px). The panels keep their own arrangement inside what
       is left: side by side where that region is wide, stacked where it is not. */
   let panelInfo = null;
+  /** A cited figure in a phone's frame (about 334 × 500): style.css tightens the same frames with the same query. */
+  const compact = () => TRV.figure && !TRV.still && window.matchMedia('(max-width: 480px)').matches;
   function layout(Wd, Ht) {
-    const sr = $('stage').getBoundingClientRect(), below = (el) => el.getBoundingClientRect().bottom - sr.top;
+    const sr = $('stage').getBoundingClientRect(), below = (el) => (el.getClientRects().length ? el.getBoundingClientRect().bottom - sr.top : 0);
+    const rec = S.scene === 'record';
+    if (compact()) {
+      // a phone's cited figure: the apparatus in a band across the top, under it the grid beside the screen; in the
+      // record scene the grid over its two record boxes, beside the phase disc over the screen (the band gives way)
+      const top = below($('hudSub')) + 6, bottom = $('legend').offsetHeight + 24, x0 = 10, w = Wd - 20, h = Math.max(120, Ht - top - bottom);
+      const bh = Math.round(h * (rec ? CB.rec : CB.anchor)), r3 = { x: x0, y: top, w, h: bh }, pr = { x: x0, y: top + bh + 8, w, h: h - bh - 8 };
+      if (!rec) {
+        const ms = Math.round(Math.min(pr.h + 26, pr.w * 0.47)), sx = pr.x + ms + 12;
+        return { cmp: true, r3, pr, mat: { x: pr.x, y: pr.y, w: ms, h: pr.h }, dsc: null, scr: { x: sx, y: pr.y, w: pr.x + pr.w - sx, h: pr.h } };
+      }
+      const half = Math.round((pr.w - 10) / 2), rx = pr.x + half + 10, rw = pr.w - half - 10, dh = Math.round(pr.h * 0.56);
+      return { cmp: true, r3, pr, mat: { x: pr.x, y: pr.y, w: half, h: pr.h, recX: pr.x, recW: half, cmp: true }, dsc: { x: rx, y: pr.y, w: rw, h: dh }, scr: { x: rx, y: pr.y + dh + 4, w: rw, h: pr.h - dh - 4 } };
+    }
     const top = TRV.thumbMode ? 24 : Math.max(46, below($('hudSub')), below($('sceneChips'))) + 10;
     const bottom = TRV.thumbMode ? 24 : Math.max(18, $('legend').offsetHeight + 20);
-    const x0 = 16, w = Wd - 32, h = Math.max(80, Ht - top - bottom), rec = S.scene === 'record';
+    const x0 = 16, w = Wd - 32, h = Math.max(80, Ht - top - bottom);
     let r3, pr;
-    if (w >= 560 && h < 300) { const lw = Math.round(w * 0.38); r3 = { x: x0, y: top, w: lw, h }; pr = { x: x0 + lw + 14, y: top, w: w - lw - 14, h }; }
+    if (w >= 560 && h < 300) {
+      // short and wide (a cited figure in a page): the apparatus on the left takes nearly half the width; the grid beside
+      // the screen on the right, in the record scene the grid over its record boxes beside the phase disc over the screen
+      const lw = Math.round(w * 0.48); r3 = { x: x0, y: top, w: lw, h }; pr = { x: x0 + lw + 14, y: top, w: w - lw - 14, h };
+      if (!rec) {
+        const mat = { x: pr.x, y: pr.y, w: Math.min(pr.w * 0.46, pr.h + 30), h: pr.h }, sx = mat.x + mat.w + 18;
+        return { r3, pr, mat, dsc: null, scr: { x: sx, y: pr.y + 18, w: pr.x + pr.w - sx, h: pr.h - 18 } };
+      }
+      const mw = Math.round(pr.w * 0.44), rx = pr.x + mw + 14, rw = pr.x + pr.w - rx, dh = Math.round(pr.h * 0.52);
+      return { r3, pr, mat: { x: pr.x, y: pr.y, w: mw, h: pr.h, recX: pr.x + 14, recW: mw - 14 }, dsc: { x: rx, y: pr.y, w: rw, h: dh }, scr: { x: rx, y: pr.y + dh + 18, w: rw, h: pr.h - dh - 18 } };
+    }
     else { const bh = Math.round(w >= 560 ? Math.max(110, Math.min(h * 0.55, h - (rec ? 172 : 150))) : Math.max(70, h * (rec ? 0.24 : 0.32))); r3 = { x: x0, y: top, w, h: bh }; pr = { x: x0, y: top + bh + 8, w, h: h - bh - 8 }; }
     const wide = pr.w >= 560 || (pr.w >= 400 && pr.w >= 1.45 * pr.h), fr = rec ? 0.64 : 0.58;   // stacked: the matrix row's share
     let mat = wide ? { x: pr.x, y: pr.y, w: Math.min(pr.w * (rec ? 0.36 : 0.46), pr.h + 30), h: pr.h } : { x: pr.x, y: pr.y, w: pr.w, h: pr.h * fr };
@@ -433,12 +467,12 @@
   }
   function drawStage() {
     const g0 = kit.plot($('flat'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, Wd = g0.W, Ht = g0.H, m = current(), words = !TRV.thumbMode;
-    const lay = layout(Wd, Ht), { r3, pr } = lay;
+    const lay = layout(Wd, Ht), { r3, pr } = lay, cmp = !!lay.cmp;
     // the apparatus, fitted to its box in the default view, with room under it for the names of the places and, where
     // its sides leave no room for the words saying what it stands for, a line above it; on a phone (a low band) the
     // names sit beside the beads and the words stay in the drawer and the MODEL box
     // (the names of two slits at ±0.5 sit above the plate's lowest corner, so they need a narrower strip than four)
-    const low = r3.h < 110, names = words && !low ? (m.n === 2 ? 10 : 22) : 0;
+    const low = r3.h < 110 || cmp, names = words && !low ? (m.n === 2 ? 10 : 22) : 0;
     const room = words && !low ? captionRoom(ctx) : [0, 0];
     let box3 = { x: r3.x, y: r3.y, w: r3.w, h: r3.h - names }, fit = fitSolid(box3), strip = false;
     if (words && !low && (fit.l - r3.x < room[0] || r3.x + r3.w - fit.r < room[1])) { strip = true; box3 = { x: r3.x, y: r3.y + 16, w: r3.w, h: r3.h - 16 - names }; fit = fitSolid(box3); }
@@ -454,8 +488,8 @@
     if (words && !low) solidCaption(ctx, r3, fit, strip);
     disc = null;
     drawMatrix(ctx, lay.mat, m);
-    if (lay.dsc) drawDisc(ctx, lay.dsc);
-    drawScreen(ctx, { x: lay.scr.x, y: lay.scr.y, w: lay.scr.w, h: lay.scr.h, W: Wd, H: Ht }, m);
+    if (lay.dsc) drawDisc(ctx, Object.assign({ cmp }, lay.dsc));
+    drawScreen(ctx, { x: lay.scr.x, y: lay.scr.y, w: lay.scr.w, h: lay.scr.h, W: Wd, H: Ht, cmp }, m);
     panelInfo = { r3, fit: { l: fit.l, r: fit.r, t: fit.t, b: fit.b }, region: pr, mat: lay.mat, disc: lay.dsc, screen: lay.scr, grid: grid && { x0: grid.x0, y0: grid.y0, size: grid.size } };
   }
 

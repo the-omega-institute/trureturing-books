@@ -169,8 +169,8 @@
     if (!TRV.thumbMode) {
       const fov = pow10(Math.round(Math.log10(U))), small = box.w < 230;
       tagAt('magU', box.x + box.w / 2, box.y + 13, small ? L(`视野 ${fov}`, `field ${fov}`) : L(`放大镜 · 视野宽 ${fov}`, `magnifier · field ${fov} wide`), 'raw ink');
-      // under the disk there is no room above the box: the gap is named inside it
-      tagAt('magG', box.x + box.w / 2, small && !box.below ? box.y - 12 : box.y + box.h - 14, gap > 0 ? L(`缝 ${sci(gap)}`, `gap ${sci(gap)}`) : L('缝 = 0：撞上边界', 'gap = 0: on the rim'), 'raw mg');
+      // under the disk there is no room above the box: the gap is named inside it, or (a phone's figure) under it
+      tagAt('magG', box.x + box.w / 2, box.under ? box.y + box.h + 10 : small && !box.below ? box.y - 12 : box.y + box.h - 14, gap > 0 ? L(`缝 ${sci(gap)}`, `gap ${sci(gap)}`) : L('缝 = 0：撞上边界', 'gap = 0: on the rim'), 'raw mg');
     }
     return { U, X, Y };
   }
@@ -184,8 +184,8 @@
       return { x, y: cy - h / 2, w, h };
     }
     if (layout.below) {
-      const w = Math.min(g.iw - 8, 2.1 * R), y = Math.max(g.Y(-1.06) + 8, g.pt + g.ih - 0.62 * w - 4), h = g.pt + g.ih - 4 - y;
-      return { x: cx - w / 2, y, w, h, corner: true, below: true };
+      const w = Math.min(g.iw - 8, 2.1 * R), y = Math.max(g.Y(-1.06) + 8, g.pt + g.ih - 0.62 * w - 4), h = g.pt + g.ih - 4 - y - (layout.compact ? 18 : 0);
+      return { x: cx - w / 2, y, w, h, corner: true, below: true, under: layout.compact };
     }
     const w = Math.min(0.9 * R, 200), h = w * 0.72;
     return { x: right - w, y: g.pt + g.ih - h - 4, w, h, corner: true };
@@ -298,16 +298,29 @@
       mag = magnifier(g, box, ang, gapNow, [], [], { hitColor: W.light[nInt] ? P.magenta : P.amber });
     }
     if (!TRV.thumbMode) {
-      const p0 = statePoint(0);
-      tagAt('wS', g.X(p0[0]), g.Y(p0[1]) + 18, 'θ*', 'raw ink');
+      const p0 = statePoint(0), placed = [];
       if (S.fold > 0.98) {
-        const seen = new Set();
+        // the counts of the folded points, above and below them in turn (the one on the rim inside the disk: the
+        // magnifier stands just outside the rim); where the points sit closer than a count is wide (a small disk),
+        // in four tiers taken in order along the spoke
+        const seen = new Set(), cs = [];
         for (let n = W.n0; n <= nInt; n++) {
           const key = (n - W.n0) % W.p; if (seen.has(key)) continue; seen.add(key);
           const p = statePoint(n), m = mult.get(key);
-          if (m > 1) tagAt(`wM${key}`, g.X(p[0]) + (W.light[n] ? 14 : 0), g.Y(p[1]) + (key % 2 ? 20 : -20), `×${m}`, W.light[n] ? 'raw mg' : 'raw cy');
+          if (m > 1) cs.push({ key, m, light: W.light[n], x: g.X(p[0]) + (W.light[n] ? -12 : 0), y: g.Y(p[1]) });
         }
-      } else {
+        cs.sort((a, b) => a.x - b.x);
+        const crowded = cs.some((c, i) => i && c.x - cs[i - 1].x < textW(`×${c.m}`) + 4);
+        cs.forEach((c, i) => {
+          const y = c.y + (crowded ? [-18, 18, -36, 36][i % 4] : c.key % 2 ? 20 : -20);
+          tagAt(`wM${c.key}`, c.x, y, `×${c.m}`, c.light ? 'raw mg' : 'raw cy'); placed.push([c.x, y, textW(`×${c.m}`)]);
+        });
+      }
+      // θ* under its point, or where no count stands
+      const x0 = g.X(p0[0]), y0 = g.Y(p0[1]), free = ([dx, dy]) => placed.every(([x, y, w]) => Math.abs(x0 + dx - x) > (w + textW('θ*')) / 2 + 2 || Math.abs(y0 + dy - y) > 17);
+      const at = [[0, 18], [0, -18], [-18, 16], [18, 16], [-18, -16], [18, -16], [0, 54], [0, -54]].find(free) || [0, 18];
+      tagAt('wS', x0 + at[0], y0 + at[1], 'θ*', 'raw ink');
+      if (S.fold <= 0.98) {
         for (let j = 1; j <= ROUNDS; j++) {
           const first = W.round.indexOf(j); if (first < 0 || first > nInt) continue;
           const a = spokeAngle(j), rr = 1.1;
@@ -355,17 +368,35 @@
   /** k + 1 points round the horizontal circle of radius r at height z, from angle a0 to a1 (model coordinates). */
   const arcPts = (r, z, a0, a1, k) => Array.from({ length: k + 1 }, (_, i) => { const a = a0 + (a1 - a0) * i / k; return [r * Math.cos(a), r * Math.sin(a), z]; });
 
+  /** A cited figure in a phone's frame (about 334 × 500): style.css tightens the same frames with the same query. */
+  const compact = () => TRV.figure && !TRV.still && window.matchMedia('(max-width: 480px)').matches;
+  const C2 = { column: 0.38, stair: 0.31 };        // a phone figure: the share of the width the disk's column takes (the sheet is wide)
   /** The two parts of the stage, in CSS pixels of the canvas: r3 for the solid, r2 for the disk and its magnifier.
       A wide stage puts them side by side (the solid on the left), a narrow one above each other (the solid on top). */
   function regions() {
     const cv = $('flat'), st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
     const thumb = TRV.thumbMode, W = cv.clientWidth, H = cv.clientHeight;
+    if (compact()) {
+      // a phone's cited figure: the solid on the left, the disk over its magnifier in a column on the right (narrower
+      // beside the staircase, whose sheet is wide and low)
+      const top = below($('hudBig').parentElement) + 6, bottom = $('legend').offsetHeight + 24, x0 = 10, aw = Math.max(1, W - 20), ah = Math.max(1, H - top - bottom);
+      const w2 = Math.round(aw * (S.scene === 'stair' ? C2.stair : C2.column)), r3 = { x: x0, y: top, w: aw - w2 - 8, h: ah }, r2 = { x: x0 + aw - w2, y: top, w: w2, h: ah };
+      return { W, H, top, bottom, wide: true, compact: true, r3, r2 };
+    }
+    $('stage').classList.remove('legend-right');   // the legend is measured across the whole stage first
     const top = thumb ? 24 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 6;
     const bottom = thumb ? 24 : Math.max(16, $('legend').offsetHeight + 18);
     const x0 = 12, aw = Math.max(1, W - 24), ah = Math.max(1, H - top - bottom), gap = 12;
     const wide = aw / ah >= 1.15;
     let r3, r2;
-    if (wide) { const w = Math.round(aw * 0.58); r3 = { x: x0, y: top, w, h: ah }; r2 = { x: x0 + w + gap, y: top, w: aw - w - gap, h: ah }; }
+    if (wide && TRV.figure && !TRV.still && !thumb) {
+      // a cited figure in a book page: the solid's part runs from under the title to the foot of the stage, and the
+      // legend keeps to the right of it, under the disk
+      const w = Math.round(aw * 0.5), x2 = x0 + w + gap;   // the disk's half keeps room for the legend under it
+      $('stage').style.setProperty('--fig-legend-left', `${x2}px`); $('stage').classList.add('legend-right');
+      r3 = { x: x0, y: top, w, h: H - top - 14 };
+      r2 = { x: x2, y: top, w: aw - w - gap, h: Math.max(1, H - top - Math.max(16, $('legend').offsetHeight + 18)) };
+    } else if (wide) { const w = Math.round(aw * 0.58); r3 = { x: x0, y: top, w, h: ah }; r2 = { x: x0 + w + gap, y: top, w: aw - w - gap, h: ah }; }
     else { const h = Math.round(ah * 0.55); r3 = { x: x0, y: top, w: aw, h }; r2 = { x: x0, y: top + h + gap, w: aw, h: ah - h - gap }; }
     return { W, H, top, bottom, wide, r3, r2 };
   }
@@ -373,7 +404,7 @@
       from any yaw, a point lands at most r units to either side and between z cos p − r sin p and z cos p + r sin p
       units up. So turning about the vertical never changes the size; tilting refits it. */
   function frame3(outline, R, pitch) {
-    const box = R.r3, m = 10 * (TRV.thumbMode ? 1.8 : 1), cp = Math.cos(pitch), sp = Math.sin(pitch);
+    const box = R.r3, m = (R.compact ? 3 : 10) * (TRV.thumbMode ? 1.8 : 1), cp = Math.cos(pitch), sp = Math.sin(pitch);
     let rmax = 0, hi = -Infinity, lo = Infinity;
     for (const [r, z] of outline) { rmax = Math.max(rmax, r); hi = Math.max(hi, z * cp + r * sp); lo = Math.min(lo, z * cp - r * sp); }
     const unit = Math.max(4, Math.min((box.w / 2 - m) / rmax, (box.h - 2 * m) / (hi - lo)));
@@ -538,7 +569,7 @@
   /* ---------- the stage ---------- */
   function drawStage() {
     const R = regions(), r2 = R.r2;
-    layout = { side: r2.w / Math.max(1, r2.h) > 1.25, top: R.top, bottom: R.bottom, wide: R.wide, r2, r3: R.r3, W: R.W, H: R.H };
+    layout = { side: r2.w / Math.max(1, r2.h) > 1.25, top: R.top, bottom: R.bottom, wide: R.wide, compact: !!R.compact, r2, r3: R.r3, W: R.W, H: R.H };
     const md = S.scene === 'stair' ? stairModel() : S.scene === 'samsara' ? samsaraModel() : cayleyModel();
     stage.cam.pitch = clamp(stage.cam.pitch, PITCH[0], PITCH[1]); stage.cam.zoom = clamp(stage.cam.zoom, 0.6, 1);
     frame3(md.outline, R, stage.cam.pitch);

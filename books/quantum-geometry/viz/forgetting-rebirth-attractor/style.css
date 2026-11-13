@@ -5,3 +5,35 @@
 @media (max-width: 560px) { #stage .hud-tl { top: 46px; } }
 /* on a phone the stage stacks the solid above the disk: give it the height of both (the book's frame keeps its own) */
 @media (max-width: 560px) { :root:not([data-embed]) .lab .center { grid-template-rows: minmax(300px, 78vh) auto auto; } }
+
+/* ---------- a cited figure (?embed=1&preset=…, `::: {.viz src=… preset=…}`): 500 px high, 760 wide in a book page and
+   about 334 on a phone. The card's note keeps to a few lines and scrolls inside its bar (a cyan shade at its top or
+   bottom edge says there is more; it disappears at the end), so a long note never takes the stage's height. The full
+   note, the scene buttons and every panel stay in the full laboratory ("open full screen" under the figure). */
+:root[data-embed][data-figure] .lab .tour { background: var(--panel-solid); }
+:root[data-embed][data-figure] .lab .tour .what {
+  max-height: 52px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line-hot) transparent;
+  background:
+    linear-gradient(var(--panel-solid) 40%, transparent) top / 100% 16px no-repeat local,
+    linear-gradient(transparent, var(--panel-solid) 60%) bottom / 100% 16px no-repeat local,
+    radial-gradient(farthest-side at 50% 0, color-mix(in srgb, var(--cyan) 50%, transparent), transparent) top / 100% 7px no-repeat scroll,
+    radial-gradient(farthest-side at 50% 100%, color-mix(in srgb, var(--cyan) 50%, transparent), transparent) bottom / 100% 7px no-repeat scroll;
+}
+/* on a phone the frame is about 334 × 500: the scene buttons give way to the title (◀ ▶ step through every card, and
+   so every scene), and the title, the legend, the note and the transport are set tighter */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] #stage .hud-tr { display: none; }
+  :root[data-embed][data-figure] #stage .hud-tl { top: 10px; left: 14px; max-width: calc(100% - 28px); gap: 1px; }
+  :root[data-embed][data-figure] #stage .hud-tl .big { font-size: 12px; letter-spacing: 0.08em; }
+  :root[data-embed][data-figure] #stage .hud-tl .sub { font-size: 11px; line-height: 1.32; }
+  :root[data-embed][data-figure] #stage .hud-bl { left: 14px; right: 14px; bottom: 12px; gap: 1px 10px; font-size: 10px; line-height: 1.28; }
+  :root[data-embed][data-figure] #stage .hud-bl .sw.box { width: 8px; height: 8px; }
+  :root[data-embed][data-figure] .lab .tour { gap: 6px; padding: 4px 6px; }
+  :root[data-embed][data-figure] .lab .tour .tbtn { min-width: 26px; height: 28px; padding: 0 4px; }
+  :root[data-embed][data-figure] .lab .tour .what { max-height: 58px; font-size: 11.5px; line-height: 1.34; }
+  :root[data-embed][data-figure] .lab .tour .what b { font-size: 10.5px; letter-spacing: 0.06em; }
+  :root[data-embed][data-figure] .app.lab > footer.rail .tbtn { height: 26px; min-width: 30px; }
+  :root[data-embed][data-figure] .app.lab > footer.rail .tau { font-size: 15px; }
+}
+/* a cited figure in a book page: the solid's column runs to the foot of the stage, the legend keeps to the right of it */
+:root[data-embed][data-figure] #stage.legend-right .hud-bl { left: var(--fig-legend-left); }
