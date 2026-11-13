@@ -8,6 +8,7 @@
 // solid apparatus (kit.solid) is checked against the same independent ρ: column heights, arch thickness and colour,
 // the relief of its screen; then the pixels of the WebGL picture against the flat panels; then solidChecks.
 import { session, stageFirstChecks, settle, until, solidChecks, solidPixels, openStill } from '../../../../tools/node/viz-testkit.mjs';
+import { withReadySolid } from './solid-readiness.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'dream-decoherence-unpinning';
 const T = await session();
@@ -349,7 +350,7 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
   check('default view: the beads on the front face and on the columns are visible, those on the back face are hidden by the plate', fc.front.every((h) => !h) && fc.back.every((h) => h) && fc.top.every((h) => !h), JSON.stringify(fc));
   const sh = await solidPixels(page);
   check('the apparatus covers 16–22 % of the stage with opaque, lit surfaces', sh && sh.share >= 0.16 && sh.share <= 0.22 && sh.spread >= 0.04, sh && `${(sh.share * 100).toFixed(1)}% σ ${sh.spread.toFixed(3)}`);
-  await solidChecks(T, BOOK, ID, page);
+  await solidChecks(withReadySolid(T), BOOK, ID, page);
   const before = await D(() => ({ t: window.DREAM_DEBUG.state.t, yaw: window.TRV.solids[0].cam.yaw }));
   const drag = await D(() => {
     const r = document.getElementById('stage').getBoundingClientRect(), p = window.DREAM_DEBUG.panels.r3;

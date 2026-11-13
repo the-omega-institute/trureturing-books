@@ -13,6 +13,7 @@
 //   the hemisphere's points on the unit sphere and projected back from the south pole onto (s − 1)/s.
 // It reads the page through window.SAMSARA_DEBUG.
 import { session, stageFirstChecks, solidChecks, solidPixels, settle, until, openStill } from '../../../../tools/node/viz-testkit.mjs';
+import { withReadySolid } from './solid-readiness.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'forgetting-rebirth-attractor';
 const T = await session();
@@ -371,18 +372,7 @@ await pick('staircase'); await stopped('staircase');
 
 // the lit solid itself (kit.solid): shading, turning, hidden marks, resting inside a book; last, since it turns the camera
 await pick('staircase'); await stopped('staircase');
-// readiness for the rest lines: the embedded card makes its first WebGL context only once it is seen on screen, and
-// before that parked() is also true; hand the embed to solidChecks only after a context has actually existed
-const TE = Object.create(T);
-TE.open = async (...a) => {
-  const em = await T.open(...a);
-  if (!/embed=1/.test(a[2] || '')) return em;
-  await settle(em);
-  check('solid (embed): the card on screen actually creates its first WebGL context before the rest checks',
-    await until(em, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000));
-  return em;
-};
-await solidChecks(TE, BOOK, ID, page);
+await solidChecks(withReadySolid(T), BOOK, ID, page);
 
 /* ---------- cited figures at the size a chapter shows them ----------
    A chapter cites a card in an iframe 500 px high: about 334 px wide on a 390 px phone, 760 px in a book page. In the

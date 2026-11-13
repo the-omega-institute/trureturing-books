@@ -11,6 +11,7 @@
 // its pixels against the flat panels it must stay out of; solidChecks runs last, so its camera turn moves nothing the
 // earlier checks read.
 import { session, stageFirstChecks, solidChecks, solidPixels, settle, until, openStill } from '../../../../tools/node/viz-testkit.mjs';
+import { withReadySolid } from './solid-readiness.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'pointer-ontology-deref';
 const T = await session();
@@ -358,7 +359,7 @@ check('English: the self-map card opens with an English HUD', /Table/.test(hud) 
 
 /* ---------- the lit solid: drawn, shaded, turning, hiding what is behind it, resting inside a book ---------- */
 await pick('qram_tree'); await seekEnd();
-await solidChecks(T, BOOK, ID, page);
+await solidChecks(withReadySolid(T), BOOK, ID, page);
 
 /* ---------- cited figures at the size a chapter shows them ----------
    A chapter cites a card in an iframe 500 px high: about 334 px wide on a 390 px phone, 760 px in a book page. In the

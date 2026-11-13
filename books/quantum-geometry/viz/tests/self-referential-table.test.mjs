@@ -12,6 +12,7 @@
 // the shape drawn, the arrows are the rows, ψ and Tψ in slice coordinates, the lower pole is behind the plane by a
 // ray–plane intersection; then solidChecks of the testkit (a lit, shaded body; turning; hidden marks; resting).
 import { session, stageFirstChecks, solidChecks, solidPixels, settle, until, openStill } from '../../../../tools/node/viz-testkit.mjs';
+import { withReadySolid } from './solid-readiness.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'self-referential-table';
 const T = await session();
@@ -405,7 +406,7 @@ check('solid: a drag across the ball turns it and leaves the chosen cell alone',
 
 // last: the testkit's solid gates on the 90° card at 45° (they turn the camera, so they come after every check above)
 await pick('orthogonal_zero'); await page.evaluate(() => window.TABLE_DEBUG.seek(45));
-await solidChecks(T, BOOK, ID, page);
+await solidChecks(withReadySolid(T), BOOK, ID, page);
 /* ---------- cited figures at the size a chapter shows them ----------
    A chapter cites a card in an iframe 500 px high: about 334 px wide on a 390 px phone, 760 px in a book page. In the
    phone's frame a long note once took ~180 px of the 500 and left the stage ~210 px: the 8 × 8 table and its side panel dropped out, and the ball, its caption and the legend ran into each other collided with the
