@@ -9,6 +9,11 @@
             so T₁ = 0x2000 and D₁,₂ = 0x9000 as in the chapter. Walk(b, [i₁ … i_L]) reads Mem[b][i₁] per hop.
    Colours: cyan = the routing path that has been set and the hops already walked; ink = cells the scan has read and
    the cell asked for; amber = the reader now (scan head, routing front, the slot being read, the value just read).
+   The stage has two layers. The exact drawings (memory row, routing tree, page tables, register) are flat, on the 2D
+   canvas #flat over the stage. Beside them (a column on the right of a wide stage, a band on top of a narrow one) the
+   same state is built as a lit solid with kit.solid, a schematic MODEL: one memory die, the 64 cells folded into an
+   8 × 8 array along an H-shaped routing tree, the page tables standing on the other half, the pointer register p
+   floating just past one end. #cv only keeps the solid's last frame while its WebGL context rests.
    Read-only probe: POINTER_DEBUG. */
 (() => {
   'use strict';
@@ -54,6 +59,90 @@
   const allPathSwitches = () => { const set = new Set(); for (const a of branches()) for (const s of pathOf(a)) set.add(`${s.l}:${s.p}`); return set.size; };
   const hopsDone = () => Math.min(tick(), S.idx.length);
   const pageResult = () => { const h = walk(S.idx); return h.length ? h[h.length - 1].value : B0; };
+
+  /* ---------- the die: the same three address spaces as one solid (a schematic MODEL) ----------
+     World units, x right, y back, z up, the die centred on the origin. The 64 cells are an 8 × 8 array on the left
+     half. The routing tree is folded onto it as an H-tree: even levels split left/right, odd levels back/front, so
+     bits 5, 3, 1 of an address give its column and bits 4, 2, 0 its row, and consecutive addresses follow the Z-order
+     curve. Switch (ℓ, p) sits at the centre of the cells it routes to. The page directory P, the leaf tables and the
+     data frame stand on the right half; the register p floats past the far end of the cell array, its read port
+     underneath, so that it hides no cell. */
+  const DIE = { hx: 1.86, hy: 0.98, z0: -0.3, inset: 0.1 };
+  const ARR = { x0: -1.72, y1: 0.83, pitch: 0.2075 };                 // the 8 × 8 array: x0 … x0 + 8·pitch, y1 … y1 − 8·pitch
+  const ZP = { pad: 0.035, bar: 0.06, node: 0.08, run: 0.082, read: 0.075, asked: 0.16, pillar: 0.38 };
+  const REG = { x: -2.12, hx: 0.2, hy: 0.3, z0: 0.3, z1: 0.38 };      // the pointer register: centre x, half-extents, bottom, top
+  const PORT = [REG.x, 0, REG.z0 - 0.06];                                // its read port, just under it
+  const colOf = (a) => (((a >> 5) & 1) << 2) | (((a >> 3) & 1) << 1) | ((a >> 1) & 1);
+  const rowOf = (a) => (((a >> 4) & 1) << 2) | (((a >> 2) & 1) << 1) | (a & 1);
+  const cellXY = (a) => [ARR.x0 + (colOf(a) + 0.5) * ARR.pitch, ARR.y1 - (rowOf(a) + 0.5) * ARR.pitch];
+  /** Switch (ℓ, p) at the mean of the cells under it (the centre of its block); level n is the cell itself. */
+  const SW3 = new Map();
+  for (const [l, p] of SWITCHES) {
+    const span = 1 << (n - l); let x = 0, y = 0;
+    for (let a = p * span; a < (p + 1) * span; a++) { const c = cellXY(a); x += c[0]; y += c[1]; }
+    SW3.set(`${l}:${p}`, [x / span, y / span]);
+  }
+  const nodeXY = (l, p) => (l === n ? cellXY(p) : SW3.get(`${l}:${p}`));
+  /** A box as five faces (no bottom), appended to a vertex/face/colour list. */
+  function box3(M, x0, x1, y0, y1, z0, z1, col) {
+    const b = M.vertices.length;
+    M.vertices.push([x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0], [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]);
+    M.faces.push([b + 4, b + 5, b + 6, b + 7], [b, b + 1, b + 5, b + 4], [b + 1, b + 2, b + 6, b + 5], [b + 2, b + 3, b + 7, b + 6], [b + 3, b, b + 4, b + 7]);
+    for (let i = 0; i < 5; i++) M.colors.push(col);
+  }
+  const mesh = () => ({ vertices: [], faces: [], colors: [] });
+  /** The die: a slab whose sides slope in by `inset` towards the top face z = 0. */
+  const DIE_MESH = (() => {
+    const { hx, hy, z0, inset: i } = DIE;
+    return { vertices: [[-hx, -hy, z0], [hx, -hy, z0], [hx, hy, z0], [-hx, hy, z0], [-hx + i, -hy + i, 0], [hx - i, -hy + i, 0], [hx - i, hy - i, 0], [-hx + i, hy - i, 0]],
+      faces: [[4, 5, 6, 7], [0, 1, 5, 4], [1, 2, 6, 5], [2, 3, 7, 6], [3, 0, 4, 7], [0, 3, 2, 1]] };
+  })();
+  /** The H-tree conduits (every edge of the 63 switches, the last level down to the cells) and the switch housings. */
+  const BUS_MESH = (() => {
+    const M = mesh(), w = 0.011, c = null;          // coloured when drawn (the palette follows the theme)
+    for (const [l, p] of SWITCHES) {
+      const A = nodeXY(l, p);
+      for (const ch of [0, 1]) {
+        const B = nodeXY(l + 1, 2 * p + ch);
+        box3(M, Math.min(A[0], B[0]) - w, Math.max(A[0], B[0]) + w, Math.min(A[1], B[1]) - w, Math.max(A[1], B[1]) + w, ZP.pad, ZP.bar, c);
+      }
+      box3(M, A[0] - 0.03, A[0] + 0.03, A[1] - 0.03, A[1] + 0.03, ZP.pad, ZP.node, c);
+    }
+    return M;
+  })();
+  /** The page tables on the right half: P and T₁ as four slots each (slot 0 at the back), T₂, T₃ and D₁,₂ as blocks. */
+  const TB3 = (() => {
+    const top = 0.83, sp = 0.24, g = 0.014;
+    const slots = (x0, x1) => Array.from({ length: TBL }, (_, k) => ({ x0, x1, y0: top - (k + 1) * sp + g, y1: top - k * sp - g, z1: 0.2 }));
+    return { [B0]: { slots: slots(0.26, 0.72) }, 0x2000: { slots: slots(1.14, 1.6) },
+      0x3000: { box: { x0: 1.14, x1: 1.6, y0: -0.36, y1: -0.2, z1: 0.15 } }, 0x4000: { box: { x0: 1.14, x1: 1.6, y0: -0.58, y1: -0.42, z1: 0.15 } },
+      0x9000: { box: { x0: 1.14, x1: 1.6, y0: -0.83, y1: -0.64, z1: 0.15 } } };
+  })();
+  const topOf = (r) => [(r.x0 + r.x1) / 2, (r.y0 + r.y1) / 2, r.z1];
+  /** Where a pointer to the table or frame b lands: the top of its slot 0 (its base address), or the top of the block. */
+  const anchor3 = (b) => (TB3[b].slots ? topOf(TB3[b].slots[0]) : topOf(TB3[b].box));
+  const POINTERS = [[B0, 0], [B0, 1], [B0, 2], [B0, 3], [0x2000, 2]];   // the pointers the flat table draws too
+  const bez = (P0, C, P1, k) => Array.from({ length: k + 1 }, (_, i) => { const t = i / k, u = 1 - t; return [0, 1, 2].map((d) => u * u * P0[d] + 2 * u * t * C[d] + t * t * P1[d]); });
+  /** The loop of P[0]: out of the top of slot 0, over its back corner (a diagonal plane, so that it reads from any
+      side) and down into the same slot. */
+  const LOOP = (() => {
+    const s = TB3[B0].slots[0], c = topOf(s), d = [-Math.SQRT1_2, Math.SQRT1_2, 0], at = (u, z) => [c[0] + d[0] * u, c[1] + d[1] * u, c[2] + z];
+    const P0 = at(-0.1, 0), P1 = at(-0.1, 0.52), P2 = at(0.6, 0.46), P3 = at(0.1, 0.03);
+    return { pts: Array.from({ length: 33 }, (_, q) => { const t = q / 32, u = 1 - t; return [0, 1, 2].map((k) => u * u * u * P0[k] + 3 * u * u * t * P1[k] + 3 * u * t * t * P2[k] + t * t * t * P3[k]); }), apex: at(0.32, 0.5) };
+  })();
+  /** The pointer of slot (b, i) as a curve: a lifted arc to its target, or for P[0] the loop back into slot 0 itself. */
+  function pointerPts(b, i) {
+    if (b === B0 && i === 0) return LOOP.pts;
+    const s = topOf(TB3[b].slots[i]), e = anchor3(MEM[b][i]), d = Math.hypot(e[0] - s[0], e[1] - s[1]);
+    return bez(s, [(s[0] + e[0]) / 2, (s[1] + e[1]) / 2, Math.max(s[2], e[2]) + 0.2 + 0.14 * d], e, 24);
+  }
+  /** The register feed: out of the read port, across and down onto the root of the H-tree. */
+  const FEED = (() => { const r = nodeXY(0, 0); return bez(PORT, [r[0], r[1], PORT[2]], [r[0], r[1], ZP.run], 16); })();
+  /** The scan head: over the last cell read (address min(t, a + 1) − 1), sliding on to the next between ticks. */
+  function headXY() {
+    const u = clamp(Math.min(clock.t, scanSteps()) - 1, 0, N - 1), i0 = Math.floor(u), f = u - i0, A = cellXY(i0), B = cellXY(Math.min(N - 1, i0 + 1));
+    return [A[0] + (B[0] - A[0]) * f, A[1] + (B[1] - A[1]) * f];
+  }
 
   /* ---------- canvas helpers ---------- */
   const lw = (x) => (TRV.thumbMode ? 2 * x : x);
@@ -136,7 +225,8 @@
   function drawTable(ctx, box, words) {
     const focus = S.scene === 'table' || TRV.thumbMode, A = focus ? 1 : 0.5;
     const hops = walk(S.idx), done = hopsDone(), cur = done < hops.length ? done : -1;
-    const colW = clamp(box.w * 0.3, 54, 150), top0 = Math.min(28, Math.max(20, box.h * 0.12)), sh = clamp((box.h - top0 - 26) / 7.6, 12, 34), fs = clamp(sh * 0.48, 8.5, 12.5);
+    // the rows as tall as the box allows: T₁ (a 22 px head and 4 rows) and the three blocks under it (4.2 rows) end inside it
+    const colW = clamp(box.w * 0.3, 54, 150), top0 = Math.min(28, Math.max(20, box.h * 0.12)), sh = clamp((box.h - top0 - 26) / 8.2, 12, 34), fs = clamp(sh * 0.48, 8.5, 12.5);
     const xP = box.x + box.w * 0.13, xT = box.x + box.w * 0.13 + colW + Math.max(26, box.w * 0.12), y0 = box.y + top0;
     const slotY = (k) => y0 + 22 + k * sh;
     const blocks = {
@@ -209,45 +299,198 @@
     geo.reg = rows;
   }
 
+  /* ---------- where the solid goes ----------
+     Wide stage: a column on the right, from under the scene chips down to the legend; the title wraps short of it,
+     and the flat drawings fill the rest, stacked when they are narrow. Narrow stage: a band on top, under the title,
+     the flat drawings below. The size of the solid does not depend on the title, so it holds still while the title
+     changes from card to card. */
+  let LAY = { mode: 'column', orient: 'deep', r3: { x: 0, y: 0, w: 1, h: 1 }, cx: 0, cy: 0, unit: 1, pitch: 0.8 }, camKey = '';
+  /** World points that bound the model: the die, the tallest pillar and arc, the register. */
+  const HULL = (() => {
+    const out = [], corners = (x0, x1, y0, y1, zs) => { for (const x of [x0, x1]) for (const y of [y0, y1]) for (const z of zs) out.push([x, y, z]); };
+    corners(-DIE.hx, DIE.hx, -DIE.hy, DIE.hy, [DIE.z0, 0]);                          // the slab
+    corners(ARR.x0, ARR.x0 + 8 * ARR.pitch, ARR.y1 - 8 * ARR.pitch, ARR.y1, [ZP.pillar + 0.14]);   // the pillars and the beads on them
+    corners(-0.2, 1.7, -0.85, 0.9, [0.7]);                                          // the pointer arcs and the loop over the tables
+    corners(REG.x - REG.hx, REG.x + REG.hx, -REG.hy, REG.hy, [REG.z0 - 0.1, REG.z1]);   // the register
+    return out;
+  })();
+  const ORIENT = { deep: -Math.PI / 2 + 0.07, wide: -0.16 };   // default yaw: the long side of the die runs away from, or across, the viewer
+  /** Fit the model into the rectangle r (leaving `cap` pixels for the caption below it): the pitch that shows the most of
+      the die's top face, and the scale and centre that put the model's outline in the middle of r. */
+  function fit(r, cap) {
+    const orient = r.w / r.h >= 1.25 ? 'wide' : 'deep', yaw = ORIENT[orient], m = 8;
+    let best = null;
+    for (let pitch = 0.62; pitch <= 0.8601; pitch += 0.04) {
+      const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch), R = [cy, -sy, 0], U = [sy * sp, cy * sp, cp];
+      let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+      for (const v of HULL) { const X = v[0] * R[0] + v[1] * R[1], Y = v[0] * U[0] + v[1] * U[1] + v[2] * U[2]; x0 = Math.min(x0, X); x1 = Math.max(x1, X); y0 = Math.min(y0, Y); y1 = Math.max(y1, Y); }
+      const unit = Math.max(10, Math.min((r.w - 2 * m) / (x1 - x0), (r.h - 2 * m - cap) / (y1 - y0))), score = unit * unit * sp * (1 - 0.8 * (pitch - 0.62));
+      if (!best || score > best.score + 1e-9) best = { score, pitch, unit, cx: r.x + r.w / 2 - unit * (x0 + x1) / 2, cy: r.y + (r.h - cap) / 2 + unit * (y0 + y1) / 2 };
+    }
+    return { orient, yaw, pitch: best.pitch, unit: best.unit, cx: best.cx, cy: best.cy };
+  }
+  /** A cited figure in a phone's frame (about 334 × 500): style.css tightens the same frames with the same query. */
+  const compact = () => TRV.figure && !TRV.still && window.matchMedia('(max-width: 480px)').matches;
+  function layout(W, H) {
+    const stage = $('stage'), st = stage.getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
+    if (TRV.thumbMode) return { mode: 'cover', r3: { x: W * 0.02, y: H * 0.05, w: W * 0.42, h: H * 0.9 }, cap: 0 };
+    if (compact()) {   // a phone's cited figure: the die in a band under the title, the drawing the card is about under it
+      stage.classList.remove('col3');
+      // the die takes what the drawing under it can spare: the page tables need 146 px, the routing tree over the memory row 116
+      const top = below($('hudBig').parentElement) + 6, bottom = $('legend').offsetHeight + 22, ah = Math.max(260, H - top - bottom);
+      const h3 = Math.round(S.scene === 'table' ? Math.min(ah * 0.52, ah - 146) : Math.min(ah * 0.58, ah - 116));
+      return { mode: 'band', compact: true, r3: { x: 10, y: top - 2, w: W - 20, h: h3 }, cap: 14, b2: { x: 14, y: top + h3 + 6, w: W - 28, h: ah - h3 - 6 } };
+    }
+    const wide = W - 36 >= 560, w3 = clamp(0.85 * (H - 60), 220, W * 0.4), x3 = W - w3 - 8;   // a short stage needs a narrower column
+    stage.classList.toggle('col3', wide);
+    stage.style.setProperty('--pod-hud-max', `${Math.max(160, x3 - 34)}px`);
+    const top = Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 8, bottom = Math.max(18, $('legend').offsetHeight + 18);
+    if (wide) {
+      const y3 = below($('sceneChips')) + 6;
+      return { mode: 'column', r3: { x: x3, y: y3, w: w3, h: H - bottom + 4 - y3 }, cap: 18, b2: { x: 18, y: top, w: x3 - 14 - 18, h: Math.max(80, H - top - bottom) } };
+    }
+    const h3 = clamp(Math.min(H * 0.34, H - 330), 90, 240);
+    return { mode: 'band', r3: { x: 10, y: top - 4, w: W - 20, h: h3 }, cap: 16, b2: { x: 18, y: top + h3 + 2, w: W - 36, h: Math.max(80, H - top - bottom - h3 - 2) } };
+  }
+
+  /* ---------- the solid ---------- */
+  let G3 = null;                              // what the last frame put on the die (for the probe)
+  function drawSolid(lay) {
+    const sc = solid, table = S.scene === 'table', focusScan = S.scene === 'scan', t = clock.t, m = levelsSet();
+    const read = table ? 0 : scanRead(), hit = !table && read >= scanSteps(), delivered = new Set(!table && m >= n ? branches() : []);
+    const rec = { cells: [], switches: [], paths: [], fronts: [], head: null, arcs: [], landing: null, loopWalks: 0, port: PORT.slice() };
+    sc.begin();
+    sc.poly('die', DIE_MESH, { color: P.faint });
+    sc.poly('bus', BUS_MESH, { color: P.lineHot, edges: false });
+    // the cells: raised where the tree has delivered (cyan pillars), the cell asked for and the cells the scan has read (ink)
+    const C = mesh(), h = ARR.pitch * 0.4;
+    for (let a = 0; a < N; a++) {
+      const [x, y] = cellXY(a);
+      let z = ZP.pad, col = P.dim, kind = 'idle';
+      if (delivered.has(a)) { z = ZP.pillar; col = P.cyan; kind = 'delivered'; }
+      else if (!table && a === S.a) { z = hit ? ZP.pillar * 0.8 : ZP.asked; col = P.ink; kind = 'asked'; }
+      else if (a < read) { z = ZP.read; col = P.ink; kind = 'read'; }
+      box3(C, x - h, x + h, y - h, y + h, 0, z, col);
+      rec.cells.push({ a, x, y, z, kind });
+    }
+    sc.poly('cells', C, { colors: C.colors });
+    // the register p, its read port underneath (hidden by the register from above)
+    const Rg = mesh();
+    box3(Rg, REG.x - REG.hx, REG.x + REG.hx, -REG.hy, REG.hy, REG.z0, REG.z1, P.dim);
+    sc.poly('reg', Rg, { colors: Rg.colors });
+    sc.bead(PORT, { key: 'port', color: P.dim, r: 3, glow: 0.2 });
+    // the page tables: walked slots cyan
+    const hops = walk(S.idx), done = table ? hopsDone() : 0, cur = table && done < hops.length ? done : -1;
+    const walked = (b, i) => hops.some((x, q) => q < done && x.base === b && x.slot === i);
+    const T3 = mesh();
+    for (const [b, tb] of Object.entries(TB3)) {
+      if (tb.slots) tb.slots.forEach((r, i) => box3(T3, r.x0, r.x1, r.y0, r.y1, 0, r.z1, walked(+b, i) ? P.cyan : P.dim));
+      else box3(T3, tb.box.x0, tb.box.x1, tb.box.y0, tb.box.y1, 0, tb.box.z1, P.dim);
+    }
+    sc.poly('tables', T3, { colors: T3.colors });
+    for (const [b, i] of POINTERS) {
+      const pts = pointerPts(b, i), on = walked(b, i), e = pts[pts.length - 1];
+      if (on) { sc.tube(`ptr${b}:${i}`, pts.slice(0, -2), { color: P.cyan, width: 3.2, glow: 0.35 }); sc.arrow(pts[pts.length - 4], e, { color: P.cyan, width: 3, headSize: 9 }); }
+      else { sc.line(pts.slice(0, -2), { color: P.faint, width: 1.3 }); sc.arrow(pts[pts.length - 4], e, { color: P.faint, width: 1.3, headSize: 7 }); }
+      rec.arcs.push({ base: b, slot: i, walked: on, walks: hops.filter((x, q) => q < done && x.base === b && x.slot === i).length });
+    }
+    rec.loopWalks = rec.arcs[0].walks;
+    if (table) {      // the amber dereference: from the port to the slot being read now, or to what the walk has read
+      const land = cur >= 0 ? topOf(TB3[hops[cur].base].slots[hops[cur].slot]) : anchor3(hops.length ? hops[hops.length - 1].value : B0);
+      const at = [land[0], land[1], land[2] + 0.04], beam = bez(PORT, [(PORT[0] + at[0]) / 2, (PORT[1] + at[1]) / 2, PORT[2] + 0.12], at, 24);
+      sc.tube('beam', beam.slice(0, -3), { color: P.amber, width: 2.6, glow: 0.6 });
+      sc.arrow(beam[beam.length - 5], at, { color: P.amber, width: 2.4, headSize: 11 });
+      sc.bead(at, { key: 'now', color: P.amber, r: 4.6, glow: 1 });
+      rec.landing = cur >= 0 ? { at, base: hops[cur].base, slot: hops[cur].slot } : { at, block: hops.length ? hops[hops.length - 1].value : B0 };
+    } else {          // the routing paths: from the port down the feed onto the root, then switch by switch
+      const front = Math.min(t, n);
+      branches().forEach((a, q) => {
+        const path = pathOf(a), pts = t > 0 ? FEED.slice() : [];
+        for (let l = 1; l <= m; l++) { const [x, y] = nodeXY(l, l === n ? a : path[l].p); pts.push([x, y, l === n ? ZP.read : ZP.run]); }
+        if (pts.length >= 2) sc.tube(`br${q}`, pts, { color: P.cyan, width: focusScan ? 2.2 : 3.2, glow: 0.35 });
+        rec.paths.push({ a, nodes: pts.slice(FEED.length - 1) });   // the root and the switches set, ending at the cell once delivered
+        if (t < n) {  // the routing front between two levels
+          const l0 = Math.floor(front), f = front - l0, A = nodeXY(l0, path[l0].p), B = nodeXY(l0 + 1, l0 + 1 === n ? a : path[l0 + 1].p);
+          const at = [A[0] + (B[0] - A[0]) * f, A[1] + (B[1] - A[1]) * f, ZP.run + 0.03];
+          sc.bead(at, { key: `front${q}`, color: P.amber, r: focusScan ? 3.4 : 4.4, glow: 1 });
+          rec.fronts.push({ a, at, l0, f });
+        }
+      });
+      if (t <= 0) sc.line(FEED, { color: P.faint, width: 1.2 });
+      for (const [l, p] of activeSwitches()) {
+        const [x, y] = nodeXY(l, p), at = [x, y, ZP.run + 0.012];
+        sc.bead(at, { key: `sw${l}:${p}`, color: P.cyan, r: focusScan ? 2.6 : 3.4, glow: 0.6 });
+        rec.switches.push({ l, p, at });
+      }
+      // the scan: the head over the last cell read, and the Z-order walk through the cells read so far
+      const [hx, hy] = headXY(), hz = (rec.cells[Math.min(N - 1, Math.max(0, Math.round(Math.min(t, scanSteps()) - 1)))].z) + 0.09;
+      sc.bead([hx, hy, hz], { key: 'head', color: P.amber, r: focusScan ? 5.4 : 3.6, glow: 1 });
+      rec.head = { at: [hx, hy, hz], cell: Math.max(0, Math.min(read, scanSteps()) - 1) };
+      if (focusScan && read > 1) sc.line(Array.from({ length: read }, (_, c) => { const [x, y] = cellXY(c); return [x, y, ZP.read + 0.014]; }), { color: P.ink, width: 1.3 });
+    }
+    // labels: what the die is, the register, the tables
+    if (lay.cap) sc.tag('cap', [lay.r3.x + lay.r3.w / 2, lay.r3.y + lay.r3.h - 9], L('示意模型：一块存储芯片', 'Schematic model: one memory die'), 'raw', { screen: true });
+    sc.tag('reg', [REG.x, 0, REG.z1], table ? 'p' : S.k === 1 ? `a = ${S.a}` : L(`a：${S.k} 个分支`, `a: ${S.k} branches`), 'num', { dy: -12, occlude: false });
+    sc.tag('P', [0.49, 0.35, 0.42], 'P', table ? 'ink' : '');
+    sc.tag('T1', [1.37, 0.35, 0.42], 'T₁', table ? 'ink' : '');
+    sc.tag('D', [1.37, -0.735, 0.34], 'D₁,₂', table ? 'ink' : '');
+    // the count of the loop over its apex, or beside it (a phone's figure, where the title is just above the die)
+    if (table && rec.loopWalks) sc.tag('loops', LOOP.apex, `×${rec.loopWalks}`, 'cy', lay.compact ? { dx: 18, dy: 0 } : { dy: -12 });
+    sc.end();
+    G3 = rec;
+  }
+
   /* ---------- the stage ---------- */
   function drawStage() {
-    const g0 = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, W = g0.W, H = g0.H;
+    const g0 = kit.plot($('flat'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, W = g0.W, H = g0.H;
     geo.amber = 0;
-    if (TRV.thumbMode) {     // wordless cover: the lit routing paths over the memory row, beside the self-mapped directory
-      const glow = ctx.createRadialGradient(W * 0.35, H * 0.5, 0, W * 0.35, H * 0.5, W * 0.6);
+    const lay = layout(W, H), f = fit(lay.r3, lay.cap), key = `${lay.mode}:${f.orient}:${f.pitch.toFixed(2)}`;
+    if (key !== camKey) { camKey = key; solid.cam.yaw = f.yaw; solid.cam.pitch = f.pitch; solid.cam.zoom = 1; }
+    LAY = Object.assign({ W, H }, lay, f);
+    drawSolid(lay);
+    geo.panels = [];
+    if (TRV.thumbMode) {     // wordless cover: the die beside the lit routing paths over the memory row and the self-mapped directory
+      const glow = ctx.createRadialGradient(W * 0.72, H * 0.5, 0, W * 0.72, H * 0.5, W * 0.28);
       glow.addColorStop(0, TRV.alpha(P.cyan, 0.08)); glow.addColorStop(1, TRV.alpha(P.cyan, 0)); ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
-      drawMemory(ctx, { x: W * 0.04, y: H * 0.08, w: W * 0.58, h: H * 0.84 }, false);
-      drawTable(ctx, { x: W * 0.66, y: H * 0.14, w: W * 0.32, h: H * 0.72 }, false);
+      drawMemory(ctx, { x: W * 0.47, y: H * 0.08, w: W * 0.32, h: H * 0.84 }, false);
+      drawTable(ctx, { x: W * 0.81, y: H * 0.16, w: W * 0.18, h: H * 0.68 }, false);
       return;
     }
-    const st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
-    const top = Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 8, bottom = Math.max(18, $('legend').offsetHeight + 18);
-    const bx = { x: 18, y: top, w: W - 36, h: Math.max(80, H - top - bottom) };
+    const bx = lay.b2;
     geo.mem = null; geo.reg = null; geo.tree = S.scene !== 'table';
+    // every flat panel's box is recorded: the solid stays out of them
+    const panel = (what, draw) => (c, b, w) => { geo.panels.push(Object.assign({ what }, b)); draw(c, b, w); };
+    const mem = panel('memory', drawMemory), tab = panel('table', drawTable), reg = panel('register', drawRegister);
+    if (lay.compact) {                 // a phone's figure: only the drawing the scene is about (the rest is in the full laboratory)
+      if (S.scene !== 'table') mem(ctx, bx, true);
+      else if (S.idx.length === 1) reg(ctx, bx);
+      else tab(ctx, bx, true);
+      return;
+    }
     if (S.scene === 'table') {         // the page table is a notation of its own: the routing tree and scan bus fold away
       const one = S.idx.length === 1, wide = bx.w >= 560;
       if (one && wide) {
         const rw = bx.w * 0.42;
-        drawRegister(ctx, { x: bx.x, y: bx.y, w: rw, h: bx.h });
-        drawTable(ctx, { x: bx.x + rw + 16, y: bx.y, w: bx.w - rw - 16, h: bx.h }, true);
+        reg(ctx, { x: bx.x, y: bx.y, w: rw, h: bx.h });
+        tab(ctx, { x: bx.x + rw + 16, y: bx.y, w: bx.w - rw - 16, h: bx.h }, true);
       } else if (one) {
         const rh = Math.min(bx.h * 0.46, 200);
-        drawRegister(ctx, { x: bx.x, y: bx.y, w: bx.w, h: rh });
-        drawTable(ctx, { x: bx.x, y: bx.y + rh + 4, w: bx.w, h: bx.h - rh - 4 }, true);
+        reg(ctx, { x: bx.x, y: bx.y, w: bx.w, h: rh });
+        tab(ctx, { x: bx.x, y: bx.y + rh + 4, w: bx.w, h: bx.h - rh - 4 }, true);
       } else {
         const tw = Math.min(bx.w, 620);
-        drawTable(ctx, { x: bx.x + (bx.w - tw) / 2, y: bx.y, w: tw, h: bx.h }, true);
+        tab(ctx, { x: bx.x + (bx.w - tw) / 2, y: bx.y, w: tw, h: bx.h }, true);
       }
       return;
     }
     if (bx.w >= 560) {
       const mw = bx.w * 0.6;
-      drawMemory(ctx, { x: bx.x, y: bx.y, w: mw, h: bx.h }, true);
-      drawTable(ctx, { x: bx.x + mw + 16, y: bx.y, w: bx.w - mw - 16, h: bx.h }, true);
+      mem(ctx, { x: bx.x, y: bx.y, w: mw, h: bx.h }, true);
+      tab(ctx, { x: bx.x + mw + 16, y: bx.y, w: bx.w - mw - 16, h: bx.h }, true);
     } else {
-      const mh = bx.h * 0.52;
-      drawMemory(ctx, { x: bx.x, y: bx.y, w: bx.w, h: mh }, true);
-      drawTable(ctx, { x: bx.x, y: bx.y + mh + 4, w: bx.w, h: bx.h - mh - 4 }, true);
+      const mh = Math.max(bx.h * 0.4, Math.min(bx.h * 0.52, bx.h - 149));   // the table keeps the height its seven rows need
+      mem(ctx, { x: bx.x, y: bx.y, w: bx.w, h: mh }, true);
+      tab(ctx, { x: bx.x, y: bx.y + mh + 4, w: bx.w, h: bx.h - mh - 4 }, true);
     }
   }
 
@@ -311,6 +554,13 @@
     document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(S.scene); });
   }
 
+  /* the solid stage: the camera turns on any drag that does not start on a memory cell of the flat drawing; its
+     placement on the stage (cx, cy, radius) is read from the layout of the last frame */
+  const solid = kit.solid($('stage'), {
+    canvas: $('cv'), onChange: () => paint(), onPick: (ev) => cellAt(ev) != null,
+    get cx() { return LAY.W ? LAY.cx / LAY.W : 0.5; }, get cy() { return LAY.H ? LAY.cy / LAY.H : 0.5; },
+    get radius() { return LAY.W ? LAY.unit / Math.min(LAY.W, LAY.H) : 0.36; }
+  });
   const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail: steps ---------- */
@@ -333,14 +583,25 @@
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
   kit.keys({ 1: () => { leave(); setScene('scan'); }, 2: () => { leave(); setScene('tree'); }, 3: () => { leave(); setScene('table'); } });
 
-  /* ---------- direct manipulation: click a memory cell ---------- */
+  /* ---------- direct manipulation: click a memory cell (flat row or die) ---------- */
   const cellAt = (ev) => {
     const g = geo.mem; if (!g) return null;
-    const b = $('cv').getBoundingClientRect(), x = ev.clientX - b.left, y = ev.clientY - b.top;
+    const b = $('flat').getBoundingClientRect(), x = ev.clientX - b.left, y = ev.clientY - b.top;
     if (x < g.x || x >= g.x + g.w || y < g.y - 8 || y > g.y + g.h + 14) return null;
     return Math.floor((x - g.x) / g.cw);
   };
-  $('cv').addEventListener('click', (ev) => { const c = cellAt(ev); if (c == null) return; leave(); S.a = c; fAddr.set(c); if (S.scene === 'table') setScene('tree', 0); else fitClock(0); clock.play(); });
+  /** The cell of the die under the pointer (a face of the cell array; five faces per cell, in address order). */
+  const dieCellAt = (ev) => { const h = solid.hit(ev); return h && h.id === 'cells' && h.face != null ? Math.floor(h.face / 5) : null; };
+  let downAt = null;
+  $('stage').addEventListener('pointerdown', (ev) => { downAt = [ev.clientX, ev.clientY]; });
+  $('stage').addEventListener('pointermove', (ev) => { if (!ev.buttons) $('stage').classList.toggle('on-cell', cellAt(ev) != null || dieCellAt(ev) != null); });
+  $('stage').addEventListener('click', (ev) => {
+    if (ev.target.closest('button, a, input, .chip')) return;
+    if (downAt && Math.hypot(ev.clientX - downAt[0], ev.clientY - downAt[1]) > 4) return;   // a drag turned the die
+    const c = cellAt(ev) ?? dieCellAt(ev);
+    if (c == null) return;
+    leave(); S.a = c; fAddr.set(c); if (S.scene === 'table') setScene('tree', 0); else fitClock(0); clock.play();
+  });
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
@@ -378,7 +639,7 @@
   TRV.startGlitch(document.querySelector('.brand'));
 
   /* ---------- probe for the browser suite, cover, start ---------- */
-  const at = (x, y) => { const b = $('cv').getBoundingClientRect(); return { x: b.left + x, y: b.top + y }; };
+  const at = (x, y) => { const b = $('flat').getBoundingClientRect(); return { x: b.left + x, y: b.top + y }; };
   window.POINTER_DEBUG = {
     get state() {
       return { scene: S.scene, a: S.a, k: S.k, idx: S.idx.slice(), t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, step: tick(),
@@ -388,7 +649,11 @@
     },
     switches: () => SWITCHES.map((s) => s.slice()), path: (a) => pathOf(a).map((s) => Object.assign({}, s)), mem: () => JSON.parse(JSON.stringify(MEM)), walk: (idx) => walk(idx),
     seek: (t) => { clock.pause(); clock.set(t); }, scene: (sc, t) => setScene(sc, t), setAddr: (a) => { S.a = a; fAddr.set(a); fitClock(); }, setK: (k) => setK(k), setIdx: (idx) => setIdx(idx),
-    point: { cell: (c) => (geo.mem ? at(geo.mem.x + (c + 0.5) * geo.mem.cw, geo.mem.y + geo.mem.h / 2) : null) }
+    point: { cell: (c) => (geo.mem ? at(geo.mem.x + (c + 0.5) * geo.mem.cw, geo.mem.y + geo.mem.h / 2) : null) },
+    /** The die of the last frame: layout, camera, cells, lit switches and paths, fronts, scan head, pointers, the
+        amber landing, the flat panels it must stay out of, and its marks (viewport pixels). */
+    solid: () => JSON.parse(JSON.stringify(Object.assign({ mode: LAY.mode, orient: LAY.orient, region: LAY.r3, pitch: LAY.pitch, unit: solid.unit, cam: solid.cam,
+      arr: ARR, die: DIE, register: REG, tables: TB3, panels: geo.panels || [] }, G3 || {}, { marks: solid.marks() })))
   };
   /** Cover: four superposed paths reaching their leaves while the scan head is a third of the way along. */
   window.TRV_THUMB = () => { S.a = 41; S.k = 4; S.idx = [0, 0]; setScene('tree', n); paint.now(); };
