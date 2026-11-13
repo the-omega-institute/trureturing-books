@@ -52,17 +52,26 @@ for (const line of text[INDEX].split('\n')) {
 const columns = files.filter((f) => f !== INDEX);
 const CH27 = 'ch27-reading-frozen-proofs-i.md', CH28 = 'ch28-reading-frozen-proofs-ii.md';
 const citedBy = (f, mode) => GIDS.filter((g) => truth[g].cites.has(f) && (mode === 'all' || truth[g].cites.get(f) === 'e')).sort();
-// where the rail runs, read from each language's SUMMARY: a unit's label is its title up to the colon; the rail starts
-// at the label of columns[0] and ends at the label of the last column; a text may name an appendix only if it has a
-// column or is the index, and a list of the reading order names exactly the appendices that have a column
+// where the rail runs, read from each language's SUMMARY: a unit's label is the unit name its heading opens with
+// (序曲/Prelude, 第N章/Chapter N, a numbered subpage N.k, 终章/Coda, 附录 X/Appendix X), followed by one space before
+// the title as now written, or by a colon as in older headings; a title in none of these families keeps the older
+// rule (up to the colon, else the whole title). The rail starts at the label of columns[0] and ends at the label of
+// the last column; a text may name an appendix only if it has a column or is the index, and a list of the reading
+// order names exactly the appendices that have a column
+const UNIT_HEAD = /^(序曲|终章|第[零〇一二三四五六七八九十百]+章|附录\s*[A-Z]|Prelude|Coda|Chapter\s+\d+|Appendix\s+[A-Z]|\d+(?:\.\d+)+)(?=[\s：:]|$)/;
+const unitLabel = (raw) => {
+  const title = raw.trim(), head = UNIT_HEAD.exec(title);
+  if (head) return head[1].replace(/\s+/g, ' ');
+  const cut = [title.indexOf('：'), title.indexOf(':')].filter((k) => k > 0);
+  return (cut.length ? title.slice(0, Math.min(...cut)) : title).trim();
+};
 const LABEL = {};
 for (const lang of ['zh', 'en']) {
   LABEL[lang] = {};
   for (const line of fs.readFileSync(path.join(BOOK, lang, 'SUMMARY.md'), 'utf8').split('\n')) {
     const a = line.indexOf('['), b = line.indexOf('](', a), c = line.indexOf('.md)', b);
     if (a < 0 || b < 0 || c < 0) continue;
-    const title = line.slice(a + 1, b), cut = [title.indexOf('：'), title.indexOf(':')].filter((k) => k > 0);
-    LABEL[lang][line.slice(b + 2, c + 3)] = (cut.length ? title.slice(0, Math.min(...cut)) : title).trim();
+    LABEL[lang][line.slice(b + 2, c + 3)] = unitLabel(line.slice(a + 1, b));
   }
 }
 const appxLetter = (lang, f) => (/^(?:附录|Appendix)\s*([A-Z])$/.exec(LABEL[lang][f] || '') || [])[1];
