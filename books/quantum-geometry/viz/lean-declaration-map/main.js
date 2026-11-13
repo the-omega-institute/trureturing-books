@@ -88,7 +88,10 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
       if (!thumb && p >= 0) {
         const name = L(DATA.parts[p][0], DATA.parts[p][1]), roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', '·'][p] || '';
         ctx.font = `${narrow ? 9.5 : 10.5}px ${TRV.fonts.body}`;
-        const lab = ctx.measureText(name).width < x1 - x0 - 4 ? name : roman;
+        // the full name if it fits; the coda-and-appendices group then tries compact forms before the bare mark
+        const fits = (str) => ctx.measureText(str).width < x1 - x0 - 4;
+        const compact = /^Coda/.test(DATA.parts[p][1]) ? L(['终章附录', '终+'], ['Coda & App.', 'Coda+']) : [];
+        const lab = [name, ...compact].find(fits) || roman;
         ctx.fillStyle = P.dim; ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillText(lab, (x0 + x1) / 2, g.pt + g.ih + 22);
       }
       c0 = c;
