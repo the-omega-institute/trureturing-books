@@ -251,17 +251,33 @@ check('opens on HAAR in the seat scene with all 600 points', s.preset === 'haar'
 }
 
 // HAAR cited in a chapter on a phone (a 315 × 500 iframe): the card's note shares the frame with the ball, so it must stay
-// short enough to leave the stage ≥ 220 px tall, still say every idea of the card, and never scroll inside the frame.
+// short enough to leave the stage ≥ 220 px tall, still say every idea of the card, and never make the frame scroll. The
+// theme bounds the note of a cited card to two lines that scroll inside the tour bar (.what has no box of its own): that
+// strip is the one scroller allowed, vertically only, and its last line must be reachable.
+const frameRead = () => {
+  const st = document.getElementById('stage').getBoundingClientRect(), tour = document.querySelector('.tour').getBoundingClientRect(), what = document.querySelector('.tour .what');
+  const note = what.querySelector(':scope > .tour-note');
+  const inner = [...document.querySelectorAll('body *')].filter((e) => e !== note && /(auto|scroll)/.test(getComputedStyle(e).overflowY) && e.scrollHeight > e.clientHeight + 1).map((e) => e.id || e.className);
+  const de = document.documentElement, out = { h: st.height, top: st.top, bottom: st.bottom, tourBottom: tour.bottom, tourH: tour.height, vh: innerHeight, scrollY,
+    docScroll: de.scrollHeight - de.clientHeight, bodyScroll: document.body.scrollHeight - document.body.clientHeight, inner, note: what.textContent, preset: window.FAIRNESS_DEBUG.state.preset };
+  if (!note) return { ...out, bar: null };
+  // the note as drawn: its scroll box, its line height, and whether its first, last and every glyph sit inside its box
+  const cs = getComputedStyle(note), r = note.getBoundingClientRect(), lh = parseFloat(cs.lineHeight);
+  const port = { l: r.left + note.clientLeft, t: r.top + note.clientTop, r: r.left + note.clientLeft + note.clientWidth, b: r.top + note.clientTop + note.clientHeight };
+  const glyphs = [], walk = document.createTreeWalker(note, NodeFilter.SHOW_TEXT), tol = 2;
+  for (let t = walk.nextNode(); t; t = walk.nextNode()) for (let i = 0; i < t.length; i++) if (t.data[i].trim()) {
+    const g = document.createRange(); g.setStart(t, i); g.setEnd(t, i + 1);
+    const q = [...g.getClientRects()].filter((b) => b.width > 0 && b.height > 0).pop(); glyphs.push(q || null);
+  }
+  const inPort = (q) => !!q && q.top >= port.t - tol && q.bottom <= port.b + tol && q.left >= port.l - tol && q.right <= port.r + tol && q.top >= -tol && q.bottom <= innerHeight + tol;
+  return { ...out, bar: { overflowY: cs.overflowY, lh, clientH: note.clientHeight, scrollH: note.scrollHeight, rectH: r.height, scrollTop: note.scrollTop, scrollMax: note.scrollHeight - note.clientHeight,
+    sideways: note.scrollWidth - note.clientWidth, glyphs: glyphs.length, outside: glyphs.filter((q) => !q || q.left < port.l - tol || q.right > port.r + tol).length,
+    firstSeen: inPort(glyphs[0]), lastSeen: inPort(glyphs[glyphs.length - 1]), inFrame: port.t >= -tol && port.b <= innerHeight + tol, text: note.textContent } };
+};
 for (const lg of ['zh', 'en']) {
   const fp = await T.open(BOOK, ID, `?embed=1&lang=${lg}&preset=haar`, { viewport: { width: 315, height: 500 }, locale: lg === 'zh' ? 'zh-CN' : 'en-US', reducedMotion: 'reduce' });
   await settle(fp, 300); await fp.evaluate(() => window.FAIRNESS_DEBUG.seek(600)); await settle(fp, 200);
-  const g = await fp.evaluate(() => {
-    const st = document.getElementById('stage').getBoundingClientRect(), tour = document.querySelector('.tour').getBoundingClientRect(), what = document.querySelector('.tour .what');
-    const inner = [...document.querySelectorAll('body *')].filter((e) => /(auto|scroll)/.test(getComputedStyle(e).overflowY) && e.scrollHeight > e.clientHeight + 1).map((e) => e.id || e.className);
-    const de = document.documentElement;
-    return { h: st.height, top: st.top, bottom: st.bottom, tourBottom: tour.bottom, vh: innerHeight, docScroll: de.scrollHeight - de.clientHeight, bodyScroll: document.body.scrollHeight - document.body.clientHeight,
-      clipped: what.scrollHeight - what.clientHeight, inner, note: what.textContent, preset: window.FAIRNESS_DEBUG.state.preset };
-  });
+  const g = await fp.evaluate(frameRead);
   const ideas = lg === 'zh'
     ? [/哈尔测度）?，?文献结果/, '未在本书形式化', '恰占四分之一', '固定种子', '接近四分之一', '青色的影子一样长', 'ψ 量 φ', 'φ 量 ψ']
     : ['Haar measure', 'literature result', 'not formalized in this book', 'exactly a quarter', 'fixed-seed', 'close to a quarter', 'cyan shadows are equal', 'ψ measuring φ', 'φ measuring ψ'];
@@ -269,8 +285,28 @@ for (const lg of ['zh', 'en']) {
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): the stage stays ≥ 220 px tall and inside the frame`, g.preset === 'haar' && g.h >= 220 && g.top >= 0 && g.bottom <= g.tourBottom && g.tourBottom <= g.vh + 1,
     JSON.stringify({ h: Math.round(g.h), top: Math.round(g.top), tourBottom: Math.round(g.tourBottom), vh: g.vh }));
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): the note keeps the Haar attribution, the exact quarter, the finite count and reciprocity`, lost.length === 0, lost.join(' / '));
-  check(`HAAR cited in a 315 × 500 phone frame (${lg}): nothing scrolls inside the frame`, g.docScroll <= 0 && g.bodyScroll <= 0 && g.clipped <= 1 && g.inner.length === 0,
-    JSON.stringify({ doc: g.docScroll, body: g.bodyScroll, clipped: g.clipped, inner: g.inner.slice(0, 3) }));
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): the frame does not scroll and nothing in it but the two-line note strip does`, g.docScroll <= 0 && g.bodyScroll <= 0 && g.inner.length === 0,
+    JSON.stringify({ doc: g.docScroll, body: g.bodyScroll, inner: g.inner.slice(0, 3) }));
+  // the note itself: two lines tall (or all of it, if shorter), nothing sideways, its whole text, the first line in view
+  const b0 = g.bar, twoLines = (b) => b.lh > 0 && Math.abs(b.clientH - Math.min(b.scrollH, 2 * b.lh)) <= 1 && Math.abs(b.rectH - b.clientH) <= 1;
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): the note shows two lines at a time inside the frame, with nothing sideways`,
+    !!b0 && twoLines(b0) && b0.inFrame && b0.sideways <= 0 && b0.glyphs > 0 && b0.outside === 0 && b0.firstSeen && b0.scrollTop === 0
+      && b0.text === await fp.textContent('#presetNote'),
+    JSON.stringify(b0 && { overflowY: b0.overflowY, lh: b0.lh, clientH: b0.clientH, scrollH: b0.scrollH, rectH: b0.rectH, sideways: b0.sideways, outside: b0.outside, firstSeen: b0.firstSeen, inFrame: b0.inFrame }));
+  // a reader's wheel over the note reaches its last line; the frame, the stage and the bar stay where they were
+  let reached = !!b0 && b0.scrollMax <= 0, g1 = g;
+  if (b0 && b0.scrollMax > 0) {
+    const nb = await fp.locator('.tour .what > .tour-note').boundingBox();
+    await fp.mouse.move(nb.x + nb.width / 2, nb.y + nb.height / 2); await fp.mouse.wheel(0, 4000);
+    reached = await until(fp, () => { const n = document.querySelector('.tour .what > .tour-note'); return n.scrollTop > 0 && n.scrollHeight - n.clientHeight - n.scrollTop <= 1; }, null, 20000);
+    await settle(fp); g1 = await fp.evaluate(frameRead);
+  }
+  const b1 = g1.bar;
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): the wheel scrolls the note to its last line and moves nothing else`,
+    reached && !!b1 && b1.overflowY === 'auto' && b1.lastSeen && twoLines(b1) && b1.sideways <= 0 && b1.outside === 0 && b1.text === b0.text
+      && g1.scrollY === 0 && g1.docScroll <= 0 && g1.bodyScroll <= 0 && g1.inner.length === 0 && Math.abs(g1.h - g.h) <= 0.5 && Math.abs(g1.top - g.top) <= 0.5 && Math.abs(g1.tourH - g.tourH) <= 0.5 && Math.abs(g1.tourBottom - g.tourBottom) <= 0.5,
+    JSON.stringify(b1 && { reached, scrollTop: b1.scrollTop, scrollMax: b1.scrollMax, lastSeen: b1.lastSeen, scrollY: g1.scrollY, stage: [Math.round(g.h), Math.round(g1.h)], bar: [g.tourH, g1.tourH], inner: g1.inner.slice(0, 3) }));
+  await fp.evaluate(() => { document.querySelector('.tour .what > .tour-note').scrollTop = 0; });
   const cn = await fp.evaluate(() => ({ c: window.FAIRNESS_DEBUG.centre(), o: window.FAIRNESS_DEBUG.overlay() }));
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): the narrow stage centres the ball and leaves #flat blank (no ledger column)`, cn.c.W <= 600 && Math.abs(cn.c.x - 0.5 * cn.c.W) < 1e-6 && cn.o.ink === 0, JSON.stringify(cn));
   await fp.context().close();
