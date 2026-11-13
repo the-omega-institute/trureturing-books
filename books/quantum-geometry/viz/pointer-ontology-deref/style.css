@@ -1,4 +1,12 @@
-/* ORTHO//ONTOLOGY: the shared lab layout (../assets/theme.css) carries the page. Only the clickable memory row and
-   the small sub-heading in the deck belong to this page; colours come from the tokens, never from hex values. */
-#cv { cursor: pointer; touch-action: manipulation; }
+/* ORTHO//ONTOLOGY: the shared lab layout (../assets/theme.css) carries the page. Only the clickable memory row, the
+   flat overlay over the solid stage and the small sub-heading in the deck belong to this page; colours come from the
+   tokens, never from hex values. */
+#flat { pointer-events: none; }
+#stage.on-cell { cursor: pointer; }
+/* a wide stage keeps a column on the right for the die: the title wraps short of it */
+#stage.col3 .hud-tl { max-width: var(--pod-hud-max); }
+/* a phone gives the stage more height: the die takes a band above the flat drawings */
+@media (max-width: 600px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(500px, 74vh) auto auto; }
+}
 .sec .sub2 { margin: 12px 0 6px; font-size: 11px; }

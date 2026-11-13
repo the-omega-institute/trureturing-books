@@ -7,6 +7,10 @@
               and walks again; one spoke per round (a wheel), folded by the period on request
      cayley   w = (s − 1)/s sends the lines Re s = c to circles inside the disk, Re s = 1/2 to the unit circle
    The rail drives one quantity per scene: the step k, the step n or the position of the line.
+   The stage is split in two. One part holds a lit solid (kit.solid), a schematic of the same state: the upper sheet of
+   the hyperboloid with its rapidity rings and the projection rays onto the disk; the tower of the wheel, one level per
+   round; the Riemann hemisphere over the disk of w. The other part holds the exact disk and its magnifier, drawn on the
+   flat canvas #flat laid over the solid. Dragging on the disk moves the state; dragging elsewhere turns the solid.
    Read-only probe for the browser suite: window.SAMSARA_DEBUG. */
 (() => {
   'use strict';
@@ -86,14 +90,27 @@
 
   /* ---------- drawing ---------- */
   let G = null, layout = null, last = {};
-  const stage = kit.stage3($('stage'), {
-    canvas: $('cv'), rotate: false,
-    onPick: (ev) => { if (!G || S.scene === 'samsara') return false; drag = true; aim(ev); return true; },
+  /* the solid: an orbit camera that turns about the vertical (and tilts a little) and never zooms in, so that the
+     solid stays inside its own part of the stage whatever the reader does; F3 places and sizes it each frame */
+  /* the wheel's tower is looked at a little more from above, so that its levels and the folded disk open up */
+  const CAM = { yaw: -0.26, pitch: 0.66, pitchOf: { samsara: 0.9 } }, PITCH = [0.1, 0.9];
+  const F3 = { cx: 0.5, cy: 0.5, radius: 0.36, unit: 1, zc: 0 };
+  const stage = kit.solid($('stage'), {
+    canvas: $('cv'), yaw: CAM.yaw, pitch: CAM.pitch, wheel: false,
+    get cx() { return F3.cx; }, get cy() { return F3.cy; }, get radius() { return F3.radius; },
+    onChange: () => paint(),
+    // only the disk itself is a handle (the staircase and fractional scenes); anywhere else a drag turns the solid
+    onPick: (ev) => { if (!onDisk(ev)) return false; drag = true; aim(ev); return true; },
     onDrag: (ev) => { if (drag) aim(ev); },
     onDrop: () => { drag = false; }
   });
   let drag = false;
-  const tagAt = (key, x, y, html, cls) => stage.tag(key, [x, y], html, cls, { screen: true });
+  /** Rough width of a label in CSS pixels (CJK characters are wider), to keep the disk's labels in their own part. */
+  const textW = (html) => { let w = 6; for (const ch of String(html).replace(/<[^>]*>/g, '')) w += /[⺀-鿿＀-￯]/.test(ch) ? 12.5 : 7; return w; };
+  const tagAt = (key, x, y, html, cls) => {
+    if (layout && layout.r2) { const r = layout.r2, hw = Math.min(r.w / 2, textW(html) / 2); x = clamp(x, r.x + hw, r.x + r.w - hw); }
+    stage.tag(key, [x, y], html, cls, { screen: true });
+  };
   const SUP = { '-': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' };
   const pow10 = (e) => `10${String(e).split('').map((c) => SUP[c]).join('')}`;
   /** x as m × 10ᵉ (or plainly when it is not small). */
@@ -152,7 +169,8 @@
     if (!TRV.thumbMode) {
       const fov = pow10(Math.round(Math.log10(U))), small = box.w < 230;
       tagAt('magU', box.x + box.w / 2, box.y + 13, small ? L(`视野 ${fov}`, `field ${fov}`) : L(`放大镜 · 视野宽 ${fov}`, `magnifier · field ${fov} wide`), 'raw ink');
-      tagAt('magG', box.x + box.w / 2, small ? box.y - 12 : box.y + box.h - 14, gap > 0 ? L(`缝 ${sci(gap)}`, `gap ${sci(gap)}`) : L('缝 = 0：撞上边界', 'gap = 0: on the rim'), 'raw mg');
+      // under the disk there is no room above the box: the gap is named inside it
+      tagAt('magG', box.x + box.w / 2, small && !box.below ? box.y - 12 : box.y + box.h - 14, gap > 0 ? L(`缝 ${sci(gap)}`, `gap ${sci(gap)}`) : L('缝 = 0：撞上边界', 'gap = 0: on the rim'), 'raw mg');
     }
     return { U, X, Y };
   }
@@ -164,6 +182,10 @@
     if (layout.side) {
       const x = g.X(1) + 0.16 * R, w = Math.min(right - x, 1.25 * R), h = Math.min(w * 0.82, g.ih - 8);
       return { x, y: cy - h / 2, w, h };
+    }
+    if (layout.below) {
+      const w = Math.min(g.iw - 8, 2.1 * R), y = Math.max(g.Y(-1.06) + 8, g.pt + g.ih - 0.62 * w - 4), h = g.pt + g.ih - 4 - y;
+      return { x: cx - w / 2, y, w, h, corner: true, below: true };
     }
     const w = Math.min(0.9 * R, 200), h = w * 0.72;
     return { x: right - w, y: g.pt + g.ih - h - 4, w, h, corner: true };
@@ -326,30 +348,230 @@
     return { c, o, samples, gapNow, mag, left };
   }
 
-  /* ---------- the stage ---------- */
-  function drawStage() {
-    const cv = $('cv'), st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
-    const thumb = TRV.thumbMode;
+  /* ---------- the solid (kit.solid): a schematic of the same state, in its own part of the stage ---------- */
+  let geo3 = null;                                 // the solid of the last frame, in model coordinates (for the probe)
+  /** Model → world: the middle of the solid's height sits at the centre of its part of the stage. */
+  const w3 = (p) => [p[0], p[1], p[2] - F3.zc];
+  /** k + 1 points round the horizontal circle of radius r at height z, from angle a0 to a1 (model coordinates). */
+  const arcPts = (r, z, a0, a1, k) => Array.from({ length: k + 1 }, (_, i) => { const a = a0 + (a1 - a0) * i / k; return [r * Math.cos(a), r * Math.sin(a), z]; });
+
+  /** The two parts of the stage, in CSS pixels of the canvas: r3 for the solid, r2 for the disk and its magnifier.
+      A wide stage puts them side by side (the solid on the left), a narrow one above each other (the solid on top). */
+  function regions() {
+    const cv = $('flat'), st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
+    const thumb = TRV.thumbMode, W = cv.clientWidth, H = cv.clientHeight;
     const top = thumb ? 24 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 6;
     const bottom = thumb ? 24 : Math.max(16, $('legend').offsetHeight + 18);
-    const aw = cv.clientWidth - 24, ah = cv.clientHeight - top - bottom;
-    layout = { side: aw / Math.max(1, ah) > 1.3, top, bottom };
+    const x0 = 12, aw = Math.max(1, W - 24), ah = Math.max(1, H - top - bottom), gap = 12;
+    const wide = aw / ah >= 1.15;
+    let r3, r2;
+    if (wide) { const w = Math.round(aw * 0.58); r3 = { x: x0, y: top, w, h: ah }; r2 = { x: x0 + w + gap, y: top, w: aw - w - gap, h: ah }; }
+    else { const h = Math.round(ah * 0.55); r3 = { x: x0, y: top, w: aw, h }; r2 = { x: x0, y: top + h + gap, w: aw, h: ah - h - gap }; }
+    return { W, H, top, bottom, wide, r3, r2 };
+  }
+  /** Size and place the solid inside r3. Its outline is a list of [r, z] (horizontal radius, height): seen at pitch p
+      from any yaw, a point lands at most r units to either side and between z cos p − r sin p and z cos p + r sin p
+      units up. So turning about the vertical never changes the size; tilting refits it. */
+  function frame3(outline, R, pitch) {
+    const box = R.r3, m = 10 * (TRV.thumbMode ? 1.8 : 1), cp = Math.cos(pitch), sp = Math.sin(pitch);
+    let rmax = 0, hi = -Infinity, lo = Infinity;
+    for (const [r, z] of outline) { rmax = Math.max(rmax, r); hi = Math.max(hi, z * cp + r * sp); lo = Math.min(lo, z * cp - r * sp); }
+    const unit = Math.max(4, Math.min((box.w / 2 - m) / rmax, (box.h - 2 * m) / (hi - lo)));
+    F3.zc = (hi + lo) / (2 * cp); F3.unit = unit;
+    F3.cx = (box.x + box.w / 2) / R.W; F3.cy = (box.y + box.h / 2) / R.H; F3.radius = unit / Math.min(R.W, R.H);
+  }
+  /** The outline of a surface of revolution with profile f(t) → [r, z], t in [0, 1]. */
+  const outlineOf = (f, k) => Array.from({ length: k + 1 }, (_, i) => f(i / k));
+
+  /* the staircase: the upper sheet t = √(1 + x² + y²) of the hyperboloid (z is t), drawn over half a turn so that the
+     rays in front of it stay in view; the rapidity rings η_k = η₀ + kΔη; the disk z = 1 − μ; the projection centre
+     C = (0, 0, −μ): Klein (μ = 0) projects from the origin onto t = 1, Poincaré (μ = 1) from (0, 0, −1) onto t = 0.
+     The sheet point of rapidity η lies on the ray from C through its disk point Q at the factor cosh η + μ, at height
+     cosh η. The sheet runs off to infinity, so the drawing keeps the factor exactly while cosh η − 1 ≤ XE (the first
+     step included) and squeezes it on a log scale beyond, the tenth step at height 1 + DTOP (MODEL): every ring then
+     lies on the drawn sheet, its ray and its disk point exact. */
+  const XE = 0.4, BL = 0.15, DTOP = 1.6;
+  const squeeze = (x, xt) => (x <= XE ? x : XE + (DTOP - XE) * Math.log1p((x - XE) / BL) / Math.log1p((xt - XE) / BL));
+  const unsqueeze = (d, xt) => (d <= XE ? d : XE + BL * Math.expm1((d - XE) * Math.log1p((xt - XE) / BL) / (DTOP - XE)));
+  /** The drawn sheet at squeezed height d (z = 1 + d) and azimuth φ: on the ray from C through the disk point. */
+  function sheetAt(d, ph, mu, xt) {
+    const x = unsqueeze(d, xt), eta = Math.acosh(1 + x), rr = (1 + mu + d) * morphR(Math.tanh(eta), mu);
+    return [rr * Math.cos(ph), rr * Math.sin(ph), 1 + d];
+  }
+  function stairModel() {
+    const mu = S.mu, dE = S.dEta, xt = Math.cosh(ETA0 + KMAX * dE) - 1, kNow = S.k;
+    const step = (eta) => {
+      const m = morphR(Math.tanh(eta), mu), d = squeeze(Math.cosh(eta) - 1, xt), f = 1 + mu + d;
+      return { eta, d, factor: f, Q: [m, 0, 1 - mu], H: [f * m, 0, 1 + d] };
+    };
+    const steps = [];
+    for (let k = 0; k <= KMAX; k++) steps.push(Object.assign({ k }, step(ETA0 + k * dE)));
+    return { scene: 'stair', mu, xt, C: [0, 0, -mu], diskZ: 1 - mu, apex: [0, 0, 1], steps, kNow, kInt: Math.floor(kNow + 1e-9), now: step(ETA0 + kNow * dE),
+      outline: [[0, -mu], [1, 1 - mu], [0, 1]].concat(outlineOf((t) => [sheetAt(t * DTOP, 0, mu, xt)[0], 1 + t * DTOP], 24), [[1 + mu + DTOP + 0.04, 1 + DTOP + 0.04]]) };
+  }
+  /** Half a ring of the sheet at squeezed height d, lifted by eps (world units) off the sheet towards its hollow side. */
+  function sheetRing(d, md, eps) {
+    const h = 1e-3, a = Math.max(0, d - h), b = Math.min(DTOP, d + h), rho = (dd) => sheetAt(dd, 0, md.mu, md.xt)[0];
+    const slope = (rho(b) - rho(a)) / (b - a), n = Math.hypot(1, slope), r = rho(d) - eps / n, z = 1 + d + eps * slope / n;
+    return arcPts(r, z, 0, Math.PI, 48).map(w3);
+  }
+  function drawStair3(md) {
+    const st = stage, px = 1 / F3.unit, words = !TRV.thumbMode, z = md.diskZ;
+    st.surface('sheet', (d, ph) => w3(sheetAt(d, ph, md.mu, md.xt)), { u: [0, DTOP], v: [0, Math.PI], nu: 44, nv: 40, color: P.dim, grid: { every: [100, 10] } });
+    st.surface('disk', (r, ph) => w3([r * Math.cos(ph), r * Math.sin(ph), z]), { u: [0, 1], v: [0, 2 * Math.PI], nu: 8, nv: 72, color: P.lineHot });
+    st.line(arcPts(1, z, 0, 2 * Math.PI, 120).map(w3), { color: P.ink, width: 2 });
+    // the cone of rays from C through the rim (back half): the boundary no step reaches; its rays never meet the sheet.
+    // The sheet creeps up to it, so the cone is drawn only as far as it stands visibly (3 px) outside the sheet.
+    const top = 1 + DTOP, far = top + md.mu, gapAt = (d) => 1 + d + md.mu - sheetAt(d, 0, md.mu, md.xt)[0];
+    let dc = 0; while (dc < DTOP && gapAt(dc) > 3 * px) dc += 0.01;
+    st.surface('cone', (t, ph) => w3([t * Math.cos(ph), t * Math.sin(ph), t - md.mu]), { u: [0, 1 + dc + md.mu], v: [0, Math.PI], nu: 24, nv: 40, color: P.faint, grid: { every: [100, 10] } });
+    for (const s of [1, -1]) st.line([w3(md.C), w3([s * far, 0, top])], { color: P.ink, width: 1.2, dash: [5, 4], alpha: 0.85 });
+    // rapidity rings: walked ones cyan, the ones still ahead faint, the current one amber
+    for (const a of md.steps) {
+      if (Math.abs(a.k - md.kNow) < 1e-9) continue;
+      const walked = a.k <= md.kInt;
+      st.tube(`ring${a.k}`, sheetRing(a.d, md, (walked ? 1.2 : 0.7) * px), { color: walked ? P.cyan : P.faint, width: walked ? 2.2 : 1.3, glow: walked ? 0.3 : 0.1 });
+    }
+    st.tube('ringNow', sheetRing(md.now.d, md, 1.6 * px), { color: P.amber, width: 3, glow: 0.45 });
+    // the rays of the walked steps (thin cyan) and of the current step (amber), from C through Q to the sheet
+    for (const a of md.steps) if (a.k <= md.kInt && Math.abs(a.k - md.kNow) > 1e-9) st.line([w3(md.C), w3(a.H)], { color: P.cyan, width: 1.1, alpha: 0.8 });
+    st.tube('rayNow', [w3(md.C), w3(md.now.H)], { color: P.amber, width: 2.2, glow: 0.4 });
+    for (const a of md.steps) if (a.k <= md.kInt && Math.abs(a.k - md.kNow) > 1e-9) { st.bead(w3(a.Q), { key: `Q${a.k}`, color: P.cyan, r: 2.6 }); st.bead(w3(a.H), { key: `H${a.k}`, color: P.cyan, r: 3.2 }); }
+    st.bead(w3(md.now.Q), { key: 'Qnow', color: P.amber, r: 4.6 });
+    st.bead(w3(md.now.H), { key: 'Hnow', color: P.amber, r: 5.6 });
+    st.bead(w3(md.apex), { key: 'apex', color: P.ink, r: 3.2 });
+    st.bead(w3(md.C), { key: 'C', color: P.ink, r: 3.6 });
+    if (words) st.tag('s3C', w3(md.C), L('投影中心', 'projection centre'), 'raw', { dy: 15 });
+  }
+
+  /* the wheel as a tower: round j of the angle ruler lifted to height (1 − f)·j·DH above the disk, its spoke turned
+     by (1 − f)·j·60° as on the flat wheel. Height and angle grow together (DH per 60°), so the spokes are the rungs
+     of one spiral ramp (a helicoid) whose outer edge, the white helix, is the rim θ = 90° carried up through the
+     rounds; folding (f → 1) winds the ramp down onto the first spoke, every round onto the first (MODEL). */
+  const DH = 0.25;
+  const towerZ = (round) => (1 - S.fold) * round * DH;
+  function samsaraModel() {
+    const nNow = S.n, nInt = Math.min(Math.floor(nNow + 1e-9), W.N - 1), f = nNow - nInt;
+    const pts = W.th.map((_, n) => { const p = statePoint(n); return [p[0], p[1], towerZ(W.round[n])]; });
+    const wp = walkerPos(nNow);
+    const wz = nInt < W.N - 1 && f > 1e-9 ? towerZ(W.round[nInt]) + (towerZ(W.round[nInt + 1]) - towerZ(W.round[nInt])) * f : towerZ(W.round[nInt]);
+    const turn = (1 - S.fold) * ROUNDS * 2 * Math.PI / (ROUNDS + 1);      // how far the ramp winds: the last spoke
+    return { scene: 'samsara', fold: S.fold, nNow, nInt, pts, walker: [wp[0], wp[1], wz], heights: Array.from({ length: ROUNDS + 1 }, (_, j) => towerZ(j)), turn,
+      // the tower as it stands now: folding lowers it to the disk, so the folded wheel is framed as the flat disk it is
+      outline: [[1.04, -0.02], [1.04, towerZ(ROUNDS) + 0.04], [0.04, towerZ(ROUNDS) + 0.16]] };
+  }
+  function drawSamsara3(md) {
+    const st = stage, nInt = md.nInt, step = 2 * Math.PI / (ROUNDS + 1), px = 1 / F3.unit, rise = DH / step;
+    st.surface('floor', (r, ph) => w3([r * Math.cos(ph), r * Math.sin(ph), 0]), { u: [0, 1], v: [0, 2 * Math.PI], nu: 8, nv: 72, color: P.lineHot });
+    st.line(arcPts(1, 0, 0, 2 * Math.PI, 120).map(w3), { color: P.ink, width: 2 });
+    if (md.turn > 1e-3) {
+      st.surface('ramp', (r, a) => w3([r * Math.cos(a), r * Math.sin(a), a * rise]), { u: [0.03, 1], v: [0, md.turn], nu: 10, nv: Math.max(8, Math.ceil(md.turn / 0.04)), value: (r, a) => a, colors: [P.faint, P.dim], range: [0, ROUNDS * step], grid: { every: [100, 6] } });
+      const hel = []; for (let i = 0; i <= 160; i++) { const a = md.turn * i / 160; hel.push(w3([Math.cos(a), Math.sin(a), a * rise])); }
+      st.tube('rim', hel, { color: P.ink, width: 1.8, glow: 0.3 });
+    }
+    st.tube('axle', [w3([0, 0, 0]), w3([0, 0, Math.max(md.heights[ROUNDS], 0) + 0.12])], { color: P.dim, width: 3, glow: 0.1 });
+    const seenRound = (j) => { const i = W.round.indexOf(j); return i >= 0 && i <= nInt; };
+    for (let j = 0; j <= ROUNDS; j++) {
+      if (!seenRound(j)) continue;
+      const a = spokeAngle(j), h = md.heights[j];
+      st.line([w3([0, 0, h + px]), w3([Math.cos(a), Math.sin(a), h + px])], { color: P.dim, width: 1, dash: [3, 4] });
+    }
+    // the fold as a motion: each later-round state has turned along its own circle from its unrolled spoke j·60°;
+    // the arc is drawn on the level where the state stands now (the disk, once folded), ending at the state
+    if (S.fold > 1e-6) for (let n = 0; n <= nInt; n++) {
+      const j = W.round[n]; if (j === 0) continue;
+      const r = W.light[n] ? 1 : morphR(kleinOfTheta(W.th[n]).r, S.mu); if (r < 0.02) continue;
+      st.line(arcPts(r, towerZ(j) + px, j * step, (1 - S.fold) * j * step, 24).map(w3), { color: P.dim, width: 1, dash: [3, 4], alpha: 0.8 });
+    }
+    // the path walked so far: along each spoke a cyan tube, the fall back to the centre of the next level dashed
+    for (let j = 0; j <= ROUNDS; j++) {
+      const run = [];
+      const up = (q) => w3([q[0], q[1], q[2] + 1.4 * px]);
+      for (let n = 0; n <= nInt; n++) if (W.round[n] === j) run.push(up(md.pts[n]));
+      if (W.round[nInt] === j && md.nNow > nInt + 1e-9 && nInt < W.N - 1 && W.round[nInt + 1] === j) run.push(up(md.walker));
+      if (run.length > 1) st.tube(`path${j}`, run, { color: P.cyan, width: 2.4, glow: 0.3 });
+    }
+    for (let n = 0; n < nInt; n++) if (W.round[n] !== W.round[n + 1]) st.line([w3(md.pts[n]), w3(md.pts[n + 1])], { color: P.dim, width: 1.2, dash: [4, 4] });
+    if (md.nNow > nInt + 1e-9 && nInt < W.N - 1 && W.round[nInt] !== W.round[nInt + 1]) st.line([w3(md.pts[nInt]), w3(md.walker)], { color: P.dim, width: 1.2, dash: [4, 4] });
+    for (let n = 0; n <= nInt; n++) {
+      const p = w3(md.pts[n]);
+      if (W.light[n]) st.bead(p, { key: `w${n}`, color: P.magenta, r: 4.6 });
+      else st.bead(p, { key: `w${n}`, color: W.round[n] === 0 ? P.ink : P.cyan, r: 3 });
+    }
+    st.bead(w3(md.walker), { key: 'walker', color: P.amber, r: 6 });
+  }
+
+  /* the fractional map on the Riemann sphere of w: the inverse stereographic projection from the south pole (0, 0, −1)
+     lifts the disk |w| < 1 onto the upper hemisphere and the unit circle onto the equator; circles go to circles, so
+     every image circle lifts to a circle on the hemisphere through (1, 0, 0), the lift of w = 1 */
+  const lift = (w) => { const q = w[0] * w[0] + w[1] * w[1], d = 1 + q; return [2 * w[0] / d, 2 * w[1] / d, (1 - q) / d]; };
+  const imageCircle = (c, k) => { const o = circleOfLine(c), pts = []; for (let i = 0; i <= k; i++) { const a = 2 * Math.PI * i / k; pts.push([o.centre + o.radius * Math.cos(a), o.radius * Math.sin(a)]); } return pts; };
+  function cayleyModel() {
+    const tNow = S.ct, c = cOf(tNow);
+    const samples = [-4, -2, -1, -0.5, 0, 0.5, 1, 2, 4].map((y) => { const w = cayley(c, y * c); return { y, s: [c, y * c], w, p: lift(w) }; });
+    return { scene: 'cayley', c, tNow, jInt: Math.floor(tNow + 1e-9), south: [0, 0, -1], samples,
+      outline: [[0.04, -1.04], [1.04, 0]].concat(outlineOf((t) => [1.03 * Math.sin(t * Math.PI / 2), 1.03 * Math.cos(t * Math.PI / 2)], 24)) };
+  }
+  function drawCayley3(md) {
+    const st = stage, px = 1 / F3.unit, words = !TRV.thumbMode;
+    st.surface('dome', (th, ph) => w3([Math.sin(th) * Math.cos(ph), Math.sin(th) * Math.sin(ph), Math.cos(th)]), { u: [0, Math.PI / 2], v: [0, Math.PI], nu: 28, nv: 48, color: P.dim, grid: { every: [7, 12] } });
+    st.surface('wdisk', (r, ph) => w3([r * Math.cos(ph), r * Math.sin(ph), 0]), { u: [0, 1], v: [0, 2 * Math.PI], nu: 8, nv: 72, color: P.lineHot });
+    st.tube('equator', arcPts(1, 0, 0, 2 * Math.PI, 144).map(w3), { color: P.ink, width: 2.2, glow: 0.3 });
+    const onSphere = (pts, lift0) => pts.map((w) => { const p = lift(w), k = 1 - lift0; return w3([p[0] * k, p[1] * k, p[2] * k]); });
+    for (let j = 0; j <= 10; j++) {
+      if (Math.abs(j - md.tNow) < 1e-9) continue;
+      const done = j <= md.jInt, pts = imageCircle(cOf(j), 160), col = done ? P.cyan : P.faint;
+      st.tube(`lift${j}`, onSphere(pts, (done ? 1.2 : 0.7) * px), { color: col, width: done ? 2 : 1.2, glow: done ? 0.3 : 0.1 });
+      st.line(pts.map((w) => w3([w[0], w[1], 0.6 * px])), { color: col, width: done ? 1.3 : 0.9, alpha: done ? 0.9 : 0.6 });
+    }
+    const now = imageCircle(md.c, 200);
+    st.tube('liftNow', onSphere(now, 1.6 * px), { color: P.amber, width: 3, glow: 0.45 });
+    st.tube('diskNow', now.map((w) => w3([w[0], w[1], 1.2 * px])), { color: P.amber, width: 2.2, glow: 0.45 });
+    // the samples s = c + iyc: their images w on the disk, their lifts on the hemisphere, and the projection lines
+    for (const q of md.samples) st.line([w3(md.south), w3(q.p)], { color: P.dim, width: 0.9, alpha: 0.7 });
+    md.samples.forEach((q, i) => { st.bead(w3([q.w[0], q.w[1], 0]), { key: `w${i}`, color: P.amber, r: q.y === 0 ? 4 : 2.6 }); st.bead(w3(q.p), { key: `p${i}`, color: P.amber, r: q.y === 0 ? 5.2 : 3.4 }); });
+    st.bead(w3(md.south), { key: 'south', color: P.ink, r: 3.6 });
+    st.ring(w3([1, 0, 0]), { key: 'one', color: P.ink, r: 6, normal: [1, 0, 0] });
+    if (words) st.tag('c3S', w3(md.south), L('南极：投影中心', 'south pole: centre'), 'raw', { dy: 15 });
+  }
+
+  /* ---------- the stage ---------- */
+  function drawStage() {
+    const R = regions(), r2 = R.r2;
+    layout = { side: r2.w / Math.max(1, r2.h) > 1.25, top: R.top, bottom: R.bottom, wide: R.wide, r2, r3: R.r3, W: R.W, H: R.H };
+    const md = S.scene === 'stair' ? stairModel() : S.scene === 'samsara' ? samsaraModel() : cayleyModel();
+    stage.cam.pitch = clamp(stage.cam.pitch, PITCH[0], PITCH[1]); stage.cam.zoom = clamp(stage.cam.zoom, 0.6, 1);
+    frame3(md.outline, R, stage.cam.pitch);
     stage.begin();
-    // wide stage: the magnifier to the right of the disk; narrow stage: in the corner below and to the right
-    const xr = layout.side ? [-1.06, 1.06 + Math.min(1.6, Math.max(0.9, 2.12 * aw / ah - 2.12))] : [-1.06, 1.81];
-    const yr = layout.side ? [-1.06, 1.06] : [-1.51, 1.06];
-    const g = kit.plot(cv, { x: xr, y: yr, equal: true, pad: [12, 12, top, bottom], clear: false });
+    // the disk part: wide, the magnifier to the right of the disk; narrow, in the corner below and to the right;
+    // tall (a column beside the solid), under the disk, as wide as the disk
+    const aw = r2.w, ah = r2.h;
+    layout.below = !layout.side && Math.min(aw / 2.12, ah / 2.98) > 1.03 * Math.min(aw / 2.87, ah / 2.57);
+    const xr = layout.side ? [-1.06, 1.06 + Math.min(1.6, Math.max(0.9, 2.12 * aw / ah - 2.12))] : layout.below ? [-1.06, 1.06] : [-1.06, 1.81];
+    const yr = layout.side ? [-1.06, 1.06] : layout.below ? [-1.92, 1.06] : [-1.51, 1.06];
+    const g = kit.plot($('flat'), { x: xr, y: yr, equal: true, pad: [r2.x, R.W - r2.x - r2.w, r2.y, R.H - r2.y - r2.h] });
     G = g;
     let out;
     if (S.scene === 'stair') out = drawStair(g);
     else if (S.scene === 'samsara') out = drawSamsara(g);
     else out = drawCayley(g);
+    if (S.scene === 'stair') drawStair3(md); else if (S.scene === 'samsara') drawSamsara3(md); else drawCayley3(md);
     stage.end();
+    geo3 = md;
     last = out || {};
   }
 
   /** Pointer → disk point. */
-  function ptr(ev) { const r = $('cv').getBoundingClientRect(); return [G.invX(ev.clientX - r.left), G.invY(ev.clientY - r.top)]; }
+  function ptr(ev) { const r = $('flat').getBoundingClientRect(); return [G.invX(ev.clientX - r.left), G.invY(ev.clientY - r.top)]; }
+  /** Is the pointer on the disk that the reader drags (staircase, fractional map)? Never in the top band of the stage,
+      where a drag always turns the solid. */
+  function onDisk(ev) {
+    if (!G || !layout || S.scene === 'samsara') return false;
+    const r = $('flat').getBoundingClientRect(), x = ev.clientX - r.left, y = ev.clientY - r.top, b = layout.r2;
+    if (y < 0.1 * r.height || x < b.x || x > b.x + b.w || y < b.y || y > b.y + b.h) return false;
+    const p = ptr(ev);
+    return Math.hypot(p[0], p[1]) <= 1.04;
+  }
   function aim(ev) {
     const p = ptr(ev);
     cards.mark(null); stopTween();
@@ -415,6 +637,12 @@
     samsara: [['cy', '角度尺走过的路', 'the path on the angle ruler'], ['mg', '撞上边界（擦表）', 'hitting the rim (wipe)'], ['am', '当前一步', 'the current step'], ['dm', '虚线：回到圆心', 'dashed: back to the centre']],
     cayley: [['cy', '直线 Re s = c 的像', 'images of the lines Re s = c'], ['am', '当前这条直线的像', 'image of the current line'], ['dm', '白色单位圆：Re s = 1/2 的像', 'white unit circle: image of Re s = 1/2']]
   };
+  /** One more legend entry per scene: what the solid is (a schematic drawing of the same state). */
+  const LEGEND3 = {
+    stair: ['dm', '实体：双曲面上半叶与投影线（示意，沿投影线压缩）', 'solid: the hyperboloid sheet and its projection rays (schematic, squeezed along the rays)'],
+    samsara: ['dm', '实体：一圈一层的轮回塔（示意）', 'solid: the wheel as a tower, one level per round (schematic)'],
+    cayley: ['dm', '实体：w 圆盘的黎曼半球，球极投影', 'solid: the Riemann hemisphere over the disk of w, by stereographic projection']
+  };
   const modelName = () => (S.mu < 0.5 ? L('Klein', 'Klein') : L('庞加莱', 'Poincaré'));
   function drawText() {
     const sc = S.scene;
@@ -470,7 +698,7 @@
     $('roNote').textContent = note; $('roAside').textContent = aside;
     $('pillScene').querySelector('strong').textContent = { stair: L('阶梯', 'STAIRCASE'), samsara: L('轮回', 'WHEEL'), cayley: L('分式', 'FRACTIONAL') }[sc];
     $('pillKeyName').textContent = pill[0]; $('pillKey').querySelector('strong').textContent = pill[1];
-    const legend = sc === 'samsara' && S.fold > 1e-6 ? LEGEND.samsara.concat([['dm', '虚线弧：折叠时转过的路；淡圈：展开时的位置', 'dashed arcs: the way each point turns as it folds; faint rings: where it was unrolled']]) : LEGEND[sc];
+    const legend = (sc === 'samsara' && S.fold > 1e-6 ? LEGEND.samsara.concat([['dm', '虚线弧：折叠时转过的路；淡圈：展开时的位置', 'dashed arcs: the way each point turns as it folds; faint rings: where it was unrolled']]) : LEGEND[sc]).concat([LEGEND3[sc]]);
     $('legend').innerHTML = legend.map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
   }
 
@@ -542,11 +770,11 @@
     cayley: { scene: 'cayley', from: 0, to: 6 }
   };
   const NOTES = {
-    staircase: ['从自指平衡角 θ* 出发（η₀ ≈ 0.817），快度每步加 Δη = 1。青色的点沿射线一级级走向白色的圆周，过每一级的青色直弦都比上一条更挤向边界；走到第 8 级，sin θ = 0.99999996，右边放大镜里品红的缝仍然张开。把步长调大、级数走多，放大镜每一步把视野缩小十倍以上，缝也从不为 0。', 'Starting from the self-referential balance angle θ* (η₀ ≈ 0.817), each step adds Δη = 1 of rapidity. The cyan points walk out along the ray toward the white rim, and each cyan chord through a step crowds closer to the rim than the one before; at step 8, sin θ = 0.99999996, and the magenta gap in the magnifier on the right is still open. Raise the step and walk further, and the magnifier narrows its field tenfold or more at every step; the gap is never 0.'],
+    staircase: ['从自指平衡角 θ* 出发（η₀ ≈ 0.817），快度每步加 Δη = 1。青色的点沿射线一级级走向白色的圆周，过每一级的青色直弦都比上一条更挤向边界；走到第 8 级，sin θ = 0.99999996，放大镜里品红的缝仍然张开。把步长调大、级数走多，放大镜每一步把视野缩小十倍以上，缝也从不为 0。', 'Starting from the self-referential balance angle θ* (η₀ ≈ 0.817), each step adds Δη = 1 of rapidity. The cyan points walk out along the ray toward the white rim, and each cyan chord through a step crowds closer to the rim than the one before; at step 8, sin θ = 0.99999996, and the magenta gap in the magnifier is still open. Raise the step and walk further, and the magnifier narrows its field tenfold or more at every step; the gap is never 0.'],
     klein_vs_poincare: ['停在第 3 级，把 Beltrami–Klein 圆盘换成庞加莱圆盘：每个点沿射线从 r = tanh η 挪到 ρ = tanh(η/2)，青色的直弦（灰色虚线是它们原来的位置）弯成与白色圆周正交的圆弧。读数里两种算法的固有时率 √(1 − r²) 与 (1 − ρ²)/(1 + ρ²) 一样，都是 sech η。', 'Stop at step 3 and swap the Beltrami–Klein disk for the Poincaré disk: each point moves along the ray from r = tanh η to ρ = tanh(η/2), and the cyan chords (the grey dashed lines are where they were) bend into arcs that meet the white rim at right angles. In the readouts the two proper-time rates √(1 − r²) and (1 − ρ²)/(1 + ρ²) agree: both are sech η.'],
     erase_reset: ['换成外部角度尺：每步把 θ 加上同样的 Δθ（与阶梯的第一步相同）。第二步就越过 90°，点落在圆周上（品红圈），轴向记忆 ½c² 归零；接着沿虚线回到圆心，换一根辐条从 0 开始重新走，又在第 4 步后撞上圆周。', 'Switch to the outside angle ruler: each step adds the same Δθ to θ (the staircase\'s own first step). The second step already passes 90°, the point lands on the rim (magenta ring) and the axial memory ½c² is zero; then it falls back to the centre along the dashed line and starts again from 0 on a new spoke, hitting the rim again after 4 steps.'],
     quotient_fold: ['走完五圈后，把轮子按周期折叠：五根辐条转到同一个方向，每个点沿自己那一圈的灰色虚线弧转过去（淡色空心圈是它原来的位置），第一次擦表之后的 25 步只落在 5 个位置上，每处叠着 5 次，品红圈全叠在圆周上的同一点；只剩最初从 θ* 出发的那一圈（白点）不在这 5 个位置里。', 'After five rounds, fold the wheel by its period: the five spokes turn to one direction, each point turning along its own grey dashed arc (the faint hollow ring is where it was), and the 25 steps after the first wipe land on only 5 positions, 5 times each, the magenta rings all on one point of the rim; only the first walk from θ* (white dots) lies outside these 5 positions.'],
-    cayley: ['分式变换 w = (s − 1)/s 把竖直线 Re s = c 变成圆：c 从 2.5 一步步减到接近 1/2，青色的像圆一个套一个，都在 w = 1 处与白色单位圆相切，并越来越贴近它；左边放大镜里，像圆与单位圆之间品红的缝在缩小，但对每个 c > 1/2 都还在。', 'The fractional map w = (s − 1)/s turns the vertical lines Re s = c into circles: as c steps down from 2.5 toward 1/2, the cyan image circles nest inside one another, all touching the white unit circle at w = 1 and hugging it ever closer; in the magnifier the magenta gap between the image circle and the unit circle shrinks, but is still there for every c > 1/2.']
+    cayley: ['分式变换 w = (s − 1)/s 把竖直线 Re s = c 变成圆：c 从 2.5 一步步减到接近 1/2，青色的像圆一个套一个，都在 w = 1 处与白色单位圆相切，并越来越贴近它；放大镜里，像圆与单位圆之间品红的缝在缩小，但对每个 c > 1/2 都还在。', 'The fractional map w = (s − 1)/s turns the vertical lines Re s = c into circles: as c steps down from 2.5 toward 1/2, the cyan image circles nest inside one another, all touching the white unit circle at w = 1 and hugging it ever closer; in the magnifier the magenta gap between the image circle and the unit circle shrinks, but is still there for every c > 1/2.']
   };
   let booting = true;
   /** A card that plays a transition (morph or fold) runs through this stand-in clock, so a book starts it when seen. */
@@ -558,6 +786,7 @@
   function applyPreset(id) {
     const p = PRESETS[id];
     stopTween();
+    stage.cam.yaw = CAM.yaw; stage.cam.pitch = CAM.pitchOf[p.scene] || CAM.pitch; stage.cam.zoom = 1;   // every card shows its solid from the same side
     if (p.dEta != null) { S.dEta = p.dEta; fD.set(p.dEta); refreshWalk(); }
     const sc = SCENES[p.scene];
     const end = p.at != null ? (p.at === 'end' ? W.N - 1 : p.at) : stopOf(p);
@@ -604,7 +833,18 @@
     },
     seek: (t) => { clock.pause(); clock.set(t); },
     /** Viewport coordinates of the disk point (x, y), for pointer tests. */
-    point: (x, y) => { const b = $('cv').getBoundingClientRect(); return G ? [b.left + G.X(x), b.top + G.Y(y)] : null; }
+    point: (x, y) => { const b = $('flat').getBoundingClientRect(); return G ? [b.left + G.X(x), b.top + G.Y(y)] : null; },
+    /** The solid of the last frame: its part of the stage, the camera, and its geometry in model coordinates (z up). */
+    get solid() {
+      const c = stage.cam, copy = (v) => JSON.parse(JSON.stringify(v));
+      return {
+        mode: stage.mode, parked: stage.parked(), camera: { yaw: c.yaw, pitch: c.pitch, zoom: c.zoom }, pitchRange: PITCH.slice(),
+        r3: layout ? copy(layout.r3) : null, r2: layout ? copy(layout.r2) : null, wide: layout ? layout.wide : null,
+        frame: { cx: F3.cx, cy: F3.cy, unit: F3.unit, zc: F3.zc }, squeeze: { XE, BL, DTOP }, towerStep: DH,
+        model: geo3 ? copy(geo3) : null,
+        disk: G ? { cx: G.X(0), cy: G.Y(0), R: G.scale } : null
+      };
+    }
   };
   window.TRV_THUMB = () => { applyPreset('staircase'); cards.mark('staircase'); setModel('poincare', false); paint.now(); };   // the cover: the Poincaré arcs
   cards.pick(cards.initial('staircase'));

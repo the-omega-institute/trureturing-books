@@ -7,8 +7,12 @@
 //   the Poincaré geodesics checked by fitting a circle through three of their points and testing |centre|² = R² + 1;
 //   the angle-ruler walk re-simulated and its period found by scanning; pinching masses from the 2 × 2 entries;
 //   the fractional map as |s − 1|/|s| with complex arithmetic.
+// The solid beside the disk (kit.solid) is checked against the same model: the disk points of the staircase at
+//   (tanh η, 0, 1) or (tan(θ/2), 0, 0), each sheet point on the line from the projection centre through its disk point
+//   (cross product), the first step on t² − x² = 1; the tower's points over the wheel's points at their round's height;
+//   the hemisphere's points on the unit sphere and projected back from the south pole onto (s − 1)/s.
 // It reads the page through window.SAMSARA_DEBUG.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'forgetting-rebirth-attractor';
 const T = await session();
@@ -221,6 +225,104 @@ await page.click('[data-lang-set="en"]'); await pick('staircase'); await stopped
 await settle(page);
 const hudEn = (await page.textContent('#hudBig')).trim();
 check('English: the HUD reads “Staircase · k = 8”', hudEn === 'Staircase · k = 8', hudEn);
+
+/* ---------- the solid beside the disk (kit.solid): its geometry against the state, by independent algorithms ---------- */
+const solid = async () => { await settle(page); return page.evaluate(() => window.SAMSARA_DEBUG.solid); };
+const sub3 = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const cross3 = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+const len3 = (a) => Math.hypot(a[0], a[1], a[2]);
+/** C, Q, H on one line, in that order (Q between C and H). */
+const onRay = (C, Q, H) => { const u = sub3(Q, C), v = sub3(H, C); return len3(cross3(u, v)) <= 1e-9 * len3(u) * len3(v) && u[0] * v[0] + u[1] * v[1] + u[2] * v[2] > 0 && len3(v) > len3(u); };
+/** The staircase solid against the model: disk points by `radius`, rays through them, rings climbing, step 0 exact. */
+function stairSolid(m, mu, radius) {
+  let disk = m.mu === mu && close(m.diskZ, 1 - mu, 1e-12) && close(m.C[2], -mu, 1e-12) && m.C[0] === 0 && m.C[1] === 0, rays = true, climb = true, inside = true;
+  for (const a of m.steps) {
+    const eta = ETA0 + a.k * s.dEta;
+    disk = disk && rel(a.Q[0], radius(eta), 1e-9) && a.Q[1] === 0 && close(a.Q[2], 1 - mu, 1e-12);
+    rays = rays && onRay(m.C, a.Q, a.H);
+    inside = inside && a.Q[0] < 1 && a.H[0] < a.H[2] + mu;
+    if (a.k > 0) climb = climb && a.H[2] > m.steps[a.k - 1].H[2];
+  }
+  const h0 = m.steps[0].H, sh = Math.sinh(ETA0), ch = Math.cosh(ETA0);
+  return { disk, rays, climb, inside, exact: close(h0[0], sh, 1e-9) && close(h0[2], ch, 1e-9) && close(h0[2] * h0[2] - h0[0] * h0[0], 1, 1e-9) };
+}
+await pick('staircase'); await stopped('staircase');
+s = await state();
+let g3 = await solid();
+check('solid: the staircase is drawn with kit.solid (WebGL) beside the disk', g3.mode === 'webgl' && !!g3.model && g3.model.scene === 'stair');
+{ const r = stairSolid(g3.model, 0, kleinR);
+  check('solid (Klein): the centre is the origin, the disk is t = 1, and step k sits on it at (tanh η_k, 0, 1)', r.disk);
+  check('solid (Klein): each sheet point lies on the ray from the centre through its disk point, beyond it', r.rays);
+  check('solid (Klein): the rings climb the sheet step by step, and no ray reaches the rim or the cone through it', r.climb && r.inside);
+  check('solid (Klein): step 0 is drawn exactly on the hyperboloid, (sinh η₀, 0, cosh η₀) with t² − x² = 1', r.exact);
+  check('solid (Klein): the amber ring and bead are step k = 8', g3.model.kNow === 8 && g3.model.now.H.every((v, i) => close(v, g3.model.steps[8].H[i], 1e-12))); }
+{ const lay = await page.evaluate(() => {
+    const b = document.getElementById('flat').getBoundingClientRect(), d = window.SAMSARA_DEBUG.solid;
+    return { W: b.width, H: b.height, r3: d.r3, r2: d.r2, disk: d.disk, marks: window.TRV.solids[0].marks().map((m) => [m.x - b.left, m.y - b.top]) };
+  });
+  const inBox = (p, r, e) => p[0] >= r.x - e && p[0] <= r.x + r.w + e && p[1] >= r.y - e && p[1] <= r.y + r.h + e;
+  const apart = lay.r3.x + lay.r3.w <= lay.r2.x || lay.r3.y + lay.r3.h <= lay.r2.y;
+  check('layout: the solid and the disk have parts of their own, and the top band of the stage is not the disk\'s', apart && lay.r2.y > 0.08 * lay.H, JSON.stringify([lay.r3, lay.r2]));
+  check('layout: every bead and ring of the solid lies in the solid\'s part', lay.marks.length > 0 && lay.marks.every((p) => inBox(p, lay.r3, 2)), String(lay.marks.length));
+  check('layout: the disk lies in its own part', inBox([lay.disk.cx - lay.disk.R, lay.disk.cy - lay.disk.R], lay.r2, 1) && inBox([lay.disk.cx + lay.disk.R, lay.disk.cy + lay.disk.R], lay.r2, 1)); }
+
+await pick('klein_vs_poincare'); await stopped('klein_vs_poincare');
+s = await state(); g3 = await solid();
+{ const r = stairSolid(g3.model, 1, poincareR);
+  check('solid (Poincaré): the centre is (0, 0, −1), the disk is t = 0, and step k sits on it at (tan(θ_k/2), 0, 0)', r.disk);
+  check('solid (Poincaré): each sheet point lies on the ray from (0, 0, −1) through its disk point, beyond it', r.rays && r.climb && r.inside);
+  check('solid (Poincaré): step 0 is still exactly (sinh η₀, 0, cosh η₀) on the hyperboloid', r.exact); }
+
+await pick('erase_reset'); await stopped('erase_reset');
+s = await state(); g3 = await solid();
+{ const m = g3.model, dh = g3.towerStep;
+  const over = m.pts.length === s.walk.points.length && m.pts.every((p, n) => close(p[0], s.walk.points[n][0], 1e-12) && close(p[1], s.walk.points[n][1], 1e-12));
+  const lifted = dh > 0 && m.pts.every((p, n) => close(p[2], s.walk.round[n] * dh, 1e-12));
+  check('solid (tower): every state stands over its point of the flat wheel, round j at height j·Δh', m.scene === 'samsara' && over && lifted);
+  check('solid (tower): the walker is at the current state n', m.walker.every((v, i) => close(v, m.pts[s.n][i], 1e-12))); }
+await pick('quotient_fold'); await stopped('quotient_fold');
+s = await state(); g3 = await solid();
+{ const m = g3.model, pts = m.pts.slice(s.walk.n0), keys = new Set(pts.map((p) => p.map((v) => v.toFixed(9)).join(',')));
+  check('solid (tower): folded, every round is lowered onto the disk (height 0) over its folded point', s.fold === 1 && m.pts.every((p, n) => close(p[2], 0, 1e-12) && close(p[0], s.walk.points[n][0], 1e-12) && close(p[1], s.walk.points[n][1], 1e-12)));
+  check('solid (tower): folded, the 25 steps after the first wipe stand on exactly 5 points', pts.length === 25 && keys.size === 5); }
+
+await pick('cayley'); await stopped('cayley');
+s = await state(); g3 = await solid();
+{ const m = g3.model;
+  const sphere = m.samples.every((q) => close(len3(q.p), 1, 1e-12) && q.p[2] > 0);
+  const back = m.samples.every((q) => { const w = cdiv([q.s[0] - 1, q.s[1]], q.s), k = 1 + q.p[2]; return close(q.p[0] / k, w[0], 1e-12) && close(q.p[1] / k, w[1], 1e-12); });
+  const line = m.samples.every((q) => onRay(m.south, [q.w[0], q.w[1], 0], q.p));
+  check('solid (hemisphere): the lift of each sample image w lies on the unit sphere, above the equator', m.scene === 'cayley' && close(m.c, s.cayley.c, 1e-12) && sphere);
+  check('solid (hemisphere): projected from the south pole, each lift lands back on (s − 1)/s (complex arithmetic)', back);
+  check('solid (hemisphere): south pole, image w and its lift lie on one line, in that order', line); }
+
+// the disk is the only handle: a drag on it moves the state and leaves the solid; a drag in the top band turns it
+await pick('staircase'); await stopped('staircase');
+{ const c0 = (await solid()).camera;
+  s = await clickAt(kleinR(ETA0 + 3), 0);
+  const c1 = (await solid()).camera;
+  check('a drag on the disk sets the step (k ≈ 3) and does not turn the solid', Math.abs(s.k - 3) < 0.05 && c1.yaw === c0.yaw && c1.pitch === c0.pitch, `${s.k} ${JSON.stringify([c0, c1])}`);
+  const b = await page.evaluate(() => { const r = document.getElementById('stage').getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; });
+  await page.mouse.move(b[0] + b[2] * 0.06, b[1] + b[3] * 0.08); await page.mouse.down();
+  for (let k = 1; k <= 6; k++) await page.mouse.move(b[0] + b[2] * (0.06 + 0.05 * k), b[1] + b[3] * 0.08);
+  await page.mouse.up();
+  const s2 = await state(), c2 = (await solid()).camera;
+  check('a drag along the top band turns the solid and leaves the step alone', Math.abs(c2.yaw - c1.yaw) > 0.5 && s2.k === s.k, `${JSON.stringify(c2)} k ${s2.k}`); }
+
+// the lit solid itself (kit.solid): shading, turning, hidden marks, resting inside a book; last, since it turns the camera
+await pick('staircase'); await stopped('staircase');
+// readiness for the rest lines: the embedded card makes its first WebGL context only once it is seen on screen, and
+// before that parked() is also true; hand the embed to solidChecks only after a context has actually existed
+const TE = Object.create(T);
+TE.open = async (...a) => {
+  const em = await T.open(...a);
+  if (!/embed=1/.test(a[2] || '')) return em;
+  await settle(em);
+  check('solid (embed): the card on screen actually creates its first WebGL context before the rest checks',
+    await until(em, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000));
+  return em;
+};
+await solidChecks(TE, BOOK, ID, page);
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

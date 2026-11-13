@@ -1,5 +1,19 @@
-/* ORTHO//TABLE: the shared lab layout (../assets/theme.css) carries the page. Only the clickable table and the
-   declaration map in the drawer belong to this page; colours come from the tokens, never from hex values. */
-#cv { cursor: pointer; touch-action: manipulation; }
+/* ORTHO//TABLE: the shared lab layout (../assets/theme.css) carries the page. Only the clickable table, the solid slice
+   beside it and the declaration map in the drawer belong to this page; colours come from the tokens, never from hex
+   values. The stage holds the WebGL canvas of kit.solid (inserted first), #cv (the parked still of that canvas) and
+   #flat, the 2D overlay with the table and the side panels, which never takes the pointer: the stage listens. */
+#flat { pointer-events: none; }
+#cv, #stage canvas.solid-gl { cursor: grab; touch-action: none; }
+#stage.on-cell #cv, #stage.on-cell canvas.solid-gl { cursor: pointer; }
 .sheet .evh { margin: 16px 0 6px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.14em; color: var(--cyan); text-transform: uppercase; }
 .declmap { display: grid; gap: 6px; }
+
+/* a phone gets a taller stage: the ball, the table and the side panel are stacked in it */
+@media (max-width: 520px) {
+  :root:not([data-embed]) .lab .center { grid-template-rows: minmax(440px, 84vh) auto auto; }
+}
+
+/* below 560px the scene chips would sit on the title: the HUD drops under them (the stage layout reads its bottom) */
+@media (max-width: 560px) {
+  :root:not([data-shot]) #stage .hud-tl { top: 44px; }
+}
