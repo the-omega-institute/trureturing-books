@@ -237,20 +237,50 @@ $$
 0.\overline{142857} = 0.142857\,142857\,142857\dots.
 $$
 
-An unawakened runner imagines that "experiencing the whole truth" means sprinting blindfolded around the six-digit millstone `1-4-2-8-5-7` for lap $10{,}001$ and lap $100{,}000{,}002$—wiping memory at every boundary and starting over at `1` in solemn earnest. The arithmetic shift and quotient relations have a finite certificate:
+An unawakened runner imagines that "experiencing the whole truth" means sprinting blindfolded around the six-digit millstone `1-4-2-8-5-7` for lap $10{,}001$ and lap $100{,}000{,}002$—wiping memory at every boundary and starting over at `1` in solemn earnest. Long division unfolds the remainder states behind those digits; the general positional-value theorem connects them to the rational generator:
 
-::: {.theorem #ex-ch36-repeating-decimal-quotient title="Six-Digit Repeating-Decimal Shift and Quotient Certificate" lean="D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.repeating_decimal_142857_shift_quotient"}
-Over the rational numbers, both equalities hold:
+::: {.theorem #ex-ch36-repeating-decimal-quotient title="Long-Division Prefix Conservation, Infinite Positional Value, and Periods" lean="D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_invariant D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_value D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_period"}
+Let $b,p,q$ be natural numbers with $2\le b$ and $p<q$. Define the remainder $r_n$, next digit $d_n$, and integer prefix $P_n$ by
 
 $$
 \begin{aligned}
-10^6\cdot\frac{1}{7}-\frac{1}{7} &= 142857, \\
-\frac{142857}{999999} &= \frac{1}{7}.
+r_0&=p,\qquad r_{n+1}=(b r_n)\bmod q,\\
+d_n&=\left\lfloor\frac{b r_n}{q}\right\rfloor,\\
+P_0&=0,\qquad P_{n+1}=bP_n+d_n.
 \end{aligned}
 $$
+
+Then:
+
+1. For every $n\in\mathbb N$, the integer conservation law is $qP_n+r_n=b^n p$.
+2. The positional series converges to the original rational value, and the normalized prefixes have the same limit:
+
+   $$
+   \begin{aligned}
+   \sum_{n=0}^{\infty}\frac{d_n}{b^{n+1}}&=\frac pq,\\
+   \lim_{n\to\infty}\frac{P_n}{b^n}&=\frac pq.
+   \end{aligned}
+   $$
+
+3. For every positive integer $L$ satisfying $q\mid(b^L-1)$, the digits satisfy $d_{n+L}=d_n$ for every $n$, and $(b^L-1)\frac pq=P_L$. This supplies a period, without asserting that it is minimal.
 :::
 
-This pair records exactly the relation between the period kernel $999{,}999$ and the finite rational generator $1/7$. **Literature result, not formalized in this book:** identifying that rational number with the infinite repeating decimal above still requires a separate semantic bridge for the decimal series; that bridge is outside the cited declaration.
+::: proof
+Euclidean division gives $br_n=qd_n+r_{n+1}$. Combining it with $P_{n+1}=bP_n+d_n$ proves item 1 by induction. After normalization, the difference between $p/q$ and the prefix is $r_n/(qb^n)$; it lies between $0$ and $b^{-n}$ because $0\le r_n<q$, and therefore tends to zero. A second induction identifies $P_n/b^n$ with the first $n$ terms of the positional series, proving item 2. If $q\mid(b^L-1)$, reducing item 1 modulo $q$ gives $r_L=p$. The deterministic remainder recurrence then repeats every subsequent state and output digit after $L$ steps. Substituting $r_L=p$ into the conservation law proves the shift identity in item 3. The full proof is checked by the Lean kernel.
+:::
+
+For $b=10$, $p=1$, and $q=7$, six steps of the defining division give the digits $1,4,2,8,5,7$ and successive remainders $3,2,6,4,5,1$, so $P_6=142857$. Since $7\mid(10^6-1)$, the general theorem identifies both the infinite six-digit repetition and its actual series value:
+
+$$
+\begin{aligned}
+x=0.\overline{142857}&=\sum_{n=0}^{\infty}\frac{d_n}{10^{n+1}},\\
+x&=\frac17,\\
+10^6x-x&=142857,\\
+x&=\frac{142857}{999999}.
+\end{aligned}
+$$
+
+This connects the finite remainder recurrence, infinite positional value, and period kernel $999999$. Once the generator $1/7$ is known, another lap supplies no new digit information.
 
 In `trureturing`, the three mathematical pillars of "factoring out redundant fibers via partition topology," "collapsing periodic subgroup sums onto dual annihilators" (echoing period extraction in [Chapter 15](ch15-grover-qft-and-period-finding.md) and generator cancellation in [Chapter 22](ch22-primes-euler-products-and-zeros.md)), and "encoding long-run orbit averages entirely inside the invariant measure of a single torus generator" (echoing [Chapter 31](ch31-quantum-fairness.md)) are united in the four formal theorems below:
 

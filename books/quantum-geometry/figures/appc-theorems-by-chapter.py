@@ -106,7 +106,7 @@ assert {k: n for k, _, n, _ in ROWS} == dict(INDEX), (ROWS, INDEX)
 assert TOTAL == sum(INDEX.values())
 BY = sorted(ROWS, key=lambda r: -r[2])
 TOP, SECOND, THIRD, FOURTH = BY[:4]
-assert [r[0] for r in BY[:4]] == ["22", "29", "30", "33"]
+assert [r[0] for r in BY[:4]] == ["22", "29", "30", "36"]
 
 if FOURTH[2] == BY[4][2]:
     tied = [r for r in BY if r[2] == FOURTH[2]]

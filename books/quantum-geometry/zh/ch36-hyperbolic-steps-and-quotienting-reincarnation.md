@@ -237,20 +237,50 @@ $$
 0.\overline{142857} = 0.142857\,142857\,142857\dots,
 $$
 
-一个不明算理的苦行者，以为“穷尽真理”就意味着必须低着头在 `1-4-2-8-5-7` 的数字磨盘上一圈又一圈跑完第一万零一轮、第一亿零二轮；每跑完一圈撞上边界清零记忆，下一圈又满怀悲壮地从 `1` 重新跑起。移位与约商的算术关系可以有限地写清：
+一个不明算理的苦行者，以为“穷尽真理”就意味着必须低着头在 `1-4-2-8-5-7` 的数字磨盘上一圈又一圈跑完第一万零一轮、第一亿零二轮；每跑完一圈撞上边界清零记忆，下一圈又满怀悲壮地从 `1` 重新跑起。长除法把这圈数字背后的余数状态逐步展开，而一般位值定理把它们一次接回有理数：
 
-::: {.theorem #ex-ch36-repeating-decimal-quotient title="六位循环小数移位与约商的有理数证书" lean="D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.repeating_decimal_142857_shift_quotient"}
-在有理数域中，以下两条等式同时成立：
+::: {.theorem #ex-ch36-repeating-decimal-quotient title="长除法的前缀—余数守恒、无穷位值与周期" lean="D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_invariant D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_value D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_period"}
+取自然数 $b,p,q$，满足 $2\le b$、$p<q$。定义余数 $r_n$、下一位数字 $d_n$ 与前 $n$ 位组成的整数 $P_n$：
 
 $$
 \begin{aligned}
-10^6\cdot\frac{1}{7}-\frac{1}{7} &= 142857, \\
-\frac{142857}{999999} &= \frac{1}{7}.
+r_0&=p,\qquad r_{n+1}=(b r_n)\bmod q,\\
+d_n&=\left\lfloor\frac{b r_n}{q}\right\rfloor,\\
+P_0&=0,\qquad P_{n+1}=bP_n+d_n.
 \end{aligned}
 $$
+
+以下结论成立：
+
+1. 对每个 $n\in\mathbb N$，有整数守恒式 $qP_n+r_n=b^n p$。
+2. 位值级数收敛于原有理数，且归一化前缀具有同一极限：
+
+   $$
+   \begin{aligned}
+   \sum_{n=0}^{\infty}\frac{d_n}{b^{n+1}}&=\frac pq,\\
+   \lim_{n\to\infty}\frac{P_n}{b^n}&=\frac pq.
+   \end{aligned}
+   $$
+
+3. 对任意正整数 $L$，若 $q\mid(b^L-1)$，则 $d_{n+L}=d_n$ 对所有 $n$ 成立，并有 $(b^L-1)\frac pq=P_L$。这里 $L$ 是一个周期，不声称为最小周期。
 :::
 
-这组等式把周期核 $999999$ 与有限有理生成元 $1/7$ 的关系一次写清。**文献结果，未在本书形式化：**把该有理数解释为上述无穷循环十进制，仍需另行给出十进制级数的语义桥梁；这一步不包含在所引声明中。
+::: proof
+欧几里得除法给出 $br_n=qd_n+r_{n+1}$；与 $P_{n+1}=bP_n+d_n$ 结合，对 $n$ 归纳即得第 1 款。归一化后，前缀与 $p/q$ 的差为 $r_n/(qb^n)$，由 $0\le r_n<q$ 控制在 $0$ 与 $b^{-n}$ 之间，故趋于零；对前缀递推再作归纳，得到 $P_n/b^n$ 恰为位值级数的前 $n$ 项和，从而得到第 2 款。若 $q\mid(b^L-1)$，第 1 款在模 $q$ 下给出 $r_L=p$；确定性的余数递推使所有后继状态及其输出数字都按 $L$ 重复，再将 $r_L=p$ 代回守恒式即得第 3 款。完整证明由 Lean 内核检查。
+:::
+
+取 $b=10$、$p=1$、$q=7$，按定义连续六次长除法给出数字 $1,4,2,8,5,7$，余数依次为 $3,2,6,4,5,1$，所以 $P_6=142857$。又有 $7\mid(10^6-1)$，上述一般定理给出六位重复的无限数字序列及其真实级数值：
+
+$$
+\begin{aligned}
+x=0.\overline{142857}&=\sum_{n=0}^{\infty}\frac{d_n}{10^{n+1}},\\
+x&=\frac17,\\
+10^6x-x&=142857,\\
+x&=\frac{142857}{999999}.
+\end{aligned}
+$$
+
+这一步同时接通了有限余数递推、无穷位值与周期核 $999999$。在生成元 $1/7$ 面前，无穷轮重复兜圈不再提供新的数字信息。
 
 在 `trureturing` 的形式化武库中，“通过商拓扑分解冗余纤维”、“通过零化子对偶一次性坍缩周期子群求和”（呼应[第 15 章](ch15-grover-qft-and-period-finding.md)的周期提取与[第 22 章](ch22-primes-euler-products-and-zeros.md)的生成元约分）以及“闭子群轨道长程极限由单一生成元不变测度完全决定”（呼应[第 31 章](ch31-quantum-fairness.md)），由以下四条严丝合缝的 Lean 4 定理共同铸就：
 
