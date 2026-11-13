@@ -6,7 +6,11 @@
 // address sets by descending that heap from the root by its bits, the scan by walking a list cell by cell, and the
 // page walk from Chapter 38's own definitions (P[0] = b₀, P[i] = addr(Tᵢ), Tᵢ[j] = addr(Dᵢ,ⱼ); b₀ = 0x1000,
 // addr(T₁) = 0x2000, addr(D₁,₂) = 0x9000 and the three rows of the chapter's table). Read through window.POINTER_DEBUG.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+// The same state is also built as a lit solid (kit.solid, a schematic die): its cells and switches are checked against an
+// H-tree built here by recursive halving, its pillars, beads, paths and dereference beam against the counts above, and
+// its pixels against the flat panels it must stay out of; solidChecks runs last, so its camera turn moves nothing the
+// earlier checks read.
+import { session, stageFirstChecks, solidChecks, solidPixels, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'pointer-ontology-deref';
 const T = await session();
@@ -225,11 +229,226 @@ await page.keyboard.press('Space');
 check('Space plays', await until(page, () => window.POINTER_DEBUG.state.step > 1));
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 
+/* ---------- the die: the same state as a lit solid (a schematic MODEL) ---------- */
+// The H-tree, built here by recursive halving of the array's rectangle (read from the probe): even depths split it
+// left/right, odd depths back/front, bit 0 taking the left (smaller x) or the back (larger y) half. A heap node sits
+// at the centre of its rectangle; leaf 64 + a is the cell of address a.
+const sol = async (pg = page) => { await settle(pg); return pg.evaluate(() => window.POINTER_DEBUG.solid()); };
+let d3 = await sol();
+const HT = new Map();
+(function build(h, x0, x1, y0, y1, depth) {
+  HT.set(h, [(x0 + x1) / 2, (y0 + y1) / 2]);
+  if (depth === 6) return;
+  if (depth % 2 === 0) { const xm = (x0 + x1) / 2; build(2 * h, x0, xm, y0, y1, depth + 1); build(2 * h + 1, xm, x1, y0, y1, depth + 1); }
+  else { const ym = (y0 + y1) / 2; build(2 * h, x0, x1, ym, y1, depth + 1); build(2 * h + 1, x0, x1, y0, ym, depth + 1); }
+})(1, d3.arr.x0, d3.arr.x0 + 8 * d3.arr.pitch, d3.arr.y1 - 8 * d3.arr.pitch, d3.arr.y1, 0);
+const near2 = (p, q, eps = 1e-9) => Math.abs(p[0] - q[0]) <= eps && Math.abs(p[1] - q[1]) <= eps;
+const heapOfLP = (l, p) => (1 << l) + p;
+check('die: the 64 cells sit at the leaves of the H-tree built by halving (consecutive addresses in Z-order)',
+  d3.cells.length === NCELLS && d3.cells.every((c) => near2([c.x, c.y], HT.get(64 + c.a))));
+await pick('qram_tree'); d3 = await (async () => { await seekEnd(); return sol(); })();
+{
+  const want = heapPath(41).map((x) => x.h), lit = d3.switches.map((w) => heapOfLP(w.l, w.p));
+  check('die · TREE at its end: the 6 cyan beads are the switches of 41’s path, each at the centre of its H-tree block',
+    lit.length === 6 && want.every((h) => lit.includes(h)) && d3.switches.every((w) => near2(w.at, HT.get(heapOfLP(w.l, w.p)))));
+  const pillars = d3.cells.filter((c) => c.kind === 'delivered').map((c) => c.a), tallest = Math.max(...d3.cells.map((c) => c.z)), idle = d3.cells.find((c) => c.kind === 'idle');
+  check('die · TREE at its end: exactly one cyan pillar, on cell 41, standing well above the idle cells', JSON.stringify(pillars) === '[41]' && d3.cells.find((c) => c.a === 41).z === tallest && tallest > 3 * idle.z);
+  const path = d3.paths[0].nodes, chain = [1, ...want.slice(1)].map((h) => HT.get(h)).concat([HT.get(64 + 41)]);
+  check('die · TREE: the cyan tube runs root → 6 switches → cell 41 through the H-tree centres, in order', d3.paths.length === 1 && path.length === 7 && path.every((q, i) => near2(q, chain[i])));
+  check('die · TREE at its end: no routing front left', d3.fronts.length === 0);
+}
+await page.evaluate(() => window.POINTER_DEBUG.seek(3.5)); d3 = await sol();
+{
+  const hp = heapPath(41).map((x) => x.h), A = HT.get(hp[3]), B = HT.get(hp[4]), f = d3.fronts[0];
+  check('die · TREE at step 3.5: 3 beads on the first three switches, no pillar, and the amber front halfway from switch 3 to switch 4',
+    d3.switches.length === 3 && d3.switches.every((w) => hp.slice(0, 3).includes(heapOfLP(w.l, w.p))) && !d3.cells.some((c) => c.kind === 'delivered')
+    && d3.fronts.length === 1 && near2(f.at, [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], 1e-9));
+}
+await pick('superpose'); await seekEnd(); d3 = await sol();
+{
+  const br = [41, 9, 33, 1], U = new Set(br.flatMap((a) => heapPath(a).map((x) => x.h))), lit = d3.switches.map((w) => heapOfLP(w.l, w.p));
+  const pil = d3.cells.filter((c) => c.kind === 'delivered').map((c) => c.a).sort((a, b) => a - b);
+  check('die · SUPERPOSE: four cyan pillars on 1, 9, 33, 41 and 17 beads, the union of the four paths, at their H-tree centres',
+    JSON.stringify(pil) === JSON.stringify([1, 9, 33, 41]) && lit.length === U.size && U.size === 17 && lit.every((h) => U.has(h)) && d3.switches.every((w) => near2(w.at, HT.get(heapOfLP(w.l, w.p)))));
+  check('die · SUPERPOSE: four fan-out tubes, each ending on its own branch’s cell', d3.paths.length === 4 && d3.paths.every((q) => near2(q.nodes[q.nodes.length - 1], HT.get(64 + q.a))) && JSON.stringify(d3.paths.map((q) => q.a)) === JSON.stringify(br));
+}
+await pick('linear64');
+{
+  let ok = true, why = '';
+  for (const k of [1, 7, 30, 63]) {
+    await page.evaluate((v) => window.POINTER_DEBUG.seek(v), k); const q = await sol();
+    const read = q.cells.filter((c) => c.kind === 'read').map((c) => c.a), want = []; for (let a = 0; a < k; a++) want.push(a);   // the list walk's first k cells
+    const c63 = q.cells.find((c) => c.a === 63), tree = Math.min(k, TREE.depth) === TREE.depth;   // the tree reaches its leaf at step 6
+    if (JSON.stringify(read) !== JSON.stringify(want) || !near2(q.head.at, HT.get(64 + (k - 1))) || c63.kind !== (tree ? 'delivered' : 'asked')) { ok = false; why = why || `k=${k}: ${read.length} read, head ${q.head.at}, cell 63 ${c63.kind}`; }
+  }
+  check('die · SCAN: after k steps the raised ink cells are addresses 0 … k − 1, the amber head sits over cell k − 1, and cell 63 is the ink cell asked for until the tree delivers it as a cyan pillar at step 6', ok, why);
+  await page.evaluate(() => window.POINTER_DEBUG.seek(64)); const q = await sol(), read = q.cells.filter((c) => c.kind === 'read').length;
+  check('die · SCAN at step 64: 63 ink cells, the head over cell 63', read === 63 && near2(q.head.at, HT.get(64 + 63)) && q.head.cell === 63);
+}
+// the page tables on the die: the walked pointers, the loop of slot 0 and the amber landing, against the walk redone here
+{
+  const inBlock = (q, b) => { const t = q.tables[b], r = t.slots ? t.slots[0] : t.box; return q.landing.at[0] >= r.x0 && q.landing.at[0] <= r.x1 && q.landing.at[1] >= r.y0 && q.landing.at[1] <= r.y1 && Math.abs(q.landing.at[2] - r.z1 - 0.04) < 1e-9; };
+  const walkedArcs = (q) => q.arcs.filter((a) => a.walked).map((a) => `${a.base}:${a.slot}`).sort();
+  await pick('four_loops'); await seek(2); let q = await sol();
+  check('die · [0, 0, 0, 0] mid-walk: the amber beam lands on slot 0 of P (the hop being read) and the loop has been walked twice',
+    q.landing.base === CH.b0 && q.landing.slot === 0 && inBlock(q, String(CH.b0)) && q.loopWalks === 2 && JSON.stringify(walkedArcs(q)) === JSON.stringify([`${CH.b0}:0`]));
+  await seekEnd(); q = await sol();
+  check('die · [0, 0, 0, 0] at the end: four walks round the loop and the beam lands on P itself', q.loopWalks === 4 && q.landing.block === walkCh(mem, [0, 0, 0, 0])[3] && inBlock(q, String(CH.b0)));
+  await pick('self_map'); await seekEnd(); q = await sol();
+  check('die · [0, 1] at the end: P[0] and P[1] walked, the beam lands on the leaf table T₁', JSON.stringify(walkedArcs(q)) === JSON.stringify([`${CH.b0}:0`, `${CH.b0}:1`].sort()) && q.landing.block === walkCh(mem, [0, 1])[1] && q.landing.block === CH.T1 && inBlock(q, String(CH.T1)));
+  await page.click('[data-idx="1,2"]'); await seekEnd(); q = await sol();
+  check('die · [1, 2] at the end: P[1] and T₁[2] walked, the loop untouched, the beam lands on the data frame D₁,₂', JSON.stringify(walkedArcs(q)) === JSON.stringify([`${CH.b0}:1`, `${CH.T1}:2`].sort()) && q.loopWalks === 0 && q.landing.block === CH.D12 && inBlock(q, String(CH.D12)));
+  await pick('diagonal_hit'); await seekEnd(); q = await sol();
+  const port = q.marks.find((m) => m.key === 'port'), now = q.marks.find((m) => m.key === 'now');
+  check('die · p = *p: the read port under the register is hidden by it, the amber landing on P is in view', port && port.hidden && now && !now.hidden && q.landing.block === CH.b0);
+}
+// the solid covers a real share of the stage in every scene, with light and shade, at the default camera
+{
+  let ok = true, why = '';
+  for (const c of ['qram_tree', 'linear64', 'diagonal_hit']) {
+    await pick(c); await seekEnd(); const px = await solidPixels(page);
+    if (!(px.share >= 0.15 && px.share <= 0.3 && px.spread >= 0.04)) { ok = false; why = why || `${c}: ${(px.share * 100).toFixed(1)}%, σ ${px.spread.toFixed(3)}`; }
+  }
+  check('die: in the tree, scan and table scenes the opaque solid covers 15–30% of the stage, with shading', ok, why);
+}
+// it stays out of the flat drawings: no opaque pixel of the WebGL canvas inside a flat panel, the title or the legend
+const glInside = (pg) => pg.evaluate(async () => {
+  const sc = window.TRV.solids[0]; await sc.ready; window.TRV.kit.flush();
+  const cv = sc.el.querySelector('canvas.solid-gl'); if (!cv) return null;
+  const o = cv.getBoundingClientRect(), k = cv.width / o.width, cp = document.createElement('canvas'); cp.width = cv.width; cp.height = cv.height;
+  const c = cp.getContext('2d'); c.drawImage(cv, 0, 0); const px = c.getImageData(0, 0, cp.width, cp.height).data;
+  const rects = window.POINTER_DEBUG.solid().panels.map((p) => [p.what, p.x, p.y, p.w, p.h]);
+  for (const el of [document.querySelector('.hud-tl'), ...document.querySelectorAll('#legend > span')]) { const r = el.getBoundingClientRect(); if (r.width) rects.push(['text', r.left - o.left, r.top - o.top, r.width, r.height]); }
+  let n = 0; const where = [];
+  for (const [what, x, y, w, h] of rects) {
+    let m = 0;
+    for (let yy = Math.max(0, Math.floor(y * k)); yy < Math.min(cp.height, Math.ceil((y + h) * k)); yy++) for (let xx = Math.max(0, Math.floor(x * k)); xx < Math.min(cp.width, Math.ceil((x + w) * k)); xx++) if (px[4 * (yy * cp.width + xx) + 3] > 8) m++;
+    if (m) where.push(`${what}: ${m}`); n += m;
+  }
+  return { n, rects: rects.length, where };
+});
+{
+  let ok = true, why = '';
+  for (const c of ['qram_tree', 'linear64', 'diagonal_hit', 'four_loops']) { await pick(c); await seekEnd(); const g = await glInside(page); if (!g || g.n || g.rects < 3) { ok = false; why = why || `${c}: ${JSON.stringify(g)}`; } }
+  check('die (desktop): no opaque pixel of the solid under a flat panel, the title or the legend', ok, why);
+  for (const [name, q, vp] of [['cited figure 740 × 500', '?embed=1&lang=zh&preset=linear64', { width: 740, height: 500 }], ['still 800 × 450', '?shot=1&lang=en&preset=superpose', { width: 800, height: 450 }], ['phone 390', '?lang=zh&preset=diagonal_hit', { width: 390, height: 844 }], ['phone 390, tree', '?lang=en&preset=qram_tree', { width: 390, height: 844 }]]) {
+    const pg = await T.open(BOOK, ID, q, { viewport: vp, reducedMotion: 'reduce' });
+    await settle(pg);
+    // inside a book the WebGL context is made once the stage is reported on screen (and given back after a rest)
+    await until(pg, () => { const sc = window.TRV.solids && window.TRV.solids[0]; if (!sc) return false; if (sc.parked()) window.TRV.kit.flush(); return !sc.parked(); });
+    const g = await glInside(pg), q3 = await sol(pg), px = await solidPixels(pg);
+    check(`die (${name}): the solid stays out of the flat panels, the title and the legend, and still covers ≥ 10% of the stage`, !!g && g.n === 0 && g.rects >= 3 && px.share >= 0.1, JSON.stringify({ g, share: px.share, mode: q3.mode }));
+    await pg.context().close();
+  }
+}
+// a click on a cell of the die reads that address, as a click on the flat row does
+await pick('linear64'); await seekEnd();
+{
+  const q = await sol(), c = q.cells.find((x) => x.a === 50);
+  const pt = await page.evaluate(([x, y, z]) => { const sc = window.TRV.solids[0], b = sc.el.getBoundingClientRect(), p = sc.p([x, y, z]); return { x: b.left + p[0], y: b.top + p[1] }; }, [c.x + 0.05, c.y, c.z]);
+  await page.mouse.click(pt.x, pt.y); s = await state();
+  check('die: clicking cell 50 on the die sets the address to 50 and scans to it', s.a === 50 && s.scene === 'scan' && s.preset === null);
+}
+
 // English
 const en = await T.goto(BOOK, ID, '?lang=en&preset=self_map');
 await settle(en);
 const hud = await en.textContent('#hudBig');
 check('English: the self-map card opens with an English HUD', /Table/.test(hud) && !/[一-鿿]/.test(hud));
+
+/* ---------- the lit solid: drawn, shaded, turning, hiding what is behind it, resting inside a book ---------- */
+await pick('qram_tree'); await seekEnd();
+await solidChecks(T, BOOK, ID, page);
+
+/* ---------- cited figures at the size a chapter shows them ----------
+   A chapter cites a card in an iframe 500 px high: about 334 px wide on a 390 px phone, 760 px in a book page. In the
+   phone's frame a long note once took ~180 px of the 500 and left the stage ~210 px: the memory row, the page tables and the register ran under the legend, and the die shrank to a strip collided with the
+   captions and the legend, and the lit solid shrank to a few per cent of the stage. These checks look at the frame
+   itself: nothing scrolls; the note bar stays short and its full note scrolls to the last line; the stage keeps most of
+   the frame; no ink of the flat canvas or the WebGL canvas and no label lies under the title, its second line or the
+   legend; the solid draws nothing inside the flat drawings; labels stay on the stage and apart; the lit solid covers
+   ≥ 12 % of the stage at the card's first and last frame; and the drawing the card is about keeps ≥ 200 × 100 px, and a memory cell ≥ 3.5 px. */
+{
+  const FIG = ['qram_tree', 'linear64', 'superpose', 'four_loops', 'self_map', 'diagonal_hit'];
+  /** Everything about the frame, in viewport pixels; `panels` and `read` come from the page's own probe. */
+  const facts = (pg) => pg.evaluate(async () => {
+    const sc = window.TRV.solids[0]; await sc.ready; window.TRV.kit.flush();
+    const st = sc.el, sr = st.getBoundingClientRect(), vp = { w: innerWidth, h: innerHeight };
+    const box = (b) => ({ x: b.left, y: b.top, w: b.width, h: b.height });
+    const textBox = (el) => { const rg = document.createRange(); rg.selectNodeContents(el); return box(rg.getBoundingClientRect()); };
+    const words = [];
+    for (const id of ['hudBig', 'hudSub']) { const el = document.getElementById(id); if (el && el.textContent.trim()) words.push([id, textBox(el)]); }
+    document.querySelectorAll('#legend > span').forEach((el, k) => words.push([`legend ${k + 1}`, box(el.getBoundingClientRect())]));
+    const image = (cv) => {
+      if (!cv) return null;
+      const cp = document.createElement('canvas'); cp.width = cv.width; cp.height = cv.height; const c = cp.getContext('2d'); c.drawImage(cv, 0, 0);
+      const r = cv.getBoundingClientRect(); return { d: c.getImageData(0, 0, cp.width, cp.height).data, w: cp.width, h: cp.height, k: cv.width / r.width, x: r.left, y: r.top };
+    };
+    const flat = image(document.getElementById('flat')), gl = image(st.querySelector('canvas.solid-gl'));
+    const ink = (im, b) => {
+      if (!im) return 0;
+      let n = 0;
+      for (let y = Math.max(0, Math.floor((b.y - im.y) * im.k)); y < Math.min(im.h, Math.ceil((b.y + b.h - im.y) * im.k)); y++)
+        for (let x = Math.max(0, Math.floor((b.x - im.x) * im.k)); x < Math.min(im.w, Math.ceil((b.x + b.w - im.x) * im.k)); x++) if (im.d[4 * (y * im.w + x) + 3] > 8) n++;
+      return n;
+    };
+    const cut = (a, b) => Math.max(0, Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x)) * Math.max(0, Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y));
+    const tags = [...st.querySelectorAll('.tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => [t.textContent.trim(), box(t.getBoundingClientRect())]);
+    const fb = document.getElementById('flat').getBoundingClientRect();
+    const panels = (() => window.POINTER_DEBUG.solid().panels.map((p) => [p.what, p]))().map(([what, b]) => [what, { x: fb.left + b.x, y: fb.top + b.y, w: b.w, h: b.h }]);
+    const what = document.querySelector('.tour .what'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
+    const full = what.textContent.trim().endsWith(note.textContent.trim()) && note.textContent.trim().length > 20;
+    const scrolls = what.scrollHeight > what.clientHeight + 1, oy = getComputedStyle(what).overflowY;
+    what.scrollTop = what.scrollHeight; const reached = what.scrollTop + what.clientHeight >= what.scrollHeight - 1; what.scrollTop = 0;
+    const btns = [...tour.querySelectorAll('[data-tour]')].map((b) => b.getBoundingClientRect()).every((b) => b.width > 0 && b.top >= 0 && b.bottom <= vp.h + 0.5 && b.left >= 0 && b.right <= vp.w + 0.5);
+    const out = {
+      vp, docScroll: document.documentElement.scrollHeight - innerHeight, docWide: document.documentElement.scrollWidth - innerWidth,
+      stageH: sr.height, tourH: tour.getBoundingClientRect().height, noteH: what.clientHeight, note: { full, scrolls, scrollable: !scrolls || oy === 'auto' || oy === 'scroll', reached, btns },
+      under: [], solidIn: [], tagOut: [], tagHit: [], read: (() => { const D = window.POINTER_DEBUG, a = D.point.cell(0), b = D.point.cell(1); return { pitch: a && b ? b.x - a.x : null, panels: D.solid().panels.map((p) => [p.what, Math.round(p.w), Math.round(p.h)]) }; })()
+    };
+    for (const [w, b] of words) {
+      const f = ink(flat, b), g = ink(gl, b);
+      if (f) out.under.push(`flat ink under ${w}: ${f}`);
+      if (g) out.under.push(`solid under ${w}: ${g}`);
+      for (const [t, tb] of tags) if (cut(tb, b) > 1) out.under.push(`label “${t}” on ${w}`);
+    }
+    for (const [w, b] of panels) { const g = ink(gl, b); if (g) out.solidIn.push(`${w}: ${g}`); }
+    for (const [t, b] of tags) if (b.x < sr.left - 1 || b.y < sr.top - 1 || b.x + b.w > sr.right + 1 || b.y + b.h > sr.bottom + 1) out.tagOut.push(t);
+    for (let i = 0; i < tags.length; i++) for (let j = i + 1; j < tags.length; j++) {
+      const a = tags[i][1], b = tags[j][1], c = cut(a, b);
+      if (c > 0.3 * Math.min(a.w * a.h, b.w * b.h)) out.tagHit.push(`${tags[i][0]} / ${tags[j][0]}`);
+    }
+    return out;
+  });
+  const share = async (pg, t) => { await pg.evaluate(([d, x]) => window[d].seek(x), ['POINTER_DEBUG', t]); await settle(pg); return solidPixels(pg); };
+  for (const [tag, vp, lang, cards] of [['phone frame 334 × 500', { width: 334, height: 500 }, 'en', FIG], ['phone frame 334 × 500', { width: 334, height: 500 }, 'zh', ['qram_tree', 'diagonal_hit']], ['book page 760 × 500', { width: 760, height: 500 }, 'en', FIG]]) {
+    const bad = { frame: [], note: [], words: [], solid: [], labels: [], share: [], read: [] };
+    for (const card of cards) {
+      const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${card}`, { viewport: vp, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+      await until(pg, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000);
+      await until(pg, (d) => !window[d].state.playing, 'POINTER_DEBUG', 120000);
+      await settle(pg);
+      const f = await facts(pg), id = `${card} (${lang})`;
+      if (f.docScroll > 0 || f.docWide > 0 || f.stageH < 0.72 * f.vp.h) bad.frame.push(`${id}: scroll ${f.docScroll}/${f.docWide}, stage ${Math.round(f.stageH)} px`);
+      if (f.tourH > 84 || !f.note.full || !f.note.scrollable || !f.note.reached || !f.note.btns) bad.note.push(`${id}: ${Math.round(f.tourH)} px ${JSON.stringify(f.note)}`);
+      if (f.under.length) bad.words.push(`${id}: ${f.under.slice(0, 3).join(', ')}`);
+      if (f.solidIn.length) bad.solid.push(`${id}: ${f.solidIn.join(', ')}`);
+      if (f.tagOut.length || f.tagHit.length) bad.labels.push(`${id}: ${[...f.tagOut.map((t) => `off stage: ${t}`), ...f.tagHit].slice(0, 3).join(', ')}`);
+      if (!(f.read.panels.length >= 1 && f.read.panels.every(([, w, h]) => w >= 200 && h >= 100) && (f.read.pitch == null || f.read.pitch >= 3.5))) bad.read.push(`${id}: ${JSON.stringify(f.read)}`);
+      const max = await pg.evaluate((d) => window[d].state.max, 'POINTER_DEBUG');
+      for (const t of [0, max]) { const px = await share(pg, t); if (!(px && px.share >= 0.12 && px.spread >= 0.04)) bad.share.push(`${id} at ${+t.toFixed(2)}: ${px ? (px.share * 100).toFixed(1) : '—'} %`); }
+      await pg.context().close();
+    }
+    const what = `${tag}, ${lang}, ${cards.length === FIG.length ? 'every cited card' : cards.join(' + ')}`;
+    check(`cited figure, ${what}: nothing scrolls and the stage keeps ≥ 72 % of the frame`, !bad.frame.length, bad.frame.join(' | '));
+    check(`cited figure, ${what}: the note bar stays ≤ 84 px, holds the card's whole note and scrolls to its last line, ◀ ▶ in the frame`, !bad.note.length, bad.note.join(' | '));
+    check(`cited figure, ${what}: no flat drawing, no solid and no label under the title, its second line or the legend`, !bad.words.length, bad.words.join(' | '));
+    check(`cited figure, ${what}: the solid draws nothing inside the memory row, the page tables or the register`, !bad.solid.length, bad.solid.join(' | '));
+    check(`cited figure, ${what}: every label stays on the stage, and no two labels sit on each other`, !bad.labels.length, bad.labels.join(' | '));
+    check(`cited figure, ${what}: the lit solid covers ≥ 12 % of the stage at the card's first and last frame`, !bad.share.length, bad.share.join(' | '));
+    check(`cited figure, ${what}: the drawing the card is about keeps ≥ 200 × 100 px, and a memory cell ≥ 3.5 px`, !bad.read.length, bad.read.join(' | '));
+  }
+}
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

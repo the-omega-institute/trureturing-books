@@ -11,6 +11,11 @@
              copy 1 (×c̄ each). Between steps the factor is interpolated as ((1 − f) + f|c|)·e^{∓iφf}.
      wake    the dream state ρ(λ) anchored at every place, read by P₀ = |x₀⟩⟨x₀|: everything but cell (0, 0) is
              multiplied by 1 − s, s the rail. The forgotten weight is 1 − Tr(P₀ρ).
+   Above the flat panels (or beside them on a short, wide stage) the same matrix is drawn as a lit solid with
+   kit.solid: a schematic apparatus (MODEL, not an optical simulation) — a plate with one slit per place, a column of
+   height ∝ ρᵢᵢ on each slit, an arch of thickness ∝ |ρᵢⱼ| between two slits, and a curved screen whose relief and
+   shade follow the brightness of the flat screen plot. The flat panels are drawn on #flat, laid over the WebGL canvas;
+   #cv only keeps the last solid frame as a picture when the context rests (inside a book).
    Read-only probe for the browser suite: window.DREAM_DEBUG. */
 (() => {
   'use strict';
@@ -23,6 +28,8 @@
     record: { max: 4, rate: 1.1, step: 1 },
     wake: { max: 1, rate: 0.5, step: 0.25 }
   };
+  /* a phone's cited figure: the share of the height (between the title and the legend) that the apparatus band takes */
+  const CB = { anchor: 0.4, rec: 0.38 };
 
   /* ---------- the mathematics ---------- */
   const amps = () => { const o = Math.sqrt((1 - S.w) / 3); return [Math.sqrt(S.w), o, o, o]; };
@@ -105,6 +112,138 @@
     return { all: env * all, diag: env * diag, kept: env * (diag + kept) };
   }
 
+  /* ---------- the solid stage: a schematic apparatus drawn from the same matrix (kit.solid) ----------
+     x along the plate, y from the plate towards the screen, z up (as kit.stage3); everything is lowered by Z0 so that
+     the camera turns about the middle of the apparatus. A thick plate with one slit per place (four, or two in the
+     record scene; the slit of xᵢ at SLIT[n][i]); on top of each slit a cyan column of height COL·ρᵢᵢ (the weight, in
+     every scene); from the top of the plate behind slit i to the one behind slit j an arch whose tube
+     radius is ARCH·|ρᵢⱼ|, coloured as cell (i, j) of the grid (cyan: kept inside an anchor block; magenta: cut, or
+     fading on waking), over a dashed grey line along the same arch that marks where it started (as the dashed frames
+     of the grid); behind the plate a curved, back-leaning screen pushed towards the plate by SCR.rel·all(u)/ymax and
+     shaded from faint to ink by all(u)/ymax, all(u) the brightness the flat screen plot draws at the same u. Beads mark
+     each place on both faces of the plate (one face always hides the other's) and on top of its column. */
+  const CAM = { yaw: -0.28, pitch: 0.38 };
+  const SLIT = { 4: [-1.05, -0.35, 0.35, 1.05], 2: [-0.5, 0.5] };
+  const PL = { x: 1.75, y0: -0.6, y1: -0.44, h: 0.56, s0: 0.16, s1: 0.46 };   // half width, front and back face, height, slit bottom and top
+  const COL = 0.8, COLW = 0.05, ARCH = 0.12, Z0 = 0.45;
+  const SCR = { x: 1.75, y: 0.4, bow: 0.25, lean: 0.25, h: 0.85, rel: 0.2 };
+  const COLY = [PL.y0 + 0.02, PL.y0 + 0.02 + 2 * COLW];
+  const wpt = (x, y, z) => [x, y, z - Z0];
+  /* the stage: kit.solid on #cv (the picture it keeps when the context rests); onPick, onDrag and onDrop are set with
+     the controls below (the matrix grid scrubs the rail; everywhere else turns the apparatus); centre and scale are
+     set by fitSolid and applyFit each frame */
+  const SO = { canvas: $('cv'), yaw: CAM.yaw, pitch: CAM.pitch, zoom: 1, radius: 0.36, cx: 0.5, cy: 0.3, wheel: false, onChange: () => paint() };
+  const st = kit.solid($('stage'), SO);
+  const slitHalf = (n) => (n === 4 ? 0.06 : 0.08);
+  const cyanRole = (role) => role === 'keep' || role === 'read';
+  /** An axis-aligned box from corner a to corner b, appended to a vertex and face list. */
+  function boxInto(V, F, a, b) {
+    const k = V.length;
+    for (const z of [a[2], b[2]]) for (const y of [a[1], b[1]]) for (const x of [a[0], b[0]]) V.push(wpt(x, y, z));
+    F.push([k, k + 1, k + 3, k + 2], [k + 4, k + 6, k + 7, k + 5], [k, k + 4, k + 5, k + 1], [k + 2, k + 3, k + 7, k + 6], [k, k + 2, k + 6, k + 4], [k + 1, k + 5, k + 7, k + 3]);
+  }
+  /** The arch from the top of the plate behind slit i to the one behind slit j: half an ellipse leaning back towards
+      the screen, the wider the pair the higher and the further back. */
+  function archPts(n, i, j) {
+    const a = SLIT[n][i], b = SLIT[n][j], half = (b - a) / 2, mid = (a + b) / 2, H = 0.16 + 0.42 * half, al = 0.25 + 0.55 * half + 0.07 * i;
+    const yb = PL.y1 - 0.035, pts = [];
+    for (let k = 0; k <= 40; k++) { const t = Math.PI * k / 40, e = H * Math.sin(t); pts.push(wpt(mid - half * Math.cos(t), yb + e * Math.sin(al), PL.h + e * Math.cos(al))); }
+    return pts;
+  }
+  /** The screen at (u, v), u the abscissa of the flat screen plot, v from its foot (0) to its top (1); I = all(u)/ymax. */
+  const screenPt = (u, v, I) => wpt(SCR.x * u, SCR.y - SCR.bow * u * u + SCR.lean * v - SCR.rel * I, SCR.h * v);
+  /** Points that bound the apparatus whatever the state (the tallest column the weight slider allows, the screen at
+      full relief): every view is fitted to them, never larger than the default one, so the apparatus does not breathe
+      as the state moves. */
+  const FIT_PTS = (() => {
+    const pts = [];
+    for (const x of [-PL.x, PL.x]) for (const y of [PL.y0, PL.y1]) for (const z of [0, PL.h]) pts.push(wpt(x, y, z));
+    pts.push(wpt(SLIT[4][0], COLY[0], PL.h + COL * 0.85));
+    for (const u of [-1, -0.5, 0, 0.5, 1]) for (const v of [0, 1]) for (const I of [0, 1]) pts.push(screenPt(u, v, I));
+    for (const n of [4, 2]) for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) archPts(n, i, j).forEach((q, k) => { if (k % 4 === 0) pts.push(q); });
+    return pts;
+  })();
+  /** Fit the apparatus, seen from (yaw, pitch), into the box r (stage pixels), at a scale of at most cap pixels per
+      unit: returns its centre and scale and the box it covers in that view (apply sets the stage to them). */
+  function fitSolid(r, yaw = CAM.yaw, pitch = CAM.pitch, cap = Infinity) {
+    const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    for (const p of FIT_PTS) {
+      const a = cy * p[0] - sy * p[1], b = -(sy * sp * p[0] + cy * sp * p[1] + cp * p[2]);
+      x0 = Math.min(x0, a); x1 = Math.max(x1, a); y0 = Math.min(y0, b); y1 = Math.max(y1, b);
+    }
+    const unit = Math.max(8, Math.min(cap, r.w / (x1 - x0), r.h / (y1 - y0)));
+    const cx = r.x + r.w / 2 - unit * (x0 + x1) / 2, cyy = r.y + r.h / 2 - unit * (y0 + y1) / 2;
+    return { l: cx + unit * x0, r: cx + unit * x1, t: cyy + unit * y0, b: cyy + unit * y1, unit, cx, cy: cyy };
+  }
+  /** Set the stage to a fit (kit.solid multiplies the scale by the camera's zoom, so it is divided out here). */
+  function applyFit(f, Wd, Ht) { SO.radius = f.unit / (Math.max(1, Math.min(Wd, Ht)) * (st.cam.zoom || 1)); SO.cx = f.cx / Math.max(1, Wd); SO.cy = f.cy / Math.max(1, Ht); }
+  let solidInfo = null, screenF = null, nameAt = { dx: 0, dy: 15 };
+  function drawSolid(m, words) {
+    const n = m.n, xs = SLIT[n], sh = slitHalf(n), V = [], F = [];
+    // the plate: a bar under the slits, a bar over them, and the posts between them
+    boxInto(V, F, [-PL.x, PL.y0, 0], [PL.x, PL.y1, PL.s0]);
+    boxInto(V, F, [-PL.x, PL.y0, PL.s1], [PL.x, PL.y1, PL.h]);
+    const ends = [-PL.x].concat(...xs.map((x) => [x - sh, x + sh]), [PL.x]);
+    for (let k = 0; k < ends.length; k += 2) boxInto(V, F, [ends[k], PL.y0, PL.s0], [ends[k + 1], PL.y1, PL.s1]);
+    st.poly('plate', { vertices: V, faces: F }, { color: P.dim, edges: false });
+    // the columns: the diagonal
+    const columns = [], cyc = (COLY[0] + COLY[1]) / 2;
+    for (let i = 0; i < n; i++) {
+      const role = m.role(i, i), hgt = COL * m.rho[i][i][0];
+      columns.push({ i, x: xs[i], h: hgt, color: 'cyan' });
+      if (hgt > 1e-4) { const CV = [], CF = []; boxInto(CV, CF, [xs[i] - COLW, COLY[0], PL.h], [xs[i] + COLW, COLY[1], PL.h + hgt]); st.poly(`col${i}`, { vertices: CV, faces: CF }, { color: P.cyan, edges: false }); }
+    }
+    // the arches: the coherence
+    const arches = [];
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+      const pts = archPts(n, i, j), role = m.role(i, j), r = ARCH * cabs(m.rho[i][j]), shown = r * st.unit >= 0.4;
+      st.line(pts, { color: P.dim, width: 1.2, dash: [4, 4] });
+      if (shown) st.tube(`arch${i}${j}`, pts, { r, color: roleColor(role), sides: 12 });
+      arches.push({ i, j, r, shown, color: cyanRole(role) ? 'cyan' : 'magenta' });
+    }
+    // the screen: the brightness of the flat plot, as relief and shade
+    const ymax = SCREEN[n].ymax, seen = new Map();
+    const I = (u) => { let v = seen.get(u); if (v == null) { v = screen(m.rho, u, m.role).all / ymax; seen.set(u, v); } return v; };
+    screenF = (u, v) => screenPt(u, v, I(u));
+    st.surface('screen', screenF, { u: [-1, 1], v: [0, 1], nu: 200, nv: 6, value: (u) => I(u), colors: [P.faint, P.ink], range: [0, 1], alpha: 1 });
+    // the places on both faces of the plate, and on top of their columns
+    const rb = 4.5 * st.lw / st.unit, rt = 3.6 * st.lw / st.unit, zb = PL.s0 / 2, nm = NAMES();
+    for (let i = 0; i < n; i++) {
+      const front = wpt(xs[i], PL.y0 - rb, zb);
+      st.bead(front, { r: 4.5, color: P.ink, key: `front${i}` });
+      st.bead(wpt(xs[i], PL.y1 + rb, zb), { r: 4.5, color: P.ink, key: `back${i}` });
+      st.bead(wpt(xs[i], cyc, PL.h + columns[i].h + rt), { r: 3.6, color: P.cyan, key: `top${i}` });
+      if (words) st.tag(`x${i}`, front, nm[i], 'num', nameAt);
+    }
+    if (S.scene === 'wake') st.ring(wpt(xs[0], cyc, PL.h + columns[0].h + rt), { r: 10, color: P.amber, normal: [0, 0, 1], key: 'read' });
+    solidInfo = { n, slits: xs.slice(), unit: st.unit, columns, arches, ymax, consts: { COL, ARCH, Z0, PL: Object.assign({}, PL), SCR: Object.assign({}, SCR), slitHalf: sh } };
+  }
+  /** What the apparatus stands for: lines for its left and its right side. */
+  const captionLines = () => ({
+    left: [[L('缝：位置 xᵢ', 'slits: places xᵢ'), P.dim], [L('柱高 ∝ 权重 ρᵢᵢ', 'column height ∝ ρᵢᵢ'), P.ink], [L('拱粗 ∝ 相干 |ρᵢⱼ|', 'arch thickness ∝ |ρᵢⱼ|'), P.ink]],
+    right: [[L('屏的起伏 ∝ 亮度', 'screen relief ∝ brightness'), P.ink], [L('示意模型，不是光学模拟', 'a schematic, not optics'), P.dim]]
+  });
+  /** The room [left, right] in pixels those lines need beside the apparatus. */
+  function captionRoom(ctx) {
+    const c = captionLines(); ctx.font = `11px ${face('body')}`;
+    const wid = (ls) => Math.max(...ls.map(([s]) => ctx.measureText(s).width)) + 14;
+    return [wid(c.left), wid(c.right)];
+  }
+  /** The caption: beside the apparatus, or (strip) in one line above it, where the fit has left a strip for it. */
+  function solidCaption(ctx, r3, fit, strip) {
+    const { left, right } = captionLines();
+    if (!strip) {
+      const mid = (fit.t + fit.b) / 2;
+      left.forEach(([s, c], k) => text(ctx, s, fit.l - 8, mid + (k - 1) * 17, c, { align: 'right', size: 11, face: 'body' }));
+      right.forEach(([s, c], k) => text(ctx, s, fit.r + 8, mid + (k - 0.5) * 17, c, { align: 'left', size: 11, face: 'body' }));
+      return;
+    }
+    const one = L('示意装置：柱高 ∝ ρᵢᵢ · 拱粗 ∝ |ρᵢⱼ| · 屏的起伏 ∝ 亮度', 'schematic: columns ∝ ρᵢᵢ · arches ∝ |ρᵢⱼ| · screen ∝ brightness');
+    ctx.font = `10.5px ${face('body')}`;
+    text(ctx, ctx.measureText(one).width <= r3.w ? one : L('示意装置（模型）', 'schematic apparatus (model)'), r3.x, r3.y + 6, P.dim, { size: 10.5, face: 'body' });
+  }
+
   /* ---------- drawing ---------- */
   const thick = () => (TRV.thumbMode ? 2 : 1);
   const face = (f) => (f === 'body' ? TRV.fonts.body : TRV.fonts.data);
@@ -126,7 +265,7 @@
 
   function drawMatrix(ctx, R, m) {
     const n = m.n, words = !TRV.thumbMode, head = words ? 30 : 6, tk = thick();
-    const size = Math.max(40, Math.min(R.w - head, R.h - head - (S.scene === 'record' && words ? 52 : 0)));
+    const size = Math.max(40, Math.min(R.w - head, R.h - head - (S.scene === 'record' && words ? (R.cmp ? 40 : 52) : 0)));   // the record boxes under it (lower in a phone's figure)
     const x0 = R.x + head + Math.max(0, (R.w - head - size) / 2), y0 = R.y + head, cs = size / n;
     grid = { x0, y0, cs, n, size };
     let gmax = 0; m.ghost.forEach((row) => row.forEach((v) => { gmax = Math.max(gmax, v); }));
@@ -167,7 +306,7 @@
       }
       if (S.scene !== 'record' && cs >= 46) text(ctx, L('躯体', 'body'), x0 + 0.5 * cs, y0 - 25, P.dim, { align: 'center', size: 10, face: 'body' });
     }
-    if (S.scene === 'record' && words) drawRecords(ctx, { x: R.recX != null ? R.recX : x0, y: y0 + size + 10, w: R.recW || size });
+    if (S.scene === 'record' && words) drawRecords(ctx, { x: R.recX != null ? R.recX : x0, y: y0 + size + (R.cmp ? 8 : 10), w: R.recW || size, cmp: R.cmp });
   }
 
   /** The path the phase of ρ₀₁ has taken so far, from 0 to clock.t, unwrapped (for the trail on the phase disc). */
@@ -190,7 +329,9 @@
       With c = 0 the arrow shrinks to the centre. */
   function drawDisc(ctx, R) {
     const words = !TRV.thumbMode, tk = thick(), head = words ? 22 : 4;
-    const rad0 = Math.max(24, Math.min(R.w, R.h - head) / 2 - (words ? 26 : 6)), cx = R.x + R.w / 2, cy = R.y + head + (R.h - head) / 2;
+    // a phone's figure: the labels need about 28 px beside the circle and 20 px under it, so the circle takes the rest
+    const rad0 = R.cmp && words ? Math.max(16, Math.min(R.w / 2 - 28, (R.h - head - 22) / 2)) : Math.max(24, Math.min(R.w, R.h - head) / 2 - (words ? 26 : 6));
+    const cx = R.x + R.w / 2, cy = R.cmp && words ? R.y + head + 2 + rad0 : R.y + head + (R.h - head) / 2;
     const sc = rad0 / 0.5, X = (z) => cx + sc * z[0], Y = (z) => cy - sc * z[1];
     disc = { cx, cy, rad: rad0 };
     ctx.save();
@@ -227,7 +368,7 @@
   }
 
   function drawRecords(ctx, R) {
-    const t = clock.t, c = overlap(), gap = 8, bw = (R.w - gap) / 2, bh = 40;
+    const t = clock.t, c = overlap(), gap = 8, bw = (R.w - gap) / 2, bh = R.cmp ? 32 : 40, y1 = R.cmp ? 10 : 12, y2 = R.cmp ? 23 : 28;
     const active = clock.t > 0 && clock.t < 4 ? STEPS[Math.min(3, Math.floor(clock.t - 1e-9))].copy : null;
     for (let k = 0; k < 2; k++) {
       const x = R.x + k * (bw + gap), done = (step) => t >= step - 1e-9;
@@ -238,14 +379,14 @@
       const hot = active === k;
       ctx.strokeStyle = hot ? P.amber : P.lineHot; ctx.lineWidth = hot ? 2 : 1; if (hot) { ctx.shadowColor = P.amber; ctx.shadowBlur = 8; }
       ctx.strokeRect(x + 0.5, R.y + 0.5, bw - 1, bh - 1); ctx.shadowBlur = 0;
-      text(ctx, L(`副本 ${k}`, `copy ${k}`), x + 8, R.y + 12, hot ? P.amber : P.ink, { size: 11.5, face: 'body' });
-      text(ctx, state, x + 8, R.y + 28, rev ? P.cyan : wrote ? P.magenta : P.dim, { size: 10.5 });
+      text(ctx, L(`副本 ${k}`, `copy ${k}`), x + 8, R.y + y1, hot ? P.amber : P.ink, { size: R.cmp ? 11 : 11.5, face: 'body' });
+      text(ctx, state, x + 8, R.y + y2, rev ? P.cyan : wrote ? P.magenta : P.dim, { size: R.cmp ? 10 : 10.5 });
     }
   }
 
   function drawScreen(ctx, R, m) {
-    const sc = SCREEN[m.n], words = !TRV.thumbMode, tk = thick();
-    const g = kit.plot($('cv'), { x: [-1, 1], y: [0, sc.ymax], pad: [R.x, R.W - R.x - R.w, R.y, R.H - R.y - R.h], clear: false });
+    const sc = SCREEN[m.n], words = !TRV.thumbMode, tk = thick(), stack = words && R.cmp;   // a phone's figure: the two words over the plot
+    const g = kit.plot($('flat'), { x: [-1, 1], y: [0, sc.ymax], pad: [R.x, R.W - R.x - R.w, R.y + (stack ? 27 : 0), R.H - R.y - R.h], clear: false });
     g.hline(0, P.lineHot, { width: 1 });
     const N = 360, us = Array.from({ length: N + 1 }, (_, k) => -1 + 2 * k / N), ys = us.map((u) => screen(m.rho, u, m.role));
     const ghostRho = m.ghost.map((row, i) => row.map((v, j) => (S.scene === 'record' ? [i === j ? 0.5 : 0.5, 0] : (S.scene === 'wake' ? anchored(S.lamDream, 'fine')[i][j] : [v, 0]))));
@@ -261,29 +402,95 @@
     g.line(us.map((u, k) => [u, gy[k]]), P.dim, { width: 1.2 * tk, dash: [3, 4], alpha: 0.8 });
     g.line(us.map((u, k) => [u, ys[k].diag]), P.cyan, { width: 2 * tk, dash: [6, 4], glow: 6 });
     g.line(us.map((u, k) => [u, ys[k].all]), P.ink, { width: 2.2 * tk, glow: 8 });
-    if (words) {
+    if (stack) {
+      const s = L('虚线灰：出发时', 'dashed grey: at the start');
+      ctx.font = `10px ${face('body')}`; const fs = Math.max(8, Math.min(10, 10 * R.w / Math.max(1, ctx.measureText(s).width)));
+      text(ctx, L('屏', 'screen'), R.x + 2, R.y + 6, P.dim, { size: 10.5, face: 'body' });
+      text(ctx, s, R.x + 2, R.y + 19, P.dim, { size: fs, face: 'body' });
+    } else if (words) {
       text(ctx, L('屏', 'screen'), R.x + 6, R.y + 10, P.dim, { size: 11, face: 'body' });
       g.text(1, sc.ymax, L('虚线灰：出发时', 'dashed grey: at the start'), P.dim, { align: 'right', base: 'top', size: 10.5, face: 'body', dy: 2 });
     }
   }
 
-  function drawStage() {
-    const sr = $('stage').getBoundingClientRect(), below = (el) => el.getBoundingClientRect().bottom - sr.top;
+  /** Where everything goes, in stage pixels: the apparatus (r3) and the flat panels (the matrix, the phase disc in the
+      record scene, the screen plot) in the rest. A wide stage puts the apparatus in a band across the top; a wide but
+      short one (a cited figure) on the left; a narrow one (a phone) in a lower band across the top, lower still in the
+      record scene, whose matrix needs room for the two record boxes (as does the band of a wide stage of middling
+      height, which leaves the panels at least 150 px, 172 px in the record scene, so the grid stays ≥ 80 px). The panels keep their own arrangement inside what
+      is left: side by side where that region is wide, stacked where it is not. */
+  let panelInfo = null;
+  /** A cited figure in a phone's frame (about 334 × 500): style.css tightens the same frames with the same query. */
+  const compact = () => TRV.figure && !TRV.still && window.matchMedia('(max-width: 480px)').matches;
+  function layout(Wd, Ht) {
+    const sr = $('stage').getBoundingClientRect(), below = (el) => (el.getClientRects().length ? el.getBoundingClientRect().bottom - sr.top : 0);
+    const rec = S.scene === 'record';
+    if (compact()) {
+      // a phone's cited figure: the apparatus in a band across the top, under it the grid beside the screen; in the
+      // record scene the grid over its two record boxes, beside the phase disc over the screen (the band gives way)
+      const top = below($('hudSub')) + 6, bottom = $('legend').offsetHeight + 24, x0 = 10, w = Wd - 20, h = Math.max(120, Ht - top - bottom);
+      const bh = Math.round(h * (rec ? CB.rec : CB.anchor)), r3 = { x: x0, y: top, w, h: bh }, pr = { x: x0, y: top + bh + 8, w, h: h - bh - 8 };
+      if (!rec) {
+        const ms = Math.round(Math.min(pr.h + 26, pr.w * 0.47)), sx = pr.x + ms + 12;
+        return { cmp: true, r3, pr, mat: { x: pr.x, y: pr.y, w: ms, h: pr.h }, dsc: null, scr: { x: sx, y: pr.y, w: pr.x + pr.w - sx, h: pr.h } };
+      }
+      const half = Math.round((pr.w - 10) / 2), rx = pr.x + half + 10, rw = pr.w - half - 10, dh = Math.round(pr.h * 0.56);
+      return { cmp: true, r3, pr, mat: { x: pr.x, y: pr.y, w: half, h: pr.h, recX: pr.x, recW: half, cmp: true }, dsc: { x: rx, y: pr.y, w: rw, h: dh }, scr: { x: rx, y: pr.y + dh + 4, w: rw, h: pr.h - dh - 4 } };
+    }
     const top = TRV.thumbMode ? 24 : Math.max(46, below($('hudSub')), below($('sceneChips'))) + 10;
     const bottom = TRV.thumbMode ? 24 : Math.max(18, $('legend').offsetHeight + 20);
-    const g0 = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, Wd = g0.W, Ht = g0.H;
-    const x0 = 16, w = Wd - 32, h = Math.max(80, Ht - top - bottom), wide = w >= 560, m = current();
-    const rec = S.scene === 'record';
-    let mat = wide ? { x: x0, y: top, w: Math.min(w * (rec ? 0.36 : 0.46), h + 30), h } : { x: x0, y: top, w, h: h * 0.58 };
+    const x0 = 16, w = Wd - 32, h = Math.max(80, Ht - top - bottom);
+    let r3, pr;
+    if (w >= 560 && h < 300) {
+      // short and wide (a cited figure in a page): the apparatus on the left takes nearly half the width; the grid beside
+      // the screen on the right, in the record scene the grid over its record boxes beside the phase disc over the screen
+      const lw = Math.round(w * 0.48); r3 = { x: x0, y: top, w: lw, h }; pr = { x: x0 + lw + 14, y: top, w: w - lw - 14, h };
+      if (!rec) {
+        const mat = { x: pr.x, y: pr.y, w: Math.min(pr.w * 0.46, pr.h + 30), h: pr.h }, sx = mat.x + mat.w + 18;
+        return { r3, pr, mat, dsc: null, scr: { x: sx, y: pr.y + 18, w: pr.x + pr.w - sx, h: pr.h - 18 } };
+      }
+      const mw = Math.round(pr.w * 0.44), rx = pr.x + mw + 14, rw = pr.x + pr.w - rx, dh = Math.round(pr.h * 0.52);
+      return { r3, pr, mat: { x: pr.x, y: pr.y, w: mw, h: pr.h, recX: pr.x + 14, recW: mw - 14 }, dsc: { x: rx, y: pr.y, w: rw, h: dh }, scr: { x: rx, y: pr.y + dh + 18, w: rw, h: pr.h - dh - 18 } };
+    }
+    else { const bh = Math.round(w >= 560 ? Math.max(110, Math.min(h * 0.55, h - (rec ? 172 : 150))) : Math.max(70, h * (rec ? 0.24 : 0.32))); r3 = { x: x0, y: top, w, h: bh }; pr = { x: x0, y: top + bh + 8, w, h: h - bh - 8 }; }
+    const wide = pr.w >= 560 || (pr.w >= 400 && pr.w >= 1.45 * pr.h), fr = rec ? 0.64 : 0.58;   // stacked: the matrix row's share
+    let mat = wide ? { x: pr.x, y: pr.y, w: Math.min(pr.w * (rec ? 0.36 : 0.46), pr.h + 30), h: pr.h } : { x: pr.x, y: pr.y, w: pr.w, h: pr.h * fr };
     let dsc = null;
-    if (rec && wide) { dsc = { x: mat.x + mat.w + 12, y: top, w: Math.min(w * 0.3, h), h: h * 0.85 }; }
-    else if (rec) { const half = (w - 10) / 2; dsc = { x: x0 + half + 10, y: top, w: half, h: mat.h - 52 }; mat = { x: x0, y: top, w: half, h: mat.h, recX: x0, recW: w }; }
+    if (rec && wide) {
+      dsc = { x: mat.x + mat.w + 12, y: pr.y, w: Math.min(pr.w * 0.3, pr.h), h: pr.h * 0.85 };
+      if (Math.min(mat.w, mat.h - 52) - 30 < 150) Object.assign(mat, { recX: mat.x + 14, recW: mat.w - 14 });   // a short grid: the record boxes take the matrix's whole width
+    }
+    else if (rec) { const half = (pr.w - 10) / 2; dsc = { x: pr.x + half + 10, y: pr.y, w: half, h: mat.h }; mat = { x: pr.x, y: pr.y, w: half, h: mat.h, recX: pr.x, recW: half }; }   // the record boxes under the matrix, the disc beside both
     const sx = dsc && wide ? dsc.x + dsc.w + 18 : mat.x + mat.w + 24;
-    const scr = wide ? { x: sx, y: top + 18, w: x0 + w - sx, h: h - 18 } : { x: x0, y: top + h * 0.58 + 12, w, h: h * 0.42 - 12 };
+    const scr = wide ? { x: sx, y: pr.y + 18, w: pr.x + pr.w - sx, h: pr.h - 18 } : { x: pr.x, y: pr.y + pr.h * fr + 12, w: pr.w, h: pr.h * (1 - fr) - 12 };
+    return { r3, pr, mat, dsc, scr };
+  }
+  function drawStage() {
+    const g0 = kit.plot($('flat'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, Wd = g0.W, Ht = g0.H, m = current(), words = !TRV.thumbMode;
+    const lay = layout(Wd, Ht), { r3, pr } = lay, cmp = !!lay.cmp;
+    // the apparatus, fitted to its box in the default view, with room under it for the names of the places and, where
+    // its sides leave no room for the words saying what it stands for, a line above it; on a phone (a low band) the
+    // names sit beside the beads and the words stay in the drawer and the MODEL box
+    // (the names of two slits at ±0.5 sit above the plate's lowest corner, so they need a narrower strip than four)
+    const low = r3.h < 110 || cmp, names = words && !low ? (m.n === 2 ? 10 : 22) : 0;
+    const room = words && !low ? captionRoom(ctx) : [0, 0];
+    let box3 = { x: r3.x, y: r3.y, w: r3.w, h: r3.h - names }, fit = fitSolid(box3), strip = false;
+    if (words && !low && (fit.l - r3.x < room[0] || r3.x + r3.w - fit.r < room[1])) { strip = true; box3 = { x: r3.x, y: r3.y + 16, w: r3.w, h: r3.h - 16 - names }; fit = fitSolid(box3); }
+    // the view the camera is turned to: no larger than the default, kept inside the apparatus's own box (between the
+    // words beside it, where they are there), so a turned apparatus never runs under the title, the legend or a panel
+    st.cam.pitch = clamp(st.cam.pitch, -0.2, 1.25); st.cam.zoom = clamp(st.cam.zoom, 0.8, 1.3);
+    const side = words && !low && !strip, keep = { x: side ? fit.l : box3.x, y: box3.y, w: side ? fit.r - fit.l : box3.w, h: box3.h };
+    applyFit(fitSolid(keep, st.cam.yaw, st.cam.pitch, fit.unit * st.cam.zoom), Wd, Ht);
+    nameAt = low ? { dx: -12, dy: 0 } : { dx: 0, dy: 15 };
+    st.begin(); drawSolid(m, words); st.end();
+    // the flat panels, on a ground of the stage's own colour, so that a turned apparatus never runs under them
+    ctx.fillStyle = P.stage; ctx.fillRect(pr.x - 8, pr.y - 4, pr.w + 16, pr.h + 8);
+    if (words && !low) solidCaption(ctx, r3, fit, strip);
     disc = null;
-    drawMatrix(ctx, mat, m);
-    if (dsc) drawDisc(ctx, dsc);
-    drawScreen(ctx, { x: scr.x, y: scr.y, w: scr.w, h: scr.h, W: Wd, H: Ht }, m);
+    drawMatrix(ctx, lay.mat, m);
+    if (lay.dsc) drawDisc(ctx, Object.assign({ cmp }, lay.dsc));
+    drawScreen(ctx, { x: lay.scr.x, y: lay.scr.y, w: lay.scr.w, h: lay.scr.h, W: Wd, H: Ht, cmp }, m);
+    panelInfo = { r3, fit: { l: fit.l, r: fit.r, t: fit.t, b: fit.b }, region: pr, mat: lay.mat, disc: lay.dsc, screen: lay.scr, grid: grid && { x0: grid.x0, y0: grid.y0, size: grid.size } };
   }
 
   /* ---------- the strip: what changes and what does not along the rail ---------- */
@@ -435,13 +642,16 @@
   kit.keys({ 1: () => { leave(); setScene('anchor'); }, 2: () => { leave(); setScene('record'); }, 3: () => { leave(); setScene('wake'); } });
   $('rew').addEventListener('click', () => { stopAt = null; clock.pause(); clock.set(0); });
 
-  // drag sideways on the matrix: the same as scrubbing the rail
+  // drag sideways on the matrix: the same as scrubbing the rail; anywhere else on the stage turns the apparatus
   let dragging = false;
-  const onGrid = (ev) => { if (!grid) return false; const b = $('cv').getBoundingClientRect(), x = ev.clientX - b.left, y = ev.clientY - b.top; return x >= grid.x0 - 6 && x <= grid.x0 + grid.size + 6 && y >= grid.y0 - 6 && y <= grid.y0 + grid.size + 6; };
-  const toT = (ev) => { const b = $('cv').getBoundingClientRect(); return clamp((ev.clientX - b.left - grid.x0) / grid.size, 0, 1) * clock.max; };
-  $('cv').addEventListener('pointerdown', (ev) => { if (!onGrid(ev)) return; dragging = true; try { $('cv').setPointerCapture(ev.pointerId); } catch (e) { /* synthetic events */ } leave(); clock.pause(); clock.set(toT(ev)); });
-  $('cv').addEventListener('pointermove', (ev) => { if (dragging) clock.set(toT(ev)); else $('cv').style.cursor = onGrid(ev) ? 'ew-resize' : 'default'; });
-  for (const type of ['pointerup', 'pointercancel']) $('cv').addEventListener(type, () => { dragging = false; });
+  const onGrid = (ev) => { if (!grid) return false; const b = $('flat').getBoundingClientRect(), x = ev.clientX - b.left, y = ev.clientY - b.top; return x >= grid.x0 - 6 && x <= grid.x0 + grid.size + 6 && y >= grid.y0 - 6 && y <= grid.y0 + grid.size + 6; };
+  const toT = (ev) => { const b = $('flat').getBoundingClientRect(); return clamp((ev.clientX - b.left - grid.x0) / grid.size, 0, 1) * clock.max; };
+  SO.onPick = (ev) => { if (!onGrid(ev)) return false; dragging = true; leave(); clock.pause(); return true; };
+  SO.onDrag = (ev) => { if (dragging) clock.set(toT(ev)); };
+  SO.onDrop = () => { dragging = false; };
+  $('stage').addEventListener('pointermove', (ev) => { if (!dragging) $('stage').style.cursor = onGrid(ev) ? 'ew-resize' : 'grab'; });
+  /** Back to the default view (a card is seen as it is described). */
+  const camHome = (ms) => { const c = st.cam; if (Math.abs(c.yaw - CAM.yaw) + Math.abs(c.pitch - CAM.pitch) + Math.abs(c.zoom - 1) > 1e-6) st.view([CAM.yaw, CAM.pitch, 1], ms); };
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
@@ -472,6 +682,7 @@
     if (c.r != null) { S.r = c.r; fR.set(c.r); }
     if (c.phi != null) { S.phi = c.phi; fPhi.set(c.phi); }
     setScene(c.scene, 0);
+    camHome(TRV.still || booting ? 0 : 500);
     if (TRV.still || (booting && !TRV.embed)) { clock.set(c.still); return; }
     stopAt = c.to == null ? null : c.to;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
@@ -497,7 +708,16 @@
     /** Move the clock while it plays, keeping a card's stop (to test that the card stops itself). */
     jump: (t) => { if (clock.playing) clock.set(t); },
     /** Viewport point at fraction fx across the grid, mid height. */
-    gridAt: (fx) => { const b = $('cv').getBoundingClientRect(); return [b.left + grid.x0 + fx * grid.size, b.top + grid.y0 + grid.size / 2]; }
+    gridAt: (fx) => { const b = $('cv').getBoundingClientRect(); return [b.left + grid.x0 + fx * grid.size, b.top + grid.y0 + grid.size / 2]; },
+    /** The apparatus of the last frame: slits, columns { i, x, h, color }, arches { i, j, r, shown, color }, constants. */
+    get solid() { return solidInfo && JSON.parse(JSON.stringify(solidInfo)); },
+    /** The screen of the apparatus at (u, v), in world coordinates, from the very function the last frame was built with. */
+    solidScreenAt: (u, v) => (screenF ? screenF(u, v) : null),
+    /** The boxes of the last frame in stage pixels: the apparatus (r3, and the part fit it covers in the default view),
+        the region of the flat panels, the matrix, the phase disc, the screen plot and the grid itself. */
+    get panels() { return panelInfo && JSON.parse(JSON.stringify(panelInfo)); },
+    /** The default view of the apparatus [yaw, pitch]. */
+    home: [CAM.yaw, CAM.pitch]
   };
   window.TRV_THUMB = () => { clock.pause(); S.fam = 'body'; S.w = 0.4; S.path = [0, 1]; setScene('anchor', 0.55); paint.now(); };
   setScene('anchor', 0);
