@@ -10,7 +10,7 @@ description: 持续研究数学与物理模型的假设，推导结构、适用�
 ## 开始与接续
 
 1. 阅读项目的 `AGENTS.md`、项目规则、验证契约与已有相关研究记录。确认用户当前范围、两个仓库的工作区、未完成 PR、已有证据及下一步；先接续未完成的实质工作。没有现成记录时直接从当前问题开展研究，不先建立全量假设目录、固定编号或登记系统。
-2. `trureturing` 默认使用 `~/trureturing`；用户明确指定其他路径时使用指定位置。将选定根目录通过 `TRURETURING_DIR` 传给后续步骤，引用其他 skill 的相对路径示例不能覆盖这个选择。在该仓库核对远程、分支与工作区所有权，再按上游隔离规则复用或创建 linked worktree；遵守其当前 `CLAUDE.md`、`agents/CONTEXT.md`、规范与 `skills/codex-formalize/SKILL.md`。本书库不存放 `.lean` 文件，也不改模板托管文件。
+2. `trureturing` 按用户显式路径、已有 `TRURETURING_DIR`、默认 `~/trureturing` 的顺序选择。将选定根目录通过 `TRURETURING_DIR` 传给后续步骤，引用其他 skill 的相对路径示例不能覆盖这个选择。在该仓库核对远程、分支与工作区所有权，再按上游隔离规则复用或创建 linked worktree；遵守其当前 `CLAUDE.md`、`agents/CONTEXT.md`、规范与 `skills/codex-formalize/SKILL.md`。本书库不存放 `.lean` 文件，也不改模板托管文件。
 3. 选择一个能推进当前问题的独立目标；沿真实证明依赖拆解，不按章节数量凑成果。候选来源可以是正文假设、推导中的缺口、实验偏差或前一轮的残余问题，不预设真假或可形式化性。
 
 ## 科学目标与命题边界
