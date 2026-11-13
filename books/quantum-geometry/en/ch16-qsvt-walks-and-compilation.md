@@ -192,7 +192,7 @@ Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 
 :::
 
-## The central-defect path: how an endpoint controls the spectrum {#sec-central-defect-gap}
+## 16.3 The central-defect path: how an endpoint controls the spectrum {#sec-central-defect-gap}
 
 Equations (25)–(27) of the same Childs et al. version use tree depth $d\ge1$ and $2d+2$ columns, indexed by $j=0,\ldots,2d+1$, with sizes $N_j=2^{\min(j,2d+1-j)}$. With normalized column vectors $|q_j\rangle=N_j^{-1/2}\sum_{v\text{ in column }j}|v\rangle$ and the graph Hamiltonian equal to $\gamma$ times adjacency, $\gamma=1/\sqrt2$, the paper's column reduction gives ordinary weights $\sqrt2\gamma=1$ and central weight $2\gamma=\sqrt2$. Thus the path parameter here is $n=d+1$, and column $j$ is zero-based path coordinate $j$. This graph-to-path identification is a literature reduction; its complete column-count, rectangular-intertwining and matrix-exponential application has not been checked in Lean for this book. The theorems below act directly on the explicitly specified $J_n$.
 
@@ -266,7 +266,7 @@ The real symmetric spectral theorem supplies the complete real root list, so the
 
 **Bridges from spectrum to traversal remain.** An endpoint probability bound also needs the actual propagator $\exp(-itJ_n)$, the two endpoints' spectral weights, and control of the cross terms in a finite time average. A glued-trees oracle algorithm further needs the graph-to-column reduction, the Hamiltonian's time normalization and its implementation cost. The classical lower bound uses a separate oracle argument. [@thm-central-defect-spectral-gap] establishes the spectral separation stated above; the complete algorithmic separation in [@rem-qsvt-walks-literature] retains its status as a literature result.
 
-## 16.3 From Interval Sums of Squares to Continuous Matrix Completion {#sec-interval-sos-completion}
+## 16.4 From Interval Sums of Squares to Continuous Matrix Completion {#sec-interval-sos-completion}
 
 
 **What is missing at the endpoint?** Take $p(x)=x/2$. If the real target $p$ itself must occupy the diagonal, the condition $p(x)^2+(1-x^2)Q(x)^2=1$ gives the impossible equality $1/4=1$ at $x=1$. The missing weight can instead enter the imaginary part of the diagonal: choose
@@ -477,7 +477,7 @@ Here $\operatorname{Re}_{\mathrm{entry}}$ takes the real part of each matrix ent
 Agreement with the interval pullback $U_{\mathrm{int}}(\operatorname{Re}z)$ is guaranteed on the upper semicircle $y\ge0$: $\sqrt{1-\cos^2\theta}=|\sin\theta|$. For example, the valid completion $P=X,Q=1$ at $\theta=-\pi/3$ has off-diagonal entries $i\sqrt3/2$ in the interval pullback and $-i\sqrt3/2$ in the signed circle loop. Both matrices are unitary, but the loops differ. What we have obtained is a completion of the polynomial deficit and its continuous matrix consequences. Factorization on the entire signed circle is proved separately in the next section. These two completion statements themselves supply no continuity of phase choices, query complexity, or full block-encoding QSVT result, and make no empirical physics claim.
 :::
 
-## From the complete polynomial pair to phases on the whole signed circle {#sec-phase-synthesis}
+## 16.5 From the complete polynomial pair to phases on the whole signed circle {#sec-phase-synthesis}
 
 The previous section supplies all four matrix entries. A separate question remains: can this **same matrix field** be written as a finite ordered product of signals and phases? We first remove the last step at the polynomial level, then restore each step as a matrix product on the circle, keeping the completion witnesses throughout.
 
@@ -687,7 +687,7 @@ For the second theorem, take $p=X,B=0,C=1$, satisfying every SOS constraint at b
 The rotation-to-reflection convention and lifting to arbitrary projected unitaries are connected below by the same witnesses in [@thm-native-phase-projected-lifting]. Equality with the positive square root on the upper semicircle still cannot replace field equality on the whole signed circle. The remaining real-part ancilla, circuit, and query boundaries are stated in [@rem-projected-lifting-provenance-boundaries].
 :::
 
-## Lifting the Same Scalar Word to a Raw Projected Unitary {#sec-raw-projected-unitary-lifting}
+## 16.6 Lifting the Same Scalar Word to a Raw Projected Unitary {#sec-raw-projected-unitary-lifting}
 
 How can a single entry of a two-dimensional matrix determine a block in a much larger space? Picture an input window $\Pi$, a raw unitary $U$, and an output window $\widetilde\Pi$. The windows may have different sizes; the output window may even be closed entirely. Amplitude outside a window remains in the space, and the next $U^*$ can bring it back. Tracking only the currently visible component cannot establish the action of an arbitrary alternating word.
 
@@ -739,7 +739,7 @@ The factors of $S(\Psi,x)=\operatorname{seqR}(\Psi,x)$ follow list order from le
 
 For example, $V_E([\alpha])=F_{\widetilde\Pi}(\alpha)U$, whereas $V_E([\alpha,\beta])=F_\Pi(\alpha)U^*F_{\widetilde\Pi}(\beta)U$. The recursion tests the length of the **tail**; replacing this with an informal phase-index convention can interchange $U$ and $U^*$. The operator $F_J$ multiplies $\operatorname{range}J$ by $e(\theta)$ and its orthogonal complement by $e(-\theta)$. When their dimensions differ, its determinant need not be $1$.
 
-### Two Frames Keep Both the Visible and Complementary Amplitudes
+### 16.6.1 Two Frames Keep Both the Visible and Complementary Amplitudes {#two-frames-keep-both-the-visible-and-complementary-amplitudes}
 
 ::: {.definition #def-singular-pair-frames title="An arbitrary singular pair and its input and output frames" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.IsSingularPair D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvtOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.rvpOf"}
 The predicate $\operatorname{IsSingularPair}(E,\psi,\sigma)$ means exactly
@@ -818,7 +818,7 @@ $$
 Keeping $b=M_{10}$ is essential: the next $00$ coefficient contains $s b$. A final projected readout does not justify removing the complementary component earlier. The endpoint action identities have already been established separately, and all formulas also cover $\psi=0$. This theorem concerns vectors satisfying the singular-pair predicate; it is not an unconditional assertion about every physical input state. The full proof is checked by the Lean kernel.
 :::
 
-### From the Complete Input Gram Spectrum to the Compressed Operator
+### 16.6.2 From the Complete Input Gram Spectrum to the Compressed Operator {#from-the-complete-input-gram-spectrum-to-the-compressed-operator}
 
 The operator $G=A^*A$ is a positive self-adjoint contraction with $\Pi G=G\Pi=G$. The source applies the pinned Mathlib finite-dimensional symmetric spectral theorem to its restriction to $\operatorname{range}\Pi$, obtaining a complete orthonormal eigenbasis $\{\psi_j\}_{j\in\mathrm{Fin}(\dim\operatorname{range}\Pi)}$ of that **input subspace**. This is not a thin decomposition listing only positive singular values, nor is this family asserted to be a basis of all $H$. Write $G\psi_j=\lambda_j\psi_j$. Positivity and $\|A\psi_j\|\le\|\psi_j\|$ give $\lambda_j\in[0,1]$; set $\sigma_j=\sqrt{\lambda_j}$. Every zero eigenvalue remains in the basis.
 
@@ -891,7 +891,7 @@ $$
 Thus the full output is $e(-\theta)(0,1)$ at the zero endpoint and $e(\theta)(1,0)$ at the unit endpoint. Both agree with the two-component formula. At the zero endpoint, the projected readout is zero while the full vector still has norm $1$.
 :::
 
-## The SAME Native Phase Object: Joint Witnesses for the Circle Field and Raw Operator {#sec-native-phase-lifting}
+## 16.7 The SAME Native Phase Object: Joint Witnesses for the Circle Field and Raw Operator {#sec-native-phase-lifting}
 
 We can now connect the earlier completion to the raw $U,\Pi,\widetilde\Pi$ without choosing a second completion. First fix the rotation and reflection conventions. The interval rotation matrix
 
@@ -1055,7 +1055,7 @@ The same native phase object now acts on arbitrary-rank projections and the raw 
 **The walk-spreading lab.** Drag the rail to change the steps, change the coin's share $w$ and phase $\varphi$, or shorten the cycle: cyan above is the quantum walk, grey below the classical random walk, and magenta what the quantum distribution has beyond its mirror image. The green box is [@lemma-symmetric-coin-walk]; the widths and the lopsidedness are the page's numbers.
 :::
 
-## 16.4 Finite Gate Words and Three-Dimensional Polytope Approximation {#sec-finite-gate-polytope}
+## 16.8 Finite Gate Words and Three-Dimensional Polytope Approximation {#sec-finite-gate-polytope}
 
 So far we have treated rotation angles $\theta$ and $\phi_k$ as continuous real parameters. In fault-tolerant quantum architectures ([Chapter 14](ch14-cloning-codes-and-braids.md)), however, hardware provides only a **finite discrete gate alphabet** — typically the Clifford+$T$ pair $\{H, T\}$.
 
@@ -1126,7 +1126,7 @@ In [@prop-two-axis-finite-word], each step chooses any continuous angle from $\m
 **At $24576$ sides the gap is still there.** Zu Chongzhi pushed the circle-cutting to $24576$ sides. The cyan inscribed polygon can no longer be told apart from the circle, and the magenta gap $1 - \cos\frac{\pi}{n}$ is down to $8.17\times10^{-9}$; magnified about $7.5\times10^{7}$ times vertically, it looks exactly as it did at the first step. This is circle-cutting in the plane; reading it as chordal faces approximating a sphere is only the pedagogical analogy of item 5 above (for the numerical table, see [Chapter 21](ch21-diagonalization-and-escape.md), [@ex-liu-hui-polygon-sagitta]).
 :::
 
-## 16.5 Compilation Error, Query Counts, and Asymptotic Gate Length {#sec-compilation-error-and-count}
+## 16.9 Compilation Error, Query Counts, and Asymptotic Gate Length {#sec-compilation-error-and-count}
 
 When the initial success probability $p \in (0, 1]$ in amplitude amplification is known and we are allowed an auxiliary coin rotation `coinRotation q`, we can eliminate the integer-step overshoot of [Chapter 15](ch15-grover-qft-and-period-finding.md) completely and bound the exact number of source queries.
 

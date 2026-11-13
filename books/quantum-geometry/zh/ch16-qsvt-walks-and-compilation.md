@@ -192,7 +192,7 @@ $$
 
 :::
 
-## 中央缺陷路径：端点如何约束整个谱 {#sec-central-defect-gap}
+## 16.3 中央缺陷路径：端点如何约束整个谱 {#sec-central-defect-gap}
 
 Childs 等人同一版本的式 (25)–(27) 使用树深度 $d\ge1$ 与 $2d+2$ 个列，列号为 $j=0,\ldots,2d+1$，列大小为 $N_j=2^{\min(j,2d+1-j)}$。取归一化列向量 $|q_j\rangle=N_j^{-1/2}\sum_{v\text{ 在列 }j}|v\rangle$，并令原图哈密顿量为邻接矩阵的 $\gamma$ 倍、$\gamma=1/\sqrt2$，则文献的列约简给出普通列间权重 $\sqrt2\gamma=1$、中央权重 $2\gamma=\sqrt2$。因而这里的路径参数是 $n=d+1$；列号 $j$ 对应路径的第 $j$ 个零起编号坐标。这一图到路径的对应属于文献约简，尚未在本书完成全部列计数、矩形交织与矩阵指数的精确 Lean 应用；下述定理直接作用于已经明确给定的 $J_n$。
 
@@ -266,7 +266,7 @@ $$
 
 **从谱到穿行仍有桥梁。** 要把这条间距界变成端点概率，须展开实际传播子 $\exp(-itJ_n)$，核对两个端点的谱权重，并控制有限时间平均中的交叉项。要再解释成黏合树黑盒算法，还须核对图到列子空间的约简、哈密顿量的时间归一化与实现成本；经典下界则依赖另一套黑盒论证。[@thm-central-defect-spectral-gap] 只承担上述谱分离结论；[@rem-qsvt-walks-literature] 中的完整算法分离保持其文献结果身份。
 
-## 16.3 从区间平方和到连续矩阵补全 {#sec-interval-sos-completion}
+## 16.4 从区间平方和到连续矩阵补全 {#sec-interval-sos-completion}
 
 
 **先看端点缺了什么。** 取 $p(x)=x/2$。若坚持把实目标 $p$ 本身放在对角线上，要求 $p(x)^2+(1-x^2)Q(x)^2=1$，那么 $x=1$ 立即给出不可能的 $1/4=1$。缺口可以放进对角元的虚部：取
@@ -477,7 +477,7 @@ $\operatorname{Re}_{\mathrm{entry}}$ 表示逐矩阵元取实部，末行则是 
 与区间拉回 $U_{\mathrm{int}}(\operatorname{Re}z)$ 的同一性只在上半圆 $y\ge0$ 上得到保证，因为 $\sqrt{1-\cos^2\theta}=|\sin\theta|$。例如合法补全 $P=X,Q=1$ 在 $\theta=-\pi/3$ 时，区间拉回的两个非对角元为 $i\sqrt3/2$，有符号圆环的则为 $-i\sqrt3/2$。两者都幺正，却不是同一个圆环。这里得到的是多项式亏量的补全及其连续矩阵后果；其中整个有符号圆的相位分解将由下一节单独证明；这两条补全声明本身不提供相位选择的连续性、查询复杂度或完整块编码 QSVT 的结论，也不涉及经验物理断言。
 :::
 
-## 从完整多项式对到整个有符号圆的相位分解 {#sec-phase-synthesis}
+## 16.5 从完整多项式对到整个有符号圆的相位分解 {#sec-phase-synthesis}
 
 上一节给出了矩阵的四个分量，现在还要回答一个不同的问题：能否把这**同一个矩阵场**写成有限个信号与相位的有序乘积？先在多项式层剥掉最后一步，再把每一步接回圆上的矩阵，便能保持补全见证不变。
 
@@ -687,7 +687,7 @@ $$
 旋转—反射约定与任意投影酉算子的提升将在下文 [@thm-native-phase-projected-lifting] 中用同一组见证连接。上半圆上的正平方根相等，仍不能代替整个有符号圆上的场相等；实部辅助比特、电路与查询的剩余边界见 [@rem-projected-lifting-provenance-boundaries]。
 :::
 
-## 把同一标量字提升到原始投影酉算子 {#sec-raw-projected-unitary-lifting}
+## 16.6 把同一标量字提升到原始投影酉算子 {#sec-raw-projected-unitary-lifting}
 
 二维矩阵里的一个数，怎样决定大空间里的一个投影块？想象先用输入窗口 $\Pi$ 留住一束振幅，经过原始酉算子 $U$，再用输出窗口 $\widetilde\Pi$ 读出。窗口的大小可以不同；输出窗口甚至可以完全关闭。被挡住的振幅仍在空间里，下一次 $U^*$ 会把它带回来。因此只跟踪当前窗口里的分量，不能证明任意长的交替字。
 
@@ -739,7 +739,7 @@ $S(\Psi,x)=\operatorname{seqR}(\Psi,x)$ 的因子按列表从左到右排列，�
 
 例如 $V_E([\alpha])=F_{\widetilde\Pi}(\alpha)U$，而 $V_E([\alpha,\beta])=F_\Pi(\alpha)U^*F_{\widetilde\Pi}(\beta)U$。递归判断的是**尾列表**长度；不能按正在读到的相位下标擅自调换 $U$ 与 $U^*$。$F_J$ 在 $\operatorname{range}J$ 上乘 $e(\theta)$，在其正交补上乘 $e(-\theta)$；若两边维数不同，其行列式也不必为 $1$。
 
-### 两副架：把留在窗内与落在窗外的振幅一起带走
+### 16.6.1 两副架：把留在窗内与落在窗外的振幅一起带走 {#两副架把留在窗内与落在窗外的振幅一起带走}
 
 ::: {.definition #def-singular-pair-frames title="任意奇异对及其输入、输出两副架" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.IsSingularPair D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvtOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.rvpOf"}
 $\operatorname{IsSingularPair}(E,\psi,\sigma)$ 表示恰好以下条件：
@@ -818,7 +818,7 @@ $$
 因此必须保留 $b=M_{10}$：下一步的 $00$ 系数含有 $s b$，即使最后只读投影块，也不能提前删除补分量。$\sigma=0,1$ 的作用式已经分别建立，$\psi=0$ 时各式也成立。该定理陈述的是满足奇异对条件的向量，尚不是对任意物理输入态的无条件断言。完整证明由 Lean 内核检查。
 :::
 
-### 从输入窗口的完整格拉姆谱到压缩算子
+### 16.6.2 从输入窗口的完整格拉姆谱到压缩算子 {#从输入窗口的完整格拉姆谱到压缩算子}
 
 $G=A^*A$ 是正自伴收缩算子，并满足 $\Pi G=G\Pi=G$。源码对 $\operatorname{range}\Pi$ 上的限制算子使用所钉 Mathlib 的有限维对称谱定理，取该**输入子空间**的完整标准正交本征基 $\{\psi_j\}_{j\in\mathrm{Fin}(\dim\operatorname{range}\Pi)}$。它不是只列正奇异值的薄分解，也不是宣称这组向量是整个 $H$ 的基。设 $G\psi_j=\lambda_j\psi_j$；由正性与 $\|A\psi_j\|\le\|\psi_j\|$ 得 $\lambda_j\in[0,1]$，置 $\sigma_j=\sqrt{\lambda_j}$。所有零本征值保留在这组基中。
 
@@ -891,7 +891,7 @@ $$
 故零端点的全部输出是 $e(-\theta)(0,1)$，单位端点的全部输出是 $e(\theta)(1,0)$。两者均与双分量公式相符，前者的投影读出为零而全向量范数仍为 $1$。
 :::
 
-## SAME 原生相位对象：圆场与原始算子的联合见证 {#sec-native-phase-lifting}
+## 16.7 SAME 原生相位对象：圆场与原始算子的联合见证 {#sec-native-phase-lifting}
 
 现在把先前的补全真正接到上述原始 $U,\Pi,\widetilde\Pi$，不重新选一次补全。先明确旋转与反射的约定。区间旋转矩阵
 
@@ -1055,7 +1055,7 @@ $$
 **游走扩散实验室。** 拖时间轴改步数，改硬币的份额 $w$ 与相位 $\varphi$，或把圈变短：上方青色是量子游走，下方灰色是经典随机游走，品红是量子分布比它的镜像多出的部分。绿色框是 [@lemma-symmetric-coin-walk]；宽度与失衡都是页面的数值。
 :::
 
-## 16.4 有限门字与三维割圆多面体 {#sec-finite-gate-polytope}
+## 16.8 有限门字与三维割圆多面体 {#sec-finite-gate-polytope}
 
 在前两节和[第十五章](ch15-grover-qft-and-period-finding.md)里，我们一直在理想化的连续角度空间里自由取用任意旋转角 $\theta$ 或 $\phi_k$。然而，当你真正坐到一台容错量子计算机的控制台前（回想[第十四章](ch14-cloning-codes-and-braids.md)的稳定子纠错码），硬件为你提供的容错基本逻辑门并不是无穷无尽的连续旋钮，而仅仅是屈指可数的几个**离散生成元**——最典型的就是由 Hadamard 门 $H$ 与 $\pi/8$ 相位门 $T$ 组成的双门字母表 $\{H, T\}$！
 
@@ -1147,7 +1147,7 @@ $$
 **割到 $24576$ 边，缝还在。** 祖冲之把割圆推到 $24576$ 边：青色的内接多边形与圆已经分不开，品红的缝 $1 - \cos\frac{\pi}{n}$ 只剩 $8.17\times10^{-9}$；放大镜纵向放大约 $7.5\times10^{7}$ 倍之后，它和第一步时一样清楚。这是平面里的割圆；拿它比照弦面逼近球面，只是上面第 5 条的教学类比（割圆数值表见[第二十一章](ch21-diagonalization-and-escape.md) [@ex-liu-hui-polygon-sagitta]）。
 :::
 
-## 16.5 编译误差、查询计数与渐近门长 {#sec-compilation-error-and-count}
+## 16.9 编译误差、查询计数与渐近门长 {#sec-compilation-error-and-count}
 
 既然离散门编译不可避免地受制于有限字长与误差权衡，那么在包含黑盒源算子 $C$ 的振幅放大算法中，我们能否至少在**已知初始成功概率 $p \in (0, 1]$** 且允许调节一枚连续辅助硬币旋转门 `coinRotation q` 的前提下，把[第十五章](ch15-grover-qft-and-period-finding.md)遗留的整数步过冲残差彻底削成**精确的零**，并给出严格的源算子查询次数上界？
 
