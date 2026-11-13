@@ -22,6 +22,11 @@
   "lean": [
     "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
   ],
+  "solid": true,
+  "scripts": [
+    "viz/two-angle-addressing/model.js",
+    "viz/gram-causal-elliptope/model.js"
+  ],
   "outputs": {
     "narrated_720p": "quantum-geometry_008_720p_narrated.mp4",
     "cover": "quantum-geometry_008_cover.jpg"

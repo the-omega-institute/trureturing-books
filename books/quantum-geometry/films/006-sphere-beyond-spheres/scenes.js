@@ -11,7 +11,8 @@
              The fiber {a0, a1, a2} splits into {a0, a1} and {a2}; joined pieces 2 → 3 (counted here). The four
              conclusions ..... DiagonalTopologicalEscape.complete_diagonal_topological_settlement (ch. 21, LEAN).
      helix   The shadow circle (cos t, sin t) and the open helix (cos t, sin t, c t) of ch. 21 §21.3 item 3 (an image,
-             not a theorem); after one turn the height is 2πc. The joined coordinate Coordinate × Output has
+             not a theorem); after one turn the height is 2πc. Drawn as a solid: the old space is a lit sphere whose
+             equator is the shadow circle, its normal escape direction ⋆Iₙ the spike out of the pole, the helix outside it. The joined coordinate Coordinate × Output has
              2 · 2 = 4 values, so 2⁴ = 16 bit functions > 4 addresses (ch. 21, after the example; counted here).
      land    The 3 × 3 list of ch. 24 example ex-three-by-three-capture-escape: rows (0,1,2), (1,2,2), (2,2,2).
              f1 = (0→1, 1→2, 2→2) twists the diagonal (0,2,2) into (1,2,2) = row 1; g 1 1 = 2 = f1(2)
@@ -315,53 +316,51 @@ SCENES.split = S => {
 /* ======================================================================= */
 /*                 3 · SPHERE BEYOND: shadow circle, open helix              */
 /* ======================================================================= */
-const HX = { c: 0.11, R: 230 };
-function hxView(cx, cy, yaw, pitch) {
-  return p => {
-    const x = p[0] * Math.cos(yaw) - p[1] * Math.sin(yaw), d = p[0] * Math.sin(yaw) + p[1] * Math.cos(yaw);
-    return [cx + HX.R * x, cy + HX.R * (d * Math.sin(pitch) - p[2] * Math.cos(pitch))];
-  };
-}
-function hxPath(V, f, t0, t1, col, a, lw) {
-  if (a <= 0 || t1 <= t0) return;
-  ctx.save(); ctx.globalAlpha = a; ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.beginPath();
-  const n = Math.max(2, Math.ceil((t1 - t0) / 0.03));
-  for (let i = 0; i <= n; i++) { const [x, y] = V(f(lerp(t0, t1, i / n))); if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); }
-  ctx.stroke(); ctx.restore();
-}
-function helixFigure(V, tEnd, a, o = {}) {
-  const shadow = t => [Math.cos(t), Math.sin(t), 0], hel = t => [Math.cos(t), Math.sin(t), HX.c * t];
-  /* floor circle (the old space) */
-  hxPath(V, shadow, 0, TAU, C.cyan, a * 0.25, 1.5);
-  /* the normal axis */
-  const p0 = V([0, 0, -0.1]), p1 = V([0, 0, HX.c * 2.3 * TAU + 0.25]);
-  arrow(p0[0], p0[1], p1[0], p1[1], C.white, a * (o.axis == null ? 1 : o.axis) * 0.8, 2);
-  if (o.axis > 0) txt('eₙ₊₁ = ⋆Iₙ', p1[0] + 16, p1[1] + 8, { size: 24, fam: F.math, w: 700, c: C.white, a: a * (o.axis == null ? 1 : o.axis) });
-  hxPath(V, shadow, 0, Math.min(tEnd, TAU), C.cyan, a, 4);
-  if (o.helix > 0) {
-    hxPath(V, hel, 0, tEnd, C.mag, a * o.helix, 4);
-    /* drop lines every quarter turn */
-    for (let t = 0; t <= tEnd + 1e-9; t += TAU / 4) { const q = V(hel(t)), s = V(shadow(t)); dashed(s[0], s[1], q[0], q[1], C.dim, a * o.helix * 0.5, 1.2); }
+/* The scene's object as a solid: the old space is a lit sphere whose equator is the shadow circle (cos t, sin t, 0);
+   its normal escape direction eₙ₊₁ = ⋆Iₙ, the dual of the equator's plane, is the spike out of the north pole; the open
+   helix (cos t, sin t, c t) climbs outside the sphere along that direction. The sphere hides what passes behind it, and
+   2D labels are placed at the shot's anchors after it is drawn. */
+const HX = { c: 0.11, R: 200, spike: 2.3 };
+const hxShadow = t => [Math.cos(t), Math.sin(t), 0], hxHelix = t => [Math.cos(t), Math.sin(t), HX.c * t];
+const hxRun = (f, t0, t1, lift = 1) => { const n = Math.max(2, Math.ceil((t1 - t0) / 0.05)), pts = []; for (let i = 0; i <= n; i++) pts.push(f(lerp(t0, t1, i / n)).map((v, k) => (k < 2 ? v * lift : v))); return pts; };
+/* the shot: rect [x, y, w, h], the screen centre (cx, cy) of the sphere's centre, the camera yaw and pitch */
+function helixShot(key, r, cx, cy, yaw, pitch, tEnd, a, o = {}) {
+  const sh = solid(key, { x: r[0], y: r[1], w: r[2], h: r[3], yaw, pitch, unit: HX.R, cx: cx - r[0], cy: cy - r[1], px: true });
+  const ax = o.axis == null ? 1 : o.axis, hl = o.helix || 0;
+  sh.begin();
+  sh.surface('sphere', (u, v) => [Math.sin(u) * Math.cos(v), Math.sin(u) * Math.sin(v), Math.cos(u)], { u: [0, Math.PI], v: [0, TAU], nu: 40, nv: 72, color: C.blue, grid: { every: [5, 6], color: C.cyan, alpha: 0.28 } });
+  /* the shadow circle (the old space's closed turn): faint whole, bright as far as the point has gone */
+  sh.line(hxRun(hxShadow, 0, TAU, 1.012), { color: C.cyan, width: 1.6, alpha: 0.35 });
+  if (tEnd > 1e-3) sh.tube('shadow', hxRun(hxShadow, 0, Math.min(tEnd, TAU), 1.012), { color: C.cyan, width: 5, glow: 0.5 });
+  /* the normal escape direction: a spike out of the north pole */
+  if (ax > 0.003) sh.arrow([0, 0, 1], [0, 0, HX.spike], { color: C.white, width: 3, headSize: 22, alpha: ax });
+  /* the open helix and its drop lines every quarter turn */
+  if (hl > 0.003 && tEnd > 1e-3) {
+    sh.tube('helix', hxRun(hxHelix, 0, tEnd), { color: C.mag, width: 5, alpha: hl, glow: 0.5 });
+    for (let t = TAU / 4; t <= tEnd + 1e-9; t += TAU / 4) sh.line([hxShadow(t).map((v, k) => (k < 2 ? v * 1.012 : v)), hxHelix(t)], { color: C.dim, width: 1.4, alpha: 0.6 * hl, dash: [5, 5] });
   }
-  const s = V(shadow(tEnd)), h = V(hel(tEnd));
-  dot(s[0], s[1], 12, 'g', a * (o.helix > 0 ? 0.5 : 1));
-  if (o.helix > 0) dot(h[0], h[1], 14, 'g', a * o.helix);
-  return { s, h };
+  /* the point: on the shadow, and (from outside) on the helix */
+  sh.bead(hxShadow(tEnd).map((v, k) => (k < 2 ? v * 1.012 : v)), { color: C.now, r: 9, alpha: hl > 0 ? 0.55 : 1 });
+  if (hl > 0.003) sh.bead(hxHelix(tEnd), { color: C.now, r: 10, alpha: hl });
+  sh.end(a);
+  return { sh, tip: sh.anchor([0, 0, HX.spike]), base: sh.anchor([1, 0, 0]), top: sh.anchor([1, 0, HX.c * TAU]) };
 }
 SCENES.helix = S => {
   const u = S.u, out = clamp((S.d - u) / 0.6);
   badgeQ(S, [[0, null, 'computed']]);
   /* camera: from straight above (pitch 90°) to the side (pitch 22°) during line 2 */
   const tilt = ease(Q(S, 2, 'From outside', 2.0));
-  const pitch = lerp(Math.PI / 2, 0.38, tilt), yaw = 0.5 + 0.12 * Math.sin(u * 0.2);
-  const V = hxView(820, lerp(500, 680, tilt), yaw, pitch);
-  const L1 = lineAt(S, 1), L2 = lineAt(S, 2);
+  const pitch = lerp(Math.PI / 2 - 1e-4, 0.38, tilt), yaw = 0.5 + 0.12 * Math.sin(u * 0.2);
+  const L1 = lineAt(S, 1);
   /* the point runs one turn during line 1, a second turn during line 3 */
   const turn1 = TAU * ease(clamp((u - L1.s - 0.2) / Math.max(1, L1.e - L1.s - 0.2)));
   const turn2 = TAU * ease(at(S, 3, Math.max(1, lineAt(S, 3).e - lineAt(S, 3).s - 1.5), 0.6));
   const tEnd = turn1 + turn2;
   const fa = at(S, 0, 0.8, -0.3) * out;
-  const r = helixFigure(V, tEnd, fa, { helix: Q(S, 2, 'From outside', 0.8), axis: Q(S, 2, 'From outside', 1.2, 0.6) });
+  /* the solid first; every 2D label goes on top of it */
+  const ax = Q(S, 2, 'From outside', 1.2, 0.6);
+  const r = fa > 0.003 ? helixShot('helix', [520, 150, 640, 720], 820, lerp(500, 640, tilt), yaw, pitch, tEnd, fa, { helix: Q(S, 2, 'From outside', 0.8), axis: ax }) : null;
+  if (r && ax > 0) txt('eₙ₊₁ = ⋆Iₙ', r.tip.x + 22, r.tip.y + 8, { size: 24, fam: F.math, w: 700, c: C.white, a: fa * ax });
   txt('inside: the shadow (cos t, sin t)', 120, 220, { size: 24, fam: F.mono, w: 700, c: C.cyan, a: Q(S, 1, 'From inside', 0.6) * out });
   txt('outside: the helix (cos t, sin t, c t)', 120, 258, { size: 24, fam: F.mono, w: 700, c: C.mag, a: Q(S, 2, 'open helix', 0.6) * out });
   txt('an image, not a theorem · 意象，不是定理', 120, 296, { size: 18, fam: F.mono, c: C.dim, a: Q(S, 1, 'From inside', 0.6) * out });
@@ -369,10 +368,10 @@ SCENES.helix = S => {
   const back = Q(S, 1, 'back where it began', 0.6) * out;
   txt('t = 2π:  (1, 0)  closed', 120, 790, { size: 30, fam: F.math, w: 700, c: C.cyan, a: back * (1 - 0.6 * Q(S, 2, 'After one turn', 0.6)) });
   txt('(1, 0, 2πc)', 120, 836, { size: 34, fam: F.math, w: 700, c: C.mag, a: Q(S, 2, 'risen by', 0.6) * out, ab: 2 });
-  if (Q(S, 2, 'risen by', 0.6) > 0 && tEnd >= TAU - 1e-6) {
-    const b = V([1, 0, 0]), t = V([1, 0, HX.c * TAU]);
-    line(b[0] + 30, b[1], b[0] + 30, t[1], C.now, Q(S, 2, 'risen by', 0.6) * out * (1 - at(S, 3, 0.6)), 3);
-    txt('2πc', b[0] + 44, (b[1] + t[1]) / 2 + 10, { size: 30, fam: F.math, w: 700, c: C.now, a: Q(S, 2, 'risen by', 0.6) * out * (1 - at(S, 3, 0.6)) });
+  if (r && Q(S, 2, 'risen by', 0.6) > 0 && tEnd >= TAU - 1e-6) {
+    const b = r.base, t = r.top, k = Q(S, 2, 'risen by', 0.6) * out * (1 - at(S, 3, 0.6));
+    line(b.x + 30, b.y, t.x + 30, t.y, C.now, k, 3);
+    txt('2πc', Math.max(b.x, t.x) + 44, (b.y + t.y) / 2 + 10, { size: 30, fam: F.math, w: 700, c: C.now, a: k });
   }
   /* the next stage needs a bigger catalog */
   const px = 1180, q3 = at(S, 3, 0.6) * out;
@@ -382,7 +381,6 @@ SCENES.helix = S => {
   txt(`functions to {0,1}:  2${'⁴'} = ${SB.funcs}`, px + 36, 560, { size: 30, fam: F.math, w: 700, c: C.mag, a: Q(S, 3, 'joined coordinate', 0.6) * out });
   txt(`addresses:  ${SB.dec.length}  <  ${SB.funcs}`, px + 36, 620, { size: 30, fam: F.math, w: 700, c: C.now, a: Q(S, 3, 'only four', 0.6) * out });
   txt('to escape again, enlarge the catalog', px + 36, 700, { size: 20, fam: F.mono, c: C.dim, a: Q(S, 3, 'only four', 0.6, 0.8) * out });
-  void r;
 };
 
 /* ======================================================================= */
@@ -547,8 +545,8 @@ FILM.poster = () => {
   const t = 60.0;
   background(t, TL.scenes[2], 2, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.3, a: 0.22, cx: 1320, cy: 420, camZ: 7, lw: 1.3, dots: false });
-  const V = hxView(470, 700, 0.5, 0.38);
-  helixFigure(V, 1.6 * TAU, 1, { helix: 1, axis: 1 });
+  const hp = helixShot('poster', [130, 250, 680, 700], 470, 700, 0.5, 0.38, 1.6 * TAU, 1, { helix: 1, axis: 1 });
+  txt('eₙ₊₁ = ⋆Iₙ', hp.tip.x + 22, hp.tip.y + 8, { size: 24, fam: F.math, w: 700, c: C.white });
   txt(DATA.film.title_zh, 1300, 300, { size: 66, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('SPHERES BEYOND SPHERES', 1270, 400, { size: 54, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 3, ls: 6 });
   txt('THE DIAGONAL ESCAPE · THE COSINE FIXED POINT', 1270, 456, { size: 26, fam: F.orb, w: 700, align: 'center', c: C.cyan, ls: 3 });

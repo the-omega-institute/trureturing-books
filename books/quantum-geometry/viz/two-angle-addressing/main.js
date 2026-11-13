@@ -165,24 +165,11 @@
     },
     onDrop: () => { grab = false; }
   });
-  /** A right-handed frame (e, f) of the plane orthogonal to the unit vector u. */
-  const frame = (u) => { const e = v3.unit(v3.cross(Math.abs(u[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0], u)); return [e, v3.cross(u, e)]; };
-  /** The point at angle w from the unit vector u, at bearing v round it, on the sphere of radius r. */
-  const capPoint = (u, w, v, r) => { const [e, f] = frame(u); return v3.scale(v3.add(v3.scale(u, Math.cos(w)), v3.add(v3.scale(e, Math.sin(w) * Math.cos(v)), v3.scale(f, Math.sin(w) * Math.sin(v)))), r); };
-  /** The circle of centre c, unit normal n and radius r, as a closed list of points. */
-  const circlePts = (c, n, r, k = 120) => { const [e, f] = frame(n); return Array.from({ length: k + 1 }, (_, i) => { const a = 2 * Math.PI * i / k; return v3.add(c, v3.add(v3.scale(e, r * Math.cos(a)), v3.scale(f, r * Math.sin(a)))); }); };
+  /* the sphere's geometry and the glass ball are shared with the films (model.js, QG_SPHERE) */
+  const { capPoint, circlePts } = QG_SPHERE;
   /** A line; with s.back, its part behind the centre plane is drawn at s.alpha × s.back (inside the glass shell). */
-  function seg(pts, s) {
-    if (s.back == null) { stage.line(pts, s); return; }
-    const D = stage.facing(), runs = [];
-    let run = null;
-    for (const q of pts) {   // a run of points on one side; a run that starts after a crossing begins at the last point
-      const f = v3.dot(q, D) >= 0;
-      if (!run || run.f !== f) { run = { f, pts: run ? [run.pts[run.pts.length - 1], q] : [q] }; runs.push(run); } else run.pts.push(q);
-    }
-    for (const r of runs) if (r.pts.length > 1) stage.line(r.pts, Object.assign({}, s, { alpha: (s.alpha == null ? 1 : s.alpha) * (r.f ? 1 : s.back) }));
-  }
-  const circleOf = (p, u, s) => { const c = v3.dot(p, u); seg(circlePts(v3.scale(u, c), u, Math.sqrt(Math.max(0, 1 - c * c))), s); };
+  const seg = (pts, s) => QG_SPHERE.seg(stage, pts, s);
+  const circleOf = (p, u, s) => QG_SPHERE.circleOf(stage, p, u, s);
   /** The road travelled along the word up to t. */
   function road(t) { const pts = [], n = Math.max(2, Math.ceil(t * 40)); for (let i = 0; i <= n; i++) pts.push(pose(t * i / n).p); return pts; }
   /** The caps drawn in the cover scene: colour i, side ±1, centre, angular radius, whether its colour holds x. */
@@ -213,8 +200,7 @@
       // the great circle orthogonal to the current point, on the surface: the ball hides its far half
       st.line(circlePts([0, 0, 0], now.p, LAYER.mark, 180), { color: P.ink, width: 1.6, alpha: 0.95, dash: [6, 5] });
     } else {
-      st.glass('ball', [0, 0, 0], 1, { color: P.cyan });
-      for (const [c, n] of [[[0, 0, 0], [0, 0, 1]], [[0, 0, 0], [0, 1, 0]], [[0, 0, 0], [1, 0, 0]]]) seg(circlePts(c, n, 1), { color: P.ink, width: 0.8, alpha: 0.22, back: 0.5 });
+      QG_SPHERE.ball(st, { glass: P.cyan, ink: P.ink });
       // the two axes
       for (const [key, u, name] of [['a', AX_A, S.alpha < 0.5 ? 'a = b' : 'a = e₃'], ['b', B, S.alpha > 89.5 ? 'b = e₂' : 'b']]) {
         if (key === 'b' && S.alpha < 0.5) continue;
