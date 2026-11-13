@@ -25,6 +25,11 @@
     "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian",
     "D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef"
   ],
+  "solid": true,
+  "scripts": [
+    "viz/two-angle-addressing/model.js",
+    "viz/zyz-compile/model.js"
+  ],
   "outputs": {
     "narrated_720p": "quantum-geometry_007_720p_narrated.mp4",
     "cover": "quantum-geometry_007_cover.jpg"

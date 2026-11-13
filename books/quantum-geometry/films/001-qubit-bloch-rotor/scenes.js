@@ -26,7 +26,11 @@
    re-derives every identity shown on screen in exact Gaussian-rational 2×2 matrix arithmetic (BigInt fractions)
    over rational unit vectors (Pythagorean quadruples) and rational half-angles (Pythagorean triples), then sweeps
    the floating-point rotors the animation draws. Any disagreement is pushed to window.FILM_ERRORS, which stops the
-   render. */
+   render.
+
+   The Bloch sphere is drawn as a solid: the glass ball of the lab page two-angle-addressing, with the line, the area and
+   the disk a state rides round an axis from the model of the lab page qubit-geometry (both pages' model.js); the
+   arrows, the projection disk and the faces the turns sweep are lit solids inside the glass. */
 'use strict';
 
 /* ======================================================================= */
@@ -287,78 +291,58 @@ const qbCx = (re, im, d = 2) => { const i = Math.abs(im) < 0.5 * Math.pow(10, -d
 const qbDeg = (r, d = 1) => (r / QB_DEG).toFixed(d) + '°';
 const qbMod = (x, m) => ((x % m) + m) % m;
 
-/* orthographic view of the unit sphere: world (x, y, z), z up → [screen x, screen y, depth] (depth > 0 behind) */
+/* orthographic view of the unit sphere: world (x, y, z), z up → [screen x, screen y, depth] (depth > 0 behind); the
+   camera of the solid shots (qbShot) is this view, so 2D labels placed with it sit on the solid */
 function qbView(cx, cy, R, yaw, el) {
   const cw = Math.cos(yaw), sw = Math.sin(yaw), ce = Math.cos(el), se = Math.sin(el);
   const V = p => {
     const X = p[0] * cw - p[1] * sw, Y = p[0] * sw + p[1] * cw, Z = p[2];
     return [cx + X * R, cy - (Z * ce + Y * se) * R, Y * ce - Z * se];
   };
-  V.cx = cx; V.cy = cy; V.R = R;
+  V.cx = cx; V.cy = cy; V.R = R; V.yaw = yaw; V.el = el;
   return V;
 }
-/* a parametric 3-D curve: front runs bright, back runs faint */
-function qbPath(V, fn, n, col, aF, aB, lw = 2) {
-  if (aF <= 0.003 && aB <= 0.003) return;
-  const pts = [];
-  for (let i = 0; i <= n; i++) pts.push(V(fn(i / n)));
-  let run = [pts[0]], back = pts[0][2] > 0;
-  const flush = () => {
-    if (run.length < 2) return;
-    const r = run;
-    curve(k => r[Math.round(k * (r.length - 1))], r.length - 1, col, back ? aB : aF, back ? lw * 0.7 : lw);
-  };
-  for (let i = 1; i < pts.length; i++) {
-    const b = pts[i][2] > 0;
-    run.push(pts[i]);
-    if (b !== back) { flush(); run = [pts[i]]; back = b; }
+/* The Bloch sphere is a solid shot. qbShot gives the shot whose camera is the 2D view V (same yaw, pitch, scale and
+   centre), so labels placed with V sit on the solid; scenes draw the shot first and the 2D labels after it. The ball is
+   the glass ball of the lab page two-angle-addressing (viz/two-angle-addressing/model.js, QG_SPHERE); the line, the
+   area and the circle a state rides round an axis are those of the lab page qubit-geometry (viz/qubit-geometry/model.js,
+   QG_QUBIT). Alphas inside a shot are absolute: the shot is composited at full opacity. */
+function qbShot(key, V, r) {
+  return solid(key, { x: r[0], y: r[1], w: r[2], h: r[3], yaw: V.yaw, pitch: V.el, unit: V.R, cx: V.cx - r[0], cy: V.cy - r[1], px: true });
+}
+const qbPts = (fn, n) => { const pts = []; for (let i = 0; i <= n; i++) pts.push(fn(i / n)); return pts; };
+/* the glass ball, its coordinate axes and (o.poles) the two poles */
+function qbBall(sh, a, o = {}) {
+  if (a <= 0.003) return;
+  QG_SPHERE.ball(sh, { glass: C.cyan, ink: C.blue, width: 1.5, alpha: 0.6 * a, back: 0.35, shell: { alpha: 0.08 * a, rim: 0.5 * a } });
+  for (const e of [[1, 0, 0], [0, 1, 0], [0, 0, 1]]) {
+    sh.line([QF.sc(-1.22, e), [0, 0, 0]], { color: C.dim, width: 1.4, alpha: 0.45 * a, dash: [10, 9] });
+    sh.arrow([0, 0, 0], QF.sc(1.28, e), { color: C.dim, width: 1.6, headSize: 14, alpha: 0.7 * a });
   }
-  flush();
+  if (o.poles !== false) for (const z of [1, -1]) sh.bead([0, 0, z], { color: C.white, r: 6, alpha: a });
 }
-/* circular arc centre + r (cos t e1 + sin t e2), t ∈ [t0, t1] */
-function qbArc(V, c0, e1, e2, r, t0, t1, col, aF, aB, lw = 2) {
-  const n = Math.max(6, Math.ceil(Math.abs(t1 - t0) * 20));
-  qbPath(V, s => { const t = t0 + (t1 - t0) * s; return QF.add(c0, QF.add(QF.sc(r * Math.cos(t), e1), QF.sc(r * Math.sin(t), e2))); }, n, col, aF, aB, lw);
-}
-function qbAxes(V, a, o = {}) {
-  const c0 = V([0, 0, 0]);
+/* the ball's 2D labels: the axis letters and the poles */
+function qbBallLabels(V, a, o = {}) {
+  if (a <= 0.003) return;
   for (const [e, l] of [[[1, 0, 0], 'x'], [[0, 1, 0], 'y'], [[0, 0, 1], 'z']]) {
-    const pn = V(QF.sc(-1.22, e)), pp = V(QF.sc(1.28, e)), pl = V(QF.sc(1.42, e));
-    dashed(pn[0], pn[1], c0[0], c0[1], C.dim, 0.45 * a, 1.4);
-    arrow(c0[0], c0[1], pp[0], pp[1], C.dim, 0.7 * a, 1.6);
+    const pl = V(QF.sc(1.42, e));
     txt(l, pl[0], pl[1] + 9, { size: 26, fam: F.math, w: 700, align: 'center', c: C.dim, a: 0.95 * a });
   }
   if (o.poles === false) return;
   const N = V([0, 0, 1]), Sp = V([0, 0, -1]);
-  dot(N[0], N[1], 11, 'w', a); dot(Sp[0], Sp[1], 11, 'w', a);
   txt('|0⟩', N[0] + 22, N[1] - 10, { size: 30, fam: F.math, w: 700, c: C.white, a });
   txt('|1⟩', Sp[0] + 22, Sp[1] + 30, { size: 30, fam: F.math, w: 700, c: C.white, a });
 }
-function qbSphere(V, a, o = {}) {
+/* an arrow from o.from (the centre) to v with a lit head and a bead at the tip */
+function qbVec3(sh, v, col, a, o = {}) {
   if (a <= 0.003) return;
-  const col = o.col || C.blue;
-  if (o.ring !== false) {
-    dot(V.cx - V.R * 0.18, V.cy - V.R * 0.22, V.R * 1.25, 'b', 0.08 * a);
-    ring(V.cx, V.cy, V.R, C.cyan, 0.8 * a, 2.4);
-    ring(V.cx, V.cy, V.R + 8, C.cyan, 0.16 * a, 1);
-  }
-  for (const lat of [-60, -30, 0, 30, 60]) {
-    const r = Math.cos(lat * QB_DEG), z = Math.sin(lat * QB_DEG), eq = lat === 0;
-    qbPath(V, s => [r * Math.cos(TAU * s), r * Math.sin(TAU * s), z], 72, eq ? (o.eq || C.cyan) : col, a * (eq ? 0.7 : 0.38), a * (eq ? 0.22 : 0.1), eq ? 2 : 1.3);
-  }
-  for (let k = 0; k < 6; k++) {
-    const ph = k * Math.PI / 6;
-    qbPath(V, s => [Math.sin(TAU * s) * Math.cos(ph), Math.sin(TAU * s) * Math.sin(ph), Math.cos(TAU * s)], 72, col, a * 0.32, a * 0.09, 1.2);
-  }
-  if (o.axes !== false) qbAxes(V, a, o);
+  sh.arrow(o.from || [0, 0, 0], v, { color: col, width: o.lw || 4, headSize: o.head || 20, alpha: a });
+  if (o.tip !== false) sh.bead(v, { color: col, r: o.r || 8, alpha: a });
 }
-/* an arrow from the centre to v with a glowing tip */
-function qbVec(V, v, col, a, o = {}) {
-  if (a <= 0.003) return;
+/* the label of such an arrow (2D) */
+function qbVecLabel(V, v, col, a, o = {}) {
+  if (a <= 0.003 || !o.label) return;
   const c0 = o.from ? V(o.from) : V([0, 0, 0]), p = V(v);
-  arrow(c0[0], c0[1], p[0], p[1], col, a, o.lw || 4);
-  if (o.tip !== false) dot(p[0], p[1], o.r || 14, o.pearl || 'g', a);
-  if (!o.label) return;
   if (o.side) {
     /* label beside the tip, perpendicular to the arrow (clear of labels placed along radial directions) */
     const dx = p[0] - c0[0], dy = p[1] - c0[1], L = Math.hypot(dx, dy) || 1;
@@ -419,7 +403,31 @@ function qbBlochAngles(S) {
 }
 SCENES.bloch = S => {
   const u = S.u, L0 = lineAt(S, 0);
-  /* opening title, decoding in during the lead */
+  const ma = at(S, 0, 0.9, -0.15) * clamp((S.d - u) / 0.5);
+  const { th, ph, yaw } = qbBlochAngles(S), v = QF.sph(th, ph);
+  const V = qbView(560, 505, 280, yaw, 0.3);
+  const b1 = Q(S, 1, 'Born weight', 0.6) * ma, hz = QF.unit([Math.cos(ph), Math.sin(ph), 0]);
+  /* the solid first: the glass ball, the Born geometry with the projection disk, the angle and the state arrow */
+  if (ma > 0) {
+    const sh = qbShot('bloch', V, [240, 170, 640, 680]);
+    sh.begin();
+    qbBall(sh, ma);
+    if (b1 > 0) {
+      /* the disk v rides round |0⟩: centre the foot cos θ on the axis, radius the area sin θ (QG_QUBIT) */
+      const Z = [0, 0, 1], sp = QG_QUBIT.split(Z, v), rim = QG_QUBIT.circle(Z, v, 96);
+      sh.fan(rim.slice(0, 96), { fill: C.cyan, alpha: 0.13 * b1 });
+      QG_SPHERE.seg(sh, rim, { color: C.cyan, width: 2, alpha: 0.75 * b1, back: 0.45 });
+      sh.tube('proj', [[0, 0, -1], sp.foot], { color: C.cyan, width: 7, alpha: b1 });
+      sh.line([v, sp.foot], { color: C.cyan, width: 2, alpha: 0.8 * b1, dash: [9, 8] });
+      sh.line([[0, 0, -1], v], { color: C.mag, width: 2.5, alpha: 0.9 * b1, dash: [10, 8] });
+      sh.line(qbPts(s => QF.add([0, 0, -1], QF.add(QF.sc(0.3 * Math.cos(th / 2 * s), [0, 0, 1]), QF.sc(0.3 * Math.sin(th / 2 * s), hz))), 24), { color: C.mag, width: 2.5, alpha: b1 });
+    }
+    /* the angle θ from |0⟩ and the state arrow */
+    sh.line(qbPts(s => QF.add(QF.sc(0.3 * Math.cos(th * s), [0, 0, 1]), QF.sc(0.3 * Math.sin(th * s), hz)), 40), { color: C.now, width: 2.5, alpha: 0.95 * ma });
+    qbVec3(sh, v, C.now, ma, { r: 9 });
+    sh.end(1);
+  }
+  /* opening title, decoding in during the lead (over the solid) */
   const ta = clamp(u / 0.5) * (1 - clamp((u - L0.s + 0.25) / 0.6));
   if (ta > 0) {
     const p = clamp(u / 1.3);
@@ -428,20 +436,12 @@ SCENES.bloch = S => {
     txt(scramble(DATA.film.title.toUpperCase(), p, 5), W / 2, 590, { size: 44, fam: F.orb, w: 900, align: 'center', c: C.white, a: ta, ls: 6, ab: 2 });
     txt('BLOCH · BORN · ROTOR · SPINOR', W / 2, 660, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.mag, a: ta * 0.9, ls: 8 });
   }
-  const ma = at(S, 0, 0.9, -0.15) * clamp((S.d - u) / 0.5);
   if (ma <= 0) return;
   if (u >= L0.s) badgeQ(S, [[0, 'Pure', 'computed'], [1, 'Born weight', 'lean']]);
-  const { th, ph, yaw } = qbBlochAngles(S), v = QF.sph(th, ph);
-  const V = qbView(560, 505, 280, yaw, 0.3);
-  qbSphere(V, ma);
-  /* Born geometry: chord from |1⟩ at half the angle, projection 1 + cos θ on the axis */
-  const b1 = Q(S, 1, 'Born weight', 0.6) * ma, hz = QF.unit([Math.cos(ph), Math.sin(ph), 0]);
+  qbBallLabels(V, ma);
+  /* the labels of the Born geometry */
   if (b1 > 0) {
     const Sp = V([0, 0, -1]), Pz = V([0, 0, Math.cos(th)]), pv = V(v);
-    line(Sp[0], Sp[1], Pz[0], Pz[1], C.cyan, b1, 7);
-    dashed(pv[0], pv[1], Pz[0], Pz[1], C.cyan, 0.8 * b1, 2);
-    dashed(Sp[0], Sp[1], pv[0], pv[1], C.mag, 0.9 * b1, 2.5);
-    qbArc(V, [0, 0, -1], [0, 0, 1], hz, 0.3, 0, th / 2, C.mag, b1, 0.6 * b1, 2.5);
     const ha = V(QF.add([0, 0, -1], QF.add(QF.sc(0.42 * Math.cos(th / 4), [0, 0, 1]), QF.sc(0.42 * Math.sin(th / 4), hz))));
     txt('θ/2', ha[0] + 6, ha[1] + 10, { size: 26, fam: F.math, w: 700, c: C.mag, a: b1 });
     const mid = [(Sp[0] + Pz[0]) / 2, (Sp[1] + Pz[1]) / 2];
@@ -452,11 +452,9 @@ SCENES.bloch = S => {
     if (nx * (V.cx - cm[0]) + ny * (V.cy - cm[1]) > 0) { nx = -nx; ny = -ny; }
     txt('2 cos(θ/2)', cm[0] + nx * 30, cm[1] + ny * 30 + 9, { size: 24, fam: F.math, w: 700, align: nx < 0 ? 'right' : 'left', c: C.mag, a: b1 * Q(S, 1, 'cosine squared', 0.5) });
   }
-  /* the angle θ from |0⟩ and the state arrow */
-  qbArc(V, [0, 0, 0], [0, 0, 1], hz, 0.3, 0, th, C.now, 0.95 * ma, 0.5 * ma, 2.5);
   const tl = V(QF.add(QF.sc(0.42 * Math.cos(th / 2), [0, 0, 1]), QF.sc(0.42 * Math.sin(th / 2), hz)));
   txt('θ', tl[0], tl[1] + 8, { size: 28, fam: F.math, w: 700, align: 'center', c: C.now, a: ma });
-  qbVec(V, v, C.now, ma, { label: 'v', side: -30 });
+  qbVecLabel(V, v, C.now, ma, { label: 'v', side: -30 });
   /* p₀ gauge */
   const p0 = Math.cos(th / 2) ** 2, gx = 905, gt = 250, gb = 760, gh = gb - gt;
   if (b1 > 0) {
@@ -572,39 +570,51 @@ SCENES.geometric = S => {
 /* ======================================================================= */
 /*                         scene 3 · SANDWICH ROTOR                          */
 /* ======================================================================= */
-/* the rotor figure: axis n̂, the bivector plane ⊥ n̂, v = |0⟩ split into v∥ (fixed) and v⊥ (turned by α) */
-function qbRotorFigure(V, al, a, o = {}) {
-  if (a <= 0.003) return;
-  const n = QB_AXIS, v0 = [0, 0, 1], par = QF.sc(QF.dot(n, v0), n), perp0 = QF.sub(v0, par), w0 = QF.cross(n, perp0);
+/* the rotor figure: axis n̂, the bivector plane ⊥ n̂, v = |0⟩ split into v∥ (fixed) and v⊥ (turned by α); the
+   magenta fan is the area v⊥ has swept round the foot of v∥ (in the solid shot sh; its 2D labels follow) */
+function qbRotorGeom(al) {
+  const n = QB_AXIS, v0 = [0, 0, 1], sp = QG_QUBIT.split(n, v0), par = sp.foot, perp0 = sp.perp, w0 = QF.cross(n, perp0);
   const tip = t => QF.add(par, QF.add(QF.sc(Math.cos(t), perp0), QF.sc(Math.sin(t), w0)));
-  const e1 = QF.unit(perp0), e2 = QF.cross(n, e1), c0 = V([0, 0, 0]);
-  /* the plane of Î: a great circle with faint spokes */
-  const pa = a * (o.plane == null ? 1 : o.plane);
-  for (let k = 0; k < 36; k++) {
-    const t = k * TAU / 36, p = V(QF.add(QF.sc(Math.cos(t), e1), QF.sc(Math.sin(t), e2)));
-    line(c0[0], c0[1], p[0], p[1], C.mag, (p[2] > 0 ? 0.05 : 0.12) * pa, 1.2);
+  const e1 = QF.unit(perp0), e2 = QF.cross(n, e1);
+  return { n, v0, par, tip, e1, e2, v: tip(al) };
+}
+function qbRotor3(sh, al, a, o = {}) {
+  if (a <= 0.003) return;
+  const G = qbRotorGeom(al), { n, par, tip, e1, e2 } = G;
+  /* the plane of Î: a great disk, faint, with its rim */
+  const pa = a * (o.plane == null ? 1 : o.plane), plane = qbPts(s => QF.add(QF.sc(Math.cos(TAU * s), e1), QF.sc(Math.sin(TAU * s), e2)), 96);
+  sh.fan(plane.slice(0, 96), { fill: C.mag, alpha: 0.08 * pa });
+  QG_SPHERE.seg(sh, plane, { color: C.mag, width: 2.2, alpha: 0.75 * pa, back: 0.35 });
+  /* the axis */
+  sh.line([QF.sc(-1.3, n), [0, 0, 0]], { color: C.cyan, width: 2, alpha: 0.5 * a, dash: [10, 9] });
+  sh.arrow([0, 0, 0], QF.sc(1.34, n), { color: C.cyan, width: 3, headSize: 20, alpha: 0.9 * a });
+  /* the cone traced by v, the area v⊥ has swept and the swept angle */
+  QG_SPHERE.seg(sh, qbPts(s => tip(TAU * s), 96), { color: C.cyan, width: 1.6, alpha: 0.4 * a, back: 0.4 });
+  if (al > 0.01) {
+    const arc = qbPts(s => tip(al * s), Math.max(8, Math.ceil(al * 24)));
+    sh.fan([par].concat(arc), { fill: C.mag, alpha: 0.2 * a });
+    sh.tube('sweep', arc, { color: C.now, width: 4, alpha: 0.95 * a });
   }
-  qbPath(V, s => QF.add(QF.sc(Math.cos(TAU * s), e1), QF.sc(Math.sin(TAU * s), e2)), 96, C.mag, 0.75 * pa, 0.25 * pa, 2.2);
+  sh.line([[0, 0, 0], G.v0], { color: C.white, width: 1.6, alpha: 0.4 * a, dash: [10, 9] });
+  /* v∥ (fixed) and v⊥ (turning) */
+  const hl = a * (o.axisHi || 0), hp = a * (o.planeHi || 0);
+  sh.arrow([0, 0, 0], par, { color: C.cyan, width: 5 + 3 * hl, headSize: 18, alpha: a });
+  if (hl > 0) sh.bead(par, { color: C.cyan, r: 8 + 6 * hl, alpha: hl });
+  sh.arrow(par, G.v, { color: C.mag, width: 3 + 2 * hp, headSize: 16, alpha: a });
+  qbVec3(sh, G.v, C.now, a, { r: 9 });
+}
+function qbRotorLabels(V, al, a, o = {}) {
+  if (a <= 0.003) return;
+  const G = qbRotorGeom(al), { n, par, e1, e2 } = G, c0 = V([0, 0, 0]);
+  const pa = a * (o.plane == null ? 1 : o.plane);
   /* label the plane at its left-most screen point, outside the sphere */
   let pl = null;
   for (let k = 0; k < 72; k++) { const p = V(QF.add(QF.sc(Math.cos(k * TAU / 72), e1), QF.sc(Math.sin(k * TAU / 72), e2))); if (!pl || p[0] < pl[0]) pl = p; }
   txt('Î = i n̂·σ', Math.min(pl[0], V.cx - V.R) - 18, pl[1] + 10, { size: 26, fam: F.math, w: 700, align: 'right', c: C.mag, a: pa });
-  /* the axis */
-  const nB = V(QF.sc(-1.3, n)), nA = V(QF.sc(1.34, n)), nl = V(QF.sc(1.48, n));
-  dashed(nB[0], nB[1], c0[0], c0[1], C.cyan, 0.5 * a, 2);
-  arrow(c0[0], c0[1], nA[0], nA[1], C.cyan, 0.9 * a, 3);
+  const nl = V(QF.sc(1.48, n));
   txt('n̂', nl[0] + 8, nl[1] + 8, { size: 34, fam: F.math, w: 700, align: 'center', c: C.cyan, a });
-  /* the cone traced by v and the swept angle */
-  qbPath(V, s => tip(TAU * s), 96, C.cyan, 0.35 * a, 0.14 * a, 1.6);
-  if (al > 0.01) qbPath(V, s => tip(al * s), Math.max(8, Math.ceil(al * 24)), C.now, 0.95 * a, 0.5 * a, 4);
-  const pv0 = V(v0);
-  dashed(c0[0], c0[1], pv0[0], pv0[1], C.white, 0.4 * a, 1.6);
-  /* v∥ (fixed) and v⊥ (turning) */
-  const v = tip(al), pp = V(par), pv = V(v), hl = a * (o.axisHi || 0), hp = a * (o.planeHi || 0);
-  arrow(c0[0], c0[1], pp[0], pp[1], C.cyan, a, 5 + 3 * hl);
-  if (hl > 0) dot(pp[0], pp[1], 16 + 10 * hl, 'c', hl);
-  arrow(pp[0], pp[1], pv[0], pv[1], C.mag, a, 3 + 2 * hp);
-  qbVec(V, v, C.now, a, { label: o.label || 'v′', side: o.label ? 60 : 32 });
+  const pp = V(par), pv = V(G.v);
+  qbVecLabel(V, G.v, C.now, a, { label: o.label || 'v′', side: o.label ? 60 : 32 });
   txt('v∥', (c0[0] + pp[0]) / 2 - 34, (c0[1] + pp[1]) / 2 + 6, { size: 28, fam: F.math, w: 700, align: 'right', c: C.cyan, a });
   txt('v⊥', (pp[0] + pv[0]) / 2 + 14, (pp[1] + pv[1]) / 2 + 30, { size: 28, fam: F.math, w: 700, c: C.mag, a });
 }
@@ -618,8 +628,15 @@ SCENES.rotor = S => {
   badgeQ(S, [[0, null, 'computed'], [0, 'half the angle', 'lean'], [1, 'The axis', 'computed']]);
   const al = qbRotorAngle(S);
   const V = qbView(540, 510, 280, -2.2 + 0.05 * u, 0.32);
-  qbSphere(V, a * 0.85, { poles: true });
-  qbRotorFigure(V, al, a, { axisHi: Q(S, 1, 'The axis', 0.6) * (1 - Q(S, 2, 'The plane', 0.6)), planeHi: Q(S, 2, 'The plane', 0.6) });
+  const fo = { axisHi: Q(S, 1, 'The axis', 0.6) * (1 - Q(S, 2, 'The plane', 0.6)), planeHi: Q(S, 2, 'The plane', 0.6) };
+  /* the solid first, then its labels and the 2D chips and panels */
+  const sh = qbShot('rotor', V, [180, 150, 720, 720]);
+  sh.begin();
+  qbBall(sh, a * 0.85);
+  qbRotor3(sh, al, a, fo);
+  sh.end(1);
+  qbBallLabels(V, a * 0.85);
+  qbRotorLabels(V, al, a, fo);
   /* the sandwich: R(α) · v · R(α)† */
   const x0 = 1130, x1 = 1400, x2 = 1670, cy = 262, sa = a * at(S, 0, 0.6, -0.2);
   chip(x0, cy, 180, 66, 'R(α)', C.now, sa, 32, F.math);
@@ -689,14 +706,25 @@ SCENES.spinor = S => {
   badgeQ(S, [[0, null, 'computed']]);
   const al = qbSpinAngle(S);
   const V = qbView(520, 505, 270, -2.05 + 0.04 * u, 0.32);
-  qbSphere(V, a, { poles: true });
   const ph = QB_SPIN_PH + al, v = QF.sph(QB_SPIN_TH, ph), zc = Math.cos(QB_SPIN_TH), rr = Math.sin(QB_SPIN_TH);
-  /* the orbit of v about z and the swept turns */
-  qbPath(V, s => [rr * Math.cos(TAU * s), rr * Math.sin(TAU * s), zc], 96, C.cyan, 0.35 * a, 0.14 * a, 1.6);
+  /* the solid first: the orbit of v about z and the faces it sweeps, the first turn amber, the second magenta */
   const sweep = Math.min(al, TAU), extra = Math.max(0, al - TAU);
-  if (sweep > 0.01) qbPath(V, s => [rr * Math.cos(QB_SPIN_PH + sweep * s), rr * Math.sin(QB_SPIN_PH + sweep * s), zc], 96, C.now, 0.8 * a, 0.4 * a, 3.5);
-  if (extra > 0.01) qbPath(V, s => [1.04 * rr * Math.cos(QB_SPIN_PH + extra * s), 1.04 * rr * Math.sin(QB_SPIN_PH + extra * s), zc], 96, C.mag, 0.9 * a, 0.45 * a, 3.5);
-  qbVec(V, v, C.now, a, { label: 'v' });
+  const sh = qbShot('spinor', V, [180, 170, 680, 680]);
+  sh.begin();
+  qbBall(sh, a);
+  QG_SPHERE.seg(sh, qbPts(s => [rr * Math.cos(TAU * s), rr * Math.sin(TAU * s), zc], 96), { color: C.cyan, width: 1.6, alpha: 0.4 * a, back: 0.4 });
+  const turn = (r, span, col, key) => {
+    const arc = qbPts(s => [r * Math.cos(QB_SPIN_PH + span * s), r * Math.sin(QB_SPIN_PH + span * s), zc], Math.max(8, Math.ceil(span * 16)));
+    sh.fan([[0, 0, zc]].concat(arc), { fill: col, alpha: 0.16 * a });
+    sh.tube(key, arc, { color: col, width: 3.5, alpha: 0.9 * a });
+  };
+  if (sweep > 0.01) turn(rr, sweep, C.now, 'turn1');
+  if (extra > 0.01) turn(1.04 * rr, extra, C.mag, 'turn2');
+  sh.line([[0, 0, 0], [0, 0, zc]], { color: C.dim, width: 1.4, alpha: 0.6 * a, dash: [6, 6] });
+  qbVec3(sh, v, C.now, a, { r: 9 });
+  sh.end(1);
+  qbBallLabels(V, a);
+  qbVecLabel(V, v, C.now, a, { label: 'v' });
   const turns = al / TAU;
   txt(`α = ${qbDeg(al, 0)}   ·   ${turns.toFixed(2)} turns`, 520, 860, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.now, a });
   /* dials and the rotor matrix */
@@ -739,8 +767,13 @@ FILM.poster = () => {
   background(t, TL.scenes[3], 3, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.3, a: 0.22, cx: 1320, cy: 400, camZ: 7, lw: 1.3, dots: false });
   const V = qbView(520, 420, 275, -2.2, 0.32);
-  qbSphere(V, 1, { poles: true });
-  qbRotorFigure(V, 2.35, 1, { label: 'R v R†' });
+  const sh = qbShot('poster', V, [160, 80, 720, 700]);
+  sh.begin();
+  qbBall(sh, 1);
+  qbRotor3(sh, 2.35, 1, { label: 'R v R†' });
+  sh.end(1);
+  qbBallLabels(V, 1);
+  qbRotorLabels(V, 2.35, 1, { label: 'R v R†' });
   txt(DATA.film.title_zh, 1310, 282, { size: 104, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('HALF-ANGLE ROTORS', 1310, 380, { size: 48, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 3, ls: 6 });
   txt('AND THE BLOCH SPHERE', 1310, 440, { size: 48, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 3, ls: 6 });

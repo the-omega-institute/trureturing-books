@@ -88,48 +88,16 @@
     const pl = PL(), J0 = at(0).J0, x = v3.dot(J0, pl.a), y = v3.dot(J0, pl.b);
     return Math.hypot(x, y) > 1e-6 * S.rho ? Math.atan2(y, x) : 0;
   }
-  const radial = (pl, al) => v3.add(v3.scale(pl.a, Math.cos(al)), v3.scale(pl.b, Math.sin(al)));
   /* ---------- the solid: the one-sided band, or (μ > 0) the pointer ball and the memory shell it is split into ----------
-     The band goes once round the axis n at radius RB. Its width direction w(t) = cos(t/2) n + sin(t/2) r(t) turns half
-     a turn per round (r(t) is the outward unit vector at the bearing a0 + t), so it is a Möbius band, drawn as a thin
-     slab. It is cut along its centre line into one long strip, t from 0 to 720°: the part with t < 360° (the first
-     round, "the pointer") lies on one side of the centre line and the part with t ≥ 360° (the second round, "the
-     memory") on the other; at μ = 0 the two pieces close up into the band, with no seam. At μ = 1 the first piece is
-     a ball round the centre and the second a ring shell round it, the dualist picture of §39.1 (MODEL); in between,
-     every point of the solid lies on the straight segment between its two places. The flag of ψ(t) stands on the
-     strip at t, from the centre line to the edge, and its tip is the point of the edge at t. */
-  const RB = 1.5, HW = 0.5, TH = 0.05, RBALL = 0.62, RTOR = 1.62, ATOR = 0.36, FACE = 0.42;
-  const NU = 96, NV = 20;
+     The geometry (frame, cross-section, the two pieces, the edge and the flag of ψ) is shared with film 010:
+     model.js, QG_SPINOR_BAND, where it is described; here it is read in the plane of the current turn. */
+  const BAND = QG_SPINOR_BAND, { HW, TH, RBALL, FACE } = BAND;
   /** Frame at turn t: centre c, outward r, travel T, axis n, width direction w and the band's normal N = w × T. */
-  function frame(t, a0) {
-    const pl = PL(), r = radial(pl, a0 + t), T = radial(pl, a0 + t + PI / 2), c2 = Math.cos(t / 2), s2 = Math.sin(t / 2);
-    return { r, T, n: pl.n, c: v3.scale(r, RB), w: v3.add(v3.scale(pl.n, c2), v3.scale(r, s2)), N: v3.add(v3.scale(r, -c2), v3.scale(pl.n, s2)) };
-  }
-  /** The cross-section of the slab at v in [0, 1]: [across (in half-widths), up (in half-thicknesses)]: the top face
-      from the centre line out, the rounded rim, the bottom face back in. */
-  function section(v) {
-    if (v <= FACE) return [v / FACE, 1];
-    if (v >= 1 - FACE) return [(1 - v) / FACE, -1];
-    const f = PI * (v - FACE) / (1 - 2 * FACE);
-    return [1 + (TH / HW) * Math.sin(f), Math.cos(f)];
-  }
-  function bandPoint(t, v, a0) { const F = frame(t, a0), s = section(v); return v3.add(F.c, v3.add(v3.scale(F.w, HW * s[0]), v3.scale(F.N, TH * s[1]))); }
-  /** Where the same point of the strip sits in the split picture (μ = 1): piece 0 a ball, piece 1 a ring shell. */
-  function splitPoint(piece, t, v, a0) {
-    const F = frame(t, a0);
-    if (!piece) { const th = PI * v; return v3.add(v3.scale(F.r, RBALL * Math.sin(th)), v3.scale(F.n, RBALL * Math.cos(th))); }
-    const ph = TAU * v + PI / 2;
-    return v3.add(v3.scale(F.r, RTOR + ATOR * Math.cos(ph)), v3.scale(F.n, ATOR * Math.sin(ph)));
-  }
+  const frame = (t, a0) => BAND.frame(PL(), t, a0);
   /** A point of the solid: piece 0 has t in [0, 360°], piece 1 in [360°, 720°]. */
-  function solidPoint(piece, t, v, a0, mu) { const b = bandPoint(t, v, a0); return mu > 0 ? v3.lerp(b, splitPoint(piece, t, v, a0), mu) : b; }
+  const solidPoint = (piece, t, v, a0, mu) => BAND.solidPoint(PL(), piece, t, v, a0, mu);
   /** The edge of the solid at t (the middle of the rim), pushed out by `off` along the outward direction of the edge. */
-  function edgeAt(t, a0, mu, off) {
-    const pc = pieceOf(t), p = solidPoint(pc, t, 0.5, a0, mu), q = v3.lerp(solidPoint(pc, t, 0, a0, mu), solidPoint(pc, t, 1, a0, mu), 0.5);
-    const out = v3.unit(v3.sub(p, q));
-    return { p: v3.add(p, v3.scale(out, off || 0)), out };
-  }
-  const pieceOf = (t) => (t < TAU - 1e-9 ? 0 : 1);
+  const edgeAt = (t, a0, mu, off) => BAND.edgeAt(PL(), t, a0, mu, off);
 
   /* ---------- stage ---------- */
   let drag = null, last = { nodes: [], tip: null };
@@ -187,22 +155,8 @@
     }
   }
 
-  /** The flag of ψ(t) on the face of the solid that looks at the viewer: pole from the centre line to the edge along
-      the surface, pennant at the edge pointing along the travel. */
-  function flag(st, t, a0, mu, s) {
-    s = s || {};
-    const pc = pieceOf(t), F = frame(t, a0), D = st.facing();
-    const along = (v) => solidPoint(pc, t, v, a0, mu);
-    const top = v3.dot(v3.sub(along(FACE * 0.5), along(1 - FACE * 0.5)), D) >= 0;   // which face is nearer the eye
-    const vs = (f) => (top ? FACE * f : 1 - FACE * f);
-    const lift = v3.scale(F.N, (top ? 1 : -1) * (TH * (1 - mu) + 0.012));   // just off the face, so it sits on it
-    const on = (v) => v3.add(along(v), lift);
-    const pole = []; for (let k = 0; k <= 8; k++) pole.push(on(vs(k / 8)));
-    st.line(pole, { color: P.violet, width: s.width || 2.6, alpha: s.alpha == null ? 1 : s.alpha, dash: s.dash });
-    const tip = on(vs(1)), low = on(vs(0.62)), mid = v3.add(on(vs(0.81)), v3.scale(F.T, 0.26 * (s.small ? 0.7 : 1)));
-    st.fan([tip, mid, low], s.dash ? { color: P.violet, width: 1.4, dash: s.dash, strokeAlpha: 0.95 } : { fill: P.violet, alpha: (s.alpha == null ? 1 : s.alpha) * 0.95, color: P.violet, width: 1, strokeAlpha: 1 });
-    return { base: along(vs(0)), tip, rim: along(0.5) };
-  }
+  /** The flag of ψ(t) on the face of the solid that looks at the viewer (QG_SPINOR_BAND.flag), in violet. */
+  const flag = (st, t, a0, mu, s) => BAND.flag(st, PL(), t, a0, mu, Object.assign({ color: P.violet }, s));
   function drawSpin(st, X) {
     const k = Math.sqrt(X.rho), a = v3.scale(X.A, k), b = v3.scale(X.B, k);
     st.fan([[0, 0, 0], a, v3.add(a, b), b], { fill: P.magenta, alpha: TRV.thumbMode ? 0.42 : 0.3, color: P.magenta, width: 1.4 });
@@ -234,12 +188,7 @@
     st.begin();
     const n = PL().n, ax = [v3.scale(n, -2.05), v3.scale(n, 2.05)];
     if (!S.ref) { st.line(ax, { color: P.violet, width: 1.4, alpha: 0.75 }); st.tag('axis', v3.scale(n, 2.15), 'n', 'raw c-vi', {}); }
-    const look = { color: P.violet, grid: { every: [4, 2] } };   // one colour: light and shade come from the camera only
-    if (S.band) {
-      for (const piece of [0, 1]) {
-        st.surface(`piece${piece}`, (u, v) => solidPoint(piece, u, v, a0, mu), Object.assign({ u: piece ? [TAU, FULL] : [0, TAU], v: [0, 1], nu: NU, nv: NV }, look));
-      }
-    }
+    if (S.band) BAND.draw(st, PL(), a0, mu, { color: P.violet, grid: { every: [4, 2] } });   // one colour: light and shade come from the camera only
     if (S.ref) drawRef(st);
     const tip0 = X.J0, n2 = Math.max(2, Math.ceil(Math.min(t, TAU) / (3 * DEG))), jp = [];
     for (let j = 0; j <= n2; j++) jp.push(at(Math.min(t, TAU) * j / n2).J);

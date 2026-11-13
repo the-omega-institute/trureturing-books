@@ -22,7 +22,11 @@
    On load, FILM.init checks DATA.lean against the two theorems and re-derives every number shown on screen by an
    independent route (closed forms against rotations, exact transport against a fine projection transport, solid
    angle two ways, complex overlaps against the latitude formula). Any disagreement is pushed to window.FILM_ERRORS,
-   which stops the render. */
+   which stops the render.
+
+   The sphere is drawn as a solid: the glass ball of the lab page two-angle-addressing (its model.js), with the turns of
+   the skew word as lit arcs and the fans they sweep, the belt the carried arrow sweeps in ORDER, and the octant the loop
+   encloses as a magenta patch of the sphere, whose area is the solid angle Ω. */
 'use strict';
 
 /* ======================================================================= */
@@ -267,29 +271,30 @@ function tbView(cx, cy, R, yaw, el) {
     const X = p[0] * cw - p[1] * sw, Y = p[0] * sw + p[1] * cw, Z = p[2];
     return [cx + X * R, cy - (Z * ce + Y * se) * R, Y * ce - Z * se];
   };
-  V.cx = cx; V.cy = cy; V.R = R;
+  V.cx = cx; V.cy = cy; V.R = R; V.yaw = yaw; V.el = el;
   return V;
 }
+/* The sphere is a solid shot whose camera is the view V (same yaw, pitch, scale and centre). tbBegin opens it and hangs
+   it on V; while it is open the helpers below draw their geometry into it and queue their 2D labels, and tbEnd draws
+   the shot and then the queued labels on top. The ball is the glass ball of the lab page two-angle-addressing
+   (viz/two-angle-addressing/model.js, QG_SPHERE). Alphas inside the shot are absolute. */
+function tbBegin(V, key) {
+  const h = Math.round(1.42 * V.R), x = Math.round(V.cx - h), y = Math.max(0, Math.round(V.cy - h));
+  V.sh = solid(key, { x, y, w: 2 * h, h: Math.min(2 * h, H - y), yaw: V.yaw, pitch: V.el, unit: V.R, cx: V.cx - x, cy: V.cy - y, px: true });
+  V.labels = [];
+  V.sh.begin();
+  return V.sh;
+}
+function tbEnd(V) { V.sh.end(1); V.sh = null; const L = V.labels; V.labels = []; L.forEach(f => f()); }
+const tbLabel = (V, f) => { if (V.sh) V.labels.push(f); else f(); };
 const tbVis = (V, p) => (V(p)[2] > 0.02 ? 0.35 : 1);
-/* a parametric 3-D curve: front runs bright, back runs faint */
+const TB_PEARL = { g: 'now', w: 'white', c: 'cyan', m: 'mag', v: 'vio' };
+/* a parametric 3-D curve inside the glass: the run behind the centre plane at aB / aF of the front's alpha */
 function tbPath(V, fn, n, col, aF, aB, lw = 2, dash = false) {
-  if (aF <= 0.003 && aB <= 0.003) return;
+  if ((aF <= 0.003 && aB <= 0.003) || !V.sh) return;
   const pts = [];
-  for (let i = 0; i <= n; i++) pts.push(V(fn(i / n)));
-  let run = [pts[0]], back = pts[0][2] > 0;
-  const flush = () => {
-    if (run.length < 2) return;
-    const r = run;
-    if (dash) { ctx.save(); ctx.setLineDash([10, 9]); }
-    curve(k => r[Math.round(k * (r.length - 1))], r.length - 1, col, back ? aB : aF, back ? lw * 0.7 : lw);
-    if (dash) ctx.restore();
-  };
-  for (let i = 1; i < pts.length; i++) {
-    const b = pts[i][2] > 0;
-    run.push(pts[i]);
-    if (b !== back) { flush(); run = [pts[i]]; back = b; }
-  }
-  flush();
+  for (let i = 0; i <= n; i++) pts.push(fn(i / n));
+  QG_SPHERE.seg(V.sh, pts, { color: col, width: lw, alpha: Math.max(aF, aB), back: aF > 0 ? Math.min(1, aB / aF) : 1, dash: dash ? [10, 9] : undefined });
 }
 /* the circle swept by p about the unit axis k, from angle t0 to t1 */
 function tbSweep(V, p, k, t0, t1, col, aF, aB, lw = 2, dash = false) {
@@ -302,52 +307,34 @@ function tbLatitudeRing(V, th, col, aF, aB, lw = 2, dash = false) {
 }
 function tbSphere(V, a, o = {}) {
   if (a <= 0.003) return;
-  dot(V.cx - V.R * 0.18, V.cy - V.R * 0.22, V.R * 1.25, 'b', 0.08 * a);
-  ring(V.cx, V.cy, V.R, C.cyan, 0.7 * a, 2.2);
-  ring(V.cx, V.cy, V.R + 8, C.cyan, 0.14 * a, 1);
-  for (const lat of [-60, -30, 0, 30, 60]) {
-    const r = Math.cos(lat * TB_DEG), z = Math.sin(lat * TB_DEG);
-    tbPath(V, s => [r * Math.cos(TAU * s), r * Math.sin(TAU * s), z], 72, C.blue, a * (lat === 0 ? 0.5 : 0.28), a * 0.08, lat === 0 ? 1.6 : 1.1);
-  }
-  for (let k = 0; k < 6; k++) {
-    const ph = k * Math.PI / 6;
-    tbPath(V, s => [Math.sin(TAU * s) * Math.cos(ph), Math.sin(TAU * s) * Math.sin(ph), Math.cos(TAU * s)], 72, C.blue, a * 0.24, a * 0.07, 1.1);
-  }
-  const N = V(NP);
-  dot(N[0], N[1], 10, 'w', a);
-  if (o.N !== false) txt('N', N[0] - 34, N[1] - 12, { size: 30, fam: F.math, w: 700, c: C.white, a });
+  QG_SPHERE.ball(V.sh, { glass: C.cyan, ink: C.blue, width: 1.5, alpha: 0.6 * a, back: 0.35, shell: { alpha: 0.08 * a, rim: 0.5 * a } });
+  V.sh.bead(NP, { color: C.white, r: 6, alpha: a });
+  if (o.N !== false) tbLabel(V, () => { const N = V(NP); txt('N', N[0] - 34, N[1] - 12, { size: 30, fam: F.math, w: 700, c: C.white, a }); });
 }
 /* a rotation axis through the sphere, in violet; label at the positive end */
 function tbAxis(V, k, label, a, o = {}) {
   if (a <= 0.003) return;
-  const L = o.len || 1.32, p = V(V3.sc(L, k)), q = V(V3.sc(-L, k)), c0 = V([0, 0, 0]);
-  dashed(q[0], q[1], c0[0], c0[1], C.vio, 0.5 * a, 2);
-  arrow(c0[0], c0[1], p[0], p[1], C.vio, 0.9 * a, o.lw || 2.6);
-  if (label) {
+  const L = o.len || 1.32;
+  V.sh.line([V3.sc(-L, k), [0, 0, 0]], { color: C.vio, width: 2, alpha: 0.5 * a, dash: [10, 9] });
+  V.sh.arrow([0, 0, 0], V3.sc(L, k), { color: C.vio, width: o.lw || 2.6, headSize: 18, alpha: 0.9 * a });
+  if (label) tbLabel(V, () => {
     const l = V(V3.sc(L + 0.14, k));
     txt(label, l[0] + (o.dx || 0), l[1] + 10 + (o.dy || 0), { size: o.size || 28, fam: F.math, w: 700, align: 'center', c: C.vio, a });
-  }
+  });
 }
-/* a point on the sphere with a glowing pearl */
-function tbPoint(V, p, a, pearl = 'g', r = 14) { const s = V(p); dot(s[0], s[1], r, pearl, a * tbVis(V, p)); return s; }
+/* a point on the sphere, a lit bead (fainter behind the centre plane) */
+function tbPoint(V, p, a, pearl = 'g', r = 14) { if (V.sh && a > 0.003) V.sh.bead(p, { color: C[TB_PEARL[pearl] || 'now'], r: r * 0.6, alpha: a * tbVis(V, p) }); return V(p); }
 /* a tangent arrow ("flag") at p in the unit tangent direction v */
 function tbFlag(V, p, v, col, a, len = 0.34, lw = 3.5, dash = false) {
-  if (a <= 0.003) return;
-  const s = V(p), e = V(V3.add(p, V3.sc(len, v))), k = a * tbVis(V, p);
-  if (dash) dashed(s[0], s[1], e[0], e[1], col, k, lw * 0.7);
-  else arrow(s[0], s[1], e[0], e[1], col, k, lw);
+  if (a <= 0.003 || !V.sh) return;
+  const k = a * tbVis(V, p), e = V3.add(p, V3.sc(len, v));
+  if (dash) V.sh.line([p, e], { color: col, width: lw * 0.7, alpha: k, dash: [10, 9] });
+  else V.sh.arrow(p, e, { color: col, width: lw, headSize: 16, alpha: k });
 }
 /* an arc on the sphere about the point p (as axis), from the tangent u0 by the angle ang */
 function tbTurnArc(V, p, u0, ang, r, col, a, lw = 3) {
   if (a <= 0.003 || Math.abs(ang) < 1e-3) return;
   tbPath(V, s => V3.unit(V3.add(p, V3.sc(r, V3.rot(u0, p, ang * s)))), 24, col, a, a * 0.4, lw);
-}
-/* fill a closed spherical polygon given by its boundary points */
-function tbFill(V, pts, col, a) {
-  if (a <= 0.003) return;
-  ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = col; ctx.beginPath();
-  pts.forEach((p, i) => { const s = V(p); if (i) ctx.lineTo(s[0], s[1]); else ctx.moveTo(s[0], s[1]); });
-  ctx.closePath(); ctx.fill(); ctx.restore();
 }
 /* coloured runs of text on one baseline: parts = [[text, colour], …] */
 function tbRich(parts, x, y, o = {}) {
@@ -392,21 +379,26 @@ const TB_PX = 1080, TB_PW = 720;   // the right-hand panel column
 /*                             scene 1 · ONE TURN                            */
 /* ======================================================================= */
 SCENES.one = S => {
-  tbTitle(S);
   const u = S.u, a = at(S, 0, 0.8, -0.2) * clamp((S.d - u) / 0.5);
-  if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed']]);
-  const V = tbView(560, 500, 285, -1.0 + 0.02 * u, 0.3);
-  tbSphere(V, a);
-  const ka = Q(S, 0, 'turn about a single axis', 0.6);
-  tbAxis(V, E2, 'e₂', a * ka);
   /* θ runs once round, from the end of line 0 to "comes back home" */
   const t0 = lineAt(S, 0).e - 0.4, t1 = phraseAt(S, 1, 'comes back home') + 0.6;
   const th = TAU * ease(clamp((u - t0) / (t1 - t0)));
-  tbSweep(V, NP, E2, 0, TAU, C.vio, 0.35 * a * ka, 0.12 * a * ka, 1.6, true);
-  tbSweep(V, NP, E2, 0, th, C.white, a, 0.4 * a, 3.5);
   const p = V3.rot(NP, E2, th);
-  tbPoint(V, p, a, 'g', 15);
+  /* the solid first; the opening title and the panel go on top of it */
+  if (a > 0) {
+    const V = tbView(560, 500, 285, -1.0 + 0.02 * u, 0.3);
+    tbBegin(V, 'sphere');
+    tbSphere(V, a);
+    const ka = Q(S, 0, 'turn about a single axis', 0.6);
+    tbAxis(V, E2, 'e₂', a * ka);
+    tbSweep(V, NP, E2, 0, TAU, C.vio, 0.35 * a * ka, 0.12 * a * ka, 1.6, true);
+    tbSweep(V, NP, E2, 0, th, C.white, a, 0.4 * a, 3.5);
+    tbPoint(V, p, a, 'g', 15);
+    tbEnd(V);
+  }
+  tbTitle(S);
+  if (a <= 0) return;
+  badgeQ(S, [[0, null, 'computed']]);
   /* panel */
   const x = TB_PX, w = TB_PW, y = 200, pa = a * at(S, 0, 0.6, 0.3);
   panel(x, y, w, 470, pa, C.cyan, 'ONE AXIS · 只绕一根轴');
@@ -436,6 +428,7 @@ SCENES.two = S => {
   badgeQ(S, [[0, null, 'computed']]);
   const V = tbView(560, 505, 285, -1.0 + 0.02 * u, 0.3);
   const { th, ph, tTwist, tPole } = tbTwoState(S);
+  tbBegin(V, 'sphere');
   tbSphere(V, a);
   const step2 = clamp((u - tTwist + 0.4) / 0.6), pole = clamp((u - tPole + 0.3) / 0.5);
   /* step 1: the y-axis and the meridian; step 2: the vertical axis and the latitude */
@@ -458,8 +451,9 @@ SCENES.two = S => {
   tbFlag(V, r, flag, C.white, a * clamp(0.35 + pole), 0.3, 3);
   tbPoint(V, r, a, 'g', 15);
   /* height marker: the drop to cos θ */
-  const hz = V([0, 0, r[2]]), rs = V(r);
-  dashed(hz[0], hz[1], rs[0], rs[1], C.now, 0.5 * a, 1.6);
+  V.sh.line([[0, 0, r[2]], r], { color: C.now, width: 1.6, alpha: 0.5 * a, dash: [10, 9] });
+  tbEnd(V);
+  const hz = V([0, 0, r[2]]);
   txt(`cos θ = ${tbNum(Math.cos(th))}`, V.cx - V.R - 70, hz[1] + 8, { size: 22, fam: F.mono, w: 700, c: C.now, a: a * clamp(th / 0.2) });
   /* panel */
   const x = TB_PX, w = TB_PW, y = 190, pa = a * at(S, 0, 0.6, 0.2);
@@ -491,8 +485,9 @@ SCENES.skew = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [1, 'Lean checks', 'lean']]);
   const K = TB_SKEW, V = tbView(560, 500, 280, -1.0 + 0.015 * u, 0.32);
+  tbBegin(V, 'sphere');
   tbSphere(V, a, { N: false });
-  { const n0 = V(NP); txt('N', n0[0] - 62, n0[1] + 6, { size: 30, fam: F.math, w: 700, c: C.white, a }); }
+  tbLabel(V, () => { const n0 = V(NP); txt('N', n0[0] - 62, n0[1] + 6, { size: 30, fam: F.math, w: 700, c: C.white, a }); });
   /* the word: four turns between "Thirty degrees" and the end of line 0 */
   const t0 = phraseAt(S, 0, 'Thirty degrees'), t1 = lineAt(S, 0).e + 0.4, n = K.word.length, beat = (t1 - t0) / n;
   const k = clamp((u - t0) / beat, 0, n), cur = Math.min(n - 1, Math.floor(k)), f = ease(k - cur);
@@ -509,15 +504,22 @@ SCENES.skew = S => {
   });
   /* target ring */
   tbPath(V, s => V3.unit(V3.add(K.target, V3.sc(0.09, V3.rot(V3.unit(V3.cross(K.target, E3)), K.target, TAU * s)))), 40, C.white, a, 0.3 * a, 2.4);
-  /* trails of the finished turns (white) and the current turn (amber) */
+  /* the turns so far as lit arcs, each with the fan it sweeps round its axis: finished white, the current one amber */
   let p = NP;
   K.word.forEach((w, i) => {
     if (u < t0 || i > cur) return;
-    const ff = i < cur ? 1 : f;
-    tbSweep(V, w.from, w.axis, 0, w.ang * ff, i < cur ? C.white : C.now, (i < cur ? 0.7 : 1) * a, 0.3 * a, 3);
+    const ff = i < cur ? 1 : f, col = i < cur ? C.white : C.now;
+    if (Math.abs(w.ang * ff) > 1e-3) {
+      const c = V3.sc(V3.dot(w.from, w.axis), w.axis), n = Math.max(8, Math.ceil(Math.abs(w.ang * ff) * 30)), arc = [];
+      for (let k = 0; k <= n; k++) arc.push(V3.rot(w.from, w.axis, w.ang * ff * k / n));
+      V.sh.fan([c].concat(arc), { fill: col, alpha: (i < cur ? 0.08 : 0.16) * a });
+      V.sh.tube('turn' + i, arc, { color: col, width: i < cur ? 3 : 4, alpha: (i < cur ? 0.75 : 1) * a });
+      V.sh.line([c, w.from], { color: col, width: 1.2, alpha: 0.45 * a, dash: [6, 6] });
+    }
     p = V3.rot(w.from, w.axis, w.ang * ff);
   });
   tbPoint(V, p, a, 'g', 15);
+  tbEnd(V);
   /* panel */
   const x = TB_PX, w = TB_PW, y = 190, pa = a * at(S, 0, 0.6, 0.2);
   panel(x, y, w, 640, pa, C.cyan, 'SKEW AXES · 斜交两轴');
@@ -545,6 +547,14 @@ function tbRoute(V, R, p1, p2, a, done) {
   /* p1, p2 ∈ [0, 1]: progress of the two quarter turns; done: the route is no longer the current one */
   const q = Math.PI / 2, [s1, s2] = R.route;
   const col = done ? C.white : C.now;
+  /* the belt the carried arrow sweeps: along the first quarter turn a band from the point out to the arrow's tip; in
+     the second, where the point stays put, it closes into a quarter disk round that point */
+  const belt = (key, p0, f0, ax, ang) => {
+    if (Math.abs(ang) < 1e-3 || !V.sh) return;
+    V.sh.surface(key, (t, v) => V3.add(V3.rot(p0, ax, t), V3.sc(0.36 * v, V3.rot(f0, ax, t))), { u: [0, ang], v: [0, 1], nu: Math.max(4, Math.ceil(ang * 24)), nv: 4, color: col, alpha: 0.42 * a, pick: false, occlude: false });
+  };
+  belt(R.route[0].name + R.route[1].name + '1', NP, E1, s1.axis, q * p1);
+  if (p1 >= 1) belt(R.route[0].name + R.route[1].name + '2', R.pts[1], R.flags[1], s2.axis, q * p2);
   tbSweep(V, NP, s1.axis, 0, q * p1, col, (done ? 0.7 : 1) * a, 0.3 * a, 3);
   const pt = p1 < 1 ? V3.rot(NP, s1.axis, q * p1) : R.pts[1];
   const fl = p1 < 1 ? V3.rot(E1, s1.axis, q * p1) : V3.rot(R.flags[1], s2.axis, q * p2);
@@ -557,6 +567,7 @@ SCENES.order = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
   const O = TB_ORDER, V = tbView(560, 505, 285, -Math.PI / 4 + 0.02 * Math.sin(0.3 * u), 0.38);
+  tbBegin(V, 'sphere');
   tbSphere(V, a);
   tbAxis(V, E1, 'X', a, { dx: -10, dy: 6 });
   tbAxis(V, E2, 'Y', a, { dx: 10, dy: 6 });
@@ -565,21 +576,23 @@ SCENES.order = S => {
   const bOn = at(S, 1, 0.4, -0.2);
   tbRoute(V, O.A, pA1, pA2, a, bOn > 0.5);
   if (bOn > 0) tbRoute(V, O.B, pB1, pB2, a * bOn, false);
-  /* end labels and the 90° between them */
-  const eA = V(E1), eB = V([0, -1, 0]);
-  txt('+X', eA[0] - 64, eA[1] + 52, { size: 28, fam: F.math, w: 700, c: C.white, a: a * Q(S, 0, 'we end on plus X', 0.5) });
-  txt('−Y', eB[0] - 56, eB[1] + 44, { size: 28, fam: F.math, w: 700, c: C.white, a: a * Q(S, 1, 'minus Y', 0.5) });
+  /* the 90° between the end points */
   const g = Q(S, 1, 'ninety degrees away', 0.8);
-  if (g > 0) {
-    tbSweep(V, E1, E3, 0, -Math.PI / 2 * g, C.white, a, 0.3 * a, 2, true);
-    const m = V([Math.SQRT1_2, -Math.SQRT1_2, 0]);
-    txt(tbDeg(O.gap * g, 0), m[0], m[1] + 44, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.white, a: a * g });
-  }
+  if (g > 0) tbSweep(V, E1, E3, 0, -Math.PI / 2 * g, C.white, a, 0.3 * a, 2, true);
   /* line 2: the flags' quarter turn at the fixed points, before (dashed) and after */
   const fl = Q(S, 2, 'the arrow it carries', 0.6);
   if (fl > 0) for (const R of [O.A, O.B]) {
     tbFlag(V, R.pts[2], R.flags[1], C.now, a * fl, 0.36, 3, true);
     tbTurnArc(V, R.pts[2], R.flags[1], Math.PI / 2 * ease(Q(S, 2, 'turns a quarter', 1.0)), 0.22, C.now, a * fl, 3);
+  }
+  tbEnd(V);
+  /* end labels and the angle between them */
+  const eA = V(E1), eB = V([0, -1, 0]);
+  txt('+X', eA[0] - 64, eA[1] + 52, { size: 28, fam: F.math, w: 700, c: C.white, a: a * Q(S, 0, 'we end on plus X', 0.5) });
+  txt('−Y', eB[0] - 56, eB[1] + 44, { size: 28, fam: F.math, w: 700, c: C.white, a: a * Q(S, 1, 'minus Y', 0.5) });
+  if (g > 0) {
+    const m = V([Math.SQRT1_2, -Math.SQRT1_2, 0]);
+    txt(tbDeg(O.gap * g, 0), m[0], m[1] + 44, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.white, a: a * g });
   }
   /* panel */
   const x = TB_PX, w = TB_PW, y = 190, pa = a * at(S, 0, 0.6, 0.2);
@@ -601,15 +614,12 @@ SCENES.order = S => {
 /* ======================================================================= */
 /*                            scene 5 · OCTANT LOOP                          */
 /* ======================================================================= */
-const TB_LOOP_BOUNDARY = (() => {
-  const pts = [];
-  TB_LOOP.edges.forEach(e => { for (let k = 0; k < 40; k++) pts.push(V3.rot(e.p, e.axis, e.ang * k / 40)); });
-  return pts;
-})();
 function tbLoopFigure(V, a, s, o = {}) {
   /* s ∈ [0, 3]: progress along the loop; o.area: the magenta fill; o.turn: the magenta turn arc at N */
   const L = TB_LOOP;
-  tbFill(V, TB_LOOP_BOUNDARY, C.mag, 0.3 * a * (o.area || 0));
+  /* the octant the loop encloses, a magenta patch of the sphere: its area is the solid angle Ω */
+  const ar = a * (o.area || 0);
+  if (ar > 0.003) V.sh.surface('octant', (th, ph) => V3.sc(1.004, [Math.sin(th) * Math.cos(ph), Math.sin(th) * Math.sin(ph), Math.cos(th)]), { u: [0, Math.PI / 2], v: [0, Math.PI / 2], nu: 24, nv: 24, color: C.mag, alpha: 0.62 * ar, grid: { every: [6, 6], color: C.white, alpha: 0.25 } });
   /* the loop, drawn as far as s */
   L.edges.forEach((e, i) => { const f = clamp(s - i); if (f > 0) tbSweep(V, e.p, e.axis, 0, e.ang * f, C.cyan, a, 0.35 * a, 3.5); });
   if (o.ghost) L.edges.forEach(e => tbSweep(V, e.p, e.axis, 0, e.ang, C.cyan, 0.25 * a, 0.1 * a, 1.6, true));
@@ -618,12 +628,17 @@ function tbLoopFigure(V, a, s, o = {}) {
   const st = L.at(s);
   if (o.turn > 0) {
     tbTurnArc(V, NP, L.v0, L.turn * o.turn, 0.28, C.mag, a, 3.5);
-    const m = V(V3.unit(V3.add(NP, V3.sc(0.5, V3.rot(L.v0, NP, L.turn / 2)))));
-    txt(tbDeg(L.turn * o.turn, 0), m[0], m[1] + 10, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.mag, a: a * o.turn });
+    tbLabel(V, () => {
+      const m = V(V3.unit(V3.add(NP, V3.sc(0.5, V3.rot(L.v0, NP, L.turn / 2)))));
+      txt(tbDeg(L.turn * o.turn, 0), m[0], m[1] + 10, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.mag, a: a * o.turn });
+    });
   }
   tbFlag(V, st.p, st.v, C.now, a, 0.36, 4);
   tbPoint(V, st.p, a, 'g', 14);
-  for (const [p, l, dx, dy] of [[E1, '+X', -48, 40], [E2, '+Y', 18, 40]]) { const q = V(p); dot(q[0], q[1], 9, 'w', a); txt(l, q[0] + dx, q[1] + dy, { size: 28, fam: F.math, w: 700, c: C.white, a }); }
+  for (const [p, l, dx, dy] of [[E1, '+X', -48, 40], [E2, '+Y', 18, 40]]) {
+    tbPoint(V, p, a, 'w', 9);
+    tbLabel(V, () => { const q = V(p); txt(l, q[0] + dx, q[1] + dy, { size: 28, fam: F.math, w: 700, c: C.white, a }); });
+  }
   return st;
 }
 SCENES.loop = S => {
@@ -631,14 +646,16 @@ SCENES.loop = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, 'The literature', 'argued']]);
   const L = TB_LOOP, V = tbView(560, 520, 290, -3 * Math.PI / 4 + 0.05 * Math.sin(0.25 * u), 0.5);
+  tbBegin(V, 'sphere');
   tbSphere(V, a, { N: false });
   /* one trip round the loop from "north" (line 0) to "comes back" (line 1) */
   const t0 = phraseAt(S, 0, 'north'), t1 = phraseAt(S, 1, 'It comes back') + 0.3;
   const s = 3 * clamp((u - t0) / (t1 - t0));
   const turn = Q(S, 1, 'turned by ninety', 0.9), area = Q(S, 2, 'That is the enclosed area', 1.2);
+  const st = tbLoopFigure(V, a, s, { area, turn, ghost: true });
+  tbEnd(V);
   const N = V(NP);
   txt('N', N[0] - 14, N[1] - 52, { size: 30, fam: F.math, w: 700, c: C.white, a });
-  const st = tbLoopFigure(V, a, s, { area, turn, ghost: true });
   /* panel */
   const x = TB_PX, w = TB_PW, y = 190, pa = a * at(S, 0, 0.6, 0.2);
   panel(x, y, w, 640, pa, C.cyan, 'PARALLEL TRANSPORT · 平行搬运');
@@ -680,8 +697,10 @@ SCENES.pairs = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [1, 'Lean checks', 'lean'], [2, 'Multiply', 'computed']]);
   const P = TB_PAIRS, V = tbView(400, 470, 220, -3 * Math.PI / 4, 0.5);
+  tbBegin(V, 'sphere');
   tbSphere(V, a, { N: false });
   tbLoopFigure(V, a, 3, { area: 0.6, turn: 0 });
+  tbEnd(V);
   const N = V(NP);
   /* corner names */
   txt('ψ₀', N[0] + 20, N[1] - 20, { size: 28, fam: F.math, w: 700, c: C.cyan, a });
@@ -745,10 +764,12 @@ FILM.poster = () => {
   background(t, sc, 4, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.3, a: 0.2, cx: 1320, cy: 420, camZ: 7, lw: 1.3, dots: false });
   const V = tbView(480, 560, 330, -3 * Math.PI / 4, 0.5);
+  tbBegin(V, 'poster');
   tbSphere(V, 1, { N: false });
   /* the two-angle trail from N, then the octant loop with the transported arrow */
   tbSweep(V, NP, E2, 0, TB_ADDR.th, C.white, 0.5, 0.2, 2, true);
   tbLoopFigure(V, 1, 2.35, { area: 1, turn: 0 });
+  tbEnd(V);
   const N = V(NP);
   txt('N', N[0] - 14, N[1] - 52, { size: 32, fam: F.math, w: 700, c: C.white });
   txt(DATA.film.title_zh, 1320, 300, { size: 50, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
