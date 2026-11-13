@@ -422,6 +422,26 @@
   let panelInfo = null;
   /** A cited figure in a phone's frame (about 334 × 500): style.css tightens the same frames with the same query. */
   const compact = () => TRV.figure && !TRV.still && window.matchMedia('(max-width: 480px)').matches;
+  /** Where the drawing may run on a stage other than a phone's figure (stage pixels): from under the title block and the
+      scene buttons (top) to above the legend (bottom). Both are measured, so a title, a second line or a legend that
+      takes more lines (another language, other font metrics) moves them. */
+  function bands() {
+    const sr = $('stage').getBoundingClientRect(), below = (el) => (el.getClientRects().length ? el.getBoundingClientRect().bottom - sr.top : 0);
+    return { top: TRV.thumbMode ? 24 : Math.max(46, below($('hudSub')), below($('sceneChips'))) + 10, bottom: TRV.thumbMode ? 24 : Math.max(18, $('legend').offsetHeight + 20) };
+  }
+  /** A narrow stage (a phone's lab) stacks the apparatus band over the panels. The panels need the height that keeps
+      the grid ≥ NARROW.grid px (80 with a margin), the band keeps its share of the rest and never less than NARROW.floor;
+      need(rec) is that height of the panels and the share of the band. */
+  const NARROW = { grid: 88, floor: 70, gap: 8 };
+  const narrowNeed = (rec) => ({ panels: (NARROW.grid + (TRV.thumbMode ? 6 : 30) + (rec && !TRV.thumbMode ? 52 : 0)) / (rec ? 0.64 : 0.58), share: rec ? 0.24 : 0.32 });
+  /** The height a narrow lab stage asks for (0 elsewhere): the title block and the legend as they are now, plus the band
+      at its share and the panels at their need. kit.plot passes it to the lab, whose stage grows to it and the page
+      scrolls; a cited figure and a still keep their frame (kit.plot ignores the request there). */
+  function stageAsk() {
+    if (TRV.figure || TRV.still || $('flat').clientWidth - 32 >= 560) return 0;
+    const { top, bottom } = bands(), n = narrowNeed(S.scene === 'record');
+    return Math.ceil(top + bottom + Math.max(NARROW.floor + NARROW.gap + n.panels, (NARROW.gap + n.panels) / (1 - n.share)));
+  }
   function layout(Wd, Ht) {
     const sr = $('stage').getBoundingClientRect(), below = (el) => (el.getClientRects().length ? el.getBoundingClientRect().bottom - sr.top : 0);
     const rec = S.scene === 'record';
@@ -437,8 +457,7 @@
       const half = Math.round((pr.w - 10) / 2), rx = pr.x + half + 10, rw = pr.w - half - 10, dh = Math.round(pr.h * 0.56);
       return { cmp: true, r3, pr, mat: { x: pr.x, y: pr.y, w: half, h: pr.h, recX: pr.x, recW: half, cmp: true }, dsc: { x: rx, y: pr.y, w: rw, h: dh }, scr: { x: rx, y: pr.y + dh + 4, w: rw, h: pr.h - dh - 4 } };
     }
-    const top = TRV.thumbMode ? 24 : Math.max(46, below($('hudSub')), below($('sceneChips'))) + 10;
-    const bottom = TRV.thumbMode ? 24 : Math.max(18, $('legend').offsetHeight + 20);
+    const { top, bottom } = bands();
     const x0 = 16, w = Wd - 32, h = Math.max(80, Ht - top - bottom);
     let r3, pr;
     if (w >= 560 && h < 300) {
@@ -453,11 +472,10 @@
       return { r3, pr, mat: { x: pr.x, y: pr.y, w: mw, h: pr.h, recX: pr.x + 14, recW: mw - 14 }, dsc: { x: rx, y: pr.y, w: rw, h: dh }, scr: { x: rx, y: pr.y + dh + 18, w: rw, h: pr.h - dh - 18 } };
     }
     else {
-      // a narrow stage (a phone): the band gives way where the stacked panels need the height that keeps the grid
-      // ≥ 88 px (80 with room for another machine's font metrics in the title block and the legend above and below)
-      const head = TRV.thumbMode ? 6 : 30, boxes = rec && !TRV.thumbMode ? 52 : 0, need = (88 + head + boxes) / (rec ? 0.64 : 0.58);
-      const bh = Math.round(w >= 560 ? Math.max(110, Math.min(h * 0.55, h - (rec ? 172 : 150))) : Math.max(70, Math.min(h * (rec ? 0.24 : 0.32), h - 8 - need)));
-      r3 = { x: x0, y: top, w, h: bh }; pr = { x: x0, y: top + bh + 8, w, h: h - bh - 8 };
+      // a narrow stage (a phone): the stage has asked for the height of both (stageAsk); the band gives way first
+      const n = narrowNeed(rec);
+      const bh = Math.round(w >= 560 ? Math.max(110, Math.min(h * 0.55, h - (rec ? 172 : 150))) : Math.max(NARROW.floor, Math.min(h * n.share, h - NARROW.gap - n.panels)));
+      r3 = { x: x0, y: top, w, h: bh }; pr = { x: x0, y: top + bh + NARROW.gap, w, h: h - bh - NARROW.gap };
     }
     const wide = pr.w >= 560 || (pr.w >= 400 && pr.w >= 1.45 * pr.h), fr = rec ? 0.64 : 0.58;   // stacked: the matrix row's share
     let mat = wide ? { x: pr.x, y: pr.y, w: Math.min(pr.w * (rec ? 0.36 : 0.46), pr.h + 30), h: pr.h } : { x: pr.x, y: pr.y, w: pr.w, h: pr.h * fr };
@@ -472,7 +490,12 @@
     return { r3, pr, mat, dsc, scr };
   }
   function drawStage() {
-    const g0 = kit.plot($('flat'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, Wd = g0.W, Ht = g0.H, m = current(), words = !TRV.thumbMode;
+    // a narrow lab stage asks for the height its title block, legend, band and panels take; when it has just grown to
+    // it, the canvas is fitted again to the new height before anything is laid out
+    const ask = stageAsk(), opts = { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0], ...(ask ? { minHeight: ask } : {}) };
+    let g0 = kit.plot($('flat'), opts);
+    if (ask && !g0.drawable) g0 = kit.plot($('flat'), opts);
+    const ctx = g0.ctx, Wd = g0.W, Ht = g0.H, m = current(), words = !TRV.thumbMode;
     const lay = layout(Wd, Ht), { r3, pr } = lay, cmp = !!lay.cmp;
     // the apparatus, fitted to its box in the default view, with room under it for the names of the places and, where
     // its sides leave no room for the words saying what it stands for, a line above it; on a phone (a low band) the
