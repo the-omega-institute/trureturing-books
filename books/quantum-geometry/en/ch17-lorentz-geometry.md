@@ -1,4 +1,4 @@
-# Geometric Demystification of Special Relativity: Hyperbolic Rotors, Null Light Cones, and Spacetime Area
+# Chapter 17 Geometric Demystification of Special Relativity: Hyperbolic Rotors, Null Light Cones, and Spacetime Area {#geometric-demystification-of-special-relativity-hyperbolic-rotors-null-light-cones-and-spacetime-area}
 
 > *"My intuition is that a line is classical time, and area is quantum time."*
 
@@ -10,7 +10,7 @@ Stepping into Part V, "The Spacetime Sphere," we confront a deeper geometric que
 **Figure 17.** A map of the chapter. Panel I: one event $(t, x) = (5, 3)$, when rotated, runs along the magenta circle $t^2 + x^2 = 34$ and leaves the white dashed light cone; when boosted, it runs along the cyan hyperbola $t^2 - x^2 = 16$, hugging the cone without ever crossing it. Panel II: the two amber axes $t'$ and $x'$ of the frame moving at $\beta = 3/5$ close toward the white light cone like scissors, while the cone itself stays put. Panel III: from $O$ to $P = (10, 0)$, the thick white worldline at rest carries $10$ ticks, while the cyan worldline that turns at $A = (5, 3)$ carries only $4$ per leg, $8$ in all. The figure uses $c = 1$; in physical units each segment's proper time is $\Delta\tau_{\mathrm{phys}} = \sqrt{q(\Delta v)}/c$.
 :::
 
-## Circles and hyperbolas: distinguish the metrics {#sec-euclidean-and-hyperbolic}
+## 17.1 Circles and hyperbolas: distinguish the metrics {#sec-euclidean-and-hyperbolic}
 
 Why do students encountering Lorentz transformations for the first time often feel that the ubiquitous square-root factor $\gamma = 1/\sqrt{1 - \beta^2}$ is an ad hoc algebraic patch? Because habit reaches for a Euclidean compass built for a positive-definite metric ($++\dots+$) to measure a Minkowski stage governed by an indefinite signature ($+-\dots-$).
 
@@ -83,7 +83,7 @@ One sometimes sees the auxiliary trigonometric parameterization $\sin\theta = \b
 **η = ln 2 takes (5, 3) to (4, 0).** The two amber axes are the $t'$ and $x'$ axes of a traveller moving with rapidity $\eta$; they close toward the light cone like scissors, and the grey dashed lines are the original $t$ and $x$ axes. At $\eta = \ln 2$ ($\beta = 3/5$) the $t'$ axis runs right through the original event $v = (5, 3)$ in the grey ring. The amber point $Bv$ is $v$ read in the traveller's coordinates: it slides along the cyan hyperbola $\tau = 4$ to $(4, 0)$ on the time axis, where $\cosh\eta = 5/4$ and $\sinh\eta = 3/4$.
 :::
 
-## Null light cones and spatial restrictions {#sec-null-cone-rigidity}
+## 17.2 Null light cones and spatial restrictions {#sec-null-cone-rigidity}
 
 In [@ex-rapidity-three-fifths] we took the quadratic form $t^2 - x^2$ as given. Yet from a foundational standpoint we should ask: why must the spacetime interval take the form $t^2 - \norm{w}^2$? If nature specifies only *which displacements lie on the null light cone*, how much of the spacetime quadratic form is already locked in place?
 
@@ -150,7 +150,7 @@ Notice the geometric mechanism inside the proof of [@lemma-null-cone-spatial]: w
 **The null caliper.** Lift the amber spatial displacement $(0, w)$ by $|w|$ up and down, and the two white arrows $(\pm|w|, w)$ land exactly on the future and past light-cone lines, with $t^2 - x^2 = 0$; the diagonals of the dashed rhombus are $2(0, w)$ and $2|w|(1, 0)$ ([@lemma-null-cone-spatial]).
 :::
 
-## Lorentz transformations and scale normalization {#sec-lorentz-normalization}
+## 17.3 Lorentz transformations and scale normalization {#sec-lorentz-normalization}
 
 With both the spatial restriction $S(0, w)$ and the cross polarization $\operatorname{polar}_S((1, 0), (0, w))$ pinned down by [@lemma-null-cone-spatial], the value of $S$ on any general spacetime vector $v = (t, w) = t(1, 0) + (0, w)$ has no remaining freedom except the overall scalar factor $S(1, 0)$.
 
@@ -231,7 +231,7 @@ $$
 with **strict inequality** $\Delta\tau < \Delta t$ (time dilation) whenever the spatial displacement is nonzero ($\Delta w \neq 0$, or $\Delta x \neq 0$ in $1+1$ dimensions) and **equality** $\Delta\tau = \Delta t$ along a rest worldline ($\Delta w = 0$). By contrast, a photon propagates along a nonzero null displacement $\Delta w \neq 0$ on the null cone $q(\Delta v) = 0$ (where $\Delta\tau = 0$, the singular limit $\eta \to \pm\infty$) and possesses no comoving inertial rest frame. See R. P. Feynman, R. B. Leighton & M. Sands, *The Feynman Lectures on Physics*, Vol. I, chs. 15–17 (Addison–Wesley, 1963); and D. Hestenes, *Space-Time Algebra* (Gordon and Breach, 1966).
 :::
 
-## Worldline segments and proper time {#sec-proper-time-segments}
+## 17.4 Worldline segments and proper time {#sec-proper-time-segments}
 
 In axiomatic treatments of spacetime geometry, [@prop-null-cone-rigidity] is frequently packaged in existential form: any real quadratic form vanishing on the Minkowski null cone is a scalar multiple of $\operatorname{minkowski}_d$.
 

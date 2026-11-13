@@ -1,4 +1,4 @@
-# 把矩阵还原为异或：3 比特刀片与 XOR–Pauli 几何代数引擎
+# 第二十五章 把矩阵还原为异或：3 比特刀片与 XOR–Pauli 几何代数引擎 {#把矩阵还原为异或3-比特刀片与-xorpauli-几何代数引擎}
 
 > *“量子=两子=量(测量)子....”*
 
@@ -17,7 +17,7 @@
 **图 25。** 本章地图：左栏，$e_2 \cdot e_1$ 的两个掩码 $010_2$、$001_2$ 逐位异或成青色的 $011_2$，两条品红的线交叉一次，结果是 $-e_{12}$；中栏，态矢平面上两面青色虚线的镜子，琥珀色的 $u$ 先照 $X$ 再照 $Z$、或先照 $Z$ 再照 $X$，两支墨色箭头指向正相反的两端（[@thm-qubit-weyl-star]）；右栏，琥珀色的向量 $a$ 拆成竖直的青色部分与水平的部分，竖直的 $\pm a_2$ 写在矩阵的对角线上，水平的 $a_0 \mp i a_1$ 写在两个角上（[@cor-bloch-operator-core]）。
 :::
 
-## 外尔对、反对易与无特征标定理 {#sec-weyl-pair-no-character}
+## 25.1 外尔对、反对易与无特征标定理 {#sec-weyl-pair-no-character}
 
 在 Lean 4 模块 `D5/S3/Quantum/FiniteDimensional.lean` 中，单量子比特算符代数被定义为 $2\times 2$ 复矩阵代数 $\mathrm{QubitMatrix} = M_2(\mathbb{C})$（`Matrix (Fin 2) (Fin 2) ℂ`），其中两个基本生成元分别为泡利翻转矩阵与相位矩阵：
 
@@ -78,7 +78,7 @@ $$
 两边乘以 $\frac{1}{2}$（`linear_combination (1 / 2 : ℂ) * hSelfNegating`）即得 $\chi(\operatorname{qubitX})\chi(\operatorname{qubitZ}) = 0$。由整环性质 `mul_eq_zero.mp`，必有 $\chi(\operatorname{qubitX}) = 0$ 或 $\chi(\operatorname{qubitZ}) = 0$。然而由 [@thm-qubit-weyl-star] 的平方归一性 $\operatorname{qubitX}^2 = 1$ 与 $\operatorname{qubitZ}^2 = 1$，又有 $\chi(\operatorname{qubitX})^2 = 1$ 且 $\chi(\operatorname{qubitZ})^2 = 1$；无论哪一个因子为 $0$，代入平方等式均导出 $0 = 1$ 的矛盾。完整证明由 Lean 内核检查。
 :::
 
-## 无公共特征向量与无迹布洛赫算符核 {#sec-no-common-eigenvector-bloch-core}
+## 25.2 无公共特征向量与无迹布洛赫算符核 {#sec-no-common-eigenvector-bloch-core}
 
 [@lemma-qubit-no-character] 在算符代数层面封死了全局乘法特征标；如果退一步，不要求对整个矩阵代数保乘法，只追问：**是否存在哪怕一根非零量子态列向量 $\psi \in \mathrm{QubitState} = (\operatorname{Fin} 2 \to \mathbb{C})$，使它在泡利算符 $\operatorname{qubitX}$ 与 $\operatorname{qubitZ}$ 下同时成为特征向量？**
 
@@ -132,7 +132,7 @@ $$
 在 `D5/S3/Quantum/Measurement/Bloch/QubitBloch.lean:31` 中，证明对矩阵指标调用 `ext i j` 与 `fin_cases i <;> fin_cases j`，将 `B`、`pauliMatrix`（其中 $\sigma_X = \operatorname{qubitX}$，$\sigma_Z = \operatorname{qubitZ}$，$\sigma_Y = i\operatorname{qubitX}\operatorname{qubitZ}$）、`qubitX` 与 `qubitZ` 的定义代入展开，并由 `ring` 逐分量核实 $(0,0)$、$(0,1)$、$(1,0)$、$(1,1)$ 四个矩阵元恒等。完整证明由 Lean 内核检查。
 :::
 
-## 三比特刀片掩码、逆序符号与两比特辛泡利字 {#sec-three-bit-blade-masks-and-symplectic-pauli}
+## 25.3 三比特刀片掩码、逆序符号与两比特辛泡利字 {#sec-three-bit-blade-masks-and-symplectic-pauli}
 
 现在，把 [@thm-qubit-weyl-star] 与 [@cor-bloch-operator-core] 放在一起看：为什么三维实向量 $a = (a_0, a_1, a_2) \in \mathbb{R}^3$ 一旦写进 $2\times 2$ 矩阵，就必须借助虚数单位 $i$ 把第一、二分量耦合在副对角线 $a_0 \mp i a_1$ 上，而把第三分量放在主对角线 $\pm a_2$ 上？
 
@@ -282,7 +282,7 @@ $$
 **四个泡利字的乘法表。** 只用两位：第 0 位记 X，第 1 位记 Z。四个品红格正是左因子含 Z、右因子含 X 的那四格；选中的 Z · X 交换一次，得到 −XZ。这正是合成律 [@thm-weyl-displacement-laws] 取 M = 2 时的指数 bc。
 :::
 
-## 零依赖 Python 3 几何代数引擎实现与自检 {#sec-geometric-state-python-engine}
+## 25.4 零依赖 Python 3 几何代数引擎实现与自检 {#sec-geometric-state-python-engine}
 
 这八块刀片先按实系数组合：上表给出的是实代数 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 的忠实泡利复矩阵表示，其文献归属见 [@rem-clifford-stabilizer-literature]。代码用 `complex` 保存系数，也容纳每块刀片各自独立的复系数；`pauli(x, z, phase)` 的 `1j` 是系数上的外加相位，与实代数内部的体积刀片 $I_3$ 分开记账，扩大的复系数容器不再由上表给出忠实表示。`reverse()` 只倒转刀片因子，按系数线性延拓，不对系数取复共轭；`norm_squared()` 所取的标量部在实系数范围内才是各刀片系数的非负平方和。下一章的旋转器取实系数、只占偶阶刀片，并满足单位条件，因而逆序给出逆元，夹心积完成三维旋转。
 

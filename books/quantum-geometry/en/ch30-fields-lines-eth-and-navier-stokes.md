@@ -1,4 +1,4 @@
-# Fields ($P$) and Lines ($NP$): From the Exponential Time Hypothesis (ETH) to Navier–Stokes Vortex Filaments
+# Chapter 30 Fields ($P$) and Lines ($NP$): From the Exponential Time Hypothesis (ETH) to Navier–Stokes Vortex Filaments {#fields-p-and-lines-np-from-the-exponential-time-hypothesis-eth-to-navierstokes-vortex-filaments}
 
 > *"In the global static time field $P = NP$, but for a finite observer $P \neq NP$. $P$ is a field; $NP$ is a line—constructing the field is hard as scaling heaven, while following the thread sees through in a single step; and when both Navier–Stokes and the $P$/$NP$ problem are cast as fields, they ask the exact same geometric question."*
 

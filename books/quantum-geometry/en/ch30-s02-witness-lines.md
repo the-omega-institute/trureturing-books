@@ -1,10 +1,10 @@
-# "$P$ Is a Field, $NP$ Is a Line"—The Witness Thread, the Guiding Field, and Hairy-Ball Curl {#sec-coda-p-is-field-np-is-line}
+# 30.2 "$P$ Is a Field, $NP$ Is a Line"—The Witness Thread, the Guiding Field, and Hairy-Ball Curl {#sec-coda-p-is-field-np-is-line}
 
 > **Author's Epigraph**: *"P is a field; NP is a line."*（“P是场, NP是线”）
 
 Here a “line” stands for a checkable witness and a “field” for structure guiding efficient solution (`MODEL`). The standard classes satisfy $P\subseteq NP$: efficiently solvable problems also have polynomial-time verifiers, so the two are not disjoint geometric categories. “A line without a field” interprets the difficulty of finding efficient algorithms; it does not define every $NP$ problem.
 
-## 1. Why "$NP$ Is a Line" (`有线无场，横截面为零的见证丝`)
+## 30.2.1 Why "$NP$ Is a Line" (`有线无场，横截面为零的见证丝`) {#1-why-np-is-a-line-有线无场横截面为零的见证丝}
 
 For a decision problem, the $NP$ condition is that an input $w$ is a yes-instance exactly when some witness $y$, of length bounded by a polynomial in the input encoding length, is accepted by a uniform deterministic verifier $V(w,y)$. Verification time must also be polynomially bounded in the input and witness encoding lengths (see [Cook's problem description, pp. 1–3](https://www.claymath.org/wp-content/uploads/2022/06/pvsnp.pdf)). Drawing this checking process as a polygonal thread is the geometric analogy (`MODEL`):
 
@@ -19,7 +19,7 @@ $$
 **One field: straight along the thread, circling off it.** The plane carries a single autonomous field $\mathbf{F} = g(\tilde y)\bigl(1, h'(x)\bigr) + \bigl(1 - g(\tilde y)\bigr)\mathbf{F}_{\mathrm{swirl}}$, with $\tilde y = y - h(x)$, $g(\tilde y) = e^{-\tilde y^2/\varepsilon^2}$, and $\mathbf{F}_{\mathrm{swirl}}$ vanishing on the thread. The probe that starts at $S_0$ exactly on the cyan witness thread $y = h(x)$ runs along it to $S^*$; three magenta probes that start only a little off it, but outside the channel $|\tilde y| < \varepsilon$, are caught by the first vortex under the same integrator and never reach the target. A schematic model of “a thread without a field” (`MODEL`), not a complexity lower bound.
 :::
 
-## 2. Why "$P$ Is a Field" (`弃线造场，局部切面处处对齐全局`)
+## 30.2.2 Why "$P$ Is a Field" (`弃线造场，局部切面处处对齐全局`) {#2-why-p-is-a-field-弃线造场局部切面处处对齐全局}
 
 In our geometric interpretation (`MODEL`), geometric or algebraic structure used by some polynomial-time algorithms is pictured as a **guiding field**, such as a convex gradient flow $\mathbf{F}=-\nabla V$. This is neither the definition of $P$ nor a necessary condition for membership. Even a smooth or curl-free field requires an analysis showing that it can be computed efficiently, reaches the required precision, and terminates in polynomially many steps. The following classical algorithms offer concrete points of comparison:
 
@@ -35,7 +35,7 @@ In our geometric interpretation (`MODEL`), geometric or algebraic structure used
 **A field: a slope everywhere.** The cyan flow lines start from all over the sphere; each looks only at the slope underfoot, and each flows to the target. The amber line is the chosen one, and the field vanishes at the opposite point (the grey ring). Reading it as a "field" is this book's interpretation (`MODEL`).
 :::
 
-### From Actual Vertex Rotations to Face-Odd Orientations: A Finite Combinatorial Prerequisite {#sec-ch30-rotation-parity}
+### 30.2.2.1 From Actual Vertex Rotations to Face-Odd Orientations: A Finite Combinatorial Prerequisite {#sec-ch30-rotation-parity}
 
 The full planar-matching result above has geometric, combinatorial, algebraic, and algorithmic parts. We first isolate a finite combinatorial question: given the cyclic order of the original graph's edges at each vertex, can one choose a single edge orientation for which every face and every even simple cycle whose deletion leaves a perfect matching has an odd number of opposing darts? A dart is an actual edge with a direction. A bridge, for example, has two reverse darts; a facial traversal that goes out and back along it must count both occurrences. An edge set alone would lose this information.
 
@@ -339,7 +339,7 @@ Two rows can be done by hand. $C_5$ with $k = 2$: suppose every edge has exactly
 3. The equivalence between colorings and orientations was published independently by T. Gallai, M. Hasse, B. Roy and L. M. Vitaver in the 1960s; its special case for complete graphs, that every tournament has a directed path through all of its vertices, was proved earlier by L. Rédei (1934).
 :::
 
-## 3. Hairy-Ball Curl ($\nabla \wedge \mathbf{F}$) as a Geometric Analogy for $P \neq NP$: Why One Line Cannot Hold Up a Field
+## 30.2.3 Hairy-Ball Curl ($\nabla \wedge \mathbf{F}$) as a Geometric Analogy for $P \neq NP$: Why One Line Cannot Hold Up a Field {#3-hairy-ball-curl-f-as-a-geometric-analogy-for-pnp-why-one-line-cannot-hold-up-a-field}
 
 Why is it so difficult to construct such a polynomial-time guiding field for $\mathrm{NP}$-complete problems like 3-SAT? Expressed as a continuous differential-geometric analogy (`MODEL`, intended as geometric intuition rather than a formal proof of [@conj-p-neq-np]):
 

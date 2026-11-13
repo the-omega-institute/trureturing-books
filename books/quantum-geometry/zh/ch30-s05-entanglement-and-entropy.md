@@ -1,10 +1,10 @@
-# “量子纠缠、P=NP、熵”——偏迹视界、勾股守恒与张量割键维的正交三位一体 {#sec-ch30-entanglement-entropy-complexity-triad}
+# 30.5 “量子纠缠、P=NP、熵”——偏迹视界、勾股守恒与张量割键维的正交三位一体 {#sec-ch30-entanglement-entropy-complexity-triad}
 
 > **作者原话**：“量子纠缠、P=NP、熵”
 
 当把 **“量子纠缠、P=NP、熵”** 这三个横跨量子信息、计算复杂性与热力学的核心词并置在同一座克利福德正交坐标系中时，它们不再是三门互不相干的学科术语，而是围绕**同一道局部偏迹视界**咬合在一起的正交三位一体（`MODEL`）：跨割双向量外积 $\mathbf{e}_A \wedge \mathbf{e}_{\bar{A}}$ 给出**量子纠缠**；有限观察者因无法读取对偶半区 $\bar{A}$ 而取偏迹截断 $\rho_A = \Tr_{\bar{A}}\bigl(\lvert\Psi\rangle\langle\Psi\rvert\bigr)$，把被切掉的跨割相干性转化为局部边缘**熵**；而跨越这道分割面维持或缩并关联所需的精确施密特秩 $\chi_{\mathrm{exact}}$ 及其熵有效维数下界 $\chi_{\mathrm{eff}} = 2^{S_{\mathrm{cut}}} \le \chi_{\mathrm{exact}}$，则在面积律导向场与体积律阻挫网之间刻画出局部计算复杂度的分水岭（对照标准统一图灵机开放猜想 [@conj-p-neq-np]，`OPEN`）。
 
-## 1. 双体纯态的精确勾股守恒与偏迹边缘熵（`LEAN ✓` 锚点 + 精确恒等式）
+## 30.5.1 双体纯态的精确勾股守恒与偏迹边缘熵（`LEAN ✓` 锚点 + 精确恒等式） {#1-双体纯态的精确勾股守恒与偏迹边缘熵lean--锚点--精确恒等式}
 
 取由正交施密特角 $\theta \in [0, \pi/2]$ 参数化的典范双量子比特纯态
 
@@ -43,7 +43,7 @@ $$
 **双体勾股守恒与偏迹盲区。** 在 $\theta = 53.13^\circ$（经典 $3\text{-}4\text{-}5$ 直角三角形）处，左半区观察者 $A$ 的青色布洛赫箭头长度 $\cos\theta = 0.600$，跨割双向量并发度 $\sin\theta = 0.800$，平方和 $0.360 + 0.640 = 1.000$。降下的品红/紫罗兰偏迹视界刀片遮蔽对偶半区 $\bar{A}$，把跨割外积面转化为 $A$ 侧的边缘混合熵光晕（$S_L = \tau = 0.640$，$S_{\mathrm{vN}} \approx 0.722\text{ bits}$）。
 :::
 
-## 2. 纠缠拓扑分水岭：面积律导向场 vs. 体积律指数键维墙（`MODEL` + 文献边界）
+## 30.5.2 纠缠拓扑分水岭：面积律导向场 vs. 体积律指数键维墙（`MODEL` + 文献边界） {#2-纠缠拓扑分水岭面积律导向场-vs-体积律指数键维墙model--文献边界}
 
 把一对量子比特推广到由 $n$ 个量子比特（实验室舞台取 $n = 16$：左半区观察者 $A$ 含 $8$ 比特，右半区对偶 $\bar{A}$ 含 $8$ 比特）组成的张量网络。按照第十九章离散桥图量子最大流—最小割定理 [@thm-bridge-quantum-maxflow-mincut] 揭示的跨割秩上界机制，讨论二分割 $A \mid \bar{A}$ 时须严格区分两个量：**精确施密特秩** $\chi_{\mathrm{exact}} := \operatorname{rank}(\rho_A)$（决定沿该割做无截断精确分解所需的最小键维）与**熵有效维数** $\chi_{\mathrm{eff}} := 2^{S_{\mathrm{vN}}(\rho_A)}$（实验室舞台柱高直接记作 $\chi_{\mathrm{eff}} = 2^{S_{\mathrm{cut}}}$）。一般有限维密度算符恒满足 $S_{\mathrm{vN}}(\rho_A) \le \log_2 \operatorname{rank}(\rho_A) = \log_2 \chi_{\mathrm{exact}}$，故
 
@@ -68,7 +68,7 @@ $$
 **体积律：同角度下八桥交织撑起指数键维墙。** 保持同一个单对角 $\theta = 60^\circ$ 不变，切换为 $k_{\mathrm{cut}} = 8$ 条非局域扩展桥跨越割面后，截断熵翻四倍至 $S_{\mathrm{cut}} \approx 6.490\text{ bits}$，熵有效维数跃升至 $\chi_{\mathrm{eff}} = 2^{S_{\mathrm{cut}}} = 4^8 / 3^6 \approx 89.90 \le \chi_{\mathrm{exact}} = 2^8 = 256$。
 :::
 
-## 3. 纠缠的双刃剑：局部单配性复杂度防火墙 vs. 全局相干读取（`文献结果` + `OPEN`）
+## 30.5.3 纠缠的双刃剑：局部单配性复杂度防火墙 vs. 全局相干读取（`文献结果` + `OPEN`） {#3-纠缠的双刃剑局部单配性复杂度防火墙-vs-全局相干读取文献结果--open}
 
 量子纠缠在计算复杂性版图上呈现出震撼的“双刃剑”效应——它既是锁死局部有限观察者的热力学与复杂度防火墙，又是在额外全局或交互资源下击穿经典验证界限的非局域引擎。相关外部文献定理及其严格前提汇总于以下注记中：
 
@@ -98,7 +98,7 @@ $$
 **抬起刀片：同一个态在全局纯态读出下满足 $r_{\mathrm{global}} = 1$ 与 $S(\rho_{AB}) = 0$。** 不改动联合态 $\lvert\Psi\rangle$（其固定割精确施密特秩 $\chi_{\mathrm{exact}} = 256$ 与边缘熵 $S(\rho_A) = 8\text{ bits}$ 保持不变），抬升品红/紫罗兰偏迹刀片展示 $A \leftrightarrow \bar{A}$ 的八条双向量纠缠桥，全局纯态密度算符满足秩 $r_{\mathrm{global}} = 1$ 且全局熵 $S(\rho_{AB}) = 0\text{ bits}$（将局部边缘重构盲区与幺正制备或额外交互资源作对比属诠释 `MODEL`，文献边界见 [@rem-ch30-entanglement-entropy-complexity-literature]）。
 :::
 
-## 4. 三种特征正交角 $\theta \in \{0^\circ,\, \theta^* \approx 42.35^\circ,\, 90^\circ\}$ 与活体观察者平衡（`MODEL`）
+## 30.5.4 三种特征正交角 $\theta \in \{0^\circ,\, \theta^* \approx 42.35^\circ,\, 90^\circ\}$ 与活体观察者平衡（`MODEL`） {#4-三种特征正交角-θ0θ423590-与活体观察者平衡model}
 
 既然 $\theta = 0^\circ$ 是零纠缠、零边缘熵的孤立经典纯点，而 $\theta = 90^\circ$ 是局部指向彻底归零（$\|\mathbf{r}_A\| = 0$）、被最大混合熵迷雾吞没的贝尔视界，那么一个既要保持局部自身记忆指向、又要与外部世界维持纠缠信息交换的有限活体观察者，应当驻留在正交象限的哪一处？在作者的正交自指诠释（`MODEL`）中，答案再次落在第二十四章有理逆级数端点定理 [@thm-dottie-rational-inverse-endpoint] 唯一锁定的正余弦不动点 $\cos\theta^* = \theta^* \approx 0.7391\text{ rad}$（$42.35^\circ$）上：此处局部布洛赫长度恰好等于施密特角弧度本身（$\|\mathbf{r}_A\| = \cos\theta^* = \theta^*$），局部确定性权重 $\|\mathbf{r}_A\|^2 \approx 0.5462$ 与跨割纠缠度 $\tau = S_L \approx 0.4538$（并发度 $\mathcal{C} = \sin\theta^* \approx 0.6736$）实现黄金呼吸，单比特边缘冯·诺依曼熵稳定在适中的 $S_{\mathrm{vN}}(\rho_A) \approx 0.559\text{ bits}$（五位小数 $0.55869\text{ bits}$）。下表汇总三个特征角度的精确账本：
 

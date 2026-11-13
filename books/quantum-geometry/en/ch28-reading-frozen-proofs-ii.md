@@ -1,4 +1,4 @@
-# Inside the Lean 4 Axiom Sanctuary (Part II): From Rank-One Born Reduction to Unread Fixed Points and $\psi = \psi(\psi)$
+# Chapter 28 Inside the Lean 4 Axiom Sanctuary (Part II): From Rank-One Born Reduction to Unread Fixed Points and $\psi = \psi(\psi)$ {#inside-the-lean-4-axiom-sanctuary-part-ii-from-rank-one-born-reduction-to-unread-fixed-points-and-ψψψ}
 
 > *"This is the $\psi = \psi(\psi)$ that we studied at the beginning."*
 
@@ -12,7 +12,7 @@ In this concluding chapter of Part VII, we audit four frozen declarations from `
 **Figure 28.** The chapter at a glance. Left panel: the amber arrow $\psi$ casts a cyan shadow $\lvert\langle\phi\mid\psi\rangle\rvert = 3/5$ on the cyan line $\phi$, and the cyan square on that shadow is the record weight $9/25$ ([@thm-audit-rank-one-born]). Middle panel, upper half: a bar of length $1$ split by the weights $w_0 = 9/25$ and $w_1 = 16/25$, which together make the unread state ([@lemma-audit-born-pairing-weight]); lower half: each piece divided by its own weight fills a whole bar, so each conditional state has trace $1$ again ([@prop-audit-conditional-state]). Right panel: $\rho$ with magenta cross blocks is changed by the pinching, while $\rho'$ with its cross blocks struck out is a fixed point ([@cor-audit-unread-fixed-iff]). The numbers come from the worked example at the end of the chapter.
 :::
 
-## Source Anatomy of the Rank-One Born Reduction and Three-Conjunct Pairing Bridge {#sec-audit-rank-one-born-and-pairing}
+## 28.1 Source Anatomy of the Rank-One Born Reduction and Three-Conjunct Pairing Bridge {#sec-audit-rank-one-born-and-pairing}
 
 In [Chapter 1](ch01-measurement.md) and [Chapter 2](ch02-born-rule.md), we saw that when both the state $\rho = \lvert\psi\rangle\langle\psi\rvert$ and the projector $P_k = \lvert\phi\rangle\langle\phi\rvert$ have rank one, the trace pairing $\Tr(\rho P_k)$ collapses to the squared modulus of the inner product $\lvert\langle\phi \mid \psi\rangle\rvert^2$. Let us open `D5/S3/Observer/BornReduction.lean:27` and inspect the exact Lean 4 proof (Panel I of Figure 28).
 
@@ -104,7 +104,7 @@ Lines 57–91 of `RankOneBornPairingWeight.lean` also include three anonymous `e
 **The three-conjunct bridge: one conjunct borrows the previous theorem, one holds by definition, one splits each term into two cases.** The green "① rank one" is [@thm-audit-rank-one-born]; ② is `rfl`; ③ is `unread_eq_weighted_ensemble`, which branches for each $j$ on whether $w_j$ vanishes — if not, the scalar factors cancel; if so, the dashed hypothesis $\rho \succeq 0$ forces $P_j \rho P_j = 0$. All three meet in the green [@lemma-audit-born-pairing-weight]; in the figure $\rho_j$ stands for $\operatorname{conditionalState}(P, \rho, j)$.
 :::
 
-## Lüders Conditional State Validity and the Unread Fixed-Point Equivalence {#sec-audit-conditional-state-and-fixed-point}
+## 28.2 Lüders Conditional State Validity and the Unread Fixed-Point Equivalence {#sec-audit-conditional-state-and-fixed-point}
 
 We now turn to lines 108 and 143 of `D5/S3/Observer/Conditioning.lean` (lower-middle and right panels of Figure 28). Given an outcome $k \in \kappa$, the **Lüders conditional state** is defined at `Conditioning.lean:137` as
 
@@ -176,7 +176,7 @@ The full proof is checked by the Lean kernel.
 **The four theorems Chapter 28 dissects.** Cyan lines run from the foot of Chapter 28 to four filled green cells in Chapters 2 and 3; the amber frame is the unread fixed-point criterion ([@cor-audit-unread-fixed-iff]), which first appears in Chapter 3, and the amber lines go to the other chapters that cite it.
 :::
 
-## Comprehensive Audit Table of Frozen Declarations Across Parts IV–VI {#sec-parts-iv-to-vi-frozen-audit-table}
+## 28.3 Comprehensive Audit Table of Frozen Declarations Across Parts IV–VI {#sec-parts-iv-to-vi-frozen-audit-table}
 
 Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md), the table below records the exact source files, line numbers, `statement_id` prefixes, and formal contracts for the declarations audited in this chapter together with representative frozen declarations across Parts IV, V, and VI at commit [{commit}](trureturing:).
 
