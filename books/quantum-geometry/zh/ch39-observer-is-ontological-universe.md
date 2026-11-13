@@ -722,9 +722,27 @@ $q=0$ 时两重求和为空，按零计。
 正的对角元保证前代入给出实际逆矩阵。奇数重复使每对中的两个正项之积恰为 $1/[t(2l)t(2(l+d+1))]\ge1$，所以每对之和至少为 $2$。三角形指标域共有 $q(q+1)/2$ 对，求和即得下界。完整证明由 Lean 内核检查。
 :::
 
-若 $m=2q+1$、$s$ 为偶数，实际词满足 $W_{s+i+m}=W_{s+i}$（$0\le i<m-1$），且 $s+2m\le N_j$，则可取 $t(i)=t_{W_{s+i}}$ 来匹配这一矩阵模型及前缀内的 $2m$ 站点窗口。所需窗口可以从替代词本身构造；下面给出构造与尺度估计，并明确它与本书现有 Lean 钉版的区别。
+若 $m=2q+1$、$s$ 为偶数，实际词满足 $W_{s+i+m}=W_{s+i}$（$0\le i<m-1$），且 $s+2m\le N_j$，则可取 $t(i)=t_{W_{s+i}}$ 来匹配这一矩阵模型及前缀内的 $2m$ 站点窗口。下面的定理从替代词本身给出所需窗口及其与前缀长度的统一比较。
 
-::: {.example #ex-ch39-p2e-aligned-tribonacci-windows title="奇数重复窗口的显式构造（尚未纳入本书 Lean 钉版）"}
+::: {.theorem #thm-ch39-p2e-aligned-tribonacci-windows title="实际 Tribonacci 前缀中的均匀奇数重复窗口" lean="D5/S1/Words/TribonacciAlignedWindows.aligned_windows"}
+对上述实际词 $W$、替代长度 $L_j=|\sigma^j(A)|$ 与偶数前缀长度 $N_j=2\lfloor L_j/2\rfloor$，存在自然数 $K>0$、$J\ge1$，使每个自然数 $j\ge J$ 都有自然数 $m,s$ 满足
+
+$$
+\begin{aligned}
+m&\ge3,\qquad m\text{ 为奇数},\quad s\text{ 为偶数},\\
+N_j&\le Km,\qquad s+2m\le N_j,\\
+W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
+\end{aligned}
+$$
+
+最后一行对范围内的每个自然数 $i$ 成立；常数 $K,J$ 不随 $j$ 改变。
+:::
+
+::: proof
+形式证明取 $K=128$、$J=4$。第四次替代中的两份 $ABA$ 提供重复块，四步替代保持三个字母像长度的奇性，从而给出奇数块长与偶数起点。非空尾段保证向下取偶数后仍包含整个窗口，七步长度增长给出因子 $128$。下面的例子展开这一构造；完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-ch39-p2e-aligned-tribonacci-windows title="奇数重复窗口的显式构造"}
 对每个 $j\ge4$，令 $r=\lfloor(j-4)/4\rfloor$、$k=4r$，于是 $k+4\le j\le k+7$。将第四次替代写成四段：
 
 $$
@@ -747,7 +765,7 @@ W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
 \end{aligned}
 $$
 
-这里 $s,m$ 都是非负整数；常数 $128$ 与 $j$ 及跃迁参数 $\rho$ 无关。这一构造对应形式化仓库的 [PR #30107](https://github.com/the-omega-institute/trureturing/pull/30107)，尚未纳入本书锁定的提交，因此本例不标为本书的 Lean 验证定理。
+这里 $s,m$ 都是非负整数；常数 $128$ 与 $j$ 及跃迁参数 $\rho$ 无关。这给出 [@thm-ch39-p2e-aligned-tribonacci-windows] 中常数与窗口的具体选择。
 :::
 
 窗口的字组合构造与全链的谱估计是两个不同步骤。局部块的逆矩阵如何嵌入整个前缀的逆矩阵，以及质量下界如何转成算子范数和谱隙估计，仍需分别证明。特别是，对每个固定 $\rho\in(0,1)$，是否存在 $C_\rho>0$ 与整数 $J_\rho\ge1$，使所有 $j\ge J_\rho$ 都满足 $\delta_{\rho,j}\le C_\rho/N_j$，仍是待证的定量目标；它若成立便可推出前述开链极限，但不能结算分形熵标度问题。

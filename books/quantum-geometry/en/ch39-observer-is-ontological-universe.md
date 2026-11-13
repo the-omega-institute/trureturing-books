@@ -722,9 +722,27 @@ For $q=0$, both sums are empty and have value zero.
 The positive diagonal lets forward substitution produce the actual inverse. Odd repetition makes the product of the two positive entries in each pair exactly $1/[t(2l)t(2(l+d+1))]\ge1$, so their sum is at least $2$. The triangular index domain has $q(q+1)/2$ pairs, giving the bound. The full proof is checked by the Lean kernel.
 :::
 
-If $m=2q+1$, $s$ is even, $W_{s+i+m}=W_{s+i}$ for $0\le i<m-1$, and $s+2m\le N_j$, setting $t(i)=t_{W_{s+i}}$ matches this matrix model and a $2m$-site window inside the prefix. The required windows can be constructed from the substitution word itself. The construction and scale estimate below are distinguished from the results included in this book's current Lean pin.
+If $m=2q+1$, $s$ is even, $W_{s+i+m}=W_{s+i}$ for $0\le i<m-1$, and $s+2m\le N_j$, setting $t(i)=t_{W_{s+i}}$ matches this matrix model and a $2m$-site window inside the prefix. The following theorem constructs the required windows from the substitution word itself and compares their lengths uniformly with the prefix length.
 
-::: {.example #ex-ch39-p2e-aligned-tribonacci-windows title="An Explicit Odd Repetition Window (Not Yet Included in This Book's Lean Pin)"}
+::: {.theorem #thm-ch39-p2e-aligned-tribonacci-windows title="Uniform Odd Repetition Windows in Actual Tribonacci Prefixes" lean="D5/S1/Words/TribonacciAlignedWindows.aligned_windows"}
+For the actual word $W$ above, the substitution lengths $L_j=|\sigma^j(A)|$, and the even prefix lengths $N_j=2\lfloor L_j/2\rfloor$, there are natural constants $K>0$ and $J\ge1$ such that every natural $j\ge J$ admits natural numbers $m,s$ satisfying
+
+$$
+\begin{aligned}
+m&\ge3,\qquad m\text{ is odd},\quad s\text{ is even},\\
+N_j&\le Km,\qquad s+2m\le N_j,\\
+W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
+\end{aligned}
+$$
+
+The last line holds for every natural $i$ in the displayed range; the constants $K,J$ do not vary with $j$.
+:::
+
+::: proof
+The formal proof takes $K=128$ and $J=4$. The two copies of $ABA$ in the fourth iterate supply the repeated blocks. Four substitution steps preserve oddness of all three letter-image lengths, giving an odd block length and an even starting position. A nonempty tail keeps the whole window inside the prefix after even rounding, and seven length-growth steps give the factor $128$. The example below spells out this construction; the full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-ch39-p2e-aligned-tribonacci-windows title="An Explicit Odd Repetition Window"}
 For each $j\ge4$, set $r=\lfloor(j-4)/4\rfloor$ and $k=4r$, so $k+4\le j\le k+7$. Split the fourth iterate into four pieces:
 
 $$
@@ -747,7 +765,7 @@ W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
 \end{aligned}
 $$
 
-Here $s,m$ are nonnegative integers, and the constant $128$ is independent of $j$ and the hopping parameter $\rho$. This construction corresponds to the formalization repository's [PR #30107](https://github.com/the-omega-institute/trureturing/pull/30107). It is not yet included in this book's pinned commit, so this example is not labelled as a Lean-verified theorem of the book.
+Here $s,m$ are nonnegative integers, and the constant $128$ is independent of $j$ and the hopping parameter $\rho$. This gives explicit choices of the constants and windows in [@thm-ch39-p2e-aligned-tribonacci-windows].
 :::
 
 Constructing a word window and estimating the spectrum of the whole chain are separate steps. Embedding the local inverse into the inverse of the whole prefix, and converting the mass bound into operator-norm and spectral-gap estimates, still require proofs. In particular, it remains open here whether, for every fixed $\rho\in(0,1)$, there are $C_\rho>0$ and an integer $J_\rho\ge1$ such that $\delta_{\rho,j}\le C_\rho/N_j$ for every $j\ge J_\rho$. Such a bound would imply the preceding open-chain limit; the fractal entropy-scaling problem would still remain.
