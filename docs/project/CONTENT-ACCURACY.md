@@ -1382,3 +1382,36 @@ EPUB、EPUBCheck 与 PDF 阅读尺度子集未完成：本次可用的命名系�
 验证（未提交补丁）：改动前原套件普通与 `VIZ_SLOW_FRAMES=1000` 均 133/133。新套件逐字保留原 133 项名称与条件（纯插入），另增 40 项；期望值由测试从中英 SUMMARY 与中英章节重新读取（两种语言各单元引用集合一致），不取页面数据或生成器。覆盖：桌面中文滑杆（含“无”）、桌面英文与 334px 书内中英点柱脚，各为 44 柱 × 两种引用方式 × 三种筛选；附录 D 在 1440／740／334px 中英六个画面；两条带点声明在同六个画面；549 格逐格点选的链接在桌面中文与 334px 英文各核一遍；书内画面先等自动播放开始，再按 End 停在全书。普通与慢帧均 173/173、退出码 0；同一新套件在原 `main.js` 上为 149/173，失败的 24 项全是新增项，原 133 项仍全过。官方截图（桌面、书内、手机中英与封面）已查看；重出的 15 张静帧与输入逐字节相同。`./tbook check` 0 错误、9 警告（1 张未引用静态图、8 段影片的历史 subject_commit），警告保留。
 
 限制与待办：只修这三项。第 32／33 章手机阅读的实际失败 F1／F2、旧 a118／547 输出边界、原生 EPUB 未验证均保留；本次未做整书 HTML／PDF／EPUB 构建或输出验证，完整输出验证、原 FIRST R1 与 Git／PR／CI／合入／Pages 仍由调用方负责，最终整书输出采纳保留 1 未用。本批不构成媒体、整章或整书批准。手机英文柱脚“Co A B D”偏挤、选中声明名只显示最后一段、英文首选字体在本地回退等既有现象未改。
+
+
+## 2026-11-13：声明地图当前 pin 的静帧对应（PR211，实施交接，待独立审查）
+
+输入 HEAD `48437a7d7a2fec5b3d086eae17b1774820dd86a8`，已合入但未提交的主线输入为 `347ef8d1448e3642b7965b37ee24245ba3eca633`；输入收据 `caller-merged-input.json` 的 SHA-256 为 `3e17e741e3404d6e06dce101f14a207fe2922723c1351cf12faaf146c14247b8`，2146 条显式源清单 SHA-256 为 `7d137932a534bfdb5c453fddb1ce4c018d11e69e3c55c9dea9962cebac88f08f`。当前 pin 是 `e526f0f5e3a1e84b05f05c0c009eab920bc3a06f/dev`，锁文件 SHA-256 为 `56908ce09a6cb1f54e4c6fa5d2463d3391947970748c8eb3af2b0afe4562e7a5`，549 条声明、每种语言 45 个单元。主线此次仅更新 pin 元数据及地图 JPG 消费者，旧 pin 的静帧证据保留其历史输入，不直接代替本次对应。
+
+本次只按原有官方生产器与工具重出 15 张 JPG，没有改生产器、DATA、测试、登记表、章节、锁文件、技能或托管文件。`main.js` SHA-256 仍为 `6a15b7dd1cc6f06eee5003eddee81619eede50c294ed39a8faa3589a1d05ef8d`；DATA 仍为 67184 字节、SHA-256 `4fdd7427cff12426be1c4722cf9b6c0c8dea8560df4e1c2d71235d337c554dc7`，未运行数据生成器。普通模式 `node books/quantum-geometry/viz/tests/lean-declaration-map.test.mjs` 与 `VIZ_SLOW_FRAMES=1000 node books/quantum-geometry/viz/tests/lean-declaration-map.test.mjs` 各运行一次，均退出 0、173/173（原 133 项与新增 40 项保留）。`node tools/node/viz-thumbs.mjs quantum-geometry lean-declaration-map` 与 `node tools/node/viz-shots.mjs quantum-geometry lean-declaration-map --out <本次私有证据>/work/shots` 各运行一次，均退出 0。完整 `./tbook check` 的实际结果另存本次实施证据；不把截图当作书内、PDF、EPUB 或原生阅读器证据。
+
+当前锁文件提供的 549 条源码链接在桌面中文与 334px 书内英文逐格点选核对，均使用当前仓库、提交及声明自身的 `module`／`line`；带点名称 `BargmannImaginaryMaximizers.Latitude.latitude_dot` 与 `Third.E₃.bound''` 在六个宽度／语言画面中分别仍指向 `BargmannImaginaryMaximizers.lean#L318` 与 `Third.lean#L335`。1062 个章节／引用方式／筛选状态在普通与慢帧中均无不符；附录 C 不设柱，附录 D 回看自身 28 条行内引用、只看环境时为 0。此为链接、控件及引用对应证据，不增加 Lean 内核、导入上下文或整单元准确性认可。
+
+已实际打开全部 15 张重出 JPG，以及桌面、740px 嵌入、390px 手机的中英画面和无字封面；官方截图工具只生成一张无字封面，没有单独的英文封面截图。卡图均为 1600×900，封面为 1280×720。读图可见全书 549/549、仅行内 161/161、定理 400/400、第二十七章环境／全部 4/32、第二十八章环境／全部 4/44。重出 15 张与初始工作文件逐字节相同；这不构成 Git 冲突选边，十四个二进制冲突的索引仍由调用方结算。以下为本次重出的文件字节数与 SHA-256（路径均在 `books/quantum-geometry/viz/lean-declaration-map/` 下）：
+
+| 文件 | 字节 | SHA-256 |
+| --- | ---: | --- |
+| `fig-all.en.jpg` | 124443 | `77a5073f5ab32a27fa71c83a545f5699fd7f0f9ad6a44124876afadaba51c8cd` |
+| `fig-all.zh.jpg` | 118847 | `1245521d785b71fb1c62c0012039d555aa5ecc4b09d162a46025836cb70a3a4a` |
+| `fig-bedrock.en.jpg` | 157606 | `1663d01309a5c063130d1f23b4836d858df01eac2b8c01ddd4886acb250cf847` |
+| `fig-bedrock.zh.jpg` | 152283 | `1d4685a09b0060182c365183fcc8ef8d05310727532cf686ca0702d485509fa5` |
+| `fig-closure.en.jpg` | 142256 | `0ef9784283fc5bd472b0f3fa53bcce96f35a125c6a9eef10efe2ac36b83d5724` |
+| `fig-closure.zh.jpg` | 136913 | `4af862b9155e639d37f205e5b1aad1fb5e69ab22e427e3f5a1a2a191b5084aae` |
+| `fig-inline.en.jpg` | 88687 | `c0c15cc8baf50492228bf31e547f4f755acd7f45bd5d830adb00590d05e2de57` |
+| `fig-inline.zh.jpg` | 83096 | `aae47bae6612a43f28fd76dd4094eba7ad8a1a290409210267fbeb38598d30d6` |
+| `fig-table27.en.jpg` | 159078 | `008382ac88ab58290e6d2ea21f82eaa594c0366255838f02cf3a58614aae4229` |
+| `fig-table27.zh.jpg` | 153726 | `428eea9f37fbacf80e22e1922fb2328094b3b79cf9b9b45e1583ec82ced94f2f` |
+| `fig-table28.en.jpg` | 146490 | `65beb72d2bdfa0e86e74cdc2f56280323334b77f2abd1a77ab9d96820e5ca75b` |
+| `fig-table28.zh.jpg` | 141149 | `f33ad7fe8d2df6b581044bca02cf86e265c449073d6c1796b006211afa7a9c25` |
+| `fig-theorems.en.jpg` | 112607 | `4e884a0e840b37989ead6af264a74fb1a05a133c480ad67292e03f93364fbd0d` |
+| `fig-theorems.zh.jpg` | 107030 | `d0321bc58eb010a826d5d986019e2207cd8e813d35690789a7008198d7ebf10a` |
+| `thumb.jpg` | 95703 | `8d9cacca8fc346bd324baa58dee09d8b75d5323703e7be81a8c04bd2932f8a0b` |
+
+可读性限制保持：手机英文柱脚 Co 与 A 相贴、尾部组名退为点；中文“终ABD”紧挤，图例折两行；740px 嵌入截图截在自动播放中途（中文 31/549、英文 29/549），不是全书终态截图。英文首选字体在本地回退的既有记录没有被独立排除，打印与 PDF／EPUB 页面尺度的字体和静帧可读性未验证。选中声明名只显示最后一段等既有行为未改。第 32／33 章手机阅读 F1／F2、旧 a118／547 输出边界与原生 EPUB 未验证仍保留。
+
+本次有限额度为一项实施、一次媒体执行、普通／慢帧各一次、官方截图与静帧生成各一次，均已用；没有追加重试、生产器修复、书籍导出、编译器或安装操作。原 FIRST R1、当前候选 HTML／PDF／EPUB／原生／手机 F1／F2 与独立审查、导入上下文对应、Git／PR／CI／合入／Pages 仍由调用方继续；旧额度不重置，最终整书输出保留 1 未用。本记录只交接当前 pin 的生成消费者对应，不作独立批准、整章或整书满足声明。
