@@ -1,5 +1,5 @@
-"""486 条锁定声明的对账：种类 × 出现方式（附录 C §C.4）。
-The ledger of the 486 locked declarations: kind × how the book cites them (appendix C, C.4).
+"""489 条锁定声明的对账：种类 × 出现方式（附录 C §C.4）。
+The ledger of the 489 locked declarations: kind × how the book cites them (appendix C, C.4).
 
 Nothing is typed by hand. Kinds come from trureturing.lock.json (theorem; def and inductive together). How a
 declaration is cited comes from the Chinese chapters, appendix C left out: by a `lean="…"` attribute on a `:::`
@@ -45,18 +45,18 @@ CELL, IDX = ledger()
 GET = lambda k, h: CELL.get((k, h), 0)
 THM = sum(GET("thm", h) for h in ("env", "media", "inline"))
 DEF = sum(GET("def", h) for h in ("env", "media", "inline"))
-assert (GET("thm", "env"), GET("thm", "media"), GET("thm", "inline")) == (254, 3, 81)
-assert (GET("def", "env"), GET("def", "media"), GET("def", "inline")) == (96, 0, 52)
-assert (THM, DEF, THM + DEF) == (338, 148, 486) and IDX == {"T": 257, "D": 96, "R": 133}
+assert (GET("thm", "env"), GET("thm", "media"), GET("thm", "inline")) == (256, 3, 81)
+assert (GET("def", "env"), GET("def", "media"), GET("def", "inline")) == (97, 0, 52)
+assert (THM, DEF, THM + DEF) == (340, 149, 489) and IDX == {"T": 259, "D": 97, "R": 133}
 
 ALT = {
     "zh": "一张两行三列的账：行是定理与定义，列是“定理或定义环境里用 lean= 引用”“由媒体引用、正文只以行内链接提到”“只在行内链接里出现”。"
-          "定理一行是 254、3、81，合计 338；定义一行是 96、0、52，合计 148；总计 486。三个虚线框标出附录 C 的三张索引："
-          "C.1 = 254 + 3 = 257，C.2 = 96，C.2.1 = 81 + 52 = 133。",
+          "定理一行是 256、3、81，合计 340；定义一行是 97、0、52，合计 149；总计 489。三个虚线框标出附录 C 的三张索引："
+          "C.1 = 256 + 3 = 259，C.2 = 97，C.2.1 = 81 + 52 = 133。",
     "en": "A ledger of two rows and three columns: the rows are theorems and definitions, the columns are cited with lean= in "
-          "an environment, cited by media and only inline in the text, and reached by inline links only. The theorem row reads 254, 3, 81, total 338; "
-          "the definition row 96, 0, 52, total 148; in all 486. Three dashed frames mark the three indexes of appendix C: "
-          "C.1 = 254 + 3 = 257, C.2 = 96, C.2.1 = 81 + 52 = 133.",
+          "an environment, cited by media and only inline in the text, and reached by inline links only. The theorem row reads 257, 3, 81, total 341; "
+          "the definition row 97, 0, 52, total 149; in all 489. Three dashed frames mark the three indexes of appendix C: "
+          "C.1 = 256 + 3 = 259, C.2 = 97, C.2.1 = 81 + 52 = 133.",
 }
 
 
