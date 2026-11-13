@@ -278,7 +278,7 @@
 **有限切片与公平律**
 
 **纯几何与拓扑：**
-格拉姆椭圆体 $\det G > 0$（`文献结果`）
+实对称格拉姆椭圆体 $G \succeq 0,\; G_{ii}=1$（含奇异边界，`文献结果`）
 
 **量子与粒子规范场：**
 互补勾股、不可克隆与 CKW 单配性（`LEAN ✓` / `文献结果`）
@@ -290,7 +290,7 @@
 希尔伯特互反律 $\prod_v (a,b)_v = +1$（`文献结果`）与有限素数筛
 
 **计算复杂性与流体场：**
-亚指数张量缝隙跨宇宙交叉尺度 $2^{558}$（`文献结果`）
+亚指数张量缝隙的跨宇宙交叉尺度约 $2^{558}$（取 $c=1$ 的示意曲线比较，`MODEL`；见 [@ex-ch30-galactic-crossover-scale]）
 
 **观察者与灵魂动力学：**
 内部窗口相位 $u \in E_\perp^3$、遗忘重置与环面遍历全息（`LEAN ✓` / `MODEL`）
@@ -383,14 +383,14 @@
 **文献结果，未在本书形式化。** 下述八大外部理论纲领的代表性数学物理结论均引自相应领域经典文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中；每一阵营随附的“三维坐标诊断与合拢机制”则明确标定为本书原创元统一诠释模型（`MODEL`）：
 
 1. **第一阵营（世界面 vs. 面积量子）：超弦/M 理论与圈量子引力**
-   - **外部文献结论**：超弦微扰世界面外尔（Weyl）共形反常在玻色弦 $D = 26$、超弦 $D = 10$（M 理论 $D = 11$）处抵消（M. B. Green, J. H. Schwarz & E. Witten, *Superstring Theory*, 1987），通量紧致化估计产生约 $10^{500}$ 量级的亚稳真空（M. R. Douglas, *JHEP* **05**, 046, 2003）；圈量子引力在无背景 $\mathrm{SU}(2)$ 自旋网络上导出离散面积算符本征谱 $A = 8\pi\gamma\ell_P^2 \sum_i \sqrt{j_i(j_i+1)}$（C. Rovelli & L. Smolin, *Nucl. Phys. B* **442**, 593–622, 1995）。
+   - **外部文献结论**：微扰世界面外尔（Weyl）共形反常在玻色弦 $D = 26$、超弦 $D = 10$ 处抵消（M. B. Green, J. H. Schwarz & E. Witten, *Superstring Theory*, 1987）；M 理论的十一维框架则涉及十维 IIA 型超弦在强耦合下的十一维超引力低能描述（E. Witten, *Nucl. Phys. B* **443**, 85–126, 1995），通量紧致化估计产生约 $10^{500}$ 量级的亚稳真空（M. R. Douglas, *JHEP* **05**, 046, 2003）；圈量子引力在无背景 $\mathrm{SU}(2)$ 自旋网络上导出离散面积算符本征谱 $A = 8\pi\gamma\ell_P^2 \sum_i \sqrt{j_i(j_i+1)}$（C. Rovelli & L. Smolin, *Nucl. Phys. B* **442**, 593–622, 1995）。
    - **元统一诊断与消解（`MODEL`）**：两派分别摸到了二维外积面积的“连续极限”与“离散多面体”。对弦论，多面体切片配对以齐肯多夫 `NoAdjacentOnes` 自动机定理（[@thm-ch32-generative-self-reference-and-zeckendorf] 第 4 款，`LEAN ✓`）为原型的离散紫外编码假说（`MODEL`）阻止高频无界堆积，海量局部真空参数可诠释为有限观察者在内部补空间 $E_\perp^3$ 中的窗口相位 $u$，经外尔遍历（[@rem-ch31-weyl-window-equidistribution-literature]）在长程极限下收敛统一统计律；对圈量子引力，补齐完整几何积的内积项并服从互补勾股守恒（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 2 款，`LEAN ✓`），即可在 `MODEL` 层面令物质固有时自锁与空间纠缠面积同源共生，并经有理精化与热熵粗粒化恢复宏观度规。
 2. **第二阵营（边界全息 vs. 无时间正几何）：AdS/CFT 全息对偶与扭量/振幅多面体**
-   - **外部文献结论**：规范/引力全息对偶最初建立于负宇宙学常数 $\Lambda < 0$ 的渐近反德西特空间（J. Maldacena, *Adv. Theor. Math. Phys.* **2**, 231–252, 1998）；扭量理论将闵可夫斯基零光线映射为复射影扭量空间中的点（R. Penrose, *J. Math. Phys.* **8**, 345–366, 1967），而平面 $\mathcal{N}=4$ 超杨—米尔斯散射振幅被证明等于正格拉斯曼流形中振幅多面体（Amplituhedron）的典范体积形式（N. Arkani-Hamed & J. Trnka, *JHEP* **10**, 030, 2014）。
+   - **外部文献结论**：规范/引力全息对偶最初建立于负宇宙学常数 $\Lambda < 0$ 的渐近反德西特空间（J. Maldacena, *Adv. Theor. Math. Phys.* **2**, 231–252, 1998）；扭量理论将闵可夫斯基零光线映射为复射影扭量空间中的点（R. Penrose, *J. Math. Phys.* **8**, 345–366, 1967），而推广正格拉斯曼流形的振幅多面体（Amplituhedron）以典范形式刻画平面 $\mathcal{N}=4$ 超杨—米尔斯理论的树级振幅与圈级被积式，其一般对应在所引原始文献中作为猜想提出（N. Arkani-Hamed & J. Trnka, *JHEP* **10**, 030, 2014）。
    - **元统一诊断与消解（`MODEL`）**：扭量与振幅多面体抛弃局域演化、以正几何体积刻画振幅，恰与无时间场的**格拉姆半正定椭圆体**（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell]）及零光锥刚性（[@thm-ch32-null-cone-holonomy-and-holographic-cut] 第 1 款）呼应，引入有限记忆窗口即切出局域因果流；而撤除无穷远共形上帝边界 $C$、将有限观察者移回晶格内部，视线 $90^\circ$ 处的封闭正交赤道便在诠释模型上转化为包裹观察者的正曲率德西特式视界（$\Lambda > 0$）。
 3. **第三阵营（算子谱与偶幺模晶格 vs. 重写因果网）：孔涅非对易几何/$E_8$ 晶格与 Wolfram 超图/因果集**
    - **外部文献结论**：非对易几何通过谱三元组 $(\mathcal{A}, \mathcal{H}, D)$ 与一阶狄拉克算子逆谱重构黎曼测地距离 $d(x,y) = \sup\{|a(x)-a(y)| : \|[D, a]\| \le 1\}$ 及标准模型规范作用量（A. Connes, *Noncommutative Geometry*, 1994；A. H. Chamseddine & A. Connes, *Commun. Math. Phys.* **186**, 731–750, 1997）；离散因果集（L. Bombelli, J. Lee, D. Meyer & R. D. Sorkin, *Phys. Rev. Lett.* **59**, 521, 1987）与超图重写模型讨论合流因果不变性与计算有界观察者粗粒化（S. Wolfram, *Complex Systems* **29**, 107–536, 2020）。
-   - **元统一诊断与消解（`MODEL`）**：[第十章](ch10-gram-geometry-and-order.md)已阐明局部算符非对易与全局完整复格拉姆账本的顺序无关重构（[`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization)）并行不悖，且康威—斯隆艾柯西安桥（[@rem-ch32-icosian-e8-literature]）通过 $2I \subset S^3 \subset \mathbb{H}$、$(\mathcal{I}, Q) \cong E_8$ 与 $\operatorname{Im}(\mathcal{I}) \subset \mathcal{I}$ 将旋量门、$E_8$ 晶格与六维黄金母格锁定为一体；而对超图重写因算子与状态分离导致的“Ruliad 规则任意性”，无背景元公理 $\psi = \psi(\psi)$（`MODEL`）令算子与状态合二为一，配合 $R^2 = -I_n$ 与有限子集单调收缩稳定化（`LEAN ✓`）及连续余弦不动点 $\cos\theta^* = \theta^*$ 诠释桥梁（`文献结果` / `MODEL`）锁定自指不动点。
+   - **元统一诊断与消解（`MODEL`）**：[第十章](ch10-gram-geometry-and-order.md)已阐明局部算符非对易与全局完整复格拉姆账本的顺序无关重构（[`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq)）并行不悖，且康威—斯隆艾柯西安桥（[@rem-ch32-icosian-e8-literature]）通过 $2I \subset S^3 \subset \mathbb{H}$、$(\mathcal{I}, Q) \cong E_8$ 与 $\operatorname{Im}(\mathcal{I}) \subset \mathcal{I}$ 将旋量门、$E_8$ 晶格与六维黄金母格锁定为一体；而对超图重写因算子与状态分离导致的“Ruliad 规则任意性”，无背景元公理 $\psi = \psi(\psi)$（`MODEL`）令算子与状态合二为一，配合 $R^2 = -I_n$ 与有限子集单调收缩稳定化（`LEAN ✓`）及连续余弦不动点 $\cos\theta^* = \theta^*$ 诠释桥梁（`文献结果` / `MODEL`）锁定自指不动点。
 4. **第四阵营（算术谱与类型等价 vs. 视界自由能与自激回路）：朗兰兹纲领/HoTT 与熵引力/主动推理/惠勒 `U`**
    - **外部文献结论**：朗兰兹纲领研究数域伽罗瓦表示与自守表示 $L$-函数的互反对应（R. P. Langlands, 1967/1970）；同伦类型论引入泛等公理（Univalence Axiom）$(A \simeq B) \simeq (A =_{\mathcal{U}} B)$ 将类型等价提升为相等路径（V. Voevodsky; Univalent Foundations Program, *Homotopy Type Theory*, 2013）；热力学/熵引力（T. Jacobson, 1995；E. Verlinde, *JHEP* **04**, 029, 2011）、马尔可夫毯变分自由能最小化（K. Friston, *Nat. Rev. Neurosci.* **11**, 127–138, 2010）与参与式宇宙自激回路 `U`（J. A. Wheeler, 1983/1990）分别从热力学、统计神经科学与量子测量哲学探讨视界与观察者的角色。
    - **元统一诊断与消解（`MODEL`）**：素数欧拉正交基轴（[第 22 章](ch22-primes-euler-products-and-zeros.md)）与哈塞余弦迹（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-hasse-gauss-literature]）连接算术与旋转，泛等公理则对应废除外部标签点 $C$ 的两子互易等价；同时兰道尔热熵平衡界（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款）与黄金接受窗边界 $\partial(W + u)$ 为视界热力学、马尔可夫毯与自激回路提供了离散几何代数与形式化内核支撑，最终汇入 $\psi = \psi(\psi)$。
@@ -413,7 +413,7 @@
 用二维有向世界面取代零维点粒子
 
 **它残留的“外部点 $C$”或维度偏置（`MODEL` 诊断）：**
-预设光滑连续流形，招致 $10/11$ 维共形约束与 $10^{500}$ 真空景观
+预设光滑连续流形，面对十维超弦的共形反常约束、十一维 M 理论的强耦合低能框架与 $10^{500}$ 真空景观
 
 **在《正交自指统一场》中的坐标与合拢机制（`MODEL` + `LEAN ✓` + `文献结果`）：**
 多面体离散切片配对以齐肯多夫 `NoAdjacentOnes`（`LEAN ✓`）为原型的紫外编码截断（`MODEL`）；真空参数诠释为内空间相位 $u \in E_\perp^3$，由外尔遍历（`文献结果`）同质化统计律
@@ -432,7 +432,7 @@
 **3. AdS/CFT 全息张量网**
 
 **它摸到的局部几何真相（`文献结果`）：**
-跨边界纠缠极小割编织空间截面（桥图 `LEAN ✓` / RT `文献结果`），电路深度对应体积
+跨边界纠缠极小割编织空间截面（桥图 `LEAN ✓` / RT `文献结果`）；电路复杂度与最大空间体积的对应是复杂度等于体积猜想（`OPEN`，见 [@conj-complexity-equals-volume] 的适用条件）
 
 **它残留的“外部点 $C$”或维度偏置（`MODEL` 诊断）：**
 站在无穷远共形上帝边界，受困于负曲率反德西特盒（$\Lambda < 0$）
@@ -449,7 +449,7 @@
 局限于渐近散射边界与高度对称模型，缺内生主观时间读出
 
 **在《正交自指统一场》中的坐标与合拢机制（`MODEL` + `LEAN ✓` + `文献结果`）：**
-母体对应无时间格拉姆半正定椭圆体 $\det G \ge 0$（`文献结果`）与零光锥刚性（`LEAN ✓`）；引入有限记忆窗口即切出局域前后因果（`MODEL`）
+母体对应无时间实对称格拉姆椭圆体 $G \succeq 0,\; G_{ii}=1$（含奇异边界，`文献结果`）与零光锥刚性（`LEAN ✓`）；引入有限记忆窗口即切出局域前后因果（`MODEL`）
 
 **5. 非对易几何 & $E_8$ 晶格**
 

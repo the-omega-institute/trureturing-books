@@ -2,20 +2,24 @@
    T is real symmetric and idempotent, so row i used as a ruler on column j gives back Σₖ TᵢₖTₖⱼ = Tᵢⱼ.
      rank  the rail is the rank r = 1 … N; the diagonal Tₖₖ adds up to the trace, which equals r; at r = N, T = I.
      read  the rail adds the products TᵢₖTₖⱼ one at a time; for a diagonal cell every term is the square Tₖⱼ².
-     heal  clicks add ε to Tᵢⱼ and Tⱼᵢ (Δ stays symmetric); T₀ = T + Δ, Tₘ₊₁ = 3Tₘ² − 2Tₘ³; the side panel shows the
-           eigenvalues of Tₘ (Jacobi rotations), pulled towards 0 and 1 by x ↦ 3x² − 2x³.
-     perp  ψ(θ) = cos θ·v₁ + sin θ·w with w = v_{r+1} orthogonal to every vₐ; ‖Tψ‖ = cos θ, zero at 90°.
+     heal  clicks add ε to Tᵢⱼ and Tⱼᵢ (Δ stays symmetric, every click accumulates); T₀ = T + Δ, Tₘ₊₁ = 3Tₘ² − 2Tₘ³; the
+           side panel shows the eigenvalues of Tₘ (Jacobi rotations), each moved by x ↦ 3x² − 2x³. The words report the
+           computed error of the step shown; "approximately idempotent" only when it is ≤ HEAL_TOL, and the one
+           asymptotic statement (same-rank projection) only under the sufficient condition ‖Δ‖₂ < HEAL_SAFE (strict).
+     perp  r < N: ψ(θ) = cos θ·v₁ + sin θ·w with w = v_{r+1} orthogonal to every vₐ; ‖Tψ‖ = cos θ, zero at 90°.
+           r = N: T = I has no nonzero complement; ψ = v₁ for every θ and Tψ = ψ.
    Colours: cyan = positive entries, the part kept by T (eigenvalues above ½); magenta = negative entries, the
    complement (eigenvalues below ½); amber = the current cell, term, step or rank. Read-only probe: TABLE_DEBUG. */
 (() => {
   'use strict';
   const { kit, L } = TRV, { clamp, fix } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
-  const MINUS = '−', M = 8, DEG = Math.PI / 180, HEAL_SAFE = (Math.sqrt(3) - 1) / 2;
+  const MINUS = '−', M = 8, DEG = Math.PI / 180, HEAL_SAFE = (Math.sqrt(3) - 1) / 2, HEAL_TOL = 1e-12;
 
   /* ---------- linear algebra ---------- */
   const zeros = (n) => Array.from({ length: n }, () => new Array(n).fill(0));
-  const mul = (A, B) => { const n = A.length, C = zeros(n); for (let i = 0; i < n; i++) for (let k = 0; k < n; k++) { const a = A[i][k]; if (a) for (let j = 0; j < n; j++) C[i][j] += a * B[k][j]; } return C; };
+  // skip exact zeros only: an entry that has overflowed (±∞, NaN) must spread to the product, never count as 0
+  const mul = (A, B) => { const n = A.length, C = zeros(n); for (let i = 0; i < n; i++) for (let k = 0; k < n; k++) { const a = A[i][k]; if (a !== 0) for (let j = 0; j < n; j++) C[i][j] += a * B[k][j]; } return C; };
   const lin = (a, A, b, B) => A.map((row, i) => row.map((x, j) => a * x + b * B[i][j]));
   const frob = (A) => Math.sqrt(A.reduce((s, row) => s + row.reduce((t, x) => t + x * x, 0), 0));
   const idemErr = (A) => frob(lin(1, mul(A, A), -1, A));
@@ -55,7 +59,8 @@
     for (let m = 0; m < M; m++) { const X = its[m], X2 = mul(X, X); its.push(lin(3, X2, -2, mul(X2, X))); }
     const eigs = its.map(eig), errs = its.map(idemErr), de = eig(D), dnorm = Math.max(Math.abs(de[0]), Math.abs(de[de.length - 1]));
     const rankErrs = Array.from({ length: S.N }, (_, k) => idemErr(tableOf(S.N, k + 1)));
-    cache = { key: key(), T, D, its, eigs, errs, dnorm, rankErrs, err: idemErr(T), sym: symErr(T), tr: trace(T) };
+    // the sufficient condition is strict: at ‖Δ‖₂ = (√3 − 1)/2 an eigenvalue 1 + ‖Δ‖₂ lands on the repelling ½ and stays
+    cache = { key: key(), T, D, its, eigs, errs, dnorm, safe: dnorm < HEAL_SAFE, rankErrs, err: idemErr(T), sym: symErr(T), tr: trace(T) };
     return cache;
   }
   const kOf = () => Math.min(S.N, Math.floor(clock.t + 1e-9));            // read: terms added so far
@@ -66,10 +71,14 @@
   const products = () => { const T = derive().T; return T.map((_, k) => T[S.i][k] * T[k][S.j]); };
   const partial = (k) => products().slice(0, k).reduce((s, x) => s + x, 0);
   const perpVecs = () => {
-    const th = thetaOf() * DEG, v = dct(S.N, 0), w = hasPerp() ? dct(S.N, S.r) : new Array(S.N).fill(0);
-    const psi = v.map((x, k) => Math.cos(th) * x + Math.sin(th) * w[k]);
-    return { v, w, psi, Tpsi: matvec(derive().T, psi), Tw: matvec(derive().T, w) };
+    const T = derive().T, v = dct(S.N, 0);
+    // r = N: T = I and no nonzero vector is orthogonal to every row, so there is nothing to turn ψ into: ψ stays the unit v₁
+    if (!hasPerp()) return { v, w: null, psi: v.slice(), Tpsi: matvec(T, v), Tw: null };
+    const th = thetaOf() * DEG, w = dct(S.N, S.r), psi = v.map((x, k) => Math.cos(th) * x + Math.sin(th) * w[k]);
+    return { v, w, psi, Tpsi: matvec(T, psi), Tw: matvec(T, w) };
   };
+  /** What the words may say about step m of the healing iteration: the computed error against HEAL_TOL, else nothing. */
+  const healStatus = (m) => { const D = derive(), e = D.errs[m]; return !S.kicks.length ? 'none' : !Number.isFinite(e) ? 'overflow' : e <= HEAL_TOL ? 'tol' : 'open'; };
 
   /* ---------- canvas helpers ---------- */
   const face = (f) => (f === 'body' ? TRV.fonts.body : TRV.fonts.data);
@@ -184,16 +193,23 @@
       g.rect(0, q + 0.62, V.psi[q], q + 0.98, P.ink, { alpha: 0.45 });
       g.rect(0, q + 1.02, V.Tpsi[q], q + 1.38, P.cyan, { alpha: 0.85 });
     }
+    const full = !hasPerp(), kept = full ? norm(V.Tpsi) : Math.cos(th * DEG), lost = full ? norm(V.psi.map((x, k) => x - V.Tpsi[k])) : Math.sin(th * DEG);
     const h = kit.plot(cv, { x: [0, 1.05], y: [0, 3], pad: padOf(bot, W, H, words ? 22 : 0, 4, 0, words ? 2 : 0), clear: false });
-    h.rect(0, 1.75, Math.cos(th * DEG), 2.35, P.cyan, { alpha: 0.85 });
-    h.rect(0, 0.2, Math.sin(th * DEG), 0.8, P.magenta, { alpha: 0.85 });
+    h.rect(0, 1.75, kept, 2.35, P.cyan, { alpha: 0.85 });
+    if (lost > 1e-12) h.rect(0, 0.2, lost, 0.8, P.magenta, { alpha: 0.85 });
     h.vline(1, P.lineHot, { dash: [3, 3] });
     if (words) {
       const fs = clamp(b.w / 34, 9.5, 12);
-      g.text(0, n + 0.6, L('灰：状态 ψ 的分量 · 青：读出 Tψ', 'grey: the entries of ψ · cyan: the reading Tψ'), P.dim, { align: 'center', base: 'bottom', dy: -2, size: fs, face: 'body' });
+      // in the top margin the panel keeps for it, so the last row's bars (cyan at every θ when r = N) never cover it
+      g.text(0, 0.4, L('灰：状态 ψ 的分量 · 青：读出 Tψ', 'grey: the entries of ψ · cyan: the reading Tψ'), P.dim, { align: 'center', base: 'bottom', dy: -2, size: fs, face: 'body' });
       for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0) g.text(-a, q + 1, String(q + 1), P.dim, { align: 'right', dx: -4, size: fs });
-      h.text(0, 2.4, `‖Tψ‖ = cos θ = ${fix(Math.cos(th * DEG), 3)}`, P.cyan, { base: 'bottom', size: fs });
-      h.text(0, 0.85, `‖(I − T)ψ‖ = sin θ = ${fix(Math.sin(th * DEG), 3)}`, P.magenta, { base: 'bottom', size: fs });
+      if (full) {   // T = I: the whole unit state is read back, and I − T = 0 leaves no complement
+        h.text(0, 2.4, `‖Tψ‖ = ‖ψ‖ = ${fix(kept, 3)}`, P.cyan, { base: 'bottom', size: fs });
+        h.text(0, 0.85, L(`‖(I − T)ψ‖ = ${fix(lost, 3)} · 没有正交补`, `‖(I − T)ψ‖ = ${fix(lost, 3)} · no complement`), P.magenta, { base: 'bottom', size: fs, face: 'body' });
+      } else {
+        h.text(0, 2.4, `‖Tψ‖ = cos θ = ${fix(kept, 3)}`, P.cyan, { base: 'bottom', size: fs });
+        h.text(0, 0.85, `‖(I − T)ψ‖ = sin θ = ${fix(lost, 3)}`, P.magenta, { base: 'bottom', size: fs });
+      }
     }
   }
 
@@ -220,7 +236,7 @@
     if (S.scene === 'read') drawRead(cv, pb, W, H, true);
     else if (S.scene === 'rank') drawRank(cv, pb, W, H, true);
     else if (S.scene === 'heal') drawHeal(cv, pb, W, H, true);
-    else if (hasPerp()) drawPerp(cv, pb, W, H, true);
+    else drawPerp(cv, pb, W, H, true);
   }
 
   /* ---------- the strip: is the table still idempotent ---------- */
@@ -235,10 +251,11 @@
     const g = kit.plot($('plot'), { x: xr, y: [FLOOR, 10], logY: true, pad: [44, 12, 10, 22] });
     const xt = sc === 'perp' ? [[0, '0°'], [45, '45°'], [90, '90°']] : Array.from({ length: xr[1] - xr[0] + 1 }, (_, q) => q + xr[0]).filter((v) => xr[1] - xr[0] <= 8 || v % 2 === 0);
     g.axes({ yTicks: [[1e-16, '10⁻¹⁶'], [1e-8, '10⁻⁸'], [1, '1']], xTicks: xt });
+    if (sc === 'heal') g.hline(HEAL_TOL, P.dim, { dash: [4, 3] });   // the named tolerance of "approximately idempotent"
     g.line(pts, P.cyan, { width: 2 });
     for (const p of pts) if (sc === 'heal' || sc === 'rank') g.dot(p[0], p[1], P.cyan, 3);
     g.vline(now, P.amber, { alpha: 0.8 });
-    g.legend([[P.cyan, L('‖T² − T‖（对数）', '‖T² − T‖ (log)')]]);
+    g.legend(sc === 'heal' ? [[P.cyan, L('‖T² − T‖（对数）', '‖T² − T‖ (log)')], [P.dim, L('虚线：容差 10⁻¹²', 'dashed: tolerance 10⁻¹²')]] : [[P.cyan, L('‖T² − T‖（对数）', '‖T² − T‖ (log)')]]);
     $('plotMeta').textContent = `${L(sc === 'heal' ? `第 ${now} 步` : '当前', sc === 'heal' ? `step ${now}` : 'now')} · ${nowV.toExponential(1).replace('-', MINUS)}`;
   }
 
@@ -247,7 +264,8 @@
     read: [['cy box', '正的格、正的乘积', 'positive cells and products'], ['mg box', '负的格、负的乘积', 'negative cells and products'], ['am', '选中的格、刚加进来的一项', 'the chosen cell, the term just added'], ['dm', '虚线：行（尺子）与列（被量）', 'dashed: the row (ruler) and the column (measured)']],
     rank: [['cy box', '正的格、对角格（越亮越大）', 'positive cells, diagonal cells (brighter is larger)'], ['mg box', '负的格', 'negative cells'], ['am', '对角格之和（迹）', 'the sum of the diagonal (trace)'], ['dm', '虚线框：对角线', 'dashed: the diagonal']],
     heal: [['cy box', '正的格；½ 以上的本征值', 'positive cells; eigenvalues above ½'], ['mg box', '负的格；½ 以下的本征值', 'negative cells; eigenvalues below ½'], ['am', '被碰的格、当前这一步', 'the knocked cell, the current step']],
-    perp: [['cy box', '读出 Tψ、留在表里的 cos θ', 'the reading Tψ, the cos θ kept by the table'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']]
+    perp: [['cy box', '读出 Tψ、留在表里的 cos θ', 'the reading Tψ, the cos θ kept by the table'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']],
+    perpFull: [['cy box', '读出 Tψ = ψ（T = I）', 'the reading Tψ = ψ (T = I)'], ['dm', '状态 ψ = v₁', 'the state ψ = v₁']]
   };
   const setLabel = (id, zh, en) => { const h = `<span class="zh">${zh}</span><span class="en">${en}</span>`; if ($(id)._h !== h) { $(id).innerHTML = h; $(id)._h = h; } };
   const ex = (x) => (x === 0 ? '0' : x.toExponential(1).replace('-', MINUS));
@@ -272,25 +290,35 @@
       setLabel('roKeyLabel', '迹 = 秩', 'Trace = rank'); $('roKey').textContent = `${fix(D.tr, 6)} = ${S.r}`; $('roKeySub').textContent = L(`N = ${S.N} 个地址里占了 ${S.r} 个`, `${S.r} of N = ${S.N} addresses taken`);
       setLabel('ro1Label', '还空着的正交方向', 'Orthogonal directions still free'); $('ro1').textContent = String(S.N - S.r);
     } else if (sc === 'heal') {
-      const m = mOf(), r0 = Math.round(trace(D.its[M]));
-      big = S.kicks.length ? L(`第 ${m} 步 · 幂等误差 ${ex(D.errs[m])}`, `Step ${m} · idempotency error ${ex(D.errs[m])}`) : L('还没碰：点表里的一格', 'Untouched: click a cell of the table');
-      hud = !S.kicks.length ? L('点一格，Tᵢⱼ 与 Tⱼᵢ 各加 ε，然后迭代 3T² − 2T³', 'a click adds ε to Tᵢⱼ and Tⱼᵢ, then 3T² − 2T³ is iterated')
-        : L(`本征值被拉向 0 与 1 · 迭代后迹 = ${fix(trace(D.its[M]), 4)}（原表 ${S.r}）`, `eigenvalues pulled to 0 and 1 · trace after the iteration ${fix(trace(D.its[M]), 4)} (the table had ${S.r})`);
-      note = !S.kicks.length ? L('没有扰动时 T 已经幂等，迭代一步也不动它。', 'Without a knock T is already idempotent and the iteration does not move it.')
-        : D.dnorm < HEAL_SAFE ? L(`‖Δ‖₂ = ${fix(D.dnorm, 3)} < 0.366：回到一张秩 ${r0} 的幂等表，离原表 ${fix(frob(lin(1, D.its[M], -1, D.T)), 3)}（很近，但一般不是原表）。`, `‖Δ‖₂ = ${fix(D.dnorm, 3)} < 0.366: back to an idempotent table of rank ${r0}, at distance ${fix(frob(lin(1, D.its[M], -1, D.T)), 3)} from the original (close, but in general not the original).`)
-          : D.dnorm < 0.5 ? L(`‖Δ‖₂ = ${fix(D.dnorm, 3)}，介于 0.366 与 ½ 之间：仍回到某个投影，秩是 ${r0}${r0 !== S.r ? '，变了' : ''}。`, `‖Δ‖₂ = ${fix(D.dnorm, 3)}, between 0.366 and ½: it still returns to some projection, of rank ${r0}${r0 !== S.r ? ' — changed' : ''}.`)
-            : L(`‖Δ‖₂ = ${fix(D.dnorm, 3)} ≥ ½：不在保证收敛的范围里。`, `‖Δ‖₂ = ${fix(D.dnorm, 3)} ≥ ½: outside the range where convergence is guaranteed.`);
-      setLabel('roKeyLabel', `幂等误差 ‖Tₘ² − Tₘ‖（第 ${m} 步）`, `Idempotency error ‖Tₘ² − Tₘ‖ (step ${m})`); $('roKey').textContent = ex(D.errs[m]);
+      // finite facts first: the computed error of the step shown; then the one sufficient condition, and only when it holds
+      const m = mOf(), e = D.errs[m], st = healStatus(m), dn = fix(D.dnorm, 3);
+      big = S.kicks.length ? L(`第 ${m} 步 · 幂等误差 ${ex(e)}`, `Step ${m} · idempotency error ${ex(e)}`) : L('还没碰：点表里的一格', 'Untouched: click a cell of the table');
+      hud = st === 'none' ? L('点一格，Tᵢⱼ 与 Tⱼᵢ 各加 ε，然后迭代 3T² − 2T³', 'a click adds ε to Tᵢⱼ and Tⱼᵢ, then 3T² − 2T³ is iterated')
+        : st === 'overflow' ? L('数值溢出：这一步页面报告不了误差', 'overflow: the page cannot report this step’s error')
+          : st === 'tol' ? L('误差 ≤ 10⁻¹²：这一步在这个容差下近似幂等', 'error ≤ 10⁻¹²: approximately idempotent at this tolerance')
+            : D.safe ? L(`‖Δ‖₂ < (√3 − 1)/2：再迭代会趋向秩 ${S.r} 的投影；这一步还不幂等`, `‖Δ‖₂ < (√3 − 1)/2: further steps tend to a rank-${S.r} projection; not idempotent yet`)
+              : L('‖Δ‖₂ ≥ (√3 − 1)/2：不在充分条件内，只看实算的误差', '‖Δ‖₂ ≥ (√3 − 1)/2: outside the sufficient condition, only the computed error counts');
+      const cond = D.safe
+        ? L(`‖Δ‖₂ = ${dn}，严格小于 (√3 − 1)/2 ≈ 0.366：按文献结果，继续迭代会渐近趋向秩 ${S.r} 的投影（T₀ 在 ½ 以上本征值的谱投影，不一定是原表）。`, `‖Δ‖₂ = ${dn} is strictly below (√3 − 1)/2 ≈ 0.366: by the literature result, further steps tend asymptotically to a projection of rank ${S.r} (the spectral projection of T₀ onto its eigenvalues above ½, not necessarily the original table).`)
+        : L(`‖Δ‖₂ = ${dn}，不小于 (√3 − 1)/2 ≈ 0.366：这个充分条件不适用，页面既不预言极限，也不预言秩（‖Δ‖₂ < ½ 也不够）。`, `‖Δ‖₂ = ${dn} is not below (√3 − 1)/2 ≈ 0.366: the sufficient condition does not apply, and the page predicts neither a limit nor a rank (‖Δ‖₂ < ½ is not enough either).`);
+      const step = st === 'overflow' ? L(`第 ${m} 步的数已超出双精度范围，页面给不出误差。`, `At step ${m} the numbers have left the double-precision range; the page cannot give an error.`)
+        : st === 'tol' ? L(`第 ${m} 步实算的幂等误差 ${ex(e)} ≤ 10⁻¹²：在这个容差下近似幂等。`, `The computed idempotency error at step ${m}, ${ex(e)}, is ≤ 10⁻¹²: approximately idempotent at this tolerance.`)
+          : L(`第 ${m} 步实算的幂等误差是 ${ex(e)}，高于容差 10⁻¹²：这一步的表还不幂等。`, `The computed idempotency error at step ${m} is ${ex(e)}, above the tolerance 10⁻¹²: the table at this step is not idempotent yet.`);
+      note = st === 'none' ? L('没有扰动时 T 已经幂等，迭代一步也不动它。', 'Without a knock T is already idempotent and the iteration does not move it.') : `${cond} ${step}`;
+      setLabel('roKeyLabel', `幂等误差 ‖Tₘ² − Tₘ‖（第 ${m} 步）`, `Idempotency error ‖Tₘ² − Tₘ‖ (step ${m})`); $('roKey').textContent = ex(e);
       $('roKeySub').textContent = m > 0 && D.errs[m - 1] > 1e-14 ? L(`上一步 ${ex(D.errs[m - 1])}`, `previous step ${ex(D.errs[m - 1])}`) : '';
       setLabel('ro1Label', '扰动的大小 ‖Δ‖₂（谱范数）', 'Size of the knock ‖Δ‖₂ (spectral norm)'); $('ro1').textContent = `${fix(D.dnorm, 3)} · ${S.kicks.length} ${L('次', S.kicks.length === 1 ? 'knock' : 'knocks')}`;
     } else {
-      const th = thetaOf(), V = perpVecs();
-      big = hasPerp() ? `θ = ${fix(th, 0)}° · ‖Tψ‖ = ${fix(norm(V.Tpsi), 3)}` : L('表写满了：没有正交补', 'The table is full: no complement');
-      hud = !hasPerp() ? L('r = N 时 T = I，任何状态都原样读回', 'at r = N, T = I and every state reads back unchanged') : th > 89.999 ? L('ψ 整个落在正交补里：读出 Tψ = 0', 'ψ lies entirely in the complement: the reading Tψ = 0') : L(`ψ = cos θ·v₁ + sin θ·w，w 与表里每一行正交`, `ψ = cos θ·v₁ + sin θ·w, with w orthogonal to every row of the table`);
-      note = L('只有留在表里的那一份 cos θ 被读出来；转到 90°，表对 ψ 一个字也读不出。', 'Only the part cos θ that lies in the table gets read; at 90° the table reads nothing at all from ψ.');
-      setLabel('roKeyLabel', '读出的长度 ‖Tψ‖', 'Length of the reading ‖Tψ‖'); $('roKey').textContent = hasPerp() ? `${fix(norm(V.Tpsi), 6)}` : '—';
-      $('roKeySub').textContent = hasPerp() ? `cos ${fix(th, 1)}° = ${fix(Math.cos(th * DEG), 6)}` : '';
-      setLabel('ro1Label', '正交补里的 w：‖Tw‖', 'The complement vector w: ‖Tw‖'); $('ro1').textContent = hasPerp() ? ex(norm(V.Tw)) : '—';
+      const th = thetaOf(), V = perpVecs(), full = !hasPerp(), len = norm(V.Tpsi);
+      big = full ? L('表写满了：没有正交补', 'The table is full: no complement') : `θ = ${fix(th, 0)}° · ‖Tψ‖ = ${fix(len, 3)}`;
+      hud = full ? L('T = I：没有非零的正交补，单位态原样读回；ψ = v₁ 不随 θ 转', 'T = I: no nonzero complement, a unit state reads back unchanged; ψ = v₁ does not turn with θ')
+        : th > 89.999 ? L('ψ 整个落在正交补里：读出 Tψ = 0', 'ψ lies entirely in the complement: the reading Tψ = 0') : L(`ψ = cos θ·v₁ + sin θ·w，w 与表里每一行正交`, `ψ = cos θ·v₁ + sin θ·w, with w orthogonal to every row of the table`);
+      note = full ? L('写满的表 T = I 没有非零的正交补：任何单位态都原样读回，Tψ = ψ，‖Tψ‖ = 1。cos θ 与 sin θ 的拆分要 r < N 才有；这里 ψ 停在 v₁，时间轴上的 θ 不改变它。', 'The full table T = I has no nonzero complement: every unit state reads back unchanged, Tψ = ψ and ‖Tψ‖ = 1. The split into cos θ and sin θ needs r < N; here ψ stays at v₁ and the angle θ on the rail does not change it.')
+        : L('只有留在表里的那一份 cos θ 被读出来；转到 90°，表对 ψ 一个字也读不出。', 'Only the part cos θ that lies in the table gets read; at 90° the table reads nothing at all from ψ.');
+      setLabel('roKeyLabel', '读出的长度 ‖Tψ‖', 'Length of the reading ‖Tψ‖'); $('roKey').textContent = fix(len, 6);
+      $('roKeySub').textContent = full ? L('= ‖ψ‖：T = I 原样读回', '= ‖ψ‖: T = I reads it back unchanged') : `cos ${fix(th, 1)}° = ${fix(Math.cos(th * DEG), 6)}`;
+      if (full) { setLabel('ro1Label', '正交补', 'The complement'); $('ro1').textContent = L('没有：维数 0', 'none: dimension 0'); }
+      else { setLabel('ro1Label', '正交补里的 w：‖Tw‖', 'The complement vector w: ‖Tw‖'); $('ro1').textContent = ex(norm(V.Tw)); }
     }
     setLabel('ro2Label', '表的大小 · 秩', 'Size · rank'); $('ro2').textContent = `${S.N} × ${S.N} · r = ${S.r}`;
     setLabel('ro3Label', '迹（舞台上这张表）', 'Trace (the table on the stage)'); $('ro3').textContent = fix(trace(A), 4);
@@ -299,7 +327,7 @@
     $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note;
     $('pillSize').querySelector('strong').textContent = `${S.N} × ${S.r}`;
     $('pillErr').querySelector('strong').textContent = ex(idemErr(A));
-    const leg = LEGEND[sc].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    const leg = LEGEND[sc === 'perp' && !hasPerp() ? 'perpFull' : sc].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
     $('oRank').textContent = String(S.r);
   }
@@ -325,12 +353,15 @@
     document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(sc); });
     fitClock(sc === 'rank' && t == null ? S.r - 1 : t);
   }
-  function setN(n) {
+  /** The one owner of a size change (size chips, cards, cover): every index the state keeps stays inside the new table,
+      and a choice that is still valid is kept as it is. */
+  function resize(n) {
     S.N = n; S.r = Math.min(S.r, n); S.i = Math.min(S.i, n - 1); S.j = Math.min(S.j, n - 1);
     S.kicks = S.kicks.filter((k) => k.i < n && k.j < n);
+    if (S.hover && (S.hover[0] >= n || S.hover[1] >= n)) S.hover = null;
     $('rank').max = String(n); fRank.set(S.r); sizeChips.set(String(n), true);
-    fitClock(S.scene === 'rank' ? S.r - 1 : undefined);
   }
+  function setN(n) { resize(n); fitClock(S.scene === 'rank' ? S.r - 1 : undefined); }
   function setR(r) { S.r = clamp(Math.round(r), 1, S.N); fRank.set(S.r); if (S.scene === 'rank') { clock.pause(); clock.set(S.r - 1); } else paint(); }
   function select(i, j) { S.i = clamp(i, 0, S.N - 1); S.j = clamp(j, 0, S.N - 1); if (S.scene === 'read') fitClock(); else paint(); }
   function kick(i, j, eps) {
@@ -377,13 +408,13 @@
     expand_table: ['一行一行写进两两正交的余弦向量：每多一行，对角格的和（琥珀色的框）就多 1，地址槽多占一个；条带里的幂等误差始终贴在机器精度上。', 'Orthogonal cosine vectors are written in one row at a time: each new row adds 1 to the sum of the diagonal (the amber frame) and takes one more address slot; the idempotency error in the strip stays at machine precision.'],
     full: ['r = N = 8：八个地址全被占满，表成了单位阵，青色只剩对角线。再也找不出与这八行都正交的第九个方向。', 'r = N = 8: all eight addresses are taken, the table is the identity, and cyan is left only on the diagonal. There is no ninth direction orthogonal to all eight rows.'],
     dual_read: ['第 1 行（横读，尺子）去读第 4 列（竖读，被量的状态）：四个乘积 T₁ₖTₖ₄ 有青有品红，逐项加起来（琥珀色的条）正好等于这一格 T₁₄（空心框）。点一个对角格，第 k 行与第 k 列是同一串数，乘积全是平方、全是青色，加起来回到 Tₖₖ 本身：这只是 T² = T 落在对角格上的一项，不是 Lawvere 对角线定理（无不动点时对角线逃出列表）的演示。', 'Row 1 (read across, the ruler) reads column 4 (read down, the state being measured): the four products T₁ₖTₖ₄, some cyan, some magenta, add up term by term (the amber bar) to exactly this cell T₁₄ (the hollow frame). Click a diagonal cell: row k and column k are the same numbers, so every product is a square, all cyan, and they add up to Tₖₖ itself. This is only T² = T read on a diagonal cell, not a picture of Lawvere’s diagonal theorem (the diagonal escaping every listing when there is no fixed point).'],
-    heal: ['往 (2, 5) 与 (5, 2) 各加 0.3，表不再幂等。每迭代一步 3T² − 2T³，右边的本征值就向 0 与 1 靠拢，条带里的误差一步比一步小得多，几步就到机器精度。', 'Add 0.3 to (2, 5) and (5, 2) and the table is no longer idempotent. With each step of 3T² − 2T³ the eigenvalues on the right move towards 0 and 1, and the error in the strip drops much faster each step, reaching machine precision in a few steps.'],
+    heal: ['往 (2, 5) 与 (5, 2) 各加 0.3，表不再幂等。每迭代一步 3T² − 2T³，右边的本征值就向 0 与 1 靠拢；这一次，条带里的误差一步比一步小得多，第 7 步降到 10⁻¹² 以下。', 'Add 0.3 to (2, 5) and (5, 2) and the table is no longer idempotent. With each step of 3T² − 2T³ the eigenvalues on the right move towards 0 and 1; for this knock the error in the strip drops much faster each step, below 10⁻¹² by step 7.'],
     orthogonal_zero: ['ψ 从表里的常值向量 v₁ 转向与表里每一行都正交的 w：读出 Tψ（青色）随 cos θ 缩短，落在正交补里的 sin θ（品红）随之变长；到 90°，读出归零。', 'ψ turns from the constant vector v₁, which is in the table, towards w, which is orthogonal to every row of it: the reading Tψ (cyan) shrinks with cos θ while the part sin θ in the complement (magenta) grows; at 90° the reading is zero.']
   };
   let booting = true;
   function applyPreset(id) {
     const p = PRESETS[id];
-    S.N = p.N; $('rank').max = String(p.N); sizeChips.set(String(p.N), true);
+    resize(p.N);                                   // a card may shrink the table: the kept cell must stay inside it
     S.r = p.r; fRank.set(p.r);
     S.kicks = (p.kicks || []).map((k) => Object.assign({}, k));
     if (p.cell) { S.i = p.cell[0]; S.j = p.cell[1]; } else if (p.kicks) { S.i = p.kicks[0].i; S.j = p.kicks[0].j; }
@@ -409,15 +440,16 @@
     get state() {
       const D = derive();
       return { scene: S.scene, N: S.N, r: S.r, i: S.i, j: S.j, eps: S.eps, kicks: S.kicks.map((k) => Object.assign({}, k)), t: clock.t, max: clock.max, playing: clock.playing,
-        preset: cards.current, k: kOf(), m: mOf(), theta: thetaOf(), trace: D.tr, err: D.err, sym: D.sym, dnorm: D.dnorm, errs: D.errs.slice(), partial: partial(kOf()) };
+        preset: cards.current, k: kOf(), m: mOf(), theta: thetaOf(), trace: D.tr, err: D.err, sym: D.sym, dnorm: D.dnorm, errs: D.errs.slice(), partial: partial(kOf()),
+        safe: D.safe, safeBound: HEAL_SAFE, tol: HEAL_TOL, heal: healStatus(mOf()) };
     },
     T: () => copy(derive().T), shown: () => copy(shown()), delta: () => copy(derive().D), iterates: () => derive().its.map(copy), eigs: (m) => derive().eigs[m == null ? mOf() : m].slice(),
     basis: () => Array.from({ length: S.r }, (_, k) => dct(S.N, k)), products: () => products(), perp: () => { const V = perpVecs(); return { v: V.v, w: V.w, psi: V.psi, Tpsi: V.Tpsi, Tw: V.Tw, has: hasPerp() }; },
     seek: (t) => { clock.pause(); clock.set(t); }, scene: (sc, t) => setScene(sc, t), setN: (n) => setN(n), setR: (r) => setR(r), select: (i, j) => select(i, j), kick: (i, j, e) => kick(i, j, e),
     point: { cell: (i, j) => (geo.table ? at(geo.table.X(j) + geo.table.c / 2, geo.table.Y(i) + geo.table.c / 2) : null) }
   };
-  /** Cover: an N = 12 table knocked out of shape, beside its eigenvalues snapping back to 0 and 1. */
-  window.TRV_THUMB = () => { S.N = 12; S.r = 5; S.kicks = [{ i: 2, j: 7, eps: 0.3 }, { i: 9, j: 9, eps: -0.25 }]; S.i = 2; S.j = 7; setScene('heal', M); paint.now(); };
+  /** Cover: an N = 12 table knocked out of shape (‖Δ‖₂ = 0.3), beside the eigenvalues of its eight computed steps. */
+  window.TRV_THUMB = () => { resize(12); S.r = 5; fRank.set(5); S.kicks = [{ i: 2, j: 7, eps: 0.3 }, { i: 9, j: 9, eps: -0.25 }]; S.i = 2; S.j = 7; setScene('heal', M); paint.now(); };
   cards.pick(cards.initial('dual_read'));   // a chapter may cite another card: ::: {.viz src="self-referential-table" preset="heal"}
   booting = false;
   paint();

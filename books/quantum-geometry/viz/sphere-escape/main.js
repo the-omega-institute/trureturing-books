@@ -33,11 +33,17 @@
   const gap = (n) => 2 * Math.sin(Math.PI / (2 * n)) ** 2;                 // 1 − cos(π/n), without cancellation
   const halfPerimeter = (n) => n * Math.sin(Math.PI / n);
   const piDeficit = (n) => { const x = Math.PI / n; return n * (x ** 3 / 6 - x ** 5 / 120 + x ** 7 / 5040 - x ** 9 / 362880); };  // π − n sin(π/n) as a series (no cancellation)
-  function taylor(theta, m) {   // m terms of the cosine series → { actual remainder, the verified bound θ^{2m}/(2m)!·e^θ }
-    let sum = 0, term = 1;
-    for (let j = 0; j < m; j++) { sum += term; term *= -theta * theta / ((2 * j + 1) * (2 * j + 2)); }
+  /** The cosine series cut after m terms → { actual: its remainder |cos θ − Σ_{j<m} (−1)^j θ^{2j}/(2j)!|, lagrange: the
+      first omitted term θ^{2m}/(2m)!, bound: the verified bound θ^{2m}/(2m)!·e^θ }. The remainder is the omitted tail
+      Σ_{j≥m} (−1)^j θ^{2j}/(2j)!, summed term by term in double precision: cos θ minus the rounded partial sum would only
+      measure rounding error (about 10⁻¹⁶) once the remainder is smaller than that. For 0 < θ ≤ 3 and m ≥ 1 the tail
+      alternates and its terms shrink (ratio θ²/((2j + 1)(2j + 2)) ≤ 3/4), so stopping once the next term is below 10⁻²⁰
+      of the sum leaves a truncation error smaller than that term. */
+  function taylor(theta, m) {
     let b = 1; for (let i = 1; i <= 2 * m; i++) b *= theta / i;
-    return { actual: Math.abs(Math.cos(theta) - sum), lagrange: b, bound: b * Math.exp(theta) };
+    let tail = 0, term = b;
+    for (let j = m; j < m + 200 && Math.abs(term) > 1e-20 * Math.abs(tail); j++) { tail += term; term *= -theta * theta / ((2 * j + 1) * (2 * j + 2)); }
+    return { actual: Math.abs(tail), lagrange: b, bound: b * Math.exp(theta) };
   }
 
   /* ---------- fiber: the four-address catalog of the chapter's hand calculation ---------- */
@@ -85,6 +91,7 @@
   };
   const step = () => Math.floor(clock.t + 1e-9), frac = () => clock.t - step();
   let hit = null;   // layout of the matrix on the stage, for clicks
+  let taylorLast = null;   // the last Taylor plot: θ, its y range and the plotted remainders and bounds for m = 1 … 10
 
   function drawDiag(g) {
     const c = g.ctx, N = S.N, k = step(), f = frac(), d = dOf(S.rows), W = g.W, H = g.H;
@@ -582,9 +589,11 @@
       g.line(a, P.magenta); g.line(b, P.cyan, { dash: [5, 3] }); a.forEach((p) => g.dot(p[0], p[1], P.magenta, 2.5)); g.vline(k, P.amber); g.dot(k, gap(sides(k)), P.magenta, 4.5);
       g.legend([[P.magenta, L('缝 1 − cos(π/n)', 'gap 1 − cos(π/n)')], [P.cyan, L('π − 半周长', 'π − half-perimeter'), 'dash']]);
       $('pATitle').textContent = L('边数翻倍，缝还剩多少', 'The gap as the sides double'); $('pAMeta').textContent = `n = ${sides(k)}`;
-      const g2 = kit.plot(B, { x: [1, 10], y: [1e-17, 100], logY: true, pad: [42, 10, 10, 22] });
-      g2.axes({ yTicks: [[1, '1'], [1e-5, '10⁻⁵'], [1e-10, '10⁻¹⁰'], [1e-15, '10⁻¹⁵']], xTicks: [1, 2, 4, 6, 8, 10] });
-      const act = [], bnd = []; for (let m = 1; m <= 10; m++) { const t = taylor(S.tpoint, m); act.push(t.actual > 2e-17 ? [m, t.actual] : null); bnd.push([m, t.bound]); }
+      // the y range holds remainder and bound for every supported θ and m: down to ≈ 4×10⁻³³ at θ = 0.2, m = 10
+      const g2 = kit.plot(B, { x: [1, 10], y: [1e-34, 100], logY: true, pad: [42, 10, 10, 22] });
+      g2.axes({ yTicks: [[1, '1'], [1e-10, '10⁻¹⁰'], [1e-20, '10⁻²⁰'], [1e-30, '10⁻³⁰']], xTicks: [1, 2, 4, 6, 8, 10] });
+      const act = [], bnd = []; for (let m = 1; m <= 10; m++) { const t = taylor(S.tpoint, m); act.push(t.actual > 0 ? [m, t.actual] : null); bnd.push([m, t.bound]); }
+      taylorLast = { theta: S.tpoint, y: [g2.y0, g2.y1], actual: act.map((p) => p && p[1]), bound: bnd.map((p) => p[1]) };
       g2.line(bnd, P.ok, { dash: [5, 3] }); g2.line(act, P.cyan); act.forEach((p) => p && g2.dot(p[0], p[1], P.cyan, 2.5));
       g2.legend([[P.cyan, L('实际余项', 'actual remainder')], [P.ok, L('已验证的界', 'verified bound'), 'dash']]);
       $('pBTitle').textContent = L('余弦的泰勒部分和', 'Taylor sums of the cosine'); $('pBMeta').textContent = `θ = ${S.tpoint.toFixed(2)}`;
@@ -782,6 +791,8 @@
     },
     /** The last prime-stage layout: free band, sizes, the box of every dial, of Q, its factorization and the least-prime-factor dial, and the gaps between the bands (canvas CSS px). */
     get prime() { return S.scene === 'prime' && primeLast ? JSON.parse(JSON.stringify(primeLast)) : null; },
+    /** The last Taylor plot (polygon scene): θ, the y range, and the plotted remainder and bound for m = 1 … 10. */
+    get taylorPlot() { return S.scene === 'poly' && taylorLast ? JSON.parse(JSON.stringify(taylorLast)) : null; },
     seek: (t) => { clock.pause(); clock.set(t); }, taylor, node: (a) => { const b = $('cv').getBoundingClientRect(), h = fiberHit[a]; return [b.left + h.x, b.top + h.y]; }, cell: (i, j) => { const b = $('cv').getBoundingClientRect(); return [b.left + hit.gx + (j + 0.5) * hit.s, b.top + hit.gy + (i + 0.5) * hit.s]; }
   };
   window.TRV_THUMB = () => { S.N = 8; S.seed = 5; S.rows = makeList(8, 5); setScene('diag', 8); paint.now(); };

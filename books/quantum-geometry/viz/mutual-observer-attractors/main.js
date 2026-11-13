@@ -217,7 +217,7 @@
       g.line(rx, P.sigma, { width: 2 }); rx.forEach((p) => g.dot(p[0], p[1], P.sigma, 4.5, { ring: true, width: 1.6 }));
       g.vline(k, P.amber, { alpha: 0.6 }); g.dot(k, ex[k], P.amber, 4.5);
       g.legend([[P.dim, L('A 的偏差 x − θ*，逐拍', 'A: x − θ*, every beat')], [P.sigma, L('每两拍取一次', 'every two beats')]]);
-      $('pATitle').textContent = L('偏差：逐拍换边，逐轮同侧', 'Off by: sides swap each beat, not each round'); $('pAMeta').textContent = `x − θ* = ${sgn(ex[k], 4)}`;
+      $('pATitle').textContent = L('偏差：逐拍与逐轮', 'Deviation: beat by beat and round by round'); $('pAMeta').textContent = `x − θ* = ${sgn(ex[k], 4)}`;
       const es = ex.map((e, t) => Math.max(Math.abs(e), Math.abs(ey[t]))), pos = es.filter((e) => e > 0);
       const lo = Math.max(1e-12, Math.min(...pos) / 3), hi = Math.max(...es) * 3;
       const g2 = kit.plot(B, { x: [-0.4, NB + 0.4], y: [lo, hi], logY: true, pad: [40, 10, 10, 22] });
