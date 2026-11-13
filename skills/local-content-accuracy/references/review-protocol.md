@@ -1,60 +1,49 @@
 # Review protocol
 
-Use this record to keep a batch auditable without claiming more coverage than was done.
+Use the sections relevant to the claims, dependencies and outputs being reviewed. Record concrete evidence in the [accuracy ledger](../../../docs/project/CONTENT-ACCURACY.md), within the assigned ownership and scope.
 
-## Finding record
+## Findings and coverage
 
-For each finding record:
+Identify each finding by a stable ID, unit/language and current heading or `#id`; quote the claim, cite its evidence, classify it as confirmed, advisory or discarded, and state the minimal correction and limits. Reconfirm old intake against the current claim rather than relying on stale line numbers.
 
-```text
-id: stable short identifier
-unit: chapter/file and language(s)
-location: stable heading, #id, or current line
-claim: the exact current wording or formula
-evidence: frozen source, independent calculation, literature check, or media inspection
-classification: confirmed | advisory | discarded
-correction: smallest bilingual change, if confirmed
-limits: assumptions, provenance limits, and units not covered
-```
+Derive coverage rows from the current SUMMARY, including prelude, coda and appendices. Track both languages, formal claims, calculations, media, outputs and independent review separately; leave uncovered components pending. Lifecycle completion and historical unit counts do not approve content or newly added media.
 
-Do not use stale line numbers after integration. Keep the old intake as provenance and reconfirm the claim at the current candidate’s stable location before repairing it.
+## Reusing evidence after changes
 
-## Coverage record
+Identify prior and current candidates. For an uncommitted patch, use input HEAD and changed paths/digests; the lifecycle owner establishes correspondence to the later committed candidate. Compare the dependencies relevant to each conclusion: text/environments, source and pin, media/captions, and producing tools/assets. State what survives, what needs fresh claim review and what needs output validation. A tooling change alone does not require a new whole-book content audit.
 
-Maintain one row per SUMMARY unit. A row can say `pending`, `read-only review`, `fixed pending review`, `approved pending PR`, `merged`, or `not reviewed`; only mark it fully covered after both languages, formal environments, formulas/examples and shared media have evidence. The total must match SUMMARY, including coda and appendices. Retain historical text coverage separately when later media remain pending; neither a historical unit count nor lifecycle completion approves newly integrated material.
+When layout or table fields move, map the old claim to its current stable location in both languages, preserving hypotheses, qualifiers, conclusion and source/GID/attribution bindings. Semantic correspondence can support evidence reuse despite changed bytes; changed or missing meaning needs fresh review. Carry justified minimal corrections into the current presentation. Correspondence itself adds no accuracy approval or coverage.
 
-On recovery or integration, record the prior evidence candidate, current input HEAD and changed scope. Compare the dependencies relevant to each reused conclusion: text/environment bytes, referenced source and pin, media/captions, and output tools/assets. State which evidence survives and why, which changed claims need fresh review, and which outputs need rebuilding. Do not treat changed tooling as a new content audit of every chapter, or unchanged text as approval of new media. For an uncommitted handoff, identify the input HEAD and changed file digests; a later committed hash needs the lifecycle owner’s correspondence check.
+For versioned stills or posters, compare the committed image pixels and export consumers with the declared publication basis. A current source preview does not establish that the shipped image is current; distinguish historical production provenance from current publication evidence.
 
-For media with a visible version or pin stamp, compare the committed image pixels and their existing export consumers with the declared publication basis; a current source preview does not establish that the published poster or still is current. Keep explicitly historical production provenance distinct from the current publication basis.
+## Formal and quantitative boundaries
 
-For an upstream table, list or display reflow, record how each affected claim’s old row/field corresponds to its current stable location and labelled fields in both languages, including assumptions, qualifiers, conclusions and source/GID/attribution bindings. Carry the already-confirmed minimal corrections into those fields where their justification still holds, retaining author wording and the upstream presentation. Established semantic correspondence can justify reuse of the relevant evidence despite changed bytes; line growth or a new layout alone adds no claims or audit credit. A changed or missing hypothesis, qualifier, conclusion or source binding beyond those corrections needs fresh review of that claim. Correspondence alone does not establish content accuracy or approve the surrounding material.
+Resolve truncated signatures against the complete frozen declaration at the exact pin before changing an assertion. Preserve optimization and existence quantifiers: an attainable optimum need not be attained by a sampled construction. Check each green evidence box in full against its cited statement; instantiations or consequences derived manually need their own attribution outside the verified box.
 
-## Three review seats
+Trace a quantitative claim across its actual supported mathematical/control domain and existing reader-facing consumers. A preset, display range or truncated example does not define that domain. Presets may set several controls; later reader changes can override one while leaving others active, so resolve selector precedence before choosing the expected curve.
 
-- **Architecture:** lock pin and branch, GID resolution and theorem kinds, bilingual environment/media parity, epistemic color and block classification, managed-file boundaries, and scoped links.
-- **Quality:** Lean assumptions and proof explanations, independent algebra/numerics, physical protocol conditions, literature attribution, terminology, and bilingual semantic parity.
-- **Tests:** fresh `./tbook check`, affected builds, EPUBCheck, SVG/XML and link checks, independent calculations, and browser checks for the changed chapter matrix.
+For each supported control combination that selects a different mathematical curve, derive the extremum's location and value independently of the producer and test helpers. Compare endpoint and interior candidates as appropriate, and check the displayed name and qualifications against that curve. A regime-only reference optimum cannot validate every selected curve's extremum. A persistent reference minimum needs a visible label identifying its reference curve.
 
-Each seat returns a short structured result with `verdict`, `blocking_findings`, `checks`, `limits` and candidate identity. Review scope and any reused dependency evidence must be explicit. An earlier approval does not automatically approve later changed inputs. Read the current project workflow for seat composition and orchestration ownership; a repair worker does not start an extra review panel when the caller owns that stage.
+## Validation by affected dependency
 
-## Validation matrix
+Choose the smallest meaningful checks during editing, then complete applicable project-required validation within the assignment's permissions. Record the actual candidate, result and limits; an unrun check remains pending.
 
-Choose checks that match the change, and record the actual result:
-
-| Change | Required evidence |
+| Affected material | Evidence needed |
 | --- | --- |
-| Chapter text, environments, GIDs | `./tbook check`; both-language environment sequence and GID comparison; source/state inspection at the current pin |
-| Formula, table, angle, probability, or physical scale | independent calculation or a reproducible small script, with assumptions and rounding stated |
-| SVG or image | XML parse, internal-reference check, and visual inspection at relevant output sizes |
-| Interactive lab implementation | changed-lab browser tests with independent edge cases; project-required shots inspected and cited stills regenerated |
-| Caption wording only, with unchanged producer dependencies | verify claims against the current producer/source; reuse producer/still evidence only after the explicit relevant dependency correspondence above, with fresh verification for uncovered claims; validate affected bilingual outputs/readers per the output row. Wording changes alone do not require lab shots or still regeneration |
-| HTML/PDF/EPUB/site output | affected `./tbook build` targets, EPUBCheck for EPUBs, and browser inspection of changed pages in desktop/mobile and relevant themes |
-| Integration or lock-pin change | explicit dependency comparison, then affected architecture/quality checks and output validation; confirm current pin and historical baseline separately |
+| Chapter text, environments or GIDs | `./tbook check`; bilingual environment/GID/media alignment; affected source/state comparison at the current pin |
+| Formula, table or physical quantity | Independent calculation with domain, protocol assumptions and rounding stated |
+| Image or SVG | Relevant structural/internal-reference checks and visual inspection at the output's reading size |
+| Interactive implementation | Project browser tests with independent cases for supported controls; required shots inspected and cited stills refreshed, per [project media rules](../../../PROJECT.md) |
+| Caption alone, producer dependencies unchanged | Verify its claims against the producer/source; reuse covered producer/still evidence only after dependency correspondence. Validate affected bilingual outputs; wording alone does not require regenerated lab shots/stills |
+| Derived artifact after source/pin integration | Check current inputs under the generator's existing invariants, retaining its assertions; follow [project rules](../../../PROJECT.md) and [book-figure](../../book-figure/SKILL.md) for regeneration |
+| HTML/PDF/EPUB/site | Affected builds, EPUBCheck for EPUB, and actual reading of changed bilingual outputs in relevant desktop/mobile and theme combinations, per [book-export](../../book-export/SKILL.md) |
 
-When an actual PDF glyph or font concern arises, extracted/`ActualText` strings and font-resource metadata do not establish painted readability. Record reading-scale pixel witnesses for the affected passages against the actual candidate and PDF artifact, stating material correspondence and unknowns about the producing renderer and environment. Successful compilation or extraction, or readable output in another environment, does not discharge the observed concern in the affected environment. Preserve author notation and voice; use [book-export](../../book-export/SKILL.md) for conversion diagnosis and the existing upstream route for shared defects.
+For a PDF readability finding, inspect reading-scale pixels of the affected passages in the actual candidate artifact and affected environment. Extracted/`ActualText` strings, font metadata, compilation success or readability in another environment do not resolve that finding. Preserve author notation; route conversion diagnosis through [book-export](../../book-export/SKILL.md), stating renderer/environment correspondence and unknowns.
 
-## PR handoff
+Classify CI failures by failing stage and checked input before reusing local or branch evidence for an integrated candidate. External setup failures require infrastructure handling by the lifecycle owner, not speculative book edits. Use the [project workflow](../../../docs/project/WORKFLOW.md) for lifecycle handling and [template-update](../../template-update/SKILL.md) for managed defects; upstream publication and downstream validation are separate evidence.
 
-An implementation handoff includes changed paths, input/candidate identity, `git diff --check`, actual validation, limits and exact remaining review/lifecycle obligations. The lifecycle owner checks the committed candidate against that patch, obtains the required three-seat results, and updates the ledger while leaving unreviewed units pending. Before pushing, check the final commit and worktree state. The PR body states concrete reader-visible changes, pin, validation and remaining coverage, without model or agent identifiers.
+## Independent review and handoff
 
-When a repair depends on managed template files, follow [template-update](../../template-update/SKILL.md) through the supported downstream update and compare its managed files with the published release commit. Track upstream approval, publication and downstream CI/Pages separately: the template repository's generic `Release` workflow can succeed while skipping a template tag, so check `template-release.yml` and the actual published, non-draft Release. For a release with build-cache attachments, verify the expected assets against `build-cache.json` before recording the publication obligation as complete; those example-site artifacts do not validate the book's current outputs.
+Use the project's independent architecture, quality and tests seats and current composition from the [workflow](../../../docs/project/WORKFLOW.md). Each reports candidate identity, scope, verdict, blocking findings, actual checks and limits, including reused evidence. Resolve blockers and ensure approval covers the final relevant inputs. Reviews inform the designated owner's adjudication; a repair worker does not start another panel when orchestration belongs to the caller.
+
+Hand off changed paths/digests, input/candidate identity, `git diff --check`, actual validation, limits and remaining review/output/lifecycle obligations. The assigned owner updates the ledger, verifies committed correspondence and completes publication through the workflow. Merge alone does not discharge accuracy, review or output obligations; carry unresolved work within the authorized scope and existing execution limits. Publication descriptions state concrete changes, pin, validation and coverage without model or agent identifiers.
