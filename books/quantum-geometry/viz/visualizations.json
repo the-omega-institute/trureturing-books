@@ -306,14 +306,14 @@
         {
           "label": "第 30 章 · 全局静态场与有限观察者",
           "label_en": "Chapter 30 · Global static field and finite observer",
-          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-global-p-eq-np-local-p-ne-np",
-          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-global-p-eq-np-local-p-ne-np"
+          "href": "../zh/ch30-s01-global-field.html#sec-coda-global-p-eq-np-local-p-ne-np",
+          "href_en": "../en/ch30-s01-global-field.html#sec-coda-global-p-eq-np-local-p-ne-np"
         },
         {
           "label": "第 30 章 · P 是场，NP 是线",
           "label_en": "Chapter 30 · P is a field, NP is a line",
-          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-p-is-field-np-is-line",
-          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-p-is-field-np-is-line"
+          "href": "../zh/ch30-s02-witness-lines.html#sec-coda-p-is-field-np-is-line",
+          "href_en": "../en/ch30-s02-witness-lines.html#sec-coda-p-is-field-np-is-line"
         },
         {
           "label": "Lean 源码 · Conditioning.lean",
@@ -358,14 +358,14 @@
         {
           "label": "第 30 章 · 纳维—斯托克斯与 P 对 NP 的场化同构",
           "label_en": "Chapter 30 · Navier–Stokes and P versus NP as fields",
-          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-navier-stokes-and-p-vs-np",
-          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-navier-stokes-and-p-vs-np"
+          "href": "../zh/ch30-s04-navier-stokes.html#sec-coda-navier-stokes-and-p-vs-np",
+          "href_en": "../en/ch30-s04-navier-stokes.html#sec-coda-navier-stokes-and-p-vs-np"
         },
         {
           "label": "第 30 章 · 二次平流闭合不可能性定理",
           "label_en": "Chapter 30 · No closure for quadratic advection",
-          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#thm-coda-quadratic-advection-no-closure",
-          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#thm-coda-quadratic-advection-no-closure"
+          "href": "../zh/ch30-s04-navier-stokes.html#thm-coda-quadratic-advection-no-closure",
+          "href_en": "../en/ch30-s04-navier-stokes.html#thm-coda-quadratic-advection-no-closure"
         },
         {
           "label": "Lean：二次观测闭合判据",
@@ -413,8 +413,8 @@
         {
           "label": "第 30 章 · ETH、张量网络秩约分与宇宙学视界",
           "label_en": "Chapter 30 · ETH, tensor-network rank reduction and the cosmic horizon",
-          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-eth-tensor-rank-and-cosmic-horizon",
-          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-eth-tensor-rank-and-cosmic-horizon"
+          "href": "../zh/ch30-s03-eth-and-horizons.html#sec-coda-eth-tensor-rank-and-cosmic-horizon",
+          "href_en": "../en/ch30-s03-eth-and-horizons.html#sec-coda-eth-tensor-rank-and-cosmic-horizon"
         },
         {
           "label": "第 19 章 · 宽度三桥图的秩与割容量",
@@ -2953,14 +2953,14 @@
         {
           "label": "第 30 章 · 交错涡旋多边形的完整谱",
           "label_en": "Chapter 30 · The full spectrum of the alternating vortex polygon",
-          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#thm-ch30-vortex-polygon-spectrum",
-          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#thm-ch30-vortex-polygon-spectrum"
+          "href": "../zh/ch30-s04-navier-stokes.html#thm-ch30-vortex-polygon-spectrum",
+          "href_en": "../en/ch30-s04-navier-stokes.html#thm-ch30-vortex-polygon-spectrum"
         },
         {
           "label": "第 30 章 · 零本征值的若尔当块与无界漂移",
           "label_en": "Chapter 30 · The Jordan block at zero and the unbounded drift",
-          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#prop-ch30-vortex-polygon-neutral-drift",
-          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#prop-ch30-vortex-polygon-neutral-drift"
+          "href": "../zh/ch30-s04-navier-stokes.html#prop-ch30-vortex-polygon-neutral-drift",
+          "href_en": "../en/ch30-s04-navier-stokes.html#prop-ch30-vortex-polygon-neutral-drift"
         }
       ],
       "lean": [
@@ -3006,8 +3006,8 @@
         {
           "label": "第三十章 · 量子纠缠、P=NP 与熵的正交三位一体",
           "label_en": "Chapter 30 · Orthogonal triad of entanglement, P=NP & entropy",
-          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-ch30-entanglement-entropy-complexity-triad",
-          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-ch30-entanglement-entropy-complexity-triad"
+          "href": "../zh/ch30-s05-entanglement-and-entropy.html#sec-ch30-entanglement-entropy-complexity-triad",
+          "href_en": "../en/ch30-s05-entanglement-and-entropy.html#sec-ch30-entanglement-entropy-complexity-triad"
         },
         {
           "label": "第十三章 · 贝尔纯态的球心混态边缘与盲区分解",

@@ -55,6 +55,12 @@
 
 - [Chapter 29 Timeless Causality and the Gram Compatible Space: From the Pythagorean Pell Seam to Elliptic-Curve Tori](ch29-timeless-causality-and-gram-space.md)
 - [Chapter 30 Fields ($P$) and Lines ($NP$): From the Exponential Time Hypothesis (ETH) to Navier–Stokes Vortex Filaments](ch30-fields-lines-eth-and-navier-stokes.md)
+  - [Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$—The Orthogonal Horizon and the Firewall of the Living Journey](ch30-s01-global-field.md)
+  - ["$P$ Is a Field, $NP$ Is a Line"—The Witness Thread, the Guiding Field, and Hairy-Ball Curl](ch30-s02-witness-lines.md)
+  - [The Exponential Time Hypothesis (ETH), 2026 Tensor-Network Rank Reduction, and the Cosmic Horizon: Scale and Interpretation of Upper-Bound Curves](ch30-s03-eth-and-horizons.md)
+  - [A Field Analogy Between Navier–Stokes and $P$ vs. $NP$ — Lamb Bivectors, 3D Vortex Stretching, and Arnold Geodesics](ch30-s04-navier-stokes.md)
+  - ["Quantum Entanglement, P=NP, Entropy" — The Orthogonal Triad of Partial-Trace Horizons, Pythagorean Conservation, and Tensor-Cut Bond Dimension](ch30-s05-entanglement-and-entropy.md)
+  - [Chapter Summary: The Orthogonal Convergence of Discrete Logic and Continuum Fluids](ch30-s06-summary.md)
 - [Chapter 31 The Essence of the Quantum Is Fairness: Fivefold Abolition of Geometric Privilege and Ergodic Statistical Holism](ch31-quantum-fairness.md)
 - [Chapter 32 Orthogonal Self-Referential Unified Field and Meta-Unification of Grand Foundational Programs](ch32-unified-field-and-meta-unification.md)
 

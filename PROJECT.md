@@ -71,6 +71,7 @@
 3. **演示文稿（`books/<slug>/slides/<deck>/`）严格对齐 `books/example-monograph/slides/overview/`**：
    - 采用 `slides.md` 与 `slides.en.md` 双语对齐，仅使用 `theme/slides` 标准版式与组件（`<TheoremCard>`、`<LeanBadge>`、`<Stat>`、`<Source>`、`<Tex>`）。
 4. **章节正文、前言与附录（`books/<slug>/{zh,en}/`）严格对齐 `books/example-monograph/{zh,en}/`**：
+   - 主章使用 `chNN-topic.md`，子章节使用 `chNN-sNN-topic.md`，更深一级继续追加 `-sNN`；数字至少两位，主题用英文 kebab-case，各语言同名。目录用每级两个空格表达父子关系，主章保留导言和入口，完整小节连同证明与媒体整体移动；编号与阅读顺序以 `SUMMARY.md` 为准。拆分不改环境 id、Lean 引用和主章定理计数，更新移动内容的片段链接及声明地图；详见 `docs/AUTHORING.md` 的“章节命名与长章拆分”。
    - 定理环境、证明块、文献注记、开放问题、数值示例表格及文末可视化/视频嵌入块完全遵循 `ch01-golden-deficit.md` 的标准写法。
 5. **静态图（`books/<slug>/figures/<name>.py`）按模板技能 `skills/book-figure` 制作**，成品示例是 `books/example-monograph/figures/`：
    - **一张图只讲一件事**，由脚本按数学生成（`./tbook fig new|build|shots`），只写颜色角色、不写色值；每种语言一版标签，随深浅主题与印刷版变化。颜色与用语同交互页面（青色=线、内积、留在里面的；品红=面积、外积、逃出去的；琥珀只给当前的态与当前这一步；紫色=转轴、体积、旋子；绿色只给正文用 `lean=` 引用的已验证结论；红色只标开放问题；见 `skills/local-viz-cards/SKILL.md`）。

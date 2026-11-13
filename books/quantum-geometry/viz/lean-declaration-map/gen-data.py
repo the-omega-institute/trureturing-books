@@ -94,6 +94,12 @@ def main() -> int:
         print(f"note: {len(missing)} declarations are cited only in {INDEX}", file=sys.stderr)
 
     def label(file, title, lang):
+        nested = re.match(r"ch(\d+)((?:-s\d+)+)-", file)
+        if nested:
+            numbers = [int(nested.group(1)), *map(int, re.findall(r"-s(\d+)", nested.group(2)))]
+            short = ".".join(map(str, numbers))
+            return [short, f"第{cn_number(numbers[0])}章·" + ".".join(map(str, numbers[1:]))
+                    if lang == "zh" else f"Section {short}"]
         m = re.match(r"ch(\d+)-", file)
         if m:
             n = int(m.group(1))
