@@ -15,8 +15,33 @@ const close = (a, b, eps = 1e-9) => Math.abs(a - b) <= eps;
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 
 await stageFirstChecks(T, BOOK, ID);
-// every chart drawn with kit.plot keeps its readable height in each cited figure, still, cover and lab viewport
-await plotBudgetChecks(T, BOOK, ID);
+// every chart drawn with kit.plot keeps its readable height in each cited figure, still, cover and lab viewport.
+// Five cited cards are a sphere of kit.stage3 alone (the PAGES, WINDOW, FIELD and THREAD scenes): their cited figures
+// show no strip, and 334 px wide the tour bar takes the place of the scene buttons (style.css), so they draw no chart.
+// There each state must show the sphere instead, read from the pixels of #cv: one of those scenes, #cv filling the
+// stage, the drawing over ≥ 12% of it, and its ink a disc (the sphere is filled with a faint shade and outlined): the
+// box around the ink nearly square (0.8 … 1.25) and ≥ 80% of the disc inscribed in that box inked.
+const sphereStage = (page) => page.evaluate(() => {
+  const scene = window.CAUSAL_DEBUG.state.scene, cv = document.getElementById('cv'), st = cv.closest('.stage');
+  const sr = st.getBoundingClientRect(), r = cv.getBoundingClientRect(), cover = (r.width * r.height) / (sr.width * sr.height);
+  const shown = getComputedStyle(cv).visibility !== 'hidden' && !cv.hidden && r.width > 0 && r.height > 0;
+  const W = cv.width, H = cv.height, d = cv.getContext('2d').getImageData(0, 0, W, H).data;
+  let n = 0, x0 = W, y0 = H, x1 = -1, y1 = -1;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    if (!d[(y * W + x) * 4 + 3]) continue;
+    n++; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+  }
+  const bw = x1 - x0 + 1, bh = y1 - y0 + 1, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, rad = Math.min(bw, bh) / 2 - 2;
+  let disc = 0, inked = 0;
+  for (let y = Math.max(0, Math.floor(cy - rad)); y <= Math.min(H - 1, cy + rad); y++) for (let x = Math.max(0, Math.floor(cx - rad)); x <= Math.min(W - 1, cx + rad); x++) {
+    if ((x - cx) ** 2 + (y - cy) ** 2 > rad * rad) continue;
+    disc++; if (d[(y * W + x) * 4 + 3]) inked++;
+  }
+  const share = n / (W * H), aspect = n ? bw / bh : 0, fill = disc ? inked / disc : 0;
+  return { ok: ['pages', 'window', 'field', 'line'].includes(scene) && shown && cover >= 0.95 && share >= 0.12 && aspect >= 0.8 && aspect <= 1.25 && fill >= 0.8,
+    detail: `scene ${scene}, #cv ${shown ? 'shown' : 'hidden'} over ${(cover * 100).toFixed(1)}% of the stage, ink ${(share * 100).toFixed(1)}%, box ${bw} × ${bh}, disc ${(fill * 100).toFixed(1)}% inked` };
+});
+await plotBudgetChecks(T, BOOK, ID, { stageOnly: { crystal: sphereStage, impossible: sphereStage, right: sphereStage, thread: sphereStage, field: sphereStage } });
 
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);

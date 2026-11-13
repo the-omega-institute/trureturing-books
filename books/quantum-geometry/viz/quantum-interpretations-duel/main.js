@@ -837,10 +837,19 @@
   const FOCUS_DRAW = { cut: focusCut, andor: focusAndOr, born: focusBorn, bell: focusBell, horizon: focusHorizon, duel: focusDuel };
 
   /* ---------- the stage ---------- */
+  /* Below the title block (a narrow stage), the lens chips are placed under the title as it reads in this frame, and
+     measured where the title stands by itself: a stack the theme made while the chips were still elsewhere (TRV.hudFit,
+     .hud-stack: the title moved under the chips) is not the title's place. TRV.hudFit then decides with the chips where
+     they now are, before the stage measures its band (reserves), so one paint leaves the title, the chips and the
+     drawing in agreement. */
   function placeLensBar() {
     const below = stageEl.clientWidth < 700;
     lensBar.classList.toggle('below', below); stageEl.classList.toggle('lens-below', below);
-    if (below) lensBar.style.setProperty('--lens-top', `${hudTl.offsetTop + hudTl.offsetHeight + 6}px`);
+    if (below) {
+      stageEl.classList.remove('hud-stack');
+      lensBar.style.setProperty('--lens-top', `${hudTl.offsetTop + hudTl.offsetHeight + 6}px`);
+    }
+    TRV.hudFit();
   }
   function reserves() {
     if (TRV.thumbMode) return { top: 14, bottom: 14 };
@@ -995,11 +1004,12 @@
   const hot30 = document.querySelector('.field .marks i.hot30');
   const showEvidence = () => document.querySelectorAll('#evidence [data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(state.focus); });
   function drawText(D) {
-    showEvidence(); placeLensBar();
+    showEvidence();
     $('hudBig').textContent = FOCUS_TITLE[state.focus]();
     $('hudSub').textContent = hudSub(D);
     const lg = LEGEND[state.focus]().join('');
     if (lg !== lastLegend) { legendEl.innerHTML = lg; lastLegend = lg; }
+    placeLensBar();     // after the title and the legend are written: the chips go under the title as it now reads
     $('pillLens').querySelector('strong').textContent = lensName(state.lens);
     $('pillAngle').querySelector('strong').textContent = `${fix(D.theta, 1)}°`;
     if (hot30) hot30.classList.toggle('is-active', Math.abs(state.theta - 30) < 0.5);   // amber only for the live θ = 30°

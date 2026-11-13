@@ -12,8 +12,15 @@
 //     (390 × 844) and on desktop screens (1440 × 900, and the short 1440 × 500 and 1081 × 500).
 // A chart is counted when its canvas is laid out and visible when it is drawn (hidden strips and scenes do not count).
 //
+// A cited card whose figure is a 3D stage alone (a lit solid of kit.solid, a sphere of kit.stage3) draws no chart
+// there: the strip of charts is not part of a figure, and in a narrow figure the tour bar takes the place of the scene
+// buttons. Its owning suite names it in opts.stageOnly with a function that establishes, on the page as it stands,
+// what the stage shows instead; every state of that figure then either draws charts, held to their readable height as
+// everywhere, or draws none and passes that function. A card not named there still needs a chart in its figure.
+//
 //   import { plotBudgetChecks } from './plot-budget.mjs';
 //   await plotBudgetChecks(T, 'quantum-geometry', '<id>');
+//   await plotBudgetChecks(T, 'quantum-geometry', '<id>', { stageOnly: { '<card>': async (page) => ({ ok, detail }) } });
 import { settle } from '../../../../tools/node/viz-testkit.mjs';
 import { resolveBook, vizCitations } from '../../../../tools/node/viz-common.mjs';
 
@@ -52,8 +59,9 @@ const charts = (page) => page.evaluate(() => {
 /**
  * Run the plot budget over the reader contexts above; one check per cited card, per tour, for the stills and cover,
  * and per lab viewport, then one for the whole budget. Returns { contexts, charts, short } for a summary.
+ * opts.stageOnly { <card>: (page) => Promise<{ ok, detail }> }: cited cards whose figure is a 3D stage alone (above).
  */
-export async function plotBudgetChecks(T, slug, id) {
+export async function plotBudgetChecks(T, slug, id, opts = {}) {
   const { check } = T, total = { contexts: 0, charts: 0, short: 0 };
   const cardIds = (page) => page.$$eval('[data-preset]', (els) => els.map((e) => e.dataset.preset));
   const where = (page) => page.evaluate(() => ({
@@ -72,9 +80,20 @@ export async function plotBudgetChecks(T, slug, id) {
       const inset = c.grown && c.inset > 0 && c.minHeight - c.rawIh <= c.inset + 0.5 ? ` (the stage is at its published plot budget; its ${c.inset}px border is not in the canvas)` : '';
       group.fails.push(`${tag}${at.card ? ` card ${at.card}` : ''}${at.scene ? ` scene ${at.scene}` : ''}: #${c.canvas} H ${c.H}, pads ${c.top}/${c.bottom} leave ${c.rawIh}px < ${c.minHeight}px${inset}`);
     }
+    // a card named in opts.stageOnly: a state that draws no chart must show its stage, as its suite establishes
+    if (group.stage) {
+      const place = `${tag}${at.card ? ` card ${at.card}` : ''}${at.scene ? ` scene ${at.scene}` : ''}`;
+      group.states.push(got.length ? { place, charts: got.length } : { place, charts: 0, ...(await group.stage(page)) });
+    }
   };
   const report = (name, group) => check(`plot budget: ${name}: every chart keeps its readable height`, group.charts > 0 && group.fails.length === 0,
     group.charts ? `${group.fails.length} of the charts drawn fall short — ${group.fails.slice(0, 4).join(' | ')}` : 'no chart drawn with kit.plot');
+  const reportStage = (name, group) => {
+    const bare = group.states.filter((s) => !s.charts), bad = bare.filter((s) => !s.ok);
+    check(`plot budget: ${name}: each state without a chart shows its 3D stage (${bare.length} of ${group.states.length}), every chart drawn keeps its readable height`,
+      group.states.length > 0 && bad.length === 0 && group.fails.length === 0,
+      [...bad.slice(0, 3).map((s) => `${s.place}: ${s.detail}`), ...group.fails.slice(0, 3)].join(' | ') || 'no state measured');
+  };
   const scenes = async (page, tag, group) => {
     const n = await page.locator(SCENES).count();
     for (let i = 0; i < n; i++) {
@@ -97,10 +116,11 @@ export async function plotBudgetChecks(T, slug, id) {
   const toured = new Set();
   for (const c of cited) {
     const page = await T.open(slug, id, `?embed=1&lang=${c.lang}&preset=${c.preset}`, { viewport: { width: FIGURE_WIDTHS[0], height: c.height }, locale: locale(c.lang) });
-    const group = { charts: 0, fails: [] }, tag = (w) => `${c.lang} ${w} × ${c.height}`;
+    const stage = opts.stageOnly && Object.prototype.hasOwnProperty.call(opts.stageOnly, c.preset) ? opts.stageOnly[c.preset] : null;
+    const group = { charts: 0, fails: [], stage, states: [] }, tag = (w) => `${c.lang} ${w} × ${c.height}`;
     for (const w of [...FIGURE_WIDTHS, FIGURE_WIDTHS[0]]) { await page.setViewportSize({ width: w, height: c.height }); await measure(page, tag(w), group); }
     await scenes(page, tag(FIGURE_WIDTHS[0]), group);
-    report(`cited figure (${c.lang}, ${c.preset}, ${FIGURE_WIDTHS.join(' and ')} × ${c.height}, then each scene)`, group);
+    (stage ? reportStage : report)(`cited figure (${c.lang}, ${c.preset}, ${FIGURE_WIDTHS.join(' and ')} × ${c.height}, then each scene)`, group);
     if (!toured.has(`${c.lang}.${c.height}`)) {
       toured.add(`${c.lang}.${c.height}`);
       const tour = { charts: 0, fails: [] };
