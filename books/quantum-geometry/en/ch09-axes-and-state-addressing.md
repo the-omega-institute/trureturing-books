@@ -1,4 +1,4 @@
-# Mutually Orthogonal Triads: Why One and Two Orthogonal Steps Reach the Whole Sphere
+# Chapter 9 Mutually Orthogonal Triads: Why One and Two Orthogonal Steps Reach the Whole Sphere {#mutually-orthogonal-triads-why-one-and-two-orthogonal-steps-reach-the-whole-sphere}
 
 > *"The key is how isotropy lets us reach another point through orthogonal relations: one orthogonal step, then a second, because the three directions are mutually orthogonal."*
 
@@ -16,7 +16,7 @@ This chapter turns that intuitive maxim into four precise geometric and topologi
 **Figure 09.** The chapter at a glance. Panel I: three violet axes $\vv{e}_1, \vv{e}_2, \vv{e}_3$, mutually perpendicular, and the three magenta discs they span in pairs, the rotation planes $I_x, I_y, I_z$. Panel II: the amber point leaves the North Pole $N$, tilts by $\theta$ along a meridian, then twists by $\varphi$ along the dashed latitude circle. Panel III: each of the six rational axes carries a $45^\circ$ cap at both ends, and the twelve caps, painted on the sphere, cover all of it, solid on the near half and faint on the far half; the three caps holding the amber point $x$ are cyan and numbered with their colours 0, 2, 4, the rest grey ([@prop-rational-six-axis-cover]).
 :::
 
-## Three Axes and Three Bivector Planes {#sec-three-axis-pauli-bivectors}
+## 9.1 Three Axes and Three Bivector Planes {#sec-three-axis-pauli-bivectors}
 
 Why does the Bloch sphere of a single qubit live in **three-dimensional** real Euclidean space $\mathbb{R}^3$, and why do the Pauli operators come in a triad $\sigma_x, \sigma_y, \sigma_z$ of **three**?
 
@@ -63,7 +63,7 @@ Panel I of Figure 09 displays this exact correspondence: **rotating about the ax
 
 > One plane traces a circle; three interlocked orthogonal planes close a sphere.
 
-## Two-Angle Addressing from the North Pole {#sec-two-angle-state-address}
+## 9.2 Two-Angle Addressing from the North Pole {#sec-two-angle-state-address}
 
 Armed with the orthonormal triad $(\vv{e}_1, \vv{e}_2, \vv{e}_3)$, stand at the North Pole reference direction $N = \vv{e}_3 = (0, 0, 1)$ (corresponding to the computational basis projector $\lvert 0\rangle\langle 0\rvert$) and ask how two orthogonal steps address any point on $S^2$ (Panel II of Figure 09):
 
@@ -99,7 +99,7 @@ Two essential geometric distinctions must be kept sharp whenever we use this two
 **At the south pole the twist does nothing.** Tilt by $\theta = 180^\circ$ to the south pole, then twist a full turn about the vertical axis: the amber point stays exactly where it is, and only the white flag sweeps round the dashed circle. At the poles every $\varphi$ names the same point.
 :::
 
-## Initial Structure and Finite Rotation Words {#sec-finite-axis-words}
+## 9.3 Initial Structure and Finite Rotation Words {#sec-finite-axis-words}
 
 In the two-angle formula above, our two rotation axes $\vv{e}_2$ and $\vv{e}_3$ met at a strict $90^\circ$ right angle. What if a hardware platform provides two control axes $a, b \in \mathbb{R}^3$ that are *not* mutually perpendicular — say, two skew drive fields meeting at an oblique angle? Can finite sequences of rotations drawn from the two continuous axis circles still generate every rotation $R \in \mathrm{SO}(3)$?
 
@@ -186,7 +186,7 @@ The row $n = 1$ deserves a second look: a quarter turn about $y$ followed by a q
 
 > Two rotations do not commute, but cut fine enough, the order hardly matters: what non-commutation leaves behind fades like $1/n$.
 
-## A Rational Six-Axis Cover and the Six-Color Lower Bound {#sec-rational-six-axis-atlas}
+## 9.4 A Rational Six-Axis Cover and the Six-Color Lower Bound {#sec-rational-six-axis-atlas}
 
 Because two-angle coordinates $(\theta, \varphi)$ become singular at the poles and any single reference axis $\vv{a}$ leaves an orthogonal equator $\{x \in S^2 \mid \langle x, \vv{a}\rangle_{\mathbb{R}} = 0\}$ where inner-product overlap vanishes ([Chapter 1](ch01-measurement.md) and [Chapter 2](ch02-born-rule.md)), a natural topological question arises:
 

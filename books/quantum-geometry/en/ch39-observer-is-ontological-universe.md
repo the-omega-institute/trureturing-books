@@ -1,4 +1,4 @@
-# The Observer Is the Ontological Universe: Substrate-Free Reflexive Domains, Relational Holography, and Spinor Self-Folding
+# Chapter 39 The Observer Is the Ontological Universe: Substrate-Free Reflexive Domains, Relational Holography, and Spinor Self-Folding {#the-observer-is-the-ontological-universe-substrate-free-reflexive-domains-relational-holography-and-spinor-self-folding}
 
 > "The observer is the ontological universe."
 

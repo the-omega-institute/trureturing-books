@@ -1,4 +1,4 @@
-# Timeless Causality and the Gram Compatible Space: From the Pythagorean Pell Seam to Elliptic-Curve Tori
+# Chapter 29 Timeless Causality and the Gram Compatible Space: From the Pythagorean Pell Seam to Elliptic-Curve Tori {#timeless-causality-and-the-gram-compatible-space-from-the-pythagorean-pell-seam-to-elliptic-curve-tori}
 
 > *"The essence of order-independence is that sequential before-and-after time does not exist at all ... and that is precisely why causality is necessary. Because the observer is finite, the causality experienced is finite; the observer's choice is made within the causally compatible space, continuously picking points in the time field."*
 
@@ -10,11 +10,11 @@ Across the twenty-eight chapters of Parts I–VII, we have traveled from pairwis
 
 ---
 
-## Pythagoras, "All Is Number," and the Four-Tier Escape of Number {#sec-coda-pythagoras-all-is-number}
+## 29.1 Pythagoras, "All Is Number," and the Four-Tier Escape of Number {#sec-coda-pythagoras-all-is-number}
 
 If we compress all thirty-nine chapters of this monograph back into the foundational seed of mathematical civilization, we find that the entire architecture was already latent twenty-five centuries ago in the twin mottoes of the Pythagorean school: **the Pythagorean Theorem ($a^2 + b^2 = c^2$)** and **"All Is Number" ($\pi\alpha\nu\tau\alpha\ \dot{\alpha}\rho\iota\theta\mu\acute{o}\varsigma$ / 万物皆数)**. Viewed through Clifford geometric algebra and a formal proof kernel, these two ancient principles unfold as a three-act geometric drama.
 
-### Act I: The True Face of the Pythagorean Theorem—1D Segments Cannot Add, 2D Areas Conserve {#sec-coda-pythagoras-act1}
+### 29.1.1 Act I: The True Face of the Pythagorean Theorem—1D Segments Cannot Add, 2D Areas Conserve {#sec-coda-pythagoras-act1}
 
 Why can two orthogonal legs $\mathbf{a} \perp \mathbf{b}$ of a right triangle never add linearly as one-dimensional lengths ($a + b \neq c$), yet become strictly additive the moment we **square them** ($a^2 + b^2 = c^2$)?
 
@@ -44,7 +44,7 @@ Normalizing the hypotenuse to unit radius $c = 1$ transforms the Pythagorean the
 2. **Special Relativity (Part V, Chapter 17)**: In Minkowski spacetime, the proper-time rate $d\tau/dt$ and the normalized spatial speed $v/c$ obey $(d\tau/dt)^2 + (v/c)^2 = 1$ (the orthogonal rearrangement of $d\tau^2 = dt^2 - dx^2/c^2$, corresponding to hyperbolic Bogoliubov norm conservation [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation))—a photon experiences zero proper time for the purely geometric reason that its unit Pythagorean hypotenuse is projected entirely onto the spatial axis $v/c = 1$;
 3. **Diophantine Number Theory and Spinor Algebra (Part VI, Chapter 23)**: The unit quaternion sphere $S^3$ norm $s^2 + x^2 + y^2 + z^2 = 1$, the Eisenstein quadratic norm form identity ([`Qform_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm)), and the golden-integer Pell norm identity ([`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)) express the higher-dimensional Pythagorean theorem across orthogonal and quadratic lattices.
 
-### Act II: Hippasus's Crack and the Indestructible Pell Remainder $m^2 - 2n^2 = \pm 1$ {#sec-coda-pythagoras-act2}
+### 29.1.2 Act II: Hippasus's Crack and the Indestructible Pell Remainder $m^2 - 2n^2 = \pm 1$ {#sec-coda-pythagoras-act2}
 
 Yet this very Pythagorean theorem shattered the original static rational sphere of the early Pythagoreans.
 
@@ -158,7 +158,7 @@ The determinant $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$ of [@thm-ch29-silver-pell-
 **Always one cell off.** The convergents $1/1, 3/2, 7/5, 17/12, \dots$ hug the line $m = \sqrt{2}\,n$ ever more closely; the two bands on the right are the cell counts $m^2$ and $2n^2$, and in the magnifier they are always one cell apart.
 :::
 
-### Act III: Reclaiming "All Is Number"—From the Verb `shǔ` to the Four-Tier Escape {#sec-coda-pythagoras-act3}
+### 29.1.3 Act III: Reclaiming "All Is Number"—From the Verb `shǔ` to the Four-Tier Escape {#sec-coda-pythagoras-act3}
 
 If rational numbers cannot even hold the hypotenuse $\sqrt{2}$ of a unit square, was Pythagoras wrong to proclaim that "All Is Number"?
 
@@ -194,13 +194,13 @@ Seen through this four-tier table, Pythagoras and the overarching thesis of this
 
 ---
 
-## The $\pm 1$ Arithmetic Seam, Prime Duality, and the $S^3$ Projection on Elliptic Curve Tori {#sec-coda-primes-elliptic-curves}
+## 29.2 The $\pm 1$ Arithmetic Seam, Prime Duality, and the $S^3$ Projection on Elliptic Curve Tori {#sec-coda-primes-elliptic-curves}
 
 When we look closely at the Pell remainder $m^2 - 2n^2 = \pm 1$ ([@thm-ch29-silver-pell-remainder]) left by Hippasus on the integer grid, a deeper arithmetic question immediately arises: **is this oscillation between $+1$ and $-1$ an isolated quirk of $\sqrt{2}$, or does the $\pm 1$ seam govern the splitting of prime numbers, the topology of elliptic curves, and the $\cos\theta$ projection that runs through the entire book?**
 
 Following this $\pm 1$ crack uncovers three structural bridges uniting number theory, algebraic geometry, and quantum spinor geometry.
 
-### Pillar 1: The $\pm 1$ Pell Seam Splits Odd Primes into "Line Primes" and "Plane Primes" {#sec-coda-pell-prime-splitting}
+### 29.2.1 Pillar 1: The $\pm 1$ Pell Seam Splits Odd Primes into "Line Primes" and "Plane Primes" {#sec-coda-pell-prime-splitting}
 
 Even in the elementary lattice of natural numbers, once the smallest even prime $2$ and the smallest odd prime $3$ form the hexagonal period base $2 \times 3 = 6$, every prime $p \ge 5$ is forced to inhabit the $\pm 1$ seams flanking multiples of $6$:
 
@@ -334,7 +334,7 @@ which are exactly the two legs read off from the Gaussian product $(1 + i)(22 + 
    In this book's geometric reading, a $-1$ chiral twist can never arise in isolation on a single prime axis; it must cancel in pairs across places, an arithmetic echo of the principle of Chapter 10 that "pairwise comparison is always consistent and order-independent."
 :::
 
-### Pillar 2: Intersecting Two Quadratic Seams ($2 \times 2 = 4$)—From a Single Quadric to the Congruent-Number Elliptic Curve Torus {#sec-coda-congruent-elliptic-torus}
+### 29.2.2 Pillar 2: Intersecting Two Quadratic Seams ($2 \times 2 = 4$)—From a Single Quadric to the Congruent-Number Elliptic Curve Torus {#sec-coda-congruent-elliptic-torus}
 
 Passing from a single quadratic conic to the classical congruent-number problem—where a rational right triangle simultaneously satisfies a Pythagorean hypotenuse constraint and a prescribed orthogonal area—leads to the following classical algebraic-geometric and Riemann-surface structure:
 
@@ -362,7 +362,7 @@ Passing from a single quadratic conic to the classical congruent-number problem�
 **On a torus the arrows vanish nowhere.** On the torus $\bigl((R + r\cos\theta)\cos\phi,\, (R + r\cos\theta)\sin\phi,\, r\sin\theta\bigr)$ ($R > r > 0$) the cyan unit tangent vectors $\hat{\mathbf{e}}_\phi = (-\sin\phi, \cos\phi, 0)$ all point along the big circle, with length $1$ everywhere; the amber point goes once round, its arrow never shrinking, and there is no magenta ring of a zero on the torus. $\chi(T^2) = 0$, against $\chi(S^2) = 2$ for the sphere (literature result, not formalized in this book; see [@rem-ch29-elliptic-torus-literature]). The picture shows a surface of the same topology, not the elliptic curve itself.
 :::
 
-### Pillar 3: Finite-Field Elliptic-Curve Reduction, the Frobenius Cosine, and the $S^3 \cong \mathrm{SU}(2)$ Projection {#sec-coda-hasse-sato-tate}
+### 29.2.3 Pillar 3: Finite-Field Elliptic-Curve Reduction, the Frobenius Cosine, and the $S^3 \cong \mathrm{SU}(2)$ Projection {#sec-coda-hasse-sato-tate}
 
 A deeper arithmetic–geometric correspondence appears when we reduce the normalized congruent-number elliptic curve $E : y^2 = x^3 - x$ onto each odd prime axis $\mathbb{F}_p$ ($p \ge 3$) from Chapter 22:
 
@@ -521,7 +521,7 @@ In the overarching geometric synthesis of this book, starting from the Pell seam
 
 ---
 
-## Order-Independence, the Timeless Web, and the Geometric Necessity of Causality {#sec-coda-timeless-causality}
+## 29.3 Order-Independence, the Timeless Web, and the Geometric Necessity of Causality {#sec-coda-timeless-causality}
 
 When the principle of Chapter 10 ("pairwise comparison is always consistent and order-independent") meets the four-tier Pythagorean escape of number and the prime–elliptic-curve cosine projection, a two-thousand-five-hundred-year knot in philosophy and physics—**the illusion of sequential time versus the necessity of causality**—is cut in a single stroke:
 
@@ -529,7 +529,7 @@ When the principle of Chapter 10 ("pairwise comparison is always consistent and 
 
 Why does order-independence abolish sequential time while simultaneously grounding unbreakable causal necessity? We can trace this across three exact mathematical and physical levels:
 
-### Level 1: Why Order-Independence Abolishes Sequential Time {#sec-coda-order-independence-no-time}
+### 29.3.1 Level 1: Why Order-Independence Abolishes Sequential Time {#sec-coda-order-independence-no-time}
 
 ::: {.remark #rem-ch29-wheeler-dewitt-page-wootters-literature title="Factorial De-Ordering, the Wheeler–DeWitt Timeless Constraint, and Page–Wootters Conditional-Time Slicing (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Consider the cosine power series that runs through the book (cf. Prelude [@rem-prelude-dottie-literature]):
@@ -562,7 +562,7 @@ Analytically, $\frac{1}{(2k)!}$ arises from iterated differentiation (or the sim
 **Every page is there at once.** All twelve pages are on the sphere the whole time and none appears first; when it plays, only the amber reading head moves. Conditioning on the clock reading is what gives the page under the head (a schematic model with a finite clock, `MODEL`).
 :::
 
-### Level 2: Why Causality Is Necessary Without Temporal Pushing—Hume's Knot vs. Spinoza's Triangle and Gram Matrix Rigidity {#sec-coda-hume-spinoza-gram}
+### 29.3.2 Level 2: Why Causality Is Necessary Without Temporal Pushing—Hume's Knot vs. Spinoza's Triangle and Gram Matrix Rigidity {#sec-coda-hume-spinoza-gram}
 
 In empiricist philosophy, David Hume demonstrated that if we look for causality inside sequential time, we only ever observe habitual conjunction ("B follows A"), never a necessary connection by which A forces B. As long as causality is sought in temporal pushing from past to future, Hume's knot remains untied.
 
@@ -597,7 +597,7 @@ This single equation exhibits two inseparable faces:
 **Two cosines lock the third: the Gram window (1:39).** With $\theta_1 = 60^\circ$ and $\theta_2 = 45^\circ$ fixed, $\mathbf{C}$ goes once round $\mathbf{B}$: $c_{AC}$ swings through $[\cos 105^\circ, \cos 15^\circ]$, the violet volume collapses to zero at the edges, and a cosine outside the window would make $\det G$ negative. Then $\theta_2$ runs from $0^\circ$ to $180^\circ$ and the windows fill the slice of the Gram ellipse. Where the top edge reaches $1$, $\mathbf{C}$ lands exactly on $\mathbf{A}$, which is the second part of [@thm-ch29-gram-rigidity-and-pell]; every other number in the film is computed on screen.
 :::
 
-### Level 3: Feynman Stationary-Phase Cancellation, the Bivector Chirality Model ($+\mathbf{\Omega} - \mathbf{\Omega} = 0$), and the Reconciliation of Determinism and Teleology in $\psi = \psi(\psi)$ {#sec-coda-stationary-phase-reconciliation}
+### 29.3.3 Level 3: Feynman Stationary-Phase Cancellation, the Bivector Chirality Model ($+\mathbf{\Omega} - \mathbf{\Omega} = 0$), and the Reconciliation of Determinism and Teleology in $\psi = \psi(\psi)$ {#sec-coda-stationary-phase-reconciliation}
 
 From the standpoint of path integrals and the bivector chirality model, why does nature display only the causally necessary trajectory?
 
@@ -623,7 +623,7 @@ This picture simultaneously reconciles the age-old rivalry between **mechanical 
 
   there is neither a push from the past nor a pull from the future—only the unique self-consistent fixed point where the measuring operator and the measured state close into one.
 
-### Level 4: The Finite Observer, the Causally Compatible Space (Gram Elliptope), and Continuously Picking Points in the Time Field {#sec-coda-finite-observer-time-field}
+### 29.3.4 Level 4: The Finite Observer, the Causally Compatible Space (Gram Elliptope), and Continuously Picking Points in the Time Field {#sec-coda-finite-observer-time-field}
 
 > **Author's Epigraph**: *"Because the observer is finite, the causality experienced is finite; the observer's choice is made within the causally compatible space, continuously picking points in the time field."*（“因为观察者是有限的, 所以经历的因果是有限的, 观察者的选择是在因果的相容空间中做选择, 不断在时间场中选点”）
 
@@ -712,13 +712,13 @@ Part 1 expands $(2a + b)^2 - 5b^2 = 4a^2 + 4ab + b^2 - 5b^2 = 4(a^2 + ab - b^2) 
 
 ---
 
-## Coherence vs. Decoherence, the Two-Way Handshake, and Boundary-Locked Causality {#sec-ch29-coherence-handshake-causality}
+## 29.4 Coherence vs. Decoherence, the Two-Way Handshake, and Boundary-Locked Causality {#sec-ch29-coherence-handshake-causality}
 
 > “In logic there is no ‘existence’ versus ‘non-existence’—only coherence and decoherence; so that the future interferes with the past is nothing strange at all: that is causality.”
 
 In [the preceding section](#sec-coda-timeless-causality), unit-vector Gram rigidity ([@thm-ch29-gram-rigidity-and-pell]) showed how a timeless correlation web dissolves the mechanical domino picture of past pushing future. Yet everyday intuition still recoils at the phrase "the future interferes with the past," because it mistakes classical Boolean "existence (`1`) versus non-existence (`0`)" for the deepest ontological grammar of reality. Closing this chapter around the authorial proposition above (cataloged verbatim as `A75` in [Appendix A](appendix-a.md#sec-appendix-a-verbatim-ledger)), we unfold four disciplined pillars—orthogonal hiding and pinching decoherence; the two-way Born handshake and common-phase locking; stationary phase, weak values, delayed-choice erasure no-signaling, and Gram endpoint permutation; and anti-phase paradox cancellation versus self-consistent fixed points—while keeping every Lean 4 kernel theorem (`LEAN ✓`), elementary algebraic derivation (`manual derivation`), external physics source (`Literature`), double-precision numerical check (`NUM`), and orthogonal geometric interpretation (`MODEL`) sharply separated.
 
-### I. Dissolving the Boolean Illusion of "Existence vs. Non-Existence": Orthogonal Hiding, Two-Path Cancellation, and Pinching Decoherence {#sec-ch29-handshake-boolean-illusion}
+### 29.4.1 Dissolving the Boolean Illusion of "Existence vs. Non-Existence": Orthogonal Hiding, Two-Path Cancellation, and Pinching Decoherence {#sec-ch29-handshake-boolean-illusion}
 
 When a local detector reports `0`, Boolean habit declares that "nothing is there"; when it reports a definite click, it declares that an absolute classical entity has come into being. In fact, a bare zero reading by itself never identifies its underlying cause (an identically zero input also yields zero), and within controlled linear and operator models, phenomena loosely lumped together as "vanishing" or "freezing into a classical fact" correspond to three mathematically distinct operations (the component formulas below are elementary calculations, `manual derivation`; reading them as "no existence versus non-existence, only coherence and decoherence" is this book's interpretation, `MODEL`):
 
@@ -778,7 +778,7 @@ Reading Clauses 1 and 4 of [@thm-ch29-coherence-complement-and-pinching] togethe
 **Zero Readout Is Not "Non-Existence": Orthogonal Hiding, Anti-Phase Routing, and Pinching Card (`boolean-illusion`)**: Left: decomposing unit vector $\mathbf{B}$ along ruler $\mathbf{A}$—at $\theta = \pi/2$ the cyan axial shadow is $0$ while the magenta complement norm squared and oriented area squared remain $1$, with $\|\mathbf{A}+\mathbf{B}\|^2 = 2$. Center: balanced two-port recombiner—at equal magnitudes and $\Delta = \pi$, port `+` reads $0$ while port `-` reads $1$ ($p_+ + p_- = 1$). Right: $2\times 2$ path density $\rho_\gamma$—pinching $\gamma = 0$ deletes magenta off-diagonal coherence, preserves diagonals, and flattens both ports to $1/2$.
 :::
 
-### II. Causality as a Two-Way Born Handshake and Common-Phase Fairness {#sec-ch29-handshake-born-reciprocity}
+### 29.4.2 Causality as a Two-Way Born Handshake and Common-Phase Fairness {#sec-ch29-handshake-born-reciprocity}
 
 Why can a one-way complex overlap $\langle\phi|\psi\rangle$ never serve by itself as an objective causal weight? Under **independent** phase rotations $|\psi\rangle \mapsto e^{i\theta_\psi}|\psi\rangle$ and $|\phi\rangle \mapsto e^{i\theta_\phi}|\phi\rangle$ (note that a *common* rephasing $\theta_\psi = \theta_\phi$ already leaves $\langle\phi|\psi\rangle$ unchanged), direct calculation (`manual derivation`) gives
 
@@ -823,7 +823,7 @@ Keep the exact scope of [@thm-ch29-born-handshake-and-phase-fairness] in view: C
 **Counter-Rotating Amplitudes and Locked Two-Way Born Handshake Card (`born-handshake`)**: Sweeping Bloch angle $\theta \in [0, \pi]$ and reference phase $\chi \in [0, 2\pi]$ rotates the cyan forward overlap $a_{\mathrm{fwd}} = \langle\phi|\psi\rangle$ and magenta conjugate echo $a_{\mathrm{echo}} = \langle\psi|\phi\rangle$ in opposite directions, while their real product $\operatorname{Tr}(P_\phi P_\psi) = \cos^2(\theta/2)$ and both projectors remain invariant.
 :::
 
-### III. Future–Past Interference: Stationary-Phase Bundles, Weak Values, Delayed-Choice Erasure No-Signaling, and Gram Endpoint Swap {#sec-ch29-handshake-future-past}
+### 29.4.3 Future–Past Interference: Stationary-Phase Bundles, Weak Values, Delayed-Choice Erasure No-Signaling, and Gram Endpoint Swap {#sec-ch29-handshake-future-past}
 
 Once transition weights are understood as Hermitian pairings across initial and final boundaries, "interference between future and past" loses all mystique: apparent local irreversibility arises only because a partial-trace observer loses access to environmental and correlation sectors, whereas inside an undiscarded joint system unimodular phase records admit coherent reversal and future basis choices sort joint outcomes into complementary interference sub-ensembles without altering the unconditional past marginal. We first lock the four formal theorems governing joint coherent reversal, reduced-state access defect, bipartite marginal blind spots, and positive-operator Gram factorization, and then state the companion physics literature and manual no-signaling and permutation identities:
 
@@ -891,7 +891,7 @@ Finally, returning to Chapter 29's three-vector Gram elliptope (cf. [@thm-ch29-g
 **Three-Epoch Gram Endpoint Swap and Determinant Invariance Card (`gram-symmetry`)**: Applying $G' = P_{13} G P_{13}^{\mathsf{T}}$ to real unit vectors $\mathbf{A}_{\mathrm{past}}, \mathbf{B}_{\mathrm{now}}, \mathbf{C}_{\mathrm{future}}$ swaps entries $x$ and $y$ when $x \neq y$ ($G' \neq G$, whereas symmetric snap $x = y = 0.5$ gives $G' = G$) while strictly preserving positive semidefiniteness, eigenvalues, and squared volume $\det G' = \det G = (\mathbf{A}\cdot(\mathbf{B}\times\mathbf{C}))^2 \ge 0$.
 :::
 
-### IV. Why Causal Loops Never Explode: Anti-Phase Paradox Cancellation vs. Self-Consistent Fixed Points {#sec-ch29-handshake-loop-consistency}
+### 29.4.4 Why Causal Loops Never Explode: Anti-Phase Paradox Cancellation vs. Self-Consistent Fixed Points {#sec-ch29-handshake-loop-consistency}
 
 This coherence-and-decoherence account also resolves the classic riddle of closed causal loops: if future and past couple around a loop, why does the "grandfather paradox" (a self-negating cycle $P \leftrightarrow \neg P$) never blow logic apart? The answer lies in keeping three distinct consistency mechanisms cleanly separated (`manual derivation` + `Literature` + `MODEL`):
 
@@ -951,7 +951,7 @@ Step into the full interactive laboratory below to switch freely across all six 
 
 ---
 
-## Chapter Summary: From the Arithmetic Seam to the Timeless Causal Crystal {#sec-ch29-summary}
+## 29.5 Chapter Summary: From the Arithmetic Seam to the Timeless Causal Crystal {#sec-ch29-summary}
 
 This chapter has unified Pythagorean area conservation, the Pell remainder and best-approximation lower bound of the silver slope $\sqrt{2} - 1$ ([@thm-ch29-silver-pell-remainder], [@thm-ch29-silver-best-approximation]), the golden-integer Pell norm identity, unit-vector Gram overlap equivalence ([@thm-ch29-gram-rigidity-and-pell]), and the plane-prime and two-squares criteria ([@thm-ch29-face-prime-two-squares], [@thm-ch29-two-squares-classification])—alongside the continued-fraction and arithmetic-geometry literature remarks ([@rem-ch29-pell-convergents-literature], [@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], [@rem-ch29-arithmetic-geometry-literature]) and the timeless-constraint and stationary-phase literature remarks ([@rem-ch29-wheeler-dewitt-page-wootters-literature], [@rem-ch29-feynman-stationary-phase-literature])—with Spinoza's geometric necessity, the finite observer's Gram elliptope ($\det G \ge 0$), and coherence-versus-decoherence logic, the two-way Born handshake, delayed-choice erasure no-signaling, and closed-loop fixed points ([@thm-ch29-coherence-complement-and-pinching]–[@thm-ch29-double-cover-fates-and-dottie], [@rem-ch29-transactional-tsvf-eraser-literature], [@rem-ch29-coherence-causality-comparison]): **because the global field is timeless, truth endures forever; because the observer is finite, every step is new.**
 

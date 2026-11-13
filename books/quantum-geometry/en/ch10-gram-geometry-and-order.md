@@ -1,4 +1,4 @@
-# Pairwise Comparison, Always Consistent, Order-Independent: Dissolving the Non-Commutativity Illusion and Berry Phase
+# Chapter 10 Pairwise Comparison, Always Consistent, Order-Independent: Dissolving the Non-Commutativity Illusion and Berry Phase {#pairwise-comparison-always-consistent-order-independent-dissolving-the-non-commutativity-illusion-and-berry-phase}
 
 > *"I keep feeling that the essence of quantum theory is this: compare things pairwise, always consistently, regardless of order."*
 
@@ -17,7 +17,7 @@ Across four sections, this chapter makes the boundary between the two completely
 **Figure 10.** The chapter at a glance. Panel I: two amber arcs leave the North Pole $N$; turning about $Y$ and then $X$ lands at $+X$, turning about $X$ and then $Y$ lands at $-Y$, and the two ends are $90^\circ$ apart. Panel II: the small cyan arrows on the sphere at the left shrink to zero at both poles (violet rings; a literature result, not formalized in this book), while the dashed circle at the right stands for the rotor sphere $S^3$ and carries a violet frame at every point. Panel III: the full complex Gram table of the three states of [@ex-octant-berry-gram], with the pairwise complex overlaps in the cyan cells ([@thm-gram-unitary-reconstruction]).
 :::
 
-## Rotation Order and Berry Solid Angle {#sec-spherical-order-and-berry}
+## 10.1 Rotation Order and Berry Solid Angle {#sec-spherical-order-and-berry}
 
 Begin by honoring genuine noncommutativity where it actually occurs.
 
@@ -169,7 +169,7 @@ Note the exact contract of [@cor-latitude-complex-overlap]: it holds for all com
 **Once round the equator.** The four corners $+X, +Y, -X, -Y$ all lie on the latitude $t = \frac{1}{2}$, so by [@cor-latitude-complex-overlap] each neighbouring inner product is $\frac{1+i}{2}$; their product is $-\frac{1}{4}$ and the cyan needle at the lower right stops at $\pi$. The magenta area is the whole northern hemisphere, $2\pi$. The amber arrow returns to $+X$ on top of the dashed one, as if it had not turned; the full magenta disc beside it shows that it has in fact turned a whole circle.
 :::
 
-## Keeping Instruments and Time Order {#sec-instruments-preserve-order}
+## 10.2 Keeping Instruments and Time Order {#sec-instruments-preserve-order}
 
 Before turning to global Gram reconstruction, let us enforce a crucial operational boundary: **pairwise consistency of state overlaps never makes sequential physical operations commute, nor does it allow sequential measurement statistics to be deduced from static single-step effects alone.**
 
@@ -208,7 +208,7 @@ establishing conjuncts 1–3. For the initial state $P_0$ and first outcome $\ma
 **Same effect, different exits.** Both rows start at the north pole $N$ and record the outcome $\mathrm{false}$, and the cyan box in the middle is the same effect $E = P_0$. In the top row the projective instrument $K = P_0$ leaves the amber point at the north pole; in the bottom row the flipped instrument $L = XP_0$ turns it over to the south pole. Far right are the readings of the second shutter $I - P_0$: $0$ and $1$ ([@prop-static-sequential-separation]).
 :::
 
-## Hairy Ball, Hopf Fibers, and the Rotor Sphere {#sec-hairy-ball-hopf-rotors}
+## 10.3 Hairy Ball, Hopf Fibers, and the Rotor Sphere {#sec-hairy-ball-hopf-rotors}
 
 Why does local coordinate descriptions on the Bloch sphere $S^2$ inevitably run into gauge patches, phase twists, and singular poles? Why can we not simply assign a smooth tangent ruler and a smooth unit spinor $\lvert\psi(p)\rangle$ to every direction $p \in S^2$ once and for all?
 
@@ -250,7 +250,7 @@ Panel II of Figure 10 contrasts the two distinct topological obstructions on the
 **In the north gauge the phase turns once around the south pole, so it has no value there.** The southern hemisphere seen from above, with the south pole at the centre. On two latitude circles, the cyan hand in each dial is the phase of $\langle 1\mid\psi_N\rangle$ for the north-gauge representative $\psi_N = \bigl(\cos\frac{\theta}{2}, e^{i\varphi}\sin\frac{\theta}{2}\bigr)$: once round a circle, the hands turn once round too; the inner circle, closer to the pole, still gives one full turn, so no value fits at the pole inside the dashed violet ring. That the Hopf bundle has no global section is a literature result, not formalized in this book ([@rem-hopf-dirac-monopole-literature]).
 :::
 
-## Reconstruction from the Full Complex Gram Matrix {#sec-complex-gram-reconstruction}
+## 10.4 Reconstruction from the Full Complex Gram Matrix {#sec-complex-gram-reconstruction}
 
 We are now ready to state the exact mathematical theorem behind *"compare things pairwise, always consistently, regardless of order"* (Panel III of Figure 10).
 
@@ -349,7 +349,7 @@ Notice that [@lemma-unit-gram-equality] requires overlap equal to $1$, not modul
 **Walked the other way, the handedness flips.** The same triangle taken as $N \to +Y \to +X \to N$: the magenta area is just as large, but the amber arrow turns $\frac{\pi}{2}$ the other way and the cyan needle at the lower right stops at $-\frac{\pi}{4}$. The three neighbouring squared moduli are still all $\frac{1}{2}$: squared moduli alone cannot tell the two walks apart.
 :::
 
-### A Timeless Interpretation: How Gram Geometry Constrains Causally Compatible Choices {#sec-timeless-gram-causality}
+### 10.4.1 A Timeless Interpretation: How Gram Geometry Constrains Causally Compatible Choices {#sec-timeless-gram-causality}
 
 > **Author's Original Words**: *"The essence of order-independence is that sequential before-and-after time simply does not exist at all... and that is why causality is so necessary." This single sentence slices straight through the 2,500-year-old "riddle of time" and "Hume's knot of causality."*
 >

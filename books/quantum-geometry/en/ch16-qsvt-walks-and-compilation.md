@@ -1,4 +1,4 @@
-# Grand Unification of Quantum Algorithms (QSVT), Quantum Walks, and Gate-Compilation Polytopes
+# Chapter 16 Grand Unification of Quantum Algorithms (QSVT), Quantum Walks, and Gate-Compilation Polytopes {#grand-unification-of-quantum-algorithms-qsvt-quantum-walks-and-gate-compilation-polytopes}
 
 > *"P/NP depends on the initial structure; some initial structures can yield P=NP. Handling infinity is essentially a matter of factorization: finding how to “cancel” infinity, continually building on known results about infinity to cancel it away. P/NP is related to lookup algorithms, order, and the order of memory. Count everything in quantum gates. The central question is really a general way to prove a proposition."*
 
@@ -15,7 +15,7 @@ We establish and examine four interconnected themes:
 **Figure 16.** The chapter at a glance. Panel I: on $[-1, 1]$ the cyan Chebyshev polynomial $T_3(x) = 4x^3 - 3x$ swings back and forth between $-1$ and $1$; the grey line is $T_1(x) = x$. Panel II: the $19$ cyan vertices where $\{H, T\}$ words of length at most $6$ take the north pole; their convex hull encloses the centre with flat chordal faces, leaving gaps below the shell. Panel III: the cyan staircase of source queries $2n + 1$ for exact amplitude amplification stays under the green bound $(\pi/2 + 2)/\sqrt{p}$ ([@cor-exact-source-query-count]); the three dots are the table's $3$, $7$ and $13$.
 :::
 
-## QSVT: Two-Dimensional Blocks and Chebyshev Recurrences {#sec-qsvt-chebyshev-blocks}
+## 16.1 QSVT: Two-Dimensional Blocks and Chebyshev Recurrences {#sec-qsvt-chebyshev-blocks}
 
 Why can contemporary quantum algorithms unify search, eigenvalue filtering, Hamiltonian simulation, and matrix inversion into polynomial transformations of singular values? Because inside a unitary operator, a natural bounded scalar input is a projection cosine $x = \cos\theta \in [-1, 1]$; iterating a two-dimensional rotation block $m$ times multiplies the rotation angle from $\theta$ to $m\theta$, turning the top-left entry into the degree-$m$ **Chebyshev polynomial of the first kind**, $T_m(x) = \cos(m\arccos x)$!
 
@@ -65,7 +65,7 @@ has eigenvalues $a = e^{i\theta}$ and $b = e^{-i\theta}$ ($\det W(x) = ab = 1$, 
 
 **Strict mathematical boundary**: [@thm-chebyshev-trace-recurrence] is a scalar recurrence in an arbitrary commutative ring $R$ with $ab = 1$ and makes no assumptions about matrices, singular values, or phase sequences; connecting it to $W(x) \in \mathrm{SU}(2)$ is an explicit hand calculation, not a formalization of the full QSVT theorem. In particular, one cannot realize an arbitrary polynomial from this recurrence alone (the polynomial realizability conditions for full QSVT are recorded in [@rem-qsvt-walks-literature]).
 
-## Quantum Walks: Coherent Superposition and Its Limits {#sec-quantum-walk-interference}
+## 16.2 Quantum Walks: Coherent Superposition and Its Limits {#sec-quantum-walk-interference}
 
 When a quantum state carries a two-level internal coin and steps coherently across the vertices of a graph, we obtain a **discrete-time quantum walk**.
 
@@ -190,7 +190,7 @@ Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 
 :::
 
-## From Interval Sums of Squares to Continuous Matrix Completion {#sec-interval-sos-completion}
+## 16.3 From Interval Sums of Squares to Continuous Matrix Completion {#sec-interval-sos-completion}
 
 
 **What is missing at the endpoint?** Take $p(x)=x/2$. If the real target $p$ itself must occupy the diagonal, the condition $p(x)^2+(1-x^2)Q(x)^2=1$ gives the impossible equality $1/4=1$ at $x=1$. The missing weight can instead enter the imaginary part of the diagonal: choose
@@ -405,7 +405,7 @@ Agreement with the interval pullback $U_{\mathrm{int}}(\operatorname{Re}z)$ is g
 **The walk-spreading lab.** Drag the rail to change the steps, change the coin's share $w$ and phase $\varphi$, or shorten the cycle: cyan above is the quantum walk, grey below the classical random walk, and magenta what the quantum distribution has beyond its mirror image. The green box is [@lemma-symmetric-coin-walk]; the widths and the lopsidedness are the page's numbers.
 :::
 
-## Finite Gate Words and Three-Dimensional Polytope Approximation {#sec-finite-gate-polytope}
+## 16.4 Finite Gate Words and Three-Dimensional Polytope Approximation {#sec-finite-gate-polytope}
 
 So far we have treated rotation angles $\theta$ and $\phi_k$ as continuous real parameters. In fault-tolerant quantum architectures ([Chapter 14](ch14-cloning-codes-and-braids.md)), however, hardware provides only a **finite discrete gate alphabet** — typically the Clifford+$T$ pair $\{H, T\}$.
 
@@ -476,7 +476,7 @@ In [@prop-two-axis-finite-word], each step chooses any continuous angle from $\m
 **At $24576$ sides the gap is still there.** Zu Chongzhi pushed the circle-cutting to $24576$ sides. The cyan inscribed polygon can no longer be told apart from the circle, and the magenta gap $1 - \cos\frac{\pi}{n}$ is down to $8.17\times10^{-9}$; magnified about $7.5\times10^{7}$ times vertically, it looks exactly as it did at the first step. This is circle-cutting in the plane; reading it as chordal faces approximating a sphere is only the pedagogical analogy of item 5 above (for the numerical table, see [Chapter 21](ch21-diagonalization-and-escape.md), [@ex-liu-hui-polygon-sagitta]).
 :::
 
-## Compilation Error, Query Counts, and Asymptotic Gate Length {#sec-compilation-error-and-count}
+## 16.5 Compilation Error, Query Counts, and Asymptotic Gate Length {#sec-compilation-error-and-count}
 
 When the initial success probability $p \in (0, 1]$ in amplitude amplification is known and we are allowed an auxiliary coin rotation `coinRotation q`, we can eliminate the integer-step overshoot of [Chapter 15](ch15-grover-qft-and-period-finding.md) completely and bound the exact number of source queries.
 

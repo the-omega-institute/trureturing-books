@@ -1,4 +1,4 @@
-# 单量子比特旋转器编译：布洛赫几何定理与 ZYZ 欧拉角编译器
+# 第二十六章 单量子比特旋转器编译：布洛赫几何定理与 ZYZ 欧拉角编译器 {#单量子比特旋转器编译布洛赫几何定理与-zyz-欧拉角编译器}
 
 > *“量子态是方向,量子门是让量子态转向的,那么可以理解为一种有面积的几何结构”*
 
@@ -17,7 +17,7 @@
 **图 26。** 本章地图：左栏，绿色的布洛赫球，琥珀色的纯态箭头伸到球面 $\lvert r\rvert = 1$，墨色的点在球内，迹为 $1$ 的正半定矩阵都落在这里（[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）；中栏，夹心积绕紫色的 $z$ 轴转 $90^\circ$，青色的影子留在轴上，品红的扇形被虚线分成两个半角；右栏，$e_1$ 按旋子乘积的作用顺序先绕 $z$ 转 $\gamma$、再绕 $y$ 转 $\beta$、最后绕 $z$ 转 $\alpha$，参数组写作 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$，琥珀色的三段路停在 $R e_1 \widetilde{R}$（旋子编译是数值演示，没有冻结定理）。
 :::
 
-## 布洛赫矩阵的迹与坐标还原 {#sec-bloch-matrix-trace-and-recovery}
+## 26.1 布洛赫矩阵的迹与坐标还原 {#sec-bloch-matrix-trace-and-recovery}
 
 在 Lean 4 模块 `D5/S3/Quantum/Information/ActualPureQubitGeometry.lean`（命名空间为 `D5.S3.Quantum.Information.ActualPureQubitCostInfimum`）中，为了建立 $2\times 2$ 厄米矩阵 $M \in M_2(\mathbb{C})$ 与“实迹 $\operatorname{Re}(\Tr M)$、三维实布洛赫向量 $\operatorname{bloch}(M) \in \operatorname{EuclideanSpace}\,\mathbb{R}\,(\operatorname{Fin} 3)$”这一对数据之间的精确双向映射，源码首先给出了两个核心定义：
 
@@ -72,7 +72,7 @@ $$
 **从矩阵读回迹与三个坐标。** 取 $a = 1$、$r = (0.48, 0.60, 0.64)$ 的 $\operatorname{blochMatrix}(1, r)$：青色的对角两格相加得迹 $1$、相减得 $z = 0.64$；墨色的右上一格给出 $x = 2 \times 0.24$ 与 $y = -2 \times (-0.30)$；虚线框的左下一格只是它的共轭，不必读。读回的正是 $r$（[@thm-bloch-matrix-trace]、[@lemma-bloch-coordinate-recovery]）。
 :::
 
-## 厄米重构、纯态单位球面与正半定球界 {#sec-hermitian-bloch-and-psd-ball}
+## 26.2 厄米重构、纯态单位球面与正半定球界 {#sec-hermitian-bloch-and-psd-ball}
 
 前两条定理从参数 $(a, r)$ 出发验证了 $\operatorname{blochMatrix}(a, r)$ 的迹与向量还原。反过来，若给定任意一个满足厄米条件 `M.IsHermitian`（即 $M^* = M$）的 $2\times 2$ 复矩阵 $M \in M_2(\mathbb{C})$，它是否必然等于由其自身实迹 $\operatorname{Re}(\Tr M)$ 与自身布洛赫向量 $\operatorname{bloch}(M)$ 重构出的布洛赫矩阵？而且，当它进一步满足迹为 $1$（$\Tr M = 1$）与幂等性（$M \cdot M = M$，即[第三章](ch03-projectors-and-duality.md)的纯态投影线条件）时，它的布洛赫向量模长为什么一定精确等于 $1$？
 
@@ -128,7 +128,7 @@ $$
 **迹为 $1$ 时，行列式的符号说出箭头在哪。** 布洛赫球的 $x$–$z$ 截面：$\det = (1 - \lvert r\rvert^2)/4$，琥珀色的纯态在绿色的圆周上，$\det = 0$；墨色的点在球内，$\det = 0.19 > 0$；品红的点在球外，$\det = -0.17 < 0$，不是正半定。绿色的圆盘是正半定矩阵所能到达的范围（[@cor-psd-bloch-ball-bound]），圆周是迹一幂等的纯态（[@prop-hermitian-bloch-geometry]）。
 :::
 
-## 偶子代数双矢量与双侧夹心积 {#sec-even-rotor-sandwich-action}
+## 26.3 偶子代数双矢量与双侧夹心积 {#sec-even-rotor-sandwich-action}
 
 有了 [@thm-bloch-matrix-trace] 至 [@cor-psd-bloch-ball-bound] 奠定的布洛赫球体状态几何，现在让我们把目光转向**旋转器（Rotor）编译**：当单比特量子门作用在布洛赫向量 $v = r_0 e_1 + r_1 e_2 + r_2 e_3 \in \mathbb{R}^3 \subset \mathcal{Cl}_{3,0}(\mathbb{R})$ 上时，如何完全在实克利福德偶子代数 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 内部完成编译与旋转？
 
@@ -180,7 +180,7 @@ $$
 **三段转动乘成一枚旋子。** 取下面例题的 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$：琥珀色的箭头 $v$ 先绕紫色的 $z$ 轴转 $\gamma$，再绕 $y$ 轴转 $\beta$，最后绕 $z$ 轴转 $\alpha$；白色三脚架停在 $Re_1$、$Re_2$、$Re_3$，图顶写出乘完的旋子 $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$。旋子编译没有冻结定理，页面上它只是数值演示。
 :::
 
-## ZYZ 旋转器编译器 Python 3 实现与数值核验 {#sec-zyz-rotor-compiler-python}
+## 26.4 ZYZ 旋转器编译器 Python 3 实现与数值核验 {#sec-zyz-rotor-compiler-python}
 
 这里沿用前章引擎的实系数范围：编译得到实偶旋转器，单位条件使 `reverse()` 可作逆元，`norm_squared()` 也在这一范围内核验归一化。
 

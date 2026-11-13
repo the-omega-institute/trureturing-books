@@ -1,4 +1,4 @@
-# 狄拉克旋量与规范场：为什么粒子要在球外绕行，为什么力是面积的曲率？
+# 第十八章 狄拉克旋量与规范场：为什么粒子要在球外绕行，为什么力是面积的曲率？ {#狄拉克旋量与规范场为什么粒子要在球外绕行为什么力是面积的曲率}
 
 > *“那面积与线、波与粒子,本质上就是一种场呀”*
 
@@ -13,7 +13,7 @@
 **图 18。** 本章地图：第 I 栏，二分量手性模型 $H = pZ + mX$ 的两个分量——蓝色的上分量 $Z = +1$ 与橙色斜纹的下分量 $Z = -1$——各自只带对角项 $\pm p$，质量 $m$ 是两者之间唯一的连线；第 II 栏，$3 \times 3$ 格点上青色的生成树是三行横边加最左一列，其余 $4 = m + 1 - n$ 条竖边是弦，品红的那一条弦与树一起围出品红的基本回路；第 III 栏，例题的单个方格在紫色的规范 $g = (1, i, -1, -i)$ 下，四条边中点的相位指针读作 $(i, i, i, -1)$，中心品红的回路相位仍是 $i$（[@cor-anchored-phase-classification]）。
 :::
 
-## 手性分解与反交换的手算起点 {#sec-chiral-factorization}
+## 18.1 手性分解与反交换的手算起点 {#sec-chiral-factorization}
 
 让我们从保罗·狄拉克（Paul Dirac）在 1928 年面对的那道代数难题算起。在相对论力学中，一颗静止质量为 $m$、动量为 $p$ 的自由粒子满足二次色散关系 $E^2 = p^2 + m^2$。然而，量子演化方程对时间是一阶导数——要想写出不含根号 $\sqrt{p^2 + m^2}$ 的一阶线性哈密顿量 $H = p\alpha + m\beta$，我们需要让一次式 $p\alpha + m\beta$ 的平方精确还原出二次平方和 $p^2 + m^2$：
 
@@ -97,7 +97,7 @@ $$
 参见 R. P. Feynman & A. R. Hibbs, *Quantum Mechanics and Path Integrals* (McGraw–Hill, 1965)；以及 D. Hestenes, *Space-Time Algebra* (Gordon and Breach, 1966)。
 :::
 
-## 小方格平行移动与交换子 {#sec-curvature-plaquette}
+## 18.2 小方格平行移动与交换子 {#sec-curvature-plaquette}
 
 从手性旋量往前再走一步：当一个携带内部相位的量子态从空间中的一点移动到相邻一点时，我们怎样比较两个不同位置上的相位箭头？
 
@@ -140,7 +140,7 @@ $$
 对于非阿贝尔规范群（如 $SU(N)$），沿闭合回路绕行一周的平行移动和乐（holonomy）在基点规范变换下按群共轭 $U_\square \mapsto g_0 U_\square g_0^{-1}$ 变换，因此只有其**共轭类**或威尔逊圈迹（Wilson loop trace，$\Tr U_\square$）才是规范不变量。必须明确：上述无穷小方格展开式属于连续统微积分近似，而本章随后两节经 Lean 验证的定理（[@thm-tree-phase-transport] 与 [@cor-anchored-phase-classification]）严格建立在命名图上的精确离散阿贝尔单位圆群 $\operatorname{Circle} = U(1)$ 相位之上，既不依赖任何连续极限近似，也不能直接提升为非阿贝尔连续规范场定理。参见 Y. Aharonov & D. Bohm, *Phys. Rev.* **115**, 485 (1959), DOI: `10.1103/PhysRev.115.485`；以及 K. G. Wilson, *Phys. Rev. D* **10**, 2445 (1974), DOI: `10.1103/PhysRevD.10.2445`。
 :::
 
-## 选定生成树上的相位输运 {#sec-tree-gauge-transport}
+## 18.3 选定生成树上的相位输运 {#sec-tree-gauge-transport}
 
 现在，让我们在无需任何连续统微积分近似的前提下，把图上的阿贝尔 $U(1)$ 规范场彻底算穿。
 
@@ -196,7 +196,7 @@ $$
 在树支撑图 $\operatorname{treeSupport}(s, t, T)$ 中，从 $r$ 到 $r$ 的唯一简单路径为空路径 `.nil`，故输运乘积为 $1$（性质 1）。对任意树边 $e \in T$，唯一树路径从 $r$ 到 $t(e)$ 与经由 $e$ 拼接的路径具有相同的无回溯简约形式，单步相位抵消给出 $\operatorname{rootPhase}(t(e)) = u(e)\operatorname{rootPhase}(s(e))$（性质 2）。在任意行走路径上对步进作归纳，中间顶点的规范因子 $g(v)^{-1} g(v) = 1$ 逐站望远镜相消，只剩首尾端点因子 $g(a)$ 与 $g(r)^{-1}$（性质 3）。由于每条固定树路径仅涉及有限步乘积与求逆，且 $\operatorname{Circle}$ 为阿贝尔拓扑群，乘积拓扑下的连续性、乘法同态性与常值 $1$ 保持性（性质 4–6）沿路径归纳直接成立。完整证明由 Lean 内核检查。
 :::
 
-## 闭合回路相位与锚定规范等价 {#sec-gauge-loop-coordinates}
+## 18.4 闭合回路相位与锚定规范等价 {#sec-gauge-loop-coordinates}
 
 仔细端详 [@thm-tree-phase-transport] 的第 3 条性质：当顶点规范变换发生时，从根 $r$ 到顶点 $a$ 的树路径相位变化为 $g(a)\cdot\operatorname{rootPhase}(u, a)\cdot g(r)^{-1}$。这意味着什么？
 

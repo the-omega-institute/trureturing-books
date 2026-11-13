@@ -1,4 +1,4 @@
-# Prelude: Point, Line, Plane, Sphere, and the One Beyond the Sphere
+# Prelude Point, Line, Plane, Sphere, and the One Beyond the Sphere {#prelude-point-line-plane-sphere-and-the-one-beyond-the-sphere}
 
 > *"What we take to be a point is in fact a line; what we take to be a line is in fact a plane; what we take to be a plane is in fact a sphere; and when we think we have seen the sphere, we are already enclosed within a larger sphere."*
 >
@@ -16,7 +16,7 @@ Whenever physics has appeared haunted by paradox, the culprit has almost always 
 
 In the figure, $O$, $A$, and $B$ are unit vectors. In the plane panel, $\theta$ is the directed angle from $A$ to $B$ measured in the fixed orientation $\hat{I}$.
 
-## First Blind Spot: Mistaking a Line for a Point {#sec-blindspot-1}
+## 0.1 First Blind Spot: Mistaking a Line for a Point {#sec-blindspot-1}
 
 **What we take to be a point is in fact a line.**
 
@@ -32,7 +32,7 @@ Step half a pace to the side and the dot immediately unfolds into what it always
 
 > A "particle" is merely the bruise left on the retina when a ray meets the eye head-on; "substance" is what grammar invents when the gaze refuses to turn.
 
-## Second Blind Spot: Mistaking a Plane for a Line {#sec-blindspot-2}
+## 0.2 Second Blind Spot: Mistaking a Plane for a Line {#sec-blindspot-2}
 
 **What we take to be a line is in fact a plane.**
 
@@ -48,7 +48,7 @@ Raise your head three inches and the mystery evaporates. There is no invisible s
 
 The "complex phase factors," "imaginary unit $i$," and "unitary gate matrices" that intimidate students in standard quantum computing textbooks are nothing more than this spinning platter seen edge-on. The unit bivector $\hat{I}$ satisfies $\hat{I}^2 = -1$ not because nature traffics in "imaginary" numbers, but because two successive $90^\circ$ orthogonal turns within the same plane ($90^\circ + 90^\circ = 180^\circ$) reverse the direction of every vector in that plane. When we peer at two-dimensional quantum gate rotations from the thin edge of our one-dimensional classical timeline, uniform rotation of a direction within the plane masquerades as the waxing and waning of probability amplitudes along a line.
 
-## Third Blind Spot: Mistaking a Sphere for a Plane {#sec-blindspot-3}
+## 0.3 Third Blind Spot: Mistaking a Sphere for a Plane {#sec-blindspot-3}
 
 **What we take to be a plane is in fact a sphere.**
 
@@ -74,7 +74,7 @@ See H. P. Robertson, *The Uncertainty Principle* (1929, DOI [10.1103/PhysRev.34.
 
 None of the three represents a breakdown of logic or a capricious throw of dice — each reflects orthogonal algebra and bundle geometry projected onto local frames.
 
-## Fourth Blind Spot: The Sphere Beyond Spheres {#sec-blindspot-4}
+## 0.4 Fourth Blind Spot: The Sphere Beyond Spheres {#sec-blindspot-4}
 
 **And at the very moment we think we have beheld the whole sphere, we are already enclosed within a larger sphere.**
 
@@ -94,7 +94,7 @@ Representing a subspace by a normal line requires an ambient space large enough 
 **Give up every direction, average over the whole sphere, and the arrows cancel back to the centre.** Twelve cyan arrows point to the twelve vertices of a regular icosahedron, spread evenly in all directions, each paired with one pointing the opposite way; they add up to zero, and the average sits at the centre, the maximally mixed state $\rho_* = \frac{1}{2}I$.
 :::
 
-## Final Awakening: From Beyond the Sphere Back to $\psi = \psi(\psi)$ {#sec-awakening}
+## 0.5 Final Awakening: From Beyond the Sphere Back to $\psi = \psi(\psi)$ {#sec-awakening}
 
 Were the story to end at the fourth blind spot, thought would resemble a Sisyphus beetle climbing an endless tower of ambient embeddings $S^1 \hookrightarrow S^2 \hookrightarrow S^3 \hookrightarrow \cdots$, escaping each shell only by positing another overhead.
 
@@ -148,7 +148,7 @@ For gate-set density, see P. O. Boykin et al., *On Universal and Fault-Tolerant 
 
 Unfolded, it spans thirty-nine chapters across quantum computing, spacetime physics, and mathematical logic; folded back, it is simply $\psi$ taking itself as ruler to measure the angle it opens, and recognizing itself across the living seam of approximation.
 
-## Reader's Guide and Formal Verification Contract {#sec-contract}
+## 0.6 Reader's Guide and Formal Verification Contract {#sec-contract}
 
 The full architecture of *Geometric Intuition of Quantum Computing* comprises **ten parts and thirty-nine chapters** (four chapters per part across Parts I–IX, mirroring the four-beat rhythm of *establishing a line, opening a plane, closing a sphere, and crossing the horizon*, followed by Part X's three-chapter culmination across dream quantum erasure, cosmic ontological QRAM pointers, and the non-dual identity of observer and universe):
 
@@ -171,7 +171,7 @@ Readers may begin directly with [Chapter 1](ch01-measurement.md): no prior famil
 A 48-slide overview of the whole book: the four blind spots and the dimensional ladder; each of the ten parts' core picture, main theorems, literature results and open problems; the counts of the three tiers of warrant and the dependency map.
 :::
 
-### Formal Verification and Epistemic Honesty Contract {#sec-honesty-rules}
+### 0.6.1 Formal Verification and Epistemic Honesty Contract {#sec-honesty-rules}
 
 While the prose aims for vivid physical clarity, every mathematical claim obeys a strict three-tier formal verification contract: **the book explains why a truth makes sense; the Lean kernel guarantees that it holds.**
 

@@ -1,4 +1,4 @@
-# Attention as Computation: Measurement-Based Quantum Computing and Spherical Natural Gradients
+# Chapter 12 Attention as Computation: Measurement-Based Quantum Computing and Spherical Natural Gradients {#attention-as-computation-measurement-based-quantum-computing-and-spherical-natural-gradients}
 
 > *"If we make the observer part of the picture, whether something appears as a particle or a wave seems to depend on the observer’s attention."*
 
@@ -17,7 +17,7 @@ At the end of [Chapter 11](ch11-pulses-and-virtual-z.md), we saw a striking reve
 **Figure 12.** The chapter at a glance: Panel I is a measuring angle becoming a gate on another node, Panel II is a quarter turn each way giving the exact slope, and Panel III is the distribution crowding onto the equator as the dimension grows. In Panel I the amber pointer is the measuring angle $\alpha$ and the dashed arrow carries the classical bit $s$ to the output node; in Panel II the amber point sits at $\theta = 60^\circ$, the two cyan points $90^\circ$ to either side, and the dashed line is the tangent; Panel III shows the exact density of $x_1$, flat for $d = 3$ and a cyan spike at the equator for $d = 300$. MBQC, the parameter-shift rule and equatorial concentration are literature results, not formalized in this book ([@rem-mbqc-gradients-literature]), so none of the three panels carries a green chip.
 :::
 
-## Cluster Measurements and Classical Feedforward {#sec-cluster-measurement-feedforward}
+## 12.1 Cluster Measurements and Classical Feedforward {#sec-cluster-measurement-feedforward}
 
 In the standard circuit model, computation is pictured as unitary gates pushing a state vector forward in time, while measurement merely reads out the final answer at the end. In **one-way quantum computing (MBQC)** (for the literature result, see [@rem-mbqc-gradients-literature]), **the sequence of measurements itself drives the computation**.
 
@@ -59,7 +59,7 @@ Now watch how measuring one qubit of a two-qubit link turns the observer's chose
 **Either outcome will do: half a turn about $x$ brings the $s = 1$ branch onto the $s = 0$ branch.** The Bloch sphere shows qubit 2 for the two outcomes: the amber point is $s = 0$, the grey point $s = 1$, each with chance one half; the amber curved arrow, half a turn about the violet $x$ axis, is the feedforward $X$. Here $\alpha = 60^\circ$ and the input is a generic state; the two chances of $\frac{1}{2}$ add to $1$, as [@lemma-measurement-branch-sum] requires. MBQC is a literature result, not formalized in this book ([@rem-mbqc-gradients-literature]).
 :::
 
-## Pauli Angles and Exact Parameter Shift {#sec-pauli-parameter-shift}
+## 12.2 Pauli Angles and Exact Parameter Shift {#sec-pauli-parameter-shift}
 
 How does a measurement probability change as a Hamiltonian generator $H$ acts for real time $t \in \mathbb{R}$? In the Lean module `ProjectionProbabilityFlow` (cross-referencing Chapter 7's `#prop-projection-probability-flow`), for a finite decidable type $n$, a density state $\rho \in \mathrm{DensityState}\,n$, a Hermitian matrix $H \in M_n(\mathbb{C})$, and a star projection $P \in M_n(\mathbb{C})$ (`IsStarProjection P`, meaning $P^* = P$ and $P^2 = P$), define the evolved density $\rho_t = \operatorname{evolvedDensity}(H, \rho, t) = e^{-itH}\rho e^{itH}$ and real readout $\operatorname{projectionProbability}(H, \rho, P, t) = \operatorname{Re}\bigl(\operatorname{bornProbability}(\rho_t, P)\bigr)$.
 
@@ -135,7 +135,7 @@ The curve and the shots come together in the full lab below: the smaller $h$, th
 **The parameter-shift rule: the full lab.** Two scenes on one rail: the curve (drag the curve or the arrow in the dial to set the angle, switch the curve, change the small step $h$) and the shots (change the number of shots $N$ per setting and watch how the two scatters change with $N$ and $h$).
 :::
 
-## Riemannian Gradients and Dissipation {#sec-riemannian-natural-gradient}
+## 12.3 Riemannian Gradients and Dissipation {#sec-riemannian-natural-gradient}
 
 Once gradients are evaluated on a curved state manifold $M$, steepest descent follows the intrinsic **Riemannian gradient** rather than Euclidean coordinate differences. In the Lean module `GradientDissipation`, let $E$ be a finite-dimensional real inner-product space and let $M$ be a Hausdorff (`T2Space M`), connected (`ConnectedSpace M`) smooth manifold modeled on $\mathbb{I} = \mathcal{I}(\mathbb{R}, E)$ (with $\mathrm{IR} = \mathcal{I}(\mathbb{R}, \mathbb{R})$) and equipped with a continuous Riemannian tangent-bundle structure (`RiemannianBundle`, `IsContinuousRiemannianBundle`). At $p \in M$, the Riesz gradient of $V : M \to \mathbb{R}$ is
 
@@ -177,7 +177,7 @@ The frozen proof (`S2_dissipation`) proceeds in three steps without assuming tha
 
 Note the mathematical contract of [@thm-riemannian-gradient-dissipation]: endpoints need not have two-sided derivatives for the arbitrary total extension $x : \mathbb{R} \to M$, and the theorem makes no claim of asymptotic convergence, global optimality, or geodesic shortest paths.
 
-## Equator Concentration and Conditions for Barren Plateaus {#sec-equator-concentration-limits}
+## 12.4 Equator Concentration and Conditions for Barren Plateaus {#sec-equator-concentration-limits}
 
 When we scale from a single qubit to $n$ qubits with dimension $d = 2^n$, why do high-dimensional state spaces become overwhelmingly orthogonal to any fixed measurement axis (Panel III of Figure 12; [@rem-sphere-equator-markov-literature])?
 
@@ -292,7 +292,7 @@ Note that [@cor-finite-trace-mode-budget] does not separately assume $R > 0$ or 
 
 ---
 
-### Summary of Part III: One Sphere Closed, Many Spheres Ready to Entangle
+### 12.4.1 Summary of Part III: One Sphere Closed, Many Spheres Ready to Entangle {#summary-of-part-iii-one-sphere-closed-many-spheres-ready-to-entangle}
 
 Across Part III ([Chapter 9](ch09-axes-and-state-addressing.md) through Chapter 12), backed by eighteen Lean-verified theorem blocks, we have closed the single-qubit sphere from static axes to dynamical hardware and measurement-driven computation:
 
