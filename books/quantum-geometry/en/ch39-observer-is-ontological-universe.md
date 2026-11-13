@@ -682,6 +682,48 @@ $$
 Only the input support is restricted; the output remains on the whole line. The corresponding $(n+2)\times n$ matrix retains both outgoing residual rows and cannot be replaced by the $n\times n$ compression that discards them. The bound takes an infimum over positions; an actual interval and unit vector can be chosen with arbitrary positive slack. This supplies an $\ell^2$ localization tool of order $1/n$, while the preceding Tribonacci open-chain question still requires zero-spectrum membership for the corresponding whole-line model, transplantation of an actual word interval with its neighboring sites into the specified finite open prefixes, and checks of length ratios and small scales. Those interfaces remain unverified in this book.
 :::
 
+A second finite-matrix route uses an odd repeated block. An odd shift exchanges even and odd bonds, allowing two strings of hopping ratios from forward substitution to be paired. The following bound expresses that cancellation in entries of the actual inverse matrix.
+
+::: {.theorem #thm-ch39-p2e-odd-repeat-inverse-mass title="Inverse-Mass Bound for an Odd Repeated Block" lean="D5/S3/Quantum/Dynamics/OddSquareGreenMass.odd_square_inverse_paired_mass"}
+Let $q\in\mathbb{N}$ and $t:\mathbb{N}\to\mathbb{R}$ satisfy $0<t(i)\le1$ for every $i\in\mathbb{N}$, and assume
+
+$$
+t(i+2q+1)=t(i)\qquad(0\le i<2q).
+$$
+
+Set $n=2q+1$. Index the lower bidiagonal matrix $L\in\mathbb{R}^{n\times n}$ from zero, with entries
+
+$$
+\begin{aligned}
+L_{i,i}&=t(2i) &&(0\le i<n),\\
+L_{i+1,i}&=-t(2i+1) &&(0\le i<n-1).
+\end{aligned}
+$$
+
+All other entries vanish. Write $G=L^{-1}$ and, for $0\le l<q$ and $0\le d<q-l$, define the paired mass
+
+$$
+\begin{aligned}
+P_{l,d}&=G_{l+d+1,l}\\
+&\quad+G_{q+l+d+1,q+l+1}.
+\end{aligned}
+$$
+
+Every displayed matrix index lies in $0,\ldots,2q$, and
+
+$$
+q(q+1)\le\sum_{l=0}^{q-1}\sum_{d=0}^{q-l-1}P_{l,d}.
+$$
+
+For $q=0$, both sums are empty and have value zero.
+:::
+
+::: proof
+The positive diagonal lets forward substitution produce the actual inverse. Odd repetition makes the product of the two positive entries in each pair exactly $1/[t(2l)t(2(l+d+1))]\ge1$, so their sum is at least $2$. The triangular index domain has $q(q+1)/2$ pairs, giving the bound. The full proof is checked by the Lean kernel.
+:::
+
+If $m=2q+1$, $s$ is even, $W_{s+i+m}=W_{s+i}$ for $0\le i<m-1$, and $s+2m\le N_j$, setting $t(i)=t_{W_{s+i}}$ matches this matrix model and a $2m$-site window inside the prefix. It remains unproved here that every sufficiently large specified prefix supplies such a window with $N_j\le Km$ for some constant $K$ independent of $j$. Embedding the local inverse into the inverse of the whole prefix, and converting this mass bound into operator-norm and spectral-gap estimates, also require separate proofs. [@thm-ch39-p2e-odd-repeat-inverse-mass] does not settle the preceding open-chain limit or fractal entropy-scaling problem.
+
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`, shift entropy and Abramov's formula carry status `Literature`, and fractal area scaling carries status `OPEN`.
 :::

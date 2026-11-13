@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "bb452a18f3e77a2c4e50864d2d7bce34fb73a040",
-  "pinned_at": "2026-11-13T09:02:25Z",
+  "commit": "243c9bdbeb8d56c6181d9b9e22c1cef6ae3bc90e",
+  "pinned_at": "2026-11-13T17:38:43Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1473,7 +1473,7 @@
       "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
       "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_phase_unitary_completion",
       "kind": "theorem",
-      "statement_id": "sha256:3d5c36d02ba847fd3cb583bb5a14c5d8c8838cdcc3689ceabcf9697df8805f81",
+      "statement_id": "sha256:804deaf76d19d115e9674a9ff4fb54d294112b6294fd125432c2fb4823a4d433",
       "line": 912,
       "signature": "theorem exists_phase_unitary_completion (k : ℕ) (p : ℝ[X]) (hp : p.natDegree ≤ k) (hpar : HasParity (p.map (algebraMap ℝ ℂ)) k) (hbound : ∀ x ∈ Set.Icc (-1 : ℝ) 1, p.eval x ^ 2 ≤ 1) : ∃ (B C : ℝ[X]) (U : CyclicObservable 2), 1 - p ^ 2 = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1) ∧ U = phaseCompletion p B C ∧ star U * U = 1 ∧ U * star U = 1 ∧ (∀ t, (U t).det = 1) ∧ (∀ t, (U t 0 0).re = p.eval (windingPhase t).re)"
     },
@@ -1481,7 +1481,7 @@
       "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
       "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_sumsq_decomposition",
       "kind": "theorem",
-      "statement_id": "sha256:3d5c36d02ba847fd3cb583bb5a14c5d8c8838cdcc3689ceabcf9697df8805f81",
+      "statement_id": "sha256:804deaf76d19d115e9674a9ff4fb54d294112b6294fd125432c2fb4823a4d433",
       "line": 845,
       "signature": "theorem exists_sumsq_decomposition (k : ℕ) (A : ℝ[X]) (hAe : IsEven (A.map (algebraMap ℝ ℂ))) (hAd : A.natDegree ≤ 2 * k) (hA : ∀ x ∈ Set.Icc (-1 : ℝ) 1, 0 ≤ A.eval x) : ∃ B C : ℝ[X], A = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1)"
     },
@@ -3012,6 +3012,14 @@
       "statement_id": "sha256:3bab964c7fe2ab39dea7a0b332d633f68051a87d107b430876d8ae3a87f3baeb",
       "line": 37,
       "signature": "theorem observer_pullback_trace_identity (channel : QuantumChannel d d) (heisenberg : MatrixAlgebra d →CP MatrixAlgebra d) (hduality : ∀ state effect : MatrixAlgebra d, Matrix.trace (channel.toCompletelyPositiveMap state * effect) = Matrix.trace (state * heisenberg effect)) (t : Nat) (rho : DensityState d) (effect : MatrixAlgebra d) : Matrix.trace ((evolvedState channel t rho).1 * effect) = Matrix.trace (rho.1 * ((fun A : MatrixAlgebra d => heisenberg A)^[t]) effect)"
+    },
+    "D5/S3/Quantum/Dynamics/OddSquareGreenMass.odd_square_inverse_paired_mass": {
+      "module": "D5/S3/Quantum/Dynamics/OddSquareGreenMass",
+      "name": "D5.S3.Quantum.Dynamics.OddSquareGreenMass.odd_square_inverse_paired_mass",
+      "kind": "theorem",
+      "statement_id": "sha256:8665a3799dac04c9e1ce83abcf91b59041dacf5e126238d51475356374cbcca0",
+      "line": 180,
+      "signature": "theorem odd_square_inverse_paired_mass (t : ℕ → ℝ) (q : ℕ) (ht : ∀ i, 0 < t i) (hu : ∀ i, t i ≤ 1) (hp : ∀ i < 2 * q, t (i + (2 * q + 1)) = t i) : (q : ℝ) * (q + 1) ≤ ∑ l : Fin q, ∑ d : Fin (q - l.val), ((lowerBlock t (2 * q + 1))⁻¹ ⟨l.val + d.val + 1, by have"
     },
     "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result": {
       "module": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation",
