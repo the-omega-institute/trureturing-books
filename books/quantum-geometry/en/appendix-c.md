@@ -333,7 +333,7 @@ The table below is sorted by module path, and its $298$ theorems spread over mod
 
 ## C.2 Formal Definitions, Structures, and Inductive Types (114 Unique Declarations) {#sec-appendix-c-definitions}
 
-The table lists **114 unique declarations (104 `def` and 9 `inductive`)** cited by `lean=` on Chinese `definition` and `example` environment headers. Together with the 298 theorems of C.1 they form **412 locked declarations cited by environment headers**. Media consumers appear in the last column and do not determine the partition.
+The table lists **114 unique declarations (104 `def` and 10 `inductive`)** cited by `lean=` on Chinese `definition` and `example` environment headers. Together with the 298 theorems of C.1 they form **412 locked declarations cited by environment headers**. Media consumers appear in the last column and do not determine the partition.
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
 | :--- | :--- | :--- | :--- | :--- |
