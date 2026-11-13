@@ -337,7 +337,93 @@ For a pure state the right-hand side is $3\ln\frac{3}{2} \approx 1.2164$ nats ($
 
 **Reading the table.** First row: make the $Z$ reading fully definite ($H_Z = 0$) and both $X$ and $Y$ become fair coins, each costing $\ln 2$. The last row is the centre of the ball, where all three contexts are fair coins and the bound is attained.
 
-**How tight the bound is.** It is tight at the centre. On the sphere it is not: a numerical search over pure states with a step of $0.25^\circ$ finds the minimum entropy sum $2\ln 2 \approx 1.3863$, attained in the six coordinate-axis directions (such as the first row) and above $3\ln\frac{3}{2}$. The tight bound $H_X + H_Y + H_Z \ge 2\ln 2$ for pure qubit states is a literature result, not formalized in this book (J. Sánchez-Ruiz, *Phys. Lett. A* **201**, 125, 1995). Which step of the proof opens the gap? The first step replaces the Shannon entropy by the collision entropy, and for a two-outcome distribution this loses nothing only in the uniform and the deterministic cases; an axis state has exactly one deterministic and two uniform contexts, so the first step is lossless. The loss occurs in the second step, because the three collision probabilities $1, \frac{1}{2}, \frac{1}{2}$ are not equal.
+**How tight the bound is.** The collision-entropy bound is tight at the centre but leaves room on the sphere. A numerical search over pure states with a step of $0.25^\circ$ finds a minimum entropy sum of $2\ln 2 \approx 1.3863$ on the grid, reached in all six coordinate-axis directions (such as the first row) and above $3\ln\frac{3}{2}$. A finite grid describes the sampled values; it cannot prove a global lower bound or exclude other equality directions. For background on entropic uncertainty relations, see J. Sánchez-Ruiz, *Phys. Lett. A* **201**, 125, 1995 ([DOI](https://doi.org/10.1016/0375-9601(95)00219-S)). We can apply an existing contraction theorem directly to obtain $H_X + H_Y + H_Z \ge 2\ln 2$ throughout the closed Bloch ball.
+
+Define the binary entropy using natural logarithms, in nats:
+
+$$
+h(p)=-p\ln p-(1-p)\ln(1-p),\qquad 0\le p\le1.
+$$
+
+Endpoint terms $0\ln0$ are taken as $0$, so $h(0)=h(1)=0$ and $h(1/2)=\ln2$. For any $r\in[-1,1]$, the diagonal state $\rho_r=\operatorname{diag}((1+r)/2,(1-r)/2)$ along a single axis has von Neumann entropy $h((1+|r|)/2)$ by the spectral formula [`qubit_state_entropy`](lean:D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy). Since $h(p)=h(1-p)$, changing the sign of $r$ only exchanges the two probabilities, so this also equals $h((1+r)/2)$.
+
+The equal mixture of $\rho_r$ and $\rho_{-r}$ is $I/2$. The two states have the same entropy, so their Holevo quantity is $\ln2-h((1+|r|)/2)$. In the existing [`qubit_holevo_contraction`](lean:D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction), take parameters $x=0$, $z=1$, and $t=|r|$: the closed-disk condition is $0^2+1^2\le1$, the contraction parameter satisfies $0\le|r|\le1$, and the uncontracted Holevo quantity is $\ln2$. Thus
+
+$$
+\begin{aligned}
+\ln2-h\!\left(\frac{1+r}{2}\right)&\le r^2\ln2,\\
+h\!\left(\frac{1+r}{2}\right)&\ge(1-r^2)\ln2.
+\end{aligned}
+$$
+
+The endpoints are included: at $r=0$ both sides of the first line are $0$; at $r=\pm1$ both sides are $\ln2$. For any $\vv{r}=(x,y,z)$ in the closed Bloch ball, each coordinate lies in $[-1,1]$, and $H_X=h((1+x)/2)$, with the analogous formulas for the other two axes. Adding the three coordinate bounds gives
+
+$$
+\begin{aligned}
+H_X+H_Y+H_Z&\ge(3-x^2-y^2-z^2)\ln2\\
+&\ge2\ln2,\qquad x^2+y^2+z^2\le1.
+\end{aligned}
+$$
+
+**Why are these exactly the six equality directions?** Set $L=\ln2>0$ and use the squared coordinate as a separate variable:
+
+$$
+\begin{aligned}
+f(u)&=h\!\left(\frac{1+\sqrt{u}}{2}\right),\\
+g(u)&=f(u)-(1-u)L,\qquad 0\le u\le1.
+\end{aligned}
+$$
+
+The proof of the same contraction theorem establishes concavity of $f$ on all of $[0,1]$, including both endpoints, with $f(0)=L$ and $f(1)=0$. Subtracting the endpoint chord $(1-u)L$ leaves a concave function $g$ with $g(0)=g(1)=0$; concavity gives $g(u)\ge0$. To determine where the chord gap is strictly positive, first evaluate one interior point:
+
+$$
+\begin{aligned}
+h(3/4)&=2L-\frac34\ln3,\\
+g(1/4)&=\frac{5L-3\ln3}{4}\\
+&=\frac{\ln32-\ln27}{4}>0.
+\end{aligned}
+$$
+
+The strict sign follows from $0<27<32$ and strict increase of the natural logarithm on positive numbers. Two chords now spread this positive gap through the interior. For $0<u\le1/4$,
+
+$$
+\begin{aligned}
+u&=(1-4u)\,0+(4u)\,\frac14,\\
+g(u)&\ge4u\,g(1/4)>0.
+\end{aligned}
+$$
+
+For $1/4<u<1$,
+
+$$
+\begin{aligned}
+u&=\frac{4(1-u)}{3}\,\frac14+\frac{4u-1}{3}\,1,\\
+g(u)&\ge\frac{4(1-u)}{3}\,g(1/4)>0.
+\end{aligned}
+$$
+
+In both convex combinations the weights are nonnegative and sum to $1$. Thus the existing concavity and one positive chord gap imply $g(u)>0$ for every $0<u<1$, without a separate strict-concavity assumption.
+
+For every $r\in[-1,1]$, the identity $\sqrt{r^2}=|r|$ and binary-entropy symmetry give
+
+$$
+h\!\left(\frac{1+r}{2}\right)-(1-r^2)L=g(r^2).
+$$
+
+The coordinate gap therefore vanishes exactly when $r^2\in\{0,1\}$: $r=0$ gives entropy $L$, while $r=1$ and $r=-1$ give $h(1)=0$ and $h(0)=0$, respectively. Every other coordinate value has a strictly positive gap. Write $H=H_X+H_Y+H_Z$ and $s=x^2+y^2+z^2\le1$. The total slack decomposes exactly as
+
+$$
+\begin{aligned}
+H-2L={}&(1-s)L\\
+&+g(x^2)+g(y^2)+g(z^2).
+\end{aligned}
+$$
+
+All four terms on the right are nonnegative. If $H=2L$, then $L>0$ forces $s=1$ and all three coordinate gaps vanish. Hence each of $x^2,y^2,z^2$ is $0$ or $1$, and their sum being $1$ forces exactly one to be $1$. Conversely, the six coordinate-axis unit states $(\pm1,0,0)$, $(0,\pm1,0)$, and $(0,0,\pm1)$ have entropy triples that are permutations of $(0,L,L)$ and attain equality. Thus, on the **entire closed Bloch ball**, $H\ge2\ln2$ with equality if and only if the state is one of these six. Every interior point $s<1$ satisfies a strict inequality because $(1-s)L>0$.
+
+This classification follows the derivation in the contraction module's [explanatory narrative](https://github.com/the-omega-institute/trureturing/blob/a2cb467f6c498757ce2975a8878a017a2b59d1b1/Blueprint/D5/S3/Quantum/Information/QubitEntropyContraction.md). It is a manual application of the existing scalar concavity, contraction result, and spectral entropy formula, with no additional standalone Lean declaration or claim of novelty. The finite grid above still reports only sampled values; the global lower bound and equality classification rest on this analytic derivation.
+
+Where does the collision-entropy derivation lose this precision? The first step replaces the Shannon entropy by the collision entropy, and for a two-outcome distribution this loses nothing only in the uniform and the deterministic cases; an axis state has exactly one deterministic and two uniform contexts, so the first step is lossless. The loss occurs in the second application of Jensen's inequality, because the three collision probabilities $1, \frac{1}{2}, \frac{1}{2}$ are not equal.
 :::
 
 The Pythagorean theorem governs sums of squares; it says that the "degrees of definiteness" of the three contexts have a capped total. Entropy restates the same fact in units of information: for one qubit, at most one of three complementary questions can receive a definite answer.
