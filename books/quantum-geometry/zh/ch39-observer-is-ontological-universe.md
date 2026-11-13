@@ -800,7 +800,83 @@ $$
 合并即得所示估计。对前述窗口，参数对应为 $m=2q+1$、$s=2a$、$N_j=2n$。这是既有逆矩阵质量结论、前代入公式和欧氏不等式的应用推导，不新增形式化声明，本例不带独立的 Lean 验证徽章。
 :::
 
-上述估计还没有完成物理全链的谱结论。仍需把实际 Tribonacci 跃迁、双子格重排与符号共轭逐项对应，并证明完整对称矩阵的特征值和该双对角块的奇异值之间的关系，再处理最初的短前缀。特别是，对每个固定 $\rho\in(0,1)$，是否存在 $C_\rho>0$ 与整数 $J_\rho\ge1$，使所有 $j\ge J_\rho$ 都满足 $\delta_{\rho,j}\le C_\rho/N_j$，仍是待证的定量目标；它若成立便可推出前述开链极限，但不能结算分形熵标度问题。
+::: {.example #ex-ch39-p2e-open-chain-residual title="从完整逆矩阵到有限开链的谱残差界"}
+对整数 $n\ge1$，取实跃迁序列 $t:\mathbb N\to\mathbb R$，满足每个 $k\in\mathbb N$ 都有 $t_k>0$。在按自然数从零编号的 $2n$ 个站点上，定义实际开链矩阵 $H\in\mathbb R^{2n\times2n}$：
+
+$$
+H_{ij}=\begin{cases}
+t_i,&i+1=j,\\
+t_j,&j+1=i,\\
+0,&\text{其他情形},
+\end{cases}
+\qquad 0\le i,j<2n.
+$$
+
+它的对角线为零，最后一条物理键为 $t_{2n-2}$，没有首尾闭合键；$n=1$ 时就是仅含键 $t_0$ 的两个站点。令 $B=L(t,n)$ 为前述下双对角块，即
+
+$$
+\begin{aligned}
+B_{i,i}&=t_{2i} &&(0\le i<n),\\
+B_{i,i-1}&=-t_{2i-1} &&(1\le i<n),
+\end{aligned}
+$$
+
+其余元素为零。下三角性给出 $\det B=\prod_{i=0}^{n-1}t_{2i}>0$，故普通矩阵逆 $G=B^{-1}$ 存在。对每个欧氏单位向量 $v\in\mathbb R^n$，都存在实数 $\lambda$ 和非零实向量 $z\in\mathbb R^{2n}$，使
+
+$$
+\begin{aligned}
+Hz&=\lambda z,\\
+|\lambda|\,\|Gv\|_2&\le1.
+\end{aligned}
+$$
+
+具体地，按偶站点、奇站点重排坐标，写 $C_{ij}=H_{2i,2j+1}$。矩阵 $C$ 的对角元为 $t_{2i}$，次对角元为 $t_{2i-1}$，其余元素为零。取 $D=\operatorname{diag}((-1)^i)_{i=0}^{n-1}$，则 $D^2=I$，且逐项计算得到
+
+$$
+\begin{aligned}
+H&=\begin{pmatrix}0&C\\C^{\mathsf T}&0\end{pmatrix},\\
+DCD&=B,\qquad CD=DB.
+\end{aligned}
+$$
+
+第一行表示重排后的矩阵。构造辅助向量 $u$，令 $u_{\mathrm{even}}=0$、$u_{\mathrm{odd}}=DGv$。由 $BG=I$，
+
+$$
+\begin{aligned}
+(Hu)_{\mathrm{even}}&=CDGv=DBGv=Dv,\\
+(Hu)_{\mathrm{odd}}&=0,\\
+\|u\|_2&=\|Gv\|_2,\qquad \|Hu\|_2=1.
+\end{aligned}
+$$
+
+这里 $D$ 只改变坐标符号，保持欧氏范数；$BGv=v\ne0$ 还保证 $u\ne0$。由于 $H$ 是有限维实对称矩阵，取它的实正交归一特征基 $e_k$，对应实特征值 $\lambda_k$（$0\le k<2n$）。令 $\alpha=\min_{0\le k<2n}|\lambda_k|$，将 $u=\sum_k c_ke_k$ 代入 Parseval 恒等式，得到
+
+$$
+\begin{aligned}
+\alpha^2\|u\|_2^2
+&=\alpha^2\sum_{k=0}^{2n-1}c_k^2,\\
+&\le\sum_{k=0}^{2n-1}\lambda_k^2c_k^2
+=\|Hu\|_2^2=1.
+\end{aligned}
+$$
+
+有限的非空特征值集合中存在 $k_0$ 使 $|\lambda_{k_0}|=\alpha$。取 $\lambda=\lambda_{k_0}$、$z=e_{k_0}$，开平方即得所示不等式。$z$ 是选出的特征向量，辅助向量 $u$ 一般并不是特征向量。本例不要求跃迁有上界。
+
+若还满足 [@ex-ch39-p2e-full-inverse-euclidean] 的上界与重复窗口假设，使用其中同一个单位向量 $v$，便有
+
+$$
+\begin{aligned}
+|\lambda|q(q+1)
+&\le2n|\lambda|\,\|Gv\|_2\le2n,\\
+\delta:=\min_{\mu\in\operatorname{Spec}(H)}|\mu|
+&=|\lambda|\le\frac{2n}{q(q+1)}.
+\end{aligned}
+$$
+
+这把完整逆矩阵的质量估计转成同一有限开链到零能量的谱距离界。
+:::
+
+上例完成了任意正跃迁有限开链的谱转换。实际 Tribonacci 前缀的全序列速率仍需把字跃迁 $t_i=t_{W_i}$、对齐重复窗口与完整逆矩阵质量估计在同一参数约定下精确拼接，并处理最初的短前缀。本节尚未建立：对每个固定 $\rho\in(0,1)$，存在 $C_\rho>0$ 与整数 $J_\rho\ge1$，使所有 $j\ge J_\rho$ 都满足 $\delta_{\rho,j}\le C_\rho/N_j$。这样的定量界可推出前述开链极限；分形熵标度仍需独立的物理态与空间切口论证。
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`，移位熵与阿布拉莫夫公式属 `文献结果`，分形面积律属 `OPEN`。

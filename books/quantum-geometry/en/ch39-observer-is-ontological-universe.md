@@ -800,7 +800,83 @@ $$
 Combining the inequalities proves the estimate. For the preceding window, the parameter correspondence is $m=2q+1$, $s=2a$, $N_j=2n$. This is an application of the existing inverse-mass result, the forward-substitution formula and Euclidean inequalities. It introduces no new formal declaration, and this example carries no separate Lean verification badge.
 :::
 
-This estimate does not yet prove the spectral conclusion for the physical full chain. The actual Tribonacci hoppings, sublattice reordering and sign conjugation still need an exact correspondence, followed by the relation between the full symmetric matrix's eigenvalues and the bidiagonal block's singular values, and treatment of the initial short prefixes. In particular, it remains open here whether, for every fixed $\rho\in(0,1)$, there are $C_\rho>0$ and an integer $J_\rho\ge1$ such that $\delta_{\rho,j}\le C_\rho/N_j$ for every $j\ge J_\rho$. Such a bound would imply the preceding open-chain limit; the fractal entropy-scaling problem would still remain.
+::: {.example #ex-ch39-p2e-open-chain-residual title="From the Full Inverse to a Spectral Residual Bound for a Finite Open Chain"}
+For an integer $n\ge1$, take a real hopping sequence $t:\mathbb N\to\mathbb R$ with $t_k>0$ for every $k\in\mathbb N$. On $2n$ sites indexed by natural numbers starting at zero, define the actual open-chain matrix $H\in\mathbb R^{2n\times2n}$ by
+
+$$
+H_{ij}=\begin{cases}
+t_i,&i+1=j,\\
+t_j,&j+1=i,\\
+0,&\text{otherwise},
+\end{cases}
+\qquad 0\le i,j<2n.
+$$
+
+Its diagonal is zero, its last physical bond is $t_{2n-2}$, and there is no closing bond. When $n=1$, it consists of two sites joined only by $t_0$. Let $B=L(t,n)$ be the lower bidiagonal block above, so
+
+$$
+\begin{aligned}
+B_{i,i}&=t_{2i} &&(0\le i<n),\\
+B_{i,i-1}&=-t_{2i-1} &&(1\le i<n),
+\end{aligned}
+$$
+
+with all other entries zero. Lower triangularity gives $\det B=\prod_{i=0}^{n-1}t_{2i}>0$, so the ordinary matrix inverse $G=B^{-1}$ exists. For every Euclidean unit vector $v\in\mathbb R^n$, there are a real number $\lambda$ and a nonzero real vector $z\in\mathbb R^{2n}$ such that
+
+$$
+\begin{aligned}
+Hz&=\lambda z,\\
+|\lambda|\,\|Gv\|_2&\le1.
+\end{aligned}
+$$
+
+To see this, reorder coordinates into even sites followed by odd sites, and write $C_{ij}=H_{2i,2j+1}$. The diagonal entries of $C$ are $t_{2i}$, its subdiagonal entries are $t_{2i-1}$, and all other entries vanish. Set $D=\operatorname{diag}((-1)^i)_{i=0}^{n-1}$. Then $D^2=I$, and entrywise calculation gives
+
+$$
+\begin{aligned}
+H&=\begin{pmatrix}0&C\\C^{\mathsf T}&0\end{pmatrix},\\
+DCD&=B,\qquad CD=DB.
+\end{aligned}
+$$
+
+The first line denotes the reordered matrix. Construct an auxiliary vector $u$ by setting $u_{\mathrm{even}}=0$ and $u_{\mathrm{odd}}=DGv$. Since $BG=I$,
+
+$$
+\begin{aligned}
+(Hu)_{\mathrm{even}}&=CDGv=DBGv=Dv,\\
+(Hu)_{\mathrm{odd}}&=0,\\
+\|u\|_2&=\|Gv\|_2,\qquad \|Hu\|_2=1.
+\end{aligned}
+$$
+
+Here $D$ only changes coordinate signs, preserving the Euclidean norm; $BGv=v\ne0$ also ensures $u\ne0$. Since $H$ is a finite real symmetric matrix, take a real orthonormal eigenbasis $e_k$ with real eigenvalues $\lambda_k$ ($0\le k<2n$). Set $\alpha=\min_{0\le k<2n}|\lambda_k|$ and substitute $u=\sum_k c_ke_k$ into Parseval's identity to obtain
+
+$$
+\begin{aligned}
+\alpha^2\|u\|_2^2
+&=\alpha^2\sum_{k=0}^{2n-1}c_k^2,\\
+&\le\sum_{k=0}^{2n-1}\lambda_k^2c_k^2
+=\|Hu\|_2^2=1.
+\end{aligned}
+$$
+
+The finite nonempty set of eigenvalues contains an index $k_0$ with $|\lambda_{k_0}|=\alpha$. Choose $\lambda=\lambda_{k_0}$ and $z=e_{k_0}$; taking square roots gives the claimed inequality. The selected $z$ is an eigenvector; the auxiliary vector $u$ generally is not. This example requires no upper bound on the hoppings.
+
+If the upper-bound and repeated-window hypotheses of [@ex-ch39-p2e-full-inverse-euclidean] also hold, use the same unit vector $v$ as in that example to obtain
+
+$$
+\begin{aligned}
+|\lambda|q(q+1)
+&\le2n|\lambda|\,\|Gv\|_2\le2n,\\
+\delta:=\min_{\mu\in\operatorname{Spec}(H)}|\mu|
+&=|\lambda|\le\frac{2n}{q(q+1)}.
+\end{aligned}
+$$
+
+This converts the mass estimate for the full inverse into a bound on the spectral distance to zero energy for the same finite open chain.
+:::
+
+The example completes the spectral conversion for any finite open chain with positive hoppings. A rate along the full sequence of actual Tribonacci prefixes still requires an exact assembly of the word hoppings $t_i=t_{W_i}$, aligned repeated windows and full-inverse mass estimate under a single parameter convention, together with treatment of the initial short prefixes. This section has not established that, for every fixed $\rho\in(0,1)$, there are $C_\rho>0$ and an integer $J_\rho\ge1$ such that $\delta_{\rho,j}\le C_\rho/N_j$ for every $j\ge J_\rho$. Such a quantitative bound would imply the preceding open-chain limit; fractal entropy scaling still requires a separate argument involving physical states and spatial cuts.
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`, shift entropy and Abramov's formula carry status `Literature`, and fractal area scaling carries status `OPEN`.
