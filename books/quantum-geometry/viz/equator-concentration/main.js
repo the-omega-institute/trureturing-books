@@ -311,11 +311,12 @@
 
   /* ---------- experiment cards ---------- */
   const L3 = Math.log2(3);
+  // still: the rail value n − 1 (n = log₂ d) a card stops on; a click plays the rail from d = 2 up to it
   const PRESETS = {
-    three: { t: L3, eps: 0.1 },
-    width: { t: 10, eps: 0.1 },
-    bound: { t: 7, eps: 0.2, scene: 'curve' },
-    twenty: { t: 20, eps: 0.1 }
+    three: { still: L3 - 1, eps: 0.1 },
+    width: { still: 10 - 1, eps: 0.1 },
+    bound: { still: 7 - 1, eps: 0.2, scene: 'curve' },
+    twenty: { still: 20 - 1, eps: 0.1 }
   };
   const NOTES = {
     three: ['普通的三维球面，d = 3：圆上的点上下铺开，右边的密度是一条竖直的直线 1/2，直方图围着它起伏——点的高度 x₁ 在 −1 到 1 之间均匀分布。ε = 0.1 的赤道带恰好占球面的 10%；1500 个点里落进带里的青色点约有一成，具体几个随抽样而变，其余是品红。', 'The ordinary sphere, d = 3: the dots spread up and down the circle, and on the right the density is a vertical straight line at 1/2 with the histogram around it: the height x₁ is spread evenly between −1 and 1. The belt with ε = 0.1 takes exactly 10% of the sphere; about a tenth of the 1500 dots fall in it (cyan), the exact count varying with the draw, and the rest are magenta.'],
@@ -325,18 +326,18 @@
   };
   let booting = true;
   function applyPreset(id) {
-    const p = PRESETS[id], still = p.t;
+    const p = PRESETS[id];
     S.eps = p.eps; fEps.set(p.eps); S.scene = p.scene || 'crowd'; sceneChips.set(S.scene, true);
     clock.pause(); stopAt = null;
-    clock.set(still - 1);
+    clock.set(p.still);
     // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
     if (TRV.still || (booting && !TRV.embed)) return;
     clock.set(0);
-    stopAt = still - 1 < clock.max - 1e-9 ? still - 1 : null;
+    stopAt = p.still < clock.max - 1e-9 ? p.still : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖时间轴改维数，改带宽 ε，或重新抽样。随时可以再选一张卡。', 'Free play: drag the rail to change the dimension, change the belt half-width ε, or redraw. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

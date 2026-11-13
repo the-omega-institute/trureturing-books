@@ -1,5 +1,4 @@
-/* TWO//ANGLES: the shared lab layout (../assets/theme.css) carries the page; only the white swatch, the larger
-   point label and the drag cursor belong to this visualization. Colours come from the tokens. */
+/* TWO//ANGLES: the shared lab layout (../assets/theme.css) carries the page; only the larger point label and the
+   drag cursor belong to this visualization. Colours come from the tokens. */
 #cv { cursor: grab; touch-action: none; }
-.sw.ik { background: var(--ink); }
 .stage .tag.big { font-size: 15px; font-weight: 600; }

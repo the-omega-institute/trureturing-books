@@ -671,7 +671,7 @@
     stopAt = p.to < clock.max - 1e-9 ? p.to : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景；在“罗盘”里点一家纲领、用时间轴逐个读阵营；在“黄金桥”里用时间轴走折叠链，点一个点看它的精确坐标。随时可以再选一张卡。', 'Free play: switch scenes; in Compass pick a programme and read the camps along the rail; on the Bridge walk the chain along the rail and click a dot to see its exact coordinates. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

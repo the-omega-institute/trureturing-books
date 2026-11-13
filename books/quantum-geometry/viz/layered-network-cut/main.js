@@ -273,11 +273,12 @@
   for (const type of ['pointerup', 'pointercancel']) $('cv').addEventListener(type, () => { drag = null; });
 
   /* ---------- experiment cards ---------- */
+  // at: the length of A a card shows; still: the rail value (length − 1) the still of a card that plays shows
   const PRESETS = {
     one: { mode: 'one', aR: 17, at: 1 },
     four: { mode: 'one', aR: 17, at: 4 },
-    grow: { mode: 'one', aR: 24, at: 16, play: true },
-    two: { mode: 'two', aR: 16, B: [18, 26], at: 10, play: true, stop: 10 }
+    grow: { mode: 'one', aR: 24, at: 16, play: true, still: 16 - 1 },
+    two: { mode: 'two', aR: 16, B: [18, 26], at: 10, play: true, stop: 10, still: 10 - 1 }
   };
   const NOTES = {
     one: ['区间只有第 16 格一格：品红的最小割就是它自己那一条腿。只有一条键穿过这道割，跨过它的秩至多是这一条键的维数。', 'The interval is the single site 16: the magenta minimal cut is its own leg. Only one bond crosses this cut, so the rank across it is at most the dimension of that one bond.'],
@@ -291,11 +292,14 @@
     clock.pause(); S.stop = null;
     S.mode = p.mode; modeChips.set(p.mode, true); if (p.B) S.B = p.B.slice(); S.aR = p.aR;
     fit(p.at); paint();
-    if (!p.play || TRV.still || (booting && !TRV.embed)) return;
+    // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
+    // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
+    if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still); return; }
+    if (!p.play) return;
     S.stop = p.stop || null; clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动区间的两端或整段，切换一段与两段，用时间轴改变 A 的长度。随时可以再选一张卡。', 'Free play: drag the ends or the middle of an interval, switch between one and two, change the length of A on the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

@@ -6,3 +6,8 @@
 .sw.dash { background: repeating-linear-gradient(90deg, var(--magenta) 0 4px, transparent 4px 7px); }
 .sw.dash.dm { background: repeating-linear-gradient(90deg, var(--dim) 0 4px, transparent 4px 7px); }
 .chk { color: var(--dim); font-weight: 600; }
+
+/* The tour bar selects the scene in a narrow cited figure. */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}

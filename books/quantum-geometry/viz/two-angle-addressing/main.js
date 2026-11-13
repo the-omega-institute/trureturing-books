@@ -388,7 +388,7 @@
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
     if (TRV.still || (booting && !TRV.embed)) clock.set(still); else if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动白色的目标圈、改两轴夹角，或换到“覆盖”场景。随时可以再选一张卡。', 'Free play: drag the white target ring, change the angle between the axes, or switch to the “Cover” scene. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

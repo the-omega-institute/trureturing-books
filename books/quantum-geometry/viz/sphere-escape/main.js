@@ -748,26 +748,39 @@
     zu: ['祖冲之算到 24576 边。肉眼早已分不出多边形和圆，缝只有 8×10⁻⁹，但把它放大十亿倍，它和第一步时一模一样。', 'Zu Chongzhi went to 24576 sides. The eye cannot tell polygon from circle any more and the gap is only 8×10⁻⁹, but magnified a billion times it looks exactly as it did at the first step.'],
     thirteen: ['2·3·5·7·11·13 + 1 = 30031 不是素数，它等于 59 × 509。欧几里得的论证没有说 Q 是素数，只说它的素因子都是新的。', '2·3·5·7·11·13 + 1 = 30031 is not prime: it is 59 × 509. Euclid\'s argument does not say that Q is prime, only that its prime factors are all new.']
   };
+  // the cards that play by themselves, and the frame their still shows ('end': the last step of the rail)
+  const PRESETS = { diagonal: { still: 'end' }, split: { still: 'end' }, absorb: { still: 'end' }, liuhui: { still: 5 } };
+  const stillOf = (id) => (PRESETS[id].still === 'end' ? clock.max : PRESETS[id].still);
   let booting = true, stopAt = null;
-  /** Start a card: `to` = where its story ends on the rail (null: the last step), `still` = the frame a still shows. */
-  function run(sc, to, still) {
+  /** Start card `id`: `to` = where its story ends on the rail (null: the last step); a still shows the declared frame. */
+  function run(sc, id, to) {
     setScene(sc, 0); if (to != null) clock.setMax(SC[sc].max(), true);
-    if (TRV.still || (booting && !TRV.embed)) { clock.set(still == null ? (to == null ? clock.max : to) : still); return; }
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(stillOf(id)); return; }
     stopAt = to;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
   function applyPreset(id) {
     stopAt = null;
     if (id === 'diagonal' || id === 'absorb') { S.N = 6; S.seed = 11; fSize.set(6); fSeed.set(11); S.rows = makeList(6, 11); }
-    if (id === 'diagonal') run('diag');
-    else if (id === 'split') { setLat([0, 0, 0, 1]); run('fiber'); }
+    if (id === 'diagonal') run('diag', id);
+    else if (id === 'split') { setLat([0, 0, 0, 1]); run('fiber', id); }
     else if (id === 'pointer') { S.pN = 8; fPN.set(8); S.shape = 'sine'; shapeChips.set('sine', true); setScene('ptr', 0); }
-    else if (id === 'absorb') { setScene('diag', 6); doAbsorb(true); if (TRV.still || (booting && !TRV.embed)) clock.set(S.N); else if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
-    else if (id === 'liuhui') run('poly', 5);
+    else if (id === 'absorb') { setScene('diag', 6); doAbsorb(true); if (TRV.still || (booting && !TRV.embed)) clock.set(stillOf(id)); else if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
+    else if (id === 'liuhui') run('poly', id, 5);
     else if (id === 'zu') setScene('poly', 12);
     else if (id === 'thirteen') setScene('prime', 6);
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "diagonal": ["翻转六行清单的对角位：所得 d 与第 k 行在第 k 位不同，因此不在清单中。", "Flip the six diagonal bits: d differs from row k at bit k, so d is absent from the list."],
+    "split": ["四个地址各自解码再翻转，g = (1, 1, 0, 0) 将原来同纤维的地址分开。", "Decode and flip at each of four addresses: g = (1, 1, 0, 0) separates addresses in one old fibre."],
+    "absorb": ["把 d 收作第七行并补一列：新对角线又产生一个清单外的串。", "Add d as row seven and a new column: the new diagonal produces another off-list string."],
+    "pointer": ["九格正弦指针移一格：重叠 |γ(1)| = cos(π/10) ≈ 0.9511，严格小于 1。", "Shift the nine-cell sine pointer by one: overlap |γ(1)| = cos(π/10) ≈ 0.9511, strictly below 1."],
+    "liuhui": ["从正六边形逐次倍边至 192 边：越来越像圆，放大后的弓高仍非零。", "Double the hexagon’s sides up to 192: it approaches the circle, but the magnified sagitta stays nonzero."],
+    "zu": ["24576 边时弓高约 8×10⁻⁹；放大十亿倍，缝仍清晰可见。", "At 24576 sides the sagitta is about 8×10⁻⁹; magnified a billion times, the gap remains visible."],
+    "thirteen": ["30031 = 59 × 509：欧几里得只保证出现新的素因子，不保证所得数为素数。", "30031 = 59 × 509: Euclid guarantees new prime factors, not that the constructed number is prime."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、改清单、拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, edit the list, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

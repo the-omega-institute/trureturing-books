@@ -16,6 +16,7 @@
   'use strict';
   const { kit, L } = TRV, { fix, clamp } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
+  const setHTML = (id, value) => { const el = $(id); if (el._h !== value) { el.innerHTML = value; el._h = value; } };
   const HALF_PI = Math.PI / 2, DEG = 180 / Math.PI;
   const TH = TRV.thumbMode ? 2 : 1;          // thicker strokes on the wordless cover
   const KMAX = 10;                            // staircase steps on the rail
@@ -374,6 +375,7 @@
   /** The two parts of the stage, in CSS pixels of the canvas: r3 for the solid, r2 for the disk and its magnifier.
       A wide stage puts them side by side (the solid on the left), a narrow one above each other (the solid on top). */
   function regions() {
+    $('stage').classList.remove('legend-right');
     const cv = $('flat'), st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
     const thumb = TRV.thumbMode, W = cv.clientWidth, H = cv.clientHeight;
     if (compact()) {
@@ -383,7 +385,6 @@
       const w2 = Math.round(aw * (S.scene === 'stair' ? C2.stair : C2.column)), r3 = { x: x0, y: top, w: aw - w2 - 8, h: ah }, r2 = { x: x0 + aw - w2, y: top, w: w2, h: ah };
       return { W, H, top, bottom, wide: true, compact: true, r3, r2 };
     }
-    $('stage').classList.remove('legend-right');   // the legend is measured across the whole stage first
     const top = thumb ? 24 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 6;
     const bottom = thumb ? 24 : Math.max(16, $('legend').offsetHeight + 18);
     const x0 = 12, aw = Math.max(1, W - 24), ah = Math.max(1, H - top - bottom), gap = 12;
@@ -666,15 +667,15 @@
   /* ---------- readouts, HUD, legend ---------- */
   const row = (cls, zh, en, val) => `<div class="${cls}"><dt>${L(zh, en)}</dt><dd>${val}</dd></div>`;
   const LEGEND = {
-    stair: [['cy', '阶梯的点与过每一级的测地线', 'staircase points and the geodesic through each step'], ['am', '当前一步', 'the current step'], ['mg', '到边界的缝', 'the gap to the rim'], ['dm', '白色圆周：视界 θ = 90°', 'white rim: the horizon θ = 90°']],
+    stair: [['cy', '阶梯的点与过每一级的测地线', 'step points and their geodesics'], ['am', '当前一步', 'the current step'], ['mg', '到边界的缝', 'the gap to the rim'], ['dm', '白色圆周：视界 θ = 90°', 'white rim: the horizon θ = 90°']],
     samsara: [['cy', '角度尺走过的路', 'the path on the angle ruler'], ['mg', '撞上边界（擦表）', 'hitting the rim (wipe)'], ['am', '当前一步', 'the current step'], ['dm', '虚线：回到圆心', 'dashed: back to the centre']],
     cayley: [['cy', '直线 Re s = c 的像', 'images of the lines Re s = c'], ['am', '当前这条直线的像', 'image of the current line'], ['dm', '白色单位圆：Re s = 1/2 的像', 'white unit circle: image of Re s = 1/2']]
   };
   /** One more legend entry per scene: what the solid is (a schematic drawing of the same state). */
   const LEGEND3 = {
-    stair: ['dm', '实体：双曲面上半叶与投影线（示意，沿投影线压缩）', 'solid: the hyperboloid sheet and its projection rays (schematic, squeezed along the rays)'],
-    samsara: ['dm', '实体：一圈一层的轮回塔（示意）', 'solid: the wheel as a tower, one level per round (schematic)'],
-    cayley: ['dm', '实体：w 圆盘的黎曼半球，球极投影', 'solid: the Riemann hemisphere over the disk of w, by stereographic projection']
+    stair: ['dm', '实体：双曲面上半叶与投影线（示意，沿投影线压缩）', 'solid: hyperboloid sheet, squeezed (model)'],
+    samsara: ['dm', '实体：一圈一层的轮回塔（示意）', 'solid: one level per round (schematic tower)'],
+    cayley: ['dm', '实体：w 圆盘的黎曼半球，球极投影', 'solid: Riemann hemisphere → w (stereographic)']
   };
   const modelName = () => (S.mu < 0.5 ? L('Klein', 'Klein') : L('庞加莱', 'Poincaré'));
   function drawText() {
@@ -726,13 +727,13 @@
       aside = 'w = (s − 1)/s';
       pill = ['c', fix(c, 3)];
     }
-    $('hudBig').innerHTML = big; $('hudSub').innerHTML = sub;
+    setHTML('hudBig', big); setHTML('hudSub', sub);
     $('ro').innerHTML = `<div class="key"><dt>${keyName}</dt><dd><b>${key}</b></dd></div>${rows}`;
     $('roNote').textContent = note; $('roAside').textContent = aside;
     $('pillScene').querySelector('strong').textContent = { stair: L('阶梯', 'STAIRCASE'), samsara: L('轮回', 'WHEEL'), cayley: L('分式', 'FRACTIONAL') }[sc];
     $('pillKeyName').textContent = pill[0]; $('pillKey').querySelector('strong').textContent = pill[1];
-    const legend = (sc === 'samsara' && S.fold > 1e-6 ? LEGEND.samsara.concat([['dm', '虚线弧：折叠时转过的路；淡圈：展开时的位置', 'dashed arcs: the way each point turns as it folds; faint rings: where it was unrolled']]) : LEGEND[sc]).concat([LEGEND3[sc]]);
-    $('legend').innerHTML = legend.map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    const legend = (sc === 'samsara' && S.fold > 1e-6 ? LEGEND.samsara.concat([['dm', '虚线弧：折叠时转过的路；淡圈：展开时的位置', 'dashed: folding path; faint rings: unfolded']]) : LEGEND[sc]).concat([LEGEND3[sc]]);
+    setHTML('legend', legend.map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join(''));
   }
 
   const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
@@ -793,14 +794,14 @@
   });
 
   /* ---------- experiment cards ----------
-     scene, model, Δη, the rail's start and stop (from, to; a still shows `to`), and the cards that play a transition
+     scene, model, Δη, the rail's start and still frame (from, still), and the cards that play a transition
      instead of the rail (morph: Klein → Poincaré; fold: unrolled → folded). */
   const PRESETS = {
-    staircase: { scene: 'stair', model: 'klein', dEta: 1, from: 0, to: 8 },
-    klein_vs_poincare: { scene: 'stair', model: 'poincare', dEta: 1, at: 3, morph: true },
-    erase_reset: { scene: 'samsara', model: 'poincare', dEta: 1, fold: 0, from: 0, to: 'round2' },
-    quotient_fold: { scene: 'samsara', model: 'poincare', dEta: 1, at: 'end', fold: 1, foldAnim: true },
-    cayley: { scene: 'cayley', from: 0, to: 6 }
+    staircase: { scene: 'stair', model: 'klein', dEta: 1, from: 0, still: 8 },
+    klein_vs_poincare: { scene: 'stair', model: 'poincare', dEta: 1, still: 3, morph: true },
+    erase_reset: { scene: 'samsara', model: 'poincare', dEta: 1, fold: 0, from: 0, get still() { return W.round.indexOf(2) + 2; } },
+    quotient_fold: { scene: 'samsara', model: 'poincare', dEta: 1, still: 'end', fold: 1, foldAnim: true },
+    cayley: { scene: 'cayley', from: 0, still: 6 }
   };
   const NOTES = {
     staircase: ['从自指平衡角 θ* 出发（η₀ ≈ 0.817），快度每步加 Δη = 1。青色的点沿射线一级级走向白色的圆周，过每一级的青色直弦都比上一条更挤向边界；走到第 8 级，sin θ = 0.99999996，放大镜里品红的缝仍然张开。把步长调大、级数走多，放大镜每一步把视野缩小十倍以上，缝也从不为 0。', 'Starting from the self-referential balance angle θ* (η₀ ≈ 0.817), each step adds Δη = 1 of rapidity. The cyan points walk out along the ray toward the white rim, and each cyan chord through a step crowds closer to the rim than the one before; at step 8, sin θ = 0.99999996, and the magenta gap in the magnifier is still open. Raise the step and walk further, and the magnifier narrows its field tenfold or more at every step; the gap is never 0.'],
@@ -815,14 +816,13 @@
     const pl = { playing: false, pause() {}, play() { pl.playing = tweenPlaying = true; run(() => { pl.playing = tweenPlaying = false; }); } };
     return pl;
   }
-  function stopOf(p) { if (p.to === 'round2') return W.round.indexOf(2) + 2; if (p.at === 'end') return W.N - 1; return p.to; }
   function applyPreset(id) {
     const p = PRESETS[id];
     stopTween();
     stage.cam.yaw = CAM.yaw; stage.cam.pitch = CAM.pitchOf[p.scene] || CAM.pitch; stage.cam.zoom = 1;   // every card shows its solid from the same side
     if (p.dEta != null) { S.dEta = p.dEta; fD.set(p.dEta); refreshWalk(); }
     const sc = SCENES[p.scene];
-    const end = p.at != null ? (p.at === 'end' ? W.N - 1 : p.at) : stopOf(p);
+    const end = p.still === 'end' ? sc.max() : p.still;
     sc.set(end);
     if (p.model) setModel(p.model, false);
     if (p.fold != null) setFold(p.fold, false);
@@ -841,7 +841,15 @@
     stopAt = end < clock.max - 1e-9 ? end : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // A cited figure keeps its short note whole; detailed explanations remain in the full laboratory.
+  const FIGURE_NOTES = {
+    "staircase": ["每步快度加 1：第八级已接近圆周，放大后缝仍非零。", "Add 1 to rapidity each step: step 8 nears the rim but leaves a nonzero gap."],
+    "klein_vs_poincare": ["换圆盘坐标，直弦变正交圆弧，两种固有时率都等于 sech η。", "Change disk coordinates: chords become orthogonal arcs; both rates equal sech η."],
+    "erase_reset": ["等角步长越过 90° 后擦表归心，换一根辐条重新出发。", "Equal angle steps cross 90°, reset at the centre and start on a new spoke."],
+    "quotient_fold": ["按周期折叠五圈：首次擦表后的 25 步落在五个位置。", "Fold five rounds by their period: 25 steps after the first reset occupy 5 places."],
+    "cayley": ["c 趋近 1/2 时像圆趋近单位圆；每个 c > 1/2 仍留非零缝。", "As c approaches 1/2, the image circles approach the unit rim but keep a gap."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? FIGURE_NOTES : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：沿射线拖动琥珀色的点，用时间轴一级级走，换 Klein 或庞加莱圆盘，改步长 Δη；在“轮回”里看角度尺怎样撞上边界、把轮子折叠；在“分式”里拖动像圆。随时可以再选一张卡。', 'Free play: drag the amber point along the ray, step with the rail, swap the Klein and Poincaré disks, change the step Δη; in Wheel watch the angle ruler hit the rim and fold the wheel; in Fractional map drag the image circle. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
