@@ -358,10 +358,10 @@
   }
   // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
   const FIGURE_NOTES = {
-    "elliptope": ["历史固定 x 后，候选只能落在 det G₃ ≥ 0 的切面内，青线标出 z 的可行窗口。", "With history fixing x, the candidate stays in the det G₃ ≥ 0 slice; the cyan segment is the allowed z window."],
-    "narrow": ["记忆从一步增至五步，品红椭圆逐层内嵌，青色可行窗口收窄，Q 始终在内。", "As memory grows from one step to five, nested magenta ellipses narrow the cyan window while Q stays inside."],
-    "flat": ["同一历史压回三维：记忆加深后可行区域退化为边界，再缩为孤立点，det G = 0。", "Squeeze the history into 3D: deeper memory reduces the feasible region to its boundary, then isolated points, det G = 0."],
-    "violate": ["候选在第三圈内、第四圈外：D₅ 首先变负，这张表无法在内积空间实现。", "Inside ring three but outside ring four, the candidate makes D₅ negative: no inner-product space realizes this table."],
+    "elliptope": ["历史固定 x 后，候选只能落在 det G₃ ≥ 0 的切面内，青线标出 z 的可行窗口。", "History fixes x: det G₃ ≥ 0 bounds the slice; cyan marks the allowed z window."],
+    "narrow": ["记忆从一步增至五步，品红椭圆逐层内嵌，青色可行窗口收窄，Q 始终在内。", "Memory 1 → 5: nested magenta ellipses narrow the cyan window; Q stays inside."],
+    "flat": ["同一历史压回三维：记忆加深后可行区域退化为边界，再缩为孤立点，det G = 0。", "History in 3D: deeper memory leaves boundaries, then isolated points; det G = 0."],
+    "violate": ["候选在第三圈内、第四圈外：D₅ 首先变负，这张表无法在内积空间实现。", "Inside ring 3, outside ring 4: D₅ < 0; no inner-product space realizes the table."],
   };
   const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：在截面里拖动琥珀色的 Q，或拖滑块、换记忆深度、换空间。拖动空白处旋转舞台。随时可以再选一张卡。', 'Free play: drag the amber Q in the slice, or move the sliders, change the depth of memory or the space. Drag empty space to rotate the stage. Pick a card again at any time.'] });
