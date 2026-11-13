@@ -59,7 +59,7 @@
 <text class="tf-cyan" x="170" y="204" font-size="13" text-anchor="middle">return</text>
 <text class="tf-dim" x="118" y="238" font-size="13" text-anchor="middle">2 qubits: 1 + 1 = 2 CNOTs</text>
 <rect x="10.2" y="264" width="215.6" height="21" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
-<text class="tf-ok tr-fig-mono" x="17.2" y="280" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓ CNOT ≥ 2²ⁿ⁻¹ + 2n − 2</text>
+<text class="tf-ok tr-fig-mono" x="17.2" y="280" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓ CNOT ≥ 2²ⁿ⁻¹ + 2n <tspan class="tr-fig-sans" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif">−</tspan> 2</text>
 </svg>
 <svg class="tr-fig-panel" x="504" y="0" width="236" height="290" viewBox="0 0 236 290">
 <text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III  between P and NP</text>

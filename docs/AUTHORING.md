@@ -66,7 +66,7 @@ $$
 
 | 种类 | 用途 | `lean` |
 | --- | --- | --- |
-| `theorem` `lemma` `proposition` `corollary` | 已在 Lean 中证明的结论 | 必须 |
+| `theorem` `lemma` `proposition` `corollary` | Lean 验证或显式书面证明的结论 | 默认必须；`status="written-proof"` 时禁止 |
 | `definition` | 定义 | 建议（指向 Lean `def`） |
 | `conjecture` `problem` | 猜想、开放问题 | 禁止 |
 | `example` `remark` | 例子、注记 | 可选 |
@@ -77,6 +77,35 @@ $$
 - 标题的显示规则（环境标题与 SUMMARY 中的章节标题相同）：`$…$` 内是 TeX，原样保留；`$…$` 外，反斜杠加 ASCII 标点是 Markdown 转义，各端（HTML 页头、侧栏、页面 `<title>`、站点目录、PDF、EPUB、账本）都只显示标点本身：`C\*-代数` 显示为 C*-代数，`snake\_case` 显示为 snake_case，`\$5` 显示为 $5 且不会成为公式。除行内数学与 `[@id]` 外，不要在标题里用强调、行内代码等格式：HTML 页头、侧栏与站点把它们当作纯文字，PDF/EPUB 却会排版，两端不一致。
 - `title` 中可以引用别的条目：`title="[@thm-deficit-three-valued] 的推广"` 显示为“定理1.3 的推广”（PDF/EPUB 中带链接）。id 不存在时 `./tbook check` 报错。
 - 环境可以嵌套（例如 `remark` 里放 `example`），但不要把 `proof` 放进定理内部——写在定理之后。
+
+### 源文有书面证明，尚无匹配的 Lean 声明
+
+书面证明与开放问题是两种状态。必须先搜索冻结库；已有陈述匹配的 Lean 验证时引用 Lean。只有尚无匹配验证、源文已有证明且有 DOI 来源时，才可使用书面证明状态。以下为语法示意，DOI、定位和 issue 必须替换为真实来源：
+
+```markdown
+::: {.theorem #thm-written status="written-proof" proof="pf-written" doi="<裸 DOI>" source="Theorem 2.1" request="https://github.com/the-omega-institute/trureturing-requests/issues/<编号>" title="源文结果"}
+忠实转述源文的陈述，并给出来源与适用范围。
+:::
+
+::: {.proof #pf-written}
+源文的书面论证，或忠实、完整的解释；注明出处。
+:::
+```
+
+`status="written-proof"` 只用于 `theorem/lemma/proposition/corollary`，不能同时有
+`lean`（空值也不行）。`proof="id"` 必须指向同一语言版本里非空的 `proof` 块，
+可跨章节。`doi` 必须是一个裸 DOI（`10.<注册者>/<后缀>`，不填 URL），`source` 是源文定理编号或章节页码，`request` 是共享请求仓库的 issue URL。各语言的状态、proof id、DOI、原文定位和 issue 必须相同，且每版都要有论证；注释或代码围栏
+不算书面证明内容。工具只检查结构，证明是否正确、完整、忠实于来源由作者与评审负责。
+
+所有输出显示紫色 **书面证明 / WRITTEN PROOF**，徽章不带链接，不计入 `LEAN ✓ n`；
+账本单列，并链接书内证明、DOI 和形式化请求。Slidev 必须用 `<TheoremCard status="written-proof" cite="thm-written" doi="…" source="…" request="…" …>`，来源字段与书中一致，不得给 `gid`；不能用独立 LeanBadge 代替有关联证明的定理卡。Beamer 的 `bookresult` 自动继承书中的状态和来源。开放问题仍用 conjecture/problem。
+
+先搜索并复用已有形式化请求；没有匹配项才新建。在 issue 正文或评论登记本书引用，标题、登记标记和去重规则见 [形式化请求规范](FORMALIZATION-REQUESTS.md)。`./tbook check` 核对 issue 存在、标题和登记；`--offline` 对未联网核验给出警告。DOI 是否真实、是否支持这条陈述，以及是否已有匹配 Lean 验证，须由作者与评审核对；语法校验不能替代这一步。
+未经证实却遗漏状态的形式结论仍报错并显示 UNVERIFIED。
+
+这里不提供“最近 Lean 声明”的环境属性：特例或变体不能作为本结果的验证引用。
+如需比较，在正文明确说明关系与差异，使用普通来源链接；不得给书面证明结果添加
+`lean` 或绿色徽章。模板层可在独立的比较记录中保存特例/变体关系，用于后续形式化。
 
 ### 选择正确的 GID
 
@@ -166,7 +195,7 @@ HTML 注释 `<!-- … -->` 不出现在任何输出中：其中的图片、链�
 :::
 ```
 
-静态图用 `::: {.figure src="<图名>"}` 引用，图名对应脚本 `books/<slug>/figures/<图名>.py`：一张图只讲一件事，放在讲到它的那句话旁，各语言版本位置与 `src` 相同，只翻译图注。图由脚本生成（`./tbook fig new|build|shots`），每种语言一版标签；HTML 中随深浅主题变化，PDF 的屏幕版与印刷版各用自己的配色。图注必须有，且不能只是编号。标准、画图库的用法与看图的方法见 `skills/book-figure`。图片语法 `![图注](../assets/x.png)` 只用于照片、截图这类不能由脚本画的图片，图注同样不能只是编号；用图片语法引用 `assets/` 里写死颜色的 SVG（没有角色类、没有 `prefers-color-scheme`），或让两种语言共用一个带字的 SVG，`./tbook check` 都给出警告。图在手机上（正文栏宽 358 px，按 `min(1, 358 / 宽度)` 缩小，分栏图按最宽一栏）最小的标签不得小于 10 px，低于时 `./tbook fig build` 与 `./tbook check` 警告，`site.toml` 的 `[figures]` `phone_labels = "error"` 可升为错误。媒体块（`.figure`、`.viz`、`.film`、`.slides`）放在各自对应的那句话之后，彼此之间要有正文：三块以上只隔着空行连排时，`./tbook check` 从第三块起警告。
+静态图用 `::: {.figure src="<图名>"}` 引用，图名对应脚本 `books/<slug>/figures/<图名>.py`：一张图只讲一件事，放在讲到它的那句话旁，各语言版本位置与 `src` 相同，只翻译图注。图由脚本生成（`./tbook fig new|build|shots`），每种语言一版标签；HTML 中随深浅主题变化，PDF 的屏幕版与印刷版各用自己的配色。图注必须有，且不能只是编号。标准、画图库的用法与看图的方法见 `skills/book-figure`。图片语法 `![图注](../assets/x.png)` 只用于照片、截图这类不能由脚本画的图片，图注同样不能只是编号；用图片语法引用 `assets/` 里写死颜色的 SVG（没有角色类、没有 `prefers-color-scheme`），或让两种语言共用一个带字的 SVG，`./tbook check` 都给出警告。图在手机上（正文栏宽 358 px，按 `min(1, 358 / 宽度)` 缩小，分栏图按最宽一栏）最小的标签不得小于 10 px，低于时 `./tbook fig build` 与 `./tbook check` 警告，`site.toml` 的 `[figures]` `phone_labels = "error"` 可升为错误。媒体块（`.figure`、`.viz`、`.film`、`.slides`）放在各自对应的那句话之后，相邻两块之间要隔着正文：两块只隔着空行或 HTML 注释相邻时，`./tbook check` 对这一对给出警告（两块的种类、`src`、实验卡的 `preset` 与行号）。不带 `preset` 的完整实验室紧跟同一页面的最后一张卡最常见：把实验室挪到章末最后一段之后，或在两者之间用一句正文交代。
 
 外部资源：`src="trureturing-visualize:<id>"`、`src="trureturing-film:film-001-v1"`。HTML 中为交互嵌入或播放器；PDF/EPUB 中为缩略图/海报加在线地址。媒体块在各语言版本中也必须一一对应。
 
@@ -183,10 +212,10 @@ HTML 注释 `<!-- … -->` 不出现在任何输出中：其中的图片、链�
 
 ## 7. 诚实标注
 
-- 只有 `LEAN ✓` 的条目是已验证结论；正文中不要手写“已证明”“已验证”来修饰未引用 Lean 的命题。
+- 只有 `LEAN ✓` 表示 Lean 内核验证；书面已证结果必须明确其 DOI 来源、证明责任和形式化请求，不得称为 Lean 已验证。
 - 构建只在锁文件确认每条 GID 都是已冻结的 Lean 定理时显示 `LEAN ✓`；否则显示红色 `UNVERIFIED`（徽章在各端都不是链接），也不计入“LEAN ✓ n”等统计（`./tbook check` 会报错，不能发布）。页脚与账本只给锁文件解析了的声明链接（例如误引的 Lean 定义，链接到它的源码），锁文件没有的 GID 显示为不带链接的文字。
 - 不把存在性写成可构造，不把一个反例写成最小反例，不把示意图的数值写成实验或模拟结果。
-- 引用文献中的结论而 trureturing 尚未形式化时，写成 `remark` 并注明“文献结果，未在本书形式化”，不要用 `theorem`。
+- 引用尚未形式化的文献结果时，可保留注明来源与边界的 `remark`；若要使用定理类环境和书面证明徽章，必须满足本节的 DOI、证明和请求登记要求。缺少 DOI 时不得用书面证明状态，也不要把已证结果误写成开放问题。
 
 ## 8. `./tbook check` 常见报错
 
@@ -217,6 +246,14 @@ HTML 注释 `<!-- … -->` 不出现在任何输出中：其中的图片、链�
 | `figure …: its smallest label (…) is … px on a phone, below 10 px`（警告，`site.toml` 可升为错误） | 做窄、分栏（`WRAP = True`）或加大最小字号，提示里给了具体数值（见 `skills/book-figure`） |
 | `… is a hand-drawn SVG with its colours written in`（警告） | 改写成图脚本 `figures/<name>.py`，用 `::: {.figure}` 引用；图片语法只留给照片一类 |
 | `… has text and is shown by the zh, en editions alike`（警告） | 每种语言一版标签：改成图脚本，或各语言各用一个文件 |
-| `N media blocks in a row … with no text between them`（警告） | 把每一块挪到它对应的那句话之后，块与块之间有正文 |
+| `… and … sit next to each other with no text between them`（警告） | 把两块各自挪到对应的那句话之后，块与块之间有正文；完整实验室挪到章末最后一段之后 |
 | `no figure books/<slug>/figures/<name>.py` | `.figure` 的 `src` 没有对应脚本：核对图名，或 `./tbook fig new <slug> <name>` |
 | `no chapter, deck, film or visualization of this book uses this file`（警告） | `assets/` 里的遗留文件：删除，或在章节里引用 |
+
+## 9. 学术报告（Beamer）
+
+传统学术报告用 `./tbook slides new <book> <deck> "<title>" --academic --editions en`。`deck.toml` 声明 `kind="academic"`、所选 `editions`、`aspect="4:3"`（或 `16:9`）、`structure_colour`、短作者/标题，可选 `institution`、`coauthors`（原主题显示 Joint work with …）、`date`、`navigation_symbols=true`（默认隐藏导航按钮），以及自有 `theme_dir`/`theme_name` 与 `institution_graphic`。每个所选语言给一个标题；所选第一语言是 `slides.tex`，其他为 `slides.<lang>.tex`。可以只覆盖书的一部分语言；同一 deck 内逐帧对齐。现有 Slidev deck 的格式不变。
+
+TeX 源在导言区写 `\input{tbook-deck}`；用 `\begin{bookresult}{thm-…}` 引用书中 id，正文自己写，种类、编号、标题与 Lean 徽章由书和锁生成。开放问题没有 GID；未解析的 GID 显示 `UNVERIFIED` 并使检查失败。`\PinnedCommit` 显示当前钉版，`\FormalVerification` 生成本报告引用过的结果账本。按“标题页、提纲、section/subsection/frame、appendix”组织，逐帧写 `% Manuscript: ...`，用 `\note{...}` 保留演讲备注。
+
+`\BookViz{golden-carry}{plus}` 插入纸面静态图并链接在线实验；先用 `./tbook slides snapshots <book>` 生成并提交 `fig-<卡>.<语言>.paper.png`。`\BookFigure{phase-square}` 经现有 `figure.materialize(...,"paper")` 路径插图，检查会拒绝过期 SVG。章节仍用 `::: {.slides src="<deck>"}`，各语言媒体序列一致；deck 缺少该语言时链接所选第一语言。完整命令、源解析边界、自有主题与排版规范见 [theme/beamer/README.md](../theme/beamer/README.md) 和 `skills/book-slides`。
