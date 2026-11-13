@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Independent browser regression for the six expansion experiments.
-import { session, stageFirstChecks, settle, cjkLeftovers, inkShare } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, settle, until, openStill, cjkLeftovers, inkShare } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'fairness-square-uncertainty-expansion';
 const PRESETS = ['helix-shadow', 'horizon-limit', 'fair-square', 'phase-fold', 'uncertainty-wedge', 'time-expand'];
@@ -250,6 +250,159 @@ for (const width of [334, 390]) for (const lang of ['zh', 'en']) {
   check(`${tag}: the card stays selected on the square scene`, m.preset === 'fair-square' && m.scene === 'square', JSON.stringify([m.preset, m.scene]));
   check(`${tag}: every stage label lies inside the canvas`, outside.length === 0, JSON.stringify({ canvas: c, outside }));
   check(`${tag}: both gauge labels are clear of the other labels, the title and the legend`, gauges.length === 2 && struck.length === 0, JSON.stringify({ gauges: gauges.length, struck }));
+  await p.context().close();
+}
+
+// ---------- the three 2D scenes: every label, DOM or canvas, keeps a place of its own ----------
+// The 2D scenes lay themselves out in the room between the title block and the legend as the browser renders them, and
+// reserve every label at its rendered size; for a given stage the reserved regions do not depend on the rail value:
+//   horizon, θ ∈ [0°, 90°]: the quarter circle (axes to 1.2 R) and its five label slots are bounded for every θ by
+//     horizonReach in main.js: e_{D+1} left of x = O − 6, V_D right of O + 1.2 R + 5, cos θ in a row under the V_D box,
+//     θ at radius ρ = rA + 6 + h/2 on the bisector, sin θ above the tip and raised past the V_D box and the θ label;
+//     the ladder has a panel of its own, its title in a row above the plot, its tick labels sized by measureText;
+//   squares, θ ∈ [0°, 360°): the squares reach (|cos θ| + |sin θ|) R ≤ √2 R; A and B sit on opposite sides of the
+//     axis, B beside the tip across the arrow from the magenta square, its box bounded by its offset maximised over a
+//     quarter turn; AB and BA are mirror images kept on their own sides, beside their dots (within rr + 10 + w across)
+//     or over them (within max(rr + 5.5, 1.3 rr, 10) + 2 + h up and down); the product has a row of its own, under the
+//     rotor or under the square and the rotor; the gauges stand in rows (label, bar, label, bar, tick label); the seven
+//     packings, with either rotor labelling, are compared by the square's radius;
+//   expansion, m ∈ [0, 6]: rows whose heights are label heights and multiples of the cell side, sized from the widest
+//     equation and witness labels over all seven steps.
+// Those bounds cover every continuous rail value. This suite reads the real browser: the box of every visible DOM
+// label and the ink box of every canvas fillText (measureText on the call itself), over dense rail samples driven
+// through the rail's own input event (which keeps a cited card selected, so the frame keeps its real height), and
+// checks them against each other, the canvas, the title and the legend, and against the regions the page reserved for
+// them (FAIRNESS_EXPANSION_DEBUG.layout(), read-only). The old fixed bands failed here: A met B at θ = 0, AB or BA met
+// (AB)(BA) = 1, V₄ met cos θ, sin θ met θ, and prime labels left the canvas or ran under the legend.
+// Fitting every label must not shrink the mathematics away: in the square scene the radius of the dashed circle and of
+// the rotor circle are read from the canvas arc calls themselves, and must stay readable (R ≥ 20 px, rr ≥ 12 px; in the
+// cited 334 px English frame the first measured packing left R ≈ 14.5 px), and a square's value is written exactly
+// when its side |cos θ| R or |sin θ| R is longer than 34 px, as it always was (a measured guard once hid some).
+function layoutSweep({ scene, values }) {
+  const dbg = window.FAIRNESS_EXPANSION_DEBUG, cv = document.querySelector('#cv'), ctx = cv.getContext('2d'), rail = document.querySelector('#now');
+  const css = (el) => getComputedStyle(el);
+  const visible = (el) => !el.hidden && el.offsetParent !== null && css(el).visibility !== 'hidden' && +css(el).opacity > 0 && el.textContent.trim().length > 0;
+  const rect = (r) => ({ left: r.left, right: r.right, top: r.top, bottom: r.bottom });
+  const meet = (a, b) => Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1;
+  const inside = (a, b, tol = 1) => a.left >= b.left - tol && a.right <= b.right + tol && a.top >= b.top - tol && a.bottom <= b.bottom + tol;
+  let ink = null, arcs = null;
+  ctx.arc = function (x0, y0, r, ...rest) {   // the radius of each circle drawn, in CSS pixels, and whether it is dashed
+    if (arcs) { const t = this.getTransform(), k = cv.width / cv.getBoundingClientRect().width; arcs.push({ r: r * Math.hypot(t.a, t.b) / k, dashed: this.getLineDash().length > 0 }); }
+    return CanvasRenderingContext2D.prototype.arc.call(this, x0, y0, r, ...rest);
+  };
+  ctx.fillText = function (text, x, y, ...rest) {   // the ink box of each canvas text, from the call itself
+    if (ink && this.globalAlpha > 0.05 && String(text).trim()) {
+      const m = this.measureText(text), t = this.getTransform(), k = cv.width / cv.getBoundingClientRect().width;
+      const at = (u, v) => [(t.a * u + t.c * v + t.e) / k, (t.b * u + t.d * v + t.f) / k];
+      const p = at(x - m.actualBoundingBoxLeft, y - m.actualBoundingBoxAscent), q = at(x + m.actualBoundingBoxRight, y + m.actualBoundingBoxDescent);
+      ink.push({ text: `canvas "${text}"`, left: Math.min(p[0], q[0]), right: Math.max(p[0], q[0]), top: Math.min(p[1], q[1]), bottom: Math.max(p[1], q[1]) });
+    }
+    return CanvasRenderingContext2D.prototype.fillText.call(this, text, x, y, ...rest);
+  };
+  const bad = [], off = [];   // what the browser shows wrong; where it disagrees with the regions the page reserved
+  const scale = { R: Infinity, rr: Infinity, odd: [] };   // the square scene: smallest circles, value labels against the rule
+  let frames = 0, labels = 0, texts = 0;
+  try {
+    for (const v of values) {
+      rail.value = String(v); rail.dispatchEvent(new Event('input', { bubbles: true }));
+      ink = []; arcs = []; window.TRV.kit.flush();
+      const st = dbg.state, lay = dbg.layout ? dbg.layout() : null, c = cv.getBoundingClientRect();
+      const at = `${scene} ${+v.toFixed(3)}`;
+      if (st.scene !== scene) { bad.push(`${at}: the scene is ${st.scene}`); continue; }
+      frames++;
+      const box = (r) => ({ left: r.x + c.left, right: r.x + r.w + c.left, top: r.y + c.top, bottom: r.y + r.h + c.top });
+      const dom = [...document.querySelectorAll('#stage .tag')].filter(visible).map((el) => ({ text: `"${el.textContent.trim()}"`, ...rect(el.getBoundingClientRect()) }));
+      const drawn = ink.map((r) => ({ ...r, left: r.left + c.left, right: r.right + c.left, top: r.top + c.top, bottom: r.bottom + c.top }));
+      const words = [...document.querySelectorAll('#hudBig, #hudSub, #legend > span, #stageCam .chip')].filter(visible).map((el) => ({ text: el.id ? `#${el.id}` : 'a legend entry or button', ...rect(el.getBoundingClientRect()) }));
+      const all = [...dom, ...drawn];
+      labels += dom.length; texts += drawn.length;
+      if (scene === 'square') {   // the dashed circle of radius R and the solid rotor circle; the dots and rings are ≤ 9 px
+        const rings = arcs.filter((a) => a.r > 9.5), sq = rings.filter((a) => a.dashed), ro = rings.filter((a) => !a.dashed);
+        if (sq.length !== 1 || ro.length !== 1) scale.odd.push(`${at}: ${sq.length} dashed and ${ro.length} solid circles`);
+        else {
+          const R = sq[0].r, th = v * Math.PI / 180, sides = [Math.abs(Math.cos(th)) * R, Math.abs(Math.sin(th)) * R];
+          scale.R = Math.min(scale.R, R); scale.rr = Math.min(scale.rr, ro[0].r);
+          const shown = dom.filter((d) => /^"\d\.\d\d"$/.test(d.text)).length, want = sides.filter((x) => x > 34).length;
+          if (sides.every((x) => Math.abs(x - 34) > 0.05) && shown !== want) scale.odd.push(`${at}: ${shown} square values shown, sides ${sides.map((x) => x.toFixed(1))} px ask ${want}`);
+        }
+      }
+      all.forEach((a, i) => {
+        if (!inside(a, rect(c))) bad.push(`${at}: ${a.text} leaves the canvas`);
+        for (const w of words) if (meet(a, w)) bad.push(`${at}: ${a.text} meets ${w.text}`);
+        for (const o of all.slice(i + 1)) if (meet(a, o)) bad.push(`${at}: ${a.text} meets ${o.text}`);
+      });
+      if (!lay) { off.push(`${at}: the page reports no reserved regions`); continue; }
+      const room = box(lay.room), regions = lay.blocks.map((b) => ({ name: b.name, ...box(b) }));
+      for (const w of words) if (meet(room, w)) off.push(`${at}: the room meets ${w.text}`);
+      regions.forEach((b, i) => {
+        if (!inside(b, room, 0.5)) off.push(`${at}: region ${b.name} leaves the room`);
+        for (const o of regions.slice(i + 1)) if (meet(b, o)) off.push(`${at}: regions ${b.name} and ${o.name} meet`);
+      });
+      for (const a of all) if (!regions.some((b) => inside(a, b))) off.push(`${at}: ${a.text} lies outside the regions reserved for it`);
+    }
+  } finally { delete ctx.fillText; delete ctx.arc; }
+  return { frames, labels, texts, bad: [...new Set(bad)], off: [...new Set(off)], scale: scene === 'square' ? { ...scale, R: +scale.R.toFixed(2), rr: +scale.rr.toFixed(2) } : null };
+}
+const steps = (a, b, n) => Array.from({ length: n + 1 }, (_, i) => a + (b - a) * i / n);
+const SQUARE_STILL = Math.atan2(3, 4) / DEG, SQUARE_END = 360 - SQUARE_STILL;
+// start (the card's from = 0), its still, its natural end (fair-square stops at 360° − 36.87°), and the whole range between
+const SWEEP = {
+  'fair-square': { scene: 'square', dense: [...steps(0, 360, 360), SQUARE_STILL, SQUARE_END], sparse: [...steps(0, 360, 72), SQUARE_STILL, SQUARE_END] },
+  'horizon-limit': { scene: 'horizon', dense: steps(0, 90, 180), sparse: steps(0, 90, 36) },
+  'time-expand': { scene: 'expand', dense: steps(0, 6, 300), sparse: steps(0, 6, 60) }
+};
+const report = (tag, r, values) => {
+  const few = (list) => ({ frames: r.frames, of: values.length, labels: r.labels, texts: r.texts, first: list.slice(0, 8), more: Math.max(0, list.length - 8) });
+  check(`${tag}: every visible DOM label and canvas text stays in the canvas, clear of the others, the title and the legend`,
+    r.frames === values.length && r.labels > 0 && r.bad.length === 0, JSON.stringify(few(r.bad)));
+  check(`${tag}: the regions the page reserved lie in the room between the title and the legend, apart, and hold every label measured`,
+    r.frames === values.length && r.off.length === 0, JSON.stringify(few(r.off)));
+  if (r.scale) check(`${tag}: the square stays readable (dashed circle ≥ 20 px, rotor circle ≥ 12 px) and shows a square's value exactly when its side exceeds 34 px`,
+    r.frames === values.length && r.scale.R >= 20 && r.scale.rr >= 12 && r.scale.odd.length === 0, JSON.stringify({ R: r.scale.R, rr: r.scale.rr, first: r.scale.odd.slice(0, 6), more: Math.max(0, r.scale.odd.length - 6) }));
+};
+
+// cited figures: the frames the chapter shows, at the narrow column widths, both languages and both colour schemes
+for (const preset of Object.keys(SWEEP)) for (const width of [334, 390]) for (const lang of ['zh', 'en']) {
+  const p = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${preset}`, { viewport: { width, height: 500 }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+  await p.waitForFunction(() => !!window.FAIRNESS_EXPANSION_DEBUG);
+  await until(p, () => window.FAIRNESS_EXPANSION_DEBUG.state.playing || window.FAIRNESS_EXPANSION_DEBUG.state.t > 0);   // the card starts once in view
+  await pause(p);
+  const cited = await p.evaluate(() => document.documentElement.hasAttribute('data-figure'));
+  for (const theme of ['dark', 'light']) {
+    await p.emulateMedia({ colorScheme: theme }); await settle(p);
+    const values = theme === 'dark' ? SWEEP[preset].dense : SWEEP[preset].sparse, r = await p.evaluate(layoutSweep, { scene: SWEEP[preset].scene, values });
+    report(`cited ${preset} ${width}×500 ${lang}/${theme}`, r, values);
+  }
+  const kept = await p.evaluate(() => window.FAIRNESS_EXPANSION_DEBUG.state.preset);
+  check(`cited ${preset} ${width}×500 ${lang}: a cited figure whose card stays selected through the sweeps`, cited && kept === preset, JSON.stringify({ cited, kept }));
+  await p.context().close();
+}
+// the lab on a desktop, a phone and in a book frame without a card; the horizon also with the shortest and longest V_D
+for (const [kind, width, height, extra] of [['desktop', 1440, 900, ''], ['mobile', 390, 844, ''], ['embed', 780, 500, '&embed=1']]) for (const lang of ['zh', 'en']) {
+  const p = await T.open(BOOK, ID, `?lang=${lang}${extra}`, { viewport: { width, height }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+  await p.waitForFunction(() => !!window.FAIRNESS_EXPANSION_DEBUG);
+  for (const theme of ['dark', 'light']) {
+    await p.emulateMedia({ colorScheme: theme });
+    for (const preset of Object.keys(SWEEP)) {
+      await p.click(`[data-preset="${preset}"]`); await pause(p);
+      const values = theme === 'dark' ? SWEEP[preset].dense.filter((_, i) => i % 2 === 0).concat(SWEEP[preset].dense.slice(-2)) : SWEEP[preset].sparse;
+      report(`${kind} ${width}×${height} ${lang}/${theme} ${preset}`, await p.evaluate(layoutSweep, { scene: SWEEP[preset].scene, values }), values);
+    }
+    if (theme === 'dark' && kind !== 'embed') {
+      await p.click('[data-preset="horizon-limit"]'); await pause(p);
+      for (const D of [1, 10]) {
+        await p.locator('#dimInput').fill(String(D)); await p.dispatchEvent('#dimInput', 'input'); await settle(p);
+        report(`${kind} ${width}×${height} ${lang} horizon with D = ${D}`, await p.evaluate(layoutSweep, { scene: 'horizon', values: SWEEP['horizon-limit'].sparse }), SWEEP['horizon-limit'].sparse);
+      }
+    }
+  }
+  await p.context().close();
+}
+// the labelled stills for PDF and EPUB (800 × 450, ?shot=1): the frame itself, then the rail around it
+for (const preset of Object.keys(SWEEP)) for (const lang of ['zh', 'en']) {
+  const p = await openStill(T, BOOK, ID, preset, lang);
+  const still = await p.evaluate(() => window.FAIRNESS_EXPANSION_DEBUG.state.t), values = [still, ...SWEEP[preset].sparse];
+  report(`still ${preset} 800×450 ${lang}`, await p.evaluate(layoutSweep, { scene: SWEEP[preset].scene, values }), values);
   await p.context().close();
 }
 

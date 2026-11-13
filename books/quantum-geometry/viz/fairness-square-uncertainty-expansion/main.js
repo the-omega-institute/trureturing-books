@@ -223,14 +223,56 @@
   };
   const tag = (key, p, html, cls, dx, dy) => st.tag(key, p, html, cls, { screen: true, dx: dx || 0, dy: dy || 0 });
 
-  /** Room for the title (top) and the legend (bottom); two panels side by side on a wide stage, stacked on a tall one. */
-  function regions(W, H) {
-    const narrow = W < 560, top = narrow ? 70 : 60, bottom = narrow ? 74 : 50, side = narrow ? 12 : 24;
-    const wide = W >= H * 1.15;
-    if (wide) { const gap = 24, w = (W - 2 * side - gap) / 2; return { wide, top, bottom, side, a: { x: side, y: top, w, h: H - top - bottom }, b: { x: side + w + gap, y: top, w, h: H - top - bottom } }; }
-    const gap = 14, h = (H - top - bottom - gap) / 2;
-    return { wide, top, bottom, side, a: { x: side, y: top, w: W - 2 * side, h }, b: { x: side, y: top + h + gap, w: W - 2 * side, h } };
+  /* ---------- the room of a 2D scene, and the size of what it writes ----------
+     A 2D scene draws between the title block (and the scene buttons, where they are shown) and the legend, as they are
+     laid out in this very frame: in a narrow cited figure both wrap onto several lines. Every label is reserved at its
+     rendered size, a DOM label through a hidden copy with the same classes and a canvas text through measureText, so the
+     scenes below place whole objects together with their labels instead of at fixed pixel offsets. */
+  const hudTl = stageEl.querySelector('.hud-tl'), legendEl = $('legend');
+  function room(W, H) {
+    if (TRV.hudFit) TRV.hudFit();             // the title block takes its place (below the buttons or not) before it is measured
+    const side = W < 560 ? 12 : 24, gap = 6, cb = cv.getBoundingClientRect();
+    let top = 10, bottom = H - 10;
+    if (!TRV.thumbMode) {                     // a cover hides the words, so it keeps the whole stage
+      for (const el of [hudTl, $('stageCam')]) {
+        if (!el || el.hidden) continue;
+        const r = el.getBoundingClientRect();
+        if (r.width > 0 && r.height > 0) top = Math.max(top, r.bottom - cb.top + gap);
+      }
+      for (const el of legendEl ? [...legendEl.children] : []) {
+        const r = el.getBoundingClientRect();
+        if (r.width > 0 && r.height > 0) bottom = Math.min(bottom, r.top - cb.top - gap);
+      }
+    }
+    return { x: side, y: top, w: Math.max(0, W - 2 * side), h: Math.max(0, bottom - top) };
   }
+  const meter = document.createElement('div');
+  meter.setAttribute('aria-hidden', 'true'); meter.style.visibility = 'hidden';
+  stageEl.appendChild(meter);
+  const sizes = new Map();
+  /** [width, height] of a stage label (st.tag) with this markup and these classes, as the browser renders it. */
+  function tagSize(html, cls) {
+    const key = `${document.documentElement.dataset.lang}|${cls}|${html}`;
+    let s = sizes.get(key);
+    if (!s) {
+      meter.className = `tag ${cls}`; meter.innerHTML = html;
+      const r = meter.getBoundingClientRect(); s = [r.width, r.height];
+      meter.textContent = '';
+      if (sizes.size > 600) sizes.clear();
+      sizes.set(key, s);
+    }
+    return s;
+  }
+  /** The widest of several renderings, so a slot does not breathe while a number in its label changes. */
+  const slot = (cls, ...htmls) => htmls.reduce((m, h) => { const s = tagSize(h, cls); return [Math.max(m[0], s[0]), Math.max(m[1], s[1])]; }, [0, 0]);
+  /** The ink box of a canvas text relative to its anchor: { w, left, right, up, down } (all ≥ 0 away from the anchor). */
+  function ink(s, font, align, base) {
+    const c = cv.getContext('2d');
+    c.save(); c.font = font; c.textAlign = align || 'center'; c.textBaseline = base || 'middle';
+    const m = c.measureText(s); c.restore();
+    return { w: m.actualBoundingBoxLeft + m.actualBoundingBoxRight, left: m.actualBoundingBoxLeft, right: m.actualBoundingBoxRight, up: m.actualBoundingBoxAscent, down: m.actualBoundingBoxDescent };
+  }
+  const dataFont = (px) => `${px}px ${TRV.fonts.data}`;
 
   /* ---------- scene 1 · helix ---------- */
   function drawHelix(D) {
@@ -273,10 +315,51 @@
   }
 
   /* ---------- scene 2 · horizon ---------- */
+  /* Left: the quarter circle above V_D, radius R, origin O, axes to 1.2 R. Every label keeps a slot of its own for each
+     θ in [0°, 90°] (screen y grows downwards):
+       e_{D+1}  left of the magenta arrowhead (right edge at O − 6);  V_D  right of the cyan arrowhead (left edge at O + 1.2 R + 5);
+       cos θ    in a row under the axis that starts below the V_D box; its centre follows the middle of the cyan segment;
+       θ        on the bisector of the amber arc, at radius ρ = rA + 6 + h/2 inside the quarter disc;
+       sin θ    just above the amber tip (the vector and the magenta segment hang below the tip), right of the magenta
+                axis (left edge ≥ O + 7) and inside the figure; it rises only as far as it must to clear the V_D box and
+                the θ label where it shares their columns.
+     horizonReach() bounds the figure with all of its labels for every θ, from R and the slot sizes, and R is the largest
+     its panel holds. Right: the ladder over D, its title in a row of its own above the plot. */
+  function horizonReach(R, Z) {
+    const rA = Math.min(34, 0.45 * R), rho = rA + 6 + Z.th[1] / 2, hs = Z.sn[1];
+    return {
+      rA, rho,
+      left: 6 + Z.ed[0],
+      right: Math.max(1.2 * R + 5 + Z.vd[0], 7 + Z.sn[0]),
+      up: Math.max(1.2 * R + Math.max(Z.ed[1] / 2, 6), R + 4 + hs, Math.SQRT1_2 * rho + Z.th[1] / 2 + 2 + hs, Z.vd[1] / 2 + 2 + hs),
+      down: Math.max(Z.vd[1] / 2, 7) + 3 + Z.cs[1]
+    };
+  }
   function drawHorizon(ctx, W, H, D) {
-    const pal = TRV.palette, hz = D.horizon, R0 = regions(W, H), a = R0.a, b = R0.b;
-    // left: the quarter circle above V_D
-    const R = Math.max(40, Math.min(a.w - 120, (a.h - 40) / 1.24)), O = [a.x + (a.w - R) / 2 - 18, a.y + a.h - 26];
+    const pal = TRV.palette, hz = D.horizon, U = room(W, H), gap = 14;
+    const Z = {
+      vd: tagSize(`V${sub(hz.D)}`, 'cy raw'), ed: tagSize(`e${sub(hz.D + 1)}`, 'mg raw'), th: tagSize('θ', 'hot raw'),
+      cs: slot('cy raw', `cos θ = ${fix(hz.cos, 2)}`, 'cos θ = 0.00'), sn: slot('mg raw', `sin θ = ${fix(hz.sin, 2)}`, 'sin θ = 0.00')
+    };
+    // the ladder needs its y ticks, ten columns in which the tick labels 9 and 10 do not touch, and its title row
+    const f10 = dataFont(10), yt = Math.max(...['0', '0.5', '1'].map((t) => ink(t, f10, 'right').left));
+    const t9 = ink('9', f10, 'center', 'top'), t10 = ink('10', f10, 'center', 'top');
+    const oneHtml = `‖I − P${sub('V' + sub('D'))}‖ = 1`, one = tagSize(oneHtml, 'mg raw');
+    const pl = Math.ceil(yt) + 8, pb = 5 + Math.ceil(Math.max(t9.down, t10.down)) + 3, col = (t9.w + t10.w) / 2 + 3;
+    const cW = Math.max(pl + (DMAX + 0.3) * col + 4, one[0]), cH = one[1] + 6 + 40 + pb;
+    const fitR = (w, h) => {
+      let lo = 0, hi = 4000;
+      for (let i = 0; i < 40; i++) { const R = (lo + hi) / 2, e = horizonReach(R, Z); if (e.left + e.right <= w && e.up + e.down <= h) lo = R; else hi = R; }
+      return lo;
+    };
+    // side by side or stacked: whichever gives the larger quarter circle, the ladder keeping at least its own minimum
+    const sideW = Math.max(0, Math.min((U.w - gap) / 2, U.w - gap - cW)), stackH = Math.max(0, Math.min((U.h - gap) / 2, U.h - gap - cH));
+    const Rside = fitR(sideW, U.h), Rstack = fitR(U.w, stackH), side = Rside >= Rstack;
+    const a = side ? { x: U.x, y: U.y, w: sideW, h: U.h } : { x: U.x, y: U.y, w: U.w, h: stackH };
+    const b = side ? { x: U.x + sideW + gap, y: U.y, w: U.w - sideW - gap, h: U.h } : { x: U.x, y: U.y + stackH + gap, w: U.w, h: U.h - stackH - gap };
+    const R = Math.max(8, side ? Rside : Rstack), e = horizonReach(R, Z);
+    const O = [a.x + (a.w - e.left - e.right) / 2 + e.left, a.y + (a.h - e.up - e.down) / 2 + e.up];
+    geo.layout = { room: U, blocks: [{ name: 'figure', x: O[0] - e.left, y: O[1] - e.up, w: e.left + e.right, h: e.up + e.down }, { name: 'ladder', ...b }] };
     const th = hz.thDeg * DEG, tip = [O[0] + R * Math.cos(th), O[1] - R * Math.sin(th)], foot = [tip[0], O[1]];
     ring(ctx, O, R, pal.dim, 1, 0.7, [3, 4], -Math.PI / 2, 0);
     arw(ctx, O, [O[0] + R * 1.2, O[1]], pal.cyan, 2.2, 0.95, 11);
@@ -284,17 +367,30 @@
     ln(ctx, O, foot, pal.cyan, 5.5, 0.95);
     ln(ctx, foot, tip, pal.magenta, 4.5, 0.95);
     if (hz.sin * R > 14 && hz.cos * R > 14) square90(ctx, foot, [-1, 0], [0, -1], 10, pal.sigma, 0.8);
-    if (hz.thDeg > 2) ring(ctx, O, 34, pal.amber, 1.4, 0.9, null, -th, 0);
+    if (hz.thDeg > 2) ring(ctx, O, e.rA, pal.amber, 1.4, 0.9, null, -th, 0);
     arw(ctx, O, tip, pal.amber, 2.8, 1, 13);
     dot(ctx, foot, 4.6, pal.cyan, 1, 8);
     geo.hTip = tip; geo.hO = O;
-    tag('vd', [O[0] + R * 1.2, O[1] + 18], `V${sub(hz.D)}`, 'cy raw');
-    tag('ed', [O[0] + 30, O[1] - R * 1.2], `e${sub(hz.D + 1)}`, 'mg raw');
-    tag('cs', [O[0] + Math.max(0, R * hz.cos) / 2, O[1] + 20], `cos θ = ${fix(hz.cos, 2)}`, 'cy raw', hz.cos * R < 64 ? 26 : 0);
-    if (hz.sin > 0.14) tag('sn', [foot[0] + 50, (O[1] + tip[1]) / 2], `sin θ = ${fix(hz.sin, 2)}`, 'mg raw');
-    if (hz.thDeg > 10) tag('th', [O[0] + 50 * Math.cos(th / 2), O[1] - 50 * Math.sin(th / 2)], 'θ', 'hot raw');
+    const vdX = O[0] + 1.2 * R + 5;
+    tag('vd', [vdX + Z.vd[0] / 2, O[1]], `V${sub(hz.D)}`, 'cy raw');
+    tag('ed', [O[0] - 6 - Z.ed[0] / 2, O[1] - 1.2 * R], `e${sub(hz.D + 1)}`, 'mg raw');
+    tag('cs', [clamp(O[0] + R * hz.cos / 2, O[0] - e.left + Z.cs[0] / 2, O[0] + e.right - Z.cs[0] / 2), O[1] + Math.max(Z.vd[1] / 2, 7) + 3 + Z.cs[1] / 2],
+      `cos θ = ${fix(hz.cos, 2)}`, 'cy raw');
+    let tb = null;
+    if (hz.thDeg > 10) {
+      const p = [O[0] + e.rho * Math.cos(th / 2), O[1] - e.rho * Math.sin(th / 2)];
+      tb = { l: p[0] - Z.th[0] / 2, r: p[0] + Z.th[0] / 2, t: p[1] - Z.th[1] / 2 };
+      tag('th', p, 'θ', 'hot raw');
+    }
+    if (hz.sin > 0.14) {
+      const [ws, hs] = Z.sn, cx = clamp(tip[0], O[0] + 7 + ws / 2, O[0] + e.right - ws / 2);
+      let bottom = tip[1] - 4;
+      if (cx + ws / 2 > vdX - 2) bottom = Math.min(bottom, O[1] - Z.vd[1] / 2 - 2);
+      if (tb && cx - ws / 2 < tb.r + 2 && cx + ws / 2 > tb.l - 2) bottom = Math.min(bottom, tb.t - 2);
+      tag('sn', [cx, bottom - hs / 2], `sin θ = ${fix(hz.sin, 2)}`, 'mg raw');
+    }
     // right: the ladder over D: a fixed x converges, the witness e_{D+1} does not move
-    const g = kit.plot(cv, { x: [0.35, DMAX + 0.65], y: [0, 1.2], pad: [b.x + 34, W - (b.x + b.w), b.y + 8, H - (b.y + b.h) + 20], clear: false });
+    const g = kit.plot(cv, { x: [0.35, DMAX + 0.65], y: [0, 1.2], pad: [b.x + pl, W - (b.x + b.w), b.y + one[1] + 6, H - (b.y + b.h) + pb], clear: false });
     g.axes({ xTicks: Array.from({ length: DMAX }, (_, i) => [i + 1, String(i + 1)]), yTicks: [[0, '0'], [0.5, '0.5'], [1, '1']], xLabel: 'D' });
     g.rect(hz.D - 0.48, 0, hz.D + 0.48, 1.16, pal.amber, { alpha: 0.05 });
     g.hline(1, pal.sigma, { alpha: 0.6, dash: [5, 4], width: 1.1 });
@@ -308,39 +404,167 @@
     const yA = hz.resid2;
     g.line([[hz.D + 0.12, yA], [hz.D + 0.4, yA]], pal.amber, { width: 2.2 });
     g.dot(hz.D + 0.26, yA, pal.amber, 4.4 * LW, { glow: 9 });
-    tag('one', [g.X((DMAX + 1) / 2), g.Y(1.12)], `‖I − P${sub('V' + sub('D'))}‖ = 1`, 'mg raw');
+    tag('one', [clamp(g.X((DMAX + 1) / 2), b.x + one[0] / 2, b.x + b.w - one[0] / 2), b.y + one[1] / 2], oneHtml, 'mg raw');
   }
 
   /* ---------- scene 3 · squares and rotors ---------- */
-  const GAUGE_MIN = 112;   // a gauge this long keeps its label (about 130 px, centred over it) inside the stage
+  /* Three objects and the product, each bounded for every θ in [0°, 360°) by its drawing and the sizes of its labels:
+       the square figure (radius R): the squares reach |x| ≤ (|cos θ| + |sin θ|) R ≤ √2 R and the axes 1.35 R. A sits on
+         the side of the horizontal axis away from the tip. B stands beside the tip, across the amber arrow from the
+         magenta square: its box lies B_GAP beyond the line through the tip perpendicular to the arrow, on the side
+         away from both squares (wider than the arrowhead there) and on the tip's side of the axis, so it meets neither
+         A, the squares nor their values, and it stays within the reach of the drawing itself once R is about 33 px
+         (squareReach). The value of a square is written at its centre when its side is longer than 34 px;
+       the rotor (radius rr): AB and BA by their dots, each kept on its own side of the horizontal axis (they are mirror
+         images), either beside the dot, 10 px out on the side away from the vertical axis (within rr + 10 + w across
+         and rr + h/2, or h + 1, up and down), or centred over it (under it, for the lower one) and raised past the dot,
+         the circle, the product ring at (rr, 0) and the end of the vertical axis (within rr + w/2, or rr + 10, across
+         and max(rr + 5.5, 1.3 rr, 10) + 2 + h up and down) (rotorReach);
+       the product (AB)(BA) = 1, in a row of its own: under the rotor, or under the square and the rotor side by side;
+       the gauges: a label, its bar, a label, its bar and the tick label 1, in rows; √2 under its tick when the rows have
+         room for it, else after the end of the bar (gaugeBlock).
+     squareLayout() tries seven packings of these blocks in the room, with either way of labelling the rotor, and keeps
+     the one with the largest square (an earlier packing, AB and BA beside their dots and √2 under its tick win
+     near-ties): three columns, square | rotor | gauges; square | rotor over gauges; square over rotor | gauges;
+     square | rotor, over gauges; square over rotor, | gauges; square | rotor over the product, | gauges; and square |
+     rotor over the product, over gauges. */
+  // B's centre is d = B_GAP + (w/2)|sin θ| + (h/2)|cos θ| from the tip along the arrow's normal σe(−sin θ, cos θ) (σ, e
+  // the signs of sin θ and cos θ, as the squares use them), so relative to O its box reaches ||cos θ| R − d |sin θ|| + w/2
+  // across and |sin θ| R + d |cos θ| + h/2 up or down. Both are maximised over a quarter turn sampled every 0.5° (with R
+  // rounded up to 1/8 px); between samples they move by less than (R + B_GAP + w + h)·0.0088 px, added with 1/8 px.
+  const B_GAP = 6, reachMemo = new Map();
+  const bOffset = (c, s, w, h) => B_GAP + (w / 2) * Math.abs(s) + (h / 2) * Math.abs(c);
+  function bReach(R, w, h) {
+    const key = `${Math.ceil(R * 8)}|${w}|${h}`;
+    let v = reachMemo.get(key);
+    if (!v) {
+      const r = Math.ceil(R * 8) / 8, slack = (r + B_GAP + w + h) * 0.0088 + 0.125;
+      let x = 0, y = 0;
+      for (let i = 0; i <= 180; i++) {
+        const f = i * Math.PI / 360, c = Math.cos(f), sn = Math.sin(f), d = bOffset(c, sn, w, h);
+        x = Math.max(x, Math.abs(r * c - d * sn) + w / 2);
+        y = Math.max(y, r * sn + d * c + h / 2);
+      }
+      v = [x + slack, y + slack];
+      if (reachMemo.size > 4000) reachMemo.clear();
+      reachMemo.set(key, v);
+    }
+    return v;
+  }
+  const aOffset = (R, Z) => Math.max(0.13 * R, Z.A[1] / 2 + 1);   // A's centre from the horizontal axis
+  const squareReach = (R, Z) => {
+    const [bx, by] = bReach(R, Z.B[0], Z.B[1]);
+    return { x: Math.max(1.35 * R, Math.SQRT2 * R + 2, 1.12 * R + Z.A[0] / 2, bx), y: Math.max(1.35 * R, by, aOffset(R, Z) + Z.A[1] / 2) };
+  };
+  const SQUARE_READ = 20;   // the smallest square radius at which A, B and both squares read clearly apart
+  const PRING = 10;         // the product ring at (rr, 0): radius 9 and half its stroke
+  /** Half-size of the box around the rotor centre that holds its axes, the product ring and the AB, BA labels (w × h)
+      for every θ: beside their dots, or over (under) them. */
+  const rotorReach = (rr, w, h, over) => (over
+    ? [Math.max(1.3 * rr, rr + PRING, rr + w / 2) + 1, Math.max(rr + 5.5, 1.3 * rr, PRING) + 2 + h + 1]
+    : [Math.max(1.3 * rr, rr + 10 + w) + 1, Math.max(1.3 * rr, rr + h / 2, h + 1) + 1]);
+  /** The gauge block for a track of length gw, in rows from its top: label 1, bar 1 (end tick ± 13), [√2], label 2,
+      bar 2, the tick label 1; and its extent left and right of the track. */
+  function gaugeBlock(gw, under, Z) {
+    const bh = 13, hg = Math.max(Z.g1[1], Z.g2[1]), wg = Math.max(Z.g1[0], Z.g2[0]);
+    const y1 = hg + 2 + bh, r2 = under ? y1 + bh + 1 + Z.r2.up + Z.r2.down + 2 : y1 + bh + 2;
+    const y2 = r2 + hg + 2 + bh, h = y2 + bh + 3 + Z.one.up + Z.one.down;
+    const left = Math.max(0, (wg - gw) / 2);
+    const right = Math.max(0, (wg - gw) / 2, under ? gw * Math.SQRT2 / 1.5 + Z.r2.w / 2 - gw : 4 + Z.r2.w, gw / 1.5 + Z.one.w / 2 - gw);
+    return { y1, y2, h, left, w: left + gw + right };
+  }
+  const layoutMemo = { key: '', value: null };
+  function squareLayout(U, Z) {
+    const key = [U.x, U.y, U.w, U.h, Z.A, Z.B, Z.ab, Z.pr, Z.g1, Z.g2, Z.r2.w, Z.r2.up, Z.r2.down, Z.one.w, Z.one.up, Z.one.down].join('|');
+    if (layoutMemo.key === key) return layoutMemo.value;
+    const gc = 10, gr = 10, gp = 4, gwMin = 64, gwMax = 360, P = { w: Z.pr[0], h: Z.pr[1] };
+    const sq = (R) => { const r = squareReach(R, Z); return { w: 2 * r.x, h: 2 * r.y }; };
+    const rot = (R, over) => { const rr = clamp(0.45 * R, 12, 72), [rx, ry] = rotorReach(rr, Z.ab[0], Z.ab[1], over); return { rr, over, w: 2 * rx, h: 2 * ry }; };
+    // the rotor with the product in a row under it, as one block placed at (x, y)
+    const stackP = (r) => ({ w: Math.max(r.w, P.w), h: r.h + gp + P.h });
+    const putP = (r, x, y) => { const b = stackP(r); return { r: { ...r, x: x + (b.w - r.w) / 2, y }, p: { ...P, x: x + (b.w - P.w) / 2, y: y + r.h + gp } }; };
+    // the longest track (at most gwMax) whose block fits the width; the shortest one when none does
+    const gauge = (width, under) => {
+      let lo = gwMin;
+      if (gaugeBlock(gwMax, under, Z).w <= width) lo = gwMax;
+      else if (gaugeBlock(gwMin, under, Z).w <= width) { let hi = gwMax; for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (gaugeBlock(m, under, Z).w <= width) lo = m; else hi = m; } }
+      return Object.assign({ gw: lo, room: width }, gaugeBlock(lo, under, Z));
+    };
+    // each packing places the blocks in U for a square of radius R: wide says whether their widths fit, need is the
+    // height they take, ok whether all of it fits
+    const fit = (o) => Object.assign(o, { ok: o.wide && o.need <= U.h });
+    // square | rotor, the product in a row under both, centred under the rotor as far as the row allows
+    const pair = (s, r, x0, ht, y0) => {
+      const w = Math.max(s.w + gc + r.w, P.w), xs = x0 + (w - s.w - gc - r.w) / 2, rx = xs + s.w + gc;
+      return { w, s: { ...s, x: xs, y: y0 + (ht - s.h) / 2 }, r: { ...r, x: rx, y: y0 + (ht - r.h) / 2 },
+        p: { ...P, x: clamp(rx + r.w / 2 - P.w / 2, x0, x0 + w - P.w), y: y0 + ht + gp } };
+    };
+    const PACKS = [
+      (R, under, over) => {   // square | rotor | gauges
+        const s = sq(R), r = rot(R, over), b = stackP(r), g = gauge(U.w - s.w - b.w - 2 * gc, under);
+        return fit({ wide: g.w <= g.room, need: Math.max(s.h, b.h, g.h), s: { ...s, x: U.x, y: U.y + (U.h - s.h) / 2 },
+          ...putP(r, U.x + s.w + gc, U.y + (U.h - b.h) / 2), g: { ...g, x: U.x + s.w + b.w + 2 * gc, y: U.y + (U.h - g.h) / 2 } });
+      },
+      (R, under, over) => {   // square | rotor over gauges
+        const s = sq(R), r = rot(R, over), b = stackP(r), rw = U.w - s.w - gc, g = gauge(rw, under), y0 = U.y + (U.h - b.h - gr - g.h) / 2, x1 = U.x + s.w + gc;
+        return fit({ wide: g.w <= rw && b.w <= rw, need: Math.max(s.h, b.h + gr + g.h), s: { ...s, x: U.x, y: U.y + (U.h - s.h) / 2 },
+          ...putP(r, x1 + (rw - b.w) / 2, y0), g: { ...g, x: x1, y: y0 + b.h + gr } });
+      },
+      (R, under, over) => {   // square over rotor | gauges
+        const s = sq(R), r = rot(R, over), b = stackP(r), g = gauge(U.w - b.w - gc, under), hb = Math.max(b.h, g.h), y0 = U.y + (U.h - s.h - gr - hb) / 2, yb = y0 + s.h + gr;
+        return fit({ wide: g.w <= g.room && s.w <= U.w, need: s.h + gr + hb, s: { ...s, x: U.x + (U.w - s.w) / 2, y: y0 },
+          ...putP(r, U.x, yb + (hb - b.h) / 2), g: { ...g, x: U.x + b.w + gc, y: yb + (hb - g.h) / 2 } });
+      },
+      (R, under, over) => {   // square | rotor, over gauges
+        const s = sq(R), r = rot(R, over), b = stackP(r), g = gauge(U.w, under), ht = Math.max(s.h, b.h), y0 = U.y + (U.h - ht - gr - g.h) / 2, x0 = U.x + (U.w - s.w - gc - b.w) / 2;
+        return fit({ wide: g.w <= U.w && s.w + gc + b.w <= U.w, need: ht + gr + g.h, s: { ...s, x: x0, y: y0 + (ht - s.h) / 2 },
+          ...putP(r, x0 + s.w + gc, y0 + (ht - b.h) / 2), g: { ...g, x: U.x, y: y0 + ht + gr } });
+      },
+      (R, under, over) => {   // square over rotor, | gauges
+        const s = sq(R), r = rot(R, over), b = stackP(r), lw = Math.max(s.w, b.w), g = gauge(U.w - lw - gc, under), hl = s.h + gr + b.h, y0 = U.y + (U.h - hl) / 2;
+        return fit({ wide: g.w <= g.room, need: Math.max(hl, g.h), s: { ...s, x: U.x + (lw - s.w) / 2, y: y0 },
+          ...putP(r, U.x + (lw - b.w) / 2, y0 + s.h + gr), g: { ...g, x: U.x + lw + gc, y: U.y + (U.h - g.h) / 2 } });
+      },
+      (R, under, over) => {   // square | rotor over the product, | gauges
+        const s = sq(R), r = rot(R, over), ht = Math.max(s.h, r.h), hp = ht + gp + P.h, y0 = U.y + (U.h - hp) / 2, two = pair(s, r, U.x, ht, y0);
+        const g = gauge(U.w - two.w - gc, under);
+        return fit({ wide: g.w <= g.room, need: Math.max(hp, g.h), s: two.s, r: two.r, p: two.p, g: { ...g, x: U.x + two.w + gc, y: U.y + (U.h - g.h) / 2 } });
+      },
+      (R, under, over) => {   // square | rotor over the product, over gauges
+        const s = sq(R), r = rot(R, over), ht = Math.max(s.h, r.h), g = gauge(U.w, under), y0 = U.y + (U.h - ht - gp - P.h - gr - g.h) / 2;
+        const w = Math.max(s.w + gc + r.w, P.w), two = pair(s, r, U.x + (U.w - w) / 2, ht, y0);
+        return fit({ wide: g.w <= U.w && w <= U.w, need: ht + gp + P.h + gr + g.h, s: two.s, r: two.r, p: two.p, g: { ...g, x: U.x, y: y0 + ht + gp + P.h + gr } });
+      }
+    ];
+    let best = null, least = Infinity;
+    for (const over of [false, true]) for (const under of [true, false]) {
+      PACKS.forEach((pack, i) => {
+        const read = pack(SQUARE_READ, under, over);
+        if (read.wide) least = Math.min(least, read.need);    // the height the room would need for a readable square
+        if (!pack(6, under, over).ok) return;
+        let lo = 6, hi = 600;
+        for (let k = 0; k < 32; k++) { const m = (lo + hi) / 2; if (pack(m, under, over).ok) lo = m; else hi = m; }
+        if (!best || lo > best.R * 1.02) best = { R: lo, under, over, i };
+      });
+    }
+    if (!best) best = { R: 6, under: false, over: false, i: 0 };
+    layoutMemo.key = key;
+    layoutMemo.value = Object.assign({ R: best.R, under: best.under, least }, PACKS[best.i](best.R, best.under, best.over));
+    return layoutMemo.value;
+  }
+  /** A short lab stage asks for the height its 2D scene needs at a readable size, through the stage budget kit.plot
+      keeps for a chart: the kit grows a scrolling lab's stage to it and leaves a cited figure or a still as they are. */
+  const askHeight = (W, H, U, need) => { if (Number.isFinite(need)) kit.plot(cv, { x: [0, 1], y: [0, 1], pad: [0, 0, U.y, H - U.y - U.h], minHeight: Math.ceil(need), clear: false }); };
   function drawSquare(ctx, W, H, D) {
-    const pal = TRV.palette, q = D.square, R0 = regions(W, H);
-    let a = R0.a, b = R0.b;
-    // right: the rotor circle beside (a wide panel) or above (a tall panel) the two gauges
-    const beside = b.w / b.h > 1;
-    let rc, rr, gx, gw, gy, gap;
-    if (beside) {
-      rr = Math.min(b.w * 0.15, b.h * 0.3); rc = [b.x + rr * 1.3 + 6, b.y + b.h * 0.45];
-      gx = b.x + rr * 2.6 + 40; gw = b.x + b.w - gx - 14; gap = Math.min(64, b.h * 0.36); gy = b.y + b.h / 2 - gap / 2 + 6;
-    } else {
-      rr = Math.max(26, Math.min(b.w * 0.2, (b.h - 170) / 2.6)); rc = [b.x + b.w / 2, b.y + rr * 1.3 + 10];
-      gx = b.x + 12; gw = b.w - 34; gap = 62; gy = rc[1] + rr * 1.3 + 70;
-    }
-    // A narrow stage short enough to be split side by side (a cited frame with a long note under it) leaves the right
-    // half too narrow for gauges as long as their labels, or too short for the rotor above them. Then the three pieces
-    // stand in three columns, square · rotor · gauges: the rotor shrinks, the square gives the gauges the width they need,
-    // the gauge block is centred in the band with the √2 mark beside its tick, clear of the second label, and the
-    // product sits below the reach of the AB and BA labels (which turn on a circle of radius rr + 16).
-    const packed = R0.wide && (gw < GAUGE_MIN || gy + gap + 36 > b.y + b.h + 8);
-    if (packed) {
-      const x0 = a.x, x1 = b.x + b.w, h = b.h, col = 12;
-      rr = clamp(h * 0.16, 14, 22);
-      const rest = x1 - x0 - col - (rr * 2.6 + 54), aw = Math.max(0, Math.min(h, rest / 2, rest - GAUGE_MIN));
-      a = { x: x0, y: a.y, w: aw, h: a.h }; b = { x: x0 + aw + col, y: b.y, w: x1 - x0 - aw - col, h };
-      rc = [b.x + rr * 1.3 + 6, b.y + h * 0.4];
-      gx = b.x + rr * 2.6 + 40; gw = b.x + b.w - gx - 14; gap = clamp(h * 0.36, 47, 64); gy = b.y + h / 2 - (gap + 3) / 2;
-    }
-    const R = Math.min(a.w, a.h) / 3.05, O = [a.x + a.w / 2, a.y + a.h / 2];
+    const pal = TRV.palette, q = D.square, f105 = dataFont(10.5);
+    const Z = {
+      A: tagSize('A', 'ink raw'), B: tagSize('B', 'hot raw'), ab: slot('vi raw', 'AB', 'BA'), pr: tagSize('(AB)(BA) = 1', 'vi raw'),
+      g1: slot('ink raw', `|cos θ| + |sin θ| = ${fix(q.l1, 3)}`, '|cos θ| + |sin θ| = 0.000'),
+      g2: slot('ink raw', `cos²θ + sin²θ = ${fix(q.l2, 3)}`, 'cos²θ + sin²θ = 0.000'),
+      r2: ink('√2', f105), one: ink('1', f105)
+    };
+    const U = room(W, H), lay = squareLayout(U, Z), R = lay.R, O = [lay.s.x + lay.s.w / 2, lay.s.y + lay.s.h / 2];
+    if (R < SQUARE_READ) askHeight(W, H, U, lay.least);
     const S = (x, y) => [O[0] + R * x, O[1] - R * y];
     const c = q.c, s = q.s, F = [c, 0], B = [c, s];
     ring(ctx, O, R, pal.dim, 1, 0.55, [3, 4]);
@@ -355,11 +579,19 @@
     if (Math.abs(c) * R > 14 && Math.abs(s) * R > 14) square90(ctx, S(...F), [-e, 0], [0, s >= 0 ? -1 : 1], 9, pal.sigma, 0.8);
     arw(ctx, S(0, 0), S(...B), pal.amber, 2.8, 1, 13);
     geo.sTip = S(...B); geo.sO = O; geo.sR = R;
-    tag('A', S(1.12, s >= 0 ? -0.13 : 0.13), 'A', 'ink raw');
-    tag('B', S(1.16 * c - 0.04 * s, 1.16 * s + 0.04 * c), 'B', 'hot raw');
-    if (Math.abs(c) * R > 34) tag('c2', S(c / 2, dn * Math.abs(c) / 2), fix(q.c2, 2), 'cy num');
+    // A on the side of the axis away from the tip; B beside the tip, across the arrow from the magenta square
+    const sg = -dn, dB = bOffset(c, s, Z.B[0], Z.B[1]);
+    tag('A', [O[0] + 1.12 * R, O[1] + sg * aOffset(R, Z)], 'A', 'ink raw');
+    tag('B', [O[0] + c * R - e * dB * Math.abs(s), O[1] - s * R - sg * dB * Math.abs(c)], 'B', 'hot raw');
+    // the value of a square at its centre, when its side is longer than 34 px: the magenta one is behind B's line and
+    // the axis keeps the two apart; the cyan one slides toward O if a wider font would bring it under A
+    if (Math.abs(c) * R > 34) {
+      const w = tagSize(fix(q.c2, 2), 'cy num')[0], x = c * R / 2;
+      tag('c2', [O[0] + (c > 0 ? Math.min(x, 1.12 * R - Z.A[0] / 2 - 2 - w / 2) : x), O[1] - dn * Math.abs(c) * R / 2], fix(q.c2, 2), 'cy num');
+    }
     if (Math.abs(s) * R > 34) tag('s2', S(c + e * Math.abs(s) / 2, s / 2), fix(q.s2, 2), 'mg num');
-    // right: the rotor circle and the two gauges, placed above
+    // the rotor circle: AB and BA by their dots, each on its own side of the horizontal axis
+    const rr = lay.r.rr, rc = [lay.r.x + lay.r.w / 2, lay.r.y + lay.r.h / 2];
     ln(ctx, [rc[0] - rr * 1.3, rc[1]], [rc[0] + rr * 1.3, rc[1]], pal.dim, 1, 0.5);
     ln(ctx, [rc[0], rc[1] + rr * 1.3], [rc[0], rc[1] - rr * 1.3], pal.dim, 1, 0.35);
     ring(ctx, rc, rr, pal.violet, 1.3, 0.6);
@@ -369,27 +601,43 @@
     dot(ctx, RP(q.prod), 3, pal.violet);
     dot(ctx, RP(q.AB), 5.5, pal.violet, 1, 8);
     ring(ctx, RP(q.BA), 5.5 * LW, pal.violet, 1.8, 1);
-    const out = (z, bias) => [rc[0] + (rr + 16) * z[0], rc[1] - (rr + 16) * z[1] + bias];
-    const up = q.AB[1] >= 0 ? -9 : 9;
-    tag('ab', out(q.AB, up), 'AB', 'vi raw');
-    tag('ba', out(q.BA, -up), 'BA', 'vi raw');
-    tag('pr', [rc[0], rc[1] + (packed ? rr + 43 : rr * 1.3 + 14)], '(AB)(BA) = 1', 'vi raw');
-    const X = (v) => gx + gw * v / 1.5, bh = 13;
+    const out = (z, above, html) => {
+      const [w, h] = tagSize(html, 'vi raw'), key = html === 'AB' ? 'ab' : 'ba', x = rr * z[0];
+      if (!lay.r.over) {   // beside the dot, 10 px out from the vertical axis
+        const y = rc[1] - rr * z[1];
+        tag(key, [rc[0] + x + (z[0] >= 0 ? 1 : -1) * (10 + w / 2), above ? Math.min(y, rc[1] - h / 2 - 1) : Math.max(y, rc[1] + h / 2 + 1)], html, 'vi raw');
+        return;
+      }
+      // centred over the dot (under it, for the lower one), 2 px past the highest of what lies under the label's span:
+      // the dot, the circle, the product ring and the end of the vertical axis (sloping off beside it, so the label
+      // moves continuously with θ)
+      const m = Math.max(0, Math.abs(x) - w / 2), mp = Math.max(0, Math.abs(x - rr) - w / 2);
+      const clear = Math.max(rr * Math.abs(z[1]) + 5.5, m < rr + 1 ? Math.sqrt((rr + 1) ** 2 - m * m) : 0, mp < PRING ? Math.sqrt(PRING * PRING - mp * mp) : 0, 1.3 * rr - 2 * m) + 2;
+      tag(key, [rc[0] + x, rc[1] + (above ? -1 : 1) * (clear + h / 2)], html, 'vi raw');
+    };
+    const abUp = q.AB[1] >= 0;
+    out(q.AB, abUp, 'AB'); out(q.BA, !abUp, 'BA');
+    tag('pr', [lay.p.x + lay.p.w / 2, lay.p.y + lay.p.h / 2], '(AB)(BA) = 1', 'vi raw');
+    // the two gauges, in their rows
+    const G = lay.g, gw = G.gw, gx = G.x + (G.room - G.w) / 2 + G.left, gy = G.y + G.y1, gy2 = G.y + G.y2, bh = 13;
+    geo.layout = { room: U, blocks: [{ name: 'square', x: lay.s.x, y: lay.s.y, w: lay.s.w, h: lay.s.h }, { name: 'rotor', x: lay.r.x, y: lay.r.y, w: lay.r.w, h: lay.r.h },
+      { name: 'product', x: lay.p.x, y: lay.p.y, w: lay.p.w, h: lay.p.h }, { name: 'gauges', x: gx - G.left, y: G.y, w: G.w, h: G.h }] };
+    const X = (v) => gx + gw * v / 1.5;
     const gauge = (y, parts, key, label) => {
       ln(ctx, [X(0), y], [X(1.5), y], pal.dim, 1, 0.6);
       let v0 = 0;
       for (const [len, col] of parts) { poly(ctx, [[X(v0), y - bh / 2], [X(v0 + len), y - bh / 2], [X(v0 + len), y + bh / 2], [X(v0), y + bh / 2]], col, 0.85, null); v0 += len; }
       ln(ctx, [X(v0), y - bh], [X(v0), y + bh], pal.ink, 1.6, 0.95);
-      tag(key, [X(0.75), y - bh - 11], label, 'ink raw');
+      tag(key, [X(0.75), y - bh - 2 - tagSize(label, 'ink raw')[1] / 2], label, 'ink raw');
       return v0;
     };
     gauge(gy, [[Math.abs(c), pal.cyan], [Math.abs(s), pal.magenta]], 'g1', `|cos θ| + |sin θ| = ${fix(q.l1, 3)}`);
-    gauge(gy + gap, [[q.c2, pal.cyan], [q.s2, pal.magenta]], 'g2', `cos²θ + sin²θ = ${fix(q.l2, 3)}`);
-    ln(ctx, [X(1), gy - 22], [X(1), gy + gap + 20], pal.sigma, 1.2, 0.8, [4, 4]);
+    gauge(gy2, [[q.c2, pal.cyan], [q.s2, pal.magenta]], 'g2', `cos²θ + sin²θ = ${fix(q.l2, 3)}`);
+    ln(ctx, [X(1), gy - bh], [X(1), gy2 + bh + 2], pal.sigma, 1.2, 0.8, [4, 4]);
     ln(ctx, [X(Math.SQRT2), gy - 8], [X(Math.SQRT2), gy + 8], pal.dim, 1.2, 0.9);
-    txt(ctx, [X(1), gy + gap + 30], '1', pal.dim, 10.5);
-    if (packed) txt(ctx, [X(1.5) + 4, gy], '√2', pal.dim, 10.5, 'left');
-    else txt(ctx, [X(Math.SQRT2), gy + 18], '√2', pal.dim, 10.5);
+    txt(ctx, [X(1), gy2 + bh + 3 + Z.one.up], '1', pal.dim, 10.5);
+    if (lay.under) txt(ctx, [X(Math.SQRT2), gy + bh + 1 + Z.r2.up], '√2', pal.dim, 10.5);
+    else txt(ctx, [X(1.5) + 4, gy], '√2', pal.dim, 10.5, 'left');
   }
 
   /* ---------- scene 4 · phase on the Bloch sphere ---------- */
@@ -472,14 +720,61 @@
   }
 
   /* ---------- scene 6 · the finite box and the axes outside it ---------- */
+  /* Two bands of cells of side s, stacked in rows from the top of the room, each row as tall as what it holds:
+       band 1: its title; head-room for the axis that stands up out of the box (1.3 s from the bottom of its cell); the box
+         of six cells, with "unseen" over the dark cells and r = 0 in a slot right of the box;
+       band 2: its title and the equation N_S = …; then the witness axes standing on the base line right of the prime
+         cells, 1.55 s tall with each label e_q above its tip, or, when the room is too short for that, 1.3 s tall (as
+         the axis of band 1) with each label beside the upper end of its shaft.
+     expandBlock() gives the height and the width of the whole arrangement from s and the label sizes (the widest title,
+     equation and witness labels over all seven steps, so nothing moves while the rail plays); s is the largest the room
+     holds, at most 62. */
+  const EQS = EUCLID.map((E) => `N${sub('S')} = ${E.S.length ? E.S.join('·') : '1'} + 1 = ${E.N}${E.factors.length > 1 ? ' = ' + E.factors.join(' × ') : ''}`);
+  /** x of the witness axes of step k, from the left edge of the cells, and the right edge of their labels. */
+  function witnessXs(k, s, beside, ws) {
+    const xs = [];
+    ws.forEach((w, j) => xs.push(j ? xs[j - 1] + Math.max(1.3 * s, beside ? 12 + ws[j - 1] : (ws[j - 1] + w) / 2 + 4) : (k + 0.9) * s));
+    const last = xs.length - 1;
+    return { xs, right: beside ? xs[last] + 6 + ws[last] : xs[last] + ws[last] / 2 };
+  }
+  function expandBlock(s, beside, Z) {
+    const head = Math.max(0.3 * s + 2, 7), y1 = Z.k1[1] + 2 + head;
+    const b1 = y1 + s + Math.max(7, (Math.max(Z.dk[1], Z.r0[1]) - s) / 2 + 1);
+    const yk2 = b1 + 5, yeu = yk2 + Z.k2[1] + 2, eub = yeu + Z.eu[1];
+    const tip = beside ? eub + 6 : eub + 3 + Z.ew[1] + 3, base = tip + (beside ? 1.3 : 1.55) * s;
+    const r0x = Math.max(6 * s + 8, 5 * s + Z.dk[0] / 2 + 4);
+    let right = Math.max(9.4 * s, r0x + Z.r0[0]);
+    for (let k = 0; k <= KSTEPS; k++) right = Math.max(right, witnessXs(k, s, beside, Z.ew.k[k]).right);
+    return { y1, yk2, yeu, tip, base, r0x, h: Math.max(base + 1, base - s / 2 + Z.p[1] / 2, beside ? tip - 3 + Z.ew[1] : 0), left: 6, w: 6 + right };
+  }
   function drawExpand(ctx, W, H, D) {
-    const pal = TRV.palette, e = D.expand, R0 = regions(W, H), k = e.k, f = e.f, span = H - R0.top - R0.bottom;
-    const s = clamp(Math.min((W - 2 * R0.side - 30) / 9.6, (span - 120) / 3.6), 22, 62);
-    const x0 = R0.side + Math.max(14, (W - 2 * R0.side - 9.6 * s) / 2);
-    const total = 18 + s + 26 + 22 + 1.55 * s + 52 + s, y1 = R0.top + Math.max(0, (span - total) / 2) + 18;
-    const y2 = y1 + s + 26 + 22 + 1.55 * s + 52, base = y2 + s, cell = (xi, yy, w) => [[xi, yy], [xi + w, yy], [xi + w, yy + s], [xi, yy + s]];
+    const pal = TRV.palette, e = D.expand, U = room(W, H), k = e.k, f = e.f;
+    const box = (d) => L(`有限盒子 ℝ⁶ · dim O${sub('m')} = ${d}`, `A finite box ℝ⁶ · dim O${sub('m')} = ${d}`);
+    const k2Html = L('开放模型 · 素数轴（MODEL）', 'Open model · prime axes (MODEL)'), dkHtml = L('读不到', 'unseen');
+    const ew = EUCLID.map((E) => E.factors.map((q) => tagSize(`e${sub(q)}`, 'mg raw')));
+    const Z = {
+      k1: slot('raw', ...[...new Set(KRY.dims)].map(box)), k2: tagSize(k2Html, 'raw'), eu: slot('num', ...EQS), r0: tagSize('r = 0', 'hot raw'), dk: tagSize(dkHtml, 'raw'),
+      p: slot('num', ...PRIMES.slice(0, KSTEPS).map(String)),
+      ew: Object.assign([Math.max(...ew.flat().map((x) => x[0])), Math.max(...ew.flat().map((x) => x[1]))], { k: ew.map((a) => a.map((x) => x[0])) })
+    };
+    const fit = (beside) => {
+      const ok = (s) => { const b = expandBlock(s, beside, Z); return b.w <= U.w && b.h <= U.h; };
+      if (ok(62)) return 62;
+      let lo = 6, hi = 62;
+      for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (ok(m)) lo = m; else hi = m; }
+      return lo;
+    };
+    const sA = fit(false), sB = fit(true), beside = sA < Math.min(sB, 22), s = beside ? sB : sA, B = expandBlock(s, beside, Z);
+    // a cell as wide as two neighbouring prime labels need, and tall enough to hold one
+    const pw = PRIMES.slice(0, KSTEPS).map((pr) => tagSize(String(pr), 'num')[0]), sRead = Math.max(Z.p[1] + 1, ...pw.slice(1).map((w, i) => (w + pw[i]) / 2 + 2));
+    if (s < sRead) askHeight(W, H, U, expandBlock(sRead, true, Z).h);
+    const T = U.y + Math.max(0, (U.h - B.h) / 2), x0 = U.x + Math.max(0, (U.w - B.w) / 2) + B.left;
+    const y1 = T + B.y1, base = T + B.base, y2 = base - s, tipY = T + B.tip;
+    geo.layout = { room: U, blocks: [{ name: 'bands', x: U.x, y: T, w: U.w, h: B.h }], cell: s, beside };
+    const cx = (w) => clamp(x0 + 3 * s, U.x + w / 2, Math.max(U.x + w / 2, U.x + U.w - w / 2));
+    const cell = (xi, yy, w) => [[xi, yy], [xi + w, yy], [xi + w, yy + s], [xi, yy + s]];
     // band 1: a fixed box of six slots and the observable Krylov tower inside it
-    const d0 = KRY.dims[k], d1 = KRY.dims[Math.min(k + 1, KSTEPS)], growing = d1 > d0 && f > 0, tx = W < 560 ? W / 2 : x0 + 3 * s;
+    const d0 = KRY.dims[k], d1 = KRY.dims[Math.min(k + 1, KSTEPS)], growing = d1 > d0 && f > 0;
     for (let i = 0; i < KDIM; i++) {
       if (i < d0) poly(ctx, cell(x0 + i * s, y1, s), pal.cyan, 0.5, pal.cyan, 0.95, 1.2);
       else poly(ctx, cell(x0 + i * s, y1, s), pal.faint, 0.35, pal.lineHot, 0.6, 1);
@@ -496,9 +791,9 @@
     if (d0 > 0 && grewNow) poly(ctx, cell(x0 + (d0 - 1) * s, y1, s), null, 0, pal.amber, 1, 2);
     ln(ctx, [x0, y1 - 6], [x0, y1 + s + 6], pal.sigma, 3, 0.85);
     ln(ctx, [x0 + KDIM * s, y1 - 6], [x0 + KDIM * s, y1 + s + 6], pal.sigma, 3, 0.85);
-    tag('k1', [tx, y1 - 16], L(`有限盒子 ℝ⁶ · dim O${sub('m')} = ${d0}`, `A finite box ℝ⁶ · dim O${sub('m')} = ${d0}`), 'raw');
-    if (k >= 1 && KRY.dims[k] === KRY.dims[k - 1] && !(f > 0 && k < KSTEPS)) tag('r0', [x0 + (d0 + 0.5) * s, y1 + s + 15], 'r = 0', 'hot raw');
-    if (KRY.stableAt >= 0 && k >= KRY.stableAt) tag('dk', [x0 + (d0 + KDIM) / 2 * s, y1 + s / 2], L('读不到', 'unseen'), 'raw');
+    tag('k1', [cx(Z.k1[0]), T + Z.k1[1] / 2], box(d0), 'raw');
+    if (k >= 1 && KRY.dims[k] === KRY.dims[k - 1] && !(f > 0 && k < KSTEPS)) tag('r0', [x0 + B.r0x + Z.r0[0] / 2, y1 + s / 2], 'r = 0', 'hot raw');
+    if (KRY.stableAt >= 0 && k >= KRY.stableAt) tag('dk', [x0 + (d0 + KDIM) / 2 * s, y1 + s / 2], dkHtml, 'raw');
     // band 2: the model: prime axes, and Euclid's witnesses standing outside them
     const ec = e.euclid, nx = e.next, cellsNow = k + (k < KSTEPS ? ease(f) : 0);
     ln(ctx, [x0 - 6, base], [x0 + 9.4 * s, base], pal.dim, 1, 0.45, [3, 4]);
@@ -510,21 +805,19 @@
     if (k > 0) poly(ctx, cell(x0 + (k - 1) * s, y2, s), null, 0, pal.amber, 1, 2);
     const witnesses = (E, kk, alpha, keyBase) => {
       if (alpha <= 0.02) return;
-      const start = x0 + kk * s + s * 0.9;
+      const ws = Z.ew.k[kk], { xs } = witnessXs(kk, s, beside, ws);
       E.factors.forEach((q, j) => {
-        const xq = start + j * s * 1.3, tipY = base - s * 1.55;
+        const xq = x0 + xs[j];
         arw(ctx, [xq, base], [xq, tipY], pal.magenta, 2.6, alpha, 10);
         square90(ctx, [xq, base], [-1, 0], [0, -1], 8, pal.sigma, 0.8 * alpha);
-        if (alpha > 0.5) tag(keyBase + j, [xq, tipY - 12], `e${sub(q)}`, 'mg raw');
+        if (alpha > 0.5) tag(keyBase + j, beside ? [xq + 6 + ws[j] / 2, tipY - 3 + Z.ew[1] / 2] : [xq, tipY - 3 - Z.ew[1] / 2], `e${sub(q)}`, 'mg raw');
       });
     };
     witnesses(ec, k, k < KSTEPS ? 1 - ease(f / 0.4) : 1, 'w');
     if (k < KSTEPS) witnesses(nx, k + 1, ease((f - 0.6) / 0.4), 'v');
-    const E = f > 0.6 && k < KSTEPS ? nx : ec, Sx = E.S.length ? E.S.join('·') : '1';
-    const eq = `N${sub('S')} = ${Sx} + 1 = ${E.N}${E.factors.length > 1 ? ' = ' + E.factors.join(' × ') : ''}`;
-    const yT = y2 - 1.55 * s - 52;
-    tag('k2', [tx, yT], L('开放模型 · 素数轴（MODEL）', 'Open model · prime axes (MODEL)'), 'raw');
-    tag('eu', [tx, yT + 19], eq, 'num');
+    const E = f > 0.6 && k < KSTEPS ? nx : ec;
+    tag('k2', [cx(Z.k2[0]), T + B.yk2 + Z.k2[1] / 2], k2Html, 'raw');
+    tag('eu', [cx(Z.eu[0]), T + B.yeu + Z.eu[1] / 2], EQS[EUCLID.indexOf(E)], 'num');
   }
 
   /* ---------- the stage ---------- */
@@ -540,7 +833,7 @@
       SOPT.cx = wide ? 0.36 : 0.5; SOPT.radius = unit / m; SOPT.cy = (top + (H - top - bottom - low) / 2) / H;
     }
     const ctx = st.begin();
-    geo.hTip = geo.sTip = null;
+    geo.hTip = geo.sTip = geo.layout = null;
     if (sc === 'helix') drawHelix(D);
     else if (sc === 'horizon') drawHorizon(ctx, W, H, D);
     else if (sc === 'square') drawSquare(ctx, W, H, D);
@@ -753,7 +1046,10 @@
     $('oPitch').textContent = fix(state.pitch, 3); $('oDim').textContent = String(state.D); $('oGamma').textContent = `${fix(state.gamma, 0)}°`;
   }
 
-  const paint = kit.painter(() => { const D = now(); drawStage(D); drawStrip(D); drawText(D); }, [stageEl, $('plot')]);
+  // the words first: a 2D scene measures the title and the legend of this very frame before it lays itself out
+  const paint = kit.painter(() => { const D = now(); drawText(D); drawStage(D); drawStrip(D); }, [stageEl, $('plot')]);
+  // a font that arrives late changes the size of every label: measure again
+  if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { sizes.clear(); paint(); });
 
   /* ---------- the rail ---------- */
   let stopAt = null;
@@ -898,6 +1194,9 @@
     /** Seek the rail of the current scene (pauses), or pick a card; both settle at once for a test. */
     seek(t) { leave(); clock.pause(); clock.set(t); kit.flush(); },
     pick(id) { cards.pick(id); kit.flush(); },
+    /** The room of the 2D scene on the stage and the regions reserved in it for each object with all of its labels, in
+        canvas pixels (null in a 3D scene): what a suite compares the measured label boxes with. */
+    layout() { return geo.layout ? JSON.parse(JSON.stringify(geo.layout)) : null; },
     /** Viewport coordinates of the draggable handles (the amber tips in the 2D scenes, ψ in the wedge scene). */
     handle() {
       const b = cv.getBoundingClientRect(), at = (p) => (p ? { x: b.left + p[0], y: b.top + p[1] } : null);
