@@ -843,7 +843,7 @@
     if (booting) kit.autoplay(clock, stageEl); else clock.play();
   }
   const cards = kit.cards($('presets'), {
-    notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyCard,
+    presets: CARDS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyCard,
     idle: ['自由探索：拖动舞台、滑块或时间轴；随时可以再选一张卡。', 'Free play: drag the stage, a slider or the rail; pick a card again at any time.']
   });
   const ORDER = Object.keys(CARDS);

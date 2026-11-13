@@ -11,10 +11,7 @@
 }
 .sec .sub2 { margin: 12px 0 6px; font-size: 11px; }
 
-/* ---------- a cited figure (?embed=1&preset=…, `::: {.viz src=… preset=…}`): 500 px high, 760 wide in a book page and
-   about 334 on a phone. The shared theme keeps the card's note short in its bar (.what has no box of its own: the bar
-   lays out the card's name between ◀ ▶ and the note under them), so a long note never takes the stage's height. The
-   full note, the scene buttons and every panel stay in the full laboratory ("open full screen" under the figure). */
+/* Cited figures keep their short notes complete; detailed notes remain in the full laboratory. */
 :root[data-embed][data-figure] .lab .tour { background: var(--panel-solid); }
 /* on a phone the frame is about 334 × 500: the scene buttons give way to the title (◀ ▶ step through every card, and
    so every scene), and the title, the legend, the card's name and note and the transport are set tighter */

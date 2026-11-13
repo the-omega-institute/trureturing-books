@@ -1,5 +1,4 @@
-/* BLOCH//NOISE: the shared lab layout (../assets/theme.css) carries the page; only the swatch for the second state
-   and the dimmed lifetime slider belong to this visualization. */
-.sw.ik { background: var(--ink); }
+/* BLOCH//NOISE: the shared lab layout (../assets/theme.css) carries the page; only the dimmed lifetime slider and
+   the larger point label belong to this visualization. */
 #ratioField.off { opacity: 0.45; }
 .stage .tag.big { font-size: 15px; font-weight: 600; }

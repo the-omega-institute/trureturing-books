@@ -162,10 +162,10 @@
   };
   const CARDS = {
     'wigner-cut': { focus: 'cut', lens: 'copenhagen', theta: 30, u: 0, beta: 0 },
-    'and-to-or': { focus: 'andor', lens: 'copenhagen', theta: 30, u: 6, beta: 0, play: true, from: 0 },
-    'born-unequal': { focus: 'born', lens: 'many-worlds', theta: 30, u: 0, beta: 0, play: true, from: 0, stop: 30 },
-    'bell-epr': { focus: 'bell', lens: 'pilot-wave', theta: 30, u: 0, beta: 0.6, play: true, from: 0, stop: 1.4 },
-    'time-horizon': { focus: 'horizon', lens: 'ortho-open-dim', theta: 30, u: 4, beta: 0, parity: 'none', play: true, from: 0, stop: 4 },
+    'and-to-or': { focus: 'andor', lens: 'copenhagen', theta: 30, u: 6, beta: 0, play: true, from: 0, still: 6 },
+    'born-unequal': { focus: 'born', lens: 'many-worlds', theta: 30, u: 0, beta: 0, play: true, from: 0, stop: 30, still: 30 },
+    'bell-epr': { focus: 'bell', lens: 'pilot-wave', theta: 30, u: 0, beta: 0.6, play: true, from: 0, stop: 1.4, still: 1.4 },
+    'time-horizon': { focus: 'horizon', lens: 'ortho-open-dim', theta: 30, u: 4, beta: 0, parity: 'none', play: true, from: 0, stop: 4, still: 4 },
     'five-way-duel': { focus: 'duel', lens: 'copenhagen', theta: 30, u: 4, beta: 0 }
   };
 
@@ -1031,17 +1031,18 @@
     Object.assign(state, { focus: cd.focus, lens: cd.lens, theta: cd.theta, u: cd.u, beta: cd.beta, parity: cd.parity || 'none', xiDraw: 0 });
     lensChips.set(state.lens, true); parityChips.set(state.parity, true);
     configureRail(); syncInputs();
-    // a still (cover, cited figure for PDF/EPUB) and the opening view of the full page show the telling frame;
-    // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
+    // a still (cover, cited figure for PDF/EPUB) and the opening view of the full page show the declared frame (the
+    // card's own value on its rail); inside a chapter the card plays once the reader has scrolled it into view; a click
+    // plays at once
     if (cd.play && !TRV.still && !(booting && !TRV.embed)) {
       stopAt = cd.stop == null ? null : cd.stop;
       clock.set(cd.from);
       if (booting) kit.autoplay(clock, stageEl); else clock.play();
-    }
+    } else if (cd.still != null) clock.set(cd.still === 'end' ? clock.max : cd.still);
     paint();
   }
   const cards = kit.cards($('presets'), {
-    notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyCard,
+    presets: CARDS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyCard,
     idle: ['自由探索：拖动琥珀色的箭头、时空图或左边的三个旋钮；换透镜不动旋钮。随时可以再选一张卡。', 'Free play: drag the amber arrow, the spacetime diagram or the three dials on the left; switching lenses leaves the dials alone. Pick a card again at any time.']
   });
   const ORDER = Object.keys(CARDS);

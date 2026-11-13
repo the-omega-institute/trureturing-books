@@ -10,18 +10,10 @@
 
 /* a phone gets a taller stage: the ball, the table and the side panel are stacked in it */
 @media (max-width: 520px) {
-  :root:not([data-embed]) .lab .center { grid-template-rows: minmax(440px, 84vh) auto auto; }
+  :root:not([data-embed]) .lab .center { grid-template-rows: minmax(max(440px, 84vh), auto) auto auto; }
 }
 
-/* below 560px the scene chips would sit on the title: the HUD drops under them (the stage layout reads its bottom) */
-@media (max-width: 560px) {
-  :root:not([data-shot]) #stage .hud-tl { top: 44px; }
-}
-
-/* ---------- a cited figure (?embed=1&preset=…, `::: {.viz src=… preset=…}`): 500 px high, 760 wide in a book page and
-   about 334 on a phone. The shared theme keeps the card's note short in its bar (.what has no box of its own: the bar
-   lays out the card's name between ◀ ▶ and the note under them), so a long note never takes the stage's height. The
-   full note, the scene buttons and every panel stay in the full laboratory ("open full screen" under the figure). */
+/* Cited figures keep their short notes complete; detailed notes remain in the full laboratory. */
 :root[data-embed][data-figure] .lab .tour { background: var(--panel-solid); }
 /* on a phone the frame is about 334 × 500: the scene buttons give way to the title (◀ ▶ step through every card, and
    so every scene), and the title, the legend, the note and the transport are set tighter */

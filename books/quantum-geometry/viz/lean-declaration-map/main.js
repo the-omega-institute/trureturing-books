@@ -311,7 +311,7 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":49,"units":[{"file":
     else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
     paint();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：点一格看它在哪里，点柱子底部看那一章引用了哪些，或拖动时间轴。', 'Free play: click a cell to see where it is, click the foot of a column to see what that chapter cites, or scrub the rail.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

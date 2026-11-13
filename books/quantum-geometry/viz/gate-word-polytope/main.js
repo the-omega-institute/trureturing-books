@@ -265,11 +265,11 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    one: { L: 1, mode: 'free', theta: 90, phi: 0, draw: 'chord', view: [-0.35, 0.35] },
-    three: { L: 3, mode: 'free', theta: 90, phi: 180, draw: 'chord', view: [0.3, 0.38] },
-    six: { L: 6, mode: 'worst', theta: 110, phi: 200, draw: 'geo', aim: [0.3, -0.12] },
-    nearest: { L: 10, mode: 'free', theta: 110, phi: 200, draw: 'chord', view: [1.0, -0.12] },
-    shrink: { L: 20, mode: 'worst', theta: 110, phi: 200, draw: 'chord', aim: [0.55, -0.2], chart: true }
+    one: { L: 1, mode: 'free', theta: 90, phi: 0, draw: 'chord', view: [-0.35, 0.35], still: 1 },
+    three: { L: 3, mode: 'free', theta: 90, phi: 180, draw: 'chord', view: [0.3, 0.38], still: 3 },
+    six: { L: 6, mode: 'worst', theta: 110, phi: 200, draw: 'geo', aim: [0.3, -0.12], still: 6 },
+    nearest: { L: 10, mode: 'free', theta: 110, phi: 200, draw: 'chord', view: [1.0, -0.12], still: 10 },
+    shrink: { L: 20, mode: 'worst', theta: 110, phi: 200, draw: 'chord', aim: [0.55, -0.2], chart: true, still: 20 }
   };
   const NOTES = {
     one: ['门长 1：北极是 T 的不动点，只有 H 把它送到 e<sub>x</sub>。两个青色的点只连成一条线段；琥珀色的目标就落在 e<sub>x</sub> 上，门字 H 精确命中，没有品红的缺口。紫色是 H 与 T 的转轴。', 'Length 1: the north pole is fixed by T, and only H carries it to e<sub>x</sub>. The two cyan points span just a segment; the amber target sits on e<sub>x</sub>, the word H hits it exactly, and there is no magenta gap. Violet marks the axes of H and T.'],
@@ -287,15 +287,14 @@
     // worst-direction cards look at the worst direction of their length, a little from the side
     const aimAt = (d, o) => [Math.atan2(-d[0], -d[1]) + o[0], clamp(Math.asin(clamp(d[2], -1, 1)) + o[1], -1.4, 1.4)];
     stage.view(p.aim ? aimAt(WORST[p.L].dir, p.aim) : p.view, TRV.still || booting ? 0 : 600);
-    clock.set(p.L);
     // a still (cover, cited figure shot) and the opening of the full page show the card's telling frame;
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-    if (TRV.still || (booting && !TRV.embed)) return;
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still === 'end' ? clock.max : p.still); return; }
     clock.set(0);
     stopAt = p.L < LMAX ? p.L : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖时间轴改门长，在球上拖动琥珀色的目标，或换成最坏方向。随时可以再选一张卡。', 'Free play: drag the rail to change the length, drag the amber target on the sphere, or switch to the worst direction. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

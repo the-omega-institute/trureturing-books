@@ -337,14 +337,15 @@
   /* ---------- experiment cards ---------- */
   const NORTH = [0, 0, 1];
   const PRESETS = {
-    clicks: { A: NORTH, B: v3.sph(70 * DEG, 30 * DEG), mode: 'fixed', turn: false, n: 24, play: true },
+    clicks: { A: NORTH, B: v3.sph(70 * DEG, 30 * DEG), mode: 'fixed', turn: false, n: 24, play: true, still: 'end' },
     // the opening view of the full page (not a card): the 60° worked example of chapter 2, its whole run done
-    open: { A: v3.sph(60 * DEG, 0), B: v3.sph(120 * DEG, 0), mode: 'fixed', turn: false, n: 4000, play: false },
-    right: { A: NORTH, B: v3.sph(90 * DEG, 40 * DEG), mode: 'fixed', turn: false, n: 4000, play: true },
-    same: { A: NORTH, B: NORTH, mode: 'fixed', turn: false, n: 400, play: true },
-    opposite: { A: NORTH, B: [0, 0, -1], mode: 'fixed', turn: false, n: 400, play: true },
-    turn: { A: v3.sph(60 * DEG, 0), B: v3.sph(120 * DEG, 0), mode: 'fixed', turn: true, n: 4000, play: true, still: 0.85 },
-    random: { A: NORTH, B: v3.sph(60 * DEG, 0), mode: 'random', turn: false, n: 4000, play: true }
+    open: { A: v3.sph(60 * DEG, 0), B: v3.sph(120 * DEG, 0), mode: 'fixed', turn: false, n: 4000, play: false, still: 'end' },
+    right: { A: NORTH, B: v3.sph(90 * DEG, 40 * DEG), mode: 'fixed', turn: false, n: 4000, play: true, still: 'end' },
+    same: { A: NORTH, B: NORTH, mode: 'fixed', turn: false, n: 400, play: true, still: 'end' },
+    opposite: { A: NORTH, B: [0, 0, -1], mode: 'fixed', turn: false, n: 400, play: true, still: 'end' },
+    // the turning pair stops 306° of the way round (0.85 of its rail), clear of where it started
+    turn: { A: v3.sph(60 * DEG, 0), B: v3.sph(120 * DEG, 0), mode: 'fixed', turn: true, n: 4000, play: true, still: 0.85 * tmaxOf(4000) },
+    random: { A: NORTH, B: v3.sph(60 * DEG, 0), mode: 'random', turn: false, n: 4000, play: true, still: 'end' }
   };
   const NOTES = {
     clicks: ['琥珀色的 B 离青色的 A 70°，可以指向任何方向；快门每次只报一端：A 这一端 +1 “过”，对面一端 −1 “不过”。右上一排方块是每一次的读数，实心青色是过，空心灰色是不过；哪一次过，事先说不准。', 'The amber B is 70° from the cyan A and could point anywhere; each shot reports only one end: +1 “pass” at A, −1 “fail” at the far end. The row of squares at the top right is shot by shot, solid cyan for a pass and hollow grey for a fail; which shot passes cannot be foretold.'],
@@ -364,10 +365,10 @@
       S.A = p.A.slice(); S.B = p.B.slice(); S.mode = p.mode; S.turn = p.turn; S.seed = 1;
       modeChips.set(p.mode, true); turnChips.set(p.turn ? 'on' : 'off', true);
       setRun(p.n); clock.pause(); clock.set(0);
-      // a still (cover, cited figure shot) and the opening view of the full page show the whole run (or the card's
-      // telling moment: the turning pair stops 306° of the way round, clear of where it started);
-      // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-      if (TRV.still || (booting && !TRV.embed)) clock.set(clock.max * (p.still ?? 1)); else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
+      // a still (cover, cited figure shot) and the opening view of the full page show the declared frame: the whole run
+      // (or the card's telling moment); inside a chapter the card plays once the reader has scrolled it into view; a
+      // click plays at once
+      if (TRV.still || (booting && !TRV.embed)) clock.set(p.still === 'end' ? clock.max : p.still); else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
     };
     if (booting || TRV.still) { land(); return; }
     // carry the arrows to the card's start, so the eye can follow what changed
@@ -378,7 +379,7 @@
       rebuild(); paint();
     }, land);
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动 B 或 A、换一串随机数、换成随机方向。随时可以再选一张卡。', 'Free play: drag B or A, draw new random numbers, switch to random directions. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

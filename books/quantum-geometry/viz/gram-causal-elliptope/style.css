@@ -1,3 +1,8 @@
 /* ORTHO//ELLIPTOPE: the shared lab layout (../assets/theme.css) carries the page; colours come from the tokens. */
 #cv { cursor: grab; touch-action: none; }
 #depthChips, #spaceChips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+
+/* The tour bar selects the scene in a narrow cited figure. */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}

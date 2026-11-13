@@ -1,7 +1,6 @@
-/* ZYZ//COMPILE: the shared lab layout (../assets/theme.css) carries the page; only the white swatch, the larger
-   arrow label, the column readout and the drag cursor belong to this visualization. Colours come from the tokens. */
+/* ZYZ//COMPILE: the shared lab layout (../assets/theme.css) carries the page; only the larger arrow label, the
+   column readout and the drag cursor belong to this visualization. Colours come from the tokens. */
 #cv { cursor: grab; touch-action: none; }
-.sw.ik { background: var(--ink); }
 .stage .tag.big { font-size: 15px; font-weight: 600; }
 #roM { white-space: pre; font-size: 13px; }
 #roRho small { display: block; margin-top: 2px; }
