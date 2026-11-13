@@ -938,7 +938,6 @@
     drawPythagoreanPlot(M, P);
     drawComplexityPlot(M, P);
     updateUI(M);
-    TRV.hudFit();
   }, [stageEl, $('plot'), $('plotWall')]);
 
   /* ---------- bottom rail clock over θ ∈ [0°, 90°] ---------- */

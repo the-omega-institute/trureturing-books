@@ -736,7 +736,7 @@
     setHTML('legend', legend.map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join(''));
   }
 
-  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail ---------- */
   let stopAt = null;

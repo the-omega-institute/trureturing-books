@@ -409,7 +409,7 @@
     if ($('legend').innerHTML !== html) $('legend').innerHTML = html;
   }
 
-  const paint = kit.painter(() => { drawStage(); drawPlot(); drawText(); TRV.hudFit(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawStage(); drawPlot(); drawText(); }, [$('stage'), $('plot')]);
 
   /* ---------- direct manipulation: click a lattice point ---------- */
   function pick(ev) {

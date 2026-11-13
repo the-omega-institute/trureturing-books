@@ -387,7 +387,7 @@
     $('alpha').disabled = S.levels === 3;
   }
 
-  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail ---------- */
   const SC = {

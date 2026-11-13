@@ -395,7 +395,7 @@
     }
   }
 
-  const paint = kit.painter(() => { drawStage(); drawPlots(); drawText(); TRV.hudFit(); }, [$('stage'), $('plotA'), $('plotB')]);
+  const paint = kit.painter(() => { drawStage(); drawPlots(); drawText(); }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
   let stopAt = null;

@@ -405,7 +405,7 @@
     $('delV').disabled = S.scene !== 'loop' || LP.n <= 3;
   }
 
-  const paint = kit.painter(() => { drawStage(); drawPlot(); drawText(); TRV.hudFit(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawStage(); drawPlot(); drawText(); }, [$('stage'), $('plot')]);
 
   /* ---------- controls ---------- */
   const MAX = () => (S.scene === 'loop' ? LP.n : S.scene === 'order' ? 2 : 1);

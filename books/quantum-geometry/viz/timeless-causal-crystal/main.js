@@ -415,7 +415,7 @@
     if ($('legend')._h !== html) { $('legend').innerHTML = html; $('legend')._h = html; }
   }
 
-  const paint = kit.painter(() => { drawStage(); drawPlots(); drawText(); TRV.hudFit(); }, [$('stage'), $('plotA'), $('plotB')]);
+  const paint = kit.painter(() => { drawStage(); drawPlots(); drawText(); }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({

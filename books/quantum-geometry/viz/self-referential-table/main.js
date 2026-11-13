@@ -638,7 +638,7 @@
     $('oRank').textContent = String(S.r);
   }
 
-  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail ---------- */
   const RAIL = {

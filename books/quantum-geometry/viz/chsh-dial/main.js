@@ -310,7 +310,7 @@
     $('legend').innerHTML = LEGEND[S.scene].map(([c, zh, en]) => `<span><i class="sw ${c}"></i>${L(zh, en)}</span>`).join('');
   }
 
-  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail: φ, the direction of B₀ (B₁ follows at φ − β) ---------- */
   let stopAt = null;

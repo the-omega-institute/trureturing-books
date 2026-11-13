@@ -301,7 +301,7 @@
     depthChips.set(String(f.M), true);
   }
 
-  const paint = kit.painter(() => { const f = frame(); drawStage(f); drawPlots(f); drawText(f); TRV.hudFit(); }, [$('stage'), $('plotA'), $('plotB')]);
+  const paint = kit.painter(() => { const f = frame(); drawStage(f); drawPlots(f); drawText(f); }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({

@@ -562,7 +562,7 @@
     get cx() { return LAY.W ? LAY.cx / LAY.W : 0.5; }, get cy() { return LAY.H ? LAY.cy / LAY.H : 0.5; },
     get radius() { return LAY.W ? LAY.unit / Math.min(LAY.W, LAY.H) : 0.36; }
   });
-  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail: steps ---------- */
   const RAIL = { scan: () => ({ max: scanSteps(), rate: Math.max(1.5, scanSteps() / 6) }), tree: () => ({ max: n, rate: 1.3 }), table: () => ({ max: S.idx.length, rate: 0.9 }) };

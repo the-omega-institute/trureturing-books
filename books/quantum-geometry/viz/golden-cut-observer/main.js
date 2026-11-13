@@ -498,7 +498,7 @@
     const leg = legend(q).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
   }
-  const paint = kit.painter(() => { const q = state(); drawText(q); TRV.hudFit(); drawStage(q); drawPlots(q); }, [$('stage'), $('plotA'), $('plotB')]);
+  const paint = kit.painter(() => { const q = state(); drawStage(q); drawPlots(q); drawText(q); }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({

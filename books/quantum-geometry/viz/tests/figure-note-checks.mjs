@@ -25,14 +25,16 @@ export async function figureNoteChecks(T) {
     for (let i = 0; i < count; i++) {
       if (i) { await page.click('[data-tour="next"]'); await settle(page); }
       const v = await page.evaluate(() => {
-        const note = document.querySelector('.tour .what'), tour = document.querySelector('.tour');
+        const note = document.querySelector('.tour .tour-note'), tour = document.querySelector('.tour');
+        const heading = tour.querySelector('.what b').getBoundingClientRect(), bar = tour.getBoundingClientRect();
         const stage = document.querySelector('.stage').getBoundingClientRect();
         const rail = document.querySelector('footer.rail').getBoundingClientRect(), r = note.getBoundingClientRect();
         const root = document.documentElement;
         return {
           card: document.querySelector('[data-preset][aria-pressed="true"]').dataset.preset,
           note: note.textContent.trim().length > 8 && note.scrollHeight <= note.clientHeight + 1 && note.scrollWidth <= note.clientWidth + 1,
-          regions: stage.bottom <= tour.getBoundingClientRect().top + 1 && r.bottom <= rail.top + 1 && rail.bottom <= innerHeight + 1,
+          regions: stage.bottom <= bar.top + 1 && heading.top >= bar.top && heading.bottom <= r.top + 1 &&
+            r.bottom <= bar.bottom + 1 && bar.bottom <= rail.top + 1 && rail.bottom <= innerHeight + 1,
           frame: root.scrollHeight <= innerHeight && root.scrollWidth <= root.clientWidth
         };
       });

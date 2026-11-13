@@ -689,7 +689,6 @@
   // readouts and legend first: the prime stage measures the legend it has to keep clear of
   const paint = kit.painter(() => {
     drawText();
-    TRV.hudFit();
     if (S.scene === 'cos') drawCos(); else { const g = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }); ({ diag: drawDiag, fiber: drawFiber, poly: drawPoly, ptr: drawPtr, prime: drawPrime })[S.scene](g); }
     drawPlots();
   }, [$('stage'), $('plotA'), $('plotB')]);
