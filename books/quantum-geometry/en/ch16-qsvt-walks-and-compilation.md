@@ -192,7 +192,6 @@ Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 
 ## From Interval Sums of Squares to Continuous Matrix Completion {#sec-interval-sos-completion}
 
-<!-- Unpublished WIP: resolve the new Lean references through the canonical pin workflow only after the source declarations merge into dev and pass the first validation there; the current lock and previous exports do not validate this section for publication. -->
 
 **What is missing at the endpoint?** Take $p(x)=x/2$. If the real target $p$ itself must occupy the diagonal, the condition $p(x)^2+(1-x^2)Q(x)^2=1$ gives the impossible equality $1/4=1$ at $x=1$. The missing weight can instead enter the imaginary part of the diagonal: choose
 
