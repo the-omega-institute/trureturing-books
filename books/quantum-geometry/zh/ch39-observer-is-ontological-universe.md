@@ -654,7 +654,10 @@ $$
 **本书未验证的有限开链间隙接口。** 令
 
 $$
-L_j=\lvert\sigma^j(A)\rvert,\qquad N_j=2\lfloor L_j/2\rfloor,\qquad h_{\rho,j}=h_{N_j}\quad(j\ge1).
+\begin{aligned}
+L_j&=\lvert\sigma^j(A)\rvert,\qquad N_j=2\lfloor L_j/2\rfloor,\\
+h_{\rho,j}&=h_{N_j}\quad(j\ge1).
+\end{aligned}
 $$
 
 对每个固定的 $\rho\in(0,1)$，沿上述确定的偶数格点开前缀，是否有
