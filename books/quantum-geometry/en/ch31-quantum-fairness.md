@@ -133,13 +133,32 @@ External quantum-information extensions to three-qubit and multipartite entangle
 ::: {.remark #rem-ch31-ckw-monogamy-literature title="Three-Qubit CKW Entanglement Monogamy Inequality and Bell / W / GHZ Budget Audit (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Quantitative monogamy bounds on shared bipartite entanglement belong to the external quantum-information literature and are not formalized in `trureturing@dev`:
 
-1. **Three-Qubit CKW Monogamy Inequality (V. Coffman, J. Kundu & W. K. Wootters, *Phys. Rev. A* **61**, 052306, 2000) and $n$-Qubit Generalization (T. J. Osborne & F. Verstraete, *Phys. Rev. Lett.* **96**, 220503, 2006)**: For any three-qubit state $\rho_{ABC}$ (pure or mixed), let $\tau(\mathbf{A}:\mathbf{B}) := C(\rho_{AB})^2$ and $\tau(\mathbf{A}:\mathbf{C}) := C(\rho_{AC})^2$ denote the squared Wootters concurrences (2-tangles), and write the reduced state $\rho_A = \operatorname{Tr}_{BC}(\rho_{ABC}) = \frac{1}{2}(I_2 + \mathbf{r}_A\cdot\boldsymbol{\sigma})$ with Bloch vector $\mathbf{r}_A \in \mathbb{R}^3$ ($\|\mathbf{r}_A\| \le 1$). Then the pairwise entanglement shares obey
+1. **Three-Qubit CKW Monogamy Inequality (V. Coffman, J. Kundu & W. K. Wootters, *Phys. Rev. A* **61**, 052306, 2000) and $n$-Qubit Generalization (T. J. Osborne & F. Verstraete, *Phys. Rev. Lett.* **96**, 220503, 2006)**: For any three-qubit state $\rho_{ABC}$ (pure or mixed), let $\tau(\mathbf{A}:\mathbf{B}) := C(\rho_{AB})^2$ and $\tau(\mathbf{A}:\mathbf{C}) := C(\rho_{AC})^2$ denote the squared Wootters concurrences (2-tangles), and write the reduced state $\rho_A = \operatorname{Tr}_{BC}(\rho_{ABC}) = \frac{1}{2}(I_2 + \mathbf{r}_A\cdot\boldsymbol{\sigma})$ with Bloch vector $\mathbf{r}_A \in \mathbb{R}^3$ ($\|\mathbf{r}_A\| \le 1$). All three marginals $\rho_{AB},\rho_{AC},\rho_A$ are actual partial traces of this same $\rho_{ABC}$.
+
+   For a two-qubit density matrix $P$, define $\widetilde P=(\sigma_y\otimes\sigma_y)\overline P(\sigma_y\otimes\sigma_y)$ in the computational basis, where $\sigma_y=\begin{pmatrix}0&-i\\i&0\end{pmatrix}$ and the bar denotes entrywise complex conjugation. Wootters' spectral formula is
+
+   $$
+   C(P)=\max\{0,\lambda_1-\lambda_2-\lambda_3-\lambda_4\},
+   $$
+
+   where $\lambda_1\ge\lambda_2\ge\lambda_3\ge\lambda_4\ge0$ are the nonnegative square roots of the four eigenvalues of $P\widetilde P$, counted with algebraic multiplicity. This product need not be self-adjoint; the nonnegative reality of its eigenvalues is part of the mathematical basis of the formula. Zero eigenvalues, repeated roots and rank-deficient states are included (W. K. Wootters, *Phys. Rev. Lett.* **80**, 2245–2248, 1998, [original paper](https://arxiv.org/abs/quant-ph/9709029)).
+
+   For the $\mathbf A|\mathbf{BC}$ cut, let $\mathcal E(\rho_{ABC})$ contain every finite pure-state decomposition $\rho_{ABC}=\sum_jp_j|\psi_j\rangle\langle\psi_j|$, with $p_j\ge0$, $\sum_jp_j=1$ and $\langle\psi_j|\psi_j\rangle=1$, and put $\rho_A^{(j)}=\operatorname{Tr}_{BC}|\psi_j\rangle\langle\psi_j|$. The mixed-state intermediate quantity is the convex roof of the pure-state budget:
+
+   $$
+   \tau(\mathbf A:\mathbf{BC})
+   :=\inf_{\mathcal E(\rho_{ABC})}\sum_jp_j\,4\det\rho_A^{(j)}.
+   $$
+
+   Zero weights are allowed, and the definition does not presuppose an optimal decomposition. This is an infimum of pure-state costs across a $2\times4$ cut; the two-qubit spectral formula above applies to $\rho_{AB}$ and $\rho_{AC}$. The full budget reads
 
    $$
    \tau(\mathbf{A}:\mathbf{B}) + \tau(\mathbf{A}:\mathbf{C}) \;\le\; \tau(\mathbf{A}:\mathbf{BC}) \;\le\; 4\det\rho_A \;=\; 1 - \|\mathbf{r}_A\|^2 \;\le\; 1
    $$
 
-   (for pure $|\Psi_{ABC}\rangle$, $\tau(\mathbf{A}:\mathbf{BC}) = 4\det\rho_A = 1 - \|\mathbf{r}_A\|^2$, and the nonnegative deficit $\tau_3 := \tau(\mathbf{A}:\mathbf{BC}) - \tau(\mathbf{A}:\mathbf{B}) - \tau(\mathbf{A}:\mathbf{C}) \ge 0$ defines the residual 3-tangle; Osborne and Verstraete proved the $n$-qubit extension $\sum_{j=2}^n \tau(A_1 : A_j) \le \tau(A_1 : A_2\cdots A_n)$);
+   The mixed-state lower bound uses convexity of squared two-qubit concurrence: apply pure-state CKW to each member of one finite decomposition, average with those same weights $p_j$, then take the infimum. The intermediate upper bound follows from concavity of $4\det\rho_A=1-\|\mathbf r_A\|^2$ on density matrices. The spectral formula, its convex-roof connection and CKW rely on the literature proofs; this full chain has not been formalized in this book. See [the original CKW paper, equations (1)–(14)](https://arxiv.org/abs/quant-ph/9907047).
+
+   For pure $|\Psi_{ABC}\rangle$, $\tau(\mathbf{A}:\mathbf{BC}) = 4\det\rho_A = 1 - \|\mathbf{r}_A\|^2$, and the nonnegative deficit $\tau_3 := \tau(\mathbf{A}:\mathbf{BC}) - \tau(\mathbf{A}:\mathbf{B}) - \tau(\mathbf{A}:\mathbf{C}) \ge 0$ defines the pure-state residual 3-tangle. Mixed-state three-tangle requires a separate convex-roof extension; this difference cannot simply serve as its definition. Osborne and Verstraete proved the $n$-qubit extension $\sum_{j=2}^n \tau(A_1 : A_j) \le \tau(A_1 : A_2\cdots A_n)$;
 2. **Explicit Audit on Three Benchmark Pure Three-Qubit States**:
    - **Bell Pair Plus Decoupled Third Qubit $|\Phi^+\rangle_{AB}\otimes|0\rangle_C$**: Here $\rho_A = \frac{1}{2}I_2$ ($\|\mathbf{r}_A\| = 0$) and $\tau(\mathbf{A}:\mathbf{B}) = 1$, forcing $\tau(\mathbf{A}:\mathbf{C}) = 0$—exhausting the full unit budget with $\mathbf{B}$ leaves strictly zero entanglement capacity for any third party $\mathbf{C}$;
    - **$W$ State $|W\rangle = \frac{1}{\sqrt{3}}(|100\rangle + |010\rangle + |001\rangle)$**: The marginal $\rho_A = \operatorname{diag}(\frac{2}{3}, \frac{1}{3})$ retains local Bloch polarization $\|\mathbf{r}_A\| = \frac{1}{3}$, capping total available tangle at $1 - \|\mathbf{r}_A\|^2 = \frac{8}{9}$, split equally as $\tau(\mathbf{A}:\mathbf{B}) = \tau(\mathbf{A}:\mathbf{C}) = \left(\frac{2}{3}\right)^2 = \frac{4}{9}$ so $\frac{4}{9} + \frac{4}{9} = \frac{8}{9}$ saturates CKW with $\tau_3 = 0$;
