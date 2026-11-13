@@ -54,7 +54,7 @@ ALT = {
           "定理一行是 255、3、81，合计 339；定义一行是 96、0、52，合计 148；总计 487。三个虚线框标出附录 C 的三张索引："
           "C.1 = 255 + 3 = 258，C.2 = 96，C.2.1 = 81 + 52 = 133。",
     "en": "A ledger of two rows and three columns: the rows are theorems and definitions, the columns are cited with lean= in "
-          "an environment, cited by media and only inline in the text, and reached by inline links only. The theorem row reads 254, 3, 81, total 338; "
+          "an environment, cited by media and only inline in the text, and reached by inline links only. The theorem row reads 255, 3, 81, total 339; "
           "the definition row 96, 0, 52, total 148; in all 487. Three dashed frames mark the three indexes of appendix C: "
           "C.1 = 255 + 3 = 258, C.2 = 96, C.2.1 = 81 + 52 = 133.",
 }
