@@ -25,9 +25,11 @@
 .stagectl.tight { flex-direction: column; align-items: flex-start; }
 .stagectl.tight .paren { display: none; }
 
-/* the episode-cache card: a MODEL box on the stage (the standard .lean.model badge), never green */
-.cachecard {
-  position: absolute; left: 0; top: 0; z-index: 2; background: color-mix(in srgb, var(--void) 84%, transparent);
+/* the episode-cache card: a MODEL box on the stage (the standard .lean.model badge), never green; the wrapper
+   .cachecard places it on the stage and hides it in the cover, the box itself carries only evidence classes */
+.cachecard { position: absolute; left: 0; top: 0; z-index: 2; }
+.cachecard > .lean {
+  background: color-mix(in srgb, var(--void) 84%, transparent);
   line-height: 1.32; font-size: 11px; padding: 5px 8px;
 }
 .cachecard .row { display: block; font-family: var(--font-data); font-size: 11px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -36,7 +38,7 @@
 .cachecard .dim { color: var(--dim); }
 
 @media (max-width: 640px) {
-  .hud-tl { top: 42px; max-width: calc(100% - 32px); left: 14px; }
+  .hud-tl { max-width: calc(100% - 32px); left: 14px; }
   .hud-tl .big { font-size: 12.5px; line-height: 1.2; }
   .hud-tl .sub { font-size: 11px; line-height: 1.25; }
   .hud-tr { top: 10px; right: 12px; }

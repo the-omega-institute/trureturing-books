@@ -554,7 +554,7 @@
     setScene(p.scene, p.at);
     if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still); } else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、拖动琥珀色或白色的箭头、拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, drag the amber or white arrows, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

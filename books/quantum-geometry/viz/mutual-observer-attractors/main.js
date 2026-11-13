@@ -343,7 +343,7 @@
     alone: { scene: 'mirror', x0: 0.1, y0: 0.1, view: 'beat', to: 6, still: 5 },
     round: { scene: 'mirror', x0: 0.1, y0: 0.1, view: 'round', to: 10, still: 10 },
     apart: { scene: 'mirror', x0: 1.5, y0: 0, view: 'round', to: 12, still: 12 },
-    transition: { scene: 'cut', l1: 1, l2: 1, to: 'crit', still: 'crit' },
+    transition: { scene: 'cut', l1: 1, l2: 1, to: 'crit', still: tOf(dCrit(1, 1)) },   // the still: d at d_crit
     connected: { scene: 'cut', l1: 1, l2: 1, at: tOf(0.2) }
   };
   const NOTES = {
@@ -361,11 +361,11 @@
     const res = (v) => (v === 'crit' ? tOf(dCrit(S.l1, S.l2)) : v);
     setScene(c.scene, 0);
     if (c.at != null) { clock.set(c.at); return; }
-    if (TRV.still || (booting && !TRV.embed)) { clock.set(res(c.still)); return; }
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(c.still); return; }
     stopAt = res(c.to);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: CARDS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景，拖两人的起点或两段的长度，在舞台上点或拖，拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, move the two starts or the two lengths, press or drag on the stage, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

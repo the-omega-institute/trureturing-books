@@ -246,8 +246,8 @@
   };
   const LEGEND = {
     lamb: [['dm', '对流项 (u·∇)u', 'the advection term (u·∇)u'], ['cy', '梯度那一半 ∇(|u|²/2)', 'the gradient half ∇(|u|²/2)'], ['mg', '兰姆那一半 ω × u', 'the Lamb half ω × u'], ['am', '探针（可拖动）', 'the probe (drag it)']],
-    tube: [['cy', '环量回路 Γ（不变）', 'the circulation loop Γ (fixed)'], ['mg', '涡度 ω：轴上的箭头；管面由灰到品红，ω = Γ/A 越大越品红', 'the vorticity ω: the arrow on the axis; the wall runs from grey to magenta as ω = Γ/A grows'], ['dm', '出发时的涡管（淡影与虚线圈）', 'the tube as it started (faint shadow, dashed circles)']],
-    closure: [['cy', 'y = 0 时的加速度', 'the acceleration at y = 0'], ['am', '同一个 x、当前 y 时的加速度与两者之差', 'the acceleration for the same x at the current y, and the gap'], ['dm', '其余几个 x', 'the other values of x']]
+    tube: [['cy', '环量回路 Γ（不变）', 'the circulation loop Γ (fixed)'], ['mg', '轴上箭头：ω；管壁灰→品红：Γ/A 增大', 'ω: axial arrow; grey → magenta as Γ/A grows'], ['dm', '出发时的涡管（淡影与虚线圈）', 'the tube as it started (faint shadow, dashed circles)']],
+    closure: [['cy', 'y = 0 时的加速度', 'the acceleration at y = 0'], ['am', '同一个 x、当前 y 时的加速度与两者之差', 'same x, current y: acceleration and gap'], ['dm', '其余几个 x', 'the other values of x']]
   };
   function drawText() {
     const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
@@ -315,11 +315,12 @@
   kit.keys({ 1: () => { leave(); setScene('lamb'); }, 2: () => { leave(); setScene('tube'); }, 3: () => { leave(); setScene('closure'); } });
 
   /* ---------- experiment cards ---------- */
+  // still: the rail value a card's still (and the opening of the full page) shows; a click plays the rail from 0
   const PRESETS = {
-    vortex: { scene: 'lamb', at: 0.8, play: true },
-    flat: { scene: 'tube', mode: 'flat', nu: 0.02, at: 4, play: true }, strain: { scene: 'tube', mode: 'strain', nu: 0, at: 1.8, play: true },
-    burgers: { scene: 'tube', mode: 'strain', nu: 0.02, at: 5.5, play: true }, runaway: { scene: 'tube', mode: 'self', nu: 0.012, at: 2.4, play: true },
-    mixed: { scene: 'closure', leaks: [0, 0, 1], at: 1.7, play: true }
+    vortex: { scene: 'lamb', still: 0.8, play: true },
+    flat: { scene: 'tube', mode: 'flat', nu: 0.02, still: 4, play: true }, strain: { scene: 'tube', mode: 'strain', nu: 0, still: 1.8, play: true },
+    burgers: { scene: 'tube', mode: 'strain', nu: 0.02, still: 5.5, play: true }, runaway: { scene: 'tube', mode: 'self', nu: 0.012, still: 2.4, play: true },
+    mixed: { scene: 'closure', leaks: [0, 0, 1], still: 1.7, play: true }
   };
   const NOTES = {
     vortex: ['让 s 从 0 走到 1：涡度 ω = 2s 出现，对流项多出一支品红箭头 ω × u，白 = 青 + 品红。s 过了 ½，流线从双曲线合拢成椭圆。', 'Let s go from 0 to 1: the vorticity ω = 2s appears and the advection term gains a magenta arrow ω × u, white = cyan + magenta. Past s = ½ the streamlines close from hyperbolas into ellipses.'],
@@ -335,12 +336,12 @@
     if (p.mode) { S.mode = p.mode; modeChips.set(p.mode, true); S.nu = p.nu; fNu.set(p.nu); }
     if (p.leaks) { [S.lin, S.self, S.mix] = p.leaks; fLin.set(S.lin); fSelf.set(S.self); fMix.set(S.mix); }
     if (p.scene === 'tube') Object.assign(st.cam, TUBE_CAM);
-    setScene(p.scene, Math.min(p.at, SC[p.scene].max()));
+    setScene(p.scene, Math.min(p.still, SC[p.scene].max()));
     if (!p.play || TRV.still || (booting && !TRV.embed)) return;
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、拖探针、调粘性与泄漏、拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, drag the probe, change the viscosity and the leaks, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
