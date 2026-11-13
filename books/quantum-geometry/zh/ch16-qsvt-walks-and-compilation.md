@@ -192,6 +192,78 @@ $$
 
 :::
 
+## 中央缺陷路径：端点如何约束整个谱 {#sec-central-defect-gap}
+
+先把“黏合树加速”拆成能分别核对的数学问题。一条路径的谱是否分离、演化能否把概率送到另一端、这段演化能否用给定黑盒高效实现，是三个不同的问题。这里处理第一个。取 $n\ge1$，在 $2n$ 个位置 $0,\ldots,2n-1$ 上放置实对称矩阵 $J_n$：对角元为零，相邻位置之间的权重通常为 $1$，只有正中央的边 $(n-1,n)$ 权重为 $\sqrt2$，其余矩阵元为零。这里的 $n$ 是路径顶点数的一半；比较不同文献的树深度记号时，须另作对应。
+
+最小的例子已经能看清对象：
+
+$$
+J_1=\begin{pmatrix}0&\sqrt2\\\sqrt2&0\end{pmatrix},
+\qquad \lambda_\pm=\pm\sqrt2.
+$$
+
+两条谱线相距 $2\sqrt2$。一般 $n$ 的问题是找一个共同下界，控制所有谱线之间的距离，包括重根是否存在，而不预先假定它们互异。矩阵族来自 Childs 等人的 [arXiv:quant-ph/0209131v2，第三节第四小节、式 (42) 与引理 2](https://arxiv.org/abs/quant-ph/0209131v2)；下面给出一个对所有 $n\ge1$ 有效的显式下界，不主张文献新颖性或最优常数。
+
+**先控制半条路径的端点。** 对自由路径，特征向量的坐标满足二阶递推。用 $y(0)=0$ 表示左侧外部边界，右侧以 $y(n+1)=b\,y(n)$ 收口，便得到下述估计。它没有把能量参数 $t$ 限在通常的振荡区间内。
+
+::: {.theorem #thm-robin-endpoint-observability title="有限路径递推的端点控制" lean="D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.recurrence_endpoint_observability"}
+
+设 $n\in\mathbb N$、$n\ge1$，$t,b\in\mathbb R$，$y:\mathbb N\to\mathbb R$ 满足 $y(0)=0$，以及
+
+$$
+\begin{aligned}
+y(j+2)&=t\,y(j+1)-y(j)
+&&\bigl(j\in\mathbb N,\ j+2\le n+1\bigr),\\
+y(n+1)&=b\,y(n).
+\end{aligned}
+$$
+
+则
+
+$$
+\sum_{j=1}^{n}y(j)^2
+\le (1+|b|)^2n^3y(n)^2.
+$$
+:::
+
+::: proof
+当 $|t|\le2$ 时，从右端向左递推，用第二类切比雪夫多项式的界 $|U_k(x)|\le k+1$（$|x|\le1$），可得每个内部坐标满足 $|y(j)|\le(1+|b|)n|y(n)|$。平方后对 $n$ 项求和即得结论。当 $|t|>2$ 时，从左端的零边界出发，递推保证坐标的绝对值沿路径不减；该绝对值论证同时覆盖两侧外部区域。$|t|=2$ 的两条边界包含在第一种情形中。完整证明由 Lean 内核检查。
+:::
+
+把 $J_n$ 沿中央对折，镜像相同和镜像相反的向量分别给出两条 $n$ 维路径 $H_+$ 与 $H_-$。二者的普通边仍为 $1$，只有最后一个对角元分别为 $+\sqrt2$ 与 $-\sqrt2$。若 $e$ 是最后一个坐标方向，则
+
+$$
+H_+-H_-=2\sqrt2\,ee^{\mathsf T}.
+$$
+
+对任一单位特征向量，[@thm-robin-endpoint-observability] 取 $b=\pm\sqrt2$，说明末端坐标的平方至少为 $1/K$，其中 $K=(1+\sqrt2)^2n^3$。这不是预先加入的端点重叠假设，而是从实际递推推出的结论。
+
+::: {.theorem #thm-central-defect-spectral-gap title="中央平方根二缺陷路径的全谱分离" lean="D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.central_spectral_gap"}
+
+设 $m\in\mathbb N$，$n=m+1$，$J_n$ 为上述 $2n\times2n$ 实对称矩阵。设实数列表 $\lambda_0,\ldots,\lambda_{2n-1}$ 作为多重集恰为 $J_n$ 的特征多项式的全部根，保留每个根的代数重数。则对任意不同的指标 $i\ne j$，
+
+$$
+|\lambda_i-\lambda_j|
+\ge \frac{2\sqrt2}{(1+\sqrt2)^2n^3}>0.
+$$
+:::
+
+::: proof
+若 $H_-u=\lambda u$、$H_+v=\mu v$，实对称性和秩一差给出
+
+$$
+(\mu-\lambda)\langle u,v\rangle
+=2\sqrt2\,u_{n-1}v_{n-1}.
+$$
+
+单位归一化给出 $|\langle u,v\rangle|\le1$，端点控制给出 $|u_{n-1}v_{n-1}|\ge1/K$，因而异扇区的谱线至少相距 $2\sqrt2/K$。还必须处理同一扇区中的两条谱线：源码利用秩一更新前后各阈值之上的特征值计数相差至多 $1$；若同扇区有过近的两条谱线，异扇区间距会使该计数差达到至少 $2$，产生矛盾。最后，对折后的和差基给出精确的特征多项式分解，将两个扇区的全部根连同重数送回 $J_n$。完整证明由 Lean 内核检查。
+:::
+
+实对称矩阵的谱定理保证上面所需的完整实根列表存在，因此该条件不是空的；结论中的严格正下界进一步推出所有根都是单根。估计对所有 $n\ge1$ 有效，不删除区间外的能量，也不把只对固定根编号成立的渐近式当作统一界。以通常的渐近记号表达，它给出共同常数 $c=2\sqrt2/(1+\sqrt2)^2$ 与阈值 $N=1$。
+
+**从谱到穿行仍有桥梁。** 要把这条间距界变成端点概率，须展开实际传播子 $\exp(-itJ_n)$，核对两个端点的谱权重，并控制有限时间平均中的交叉项。要再解释成黏合树黑盒算法，还须核对图到列子空间的约简、哈密顿量的时间归一化与实现成本；经典下界则依赖另一套黑盒论证。[@thm-central-defect-spectral-gap] 只承担上述谱分离结论；[@rem-qsvt-walks-literature] 中的完整算法分离保持其文献结果身份。
+
 ## 从区间平方和到连续矩阵补全 {#sec-interval-sos-completion}
 
 

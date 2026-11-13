@@ -192,6 +192,78 @@ Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 
 :::
 
+## The central-defect path: how an endpoint controls the spectrum {#sec-central-defect-gap}
+
+Separate the glued-trees claim into questions that can be checked individually. Spectral separation, transfer probability between endpoints, and efficient implementation with a specified oracle each require their own argument. Here we address spectral separation. For $n\ge1$, let $J_n$ be the real symmetric matrix on $2n$ positions $0,\ldots,2n-1$. Its diagonal is zero; adjacent positions have weight $1$ except for the central edge $(n-1,n)$, whose weight is $\sqrt2$; all other entries vanish. Here $n$ is half the number of path vertices. A comparison with a paper's tree-depth parameter requires a separate identification.
+
+The smallest case makes the object explicit:
+
+$$
+J_1=\begin{pmatrix}0&\sqrt2\\\sqrt2&0\end{pmatrix},
+\qquad \lambda_\pm=\pm\sqrt2.
+$$
+
+The two spectral lines are $2\sqrt2$ apart. For general $n$, we seek one lower bound controlling every pair, including whether repeated roots can occur, without assuming distinctness. The matrix family comes from Childs et al., [arXiv:quant-ph/0209131v2, the fourth subsection of Section III, equation (42) and Lemma 2](https://arxiv.org/abs/quant-ph/0209131v2). The explicit bound below holds for every $n\ge1$; no literature novelty or optimal constant is claimed.
+
+**Control the endpoint of a half-path first.** Coordinates of a free-path eigenvector satisfy a second-order recurrence. Impose the exterior boundary $y(0)=0$ on the left and close the right end with $y(n+1)=b\,y(n)$. The resulting estimate does not restrict the energy parameter $t$ to the usual oscillatory interval.
+
+::: {.theorem #thm-robin-endpoint-observability title="Endpoint control for a finite path recurrence" lean="D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.recurrence_endpoint_observability"}
+
+Let $n\in\mathbb N$, $n\ge1$, $t,b\in\mathbb R$, and $y:\mathbb N\to\mathbb R$ satisfy $y(0)=0$ and
+
+$$
+\begin{aligned}
+y(j+2)&=t\,y(j+1)-y(j)
+&&\bigl(j\in\mathbb N,\ j+2\le n+1\bigr),\\
+y(n+1)&=b\,y(n).
+\end{aligned}
+$$
+
+Then
+
+$$
+\sum_{j=1}^{n}y(j)^2
+\le (1+|b|)^2n^3y(n)^2.
+$$
+:::
+
+::: proof
+For $|t|\le2$, run the recurrence backwards from the right endpoint. The second-kind Chebyshev bound $|U_k(x)|\le k+1$ for $|x|\le1$ gives $|y(j)|\le(1+|b|)n|y(n)|$ at every interior coordinate. Square and sum the $n$ terms. For $|t|>2$, the recurrence starting at the zero left boundary makes the coordinate magnitudes nondecreasing; the absolute-value argument covers both exterior regimes. The first case includes both boundaries $|t|=2$. The full proof is checked by the Lean kernel.
+:::
+
+Fold $J_n$ at its central edge. Reflection-even and reflection-odd vectors give two $n$-dimensional paths $H_+$ and $H_-$. Their ordinary edges still have weight $1$; their final diagonal entries are $+\sqrt2$ and $-\sqrt2$, respectively. Writing $e$ for the final coordinate vector gives
+
+$$
+H_+-H_-=2\sqrt2\,ee^{\mathsf T}.
+$$
+
+Apply [@thm-robin-endpoint-observability] with $b=\pm\sqrt2$. Every unit eigenvector has final-coordinate square at least $1/K$, where $K=(1+\sqrt2)^2n^3$. This endpoint weight is derived from the actual recurrence rather than supplied as an overlap assumption.
+
+::: {.theorem #thm-central-defect-spectral-gap title="Full spectral separation for the central square-root-two defect path" lean="D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.central_spectral_gap"}
+
+Let $m\in\mathbb N$, $n=m+1$, and let $J_n$ be the real symmetric $2n\times2n$ matrix defined above. Suppose the real list $\lambda_0,\ldots,\lambda_{2n-1}$ is exactly the multiset of all roots of its characteristic polynomial, retaining every algebraic multiplicity. For any distinct indices $i\ne j$,
+
+$$
+|\lambda_i-\lambda_j|
+\ge \frac{2\sqrt2}{(1+\sqrt2)^2n^3}>0.
+$$
+:::
+
+::: proof
+For $H_-u=\lambda u$ and $H_+v=\mu v$, real symmetry and the rank-one difference imply
+
+$$
+(\mu-\lambda)\langle u,v\rangle
+=2\sqrt2\,u_{n-1}v_{n-1}.
+$$
+
+Unit normalization gives $|\langle u,v\rangle|\le1$, while endpoint control gives $|u_{n-1}v_{n-1}|\ge1/K$. Opposite-sector spectral lines are therefore at least $2\sqrt2/K$ apart. Pairs in the same sector still require an argument: the source proof bounds the difference between the two sectors' eigenvalue counts above any threshold by $1$. Two excessively close lines in one sector, together with opposite-sector separation, would force a count difference of at least $2$. Finally, the sum and difference basis after folding gives an exact characteristic-polynomial factorization, transporting both complete sector root multisets, with multiplicity, back to $J_n$. The full proof is checked by the Lean kernel.
+:::
+
+The real symmetric spectral theorem supplies the complete real root list, so the hypothesis is inhabited; the strictly positive conclusion then establishes that every root is simple. The estimate holds for every $n\ge1$, retains exterior energies, and uses no fixed-index asymptotic expansion as a uniform bound. In the usual asymptotic formulation it supplies the common constant $c=2\sqrt2/(1+\sqrt2)^2$ and threshold $N=1$.
+
+**Bridges from spectrum to traversal remain.** An endpoint probability bound also needs the actual propagator $\exp(-itJ_n)$, the two endpoints' spectral weights, and control of the cross terms in a finite time average. A glued-trees oracle algorithm further needs the graph-to-column reduction, the Hamiltonian's time normalization and its implementation cost. The classical lower bound uses a separate oracle argument. [@thm-central-defect-spectral-gap] establishes the spectral separation stated above; the complete algorithmic separation in [@rem-qsvt-walks-literature] retains its status as a literature result.
+
 ## From Interval Sums of Squares to Continuous Matrix Completion {#sec-interval-sos-completion}
 
 
