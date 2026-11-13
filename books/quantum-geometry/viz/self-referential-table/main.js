@@ -486,7 +486,11 @@
   /** The three boxes of the stage (CSS pixels of the canvas): the ball on the left (wide) or on top (narrow). */
   function layoutOf(W, H, words) {
     if (!words) return { mode: 'cover', solid: { x: W * 0.02, y: H * 0.08, w: W * 0.36, h: H * 0.84 }, table: { x: W * 0.4, y: H * 0.08, w: W * 0.33, h: H * 0.84 }, panel: { x: W * 0.76, y: H * 0.1, w: W * 0.21, h: H * 0.8 } };
-    const st = $('stage').getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
+    const stEl = $('stage'), st = stEl.getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
+    // the legend's offset to the right belongs to one layout (a cited figure in a book page) and is derived anew for
+    // every frame: a frame narrowed from a book page to a phone must not keep it, and every layout below measures the
+    // legend across the whole stage first
+    stEl.classList.remove('legend-right');
     if (compact()) {                          // a phone's cited figure: the ball as large as the width allows on the left,
       // the table over its side panel in the column on the right, between the title and the legend
       const top = below($('hudBig').parentElement) + 6, bottom = $('legend').offsetHeight + 22;
@@ -494,15 +498,13 @@
       const w3 = Math.round(bx.w * 0.6), rx = bx.x + w3 + 8, rw = bx.w - w3 - 8, side = Math.min(rw, bx.h * 0.56);
       return { mode: 'compact', solid: { x: bx.x, y: bx.y, w: w3, h: bx.h }, table: { x: rx, y: bx.y, w: rw, h: side }, panel: { x: rx, y: bx.y + side + 8, w: rw, h: bx.h - side - 8 } };
     }
-    const stEl = $('stage');
-    stEl.classList.remove('legend-right');    // the legend is measured across the whole stage first
     const top = Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10, bottom = Math.max(18, $('legend').offsetHeight + 20);
     const bx = { x: 18, y: top, w: W - 36, h: Math.max(80, H - top - bottom) };
     const wide = bx.w >= 520 && bx.w >= bx.h * 1.2;
     if (wide && bx.w >= bx.h * 2.05 && TRV.figure && !TRV.still) {
       // a cited figure in a book page: the ball's column runs from under the title to the foot of the stage, and the
       // legend keeps to the right of it, under the table and the side panel
-      const cb = { x: bx.x, y: bx.y - 6, w: bx.w, h: H - bx.y - 12 };
+      const cb = { x: bx.x, y: bx.y - 6, w: bx.w, h: H - (bx.y - 6) - 12 };   // from 6 px over the boxes to 12 px over the foot
       const w3 = Math.round(clamp(cb.h - 20, bx.w * 0.36, bx.w * 0.42)), rx = bx.x + w3 + 16, rw = bx.w - w3 - 16;
       stEl.style.setProperty('--fig-legend-left', `${rx}px`); stEl.classList.add('legend-right');
       const bh = Math.max(80, H - top - Math.max(18, $('legend').offsetHeight + 20)), pw = Math.round(bx.w * 0.27), side = Math.min(bh, rw - pw - 22);
@@ -531,7 +533,10 @@
     geo.layout = Object.assign({ W, H }, lay);
     // the ball: sized to its box less the caption under it, centred in what is left
     const sl = sliceNow(), shape = shapeOf(sl), cap = words ? captionLines(ctx, captionOf(sl, shape), lay.solid.w) : { lines: [], fs: 0 };
-    const capH = cap.lines.length * (cap.fs + 4) + (words ? 6 : 0), ball = { x: lay.solid.x, y: lay.solid.y, w: lay.solid.w, h: lay.solid.h - capH };
+    // a caption broken over lines is set as the page's other text is (fs + 2 a line), so in a column whose height decides
+    // the ball a second line takes no more of it than it needs; a single line keeps its padding
+    const lead = cap.fs + (cap.lines.length > 1 ? 2 : 4);
+    const capH = cap.lines.length * lead + (words ? 6 : 0), ball = { x: lay.solid.x, y: lay.solid.y, w: lay.solid.w, h: lay.solid.h - capH };
     // the glass and anything the image pokes out of it; a short stage lets the ball fill its column almost to the edge
     const tight = lay.mode === 'columns' || lay.mode === 'compact', unit = Math.max(16, Math.min(ball.w, ball.h) / 2 * Math.min(tight ? 0.97 : 0.9, (tight ? 1 : 0.97) / sl.scale));
     geo.ballBox = lay.solid;
@@ -539,7 +544,7 @@
     stage.begin();
     geo.solid = Object.assign(drawSolid(stage, sl, shape), { unit: stage.unit, center: [stage.cx, stage.cy], ball, caption: cap.lines.slice() });
     stage.end();
-    cap.lines.forEach((s, k) => text(ctx, s, ball.x + ball.w / 2, ball.y + ball.h + 6 + (k + 0.5) * (cap.fs + 4), P.dim, { align: 'center', size: cap.fs, face: 'body' }));
+    cap.lines.forEach((s, k) => text(ctx, s, ball.x + ball.w / 2, ball.y + ball.h + 6 + (k + 0.5) * lead, P.dim, { align: 'center', size: cap.fs, face: 'body' }));
     if (TRV.thumbMode) {   // wordless cover: the ball, the table and its eigenvalues snapping to 0 and 1
       const gx = lay.table.x + lay.table.w / 2, gr = gx - (lay.solid.x + lay.solid.w), glow = ctx.createRadialGradient(gx, H * 0.5, 0, gx, H * 0.5, gr);   // fades out before the ball
       glow.addColorStop(0, TRV.alpha(P.cyan, 0.08)); glow.addColorStop(1, TRV.alpha(P.cyan, 0)); ctx.fillStyle = glow; ctx.fillRect(gx - gr, 0, 2 * gr, H);
