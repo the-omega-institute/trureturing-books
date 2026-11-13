@@ -12,6 +12,8 @@ import math
 import re
 from pathlib import Path
 
+from tbook.summary import parse_summary
+
 from _ch21 import icosahedron, rot  # noqa: F401  (rot is re-exported for the figures)
 
 PHI = (1 + math.sqrt(5)) / 2
@@ -178,10 +180,12 @@ def chapter_references(n=39):
 def parts():
     """The chapters of each part, read from zh/SUMMARY.md: [[1, 2, 3, 4], [5, …], …]."""
     out = []
-    for line in (ZH / "SUMMARY.md").read_text(encoding="utf-8").splitlines():
-        if line.startswith("# 第") and "部" in line:
+    part = None
+    for chapter in parse_summary(ZH / "SUMMARY.md").top_level():
+        if not chapter.path or not re.match(r"ch\d+-", chapter.path):
+            continue
+        if chapter.part != part:
             out.append([])
-        m = re.search(r"\(ch(\d\d)-", line)
-        if m and out:
-            out[-1].append(int(m.group(1)))
+            part = chapter.part
+        out[-1].append(chapter.number[0])
     return out

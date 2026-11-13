@@ -4,10 +4,10 @@
 
 ## 1. 原则
 
-1. **真值只在 trureturing。** 书中每条 `theorem / lemma / proposition / corollary` 都必须引用 trureturing 中已被 Lean 内核验证并冻结的声明。冻结成员身份的唯一判据是所钉提交上存在 `Golden/Frozen/state/<module>.lean.json` 且其中列有该声明（trureturing CLAUDE.md §1.3 冻结律）。Lean 代码只写在 trureturing，本仓库不含 `.lean` 文件。
-2. **书是投影，不是真源。** 书的文字解释定理；定理的成立由 Lean 声明决定。未证结论只能写成 `conjecture` 或 `problem`。
+1. **Lean 验证只来自 trureturing。** 书中 `theorem / lemma / proposition / corollary` 默认引用 trureturing 中已被 Lean 内核验证并冻结的声明；源文有证明但无匹配声明时必须显式标为 `status="written-proof" proof="id"` 且不带 `lean`，每版关联非空书面证明，并提供 DOI 或源论文仓库、原文定位与 trureturing-requests issue，见 [形式化请求规范](FORMALIZATION-REQUESTS.md)。已有匹配 Lean 验证时必须引用 Lean。冻结成员身份的唯一判据是所钉提交上存在 `Golden/Frozen/state/<module>.lean.json` 且其中列有该声明（trureturing CLAUDE.md §1.3 冻结律）。Lean 代码只写在 trureturing，本仓库不含 `.lean` 文件。
+2. **证据状态不可混淆。** Lean 结果由冻结声明支撑；书面证明由作者与评审负责，紫色徽章不带验证链接、不计入 Lean 数量。真正开放的结论用 `conjecture` 或 `problem`。
 3. **一次编写，多端导出。** 同一份 Markdown 生成 HTML（mdBook）、PDF（Typst，屏幕版与印刷版）、EPUB 3（Apple Books）。编号、标签、徽章与 Lean 链接由 `tools/tbook/render.py` 统一计算，各端一致。
-4. **多语言，默认中文与英文。** 每本书有若干语言版本（edition），第一个为权威版本；`./tbook check` 要求各版本的章节文件、环境序列（种类、id、Lean 引用）逐条一致。
+4. **多语言，默认中文与英文。** 每本书有若干语言版本（edition），第一个为权威版本；`./tbook check` 要求各版本的章节文件、环境序列（种类、id、Lean 引用、证据状态、证明关联与来源字段）逐条一致。
 5. **配色单一来源。** 赛博朋克配色只在 `theme/tokens.json` 定义，`./tbook theme` 派生出各端使用的 CSS / Typst / JS（幻灯片的打印背景图由 Chromium 按派生的 CSS 渲染，见 §2 的 `slides/`）。绿色只留给 Lean 已验证，琥珀色只留给“现在/当前选择”，红色标开放问题。
 6. **模板可升级。** `template.toml` 列出模板托管的路径；下游只改自己的路径（`books/`、`site.toml`、`trureturing.lock.json`、`i18n/`、`PROJECT.md`、`README.md`）。`./tbook template update` 把托管路径同步到模板的新版本。
 
@@ -84,7 +84,8 @@ skills/                   内置 agent skills（.claude/skills → ../skills）
 
 | 种类 | 类名 | Lean 引用 | 编号 | 徽章 |
 | --- | --- | --- | --- | --- |
-| 形式结论 | `theorem` `lemma` `proposition` `corollary` | **必须**，且解析为 Lean `theorem` | 是 | `LEAN ✓`（绿，链接到第一条声明）；所引 GID 不能全部经锁文件解析为 Lean `theorem` 时，构建显示红色 `UNVERIFIED`，各端徽章都不是链接，页脚与账本只链接锁文件解析了的声明（`./tbook check` 报错） |
+| 形式结论 | `theorem` `lemma` `proposition` `corollary` | 默认**必须**，且解析为 Lean `theorem` | 是 | `LEAN ✓`（绿，链接到第一条声明）；所引 GID 不能全部经锁文件解析为 Lean `theorem` 时，构建显示红色 `UNVERIFIED`，各端徽章都不是链接，页脚与账本只链接锁文件解析了的声明（`./tbook check` 报错） |
+| 书面证明 | 上述形式结论 + `status="written-proof" proof="id"` | **禁止**，每版关联非空 proof，必须有 DOI 或源论文仓库、原文定位和已登记的请求 issue | 是 | `书面证明 / WRITTEN PROOF`（紫，无链接，不计入 Lean 数量） |
 | 定义 | `definition` | 可选；给出则必须解析 | 是 | — |
 | 开放 | `conjecture` `problem` | **禁止** | 是 | `OPEN`（红） |
 | 非形式 | `example` `remark` | 可选；给出则必须解析 | 是 | — |
@@ -153,6 +154,7 @@ skills/                   内置 agent skills（.claude/skills → ../skills）
   - 视频：`books/<slug>/films/<NNN>-<name>/`（`film.json`、`script.json`、`scenes.js`、`poster.jpg`）；规范见 `templates/film/README.md`。成片是构建产物（见下文“视频构建”），没有单独的 Release；`film.json` 中旧的 `release_tag`、`published_tag` 不再使用，`./tbook check` 给出警告。
   - 幻灯片：`books/<slug>/slides/<deck>/slides.md`（第一语言）与 `slides.<lang>.md`，逐页对应；不得有 `slides.<第一语言>.md`（会被 `slides.md` 遮蔽），也不得用 `src:` 导入别的文件的幻灯片（检查无法读取导入的内容），二者都报错；写法见 `theme/slides/README.md`。
 - 媒体中引用的 Lean GID 与章节引用一样必须在锁文件中，由 `./tbook pin --refresh` 解析、`./tbook check` 复核：登记表的 `lean`、页面的 `data-lean-gid`、`film.json` 的 `lean`、幻灯片的 `<LeanBadge>` / `<TheoremCard>`（`<lean-badge>`、`<theorem-card>` 等 Vue 认可的写法同样受检查；代码块之外的每个标签都受检查。代码块指围栏代码块、缩进代码块与 `<<<` 导入，按 Slidev 53 配置下 markdown-exit 的块规则识别：表格、组件 HTML 块、脚注、`$$` 公式块与各容器的规则都在内。Python 的 `slides.code_lines` 与 Node 的 `codeLines` 是同一份移植，测试用 Slidev 构建出的解析器比对二者）。它们显示为绿色 `LEAN ✓`，因此必须是种类为 `theorem` 的声明：页面中的定义用 `data-trureturing-path="<module>.lean"` 链接；幻灯片写 `kind="definition"` 时可以引用 Lean 定义，显示中性的 `LEAN DEF` 而不是绿色 `LEAN ✓`。
+- 可视化页面的绿色对勾 `.okmark` 只在 `.lean` 依据框里；页面里没有 `.lean` 祖先的 `.okmark`，以及脚本里写入 `.okmark`、却没有点名某个位于 `.lean` 框中的元素的那一行，`./tbook check`（`viz.okmarks_outside_lean`）与 `viz-validate`（`okmarksOutsideLean`）给警告；页面自己核对的数用中性的 `.nummark`。
 - `[@id]` 只能指向编号环境，不能指向媒体块。
 
 ### 3.5 数学
@@ -167,9 +169,9 @@ skills/                   内置 agent skills（.claude/skills → ../skills）
 2. 结构：SUMMARY 可解析、章节文件存在、未列入 SUMMARY 的 `.md`（警告）、fenced div 与 HTML 注释块闭合、无法解析的 div 开头行（报错）；行内 `<!--` 未在所在段落内闭合而后文另有 `-->`，围栏代码块随容器结束或从未闭合，mdBook 与 Pandoc 读法不同的定义，围栏代码块前未闭合、Pandoc 跨过围栏配对的 `$`（警告）；章节中链接或嵌入的本地文件（图片、`../assets/…`、引用式链接定义）不存在、或链接离开书目录，引用式定义的地址写在标签的下一行（警告）。
 3. 环境规则（见 §3.1 表）。
 4. 交叉引用 `[@id]`（正文与环境标题中）指向本版本存在的编号环境。
-5. 多语言对齐：各版本章节文件与顺序相同；每章环境序列（种类、id、Lean 引用）与媒体序列逐条相同；SUMMARY 结构（前言/编号/附录章节、嵌套、草稿条目）一致，使同一章在各语言中编号相同。
+5. 多语言对齐：各版本章节文件与顺序相同；每章环境序列（种类、id、Lean 引用、证据状态、证明关联与来源字段）与媒体序列逐条相同；SUMMARY 结构（前言/编号/附录章节、嵌套、草稿条目）一致，使同一章在各语言中编号相同。
 6. Lean：每个被引用的 GID 都在锁文件中；形式结论引用的必须是 `theorem`；在锁定提交上重新读取冻结状态片，名称、种类、模块、`statement_id` 与锁文件一致（防止锁文件过期或被手改）；所钉提交可从 `site.toml` 的 trureturing 分支到达（本地 checkout 用 `git merge-base --is-ancestor`，否则用 GitHub compare API；无法判定时 GitHub Actions 中为错误，本地或 `--offline` 下为警告）；锁文件的 `branch` 与该分支相同，且该分支是分支名而不是 SHA 或 `refs/…`（错误）；未被引用的锁条目（警告；`--book` 时也计入其他书的引用）。
-7. 媒体：`tbook.viz/film/slides/figure.check(book)` 与 `check_ref(book, src)`。静态图：脚本不能运行、提交的 `figures/<name>.<lang>.svg` 与脚本现在画出的不一致或缺失（错误，`./tbook fig build`）；没有脚本的 `figures/*.svg`、没有任何章节引用的图（`check.check_unused_figures`）（警告）；`.figure` 块没有图注，或图注、图片说明（`![…](x.svg)`）只是编号（`figure.caption_problem`，错误）；`assets/` 下没有被任何语言的章节链接、文件名也不出现在本书幻灯片、视频、可视化源文件中的文件（`check.check_unused_assets`，警告）；各语言版本同一章的图片（`![…](…)`）张数不同（`check.check_image_parity`，警告；图片可以是各语言自己的文件，所以只比张数，`.figure` 块则逐条比对）；用图片语法引用、位于 `assets/`、写死颜色（有 `fill`/`stroke`/`stop-color`/`color` 的色值，却既没有 `ts-`/`tf-` 角色类也没有 `prefers-color-scheme`）的 SVG，以及被两种以上语言的章节共用、含 `<text>` 的 SVG（`check.check_drawn_images`，警告；位图不报）；图在手机上的最小标签：取提交的各语言 SVG 中最小的数值 `font-size`（上下标的 `72%` 随所在标签，不另计），乘以 `min(1, 358 / 宽度)`（`WRAP = True` 的分栏图取最宽一栏），低于 10 px（`figure.phone_problem`，默认警告，`[figures] phone_labels` 可升为错误；`./tbook fig build` 同样报出，`./tbook fig list` 列出该值）；三块以上 `.figure`/`.viz`/`.film`/`.slides` 在同一层只隔着空行或 HTML 注释连排（`check.check_media_runs`，警告，报在第三块）。
+7. 媒体：`tbook.viz/film/slides/figure.check(book)` 与 `check_ref(book, src)`。静态图：脚本不能运行、提交的 `figures/<name>.<lang>.svg` 与脚本现在画出的不一致或缺失（错误，`./tbook fig build`）；没有脚本的 `figures/*.svg`、没有任何章节引用的图（`check.check_unused_figures`）（警告）；`.figure` 块没有图注，或图注、图片说明（`![…](x.svg)`）只是编号（`figure.caption_problem`，错误）；`assets/` 下没有被任何语言的章节链接、文件名也不出现在本书幻灯片、视频、可视化源文件中的文件（`check.check_unused_assets`，警告）；各语言版本同一章的图片（`![…](…)`）张数不同（`check.check_image_parity`，警告；图片可以是各语言自己的文件，所以只比张数，`.figure` 块则逐条比对）；用图片语法引用、位于 `assets/`、写死颜色（有 `fill`/`stroke`/`stop-color`/`color` 的色值，却既没有 `ts-`/`tf-` 角色类也没有 `prefers-color-scheme`）的 SVG，以及被两种以上语言的章节共用、含 `<text>` 的 SVG（`check.check_drawn_images`，警告；位图不报）；图在手机上的最小标签：取提交的各语言 SVG 中最小的数值 `font-size`（上下标的 `72%` 随所在标签，不另计），乘以 `min(1, 358 / 宽度)`（`WRAP = True` 的分栏图取最宽一栏），低于 10 px（`figure.phone_problem`，默认警告，`[figures] phone_labels` 可升为错误；`./tbook fig build` 同样报出，`./tbook fig list` 列出该值）；两块 `.figure`/`.viz`/`.film`/`.slides` 在同一层只隔着空行或 HTML 注释相邻（`check.check_media_runs`，警告，每一对报在第二块，点名两块的种类、`src`、`preset` 与行号；完整实验室紧跟同一页面的卡时另给隔开的办法）。
 8. 主题：`theme/generated/*` 与 `tokens.json` 同步（`./tbook theme --check`）；幻灯片的打印背景图 `theme/slides/styles/backdrop.jpg` 与 `backdrop.css`、`tokens.css` 同步（`./tbook theme --check` 与 `slides-check` 核对指纹）。
 9. 缓存：`.cache/` 下的文件不得提交入库，`.cache` 本身（例如符号链接）也不得提交（错误；缓存只在本地可信；`git ls-files` 查询字面路径 `.cache`，不解析符号链接）。
 
@@ -214,7 +216,7 @@ HTML 专有选项：`book.toml` 的 `[html] section-labels = true` 恢复 mdBook
 
 环境变量：`MDBOOK`（mdBook 路径）、`PANDOC`、`PW_CHROMIUM_PATH`（已有的 Chromium）、`TBOOK_EPUBCHECK=1|warn|0`、`TBOOK_SLIDES_NO_PDF=1`（不导出、不发布幻灯片 PDF；`slides.publish` 会去掉章节卡片中指向未发布 PDF 的链接）、`TBOOK_SLIDES_NO_CHECK=1`、`SOURCE_DATE_EPOCH`（可复现的时间戳）、`TBOOK_REPO` / `TBOOK_BASE_URL`（覆盖仓库与站点地址）、`TRURETURING_DIR`（本地 trureturing 检出）、`TRURETURING_TOKEN`（读取私有 trureturing；GitHub API 也依次用 `GITHUB_TOKEN`、`GH_TOKEN`）、`TBOOK_LANG=zh|en`（模板升级摘要语言）。
 
-视频构建：每部视频是一个构建单元（目标 `films`，单元 `<slug>/<id>`，`tbook.film.units`），由 `./tbook build films|site|all` 经 `film.build_videos` 运行。键覆盖视频依赖的全部输入，而不含无关输入：视频目录中 git 会提交的文件（不含 `out/`、`poster.jpg`、`README.md`）、`theme/film/`（不含视频页资源 `site/`，含 `requirements.txt`）、`theme/generated/tokens.mjs`、`tools/tbook/film.py`、引擎绘制的数据（`film.engine_data`：书的代号、版本与标题，所钉提交与引用声明的名称、陈述摘要，片内文字）、`package-lock.json` 中字体与 Playwright（它决定 Chromium）的版本、Kokoro 模型版本（`film.KOKORO_RELEASE`）与 Node 主版本；不含站点地址，所以 CI、Pages 与 Release 的构建共用同一份视频。也不含探测到的 ffmpeg、Chromium 与视频 Python：没有视频工具链的构建（`TBOOK_FILMS=auto|skip`）须算出同一个键才能恢复视频，运行器上 ffmpeg 包的新修订也不改变视频的内容。缓存未命中时按 `TBOOK_FILMS` 处理：`auto`（默认）在工具链齐全（`film.toolchain_missing`：ffmpeg、Node 与 Playwright、Chromium、视频 Python 的包、Kokoro 模型、字体）时渲染，否则警告并删去该视频的旧构建目录；`require` 失败；`skip` 从不渲染。渲染即 `FILM_STRICT=1 theme/film/film.sh <dir> all <outputs 的键…>`（`film.render_videos` 明确传入 `film.json` 所列的输出），在 `out/` 中工作，只把这些文件复制到 `build/films/<slug>/<id>/`，缺少任何一个即失败（`buildcache.MissingOutput`，不存入缓存），不写入库文件（提交的 `poster.jpg` 只由手工的 `poster` 步骤生成）。`film.json` 在键中，改动 `outputs` 会重新渲染。流水线只编码所需（`film.render_plan`，`theme/film/plan.py` 给各步骤）：Chromium 按 1920×1080 截取每帧一次，各渲染进程在同一遍中编码——720p 视频（`narrated_720p`、`music_only_720p`）由帧直接缩放（hqdn3d、lanczos，x264 CRF 19、preset slow），只有列出 1080p 视频（`narrated`、`music_only`）时才另编码 1080p 母版（CRF 17）；`mux` 只做拼接与混入音频（AAC 48 kHz，`+faststart`），不再重新编码；纯配乐混音只在列出纯配乐视频时生成。同一台机器、同样的进程数，产物逐字节相同；720p 旁白版无论是否列出 1080p 都相同。默认（720p 旁白版与封面）渲染 50 秒的示例约 80 秒；另列出 1080p 视频时约 140 秒（帧截取不变，多编码 1080p 母版）。视频工具链由 `theme/film/setup.sh` 安装：钉死的包进 `$FILM_CACHE/venv`（默认 `.cache/film/venv`，`PYTHON` 可指定别的解释器），模型进 `$KOKORO_MODEL_DIR`（默认 `.cache/film/models`）；ffmpeg 来自系统（`FFMPEG` 可覆盖）。
+视频构建：每部视频是一个构建单元（目标 `films`，单元 `<slug>/<id>`，`tbook.film.units`），由 `./tbook build films|site|all` 经 `film.build_videos` 运行。键覆盖视频依赖的全部输入，而不含无关输入：视频目录中 git 会提交的文件（不含 `out/`、`poster.jpg`、`README.md`）、`theme/film/`（不含视频页资源 `site/`，含 `requirements.txt`）、`theme/generated/tokens.mjs`、`tools/tbook/film.py`、引擎绘制的数据（`film.engine_data`：书的代号、版本与标题，所钉提交与引用声明的名称、陈述摘要，片内文字）、`package-lock.json` 中字体与 Playwright（它决定 Chromium）的版本、Kokoro 模型版本（`film.KOKORO_RELEASE`）与 Node 主版本，`film.json` 的 `scripts` 所列脚本，有实体镜头（`"solid": true`）时还有造型核心 `theme/viz/solid-core.js` 与 `theme/viz/vendor/` 的 three.js（没有实体镜头的视频不依赖它们）；不含站点地址，所以 CI、Pages 与 Release 的构建共用同一份视频。也不含探测到的 ffmpeg、Chromium 与视频 Python：没有视频工具链的构建（`TBOOK_FILMS=auto|skip`）须算出同一个键才能恢复视频，运行器上 ffmpeg 包的新修订也不改变视频的内容。缓存未命中时按 `TBOOK_FILMS` 处理：`auto`（默认）在工具链齐全（`film.toolchain_missing`：ffmpeg、Node 与 Playwright、Chromium、视频 Python 的包、Kokoro 模型、字体）时渲染，否则警告并删去该视频的旧构建目录；`require` 失败；`skip` 从不渲染。渲染即 `FILM_STRICT=1 theme/film/film.sh <dir> all <outputs 的键…>`（`film.render_videos` 明确传入 `film.json` 所列的输出），在 `out/` 中工作，只把这些文件复制到 `build/films/<slug>/<id>/`，缺少任何一个即失败（`buildcache.MissingOutput`，不存入缓存），不写入库文件（提交的 `poster.jpg` 只由手工的 `poster` 步骤生成）。`film.json` 在键中，改动 `outputs` 会重新渲染。流水线只编码所需（`film.render_plan`，`theme/film/plan.py` 给各步骤）：Chromium 按 1920×1080 截取每帧一次，各渲染进程在同一遍中编码——720p 视频（`narrated_720p`、`music_only_720p`）由帧直接缩放（hqdn3d、lanczos，x264 CRF 19、preset slow），只有列出 1080p 视频（`narrated`、`music_only`）时才另编码 1080p 母版（CRF 17）；`mux` 只做拼接与混入音频（AAC 48 kHz，`+faststart`），不再重新编码；纯配乐混音只在列出纯配乐视频时生成。同一台机器、同样的进程数，产物逐字节相同；720p 旁白版无论是否列出 1080p 都相同。默认（720p 旁白版与封面）渲染 50 秒的示例约 80 秒；另列出 1080p 视频时约 140 秒（帧截取不变，多编码 1080p 母版）。视频工具链由 `theme/film/setup.sh` 安装：钉死的包进 `$FILM_CACHE/venv`（默认 `.cache/film/venv`，`PYTHON` 可指定别的解释器），模型进 `$KOKORO_MODEL_DIR`（默认 `.cache/film/models`）；ffmpeg 来自系统（`FFMPEG` 可覆盖）。
 
 ### 5.1 构建缓存
 
@@ -296,7 +298,7 @@ manifest.json              机器可读清单（schema trureturing-books.site.v1
                            <deck>/<slug>-<deck>-<lang>.pdf
 ```
 
-`manifest.json` 字段：`generated_at`、`site{title,languages,base_url,repo}`、`template{name,version}`、`trureturing{repo,commit,branch}`、`books[{slug, version, code, title{lang}, editions[{lang,bcp47,primary,html}], landing, verified, open, declarations[], media{viz,films,slides}, files[{path,size,sha256,kind(pdf|epub|cover|slides-pdf),lang,variant}]}]`。设置 `SOURCE_DATE_EPOCH` 可使 `generated_at` 可复现。
+`manifest.json` 字段：`generated_at`、`site{title,languages,base_url,repo}`、`template{name,version}`、`trureturing{repo,commit,branch}`、`formalization_requests`（按 issue 汇总 DOI/源仓库、定位、书籍/结果及去重计数）、`books[{slug, version, code, title{lang}, editions[{lang,bcp47,primary,html}], landing, verified, open, declarations[], media{viz,films,slides}, files[{path,size,sha256,kind(pdf|epub|cover|slides-pdf),lang,variant}]}]`。设置 `SOURCE_DATE_EPOCH` 可使 `generated_at` 可复现。
 
 站点品牌：`site.toml` 可选 `[site] logo = "TRURETURING//BOOKS"`；缺省时用英文站名生成 `FIRST//REST`。
 
@@ -394,3 +396,13 @@ def generate(out_dir) -> Path
 | Playwright | `playwright-chromium@1.56.1` | `package.json`；本地可用 `PW_CHROMIUM_PATH` 指向已有 Chromium |
 
 字体：网页用 Google Fonts（Chakra Petch、JetBrains Mono、Noto Sans SC，以及英文等非中日韩文字用的 Source Sans 3：令牌 `font.body-latin`。Noto Sans SC 把弯引号与撇号画成全角，中文需要这样，英文里却与词隔开，所以 mdBook、站点、视频页与可视化在语言不是中日韩时把 `--tr-font-body` 换成它；PDF 的英文正文本来用拉丁字体，EPUB 正文用阅读器的字体）；PDF 用系统字体加 `tools/fetch-fonts.sh` 拉取的 TTF（`.cache/fonts/`）；幻灯片与视频用 `@fontsource` 自托管。
+
+## 9. 学术演示稿（Beamer）
+
+`tools/tbook/academic.py` 在现有 `slides` 组件中实现学术演示稿。演示目录中的 `deck.toml` 选择这条构建路径；Node 端发现 Slidev 演示时跳过带此配置的目录，Python 端检查两种格式，无效配置会报错。学术演示稿可以选择书中语言版本的非空子集，并独立指定顺序：`slides.tex` 属于第一个所选语言，其他语言使用 `slides.<lang>.tex`。可选的 `theme_dir` 与机构图片路径相对于演示目录解析；本地接入也支持自有主题的绝对路径。现有托管目录 `theme/`、`templates/`、`tools/`、`skills/`、`docs/` 与 `.github/` 已覆盖新增模板文件；`books/` 仍归下游所有。
+
+TeX 词法分析器读取字面量命令，处理成对嵌套的必选、可选与逐步显示参数并保留源码行号，跳过注释与原样文本，拒绝未受检查的源码导入和动态计算的结果或媒体 id。`bookresult` 通过 `model.load_edition()` 与 `lean.Lock` 解析书中 id，沿用形式结论、定义和开放问题的验证规则。源码中的引用进入 `slides.cited_gids()`，继而接受现有的钉版、分支与冻结状态检查。生成的 `tbook-lean.sty` 包含书中标题和编号、纸面语义色、固定到所钉提交的链接、`PinnedCommit` 与去重账本；它不绑定具体版式，也可用于演示稿自有主题。静态检查不验证报告人撰写的陈述，也不展开任意 TeX 宏。
+
+纸面可视化静态图位于 `viz/<id>/fig-<card>.<lang>.paper.png`；`slides snapshots` 复用现有服务器、停帧、实验卡、字体与浏览器接口，在绘制前应用纸面配色。未知可视化或实验卡、缺失静态图都会使检查失败。`BookFigure` 先比较规范 SVG 与绘图脚本的输出，再通过 `figure.materialize(...,"paper",ground=True)` 和固定版本的 Typst 生成 PDF 图件，继续以现有绘图脚本为唯一图源。
+
+构建暂存目录为 `build/stage/<slug>/beamer/<deck>/<lang>/`。Tectonic 0.16.9 使用固定名称的听众版与备注版入口、固定的 v33 资源包、`SOURCE_DATE_EPOCH` 与确定性模式编译，不启用 shell escape。输出为 `build/slides/<slug>/<deck>-<lang>.pdf` 与 `…-notes.pdf`。现有的逐书幻灯片缓存涵盖学术稿源码、书模型、静态图、图件、令牌、代码、引擎、资源包、时间基准及外部主题和图片内容。构建清单为这些演示稿记录 `kind="academic"` 和 `notes_pdf`；站点复制两种 PDF 及各语言入口页，`manifest.json` 增加 `slides-notes-pdf` 条目，书籍 Release 也收集备注版 PDF。两种 PDF 来自同一份源码，正文总帧数不计附录。账本每帧最多列出十二条不同的引用结果，解析器按相同规则计数。配置还可声明机构、合作者和日期；两种主题都默认隐藏导航按钮，按需启用。纸面静态图按 4 倍像素比截取（3200 × 1800）；共享画布运行时允许这种带标签的印刷静态图使用 4 倍像素比，交互模式仍上限为 2 倍。

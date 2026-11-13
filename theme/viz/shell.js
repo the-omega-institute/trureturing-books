@@ -14,6 +14,10 @@
      TRV.still        thumbMode || shot: no animation; show a representative state at once
      TRV.css(name)    the computed value of a CSS custom property, e.g. TRV.css('--tr-cyan')
      TRV.esc(text)    HTML-escape a string for innerHTML
+     TRV.keepCase(el) under capitals (text-transform: uppercase) keep Greek letters and one-letter variables as written;
+                      runs by itself on the page and on what the page writes (see "capitals that keep their letters")
+     TRV.hudFit()     keep the title, scene buttons and legend clear; reserve their minimum height in a scrolling lab;
+                      runs on resize, fonts, language, text changes and after a kit painter draws
    Load it in <head>, after theme.css and before any page script (src="../assets/shell.js" from a viz page).
    It sets <html data-lang> immediately, so the paired .zh / .en fragments never flash both languages. */
 (function () {
@@ -124,7 +128,8 @@
 
   /** Match a canvas backing store to its CSS box; returns the device pixel ratio used. */
   function fitCanvas(cv) {
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    // Labelled print stills can be captured at 4×; interactive canvases retain the 2× cap.
+    const dpr = Math.min(shot ? 4 : 2, window.devicePixelRatio || 1);
     const w = Math.max(10, Math.round(cv.clientWidth * dpr));
     const h = Math.max(10, Math.round(cv.clientHeight * dpr));
     if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
@@ -182,7 +187,129 @@
   const smooth = (x) => x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x);
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+  /* ---------- capitals that keep their letters ----------
+     The theme sets stage labels, panel and plot headings, card codes, chips and the crumb in capitals
+     (text-transform: uppercase). CSS cannot exempt single characters, and capitals change what a symbol means: δ is
+     not Δ, u is not U. keepCase(node) wraps, in every text node under node whose element is set in capitals, the runs
+     of Greek letters (and µ) and every one-letter Latin variable (a lowercase letter with no Latin letter next to it,
+     an apostrophe between counting as next to it, so "it's" stays a word; "a" between two words is the article) in
+     <span class="keepcase">, which the theme
+     sets as written. textContent is unchanged; words of two or more Latin letters are still set in capitals. It runs
+     on the whole page when the document is ready and then on whatever the page writes (a MutationObserver);
+     kit.stage3 and kit.solid also call it when they write a label. A page never needs to mark these by hand. */
+  const LATIN = 'A-Za-z\\u00c0-\\u024f';
+  let KEEP = null, KEEP1 = null;
+  try {
+    const src = `[\\p{Script=Greek}\\u00b5]+|(?<![${LATIN}]['\\u2019]?)[a-z](?!['\\u2019]?[${LATIN}])`;
+    KEEP = new RegExp(src, 'gu'); KEEP1 = new RegExp(src, 'u');
+  } catch (e) { KEEP = null; /* an engine without Unicode property escapes or lookbehind: capitals as before */ }
+  const SKIP = '.keepcase, script, style, textarea, code, kbd, pre, svg, math, .katex';
+  // whether an element is set in capitals, remembered per element and class list (pages rewrite readouts every frame)
+  const caseOf = new WeakMap();
+  function capitals(el) {
+    const c = caseOf.get(el);
+    if (c && c.cls === el.className) return c.upper;
+    const upper = getComputedStyle(el).textTransform === 'uppercase';
+    caseOf.set(el, { cls: el.className, upper });
+    return upper;
+  }
+  // the English article: "a" between two words of Latin letters ("in a straight line") is a word, not a variable
+  const ARTICLE_BEFORE = new RegExp(`[${LATIN}]{2,} +$`), ARTICLE_AFTER = new RegExp(`^ +[${LATIN}]{2,}`);
+  const article = (s, m) => m[0] === 'a' && ARTICLE_BEFORE.test(s.slice(0, m.index)) && ARTICLE_AFTER.test(s.slice(m.index + 1));
+  function keepCase(node) {
+    if (!KEEP || !node) return;
+    const texts = [];
+    if (node.nodeType === 3) texts.push(node);
+    else if (node.nodeType === 1 || node.nodeType === 11) {
+      const w = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+      for (let t = w.nextNode(); t; t = w.nextNode()) texts.push(t);
+    }
+    for (const t of texts) {
+      const s = t.nodeValue, el = t.parentElement;
+      if (!s || !el || !KEEP1.test(s) || el.closest(SKIP) || !el.isConnected) continue;
+      if (!capitals(el)) continue;
+      const keep = [...s.matchAll(KEEP)].filter((m) => !article(s, m));
+      if (!keep.length) continue;
+      const frag = document.createDocumentFragment();
+      let at = 0;
+      for (const m of keep) {
+        if (m.index > at) frag.append(s.slice(at, m.index));
+        const sp = document.createElement('span'); sp.className = 'keepcase'; sp.textContent = m[0]; frag.append(sp);
+        at = m.index + m[0].length;
+      }
+      if (at < s.length) frag.append(s.slice(at));
+      // a text run straight inside a flex or grid container is one (anonymous) item: keep it one item
+      if (/flex|grid/.test(getComputedStyle(el).display)) { const run = document.createElement('span'); run.append(frag); t.replaceWith(run); }
+      else t.replaceWith(frag);
+    }
+  }
+
+  /* ---------- the stage HUD: title block and scene buttons do not overlap ----------
+     .hud-tl (top left: title and one line of explanation) and .hud-tr (top right: scene buttons) share the top of a
+     stage. Where a line of the title block would run under a button (a narrow screen, the book's narrow frame, many
+     buttons), the stage gets the class hud-stack and the theme gives the buttons a full row, with the title below
+     (--hud-tr-bottom: the bottom edge of the buttons in the stage). Where they do not meet, nothing moves, so a wide
+     screen looks as before. Not in a cover or a still (?thumb=1, ?shot=1), where the buttons are not shown. */
+  const rectsMeet = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+  function hudFit() {
+    hudQueued = false;
+    if (thumbMode || shot) return;
+    for (const tr of document.querySelectorAll('.hud-tr')) {
+      const st = tr.closest('.stage') || tr.parentElement, tl = st && st.querySelector('.hud-tl');
+      if (!tl) continue;
+      st.classList.remove('hud-stack');
+      const buttons = [...tr.children].map((c) => c.getBoundingClientRect()).filter((r) => r.width > 0 && r.height > 0);
+      const lines = [], range = document.createRange(), w = document.createTreeWalker(tl, NodeFilter.SHOW_TEXT);
+      for (let t = w.nextNode(); t; t = w.nextNode()) {   // the lines of text themselves, not the boxes around them
+        range.selectNodeContents(t);
+        for (const r of range.getClientRects()) if (r.width > 0 && r.height > 0) lines.push(r);
+      }
+      if (buttons.some((a) => lines.some((b) => rectsMeet(a, b)))) {
+        st.classList.add('hud-stack');
+        const base = (tl.offsetParent || st).getBoundingClientRect();
+        st.style.setProperty('--hud-tr-bottom', `${Math.ceil(tr.getBoundingClientRect().bottom - base.top)}px`);
+      }
+      // A scrolling lab can grow on a short screen. A cited figure has a fixed frame: its tour note uses the full
+      // width instead, and the quality gate still reports a frame that cannot hold its complete contents.
+      const bl = st.querySelector('.hud-bl');
+      if (bl && !(embed && preset)) {
+        // A display:none block has a zero rectangle at the viewport origin, not at the stage. Only rendered
+        // rectangles contribute to this local band, so scrolling the stage cannot change its required height.
+        const top = st.getBoundingClientRect().top;
+        const band = Math.max(0, ...[tl, tr].map((el) => el.getBoundingClientRect())
+          .filter((r) => r.width > 0 && r.height > 0).map((r) => r.bottom - top));
+        const bottom = parseFloat(getComputedStyle(bl).bottom) || 0;
+        st.style.setProperty('--hud-min-height', `${Math.ceil(band + bl.getBoundingClientRect().height + bottom + 8)}px`);
+      }
+    }
+  }
+  let hudQueued = false;
+  const nextFrame = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : (fn) => setTimeout(fn, 16);
+  const hudLater = () => { if (!hudQueued) { hudQueued = true; nextFrame(hudFit); } };
+  document.addEventListener('DOMContentLoaded', () => {
+    keepCase(document.body);
+    hudFit();
+    if (window.MutationObserver) {
+      new MutationObserver((records) => {
+        let hud = false;
+        for (const r of records) {
+          if (r.type === 'characterData') keepCase(r.target); else r.addedNodes.forEach(keepCase);
+          const el = r.target.nodeType === 1 ? r.target : r.target.parentElement;
+          if (!hud && el && el.closest && el.closest('.hud-tl, .hud-tr, .hud-bl')) hud = true;
+        }
+        if (hud) hudLater();
+      }).observe(document.body, { childList: true, characterData: true, subtree: true });
+    }
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(hudLater);
+      document.querySelectorAll('.hud-tr, .hud-tl, .hud-bl').forEach((el) => { ro.observe(el); if (el.parentElement) ro.observe(el.parentElement); });
+    } else window.addEventListener('resize', hudLater);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(hudLater);
+    langListeners.push(hudLater);
+  });
+
   window.TRV = {
+    keepCase, hudFit,
     reduceMotion, palette, rgb, fonts, alpha, css, esc, fitCanvas, toast, glitch, startGlitch, drawer, mulberry32, gauss, smooth,
     embed, thumbMode, shot, still: thumbMode || shot, preset, figure: embed && !!preset, L, lang: () => lang, setLang, onLang: (fn) => langListeners.push(fn)
   };

@@ -44,6 +44,7 @@ import html
 import importlib
 import json
 import os
+import subprocess
 import posixpath
 import re
 import shutil
@@ -75,7 +76,7 @@ KATEX_CSS = "katex/katex.min.css"  # below assets/, with its fonts in assets/kat
 SITE_I18N: dict[str, dict[str, str]] = {
     "zh": {
         "skip": "跳到正文",
-        "lede": "书中每一条定理都引用 trureturing 中一条已由 Lean 内核验证并冻结的声明：文字负责解释，Lean 负责成立。",
+        "lede": "本书库区分 Lean 内核验证、书面证明与开放问题；只有 LEAN ✓ 表示陈述同一结果的冻结声明。",
         "nav_site": "站点信息",
         "lang_group": "界面语言",
         "source": "源码",
@@ -112,8 +113,7 @@ SITE_I18N: dict[str, dict[str, str]] = {
     },
     "en": {
         "skip": "Skip to content",
-        "lede": "Every theorem in these books cites a declaration in trureturing that the Lean kernel has verified "
-                "and that is frozen: the text explains, Lean establishes.",
+        "lede": "These books distinguish kernel-verified Lean results, written proofs and open questions. Only LEAN ✓ marks a matching frozen declaration.",
         "nav_site": "Site status",
         "lang_group": "Interface language",
         "source": "Source",
@@ -1073,11 +1073,13 @@ def verification_html(view: BookView, ed_lang: str, ui_lang: str, math: dict[str
 
     def row(env: Env, chip: str = "") -> str:
         decls = []
-        for gid in env.lean:
+        for gid in env.lean if env.status != "written-proof" else []:
             lv = render.lean_view(gid, lock)  # a link only where the lock resolves the declaration
             code = f"<code>{wbr(lv['name'] or gid)}</code>"
             decls.append(f'<a href="{esc(lv["url"])}" rel="noopener" title="{esc(gid)}">{code}</a>'
                          if lv["url"] else code)
+        if env.status == "written-proof":
+            decls.append(render.source_html(render.source_view(env)))
         return f"<li>{ref(env)}{title(env, chip)}" + (f'<span class="decls">{"".join(decls)}</span>' if decls else "") + "</li>"
 
     formal = render.verified_envs(model.formal_envs(), lock)
@@ -1093,11 +1095,17 @@ def verification_html(view: BookView, ed_lang: str, ui_lang: str, math: dict[str
     else:
         out.append(f'<p class="note">{esc(t(ui_lang, "theorems_none"))}</p>')
     # Formal results the lock does not back (./tbook check rejects them): red, never in the green list.
-    unverified = [e for e in model.formal_envs() if not any(e is v for v in formal)]
+    unverified = [e for e in model.formal_envs() if e.status != "written-proof" and not any(e is v for v in formal)]
     if unverified:
         text, tip = render.unverified_badge(ui_lang)
         chip = f'<span class="k warn" title="{esc(tip)}">{esc(text)}</span>'
         out.append(f'<ul class="vlist open">{"".join(row(e, chip) for e in unverified)}</ul>')
+    written = [e for e in model.formal_envs() if e.status == "written-proof"]
+    if written:
+        out.append(f'<h3>{esc(config.s(ui_lang, "ledger.written_title"))}</h3>')
+        chip = (f'<span class="k written-proof" title="{esc(config.s(ui_lang, "badge.written_proof_title"))}">'
+                f'{esc(config.s(ui_lang, "badge.written_proof"))}</span>')
+        out.append(f'<ul class="vlist written-proof">{"".join(row(e, chip) for e in written)}</ul>')
     out.append(f'<h3>{esc(config.s(ui_lang, "ledger.open_title"))}</h3>')
     opened = [e for e in model.all_envs() if e.kind in OPEN]
     if opened:
@@ -1237,6 +1245,10 @@ def slides_section(bi: Bi, view: BookView) -> str:
                 size = human_size((view.bdir / p).stat().st_size)
                 links.append(f'<a class="chip" href="{esc(p)}" type="application/pdf" hreflang="{esc(config.bcp47(lang))}">'
                              f'PDF <small>{esc(size)}</small></a>')
+            notes = str(it.get("notes_pdf", {}).get(lang) or "")
+            if notes and _exists(view.bdir, notes):
+                from . import slides
+                links.append(f'<a class="chip" href="{esc(notes)}" type="application/pdf">{esc(slides.t(lang, "notes_pdf"))}</a>')
             if links:
                 rows.append(f'<div class="deck-row" data-ed="{esc(lang)}">{"".join(links)}</div>')
         count = it.get("slides")
@@ -1435,6 +1447,12 @@ def manifest(site: config.Site, views: list[BookView], lock: lean.Lock | None) -
                               "kind": "cover", "lang": ed.lang, "variant": "screen"})
         for it in v.media.get("slides", []):
             pdfs = it.get("pdf") if isinstance(it.get("pdf"), dict) else {}
+            pdfs = dict(pdfs)
+            for lang, rel in sorted(it.get("notes_pdf", {}).items()):
+                f = v.bdir / str(rel)
+                if f.is_file():
+                    files.append({"path": f"{book.slug}/{rel}", "size": f.stat().st_size, "sha256": _sha256(f),
+                                  "kind": "slides-notes-pdf", "lang": lang, "variant": str(it.get("id", "")) or None})
             for lang, rel in sorted(pdfs.items()):
                 f = v.bdir / str(rel)
                 if f.is_file():
@@ -1455,6 +1473,7 @@ def manifest(site: config.Site, views: list[BookView], lock: lean.Lock | None) -
             "media": {part: [str(i.get("id", "")) for i in v.media.get(part, [])] for part in MEDIA_PARTS},
             "files": files,
         })
+    from . import requests
     return {
         "schema": SCHEMA,
         "generated_at": _generated_at(),
@@ -1463,6 +1482,7 @@ def manifest(site: config.Site, views: list[BookView], lock: lean.Lock | None) -
         "template": {"name": name or None, "version": version or None},
         "trureturing": {"repo": lock.repo, "commit": lock.commit, "branch": lock.branch or None} if lock else None,
         "books": books,
+        "formalization_requests": requests.collect(m for view in views for m in view.models.values()),
     }
 
 
@@ -1493,6 +1513,19 @@ def _site_books(books: list[config.Book], out: Path) -> list[config.Book]:
         elif (out / b.slug).is_dir():
             ordered.append(b)
     return ordered + list(selected.values())
+
+
+def post_build(site: config.Site, out: Path) -> None:
+    """Run an explicitly configured repository command after successful assembly."""
+    command = site.raw.get("site", {}).get("post_build")
+    if command is not None:
+        if not isinstance(command, list) or not command or not all(isinstance(a, str) and a for a in command):
+            raise SiteError("site.post_build must be a nonempty array of command arguments")
+        env = dict(os.environ, TBOOK_SITE_OUT=str(out.resolve()))
+        try:
+            subprocess.run(command, cwd=site.root, env=env, check=True)
+        except (OSError, subprocess.CalledProcessError) as exc:
+            raise SiteError(f"site.post_build failed: {exc}") from exc
 
 
 def build(site, books, out_dir: Path, only: set[str] | None = None, *, build_root: Path | None = None) -> Path:
@@ -1549,4 +1582,5 @@ def build(site, books, out_dir: Path, only: set[str] | None = None, *, build_roo
                                        encoding="utf-8")
     if problems:
         raise SiteError(f"site written to {out} with {len(problems)} problem(s):\n  " + "\n  ".join(problems))
+    post_build(site, out)
     return out
