@@ -279,7 +279,12 @@
   function drawRegister(ctx, box) {
     const hop = walk(S.idx)[0], done = hopsDone() >= 1;
     const other = { base: 0x2000, slot: 0, value: MEM[0x2000][0] };
-    const fs = clamp(box.w / 26, 10, 14), bh = clamp(fs * 2.6, 28, 40), bw = clamp(box.w * 0.36, 86, 170);
+    // each row is its caption, the two labels and the two boxes: bh + 2.95·fs from the caption's top to the boxes' bottom,
+    // and 0.7·fs between the rows; a short box sets the type smaller until both rows fit its height
+    const rowsH = (f) => 2 * clamp(f * 2.6, 28, 40) + 6.6 * f;
+    let fs = clamp(box.w / 26, 10, 14);
+    while (fs > 8 && rowsH(fs) > box.h - 2) fs -= 0.25;
+    const bh = clamp(fs * 2.6, 28, 40), bw = clamp(box.w * 0.36, 86, 170);
     const cx = box.x + box.w / 2, rows = [];
     const pair = (y, h, A, cap) => {
       const same = h.base === h.value, xl = cx - bw - fs * 1.4, xr = cx + fs * 1.4;
@@ -293,7 +298,10 @@
       ctx.globalAlpha = A; text(ctx, eq, cx, y, same ? P.cyan : P.dim, { align: 'center', size: fs * 1.9, weight: 700 }); ctx.globalAlpha = 1;
       rows.push({ p: h.base, star: h.value, sign: eq });
     };
-    const y1 = box.y + Math.max(box.h * 0.3, bh / 2 + fs * 3.4), y2 = Math.min(box.y + box.h - bh / 2 - 2, y1 + bh + fs * 4.2);
+    // the second row keeps to the box; when the box's bottom holds it up, the first row moves up so the second row's
+    // caption stays clear of the first row's boxes (never above the box's top)
+    const y0 = box.y + Math.max(box.h * 0.3, bh / 2 + fs * 3.4), y2 = Math.min(box.y + box.h - bh / 2 - 2, y0 + bh + fs * 4.2);
+    const y1 = Math.max(box.y + bh / 2 + fs * 2.95, Math.min(y0, y2 - bh - fs * 3.65));
     pair(y1, hop, 1, L('指针寄存器 p 与它读出的 *p', 'the pointer register p and what it reads, *p'));
     pair(y2, other, 0.55, L('对照：一枚普通指针', 'for contrast: an ordinary pointer'));
     geo.reg = rows;
