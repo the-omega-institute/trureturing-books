@@ -32,13 +32,14 @@
 .access button[aria-pressed="true"] { background: transparent; color: var(--dim); border-style: dashed; }
 .chip[aria-pressed="true"] .m { color: inherit; }
 
-/* the stage's own hud: the scene chips stay on one row; long titles wrap under them on narrow screens */
+/* the stage's own hud: the scene chips stay on one row; where the title would run under them, the shared runtime
+   (.hud-stack) puts it below them */
 :root:not([data-shot]) .hud-tl { max-width: calc(100% - 300px); }
 @media (max-width: 1080px) {
   :root:not([data-shot]) .hud-tl { max-width: calc(100% - 290px); }
 }
 @media (max-width: 760px) {
-  :root:not([data-shot]) .hud-tl, .hud-tl { top: 50px; max-width: calc(100% - 36px); }
+  :root:not([data-shot]) .hud-tl, .hud-tl { max-width: calc(100% - 36px); }
   .hud-tl .big { font-size: 12.5px; line-height: 1.2; }
   .hud-tl .sub { font-size: 11px; line-height: 1.25; }
 }
@@ -48,7 +49,7 @@
   :root:not([data-embed]):not([data-thumb-mode]) .lab .center { grid-template-rows: minmax(470px, 64vh) auto auto; }
   .hud-tr { top: 8px; right: 10px; gap: 4px; }
   .hud-tr .chip { min-height: 44px; padding: 4px 8px; font-size: 10.5px; letter-spacing: 0.04em; }
-  :root:not([data-shot]) .hud-tl, .hud-tl { top: 60px; left: 14px; max-width: calc(100% - 28px); }
+  :root:not([data-shot]) .hud-tl, .hud-tl { left: 14px; max-width: calc(100% - 28px); }
   .chip, .preset, .tbtn, .langs button, .access button { min-height: 44px; }
   .tbtn { min-width: 44px; }
   .access { grid-template-columns: repeat(4, minmax(0, 1fr)); }
