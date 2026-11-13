@@ -543,8 +543,9 @@
     const big = $('hudBig'), chips = $('sceneChips'), tl = big.parentElement;
     big.textContent = full; tl.style.marginTop = '';
     if (TRV.thumbMode || TRV.shot || chips.offsetParent === null) return;
-    // measure in the title's own row: where a title still met the buttons, the theme (TRV.hudFit, after each draw) has
-    // set the stage .hud-stack and put the title under them, where the full title never meets them and would stay
+    // measure in the title's own row: where a title still met the buttons, the theme (TRV.hudFit, once the text is
+    // written and after each draw) has set the stage .hud-stack and put the title under them, where the full title
+    // never meets them and would stay
     $('stage').classList.remove('hud-stack');
     const b = chips.getBoundingClientRect(), ink = () => { const r = document.createRange(); r.selectNodeContents(big); return r.getBoundingClientRect(); };
     if (!overlaps(ink(), b)) return;
@@ -610,7 +611,10 @@
     const leg = LEG[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
   }
-  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plotA')]);
+  // setHud measures the title with the stage's .hud-stack taken off; once the title and its second line are written,
+  // the theme decides again whether the title block goes under the scene buttons (where the second line meets them),
+  // so the layout below measures the title block where it is shown, not where it stood while being measured
+  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plotA')]);
 
   /* ---------- controls ---------- */
   let stopAt = null;
