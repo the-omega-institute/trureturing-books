@@ -3421,6 +3421,22 @@
       "line": 214,
       "signature": "theorem uniform_operator_rotation (J : Matrix l s ℂ) (C P : Matrix l l ℂ) (p : ℝ) (hJ : Jᴴ * J = 1) (hC : Cᴴ * C = 1) (hP : Pᴴ = P) (hPP : P * P = P) (hA : (P * (C * J))ᴴ * (P * (C * J)) = (p : ℂ) • (1 : Matrix s s ℂ)) (hp : 0 < p) (hple : p ≤ 1) : let U"
     },
+    "D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse": {
+      "module": "D5/S3/Quantum/Recovery/FiniteKrausReversibility",
+      "name": "D5.S3.Quantum.Recovery.FiniteKrausReversibility.scalar_products_construct_left_inverse",
+      "kind": "theorem",
+      "statement_id": "sha256:d60d51c3e368805b95d4b276500065241b891930acd0cc9aac33415c9fc6a877",
+      "line": 99,
+      "signature": "theorem scalar_products_construct_left_inverse (E : s → Matrix n d ℂ) (hTP : (∑ a, (E a)ᴴ * E a) = 1) (v : d) (c : Matrix s s ℂ) (hE : ∀ a b, (E a)ᴴ * E b = c a b • (1 : Matrix d d ℂ)) : ∃ r : ℕ, ∃ A : Fin r → Matrix d n ℂ, (∑ b, (A b)ᴴ * A b) = 1 ∧ ∀ X : Matrix d d ℂ, (∑ b, A b * (∑ a, E a * X * (E a)ᴴ) * (A b)ᴴ) = X"
+    },
+    "D5/S3/Quantum/Recovery/KrausLeftInverseNecessity.left_inverse_error_products": {
+      "module": "D5/S3/Quantum/Recovery/KrausLeftInverseNecessity",
+      "name": "D5.S3.Quantum.Recovery.KrausLeftInverseNecessity.left_inverse_error_products",
+      "kind": "theorem",
+      "statement_id": "sha256:ad0ec123207d221a4ca3d555d32acce658cfd96f65ea766e3462b4e6a81dd41a",
+      "line": 82,
+      "signature": "theorem left_inverse_error_products (E : s → Matrix n d ℂ) (A : t → Matrix d n ℂ) (hA : (∑ b, (A b)ᴴ * A b) = 1) (hleft : ∀ X : Matrix d d ℂ, (∑ b, A b * (∑ a, E a * X * (E a)ᴴ) * (A b)ᴴ) = X) (j₀ : d) (a c : s) : (E a)ᴴ * E c = (∑ b, star ((A b * E a) j₀ j₀) * ((A b * E c) j₀ j₀)) • (1 : Matrix d d ℂ)"
+    },
     "D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery": {
       "module": "D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding",
       "name": "D5.S3.Quantum.Recovery.OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery",
