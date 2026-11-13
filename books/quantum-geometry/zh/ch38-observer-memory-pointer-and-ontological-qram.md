@@ -144,6 +144,61 @@ theorem correctness :
 
 [@thm-ch38-reversible-qram-correctness] 的对象是**固定经典数据上的理想布尔可逆网络及其复线性作用**。`route` 递归施加左右两支的门，`readLeaves` 串行经过全部叶子；这一定理没有给出整次查询的电路深度、总门数或噪声代价为 $O(\log N)$ 的界，也没有建立总线的物理局域性、`wait / left / right` 三态路由器实现或未知量子存储的复制。Arunachalam 等人的第 IV 节也明确提醒其总线与所有存储位相互作用，未必具有物理现实性。上框文献所计的每分支活跃路径、Page–Wootters 机制，以及观察者—宇宙存储的 `MODEL` 诠释，均保留各自的依据边界。下面的六开关图仍是上框物理桶链式提案的路径示意，不是本定理的完整门调度。
 
+这里还须把布尔网络与真正含有空间模式的三态构造分开。Hann、Lee、Girvin 与 Jiang 的 [arXiv:2012.05340v2](https://arxiv.org/pdf/2012.05340v2) 第 II.B 节、图 1(b)、附录 A 的顺序装载说明及附录 B 式 (B1)，给出下面采用的理想构造。以下名称均属于 `D5.S3.Quantum.Routing.HannSpatialQram`；地址仍用上面的 $A_n$，其余状态与操作独立于布尔网络。
+
+三态基为 $Q=\{W,0,1\}$；`encode false = zero`，`encode true = one`。$W$ 对路由器表示等待，对空间模式表示真空。空间树 `Tree n = Q × Interior n` 的首坐标是入射模式，`Interior 0 = Unit`，而 `Interior (n+1) = Q × Tree n × Tree n`：首项是路由器，两个子树的入射模式就是父节点的左右输出模式，并不另复制一份。完整基配置为 `State n = (Fin n → Q) × Q × Tree n`，依次是互相分离的地址槽、外部总线、空间树；`vacuum` 将所有路由器和模式置为 $W$。
+
+`absorb` 在入射模式与路由器之间作完整三态 SWAP；`route` 先在路由器为 $0$ 时交换入射与左输出，再在路由器为 $1$ 时交换入射与右输出。这些门在任意脏基配置上也是字面意义的置换。`load n k` 按固定顺序把前 $k$ 个地址槽逐个与根入射模式交换，再经已编程层送到等待的路由器；门的调度只依赖深度与索引，不依赖地址值。`loading n a p k` 中，已消耗的地址槽为 $W$，其余仍为编码地址位，外部总线保留任意 $p\in Q$，`programmed n a k` 只在地址前缀路径的前 $k$ 个路由器中保存这些位，所有空间模式与其他路由器均为 $W$。
+
+`transport n` 逐层作局部受控 SWAP，将根入射载荷送至空间叶；`arrived n a p` 保留完整编程路由器，仅在叶 $a$ 放置 $p$，其余模式为 $W$，`leaf` 读实际叶模式。固定经典存储 $D:A_n\to\operatorname{Bool}$ 的 `readLeaves n D` 在每个叶施加式 (B1) 的 $\widetilde X^{D(i)}$：数据为真时交换 $0,1$，并始终固定 $W$。`forward n` 依次完整装载地址、交换外部总线与根入射模式、执行输运；`query n D` 为该前向过程、叶读出、该前向过程的精确逆过程。`clean n a b = loading n a (encode b) 0`。
+
+记 $S_n=\operatorname{State}(n)$，$Q_{n,D}=\operatorname{queryMatrix}(n,D)$ 是 `query` 在整个 $S_n$ 上的复置换矩阵。任意 $\psi:A_n\times\operatorname{Bool}\to\mathbb C$ 的初始化嵌入为
+
+$$
+\operatorname{initialized}(n,\psi)(s)
+=\sum_{a\in A_n}\sum_{b\in\operatorname{Bool}}
+\begin{cases}\psi(a,b),&s=\operatorname{clean}(n,a,b),\\0,&\text{其他情形}.\end{cases}
+$$
+
+::: {.theorem #thm-ch38-spatial-qutrit-qram-correctness title="任意深度顺序空间三态 QRAM 的装载、输运与干净查询" lean="D5/S3/Quantum/Routing/HannSpatialQram.correctness"}
+在上述命名空间中，`correctness` 的完整声明类型如下：
+
+```lean
+correctness :
+    (∀ (n : ℕ) (a : Address n) (b : Qutrit) (k : ℕ), k ≤ n →
+      load n k (loading n a b 0) = loading n a b k) ∧
+    (∀ (n : ℕ) (a : Address n) (p : Qutrit),
+      transport n (input n (programmed n a n) p) = arrived n a p ∧
+      ∀ i : Address n, leaf n (transport n (input n (programmed n a n) p)) i =
+        if i = a then p else wait) ∧
+    (∀ (n : ℕ) (D : Address n → Bool) (a : Address n) (b : Bool),
+      query n D (clean n a b) = clean n a (xor b (D a))) ∧
+    (∀ (n : ℕ) (D : Address n → Bool),
+      (queryMatrix n D)ᴴ * queryMatrix n D = 1 ∧
+      queryMatrix n D * (queryMatrix n D)ᴴ = 1 ∧
+      ∀ ψ : Address n × Bool → ℂ,
+        queryMatrix n D *ᵥ initialized n ψ =
+          initialized n (fun s => ψ (s.1, xor s.2 (D s.1))))
+```
+
+四个合取项分别是：
+
+1. 对任意 $n\in\mathbb N$、$a\in A_n$、外部总线标签 $p\in Q$ 与自然数 $k\le n$，`load n k (loading n a p 0) = loading n a p k`。
+2. 对任意 $n\in\mathbb N$、$a\in A_n$ 与 $p\in Q$，`transport n (input n (programmed n a n) p) = arrived n a p`，并且对每个 $i\in A_n$，输运后 `leaf` 的值在 $i=a$ 时为 $p$，否则为 $W$。
+3. 对任意 $n\in\mathbb N$、$D:A_n\to\operatorname{Bool}$、$a\in A_n$ 与两个布尔总线初值中的任意一个 $b$，$\operatorname{query}(n,D)(\operatorname{clean}(n,a,b))=\operatorname{clean}(n,a,b\mathbin{\oplus}D(a))$。
+4. 对任意 $n\in\mathbb N$、$D:A_n\to\operatorname{Bool}$，$Q_{n,D}^\dagger Q_{n,D}=1$ 与 $Q_{n,D}Q_{n,D}^\dagger=1$ 在整个 $S_n$ 上同时成立；对任意复振幅 $\psi:A_n\times\operatorname{Bool}\to\mathbb C$，$Q_{n,D}\operatorname{initialized}(n,\psi)=\operatorname{initialized}(n,(a,b)\mapsto\psi(a,b\mathbin{\oplus}D(a)))$，不要求归一化。
+
+所有量词包括 $n=0$：此时没有地址槽或路由器，但有唯一空地址与一个空间叶，查询仍实际交换总线、读出并返回。第 1、2 款允许载荷为 $W$，此时输运后的所有叶均为真空；第 3、4 款使用编码的两个布尔总线标签。
+:::
+
+::: proof
+先对注入次数归纳：局部完整 SWAP 将下一地址位沿已编程前缀送到等待的路由器，延长此前缀，清空经过的入射与输出模式，未选子树仍是真空。这给出每个 $k\le n$ 的完整 `loading` 状态，而非只给最终路由位。再沿空间树归纳受控 SWAP，得到任意三态载荷的完整 `arrived` 状态及每个叶的值。叶读出固定真空，仅将占据标签改为 `encode (b XOR D(a))`；逆转整个前向门序列遂恢复地址槽、总线位置、全部等待路由器与真空空间模式。深度零的唯一叶给出两次归纳的实际起点。
+
+最后，实际查询置换的复矩阵在整个基空间上满足两个伴随恒等式；在初始化支撑上，以逆置换拉回任意联合地址—总线振幅，异或的自逆性给出第 4 款。完整证明由 Lean 内核检查。
+:::
+
+[@thm-ch38-spatial-qutrit-qram-correctness] 验证的是上述**固定经典数据、顺序装载的理想空间三态电路**，不将它在脏配置上的置换等同于附录 A 图 10 的流水线调度，也不把早期架构文献的辅助比特 $f$ 等同于 $W$。它不给出物理哈密顿量、硬件实现、噪声、资源、深度或叠加态总活跃节点数的界，更不复制未知量子态。前述独立布尔网络与一般加法群读出、Page–Wootters 文献机制、2008 年架构的每分支路径计数和观察者—宇宙 `MODEL` 均保留各自边界。下图仍只是该架构文献的路径示意。
+
 ::: {.viz src="pointer-ontology-deref" preset="qram_tree" height="500"}
 **一个地址只拨动一条路上的 6 个开关。** 地址 41 = 101001₂ 从树根进来，每一拍按一位拨一层：六拍后青色的路通到第 42 格，63 个开关里只亮这 6 个；同一时刻，底部琥珀色的扫描读头才读过 6 格。树的深度与开关数照 [@rem-ch38-qram-page-wootters-literature] 的桶链式 QRAM 画出（文献结果，未在本书形式化）。
 :::
