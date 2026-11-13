@@ -293,12 +293,12 @@
   const nChips = kit.chips($('nChips'), 'n', (v) => { if (v == null) return; leave(); clock.pause(); setN(Number(v)); });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
 
-  /* ---------- experiment cards ---------- */
+  /* ---------- experiment cards: N, the step a played card stops at (to), and the frame a still shows ---------- */
   const PRESETS = {
-    four: { N: 4, to: 1 },
-    eight: { N: 8, to: 2 },
-    over: { N: 8, to: 3 },
-    sqrt: { N: 256, to: 12 }
+    four: { N: 4, to: 1, still: 1 },
+    eight: { N: 8, to: 2, still: 2 },
+    over: { N: 8, to: 3, still: 3 },
+    sqrt: { N: 256, to: 12, still: 12 }
   };
   const NOTES = {
     four: ['N = 4，θ = 30°。只走一步，箭头从 30° 转 60° 到 90°，正好立在目标轴上：青色的影子长 1，品红的影子消失，右边第 1 根柱子顶到 1。', 'N = 4, θ = 30°. One step turns the arrow by 60° from 30° to 90°, exactly onto the target axis: the cyan shadow has length 1, the magenta one vanishes, and bar 1 on the right reaches 1.'],
@@ -313,12 +313,12 @@
     setN(p.N);
     // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.to); return; }
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still === 'end' ? clock.max : p.still); return; }
     clock.set(0);
     stopAt = p.to < clock.max - 1e-9 ? p.to : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动初始态改 θ，换 N，用 ← → 一面一面地照镜子，或点右边的柱子跳到那一步。随时可以再选一张卡。', 'Free play: drag the initial state to set θ, change N, apply the mirrors one at a time with ← →, or click a bar to jump to that step. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

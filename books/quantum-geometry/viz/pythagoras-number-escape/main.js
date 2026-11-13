@@ -399,6 +399,8 @@
   kit.keys({ 1: () => { leave(); setScene('pell'); }, 2: () => { leave(); setScene('split'); }, 3: () => { leave(); setScene('curve'); } });
 
   /* ---------- experiment cards ---------- */
+  // the card that plays, with the frame its still shows (kit.cards writes it onto the card as data-still)
+  const PRESETS = { hippasus: { still: 3 } };
   const NOTES = {
     hippasus: ['1/1、3/2、7/5、17/12、41/29……这些分数一上一下地夹住 √2，沿线看很快就分不出差别。但 m² 与 2n² 是两个整数，从不相等：放大镜里永远差着一格。', '1/1, 3/2, 7/5, 17/12, 41/29, … squeeze √2 from above and below, and along the line they soon cannot be told apart. But m² and 2n² are two integers that are never equal: in the magnifier they are always one cell apart.'],
     locked: ['√7 的周期是 4（偶数）。差值在 −3、+2、−3、+1 之间循环，每次回到 +1，却永远碰不到 −1。7 是线素数。', 'The period of √7 is 4 (even). The gap cycles through −3, +2, −3, +1 and returns to +1 each time, but never touches −1. 7 is a line prime.'],
@@ -412,7 +414,9 @@
     S.sato = false;
     const pellAt = (d, t, play) => {
       S.d = d; fD.set(DS.indexOf(d)); setScene('pell', t);
-      if (play && !TRV.still && !(booting && !TRV.embed)) { clock.set(0); if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
+      if (!play) return;
+      if (TRV.still || (booting && !TRV.embed)) clock.set(PRESETS[id].still);
+      else { clock.set(0); if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
     };
     const curve = (c) => { S.curve = c; curveChips.set(c, true); };
     if (id === 'hippasus') pellAt(2, 3, true);
@@ -422,7 +426,7 @@
     else if (id === 'count') { curve('cm'); setScene('curve', ODD.indexOf(13)); }
     else if (id === 'sato') { curve('gen'); setScene('curve', ODD.indexOf(53)); S.sato = true; paint(); }
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、换 d、拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, change d, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

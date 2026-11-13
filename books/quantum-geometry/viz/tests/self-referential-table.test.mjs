@@ -15,7 +15,8 @@
 // when its error is ≤ 10⁻¹², and may predict a same-rank projection only under ‖Δ‖₂ < (√3 − 1)/2 (strict); the suite
 // verifies both with its own products, power iteration and Sturm counts, including the counterexamples that refute a
 // uniform few-step promise (N = r = 8, ε = −0.36 on (6, 7)) and the old ‖Δ‖₂ < ½ guarantee (T = I, Δ = aEᵢᵢ).
-import { session, stageFirstChecks, solidChecks, solidPixels, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, solidPixels, settle, until, openStill } from '../../../../tools/node/viz-testkit.mjs';
+import { withReadySolid } from './solid-readiness.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'self-referential-table';
 const T = await session();
@@ -529,6 +530,7 @@ const tableHere = (N, r) => {
   return Array.from({ length: N }, (_, i) => Array.from({ length: N }, (__, j) => v.reduce((s, b) => s + b[i] * b[j], 0)));
 };
 const rowColGap = (A, i, j) => Math.max(...A.map((_, k) => Math.abs(A[i][k] - A[k][j])));
+await page.evaluate(() => window.TRV.kit.pause());
 { const ep = await T.open(BOOK, ID, '?lang=en', { locale: 'en-US' });
   await settle(ep);
   const labels = () => ep.evaluate(() => [...document.querySelectorAll('#stage .tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => t.textContent.trim()));
@@ -547,13 +549,15 @@ const rowColGap = (A, i, j) => Math.max(...A.map((_, k) => Math.abs(A[i][k] - A[
   check('read labels (en, N = 12, rank 1, clicked row 1 / column 5): every cell is 1/12, so row 1 = column 5 is said, and it is true',
     es.r === 1 && es.i === 0 && es.j === 4 && A.flat().every((x) => Math.abs(x - 1 / 12) < 1e-15) && rowColGap(A, 0, 4) < 1e-15 && lab.length === 1 && lab[0] === 'row 1 = column 5', JSON.stringify(lab));
   // every allowed state: N = 4, 8, 12, every rank, every cell
-  const sweep = await ep.evaluate(() => {
+  const sweep = await ep.evaluate(async () => {
     const D = window.TABLE_DEBUG, out = [], seen = () => [...document.querySelectorAll('#stage .tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => t.textContent.trim());
     for (const N of [4, 8, 12]) for (let r = 1; r <= N; r++) for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) {
       if (D.state.N !== N) D.setN(N);
       if (D.state.r !== r) D.setR(r);
       D.select(i, j); window.TRV.kit.flush();
       const s = D.state; out.push([N, r, i, j, s.N === N && s.r === r && s.i === i && s.j === j && s.scene === 'read', seen()]);
+      // Let rendering and DOM observers finish between rows of this exhaustive sweep.
+      if (j === N - 1) await new Promise((resolve) => setTimeout(resolve, 0));
     }
     return out;
   });
@@ -574,6 +578,10 @@ check('no page error, console error or failed request (page-specific part)', T.e
 
 {   // the solid part keeps its own names (residual, readOk, lam0) apart from the healing and 90° checks above
 /* ---------- the solid: a 3D slice of ℝᴺ and the image of its unit ball ---------- */
+// Start this independent section on a fresh, foreground page after the long rendering sweep.
+await page.bringToFront();
+await T.goto(BOOK, ID, '?lang=en');
+await settle(page);
 const sol = async () => { await settle(page); return page.evaluate(() => window.TABLE_DEBUG.solid()); };
 const orthonormal = (Q) => Q.every((a, i) => Q.every((b, j) => Math.abs(dot(a, b) - (i === j ? 1 : 0)) < 1e-12));
 /** max ‖Aq − λq‖ over the slice: zero exactly when A maps each q of the slice to λq. */
@@ -736,12 +744,12 @@ check('solid: a drag across the ball turns it and leaves the chosen cell alone',
 
 // last: the testkit's solid gates on the 90° card at 45° (they turn the camera, so they come after every check above)
 await pick('orthogonal_zero'); await page.evaluate(() => window.TABLE_DEBUG.seek(45));
-await solidChecks(T, BOOK, ID, page);
+await solidChecks(withReadySolid(T), BOOK, ID, page);
 /* ---------- cited figures at the size a chapter shows them ----------
    A chapter cites a card in an iframe 500 px high: about 334 px wide on a 390 px phone, 760 px in a book page. In the
    phone's frame a long note once took ~180 px of the 500 and left the stage ~210 px: the 8 × 8 table and its side panel dropped out, and the ball, its caption and the legend ran into each other collided with the
    captions and the legend, and the lit solid shrank to a few per cent of the stage. These checks look at the frame
-   itself: nothing scrolls; the note bar stays short and its full note scrolls to the last line; the stage keeps most of
+   itself: nothing scrolls; the complete note stays short and needs no internal scrolling; the stage keeps most of
    the frame; no ink of the flat canvas or the WebGL canvas and no label lies under the title, its second line or the
    legend; the solid draws nothing inside the flat drawings; labels stay on the stage and apart; the lit solid covers
    ≥ 12 % of the stage at the card's first and last frame; and the table keeps cells ≥ 11 px, the ball a radius ≥ 60 px and the side panel ≥ 90 × 70 px. */
@@ -773,7 +781,7 @@ await solidChecks(T, BOOK, ID, page);
     const tags = [...st.querySelectorAll('.tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => [t.textContent.trim(), box(t.getBoundingClientRect())]);
     const fb = document.getElementById('flat').getBoundingClientRect();
     const panels = (() => { const L = window.TABLE_DEBUG.layout(); return [['the table', L.table], ['the side panel', L.panel]]; })().map(([what, b]) => [what, { x: fb.left + b.x, y: fb.top + b.y, w: b.w, h: b.h }]);
-    const what = document.querySelector('.tour .what'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
+    const what = document.querySelector('.tour .tour-note'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
     const full = what.textContent.trim().endsWith(note.textContent.trim()) && note.textContent.trim().length > 20;
     const scrolls = what.scrollHeight > what.clientHeight + 1, oy = getComputedStyle(what).overflowY;
     what.scrollTop = what.scrollHeight; const reached = what.scrollTop + what.clientHeight >= what.scrollHeight - 1; what.scrollTop = 0;
@@ -801,13 +809,14 @@ await solidChecks(T, BOOK, ID, page);
   for (const [tag, vp, lang, cards] of [['phone frame 334 × 500', { width: 334, height: 500 }, 'en', FIG], ['phone frame 334 × 500', { width: 334, height: 500 }, 'zh', ['dual_read', 'heal']], ['book page 760 × 500', { width: 760, height: 500 }, 'en', FIG]]) {
     const bad = { frame: [], note: [], words: [], solid: [], labels: [], share: [], read: [] };
     for (const card of cards) {
-      const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${card}`, { viewport: vp, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+      const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${card}`, { viewport: vp, locale: lang === 'en' ? 'en-US' : 'zh-CN', reducedMotion: 'reduce' });
       await until(pg, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000);
-      await until(pg, (d) => !window[d].state.playing, 'TABLE_DEBUG', 120000);
+      // Inspect the ending frame directly; the card controls have separate playback checks.
+      await pg.evaluate((d) => window[d].seek(window[d].state.max), 'TABLE_DEBUG');
       await settle(pg);
       const f = await facts(pg), id = `${card} (${lang})`;
       if (f.docScroll > 0 || f.docWide > 0 || f.stageH < 0.72 * f.vp.h) bad.frame.push(`${id}: scroll ${f.docScroll}/${f.docWide}, stage ${Math.round(f.stageH)} px`);
-      if (f.tourH > 84 || !f.note.full || !f.note.scrollable || !f.note.reached || !f.note.btns) bad.note.push(`${id}: ${Math.round(f.tourH)} px ${JSON.stringify(f.note)}`);
+      if (f.tourH > 84 || !f.note.full || f.note.scrolls || !f.note.reached || !f.note.btns) bad.note.push(`${id}: ${Math.round(f.tourH)} px ${JSON.stringify(f.note)}`);
       if (f.under.length) bad.words.push(`${id}: ${f.under.slice(0, 3).join(', ')}`);
       if (f.solidIn.length) bad.solid.push(`${id}: ${f.solidIn.join(', ')}`);
       if (f.tagOut.length || f.tagHit.length) bad.labels.push(`${id}: ${[...f.tagOut.map((t) => `off stage: ${t}`), ...f.tagHit].slice(0, 3).join(', ')}`);
@@ -818,15 +827,39 @@ await solidChecks(T, BOOK, ID, page);
     }
     const what = `${tag}, ${lang}, ${cards.length === FIG.length ? 'every cited card' : cards.join(' + ')}`;
     check(`cited figure, ${what}: nothing scrolls and the stage keeps ≥ 72 % of the frame`, !bad.frame.length, bad.frame.join(' | '));
-    check(`cited figure, ${what}: the note bar stays ≤ 84 px, holds the card's whole note and scrolls to its last line, ◀ ▶ in the frame`, !bad.note.length, bad.note.join(' | '));
+    check(`cited figure, ${what}: the note bar stays ≤ 84 px, holds the card's complete note without internal scrolling, ◀ ▶ in the frame`, !bad.note.length, bad.note.join(' | '));
     check(`cited figure, ${what}: no flat drawing, no solid and no label under the title, its second line or the legend`, !bad.words.length, bad.words.join(' | '));
     check(`cited figure, ${what}: the solid draws nothing inside the table or its side panel`, !bad.solid.length, bad.solid.join(' | '));
     check(`cited figure, ${what}: every label stays on the stage, and no two labels sit on each other`, !bad.labels.length, bad.labels.join(' | '));
     check(`cited figure, ${what}: the lit solid covers ≥ 12 % of the stage at the card's first and last frame`, !bad.share.length, bad.share.join(' | '));
     check(`cited figure, ${what}: the table keeps cells ≥ 11 px, the ball a radius ≥ 60 px and the side panel ≥ 90 × 70 px`, !bad.read.length, bad.read.join(' | '));
   }
+  // the full-rank 90° state in a phone's cited figure (compact layout, short legends): the legend still names Tψ = ψ
+  // (T = I) and no sin θ, the caption under the ball says there is no complement, and nothing lies under the words
+  { const pg = await T.open(BOOK, ID, '?embed=1&lang=en&preset=full', { viewport: { width: 334, height: 500 }, locale: 'en-US', reducedMotion: 'reduce' });
+    await until(pg, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000);
+    await pg.evaluate((d) => window[d].scene('perp', 90), 'TABLE_DEBUG');
+    await settle(pg);
+    const f = await facts(pg);
+    const g = await pg.evaluate((d) => { const D = window[d], G = D.solid(); return { s: D.state, has: D.perp().has, mode: (D.layout() || {}).mode, cap: G ? G.caption.join(' ') : '', legend: document.getElementById('legend').textContent, items: document.querySelectorAll('#legend > span').length }; }, 'TABLE_DEBUG');
+    check('cited figure, phone frame 334 × 500, en, FULL → 90°: compact layout; the short legend names Tψ = ψ (T = I) and no sin θ, the caption says no complement, nothing under the words',
+      g.mode === 'compact' && g.s.N === 8 && g.s.r === 8 && g.s.scene === 'perp' && g.has === false && g.items === 2 && /Tψ = ψ/.test(g.legend) && /T = I/.test(g.legend) && !/sin θ/.test(g.legend) && /no complement/.test(g.cap) && !f.under.length,
+      JSON.stringify({ mode: g.mode, legend: g.legend, cap: g.cap, under: f.under.slice(0, 3) }));
+    await pg.context().close();
+  }
 }
 
+}
+
+
+// Publication stills use clock coordinates and retain the values the captions describe.
+for (const lang of ['zh', 'en']) for (const [card, time] of [['expand_table', 3], ['orthogonal_zero', 90]]) {
+  const pg = await openStill(T, BOOK, ID, card, lang);
+  const q = await pg.evaluate(() => window.TABLE_DEBUG.state);
+  const declared = await pg.getAttribute(`[data-preset="${card}"]`, 'data-still');
+  check(`still ${card} (${lang}): its declared frame matches the clock and caption`,
+    !q.playing && Math.abs(q.t - time) < 1e-9 && (declared === 'end' ? q.t === q.max : Number(declared) === q.t) && (q.r === (card === 'expand_table' ? 4 : 3)), JSON.stringify({ q, declared }));
+  await pg.context().close();
 }
 
 check('no page error, console error or failed request (solid part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));

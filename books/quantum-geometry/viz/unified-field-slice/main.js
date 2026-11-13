@@ -513,7 +513,7 @@
     stopAt = p.to < clock.max - 1e-9 ? p.to : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景，用时间轴推快度、走回路或推视界；在“时钟”里拖动圆上的点，在“回路”里改转角与平面。随时可以再选一张卡。', 'Free play: switch scenes, and use the rail to push the rapidity, walk the loop or push the horizon; drag the point on the circle in Clock, and change the angle and the planes in Loop. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

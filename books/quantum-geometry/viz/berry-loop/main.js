@@ -467,7 +467,7 @@
     else clock.play();
     paint();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动青色的顶点、加减顶点、反着走，或换一个场景。随时可以再选一张卡。', 'Free play: drag the cyan corners, add or remove one, reverse the loop, or change the scene. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

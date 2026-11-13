@@ -9,6 +9,8 @@
 import fs from 'node:fs';
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
+import { figureNoteChecks } from './figure-note-checks.mjs';
+
 const BOOK = 'quantum-geometry', ID = 'chsh-dial';
 const T = await session();
 const { check } = T;
@@ -61,6 +63,7 @@ function toy(d) {
 
 /* ---------- the gates every stage-first page must pass ---------- */
 await stageFirstChecks(T, BOOK, ID);
+await figureNoteChecks(T);
 
 /* ---------- page-specific checks ---------- */
 const page = await T.goto(BOOK, ID, '?lang=zh');

@@ -942,7 +942,7 @@
     stopAt = c.to == null ? null : c.to;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景，拖输入角或尺子（也可以直接在圆盘上拖），切换学到的事实，拨舞台上的开关，或拖动时间轴。随时可以再选一张卡。', 'Free play: switch scenes, move the input angle or the ruler (or drag them on the disc), change the learned fact, flip the switch on the stage, or scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

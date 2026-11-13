@@ -324,6 +324,15 @@
       "lean": [
         {
           "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning.conditionalState_isState"
+        },
+        {
+          "gid": "D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation"
+        },
+        {
+          "gid": "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"
         }
       ]
     },
@@ -2632,7 +2641,11 @@
           "href": "{trureturing}/D5/S3/QuantumBounds/LagrangeGramIdentity.lean"
         }
       ],
-      "lean": []
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        }
+      ]
     },
     {
       "id": "dream-decoherence-unpinning",

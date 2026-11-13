@@ -313,7 +313,7 @@
     S.gates = []; circuitChanged();
     moving = kit.tween(420, (e) => { const r = v3.slerp(from, to, e); S.theta = Math.acos(kit.clamp(r[2], -1, 1)) / DEG; S.phi = (Math.atan2(r[1], r[0]) / DEG + 360) % 360; rebuild(); paint(); }, land);
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动 B、换量尺、加门。随时可以再选一张卡。', 'Free play: drag B, change the ruler, add gates. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

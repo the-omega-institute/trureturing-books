@@ -319,7 +319,7 @@
     else if (booting) kit.autoplay(clock, $('stage'));
     else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：点比特加错误、换逻辑态、换成四分支混合。随时可以再选一张卡。', 'Free play: click qubits to add errors, change the logical state, switch to the four-branch mixture. Pick a card again at any time.'] });
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
   TRV.startGlitch(document.querySelector('.brand'));
