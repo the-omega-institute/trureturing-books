@@ -586,7 +586,7 @@
     const t0 = clock.t;
     moving = kit.tween(380, (e) => clock.set(t0 * (1 - e)), land);
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：按“操作”给账本记一步，拖动转角与布居数。随时可以再选一张卡。', 'Free play: press an operation to write a step, move the turn and the population. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

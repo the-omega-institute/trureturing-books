@@ -389,10 +389,11 @@
   kit.keys({ 1: () => { leave(); setScene('curve'); }, 2: () => { leave(); setScene('shots'); } });
 
   /* ---------- experiment cards ---------- */
+  // `still` is the rail value of the card's still frame: θ + π on the curve, the trial number in the shots
   const PRESETS = {
-    shift: { scene: 'curve', model: 'z', h: 30, from: 0, to: PI / 3, still: PI / 3 },
-    anywhere: { scene: 'curve', model: 'tilt', h: 30, from: -PI, to: PI, still: 2 * PI / 3 },
-    step: { scene: 'curve', model: 'z', h: 30, from: -PI, to: PI, still: PI / 3 },
+    shift: { scene: 'curve', model: 'z', h: 30, from: 0, to: PI / 3, still: PI / 3 + PI },
+    anywhere: { scene: 'curve', model: 'tilt', h: 30, from: -PI, to: PI, still: 2 * PI / 3 + PI },
+    step: { scene: 'curve', model: 'z', h: 30, from: -PI, to: PI, still: PI / 3 + PI },
     noise: { scene: 'shots', model: 'z', h: 6, N: 100, theta: PI / 3, still: TRIALS }
   };
   const NOTES = {
@@ -409,7 +410,7 @@
     if (p.N) { S.N = p.N; shotChips.set(String(p.N), true); }
     if (p.theta != null) S.theta = p.theta;
     if (p.scene === 'curve') {
-      setScene('curve', p.still + PI);
+      setScene('curve', p.still);
       // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
       // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
       if (TRV.still || (booting && !TRV.embed)) return;
@@ -423,7 +424,7 @@
       if (booting) kit.autoplay(clock, $('stage')); else clock.play();
     }
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动曲线或箭头改角度，换曲线、改小步长，或到“采样”场景改每点的发数。随时可以再选一张卡。', 'Free play: drag the curve or the arrow to set θ, switch the curve, change the small step, or go to the shots scene and change the shots per setting. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

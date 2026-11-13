@@ -291,7 +291,7 @@
             : L(`交换 ${D.swaps} 次，所以符号是 ${s > 0 ? '+' : MINUS}；同时出现在两边的 ${D.cancels} 个方向抵掉，剩下的就是异或。`, `${D.swaps} swap${D.swaps === 1 ? '' : 's'}, so the sign is ${s > 0 ? '+' : MINUS}; the ${D.cancels} direction${D.cancels === 1 ? '' : 's'} on both sides cancel and what is left is the XOR.`);
       setLabel('roKeyLabel', '乘积', 'Product');
       $('roKey').innerHTML = `${nm(S.l)} · ${nm(S.r)} = <span class="${s > 0 ? 'c-cy' : 'c-mg'}">${signed(s, D.mask)}</span>`;
-      $('roKeySub').innerHTML = `${L(pl ? '与 XᵃZᵇ 矩阵相乘一致' : '与泡利矩阵相乘一致', pl ? 'agrees with multiplying XᵃZᵇ' : 'agrees with multiplying Pauli matrices')} <span class="okmark">${ok ? '✓' : '✗'}</span>`;
+      $('roKeySub').innerHTML = `${L(pl ? '与 XᵃZᵇ 矩阵相乘一致' : '与泡利矩阵相乘一致', pl ? 'agrees with multiplying XᵃZᵇ' : 'agrees with multiplying Pauli matrices')} <span class="nummark">${ok ? '✓' : '✗'}</span>`;
       setLabel('ro1Label', '掩码异或', 'XOR of the masks'); $('ro1').textContent = `${bin(S.l)} ⊕ ${bin(S.r)} = ${bin(D.mask)}`;
       setLabel('ro2Label', '要交换几次（inv）', 'Swaps needed (inv)'); $('ro2').innerHTML = `${D.swaps} → <span class="${s > 0 ? 'c-cy' : 'c-mg'}">${s > 0 ? '+' : MINUS}</span>`;
       setLabel('ro3Label', '抵掉的同号对', 'Equal pairs cancelled'); $('ro3').textContent = String(D.cancels);
@@ -308,11 +308,11 @@
       note = L('交叉项 eᵢeⱼ 与 eⱼeᵢ 一正一负：青色与品红的条一样长，净值为 0。', 'The cross terms eᵢeⱼ and eⱼeᵢ have opposite signs: the cyan and magenta bars are equally long and the net is 0.');
       setLabel('roKeyLabel', 'v · v 至此', 'v · v so far');
       $('roKey').innerHTML = `${sc}${biv.some((o) => o.net) ? ' + …' : ''}`;
-      $('roKeySub').innerHTML = n === TERMS.length ? ` = 13² <span class="okmark">✓</span>` : '';
+      $('roKeySub').innerHTML = n === TERMS.length ? ` = 13² <span class="nummark">✓</span>` : '';
       setLabel('ro1Label', '标量部分（对角三项）', 'Scalar part (the three diagonal terms)'); $('ro1').textContent = `${TERMS.slice(0, n).filter((t) => !t.mask).map((t) => t.coef).join(' + ') || '0'} = ${sc}`;
       setLabel('ro2Label', '双矢量部分 e₁₂、e₁₃、e₂₃', 'Bivector part e₁₂, e₁₃, e₂₃'); $('ro2').textContent = biv.map((o) => `${o.pos ? '+' + o.pos : ''}${o.neg ? ' ' + MINUS + ' ' + o.neg : ''}${o.pos || o.neg ? ' = ' : ''}${fmtInt(o.net)}`).join(' · ');
       setLabel('ro3Label', '已加的项', 'Terms added'); $('ro3').textContent = `${n} / 9`;
-      setLabel('ro4Label', 'B(3, 4, 12)² 的矩阵乘法', 'B(3, 4, 12)² by matrix multiplication'); $('ro4').innerHTML = `[[${BSQ[0][0][0]}, ${BSQ[0][1][0]}], [${BSQ[1][0][0]}, ${BSQ[1][1][0]}]] = 169·I <span class="okmark">${bsqOk ? '✓' : '✗'}</span>`;
+      setLabel('ro4Label', 'B(3, 4, 12)² 的矩阵乘法', 'B(3, 4, 12)² by matrix multiplication'); $('ro4').innerHTML = `[[${BSQ[0][0][0]}, ${BSQ[0][1][0]}], [${BSQ[1][0][0]}, ${BSQ[1][1][0]}]] = 169·I <span class="nummark">${bsqOk ? '✓' : '✗'}</span>`;
       $('roAside').textContent = 'a = (3, 4, 12)';
       $('pillProd').querySelector('strong').textContent = `v² ${n === TERMS.length ? '= 169' : '…'}`;
       $('pillSwaps').querySelector('strong').textContent = '—';
@@ -388,9 +388,9 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    e2e1: { scene: 'cl3', pair: [2, 1], play: true },
-    square: { scene: 'cl3', pair: [3, 3], hl: 'diag', play: true }, pseudo: { scene: 'cl3', pair: [7, 7], hl: 'pseudo', play: true },
-    pauli: { scene: 'pauli', pair: [2, 1], play: true }, vector: { scene: 'vector', play: true }
+    e2e1: { scene: 'cl3', pair: [2, 1], play: true, still: 'end' },
+    square: { scene: 'cl3', pair: [3, 3], hl: 'diag', play: true, still: 'end' }, pseudo: { scene: 'cl3', pair: [7, 7], hl: 'pseudo', play: true, still: 'end' },
+    pauli: { scene: 'pauli', pair: [2, 1], play: true, still: 'end' }, vector: { scene: 'vector', play: true, still: 'end' }
   };
   const NOTES = {
     e2e1: ['e₂ · e₁ 与 e₁ · e₂：两种次序的掩码异或都是 001₂ ⊕ 010₂ = 011₂，即 e₁₂。e₁ · e₂ 已按 e₁ e₂ e₃ 的顺序排好，不用交换，乘积是 +e₁₂，表里那一格是青色；反过来 e₂ · e₁ 右边的 e₁ 要越过左边的 e₂，两条线交叉一次，符号变成 −，这一格是品红，与 e₁ · e₂ 那一格关于对角线对称。', 'e₂ · e₁ and e₁ · e₂: in either order the masks XOR to 001₂ ⊕ 010₂ = 011₂, that is e₁₂. In e₁ · e₂ the factors are already in the order e₁ e₂ e₃, no swap is needed, the product is +e₁₂, and that cell is cyan; the other way round, in e₂ · e₁ the e₁ on the right must move past the e₂ on the left, the two lines cross once, the sign becomes −, and this cell is magenta, the mirror image of the e₁ · e₂ cell across the diagonal.'],
@@ -405,13 +405,14 @@
     S.hl = p.hl || null;
     if (p.pair) { S.l = p.pair[0]; S.r = p.pair[1]; }
     setScene(p.scene);
-    // a still (cover, cited figure for PDF/EPUB) and the opening view of the full page show the finished product;
-    // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-    if (!p.play || TRV.still || (booting && !TRV.embed) || K() < 1) return;
+    // a still (cover, cited figure for PDF/EPUB) and the opening view of the full page show the declared frame (the
+    // finished product); inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
+    if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still === 'end' ? clock.max : p.still); return; }
+    if (!p.play || K() < 1) return;
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：点表里的一格、换场景、拖时间轴。随时可以再选一张卡。', 'Free play: click a cell of the table, switch scenes, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

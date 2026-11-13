@@ -19,6 +19,7 @@
   'use strict';
   const { kit, L } = TRV, { clamp } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
+  const setText = (id, value) => { const el = $(id); if (el.textContent !== value) el.textContent = value; };
 
   /* ---------- the three address spaces ---------- */
   const n = 6, N = 1 << n;                                   // 64 cells, depth 6
@@ -279,12 +280,7 @@
   function drawRegister(ctx, box) {
     const hop = walk(S.idx)[0], done = hopsDone() >= 1;
     const other = { base: 0x2000, slot: 0, value: MEM[0x2000][0] };
-    // each row is its caption, the two labels and the two boxes: bh + 2.95·fs from the caption's top to the boxes' bottom,
-    // and 0.7·fs between the rows; a short box sets the type smaller until both rows fit its height
-    const rowsH = (f) => 2 * clamp(f * 2.6, 28, 40) + 6.6 * f;
-    let fs = clamp(box.w / 26, 10, 14);
-    while (fs > 8 && rowsH(fs) > box.h - 2) fs -= 0.25;
-    const bh = clamp(fs * 2.6, 28, 40), bw = clamp(box.w * 0.36, 86, 170);
+    const fs = clamp(box.w / 26, 10, 14), bh = clamp(fs * 2.6, 28, 40), bw = clamp(box.w * 0.36, 86, 170);
     const cx = box.x + box.w / 2, rows = [];
     const pair = (y, h, A, cap) => {
       const same = h.base === h.value, xl = cx - bw - fs * 1.4, xr = cx + fs * 1.4;
@@ -298,10 +294,7 @@
       ctx.globalAlpha = A; text(ctx, eq, cx, y, same ? P.cyan : P.dim, { align: 'center', size: fs * 1.9, weight: 700 }); ctx.globalAlpha = 1;
       rows.push({ p: h.base, star: h.value, sign: eq });
     };
-    // the second row keeps to the box; when the box's bottom holds it up, the first row moves up so the second row's
-    // caption stays clear of the first row's boxes (never above the box's top)
-    const y0 = box.y + Math.max(box.h * 0.3, bh / 2 + fs * 3.4), y2 = Math.min(box.y + box.h - bh / 2 - 2, y0 + bh + fs * 4.2);
-    const y1 = Math.max(box.y + bh / 2 + fs * 2.95, Math.min(y0, y2 - bh - fs * 3.65));
+    const y1 = box.y + Math.max(box.h * 0.3, bh / 2 + fs * 3.4), y2 = Math.min(box.y + box.h - bh / 2 - 2, y1 + bh + fs * 4.2);
     pair(y1, hop, 1, L('指针寄存器 p 与它读出的 *p', 'the pointer register p and what it reads, *p'));
     pair(y2, other, 0.55, L('对照：一枚普通指针', 'for contrast: an ordinary pointer'));
     geo.reg = rows;
@@ -554,7 +547,7 @@
     setLabel('ro3Label', '树的深度 log₂N', 'Depth of the tree log₂N'); $('ro3').textContent = String(depthOf(N));
     setLabel('ro4Label', `页表 ${idxStr()}：已走的跳`, `Page table ${idxStr()}: hops walked`);
     $('ro4').textContent = hops.slice(0, done).map((h) => `${hex(h.base)}[${h.slot}] → ${hex(h.value)}`).join(' · ') || '—';
-    $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note;
+    setText('hudBig', big); setText('hudSub', hud); $('roNote').textContent = note;
     $('pillSteps').querySelector('strong').textContent = String(s);
     const leg = (S.scene === 'table' ? LEGEND_TABLE : LEGEND).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
@@ -613,12 +606,12 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    qram_tree: { scene: 'tree', a: 41, k: 1, idx: [1, 2], play: true },
-    linear64: { scene: 'scan', a: 63, k: 1, idx: [1, 2], play: true },
-    superpose: { scene: 'tree', a: 41, k: 4, idx: [1, 2], play: true },
-    four_loops: { scene: 'table', a: 41, k: 1, idx: [0, 0, 0, 0], play: true },
-    self_map: { scene: 'table', a: 41, k: 1, idx: [0, 1], play: true },
-    diagonal_hit: { scene: 'table', a: 41, k: 1, idx: [0], play: true }
+    qram_tree: { scene: 'tree', a: 41, k: 1, idx: [1, 2], play: true, still: 'end' },
+    linear64: { scene: 'scan', a: 63, k: 1, idx: [1, 2], play: true, still: 'end' },
+    superpose: { scene: 'tree', a: 41, k: 4, idx: [1, 2], play: true, still: 'end' },
+    four_loops: { scene: 'table', a: 41, k: 1, idx: [0, 0, 0, 0], play: true, still: 'end' },
+    self_map: { scene: 'table', a: 41, k: 1, idx: [0, 1], play: true, still: 'end' },
+    diagonal_hit: { scene: 'table', a: 41, k: 1, idx: [0], play: true, still: 'end' }
   };
   const NOTES = {
     qram_tree: ['地址 41 = 101001₂ 从树根进来，每一拍按一位拨一层开关：六拍后青色的路通到第 42 格，63 个开关里只亮这 6 个。同一时刻，琥珀色的扫描读头才读过 6 格。', 'Address 41 = 101001₂ enters at the root and each tick sets one level by one bit: after six ticks the cyan path reaches cell 42, and only these 6 of the 63 switches light up. At the same moment the amber scan head has read just 6 cells.'],
@@ -636,11 +629,20 @@
     if (!p.play) return;
     // a still (cover, cited figure for PDF/EPUB) and the opening view of the full page show the end of the walk;
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-    if (TRV.still || (booting && !TRV.embed)) return;
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still === 'end' ? clock.max : p.still); return; }
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // A cited figure keeps its short note whole; detailed explanations remain in the full laboratory.
+  const FIGURE_NOTES = {
+    "qram_tree": ["地址 41 沿六级树走六步到叶子，63 个开关只亮六个。", "Address 41 takes 6 levels and lights 6 of 63 switches."],
+    "linear64": ["顺序读到地址 63 要走 64 步，同一规模的路由树只需六步。", "Reading cell 64 takes 64 steps; the routing tree takes 6."],
+    "superpose": ["四个地址叠加共点亮 17 个开关，每条路径仍只有六级。", "Four branches light 17 switches; each path has 6 levels."],
+    "four_loops": ["索引 [0,0,0,0] 四次返回 0x1000，读出的仍是页目录自己。", "Four [0,0,0,0] hops return the directory itself at 0x1000."],
+    "self_map": ["索引 [0,1] 先返回本页，再读出叶页表 T₁ 自身作为数据。", "Index [0,1] returns this page, then reads T₁ as data."],
+    "diagonal_hit": ["p = *p = 0x1000：这一格恰好保存自身地址，一次解引用即返回。", "p = *p = 0x1000: one read returns this cell's own address."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? FIGURE_NOTES : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖地址、点内存格、换叠加的分支数或页表索引、拖时间轴。随时可以再选一张卡。', 'Free play: drag the address, click a memory cell, change the branches or the page-table index, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

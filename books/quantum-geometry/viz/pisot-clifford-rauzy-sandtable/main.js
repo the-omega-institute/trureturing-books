@@ -879,15 +879,17 @@
   kit.keys({ 1: () => { leave(); setView(S.last.sand); }, 2: () => { leave(); setView(S.last.plane); }, 3: () => { leave(); setView(S.last.tree); }, 4: () => { leave(); setView(S.last.entropy); } });
 
   /* ---------- experiment cards ---------- */
+  // still: the rail value a card's still (and the opening of the full page) shows; a click plays the rail from 0.
+  // ENTANGLEMENT stops on the first forbidden pair of its encoder (N = 2, K = 3, mX = 4, mY = 5)
   const PRESETS = {
-    zeckendorf: { view: 'words', K: 2, Q: 7, at: 7, play: true },
-    kbonacci: { view: 'roots', at: 4, play: true },
-    padic: { view: 'padic', p: 3, xyz: [7, 34, 16], at: 4, play: true },
-    rauzy: { view: 'rauzy', K: 3, Q: 12, at: 12, sel: 109, play: true },
-    clifford: { view: 'sand', K: 3, Q: 11, at: 11, sel: 109, cam: 'iso', play: true },
-    'self-reference': { view: 'spiral', at: 12, play: true },
-    entanglement: { view: 'cut', K: 3, enc: [2, 4, 5], at: 'forbidden', play: true },
-    entropy: { view: 'entropy', K: 3, at: 8, play: true }
+    zeckendorf: { view: 'words', K: 2, Q: 7, still: 7, play: true },
+    kbonacci: { view: 'roots', still: 4, play: true },
+    padic: { view: 'padic', p: 3, xyz: [7, 34, 16], still: 4, play: true },
+    rauzy: { view: 'rauzy', K: 3, Q: 12, still: 12, sel: 109, play: true },
+    clifford: { view: 'sand', K: 3, Q: 11, still: 11, sel: 109, cam: 'iso', play: true },
+    'self-reference': { view: 'spiral', still: 12, play: true },
+    entanglement: { view: 'cut', K: 3, enc: [2, 4, 5], still: firstForbidden(encoder(2, 3, 4, 5)), play: true },
+    entropy: { view: 'entropy', K: 3, still: 8, play: true }
   };
   const NOTES = {
     zeckendorf: ['K = 2 的字树：从顶上的空字开始，每层添一位，青色的枝添 1、白色的枝添 0；会出现两个相邻 1 的枝被剪掉（品红 ×）。右边是每层留下的字数 1、2、3、5、8、13、21、34，正是斐波那契数；琥珀色的是正在长出的一层。底下是黄金窗口 [−1, φ]，每一道竖线是一个字的内部坐标 Σ εⱼψʲ。', 'The word tree for K = 2: from the empty word at the top each level adds one digit, a cyan branch a 1 and a white branch a 0; a branch that would make two adjacent 1s is pruned (magenta ×). On the right is the number of words on each level, 1, 2, 3, 5, 8, 13, 21, 34: the Fibonacci numbers; the amber level is the one now growing. Below is the golden window [−1, φ], each tick the internal coordinate Σ εⱼψʲ of one word.'],
@@ -907,14 +909,24 @@
     if (p.xyz) { S.p = p.p; pChips.set(String(p.p), true); [S.x, S.y, S.z] = p.xyz; fX.set(S.x); fY.set(S.y); fZ.set(S.z); }
     if (p.enc) { [S.N, S.mX, S.mY] = p.enc; fN.set(S.N); fMX.set(S.mX); fMY.set(S.mY); }
     if (p.cam) { camChips.set(p.cam, true); st.view(CAMS[p.cam], TRV.still ? 0 : 600); }
-    const at = p.at === 'forbidden' ? firstForbidden(encoder(S.N, S.K, S.mX, S.mY)) : p.at;
-    setView(p.view, at);
+    setView(p.view, p.still);
     if (!p.play || TRV.still || (booting && !TRV.embed)) return;
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "zeckendorf": ["K = 2 时剪去含 11 的枝，层数为斐波那契数；下方显示内部坐标 Σ εⱼψʲ。", "For K = 2, prune branches containing 11: level counts are Fibonacci numbers; below are coordinates Σ εⱼψʲ."],
+    "kbonacci": ["K 从 2 增至 8：皮索根 β_K 从圆外趋近 2，其余根在圆内，缺口为 β_K^−K。", "As K grows from 2 to 8, the Pisot root β_K approaches 2 from outside the circle; other roots stay inside."],
+    "padic": ["p = 3，7 与 34 相差 −3³，余数路径在 k = 0…3 重合，k = 4 首次分开。", "For p = 3, 7 − 34 = −3³: their residue paths agree through k = 3 and first split at k = 4."],
+    "rauzy": ["不含 111 的字映到 Σ εⱼαʲ；0、10、110 三种前缀生成三个收缩副本，图为有限深度样本。", "Words without 111 map to Σ εⱼαʲ; prefixes 0, 10 and 110 give three contracted copies, sampled at finite depth."],
+    "clifford": ["沙盘水平坐标为 e(α)，高度为 e(β)/β^q；字长增加时旧点下沉，水平影子保持有界。", "Sandtable coordinates: horizontal e(α), height e(β)/β^q; longer words lower old points while shadows stay bounded."],
+    "self-reference": ["余弦蛛网趋于 θ*，αⁿ 螺线趋于原点；θ* 与 |α| 相差约 0.2344%，接近但不相等。", "The cosine cobweb tends to θ*, the αⁿ spiral to zero; θ* and |α| differ by about 0.2344%."],
+    "entanglement": ["K = 3 接缝合法当且仅当 τ + ι < 3；右图可达秩满足 1 ≤ r₀ ≤ 6、1 ≤ r₁ ≤ 5。", "At a K = 3 seam, legality means τ + ι < 3; attainable ranks satisfy 1 ≤ r₀ ≤ 6 and 1 ≤ r₁ ≤ 5."],
+    "entropy": ["左为帕里重置链；右图品红格为观测未区分的点对，琥珀格为移除观测后新增的未区分对。", "Left: Parry reset chain; right: magenta pairs remain indistinguishable, amber pairs become so when an observation is removed."],
+  };
   const cards = kit.cards($('presets'), {
-    notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+    presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、改 K 与字长，拖动舞台转动沙盘或选一个点，拖时间轴。随时可以再选一张卡。', 'Free play: change the scene, K and the word length, drag the stage to turn the sandtable or pick a point, scrub the rail. Pick a card again at any time.']
   });
 

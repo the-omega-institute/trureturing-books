@@ -7,7 +7,8 @@
 // channel from record vectors and the overlap of the Lean definition, the screen from the pure-state amplitude. The
 // solid apparatus (kit.solid) is checked against the same independent ρ: column heights, arch thickness and colour,
 // the relief of its screen; then the pixels of the WebGL picture against the flat panels; then solidChecks.
-import { session, stageFirstChecks, settle, until, solidChecks, solidPixels } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, settle, until, solidChecks, solidPixels, openStill } from '../../../../tools/node/viz-testkit.mjs';
+import { withReadySolid } from './solid-readiness.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'dream-decoherence-unpinning';
 const T = await session();
@@ -349,16 +350,15 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
   check('default view: the beads on the front face and on the columns are visible, those on the back face are hidden by the plate', fc.front.every((h) => !h) && fc.back.every((h) => h) && fc.top.every((h) => !h), JSON.stringify(fc));
   const sh = await solidPixels(page);
   check('the apparatus covers 16–22 % of the stage with opaque, lit surfaces', sh && sh.share >= 0.16 && sh.share <= 0.22 && sh.spread >= 0.04, sh && `${(sh.share * 100).toFixed(1)}% σ ${sh.spread.toFixed(3)}`);
-  await solidChecks(T, BOOK, ID, page);
-  // solidChecks hands the camera back as it found it; the turn checked here is a drag of this test's own, along the
-  // top of the stage (at 8 % of its height), across three tenths of its width
+  await solidChecks(withReadySolid(T), BOOK, ID, page);
   const before = await D(() => ({ t: window.DREAM_DEBUG.state.t, yaw: window.TRV.solids[0].cam.yaw }));
-  const sb = await D(() => { const r = window.TRV.solids[0].el.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; });
-  const ty = sb[1] + sb[3] * 0.08;
-  await page.mouse.move(sb[0] + sb[2] * 0.06, ty); await page.mouse.down();
-  for (let k = 1; k <= 6; k++) await page.mouse.move(sb[0] + sb[2] * (0.06 + 0.05 * k), ty);
-  await page.mouse.up();
-  await settle(page);
+  const drag = await D(() => {
+    const r = document.getElementById('stage').getBoundingClientRect(), p = window.DREAM_DEBUG.panels.r3;
+    return { x: r.left + p.x + 16, y: r.top + p.y + p.h / 2, dx: 200 };
+  });
+  await page.mouse.move(drag.x, drag.y); await page.mouse.down();
+  for (let k = 1; k <= 8; k++) await page.mouse.move(drag.x + drag.dx * k / 8, drag.y);
+  await page.mouse.up(); await settle(page);
   const after = await D(() => ({ t: window.DREAM_DEBUG.state.t, yaw: window.TRV.solids[0].cam.yaw }));
   check('a drag across the top of the stage turns the apparatus and leaves the rail alone (onPick is false there)', Math.abs(after.yaw - before.yaw) > 0.5 && after.t === before.t, JSON.stringify([before, after]));
   fc = await faces();
@@ -371,7 +371,7 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
    A chapter cites a card in an iframe 500 px high: about 334 px wide on a 390 px phone, 760 px in a book page. In the
    phone's frame a long note once took ~180 px of the 500 and left the stage ~210 px: the grid, the screen and the record boxes ran under the legend collided with the
    captions and the legend, and the lit solid shrank to a few per cent of the stage. These checks look at the frame
-   itself: nothing scrolls; the note bar stays short and its full note scrolls to the last line; the stage keeps most of
+   itself: nothing scrolls; the complete note stays short and needs no internal scrolling; the stage keeps most of
    the frame; no ink of the flat canvas or the WebGL canvas and no label lies under the title, its second line or the
    legend; the solid draws nothing inside the flat drawings; labels stay on the stage and apart; the lit solid covers
    ≥ 12 % of the stage at the card's first and last frame; and the grid stays ≥ 80 px and the phase disc keeps a box ≥ 80 px. */
@@ -403,7 +403,7 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
     const tags = [...st.querySelectorAll('.tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => [t.textContent.trim(), box(t.getBoundingClientRect())]);
     const fb = document.getElementById('flat').getBoundingClientRect();
     const panels = (() => { const p = window.DREAM_DEBUG.panels; return [['the grid', p.mat], ['the screen', p.screen]].concat(p.disc ? [['the phase disc', p.disc]] : []); })().map(([what, b]) => [what, { x: fb.left + b.x, y: fb.top + b.y, w: b.w, h: b.h }]);
-    const what = document.querySelector('.tour .what'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
+    const what = document.querySelector('.tour .tour-note'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
     const full = what.textContent.trim().endsWith(note.textContent.trim()) && note.textContent.trim().length > 20;
     const scrolls = what.scrollHeight > what.clientHeight + 1, oy = getComputedStyle(what).overflowY;
     what.scrollTop = what.scrollHeight; const reached = what.scrollTop + what.clientHeight >= what.scrollHeight - 1; what.scrollTop = 0;
@@ -431,13 +431,14 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
   for (const [tag, vp, lang, cards] of [['phone frame 334 × 500', { width: 334, height: 500 }, 'en', FIG], ['phone frame 334 × 500', { width: 334, height: 500 }, 'zh', ['half_erase', 'unpin_body']], ['book page 760 × 500', { width: 760, height: 500 }, 'en', FIG]]) {
     const bad = { frame: [], note: [], words: [], solid: [], labels: [], share: [], read: [] };
     for (const card of cards) {
-      const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${card}`, { viewport: vp, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+      const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${card}`, { viewport: vp, locale: lang === 'en' ? 'en-US' : 'zh-CN', reducedMotion: 'reduce' });
       await until(pg, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000);
-      await until(pg, (d) => !window[d].state.playing, 'DREAM_DEBUG', 120000);
+      // Inspect the ending frame directly; the card controls have separate playback checks.
+      await pg.evaluate((d) => window[d].seek(window[d].state.max), 'DREAM_DEBUG');
       await settle(pg);
       const f = await facts(pg), id = `${card} (${lang})`;
       if (f.docScroll > 0 || f.docWide > 0 || f.stageH < 0.72 * f.vp.h) bad.frame.push(`${id}: scroll ${f.docScroll}/${f.docWide}, stage ${Math.round(f.stageH)} px`);
-      if (f.tourH > 84 || !f.note.full || !f.note.scrollable || !f.note.reached || !f.note.btns) bad.note.push(`${id}: ${Math.round(f.tourH)} px ${JSON.stringify(f.note)}`);
+      if (f.tourH > 84 || !f.note.full || f.note.scrolls || !f.note.reached || !f.note.btns) bad.note.push(`${id}: ${Math.round(f.tourH)} px ${JSON.stringify(f.note)}`);
       if (f.under.length) bad.words.push(`${id}: ${f.under.slice(0, 3).join(', ')}`);
       if (f.solidIn.length) bad.solid.push(`${id}: ${f.solidIn.join(', ')}`);
       if (f.tagOut.length || f.tagHit.length) bad.labels.push(`${id}: ${[...f.tagOut.map((t) => `off stage: ${t}`), ...f.tagHit].slice(0, 3).join(', ')}`);
@@ -448,13 +449,24 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
     }
     const what = `${tag}, ${lang}, ${cards.length === FIG.length ? 'every cited card' : cards.join(' + ')}`;
     check(`cited figure, ${what}: nothing scrolls and the stage keeps ≥ 72 % of the frame`, !bad.frame.length, bad.frame.join(' | '));
-    check(`cited figure, ${what}: the note bar stays ≤ 84 px, holds the card's whole note and scrolls to its last line, ◀ ▶ in the frame`, !bad.note.length, bad.note.join(' | '));
+    check(`cited figure, ${what}: the note bar stays ≤ 84 px, holds the card's complete note without internal scrolling, ◀ ▶ in the frame`, !bad.note.length, bad.note.join(' | '));
     check(`cited figure, ${what}: no flat drawing, no solid and no label under the title, its second line or the legend`, !bad.words.length, bad.words.join(' | '));
     check(`cited figure, ${what}: the solid draws nothing inside the grid, the phase disc or the screen`, !bad.solid.length, bad.solid.join(' | '));
     check(`cited figure, ${what}: every label stays on the stage, and no two labels sit on each other`, !bad.labels.length, bad.labels.join(' | '));
     check(`cited figure, ${what}: the lit solid covers ≥ 12 % of the stage at the card's first and last frame`, !bad.share.length, bad.share.join(' | '));
     check(`cited figure, ${what}: the grid stays ≥ 80 px and the phase disc keeps a box ≥ 80 px`, !bad.read.length, bad.read.join(' | '));
   }
+}
+
+
+// Publication stills use clock coordinates and retain the values the captions describe.
+for (const lang of ['zh', 'en']) for (const [card, time] of [['half_erase', 3], ['quantum_eraser', 4]]) {
+  const pg = await openStill(T, BOOK, ID, card, lang);
+  const q = await pg.evaluate(() => window.DREAM_DEBUG.state);
+  const declared = await pg.getAttribute(`[data-preset="${card}"]`, 'data-still');
+  check(`still ${card} (${lang}): its declared frame matches the clock and caption`,
+    !q.playing && Math.abs(q.t - time) < 1e-9 && (declared === 'end' ? q.t === q.max : Number(declared) === q.t) && (Math.abs(q.z[0] - (card === 'half_erase' ? 0 : 0.5)) < 1e-9 && Math.abs(q.z[1] - (card === 'half_erase' ? -0.5 : 0)) < 1e-9), JSON.stringify({ q, declared }));
+  await pg.context().close();
 }
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));

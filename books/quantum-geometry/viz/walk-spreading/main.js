@@ -265,10 +265,10 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    fifty: { scene: 'dist', p: 121, w: 0.5, phi: 90, n: 50 },
-    width: { scene: 'width', p: 121, w: 0.5, phi: 90, n: 60 },
-    coin: { scene: 'pairs', p: 121, w: 0.5, phi: 0, n: 50 },
-    ring: { scene: 'dist', p: 9, w: 0.5, phi: 90, n: 20 }
+    fifty: { scene: 'dist', p: 121, w: 0.5, phi: 90, n: 50, still: 50 },
+    width: { scene: 'width', p: 121, w: 0.5, phi: 90, n: 60, still: 60 },
+    coin: { scene: 'pairs', p: 121, w: 0.5, phi: 0, n: 50, still: 50 },
+    ring: { scene: 'dist', p: 9, w: 0.5, phi: 90, n: 20, still: 20 }
   };
   const NOTES = {
     fifty: ['从原点出发、硬币取 c*，走 50 步：上方青色的量子分布左右对称，两个尖峰已经跑到 ±34，全都落在虚线 ±50 之内；下方灰色的经典钟形只铺开到 ±7 左右。量子宽度 σ = 27.07，经典 σ = √50 = 7.07，差了 3.83 倍。', 'From the origin with the coin c*, fifty steps: above, the cyan quantum distribution is symmetric, its two peaks already out at ±34 and all of it inside the dashed lines ±50; below, the grey classical bell spreads only to about ±7. Quantum width σ = 27.07, classical σ = √50 = 7.07: 3.83 times apart.'],
@@ -282,15 +282,14 @@
     clock.pause(); stopAt = null;
     S.scene = p.scene; S.p = p.p; S.w = p.w; S.phi = p.phi;
     sceneChips.set(S.scene, true); fW.set(p.w); fPhi.set(p.phi); fP.set(p.p);
-    clock.set(p.n);
     // a still (cover, cited figure shot) and the opening of the full page show the card's telling frame;
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-    if (TRV.still || (booting && !TRV.embed)) return;
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still); return; }
     clock.set(0);
     stopAt = p.n < NMAX ? p.n : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖时间轴改步数，改硬币的份额与相位，或把圈变短。随时可以再选一张卡。', 'Free play: drag the rail to change the steps, change the share and phase of the coin, or shorten the cycle. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

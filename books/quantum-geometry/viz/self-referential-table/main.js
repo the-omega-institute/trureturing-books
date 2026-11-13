@@ -20,6 +20,7 @@
   'use strict';
   const { kit, L } = TRV, { clamp, fix, v3, TAU } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
+  const setText = (id, value) => { const el = $(id); if (el.textContent !== value) el.textContent = value; };
   const MINUS = '−', M = 8, DEG = Math.PI / 180, HEAL_SAFE = (Math.sqrt(3) - 1) / 2;
 
   /* ---------- linear algebra ---------- */
@@ -485,12 +486,10 @@
   let geo = {};
   /** The three boxes of the stage (CSS pixels of the canvas): the ball on the left (wide) or on top (narrow). */
   function layoutOf(W, H, words) {
-    // the legend's place beside the ball belongs to the book-page columns only: every layout starts from the stage's own
-    // legend (measured across the whole stage), and only the columns below put it back, for the size the frame has now
-    const stEl = $('stage');
-    stEl.classList.remove('legend-right'); stEl.style.removeProperty('--fig-legend-left');
     if (!words) return { mode: 'cover', solid: { x: W * 0.02, y: H * 0.08, w: W * 0.36, h: H * 0.84 }, table: { x: W * 0.4, y: H * 0.08, w: W * 0.33, h: H * 0.84 }, panel: { x: W * 0.76, y: H * 0.1, w: W * 0.21, h: H * 0.8 } };
-    const st = $('stage').getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
+    const stEl = $('stage');
+    stEl.classList.remove('legend-right');
+    const st = stEl.getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
     if (compact()) {                          // a phone's cited figure: the ball as large as the width allows on the left,
       // the table over its side panel in the column on the right, between the title and the legend
       const top = below($('hudBig').parentElement) + 6, bottom = $('legend').offsetHeight + 22;
@@ -579,10 +578,10 @@
 
   /* ---------- words ---------- */
   const LEGEND = {
-    read: [['cy box', '正的格、正的乘积；圆盘上行读为正的一半', 'positive cells and products; the half disc the row reads as positive'], ['mg box', '负的格、负的乘积；读为负的一半', 'negative cells and products; the half read as negative'], ['am', '选中的格、刚加进来的一项；列在行上的影子', 'the chosen cell, the term just added; the column’s shadow on the row'], ['dm', '虚线：行（尺子）与列（被量）', 'dashed: the row (ruler) and the column (measured)']],
-    rank: [['cy box', '正的格、对角格（越亮越大）；球里：像', 'positive cells, diagonal cells (brighter is larger); in the ball: the image'], ['mg box', '负的格；读成 0 的方向', 'negative cells; directions read as 0'], ['am', '对角格之和（迹）；刚写进的一行', 'the sum of the diagonal (trace); the newest row'], ['dm', '虚线框：对角线', 'dashed: the diagonal']],
+    read: [['cy box', '正的格、正的乘积；圆盘上行读为正的一半', 'positive cells/products; positive half disc'], ['mg box', '负的格、负的乘积；读为负的一半', 'negative cells/products; negative half disc'], ['am', '选中的格、刚加进来的一项；列在行上的影子', 'chosen cell/term; column’s shadow on row'], ['dm', '虚线：行（尺子）与列（被量）', 'dashed: row ruler, measured column']],
+    rank: [['cy box', '正的格、对角格（越亮越大）；球里：像', 'positive/diagonal cells; brighter = larger; ball: image'], ['mg box', '负的格；读成 0 的方向', 'negative cells; directions read as 0'], ['am', '对角格之和（迹）；刚写进的一行', 'the sum of the diagonal (trace); the newest row'], ['dm', '虚线框：对角线', 'dashed: the diagonal']],
     heal: [['cy box', '正的格；½ 以上的本征值及其方向', 'positive cells; eigenvalues above ½, their directions'], ['mg box', '负的格；½ 以下的本征值及其方向', 'negative cells; eigenvalues below ½, their directions'], ['am', '被碰的格、当前这一步', 'the knocked cell, the current step']],
-    perp: [['cy box', '读出 Tψ、留在表里的 cos θ；圆盘：像', 'the reading Tψ, the cos θ kept by the table; the disc: the image'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']]
+    perp: [['cy box', '读出 Tψ、留在表里的 cos θ；圆盘：像', 'reading Tψ, retained cos θ; disc: image'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']]
   };
   const setLabel = (id, zh, en) => { const h = `<span class="zh">${zh}</span><span class="en">${en}</span>`; if ($(id)._h !== h) { $(id).innerHTML = h; $(id)._h = h; } };
   const ex = (x) => (x === 0 ? '0' : x.toExponential(1).replace('-', MINUS));
@@ -631,7 +630,7 @@
     setLabel('ro3Label', '迹（舞台上这张表）', 'Trace (the table on the stage)'); $('ro3').textContent = fix(trace(A), 4);
     setLabel('ro4Label', '‖T² − T‖ · ‖T − Tᵀ‖（舞台上这张表）', '‖T² − T‖ · ‖T − Tᵀ‖ (the table on the stage)'); $('ro4').textContent = `${ex(idemErr(A))} · ${ex(symErr(A))}`;
     $('roAside').textContent = sc === 'heal' ? 'Tₘ₊₁ = 3Tₘ² − 2Tₘ³' : 'T² = T, Tᵀ = T';
-    $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note;
+    setText('hudBig', big); setText('hudSub', hud); $('roNote').textContent = note;
     $('pillSize').querySelector('strong').textContent = `${S.N} × ${S.r}`;
     $('pillErr').querySelector('strong').textContent = ex(idemErr(A));
     const leg = LEGEND[sc].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
@@ -709,11 +708,11 @@
   /* ---------- experiment cards ---------- */
   const PRESETS = {
     reset: { scene: 'rank', N: 8, r: 1 },
-    expand_table: { scene: 'rank', N: 8, r: 1, play: true, still: 4 },
+    expand_table: { scene: 'rank', N: 8, r: 1, play: true, still: 3 },
     full: { scene: 'rank', N: 8, r: 8 },
-    dual_read: { scene: 'read', N: 4, r: 2, cell: [0, 3], play: true },
-    heal: { scene: 'heal', N: 8, r: 3, kicks: [{ i: 1, j: 4, eps: 0.3 }], play: true },
-    orthogonal_zero: { scene: 'perp', N: 8, r: 3, play: true }
+    dual_read: { scene: 'read', N: 4, r: 2, cell: [0, 3], play: true, still: 'end' },
+    heal: { scene: 'heal', N: 8, r: 3, kicks: [{ i: 1, j: 4, eps: 0.3 }], play: true, still: 'end' },
+    orthogonal_zero: { scene: 'perp', N: 8, r: 3, play: true, still: 'end' }
   };
   const NOTES = {
     reset: ['清空到一行：只写进常值向量，T 的每一格都是 1/8，八个对角格加起来是 1。下面八个地址槽只占了一个。', 'Cleared to one row: only the constant vector is written in, every cell of T is 1/8, and the eight diagonal cells add up to 1. Of the eight address slots below, one is taken.'],
@@ -733,14 +732,22 @@
     if (Math.abs(stage.cam.yaw - VIEW[0]) + Math.abs(stage.cam.pitch - VIEW[1]) + Math.abs(stage.cam.zoom - 1) > 1e-6) stage.view(VIEW, 450);   // a card shows its frame from the default view
     setScene(p.scene);
     if (!p.play) return;
-    const R = RAIL[p.scene]();
     // a still (cover, cited figure for PDF/EPUB) and the opening view of the full page show the telling frame;
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still != null ? p.still - (p.scene === 'rank' ? 1 : 0) : R.max); return; }
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still === 'end' ? clock.max : p.still); return; }
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // A cited figure keeps its short note whole; detailed explanations remain in the full laboratory.
+  const FIGURE_NOTES = {
+    "reset": ["只写入常值向量：每格为 1/8，迹为 1，只占一个地址槽。", "One constant vector: every cell is 1/8, trace 1, and one address slot is used."],
+    "expand_table": ["逐行写入正交向量：每行使迹增 1，表始终保持幂等。", "Each new orthogonal row adds 1 to the trace; the table stays idempotent."],
+    "full": ["八行填满八维空间，表成为单位阵，不存在第九个正交方向。", "Eight rows fill eight dimensions: T = I, with no ninth orthogonal direction."],
+    "dual_read": ["横行与竖列逐项相乘求和，返回 T 的同一格，即 T² = T。", "A row times a column returns the same cell: T² = T."],
+    "heal": ["对称扰动破坏幂等性；迭代 3T² − 2T³ 将本征值推向 0 或 1。", "After a symmetric perturbation, 3T² − 2T³ drives eigenvalues towards 0 or 1."],
+    "orthogonal_zero": ["ψ 转入正交补时，读出 Tψ 按 cos θ 缩短，在 90° 归零。", "As ψ turns into the orthogonal complement, Tψ shrinks to zero at 90°."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? FIGURE_NOTES : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：点表里的一格、换场景、改 N 与秩、拖时间轴。随时可以再选一张卡。', 'Free play: click a cell, switch scenes, change N and the rank, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
