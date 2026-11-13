@@ -349,8 +349,17 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
   check('default view: the beads on the front face and on the columns are visible, those on the back face are hidden by the plate', fc.front.every((h) => !h) && fc.back.every((h) => h) && fc.top.every((h) => !h), JSON.stringify(fc));
   const sh = await solidPixels(page);
   check('the apparatus covers 16–22 % of the stage with opaque, lit surfaces', sh && sh.share >= 0.16 && sh.share <= 0.22 && sh.spread >= 0.04, sh && `${(sh.share * 100).toFixed(1)}% σ ${sh.spread.toFixed(3)}`);
-  const before = await D(() => ({ t: window.DREAM_DEBUG.state.t, yaw: window.TRV.solids[0].cam.yaw }));
   await solidChecks(T, BOOK, ID, page);
+  // solidChecks puts the camera back where it found it; turn it here: a sideways drag across the top of the stage
+  // (8 % down, from 6 % to 36 % across), away from the grid, where onPick is false
+  const before = await D(() => ({ t: window.DREAM_DEBUG.state.t, yaw: window.TRV.solids[0].cam.yaw }));
+  {
+    const b = await D(() => { const r = window.TRV.solids[0].el.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; });
+    const y = b[1] + b[3] * 0.08;
+    await page.mouse.move(b[0] + b[2] * 0.06, y); await page.mouse.down();
+    for (let k = 1; k <= 6; k++) await page.mouse.move(b[0] + b[2] * (0.06 + 0.05 * k), y);
+    await page.mouse.up(); await settle(page);
+  }
   const after = await D(() => ({ t: window.DREAM_DEBUG.state.t, yaw: window.TRV.solids[0].cam.yaw }));
   check('a drag across the top of the stage turns the apparatus and leaves the rail alone (onPick is false there)', Math.abs(after.yaw - before.yaw) > 0.5 && after.t === before.t, JSON.stringify([before, after]));
   fc = await faces();
@@ -395,7 +404,8 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
     const tags = [...st.querySelectorAll('.tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => [t.textContent.trim(), box(t.getBoundingClientRect())]);
     const fb = document.getElementById('flat').getBoundingClientRect();
     const panels = (() => { const p = window.DREAM_DEBUG.panels; return [['the grid', p.mat], ['the screen', p.screen]].concat(p.disc ? [['the phase disc', p.disc]] : []); })().map(([what, b]) => [what, { x: fb.left + b.x, y: fb.top + b.y, w: b.w, h: b.h }]);
-    const what = document.querySelector('.tour .what'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
+    // the note's own row of the tour bar is what scrolls (theme.css lays .what out as two rows of the bar)
+    const what = document.querySelector('.tour .tour-note') || document.querySelector('.tour .what'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
     const full = what.textContent.trim().endsWith(note.textContent.trim()) && note.textContent.trim().length > 20;
     const scrolls = what.scrollHeight > what.clientHeight + 1, oy = getComputedStyle(what).overflowY;
     what.scrollTop = what.scrollHeight; const reached = what.scrollTop + what.clientHeight >= what.scrollHeight - 1; what.scrollTop = 0;

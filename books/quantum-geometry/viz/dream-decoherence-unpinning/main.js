@@ -28,8 +28,9 @@
     record: { max: 4, rate: 1.1, step: 1 },
     wake: { max: 1, rate: 0.5, step: 0.25 }
   };
-  /* a phone's cited figure: the share of the height (between the title and the legend) that the apparatus band takes */
-  const CB = { anchor: 0.4, rec: 0.38 };
+  /* a phone's cited figure: the share of the height (between the title and the legend) that the apparatus band takes
+     at most; on a phone the flat panels under the band first keep the room for a grid of GRID_MIN px */
+  const CB = { anchor: 0.42, rec: 0.42 }, GRID_MIN = 82;
 
   /* ---------- the mathematics ---------- */
   const amps = () => { const o = Math.sqrt((1 - S.w) / 3); return [Math.sqrt(S.w), o, o, o]; };
@@ -263,9 +264,14 @@
   let grid = null, disc = null;
   const roleColor = (role) => (role === 'keep' ? P.cyan : role === 'read' ? P.cyan : P.magenta);
 
+  /** The room for the names of the places above and left of the grid (the record scene of a phone's figure has no
+      word over its two names, so it keeps less), and the side of the grid a matrix box R holds, the two record boxes
+      under it in the record scene (lower in a phone's figure). layout() asks the same function. */
+  const matHead = (R) => (TRV.thumbMode ? 6 : R.cmp && S.scene === 'record' ? 22 : 30);
+  const gridSide = (R) => { const head = matHead(R); return Math.min(R.w - head, R.h - head - (S.scene === 'record' && !TRV.thumbMode ? (R.cmp ? 36 : 52) : 0)); };
   function drawMatrix(ctx, R, m) {
-    const n = m.n, words = !TRV.thumbMode, head = words ? 30 : 6, tk = thick();
-    const size = Math.max(40, Math.min(R.w - head, R.h - head - (S.scene === 'record' && words ? (R.cmp ? 40 : 52) : 0)));   // the record boxes under it (lower in a phone's figure)
+    const n = m.n, words = !TRV.thumbMode, head = matHead(R), tk = thick();
+    const size = Math.max(40, gridSide(R));
     const x0 = R.x + head + Math.max(0, (R.w - head - size) / 2), y0 = R.y + head, cs = size / n;
     grid = { x0, y0, cs, n, size };
     let gmax = 0; m.ghost.forEach((row) => row.forEach((v) => { gmax = Math.max(gmax, v); }));
@@ -306,7 +312,7 @@
       }
       if (S.scene !== 'record' && cs >= 46) text(ctx, L('躯体', 'body'), x0 + 0.5 * cs, y0 - 25, P.dim, { align: 'center', size: 10, face: 'body' });
     }
-    if (S.scene === 'record' && words) drawRecords(ctx, { x: R.recX != null ? R.recX : x0, y: y0 + size + (R.cmp ? 8 : 10), w: R.recW || size, cmp: R.cmp });
+    if (S.scene === 'record' && words) drawRecords(ctx, { x: R.recX != null ? R.recX : x0, y: y0 + size + (R.cmp ? 6 : 10), w: R.recW || size, cmp: R.cmp });
   }
 
   /** The path the phase of ρ₀₁ has taken so far, from 0 to clock.t, unwrapped (for the trail on the phase disc). */
@@ -368,7 +374,7 @@
   }
 
   function drawRecords(ctx, R) {
-    const t = clock.t, c = overlap(), gap = 8, bw = (R.w - gap) / 2, bh = R.cmp ? 32 : 40, y1 = R.cmp ? 10 : 12, y2 = R.cmp ? 23 : 28;
+    const t = clock.t, c = overlap(), gap = 8, bw = (R.w - gap) / 2, bh = R.cmp ? 30 : 40, y1 = R.cmp ? 9 : 12, y2 = R.cmp ? 21 : 28;
     const active = clock.t > 0 && clock.t < 4 ? STEPS[Math.min(3, Math.floor(clock.t - 1e-9))].copy : null;
     for (let k = 0; k < 2; k++) {
       const x = R.x + k * (bw + gap), done = (step) => t >= step - 1e-9;
@@ -417,30 +423,37 @@
       record scene, the screen plot) in the rest. A wide stage puts the apparatus in a band across the top; a wide but
       short one (a cited figure) on the left; a narrow one (a phone) in a lower band across the top, lower still in the
       record scene, whose matrix needs room for the two record boxes (as does the band of a wide stage of middling
-      height, which leaves the panels at least 150 px, 172 px in the record scene, so the grid stays ≥ 80 px). The panels keep their own arrangement inside what
-      is left: side by side where that region is wide, stacked where it is not. */
+      height, which leaves the panels at least 150 px, 172 px in the record scene, so the grid stays ≥ 80 px). On a
+      phone the panels first keep the height that holds a grid of GRID_MIN px (gridSide, the formula drawMatrix uses)
+      and the band takes its share of the rest; a phone's laboratory too short for that and the least band asks for
+      a taller stage (kit.plot's minHeight: the page scrolls), a cited figure keeps its frame. The panels keep their own
+      arrangement inside what is left: side by side where that region is wide, stacked where it is not. */
   let panelInfo = null;
   /** A cited figure in a phone's frame (about 334 × 500): style.css tightens the same frames with the same query. */
   const compact = () => TRV.figure && !TRV.still && window.matchMedia('(max-width: 480px)').matches;
   function layout(Wd, Ht) {
     const sr = $('stage').getBoundingClientRect(), below = (el) => (el.getClientRects().length ? el.getBoundingClientRect().bottom - sr.top : 0);
     const rec = S.scene === 'record';
+    /** The height a matrix box of the given kind spends on more than its grid (names, the record boxes under it). */
+    const overGrid = (cmp) => 1000 - gridSide({ w: Infinity, h: 1000, cmp });
     if (compact()) {
       // a phone's cited figure: the apparatus in a band across the top, under it the grid beside the screen; in the
-      // record scene the grid over its two record boxes, beside the phase disc over the screen (the band gives way)
+      // record scene the grid over its two record boxes, beside the phase disc (a box as tall as the grid at least)
+      // over the screen. The panels keep the room for a grid of GRID_MIN px; the band takes its share of the rest
       const top = below($('hudSub')) + 6, bottom = $('legend').offsetHeight + 24, x0 = 10, w = Wd - 20, h = Math.max(120, Ht - top - bottom);
-      const bh = Math.round(h * (rec ? CB.rec : CB.anchor)), r3 = { x: x0, y: top, w, h: bh }, pr = { x: x0, y: top + bh + 8, w, h: h - bh - 8 };
+      const least = GRID_MIN + overGrid(rec), bh = Math.max(40, Math.round(Math.min(h * (rec ? CB.rec : CB.anchor), h - 8 - least)));
+      const r3 = { x: x0, y: top, w, h: bh }, pr = { x: x0, y: top + bh + 8, w, h: h - bh - 8 };
       if (!rec) {
         const ms = Math.round(Math.min(pr.h + 26, pr.w * 0.47)), sx = pr.x + ms + 12;
         return { cmp: true, r3, pr, mat: { x: pr.x, y: pr.y, w: ms, h: pr.h }, dsc: null, scr: { x: sx, y: pr.y, w: pr.x + pr.w - sx, h: pr.h } };
       }
-      const half = Math.round((pr.w - 10) / 2), rx = pr.x + half + 10, rw = pr.w - half - 10, dh = Math.round(pr.h * 0.56);
+      const half = Math.round((pr.w - 10) / 2), rx = pr.x + half + 10, rw = pr.w - half - 10, dh = Math.min(pr.h - 50, Math.max(GRID_MIN, Math.round(pr.h * 0.56)));
       return { cmp: true, r3, pr, mat: { x: pr.x, y: pr.y, w: half, h: pr.h, recX: pr.x, recW: half, cmp: true }, dsc: { x: rx, y: pr.y, w: rw, h: dh }, scr: { x: rx, y: pr.y + dh + 4, w: rw, h: pr.h - dh - 4 } };
     }
     const top = TRV.thumbMode ? 24 : Math.max(46, below($('hudSub')), below($('sceneChips'))) + 10;
     const bottom = TRV.thumbMode ? 24 : Math.max(18, $('legend').offsetHeight + 20);
-    const x0 = 16, w = Wd - 32, h = Math.max(80, Ht - top - bottom);
-    let r3, pr;
+    const x0 = 16, w = Wd - 32, h = Math.max(80, Ht - top - bottom), fr = rec ? 0.64 : 0.58;   // stacked: the matrix row's share
+    let r3, pr, need = null;
     if (w >= 560 && h < 300) {
       // short and wide (a cited figure in a page): the apparatus on the left takes nearly half the width; the grid beside
       // the screen on the right, in the record scene the grid over its record boxes beside the phase disc over the screen
@@ -452,8 +465,17 @@
       const mw = Math.round(pr.w * 0.44), rx = pr.x + mw + 14, rw = pr.x + pr.w - rx, dh = Math.round(pr.h * 0.52);
       return { r3, pr, mat: { x: pr.x, y: pr.y, w: mw, h: pr.h, recX: pr.x + 14, recW: mw - 14 }, dsc: { x: rx, y: pr.y, w: rw, h: dh }, scr: { x: rx, y: pr.y + dh + 18, w: rw, h: pr.h - dh - 18 } };
     }
-    else { const bh = Math.round(w >= 560 ? Math.max(110, Math.min(h * 0.55, h - (rec ? 172 : 150))) : Math.max(70, h * (rec ? 0.24 : 0.32))); r3 = { x: x0, y: top, w, h: bh }; pr = { x: x0, y: top + bh + 8, w, h: h - bh - 8 }; }
-    const wide = pr.w >= 560 || (pr.w >= 400 && pr.w >= 1.45 * pr.h), fr = rec ? 0.64 : 0.58;   // stacked: the matrix row's share
+    else {
+      let bh;
+      if (w >= 560) bh = Math.max(110, Math.min(h * 0.55, h - (rec ? 172 : 150)));
+      else {   // a phone: the stacked panels keep the room for a grid of GRID_MIN px (the matrix row is fr of them)
+        const least = Math.ceil((GRID_MIN + overGrid(false)) / fr), band = 70;
+        bh = Math.max(band, Math.min(h * (rec ? 0.24 : 0.32), h - 8 - least));
+        need = { top, bottom, h: band + 8 + least };
+      }
+      bh = Math.round(bh); r3 = { x: x0, y: top, w, h: bh }; pr = { x: x0, y: top + bh + 8, w, h: h - bh - 8 };
+    }
+    const wide = pr.w >= 560 || (pr.w >= 400 && pr.w >= 1.45 * pr.h);
     let mat = wide ? { x: pr.x, y: pr.y, w: Math.min(pr.w * (rec ? 0.36 : 0.46), pr.h + 30), h: pr.h } : { x: pr.x, y: pr.y, w: pr.w, h: pr.h * fr };
     let dsc = null;
     if (rec && wide) {
@@ -463,11 +485,13 @@
     else if (rec) { const half = (pr.w - 10) / 2; dsc = { x: pr.x + half + 10, y: pr.y, w: half, h: mat.h }; mat = { x: pr.x, y: pr.y, w: half, h: mat.h, recX: pr.x, recW: half }; }   // the record boxes under the matrix, the disc beside both
     const sx = dsc && wide ? dsc.x + dsc.w + 18 : mat.x + mat.w + 24;
     const scr = wide ? { x: sx, y: pr.y + 18, w: pr.x + pr.w - sx, h: pr.h - 18 } : { x: pr.x, y: pr.y + pr.h * fr + 12, w: pr.w, h: pr.h * (1 - fr) - 12 };
-    return { r3, pr, mat, dsc, scr };
+    return { r3, pr, mat, dsc, scr, need };
   }
   function drawStage() {
     const g0 = kit.plot($('flat'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, Wd = g0.W, Ht = g0.H, m = current(), words = !TRV.thumbMode;
     const lay = layout(Wd, Ht), { r3, pr } = lay, cmp = !!lay.cmp;
+    // a phone's laboratory asks for the stage height its panels need (kit.plot publishes it; ignored in figures and stills)
+    if (lay.need) kit.plot($('flat'), { x: [0, 1], y: [0, 1], pad: [0, 0, lay.need.top, lay.need.bottom], minHeight: lay.need.h, clear: false });
     // the apparatus, fitted to its box in the default view, with room under it for the names of the places and, where
     // its sides leave no room for the words saying what it stands for, a line above it; on a phone (a low band) the
     // names sit beside the beads and the words stay in the drawer and the MODEL box
