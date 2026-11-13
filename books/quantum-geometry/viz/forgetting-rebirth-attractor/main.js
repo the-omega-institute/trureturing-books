@@ -841,7 +841,15 @@
     stopAt = end < clock.max - 1e-9 ? end : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // A cited figure keeps its short note whole; detailed explanations remain in the full laboratory.
+  const FIGURE_NOTES = {
+    "staircase": ["每步快度加 1：第八级已接近圆周，放大后缝仍非零。", "Add 1 to rapidity each step: step 8 nears the rim but leaves a nonzero gap."],
+    "klein_vs_poincare": ["换圆盘坐标，直弦变正交圆弧，两种固有时率都等于 sech η。", "Change disk coordinates: chords become orthogonal arcs; both rates equal sech η."],
+    "erase_reset": ["等角步长越过 90° 后擦表归心，换一根辐条重新出发。", "Equal angle steps cross 90°, reset at the centre and start on a new spoke."],
+    "quotient_fold": ["按周期折叠五圈：首次擦表后的 25 步落在五个位置。", "Fold five rounds by their period: 25 steps after the first reset occupy 5 places."],
+    "cayley": ["c 趋近 1/2 时像圆趋近单位圆；每个 c > 1/2 仍留非零缝。", "As c approaches 1/2, the image circles approach the unit rim but keep a gap."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? FIGURE_NOTES : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：沿射线拖动琥珀色的点，用时间轴一级级走，换 Klein 或庞加莱圆盘，改步长 Δη；在“轮回”里看角度尺怎样撞上边界、把轮子折叠；在“分式”里拖动像圆。随时可以再选一张卡。', 'Free play: drag the amber point along the ray, step with the rail, swap the Klein and Poincaré disks, change the step Δη; in Wheel watch the angle ruler hit the rim and fold the wheel; in Fractional map drag the image circle. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

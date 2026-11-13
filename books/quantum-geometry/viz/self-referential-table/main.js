@@ -738,7 +738,16 @@
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // A cited figure keeps its short note whole; detailed explanations remain in the full laboratory.
+  const FIGURE_NOTES = {
+    "reset": ["只写入常值向量：每格为 1/8，迹为 1，只占一个地址槽。", "One constant vector: every cell is 1/8, trace 1, and one address slot is used."],
+    "expand_table": ["逐行写入正交向量：每行使迹增 1，表始终保持幂等。", "Each new orthogonal row adds 1 to the trace; the table stays idempotent."],
+    "full": ["八行填满八维空间，表成为单位阵，不存在第九个正交方向。", "Eight rows fill eight dimensions: T = I, with no ninth orthogonal direction."],
+    "dual_read": ["横行与竖列逐项相乘求和，返回 T 的同一格，即 T² = T。", "A row times a column returns the same cell: T² = T."],
+    "heal": ["对称扰动破坏幂等性；迭代 3T² − 2T³ 将本征值推向 0 或 1。", "After a symmetric perturbation, 3T² − 2T³ drives eigenvalues towards 0 or 1."],
+    "orthogonal_zero": ["ψ 转入正交补时，读出 Tψ 按 cos θ 缩短，在 90° 归零。", "As ψ turns into the orthogonal complement, Tψ shrinks to zero at 90°."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? FIGURE_NOTES : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：点表里的一格、换场景、改 N 与秩、拖时间轴。随时可以再选一张卡。', 'Free play: click a cell, switch scenes, change N and the rank, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

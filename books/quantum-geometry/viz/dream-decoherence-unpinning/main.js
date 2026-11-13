@@ -533,7 +533,7 @@
   const STEP_TEXT = [['出发：等幅叠加，ρ₀₁ = 1/2', 'Start: the equal superposition, ρ₀₁ = 1/2'], ['写入副本 0', 'Writing copy 0'], ['写入副本 1', 'Writing copy 1'], ['逆转副本 0', 'Reversing copy 0'], ['逆转副本 1', 'Reversing copy 1']];
   const LEG = {
     anchor: [['cy box', '对角、块里的格与它们的条纹：留下的', 'kept: diagonal, in-block cells, their fringes'], ['mg box', '跨块的格与它添的条纹：被剪的', 'cut: cross-block cells, their fringes'], ['dm', '灰框：锚点的块', 'grey frames: anchor blocks']],
-    record: [['cy box', '对角', 'diagonal'], ['mg box', '相干 ρ₀₁（方格与盘上的箭头）与它添的条纹', 'coherence ρ₀₁ (square, arrow on the disc) and its fringes'], ['am', '这一步作用的那份记录', 'the record acting at this step']],
+    record: [['cy box', '对角', 'diagonal'], ['mg box', '相干 ρ₀₁ 与条纹', 'ρ₀₁ coherence and fringes'], ['am', '此步作用的记录', 'record at this step']],
     wake: [['am', '读出 P₀：躯体那一格', 'readout P₀: the body cell'], ['cy box', '留下的权重', 'weight kept'], ['mg box', '淡出的部分', 'what fades out']]
   };
   /** The stage title shares its row with the scene buttons: on a narrow stage, where the full title would run under
@@ -688,7 +688,17 @@
     stopAt = c.to == null ? null : c.to;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // A cited figure keeps its short note whole; detailed explanations remain in the full laboratory.
+  const FIGURE_NOTES = {
+    "waking": ["λ 从 0 到 1：跨块相干消失，对角权重不变，条纹淡出。", "As λ grows to 1, cross-block coherence and fringes vanish; diagonal weights stay."],
+    "blocks": ["锚点只分躯体与其余两块：块内相干保留，跨块相干消失。", "Two anchor blocks keep coherence within each block and cut it between them."],
+    "half_erase": ["两份相位记录只逆转一份：ρ₀₁ 停在 −i/2，条纹仍错开。", "Reverse just one of two phase records: ρ₀₁ stops at −i/2; fringes stay shifted."],
+    "zero_overlap_fail": ["c = 0 的记录使 ρ₀₁ 归零，逆转两份也不能恢复条纹。", "For c = 0, ρ₀₁ vanishes; reversing both records does not restore fringes."],
+    "quantum_eraser": ["两份相位记录全部逆转，ρ₀₁ 返回 1/2，条纹恢复。", "Reverse both phase records: ρ₀₁ returns to 1/2 and the fringes return."],
+    "unpin_body": ["λ 降至 0.1：躯体连向其余的相干恢复至原来的九成。", "Lower λ to 0.1: body-to-rest coherence returns to 90% of its original size."],
+    "wake_snap": ["投影 P₀ 只留躯体一格，遗忘权重为 0.60，其余相干消失。", "Projection P₀ keeps the body cell; forgotten weight is 0.60."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? FIGURE_NOTES : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景，拖锚点强度、躯体的权重或记录的重叠，在方格上左右拖，或拖动时间轴。随时可以再选一张卡。', 'Free play: switch scenes, move the anchor strength, the body weight or the record overlap, drag sideways on the grid, or scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

@@ -388,7 +388,7 @@ await solidChecks(TE, BOOK, ID, page);
    A chapter cites a card in an iframe 500 px high: about 334 px wide on a 390 px phone, 760 px in a book page. In the
    phone's frame a long note once took ~180 px of the 500 and left the stage ~210 px: the tower and the disk shrank to a few pixels, and the disk, its magnifier and their labels ran into the legend collided with the
    captions and the legend, and the lit solid shrank to a few per cent of the stage. These checks look at the frame
-   itself: nothing scrolls; the note bar stays short and its full note scrolls to the last line; the stage keeps most of
+   itself: nothing scrolls; the complete note stays short and needs no internal scrolling; the stage keeps most of
    the frame; no ink of the flat canvas or the WebGL canvas and no label lies under the title, its second line or the
    legend; the solid draws nothing inside the flat drawings; labels stay on the stage and apart; the lit solid covers
    ≥ 12 % of the stage at the card's first and last frame; and the exact disk keeps a radius ≥ 40 px. */
@@ -420,7 +420,7 @@ await solidChecks(TE, BOOK, ID, page);
     const tags = [...st.querySelectorAll('.tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => [t.textContent.trim(), box(t.getBoundingClientRect())]);
     const fb = document.getElementById('flat').getBoundingClientRect();
     const panels = (() => [['the disk and its magnifier', window.SAMSARA_DEBUG.solid.r2]])().map(([what, b]) => [what, { x: fb.left + b.x, y: fb.top + b.y, w: b.w, h: b.h }]);
-    const what = document.querySelector('.tour .what'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
+    const what = document.querySelector('.tour .tour-note'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
     const full = what.textContent.trim().endsWith(note.textContent.trim()) && note.textContent.trim().length > 20;
     const scrolls = what.scrollHeight > what.clientHeight + 1, oy = getComputedStyle(what).overflowY;
     what.scrollTop = what.scrollHeight; const reached = what.scrollTop + what.clientHeight >= what.scrollHeight - 1; what.scrollTop = 0;
@@ -454,7 +454,7 @@ await solidChecks(TE, BOOK, ID, page);
       await settle(pg);
       const f = await facts(pg), id = `${card} (${lang})`;
       if (f.docScroll > 0 || f.docWide > 0 || f.stageH < 0.72 * f.vp.h) bad.frame.push(`${id}: scroll ${f.docScroll}/${f.docWide}, stage ${Math.round(f.stageH)} px`);
-      if (f.tourH > 84 || !f.note.full || !f.note.scrollable || !f.note.reached || !f.note.btns) bad.note.push(`${id}: ${Math.round(f.tourH)} px ${JSON.stringify(f.note)}`);
+      if (f.tourH > 84 || !f.note.full || f.note.scrolls || !f.note.reached || !f.note.btns) bad.note.push(`${id}: ${Math.round(f.tourH)} px ${JSON.stringify(f.note)}`);
       if (f.under.length) bad.words.push(`${id}: ${f.under.slice(0, 3).join(', ')}`);
       if (f.solidIn.length) bad.solid.push(`${id}: ${f.solidIn.join(', ')}`);
       if (f.tagOut.length || f.tagHit.length) bad.labels.push(`${id}: ${[...f.tagOut.map((t) => `off stage: ${t}`), ...f.tagHit].slice(0, 3).join(', ')}`);
@@ -465,7 +465,7 @@ await solidChecks(TE, BOOK, ID, page);
     }
     const what = `${tag}, ${lang}, ${cards.length === FIG.length ? 'every cited card' : cards.join(' + ')}`;
     check(`cited figure, ${what}: nothing scrolls and the stage keeps ≥ 72 % of the frame`, !bad.frame.length, bad.frame.join(' | '));
-    check(`cited figure, ${what}: the note bar stays ≤ 84 px, holds the card's whole note and scrolls to its last line, ◀ ▶ in the frame`, !bad.note.length, bad.note.join(' | '));
+    check(`cited figure, ${what}: the note bar stays ≤ 84 px, holds the card's complete note without internal scrolling, ◀ ▶ in the frame`, !bad.note.length, bad.note.join(' | '));
     check(`cited figure, ${what}: no flat drawing, no solid and no label under the title, its second line or the legend`, !bad.words.length, bad.words.join(' | '));
     check(`cited figure, ${what}: the solid draws nothing inside the part of the disk and its magnifier`, !bad.solid.length, bad.solid.join(' | '));
     check(`cited figure, ${what}: every label stays on the stage, and no two labels sit on each other`, !bad.labels.length, bad.labels.join(' | '));

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Independent browser regression for the eight sandtable experiments.
-import { session, stageFirstChecks, settle, cjkLeftovers, inkShare } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, stageView, settle, cjkLeftovers, inkShare } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'pisot-clifford-rauzy-sandtable';
 const PRESETS = ['zeckendorf', 'kbonacci', 'padic', 'rauzy', 'clifford', 'self-reference', 'entanglement', 'entropy'];
@@ -209,7 +209,6 @@ for (const [kind, width, height] of [['desktop', 1440, 900], ['mobile', 390, 844
       await p.evaluate(() => window.scrollTo(0, 0)); await settle(p);
       const info = await p.evaluate(embed => {
         const r = document.querySelector('#stage').getBoundingClientRect(), tour = document.querySelector('#tour').getBoundingClientRect();
-        const a = document.querySelector('.hud-tl').getBoundingClientRect(), b = document.querySelector('.hud-tr').getBoundingClientRect();
         const cv = document.querySelector('#cv'), cr = cv.getBoundingClientRect();
         return { preset: window.RAUZY_SANDTABLE_DEBUG.preset, view: window.RAUZY_SANDTABLE_DEBUG.view,
           theme: matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark', lang: document.documentElement.dataset.lang,
@@ -217,15 +216,16 @@ for (const [kind, width, height] of [['desktop', 1440, 900], ['mobile', 390, 844
           share: r.width * Math.max(0, Math.min(r.bottom, innerHeight) - Math.max(r.top, 0)) / (innerWidth * innerHeight),
           order: r.top < document.querySelector('.deck').getBoundingClientRect().top,
           fits: tour.bottom <= innerHeight + 1 && r.bottom <= tour.top + 1,
-          hud: a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top,
           canvas: cv.width > 0 && cv.height > 0 && Math.abs(cr.width - r.width) < 3,
           pressed: document.querySelector(`[data-preset="${window.RAUZY_SANDTABLE_DEBUG.preset}"]`).getAttribute('aria-pressed'),
           note: document.querySelector(embed ? '.tour .what' : '#presetNote').textContent.trim().length };
       }, kind === 'embed');
+      // Check rendered title lines, buttons and legend entries rather than empty container space.
+      info.hud = (await stageView(p, '#stage', kind === 'embed')).hud;
       const tag = `${kind} ${width}×${height} ${lang}/${theme} ${PRESETS[i]}`;
       check(`${tag}: card, view, color preference and rendered stage`, info.preset === PRESETS[i] && info.view === VIEWS[i] && info.theme === theme && info.lang === lang
         && info.pressed === 'true' && info.note > 8 && info.canvas && (await inkShare(p, '#cv')) > 0.01, JSON.stringify(info));
-      check(`${tag}: stage-first geometry and HUD separation`, info.overflow <= 0 && info.hud
+      check(`${tag}: stage-first geometry and HUD separation`, info.overflow <= 0 && info.hud.length === 0
         && info.share >= (kind === 'embed' ? 0.6 : 0.28) && (kind !== 'mobile' || info.order) && (kind !== 'embed' || info.fits), JSON.stringify(info));
       if (lang === 'en') { const bad = await cjkLeftovers(p); check(`${tag}: English is complete`, bad.length === 0, bad.slice(0, 3).join(' | ')); }
     }

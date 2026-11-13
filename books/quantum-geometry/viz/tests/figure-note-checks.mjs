@@ -4,6 +4,10 @@ import { settle } from '../../../../tools/node/viz-testkit.mjs';
 
 const pages = [
   ['chsh-dial', 'collinear'],
+  ['dream-decoherence-unpinning', 'waking'],
+  ['self-referential-table', 'reset'],
+  ['forgetting-rebirth-attractor', 'staircase'],
+  ['pointer-ontology-deref', 'qram_tree'],
   ['entanglement-entropy-complexity', 'pythagoras'],
   ['eth-horizon-crossover', 'human'],
   ['sphere-escape', 'diagonal'],

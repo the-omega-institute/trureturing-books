@@ -633,7 +633,16 @@
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // A cited figure keeps its short note whole; detailed explanations remain in the full laboratory.
+  const FIGURE_NOTES = {
+    "qram_tree": ["地址 41 沿六级树走六步到叶子，63 个开关只亮六个。", "Address 41 reaches its leaf in 6 steps, lighting 6 of 63 switches."],
+    "linear64": ["顺序读到地址 63 要走 64 步，同一规模的路由树只需六步。", "Reading address 63 sequentially takes 64 steps; the routing tree takes 6."],
+    "superpose": ["四个地址叠加共点亮 17 个开关，每条路径仍只有六级。", "Four address branches light 17 switches in all; each path still has 6 levels."],
+    "four_loops": ["索引 [0,0,0,0] 四次返回 0x1000，读出的仍是页目录自己。", "Index [0,0,0,0] loops to 0x1000 four times, returning the directory itself."],
+    "self_map": ["索引 [0,1] 先返回本页，再读出叶页表 T₁ 自身作为数据。", "Index [0,1] first returns to this page, then reads the leaf table T₁ as data."],
+    "diagonal_hit": ["p = *p = 0x1000：这一格恰好保存自身地址，一次解引用即返回。", "p = *p = 0x1000: this cell holds its own address and returns it in one read."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? FIGURE_NOTES : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖地址、点内存格、换叠加的分支数或页表索引、拖时间轴。随时可以再选一张卡。', 'Free play: drag the address, click a memory cell, change the branches or the page-table index, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
