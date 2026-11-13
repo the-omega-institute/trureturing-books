@@ -722,7 +722,35 @@ For $q=0$, both sums are empty and have value zero.
 The positive diagonal lets forward substitution produce the actual inverse. Odd repetition makes the product of the two positive entries in each pair exactly $1/[t(2l)t(2(l+d+1))]\ge1$, so their sum is at least $2$. The triangular index domain has $q(q+1)/2$ pairs, giving the bound. The full proof is checked by the Lean kernel.
 :::
 
-If $m=2q+1$, $s$ is even, $W_{s+i+m}=W_{s+i}$ for $0\le i<m-1$, and $s+2m\le N_j$, setting $t(i)=t_{W_{s+i}}$ matches this matrix model and a $2m$-site window inside the prefix. It remains unproved here that every sufficiently large specified prefix supplies such a window with $N_j\le Km$ for some constant $K$ independent of $j$. Embedding the local inverse into the inverse of the whole prefix, and converting this mass bound into operator-norm and spectral-gap estimates, also require separate proofs. [@thm-ch39-p2e-odd-repeat-inverse-mass] does not settle the preceding open-chain limit or fractal entropy-scaling problem.
+If $m=2q+1$, $s$ is even, $W_{s+i+m}=W_{s+i}$ for $0\le i<m-1$, and $s+2m\le N_j$, setting $t(i)=t_{W_{s+i}}$ matches this matrix model and a $2m$-site window inside the prefix. The required windows can be constructed from the substitution word itself. The construction and scale estimate below are distinguished from the results included in this book's current Lean pin.
+
+::: {.example #ex-ch39-p2e-aligned-tribonacci-windows title="An Explicit Odd Repetition Window (Not Yet Included in This Book's Lean Pin)"}
+For each $j\ge4$, set $r=\lfloor(j-4)/4\rfloor$ and $k=4r$, so $k+4\le j\le k+7$. Split the fourth iterate into four pieces:
+
+$$
+\sigma^4(A)=ABAC\,\vert\,ABA\,\vert\,ABA\,\vert\,CAB.
+$$
+
+Write $a=\sigma^k(A)$, $b=\sigma^k(B)$, and $c=\sigma^k(C)$; the vertical bars indicate concatenation, not additional letters. Applying $k$ further substitutions gives
+
+$$
+\sigma^{k+4}(A)=(abac)\,(aba)\,(aba)\,(cab).
+$$
+
+Take $s=|abac|$ and $m=|aba|$. At every level divisible by four, the lengths of $a,b,c$ are all odd: at level zero each length is $1$, and the fourth images of the three letters contain $13,11,7$ letters, respectively, so four substitution steps preserve this oddness. Thus $s$ is even, $m\ge3$ is odd, and the two copies of $aba$ supply the required equality. The nonempty tail $cab$ ensures that rounding the prefix length down to an even number preserves the entire repeated window. Each substitution at most doubles length, giving
+
+$$
+\begin{aligned}
+N_j&\le L_j\le L_{k+7}\le128L_k\le128m,\\
+s+2m&\le N_j,\\
+W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
+\end{aligned}
+$$
+
+Here $s,m$ are nonnegative integers, and the constant $128$ is independent of $j$ and the hopping parameter $\rho$. This construction corresponds to the formalization repository's [PR #30107](https://github.com/the-omega-institute/trureturing/pull/30107). It is not yet included in this book's pinned commit, so this example is not labelled as a Lean-verified theorem of the book.
+:::
+
+Constructing a word window and estimating the spectrum of the whole chain are separate steps. Embedding the local inverse into the inverse of the whole prefix, and converting the mass bound into operator-norm and spectral-gap estimates, still require proofs. In particular, it remains open here whether, for every fixed $\rho\in(0,1)$, there are $C_\rho>0$ and an integer $J_\rho\ge1$ such that $\delta_{\rho,j}\le C_\rho/N_j$ for every $j\ge J_\rho$. Such a bound would imply the preceding open-chain limit; the fractal entropy-scaling problem would still remain.
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`, shift entropy and Abramov's formula carry status `Literature`, and fractal area scaling carries status `OPEN`.
