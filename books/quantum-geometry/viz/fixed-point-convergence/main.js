@@ -475,7 +475,17 @@
     if (c.at != null) { setScene(c.scene, c.at); return; }
     run(c.scene, c.to, c.still);
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "golden": ["从 x₀ = 1 迭代 1 + 1/x，交替逼近 φ，相邻误差之比趋于约 −0.382。", "Iterate 1 + 1/x from x₀ = 1: it approaches φ alternately, with error ratio tending to about −0.382."],
+    "far": ["从 x₀ = 3 取余弦，第一步落入 [−1, 1]，此后收敛到 θ* ≈ 0.739。", "From x₀ = 3, cosine enters [−1, 1] in one step and then converges to θ* ≈ 0.739."],
+    "rate": ["近 θ* 时余弦迭代的误差比趋于切线斜率 −sin θ* ≈ −0.674。", "Near θ*, the cosine iteration’s error ratio tends to tangent slope −sin θ* ≈ −0.674."],
+    "circle": ["单位圆上 P = (θ*, sin θ*)：横坐标是定点，高度约 0.674 是渐近误差收缩率。", "On the unit circle, P = (θ*, sin θ*): its height ≈ 0.674 is the asymptotic error contraction factor."],
+    "newton": ["牛顿法从 1 出发：前两步正确位数 0 → 1 → 4，近点时误差渐近平方。", "Newton’s method from 1: correct digits go 0 → 1 → 4 in two steps; near the root the error squares asymptotically."],
+    "rational": ["渐近分数 q 逼近 θ*，品红残差 |cos q − q| 始终留在两条虚线的楔形内。", "Convergents q approach θ*; the magenta residual |cos q − q| stays inside the dashed wedge."],
+    "ruler": ["17/23 的残差约为千分尺最近刻度 739/1000 的一半。", "The residual of 17/23 is about half that of the nearest thousandth, 739/1000."],
+  };
+  const cards = kit.cards($('presets'), { presets: CARDS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换映射、拖起点、换镜头、拖时间轴。随时可以再选一张卡。', 'Free play: switch the map, drag the start, change the camera, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

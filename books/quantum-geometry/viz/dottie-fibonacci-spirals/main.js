@@ -1395,6 +1395,7 @@
     run(c.scene, c.to, c.still);
   }
   const cards = kit.cards($('presets'), {
+    presets: CARDS,
     notes: NOTES,
     noteEl: $('presetNote'),
     tour: $('tour'),

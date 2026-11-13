@@ -209,25 +209,6 @@
     return { deg, arc, mid: arc[m / 2] };
   }
 
-  /** A dashed path that stays dashed however finely it is sampled: stage paths stroke segment by segment, which
-      restarts a line dash at every sample, so the dashes are cut here along the projected length instead. */
-  function dashPath(pts, s) {
-    const on = s.dash[0], off = s.dash[1], solid = Object.assign({}, s, { dash: null });
-    let chunk = [pts[0]], run = 0, drawing = true;
-    for (let i = 1; i < pts.length; i++) {
-      const a = stage.p(pts[i - 1]), b = stage.p(pts[i]), d = Math.hypot(b[0] - a[0], b[1] - a[1]);
-      let used = 0;
-      while (d - used > (drawing ? on : off) - run) {
-        const f = (used + (drawing ? on : off) - run) / d, mid = v3.add(v3.scale(pts[i - 1], 1 - f), v3.scale(pts[i], f));
-        if (drawing) { chunk.push(mid); if (chunk.length > 1) stage.path(chunk, solid); }
-        used += (drawing ? on : off) - run; run = 0; drawing = !drawing; chunk = [mid];
-      }
-      run += d - used;
-      if (drawing) chunk.push(pts[i]);
-    }
-    if (drawing && chunk.length > 1) stage.path(chunk, solid);
-  }
-
   function drawSphere(now, ghostNow, C) {
     const st = stage, lab = S.frame === 'lab', thick = TRV.thumbMode ? 1.5 : 1;
     st.sphere(1, { lat: [0], lon: 2, shade: 0.05, alpha: TRV.thumbMode ? 0.7 : 0.45 });
@@ -280,13 +261,13 @@
         st.line(c0, a0, { color: P.magenta, width: 1, alpha: 0.6, back: 0.4 }); st.line(c0, pts[pts.length - 1], { color: P.magenta, width: 1, alpha: 0.6, back: 0.4 });
       }
     }
-    // the compared path, dashed
+    // the compared path, dashed (the stage keeps one dash pattern along the whole projected path)
     if (C.ghost) {
       if (C.kind === 'lam') {                          // the literal circuit: an instantaneous turn by λ about z first
         const pts = [], m = 40; for (let i = 0; i <= m; i++) pts.push(rotZ(S.r0, S.lam * DEG * i / m));
-        dashPath(pts, { color: P.ink, width: 1.4, alpha: 0.7, dash: [6, 5], back: 0.35 });
+        st.path(pts, { color: P.ink, width: 1.4, alpha: 0.7, dash: [6, 5], back: 0.35 });
       }
-      dashPath(path(C.ghost, now.t, lab), { color: P.ink, width: 1.6 * thick, alpha: 0.8, dash: [6, 5], back: 0.35 });
+      st.path(path(C.ghost, now.t, lab), { color: P.ink, width: 1.6 * thick, alpha: 0.8, dash: [6, 5], back: 0.35 });
       const gp = lab ? labOf(ghostNow) : ghostNow.r;
       st.dot(gp, 5.5, P.ink, { ring: true, width: 2, fade: false });
       st.dot([0, 0, gp[2]], 4, P.cyan, { ring: true, width: 1.6, fade: false });
@@ -557,7 +538,7 @@
     // the card plays once the reader has scrolled it into view; a click plays at once
     if (TRV.still || (booting && !TRV.embed)) clock.set(p.still); else if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖包络的顶和右端、改相位与失谐、加一个虚拟 Z 或第二个脉冲，或在球上拖起始态。随时可以再选一张卡。', 'Free play: drag the top or the right end of the envelope, change the phase and the detuning, add a virtual Z or a second pulse, or drag the starting state on the sphere. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

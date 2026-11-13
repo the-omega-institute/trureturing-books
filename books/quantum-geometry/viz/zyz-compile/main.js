@@ -275,7 +275,7 @@
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
     if (TRV.still || (booting && !TRV.embed)) clock.set(p.still); else if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖三个欧拉角、换箭头的起点，或打开单一转轴 n。随时可以再选一张卡。', 'Free play: drag the three Euler angles, move the arrow\'s start, or switch on the single axis n. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

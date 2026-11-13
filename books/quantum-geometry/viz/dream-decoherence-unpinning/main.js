@@ -21,6 +21,7 @@
   'use strict';
   const { kit, L } = TRV, { fix, sgn, clamp } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
+  const setText = (id, value) => { const el = $(id); if (el.textContent !== value) el.textContent = value; };
   const DEG = Math.PI / 180, TAU = Math.PI * 2;
   const S = { scene: 'anchor', fam: 'fine', w: 0.4, path: [0, 1], lamDream: 0.1, r: 1, phi: 90 };
   const SC = {
@@ -532,7 +533,7 @@
   const STEP_TEXT = [['出发：等幅叠加，ρ₀₁ = 1/2', 'Start: the equal superposition, ρ₀₁ = 1/2'], ['写入副本 0', 'Writing copy 0'], ['写入副本 1', 'Writing copy 1'], ['逆转副本 0', 'Reversing copy 0'], ['逆转副本 1', 'Reversing copy 1']];
   const LEG = {
     anchor: [['cy box', '对角、块里的格与它们的条纹：留下的', 'kept: diagonal, in-block cells, their fringes'], ['mg box', '跨块的格与它添的条纹：被剪的', 'cut: cross-block cells, their fringes'], ['dm', '灰框：锚点的块', 'grey frames: anchor blocks']],
-    record: [['cy box', '对角', 'diagonal'], ['mg box', '相干 ρ₀₁（方格与盘上的箭头）与它添的条纹', 'coherence ρ₀₁ (square, arrow on the disc) and its fringes'], ['am', '这一步作用的那份记录', 'the record acting at this step']],
+    record: [['cy box', '对角', 'diagonal'], ['mg box', '相干 ρ₀₁ 与条纹', 'ρ₀₁ coherence and fringes'], ['am', '此步作用的记录', 'record at this step']],
     wake: [['am', '读出 P₀：躯体那一格', 'readout P₀: the body cell'], ['cy box', '留下的权重', 'weight kept'], ['mg box', '淡出的部分', 'what fades out']]
   };
   /** The stage title shares its row with the scene buttons: on a narrow stage, where the full title would run under
@@ -557,7 +558,7 @@
     if (S.scene === 'anchor') {
       const lam = lamNow(), c0 = crossNorm(anchored(0, S.fam), S.fam), c = crossNorm(m.rho, S.fam), ent = H(eig);
       setHud(L(`锚点 · λ = ${fix(lam, 2)}`, `Anchors · λ = ${fix(lam, 2)}`), `λ = ${fix(lam, 2)}`);
-      $('hudSub').textContent = L(`${S.fam === 'fine' ? '锚点：逐个位置' : '锚点：躯体 | 其余三处'} · 跨块相干剩 ${fix(100 * (1 - lam), 0)}% · 对角不动 · 熵 S = ${fix(ent, 2)}`, `${S.fam === 'fine' ? 'anchors: every place' : 'anchors: body | the other three'} · ${fix(100 * (1 - lam), 0)}% of the cross-block coherence left · diagonal fixed · entropy S = ${fix(ent, 2)}`);
+      setText('hudSub', L(`${S.fam === 'fine' ? '锚点：逐个位置' : '锚点：躯体 | 其余三处'} · 跨块相干剩 ${fix(100 * (1 - lam), 0)}% · 对角不动 · 熵 S = ${fix(ent, 2)}`, `${S.fam === 'fine' ? 'anchors: every place' : 'anchors: body | the other three'} · ${fix(100 * (1 - lam), 0)}% of the cross-block coherence left · diagonal fixed · entropy S = ${fix(ent, 2)}`));
       $('roKeyL').textContent = L('跨块相干的模长', 'modulus of the cross-block coherence');
       $('roKey').textContent = fix(c, 3); $('roKeySub').textContent = L(` = (1 − λ) × 出发时的 ${fix(c0, 3)}`, ` = (1 − λ) × ${fix(c0, 3)} at the start`);
       setRo(1, '锚点强度 λ', 'anchor strength λ', fix(lam, 3));
@@ -574,7 +575,7 @@
       const z = m.rho[0][1], k = Math.min(4, Math.floor(clock.t + 1e-9)), c = overlap(), prod = cmul(z, [2, 0]);
       setHud(L(`记录 · ρ₀₁ = ${fmtC(z, 2)}`, `Records · ρ₀₁ = ${fmtC(z, 2)}`), `ρ₀₁ = ${fmtC(z, 2)}`);
       const stepNow = clock.t <= 1e-9 ? 0 : Math.min(4, Math.ceil(clock.t - 1e-9));
-      $('hudSub').textContent = `${L(...STEP_TEXT[stepNow])} · ${L(`每份记录的重叠 c = ${fmtC(c, 2)}`, `overlap of each record c = ${fmtC(c, 2)}`)}`;
+      setText('hudSub', `${L(...STEP_TEXT[stepNow])} · ${L(`每份记录的重叠 c = ${fmtC(c, 2)}`, `overlap of each record c = ${fmtC(c, 2)}`)}`);
       $('roKeyL').textContent = L('非对角元 ρ₀₁', 'off-diagonal entry ρ₀₁');
       $('roKey').textContent = fmtC(z, 3); $('roKeySub').textContent = L(' 出发时 1/2', ' 1/2 at the start');
       setRo(1, '已完成的步数', 'steps done', `${k} / 4`);
@@ -591,7 +592,7 @@
     } else {
       const s = clock.t, keep = m.rho[0][0][0], pf = 1 - keep, pAt = (l) => 1 - anchored(l, 'fine')[0][0][0];
       setHud(L(`醒来 · 遗忘 ${fix(pf, 2)}`, `Waking · forgotten ${fix(pf, 2)}`), L(`遗忘 ${fix(pf, 2)}`, `forgotten ${fix(pf, 2)}`));
-      $('hudSub').textContent = L(`读出 P₀ = |x₀⟩⟨x₀| · 进度 ${fix(100 * s, 0)}% · 梦中 λ = ${fix(S.lamDream, 2)}`, `readout P₀ = |x₀⟩⟨x₀| · ${fix(100 * s, 0)}% done · dream λ = ${fix(S.lamDream, 2)}`);
+      setText('hudSub', L(`读出 P₀ = |x₀⟩⟨x₀| · 进度 ${fix(100 * s, 0)}% · 梦中 λ = ${fix(S.lamDream, 2)}`, `readout P₀ = |x₀⟩⟨x₀| · ${fix(100 * s, 0)}% done · dream λ = ${fix(S.lamDream, 2)}`));
       $('roKeyL').textContent = L('遗忘的权重 1 − Tr(P₀ρ)', 'forgotten weight 1 − Tr(P₀ρ)');
       $('roKey').textContent = fix(pf, 3); $('roKeySub').textContent = L(' = 1 − |⟨x₀|Ψ⟩|²', ' = 1 − |⟨x₀|Ψ⟩|²');
       setRo(1, '读出进度', 'readout progress', `${fix(100 * s, 0)}%`);
@@ -687,7 +688,17 @@
     stopAt = c.to == null ? null : c.to;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // A cited figure keeps its short note whole; detailed explanations remain in the full laboratory.
+  const FIGURE_NOTES = {
+    "waking": ["λ 从 0 到 1：跨块相干消失，对角权重不变，条纹淡出。", "As λ grows to 1, cross-block coherence and fringes vanish; diagonal weights stay."],
+    "blocks": ["锚点只分躯体与其余两块：块内相干保留，跨块相干消失。", "Two anchor blocks keep coherence within each block and cut it between them."],
+    "half_erase": ["两份相位记录只逆转一份：ρ₀₁ 停在 −i/2，条纹仍错开。", "Reverse just one of two phase records: ρ₀₁ stops at −i/2; fringes stay shifted."],
+    "zero_overlap_fail": ["c = 0 的记录使 ρ₀₁ 归零，逆转两份也不能恢复条纹。", "For c = 0, ρ₀₁ vanishes; reversing both records does not restore fringes."],
+    "quantum_eraser": ["两份相位记录全部逆转，ρ₀₁ 返回 1/2，条纹恢复。", "Reverse both phase records: ρ₀₁ returns to 1/2 and the fringes return."],
+    "unpin_body": ["λ 降至 0.1：躯体连向其余的相干恢复至原来的九成。", "Lower λ to 0.1: body-to-rest coherence returns to 90% of its original size."],
+    "wake_snap": ["投影 P₀ 只留躯体一格，遗忘权重为 0.60，其余相干消失。", "Projection P₀ keeps the body cell; forgotten weight is 0.60."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? FIGURE_NOTES : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景，拖锚点强度、躯体的权重或记录的重叠，在方格上左右拖，或拖动时间轴。随时可以再选一张卡。', 'Free play: switch scenes, move the anchor strength, the body weight or the record overlap, drag sideways on the grid, or scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

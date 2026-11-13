@@ -258,14 +258,14 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    over: { n: 2, word: [1], colors: [0, 1], closed: false, rule: 'dihedral', view: 'tilt' },
-    inverse: { n: 2, word: [1, -1], colors: [0, 1], B: { n: 2, word: [] }, closed: false, rule: 'dihedral', view: 'tilt' },
-    twice: { n: 2, word: [1, 1], colors: [0, 1], B: { n: 2, word: [] }, closed: false, rule: 'dihedral', view: 'tilt' },
-    yb: { n: 3, word: [1, 2, 1], colors: [0, 1, 2], B: { n: 3, word: [2, 1, 2] }, closed: false, rule: 'dihedral', view: 'tilt' },
-    close: { n: 2, word: [1], colors: [0, 1], closed: true, rule: 'dihedral', view: 'front' },
-    stabilize: { n: 2, word: [1, 1, 1], colors: [0, 1], B: { n: 3, word: [2, 1, 1, 1] }, closed: true, rule: 'dihedral', view: 'front' },
-    trefoil: { n: 2, word: [1], colors: [0, 1], B: { n: 2, word: [1, 1, 1] }, closed: true, rule: 'dihedral', view: 'front' },
-    rack: { n: 1, word: [], colors: [0], B: { n: 2, word: [1] }, closed: true, rule: 'shift', view: 'front' }
+    over: { n: 2, word: [1], colors: [0, 1], closed: false, rule: 'dihedral', view: 'tilt', still: 1 },
+    inverse: { n: 2, word: [1, -1], colors: [0, 1], B: { n: 2, word: [] }, closed: false, rule: 'dihedral', view: 'tilt', still: 1 },
+    twice: { n: 2, word: [1, 1], colors: [0, 1], B: { n: 2, word: [] }, closed: false, rule: 'dihedral', view: 'tilt', still: 1 },
+    yb: { n: 3, word: [1, 2, 1], colors: [0, 1, 2], B: { n: 3, word: [2, 1, 2] }, closed: false, rule: 'dihedral', view: 'tilt', still: 1 },
+    close: { n: 2, word: [1], colors: [0, 1], closed: true, rule: 'dihedral', view: 'front', still: 1 },
+    stabilize: { n: 2, word: [1, 1, 1], colors: [0, 1], B: { n: 3, word: [2, 1, 1, 1] }, closed: true, rule: 'dihedral', view: 'front', still: 1 },
+    trefoil: { n: 2, word: [1], colors: [0, 1], B: { n: 2, word: [1, 1, 1] }, closed: true, rule: 'dihedral', view: 'front', still: 1 },
+    rack: { n: 1, word: [], colors: [0], B: { n: 2, word: [1] }, closed: true, rule: 'shift', view: 'front', still: 1 }
   };
   const NOTES = {
     over: ['两颗粒子绕中点转半圈换了位置：左边那股从前面过（离你近），右边那股从后面过。前面那股带着颜色 0 走到右边；后面那股被它改色，1 变成 0 ⋆ 1 = 2。', 'Two particles swap places by half a turn about their midpoint: the left strand passes in front (nearer to you), the right one behind. The front strand carries its color 0 to the right; the one behind is recolored by it, 1 becoming 0 ⋆ 1 = 2.'],
@@ -286,11 +286,11 @@
     stage.view(VIEWS[p.view], booting || TRV.still ? 0 : 600);
     pace(); clock.pause(); clock.set(0);
     // a still and the opening view of the full page show the whole braid; in a chapter the card plays when seen
-    if (TRV.still || (booting && !TRV.embed)) clock.set(1);
+    if (TRV.still || (booting && !TRV.embed)) clock.set(p.still);
     else if (booting) kit.autoplay(clock, $('stage'));
     else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：在最上面添交叉、换股数、点底部的数字换颜色、首尾接上。随时可以再选一张卡。', 'Free play: add crossings on top, change the number of strands, click the numbers at the bottom to change colors, close the braid. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
