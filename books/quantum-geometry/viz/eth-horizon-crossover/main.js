@@ -271,8 +271,8 @@
       const I = fresh(), k = cuts(I.a, I.b, I.c, I.d), cone = inCone(I.a, I.b, I.c, I.d);
       big = L(`桥图 (${I.a}, ${I.b}, ${I.c}, ${I.d}) · 第 ${I.seed} 次抽样`, `Bridge (${I.a}, ${I.b}, ${I.c}, ${I.d}) · draw ${I.seed}`);
       hud = L(`这个实例的秩 ${I.rank}，最小割 ${k.full}：${I.rank === k.full ? '相等' : '秩更小'}`, `rank of this instance ${I.rank}, minimal cut ${k.full}: ${I.rank === k.full ? 'equal' : 'the rank is smaller'}`);
-      // the green mark belongs to the frozen bound QMinCut (QMaxFlow ≤ QMinCut); the fourth cut is shown beside it, not under the mark
-      $('roKeyL').textContent = L('这个随机实例的秩', 'rank of this random instance'); $('roKey').innerHTML = `<span class="c-cy">${I.rank}</span> <span class="okmark">${I.rank <= k.min ? `≤ ${k.min} ✓` : '✗'}</span>`; $('roKeySub').textContent = L(`Lean 的 QMinCut = min(3ac, ad, bc) = ${k.min}；四道割最小 ${k.full}`, `Lean's QMinCut = min(3ac, ad, bc) = ${k.min}; smallest of the four cuts ${k.full}`);
+      // the neutral mark is the page's numerical check of this draw against QMinCut (green stays in the Lean box); the fourth cut is shown beside it, not under the mark
+      $('roKeyL').textContent = L('这个随机实例的秩', 'rank of this random instance'); $('roKey').innerHTML = `<span class="c-cy">${I.rank}</span> <span class="nummark">${I.rank <= k.min ? `≤ ${k.min} ✓` : '✗'}</span>`; $('roKeySub').textContent = L(`Lean 的 QMinCut = min(3ac, ad, bc) = ${k.min}；四道割最小 ${k.full}`, `Lean's QMinCut = min(3ac, ad, bc) = ${k.min}; smallest of the four cuts ${k.full}`);
       set(1, L('行数 a·d', 'rows a·d'), String(k.rows)); set(2, L('列数 b·c', 'columns b·c'), String(k.cols)); set(3, L('穿桥的割 3·a·c、3·b·d', 'cuts through the bridges, 3·a·c and 3·b·d'), L(`${k.bridges}、${k.bridgesBD}`, `${k.bridges}, ${k.bridgesBD}`));
       set(4, L('在定理的锥域内？', 'inside the cone of the theorem?'), cone ? L('是', 'yes') : L('否', 'no'));
       // the theorem is about the greatest attainable rank; the draw on the stage is one instance and may fall short

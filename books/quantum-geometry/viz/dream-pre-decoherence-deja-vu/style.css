@@ -25,15 +25,16 @@
 .stagectl.tight { flex-direction: column; align-items: flex-start; }
 .stagectl.tight .paren { display: none; }
 
-/* the episode-cache card: a MODEL box on the stage (the standard .lean.model badge), never green */
-.cachecard {
+/* the episode-cache card #cacheCard: a MODEL box on the stage (the standard .lean.model badge), never green; its
+   static .thumb-hide wrapper keeps it out of the cover */
+#cacheCard {
   position: absolute; left: 0; top: 0; z-index: 2; background: color-mix(in srgb, var(--void) 84%, transparent);
   line-height: 1.32; font-size: 11px; padding: 5px 8px;
 }
-.cachecard .row { display: block; font-family: var(--font-data); font-size: 11px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cachecard .row.head { font-family: var(--font-body); color: var(--dim); white-space: normal; }
-.cachecard .row.verdict { font-size: 12px; font-weight: 600; white-space: normal; }
-.cachecard .dim { color: var(--dim); }
+#cacheCard .row { display: block; font-family: var(--font-data); font-size: 11px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#cacheCard .row.head { font-family: var(--font-body); color: var(--dim); white-space: normal; }
+#cacheCard .row.verdict { font-size: 12px; font-weight: 600; white-space: normal; }
+#cacheCard .dim { color: var(--dim); }
 
 @media (max-width: 640px) {
   .hud-tl { top: 42px; max-width: calc(100% - 32px); left: 14px; }
@@ -42,7 +43,7 @@
   .hud-tr { top: 10px; right: 12px; }
   .stagectl .cap { font-size: 10.5px; }
   .stagectl .chip { padding: 3px 8px; font-size: 10.5px; }
-  .cachecard .row { font-size: 10.5px; }
+  #cacheCard .row { font-size: 10.5px; }
 }
 @media (max-width: 560px) {
   :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(640px, 84vh) auto auto; }

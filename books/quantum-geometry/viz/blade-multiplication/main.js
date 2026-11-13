@@ -291,7 +291,7 @@
             : L(`交换 ${D.swaps} 次，所以符号是 ${s > 0 ? '+' : MINUS}；同时出现在两边的 ${D.cancels} 个方向抵掉，剩下的就是异或。`, `${D.swaps} swap${D.swaps === 1 ? '' : 's'}, so the sign is ${s > 0 ? '+' : MINUS}; the ${D.cancels} direction${D.cancels === 1 ? '' : 's'} on both sides cancel and what is left is the XOR.`);
       setLabel('roKeyLabel', '乘积', 'Product');
       $('roKey').innerHTML = `${nm(S.l)} · ${nm(S.r)} = <span class="${s > 0 ? 'c-cy' : 'c-mg'}">${signed(s, D.mask)}</span>`;
-      $('roKeySub').innerHTML = `${L(pl ? '与 XᵃZᵇ 矩阵相乘一致' : '与泡利矩阵相乘一致', pl ? 'agrees with multiplying XᵃZᵇ' : 'agrees with multiplying Pauli matrices')} <span class="okmark">${ok ? '✓' : '✗'}</span>`;
+      $('roKeySub').innerHTML = `${L(pl ? '与 XᵃZᵇ 矩阵相乘一致' : '与泡利矩阵相乘一致', pl ? 'agrees with multiplying XᵃZᵇ' : 'agrees with multiplying Pauli matrices')} <span class="nummark">${ok ? '✓' : '✗'}</span>`;
       setLabel('ro1Label', '掩码异或', 'XOR of the masks'); $('ro1').textContent = `${bin(S.l)} ⊕ ${bin(S.r)} = ${bin(D.mask)}`;
       setLabel('ro2Label', '要交换几次（inv）', 'Swaps needed (inv)'); $('ro2').innerHTML = `${D.swaps} → <span class="${s > 0 ? 'c-cy' : 'c-mg'}">${s > 0 ? '+' : MINUS}</span>`;
       setLabel('ro3Label', '抵掉的同号对', 'Equal pairs cancelled'); $('ro3').textContent = String(D.cancels);
@@ -308,11 +308,11 @@
       note = L('交叉项 eᵢeⱼ 与 eⱼeᵢ 一正一负：青色与品红的条一样长，净值为 0。', 'The cross terms eᵢeⱼ and eⱼeᵢ have opposite signs: the cyan and magenta bars are equally long and the net is 0.');
       setLabel('roKeyLabel', 'v · v 至此', 'v · v so far');
       $('roKey').innerHTML = `${sc}${biv.some((o) => o.net) ? ' + …' : ''}`;
-      $('roKeySub').innerHTML = n === TERMS.length ? ` = 13² <span class="okmark">✓</span>` : '';
+      $('roKeySub').innerHTML = n === TERMS.length ? ` = 13² <span class="nummark">✓</span>` : '';
       setLabel('ro1Label', '标量部分（对角三项）', 'Scalar part (the three diagonal terms)'); $('ro1').textContent = `${TERMS.slice(0, n).filter((t) => !t.mask).map((t) => t.coef).join(' + ') || '0'} = ${sc}`;
       setLabel('ro2Label', '双矢量部分 e₁₂、e₁₃、e₂₃', 'Bivector part e₁₂, e₁₃, e₂₃'); $('ro2').textContent = biv.map((o) => `${o.pos ? '+' + o.pos : ''}${o.neg ? ' ' + MINUS + ' ' + o.neg : ''}${o.pos || o.neg ? ' = ' : ''}${fmtInt(o.net)}`).join(' · ');
       setLabel('ro3Label', '已加的项', 'Terms added'); $('ro3').textContent = `${n} / 9`;
-      setLabel('ro4Label', 'B(3, 4, 12)² 的矩阵乘法', 'B(3, 4, 12)² by matrix multiplication'); $('ro4').innerHTML = `[[${BSQ[0][0][0]}, ${BSQ[0][1][0]}], [${BSQ[1][0][0]}, ${BSQ[1][1][0]}]] = 169·I <span class="okmark">${bsqOk ? '✓' : '✗'}</span>`;
+      setLabel('ro4Label', 'B(3, 4, 12)² 的矩阵乘法', 'B(3, 4, 12)² by matrix multiplication'); $('ro4').innerHTML = `[[${BSQ[0][0][0]}, ${BSQ[0][1][0]}], [${BSQ[1][0][0]}, ${BSQ[1][1][0]}]] = 169·I <span class="nummark">${bsqOk ? '✓' : '✗'}</span>`;
       $('roAside').textContent = 'a = (3, 4, 12)';
       $('pillProd').querySelector('strong').textContent = `v² ${n === TERMS.length ? '= 169' : '…'}`;
       $('pillSwaps').querySelector('strong').textContent = '—';
