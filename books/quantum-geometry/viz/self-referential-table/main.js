@@ -6,10 +6,19 @@
            eigenvalues of Tₘ (Jacobi rotations), pulled towards 0 and 1 by x ↦ 3x² − 2x³.
      perp  ψ(θ) = cos θ·v₁ + sin θ·w with w = v_{r+1} orthogonal to every vₐ; ‖Tψ‖ = cos θ, zero at 90°.
    Colours: cyan = positive entries, the part kept by T (eigenvalues above ½); magenta = negative entries, the
-   complement (eigenvalues below ½); amber = the current cell, term, step or rank. Read-only probe: TABLE_DEBUG. */
+   complement (eigenvalues below ½); amber = the current cell, term, step or rank. Read-only probe: TABLE_DEBUG.
+   The solid (kit.solid, the left or upper part of the stage): a glass unit ball of a 3D slice span{q₁, q₂, q₃} of ℝᴺ
+   whose directions the matrix on the stage maps into themselves, and inside it the image of that ball, drawn as
+   computed: q ↦ λq with λ = qᵀAq, so the image is the rod, disc or whole ball of a projection (λ ∈ {0, 1}), or the
+   ellipsoid of semi-axes |λ| of a healing step. The slice of each scene:
+     rank, perp, heal untouched   basis vectors: r = 1 → {v₂, v₃ | v₁}, r < N → {v₁, v₂ | v_{r+1}}, r = N → the last three
+     read, r ≥ 3                  the plane of row i and column j (both in Im T) | v_{r+1} (in ker T), or any third at r = N
+     heal with knocks             three eigenvectors of T₀ (Jacobi), common to every Tₘ, the most knocked ones
+   The odd direction (after |) stands along the tilted normal n; the other two lie in the tilted plane. The table and
+   the side panels are drawn on the flat canvas #flat over the WebGL canvas; #cv only keeps the parked frame. */
 (() => {
   'use strict';
-  const { kit, L } = TRV, { clamp, fix } = kit, P = TRV.palette;
+  const { kit, L } = TRV, { clamp, fix, v3, TAU } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
   const MINUS = '−', M = 8, DEG = Math.PI / 180, HEAL_SAFE = (Math.sqrt(3) - 1) / 2;
 
@@ -39,6 +48,29 @@
     }
     return A.map((r, i) => r[i]).sort((a, b) => a - b);
   }
+  /** Eigenpairs of a symmetric matrix by the same cyclic Jacobi rotations, accumulated: [{ val, vec }], ascending. */
+  function eigsys(A0) {
+    const n = A0.length, A = A0.map((r) => r.slice()), V = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (__, j) => (i === j ? 1 : 0)));
+    for (let sweep = 0; sweep < 60; sweep++) {
+      let off = 0; for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) off += A[p][q] * A[p][q];
+      if (off < 1e-30) break;
+      for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) {
+        if (Math.abs(A[p][q]) < 1e-300) continue;
+        const th = (A[q][q] - A[p][p]) / (2 * A[p][q]), t = Math.sign(th || 1) / (Math.abs(th) + Math.sqrt(th * th + 1));
+        const c = 1 / Math.sqrt(t * t + 1), s = t * c;
+        for (let k = 0; k < n; k++) { const akp = A[k][p], akq = A[k][q]; A[k][p] = c * akp - s * akq; A[k][q] = s * akp + c * akq; }
+        for (let k = 0; k < n; k++) { const apk = A[p][k], aqk = A[q][k]; A[p][k] = c * apk - s * aqk; A[q][k] = s * apk + c * aqk; }
+        for (let k = 0; k < n; k++) { const vkp = V[k][p], vkq = V[k][q]; V[k][p] = c * vkp - s * vkq; V[k][q] = s * vkp + c * vkq; }
+      }
+    }
+    return A.map((r, i) => ({ val: r[i], vec: V.map((row) => row[i]) })).sort((a, b) => a.val - b.val);
+  }
+  const dotv = (a, b) => a.reduce((s, x, k) => s + x * b[k], 0);
+  const unitv = (v) => { const n = norm(v); return v.map((x) => x / n); };
+  /** v minus its components along the orthonormal vectors of `basis`. */
+  const orth = (v, basis) => basis.reduce((w, b) => { const d = dotv(w, b); return w.map((x, k) => x - d * b[k]); }, v.slice());
+  /** The Rayleigh quotient qᵀAq of a unit vector q. */
+  const rayl = (A, q) => dotv(q, matvec(A, q));
   /** The k-th orthonormal discrete cosine vector of ℝᴺ (k = 0 is the constant vector). */
   const dct = (N, k) => Array.from({ length: N }, (_, n) => Math.sqrt((k ? 2 : 1) / N) * Math.cos(Math.PI * (n + 0.5) * k / N));
   const tableOf = (N, r) => { const V = Array.from({ length: r }, (_, k) => dct(N, k)), T = zeros(N); for (const v of V) for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) T[i][j] += v[i] * v[j]; return T; };
@@ -71,6 +103,50 @@
     return { v, w, psi, Tpsi: matvec(derive().T, psi), Tw: matvec(derive().T, w) };
   };
 
+  /* ---------- the 3D slice: three orthonormal directions of ℝᴺ that the matrix on the stage maps into themselves ---------- */
+  const SUBD = '₀₁₂₃₄₅₆₇₈₉', subs = (n) => String(n).replace(/\d/g, (d) => SUBD[d]);
+  /** Indices of the discrete cosine vectors of the canonical slice [in the plane, in the plane, along the normal]. */
+  const canonIdx = (r, N) => (r === 1 ? [1, 2, 0] : r < N ? [0, 1, r] : [N - 3, N - 2, N - 1]);
+  /** The healing slice of the current knocks: three eigenvectors of T₀ (so of every Tₘ), the most knocked ones; two
+      the iteration keeps (eigenvalue above ½ at the last step) in the plane and one it drops along the normal. */
+  function healPick() {
+    const D = derive();
+    if (D.hs) return D.hs;
+    const es = eigsys(D.its[0]).map((e) => ({ vec: e.vec, l0: e.val, lm: D.its.map((X) => rayl(X, e.vec)) }));
+    const K = es.filter((e) => e.lm[M] > 0.5).sort((a, b) => Math.abs(b.l0 - 1) - Math.abs(a.l0 - 1));
+    const Z = es.filter((e) => e.lm[M] <= 0.5).sort((a, b) => Math.abs(b.l0) - Math.abs(a.l0));
+    const pick = K.length >= 2 && Z.length ? [K[0], K[1], Z[0]] : K.length === 1 ? [Z[0], Z[1], K[0]] : !Z.length ? [K[0], K[1], K[2]] : [Z[0], Z[1], Z[2]];
+    D.hs = { pick, scale: Math.max(1, ...pick.map((e) => Math.max(...e.lm.map(Math.abs)))) };
+    return D.hs;
+  }
+  /** The slice of the scene: Q = [q_a, q_b, q_c] (q_c along the normal), the matrix A on the stage, λ = qᵀAq along each
+      (A maps each q to λq), kept = which of them the table keeps, names, and the scale the ball is drawn at. */
+  function sliceNow() {
+    const N = S.N, r = S.r, sc = S.scene, T = derive().T, A = shown();
+    if (sc === 'heal' && S.kicks.length) {
+      const H = healPick(), m = mOf();
+      return { kind: 'heal', Q: H.pick.map((e) => e.vec), A, lam: H.pick.map((e) => e.lm[m]), kept: H.pick.map((e) => e.lm[M] > 0.5), names: ['q₁', 'q₂', 'q₃'], scale: H.scale, idx: null };
+    }
+    let Q, names, idx = null;
+    if (sc === 'read' && r >= 3) {   // the plane of row i and column j (both in Im T), and one free direction (in ker T)
+      const ri = T[S.i], cj = T.map((row) => row[S.j]), u1 = unitv(ri);
+      let w2 = orth(cj, [u1]);
+      for (let k = 0; norm(w2) < 1e-6 && k < r; k++) { const w = orth(dct(N, k), [u1]); if (norm(w) > 0.3) w2 = w; }
+      const u2 = unitv(w2);
+      let q3 = r < N ? dct(N, r) : null;
+      for (let k = 0; !q3 && k < N; k++) { const w = orth(dct(N, k), [u1, u2]); if (norm(w) > 0.3) q3 = unitv(w); }
+      Q = [u1, u2, q3]; names = ['', '', r < N ? `v${subs(r + 1)}` : ''];
+    } else { idx = canonIdx(r, N); Q = idx.map((k) => dct(N, k)); names = idx.map((k) => `v${subs(k + 1)}`); }
+    const lam = Q.map((q) => rayl(A, q));
+    return { kind: 'proj', Q, A, lam, kept: lam.map((x) => x > 0.5), names, scale: 1, idx };
+  }
+  /** A vector of ℝᴺ in slice coordinates. */
+  const sliceOf = (sl, v) => sl.Q.map((q) => dotv(q, v));
+  /** Semi-axes of the image of the slice's unit ball: 1 or 0 for a projection, |λ| for a healing step. */
+  const semiOf = (sl) => (sl.kind === 'proj' ? sl.kept.map((k) => (k ? 1 : 0)) : sl.lam.map(Math.abs));
+  const FLAT = 0.004;   // a semi-axis below this (in units of the ball) is drawn flat
+  const shapeOf = (sl) => { const nb = semiOf(sl).filter((x) => x > FLAT).length; return sl.kind === 'proj' && nb === 3 ? 'ball' : ['point', 'rod', 'disk', 'ellipsoid'][nb]; };
+
   /* ---------- canvas helpers ---------- */
   const face = (f) => (f === 'body' ? TRV.fonts.body : TRV.fonts.data);
   function text(ctx, str, x, y, color, o) {
@@ -82,6 +158,25 @@
   const glowRect = (ctx, col, w, x, y, a, b) => { ctx.strokeStyle = col; ctx.lineWidth = w; ctx.shadowColor = col; ctx.shadowBlur = 10; ctx.strokeRect(x, y, a, b); ctx.shadowBlur = 0; };
   const padOf = (b, W, H, l, r, t, bt) => [b.x + l, W - b.x - b.w + r, b.y + t, H - b.y - b.h + bt];
   const lw = (x) => (TRV.thumbMode ? 2 * x : x);
+  /** A cited figure in a phone's frame (about 334 × 500): style.css tightens the same frames with the same query. */
+  const compact = () => TRV.figure && !TRV.still && window.matchMedia('(max-width: 480px)').matches;
+  /** str in lines no wider than w: one line at the largest size from fs down to minFs that fits, else broken at
+      spaces (and between CJK characters) at minFs. Returns { lines, fs }. */
+  function fitLines(ctx, str, w, fs, minFs, f) {
+    const wid = (s, z) => { ctx.font = `${z}px ${face(f || 'body')}`; return ctx.measureText(s).width; };
+    for (let z = fs; z >= minFs - 1e-9; z -= 0.5) if (wid(str, z) <= w) return { lines: [str], fs: z };
+    const lines = []; let cur = '';
+    for (const tk of str.match(/[⺀-鿿＀-￯]|[^\s⺀-鿿＀-￯]+|\s+/g) || []) {
+      const t = cur + tk;
+      if (cur.trim() && wid(t.trim(), minFs) > w) { lines.push(cur.trim()); cur = tk.trim() ? tk : ''; } else cur = t;
+    }
+    if (cur.trim()) lines.push(cur.trim());
+    return { lines, fs: minFs };
+  }
+  /** Lines from fitLines at x (centred unless o.align says otherwise), from y down (or, with o.up, up to y), one line
+      every fs + 2 pixels. */
+  const drawLines = (ctx, fl, x, y, color, o) => fl.lines.forEach((s, k) => text(ctx, s, x, (o && o.up) ? y - (fl.lines.length - 1 - k) * (fl.fs + 2) : y + k * (fl.fs + 2), color,
+    Object.assign({ size: fl.fs, face: 'body', align: 'center', base: (o && o.up) ? 'bottom' : 'top' }, o)));
 
   /* ---------- the table ---------- */
   function drawTable(ctx, box, A, words) {
@@ -124,8 +219,10 @@
   /* ---------- the side panels ---------- */
   function drawRead(cv, b, W, H, words) {
     const T = derive().T, p = products(), n = S.N, k = kOf(), sum = partial(k);
-    const a = Math.max(0.02, ...p.map(Math.abs), Math.abs(T[S.i][S.j]), Math.abs(sum)) * 1.18;
-    const g = kit.plot(cv, { x: [0.3, n + 3.2], y: [-a, a], pad: padOf(b, W, H, words ? 8 : 0, 0, words ? 18 : 0, words ? 22 : 0), clear: false });
+    const a = Math.max(0.02, ...p.map(Math.abs), Math.abs(T[S.i][S.j]), Math.abs(sum)) * 1.18, cmp = words && geo.layout.mode === 'compact';
+    // a phone's narrow panel: the title over it broken into lines that fit, the plot under them
+    const ttl = cmp ? fitLines(cv.getContext('2d'), L(`第 ${S.i + 1} 行 × 第 ${S.j + 1} 列，逐项`, `row ${S.i + 1} × column ${S.j + 1}, term by term`), b.w - 4, 9.5, 8.5) : null;
+    const g = kit.plot(cv, { x: [0.3, n + 3.2], y: [-a, a], pad: padOf(b, W, H, words ? (cmp ? 2 : 8) : 0, 0, cmp ? 6 + ttl.lines.length * (ttl.fs + 2) : words ? 18 : 0, words ? (cmp ? 16 : 22) : 0), clear: false });
     g.hline(0, P.lineHot, { width: 1 });
     for (let q = 0; q < n; q++) {
       const done = q < k, col = p[q] >= 0 ? P.cyan : P.magenta;
@@ -135,32 +232,39 @@
     g.rect(n + 1.05, 0, n + 1.85, sum || 1e-9, P.amber, { alpha: 0.55, stroke: P.amber, width: lw(1.6), glow: 8 });
     g.rect(n + 2.15, 0, n + 2.95, T[S.i][S.j] || 1e-9, P.ink, { fill: false, stroke: P.ink, width: lw(1.4), strokeAlpha: 0.9 });
     if (words) {
-      const fs = clamp(b.w / 34, 9.5, 12);
-      g.text(n / 2 + 0.5, a, L(`第 ${S.i + 1} 行 × 第 ${S.j + 1} 列，逐项`, `row ${S.i + 1} × column ${S.j + 1}, term by term`), P.dim, { align: 'center', base: 'bottom', dy: -4, size: fs, face: 'body' });
+      const fs = cmp ? 9 : clamp(b.w / 34, 9.5, 12);
+      if (cmp) drawLines(g.ctx, ttl, b.x + b.w / 2, g.Y(a) - 3, P.dim, { up: true });
+      else g.text(n / 2 + 0.5, a, L(`第 ${S.i + 1} 行 × 第 ${S.j + 1} 列，逐项`, `row ${S.i + 1} × column ${S.j + 1}, term by term`), P.dim, { align: 'center', base: 'bottom', dy: -4, size: fs, face: 'body' });
       for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0 || q === k - 1) g.text(q + 1, -a, String(q + 1), q === k - 1 ? P.amber : P.dim, { align: 'center', base: 'top', dy: 4, size: fs });
       g.text(n + 1.45, -a, 'Σ', P.amber, { align: 'center', base: 'top', dy: 4, size: fs + 1 });
       g.text(n + 2.55, -a, 'Tᵢⱼ', P.ink, { align: 'center', base: 'top', dy: 4, size: fs + 1, face: 'body' });
     }
   }
   function drawRank(cv, b, W, H, words) {
-    const T = derive().T, n = S.N, d = T.map((row, k) => row[k]), tr = d.reduce((s, x) => s + x, 0);
-    const top = { x: b.x, y: b.y, w: b.w, h: b.h * 0.62 }, bot = { x: b.x, y: b.y + b.h * 0.7, w: b.w, h: b.h * 0.3 };
-    const g = kit.plot(cv, { x: [0.3, n + 0.7], y: [0, 1.12], pad: padOf(top, W, H, words ? 8 : 0, 0, words ? 18 : 0, words ? 18 : 0), clear: false });
+    const T = derive().T, n = S.N, d = T.map((row, k) => row[k]), tr = d.reduce((s, x) => s + x, 0), cmp = words && geo.layout.mode === 'compact';
+    const line = L(`N = ${n} 个地址，占了 r = ${S.r} 个；对角格加起来 = ${fix(tr, 3)}`, `N = ${n} addresses, r = ${S.r} taken; the diagonal adds up to ${fix(tr, 3)}`);
+    // a phone's narrow panel: the sentence under the slots is broken into lines, and the two plots share what is left
+    const fl = cmp ? fitLines(cv.getContext('2d'), line, b.w, 9.5, 8.5) : null, ch = cmp ? b.h - fl.lines.length * (fl.fs + 2) - 4 : b.h;
+    const top = { x: b.x, y: b.y, w: b.w, h: ch * (cmp ? 0.66 : 0.62) }, bot = cmp ? { x: b.x, y: b.y + ch * 0.72, w: b.w, h: ch * 0.28 } : { x: b.x, y: b.y + b.h * 0.7, w: b.w, h: b.h * 0.3 };
+    const g = kit.plot(cv, { x: [0.3, n + 0.7], y: [0, 1.12], pad: padOf(top, W, H, words ? (cmp ? 2 : 8) : 0, 0, words ? (cmp ? 14 : 18) : 0, words ? (cmp ? 14 : 18) : 0), clear: false });
     g.hline(1, P.lineHot, { dash: [4, 3] });
     for (let q = 0; q < n; q++) g.rect(q + 0.62, 0, q + 1.38, d[q], P.cyan, { alpha: 0.8 });
-    const h = kit.plot(cv, { x: [0, n], y: [0, 1], pad: padOf(bot, W, H, words ? 8 : 0, words ? 8 : 0, 0, words ? 18 : 0), clear: false });
+    const h = kit.plot(cv, { x: [0, n], y: [0, 1], pad: padOf(bot, W, H, words ? (cmp ? 2 : 8) : 0, words ? (cmp ? 2 : 8) : 0, 0, words && !cmp ? 18 : 0), clear: false });
     for (let q = 0; q < n; q++) h.rect(q + 0.06, 0.15, q + 0.94, 0.85, q < S.r ? P.cyan : P.dim, { alpha: q < S.r ? 0.75 : 0.1, stroke: q < S.r ? undefined : P.lineHot });
     h.rect(0, 0.04, tr, 0.96, P.amber, { fill: false, stroke: P.amber, width: lw(2), glow: 8 });
     if (words) {
-      const fs = clamp(b.w / 34, 9.5, 12);
+      const fs = cmp ? 9 : clamp(b.w / 34, 9.5, 12);
       g.text((n + 1) / 2, 1.12, L('对角格 Tₖₖ', 'diagonal cells Tₖₖ'), P.dim, { align: 'center', base: 'bottom', dy: -2, size: fs, face: 'body' });
-      for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0) g.text(q + 1, 0, String(q + 1), P.dim, { align: 'center', base: 'top', dy: 4, size: fs });
-      h.text(0, 0, L(`N = ${n} 个地址，占了 r = ${S.r} 个；对角格加起来 = ${fix(tr, 3)}`, `N = ${n} addresses, r = ${S.r} taken; the diagonal adds up to ${fix(tr, 3)}`), P.ink, { base: 'top', dy: 4, size: fs, face: 'body' });
+      for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0) g.text(q + 1, 0, String(q + 1), P.dim, { align: 'center', base: 'top', dy: cmp ? 3 : 4, size: fs });
+      if (cmp) { drawLines(h.ctx, fl, b.x, bot.y + bot.h + 4, P.ink, { align: 'left' }); return; }
+      h.ctx.font = `${fs}px ${face('body')}`;
+      const wl = h.ctx.measureText(line).width, fit = wl > b.w ? Math.max(8, fs * b.w / wl) : fs;   // shrunk to the width of the panel
+      h.text(0, 0, line, P.ink, { base: 'top', dy: 4, size: fit, face: 'body' });
     }
   }
   function drawHeal(cv, b, W, H, words) {
-    const D = derive(), m = mOf();
-    const g = kit.plot(cv, { x: [-0.58, 1.58], y: [-0.6, M + 0.6], pad: padOf(b, W, H, words ? 34 : 0, 4, words ? 18 : 0, words ? 18 : 0), clear: false });
+    const D = derive(), m = mOf(), cmp = words && geo.layout.mode === 'compact';
+    const g = kit.plot(cv, { x: [-0.58, 1.58], y: [-0.6, M + 0.6], pad: padOf(b, W, H, words ? (cmp ? 28 : 34) : 0, 4, words ? (cmp ? 15 : 18) : 0, words ? (cmp ? 14 : 18) : 0), clear: false });
     for (const x of [0, 1]) g.vline(x, P.lineHot, { width: 1.2 });
     g.vline(0.5, P.dim, { dash: [3, 3] });
     const yOf = (q) => M - q;
@@ -168,54 +272,283 @@
     const r = TRV.thumbMode ? 7 : clamp(b.h / 80, 3, 5);
     for (let q = 0; q <= m; q++) for (const x of D.eigs[q]) g.dot(clamp(x, -0.58, 1.58), yOf(q), x > 0.5 ? P.cyan : P.magenta, r, { alpha: q === m ? 1 : 0.5 });
     if (words) {
-      const fs = clamp(b.w / 34, 9.5, 12);
-      for (const [x, s] of [[0, '0'], [0.5, '½'], [1, '1']]) g.text(x, -0.6, s, P.dim, { align: 'center', base: 'top', dy: 4, size: fs });
-      for (let q = 0; q <= M; q++) g.text(-0.58, yOf(q), `m=${q}`, q === m ? P.amber : P.dim, { align: 'right', dx: -4, size: fs - 0.5 });
+      const fs = cmp ? 9 : clamp(b.w / 34, 9.5, 12), every = cmp && Math.abs(g.Y(0) - g.Y(1)) < fs + 2 ? 2 : 1;   // rows too close: every other step named
+      for (const [x, s] of [[0, '0'], [0.5, '½'], [1, '1']]) g.text(x, -0.6, s, P.dim, { align: 'center', base: 'top', dy: cmp ? 2 : 4, size: fs });
+      for (let q = 0; q <= M; q++) if (q % every === 0 || q === m) g.text(-0.58, yOf(q), `m=${q}`, q === m ? P.amber : P.dim, { align: 'right', dx: -4, size: fs - 0.5 });
       g.text(0.5, M + 0.6, L('Tₘ 的本征值', 'eigenvalues of Tₘ'), P.dim, { align: 'center', base: 'bottom', dy: -2, size: fs, face: 'body' });
     }
   }
   function drawPerp(cv, b, W, H, words) {
-    const n = S.N, th = thetaOf(), V = perpVecs();
-    const top = { x: b.x, y: b.y, w: b.w, h: b.h * 0.7 }, bot = { x: b.x, y: b.y + b.h * 0.76, w: b.w, h: b.h * 0.24 };
+    const n = S.N, th = thetaOf(), V = perpVecs(), cmp = words && geo.layout.mode === 'compact';
+    const cap = L('灰：状态 ψ 的分量 · 青：读出 Tψ', 'grey: the entries of ψ · cyan: the reading Tψ');
+    // a phone's narrow panel: the caption in lines over the bars, the two readings in lines of their own under them
+    const ctx0 = cv.getContext('2d'), fcap = cmp ? fitLines(ctx0, cap, b.w - 2, 9.5, 8.5) : null;
+    const rd = cmp ? [fitLines(ctx0, `‖Tψ‖ = cos θ = ${fix(Math.cos(th * DEG), 3)}`, b.w, 9, 8, 'data'), fitLines(ctx0, `‖(I − T)ψ‖ = sin θ = ${fix(Math.sin(th * DEG), 3)}`, b.w, 9, 8, 'data')] : null;
+    const capH = cmp ? fcap.lines.length * (fcap.fs + 2) + 4 : 0, rdH = cmp ? rd.reduce((s, f) => s + f.lines.length * (f.fs + 2), 0) : 0;
+    const top = cmp ? { x: b.x, y: b.y + capH, w: b.w, h: (b.h - capH - rdH - 12) * 0.72 } : { x: b.x, y: b.y, w: b.w, h: b.h * 0.7 };
+    const bot = cmp ? { x: b.x, y: top.y + top.h + 4, w: b.w, h: (b.h - capH - rdH - 12) * 0.28 } : { x: b.x, y: b.y + b.h * 0.76, w: b.w, h: b.h * 0.24 };
     const a = Math.max(0.2, ...V.psi.map(Math.abs), ...V.v.map(Math.abs)) * 1.15;
-    const g = kit.plot(cv, { x: [-a, a], y: [n + 0.6, 0.4], pad: padOf(top, W, H, words ? 22 : 0, 4, words ? 18 : 0, 4), clear: false });
+    const g = kit.plot(cv, { x: [-a, a], y: [n + 0.6, 0.4], pad: padOf(top, W, H, words ? (cmp ? 14 : 22) : 0, 4, words && !cmp ? 18 : 0, cmp ? 0 : 4), clear: false });
     g.vline(0, P.lineHot, { width: 1 });
     for (let q = 0; q < n; q++) {
       g.rect(0, q + 0.62, V.psi[q], q + 0.98, P.ink, { alpha: 0.45 });
       g.rect(0, q + 1.02, V.Tpsi[q], q + 1.38, P.cyan, { alpha: 0.85 });
     }
-    const h = kit.plot(cv, { x: [0, 1.05], y: [0, 3], pad: padOf(bot, W, H, words ? 22 : 0, 4, 0, words ? 2 : 0), clear: false });
+    const h = kit.plot(cv, { x: [0, 1.05], y: [0, 3], pad: padOf(bot, W, H, words ? (cmp ? 14 : 22) : 0, 4, 0, words && !cmp ? 2 : 0), clear: false });
     h.rect(0, 1.75, Math.cos(th * DEG), 2.35, P.cyan, { alpha: 0.85 });
     h.rect(0, 0.2, Math.sin(th * DEG), 0.8, P.magenta, { alpha: 0.85 });
     h.vline(1, P.lineHot, { dash: [3, 3] });
     if (words) {
-      const fs = clamp(b.w / 34, 9.5, 12);
-      g.text(0, n + 0.6, L('灰：状态 ψ 的分量 · 青：读出 Tψ', 'grey: the entries of ψ · cyan: the reading Tψ'), P.dim, { align: 'center', base: 'bottom', dy: -2, size: fs, face: 'body' });
+      const fs = cmp ? 9 : clamp(b.w / 34, 9.5, 12);
+      if (cmp) {
+        drawLines(g.ctx, fcap, b.x + b.w / 2, b.y, P.dim);
+        for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0) g.text(-a, q + 1, String(q + 1), P.dim, { align: 'right', dx: -3, size: fs });
+        let y = bot.y + bot.h + 4;
+        rd.forEach((f, k) => { drawLines(h.ctx, f, b.x, y, k ? P.magenta : P.cyan, { align: 'left', face: 'data' }); y += f.lines.length * (f.fs + 2); });
+        return;
+      }
+      g.ctx.font = `${fs}px ${face('body')}`;
+      const wc = g.ctx.measureText(cap).width, fc = wc > b.w - 22 ? Math.max(8, fs * (b.w - 22) / wc) : fs;   // shrunk to the width of the panel
+      g.text(0, 0.4, cap, P.dim, { align: 'center', base: 'bottom', dy: -2, size: fc, face: 'body' });   // above row 1 (y runs down)
       for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0) g.text(-a, q + 1, String(q + 1), P.dim, { align: 'right', dx: -4, size: fs });
       h.text(0, 2.4, `‖Tψ‖ = cos θ = ${fix(Math.cos(th * DEG), 3)}`, P.cyan, { base: 'bottom', size: fs });
       h.text(0, 0.85, `‖(I − T)ψ‖ = sin θ = ${fix(Math.sin(th * DEG), 3)}`, P.magenta, { base: 'bottom', size: fs });
     }
   }
 
-  /* ---------- the stage ---------- */
-  let geo = {};
-  function drawStage() {
-    const g0 = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, W = g0.W, H = g0.H, cv = $('cv');
-    if (TRV.thumbMode) {   // wordless cover: the table beside its eigenvalues snapping to 0 and 1
-      const glow = ctx.createRadialGradient(W * 0.3, H * 0.5, 0, W * 0.3, H * 0.5, W * 0.55);
-      glow.addColorStop(0, TRV.alpha(P.cyan, 0.08)); glow.addColorStop(1, TRV.alpha(P.cyan, 0)); ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
-      geo.table = drawTable(ctx, { x: W * 0.05, y: H * 0.07, w: W * 0.48, h: H * 0.86 }, shown(), false);
-      drawHeal(cv, { x: W * 0.6, y: H * 0.1, w: W * 0.34, h: H * 0.8 }, W, H, false);
-      return;
+  /* ---------- the solid: a glass unit ball of the slice and the image of that ball inside it (kit.solid) ----------
+     The plane of q_a, q_b is tilted by TILT about the world y axis (towards +x), q_c stands along its normal NRM; the
+     default camera looks down from about 42° (VIEW), 54° in azimuth to one side of that tilt. Seen from within about
+     70° in azimuth of the tilt (the cos of the angle between the view and the normal stays above 1/√2), the plane (an
+     opaque disc, ellipsoid or cut ball) lies between the viewer and the lower pole −q_c: that pole is hidden and the
+     upper one seen, from the default view and after turning it some 105° the other way. Nothing of the solid is drawn
+     outside its own box of the stage. */
+  const TILT = 0.3, VIEW = [-0.62, 0.74];
+  const NRM = [Math.sin(TILT), 0, Math.cos(TILT)], P1 = [Math.cos(TILT), 0, -Math.sin(TILT)], P2 = [0, 1, 0];
+  const EA = v3.scale(v3.add(P1, P2), Math.SQRT1_2), EB = v3.scale(v3.sub(P2, P1), Math.SQRT1_2), FRAME = [EA, EB, NRM];
+  /** Slice coordinates (along q_a, q_b, q_c) → world point. */
+  const toW = (c) => [0, 1, 2].map((d) => c[0] * EA[d] + c[1] * EB[d] + c[2] * NRM[d]);
+  const AX = [[1, 0, 0], [0, 1, 0], [0, 0, 1]], ax = (k, t) => AX[k].map((x) => x * t);
+  const L3 = { cxF: 0.5, cyF: 0.5, radF: 0.36 };   // where drawStage puts the ball (fractions of the stage), read by kit.solid
+  const stage = kit.solid($('stage'), {
+    canvas: $('cv'), wheel: false, yaw: VIEW[0], pitch: VIEW[1], onChange: () => paint(),
+    get cx() { return L3.cxF; }, get cy() { return L3.cyF; }, get radius() { return L3.radF; },
+    // a press on a cell of the table belongs to the table (selecting or knocking it); anywhere else it turns the ball
+    onPick: (ev) => !!cellAt(ev)
+  });
+
+  /** Draw the slice: the glass unit ball, the image of the ball (opaque, lit), its axes, arrows, beads and labels.
+      Returns what it drew, in slice and world coordinates, for the probe. */
+  function drawSolid(st, sl, shape) {
+    const sc = S.scene, D3 = st.facing(), u = st.unit, s = semiOf(sl), kp = sl.kept, T = derive().T;
+    const out = { scene: sc, kind: sl.kind, shape, Q: sl.Q.map((q) => q.slice()), lam: sl.lam.slice(), kept: kp.slice(), semi: s.slice(), scale: sl.scale,
+      names: sl.names.slice(), frame: FRAME.map((e) => e.slice()), beads: [], read: null, perp: null };
+    const near = (p, px) => v3.add(p, v3.scale(D3, px / u));   // moved towards the viewer: the same place on the screen, in front
+    const bead = (key, c, color, r) => { const p = toW(c); st.bead(p, { key, color, r: r || 5 }); out.beads.push({ key, p, c: c.slice() }); };
+    const O = [0, 0, 0], box = geo.ballBox;
+    /** A label at a world point, moved sideways (never across the point) so that it stays inside the ball's box. */
+    const tagIn = (key, p, html, cls, o) => {
+      const q = st.p(p), half = 3.4 * String(html).replace(/<[^>]*>/g, '').length + 4, dx = (o && o.dx) || 0;
+      const x = box ? clamp(q[0] + dx, box.x + half, box.x + box.w - half) : q[0] + dx;
+      st.tag(key, p, html, cls, Object.assign({}, o, { dx: x - q[0] }));
+    };
+    /** An arrow lying on a disc: a halo of the stage colour under it, the arrow itself a few pixels in front. */
+    const onDisc = (a, b, color, o, lift) => {
+      const h = lift || 2.5, w = (o && o.width) || 2.4;
+      st.line([near(toW(a), h - 2), near(toW(b), h - 2)], { color: P.stage, width: w + 3.4 });
+      st.arrow(near(toW(a), h), near(toW(b), h), Object.assign({ color, width: w, headSize: 11 }, o));
+    };
+    const full = shape === 'ball';
+    st.glass('glass', O, 1, { color: P.cyan, alpha: full ? 0.14 : 0.07, rim: full ? 0.65 : 0.5 });
+    // in the read scene row i colours the image: cyan where it reads positive, magenta where negative
+    const rc = sc === 'read' ? sliceOf(sl, T[S.i]) : null, rn = rc ? Math.hypot(rc[0], rc[1], rc[2]) : 1;
+    const ramp = (c3) => (rc ? { colors: [P.magenta, P.cyan], range: [0, 1], value: (uu, vv) => clamp(0.5 + 8 * v3.dot(rc, c3(uu, vv)) / rn, 0, 1) } : { color: P.cyan });
+    const grid = { every: [8, 3], alpha: 0.42 };   // spokes every 30°, rings at radius ¼, ½, ¾ and 1
+    const discAt = (i, j, si, sj) => (uu, vv) => v3.add(ax(i, si * vv * Math.cos(uu)), ax(j, sj * vv * Math.sin(uu)));
+    if (sl.kind === 'proj') {
+      if (kp[0] && kp[1] && kp[2]) {          // the whole ball, cut open along the plane: the lower half and the cut lit
+        const hemi = (uu, vv) => [Math.sin(vv) * Math.cos(uu), Math.sin(vv) * Math.sin(uu), -Math.cos(vv)], cut = discAt(0, 1, 1, 1);
+        st.surface('body', (uu, vv) => toW(hemi(uu, vv)), Object.assign({ u: [0, TAU], v: [0, Math.PI / 2], nu: 96, nv: 24, alpha: 1 }, ramp(hemi)));
+        st.surface('cut', (uu, vv) => toW(cut(uu, vv)), Object.assign({ u: [0, TAU], v: [0, 1], nu: 96, nv: 12, alpha: 1, grid }, ramp(cut)));
+      } else if (kp[0] && kp[1]) {            // a disc: the plane is the image, the normal is read as 0
+        const d = discAt(0, 1, 1, 1);
+        st.surface('body', (uu, vv) => toW(d(uu, vv)), Object.assign({ u: [0, TAU], v: [0, 1], nu: 96, nv: 12, alpha: 1, grid }, ramp(d)));
+        st.line([toW(ax(2, -1)), toW(ax(2, 1))], { color: P.magenta, width: 1.6, dash: [6, 4], alpha: 0.9 });
+      } else if (kp[2]) {                     // a rod along the normal: the plane is read as 0
+        const d = discAt(0, 1, 1, 1);
+        st.surface('kernel', (uu, vv) => toW(d(uu, vv)), { u: [0, TAU], v: [0, 1], nu: 96, nv: 12, alpha: 1, color: P.magenta, grid });
+        st.tube('rod', [toW(ax(2, -1)), toW(ax(2, 1))], { color: P.cyan, width: sc === 'read' ? 5 : 8, glow: 0.25 });
+      }
+    } else {                                  // a healing step: the ellipsoid of semi-axes |λ|, flat where |λ| vanishes
+      const big = s.map((x) => x > FLAT), nb = big.filter(Boolean).length;
+      // the colour of a point x of the image: the share of x/|x| that the limit keeps (cyan) or drops (magenta)
+      const kw = (x) => { const n2 = x[0] * x[0] + x[1] * x[1] + x[2] * x[2]; return n2 > 0 ? x.reduce((t, y, k) => t + y * y * (kp[k] ? 1 : 0), 0) / n2 : 0.5; };
+      if (nb === 3) {
+        const pt = (uu, vv) => [s[0] * Math.sin(vv) * Math.cos(uu), s[1] * Math.sin(vv) * Math.sin(uu), s[2] * Math.cos(vv)];
+        st.surface('body', (uu, vv) => toW(pt(uu, vv)), { u: [0, TAU], v: [0, Math.PI], nu: 96, nv: 48, alpha: 1, colors: [P.magenta, P.cyan], range: [0, 1], value: (uu, vv) => kw(pt(uu, vv)) });
+      } else if (nb === 2) {
+        const [i, j] = [0, 1, 2].filter((k) => big[k]), d = discAt(i, j, s[i], s[j]);
+        st.surface('body', (uu, vv) => toW(d(uu, vv)), { u: [0, TAU], v: [0, 1], nu: 96, nv: 12, alpha: 1, grid, colors: [P.magenta, P.cyan], range: [0, 1], value: (uu) => kw(d(uu, 1)) });
+      } else if (nb === 1) {
+        const i = big.indexOf(true);
+        st.tube('rod', [toW(ax(i, -s[i])), toW(ax(i, s[i]))], { color: kp[i] ? P.cyan : P.magenta, width: 8, glow: 0.25 });
+      }
+      // the three eigen-directions through the whole glass (dashed), and the principal semi-axes ±|λ| as lit rods:
+      // inside the ellipsoid they are hidden by it; once it is flat they lie on the disc, just in front of it
+      for (let k = 0; k < 3; k++) {
+        st.line([toW(ax(k, -1)), toW(ax(k, 1))], { color: kp[k] ? P.cyan : P.magenta, width: 1.3, dash: [4, 4], alpha: 0.85 });
+        if (s[k] > FLAT && nb < 3 && nb !== 1) st.tube(`semi${k}`, [near(toW(ax(k, -s[k])), 2), near(toW(ax(k, s[k])), 2)], { color: kp[k] ? P.cyan : P.magenta, width: 3.5, glow: 0.3 });
+      }
     }
-    const st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
+    // the two poles of the normal: the upper one in front of the plane, the lower one behind it
+    const newest = (k) => sc === 'rank' && sl.idx && sl.idx[k] + 1 === S.r;
+    const poleCol = kp[2] ? (newest(2) ? P.amber : P.cyan) : P.magenta;
+    bead('pole+', [0, 0, 1], poleCol, 5); bead('pole-', [0, 0, -1], poleCol, 5);
+    const tip = (c, t) => { const n = Math.hypot(c[0], c[1], c[2]) || 1; return c.map((x) => x * (1 + t / n)); };
+    if (sl.kind === 'heal') {                 // the eigenvalues of Tₘ along the three directions; amber: where Tₘ sends q₃
+      bead('step', ax(2, sl.lam[2]), P.amber, 5.5);
+      for (let k = 0; k < 3; k++) tagIn(`n${k}`, toW(ax(k, Math.max(1, s[k]) + 0.17)), `<span class="${kp[k] ? 'c-cy' : 'c-mg'}">λ = ${fix(sl.lam[k], 3)}</span>`, 'num');
+    } else if (sc === 'read') {               // row i and column j of the table, and the shadow of the column on the row
+      const cc = sliceOf(sl, T.map((row) => row[S.j])), tij = T[S.i][S.j], sh = rc.map((x) => x * tij / (rn * rn));
+      const lift = kp[0] && kp[1] ? 2.5 : 7;
+      onDisc(O, cc, P.ink, { dash: [6, 4], width: 2 }, lift);
+      onDisc(O, rc, P.ink, {}, lift + 1);
+      if (Math.abs(tij) > 1e-9) st.line([near(toW(O), lift + 2), near(toW(sh), lift + 2)], { color: P.amber, width: 4.5 });
+      st.line([near(toW(cc), lift), near(toW(sh), lift)], { color: P.ink, width: 1.2, dash: [3, 3], alpha: 0.6 });
+      bead('read', sh, P.amber, 4.5);
+      // “=” only where row i and column j are the same N numbers (a diagonal cell; or rank 1, every cell 1/N): tested
+      // on all of ℝᴺ, not on the arrows. Arrows that merely land close together share one label, which says “≠”.
+      const cj = T.map((row) => row[S.j]), equal = T[S.i].every((x, k) => Math.abs(x - cj[k]) <= 1e-12);
+      const near3 = Math.hypot(rc[0] - cc[0], rc[1] - cc[1], rc[2] - cc[2]) < 0.15, label = equal ? 'equal' : near3 ? 'shared' : 'apart';
+      if (label !== 'apart') {
+        const rel = equal ? '=' : '≠', mid = rc.map((x, k) => (x + cc[k]) / 2);
+        tagIn('row', toW(tip(equal ? rc : mid, 0.2)), L(`第 ${S.i + 1} 行 ${rel} 第 ${S.j + 1} 列`, `row ${S.i + 1} ${rel} column ${S.j + 1}`), 'raw ink');
+      } else {
+        tagIn('row', toW(tip(rc, 0.2)), L(`第 ${S.i + 1} 行`, `row ${S.i + 1}`), 'raw ink');
+        tagIn('col', toW(tip(cc, 0.2)), L(`第 ${S.j + 1} 列`, `column ${S.j + 1}`), 'raw ink');
+      }
+      out.read = { i: S.i, j: S.j, rc: rc.slice(), cc, shadow: sh, tij, equal, label };
+    } else if (sc === 'perp' && hasPerp()) {  // ψ(θ), its reading Tψ = cos θ·v₁ and the part sin θ·w in the complement
+      const V = perpVecs(), ps = sliceOf(sl, V.psi), tp = sliceOf(sl, V.Tpsi), v1 = sliceOf(sl, V.v), w = sliceOf(sl, V.w), th = thetaOf() * DEG;
+      const arc = [];
+      for (let t = 0; t <= 30; t++) { const a = t / 30 * Math.PI / 2; arc.push(toW(v1.map((x, k) => Math.cos(a) * x + Math.sin(a) * w[k]))); }
+      st.line(arc, { color: P.ink, width: 1.2, dash: [3, 4], alpha: 0.5 });
+      // the sector ψ has swept, each radius coloured by how much of it the table reads (cos² of its angle)
+      if (th > 0.02) st.surface('fan', (uu, vv) => toW(v1.map((x, k) => vv * (Math.cos(uu) * x + Math.sin(uu) * w[k]))),
+        { u: [0, th], v: [0, 1], nu: Math.max(4, Math.round(th / DEG / 3)), nv: 6, alpha: 1, colors: [P.magenta, P.cyan], range: [0, 1], value: (uu) => Math.cos(uu) ** 2 });
+      const lift = kp[0] && kp[1] ? 2.5 : 7;
+      if (Math.hypot(tp[0], tp[1], tp[2]) > 0.02) onDisc(O, tp, P.cyan, { width: 3 }, lift);
+      st.arrow(near(O, 1), near(toW(ps), 1), { color: P.ink, width: 2.4, headSize: 11 });
+      if (Math.sin(th) > 0.01) st.tube('sin', [toW(tp), toW(ps)], { color: P.magenta, width: 4.5, glow: 0.3 });
+      bead('psi', ps, P.ink, 4.5); bead('Tpsi', tp, P.cyan, 4.5);
+      const wk = kp[0] && kp[1] ? 2 : 0;   // which slice axis w is: the normal (r ≥ 2) or the plane (r = 1)
+      tagIn('psi', toW(ps), 'ψ', 'raw ink', { dx: -16, dy: -4 });
+      tagIn('Tpsi', toW(tp), 'Tψ', 'raw c-cy', { dy: 15 });
+      tagIn('w', toW(ax(wk, 1.12)), 'w', 'raw c-mg', { dx: 16 });
+      out.perp = { theta: thetaOf(), ps, tp, v1, w, tube: [tp, ps] };
+    } else {                                  // the basis vectors of the slice: kept ones as arrows, free ones dashed
+      for (let k = 0; k < 3; k++) {
+        const col = newest(k) ? P.amber : P.ink;
+        if (kp[k] && !(k === 2 && !kp[0])) { if (k < 2) onDisc(O, ax(k, 1), col); else st.arrow(near(O, 1), near(toW(ax(2, 1)), 1), { color: col, width: 2.4, headSize: 11 }); }
+        else if (!kp[k] && k < 2) st.line([near(O, 2), near(toW(ax(k, 1)), 2)], { color: P.ink, width: 1.6, dash: [5, 4], alpha: 0.8 });
+        tagIn(`n${k}`, toW(ax(k, 1.17)), sl.names[k], newest(k) ? 'raw c-am' : kp[k] ? 'raw c-cy' : 'raw c-mg', k === 2 ? { dx: 14 } : undefined);
+      }
+    }
+    return out;
+  }
+
+  /** The words under the ball: which slice it is and what the image is. */
+  function captionOf(sl, shape) {
+    const sc = S.scene, SH = { point: ['一点', 'a point'], rod: ['杆', 'a rod'], disk: ['圆盘', 'a disc'], ball: ['整个球', 'the whole ball'], ellipsoid: ['椭球', 'an ellipsoid'] }[shape];
+    const span = `⟨${sl.names.join(', ')}⟩`;
+    if (sl.kind === 'heal') { const m = mOf(); return L(`示意切片：T₀ 的三条本征方向 · T${subs(m)} 的像：${SH[0]}`, `model slice: three eigen-directions of T₀ · image under T${subs(m)}: ${SH[1]}`); }
+    if (sc === 'read') {
+      const tij = num(derive().T[S.i][S.j]);
+      return S.r >= 3 ? L(`示意切片：第 ${S.i + 1} 行与第 ${S.j + 1} 列所张的面${sl.names[2] ? ` + ${sl.names[2]}` : ''} · 内积 ${tij}`, `model slice: plane of row ${S.i + 1} and column ${S.j + 1}${sl.names[2] ? ` + ${sl.names[2]}` : ''} · dot product ${tij}`)
+        : L(`示意切片 ${span} · 第 ${S.i + 1} 行 · 第 ${S.j + 1} 列 = ${tij}`, `model slice ${span} · row ${S.i + 1} · column ${S.j + 1} = ${tij}`);
+    }
+    if (sc === 'perp' && hasPerp()) return L(`示意切片 ${span}，w = ${S.r >= 2 ? sl.names[2] : sl.names[0]} · ‖Tψ‖ = cos θ = ${fix(Math.cos(thetaOf() * DEG), 3)}`, `model slice ${span}, w = ${S.r >= 2 ? sl.names[2] : sl.names[0]} · ‖Tψ‖ = cos θ = ${fix(Math.cos(thetaOf() * DEG), 3)}`);
+    return L(`示意切片 ${span} · 单位球的像：${SH[0]}`, `model slice ${span} · image of the unit ball: ${SH[1]}`);
+  }
+  /** The caption centred under the ball in `w` pixels: one line, or two (split at the last " · ") if one does not fit. */
+  function captionLines(ctx, str, w) {
+    const fits = (s, fs) => { ctx.font = `${fs}px ${face('body')}`; return ctx.measureText(s).width <= w; };
+    for (let fs = 11; fs >= 9; fs -= 0.5) if (fits(str, fs)) return { lines: [str], fs };
+    const k = str.lastIndexOf(' · '), two = k > 0 ? [str.slice(0, k), str.slice(k + 3)] : [str];
+    for (let fs = 10.5; fs >= 8; fs -= 0.5) if (two.every((s) => fits(s, fs))) return { lines: two, fs };
+    // a narrow column (a phone's cited figure): each part broken at its spaces, so no line runs out of the column
+    const lines = two.flatMap((s) => fitLines(ctx, s, w, 8.5, 8.5).lines);
+    return { lines, fs: 8.5 };
+  }
+
+  /* ---------- the stage: the ball in its own box, the table and the side panel on the flat canvas ---------- */
+  let geo = {};
+  /** The three boxes of the stage (CSS pixels of the canvas): the ball on the left (wide) or on top (narrow). */
+  function layoutOf(W, H, words) {
+    if (!words) return { mode: 'cover', solid: { x: W * 0.02, y: H * 0.08, w: W * 0.36, h: H * 0.84 }, table: { x: W * 0.4, y: H * 0.08, w: W * 0.33, h: H * 0.84 }, panel: { x: W * 0.76, y: H * 0.1, w: W * 0.21, h: H * 0.8 } };
+    const st = $('stage').getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
+    if (compact()) {                          // a phone's cited figure: the ball as large as the width allows on the left,
+      // the table over its side panel in the column on the right, between the title and the legend
+      const top = below($('hudBig').parentElement) + 6, bottom = $('legend').offsetHeight + 22;
+      const bx = { x: 10, y: top, w: W - 20, h: Math.max(120, H - top - bottom) };
+      const w3 = Math.round(bx.w * 0.6), rx = bx.x + w3 + 8, rw = bx.w - w3 - 8, side = Math.min(rw, bx.h * 0.56);
+      return { mode: 'compact', solid: { x: bx.x, y: bx.y, w: w3, h: bx.h }, table: { x: rx, y: bx.y, w: rw, h: side }, panel: { x: rx, y: bx.y + side + 8, w: rw, h: bx.h - side - 8 } };
+    }
+    const stEl = $('stage');
+    stEl.classList.remove('legend-right');    // the legend is measured across the whole stage first
     const top = Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10, bottom = Math.max(18, $('legend').offsetHeight + 20);
     const bx = { x: 18, y: top, w: W - 36, h: Math.max(80, H - top - bottom) };
     const wide = bx.w >= 520 && bx.w >= bx.h * 1.2;
-    let tb, pb;
-    if (wide) { const side = Math.min(bx.h, bx.w * 0.54); tb = { x: bx.x, y: bx.y, w: side, h: bx.h }; pb = { x: bx.x + side + 30, y: bx.y + 4, w: bx.w - side - 30, h: bx.h - 8 }; }
-    else { const side = Math.min(bx.w, bx.h * 0.58); tb = { x: bx.x, y: bx.y, w: bx.w, h: side }; pb = { x: bx.x, y: bx.y + side + 14, w: bx.w, h: bx.h - side - 14 }; }
-    geo.table = drawTable(ctx, tb, shown(), true);
+    if (wide && bx.w >= bx.h * 2.05 && TRV.figure && !TRV.still) {
+      // a cited figure in a book page: the ball's column runs from under the title to the foot of the stage, and the
+      // legend keeps to the right of it, under the table and the side panel
+      const cb = { x: bx.x, y: bx.y - 6, w: bx.w, h: H - bx.y - 12 };
+      const w3 = Math.round(clamp(cb.h - 20, bx.w * 0.36, bx.w * 0.42)), rx = bx.x + w3 + 16, rw = bx.w - w3 - 16;
+      stEl.style.setProperty('--fig-legend-left', `${rx}px`); stEl.classList.add('legend-right');
+      const bh = Math.max(80, H - top - Math.max(18, $('legend').offsetHeight + 20)), pw = Math.round(bx.w * 0.27), side = Math.min(bh, rw - pw - 22);
+      return { mode: 'columns', solid: { x: cb.x, y: cb.y, w: w3, h: cb.h }, table: { x: rx, y: bx.y, w: side, h: bh }, panel: { x: rx + side + 22, y: bx.y + 4, w: rw - side - 22, h: bh - 8 } };
+    }
+    if (wide && bx.w >= bx.h * 2.05) {        // short and wide (a cited figure, a still): ball | table | panel
+      // the height decides the ball here: its column takes a little less from the HUD and the legend, and is as wide
+      // as the ball can be tall; the side panel keeps its share of the width and the table takes what is left
+      const cb = { x: bx.x, y: bx.y - 6, w: bx.w, h: bx.h + 10 };
+      const w3 = Math.round(clamp(cb.h - 20, bx.w * 0.36, bx.w * 0.42)), rx = bx.x + w3 + 16, rw = bx.w - w3 - 16;
+      const pw = Math.round(bx.w * 0.27), side = Math.min(bx.h, rw - pw - 22);
+      return { mode: 'columns', solid: { x: cb.x, y: cb.y, w: w3, h: cb.h }, table: { x: rx, y: bx.y, w: side, h: bx.h }, panel: { x: rx + side + 22, y: bx.y + 4, w: rw - side - 22, h: bx.h - 8 } };
+    }
+    if (wide) {                               // the ball on the left, the table over the panel on the right
+      const w3 = Math.round(bx.w * 0.54), rx = bx.x + w3 + 16, rw = bx.w - w3 - 16, side = Math.min(rw, bx.h * 0.54);
+      return { mode: 'left', solid: { x: bx.x, y: bx.y, w: w3, h: bx.h }, table: { x: rx, y: bx.y, w: rw, h: side }, panel: { x: rx, y: bx.y + side + 14, w: rw, h: bx.h - side - 14 } };
+    }
+    const h3 = Math.round(clamp(bx.h * 0.42, 110, 270)), ry = bx.y + h3 + 10, rh = bx.h - h3 - 10, solid = { x: bx.x, y: bx.y, w: bx.w, h: h3 };
+    if (rh >= bx.w * 0.95) { const side = Math.min(bx.w, rh * 0.56); return { mode: 'top', solid, table: { x: bx.x, y: ry, w: bx.w, h: side }, panel: { x: bx.x, y: ry + side + 14, w: bx.w, h: rh - side - 14 } }; }
+    const side = Math.min(rh, bx.w * 0.5);
+    return { mode: 'top', solid, table: { x: bx.x, y: ry, w: side, h: rh }, panel: { x: bx.x + side + 14, y: ry + 4, w: bx.w - side - 14, h: rh - 8 } };
+  }
+  function drawStage() {
+    const flat = $('flat'), g0 = kit.plot(flat, { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, W = g0.W, H = g0.H, cv = flat;
+    const words = !TRV.thumbMode, lay = layoutOf(W, H, words);
+    geo.layout = Object.assign({ W, H }, lay);
+    // the ball: sized to its box less the caption under it, centred in what is left
+    const sl = sliceNow(), shape = shapeOf(sl), cap = words ? captionLines(ctx, captionOf(sl, shape), lay.solid.w) : { lines: [], fs: 0 };
+    const capH = cap.lines.length * (cap.fs + 4) + (words ? 6 : 0), ball = { x: lay.solid.x, y: lay.solid.y, w: lay.solid.w, h: lay.solid.h - capH };
+    // the glass and anything the image pokes out of it; a short stage lets the ball fill its column almost to the edge
+    const tight = lay.mode === 'columns' || lay.mode === 'compact', unit = Math.max(16, Math.min(ball.w, ball.h) / 2 * Math.min(tight ? 0.97 : 0.9, (tight ? 1 : 0.97) / sl.scale));
+    geo.ballBox = lay.solid;
+    L3.cxF = (ball.x + ball.w / 2) / W; L3.cyF = (ball.y + ball.h / 2) / H; L3.radF = unit / (Math.min(W, H) * stage.cam.zoom);
+    stage.begin();
+    geo.solid = Object.assign(drawSolid(stage, sl, shape), { unit: stage.unit, center: [stage.cx, stage.cy], ball, caption: cap.lines.slice() });
+    stage.end();
+    cap.lines.forEach((s, k) => text(ctx, s, ball.x + ball.w / 2, ball.y + ball.h + 6 + (k + 0.5) * (cap.fs + 4), P.dim, { align: 'center', size: cap.fs, face: 'body' }));
+    if (TRV.thumbMode) {   // wordless cover: the ball, the table and its eigenvalues snapping to 0 and 1
+      const gx = lay.table.x + lay.table.w / 2, gr = gx - (lay.solid.x + lay.solid.w), glow = ctx.createRadialGradient(gx, H * 0.5, 0, gx, H * 0.5, gr);   // fades out before the ball
+      glow.addColorStop(0, TRV.alpha(P.cyan, 0.08)); glow.addColorStop(1, TRV.alpha(P.cyan, 0)); ctx.fillStyle = glow; ctx.fillRect(gx - gr, 0, 2 * gr, H);
+      geo.table = drawTable(ctx, lay.table, shown(), false);
+      drawHeal(cv, lay.panel, W, H, false);
+      return;
+    }
+    geo.table = drawTable(ctx, lay.table, shown(), true);
+    const pb = lay.panel;
     if (pb.h < 40) return;
     if (S.scene === 'read') drawRead(cv, pb, W, H, true);
     else if (S.scene === 'rank') drawRank(cv, pb, W, H, true);
@@ -244,10 +577,10 @@
 
   /* ---------- words ---------- */
   const LEGEND = {
-    read: [['cy box', '正的格、正的乘积', 'positive cells and products'], ['mg box', '负的格、负的乘积', 'negative cells and products'], ['am', '选中的格、刚加进来的一项', 'the chosen cell, the term just added'], ['dm', '虚线：行（尺子）与列（被量）', 'dashed: the row (ruler) and the column (measured)']],
-    rank: [['cy box', '正的格、对角格（越亮越大）', 'positive cells, diagonal cells (brighter is larger)'], ['mg box', '负的格', 'negative cells'], ['am', '对角格之和（迹）', 'the sum of the diagonal (trace)'], ['dm', '虚线框：对角线', 'dashed: the diagonal']],
-    heal: [['cy box', '正的格；½ 以上的本征值', 'positive cells; eigenvalues above ½'], ['mg box', '负的格；½ 以下的本征值', 'negative cells; eigenvalues below ½'], ['am', '被碰的格、当前这一步', 'the knocked cell, the current step']],
-    perp: [['cy box', '读出 Tψ、留在表里的 cos θ', 'the reading Tψ, the cos θ kept by the table'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']]
+    read: [['cy box', '正的格、正的乘积；圆盘上行读为正的一半', 'positive cells and products; the half disc the row reads as positive'], ['mg box', '负的格、负的乘积；读为负的一半', 'negative cells and products; the half read as negative'], ['am', '选中的格、刚加进来的一项；列在行上的影子', 'the chosen cell, the term just added; the column’s shadow on the row'], ['dm', '虚线：行（尺子）与列（被量）', 'dashed: the row (ruler) and the column (measured)']],
+    rank: [['cy box', '正的格、对角格（越亮越大）；球里：像', 'positive cells, diagonal cells (brighter is larger); in the ball: the image'], ['mg box', '负的格；读成 0 的方向', 'negative cells; directions read as 0'], ['am', '对角格之和（迹）；刚写进的一行', 'the sum of the diagonal (trace); the newest row'], ['dm', '虚线框：对角线', 'dashed: the diagonal']],
+    heal: [['cy box', '正的格；½ 以上的本征值及其方向', 'positive cells; eigenvalues above ½, their directions'], ['mg box', '负的格；½ 以下的本征值及其方向', 'negative cells; eigenvalues below ½, their directions'], ['am', '被碰的格、当前这一步', 'the knocked cell, the current step']],
+    perp: [['cy box', '读出 Tψ、留在表里的 cos θ；圆盘：像', 'the reading Tψ, the cos θ kept by the table; the disc: the image'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']]
   };
   const setLabel = (id, zh, en) => { const h = `<span class="zh">${zh}</span><span class="en">${en}</span>`; if ($(id)._h !== h) { $(id).innerHTML = h; $(id)._h = h; } };
   const ex = (x) => (x === 0 ? '0' : x.toExponential(1).replace('-', MINUS));
@@ -347,21 +680,29 @@
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
   kit.keys({ 1: () => { leave(); setScene('rank'); }, 2: () => { leave(); setScene('read'); }, 3: () => { leave(); setScene('heal'); }, 4: () => { leave(); setScene('perp'); } });
 
-  /* ---------- direct manipulation: click a cell ---------- */
+  /* ---------- direct manipulation: click a cell (the stage listens: #flat never takes the pointer) ---------- */
   const cellAt = (ev) => {
     const g = geo.table; if (!g) return null;
-    const b = $('cv').getBoundingClientRect(), j = Math.floor((ev.clientX - b.left - g.ox) / g.c), i = Math.floor((ev.clientY - b.top - g.oy) / g.c);
+    const b = $('flat').getBoundingClientRect(), j = Math.floor((ev.clientX - b.left - g.ox) / g.c), i = Math.floor((ev.clientY - b.top - g.oy) / g.c);
     return i >= 0 && j >= 0 && i < g.n && j < g.n ? [i, j] : null;
   };
-  $('cv').addEventListener('click', (ev) => {
+  let downAt = null;
+  $('stage').addEventListener('pointerdown', (ev) => { downAt = [ev.clientX, ev.clientY]; });
+  $('stage').addEventListener('click', (ev) => {
+    if (ev.target.closest('button, a, input, .chip')) return;
+    if (downAt && Math.hypot(ev.clientX - downAt[0], ev.clientY - downAt[1]) > 6) return;   // the end of a turn of the ball
     const c = cellAt(ev); if (!c) return;
     leave();
     if (S.scene === 'heal') { kick(c[0], c[1]); clock.play(); }
     else if (S.scene === 'rank' || S.scene === 'perp') { S.i = c[0]; S.j = c[1]; setScene('read'); fitClock(); }
     else select(c[0], c[1]);
   });
-  $('cv').addEventListener('pointermove', (ev) => { const c = cellAt(ev); if (String(c) !== String(S.hover)) { S.hover = c; paint(); } });
-  $('cv').addEventListener('pointerleave', () => { if (S.hover) { S.hover = null; paint(); } });
+  $('stage').addEventListener('pointermove', (ev) => {
+    const c = ev.target.closest('button, a, input, .chip') ? null : cellAt(ev);
+    $('stage').classList.toggle('on-cell', !!c);
+    if (String(c) !== String(S.hover)) { S.hover = c; paint(); }
+  });
+  $('stage').addEventListener('pointerleave', () => { $('stage').classList.remove('on-cell'); if (S.hover) { S.hover = null; paint(); } });
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
@@ -387,6 +728,7 @@
     S.r = p.r; fRank.set(p.r);
     S.kicks = (p.kicks || []).map((k) => Object.assign({}, k));
     if (p.cell) { S.i = p.cell[0]; S.j = p.cell[1]; } else if (p.kicks) { S.i = p.kicks[0].i; S.j = p.kicks[0].j; }
+    if (Math.abs(stage.cam.yaw - VIEW[0]) + Math.abs(stage.cam.pitch - VIEW[1]) + Math.abs(stage.cam.zoom - 1) > 1e-6) stage.view(VIEW, 450);   // a card shows its frame from the default view
     setScene(p.scene);
     if (!p.play) return;
     const R = RAIL[p.scene]();
@@ -403,7 +745,8 @@
   TRV.startGlitch(document.querySelector('.brand'));
 
   /* ---------- probe for the browser suite, cover, start ---------- */
-  const at = (x, y) => { const b = $('cv').getBoundingClientRect(); return { x: b.left + x, y: b.top + y }; };
+  const at = (x, y) => { const b = $('flat').getBoundingClientRect(); return { x: b.left + x, y: b.top + y }; };
+  const plain = (o) => JSON.parse(JSON.stringify(o));
   const copy = (A) => A.map((r) => r.slice());
   window.TABLE_DEBUG = {
     get state() {
@@ -414,7 +757,12 @@
     T: () => copy(derive().T), shown: () => copy(shown()), delta: () => copy(derive().D), iterates: () => derive().its.map(copy), eigs: (m) => derive().eigs[m == null ? mOf() : m].slice(),
     basis: () => Array.from({ length: S.r }, (_, k) => dct(S.N, k)), products: () => products(), perp: () => { const V = perpVecs(); return { v: V.v, w: V.w, psi: V.psi, Tpsi: V.Tpsi, Tw: V.Tw, has: hasPerp() }; },
     seek: (t) => { clock.pause(); clock.set(t); }, scene: (sc, t) => setScene(sc, t), setN: (n) => setN(n), setR: (r) => setR(r), select: (i, j) => select(i, j), kick: (i, j, e) => kick(i, j, e),
-    point: { cell: (i, j) => (geo.table ? at(geo.table.X(j) + geo.table.c / 2, geo.table.Y(i) + geo.table.c / 2) : null) }
+    point: { cell: (i, j) => (geo.table ? at(geo.table.X(j) + geo.table.c / 2, geo.table.Y(i) + geo.table.c / 2) : null) },
+    /** The solid as last drawn: slice Q (columns of ℝᴺ), λ = qᵀAq, kept, semi-axes drawn, frame (world axes of the
+        slice), beads (world p, slice c), the read arrows or the ψ arrows (slice coordinates), unit, centre, boxes. */
+    solid: () => (geo.solid ? plain(geo.solid) : null),
+    /** The boxes of the stage (canvas CSS pixels): the ball, the table, the side panel; with the table's cell grid. */
+    layout: () => (geo.layout ? plain(Object.assign({}, geo.layout, { cells: geo.table ? { ox: geo.table.ox, oy: geo.table.oy, c: geo.table.c, n: geo.table.n } : null })) : null)
   };
   /** Cover: an N = 12 table knocked out of shape, beside its eigenvalues snapping back to 0 and 1. */
   window.TRV_THUMB = () => { S.N = 12; S.r = 5; S.kicks = [{ i: 2, j: 7, eps: 0.3 }, { i: 9, j: 9, eps: -0.25 }]; S.i = 2; S.j = 7; setScene('heal', M); paint.now(); };
