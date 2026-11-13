@@ -7,6 +7,10 @@
    bottom edge says there is more; it disappears at the end), so a long note never takes the stage's height. The full
    note, the scene buttons and every panel stay in the full laboratory ("open full screen" under the figure). */
 :root[data-embed][data-figure] .lab .tour { background: var(--panel-solid); }
+/* the shared bar lays the title and the note out as its own rows (.what makes no box of its own); here the title and
+   the note share one box between ◀ and ▶, and that box is the one that keeps to a few lines and scrolls */
+:root[data-embed][data-figure] .lab .tour .what { display: block; grid-column: 2; grid-row: 1; min-width: 0; }
+:root[data-embed][data-figure] .lab .tour .what b { display: block; }
 :root[data-embed][data-figure] .lab .tour .what {
   max-height: 52px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line-hot) transparent;
   background:
@@ -31,3 +35,8 @@
   :root[data-embed][data-figure] .app.lab > footer.rail .tbtn { height: 26px; min-width: 30px; }
   :root[data-embed][data-figure] .app.lab > footer.rail .tau { font-size: 15px; }
 }
+
+/* on a phone the stage stacks the apparatus above the grid (over its record boxes in the record scene), the phase disc
+   and the screen, and the title block may sit below the scene buttons: give the stage the height of all of them, so the
+   grid keeps ≥ 80 px (the book's frame keeps its own) */
+@media (max-width: 560px) { :root:not([data-embed]) .lab .center { grid-template-rows: minmax(min-content, max(360px, 66vh)) auto auto; } }

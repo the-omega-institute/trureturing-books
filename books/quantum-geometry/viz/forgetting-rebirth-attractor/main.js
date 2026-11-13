@@ -376,6 +376,9 @@
   function regions() {
     const cv = $('flat'), st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
     const thumb = TRV.thumbMode, W = cv.clientWidth, H = cv.clientHeight;
+    // the legend's place right of the solid belongs to the book-page columns only: every layout starts from the stage's
+    // own legend (measured across the whole stage), and only those columns below put it back, for the frame's size now
+    $('stage').classList.remove('legend-right'); $('stage').style.removeProperty('--fig-legend-left');
     if (compact()) {
       // a phone's cited figure: the solid on the left, the disk over its magnifier in a column on the right (narrower
       // beside the staircase, whose sheet is wide and low)
@@ -383,7 +386,6 @@
       const w2 = Math.round(aw * (S.scene === 'stair' ? C2.stair : C2.column)), r3 = { x: x0, y: top, w: aw - w2 - 8, h: ah }, r2 = { x: x0 + aw - w2, y: top, w: w2, h: ah };
       return { W, H, top, bottom, wide: true, compact: true, r3, r2 };
     }
-    $('stage').classList.remove('legend-right');   // the legend is measured across the whole stage first
     const top = thumb ? 24 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 6;
     const bottom = thumb ? 24 : Math.max(16, $('legend').offsetHeight + 18);
     const x0 = 12, aw = Math.max(1, W - 24), ah = Math.max(1, H - top - bottom), gap = 12;

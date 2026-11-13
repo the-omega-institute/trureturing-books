@@ -349,8 +349,16 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
   check('default view: the beads on the front face and on the columns are visible, those on the back face are hidden by the plate', fc.front.every((h) => !h) && fc.back.every((h) => h) && fc.top.every((h) => !h), JSON.stringify(fc));
   const sh = await solidPixels(page);
   check('the apparatus covers 16–22 % of the stage with opaque, lit surfaces', sh && sh.share >= 0.16 && sh.share <= 0.22 && sh.spread >= 0.04, sh && `${(sh.share * 100).toFixed(1)}% σ ${sh.spread.toFixed(3)}`);
-  const before = await D(() => ({ t: window.DREAM_DEBUG.state.t, yaw: window.TRV.solids[0].cam.yaw }));
   await solidChecks(T, BOOK, ID, page);
+  // solidChecks hands the camera back as it found it; the turn checked here is a drag of this test's own, along the
+  // top of the stage (at 8 % of its height), across three tenths of its width
+  const before = await D(() => ({ t: window.DREAM_DEBUG.state.t, yaw: window.TRV.solids[0].cam.yaw }));
+  const sb = await D(() => { const r = window.TRV.solids[0].el.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; });
+  const ty = sb[1] + sb[3] * 0.08;
+  await page.mouse.move(sb[0] + sb[2] * 0.06, ty); await page.mouse.down();
+  for (let k = 1; k <= 6; k++) await page.mouse.move(sb[0] + sb[2] * (0.06 + 0.05 * k), ty);
+  await page.mouse.up();
+  await settle(page);
   const after = await D(() => ({ t: window.DREAM_DEBUG.state.t, yaw: window.TRV.solids[0].cam.yaw }));
   check('a drag across the top of the stage turns the apparatus and leaves the rail alone (onPick is false there)', Math.abs(after.yaw - before.yaw) > 0.5 && after.t === before.t, JSON.stringify([before, after]));
   fc = await faces();
