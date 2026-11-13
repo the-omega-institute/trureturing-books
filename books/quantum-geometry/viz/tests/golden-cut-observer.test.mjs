@@ -5,6 +5,7 @@
 // the admissible shifts of a fixed patch by brute force over a grid, Fibonacci numbers with their own BigInt recurrence,
 // the golden rotation by repeated addition, and the triacontahedron as a zonotope through its support function.
 import { session, stageFirstChecks, solidChecks, settle, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
+import { plotBudgetChecks } from './plot-budget.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'golden-cut-observer';
 const T = await session();
@@ -19,6 +20,8 @@ const chosen = (u) => LATTICE.filter((p) => p.c >= LO + u - 1e-12 && p.c <= HI +
 
 // the cover is the cut scene, a flat plot drawn on #flat over the solid's canvases
 await stageFirstChecks(T, BOOK, ID, { cover: '#flat' });
+// every chart drawn with kit.plot keeps its readable height in each cited figure, still, cover and lab viewport
+await plotBudgetChecks(T, BOOK, ID);
 
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);

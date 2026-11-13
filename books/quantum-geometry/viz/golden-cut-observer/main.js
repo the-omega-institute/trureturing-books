@@ -91,9 +91,21 @@
     }
     return q;
   }
+  /* MIN_H: a chart's readable height (two 10px label rows and a 4px gap), declared to kit.plot as minHeight. A lab stage
+     grows to the height its charts declare (kit.plot publishes it). A cited figure or a still keeps its frame: when the
+     free box (between the HUD and the legend) is shorter than a scene needs (its chart's readable height and the rows it
+     draws around the chart), the scene keeps that, centred on the box, and the HUD text, drawn with a halo, runs over
+     its edges. */
+  const MIN_H = 24;
+  function fitBand(H, top, bottom, need) {
+    if (!(TRV.figure || TRV.still) || H - top - bottom >= need) return { top, bottom };
+    const t = clamp((top + H - bottom - need) / 2, 0, Math.max(0, H - need));
+    return { top: t, bottom: Math.max(0, H - t - need) };
+  }
   function drawCut(q) {
     const words = !TRV.thumbMode, u = q.u, K = words ? 1 : 2.2;      // the cover is drawn bolder: it is read at card size
-    const g = kit.plot($('flat'), { x: [-q.half, q.half], y: [MID - 1.9, MID + 1.9], pad: [words ? 30 : 8, 10, box.top, box.bottom + (words ? 46 : 36)] }), ctx = g.ctx; view = g;
+    const rows = words ? 46 : 36, b = fitBand($('flat').clientHeight, box.top, box.bottom, MIN_H + rows);   // the physical line and its ticks go under the chart
+    const g = kit.plot($('flat'), { x: [-q.half, q.half], y: [MID - 1.9, MID + 1.9], pad: [words ? 30 : 8, 10, b.top, b.bottom + rows], minHeight: MIN_H }), ctx = g.ctx; view = g;
     const lo = LO + u, hi = HI + u, rowY = g.pt + g.ih + 15, rowH = words ? 12 : 22, inView = (p) => p.x >= g.x0 && p.x <= g.x1 && p.c >= g.y0 && p.c <= g.y1;
     g.rect(g.x0, lo, g.x1, hi, P.amber, { alpha: words ? 0.09 : 0.14 });
     if (q.emp) g.rect(g.x0, q.emp[0], g.x1, q.emp[1], P.cyan, { alpha: 0.13 });
@@ -139,7 +151,8 @@
   const power = (k) => [fibN(k) + fibN(k + 1) * PHI, fibN(k) + fibN(k + 1) * PSI];        // φ^(k+1) = F_k + F_(k+1)·φ as the lattice point (itself, conjugate)
   const sub = (n) => String(n).replace(/\d/g, (d) => '₀₁₂₃₄₅₆₇₈₉'[d]), sup = (n) => String(n).replace(/\d/g, (d) => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
   function drawCassini(k) {
-    const words = !TRV.thumbMode, g = kit.plot($('flat'), { x: [-2, 31], y: [-1.3, 1.3], pad: [words ? 30 : 8, 12, box.top, box.bottom + (words ? 20 : 4)] }), ctx = g.ctx; view = g;
+    const words = !TRV.thumbMode, rows = words ? 20 : 4, b = fitBand($('flat').clientHeight, box.top, box.bottom, MIN_H + rows);
+    const g = kit.plot($('flat'), { x: [-2, 31], y: [-1.3, 1.3], pad: [words ? 30 : 8, 12, b.top, b.bottom + rows], minHeight: MIN_H }), ctx = g.ctx; view = g;
     if (words) g.axes({ xTicks: [0, 5, 10, 15, 20, 25, 30], yTicks: [[-1, '−1'], [0, '0'], [1, '1']], frame: false });
     g.hline(0, P.ink, { alpha: 0.45 }); g.vline(0, P.faint, { alpha: 0.7 });
     for (const sg of [1, -1]) { const col = sg > 0 ? P.cyan : P.magenta, right = [], left = []; for (let i = 0; i <= 200; i++) { const x = 1 / 1.3 + (31 - 1 / 1.3) * Math.pow(i / 200, 2); right.push([x, sg / x]); } for (let i = 0; i <= 40; i++) { const x = -2 + (2 - 1 / 1.3) * i / 40; left.push([x, sg / x]); } g.line(right, col, { width: 1.1, alpha: 0.5 }); g.line(left, col, { width: 1.1, alpha: 0.5 }); }
@@ -175,10 +188,11 @@
   }
   function drawReturns(q) {
     const cv = $('flat'), W = cv.clientWidth, H = cv.clientHeight, words = !TRV.thumbMode;
-    let top = box.top + 6, bottom = box.bottom + 22; const spare = H - top - bottom - 2.3 * W * 0.2;
+    const b = fitBand(H, box.top, box.bottom, 6 + MIN_H + 22);
+    let top = b.top + 6, bottom = b.bottom + 22; const spare = H - top - bottom - 2.3 * W * 0.2;
     if (spare > 0) { top += spare / 2; bottom += spare / 2; }
     const R = (H - top - bottom) / 2.3, cx = 14 + R * 1.1, nView = Math.max(55, q.N);
-    const g = kit.plot(cv, { x: [0, nView + 1], y: [-1.15, 1.15], pad: [cx + R * 1.1 + 34, 16, top, bottom] }), ctx = g.ctx, cy = g.Y(0); view = g;
+    const g = kit.plot(cv, { x: [0, nView + 1], y: [-1.15, 1.15], pad: [cx + R * 1.1 + 34, 16, top, bottom], minHeight: MIN_H }), ctx = g.ctx, cy = g.Y(0); view = g;
     const y1 = g.Y(clamp(q.u1, -1.15, 1.15)), y2 = g.Y(clamp(q.u2, -1.15, 1.15));
     ctx.fillStyle = P.amber; ctx.globalAlpha = 0.11; ctx.fillRect(cx - R - 8, y2, g.pl + g.iw - (cx - R - 8), y1 - y2); ctx.globalAlpha = 1;
     ctx.strokeStyle = P.amber; ctx.lineWidth = 1.3; for (const y of [y1, y2]) { ctx.beginPath(); ctx.moveTo(cx - R - 8, Math.round(y) + 0.5); ctx.lineTo(g.pl + g.iw, Math.round(y) + 0.5); ctx.stroke(); }

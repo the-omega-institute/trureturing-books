@@ -197,10 +197,21 @@
     const sr = $('stage').getBoundingClientRect(), below = (el) => el.getBoundingClientRect().bottom - sr.top;
     return TRV.thumbMode ? { top: 26, bottom: 26 } : { top: Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10, bottom: Math.max(18, $('legend').offsetHeight + 20) };
   };
+  /* MIN_H: a chart's readable height (two 10px label rows and a 4px gap), declared to kit.plot as minHeight. A lab stage
+     grows to the height its charts declare (kit.plot publishes it). A cited figure or a still keeps its frame: when the
+     free box (between the HUD and the legend) is shorter than a scene needs (its chart's readable height and the rows it
+     draws under the chart), the scene keeps that, centred on the box, and the HUD text, drawn with a halo, runs over its
+     edges. */
+  const MIN_H = 24;
+  function fitBand(H, top, bottom, need) {
+    if (!(TRV.figure || TRV.still) || H - top - bottom >= need) return { top, bottom };
+    const t = Math.max(0, Math.min(H - need, (top + H - bottom - need) / 2));
+    return { top: t, bottom: Math.max(0, H - t - need) };
+  }
   const tag = (key, x, y, html, cls, o) => stage.tag(key, [flat.X(x) + ((o && o.dx) || 0), flat.Y(y) + ((o && o.dy) || 0)], html, cls, { screen: true });
   function drawOrder(st) {
-    const n = ordN(clock.t), b = box(), top = 17;
-    const g = flat = kit.plot($('cv'), { x: [0, ORD.hi + 4], y: [0, top], pad: [44, 24, b.top, b.bottom + 22] });
+    const n = ordN(clock.t), b0 = box(), top = 17, b = fitBand($('cv').clientHeight, b0.top, b0.bottom, MIN_H + 22);   // the n ticks under the chart
+    const g = flat = kit.plot($('cv'), { x: [0, ORD.hi + 4], y: [0, top], pad: [44, 24, b.top, b.bottom + 22], minHeight: MIN_H });
     g.axes({ yTicks: [0, 2, 4, 8, 12, 16], xTicks: [4, 12, 20, 28, 36, 44, 52, 60], xLabel: L('变量数 n', 'variables n'), yLabel: L('阶', 'order') });
     const cn = (x) => ORD.c * x, line = [[0, 0], [ORD.hi + 4, cn(ORD.hi + 4)]];
     g.poly([[0, 0], ...line.slice(1), [ORD.hi + 4, 0]], P.magenta, { alpha: 0.07 });
@@ -220,8 +231,8 @@
       : L('M 已高过示意线 c·n；文献只给出 Ω(n) 的下界，不给出这条线的斜率', 'M is above the schematic line c·n; the literature gives an Ω(n) lower bound, not the slope of this line');
   }
   function drawWild(st) {
-    const t = clock.t, b = box(), prs = probes();
-    const g = flat = kit.plot($('cv'), { x: [-0.45, WL.L + 0.45], y: [-1.9, 1.9], pad: [16, 16, b.top, b.bottom], equal: true });
+    const t = clock.t, b0 = box(), b = fitBand($('cv').clientHeight, b0.top, b0.bottom, MIN_H), prs = probes();
+    const g = flat = kit.plot($('cv'), { x: [-0.45, WL.L + 0.45], y: [-1.9, 1.9], pad: [16, 16, b.top, b.bottom], equal: true, minHeight: MIN_H });
     // the vortices: closed level sets of ψ in every cell above and below the thread
     for (let j = 0; j < 5; j++) for (const sg of [1, -1]) for (const lev of [0.12, 0.4, 0.75]) {
       const xc = 1.5 * j, up = [], dn = [];

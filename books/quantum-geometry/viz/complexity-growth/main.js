@@ -170,15 +170,36 @@
   function layout() {
     const st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
     const thumb = TRV.thumbMode;
-    return { top: thumb ? 22 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 8, bottom: thumb ? 22 : Math.max(18, $('legend').offsetHeight + 20), H: st.height, W: st.width };
+    // H: the canvas's own height, which the charts' pads divide (the stage box also counts its border)
+    return { top: thumb ? 22 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 8, bottom: thumb ? 22 : Math.max(18, $('legend').offsetHeight + 20), H: $('cv').clientHeight || st.height, W: st.width };
+  }
+
+  /* MIN_H: a chart's readable height (two 10px label rows and a 4px gap), declared to kit.plot as minHeight. Under the
+     entropy lane runs the row of layer ticks (TICKS); between the lanes, a gap no smaller than a tick label (GAP_MIN). */
+  const MIN_H = 24, TICKS = 18, GAP_MIN = 10;
+  /** A lab stage grows to the height its charts declare (kit.plot publishes it). A cited figure or a still keeps its
+      frame: when the band is shorter than a scene needs, the scene keeps its full need, centred on the band, and the
+      HUD text, drawn with a halo, runs over its edges. */
+  function fitBand(H, top, bottom, need) {
+    if (!(TRV.figure || TRV.still) || H - top - bottom >= need) return { top, bottom };
+    const t = clamp((top + H - bottom - need) / 2, 0, Math.max(0, H - need));
+    return { top: t, bottom: Math.max(0, H - t - need) };
   }
 
   function drawGrowth() {
     const lo = layout(), cv = $('cv'), t = S.t, thumb = TRV.thumbMode;
-    const inner = lo.H - lo.top - lo.bottom - 24, gap = 34, hTop = Math.max(60, (inner - gap) * 0.58), left = thumb ? 24 : 48, right = thumb ? 24 : 30;
+    const inner = lo.H - lo.top - lo.bottom - 24, left = thumb ? 24 : 48, right = thumb ? 24 : 30;
+    let top = lo.top, bottom = lo.bottom, gap = 34, hTop = Math.max(60, (inner - gap) * 0.58);
+    // A fixed frame where the entropy lane would come out shorter than a chart's readable height: the gap gives way
+    // first, then the complexity lane its preferred 60px, and the two lanes keep their readable heights.
+    if ((TRV.figure || TRV.still) && lo.H - top - hTop - gap - bottom - TICKS < MIN_H) {
+      gap = GAP_MIN;
+      ({ top, bottom } = fitBand(lo.H, top, bottom, 2 * MIN_H + gap + TICKS));
+      hTop = clamp(lo.H - top - bottom - TICKS - gap - MIN_H, MIN_H, 60);
+    }
     const tTicks = thumb ? [] : [0, 10, 20, 30, 40, 50, 60, 70, 80, 90].map((v) => [v, String(v)]);
     // the complexity lane
-    const g = kit.plot(cv, { x: [0, TMAX], y: [0, 340], pad: [left, right, lo.top, lo.H - lo.top - hTop] });
+    const g = kit.plot(cv, { x: [0, TMAX], y: [0, 340], pad: [left, right, top, lo.H - top - hTop], minHeight: MIN_H });
     G = g;
     g.axes({ yTicks: thumb ? [] : [[0, '0'], [100, '100'], [200, '200'], [CEIL, '256']], xTicks: [] });
     const full = (fn) => { const pts = []; for (let i = 0; i <= TMAX * 4; i++) { const x = i / 4; pts.push([x, fn(x)]); } return pts; };
@@ -198,7 +219,7 @@
     g.dot(t, gatesAt(t), P.amber, 5 * TH, { glow: 10 });
     g.dot(t, model(gatesAt(t)), P.magenta, 4 * TH, {});
     // the entropy lane
-    const g2 = kit.plot(cv, { x: [0, TMAX], y: [0, 4.6], pad: [left, right, lo.top + hTop + gap, lo.bottom + 18], clear: false });
+    const g2 = kit.plot(cv, { x: [0, TMAX], y: [0, 4.6], pad: [left, right, top + hTop + gap, bottom + TICKS], clear: false, minHeight: MIN_H });
     G2 = g2;
     g2.axes({ yTicks: thumb ? [] : [[0, '0'], [2, '2'], [4, '4']], xTicks: tTicks });
     g2.hline(HALF, P.ink, { width: 1.6 * TH, alpha: 0.85 });
@@ -225,7 +246,8 @@
   function drawDepth() {
     const lo = layout(), cv = $('cv'), d = depthInfo(), N = S.N, thumb = TRV.thumbMode;
     const top = Math.max(d.D, d.guess || 0, d.floor || 0, S.hold, 4);
-    const g = kit.plot(cv, { x: [0.2, N + 0.8], y: [-1.3, top + 0.25], pad: [thumb ? 20 : 54, thumb ? 20 : 22, lo.top, lo.bottom + 6] });
+    const fb = fitBand(lo.H, lo.top, lo.bottom, MIN_H + 6);
+    const g = kit.plot(cv, { x: [0.2, N + 0.8], y: [-1.3, top + 0.25], pad: [thumb ? 20 : 54, thumb ? 20 : 22, fb.top, fb.bottom + 6], minHeight: MIN_H });
     G = g; G2 = null;
     const lt = S.lt;
     g.axes({ yTicks: thumb ? [] : Array.from({ length: Math.min(top, 14) }, (_, i) => [i, String(i)]), xTicks: [], frame: false });

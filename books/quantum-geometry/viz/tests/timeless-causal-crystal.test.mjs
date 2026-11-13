@@ -5,6 +5,7 @@
 // on the full state vector, 2-SAT decided by strongly connected components and by brute force, a pairwise
 // resolution fixpoint, and a separately written RK4 integration of the wilderness field.
 import { session, stageFirstChecks, settle } from '../../../../tools/node/viz-testkit.mjs';
+import { plotBudgetChecks } from './plot-budget.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'timeless-causal-crystal';
 const T = await session();
@@ -14,6 +15,8 @@ const close = (a, b, eps = 1e-9) => Math.abs(a - b) <= eps;
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 
 await stageFirstChecks(T, BOOK, ID);
+// every chart drawn with kit.plot keeps its readable height in each cited figure, still, cover and lab viewport
+await plotBudgetChecks(T, BOOK, ID);
 
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);

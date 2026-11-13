@@ -67,16 +67,43 @@
   const ZEROS = [14.134725142, 21.022039639, 25.010857580, 30.424876126, 32.935061588];   // the first five ordinates (numerical)
 
   /* ---------- the stage ---------- */
+  /* Heights the panels are allotted from. MIN_H: a chart's readable height (two 10px label rows and a 4px gap), declared
+     to kit.plot as minHeight. The magnifier: its caption row, its chart and a bottom margin, inset from the w panel.
+     The quartic: two curves, each under a caption row, a gap between them and the row of t ticks under the lower one. */
+  const MIN_H = 24, GAP = 18, MAG_HEAD = 22, MAG_FOOT = 8, MAG_EDGE = 4, Q_HEAD = 16, Q_GAP = 26, TICKS = 22;
+  const MAG_MIN = MAG_HEAD + MIN_H + MAG_FOOT;
+  const NEED = { s: MIN_H, mirror: MAG_MIN + 2 * MAG_EDGE, quartic: 2 * (Q_HEAD + MIN_H) + Q_GAP + TICKS };
+  /** The free band of the stage: below the title block and the scene buttons, above the legend (46: the band of a
+      one-line title; 10 and 20: the gap under it, and the legend's offset from the bottom edge plus a gap). */
+  function hudBand() {
+    if (TRV.thumbMode) return { top: 18, bottom: 18 };
+    const sr = $('stage').getBoundingClientRect(), below = (el) => el.getBoundingClientRect().bottom - sr.top, legend = document.querySelector('#stage .hud-bl');
+    return { top: Math.max(46, below(document.querySelector('#stage .hud-tl')), below($('sceneChips'))) + 10, bottom: Math.max(18, legend.offsetHeight + 20) };
+  }
+  /** A lab stage grows to the height its charts declare (kit.plot publishes it). A cited figure or a still keeps its
+      frame: when the band is shorter than the panels need, they keep their full need, centred on the band, and the HUD
+      text, drawn with a halo, runs over their edges. */
+  function fitBand(H, top, bottom, need) {
+    if (!(TRV.figure || TRV.still) || H - top - bottom >= need) return { top, bottom };
+    const t = Math.max(0, Math.min(H - need, (top + H - bottom - need) / 2));
+    return { top: t, bottom: Math.max(0, H - t - need) };
+  }
+  /** Side by side on a wide stage. On a narrow one the panels stack (the captions of the curves and the magnifier need
+      the width), the lower one first getting what its charts need. */
   let geoS = null;
   function panels(W, H) {
-    const narrow = W < 640, top = TRV.thumbMode ? 18 : 92, bot = TRV.thumbMode ? 18 : 54;
-    if (!narrow) { const mid = Math.round(W * 0.42); return { narrow, s: [16, W - mid + 8, top, bot], r: [mid + 24, 18, top, bot], split: mid }; }
-    const h = (H - top - bot) / 2;
-    return { narrow, s: [16, 16, top, bot + h + 18], r: [16, 16, top + h + 18, bot], split: null };
+    const narrow = W < 640, band = hudBand(), needR = NEED[S.scene];
+    if (!narrow) {
+      const mid = Math.round(W * 0.42), b = fitBand(H, band.top, band.bottom, Math.max(NEED.s, needR));
+      return { narrow, s: [16, W - mid + 8, b.top, b.bottom], r: [mid + 24, 18, b.top, b.bottom], split: mid };
+    }
+    const b = fitBand(H, band.top, band.bottom, NEED.s + GAP + needR), ih = H - b.top - b.bottom;
+    const hr = Math.max(needR, (ih - GAP) / 2), hs = ih - GAP - hr;
+    return { narrow, s: [16, 16, b.top, b.bottom + hr + GAP], r: [16, 16, b.top + hs + GAP, b.bottom], split: null };
   }
   function drawS(cv, pad, O) {
     const d = delta(), Y = Math.max(S.gamma * 1.3, 3.2);
-    const g = kit.plot(cv, { x: [-0.18, 1.18], y: [-Y, Y], pad });
+    const g = kit.plot(cv, { x: [-0.18, 1.18], y: [-Y, Y], pad, minHeight: MIN_H });
     geoS = g;
     const c = g.ctx, k = TRV.thumbMode ? 2 : 1;
     g.rect(0, g.y0, 1, g.y1, P.cyan, { alpha: 0.05 });
@@ -107,7 +134,8 @@
   }
   function drawW(cv, pad, O) {
     const d = delta(), k = TRV.thumbMode ? 2 : 1;
-    const g = kit.plot(cv, { x: [-1.25, 1.25], y: [-1.25, 1.25], pad, equal: true, clear: false });
+    // the w plane declares the height its magnifier needs inside it (a lab stage grows to it in one step)
+    const g = kit.plot(cv, { x: [-1.25, 1.25], y: [-1.25, 1.25], pad, equal: true, clear: false, minHeight: NEED.mirror });
     const c = g.ctx, circ = []; for (let i = 0; i <= 180; i++) circ.push([Math.cos(i * Math.PI / 90), Math.sin(i * Math.PI / 90)]);
     g.line([[g.x0, 0], [g.x1, 0]], P.faint, { width: 1, alpha: 0.6 }); g.line([[0, g.y0], [0, g.y1]], P.faint, { width: 1, alpha: 0.6 });
     g.line(circ, P.cyan, { width: 1.8 * k });
@@ -125,9 +153,10 @@
     // log-polar magnifier: angle across, ln|w| up; the unit circle is the line ln|w| = 0
     const th = Math.abs(Math.atan2(O[0].w.im, O[0].w.re)), lr = Math.abs(Math.log(cabs(O[0].w)));
     const A = Math.max(th * 1.6, 0.02), D = Math.max(lr * 2.4, 2.5e-4);
-    const mw = Math.min(210, g.iw * 0.46), mh = Math.min(130, g.ih * 0.36), mx = g.pl + 4, my = g.pt + g.ih - mh - 4;
+    // a third of the panel's height, never less than the magnifier's own rows need
+    const mw = Math.min(210, g.iw * 0.46), mh = Math.max(MAG_MIN, Math.min(130, g.ih * 0.36)), mx = g.pl + MAG_EDGE, my = g.pt + g.ih - mh - MAG_EDGE;
     c.fillStyle = TRV.alpha(P.void, 0.82); c.fillRect(mx, my, mw, mh); c.strokeStyle = P.amber; c.lineWidth = 1; c.strokeRect(mx + 0.5, my + 0.5, mw - 1, mh - 1);
-    const m = kit.plot(cv, { x: [-A, A], y: [-D, D], pad: [mx + 8, g.W - mx - mw + 8, my + 22, g.H - my - mh + 8], clear: false });
+    const m = kit.plot(cv, { x: [-A, A], y: [-D, D], pad: [mx + 8, g.W - mx - mw + 8, my + MAG_HEAD, g.H - my - mh + MAG_FOOT], clear: false, minHeight: MIN_H });
     m.line([[-A, 0], [A, 0]], P.cyan, { width: 1.6 });
     for (const z of ZEROS) for (const sg of [1, -1]) { const a = sg * (Math.PI - 2 * Math.atan(2 * z)); if (Math.abs(a) <= A) m.dot(a, 0, P.dim, 2.8); }
     O.forEach((p, i) => { const a = Math.atan2(p.w.im, p.w.re), y = Math.log(cabs(p.w)); m.dot(a, y, i === 0 ? P.amber : col, i === 0 ? 5 : 4); });
@@ -136,16 +165,19 @@
   }
   function drawQuartic(cv, pad) {
     const d = delta(), gm = S.gamma, t0 = Math.max(0.2, gm - 1.2), t1 = gm + 1.2;
-    const H = cv.clientHeight, ih = H - pad[2] - pad[3], gap = 26, h1 = (ih - gap) / 2;
+    // the panel holds F under its caption, the gap, ξ under its caption, and the t ticks under ξ; its frame declares
+    // all of that, so a lab stage grows to it in one step rather than by halves for each curve
+    kit.plot(cv, { x: [0, 1], y: [0, 1], pad, clear: false, minHeight: NEED.quartic });
+    const H = cv.clientHeight, ih = H - pad[2] - pad[3] - TICKS, gap = Q_GAP, h1 = (ih - gap) / 2;
     const Fs = [], Xs = []; let fmax = 0, xmax = 0;
     for (let i = 0; i <= 160; i++) { const t = t0 + (t1 - t0) * i / 160, f = quartic(d, gm, t), x = xiLine(t).re; Fs.push([t, f]); Xs.push([t, x]); fmax = Math.max(fmax, f); xmax = Math.max(xmax, Math.abs(x)); }
-    const g1 = kit.plot(cv, { x: [t0, t1], y: [0, fmax * 1.08], pad: [pad[0] + 34, pad[1], pad[2] + 16, H - pad[2] - h1], clear: false });
+    const g1 = kit.plot(cv, { x: [t0, t1], y: [0, fmax * 1.08], pad: [pad[0] + 34, pad[1], pad[2] + Q_HEAD, H - pad[2] - h1], clear: false, minHeight: MIN_H });
     g1.axes({ yTicks: [[0, '0']], xTicks: [] });
     g1.line([[t0, 0], [t1, 0]], P.dim, { width: 1 });
     g1.line(Fs, P.cyan, { width: 2 });
     const fmin = 4 * d * d * gm * gm, tm = Math.sqrt(Math.max(0, gm * gm - d * d));
     g1.dot(tm, fmin, P.amber, 5);
-    const g2 = kit.plot(cv, { x: [t0, t1], y: [-xmax * 1.15, xmax * 1.15], pad: [pad[0] + 34, pad[1], pad[2] + h1 + gap + 16, pad[3]], clear: false });
+    const g2 = kit.plot(cv, { x: [t0, t1], y: [-xmax * 1.15, xmax * 1.15], pad: [pad[0] + 34, pad[1], pad[2] + h1 + gap + Q_HEAD, pad[3] + TICKS], clear: false, minHeight: MIN_H });
     g2.axes({ yTicks: [[0, '0']], xTicks: [[Math.ceil(t0), String(Math.ceil(t0))], [Math.round(gm), String(Math.round(gm))], [Math.floor(t1), String(Math.floor(t1))]] });
     g2.line([[t0, 0], [t1, 0]], P.dim, { width: 1 });
     g2.line(Xs, P.magenta, { width: 2 });
