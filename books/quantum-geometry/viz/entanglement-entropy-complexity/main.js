@@ -987,8 +987,8 @@
     "dottie": ["cos θ* = θ* ≈ 0.7391：局部长度平方约 0.5462，线性熵约 0.4538。", "At cos θ* = θ* ≈ 0.7391, squared local length is 0.5462 and linear entropy 0.4538."],
     "arealaw": ["θ = 60°、两条跨割桥：S_cut ≈ 1.623 bits，有效键维约 3.08，精确秩为 4。", "At θ = 60° with two bridges, S_cut ≈ 1.623 bits, effective dimension ≈ 3.08 and exact rank 4."],
     "volumelaw": ["同样 θ = 60°，八条跨割桥把熵增至 6.490 bits，有效键维约 89.9，精确秩为 256。", "At θ = 60° with eight bridges, entropy is 6.490 bits, effective dimension ≈ 89.9 and exact rank 256."],
-    "bellcut": ["θ = 90°：局部箭头归零，八桥熵为 8 bits，有效键维与精确秩都为 256。", "At θ = 90°, local arrows vanish; eight bridges give 8 bits, with effective dimension and exact rank both 256."],
-    "globaljoint": ["抬起偏迹刀片：全局纯态秩为 1、熵为 0；跨割熵仍为 8 bits，施密特秩仍为 256。", "Lift the trace blade: global pure-state rank is 1 and entropy 0; cut entropy stays 8 bits and Schmidt rank 256."],
+    "bellcut": ["θ = 90°：局部箭头归零，八桥熵为 8 bits，有效键维与精确秩都为 256。", "θ = 90°: arrows vanish; eight bridges give 8 bits, effective dimension = rank = 256."],
+    "globaljoint": ["抬起偏迹刀片：全局纯态秩为 1、熵为 0；跨割熵仍为 8 bits，施密特秩仍为 256。", "Lift the blade: global rank 1, entropy 0; cut entropy 8 bits, Schmidt rank 256."],
   };
   const cards = kit.cards($('presets'), {
     notes: TRV.figure ? { ...CARD_NOTES, ...FIGURE_NOTES } : CARD_NOTES,

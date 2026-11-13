@@ -24,7 +24,7 @@
   'use strict';
   const { kit, L } = TRV, { clamp, fix, v3, TAU } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
-  const setText = (id, value) => { const el = $(id); if (el.textContent !== value) el.textContent = value; };
+  const setText = (target, value) => { const el = typeof target === 'string' ? $(target) : target; if (el.textContent !== value) el.textContent = value; };
   const MINUS = '−', M = 8, DEG = Math.PI / 180, HEAL_SAFE = (Math.sqrt(3) - 1) / 2, HEAL_TOL = 1e-12;
 
   /* ---------- linear algebra ---------- */
@@ -609,7 +609,7 @@
     for (const p of pts) if (sc === 'heal' || sc === 'rank') g.dot(p[0], p[1], P.cyan, 3);
     g.vline(now, P.amber, { alpha: 0.8 });
     g.legend(sc === 'heal' ? [[P.cyan, L('‖T² − T‖（对数）', '‖T² − T‖ (log)')], [P.dim, L('虚线：容差 10⁻¹²', 'dashed: tolerance 10⁻¹²')]] : [[P.cyan, L('‖T² − T‖（对数）', '‖T² − T‖ (log)')]]);
-    $('plotMeta').textContent = `${L(sc === 'heal' ? `第 ${now} 步` : '当前', sc === 'heal' ? `step ${now}` : 'now')} · ${nowV.toExponential(1).replace('-', MINUS)}`;
+    setText('plotMeta', `${L(sc === 'heal' ? `第 ${now} 步` : '当前', sc === 'heal' ? `step ${now}` : 'now')} · ${nowV.toExponential(1).replace('-', MINUS)}`);
   }
 
   /* ---------- words ---------- */
@@ -633,15 +633,15 @@
       note = diag ? L(`第 ${S.i + 1} 行与第 ${S.i + 1} 列是同一串数，所以每一项都是平方（全是青色），加起来是这一行的长度平方，正好等于对角格本身。`, `Row ${S.i + 1} and column ${S.i + 1} are the same numbers, so every term is a square (all cyan); they add up to the squared length of the row, which is the diagonal cell itself.`)
         : L('青色与品红的乘积有正有负，相加后不多不少落回这一格：表拿自己读自己，读回的还是它。', 'Cyan and magenta products, positive and negative, add up to exactly this cell: the table reading itself gives itself back.');
       setLabel('roKeyLabel', `第 i 行读第 j 列（i = ${S.i + 1}, j = ${S.j + 1}）`, `Row i reads column j (i = ${S.i + 1}, j = ${S.j + 1})`);
-      $('roKey').textContent = `${num(partial(S.N))} = ${num(T[S.i][S.j])}`;
-      $('roKeySub').textContent = L('(T²)ᵢⱼ 与 Tᵢⱼ', '(T²)ᵢⱼ and Tᵢⱼ');
-      setLabel('ro1Label', '逐项乘积之和（已读的项）', 'Sum of the products (terms read)'); $('ro1').textContent = `${k} / ${S.N} · ${num(s)}`;
+      setText('roKey', `${num(partial(S.N))} = ${num(T[S.i][S.j])}`);
+      setText('roKeySub', L('(T²)ᵢⱼ 与 Tᵢⱼ', '(T²)ᵢⱼ and Tᵢⱼ'));
+      setLabel('ro1Label', '逐项乘积之和（已读的项）', 'Sum of the products (terms read)'); setText('ro1', `${k} / ${S.N} · ${num(s)}`);
     } else if (sc === 'rank') {
       big = L(`写进 r = ${S.r} 行 · 迹 = ${fix(D.tr, 3)}`, `r = ${S.r} rows written · trace = ${fix(D.tr, 3)}`);
       hud = S.r === S.N ? L('写满了：T 是单位阵，再没有和它们都正交的方向', 'full: T is the identity, and no direction is orthogonal to all of them') : L(`对角格加起来正好是 ${S.r}；还有 ${S.N - S.r} 个方向空着`, `the diagonal adds up to exactly ${S.r}; ${S.N - S.r} directions are still free`);
       note = S.r === 1 ? L('秩 1：只有常值向量一行，每一格都是 1/N。', 'Rank 1: just the constant vector, every cell is 1/N.') : S.r === S.N ? L('r = N：每个地址只读自己，表就是单位阵；第 N + 1 行写不进来。', 'r = N: each address reads only itself, the table is the identity; an (N + 1)-th row cannot go in.') : L('每多写一行，迹就多 1；表一直对称、一直幂等。', 'Each new row adds 1 to the trace; the table stays symmetric and idempotent.');
-      setLabel('roKeyLabel', '迹 = 秩', 'Trace = rank'); $('roKey').textContent = `${fix(D.tr, 6)} = ${S.r}`; $('roKeySub').textContent = L(`N = ${S.N} 个地址里占了 ${S.r} 个`, `${S.r} of N = ${S.N} addresses taken`);
-      setLabel('ro1Label', '还空着的正交方向', 'Orthogonal directions still free'); $('ro1').textContent = String(S.N - S.r);
+      setLabel('roKeyLabel', '迹 = 秩', 'Trace = rank'); setText('roKey', `${fix(D.tr, 6)} = ${S.r}`); setText('roKeySub', L(`N = ${S.N} 个地址里占了 ${S.r} 个`, `${S.r} of N = ${S.N} addresses taken`));
+      setLabel('ro1Label', '还空着的正交方向', 'Orthogonal directions still free'); setText('ro1', String(S.N - S.r));
     } else if (sc === 'heal') {
       // finite facts first: the computed error of the step shown; then the one sufficient condition, and only when it holds
       const m = mOf(), e = D.errs[m], st = healStatus(m), dn = fix(D.dnorm, 3);
@@ -658,9 +658,9 @@
         : st === 'tol' ? L(`第 ${m} 步实算的幂等误差 ${ex(e)} ≤ 10⁻¹²：在这个容差下近似幂等。`, `The computed idempotency error at step ${m}, ${ex(e)}, is ≤ 10⁻¹²: approximately idempotent at this tolerance.`)
           : L(`第 ${m} 步实算的幂等误差是 ${ex(e)}，高于容差 10⁻¹²：这一步的表还不幂等。`, `The computed idempotency error at step ${m} is ${ex(e)}, above the tolerance 10⁻¹²: the table at this step is not idempotent yet.`);
       note = st === 'none' ? L('没有扰动时 T 已经幂等，迭代一步也不动它。', 'Without a knock T is already idempotent and the iteration does not move it.') : `${cond} ${step}`;
-      setLabel('roKeyLabel', `幂等误差 ‖Tₘ² − Tₘ‖（第 ${m} 步）`, `Idempotency error ‖Tₘ² − Tₘ‖ (step ${m})`); $('roKey').textContent = ex(e);
-      $('roKeySub').textContent = m > 0 && D.errs[m - 1] > 1e-14 ? L(`上一步 ${ex(D.errs[m - 1])}`, `previous step ${ex(D.errs[m - 1])}`) : '';
-      setLabel('ro1Label', '扰动的大小 ‖Δ‖₂（谱范数）', 'Size of the knock ‖Δ‖₂ (spectral norm)'); $('ro1').textContent = `${fix(D.dnorm, 3)} · ${S.kicks.length} ${L('次', S.kicks.length === 1 ? 'knock' : 'knocks')}`;
+      setLabel('roKeyLabel', `幂等误差 ‖Tₘ² − Tₘ‖（第 ${m} 步）`, `Idempotency error ‖Tₘ² − Tₘ‖ (step ${m})`); setText('roKey', ex(e));
+      setText('roKeySub', m > 0 && D.errs[m - 1] > 1e-14 ? L(`上一步 ${ex(D.errs[m - 1])}`, `previous step ${ex(D.errs[m - 1])}`) : '');
+      setLabel('ro1Label', '扰动的大小 ‖Δ‖₂（谱范数）', 'Size of the knock ‖Δ‖₂ (spectral norm)'); setText('ro1', `${fix(D.dnorm, 3)} · ${S.kicks.length} ${L('次', S.kicks.length === 1 ? 'knock' : 'knocks')}`);
     } else {
       const th = thetaOf(), V = perpVecs(), full = !hasPerp(), len = norm(V.Tpsi);
       big = full ? L('表写满了：没有正交补', 'The table is full: no complement') : `θ = ${fix(th, 0)}° · ‖Tψ‖ = ${fix(len, 3)}`;
@@ -668,21 +668,21 @@
         : th > 89.999 ? L('ψ 整个落在正交补里：读出 Tψ = 0', 'ψ lies entirely in the complement: the reading Tψ = 0') : L(`ψ = cos θ·v₁ + sin θ·w，w 与表里每一行正交`, `ψ = cos θ·v₁ + sin θ·w, with w orthogonal to every row of the table`);
       note = full ? L('写满的表 T = I 没有非零的正交补：任何单位态都原样读回，Tψ = ψ，‖Tψ‖ = 1。cos θ 与 sin θ 的拆分要 r < N 才有；这里 ψ 停在 v₁，时间轴上的 θ 不改变它。', 'The full table T = I has no nonzero complement: every unit state reads back unchanged, Tψ = ψ and ‖Tψ‖ = 1. The split into cos θ and sin θ needs r < N; here ψ stays at v₁ and the angle θ on the rail does not change it.')
         : L('只有留在表里的那一份 cos θ 被读出来；转到 90°，表对 ψ 一个字也读不出。', 'Only the part cos θ that lies in the table gets read; at 90° the table reads nothing at all from ψ.');
-      setLabel('roKeyLabel', '读出的长度 ‖Tψ‖', 'Length of the reading ‖Tψ‖'); $('roKey').textContent = fix(len, 6);
-      $('roKeySub').textContent = full ? L('= ‖ψ‖：T = I 原样读回', '= ‖ψ‖: T = I reads it back unchanged') : `cos ${fix(th, 1)}° = ${fix(Math.cos(th * DEG), 6)}`;
-      if (full) { setLabel('ro1Label', '正交补', 'The complement'); $('ro1').textContent = L('没有：维数 0', 'none: dimension 0'); }
-      else { setLabel('ro1Label', '正交补里的 w：‖Tw‖', 'The complement vector w: ‖Tw‖'); $('ro1').textContent = ex(norm(V.Tw)); }
+      setLabel('roKeyLabel', '读出的长度 ‖Tψ‖', 'Length of the reading ‖Tψ‖'); setText('roKey', fix(len, 6));
+      setText('roKeySub', full ? L('= ‖ψ‖：T = I 原样读回', '= ‖ψ‖: T = I reads it back unchanged') : `cos ${fix(th, 1)}° = ${fix(Math.cos(th * DEG), 6)}`);
+      if (full) { setLabel('ro1Label', '正交补', 'The complement'); setText('ro1', L('没有：维数 0', 'none: dimension 0')); }
+      else { setLabel('ro1Label', '正交补里的 w：‖Tw‖', 'The complement vector w: ‖Tw‖'); setText('ro1', ex(norm(V.Tw))); }
     }
-    setLabel('ro2Label', '表的大小 · 秩', 'Size · rank'); $('ro2').textContent = `${S.N} × ${S.N} · r = ${S.r}`;
-    setLabel('ro3Label', '迹（舞台上这张表）', 'Trace (the table on the stage)'); $('ro3').textContent = fix(trace(A), 4);
-    setLabel('ro4Label', '‖T² − T‖ · ‖T − Tᵀ‖（舞台上这张表）', '‖T² − T‖ · ‖T − Tᵀ‖ (the table on the stage)'); $('ro4').textContent = `${ex(idemErr(A))} · ${ex(symErr(A))}`;
-    $('roAside').textContent = sc === 'heal' ? 'Tₘ₊₁ = 3Tₘ² − 2Tₘ³' : 'T² = T, Tᵀ = T';
-    setText('hudBig', big); setText('hudSub', hud); $('roNote').textContent = note;
-    $('pillSize').querySelector('strong').textContent = `${S.N} × ${S.r}`;
-    $('pillErr').querySelector('strong').textContent = ex(idemErr(A));
+    setLabel('ro2Label', '表的大小 · 秩', 'Size · rank'); setText('ro2', `${S.N} × ${S.N} · r = ${S.r}`);
+    setLabel('ro3Label', '迹（舞台上这张表）', 'Trace (the table on the stage)'); setText('ro3', fix(trace(A), 4));
+    setLabel('ro4Label', '‖T² − T‖ · ‖T − Tᵀ‖（舞台上这张表）', '‖T² − T‖ · ‖T − Tᵀ‖ (the table on the stage)'); setText('ro4', `${ex(idemErr(A))} · ${ex(symErr(A))}`);
+    setText('roAside', sc === 'heal' ? 'Tₘ₊₁ = 3Tₘ² − 2Tₘ³' : 'T² = T, Tᵀ = T');
+    setText('hudBig', big); setText('hudSub', hud); setText('roNote', note);
+    setText($('pillSize').querySelector('strong'), `${S.N} × ${S.r}`);
+    setText($('pillErr').querySelector('strong'), ex(idemErr(A)));
     const leg = LEGEND[sc === 'perp' && !hasPerp() ? 'perpFull' : sc].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
-    $('oRank').textContent = String(S.r);
+    setText('oRank', String(S.r));
   }
 
   const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
