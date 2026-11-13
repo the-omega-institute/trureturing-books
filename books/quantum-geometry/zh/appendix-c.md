@@ -2,28 +2,28 @@
 
 本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 [{commit}](trureturing:)）中接受逐条核验：
 
-1. **C.1 冻结定理总索引（298 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
-2. **C.2 形式化定义与代数载体总索引（114 项唯一声明：104 项 `def` + 10 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.2.1 行内辅助定理与定义索引（162 项声明：109 项 `theorem` + 53 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **574 项唯一声明**（$298 + 114 + 162 = 574$）。媒体引用在各行末尾另列，不改变上述分区。
+1. **C.1 冻结定理总索引（299 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
+2. **C.2 形式化定义与代数载体总索引（114 项唯一声明：104 项 `def` + 10 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.2.1 行内辅助定理与定义索引（163 项声明：110 项 `theorem` + 53 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **576 项唯一声明**（$299 + 114 + 163 = 576$）。媒体引用在各行末尾另列，不改变上述分区。
 3. **C.3 开放问题与未形式化前沿边界台账（11 项：6 个 `conjecture` + 3 个 `problem` 环境 + 2 项文献边界 `remark`）**：9 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**574 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：407 格是定理，167 格是定义或归纳类型；412 个实心格被环境头以 `lean=` 引用，162 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
+**576 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：409 格是定理，167 格是定义或归纳类型；413 个实心格被环境头以 `lean=` 引用，163 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
 :::
 
 ---
 
-## C.1 已验证并冻结的 Lean 4 定理总索引（298 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
+## C.1 已验证并冻结的 Lean 4 定理总索引（299 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
 
-下表按 GID 的模块路径字母顺序列出 **298 条至少被一个 `:::` 环境头以 `lean=` 引用的唯一冻结定理**。第一至第三十九章与终章合计引用这些定理 410 次（同一 GID 每章计一次）；这 410 次引用分布在 260 个定理、引理、命题与推论环境及 2 个形式化 `example` 环境（`#ex-ch35-two-anchor-gram-corridor`、`#ex-ch37-gram-constraint-release`，共 262 个 `:::` 环境头）中。行内引用与媒体消费者另列在最后一栏，不增加柱高。已发布的序号保持不变；原始投影酉提升与 SAME 相位联合端点新增 `T296`–`T298`，其定义新增 `D102`–`D114`。既有 `T294`、`T295`、`D098`–`D101` 与 `R162` 均保留。
+下表按 GID 的模块路径字母顺序列出 **299 条至少被一个 `:::` 环境头以 `lean=` 引用的唯一冻结定理**。第一至第三十九章与终章合计引用这些定理 411 次（同一 GID 每章计一次）；这 411 次引用分布在 261 个定理、引理、命题与推论环境及 2 个形式化 `example` 环境（`#ex-ch35-two-anchor-gram-corridor`、`#ex-ch37-gram-constraint-release`，共 263 个 `:::` 环境头）中。行内引用与媒体消费者另列在最后一栏，不增加柱高。已发布的序号保持不变，包括第四章新增的 `T294` 与 `R162`。第十六章相位合成与提升条目使用 `T295`–`T299`、`D098`–`D114` 与 `R163`；为避开上游已发布序号，相位因子化条目由 `T294` 调整为 `T299`，逆步定义由 `R162` 调整为 `R163`，声明身份不变。
 
 ::: {.figure src="appc-theorems-by-chapter"}
-**每一章带 `lean=` 的环境头引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，共 40 根绿色柱子，按第 I–X 部加浅色底纹。第二十二章最高，$35$ 条；其次第二十九章 $27$ 条、第三十章 $23$ 条、第三十三与第三十七章各 $19$ 条、第三十八章 $18$ 条。第四、三十六章各 $17$ 条；第二十四、三十九章各 $16$ 条；第三十一章 $15$ 条；第十四章 $14$ 条、终章 $13$ 条；第十六章 $11$ 条；其余 26 章各 $4$ 到 $9$ 条。柱高合计 $410$，由脚本从中文章节与锁文件算出，并与下表最后一栏的环境锚点逐章核对；本节全部 $298$ 条定理均至少出现在一根柱子中。实心下段是在该章第一次出场的定理，共 $287$ 条；空心上段是此前已出场、在该章再次引用的定理，共 $123$ 条。同一条定理在不同章重复计，定义与仅有行内引用的声明不计。
+**每一章带 `lean=` 的环境头引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，共 40 根绿色柱子，按第 I–X 部加浅色底纹。第二十二章最高，$35$ 条；其次第二十九章 $27$ 条、第三十章 $23$ 条、第三十三与第三十七章各 $19$ 条、第三十八章 $18$ 条。第四章 $18$ 条；第三十六章 $17$ 条；第二十四、三十九章各 $16$ 条；第三十一章 $15$ 条；第十四章 $14$ 条、终章 $13$ 条；第十六章 $11$ 条；其余 26 章各 $4$ 到 $9$ 条。柱高合计 $411$，由脚本从中文章节与锁文件算出，并与下表最后一栏的环境锚点逐章核对；本节全部 $299$ 条定理均至少出现在一根柱子中。实心下段是在该章第一次出场的定理，共 $288$ 条；空心上段是此前已出场、在该章再次引用的定理，共 $123$ 条。同一条定理在不同章重复计，定义与仅有行内引用的声明不计。
 :::
 
-下表按模块路径排序，这 $298$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族最大，占 $86$ 条；`FluidDynamics` 的 $18$ 条全在第八部。
+下表按模块路径排序，这 $299$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族最大，占 $87$ 条；`FluidDynamics` 的 $18$ 条全在第八部。
 
 ::: {.figure src="appc-modules-by-part"}
-**C.1 的 $298$ 条定理按模块族与首次出场的部分组。** 行是模块路径的前三段，较小的族合并为末行；列是第一至第十部与终章、附录。每条定理只计一次，放在中文正文最先引用它的部分；格中数字为条数，底色越深条数越多，空格为零。图不表示模块间的证明依赖。
+**C.1 的 $299$ 条定理按模块族与首次出场的部分组。** 行是模块路径的前三段，较小的族合并为末行；列是第一至第十部与终章、附录。每条定理只计一次，放在中文正文最先引用它的部分；格中数字为条数，底色越深条数越多，空格为零。图不表示模块间的证明依赖。
 :::
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
@@ -111,7 +111,7 @@
 | `T081` | [`D5.S3.Constants.PentagonCosines.pentagon_golden_cosines`](lean:D5/S3/Constants/PentagonCosines.pentagon_golden_cosines) | [{source}](lean:D5/S3/Constants/PentagonCosines.pentagon_golden_cosines) | `theorem` | Ch 24 `#prop-pentagon-golden-cosines`, Ch 28 |
 | `T292` | [`D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_phase_unitary_completion`](lean:D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_phase_unitary_completion) | [{source}](lean:D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_phase_unitary_completion) | `theorem` | Ch 16 `#thm-phase-unitary-completion` |
 | `T293` | [`D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_sumsq_decomposition`](lean:D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_sumsq_decomposition) | [{source}](lean:D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_sumsq_decomposition) | `theorem` | Ch 16 `#thm-interval-sumsq-decomposition` |
-| `T294` | [`D5.S3.ContinuousObservables.PhaseSynthesis.exists_phase_factorization`](lean:D5/S3/ContinuousObservables/PhaseSynthesis.exists_phase_factorization) | [{source}](lean:D5/S3/ContinuousObservables/PhaseSynthesis.exists_phase_factorization) | `theorem` | Ch 16 `#thm-signed-circle-phase-factorization` |
+| `T299` | [`D5.S3.ContinuousObservables.PhaseSynthesis.exists_phase_factorization`](lean:D5/S3/ContinuousObservables/PhaseSynthesis.exists_phase_factorization) | [{source}](lean:D5/S3/ContinuousObservables/PhaseSynthesis.exists_phase_factorization) | `theorem` | Ch 16 `#thm-signed-circle-phase-factorization` |
 | `T295` | [`D5.S3.ContinuousObservables.PhaseSynthesis.exists_phases`](lean:D5/S3/ContinuousObservables/PhaseSynthesis.exists_phases) | [{source}](lean:D5/S3/ContinuousObservables/PhaseSynthesis.exists_phases) | `theorem` | Ch 16 `#thm-polynomial-phase-synthesis` |
 | `T296` | [`D5.S3.ContinuousObservables.PhaseSynthesisLifting.native_phase_lifting`](lean:D5/S3/ContinuousObservables/PhaseSynthesisLifting.native_phase_lifting) | [{source}](lean:D5/S3/ContinuousObservables/PhaseSynthesisLifting.native_phase_lifting) | `theorem` | Ch 16 `#thm-native-phase-projected-lifting` |
 | `T297` | [`D5.S3.ContinuousObservables.ProjectedUnitaryLifting.altSeq_apply_singular`](lean:D5/S3/ContinuousObservables/ProjectedUnitaryLifting.altSeq_apply_singular) | [{source}](lean:D5/S3/ContinuousObservables/ProjectedUnitaryLifting.altSeq_apply_singular) | `theorem` | Ch 16 `#thm-alternating-singular-pair-action` |
@@ -212,6 +212,7 @@
 | `T175` | [`D5.S3.Quantum.Decoherence.CoherenceDecay.equal_superposition_coherence_tendsto_zero`](lean:D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero) | [{source}](lean:D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero) | `theorem` | Ch 4 `#prop-phase-damping-decay`; media `viz/visualizations.json`, `viz/bloch-noise/index.html` |
 | `T176` | [`D5.S3.Quantum.Decoherence.NonselectiveMarginalization.nonselective_recording_marginal`](lean:D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal) | [{source}](lean:D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal) | `theorem` | Ch 4 `#thm-nonselective-marginal`, Ch 27; media `films/002-pairwise-born/film.json` |
 | `T177` | [`D5.S3.Quantum.Decoherence.ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect`](lean:D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect) | [{source}](lean:D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect) | `theorem` | Ch 4 `#thm-reduced-access-defect`, Ch 29 `#thm-ch29-reversal-access-and-gram-realizability`, Ch 33 `#thm-ch33-consensus-redundant-records-and-kernel`, Ch 38 `#thm-ch38-copied-address-dereference-and-access-defect`, 附录 A, 附录 D; media `viz/visualizations.json`, `viz/coherence-handshake-causality/index.html`, `viz/observer-consensus-decoherence/index.html`, `viz/quantum-interpretations-duel/index.html` |
+| `T294` | [`D5.S3.Quantum.Decoherence.RepeatedRecordExponentialDecay.repeated_record_exponential_decay`](lean:D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay.repeated_record_exponential_decay) | [{source}](lean:D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay.repeated_record_exponential_decay) | `theorem` | Ch 4 `#thm-repeated-record-decay` |
 | `T178` | [`D5.S3.Quantum.Divergence.CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi`](lean:D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi) | [{source}](lean:D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi) | `theorem` | Ch 8 `#thm-channel-data-processing`; media `viz/visualizations.json`, `viz/erasure-ledger/index.html` |
 | `T179` | [`D5.S3.Quantum.Divergence.DualAccountFull.dual_account_full`](lean:D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full) | [{source}](lean:D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full) | `theorem` | Ch 8 `#thm-dual-account-full`; media `viz/visualizations.json`, `viz/erasure-ledger/index.html` |
 | `T180` | [`D5.S3.Quantum.Dynamics.CalibratedUnitaryGroup.calibrated_group`](lean:D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group) | [{source}](lean:D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group) | `theorem` | Ch 7 `#thm-calibrated-unitary-group`, 终章, 附录 A |
@@ -331,7 +332,7 @@
 
 ## C.2 形式化定义、结构与归纳类型索引（114 项唯一声明） {#sec-appendix-c-definitions}
 
-下表列出被中文正文 `definition` 与 `example` 环境头以 `lean=` 引用的 **114 项唯一声明（104 项 `def`、10 项 `inductive`）**；它们与 C.1 的 298 条定理共同构成 **412 项被环境头引用的锁定声明**。媒体消费者在最后一栏另列，不决定分区。
+下表列出被中文正文 `definition` 与 `example` 环境头以 `lean=` 引用的 **114 项唯一声明（104 项 `def`、10 项 `inductive`）**；它们与 C.1 的 299 条定理共同构成 **413 项被环境头引用的锁定声明**。媒体消费者在最后一栏另列，不决定分区。
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -452,9 +453,9 @@
 
 ---
 
-## C.2.1 行内引用的辅助定理与定义索引（162 项唯一声明） {#sec-appendix-c-inline}
+## C.2.1 行内引用的辅助定理与定义索引（163 项唯一声明） {#sec-appendix-c-inline}
 
-除 C.1 与 C.2 的 412 项环境引用声明外，另有 **162 项声明（109 项定理、53 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **574 项唯一声明**（$298 + 114 + 162 = 574$）。
+除 C.1 与 C.2 的 413 项环境引用声明外，另有 **163 项声明（110 项定理、53 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **576 项唯一声明**（$299 + 114 + 163 = 576$）。
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -525,7 +526,7 @@
 | `R065` | [`D5.S3.ConceptDynamics.ObservationTopology.ResidualSeparationTopology.defectRelation_eq_separationDeficit`](lean:D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology.defectRelation_eq_separationDeficit) | [{source}](lean:D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology.defectRelation_eq_separationDeficit) | `theorem` | Ch 21 |
 | `R066` | [`D5.S3.Constants.Irrationality.TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate) | [{source}](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate) | `theorem` | Ch 39, 附录 A |
 | `R067` | [`D5.S3.Constants.Irrationality.TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) | [{source}](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) | `theorem` | Ch 39, 附录 A |
-| `R162` | [`D5.S3.ContinuousObservables.PhaseSynthesis.unstepW`](lean:D5/S3/ContinuousObservables/PhaseSynthesis.unstepW) | [{source}](lean:D5/S3/ContinuousObservables/PhaseSynthesis.unstepW) | `def` | Ch 16 |
+| `R163` | [`D5.S3.ContinuousObservables.PhaseSynthesis.unstepW`](lean:D5/S3/ContinuousObservables/PhaseSynthesis.unstepW) | [{source}](lean:D5/S3/ContinuousObservables/PhaseSynthesis.unstepW) | `def` | Ch 16 |
 | `R068` | [`D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.fluid_gap_from_mixed`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.fluid_gap_from_mixed) | [{source}](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.fluid_gap_from_mixed) | `theorem` | Ch 30 |
 | `R069` | [`D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.mixed_condition_fails`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_condition_fails) | [{source}](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_condition_fails) | `theorem` | Ch 30 |
 | `R070` | [`D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.mixed_witness`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness) | [{source}](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness) | `theorem` | Ch 30 |
@@ -575,6 +576,7 @@
 | `R114` | [`D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.halfIdentity`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.halfIdentity) | [{source}](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.halfIdentity) | `def` | Ch 5 |
 | `R115` | [`D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.secondCross_eq_neg_first`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.secondCross_eq_neg_first) | [{source}](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.secondCross_eq_neg_first) | `theorem` | Ch 5 |
 | `R116` | [`D5.S3.Quantum.Completion.IncreasingProjectionStrongLimit.increasing_projection_strong_limit`](lean:D5/S3/Quantum/Completion/IncreasingProjectionStrongLimit.increasing_projection_strong_limit) | [{source}](lean:D5/S3/Quantum/Completion/IncreasingProjectionStrongLimit.increasing_projection_strong_limit) | `theorem` | Ch 31, 附录 A; media `viz/visualizations.json`, `viz/fairness-square-uncertainty-expansion/index.html` |
+| `R162` | [`D5.S3.Quantum.Decoherence.EnvironmentMarginalChannel.environment_marginal_channel`](lean:D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel.environment_marginal_channel) | [{source}](lean:D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel.environment_marginal_channel) | `theorem` | Ch 4 |
 | `R117` | [`D5.S3.Quantum.Divergence.DualAccountFull.entropy_freedom_segment`](lean:D5/S3/Quantum/Divergence/DualAccountFull.entropy_freedom_segment) | [{source}](lean:D5/S3/Quantum/Divergence/DualAccountFull.entropy_freedom_segment) | `theorem` | Ch 8 |
 | `R118` | [`D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) | [{source}](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) | `theorem` | Ch 7, Ch 31 |
 | `R119` | [`D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.pureDensityState`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.pureDensityState) | [{source}](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.pureDensityState) | `def` | Ch 11 |
@@ -591,6 +593,8 @@
 | `R130` | [`D5.S3.Quantum.FiniteDimensional.QubitMatrix`](lean:D5/S3/Quantum/FiniteDimensional.QubitMatrix) | [{source}](lean:D5/S3/Quantum/FiniteDimensional.QubitMatrix) | `def` | Ch 1 |
 | `R131` | [`D5.S3.Quantum.Foundation.LeastConfirmationGeneration.zeroSpan`](lean:D5/S3/Quantum/Foundation/LeastConfirmationGeneration.zeroSpan) | [{source}](lean:D5/S3/Quantum/Foundation/LeastConfirmationGeneration.zeroSpan) | `def` | Ch 2 |
 | `R132` | [`D5.S3.Quantum.Foundation.RayPhaseRigidity.RaySupportConnected`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.RaySupportConnected) | [{source}](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.RaySupportConnected) | `def` | Ch 1 |
+| `R160` | [`D5.S3.Quantum.Information.QubitEntropyContraction.qubit_holevo_contraction`](lean:D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction) | [{source}](lean:D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction) | `theorem` | Ch 3 |
+| `R161` | [`D5.S3.Quantum.Information.QubitNormalFormState.qubit_state_entropy`](lean:D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy) | [{source}](lean:D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy) | `theorem` | Ch 3 |
 | `R133` | [`D5.S3.Quantum.Measurement.FourQubitParentConstruction.B`](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.B) | [{source}](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.B) | `def` | Ch 1 |
 | `R134` | [`D5.S3.Quantum.Measurement.FourQubitParentConstruction.scalarB`](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.scalarB) | [{source}](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.scalarB) | `def` | Ch 1 |
 | `R135` | [`D5.S3.Quantum.Recovery.KrausLeftInverseNecessity.left_inverse_error_products`](lean:D5/S3/Quantum/Recovery/KrausLeftInverseNecessity.left_inverse_error_products) | [{source}](lean:D5/S3/Quantum/Recovery/KrausLeftInverseNecessity.left_inverse_error_products) | `theorem` | Ch 14 |
@@ -618,11 +622,9 @@
 | `R157` | [`Zeta23.RvM.completedRiemannZeta_ne_zero_of_re_nonpos`](lean:D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_ne_zero_of_re_nonpos) | [{source}](lean:D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_ne_zero_of_re_nonpos) | `theorem` | Ch 22 |
 | `R158` | [`D5.S3.Zeros.Convolution.PerfectMatchingCount.FixedPointFreeInvolution`](lean:D5/S3/Zeros/Convolution/PerfectMatchingCount.FixedPointFreeInvolution) | [{source}](lean:D5/S3/Zeros/Convolution/PerfectMatchingCount.FixedPointFreeInvolution) | `def` | Ch 30 |
 | `R159` | [`D5.S3.Zeros.ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one`](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | [{source}](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | `theorem` | Ch 22 |
-| `R160` | [`D5.S3.Quantum.Information.QubitEntropyContraction.qubit_holevo_contraction`](lean:D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction) | [{source}](lean:D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction) | `theorem` | Ch 3 |
-| `R161` | [`D5.S3.Quantum.Information.QubitNormalFormState.qubit_state_entropy`](lean:D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy) | [{source}](lean:D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy) | `theorem` | Ch 3 |
 
 ::: {.viz src="lean-declaration-map" preset="inline" height="500"}
-**只靠行内链接出现的那些。** 地图保留 162 个空心格：109 格绿色的定理、53 格灰色的定义，全部列在本节。这里的“行内”仅描述中文正文的引用方式；其中有些声明也被媒体使用。
+**只靠行内链接出现的那些。** 地图保留 163 个空心格：110 格绿色的定理、53 格灰色的定义，全部列在本节。这里的“行内”仅描述中文正文的引用方式；其中有些声明也被媒体使用。
 :::
 
 ---
@@ -663,17 +665,17 @@
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s)`） | `PASS` |
 
 ::: {.figure src="appc-ledger"}
-**$574$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $298 + 7 + 102 = 407$，定义一行 $114 + 0 + 53 = 167$。虚线框按本附录的环境引用分区：C.1 $= 298$，C.2 $= 114$，C.2.1 $= 7 + 102 + 0 + 53 = 162$；媒体消费者不改变索引分区。
+**$576$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $299 + 7 + 103 = 409$，定义一行 $114 + 0 + 53 = 167$。虚线框按本附录的环境引用分区：C.1 $= 299$，C.2 $= 114$，C.2.1 $= 7 + 103 + 0 + 53 = 163$；媒体消费者不改变索引分区。
 :::
 
-这张账的第一行在声明地图上是 $407$ 格绿色：被环境头引用的 $298$ 格画成实心，其余 $7 + 102 = 109$ 格空心。
+这张账的第一行在声明地图上是 $409$ 格绿色：被环境头引用的 $299$ 格画成实心，其余 $7 + 103 = 110$ 格空心。
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 407 格：298 个实心格被环境头以 `lean=` 引用，109 个空心格只在中文正文的行内链接里出现。
+**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 409 格：299 个实心格被环境头以 `lean=` 引用，110 个空心格只在中文正文的行内链接里出现。
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-本附录 C.1 的 298 条环境引用定理、C.2 的 114 项环境引用定义/归纳类型与 C.2.1 的 162 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 574 项声明（407 项 `theorem` + 157 项 `def` + 10 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.3 的 9 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
+本附录 C.1 的 299 条环境引用定理、C.2 的 114 项环境引用定义/归纳类型与 C.2.1 的 163 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 576 项声明（409 项 `theorem` + 157 项 `def` + 10 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.3 的 9 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}

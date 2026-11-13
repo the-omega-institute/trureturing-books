@@ -211,6 +211,58 @@ $$
 结论 1 对自然数 $N$ 归纳：$N = 0$ 时 $c^0 = 1$ 为恒等映射；由 $N$ 到 $N+1$ 时，对角位置 $(i = j)$ 保持不变，副对角位置 $(i \neq j)$ 再乘一次因子 $c$，得到 $c \cdot (c^N \rho_{ij}) = c^{N+1}\rho_{ij}$。结论 2 将 $\rho_+$ 代入结论 1，得第 $(0, 1)$ 元为 $\frac{1}{2}c^N$；因 $0 \le c < 1$，实数（及嵌入复数后）的模长满足 $|c| < 1$，故几何级数项 $c^N \to 0$，乘以常数 $\frac{1}{2}$ 后仍收敛于 $0$。完整证明由 Lean 内核检查。
 :::
 
+上述单比特公式把环境作用压缩为一个实数 $c$。如果系统有许多分支、环境记录之间还带有复相位，完全正交是否仍是必要的起点？先把每个系统地址 $i$ 配上一个单位环境向量 $E_i$。受控记录映射 $V\lvert i\rangle=\lvert i\rangle\otimes\lvert E_i\rangle$ 对环境求偏迹后，第 $(i,j)$ 个矩阵元恰好乘以 $G_{ij}=\sum_a E_i(a)\overline{E_j(a)}$，即 [`environment_marginal_channel`](lean:D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel.environment_marginal_channel) 的矩阵元公式。于是，“环境记录完全正交”可以放宽为一个带数值误差的充分条件。
+
+::: {.theorem #thm-repeated-record-decay title="重复有限记录对记录类捏合的指数误差界" lean="D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay.repeated_record_exponential_decay"}
+设 $d,e\in\mathbb{N}$，$E:\mathrm{Fin}\,d\to\mathrm{Fin}\,e\to\mathbb{C}$，且对每个系统地址 $i$ 有 $\sum_a |E_i(a)|^2=1$。定义
+
+$$
+G_{ij}=\sum_a E_i(a)\overline{E_j(a)},\qquad
+\Phi_E(\rho)_{ij}=G_{ij}\rho_{ij}.
+$$
+
+给定 $q\in[0,1)$，假设 $E_i\ne E_j$ 时均有 $|G_{ij}|\le q$。对每个 $v\in\operatorname{range} E$ 定义对角投影
+
+$$
+\begin{aligned}
+(P_v)_{ij}&=\begin{cases}1,&i=j\text{ 且 }E_i=v,\\0,&\text{其他情形},\end{cases}\\
+\Pi_E(\rho)&=\sum_{v\in\operatorname{range}E}P_v\rho P_v.
+\end{aligned}
+$$
+
+则对任意 $N\in\mathbb{N}$、$\rho\in M_d(\mathbb{C})$ 及 $i,j\in\mathrm{Fin}\,d$，同时成立
+
+$$
+\begin{aligned}
+\bigl(\Phi_E^N(\rho)\bigr)_{ij}&=G_{ij}^N\rho_{ij},\\
+\Pi_E(\rho)_{ij}&=\begin{cases}\rho_{ij},&E_i=E_j,\\0,&E_i\ne E_j,\end{cases}\\
+\|\Phi_E^N(\rho)-\Pi_E(\rho)\|_{\mathrm F}
+&\le q^N\|\rho-\Pi_E(\rho)\|_{\mathrm F},
+\end{aligned}
+$$
+
+其中 $\|A\|_{\mathrm F}=(\sum_{i,j}|A_{ij}|^2)^{1/2}$ 为 Frobenius 范数，亦即希尔伯特—施密特范数；$\Phi_E^0$ 为恒等映射。
+:::
+
+::: proof
+每次作用只将第 $(i,j)$ 元再乘以 $G_{ij}$，归纳得到第一式。对角投影 $P_v$ 的左右乘法只保留同属记录 $v$ 的行列，求和得到第二式。同类记录因归一化而满足 $G_{ij}=1$，故误差在那里为零；不同类的误差则为 $G_{ij}^N\rho_{ij}$，其模不超过 $q^N|\rho_{ij}|$。逐项平方、求和再开方即得第三式。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-nonorthogonal-record-decay title="每次只分开一点，十次后的误差有多大？"}
+取两条非正交单位记录 $E_0=(1,0)$、$E_1=(1/2,\sqrt{3}/2)$，则 $G_{01}=G_{10}=1/2$，可取 $q=1/2$。两条记录互不相同，记录类都是单点，因而 $\Pi_E$ 就是计算基捏合。对赤道初态 $\rho_+=\frac12\bigl(\begin{smallmatrix}1&1\\1&1\end{smallmatrix}\bigr)$，直接代入上式可得
+
+$$
+\Phi_E^N(\rho_+)=\frac12\begin{pmatrix}1&2^{-N}\\2^{-N}&1\end{pmatrix},\qquad
+\|\Phi_E^N(\rho_+)-\Pi_E(\rho_+)\|_{\mathrm F}=\frac{2^{-N}}{\sqrt2}.
+$$
+
+十次后，相对于初始副对角残差的误差比为 $1/1024$。有限步没有被说成“精确归零”；这里计算的是指定模型下的相干残差。
+:::
+
+这里的“类”按**记录向量完全相等**划分，同类内部的相干保留；只有类全是单点时，极限才是逐个基地址的完全去相干。若 $E_1=-E_0$，两向量虽然不相等，却有 $|G_{01}|=1$，不满足严格重叠界：作用只改变相位，不使这项相干的模衰减。向量不同，不能自动当作环境获得了可区分的记录。
+
+把 $\Phi_E^N$ 解释为连续碰撞，还需要每一步确实实现同一个约化信道；一种实现是每次使用新的、初始不相关的环境寄存器和相同记录耦合。反复访问同一环境或环境之间已有相关时，不能仅凭单次重叠套用 $G_{ij}^N$。本结果给出了放宽理想正交条件后的误差控制，归一化、严格重叠界与重复信道描述仍是模型前提；范数也是 Frobenius 范数，不能直接读作迹距离或实验判别错误率。
+
 **衰减到零，还算可逆吗？** [@prop-phase-damping-decay] 里的相干元每一步乘以 $c$，$N$ 步后只剩 $c^N\rho_{01}$，最终归零。4.1 节说过，单步退相干可以看成一次可逆耦合之后丢掉环境（[@thm-stinespring-dilation]、[@thm-reduced-access-defect]）。可“每一步都能这样看”与“所有步数合起来仍是同一个可逆演化的影子”是两回事：前者允许每一步各换一个扩张，后者要求一个酉算子 $U$ 一次管住全部的 $T^n$。下面的定理说，后者对任何压缩算子都成立。
 
 ::: {.theorem #thm-unitary-power-dilation title="Sz.-Nagy 酉幂扩张：压缩算子的每一次幂都是同一个酉算子的影子" lean="D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation"}

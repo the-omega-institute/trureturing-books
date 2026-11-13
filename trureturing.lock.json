@@ -3045,6 +3045,14 @@
       "line": 17,
       "signature": "theorem equal_superposition_coherence_tendsto_zero (c : DampingCoefficient) (hCoefficient : (c : Real) < 1) : Tendsto (fun N : Nat => phaseDampingIterate c N equalSuperpositionDensity 0 1) atTop (nhds 0)"
     },
+    "D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel.environment_marginal_channel": {
+      "module": "D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel",
+      "name": "D5.S3.Quantum.Decoherence.EnvironmentMarginalChannel.environment_marginal_channel",
+      "kind": "theorem",
+      "statement_id": "sha256:db9e9bb4430d3e35135dc296dee377f026345059326d011ef77987478f8eeea8",
+      "line": 32,
+      "signature": "theorem environment_marginal_channel {d e : Nat} (record : Fin d -> Fin e -> ℂ) (rho : Matrix (Fin d) (Fin d) ℂ) : let recording : Matrix (Fin d × Fin e) (Fin d) ℂ"
+    },
     "D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal": {
       "module": "D5/S3/Quantum/Decoherence/NonselectiveMarginalization",
       "name": "D5.S3.Quantum.Decoherence.NonselectiveMarginalization.nonselective_recording_marginal",
@@ -3060,6 +3068,14 @@
       "statement_id": "sha256:62d42f267c4e451e307d97488260302800a39a5186538134884bc9703e414c45",
       "line": 130,
       "signature": "theorem reduced_irreversibility_is_access_defect (rho sigma : QubitMatrix) (hdiag : ∀ i, rho i i = sigma i i) (hcoherence : ∃ i j, i ≠ j ∧ rho i j ≠ sigma i j) : copyUnitary ∈ Matrix.unitaryGroup (Fin 2 × Fin 2) ℂ ∧ (unitaryEvolution copyUnitary (blankEnvironmentJointState rho) = controlledRecordJointState copiedAddressRecord rho ∧ unitaryEvolution copyUnitary (blankEnvironmentJointState sigma) = controlledRecordJointState copiedAddressRecord sigma) ∧ traceEnvironment (controlledRecordJointState copiedAddressRecord rho) = traceEnvironment (controlledRecordJointState copiedAddressRecord sigma) "
+    },
+    "D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay.repeated_record_exponential_decay": {
+      "module": "D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay",
+      "name": "D5.S3.Quantum.Decoherence.RepeatedRecordExponentialDecay.repeated_record_exponential_decay",
+      "kind": "theorem",
+      "statement_id": "sha256:1b81efb297c329422680250f2df3918d278338dc7c99b9ea89f8235f79b03d85",
+      "line": 251,
+      "signature": "theorem repeated_record_exponential_decay {d e : Nat} (record : Fin d -> Fin e -> ℂ) (hNormalized : ∀ i, ∑ a, ‖record i a‖ ^ 2 = 1) (q : Set.Ico (0 : ℝ) 1) (hBound : ∀ i j, record i ≠ record j -> ‖recordGram record i j‖ ≤ (q : ℝ)) : let pinching"
     },
     "D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi": {
       "module": "D5/S3/Quantum/Divergence/CanonicalChannelDPI",
