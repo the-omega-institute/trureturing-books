@@ -337,6 +337,146 @@ await page.click('[data-lang-set="zh"]'); await settle(page);
   check('loop: released on its own axis left of its tail, the loop arrow reads δ = π', Math.abs((await state()).params.tau - 1) < 1e-5, String((await state()).params.tau));
 }
 
+/* ---------- drags across a relayout: each move is read in the frame drawn in its live layout ---------- */
+// The amber pill gains a digit at δ = 100°; on a header just narrow enough that wraps it and moves the stage mid-drag.
+// A recorder logs, per paint of #cv, the live canvas box and the drawn arrow shafts, dashed curves and dots, and per
+// pointer event the box it was dispatched in, the frames drawn before and after its handler and the rail afterwards.
+// The expected value of a move comes from the pointer and the frame laid out in that box alone (not the page's
+// transforms): the loop arrow turns about its drawn tail toward the pointer; C, held on its drawn orbit, is drawn
+// under a pointer put on that orbit.
+{
+  const p2 = await T.open(BOOK, ID, '?lang=zh', { viewport: { width: 1440, height: 900 } }); await settle(p2);
+  await p2.evaluate(() => {
+    const R = window.__rec = { on: false, frames: [], events: [], moves: 0, perturbAt: -1 };
+    const cv = document.getElementById('cv'), proto = CanvasRenderingContext2D.prototype;
+    const box = () => { const b = cv.getBoundingClientRect(); return [b.left, b.top, b.width, b.height]; };
+    const norm = (c) => { const x = document.createElement('canvas').getContext('2d'); x.strokeStyle = c; return x.strokeStyle; };
+    R.col = { violet: norm(TRV.palette.violet), amber: norm(TRV.palette.amber), dim: norm(TRV.palette.dim) };
+    let path = [];
+    const wrap = (name, fn) => { const f = proto[name]; proto[name] = function (...a) { if (R.on && this.canvas === cv) fn.call(this, a); return f.apply(this, a); }; };
+    const flat = (ctx) => { const m = ctx.getTransform(); return !m.b && !m.c && !m.e && !m.f && m.a === m.d; };
+    wrap('clearRect', function (a) { if (!a[0] && !a[1]) R.frames.push({ rect: box(), flat: flat(this), shafts: [], dashed: [], dots: [] }); });
+    wrap('beginPath', () => { path = []; });
+    wrap('moveTo', (a) => path.push([a[0], a[1]]));
+    wrap('lineTo', (a) => path.push([a[0], a[1]]));
+    wrap('arc', (a) => path.push([a[0], a[1], a[2]]));
+    wrap('stroke', function (a) {
+      const F = R.frames[R.frames.length - 1]; if (!F || a.length) return;
+      if (!flat(this)) F.flat = false;
+      if (this.getLineDash().length) F.dashed.push({ style: this.strokeStyle, alpha: this.globalAlpha, pts: path.slice() });
+      else if (path.length === 2 && path[0].length === 2 && path[1].length === 2) F.shafts.push({ style: this.strokeStyle, alpha: this.globalAlpha, lw: this.lineWidth, pts: path.slice() });
+    });
+    wrap('fill', function (a) { const F = R.frames[R.frames.length - 1]; if (F && !a.length && path.length === 1 && path[0].length === 3) F.dots.push({ style: this.fillStyle, arc: path[0] }); });
+    // a controlled relayout: the header grows and the centre column gains a left padding (stage moves down and right)
+    R.perturb = (on) => { document.querySelector('header.top').style.paddingBottom = on ? '38px' : ''; document.querySelector('.lab .center').style.paddingLeft = on ? '40px' : ''; };
+    for (const type of ['pointerdown', 'pointermove']) {
+      window.addEventListener(type, (e) => {
+        if (!R.on || !e.buttons) return;
+        if (type === 'pointermove' && ++R.moves === R.perturbAt) R.perturb(true);
+        R.events.push({ type, x: e.clientX, y: e.clientY, rect: box(), nBefore: R.frames.length });
+      }, true);
+      window.addEventListener(type, (e) => {
+        if (!R.on || !e.buttons) return;
+        Object.assign(R.events[R.events.length - 1], { nAfter: R.frames.length, rail: Number(document.getElementById('now').value) });
+      });
+    }
+  });
+  const rec = (fn, arg) => p2.evaluate(fn, arg);
+  const begin = (perturbAt = -1) => rec((k) => { Object.assign(window.__rec, { frames: [], events: [], moves: 0, perturbAt: k, on: true }); }, perturbAt);
+  const end = () => rec(() => { const R = window.__rec; R.on = false; R.perturb(false); return { frames: R.frames, events: R.events, col: R.col }; });
+  const lastFrame = () => rec(() => window.__rec.frames[window.__rec.frames.length - 1]);
+  const sameBox = (a, b) => a.every((v, i) => Math.abs(v - b[i]) < 1e-6);
+  const turn = (a, b) => { const d = ((a - b) % TAU + TAU) % TAU; return Math.min(d, TAU - d); };
+  // the frame of an event: the latest one drawn up to the end of its handler if laid out in the event's live box,
+  // else the first later one laid out there; its response: the first frame after its handler, before the next mapping
+  const frameOf = (F, ev) => { if (ev.nAfter > 0 && sameBox(F[ev.nAfter - 1].rect, ev.rect)) return ev.nAfter - 1; return F.findIndex((f, i) => i >= ev.nAfter && sameBox(f.rect, ev.rect)); };
+  const responseOf = (F, E, j) => { const nx = E[j + 1], hi = nx ? nx.nBefore : F.length; return E[j].nAfter < hi ? E[j].nAfter : nx && nx.nAfter > nx.nBefore ? nx.nBefore : -1; };
+  const loopShaft = (f, col) => f.shafts.filter((s) => s.style === col.violet && s.alpha === 1 && Math.abs(s.lw - 2.2) < 1e-5);
+
+  // the narrowest width at which δ = 100° leaves the stage where the widest page has it; one pixel less, only the
+  // third digit wraps the header (fonts differ between machines, so the width is found, not fixed)
+  await p2.click('[data-preset="paradox-cancel"]'); await settle(p2);
+  const topAt = async (w, deg) => {
+    await p2.setViewportSize({ width: w, height: 900 }); await p2.evaluate((t) => window.__HANDSHAKE_LAB__.setState({ tau: t }), deg / 180); await settle(p2);
+    return p2.evaluate(() => document.getElementById('cv').getBoundingClientRect().top);
+  };
+  const wide = await topAt(2000, 100);
+  let lo = 1081, hi = 2000;
+  if (await topAt(lo, 100) !== wide) while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (await topAt(mid, 100) === wide) hi = mid; else lo = mid; }
+  const natural = (await topAt(lo, 99)) !== (await topAt(lo, 100));
+  // where the fonts never wrap the header at that step, a controlled relayout at the third move stands in for it
+  if (!natural) T.warn('relayout: no three-column width wraps the header exactly at δ = 100°; the loop drags use a controlled relayout');
+
+  // press the δ = 60° tip; move through 70°, 85°, 105°, …, 165° of the starting frame, once with a frame drawn between
+  // moves and once with none asked for (only the frames the browser delivers; none under slow frames)
+  const loopDrag = async (wait) => {
+    await p2.evaluate(() => window.__HANDSHAKE_LAB__.setState({ tau: 1 / 3 })); await settle(p2);
+    await begin(natural ? -1 : 3); await settle(p2);
+    const f0 = await lastFrame(), col = await rec(() => window.__rec.col), s0 = loopShaft(f0, col)[0];
+    const r = Math.hypot(s0.pts[1][0] - s0.pts[0][0], s0.pts[1][1] - s0.pts[0][1]);
+    const at = await p2.evaluate(() => window.__HANDSHAKE_LAB__.at('loop'));
+    await p2.mouse.move(at[0], at[1]); await p2.mouse.down();
+    for (const d of [70, 85, 105, 120, 135, 150, 165]) {
+      await p2.mouse.move(f0.rect[0] + s0.pts[0][0] + r * Math.cos(d * DEG), f0.rect[1] + s0.pts[0][1] - r * Math.sin(d * DEG));
+      if (wait) await settle(p2);
+    }
+    await p2.mouse.up(); await settle(p2);
+    const R = await end(); await settle(p2);
+    const E = R.events, F = R.frames, down = E[0], tail0 = loopShaft(F[frameOf(F, down)], col)[0].pts[0], rows = [];
+    for (let j = 1; j < E.length; j++) {
+      const ev = E[j], k = frameOf(F, ev), sh = k < 0 ? [] : loopShaft(F[k], col), resp = responseOf(F, E, j);
+      const row = { j, frame: k, relaid: !sameBox(ev.rect, down.rect), flat: k >= 0 && F[k].flat && sh.length === 1 };
+      if (row.flat) {
+        const aim = (t) => Math.atan2(-(ev.y - ev.rect[1] - t[1]), ev.x - ev.rect[0] - t[0]);
+        row.miss = turn(ev.rail * PI, aim(sh[0].pts[0]));
+        row.staleMiss = turn(aim(tail0), aim(sh[0].pts[0]));
+      }
+      if (resp >= 0) { const s = loopShaft(F[resp], col)[0]; row.drawn = s ? turn(Math.atan2(-(s.pts[1][1] - s.pts[0][1]), s.pts[1][0] - s.pts[0][0]), ev.rail * PI) : Infinity; }
+      rows.push(row);
+    }
+    return rows;
+  };
+  const framed = await loopDrag(true), free = await loopDrag(false), rows = [...framed, ...free];
+  const show = (rs) => rs.map((q) => `${q.j}${q.relaid ? '*' : ''}:${q.miss == null ? 'no frame' : q.miss.toExponential(1)}`).join(' ');
+  check(`relayout: the stage moved under the drag (${natural ? 'the header wrapped at the third digit' : 'controlled relayout'})`,
+    framed.filter((q) => q.relaid).length >= 2, show(framed));
+  check('relayout: every move turns the loop arrow toward the pointer about its tail as drawn in the live layout',
+    framed.length === 7 && free.length > 0 && rows.every((q) => q.flat && q.miss < 1e-9), `${show(framed)} | ${show(free)}`);
+  check('relayout: the arrow drawn after each move points along the rail value', rows.some((q) => q.drawn != null) && rows.every((q) => q.drawn == null || q.drawn < 1e-9),
+    rows.map((q) => (q.drawn == null ? '-' : q.drawn.toExponential(1))).join(' '));
+  check('relayout: the pressed frame read in the moved stage would miss those moves (the check sees a stale frame)',
+    framed.filter((q) => q.relaid).every((q) => q.staleMiss > 1e-3), framed.filter((q) => q.relaid).map((q) => q.staleMiss.toExponential(1)).join(' '));
+
+  // 3D: the stage moves between the paint and the next move (the move's own capture listener relays it out); the
+  // targets are front vertices of the drawn orbit of C (z = y), two in the plain layout and three in the moved one
+  await p2.setViewportSize({ width: 1440, height: 900 }); await p2.click('[data-preset="gram-symmetry"]'); await settle(p2);
+  await begin();
+  const orbit = async (on) => {
+    await rec((v) => window.__rec.perturb(v), on); await settle(p2);
+    const f = await lastFrame(), col = await rec(() => window.__rec.col);
+    const run = f.dashed.filter((s) => s.style === col.dim && s.alpha > 0.5).sort((a, b) => b.pts.length - a.pts.length)[0];
+    return (u) => { const v = run.pts[Math.round(u * (run.pts.length - 1))]; return [f.rect[0] + v[0], f.rect[1] + v[1]]; };
+  };
+  const moved = await orbit(true), plain = await orbit(false);
+  const targets = [plain(0.15), plain(0.3), moved(0.5), moved(0.7), moved(0.85)];
+  await end(); await begin(3); await settle(p2);
+  const atC = await p2.evaluate(() => window.__HANDSHAKE_LAB__.at('C'));
+  await p2.mouse.move(atC[0], atC[1]); await p2.mouse.down();
+  for (const t of targets) { await p2.mouse.move(t[0], t[1]); await settle(p2); }
+  await p2.mouse.up(); await settle(p2);
+  const RC = await end(); await settle(p2);
+  const cRows = RC.events.slice(1).map((ev, i) => {
+    const j = i + 1, resp = responseOf(RC.frames, RC.events, j), f = RC.frames[resp];
+    const dot = f ? f.dots.filter((d) => d.style === RC.col.amber && Math.abs(d.arc[2] - 5.5) < 1e-9) : [];
+    return { window: ev.nBefore > 0 && !sameBox(RC.frames[ev.nBefore - 1].rect, ev.rect), same: !!f && sameBox(f.rect, ev.rect) && f.flat && dot.length === 1,
+      px: dot.length === 1 ? Math.hypot(f.rect[0] + dot[0].arc[0] - ev.x, f.rect[1] + dot[0].arc[1] - ev.y) : Infinity };
+  });
+  // pointer coordinates arrive as float32 (6e-5 px at 1000 px) and C is held on its orbit: 1e-3 px
+  check('relayout (3D): a move that arrives after the stage moved and before it was redrawn is read in the moved stage',
+    cRows.length === 5 && cRows.filter((q) => q.window).length === 1 && cRows.every((q) => q.same && q.px < 1e-3), JSON.stringify(cRows));
+  await p2.context().close();
+}
+
 /* ---------- presets, rail, keys, language, motion, touch ---------- */
 {
   const seen = [];
