@@ -797,7 +797,7 @@ $$
 \end{aligned}
 $$
 
-Combining the inequalities proves the estimate. For the preceding window, the parameter correspondence is $m=2q+1$, $s=2a$, $N_j=2n$. This derivation explains how a general repeated window controls the full bidiagonal inverse. Its formalization candidate is not yet included in this book's pin, so this example carries no Lean verification badge.
+Combining the inequalities proves the estimate. For the preceding window, the parameter correspondence is $m=2q+1$, $s=2a$, $N_j=2n$. This is an application of the existing inverse-mass result, the forward-substitution formula and Euclidean inequalities. It introduces no new formal declaration, and this example carries no separate Lean verification badge.
 :::
 
 This estimate does not yet prove the spectral conclusion for the physical full chain. The actual Tribonacci hoppings, sublattice reordering and sign conjugation still need an exact correspondence, followed by the relation between the full symmetric matrix's eigenvalues and the bidiagonal block's singular values, and treatment of the initial short prefixes. In particular, it remains open here whether, for every fixed $\rho\in(0,1)$, there are $C_\rho>0$ and an integer $J_\rho\ge1$ such that $\delta_{\rho,j}\le C_\rho/N_j$ for every $j\ge J_\rho$. Such a bound would imply the preceding open-chain limit; the fractal entropy-scaling problem would still remain.
