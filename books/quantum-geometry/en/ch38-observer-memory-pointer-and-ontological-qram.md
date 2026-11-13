@@ -155,9 +155,11 @@ The operation `transport n` applies local controlled SWAPs down the tree to carr
 Write $S_n=\operatorname{State}(n)$ and $Q_{n,D}=\operatorname{queryMatrix}(n,D)$ for the complex permutation matrix of `query` on all of $S_n$. For arbitrary $\psi:A_n\times\operatorname{Bool}\to\mathbb C$, its initialized embedding is
 
 $$
-\operatorname{initialized}(n,\psi)(s)
-=\sum_{a\in A_n}\sum_{b\in\operatorname{Bool}}
+\begin{aligned}
+&\operatorname{initialized}(n,\psi)(s)\\
+&\quad=\sum_{a\in A_n}\sum_{b\in\operatorname{Bool}}
 \begin{cases}\psi(a,b),&s=\operatorname{clean}(n,a,b),\\0,&\text{otherwise}.\end{cases}
+\end{aligned}
 $$
 
 ::: {.theorem #thm-ch38-spatial-qutrit-qram-correctness title="All-Depth Sequential Spatial Qutrit QRAM: Loading, Transport, and Clean Lookup" lean="D5/S3/Quantum/Routing/HannSpatialQram.correctness"}

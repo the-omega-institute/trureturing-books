@@ -155,9 +155,11 @@ theorem correctness :
 记 $S_n=\operatorname{State}(n)$，$Q_{n,D}=\operatorname{queryMatrix}(n,D)$ 是 `query` 在整个 $S_n$ 上的复置换矩阵。任意 $\psi:A_n\times\operatorname{Bool}\to\mathbb C$ 的初始化嵌入为
 
 $$
-\operatorname{initialized}(n,\psi)(s)
-=\sum_{a\in A_n}\sum_{b\in\operatorname{Bool}}
+\begin{aligned}
+&\operatorname{initialized}(n,\psi)(s)\\
+&\quad=\sum_{a\in A_n}\sum_{b\in\operatorname{Bool}}
 \begin{cases}\psi(a,b),&s=\operatorname{clean}(n,a,b),\\0,&\text{其他情形}.\end{cases}
+\end{aligned}
 $$
 
 ::: {.theorem #thm-ch38-spatial-qutrit-qram-correctness title="任意深度顺序空间三态 QRAM 的装载、输运与干净查询" lean="D5/S3/Quantum/Routing/HannSpatialQram.correctness"}
