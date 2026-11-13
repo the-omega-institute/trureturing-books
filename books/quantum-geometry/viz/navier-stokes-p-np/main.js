@@ -246,8 +246,8 @@
   };
   const LEGEND = {
     lamb: [['dm', '对流项 (u·∇)u', 'the advection term (u·∇)u'], ['cy', '梯度那一半 ∇(|u|²/2)', 'the gradient half ∇(|u|²/2)'], ['mg', '兰姆那一半 ω × u', 'the Lamb half ω × u'], ['am', '探针（可拖动）', 'the probe (drag it)']],
-    tube: [['cy', '环量回路 Γ（不变）', 'the circulation loop Γ (fixed)'], ['mg', '涡度 ω：轴上的箭头；管面由灰到品红，ω = Γ/A 越大越品红', 'the vorticity ω: the arrow on the axis; the wall runs from grey to magenta as ω = Γ/A grows'], ['dm', '出发时的涡管（淡影与虚线圈）', 'the tube as it started (faint shadow, dashed circles)']],
-    closure: [['cy', 'y = 0 时的加速度', 'the acceleration at y = 0'], ['am', '同一个 x、当前 y 时的加速度与两者之差', 'the acceleration for the same x at the current y, and the gap'], ['dm', '其余几个 x', 'the other values of x']]
+    tube: [['cy', '环量回路 Γ（不变）', 'the circulation loop Γ (fixed)'], ['mg', '轴上箭头：ω；管壁灰→品红：Γ/A 增大', 'ω: axial arrow; grey → magenta as Γ/A grows'], ['dm', '出发时的涡管（淡影与虚线圈）', 'the tube as it started (faint shadow, dashed circles)']],
+    closure: [['cy', 'y = 0 时的加速度', 'the acceleration at y = 0'], ['am', '同一个 x、当前 y 时的加速度与两者之差', 'same x, current y: acceleration and gap'], ['dm', '其余几个 x', 'the other values of x']]
   };
   function drawText() {
     const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
@@ -290,7 +290,7 @@
     const leg = LEGEND[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
   }
-  const paint = kit.painter(() => { drawText(); drawStage(); drawPlots(); }, [$('stage'), $('plotA'), $('plotB')]);
+  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlots(); }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({

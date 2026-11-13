@@ -581,7 +581,7 @@
     read: [['cy box', '正的格、正的乘积；圆盘上行读为正的一半', 'positive cells/products; positive half disc'], ['mg box', '负的格、负的乘积；读为负的一半', 'negative cells/products; negative half disc'], ['am', '选中的格、刚加进来的一项；列在行上的影子', 'chosen cell/term; column’s shadow on row'], ['dm', '虚线：行（尺子）与列（被量）', 'dashed: row ruler, measured column']],
     rank: [['cy box', '正的格、对角格（越亮越大）；球里：像', 'positive/diagonal cells; brighter = larger; ball: image'], ['mg box', '负的格；读成 0 的方向', 'negative cells; directions read as 0'], ['am', '对角格之和（迹）；刚写进的一行', 'the sum of the diagonal (trace); the newest row'], ['dm', '虚线框：对角线', 'dashed: the diagonal']],
     heal: [['cy box', '正的格；½ 以上的本征值及其方向', 'positive cells; eigenvalues above ½, their directions'], ['mg box', '负的格；½ 以下的本征值及其方向', 'negative cells; eigenvalues below ½, their directions'], ['am', '被碰的格、当前这一步', 'the knocked cell, the current step']],
-    perp: [['cy box', '读出 Tψ、留在表里的 cos θ；圆盘：像', 'Tψ = cos θ in the image; disc: image'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']]
+    perp: [['cy box', '读出 Tψ、留在表里的 cos θ；圆盘：像', 'reading Tψ, retained cos θ; disc: image'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']]
   };
   const setLabel = (id, zh, en) => { const h = `<span class="zh">${zh}</span><span class="en">${en}</span>`; if ($(id)._h !== h) { $(id).innerHTML = h; $(id)._h = h; } };
   const ex = (x) => (x === 0 ? '0' : x.toExponential(1).replace('-', MINUS));

@@ -938,6 +938,7 @@
     drawPythagoreanPlot(M, P);
     drawComplexityPlot(M, P);
     updateUI(M);
+    TRV.hudFit();
   }, [stageEl, $('plot'), $('plotWall')]);
 
   /* ---------- bottom rail clock over θ ∈ [0°, 90°] ---------- */
@@ -981,8 +982,17 @@
   const CARD_NOTES = Object.fromEntries(
     Object.entries(CARDS).map(([k, c]) => [k, [c.zh, c.en]])
   );
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "pythagoras": ["θ = 53.13°：局部长度 0.6、并发度 0.8，平方和为 1，线性熵为 0.64。", "At θ = 53.13°, local length 0.6 and concurrence 0.8 have squared sum 1; linear entropy is 0.64."],
+    "dottie": ["cos θ* = θ* ≈ 0.7391：局部长度平方约 0.5462，线性熵约 0.4538。", "At cos θ* = θ* ≈ 0.7391, squared local length is 0.5462 and linear entropy 0.4538."],
+    "arealaw": ["θ = 60°、两条跨割桥：S_cut ≈ 1.623 bits，有效键维约 3.08，精确秩为 4。", "At θ = 60° with two bridges, S_cut ≈ 1.623 bits, effective dimension ≈ 3.08 and exact rank 4."],
+    "volumelaw": ["同样 θ = 60°，八条跨割桥把熵增至 6.490 bits，有效键维约 89.9，精确秩为 256。", "At θ = 60° with eight bridges, entropy is 6.490 bits, effective dimension ≈ 89.9 and exact rank 256."],
+    "bellcut": ["θ = 90°：局部箭头归零，八桥熵为 8 bits，有效键维与精确秩都为 256。", "At θ = 90°, local arrows vanish; eight bridges give 8 bits, with effective dimension and exact rank both 256."],
+    "globaljoint": ["抬起偏迹刀片：全局纯态秩为 1、熵为 0；跨割熵仍为 8 bits，施密特秩仍为 256。", "Lift the trace blade: global pure-state rank is 1 and entropy 0; cut entropy stays 8 bits and Schmidt rank 256."],
+  };
   const cards = kit.cards($('presets'), {
-    notes: CARD_NOTES,
+    notes: TRV.figure ? { ...CARD_NOTES, ...FIGURE_NOTES } : CARD_NOTES,
     noteEl: $('presetNote'),
     idle: [
       '<b>自由探索</b>：拖动施密特角 θ、切换面积律/体积律或升降偏迹刀片；点击任一实验卡回到命名场景。',

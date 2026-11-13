@@ -228,7 +228,7 @@
       drawUnrolled(t);
       $('hudBig').textContent = L('沿底圈展开的光带', 'the band unrolled along its base circle');
       $('hudSub').innerHTML = `${L('每 30° 插一面小旗', 'a flag every 30°')} · ${L('转过', 'turned')} ${fix(t / DEG, 0)}° · <span class="c-vi">${signText(X)}</span>`;
-      $('legend').innerHTML = [['vi', L('小旗 w = cos(t/2) n + sin(t/2) r；虚线：出发时的那一面', 'flags w = cos(t/2) n + sin(t/2) r; dashed: the one at the start')], ['am', L('此刻', 'now')]].map(([k, q]) => `<span><i class="sw ${k}"></i>${q}</span>`).join('');
+      $('legend').innerHTML = [['vi', L('小旗 w = cos(t/2) n + sin(t/2) r；虚线：出发时的那一面', 'w = cos(t/2)n + sin(t/2)r; dashed: start')], ['am', L('此刻', 'now')]].map(([k, q]) => `<span><i class="sw ${k}"></i>${q}</span>`).join('');
       return X;
     }
     st.begin();
@@ -284,7 +284,7 @@
     $('hudSub').innerHTML = `${L('在', 'in ')}${PL().name}${L(' 面里转过', ', turned')} ${fix(t / DEG, 0)}° · <span class="c-cy">${L('J 离出发方向', 'J from its start')} ${fix(X.Jback / DEG, 0)}°</span> · <span class="c-vi">${signText(X)}</span>`;
     const LEG = [['cy', S.ref ? L('流向量 J = ψe₃ψ̃', 'current J = ψe₃ψ̃') : L('流向量 J = ψe₃ψ̃；虚线：J 走过的路', 'current J = ψe₃ψ̃; dashed: its path')], ['mg', L('自旋面 S = ψe₁e₂ψ̃', 'spin plane S = ψe₁e₂ψ̃')]];
     if (S.ref) LEG.push(['dm', L('参考刀片 e₃ 与 e₁e₂', 'reference blades e₃ and e₁e₂')], ['vi', L('ψ 把 e₃ 带到 J', 'ψ carries e₃ to J')]);
-    else if (S.band) LEG.push(['vi', L('单侧光带、转轴、ψ 的小旗；实线：旗尖走过的边，虚线：还没走的', 'one-sided band, axis, the flag of ψ; solid: the edge its tip has run along, dashed: still ahead')], ['am', L('此刻', 'now')]);
+    else if (S.band) LEG.push(['vi', L('单侧光带、转轴、ψ 的小旗；实线：旗尖走过的边，虚线：还没走的', 'band/axis/ψ flag; solid: past, dashed: ahead')], ['am', L('此刻', 'now')]);
     else LEG.push(['vi', L('转轴 n', 'axis n')]);
     $('legend').innerHTML = LEG.map(([k, s]) => `<span><i class="sw ${k}"></i>${s}</span>`).join('');
     return X;

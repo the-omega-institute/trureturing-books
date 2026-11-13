@@ -310,7 +310,7 @@
     $('legend').innerHTML = LEGEND[S.scene].map(([c, zh, en]) => `<span><i class="sw ${c}"></i>${L(zh, en)}</span>`).join('');
   }
 
-  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail: φ, the direction of B₀ (B₁ follows at φ − β) ---------- */
   let stopAt = null;
@@ -390,7 +390,16 @@
       clock.set(wrap(s0.phi + (t1.phi - s0.phi) * e) + 180);
     }, () => { tw = null; S.a0 = p.a0; S.a1 = p.a1; S.beta = p.beta; clock.set(startPhi + 180); go(); });
   }
-  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "collinear": ["Alice 两箭头重合，Bob 转动时 S = 2 cos φ，始终不越过经典界 2。", "Alice’s arrows coincide: turning Bob gives S = 2 cos φ, never above the classical bound 2."],
+    "sixty": ["两侧各张 60°：φ = 0° 时 S = 2.5；转到约 19.1° 时达到 √7。", "Both sides open 60°: S = 2.5 at φ = 0°, reaching √7 near φ = 19.1°."],
+    "sweep": ["两侧都是直角：Bob 转动时 S = 2√2 cos(φ − 45°)，在 45° 达到峰值。", "Both sides at right angles: S = 2√2 cos(φ − 45°), peaking at 45°."],
+    "tsirelson": ["Bob 转过 45°，四段青色各贡献 1/√2，合计 S = 2√2。", "Bob turns 45°; four cyan steps each contribute 1/√2, giving S = 2√2."],
+    "hidden": ["360 个隐方向各给 ±2；φ = 120° 时为 240 个 +2、120 个 −2，平均约 0.667。", "Each hidden direction gives ±2; at φ = 120°, 240 give +2 and 120 give −2, averaging 0.667."],
+    "arc": ["四段品红差值合计 2√2 − 2：余弦弧给 2√2，经典折线给 2。", "The four magenta gaps sum to 2√2 − 2: the cosine arc gives 2√2, the classical polyline 2."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动盘上的任何一支箭头，改两侧的张角，或用时间轴转动 Bob 的一对方向。随时可以再选一张卡。', 'Free play: drag any arrow on the dial, change the two openings, or turn Bob\'s pair with the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

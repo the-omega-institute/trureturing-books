@@ -14,3 +14,8 @@
   .hud-tr .lg { display: none; }
   .hud-tr { left: 12px; right: 12px; justify-content: flex-start; }
 }
+
+/* The tour bar selects the scene in a narrow cited figure. */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}

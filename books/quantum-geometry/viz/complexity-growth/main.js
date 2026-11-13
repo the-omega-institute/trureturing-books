@@ -319,7 +319,7 @@
   const row = (cls, zh, en, val) => `<div class="${cls}"><dt>${L(zh, en)}</dt><dd>${val}</dd></div>`;
   const LEGEND = {
     growth: [['dm', '白线：已用的门数', 'white line: gates used'], ['mg', '预期复杂度（模型）', 'expected complexity (model)'], ['cy', '半链纠缠熵', 'half-chain entanglement entropy'], ['dm', '灰色台阶：2 × 跨割门数', 'grey steps: 2 × gates across the cut']],
-    depth: [['cy', '门（已执行）', 'gates (done)'], ['am', '正在执行的层', 'the layer running now'], ['mg', '折返点 S', 'turning points S'], ['dm', '白线：定理的最少层数 · 灰色虚线：旧公式', 'white line: minimum by the theorem · grey dashed: old formula']]
+    depth: [['cy', '门（已执行）', 'gates (done)'], ['am', '正在执行的层', 'the layer running now'], ['mg', '折返点 S', 'turning points S'], ['dm', '白线：定理的最少层数 · 灰色虚线：旧公式', 'white: theorem minimum; dashed grey: old formula']]
   };
   function drawText() {
     let big, sub, key, keyName, rows, note, aside, pill;
@@ -359,7 +359,7 @@
     $('cvBtn').setAttribute('aria-pressed', String(S.cv));
   }
 
-  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ======================= the rail ======================= */
   let stopAt = null;

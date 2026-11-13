@@ -2,3 +2,8 @@
    visualization alone; colours come from the tokens (var(--cyan) …), never from hex values. */
 #cv { cursor: grab; touch-action: none; }
 #stage .tag.dim { color: var(--dim); }
+
+/* The tour bar selects the scene in a narrow cited figure. */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}

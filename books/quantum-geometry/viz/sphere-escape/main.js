@@ -689,6 +689,7 @@
   // readouts and legend first: the prime stage measures the legend it has to keep clear of
   const paint = kit.painter(() => {
     drawText();
+    TRV.hudFit();
     if (S.scene === 'cos') drawCos(); else { const g = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }); ({ diag: drawDiag, fiber: drawFiber, poly: drawPoly, ptr: drawPtr, prime: drawPrime })[S.scene](g); }
     drawPlots();
   }, [$('stage'), $('plotA'), $('plotB')]);
@@ -770,7 +771,17 @@
     else if (id === 'zu') setScene('poly', 12);
     else if (id === 'thirteen') setScene('prime', 6);
   }
-  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "diagonal": ["翻转六行清单的对角位：所得 d 与第 k 行在第 k 位不同，因此不在清单中。", "Flip the six diagonal bits: d differs from row k at bit k, so d is absent from the list."],
+    "split": ["四个地址各自解码再翻转，g = (1, 1, 0, 0) 将原来同纤维的地址分开。", "Decode and flip at each of four addresses: g = (1, 1, 0, 0) separates addresses in one old fibre."],
+    "absorb": ["把 d 收作第七行并补一列：新对角线又产生一个清单外的串。", "Add d as row seven and a new column: the new diagonal produces another off-list string."],
+    "pointer": ["九格正弦指针移一格：重叠 |γ(1)| = cos(π/10) ≈ 0.9511，严格小于 1。", "Shift the nine-cell sine pointer by one: overlap |γ(1)| = cos(π/10) ≈ 0.9511, strictly below 1."],
+    "liuhui": ["从正六边形逐次倍边至 192 边：越来越像圆，放大后的弓高仍非零。", "Double the hexagon’s sides up to 192: it approaches the circle, but the magnified sagitta stays nonzero."],
+    "zu": ["24576 边时弓高约 8×10⁻⁹；放大十亿倍，缝仍清晰可见。", "At 24576 sides the sagitta is about 8×10⁻⁹; magnified a billion times, the gap remains visible."],
+    "thirteen": ["30031 = 59 × 509：欧几里得只保证出现新的素因子，不保证所得数为素数。", "30031 = 59 × 509: Euclid guarantees new prime factors, not that the constructed number is prime."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、改清单、拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, edit the list, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

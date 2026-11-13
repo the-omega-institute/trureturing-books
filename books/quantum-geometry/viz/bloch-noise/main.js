@@ -348,7 +348,7 @@
     $('pHintZh').textContent = per[0]; $('pHintEn').textContent = per[1];
   }
 
-  const paint = kit.painter(() => { drawStage(); drawAxes(); drawDist(); drawText(); }, [$('stage'), $('axesPlot'), $('distPlot')]);
+  const paint = kit.painter(() => { drawStage(); drawAxes(); drawDist(); drawText(); TRV.hudFit(); }, [$('stage'), $('axesPlot'), $('distPlot')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({

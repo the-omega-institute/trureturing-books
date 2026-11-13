@@ -434,7 +434,7 @@
       : S.scene === 'returns' ? [['am', '观测窗与此刻的点', 'the window and the current point'], ['cy', '落在窗口里的步', 'steps inside the window'], ['mg', '目前最长的间隔（只是样本）', 'the longest gap so far (sample only)']]
         : S.scene === 'gaps' ? (q.kinds.length === 3 ? [['cy', '最短的一种弧', 'the shortest kind of arc'], ['vi', '中间的一种', 'the middle kind'], ['mg', '最长的一种 = 另两种之和', 'the longest kind = the sum of the other two'], ['am', '最新的点', 'the newest point']]
           : [['cy', '短的一种弧', 'the short kind of arc'], ['mg', '长的一种', 'the long kind'], ['am', '最新的点', 'the newest point']])
-          : [['cy', '棱与 12 个五重顶点（圆点）', 'the edges, and the 12 fivefold vertices (dots)'], ['dm', '后半个壳；前半切开，露出里面', 'the back half of the shell; the front half is cut away to show the inside'], ['am', '窗口里的点与半径 d∂ 的球', 'the point and the ball of radius d∂'], ['mg', q.edgePt ? '离它最近的面，与贴近这个面的点' : '离它最近的面', q.edgePt ? 'the face nearest to it, and a point close to that face' : 'the face nearest to it']]);
+          : [['cy', '棱与 12 个五重顶点（圆点）', 'the edges, and the 12 fivefold vertices (dots)'], ['dm', '后半个壳；前半切开，露出里面', 'back shell; front cut away to show the inside'], ['am', '窗口里的点与半径 d∂ 的球', 'the point and the ball of radius d∂'], ['mg', q.edgePt ? '离它最近的面，与贴近这个面的点' : '离它最近的面', q.edgePt ? 'the face nearest to it, and a point close to that face' : 'the face nearest to it']]);
   function drawText(q) {
     const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
     const keyRO = (lab, val, subText) => { $('roKeyL').textContent = lab; $('roKey').innerHTML = val; $('roKeySub').textContent = subText; };
@@ -498,7 +498,7 @@
     const leg = legend(q).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
   }
-  const paint = kit.painter(() => { const q = state(); drawText(q); drawStage(q); drawPlots(q); }, [$('stage'), $('plotA'), $('plotB')]);
+  const paint = kit.painter(() => { const q = state(); drawText(q); TRV.hudFit(); drawStage(q); drawPlots(q); }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({
@@ -562,7 +562,16 @@
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "cut": ["黄金格点经长度 1 的闭窗筛选：投影通常间隔 φ 或 φ²，双端点入窗另生一段 1。", "A closed window of length 1 selects golden lattice points: gaps are φ or φ², with one extra gap 1 from both endpoints."],
+    "empire": ["固定 |x| ≤ 4 的小片会限制窗口移动，连远方始终留在窗内的点也随之固定。", "Fixing the patch |x| ≤ 4 restricts the window; even distant points that stay inside throughout are fixed."],
+    "cassini": ["φ 的幂交替贴近横轴，长方形面积始终为 |FₖFₖ₊₂ − Fₖ₊₁²| = 1。", "Powers of φ approach the axis alternately; each rectangle has area |FₖFₖ₊₂ − Fₖ₊₁²| = 1."],
+    "returns": ["黄金角轨道反复进入 (0.2, 0.8)；品红括号仅标出已画步骤中的最长回归间隔。", "The golden-angle orbit revisits (0.2, 0.8); the magenta bracket is the longest gap among the drawn steps only."],
+    "narrow": ["窄窗 (0.45, 0.55) 使回归更稀；图中 233 步的最长间隔不是定理所保证的 M。", "The narrow window (0.45, 0.55) makes visits rarer; the sample’s longest gap is not the theorem’s M."],
+    "window": ["菱形三十面体内，点到边界的距离 d∂ 是可容扰动的半径；靠边时半径缩小。", "Inside the rhombic triacontahedron, distance d∂ to the boundary is the disturbance radius; it shrinks near an edge."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：上下拖动窗口，拖时间轴，换场景，固定一小片，或改观测窗。随时可以再选一张卡。', 'Free play: drag the window up and down, scrub the rail, change the scene, fix a patch or change the observation window. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

@@ -914,8 +914,19 @@
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "zeckendorf": ["K = 2 时剪去含 11 的枝，层数为斐波那契数；下方显示内部坐标 Σ εⱼψʲ。", "For K = 2, prune branches containing 11: level counts are Fibonacci numbers; below are coordinates Σ εⱼψʲ."],
+    "kbonacci": ["K 从 2 增至 8：皮索根 β_K 从圆外趋近 2，其余根在圆内，缺口为 β_K^−K。", "As K grows from 2 to 8, the Pisot root β_K approaches 2 from outside the circle; other roots stay inside."],
+    "padic": ["p = 3，7 与 34 相差 −3³，余数路径在 k = 0…3 重合，k = 4 首次分开。", "For p = 3, 7 − 34 = −3³: their residue paths agree through k = 3 and first split at k = 4."],
+    "rauzy": ["不含 111 的字映到 Σ εⱼαʲ；0、10、110 三种前缀生成三个收缩副本，图为有限深度样本。", "Words without 111 map to Σ εⱼαʲ; prefixes 0, 10 and 110 give three contracted copies, sampled at finite depth."],
+    "clifford": ["沙盘水平坐标为 e(α)，高度为 e(β)/β^q；字长增加时旧点下沉，水平影子保持有界。", "Sandtable coordinates: horizontal e(α), height e(β)/β^q; longer words lower old points while shadows stay bounded."],
+    "self-reference": ["余弦蛛网趋于 θ*，αⁿ 螺线趋于原点；θ* 与 |α| 相差约 0.2344%，接近但不相等。", "The cosine cobweb tends to θ*, the αⁿ spiral to zero; θ* and |α| differ by about 0.2344%."],
+    "entanglement": ["K = 3 接缝合法当且仅当 τ + ι < 3；右图可达秩满足 1 ≤ r₀ ≤ 6、1 ≤ r₁ ≤ 5。", "At a K = 3 seam, legality means τ + ι < 3; attainable ranks satisfy 1 ≤ r₀ ≤ 6 and 1 ≤ r₁ ≤ 5."],
+    "entropy": ["左为帕里重置链；右图品红格为观测未区分的点对，琥珀格为移除观测后新增的未区分对。", "Left: Parry reset chain; right: magenta pairs remain indistinguishable, amber pairs become so when an observation is removed."],
+  };
   const cards = kit.cards($('presets'), {
-    presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+    presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、改 K 与字长，拖动舞台转动沙盘或选一个点，拖时间轴。随时可以再选一张卡。', 'Free play: change the scene, K and the word length, drag the stage to turn the sandtable or pick a point, scrub the rail. Pick a card again at any time.']
   });
 

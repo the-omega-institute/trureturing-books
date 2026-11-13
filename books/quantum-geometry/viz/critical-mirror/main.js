@@ -206,7 +206,7 @@
     $('pillCount').querySelector('strong').textContent = String(n);
   }
 
-  const paint = kit.painter(() => { drawStage(); drawPlot(); drawText(); }, [$('stage'), $('plot')]);
+  const paint = kit.painter(() => { drawStage(); drawPlot(); drawText(); TRV.hudFit(); }, [$('stage'), $('plot')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({

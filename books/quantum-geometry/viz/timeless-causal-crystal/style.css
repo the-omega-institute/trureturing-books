@@ -5,3 +5,8 @@
   .hud-tr { gap: 3px; }
   .hud-tr .chip { padding: 4px 4px; letter-spacing: 0.04em; }
 }
+
+/* The tour bar selects the scene in a narrow cited figure. */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}

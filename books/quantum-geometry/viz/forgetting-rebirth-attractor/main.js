@@ -673,7 +673,7 @@
   };
   /** One more legend entry per scene: what the solid is (a schematic drawing of the same state). */
   const LEGEND3 = {
-    stair: ['dm', '实体：双曲面上半叶与投影线（示意，沿投影线压缩）', 'solid: ray-compressed hyperboloid (schematic)'],
+    stair: ['dm', '实体：双曲面上半叶与投影线（示意，沿投影线压缩）', 'solid: hyperboloid sheet, squeezed (model)'],
     samsara: ['dm', '实体：一圈一层的轮回塔（示意）', 'solid: one level per round (schematic tower)'],
     cayley: ['dm', '实体：w 圆盘的黎曼半球，球极投影', 'solid: Riemann hemisphere → w (stereographic)']
   };

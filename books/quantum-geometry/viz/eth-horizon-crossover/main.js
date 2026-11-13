@@ -294,7 +294,7 @@
     const leg = LEGEND[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
   }
-  const paint = kit.painter(() => { drawText(); drawStage(); drawPlots(); }, [$('stage'), $('plotA'), $('plotB')]);
+  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlots(); }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({
@@ -353,7 +353,17 @@
     clock.set(p.from || 0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "human": ["c = 1、n = 2¹⁶：示意曲线才降到穷举指数 1，PPSZ 指数为 0.386。", "At c = 1 and n = 2¹⁶, the schematic exponent only reaches brute force’s 1; PPSZ pays 0.386."],
+    "atoms": ["n = 2²⁶⁶ 时示意指数约 0.494，仍高于 PPSZ 的 0.386。", "At n = 2²⁶⁶, the schematic exponent is still 0.494, above PPSZ’s 0.386."],
+    "cross": ["c = 1 时示意曲线直到 n ≈ 2⁵⁵⁸ 才与 0.386 相交。", "For c = 1, the schematic curve meets 0.386 only at n ≈ 2⁵⁵⁸."],
+    "constant": ["c 减半，示意交叉点从 2⁵⁵⁸ 移至约 2⁵⁷；大 O 不决定这个常数。", "Halving c moves the schematic crossover from 2⁵⁵⁸ to about 2⁵⁷; big O does not fix c."],
+    "bridge": ["桥图锥域内最大秩等于最小割 6；单次抽样可更低，此定理不支持 3-SAT 算法主张。", "In the bridge-graph cone, maximum rank equals min-cut 6; samples may be lower, and this gives no 3-SAT algorithm."],
+    "narrow": ["外割为 5，三桥只容 3：5 × 5 流矩阵的秩至多为 3，这组维数在锥域外。", "Outer cuts are 5, but bridges carry only 3: the 5 × 5 flow matrix has rank at most 3, outside the cone."],
+    "geometric": ["λⱼ = 2^−(j+1)、τ = 1/8：三根柱过线，总预算 1 给出柱数上界 8。", "For λⱼ = 2^−(j+1) and τ = 1/8, three bars clear the line; budget 1 bounds their count by 8."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、调常数、换子句宽度 k、改维数、拖阈值。随时可以再选一张卡。', 'Free play: switch scenes, change the constant or the clause width k, change the dimensions, drag the threshold. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

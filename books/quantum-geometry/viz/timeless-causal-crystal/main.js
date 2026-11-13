@@ -408,14 +408,14 @@
       pages: [['cy', '全部书页', 'all the pages'], ['am', '读头所在的页', 'the page under the head'], ['vi', '翻页轴', 'the paging axis']],
       field: [['cy', '各处出发的流线', 'flow lines from everywhere'], ['am', '选中的那条', 'the chosen one'], ['dm', '场为零的对面点', 'the opposite point, where the field is zero']],
       line: [['cy', '走过的每一步', 'every step taken'], ['am', '当前的态', 'the current state'], ['dm', '起点附近的“其余”轴', 'the “rest” axis near the start']],
-      sos: [['cy', '2-SAT：消解闭包的阶（实心：推出空子句；空心：可满足）', '2-SAT: order of the resolution closure (filled: empty clause derived; hollow: satisfiable)'], ['mg', '3-XOR：示意的阶数阈值', '3-XOR: schematic order threshold'], ['am', '观察者的阶 M', 'the observer\'s order M']],
+      sos: [['cy', '2-SAT：消解闭包的阶', '2-SAT: resolution closure order'], ['cy', '实心：推出空子句；空心：可满足', 'filled: empty clause; hollow: satisfiable'], ['mg', '3-XOR：示意的阶数阈值', '3-XOR: schematic order threshold'], ['am', '观察者的阶 M', 'the observer\'s order M']],
       wild: [['cy', '见证丝与丝上的探针', 'the thread and the probe on it'], ['mg', '涡旋与通道外的探针', 'the vortices and the probes off the channel'], ['am', '探针此刻的位置', 'where the probes are now']]
     };
     const html = LEG[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== html) { $('legend').innerHTML = html; $('legend')._h = html; }
   }
 
-  const paint = kit.painter(() => { drawStage(); drawPlots(); drawText(); }, [$('stage'), $('plotA'), $('plotB')]);
+  const paint = kit.painter(() => { drawStage(); drawPlots(); drawText(); TRV.hudFit(); }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({
@@ -480,7 +480,13 @@
     else if (id === 'wilderness') { S.eps = 0.15; S.user = null; fEps.set(0.15); setScene('wild', 0); run(id); }
     if (id !== 'impossible') fWish.show();
   }
-  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
+  const FIGURE_NOTES = {
+    "window": ["实向量夹角 60° 与 45° 固定时，A·C 只能在 cos 105° 与 cos 15° 之间，边界共面。", "For real vectors with angles 60° and 45° fixed, A·C stays between cos 105° and cos 15°; edges are coplanar."],
+    "sos": ["2-SAT 消解闭包停在阶 2；随机 3-XOR/3-SAT 的文献平方和下界不推出 P ≠ NP。", "2-SAT resolution closes at order 2; literature sum-of-squares lower bounds for random 3-XOR/3-SAT do not settle P ≠ NP."],
+    "wilderness": ["青色探针沿丝到达目标，通道外的品红探针被涡旋困住；这是示意模型。", "The cyan probe follows the thread to the target; magenta probes outside the channel are trapped: a schematic model."],
+  };
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、拖滑块、在球上拖动 C、在荒野里点一下放一根探针。随时可以再选一张卡。', 'Free play: switch scenes, move the sliders, drag C on the sphere, click the wilderness to drop a probe. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
