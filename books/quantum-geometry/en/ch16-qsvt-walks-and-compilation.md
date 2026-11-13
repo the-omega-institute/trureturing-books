@@ -134,7 +134,7 @@ Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 **A straight line against a $\sqrt{n}$.** Width against the steps: the cyan quantum width is a straight line ($\sigma / n$ stays near $0.54$), the grey classical width is $\sqrt{n}$; at sixty steps it is $32.5$ against $7.75$. On a line the gap between them is a square, not an exponential; the exponential separation for the specific glued-trees oracle traversal task and its scope are in item 2 of [@rem-qsvt-walks-literature] (literature results, not formalized in this book), and the curves are the page's numbers.
 :::
 
-::: {.remark #rem-qsvt-walks-literature title="Full QSVT Realizability, Interval Sums of Squares, and the Glued-Trees Separation (Literature Result, Not Formalized in This Book)"}
+::: {.remark #rem-qsvt-walks-literature title="Full QSVT Realizability and the Glued-Trees Separation (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Two landmark theorems from the quantum algorithms literature govern the full scope of QSVT and quantum walks:
 
 1. **Quantum Singular Value Transformation (QSVT): complex unitary completion versus real-polynomial extraction** (A. Gilyén, Y. Su, G. H. Low, and N. Wiebe, *Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics*, Proc. 51st ACM STOC, 193–204, 2019, doi:10.1145/3313276.3316366, Theorem 3 and Theorem 17 / Corollary 18): Given a block encoding $\tilde{\Pi} U \Pi = A$ ($\norm{A}_{\mathrm{op}} \le 1$), the literature distinguishes two levels of polynomial realizability:
@@ -188,7 +188,11 @@ Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 
 2. **Exponential quantum-walk speedup on glued trees and its structural limits** (A. M. Childs, R. Cleve, E. Deotto, E. Farhi, S. Gutmann, and D. A. Spielman, *Exponential algorithmic speedup by a quantum walk*, Proc. 35th ACM STOC, 59–68, 2003, doi:10.1145/780542.780552, arXiv:quant-ph/0209131): On two depth-$n$ binary trees joined by a random cycle of alternating edges at the leaves, a continuous-time quantum walk starting at the entrance root remains confined to the $(2n+2)$-dimensional symmetric column subspace and reaches the `EXIT` root in $\mathrm{poly}(n)$ time, whereas Childs et al. prove that any classical algorithm making at most $2^{n/6}$ oracle queries finds the `EXIT` vertex with probability at most $4\cdot 2^{-n/6}$ (yielding a $2^{\Omega(n)}$ classical query lower bound for bounded success probability). This exponential separation relies critically on graph symmetry, oracle access, and task definition; on general unstructured graphs, interference does not automatically cancel all backtracking paths.
 
-**From interval sums of squares to continuous matrix completion.**
+:::
+
+## From Interval Sums of Squares to Continuous Matrix Completion {#sec-interval-sos-completion}
+
+<!-- Unpublished WIP: resolve the new Lean references through the canonical pin workflow only after the source declarations merge into dev and pass the first validation there; the current lock and previous exports do not validate this section for publication. -->
 
 **What is missing at the endpoint?** Take $p(x)=x/2$. If the real target $p$ itself must occupy the diagonal, the condition $p(x)^2+(1-x^2)Q(x)^2=1$ gives the impossible equality $1/4=1$ at $x=1$. The missing weight can instead enter the imaginary part of the diagonal: choose
 
@@ -202,7 +206,11 @@ P(X)&=p(X)+iB(X)\\
 $$
 Then $|P(1)|=1$ at the endpoint, while $\operatorname{Re}P(x)=p(x)$. The real target is preserved; the other components needed for normalization now have room to fit.
 
-**Interval sums of squares at arbitrary degree.** The literature basis is [arXiv:1806.01838v1, Lemma 6 and Theorems 3 and 5](https://arxiv.org/abs/1806.01838v1) of the paper by Gilyén, Su, Low, and Wiebe cited above (STOC 2019, doi:10.1145/3313276.3316366). The explanation follows that lemma and the proofs of `exists_sumsq_decomposition` and `exists_complement` in shosonoda's [fixed revision of lean-qsvt](https://github.com/auto-res/lean-qsvt/tree/42c4b9149d5957db497e4226bc02da92d10f7a3c); the source is copyright shosonoda (2026), under Apache-2.0. We present the source argument and explicit algebra here; they are **not formalized in this book**.
+The literature basis for interval sums of squares is [arXiv:1806.01838v1, Lemma 6 and Theorems 3 and 5](https://arxiv.org/abs/1806.01838v1) of the paper by Gilyén, Su, Low, and Wiebe cited above (STOC 2019, doi:10.1145/3313276.3316366). The explanation follows that lemma and the proofs of `exists_sumsq_decomposition` and `exists_complement` in shosonoda's [fixed revision of lean-qsvt](https://github.com/auto-res/lean-qsvt/tree/42c4b9149d5957db497e4226bc02da92d10f7a3c); the source is copyright shosonoda (2026), under Apache-2.0. [@thm-interval-sumsq-decomposition] cites the main repository's reuse of the original sum-of-squares proof; [@thm-phase-unitary-completion] cites its native continuous matrix-field application. No mathematical novelty is claimed.
+
+Write $c(R)=R.\mathrm{map}(\mathrm{algebraMap}\,\mathbb R\,\mathbb C)$ for complexification of a real polynomial. In the source, $\operatorname{IsEven}(c(R))$ means that every odd coefficient vanishes, and $\operatorname{HasParity}(c(R),m)$ means that coefficients of parity opposite to $m$ vanish. For real polynomials these are written as $R(-X)=R(X)$ and $R(-X)=(-1)^mR(X)$, respectively. Throughout, natural-number subtraction $k-1$ is truncated to $\max(k-1,0)$, and $\operatorname{natDegree}0=0$.
+
+::: {.theorem #thm-interval-sumsq-decomposition title="Interval sums of squares for even polynomials at any degree budget" lean="D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_sumsq_decomposition"}
 
 For any $k\in\mathbb N$ and real polynomial $A\in\mathbb R[X]$, assume
 
@@ -225,6 +233,9 @@ C(-X)&=(-1)^{\max(k-1,0)}C(X),\\
 k=0&\ \Longrightarrow\ C=0.
 \end{aligned}
 $$
+:::
+
+::: proof
 The bound uses truncated natural-number subtraction, $\max(k-1,0)$, and the zero polynomial has $\operatorname{natDegree}$ equal to $0$; it is both even and odd. In particular, $\operatorname{natDegree}C\le0$ only says that $C$ is constant and **cannot replace** the condition $C=0$ when $k=0$. If $A=0$, choose $B=C=0$ for any $k$; if $k=0$, then $A=a\ge0$ is constant, and $B=\sqrt a$, $C=0$ works.
 
 **Why can the factors be completed one at a time?** Evenness and real coefficients pair the roots of a nonzero polynomial as $s,-s,\bar s,-\bar s$, with multiplicities preserved. An interior real root must have even multiplicity, since otherwise the sign would change across it; the source uses this to remove a double factor first. There are three kinds of nonnegative factors to remove:
@@ -269,6 +280,59 @@ $$
 $$
 
 The same identity preserves the sum of squares while increasing the budget from $k$ to $k+1$ and toggling the parities. Thus a lower-degree polynomial can still meet the specified parity budget; $\deg A=2k$ is not required.
+
+The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-phase-unitary-completion title="Native continuous unitary completion of a bounded parity polynomial" lean="D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_phase_unitary_completion"}
+Let $k\in\mathbb N$ and $p\in\mathbb R[X]$ satisfy $\operatorname{HasParity}(c(p),k)$, and assume
+
+$$
+\begin{aligned}
+\operatorname{natDegree}p&\le k,\\
+p(x)^2&\le1\quad(x\in[-1,1]).
+\end{aligned}
+$$
+
+Put $T=\operatorname{AddCircle}(1:\mathbb R)=\mathbb R/\mathbb Z$, $z(t)=\operatorname{windingPhase}(t)$, $x(t)=\operatorname{Re}z(t)$, and $y(t)=\operatorname{Im}z(t)$. There exist $B,C\in\mathbb R[X]$ and $U:\mathrm{CyclicObservable}\,2$, the type of continuous complex matrix fields on $T$ with rows and columns indexed by $\mathrm{ZMod}\,2$, such that
+
+$$
+\begin{aligned}
+1-p^2&=B^2+(1-X^2)C^2,\\
+\operatorname{natDegree}B&\le k,\\
+\operatorname{natDegree}C&\le\max(k-1,0),\\
+k=0&\ \Longrightarrow\ C=0.
+\end{aligned}
+$$
+
+Both $\operatorname{HasParity}(c(B),k)$ and $\operatorname{HasParity}(c(C),\max(k-1,0))$ hold. The first line is an identity in $\mathbb R[X]$. The field witness satisfies $U=\operatorname{phaseCompletion}(p,B,C)$: for every $t\in T$,
+
+$$
+U(t)=
+\begin{pmatrix}
+p(x(t))+iB(x(t))&iy(t)C(x(t))\\
+iy(t)C(x(t))&p(x(t))-iB(x(t))
+\end{pmatrix}.
+$$
+
+In the continuous matrix-field algebra, $\operatorname{star}$ is pointwise conjugate transpose and $1$ is the constant identity matrix field. All of the following hold:
+
+$$
+\begin{aligned}
+\operatorname{star}(U)\,U&=1,\\
+U\,\operatorname{star}(U)&=1,\\
+\det U(t)&=1\quad(t\in T),\\
+\operatorname{Re}(U(t)_{00})&=p(x(t))\quad(t\in T).
+\end{aligned}
+$$
+:::
+
+::: proof
+The polynomial $A=1-p^2$ satisfies the evenness, degree, and closed-interval nonnegativity assumptions of [@thm-interval-sumsq-decomposition], which supplies $B,C$ with every stated constraint. The native circle coordinates satisfy $x(t)^2+y(t)^2=1$, so evaluation of the polynomial identity gives $p(x(t))^2+B(x(t))^2+y(t)^2C(x(t))^2=1$. Every matrix entry combines continuous coordinates with polynomial evaluation. Direct multiplication gives both star-product identities and the determinant identity, while the upper-left real part follows from the matrix formula. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark #rem-interval-sos-completion-bridges title="Completion by hand and its applicability limits"}
+The explicit algebra below retains the completion's manual derivation. The complex polynomial pair, the full entrywise real-part and Hermitian-part identities, and the comparison with the interval square-root pullback are manual explanations outside the conclusions of the two Lean declarations above. Neither declaration supplies phase product decomposition or query bounds.
 
 **Turning the deficit into the remaining matrix components.** Now let a real polynomial $p$ satisfy $\operatorname{natDegree}p\le k$, $p(-X)=(-1)^kp(X)$, and $p(x)^2\le1$ for $x\in[-1,1]$. Apply the decomposition to the even polynomial $A=1-p^2$, retain all degree, parity, and $k=0$ conditions on $B,C$, and set $P=p+iB$, $Q=C$. Then
 

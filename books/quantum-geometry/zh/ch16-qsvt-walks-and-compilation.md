@@ -134,7 +134,7 @@ $$
 **一条直线对一条 $\sqrt{n}$。** 宽度随步数：青色的量子宽度是一条直线（$\sigma / n$ 停在 $0.54$ 附近），灰色的经典宽度是 $\sqrt{n}$；走到 $60$ 步是 $32.5$ 对 $7.75$。在一条线上，两者之差是平方关系，不是指数；黏合树上特定黑盒穿行任务的指数分离及其适用边界见 [@rem-qsvt-walks-literature] 第 2 条（文献结果，未在本书形式化），图中曲线是页面的数值。
 :::
 
-::: {.remark #rem-qsvt-walks-literature title="完整 QSVT 可实现性、区间平方和与黏合树加速（文献结果，未在本书形式化）"}
+::: {.remark #rem-qsvt-walks-literature title="完整 QSVT 可实现性与黏合树加速（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于第一节的量子奇异值变换（QSVT）与第二节的图上量子游走，算法文献中的完整定理及其精确前提如下：
 
 1. **量子奇异值变换（QSVT）的复幺正补全与实目标多项式提取定理**（A. Gilyén, Y. Su, G. H. Low, and N. Wiebe, *Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics*, Proc. 51st ACM STOC, 193–204, 2019, doi:10.1145/3313276.3316366，Theorem 3 与 Theorem 17 / Corollary 18）：设矩阵 $A$ 通过块编码（block encoding）嵌入幺正算子 $U$ 的投影块 $\tilde{\Pi} U \Pi = A$（$\norm{A}_{\mathrm{op}} \le 1$）。文献严格区分两层可实现性定理：
@@ -188,7 +188,11 @@ $$
 
 2. **量子游走指数加速的图结构与黑盒边界**（A. M. Childs, R. Cleve, E. Deotto, E. Farhi, S. Gutmann, and D. A. Spielman, *Exponential algorithmic speedup by a quantum walk*, Proc. 35th ACM STOC, 59–68, 2003, doi:10.1145/780542.780552, arXiv:quant-ph/0209131）：在两棵深度为 $n$ 的二叉树在叶节点随机交错黏合而成的“黏合树（glued trees）”图族上，给定邻接表黑盒（oracle）访问，从入口根顶点出发的连续时间量子游走因在每一层等距列子空间上保持对称均匀叠加，把指数多顶点的图坍缩为长度为 $2n+2$ 的一维链，从而在 $\mathrm{poly}(n)$ 时间内以有界概率穿透到出口根顶点 `EXIT`；而 Childs 等人证明，任何最多执行 $2^{n/6}$ 次黑盒查询的经典算法找到 `EXIT` 顶点的概率至多为 $4\cdot 2^{-n/6}$（即要达到常数成功概率必须付出 $2^{\Omega(n)}$ 次经典黑盒查询）。这一指数优势严格依赖于图族的层对称约简、黑盒访问模型与特定穿行任务定义；对于缺乏此类对称结构的任意一般图或无结构迷宫，量子游走的干涉相消并不能自动把所有回头路径清零。
 
-**从区间平方和到连续矩阵补全。**
+:::
+
+## 从区间平方和到连续矩阵补全 {#sec-interval-sos-completion}
+
+<!-- 未出版 WIP：本节新增 Lean 引用待源声明合入 dev 并通过首次验证后，由规范 pin 流程解析；当前锁文件与旧导出不构成本节的出版验证。 -->
 
 **先看端点缺了什么。** 取 $p(x)=x/2$。若坚持把实目标 $p$ 本身放在对角线上，要求 $p(x)^2+(1-x^2)Q(x)^2=1$，那么 $x=1$ 立即给出不可能的 $1/4=1$。缺口可以放进对角元的虚部：取
 
@@ -202,7 +206,11 @@ P(X)&=p(X)+iB(X)\\
 $$
 这样端点处 $|P(1)|=1$，同时 $\operatorname{Re}P(x)=p(x)$。实目标仍被保留，只是归一化所需的其余分量有了容身之处。
 
-**任意次数的区间平方和。** 这一步的文献依据是 Gilyén、Su、Low 与 Wiebe 上述论文的 [arXiv:1806.01838v1，Lemma 6 与 Theorems 3、5](https://arxiv.org/abs/1806.01838v1)（STOC 2019，doi:10.1145/3313276.3316366）。以下按该引理及 shosonoda 的 [lean-qsvt 固定版本](https://github.com/auto-res/lean-qsvt/tree/42c4b9149d5957db497e4226bc02da92d10f7a3c) 中 `exists_sumsq_decomposition`、`exists_complement` 的证明路线展开；该源码版权归 shosonoda（2026），采用 Apache-2.0 许可。这里引用原证明并作显式代数推导，**未在本书形式化**。
+区间平方和的文献依据是 Gilyén、Su、Low 与 Wiebe 上述论文的 [arXiv:1806.01838v1，Lemma 6 与 Theorems 3、5](https://arxiv.org/abs/1806.01838v1)（STOC 2019，doi:10.1145/3313276.3316366）。以下按该引理及 shosonoda 的 [lean-qsvt 固定版本](https://github.com/auto-res/lean-qsvt/tree/42c4b9149d5957db497e4226bc02da92d10f7a3c) 中 `exists_sumsq_decomposition`、`exists_complement` 的证明路线展开；该源码版权归 shosonoda（2026），采用 Apache-2.0 许可。[@thm-interval-sumsq-decomposition] 引用主仓对原平方和证明的复用，[@thm-phase-unitary-completion] 引用其原生连续矩阵场应用；不主张数学新颖性。
+
+记 $c(R)=R.\mathrm{map}(\mathrm{algebraMap}\,\mathbb R\,\mathbb C)$ 为实多项式的复化。源码中的 $\operatorname{IsEven}(c(R))$ 表示所有奇次系数为零，$\operatorname{HasParity}(c(R),m)$ 表示与 $m$ 奇偶性相反的系数为零；对实多项式，这分别写成 $R(-X)=R(X)$ 与 $R(-X)=(-1)^mR(X)$。以下 $k-1$ 的自然数减法均取截断值 $\max(k-1,0)$，$\operatorname{natDegree}0=0$。
+
+::: {.theorem #thm-interval-sumsq-decomposition title="任意次数预算下的偶多项式区间平方和" lean="D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_sumsq_decomposition"}
 
 给定任意 $k\in\mathbb N$ 与实多项式 $A\in\mathbb R[X]$，假设
 
@@ -225,6 +233,9 @@ C(-X)&=(-1)^{\max(k-1,0)}C(X),\\
 k=0&\ \Longrightarrow\ C=0.
 \end{aligned}
 $$
+:::
+
+::: proof
 这里自然数减法取截断值 $\max(k-1,0)$，零多项式的 $\operatorname{natDegree}$ 为 $0$；零多项式同时具有偶性与奇性。特别地，$\operatorname{natDegree}C\le0$ 只说明 $C$ 为常数，**不能替代** $k=0$ 时的 $C=0$ 条件。若 $A=0$，任意 $k$ 都可取 $B=C=0$；若 $k=0$，$A=a\ge0$ 为常数，可取 $B=\sqrt a$、$C=0$。
 
 **为何因子能逐个补全？** 偶性与实系数使非零多项式的根按 $s,-s,\bar s,-\bar s$ 配对，连重数也保留。区间内部的实根必须具有偶重数，否则穿过根时会变号；原证明据此先剥出二重因子。具体可剥出的非负因子有三类：
@@ -269,6 +280,59 @@ $$
 $$
 
 同一恒等式说明平方和不变；预算由 $k$ 增至 $k+1$，奇偶性随之翻转。因此次数不足时也能补到指定的奇偶预算，不要求 $\deg A=2k$。
+
+完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-phase-unitary-completion title="有界奇偶多项式的原生连续酉补全" lean="D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_phase_unitary_completion"}
+设 $k\in\mathbb N$、$p\in\mathbb R[X]$ 满足 $\operatorname{HasParity}(c(p),k)$，且
+
+$$
+\begin{aligned}
+\operatorname{natDegree}p&\le k,\\
+p(x)^2&\le1\quad(x\in[-1,1]).
+\end{aligned}
+$$
+
+令 $T=\operatorname{AddCircle}(1:\mathbb R)=\mathbb R/\mathbb Z$，$z(t)=\operatorname{windingPhase}(t)$，$x(t)=\operatorname{Re}z(t)$、$y(t)=\operatorname{Im}z(t)$。则存在 $B,C\in\mathbb R[X]$ 与 $U:\mathrm{CyclicObservable}\,2$，其中该类型是 $T$ 上以 $\mathrm{ZMod}\,2$ 为行列指标的连续复矩阵场，使
+
+$$
+\begin{aligned}
+1-p^2&=B^2+(1-X^2)C^2,\\
+\operatorname{natDegree}B&\le k,\\
+\operatorname{natDegree}C&\le\max(k-1,0),\\
+k=0&\ \Longrightarrow\ C=0.
+\end{aligned}
+$$
+
+并有 $\operatorname{HasParity}(c(B),k)$ 与 $\operatorname{HasParity}(c(C),\max(k-1,0))$。这里第一行是 $\mathbb R[X]$ 中的恒等式。矩阵场见证满足 $U=\operatorname{phaseCompletion}(p,B,C)$，即对每个 $t\in T$，
+
+$$
+U(t)=
+\begin{pmatrix}
+p(x(t))+iB(x(t))&iy(t)C(x(t))\\
+iy(t)C(x(t))&p(x(t))-iB(x(t))
+\end{pmatrix}.
+$$
+
+在连续矩阵场代数中，$\operatorname{star}$ 是逐点共轭转置，$1$ 是常值单位矩阵场，同时有
+
+$$
+\begin{aligned}
+\operatorname{star}(U)\,U&=1,\\
+U\,\operatorname{star}(U)&=1,\\
+\det U(t)&=1\quad(t\in T),\\
+\operatorname{Re}(U(t)_{00})&=p(x(t))\quad(t\in T).
+\end{aligned}
+$$
+:::
+
+::: proof
+$A=1-p^2$ 满足 [@thm-interval-sumsq-decomposition] 的偶性、次数与闭区间非负条件，故得到具有所列全部约束的 $B,C$。对原生圆坐标有 $x(t)^2+y(t)^2=1$，求值平方和恒等式得 $p(x(t))^2+B(x(t))^2+y(t)^2C(x(t))^2=1$。各矩阵元由连续坐标与多项式求值组成；直接相乘给出左右两条星乘积与行列式等式，左上角实部则由矩阵公式读出。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-interval-sos-completion-bridges title="补全的手算展开与适用边界"}
+以下保留补全的显式代数展开。复多项式配对、逐矩阵元实部与 Hermitian 部分的完整等式、以及与区间平方根拉回的比较，是手算说明，未包含在上述两条 Lean 声明的结论中；相位乘积分解与查询界也不由它们给出。
 
 **把亏量变成矩阵的其余分量。** 现在令实多项式 $p$ 满足 $\operatorname{natDegree}p\le k$、$p(-X)=(-1)^kp(X)$，以及 $p(x)^2\le1$（$x\in[-1,1]$）。对偶多项式 $A=1-p^2$ 应用上述分解，保留所得 $B,C$ 的全部次数、奇偶与 $k=0$ 条件，再置 $P=p+iB$、$Q=C$。于是
 
