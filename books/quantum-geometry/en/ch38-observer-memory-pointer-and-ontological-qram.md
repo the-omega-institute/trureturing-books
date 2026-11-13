@@ -185,8 +185,25 @@ The four conjuncts state:
 
 1. For every $n\in\mathbb N$, $a\in A_n$, external bus label $p\in Q$, and natural $k\le n$, `load n k (loading n a p 0) = loading n a p k`.
 2. For every $n\in\mathbb N$, $a\in A_n$, and $p\in Q$, `transport n (input n (programmed n a n) p) = arrived n a p`; moreover, for every $i\in A_n$, the transported `leaf` value is $p$ if $i=a$ and $W$ otherwise.
-3. For every $n\in\mathbb N$, $D:A_n\to\operatorname{Bool}$, $a\in A_n$, and either Boolean input bus value $b$, $\operatorname{query}(n,D)(\operatorname{clean}(n,a,b))=\operatorname{clean}(n,a,b\mathbin{\oplus}D(a))$.
-4. For every $n\in\mathbb N$ and $D:A_n\to\operatorname{Bool}$, both $Q_{n,D}^\dagger Q_{n,D}=1$ and $Q_{n,D}Q_{n,D}^\dagger=1$ hold on all of $S_n$; for every complex amplitude function $\psi:A_n\times\operatorname{Bool}\to\mathbb C$, $Q_{n,D}\operatorname{initialized}(n,\psi)=\operatorname{initialized}(n,(a,b)\mapsto\psi(a,b\mathbin{\oplus}D(a)))$, without a normalization assumption.
+3. For every $n\in\mathbb N$, $D:A_n\to\operatorname{Bool}$, $a\in A_n$, and either Boolean input bus value $b$,
+
+   $$
+   \begin{aligned}
+   &\operatorname{query}(n,D)(\operatorname{clean}(n,a,b))\\
+   &\quad=\operatorname{clean}(n,a,b\mathbin{\oplus}D(a)).
+   \end{aligned}
+   $$
+4. For every $n\in\mathbb N$ and $D:A_n\to\operatorname{Bool}$, both $Q_{n,D}^\dagger Q_{n,D}=1$ and $Q_{n,D}Q_{n,D}^\dagger=1$ hold on all of $S_n$; for every complex amplitude function $\psi:A_n\times\operatorname{Bool}\to\mathbb C$,
+
+   $$
+   \begin{aligned}
+   &Q_{n,D}\operatorname{initialized}(n,\psi)\\
+   &\quad=\operatorname{initialized}\bigl(n,(a,b)\mapsto\\
+   &\qquad\quad\psi(a,b\mathbin{\oplus}D(a))\bigr)
+   \end{aligned}
+   $$
+
+   without a normalization assumption.
 
 Every quantifier includes $n=0$: there are no address slots or routers, but there is one empty address and one spatial leaf, and the query still exchanges the bus, reads, and returns it. Clauses 1 and 2 allow payload $W$, in which case every transported leaf is vacuum; Clauses 3 and 4 use the two encoded Boolean bus labels.
 :::

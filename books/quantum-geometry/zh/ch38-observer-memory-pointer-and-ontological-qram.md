@@ -185,8 +185,25 @@ correctness :
 
 1. 对任意 $n\in\mathbb N$、$a\in A_n$、外部总线标签 $p\in Q$ 与自然数 $k\le n$，`load n k (loading n a p 0) = loading n a p k`。
 2. 对任意 $n\in\mathbb N$、$a\in A_n$ 与 $p\in Q$，`transport n (input n (programmed n a n) p) = arrived n a p`，并且对每个 $i\in A_n$，输运后 `leaf` 的值在 $i=a$ 时为 $p$，否则为 $W$。
-3. 对任意 $n\in\mathbb N$、$D:A_n\to\operatorname{Bool}$、$a\in A_n$ 与两个布尔总线初值中的任意一个 $b$，$\operatorname{query}(n,D)(\operatorname{clean}(n,a,b))=\operatorname{clean}(n,a,b\mathbin{\oplus}D(a))$。
-4. 对任意 $n\in\mathbb N$、$D:A_n\to\operatorname{Bool}$，$Q_{n,D}^\dagger Q_{n,D}=1$ 与 $Q_{n,D}Q_{n,D}^\dagger=1$ 在整个 $S_n$ 上同时成立；对任意复振幅 $\psi:A_n\times\operatorname{Bool}\to\mathbb C$，$Q_{n,D}\operatorname{initialized}(n,\psi)=\operatorname{initialized}(n,(a,b)\mapsto\psi(a,b\mathbin{\oplus}D(a)))$，不要求归一化。
+3. 对任意 $n\in\mathbb N$、$D:A_n\to\operatorname{Bool}$、$a\in A_n$ 与两个布尔总线初值中的任意一个 $b$：
+
+   $$
+   \begin{aligned}
+   &\operatorname{query}(n,D)(\operatorname{clean}(n,a,b))\\
+   &\quad=\operatorname{clean}(n,a,b\mathbin{\oplus}D(a)).
+   \end{aligned}
+   $$
+4. 对任意 $n\in\mathbb N$、$D:A_n\to\operatorname{Bool}$，$Q_{n,D}^\dagger Q_{n,D}=1$ 与 $Q_{n,D}Q_{n,D}^\dagger=1$ 在整个 $S_n$ 上同时成立；对任意复振幅 $\psi:A_n\times\operatorname{Bool}\to\mathbb C$，
+
+   $$
+   \begin{aligned}
+   &Q_{n,D}\operatorname{initialized}(n,\psi)\\
+   &\quad=\operatorname{initialized}\bigl(n,(a,b)\mapsto\\
+   &\qquad\quad\psi(a,b\mathbin{\oplus}D(a))\bigr)
+   \end{aligned}
+   $$
+
+   不要求归一化。
 
 所有量词包括 $n=0$：此时没有地址槽或路由器，但有唯一空地址与一个空间叶，查询仍实际交换总线、读出并返回。第 1、2 款允许载荷为 $W$，此时输运后的所有叶均为真空；第 3、4 款使用编码的两个布尔总线标签。
 :::
