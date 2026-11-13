@@ -133,13 +133,32 @@
 ::: {.remark #rem-ch31-ckw-monogamy-literature title="三量子比特 CKW 纠缠单配性不等式与 Bell / GHZ / W 态预算核验（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 多体二元纠缠配额的单配性（Monogamy of Entanglement）定量不等式引自量子信息经典文献，未包含在本书锁定的形式化声明集中：
 
-1. **三量子比特 CKW 单配性不等式（V. Coffman, J. Kundu & W. K. Wootters, *Phys. Rev. A* **61**, 052306, 2000）与 $n$ 比特推广（T. J. Osborne & F. Verstraete, *Phys. Rev. Lett.* **96**, 220503, 2006）**：对任意三量子比特量子态 $\rho_{ABC}$（纯态或混合态），记二体纠缠度（2-tangle）$\tau(\mathbf{A}:\mathbf{B}) := C(\rho_{AB})^2$、$\tau(\mathbf{A}:\mathbf{C}) := C(\rho_{AC})^2$ 为 Wootters 并发度（concurrence）的平方，记单体约化态 $\rho_A = \operatorname{Tr}_{BC}(\rho_{ABC}) = \frac{1}{2}(I_2 + \mathbf{r}_A\cdot\boldsymbol{\sigma})$ 的布洛赫向量为 $\mathbf{r}_A \in \mathbb{R}^3$（$\|\mathbf{r}_A\| \le 1$）。则二体纠缠配额恒满足
+1. **三量子比特 CKW 单配性不等式（V. Coffman, J. Kundu & W. K. Wootters, *Phys. Rev. A* **61**, 052306, 2000）与 $n$ 比特推广（T. J. Osborne & F. Verstraete, *Phys. Rev. Lett.* **96**, 220503, 2006）**：对任意三量子比特量子态 $\rho_{ABC}$（纯态或混合态），记二体纠缠度（2-tangle）$\tau(\mathbf{A}:\mathbf{B}) := C(\rho_{AB})^2$、$\tau(\mathbf{A}:\mathbf{C}) := C(\rho_{AC})^2$ 为 Wootters 并发度（concurrence）的平方，记单体约化态 $\rho_A = \operatorname{Tr}_{BC}(\rho_{ABC}) = \frac{1}{2}(I_2 + \mathbf{r}_A\cdot\boldsymbol{\sigma})$ 的布洛赫向量为 $\mathbf{r}_A \in \mathbb{R}^3$（$\|\mathbf{r}_A\| \le 1$）。三个边缘 $\rho_{AB},\rho_{AC},\rho_A$ 均取自同一个 $\rho_{ABC}$ 的实际偏迹。
+
+   对二比特密度矩阵 $P$，在计算基中令 $\widetilde P=(\sigma_y\otimes\sigma_y)\overline P(\sigma_y\otimes\sigma_y)$，其中 $\sigma_y=\begin{pmatrix}0&-i\\i&0\end{pmatrix}$，横线表示逐项复共轭。Wootters 的谱公式为
+
+   $$
+   C(P)=\max\{0,\lambda_1-\lambda_2-\lambda_3-\lambda_4\},
+   $$
+
+   其中 $\lambda_1\ge\lambda_2\ge\lambda_3\ge\lambda_4\ge0$ 是 $P\widetilde P$ 的四个特征值的非负平方根，计代数重数。该乘积一般不自伴；其特征值为非负实数是谱公式的数学依据，不能仅凭矩阵名称省略。零谱、重根和低秩态均包括在内（W. K. Wootters, *Phys. Rev. Lett.* **80**, 2245–2248, 1998，[原文](https://arxiv.org/abs/quant-ph/9709029)）。
+
+   对 $\mathbf A|\mathbf{BC}$ 切分，令 $\mathcal E(\rho_{ABC})$ 包含所有有限纯态分解 $\rho_{ABC}=\sum_jp_j|\psi_j\rangle\langle\psi_j|$，其中 $p_j\ge0$、$\sum_jp_j=1$、$\langle\psi_j|\psi_j\rangle=1$，并记 $\rho_A^{(j)}=\operatorname{Tr}_{BC}|\psi_j\rangle\langle\psi_j|$。混合态中间项按纯态预算的凸顶定义：
+
+   $$
+   \tau(\mathbf A:\mathbf{BC})
+   :=\inf_{\mathcal E(\rho_{ABC})}\sum_jp_j\,4\det\rho_A^{(j)}.
+   $$
+
+   零权重允许存在，定义不要求预先选出最优分解。这是 $2\times4$ 切分的纯态代价下确界；上面的二比特谱公式只用于 $\rho_{AB}$ 与 $\rho_{AC}$。完整配额为
 
    $$
    \tau(\mathbf{A}:\mathbf{B}) + \tau(\mathbf{A}:\mathbf{C}) \;\le\; \tau(\mathbf{A}:\mathbf{BC}) \;\le\; 4\det\rho_A \;=\; 1 - \|\mathbf{r}_A\|^2 \;\le\; 1
    $$
 
-   （对三量子比特纯态 $|\Psi_{ABC}\rangle$，$\tau(\mathbf{A}:\mathbf{BC}) = 4\det\rho_A = 1 - \|\mathbf{r}_A\|^2$ 取等号，差值 $\tau_3 := \tau(\mathbf{A}:\mathbf{BC}) - \tau(\mathbf{A}:\mathbf{B}) - \tau(\mathbf{A}:\mathbf{C}) \ge 0$ 定义三体残余纠缠度 3-tangle；Osborne 与 Verstraete 进一步证明 $n$ 量子比特满足 $\sum_{j=2}^n \tau(A_1 : A_j) \le \tau(A_1 : A_2\cdots A_n)$）；
+   混合态左界使用二体平方并发度的凸性：对同一个有限分解的每个纯态先应用 CKW，再按同一组 $p_j$ 平均，最后取下确界。右侧中间上界来自 $4\det\rho_A=1-\|\mathbf r_A\|^2$ 对密度矩阵的凹性。这里的谱公式、凸顶连接与 CKW 均依赖文献证明，本书尚未将这条完整链形式化，详见 [CKW 原文式 (1)–(14)](https://arxiv.org/abs/quant-ph/9907047)。
+
+   对三量子比特纯态 $|\Psi_{ABC}\rangle$，$\tau(\mathbf{A}:\mathbf{BC}) = 4\det\rho_A = 1 - \|\mathbf{r}_A\|^2$ 取等号，差值 $\tau_3 := \tau(\mathbf{A}:\mathbf{BC}) - \tau(\mathbf{A}:\mathbf{B}) - \tau(\mathbf{A}:\mathbf{C}) \ge 0$ 定义纯态三体残余纠缠度 3-tangle；混合态的三缠结需另作凸顶延拓，不能直接把这个差值当作其定义。Osborne 与 Verstraete 进一步证明 $n$ 量子比特满足 $\sum_{j=2}^n \tau(A_1 : A_j) \le \tau(A_1 : A_2\cdots A_n)$；
 2. **三类标准三量子比特纯态的账本核验**：
    - **贝尔对直积孤立态 $|\Phi^+\rangle_{AB}\otimes|0\rangle_C$**：$\rho_A = \frac{1}{2}I_2$（$\|\mathbf{r}_A\| = 0$），$\mathbf{A}$ 与 $\mathbf{B}$ 倾尽预算结成最大二体纠缠 $\tau(\mathbf{A}:\mathbf{B}) = 1$，迫使 $\tau(\mathbf{A}:\mathbf{C}) = 0$——一旦与 $\mathbf{B}$ 满额相融，对任何第三方 $\mathbf{C}$ 的纠缠容量严格归零；
    - **$W$ 态 $|W\rangle = \frac{1}{\sqrt{3}}(|100\rangle + |010\rangle + |001\rangle)$**：单体边缘 $\rho_A = \operatorname{diag}(\frac{2}{3}, \frac{1}{3})$ 保留局部极化 $\|\mathbf{r}_A\| = \frac{1}{3}$，故可用纠缠上限为 $1 - \|\mathbf{r}_A\|^2 = \frac{8}{9}$，平分给两段二体纠缠 $\tau(\mathbf{A}:\mathbf{B}) = \tau(\mathbf{A}:\mathbf{C}) = \left(\frac{2}{3}\right)^2 = \frac{4}{9}$，相加恰好饱和上界 $\frac{4}{9} + \frac{4}{9} = \frac{8}{9}$（三体残余 $\tau_3 = 0$）；
