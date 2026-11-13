@@ -1367,3 +1367,38 @@ EPUB、EPUBCheck 与 PDF 阅读尺度子集未完成：本次可用的命名系�
 **残留而非全部关闭：F1–F5及F7已作对应事实修正；F6在指定正文、文献条目及双语理论抽屉已修正，但实验室 `index.html` 输入／当前第139行的双语 ARGUED 依据框仍以“一般一维有能隙基态”概括，缺少同组假设。** 该现存重复消费者由本次图片检查指出；唯一媒体执行仅获准改理论抽屉，额度已用完，未追加媒体编辑或执行，故F6不作完全关闭声明，交调用方裁定后续。本次不扩展处理A1／A2，也不因检查通过撤销既有读者缺陷。
 
 证据根为 `/private/tmp/qg-main-a6-ch29-ch30-factual-20261113/evidence/`；`coverage-boundary.json`、`grounding-manifest.json`、`source-structure-check.json`、`factual-math-check.json` 与媒体 `result.json` 分别保留边界、完整依据、源结构、复算和实际媒体检查结果，最终摘要清单记录输入与每项改动的字节对应。原独立 FIRST R1、当前实际HTML／PDF／EPUB及原生阅读器验收、候选对应与PR／CI／合入／Pages均仍待调用方完成；本次没有整书构建／导出或独立审查，不给完整单元／整书或生命周期结论。本 assignment总1／已用1／剩余0，事实源修订1次、直接媒体执行1次、重试0次、额外工作席0；旧额度不重置，最终整书导出／采纳保留1仍 **UNSPENT**。
+
+
+## 2026-11-13：F6 既存文献消费者的有限闭合（待原 FIRST R1）
+
+本次输入为同一 PR227 已推送候选 `c5b64424e6173555c26219c50d872696408fa2f8`（基于 main `13dfca931d4060ac2b6a4863038e1c2f1ced91d1`），保持每语言45单元、549条声明及 pin `3b3ab5883295803c705670de0d118219db346f94/dev`。这是一项针对先前已独立观察到的 F6 同族剩余消费者的有界闭合，不是新家族，也不重置原 assignment／源修订／媒体执行各1/1已花额度。现存有限域为 ARGUED 双语框2处、理论抽屉2处、第30章模型／文献解释4处，共8个实际字段；只读核对其完整原文和既有运行时双语字串，固定双桥／八桥 MODEL 的精确秩、熵、控制、图例与数学保持。
+
+唯一媒体源修订在 `books/quantum-geometry/viz/entanglement-entropy-complexity/index.html:139` 的两语第一条文献短句：一维局部哈密顿量须有唯一基态、固定局部维数、有界有限程相互作用，以及不随 n 缩小的正常数能隙；在同组条件下满足面积律并存在误差不超过 1/poly(n) 的多项式键维 MPS 近似。说明近似存在性、精确有限秩恒等式与求取算法的区别，保留第30章原有最近邻规范化有界项下的随机算法和成功概率归属。Hastings 原文的唯一基态／局部条件及 LVV 原文已对应；退化基态空间反例在 n=4/8/12 的能隙均为1，跨中割熵为 n/4，只说明遗漏唯一性会夸大，不能当成原定理反例。Page、CKW、解码归约、后选择与共享纠缠验证等其余文献短句全部保持原字节。
+
+`index.html` 输入 SHA-256 为 `2fa00163b7f01d0207dbd2365adc0a3c9b6bc398a52643b462520d9388b9bca4`，输出为 `fa6121ddbb61e5a4fcf39ba37ca0aa3ed44695d3a2a62644c3abdd8c5b0687a4`；只有第139行改变，恰为两条短句替换，抽屉及其余 HTML 字节保持。中英第30章分别保持 `7bb24d96d178a34e17464d7f8c457d18b212f86e51c0ad8ee3bf6280963e6c57`／`0e579754c3b5392bfce64e4f26f3ae5b587adf5330438ec653452f889fe0f458`。八字段逐项源对应见本次证据 `finite-consumer-correspondence.json`：均有相关文献假设，抽屉只陈述较弱的近似结论，不另承诺精度或算法；精确常数键维只属于明确的因子化桥 MODEL。故本次 F6 缺假设消费者在该有限域内按实施／本地媒体验证闭合，独立内容批准仍待原 FIRST R1；不宣称未来消费者、其他文献断言、完整实验室、章节或整书已经验收。
+
+媒体由一次全新前台直接执行完成，身份记录包含实际参数、可执行文件和提示摘要、起止时间与退出0；未重试、续接、派生工作席或由父执行者接手修媒体。现有129项套件原字节保留，普通与1000毫秒慢帧模式各129/129、退出0；官方 viz-shots／viz-thumbs 各一次退出0，7张截图和13张重生成静帧均实际查看。1440×900桌面和334／358／390×844手机，逐一通过读者按钮切中英、打开理论抽屉并滚动证据栏／页面／抽屉，两个系统配色偏好共16种组合；新增条件、近似限定均可见，未发现新增裁切／隐藏字迹，文档、框、文字及抽屉横向溢出均为0。两种偏好下8对画面像素相同，实际为同一个夜间主题，不称已有独立浅色主题。读者组合使用DPR2，官方截图使用原脚本设置，不能以此关闭原DPR1符号问题。
+
+环境为本地 macOS 26.6.2 arm64、Chromium 141.0.7390.37／playwright-chromium 1.56.1、Node v25.8.1；沿用已提供的运行时，不安装依赖或修改全局设置／权限。字体路由只提供 Chakra Petch、JetBrains Mono、Noto Sans SC；新增中英文条件字形实际均由本地 Noto Sans SC 网页字体绘制，Source Sans 3 虽被请求但未加载，不能凭 document.fonts.check 的 true 冒称已用该字体。原有 Θ／τ 由 PingFang SC、集合关系符由 Apple Symbols 系统回退；16次外部请求均为路由接管的字体CSS且返回200，未取 gstatic、失败请求及页面／控制台错误为0。线上字体、Linux／CI回退和原生阅读器不在本次验收内。
+
+13张现有官方JPG全部与输入逐字节相同，下列 SHA-256 同时是其旧／新输出摘要（目录均为 `books/quantum-geometry/viz/entanglement-entropy-complexity/`）：
+
+- `fig-arealaw.en.jpg`：`3f0e9c3a0b85ee513e6627343c0dc4dd775a28787ba508994739d43bf2af5d9a`。
+- `fig-arealaw.zh.jpg`：`cbf4ac2fe909c410b0d2f7ad57b0172211380f7ff9115040068da3bb4a30ce07`。
+- `fig-bellcut.en.jpg`：`31a12a8b687611b673a20bb2b79901f5158a7be409af0067619af7454e497134`。
+- `fig-bellcut.zh.jpg`：`c397ea69573c11ec7a42d964b3757aa40f7d28dd61d0368fd9752e7988cce90a`。
+- `fig-dottie.en.jpg`：`c69f8e1e6e7ffe1961b546b0fd61327bf9a010c622be2fd8769d8fb66a267486`。
+- `fig-dottie.zh.jpg`：`6e32fa18aac0e533e9048f6954ff70855fefb71724572066d28f67d132e42a7b`。
+- `fig-globaljoint.en.jpg`：`3b7511827d711dbbeb87ca13fd494b77d06d46754f3195650d2240f60c2898df`。
+- `fig-globaljoint.zh.jpg`：`2c1989649c6f99e2c7a55c1cd4ad820e9e16cd638547aecf662b62901406aacf`。
+- `fig-pythagoras.en.jpg`：`72c77347bddda446dbb0a1391713c0fbeb36ab16e8d24bab62b22f0980eee49f`。
+- `fig-pythagoras.zh.jpg`：`52bd7e019c19ada327622792d115d2691013e07efcbb31f292471060e761cd84`。
+- `fig-volumelaw.en.jpg`：`65f6e761ef03fe5c3e830726bb9443abebb7ff09fb37693a4bf39a846f00a95e`。
+- `fig-volumelaw.zh.jpg`：`1316db484f5469ebded4cad607e56261419a3410b9db3508a93d60ebcac2c629`。
+- `thumb.jpg`：`d9ad307f74f95d944ca8bc7d10f09503d55560fc794c13f3321180989220af61`。
+
+既有限制如实保留：手机英文单宽范数符号近似 I、HUD 范数间距、抽屉英文 Ā 的偏移长音符，以及静帧 Tr_Ā／刀片边、bellcut 键维标签／柱边、globaljoint 观察者标签／桥线相交；没有以测试通过抹去这些观察。媒体所有者另列的抽屉未重复误差阶、英文正文 efficient 的措辞及有限程惯用短语仅保留为审查建议，未据机械字词标记扩写正确消费者或追加修订。原 PR227 Pell 高阶公式／手机／字体／静帧债务及其他现行阅读失败仍待处理。
+
+当前 `./tbook check` 实际退出0、0错误／9条既有警告（未引用 prelude-parts 与8条影片历史 subject_commit），未作整书构建／导出。完整2146条输入与15路径允许清单逐项对照，仅本 HTML 与本账本追加改变，原账本316842字节保持完整前缀；最终路径摘要及空白检查收据随本次交接。证据根为 `/private/tmp/qg-pr227-f6-consumer-closure-20261113/evidence/`：`intake-baseline.json`、`media-collection.json`、`media/result.json`、`output-artifact-verification.json`、`finite-consumer-correspondence.json`、`source-conservation.json`、`changed-path-hashes.json`、`tbook-check-result.json`、`whitespace-check.json`。媒体相对图片引用已在父级收据中对应为核验过的绝对路径，原结果不改写；原始诊断日志及 opaque log_ref 正文未打开。
+
+本次独立有界 assignment／源修订／新媒体执行各总1、已用1、剩余0，原已花额度不重置；整书最终导出／采纳保留1仍 UNSPENT。原 mandatory FIRST R1（包括本闭合补丁）、当前 HTML／PDF／EPUB 及原生阅读验收、最终候选对应、CI／合入／Pages 均由调用方继续完成。本次未提交、暂存、推送或操作 GitHub，未做任何新图／地图生产器、托管文件、锁、正文、证明、布局、CSS、数学、共享运行时或其他实验室修改，也不作完整单元／整书或生命周期批准。
