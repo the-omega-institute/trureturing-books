@@ -326,9 +326,15 @@ await page.click('[data-lang-set="zh"]'); await settle(page);
   check('fates: six nondegenerate maps, each with exactly one fate, live exactly for the two golden families', JSON.stringify(theirs) === JSON.stringify(mine) && (await LAB(() => window.__HANDSHAKE_LAB__.fates())).every((f) => f.fates.length === 1 && (f.fate === 'live') === f.phiFamily));
   await page.click('#loopSnaps [data-snap="0"]'); await settle(page);
   check('loop: the δ = 0 snap brightens the paradox port', near((await state()).math['paradox-cancel'].pLoop, 1));
-  const at = await LAB(() => window.__HANDSHAKE_LAB__.at('loop')), tgt = await LAB(() => { const L = window.__HANDSHAKE_LAB__; L.setState({ tau: 1 }); const q = L.at('loop'); L.setState({ tau: 0 }); return q; });
-  await page.mouse.move(at[0], at[1]); await page.mouse.down(); await page.mouse.move(tgt[0], tgt[1], { steps: 5 }); await page.mouse.up(); await settle(page);
+  // Press the tip and release it in the frame the drag starts in. A target read from a temporary δ = π state names a
+  // point of another frame: a three-digit δ in the amber pill can wrap the header and move the stage. The arrow turns
+  // about its tail, so every point of the tip's own axis left of the tail is exactly δ = π (the left edge of the canvas
+  // is one), and a point taken from another frame lands off that axis. One move: once δ has jumped, a frame may re-lay
+  // the page out under the pointer before a later move arrives.
+  const [at, tgt] = await LAB(() => { const p = window.__HANDSHAKE_LAB__.at('loop'), b = document.getElementById('cv').getBoundingClientRect(); return [p, [b.left + 2, p[1]]]; });
+  await page.mouse.move(at[0], at[1]); await page.mouse.down(); await page.mouse.move(tgt[0], tgt[1]); await page.mouse.up(); await settle(page);
   check('loop: dragging the violet loop arrow turns δ', Math.abs((await state()).params.tau - 1) < 0.06, String((await state()).params.tau));
+  check('loop: released on its own axis left of its tail, the loop arrow reads δ = π', Math.abs((await state()).params.tau - 1) < 1e-5, String((await state()).params.tau));
 }
 
 /* ---------- presets, rail, keys, language, motion, touch ---------- */
