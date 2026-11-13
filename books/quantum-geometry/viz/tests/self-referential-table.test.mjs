@@ -651,6 +651,32 @@ check('solid, HEAL: step 0 is a true ellipsoid (|λ| = 1.12, 0.91, 0.21), step 8
   healed[0].G.shape === 'ellipsoid' && healed[0].G.semi.every((x) => x > 0.1) && healed[4].G.shape === 'disk' && Math.abs(healed[4].lam[2]) < 1e-9, `${healed[0].G.shape} → ${healed[4].G.shape}`);
 check('solid, HEAL: the ball is drawn at a scale that holds the largest |λ| along the rail', healed.every((h) => h.G.scale >= Math.max(...healed.flatMap((k) => k.lam.map(Math.abs))) - 1e-12));
 
+// HEAL, FULL with one knock of +0.45 on the diagonal (1, 1) (real controls): each λ label takes the colour of the step
+// shown, as the spectrum and the legend do (cyan above ½, magenta below). Independently, by x ↦ 3x² − 2x³ alone,
+// λ₀ = 1.45 (cyan) and λ₈ ≈ 2.69454 × 10⁻³² (magenta) along the same knocked direction e₁.
+{ const fx = (x) => 3 * x * x - 2 * x * x * x, lamAt = (m) => { let x = 1.45; for (let q = 0; q < m; q++) x = fx(x); return x; };
+  await pick('full'); await page.click('[data-scene="heal"]'); await settle(page);
+  await slide('#kick', 0.45); await clickCell(0, 0);
+  const seen = [];
+  for (const m of [0, 8]) {
+    await slide('#now', m); const st = await state(), g = await sol(), spec = await dbg((q) => window.TABLE_DEBUG.eigs(q), m);
+    const k = g.Q.findIndex((q) => Math.abs(Math.abs(q[0]) - 1) < 1e-9);   // the slice direction along e₁
+    const tags = await page.evaluate(() => [...document.querySelectorAll('#stage .tags .tag span.c-cy, #stage .tags .tag span.c-mg')]
+      .filter((t) => !t.closest('.tag').hidden && /^λ = /.test(t.textContent.trim())).map((t) => [t.textContent.trim(), t.className]));
+    seen.push({ m, st, k, lam: g.lam.slice(), kept: g.kept.slice(), spec, tags });
+  }
+  const want = [lamAt(0), lamAt(8)], text3 = (x) => `λ = ${(Math.abs(x) < 5e-4 ? 0 : x).toFixed(3)}`;
+  const good = seen.every((u, q) => {
+    const x = u.lam[u.k], cls = want[q] > 0.5 ? 'c-cy' : 'c-mg', mine = u.tags.filter(([t]) => t === text3(want[q]));
+    return u.st.m === u.m && u.st.kicks.length === 1 && u.st.kicks[0].i === 0 && u.st.kicks[0].j === 0 && u.st.kicks[0].eps === 0.45 && u.k >= 0
+      && Math.abs(x - want[q]) < 1e-9 && u.kept[u.k] === (want[q] > 0.5) && u.lam.every((y, a) => u.kept[a] === (y > 0.5))
+      && u.spec.some((y) => Math.abs(y - want[q]) < 1e-9) && mine.length === 1 && mine[0][1] === cls
+      && u.tags.length === 3 && u.tags.every(([t, c]) => c === (Number(t.slice(4).replace('−', '-')) > 0.5 ? 'c-cy' : 'c-mg'));
+  });
+  check('HEAL, FULL + 0.45 on (1, 1): λ₀ = 1.45 is cyan and λ₈ ≈ 2.69 × 10⁻³² magenta along e₁ (independent x ↦ 3x² − 2x³); every λ label, kept flag and spectrum value agree at the step shown',
+    good && want[0] === 1.45 && Math.abs(want[1] - 2.69454e-32) < 1e-36, JSON.stringify(seen.map((u) => [u.m, u.k, u.lam, u.kept, u.tags]).concat([want])));
+}
+
 // PERP: ψ, its reading Tψ (in the disc) and the magenta part sin θ along the normal
 await pick('orthogonal_zero');
 let perpOk = true, perpMsg = '';

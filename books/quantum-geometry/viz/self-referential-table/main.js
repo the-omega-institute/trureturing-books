@@ -136,7 +136,8 @@
     const N = S.N, r = S.r, sc = S.scene, T = derive().T, A = shown();
     if (sc === 'heal' && S.kicks.length) {
       const H = healPick(), m = mOf();
-      return { kind: 'heal', Q: H.pick.map((e) => e.vec), A, lam: H.pick.map((e) => e.lm[m]), kept: H.pick.map((e) => e.lm[M] > 0.5), names: ['q₁', 'q₂', 'q₃'], scale: H.scale, idx: null };
+      // colours follow the step shown (λ above ½ at step m), as the spectrum and the legend do; the pick above uses step M
+      return { kind: 'heal', Q: H.pick.map((e) => e.vec), A, lam: H.pick.map((e) => e.lm[m]), kept: H.pick.map((e) => e.lm[m] > 0.5), names: ['q₁', 'q₂', 'q₃'], scale: H.scale, idx: null };
     }
     let Q, names, idx = null;
     if (sc === 'read' && r >= 3) {   // the plane of row i and column j (both in Im T), and one free direction (in ker T)
