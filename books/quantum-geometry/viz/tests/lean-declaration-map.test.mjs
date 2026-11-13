@@ -52,6 +52,33 @@ for (const line of text[INDEX].split('\n')) {
 const columns = files.filter((f) => f !== INDEX);
 const CH27 = 'ch27-reading-frozen-proofs-i.md', CH28 = 'ch28-reading-frozen-proofs-ii.md';
 const citedBy = (f, mode) => GIDS.filter((g) => truth[g].cites.has(f) && (mode === 'all' || truth[g].cites.get(f) === 'e')).sort();
+// where the rail runs, read from each language's SUMMARY: a unit's label is its title up to the colon; the rail starts
+// at the label of columns[0] and ends at the label of the last column; a text may name an appendix only if it has a
+// column or is the index, and a list of the reading order names exactly the appendices that have a column
+const LABEL = {};
+for (const lang of ['zh', 'en']) {
+  LABEL[lang] = {};
+  for (const line of fs.readFileSync(path.join(BOOK, lang, 'SUMMARY.md'), 'utf8').split('\n')) {
+    const a = line.indexOf('['), b = line.indexOf('](', a), c = line.indexOf('.md)', b);
+    if (a < 0 || b < 0 || c < 0) continue;
+    const title = line.slice(a + 1, b), cut = [title.indexOf('：'), title.indexOf(':')].filter((k) => k > 0);
+    LABEL[lang][line.slice(b + 2, c + 3)] = (cut.length ? title.slice(0, Math.min(...cut)) : title).trim();
+  }
+}
+const appxLetter = (lang, f) => (/^(?:附录|Appendix)\s*([A-Z])$/.exec(LABEL[lang][f] || '') || [])[1];
+const railSays = (lang, txt) => {
+  const low = txt.toLowerCase(), start = low.indexOf(LABEL[lang][columns[0]].toLowerCase()), end = low.indexOf(LABEL[lang][columns[columns.length - 1]].toLowerCase());
+  const known = new Set([...columns, INDEX].map((f) => appxLetter(lang, f)).filter(Boolean));
+  const named = [...txt.matchAll(lang === 'zh' ? /附录\s*([A-Z])\b/g : /Appendix\s+([A-Z])\b/g)].map((m) => m[1]);
+  return start >= 0 && end > start && named.every((x) => known.has(x));
+};
+const ledeSays = (lang, txt) => {
+  const open = txt.indexOf(lang === 'zh' ? '（' : '('), close = txt.indexOf(lang === 'zh' ? '）' : ')', open), seq = txt.slice(open + 1, close);
+  const at = seq.search(lang === 'zh' ? /附录/ : /Appendi/), letters = at < 0 ? [] : [...seq.slice(at).matchAll(/\b([A-Z])\b/g)].map((m) => m[1]);
+  const want = columns.map((f) => appxLetter(lang, f)).filter(Boolean);
+  return open >= 0 && seq.toLowerCase().includes(LABEL[lang][columns[0]].toLowerCase()) && seq.toLowerCase().includes(LABEL[lang]['coda.md'].toLowerCase())
+    && JSON.stringify(letters) === JSON.stringify(want) && txt.slice(close).includes(LABEL[lang][INDEX]);
+};
 
 /* ---------- the page ---------- */
 const T = await session();
@@ -107,6 +134,11 @@ await page.click('#play'); s = await state();
 check('the play button pauses', !s.playing);
 const note = async () => (await page.textContent('#presetNote')).trim();
 check('WHOLE-BOOK note names the number of lock entries', (await note()).includes(`${GIDS.length} 格`));
+check('WHOLE-BOOK note: the rail runs from the first unit of SUMMARY to its last column, and names no appendix without a column except the index', railSays('zh', await note()), await note());
+for (const lang of ['zh', 'en']) {
+  const lede = await page.textContent(`#drawer .${lang} .lede`);
+  check(`drawer (${lang}): the reading order runs from the prelude to the coda and lists exactly the appendices with a column; the index is named outside it`, ledeSays(lang, lede), lede);
+}
 
 // CH27-FOUR, CH28-FOUR: the dissected theorems, from the foot of their chapter
 s = await pick('bedrock');
@@ -193,7 +225,9 @@ await page.fill('#q', ''); await settle(page); s = await state();
 check('clearing the search shows every cell again', s.q === '' && s.found.length === 0 && (await page.textContent('#qOut')).includes('输入声明名'));
 
 // English
-await page.click('[data-lang-set="en"]'); await pick('table28');
+await page.click('[data-lang-set="en"]'); await pick('all');
+check('English WHOLE-BOOK note: the same start and end of the rail', railSays('en', await note()), await note());
+await pick('table28');
 check('English note of CH28-TABLE carries the same numbers', (await note()).includes(`cites ${a28.length} declarations`) && (await note()).includes(`${in46} of them land in Parts IV–VI`), await note());
 await page.click('[data-lang-set="zh"]');
 

@@ -1,5 +1,5 @@
 /* LEAN//MAP · Lean 声明地图: every frozen declaration the book cites, laid out by chapter.
-     stage   one column per unit of the book in reading order (prelude, chapters 1–39, coda, Appendices A and B;
+     stage   one column per unit of the book in reading order (prelude, chapters 1–39, coda, Appendices A, B and D;
              Appendix C indexes everything and has no column). Each cell is one entry of trureturing.lock.json,
              stacked in the column of the chapter whose Chinese text cites it first: theorems (green) below
              definitions (grey), environment citations (filled) below inline-only ones (hollow).
@@ -269,9 +269,10 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
     theorems: { filter: 'theorem', src: null, sel: null, at: NC, still: NC },
     inline: { filter: 'inline', src: null, sel: null, at: NC, still: NC }
   };
+  const [FIRST, LAST, INDEXED] = [COLS[0], COLS[NC - 1], IDX].map((u) => DATA.units[u].n);   // where the rail starts and ends, and the index it passes over
   const NOTES = {
-    all: [`时间轴从序曲一章一章读到附录 B：每一章第一次引用的冻结声明落进这一章的柱子（绿色是定理，灰色是定义）。读完，${D.length} 格全部落定，正好是锁文件的条目数。`,
-      `The rail reads from the prelude to Appendix B one chapter at a time: the frozen declarations a chapter cites first drop into its column (green theorems, grey definitions). At the end all ${D.length} cells have landed, exactly the number of entries in the lock file.`],
+    all: [`时间轴从${FIRST[0]}一章一章读到${LAST[0]}（${INDEXED[0]} 是总索引，不单列一柱）：每一章第一次引用的冻结声明落进这一章的柱子（绿色是定理，灰色是定义）。读完，${D.length} 格全部落定，正好是锁文件的条目数。`,
+      `The rail reads from the ${FIRST[1]} to ${LAST[1]} one chapter at a time (${INDEXED[1]}, the index, has no column): the frozen declarations a chapter cites first drop into its column (green theorems, grey definitions). At the end all ${D.length} cells have landed, exactly the number of entries in the lock file.`],
     bedrock: [`第二十七章用定理环境逐行解剖的 ${env27.length} 条：${env27.length} 根青色的线从第二十七章的柱脚连回它们第一次出场的${homeNames(env27, 0)}，选中的那一格也是青线。琥珀色框住选中的平行四边形恒等式，琥珀色的线只连到另外引用它的几章。`,
       `The ${env27.length} theorems Chapter 27 dissects in its own environments: ${env27.length} cyan lines run from the foot of Chapter 27 back to where they first appear, ${homeNames(env27, 1)}, the chosen cell's line among them. The amber frame marks the chosen parallelogram law, and amber lines go only to the other chapters that cite it.`],
     table27: [`第二十七章连同它的审计表一共引用 ${all27.length} 条：青色的线从它的柱脚伸回${span(all27, 0)}，其中 ${inParts(all27, 0, 2)} 条落在第一至三部。`,
