@@ -11,7 +11,7 @@
 // stage (the healing steps recomputed here from T + Δ), the rank of the 3 × 3 compression QᵀAQ by elimination matches
 // the shape drawn, the arrows are the rows, ψ and Tψ in slice coordinates, the lower pole is behind the plane by a
 // ray–plane intersection; then solidChecks of the testkit (a lit, shaded body; turning; hidden marks; resting).
-import { session, stageFirstChecks, solidChecks, solidPixels, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, solidPixels, settle, until, openStill } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'self-referential-table';
 const T = await session();
@@ -494,6 +494,17 @@ await solidChecks(T, BOOK, ID, page);
     check(`cited figure, ${what}: the lit solid covers ≥ 12 % of the stage at the card's first and last frame`, !bad.share.length, bad.share.join(' | '));
     check(`cited figure, ${what}: the table keeps cells ≥ 11 px, the ball a radius ≥ 60 px and the side panel ≥ 90 × 70 px`, !bad.read.length, bad.read.join(' | '));
   }
+}
+
+
+// Publication stills use clock coordinates and retain the values the captions describe.
+for (const lang of ['zh', 'en']) for (const [card, time] of [['expand_table', 3], ['orthogonal_zero', 90]]) {
+  const pg = await openStill(T, BOOK, ID, card, lang);
+  const q = await pg.evaluate(() => window.TABLE_DEBUG.state);
+  const declared = await pg.getAttribute(`[data-preset="${card}"]`, 'data-still');
+  check(`still ${card} (${lang}): its declared frame matches the clock and caption`,
+    !q.playing && Math.abs(q.t - time) < 1e-9 && (declared === 'end' ? q.t === q.max : Number(declared) === q.t) && (q.r === (card === 'expand_table' ? 4 : 3)), JSON.stringify({ q, declared }));
+  await pg.context().close();
 }
 
 check('no page error, console error or failed request (solid part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));

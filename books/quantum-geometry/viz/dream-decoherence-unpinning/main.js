@@ -687,7 +687,7 @@
     stopAt = c.to == null ? null : c.to;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景，拖锚点强度、躯体的权重或记录的重叠，在方格上左右拖，或拖动时间轴。随时可以再选一张卡。', 'Free play: switch scenes, move the anchor strength, the body weight or the record overlap, drag sideways on the grid, or scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

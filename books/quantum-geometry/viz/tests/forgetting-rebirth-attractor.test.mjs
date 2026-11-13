@@ -12,7 +12,7 @@
 //   (cross product), the first step on t² − x² = 1; the tower's points over the wheel's points at their round's height;
 //   the hemisphere's points on the unit sphere and projected back from the south pole onto (s − 1)/s.
 // It reads the page through window.SAMSARA_DEBUG.
-import { session, stageFirstChecks, solidChecks, solidPixels, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, solidPixels, settle, until, openStill } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'forgetting-rebirth-attractor';
 const T = await session();
@@ -472,6 +472,17 @@ await solidChecks(TE, BOOK, ID, page);
     check(`cited figure, ${what}: the lit solid covers ≥ 12 % of the stage at the card's first and last frame`, !bad.share.length, bad.share.join(' | '));
     check(`cited figure, ${what}: the exact disk keeps a radius ≥ 40 px`, !bad.read.length, bad.read.join(' | '));
   }
+}
+
+
+// Publication stills use clock coordinates and retain the values the captions describe.
+for (const lang of ['zh', 'en']) for (const [card, time] of [['staircase', 8], ['erase_reset', Wk.n0 + Wk.p + 2]]) {
+  const pg = await openStill(T, BOOK, ID, card, lang);
+  const q = await pg.evaluate(() => window.SAMSARA_DEBUG.state);
+  const declared = await pg.getAttribute(`[data-preset="${card}"]`, 'data-still');
+  check(`still ${card} (${lang}): its declared frame matches the clock and caption`,
+    !q.playing && Math.abs(q.t - time) < 1e-9 && (declared === 'end' ? q.t === q.max : Number(declared) === q.t) && ((card === 'staircase' ? q.k : q.n) === time), JSON.stringify({ q, declared }));
+  await pg.context().close();
 }
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));

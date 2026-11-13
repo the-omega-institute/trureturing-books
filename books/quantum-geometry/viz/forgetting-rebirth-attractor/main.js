@@ -793,14 +793,14 @@
   });
 
   /* ---------- experiment cards ----------
-     scene, model, Δη, the rail's start and stop (from, to; a still shows `to`), and the cards that play a transition
+     scene, model, Δη, the rail's start and still frame (from, still), and the cards that play a transition
      instead of the rail (morph: Klein → Poincaré; fold: unrolled → folded). */
   const PRESETS = {
-    staircase: { scene: 'stair', model: 'klein', dEta: 1, from: 0, to: 8 },
-    klein_vs_poincare: { scene: 'stair', model: 'poincare', dEta: 1, at: 3, morph: true },
-    erase_reset: { scene: 'samsara', model: 'poincare', dEta: 1, fold: 0, from: 0, to: 'round2' },
-    quotient_fold: { scene: 'samsara', model: 'poincare', dEta: 1, at: 'end', fold: 1, foldAnim: true },
-    cayley: { scene: 'cayley', from: 0, to: 6 }
+    staircase: { scene: 'stair', model: 'klein', dEta: 1, from: 0, still: 8 },
+    klein_vs_poincare: { scene: 'stair', model: 'poincare', dEta: 1, still: 3, morph: true },
+    erase_reset: { scene: 'samsara', model: 'poincare', dEta: 1, fold: 0, from: 0, get still() { return W.round.indexOf(2) + 2; } },
+    quotient_fold: { scene: 'samsara', model: 'poincare', dEta: 1, still: 'end', fold: 1, foldAnim: true },
+    cayley: { scene: 'cayley', from: 0, still: 6 }
   };
   const NOTES = {
     staircase: ['从自指平衡角 θ* 出发（η₀ ≈ 0.817），快度每步加 Δη = 1。青色的点沿射线一级级走向白色的圆周，过每一级的青色直弦都比上一条更挤向边界；走到第 8 级，sin θ = 0.99999996，放大镜里品红的缝仍然张开。把步长调大、级数走多，放大镜每一步把视野缩小十倍以上，缝也从不为 0。', 'Starting from the self-referential balance angle θ* (η₀ ≈ 0.817), each step adds Δη = 1 of rapidity. The cyan points walk out along the ray toward the white rim, and each cyan chord through a step crowds closer to the rim than the one before; at step 8, sin θ = 0.99999996, and the magenta gap in the magnifier is still open. Raise the step and walk further, and the magnifier narrows its field tenfold or more at every step; the gap is never 0.'],
@@ -815,14 +815,13 @@
     const pl = { playing: false, pause() {}, play() { pl.playing = tweenPlaying = true; run(() => { pl.playing = tweenPlaying = false; }); } };
     return pl;
   }
-  function stopOf(p) { if (p.to === 'round2') return W.round.indexOf(2) + 2; if (p.at === 'end') return W.N - 1; return p.to; }
   function applyPreset(id) {
     const p = PRESETS[id];
     stopTween();
     stage.cam.yaw = CAM.yaw; stage.cam.pitch = CAM.pitchOf[p.scene] || CAM.pitch; stage.cam.zoom = 1;   // every card shows its solid from the same side
     if (p.dEta != null) { S.dEta = p.dEta; fD.set(p.dEta); refreshWalk(); }
     const sc = SCENES[p.scene];
-    const end = p.at != null ? (p.at === 'end' ? W.N - 1 : p.at) : stopOf(p);
+    const end = p.still === 'end' ? sc.max() : p.still;
     sc.set(end);
     if (p.model) setModel(p.model, false);
     if (p.fold != null) setFold(p.fold, false);
@@ -841,7 +840,7 @@
     stopAt = end < clock.max - 1e-9 ? end : null;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：沿射线拖动琥珀色的点，用时间轴一级级走，换 Klein 或庞加莱圆盘，改步长 Δη；在“轮回”里看角度尺怎样撞上边界、把轮子折叠；在“分式”里拖动像圆。随时可以再选一张卡。', 'Free play: drag the amber point along the ray, step with the rail, swap the Klein and Poincaré disks, change the step Δη; in Wheel watch the angle ruler hit the rim and fold the wheel; in Fractional map drag the image circle. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

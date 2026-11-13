@@ -707,11 +707,11 @@
   /* ---------- experiment cards ---------- */
   const PRESETS = {
     reset: { scene: 'rank', N: 8, r: 1 },
-    expand_table: { scene: 'rank', N: 8, r: 1, play: true, still: 4 },
+    expand_table: { scene: 'rank', N: 8, r: 1, play: true, still: 3 },
     full: { scene: 'rank', N: 8, r: 8 },
-    dual_read: { scene: 'read', N: 4, r: 2, cell: [0, 3], play: true },
-    heal: { scene: 'heal', N: 8, r: 3, kicks: [{ i: 1, j: 4, eps: 0.3 }], play: true },
-    orthogonal_zero: { scene: 'perp', N: 8, r: 3, play: true }
+    dual_read: { scene: 'read', N: 4, r: 2, cell: [0, 3], play: true, still: 'end' },
+    heal: { scene: 'heal', N: 8, r: 3, kicks: [{ i: 1, j: 4, eps: 0.3 }], play: true, still: 'end' },
+    orthogonal_zero: { scene: 'perp', N: 8, r: 3, play: true, still: 'end' }
   };
   const NOTES = {
     reset: ['清空到一行：只写进常值向量，T 的每一格都是 1/8，八个对角格加起来是 1。下面八个地址槽只占了一个。', 'Cleared to one row: only the constant vector is written in, every cell of T is 1/8, and the eight diagonal cells add up to 1. Of the eight address slots below, one is taken.'],
@@ -731,14 +731,13 @@
     if (Math.abs(stage.cam.yaw - VIEW[0]) + Math.abs(stage.cam.pitch - VIEW[1]) + Math.abs(stage.cam.zoom - 1) > 1e-6) stage.view(VIEW, 450);   // a card shows its frame from the default view
     setScene(p.scene);
     if (!p.play) return;
-    const R = RAIL[p.scene]();
     // a still (cover, cited figure for PDF/EPUB) and the opening view of the full page show the telling frame;
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still != null ? p.still - (p.scene === 'rank' ? 1 : 0) : R.max); return; }
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still === 'end' ? clock.max : p.still); return; }
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：点表里的一格、换场景、改 N 与秩、拖时间轴。随时可以再选一张卡。', 'Free play: click a cell, switch scenes, change N and the rank, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

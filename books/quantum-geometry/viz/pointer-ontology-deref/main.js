@@ -605,12 +605,12 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    qram_tree: { scene: 'tree', a: 41, k: 1, idx: [1, 2], play: true },
-    linear64: { scene: 'scan', a: 63, k: 1, idx: [1, 2], play: true },
-    superpose: { scene: 'tree', a: 41, k: 4, idx: [1, 2], play: true },
-    four_loops: { scene: 'table', a: 41, k: 1, idx: [0, 0, 0, 0], play: true },
-    self_map: { scene: 'table', a: 41, k: 1, idx: [0, 1], play: true },
-    diagonal_hit: { scene: 'table', a: 41, k: 1, idx: [0], play: true }
+    qram_tree: { scene: 'tree', a: 41, k: 1, idx: [1, 2], play: true, still: 'end' },
+    linear64: { scene: 'scan', a: 63, k: 1, idx: [1, 2], play: true, still: 'end' },
+    superpose: { scene: 'tree', a: 41, k: 4, idx: [1, 2], play: true, still: 'end' },
+    four_loops: { scene: 'table', a: 41, k: 1, idx: [0, 0, 0, 0], play: true, still: 'end' },
+    self_map: { scene: 'table', a: 41, k: 1, idx: [0, 1], play: true, still: 'end' },
+    diagonal_hit: { scene: 'table', a: 41, k: 1, idx: [0], play: true, still: 'end' }
   };
   const NOTES = {
     qram_tree: ['地址 41 = 101001₂ 从树根进来，每一拍按一位拨一层开关：六拍后青色的路通到第 42 格，63 个开关里只亮这 6 个。同一时刻，琥珀色的扫描读头才读过 6 格。', 'Address 41 = 101001₂ enters at the root and each tick sets one level by one bit: after six ticks the cyan path reaches cell 42, and only these 6 of the 63 switches light up. At the same moment the amber scan head has read just 6 cells.'],
@@ -628,11 +628,11 @@
     if (!p.play) return;
     // a still (cover, cited figure for PDF/EPUB) and the opening view of the full page show the end of the walk;
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-    if (TRV.still || (booting && !TRV.embed)) return;
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(p.still === 'end' ? clock.max : p.still); return; }
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖地址、点内存格、换叠加的分支数或页表索引、拖时间轴。随时可以再选一张卡。', 'Free play: drag the address, click a memory cell, change the branches or the page-table index, scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

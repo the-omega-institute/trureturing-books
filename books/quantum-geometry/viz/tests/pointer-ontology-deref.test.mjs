@@ -10,7 +10,7 @@
 // H-tree built here by recursive halving, its pillars, beads, paths and dereference beam against the counts above, and
 // its pixels against the flat panels it must stay out of; solidChecks runs last, so its camera turn moves nothing the
 // earlier checks read.
-import { session, stageFirstChecks, solidChecks, solidPixels, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, solidPixels, settle, until, openStill } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'pointer-ontology-deref';
 const T = await session();
@@ -448,6 +448,17 @@ await solidChecks(T, BOOK, ID, page);
     check(`cited figure, ${what}: the lit solid covers ≥ 12 % of the stage at the card's first and last frame`, !bad.share.length, bad.share.join(' | '));
     check(`cited figure, ${what}: the drawing the card is about keeps ≥ 200 × 100 px, and a memory cell ≥ 3.5 px`, !bad.read.length, bad.read.join(' | '));
   }
+}
+
+
+// Publication stills use clock coordinates and retain the values the captions describe.
+for (const lang of ['zh', 'en']) for (const [card, time] of [['qram_tree', 6], ['linear64', 64]]) {
+  const pg = await openStill(T, BOOK, ID, card, lang);
+  const q = await pg.evaluate(() => window.POINTER_DEBUG.state);
+  const declared = await pg.getAttribute(`[data-preset="${card}"]`, 'data-still');
+  check(`still ${card} (${lang}): its declared frame matches the clock and caption`,
+    !q.playing && Math.abs(q.t - time) < 1e-9 && (declared === 'end' ? q.t === q.max : Number(declared) === q.t) && (card === 'qram_tree' ? q.levels === TREE.depth && q.active.length === TREE.depth : q.hit && q.scanRead === NCELLS), JSON.stringify({ q, declared }));
+  await pg.context().close();
 }
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
