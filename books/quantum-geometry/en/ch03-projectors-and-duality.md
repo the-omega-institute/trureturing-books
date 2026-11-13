@@ -337,7 +337,37 @@ For a pure state the right-hand side is $3\ln\frac{3}{2} \approx 1.2164$ nats ($
 
 **Reading the table.** First row: make the $Z$ reading fully definite ($H_Z = 0$) and both $X$ and $Y$ become fair coins, each costing $\ln 2$. The last row is the centre of the ball, where all three contexts are fair coins and the bound is attained.
 
-**How tight the bound is.** It is tight at the centre. On the sphere it is not: a numerical search over pure states with a step of $0.25^\circ$ finds the minimum entropy sum $2\ln 2 \approx 1.3863$, attained in the six coordinate-axis directions (such as the first row) and above $3\ln\frac{3}{2}$. The tight bound $H_X + H_Y + H_Z \ge 2\ln 2$ for pure qubit states is a literature result, not formalized in this book (J. Sánchez-Ruiz, *Phys. Lett. A* **201**, 125, 1995). Which step of the proof opens the gap? The first step replaces the Shannon entropy by the collision entropy, and for a two-outcome distribution this loses nothing only in the uniform and the deterministic cases; an axis state has exactly one deterministic and two uniform contexts, so the first step is lossless. The loss occurs in the second step, because the three collision probabilities $1, \frac{1}{2}, \frac{1}{2}$ are not equal.
+**How tight the bound is.** The collision-entropy bound is tight at the centre but leaves room on the sphere. A numerical search over pure states with a step of $0.25^\circ$ finds a minimum entropy sum of $2\ln 2 \approx 1.3863$ on the grid, reached in all six coordinate-axis directions (such as the first row) and above $3\ln\frac{3}{2}$. A finite grid describes the sampled values; it cannot prove a global lower bound or exclude other equality directions. For background on entropic uncertainty relations, see J. Sánchez-Ruiz, *Phys. Lett. A* **201**, 125, 1995 ([DOI](https://doi.org/10.1016/0375-9601(95)00219-S)). We can apply an existing contraction theorem directly to obtain $H_X + H_Y + H_Z \ge 2\ln 2$ throughout the closed Bloch ball.
+
+Define the binary entropy using natural logarithms, in nats:
+
+$$
+h(p)=-p\ln p-(1-p)\ln(1-p),\qquad 0\le p\le1.
+$$
+
+Endpoint terms $0\ln0$ are taken as $0$, so $h(0)=h(1)=0$ and $h(1/2)=\ln2$. For any $r\in[-1,1]$, the diagonal state $\rho_r=\operatorname{diag}((1+r)/2,(1-r)/2)$ along a single axis has von Neumann entropy $h((1+|r|)/2)$ by the spectral formula [`qubit_state_entropy`](lean:D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy). Since $h(p)=h(1-p)$, changing the sign of $r$ only exchanges the two probabilities, so this also equals $h((1+r)/2)$.
+
+The equal mixture of $\rho_r$ and $\rho_{-r}$ is $I/2$. The two states have the same entropy, so their Holevo quantity is $\ln2-h((1+|r|)/2)$. In the existing [`qubit_holevo_contraction`](lean:D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction), take parameters $x=0$, $z=1$, and $t=|r|$: the closed-disk condition is $0^2+1^2\le1$, the contraction parameter satisfies $0\le|r|\le1$, and the uncontracted Holevo quantity is $\ln2$. Thus
+
+$$
+\begin{aligned}
+\ln2-h\!\left(\frac{1+r}{2}\right)&\le r^2\ln2,\\
+h\!\left(\frac{1+r}{2}\right)&\ge(1-r^2)\ln2.
+\end{aligned}
+$$
+
+The endpoints are included: at $r=0$ both sides of the first line are $0$; at $r=\pm1$ both sides are $\ln2$. For any $\vv{r}=(x,y,z)$ in the closed Bloch ball, each coordinate lies in $[-1,1]$, and $H_X=h((1+x)/2)$, with the analogous formulas for the other two axes. Adding the three coordinate bounds gives
+
+$$
+\begin{aligned}
+H_X+H_Y+H_Z&\ge(3-x^2-y^2-z^2)\ln2\\
+&\ge2\ln2,\qquad x^2+y^2+z^2\le1.
+\end{aligned}
+$$
+
+The six coordinate-axis unit states $(\pm1,0,0)$, $(0,\pm1,0)$, and $(0,0,\pm1)$ have entropy triples that are permutations of $(0,\ln2,\ln2)$. They therefore attain $2\ln2$, so this uniform lower bound cannot be increased. This is an application of existing theorems; we do not classify all equality states here or treat the numerical grid as a uniqueness proof.
+
+Where does the collision-entropy derivation lose this precision? The first step replaces the Shannon entropy by the collision entropy, and for a two-outcome distribution this loses nothing only in the uniform and the deterministic cases; an axis state has exactly one deterministic and two uniform contexts, so the first step is lossless. The loss occurs in the second application of Jensen's inequality, because the three collision probabilities $1, \frac{1}{2}, \frac{1}{2}$ are not equal.
 :::
 
 The Pythagorean theorem governs sums of squares; it says that the "degrees of definiteness" of the three contexts have a capped total. Entropy restates the same fact in units of information: for one qubit, at most one of three complementary questions can receive a definite answer.

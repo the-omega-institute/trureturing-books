@@ -3301,6 +3301,22 @@
       "line": 52,
       "signature": "theorem triple_bargmann_bloch (r₁ r₂ r₃ : Fin 3 → ℝ) : tripleBargmann r₁ r₂ r₃ = (((1 + r₁ ⬝ᵥ r₂ + r₂ ⬝ᵥ r₃ + r₃ ⬝ᵥ r₁ : ℝ) : ℂ) / 4) + (((r₁ ⬝ᵥ (r₂ ⨯₃ r₃) : ℝ) : ℂ) * Complex.I / 4)"
     },
+    "D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction": {
+      "module": "D5/S3/Quantum/Information/QubitEntropyContraction",
+      "name": "D5.S3.Quantum.Information.QubitEntropyContraction.qubit_holevo_contraction",
+      "kind": "theorem",
+      "statement_id": "sha256:230119a062962dc5618bd5332a534c6cf2f254223051688f173742b7221892aa",
+      "line": 144,
+      "signature": "theorem qubit_holevo_contraction {x z t : ℝ} (hdisk : x ^ 2 + z ^ 2 ≤ 1) (ht : t ∈ Icc (0 : ℝ) 1) : let hscaled : x ^ 2 + (t * z) ^ 2 ≤ 1"
+    },
+    "D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy": {
+      "module": "D5/S3/Quantum/Information/QubitNormalFormState",
+      "name": "D5.S3.Quantum.Information.QubitNormalFormState.qubit_state_entropy",
+      "kind": "theorem",
+      "statement_id": "sha256:f508b0402c60c455c44b39347c8b9af2b3b511a793ccafff38aa66f2e83d7778",
+      "line": 103,
+      "signature": "theorem qubit_state_entropy (x z : ℝ) (h : x ^ 2 + z ^ 2 ≤ 1) : D5.S3.Quantum.Divergence.VonNeumannEntropyPinching.vonNeumannEntropy (qubitState x z h) = Real.binEntropy ((1 + Real.sqrt (x ^ 2 + z ^ 2)) / 2)"
+    },
     "D5/S3/Quantum/Magic/ReflectionDiagonalCNOTLowerBound.result": {
       "module": "D5/S3/Quantum/Magic/ReflectionDiagonalCNOTLowerBound",
       "name": "D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound.result",
