@@ -485,6 +485,10 @@
   let geo = {};
   /** The three boxes of the stage (CSS pixels of the canvas): the ball on the left (wide) or on top (narrow). */
   function layoutOf(W, H, words) {
+    // the legend's place beside the ball belongs to the book-page columns only: every layout starts from the stage's own
+    // legend (measured across the whole stage), and only the columns below put it back, for the size the frame has now
+    const stEl = $('stage');
+    stEl.classList.remove('legend-right'); stEl.style.removeProperty('--fig-legend-left');
     if (!words) return { mode: 'cover', solid: { x: W * 0.02, y: H * 0.08, w: W * 0.36, h: H * 0.84 }, table: { x: W * 0.4, y: H * 0.08, w: W * 0.33, h: H * 0.84 }, panel: { x: W * 0.76, y: H * 0.1, w: W * 0.21, h: H * 0.8 } };
     const st = $('stage').getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
     if (compact()) {                          // a phone's cited figure: the ball as large as the width allows on the left,
@@ -494,8 +498,6 @@
       const w3 = Math.round(bx.w * 0.6), rx = bx.x + w3 + 8, rw = bx.w - w3 - 8, side = Math.min(rw, bx.h * 0.56);
       return { mode: 'compact', solid: { x: bx.x, y: bx.y, w: w3, h: bx.h }, table: { x: rx, y: bx.y, w: rw, h: side }, panel: { x: rx, y: bx.y + side + 8, w: rw, h: bx.h - side - 8 } };
     }
-    const stEl = $('stage');
-    stEl.classList.remove('legend-right');    // the legend is measured across the whole stage first
     const top = Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10, bottom = Math.max(18, $('legend').offsetHeight + 20);
     const bx = { x: 18, y: top, w: W - 36, h: Math.max(80, H - top - bottom) };
     const wide = bx.w >= 520 && bx.w >= bx.h * 1.2;
