@@ -309,6 +309,204 @@ try {
     s = await state();
     check(`${card.id}: automatic endpoint restores the promised experiment`, s.thetaDeg === 30 && s.N === Math.round(10 ** card.u) && near(s.beta, card.beta));
   }
+
+  // Probability against expectation (born-unequal), and the AND-to-OR limit note under ordinary overrides.
+  // Expected values come from vectors and a partial trace written here; the page is read only through what a reader
+  // sees: readout rows, notes, legend, and the strings the stage canvas actually paints (with their boxes).
+  const KET = { '+': [Math.SQRT1_2, Math.SQRT1_2], '−': [Math.SQRT1_2, -Math.SQRT1_2] }, P0 = [[1, 0], [0, 0]];
+  const probZ = (k) => dot(KET[k], mv(P0, KET[k])), expX = (k) => dot(KET[k], mv(X, KET[k]));
+  const paintedText = (p) => p.evaluate(() => {
+    const C = CanvasRenderingContext2D.prototype;
+    if (!C.duelTextProbe) {
+      const fill = C.fillText, clear = C.clearRect;
+      C.clearRect = function (...a) { if (this.canvas.id === 'cv' && !a[0] && !a[1]) window.duelText = []; return clear.apply(this, a); };
+      C.fillText = function (str, x, y, ...rest) {
+        if (this.canvas.id === 'cv') {
+          const m = this.measureText(String(str));
+          (window.duelText = window.duelText || []).push({ s: String(str), l: x - m.actualBoundingBoxLeft, r: x + m.actualBoundingBoxRight, t: y - m.actualBoundingBoxAscent, b: y + m.actualBoundingBoxDescent,
+            size: parseFloat(/([\d.]+)px/.exec(this.font)[1]), W: this.canvas.clientWidth, H: this.canvas.clientHeight });
+        }
+        return fill.call(this, str, x, y, ...rest);
+      };
+      C.duelTextProbe = true;
+    }
+    window.TRV.kit.flush();
+    return (window.duelText || []).slice();
+  });
+  const overlaps = (a, b) => a.l < b.r && b.l < a.r && a.t < b.b && b.t < a.b;
+  const plain = (str) => str.replace(/\u00a0/g, ' ');   // no-break spaces keep P(Z = +1) on one line
+  async function bornCanvas(p, where) {
+    const texts = await paintedText(p), prob = texts.filter((t) => t.s === 'P(Z = +1)'), expn = texts.filter((t) => t.s === '⟨X⟩');
+    const kets = texts.filter((t) => t.s === '|+⟩' || t.s === '|−⟩'), mid = (t) => (t.l + t.r) / 2;
+    const between = (t, a, b) => !!t && !!a && !!b && mid(a) < mid(t) && mid(t) < mid(b);
+    check(`${where}: the stage names the cyan bars the probability P(Z = +1) and the magenta bars the expectation ⟨X⟩`,
+      prob.length === 1 && expn.length === 1 && kets.length === 4 && !texts.some((t) => t.s === 'Z' || t.s === 'X') && between(prob[0], kets[0], kets[1]) && between(expn[0], kets[2], kets[3]),
+      JSON.stringify(texts.filter((t) => /Z|X|\|[+−]⟩/.test(t.s)).map((t) => t.s)));
+    const bad = [...prob, ...expn].filter((t) => !(t.l >= 0 && t.r <= t.W && t.t >= 0 && t.b <= t.H && t.size >= 9 && texts.every((o) => o === t || !overlaps(t, o))));
+    check(`${where}: both statistic labels are painted whole, at reading size and clear of every other label`, prob.length + expn.length === 2 && bad.length === 0, JSON.stringify(bad));
+  }
+  async function bornReadouts(lang) {
+    const rows = (await page.evaluate(() => [1, 2, 3, 4, 5, 6].map((i) => [document.getElementById(`roL${i}`).textContent, document.getElementById(`ro${i}`).textContent]))).map((r) => r.map(plain));
+    const word = lang === 'zh' ? { prob: '概率', exp: '期望' } : { prob: 'probability', exp: 'expectation' };
+    const probRow = rows.find(([l]) => l.includes('P(Z = +1)')), expRow = rows.find(([l]) => l.includes('⟨X⟩'));
+    const pv = `${fixed(probZ('+'), 2)} · ${fixed(probZ('−'), 2)}`, xv = `${signed(expX('+'), 0)} · ${signed(expX('−'), 0)}`;
+    check(`born-unequal (${lang}): the readout row showing ${pv} is named the probability P(Z = +1) of |+⟩, |−⟩`, !!probRow && probRow[0].includes(word.prob) && probRow[1] === pv, JSON.stringify(rows));
+    check(`born-unequal (${lang}): the readout row showing ${xv} is named the expectation ⟨X⟩ of |+⟩, |−⟩`, !!expRow && expRow[0].includes(word.exp) && expRow[1] === xv, JSON.stringify(rows));
+    return [probRow, expRow];
+  }
+  for (const lang of ['zh', 'en']) {
+    await openCard(CARDS[2], lang);
+    const rows = await bornReadouts(lang);
+    const note = plain(await page.textContent('#presetNote')), legend = plain(await page.textContent('#legend'));
+    check(`born-unequal (${lang}): the card note gives ½ as the probability P(Z = +1) and +1, −1 as the expectation ⟨X⟩`, /P\(Z = \+1\)[^。;]*½/.test(note) && /⟨X⟩[^。;]*\+1[^。;]*−1/.test(note), note);
+    check(`born-unequal (${lang}): the magenta legend names the expectation ⟨X⟩`, legend.includes('⟨X⟩') && legend.includes(lang === 'zh' ? '期望' : 'expectation'), legend);
+    await bornCanvas(page, `born-unequal desktop 1440 (${lang})`);
+    for (const theta of [0, 45, 90]) {
+      await input('theta', theta);
+      check(`born-unequal (${lang}) after θ = ${theta}°: the P(Z = +1) and ⟨X⟩ rows keep their values and names`, JSON.stringify(await bornReadouts(lang)) === JSON.stringify(rows));
+    }
+    for (const [view, query, viewport] of [['cited embed 740', `?embed=1&lang=${lang}&preset=born-unequal`, { width: 740, height: 500 }],
+      ['phone 390', `?lang=${lang}&preset=born-unequal`, { width: 390, height: 844 }], ['still 800×450', `?shot=1&lang=${lang}&preset=born-unequal`, { width: 800, height: 450 }]]) {
+      const p = await T.open(BOOK, ID, query, { viewport, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+      await settle(p); await bornCanvas(p, `born-unequal ${view} (${lang})`);
+      await p.context().close();
+    }
+  }
+
+  // The AND-to-OR readout note states limits as γ → 0. Whatever θ the reader sets, every limit it states without a
+  // condition must equal the limit of the actual state, and the fixed 30° example must stay (qualified and correct).
+  const close = (text, i) => { let depth = 0; for (let j = i; j < text.length; j++) { if (text[j] === '(') depth++; else if (text[j] === ')' && --depth === 0) return j + 1; } return -1; };
+  const topSplit = (str) => { const out = ['']; let depth = 0; for (const ch of str) { if (ch === ',' && depth === 0) { out.push(''); continue; } if (ch === '(') depth++; if (ch === ')') depth--; out[out.length - 1] += ch; } return out.map((x) => x.trim()); };
+  /** Value of a displayed expression in p: numbers, fractions, p, parentheses, + and −, implicit products, squares. */
+  function evalIn(expr, p) {
+    const src = expr.replace(/\s+/g, ''); let i = 0;
+    const atom = () => {
+      let v;
+      if (src[i] === '(') { i++; v = sum(); if (src[i++] !== ')') throw new Error(`unbalanced ${expr}`); }
+      else if (src[i] === 'p') { i++; v = p; }
+      else { const m = /^\d+(\.\d+)?/.exec(src.slice(i)); if (!m) throw new Error(`cannot read ${expr}`); i += m[0].length; v = Number(m[0]); }
+      while (src[i] === '²') { i++; v *= v; }
+      return v;
+    };
+    const product = () => { let v = atom(); for (;;) { if (src[i] === '/') { i++; v /= atom(); } else if (/[(p\d]/.test(src[i] || '')) v *= atom(); else return v; } };
+    function sum() { let v = product(); for (;;) { if (src[i] === '+') { i++; v += product(); } else if (src[i] === '−' || src[i] === '-') { i++; v -= product(); } else return v; } }
+    const v = sum(); if (i !== src.length) throw new Error(`cannot read ${expr}`); return v;
+  }
+  const EXPR = /^[\dp²+−\-/().\s]+$/;
+  function exprAfter(text, key) {
+    const k = text.indexOf(key); if (k < 0) return null;
+    let i = k + key.length, out = '';
+    while (i < text.length) {
+      if (text[i] === '(') { const j = close(text, i); if (j < 0 || !EXPR.test(text.slice(i, j))) break; out += text.slice(i, j); i = j; } else if (/[\dp²+−\-/.\s]/.test(text[i])) out += text[i++]; else break;
+    }
+    return out.trim() || null;
+  }
+  function tupleAfter(text, key) {
+    const k = text.indexOf(key); if (k < 0) return null;
+    const i = text.indexOf('(', k + key.length), j = i < 0 ? -1 : close(text, i);
+    return j < 0 || text.slice(k + key.length, i).trim() ? null : topSplit(text.slice(i + 1, j - 1));
+  }
+  /** γ = 0: the two environment records are orthogonal, so tracing them out leaves diag(cos²θ, sin²θ). */
+  function decohered(thetaDeg) {
+    const c = Math.cos(thetaDeg * Math.PI / 180), s = Math.sin(thetaDeg * Math.PI / 180), rho = [[c * c, 0], [0, s * s]];
+    const det = rho[0][0] * rho[1][1] - rho[0][1] * rho[1][0], tr2 = mul(rho, rho)[0][0] + mul(rho, rho)[1][1];
+    return { p: c * c, tuple: [(rho[0][0] - rho[1][1]) ** 2 + 4 * rho[0][1] ** 2, 4 * det, 2 * rho[0][1] ** 2, 2 * Math.abs(rho[0][1])], purity: tr2 };
+  }
+  const purityKey = (lang) => (lang === 'zh' ? '纯度 →' : 'purity →');
+  /** [] when the note is truthful at θ (and, at N = 10⁶, agrees with the visible readouts); otherwise the reasons. */
+  function noteProblems(o, lang) {
+    const why = [], d = decohered(o.theta), tuple = tupleAfter(o.note, '(r², τ, C, V) →'), purity = exprAfter(o.note, purityKey(lang));
+    let tv = null, pv = null;
+    try { tv = tuple && tuple.length === 4 ? tuple.map((x) => evalIn(x, d.p)) : null; pv = purity == null ? null : evalIn(purity, d.p); } catch (e) { why.push(e.message); }
+    if (!tv || !tv.every((v, k) => near(v, d.tuple[k]))) why.push(`limit (r², τ, C, V) → ${tuple && tuple.join(', ')} is ${tv && tv.map((v) => fixed(v, 4)).join(', ')} at θ = ${o.theta}°, the state's limit is ${d.tuple.map((v) => fixed(v, 4)).join(', ')}`);
+    if (pv == null || !near(pv, d.purity)) why.push(`purity limit ${purity} is ${pv} at θ = ${o.theta}°, the state's limit is ${d.purity}`);
+    if (o.u === 6 && tv && pv != null) {
+      // at N = 10⁶ (γ = e⁻¹⁰⁰) the shown r², τ, purity, C, V must be the independent partial trace and the note's limit, to display precision
+      const r = lab(o.theta, 6), num = (x) => Number(String(x).replace(/−/g, '-')), key = o.key.split(/[+=]/).map(num);
+      const shown = [key[0], key[1], num(o.ro1), num(o.ro2), num(o.ro3)], exact = [r.r2, r.tangle, r.purity, r.deleted, r.visibility], fromNote = [tv[0], tv[1], pv, tv[2], tv[3]], digits = [3, 3, 4, 4, 4];
+      const off = shown.some((x, k) => !(Math.abs(x - exact[k]) <= 0.5 * 10 ** -digits[k] + 1e-12 && Math.abs(x - fromNote[k]) <= 0.5 * 10 ** -digits[k] + 1e-12));
+      if (off || !(Math.abs(key[2] - 1) <= 5e-4 + 1e-12)) why.push(`N = 10⁶ readouts ${JSON.stringify([o.key, o.ro1, o.ro2, o.ro3])}, independent ${JSON.stringify(exact)}, note ${JSON.stringify(fromNote)}`);
+    }
+    return why;
+  }
+  /** The 30° example survives: a parenthesis that opens with θ = 30° holds a tuple and a purity equal to that limit. */
+  function example30(note, lang) {
+    const k = note.indexOf('θ = 30°'), d = decohered(30);
+    if (k < 0) return false;
+    const open = Math.max(note.lastIndexOf('(', k), note.lastIndexOf('（', k)), shut = open < 0 ? -1 : note[open] === '（' ? note.indexOf('）', k) : close(note, open) - 1;
+    if (open < 0 || shut < 0) return false;
+    const seg = note.slice(open + 1, shut), t = /\(([^()]*)\)/.exec(seg), frac = /(\d+)\/(\d+)/.exec(seg.replace(/\([^()]*\)/g, ''));
+    return !!t && topSplit(t[1]).length === 4 && topSplit(t[1]).every((x, i) => near(evalIn(x, 0), d.tuple[i])) && !!frac && near(frac[1] / frac[2], d.purity);
+  }
+  const andOrView = (p) => p.evaluate(() => {
+    const txt = (id) => document.getElementById(id).textContent;
+    return { note: txt('roNote'), key: txt('roKey'), ro1: txt('ro1'), ro2: txt('ro2'), ro3: txt('ro3'), hud: txt('hudBig'), shownTheta: txt('oTheta'), pill: document.querySelector('#pillAngle strong').textContent, shownN: txt('oU'),
+      card: document.querySelector('[data-preset="and-to-or"]').getAttribute('aria-pressed') === 'true' };
+  });
+  const andOrHud = (lang) => (lang === 'zh' ? '从“与”到“或”' : 'From AND to OR');
+  const viewState = (v, theta, u) => Object.assign({}, v, { theta, u });
+  for (const lang of ['zh', 'en']) {
+    s = await openCard(CARDS[1], lang);
+    let v = await andOrView(page);
+    check(`and-to-or (${lang}): the preset opens on AND-to-OR at θ = 30°, N = 10⁶ with a truthful limit note and its 30° example`, v.card && v.hud.startsWith(andOrHud(lang)) && v.shownN === 'N = 10⁶' && noteProblems(viewState(v, 30, 6), lang).length === 0 && example30(v.note, lang), JSON.stringify([v, noteProblems(viewState(v, 30, 6), lang)]));
+    // every slider position of θ, entered as the reader enters it (an input event on the range), N kept at 10⁶
+    const sweep = await page.evaluate(() => {
+      const el = document.getElementById('theta'), out = [];
+      for (let k = 0; k <= 180; k++) {
+        el.value = String(k / 2); el.dispatchEvent(new Event('input', { bubbles: true })); window.TRV.kit.flush();
+        const txt = (id) => document.getElementById(id).textContent;
+        out.push({ value: k / 2, note: txt('roNote'), key: txt('roKey'), ro1: txt('ro1'), ro2: txt('ro2'), ro3: txt('ro3'), hud: txt('hudBig'), shownTheta: txt('oTheta'), shownN: txt('oU'), card: document.querySelector('[data-preset="and-to-or"]').getAttribute('aria-pressed') === 'true' });
+      }
+      return out;
+    });
+    const sweepBad = sweep.map((o) => ({ o, why: o.shownTheta !== `${fixed(o.value, 1)}°` || !o.hud.startsWith(andOrHud(lang)) || o.card || o.shownN !== 'N = 10⁶' ? ['input not applied as shown'] : noteProblems(viewState(o, o.value, 6), lang) })).filter((x) => x.why.length);
+    check(`and-to-or (${lang}): all ${sweep.length} θ slider positions 0°–90° (step 0.5°, N = 10⁶) keep a truthful limit note that matches the visible readouts`, sweep.length === 181 && sweepBad.length === 0,
+      `${sweepBad.length} failing, e.g. ${JSON.stringify(sweepBad.slice(0, 2).map((x) => ({ theta: x.o.value, note: x.o.note, why: x.why })))}`);
+    check(`and-to-or (${lang}): the 30° example is kept with its qualifier at every slider position`, sweep.every((o) => example30(o.note, lang)));
+    // keyboard on the θ slider
+    for (const [key, theta] of [['End', 90], ['Home', 0], ['ArrowRight', 0.5]]) {
+      await page.locator('#theta').focus(); await page.keyboard.press(key); await settle(page); v = await andOrView(page);
+      check(`and-to-or (${lang}): keyboard ${key} on θ (→ ${theta}°) keeps a truthful limit note`, v.shownTheta === `${fixed(theta, 1)}°` && noteProblems(viewState(v, theta, 6), lang).length === 0, JSON.stringify([v.shownTheta, noteProblems(viewState(v, theta, 6), lang)]));
+    }
+    // dragging the amber arrow on the stage: continuous θ between the slider steps
+    for (const target of [44.3, 71.8]) {
+      const h = await page.evaluate(() => window.INTERPRETATIONS_DUEL_DEBUG.handles().find((x) => x.kind === 'theta'));
+      const x = h.left + h.x, y = h.top + h.y, a = target * Math.PI / 180;
+      await page.mouse.move(x + h.r * 0.3, y); await page.mouse.down();
+      await page.mouse.move(x + h.r * 0.7 * Math.cos(a), y - h.r * 0.7 * Math.sin(a), { steps: 6 }); await page.mouse.up();
+      s = await state(); v = await andOrView(page);
+      check(`and-to-or (${lang}): dragging the amber arrow to θ = ${fixed(s.thetaDeg, 2)}° keeps a truthful limit note`, near(s.thetaDeg, target, 1.5) && v.pill === `${fixed(s.thetaDeg, 1)}°` && v.hud.startsWith(andOrHud(lang)) && noteProblems(viewState(v, s.thetaDeg, 6), lang).length === 0,
+        JSON.stringify([v.pill, noteProblems(viewState(v, s.thetaDeg, 6), lang)]));
+    }
+    // lens, parity and ξ controls at an overridden θ leave the note truthful (and unchanged)
+    s = await input('theta', 45); const at45 = (await andOrView(page)).note;
+    for (const lens of LENSES) {
+      await page.click(`#lensBar [data-lens="${lens}"]`); await settle(page); v = await andOrView(page);
+      check(`and-to-or (${lang}) θ = 45°, lens ${lens}: the limit note stays truthful`, v.note === at45 && noteProblems(viewState(v, 45, 6), lang).length === 0);
+    }
+    for (const mode of ['parity', 'redundant', 'none']) { await page.click(`[data-parity="${mode}"]`); await settle(page); }
+    await page.click('#xiBtn'); await settle(page); v = await andOrView(page);
+    check(`and-to-or (${lang}) θ = 45°: parity readouts and a ξ redraw leave the limit note truthful`, v.note === at45 && noteProblems(viewState(v, 45, 6), lang).length === 0);
+    // the rail: rewind to N = 1, scrub, then play to the end at θ = 45°
+    await page.click('#rew'); s = await state(); v = await andOrView(page);
+    check(`and-to-or (${lang}) θ = 45°, rail rewound to N = 1: the note still states the true γ → 0 limit`, s.N === 1 && noteProblems(viewState(v, 45, 0), lang).length === 0);
+    s = await input('now', 4.5); v = await andOrView(page);
+    check(`and-to-or (${lang}) θ = 45°, rail scrubbed to lg N = 4.5: the note still states the true γ → 0 limit`, near(s.uScale, 4.5) && noteProblems(viewState(v, 45, 4.5), lang).length === 0);
+    // play on delivered frames from N = 1, then scrub close to the end and cross it on a real frame (no frame-rate assumption)
+    await page.click('#rew'); await page.click('#play');
+    check(`and-to-or (${lang}) θ = 45°: the rail plays from N = 1`, await until(page, () => { const d = window.INTERPRETATIONS_DUEL_DEBUG.state; return d.playing && d.t > 0 && d.thetaDeg === 45; }));
+    await input('now', 6 - 0.001); await page.click('#play');
+    check(`and-to-or (${lang}) θ = 45°: playing the rail reaches N = 10⁶`, await until(page, () => { const d = window.INTERPRETATIONS_DUEL_DEBUG.state; return !d.playing && Math.abs(d.t - 6) < 1e-12 && d.N === 1e6; }));
+    v = await andOrView(page);
+    check(`and-to-or (${lang}) θ = 45°, after playback to N = 10⁶: note and visible readouts agree with the independent limit`, v.shownN === 'N = 10⁶' && noteProblems(viewState(v, 45, 6), lang).length === 0, JSON.stringify([v, noteProblems(viewState(v, 45, 6), lang)]));
+    // picking the card again restores θ = 30° and its own sweep
+    await page.click('[data-preset="and-to-or"]');
+    check(`and-to-or (${lang}): picking the card again starts its sweep at θ = 30°`, await until(page, () => { const d = window.INTERPRETATIONS_DUEL_DEBUG.state; return d.playing && d.t > 0 && d.thetaDeg === 30; }));
+    await input('now', 6 - 0.001); await page.click('#play');
+    check(`and-to-or (${lang}): the card's sweep stops at N = 10⁶`, await until(page, () => { const d = window.INTERPRETATIONS_DUEL_DEBUG.state; return !d.playing && Math.abs(d.t - 6) < 1e-12 && d.N === 1e6 && d.thetaDeg === 30; }));
+    v = await andOrView(page);
+    check(`and-to-or (${lang}): after the card's own sweep the note is truthful and keeps its 30° example`, v.card && noteProblems(viewState(v, 30, 6), lang).length === 0 && example30(v.note, lang));
+  }
   check('zero console errors, page errors, failed requests or HTTP failures throughout', T.errors.length === 0, T.errors.join(' | '));
 } catch (error) {
   check('suite completes without an unexpected exception', false, error.stack || String(error));
