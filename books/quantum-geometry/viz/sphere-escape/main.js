@@ -776,7 +776,7 @@
     "split": ["四个地址各自解码再翻转，g = (1, 1, 0, 0) 将原来同纤维的地址分开。", "Decode and flip at each of four addresses: g = (1, 1, 0, 0) separates addresses in one old fibre."],
     "absorb": ["把 d 收作第七行并补一列：新对角线又产生一个清单外的串。", "Add d as row seven and a new column: the new diagonal produces another off-list string."],
     "pointer": ["九格正弦指针移一格：重叠 |γ(1)| = cos(π/10) ≈ 0.9511，严格小于 1。", "Shift the nine-cell sine pointer by one: overlap |γ(1)| = cos(π/10) ≈ 0.9511, strictly below 1."],
-    "liuhui": ["从正六边形逐次倍边至 192 边：越来越像圆，放大后的弓高仍非零。", "Double the hexagon’s sides up to 192: it approaches the circle, but the magnified sagitta stays nonzero."],
+    "liuhui": ["从正六边形逐次倍边至 192 边：越来越像圆，放大后的弓高仍非零。", "6 → 192 sides: closer to a circle, yet the magnified sagitta remains nonzero."],
     "zu": ["24576 边时弓高约 8×10⁻⁹；放大十亿倍，缝仍清晰可见。", "At 24576 sides the sagitta is about 8×10⁻⁹; magnified a billion times, the gap remains visible."],
     "thirteen": ["30031 = 59 × 509：欧几里得只保证出现新的素因子，不保证所得数为素数。", "30031 = 59 × 509: Euclid guarantees new prime factors, not that the constructed number is prime."],
   };

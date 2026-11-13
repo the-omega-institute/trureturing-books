@@ -80,6 +80,14 @@ const seekEnd = () => page.evaluate(() => window.TABLE_DEBUG.seek(1e9));
 let s = await state();
 check('page carries its id', (await page.evaluate(() => document.body.dataset.vizId)) === ID);
 check('opens on ROW · COL: N = 4, r = 2, cell (1, 4), read to the end', s.preset === 'dual_read' && s.scene === 'read' && s.N === 4 && s.r === 2 && s.i === 0 && s.j === 3 && s.k === 4 && !s.playing);
+const unchangedText = await page.evaluate(() => {
+  const observer = new MutationObserver(() => {});
+  for (const id of ['readouts', 'pillSize', 'pillErr', 'plotMeta', 'oRank']) observer.observe(document.getElementById(id), { subtree: true, childList: true, characterData: true });
+  for (let i = 0; i < 10; i++) window.TRV.kit.flush();
+  const count = observer.takeRecords().length; observer.disconnect();
+  return count;
+});
+check('a stationary redraw preserves unchanged readout text nodes', unchangedText === 0, `${unchangedText} text mutations`);
 
 // T is symmetric, idempotent, of rank r with trace r, for every N and r the page offers
 let worstSym = 0, worstIdem = 0, worstTrace = 0, rankOk = true, nullOk = true, basisOk = true;
