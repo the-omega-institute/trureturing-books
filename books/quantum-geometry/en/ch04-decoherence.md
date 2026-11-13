@@ -261,7 +261,75 @@ After ten steps the error relative to the initial off-diagonal residual is $1/10
 
 Classes here mean **identical record vectors**. Coherence within a class survives; the limit is complete dephasing of individual basis addresses only when all classes are singletons. If $E_1=-E_0$, the vectors are distinct but $|G_{01}|=1$, violating the strict overlap bound: the channel changes phase without reducing this coherence's magnitude. Distinct vectors alone do not establish distinguishable environment records.
 
-Interpreting $\Phi_E^N$ as successive collisions also requires each step to implement the same reduced channel. One realization uses a fresh, initially uncorrelated environment register and the same recording interaction at every step. Reusing an environment or introducing correlations does not justify $G_{ij}^N$ from a one-step overlap alone. The result controls the error after relaxing ideal orthogonality; normalization, the strict overlap bound and the repeated-channel description remain model premises. Its Frobenius norm must also be distinguished from trace distance or an experimental discrimination error rate.
+::: {.remark #rem-ray-record-orbit title="Ray-Representative Reduction and Rotating Coherent Blocks (Application Derivation)"}
+Grouping instead by the **unit rays of the environment records** folds the global-phase redundancy above directly into an application derivation from [@thm-repeated-record-decay], while keeping the original channel $\Phi_E$ rather than replacing $E_i$ by vectorized density matrices $\lvert E_i\rangle\langle E_i\rvert$ (which would replace the Gram entries $G_{ij}$ by $|G_{ij}|^2$ and alter the channel).
+
+Let $d,e\in\mathbb{N}$ be arbitrary natural numbers, and let $E:\mathrm{Fin}\,d\to\mathrm{Fin}\,e\to\mathbb{C}$ satisfy $\sum_a |E_i(a)|^2=1$ for each system address $i$, with
+
+$$
+G_{E,ij}=\sum_a E_i(a)\overline{E_j(a)},\qquad
+\Phi_E(\rho)_{ij}=G_{E,ij}\rho_{ij}.
+$$
+
+Define ray equivalence $i\sim j$ if and only if there exists a unit-modulus complex scalar $u\in\mathbb{C}$ ($|u|=1$) carrying $E_j$ to $E_i$ ($E_i=uE_j$), and let the ray-pinching map $P_{\mathrm{ray}}$ retain and only retain same-ray matrix entries:
+
+$$
+P_{\mathrm{ray}}(\rho)_{ij}=\begin{cases}\rho_{ij},&i\sim j,\\0,&i\not\sim j.\end{cases}
+$$
+
+Choose a unit representative $R_c$ for each ray $c$, and set $R_i=R_{c(i)}$ for each system address $i\in\mathrm{Fin}\,d$ (representative records remain indexed by system addresses, and every entry in row $i$ uses the same representative), so that $E_i=u_i R_{c(i)}$ with $|u_i|=1$. In a finite-dimensional complex inner-product space, the equality criterion of the Cauchy–Schwarz inequality $|G_{R,ij}|\le\|R_i\|_2\|R_j\|_2=1$ shows that two unit vectors attain the upper bound on inner-product modulus if and only if they lie on the same ray ($i\sim j$); hence representatives of distinct rays ($i\not\sim j$, equivalently $R_i\ne R_j$) have overlap modulus $|G_{E,ij}|=|G_{R,ij}|<1$. Because there are only finitely many cross-ray index pairs $(i,j)$, their overlap moduli admit a uniform bound $q\in[0,1)$ (with $q=0$ when no cross-ray pairs exist). This $q$ is determined by the record family $E$ and holds uniformly across all $i,j$, all step counts $N\in\mathbb{N}$, and all system matrices $\rho$; no uniform positive gap across all record families is claimed.
+
+Expanding the inner product gives $G_{E,ij}=u_i\overline{u_j}G_{R,ij}$. Setting $U=\operatorname{diag}(u_i)$, the $N$-fold iterate of the original channel is related to the representative channel for all $N\in\mathbb{N}$ and every complex system matrix $\rho\in M_d(\mathbb{C})$ by
+
+$$
+\Phi_E^N(\rho)=U^N\Phi_R^N(\rho)(U^N)^*.
+$$
+
+The vector-equality classes $R_i=R_j$ of the representative records $R$ are precisely the ray classes $i\sim j$, so $\Pi_R$ coincides with $P_{\mathrm{ray}}$ and $|G_{R,ij}|\le q<1$ whenever $R_i\ne R_j$. Applying [@thm-repeated-record-decay] to $R$ and using the Frobenius-norm invariance of unitary diagonal conjugation yields, for every natural number $N\in\mathbb{N}$ and every complex system matrix $\rho\in M_d(\mathbb{C})$ (with no extra density-matrix, positivity, unit-trace, or nonemptiness hypotheses):
+
+$$
+\bigl\|\Phi_E^N(\rho)-U^N P_{\mathrm{ray}}(\rho)(U^N)^*\bigr\|_{\mathrm F}
+\le q^N\bigl\|\rho-P_{\mathrm{ray}}(\rho)\bigr\|_{\mathrm F}.
+$$
+
+The asymptotic comparison object under ray grouping is therefore the **rotating coherent-block orbit** $U^N P_{\mathrm{ray}}(\rho)(U^N)^*$, not static full diagonalization. On the same ray ($i\sim j$), $G_{E,ij}=u_i\overline{u_j}$, so after $N$ steps the coherence magnitude $|\rho_{ij}|$ is preserved while the conditional phase continues to rotate. These conditional phases are fixed by the actual controlled coupling or phase calibration; knowing only the density matrices $\lvert E_i\rangle\langle E_i\rvert$ of the individual environment records cannot determine them. The persistence of rotating components in quantum-channel asymptotics is not a new physical finding (literature result, not formalized in this book: see Victor V. Albert, *Asymptotics of quantum channels: conserved quantities, an adiabatic limit, and matrix product states*, Quantum **3**, 151 (2019), DOI [10.22331/q-2019-06-06-151](https://doi.org/10.22331/q-2019-06-06-151), Section 2 on rotating points and asymptotic projections; that paper provides general channel background, whereas the finite-record norm bound above is derived directly from [@thm-repeated-record-decay] via the representative construction).
+:::
+
+::: {.example #ex-ray-record-rotation title="Three-Record Hand Calculation: Simultaneous Phase Rotation and Cross-Ray Contraction"}
+Take $d=3,e=2$ and three unit environment records
+
+$$
+E_0=(1,0),\qquad
+E_1=(i,0),\qquad
+E_2=\left(\frac{3}{5},\frac{4}{5}\right).
+$$
+
+Here $E_0$ and $E_1$ differ only by a unit phase, partitioning the addresses into ray classes $\{0,1\}$ and $\{2\}$. Choosing ray representatives $R_0=R_1=(1,0)$ and $R_2=(3/5,4/5)$ gives phases $u=(1,i,1)$ and cross-ray overlap moduli $|G_{02}|=|G_{12}|=3/5$, so we may take $q=3/5$.
+
+Let $\rho\in M_3(\mathbb{C})$ have all $3\times 3$ entries equal to $1/3$; it is the density matrix of the normalized equal-superposition pure state. After $N$ steps:
+
+1. **Unattenuated phase rotation within the shared ray**: Indices $(0,1)$ lie on the same ray with $G_{01}=1\cdot\overline{i}=-i$, so
+
+   $$
+   \bigl(\Phi_E^N(\rho)\bigr)_{01}=\frac{(-i)^N}{3},\qquad
+   \bigl|\bigl(\Phi_E^N(\rho)\bigr)_{01}\bigr|=\frac{1}{3},
+   $$
+
+   while the conjugate entry $(1,0)$ is $i^N/3$, keeping modulus $1/3$ for all $N$.
+2. **Contraction as $(3/5)^N$ across distinct rays**: Each of the four cross-ray entries $(0,2),(2,0),(1,2),(2,1)$ has modulus $\frac{1}{3}(3/5)^N$, so the Frobenius error to the rotating coherent block $U^N P_{\mathrm{ray}}(\rho)(U^N)^*$ is
+
+   $$
+   \begin{aligned}
+   \bigl\|\Phi_E^N(\rho)-U^N P_{\mathrm{ray}}(\rho)(U^N)^*\bigr\|_{\mathrm F}
+   &=\sqrt{4\cdot\frac{1}{9}\left(\frac{3}{5}\right)^{2N}} \\
+   &=\frac{2}{3}\left(\frac{3}{5}\right)^N.
+   \end{aligned}
+   $$
+
+   The error is $2/3$ at $N=0$, $2/5$ at $N=1$, and $\frac{2}{3}(3/5)^{10}=0.0040310784$ at $N=10$.
+:::
+
+Interpreting $\Phi_E^N$ as successive collisions also requires each step to implement the same reduced channel. One realization uses a fresh, initially uncorrelated environment register and the same recording interaction at every step. Reusing an environment or introducing correlations does not justify $G_{ij}^N$ from a one-step overlap alone. Together these results control the error after relaxing ideal orthogonality: the original vector-grouping theorem [@thm-repeated-record-decay] still assumes the strict overlap bound as a hypothesis, whereas the ray-grouping application in [@rem-ray-record-orbit] derives that bound from finitely many unit records; in both formulations, record normalization, the specified controlled coupling, and the physical applicability of a repeated reduced channel remain model premises requiring independent physical evidence, and the Frobenius norm must be distinguished from trace distance or an experimental discrimination error rate.
 
 **Decay to zero: is it still reversible?** In [@prop-phase-damping-decay] the coherence is multiplied by $c$ at each step, leaving $c^N\rho_{01}$ after $N$ steps and finally zero. Section 4.1 showed that one step of decoherence can be seen as a reversible coupling followed by discarding the environment ([@thm-stinespring-dilation], [@thm-reduced-access-defect]). But "each step can be seen this way" and "all the steps together are still the shadow of one reversible evolution" are different claims: the first allows a different dilation at every step, the second asks one unitary $U$ to account for all the powers $T^n$ at once. The next theorem says that the second holds for every contraction.
 
