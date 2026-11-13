@@ -2,28 +2,28 @@
 
 本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 [{commit}](trureturing:)）中接受逐条核验：
 
-1. **C.1 冻结定理总索引（293 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
-2. **C.2 形式化定义与代数载体总索引（97 项唯一声明：88 项 `def` + 9 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.2.1 行内辅助定理与定义索引（161 项声明：109 项 `theorem` + 52 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **551 项唯一声明**（$293 + 97 + 161 = 551$）。媒体引用在各行末尾另列，不改变上述分区。
+1. **C.1 冻结定理总索引（294 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
+2. **C.2 形式化定义与代数载体总索引（97 项唯一声明：88 项 `def` + 9 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.2.1 行内辅助定理与定义索引（162 项声明：110 项 `theorem` + 52 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **553 项唯一声明**（$294 + 97 + 162 = 553$）。媒体引用在各行末尾另列，不改变上述分区。
 3. **C.3 开放问题与未形式化前沿边界台账（11 项：6 个 `conjecture` + 3 个 `problem` 环境 + 2 项文献边界 `remark`）**：9 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**551 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：402 格是定理，149 格是定义或归纳类型；390 个实心格被环境头以 `lean=` 引用，161 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
+**553 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：404 格是定理，149 格是定义或归纳类型；391 个实心格被环境头以 `lean=` 引用，162 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
 :::
 
 ---
 
-## C.1 已验证并冻结的 Lean 4 定理总索引（293 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
+## C.1 已验证并冻结的 Lean 4 定理总索引（294 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
 
-下表按 GID 的模块路径字母顺序列出 **293 条至少被一个 `:::` 环境头以 `lean=` 引用的唯一冻结定理**。第一至第三十九章与终章合计引用这些定理 405 次（同一 GID 每章计一次）；这 405 次引用分布在 255 个定理、引理、命题与推论环境及 2 个形式化 `example` 环境（`#ex-ch35-two-anchor-gram-corridor`、`#ex-ch37-gram-constraint-release`，共 257 个 `:::` 环境头）中。行内引用与媒体消费者另列在最后一栏，不增加柱高。
+下表按 GID 的模块路径字母顺序列出 **294 条至少被一个 `:::` 环境头以 `lean=` 引用的唯一冻结定理**。第一至第三十九章与终章合计引用这些定理 406 次（同一 GID 每章计一次）；这 406 次引用分布在 256 个定理、引理、命题与推论环境及 2 个形式化 `example` 环境（`#ex-ch35-two-anchor-gram-corridor`、`#ex-ch37-gram-constraint-release`，共 258 个 `:::` 环境头）中。行内引用与媒体消费者另列在最后一栏，不增加柱高。
 
 ::: {.figure src="appc-theorems-by-chapter"}
-**每一章带 `lean=` 的环境头引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，共 40 根绿色柱子，按第 I–X 部加浅色底纹。第二十二章最高，$35$ 条；其次第二十九章 $27$ 条、第三十章 $23$ 条、第三十三与第三十七章各 $19$ 条、第三十八章 $18$ 条。第四、三十六章各 $17$ 条；第二十四、三十九章各 $16$ 条；第三十一章 $15$ 条；第十四章 $14$ 条、终章 $13$ 条；其余 27 章各 $4$ 到 $9$ 条。柱高合计 $405$，由脚本从中文章节与锁文件算出，并与下表最后一栏的环境锚点逐章核对；本节全部 $293$ 条定理均至少出现在一根柱子中。实心下段是在该章第一次出场的定理，共 $282$ 条；空心上段是此前已出场、在该章再次引用的定理，共 $123$ 条。同一条定理在不同章重复计，定义与仅有行内引用的声明不计。
+**每一章带 `lean=` 的环境头引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，共 40 根绿色柱子，按第 I–X 部加浅色底纹。第二十二章最高，$35$ 条；其次第二十九章 $27$ 条、第三十章 $23$ 条、第三十三与第三十七章各 $19$ 条、第四、三十八章各 $18$ 条；第三十六章 $17$ 条；第二十四、三十九章各 $16$ 条；第三十一章 $15$ 条；第十四章 $14$ 条、终章 $13$ 条；其余 27 章各 $4$ 到 $9$ 条。柱高合计 $406$，由脚本从中文章节与锁文件算出，并与下表最后一栏的环境锚点逐章核对；本节全部 $294$ 条定理均至少出现在一根柱子中。实心下段是在该章第一次出场的定理，共 $283$ 条；空心上段是此前已出场、在该章再次引用的定理，共 $123$ 条。同一条定理在不同章重复计，定义与仅有行内引用的声明不计。
 :::
 
-下表按模块路径排序，这 $293$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族最大，占 $86$ 条；`FluidDynamics` 的 $18$ 条全在第八部。
+下表按模块路径排序，这 $294$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族最大，占 $87$ 条；`FluidDynamics` 的 $18$ 条全在第八部。
 
 ::: {.figure src="appc-modules-by-part"}
-**C.1 的 $293$ 条定理按模块族与首次出场的部分组。** 行是模块路径的前三段，较小的族合并为末行；列是第一至第十部与终章、附录。每条定理只计一次，放在中文正文最先引用它的部分；格中数字为条数，底色越深条数越多，空格为零。图不表示模块间的证明依赖。
+**C.1 的 $294$ 条定理按模块族与首次出场的部分组。** 行是模块路径的前三段，较小的族合并为末行；列是第一至第十部与终章、附录。每条定理只计一次，放在中文正文最先引用它的部分；格中数字为条数，底色越深条数越多，空格为零。图不表示模块间的证明依赖。
 :::
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
@@ -207,6 +207,7 @@
 | `T175` | [`D5.S3.Quantum.Decoherence.CoherenceDecay.equal_superposition_coherence_tendsto_zero`](lean:D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero) | [{source}](lean:D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero) | `theorem` | Ch 4 `#prop-phase-damping-decay`; media `viz/visualizations.json`, `viz/bloch-noise/index.html` |
 | `T176` | [`D5.S3.Quantum.Decoherence.NonselectiveMarginalization.nonselective_recording_marginal`](lean:D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal) | [{source}](lean:D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal) | `theorem` | Ch 4 `#thm-nonselective-marginal`, Ch 27; media `films/002-pairwise-born/film.json` |
 | `T177` | [`D5.S3.Quantum.Decoherence.ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect`](lean:D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect) | [{source}](lean:D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect) | `theorem` | Ch 4 `#thm-reduced-access-defect`, Ch 29 `#thm-ch29-reversal-access-and-gram-realizability`, Ch 33 `#thm-ch33-consensus-redundant-records-and-kernel`, Ch 38 `#thm-ch38-copied-address-dereference-and-access-defect`, 附录 A, 附录 D; media `viz/visualizations.json`, `viz/coherence-handshake-causality/index.html`, `viz/observer-consensus-decoherence/index.html`, `viz/quantum-interpretations-duel/index.html` |
+| `T292` | [`D5.S3.Quantum.Decoherence.RepeatedRecordExponentialDecay.repeated_record_exponential_decay`](lean:D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay.repeated_record_exponential_decay) | [{source}](lean:D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay.repeated_record_exponential_decay) | `theorem` | Ch 4 `#thm-repeated-record-decay` |
 | `T178` | [`D5.S3.Quantum.Divergence.CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi`](lean:D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi) | [{source}](lean:D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi) | `theorem` | Ch 8 `#thm-channel-data-processing`; media `viz/visualizations.json`, `viz/erasure-ledger/index.html` |
 | `T179` | [`D5.S3.Quantum.Divergence.DualAccountFull.dual_account_full`](lean:D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full) | [{source}](lean:D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full) | `theorem` | Ch 8 `#thm-dual-account-full`; media `viz/visualizations.json`, `viz/erasure-ledger/index.html` |
 | `T180` | [`D5.S3.Quantum.Dynamics.CalibratedUnitaryGroup.calibrated_group`](lean:D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group) | [{source}](lean:D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group) | `theorem` | Ch 7 `#thm-calibrated-unitary-group`, 终章, 附录 A |
@@ -326,7 +327,7 @@
 
 ## C.2 形式化定义、结构与归纳类型索引（97 项唯一声明） {#sec-appendix-c-definitions}
 
-下表列出被中文正文 `definition` 与 `example` 环境头以 `lean=` 引用的 **97 项唯一声明（88 项 `def`、9 项 `inductive`）**；它们与 C.1 的 293 条定理共同构成 **390 项被环境头引用的锁定声明**。媒体消费者在最后一栏另列，不决定分区。
+下表列出被中文正文 `definition` 与 `example` 环境头以 `lean=` 引用的 **97 项唯一声明（88 项 `def`、9 项 `inductive`）**；它们与 C.1 的 294 条定理共同构成 **391 项被环境头引用的锁定声明**。媒体消费者在最后一栏另列，不决定分区。
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -430,9 +431,9 @@
 
 ---
 
-## C.2.1 行内引用的辅助定理与定义索引（161 项唯一声明） {#sec-appendix-c-inline}
+## C.2.1 行内引用的辅助定理与定义索引（162 项唯一声明） {#sec-appendix-c-inline}
 
-除 C.1 与 C.2 的 390 项环境引用声明外，另有 **161 项声明（109 项定理、52 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **551 项唯一声明**（$293 + 97 + 161 = 551$）。
+除 C.1 与 C.2 的 391 项环境引用声明外，另有 **162 项声明（110 项定理、52 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **553 项唯一声明**（$294 + 97 + 162 = 553$）。
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -597,9 +598,10 @@
 | `R159` | [`D5.S3.Zeros.ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one`](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | [{source}](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | `theorem` | Ch 22 |
 | `R160` | [`D5.S3.Quantum.Information.QubitEntropyContraction.qubit_holevo_contraction`](lean:D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction) | [{source}](lean:D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction) | `theorem` | Ch 3 |
 | `R161` | [`D5.S3.Quantum.Information.QubitNormalFormState.qubit_state_entropy`](lean:D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy) | [{source}](lean:D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy) | `theorem` | Ch 3 |
+| `R162` | [`D5.S3.Quantum.Decoherence.EnvironmentMarginalChannel.environment_marginal_channel`](lean:D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel.environment_marginal_channel) | [{source}](lean:D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel.environment_marginal_channel) | `theorem` | Ch 4 |
 
 ::: {.viz src="lean-declaration-map" preset="inline" height="500"}
-**只靠行内链接出现的那些。** 地图保留 161 个空心格：109 格绿色的定理、52 格灰色的定义，全部列在本节。这里的“行内”仅描述中文正文的引用方式；其中有些声明也被媒体使用。
+**只靠行内链接出现的那些。** 地图保留 162 个空心格：110 格绿色的定理、52 格灰色的定义，全部列在本节。这里的“行内”仅描述中文正文的引用方式；其中有些声明也被媒体使用。
 :::
 
 ---
@@ -640,17 +642,17 @@
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s)`） | `PASS` |
 
 ::: {.figure src="appc-ledger"}
-**$551$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $293 + 7 + 102 = 402$，定义一行 $97 + 0 + 52 = 149$。虚线框按本附录的环境引用分区：C.1 $= 293$，C.2 $= 97$，C.2.1 $= 7 + 102 + 0 + 52 = 161$；媒体消费者不改变索引分区。
+**$553$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $294 + 7 + 103 = 404$，定义一行 $97 + 0 + 52 = 149$。虚线框按本附录的环境引用分区：C.1 $= 294$，C.2 $= 97$，C.2.1 $= 7 + 103 + 0 + 52 = 162$；媒体消费者不改变索引分区。
 :::
 
-这张账的第一行在声明地图上是 $402$ 格绿色：被环境头引用的 $293$ 格画成实心，其余 $7 + 102 = 109$ 格空心。
+这张账的第一行在声明地图上是 $404$ 格绿色：被环境头引用的 $294$ 格画成实心，其余 $7 + 103 = 110$ 格空心。
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 402 格：293 个实心格被环境头以 `lean=` 引用，109 个空心格只在中文正文的行内链接里出现。
+**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 404 格：294 个实心格被环境头以 `lean=` 引用，110 个空心格只在中文正文的行内链接里出现。
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-本附录 C.1 的 293 条环境引用定理、C.2 的 97 项环境引用定义/归纳类型与 C.2.1 的 161 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 551 项声明（402 项 `theorem` + 140 项 `def` + 9 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.3 的 9 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
+本附录 C.1 的 294 条环境引用定理、C.2 的 97 项环境引用定义/归纳类型与 C.2.1 的 162 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 553 项声明（404 项 `theorem` + 140 项 `def` + 9 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.3 的 9 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}

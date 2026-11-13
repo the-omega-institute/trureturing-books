@@ -211,6 +211,58 @@ Let $c \in [0, 1]$ be a real coherence-retention coefficient, and let $\mathcal{
 Claim 1 follows by induction on $N$: $N = 0$ is the identity ($c^0 = 1$), and step $N \to N + 1$ leaves diagonal entries $i = j$ untouched while multiplying off-diagonal entries $i \neq j$ by one more factor of $c$ to give $c^{N+1}\rho_{ij}$. For claim 2, evaluating claim 1 on $\rho_+$ at $(0, 1)$ gives $\frac{1}{2}c^N$; since $0 \le c < 1$, $|c| < 1$ implies $c^N \to 0$ as $N \to \infty$, and scaling by $\frac{1}{2}$ preserves convergence to $0$. The full proof is checked by the Lean kernel.
 :::
 
+The qubit formula above compresses the environment's action into one real number $c$. What if the system has many branches and complex phases enter the overlaps? Attach a unit environment vector $E_i$ to each system address $i$. After the controlled recording map $V\lvert i\rangle=\lvert i\rangle\otimes\lvert E_i\rangle$, tracing out the environment multiplies entry $(i,j)$ by $G_{ij}=\sum_a E_i(a)\overline{E_j(a)}$, the entry formula of [`environment_marginal_channel`](lean:D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel.environment_marginal_channel). Exact orthogonality can therefore be relaxed to a sufficient condition with a quantitative error bound.
+
+::: {.theorem #thm-repeated-record-decay title="Exponential Error Bound for Repeated Finite Records and Record-Class Pinching" lean="D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay.repeated_record_exponential_decay"}
+Let $d,e\in\mathbb{N}$ and $E:\mathrm{Fin}\,d\to\mathrm{Fin}\,e\to\mathbb{C}$, with $\sum_a |E_i(a)|^2=1$ for every system address $i$. Define
+
+$$
+G_{ij}=\sum_a E_i(a)\overline{E_j(a)},\qquad
+\Phi_E(\rho)_{ij}=G_{ij}\rho_{ij}.
+$$
+
+Given $q\in[0,1)$, assume that $|G_{ij}|\le q$ whenever $E_i\ne E_j$. For each $v\in\operatorname{range} E$, define the diagonal projector
+
+$$
+\begin{aligned}
+(P_v)_{ij}&=\begin{cases}1,&i=j\text{ and }E_i=v,\\0,&\text{otherwise},\end{cases}\\
+\Pi_E(\rho)&=\sum_{v\in\operatorname{range}E}P_v\rho P_v.
+\end{aligned}
+$$
+
+Then for every $N\in\mathbb{N}$, $\rho\in M_d(\mathbb{C})$ and $i,j\in\mathrm{Fin}\,d$, all three statements hold:
+
+$$
+\begin{aligned}
+\bigl(\Phi_E^N(\rho)\bigr)_{ij}&=G_{ij}^N\rho_{ij},\\
+\Pi_E(\rho)_{ij}&=\begin{cases}\rho_{ij},&E_i=E_j,\\0,&E_i\ne E_j,\end{cases}\\
+\|\Phi_E^N(\rho)-\Pi_E(\rho)\|_{\mathrm F}
+&\le q^N\|\rho-\Pi_E(\rho)\|_{\mathrm F},
+\end{aligned}
+$$
+
+Here $\|A\|_{\mathrm F}=(\sum_{i,j}|A_{ij}|^2)^{1/2}$ is the Frobenius, or Hilbert–Schmidt, norm, and $\Phi_E^0$ is the identity map.
+:::
+
+::: proof
+Each application multiplies entry $(i,j)$ by $G_{ij}$ again, so induction gives the first identity. Multiplication on both sides by the diagonal projector $P_v$ retains precisely rows and columns carrying record $v$; summing gives the second identity. Equal normalized records have $G_{ij}=1$, so their error vanishes. Across different classes, the error is $G_{ij}^N\rho_{ij}$, whose magnitude is at most $q^N|\rho_{ij}|$. Square these bounds, sum over entries and take the square root to obtain the third statement. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-nonorthogonal-record-decay title="A Little Separation Each Time: How Much Error Remains after Ten Steps?"}
+Take the nonorthogonal unit records $E_0=(1,0)$ and $E_1=(1/2,\sqrt{3}/2)$. Then $G_{01}=G_{10}=1/2$, so $q=1/2$ is admissible. The records are distinct, their classes are singletons, and $\Pi_E$ is computational-basis pinching. Substituting the equatorial state $\rho_+=\frac12\bigl(\begin{smallmatrix}1&1\\1&1\end{smallmatrix}\bigr)$ gives
+
+$$
+\Phi_E^N(\rho_+)=\frac12\begin{pmatrix}1&2^{-N}\\2^{-N}&1\end{pmatrix},\qquad
+\|\Phi_E^N(\rho_+)-\Pi_E(\rho_+)\|_{\mathrm F}=\frac{2^{-N}}{\sqrt2}.
+$$
+
+After ten steps the error relative to the initial off-diagonal residual is $1/1024$. No finite step has been called exact erasure: this is the coherence residual of the specified model.
+:::
+
+Classes here mean **identical record vectors**. Coherence within a class survives; the limit is complete dephasing of individual basis addresses only when all classes are singletons. If $E_1=-E_0$, the vectors are distinct but $|G_{01}|=1$, violating the strict overlap bound: the channel changes phase without reducing this coherence's magnitude. Distinct vectors alone do not establish distinguishable environment records.
+
+Interpreting $\Phi_E^N$ as successive collisions also requires each step to implement the same reduced channel. One realization uses a fresh, initially uncorrelated environment register and the same recording interaction at every step. Reusing an environment or introducing correlations does not justify $G_{ij}^N$ from a one-step overlap alone. The result controls the error after relaxing ideal orthogonality; normalization, the strict overlap bound and the repeated-channel description remain model premises. Its Frobenius norm must also be distinguished from trace distance or an experimental discrimination error rate.
+
 **Decay to zero: is it still reversible?** In [@prop-phase-damping-decay] the coherence is multiplied by $c$ at each step, leaving $c^N\rho_{01}$ after $N$ steps and finally zero. Section 4.1 showed that one step of decoherence can be seen as a reversible coupling followed by discarding the environment ([@thm-stinespring-dilation], [@thm-reduced-access-defect]). But "each step can be seen this way" and "all the steps together are still the shadow of one reversible evolution" are different claims: the first allows a different dilation at every step, the second asks one unitary $U$ to account for all the powers $T^n$ at once. The next theorem says that the second holds for every contraction.
 
 ::: {.theorem #thm-unitary-power-dilation title="Sz.-Nagy Unitary Power Dilation: Every Power of a Contraction Is a Shadow of the Same Unitary" lean="D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation"}
