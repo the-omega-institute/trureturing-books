@@ -1,4 +1,4 @@
-# Appendix B: Clifford Algebra Cheat Sheet
+# Appendix B Clifford Algebra Cheat Sheet {#appendix-b-clifford-algebra-cheat-sheet}
 
 This appendix collects the core identities of Clifford Geometric Algebra used throughout the book—from the three-dimensional Euclidean algebra $\mathcal{Cl}_{3,0}(\mathbb{R})$ governing the single-qubit Bloch sphere, through the two-bit Pauli symplectic table over $\mathbb{F}_2^{2n}$, to the relativistic spacetime algebras $\mathcal{Cl}_{1,1}(\mathbb{R})$ and $\mathcal{Cl}_{1,3}(\mathbb{R})$ of Part V. Every identity carries an explicit epistemic tag: results verified by locked `trureturing@dev` declarations carry a `LEAN ✓` badge and clickable GID link, while foundational definitions and classical textbook identities are marked `definition` or `Literature result`.
 

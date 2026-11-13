@@ -1,4 +1,4 @@
-# The Essence of the Quantum Is Fairness: Fivefold Abolition of Geometric Privilege and Ergodic Statistical Holism
+# Chapter 31 The Essence of the Quantum Is Fairness: Fivefold Abolition of Geometric Privilege and Ergodic Statistical Holism {#the-essence-of-the-quantum-is-fairness-fivefold-abolition-of-geometric-privilege-and-ergodic-statistical-holism}
 
 > *"The essence of the quantum is fairness... The universe cut away the lofty third point above, compelling all beings to measure one another pairwise at eye level; with the Pythagorean theorem it revoked the privilege of omniscience and omnipotence, with the horizon it sheltered the suspense of finite life, and finally with irrational ergodicity it guaranteed that every soul awakening from forgetting shall, across the long journey, receive an equally abundant share of starlight."*
 

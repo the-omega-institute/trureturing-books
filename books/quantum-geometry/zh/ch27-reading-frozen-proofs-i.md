@@ -1,4 +1,4 @@
-# 走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录挤压
+# 第二十七章 走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录挤压 {#走进-lean-4-公理圣殿上从平行四边形恒等式到有限记录挤压}
 
 > *“构建命题证明通用机器学术理论,定义定理证明”*
 
@@ -17,7 +17,7 @@
 **第二十七章解剖的四条，回到它们出场的地方。** 青色的线从第二十七章的柱脚连回四个绿色实心格，它们第一次出场都在第一至第三章；琥珀色框住的是平行四边形恒等式（[@thm-audit-parallelogram-law]），琥珀色的线连到另外引用它的几章。
 :::
 
-## 定义、定理与证明：走进 Lean 4 内核审计 {#sec-lean-kernel-audit-architecture}
+## 27.1 定义、定理与证明：走进 Lean 4 内核审计 {#sec-lean-kernel-audit-architecture}
 
 在 `trureturing` 仓库的冻结验证体系中，一个数学命题要想成为本书可引用的绿色定理，必须跨越三道机器铁门槛：
 
@@ -127,7 +127,7 @@ $$
 **玻恩骨架的证明分三路，只有第三路要绕道。** 虚线圈是前提，方框是证明里写到的步骤与所用的引理：①、② 各一步；③ 先由 $\rho \succeq 0$ 得到三明治 $P\rho P^* \succeq 0$，再借 $P^* = P$、$P^2 = P$ 用迹的循环律把它的迹换回 $\Tr(\rho P)$，最后取迹非负。三路汇入绿色的 [@lemma-audit-born-skeleton]。
 :::
 
-## 支撑链射线相位刚性与有限记录挤压幂等 {#sec-audit-ray-rigidity-and-pinching}
+## 27.2 支撑链射线相位刚性与有限记录挤压幂等 {#sec-audit-ray-rigidity-and-pinching}
 
 现在我们转向两道在几何与观察者条件化中最具代表性的结构性定理（图 27 中栏与右栏）。
 
@@ -203,7 +203,7 @@ $$
 **挤压幂等的证明是一条直链。** 虚线圈里的正交与幂等两条前提先让左投影吸收整个和式，$P_k \cdot U(\rho) = P_k \rho P_k$；右乘 $P_k$ 再吸收一次，得到逐点幂等；最后用函数外延性推到每个 $\rho$，到达绿色的 [@cor-audit-pinching-idempotent]。图中 $U(\rho)$ 即 $\operatorname{unreadState}(P, \rho)$。
 :::
 
-## 逐行源码解剖：从 Mathlib 引理到图归纳与矩阵块消去 {#sec-line-by-line-proof-anatomy-i}
+## 27.3 逐行源码解剖：从 Mathlib 引理到图归纳与矩阵块消去 {#sec-line-by-line-proof-anatomy-i}
 
 为了帮助读者养成直接阅读 Lean 4 源码的能力，我们将上面四条定理在 `trureturing@dev` 中的核心证明机制总结为四条通用证明设计模式：
 
@@ -212,7 +212,7 @@ $$
 3. **有限和式的单点筛除模式（`Finset.sum_eq_single k`）**：在 `RayPhaseRigidity.lean`（对角矩阵乘向量）与 `Conditioning.lean`（正交投影块相乘）中，每当需要将有限求和 $\sum_{l} F(k, l)$ 坍缩为对角单点项 $F(k, k)$ 时，一律调用 `Finset.sum_eq_single k`，将证明拆分为两条干净的子目标：其一是异指标消去 `∀ l ≠ k, F(k, l) = 0`，其二是荒谬边界排除 `k ∉ Finset.univ → F(k, k) = 0`；
 4. **稀疏连通图的自反传递闭包归纳模式（`Relation.ReflTransGen`）**：在 [@prop-audit-ray-phase-rigidity] 中，局部两两重叠关系 `∃ x ∈ tests, x i ≠ 0 ∧ x j ≠ 0` 通过 `Relation.ReflTransGen` 提升为全局连通性，证明只需对 `refl`（自反步 `rfl`）与 `tail`（单步延拓 `ih.trans (hstep j k hjk)`）做两行结构归纳，就将局部对角元相等 $A_{jj} = A_{kk}$ 传遍整张连通图！
 
-## 第一至三部冻结声明全景审计表 {#sec-parts-i-to-iii-frozen-audit-table}
+## 27.4 第一至三部冻结声明全景审计表 {#sec-parts-i-to-iii-frozen-audit-table}
 
 下面的审计表列出了本书第一部至第三部所引用的代表性冻结声明在 `trureturing@dev`（提交 [{commit}](trureturing:)）中的精确源码路径、行号、语句摘要哈希前缀（`statement_id`）以及形式化契约边界。表中任何中文/英文散文标题（如“平行四边形定律”“玻恩概率骨架”“挤压幂等”）仅作导读说明，不附加超出冻结签名本身的额外形式化声明。
 

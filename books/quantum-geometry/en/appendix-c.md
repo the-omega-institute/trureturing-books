@@ -1,4 +1,4 @@
-# Appendix C: Master Index of Formalized Lean 4 Theorems and Open Problems
+# Appendix C Master Index of Formalized Lean 4 Theorems and Open Problems {#appendix-c-master-index-of-formalized-lean-4-theorems-and-open-problems}
 
 This appendix serves as the **Master Audit Ledger** of the epistemic boundaries governing this monograph. Under the Epistemic Contract established in the Prelude, every mathematical claim in the book belongs to one of three strictly segregated tiers, verified entry-by-entry against `trureturing.lock.json` (pinned to `trureturing@dev` commit [{commit}](trureturing:)):
 
@@ -457,7 +457,7 @@ The table lists **114 unique declarations (104 `def` and 10 `inductive`)** cited
 
 ---
 
-## C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (163 Unique Declarations) {#sec-appendix-c-inline}
+## C.3 Inline-Referenced Auxiliary Theorems and Definitions (163 Unique Declarations) {#sec-appendix-c-inline}
 
 Beyond the 415 environment-cited declarations in C.1 and C.2, **163 declarations (110 theorems and 53 definitions)** appear only through inline links in the Chinese units, with no `lean=` citation on any `:::` environment header. They include three media-consumed theorems formerly placed in C.1; their media consumers remain listed, without changing their inline classification. The three sections cover all **578 unique locked declarations** ($301 + 114 + 163 = 578$).
 
@@ -633,7 +633,7 @@ Beyond the 415 environment-cited declarations in C.1 and C.2, **163 declarations
 
 ---
 
-## C.3 Open Conjectures and Unformalized Problems (11 Entries: 6 Conjectures + 3 Open Problems + 2 Literature Boundaries — Zero `lean` Attributes) {#sec-appendix-c-open-register}
+## C.4 Open Conjectures and Unformalized Problems (11 Entries: 6 Conjectures + 3 Open Problems + 2 Literature Boundaries — Zero `lean` Attributes) {#sec-appendix-c-open-register}
 
 ::: {.remark #rem-appendix-c-open-literature-register title="Register of Open Conjectures and External Literature Boundaries (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book (only for external literature boundary entries `O6` and `O7` below; `O1`–`O5` and `O8` are `conjecture` environments, while `O9`–`O11` are `problem` environments).** The book contains nine open environments, all without a `lean` attribute. Open conjectures, open problems and classical literature results are identified separately and excluded from the count of verified declarations.
@@ -656,7 +656,7 @@ Beyond the 415 environment-cited declarations in C.1 and C.2, **163 declarations
 
 ---
 
-## C.4 Pinned Commit & Kernel Integrity Checklist {#sec-appendix-c-integrity-checklist}
+## C.5 Pinned Commit & Kernel Integrity Checklist {#sec-appendix-c-integrity-checklist}
 
 Every build and release of this book mechanically enforces the following five verification gates via `./tbook pin` and `./tbook check`:
 

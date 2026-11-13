@@ -10,6 +10,9 @@
      For a third cosine x outside the window, sin²θ₁ sin²θ₂ − (x − cos θ₁ cos θ₂)² < 0: no unit vectors.
      The slice c_AB = cos θ₁ of the region det G ≥ 0, drawn in the (c_BC, c_AC) plane, is the ellipse whose rim is
      (cos θ₂, cos(θ₁ ∓ θ₂)); its top touches 1 at θ₂ = θ₁, where C = A.
+   Drawn as solids: the three arrows in the glass ball of the lab page two-angle-addressing, and, when the ellipse's rim
+   is read, the slice stood back up into the region det G ≥ 0 itself (the chapter's "bubble"), cut open at
+   c_AB = cos θ₁ by the model of the lab page gram-causal-elliptope (both from the pages' model.js).
 
    Lean (film.json "lean", at the pinned commit): UnitGramIndistinguishability.unit_gram_overlap_characterization:
      for a family of unit vectors, ⟪record i, record j⟫ = 1 ↔ record i = record j, and "overlap 1" is an
@@ -114,63 +117,22 @@ Object.assign(FILM.speed, { fix: 0.02, window: 0.014, volume: 0.016, ellipse: 0.
 /* ======================================================================= */
 /*                              drawing helpers                              */
 /* ======================================================================= */
-/* orthographic view of the unit sphere: world z up → [screen x, screen y, depth] (depth > 0 behind) */
+/* orthographic view of the unit sphere: world z up → [screen x, screen y, depth] (depth > 0 behind); the camera of the
+   solid shots (gwShot) is this view, so 2D labels placed with it sit on the solid */
 function gwView(cx, cy, R, yaw, el) {
   const cw = Math.cos(yaw), sw = Math.sin(yaw), ce = Math.cos(el), se = Math.sin(el);
   const V = p => { const X = p[0] * cw - p[1] * sw, Y = p[0] * sw + p[1] * cw, Z = p[2]; return [cx + X * R, cy - (Z * ce + Y * se) * R, Y * ce - Z * se]; };
-  V.cx = cx; V.cy = cy; V.R = R;
+  V.cx = cx; V.cy = cy; V.R = R; V.yaw = yaw; V.el = el;
   return V;
 }
-/* a parametric 3-D curve: the front runs bright, the back runs faint */
-function gwPath(V, fn, n, col, aF, aB, lw = 2, dash = null) {
-  if (aF <= 0.003 && aB <= 0.003) return;
-  const pts = [];
-  for (let i = 0; i <= n; i++) pts.push(V(fn(i / n)));
-  let run = [pts[0]], back = pts[0][2] > 0;
-  const flush = () => {
-    if (run.length < 2) return;
-    const r = run;
-    ctx.save(); if (dash) ctx.setLineDash(dash);
-    curve(k => r[Math.round(k * (r.length - 1))], r.length - 1, col, back ? aB : aF, back ? lw * 0.7 : lw);
-    ctx.restore();
-  };
-  for (let i = 1; i < pts.length; i++) {
-    const b = pts[i][2] > 0;
-    run.push(pts[i]);
-    if (b !== back) { flush(); run = [pts[i]]; back = b; }
-  }
-  flush();
+/* The sphere figures are solid shots. gwShot gives the shot whose camera is the 2D view V (same yaw, pitch, scale and
+   centre), so labels placed with V sit on the solid; scenes draw the shot first and the 2D labels after it. The ball is
+   the glass ball of the lab page two-angle-addressing (viz/two-angle-addressing/model.js, QG_SPHERE). */
+function gwShot(key, V, r) {
+  return solid(key, { x: r[0], y: r[1], w: r[2], h: r[3], yaw: V.yaw, pitch: V.el, unit: V.R, cx: V.cx - r[0], cy: V.cy - r[1], px: true });
 }
-/* great-circle arc between unit vectors u and v (scaled by r) */
-function gwArc(V, u, v, col, a, lw = 3, r = 1) {
-  const om = Math.acos(clamp(GV.dot(u, v), -1, 1));
-  if (om < 1e-4) return;
-  const so = Math.sin(om);
-  gwPath(V, s => GV.sc(r, GV.add(GV.sc(Math.sin((1 - s) * om) / so, u), GV.sc(Math.sin(s * om) / so, v))), 48, col, a, a * 0.45, lw);
-}
-function gwSphere(V, a) {
-  if (a <= 0.003) return;
-  dot(V.cx - V.R * 0.18, V.cy - V.R * 0.22, V.R * 1.25, 'b', 0.07 * a);
-  ring(V.cx, V.cy, V.R, C.cyan, 0.7 * a, 2.2);
-  ring(V.cx, V.cy, V.R + 8, C.cyan, 0.14 * a, 1);
-  for (const lat of [-60, -30, 0, 30, 60]) {
-    const r = Math.cos(lat * GW_DEG), z = Math.sin(lat * GW_DEG);
-    gwPath(V, s => [r * Math.cos(TAU * s), r * Math.sin(TAU * s), z], 72, C.blue, a * 0.3, a * 0.08, 1.2);
-  }
-  for (let k = 0; k < 6; k++) {
-    const ph = k * Math.PI / 6;
-    gwPath(V, s => [Math.sin(TAU * s) * Math.cos(ph), Math.sin(TAU * s) * Math.sin(ph), Math.cos(TAU * s)], 72, C.blue, a * 0.25, a * 0.07, 1.1);
-  }
-}
-function gwVec(V, v, col, a, pearlName, label, o = {}) {
-  if (a <= 0.003) return;
-  const c0 = V([0, 0, 0]), p = V(v);
-  arrow(c0[0], c0[1], p[0], p[1], col, a, o.lw || 4);
-  dot(p[0], p[1], o.r || 14, pearlName, a);
-  if (label) {
-    const q = V(GV.sc(1.16, v));
-    txt(label, q[0] + (o.dx || 0), q[1] + 12 + (o.dy || 0), { size: o.size || 36, fam: F.math, w: 700, align: 'center', c: col, a });
-  }
+function gwBall(sh, a) {
+  QG_SPHERE.ball(sh, { glass: C.cyan, ink: C.blue, width: 1.5, alpha: 0.55 * a, back: 0.35, shell: { alpha: 0.08 * a, rim: 0.5 * a } });
 }
 function gwPoly(pts, col, a, stroke = null) {
   if (a <= 0.003) return;
@@ -196,30 +158,44 @@ function gwRich(parts, x, y, o = {}) {
 }
 /* c with a two-letter subscript, as a list of rich parts */
 const gwC = (pair, col) => [['c', col], [pair, col, 'sub']];
-/* the three vectors, the arcs between them and the circle C may travel on */
-function gwFigure(V, g, a, o = {}) {
-  if (a <= 0.003) return;
+/* the three vectors, the arcs between them, the circle C may travel on and the solid they span, in the shot sh;
+   alphas are absolute (the shot is composited at full opacity) */
+function gwFigure3(sh, g, a, o = {}) {
   const aC = o.aC == null ? a : o.aC, aCirc = o.aCirc == null ? 0 : o.aCirc;
-  let aVol = o.aVol || 0;
   /* the circle about B on which C may go */
-  if (aCirc > 0) gwPath(V, s => [g.s2 * Math.cos(TAU * s), g.s2 * Math.sin(TAU * s), g.c2], 96, C.now, 0.8 * aCirc, 0.35 * aCirc, 2, [8, 8]);
-  /* the solid the three arrows span */
-  if (aVol > 0) {
-    aVol *= clamp(Math.abs(g.vol) / 0.12);   // the solid flattens to nothing when the three are coplanar
-    const O = V([0, 0, 0]), pA = V(g.A), pB = V(g.B), pC = V(g.C);
-    for (const [p, q] of [[pA, pB], [pB, pC], [pA, pC]]) gwPoly([O, p, q], C.vio, 0.12 * aVol);
-    gwPoly([pA, pB, pC], C.vio, 0.24 * aVol, C.vio);
-  }
+  if (aCirc > 0.003) QG_SPHERE.seg(sh, QG_SPHERE.circlePts([0, 0, g.c2], [0, 0, 1], g.s2, 96), { color: C.now, width: 2.4, alpha: 0.85 * aCirc, dash: [10, 9], back: 0.45 });
+  /* the great circle through A and B, when the three are coplanar */
+  if (o.flat > 0.003) QG_SPHERE.seg(sh, QG_SPHERE.circlePts([0, 0, 0], [0, 1, 0], 1, 120), { color: C.vio, width: 2.6, alpha: 0.75 * o.flat, back: 0.45 });
+  /* the solid the three arrows span; it flattens to nothing when the three are coplanar */
+  const aVol = (o.aVol || 0) * clamp(Math.abs(g.vol) / 0.12);
+  if (aVol > 0.003) sh.poly('vol', { vertices: [[0, 0, 0], g.A, g.B, g.C], faces: [[0, 1, 2], [0, 2, 3], [0, 3, 1], [1, 2, 3]] }, { color: C.vio, alpha: 0.42 * aVol, edges: C.vio });
   /* A·B and B·C are meridians from the pole B (exact even when C = −B); A·C is a great-circle arc */
   const t1 = Math.acos(clamp(g.c1, -1, 1)), t2 = Math.acos(clamp(g.c2, -1, 1)), phC = Math.atan2(g.C[1], g.C[0]);
-  gwPath(V, s => GV.sph(t1 * s, 0), 40, C.cyan, a, 0.45 * a, 4);
-  if (aC > 0) { gwPath(V, s => GV.sph(t2 * s, phC), 60, C.mag, aC, 0.45 * aC, 4); if (o.aAC) gwArc(V, g.A, g.C, C.now, o.aAC * aC, 3.5); }
+  const arc = (fn, n) => { const pts = []; for (let i = 0; i <= n; i++) pts.push(fn(i / n)); return pts; };
+  if (a > 0.003) sh.tube('ab', arc(s => GV.sph(t1 * s, 0), 40), { color: C.cyan, width: 5, alpha: a });
+  if (aC > 0.003 && t2 > 1e-4) sh.tube('bc', arc(s => GV.sph(t2 * s, phC), 60), { color: C.mag, width: 5, alpha: aC });
+  const om = Math.acos(clamp(GV.dot(g.A, g.C), -1, 1));
+  if (aC > 0.003 && o.aAC && om > 1e-4) {
+    const so = Math.sin(om);
+    sh.tube('ac', arc(s => GV.add(GV.sc(Math.sin((1 - s) * om) / so, g.A), GV.sc(Math.sin(s * om) / so, g.C)), 48), { color: C.now, width: 4.5, alpha: o.aAC * aC });
+  }
+  /* the arrows */
+  const vec = (v, col, al, r) => { if (al <= 0.003) return; sh.arrow([0, 0, 0], v, { color: col, width: 4, headSize: 20, alpha: al }); sh.bead(v, { color: col, r, alpha: al }); };
+  vec(g.B, C.white, a, 8);
+  vec(g.A, C.cyan, a, 8);
+  vec(g.C, C.now, aC, 10);
+}
+/* the 2D labels of the figure (view V), drawn after the shot */
+function gwFigureLabels(V, g, a, o = {}) {
+  if (a <= 0.003) return;
+  const aC = o.aC == null ? a : o.aC;
+  const t1 = Math.acos(clamp(g.c1, -1, 1)), t2 = Math.acos(clamp(g.c2, -1, 1)), phC = Math.atan2(g.C[1], g.C[0]);
   /* labels give way when C sits on A, or when C's label would land on B's */
   const dCA = GV.norm(GV.add(g.C, GV.sc(-1, g.A))), pB = V(GV.sc(1.16, g.B)), pCl = V(GV.sc(1.16, g.C));
   const sep = clamp((dCA - 0.12) / 0.2), sepB = clamp((Math.hypot(pCl[0] - pB[0], pCl[1] - pB[1]) - 40) / 40);
-  gwVec(V, g.B, C.white, a, 'w', 'B', { dy: -6 });
-  gwVec(V, g.A, C.cyan, a, 'c', 'A', { dx: -8 });
-  if (aC > 0) gwVec(V, g.C, C.now, aC, 'g', null, { r: 16 });
+  const lab = (v, s, col, al, dx = 0, dy = 0) => { const q = V(GV.sc(1.16, v)); txt(s, q[0] + dx, q[1] + 12 + dy, { size: 36, fam: F.math, w: 700, align: 'center', c: col, a: al }); };
+  lab(g.B, 'B', C.white, a, 0, -6);
+  lab(g.A, 'A', C.cyan, a, -8, 0);
   if (aC > 0) txt('C', pCl[0], pCl[1] + 12, { size: 36, fam: F.math, w: 700, align: 'center', c: C.now, a: aC * sep * sepB });
   /* angle labels at the arc midpoints */
   if (o.labels !== false) {
@@ -230,6 +206,43 @@ function gwFigure(V, g, a, o = {}) {
       txt('θ₂', mBC[0] + 8, mBC[1] + 4, { size: 30, fam: F.math, w: 700, c: C.mag, a: aC * clamp((dl - 50) / 40) * clamp((dB - 50) / 30) });
     }
   }
+}
+/* the sphere shot of a scene: the glass ball (alpha aBall) and the figure, then the figure's labels */
+const GW_RECT = [200, 200, 640, 660];
+function gwSphereShot(key, V, g, aBall, a, o = {}, rect = GW_RECT) {
+  if (aBall <= 0.003 && a <= 0.003) return;
+  const sh = gwShot(key, V, rect);
+  sh.begin();
+  gwBall(sh, aBall);
+  gwFigure3(sh, g, a, o);
+  sh.end(1);
+  gwFigureLabels(V, g, a, o);
+}
+/* The "bubble": the three-element Gram elliptope det G ≥ 0 in the coordinates (c_AB, c_BC, c_AC), drawn by the model of
+   the lab page gram-causal-elliptope (viz/gram-causal-elliptope/model.js, QG_ELLIPTOPE) with the page's camera, cut open
+   at c_AB = cos θ₁ so that the slice, the ellipse of this film, faces the viewer; on it the rim (white), the window of
+   the current θ₂ (amber) and the current c_AC. Returns the 2D anchors of its labels. */
+const GW_BUBBLE_VIEW = { yaw: -1.08, pitch: 0.28 };
+function gwBubbleShot(key, r, a, g, o = {}) {
+  const sh = solid(key, Object.assign({ x: r[0], y: r[1], w: r[2], h: r[3], unit: r[4] }, GW_BUBBLE_VIEW));
+  sh.begin();
+  const x0 = g.c1, m = QG_ELLIPTOPE.model(x0, { ns: 40, nt: 48 });
+  QG_ELLIPTOPE.draw(sh, m, { color: C.vio, width: 1.3, alpha: 0.5 });
+  for (const e of [[1, 0, 0], [0, 1, 0], [0, 0, 1]]) sh.line([GV.sc(-1.2, e), GV.sc(1.25, e)], { color: C.dim, width: 1.2, alpha: 0.8 });
+  const face = (y, z) => [x0 + 0.006, y, z];
+  const rim = m.cap[m.cap.length - 1].map(p => face(p[1], p[2]));
+  sh.line(rim, { color: C.white, width: 3, alpha: o.rim == null ? 1 : o.rim });
+  if (o.slit !== false) {
+    sh.line([face(g.c2, g.lo), face(g.c2, g.hi)], { color: C.now, width: 5 });
+    sh.bead(face(g.c2, g.cAC), { color: C.now, r: 8 });
+  }
+  sh.end(a);
+  return { sh, y: sh.anchor([0, 1.36, 0]), z: sh.anchor([0, 0, 1.34]) };
+}
+function gwBubbleLabels(b, a) {
+  if (a <= 0.003) return;
+  gwRich(gwC('BC', C.mag), b.y.x + 6, b.y.y + 10, { size: 26, a });
+  gwRich(gwC('AC', C.now), b.z.x - 16, b.z.y - 10, { size: 26, a });
 }
 /* a plot frame: data box [x0, x1] × [y0, y1] onto the screen rectangle (px, py, pw, ph) */
 function gwPlot(px, py, pw, ph, x0, x1, y0, y1) {
@@ -254,6 +267,15 @@ const GW_V = () => gwView(520, 530, 268, Math.PI + 0.42, 0.4);
 /* ======================================================================= */
 SCENES.fix = S => {
   const u = S.u, L0 = lineAt(S, 0), L1 = lineAt(S, 1);
+  const ma = at(S, 0, 0.8, 0.1) * clamp((S.d - u) / 0.5);
+  /* C appears at φ = 0, then from line 1 travels round the circle about B */
+  const go = clamp((u - L1.s - 0.4) / Math.max(1, L1.e - L1.s + 0.2));
+  const ph = 360 * ease(go) + 30 * clamp((u - L0.s) / (L1.s - L0.s + 0.01)) ;
+  const g = GV.gram(GW_T1, GW_T2, ph);
+  const V = GW_V();
+  const aC = Q(S, 0, 'and B with C', 0.6) * ma, aCirc = Q(S, 1, 'circle around B', 0.6, -0.4) * ma;
+  /* the solid first; the title and the panel are drawn over it */
+  if (ma > 0) gwSphereShot('sphere', V, g, ma, ma * Q(S, 0, 'fix two cosines', 0.6, -0.8), { aC, aCirc, aAC: Q(S, 1, 'no longer free', 0.6) });
   const ta = clamp(u / 0.5) * (1 - clamp((u - L0.s + 0.2) / 0.6));
   if (ta > 0) {
     const p = clamp(u / 1.3);
@@ -262,17 +284,8 @@ SCENES.fix = S => {
     txt(scramble(DATA.film.title.toUpperCase(), p, 8), W / 2, 590, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.white, a: ta, ls: 4, ab: 2 });
     txt('A · B · C  ·  det G ≥ 0', W / 2, 660, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.mag, a: ta * 0.9, ls: 6 });
   }
-  const ma = at(S, 0, 0.8, 0.1) * clamp((S.d - u) / 0.5);
   if (ma <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  /* C appears at φ = 0, then from line 1 travels round the circle about B */
-  const go = clamp((u - L1.s - 0.4) / Math.max(1, L1.e - L1.s + 0.2));
-  const ph = 360 * ease(go) + 30 * clamp((u - L0.s) / (L1.s - L0.s + 0.01)) ;
-  const g = GV.gram(GW_T1, GW_T2, ph);
-  const V = GW_V();
-  gwSphere(V, ma);
-  const aC = Q(S, 0, 'and B with C', 0.6) * ma, aCirc = Q(S, 1, 'circle around B', 0.6, -0.4) * ma;
-  gwFigure(V, g, ma * Q(S, 0, 'fix two cosines', 0.6, -0.8), { aC, aCirc, aAC: Q(S, 1, 'no longer free', 0.6) });
 
   /* the panel */
   const x = 1010, y = 190, w = 790;
@@ -302,8 +315,7 @@ SCENES.window = S => {
   const rate = 60, ph = rate * u;
   const g = GV.gram(GW_T1, GW_T2, ph);
   const V = GW_V();
-  gwSphere(V, a);
-  gwFigure(V, g, a, { aCirc: a, aAC: 1 });
+  gwSphereShot('sphere', V, g, a, a, { aCirc: a, aAC: 1 });
 
   const x = 1010, y = 190, w = 790, h = 640;
   panel(x, y, w, h, a, C.cyan, 'GRAM WINDOW · 格拉姆窗口');
@@ -364,15 +376,10 @@ SCENES.volume = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
   const ph = gwVolumePhi(S), g = GV.gram(GW_T1, GW_T2, ph), V = GW_V();
-  gwSphere(V, a);
   const flat = Q(S, 2, 'lie in one plane', 0.5);
-  /* the great circle through A and B when they are coplanar */
-  if (flat > 0) {
-    gwPath(V, s => [Math.sin(TAU * s), 0, Math.cos(TAU * s)], 120, C.vio, 0.7 * flat * a, 0.35 * flat * a, 2.5);
-    txt('one plane · 共面', 600, 700, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.vio, a: flat * a });
-  }
-
-  gwFigure(V, g, a, { aCirc: 0.5 * a, aAC: 1, aVol: a });
+  /* the solid the three span, and the great circle through A and B when they are coplanar */
+  gwSphereShot('sphere', V, g, a, a, { aCirc: 0.5 * a, aAC: 1, aVol: a, flat: flat * a });
+  if (flat > 0) txt('one plane · 共面', 600, 700, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.vio, a: flat * a });
 
   const x = 1010, y = 190, w = 790, h = 640;
   panel(x, y, w, h, a, C.cyan, 'GRAM DETERMINANT · 格拉姆行列式');
@@ -460,15 +467,21 @@ SCENES.ellipse = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
   const t2 = gwSweep(S), ph = 150 * u + 20, g = GV.gram(GW_T1, t2, ph), V = GW_V();
-  gwSphere(V, a);
-  gwFigure(V, g, a, { aCirc: a, aAC: 1 });
+  /* with the rim, the slice stands back up into its solid: the sphere gives way to the elliptope (the bubble) */
+  const kb = Q(S, 2, 'Its rim', 1.2, -0.3), rim = Q(S, 2, 'Its rim', 0.8, -0.3);
+  gwSphereShot('sphere', V, g, a * (1 - kb), a * (1 - kb), { aCirc: a * (1 - kb), aAC: 1 });
+  if (kb > 0.003) {
+    const b = gwBubbleShot('bubble', [170, 190, 700, 680, 182], a * kb, g, { rim });
+    gwBubbleLabels(b, a * kb);
+    txt('det G ≥ 0', 230, 770, { size: 28, fam: F.math, w: 700, c: C.vio, a: a * kb });
+    gwRich([['cut at ', C.white], ...gwC('AB', C.cyan), [' = cos θ₁ = 0.5', C.cyan]], 230, 812, { size: 24, a: a * kb });
+  }
 
   const x = 1010, y = 190, w = 790, h = 640;
   panel(x, y, w, h, a, C.cyan, 'THE SLICE c_AB = cos 60° · 椭圆切片');
   gwNumTag(x + w - 60, y + 16, a);
   const P = gwPlot(x + 130, y + 110, 430, 430, -1, 1, -1, 1);
   gwAxes(P, a);
-  const rim = Q(S, 2, 'Its rim', 0.8, -0.3);
   gwEllipse(P, t2, a, { rim });
   /* the current slit */
   const sx = P.X(g.c2);
@@ -500,8 +513,7 @@ SCENES.lock = S => {
   /* θ₂ runs 120° → 60° and φ → 0 during line 0, then C sits on A */
   const k = ease(clamp((u - 0.2) / Math.max(1, lineAt(S, 1).s + 0.6)));
   const t2 = lerp(120, GW_T1, k), ph = lerp(140, 0, k), g = GV.gram(GW_T1, t2, ph), V = GW_V();
-  gwSphere(V, a);
-  gwFigure(V, g, a, { aCirc: a * (1 - k * 0.6), aAC: 1 });
+  gwSphereShot('sphere', V, g, a, a, { aCirc: a * (1 - k * 0.6), aAC: 1 });
   const hit = Q(S, 1, 'C lands on A', 0.5);
   if (hit > 0) { const pA = V(g.A); ring(pA[0], pA[1], 30 + 30 * (1 - hit), C.now, a * hit, 3); txt('C = A', pA[0] - 30, pA[1] - 72, { size: 30, fam: F.math, w: 700, align: 'right', c: C.now, a: a * hit }); }
 
@@ -546,13 +558,9 @@ FILM.poster = () => {
   background(t, TL.scenes[si], si, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.3, a: 0.18, cx: 1360, cy: 420, camZ: 7, lw: 1.3, dots: false });
   const V = gwView(450, 580, 285, Math.PI + 0.42, 0.4), g = GV.gram(GW_T1, GW_T2, 115);
-  gwSphere(V, 1);
-  gwFigure(V, g, 1, { aCirc: 1, aAC: 1, aVol: 1 });
-  const P = gwPlot(1530, 560, 230, 230, -1, 1, -1, 1);
-  gwAxes(P, 1);
-  gwEllipse(P, 180, 1, { rim: 1 });
-  line(P.X(GW0.c2), P.Y(GW0.lo), P.X(GW0.c2), P.Y(GW0.hi), C.now, 1, 5);
-  dot(P.X(GW0.c2), P.Y(g.cAC), 13, 'g', 1);
+  gwSphereShot('sphere', V, g, 1, 1, { aCirc: 1, aAC: 1, aVol: 1 }, [130, 250, 640, 680]);
+  /* the bubble with the chapter's window on its slice */
+  gwBubbleLabels(gwBubbleShot('bubble', [1530, 580, 340, 330, 84], 1, Object.assign({}, GW0, { cAC: g.cAC })), 1);
   const cx = 1300;
   txt('两条余弦锁住第三条', cx, 250, { size: 96, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('格拉姆窗口', cx, 362, { size: 96, fam: F.zh, w: 900, align: 'center', c: C.cyan, ab: 3 });

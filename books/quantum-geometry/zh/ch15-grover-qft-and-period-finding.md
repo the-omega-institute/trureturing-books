@@ -1,4 +1,4 @@
-# 夹角平面旋转与赤道面积齿轮：Grover 搜索、QFT 与 Shor 大数分解
+# 第十五章 夹角平面旋转与赤道面积齿轮：Grover 搜索、QFT 与 Shor 大数分解 {#夹角平面旋转与赤道面积齿轮grover-搜索qft-与-shor-大数分解}
 
 > *“这核心是各向同性如何从正交关系到达另外一个点,一个是正交一次,一个是正交两次,因为三元两两正交”*
 
@@ -13,7 +13,7 @@
 **图 15。** 本章地图：面板 I，$N = 4$ 时一步 Grover 迭代把箭头 $U$ 转过紫色的 $2\theta = 60^\circ$，琥珀色的 $QU$ 正好落在成功方向 $W$ 上；面板 II，$x = 5 = (101)_2$ 的三只相位齿轮，齿数 $2$、$4$、$8$，琥珀色的指针依次指向 $\pi$、$\pi/2$、$5\pi/4$；面板 III，$Q = 16$、$r = 4$ 的周期态做完 QFT 后，只有 $k = 0, 4, 8, 12$ 四处留下高 $1/4$ 的青色柱。
 :::
 
-## Grover：两次反射的共同不变平面 {#sec-grover-invariant-plane}
+## 15.1 Grover：两次反射的共同不变平面 {#sec-grover-invariant-plane}
 
 想象在一座拥有 $l$ 个正交房间的巨大迷宫里寻找目标。经典搜寻者每次只能推开一扇门，平均要试 $O(l)$ 次；而量子搜索则从一开始就把单位 $\ell^2$ 范数均匀铺满所有房间（注意：量子态列向量的单位归一化始终是欧氏/希尔伯特 $\ell^2$ 范数 $\sum_i |\psi_i|^2 = 1$，而非函数空间上的上确界 $\sup$ 范数）。
 
@@ -119,7 +119,7 @@ $$
 Grover 两次反射的完整实验室：拖动镜 2 上的初始态改 $\theta$，换 $N$，用 ← → 一面一面地照镜子；右边的柱子是每一步之后的成功概率 $\sin^2((2n+1)\theta)$（[@thm-grover-uniform-rotation]）。查询下界 $\Omega(\sqrt{N})$ 是文献结果，未在本书形式化。
 :::
 
-## 相位反冲与 QFT 二进制齿轮 {#sec-qft-phase-gears}
+## 15.2 相位反冲与 QFT 二进制齿轮 {#sec-qft-phase-gears}
 
 如果说 Grover 搜索靠的是在实平面里一步旋转 $2\theta$，那么量子傅里叶变换（QFT）与相位估计靠的就是在复赤道圆周上拧转不同齿比的**相位齿轮**（见图 15 面板 II）。
 
@@ -160,7 +160,7 @@ $$
 2. **共轭转置 `star` 与相位正号规范**：式中的 $\mathrm{star}$ 表示矩阵共轭转置 $(\cdot)^*$；由于源码定义 $\mathrm{windowRoot}(M) = \exp(+2\pi i / M)$ 且移位作用为 $(X\psi)_i = \psi_{i-1}$、算子次序为 $X^{e.\mathrm{val}} Z^{f.\mathrm{val}}$，共轭后指数恰好是正号 $(b \cdot c - a \cdot d).\mathrm{val}$。
 3. **代数核心与完整 QFT 电路的边界**：[@lemma-phase-kickback-weyl] 给出了有限 Weyl 代数中“用位移共轭提取辛相位”的精确算子恒等式；而多比特受控相位门与 Hadamard 门如何拼装成多项式门数的量子傅里叶变换（QFT）电路，我们将在 [@ex-grover-four-shor-fifteen] 第二步中按显式二进制位序手算展开，并在 [@rem-grover-qft-shor-literature] 中说明其门数与输入输出边界。
 
-## 有限字符正交与非共振相消 {#sec-period-frequency-cancellation}
+## 15.3 有限字符正交与非共振相消 {#sec-period-frequency-cancellation}
 
 当第一寄存器通过模幂运算与相位反冲，把一个隐藏的周期子群 $H \le \mathrm{ZMod}\,m$（$m \in \mathbb{N}$，带 `[NeZero m]`）编码成等幅叠加态后，为什么做一次有限傅里叶变换就能把所有不属于对偶格点的杂散频率统统清零？
 
@@ -208,7 +208,7 @@ $$
 **周期 4 留下四根峰。** $Q = 16$、梳子 $\{0, 4, 8, 12\}$：看 $k = 4$ 时四支青色箭头全部朝右，链长 $4$，这是未归一化的和，不是概率 $1$；扫完之后谱上只剩 $0$、$4$、$8$、$12$ 四根等高的柱子，每根 $\frac{1}{4}$，正落在品红的 $sQ/r$ 上，其余十二根都是 $0$。
 :::
 
-## 有限周期采样与 Shor 阶重建 {#sec-shor-order-reconstruction}
+## 15.4 有限周期采样与 Shor 阶重建 {#sec-shor-order-reconstruction}
 
 将 [@prop-finite-character-cancellation] 的正交筛子应用于 $\mathrm{ZMod}\,m$ 上的任意复值函数 $f : \mathrm{ZMod}\,m \to \mathbb{C}$，便立即导出调和分析与量子周期寻找的共同枢纽——**有限泊松求和公式（Finite Poisson Summation Formula）**。
 

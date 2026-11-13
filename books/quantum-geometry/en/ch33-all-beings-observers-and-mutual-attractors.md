@@ -1,4 +1,4 @@
-# All Beings as Observers: Self-Sustaining Basins and Mutual-Attractor Double Helices
+# Chapter 33 All Beings as Observers: Self-Sustaining Basins and Mutual-Attractor Double Helices {#all-beings-as-observers-self-sustaining-basins-and-mutual-attractor-double-helices}
 
 > *"Not only are historical ruins attractors—observers themselves are attractors too; indeed, all beings are observers, and observers serve as mutual attractors to one another."*
 
@@ -17,7 +17,7 @@ So long as that subject–object chasm remains unchallenged, the external third 
 
 ---
 
-## All Beings as Observers: Dissolving Subject–Object Dualism and the Memory-Order Continuum
+## 33.1 All Beings as Observers: Dissolving Subject–Object Dualism and the Memory-Order Continuum {#all-beings-as-observers-dissolving-subjectobject-dualism-and-the-memory-order-continuum}
 
 Why did classical mechanism first drain all perceptual capacity out of matter—reducing rocks and electrons to blind, perspective-free "mere objects"—only to stand baffled before the quantum measurement problem, asking how many millions of neurons must assemble before an apparatus suddenly earns a license to "collapse a wave packet"? Viewed genealogically, the paradox is entirely self-inflicted: first invent the idol of "dead matter," then marvel that "living observation" refuses to emerge from it.
 
@@ -85,7 +85,7 @@ A granite peak is not devoid of observation—its clock simply beats once per ge
 
 ---
 
-## Every Observer Is an Attractor: Self-Sustaining Contraction Basins
+## 33.2 Every Observer Is an Attractor: Self-Sustaining Contraction Basins {#every-observer-is-an-attractor-self-sustaining-contraction-basins}
 
 Recognizing that all beings are observers immediately raises a sharper dynamical question: **why must an observer be more than a passive photographic plate—why is every observer necessarily *an attractor in its own right*?**
 
@@ -138,7 +138,7 @@ Conjuncts 3 and 4 of [@thm-ch33-contextual-attractor-and-common-factor] illumina
 
 ---
 
-## Mutual-Reference Monotonic Locking: How Two Mirrors Turn Two Negatives Positive in a Two-Step Round
+## 33.3 Mutual-Reference Monotonic Locking: How Two Mirrors Turn Two Negatives Positive in a Two-Step Round {#mutual-reference-monotonic-locking-how-two-mirrors-turn-two-negatives-positive-in-a-two-step-round}
 
 If each observer already possesses an individual restoring basin $\psi_i = \psi_i(\psi_i)$, why does the universe not leave every being sealed inside solitary contemplation? Why do spins pair into bonds, stars gather into galaxies, and minds seek out resonant companions?
 
@@ -212,7 +212,7 @@ The same holds when the two start apart. The curve $x = \cos y$ along which A re
 
 ---
 
-## Window Intersection, Min-Cut Reconnection, and All Beings as Walking Homelands
+## 33.4 Window Intersection, Min-Cut Reconnection, and All Beings as Walking Homelands {#window-intersection-min-cut-reconnection-and-all-beings-as-walking-homelands}
 
 Let us now lift one-dimensional mutual locking back into the six-dimensional cut-and-project parent space $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ and holographic tensor networks to uncover the spatial and thermodynamic engine of mutual attraction.
 
@@ -295,7 +295,7 @@ Before turning in the final section to multi-observer decoherence consensus, exp
 
 ---
 
-## Multi-Observer Consensus Tensor, Emergent Pointer Basis, and No Observer-Independent Facts {#sec-ch33-consensus-decoherence-pointer}
+## 33.5 Multi-Observer Consensus Tensor, Emergent Pointer Basis, and No Observer-Independent Facts {#sec-ch33-consensus-decoherence-pointer}
 
 > “观察者的共识选择决定了去相干方向, 没有绝对客观存在” — "Observers' consensus choice determines the direction of decoherence; there is no absolute objective existence."
 
@@ -303,7 +303,7 @@ The preceding four sections dissolved the cliff between "living subjects" and "i
 
 Standard textbook presentations quietly smuggle point $C$ back in by postulating a fixed diagonal system–environment interaction Hamiltonian from the outset, then announcing that its eigenstates survive as classical pointer states. Returning to this chapter's first principle—that *all beings are observers*—exposes what "the environment" actually is: **not an inert external backdrop, but an endogenous population of observers $\{\mathcal{O}_1, \dots, \mathcal{O}_N\}$ exchanging pairwise projections with the system!** Taken in isolation, the qubit state space is a completely democratic unit Bloch sphere $S^2$ on which no direction carries built-in classical privilege; longitudinal polarization survives and transverse coherence is erased along a preferred axis *only* when the surrounding observer axes $\{\mathbf{n}_1, \dots, \mathbf{n}_N\}$ align at the second-order tensor level to open a positive spectral gap. Disperse those axes isotropically, and the Bloch ball shrinks uniformly toward its center with no pointer axis whatsoever; split the observers into two orthogonal consensus bubbles, and their local pointer records refuse to stitch into a single context-free global truth table. Throughout this section we enforce our three-tier epistemic boundary: algebraic complement projections, common-phase quadratic forms, record pinching, multi-copy reversal blocking, partition-topology kernels, conflict-reset noncommutativity, and orthogonal residual escape rest on twelve frozen Lean 4 theorems (`LEAN ✓`); the second-order consensus tensor, Pauli Bloch contraction products, and rank-two branching mutual-information curves are derived explicitly and verified numerically (`manual derivation` / `NUM`); Quantum Darwinism and the extended Wigner's-friend Local Friendliness no-go inequality carry explicit literature attribution (`Literature`); and the overarching thesis that consensus selects the decoherence axis without observer-independent facts is designated as our geometric `MODEL`.
 
-### Second-Order Consensus Structure Tensor, Sign-Reversal Invariance, and Isotropic Fog {#sec-ch33-consensus-tensor-axis}
+### 33.5.1 Second-Order Consensus Structure Tensor, Sign-Reversal Invariance, and Isotropic Fog {#sec-ch33-consensus-tensor-axis}
 
 Let us compute directly in real three-dimensional Bloch space $\mathbb{R}^3$ how a collection of observer axes aggregates into a macroscopic decoherence geometry. Consider $N \ge 1$ participating observers with normalized coupling weights (or independent encounter probabilities) $w_j \ge 0$, $\sum_{j=1}^N w_j = 1$, and unit measurement-axis directions $\mathbf{n}_j \in \mathbb{R}^3$, $\|\mathbf{n}_j\| = 1$. Taking a naive first-order vector average $\overline{\mathbf{n}} = \sum_{j=1}^N w_j \mathbf{n}_j$ immediately fails an elementary consistency test: swapping the plus/minus outcome labels of an unoriented measurement line ($\mathbf{n}_j \mapsto -\mathbf{n}_j$) would make two observers measuring the *very same* $Z$ spin axis along $+Z$ and $-Z$ cancel to zero! A two-outcome projective measurement axis is an **unoriented one-dimensional line** in $\mathbb{R}^3$, represented faithfully by its rank-one orthogonal projection dyad $P_j := \mathbf{n}_j \otimes \mathbf{n}_j = \mathbf{n}_j \mathbf{n}_j^{\mathsf{T}}$ ($P_j^{\mathsf{T}} = P_j$, $P_j^2 = P_j$). Taking the weighted convex sum of these dyads defines the **second-order consensus structure tensor** (`manual derivation`):
 
@@ -354,7 +354,7 @@ Respecting every hypothesis boundary of [@thm-ch33-consensus-quadratic-and-gram]
 **Axis Sign Relabeling vs. Complex Phase Gauge Card (`phase-gauge`)**: Eight unsigned measurement axes ($4$ along $z$ with total weight $0.60$, $2$ along $x$ with $0.25$, $2$ along $y$ with $0.15$) give $\mathbf{M}_{\mathrm{cons}} = \operatorname{diag}(0.25, 0.15, 0.60)$, spectrum $(0.60, 0.25, 0.15)$, $\kappa = 0.40$, and gap $\Delta\lambda = 0.35$. Flipping axis signs one by one leaves every entry of $\mathbf{M}_{\mathrm{cons}}$, its spectrum, and the mean contraction channel unchanged; a dedicated ket-phase inset verifies invariance of quadratic Hermitian and Gram pairings under $z \mapsto e^{i\theta} z$ ([@thm-ch33-consensus-quadratic-and-gram]), keeping axis-label swaps strictly distinct from orthogonal antipodal states.
 :::
 
-### Pauli-Dephasing Bloch Contraction, Longitudinal Pointer Survival, and Transverse Pythagorean Deletion {#sec-ch33-consensus-pinching-pointer}
+### 33.5.2 Pauli-Dephasing Bloch Contraction, Longitudinal Pointer Survival, and Transverse Pythagorean Deletion {#sec-ch33-consensus-pinching-pointer}
 
 With the static consensus tensor $\mathbf{M}_{\mathrm{cons}}$ in hand, we now derive—rather than fit—how sequential observer couplings sculpt the Bloch ball dynamically (`manual derivation`). Write a qubit state as $\rho = \frac{1}{2}(I_2 + \mathbf{r}\cdot\vec{\sigma})$ ($\|\mathbf{r}\| \le 1$) and set $A = \mathbf{n}\cdot\vec{\sigma}$ ($A^\dagger = A,\; A^2 = I_2$) for a unit axis $\mathbf{n}$. For coupling angle $\alpha \in [0, \frac{\pi}{2}]$, Kraus operators $L_0 = \cos(\frac{\alpha}{2}) I_2$ and $L_1 = \sin(\frac{\alpha}{2}) A$ obey $\sum_{s=0}^1 L_s^\dagger L_s = I_2$, defining the unital CPTP Pauli-dephasing channel
 
@@ -414,7 +414,7 @@ Two exact scope guardrails accompany [@thm-ch33-consensus-pinching-and-fixed-poi
 **Collinear Axis Consensus and Transverse Contraction Card (`axis-consensus`)**: Sixteen equal-weight axes alternate signs along $\pm z$, giving $\lambda = (1, 0, 0),\; \kappa = 1$. Acting on $\mathbf{r}_0 = (1, 0, 1)/\sqrt{2}$ with $N = 16, \alpha = 0.4$ exact Pauli channels keeps the cyan longitudinal polarization $r_z = 1/\sqrt{2}$ invariant ($\Gamma_\parallel = 1$) while contracting the magenta transverse disk by $(\cos\alpha)^k$; toggling the separate "full pinching ($\alpha = \pi/2$)" switch verifies Hilbert–Schmidt Pythagoras, full-pinching relative-entropy gain, and pointer-diagonal fixed states ([@thm-ch33-consensus-pinching-and-fixed-points]).
 :::
 
-### Quantum Darwinism Redundancy Plateau, Local Reversal Blocking, and the Consensus Kernel {#sec-ch33-consensus-darwinism-kernel}
+### 33.5.3 Quantum Darwinism Redundancy Plateau, Local Reversal Blocking, and the Consensus Kernel {#sec-ch33-consensus-darwinism-kernel}
 
 If an unread dephasing channel leaves a diagonal classical mixture on the system, why do ten passersby inspecting the same signpost independently read matching classical pointer labels, and why can no single observer restore quantum interference by erasing their own private notebook? To answer quantitatively, we move to the **pure two-branch aligned record model** in a fixed common pointer basis $\{|0\rangle_S, |1\rangle_S\}$ (`manual derivation`, explicitly distinct from non-collinear Pauli schedules above): an isometric coupling from initially blank observer records prepares the global pure state
 
@@ -471,7 +471,7 @@ Keep two exact distinctions in view when reading [@thm-ch33-consensus-redundant-
 **Quantum Darwinism Redundancy Plateau and Reversal-Blocking Card (`darwinism-plateau`)**: Pure aligned branching model ($N = 16,\, p_0 = \frac{1}{2},\, c_j = 0.3$). Sweeping fragment size $m = 0 \dots 16$ traces the exact mutual-information curve from $I(0) = 0$ onto a flat near-$1\text{-bit}$ classical redundancy plateau ($|I(m) - S(\rho_S)| < 5.3 \times 10^{-4}\text{ bits}$ across $m = 3 \dots 13$) before rising to $2 S(\rho_S)$ at global access $m = 16$. Toggling controlled-$U_j^\dagger$ access demonstrates how uncontrolled overlaps cap residual coherence, while a separate inset displays the exact four-stage phase trajectory $\frac{1}{2} \to -\frac{1}{2} \to -\frac{i}{2} \to \frac{1}{2}$ of `two_copy_joint_reversal_certificate` ([@thm-ch33-consensus-redundant-records-and-kernel]).
 :::
 
-### Dual-Wigner Orthogonal Consensus Bubbles, Local Friendliness Bounds, and Pioneer Escape Residuals {#sec-ch33-consensus-wigner-pioneers}
+### 33.5.4 Dual-Wigner Orthogonal Consensus Bubbles, Local Friendliness Bounds, and Pioneer Escape Residuals {#sec-ch33-consensus-wigner-pioneers}
 
 We now arrive at the sharpest thought experiment of all: **what happens when there is no single global consensus—when two decoupled observer bubbles $\mathcal{C}_A$ (aligned along $Z$) and $\mathcal{C}_B$ (aligned along $X$, at $90^\circ$) coexist without sharing a common pointer axis?**
 

@@ -1,4 +1,4 @@
-# Ontological QRAM, the Observer Memory Pointer, and Recursive Self-Mapped Page Tables
+# Chapter 38 Ontological QRAM, the Observer Memory Pointer, and Recursive Self-Mapped Page Tables {#ontological-qram-the-observer-memory-pointer-and-recursive-self-mapped-page-tables}
 
 > "An observer is in fact a memory pointer of the universe's ontological quantum computing system."
 
@@ -346,7 +346,7 @@ Beneath the darting focal spot of `*ptr++`, **not a single bit of the universe's
 
 Once Slot `[0,0]` in §38.3 folds the lookup procedure inside the page table itself (`p = *p` $\iff T = T(T)$), an inverse thought experiment linking computational complexity, holographic gravity, and biological thermodynamics opens directly before us—captured verbatim in the author's working note: *"Suppose there exists a lookup-table algorithm that achieves P = NP, and progressively degrade that lookup-table algorithm"*（“假设存在一种查表算法可以P=NP, 逐渐退化这种查表算法”）. Each time we strip away one idealized privilege from that oracle, what exact mathematical or physical barrier does the hardware strike, and which familiar law of nature crystallizes out of that barrier?
 
-### I. Three Privileges of the Stage-0 Holographic Prototype (d = 0) and the Epistemic Boundary
+### 38.4.1 Three Privileges of the Stage-0 Holographic Prototype (d = 0) and the Epistemic Boundary {#i-three-privileges-of-the-stage-0-holographic-prototype-d--0-and-the-epistemic-boundary}
 
 As the idealized starting point of the thought experiment, construct within our **`MODEL` (interpretive model)** an unconstrained **Stage-0 holographic self-referential oracle ($d = 0$)**. Its ability to isolate a satisfying assignment $x^* = T[\Phi]$ for an $n$-variable constraint mask $\Phi$ at zero asymptotic time exponent $r_{\mathrm{eff}} = 0$ ($\log_2 T / n \to 0$) rests on three simultaneously granted privileges:
 
@@ -374,11 +374,11 @@ Before descending the degradation ladder, two strict epistemic boundaries must b
 **Stage-0 experiment card: Holographic self-referential oracle `p = *p` and bivector cancellation.** On the left, Slot `[0,0]` carries the self-mapping loop `p = *p` ($T = T(T)$) while non-satisfying cells cancel in opposite bivector chirality pairs ($+\mathbf{\Omega} - \mathbf{\Omega} = 0$), isolating $x^* = T[\Phi]$ with zero wire latency; on the right phase diagram, the amber state marker rests at $(\sigma_{\mathrm{eff}} = 0,\; r_{\mathrm{eff}} = 0.000)$.
 :::
 
-### II. Stripping Privileges Step by Step: Six Degradations from Static Advice Horizons to Memoryless Search (d = 1 .. 6)
+### 38.4.2 Stripping Privileges Step by Step: Six Degradations from Static Advice Horizons to Memoryless Search (d = 1 .. 6) {#ii-stripping-privileges-step-by-step-six-degradations-from-static-advice-horizons-to-memoryless-search-d--1--6}
 
 We now remove the Stage-0 privileges one by one, tracking the effective time-exponent rate $r_{\mathrm{eff}}(\sigma) := (\log_2 T)/n$ and physical routing morphology at every step:
 
-#### Stage 1 (d = 1): Severing `T[0]` Self-Generation $\to$ Static Read-Only Polynomial Advice $a_n$ ($|T_n| = \operatorname{poly}(n)$)
+#### 38.4.2.1 Stage 1 (d = 1): Severing `T[0]` Self-Generation $\to$ Static Read-Only Polynomial Advice $a_n$ ($|T_n| = \operatorname{poly}(n)$) {#stage-1-d--1-severing-t0-self-generation--static-read-only-polynomial-advice-an-tnpolyn}
 
 First, sever the recursive self-generating loop at `T[0]`, leaving only an externally pre-baked read-only advice string $a_n$ of polynomial size $|T_n| = \operatorname{poly}(n)$ ($\sigma_n = (\log_2 |T_n|)/n \to 0$, matching non-uniform $\mathrm{P}/\mathrm{poly}$). Inside the already-tabulated finite domain $|x| \le n$, copying observed answers trivially achieves zero retrospective loss ($r_{\le n} = 0$); yet the moment instance size crosses the $n \to n + 1$ horizon, static table-copying violates non-anticipation everywhere (and by the Karp–Lipton theorem, $\mathrm{NP} \subseteq \mathrm{P}/\mathrm{poly}$ would collapse the polynomial hierarchy to $\mathrm{PH} = \Sigma_2^p \cap \Pi_2^p$; Item 2 of [@rem-ch38-lookup-degradation-literature]). The exact structural gulf between zero retrospective copy loss and prospective non-anticipation is locked in the following theorem:
 
@@ -397,7 +397,7 @@ Over a finite domain $Z$ with decidable equality (`[Fintype Z] [DecidableEq Z]`)
 For Claim 1, substituting $\operatorname{tableCopy}(\mathrm{comparison})(z) = \mathrm{observedAnswer}(z)$ reduces every summand over $Z$ to $0$ by `selfLoss`. For Claim 2, given any $z \in Z$, full-table inclusion $Z \subseteq \mathrm{evidenceDependencies}$ forces $z \in \mathrm{evidenceDependencies}$, directly contradicting the second conjunct $z \notin \mathrm{evidenceDependencies}$ of $\operatorname{NonAnticipating}(\mathrm{commitment}, z)$. For Claim 3, assuming the implication holds, feeding Claim 1 into its premise and instantiating the universally quantified gain functional at the identically zero map $G_0 := (\_\mapsto 0)$ yields $0 < 0$, a contradiction. The full proof is checked by the Lean kernel.
 :::
 
-#### Stage 2 (d = 2): Restoring Uniform Local Rules $\to$ Local Tensor Blocks and the Zeckendorf Carry Wave (Birth of Serial Causal Time)
+#### 38.4.2.2 Stage 2 (d = 2): Restoring Uniform Local Rules $\to$ Local Tensor Blocks and the Zeckendorf Carry Wave (Birth of Serial Causal Time) {#stage-2-d--2-restoring-uniform-local-rules--local-tensor-blocks-and-the-zeckendorf-carry-wave-birth-of-serial-causal-time}
 
 To cross $n \to n + 1$ uniformly without external advice, Stage 2 replaces static tables with uniform local $k$-body tensor blocks and canonical Fibonacci/Zeckendorf coding (`NoAdjacentOnes`, [Chapter 32](ch32-unified-field-and-meta-unification.md) [@thm-ch32-generative-self-reference-and-zeckendorf]). Here a striking directional asymmetry appears—**downward carry penetration is rigorously capped at two positions, whereas upward carries cascade serially across alternating critical strings**:
 
@@ -419,7 +419,7 @@ Notice the sharp division between verified theorem and literature barrier: [@thm
 **Stage-2 experiment card: Zeckendorf downward carry wall and Frougny upward carry wave.** The register normalizes $(F_{16}+F_{14}+F_{12}+F_{10}+F_8) + F_8 = 1584 + 21 = 1605$ across five exact steps: the cyan barrier at $k = 6 = m - 2$ is enforced by `lower_support_carry_barrier` (indices $2\dots 5$ stay strictly zero), while the magenta carry wave marches serially upward to $F_{17}$.
 :::
 
-#### Stages 3 to 6 (d = 3 .. 6): Gravitational Radius, Quantum Pointer Rotation, Landauer Heat, and Tabula Rasa
+#### 38.4.2.3 Stages 3 to 6 (d = 3 .. 6): Gravitational Radius, Quantum Pointer Rotation, Landauer Heat, and Tabula Rasa {#stages-3-to-6-d--3--6-gravitational-radius-quantum-pointer-rotation-landauer-heat-and-tabula-rasa}
 
 Stripping the remaining privileges brings out four foundational laws of physics in succession:
 
@@ -470,7 +470,7 @@ External complexity, automata, and gravitational-thermodynamic theorems referenc
 7. **Thermodynamic Cost of Irreversible Bit Erasure (R. Landauer, *IBM J. Res. Dev.* **5**, 183–191, 1961)**: Irreversibly erasing or overwriting $1$ bit in a bath at temperature $T$ dissipates at least $k_B T \ln 2$ of heat.
 :::
 
-### III. Seven-Stage Holographic Summary Table (d = 0 .. 6)
+### 38.4.3 Seven-Stage Holographic Summary Table (d = 0 .. 6) {#iii-seven-stage-holographic-summary-table-d--0--6}
 
 We consolidate stripped privileges, space–time exponents, formal anchors, and emergent physical laws across all seven stages in the panorama below:
 
@@ -488,7 +488,7 @@ We consolidate stripped privileges, space–time exponents, formal anchors, and 
 | **`d = 6`** | Wipe all cache memory ($|T| = 0, M = 0$) | $|T| = 0$ ($\sigma = 0$) | $\mathbf{1.000}$ ($\Theta(2^n)$ blind trials) | `GC Wipe` reset & full open Gram elliptope $\det G_0 = 1$ (`MODEL`) | **Tabula rasa & maximal open choice volume** |
 :::
 
-### IV. Bidirectional Reading and Interactive Lab: Physical Limiters Downward (0 $\to$ 6) vs. Life Table-Building Upward (6 $\to$ 0)
+### 38.4.4 Bidirectional Reading and Interactive Lab: Physical Limiters Downward (0 $\to$ 6) vs. Life Table-Building Upward (6 $\to$ 0) {#iv-bidirectional-reading-and-interactive-lab-physical-limiters-downward-0--6-vs-life-table-building-upward-6--0}
 
 ::: {.viz src="pnp-lookup-degradation" preset="ladder" height="500"}
 **7-stage ladder card: Forward physical limiters ($0 \to 6$) versus reverse biological table-building ($6 \to 0$).** The left panel stacks all seven effective time-exponent bars alongside the downward limiter arrow (magenta) and upward learning arrow (cyan), while the right panel traces the seven-stage trajectory across the spacetime–gravity phase diagram.
@@ -515,7 +515,7 @@ Building directly on the analysis of finite-table lookup degradation in [the pre
 
 Under our three-tier epistemic contract, this section anchors the combinatorial and information-geometric skeleton of the **Observer Escape Ledger** in six newly pinned kernel-verified Lean 4 theorems (paired with the bipartite local-marginal blind-spot theorem proved in [Chapter 13](ch13-entanglement-and-chsh.md)), while explicitly marking the closed Hilbert-loop traversal, Zeckendorf golden capacity budget, and waking/dreaming thermodynamic synthesis as **`MODEL` (interpretive model)**.
 
-### Preimage Fibers, Ordered Escape Pairs, and Strict Quotient-Kernel Novelty
+### 38.5.1 Preimage Fibers, Ordered Escape Pairs, and Strict Quotient-Kernel Novelty {#preimage-fibers-ordered-escape-pairs-and-strict-quotient-kernel-novelty}
 
 Let $\mathcal{S}$ be a finite underlying state space of cardinality $N = \lvert\mathcal{S}\rvert > 1$ (nondegeneracy). An observer's resident lookup catalog over a finite index set $\mathrm{Index}$ is a family of concepts $T = \{L_i\}_{i \in \mathrm{Index}}$, each inducing a quotient equivalence relation (`agrees`) on $\mathcal{S}$ via a finite bundle of discriminating primitives. When the observer jointly evaluates a subset $S \subseteq \mathrm{Index}$, the joint quotient map partitions $\mathcal{S}$ into pairwise disjoint **preimage fibers** $\{\mathcal{F}_S(y)\}_{y \in \Sigma_S}$. Any two distinct states $s_1 \neq s_2$ landing inside the same fiber $\mathcal{F}_S(y)$ produce identical outputs across every lemma in $S$—forming an **information escape pair**.
 
@@ -570,7 +570,7 @@ Let $\mathrm{arena}$ be a finite state arena (whose carrier $\mathrm{arena.State
 For Conjunct 1, split any off-diagonal ordered pair $p = (s_1, s_2)$ by excluded middle on entry $i$'s agreement predicate $\operatorname{agrees}_i(s_1, s_2)$: if $p \in \operatorname{escapePairs}(\operatorname{without}(i))$ and $\operatorname{agrees}_i(s_1, s_2)$ holds, rewriting $\mathrm{fullIndexSet} = \operatorname{insert}(i, \operatorname{without}(i))$ places $p$ in $\operatorname{escapePairs}(\mathrm{fullIndexSet})$; if $\operatorname{agrees}_i(s_1, s_2)$ fails, the filter definition places $p$ in $\operatorname{uniqueCapturePairs}(i)$. Conversely, antitone inclusion $\operatorname{escapePairs}(\mathrm{fullIndexSet}) \subseteq \operatorname{escapePairs}(\operatorname{without}(i))$ and mutual exclusivity yield both the union identity and the set-difference formula. For Conjunct 2, `arena.Nondegenerate` provides `escapeDenominator_pos`, reducing the strict rational inequality on `escapeRate` to $\lvert\operatorname{escapePairs}(\mathrm{fullIndexSet})\rvert < \lvert\operatorname{escapePairs}(\operatorname{without}(i))\rvert$; by Conjunct 1's disjoint cardinality additivity this holds iff $\operatorname{uniqueCapturePairs}(i)$ is nonempty—meaning some pair of states agrees across all other entries yet disagrees at $i$—which translates via the tagged quotient-cut bijection into strict kernel inclusion upon inserting `taggedQuotientCut(i)`. The full proof is checked by the Lean kernel.
 :::
 
-### Explicit 16-State Five-Lemma System: Lossless Compression vs. Four-Body XOR Marginal Blind Spot
+### 38.5.2 Explicit 16-State Five-Lemma System: Lossless Compression vs. Four-Body XOR Marginal Blind Spot {#explicit-16-state-five-lemma-system-lossless-compression-vs-four-body-xor-marginal-blind-spot}
 
 To watch every symbol of [@thm-ch38-escape-pairs-and-structural-novelty] operate with zero free parameters, set $\mathcal{S} = \{0, 1\}^4$ ($N = 16$, $n = 4\text{ bits}$, $N(N - 1) = 240$ ordered distinct pairs, and $\binom{16}{2} = 120$ unordered canvas chords). Write each state as $s = (b_0, b_1, b_2, b_3) \in \{0, 1\}^4$ and load five explicit boolean lemmas into the observer's table:
 
@@ -610,7 +610,7 @@ Walking along the closed $4 \times 4$ Hamiltonian Moore/Hilbert space-filling cy
 **Quantum local-marginal blind spot: Bell state versus classical mixtures.** Switching to the two-qubit view shows $\lvert\Phi^+\rangle\langle\Phi^+\rvert$, $\rho_{\mathrm{cl}}$, and $\frac{1}{4}I_4$ sharing identical single-qubit marginals $\frac{1}{2}I_2$, leaving local readouts blind to the $9$-dimensional correlation sector ([@thm-local-correlation-sectors], [@lemma-bell-mixed-marginal]).
 :::
 
-### Refinement Impurity Monotonicity, Closed Hilbert Scans, and the Zeckendorf Golden Budget
+### 38.5.3 Refinement Impurity Monotonicity, Closed Hilbert Scans, and the Zeckendorf Golden Budget {#refinement-impurity-monotonicity-closed-hilbert-scans-and-the-zeckendorf-golden-budget}
 
 Conversely, whenever an observer refines a coarse concept table into a finer one via a factor map, conditional logical impurity (the fiber-weighted pair-disagreement mass toward any target concept) obeys an exceptionless monotonicity law:
 

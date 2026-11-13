@@ -1,10 +1,10 @@
-# Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$—The Orthogonal Horizon and the Firewall of the Living Journey {#sec-coda-global-p-eq-np-local-p-ne-np}
+# 30.1 Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$—The Orthogonal Horizon and the Firewall of the Living Journey {#sec-coda-global-p-eq-np-local-p-ne-np}
 
 > **Author's Epigraph**: *"In the global static time field $P = NP$, but for a finite observer $P \neq NP$."*（“全局静态时间场P=NP, 但有限观察者P!=NP”）
 
 The author places the timeless crystal alongside the finite point-picking observer to offer a dual perspective on **$\mathrm{P}$ vs. $\mathrm{NP}$** (`MODEL`). Three levels must be distinguished: a static solution set describes which assignments satisfy the constraints; the postselection and CTC complexity theorems require specified additional computational resources ([@rem-ch30-postselection-ctc-literature]); and black-box query and bounded-degree semidefinite lower bounds constrain their respective restricted models ([@rem-ch30-query-sos-literature]). In the standard uniform Turing-machine model, $\mathrm{P}\neq\mathrm{NP}$ remains open (Chapter 20, [@conj-p-neq-np], `OPEN`). Removing time from a description, or merely requiring finite observer resources, does not settle this asymptotic question.
 
-## 1. The Solution Set of the "Global Static Time Field" and Additional Computational Resources
+## 30.1.1 The Solution Set of the "Global Static Time Field" and Additional Computational Resources {#1-the-solution-set-of-the-global-static-time-field-and-additional-computational-resources}
 
 For a SAT formula with $n$ Boolean variables and $m$ clauses, take $\mathcal{H}=\mathbb{C}^{2^n}$ with computational basis indexed by assignments $a\in\{0,1\}^n$. Let $H_j$ be the span of basis vectors $\lvert a\rangle$ satisfying clause $C_j$. This is generally not a codimension-one hyperplane: with $n=4$, the clause $x_1\lor x_2\lor x_3$ accepts $14$ of the $16$ assignments, so $\dim H_j=14$. The static solution subspace is
 
@@ -30,7 +30,7 @@ This intersection is exactly the span of assignments satisfying every clause. It
    $$
 :::
 
-## 2. Why a Finite Observer Inside the Field Faces $P \neq NP$-Like Orthogonal Horizons and Local Blind Spots
+## 30.1.2 Why a Finite Observer Inside the Field Faces $P \neq NP$-Like Orthogonal Horizons and Local Blind Spots {#2-why-a-finite-observer-inside-the-field-faces-pnp-like-orthogonal-horizons-and-local-blind-spots}
 
 Once we return to a real finite observer inside the field—unable to postselect the ending in advance and equipped only with a finite gate budget $L$ and a bounded local memory order $M \ll n$—two geometric obstructions emerge across restricted observation models (`MODEL`):
 
@@ -63,7 +63,7 @@ The unconditional restricted-model lower bounds corresponding to these two geome
 **Two literals close at order 2; three-way parity does not.** The cyan points: for each $n$ a random 2-SAT formula, in which resolving two 2-clauses on a variable leaves at most two literals, so the resolution closure stays at order $2$ and whether the empty clause appears decides satisfiability: a filled point derived the empty clause (unsatisfiable), a hollow ring did not (satisfiable) (numbers computed by the page). The dashed magenta line: for random 3-XOR / 3-SAT, the literature result of item 3 above says that sum-of-squares relaxations of order $o(n)$ stay consistent everywhere; the slope of this line is only schematic (`MODEL`). Amber is the observer's order $M$. These lower bounds constrain this family of relaxations only and do not imply $\mathrm{P}\neq\mathrm{NP}$ ([@conj-p-neq-np], `OPEN`).
 :::
 
-## 3. The Author's Interpretation: Complexity Horizons, Subjective Time, and Choice
+## 30.1.3 The Author's Interpretation: Complexity Horizons, Subjective Time, and Choice {#3-the-authors-interpretation-complexity-horizons-subjective-time-and-choice}
 
 Placing the global static field alongside the finite observer expresses the author's epistemological interpretation of time and choice (`MODEL`). Query or SoS lower bounds imply neither standard $P\neq NP$ nor the existence of subjective time or free choice; the author assigns these philosophical meanings:
 

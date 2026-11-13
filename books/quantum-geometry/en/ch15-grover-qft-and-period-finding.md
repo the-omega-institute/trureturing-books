@@ -1,4 +1,4 @@
-# Invariant-Plane Rotations and Equatorial Area Gears: Grover Search, QFT, and Shor Factoring
+# Chapter 15 Invariant-Plane Rotations and Equatorial Area Gears: Grover Search, QFT, and Shor Factoring {#invariant-plane-rotations-and-equatorial-area-gears-grover-search-qft-and-shor-factoring}
 
 > *"The core is how isotropy lets us reach another point through orthogonal relations: one orthogonal step, then two, because the three directions are pairwise orthogonal."*
 
@@ -13,7 +13,7 @@ When stripped of circuit notation, the two flagship families of quantum algorith
 **Figure 15.** The chapter at a glance. Panel I: for $N = 4$, one Grover step turns the arrow $U$ through the violet $2\theta = 60^\circ$, and the amber $QU$ lands exactly on the success direction $W$. Panel II: the three phase gears for $x = 5 = (101)_2$, with $2$, $4$ and $8$ teeth; their amber pointers sit at $\pi$, $\pi/2$ and $5\pi/4$. Panel III: after the QFT of the $Q = 16$, $r = 4$ period state, only $k = 0, 4, 8, 12$ keep a cyan bar, each of height $1/4$.
 :::
 
-## Grover: The Common Invariant Plane of Two Reflections {#sec-grover-invariant-plane}
+## 15.1 Grover: The Common Invariant Plane of Two Reflections {#sec-grover-invariant-plane}
 
 Suppose we search for marked items inside an $l$-dimensional space. Whereas a classical search inspects candidates one by one, a quantum algorithm distributes unit $\ell^2$ norm across the search space from the start (note that unit normalization for quantum column vectors is always the Euclidean/Hilbert $\ell^2$ norm $\sum_i |\psi_i|^2 = 1$, never the $\sup$ norm on function spaces).
 
@@ -117,7 +117,7 @@ An exact coin-assisted remedy for known $p$ is proved in [Chapter 16](ch16-qsvt-
 The full lab of Grover's two reflections: drag the initial state on mirror 2 to change $\theta$, change $N$, and apply the mirrors one at a time with ← →; the bars on the right are the success probabilities $\sin^2((2n+1)\theta)$ after each step ([@thm-grover-uniform-rotation]). The $\Omega(\sqrt{N})$ query lower bound is a literature result, not formalized in this book.
 :::
 
-## Phase Kickback and the Binary Gears of the QFT {#sec-qft-phase-gears}
+## 15.2 Phase Kickback and the Binary Gears of the QFT {#sec-qft-phase-gears}
 
 Whereas Grover's algorithm rotates states in a real two-dimensional plane, the Quantum Fourier Transform (QFT) and phase estimation wind relative phases around equatorial circles like meshed binary gears (Figure 15, Panel II).
 
@@ -158,7 +158,7 @@ Three details of [@lemma-phase-kickback-weyl] should be noted:
 2. **Conjugate transpose `star` and the positive phase convention**: Here `star` is the conjugate transpose $(\cdot)^*$, and the positive sign in $\omega_M^{(bc - ad).\mathrm{val}}$ matches $\omega_M = \exp(+2\pi i / M)$, the shift action $(X\psi)_i = \psi_{i-1}$, and the operator order $X^e Z^f$.
 3. **Scope**: [@lemma-phase-kickback-weyl] establishes the algebraic core of finite Weyl phase kickback, not the full polynomial-gate decomposition of the multi-qubit QFT circuit into controlled phase and Hadamard gates (worked out in [@ex-grover-four-shor-fifteen], with the gate count and input/output boundaries discussed in [@rem-grover-qft-shor-literature]).
 
-## Finite Character Orthogonality and Nonresonant Cancellation {#sec-period-frequency-cancellation}
+## 15.3 Finite Character Orthogonality and Nonresonant Cancellation {#sec-period-frequency-cancellation}
 
 Once a periodic subgroup $H \le \mathrm{ZMod}\,m$ ($m \in \mathbb{N}$ with `[NeZero m]`) has been imprinted into a quantum register, why does a Fourier transform annihilate every non-resonant frequency?
 
@@ -198,7 +198,7 @@ Note the normalization boundary in [@prop-finite-character-cancellation]: for $x
 **Period 4 leaves four peaks.** $Q = 16$, comb $\{0, 4, 8, 12\}$: following $k = 4$, all four cyan arrows point right and the chain has length $4$, an unnormalized sum and not a probability $1$; after the sweep only the four bars at $0$, $4$, $8$ and $12$ remain, each $\frac{1}{4}$, right on the magenta marks $sQ/r$, and the other twelve are $0$.
 :::
 
-## Finite Period Sampling and Order Reconstruction in Shor’s Algorithm {#sec-shor-order-reconstruction}
+## 15.4 Finite Period Sampling and Order Reconstruction in Shor’s Algorithm {#sec-shor-order-reconstruction}
 
 Applying [@prop-finite-character-cancellation] to an arbitrary function $f : \mathrm{ZMod}\,m \to \mathbb{C}$ yields the **finite Poisson summation formula**.
 

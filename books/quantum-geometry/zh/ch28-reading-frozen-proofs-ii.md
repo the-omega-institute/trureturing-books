@@ -1,4 +1,4 @@
-# 走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到未读不动点与 $\psi = \psi(\psi)$
+# 第二十八章 走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到未读不动点与 $\psi = \psi(\psi)$ {#走进-lean-4-公理圣殿下从秩一玻恩归约到未读不动点与-ψψψ}
 
 > *“这就是我们最早研究的 psi=psi(psi)”*
 
@@ -12,7 +12,7 @@
 **图 28。** 本章地图：左栏，琥珀色的箭头 $\psi$ 在青色的线 $\phi$ 上落下青色的影子 $\lvert\langle\phi\mid\psi\rangle\rvert = 3/5$，以影子为边的青色正方形就是记录权重 $9/25$（[@thm-audit-rank-one-born]）；中栏上半，长为 $1$ 的横条按权重 $w_0 = 9/25$、$w_1 = 16/25$ 分成两段，合起来是未读态（[@lemma-audit-born-pairing-weight]）；中栏下半，每段除以自己的权重，各自撑满一整根，条件态的迹回到 $1$（[@prop-audit-conditional-state]）；右栏，带品红交叉块的 $\rho$ 被挤压改变，交叉块划掉的 $\rho'$ 是不动点（[@cor-audit-unread-fixed-iff]）。数值取自本章末尾的例子。
 :::
 
-## 秩一玻恩模方归约与三合取配对桥的源码解剖 {#sec-audit-rank-one-born-and-pairing}
+## 28.1 秩一玻恩模方归约与三合取配对桥的源码解剖 {#sec-audit-rank-one-born-and-pairing}
 
 在[第一章](ch01-measurement.md)与[第二章](ch02-born-rule.md)中，我们曾指出：纯态 $\rho = \lvert\psi\rangle\langle\psi\rvert$ 在秩一投影 $P_k = \lvert\phi\rangle\langle\phi\rvert$ 下的迹配对 $\Tr(\rho P_k)$ 之所以化为内积模方 $\lvert\langle\phi \mid \psi\rangle\rvert^2$，完全源于外积矩阵 `Matrix.vecMulVec` 的乘法结合律与迹收缩恒等式。现在让我们打开 `D5/S3/Observer/BornReduction.lean:27`，审视其精确的 Lean 4 声明与内核证明（图 28 左栏）。
 
@@ -104,7 +104,7 @@ $$
 **三合取桥：一项借上一条定理，一项按定义，一项逐项分两种情形。** 绿色的“① 秩一归约”就是 [@thm-audit-rank-one-born]；② 用 `rfl`；③ 用 `unread_eq_weighted_ensemble`，它对每个 $j$ 按 $w_j$ 是否为零分支——不为零时数乘互相抵消，为零时借虚线圈里的 $\rho \succeq 0$ 推出 $P_j \rho P_j = 0$。三路汇入绿色的 [@lemma-audit-born-pairing-weight]；图中 $\rho_j$ 即 $\operatorname{conditionalState}(P, \rho, j)$。
 :::
 
-## 吕德斯条件态完备性与未读不动点充要判据 {#sec-audit-conditional-state-and-fixed-point}
+## 28.2 吕德斯条件态完备性与未读不动点充要判据 {#sec-audit-conditional-state-and-fixed-point}
 
 现在我们打开 `D5/S3/Observer/Conditioning.lean` 的第 108 行与第 143 行，审计观察者条件化理论中最核心的两条定理（图 28 中下栏与右栏）。
 
@@ -181,7 +181,7 @@ $$
 **第二十八章解剖的四条。** 青色的线从第二十八章的柱脚连回第二、三章的四个绿色实心格；琥珀色框住的是未读不动点判据（[@cor-audit-unread-fixed-iff]），它第一次出场在第三章，琥珀色的线连到另外引用它的章。
 :::
 
-## 第四至六部冻结声明全景审计表 {#sec-parts-iv-to-vi-frozen-audit-table}
+## 28.3 第四至六部冻结声明全景审计表 {#sec-parts-iv-to-vi-frozen-audit-table}
 
 与上一章的第一至三部审计表相呼应，下表汇总了本书第四部（纠缠、贝尔边界与傅里叶对偶）、第五部（玻戈留波夫双曲变换、闵可夫斯基光锥刚性、规范完整群、张量网络流割与电路深度反例）以及第六部（对角拓扑逃逸、黎曼 $\zeta$ 欧拉乘积、艾森斯坦范数型与收缩不动点）在 `trureturing@dev`（提交 [{commit}](trureturing:)）中的精确源码坐标、语句摘要哈希前缀（`statement_id`）及形式化边界。
 
