@@ -1235,24 +1235,30 @@
     'gram-symmetry': ['对调 A_past 与 C_future：矩阵里青色的 x 与紫色的 y 换位，截面上的点翻到对角线另一侧，G′ ≠ G；行列式 0.614 与三个特征值都不变。时间轴让 C 绕 B 转一圈，两条曲线始终重合。', 'Swap A_past and C_future: the cyan x and the violet y trade places in the matrix and the point in the slice flips across the diagonal, so G′ ≠ G; the determinant 0.614 and the three eigenvalues stay. The rail turns C once about B, and the two curves coincide throughout.'],
     'paradox-cancel': ['底圆转满一圈，提升的点只走半圈，从 +1 到 −1：回路臂相对参考臂差一个负号，悖论端口变暗、另一端口全亮；再转一圈回到 +1。下方：X 的不动点是一整条线，余弦只有 θ* ≈ 0.739。', 'One full base turn lifts the point only half way, +1 to −1: the loop arm differs from the reference arm by a sign, the paradox port goes dark and the other is fully lit; a second turn returns to +1. Below: X fixes a whole segment, cosine only θ* ≈ 0.739.']
   };
+  // every card plays when picked; `still` is the rail value its still (cover, cited figure) and the opening full page show
+  const PRESETS = {
+    'boolean-illusion': { still: 1 }, 'born-handshake': { still: DEF.chiPsi }, 'feynman-stationary': { still: 1 },
+    'tsvf-eraser': { still: PI / 2 }, 'gram-symmetry': { still: 0 }, 'paradox-cancel': { still: 1 }
+  };
   let booting = true;
   /** Start a card: play for the reader, or jump to the frame that a still should show. */
   function run(play, still, start) {
-    if (TRV.still || (booting && !TRV.embed)) { clock.set(still); return; }
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(still === 'end' ? clock.max : still); return; }
     clock.set(start == null ? 0 : start);
     if (play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
   }
   function applyPreset(id) {
+    const still = PRESETS[id].still;
     S.reject = null;
-    if (id === 'boolean-illusion') { Object.assign(S, { th: DEF.th, xi: DEF.xi, Delta: DEF.Delta, gamma: 1 }); setScene(id); run(true, 1, 0); }
-    else if (id === 'born-handshake') { Object.assign(S, { thB: DEF.thB, chiPhi: 0, chiPsi: DEF.chiPsi }); setScene(id); run(true, DEF.chiPsi, 0); }
-    else if (id === 'feynman-stationary') { Object.assign(S, { k0: DEF.k0, n1: 1, n2: 1.5, mesh: 'auto', fan: 'exact' }); setScene(id); run(true, 1, 0); }
-    else if (id === 'tsvf-eraser') { Object.assign(S, { V: 1, eta: DEF.eta }); setScene(id); run(true, PI / 2, 0); }
-    else if (id === 'gram-symmetry') { Object.assign(S, { x: DEF.x, y: DEF.y }); setScene(id); setSwap(true, TRV.still || booting ? 0 : 700); run(true, 0, 0); }
-    else if (id === 'paradox-cancel') { setScene(id); run(true, 1, 0); }
+    if (id === 'boolean-illusion') { Object.assign(S, { th: DEF.th, xi: DEF.xi, Delta: DEF.Delta, gamma: 1 }); setScene(id); run(true, still, 0); }
+    else if (id === 'born-handshake') { Object.assign(S, { thB: DEF.thB, chiPhi: 0, chiPsi: DEF.chiPsi }); setScene(id); run(true, still, 0); }
+    else if (id === 'feynman-stationary') { Object.assign(S, { k0: DEF.k0, n1: 1, n2: 1.5, mesh: 'auto', fan: 'exact' }); setScene(id); run(true, still, 0); }
+    else if (id === 'tsvf-eraser') { Object.assign(S, { V: 1, eta: DEF.eta }); setScene(id); run(true, still, 0); }
+    else if (id === 'gram-symmetry') { Object.assign(S, { x: DEF.x, y: DEF.y }); setScene(id); setSwap(true, TRV.still || booting ? 0 : 700); run(true, still, 0); }
+    else if (id === 'paradox-cancel') { setScene(id); run(true, still, 0); }
   }
   const cards = kit.cards($('presets'), {
-    notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+    presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动舞台上的箭头与交点，拖滑块，或换一张卡。数字键 1–6 换场景。', 'Free play: drag the arrows and the crossing on the stage, move the sliders, or pick another card. Keys 1–6 switch scenes.']
   });
 

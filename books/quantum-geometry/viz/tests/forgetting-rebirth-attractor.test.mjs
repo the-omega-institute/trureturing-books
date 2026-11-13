@@ -12,7 +12,8 @@
 //   (cross product), the first step on t² − x² = 1; the tower's points over the wheel's points at their round's height;
 //   the hemisphere's points on the unit sphere and projected back from the south pole onto (s − 1)/s.
 // It reads the page through window.SAMSARA_DEBUG.
-import { session, stageFirstChecks, solidChecks, solidPixels, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, solidPixels, settle, until, openStill } from '../../../../tools/node/viz-testkit.mjs';
+import { withReadySolid } from './solid-readiness.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'forgetting-rebirth-attractor';
 const T = await session();
@@ -371,24 +372,13 @@ await pick('staircase'); await stopped('staircase');
 
 // the lit solid itself (kit.solid): shading, turning, hidden marks, resting inside a book; last, since it turns the camera
 await pick('staircase'); await stopped('staircase');
-// readiness for the rest lines: the embedded card makes its first WebGL context only once it is seen on screen, and
-// before that parked() is also true; hand the embed to solidChecks only after a context has actually existed
-const TE = Object.create(T);
-TE.open = async (...a) => {
-  const em = await T.open(...a);
-  if (!/embed=1/.test(a[2] || '')) return em;
-  await settle(em);
-  check('solid (embed): the card on screen actually creates its first WebGL context before the rest checks',
-    await until(em, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000));
-  return em;
-};
-await solidChecks(TE, BOOK, ID, page);
+await solidChecks(withReadySolid(T), BOOK, ID, page);
 
 /* ---------- cited figures at the size a chapter shows them ----------
    A chapter cites a card in an iframe 500 px high: about 334 px wide on a 390 px phone, 760 px in a book page. In the
    phone's frame a long note once took ~180 px of the 500 and left the stage ~210 px: the tower and the disk shrank to a few pixels, and the disk, its magnifier and their labels ran into the legend collided with the
    captions and the legend, and the lit solid shrank to a few per cent of the stage. These checks look at the frame
-   itself: nothing scrolls; the note bar stays short and its full note scrolls to the last line; the stage keeps most of
+   itself: nothing scrolls; the complete note stays short and needs no internal scrolling; the stage keeps most of
    the frame; no ink of the flat canvas or the WebGL canvas and no label lies under the title, its second line or the
    legend; the solid draws nothing inside the flat drawings; labels stay on the stage and apart; the lit solid covers
    ≥ 12 % of the stage at the card's first and last frame; and the exact disk keeps a radius ≥ 40 px. */
@@ -420,7 +410,7 @@ await solidChecks(TE, BOOK, ID, page);
     const tags = [...st.querySelectorAll('.tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => [t.textContent.trim(), box(t.getBoundingClientRect())]);
     const fb = document.getElementById('flat').getBoundingClientRect();
     const panels = (() => [['the disk and its magnifier', window.SAMSARA_DEBUG.solid.r2]])().map(([what, b]) => [what, { x: fb.left + b.x, y: fb.top + b.y, w: b.w, h: b.h }]);
-    const what = document.querySelector('.tour .what'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
+    const what = document.querySelector('.tour .tour-note'), note = document.getElementById('presetNote'), tour = document.getElementById('tour');
     const full = what.textContent.trim().endsWith(note.textContent.trim()) && note.textContent.trim().length > 20;
     const scrolls = what.scrollHeight > what.clientHeight + 1, oy = getComputedStyle(what).overflowY;
     what.scrollTop = what.scrollHeight; const reached = what.scrollTop + what.clientHeight >= what.scrollHeight - 1; what.scrollTop = 0;
@@ -448,13 +438,14 @@ await solidChecks(TE, BOOK, ID, page);
   for (const [tag, vp, lang, cards] of [['phone frame 334 × 500', { width: 334, height: 500 }, 'en', FIG], ['phone frame 334 × 500', { width: 334, height: 500 }, 'zh', ['staircase', 'quotient_fold']], ['book page 760 × 500', { width: 760, height: 500 }, 'en', FIG]]) {
     const bad = { frame: [], note: [], words: [], solid: [], labels: [], share: [], read: [] };
     for (const card of cards) {
-      const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${card}`, { viewport: vp, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+      const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${card}`, { viewport: vp, locale: lang === 'en' ? 'en-US' : 'zh-CN', reducedMotion: 'reduce' });
       await until(pg, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000);
-      await until(pg, (d) => !window[d].state.playing, 'SAMSARA_DEBUG', 120000);
+      // Inspect the ending frame directly; the card controls have separate playback checks.
+      await pg.evaluate((d) => window[d].seek(window[d].state.max), 'SAMSARA_DEBUG');
       await settle(pg);
       const f = await facts(pg), id = `${card} (${lang})`;
       if (f.docScroll > 0 || f.docWide > 0 || f.stageH < 0.72 * f.vp.h) bad.frame.push(`${id}: scroll ${f.docScroll}/${f.docWide}, stage ${Math.round(f.stageH)} px`);
-      if (f.tourH > 84 || !f.note.full || !f.note.scrollable || !f.note.reached || !f.note.btns) bad.note.push(`${id}: ${Math.round(f.tourH)} px ${JSON.stringify(f.note)}`);
+      if (f.tourH > 84 || !f.note.full || f.note.scrolls || !f.note.reached || !f.note.btns) bad.note.push(`${id}: ${Math.round(f.tourH)} px ${JSON.stringify(f.note)}`);
       if (f.under.length) bad.words.push(`${id}: ${f.under.slice(0, 3).join(', ')}`);
       if (f.solidIn.length) bad.solid.push(`${id}: ${f.solidIn.join(', ')}`);
       if (f.tagOut.length || f.tagHit.length) bad.labels.push(`${id}: ${[...f.tagOut.map((t) => `off stage: ${t}`), ...f.tagHit].slice(0, 3).join(', ')}`);
@@ -465,13 +456,24 @@ await solidChecks(TE, BOOK, ID, page);
     }
     const what = `${tag}, ${lang}, ${cards.length === FIG.length ? 'every cited card' : cards.join(' + ')}`;
     check(`cited figure, ${what}: nothing scrolls and the stage keeps ≥ 72 % of the frame`, !bad.frame.length, bad.frame.join(' | '));
-    check(`cited figure, ${what}: the note bar stays ≤ 84 px, holds the card's whole note and scrolls to its last line, ◀ ▶ in the frame`, !bad.note.length, bad.note.join(' | '));
+    check(`cited figure, ${what}: the note bar stays ≤ 84 px, holds the card's complete note without internal scrolling, ◀ ▶ in the frame`, !bad.note.length, bad.note.join(' | '));
     check(`cited figure, ${what}: no flat drawing, no solid and no label under the title, its second line or the legend`, !bad.words.length, bad.words.join(' | '));
     check(`cited figure, ${what}: the solid draws nothing inside the part of the disk and its magnifier`, !bad.solid.length, bad.solid.join(' | '));
     check(`cited figure, ${what}: every label stays on the stage, and no two labels sit on each other`, !bad.labels.length, bad.labels.join(' | '));
     check(`cited figure, ${what}: the lit solid covers ≥ 12 % of the stage at the card's first and last frame`, !bad.share.length, bad.share.join(' | '));
     check(`cited figure, ${what}: the exact disk keeps a radius ≥ 40 px`, !bad.read.length, bad.read.join(' | '));
   }
+}
+
+
+// Publication stills use clock coordinates and retain the values the captions describe.
+for (const lang of ['zh', 'en']) for (const [card, time] of [['staircase', 8], ['erase_reset', Wk.n0 + Wk.p + 2]]) {
+  const pg = await openStill(T, BOOK, ID, card, lang);
+  const q = await pg.evaluate(() => window.SAMSARA_DEBUG.state);
+  const declared = await pg.getAttribute(`[data-preset="${card}"]`, 'data-still');
+  check(`still ${card} (${lang}): its declared frame matches the clock and caption`,
+    !q.playing && Math.abs(q.t - time) < 1e-9 && (declared === 'end' ? q.t === q.max : Number(declared) === q.t) && ((card === 'staircase' ? q.k : q.n) === time), JSON.stringify({ q, declared }));
+  await pg.context().close();
 }
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));

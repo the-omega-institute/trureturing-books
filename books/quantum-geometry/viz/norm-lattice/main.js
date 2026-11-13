@@ -460,15 +460,16 @@
     onChange: () => paint()
   });
 
-  /* ---------- experiment cards ---------- */
+  /* ---------- experiment cards: a played card declares the rail value its still shows (the rail of the
+     Eisenstein scene reads t + 1) ---------- */
   const PRESETS = {
     hex: { scene: 'eis', m: 1, t: -1, cur: [-1, 3], cell: true, play: false },
     skew: { scene: 'eis', m: 0, t: 2, cur: [-1, 3], cell: false, play: false },
-    shear: { scene: 'eis', m: 1, t: -1, t1: 2, cur: [-1, 3], cell: true, play: true },
-    range: { scene: 'eis', m: 0, t: -1, t1: 2, still: 1, cur: [-1, 3], cell: false, trails: true, play: true },
+    shear: { scene: 'eis', m: 1, t: -1, t1: 2, still: 3, cur: [-1, 3], cell: true, play: true },
+    range: { scene: 'eis', m: 0, t: -1, t1: 2, still: 2, cur: [-1, 3], cell: false, trails: true, play: true },
     norm: { scene: 'gold', alpha: 0, g0: [2, 1], smax: 2, play: false },
     pell: { scene: 'gold', alpha: 1, g0: [2, 1], smax: 2, play: false },
-    units: { scene: 'gold', alpha: 1, g0: [1, 0], smax: 4, play: true }
+    units: { scene: 'gold', alpha: 1, g0: [1, 0], smax: 4, play: true, still: 4 }
   };
   const NOTES = {
     hex: ['艾森斯坦整数画在复平面上，排成六角格。范数 x² + xy + y² 是到原点距离的平方：实线圆 1、3、4、7、9、12、13 都穿过格点，虚线圆 2、5、6 一个格点也碰不到。琥珀色的点 (−1, 3) 与另外 11 个青色格点同在范数 7 的圆上。',
@@ -496,7 +497,7 @@
       const m0 = same ? S.m : p.m, c0 = same ? clock.t : p.t + 1;
       setScene('eis'); viewChips.set(String(p.m), true);
       const end = p.play ? p.t1 + 1 : p.t + 1;
-      if (TRV.still || (booting && !TRV.embed)) { S.m = p.m; clock.set(p.still != null ? p.still + 1 : end); return; }
+      if (TRV.still || (booting && !TRV.embed)) { S.m = p.m; clock.set(p.still != null ? (p.still === 'end' ? clock.max : p.still) : end); return; }
       tw = kit.tween(same ? 650 : 0, (e) => { S.m = lerp(m0, p.m, e); clock.set(lerp(c0, p.t + 1, e)); }, () => {
         tw = null;
         if (!p.play) return;
@@ -506,7 +507,7 @@
       const a0 = same ? S.alpha : p.alpha;
       S.g0 = p.g0.slice(); S.smax = p.smax;
       setScene('gold'); frameChips.set(String(p.alpha), true); clock.set(0);
-      if (TRV.still || (booting && !TRV.embed)) { S.alpha = p.alpha; clock.set(p.play ? p.smax : 0); return; }
+      if (TRV.still || (booting && !TRV.embed)) { S.alpha = p.alpha; clock.set(p.still != null ? (p.still === 'end' ? clock.max : p.still) : 0); return; }
       tw = kit.tween(same ? 650 : 0, (e) => { S.alpha = lerp(a0, p.alpha, e); paint(); }, () => {
         tw = null;
         if (!p.play) return;
@@ -514,7 +515,7 @@
       });
     }
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：切换场景与坐标，拖时间轴，点一个格点让它成为当前点。', 'Free play: switch scenes and coordinates, scrub the rail, click a lattice point to make it the current one.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });

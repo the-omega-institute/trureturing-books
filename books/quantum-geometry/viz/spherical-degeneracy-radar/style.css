@@ -9,3 +9,8 @@
   .hud-tr { top: var(--scene-top, 58px); left: 20px; right: 20px; max-width: none; justify-content: flex-start; gap: 3px; }
   .hud-tr .chip { padding: 3px 4px; font-size: 9px; letter-spacing: 0.04em; }
 }
+
+/* The tour bar selects the scene in a narrow cited figure. */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}

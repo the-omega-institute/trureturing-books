@@ -334,7 +334,7 @@
   const LEGEND = {
     speed: [['cy', '到起点的夹角 θ；左边：重叠的各支', 'angle θ to the start; left: the parts of the overlap'], ['dm', '速度线 ΔH·t', 'speed line ΔH·t'], ['mg', '90° 的墙；左边：重叠为 0', 'the 90° wall; left: zero overlap'], ['am', '此刻', 'now']],
     zeno: [['cy', '线上的影子 · 留下的概率', 'shadow on the line · chance to stay'], ['mg', '离开线的一份 · 走掉的概率', 'part off the line · chance gone'], ['dm', '不看时的路', 'the unwatched path'], ['am', '当前的箭头', 'the current arrow']],
-    return: [['cy', '柱：已返回 · 球：箭头在线上的影子', 'columns: returned · sphere: the arrow\'s shadow on the line'], ['mg', '柱：还没回来 · 球：离开线的一份', 'columns: not yet · sphere: the part off the line'], ['mg', '虚线台阶：另一个步长的已返回', 'dashed steps: returned, for another step size'], ['am', '当前这一步 · 还没回来的那一支', 'the current step · the branch not yet back']]
+    return: [['cy', '柱：已返回 · 球：箭头在线上的影子', 'columns: returned; sphere: projection on line'], ['mg', '柱：还没回来 · 球：离开线的一份', 'columns: not yet · sphere: the part off the line'], ['mg', '虚线台阶：另一个步长的已返回', 'dashed steps: returned, for another step size'], ['am', '当前这一步 · 还没回来的那一支', 'the current step · the branch not yet back']]
   };
   function drawText() {
     const t = clock.t;
@@ -465,7 +465,7 @@
     clock.pause();
     moving = kit.tween(420, (e) => { S.alpha = Math.round(a0 + (a1 - a0) * e); S.delta = Math.round(d0 + (d1 - d0) * e); refresh(); paint(); }, land);
   }
-  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+  const cards = kit.cards($('presets'), { presets: PRESETS, notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、拖时间轴、改权重、频闪次数或步长。随时可以再选一张卡。', 'Free play: switch scenes, drag the rail, change the weights, the strobe or the step. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
