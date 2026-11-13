@@ -11,6 +11,8 @@
 3. **两轴连续旋转生成与离散 $\{H, T\}$ 门集的三维割圆多面体**：在连续正交群 $\mathrm{SO}(3)$ 中，绕两根不共线轴的连续轴圆经有限步乘积即可精确到达任意三维旋转；然而一旦落回真实量子计算机的有限离散门集 $\{H, T\}$，在任意有限门长预算 $L < \infty$ 下，固定初态的可达点集 $\mathcal{S}_L \subset S^2$ 张成的凸包 $P_L = \operatorname{conv}(\mathcal{S}_L)$ 永远只是一座由平直弦面拼接而成的**三维割圆多面体**，球皮与弦面之间恒存在严格为正的逼近残差 $\varepsilon_L > 0$；
 4. **精确振幅放大的源查询计数与渐近门编译的区分**：当已知初始成功概率 $p$ 时，借助辅助硬币旋转调慢步长，可以用至多 $\frac{\pi/2 + 2}{\sqrt{p}}$ 次源算子查询实现零残差的精确振幅放大；同时我们将严格区分这一“源查询次数（`sourceQueries`）”与 $\{H, T\}$ 离散门集的渐近门编译字长（详见章末 [@rem-solovay-kitaev-literature]）。
 
+第一条主线还将依次经过区间平方和补全、整个有符号圆的精确相位分解，以及同一相位元组在任意原始投影酉算子上的奇偶压缩提升。最后一层作用于复多项式 $P=c(p)+i\,c(B)$；实目标的电路提取与物理对应另有明确边界。
+
 ::: {.figure src="ch16-overview"}
 **图 16。** 本章地图：面板 I，区间 $[-1, 1]$ 上青色的切比雪夫多项式 $T_3(x) = 4x^3 - 3x$ 在 $-1$ 与 $1$ 之间来回摆动，灰色的直线是 $T_1(x) = x$；面板 II，从北极出发、长度不超过 $6$ 的 $\{H, T\}$ 门字落在球面上的 $19$ 个青色顶点，它们的凸包用平直的弦面包住球心，与球皮之间留着缝；面板 III，青色的阶梯是精确振幅放大的源查询次数 $2n + 1$，始终在绿色的上界 $(\pi/2 + 2)/\sqrt{p}$ 之下（[@cor-exact-source-query-count]），三个点是本章表格里的 $3$、$7$、$13$。
 :::
@@ -135,7 +137,7 @@ $$
 :::
 
 ::: {.remark #rem-qsvt-walks-literature title="完整 QSVT 可实现性与黏合树加速（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 这里登记完整 QSVT 与图游走的文献结论。Theorem 3 在旋转约定下的充分性，以及同一补全的有符号圆分解，已在下文 [@thm-polynomial-phase-synthesis]、[@thm-signed-circle-phase-factorization] 中单独形式化；以下完整充要刻画、算子提升与查询语义仍按文献边界陈述。
+**文献结果，未在本书形式化。** 这里登记完整 QSVT 与图游走的文献结论。Theorem 3 在旋转约定下的充分性，以及同一补全的有符号圆分解，已在下文 [@thm-polynomial-phase-synthesis]、[@thm-signed-circle-phase-factorization] 中单独形式化；以下完整充要刻画、实部电路与查询语义仍按文献边界陈述；任意原始投影酉算子的复多项式提升另见 [@thm-projected-unitary-polynomial-lifting]、[@thm-native-phase-projected-lifting]。
 
 1. **量子奇异值变换（QSVT）的复幺正补全与实目标多项式提取定理**（A. Gilyén, Y. Su, G. H. Low, and N. Wiebe, *Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics*, Proc. 51st ACM STOC, 193–204, 2019, doi:10.1145/3313276.3316366，Theorem 3 与 Theorem 17 / Corollary 18）：设矩阵 $A$ 通过块编码（block encoding）嵌入幺正算子 $U$ 的投影块 $\tilde{\Pi} U \Pi = A$（$\norm{A}_{\mathrm{op}} \le 1$）。文献严格区分两层可实现性定理：
    - **直接二维复多项式量子信号处理（QSP，Theorem 3）**：复多项式对 $(P_{\mathrm{c}}, Q_{\mathrm{c}}) \in \mathbb{C}[x]^2$ 能直接作为单一交替相位序列算子 $U_{\Phi}(x)$ 的二维矩阵元实现，当且仅当 $\deg(P_{\mathrm{c}}) \le d$、$\deg(Q_{\mathrm{c}}) \le d - 1$，$P_{\mathrm{c}}$ 具有确定奇偶性 $d \bmod 2$，$Q_{\mathrm{c}}$ 具有相反奇偶性 $(d-1) \bmod 2$，且在一切 $x \in [-1, 1]$ 上满足复模方幺正归一恒等式 $|P_{\mathrm{c}}(x)|^2 + (1 - x^2)|Q_{\mathrm{c}}(x)|^2 = 1$。
@@ -605,11 +607,375 @@ $$
 对第二个定理，取 $p=X,B=0,C=1$，同样满足预算 $3$ 的全部平方和约束；上述列表给出 $U=W$ 的整个圆分解。取 $t=-1/6$，则 $x=1/2,y=-\sqrt3/2$，所得两个非对角元均为 $-i\sqrt3/2$。这与上一节的区间正平方根拉回的 $+i\sqrt3/2$ 不同。预算 $1$ 时也可取 $\phi_0=0,\Phi=[0]$，说明本定理规定的是给定合法预算的存在性，不是最短列表。
 :::
 
-::: {.remark #rem-phase-synthesis-boundaries title="精确存在性已经闭合，实施与提升仍须另证"}
-[@thm-polynomial-phase-synthesis] 与 [@thm-signed-circle-phase-factorization] 闭合了合法多项式对的相位存在性，以及同一平方和补全在**整个原生有符号圆**上的精确分解。初始相位是列表之外另行存在量化的实数，并非可任意预先指定的实数。它们不声称最优或可计算的相位求解器、相位唯一性、随输入连续的选择或数值稳定性。
+::: {.remark #rem-phase-synthesis-boundaries title="精确相位存在性与后续算子接口的分界"}
+[@thm-polynomial-phase-synthesis] 与 [@thm-signed-circle-phase-factorization] 给出合法多项式对的相位存在性，以及同一平方和补全在**整个原生有符号圆**上的精确分解。初始相位是列表之外另行存在量化的实数，并非可任意预先指定。它们不声称最优或可计算的相位求解器、相位唯一性、随输入连续的选择或数值稳定性。
 
-本次所钉源码也未由这两条结论给出完整正向充要刻画、旋转与反射约定的传输、任意投影算子的提升、实部辅助比特实现或原始黑盒查询的精确语义；这些仍需各自明确的冻结依据。尤其 $\Phi\mapsto-\Phi$ 是相位取负，不是把物理门字取伴随或颠倒次序。进行中的 [issue 29935](https://github.com/the-omega-institute/trureturing/issues/29935) 属于后续提升研究，不是本节形式结论。上半圆上的正平方根相等，不能代替整个有符号圆上的场相等。
+旋转—反射约定与任意投影酉算子的提升将在下文 [@thm-native-phase-projected-lifting] 中用同一组见证连接。上半圆上的正平方根相等，仍不能代替整个有符号圆上的场相等；实部辅助比特、电路与查询的剩余边界见 [@rem-projected-lifting-provenance-boundaries]。
 :::
+
+## 把同一标量字提升到原始投影酉算子 {#sec-raw-projected-unitary-lifting}
+
+二维矩阵里的一个数，怎样决定大空间里的一个投影块？想象先用输入窗口 $\Pi$ 留住一束振幅，经过原始酉算子 $U$，再用输出窗口 $\widetilde\Pi$ 读出。窗口的大小可以不同；输出窗口甚至可以完全关闭。被挡住的振幅仍在空间里，下一次 $U^*$ 会把它带回来。因此只跟踪当前窗口里的分量，不能证明任意长的交替字。
+
+以下固定任意有限维复内积空间 $H$，允许 $H=\{0\}$。所有算子都是 $H\to_{\mathbb C}H$ 的线性自映射，乘积按复合解释，最右侧先作用。给定**原始**算子与投影
+
+$$
+\begin{aligned}
+U^*U&=1,& UU^*&=1,\\
+\Pi^*&=\Pi,& \Pi^2&=\Pi,\\
+\widetilde\Pi^*&=\widetilde\Pi,&\widetilde\Pi^2&=\widetilde\Pi,
+\end{aligned}
+$$
+
+记 $A=\widetilde\Pi U\Pi$、$G=A^*A$。星号是内积伴随；源码在此使用标准内积与伴随，没有另换范数。$A$ 不必自伴，两个投影不必等秩，也不要求任何非零奇异值。
+
+::: {.definition #def-projected-unitary-word title="原始编码、投影相位与尾长决定的交替字" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.ofRaw D5/S3/ContinuousObservables/ProjectedUnitaryLifting.phaseOp D5/S3/ContinuousObservables/ProjectedUnitaryLifting.altSeq D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.Rref D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.phaseZ D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.seqR"}
+在上述假设下，$E=\operatorname{ofRaw}(U,\Pi,\widetilde\Pi)$ 是由这三个算子组成的投影酉编码。源码的投影谓词是“正且幂等”，它与这里的自伴幂等条件等价。对任意正交投影 $J$ 与实数 $\theta$，定义
+
+$$
+F_J(\theta)=e(\theta)J+e(-\theta)(1-J).
+$$
+
+记 $V_E(\Psi)=\operatorname{altSeq}(E,\Psi)$。对所有实数列表递归定义
+
+$$
+\begin{aligned}
+V_E([])&=1,\\
+V_E(\theta::\Theta)&=
+\begin{cases}
+F_{\widetilde\Pi}(\theta)U V_E(\Theta),&|\Theta|\text{ 为偶数},\\
+F_\Pi(\theta)U^* V_E(\Theta),&|\Theta|\text{ 为奇数}.
+\end{cases}
+\end{aligned}
+$$
+
+同时令 $s(x)=\sqrt{1-x^2}$（实数非负平方根），并定义标量反射字
+
+$$
+\begin{aligned}
+R_{\mathrm{ref}}(x)&=\begin{pmatrix}x&s(x)\\s(x)&-x\end{pmatrix},&
+D(\theta)&=\begin{pmatrix}e(\theta)&0\\0&e(-\theta)\end{pmatrix},\\
+S([],x)&=I_2,&
+S(\theta::\Theta,x)&=D(\theta)R_{\mathrm{ref}}(x)S(\Theta,x).
+\end{aligned}
+$$
+
+$S(\Psi,x)=\operatorname{seqR}(\Psi,x)$ 的因子按列表从左到右排列，作用时仍从右到左。
+:::
+
+例如 $V_E([\alpha])=F_{\widetilde\Pi}(\alpha)U$，而 $V_E([\alpha,\beta])=F_\Pi(\alpha)U^*F_{\widetilde\Pi}(\beta)U$。递归判断的是**尾列表**长度；不能按正在读到的相位下标擅自调换 $U$ 与 $U^*$。$F_J$ 在 $\operatorname{range}J$ 上乘 $e(\theta)$，在其正交补上乘 $e(-\theta)$；若两边维数不同，其行列式也不必为 $1$。
+
+### 两副架：把留在窗内与落在窗外的振幅一起带走
+
+::: {.definition #def-singular-pair-frames title="任意奇异对及其输入、输出两副架" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.IsSingularPair D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvtOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.rvpOf"}
+$\operatorname{IsSingularPair}(E,\psi,\sigma)$ 表示恰好以下条件：
+
+$$
+\Pi\psi=\psi,\qquad 0\le\sigma\le1,\qquad
+A^*A\psi=\sigma^2\psi.
+$$
+
+不要求 $\|\psi\|=1$ 或 $\psi\ne0$。令 $s=\sqrt{1-\sigma^2}$，定义
+
+$$
+\begin{aligned}
+\ell&=\begin{cases}0,&\sigma=0,\\\sigma^{-1}A\psi,&\sigma\ne0,\end{cases}\\
+\widetilde\ell&=s^{-1}(1-\widetilde\Pi)U\psi,\\
+\psi_\perp&=s^{-1}(1-\Pi)U^*\ell.
+\end{aligned}
+$$
+
+逆元均在 $\mathbb C$ 中取，采用 $0^{-1}=0$。输入架为 $(\psi,\psi_\perp)$，输出架为 $(\ell,\widetilde\ell)$；“架”在此允许退化，不声称总是两维基。
+:::
+
+先在 $0<\sigma<1$ 且 $\psi\ne0$ 的情形看清机制。$A\psi=\sigma\ell$、$A^*\ell=\sigma\psi$，而两个窗口把每副架的第二根向量消去：$\Pi\psi_\perp=0$、$\widetilde\Pi\widetilde\ell=0$。内积计算给出 $\|A\psi\|=\sigma\|\psi\|$，故 $\|\ell\|=\|\psi\|$。投影的勾股分解再给出 $\|\widetilde\ell\|=\|\psi_\perp\|=\|\psi\|$；每副架内部正交，但输入架与输出架一般不是同一副架。若 $\psi$ 为单位向量，它们才是各自平面内的标准正交架。
+
+源码用于归纳的四条作用式是
+
+$$
+\begin{aligned}
+U\psi&=\sigma\ell+s\widetilde\ell,&
+U\psi_\perp&=s\ell-\sigma\widetilde\ell,\\
+U^*\ell&=\sigma\psi+s\psi_\perp,&
+U^*\widetilde\ell&=s\psi-\sigma\psi_\perp.
+\end{aligned}
+$$
+
+例如在 $s>0$ 时，由 $s\psi_\perp=U^*\ell-\sigma\psi$ 与酉性直接算得
+
+$$
+\begin{aligned}
+sU\psi_\perp&=\ell-\sigma U\psi\\
+&=(1-\sigma^2)\ell-\sigma s\widetilde\ell\\
+&=s^2\ell-\sigma s\widetilde\ell.
+\end{aligned}
+$$
+
+约去 $s$ 就得到第二条；同理由 $s\widetilde\ell=U\psi-\sigma\ell$ 得第四条。这里需切换输入、输出两副架，而非假定 $U$ 在一副固定架上作同一反射。
+
+前后两副架之间，$U$ 与 $U^*$ 都由 $R_{\mathrm{ref}}(\sigma)$ 表示。相位算子再把第一坐标乘 $e(\theta)$、第二坐标乘 $e(-\theta)$，正好成为 $D(\theta)R_{\mathrm{ref}}(\sigma)$。这些作用式在下面的两个端点也成立，不能只从非退化平面的图像推断。
+
+**$\sigma=0$：左向量消失，输出没有消失。** 由 $\|A\psi\|^2=\sigma^2\|\psi\|^2$ 得 $A\psi=0$。于是 $\ell=\psi_\perp=0$，但 $s=1$ 且 $\widetilde\ell=U\psi$；$U^*\widetilde\ell=\psi$。输入架退化为 $(\psi,0)$，输出架退化为 $(0,U\psi)$，$R_{\mathrm{ref}}(0)$ 的交换作用恰好在这两副退化架之间传递振幅。若只保留归一化的左奇异向量，便会错误地丢掉 $U\psi$。
+
+**$\sigma=1$：不能约掉零平方根。** 此时 $s=0$，按逆零约定 $\widetilde\ell=\psi_\perp=0$。还必须证明 $U\psi=\ell$ 与 $U^*\ell=\psi$：$\widetilde\Pi U\psi=\ell$ 且 $\|\ell\|=\|U\psi\|=\|\psi\|$，故投影勾股恒等式迫使 $(1-\widetilde\Pi)U\psi=0$；另一方向同理。这里是范数饱和补上端点作用，不是以 $s$ 作分母后默认可消去。
+
+::: {.theorem #thm-alternating-singular-pair-action title="任意相位列表在奇异对上的完整双分量作用" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.altSeq_apply_singular"}
+对上述任意编码 $E$、任意满足 $\operatorname{IsSingularPair}(E,\psi,\sigma)$ 的 $\psi,\sigma$，以及任意 $\Psi\in\operatorname{List}(\mathbb R)$（包括空列表），令 $M=S(\Psi,\sigma)$。则
+
+$$
+V_E(\Psi)\psi=
+\begin{cases}
+M_{00}\psi+M_{10}\psi_\perp,&|\Psi|\text{ 为偶数},\\
+M_{00}\ell+M_{10}\widetilde\ell,&|\Psi|\text{ 为奇数}.
+\end{cases}
+$$
+:::
+
+::: proof
+空列表给出 $M=I_2$ 与 $V_E([])\psi=\psi$。归纳时，若尾长为偶数，$U$ 将输入架送到输出架；若尾长为奇数，$U^*$ 将输出架送回输入架。四条作用式与相位规则同时更新两坐标：
+
+$$
+\begin{aligned}
+a'&=e(\theta)(\sigma a+s b),\\
+b'&=e(-\theta)(s a-\sigma b).
+\end{aligned}
+$$
+
+因此必须保留 $b=M_{10}$：下一步的 $00$ 系数含有 $s b$，即使最后只读投影块，也不能提前删除补分量。$\sigma=0,1$ 的作用式已经分别建立，$\psi=0$ 时各式也成立。该定理陈述的是满足奇异对条件的向量，尚不是对任意物理输入态的无条件断言。完整证明由 Lean 内核检查。
+:::
+
+### 从输入窗口的完整格拉姆谱到压缩算子
+
+$G=A^*A$ 是正自伴收缩算子，并满足 $\Pi G=G\Pi=G$。源码对 $\operatorname{range}\Pi$ 上的限制算子使用所钉 Mathlib 的有限维对称谱定理，取该**输入子空间**的完整标准正交本征基 $\{\psi_j\}_{j\in\mathrm{Fin}(\dim\operatorname{range}\Pi)}$。它不是只列正奇异值的薄分解，也不是宣称这组向量是整个 $H$ 的基。设 $G\psi_j=\lambda_j\psi_j$；由正性与 $\|A\psi_j\|\le\|\psi_j\|$ 得 $\lambda_j\in[0,1]$，置 $\sigma_j=\sqrt{\lambda_j}$。所有零本征值保留在这组基中。
+
+对 $R(X)=\sum_m r_mX^m\in\mathbb C[X]$，定义代数求值
+
+$$
+R(G)=\operatorname{aeval}_G(R)=\sum_m r_m G^m,
+\qquad G^0=1_H.
+$$
+
+这是源码的 `Polynomial.aeval`，常数项乘整个空间的单位算子，不是逐矩阵元求值。因而 $R(G)\psi_j=R(\sigma_j^2)\psi_j$，且 $R(G)$ 与 $\Pi$ 对易。
+
+::: {.theorem #thm-projected-unitary-polynomial-lifting title="任意复多项式标量恒等式的奇偶压缩提升" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.polynomial_lifting"}
+在上述有限维空间与编码假设下，给定任意实数列表 $\Psi$ 与任意 $R\in\mathbb C[X]$。假设对**每个** $x\in[0,1]$ 都有
+
+$$
+S(\Psi,x)_{00}=\begin{cases}
+R(x^2),&|\Psi|\text{ 为偶数},\\
+xR(x^2),&|\Psi|\text{ 为奇数}.
+\end{cases}
+$$
+
+则以下两个条件命题同时成立：
+
+$$
+\begin{aligned}
+|\Psi|\text{ 为偶数}&\ \Longrightarrow\
+\Pi V_E(\Psi)\Pi=\Pi R(G)\Pi,\\
+|\Psi|\text{ 为奇数}&\ \Longrightarrow\
+\widetilde\Pi V_E(\Psi)\Pi=A R(G).
+\end{aligned}
+$$
+:::
+
+::: proof
+对输入本征基中的每个 $\psi_j$ 使用 [@thm-alternating-singular-pair-action]。偶长时再投影 $\Pi$ 消去 $\psi_\perp$，留下 $R(\sigma_j^2)\psi_j$；奇长时投影 $\widetilde\Pi$ 消去 $\widetilde\ell$，留下 $\sigma_j R(\sigma_j^2)\ell=R(\sigma_j^2)A\psi_j$。这也覆盖 $\sigma_j=0$，不以它作除数。
+
+对任意 $v\in H$，先将 $\Pi v$ 在输入基上完整展开，再用线性性延伸。两侧在 $(1-\Pi)v$ 上均为零；奇长右侧未显式写末端 $\Pi$，因为 $A\Pi=A$ 且 $R(G)\Pi=\Pi R(G)$。若输入空间为零，基指标集为空，结论仍由同一展开成立。这里并未把全区间标量前提削弱成只在某些谱点成立。在 $\operatorname{range}\Pi\cap\ker A$ 上，偶作用是输入向量的 $R(0)$ 倍；当 $A=0$ 时，整个偶块为 $R(0)\Pi$，奇块为零。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-projected-lifting-degenerate title="空列表、关闭输出窗口与两个奇异端点（手算）"}
+以下直接核对定义，不增加形式定理。
+
+**空列表。** 取 $\Psi=[]$、$R=1$，则全区间上 $S_{00}=1=R(x^2)$，$V_E=1$。偶结论给出 $\Pi 1\Pi=\Pi=\Pi R(G)\Pi$，对任意输出投影都成立。
+
+**输入非零而输出投影为零。** 取 $H=\mathbb C^2$、$\Pi=\operatorname{diag}(1,0)$、$\widetilde\Pi=0$、$U=\begin{pmatrix}0&1\\1&0\end{pmatrix}$。此时 $A=G=0$，输入基仍有 $\psi=(1,0)$，$\sigma=0$、$\ell=\psi_\perp=0$、$\widetilde\ell=(0,1)$。对任意 $\alpha,\beta$，令
+
+$$
+\begin{aligned}
+\Psi&=[\alpha,\beta],\\
+R(T)&=e(\alpha)\bigl[e(\beta)T+e(-\beta)(1-T)\bigr].
+\end{aligned}
+$$
+
+直接乘 $D(\alpha)R_{\mathrm{ref}}(x)D(\beta)R_{\mathrm{ref}}(x)$，得到全区间 $S_{00}=R(x^2)$。算子字为 $V_E=e(-\beta)F_\Pi(\alpha)$，所以
+
+$$
+\Pi V_E\Pi=e(\alpha-\beta)\Pi=R(0)\Pi.
+$$
+
+例如 $\alpha=\pi/3,\beta=\pi/6$ 时系数为 $\sqrt3/2+i/2$，并非零。偶变换必须保留输入核上的 $R(0)$；只对正奇异值求和会漏掉整个答案。
+
+**同一二维族的 $\sigma=0$ 与 $\sigma=1$。** 取 $U=R_{\mathrm{ref}}(\sigma)$、$\Pi=\widetilde\Pi=\operatorname{diag}(1,0)$、$\psi=(1,0)$。在 $0<\sigma<1$ 时，$\ell=(1,0)$、$\widetilde\ell=\psi_\perp=(0,1)$。在 $\sigma=0$ 时，$\ell=\psi_\perp=0$、$\widetilde\ell=(0,1)$；在 $\sigma=1$ 时，$\ell=(1,0)$、其余两根为零。单步给出
+
+$$
+V_E([\theta])\psi=
+\begin{pmatrix}e(\theta)\sigma\\e(-\theta)\sqrt{1-\sigma^2}\end{pmatrix}.
+$$
+
+故零端点的全部输出是 $e(-\theta)(0,1)$，单位端点的全部输出是 $e(\theta)(1,0)$。两者均与双分量公式相符，前者的投影读出为零而全向量范数仍为 $1$。
+:::
+
+## SAME 原生相位对象：圆场与原始算子的联合见证 {#sec-native-phase-lifting}
+
+现在把先前的补全真正接到上述原始 $U,\Pi,\widetilde\Pi$，不重新选一次补全。先明确旋转与反射的约定。区间旋转矩阵
+
+$$
+W_{\mathrm{rot}}(x)=\begin{pmatrix}x&i s(x)\\i s(x)&x\end{pmatrix}
+$$
+
+对应原生信号场在非负虚部半圆的取值。记 $W_{\mathrm{word}}(\phi_0,\Phi;x)=D(\phi_0)\prod_{j=1}^{|\Phi|}(W_{\mathrm{rot}}(x)D(\phi_j))$，乘积按列表次序排列。原生场仍使用有符号的 $y(t)$，没有把整个圆替换成非负平方根。
+
+::: {.definition #def-native-reflection-phases title="非空旋转列表的反射相位约定" lean="D5/S3/ContinuousObservables/PhaseSynthesisLifting.cor8Phases"}
+给定 $\phi_0\in\mathbb R$ 与非空列表 $\Phi=[\phi_1,\ldots,\phi_d]$，定义
+
+$$
+\begin{aligned}
+\Psi&=\operatorname{cor8Phases}(\phi_0,\Phi)\\
+&=\bigl[\phi_0+\phi_d+(d-1)\pi/2,\
+\phi_1-\pi/2,\ldots,\phi_{d-1}-\pi/2\bigr].
+\end{aligned}
+$$
+
+即首相位合并初相位、末相位与长度修正，其余来自 `dropLast` 后各减 $\pi/2$。这里 $d=|\Phi|>0$；$d=1$ 时仅有首项。
+:::
+
+约定传输的计算保留了常因子与右端对角因子：
+
+$$
+\begin{aligned}
+W_{\mathrm{rot}}(x)&=iD(-\pi/4)R_{\mathrm{ref}}(x)D(-\pi/4),\\
+\Xi&=[\phi_0-\pi/4,\phi_1-\pi/2,\ldots,\phi_{d-1}-\pi/2],\\
+W_{\mathrm{word}}(\phi_0,\Phi;x)&=i^d S(\Xi,x)D(\phi_d-\pi/4).
+\end{aligned}
+$$
+
+取 $00$ 元时，右端对角因子贡献 $e(\phi_d-\pi/4)$，而 $i^d=e(d\pi/2)$。把它们和首相位 $\phi_0-\pi/4$ 合并，正好得到 $\Psi$ 的首项。因此得到 $W_{\mathrm{word},00}=S(\Psi,x)_{00}$；这里没有将两个**完整矩阵字**认作同一个矩阵。
+
+::: {.definition #def-polynomial-parity-roots title="同一复多项式的偶根与奇根" lean="D5/S3/ContinuousObservables/IntervalSOSCompletion.Poly.evenRoot D5/S3/ContinuousObservables/IntervalSOSCompletion.Poly.oddRoot"}
+对 $P(X)=\sum_j a_jX^j\in\mathbb C[X]$，定义
+
+$$
+\begin{aligned}
+\operatorname{evenRoot}P(T)&=\sum_{m\ge0}a_{2m}T^m=\operatorname{contract}(2,P)(T),\\
+\operatorname{oddRoot}P(T)&=\sum_{m\ge0}a_{2m+1}T^m
+=\operatorname{contract}(2,P.\operatorname{divX})(T).
+\end{aligned}
+$$
+
+这里 `divX` 丢掉常数项再降低指数；“根”指将指数折半，不是选取数值平方根。若 $P$ 为偶多项式，则 $P(x)=\operatorname{evenRoot}P(x^2)$；若为奇多项式，则 $P(x)=x\operatorname{oddRoot}P(x^2)$，包括 $x=0$。
+:::
+
+::: {.theorem #thm-native-phase-projected-lifting title="同一补全、同一原生相位元组在原始投影酉算子上的提升" lean="D5/S3/ContinuousObservables/PhaseSynthesisLifting.native_phase_lifting"}
+设 $H,U,\Pi,\widetilde\Pi$ 满足 [@def-projected-unitary-word] 前的全部有限维、酉与自伴幂等假设。给定 $d\in\mathbb N$ 与 $p\in\mathbb R[X]$，假设
+
+$$
+0<d,\qquad \operatorname{natDegree}p\le d,\qquad
+\operatorname{HasParity}(c(p),d),\qquad
+|p(x)|\le1\quad(x\in[-1,1]).
+$$
+
+则存在**同一组联合见证** $B,C\in\mathbb R[X]$、$U_{\mathrm{field}}\in\mathcal A_2$、$\phi_0\in\mathbb R$、$\Phi\in\operatorname{List}(\mathbb R)$ 以及 $\Phi\ne[]$ 的见证，使以下各式全部同时成立。平方和与奇偶预算为
+
+$$
+\begin{aligned}
+1-p^2&=B^2+(1-X^2)C^2,\\
+\operatorname{natDegree}B&\le d,&\operatorname{natDegree}C&\le d-1,\\
+d=0&\ \Longrightarrow\ C=0,\\
+\operatorname{HasParity}(c(B),d)&,&\operatorname{HasParity}(c(C),d-1)&.
+\end{aligned}
+$$
+
+这里 $d-1=\max(d-1,0)$ 为自然数截断减法；虽有 $d>0$，仍保留源声明中的 $d=0\Rightarrow C=0$ 合取项。对所有 $t\in T$，同一个矩阵场满足
+
+$$
+\begin{aligned}
+U_{\mathrm{field}}&=\operatorname{phaseCompletion}(p,B,C),\\
+U_{\mathrm{field}}(t)&=\begin{pmatrix}
+p(x(t))+iB(x(t))&iy(t)C(x(t))\\
+iy(t)C(x(t))&p(x(t))-iB(x(t))
+\end{pmatrix},\\
+\operatorname{star}(U_{\mathrm{field}})U_{\mathrm{field}}&=1,
+&U_{\mathrm{field}}\operatorname{star}(U_{\mathrm{field}})&=1,\\
+\det U_{\mathrm{field}}(t)&=1,
+&\operatorname{Re}(U_{\mathrm{field}}(t)_{00})&=p(x(t)).
+\end{aligned}
+$$
+
+同一原生相位元组满足
+
+$$
+\begin{aligned}
+\Phi&\ne[],& |\Phi|&=d,\\
+\operatorname{qspPolyW}(\phi_0,\Phi)&=(c(p)+i\,c(B),c(C)),\\
+\operatorname{phaseProduct}(\phi_0,\Phi)&=U_{\mathrm{field}}
+\quad\text{在整个 }\mathcal A_2\text{ 中}.
+\end{aligned}
+$$
+
+最后令 $\Psi=\operatorname{cor8Phases}(\phi_0,\Phi)$、$P=c(p)+i\,c(B)$、$E=\operatorname{ofRaw}(U,\Pi,\widetilde\Pi)$、$A=\widetilde\Pi U\Pi$、$G=A^*A$，则**这些相同见证**还满足
+
+$$
+\begin{aligned}
+|\Psi|&=d,\\
+S(\Psi,x)_{00}&=P(x)\quad\text{对每个 }x\in[0,1],\\
+d\text{ 为偶数}&\ \Longrightarrow\
+\Pi V_E(\Psi)\Pi=\Pi(\operatorname{evenRoot}P)(G)\Pi,\\
+d\text{ 为奇数}&\ \Longrightarrow\
+\widetilde\Pi V_E(\Psi)\Pi=A(\operatorname{oddRoot}P)(G).
+\end{aligned}
+$$
+
+根多项式在 $G$ 处均作 `aeval` 求值。
+:::
+
+::: proof
+从 [@thm-signed-circle-phase-factorization] 只取一次 $B,C,U_{\mathrm{field}},\phi_0,\Phi$；$|p|\le1$ 提供其所需的 $p^2\le1$。所有平方和、预算、场恒等式及多项式对合取项原样保留。$|\Phi|=d>0$ 给出非空性与 $|\Psi|=d$。
+
+原生多项式递推给出区间旋转字的第一行为 $(P(x),i\,c(C)(x)s(x))$；这个归纳同时保留第二个分量，才能在乘下一步时得到正确的第一分量。以上反射约定传输只取 $00$ 元，因此对每个 $x\in[0,1]$ 得 $S(\Psi,x)_{00}=P(x)$。$P$ 与 $d$ 同奇偶；用同一个 $P$ 的偶根或奇根代入 [@thm-projected-unitary-polynomial-lifting]，即得原始算子的两种压缩结论。整个圆的四元矩阵场相等来自先前原生因子分解；最后的旋转—反射传输只需要并只使用 $00$ 等式。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-native-complex-lift title="正预算下复提升与实目标的区别（手算）"}
+回到 $p=X/2$，取 $d=1$、$B=\sqrt3 X/2$、$C=1$，并令
+
+$$
+\phi_0=\pi/6,\qquad\Phi=[\pi/6],\qquad\Psi=[\pi/3].
+$$
+
+一次 `stepW` 给出
+
+$$
+\operatorname{qspPolyW}(\pi/6,[\pi/6])
+=(e(\pi/3)X,1)=(c(p)+i\,c(B),c(C)).
+$$
+
+因此同一圆场的对角元为 $e(\pi/3)x$ 与 $e(-\pi/3)x$，非对角元为 $iy$；该补全在整个有符号圆上成立。反射字满足 $S([\pi/3],x)_{00}=e(\pi/3)x$，奇根为常数 $e(\pi/3)$。对任意上述原始编码，其压缩块为
+
+$$
+\widetilde\Pi V_E([\pi/3])\Pi=e(\pi/3)A
+=\left(\frac12+i\frac{\sqrt3}{2}\right)A.
+$$
+
+它的实目标是 $A/2$ 对应的奇异值变换，但压缩块本身还含虚部。在前例的二维族取 $\sigma=1/2$ 时，$00$ 系数为 $1/4+i\sqrt3/4$，并非 $1/4$。不能把“实部读出等于 $p$”改写成已经实现实目标的整个通道。
+
+偶预算也可以保留零谱：取 $p=1/2$、$d=2$、$B=\sqrt3/2,C=0$、$\phi_0=-\pi/6$、$\Phi=[\pi/2,0]$。多项式对依次为
+
+$$
+(e(-\pi/6),0)\ \longmapsto\ (e(\pi/3)X,-e(\pi/3))
+\ \longmapsto\ (e(\pi/3),0).
+$$
+
+此时 $\Psi=[\pi/3,0]$，$S=D(\pi/3)$，$V_E=F_\Pi(\pi/3)$。偶根为常数 $e(\pi/3)$，所以 $\Pi V_E\Pi=e(\pi/3)\Pi$，包括 $A=0$ 的全部输入核。这里给出的是合法预算 $2$ 的同一相位例子，不是最短电路的结论。
+:::
+
+::: {.remark #rem-projected-lifting-provenance-boundaries title="证明复用、压缩语义与尚待连接的电路边界"}
+[@thm-alternating-singular-pair-action]、[@thm-projected-unitary-polynomial-lifting] 的结构证明复用 shosonoda 的 [auto-res/lean-qsvt@42c4b9149d5957db497e4226bc02da92d10f7a3c](https://github.com/auto-res/lean-qsvt/tree/42c4b9149d5957db497e4226bc02da92d10f7a3c)，涉及 `QSVT/Operator/Basic.lean`、`Encoding/Projected.lean`、`QSP/Conventions.lean` 与 `SVT/PhaseOp.lean`、`AltSeq.lean`、`EigenBasis.lean`、`SVTransform.lean`、`SVD.lean`、`TwoVector.lean`、`TwoFrame.lean`、`SingularPair.lean`。约定传输复用 `QSVT/QSP/Conversion.lean` 从 `Wrot_eq_Rref` 到 `seqW_apply_zero_zero_eq` 的证明；原生标量递推与矩阵场由本章前节的接口连接。原作 Copyright (c) 2026 shosonoda，并保留 `Operator/Basic.lean` 所复用的 lean-quantum 中 Copyright (c) 2025 Hayata Yamasaki 归属；均为 Apache-2.0，完整许可保存在所钉主仓的 `docs/reports/licenses/auto-res-lean-qsvt-LICENSE.txt`。接收端的谱分解复用所钉 Mathlib 的标准定理。数学依据是 Gilyén–Su–Low–Wiebe，[arXiv:1806.01838v1，Definitions 15–16、Theorem 17（印刷页 17–19）及 Corollary 8](https://arxiv.org/abs/1806.01838v1)。这是既有数学的接收端形式桥接；有限架辅助步骤与约定整理不构成独立的新数学结果，也不解决外部开放问题。
+
+目前的结论已经把同一原生相位对象接到任意秩投影与原始酉算子，但压缩块实现的是 $P=c(p)+i\,c(B)$。**一颗辅助比特的未缩放实部提取、字面电路实现、原始 $U/U^*$ 的精确调用计数、$d=0$ 的零查询 SAME 相位电路，以及物理来源与形式算子的对应**，仍须分别给出依据。一般不能把相位取负当成整个物理门字的伴随：取伴随还反转乘积次序并交换 $U$ 与 $U^*$。压缩等式也不保证全输出是确定性成功通道；未被投影读出的分量仍可能非零。
+:::
+
+
 
 ::: {.viz src="walk-spreading" height="560"}
 **游走扩散实验室。** 拖时间轴改步数，改硬币的份额 $w$ 与相位 $\varphi$，或把圈变短：上方青色是量子游走，下方灰色是经典随机游走，品红是量子分布比它的镜像多出的部分。绿色框是 [@lemma-symmetric-coin-walk]；宽度与失衡都是页面的数值。

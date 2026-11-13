@@ -11,6 +11,8 @@ We establish and examine four interconnected themes:
 3. **Continuous two-axis generation versus finite-word $\{H, T\}$ polytope approximation (Liu Hui's three-dimensional 割圆术)**: While continuous rotations around any two non-collinear axes generate $\mathrm{SO}(3)$ in finitely many steps, restricting to words of length $\le L$ over the discrete gate set $\{H, T\}$ applied to a fixed initial Bloch state $\vv{r}_0 \in S^2$ produces a finite point set $\mathcal{S}_L \subset S^2$ whose Euclidean convex hull $P_L = \operatorname{conv}(\mathcal{S}_L)$ is a flat-faced inscribed polytope with strictly positive covering residual $\varepsilon_L > 0$;
 4. **Exact coin-assisted source-query counts versus asymptotic gate compilation length**: When the initial success probability $p \in (0, 1]$ is known, an auxiliary coin rotation eliminates discrete overshoot and achieves exact amplitude amplification in at most $\frac{\pi/2 + 2}{\sqrt{p}}$ source queries — a query count (`sourceQueries`) that must be kept strictly distinct from asymptotic $\{H, T\}$ gate compilation length (recorded in [@rem-solovay-kitaev-literature]).
 
+The first theme continues through interval sum-of-squares completion, exact phase factorization on the whole signed circle, and even or odd compressed lifting of the same phase tuple to any raw projected unitary. The final block acts through the complex polynomial $P=c(p)+i\,c(B)$; circuit extraction of the real target and physical correspondence have separate, explicit boundaries.
+
 ::: {.figure src="ch16-overview"}
 **Figure 16.** The chapter at a glance. Panel I: on $[-1, 1]$ the cyan Chebyshev polynomial $T_3(x) = 4x^3 - 3x$ swings back and forth between $-1$ and $1$; the grey line is $T_1(x) = x$. Panel II: the $19$ cyan vertices where $\{H, T\}$ words of length at most $6$ take the north pole; their convex hull encloses the centre with flat chordal faces, leaving gaps below the shell. Panel III: the cyan staircase of source queries $2n + 1$ for exact amplitude amplification stays under the green bound $(\pi/2 + 2)/\sqrt{p}$ ([@cor-exact-source-query-count]); the three dots are the table's $3$, $7$ and $13$.
 :::
@@ -135,7 +137,7 @@ Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 :::
 
 ::: {.remark #rem-qsvt-walks-literature title="Full QSVT Realizability and the Glued-Trees Separation (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** This note records the full literature statements for QSVT and quantum walks. The sufficiency direction of Theorem 3 in the rotation convention, and signed-circle factorization of the same completion, are formalized separately below in [@thm-polynomial-phase-synthesis] and [@thm-signed-circle-phase-factorization]. The full iff characterization, operator lifting, and query semantics stated here retain their literature status:
+**Literature result, not formalized in this book.** This note records the full literature statements for QSVT and quantum walks. The sufficiency direction of Theorem 3 in the rotation convention, and signed-circle factorization of the same completion, are formalized separately below in [@thm-polynomial-phase-synthesis] and [@thm-signed-circle-phase-factorization]. The full iff characterization, real-part circuits, and query semantics stated here retain their literature status; complex-polynomial lifting on arbitrary raw projected unitaries is treated separately in [@thm-projected-unitary-polynomial-lifting] and [@thm-native-phase-projected-lifting].
 
 1. **Quantum Singular Value Transformation (QSVT): complex unitary completion versus real-polynomial extraction** (A. Gilyén, Y. Su, G. H. Low, and N. Wiebe, *Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics*, Proc. 51st ACM STOC, 193–204, 2019, doi:10.1145/3313276.3316366, Theorem 3 and Theorem 17 / Corollary 18): Given a block encoding $\tilde{\Pi} U \Pi = A$ ($\norm{A}_{\mathrm{op}} \le 1$), the literature distinguishes two levels of polynomial realizability:
    - **Direct two-dimensional complex QSP (Theorem 3)**: A pair of complex polynomials $(P_{\mathrm{c}}, Q_{\mathrm{c}}) \in \mathbb{C}[x]^2$ is realized directly as the matrix entries of a single phase-modulated sequence $U_{\Phi}(x)$ if and only if $\deg(P_{\mathrm{c}}) \le d$, $\deg(Q_{\mathrm{c}}) \le d - 1$, $P_{\mathrm{c}}$ has parity $d \bmod 2$, $Q_{\mathrm{c}}$ has opposite parity $(d - 1) \bmod 2$, and $|P_{\mathrm{c}}(x)|^2 + (1 - x^2)|Q_{\mathrm{c}}(x)|^2 = 1$ for all $x \in [-1, 1]$.
@@ -605,11 +607,375 @@ The first step uses $e(\pi/2)=i$ and $e(-\pi/2)=-i$. In the second, the first co
 For the second theorem, take $p=X,B=0,C=1$, satisfying every SOS constraint at budget $3$. The same list factors $U=W$ on the entire circle. At $t=-1/6$, $x=1/2,y=-\sqrt3/2$, and both off-diagonal entries are $-i\sqrt3/2$, unlike the $+i\sqrt3/2$ entries of the positive-square-root interval pullback. At budget $1$, one can also take $\phi_0=0,\Phi=[0]$. The theorem establishes existence at the given admissible budget, rather than a shortest list.
 :::
 
-::: {.remark #rem-phase-synthesis-boundaries title="Exact existence is settled; implementation and lifting need separate proofs"}
-[@thm-polynomial-phase-synthesis] and [@thm-signed-circle-phase-factorization] establish phase existence for admissible polynomial pairs and exact factorization of the same SOS completion on the **whole native signed circle**. The initial real phase is existentially quantified separately from the list; it cannot be arbitrarily prescribed in advance. These results do not assert an optimal or computable phase solver, uniqueness, continuous selection as the input varies, or numerical stability.
+::: {.remark #rem-phase-synthesis-boundaries title="Exact phase existence and the subsequent operator interface"}
+[@thm-polynomial-phase-synthesis] and [@thm-signed-circle-phase-factorization] establish phase existence for legal polynomial pairs and exact factorization of the same sum-of-squares completion on the **entire native signed circle**. The initial phase is existentially quantified outside the list, rather than arbitrarily prescribed in advance. These results assert no optimal or computable phase solver, uniqueness, continuous choice, or numerical stability.
 
-At this pin, these conclusions also do not establish the full forward iff characterization, transport between rotation and reflection conventions, arbitrary projected-operator lifting, real-part ancilla implementation, or exact original-oracle query semantics. Each requires its own explicit frozen source. In particular, $\Phi\mapsto-\Phi$ negates phases; it does not take a physical adjoint word or reverse its order. Ongoing [issue 29935](https://github.com/the-omega-institute/trureturing/issues/29935) concerns subsequent lifting research and supplies no formal result to these boxes. Agreement with a positive square root on the upper semicircle cannot replace equality of fields on the whole signed circle.
+The rotation-to-reflection convention and lifting to arbitrary projected unitaries are connected below by the same witnesses in [@thm-native-phase-projected-lifting]. Equality with the positive square root on the upper semicircle still cannot replace field equality on the whole signed circle. The remaining real-part ancilla, circuit, and query boundaries are stated in [@rem-projected-lifting-provenance-boundaries].
 :::
+
+## Lifting the Same Scalar Word to a Raw Projected Unitary {#sec-raw-projected-unitary-lifting}
+
+How can a single entry of a two-dimensional matrix determine a block in a much larger space? Picture an input window $\Pi$, a raw unitary $U$, and an output window $\widetilde\Pi$. The windows may have different sizes; the output window may even be closed entirely. Amplitude outside a window remains in the space, and the next $U^*$ can bring it back. Tracking only the currently visible component cannot establish the action of an arbitrary alternating word.
+
+Fix an arbitrary finite-dimensional complex inner product space $H$, including $H=\{0\}$. All operators are complex-linear endomorphisms of $H$. Products mean composition, with the rightmost factor acting first. The **raw** operators satisfy
+
+$$
+\begin{aligned}
+U^*U&=1,& UU^*&=1,\\
+\Pi^*&=\Pi,& \Pi^2&=\Pi,\\
+\widetilde\Pi^*&=\widetilde\Pi,&\widetilde\Pi^2&=\widetilde\Pi.
+\end{aligned}
+$$
+
+Set $A=\widetilde\Pi U\Pi$ and $G=A^*A$. The star denotes the inner product adjoint; the source uses the standard inner product and adjoint here, with no alternative norm convention. The operator $A$ need not be self-adjoint, the projections need not have equal rank, and no positive singular value is assumed.
+
+::: {.definition #def-projected-unitary-word title="Raw encoding, projector phases, and the alternating word determined by tail length" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.ofRaw D5/S3/ContinuousObservables/ProjectedUnitaryLifting.phaseOp D5/S3/ContinuousObservables/ProjectedUnitaryLifting.altSeq D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.Rref D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.phaseZ D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.seqR"}
+Under these assumptions, $E=\operatorname{ofRaw}(U,\Pi,\widetilde\Pi)$ is the projected-unitary encoding formed from these three operators. The source's projector predicate is positivity together with idempotence, equivalent here to self-adjoint idempotence. For an orthogonal projection $J$ and $\theta\in\mathbb R$, define
+
+$$
+F_J(\theta)=e(\theta)J+e(-\theta)(1-J).
+$$
+
+Write $V_E(\Psi)=\operatorname{altSeq}(E,\Psi)$. For every real phase list, define recursively
+
+$$
+\begin{aligned}
+V_E([])&=1,\\
+V_E(\theta::\Theta)&=
+\begin{cases}
+F_{\widetilde\Pi}(\theta)U V_E(\Theta),&|\Theta|\text{ is even},\\
+F_\Pi(\theta)U^* V_E(\Theta),&|\Theta|\text{ is odd}.
+\end{cases}
+\end{aligned}
+$$
+
+Also put $s(x)=\sqrt{1-x^2}$, using the nonnegative real square root, and define the scalar reflection word
+
+$$
+\begin{aligned}
+R_{\mathrm{ref}}(x)&=\begin{pmatrix}x&s(x)\\s(x)&-x\end{pmatrix},&
+D(\theta)&=\begin{pmatrix}e(\theta)&0\\0&e(-\theta)\end{pmatrix},\\
+S([],x)&=I_2,&
+S(\theta::\Theta,x)&=D(\theta)R_{\mathrm{ref}}(x)S(\Theta,x).
+\end{aligned}
+$$
+
+The factors of $S(\Psi,x)=\operatorname{seqR}(\Psi,x)$ follow list order from left to right and act from right to left.
+:::
+
+For example, $V_E([\alpha])=F_{\widetilde\Pi}(\alpha)U$, whereas $V_E([\alpha,\beta])=F_\Pi(\alpha)U^*F_{\widetilde\Pi}(\beta)U$. The recursion tests the length of the **tail**; replacing this with an informal phase-index convention can interchange $U$ and $U^*$. The operator $F_J$ multiplies $\operatorname{range}J$ by $e(\theta)$ and its orthogonal complement by $e(-\theta)$. When their dimensions differ, its determinant need not be $1$.
+
+### Two Frames Keep Both the Visible and Complementary Amplitudes
+
+::: {.definition #def-singular-pair-frames title="An arbitrary singular pair and its input and output frames" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.IsSingularPair D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvtOf D5/S3/ContinuousObservables/ProjectedUnitaryLifting.rvpOf"}
+The predicate $\operatorname{IsSingularPair}(E,\psi,\sigma)$ means exactly
+
+$$
+\Pi\psi=\psi,\qquad 0\le\sigma\le1,\qquad
+A^*A\psi=\sigma^2\psi.
+$$
+
+Neither $\|\psi\|=1$ nor $\psi\ne0$ is required. Set $s=\sqrt{1-\sigma^2}$ and define
+
+$$
+\begin{aligned}
+\ell&=\begin{cases}0,&\sigma=0,\\\sigma^{-1}A\psi,&\sigma\ne0,\end{cases}\\
+\widetilde\ell&=s^{-1}(1-\widetilde\Pi)U\psi,\\
+\psi_\perp&=s^{-1}(1-\Pi)U^*\ell.
+\end{aligned}
+$$
+
+Inverses are taken in $\mathbb C$, with $0^{-1}=0$. The input frame is $(\psi,\psi_\perp)$ and the output frame is $(\ell,\widetilde\ell)$. These frames may degenerate; they are not asserted always to be two-dimensional bases.
+:::
+
+First examine $0<\sigma<1$ with $\psi\ne0$. We have $A\psi=\sigma\ell$ and $A^*\ell=\sigma\psi$, while each window kills its frame's second vector: $\Pi\psi_\perp=0$ and $\widetilde\Pi\widetilde\ell=0$. An inner product calculation gives $\|A\psi\|=\sigma\|\psi\|$, hence $\|\ell\|=\|\psi\|$. Pythagoras for the projections then gives $\|\widetilde\ell\|=\|\psi_\perp\|=\|\psi\|$. The vectors within either frame are orthogonal, but the input and output frames generally differ. They are orthonormal frames in their respective planes only when $\psi$ is a unit vector.
+
+The source's induction uses all four action identities
+
+$$
+\begin{aligned}
+U\psi&=\sigma\ell+s\widetilde\ell,&
+U\psi_\perp&=s\ell-\sigma\widetilde\ell,\\
+U^*\ell&=\sigma\psi+s\psi_\perp,&
+U^*\widetilde\ell&=s\psi-\sigma\psi_\perp.
+\end{aligned}
+$$
+
+For example, when $s>0$, the identity $s\psi_\perp=U^*\ell-\sigma\psi$ and unitarity give
+
+$$
+\begin{aligned}
+sU\psi_\perp&=\ell-\sigma U\psi\\
+&=(1-\sigma^2)\ell-\sigma s\widetilde\ell\\
+&=s^2\ell-\sigma s\widetilde\ell.
+\end{aligned}
+$$
+
+Cancel $s$ to obtain the second action identity. The fourth follows similarly from $s\widetilde\ell=U\psi-\sigma\ell$. This switches between input and output frames; it does not assume that $U$ is the same reflection in a single fixed frame.
+
+Between the appropriate frames, both $U$ and $U^*$ are represented by $R_{\mathrm{ref}}(\sigma)$. The projector phase then multiplies the first coordinate by $e(\theta)$ and the second by $e(-\theta)$, giving $D(\theta)R_{\mathrm{ref}}(\sigma)$. The identities also hold at both endpoints below; the picture of a nondegenerate plane alone does not establish them.
+
+**$\sigma=0$: the left vector vanishes, but the output does not.** The identity $\|A\psi\|^2=\sigma^2\|\psi\|^2$ gives $A\psi=0$. Thus $\ell=\psi_\perp=0$, but $s=1$, $\widetilde\ell=U\psi$, and $U^*\widetilde\ell=\psi$. The input frame degenerates to $(\psi,0)$ and the output frame to $(0,U\psi)$. The swap $R_{\mathrm{ref}}(0)$ transfers amplitude between precisely these degenerate frames. Retaining only a normalized left singular vector would discard $U\psi$ entirely.
+
+**$\sigma=1$: cancellation by a zero square root is unavailable.** Here $s=0$, and the inverse-zero convention gives $\widetilde\ell=\psi_\perp=0$. One must still prove $U\psi=\ell$ and $U^*\ell=\psi$. Since $\widetilde\Pi U\psi=\ell$ and $\|\ell\|=\|U\psi\|=\|\psi\|$, the projection's Pythagorean identity forces $(1-\widetilde\Pi)U\psi=0$; the reverse direction is analogous. Norm saturation supplies the endpoint action.
+
+::: {.theorem #thm-alternating-singular-pair-action title="The full two-component action of any phase list on a singular pair" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.altSeq_apply_singular"}
+For any encoding $E$ as above, any $\psi,\sigma$ satisfying $\operatorname{IsSingularPair}(E,\psi,\sigma)$, and any $\Psi\in\operatorname{List}(\mathbb R)$, including the empty list, put $M=S(\Psi,\sigma)$. Then
+
+$$
+V_E(\Psi)\psi=
+\begin{cases}
+M_{00}\psi+M_{10}\psi_\perp,&|\Psi|\text{ is even},\\
+M_{00}\ell+M_{10}\widetilde\ell,&|\Psi|\text{ is odd}.
+\end{cases}
+$$
+:::
+
+::: proof
+For the empty list, $M=I_2$ and $V_E([])\psi=\psi$. In the induction step, $U$ takes the input frame to the output frame when the tail length is even; $U^*$ takes the output frame back to the input frame when it is odd. The four action identities and the phase rules update both coordinates:
+
+$$
+\begin{aligned}
+a'&=e(\theta)(\sigma a+s b),\\
+b'&=e(-\theta)(s a-\sigma b).
+\end{aligned}
+$$
+
+Keeping $b=M_{10}$ is essential: the next $00$ coefficient contains $s b$. A final projected readout does not justify removing the complementary component earlier. The endpoint action identities have already been established separately, and all formulas also cover $\psi=0$. This theorem concerns vectors satisfying the singular-pair predicate; it is not an unconditional assertion about every physical input state. The full proof is checked by the Lean kernel.
+:::
+
+### From the Complete Input Gram Spectrum to the Compressed Operator
+
+The operator $G=A^*A$ is a positive self-adjoint contraction with $\Pi G=G\Pi=G$. The source applies the pinned Mathlib finite-dimensional symmetric spectral theorem to its restriction to $\operatorname{range}\Pi$, obtaining a complete orthonormal eigenbasis $\{\psi_j\}_{j\in\mathrm{Fin}(\dim\operatorname{range}\Pi)}$ of that **input subspace**. This is not a thin decomposition listing only positive singular values, nor is this family asserted to be a basis of all $H$. Write $G\psi_j=\lambda_j\psi_j$. Positivity and $\|A\psi_j\|\le\|\psi_j\|$ give $\lambda_j\in[0,1]$; set $\sigma_j=\sqrt{\lambda_j}$. Every zero eigenvalue remains in the basis.
+
+For $R(X)=\sum_m r_mX^m\in\mathbb C[X]$, algebraic evaluation means
+
+$$
+R(G)=\operatorname{aeval}_G(R)=\sum_m r_m G^m,
+\qquad G^0=1_H.
+$$
+
+This is `Polynomial.aeval`: the constant term multiplies the identity on the entire space, rather than evaluating each matrix entry separately. Consequently $R(G)\psi_j=R(\sigma_j^2)\psi_j$, and $R(G)$ commutes with $\Pi$.
+
+::: {.theorem #thm-projected-unitary-polynomial-lifting title="Even and odd compressed lifting of an arbitrary complex scalar polynomial identity" lean="D5/S3/ContinuousObservables/ProjectedUnitaryLifting.polynomial_lifting"}
+Under the finite-dimensional space and encoding assumptions above, let $\Psi$ be any real phase list and $R\in\mathbb C[X]$ any polynomial. Assume, for **every** $x\in[0,1]$, that
+
+$$
+S(\Psi,x)_{00}=\begin{cases}
+R(x^2),&|\Psi|\text{ is even},\\
+xR(x^2),&|\Psi|\text{ is odd}.
+\end{cases}
+$$
+
+Then both conditional statements hold:
+
+$$
+\begin{aligned}
+|\Psi|\text{ is even}&\ \Longrightarrow\
+\Pi V_E(\Psi)\Pi=\Pi R(G)\Pi,\\
+|\Psi|\text{ is odd}&\ \Longrightarrow\
+\widetilde\Pi V_E(\Psi)\Pi=A R(G).
+\end{aligned}
+$$
+:::
+
+::: proof
+Apply [@thm-alternating-singular-pair-action] to every input eigenvector $\psi_j$. For even length, projection by $\Pi$ removes $\psi_\perp$, leaving $R(\sigma_j^2)\psi_j$. For odd length, projection by $\widetilde\Pi$ removes $\widetilde\ell$, leaving $\sigma_jR(\sigma_j^2)\ell=R(\sigma_j^2)A\psi_j$. This includes $\sigma_j=0$ without division by it.
+
+For any $v\in H$, expand $\Pi v$ in the complete input basis and extend by linearity. Both sides vanish on $(1-\Pi)v$. The odd right-hand side does not need an explicit final $\Pi$, because $A\Pi=A$ and $R(G)\Pi=\Pi R(G)$. If the input space is zero, the basis index set is empty and the same expansion still applies. The whole-interval scalar premise has not been weakened to a statement only at selected spectral points. On $\operatorname{range}\Pi\cap\ker A$, the even action is $R(0)$ times the input vector; when $A=0$, the entire even block is $R(0)\Pi$, while the odd block is zero. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-projected-lifting-degenerate title="The empty list, a closed output window, and both singular endpoints (hand calculation)"}
+These calculations check the definitions directly and add no formal theorem.
+
+**The empty list.** With $\Psi=[]$ and $R=1$, we have $S_{00}=1=R(x^2)$ throughout the interval and $V_E=1$. The even conclusion reads $\Pi1\Pi=\Pi=\Pi R(G)\Pi$, for any output projection.
+
+**Nonzero input with zero output projection.** Take $H=\mathbb C^2$, $\Pi=\operatorname{diag}(1,0)$, $\widetilde\Pi=0$, and $U=\begin{pmatrix}0&1\\1&0\end{pmatrix}$. Then $A=G=0$, but the input basis still contains $\psi=(1,0)$, with $\sigma=0$, $\ell=\psi_\perp=0$, and $\widetilde\ell=(0,1)$. For any $\alpha,\beta$, set
+
+$$
+\begin{aligned}
+\Psi&=[\alpha,\beta],\\
+R(T)&=e(\alpha)\bigl[e(\beta)T+e(-\beta)(1-T)\bigr].
+\end{aligned}
+$$
+
+Multiplying $D(\alpha)R_{\mathrm{ref}}(x)D(\beta)R_{\mathrm{ref}}(x)$ gives $S_{00}=R(x^2)$ throughout the interval. The operator word is $V_E=e(-\beta)F_\Pi(\alpha)$, so
+
+$$
+\Pi V_E\Pi=e(\alpha-\beta)\Pi=R(0)\Pi.
+$$
+
+For $\alpha=\pi/3,\beta=\pi/6$, the coefficient is $\sqrt3/2+i/2$, not zero. The even transform must retain $R(0)$ on the input kernel; summing only over positive singular values would lose the entire answer.
+
+**$\sigma=0$ and $\sigma=1$ in one two-dimensional family.** Take $U=R_{\mathrm{ref}}(\sigma)$, $\Pi=\widetilde\Pi=\operatorname{diag}(1,0)$, and $\psi=(1,0)$. For $0<\sigma<1$, the frames have $\ell=(1,0)$ and $\widetilde\ell=\psi_\perp=(0,1)$. At $\sigma=0$, $\ell=\psi_\perp=0$ and $\widetilde\ell=(0,1)$; at $\sigma=1$, $\ell=(1,0)$ and both complementary vectors vanish. A single step gives
+
+$$
+V_E([\theta])\psi=
+\begin{pmatrix}e(\theta)\sigma\\e(-\theta)\sqrt{1-\sigma^2}\end{pmatrix}.
+$$
+
+Thus the full output is $e(-\theta)(0,1)$ at the zero endpoint and $e(\theta)(1,0)$ at the unit endpoint. Both agree with the two-component formula. At the zero endpoint, the projected readout is zero while the full vector still has norm $1$.
+:::
+
+## The SAME Native Phase Object: Joint Witnesses for the Circle Field and Raw Operator {#sec-native-phase-lifting}
+
+We can now connect the earlier completion to the raw $U,\Pi,\widetilde\Pi$ without choosing a second completion. First fix the rotation and reflection conventions. The interval rotation matrix
+
+$$
+W_{\mathrm{rot}}(x)=\begin{pmatrix}x&i s(x)\\i s(x)&x\end{pmatrix}
+$$
+
+is the native signal field evaluated on the semicircle with nonnegative imaginary part. Write $W_{\mathrm{word}}(\phi_0,\Phi;x)=D(\phi_0)\prod_{j=1}^{|\Phi|}(W_{\mathrm{rot}}(x)D(\phi_j))$, with factors in list order. The native field continues to use signed $y(t)$; the whole circle has not been replaced by a nonnegative square root.
+
+::: {.definition #def-native-reflection-phases title="The reflection-phase convention for a nonempty rotation list" lean="D5/S3/ContinuousObservables/PhaseSynthesisLifting.cor8Phases"}
+Given $\phi_0\in\mathbb R$ and a nonempty list $\Phi=[\phi_1,\ldots,\phi_d]$, define
+
+$$
+\begin{aligned}
+\Psi&=\operatorname{cor8Phases}(\phi_0,\Phi)\\
+&=\bigl[\phi_0+\phi_d+(d-1)\pi/2,\
+\phi_1-\pi/2,\ldots,\phi_{d-1}-\pi/2\bigr].
+\end{aligned}
+$$
+
+The first phase combines the initial phase, final phase, and length correction. The remaining phases come from `dropLast`, each reduced by $\pi/2$. Here $d=|\Phi|>0$; for $d=1$, the list contains just its first entry.
+:::
+
+The convention calculation retains both the scalar factor and the final diagonal factor:
+
+$$
+\begin{aligned}
+W_{\mathrm{rot}}(x)&=iD(-\pi/4)R_{\mathrm{ref}}(x)D(-\pi/4),\\
+\Xi&=[\phi_0-\pi/4,\phi_1-\pi/2,\ldots,\phi_{d-1}-\pi/2],\\
+W_{\mathrm{word}}(\phi_0,\Phi;x)&=i^d S(\Xi,x)D(\phi_d-\pi/4).
+\end{aligned}
+$$
+
+In the $00$ entry, the right diagonal contributes $e(\phi_d-\pi/4)$ and $i^d=e(d\pi/2)$. Combining them with the first phase $\phi_0-\pi/4$ gives precisely the first phase of $\Psi$. Thus $W_{\mathrm{word},00}=S(\Psi,x)_{00}$. This does not identify the two **complete matrix words**.
+
+::: {.definition #def-polynomial-parity-roots title="The even and odd roots of the same complex polynomial" lean="D5/S3/ContinuousObservables/IntervalSOSCompletion.Poly.evenRoot D5/S3/ContinuousObservables/IntervalSOSCompletion.Poly.oddRoot"}
+For $P(X)=\sum_j a_jX^j\in\mathbb C[X]$, define
+
+$$
+\begin{aligned}
+\operatorname{evenRoot}P(T)&=\sum_{m\ge0}a_{2m}T^m=\operatorname{contract}(2,P)(T),\\
+\operatorname{oddRoot}P(T)&=\sum_{m\ge0}a_{2m+1}T^m
+=\operatorname{contract}(2,P.\operatorname{divX})(T).
+\end{aligned}
+$$
+
+Here `divX` discards the constant term and lowers the remaining exponents. A “root” halves exponents; it does not select a numerical square root. If $P$ is even, then $P(x)=\operatorname{evenRoot}P(x^2)$; if it is odd, then $P(x)=x\operatorname{oddRoot}P(x^2)$, including at $x=0$.
+:::
+
+::: {.theorem #thm-native-phase-projected-lifting title="The same completion and native phase tuple lifted to the raw projected unitary" lean="D5/S3/ContinuousObservables/PhaseSynthesisLifting.native_phase_lifting"}
+Let $H,U,\Pi,\widetilde\Pi$ satisfy all the finite-dimensional, unitary, and self-adjoint idempotent assumptions preceding [@def-projected-unitary-word]. Given $d\in\mathbb N$ and $p\in\mathbb R[X]$, assume
+
+$$
+0<d,\qquad \operatorname{natDegree}p\le d,\qquad
+\operatorname{HasParity}(c(p),d),\qquad
+|p(x)|\le1\quad(x\in[-1,1]).
+$$
+
+There is **a single joint collection of witnesses** $B,C\in\mathbb R[X]$, $U_{\mathrm{field}}\in\mathcal A_2$, $\phi_0\in\mathbb R$, $\Phi\in\operatorname{List}(\mathbb R)$, and a witness to $\Phi\ne[]$, such that all the following hold simultaneously. The sum-of-squares and parity budgets are
+
+$$
+\begin{aligned}
+1-p^2&=B^2+(1-X^2)C^2,\\
+\operatorname{natDegree}B&\le d,&\operatorname{natDegree}C&\le d-1,\\
+d=0&\ \Longrightarrow\ C=0,\\
+\operatorname{HasParity}(c(B),d)&,&\operatorname{HasParity}(c(C),d-1)&.
+\end{aligned}
+$$
+
+Here $d-1=\max(d-1,0)$ is truncated natural subtraction. Although $d>0$, the source's conjunct $d=0\Rightarrow C=0$ is retained. For every $t\in T$, the same matrix field satisfies
+
+$$
+\begin{aligned}
+U_{\mathrm{field}}&=\operatorname{phaseCompletion}(p,B,C),\\
+U_{\mathrm{field}}(t)&=\begin{pmatrix}
+p(x(t))+iB(x(t))&iy(t)C(x(t))\\
+iy(t)C(x(t))&p(x(t))-iB(x(t))
+\end{pmatrix},\\
+\operatorname{star}(U_{\mathrm{field}})U_{\mathrm{field}}&=1,
+&U_{\mathrm{field}}\operatorname{star}(U_{\mathrm{field}})&=1,\\
+\det U_{\mathrm{field}}(t)&=1,
+&\operatorname{Re}(U_{\mathrm{field}}(t)_{00})&=p(x(t)).
+\end{aligned}
+$$
+
+The same native phase tuple satisfies
+
+$$
+\begin{aligned}
+\Phi&\ne[],& |\Phi|&=d,\\
+\operatorname{qspPolyW}(\phi_0,\Phi)&=(c(p)+i\,c(B),c(C)),\\
+\operatorname{phaseProduct}(\phi_0,\Phi)&=U_{\mathrm{field}}
+\quad\text{throughout }\mathcal A_2.
+\end{aligned}
+$$
+
+Finally put $\Psi=\operatorname{cor8Phases}(\phi_0,\Phi)$, $P=c(p)+i\,c(B)$, $E=\operatorname{ofRaw}(U,\Pi,\widetilde\Pi)$, $A=\widetilde\Pi U\Pi$, and $G=A^*A$. **These same witnesses** also satisfy
+
+$$
+\begin{aligned}
+|\Psi|&=d,\\
+S(\Psi,x)_{00}&=P(x)\quad\text{for every }x\in[0,1],\\
+d\text{ is even}&\ \Longrightarrow\
+\Pi V_E(\Psi)\Pi=\Pi(\operatorname{evenRoot}P)(G)\Pi,\\
+d\text{ is odd}&\ \Longrightarrow\
+\widetilde\Pi V_E(\Psi)\Pi=A(\operatorname{oddRoot}P)(G).
+\end{aligned}
+$$
+
+Both root polynomials are evaluated at $G$ by `aeval`.
+:::
+
+::: proof
+Take $B,C,U_{\mathrm{field}},\phi_0,\Phi$ just once from [@thm-signed-circle-phase-factorization]; $|p|\le1$ supplies its squared bound $p^2\le1$. Retain every sum-of-squares, budget, field, and polynomial-pair conjunct. The equality $|\Phi|=d>0$ gives nonemptiness and $|\Psi|=d$.
+
+The native polynomial recursion gives the first row of the interval rotation word as $(P(x),i\,c(C)(x)s(x))$. This induction keeps the second component too, since it contributes to the first component at the next multiplication. The reflection convention above then transports the $00$ entry, giving $S(\Psi,x)_{00}=P(x)$ for every $x\in[0,1]$. The polynomial $P$ has parity $d$; substituting the even or odd root of this same $P$ into [@thm-projected-unitary-polynomial-lifting] yields the two compressed identities for the raw operator. Equality of all four field entries on the whole circle comes from the earlier native factorization. The final rotation-to-reflection transport needs and uses only the $00$ equality. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-native-complex-lift title="The complex lift differs from the real target at positive budget (hand calculation)"}
+Return to $p=X/2$. Take $d=1$, $B=\sqrt3 X/2$, $C=1$, and
+
+$$
+\phi_0=\pi/6,\qquad\Phi=[\pi/6],\qquad\Psi=[\pi/3].
+$$
+
+One `stepW` gives
+
+$$
+\operatorname{qspPolyW}(\pi/6,[\pi/6])
+=(e(\pi/3)X,1)=(c(p)+i\,c(B),c(C)).
+$$
+
+Thus the same circle field has diagonal entries $e(\pi/3)x$ and $e(-\pi/3)x$, and off-diagonal entries $iy$; this completion holds on the entire signed circle. The reflection word satisfies $S([\pi/3],x)_{00}=e(\pi/3)x$, whose odd root is the constant $e(\pi/3)$. For any raw encoding above, its compressed block is
+
+$$
+\widetilde\Pi V_E([\pi/3])\Pi=e(\pi/3)A
+=\left(\frac12+i\frac{\sqrt3}{2}\right)A.
+$$
+
+The real target corresponds to the singular-value transform $A/2$, but the block itself retains an imaginary contribution. At $\sigma=1/2$ in the preceding two-dimensional family, the $00$ coefficient is $1/4+i\sqrt3/4$, not $1/4$. A real-part readout equal to $p$ cannot be restated as an already realized channel for the real target.
+
+An even budget can also retain the zero spectrum. Take $p=1/2$, $d=2$, $B=\sqrt3/2$, $C=0$, $\phi_0=-\pi/6$, and $\Phi=[\pi/2,0]$. The polynomial pairs are
+
+$$
+(e(-\pi/6),0)\ \longmapsto\ (e(\pi/3)X,-e(\pi/3))
+\ \longmapsto\ (e(\pi/3),0).
+$$
+
+Here $\Psi=[\pi/3,0]$, $S=D(\pi/3)$, and $V_E=F_\Pi(\pi/3)$. The even root is the constant $e(\pi/3)$, so $\Pi V_E\Pi=e(\pi/3)\Pi$, including the entire input kernel when $A=0$. This exhibits the same phases at a legal budget of $2$; it asserts no shortest-circuit result.
+:::
+
+::: {.remark #rem-projected-lifting-provenance-boundaries title="Proof reuse, compressed semantics, and the remaining circuit boundaries"}
+The structural proofs behind [@thm-alternating-singular-pair-action] and [@thm-projected-unitary-polynomial-lifting] reuse shosonoda's [auto-res/lean-qsvt@42c4b9149d5957db497e4226bc02da92d10f7a3c](https://github.com/auto-res/lean-qsvt/tree/42c4b9149d5957db497e4226bc02da92d10f7a3c): `QSVT/Operator/Basic.lean`, `Encoding/Projected.lean`, `QSP/Conventions.lean`, and `SVT/PhaseOp.lean`, `AltSeq.lean`, `EigenBasis.lean`, `SVTransform.lean`, `SVD.lean`, `TwoVector.lean`, `TwoFrame.lean`, and `SingularPair.lean`. Convention transport reuses the proofs from `Wrot_eq_Rref` through `seqW_apply_zero_zero_eq` in `QSVT/QSP/Conversion.lean`; the earlier native interfaces connect the scalar recursion and matrix field. Copyright (c) 2026 shosonoda is retained, together with the Copyright (c) 2025 Hayata Yamasaki attribution inherited from lean-quantum in `Operator/Basic.lean`. Both are under Apache-2.0; the full license is retained in the pinned source repository at `docs/reports/licenses/auto-res-lean-qsvt-LICENSE.txt`. The receiving spectral decomposition reuses standard results from pinned Mathlib. The mathematical references are Gilyén–Su–Low–Wiebe, [arXiv:1806.01838v1, Definitions 15–16, Theorem 17 (printed pp. 17–19), and Corollary 8](https://arxiv.org/abs/1806.01838v1). This is a receiving formal bridge for established mathematics. Finite-frame helpers and convention normalization are supporting steps, not independent new mathematical results or resolutions of external open problems.
+
+The same native phase object now acts on arbitrary-rank projections and the raw unitary, but the compressed block implements $P=c(p)+i\,c(B)$. **Unscaled real-part extraction with one ancilla, literal circuit realization, exact accounting of calls to the original $U/U^*$, a zero-query SAME-phase circuit for $d=0$, and correspondence between physical sources and the formal operators** each still require their own justification. Negating phases generally does not take the adjoint of the entire physical word: an adjoint also reverses product order and exchanges $U$ with $U^*$. A compressed identity does not guarantee a deterministic successful whole-output channel; the unread complementary component can remain nonzero.
+:::
+
+
 
 ::: {.viz src="walk-spreading" height="560"}
 **The walk-spreading lab.** Drag the rail to change the steps, change the coin's share $w$ and phase $\varphi$, or shorten the cycle: cyan above is the quantum walk, grey below the classical random walk, and magenta what the quantum distribution has beyond its mirror image. The green box is [@lemma-symmetric-coin-walk]; the widths and the lopsidedness are the page's numbers.
