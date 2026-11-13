@@ -161,6 +161,10 @@ for (const theta of angles) {
       && matrixNear(s.cacheEntry.payload, saved) && s.cacheEntry.valid === 1 && s.cacheMatch.payload === unchanged
       && s.cacheHit === unchanged && s.untaggedFamiliarity === unchanged && matrixNear(pinching(s.rho, beta), s.rho)
       && near(await readNumber('ro4'), 0));
+    // The HUD may only report what the state does; a nonzero residual does show that β differs from the saved β = 0°.
+    const sub = await text('hudSub');
+    check(`repeat grid θ=${theta}, β=${beta}: HUD reports the state property, not ruler identity`, sub.includes(`β = ${beta}°`)
+      && !sub.includes('同一把尺子') && (unchanged ? sub.startsWith('再投影保持态不变') : sub.startsWith('换了尺子') && beta !== s.snapshot.beta), sub);
   }
 }
 // A maximally mixed snapshot (θ=45°) is fixed by every ruler; a changed ruler need not imply a miss there.
@@ -221,6 +225,68 @@ check('panel fact switch while ON: distinguishing fact immediately invalidates t
 s = await click('[data-fact="dup"]');
 check('panel fact switch back to redundant: original state and hit return', s.redundantMode && s.contextVersion === 0
   && s.flush === 0 && s.cacheHit && matrixNear(s.rho, sigma) && JSON.stringify(s.snapshot) === immutable);
+
+// A fixed state does not identify the ruler. At θ = 45° the saved snapshot is I/2, which the pinchings with β = 0° and
+// β = 90° both leave alone although the two maps differ; drive the real controls (arrow keys on the sliders, the stage
+// switch) and require the HUD to report the state property only.
+const keysOn = async (p, selector, key, n) => {
+  await p.focus(selector); for (let k = 0; k < n; k++) await p.keyboard.press(key);
+  await p.evaluate(() => document.activeElement?.blur()); await settle(p);
+  return p.evaluate(() => window.DEJAVU_SANDTABLE_DEBUG.state);
+};
+const mixedSaved = pinching(pure(45), 0), channelGap = Math.max(...pinching(pure(45), 0).flat().map((x, i) => Math.abs(x - pinching(pure(45), 90).flat()[i])));
+check('θ=45° certificate: Π at 0° and 90° differ by 1/2 on the input, yet both fix the saved I/2', matrixNear(mixedSaved, half)
+  && near(channelGap, 1 / 2) && matrixNear(pinching(mixedSaved, 90), mixedSaved) && matrixNear(pinching(mixedSaved, 0), mixedSaved));
+const fixedHudZh = '再投影保持态不变，β = 90°，态熵仍是 1.000 bit', fixedHudEn = 'Π(σ) = σ, β = 90°; state entropy still 1.000 bit';
+s = await card('deja-vu-hit', 2);
+check('deja-vu-hit HUD at the card: state unchanged under β = 0°', await text('hudSub') === '再投影保持态不变，β = 0°，态熵仍是 0.811 bit');
+s = await keysOn(page, '#theta', 'ArrowRight', 15);
+check('θ=45° by arrow keys: saved snapshot I/2 under the dream ruler, hit', s.theta === 45 && near(s.beta, 0)
+  && matrixNear(s.snapshot.sigma, mixedSaved) && s.cacheHit && await text('oTheta') === '45°');
+s = await keysOn(page, '#beta', 'ArrowRight', 18);
+frameChecks('fixed state, ruler turned to 90° by arrow keys', s, mixedSaved, mixedSaved);
+let hud = await text('hudSub'), note = await text('roNote');
+check('fixed state, ruler turned: current β 90° ≠ saved β 0°, state unchanged, hit', near(s.beta, 90) && s.snapshot.beta === 0
+  && matrixNear(s.rho, s.before) && s.cacheMatch.payload && s.cacheHit && await text('oBeta') === '90°');
+check('fixed state, ruler turned: visible HUD reports only that the state is unchanged', await page.locator('#hudSub').isVisible()
+  && hud === fixedHudZh && !/同一把尺子/.test(hud + note), `${hud} | ${note}`);
+s = await card('deja-vu-hit', 2);
+await keysOn(page, '#theta', 'ArrowRight', 15);
+s = await click('[data-up="on"]');
+frameChecks('fixed state, upgrade turns the ruler to 90°', s, mixedSaved, mixedSaved);
+hud = await text('hudSub'); note = await text('roNote');
+check('fixed state, upgrade: β 90° ≠ saved β 0°, flush and MISS while the state stays', s.logicUpgrade && near(s.beta, 90)
+  && s.snapshot.beta === 0 && s.flush === 1 && s.cacheEntry.valid === 0 && s.cacheMatch.payload && !s.cacheHit && await text('ro5') === 'MISS');
+check('fixed state, upgrade: visible HUD reports only that the state is unchanged', await page.locator('#hudSub').isVisible()
+  && hud === fixedHudZh && !/同一把尺子/.test(hud + note), `${hud} | ${note}`);
+const english = await T.open(BOOK, ID, '?lang=en&preset=deja-vu-hit');
+await settle(english);
+await keysOn(english, '#theta', 'ArrowRight', 15);
+let q = await keysOn(english, '#beta', 'ArrowRight', 18);
+hud = await english.locator('#hudSub').innerText(); note = await english.locator('#roNote').innerText();
+check('English, ruler turned: β 90° ≠ saved 0°, fixed I/2 state, HUD reports only the state', near(q.beta, 90) && q.snapshot.beta === 0
+  && matrixNear(q.rho, mixedSaved) && q.cacheHit && await english.locator('#hudSub').isVisible() && hud === fixedHudEn
+  && !/same ruler/i.test(hud + note), `${hud} | ${note}`);
+await english.click('[data-up="on"]'); await settle(english);
+q = await english.evaluate(() => window.DEJAVU_SANDTABLE_DEBUG.state);
+hud = await english.locator('#hudSub').innerText(); note = await english.locator('#roNote').innerText();
+check('English, upgrade: flush and MISS with the state unchanged, HUD reports only the state', q.logicUpgrade && near(q.beta, 90)
+  && q.flush === 1 && !q.cacheHit && matrixNear(q.rho, mixedSaved) && hud === fixedHudEn && !/same ruler/i.test(hud + note), `${hud} | ${note}`);
+await english.context().close();
+// At the narrowest phone width the widest reading (β = 175°) stays on one visible line inside the stage.
+for (const [lang, expected] of [['zh', '再投影保持态不变，β = 175°，态熵仍是 1.000 bit'], ['en', 'Π(σ) = σ, β = 175°; state entropy still 1.000 bit']]) {
+  const narrow = await T.open(BOOK, ID, `?lang=${lang}&preset=deja-vu-hit`, { viewport: { width: 334, height: 720 }, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+  await settle(narrow);
+  await keysOn(narrow, '#theta', 'ArrowRight', 15);
+  q = await keysOn(narrow, '#beta', 'ArrowRight', 35);
+  const g = await narrow.evaluate(() => {
+    const el = document.getElementById('hudSub'), r = el.getBoundingClientRect(), st = document.getElementById('stage').getBoundingClientRect();
+    return { text: el.innerText, lines: Math.round(r.height / parseFloat(getComputedStyle(el).lineHeight)), inside: r.left >= st.left && r.right <= st.right && r.top >= st.top };
+  });
+  check(`${lang} 334 px, β = 175°: fixed I/2 state, HUD on one line inside the stage`, near(q.beta, 175) && q.snapshot.beta === 0 && q.cacheHit
+    && matrixNear(q.rho, mixedSaved) && g.text === expected && g.lines === 1 && g.inside && await narrow.locator('#hudSub').isVisible(), JSON.stringify(g));
+  await narrow.context().close();
+}
 
 // Gram geometry: derive the feasible band from unit vectors, independently of the displayed determinant.
 const detGram = (z) => 81 / 625 - (z - 16 / 25) ** 2;

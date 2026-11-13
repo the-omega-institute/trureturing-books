@@ -404,7 +404,7 @@ $$
 **文献结果，未在本书形式化。** 本节将“梦境前置逻辑去相干、醒后新事实冲刷与既视感缓存命中”映射为体系结构原语（`MODEL`）时，所借用的硬件机制引自以下标准计算机体系结构文献，不代表生物神经元或量子熵之间存在已证实的物理等式：
 
 1. **分支预测、投机执行与错误预测时的流水线冲刷（J. L. Hennessy & D. A. Patterson, *Computer Architecture: A Quantitative Approach*, 6th ed., Morgan Kaufmann, 2017，指令级并行与硬件推测执行章节）**：现代乱序超标量微处理器在条件分支结果尚未从慢速内存返回前，利用历史分支预测器（Branch Predictor）选定高概率路径并超前投机执行（Speculative Execution）后续指令，把计算结果暂存于重排序缓冲区；若后续真实条件验证通过，投机结果零重算开销直接退休提交；一旦验证发现分支预测失误，硬件立即触发**流水线冲刷（Pipeline Squash / Flush）**，作废投机结果并从正确分支重新取指执行；
-2. **转译后备缓冲器（TLB）虚拟页地址标签与进程上下文标识符（Intel *64 and IA-32 Architectures Software Developer’s Manual*, Vol. 3A: *System Programming Guide*, “Translation Lookaside Buffers (TLBs)” 与 “Process-Context Identifiers (PCIDs)” 章节）**：在真实硬件缓存与 TLB 中，一次合法命中（Cache / TLB Hit）绝不能仅凭有效位 `Valid = 1` 判定，而必须同时通过**虚拟页地址标签（Address Tag）匹配**与**当前地址空间上下文标识符（如 PCID / ASID）匹配**。因此，§37.5.4 沙盘模型中的“缺失情景时间戳（`Time_Tag = NULL`）”绝不等于硬件层面的“无地址标签寻址”——地址标签与语境版本仍在严格核验，缺失的仅仅是外显编年史时间戳元数据。
+2. **转译后备缓冲器（TLB）虚拟页地址标签与进程上下文标识符（Intel *64 and IA-32 Architectures Software Developer’s Manual*, Vol. 3A: *System Programming Guide*, “Translation Lookaside Buffers (TLBs)” 与 “Process-Context Identifiers (PCIDs)” 章节）**：以启用 PCID 的非全局 TLB 条目为例，一次合法命中不能仅凭有效位 `Valid = 1` 判定，还须匹配**虚拟页号（Address Tag）**与**当前 PCID**；全局 TLB 条目可跨 PCID 使用，其他缓存的标签规则则依具体架构而定。因此，§37.5.4 沙盘模型中的“缺失情景时间戳（`Time_Tag = NULL`）”绝不等于“无地址标签寻址”——模型仍严格核验地址标签与语境版本，缺失的仅仅是外显编年史时间戳元数据。
 :::
 
 让我们在单量子比特模型上把这笔“梦境首次预编译账”连同后续同轴复测与换轴重编的精确数值一次性算到底（**手工推导，未作为独立声明在本书形式化**；浮点值为 `NUM`）：对任意实倾角纯态 $\lvert\psi_\theta\rangle = (\cos\theta, \sin\theta)^T$（$0 \le \theta \le \pi/2$）与选定逻辑测量轴 $\mathbf{n}_\beta = (\sin\beta, 0, \cos\beta)$（$0 \le \beta < \pi$），完备未读捏合信道显式写为
@@ -419,7 +419,7 @@ $$
 \rho_{\mathrm{in}} = \begin{pmatrix} 3/4 & \sqrt{3}/4 \\ \sqrt{3}/4 & 1/4 \end{pmatrix} \quad\xrightarrow{\;\Pi_0\;}\quad \sigma_{\mathrm{dream}} = \Pi_0(\rho_{\mathrm{in}}) = \begin{pmatrix} 3/4 & 0 \\ 0 & 1/4 \end{pmatrix}.
 $$
 
-在梦境完成这第一次去相干预编译的瞬间，副对角相干元 $\pm\sqrt{3}/4$ 被当场剪除：按 [`pinching_discarded_coherence_mass`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass)，丢弃的希尔伯特—施密特平方相干质量为无量纲精确分数 $\operatorname{Tr}((\rho_{\mathrm{in}} - \sigma_{\mathrm{dream}})^2) = 2\times(\frac{\sqrt{3}}{4})^2 = \frac{3}{8} = 0.375$（注意这是矩阵残差平方范数，单位绝不是比特！）；按 [`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity) 除以 $\ln 2$ 换算为二进制比特后，这一步预编译已在夜间提前支付了二元香农熵 $h_2(3/4) = -\frac{3}{4}\log_2\frac{3}{4} - \frac{1}{4}\log_2\frac{1}{4} \approx 0.811278$ 比特。四阶段完整对比账本如下：
+在梦境完成这第一次去相干预编译的瞬间，两个副对角相干元（均为 $\sqrt{3}/4$）被当场剪除：按 [`pinching_discarded_coherence_mass`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass)，丢弃的希尔伯特—施密特平方相干质量为无量纲精确分数 $\operatorname{Tr}((\rho_{\mathrm{in}} - \sigma_{\mathrm{dream}})^2) = 2\times(\frac{\sqrt{3}}{4})^2 = \frac{3}{8} = 0.375$（注意这是矩阵残差平方范数，单位绝不是比特！）；按 [`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity) 除以 $\ln 2$ 换算为二进制比特后，这一步预编译已在夜间提前支付了二元香农熵 $h_2(3/4) = -\frac{3}{4}\log_2\frac{3}{4} - \frac{1}{4}\log_2\frac{1}{4} \approx 0.811278$ 比特。四阶段完整对比账本如下：
 
 | 演化与检测阶段 | 密度矩阵状态 | 状态冯·诺依曼熵（比特） | 本步再捏合新增熵 $\Delta H_{\mathrm{bits}}$ | 丢弃相干质量 $\lVert\rho - \Pi_\beta(\rho)\rVert_{\mathrm{HS}}^2$ |
 | :--- | :--- | ---: | ---: | ---: |
@@ -564,7 +564,7 @@ $$
 | 认知比较维度（`MODEL`） | 1. 普通全新清醒体验（冷未命中） | 2. 普通显式往事回忆（带时间戳命中） | 3. 既视感体验（梦境预编译无时间戳命中） |
 | :--- | :--- | :--- | :--- |
 | **首次退相干编译发生地** | 当下清醒五感现场实时首次执行 | 过去某次清醒五感现场已完成编译并归档 | 昨夜或更早梦境离线沙盘已由前置逻辑预编译 |
-| **当前同轴投影新增熵 $\Delta H_{\mathrm{bits}}$** | 严格为正（如默认算例 $+0.8113$ 比特，残差 $3/8$） | 同语境复现重投影增量为 $0$ | 同语境复现重投影增量为 **$0$**（零新增相干删除残差） |
+| **当前同轴投影新增熵 $\Delta H_{\mathrm{bits}}$** | 非负；输入在所选基下有非零相干时严格为正（如默认算例 $+0.8113$ 比特，残差 $3/8$） | 同语境复现重投影增量为 $0$ | 同语境复现重投影增量为 **$0$**（零新增相干删除残差） |
 | **地址与语境版本标签核验** | 无匹配历史条目（`Cache Miss`） | `Valid = 1`，地址标签与语境版本均匹配 | `Valid = 1`，地址标签与语境版本均匹配（`Cache Hit`） |
 | **外显情景时间戳 `Time_Tag`** | 当下实时盖戳写入 `t = t_now` | 存有明确的过去清醒时空戳 `t = t_past` | **`Time_Tag = NULL`**（睡眠离线编译时编年锚点挂起） |
 | **第一人称现象学质感** | 鲜活的陌生感与实时消解分叉的专注感 | 踏实的“我记得某年某月来过这里” | 零重算阻力触发强烈熟悉感，但回溯时间标签返回空值：“我明明经历过，却绝不可能经历过！” |

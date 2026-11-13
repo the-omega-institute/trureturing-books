@@ -778,7 +778,7 @@
         const pass2 = fr.pass === 2, done = fr.f >= 1 - EPS;
         $('hudBig').textContent = pass2 ? L(`再投影 · 新增熵 ${sbit(nm.added)}`, `Again · added entropy ${sbit(nm.added)}`) : L(`梦中编译 · 新增熵 ${sbit(nm.added)}`, `Dream compile · added ${sbit(nm.added)}`);
         $('hudSub').textContent = pass2
-          ? (M.maxAbs(M.sub(fr.after, fr.before)) < TOL ? L(`同一把尺子 β = ${fix(fr.beta, 0)}° · 态熵仍是 ${bit(nm.existing, 3)}`, `same ruler β = ${fix(fr.beta, 0)}° · state entropy still ${bit(nm.existing, 3)}`) : L(`换了尺子 β = ${fix(fr.beta, 0)}° · 残差 ${fix(nm.mass, 4)}`, `new ruler β = ${fix(fr.beta, 0)}° · residual ${fix(nm.mass, 4)}`))
+          ? (M.maxAbs(M.sub(fr.after, fr.before)) < TOL ? L(`再投影保持态不变，β = ${fix(fr.beta, 0)}°，态熵仍是 ${bit(nm.existing, 3)}`, `Π(σ) = σ, β = ${fix(fr.beta, 0)}°; state entropy still ${bit(nm.existing, 3)}`) : L(`换了尺子 β = ${fix(fr.beta, 0)}° · 残差 ${fix(nm.mass, 4)}`, `new ruler β = ${fix(fr.beta, 0)}° · residual ${fix(nm.mass, 4)}`))
           : L(`完整未读捏合 Π(0°) · 非对角 ${fix(Math.abs(fr.cur[0][1]), 3)}`, `complete unread pinching Π(0°) · off-diagonal ${fix(Math.abs(fr.cur[0][1]), 3)}`);
         $('roKeyL').textContent = L('再捏合新增熵（本次投影）', 'added pinching entropy (this pass)');
         $('roKey').textContent = sbit(nm.added); $('roKeySub').textContent = L(` 本次：${pass2 ? '第二次' : '第一次'}`, ` this pass: ${pass2 ? 'the second' : 'the first'}`);
@@ -794,7 +794,7 @@
           !c.match.address && L('地址不符（Address_Tag）', 'the address differs (Address_Tag)')].filter(Boolean);
         const whyEn = why.length > 1 ? `${why.slice(0, -1).join(', ')} and ${why[why.length - 1]}` : why.join('');
         $('roNote').textContent = pass2 && done
-          ? (c.hit ? L('同一把尺子再投影：态不动，新增熵与残差都是 0；态熵与惊讶度没有变成 0。', 'Same ruler again: the state stays, added entropy and residual are 0; the state entropy and the surprisals are not 0.')
+          ? (c.hit ? L('再投影保持保存的态不变：新增熵与残差都是 0；态熵与惊讶度没有变成 0。', 'The re-projection leaves the saved state unchanged: added entropy and residual are 0; the state entropy and the surprisals are not 0.')
             : kept ? L(`再投影没有改变保存的态：新增熵与残差都是 0；缓存不命中只因${why.join('、')}。`, `The re-projection leaves the saved state as it was: added entropy and residual are 0; the cache misses only because ${whyEn}.`)
             : L('再投影改变了保存的态：新增熵与残差不为 0，缓存不命中。', 'The re-projection changes the saved state: added entropy and residual are not 0, and the cache misses.'))
           : L('第一次完整未读捏合：横跨尺子的部分缩到 0，两个结果的权重一分不少。', 'The first complete unread pinching: the part across the ruler shrinks to 0, and both outcome weights are kept in full.');
