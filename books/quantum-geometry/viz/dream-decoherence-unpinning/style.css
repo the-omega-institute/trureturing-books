@@ -2,19 +2,8 @@
    visualization alone; colours come from the tokens (var(--cyan) …), never from hex values. */
 #cv { cursor: grab; touch-action: none; }
 
-/* ---------- a cited figure (?embed=1&preset=…, `::: {.viz src=… preset=…}`): 500 px high, 760 wide in a book page and
-   about 334 on a phone. The card's note keeps to a few lines and scrolls inside its bar (a cyan shade at its top or
-   bottom edge says there is more; it disappears at the end), so a long note never takes the stage's height. The full
-   note, the scene buttons and every panel stay in the full laboratory ("open full screen" under the figure). */
+/* Cited figures keep their short notes complete; detailed notes remain in the full laboratory. */
 :root[data-embed][data-figure] .lab .tour { background: var(--panel-solid); }
-:root[data-embed][data-figure] .lab .tour .what {
-  max-height: 52px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line-hot) transparent;
-  background:
-    linear-gradient(var(--panel-solid) 40%, transparent) top / 100% 16px no-repeat local,
-    linear-gradient(transparent, var(--panel-solid) 60%) bottom / 100% 16px no-repeat local,
-    radial-gradient(farthest-side at 50% 0, color-mix(in srgb, var(--cyan) 50%, transparent), transparent) top / 100% 7px no-repeat scroll,
-    radial-gradient(farthest-side at 50% 100%, color-mix(in srgb, var(--cyan) 50%, transparent), transparent) bottom / 100% 7px no-repeat scroll;
-}
 /* on a phone the frame is about 334 × 500: the scene buttons give way to the title (◀ ▶ step through every card, and
    so every scene), and the title, the legend, the note and the transport are set tighter */
 @media (max-width: 480px) {
@@ -26,8 +15,13 @@
   :root[data-embed][data-figure] #stage .hud-bl .sw.box { width: 8px; height: 8px; }
   :root[data-embed][data-figure] .lab .tour { gap: 6px; padding: 4px 6px; }
   :root[data-embed][data-figure] .lab .tour .tbtn { min-width: 26px; height: 28px; padding: 0 4px; }
-  :root[data-embed][data-figure] .lab .tour .what { max-height: 58px; font-size: 11.5px; line-height: 1.34; }
+  :root[data-embed][data-figure] .lab .tour .what { font-size: 11.5px; line-height: 1.34; }
   :root[data-embed][data-figure] .lab .tour .what b { font-size: 10.5px; letter-spacing: 0.06em; }
   :root[data-embed][data-figure] .app.lab > footer.rail .tbtn { height: 26px; min-width: 30px; }
   :root[data-embed][data-figure] .app.lab > footer.rail .tau { font-size: 15px; }
+}
+
+/* The apparatus and its matrix stack vertically in the full phone laboratory. */
+@media (max-width: 520px) {
+  :root:not([data-embed]) .lab .center { grid-template-rows: minmax(520px, 84vh) auto auto; }
 }
