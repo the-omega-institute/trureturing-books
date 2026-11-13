@@ -62,6 +62,7 @@ description: 撰写或修改书籍各语言版本的章节时使用：定理环�
 ```
 
 - 长章拆分先按 `docs/AUTHORING.md` 的“章节命名与长章拆分”操作：用 `new-chapter --parent` 建立层级，按完整环境移动，保持主章计数和各语言的目录形状。
+- 每页一个一级标题，文字与本语言的 `SUMMARY.md` 一致；页内标题不跳级，各语言保持相同的层级序列。编号和分隔符按整本书的约定统一，子页面编号沿目录层级继续；改已发布标题时保留原片段 id。不要把标题校验警告留到导出后才处理。
 - 形式结论、定义、开放条目必须有 `#id`；id 一经发布不要改（外链依赖它）。
 - 数学：行内 `$…$`，块级 `$$` 独占一行、前后空行；不用 `\(`、`\[`。
 - 标题（`title="…"` 与 SUMMARY 章节标题）是行内 Markdown：`$…$` 外写 `C\*-代数`、`\$5` 时各端都显示 C*-代数、$5；不要在标题里用强调或行内代码（`docs/AUTHORING.md` §2）。
@@ -91,8 +92,11 @@ PDF 一端由 `tools/filters/typst-compat.lua` 负责与 KaTeX 保持一致：�
 
 把源文已证结果写成显式 written-proof 之前，先在所钉提交上搜索匹配的冻结声明；真正未证才用 conjecture。经典结论常常已经冻结，只是换了名字，或以有限维、固定参数、等价改写的形式出现。trureturing 每个 `D5/**/*.lean` 文件头有一行英文 `digest:` 摘要：
 
+本地上游默认使用 `~/trureturing`；用户显式指定时先将该路径设为 `TRURETURING_DIR`，否则沿用已有值。后续形式化与钉版继续使用这个目录。
+
 ```bash
-T="${TRURETURING_DIR:-../trureturing}"
+export TRURETURING_DIR="${TRURETURING_DIR:-$HOME/trureturing}"
+T="$TRURETURING_DIR"
 C=$(python3 -c "import json; print(json.load(open('trureturing.lock.json'))['commit'])")
 git -C "$T" grep -n -i -E 'digest: .*(stinespring|trace distance)' "$C" -- D5
 git -C "$T" cat-file -e "$C:Golden/Frozen/state/<模块路径>.lean.json" && echo frozen
