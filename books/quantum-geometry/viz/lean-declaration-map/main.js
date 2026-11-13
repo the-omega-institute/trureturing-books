@@ -31,7 +31,9 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
     const declaration = PIN.declarations[gid];
     if (!declaration) throw new Error(`Declaration missing from publication lock: ${gid}`);
     const kind = DATA.kinds.indexOf(declaration.kind), line = declaration.line || 0;
-    const dot = gid.lastIndexOf('.'), module = gid.slice(0, dot), short = gid.slice(dot + 1);
+    // the source file is the module the lock records: a declaration name may itself contain dots (Latitude.latitude_dot)
+    const module = declaration.module, short = gid.slice(gid.lastIndexOf('.') + 1);
+    if (!module || !gid.startsWith(`${module}.`)) throw new Error(`Declaration module missing from publication lock: ${gid}`);
     return { i, gid, module, short, kind, line, home, col: colOf[home], cites, serial, env: cites.some((c) => c[1] === 'e') };
   });
   const BY = Object.fromEntries(D.map((d) => [d.gid, d]));
@@ -61,7 +63,8 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
   let lay = layout('all'), from = null, mix = 1;                         // from: the layout a transition starts from
   const metIn = (d, t) => d.col < Math.floor(t) || (d.col === Math.floor(t) && lay.pos[d.gid] < (t - Math.floor(t)) * lay.cols[d.col].length);
   const visible = () => D.filter(FILTERS[S.filter]);
-  const focus = () => new Set(citedBy(S.src, S.mode).map((d) => d.gid));
+  // S.src is a column; the unit it stands for skips Appendix C, which has no column
+  const focus = () => new Set(citedBy(S.src == null ? null : COLS[S.src], S.mode).map((d) => d.gid));
   /** Visible declarations whose GID (module path and name) contains the search text, ignoring case. */
   const found = () => { const q = S.q.trim().toLowerCase(); return q ? visible().filter((d) => d.gid.toLowerCase().includes(q)) : null; };
   const metCount = (t) => visible().filter((d) => metIn(d, t)).length;
@@ -265,10 +268,10 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
   const FIX = D.find((d) => d.short === 'unreadState_fixed_iff'), PAR = D.find((d) => d.short === 'inner_product_norm_parallelogram_law');
   const PRESETS = {
     all: { filter: 'all', src: null, sel: null, at: 0, play: true, still: NC },
-    bedrock: { filter: 'all', src: C27, mode: 'env', sel: PAR.gid, at: NC, still: NC },
-    table27: { filter: 'all', src: C27, mode: 'all', sel: null, at: NC, still: NC },
-    closure: { filter: 'all', src: C28, mode: 'env', sel: FIX.gid, at: NC, still: NC },
-    table28: { filter: 'all', src: C28, mode: 'all', sel: null, at: NC, still: NC },
+    bedrock: { filter: 'all', src: colOf[C27], mode: 'env', sel: PAR.gid, at: NC, still: NC },
+    table27: { filter: 'all', src: colOf[C27], mode: 'all', sel: null, at: NC, still: NC },
+    closure: { filter: 'all', src: colOf[C28], mode: 'env', sel: FIX.gid, at: NC, still: NC },
+    table28: { filter: 'all', src: colOf[C28], mode: 'all', sel: null, at: NC, still: NC },
     theorems: { filter: 'theorem', src: null, sel: null, at: NC, still: NC },
     inline: { filter: 'inline', src: null, sel: null, at: NC, still: NC }
   };
@@ -324,7 +327,7 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
     cellAt: (gid) => { const b = $('cv').getBoundingClientRect(), p = (window.LEANMAP_BOXES || {})[gid]; return p ? [b.left + p[0], b.top + p[1]] : null; },
     footAt: (col) => { const b = $('cv').getBoundingClientRect(); return [b.left + view.X(col), b.top + view.pt + view.ih + 12]; }
   };
-  window.TRV_THUMB = () => { clock.pause(); S.src = C28; S.mode = 'all'; S.sel = FIX.gid; setLayout('all', false); clock.set(NC); paint.now(); };
+  window.TRV_THUMB = () => { clock.pause(); S.src = colOf[C28]; S.mode = 'all'; S.sel = FIX.gid; setLayout('all', false); clock.set(NC); paint.now(); };
   cards.pick(cards.initial('all'));   // a chapter may cite another card: ::: {.viz src="lean-declaration-map" preset="table27"}
   booting = false;
   paint();
