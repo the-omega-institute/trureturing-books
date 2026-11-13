@@ -67,6 +67,12 @@ const NC = columns.length;
 
 check('page carries its id', (await page.evaluate(() => document.body.dataset.vizId)) === 'lean-declaration-map');
 
+const mainSource = fs.readFileSync(path.join(BOOK, 'viz/lean-declaration-map/main.js'), 'utf8');
+check('the coda group tries Coda & App. before the dot fallback',
+  /roman = \[[^\n]*'·'\]\[p\]/.test(mainSource)
+  && /const compact = [^\n]*'Coda & App\.'/.test(mainSource)
+  && /const lab = \[name, \.\.\.compact\]\.find\(fits\) \|\| roman;/.test(mainSource));
+
 // the data block against the lock and the chapters
 const rows = await page.evaluate(() => window.LEANMAP_DEBUG.rows());
 check('one cell per entry of trureturing.lock.json', rows.length === GIDS.length && new Set(rows.map((r) => r[0])).size === GIDS.length && rows.every((r) => r[0] in lock.declarations), `${rows.length} cells, ${GIDS.length} entries`);
