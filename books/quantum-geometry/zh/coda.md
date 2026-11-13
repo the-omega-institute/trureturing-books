@@ -662,7 +662,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 39 章](ch39-observer-is-ontological-universe.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝、量子公平、大一统元统一、语境不动点、劳维尔同像扩表 $T = T(T)$、商拓扑约去轮回、概念纤维分解与齐肯多夫线程）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 参考引擎及其冻结依据与 `FiniteRecordCosineObstruction` 的剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [{commit}](trureturing:) 下全部 $296$ 条环境引用冻结定理、$97$ 项环境辅助定义与 $161$ 项行内引用声明，共计 $554$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 参考引擎及其冻结依据与 `FiniteRecordCosineObstruction` 的剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [{commit}](trureturing:) 下全部 $297$ 条环境引用冻结定理、$97$ 项环境辅助定义与 $161$ 项行内引用声明，共计 $555$ 项唯一锁定声明）。
 
 ### 第六至第十部（第 21–39 章）55 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -726,4 +726,4 @@ $$
 | **第 39 章**<br/>观察者即宇宙本体 | T39.1 | `D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition` | 概念状态空间按可观测签名纤维的不相交并重构定理 |
 | **第 39 章** | T39.2 | `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective` | 非负实数全尺度齐肯多夫编码线程严格单射定理 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $393$ 项 `trureturing@dev` 环境头引用声明（含行内共 $554$ 项唯一锁定声明），并在 [附录 D](appendix-d.md) 中纵览量子力学六大经典未解难题与五大诠释流派的几何对决。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $394$ 项 `trureturing@dev` 环境头引用声明（含行内共 $555$ 项唯一锁定声明），并在 [附录 D](appendix-d.md) 中纵览量子力学六大经典未解难题与五大诠释流派的几何对决。

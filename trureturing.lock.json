@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "bb452a18f3e77a2c4e50864d2d7bce34fb73a040",
-  "pinned_at": "2026-11-13T10:32:25Z",
+  "commit": "8acf7efa41af7fc9ddbbd39571e7ef73462f4509",
+  "pinned_at": "2026-11-13T10:55:13Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1497,7 +1497,7 @@
       "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
       "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_phase_unitary_completion",
       "kind": "theorem",
-      "statement_id": "sha256:3d5c36d02ba847fd3cb583bb5a14c5d8c8838cdcc3689ceabcf9697df8805f81",
+      "statement_id": "sha256:18f8185ca10253a41a37d89014cec95bd0a3612bd4086744ca09836a0bb91913",
       "line": 912,
       "signature": "theorem exists_phase_unitary_completion (k : ℕ) (p : ℝ[X]) (hp : p.natDegree ≤ k) (hpar : HasParity (p.map (algebraMap ℝ ℂ)) k) (hbound : ∀ x ∈ Set.Icc (-1 : ℝ) 1, p.eval x ^ 2 ≤ 1) : ∃ (B C : ℝ[X]) (U : CyclicObservable 2), 1 - p ^ 2 = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1) ∧ U = phaseCompletion p B C ∧ star U * U = 1 ∧ U * star U = 1 ∧ (∀ t, (U t).det = 1) ∧ (∀ t, (U t 0 0).re = p.eval (windingPhase t).re)"
     },
@@ -1505,7 +1505,7 @@
       "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
       "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_sumsq_decomposition",
       "kind": "theorem",
-      "statement_id": "sha256:3d5c36d02ba847fd3cb583bb5a14c5d8c8838cdcc3689ceabcf9697df8805f81",
+      "statement_id": "sha256:18f8185ca10253a41a37d89014cec95bd0a3612bd4086744ca09836a0bb91913",
       "line": 845,
       "signature": "theorem exists_sumsq_decomposition (k : ℕ) (A : ℝ[X]) (hAe : IsEven (A.map (algebraMap ℝ ℂ))) (hAd : A.natDegree ≤ 2 * k) (hA : ∀ x ∈ Set.Icc (-1 : ℝ) 1, 0 ≤ A.eval x) : ∃ B C : ℝ[X], A = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1)"
     },
@@ -3500,6 +3500,14 @@
       "statement_id": "sha256:27a50d53ea4b7ef105570f1c854b960f2a96fb04b4ba357796287115baf6237b",
       "line": 67,
       "signature": "theorem orthogonal_syndrome_recovery (S : s → Matrix n d ℂ) (hS : OrthogonalSyndromes S) (sigma : Matrix s s ℂ) (rho : Matrix d d ℂ) : syndromeDecoding S (syndromeEncoding S sigma rho) = Matrix.trace sigma • rho"
+    },
+    "D5/S3/Quantum/Routing/ReversibleQram.correctness": {
+      "module": "D5/S3/Quantum/Routing/ReversibleQram",
+      "name": "D5.S3.Quantum.Routing.ReversibleQram.correctness",
+      "kind": "theorem",
+      "statement_id": "sha256:07ebdbb032c2a26a85df415803daff40fa76a8bbf442745abc31db865e604f59",
+      "line": 208,
+      "signature": "theorem correctness : (∀ (n : ℕ) (a i : Address n) (e : Bool), leaf n (route n a (clean n e)) i = if i = a then e else false) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (w : Wires n) (r : G), query n D (a, w, r) = (a, w, r + readAmount n D (route n a w))) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (r : G), query n D (a, clean n true, r) = (a, clean n true, r + D a)) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] [Fintype G] [DecidableEq G] (D : Address n → G), (queryMatrix n D)ᴴ * queryMatrix n D = 1 ∧ queryMatrix n D * (queryMatrix"
     },
     "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR": {
       "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",
