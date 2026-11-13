@@ -309,6 +309,20 @@ try {
     s = await state();
     check(`${card.id}: automatic endpoint restores the promised experiment`, s.thetaDeg === 30 && s.N === Math.round(10 ** card.u) && near(s.beta, card.beta));
   }
+  // The five-way card cited in a narrow column (334 × 520, its chapter's frame): five lens rows, each tall enough to read,
+  // inside the band between the title block with the lens chips and the legend (they once shared about 50 px).
+  for (const lang of ['zh', 'en']) {
+    const fig = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=five-way-duel`, { viewport: { width: 334, height: 520 }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+    await settle(fig, 200);
+    const r = await fig.evaluate(() => {
+      const cv = document.getElementById('cv').getBoundingClientRect(), box = (id) => document.getElementById(id).getBoundingClientRect();
+      return { top: Math.max(box('hudTl').bottom, box('lensBar').bottom) - cv.top, bottom: box('legend').top - cv.top,
+        rows: window.INTERPRETATIONS_DUEL_DEBUG.handles().filter((h) => h.kind === 'lens').map((h) => [Math.round(h.y0), Math.round(h.y1)]) };
+    });
+    check(`five-way-duel cited at 334 × 520 (${lang}): five lens rows of at least 20 px inside the band between the title block and the legend`,
+      r.rows.length === 5 && r.rows.every(([a, b]) => b - a >= 20 && a >= r.top - 0.5 && b <= r.bottom + 0.5), JSON.stringify(r));
+    await fig.context().close();
+  }
   check('zero console errors, page errors, failed requests or HTTP failures throughout', T.errors.length === 0, T.errors.join(' | '));
 } catch (error) {
   check('suite completes without an unexpected exception', false, error.stack || String(error));

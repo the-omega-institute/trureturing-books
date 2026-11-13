@@ -104,9 +104,13 @@
   }
   function drawCut(q) {
     const words = !TRV.thumbMode, u = q.u, K = words ? 1 : 2.2;      // the cover is drawn bolder: it is read at card size
-    const rows = words ? 46 : 36, b = fitBand($('flat').clientHeight, box.top, box.bottom, MIN_H + rows);   // the physical line and its ticks go under the chart
-    const g = kit.plot($('flat'), { x: [-q.half, q.half], y: [MID - 1.9, MID + 1.9], pad: [words ? 30 : 8, 10, b.top, b.bottom + rows], minHeight: MIN_H }), ctx = g.ctx; view = g;
-    const lo = LO + u, hi = HI + u, rowY = g.pt + g.ih + 15, rowH = words ? 12 : 22, inView = (p) => p.x >= g.x0 && p.x <= g.x1 && p.c >= g.y0 && p.c <= g.y1;
+    /* the physical line and its ticks go under the chart. A narrow cited figure has a short band: the row of tiles sits
+       closer, its tick numbers stay only while the chart keeps 44px, and the chart shows a little less of the conjugate
+       axis around the window, so the window and its points keep their height */
+    const tight = words && narrowFigure(), band = $('flat').clientHeight - box.top - box.bottom, ticks = !tight || band - 31 >= 44;
+    const rows = !words ? 36 : !tight ? 46 : ticks ? 31 : 20, span = tight ? 1.55 : 1.9, b = fitBand($('flat').clientHeight, box.top, box.bottom, MIN_H + rows);
+    const g = kit.plot($('flat'), { x: [-q.half, q.half], y: [MID - span, MID + span], pad: [words ? 30 : 8, 10, b.top, b.bottom + rows], minHeight: MIN_H }), ctx = g.ctx; view = g;
+    const lo = LO + u, hi = HI + u, rowY = g.pt + g.ih + (tight ? 10 : 15), rowH = !words ? 22 : tight ? 11 : 12, inView = (p) => p.x >= g.x0 && p.x <= g.x1 && p.c >= g.y0 && p.c <= g.y1;
     g.rect(g.x0, lo, g.x1, hi, P.amber, { alpha: words ? 0.09 : 0.14 });
     if (q.emp) g.rect(g.x0, q.emp[0], g.x1, q.emp[1], P.cyan, { alpha: 0.13 });
     g.hline(lo, P.amber, { width: 1.4 * K }); g.hline(hi, P.amber, { width: 1.4 * K });
@@ -134,11 +138,28 @@
     }
     if (!words) return;
     for (const v of [-1, 0, 1]) text(ctx, String(v).replace('-', '−'), g.pl - 6, g.Y(v), P.dim, { align: 'right', size: 10, halo: false });
-    for (let v = -8; v <= 8; v += 2) if (Math.abs(v) < q.half - 0.3) text(ctx, String(v).replace('-', '−'), g.X(v), rowY + 17, P.dim, { align: 'center', size: 10, halo: false });
+    if (ticks) for (let v = -8; v <= 8; v += 2) if (Math.abs(v) < q.half - 0.3) text(ctx, String(v).replace('-', '−'), g.X(v), rowY + (tight ? 14 : 17), P.dim, { align: 'center', size: 10, halo: false });
+    const patchLab = L(`固定的一小片 |x| ≤ ${PATCH}`, `the fixed patch |x| ≤ ${PATCH}`);
+    if (tight) {
+      /* a short chart: the row just above the window's top edge carries the window's name and then the deepest point (or
+         the patch); both axis names share the row under the window's lower edge, one at each end */
+      const yA = Math.max(g.pt + 6, g.Y(hi) - 9), yB = Math.min(g.pt + g.ih - 6, Math.max(g.Y(lo) + 9, g.pt + g.ih - 8));
+      text(ctx, 'W + u', g.pl + 4, yA, P.amber, { size: 11.5 });
+      ctx.font = `11.5px ${face()}`; const after = g.pl + 4 + ctx.measureText('W + u').width + 10;
+      text(ctx, L('↑ 共轭 a + bψ', '↑ the conjugate a + bψ'), g.pl + 4, yB, P.dim, { size: 10.5, face: 'body' });
+      text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 4, yB, P.dim, { align: 'right', size: 10.5, face: 'body' });
+      if (S.patch) text(ctx, patchLab, after, yA, P.ink, { size: 11, face: 'body' });
+      else if (q.deep) {
+        const deepLab = L(`最深的点 · 离边 ${fix(margin(q.deep.c, u), 2)}`, `deepest point · ${fix(margin(q.deep.c, u), 2)} from the edge`);
+        ctx.font = `11px ${TRV.fonts.body}`; const dw = ctx.measureText(deepLab).width;
+        text(ctx, deepLab, clamp(g.X(q.deep.x) - dw / 2, after, g.pl + g.iw - dw), yA, P.cyan, { size: 11, face: 'body' });
+      }
+      return;
+    }
     text(ctx, 'W + u', g.pl + 8, g.Y(hi) - 10, P.amber, { size: 11.5 });
     text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 6, g.pt + g.ih - 9, P.dim, { align: 'right', size: 10.5, face: 'body' });
     text(ctx, L('↑ 共轭 a + bψ', '↑ the conjugate a + bψ'), g.X(0) + 6, g.pt + 8, P.dim, { size: 10.5, face: 'body' });
-    if (S.patch) text(ctx, L(`固定的一小片 |x| ≤ ${PATCH}`, `the fixed patch |x| ≤ ${PATCH}`), g.X(0), g.pt + g.ih - 10, P.ink, { align: 'center', size: 11, face: 'body' });
+    if (S.patch) text(ctx, patchLab, g.X(0), g.pt + g.ih - 10, P.ink, { align: 'center', size: 11, face: 'body' });
     else if (q.deep) {
       // centred over the deepest point, kept inside the stage by its own half-width (the English label is the longer one)
       const deepLab = L(`最深的点 · 离边 ${fix(margin(q.deep.c, u), 2)}`, `deepest point · ${fix(margin(q.deep.c, u), 2)} from the edge`);
@@ -165,12 +186,24 @@
     for (const p of NEAR) if (p.x >= g.x0 && p.x <= g.x1 && Math.abs(p.c) <= 1.3) g.dot(p.x, p.c, P.dim, 2.4, { alpha: 0.8 });
     for (let j = 1; j <= k; j++) { const [x, y] = power(j), col = cassini(j) > 0n ? P.cyan : P.magenta, now = j === k; g.rect(0, 0, x, y, col, { alpha: now ? 0.3 : 0.07, stroke: col, strokeAlpha: now ? 1 : 0.55, width: now ? 2 : 1 }); }
     g.dot(0, 0, P.ink, 3.2);
+    /* a narrow cited figure: the current power's label also carries its x·x′ (the two would share a row beside a flat
+       rectangle), the two hyperbolas are named by the legend alone, and the conjugate axis is named at the top right */
+    const tight = words && narrowFigure();
     for (let j = 0; j <= k; j++) {
       const [x, y] = power(j), col = y > 0 ? P.cyan : P.magenta, now = j === k;
       g.dot(x, y, col, now ? 5.5 : 3.6, now ? { glow: 12 } : null);
-      if (words) text(ctx, now ? `φ${sup(j + 1)} = ${FIB[j]} + ${FIB[j + 1]}φ` : `φ${sup(j + 1)}`, clamp(g.X(x), g.pl + 20, g.pl + g.iw - (now ? 62 : 14)), g.Y(y) + (y > 0 ? -13 : 14), now ? P.ink : col, { align: 'center', size: now ? 12 : 10.5 });
+      if (words && !(tight && now)) text(ctx, now ? `φ${sup(j + 1)} = ${FIB[j]} + ${FIB[j + 1]}φ` : `φ${sup(j + 1)}`, clamp(g.X(x), g.pl + 20, g.pl + g.iw - (now ? 62 : 14)), g.Y(y) + (y > 0 ? -13 : 14), now ? P.ink : col, { align: 'center', size: now ? 12 : 10.5 });
     }
     if (!words) return;
+    if (tight) {
+      const [x, y] = power(k), a = `φ${sup(k + 1)} = ${FIB[k]} + ${FIB[k + 1]}φ`, b = `  x·x′ = ${cassini(k) > 0n ? '+1' : '−1'}`;
+      ctx.font = `12px ${face()}`; const wa = ctx.measureText(a).width; ctx.font = `600 12px ${face()}`; const wb = ctx.measureText(b).width;
+      const x0 = clamp(g.X(x) - (wa + wb) / 2, g.pl + 4, g.pl + g.iw - wa - wb), yy = g.Y(y) + (y > 0 ? -13 : 14);
+      text(ctx, a, x0, yy, P.ink, { size: 12 }); text(ctx, b, x0 + wa, yy, y > 0 ? P.cyan : P.magenta, { size: 12, weight: 600 });
+      text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 6, g.pt + g.ih - 8, P.dim, { align: 'right', size: 10.5, face: 'body' });
+      text(ctx, L('↑ 共轭 a + bψ', '↑ the conjugate a + bψ'), g.pl + g.iw - 6, g.pt + 8, P.dim, { align: 'right', size: 10.5, face: 'body' });
+      return;
+    }
     const [x, y] = power(k), tall = Math.abs(g.Y(y) - g.Y(0)) > 26;
     text(ctx, `x·x′ = ${cassini(k) > 0n ? '+1' : '−1'}`, g.X(x / 2), tall ? g.Y(y / 2) : g.Y(y) + (y > 0 ? -12 : 13), tall ? P.ink : (y > 0 ? P.cyan : P.magenta), { align: 'center', size: 12, weight: 600 });
     text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 6, g.pt + g.ih - 8, P.dim, { align: 'right', size: 10.5, face: 'body' });
@@ -278,12 +311,29 @@
     const ki = q.arcs.indexOf(Math.min(...q.arcs)), short = q.pts[ki], tiny = TAU * q.min * R < 3;
     if (tiny) { const [sx, sy] = at(short.x + q.min / 2, R); ctx.strokeStyle = P.cyan; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.arc(sx, sy, 11, 0, TAU); ctx.stroke(); }
     if (!words) return;
-    if (tiny) { const [sx, sy] = at(short.x + q.min / 2, R * 0.6); text(ctx, L(`最短的弧 ${sci(q.min)}`, `shortest arc ${sci(q.min)}`), clamp(sx, 90, W - 90), sy, P.cyan, { align: 'center', size: 12, face: 'body' }); }
+    /* the ringed arc's label and the newest point's label sit inside the circle; when they would meet (the newest point
+       is the one that cut the tiny arc, as with π − 3 at N = 114), or the point's label would run into the key in the
+       middle, both go outside the ring, one on each side of it */
+    const shortLab = L(`最短的弧 ${sci(q.min)}`, `shortest arc ${sci(q.min)}`), pointLab = L(`第 ${q.N - 1} 个点`, `point ${q.N - 1}`);
+    let [tx, ty] = at(last.x, r0 - 24), sxy = tiny ? at(short.x + q.min / 2, R * 0.6) : null;
+    const wOf = (str, size) => { ctx.font = `${size}px ${TRV.fonts.body}`; return ctx.measureText(str).width; };
+    const keyHalf = 9 * q.kinds.length + 2, keyW = 120;
+    const meet = (sxy && Math.abs(sxy[1] - ty) < 16 && Math.abs(clamp(sxy[0], 90, W - 90) - tx) < (wOf(shortLab, 12) + wOf(pointLab, 11.5)) / 2 + 6)
+      || (Math.abs(ty - cy) < keyHalf + 8 && Math.abs(tx - cx) < keyW / 2 + wOf(pointLab, 11.5) / 2);
+    if (tiny && meet) {
+      const [rx, ry] = at(short.x + q.min / 2, R), ux = (rx - cx) / R, uy = (ry - cy) / R, bx = rx + ux * 16, by = ry + uy * 16;
+      text(ctx, shortLab, bx + 14, by, P.cyan, { size: 12, face: 'body' });
+      text(ctx, pointLab, bx - 14, by, P.amber, { align: 'right', size: 11.5, face: 'body' });
+    } else {
+      if (sxy) text(ctx, shortLab, clamp(sxy[0], 90, W - 90), sxy[1], P.cyan, { align: 'center', size: 12, face: 'body' });
+      text(ctx, pointLab, tx, ty, P.amber, { align: 'center', size: 11.5, face: 'body' });
+    }
     text(ctx, `0`, cx, cy - R - lw - 8, P.dim, { align: 'center', size: 10.5 });
-    { const [tx, ty] = at(last.x, r0 - 24); text(ctx, L(`第 ${q.N - 1} 个点`, `point ${q.N - 1}`), tx, ty, P.amber, { align: 'center', size: 11.5, face: 'body' }); }
     // the kinds, as a key in the middle of the circle: length (count)
     const lines = q.kinds.map((k, j) => [`${fmtLen(k.len)} × ${k.n}`, kindColor(q, j)]);
-    lines.forEach(([str, col], j) => text(ctx, str, cx, cy + (j - (lines.length - 1) / 2) * 18, col, { align: 'center', size: 12.5 }));
+    // a small circle (a narrow frame): the key's lines step down to 10px so that they stay inside the ring
+    ctx.font = `12.5px ${face()}`; const keyMax = Math.max(...lines.map(([str]) => ctx.measureText(str).width)), keySize = clamp(12.5 * 2 * (r0 - 8) / keyMax, 10, 12.5);
+    lines.forEach(([str, col], j) => text(ctx, str, cx, cy + (j - (lines.length - 1) / 2) * (keySize + 5.5), col, { align: 'center', size: keySize }));
   }
   /** 3.0 × 10⁻⁵ */
   const sci = (x) => { const [m, e] = x.toExponential(1).split('e'); return `${m} × 10${[...e].map((c) => ({ '-': '⁻', '+': '' }[c] ?? '⁰¹²³⁴⁵⁶⁷⁸⁹'[c])).join('')}`; };
@@ -337,6 +387,15 @@
     return out;
   }
   function drawWindow3(q) {
+    SOLID.radius = 0.34; SOLID.cy = 0.52;
+    if (!TRV.thumbMode) {
+      // the solid's outline (the unit sphere through its vertices, the labels above the point inside it) fitted to the band
+      const W = $('cv').clientWidth, H = $('cv').clientHeight, m = Math.min(W, H) || 1, band = H - box.top - box.bottom, R0 = 0.34 * m;
+      if (W < 520 && (0.52 * H - R0 < box.top || 0.52 * H + R0 > H - box.bottom)) {
+        const R = Math.max(24, Math.min(R0, band / 2 - 2, W / 2 - 12));
+        SOLID.radius = R / m; SOLID.cy = (box.top + band / 2) / H;
+      }
+    }
     st.begin();
     const D = st.facing(), k = 1 / TRIA.rout, sc = (p) => v3.scale(p, k), words = !TRV.thumbMode;
     const V = TRIA.verts.map((v) => sc(v.p)), nV = V.length;
@@ -364,13 +423,18 @@
       st.bead(sc(foot), { color: P.magenta, r: 4, key: 'foot' });
     }
     st.bead(sc(q.p), { color: q.inside ? P.amber : P.magenta, r: 6.5, glow: 1, key: 'p' });
-    if (words) st.tag('p', sc(q.p), q.inside ? `d∂ = ${fix(q.d, 3)}` : L('已在窗口之外', 'outside the window'), q.inside ? 'hot raw' : 'mg raw', { dy: -16 });
+    // a solid fitted small into a short band: the two labels stand beside it, the amber one on the left, the magenta on
+    // the right, level with their points, instead of over the solid
+    const ctr = st.p([0, 0, 0]), Rpx = SOLID.radius * Math.min($('cv').clientWidth, $('cv').clientHeight), small = !TRV.thumbMode && Rpx < 45;
+    if (words) st.tag('p', sc(q.p), q.inside ? `d∂ = ${fix(q.d, 3)}` : L('已在窗口之外', 'outside the window'), q.inside ? 'hot raw' : 'mg raw', small ? { dx: ctr[0] - Rpx - 40 - st.p(sc(q.p))[0] } : { dy: -16 });
     if (q.edgePt) {     // for comparison: a point on the same ray near the boundary, with its small ball and its way to the face
       const e = q.edgePt, ne = depth(e.p), ef = v3.add(e.p, v3.scale(ne.f.n, ne.d));
       st.line(circlePts(sc(e.p), D, e.d * k, 40), { color: P.magenta, width: 1.4, alpha: 0.95, close: true });
       st.line([sc(e.p), sc(ef)], { color: P.magenta, width: 1.6 });
       st.bead(sc(e.p), { color: P.magenta, r: 5.5, glow: 0.8, key: 'edgePt' });
-      if (words) st.tag('edge', sc(e.p), `d∂ ≈ ${fix(e.d, 2)}`, 'mg raw', { dy: -30 });
+      // on a narrow stage the two points' labels would meet above them: this one goes under its point
+      const pa = st.p(sc(q.p)), pe = st.p(sc(e.p)), meet = $('cv').clientWidth < 520 && Math.abs(pa[0] - pe[0]) < 80 && Math.abs((pa[1] - 16) - (pe[1] - 30)) < 18;
+      if (words) st.tag('edge', sc(e.p), `d∂ ≈ ${fix(e.d, 2)}`, 'mg raw', small ? { dx: ctr[0] + Rpx + 36 - pe[0] } : { dy: meet ? 16 : -30 });
     }
     st.end();
   }
@@ -379,8 +443,12 @@
   const box = { top: 70, bottom: 44 };
   let view = null;
   // the triacontahedron is a lit solid (kit.solid on #cv); the other four scenes are flat plots on #flat, laid over it
-  const st = kit.solid($('stage'), { canvas: $('cv'), yaw: WIN_CAM.yaw, pitch: WIN_CAM.pitch, zoom: WIN_CAM.zoom, radius: 0.34, cy: 0.52, wheel: false, onChange: () => paint(),
-    onPick: (ev) => { if (S.scene === 'window3') return false; if (S.scene !== 'cassini') { leave(); drag(ev); } return true; }, onDrag: (ev) => { if (S.scene !== 'cassini') drag(ev); } });
+  /* SOLID: the solid's placement (kit.solid reads it every frame). The default circle (radius 0.34, centre at 0.52 of the
+     height) holds wide frames and the stills; on a narrow stage where it would run under the title block or the legend,
+     drawWindow3 fits it to the band between them. */
+  const SOLID = { radius: 0.34, cy: 0.52 };
+  const st = kit.solid($('stage'), Object.assign(SOLID, { canvas: $('cv'), yaw: WIN_CAM.yaw, pitch: WIN_CAM.pitch, zoom: WIN_CAM.zoom, wheel: false, onChange: () => paint(),
+    onPick: (ev) => { if (S.scene === 'window3') return false; if (S.scene !== 'cassini') { leave(); drag(ev); } return true; }, onDrag: (ev) => { if (S.scene !== 'cassini') drag(ev); } }));
   function drag(ev) {
     if (!view) return;
     const y = view.invY(ev.clientY - $('flat').getBoundingClientRect().top);
@@ -390,7 +458,8 @@
   const state = () => (S.scene === 'cut' ? cutState(clock.t) : S.scene === 'cassini' ? cassiniState(clock.t) : S.scene === 'returns' ? returnsState(clock.t) : S.scene === 'gaps' ? gapsState(clock.t) : windowState(clock.t));
   function drawStage(q) {
     const sr = $('stage').getBoundingClientRect(), below = (el) => el.getBoundingClientRect().bottom - sr.top;
-    box.top = TRV.thumbMode ? 26 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10; box.bottom = TRV.thumbMode ? 26 : Math.max(18, $('legend').offsetHeight + 20);
+    const tight = narrowFigure();     // the legend sits 12px above the stage's bottom edge: keep 4px (wide: 8px) clear of it
+    box.top = TRV.thumbMode ? 26 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + (tight ? 6 : 10); box.bottom = TRV.thumbMode ? 26 : Math.max(18, $('legend').offsetHeight + (tight ? 16 : 20));
     $('flat').hidden = S.scene === 'window3';
     if (S.scene === 'window3') return drawWindow3(q);
     st.begin(); st.end();
@@ -471,7 +540,13 @@
         : S.scene === 'gaps' ? (q.kinds.length === 3 ? [['cy', '最短的一种弧', 'the shortest kind of arc'], ['vi', '中间的一种', 'the middle kind'], ['mg', '最长的一种 = 另两种之和', 'the longest kind = the sum of the other two'], ['am', '最新的点', 'the newest point']]
           : [['cy', '短的一种弧', 'the short kind of arc'], ['mg', '长的一种', 'the long kind'], ['am', '最新的点', 'the newest point']])
           : [['cy', '棱与 12 个五重顶点（圆点）', 'the edges, and the 12 fivefold vertices (dots)'], ['dm', '后半个壳；前半切开，露出里面', 'the back half of the shell; the front half is cut away to show the inside'], ['am', '窗口里的点与半径 d∂ 的球', 'the point and the ball of radius d∂'], ['mg', q.edgePt ? '离它最近的面，与贴近这个面的点' : '离它最近的面', q.edgePt ? 'the face nearest to it, and a point close to that face' : 'the face nearest to it']]);
+  /* A cited figure in a narrow column (a phone page): a long note under the figure leaves the stage little height, and the
+     title block and the legend would leave the drawing none. There the line under the title keeps every number of the
+     wide line in fewer words (the quantity already in the title is not repeated), the legend sits closer (style.css),
+     and the drawing takes the band between them, measured each frame. */
+  const narrowFigure = () => TRV.figure && !TRV.thumbMode && $('stage').clientWidth < 520;
   function drawText(q) {
+    const tight = narrowFigure();
     const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
     const keyRO = (lab, val, subText) => { $('roKeyL').textContent = lab; $('roKey').innerHTML = val; $('roKeySub').textContent = subText; };
     let big, hud, what, key, note;
@@ -479,7 +554,8 @@
       const u = q.u, names = q.kinds.map((d) => (Math.abs(d - PHI) < 1e-6 ? 'φ' : Math.abs(d - PHI * PHI) < 1e-6 ? 'φ²' : Math.abs(d - 1) < 1e-6 ? '1' : fix(d, 3))).join(L('、', ', ')), only = q.kinds.every((d) => Math.abs(d - PHI) < 1e-6 || Math.abs(d - PHI * PHI) < 1e-6);
       big = L(`切投 · u = ${sgn(u, 2)}`, `Cut · u = ${sgn(u, 2)}`);
       hud = S.patch ? L(`u 只能取 (${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)})；另有 ${q.forced.length} 个点被定住，${q.free.length} 个未定`, `u is confined to (${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)}); ${q.forced.length} more points fixed, ${q.free.length} undecided`)
-        : L(`窗口平移 u · 视野里选中 ${q.seen.length} 个点 · 相邻间隔：${names} · ${q.edge} 个离边不到 0.08`, `the window is shifted by u · ${q.seen.length} points selected in view · gaps between neighbours: ${names} · ${q.edge} less than 0.08 from an edge`);
+        : tight ? L(`选中 ${q.seen.length} 个点 · 相邻间隔 ${names} · ${q.edge} 个离边不到 0.08`, `${q.seen.length} points in view · gaps ${names} · ${q.edge} within 0.08 of an edge`)
+          : L(`窗口平移 u · 视野里选中 ${q.seen.length} 个点 · 相邻间隔：${names} · ${q.edge} 个离边不到 0.08`, `the window is shifted by u · ${q.seen.length} points selected in view · gaps between neighbours: ${names} · ${q.edge} less than 0.08 from an edge`);
       keyRO(L('相邻两点的间隔', 'gaps between neighbouring points'), `<span class="c-cy">${names}</span>`, only ? L('只有两种', 'two kinds only') : L('闭窗口两端各有一个格点', 'a lattice point on each end of the closed window'));
       set(1, L('窗口 W + u', 'the window W + u'), `[${fix(LO + u, 3)}, ${fix(HI + u, 3)}]`);
       set(2, L('最小间隔', 'smallest gap'), `${fix(q.minGap, 3)} ${q.minGap >= 1 - 1e-9 ? '≥ 1 ✓' : '✗'}`);
@@ -491,7 +567,8 @@
     } else if (S.scene === 'cassini') {
       const k = q.k, a = FIB[k], b = FIB[k + 1], c = FIB[k + 2], sv = q.value > 0 ? '+1' : '−1';
       big = L(`卡西尼 · k = ${k}`, `Cassini · k = ${k}`);
-      hud = L(`φ${sup(k + 1)} = ${a} + ${b}φ 在格点图里是 (${fix(q.x, 3)}, ${fix(q.y, 4)})：矩形面积 = F${sub(k)}·F${sub(k + 2)} − F${sub(k + 1)}² = ${a}·${c} − ${b}² = ${sv}`, `φ${sup(k + 1)} = ${a} + ${b}φ sits at (${fix(q.x, 3)}, ${fix(q.y, 4)}) in the lattice: area of the rectangle = F${sub(k)}·F${sub(k + 2)} − F${sub(k + 1)}² = ${a}·${c} − ${b}² = ${sv}`);
+      hud = tight ? L(`φ${sup(k + 1)} = ${a} + ${b}φ 在 (${fix(q.x, 3)}, ${fix(q.y, 4)})：矩形面积 = F${sub(k)}·F${sub(k + 2)} − F${sub(k + 1)}² = ${a}·${c} − ${b}² = ${sv}`, `φ${sup(k + 1)} = ${a} + ${b}φ at (${fix(q.x, 3)}, ${fix(q.y, 4)}): rectangle area = F${sub(k)}·F${sub(k + 2)} − F${sub(k + 1)}² = ${a}·${c} − ${b}² = ${sv}`)
+        : L(`φ${sup(k + 1)} = ${a} + ${b}φ 在格点图里是 (${fix(q.x, 3)}, ${fix(q.y, 4)})：矩形面积 = F${sub(k)}·F${sub(k + 2)} − F${sub(k + 1)}² = ${a}·${c} − ${b}² = ${sv}`, `φ${sup(k + 1)} = ${a} + ${b}φ sits at (${fix(q.x, 3)}, ${fix(q.y, 4)}) in the lattice: area of the rectangle = F${sub(k)}·F${sub(k + 2)} − F${sub(k + 1)}² = ${a}·${c} − ${b}² = ${sv}`);
       keyRO('Fₖ·Fₖ₊₂ − Fₖ₊₁²', `<span class="${q.value > 0 ? 'c-cy' : 'c-mg'}">${sv}</span>`, `${a}·${c} − ${b}²`);
       set(1, '(Fₖ, Fₖ₊₁, Fₖ₊₂)', `(${a}, ${b}, ${c})`); set(2, L('本身 × 共轭', 'itself × conjugate'), `${fix(q.x, 3)} × ${fix(q.y, 4)} = ${fix(q.x * q.y, 6)}`);
       set(3, L('矩形的长', 'length of the rectangle'), fix(q.x, 3)); set(4, L('斜率 Fₖ/Fₖ₊₁ − φ⁻¹', 'slope Fₖ/Fₖ₊₁ − φ⁻¹'), sgn(slope(k), 6));
@@ -501,6 +578,7 @@
       const none = !q.hits.length, gap = q.longest != null;
       big = L(`回归 · N = ${q.N}`, `Returns · N = ${q.N}`);
       hud = none ? L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：前 ${q.N} 步还没有进入过`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): not entered in the first ${q.N} steps`)
+        : gap && tight ? L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：${q.N} 步进入 ${q.hits.length} 次 · 目前最长间隔 ${q.longest} 步（只是样本）`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): ${q.hits.length} visits in ${q.N} steps · longest gap so far ${q.longest} steps (sample only)`)
         : gap ? L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：前 ${q.N} 步进入 ${q.hits.length} 次 · 两次进入之间目前最长隔 ${q.longest} 步（只是样本）`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): entered ${q.hits.length} times in the first ${q.N} steps · longest gap between two visits so far: ${q.longest} steps (sample only)`)
           : L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：前 ${q.N} 步只进入 1 次 · 还没有完整的间隔，上次进入后已过 ${q.open} 步`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): entered once in the first ${q.N} steps · no completed gap yet, ${q.open} ${q.open === 1 ? 'step' : 'steps'} since that visit`);
       keyRO(L('目前最长的间隔（样本）', 'longest gap so far (sample)'), gap ? `<span class="c-mg">${q.longest}</span>` : '—', gap ? L('步，只描述前 N 步', 'steps, describes the first N steps only') : L('还没有完整的间隔', 'no completed gap yet'));
@@ -522,7 +600,9 @@
     } else {
       const five = TRIA.verts.filter((v) => v.deg === 5).length, three = TRIA.verts.filter((v) => v.deg === 3).length;
       big = L(`接受窗 · s = ${fix(q.s, 2)}`, `Window · s = ${fix(q.s, 2)}`);
-      hud = q.inside ? L(`菱形三十面体里的点离边界 d∂ = ${fix(q.d, 3)}（棱长为 1）：比这更小的扰动推不出窗口`, `a point in the rhombic triacontahedron, d∂ = ${fix(q.d, 3)} from the boundary (edge length 1): no smaller disturbance takes it out of the window`) : L('点已经越过菱形三十面体最近的那个面：它不在窗口里了', 'the point has crossed the nearest face of the rhombic triacontahedron: it is no longer in the window');
+      hud = !q.inside ? L('点已经越过菱形三十面体最近的那个面：它不在窗口里了', 'the point has crossed the nearest face of the rhombic triacontahedron: it is no longer in the window')
+        : tight ? L(`离边界 d∂ = ${fix(q.d, 3)}（棱长 1）：更小的扰动推不出窗口`, `d∂ = ${fix(q.d, 3)} from the boundary (edge 1): no smaller push takes it out`)
+          : L(`菱形三十面体里的点离边界 d∂ = ${fix(q.d, 3)}（棱长为 1）：比这更小的扰动推不出窗口`, `a point in the rhombic triacontahedron, d∂ = ${fix(q.d, 3)} from the boundary (edge length 1): no smaller disturbance takes it out of the window`);
       keyRO(L('到边界的距离 d∂', 'distance to the boundary, d∂'), q.inside ? `<span class="c-am">${fix(q.d, 3)}</span>` : `<span class="c-mg">${L('窗外', 'outside')}</span>`, q.inside ? `= ${fix(q.d / TRIA.rin, 2)} r` : '');
       set(1, L('面 · 棱 · 顶点', 'faces · edges · vertices'), `${TRIA.faces.length} · ${TRIA.edges.length} · ${TRIA.verts.length}`); set(2, L('五重 · 三重顶点', 'fivefold · threefold vertices'), `${five} · ${three}`);
       set(3, L('内切球半径 r', 'inradius r'), fix(TRIA.rin, 4)); set(4, L('至少这么深的部分', 'the part at least this deep'), q.inside ? `${fix(100 * q.share, 1)}%` : '—');

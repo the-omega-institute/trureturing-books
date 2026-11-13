@@ -241,5 +241,26 @@ check('English HUD preserves lowercase Greek σ in S = 2^{σn} (zero uppercase �
   enHud.includes('σ') && !enHud.includes('Σ'), enHud);
 await page.click('[data-lang-set="zh"]');
 
+/* ---------- cited cards in a narrow column (334 × 500, as on a phone page) ---------- */
+// The routing picture and the phase diagram stand side by side, each the full height of the band between the title
+// block and the legend as laid out; stacked, each was left a strip of a few dozen pixels.
+for (const lang of ['zh', 'en']) {
+  const bad = [];
+  for (const [pid, st] of ALL_PRESETS) {
+    const fig = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${pid}`, { viewport: { width: 334, height: 500 }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+    await settle(fig, 200);
+    await fig.evaluate((t) => window.LOOKUP_DEBUG.seek(t), st); await settle(fig, 120);
+    const r = await fig.evaluate(() => {
+      const cv = document.getElementById('cv').getBoundingClientRect(), lg = document.getElementById('legend').getBoundingClientRect();
+      const hud = Math.max(document.querySelector('.hud-tl').getBoundingClientRect().bottom, document.getElementById('sceneChips').getBoundingClientRect().bottom) - cv.top;
+      return { L: window.LOOKUP_DEBUG.state.layout, hud, legend: lg.top - cv.top };
+    });
+    const ps = r.L ? r.L.panels : [];
+    if (!(r.L && r.L.side && ps.length === 2 && ps.every((q) => q.y >= r.hud && q.y + q.h <= r.legend && q.h >= 70) && ps[0].x + ps[0].w <= ps[1].x)) bad.push(`${pid}: ${JSON.stringify(r)}`);
+    await fig.context().close();
+  }
+  check(`cited cards at 334 × 500 (${lang}): routing and phase panels side by side, each at least 70 px high, between the title block and the legend`, bad.length === 0, bad.join(' | '));
+}
+
 check('no page error, console error or failed request', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

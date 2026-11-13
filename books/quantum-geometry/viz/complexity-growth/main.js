@@ -176,7 +176,7 @@
 
   /* MIN_H: a chart's readable height (two 10px label rows and a 4px gap), declared to kit.plot as minHeight. Under the
      entropy lane runs the row of layer ticks (TICKS); between the lanes, a gap no smaller than a tick label (GAP_MIN). */
-  const MIN_H = 24, TICKS = 18, GAP_MIN = 10;
+  const MIN_H = 24, TICKS = 18, GAP_MIN = 10, CV_GAP = 34;
   /** A lab stage grows to the height its charts declare (kit.plot publishes it). A cited figure or a still keeps its
       frame: when the band is shorter than a scene needs, the scene keeps its full need, centred on the band, and the
       HUD text, drawn with a halo, runs over its edges. */
@@ -197,19 +197,25 @@
   function drawGrowth() {
     const lo = layout(), cv = $('cv'), t = S.t, thumb = TRV.thumbMode;
     const inner = lo.H - lo.top - lo.bottom - 24, left = thumb ? 24 : 48, right = thumb ? 24 : 30;
+    /* A narrow plot (a cited figure in a narrow column, a phone) has no room inside the complexity lane for the long
+       red CV label: it gets a row of its own between the two lanes, under the red stretch it names, and the entropy
+       ceiling's label keeps the row above its white line (CV_GAP: both rows). Wide plots keep the label in the lane. */
+    const cvRow = S.cv && !thumb && lo.W - left - right < 420;
     let top = lo.top, bottom = lo.bottom, gap = 34, hTop = Math.max(60, (inner - gap) * 0.58);
     // A fixed frame where the entropy lane would come out shorter than a chart's readable height: the gap gives way
-    // first, then the complexity lane its preferred 60px, and the two lanes keep their readable heights.
+    // first, then the complexity lane its preferred 60px, and the two lanes keep their readable heights. With the CV
+    // row the gap keeps both label rows and the two lanes share what is left (the complexity lane a little more).
     if ((TRV.figure || TRV.still) && lo.H - top - hTop - gap - bottom - TICKS < MIN_H) {
-      gap = GAP_MIN;
+      gap = cvRow ? CV_GAP : GAP_MIN;
       ({ top, bottom } = fitBand(lo.H, top, bottom, 2 * MIN_H + gap + TICKS));
-      hTop = clamp(lo.H - top - bottom - TICKS - gap - MIN_H, MIN_H, 60);
+      const lanes = lo.H - top - bottom - TICKS - gap;
+      hTop = cvRow ? clamp(lanes * 0.58, MIN_H, 60) : clamp(lanes - MIN_H, MIN_H, 60);
     }
     const tTicks = thumb ? [] : [0, 10, 20, 30, 40, 50, 60, 70, 80, 90].map((v) => [v, String(v)]);
-    // the complexity lane
+    // the complexity lane (a short lane drops the 200 tick, which would sit on the 256 one)
     const g = kit.plot(cv, { x: [0, TMAX], y: [0, 340], pad: [left, right, top, lo.H - top - hTop], minHeight: MIN_H });
     G = g;
-    g.axes({ yTicks: thumb ? [] : [[0, '0'], [100, '100'], [200, '200'], [CEIL, '256']], xTicks: [] });
+    g.axes({ yTicks: thumb ? [] : hTop < 70 ? [[0, '0'], [100, '100'], [CEIL, '256']] : [[0, '0'], [100, '100'], [200, '200'], [CEIL, '256']], xTicks: [] });
     const full = (fn) => { const pts = []; for (let i = 0; i <= TMAX * 4; i++) { const x = i / 4; pts.push([x, fn(x)]); } return pts; };
     const upto = (fn) => { const pts = []; const n = Math.ceil(t * 4); for (let i = 0; i <= n; i++) { const x = Math.min(t, i / 4); pts.push([x, fn(x)]); } return pts; };
     const gatesAt = (x) => lerpAt(RUN.gates, x);
@@ -240,12 +246,34 @@
     g2.vline(t, P.amber, { width: 1.4 * TH, alpha: 0.9 });
     g2.dot(t, sAt(t), P.amber, 5 * TH, { glow: 10 });
     if (!thumb) {
-      const R = g.pl + g.iw;
-      tag('gGates', clamp(g.X(t) + 14, g.pl + 60, R - 70), g.Y(gatesAt(t)) - 16, `${L('门数', 'gates')} ${RUN.gates[Math.floor(t)]}`, 'raw ink');
-      tag('gCeil', R - 92, g.Y(CEIL) - 12, L('≈ 2^N 天花板（量级）', '≈ 2^N ceiling (order)'), 'raw ink');
-      tag('gModel', g.pl + 120, g.Y(model(gatesAt(Math.min(TMAX, 46)))) - 4, L('预期复杂度（模型）', 'expected complexity (model)'), 'raw mg');
-      if (S.cv && t > 4) tag('gCV', g.pl + g.iw * 0.42, g.Y(26), L('CV：这段线 ∝ 虫洞体积？OPEN', 'CV: this stretch ∝ wormhole volume? OPEN'), 'raw wn');
-      tag('sCeil', R - 92, g2.Y(HALF) - 11, L('上限 log₂16 = 4 比特', 'ceiling log₂16 = 4 bits'), 'raw ink');
+      const R = g.pl + g.iw, narrow = g.iw < 420;
+      /* the gate count's label sits above its point unless that row is taken by the ceiling's label (late in a narrow
+         lane, where the point nears the dashed line) or lies under the title block (the last layers, the point at the
+         top of the lane): then it goes below, where both lines have not been yet */
+      const ceilText = L('≈ 2^N 天花板（量级）', '≈ 2^N ceiling (order)'), gatesText = `${L('门数', 'gates')} ${RUN.gates[Math.floor(t)]}`;
+      const ceil = { x: R - 92, y: g.Y(CEIL) - 12 }, [c0, c1] = tagSpan(g.ctx, ceil.x, ceilText);
+      const gx = clamp(g.X(t) + 14, g.pl + 60, R - 70), [k0, k1] = tagSpan(g.ctx, gx, gatesText), gUp = g.Y(gatesAt(t)) - 16;
+      const cr = cv.getBoundingClientRect(), underHud = [$('hudBig').parentElement, $('sceneChips')].some((el) => {
+        const r = el.getBoundingClientRect();
+        return r.width > 0 && k0 < r.right - cr.left && r.left - cr.left < k1 && gUp - ROW / 2 < r.bottom - cr.top && r.top - cr.top < gUp + ROW / 2;
+      });
+      const blocked = (narrow && k0 < c1 && c0 < k1 && Math.abs(gUp - ceil.y) < ROW) || underHud;
+      // below: under the point, and once the magenta line runs flat, under that line too
+      const gDown = Math.max(g.Y(gatesAt(t)) + 16, t >= T_CEIL ? g.Y(CEIL) + 13 : -Infinity);
+      const gy = blocked && gDown + ROW / 2 <= g.pt + g.ih ? gDown : blocked && g.Y(gatesAt(t)) + 16 + ROW / 2 <= g.pt + g.ih ? g.Y(gatesAt(t)) + 16 : gUp;
+      tag('gGates', gx, gy, gatesText, 'raw ink');
+      tag('gCeil', ceil.x, ceil.y, ceilText, 'raw ink');
+      // a narrow lane has no free row for this label; the legend's magenta entry reads the same words
+      if (!narrow) tag('gModel', g.pl + 120, g.Y(model(gatesAt(Math.min(TMAX, 46)))) - 4, L('预期复杂度（模型）', 'expected complexity (model)'), 'raw mg');
+      if (S.cv && t > 4) {
+        const cvText = L('CV：这段线 ∝ 虫洞体积？OPEN', 'CV: this stretch ∝ wormhole volume? OPEN');
+        if (cvRow) {
+          const [a0, a1] = tagSpan(g.ctx, 0, cvText), half = (a1 - a0) / 2 - TAG_PAD;
+          const x = clamp((g.X(0) + g.X(Math.min(t, T_CEIL))) / 2, half + 6, lo.W - half - 6);
+          tag('gCV', x, g.pt + g.ih + 3 + ROW / 2, cvText, 'raw wn');
+        } else tag('gCV', g.pl + g.iw * 0.42, g.Y(26), cvText, 'raw wn');
+      }
+      tag('sCeil', R - 92, g2.Y(HALF) - (cvRow ? 9 : 11), L('上限 log₂16 = 4 比特', 'ceiling log₂16 = 4 bits'), 'raw ink');
       tag('sCurve', clamp(g2.X(t) + 12, g2.pl + 60, R - 60), g2.Y(sAt(t)) + 18, `S = ${fix(sAt(t), 2)}`, 'raw cy');
     }
     return {};

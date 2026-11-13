@@ -43,3 +43,11 @@ dl.ro sub, .hud-tl sub, .hud-bl sub, .note sub, .lean sub { font-size: 0.72em; l
 .sw.hollow { background: transparent; border: 1.5px solid var(--cyan); height: 8px; width: 12px; }
 .lean a[target="_top"] { color: var(--ink); }
 dl.ro .vi dd { color: var(--violet); }
+/* a cited figure in a narrow column: the five lens chips keep one row, and the title's second line and the legend set
+   their lines closer, so that the readout panels in the band between them (measured by main.js) keep their room */
+@media (max-width: 520px) {
+  :root[data-embed][data-figure] .hud-tr.lens-bar { gap: 2px; }
+  :root[data-embed][data-figure] .hud-tr.lens-bar .chip { padding: 2px 3px; font-size: 9px; }
+  :root[data-embed][data-figure] .hud-tl .sub, :root[data-embed][data-figure] .hud-bl { line-height: 1.3; }
+  :root[data-embed][data-figure] .hud-bl { row-gap: 1px; }
+}

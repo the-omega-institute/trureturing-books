@@ -324,6 +324,7 @@
   };
 
   let lastCurveHit = null; // { x0, x1, y0, y1 } for clicking prime points on the right-hand curve
+  let lastLayout = null;   // drawStage: the band between the title block and the legend, and whether one panel fills it
   let lastStacked = false;
 
   const rIdx = () => clamp(Math.round(clock.t), 0, R_CLIFF);
@@ -339,6 +340,11 @@
      the panels place their rows, captions and readout lines one under another and wrap long text onto lines of its own,
      instead of squeezing it into one line; wide frames keep their layout. */
   let narrowStage = false;
+  /* focusStage: a stacked stage too short for three panels (drawStage), where one panel fills the band: the tree keeps
+     the height its layers need and its inspector lines give way first (they repeat the title block, the note under the
+     figure and the lab's readouts), and the cliff panel drops its title (the title block reads the same). */
+  let focusStage = false;
+  const TREE_MIN = 92;
   /** Lines of str no wider than maxW in the current font: breaks at spaces, and between Chinese characters. */
   function wrapLines(ctx, str, maxW) {
     const tokens = String(str).match(/[⺀-鿿＀-￯]\s*|[^\s⺀-鿿＀-￯]+\s*|\s+/g) || [];
@@ -413,14 +419,16 @@
     if (narrow) {
       ctx.font = font(9.5, 'data', 600);
       inspector = inspectorTexts(p, H, Pr).map((g) => ({ color: g.color, lines: wrapLines(ctx, g.text, rect.w - 36) }));
-      const cardOf = (gs) => 10 + gs.reduce((n, g) => n + g.lines.length, 0) * 11;
+      const cardOf = (gs) => (gs.length ? 10 + gs.reduce((n, g) => n + g.lines.length, 0) * 11 : 0);
       if (rect.h - topPad - 12 - 6 - cardOf(inspector) < 88) inspector = inspector.slice(0, 2);
+      while (focusStage && inspector.length && rect.h - topPad - 12 - 6 - cardOf(inspector) < TREE_MIN) inspector = inspector.slice(0, -1);
       botCardH = cardOf(inspector);
     }
     const tx = rect.x + 14;
     const tw = Math.max(40, rect.w - 28);
     const ty = rect.y + topPad;
     const th = Math.max(50, rect.h - topPad - botCardH - (narrow ? 12 : 10));
+    if (lastLayout) lastLayout.tree = th;            // the height the layers of the tree are drawn in (the probe reads it)
 
     // Determine visible tree layers
     const K = st.depth;
@@ -436,7 +444,7 @@
     }
 
     // Bottom inspector banner inside Left Panel (Hensel + Ultrametric probe)
-    if (!TRV.thumbMode) {
+    if (!TRV.thumbMode && !(inspector && !inspector.length)) {
       drawInspectorCard(ctx, { x: rect.x + 10, y: rect.y + rect.h - botCardH - 6, w: rect.w - 20, h: botCardH }, lw, p, H, Pr, inspector);
     }
 
@@ -1033,7 +1041,8 @@
 
   /* ---------- Cliff Mode (r = 12): Continuous p_∞ Carry Avalanche vs Euclid Infinite Discrete Primes ---------- */
   function drawCliffVsEuclidPanel(ctx, rect, lw) {
-    const titleBottom = panelFrame(
+    const compact = focusStage && narrowStage && !TRV.thumbMode;
+    const titleBottom = compact ? (panelFrame(ctx, rect, lw, '', '', true), rect.y + 6) : panelFrame(
       ctx,
       rect,
       lw,
@@ -1059,7 +1068,18 @@
     // narrow frames: the four captions wrapped at full size, and every part one under another: caption, register, reset
     // line, caption, divider, caption, the p* labels and the steps, the last caption at the bottom
     let N = null;
-    if (narrowStage && !TRV.thumbMode) {
+    if (compact) {
+      /* one panel in a short band: the carry caption, the register, the reset line with its target (the second caption
+         in short; the whole of it is in the lab and in the note under the figure), the Euclid caption with 30031 = 59×509,
+         and the staircase down to the bottom; the last caption (the walls stay closed at every finite p) is the lab's */
+      const LH = 10.5;
+      ctx.font = font(9.3, 'data', 600);
+      const ls = [CAP[0], L('→ 重置回 p = 2, K = 10', '→ resets to p = 2, K = 10'), CAP[2]].map((c) => wrapLines(ctx, c, w));
+      const t = titleBottom, regY0 = t + ls[0].length * LH + 10, bitH0 = clamp((rect.h - 150) * 0.25 + 14, 14 * lw, 22 * lw), loopY0 = regY0 + bitH0 + 8;
+      const c2Y = loopY0 + 5, mid = c2Y + ls[1].length * LH + 4, c3Y = mid + 5, base = rect.y + rect.h - 6;
+      N = { LH, ls: [ls[0], ls[1], ls[2], []], t, regY: regY0, bitH: bitH0, loopY: loopY0, c2Y, mid, c3Y, c4Y: base, base, maxStairH: Math.max(10, base - (c3Y + ls[2].length * LH + 14)) };
+      midY = mid;
+    } else if (narrowStage && !TRV.thumbMode) {
       const LH = 10.5;
       ctx.font = font(9.3, 'data', 600);
       const ls = CAP.map((c) => wrapLines(ctx, c, w));
@@ -1363,15 +1383,29 @@
     // the small box of a narrow frame: the product and the log sum each on a line of their own under the bars, and one
     // label per bar ("p=2: 1/4") on the zero-line side away from the bar
     const small = narrowStage && !fullMode && !TRV.thumbMode, FL = 11.5;
+    /* the adelic scene's ledger in a narrow frame: under the bars, the product, the log sum and the CRT splitting each
+       start a line of their own and wrap at full size; every bar keeps its |x| at its end and its place at the zero
+       line, and the bars are scaled to leave a label's row above and below them inside the box */
+    const ledger = narrowStage && fullMode && !TRV.thumbMode;
+    let foot = null;
+    if (ledger) {
+      ctx.font = font(9.5, 'data', 600);
+      const room = rect.w - 20;
+      foot = [
+        ...wrapLines(ctx, `${Ad.places.map((u) => u.normStr).join(' × ')} = ${Ad.productStr}`, room).map((t) => [t, P.cyan]),
+        ...wrapLines(ctx, `ln|x|_∞ + ∑ ln|x|_p = ${fix(Ad.logSum, 4)}`, room).map((t) => [t, P.cyan]),
+        ...wrapLines(ctx, L(`中国剩余正交直积: ${Ad.crtIso}`, `CRT orthogonal product: ${Ad.crtIso}`), room).map((t) => [t, P.dim])
+      ];
+    }
     const pl = 14, pr = 14;
-    const pt = TRV.thumbMode ? 18 : small ? Math.max(20, titleBottom - rect.y) + 2 : 28;
-    const pb = TRV.thumbMode ? 16 : small ? 2 * FL + 10 : (fullMode ? 56 : 40);
+    const pt = TRV.thumbMode ? 18 : small || ledger ? Math.max(20, titleBottom - rect.y) + 2 : 28;
+    const pb = TRV.thumbMode ? 16 : small ? 2 * FL + 10 : ledger ? foot.length * 12 + 8 : (fullMode ? 56 : 40);
     const bx0 = rect.x + pl, bw = Math.max(30, rect.w - pl - pr);
     const by0 = rect.y + pt, bh = Math.max(small ? 18 : 28, rect.h - pt - pb);
     const zeroY = by0 + bh * 0.5;
 
     const maxLog = Math.max(1.2, ...Ad.places.map((u) => Math.abs(u.logNorm))) * 1.22;
-    const Y = (v) => zeroY - (v / maxLog) * (bh * 0.46);
+    const Y = ledger ? (v) => zeroY - (v / (maxLog / 1.22)) * Math.max(6, bh / 2 - 13) : (v) => zeroY - (v / maxLog) * (bh * 0.46);
 
     // Zero log-balance axis
     ctx.strokeStyle = TRV.alpha(P.ink, 0.55);
@@ -1408,6 +1442,17 @@
         ctx.textAlign = 'center';
         ctx.textBaseline = plItem.logNorm >= 0 ? 'top' : 'bottom';
         ctx.fillText(`${plItem.place}: ${plItem.normStr}`, x + barW / 2, plItem.logNorm >= 0 ? zeroY + 2 : zeroY - 2);
+      } else if (ledger) {
+        // "|x| = " is dropped where it would run into the next bar's label: the value alone, as in the line below
+        ctx.font = font(9, 'data', 600);
+        const full = `|x| = ${plItem.normStr}`, val = ctx.measureText(full).width <= barW + gap - 4 ? full : plItem.normStr;
+        ctx.fillStyle = isSelectedPrime ? P.amber : col;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = plItem.logNorm >= 0 ? 'bottom' : 'top';
+        ctx.fillText(val, x + barW / 2, plItem.logNorm >= 0 ? top - 2 : top + h + 2);
+        ctx.fillStyle = isSelectedPrime ? P.amber : P.ink;
+        ctx.textBaseline = plItem.logNorm >= 0 ? 'top' : 'bottom';
+        ctx.fillText(plItem.place, x + barW / 2, plItem.logNorm >= 0 ? zeroY + 3 : zeroY - 3);
       } else if (!TRV.thumbMode) {
         ctx.font = font(9, 'data', 600);
         ctx.fillStyle = isSelectedPrime ? P.amber : col;
@@ -1421,7 +1466,13 @@
       }
     });
 
-    if (small) {
+    if (ledger) {
+      ctx.font = font(9.5, 'data', 600);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      const fy = rect.y + rect.h - 4 - foot.length * 12;
+      foot.forEach(([t, c], i) => { ctx.fillStyle = c; ctx.fillText(t, rect.x + rect.w / 2, fy + i * 12); });
+    } else if (small) {
       const fy = rect.y + rect.h - 4 - 2 * FL;
       ctx.font = font(9.5, 'data', 600);
       ctx.fillStyle = P.cyan;
@@ -1456,15 +1507,32 @@
     const lw = TRV.thumbMode ? 1.9 : 1;
     const stacked = W < 620;
     lastStacked = stacked;
-    narrowStage = stacked && !TRV.thumbMode && S.scene !== 'adelic';   // the adelic scene's two halves keep their layout
-    const pt = TRV.thumbMode ? 14 : (stacked ? 102 : 56);
-    const pb = TRV.thumbMode ? 14 : (stacked ? 54 : 42);
+    narrowStage = stacked && !TRV.thumbMode;
+    /* a stacked (narrow) stage draws in the band between the title block (and the scene buttons) and the legend, as
+       they are laid out this frame; a wide stage keeps its margins */
+    let pt = 14, pb = 14;
+    if (!TRV.thumbMode && stacked) {
+      const sr = $('stage').getBoundingClientRect(), cr = cv.getBoundingClientRect(), lg = $('legend').getBoundingClientRect();
+      const hudB = Math.max(...['.hud-tl', '#sceneChips'].map((q) => document.querySelector(q)).filter(Boolean).map((el) => el.getBoundingClientRect().bottom));
+      pt = Math.max(20, hudB - cr.top + 6);
+      pb = Math.max(14, cr.bottom - (lg.height > 0 ? lg.top : sr.bottom - 12) + 4);
+    } else if (!TRV.thumbMode) { pt = 56; pb = 42; }
     const pl = 14, pr = 14;
     const inner = { x: pl, y: pt, w: Math.max(40, W - pl - pr), h: Math.max(40, H - pt - pb) };
+    /* a stacked stage shorter than three readable panels need (a cited card in a narrow column; a phone's lab stage is
+       taller) shows the panel the card is about: the dual scene its tree (or, at p_∞, the cliff and the prime ladder),
+       whose depth K, collisions E₁ and adelic product stay in the title block; the adelic scene its ledger, with the
+       observer's K(p) on the rail. The other panels are a scene button or a wider frame away. */
+    const focus = stacked && !TRV.thumbMode && inner.h < 420;
+    focusStage = focus;
+    lastLayout = { focus, band: [pt, H - pb], main: { scene: S.scene, x: inner.x, y: inner.y, w: inner.w, h: inner.h } };
 
-    if (S.scene === 'tree') {
+    if (S.scene === 'tree' || (S.scene === 'duo' && focus)) {
       lastCurveHit = null;
       drawTreePanel(ctx, inner, lw);
+    } else if (S.scene === 'adelic' && focus) {
+      lastCurveHit = null;          // the ledger this card is about; K(p) of the observer stays on the rail
+      drawAdelicBox(ctx, inner, lw, true);
     } else if (S.scene === 'adelic') {
       const gap = 10;
       const r1 = stacked
@@ -1569,7 +1637,7 @@
         'p_∞ melts clopen walls into 10-bit carry reset · ∏pⱼ+1 keeps discrete expansion infinite'
       );
       $('legend').innerHTML = [
-        `<span><i class="sw cy"></i>${L('离散素数阶梯 p₁<p₂<…', 'discrete prime ladder')}</span>`,
+        `<span><i class="sw cy"></i>${L('离散素数阶梯 p₁&lt;p₂&lt;…', 'discrete prime ladder')}</span>`,
         `<span><i class="sw mg"></i>${L('p_∞ 连续进位雪崩', 'p_∞ carry avalanche')}</span>`,
         `<span><i class="sw vi"></i>${L('失忆轮回重置弧', 'amnesia reset loop')}</span>`,
         `<span><i class="sw am"></i>${L('欧几里得新素数见证 p*', 'Euclid witness p*')}</span>`
@@ -1648,7 +1716,8 @@
       );
   }
 
-  const paint = kit.painter(() => { drawStage(); drawPlots(); drawText(); }, [$('stage'), $('plotA'), $('plotB')]);
+  // the text first: the stage measures the title block and the legend as this frame lays them out
+  const paint = kit.painter(() => { drawText(); drawStage(); drawPlots(); }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- Clock Rail & Interactive Controls ---------- */
   let stopAt = null;
@@ -1845,7 +1914,8 @@
         max: clock.max,
         playing: clock.playing,
         stopAt,
-        stacked: lastStacked
+        stacked: lastStacked,
+        layout: lastLayout && JSON.parse(JSON.stringify(lastLayout))
       };
     },
     curveHitAt: (idx) => {

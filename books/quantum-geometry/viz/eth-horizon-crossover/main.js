@@ -53,11 +53,16 @@
     g.vline(l, P.amber, { alpha: 0.9 }); g.dot(l, rate(S.c, l), P.amber, 6.5, { glow: 12 });
     if (!TRV.thumbMode) {
       const atomsLab = L('宇宙原子数 2²⁶⁶ 以内', 'within the atoms of the universe, 2²⁶⁶'); g.ctx.font = `11.5px ${TRV.fonts.body}`;
-      const atomsFits = g.ctx.measureText(atomsLab).width + 16 <= g.X(ATOMS) - g.X(0);   // on a narrow stage it starts at the axis instead
+      const atomsW = g.ctx.measureText(atomsLab).width, atomsFits = atomsW + 16 <= g.X(ATOMS) - g.X(0);   // on a narrow stage it starts at the axis instead
       g.text(atomsFits ? ATOMS : 0, g.y1, atomsLab, P.ink, { align: atomsFits ? 'right' : 'left', base: 'top', dx: atomsFits ? -8 : 8, dy: 26, face: 'body', size: 11.5, alpha: 0.9 });   // below the axis label
+      const aL = atomsFits ? g.X(ATOMS) - 8 - atomsW : g.X(0) + 8, aR = aL + atomsW, aT = g.Y(g.y1) + 26, aB = aT + 14;
       const ppszLab = `PPSZ ${S.k}-SAT ${fix(PPSZ(), 3)}`;
       g.text(LMAX, PPSZ(), ppszLab, P.magenta, { align: 'right', base: 'bottom', dx: -6, dy: -5, size: 11.5 });
-      g.text(LMAX, 1, L('穷举 2ⁿ：r = 1', 'brute force 2ⁿ: r = 1'), P.dim, { align: 'right', base: 'bottom', dx: -6, dy: -4, face: 'body', size: 11 });
+      // the brute-force line's name sits above its line, or under it where the line about the atoms runs across (a narrow
+      // stage, where that line starts at the axis)
+      const bruteLab = L('穷举 2ⁿ：r = 1', 'brute force 2ⁿ: r = 1'); g.ctx.font = `11px ${TRV.fonts.body}`;
+      const bR = g.X(LMAX) - 6, bL = bR - g.ctx.measureText(bruteLab).width, bUp = g.Y(1) - 4, bClash = bL < aR + 4 && bR > aL - 4 && bUp - 13 < aB + 2 && bUp > aT - 2;
+      g.text(LMAX, 1, bruteLab, P.dim, { align: 'right', base: bClash ? 'top' : 'bottom', dx: -6, dy: bClash ? Math.max(5, aB + 3 - g.Y(1)) : -4, face: 'body', size: 11 });
       // at the foot of the crossover line: the curve stays above r ≈ 0.13 on the drawn range for every c with a crossover
       if (x != null && x <= LMAX) {
         g.ctx.font = `11.5px ${TRV.fonts.body}`;
@@ -71,6 +76,9 @@
       g.ctx.font = `12.5px ${TRV.fonts.data}`; const cW = g.ctx.measureText(curLab).width, cX = g.X(l) + (curRight ? -10 : 10), cL = curRight ? cX - cW : cX, cR = curRight ? cX : cX + cW;
       let curDy = -8;
       if (cL < pR + 4 && cR > pL - 4 && curY + curDy > pT - 3 && curY + curDy - 14 < pB + 3) curDy = pT - 4 - curY;
+      // near the start the dot is high on the curve, where the line about the atoms runs: the value goes under its dot
+      // (or, with no room there, above that line), so the two never share a row
+      if (cL < aR + 4 && cR > aL - 4 && curY + curDy > aT - 3 && curY + curDy - 14 < aB + 3) curDy = curY + 24 + 14 <= g.Y(g.y0) - 4 && !(curY + 24 - 14 < aB + 3) ? 24 : aT - 4 - curY;
       g.text(l, rate(S.c, l), curLab, P.amber, { align: curRight ? 'right' : 'left', base: 'bottom', dx: curRight ? -10 : 10, dy: curDy, size: 12.5, weight: 600, halo: true });
     }
   }
@@ -123,26 +131,31 @@
   function fresh() { const [a, b, c, d] = S.dims, seed = draw(); if (!inst || inst.a !== a || inst.b !== b || inst.c !== c || inst.d !== d || inst.seed !== seed) inst = instance(a, b, c, d, seed); return inst; }
   function drawCut() {
     const g = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g.ctx, W = g.W, H = g.H, I = fresh(), k = cuts(I.a, I.b, I.c, I.d), words = !TRV.thumbMode;
-    const x0 = 18, y0 = box.top, w = W - 36, h = H - box.top - box.bottom, wide = w > 560, dw = wide ? w * 0.44 : w, dh = wide ? h : h * 0.42;
+    const x0 = 18, y0 = box.top, w = W - 36, h = H - box.top - box.bottom, wide = w > 560, short = !wide && shortBridge(), dw = wide ? w * 0.44 : w, dh = wide || short ? h : h * 0.62;
     // no room for the diagram (a frame still loading, hidden or in mid-resize): the canvas stays as kit.plot cleared it and
     // there is no geometry to report; the painter's ResizeObserver draws the diagram again once the stage has its room back
     if (!(w > 0 && h > 0)) { cutGeo = null; return; }
-    // the diagram: two nodes, the bond of three bridges, four outer legs (a and b on M, d and c on N); the four cuts as dashed lines
-    const mx = x0 + dw * 0.3, nx = x0 + dw * 0.7, cy = y0 + dh * 0.5, r = Math.min(38, dh * 0.13, dw * 0.085), mid = (mx + nx) / 2;
+    /* the diagram: two nodes, the bond of three bridges, four outer legs (a and b on M, d and c on N); the four cuts as dashed
+       lines. A narrow stage stacks the diagram over the flow matrix and its singular values (side by side), gives the
+       diagram most of the height and sets its labels a fixed distance off the legs and cuts, so that they stay apart
+       however small the tensors come out: the labels then reach 2.9r + 17 px above and below the centre */
+    const mx = x0 + dw * 0.3, nx = x0 + dw * 0.7, cy = y0 + dh * 0.5, mid = (mx + nx) / 2;
+    const r = wide ? Math.min(38, dh * 0.13, dw * 0.085) : Math.max(4, Math.min(30, (dh - 34) / 5.8, dw * 0.085));
+    const legY = (s) => cy + s * (wide ? r * 2.8 : r * 2.4 + 10), cutY = (s) => cy + s * (wide ? r * 3.5 : r * 2.9 + 10);
     const leg = (xa, ya, xb, yb, col, wd) => { ctx.strokeStyle = col; ctx.lineWidth = wd; ctx.beginPath(); ctx.moveTo(xa, ya); ctx.lineTo(xb, yb); ctx.stroke(); };
     const LEGS = { a: [[mx - r * 0.7, cy - r * 0.7], [mx - r * 2.2, cy - r * 2.4]], b: [[mx - r * 0.7, cy + r * 0.7], [mx - r * 2.2, cy + r * 2.4]], d: [[nx + r * 0.7, cy - r * 0.7], [nx + r * 2.2, cy - r * 2.4]], c: [[nx + r * 0.7, cy + r * 0.7], [nx + r * 2.2, cy + r * 2.4]] };
     const BRIDGES = [-r * 0.55, 0, r * 0.55].map((dy) => [[mx + r, cy + dy], [nx - r, cy + dy]]);
     for (const [[xa, ya], [xb, yb]] of BRIDGES.concat(Object.values(LEGS))) leg(xa, ya, xb, yb, P.ink, 1.6);
     for (const [x, lab] of [[mx, 'M'], [nx, 'N']]) { ctx.fillStyle = P.stage; ctx.strokeStyle = P.cyan; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, cy, r, 0, kit.TAU); ctx.fill(); ctx.stroke(); text(ctx, lab, x, cy + 1, P.ink, { align: 'center', size: 14, weight: 600 }); }
-    text(ctx, `a = ${I.a}`, mx - r * 2.3, cy - r * 2.8, P.ink, { align: 'center', size: 12 }); text(ctx, `b = ${I.b}`, mx - r * 2.3, cy + r * 2.8, P.ink, { align: 'center', size: 12 });
-    text(ctx, `d = ${I.d}`, nx + r * 2.3, cy - r * 2.8, P.ink, { align: 'center', size: 12 }); text(ctx, `c = ${I.c}`, nx + r * 2.3, cy + r * 2.8, P.ink, { align: 'center', size: 12 });
+    text(ctx, `a = ${I.a}`, mx - r * 2.3, legY(-1), P.ink, { align: 'center', size: 12 }); text(ctx, `b = ${I.b}`, mx - r * 2.3, legY(1), P.ink, { align: 'center', size: 12 });
+    text(ctx, `d = ${I.d}`, nx + r * 2.3, legY(-1), P.ink, { align: 'center', size: 12 }); text(ctx, `c = ${I.c}`, nx + r * 2.3, legY(1), P.ink, { align: 'center', size: 12 });
     // every cut runs from the left (between legs a and b) to the right (between legs d and c), leaving the ends of a and d
     // above it and the ends of b and c below; the two through the bridges pass over one tensor and under the other
     const flip = ([x, y]) => [x, 2 * cy - y], over = [mx + r * 0.2, cy - r * 1.85];
     const upper = [[mx - r * 2.7, cy - r * 1.9], [mid, cy - r * 2.9], [nx + r * 2.7, cy - r * 1.9]], ac = [[mx - r * 2.6, cy - r * 0.9], over, [nx - r * 0.2, cy + r * 1.85], [nx + r * 2.6, cy + r * 0.9]];
     const SEP = [
-      { id: 'ad', value: k.rows, pts: upper, label: `a·d = ${k.rows}`, at: [mid, cy - r * 3.5], align: 'center' },
-      { id: 'bc', value: k.cols, pts: upper.map(flip), label: `b·c = ${k.cols}`, at: [mid, cy + r * 3.5], align: 'center' },
+      { id: 'ad', value: k.rows, pts: upper, label: `a·d = ${k.rows}`, at: [mid, cutY(-1)], align: 'center' },
+      { id: 'bc', value: k.cols, pts: upper.map(flip), label: `b·c = ${k.cols}`, at: [mid, cutY(1)], align: 'center' },
       { id: 'ac', value: k.bridges, pts: ac, label: `3·a·c = ${k.bridges}`, at: [over[0] + 12, over[1] - 4], align: 'left' },
       { id: 'bd', value: k.bridgesBD, pts: ac.map(flip), label: `3·b·d = ${k.bridgesBD}`, at: flip([over[0] + 12, over[1] - 4]), align: 'left' }
     ].map((q) => ({ ...q, hot: q.value === k.full }));
@@ -152,26 +165,47 @@
       text(ctx, q.label, q.at[0], q.at[1], q.hot ? P.magenta : P.dim, { align: q.align, size: 12, weight: q.hot ? 600 : 0, halo: true });
     }
     cutGeo = { r, M: [mx, cy], N: [nx, cy], legs: LEGS, bridges: BRIDGES, cuts: SEP.map((q) => ({ id: q.id, value: q.value, hot: q.hot, label: q.label, pts: q.pts.map((p) => p.slice()) })) };
+    if (short) return;
     // the flow matrix and its singular values
-    const gx = wide ? x0 + dw + 14 : x0, gy = wide ? y0 + 16 : y0 + dh + 14, gw = wide ? w - dw - 14 : w, gh = (wide ? h : h - dh) - 16 - 54;
-    const rows = I.F.length, cols = I.F[0].length, cell = Math.max(3, Math.min(gw / cols, gh / rows, 46)), ox = gx + (gw - cell * cols) / 2, oy = gy + Math.max(0, (gh - cell * rows) / 2);
+    const rows = I.F.length, cols = I.F[0].length, n = I.sv.length, smax = I.sv[0] || 1, sz = 11;
+    const flowLab = L(`flow：${rows} 行 × ${cols} 列`, `flow: ${rows} rows × ${cols} columns`), svLab = L(`奇异值：前 ${I.rank} 个非零`, `singular values: the first ${I.rank} are nonzero`);
     let top = 1; for (const row of I.F) for (const v of row) top = Math.max(top, Math.abs(v));
-    for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) { const v = I.F[i][j]; ctx.fillStyle = v ? TRV.alpha(v > 0 ? P.cyan : P.ink, (v > 0 ? 0.2 : 0.15) + (v > 0 ? 0.8 : 0.6) * Math.abs(v) / top) : TRV.alpha(P.lineHot, 0.25); ctx.fillRect(ox + j * cell, oy + i * cell, cell - Math.max(1, cell * 0.08), cell - Math.max(1, cell * 0.08)); }
-    if (words) text(ctx, L(`flow：${rows} 行 × ${cols} 列`, `flow: ${rows} rows × ${cols} columns`), ox, oy - 9, P.dim, { size: 11, face: 'body' });
-    const n = I.sv.length, by = oy + cell * rows + 46, bw = Math.min(26, (cell * cols) / n), smax = I.sv[0] || 1;
-    for (let i = 0; i < n; i++) { const hh = 34 * I.sv[i] / smax, on = i < I.rank; ctx.fillStyle = on ? P.cyan : P.faint; ctx.fillRect(ox + i * bw, by - Math.max(hh, 1.5), Math.max(2, bw - 3), Math.max(hh, 1.5)); }
-    ctx.strokeStyle = P.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(ox + I.rank * bw - 1.5, by - 40); ctx.lineTo(ox + I.rank * bw - 1.5, by + 3); ctx.stroke();
+    const cellsAt = (ox, oy, cell) => { for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) { const v = I.F[i][j]; ctx.fillStyle = v ? TRV.alpha(v > 0 ? P.cyan : P.ink, (v > 0 ? 0.2 : 0.15) + (v > 0 ? 0.8 : 0.6) * Math.abs(v) / top) : TRV.alpha(P.lineHot, 0.25); ctx.fillRect(ox + j * cell, oy + i * cell, cell - Math.max(1, cell * 0.08), cell - Math.max(1, cell * 0.08)); } };
+    const barsAt = (ox, by, bw, bh) => {
+      for (let i = 0; i < n; i++) { const hh = bh * I.sv[i] / smax, on = i < I.rank; ctx.fillStyle = on ? P.cyan : P.faint; ctx.fillRect(ox + i * bw, by - Math.max(hh, 1.5), Math.max(2, bw - 3), Math.max(hh, 1.5)); }
+      ctx.strokeStyle = P.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(ox + I.rank * bw - 1.5, by - bh - 6); ctx.lineTo(ox + I.rank * bw - 1.5, by + 3); ctx.stroke();
+    };
+    /** str broken at its spaces into lines no wider than room (one word per line at least) */
+    const wrap = (str, room) => { ctx.font = `${sz}px ${TRV.fonts.body}`; const lines = []; for (const word of str.split(' ')) { const cand = lines.length ? `${lines[lines.length - 1]} ${word}` : word; if (lines.length && ctx.measureText(cand).width <= room) lines[lines.length - 1] = cand; else lines.push(word); } return lines; };
+    if (!wide) {
+      /* narrow: under the diagram the matrix (its label above it) and, to the right of that label, the singular values
+         (their label above them, wrapped to the room left at the right) */
+      const gy = y0 + dh + 6, gh = h - dh - 6, lh = 12;
+      ctx.font = `${sz}px ${TRV.fonts.body}`; const flowW = words ? ctx.measureText(flowLab).width : 0;
+      const room = Math.max(60, x0 + w - (x0 + flowW + 14)), svLines = words ? wrap(svLab, room) : [], labH = words ? Math.max(1, svLines.length) * lh + 4 : 0;
+      const cell = Math.max(2, Math.min((gh - (words ? lh + 4 : 0)) / rows, (w * 0.4) / cols, 46)), ox = x0, oy = gy + (words ? lh + 4 : 0);
+      cellsAt(ox, oy, cell);
+      const bx = Math.max(ox + cell * cols + 16, x0 + flowW + 14), bw = Math.max(3, Math.min(26, (x0 + w - bx) / n)), bh = Math.max(8, Math.min(34, gh - labH - 6)), by = gy + labH + bh + 4;
+      barsAt(bx, by, bw, bh);
+      if (words) { text(ctx, flowLab, ox, gy + lh / 2, P.dim, { size: sz, face: 'body' }); svLines.forEach((str, i) => text(ctx, str, bx, gy + lh / 2 + i * lh, P.dim, { size: sz, face: 'body' })); }
+      return;
+    }
+    const gx = x0 + dw + 14, gy = y0 + 16, gw = w - dw - 14, gh = h - 16 - 54;
+    const cell = Math.max(3, Math.min(gw / cols, gh / rows, 46)), ox = gx + (gw - cell * cols) / 2, oy = gy + Math.max(0, (gh - cell * rows) / 2);
+    cellsAt(ox, oy, cell);
+    if (words) text(ctx, flowLab, ox, oy - 9, P.dim, { size: sz, face: 'body' });
+    const by = oy + cell * rows + 46, bw = Math.min(26, (cell * cols) / n);
+    barsAt(ox, by, bw, 34);
     if (words) {
-      // to the right of the bars when it fits there (wide stages); otherwise on the wider free side of the bars, wrapped
-      // at its spaces into as many lines as that side needs, beside the bars and inside the stage
-      const svLab = L(`奇异值：前 ${I.rank} 个非零`, `singular values: the first ${I.rank} are nonzero`), sz = 11, right = ox + n * bw + 8, left = ox - 8, edge = x0 + w;
+      // to the right of the bars when it fits there; otherwise on the wider free side of the bars, wrapped at its spaces
+      // into as many lines as that side needs, beside the bars and inside the stage
+      const right = ox + n * bw + 8, left = ox - 8, edge = x0 + w;
       ctx.font = `${sz}px ${TRV.fonts.body}`;
       if (right + ctx.measureText(svLab).width <= edge) text(ctx, svLab, right, by - 14, P.dim, { size: sz, face: 'body' });
       else {
-        const onRight = edge - right >= left - x0, room = Math.max(40, onRight ? edge - right : left - x0), lines = [];
-        for (const word of svLab.split(' ')) { const cand = lines.length ? `${lines[lines.length - 1]} ${word}` : word; if (lines.length && ctx.measureText(cand).width <= room) lines[lines.length - 1] = cand; else lines.push(word); }
+        const onRight = edge - right >= left - x0, lines = wrap(svLab, Math.max(40, onRight ? edge - right : left - x0));
         const lh = 12, y1 = by - 14 - (lines.length - 1) * lh / 2;
-        lines.forEach((s, i) => text(ctx, s, onRight ? right : left, y1 + i * lh, P.dim, { size: sz, face: 'body', align: onRight ? 'left' : 'right' }));
+        lines.forEach((str, i) => text(ctx, str, onRight ? right : left, y1 + i * lh, P.dim, { size: sz, face: 'body', align: onRight ? 'left' : 'right' }));
       }
     }
   }
@@ -216,9 +250,15 @@
 
   /* ---------- the stage ---------- */
   const box = { top: 70, bottom: 44 };
+  const hudBottom = () => { const sr = $('stage').getBoundingClientRect(), below = (el) => el.getBoundingClientRect().bottom - sr.top; return Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))); };
+  /* A cited figure in a narrow column with a long note under it (the English bridge card on a phone page) leaves the
+     bridge scene less than 190px under the title: too little for the diagram and the flow matrix both. There the
+     diagram takes the whole band at a readable size, the legend keeps only its entry for the cuts, and the rank stays
+     in the line under the title; the matrix and its singular values are in every taller or wider frame and in the lab. */
+  const shortBridge = () => TRV.figure && !TRV.thumbMode && $('cv').clientWidth - 36 <= 560 && $('stage').clientHeight - hudBottom() < 190;
   function drawStage() {
-    const sr = $('stage').getBoundingClientRect(), below = (el) => el.getBoundingClientRect().bottom - sr.top;
-    box.top = TRV.thumbMode ? 30 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10; box.bottom = TRV.thumbMode ? 30 : Math.max(18, $('legend').offsetHeight + 20);
+    const tight = TRV.figure && $('cv').clientWidth < 520;    // a narrow cited figure: 6px under the title, 4px over the legend
+    box.top = TRV.thumbMode ? 30 : hudBottom() + (tight ? 6 : 10); box.bottom = TRV.thumbMode ? 30 : Math.max(18, $('legend').offsetHeight + (tight ? 16 : 20));
     if (S.scene === 'rates') drawRates(scaleL()); else if (S.scene === 'cut') drawCut(); else drawModes();
   }
   function drawPlots() {
@@ -310,7 +350,8 @@
     }
     $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note; $('roAside').textContent = L(SC[S.scene].name[0], SC[S.scene].name[1]);
     $('pillScene').querySelector('strong').textContent = SC[S.scene].name[1]; $('pillWhat').querySelector('strong').textContent = what; $('pillKey').querySelector('strong').textContent = key;
-    const leg = LEGEND[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    // a bridge too short for the flow matrix (see shortBridge) keeps only the legend entry of what it draws: the cuts
+    const leg = LEGEND[S.scene].slice(0, S.scene === 'cut' && shortBridge() ? 1 : undefined).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
   }
   const paint = kit.painter(() => { drawText(); drawStage(); drawPlots(); }, [$('stage'), $('plotA'), $('plotB')]);
