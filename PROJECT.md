@@ -92,3 +92,7 @@
    - **交互可视化与讲解视频（`claude` CLI · Opus 5.5）**：直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**禁止使用 Claude Subagent**），严格按照 `books/example-monograph/` 示例框架完成全部交互可视化（`books/quantum-geometry/viz/<id>/`）与讲解视频（`books/quantum-geometry/films/<NNN>-<name>/`）的实现与测试。
    - **三席异构独立审查（`/sshx` `review_triplet_workers`）**：每批次由 `architecture`、`quality`、`tests` 三席独立审查；第一轮（Round 1）采用 `1 nyxid-oracle + 1 codex-cli + 1 isolated-token-subagent`，第二轮及后续复审（Round 2+）禁用响应较慢的 `nyxid-oracle`，采用 `2 codex-cli + 1 isolated-token-subagent` 高速完成修复验证闭环。
 2. **五路 Git Worktree 流水线**：最多并行开启 5 个 `git worktree`（主仓库 `wt1` 及 `wt3`–`wt6`），使当前批次的审查/修复与后续批次的辅助规格、正文写作和可视化/视频制作并行推进、互不阻塞。
+
+## 8. 持续模型研究
+
+使用 [skills/local-assumption-research/SKILL.md](skills/local-assumption-research/SKILL.md) 接续模型假设研究。skill 提供可泛化的研究方法，不内置具体假设清单、编号或登记系统；实质研究证据按需留在项目材料中。研究同时推进可证明的数学结构、有效近似误差与可检验物理后果；基本假说和哲学诠释保留其身份，不因相邻数学定理已验证而自动升级。跨仓库成果先在 `trureturing` 合入并冻结，再钉版回写本书，两个仓库的数学状态与发布状态分别说明。
