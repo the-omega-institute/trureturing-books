@@ -1,4 +1,4 @@
-# 量子纠缠与贝尔 45° 破缺：余弦圆弧如何击败经典折线？
+# 第十三章 量子纠缠与贝尔 45° 破缺：余弦圆弧如何击败经典折线？ {#量子纠缠与贝尔-45-破缺余弦圆弧如何击败经典折线}
 
 > *“其实点 C并不是一个已知量,而是一个相融点的投影,因为实际上一条确定的量子态只能确定一条线,一组量子态才能对应一个面积.”*
 
@@ -12,7 +12,7 @@
 **图 13。** 本章地图：面板 I，双比特泡利账本的 4 × 4 格子里，青色的局域线 $3 + 3$ 格、品红的关联面 $9$ 格；面板 II，贝尔态的两颗球里，琥珀色的点都在球心（$\vv{r} = \vv{s} = \vv{0}$），品红的关联连在两球之间；面板 III，青色的余弦弧与暗色的玩具折线在 $0^\circ$、$90^\circ$、$180^\circ$ 相交，在 $45^\circ$ 处弧高出一段品红。
 :::
 
-## 局域线与关联面：6 + 9 = 15 {#sec-pauli-local-correlation}
+## 13.1 局域线与关联面：6 + 9 = 15 {#sec-pauli-local-correlation}
 
 为什么仅靠“Alice 球面上的箭头 $\vv{r} \in \mathbb{R}^3$”加上“Bob 球面上的箭头 $\vv{s} \in \mathbb{R}^3$”，永远拼不出两体量子态的真实版图？让我们先做一笔严格的实维数与正交子空间审计。
 
@@ -123,7 +123,7 @@ $$
 **边缘一样，关联格不一样。** 每格是 $\Tr\bigl(\rho(\sigma_p \otimes \sigma_q)\bigr)$，由两个 $4\times 4$ 密度矩阵算出。左边的经典关联态与右边的贝尔态 $\lvert\Phi^+\rangle$，第一行与第一列的六格青色局域格全都空着，两边的边缘态都是 $\frac{1}{2}I_2$；品红的关联格里，经典关联态只占 $(Z, Z)$ 一格，贝尔态占 $(X, X)$、$(Y, Y)$、$(Z, Z)$ 三格，取 $+1$、$-1$、$+1$（[@thm-local-correlation-sectors] 结论 7、8）。
 :::
 
-## 贝尔态：球心边缘态与共享关联 {#sec-bell-local-zero}
+## 13.2 贝尔态：球心边缘态与共享关联 {#sec-bell-local-zero}
 
 现在，让我们把放大镜对准 [@thm-local-correlation-sectors] 中登场的贝尔纯态 $\mathrm{bellVector} = \lvert\Phi^+\rangle = \frac{1}{\sqrt{2}}(\lvert 00\rangle + \lvert 11\rangle)$ 及其密度矩阵 $\mathrm{bellDensity} = \lvert\Phi^+\rangle\langle\Phi^+\rvert$。
 
@@ -178,7 +178,7 @@ $$
    单态 $\lvert\Psi^-\rangle$ 在任意相同测量轴 $\vv{n}$ 下呈现全向反相关 $\langle(\vv{n}\cdot\vv{\sigma})\otimes(\vv{n}\cdot\vv{\sigma})\rangle_{\Psi^-} = -1$；而 $\lvert\Phi^+\rangle$ 在 $(Z, X)$ 实平面（$n_y = 0$）内任意相同方向 $\vv{n} = (\sin\alpha, 0, \cos\alpha)$ 下呈现正相关 $\langle(\vv{n}\cdot\vv{\sigma})\otimes(\vv{n}\cdot\vv{\sigma})\rangle_{\Phi^+} = \sin^2\alpha + \cos^2\alpha = +1$，唯独在 $Y$ 轴上反号为 $-1$。两者之间通过 Bob 端的局域泡利变换 $-i\sigma_Y = \sigma_X \sigma_Z$（或 Alice 端的 $i\sigma_Y = \sigma_Z \sigma_X$）精确互译，绝不能把 $\lvert\Phi^+\rangle$ 与 $\lvert\Psi^-\rangle$ 的 $\sigma_Y \otimes \sigma_Y$ 符号混为一谈。
 2. **仅凭“局域边缘态为 $\frac{1}{2}I_2$（局域零向量）”不能反推任意双体态最大纠缠**：唯有在已知**全局态是纯态**（$\operatorname{rank}\rho = 1$，$\Tr(\rho^2) = 1$）的前提下，局部边缘态等于 $\frac{1}{2}I_2$ 才充要地标志着双比特最大纠缠。对于一般混合态，如 [@thm-local-correlation-sectors] 中的经典关联态 $\mathrm{classicalCorrelatedDensity} = \frac{1}{4}(I_4 + \sigma_Z \otimes \sigma_Z)$（$T = \operatorname{diag}(0, 0, 1)$）乃至完全无关联的最大混合态 $\frac{1}{4}I_4$（$T = 0$），它们的局部边缘态同样等于 $\frac{1}{2}I_2$，却丝毫不具量子纠缠。
 
-## CHSH 平方：正交面积的换位子项 {#sec-chsh-commutator-area}
+## 13.3 CHSH 平方：正交面积的换位子项 {#sec-chsh-commutator-area}
 
 既然经典对角混合态 $\mathrm{classicalCorrelatedDensity}$ 也能把局部边缘态缩成 $\frac{1}{2}I_2$ 并在关联扇区里占有一格 $\sigma_Z \otimes \sigma_Z$，我们究竟怎样用 CHSH 实验，比对这个经典态的一维关联线与贝尔态 $\lvert\Phi^+\rangle$ 的多方向相干关联面？
 
@@ -374,7 +374,7 @@ $$
 ::: {.figure src="ch13-unit-circle-bound"}
 **块界在单位圆的直角处顶到天花板。** 左边是单位圆，琥珀色的点是 $z = e^{i\alpha}$（图中 $\alpha = 60^\circ$），两条青色的弦从它连到 $+1$ 与 $-1$，在 $z$ 处成直角，长度分别是 $\lvert 1 - z\rvert = 2\sin(\alpha/2)$ 与 $\lvert 1 + z\rvert = 2\cos(\alpha/2)$；圆顶的空心点是 $z = i$，两弦在那里等长。右边青色的曲线是两弦长之和 $2\sqrt{1 + \sin\alpha}$：两端是 $2$，琥珀色的点在 $60^\circ$ 处是 $2.732$，只在 $\alpha = 90^\circ$ 碰到绿色虚线 $2\sqrt{2}$。绿色虚线是 [@thm-unitary-bell-bound] 取 $d = 2$ 的上界（代入是手工推导）；曲线是正文的手算。
 :::
-## 45° 余弦与固定 CHSH 极值 {#sec-bell-45-tsirelson}
+## 13.4 45° 余弦与固定 CHSH 极值 {#sec-bell-45-tsirelson}
 
 为了在本章的贝尔态 $\lvert\Phi^+\rangle$ 上，让 $(Z, X)$ 实平面内的测量真正触及正峰值 $\sqrt{8} = 2\sqrt{2}$，固定 Alice 为 $Z, X$ 后，Bob 的正交十字架应该怎样摆放？
 

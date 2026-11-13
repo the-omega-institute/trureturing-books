@@ -1,4 +1,4 @@
-# Dirac Spinors and Gauge Fields: Why Fermions Detour Through the Sphere and Why Force Is Area Curvature
+# Chapter 18 Dirac Spinors and Gauge Fields: Why Fermions Detour Through the Sphere and Why Force Is Area Curvature {#dirac-spinors-and-gauge-fields-why-fermions-detour-through-the-sphere-and-why-force-is-area-curvature}
 
 > *"Then area and line, wave and particle, are all aspects of a field."*
 
@@ -13,7 +13,7 @@ The opening epigraph points to the common geometric thread linking both question
 **Figure 18.** A map of the chapter. Panel I: the two components of the two-component chiral model $H = pZ + mX$, the blue upper component $Z = +1$ and the orange, striped lower component $Z = -1$, each carry only their diagonal term $\pm p$, and the mass $m$ is the only link between them. Panel II: on a $3 \times 3$ lattice the cyan spanning tree is the three rows and the left column, the other $4 = m + 1 - n$ vertical edges are chords, and the magenta chord closes, through the tree, the magenta fundamental loop. Panel III: the single square of the worked example under the violet gauge $g = (1, i, -1, -i)$; the phase pointers at the edge midpoints read $(i, i, i, -1)$, and the magenta loop phase at the centre is still $i$ ([@cor-anchored-phase-classification]).
 :::
 
-## Chiral decomposition and explicit anticommutation {#sec-chiral-factorization}
+## 18.1 Chiral decomposition and explicit anticommutation {#sec-chiral-factorization}
 
 Begin with the algebraic puzzle Paul Dirac faced in 1928. A relativistic particle of rest mass $m$ and momentum $p$ obeys the quadratic dispersion relation $E^2 = p^2 + m^2$. Quantum time evolution, however, is first-order in time: to build a linear first-order Hamiltonian $H = p\alpha + m\beta$ free of the square root $\sqrt{p^2 + m^2}$, the square of the linear operator $p\alpha + m\beta$ must reproduce the sum of squares $p^2 + m^2$ identically:
 
@@ -97,7 +97,7 @@ In the physics literature, three distinct quantities must be kept carefully sepa
 See R. P. Feynman & A. R. Hibbs, *Quantum Mechanics and Path Integrals* (McGraw–Hill, 1965); and D. Hestenes, *Space-Time Algebra* (Gordon and Breach, 1966).
 :::
 
-## Plaquette transport and commutators {#sec-curvature-plaquette}
+## 18.2 Plaquette transport and commutators {#sec-curvature-plaquette}
 
 Now take the next geometric step: when a quantum state carrying an internal phase moves from one site to a neighboring site, how do we compare phases across the step?
 
@@ -140,7 +140,7 @@ $$
 For a non-abelian gauge group, closed-loop holonomy transforms by basepoint conjugation $U_\square \mapsto g_0 U_\square g_0^{-1}$, so only its **conjugacy class** or Wilson loop trace $\Tr U_\square$ is gauge-invariant. The continuum small-plaquette expansion above belongs to differential-geometric approximation theory, whereas the frozen Lean theorems in the next two sections ([@thm-tree-phase-transport] and [@cor-anchored-phase-classification]) apply strictly to exact discrete abelian unit-circle phases $\operatorname{Circle} = U(1)$ on named graphs without any continuum limit, and must not be promoted into continuum non-abelian Yang–Mills theorems. See Y. Aharonov & D. Bohm, *Phys. Rev.* **115**, 485 (1959), DOI: `10.1103/PhysRev.115.485`; and K. G. Wilson, *Phys. Rev. D* **10**, 2445 (1974), DOI: `10.1103/PhysRevD.10.2445`.
 :::
 
-## Phase transport on a selected spanning tree {#sec-tree-gauge-transport}
+## 18.3 Phase transport on a selected spanning tree {#sec-tree-gauge-transport}
 
 Let us now analyze abelian $U(1)$ gauge fields on an arbitrary graph completely, without a single continuum approximation.
 
@@ -196,7 +196,7 @@ $$
 In $\operatorname{treeSupport}(s, t, T)$, the unique simple path from $r$ to $r$ is the empty walk `.nil`, giving transport product $1$ (property 1). For any tree edge $e \in T$, appending $e$ to the tree path from $r$ to $s(e)$ shares the same reduced tree path as $\operatorname{rootPath}(ht, r, t(e))$, cancelling backtracking steps to yield $\operatorname{rootPhase}(t(e)) = u(e)\operatorname{rootPhase}(s(e))$ (property 2). Inducting along any walk shows that intermediate gauge factors $g(v)^{-1}g(v) = 1$ telescope at every internal vertex, leaving only the endpoint factors $g(a)$ and $g(r)^{-1}$ (property 3). Because each fixed tree path has finite length and $\operatorname{Circle}$ is a compact abelian topological group, continuity, multiplicativity, and preservation of the identity field $1$ (properties 4–6) follow by induction along the walk. The full proof is checked by the Lean kernel.
 :::
 
-## Loop phases and anchored gauge equivalence {#sec-gauge-loop-coordinates}
+## 18.4 Loop phases and anchored gauge equivalence {#sec-gauge-loop-coordinates}
 
 Look closely at property 3 of [@thm-tree-phase-transport]: under a gauge transformation $g$, the tree transport phase to vertex $a$ transforms as $g(a)\cdot\operatorname{rootPhase}(u, a)\cdot g(r)^{-1}$. Two immediate invariants jump out:
 

@@ -1,4 +1,4 @@
-# The Exponential Time Hypothesis (ETH), 2026 Tensor-Network Rank Reduction, and the Cosmic Horizon: Scale and Interpretation of Upper-Bound Curves {#sec-coda-eth-tensor-rank-and-cosmic-horizon}
+# 30.3 The Exponential Time Hypothesis (ETH), 2026 Tensor-Network Rank Reduction, and the Cosmic Horizon: Scale and Interpretation of Upper-Bound Curves {#sec-coda-eth-tensor-rank-and-cosmic-horizon}
 
 > *"Viewed inside our geometric architecture of 'fields ($P$) and lines ($NP$), polyhedral approximations to the sphere, and the finite observer's horizon,' placing the Exponential Time Hypothesis (ETH) alongside the late-October 2026 tensor-network rank-reduction preprints does not overturn finite-observer $P \neq NP$, but instead supplies a cosmological-scale asymptotic illustration of two core geometric principles: local three-body constraints cannot weld an absolutely rigid true sphere, and the observer's horizon remains uncrossable."*
 
@@ -25,7 +25,7 @@ To keep external complexity-theoretic literature strictly separated from our ort
 
 :::
 
-## 1. Lifting from a 1D Assignment Line to a Tensor Correlation Field and Polyhedral Sphere Seams (`MODEL`)
+## 30.3.1 Lifting from a 1D Assignment Line to a Tensor Correlation Field and Polyhedral Sphere Seams (`MODEL`) {#1-lifting-from-a-1d-assignment-line-to-a-tensor-correlation-field-and-polyhedral-sphere-seams-model}
 
 Comparing the mathematical mechanism in [@rem-ch30-eth-subexponential-literature] with our orthogonal geometry (`MODEL`) highlights two structural resonances:
 
@@ -36,7 +36,7 @@ Comparing the mathematical mechanism in [@rem-ch30-eth-subexponential-literature
 **The rank of the flow matrix equals the minimal cut.** The bridge graph with $(a, b, c, d) = (2, 3, 2, 3)$: both outer cuts are $6$ (magenta dashes) and the three bridges could carry $12$. On the right is the $6 \times 6$ flow matrix of one random integer instance (cyan entries positive, grey negative) with six nonzero singular values below it: rank $6$, exactly the minimal cut. This is a single instance; [@thm-bridge-quantum-maxflow-mincut], verified in Lean, states that under its full dimensional hypotheses the greatest attainable rank of these bridge graphs equals the minimal cut, while a single draw can have lower rank. The theorem is only about flows and cuts on bridge graphs and has nothing to do with the subexponential 3-SAT preprints discussed above: it neither checks nor supports their algorithmic claim ([@rem-ch30-eth-subexponential-literature], not independently rebuilt in this book).
 :::
 
-## 2. Galactic Algorithms and the Cosmic Horizon: What Can Upper-Bound Comparisons Tell Us? (`MODEL` & Epistemological Boundaries)
+## 30.3.2 Galactic Algorithms and the Cosmic Horizon: What Can Upper-Bound Comparisons Tell Us? (`MODEL` & Epistemological Boundaries) {#2-galactic-algorithms-and-the-cosmic-horizon-what-can-upper-bound-comparisons-tell-us-model--epistemological-boundaries}
 
 ::: {.example #ex-ch30-galactic-crossover-scale title="Trans-Cosmological Scale Comparison and Quadratic-Encoding Inflation of the Subexponential Bound"}
 **Literature background and numerical illustration (`MODEL`), not formalized in this book.** Does an asymptotic upper-bound exponent drifting toward $0$ enable a finite observer at realizable physical scales to cross exponential search barriers? To visualize the scale behavior of the external asymptotic bound in [@rem-ch30-eth-subexponential-literature], consider the illustrative normalized base-$2$ curve $r_{\mathrm{new}}(n) = c \cdot \frac{\log_2(\log_2 n)}{\sqrt{\log_2 n}}$ (corresponding to an upper-bound runtime of the form $2^{r_{\mathrm{new}}(n)\cdot n}$, evaluated at the illustrative normalization $c = 1$ solely to compare literature upper-bound curves—not as a proven lower bound for all algorithms or physical observers) alongside the classical $0.386$ PPSZ local-search benchmark ($1.307^n \approx 2^{0.386 n}$) from [@rem-ch30-eth-subexponential-literature]:

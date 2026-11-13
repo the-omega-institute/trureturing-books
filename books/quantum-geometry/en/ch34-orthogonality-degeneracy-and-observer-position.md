@@ -1,4 +1,4 @@
-# Orthogonality-Degeneracy Blind Spots: How Single vs. Double Orthogonality Inverts Observer Position
+# Chapter 34 Orthogonality-Degeneracy Blind Spots: How Single vs. Double Orthogonality Inverts Observer Position {#orthogonality-degeneracy-blind-spots-how-single-vs-double-orthogonality-inverts-observer-position}
 
 > *"That a single orthogonality step and a double orthogonality step yield the same result reflects precisely the position of the observer."*
 
@@ -18,7 +18,7 @@ We develop this blind-spot inversion principle across three progressive stages, 
 
 ---
 
-## Second-Orthogonality Invisibility in Spherical Addressing: Symmetry Meridian and Polar Normal Inversion {#sec-ch34-spherical-addressing-inversion}
+## 34.1 Second-Orthogonality Invisibility in Spherical Addressing: Symmetry Meridian and Polar Normal Inversion {#sec-ch34-spherical-addressing-inversion}
 
 ::: {.example #ex-ch34-spherical-addressing-preview title="Flat-Floor Hypotenuse Contrast and Spherical Two-Step Addressing Inversion Preview (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** The elementary Euclidean hypotenuse contrast and unit-sphere $S^2 \subset \mathbb{R}^3$ inner-product inversion preview below belong to classical Euclidean geometry (with full algebraic elimination given in [@ex-ch34-spherical-addressing-and-octant-rotors], Part 1) and are not formalized as a standalone continuous spherical-coordinate lemma in `trureturing@dev`:
@@ -88,7 +88,7 @@ Taken together, the three clauses of [@thm-ch34-perpendicular-axis-and-pullback]
 
 ---
 
-## Spherical Octant and Rotor Curvature: You Stand on the Normal of Whichever Area You Cannot See {#sec-ch34-octant-rotor-holonomy}
+## 34.2 Spherical Octant and Rotor Curvature: You Stand on the Normal of Whichever Area You Cannot See {#sec-ch34-octant-rotor-holonomy}
 
 Moving from static vector addressing to the **octant orthogonal-circuit model (`MODEL`)** in Panel II of Figure 34 (with the single-step vs. two-step rotor products, holonomy discrepancy, and equatorial test-vector comparison derived inside attributed example [@ex-ch34-spherical-addressing-and-octant-rotors] Part 2 below, and continuum geometric-phase literature recorded in [@rem-ch34-virtual-z-berry-relativity-literature]) elevates the comparison between single and double orthogonality from point coordinates to **readout kernels and commutator blind spots**.
 
@@ -213,7 +213,7 @@ Stepping back from the rotor calculation in Part 2 of [@ex-ch34-spherical-addres
 
 ---
 
-## From a Single Plane and Relativistic Simultaneity to the 6D Golden Cut: Universal Observer Localization {#sec-ch34-universal-observer-localization}
+## 34.3 From a Single Plane and Relativistic Simultaneity to the 6D Golden Cut: Universal Observer Localization {#sec-ch34-universal-observer-localization}
 
 Once we grasp that *readout degeneracy is normal-axis localization*, the mechanism scales effortlessly beyond $S^2$ to relativistic spacetime metrics and higher-dimensional cut-and-project lattices: how does a relativistic observer determine which spatially orthogonal events happen "at the same time," and how does a cut-and-project observer ([Chapter 32](ch32-unified-field-and-meta-unification.md) [@rem-ch32-icosian-e8-literature]) anchor the three-dimensional orientation of its physical slice inside a six-dimensional mother lattice?
 

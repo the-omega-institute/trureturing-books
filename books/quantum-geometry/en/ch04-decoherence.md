@@ -635,7 +635,7 @@ Four geometric properties converge at this single point:
 
 ---
 
-### Summary of Part I: From Point to Line — Ready to Open the Plane
+### 4.3.1 Summary of Part I: From Point to Line — Ready to Open the Plane {#summary-of-part-i-from-point-to-line--ready-to-open-the-plane}
 
 Across the four chapters of Part I, the theorem statements checked by the Lean kernel and their pinned formal declarations support our reconstruction of the foundations of quantum geometry; their individual correspondences appear in the book's formal verification ledger:
 

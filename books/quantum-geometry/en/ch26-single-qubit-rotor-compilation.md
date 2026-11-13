@@ -1,4 +1,4 @@
-# Single-Qubit Rotor Compilation: Bloch Geometry Theorems and the ZYZ Euler Compiler
+# Chapter 26 Single-Qubit Rotor Compilation: Bloch Geometry Theorems and the ZYZ Euler Compiler {#single-qubit-rotor-compilation-bloch-geometry-theorems-and-the-zyz-euler-compiler}
 
 > *"A quantum state is a direction, and a quantum gate turns that direction; it can therefore be understood as a geometric structure with area."*
 
@@ -17,7 +17,7 @@ In this chapter we complete the single-qubit computational bridge by joining two
 **Figure 26.** The chapter at a glance. Panel I: the green Bloch ball; the amber pure-state arrow reaches the shell $\lvert r\rvert = 1$, and the dark point lies inside, where every trace-one positive semidefinite matrix lands ([@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]). Panel II: the sandwich turns by $90^\circ$ about the violet $z$ axis; the cyan shadow stays on the axis, and the magenta fan is split by a dashed line into two half-angles. Panel III: in the order used by the rotor product, $e_1$ turns about $z$ by $\gamma$, then about $y$ by $\beta$, and finally about $z$ by $\alpha$, with parameter tuple $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$; the amber path of three legs ends at $R e_1 \widetilde{R}$ (rotor compilation is a numerical illustration with no frozen theorem).
 :::
 
-## Bloch Matrix Trace and Coordinate Recovery {#sec-bloch-matrix-trace-and-recovery}
+## 26.1 Bloch Matrix Trace and Coordinate Recovery {#sec-bloch-matrix-trace-and-recovery}
 
 In the Lean 4 module `D5/S3/Quantum/Information/ActualPureQubitGeometry.lean` (within namespace `D5.S3.Quantum.Information.ActualPureQubitCostInfimum`), the exact bidirectional correspondence between $2\times 2$ Hermitian matrices $M \in M_2(\mathbb{C})$ and pairs consisting of a real trace scalar $\operatorname{Re}(\Tr M)$ and a real Bloch three-vector $\operatorname{bloch}(M) \in \operatorname{EuclideanSpace}\,\mathbb{R}\,(\operatorname{Fin} 3)$ is defined by two maps:
 
@@ -72,7 +72,7 @@ Hence $\operatorname{bloch}(\operatorname{blochMatrix}(a, r)) = r$. The full pro
 **Reading the trace and the three coordinates back from the matrix.** Take $\operatorname{blochMatrix}(1, r)$ with $r = (0.48, 0.60, 0.64)$: the two cyan diagonal cells add to the trace $1$ and subtract to $z = 0.64$; the dark top-right cell gives $x = 2 \times 0.24$ and $y = -2 \times (-0.30)$; the dashed bottom-left cell is only its conjugate and is not read. What comes back is $r$ ([@thm-bloch-matrix-trace], [@lemma-bloch-coordinate-recovery]).
 :::
 
-## Hermitian Reconstruction, the Pure-State Sphere, and the Positive-Semidefinite Ball Bound {#sec-hermitian-bloch-and-psd-ball}
+## 26.2 Hermitian Reconstruction, the Pure-State Sphere, and the Positive-Semidefinite Ball Bound {#sec-hermitian-bloch-and-psd-ball}
 
 Conversely, start with an arbitrary Hermitian $2\times 2$ matrix $M \in M_2(\mathbb{C})$ (`hM : M.IsHermitian`). The next frozen proposition proves both that $M$ is reconstructed identically from its real trace `(Matrix.trace M).re` and its Bloch vector `bloch M`, and that whenever $M$ has unit trace ($\Tr M = 1$) and is idempotent ($M \cdot M = M$), its Bloch vector lies on the unit sphere $\norm{\operatorname{bloch}(M)} = 1$.
 
@@ -126,7 +126,7 @@ Since $\operatorname{Re}(\det M) \ge 0$ and both $\operatorname{Re}(\Tr M)$ and 
 **With trace $1$, the sign of the determinant says where the arrow ends.** The $x$–$z$ cross-section of the Bloch ball, with $\det = (1 - \lvert r\rvert^2)/4$: the amber pure state on the green circle has $\det = 0$; the dark point inside has $\det = 0.19 > 0$; the magenta point outside has $\det = -0.17 < 0$ and is not positive semidefinite. The green disc is where positive semidefinite matrices can land ([@cor-psd-bloch-ball-bound]); the circle holds the trace-one idempotent pure states ([@prop-hermitian-bloch-geometry]).
 :::
 
-## Even-Subalgebra Bivectors and the Rotor Sandwich Action {#sec-even-rotor-sandwich-action}
+## 26.3 Even-Subalgebra Bivectors and the Rotor Sandwich Action {#sec-even-rotor-sandwich-action}
 
 Now let us see how rotations of the Bloch vector $v = r_0 e_1 + r_1 e_2 + r_2 e_3 \in \mathbb{R}^3 \subset \mathcal{Cl}_{3,0}(\mathbb{R})$ are compiled directly inside the four-dimensional even subalgebra $\mathcal{Cl}^+_{3,0}(\mathbb{R}) = \operatorname{span}_{\mathbb{R}}\{1, e_1 e_2, e_1 e_3, e_2 e_3\}$.
 
@@ -164,7 +164,7 @@ $$
 **Three turns multiply into one rotor.** With the triple $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$ of the example below, the amber arrow $v$ turns first by $\gamma$ about the violet $z$ axis, then by $\beta$ about $y$, and last by $\alpha$ about $z$; the white tripod comes to rest at $Re_1$, $Re_2$, $Re_3$, and the top of the figure shows the compiled rotor $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$. Rotor compilation has no frozen theorem; on the page it is a numerical illustration only.
 :::
 
-## Python 3 ZYZ Rotor Compiler Implementation and Numerical Verification {#sec-zyz-rotor-compiler-python}
+## 26.4 Python 3 ZYZ Rotor Compiler Implementation and Numerical Verification {#sec-zyz-rotor-compiler-python}
 
 We keep the real coefficients of the preceding chapter's engine: compilation produces real even rotors, whose unit condition makes `reverse()` their inverse; `norm_squared()` checks normalization within this same domain.
 

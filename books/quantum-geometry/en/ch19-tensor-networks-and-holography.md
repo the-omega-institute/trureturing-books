@@ -1,4 +1,4 @@
-# Entanglement Weaves Space: Tensor Networks, Holographic Duality, and the Discrete Min-Cut Theorem
+# Chapter 19 Entanglement Weaves Space: Tensor Networks, Holographic Duality, and the Discrete Min-Cut Theorem {#entanglement-weaves-space-tensor-networks-holographic-duality-and-the-discrete-min-cut-theorem}
 
 > *"Point C is not an independently known quantity but a projection of overlap: one definite quantum state determines only a line; a collection of states can span an area."*
 
@@ -16,7 +16,7 @@ In keeping with our three-tier epistemological contract and the discrete facet-s
 **Figure 19.** The chapter at a glance. Panel I: in an ordinary binary tree (not the layered network of the later experiment cards), the 4 amber legs along the bottom are cut off by just the 2 bonds marked magenta (a schematic model). Panel II: on the width-three bridge graph $(a, b, c, d) = (2, 3, 2, 3)$, the solid magenta $ad$ above and the dashed magenta $bc$ below are the two min cuts, $ad = bc = 6$, and flow equals cut ([@thm-bridge-quantum-maxflow-mincut]). Panel III: in log capacity, the solid magenta $ad$ facet and the dashed magenta $bc$ facet join into one bent line at the dashed vertical seam.
 :::
 
-## Entanglement hierarchies and finite tensor networks {#sec-mera-hierarchy}
+## 19.1 Entanglement hierarchies and finite tensor networks {#sec-mera-hierarchy}
 
 Suppose two composite quantum subsystems — a left boundary and a right boundary — communicate through an intermediate network of contracted tensor legs. If only a single one-dimensional scalar wire links the two sides, the induced linear map across the cut has rank at most $1$ regardless of how large the boundary Hilbert spaces are. When multiple internal bonds bridge the interface in parallel, the operator rank across the cut (the number of nonzero Schmidt singular values) can grow with the product of the bond dimensions.
 
@@ -65,7 +65,7 @@ Choosing $M = 0$ and $N = 0$ shows that $\operatorname{attainable}(a, b, c, d) \
 
 Note the honesty boundary of [@lemma-bridge-flow-attained]: the lemma proves the mathematical **existence** of rank-maximizing tensors $(M, N)$ via boundedness in $\mathbb{N}$, which does not by itself supply an efficient polynomial-time optimization algorithm for arbitrary tensor networks.
 
-## Rank and cut capacity in a width-three bridge graph {#sec-bridge-flow-cut}
+## 19.2 Rank and cut capacity in a width-three bridge graph {#sec-bridge-flow-cut}
 
 Now count the three cut-capacity bounds used by the source to limit the rank of $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$:
 
@@ -142,7 +142,7 @@ Together, $\operatorname{flow}(M, N)$ is a $6\times 6$ permutation matrix of ran
 **Together the three bridges tile a $6 \times 6$ permutation matrix exactly.** The cyan cells are the non-zero entries of $\operatorname{flow}(M, N)$, and the number in each is the bridge $r$ that puts it there: bridge $0$ fills the $4$ cells at the top left, bridges $1$ and $2$ add one cell each; the six cells share no row and no column, so the rank is $6$ ([@ex-bridge-two-three]).
 :::
 
-## Cone domains and discrete capacity facets {#sec-discrete-facet-stitching}
+## 19.3 Cone domains and discrete capacity facets {#sec-discrete-facet-stitching}
 
 In [@ex-bridge-two-three], the internal bridge cut $3ac = 12$ sits well above the outer boundary cuts $ad = bc = 6$. Why do the quadratic cone inequalities $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ carve out the natural domain where the three-bridge interior never bottlenecks the outer cuts?
 
@@ -213,7 +213,7 @@ The three candidate cut capacities are now $(3ac, ad, bc) = (12, 8, 6)$, with $\
 **The min cut is the lower envelope of three planes, and crossing the seam changes the bottleneck.** With $a = 2, b = 3, c = 2$ and $\ln d$ across: the thick line climbs along the blue $\ln ad$, bends at the dashed vertical $ad = bc$ onto the orange $\ln bc$, and the grey $\ln 3ac$ stays above throughout. The lattice points $d = 2, 3, 4$ carry the candidate cuts $(12, 4, 6)$, $(12, 6, 6)$, $(12, 8, 6)$ ([@ex-log-capacity-facets]); the theorem speaks only about these integer points.
 :::
 
-## From discrete bridge graphs to the RT literature {#sec-rt-literature-bridge}
+## 19.4 From discrete bridge graphs to the RT literature {#sec-rt-literature-bridge}
 
 Combining the universal upper bound $\operatorname{QMaxFlow} \le \operatorname{QMinCut}$ ([@prop-bridge-flow-cut-bound]) with the cone simplification $\operatorname{QMinCut} = \min(ad, bc)$ ([@cor-bridge-cone-mincut]) leaves the constructive lower bound: on the ordered cone domain $0 < a \le b$, $0 < c \le d$ with $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$, does there always exist a pair $(M, N)$ whose bridge contraction achieves rank $\min(ad, bc)$?
 

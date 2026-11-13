@@ -137,12 +137,13 @@ check('DELAYED: half the hits are read as “left”, as the law gives', near(p1
 check('DELAYED: neither row shows fringes', Math.abs(estimate(rowsOf(hits, 0))) < 0.2 && Math.abs(estimate(rowsOf(hits, 1))) < 0.2);
 await pick('erase'); s = await state();
 check('ERASER: the marker again waits for the hits, to be read for the path first and to erase afterwards', s.hold && s.reader === 'path' && s.then === 'erase');
-// The last hit starts a chain: sort by the path (700 ms), pause (1400 ms), gather back (450 ms), sort to erase. settle()
-// flushes twice, so it would end the sort and the pause and leave the gathering back running on real frames; a busy
-// browser can finish it before a later read. Land the last hit, end only the sort, and read in the same task.
-({ s, hits } = await D((t) => { window.SLIT_DEBUG.seek(t); window.TRV.kit.flush(); return { s: window.SLIT_DEBUG.state, hits: window.SLIT_DEBUG.hits() }; }, NMAX));
-check('ERASER: when the last hit lands, the path sorting is complete and the erasing reading is still to come', s.n === NMAX && hits.length === NMAX && !s.hold && s.split === 1 && s.then === 'erase', JSON.stringify({ n: s.n, hold: s.hold, split: s.split, then: s.then }));
-check('ERASER: once the hits are in, they are first sorted by the path reading, none moved', s.reader === 'path' && hits.every((h, i) => h.x === unreadX[i]) && Math.abs(estimate(rowsOf(hits, 0))) < 0.2 && Math.abs(estimate(rowsOf(hits, 1))) < 0.2);
+// the last hit starts the card's own sequence: sort by the path (700 ms), pause (1400 ms), gather (450 ms), sort to erase
+// (700 ms). settle() flushes twice and so also ends the pause, leaving the path rows only for the gather, which separate
+// calls can miss on a busy runner: land the last hit, end the sort alone (one flush does not end the pause it schedules)
+// and read the state and the hits in that same task
+const first = await D((n) => { const before = window.SLIT_DEBUG.state; window.SLIT_DEBUG.seek(n); window.TRV.kit.flush(); return { before, st: window.SLIT_DEBUG.state, hits: window.SLIT_DEBUG.hits() }; }, NMAX);
+s = first.st; hits = first.hits;
+check('ERASER: once the hits are in, they are first sorted by the path reading, none moved', first.before.hold && first.before.n < NMAX && s.n === NMAX && !s.hold && s.reader === 'path' && s.split === 1 && s.then === 'erase' && hits.length === NMAX && hits.every((h, i) => h.x === unreadX[i] && (h.row === 0 || h.row === 1)) && Math.abs(estimate(rowsOf(hits, 0))) < 0.2 && Math.abs(estimate(rowsOf(hits, 1))) < 0.2, `${JSON.stringify({ before: first.before.hold, reader: s.reader, split: s.split, then: s.then })} ${estimate(rowsOf(hits, 0))} ${estimate(rowsOf(hits, 1))}`);
 check('ERASER: then, by itself, the card gathers them back and reads them again to erase', await until(page, () => { const d = window.SLIT_DEBUG.state; return d.reader === 'erase' && d.split === 1 && d.then === null; }));
 await settle(page); s = await state(); hits = await D(() => window.SLIT_DEBUG.hits());
 const ep = estimate(rowsOf(hits, 0)), em = estimate(rowsOf(hits, 1));

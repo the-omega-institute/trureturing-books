@@ -491,7 +491,7 @@
     // every frame: a frame narrowed from a book page to a phone must not keep it, and every layout below measures the
     // legend across the whole stage first
     const stEl = $('stage');
-    stEl.classList.remove('legend-right');
+    stEl.classList.remove('legend-right');    // the legend is measured across the whole stage first (also in a frame that was wide)
     const st = stEl.getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
     if (compact()) {                          // a phone's cited figure: the ball as large as the width allows on the left,
       // the table over its side panel in the column on the right, between the title and the legend

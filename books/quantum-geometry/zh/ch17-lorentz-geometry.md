@@ -1,4 +1,4 @@
-# 狭义相对论的几何脱魅：双曲旋转、光锥零线与时空面积
+# 第十七章 狭义相对论的几何脱魅：双曲旋转、光锥零线与时空面积 {#狭义相对论的几何脱魅双曲旋转光锥零线与时空面积}
 
 > *“我的直觉是,线是经典时间,面积是量子时间”*
 
@@ -10,7 +10,7 @@
 **图 17。** 本章地图：第 I 栏，同一个事件 $(t, x) = (5, 3)$ 被转动时沿品红的圆 $t^2 + x^2 = 34$ 走、穿出白色虚线的光锥，被推动时沿青色的双曲线 $t^2 - x^2 = 16$ 走、贴着光锥却跨不过去；第 II 栏，以 $\beta = 3/5$ 运动的参考系的两根琥珀色坐标轴 $t'$、$x'$ 像剪刀一样向白色的光锥合拢，光锥本身不动；第 III 栏，从 $O$ 到 $P = (10, 0)$，原地静止的白色粗线被刻成 $10$ 段，经 $A = (5, 3)$ 折返的青色折线每段只刻 $4$ 段、共 $8$ 段。图中取 $c = 1$；物理单位制下每段固有时为 $\Delta\tau_{\mathrm{phys}} = \sqrt{q(\Delta v)}/c$。
 :::
 
-## 圆与双曲线：先区分度规 {#sec-euclidean-and-hyperbolic}
+## 17.1 圆与双曲线：先区分度规 {#sec-euclidean-and-hyperbolic}
 
 为什么初学者第一次面对狭义相对论的洛伦兹变换（Lorentz transformation）时，总觉得那些无处不在的根号 $\gamma = 1/\sqrt{1 - \beta^2}$ 像是一套生硬拼凑出来的代数补丁？根源在于，人们试图用习惯了欧氏正定度规（$++\dots+$）的圆规，去强行丈量一座不定号度规（$+-\dots-$）的闵可夫斯基（Minkowski）舞台。
 
@@ -83,7 +83,7 @@ $$
 **η = ln 2 把 (5, 3) 推到 (4, 0)。** 琥珀色的两根轴是以快度 $\eta$ 运动的旅行者的 $t'$、$x'$ 轴，像剪刀一样向光锥合拢，灰色虚线是原来的 $t$、$x$ 轴；到 $\eta = \ln 2$（$\beta = 3/5$）时，$t'$ 轴正好穿过灰圈里的原事件 $v = (5, 3)$。琥珀色的点 $Bv$ 是 $v$ 在旅行者坐标里的读数，沿青色双曲线 $\tau = 4$ 滑到时间轴上的 $(4, 0)$，这时 $\cosh\eta = 5/4$、$\sinh\eta = 3/4$。
 :::
 
-## 光锥零线与空间限制 {#sec-null-cone-rigidity}
+## 17.2 光锥零线与空间限制 {#sec-null-cone-rigidity}
 
 在 [@ex-rapidity-three-fifths] 中，我们预设了时空间隔采用二次型 $t^2 - x^2$。但从谱系学视角追问：为什么时空几何的核心刻度非得写成 $t^2 - \norm{w}^2$ 不可？如果宇宙只告诉我们“哪些位移属于以极限速率传播的光锥零线（null cone）”，这一条零线约束究竟能锁死多少几何结构？
 
@@ -150,7 +150,7 @@ $$
 **零线卡尺。** 琥珀色的空间位移 $(0, w)$ 向上、向下各垫起 $|w|$，两支白色箭头 $(\pm|w|, w)$ 正好落在未来与过去的光锥线上，$t^2 - x^2 = 0$；虚线菱形的两条对角线是 $2(0, w)$ 与 $2|w|(1, 0)$（[@lemma-null-cone-spatial]）。
 :::
 
-## 洛伦兹变换与尺度归一化 {#sec-lorentz-normalization}
+## 17.3 洛伦兹变换与尺度归一化 {#sec-lorentz-normalization}
 
 一旦空间限制 $S(0, w)$ 与时空交叉极化 $\operatorname{polar}_S((1, 0), (0, w))$ 均由 [@lemma-null-cone-spatial] 锁定，任意一般时空向量 $v = (t, w) = t(1, 0) + (0, w)$ 上的二次型取值便不再有任何自由逃逸的余地。
 
@@ -231,7 +231,7 @@ $$
 其中当且仅当空间位移非零（$\Delta w \neq 0$，一维空间中 $\Delta x \neq 0$）时取**严格不等号** $\Delta\tau < \Delta t$（即“运动时钟变慢”的几何投影效应），而在原地静止世界线（$\Delta w = 0$）上取**等号** $\Delta\tau = \Delta t$；光子沿 $\Delta w \neq 0$ 且 $q(\Delta v) = 0$ 的非零光锥零线传播（$\Delta\tau = 0$），对应 $\eta \to \pm\infty$ 的奇异极限，不存在任何属于光子的静止惯性观察系（因而不能说“在光子看来时间停滞或空间缩成一点”）。参见 R. P. Feynman, R. B. Leighton & M. Sands, *The Feynman Lectures on Physics*, Vol. I, chs. 15–17 (Addison–Wesley, 1963)；以及 D. Hestenes, *Space-Time Algebra* (Gordon and Breach, 1966)。
 :::
 
-## 世界线分段与固有时 {#sec-proper-time-segments}
+## 17.4 世界线分段与固有时 {#sec-proper-time-segments}
 
 在工程检验与公理化文献中，[@prop-null-cone-rigidity] 常被表述为存在性推论：只要二次型 $S$ 在闵可夫斯基零锥上恒为零，就必然存在某个实标量因子 $f \in \mathbb{R}$，使 $S$ 等于 $\operatorname{minkowski}_d$ 的 $f$ 倍。
 
@@ -307,7 +307,7 @@ $$
 至此，狭义相对论的度规骨架已完全显影：双曲恒等式 $|\cosh r|^2 - |\sinh r|^2 = 1$（[@thm-hyperbolic-norm]）刻画了单位双曲线上的保范变换，而光锥零集消失条件则通过 [@lemma-null-cone-spatial]、[@prop-null-cone-rigidity] 与 [@cor-null-cone-proportionality] 将时空二次型严格锁定为 $\operatorname{minkowski}_d$ 的标量倍。
 
 ::: {.film src="005-hyperbolic-rotation"}
-**双曲旋转：光锥不动，快度相加（1 分 53 秒）。** 同一个事件 $(5, 3)$ 被转动时沿品红的圆穿出光锥，被推动时沿青色的双曲线滑行；以 $\eta = \ln 2$ 推动，$\cosh\eta = 5/4$、$\sinh\eta = 3/4$（[@thm-hyperbolic-norm]），它滑到 $(4, 0)$。随后白色珠子只沿光锥滑动，比例 $k = 3/2$ 保住光锥却把 $\tau = 4$ 变成 $6$（[@prop-null-cone-rigidity]）；两次 $\ln 2$ 的推动乘成一次 $\ln 4$ 的推动，品红的两块双曲扇形面积各为 $\ln 2 / 2$，速度却合成 $15/17$（速度读法见 [@rem-lorentz-rotor-literature]）；最后推到去程旅行者的参考系，折线与静止世界线的刻度仍是 $8$ 与 $10$。
+**双曲旋转：光锥不动（1 分 53 秒）。** 同一个事件 $(5, 3)$ 被转动时沿品红的圆穿出光锥，被推动时沿青色的双曲线滑行；以 $\eta = \ln 2$ 推动，$\cosh\eta = 5/4$、$\sinh\eta = 3/4$（[@thm-hyperbolic-norm]），它滑到 $(4, 0)$。随后白色珠子只沿光锥滑动，比例 $k = 3/2$ 保住光锥却把 $\tau = 4$ 变成 $6$（[@prop-null-cone-rigidity]）；两次 $\ln 2$ 的推动乘成一次 $\ln 4$ 的推动，品红的两块双曲扇形面积各为 $\ln 2 / 2$，速度却合成 $15/17$（速度读法见 [@rem-lorentz-rotor-literature]）；最后推到去程旅行者的参考系，折线与静止世界线的刻度仍是 $8$ 与 $10$。
 :::
 
 在下一章（[狄拉克旋量与规范场](ch18-spinors-and-gauge-curvature.md)）中，我们将进一步对这一不定号度规作“一阶矩阵开方”，看看反交换泡利矩阵与图上的闭合回路相位如何编织出旋量与规范曲率的几何图景。

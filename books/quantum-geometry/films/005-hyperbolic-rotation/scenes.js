@@ -1,4 +1,4 @@
-/* Film 005 · Hyperbolic rotation: the light cone stays, rapidities add · 双曲旋转：光锥不动，快度相加
+/* Film 005 · Hyperbolic rotation: the light cone stays · 双曲旋转：光锥不动
    (book quantum-geometry, part V, chapter 17). Scenes for theme/film/engine.js.
 
    Events are (t, x) with c = 1; the boost of the chapter's example is

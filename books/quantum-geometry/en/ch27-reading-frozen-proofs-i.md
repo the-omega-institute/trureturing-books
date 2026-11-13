@@ -1,4 +1,4 @@
-# Inside the Lean 4 Axiom Sanctuary (Part I): From the Parallelogram Law to Finite Record Pinching
+# Chapter 27 Inside the Lean 4 Axiom Sanctuary (Part I): From the Parallelogram Law to Finite Record Pinching {#inside-the-lean-4-axiom-sanctuary-part-i-from-the-parallelogram-law-to-finite-record-pinching}
 
 > *"Build an academic theory of a universal machine for proposition proofs: define, state, prove."*
 
@@ -17,7 +17,7 @@ In this chapter and [Chapter 28](ch28-reading-frozen-proofs-ii.md), we open the 
 **The four theorems Chapter 27 dissects, back where they first appear.** Cyan lines run from the foot of Chapter 27 to four filled green cells, all of which first appear in Chapters 1–3; the amber frame is the parallelogram law ([@thm-audit-parallelogram-law]), and the amber lines go to the other chapters that cite it.
 :::
 
-## Define, State, Prove: Inside the Lean 4 Kernel Audit {#sec-lean-kernel-audit-architecture}
+## 27.1 Define, State, Prove: Inside the Lean 4 Kernel Audit {#sec-lean-kernel-audit-architecture}
 
 In the `trureturing` verification pipeline, every green theorem in this book passes three machine-enforced stages:
 
@@ -127,7 +127,7 @@ The full proof is checked by the Lean kernel.
 **The Born skeleton is proved along three branches, and only the third takes a detour.** Dashed ovals are hypotheses; boxes are the steps the proof names, each with the lemma that does it. Branches ① and ② take one step each; branch ③ first turns $\rho \succeq 0$ into the sandwich $P\rho P^* \succeq 0$, then uses $P^* = P$ and $P^2 = P$ with the cyclic trace to bring its trace back to $\Tr(\rho P)$, and finally takes a nonnegative trace. All three meet in the green [@lemma-audit-born-skeleton].
 :::
 
-## Support-Chain Ray Phase Rigidity and Finite Record Pinching Idempotence {#sec-audit-ray-rigidity-and-pinching}
+## 27.2 Support-Chain Ray Phase Rigidity and Finite Record Pinching Idempotence {#sec-audit-ray-rigidity-and-pinching}
 
 We now audit two structural theorems from Part I that showcase graph induction and block-diagonal projection algebra in Lean 4 (Panels II and III of Figure 27).
 
@@ -201,7 +201,7 @@ by collapsing the sum over $l \in \kappa$ to the single index $l = k$ via `Finse
 **The idempotence of pinching is proved in one straight chain.** The dashed hypotheses, orthogonality and idempotence, first let the left projection absorb the whole sum, $P_k \cdot U(\rho) = P_k \rho P_k$; multiplying by $P_k$ on the right absorbs once more and gives pointwise idempotence; function extensionality then carries it to every $\rho$, ending in the green [@cor-audit-pinching-idempotent]. In the figure, $U(\rho)$ stands for $\operatorname{unreadState}(P, \rho)$.
 :::
 
-## Line-by-Line Source Anatomy: From Mathlib Lemmas to Graph Induction and Block Elimination {#sec-line-by-line-proof-anatomy-i}
+## 27.3 Line-by-Line Source Anatomy: From Mathlib Lemmas to Graph Induction and Block Elimination {#sec-line-by-line-proof-anatomy-i}
 
 Across the four proofs above, four recurring Lean 4 proof engineering patterns stand out:
 
@@ -210,7 +210,7 @@ Across the four proofs above, four recurring Lean 4 proof engineering patterns s
 3. **Single-index sum collapse (`Finset.sum_eq_single k`)**: Orthogonality relations ($A_{kl} = 0$ or $P_k P_l = 0$ for $k \neq l$) prune finite sums $\sum_{l \in \kappa}$ down to the diagonal term $l = k$;
 4. **Reflexive-transitive closure induction (`Relation.ReflTransGen`)**: Local two-coordinate overlap steps (`hstep`) are lifted to global constancy across arbitrary connected support graphs by two-line structural induction (`refl` and `tail`).
 
-## Comprehensive Audit Table of Frozen Declarations Across Parts I–III {#sec-parts-i-to-iii-frozen-audit-table}
+## 27.4 Comprehensive Audit Table of Frozen Declarations Across Parts I–III {#sec-parts-i-to-iii-frozen-audit-table}
 
 The table below audits representative frozen declarations cited across Parts I through III at commit [{commit}](trureturing:). As required by our verification contract, prose labels such as "parallelogram law", "probability skeleton", or "pinching idempotence" are descriptive titles only and carry no formal claim beyond the exact Lean signature.
 

@@ -1,4 +1,4 @@
-# 无时间因果与格拉姆相容空间：从毕达哥拉斯佩尔接缝到椭圆曲线环面
+# 第二十九章 无时间因果与格拉姆相容空间：从毕达哥拉斯佩尔接缝到椭圆曲线环面 {#无时间因果与格拉姆相容空间从毕达哥拉斯佩尔接缝到椭圆曲线环面}
 
 > *“顺序无关的本质就是根本不存在前后的时间......因果就是这样必然。因为观察者是有限的, 所以经历的因果是有限的, 观察者的选择是在因果的相容空间中做选择, 不断在时间场中选点”*
 
@@ -10,11 +10,11 @@
 
 ---
 
-## 毕达哥拉斯、万物皆数与四级“球外之球”突围 {#sec-coda-pythagoras-all-is-number}
+## 29.1 毕达哥拉斯、万物皆数与四级“球外之球”突围 {#sec-coda-pythagoras-all-is-number}
 
 如果把整本书的三十九章压缩回人类数学文明最初的那粒种子，我们会发现它早已埋藏在两千五百年前毕达哥拉斯学派的两句箴言之中：**“勾股定理（$a^2 + b^2 = c^2$）”**与**“万物皆数（All is Number）”**。透过克利福德几何代数与形式化内核的透镜，这两句古老箴言展现出了跨越三幕的壮丽几何真容。
 
-### 第一幕：勾股定理的几何真容——一维线段不可加，二维面积才守恒 {#sec-coda-pythagoras-act1}
+### 29.1.1 第一幕：勾股定理的几何真容——一维线段不可加，二维面积才守恒 {#sec-coda-pythagoras-act1}
 
 为什么直角三角形的两条正交直角边 $\mathbf{a} \perp \mathbf{b}$，不能靠一维长度直接相加得到斜边（$a + b \neq c$），偏偏要**先平方、再相加**（$a^2 + b^2 = c^2$）？
 
@@ -44,7 +44,7 @@ $$
 2. **狭义相对论（第五部第 17 章）**：闵可夫斯基时空中固有时流逝率 $d\tau/dt$ 与空间运动速率 $v/c$ 满足 $(d\tau/dt)^2 + (v/c)^2 = 1$（即 $d\tau^2 = dt^2 - dx^2/c^2$ 的正交重排，对应双曲旋量范数守恒 [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)）——所谓“光子以光速飞行时不经历固有时流逝”，只是勾股斜边 $1$ 全部投影到了空间轴 $v/c = 1$ 上，使得时间轴投影归零；
 3. **丢番图数论与旋量代数（第六部第 23 章）**：四元数单位球面 $S^3$ 的范数守恒 $s^2 + x^2 + y^2 + z^2 = 1$、艾森斯坦二次范数型恒等式（[`Qform_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm)）与黄金整数佩尔范数恒等式（[`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)），则是高维正交与二次格空间中的勾股定理。
 
-### 第二幕：希帕索斯之裂与永不磨灭的佩尔余项 $m^2 - 2n^2 = \pm 1$ {#sec-coda-pythagoras-act2}
+### 29.1.2 第二幕：希帕索斯之裂与永不磨灭的佩尔余项 $m^2 - 2n^2 = \pm 1$ {#sec-coda-pythagoras-act2}
 
 然而，正是这条看似天衣无缝的勾股定理，亲手砸碎了毕达哥拉斯学派最初的静态有理数球面。
 
@@ -158,7 +158,7 @@ $$
 **永远差一格。** 渐近分数 $1/1, 3/2, 7/5, 17/12, \dots$ 沿直线 $m = \sqrt{2}\,n$ 越贴越近；右侧两条色带是 $m^2$ 与 $2n^2$ 的格子数，放大镜里它们永远差着一格。
 :::
 
-### 第三幕：为“万物皆数”正名——从动词“数（shǔ）”到四级数系突围 {#sec-coda-pythagoras-act3}
+### 29.1.3 第三幕：为“万物皆数”正名——从动词“数（shǔ）”到四级数系突围 {#sec-coda-pythagoras-act3}
 
 既然有理数连最简单的正交斜边 $\sqrt{2}$ 都装不下，毕达哥拉斯的“万物皆数”错了吗？
 
@@ -194,13 +194,13 @@ $$
 
 ---
 
-## $\pm 1$ 算术接缝、素数二象性与椭圆曲线环面上的 $S^3$ 投影 {#sec-coda-primes-elliptic-curves}
+## 29.2 $\pm 1$ 算术接缝、素数二象性与椭圆曲线环面上的 $S^3$ 投影 {#sec-coda-primes-elliptic-curves}
 
 当我们凝视希帕索斯在整数网格上留下的那道佩尔余项 $m^2 - 2n^2 = \pm 1$（[@thm-ch29-silver-pell-remainder]）时，一个更深邃的数论追问自然浮现：**这道在 $+1$ 与 $-1$ 之间交替跳荡的算术接缝，难道仅仅是 $\sqrt{2}$ 的孤立巧合吗？它与素数的分布、椭圆曲线的拓扑以及全书反复出现的 $\cos\theta$ 投影究竟有着怎样的关联？**
 
 顺着这道 $\pm 1$ 裂隙向下挖掘，数论、代数几何与量子旋量几何在三座桥梁上轰然汇合。
 
-### 第一座桥：$\pm 1$ 佩尔接缝将奇素数一分为二——“线素数”与“面素数” {#sec-coda-pell-prime-splitting}
+### 29.2.1 第一座桥：$\pm 1$ 佩尔接缝将奇素数一分为二——“线素数”与“面素数” {#sec-coda-pell-prime-splitting}
 
 在自然数的底层网格中，一旦最小偶素数 $2$ 与最小奇素数 $3$ 张成六角密排周期基底 $2 \times 3 = 6$，此后一切大于 $3$ 的素数 $p \ge 5$ 都只能栖居在 $6$ 的倍数的两侧接缝上：
 
@@ -334,7 +334,7 @@ $$
    在本书的几何读法中，这意味着 $-1$ 手性扭结不会在单个素数轴上孤立出现，它必须在成对的位之间正反相消，与第三部第 10 章“两两比较，永远一致，顺序无关”形成算术呼应。
 :::
 
-### 第二座桥：两道二次接缝相交（$2 \times 2 = 4$）——从二次曲线到同余数椭圆曲线环面 {#sec-coda-congruent-elliptic-torus}
+### 29.2.2 第二座桥：两道二次接缝相交（$2 \times 2 = 4$）——从二次曲线到同余数椭圆曲线环面 {#sec-coda-congruent-elliptic-torus}
 
 如果把单条二次圆锥曲线进一步推广到有理直角三角形勾股斜边与面积同时给定的经典同余数情境，两道二次约束的正交交集便引出以下经典代数几何与黎曼面文献结构：
 
@@ -362,7 +362,7 @@ $$
 **环面上的箭头处处不为零。** 环面 $\bigl((R + r\cos\theta)\cos\phi,\, (R + r\cos\theta)\sin\phi,\, r\sin\theta\bigr)$（$R > r > 0$）上青色的单位切向量 $\hat{\mathbf{e}}_\phi = (-\sin\phi, \cos\phi, 0)$ 都沿大圈的方向，长度处处为 $1$；琥珀色的点绕大圈走一周，它的箭头一刻也不缩短，环面上没有品红的零点环。$\chi(T^2) = 0$，与球面的 $\chi(S^2) = 2$ 相对（文献结果，未在本书形式化，见 [@rem-ch29-elliptic-torus-literature]）。图中只是拓扑上同一种曲面，不是椭圆曲线本身。
 :::
 
-### 第三座桥：有限域椭圆曲线约化、弗罗贝尼乌斯余弦与 $S^3 \cong \mathrm{SU}(2)$ 投影 {#sec-coda-hasse-sato-tate}
+### 29.2.3 第三座桥：有限域椭圆曲线约化、弗罗贝尼乌斯余弦与 $S^3 \cong \mathrm{SU}(2)$ 投影 {#sec-coda-hasse-sato-tate}
 
 更深一层的算术—几何呼应出现在把标准同余数椭圆曲线 $E : y^2 = x^3 - x$ 约化到第 22 章的每一根奇素数轴 $\mathbb{F}_p$（$p \ge 3$）上的时刻：
 
@@ -521,7 +521,7 @@ $$
 
 ---
 
-## 顺序无关、无时间之网与几何因果的必然性 {#sec-coda-timeless-causality}
+## 29.3 顺序无关、无时间之网与几何因果的必然性 {#sec-coda-timeless-causality}
 
 当第三部第 10 章的“两两比较，永远一致，顺序无关”与本章前文的四级数系突围、素数—椭圆曲线余弦投影交汇在一起时，一个困扰了人类哲学与物理学两千五百年的终极死结——**“时间的前后流逝”与“因果律的必然性”**——在这里被一刀劈开：
 
@@ -529,7 +529,7 @@ $$
 
 为什么“顺序无关”直接宣告了先后时间的消解，却反而铸就了不可动摇的因果必然性？我们可以从三个精确的数学与物理层面看清这一真相：
 
-### 第一层：为什么“顺序无关”意味着根本不存在前后的时间？ {#sec-coda-order-independence-no-time}
+### 29.3.1 第一层：为什么“顺序无关”意味着根本不存在前后的时间？ {#sec-coda-order-independence-no-time}
 
 ::: {.remark #rem-ch29-wheeler-dewitt-page-wootters-literature title="余弦阶乘去序诠释、惠勒—德维特无时间约束与佩奇—伍特斯条件时间机制（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 回看贯穿全书的余弦幂级数展开式（见序曲 [@rem-prelude-dottie-literature]）：
@@ -562,7 +562,7 @@ $$
 **所有页同时都在。** 十二页一直都画在球上，没有哪一页先出现；播放时移动的只有琥珀色的读头。对时钟读数条件化，才得到读头下面的那一页（有限时钟的示意模型，`MODEL`）。
 :::
 
-### 第二层：没有时间推动，因果何以必然？——休谟死结 vs. 斯宾诺莎三角形与 Gram 矩阵刚性 {#sec-coda-hume-spinoza-gram}
+### 29.3.2 第二层：没有时间推动，因果何以必然？——休谟死结 vs. 斯宾诺莎三角形与 Gram 矩阵刚性 {#sec-coda-hume-spinoza-gram}
 
 在经验哲学中，大卫·休谟（David Hume）曾提出著名的因果怀疑论：如果我们在先后时间流里观察世界，我们看到的永远只是“事件 A 之后惯常伴随着事件 B（恒常联结）”，却永远看不到 A 必然产生 B 的“必然联系”。只要把因果寄托在时间的前后推动上，休谟死结就永远无解。
 
@@ -597,7 +597,7 @@ $$
 **两条余弦锁住第三条：格拉姆窗口（1:39）。** 固定 $\theta_1 = 60^\circ$、$\theta_2 = 45^\circ$，让 $\mathbf{C}$ 绕 $\mathbf{B}$ 转一圈：$c_{AC}$ 在 $[\cos 105^\circ, \cos 15^\circ]$ 里来回，紫色的体积在窗边塌成零，窗外的余弦会让 $\det G$ 变成负数；再让 $\theta_2$ 从 $0^\circ$ 走到 $180^\circ$，一道道窗口铺满格拉姆椭圆的切片。上沿碰到 $1$ 时 $\mathbf{C}$ 正好落在 $\mathbf{A}$ 上，这一步由 [@thm-ch29-gram-rigidity-and-pell] 的第二部分保证；片中其余数字都是屏幕上的计算。
 :::
 
-### 第三层：费曼驻相相消与双向量手性几何模型（$+\mathbf{\Omega} - \mathbf{\Omega} = 0$）及决定论、目的论在 $\psi = \psi(\psi)$ 中的和解 {#sec-coda-stationary-phase-reconciliation}
+### 29.3.3 第三层：费曼驻相相消与双向量手性几何模型（$+\mathbf{\Omega} - \mathbf{\Omega} = 0$）及决定论、目的论在 $\psi = \psi(\psi)$ 中的和解 {#sec-coda-stationary-phase-reconciliation}
 
 从路径积分与双向量手性的几何模型视角看，为什么物理世界只向我们显现那条满足因果律的必然轨迹？
 
@@ -623,7 +623,7 @@ $$
 
   时，既没有来自过去的推力，也没有来自未来的拉力——有的只是**测量算子与被测状态在无时间几何晶体中达成的唯一自洽闭合**。因果之所以如此必然，恰恰因为根本不存在前后的时间！
 
-### 第四层：有限观察者、因果相容空间（格拉姆椭圆体）与在时间场中不断选点 {#sec-coda-finite-observer-time-field}
+### 29.3.4 第四层：有限观察者、因果相容空间（格拉姆椭圆体）与在时间场中不断选点 {#sec-coda-finite-observer-time-field}
 
 > **作者原话**：“因为观察者是有限的, 所以经历的因果是有限的, 观察者的选择是在因果的相容空间中做选择, 不断在时间场中选点”
 
@@ -712,13 +712,13 @@ $$
 
 ---
 
-## 相干与去相干、双端握手与全息边界因果 {#sec-ch29-coherence-handshake-causality}
+## 29.4 相干与去相干、双端握手与全息边界因果 {#sec-ch29-coherence-handshake-causality}
 
 > “逻辑没有什么存在于不存在, 只有相干与去相干, 所以未来对过去有了干涉, 这也不稀奇, 这就是因果”
 
 在前一节（[“顺序无关、无时间之网与几何因果的必然性”](#sec-coda-timeless-causality)）中，我们从单位向量族的 Gram 矩阵刚性（[@thm-ch29-gram-rigidity-and-pell]）看见了无时间关联网络如何消解“前推后”的机械多米诺骨牌时间观。然而，日常直觉之所以一听见“未来对过去发生干涉”便觉得违反逻辑，根源在于把经典布尔逻辑的“存在（`1`）对不存在（`0`）”误当成了宇宙最底层的本体语法。本章收官之际，我们围绕这句收拢因果本质的命题（原话台账见[附录 A](appendix-a.md#sec-appendix-a-verbatim-ledger) `A75`），沿着“正交隐匿与捏合去相干—双端玻恩握手与共同相位锁定—驻相、弱值、延迟擦除无信令与格拉姆端点置换—反相悖论相消与自洽不动点”四根支柱展开严格拆解，并逐项标清 Lean 4 内核定理（`LEAN ✓`）、手工代数推导（`手工推导`）、外部物理文献（`文献结果`）、双精度数值检验（`NUM`）与本书正交几何诠释（`MODEL`）的各自边界。
 
-### 一、 破除布尔“存在与不存在”幻觉：正交隐匿、双路相消与捏合去相干 {#sec-ch29-handshake-boolean-illusion}
+### 29.4.1 破除布尔“存在与不存在”幻觉：正交隐匿、双路相消与捏合去相干 {#sec-ch29-handshake-boolean-illusion}
 
 当局部探测器屏幕上报出读数 `0` 时，布尔直觉习惯宣称“那里什么都不存在”；报出确定结果时，又宣称“客观事实已经绝对生成”。事实上，仅凭单个零读数本身并不能反推背后的机制（空输入本身同样给出零读数），而在受控线性与算子模型中，看似同为“归零”或“定格为经典事实”的现象背后，严格对应着三种截然不同的几何与代数操作（以下分项算式为初等手工推导，`手工推导`；将其读作“逻辑无所谓存亡、唯有相干与去相干”属本书诠释，`MODEL`）：
 
@@ -778,7 +778,7 @@ $$
 **零读数并非“不存在”：正交隐匿、反相分流与捏合去相干对照卡（`boolean-illusion`）**：左栏展示单位向量 $\mathbf{B}$ 对标尺轴 $\mathbf{A}$ 的分解——在 $\theta = \pi/2$ 处青色轴向投影归零，品红正交分量与有向面积平方保持 $1$，且 $\|\mathbf{A}+\mathbf{B}\|^2 = 2$；中栏展示平衡双端口合束器——在等幅反相 $\Delta = \pi$ 时 `+` 端口归零而 `-` 端口得 $1$（总输出恒为 $1$）；右栏展示 $2\times 2$ 路径密度矩阵 $\rho_\gamma$——捏合 $\gamma = 0$ 抹去品红非对角相干元、保留对角权重并将双端口拉平为 $1/2$。
 :::
 
-### 二、 因果作为双端玻恩握手与共同相位公平锁定 {#sec-ch29-handshake-born-reciprocity}
+### 29.4.2 因果作为双端玻恩握手与共同相位公平锁定 {#sec-ch29-handshake-born-reciprocity}
 
 为什么单向复交叠 $\langle\phi|\psi\rangle$ 本身还不能直接充当客观的物理因果权重？对两个归一化态分别施加**各自独立**的全局相位旋转 $|\psi\rangle \mapsto e^{i\theta_\psi}|\psi\rangle$ 与 $|\phi\rangle \mapsto e^{i\theta_\phi}|\phi\rangle$（注意：若对两者施加同一个公共相位 $\theta_\psi = \theta_\phi$，内积 $\langle\phi|\psi\rangle$ 本就保持不变），手工计算（`手工推导`）立即给出
 
@@ -823,7 +823,7 @@ $$
 **单向振幅旋转而双端握手锁定卡（`born-handshake`）**：调节布洛赫夹角 $\theta \in [0, \pi]$ 与参考相位 $\chi \in [0, 2\pi]$，青色正向交叠箭头 $a_{\mathrm{fwd}} = \langle\phi|\psi\rangle$ 与品红共轭回波箭头 $a_{\mathrm{echo}} = \langle\psi|\phi\rangle$ 随 $\chi$ 反向旋转，而二者相乘结出的实数握手权重 $\operatorname{Tr}(P_\phi P_\psi) = \cos^2(\theta/2)$ 与两侧投影算子始终锁定不变。
 :::
 
-### 三、 未来与过去的双向干涉：驻相束、弱值、延迟擦除无信令与格拉姆端点置换 {#sec-ch29-handshake-future-past}
+### 29.4.3 未来与过去的双向干涉：驻相束、弱值、延迟擦除无信令与格拉姆端点置换 {#sec-ch29-handshake-future-past}
 
 一旦明白物理概率由首尾两端的厄米配对共同锁定，所谓“未来对过去发生干涉”便褪去了全部神秘色彩：局部观察者之所以觉得过去已经不可逆转，仅仅是因为自身偏迹视角丢失了环境与关联扇区的相干相位；而在未作不可逆丢弃的联合系统中，幺模相位记录支持相干逆转，未来测量基的选择则在不改动过去无条件边缘总和的前提下，将联合记录分拣为互补的干涉子系综。我们先将联合相干逆转、局部偏迹访问缺陷、二分边缘关联盲区与正算子格拉姆因式分解四条核心定理形式化锁定，再集中梳理对应的物理文献与手工无信令及置换恒等式：
 
@@ -891,7 +891,7 @@ $$
 **三时刻格拉姆矩阵首尾置换与行列式不变量卡（`gram-symmetry`）**：对实单位向量 $\mathbf{A}_{\mathrm{past}}, \mathbf{B}_{\mathrm{now}}, \mathbf{C}_{\mathrm{future}}$ 执行首尾置换 $G' = P_{13} G P_{13}^{\mathsf{T}}$——当 $x \neq y$ 时矩阵元 $x$ 与 $y$ 互换（$G' \neq G$，切换到对称点 $x = y = 0.5$ 时 $G' = G$），而半正定性、特征值谱与体积平方 $\det G' = \det G = (\mathbf{A}\cdot(\mathbf{B}\times\mathbf{C}))^2 \ge 0$ 全程守恒。
 :::
 
-### 四、 为何因果闭环从不自毁：反相悖论相消与自洽不动点锁定 {#sec-ch29-handshake-loop-consistency}
+### 29.4.4 为何因果闭环从不自毁：反相悖论相消与自洽不动点锁定 {#sec-ch29-handshake-loop-consistency}
 
 这套相干—去相干因果观还能干净地回答最后一个经典诘难：假如未来与过去真能构成闭合因果环路，“外祖母悖论”（回到过去阻止自己出发，即布尔逻辑里的 $P \leftrightarrow \neg P$）为何不会把宇宙逻辑炸毁？答案在于严格区分三种常被混为一谈的闭环自洽机制（`手工推导` + `文献结果` + `MODEL`）：
 
@@ -951,7 +951,7 @@ $$
 
 ---
 
-## 本章小结：从算术接缝到无时间因果晶体 {#sec-ch29-summary}
+## 29.5 本章小结：从算术接缝到无时间因果晶体 {#sec-ch29-summary}
 
 本章将毕达哥拉斯的勾股面积守恒、银斜率 $\sqrt{2} - 1$ 的佩尔余项与最佳逼近下界（[@thm-ch29-silver-pell-remainder]、[@thm-ch29-silver-best-approximation]）、黄金整数佩尔范数恒等式与单位向量 Gram 重叠等价关系（[@thm-ch29-gram-rigidity-and-pell]）、面素数与两平方和判据（[@thm-ch29-face-prime-two-squares]、[@thm-ch29-two-squares-classification]），对照连分数识别与算术几何文献评注（[@rem-ch29-pell-convergents-literature]、[@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-arithmetic-geometry-literature]）、无时间约束与驻相文献评注（[@rem-ch29-wheeler-dewitt-page-wootters-literature]、[@rem-ch29-feynman-stationary-phase-literature]）、斯宾诺莎三角形因果必然性与有限观察者的格拉姆椭圆体（$\det G \ge 0$），以及相干—去相干逻辑、双端玻恩握手、延迟擦除无信令与闭环自洽不动点（[@thm-ch29-coherence-complement-and-pinching]–[@thm-ch29-double-cover-fates-and-dottie]、[@rem-ch29-transactional-tsvf-eraser-literature]、[@rem-ch29-coherence-causality-comparison]）融为一炉：**全局无时间，故万古长存；观察者有限，故步步皆新。**
 
