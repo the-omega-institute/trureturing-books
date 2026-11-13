@@ -120,5 +120,129 @@ await page.keyboard.press('Space');
 check('Space plays: δ runs down', await until(page, () => { const d = window.MIRROR_DEBUG.state; return d.playing && d.delta < 0.34; }));
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 
+/* ---------- QUARTIC: the least value of F over the whole supported (δ, γ) domain ---------- */
+// Independent of the page: F(½ + it) as the product of its four linear factors (it − (±δ ± iγ)) in complex arithmetic,
+// minimized numerically over real t (F is even in t, so over t ≥ 0, the endpoint t = 0 included) by a dense grid and a
+// golden-section refinement. No closed form is used here.
+const Fprod = (d, g, t) => { let f = [1, 0]; for (const [a, b] of [[d, g], [d, -g], [-d, g], [-d, -g]]) f = cm(f, [-a, t - b]); return f; };
+function leastF(d, g) {
+  const hi = g + 1, n = 4000; let bi = 0, bf = Infinity;
+  for (let i = 0; i <= n; i++) { const f = Fprod(d, g, hi * i / n)[0]; if (f < bf) { bf = f; bi = i; } }
+  let a = Math.max(0, hi * (bi - 1) / n), b = Math.min(hi, hi * (bi + 1) / n);
+  const r = (Math.sqrt(5) - 1) / 2;
+  for (let k = 0; k < 200 && b - a > 1e-13; k++) { const c = b - r * (b - a), e = a + r * (b - a); if (Fprod(d, g, c)[0] <= Fprod(d, g, e)[0]) b = e; else a = c; }
+  const tm = (a + b) / 2, fa = Fprod(d, g, 0)[0], fm = Fprod(d, g, tm)[0];
+  return fa <= fm ? { t: 0, f: fa } : { t: tm, f: fm };
+}
+const SUPD = { '⁰': 0, '¹': 1, '²': 2, '³': 3, '⁴': 4, '⁵': 5, '⁶': 6, '⁷': 7, '⁸': 8, '⁹': 9 };
+/** The number a HUD prints after "最低" / "AT LEAST": decimals or m.mm×10ⁿ; with the precision it was printed at. */
+function hudNumber(text) {
+  const m = /(?:最低|AT LEAST)\s+([0-9.]+)(?:×10([⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+))?/.exec(text || '');
+  if (!m) return null;
+  if (m[2]) { const neg = m[2][0] === '⁻', e = [...m[2].replace('⁻', '')].reduce((v, ch) => v * 10 + SUPD[ch], 0); return { v: parseFloat(m[1]) * 10 ** (neg ? -e : e), rel: 0.006 }; }
+  const dec = (m[1].split('.')[1] || '').length; return { v: parseFloat(m[1]), abs: 0.5 * 10 ** -dec + 1e-12 };
+}
+// a numerical minimum at a double zero (δ = 0) is only zero to rounding: below 1e-20 it counts as 0
+const shows = (h, f) => h && (h.rel ? Math.abs(h.v - f) <= h.rel * f : Math.abs(h.v - f) <= h.abs) && (f > 1e-20 ? h.v > 0 : h.v === 0);
+const setGamma = async (g) => { await page.evaluate((v) => { const el = document.getElementById('gamma'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, g); };
+s = await pick('quartic');
+let qBad = [];
+for (const d of [0, 0.01, 0.1, 0.25, 0.3, 0.45]) for (const g of [0.3, 0.31, 0.44, 0.45, 0.46, 0.6, 2, 14, 40]) {
+  await setGamma(g); s = await seek(45 - 100 * d);
+  const want = leastF(d, g), qp = await page.evaluate(() => window.MIRROR_DEBUG.quarticPlot), big = await page.textContent('#hudBig'), sub = await page.textContent('#hudSub');
+  const tag = `δ=${d} γ=${g}`;
+  if (!(near(s.delta, d, 1e-12) && s.gamma === g)) { qBad.push(`${tag}: state ${s.delta} ${s.gamma}`); continue; }
+  if (!(Math.abs(s.fmin - want.f) <= 1e-9 * Math.max(want.f, 1e-6) && Math.abs(s.tmin - want.t) <= 2e-3)) qBad.push(`${tag}: page min ${s.fmin} at ${s.tmin}, numerical ${want.f} at ${want.t}`);
+  if (!(qp && qp.t === s.tmin && qp.f === s.fmin && qp.t >= qp.t0 && qp.t <= qp.t1)) qBad.push(`${tag}: plotted mark ${JSON.stringify(qp)}`);
+  if (!shows(hudNumber(big), want.f)) qBad.push(`${tag}: HUD "${big}" vs ${want.f}`);
+  if (d > 0 ? !sub.includes('不在线上') : !(sub.includes('成对落在线上') && !sub.includes('不在线上') && sub.includes(`±${g.toFixed(2)}`))) qBad.push(`${tag}: HUD sub "${sub}"`);
+}
+check('QUARTIC over δ ∈ {0 … 0.45} × γ ∈ {0.3 … 40} (54 cases, γ < δ, γ = δ and γ > δ): the page\'s least value of F, its minimizer, the plotted amber mark (in view) and the HUD agree with a numerical minimization of the product of four linear factors', qBad.length === 0, qBad.slice(0, 3).join(' | '));
+const wLow = leastF(0.45, 0.3);
+check('independent: at δ = 0.45, γ = 0.3 (γ < δ) the least value of F on the line is 0.08555625 at t = 0, not 4δ²γ² = 0.0729', near(wLow.f, 0.08555625, 1e-12) && wLow.t === 0 && Math.abs(wLow.f - 0.0729) > 0.01, JSON.stringify(wLow));
+
+/* ---------- QUARTIC at the end of the rail (δ = 0), as a reader reaches it, in both languages ---------- */
+for (const lang of ['zh', 'en']) {
+  const p = await T.open('quantum-geometry', 'critical-mirror', `?lang=${lang}&preset=quartic`, { locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+  await settle(p, 200);
+  await p.focus('#now'); await p.keyboard.press('End'); await settle(p);
+  const st = await p.evaluate(() => window.MIRROR_DEBUG.state), qp = await p.evaluate(() => window.MIRROR_DEBUG.quarticPlot);
+  const big = await p.textContent('#hudBig'), sub = await p.textContent('#hudSub');
+  const at14 = Fprod(0, 14, 14), want = leastF(0, 14);
+  check(`${lang}: End on the rail in QUARTIC gives δ = 0, γ = 14: two distinct points and F(½ + 14i) = 0 (product of the four linear factors)`, st.scene === 'quartic' && st.delta === 0 && st.gamma === 14 && st.count === 2 && at14[0] === 0 && at14[1] === 0 && want.f <= 1e-20 && near(want.t, 14, 2e-3), JSON.stringify([st.delta, st.gamma, st.count, at14, want]));
+  check(`${lang}: at δ = 0 the page's least value is 0 at t = 14, plotted there`, st.fmin === 0 && st.tmin === 14 && qp && qp.f === 0 && qp.t === 14 && qp.t >= qp.t0 && qp.t <= qp.t1, JSON.stringify([st.fmin, st.tmin, qp]));
+  const hud = lang === 'zh'
+    ? sub.includes('零点 ½ ± 14.00i 成对落在线上（各为二重）') && sub.includes('F 沿临界线非负，在 t = ±14.00 归零') && !sub.includes('不在线上') && shows(hudNumber(big), 0)
+    : sub.includes('Paired zeros ½ ± 14.00i lie on the line (each double)') && sub.includes('F is nonnegative along the line and vanishes at t = ±14.00') && !sub.includes('off the line') && shows(hudNumber(big), 0);
+  check(`${lang}: the HUD says the paired zeros lie on the line and F vanishes at t = ±γ, not that they are off the line`, hud, `${big} / ${sub}`);
+  const drawer = await p.evaluate((l) => document.querySelector(`#drawer .${l} ol li:nth-child(3)`).textContent, lang);
+  const dOk = lang === 'zh'
+    ? drawer.includes('δ ≠ 0 时处处为正') && drawer.includes('γ ≥ δ 时最小值 4δ²γ²（在 t = ±√(γ² − δ²) 处）') && drawer.includes('γ < δ 时最小值 (δ² + γ²)²（在 t = 0 处）') && drawer.includes('δ = 0 时零点 ½ ± iγ 成对落在线上（各为二重），F = (γ² − t²)² 非负，在 t = ±γ 归零') && !drawer.includes('是正实数')
+    : drawer.includes('for δ ≠ 0 it is positive everywhere') && drawer.includes('minimum 4δ²γ² at t = ±√(γ² − δ²) when γ ≥ δ') && drawer.includes('(δ² + γ²)² at t = 0 when γ < δ') && drawer.includes('at δ = 0 the zeros ½ ± iγ lie on the line in pairs (each double), and F = (γ² − t²)² is nonnegative and vanishes at t = ±γ') && !drawer.includes('positive real number');
+  check(`${lang}: the drawer gives the least value of F in both regimes γ ≥ δ and γ < δ, and the δ = 0 endpoint`, dOk, drawer);
+  // the identity behind the δ = 0 text: F = (γ² − t²)² ≥ 0 on the line, from the factors, at a spread of heights
+  let endOk = true; for (let t = 0; t <= 30; t += 0.25) { const f = Fprod(0, 14, t); endOk = endOk && Math.abs(f[1]) < 1e-9 && f[0] >= 0 && near(f[0], (196 - t * t) ** 2, 1e-9 * Math.max(1, f[0])); }
+  check(`${lang}: independent: at δ = 0 the product of the factors is (γ² − t²)², real and nonnegative`, endOk);
+  await p.context().close();
+}
+
+/* ---------- γ: one value for the state, the slider and its readout, through every control ---------- */
+const gAgree = async (exact = true) => {
+  await settle(page);
+  const st = await page.evaluate(() => window.MIRROR_DEBUG.state), v = parseFloat(await page.$eval('#gamma', (el) => el.value)), o = await page.textContent('#oGamma');
+  const ok = st.gamma >= 0.3 && st.gamma <= 40 && o === st.gamma.toFixed(2) && (exact ? v === st.gamma : Math.abs(v - st.gamma) <= 0.005 + 1e-12);
+  return { st, v, o, ok };
+};
+check('the γ slider spans the whole drag domain 0.3 … 40 in steps of 0.01', await page.$eval('#gamma', (el) => [el.min, el.max, el.step].join()) === '0.3,40,0.01');
+s = await pick('quartic');
+await page.click('#rew'); await settle(page);
+check('rewind in QUARTIC: δ = 0.45, γ still 14', near((await state()).delta, 0.45, 1e-12) && (await state()).gamma === 14);
+let to2 = await page.evaluate(() => window.MIRROR_DEBUG.at(0.95, 0.3));
+await page.mouse.click(to2[0], to2[1]);
+let ga = await gAgree();
+const wantNear = leastF(ga.st.delta, ga.st.gamma);
+check('click at σ = 0.95, γ = 0.30 (δ = 0.45): ρ moves there, and the state, the slider and its readout agree on γ', ga.ok && ga.st.side === 1 && near(ga.st.delta, 0.45, 1e-12) && near(ga.st.gamma, 0.3, 0.011), JSON.stringify([ga.st.gamma, ga.v, ga.o]));
+check('there γ < δ: the least value of F is at t = 0, equal to a numerical minimization, plotted in view, and the HUD prints it', ga.st.gamma < ga.st.delta && ga.st.tmin === 0 && near(ga.st.fmin, wantNear.f, 1e-12) && wantNear.t === 0 && shows(hudNumber(await page.textContent('#hudBig')), wantNear.f)
+  && (await page.evaluate(() => { const q = window.MIRROR_DEBUG.quarticPlot; return q.t === 0 && q.t0 === 0; })), JSON.stringify([ga.st.fmin, wantNear]));
+to2 = await page.evaluate(() => window.MIRROR_DEBUG.at(0.95, 0.05));
+await page.mouse.click(to2[0], to2[1]); ga = await gAgree();
+check('a click below the lowest height holds ρ at γ = 0.3: slider 0.3, readout 0.30', ga.ok && ga.st.gamma === 0.3 && ga.v === 0.3 && ga.o === '0.30', JSON.stringify([ga.st.gamma, ga.v, ga.o]));
+check('at δ = 0.45, γ = 0.3 the page reads the least value 0.0856 (HUD 0.086), not 0.0729', near(ga.st.fmin, 0.08555625, 1e-12) && /最低 0\.086$/.test(await page.textContent('#hudBig')), await page.textContent('#hudBig'));
+// drag ρ upwards past the top of the strip: the height climbs to the top of the domain, and the slider follows
+const from = await page.evaluate(() => window.MIRROR_DEBUG.at(0.7, 2));
+await page.mouse.move(from[0], from[1]); await page.mouse.down();
+for (let k = 0; k < 40 && (await state()).gamma < 40; k++) { await page.mouse.move(from[0], 2 + (k % 2)); await settle(page); }
+ga = await gAgree();
+check('dragging ρ far above the strip stops at γ = 40, and the slider and readout show 40.00 (not 35)', ga.ok && ga.st.gamma === 40 && ga.v === 40 && ga.o === '40.00', JSON.stringify([ga.st.gamma, ga.v, ga.o]));
+await page.mouse.up();
+// the slider itself: keyboard and pointer
+await page.focus('#gamma');
+await page.keyboard.press('Home'); ga = await gAgree();
+check('slider, Home: γ = 0.3 in the state, the slider and the readout', ga.ok && ga.st.gamma === 0.3 && ga.o === '0.30');
+await page.keyboard.press('ArrowRight'); ga = await gAgree();
+check('slider, →: γ = 0.31 everywhere', ga.ok && ga.st.gamma === 0.31 && ga.o === '0.31');
+await page.keyboard.press('End'); ga = await gAgree();
+check('slider, End: γ = 40 everywhere', ga.ok && ga.st.gamma === 40 && ga.o === '40.00');
+await page.keyboard.press('ArrowLeft'); ga = await gAgree();
+check('slider, ←: γ = 39.99 everywhere', ga.ok && ga.st.gamma === 39.99 && ga.o === '39.99');
+const box = await page.locator('#gamma').boundingBox();
+await page.mouse.click(box.x + 1, box.y + box.height / 2); ga = await gAgree();
+check('slider, a click at its left end: γ = 0.3 everywhere', ga.ok && ga.st.gamma === 0.3, JSON.stringify([ga.st.gamma, ga.v, ga.o]));
+await page.mouse.click(box.x + box.width - 1, box.y + box.height / 2); ga = await gAgree();
+check('slider, a click at its right end: γ = 40 everywhere', ga.ok && ga.st.gamma === 40, JSON.stringify([ga.st.gamma, ga.v, ga.o]));
+// cards
+s = await pick('cayley'); ga = await gAgree(false);
+check('CAYLEY keeps the first zero\'s height γ = 14.134725142; the slider sits on 14.13 and the readout shows 14.13', ga.ok && ga.st.gamma === 14.134725142 && ga.v === 14.13 && ga.o === '14.13' && (await page.textContent('#hudSub')).includes('14.1347i') && (ga.st.argW * 180 / Math.PI).toFixed(2) === '4.05');
+s = await pick('quartic'); ga = await gAgree();
+check('QUARTIC card: γ = 14 everywhere, δ = ¼, least value 49 = 4δ²γ²', ga.ok && ga.st.gamma === 14 && near(ga.st.delta, 0.25, 1e-12) && near(ga.st.fmin, leastF(0.25, 14).f, 1e-9) && near(ga.st.fmin, 49, 1e-9));
+// the rail and rewind move δ only
+await page.locator('body').click({ position: { x: 5, y: 5 } });
+await page.keyboard.press('End'); ga = await gAgree();
+check('rail End (δ = 0): γ unchanged and still agreed', ga.ok && ga.st.delta === 0 && ga.st.gamma === 14);
+await page.keyboard.press('Home'); ga = await gAgree();
+check('rail Home (δ = 0.45): γ unchanged and still agreed', ga.ok && near(ga.st.delta, 0.45, 1e-12) && ga.st.gamma === 14);
+await page.click('#rew'); ga = await gAgree();
+check('rewind: γ unchanged and still agreed', ga.ok && near(ga.st.delta, 0.45, 1e-12) && ga.st.gamma === 14);
+
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

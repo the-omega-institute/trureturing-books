@@ -1,7 +1,8 @@
 // Browser regression suite for ORTHO//ESCAPE (books/quantum-geometry/viz/sphere-escape/).
 //   node books/quantum-geometry/viz/tests/sphere-escape.test.mjs      (or: node tools/node/viz-test.mjs quantum-geometry)
 // Reads the page through window.ESCAPE_DEBUG and recomputes every claim independently: the flipped diagonal, the
-// polygon gap, the verified Taylor bound, the cosine orbit and Euclid's numbers (with BigInt).
+// polygon gap, the Taylor remainder and its verified bound (exact rational arithmetic in BigInt), the cosine orbit and
+// Euclid's numbers (with BigInt).
 import { session, stageFirstChecks, settle } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'sphere-escape';
@@ -146,18 +147,73 @@ check('step 4 is the 96-gon, whose half-perimeter 3.1410… is Liu Hui\'s area o
 s = await seek(5);
 check('step 5 is the 192-gon', s.n === 192 && (await page.textContent('#ro2')).startsWith('3.1414'));
 check('the key readout says the gap is positive', (await page.textContent('#roKey')).includes('> 0'));
+// Exact arithmetic for the slider's angles θ = n/20 (0.20 … 3.00 in steps of 0.05): BigInt fixed point at 10⁻¹⁵⁰, every
+// term θᵏ/k! rounded down from its exact fraction. The remainder of the cosine cut after m terms is the tail
+// Σ_{j≥m} (−1)ʲθ²ʲ/(2j)!, summed until the terms vanish at that scale; e^θ likewise. The rounding, at most one unit
+// of 10⁻¹⁵⁰ per term, and the omitted terms are below 10⁻¹⁴⁰, while the smallest remainder here is about 4×10⁻³³.
+const SC = 10n ** 150n;
+function exactTaylor(n, m) {
+  const N = BigInt(n); let num = 1n, den = 1n, R = 0n, E = 0n, a = 0n;
+  for (let k = 0; ; k++) {
+    if (k > 0) { num *= N; den *= 20n * BigInt(k); }
+    const t = SC * num / den;
+    if (t === 0n) break;
+    E += t;
+    if (k % 2 === 0 && k >= 2 * m) { if (k === 2 * m) a = t; R += (k / 2) % 2 ? -t : t; }
+  }
+  const absR = R < 0n ? -R : R, num2 = (x) => Number(x) / 1e150;
+  return { R: num2(absR), a: num2(a), B: num2(a) * num2(E), lt: absR * SC + 10n ** 12n * SC < a * E };   // lt: |R| < θ²ᵐ/(2m)!·e^θ with room for the rounding
+}
 const tay = await page.evaluate(() => { const out = []; for (const th of [0.2, 1, 2, 3]) for (let m = 1; m <= 10; m++) { const t = window.ESCAPE_DEBUG.taylor(th, m); out.push([th, m, t.actual, t.lagrange, t.bound]); } return out; });
 let tOk = true, tIndep = 0;
 for (const [th, m, actual, lagrange, bound] of tay) {
-  let sum = 0; for (let j = 0; j < m; j++) { let term = 1; for (let i = 1; i <= 2 * j; i++) term *= th / i; sum += (j % 2 ? -1 : 1) * term; }
-  let b = 1; for (let i = 1; i <= 2 * m; i++) b *= th / i;
-  tIndep = Math.max(tIndep, Math.abs(actual - Math.abs(Math.cos(th) - sum)), rel(lagrange, b), rel(bound, b * Math.exp(th)));
-  tOk = tOk && actual <= bound + 4e-16;   // the remainder itself is only known to a few ulps of cos θ
+  const X = exactTaylor(Math.round(th * 20), m);
+  tIndep = Math.max(tIndep, rel(actual, X.R), rel(lagrange, X.a), rel(bound, X.B));
+  tOk = tOk && actual < bound && X.lt;
 }
-check('the Taylor remainder never exceeds the verified bound θ²ᵐ/(2m)!·e^θ (40 cases)', tOk);
-check('remainder and bound agree with an independent computation', tIndep < 1e-12, `max error ${tIndep}`);
+check('the Taylor remainder stays strictly below the verified bound θ²ᵐ/(2m)!·e^θ (40 cases, page and exact)', tOk);
+check('remainder, first omitted term and bound agree with exact rational arithmetic (relative 1e-12)', tIndep < 1e-12, `max relative error ${tIndep}`);
 await setRange('tpoint', 2.5);
 check('the Taylor angle slider drives the second plot', (await page.textContent('#pBMeta')).includes('2.50'));
+
+/* ---------- the Taylor plot over the whole θ slider, driven by the keyboard ---------- */
+// The cancellation the plot must not show: cos θ minus the rounded partial sum is rounding error once the remainder is
+// below ~10⁻¹⁶. At θ = 0.35, m = 10 that difference is ~10⁻¹⁶, far above the verified bound, while the true remainder
+// (exact arithmetic) is below it.
+const naive = (() => { let sum = 0, term = 1; for (let j = 0; j < 10; j++) { sum += term; term *= -0.35 * 0.35 / ((2 * j + 1) * (2 * j + 2)); } return Math.abs(Math.cos(0.35) - sum); })();
+const WIT = exactTaylor(7, 10);
+check('cancellation witness, θ = 0.35, m = 10: cos θ minus the rounded partial sum is ≥ 10⁻¹⁷, over 10¹⁰ times the bound; the exact remainder 3.126951365532823×10⁻²⁸ is under the bound 4.438531831171985×10⁻²⁸',
+  naive >= 1e-17 && naive > 1e10 * WIT.B && rel(WIT.R, 3.12695136553282346883802570061798613168946316166809908409343e-28) < 1e-14
+  && rel(WIT.B, 4.43853183117198474637358398567238506484989525191591334578519e-28) < 1e-14 && WIT.lt, JSON.stringify([naive, WIT]));
+for (const lang of ['zh', 'en']) {
+  const p = await T.open(BOOK, ID, `?preset=liuhui&lang=${lang}`, { locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+  await settle(p, 200);
+  await p.focus('#tpoint'); await p.keyboard.press('Home'); for (let i = 0; i < 3; i++) await p.keyboard.press('ArrowRight');
+  await settle(p);
+  let tp = await p.evaluate(() => window.ESCAPE_DEBUG.taylorPlot);
+  const out = await p.textContent('#oTpoint'), meta = await p.textContent('#pBMeta');
+  check(`${lang}: LIUHUI card, θ slider Home then → three times: θ = 0.35, and the plotted remainder at m = 10 is the exact 3.127×10⁻²⁸, under the plotted bound`,
+    tp && Math.abs(tp.theta - 0.35) < 1e-12 && out === '0.35' && meta.includes('0.35') && rel(tp.actual[9], WIT.R) < 1e-12 && rel(tp.bound[9], WIT.B) < 1e-12 && tp.actual[9] < tp.bound[9],
+    JSON.stringify(tp && [tp.theta, out, meta, tp.actual[9], tp.bound[9]]));
+  if (lang === 'en') {
+    await p.keyboard.press('Home');
+    const bad = []; let cases = 0;
+    for (let n = 4; n <= 60; n++) {
+      if (n > 4) await p.keyboard.press('ArrowRight');
+      await settle(p);
+      tp = await p.evaluate(() => window.ESCAPE_DEBUG.taylorPlot);
+      const o = await p.textContent('#oTpoint');
+      if (!tp || Math.abs(tp.theta - n / 20) > 1e-12 || o !== (n / 20).toFixed(2)) { bad.push(`n=${n}: θ ${tp && tp.theta}, readout ${o}`); continue; }
+      for (let m = 1; m <= 10; m++) {
+        const X = exactTaylor(n, m), a = tp.actual[m - 1], b = tp.bound[m - 1]; cases++;
+        if (!(a != null && rel(a, X.R) < 1e-12 && rel(b, X.B) < 1e-12 && a < b && X.lt && a >= tp.y[0] && a <= tp.y[1] && b >= tp.y[0] && b <= tp.y[1])) bad.push(`θ=${n / 20} m=${m}: page ${a} < ${b}? exact ${X.R} < ${X.B}`);
+      }
+    }
+    check('the θ slider walked by → over 0.20 … 3.00 (57 positions × m = 1 … 10 = 570 cases): each plotted remainder equals the exact one (relative 1e-12), stays strictly under the plotted verified bound, and both lie inside the plot',
+      bad.length === 0 && cases === 570, bad.slice(0, 3).join(' | '));
+  }
+  await p.context().close();
+}
 
 /* ---------- cosine ---------- */
 await scene('cos'); await setRange('x0', 0); await page.click('#zoomChips [data-zoom="follow"]'); s = await seek(0);

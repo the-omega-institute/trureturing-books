@@ -11,6 +11,7 @@
   const { kit, L } = TRV, { fix } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
   const DMAX = 0.45, RAIL = 45;                       // the rail runs δ from 0.45 down to 0 in steps of 0.01
+  const GMIN = 0.3, GMAX = 40;                        // the heights γ that dragging, the slider and its readout share
   const S = { scene: 'mirror', side: 1, gamma: 2 };
   const delta = () => Math.max(0, (RAIL - clock.t) / 100);
   const railOf = (d) => RAIL - 100 * d;
@@ -64,10 +65,14 @@
     return mul(scale(mul(s, sub(s, C(1))), 0.5), mul(g, zeta(s)));
   }
   const quartic = (d, gamma, t) => { const a = d * d + gamma * gamma - t * t; return a * a + 4 * d * d * t * t; };   // F(½ + it), F = offCriticalQuartic δ γ
+  /** The least value of F(½ + it) over real t, and where it is attained. With u = t² ≥ 0, F = u² + 2(δ² − γ²)u + (δ² + γ²)²
+      is a parabola in u whose vertex u = γ² − δ² is admissible only when γ² ≥ δ²; otherwise the least value is at t = 0. */
+  const quarticMin = (d, gamma) => (gamma * gamma >= d * d ? { t: Math.sqrt(gamma * gamma - d * d), f: 4 * d * d * gamma * gamma } : { t: 0, f: (d * d + gamma * gamma) ** 2 });
+  const fmtF = (x) => (x < 1e-3 ? sci(x) : fix(x, x < 10 ? 3 : 1));   // a positive least value never reads as 0.000
   const ZEROS = [14.134725142, 21.022039639, 25.010857580, 30.424876126, 32.935061588];   // the first five ordinates (numerical)
 
   /* ---------- the stage ---------- */
-  let geoS = null;
+  let geoS = null, quarticView = null;
   function panels(W, H) {
     const narrow = W < 640, top = TRV.thumbMode ? 18 : 92, bot = TRV.thumbMode ? 18 : 54;
     if (!narrow) { const mid = Math.round(W * 0.42); return { narrow, s: [16, W - mid + 8, top, bot], r: [mid + 24, 18, top, bot], split: mid }; }
@@ -135,7 +140,7 @@
     c.fillText(L(`放大：角 ±${fix(A * 180 / Math.PI, 1)}° · ln|w| ±${sci(D)}`, `zoom: angle ±${fix(A * 180 / Math.PI, 1)}° · ln|w| ±${sci(D)}`), mx + 6, my + 5);
   }
   function drawQuartic(cv, pad) {
-    const d = delta(), gm = S.gamma, t0 = Math.max(0.2, gm - 1.2), t1 = gm + 1.2;
+    const d = delta(), gm = S.gamma, t0 = Math.max(0, gm - 1.2), t1 = gm + 1.2;   // the least value of F lies in [max(0, γ − δ), γ]: always in view
     const H = cv.clientHeight, ih = H - pad[2] - pad[3], gap = 26, h1 = (ih - gap) / 2;
     const Fs = [], Xs = []; let fmax = 0, xmax = 0;
     for (let i = 0; i <= 160; i++) { const t = t0 + (t1 - t0) * i / 160, f = quartic(d, gm, t), x = xiLine(t).re; Fs.push([t, f]); Xs.push([t, x]); fmax = Math.max(fmax, f); xmax = Math.max(xmax, Math.abs(x)); }
@@ -143,8 +148,9 @@
     g1.axes({ yTicks: [[0, '0']], xTicks: [] });
     g1.line([[t0, 0], [t1, 0]], P.dim, { width: 1 });
     g1.line(Fs, P.cyan, { width: 2 });
-    const fmin = 4 * d * d * gm * gm, tm = Math.sqrt(Math.max(0, gm * gm - d * d));
-    g1.dot(tm, fmin, P.amber, 5);
+    const q = quarticMin(d, gm);
+    g1.dot(q.t, q.f, P.amber, 5);
+    quarticView = { t0, t1, t: q.t, f: q.f };
     const g2 = kit.plot(cv, { x: [t0, t1], y: [-xmax * 1.15, xmax * 1.15], pad: [pad[0] + 34, pad[1], pad[2] + h1 + gap + 16, pad[3]], clear: false });
     g2.axes({ yTicks: [[0, '0']], xTicks: [[Math.ceil(t0), String(Math.ceil(t0))], [Math.round(gm), String(Math.round(gm))], [Math.floor(t1), String(Math.floor(t1))]] });
     g2.line([[t0, 0], [t1, 0]], P.dim, { width: 1 });
@@ -152,7 +158,7 @@
     ZEROS.forEach((z) => { if (z > t0 && z < t1) g2.dot(z, 0, P.dim, 4.5); });
     if (TRV.thumbMode) return;
     const c = g1.ctx; c.font = `600 12px ${TRV.fonts.data}`; c.textAlign = 'left'; c.textBaseline = 'top';
-    c.fillStyle = P.cyan; c.fillText(L(`F(½ + it)，最低 ${fix(fmin, fmin < 10 ? 3 : 1)}`, `F(½ + it), lowest ${fix(fmin, fmin < 10 ? 3 : 1)}`), g1.pl + 6, pad[2]);
+    c.fillStyle = P.cyan; c.fillText(L(`F(½ + it)，最低 ${fmtF(q.f)}`, `F(½ + it), lowest ${fmtF(q.f)}`), g1.pl + 6, pad[2]);
     c.fillStyle = P.magenta; c.fillText(L('ξ(½ + it)（另一把标尺）', 'ξ(½ + it) (its own scale)'), g2.pl + 6, pad[2] + h1 + gap);
     g2.text(t1, -xmax * 1.15, 't', P.dim, { align: 'right', base: 'bottom', dx: -2, dy: -2, size: 11 });
   }
@@ -174,9 +180,12 @@
       $('hudSub').textContent = L(`ρ = ${fix(O[0].s.re, 2)} + ${fix(S.gamma, 4)}i：镜像与共轭给出 ${n} 个点；w 的辐角 ${fix(Math.atan2(w.im, w.re) * 180 / Math.PI, 2)}°，ln|w| = ${sci(Math.log(cabs(w)))}`,
         `ρ = ${fix(O[0].s.re, 2)} + ${fix(S.gamma, 4)}i: mirror and conjugation give ${n} points; arg w = ${fix(Math.atan2(w.im, w.re) * 180 / Math.PI, 2)}°, ln|w| = ${sci(Math.log(cabs(w)))}`);
     } else {
-      const fmin = 4 * d * d * S.gamma * S.gamma;
-      $('hudBig').textContent = L(`伪造的四点组 · F 在线上最低 ${fix(fmin, fmin < 10 ? 3 : 1)}`, `MOCK QUARTET · F ON THE LINE AT LEAST ${fix(fmin, fmin < 10 ? 3 : 1)}`);
-      $('hudSub').textContent = L(`零点 ½ ± ${fix(d, 2)} ± ${fix(S.gamma, 2)}i 不在线上；F 沿临界线取实值却不变号，ξ 在 14 与 15 之间变号`, `Zeros ½ ± ${fix(d, 2)} ± ${fix(S.gamma, 2)}i are off the line; F is real along the line and never changes sign, while ξ changes sign between 14 and 15`);
+      const fmin = quarticMin(d, S.gamma).f, gs = fix(S.gamma, 2);
+      $('hudBig').textContent = L(`伪造的四点组 · F 在线上最低 ${fmtF(fmin)}`, `MOCK QUARTET · F ON THE LINE AT LEAST ${fmtF(fmin)}`);
+      // δ = 0 is on the rail: there the zeros are ½ ± iγ, each double, and F = (γ² − t²)² touches 0 at t = ±γ
+      $('hudSub').textContent = d > 1e-9
+        ? L(`零点 ½ ± ${fix(d, 2)} ± ${gs}i 不在线上；F 沿临界线取实值却不变号，ξ 在 14 与 15 之间变号`, `Zeros ½ ± ${fix(d, 2)} ± ${gs}i are off the line; F is real along the line and never changes sign, while ξ changes sign between 14 and 15`)
+        : L(`零点 ½ ± ${gs}i 成对落在线上（各为二重）；F 沿临界线非负，在 t = ±${gs} 归零，ξ 在 14 与 15 之间变号`, `Paired zeros ½ ± ${gs}i lie on the line (each double); F is nonnegative along the line and vanishes at t = ±${gs}, while ξ changes sign between 14 and 15`);
     }
   }
 
@@ -216,6 +225,9 @@
   });
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { cards.mark(null); S.scene = v; paint(); });
   const fGamma = kit.field($('gamma'), { fmt: (v) => fix(v, 2), onInput: (v) => { cards.mark(null); S.gamma = v; paint(); } });
+  /** Move ρ to height v: the state and the slider take the same legal value, on the slider's grid of 0.01 inside
+      [GMIN, GMAX]. A card may keep a finer height (the first zero's), which the slider and its readout show to 0.01. */
+  const setGamma = (v, exact) => { S.gamma = exact ? v : Math.min(GMAX, Math.max(GMIN, Math.round(v * 100) / 100)); fGamma.set(S.gamma); };
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
   // drag ρ in the s plane
   let dragging = false;
@@ -223,7 +235,7 @@
     if (!geoS) return;
     const b = $('cv').getBoundingClientRect(), x = geoS.invX(ev.clientX - b.left), y = geoS.invY(ev.clientY - b.top);
     const d = Math.min(DMAX, Math.abs(x - 0.5)); S.side = x >= 0.5 ? 1 : -1;
-    S.gamma = Math.min(40, Math.max(0.3, Math.abs(y))); fGamma.set(Math.round(S.gamma * 100) / 100);
+    setGamma(Math.abs(y));
     clock.set(railOf(Math.round(d * 100) / 100)); paint();
   };
   $('cv').addEventListener('pointerdown', (ev) => {
@@ -257,7 +269,7 @@
   let booting = true;
   function applyPreset(id) {
     const p = PRESETS[id];
-    clock.pause(); S.scene = p.scene; sceneChips.set(p.scene, true); S.side = p.side || 1; S.gamma = p.gamma; fGamma.set(Math.round(p.gamma * 100) / 100);
+    clock.pause(); S.scene = p.scene; sceneChips.set(p.scene, true); S.side = p.side || 1; setGamma(p.gamma, true);
     clock.set(railOf(p.d));
     if (TRV.still || (booting && !TRV.embed) || !p.play) { paint(); return; }
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
@@ -271,16 +283,19 @@
   window.MIRROR_DEBUG = {
     get state() {
       const d = delta(), O = orbit(d, S.side, S.gamma);
+      const q = quarticMin(d, S.gamma);
       return { scene: S.scene, delta: d, side: S.side, gamma: S.gamma, t: clock.t, playing: clock.playing, preset: cards.current, count: distinct(O),
-        points: O.map((p) => [p.s.re, p.s.im]), images: O.map((p) => [p.w.re, p.w.im]), absW: O.map((p) => cabs(p.w)), lnW: Math.log(cabs(O[0].w)), argW: Math.atan2(O[0].w.im, O[0].w.re), fmin: 4 * d * d * S.gamma * S.gamma };
+        points: O.map((p) => [p.s.re, p.s.im]), images: O.map((p) => [p.w.re, p.w.im]), absW: O.map((p) => cabs(p.w)), lnW: Math.log(cabs(O[0].w)), argW: Math.atan2(O[0].w.im, O[0].w.re), fmin: q.f, tmin: q.t };
     },
+    /** The last QUARTIC plot: its t range and the amber mark of the least value of F (null before the scene is drawn). */
+    get quarticPlot() { return quarticView ? { ...quarticView } : null; },
     seek: (t) => { clock.pause(); clock.set(t); },
     xi: (t) => { const x = xiLine(t); return [x.re, x.im]; },
     quartic: (t) => quartic(delta(), S.gamma, t),
     /** Viewport coordinates of the s-plane point σ + it. */
     at: (sigma, t) => { const b = $('cv').getBoundingClientRect(); return [b.left + geoS.X(sigma), b.top + geoS.Y(t)]; }
   };
-  window.TRV_THUMB = () => { clock.pause(); S.scene = 'mirror'; S.side = 1; S.gamma = 2; clock.set(railOf(0.1)); paint.now(); };
+  window.TRV_THUMB = () => { clock.pause(); S.scene = 'mirror'; S.side = 1; setGamma(2); clock.set(railOf(0.1)); paint.now(); };
   cards.pick(cards.initial('quartet'));
   booting = false;
   paint();
