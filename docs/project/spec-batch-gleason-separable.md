@@ -1,10 +1,10 @@
 # 可分复 Hilbert 空间投影赋值：统一泛函、尾项与原生密度的采用规格
 
-本规格供指定正文主笔核对完整应用的数学接口、来源与采用边界。从原始投影读数到同一组正归一连续复线性泛函、有限秩尾项与正原生迹类密度的完整联合结论，已有整体 Lean 内核核验的应用证据，包含解析迹一、每个有界算子的原生迹配对及仅凭原始投影读数的密度唯一性。它是既有结果的应用组合，没有保留新的 Lean 声明，应用没有独立的 theorem Describe 或公开原始输入 GID。源码说明所在的固定本地检查点尚未合并，中英文正文采用亦未完成。本规格只给工程采用接口与推导，不提供替换章节段落。
+本规格供指定正文主笔核对完整应用的数学接口、来源与采用边界。从原始投影读数到同一组正归一连续复线性泛函、有限秩尾项与正原生迹类密度的完整联合结论，已有整体 Lean 内核核验的应用证据，包含解析迹一、每个有界算子的原生迹配对及仅凭原始投影读数的密度唯一性。它是既有结果的应用组合，没有保留新的 Lean 声明，应用没有独立的 theorem Describe 或公开原始输入 GID。中英文正文采用尚未完成。本规格只给工程采用接口与推导，不提供替换章节段落。
 
 ## 1. 固定来源与有限声明的关系
 
-本规格的源码基准为 trureturing 不可变本地检查点 `4367dc9542d65524f3c2a9b5055be18f85ca8d7e`。该检查点尚未合并，不能据此视作已进入集成分支。完整应用的两个对应来源是：
+本规格的源码基准为 trureturing 不可变提交 `4367dc9542d65524f3c2a9b5055be18f85ca8d7e`。完整应用的两个对应来源是：
 
 - [Blueprint：Application to a countably additive projection measure](https://github.com/the-omega-institute/trureturing/blob/4367dc9542d65524f3c2a9b5055be18f85ca8d7e/Blueprint/D5/S3/Quantum/GleasonComplexRepresentation.md#application-to-a-countably-additive-projection-measure)。
 - [拥有该应用的 Scribe 定义](https://github.com/the-omega-institute/trureturing/blob/4367dc9542d65524f3c2a9b5055be18f85ca8d7e/Blueprint/D5/S3/Quantum/GleasonComplexRepresentation.scribe.cs)：`GleasonComplexRepresentationDocument.Create` 中同名 `DocumentBlock.Section`；它在有限定理的 `Describe.Lean` 之外，未增加另一个声明句柄。
@@ -13,7 +13,7 @@
 
 有限声明的[冻结记录](https://github.com/the-omega-institute/trureturing/blob/4367dc9542d65524f3c2a9b5055be18f85ca8d7e/Golden/Frozen/state/D5/S3/Quantum/GleasonComplexRepresentation.lean.json)仍含名称键 `ns(ns(ns(n0,7:Gleason),17:ProjectionPackage),22:gleason_representation)`、种类 `theorem`，模块状态 `statement_id` 为 `sha256:dd9874dc790ed4367402ce8fce42837ee0c9f1b2ff1ccb61b47c1769440a4326`。模块状态身份不能冒充新增应用的声明 ID。
 
-[书库锁文件](../../trureturing.lock.json)保持在 `e526f0f5e3a1e84b05f05c0c009eab920bc3a06f`，共 549 条声明引用；尚未引用上述有限声明或下述向量级数供应声明，更没有覆盖本应用的无限维原始输入 GID。完整联合核验的应用证据、检查点中的应用说明、既有冻结供应声明、锁内已采用声明各有不同的采用权限。不得给本应用附加 `lean` 属性或沿用有限 GID 覆盖其无限维范围。
+[书库锁文件](../../trureturing.lock.json)保持在 `e526f0f5e3a1e84b05f05c0c009eab920bc3a06f`，共 549 条声明引用；尚未引用上述有限声明或下述向量级数供应声明，更没有覆盖本应用的无限维原始输入 GID。完整联合核验的应用证据、固定源码中的应用说明、既有冻结供应声明、锁内已采用声明各有不同的采用权限。不得给本应用附加 `lean` 属性或沿用有限 GID 覆盖其无限维范围。
 
 ## 2. 原始输入与精确可数法则
 
@@ -199,7 +199,7 @@ $$
 | 层次 | 输入与可使用结果 | 采用界限 |
 | --- | --- | --- |
 | 有限冻结定理 | 有限 `ProjectionPackage N`、$N\ge3$；唯一有限密度矩阵 | 第 4 节有质量有限角的供应；无限维环境没有变成有限矩阵。 |
-| 完整联合应用 | 第 2 节原始 $p$；同一 $\phi,E,\rho$，全部投影一致性、尾项、原生迹一、全算子配对和投影读数唯一性 | 已有完整联合核验证据；检查点未合并，没有独立公开声明、theorem Describe 或 GID。 |
+| 完整联合应用 | 第 2 节原始 $p$；同一 $\phi,E,\rho$，全部投影一致性、尾项、原生迹一、全算子配对和投影读数唯一性 | 已有完整联合核验证据；没有独立公开声明、theorem Describe 或 GID。 |
 | 冻结向量级数供应 | 已给定的正归一 $\phi$ 与有限秩 tightness；一组质量一向量代表全部有界算子 | 只输出向量族及 `HasSum`；完整原生结论还使用下节各供应项，不能归给该单条声明。 |
 | 书稿采用 | 精确条件、来源、文献环境与双语对齐 | 尚待指定正文主笔采用；工程规格与联合核验证据不自动改变书稿环境或锁内引用。 |
 
@@ -207,7 +207,7 @@ $$
 
 本节接第 5 节同一向量族 $u:\mathbb N\to H$，保持 $\operatorname{HasSum}(k\mapsto\|u_k\|^2,1)$ 及对每个 $A$ 的复 `HasSum`。这些步骤与第 2–4 节的原始输入构造已在一个完整联合结论中共同核验；这里呈现其数学组合和精确接口，不重新命名为公开定理。
 
-下述 Mathlib 接口均属于该检查点 [`lake-manifest.json`](https://github.com/the-omega-institute/trureturing/blob/4367dc9542d65524f3c2a9b5055be18f85ca8d7e/lake-manifest.json) 所钉的 `56a005855ea17e0b0958f73ec801ae140b0a1679`。路径以所钉依赖的模块名记载，不把当前其他版本的同名接口混入应用。
+下述 Mathlib 接口均属于该提交 [`lake-manifest.json`](https://github.com/the-omega-institute/trureturing/blob/4367dc9542d65524f3c2a9b5055be18f85ca8d7e/lake-manifest.json) 所钉的 `56a005855ea17e0b0958f73ec801ae140b0a1679`。路径以所钉依赖的模块名记载，不把当前其他版本的同名接口混入应用。
 
 **从向量族到正算子。** 内积第一变量共轭线性，记
 
