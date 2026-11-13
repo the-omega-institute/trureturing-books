@@ -398,6 +398,10 @@ check('English zero-overlap comparison explicitly rejects the premise', await te
 
 // Both figure cards keep their essential annotation and the upgrade switch on the stage.
 const figure = await T.open(BOOK, ID, '?embed=1&lang=en&preset=deja-vu-hit', { viewport: { width: 740, height: 500 }, reducedMotion: 'reduce' });
+// A cited card starts playing (from t = 0) at its first in-view report; seek only after that, or the start overwrites the seek.
+check('embedded hit figure plays its card once the stage is in view', await until(figure, () => {
+  const q = window.DEJAVU_SANDTABLE_DEBUG.state; return q.preset === 'deja-vu-hit' && (q.playing || q.t > 0);
+}));
 await figure.evaluate(() => window.DEJAVU_SANDTABLE_DEBUG.seek(2));
 await settle(figure);
 const box = await figure.locator('#cacheCard').evaluate((el) => {
