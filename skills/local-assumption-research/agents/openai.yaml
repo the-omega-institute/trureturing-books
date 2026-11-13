@@ -1,0 +1,4 @@
+interface:
+  display_name: "持续模型研究与形式化"
+  short_description: "研究模型假设、误差界与预测，贯通形式化和双语书稿的两仓交付"
+  default_prompt: "使用 $local-assumption-research 接续当前模型问题，推进实质研究，尝试上游形式化、回写书稿并按授权完成两仓 PR 与合并，同时从实际反馈中提炼可泛化的方法改进本 skill。"
