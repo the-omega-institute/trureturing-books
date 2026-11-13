@@ -1,0 +1,43 @@
+/* ORTHO//HANDSHAKE: the shared lab layout (../assets/theme.css) carries the page; every colour comes from the tokens.
+   Book colour rule: amber marks only the current cursor of the rail, so the theme's other amber accents become cyan or ink. */
+.tagline em { color: var(--cyan); }
+.toast { border-color: var(--cyan); box-shadow: 0 0 22px color-mix(in srgb, var(--cyan) 22%, transparent); }
+.toast b { color: var(--cyan); }
+.sheet li b { color: var(--cyan); }
+.field output { color: var(--ink); }
+
+/* math symbols must keep their case: no uppercase on chips, stage labels or the snap groups (θ, φ, β, η, Δ, π stay lower-case) */
+.app .chip, .drawer .chip { text-transform: none; letter-spacing: 0.04em; }
+.stage .tag { text-transform: none; letter-spacing: 0.02em; }
+#boolSnaps, #bornSnaps, #tsvfSnaps, #gramSnaps, #loopSnaps, #mChips, #fanChips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+/* chip groups inside a .field take their own row under the label */
+.field > .chips { grid-column: 1 / -1; }
+#gramSnaps .chip[aria-pressed="true"] { background: var(--violet); border-color: var(--violet); color: var(--on-accent); box-shadow: none; }
+
+/* 2D scenes: dragging only moves the handles, so the stage is not a grab surface */
+.stage.flat { cursor: default; }
+.stage.flat:active { cursor: default; }
+
+/* stage labels: one line per label, or two stacked lines for a panel footer */
+.stage .tag.raw { font-size: 12px; }
+.stage .tag.small { font-size: 11px; }
+.stage .tag.title { font-family: var(--font-display); font-size: 11.5px; letter-spacing: 0.08em; color: var(--ink); }
+.stage .tag.foot { font-family: var(--font-data); font-size: 11px; line-height: 1.35; text-align: center; color: var(--ink); }
+.stage .tag .c-dim { color: var(--dim); }
+.stage .tag sub { font-size: 0.78em; }
+
+/* readouts: long complex numbers and residuals wrap instead of widening the column */
+dl.ro dd { overflow-wrap: anywhere; }
+dl.ro .key dd b { font-size: 17px; }
+
+/* touch: every control a finger presses is at least 44 px tall on a phone or a coarse pointer */
+@media (max-width: 520px), (pointer: coarse) {
+  .app .chip, .drawer .chip, .langs button, .tbtn, .tour .tbtn { min-height: 44px; min-width: 44px; }
+  .preset { min-height: 44px; }
+  .field input[type=range], .clock input[type=range] { height: 44px; }
+  .crumb { min-height: 44px; display: inline-flex; align-items: center; }
+}
+@media (max-width: 520px) {
+  .hud-tl .big { font-size: 12px; letter-spacing: 0.06em; }
+  .hud-tl .sub { font-size: 11px; }
+}

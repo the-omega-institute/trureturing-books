@@ -810,12 +810,12 @@ section: "Part X · warrant"
 
 <div class="body">
   <p class="kicker">Literature results · not formalized in this book</p>
-  <h2 class="t">Quantum erasers and spinor bilinears are literature; <em>non-duality is interpretation</em></h2>
+  <h2 class="t">Erasers and spinor bilinears are literature; <em>non-duality is model</em></h2>
   <div class="g2 mt">
     <div class="card violet">
       <h4>Literature · Chapter 37</h4>
-      <h3>Which-path marking and delayed-choice erasure</h3>
-      <p>Fringes vanish when the path is recorded distinguishably; projecting the probe onto the complementary basis and sorting by its reading brings them back in the conditional sub-ensembles. The unconditional total never changes, so no signal goes back in time.</p>
+      <h3>Which-path marking and delayed erasure</h3>
+      <p>Distinguishable path records erase fringes; projecting the probe onto a complementary basis restores them only within sorted sub-ensembles. The unconditional total never changes—no signal goes back in time.</p>
     </div>
     <div class="card violet">
       <h4>Literature · Chapter 39</h4>
@@ -823,7 +823,7 @@ section: "Part X · warrant"
       <p>A spinor is not observed directly; spacetime quantities are its bilinears: <Tex t="\mathbf J = \psi\gamma_0\tilde\psi" />, <Tex t="\mathbf S = \psi\mathbf I_{12}\tilde\psi" />; at <Tex t="\beta = 0" />, <Tex t="\mathbf J^2 = -\mathbf S^2 = \rho^2" />.</p>
     </div>
   </div>
-  <p class="lead mt">Dream erasure, the memory pointer and “the observer is the ontological universe” are the book's interpretive model (MODEL): argued from verified theorems, not derived from them. Part X has no open problems.</p>
+  <p class="lead mt">Dream erasure, the memory pointer and “observer as universe” are the book's model (MODEL): argued from verified theorems, not derived from them. Uniform <Tex t="\mathrm{P} \neq \mathrm{NP}" /> and Rauzy fractal-horizon scaling remain open (OPEN).</p>
 </div>
 <Source>Chapters 37 and 39, literature remarks</Source>
 
@@ -836,18 +836,18 @@ section: "Three tiers"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">Three tiers of warrant, <em>three colours</em>, never mixed</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green counts the theorems with a Lean reference, violet the literature results, red the open conjectures; under the green bar, the number of theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green counts the theorems with a Lean reference, violet the literature results, red the open conjectures and problems; under the green bar, the number of theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
     <div>
       <ul class="plain">
         <li><span class="hl-ok">LEAN ✓</span>: theorems, lemmas, propositions and corollaries with lean=</li>
         <li><span class="hl-violet">Literature</span>: remarks and examples marked “literature result, not formalized”</li>
-        <li><span class="hl-warn">OPEN</span>: open conjectures, with no Lean reference</li>
+        <li><span class="hl-warn">OPEN</span>: open conjectures and problems, with no Lean reference</li>
       </ul>
       <p class="lead mt">The counts on the left are computed by the figure script from the text and the lock file <span class="mono">trureturing.lock.json</span>, and follow the book; the lock pins <PinnedCommit />.</p>
     </div>
   </div>
 </div>
-<Source>Counted from both editions and trureturing.lock.json · Prelude, prelude-three-tiers · Appendix C</Source>
+<Source>Counted from the Chinese edition and trureturing.lock.json · Prelude, prelude-three-tiers · Appendix C</Source>
 
 ---
 # 47 Dependency map

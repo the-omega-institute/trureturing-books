@@ -823,7 +823,7 @@ section: "第十部 · 依据"
       <p>旋量不能直接观测，时空量由它夹持生成：<Tex t="\mathbf J = \psi\gamma_0\tilde\psi" />，<Tex t="\mathbf S = \psi\mathbf I_{12}\tilde\psi" />；在 <Tex t="\beta = 0" /> 时 <Tex t="\mathbf J^2 = -\mathbf S^2 = \rho^2" />。</p>
     </div>
   </div>
-  <p class="lead mt">梦境擦除、记忆指针与“观察者即宇宙本体”是本书的诠释模型（MODEL），借已验证的定理立论，不由它们推出；第十部没有开放问题。</p>
+  <p class="lead mt">梦境擦除、记忆指针与“观察者即宇宙本体”是本书的诠释模型（MODEL），借已验证的定理立论，不由它们推出；第十部将标准图灵机 <Tex t="\mathrm{P} \neq \mathrm{NP}" /> 与劳齐分形视界纠缠标度显式标为开放问题（OPEN）。</p>
 </div>
 <Source>第三十七章、第三十九章 文献注记</Source>
 
@@ -836,18 +836,18 @@ section: "三层依据"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">三层依据，<em>三种颜色</em>，从不越级</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色是带 Lean 引用的定理条数，紫色是文献结果的条数，红色是开放猜想的条数；绿色下注锁文件里 theorem 声明的条数。" style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色是带 Lean 引用的定理条数，紫色是文献结果的条数，红色是开放猜想与开放问题的条数；绿色下注锁文件里 theorem 声明的条数。" style="display: block; width: 900px; max-width: 100%;">
     <div>
       <ul class="plain">
         <li><span class="hl-ok">LEAN ✓</span>：带 lean= 的定理、引理、命题与推论</li>
         <li><span class="hl-violet">文献结果</span>：写明“文献结果，未在本书形式化”的注记与例</li>
-        <li><span class="hl-warn">OPEN</span>：开放猜想，不带 Lean 引用</li>
+        <li><span class="hl-warn">OPEN</span>：开放猜想与开放问题，不带 Lean 引用</li>
       </ul>
       <p class="lead mt">左图的条数由图脚本从正文与锁文件 <span class="mono">trureturing.lock.json</span> 算出，随书更新；锁文件钉住 <PinnedCommit />。</p>
     </div>
   </div>
 </div>
-<Source>按中英两版正文与 trureturing.lock.json 统计 · 序曲 prelude-three-tiers · 附录 C</Source>
+<Source>按中文正文与 trureturing.lock.json 统计 · 序曲 prelude-three-tiers · 附录 C</Source>
 
 ---
 # 47 依赖导图

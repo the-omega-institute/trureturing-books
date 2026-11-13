@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//RAUZY · Zeckendorf, Pisot and Rauzy: an eight-concept sandtable">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//RAUZY 齐肯多夫、皮索与劳齐 · 八概念综合沙盘</title>
+<meta name="description" content="第三十九章八概念综合沙盘的四个场景。同一串不出现 K 个连续 1 的 0/1 字 ε，按 e(X) = Σ εⱼXʲ 在皮索根 β_K 处放大成物理直线上的点，在共轭根 α 处收缩成内部平面上的点。3D 沙盘：竖轴是 e(β)·β<sup>−Q</sup>，水平面是 e(α)，K = 3 时地面上的点云就是劳齐分形 R₃ 的有限样本。2D：K = 3 的内部平面按三支收缩 f₀(w) = αw、f₁₀(w) = 1 + α²w、f₁₁₀(w) = 1 + α + α³w 上色；P_K 的根与单位圆，β_K → 2 且 2 − β_K = β_K^−K；余弦不动点 θ* ≈ 0.739085 与 |α| = β₃^−1/2 ≈ 0.737353 并排，相差约 0.2344%，是数值上的接近，不是恒等式。树与切口：剪掉 K 个连续 1 的字树（K = 2 时是斐波那契个字与黄金窗口），素数幂余数树（第一次分岔在 v_p(x − y) + 1 层），跨切口的直接编码（接缝处 τ(x) + ι(y) < K，页秩上限 R₀、R₁）。熵与逃逸：帕里重置链的平稳律与有限目录里无法区分的有序点对。Four scenes for Chapter 39's eight-concept sandtable. The same 0/1 words ε with no K ones in a row give e(X) = Σ εⱼXʲ, which expands at the Pisot root β_K into a point of the physical line and contracts at a conjugate root α into a point of the internal plane. 3D sandtable: height e(β)·β^−Q over the internal plane e(α); at K = 3 the shadow on the floor is a finite sample of the Rauzy fractal R₃. 2D: the K = 3 internal plane coloured by the three contractions f₀(w) = αw, f₁₀(w) = 1 + α²w, f₁₁₀(w) = 1 + α + α³w; the roots of P_K against the unit circle, β_K → 2 with 2 − β_K = β_K^−K; the cosine fixed point θ* ≈ 0.739085 beside |α| = β₃^−1/2 ≈ 0.737353, about 0.2344% apart, a numerical closeness and not an identity. Tree and cut: the word tree pruned of K ones in a row (Fibonacci many words and the golden window at K = 2), the prime-power residue tree (first split at level v_p(x − y) + 1), and the direct encoder across a cut (τ(x) + ι(y) < K at the seam, page rank caps R₀, R₁). Entropy and escape: the stationary law of the Parry reset chain and the ordered pairs a finite catalog cannot tell apart.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="pisot-clifford-rauzy-sandtable">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//RAUZY">ORTHO<b>//</b>RAUZY</h1>
+      <div class="tagline">
+        <span class="zh">皮索—克利福德—劳齐沙盘 · <em>同一串不出现 K 个连续 1 的字，在物理直线上放大，在内部平面里收缩</em></span>
+        <span class="en">Pisot–Clifford–Rauzy · <em>each word with no K ones in a row grows along the line and shrinks in the plane</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene">SCENE <strong>—</strong></span>
+      <span class="pill" id="pillWhat"><strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="zeckendorf" aria-pressed="false"><span class="code">ZECKENDORF</span><span class="cn zh">没有相邻的 1：斐波那契个字</span><span class="cn en">No two adjacent 1s: Fibonacci many words</span></button>
+        <button class="preset" data-preset="kbonacci" aria-pressed="false"><span class="code">K-BONACCI</span><span class="cn zh">皮索根逼近 2，共轭都在圆内</span><span class="cn en">The Pisot root nears 2, the conjugates stay inside</span></button>
+        <button class="preset" data-preset="padic" aria-pressed="false"><span class="code">P-ADIC</span><span class="cn zh">余数树：在 v + 1 层第一次分岔</span><span class="cn en">Residue tree: the first split is at level v + 1</span></button>
+        <button class="preset" data-preset="rauzy" aria-pressed="false"><span class="code">RAUZY</span><span class="cn zh">三支收缩合起来还是它自己</span><span class="cn en">Three contractions together give it back</span></button>
+        <button class="preset" data-preset="clifford" aria-pressed="false"><span class="code">CLIFFORD</span><span class="cn zh">物理直线放大，内部平面收缩</span><span class="cn en">The physical line expands, the internal plane contracts</span></button>
+        <button class="preset" data-preset="self-reference" aria-pressed="false"><span class="code">SELF-REF</span><span class="cn zh">0.7391 与 0.7374：近，但不相等</span><span class="cn en">0.7391 and 0.7374: close, not equal</span></button>
+        <button class="preset" data-preset="entanglement" aria-pressed="false"><span class="code">ENTANGLE</span><span class="cn zh">跨过切口：接缝上不许凑满 K 个 1</span><span class="cn en">Across the cut: no K ones at the seam</span></button>
+        <button class="preset" data-preset="entropy" aria-pressed="false"><span class="code">ENTROPY</span><span class="cn zh">帕里权重与逃逸的点对</span><span class="cn en">Parry weights and escaping pairs</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" id="kPanel">
+      <h2><span class="zh">记忆阶与字长</span><span class="en">Memory order and word length</span><span class="aside">K · Q</span></h2>
+      <div class="chips kchips" id="kChips" role="group" aria-label="记忆阶 K" data-aria-en="Memory order K">
+        <button class="chip" data-k="2" aria-pressed="false">K=2</button><button class="chip" data-k="3" aria-pressed="true">K=3 · R₃</button><button class="chip" data-k="4" aria-pressed="false">K=4</button><button class="chip" data-k="5" aria-pressed="false">K=5</button><button class="chip" data-k="6" aria-pressed="false">K=6</button><button class="chip" data-k="7" aria-pressed="false">K=7</button><button class="chip" data-k="8" aria-pressed="false">K=8</button>
+      </div>
+      <div class="field"><label for="qmax"><span class="zh">最长字长</span><span class="en">Longest word length</span> <small>Q</small></label><output id="oQ" for="qmax">12</output><input type="range" id="qmax" min="2" max="18" step="1" value="12"></div>
+      <p class="note"><span class="zh">K 是不许连续出现的 1 的个数。K = 3 是本书劳齐分形 R₃ 的情形；其余 K 在内部平面里只是计算出的样本。</span><span class="en">K is the number of ones that may not appear in a row. K = 3 is the case of the book’s Rauzy fractal R₃; for other K the internal plane shows a computed sample only.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="sand">
+      <h2><span class="zh">视角</span><span class="en">View</span><span class="aside">E∥ ⊕ E⊥</span></h2>
+      <div class="chips" id="camChips" role="group" aria-label="视角" data-aria-en="Camera">
+        <button class="chip" data-cam="iso" aria-pressed="true"><span class="zh">斜看</span><span class="en">Iso</span></button>
+        <button class="chip" data-cam="top" aria-pressed="false"><span class="zh">俯看内部平面</span><span class="en">Top: internal plane</span></button>
+        <button class="chip" data-cam="front" aria-pressed="false"><span class="zh">平看物理轴</span><span class="en">Front: physical axis</span></button>
+      </div>
+      <p class="note"><span class="zh">时间轴是字长 q，从 0 到 Q。拖动舞台转动沙盘；按住一个点拖动，选中离指针最近的字。</span><span class="en">The rail is the word length q, from 0 to Q. Drag the stage to turn the sandtable; press on a point and drag to pick the word nearest the pointer.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="plane" hidden>
+      <h2><span class="zh">平面上的对象</span><span class="en">Object in the plane</span><span class="aside">ℂ</span></h2>
+      <div class="chips" id="planeChips" role="group" aria-label="平面视图" data-aria-en="Plane view">
+        <button class="chip" data-view="rauzy" aria-pressed="true"><span class="zh">劳齐</span><span class="en">Rauzy</span></button>
+        <button class="chip" data-view="roots" aria-pressed="false"><span class="zh">根</span><span class="en">Roots</span></button>
+        <button class="chip" data-view="spiral" aria-pressed="false"><span class="zh">螺线</span><span class="en">Spiral</span></button>
+      </div>
+      <p class="note" id="planeNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="tree" hidden>
+      <h2><span class="zh">树与切口</span><span class="en">Tree and cut</span><span class="aside">TREE</span></h2>
+      <div class="chips" id="treeChips" role="group" aria-label="树视图" data-aria-en="Tree view">
+        <button class="chip" data-view="words" aria-pressed="true"><span class="zh">字树</span><span class="en">Words</span></button>
+        <button class="chip" data-view="padic" aria-pressed="false"><span class="zh">余数树</span><span class="en">Residues</span></button>
+        <button class="chip" data-view="cut" aria-pressed="false"><span class="zh">切口</span><span class="en">Cut</span></button>
+      </div>
+      <div class="sub" data-views="padic" hidden>
+        <div class="chips" id="pChips" role="group" aria-label="素数 p" data-aria-en="Prime p">
+          <button class="chip" data-p="2" aria-pressed="false">p = 2</button><button class="chip" data-p="3" aria-pressed="true">p = 3</button><button class="chip" data-p="5" aria-pressed="false">p = 5</button>
+        </div>
+        <div class="field"><label for="px"><span class="zh">整数</span><span class="en">Integer</span> <small class="c-cy">x</small></label><output id="oPX" for="px">7</output><input type="range" id="px" min="0" max="250" step="1" value="7"></div>
+        <div class="field"><label for="py"><span class="zh">整数</span><span class="en">Integer</span> <small class="c-mg">y</small></label><output id="oPY" for="py">34</output><input type="range" id="py" min="0" max="250" step="1" value="34"></div>
+        <div class="field"><label for="pz"><span class="zh">整数</span><span class="en">Integer</span> <small class="c-vi">z</small></label><output id="oPZ" for="pz">16</output><input type="range" id="pz" min="0" max="250" step="1" value="16"></div>
+      </div>
+      <div class="sub" data-views="cut" hidden>
+        <div class="field"><label for="cn"><span class="zh">逻辑编号 0…N</span><span class="en">Logical labels 0…N</span> <small>N</small></label><output id="oCN" for="cn">2</output><input type="range" id="cn" min="2" max="30" step="1" value="2"></div>
+        <div class="field"><label for="cx"><span class="zh">左边的字长</span><span class="en">Length on the left</span> <small>m<sub>X</sub></small></label><output id="oCX" for="cx">4</output><input type="range" id="cx" min="1" max="6" step="1" value="4"></div>
+        <div class="field"><label for="cy"><span class="zh">右边的字长</span><span class="en">Length on the right</span> <small>m<sub>Y</sub></small></label><output id="oCY" for="cy">5</output><input type="range" id="cy" min="1" max="7" step="1" value="5"></div>
+      </div>
+      <p class="note" id="treeNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="entropy" hidden>
+      <h2><span class="zh">熵与逃逸</span><span class="en">Entropy and escape</span><span class="aside">PARRY · E(S)</span></h2>
+      <p class="note"><span class="zh">左边是帕里重置链：状态是“符号 ± 与当前连续 1 的个数 j”，加一个 1 往右走一格，重置回 j = 0 并翻转符号。右边的竞技场是长为 4 的合法字，目录是“末尾连续 1 的个数”与四个位。时间轴先逐个加入观测，再逐个拿走一个。</span><span class="en">On the left the Parry reset chain: a state is a sign ± and the current number j of ones in a row; one more 1 moves one step right, a reset returns to j = 0 and flips the sign. On the right the arena is the legal words of length 4, and the catalog is “the number of ones at the end” and the four digits. The rail first adds the observations one by one, then takes one away at a time.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：合法字在物理直线与内部平面上的两个像；劳齐分形、特征根与余弦螺线；字树、余数树与切口；帕里链与逃逸点对" data-aria-en="Stage: the two images of the legal words on the physical line and in the internal plane; the Rauzy fractal, the characteristic roots and the cosine spiral; the word tree, the residue tree and the cut; the Parry chain and the escaping pairs">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="sand" aria-pressed="true"><span class="zh">3D 沙盘</span><span class="en">3D sand<span class="lg">table</span></span></button>
+        <button class="chip" data-scene="plane" aria-pressed="false"><span class="zh">劳齐<span class="lg"> · 螺线</span></span><span class="en">Rauzy<span class="lg"> · spiral</span></span></button>
+        <button class="chip" data-scene="tree" aria-pressed="false"><span class="zh">树<span class="lg"> · 切口</span></span><span class="en">Tree<span class="lg"> · cut</span></span></button>
+        <button class="chip" data-scene="entropy" aria-pressed="false"><span class="zh">熵<span class="lg"> · 逃逸</span></span><span class="en">Entropy<span class="lg"> · escape</span></span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景的小图 A" data-aria-en="Small plot A of the scene"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="本场景的小图 B" data-aria-en="Small plot B of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="m"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+<div class="lean" data-views="words"><span class="ok">LEAN ✓</span><span><span class="zh">二进制齐肯多夫自动机能把一个 0/1 字（Fin 2 的列表）读完，当且仅当字里没有相邻的两个 1。K = 2 时树上没被剪掉的枝，正是它读得完的字（页面把布尔位写成 0 与 1）。已冻结：</span><span class="en">The binary Zeckendorf automaton runs through a word of 0s and 1s (a list over Fin 2) if and only if the word has no two adjacent 1s. At K = 2 the branches of the tree that are not pruned are exactly the words it runs through (the page writes the Boolean digits as 0 and 1). Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes" href="#" target="_blank" rel="noopener"><code>base_success_iff_noAdjacentOnes</code></a></span></div>
+<div class="lean" data-views="words rauzy sand"><span class="ok">LEAN ✓</span><span><span class="zh">对一切 d 与 Q：长为 Q、没有 d 个连续 1 的布尔字恰有 dbonacci d (Q + 2) 个。d = 2 时这是斐波那契数 F<sub>Q+2</sub>；d = 3 时 Q = 0…4 依次是 1、2、4、7、13。已冻结：</span><span class="en">For all d and Q: there are exactly dbonacci d (Q + 2) Boolean words of length Q with no d ones in a row. For d = 2 this is the Fibonacci number F<sub>Q+2</sub>; for d = 3 and Q = 0…4 it is 1, 2, 4, 7, 13. Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Tower/DBonacci/Names.dbonacci_name_card" href="#" target="_blank" rel="noopener"><code>dbonacci_name_card</code></a></span></div>
+<div class="lean" data-views="roots"><span class="ok">LEAN ✓</span><span><span class="zh">对每个 d ≥ 2：2 − β<sub>d</sub> = (β<sub>d</sub>)⁻¹ 的 d 次方，其中 β<sub>d</sub> 是 X<sup>d</sup> − (X<sup>d−1</sup> + … + X + 1) 在 (1, 2) 里唯一的根。已冻结：</span><span class="en">For every d ≥ 2: 2 − β<sub>d</sub> = (β<sub>d</sub>)⁻¹ to the power d, where β<sub>d</sub> is the unique root of X<sup>d</sup> − (X<sup>d−1</sup> + … + X + 1) in (1, 2). Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Tower/DBonacci/PerronRoot.two_sub_dbonacciPerronRoot_eq_inv_pow" href="#" target="_blank" rel="noopener"><code>two_sub_dbonacciPerronRoot_eq_inv_pow</code></a></span></div>
+<div class="lean" data-views="roots"><span class="ok">LEAN ✓</span><span><span class="zh">d → ∞ 时，β<sub>d</sub> 收敛到 2。已冻结：</span><span class="en">As d → ∞, β<sub>d</sub> converges to 2. Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_tendsto_two" href="#" target="_blank" rel="noopener"><code>dbonacciPerronRoot_tendsto_two</code></a></span></div>
+<div class="lean" data-views="roots rauzy sand"><span class="ok">LEAN ✓</span><span><span class="zh">对每个 q ≥ 2 与 X<sup>q</sup> − Σ<sub>i&lt;q</sub> X<sup>i</sup> 的每个复根 z：1 ≤ ‖z‖ 当且仅当 z = β<sub>q</sub>。所以除 β<sub>q</sub> 以外的根都在开单位圆盘里。已冻结：</span><span class="en">For every q ≥ 2 and every complex root z of X<sup>q</sup> − Σ<sub>i&lt;q</sub> X<sup>i</sup>: 1 ≤ ‖z‖ if and only if z = β<sub>q</sub>. So every root other than β<sub>q</sub> lies in the open unit disc. Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Tower/DBonacci/Irreducibility.dbonacci_complex_root_location" href="#" target="_blank" rel="noopener"><code>dbonacci_complex_root_location</code></a></span></div>
+<div class="lean" data-views="rauzy sand"><span class="ok">LEAN ✓</span><span><span class="zh">设 z 是三波那契特征多项式 X³ − X² − X − 1 的根且 z ≠ β₃，R₃(z) 是所有有限合法和 Σ εⱼ zʲ（字里没有 111）的闭包。则 f₀(R₃) ∪ f₁₀(R₃) ∪ f₁₁₀(R₃) = R₃，其中 f₀(w) = zw，f₁₀(w) = 1 + z²w，f₁₁₀(w) = 1 + z + z³w。已冻结：</span><span class="en">Let z be a root of the Tribonacci polynomial X³ − X² − X − 1 with z ≠ β₃, and R₃(z) the closure of all finite legal sums Σ εⱼ zʲ (words without 111). Then f₀(R₃) ∪ f₁₀(R₃) ∪ f₁₁₀(R₃) = R₃, where f₀(w) = zw, f₁₀(w) = 1 + z²w and f₁₁₀(w) = 1 + z + z³w. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_prefix_cover" href="#" target="_blank" rel="noopener"><code>rauzyFractal_prefix_cover</code></a></span></div>
+<div class="lean" data-views="rauzy"><span class="ok">LEAN ✓</span><span><span class="zh">同样的 z（X³ − X² − X − 1 的根，z ≠ β₃）：R₃(z) 的内部非空。已冻结：</span><span class="en">For the same z (a root of X³ − X² − X − 1 with z ≠ β₃): the interior of R₃(z) is nonempty. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/Rauzy/TribonacciInterior.rauzyFractal_interior_nonempty" href="#" target="_blank" rel="noopener"><code>rauzyFractal_interior_nonempty</code></a></span></div>
+<div class="lean" data-views="rauzy"><span class="ok">LEAN ✓</span><span><span class="zh">同样的 z：R₃(z) 的边界在复平面上的勒贝格测度（面积）为 0。这是面积为零，不是边界长度，也不是豪斯多夫维数。已冻结：</span><span class="en">For the same z: the frontier of R₃(z) has Lebesgue measure (area) 0 in the complex plane. This is zero area, not zero length and not a Hausdorff dimension. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/Rauzy/TribonacciNullBoundary.rauzyFractal_frontier_volume_zero" href="#" target="_blank" rel="noopener"><code>rauzyFractal_frontier_volume_zero</code></a></span></div>
+<div class="lean" data-views="padic"><span class="ok">LEAN ✓</span><span><span class="zh">对素数 p 与整数 x ≠ y：使读数 x mod pᵏ 与 y mod pᵏ 不同的最小精度 k 恰是 v<sub>p</sub>(x − y) + 1。已冻结：</span><span class="en">For a prime p and integers x ≠ y: the least precision k at which the readings x mod pᵏ and y mod pᵏ differ is exactly v<sub>p</sub>(x − y) + 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Arith/Congruence/PadicPrecisionBlindSpot.first_distinguishing_precision" href="#" target="_blank" rel="noopener"><code>first_distinguishing_precision</code></a></span></div>
+<div class="lean" data-views="padic"><span class="ok">LEAN ✓</span><span><span class="zh">对任何一层层读出的概念层级与视界 H，距离 d<sub>H</sub>(x, y) = H − （到视界为止两者一致的层数）满足强三角不等式 d<sub>H</sub>(x, z) ≤ max(d<sub>H</sub>(x, y), d<sub>H</sub>(y, z))。页面把第 k 层读作 x mod pᵏ。已冻结：</span><span class="en">For any hierarchy of level-by-level readouts and any horizon H, the distance d<sub>H</sub>(x, y) = H − (the number of levels up to the horizon on which the two agree) satisfies the strong triangle inequality d<sub>H</sub>(x, z) ≤ max(d<sub>H</sub>(x, y), d<sub>H</sub>(y, z)). The page reads level k as x mod pᵏ. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric" href="#" target="_blank" rel="noopener"><code>refinementDistance_ultrametric</code></a></span></div>
+<div class="lean" data-views="spiral"><span class="ok">LEAN ✓</span><span><span class="zh">存在 θ ∈ (0, 1) 使 cos θ = θ；它是唯一的正实不动点；并且一条选定的有理系数反函数级数在 π 处绝对收敛、和为 θ。已冻结：</span><span class="en">There is θ ∈ (0, 1) with cos θ = θ; it is the only positive real fixed point; and a selected inverse series with rational coefficients converges absolutely at π with sum θ. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint" href="#" target="_blank" rel="noopener"><code>rational_inverse_endpoint</code></a></span></div>
+<div class="lean" data-views="cut"><span class="ok">LEAN ✓</span><span><span class="zh">设 N ≥ 2、K ≥ 2、m<sub>X</sub>, m<sub>Y</sub> ≥ 1。每个合法的直接编码器（满足 directContract，包括接缝上不出现 K 个连续 1）在两页上的秩 r<sub>b</sub> ≤ R<sub>b</sub>；存在一组共同选定的编码器与页态取到秩 (r₀, r₁)，当且仅当 1 ≤ r₀ ≤ R₀ 且 1 ≤ r₁ ≤ R₁；整页 b 上的纯输入编码后的施密特秩等于 σ<sub>b</sub> 的秩；S(σ<sub>b</sub>) ≤ ln R<sub>b</sub>。它不说每个编码器的秩都是 K。已冻结：</span><span class="en">Let N ≥ 2, K ≥ 2 and m<sub>X</sub>, m<sub>Y</sub> ≥ 1. Every legal direct encoder (satisfying directContract, including no K ones in a row across the seam) has page ranks r<sub>b</sub> ≤ R<sub>b</sub>; a jointly chosen encoder and page states with ranks (r₀, r₁) exist if and only if 1 ≤ r₀ ≤ R₀ and 1 ≤ r₁ ≤ R₁; a pure input lying entirely in page b is encoded with Schmidt rank equal to the rank of σ<sub>b</sub>; and S(σ<sub>b</sub>) ≤ ln R<sub>b</sub>. It does not say that every encoder has rank K. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy" href="#" target="_blank" rel="noopener"><code>complete_original_direct_rank_entropy</code></a></span></div>
+<div class="lean" data-views="entropy"><span class="ok">LEAN ✓</span><span><span class="zh">对 k ≥ 2 与 p = β<sub>k</sub>⁻¹：1/2 &lt; p ≤ φ⁻¹ 且 p + p² + … + pᵏ = 1；重置链的转移核非负、每行和为 1；律 π 非负、总和为 1、平稳（πK = π），并在翻转符号下不变。它本身不是熵定理。已冻结：</span><span class="en">For k ≥ 2 and p = β<sub>k</sub>⁻¹: 1/2 &lt; p ≤ φ⁻¹ and p + p² + … + pᵏ = 1; the reset kernel is nonnegative with rows summing to 1; the law π is nonnegative, sums to 1, is stationary (πK = π) and is unchanged when the sign flips. It is not by itself an entropy theorem. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law" href="#" target="_blank" rel="noopener"><code>parry_stationary_law</code></a></span></div>
+<div class="lean" data-views="entropy"><span class="ok">LEAN ✓</span><span><span class="zh">在至少有两个状态的有限竞技场里，从目录中拿走观测 i 使逃逸率 e = |E|/[q(q − 1)] 严格上升，当且仅当 i 独自区分的有序点对个数 |U<sub>i</sub>| &gt; 0。这是有限的计数律，不是香农熵或冯·诺依曼熵。已冻结：</span><span class="en">In a finite arena with at least two states, removing observation i from the catalog strictly raises the escape rate e = |E|/[q(q − 1)] if and only if the number |U<sub>i</sub>| of ordered pairs that i alone separates is positive. This is a finite counting law, not a Shannon or von Neumann entropy. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos" href="#" target="_blank" rel="noopener"><code>lowersEscape_iff_uniqueCaptureCount_pos</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+<div class="lean argued" data-views="rauzy"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：R₃ 的边界是豪斯多夫维数约 1.09336 的分形曲线（见 Messaoudi 2000 及其所引文献；小数照文献记录，标 NUM）。它不来自上面的零面积定理，也不来自点云的拟合。</span><span class="en">Literature result, not formalized in this book: the boundary of R₃ is a fractal curve of Hausdorff dimension about 1.09336 (see Messaoudi 2000 and the works it cites; the decimal is recorded from the literature, NUM). It does not follow from the zero-area theorem above, nor from fitting the point cloud.</span></span></div>
+<div class="lean argued" data-views="cut"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：最近邻里德堡阻塞禁止相邻激发，对应 K = 2（Lesanovsky 2011；Bernien 等 2017）；斐波那契任意子的融合空间也按斐波那契数计数（Feiguin 等 2007）。它们是另一些物理模型，不是这里的编码器，K &gt; 2 也不等于“更长程的阻塞”。</span><span class="en">Literature results, not formalized in this book: nearest-neighbour Rydberg blockade forbids adjacent excitations, the case K = 2 (Lesanovsky 2011; Bernien et al. 2017); the fusion space of Fibonacci anyons is also counted by Fibonacci numbers (Feiguin et al. 2007). These are other physical models, not the encoder here, and K &gt; 2 is not simply a longer-range blockade.</span></span></div>
+<div class="lean argued" data-views="entropy"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：不许 K 个连续 1 的移位空间的拓扑熵是 log₂ β<sub>K</sub> 比特，随 K 增大趋向 1 比特；阿布拉莫夫公式 h(T<sub>A</sub>) = h(T)/μ(A) 在标准的有限测度、正测度诱导条件下成立（Abramov 1959）。两者都不是帕里定理或逃逸计数律的结论。</span><span class="en">Literature results, not formalized in this book: the shift with no K ones in a row has topological entropy log₂ β<sub>K</sub> bits, which tends to 1 bit as K grows; Abramov’s formula h(T<sub>A</sub>) = h(T)/μ(A) holds under the standard finite-measure, positive-measure inducing hypotheses (Abramov 1959). Neither is a conclusion of the Parry theorem or the escape counting law.</span></span></div>
+<div class="lean model" data-views="sand"><span class="ok">MODEL</span><span><span class="zh">沙盘的坐标是页面声明的代数坐标：竖轴是 e(β)·β<sup>−Q</sup>，水平面是 e(α)，e(X) = Σ εⱼXʲ。它不是标准整数基的正交投影；把 E∥ ⊕ E⊥ 读成克利福德分解、把竖轴读成观察者的物理方向，是本书的模型。把 R₃ 立在三维里，它的数学维数仍是二。</span><span class="en">The sandtable uses algebraic coordinates declared by the page: height e(β)·β<sup>−Q</sup> over the plane e(α), with e(X) = Σ εⱼXʲ. It is not an orthogonal projection of the standard integer basis; reading E∥ ⊕ E⊥ as a Clifford split and the height as the observer’s physical direction is this book’s model. Standing R₃ up in three dimensions does not change its mathematical dimension, which is two.</span></span></div>
+<div class="lean model" data-views="spiral"><span class="ok">MODEL</span><span><span class="zh">θ* ≈ 0.739085 与 |α| = β₃<sup>−1/2</sup> ≈ 0.737353 相差约 0.2344%（相对 θ*，NUM）。这是数值上的接近，不是代数恒等式，也不是同一个常数；把两者读成同一种自指收缩（ψ = ψ(ψ)）是本书的模型。</span><span class="en">θ* ≈ 0.739085 and |α| = β₃<sup>−1/2</sup> ≈ 0.737353 differ by about 0.2344% (relative to θ*, NUM). This is a numerical closeness, not an algebraic identity, and not one constant; reading both as the same self-referential contraction (ψ = ψ(ψ)) is this book’s model.</span></span></div>
+<div class="lean model" data-views="padic"><span class="ok">MODEL</span><span><span class="zh">余数树按低位数字细分。把它与齐肯多夫字或劳齐分形的公共前缀看成同一种“精度”，是本书的模型：一般字的公共前缀长度并不等于差的 p 进赋值。</span><span class="en">The residue tree refines by low digits. Treating it and the common prefixes of Zeckendorf words or of the Rauzy fractal as one kind of “precision” is this book’s model: the common prefix of two words is in general not the p-adic valuation of a difference.</span></span></div>
+<div class="lean model" data-views="entropy"><span class="ok">MODEL</span><span><span class="zh">“分形视界面积律” S<sub>ent</sub> ∝ R<sup>D<sub>F</sub></sup> 是本书的模型，没有形式化的熵—几何定律，也没有推出引力的面积律。帕里律、逃逸计数与阿布拉莫夫公式是三种不同的量。</span><span class="en">The “fractal horizon area law” S<sub>ent</sub> ∝ R<sup>D<sub>F</sub></sup> is this book’s model: there is no formal entropy–geometry law and no derived gravitational area law. The Parry law, the escape count and Abramov’s formula are three different quantities.</span></span></div>
+<div class="lean model"><span class="ok">MODEL</span><span><span class="zh">把齐肯多夫、K-波那契、p 进树、劳齐分形、克利福德分解、自指不动点、纠缠与熵连成一张图，是本书第三十九章的诠释综合；每个绿框只担保它自己那一条，整张图不是定理。</span><span class="en">Joining Zeckendorf, K-Bonacci, the p-adic tree, the Rauzy fractal, the Clifford split, the self-referential fixed point, entanglement and entropy into one picture is the interpretive synthesis of Chapter 39 of this book; each green box vouches for its own statement only, and the whole picture is not a theorem.</span></span></div>
+<div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：字逐个枚举并按 dbonacci 递推核对；β<sub>K</sub> 与 θ* 用二分法、其余根用迭代求出；R₃ 只画有限深度的点云，看不出内部与边界；帕里核、平稳残差、编码秩上限与逃逸点对都逐项算出。K ≠ 3 时内部平面只是计算样本，R₃ 的定理不搬过去。</span><span class="en">A numerical illustration on the page, not a proof: words are enumerated one by one and checked against the dbonacci recurrence; β<sub>K</sub> and θ* are found by bisection and the other roots by iteration; R₃ is drawn only as a point cloud of finite depth, which shows neither interior nor boundary; the Parry kernel, the stationarity residual, the encoder rank caps and the escaping pairs are all computed term by term. For K ≠ 3 the internal plane is a computed sample only, and the R₃ theorems are not carried over.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.4" aria-pressed="false">0.4×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：字长、记忆阶、迭代步数、精度、点对或目录的步骤" data-aria-en="Rail: word length, memory order, iteration step, precision, pair or catalog step">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>4</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">第三十九章把八个概念放进同一张沙盘：同一串不出现 K 个连续 1 的 0/1 字 ε，写成多项式 e(X) = Σ εⱼXʲ，在皮索根 β<sub>K</sub> 处是一个放大的实数，在共轭根 α 处是一个收缩的复数。本页是数值演示，不是证明；八个概念之间的连线是本书的诠释模型，只有带 Lean 链接的绿框是已验证定理，而且各自只担保自己那一条。</p>
+      <ol>
+        <li><b>齐肯多夫与 K-波那契。</b>长为 Q、没有 K 个连续 1 的字恰有 dbonacci K (Q + 2) 个；K = 2 时是斐波那契数，这些字正是二进制齐肯多夫自动机读得完的字。字树把会凑满 K 个 1 的枝剪掉（品红 ×）。K = 2 时内部坐标 Σ εⱼψʲ（ψ = 1 − φ）落在黄金窗口 [−1, φ] 里。</li>
+        <li><b>皮索根。</b>P<sub>K</sub>(X) = X<sup>K</sup> − (X<sup>K−1</sup> + … + 1) 在 (1, 2) 里有唯一的根 β<sub>K</sub>，2 − β<sub>K</sub> = β<sub>K</sub><sup>−K</sup>，K → ∞ 时 β<sub>K</sub> → 2；其余 K − 1 个复根都在开单位圆盘里。β₂ = φ ≈ 1.618034，β₃ ≈ 1.839287，β₄ ≈ 1.927562。</li>
+        <li><b>p 进余数树。</b>第 k 层的结点是模 pᵏ 的余数类，往下一层按低位数字分成 p 支。两个整数 x ≠ y 在前 v<sub>p</sub>(x − y) 层走同一条路，在第 v<sub>p</sub>(x − y) + 1 层第一次分开。有限视界 H 的距离 d<sub>H</sub> = H − 一致层数满足强三角不等式；它不是指数形式的 p 进度量，也不自动与劳齐动力系统共轭。</li>
+        <li><b>劳齐分形。</b>K = 3，取 X³ − X² − X − 1 在上半平面的根 α ≈ −0.419643 + 0.606291i（|α| = β₃<sup>−1/2</sup> ≈ 0.737353，arg α ≈ 124.69°）。R₃ 是所有有限合法和 Σ εⱼαʲ 的闭包，等于三支收缩 f₀(w) = αw、f₁₀(w) = 1 + α²w、f₁₁₀(w) = 1 + α + α³w 的像之并，内部非空，边界面积为零。页面上的点云只是有限深度的样本；平铺、连通、同胚于圆盘都不是这里的结论。</li>
+        <li><b>克利福德沙盘。</b>竖轴 E∥ 是 e(β)·β<sup>−Q</sup>，水平面 E⊥ 是 e(α)。同一个字在竖直方向上被放大，在水平面里收缩。这是页面声明的代数坐标；克利福德读法是模型。</li>
+        <li><b>自指。</b>θ<sub>n+1</sub> = cos θ<sub>n</sub> 收缩到 θ* ≈ 0.739085（每步约乘 sin θ* ≈ 0.674）；αⁿ 以 |α| ≈ 0.737353 的比例绕原点旋进。两个数相差约 0.2344%，是数值上的接近，不是恒等式。</li>
+        <li><b>跨切口的编码。</b>左边长 m<sub>X</sub> 的字 x 与右边长 m<sub>Y</sub> 的字 y 拼接，接缝合法当且仅当 x 末尾连续 1 的个数 τ(x) 与 y 开头的 ι(y) 之和小于 K。页秩上限 R₀ = min(c<sub>m<sub>X</sub>,0</sub>, ⌊c<sub>m<sub>Y</sub>,0</sub>/M₀⌋)，R₁ = min(c<sub>m<sub>X</sub>,1</sub>, min<sub>s</sub> (a<sub>s</sub> + ⌊n<sub>s</sub>/M₁⌋))。N = 2、K = 3、m<sub>X</sub> = 4、m<sub>Y</sub> = 5 时 R₀ = 6、R₁ = 5，秩 3 只是可取的一种。</li>
+        <li><b>熵与逃逸。</b>帕里参数 p = β<sub>K</sub>⁻¹ 满足 p + … + p<sup>K</sup> = 1；重置链的律平稳。目录 S 区分不了的有序点对集合 E(S) 随观测增多而缩小；拿走观测 i，逃逸率上升 |U<sub>i</sub>|/[q(q − 1)]，上升为正当且仅当 |U<sub>i</sub>| &gt; 0。拓扑熵 log₂ β<sub>K</sub>、阿布拉莫夫公式是文献结果，分形视界面积律是模型。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch39-observer-is-ontological-universe.html#sec-ch39-pisot-clifford-rauzy" target="_top">第三十九章 · 齐肯多夫、皮索与劳齐：八概念综合沙盘</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S0/Tower/DBonacci/Names.lean" href="#" target="_blank" rel="noopener">DBonacci/Names.lean</a> · <a data-trureturing-path="D5/S0/Tower/DBonacci/PerronRoot.lean" href="#" target="_blank" rel="noopener">PerronRoot.lean</a> · <a data-trureturing-path="D5/S0/Tower/Tribonacci/RauzyFractal.lean" href="#" target="_blank" rel="noopener">RauzyFractal.lean</a> · <a data-trureturing-path="D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.lean" href="#" target="_blank" rel="noopener">KBonacciDirectRankEntropy.lean</a> · <a data-trureturing-path="D5/S3/TotalVariation/ParryResetLaw.lean" href="#" target="_blank" rel="noopener">ParryResetLaw.lean</a> · <a data-trureturing-path="D5/S3/ConceptDynamics/InformationEscape/ExactRate.lean" href="#" target="_blank" rel="noopener">ExactRate.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Chapter 39 puts eight concepts on one sandtable: the same 0/1 word ε with no K ones in a row, written as the polynomial e(X) = Σ εⱼXʲ, is an expanded real number at the Pisot root β<sub>K</sub> and a contracted complex number at a conjugate root α. The page is a numerical illustration, not a proof; the lines drawn between the eight concepts are an interpretive model of this book, and only the green boxes with Lean links are verified theorems, each vouching for its own statement only.</p>
+      <ol>
+        <li><b>Zeckendorf and K-Bonacci.</b> There are exactly dbonacci K (Q + 2) words of length Q with no K ones in a row; at K = 2 these are Fibonacci numbers, and the words are exactly those the binary Zeckendorf automaton runs through. The word tree prunes every branch that would complete K ones (magenta ×). At K = 2 the internal coordinate Σ εⱼψʲ (ψ = 1 − φ) lies in the golden window [−1, φ].</li>
+        <li><b>The Pisot root.</b> P<sub>K</sub>(X) = X<sup>K</sup> − (X<sup>K−1</sup> + … + 1) has a unique root β<sub>K</sub> in (1, 2), with 2 − β<sub>K</sub> = β<sub>K</sub><sup>−K</sup> and β<sub>K</sub> → 2 as K → ∞; the other K − 1 complex roots all lie in the open unit disc. β₂ = φ ≈ 1.618034, β₃ ≈ 1.839287, β₄ ≈ 1.927562.</li>
+        <li><b>The p-adic residue tree.</b> The nodes at level k are the residue classes mod pᵏ, and each splits into p by the next low digit. Two integers x ≠ y share the path for the first v<sub>p</sub>(x − y) levels and part for the first time at level v<sub>p</sub>(x − y) + 1. The finite-horizon distance d<sub>H</sub> = H − (levels in agreement) satisfies the strong triangle inequality; it is not the exponential p-adic metric, and it is not automatically conjugate to the Rauzy dynamics.</li>
+        <li><b>The Rauzy fractal.</b> K = 3, with the root α ≈ −0.419643 + 0.606291i of X³ − X² − X − 1 in the upper half-plane (|α| = β₃<sup>−1/2</sup> ≈ 0.737353, arg α ≈ 124.69°). R₃ is the closure of all finite legal sums Σ εⱼαʲ; it equals the union of the images of the three contractions f₀(w) = αw, f₁₀(w) = 1 + α²w and f₁₁₀(w) = 1 + α + α³w, has nonempty interior and a boundary of zero area. The point cloud on the page is a sample of finite depth only; tiling, connectedness and being homeomorphic to a disc are not conclusions here.</li>
+        <li><b>The Clifford sandtable.</b> The vertical axis E∥ is e(β)·β<sup>−Q</sup> and the horizontal plane E⊥ is e(α). The same word is expanded vertically and contracted in the plane. These are algebraic coordinates declared by the page; the Clifford reading is a model.</li>
+        <li><b>Self-reference.</b> θ<sub>n+1</sub> = cos θ<sub>n</sub> contracts to θ* ≈ 0.739085 (by about sin θ* ≈ 0.674 per step); αⁿ spirals in round the origin by the ratio |α| ≈ 0.737353. The two numbers differ by about 0.2344%, a numerical closeness and not an identity.</li>
+        <li><b>Encoding across a cut.</b> A word x of length m<sub>X</sub> on the left and a word y of length m<sub>Y</sub> on the right join legally if and only if the number τ(x) of ones at the end of x plus the number ι(y) at the start of y is less than K. The page rank caps are R₀ = min(c<sub>m<sub>X</sub>,0</sub>, ⌊c<sub>m<sub>Y</sub>,0</sub>/M₀⌋) and R₁ = min(c<sub>m<sub>X</sub>,1</sub>, min<sub>s</sub> (a<sub>s</sub> + ⌊n<sub>s</sub>/M₁⌋)). For N = 2, K = 3, m<sub>X</sub> = 4, m<sub>Y</sub> = 5 they are R₀ = 6 and R₁ = 5, and rank 3 is just one of the allowed choices.</li>
+        <li><b>Entropy and escape.</b> The Parry parameter p = β<sub>K</sub>⁻¹ satisfies p + … + p<sup>K</sup> = 1, and the law of the reset chain is stationary. The set E(S) of ordered pairs a catalog S cannot separate shrinks as observations are added; taking observation i away raises the escape rate by |U<sub>i</sub>|/[q(q − 1)], which is positive if and only if |U<sub>i</sub>| &gt; 0. The topological entropy log₂ β<sub>K</sub> and Abramov’s formula are literature results; the fractal horizon area law is a model.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch39-observer-is-ontological-universe.html#sec-ch39-pisot-clifford-rauzy" target="_top">Chapter 39 · Zeckendorf, Pisot and Rauzy: an eight-concept sandtable</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S0/Tower/DBonacci/Names.lean" href="#" target="_blank" rel="noopener">DBonacci/Names.lean</a> · <a data-trureturing-path="D5/S0/Tower/DBonacci/PerronRoot.lean" href="#" target="_blank" rel="noopener">PerronRoot.lean</a> · <a data-trureturing-path="D5/S0/Tower/Tribonacci/RauzyFractal.lean" href="#" target="_blank" rel="noopener">RauzyFractal.lean</a> · <a data-trureturing-path="D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.lean" href="#" target="_blank" rel="noopener">KBonacciDirectRankEntropy.lean</a> · <a data-trureturing-path="D5/S3/TotalVariation/ParryResetLaw.lean" href="#" target="_blank" rel="noopener">ParryResetLaw.lean</a> · <a data-trureturing-path="D5/S3/ConceptDynamics/InformationEscape/ExactRate.lean" href="#" target="_blank" rel="noopener">ExactRate.lean</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

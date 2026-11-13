@@ -2114,8 +2114,8 @@
       "code": "LEAN//MAP",
       "title": "Lean 声明地图",
       "title_en": "The map of Lean declarations",
-      "summary": "本书引用的 486 条冻结声明按章排开：舞台从左到右是阅读顺序（序曲、三十九章、终章、附录 A 与 B），每一格是 trureturing.lock.json 里的一条声明，落在中文正文第一次引用它的那一章的柱子里；绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。时间轴是阅读位置，读到哪一章，那一章的格子就落定；读完正文，格数正好等于锁文件的条目数。点一格看它的种类、模块与源码行、在书中出现的每一章与附录 C 的序号；点一章的柱脚，青色的线连到那一章引用的每一条。第二十七、二十八章逐行解剖的八条定理与两张审计表各有一张卡。数据由页面目录里的 gen-data.py 从锁文件与章节生成，不手填。七张实验卡可以在第二十七、二十八章与附录 C 里单独引用。",
-      "summary_en": "The 486 frozen declarations the book cites, laid out by chapter: from left to right the stage follows the reading order (prelude, thirty-nine chapters, coda, Appendices A and B), and each cell is one entry of trureturing.lock.json, placed in the column of the chapter whose Chinese text cites it first; green cells are theorems (kind theorem in the lock), grey ones definitions, and hollow ones are reached by inline links only. The rail is the reading position: as a chapter is read its cells land, and at the end of the main text the number of cells equals the number of entries in the lock. Click a cell for its kind, module and source line, every chapter that cites it and its Appendix C entry; click the foot of a column and cyan lines run to everything that chapter cites. The eight theorems Chapters 27 and 28 dissect line by line and their two audit tables each have a card. The data is generated from the lock and the chapters by gen-data.py in the page's folder, never typed by hand. Each of the seven experiment cards can be cited on its own from Chapters 27 and 28 and Appendix C.",
+      "summary": "本书引用的 542 条冻结声明按章排开：舞台从左到右是阅读顺序（序曲、三十九章、终章、附录 A、B 与 D），每一格是 trureturing.lock.json 里的一条声明，落在中文正文第一次引用它的那一章的柱子里；绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。时间轴是阅读位置，读到哪一章，那一章的格子就落定；读完正文，格数正好等于锁文件的条目数。点一格看它的种类、模块与源码行、在书中出现的每一章与附录 C 的序号；点一章的柱脚，青色的线连到那一章引用的每一条。第二十七、二十八章逐行解剖的八条定理与两张审计表各有一张卡。数据由页面目录里的 gen-data.py 从锁文件与章节生成，不手填。七张实验卡可以在第二十七、二十八章与附录 C 里单独引用。",
+      "summary_en": "The 542 frozen declarations the book cites, laid out by chapter: from left to right the stage follows the reading order (prelude, thirty-nine chapters, coda, Appendices A, B and D), and each cell is one entry of trureturing.lock.json, placed in the column of the chapter whose Chinese text cites it first; green cells are theorems (kind theorem in the lock), grey ones definitions, and hollow ones are reached by inline links only. The rail is the reading position: as a chapter is read its cells land, and at the end of the main text the number of cells equals the number of entries in the lock. Click a cell for its kind, module and source line, every chapter that cites it and its Appendix C entry; click the foot of a column and cyan lines run to everything that chapter cites. The eight theorems Chapters 27 and 28 dissect line by line and their two audit tables each have a card. The data is generated from the lock and the chapters by gen-data.py in the page's folder, never typed by hand. Each of the seven experiment cards can be cited on its own from Chapters 27 and 28 and Appendix C.",
       "path": "lean-declaration-map/",
       "thumbnail": "lean-declaration-map/thumb.jpg",
       "status": "live",
@@ -2972,6 +2972,856 @@
         },
         {
           "gid": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift"
+        }
+      ]
+    },
+    {
+      "id": "entanglement-entropy-complexity",
+      "code": "ORTHO//TRIAD",
+      "title": "量子纠缠、P=NP 与熵的正交三位一体 · 偏迹视界刀片与张量割复杂度",
+      "title_en": "Orthogonal triad of entanglement, P=NP & entropy · partial-trace horizon & cut bond dimension",
+      "summary": "16 比特三维张量网络（左半区观察者 A 八比特，右半区对偶 Ā 八比特）上，施密特角 θ ∈ [0°, 90°] 同步驱动局部布洛赫向量 r_A 与跨割双向量纠缠桥，实时核验勾股守恒 ‖r_A‖² + τ(A:Ā) = cos²θ + sin²θ ≡ 1、归一化线性熵 S_L(ρ_A) = 2(1 − Tr(ρ_A²)) ≡ sin²θ 与冯·诺依曼熵 S_vN(ρ_A) = H_bin((1 + cos θ)/2)（余弦不动点 θ* ≈ 42.35° 处 S_vN ≈ 0.559 bits）。切换面积律（2-SAT 边界桥 k_cut = 2）与体积律（3-SAT 扩展网桥 k_cut = 8），对比品红/紫罗兰局部偏迹视界刀片降下时的键维墙 χ_bond = 2^{S_cut} 与抬升刀片后全局无时间纯态 HΨ = 0 的零熵联合相干读取（S_global = 0）。六张实验卡可在第三十章单独引用。",
+      "summary_en": "On a 16-qubit 3D tensor network (8 observer qubits in A, 8 dual qubits in Ā), the Schmidt angle θ ∈ [0°, 90°] drives both local Bloch vectors r_A and cross-cut bivector entanglement bridges, verifying exact Pythagorean conservation ‖r_A‖² + τ(A:Ā) = cos²θ + sin²θ ≡ 1, normalized linear entropy S_L(ρ_A) = 2(1 − Tr(ρ_A²)) ≡ sin²θ, and von Neumann entropy S_vN(ρ_A) = H_bin((1 + cos θ)/2) (0.559 bits at Dottie's constant θ* ≈ 42.35°). Toggle Area Law (2-SAT boundary cut k_cut = 2) against Volume Law (3-SAT expander cut k_cut = 8) and contrast the magenta/violet local partial-trace horizon blade (χ_bond = 2^{S_cut}) with the lifted global pure-state view (HΨ = 0, S_global = 0). Each of the six experiment cards can be cited on its own from Chapter 30.",
+      "path": "entanglement-entropy-complexity/",
+      "thumbnail": "entanglement-entropy-complexity/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "量子纠缠",
+        "偏迹与熵",
+        "面积律与体积律",
+        "P 与 NP",
+        "余弦不动点",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Quantum entanglement",
+        "Partial trace & entropy",
+        "Area vs volume law",
+        "P vs NP",
+        "Cosine fixed point",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第三十章 · 量子纠缠、P=NP 与熵的正交三位一体",
+          "label_en": "Chapter 30 · Orthogonal triad of entanglement, P=NP & entropy",
+          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-ch30-entanglement-entropy-complexity-triad",
+          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-ch30-entanglement-entropy-complexity-triad"
+        },
+        {
+          "label": "第十三章 · 贝尔纯态的球心混态边缘与盲区分解",
+          "label_en": "Chapter 13 · Maximally mixed Bell marginals and blind-spot sectors",
+          "href": "../zh/ch13-entanglement-and-chsh.html#sec-bell-local-zero",
+          "href_en": "../en/ch13-entanglement-and-chsh.html#sec-bell-local-zero"
+        },
+        {
+          "label": "第八章 · 相干删除相对熵与熵产生恒等式",
+          "label_en": "Chapter 8 · Coherence-deletion relative entropy & entropy production",
+          "href": "../zh/ch08-erasure-and-time-arrows.html",
+          "href_en": "../en/ch08-erasure-and-time-arrows.html"
+        },
+        {
+          "label": "第二十四章 · 余弦自指不动点 θ*",
+          "label_en": "Chapter 24 · Cosine self-referential fixed point θ*",
+          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html",
+          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        }
+      ]
+    },
+    {
+      "id": "fairness-square-uncertainty-expansion",
+      "code": "ORTHO//EXPAND",
+      "title": "公平、平方与正交扩维",
+      "title_en": "Fairness, squaring and orthogonal expansion",
+      "summary": "第三十一章的一条线索，分六张实验卡画在同一块舞台上。可转动的开口螺旋 h(t) = (cos t, sin t, c·t) 每转一圈升高一层，平面影子却回到同一点；黄金螺旋 (n, s, o) ↦ (n + 1, s + T, ¬o) 的整数傅里叶读数走一步不变，加上层 n 就分辨得出每一步。截断 V_D 对固定向量强收敛，而 e_{D+1} 的余量恒为 1，θ = 90° 时影子 cos θ 归零。一次方 |cos θ| + |sin θ| 在 1 与 √2 之间摇摆，平方和与 (AB)(BA) 恒为 1。|+⟩ 与 |−⟩ 的每个对角读数都是 ½，X 读出 +1 与 −1，半角提升绕一圈停在 −1。量子比特上 (ΔA)²(ΔB)² = C² + |K|² + G：A = X、B = Y、ψ = |0⟩ 时全是品红的对易面积。固定的 6 维盒子里克雷洛夫塔长到 4 维后停住；欧几里得 N_S = ∏p + 1 给出盒外的素数，30031 = 59 × 509。克利福德包装、X/Y/|0⟩ 的精确值与 D → D + 1 的维数计算是手工推导，互惠推出平方需要额外前提（文献结果），把扩维读成时间是诠释模型。",
+      "summary_en": "One thread of Chapter 31, in six experiment cards on one stage. The open helix h(t) = (cos t, sin t, c·t), which can be turned by hand, climbs one level per turn while its planar shadow returns to the same point; the golden helix (n, s, o) ↦ (n + 1, s + T, ¬o) keeps every integer Fourier readout through a step, and the level n tells every step apart. Truncations V_D converge strongly on a fixed vector while e_{D+1} keeps residual 1, and at θ = 90° the shadow cos θ is 0. The first power |cos θ| + |sin θ| swings between 1 and √2 while the square sum and (AB)(BA) stay at 1. |+⟩ and |−⟩ read ½ on every diagonal observable while X reads +1 and −1, and the half-angle lift ends one loop at −1. On a qubit (ΔA)²(ΔB)² = C² + |K|² + G: for A = X, B = Y, ψ = |0⟩ it is all magenta commutator area. In a fixed 6-dimensional box the Krylov tower stops at 4; Euclid's N_S = ∏p + 1 names primes outside the list, 30031 = 59 × 509. The Clifford packaging, the exact X/Y/|0⟩ values and the D → D + 1 dimension count are hand derivations, deriving squaring from reciprocity needs extra premises (literature results), and reading expansion as time is an interpretive model.",
+      "path": "fairness-square-uncertainty-expansion/",
+      "thumbnail": "fairness-square-uncertainty-expansion/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "开口螺旋",
+        "截断视界",
+        "平方与公平",
+        "相对相位",
+        "罗伯逊—薛定谔",
+        "克雷洛夫塔",
+        "欧几里得素数"
+      ],
+      "tags_en": [
+        "Open helix",
+        "Truncation horizon",
+        "Squares and fairness",
+        "Relative phase",
+        "Robertson–Schrödinger",
+        "Krylov tower",
+        "Euclid's primes"
+      ],
+      "theory": [
+        {
+          "label": "第三十一章 · 公平、平方与正交扩维",
+          "label_en": "Chapter 31 · Fairness, squaring & expansion",
+          "href": "../zh/ch31-quantum-fairness.html#sec-ch31-fairness-square-expansion",
+          "href_en": "../en/ch31-quantum-fairness.html#sec-ch31-fairness-square-expansion"
+        },
+        {
+          "label": "第六章 · 罗伯逊—薛定谔恒等式",
+          "label_en": "Chapter 6 · The Robertson–Schrödinger identity",
+          "href": "../zh/ch06-geometric-product.html#thm-robertson-schrodinger",
+          "href_en": "../en/ch06-geometric-product.html#thm-robertson-schrodinger"
+        },
+        {
+          "label": "第五章 · 圆的二重覆盖",
+          "label_en": "Chapter 5 · The double cover of the circle",
+          "href": "../zh/ch05-complex-phase-and-rotors.html#thm-circle-double-cover-history-lift",
+          "href_en": "../en/ch05-complex-phase-and-rotors.html#thm-circle-double-cover-history-lift"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_fourier_readout_step"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.level_fourier_joint_readout_detects_step"
+        },
+        {
+          "gid": "D5/S3/Quantum/Completion/IncreasingProjectionStrongLimit.increasing_projection_strong_limit"
+        },
+        {
+          "gid": "D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"
+        },
+        {
+          "gid": "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape"
+        }
+      ]
+    },
+    {
+      "id": "padic-prime-table-tree",
+      "code": "ORTHO//PADIC",
+      "title": "p 进零进位查表树与素数扩表 · 树宽压平树深、阿代尔乘积守恒与阻断轮回悬崖",
+      "title_en": "p-adic zero-carry lookup trees & prime expansion · fan-out flattens depth, Adelic balance & blocking the carry cliff",
+      "summary": "在目标状态空间 N = 1024 = 2¹⁰ 上把 p 进整数环展开为既开又闭的零进位前缀查表树 Z/pᵏZ：当观察者素数 p 沿 2 → 3 → 5 → 7 → … → 31 → 97 → 257 → 1031 扩表时，水平扇出 p 不断展宽，串行查表深度 K(p) = ⌈10/log₂ p⌉ 从 10 层卵裂压平至 1 层单步直读，首层模 p 桶碰撞对 E₁(1024,p) 精确归零。左栏叠加 BigInt 亨泽尔 O(1) 提根（如 p = 7 上 x² = 2 的零进位数字流 3 + 1·7 + 2·7² + 6·7³ + 1·7⁴ + …，以及 p ∣ Δ 时的品红/紫色分歧奇异枝）与超度量盲区探针（Lean 已验证）；右栏同步展示树深/碰撞衰减曲线、阿代尔有理乘积守恒 |x|_∞·∏_p |x|_p = 1 与中国剩余互素解耦（Lean 已验证），并以欧几里得无穷离散素数阶梯对比 p_∞ 连续进位失忆悬崖。六张实验卡可在第三十六章正文里单独引用。",
+      "summary_en": "Across N = 1024 = 2¹⁰ states, the p-adic integers unfold as a clopen zero-carry prefix lookup tree Z/pᵏZ: expanding the observer prime p along 2 → 3 → 5 → 7 → … → 31 → 97 → 257 → 1031 widens horizontal fan-out p, collapses serial lookup depth K(p) = ⌈10/log₂ p⌉ from 10 layers to a single K = 1 direct read, and drives exact first-layer collisions E₁(1024,p) strictly to zero. The left stage overlays exact BigInt Hensel O(1) root lifting (such as 3 + 1·7 + 2·7² + 6·7³ + 1·7⁴ + … for x² = 2 at p = 7, alongside magenta/violet ramified singular branches when p ∣ Δ) and the ultrametric blind-spot probe (kernel-verified in Lean); the right stage pairs the depth/collision decay curves with Adelic product conservation |x|_∞·∏_p |x|_p = 1 and Chinese Remainder decoupling (kernel-verified in Lean), contrasting Euclid's infinite discrete prime ladder against the continuous p_∞ carry-overflow cliff. Each of the six experiment cards can be cited on its own from Chapter 36.",
+      "path": "padic-prime-table-tree/",
+      "thumbnail": "padic-prime-table-tree/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "p 进数",
+        "亨泽尔引理",
+        "超度量查表树",
+        "素数扩表",
+        "阿代尔乘积公式",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "p-adic numbers",
+        "Hensel's lemma",
+        "Ultrametric lookup tree",
+        "Prime table expansion",
+        "Adelic product formula",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第三十六章 §36.4 · p 进零进位查表树、素数观察者扩表与阻断轮回",
+          "label_en": "Chapter 36 §36.4 · p-adic zero-carry lookup trees, prime expansion & blocking samsara",
+          "href": "../zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#sec-ch36-padic-prime-table-expansion",
+          "href_en": "../en/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#sec-ch36-padic-prime-table-expansion"
+        },
+        {
+          "label": "OstrowskiClassification.lean",
+          "label_en": "OstrowskiClassification.lean",
+          "href": "{trureturing}/D5/S3/Arith/AbsoluteValues/OstrowskiClassification.lean"
+        },
+        {
+          "label": "PadicBallFiberCorrespondence.lean",
+          "label_en": "PadicBallFiberCorrespondence.lean",
+          "href": "{trureturing}/D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.lean"
+        },
+        {
+          "label": "RationalPadicProductFormula.lean",
+          "label_en": "RationalPadicProductFormula.lean",
+          "href": "{trureturing}/D5/S3/Factorization/Embeddings/RationalPadicProductFormula.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification"
+        },
+        {
+          "gid": "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range"
+        },
+        {
+          "gid": "D5/S3/Arith/Congruence/PadicObservationDistance.observation_distance_eq_padic_valuation"
+        },
+        {
+          "gid": "D5/S3/Arith/Congruence/PadicPrecisionBlindSpot.first_distinguishing_precision"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Arith/ChineseRemainder.chinese_remainder_bijective"
+        },
+        {
+          "gid": "D5/S3/Observer/PrimeTimeGeometry/DiscountedPrimeTimeUltrametric.discounted_prime_time_distance_strong_triangle"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric"
+        }
+      ]
+    },
+    {
+      "id": "dream-pre-decoherence-deja-vu",
+      "code": "ORTHO//DEJAVU",
+      "title": "梦的预编译与似曾相识 · 同一把尺子再量一次",
+      "title_en": "Dream precompile and déjà vu · the same ruler again",
+      "summary": "一张投影沙盘，三个场景。尺子：同一个输入态在 β = 0° 与 β = 90° 两条测量轴上给出不同的结果权重（0.750 与 0.933）；梦中的第一次完整未读捏合把非对角 √3/4 剪成 0，态熵升到 0.811 bit，丢弃的希尔伯特—施密特质量 3/8；同一把尺子再投影一次，态不动，新增熵 0、残差 0，示意缓存命中（Valid 1、Time_Tag NULL）；转动尺子或打开“梦后逻辑升级”立刻变成不命中。漏斗：硬锚 x = y = 4/5 定下 det G 的拱形，先验窗口收窄到 [0.76, 0.82]，示意路径走到 0.80，黄金窗口选中的格点 26 → 11 → 7；学到区分性事实后旧目标被排除，新窗口 [0.28, 0.52] 里选 0.40，保存的态按新尺子再投影新增 0.189 bit。记录：两份重叠为 −i 的相位记录把 ρ₀₁ 从 1/2 转到 −1/2，逆转一份得 −i/2，两份都逆转回到 1/2；重叠为 0 时回不来。",
+      "summary_en": "One projection sandtable in three scenes. Ruler: one input state gives different outcome weights on the axes β = 0° and β = 90° (0.750 and 0.933); the first complete unread pinching in the dream cuts the off-diagonal √3/4 to 0, the state entropy rises to 0.811 bit and the discarded Hilbert–Schmidt mass is 3/8; projecting again with the same ruler leaves the state where it is, with zero added entropy and zero residual, and the model cache hits (Valid 1, Time_Tag NULL); turning the ruler or switching on the post-dream logic upgrade makes it miss at once. Funnel: the hard anchors x = y = 4/5 fix the arch of det G, the prior windows narrow to [0.76, 0.82], an illustrative path reaches 0.80 and the golden window selects 26 → 11 → 7 lattice points; once a distinguishing fact is learned the old target is excluded, 0.40 is chosen in the new window [0.28, 0.52], and re-projecting the saved state with the new ruler adds 0.189 bit. Records: two phase records of overlap −i take ρ₀₁ from 1/2 to −1/2, reversing one gives −i/2, reversing both restores 1/2; with overlap 0 nothing comes back.",
+      "path": "dream-pre-decoherence-deja-vu/",
+      "thumbnail": "dream-pre-decoherence-deja-vu/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "捏合幂等",
+        "似曾相识",
+        "格拉姆漏斗",
+        "逻辑升级",
+        "相位记录"
+      ],
+      "tags_en": [
+        "pinching idempotence",
+        "déjà vu",
+        "Gram funnel",
+        "logic upgrade",
+        "phase records"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十七章 · 梦的预退相干与似曾相识",
+          "label_en": "Chapter 37 · Dream pre-decoherence and déjà vu",
+          "href": "../zh/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#sec-ch37-dream-pre-decoherence-deja-vu",
+          "href_en": "../en/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#sec-ch37-dream-pre-decoherence-deja-vu"
+        },
+        {
+          "label": "有限记录捏合幂等（Blueprint）",
+          "label_en": "Finite record pinching idempotence (Blueprint)",
+          "href": "{trureturing}/Blueprint/D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.md"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/GramRealizability.gram_realizability"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_not_mem_semanticClosureWithout"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior"
+        },
+        {
+          "gid": "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed"
+        }
+      ]
+    },
+    {
+      "id": "pnp-lookup-degradation",
+      "code": "ORTHO//LOOKUP",
+      "title": "查表退化阶梯与全息引力权衡",
+      "title_en": "7-stage degradation of a P=NP lookup oracle and holographic trade-off",
+      "summary": "顺着“假设存在一种查表算法可以 P=NP，逐渐退化这种查表算法”的思想实验，左右双栏同步对照七阶（d = 0..6）物理路由形态与时空—引力权衡相图 σ = (log₂ S)/n 对 r_eff(σ)。从 d=0 全息自指预言机 p = *p 与双向量手性相消（r = 0），经 d=1 静态多项式建议表（越过 n→n+1 视界丧失非预见性）、d=2 局部张量块与齐肯多夫自动机（Lean 严格锁死向下进位止于 m−2，Frougny 向上进位波催生串行因果时间）、d=3 贝肯斯坦—霍金引力全息半径 R = Ω(2^{σn/2}) 与光锥线延迟（流水线界 max(1−σ, σ/2) 于 σ* = 2/3 达极小 r_min = 1/3）、d=4 二维量子叠加指针（ST² = Ω(2ⁿ)，σ = 0 处 Grover 率 0.500 与 σ = 1 全空间线延迟精确对偶）、d=5 一维退相干指针与兰道尔回溯擦除热，直至 d=6 无记忆盲搜（r = 1.000）。六张实验卡可在第 38 章 §38.4 单独引用。",
+      "summary_en": "Synchronized dual-panel lab tracing the 7-stage degradation (d = 0..6) of a hypothetical P=NP lookup oracle alongside the spacetime–gravity trade-off phase diagram σ = (log₂ S)/n versus r_eff(σ). Stripping oracle privileges moves from d=0 self-mapped p = *p and bivector pair cancellation (r = 0) through d=1 static polynomial advice (non-anticipating failure across n→n+1), d=2 local tensor blocks and the Zeckendorf carry automaton (Lean locks downward carry penetration at m−2 while Frougny's upward carry wave births serial causal time), d=3 Bekenstein–Hawking sphere radius R = Ω(2^{σn/2}) and light-cone wire delay (pipelined floor max(1−σ, σ/2) hitting r_min = 1/3 at σ* = 2/3), d=4 2D quantum superposition pointer (ST² = Ω(2ⁿ), where Grover r = 0.500 at σ = 0 mirrors Stage-3 full-table wire delay at σ = 1), and d=5 1D classical pointer with Landauer backtrack heat, down to d=6 memoryless blind search (r = 1.000). Six experiment cards can be cited individually in Chapter 38 §38.4.",
+      "path": "pnp-lookup-degradation/",
+      "thumbnail": "pnp-lookup-degradation/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "查表退化",
+        "时空权衡",
+        "贝肯斯坦—霍金界",
+        "齐肯多夫进位",
+        "兰道尔原理",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Lookup degradation",
+        "Space–time trade-off",
+        "Bekenstein–Hawking bound",
+        "Zeckendorf carry",
+        "Landauer principle",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第三十八章 §38.4 · P=NP 查表算法的七阶退化与全息引力权衡",
+          "label_en": "Chapter 38 §38.4 · 7-stage degradation of a P=NP lookup oracle",
+          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-pnp-lookup-degradation",
+          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-pnp-lookup-degradation"
+        },
+        {
+          "label": "Lean 源码 · LookupProgramUpperBound.lean",
+          "label_en": "Lean source · LookupProgramUpperBound.lean",
+          "href": "{trureturing}/D5/S0/Computability/DescriptionComplexity/LookupProgramUpperBound.lean"
+        },
+        {
+          "label": "Lean 源码 · RetrospectiveLookupFailure.lean",
+          "label_en": "Lean source · RetrospectiveLookupFailure.lean",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lean"
+        },
+        {
+          "label": "Lean 源码 · ZeckendorfCarryBarrier.lean",
+          "label_en": "Lean source · ZeckendorfCarryBarrier.lean",
+          "href": "{trureturing}/D5/S1/Digit/ZeckendorfCarryBarrier.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed"
+        },
+        {
+          "gid": "D5/S0/Computability/DescriptionComplexity/LookupProgramUpperBound.lookup_program_upper_bound"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure"
+        },
+        {
+          "gid": "D5/S1/Digit/ZeckendorfCarryBarrier.lower_support_carry_barrier"
+        },
+        {
+          "gid": "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance"
+        }
+      ]
+    },
+    {
+      "id": "observer-escape-ledger",
+      "code": "ORTHO//LEDGER",
+      "title": "观察者逃逸账本 · 原像纤维与希尔伯特—齐肯多夫熵",
+      "title_en": "Observer escape ledger · preimage fibers and Hilbert–Zeckendorf entropy",
+      "summary": "左栏画出 16 态四比特闭合 Moore/Hilbert 空间填充哈密顿回路（每步 d_in = d_out = 1），用颜色簇标出观察者引理快表 T 诱导的原像纤维 F_T(y)，用品红与紫色画出不可区分的无序逃逸弦（有序逃逸对恰为其两倍），并可切换至二量子比特贝尔态 |Φ⁺⟩ 对照经典混态的局部边缘盲区；右栏与下方小图实时核算 H_total = I_ledger(T) + H₂^escape(S|T) = 4 bits 守恒、五引理留一唯一捕获新颖度（冗余 L₅ = b₀⊕b₁ 贡献 0 弦无损压缩，四体奇偶 L₄ 缺失弹出 8 条跨格逃逸弦）、清醒兰道尔擦除热对照梦境零热复相干，以及齐肯多夫黄金容量 log₂φ ≈ 0.69424 bits/symbol、14 比特避碰上界与 SMB 柱集收缩回弹。六张实验卡可在第 38 章 §38.5 正文中单独引用。",
+      "summary_en": "On the left, a 16-state 4-bit closed Hamiltonian Moore/Hilbert space-filling cycle (d_in = d_out = 1 on every step) colors the preimage fibers F_T(y) induced by the observer's lemma table T, arches unordered magenta/violet escape chords across indistinguishable states (half the count of ordered escapePairs), and switches to the two-qubit Bell |Φ⁺⟩ vs classical/mixed local-marginal blind spot; on the right and in the strip plots, the page tallies exact conservation H_total = I_ledger(T) + H₂^escape(S|T) = 4 bits, leave-one-out uniqueCapture novelty (redundant L₅ = b₀⊕b₁ yields 0 chords for lossless compression; dropping 4-body parity L₄ pops 8 cross-lattice chords), Awake Stage-5 Landauer heat vs Dream Stage-4 zero-heat recoherence, and Zeckendorf golden capacity log₂φ ≈ 0.69424 bits/symbol with the frozen 14-bit avoidance bound and SMB cylinder rebound. Each of the six experiment cards can be cited on its own from Chapter 38 §38.5.",
+      "path": "observer-escape-ledger/",
+      "thumbnail": "observer-escape-ledger/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "观察者逃逸对",
+        "原像纤维",
+        "商核新颖度",
+        "局部边缘盲区",
+        "希尔伯特回路",
+        "齐肯多夫容量",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Escape pairs",
+        "Preimage fibers",
+        "Structural novelty",
+        "Marginal blind spot",
+        "Hilbert loop",
+        "Zeckendorf capacity",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第三十八章 §38.5 · 观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵",
+          "label_en": "Chapter 38 §38.5 · Observer escape ledger, preimage fibers and Hilbert–Zeckendorf entropy",
+          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-observer-escape-ledger",
+          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-observer-escape-ledger"
+        },
+        {
+          "label": "第十三章 · 局域边缘扇区与关联扇区的正交分解及边缘盲区定理",
+          "label_en": "Chapter 13 · Orthogonal split of local-marginal and correlation sectors",
+          "href": "../zh/ch13-entanglement-and-chsh.html#thm-local-correlation-sectors",
+          "href_en": "../en/ch13-entanglement-and-chsh.html#thm-local-correlation-sectors"
+        },
+        {
+          "label": "Blueprint · ConceptDynamics/InformationEscape/EscapePairs",
+          "label_en": "Blueprint · ConceptDynamics/InformationEscape/EscapePairs",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/InformationEscape/EscapePairs.lean"
+        },
+        {
+          "label": "Blueprint · ConceptDynamics/InformationEscape/StructuralNovelty",
+          "label_en": "Blueprint · ConceptDynamics/InformationEscape/StructuralNovelty",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lean"
+        },
+        {
+          "label": "Blueprint · Digit/ZeckendorfAvoidanceCount",
+          "label_en": "Blueprint · Digit/ZeckendorfAvoidanceCount",
+          "href": "{trureturing}/D5/S1/Digit/ZeckendorfAvoidanceCount.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.uniqueCapturePairs_eq_sdiff"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.structurallyLowersEscape_iff_lowersEscape"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot"
+        },
+        {
+          "gid": "D5/S1/Digit/ZeckendorfAvoidanceCount.uniform_avoidance_count"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity.refinement_impurity_monotone"
+        }
+      ]
+    },
+    {
+      "id": "pisot-clifford-rauzy-sandtable",
+      "code": "ORTHO//RAUZY",
+      "title": "齐肯多夫、皮索与劳齐：八概念综合沙盘",
+      "title_en": "Zeckendorf, Pisot and Rauzy: an eight-concept sandtable",
+      "summary": "同一串不出现 K 个连续 1 的 0/1 字 ε，写成 e(X) = Σ εⱼXʲ，在皮索根 β_K 处放大成物理直线上的点，在共轭根 α 处收缩成内部平面上的点。3D 沙盘把两者立在一起：高度 e(β)·β^−q，水平面 e(α)，K = 3 时地面上是劳齐分形 R₃ 的有限样本。2D 场景按三支收缩 f₀(w) = αw、f₁₀(w) = 1 + α²w、f₁₁₀(w) = 1 + α + α³w 给 R₃ 上色，画出 P_K 的根（β_K → 2，2 − β_K = β_K^−K，其余根在单位圆内），并把余弦不动点 θ* ≈ 0.739085 与 |α| = β₃^−1/2 ≈ 0.737353 并排（相差约 0.2344%，是数值上的接近，不是恒等式）。树与切口：剪掉 K 个连续 1 的字树（K = 2 时是斐波那契个字与黄金窗口 [−1, φ]）、素数幂余数树（第一次分岔在 v_p(x − y) + 1 层）、跨切口的直接编码（接缝 τ(x) + ι(y) < K，页秩上限 R₀、R₁）。熵与逃逸：帕里重置链的平稳律与有限目录区分不了的有序点对。八张实验卡可在第三十九章正文里单独引用；八个概念之间的连线是诠释模型。",
+      "summary_en": "The same 0/1 words ε with no K ones in a row, written as e(X) = Σ εⱼXʲ, expand at the Pisot root β_K into points of the physical line and contract at a conjugate root α into points of the internal plane. The 3D sandtable stands the two together: height e(β)·β^−q over the plane e(α), and at K = 3 the floor shows a finite sample of the Rauzy fractal R₃. The 2D scene colours R₃ by the three contractions f₀(w) = αw, f₁₀(w) = 1 + α²w and f₁₁₀(w) = 1 + α + α³w, draws the roots of P_K (β_K → 2 with 2 − β_K = β_K^−K, the other roots inside the unit circle), and sets the cosine fixed point θ* ≈ 0.739085 beside |α| = β₃^−1/2 ≈ 0.737353 (about 0.2344% apart: a numerical closeness, not an identity). Tree and cut: the word tree pruned of K ones in a row (Fibonacci many words and the golden window [−1, φ] at K = 2), the prime-power residue tree (first split at level v_p(x − y) + 1) and the direct encoder across a cut (seam τ(x) + ι(y) < K, page rank caps R₀, R₁). Entropy and escape: the stationary law of the Parry reset chain and the ordered pairs a finite catalog cannot separate. Each of the eight experiment cards can be cited on its own from Chapter 39; the lines drawn between the eight concepts are an interpretive model.",
+      "path": "pisot-clifford-rauzy-sandtable/",
+      "thumbnail": "pisot-clifford-rauzy-sandtable/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "齐肯多夫",
+        "K-波那契",
+        "皮索数",
+        "劳齐分形",
+        "p 进树",
+        "克利福德分解",
+        "自指不动点",
+        "直接编码",
+        "帕里测度",
+        "逃逸点对"
+      ],
+      "tags_en": [
+        "Zeckendorf",
+        "K-Bonacci",
+        "Pisot number",
+        "Rauzy fractal",
+        "p-adic tree",
+        "Clifford split",
+        "Self-referential fixed point",
+        "Direct encoder",
+        "Parry measure",
+        "Escape pairs"
+      ],
+      "theory": [
+        {
+          "label": "第三十九章 · 齐肯多夫、皮索与劳齐",
+          "label_en": "Chapter 39 · Zeckendorf, Pisot & Rauzy",
+          "href": "../zh/ch39-observer-is-ontological-universe.html#sec-ch39-pisot-clifford-rauzy",
+          "href_en": "../en/ch39-observer-is-ontological-universe.html#sec-ch39-pisot-clifford-rauzy"
+        },
+        {
+          "label": "trureturing · RauzyFractal.lean",
+          "label_en": "trureturing · RauzyFractal.lean",
+          "href": "{trureturing}/D5/S0/Tower/Tribonacci/RauzyFractal.lean",
+          "href_en": "{trureturing}/D5/S0/Tower/Tribonacci/RauzyFractal.lean"
+        },
+        {
+          "label": "trureturing · KBonacciDirectRankEntropy.lean",
+          "label_en": "trureturing · KBonacciDirectRankEntropy.lean",
+          "href": "{trureturing}/D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.lean",
+          "href_en": "{trureturing}/D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes"
+        },
+        {
+          "gid": "D5/S0/Tower/DBonacci/Names.dbonacci_name_card"
+        },
+        {
+          "gid": "D5/S0/Tower/DBonacci/PerronRoot.two_sub_dbonacciPerronRoot_eq_inv_pow"
+        },
+        {
+          "gid": "D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_tendsto_two"
+        },
+        {
+          "gid": "D5/S0/Tower/DBonacci/Irreducibility.dbonacci_complex_root_location"
+        },
+        {
+          "gid": "D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_prefix_cover"
+        },
+        {
+          "gid": "D5/S3/Geometry/Rauzy/TribonacciInterior.rauzyFractal_interior_nonempty"
+        },
+        {
+          "gid": "D5/S3/Geometry/Rauzy/TribonacciNullBoundary.rauzyFractal_frontier_volume_zero"
+        },
+        {
+          "gid": "D5/S3/Arith/Congruence/PadicPrecisionBlindSpot.first_distinguishing_precision"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy"
+        },
+        {
+          "gid": "D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos"
+        }
+      ]
+    },
+    {
+      "id": "quantum-interpretations-duel",
+      "code": "ORTHO//DUEL",
+      "title": "五种诠释，同一台仪器",
+      "title_en": "Five interpretations, one apparatus",
+      "summary": "维格纳的朋友关在密封实验室 S + F + E^⊗N 里，与远方 Bob 手中的 B 处于 |Φ⁺⟩ = (|00⟩ + |11⟩)/√2；舞台上始终是这同一台仪器与同一组旋钮：测量角 θ（30° 处有刻度）、环境规模 N = 10^u（1 到 10⁶）与洛伦兹推动 β（−0.8 到 0.8）。五副透镜（哥本哈根、多世界、导航波、客观坍缩、正交开维）换的只是读法：以 Bob 的 B = 0 为条件的权重 cos²30° : sin²30° = 75% : 25%，不加条件的边缘始终 50% : 50%；环境重叠 γ(N) = exp(−N/10⁴)（示意模型）下的纯度 p² + (1 − p)² + 2p(1 − p)γ²、捏合删去的相干质量、可见度 2√(p(1 − p))γ、r² + τ = 1 与以比特计的捏合熵；CHSH 的 2√2 越过局域上界 2，6 维局部格看不见 9 维关联；推动只颠倒类空事件 A、B 的先后（Δt′ = −2Γβ，间隔恒为 −4），不改任何读数；16 态视界上 b₀b₁b₂ 留下 16 个有序逃逸对（逃逸率 1/15，1 比特），加奇偶读出全部捕获。六张实验卡对应附录 D 的六个基础谜题，可在正文里单独引用；绿框只给所引的 20 条冻结定理，文献结果、示意模型与开放问题分别标注。",
+      "summary_en": "Wigner's friend sealed in a lab S + F + E^⊗N shares |Φ⁺⟩ = (|00⟩ + |11⟩)/√2 with distant Bob's B; the stage always shows this one apparatus with one set of dials: measurement angle θ (with a mark at 30°), environment size N = 10^u (1 to 10⁶) and Lorentz boost β (−0.8 to 0.8). Five lenses (Copenhagen, many-worlds, pilot wave, objective collapse, orthogonal open dimension) change only the reading: weights conditioned on Bob's B = 0, cos²30° : sin²30° = 75% : 25%, against unconditional marginals that stay at 50% : 50%; under the environment overlap γ(N) = exp(−N/10⁴) (an illustrative model), the purity p² + (1 − p)² + 2p(1 − p)γ², the coherence mass pinching deletes, the visibility 2√(p(1 − p))γ, r² + τ = 1 and the pinching entropy in bits; CHSH reaches 2√2 past the local bound 2 while the 6 local cells miss the 9 correlation cells; a boost only reverses the order of the spacelike events A and B (Δt′ = −2Γβ, interval always −4) and changes no readout; on a 16-state horizon b₀b₁b₂ leaves 16 ordered escape pairs (rate 1/15, 1 bit) and a parity readout captures them all. The six experiment cards follow Appendix D's six foundational puzzles and can each be cited from the text; green boxes go only to the 20 frozen theorems cited, and literature results, models and the open problem are labelled as such.",
+      "path": "quantum-interpretations-duel/",
+      "thumbnail": "quantum-interpretations-duel/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "维格纳的朋友",
+        "退相干",
+        "玻恩规则",
+        "贝尔—CHSH",
+        "无信号",
+        "量子诠释"
+      ],
+      "tags_en": [
+        "Wigner's friend",
+        "Decoherence",
+        "Born rule",
+        "Bell–CHSH",
+        "No-signalling",
+        "Quantum interpretations"
+      ],
+      "theory": [
+        {
+          "label": "附录 D · 六个基础谜题与五方诠释",
+          "label_en": "Appendix D · Six puzzles & five interpretations",
+          "href": "../zh/appendix-d.html#sec-appendix-d-six-foundational-puzzles",
+          "href_en": "../en/appendix-d.html#sec-appendix-d-six-foundational-puzzles"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"
+        },
+        {
+          "gid": "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot"
+        },
+        {
+          "gid": "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos"
+        }
+      ]
+    },
+    {
+      "id": "coherence-handshake-causality",
+      "code": "ORTHO//HANDSHAKE",
+      "title": "相干握手 · 零不等于没有，概率是一次握手",
+      "title_en": "Coherence handshake · a zero is not an absence, a probability is a handshake",
+      "summary": "六个互相独立的场景，每个只算它自己的模型。三种零：B 与 A 正交时青色的影子为零而品红的补分量满格（P_{M⊥} = I − P_M），两臂等幅反相时 + 端口全暗而 − 端口全亮（p₊ + p₋ = 1，只有 a = b 才为零），把相干 γ 捏到 0 时两端口都回到 ½、纯度降到 ½（捏合幂等，HS 质量分成留下的对角与捏掉的相干）。握手：去程 ⟨φ|ψ⟩ 随相位转、回程 ⟨ψ|φ⟩ 反着转，乘积 w = Tr(P_φP_ψ) = cos²(θ/2) 停在实轴上。路径扇：L(s) = n₁√(s² + 1) + n₂√((1 − s)² + 1) 的有限求积 A_M = M^{−½}Σe^{ik₀L(s_k)}，离驻点的箭头绕成螺旋、近乎抵消，驻点满足斯涅尔定律。擦除：128 格屏幕的 4 × 4 迹给出 p(j, ±) = (qⱼ/2)(1 ± V sin β cos φⱼ)，未来改变标记基，过去的总数 p(j) = qⱼ 一格不动；弱值 Z_w = tan η 在 η = ±90° 处无定义。格拉姆对调：A_past ↔ C_future 让 x、y 换位，G′ ≠ G，行列式 0.614、特征值与半正定不变，带号三重积变号。回路：底圆转满一圈提升到 −1，回路臂相对参考臂差一个负号，悖论端口 |½(1 + e^{iπ})|² = 0；对照多伊奇 X 的一整条不动点、Fin 2 上的四种命运与 cos θ* = θ* ≈ 0.7391。十四条 Lean 已验证定理各自只担保它所写的那一件事。",
+      "summary_en": "Six independent scenes, each computing only its own model. Three zeros: with B ⟂ A the cyan shadow is zero while the magenta complement is full (P_{M⊥} = I − P_M); equal arms in opposite phase leave the + port dark and the − port bright (p₊ + p₋ = 1, zero only when a = b); pinching the coherence γ to 0 sends both ports back to ½ and the purity to ½ (pinching is idempotent, and the HS mass splits into kept diagonal and pinched coherence). The handshake: the forward ⟨φ|ψ⟩ turns with the phase and the echo ⟨ψ|φ⟩ turns back, their product w = Tr(P_φP_ψ) = cos²(θ/2) stays on the real axis. The path fan: the finite quadrature A_M = M^{−½}Σe^{ik₀L(s_k)} of L(s) = n₁√(s² + 1) + n₂√((1 − s)² + 1); arrows off the stationary point curl and nearly cancel, and the stationary point obeys Snell's law. The eraser: 4 × 4 traces on a 128-bin screen give p(j, ±) = (qⱼ/2)(1 ± V sin β cos φⱼ); changing the future marker basis leaves the past total p(j) = qⱼ exactly as it was; the weak value Z_w = tan η is undefined at η = ±90°. The Gram swap: A_past ↔ C_future exchanges x and y, so G′ ≠ G, while the determinant 0.614, the eigenvalues and positivity stay and the signed triple product flips. The loop: one full base turn lifts to −1, the loop arm differs from the reference arm by a sign, and the paradox port |½(1 + e^{iπ})|² = 0; beside it Deutsch's X with a whole segment of fixed points, the four fates over Fin 2, and cos θ* = θ* ≈ 0.7391. Each of the fourteen Lean-verified theorems vouches only for what it states.",
+      "path": "coherence-handshake-causality/",
+      "thumbnail": "coherence-handshake-causality/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "相干",
+        "玻恩握手",
+        "退相干捏合",
+        "驻相",
+        "延迟选择擦除",
+        "弱值",
+        "格拉姆矩阵",
+        "第 29 章"
+      ],
+      "tags_en": [
+        "Coherence",
+        "Born handshake",
+        "Decoherence pinching",
+        "Stationary phase",
+        "Delayed-choice eraser",
+        "Weak value",
+        "Gram matrix",
+        "Chapter 29"
+      ],
+      "theory": [
+        {
+          "label": "第 29 章 · 相干握手与因果",
+          "label_en": "Chapter 29 · The coherence handshake and causality",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-ch29-coherence-handshake-causality",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-ch29-coherence-handshake-causality"
+        },
+        {
+          "label": "Lean 源码 · RankOneBornPairingWeight.lean",
+          "label_en": "Lean source · RankOneBornPairingWeight.lean",
+          "href": "{trureturing}/D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/GramRealizability.gram_realizability"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S0/Diagonal/SelfApplicationFates.self_application_four_fates"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        }
+      ]
+    },
+    {
+      "id": "observer-consensus-decoherence",
+      "code": "ORTHO//CONSENSUS",
+      "title": "观察者共识与去相干 · 共享的轴、冗余的记录与新方向",
+      "title_en": "Observer consensus and decoherence · shared axes, redundant records and new directions",
+      "summary": "同一根轴能留下两端，散开的轴会把球一起压向中心。许多观察者各带一根无向的测量轴，共识张量 M = Σ wⱼnⱼnⱼᵀ 决定布洛赫球被压成什么形状：六根轴 ±x、±y、±z 的各向同性雾 λ = (⅓, ⅓, ⅓) 没有唯一指针轴，均值信道整体缩放 [(1 + 2cos α)/3]ᵏ（k = 16、α = 0.4 时 0.421），与另算的弱极限 e^(−kα²/3) = 0.426 分开标注；十六根交替 ±z 的轴 λ = (1, 0, 0)，纵向 r_z = 1/√2 严格保留、横向按 (cos α)ᵏ 删去相干，完全捏合时熵增等于相对熵；翻转八根无向轴的标签端，张量 diag(0.25, 0.15, 0.6)、κ = 0.4、间隙 0.35 纹丝不动，而带号和摆动归零；十六份重叠 0.3 的冗余记录给出秩二闭式互信息 I(S : O_m)，m = 3…13 贴着一比特平台、m = 16 升到 2S，受控 U† 擦除只把相干恢复到未擦记录重叠之积；Z、X 两个气泡的未读更新对易而选读 (+, +) 终点相差 1/4，Bong 等人的局部友好分数 √5 + 3 + √(2 + √2) ≈ 7.084 在可见度 v ≈ 0.847 越过 6；先驱轴把张量从旧平面撑成立体（残差 sin β，秩 2 → 3），而旧的 z 模按 e^(−t) 衰减、并不受保护。六张实验卡可在第三十三章正文里单独引用。",
+      "summary_en": "A shared axis preserves its poles; dispersed axes contract the ball toward its centre. Many observers each carry an unoriented measurement axis, and the consensus tensor M = Σ wⱼnⱼnⱼᵀ decides what shape the Bloch ball is pressed into: the isotropic fog of six axes ±x, ±y, ±z has λ = (⅓, ⅓, ⅓) and no unique pointer axis, shrinking uniformly by the mean channel [(1 + 2cos α)/3]ᵏ (0.421 at k = 16, α = 0.4), labelled apart from the weak limit e^(−kα²/3) = 0.426; sixteen axes alternating ±z have λ = (1, 0, 0), keep the longitudinal r_z = 1/√2 exactly and delete transverse coherence by (cos α)ᵏ, and under full pinching the entropy gained equals the relative entropy; flipping the labelled ends of eight unsigned axes leaves the tensor diag(0.25, 0.15, 0.6), κ = 0.4 and the gap 0.35 untouched while the signed sum swings through zero; sixteen redundant records of overlap 0.3 give the exact rank-two mutual information I(S : O_m), hugging a one-bit plateau for m = 3…13 and rising to 2S at m = 16, and erasing records with controlled U† restores coherence only up to the product of the overlaps not erased; the unread updates of a Z bubble and an X bubble commute while the selected (+, +) endpoints differ by 1/4, and the Local Friendliness score √5 + 3 + √(2 + √2) ≈ 7.084 of Bong et al. crosses 6 at visibility v ≈ 0.847; a pioneer axis lifts the tensor out of the old plane (residual sin β, rank 2 → 3), while the old z mode decays as e^(−t) and is not protected. Six experiment cards can be cited on their own from Chapter 33.",
+      "path": "observer-consensus-decoherence/",
+      "thumbnail": "observer-consensus-decoherence/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "观察者共识",
+        "去相干",
+        "指针基",
+        "共识张量",
+        "量子达尔文主义",
+        "局部友好",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Observer consensus",
+        "Decoherence",
+        "Pointer basis",
+        "Consensus tensor",
+        "Quantum Darwinism",
+        "Local Friendliness",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第三十三章 · 共识、去相干与指针轴",
+          "label_en": "Chapter 33 · Consensus, decoherence and the pointer axis",
+          "href": "../zh/ch33-all-beings-observers-and-mutual-attractors.html#sec-ch33-consensus-decoherence-pointer",
+          "href_en": "../en/ch33-all-beings-observers-and-mutual-attractors.html#sec-ch33-consensus-decoherence-pointer"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/GramRealizability.gram_realizability"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
         }
       ]
     }

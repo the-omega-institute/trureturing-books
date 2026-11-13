@@ -1,0 +1,45 @@
+/* ORTHO//DUEL: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this visualization
+   alone lives here; colours come from the tokens (var(--cyan) …), never from literal values. */
+#cv { cursor: default; touch-action: pan-y; }
+#cv.grab { cursor: grab; }
+#cv.grabbing { cursor: grabbing; }
+.chip { text-transform: none; }
+
+/* a wider stage on desktop: slimmer side columns and a lower strip */
+@media (min-width: 1081px) {
+  .app.lab { grid-template-columns: minmax(232px, 268px) minmax(0, 1fr) minmax(252px, 300px); }
+  .lab .strip { height: 146px; }
+}
+
+/* the lens selector sits on the stage, top right; on a narrow stage it drops under the title */
+.hud-tr.lens-bar { top: 12px; right: 16px; max-width: 54%; gap: 4px; z-index: 2; }
+.hud-tr.lens-bar .chip { font-size: 10.5px; letter-spacing: 0.04em; padding: 3px 7px; }
+.hud-tr.lens-bar .chip[aria-pressed="true"] { background: var(--amber); border-color: var(--amber); color: var(--on-accent); box-shadow: var(--glow-amber); }
+.hud-tl { max-width: calc(46% - 20px); }
+/* main.js adds .below when the stage is too narrow for both: the chips then sit under the title (--lens-top) */
+.hud-tr.lens-bar.below { top: var(--lens-top, 56px); right: auto; left: 18px; max-width: calc(100% - 36px); justify-content: flex-start; }
+.stage.lens-below .hud-tl { max-width: calc(100% - 40px); }
+.hud-tl .sub { line-height: 1.3; }
+@media (max-width: 560px) {
+  .hud-tl { top: 12px; left: 14px; }
+  .hud-tl .big { font-size: 12px; line-height: 1.2; }
+  .hud-tl .sub { font-size: 10.5px; }
+  .hud-tr.lens-bar.below { left: 12px; max-width: calc(100% - 24px); }
+  .hud-tr.lens-bar { gap: 3px; }
+  .hud-tr.lens-bar .chip { padding: 2px 5px; font-size: 9.5px; letter-spacing: 0; }
+}
+
+/* the 30° landmark under the angle slider: a plain reference tick; amber only while θ sits on 30° (main.js toggles .is-active) */
+.field .marks { grid-column: 1 / -1; margin-top: 1px; }
+.field .marks i.hot30 { color: var(--cyan); }
+.field .marks i.hot30.is-active { color: var(--amber); }
+
+.xi { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.xi .note { font-family: var(--font-data); font-size: 11px; }
+#lensKeeps b, #lensAdds b { color: var(--ink); font-weight: 600; }
+#readouts dl.ro .key dd b { font-size: 17px; }
+dl.ro sub, .hud-tl sub, .hud-bl sub, .note sub, .lean sub { font-size: 0.72em; line-height: 0; vertical-align: -0.3em; }
+.sw.ink { background: var(--sigma); }
+.sw.hollow { background: transparent; border: 1.5px solid var(--cyan); height: 8px; width: 12px; }
+.lean a[target="_top"] { color: var(--ink); }
+dl.ro .vi dd { color: var(--violet); }
