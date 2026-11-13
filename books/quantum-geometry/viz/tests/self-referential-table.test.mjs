@@ -218,6 +218,54 @@ await settle(en);
 const hud = await en.textContent('#hudBig');
 check('English: the heal card opens with an English HUD', /Step|Untouched/.test(hud) && !/[一-鿿]/.test(hud));
 
+// the labels of the read arrows in the ball say “row i = column j” only when the two are the same N numbers. T is
+// rebuilt here from its cosine rows; row i and column j are compared entry by entry over all of ℝᴺ.
+const tableHere = (N, r) => {
+  const v = Array.from({ length: r }, (_, k) => Array.from({ length: N }, (__, n) => Math.sqrt((k ? 2 : 1) / N) * Math.cos(Math.PI * (n + 0.5) * k / N)));
+  return Array.from({ length: N }, (_, i) => Array.from({ length: N }, (__, j) => v.reduce((s, b) => s + b[i] * b[j], 0)));
+};
+const rowColGap = (A, i, j) => Math.max(...A.map((_, k) => Math.abs(A[i][k] - A[k][j])));
+{ const ep = await T.open(BOOK, ID, '?lang=en', { locale: 'en-US' });
+  await settle(ep);
+  const labels = () => ep.evaluate(() => [...document.querySelectorAll('#stage .tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => t.textContent.trim()));
+  const clickCell = async (i, j) => { const p = await ep.evaluate(([a, b]) => window.TABLE_DEBUG.point.cell(a, b), [i, j]); await ep.mouse.click(p.x, p.y); await settle(ep); return ep.evaluate(() => window.TABLE_DEBUG.state); };
+  await ep.click('[data-size="12"]'); await settle(ep);
+  let es = await clickCell(0, 1), A = tableHere(12, 2), lab = await labels(), G2 = await ep.evaluate(() => window.TABLE_DEBUG.solid());
+  const d3 = Math.hypot(...G2.read.rc.map((x, k) => x - G2.read.cc[k]));
+  check('read labels (en, N = 12, r = 2, clicked row 1 / column 2): row 1 ≠ column 2 (first entries 0.2472 vs 0.2360), the near arrows share one label without “=”',
+    es.N === 12 && es.r === 2 && es.i === 0 && es.j === 1 && es.scene === 'read' && Math.abs(A[0][0] - 0.24716) < 1e-5 && Math.abs(A[0][1] - 0.23600) < 1e-5 && rowColGap(A, 0, 1) > 1e-3 && d3 < 0.15
+      && lab.length === 1 && lab[0] === 'row 1 ≠ column 2' && G2.read.equal === false, `${JSON.stringify(lab)} · gap ${rowColGap(A, 0, 1)} · arrows ${d3}`);
+  es = await clickCell(2, 2); lab = await labels();
+  check('read labels (en, N = 12, r = 2, clicked the diagonal cell (3, 3)): row 3 = column 3 is said, and it is true', es.i === 2 && es.j === 2 && rowColGap(A, 2, 2) === 0 && lab.length === 1 && lab[0] === 'row 3 = column 3', JSON.stringify(lab));
+  await ep.evaluate(() => { const el = document.getElementById('rank'); el.value = '1'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+  await settle(ep);
+  es = await clickCell(0, 4); A = tableHere(12, 1); lab = await labels();
+  check('read labels (en, N = 12, rank 1, clicked row 1 / column 5): every cell is 1/12, so row 1 = column 5 is said, and it is true',
+    es.r === 1 && es.i === 0 && es.j === 4 && A.flat().every((x) => Math.abs(x - 1 / 12) < 1e-15) && rowColGap(A, 0, 4) < 1e-15 && lab.length === 1 && lab[0] === 'row 1 = column 5', JSON.stringify(lab));
+  // every allowed state: N = 4, 8, 12, every rank, every cell
+  const sweep = await ep.evaluate(() => {
+    const D = window.TABLE_DEBUG, out = [], seen = () => [...document.querySelectorAll('#stage .tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length).map((t) => t.textContent.trim());
+    for (const N of [4, 8, 12]) for (let r = 1; r <= N; r++) for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) {
+      if (D.state.N !== N) D.setN(N);
+      if (D.state.r !== r) D.setR(r);
+      D.select(i, j); window.TRV.kit.flush();
+      const s = D.state; out.push([N, r, i, j, s.N === N && s.r === r && s.i === i && s.j === j && s.scene === 'read', seen()]);
+    }
+    return out;
+  });
+  const wrong = [];
+  let eq = 0, shared = 0, minGap = Infinity;
+  for (const [N, r, i, j, at, lb] of sweep) {
+    const g = rowColGap(tableHere(N, r), i, j), same = g < 1e-12, R = `row ${i + 1}`, C = `column ${j + 1}`;
+    if (!same) minGap = Math.min(minGap, g);
+    const good = at && (same ? lb.length === 1 && lb[0] === `${R} = ${C}` : lb.every((t) => !t.includes('=')) && (lb.length === 1 ? lb[0] === `${R} ≠ ${C}` : lb.length === 2 && lb.includes(R) && lb.includes(C)));
+    if (same) eq++; else if (lb.length === 1) shared++;
+    if (!good) wrong.push(`N ${N} r ${r} (${i + 1}, ${j + 1}) gap ${g.toExponential(1)}: ${JSON.stringify(lb)}`);
+  }
+  check(`read labels (en), all ${sweep.length} states N ∈ {4, 8, 12} × r × cell: “=” exactly where row i and column j agree in every entry (${eq}), near unequal arrows share a “≠” label (${shared}), otherwise two labels`,
+    sweep.length === 4 * 4 * 4 + 8 * 8 * 8 + 12 * 12 * 12 && !wrong.length && minGap > 1e-4 && eq > 0 && shared > 0, wrong.slice(0, 3).join(' | ') + ` · smallest unequal gap ${minGap}`);
+  await ep.context().close(); }
+
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 
 /* ---------- the solid: a 3D slice of ℝᴺ and the image of its unit ball ---------- */

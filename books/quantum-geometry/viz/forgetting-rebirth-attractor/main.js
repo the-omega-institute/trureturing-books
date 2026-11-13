@@ -545,18 +545,20 @@
   }
   function drawCayley3(md) {
     const st = stage, px = 1 / F3.unit, words = !TRV.thumbMode;
-    st.surface('dome', (th, ph) => w3([Math.sin(th) * Math.cos(ph), Math.sin(th) * Math.sin(ph), Math.cos(th)]), { u: [0, Math.PI / 2], v: [0, Math.PI], nu: 28, nv: 48, color: P.dim, grid: { every: [7, 12] } });
+    // the whole upper hemisphere, opaque: the disk of w and what lies on it are inside it, hidden as a solid hides them
+    st.surface('dome', (th, ph) => w3([Math.sin(th) * Math.cos(ph), Math.sin(th) * Math.sin(ph), Math.cos(th)]), { u: [0, Math.PI / 2], v: [0, 2 * Math.PI], nu: 28, nv: 96, color: P.dim, grid: { every: [7, 12] } });
     st.surface('wdisk', (r, ph) => w3([r * Math.cos(ph), r * Math.sin(ph), 0]), { u: [0, 1], v: [0, 2 * Math.PI], nu: 8, nv: 72, color: P.lineHot });
     st.tube('equator', arcPts(1, 0, 0, 2 * Math.PI, 144).map(w3), { color: P.ink, width: 2.2, glow: 0.3 });
-    const onSphere = (pts, lift0) => pts.map((w) => { const p = lift(w), k = 1 - lift0; return w3([p[0] * k, p[1] * k, p[2] * k]); });
+    // a lifted circle as a tube of `width` pixels lying on the sphere: its axis one tube radius (and a hair) outside it
+    const onSphere = (pts, width) => pts.map((w) => { const p = lift(w), k = 1 + (0.5 * width * st.lw + 0.4) / st.unit; return w3([p[0] * k, p[1] * k, p[2] * k]); });
     for (let j = 0; j <= 10; j++) {
       if (Math.abs(j - md.tNow) < 1e-9) continue;
       const done = j <= md.jInt, pts = imageCircle(cOf(j), 160), col = done ? P.cyan : P.faint;
-      st.tube(`lift${j}`, onSphere(pts, (done ? 1.2 : 0.7) * px), { color: col, width: done ? 2 : 1.2, glow: done ? 0.3 : 0.1 });
+      st.tube(`lift${j}`, onSphere(pts, done ? 2 : 1.2), { color: col, width: done ? 2 : 1.2, glow: done ? 0.3 : 0.1 });
       st.line(pts.map((w) => w3([w[0], w[1], 0.6 * px])), { color: col, width: done ? 1.3 : 0.9, alpha: done ? 0.9 : 0.6 });
     }
     const now = imageCircle(md.c, 200);
-    st.tube('liftNow', onSphere(now, 1.6 * px), { color: P.amber, width: 3, glow: 0.45 });
+    st.tube('liftNow', onSphere(now, 3), { color: P.amber, width: 3, glow: 0.45 });
     st.tube('diskNow', now.map((w) => w3([w[0], w[1], 1.2 * px])), { color: P.amber, width: 2.2, glow: 0.45 });
     // the samples s = c + iyc: their images w on the disk, their lifts on the hemisphere, and the projection lines
     for (const q of md.samples) st.line([w3(md.south), w3(q.p)], { color: P.dim, width: 0.9, alpha: 0.7 });

@@ -416,13 +416,18 @@
       if (Math.abs(tij) > 1e-9) st.line([near(toW(O), lift + 2), near(toW(sh), lift + 2)], { color: P.amber, width: 4.5 });
       st.line([near(toW(cc), lift), near(toW(sh), lift)], { color: P.ink, width: 1.2, dash: [3, 3], alpha: 0.6 });
       bead('read', sh, P.amber, 4.5);
-      const same = Math.hypot(rc[0] - cc[0], rc[1] - cc[1], rc[2] - cc[2]) < 0.15;
-      if (same) tagIn('row', toW(tip(rc, 0.2)), L(`第 ${S.i + 1} 行 = 第 ${S.j + 1} 列`, `row ${S.i + 1} = column ${S.j + 1}`), 'raw ink');
-      else {
+      // “=” only where row i and column j are the same N numbers (a diagonal cell; or rank 1, every cell 1/N): tested
+      // on all of ℝᴺ, not on the arrows. Arrows that merely land close together share one label, which says “≠”.
+      const cj = T.map((row) => row[S.j]), equal = T[S.i].every((x, k) => Math.abs(x - cj[k]) <= 1e-12);
+      const near3 = Math.hypot(rc[0] - cc[0], rc[1] - cc[1], rc[2] - cc[2]) < 0.15, label = equal ? 'equal' : near3 ? 'shared' : 'apart';
+      if (label !== 'apart') {
+        const rel = equal ? '=' : '≠', mid = rc.map((x, k) => (x + cc[k]) / 2);
+        tagIn('row', toW(tip(equal ? rc : mid, 0.2)), L(`第 ${S.i + 1} 行 ${rel} 第 ${S.j + 1} 列`, `row ${S.i + 1} ${rel} column ${S.j + 1}`), 'raw ink');
+      } else {
         tagIn('row', toW(tip(rc, 0.2)), L(`第 ${S.i + 1} 行`, `row ${S.i + 1}`), 'raw ink');
         tagIn('col', toW(tip(cc, 0.2)), L(`第 ${S.j + 1} 列`, `column ${S.j + 1}`), 'raw ink');
       }
-      out.read = { i: S.i, j: S.j, rc: rc.slice(), cc, shadow: sh, tij };
+      out.read = { i: S.i, j: S.j, rc: rc.slice(), cc, shadow: sh, tij, equal, label };
     } else if (sc === 'perp' && hasPerp()) {  // ψ(θ), its reading Tψ = cos θ·v₁ and the part sin θ·w in the complement
       const V = perpVecs(), ps = sliceOf(sl, V.psi), tp = sliceOf(sl, V.Tpsi), v1 = sliceOf(sl, V.v), w = sliceOf(sl, V.w), th = thetaOf() * DEG;
       const arc = [];
