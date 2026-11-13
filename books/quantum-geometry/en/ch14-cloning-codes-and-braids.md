@@ -274,6 +274,61 @@ Two important domain boundaries apply to [@prop-orthogonal-syndrome-recovery]:
 
 2. **Algebraic decoding on the syndrome support versus a globally trace-preserving channel**: $\mathrm{syndromeDecoding}(S, \cdot) = \sum_{i \in s} S_i^* (\cdot) S_i$ is an algebraic recovery formula on the direct sum $\bigoplus_{i \in s} \operatorname{range}(S_i)$. Whenever $|s|d < n$ so that $\sum_{i \in s} S_i S_i^* \neq I_n$, one cannot unconditionally claim that $\{S_i^*\}_{i \in s}$ alone defines a trace-preserving (CPTP) channel on the entire physical space $M_n(\mathbb{C})$; a full physical channel requires completing the Kraus operators on the orthogonal complement $I_n - \sum_{i \in s} S_i S_i^*$.
 
+Orthogonal syndromes are the clearest coordinate form: they assume the coefficient matrix is diagonal in advance. The frozen source also gives a finite rectangular construction without that assumption. Its input errors are $n\times d$ matrices, while the recovery operators are $d\times n$ matrices, so the result crosses the physical/logical dimension boundary explicitly.
+
+::: {.theorem #thm-finite-kraus-recovery-sufficiency title="Finite Rectangular Kraus Scalar Products Give an Actual Recovery" lean="D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse"}
+Let $s,n,d$ be finite index types, each with finite-type and decidable-equality instances. Let $E : s \to M_{n\times d}(\mathbb{C})$, choose a logical index $v : d$, and let $c\in M_s(\mathbb{C})$ satisfy
+
+$$
+\sum_{a\in s} E_a^*E_a=I_d,
+\qquad
+E_a^*E_b=c_{ab}I_d \quad (a,b\in s).
+$$
+
+Then there are a finite $r\in\mathbb{N}$ and a recovery Kraus family $A : \mathrm{Fin}\,r \to M_{d\times n}(\mathbb{C})$ such that
+
+$$
+\sum_{b\in\mathrm{Fin}\,r} A_b^*A_b=I_n
+$$
+
+and, for every complex logical matrix $X\in M_d(\mathbb{C})$,
+
+$$
+\sum_{b\in\mathrm{Fin}\,r} A_b
+\left(\sum_{a\in s}E_a X E_a^*\right)A_b^*=X.
+$$
+
+The explicit term $v:d$ witnesses a nonempty logical interface; the theorem does not use the vacuous zero-dimensional case. The rectangular sizes are part of the statement: noise sends logical matrices into $M_n(\mathbb{C})$, and $A_b$ returns them to $M_d(\mathbb{C})$.
+:::
+
+::: proof
+The proof follows the existing spectral construction recorded in the source Blueprint. The chosen $v$ turns $c$ into a Gram matrix, giving positive semidefiniteness; an Hermitian spectral decomposition then unitarily rotates the errors into orthogonal branches weighted by eigenvalues. Strictly positive branches are normalized by $\sqrt{\lambda}$, while zero-eigenvalue branches are removed through an actual finite subtype, so no division by zero is hidden. For the remaining orthogonal syndrome family, the source `completeKraus` adds complementary reset rows on the orthogonal complement of the syndrome support. That completion extends adjoint decoding from the correctable support to a normalized recovery on the whole physical input. Finally the finite index is reindexed as `Fin r`, yielding the identity for every complex matrix $X$. The full proof is checked by the Lean kernel.
+:::
+
+This sufficiency result extends [@prop-orthogonal-syndrome-recovery] in three ways: $c$ may begin with off-diagonal coherences and is diagonalized by the spectral rotation; zero spectral weights are removed explicitly rather than assuming every error branch has positive probability; and the recovery family is completed on the unused physical complement, so its normalization covers the whole physical input. It remains a statement about a **finite** Kraus family. It does not assert a finite Kraus representation for every bundled channel, and it supplies no recovery-time or noise-robustness bound.
+
+**Ordinary encoding notation (paper derivation, not a new Lean specialization check).** Let the physical and logical dimensions $n$ and $d$ be finite positive integers, and let the error index set $s$ be finite. Let $V\in M_{n\times d}(\mathbb{C})$ satisfy $V^*V=I_d$, let the physical error family $(E_i)_{i\in s}$ have $E_i\in M_n(\mathbb{C})$ satisfying $\sum_iE_i^*E_i=I_n$, and put $F_i=E_iV\in M_{n\times d}(\mathbb{C})$. If the logical Knill–Laflamme condition is
+
+$$
+V^*E_i^*E_jV=\alpha_{ij}I_d,
+$$
+
+the two premises transport exactly to the rectangular theorem:
+
+$$
+F_i^*F_j=V^*E_i^*E_jV=\alpha_{ij}I_d,
+\qquad
+\sum_iF_i^*F_i=V^*\left(\sum_iE_i^*E_i\right)V=V^*V=I_d.
+$$
+
+Choose any logical index $v\in\{1,\ldots,d\}$ as the nonempty witness. The theorem then gives a finite $r$ and a recovery family $(A_t)_{t\in\mathrm{Fin}\,r}$ with $A_t\in M_{d\times n}(\mathbb{C})$ and $\sum_t A_t^*A_t=I_n$, such that, for every complex matrix $X\in M_d(\mathbb{C})$,
+
+$$
+\sum_tA_t\left(\sum_iE_iVXV^*E_i^*\right)A_t^*=X.
+$$
+
+The parenthesized term is the physical $n\times n$ output; after the $A_t$ sandwich, $X$ is the logical $d\times d$ output. The two boundaries must not be conflated into an identity on the physical space.
+
 ## Planar Braids and the Third Orthogonal Direction {#sec-braids-and-third-axis}
 
 Beyond active syndrome measurement, nature offers a passive topological mechanism for fault-tolerant gates: **braiding particle worldlines in $(2+1)$-dimensional spacetime**.
@@ -634,10 +689,10 @@ A phase flip fails in a different way: $Z_1$ commutes with both $g_1 = Z_1Z_2$ a
 **Flip a phase: no light, yet the state has changed.** In the logical state $\lvert +_L\rangle$ the first qubit has its phase flipped (the magenta Z): $Z_1$ commutes with both $g_1$ and $g_2$, neither light goes on, the bars never leave the code space and the decoder does nothing; yet the cyan bar on $\lvert 111\rangle$ has flipped below the axis, exactly opposite the dashed outline, and the state has become the orthogonal $\lvert -_L\rangle$.
 :::
 
-::: {.remark #rem-error-correction-anyons-literature title="Knill–Laflamme Conditions, Stabilizer Codes, and Anyonic Braiding (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Beyond the frozen algebraic results of this chapter ([@thm-no-cloning-overlap], [@lemma-pauli-word-phase], [@prop-orthogonal-syndrome-recovery], and [@cor-braid-yang-baxter]), four foundational results from the quantum error-correction and topological physics literature should be noted:
+::: {.remark #rem-error-correction-anyons-literature title="Knill–Laflamme Conditions, Stabilizer Codes, and Anyonic Braiding (Formal Result and Literature Boundaries)"}
+This chapter also contains the finite rectangular Kraus sufficiency theorem [@thm-finite-kraus-recovery-sufficiency]. It turns scalar products for a given finite error family into a normalized recovery family covering the whole physical input. The following items retain the classical literature boundaries for the full if-and-only-if picture, stabilizer-code structure, and anyonic physics:
 
-1. **The Knill–Laflamme error-correction conditions** (E. Knill and R. Laflamme, *Theory of quantum error-correcting codes*, Phys. Rev. A **55**, 900–911, 1997, doi:10.1103/PhysRevA.55.900): A code projector $P_{\mathcal{C}} = V V^*$ admits exact CPTP recovery from a set of error operators $\{E_i\}$ if and only if $P_{\mathcal{C}} E_i^* E_j P_{\mathcal{C}} = \alpha_{ij} P_{\mathcal{C}}$ for a Hermitian matrix $\alpha_{ij}$ independent of the logical state. Diagonalizing $\alpha_{ij}$ yields the orthogonal-syndrome condition $S_i^* S_j = \delta_{ij} I_d$ of [@prop-orthogonal-syndrome-recovery] on the correctable subspace while ensuring that syndrome extraction leaks zero information about logical amplitudes.
+1. **The Knill–Laflamme error-correction conditions** (E. Knill and R. Laflamme, *Theory of quantum error-correcting codes*, Phys. Rev. A **55**, 900–911, 1997, doi:10.1103/PhysRevA.55.900): The classical literature statement is that a code projector $P_{\mathcal{C}} = V V^*$ admits exact CPTP recovery from a set of error operators $\{E_i\}$ if and only if $P_{\mathcal{C}} E_i^* E_j P_{\mathcal{C}} = \alpha_{ij} P_{\mathcal{C}}$ for a Hermitian matrix $\alpha_{ij}$ independent of the logical state. Diagonalizing $\alpha_{ij}$ yields the orthogonal-syndrome condition $S_i^* S_j = \delta_{ij} I_d$ of [@prop-orthogonal-syndrome-recovery] on the correctable subspace while ensuring that syndrome extraction leaks zero information about logical amplitudes. The finite rectangular sufficiency direction is the formal theorem [@thm-finite-kraus-recovery-sufficiency]; for a nonempty logical space, necessity for a recovery already given by a finite Kraus family, normalized on the whole physical space and acting as a left inverse on all complex logical matrices, can be read directly in the frozen source [`left_inverse_error_products`](lean:D5/S3/Quantum/Recovery/KrausLeftInverseNecessity.left_inverse_error_products), which this chapter cites as source context rather than adding another theorem box.
 2. **Stabilizer codes** (D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, Caltech Ph.D. thesis, 1997, arXiv:quant-ph/9705052): An Abelian subgroup $\mathcal{S} \subset \mathcal{P}_N$ of cardinality $|\mathcal{S}| = 2^{N-k}$ generated by $N - k$ independent commuting Pauli operators and not containing $-I^{\otimes N}$ defines a $2^k$-dimensional code space $\mathcal{C}$ via its joint $+1$ eigenspace. Pauli errors anticommuting with at least one generator of $\mathcal{S}$ are diagnosed via the binary symplectic inner product; quotienting out the central scalar phase subgroup $\langle i I^{\otimes N}\rangle = \{\pm I^{\otimes N}, \pm i I^{\otimes N}\}$, operators in $N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ represent nontrivial logical classes in $N(\mathcal{S}) / (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ (excluding central scalar multiples such as $-I^{\otimes N}$ of weight $0$), and the code distance $d_{\mathrm{code}}$ is the minimum Pauli weight among all $E \in N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$.
 3. **Configuration-space braid groups in 2D versus 3D** (J. M. Leinaas and J. Myrheim, *On the theory of identical particles*, Nuovo Cimento B **37**, 1–23, 1977, doi:10.1007/BF02727953): For $n$ indistinguishable non-colliding point particles in $\mathbb{R}^d$, the fundamental group of configuration space is the symmetric group $S_n$ for $d \ge 3$ (whose one-dimensional unitary exchange representations allow only the bosonic $+1$ or fermionic $-1$ exchange sign), and the Artin braid group $B_n$ for $d = 2$.
 4. **Non-Abelian anyons and physical limits of topological protection** (C. Nayak, S. H. Simon, A. Stern, M. Freedman, and S. Das Sarma, *Non-Abelian anyons and topological quantum computation*, Rev. Mod. Phys. **80**, 1083–1159, 2008, doi:10.1103/RevModPhys.80.1083): In gapped 2D topological phases, braiding non-Abelian anyons induces unitary transformations on degenerate fusion spaces protected against local perturbations up to exponentially small splitting $\propto e^{-L/\xi}$. This gate regime requires well-separated anyons, motion adiabatic relative to the bulk gap, and an operation duration that does not resolve the residual energy splitting at finite separation. As emphasized in the text, the triviality of point-particle double exchange in $\mathbb{R}^3$ does not mean closed $1$-dimensional knots in $\mathbb{R}^3$ untie themselves, nor does topological protection imply strictly zero error in finite-temperature hardware subject to thermally excited quasiparticles.

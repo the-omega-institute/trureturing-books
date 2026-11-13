@@ -274,6 +274,61 @@ $$
 
 2. **支持子空间上的代数解码与全空间迹保持信道的区分**：$\mathrm{syndromeDecoding}(S, \cdot) = \sum_{i \in s} S_i^* (\cdot) S_i$ 是在可纠综合征支持集 $\mathcal{W} = \bigoplus_{i \in s} \operatorname{range}(S_i)$ 上定义的解码代数式。由于 $s$ 个 $d$ 维正交房间占用的总维数为 $|s|d \le n$，当 $|s|d < n$（即 $\sum_{i \in s} S_i S_i^* \neq I_n$）时，不能无条件声称仅由 $\{S_i^*\}_{i \in s}$ 构成的映射已在整个 $n$ 维物理空间 $M_n(\mathbb{C})$ 上定义了一个迹保持（CPTP）量子信道；若要延拓为全空间上的迹保持信道，还必须把支持子空间正交补 $I_n - \sum_{i \in s} S_i S_i^*$ 上的附加 Kraus 算子补齐。
 
+正交综合征只是最透明的坐标形状：它把系数矩阵先验地写成对角形式。冻结源码还给出了不要求对角化的有限矩形版本。其输入 $E_a$ 是 $n\times d$ 矩阵，输出恢复算子是 $d\times n$ 矩阵；因此它真正跨越了物理空间与逻辑空间的维数边界。
+
+::: {.theorem #thm-finite-kraus-recovery-sufficiency title="有限矩形 Kraus 标量条件给出充分的实际恢复" lean="D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse"}
+设 $s,n,d$ 为有限指标类型，均带有有限型与可判等实例。设有限误差族 $E : s \to M_{n\times d}(\mathbb{C})$、一个逻辑指标 $v : d$ 以及系数矩阵 $c \in M_s(\mathbb{C})$ 满足
+
+$$
+\sum_{a\in s} E_a^*E_a=I_d,
+\qquad
+E_a^*E_b=c_{ab}I_d \quad (a,b\in s).
+$$
+
+则存在某个有限 $r\in\mathbb{N}$ 与恢复 Kraus 族 $A : \mathrm{Fin}\,r \to M_{d\times n}(\mathbb{C})$，使得
+
+$$
+\sum_{b\in\mathrm{Fin}\,r} A_b^*A_b=I_n
+$$
+
+并且对每一个复逻辑矩阵 $X\in M_d(\mathbb{C})$，都有
+
+$$
+\sum_{b\in\mathrm{Fin}\,r} A_b
+\left(\sum_{a\in s}E_a X E_a^*\right)A_b^*=X.
+$$
+
+这里显式给出的 $v:d$ 是非空逻辑接口的见证；定理没有把零维逻辑空间当作“所有输入”的空洞情形。矩形尺寸也很具体：噪声把逻辑矩阵送入 $M_n(\mathbb{C})$，$A_b$ 再把它送回 $M_d(\mathbb{C})$。
+:::
+
+::: proof
+证明沿用源码 Blueprint 的既有谱构造。先用选定的 $v$ 把 $c$ 写成一个 Gram 矩阵，从而得到半正定性；再作厄米谱分解，把误差族酉旋转成按谱权重正交的族。严格为正的谱支用 $\sqrt{\lambda}$ 归一化，零特征值支先由实际的有限子类型删去，所以没有除以零的分支。对剩下的正交综合征族，源码的 `completeKraus` 在其支撑空间正交补上补入互补重置行；这一步把只在纠正支撑上成立的伴随解码扩展为整个物理输入空间上的归一恢复。最后将有限指标重编号为 `Fin r`，得到上述对所有复矩阵 $X$ 的恒等式。完整证明由 Lean 内核检查。
+:::
+
+这条充分性结果比 [@prop-orthogonal-syndrome-recovery] 多做了三件事：系数矩阵 $c$ 可以先有非对角相干，再由谱旋转变成正交房间；零谱权重被明确移除，而不是假设每个错误分支都有正概率；恢复族在物理空间的剩余正交补上补齐，因此归一式确实覆盖整个物理输入。它仍然只是一族**有限** Kraus 矩阵的结论，不声称一般捆绑量子信道都有有限 Kraus 表示，也不给出恢复时间或噪声鲁棒性界。
+
+**普通编码记号下的纸面代入（应用推导，不是新增的 Lean 专门检查）。** 设物理维数 $n$ 与逻辑维数 $d$ 都是有限正整数，误差指标集 $s$ 有限。令 $V\in M_{n\times d}(\mathbb{C})$ 满足 $V^*V=I_d$，令物理误差族 $(E_i)_{i\in s}$ 中的 $E_i\in M_n(\mathbb{C})$ 满足 $\sum_iE_i^*E_i=I_n$，并设 $F_i=E_iV\in M_{n\times d}(\mathbb{C})$。若逻辑 Knill–Laflamme 条件为
+
+$$
+V^*E_i^*E_jV=\alpha_{ij}I_d,
+$$
+
+则两条前提恰好传到上面的矩形定理：
+
+$$
+F_i^*F_j=V^*E_i^*E_jV=\alpha_{ij}I_d,
+\qquad
+\sum_iF_i^*F_i=V^*\left(\sum_iE_i^*E_i\right)V=V^*V=I_d.
+$$
+
+取任意逻辑指标 $v\in\{1,\ldots,d\}$ 作为非空见证，于是得到某个有限 $r$ 与恢复族 $(A_t)_{t\in\mathrm{Fin}\,r}$，其中 $A_t\in M_{d\times n}(\mathbb{C})$ 且 $\sum_t A_t^*A_t=I_n$；并对每一个复矩阵 $X\in M_d(\mathbb{C})$ 有
+
+$$
+\sum_tA_t\left(\sum_iE_iVXV^*E_i^*\right)A_t^*=X.
+$$
+
+括号内是物理 $n\times n$ 输出，左乘右乘 $A_t$ 后的 $X$ 是逻辑 $d\times d$ 输出；两者的边界不能混写成物理空间上的恒等式。
+
 ## 二维编织与第三正交方向 {#sec-braids-and-third-axis}
 
 除了用泡利稳定子校验面主动侦测并纠正错误之外，大自然还提供了一种更加匪夷所思的被动防御机制：**用二维平面粒子的世界线编织（braiding）打结**。
@@ -649,16 +704,16 @@ $$
 **翻相位，灯不亮，态却变了。** 逻辑态 $\lvert +_L\rangle$ 的第一个比特翻了相位（品红的 Z）：$Z_1$ 与 $g_1$、$g_2$ 都对易，两盏灯都不亮，柱子没有离开码空间，解码器也不动；可 $\lvert 111\rangle$ 那根青色柱子翻到了轴下，与虚线正好相反，态成了正交的 $\lvert -_L\rangle$。
 :::
 
-::: {.remark #rem-error-correction-anyons-literature title="Knill–Laflamme 纠错条件、稳定子码与任意子拓扑编织（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本章的形式化结果聚焦于不可克隆内积判据（[@thm-no-cloning-overlap]）、泡利字算子乘法相位（[@lemma-pauli-word-phase]）、正交综合征子空间恢复代数式（[@prop-orthogonal-syndrome-recovery]）以及架着色的三股编织恒等式（[@cor-braid-yang-baxter]）。在量子纠错与拓扑量子计算的完整理论中，以下四项核心定理由经典文献给出：
+::: {.remark #rem-error-correction-anyons-literature title="Knill–Laflamme 纠错条件、稳定子码与任意子拓扑编织（形式化结果与文献边界）"}
+本章现在还包含有限矩形 Kraus 充分性定理 [@thm-finite-kraus-recovery-sufficiency]；它把一族已给定的有限误差矩阵的标量乘积条件，具体构造成归一且覆盖整个物理输入的恢复族。下面列出仍留在经典文献边界内的充要性全貌、稳定子码结构与任意子物理结果：
 
-1. **Knill–Laflamme 充要条件**（E. Knill and R. Laflamme, *Theory of quantum error-correcting codes*, Phys. Rev. A **55**, 900–911, 1997, doi:10.1103/PhysRevA.55.900）：设 $P_{\mathcal{C}} = V V^*$ 为物理空间到码子空间 $\mathcal{C}$ 的正交投影。一族噪声 Kraus 算子 $\{E_i\}$ 在 $\mathcal{C}$ 上可被某个完全正且保迹（CPTP）恢复信道精确纠正，当且仅当存在厄米系数矩阵 $\alpha_{ij} \in \mathbb{C}$ 使得
+1. **Knill–Laflamme 充要条件**（E. Knill and R. Laflamme, *Theory of quantum error-correcting codes*, Phys. Rev. A **55**, 900–911, 1997, doi:10.1103/PhysRevA.55.900）：经典文献的完整说法是，设 $P_{\mathcal{C}} = V V^*$ 为物理空间到码子空间 $\mathcal{C}$ 的正交投影。一族噪声 Kraus 算子 $\{E_i\}$ 在 $\mathcal{C}$ 上可被某个完全正且保迹（CPTP）恢复信道精确纠正，当且仅当存在厄米系数矩阵 $\alpha_{ij} \in \mathbb{C}$ 使得
 
    $$
    P_{\mathcal{C}} E_i^* E_j P_{\mathcal{C}} = \alpha_{ij} P_{\mathcal{C}} \qquad (\forall i, j).
    $$
 
-   将 $\alpha$ 对角化后，即可在可纠子空间上化归为本章 [@prop-orthogonal-syndrome-recovery] 的正交综合征结构 $S_i^* S_j = \delta_{ij} I_d$，并且标量因子 $\alpha_{ij}$ 独立于码空间内的具体逻辑态，从根本上保证了综合征测量不会泄露任何逻辑叠加幅度。
+   将 $\alpha$ 对角化后，即可在可纠子空间上化归为本章 [@prop-orthogonal-syndrome-recovery] 的正交综合征结构 $S_i^* S_j = \delta_{ij} I_d$，并且标量因子 $\alpha_{ij}$ 独立于码空间内的具体逻辑态，从根本上保证了综合征测量不会泄露任何逻辑叠加幅度。 本章的有限、矩形、充分性方向由 [@thm-finite-kraus-recovery-sufficiency] 承担；对于非空逻辑空间，已给定有限 Kraus 表示、在整个物理空间上归一且在所有复逻辑矩阵上构成左逆的恢复，其必要性可直接查阅冻结源码 [`left_inverse_error_products`](lean:D5/S3/Quantum/Recovery/KrausLeftInverseNecessity.left_inverse_error_products)，本书只作来源说明，不另加定理盒。
 2. **Gottesman 稳定子码形式体系**（D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, Caltech Ph.D. thesis, 1997, arXiv:quant-ph/9705052）：在 $N$ 比特泡利群 $\mathcal{P}_N$ 中，取由 $N - k$ 个相互独立且两两对易的泡利生成元生成、阶为 $|\mathcal{S}| = 2^{N-k}$ 且不含 $-I^{\otimes N}$ 的阿贝尔子群 $\mathcal{S} \cong (\mathbb{Z}/2\mathbb{Z})^{N-k}$，其公共 $+1$ 特征子空间构成 $2^k$ 维码空间 $\mathcal{C}$。凡与 $\mathcal{S}$ 中某个生成元反对易的泡利错误算子均由二元辛内积唯一标记非零综合征；而在 $\mathcal{S}$ 的正规化子（即中心化子）$N(\mathcal{S})$ 中，商去全局标量相位中心群 $\langle i I^{\otimes N}\rangle = \{\pm I^{\otimes N}, \pm i I^{\otimes N}\}$ 与稳定子群 $\mathcal{S}$ 后，集合 $N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 中的算子代表商群 $N(\mathcal{S}) / (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 中的非平凡逻辑算子（商去标量相位排除了诸如 $-I^{\otimes N}$ 这类仅改变全局相位、泡利权重为 $0$ 的平凡中心元），码距 $d_{\mathrm{code}}$ 则严格定义为全体 $E \in N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 的最小泡利汉明权重。
 3. **二维配置空间辫群与任意子分数统计**（J. M. Leinaas and J. Myrheim, *On the theory of identical particles*, Nuovo Cimento B **37**, 1–23, 1977, doi:10.1007/BF02727953）：对欧氏空间 $M = \mathbb{R}^d$ 上 $n$ 个全同不可碰撞点粒子的配置空间 $\mathrm{Conf}_n(M) = \{(x_1, \dots, x_n) \in M^n : i \neq j \Rightarrow x_i \neq x_j\} / S_n$，当 $d \ge 3$ 时基本群同构于对称群 $\pi_1(\mathrm{Conf}_n(\mathbb{R}^d)) \cong S_n$（在一维幺正交换表示中，单次交换只能给出玻色 $+1$ 或费米 $-1$ 符号）；当 $d = 2$ 时，基本群为 Artin 辫群 $\pi_1(\mathrm{Conf}_n(\mathbb{R}^2)) \cong B_n$，允许连续阿贝尔任意子相位或非阿贝尔高维幺正编织表示。
 4. **非阿贝尔任意子与拓扑容错的物理边界**（C. Nayak, S. H. Simon, A. Stern, M. Freedman, and S. Das Sarma, *Non-Abelian anyons and topological quantum computation*, Rev. Mod. Phys. **80**, 1083–1159, 2008, doi:10.1103/RevModPhys.80.1083）：在具有能隙的二维拓扑物相中，非阿贝尔准粒子的简并融合空间对局域微扰具有随准粒子间距 $L$ 指数衰减的分裂保护 $\Delta E \propto e^{-L/\xi}$，世界线编织在简并子空间上诱导出满足 Yang–Baxter 关系的非平凡幺正门。这里的门操作要求任意子彼此充分分离，运动相对于体能隙保持绝热，同时在操作历时内不分辨有限间距带来的残余能级分裂。但需注意：首先，如正文所述，三维空间中点粒子交换回路可借第三空间轴解开，绝不意味着三维闭合一维绳结（knots）会自动解开；其次，拓扑保护在真实有限温度硬件中仍受热激发准粒子游走（thermal poisoning）与有限尺寸效应限制，并非在物理实现中绝对零错误。
