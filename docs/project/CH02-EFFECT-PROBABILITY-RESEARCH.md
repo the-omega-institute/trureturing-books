@@ -33,7 +33,7 @@ $$
 
 ## 任意有限观测仍允许的精确反模型
 
-另一个已完成结果的量词为：每个 $d\ge1$、每个任意**有限**实际效应集 $T\subset\mathcal E_d$、每个给定密度 $\rho_\star$，均存在一个定义在全部矩阵上的 Borel 可测实函数 $p$，其效应值域为 $[0,1]$，$p(0)=0$、$p(I)=1$，且 $p(E)=b_{\rho_\star}(E)$ 对所有 $E\in T$ 精确成立。同时：
+另一个已完成结果的量词为：每个 $d\ge1$、每个任意**有限**实际效应集 $T\subset\mathcal E_d$、每个给定密度 $\rho_\star$，均存在一个定义在全部矩阵上的 Borel 可测实函数 $p$，在效应上取值于 $[0,1]$，$p(0)=0$、$p(I)=1$，且 $p(E)=b_{\rho_\star}(E)$ 对所有 $E\in T$ 精确成立。同时：
 
 - 所有允许的二元和上，$|p(E+F)-p(E)-p(F)|\le2$，并存在**不同的**允许效应 $E,F$ 达到 $2$。
 - 对**每个**实际密度 $\rho$，所有效应上的 $|p(E)-b_\rho(E)|\le1$；对每个实数 $\eta>0$，另有实际效应使该距离严格大于 $1-\eta$。因此每个密度对应的全效应上确界均为 $1$，不声称一定取到最大值。
@@ -139,4 +139,8 @@ Hrushovski–Pitowsky，*Generalizations of Kochen and Specker's Theorem and the
 
 另据完成的 `/tmp/ray-record-finite-observation-source-integration-work-01a1d544/collected-envelope.json`，原生反模型后来在基线 `1ff680e6cc902e88cfbba1b684826388e2ac8d37` 上保存为 `bf123334329e8eaf6f1774353b6634bdb5756c70`；实际 `EffectFiniteObservationCountermodel.lean` 的 SHA256 为 `5b887ec550cd433f208105c620445d8d223c0e3812ab2fd46530eca17dd6f8ab`，原生编译退出码 0、错误与警告均为 0，公理闭包为上述标准三项。此项是后续原生编译证据，未替换前述原始反模型身份与机制。该完成快照的规范范围报告因缓存写入守卫忙而未成功，Reg 审计未编译，规范 Scribe 发射／生成文件映射尚缺，独立冻结前审查、准入、冻结及出版均未完成；本笔记只复用完成结论，不核查活动源工作区。
 
-后续源作者与仓库负责人仍须核实适用的预登记及原始时序依据（不追溯赋予信用）、实际 theory/atom 对应、逐项准入与真实消费关系、同作者 Reg 审计及其必要的未完成披露，补齐待交付候选的规范报告／源兼容／内核／公理证据、Scribe 忠实性与独立审查，再完成正式 deposit、冻结和 `dev` 合入。可能已有的规范源身份不等于书中可引用的冻结 GID，后者与可达 pin 仍待实际接收步骤。随后由工程方建立配置分支可达的书库 pin，由指定主笔先中文再英文逐项回写条件、误差界及有限观测边界，并完成书库检查、所需构建、审查、`main` 合入、CI 与 Pages 验证。本次只准备本地工程笔记，没有执行上述接收与发布步骤，也没有完成更广的跨仓库目标。
+后续完成的原生 Stage A 已保存为 `64426c6c3068c76d44fe7753b853439b9c24ee0c`，其中已合入 `dev` 的 `d4a6bd75fd78850fed8cf60aebb6ce7fceffa2e1`。四个数学模块 `EffectAdditivityStability`、`EffectDensityRepair`、`EffectDensityStability`、`EffectFiniteObservationCountermodel` 及保留的反模型 Reg 模块经受控入口编译通过，退出码 0、零警告；规范范围报告包含 59 个模块、2,173 个声明，SHA256 为 `2e328885ec2b486c56c4a48b587c770de88336c23e6d8288cf6bd07c288a5d17`，所选声明仅使用标准三项公理且无 `sorryAx`。随后三份稳定性 Scribe 改用有类型的作者公式，保留全部 63 个声明句柄并规范生成 Markdown；反模型文档保持原有完整联合子句。当前输入的生成与 `filemap-conform` 均退出 0；四个 D5 文件、保留的 Reg 及反模型 Scribe／Markdown 的完整源码哈希未变。完成记录分别见 `/tmp/ray-record-effects-native-current-check-work-01a1d544/collected-envelope.json` 与 `/tmp/effect-stability-scribe-repair-01a1d544/collected-envelope.json`。这些仍是临时交接定位，不是永久冻结身份。
+
+该快照中的反模型 Reg 有真实已编译证明及当前 `declared_validated` 记录；三份稳定性模块的 48 条公开定理／引理登记仍未完成，未提交对应 Reg 源码。源作者的有限模板调查及缺失的完整 Law、合法已登记读出、变动、敏感性、观察依赖和绑定证据已如实列于 [上游 issue 30392](https://github.com/the-omega-institute/trureturing/issues/30392)。这是现有未完成登记披露路径，不是证明、豁免或新的机器状态。Scribe 逐式忠实性目前是源作者核对结果，独立冻结前审查仍待完成。
+
+后续仍须核实适用的预登记及原始时序依据（不追溯赋予信用）、实际 theory/atom 对应、逐项准入与真实消费关系，完成独立冻结前审查、正式 deposit、冻结、最终审查与 `dev` 合入。规范源身份及编译通过不等于书中可引用的冻结 GID。之后建立配置分支可达的书库 pin，由指定主笔先中文再英文逐项回写条件、误差界及有限观测边界，并完成书库检查、所需构建、审查、`main` 合入、CI 与 Pages 验证。本笔记仍是工程研究材料，尚未完成上述跨仓库接收与书稿交付。
