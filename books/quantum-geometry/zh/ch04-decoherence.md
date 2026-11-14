@@ -462,6 +462,38 @@ $$
    仅当在 [@rem-retained-environment-defect] 已说明的实际受控列假设 $U_{(i,b),\,(j,a)}=[j=i]\,E_i(b)$ 下能够将 $R_p$ 认同为受控记录信道 $\Phi_E$（并配合跨类重叠界 $|G_{ij}|\le q<1$ 或 [@rem-ray-record-orbit] 的射线分离界）时，上述有限步累加和才能进一步给出真实轨迹对记录类捏合的 Frobenius 误差预算。同时必须区分比较目标：上述缺陷界衡量的是相对于**纯投影** $p$ 的偏离 $D(\tau_k,\rho_k\otimes p)$，其直接受控的比较对象是 $R_p(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes p)U^*\bigr)$，**并不自动给出** $R_p$ 与混合参考重置映射 $R_\eta(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes\eta)U^*\bigr)$ 相等或针对 $R_\eta$ 的误差界（不同参考态未必导出不同的重置映射，例如 $U=I$ 对任意迹为 $1$ 的环境参考态均导出系统恒等映射；但除非独立证明 $R_p=R_\eta$，将 $\eta$ 替换为 $p$ 仍需对 $R_p$ 与 $R_\eta$ 及其迭代另作比较），因此不能将该纯参考界直接套用于 [@ex-retained-environment-cnot] 中以混合态 $\eta_r$（$0\le r<1$）定义的重置信道 $R_{\eta_r}$。此外，这一单步估计在轨迹上按有限步数 $N$ 累加，既不证明具体物理系统中 $\varepsilon_k$ 必然微小，也不自动给出关于时间 $N$ 一致成立的小误差界。
 :::
 
+::: {.remark #rem-pure-record-support-compatibility title="受控记录下保纯环境的布居支集限制与相干模长守恒（应用推导）"}
+[@rem-pure-environment-marginal-defect] 第 2 条的有限步恒等式 $\rho_N=R_p^N(\rho_0)$ 仅要求在各**输入步** $0\le k<N$ 上真实环境边缘态满足 $\Tr_{\mathrm{S}}(\tau_k)=p=\lvert a\rangle\langle a\rvert$，并不约束末端输出步 $\tau_N$：即便在单步 $N=1$ 时，$\Tr_{\mathrm{S}}(\tau_0)=p$ 已足以给出 $\rho_1=R_p(\rho_0)$，而末端输出 $\tau_1$ 仍可发生真实的环境记录与系统退相干。若进一步要求单步跃迁 $\tau'=U\tau U^*$ **跨跃迁保持**同一个指定的纯环境边缘态 $p=\lvert a\rangle\langle a\rvert$，则必须在输入与输出两个端点同时施加精确纯度条件 $\Tr_{\mathrm{S}}(\tau)=p$ 与 $\Tr_{\mathrm{S}}(\tau')=p$，这是一项严格更强的限制（以下仍为定理盒之外的有限维分析应用推导，不构成所引冻结声明的附加条款或新的形式化定理）。沿用 [@rem-retained-environment-defect] 在 $\mathrm{Fin}\,d\times\mathrm{Fin}\,e$ 上的受控记录列假设 $U_{(i,b),\,(j,a)}=[j=i]\,E_i(b)$（故每条记录满足归一化 $\sum_{b\in\mathrm{Fin}\,e}|E_i(b)|^2=1$ 且 $R_p=\Phi_E$），设联合输入 $\tau$ 半正定且迹为 $1$，记系统边缘态为 $\rho=\Tr_{\mathrm{E}}(\tau)$，并记其在控制基下的**布居支集**为 $S=\{i\in\mathrm{Fin}\,d:\rho_{ii}>0\}$。由 [@rem-pure-environment-marginal-defect] 第 1 条，输入端 $\Tr_{\mathrm{S}}(\tau)=p$ 已直接导出张量积因子化 $\tau=\rho\otimes p$。在这一受控列结构下，输出联合态 $\tau'=U(\rho\otimes p)U^*$ 在环境指标 $b\in\mathrm{Fin}\,e$ 处的边缘对角元恰为 $\sum_{i\in\mathrm{Fin}\,d}\rho_{ii}|E_i(b)|^2$；若输出环境边缘态仍精确等于 $p=\lvert a\rangle\langle a\rvert$，则对一切 $b\ne a$ 有
+
+$$
+0=p_{b,b}=\Bigl(\Tr_{\mathrm{S}}\bigl(U(\rho\otimes p)U^*\bigr)\Bigr)_{b,b}=\sum_{i\in\mathrm{Fin}\,d}\rho_{ii}|E_i(b)|^2.
+$$
+
+因 $\rho$ 半正定，每一求和项均满足 $\rho_{ii}|E_i(b)|^2\ge 0$；非负实数之和为零迫使每一项各自为零，故对一切受占地址 $i\in S$（$\rho_{ii}>0$）及一切 $b\ne a$ 均有 $E_i(b)=0$。结合记录归一化 $\sum_{b\in\mathrm{Fin}\,e}|E_i(b)|^2=1$，布居支集 $S$ 上的每条受占记录向量必沿 $\lvert a\rangle$ 方向且仅差一个单位复相位：
+
+$$
+E_i=u_i\lvert a\rangle,\qquad u_i=E_i(a)\in\mathbb{C},\qquad |u_i|=1\qquad (i\in S).
+$$
+
+由此，对任意一对受占地址 $i,j\in S$，Gram 乘子满足 $G_{ij}=\sum_{b\in\mathrm{Fin}\,e}E_i(b)\overline{E_j(b)}=u_i\overline{u_j}$ 且模长恒为 $|G_{ij}|=1$，单步信道公式 $R_p(\rho)_{ij}=\Phi_E(\rho)_{ij}=G_{ij}\rho_{ij}$ 在 $S\times S$ 上保持矩阵元模长 $|\rho_{ij}|$ 不变。而在受占支集之外，只要 $i\notin S$ 或 $j\notin S$，非负对角布居 $\rho_{ii},\rho_{jj}\ge 0$ 中至少有一项为零；由半正定矩阵元上界 $|\rho_{ij}|^2\le\rho_{ii}\rho_{jj}$，零对角布居迫使其所在的整行与整列恒为零（$\rho_{ij}=0$，从而输出亦有 $R_p(\rho)_{ij}=G_{ij}\rho_{ij}=0$）。因此，包括 $S$ 之外的零行列在内，系统密度矩阵的**每一个矩阵元模长**在跨跃迁后均精确守恒：
+
+$$
+G_{ij}=u_i\overline{u_j},\quad |G_{ij}|=1\quad (i,j\in S),\qquad \bigl|R_p(\rho)_{ij}\bigr|=|\rho_{ij}|\quad (\forall i,j\in\mathrm{Fin}\,d).
+$$
+
+相对相位因子 $u_i\overline{u_j}$ 的旋转（或实部、虚部等正交分量的改变）只是复平面上的相位转动，不构成相干模长 $|\rho_{ij}|$ 的衰减。这一推导仅用到输入态的半正定性、单位迹以及两端环境边缘态等于 $p$，无需额外假设系统态 $\rho$ 为纯态、联合态 $\tau$ 为纯态、$\rho$ 满秩或布居支集 $S$ 占满全部系统地址；反过来，秩为 $1$ 的纯叠加态（如全基等权叠加态）完全可以拥有满布居支集 $S=\mathrm{Fin}\,d$。
+
+由于求和式 $\sum_i\rho_{ii}|E_i(b)|^2=0$ 只约束 $\rho_{ii}>0$ 的受占地址，上述条件对全局信道 $R_p$ 的限制取决于输入态的布居支集 $S$。当输入具有**满布居支集** $S=\mathrm{Fin}\,d$ 时，$E_i=u_i\lvert a\rangle$（$|u_i|=1$）遍及全部系统地址，记相位对角幺正阵为 $U_{\mathrm{ray}}=\operatorname{diag}(u_i)$，则重置映射在**任意**复系统矩阵 $\sigma\in M_d(\mathbb{C})$ 上均化为幺正对角共轭 $R_p(\sigma)=U_{\mathrm{ray}}\sigma U_{\mathrm{ray}}^*$。当输入**布居支集不满**（$S\subsetneq\mathrm{Fin}\,d$）时，未受占地址 $i\notin S$ 的记录列 $E_i$ 不受该条轨迹约束，全局重置信道 $R_p$ 未必是幺正共轭：例如取 $d=3$ 及正交环境基态 $\lvert a\rangle\perp\lvert b\rangle$，令 $E_0=E_1=\lvert a\rangle$、$E_2=\lvert b\rangle$，则任何支集落在 $\{0,1\}$ 上的相干输入都保持输出环境边缘态为 $p$ 且保持全部矩阵元模长不变，但对占据地址 $2$ 的其他输入，涉及地址 $2$ 的相干元仍因 $G_{02}=G_{12}=0$ 而发生完全退相干。另一方面，若沿**同一个固定**受控幺正算子 $U$ 生成真实联合轨迹 $\tau_{k+1}=U\tau_k U^*$，则初态 $\tau_0$ 在首步跃迁上保持环境边缘态 $p$ 一旦确定了对一切 $i\in S=\{i:(\rho_0)_{ii}>0\}$ 有 $U(\lvert i\rangle\otimes\lvert a\rangle)=u_i(\lvert i\rangle\otimes\lvert a\rangle)$，由 $\{\lvert i\rangle\otimes\lvert a\rangle:i\in S\}$ 张成的联合子空间（以及支集在 $S\times\{a\}$ 上的联合密度矩阵）即成为 $U$ 的不变子空间。于是对角布居 $(\rho_k)_{ii}=(\rho_0)_{ii}$ 与支集 $S$ 保持固定，后续每一步 $k\in\mathbb{N}$ 均自动维持 $\Tr_{\mathrm{S}}(\tau_k)=p$ 且满足
+
+$$
+(\rho_k)_{ij}=(u_i\overline{u_j})^k(\rho_0)_{ij}\quad (i,j\in S),\qquad \bigl|(\rho_k)_{ij}\bigr|=\bigl|(\rho_0)_{ij}\bigr|\quad (\forall i,j\in\mathrm{Fin}\,d),
+$$
+
+对于这同一个固定受控算子 $U$，无需在后续步 $k\ge 1$ 上重复追加新的输出端纯度假设。若每步耦合算子随时间改变，则仍须在每次跃迁上分别满足相应的受控列结构与纯边缘态保持条件；同时，该结论不涵盖未观测的连续中间时刻，也不适用于脱离受控记录列结构的任意联合幺正算子——例如单比特 Hadamard 门与环境恒等算子的张量积 $U=H\otimes I$ 在保持环境边缘态 $p$ 的同时会将赤道态 $\lvert +\rangle\langle +\rvert$ 旋转为计算基态 $\lvert 0\rangle\langle 0\rvert$，这改变的是计算基下的相干与布居分布，而非受控记录下的退相干。
+
+将上述支集性质与前文的衰减条件对照，即可厘清不同模型前提之间的相容边界。若在保持纯环境 $p$ 的同时还要求满足 [@thm-repeated-record-decay] 按字面向量划分的严格跨类重叠界（$E_i\ne E_j$ 时 $|G_{ij}|\le q<1$），则因任意两个受占地址 $i,j\in S$ 的重叠模长恒为 $|G_{ij}|=|u_i\overline{u_j}|=1$，不可能满足 $1\le q<1$；故 $S$ 上的所有受占记录向量必须按字面完全相等（对同一公共单位相位 $u$ 有 $E_i=u\lvert a\rangle$），此时 $R_p(\rho)=\rho$，该输入态相对于记录类捏合的误差 $\|\rho-\Pi_E(\rho)\|_{\mathrm F}$ 恒为零。若采用 [@rem-ray-record-orbit] 的射线表述，则 $S$ 上的受占记录 $E_i=u_i\lvert a\rangle$ 共处同一条射线 $\mathbb{C}\lvert a\rangle$，不存在跨射线受占对，射线捏合误差 $\|\rho-P_{\mathrm{ray}}(\rho)\|_{\mathrm F}$ 同样为零，仅保留相位轨道 $(u_i\overline{u_j})^k\rho_{ij}$ 的相干旋转。在整个分析中，必须将**真实完整环境边缘态的精确纯度** $\Tr_{\mathrm{S}}(\tau)=p$ 与以下五类不同条件严格区分：单条条件记录向量 $\lvert E_i\rangle$ 的纯态性（在任何受控记录模型中 $\lvert E_i\rangle$ 本身皆为单位纯态，但其加权边缘态 $\sum_i\rho_{ii}\lvert E_i\rangle\langle E_i\rvert$ 仍可因记录分岔而混合）、全局联合态 $\tau$ 的纯态性、仅在定义 $R_p$ 时人为选作比较基准的纯参考态 $p$、混合环境边缘态的定常性（如 [@ex-retained-environment-cnot]），以及近似纯度（[@rem-pure-environment-marginal-defect] 中的 $\varepsilon_k>0$）——这五者均不能替代两端边缘态精确为 $p$ 的前提。上述结论均基于有限维矩阵、偏迹与受控记录恒等式的分析推演，不声称逆命题、无穷维推广、原创数学发现或实验验证。
+:::
+
 **衰减到零，还算可逆吗？** [@prop-phase-damping-decay] 里的相干元每一步乘以 $c$，$N$ 步后只剩 $c^N\rho_{01}$，最终归零。4.1 节说过，单步退相干可以看成一次可逆耦合之后丢掉环境（[@thm-stinespring-dilation]、[@thm-reduced-access-defect]）。可“每一步都能这样看”与“所有步数合起来仍是同一个可逆演化的影子”是两回事：前者允许每一步各换一个扩张，后者要求一个酉算子 $U$ 一次管住全部的 $T^n$。下面的定理说，后者对任何压缩算子都成立。
 
 ::: {.theorem #thm-unitary-power-dilation title="Sz.-Nagy 酉幂扩张：压缩算子的每一次幂都是同一个酉算子的影子" lean="D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation"}
