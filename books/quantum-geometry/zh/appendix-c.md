@@ -1,10 +1,12 @@
 # 附录 C Lean 4 形式化定理总索引与开放问题台账 {#附录-clean-4-形式化定理总索引与开放问题台账}
 
-本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 [{commit}](trureturing:)）中接受逐条核验：
+本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，Lean 验证、书面证明与开放问题分别声明证据。下列 C.1–C.3 逐条核对 `trureturing.lock.json` 中的冻结声明（所钉 `trureturing@dev` 提交为 [{commit}](trureturing:)），C.4 另列开放问题与选定文献边界：
 
 1. **C.1 冻结定理总索引（301 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
 2. **C.2 形式化定义与代数载体总索引（114 项唯一声明：104 项 `def` + 10 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.3 行内辅助定理与定义索引（163 项声明：110 项 `theorem` + 53 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **578 项唯一声明**（$301 + 114 + 163 = 578$）。媒体引用在各行末尾另列，不改变上述分区。
 3. **C.4 开放问题与未形式化前沿边界台账（11 项：6 个 `conjecture` + 3 个 `problem` 环境 + 2 项文献边界 `remark`）**：9 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
+
+第 16.3 节的 [@thm-central-defect-endpoint-average] 及其 [书面证明](ch16-qsvt-walks-and-compilation.md#pf-central-defect-endpoint-average) 不属于冻结声明，也不是开放问题。其 DOI、原文定位与[形式化请求 #10](https://github.com/the-omega-institute/trureturing-requests/issues/10) 随正文及自动生成的书面证明账本单列；不增加上述锁定声明、绿色图表或 C.4 的条数。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
 **578 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：411 格是定理，167 格是定义或归纳类型；415 个实心格被环境头以 `lean=` 引用，163 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。

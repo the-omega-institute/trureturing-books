@@ -6,7 +6,7 @@
 
 本书库中的专著同时承担双重使命：
 
-1. **经 Lean 内核验证的严格学术专著**：全书每一条正式的 `theorem`、`lemma`、`proposition` 与 `corollary`，都严格对应 `the-omega-institute/trureturing` 主干（`dev` 分支）中一条已被 Lean 4 内核验证并冻结的声明；假设、定义域、类型与结论必须与 Lean 源码百分之百一致。
+1. **证据明确的严格学术专著**：全书正式的 `theorem`、`lemma`、`proposition` 与 `corollary` 默认对应 `the-omega-institute/trureturing` 主干（`dev` 分支）所钉提交中已被 Lean 4 内核验证并冻结的声明；假设、定义域、类型与结论必须与 Lean 源码一致。无匹配冻结声明而源文已有证明时，按根级守则与第 4 节显式声明书面证明，由作者与评审负责，不计入 Lean 验证。
 2. **自包含、直觉通透的现代物理与计算教材**：面向物理学家、计算机科学家、数学研究者、工程师以及具备基本线性代数素养的求知读者。任何抽象代数对象（投影算子、迹配对、克利福德双矢量、信道压缩、部分迹）在引入之前，都必须先给出可触摸的几何图像与手算推演（如 $2\times 2$ 矩阵显式展开、球面截线与角度换算），绝不把结论藏在黑箱符号背后。
 
 ## 2. 文风与教学方法论
@@ -16,9 +16,11 @@
 - **作者原声箴言与核心命题的忠实呈现**：各章章首题记（blockquote）直接引述作者 Auric 原始手稿（`ignore/量子与量子门的几何本质.pdf` 与 `ignore/量子与量子门的几何本质.md`）中的原句（中文版除空白符与标点/数学排版规范化外逐字保留原话，英文版配以洗练地道的格言体对译），以作者本人的思考原声自然展开，绝不掺杂任何对话体痕迹或旁白转述腔调。
 - **费曼（Richard Feynman）式的物理机制与手算教学法**：拒绝从空洞的公理教条出发。用快门截断转盘、偏振片级联、手电筒迎面照射、球面赤道投影、旋转参考系等具体机制切入；先算最透明的 $2\times 2$ 特例与极点数值，再上升到任意有限维或完备内积空间的一般定理。
 - **尼采（Friedrich Nietzsche）式的谱系学批判与格言锋芒**：追问传统量子力学教科书中“孤立粒子”“外部绝对坐标系（第 3 点 $C$）”“波包神秘坍缩”等概念偶像的认知起源，诊断观察者因维度遮蔽而产生的四重视觉盲区；在关键转折处凝练出短促、锐利、可铭记的几何格言。
-- **定理盒内的绝对克制**：一切比喻、谱系批判与哲学格言都只写在定理盒之外的散文评注中。进入 `theorem / lemma / proposition / corollary / definition` 环境内部时，语言必须纯粹、精确、无修辞夸张，逐项对齐所引 Lean 声明的前提与结论。`proof` 环境紧随定理盒之后（绝不嵌套在定理盒内），用直觉透明的语言解释证明骨架，并以固定结语收束：
+- **定理盒内的绝对克制**：一切比喻、谱系批判与哲学格言都只写在定理盒之外的散文评注中。进入 `theorem / lemma / proposition / corollary / definition` 环境内部时，语言必须纯粹、精确、无修辞夸张，逐项对齐所引 Lean 声明或书面证明来源的前提与结论。`proof` 环境紧随定理盒之后（绝不嵌套在定理盒内）；Lean 结果用直觉透明的语言解释证明骨架，并以固定结语收束：
   - 中文：`完整证明由 Lean 内核检查。`
   - 英文：`The full proof is checked by the Lean kernel.`
+
+  书面证明结果则给出完整、忠实且注明出处的论证，不使用上述 Lean 验证结语。
 
 ## 3. 中英双语受控术语表
 
@@ -45,9 +47,9 @@
 全书对每一条数学与物理断言实行严格的三层分级，严禁越级包装：
 
 1. **第一层：Lean 内核验证定理（绿色 `LEAN ✓`）**  
-   凡使用 `theorem`、`lemma`、`proposition`、`corollary` 环境的条目，必须通过 `lean="<GID>"` 指向 `trureturing@dev` 所钉提交中已冻结且 `kind = "theorem"` 的声明；`definition` 环境建议指向对应的冻结定义或结构。正文中不为未经 Lean 验证的论断手写“已验证”或勾选符号。
-2. **第二层：经典文献定理（`remark` 或 `example` 显式归属）**  
-   凡数学或物理学界已有严格纸面证明、但尚未在 `trureturing` 中形式化的经典结论（如 Gleason 定理、Busch 定理、Lindemann–Weierstrass 定理等），一律放入 `remark` 或 `example` 环境，并在标题或正文中明确标注：`文献结果，未在本书形式化` / `Literature result, not formalized in this book`。
+   使用 `theorem`、`lemma`、`proposition`、`corollary` 环境的条目默认通过 `lean="<GID>"` 指向 `trureturing@dev` 所钉提交中已冻结且 `kind = "theorem"` 的声明；显式书面证明适用第二层。`definition` 环境建议指向对应的冻结定义或结构。正文中不为未经 Lean 验证的论断手写“已验证”或勾选符号。
+2. **第二层：文献结果与书面证明（紫色，不计入 Lean 验证）**
+   数学或物理学界已有严格纸面证明、但尚无匹配冻结声明的结论，可在 `remark` 或 `example` 中明确标注：`文献结果，未在本书形式化` / `Literature result, not formalized in this book`。需要定理类环境时，必须先检索冻结库，使用 `status="written-proof" proof="<proof-id>"` 且不带 `lean`，每版关联完整证明，并提供支持同一陈述的 DOI 或源论文仓库、原文定位与已登记的 `trureturing-requests` issue；遵守根级守则及 `docs/FORMALIZATION-REQUESTS.md`。紫色书面证明由作者与评审负责，不能声称内核验证。
 3. **第三层：开放问题与猜想（红色 `OPEN`）**  
    凡尚未解决的数学或物理猜想（如黎曼猜想、复杂度等于体积猜想等），一律使用 `conjecture` 或 `problem` 环境，严禁附加 `lean` 属性。
 

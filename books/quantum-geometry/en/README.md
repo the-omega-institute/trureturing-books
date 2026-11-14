@@ -173,11 +173,13 @@ A 48-slide overview of the whole book: the four blind spots and the dimensional 
 
 ### 0.6.1 Formal Verification and Epistemic Honesty Contract {#sec-honesty-rules}
 
-While the prose aims for vivid physical clarity, every mathematical claim obeys a strict three-tier formal verification contract: **the book explains why a truth makes sense; the Lean kernel guarantees that it holds.**
+While the prose aims for vivid physical clarity, each result declares its evidence: **Lean verification relies on pinned, frozen declarations; authors and reviewers are responsible for written proofs; open problems retain their unproved status.**
 
 ::: {.figure src="prelude-three-tiers"}
 **Three tiers of warrant, three colours.** Green (`LEAN ✓`) is the theorems, lemmas, propositions and corollaries carrying `lean=`; violet is the remarks and examples marked "Literature result, not formalized in this book"; red (`OPEN`) is the open conjectures and problems. Each bar ends in its count over the Chinese text, and a note under the green bar gives the number of theorem declarations in the lock file.
 :::
+
+The violet bar counts only literature remarks and examples. Results explicitly marked `status="written-proof"`, such as [@thm-central-defect-endpoint-average], are listed separately in the automatically generated end-of-book ledger and count toward neither these bars nor the Lean total.
 
 1. **Numbering and Cross-References**: Within each chapter, definitions, theorems, lemmas, propositions, corollaries, examples, and remarks share a single sequential counter (`Theorem 1.1`, `Proposition 4.5`, etc.); items in the Prelude carry prefix `0`, and appendices carry `A, B, …`. All cross-references are live links across HTML, PDF, and EPUB.
 2. **Semantic Badges and Color Discipline**: Colors carry fixed epistemic meanings throughout the book and its diagrams:
@@ -186,7 +188,8 @@ While the prose aims for vivid physical clarity, every mathematical claim obeys 
 | :--- | :--- | :--- |
 | `LEAN ✓` badge | Green | Reserved exclusively for formal `theorem`, `lemma`, `proposition`, and `corollary` items whose cited declarations are kernel-verified and frozen with kind `theorem` in [trureturing](https://github.com/the-omega-institute/trureturing) (`dev` branch at the pinned commit). Clicking the badge or declaration footer jumps to the exact Lean source line. |
 | Classical literature note | Neutral frame (`remark` / `example`) | Proved results from the mathematical-physics literature not formalized in this book's pinned repository (such as Gleason's theorem) are placed in `remark` or `example` blocks and explicitly labeled *Literature result, not formalized in this book*. |
+| Written-proof badge | Violet | When the source supplies a proof and no matching frozen declaration exists, a theorem environment explicitly carries `status="written-proof"`, a complete proof in each edition, a DOI or source repository, a source locator, and a registered formalization request. It carries no `lean` attribute and does not count as Lean verification. |
 | `OPEN` badge | Red | Reserved for unresolved `conjecture` and `problem` environments, which never carry a Lean citation. |
 | Observer focus / active state | Amber | Used in figures and UI elements solely to mark the observer's currently selected measurement axis or active reading position. |
 
-3. **Role of Proof Blocks**: Every `Proof` (`proof`) block appears immediately after its theorem box to illuminate the underlying geometric and algebraic mechanism in human terms, concluding with *"The full proof is checked by the Lean kernel."* An automatically generated **Formal Verification Ledger** at the end of the book records the pinned `trureturing` commit hash, source links, and frozen statement digests for independent audit.
+3. **Role of Proof Blocks**: A `Proof` (`proof`) block follows its theorem box to illuminate the underlying geometric and algebraic mechanism. Explanations of Lean results conclude with *"The full proof is checked by the Lean kernel."* A written-proof result instead links a complete, sourced argument and makes no such Lean claim. The automatically generated **Formal Verification Ledger** records the pinned `trureturing` commit hash, formalized declaration links, and frozen statement digests, and lists written proofs separately with their sources and requests so readers can audit each kind of evidence.
