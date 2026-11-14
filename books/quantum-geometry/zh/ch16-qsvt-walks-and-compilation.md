@@ -200,7 +200,29 @@ $$
 
 更贴近下面端点、计数与概率表述的出处是 Boaz Tsaban，*Permutation graphs, fast forward permutations, and sampling the cycle structure of a permutation*，*Journal of Algorithms* **47**（2003），104–121，[doi:10.1016/S0196-6774(03)00017-8](https://doi.org/10.1016/S0196-6774(03)00017-8)。该文第 107–109 页的 Lemma 1.1 从无有向循环的部分置换图得到路径分量及其唯一最小、最大端点；Lemma 1.2 通过连接这些端点穷尽单环补全，给出阶乘计数；Lemma 1.3 区分同分量封口与异分量合并；Definition 1.4 与 Lemma 1.5 则给出正、逆向置换查询中的均匀端点选择与查询序列概率。这些端点、计数与概率规律已有文献依据，并非始于本书。
 
-下面将这些经典结果写成同一顶点集上的实际补全集、端点双射与静态条件分布，并保留完整书面证明。Tsaban 的查询模型只涉及置换及逆置换的取值，并不直接覆盖黏合树的完整自适应查询历史。不主张数学新颖性；当前未找到覆盖完整结论的匹配冻结声明，以下保留书面证明，形式化需求登记于[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11)。
+下面将这些经典结果写成同一顶点集上的实际补全集、端点双射与静态条件分布，并保留完整书面证明。Tsaban 的查询模型只涉及置换及逆置换的取值，并不直接覆盖黏合树的完整自适应查询历史。不主张数学新颖性；形式化需求登记于[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11)；下文先给出端点补全的 Lean 核心，再列出范围更广的书面结论。
+
+把每个弱连通分量缩成一点，补全后的整圈就对应分量之间的一个整圈。下面直接从原始边关系定义分量、头尾和补全集；这里的整圈是顶点集上只有一个轨道的置换。
+
+::: {.theorem #thm-directed-forest-completion-core title="有向线性森林的端点补全核心" lean="D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion"}
+设 $V$ 为有限类型，$E:V\to V\to\operatorname{Prop}$ 同时满足右唯一（每个顶点至多一个出邻点）、左唯一（每个顶点至多一个入邻点）以及 `Relation.TransGen E` 无自反点；再设真实弱连通分量商集 $\operatorname{Component}(E)$ 至少有两个元素。令 $\operatorname{Tail}(E)$ 与 $\operatorname{Head}(E)$ 分别是没有出边与没有入边的顶点子类型，令
+$\operatorname{CycleCompletion}(E)$ 为满足 `IsCycleOn Set.univ` 且延拓 $E$ 的实际置换，令 $\operatorname{FullCycle}(W)$ 为 $W$ 上满足 `IsCycleOn Set.univ` 的实际置换。
+
+则存在等价
+$q:\operatorname{Component}(E)\simeq\operatorname{Tail}(E)$、
+$h:\operatorname{Component}(E)\simeq\operatorname{Head}(E)$
+和
+$\Phi:\operatorname{CycleCompletion}(E)\simeq\operatorname{FullCycle}(\operatorname{Component}(E))$，使得 $q(A)$ 与 $h(A)$ 的底层顶点都属于分量 $A$，并且对每个补全 $\sigma$ 与分量 $A$ 都有端点等式
+$\sigma(q(A))=h(\Phi(\sigma)(A))$。
+此外，$\operatorname{CycleCompletion}(E)$ 非空，其有限基数为
+$(|\operatorname{Component}(E)|-1)!$（按自然数截断减法与阶乘），并且满足定义中的 `UniformCompletionLaw`：存在实际全环上的均匀概率质量 $\mu_0$ 与补全集上的均匀概率质量 $\mu_E$，延拓事件与 $\mu_0$ 的支撑相交，$\mu_0$ 经 `PMF.filter` 条件化后，等于 $\mu_E$ 沿自然包含映射到全环集的推前；$\mu_E$ 经 $\Phi$ 推前得到分量全环的均匀概率质量；同一 $\mu_E$ 下，端点像 $\sigma(q(A))$ 取 $h(B)$ 的概率在 $A=B$ 时为零，在 $A\ne B$ 时为 $1/(c-1)$，其中 $c=|\operatorname{Component}(E)|$。
+:::
+
+::: proof
+先由有限性、无环性和后继的唯一性确定每个弱分量的尾，对反向关系作同样处理得到头。延拓置换把所有尾双射到所有头；沿头的首次返回识别原置换与分量置换的轨道，从而得到整圈补全之间的等价。等价给出阶乘计数及非空性，有限均匀概率质量的条件化与推前给出同一补全分布；端点等式再把分量后继的边缘概率传回原始顶点。完整证明由 Lean 内核检查。
+:::
+
+下面书面结论中的边数恒等式 $|E|=N-c$ 与显式事件概率比值 $(c-1)!/(N-1)!$ 未在所引 Lean 声明中陈述或核验，仍由后面的完整书面证明承担。关于无向方向、交替环、自适应历史、查询或 `EXIT` 的桥梁则另需相应的分布与对应证明。
 
 ::: {.theorem #thm-directed-forest-cycle-completion title="有向森林的单环补全与静态均匀律" status="written-proof" proof="pf-directed-forest-cycle-completion" doi="10.1007/978-1-4684-0637-5_13" source="Section 8, p. 11" request="https://github.com/the-omega-institute/trureturing-requests/issues/11"}
 设 $V$ 为有 $N\ge2$ 个元素的有限标号集，$E\subseteq V\times V$。假定每个顶点在 $E$ 中至多有一条入边、至多有一条出边，且 $E$ 无有向循环。令 $\mathcal C$ 为 $(V,E)$ 的全部弱连通分量组成的集合，包含每一个孤立顶点，并假定 $c=|\mathcal C|\ge2$。

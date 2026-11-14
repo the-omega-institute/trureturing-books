@@ -786,6 +786,174 @@ $$
 第二步用 $h$ 在 $[0,1/2]$ 上递增及 $\ln(K-1)\ge0$；第三步用 $-(1-d)\ln(1-d)\le d$，再代入 $d_K$。右端趋于 $0$，且不依赖 $m,n$。所以对每个 $\varepsilon>0$，存在与切口长度无关的 $K_0\ge2$，使所有 $K\ge K_0$、$m,n\ge0$ 都满足 $S_K(m,n)<\varepsilon$。这是这个指定态族的结果：秩可以达到 $K$，但除最大本征值之外的谱质量仍一致趋于零。它不建立固定 $K$ 的长区间熵极限，不指定物理基态，也不解答劳齐边界维数与纠缠标度之间的开放问题。
 :::
 
+::: {.example #ex-ch39-p2e-fixed-order-entropy-limit title="纸面推导：固定禁串阶数的双侧熵极限"}
+固定 $K\ge2$，让切口两侧都变长，问题便从“有多少个非零 Schmidt 系数”变成“这些系数的质量怎样稳定下来”。这里继续研究 [@ex-ch39-p2e-finite-kernel] 的实际正等幅态：所有不含 $1^K$ 的二进制字都参与叠加，不固定首位或粒子数。以下是纸面推导，完整应用尚未编译为 Lean；它不指定物理基态。
+
+记 $W_L$ 为合法长度 $L$ 的字集，$z_L=|W_L|$，其中 $z_0=1$。令 $\beta=\beta_K$、$p=\beta^{-1}$，并定义
+
+$$
+\begin{aligned}
+w_j&=\sum_{a=1}^{K-j}p^a\quad(0\le j<K),\\
+T&=\sum_{j=0}^{K-1}p^j w_j=\sum_{a=1}^{K}a p^a.
+\end{aligned}
+$$
+
+根方程给出 $1<\beta<2$、$\sum_{a=1}^Kp^a=1$，故 $w_0=1$、$p\le w_j\le1$ 且 $T>0$。定义实 $K\times K$ 矩阵
+
+$$
+\begin{aligned}
+C^\infty_{rs}&=\mathbf1_{\{r+s<K\}}\frac{p^{(r+s+1)/2}}{\sqrt T},\\
+G^\infty_{rr'}&=\frac{p^{(r+r')/2}w_{\max(r,r')}}{T}.
+\end{aligned}
+$$
+
+下面证明 $G^\infty=C^\infty(C^\infty)^*$ 正定且迹为 $1$。对其按重数列出的特征值 $\lambda_1,\ldots,\lambda_K$，实际态的熵满足
+
+$$
+\begin{aligned}
+\lim_{\min(m,n)\to\infty}S_K(m,n)
+&=S_K^\infty:=-\sum_{i=1}^{K}\lambda_i\ln\lambda_i,\\
+0&<S_K^\infty<\ln K.
+\end{aligned}
+$$
+
+两个长度必须同时趋于无穷，但不要求按相同比例增长。
+
+**先恢复自由端点的实际字数。** 使用下一节的有符号 Parry 链 $Q$，状态为 $(b,j)\in\{\mathrm{false},\mathrm{true}\}\times\{0,\ldots,K-1\}$。从 $(b,j)$ 读到 $0$ 时翻转符号并重置到 $(!b,0)$，权重为 $p/w_j$；读到 $1$ 时保持符号并前进到 $(b,j+1)$，权重为 $p w_{j+1}/w_j$，仅在 $j+1<K$ 时允许。从 $x_0=(\mathrm{false},0)$ 出发，每个合法字恰好对应一条允许路径；相邻状态又唯一恢复每一位。末端符号不受限制，不额外乘以 $2$，也不要求路径闭合。
+
+长度 $L$、末端游程为 $j$ 的路径权重望远镜消去为 $p^Lw_j$。若 $N_L(b,j)$ 是到达 $(b,j)$ 的路径数，矩阵乘法展开便给出
+
+$$
+\begin{aligned}
+(Q^L)_{x_0,(b,j)}&=N_L(b,j)p^Lw_j,\\
+z_Lp^L&=\sum_{b,j}\frac{(Q^L)_{x_0,(b,j)}}{w_j}.
+\end{aligned}
+$$
+
+末端因子 $1/w_j$ 不能省略：自由端点计数不是直接取平稳边缘分布。已有链混合界与平稳律为
+
+$$
+\begin{aligned}
+\pi(b,j)&=\frac{p^jw_j}{2T},\\
+\operatorname{TV}(Q^L(x,\cdot),\pi)
+&\le\theta_L:=(3/4)^{\lfloor L/3\rfloor}.
+\end{aligned}
+$$
+
+总变差取有限 $\ell^1$ 距离的一半。由 $w_j\ge p$，对末端重加权求和得到
+
+$$
+\begin{aligned}
+z_Lp^L&=c+\varepsilon_L,\\
+c&=\sum_{b,j}\frac{\pi(b,j)}{w_j}
+=\frac{\sum_{j=0}^{K-1}p^j}{T}=\frac1{pT}>0,\\
+|\varepsilon_L|&\le\frac2p\theta_L.
+\end{aligned}
+$$
+
+常数 $c$ 的最后一个等式使用根方程。这一步把链混合接到了实际自由边界字数上。
+
+**再把端点字数接回量子态。** 当 $m,n\ge K$ 时，左侧末端恰有 $r$ 个 $1$ 的字唯一写成 $u\,0\,1^r$，其中 $u\in W_{m-r-1}$；右侧首端恰有 $s$ 个 $1$ 的字唯一写成 $1^s\,0\,v$，其中 $v\in W_{n-s-1}$。插入的 $0$ 阻断跨接处的禁串，故这些是实际双射，有 $a_r=z_{m-r-1}$、$b_s=z_{n-s-1}$；该最终范围内没有全 $1$ 字的例外。
+
+有限核推导由非空类的归一化示性向量给出实际系数矩阵 $M=UC^{m,n}V^*$，其中
+
+$$
+C^{m,n}_{rs}=\mathbf1_{\{r+s<K\}}\sqrt{\frac{a_rb_s}{z_{m+n}}}.
+$$
+
+因此实际约化态的正特征值及重数恰由 $G^{m,n}=C^{m,n}(C^{m,n})^*$ 给出；物理空间多出的零特征值不贡献熵。对 $r+s<K$，代入字数渐近式得到
+
+$$
+(C^{m,n}_{rs})^2
+=p^{r+s+2}\frac{(c+\varepsilon_{m-r-1})(c+\varepsilon_{n-s-1})}
+{c+\varepsilon_{m+n}}
+\longrightarrow\frac{p^{r+s+1}}T.
+$$
+
+全部移位指标至少为 $\min(m,n)-K$，故同一个趋于零的量 $2\theta_{\min(m,n)-K}/p$ 控制全部有限个误差项。分母趋于正数 $c$，取非负平方根得到联合尾部极限 $C^{m,n}\to C^\infty$，继而 $G^{m,n}\to G^\infty$。直接相乘给出所显示的 $G^\infty$ 公式，且 $\operatorname{Tr}G^\infty=\sum_r p^rw_r/T=1$。作为对照，单独半字的端点频率趋于 $a_r/z_m\to p^{r+1}$；平稳游程质量则为 $p^rw_r/T$。后者出现在极限 Gram 矩阵的对角线上，但非对角元仍须保留。
+
+**最后控制谱与熵。** 固定维数 $K$ 使逐项收敛推出算子范数收敛，例如 $\|E\|_{\mathrm{op}}\le K\max_{r,s}|E_{rs}|$。对两个 Hermitian Gram 矩阵应用有序特征值扰动界，
+
+$$
+|\lambda_i(G^{m,n})-\lambda_i(G^\infty)|
+\le\|G^{m,n}-G^\infty\|_{\mathrm{op}}\longrightarrow0.
+$$
+
+排序保留全部重数，不要求单谱。函数 $\eta(x)=-x\ln x$ 取连续端点值 $\eta(0)=0$，故固定 $K$ 项之和收敛；通过上述实际谱对应，这正是物理约化态的熵极限。
+
+把 $C^\infty$ 的列倒序后得到三角矩阵，对角元均为 $p^{K/2}/\sqrt T$，所以 $\det G^\infty=p^{K^2}/T^K>0$。它的 $K\ge2$ 个特征值都严格为正且和为 $1$，故熵严格为正。严格凸性给出熵不超过 $\ln K$，等号仅在全部特征值为 $1/K$ 时成立；Hermitian 谱定理此时迫使 $G^\infty=I_K/K$。然而 $G^\infty_{0,1}=\sqrt p\,w_1/T>0$，排除了等号。
+
+所复用的根方程、链混合与谱扰动工具见本书[当前所钉源码](trureturing:)中的 `DBonacci/PerronRoot`、`ParryTwistedComparison.parry_mixing_and_complete_prefix` 与 `HermitianEigenvaluePerturbation.abs_eigenvalue_sub_eigenvalue_le_norm`；连续熵函数与 Hermitian 对角化采用所钉 Mathlib 的标准结果。路径计数、末端重加权及实际态的极限连接已在上面完整写出，但尚未取得完整应用的 Lean 验证。$S_K^\infty$ 是一次切口的纠缠熵，区别于每步移位熵 $\log_2\beta_K$；[@ex-ch39-p2e-uniform-entropy] 的一致界也传递给 $S_K^\infty$。固定一侧长度、改变相位、物理基态与 Rauzy 边界熵律仍需各自的论证。
+:::
+
+
+::: {.example #ex-ch39-p2e-local-parent title="纸面推导：选取合法字正等幅态的局域父哈密顿量"}
+前面的熵计算指定了一个态。能否反过来写出一个局域能量，使它成为唯一基态？先看两个位置、禁止 `11` 的最小例子。在基 $00,01,10,11$ 中取
+
+$$
+H_{2,2}=\begin{pmatrix}
+2&-1&-1&0\\
+-1&1&0&0\\
+-1&0&1&0\\
+0&0&0&1
+\end{pmatrix}.
+$$
+
+左上角是三顶点路径图 $01\leftrightarrow00\leftrightarrow10$ 的拉普拉斯矩阵：相邻顶点振幅相等时没有能量代价。最后一个对角元给非法字 `11` 加罚。谱为 $0,1,1,3$，唯一归一化零态到整体相位为 $(1,1,1,0)/\sqrt3$。下面把这个机制推广到所有有限长度。以下是标准配置图拉普拉斯方法的应用与纸面证明，完整构造尚未取得 Lean 验证。
+
+固定 $K\ge2$、$N\ge0$，在完整空间 $\mathcal H_N=(\mathbb C^2)^{\otimes N}$ 中，令 $n_j=|1\rangle_j\langle1|$，$X_i$ 为第 $i$ 位的翻转算子。所有长度 $K$ 的窗口都完全位于链内，不作周期回绕。定义
+
+$$
+\begin{aligned}
+B_a&=\prod_{j=a}^{a+K-1}n_j
+\quad(1\le a\le N-K+1),\\
+\mathcal W_i&=\{a:1\le a\le N-K+1,\ a\le i<a+K\},\\
+C_i&=\prod_{a\in\mathcal W_i}
+\left(I-\prod_{\substack{a\le j<a+K\\j\ne i}}n_j\right),\\
+h_i&=C_i(I-X_i)C_i,\\
+H_{K,N}&=\sum_{i=1}^{N}h_i+\sum_{a=1}^{N-K+1}B_a.
+\end{aligned}
+$$
+
+空指标集上的和取 $0$、积取恒等算子，故 $N<K$ 时没有窗口。$C_i$ 是对角投影，不依赖中心位，与 $X_i$ 对易。它只检查距 $i$ 至多 $K-1$ 的位置：每一项 $h_i$ 支撑于至多 $2K-1$ 个连续位置，边界处截断；$B_a$ 支撑于 $K$ 个位置。$K=2$ 时 $C_i$ 就是链内相邻位置的空位投影之积。
+
+**能量怎样识别合法字？** 固定第 $i$ 位之外的配置 $\eta$，记对应的两个字为 $\eta0,\eta1$，中心数字均插在位置 $i$。$C_i(\eta)=1$ 当且仅当把中心置为 $1$ 不会形成任何包含 $i$ 的禁窗口。在这样的二维块上，$h_i$ 为
+
+$$
+\begin{pmatrix}1&-1\\-1&1\end{pmatrix};
+$$
+
+其余块为零，因此 $h_i$ 正半定。$B_a$ 也是正投影。对任意 $|\phi\rangle=\sum_w a_w|w\rangle$，令 $\nu_K(w)$ 为字 $w$ 中全 $1$ 的长度 $K$ 窗口数，得到完整空间上的能量恒等式
+
+$$
+\begin{aligned}
+\langle\phi|H_{K,N}|\phi\rangle
+={}&\sum_{i=1}^{N}\ \sum_{\eta:C_i(\eta)=1}
+|a_{\eta0}-a_{\eta1}|^2\\
+&+\sum_{w\in\{0,1\}^N}\nu_K(w)|a_w|^2.
+\end{aligned}
+$$
+
+每个固定外部配置的无向翻转对只计一次，不另乘 $2$。零能量首先迫使所有非法字的振幅为零。对于合法字，删除任意一个 $1$ 都保持合法，而且该位置的 $C_i=1$，所以第一项又迫使这一对合法字的振幅相等。逐位删除到全零字，便把所有合法字连在一起。
+
+反过来，一次满足 $C_i=1$ 的翻转不会改变字的合法性：包含 $i$ 的窗口在两个端点都不违规，其他窗口不受翻转影响。因此令合法字振幅相同、非法字振幅为零，会逐项消去上述全部平方项和罚项。若 $W_N$ 仍表示不含 $1^K$ 的全部长度 $N$ 字、$z_N=|W_N|$，则
+
+$$
+\begin{aligned}
+|\Psi_{K,N}\rangle&=z_N^{-1/2}\sum_{w\in W_N}|w\rangle,\\
+\ker H_{K,N}&=\mathbb C|\Psi_{K,N}\rangle.
+\end{aligned}
+$$
+
+这既证明了完整张量空间中的唯一基态射线，也证明它同时使每一局域正项取零，即无挫折。合法字张成的子空间被各项保持；限制在该空间时，$\sum_i h_i$ 正是单比特合法翻转图的拉普拉斯。非法性罚项使这个限制空间中的唯一性提升到完整空间中的唯一性，不能省略：上面的 $K=N=2$ 例子若删去罚项，$|11\rangle$ 就多出一个零态。
+
+**长度与物理解释的边界。** $N=0$ 时空间是一维真空空间，$H_{K,0}=0$，没有激发能级可定义谱隙。每个固定 $N\ge1$ 的矩阵都是有限维、正半定且恰有一维核，因而其第一正本征值严格大于零；这里没有给出对所有 $N$ 一致的下界。当 $1\le N<K$ 时，$C_i=I$ 且无罚项，$H_{K,N}=\sum_i(I-X_i)$，基态为 $|+\rangle^{\otimes N}$，谱隙恰为 $2$。
+
+因此，前面实际正等幅态的有限切口熵与固定 $K$ 双侧极限，也是这个专门设计模型的基态纠缠结果。这不把它识别为真实里德堡阵列、黄金链、Tribonacci 跃迁链或 Rauzy 几何所选出的态，也不解决分形边界与纠缠标度的开放问题。
+
+来源与对应：本书[当前所钉源码](trureturing:) 中的理论卷 `docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md` §15.9、定义 15.22 与命题 15.23 已给出 $K=2$、正活动 $a_i$ 的合法空间局域父及逐位删除证明；这里取 $a_i=1$，把控制投影写成所有包含中心的禁窗口，并补入全空间罚项。该卷命题 15.25 明确指出不加罚项时全空间唯一性失败。[Lesanovsky 的三体模型](https://arxiv.org/abs/1010.2349v2)式 (3)–(5) 提供相关物理背景，符号、正尺度及边界对应见该卷数学引文 15.24；这里的任意 $K$ 构造由上述能量恒等式承担，不将其归为该文已证明的实验实现。
+:::
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="文献结果：斐波那契任意子黄金链与里德堡原子阻塞实验背景（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在凝聚态与原子分子光物理文献中，$K = 2$ 的禁邻 `11` 希尔伯特空间在两类著名多体系统中获得了物理实现或理论建模：其一是 A. E. Feiguin 等人提出的拓扑斐波那契任意子“黄金链”（golden chain）模型（*Phys. Rev. Lett.* **98**, 2007, 160409），其融合规则 $\tau \times \tau = \mathbf{1} + \tau$ 使有限链融合空间维数按斐波那契数增长；其二是里德堡（Rydberg）原子阵列中的偶极/范德瓦耳斯 $1/r^6$ 阻塞机制（理论建模见 I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301；51 原子量子模拟器实验见 H. Bernien et al., *Nature* **551**, 2017, 579–584）。引用这些物理背景时须注意两重边界：第一，最近邻两体里德堡阻塞刚好实现禁相邻激发 $|11\rangle$（对应 $K = 2$ 的 PXP 子空间），但单纯拉大两体阻塞半径只会禁止距离 $R_b$ 内的一切激发对（例如连 `101` 一并禁止），**并不会自动产生 $K > 2$ 的禁连续 $1^K$ 约束**——若要在物理哈密顿量中实现 $K > 2$ 的 $K$-Bonacci 子空间，必须另行设计专门的 $K$ 体局域相互作用；第二，任意子融合空间与有限阻塞比实验哈密顿量均非 [@thm-ch39-p2e-direct-encoder-ranks] 中精确零振幅等距直接编码器的形式同义物。
 :::

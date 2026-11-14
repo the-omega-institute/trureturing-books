@@ -786,6 +786,174 @@ $$
 The second step uses the increase of $h$ on $[0,1/2]$ and $\ln(K-1)\ge0$. The third uses $-(1-d)\ln(1-d)\le d$ and substitutes $d_K$. The right-hand side tends to zero independently of $m,n$. Hence for every $\varepsilon>0$ there is a $K_0\ge2$, independent of the cut lengths, such that $S_K(m,n)<\varepsilon$ for every $K\ge K_0$ and every $m,n\ge0$. This concerns the specified state family: its rank can reach $K$ while the spectral mass outside its largest eigenvalue vanishes uniformly. It establishes no fixed-$K$ long-region entropy limit, specifies no physical ground state and does not resolve the relation between Rauzy-boundary dimension and entanglement scaling.
 :::
 
+::: {.example #ex-ch39-p2e-fixed-order-entropy-limit title="Paper derivation: the two-sided entropy limit at fixed forbidden-run order"}
+Fix $K\ge2$ and let both sides of the cut grow. The question shifts from how many Schmidt coefficients are nonzero to how their mass settles. Continue with the actual positive equal-amplitude state of [@ex-ch39-p2e-finite-kernel]: all binary words avoiding $1^K$ participate, without a fixed first bit or occupation number. This is a paper derivation; the complete application has not been compiled in Lean and specifies no physical ground state.
+
+Let $W_L$ be the legal words of length $L$, and $z_L=|W_L|$, including $z_0=1$. Set $\beta=\beta_K$, $p=\beta^{-1}$, and
+
+$$
+\begin{aligned}
+w_j&=\sum_{a=1}^{K-j}p^a\quad(0\le j<K),\\
+T&=\sum_{j=0}^{K-1}p^j w_j=\sum_{a=1}^{K}a p^a.
+\end{aligned}
+$$
+
+The root equation gives $1<\beta<2$ and $\sum_{a=1}^Kp^a=1$, hence $w_0=1$, $p\le w_j\le1$, and $T>0$. Define real $K\times K$ matrices
+
+$$
+\begin{aligned}
+C^\infty_{rs}&=\mathbf1_{\{r+s<K\}}\frac{p^{(r+s+1)/2}}{\sqrt T},\\
+G^\infty_{rr'}&=\frac{p^{(r+r')/2}w_{\max(r,r')}}{T}.
+\end{aligned}
+$$
+
+We will show that $G^\infty=C^\infty(C^\infty)^*$ is positive definite with trace one. For its eigenvalues $\lambda_1,\ldots,\lambda_K$, listed with multiplicity, the actual state's entropy satisfies
+
+$$
+\begin{aligned}
+\lim_{\min(m,n)\to\infty}S_K(m,n)
+&=S_K^\infty:=-\sum_{i=1}^{K}\lambda_i\ln\lambda_i,\\
+0&<S_K^\infty<\ln K.
+\end{aligned}
+$$
+
+Both lengths must diverge, but their relative growth rates are unrestricted.
+
+**First recover the actual free-boundary counts.** Use the signed Parry chain $Q$ of the next section, on states $(b,j)\in\{\mathrm{false},\mathrm{true}\}\times\{0,\ldots,K-1\}$. Reading $0$ at $(b,j)$ flips the sign and resets to $(!b,0)$ with weight $p/w_j$; reading $1$ preserves the sign and advances to $(b,j+1)$ with weight $p w_{j+1}/w_j$, allowed only when $j+1<K$. From $x_0=(\mathrm{false},0)$, every legal word gives exactly one allowed path, and adjacent states uniquely recover each bit. The terminal sign is unrestricted: there is no extra factor of two or closing condition.
+
+The weight of a length-$L$ path ending at run $j$ telescopes to $p^Lw_j$. If $N_L(b,j)$ counts paths ending at $(b,j)$, expansion of matrix multiplication gives
+
+$$
+\begin{aligned}
+(Q^L)_{x_0,(b,j)}&=N_L(b,j)p^Lw_j,\\
+z_Lp^L&=\sum_{b,j}\frac{(Q^L)_{x_0,(b,j)}}{w_j}.
+\end{aligned}
+$$
+
+The terminal factor $1/w_j$ is essential: free-boundary counts are not obtained by simply taking a stationary marginal. The existing chain mixing bound and stationary law are
+
+$$
+\begin{aligned}
+\pi(b,j)&=\frac{p^jw_j}{2T},\\
+\operatorname{TV}(Q^L(x,\cdot),\pi)
+&\le\theta_L:=(3/4)^{\lfloor L/3\rfloor}.
+\end{aligned}
+$$
+
+Total variation is half the finite $\ell^1$ distance. Since $w_j\ge p$, summing with the terminal reweighting yields
+
+$$
+\begin{aligned}
+z_Lp^L&=c+\varepsilon_L,\\
+c&=\sum_{b,j}\frac{\pi(b,j)}{w_j}
+=\frac{\sum_{j=0}^{K-1}p^j}{T}=\frac1{pT}>0,\\
+|\varepsilon_L|&\le\frac2p\theta_L.
+\end{aligned}
+$$
+
+The last identity for $c$ uses the root equation. This connects chain mixing to the actual word count with free boundaries.
+
+**Then return from endpoint counts to the quantum state.** Once $m,n\ge K$, a left word with terminal run exactly $r$ has the unique form $u\,0\,1^r$, with $u\in W_{m-r-1}$; a right word with initial run exactly $s$ has the unique form $1^s\,0\,v$, with $v\in W_{n-s-1}$. The inserted zero prevents a forbidden run across the join, so these are actual bijections: $a_r=z_{m-r-1}$ and $b_s=z_{n-s-1}$. There is no all-ones exception in this eventual range.
+
+The finite-kernel derivation uses normalized indicators of nonempty classes to factor the actual coefficient matrix as $M=UC^{m,n}V^*$, where
+
+$$
+C^{m,n}_{rs}=\mathbf1_{\{r+s<K\}}\sqrt{\frac{a_rb_s}{z_{m+n}}}.
+$$
+
+Thus the positive eigenvalues of the actual reduced state, with multiplicities, are exactly those of $G^{m,n}=C^{m,n}(C^{m,n})^*$. Additional physical zero eigenvalues contribute no entropy. For $r+s<K$, substitution of the count asymptotic gives
+
+$$
+(C^{m,n}_{rs})^2
+=p^{r+s+2}\frac{(c+\varepsilon_{m-r-1})(c+\varepsilon_{n-s-1})}
+{c+\varepsilon_{m+n}}
+\longrightarrow\frac{p^{r+s+1}}T.
+$$
+
+All shifted indices are at least $\min(m,n)-K$, so the same vanishing bound $2\theta_{\min(m,n)-K}/p$ controls every error in these finitely many expressions. The denominator tends to $c>0$. Taking nonnegative square roots gives the joint tail limit $C^{m,n}\to C^\infty$, and hence $G^{m,n}\to G^\infty$. Direct multiplication gives the displayed formula for $G^\infty$, with $\operatorname{Tr}G^\infty=\sum_r p^rw_r/T=1$. For comparison, a standalone half-word's endpoint frequency tends to $a_r/z_m\to p^{r+1}$, whereas the stationary run mass is $p^rw_r/T$. The latter appears on the limiting Gram matrix's diagonal, but its off-diagonal entries must also be retained.
+
+**Finally control spectrum and entropy.** Fixed dimension $K$ turns entrywise convergence into operator-norm convergence, for example through $\|E\|_{\mathrm{op}}\le K\max_{r,s}|E_{rs}|$. Apply the ordered-eigenvalue perturbation bound to the two Hermitian Gram matrices:
+
+$$
+|\lambda_i(G^{m,n})-\lambda_i(G^\infty)|
+\le\|G^{m,n}-G^\infty\|_{\mathrm{op}}\longrightarrow0.
+$$
+
+Ordering retains every multiplicity and needs no simple-spectrum assumption. The function $\eta(x)=-x\ln x$ has the continuous endpoint value $\eta(0)=0$, so the fixed sum of $K$ terms converges. The actual-spectrum correspondence above makes this the physical reduced state's entropy limit.
+
+Reversing the columns of $C^\infty$ gives a triangular matrix with constant diagonal $p^{K/2}/\sqrt T$, so $\det G^\infty=p^{K^2}/T^K>0$. Its $K\ge2$ eigenvalues are strictly positive and sum to one, making the entropy strictly positive. Strict convexity bounds entropy by $\ln K$, with equality only when every eigenvalue is $1/K$; the Hermitian spectral theorem would then force $G^\infty=I_K/K$. But $G^\infty_{0,1}=\sqrt p\,w_1/T>0$, ruling out equality.
+
+The reused root, chain-mixing and spectral-perturbation tools are in this book's [currently pinned source](trureturing:), in `DBonacci/PerronRoot`, `ParryTwistedComparison.parry_mixing_and_complete_prefix` and `HermitianEigenvaluePerturbation.abs_eigenvalue_sub_eigenvalue_le_norm`; entropy continuity and Hermitian diagonalization use standard results of pinned Mathlib. The path counting, terminal reweighting and actual-state limit bridge are written out above, but the complete application has no Lean verification. $S_K^\infty$ is entanglement across one cut, distinct from the per-step shift entropy $\log_2\beta_K$; the uniform bound in [@ex-ch39-p2e-uniform-entropy] also passes to $S_K^\infty$. Fixed-side limits, changed phases, physical ground states and Rauzy-boundary entropy laws each need their own argument.
+:::
+
+
+::: {.example #ex-ch39-p2e-local-parent title="Paper derivation: a local parent Hamiltonian for the positive equal-amplitude legal-word state"}
+The preceding entropy calculations specify a state. Can a local energy select it as its unique ground state? Start with two sites and the forbidden word `11`. In the basis $00,01,10,11$, take
+
+$$
+H_{2,2}=\begin{pmatrix}
+2&-1&-1&0\\
+-1&1&0&0\\
+-1&0&1&0\\
+0&0&0&1
+\end{pmatrix}.
+$$
+
+The upper block is the Laplacian of the three-vertex path $01\leftrightarrow00\leftrightarrow10$: equal amplitudes at neighboring vertices cost no energy. The final diagonal entry penalizes the illegal word `11`. The spectrum is $0,1,1,3$, and the unique normalized zero state, up to overall phase, is $(1,1,1,0)/\sqrt3$. We now extend this mechanism to every finite length. This is an application of the standard configuration-graph Laplacian method with a paper proof; the complete construction has not been verified in Lean.
+
+Fix $K\ge2$ and $N\ge0$. On the full space $\mathcal H_N=(\mathbb C^2)^{\otimes N}$, let $n_j=|1\rangle_j\langle1|$ and let $X_i$ flip bit $i$. Every length-$K$ window lies entirely within the chain, with no periodic wraparound. Define
+
+$$
+\begin{aligned}
+B_a&=\prod_{j=a}^{a+K-1}n_j
+\quad(1\le a\le N-K+1),\\
+\mathcal W_i&=\{a:1\le a\le N-K+1,\ a\le i<a+K\},\\
+C_i&=\prod_{a\in\mathcal W_i}
+\left(I-\prod_{\substack{a\le j<a+K\\j\ne i}}n_j\right),\\
+h_i&=C_i(I-X_i)C_i,\\
+H_{K,N}&=\sum_{i=1}^{N}h_i+\sum_{a=1}^{N-K+1}B_a.
+\end{aligned}
+$$
+
+Sums over empty index sets are $0$ and products are the identity, so there are no windows when $N<K$. The diagonal projector $C_i$ does not depend on the central bit and commutes with $X_i$. It examines only sites within distance $K-1$ of $i$: each $h_i$ is supported on at most $2K-1$ consecutive sites, truncated at the boundary, while each $B_a$ acts on $K$ sites. For $K=2$, $C_i$ is the product of vacancy projectors at the neighbors that lie within the chain.
+
+**How does the energy recognize legal words?** Fix a configuration $\eta$ outside site $i$, and write $\eta0,\eta1$ for the two words obtained by inserting the central bit at site $i$. Then $C_i(\eta)=1$ exactly when setting that bit to $1$ creates no forbidden window containing $i$. On this two-dimensional block, $h_i$ is
+
+$$
+\begin{pmatrix}1&-1\\-1&1\end{pmatrix};
+$$
+
+all other blocks vanish. Thus $h_i$ is positive semidefinite, as is the projector $B_a$. For an arbitrary $|\phi\rangle=\sum_w a_w|w\rangle$, let $\nu_K(w)$ count its all-$1$ windows of length $K$. The full-space energy identity is
+
+$$
+\begin{aligned}
+\langle\phi|H_{K,N}|\phi\rangle
+={}&\sum_{i=1}^{N}\ \sum_{\eta:C_i(\eta)=1}
+|a_{\eta0}-a_{\eta1}|^2\\
+&+\sum_{w\in\{0,1\}^N}\nu_K(w)|a_w|^2.
+\end{aligned}
+$$
+
+Each undirected flip pair with fixed exterior configuration is counted once, with no extra factor of $2$. Zero energy first forces every illegal-word amplitude to vanish. Deleting any $1$ from a legal word preserves legality and has $C_i=1$, so the first sum forces the two legal-word amplitudes to agree. Repeated deletion connects every legal word to the all-zero word.
+
+Conversely, a flip with $C_i=1$ preserves the legality status of the word: windows containing $i$ are legal at both endpoints, and all other windows are unchanged. Equal amplitudes on legal words and zero amplitudes on illegal words therefore annihilate every square and every penalty above. With $W_N$ again denoting all length-$N$ words avoiding $1^K$ and $z_N=|W_N|$, this gives
+
+$$
+\begin{aligned}
+|\Psi_{K,N}\rangle&=z_N^{-1/2}\sum_{w\in W_N}|w\rangle,\\
+\ker H_{K,N}&=\mathbb C|\Psi_{K,N}\rangle.
+\end{aligned}
+$$
+
+The ground-state ray is consequently unique on the full tensor space, and every positive local term separately vanishes on it: the model is frustration-free. Each term preserves the span of legal words; on that subspace, $\sum_i h_i$ is precisely the Laplacian of the legal single-bit flip graph. The illegality penalty promotes uniqueness on this restricted space to uniqueness on the full space. It is essential: removing it in the $K=N=2$ example leaves $|11\rangle$ as an additional zero state.
+
+**Length and physical interpretation.** For $N=0$, the space is the one-dimensional vacuum space and $H_{K,0}=0$; there is no excited level from which to define a gap. For each fixed $N\ge1$, the matrix is finite-dimensional and positive semidefinite with a one-dimensional kernel, so its first positive eigenvalue is strictly positive. This supplies no lower bound uniform in $N$. For $1\le N<K$, all $C_i=I$ and there is no penalty, giving $H_{K,N}=\sum_i(I-X_i)$, ground state $|+\rangle^{\otimes N}$, and gap exactly $2$.
+
+The finite-cut entropy and fixed-$K$ two-sided limit of the preceding positive equal-amplitude state thus also describe ground-state entanglement in this specifically designed model. This does not identify it with the state selected by a physical Rydberg array, golden chain, Tribonacci hopping chain, or Rauzy geometry, and does not resolve the open relation between fractal boundaries and entanglement scaling.
+
+Sources and correspondence: §15.9, Definition 15.22 and Proposition 15.23 of the [currently pinned source](trureturing:), theory volume `docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md`, already provide a legal-space local parent for $K=2$ with positive activities $a_i$, together with the deletion proof. Here $a_i=1$, the control projector checks every forbidden window containing the center, and full-space penalties are included. Proposition 15.25 explicitly identifies the failure of full-space uniqueness without a penalty. Equations (3)–(5) of [Lesanovsky's three-body model](https://arxiv.org/abs/1010.2349v2) provide related physical context; signs, positive scale, and boundary correspondence are given in Attribution 15.24 of that volume. The arbitrary-$K$ construction here is justified by the displayed energy identity, rather than attributed to that paper as a proved experimental implementation.
+:::
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** In condensed-matter and atomic-physics literature, the order-$K = 2$ `NoAdjacentOnes` Hilbert space arises in two celebrated many-body settings: first, the topological Fibonacci-anyon "golden chain" of A. E. Feiguin et al. (*Phys. Rev. Lett.* **98**, 2007, 160409), where the fusion rule $\tau \times \tau = \mathbf{1} + \tau$ makes fusion-space dimensions grow as Fibonacci numbers; second, van der Waals $1/r^6$ Rydberg blockade arrays (modeled theoretically by I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301, and probed experimentally on a 51-atom quantum simulator by H. Bernien et al., *Nature* **551**, 2017, 579–584). Two scope boundaries apply whenever citing these physical realizations: first, nearest-neighbor pairwise Rydberg blockade forbids adjacent excitations $|11\rangle$ ($K = 2$, the PXP subspace), whereas simply extending pairwise blockade range forbids *all* pairs within distance $R_b$ (eliminating `101` along with `111`) and **does not** by itself enforce the $K > 2$ "no $K$ consecutive ones" constraint—realizing a $K > 2$ $K$-Bonacci subspace requires a dedicated multi-body $K$-local interaction; second, neither the anyon fusion chain nor a finite-blockade Rydberg Hamiltonian is formally identical to the exact zero-amplitude isometric `directContract` encoder of [@thm-ch39-p2e-direct-encoder-ranks].
 :::
