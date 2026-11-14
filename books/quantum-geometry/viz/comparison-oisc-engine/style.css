@@ -1,0 +1,66 @@
+/* ORTHO//CMP: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this page lives here:
+   the pointer on the stage, the slot grid of the two words, legend swatches, math kept out of uppercase, the book's
+   colour rule (amber only for the current comparison, slot, pair, handle, rail cursor and selected card) and touch
+   targets on phones. Colours come from the tokens (var(--cyan) …), never from literal colour values. */
+#cv { cursor: grab; touch-action: none; }
+#cv:active { cursor: grabbing; }
+.stage.still #cv { cursor: pointer; }
+.stage.still #cv:active { cursor: pointer; }
+
+/* the book's colour rule: the tagline and the drawer's bold leads are not "now" */
+.tagline em { color: var(--cyan); }
+.sheet li b { color: var(--cyan); }
+.sheet .evh { margin: 16px 0 6px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.14em; color: var(--cyan); }
+
+/* math never goes through an uppercase transform (θ, κ, β, φ would change shape) */
+.chip .m { text-transform: none; letter-spacing: 0.02em; font-family: var(--font-data); }
+.chip[aria-pressed="true"] .m { color: inherit; }
+
+/* legend swatches */
+.sw.ink { background: var(--sigma); }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--dim) 0 4px, transparent 4px 7px); }
+.sw.dash.ink { background: repeating-linear-gradient(90deg, var(--sigma) 0 4px, transparent 4px 7px); }
+.sw.dash.vi { background: repeating-linear-gradient(90deg, var(--violet) 0 4px, transparent 4px 7px); }
+.sw.ring { width: 10px; height: 10px; border-radius: 50%; background: transparent; border: 2px solid var(--amber); }
+
+/* the two words, slot by slot: w_A is the reference, the slots of w_B can be flipped */
+.slots { display: grid; grid-template-columns: 2.4em repeat(8, minmax(0, 1fr)); gap: 4px; align-items: center; }
+.slots .who { font-family: var(--font-data); font-size: 11.5px; color: var(--dim); }
+.slots .bit {
+  min-width: 0; min-height: 28px; display: grid; place-items: center; padding: 0;
+  border: 1px solid var(--line-hot); background: transparent; color: var(--ink);
+  font-family: var(--font-data); font-size: 11.5px; font-variant-numeric: tabular-nums;
+}
+.slots .bit.up { background: color-mix(in srgb, var(--sigma) 14%, transparent); }
+.slots button.bit { cursor: pointer; }
+.slots button.bit:hover { border-color: var(--ink); }
+.slots .bit.same { border-color: color-mix(in srgb, var(--cyan) 75%, transparent); }
+.slots .bit.diff { border-color: color-mix(in srgb, var(--magenta) 85%, transparent); color: var(--magenta); }
+
+/* the stage's own hud: the scene chips stay on one row and long titles wrap beside them; where the two would still
+   meet, the shared runtime (TRV.hudFit) stacks the title under the chips */
+:root:not([data-shot]) .hud-tl { max-width: calc(100% - 330px); }
+@media (max-width: 1080px) {
+  :root:not([data-shot]) .hud-tl { max-width: calc(100% - 320px); }
+}
+@media (max-width: 760px) {
+  :root:not([data-shot]) .hud-tl, .hud-tl { max-width: calc(100% - 36px); }
+  .hud-tl .big { font-size: 12.5px; line-height: 1.2; }
+  .hud-tl .sub { font-size: 11px; line-height: 1.25; }
+}
+
+/* phones: every control a finger can hit is at least 44 px tall */
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 66vh)) auto auto; }
+  .hud-tr { top: 8px; right: 10px; gap: 4px; }
+  .hud-tr .chip { min-height: 44px; padding: 4px 7px; font-size: 10.5px; letter-spacing: 0.03em; }
+  :root:not([data-shot]) .hud-tl, .hud-tl { left: 14px; max-width: calc(100% - 28px); }
+  .chip, .preset, .tbtn, .langs button, .slots button.bit { min-height: 44px; }
+  .tbtn { min-width: 44px; }
+  input[type=range] { height: 44px; }
+}
+
+/* The tour bar selects the card (and with it the scene) in a narrow cited figure. */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}

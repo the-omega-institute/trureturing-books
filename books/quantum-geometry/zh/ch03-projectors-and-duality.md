@@ -526,17 +526,32 @@ $N=0$ 时为 $0$，$N=1$ 时为上面的 $1/4$。这些比例均以已制备的�
 :::
 
 ::: {.figure src="ch03-polarizer-chain"}
-**中间插的片越多，透过的越多。** 青色的点是 $w_N = \bigl[\cos^2\frac{\pi}{2(N+1)}\bigr]^{N+1}$：只有首尾两片（$N = 0$）时为 $0$，带圈的三片（$N = 1$）为 $\frac{1}{4}$，$N = 12$ 时约为 $0.83$；有限片数的值来自 [@thm-rank-one-chain-trace] 的有限链。顶上紫色的虚线标出 $N \to \infty$ 的极限 $1$，这是文献结果，未在本书形式化（[@rem-polarizer-ideal-limit]）。
+**理想链的透射权重趋近于 $1$。** 青色的点是 $w_N = \bigl[\cos^2\frac{\pi}{2(N+1)}\bigr]^{N+1}$：只有首尾两片（$N = 0$）时为 $0$，带圈的三片（$N = 1$）为 $\frac{1}{4}$，$N = 12$ 时约为 $0.83$；有限片数的值来自 [@thm-rank-one-chain-trace] 的有限链。顶上紫色的虚线标出 $N \to \infty$ 的极限 $1$，这一标量极限是现有 Mathlib 分析结果的应用（[@rem-polarizer-ideal-limit]）。
 :::
 
-::: {.remark #rem-polarizer-ideal-limit title="理想偏振片链的极限（文献结果，未在本书形式化）"}
+::: {.remark #rem-polarizer-ideal-limit title="理想偏振片链的极限（现有 Mathlib 的应用）"}
 Kidambi、Widom、Lerner 与 Srivastava 在 [《Photon Polarization Measurements without the Quantum Zeno Effect》](https://arxiv.org/pdf/quant-ph/9902080v1) 第 2 页式 (7)–(8) 中给出理想投影模型的有限式与标量极限（文献的 $N$ 对应本例的 $m=N+1$）：
 
 $$
 \lim_{N\to\infty}w_N=1.
 $$
 
-这一经典极限未在本书形式化，也不包含在 [@thm-rank-one-chain-trace] 的有限代数恒等式中。它以已制备的水平输入和理想滤片为前提；若改以制备前的未偏振光束为基准，理想透射比例的极限是 $1/2$。原文紧接着明确指出，真实实验中光束通过多片偏振片总会有衰减，因此这里的理想极限不保证真实滤片达到无损透射。
+这一标量极限可由现有 Mathlib 的导数与幂极限结果推出。令实函数 $f(x)=\cos^2((\pi/2)x)$，则 $f(0)=1$；由链式法则与幂函数求导法则，$f'(x)=-\pi\sin((\pi/2)x)\cos((\pi/2)x)$，故 $f'(0)=0$。`HasDerivAt.tendsto_slope_zero_right` 因而给出
+
+$$
+\frac{f(x)-1}{x}\longrightarrow0\qquad(x\to0^+).
+$$
+
+沿正整数 $n\to\infty$ 取 $x=1/n$，便有 $n(f(1/n)-1)\to0$。Mathlib 的 `Real.tendsto_one_add_pow_exp_of_tendsto` 说明：若实数列 $g_n$ 满足 $n g_n\to t$，则 $(1+g_n)^n\to\exp(t)$。取 $g_n=f(1/n)-1$、$t=0$；辅助序列的第零项可任意补定，不影响极限。于是
+
+$$
+\left[\cos^2\left(\frac{\pi}{2n}\right)\right]^n
+=(1+g_n)^n\longrightarrow\exp(0)=1.
+$$
+
+再令 $n=m=N+1$，就得到本例中以自然数 $N$ 计中间片数的极限；这里始终有 $m\ge1$，包括 $N=0$ 的两片情形。若入射光在制备前是未偏振态 $I/2$，保留初始水平制备的因子 $1/2$，则相对于原始光束的理想透射比例满足 $(1/2)w_N\to1/2$。
+
+这个分析步骤不包含在 [@thm-rank-one-chain-trace] 的有限代数恒等式中；它也不推出 $w_N$ 随 $N$ 严格递增，后者需要另行证明。有限链与此极限都以理想秩一投影为模型。原文紧接着明确指出，真实实验中光束通过多片偏振片总会有衰减，因此这里的理想极限不保证真实滤片达到无损透射，也不给出一般含噪滤片或吸收介质的透射极限。
 :::
 
 [@ex-malus-three-polarizers] 清晰展示了操作层面条件记录序列的几何机制：实验室时间轴上的串行测量记录，并不是一颗颗带着预先固定标签的小球在跑道上被动过关，而是一连串不共线的幂等投影 $P(\tau_1), P(\tau_2), P(\tau_3)$ 依次切出相融分量、并将幸存条件态确立为下一步新基准轴的**串行条件重定基过程**（至于未读取分支的全局去向与擦除记录的热力学代价，则分别留待下一章的幺正记录定理与第八章的兰道尔原理完整解答）。

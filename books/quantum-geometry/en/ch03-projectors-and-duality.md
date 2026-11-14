@@ -526,17 +526,32 @@ $N=0$ gives $0$, while $N=1$ gives the $1/4$ above. All these ratios refer to th
 :::
 
 ::: {.figure src="ch03-polarizer-chain"}
-**The more polarizers in between, the more light gets through.** The cyan dots are $w_N = \bigl[\cos^2\frac{\pi}{2(N+1)}\bigr]^{N+1}$: $0$ with only the first and last polarizers ($N = 0$), $\frac{1}{4}$ for the ringed three-polarizer case ($N = 1$), and about $0.83$ at $N = 12$; the finite values come from the finite chain of [@thm-rank-one-chain-trace]. The dashed violet line at the top marks the limit $1$ as $N \to \infty$, a literature result not formalized in this book ([@rem-polarizer-ideal-limit]).
+**The ideal chain's transmission weight tends to $1$.** The cyan dots are $w_N = \bigl[\cos^2\frac{\pi}{2(N+1)}\bigr]^{N+1}$: $0$ with only the first and last polarizers ($N = 0$), $\frac{1}{4}$ for the ringed three-polarizer case ($N = 1$), and about $0.83$ at $N = 12$; the finite values come from the finite chain of [@thm-rank-one-chain-trace]. The dashed violet line at the top marks the limit $1$ as $N \to \infty$; this scalar limit is an application of existing Mathlib analysis results ([@rem-polarizer-ideal-limit]).
 :::
 
-::: {.remark #rem-polarizer-ideal-limit title="The Ideal Polarizer-Chain Limit (Literature Result, Not Formalized in This Book)"}
+::: {.remark #rem-polarizer-ideal-limit title="The Ideal Polarizer-Chain Limit (An Application of Existing Mathlib)"}
 Kidambi, Widom, Lerner, and Srivastava give the finite formula and scalar limit for the ideal projection model in [*Photon Polarization Measurements without the Quantum Zeno Effect*](https://arxiv.org/pdf/quant-ph/9902080v1), p. 2, Eqs. (7)–(8). Their $N$ corresponds to $m=N+1$ in this example:
 
 $$
 \lim_{N\to\infty}w_N=1.
 $$
 
-This classical limit is not formalized in this book and is not part of the finite algebraic identity in [@thm-rank-one-chain-trace]. It assumes the prepared horizontal input and ideal filters. Relative to an unpolarized beam before preparation, the ideal transmission ratio instead tends to $1/2$. Immediately after the limit, the paper explicitly notes attenuation in real experiments with many polarizers; the ideal limit therefore gives no guarantee of lossless transmission through real filters.
+This scalar limit follows from existing Mathlib results on derivatives and limits of powers. Define the real function $f(x)=\cos^2((\pi/2)x)$, so $f(0)=1$. The chain and power rules give $f'(x)=-\pi\sin((\pi/2)x)\cos((\pi/2)x)$, hence $f'(0)=0$. Thus `HasDerivAt.tendsto_slope_zero_right` gives
+
+$$
+\frac{f(x)-1}{x}\longrightarrow0\qquad(x\to0^+).
+$$
+
+Along positive integers $n\to\infty$, substitute $x=1/n$ to obtain $n(f(1/n)-1)\to0$. Mathlib's `Real.tendsto_one_add_pow_exp_of_tendsto` says that if a real sequence $g_n$ satisfies $n g_n\to t$, then $(1+g_n)^n\to\exp(t)$. Take $g_n=f(1/n)-1$ and $t=0$; the auxiliary sequence's zeroth term may be assigned arbitrarily without affecting the limit. This yields
+
+$$
+\left[\cos^2\left(\frac{\pi}{2n}\right)\right]^n
+=(1+g_n)^n\longrightarrow\exp(0)=1.
+$$
+
+Setting $n=m=N+1$ gives the limit with the natural number $N$ counting intermediate sheets. Here $m\ge1$ throughout, including the two-sheet case $N=0$. For unpolarized input $I/2$ before preparation, retaining the initial horizontal preparation contributes the factor $1/2$, so the ideal transmission ratio relative to that original beam satisfies $(1/2)w_N\to1/2$.
+
+This analytic step lies outside the finite algebraic identity in [@thm-rank-one-chain-trace]. It also does not establish strict increase of $w_N$ with $N$, which requires a separate argument. Both the finite chain and this limit use ideal rank-one projections. Immediately after the limit, the paper explicitly notes attenuation in real experiments with many polarizers; the ideal limit therefore gives no guarantee of lossless transmission through real filters, nor any transmission limit for general noisy filters or absorbing media.
 :::
 
 [@ex-malus-three-polarizers] brings out the operational geometry of sequential record conditioning: a chain of recorded laboratory measurements is not a conveyor belt carrying pre-labeled pebbles past passive checkpoints, but a **sequence of conditional idempotent re-basings** $P(\tau_1), P(\tau_2), P(\tau_3)$ in which each retained outcome resets the conditioned state for the next probe (while the global fate of unmonitored branches and the thermodynamic cost of erasing records are established by unitary dilation in Chapter 4 and Landauer's principle in Chapter 8, respectively).

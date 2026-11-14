@@ -1,6 +1,7 @@
 ---
 # 01 Cover
 theme: ../../../../theme/slides
+preloadImages: false
 title: "Geometric Intuition of Quantum Computing · Overview"
 info: "An overview of Geometric Intuition of Quantum Computing: the four blind spots and the ten-part, thirty-nine-chapter dimensional ladder; for each of the ten parts its core picture, main Lean-verified theorems, literature results and open problems; the counts of the three tiers of warrant; and the full thirty-nine-chapter dependency map."
 htmlAttrs:
@@ -788,9 +789,9 @@ section: "Part X · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 38.3 · Theorem 39.7</p>
+  <p class="kicker">Theorem 38.5 · Theorem 39.7</p>
   <h2 class="t">Non-orthogonal states <em>cannot be deep-copied</em>; the double cover <em>has no section</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem 38.3" title="No universal deep copy: the inner-product criterion (item 2)" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
+<TheoremCard class="compact mt-s" label="Theorem 38.5" title="No universal deep copy: the inner-product criterion (item 2)" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
 
 Let $U$ be a complex linear isometric equivalence of $H \otimes H$. If unit vectors $\psi, \phi$ and one unit blank state satisfy $U(\psi \otimes \mathrm{blank}) = \psi \otimes \psi$ and $U(\phi \otimes \mathrm{blank}) = \phi \otimes \phi$, then $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$, and $\phi = \psi$ or $\langle\phi, \psi\rangle = 0$.
 

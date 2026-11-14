@@ -21,7 +21,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 61 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 63 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -86,6 +86,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `quantum-interpretations-duel` | 密封的朋友实验室配远距贝尔对：同一组角度、环境规模与洛伦兹推动下，五种视角各自把账记在哪里 | `wigner-cut` `and-to-or` `born-unequal` `bell-epr` `time-horizon` `five-way-duel` |
 | `coherence-handshake-causality` | 零读数是正交或反相相消，单向振幅配共轭回波才成公平握手，未来擦除分拣条纹而不改边缘总和 | `boolean-illusion` `born-handshake` `feynman-stationary` `tsvf-eraser` `gram-symmetry` `paradox-cancel` |
 | `observer-consensus-decoherence` | 同一根轴能留下两端，散开的轴会把球一起压向中心；多份对齐记录在中间拉出平坦的冗余平台 | `isotropic-fog` `axis-consensus` `phase-gauge` `darwinism-plateau` `dual-wigner-bubbles` `new-axis-pioneers` |
+| `comparison-oisc-engine` | 不预设坐标的两两比较拆出求同与存异：双向乘积在 Î² = −1 守住单位预算，二十八次比较显影出三维八角盒，装不下的残差立为新轴 | `oisc` `emergence` `uncertainty` `time-axis` `lookup` `budget-cone` |
+| `spherical-trihedron-cell` | 正交一次与正交两次是同一块小弧面体的两个投影：沿棱看是一条直弧，沿墙走是拐 90° 的两步，多出鼓起的球面帽与撑开的体积砖 | `cell` `once-ridge` `twice-walls` `cap-excess` `gram-brick` `octant-limit` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -194,6 +196,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `coherence-handshake-causality` 与 `timeless-causal-crystal`、`gram-causal-elliptope` 分工：前两页分别讲无时间晶体四切面与多步记忆椭圆体收缩，本页讲第二十九章 `#sec-ch29-coherence-handshake-causality` 的相干—去相干逻辑、双端玻恩握手、未来擦除无信令与闭环自洽：青色是轴向可见投影、正向交叠振幅、无条件过去边缘总和与相容闭环通路，品红是正交补分量与双向量面积、共轭回波振幅、被捏合删除的非对角相干与反相分流到互补端口的权重，紫色是双端口合束算符、置换阵 P₁₃ 与格拉姆体积不变量，琥珀是当前选中的角度、斯涅尔驻点 s*、未来标记基角 β 与余弦不动点 θ* ≈ 0.739085（不用红色标零概率或符号翻转）。绿色框只给 `#sec-ch29-coherence-handshake-causality` 用 `lean=` 引用的十四条冻结定理；费曼—希布斯斯涅尔折射有限求积、Cramer (1986) 交易诠释、ABL (1964) / AAV (1988) 双态矢量与弱值在 ⟨Φ|Ψ⟩ = 0 处严格无定义、Scully–Drühl / Kim 延迟选择量子擦除及 Deutsch (1991) 闭合类时曲线混合态不动点标 `ARGUED`；双端口守恒、克劳斯完备性无信令 p(j) = q_j 与 P₁₃GP₁₃ᵀ 置换恒等式标 `ARGUED` / `NUM`；“逻辑只有相干与去相干、双端握手即因果”标 `MODEL`。
 
 `observer-consensus-decoherence` 与 `mutual-observer-attractors`、`bloch-noise`、`quantum-interpretations-duel` 分工：前三页分别讲两人互指蛛网与极小割重联、单通道布洛赫仿射噪声、五种量子诠释账本对照，本页讲第三十三章 `#sec-ch33-consensus-decoherence-pointer` 的多观察者二阶共识张量 M_cons、去相干指针基涌现与无脱观察者绝对客观事实：青色是唯一分辨出的未定向共识指针线（仅当谱隙 Δλ = λ₁ − λ₂ > 10⁻⁸ 时画出；各向同性迷雾 I₃/3 与双正交泡顶层简并 (1/2, 1/2, 0) 均标 `pointerAxis = null`）、纵向存留极化与纯双分支互信息经典冗余平台，品红是横向相干圆盘收缩、未控幸存记录封锁的残余相干与平面外拓荒观察者的正交逃逸余项 sin β，紫色是共同复相位二次厄米配对、双副本四步相位复原轨迹与双实验室真局域友好性关联多胞体，琥珀是当前选中的观察者轴簇、去相干角 α、片段规模 m、白噪声可见度 v 与拓荒倾角 β（不用红色标零读数或旧生成元下最快衰减的核方向）。绿色框只给 `#sec-ch33-consensus-decoherence-pointer` 用 `lean=` 引用的十二条冻结定理；Zurek 环境诱导超选择与量子达尔文主义（含 Blume-Kohout & Zurek 自旋环境模型）、Brukner / Frauchiger–Renner 扩展维格纳朋友定理及 Bong 等人 (2020) 真局域友好性不等式 F_LF ≤ 6（量子违背见证 √5 + 3 + √(2 + √2) ≈ 7.0838，v_crit ≈ 0.8470）标 `ARGUED`；二阶并矢张量符号翻转不变性（严格区分于对径正交纯态）、有序乘积 vs. 系综平均 vs. 弱耦合生成元 I₃ − M_cons、O(N) 纯分支互信息曲线、正交 Z/X 未读对易 vs. 选择性分支不对易及 det M_η = (1 − η)²abη sin²β（并标明旧生成元下 ker M₀ 按 e^(−t) 最快衰减而非无退相干子空间）标 `ARGUED` / `NUM`；Lamport–Shostak–Pease 拜占庭多数派共识类比与“共识决定去相干方向、无绝对客观存在”标 `MODEL`。
+
+`comparison-oisc-engine`（`ORTHO//CMP`）与 `unified-field-slice`、`fairness-square-uncertainty-expansion`、`pnp-lookup-degradation` 分工：后三页分别讲统一场五切面、螺旋阴影与算术素数逃逸、宏观查表退化七阶包络，本页讲第三十二章 `#sec-ch32-oisc-comparison-engine` 与 `#sec-ch32-axiom-of-comparison` 的宇宙单指令集两两比较原语与零背景比较公理 A₀（四个场景：原语、显影、折痕、开维）：青色是同槽（`XNOR`）累成的求同读数 s = cos θ、留在表内的投影 cos β、同² 份额、固有时留存 dτ/dt 与深度 b 前缀树命中，品红是异槽（`XOR`）撑开的存异读数 a = sin θ、楔² 下界、空间存异推进 dx/(c dt)、与旧平面正交的残差 r = sin β e₃ 及同桶逃逸对 `EscapePairs`，紫色是秩 3 谱分解出的 `3-3-2` 三维八角盒（因 3 ∤ 8，八个八槽 ±1 单位字张成八角长方盒而非正方体）与纯差复结构平面，琥珀是当前点翻的槽位、比对向量 v、分配角 θ、抬升角 β、前缀叶键或自比较蛛网当前步。绿色框严格只给页面列出的十条冻结定理（`inner_product_norm_parallelogram_law`、`rank_one_born_pairing_weight`、`square_eq_neg_one_of_skewAdjoint_unitary`、`gram_realizability`、`lagrange_gram_identity`、`robertson_schrodinger`、`finite_layer_projection_escape`、`eq_smul_minkowski_of_null`、`escapePairs_without_eq_union`、`rational_inverse_endpoint`；正文 §32.5–§32.6 另在定理盒引用 `name_compare_run`、`dictionary_lookup_run`、`future_word_orthogonal_residual`、`partition_inseparable_iff_kernel`）；Mavaddat & Parhami (1988) `SUBLEQ` 单指令集图灵完备性、Jordan–von Neumann 平行四边形逆定理、Schoenberg (1935) 半正定度规嵌入与 Gleason (1957) 定理标 `ARGUED`；标准 P ≠ NP 与物理希尔伯特空间是否真长出新维标 `OPEN`；雅可比谱分解、格拉姆秩、16(2^(4−b) − 1) 逃逸对枚举与蛛网迭代标 `NUM`；宇宙单指令机、零背景比较公理 A₀、κ 对照旋钮与预算圆改写光锥标 `MODEL`。
+
+`spherical-trihedron-cell`（`ORTHO//CELL`）与 `spherical-degeneracy-radar`、`two-angle-addressing`、`berry-loop` 分工：前三页分别讲简并盲圈反演观察者站位、球面两角旋转字与有理六轴覆盖、整球环路贝里立体角与发旋，本页讲第三十四章 `#sec-ch34-infinitesimal-spherical-trihedron` 的球面直角三面角原胞 ΔT_ε（五个场景：原胞、一次、两次、角超、格拉姆）：青色是平直弦削面 △_flat ABC 与沿中脊棱 OB 投影出的“正交一次”大圆直弧 AC（cos c_ε = cos²ε），品红是单位模方公平向外撑鼓的球面帽 △_sph ABC、吉拉尔角超 Ω(ε) 与两步换序的横向差（严禁把球面帽鼓包写成金色或琥珀色），紫色是三态撑开的三维格拉姆体积砖 √det G = sin²ε（对比共面两步 det G = 0）与两面垂直墙上的半角旋子 U₁₂、U₂₃，琥珀只给当前步长手柄 ε 与测地回路位置 t，“格拉姆”场景里的最小步长 ε_min 画成灰色示意带。绿色框严格只给页面引用的六条冻结定理（`unit_perpendicular_pair`、`lagrange_gram_identity`、`two_axis_finite_word`、`covariant_commutator_formula`、`partition_inseparable_iff_kernel`、`finite_layer_projection_escape`；正文 §34.4 定理盒另引用 `tetra_defects_incidence_repair_and_exactness` 与 `moving_axis_invariance`）；球面直角三角形纳皮尔公式、吉拉尔角超 Ω(ε) = 2 arctan(sec ε) − π/2 = 2 arctan(tan²(ε/2))、高斯—博内平行移动转角 +Ω(ε)、潘查拉特纳姆—贝里测地闭环旋量和乐 exp(−(Ω/2)Î_A)（与仅走两面坐标墙的横项 −sin²(ε/2) e₁e₃ 严格区分：后者只在 ε → 0⁺ 的二阶主项 O(ε²) 与 −Ω/2 一致，并在 ε = 90° 汇合于八分球）及 Regge (1961) 离散单纯形曲率标 `ARGUED`；顶点、三重积、刀片旋子乘法与逐段平行移动实算标 `NUM`；“一体双影”诠释、灰色 ε_min 带与离散球面拼砖标 `MODEL`。
 
 `critical-mirror` 的舞台是两个并排的平面：左边是临界带 0 < Re s < 1（纵向压缩），琥珀色的 ρ = ½ ± δ + iγ 与三个品红的伴 ρ̄、1 − ρ、1 − ρ̄，δ = 0 时两两重合成青色的两点；右边是凯莱坐标 w = (s − 1)/s，单位圆是青色，左下的放大镜以辐角为横轴、ln|w| 为纵轴，把高处只偏出圆周万分之几的四个像拉开。“四次式”场景把右边换成同样对称的四次式 F(½ + it)（青色，最低处琥珀色）与 ξ(½ + it)（品红，各用各的标尺；ξ 由欧拉—麦克劳林求 ζ、斯特林求 Γ）。前五个零点是灰色的数值点（与静态图 `ch22-critical-line`、`ch22-overview` 里的零点同为灰色）。时间轴是 ρ 到镜面的距离 δ。绿色框只给第二十二章用 `lean=` 引用的 `xi_reading_reflection`、`xi_reading_one_sub_conj`、`cayley_ratio_norm_one_iff_critical_line` 与 `full_symmetry_not_fixed_line_localization`；零点高度、|w|、F、ξ 标 `NUM`；黎曼猜想只在抽屉里标 `OPEN`，页面不画“全部零点”。
 
@@ -482,8 +488,15 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十二章 | §32.3 三根诊断轴列表之后、“在逐一检阅四大理论阵营之前”之前 | `meta-unification-compass` · `cube` |
 | 第三十二章 | 文献注记 `rem-ch32-icosian-e8-literature` 之后，各隔一句承上启下的话 | `meta-unification-compass` · `icosians`、`e8`、`fold` |
 | 第三十二章 | 文献注记 `rem-ch32-eight-programs-literature` 之后（隔一句话）、“最后，我们将这八条……”之前 | `meta-unification-compass` · `camps` |
-| 第三十二章 | 全章末段“……看见了整座宇宙。”之后、“接下来，第九部……”之前 | `meta-unification-compass` · `crystal` |
-| 第三十二章 | 全章末尾 | `meta-unification-compass` 完整实验室 |
+| 第三十二章 | §32.4 末段“……看见了整座宇宙。”之后 | `meta-unification-compass` · `crystal` |
+| 第三十二章 | §32.4 末尾（隔一句引出语、转入 §32.5 之前） | `meta-unification-compass` 完整实验室 |
+| 第三十二章 | §32.5 求同与求异双通道列表之后、“一旦看清宇宙只是……”之前 | `comparison-oisc-engine` · `oisc` |
+| 第三十二章 | §32.5 六重涌现第（一）项（量子概率与海森堡测不准）之后 | `comparison-oisc-engine` · `uncertainty` |
+| 第三十二章 | §32.5 六重涌现第（二）项（三维空间与三维八角盒）之后 | `comparison-oisc-engine` · `emergence` |
+| 第三十二章 | §32.5 六重涌现第（三）项（时间流逝与正交开维）之后 | `comparison-oisc-engine` · `time-axis` |
+| 第三十二章 | §32.5 六重涌现第（五）项（快表记忆化）之后、第（六）项之前 | `comparison-oisc-engine` · `lookup` |
+| 第三十二章 | §32.6 第三小节第 1 条（闵可夫斯基时空间隔与光速极限）之后 | `comparison-oisc-engine` · `budget-cone` |
+| 第三十二章 | §32.6 六大基础学科公理重铸总表与引出段之后、全章末桥接段之前 | `comparison-oisc-engine` 完整实验室 |
 | 第三十三章 | “互指单调锁死”一节列表第 1 条（独自闭门内省）之后、第 2 条之前 | `mutual-observer-attractors` · `alone` |
 | 第三十三章 | 例 `ex-ch33-mutual-cosine-monotonic-lock` 之后、“对照……轨迹账本”一段之前 | `mutual-observer-attractors` · `round` |
 | 第三十三章 | “两人起点不同时也是如此”一段之后、“接受窗交集”一节之前 | `mutual-observer-attractors` · `apart` |
@@ -506,6 +519,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十四章 | 该例之后的定位箴言段之后、第三节之前 | `spherical-degeneracy-radar` · `frames` |
 | 第三十四章 | 文献注记 `rem-ch34-virtual-z-berry-relativity-literature` 之后 | `berry-loop` · `octant` |
 | 第三十四章 | 四阶总表之后的“凡简并处”一段之后 | `spherical-degeneracy-radar` 完整实验室 |
+| 第三十四章 | §34.4 开篇三矢量体积元公式之后、“一、一体双影”之前 | `spherical-trihedron-cell` · `cell` |
+| 第三十四章 | §34.4 “一、一体双影”第 1 条（沿中脊棱投影“正交一次”）之后 | `spherical-trihedron-cell` · `once-ridge` |
+| 第三十四章 | §34.4 “一、一体双影”第 2 条（沿两面正交墙分解“正交两次”）之后 | `spherical-trihedron-cell` · `twice-walls` |
+| 第三十四章 | §34.4 “二、公平平方撑起品红球面帽”末、“三、为什么必须是极小的”之前 | `spherical-trihedron-cell` · `cap-excess` |
+| 第三十四章 | §34.4 “三、为什么必须是极小的”第 2 条（平直幻象与曲率量子）之后 | `spherical-trihedron-cell` · `gram-brick` |
+| 第三十四章 | §34.4 “三、为什么必须是极小的”第 3 条（离散球面与八分球极限）之后 | `spherical-trihedron-cell` · `octant-limit` |
+| 第三十四章 | §34.4 四重视角对照表与引出段之后、全章末转入第三十五章之前 | `spherical-trihedron-cell` 完整实验室 |
 | 第三十五章 | 第一节 Lean 三定理列表第 3 条（`finite_memory_history_capacity`）之后、“这里的清表”一段之前 | `self-referential-table` · `full` |
 | 第三十五章 | 第一节“因此，乘着光来……”一段之后、定理 `thm-ch35-null-pulse-and-record-blocking` 之前 | `self-referential-table` · `reset` |
 | 第三十五章 | “成长即扩表”一节三步列表之后、“下面我们将……”一段之前 | `self-referential-table` · `expand_table` |

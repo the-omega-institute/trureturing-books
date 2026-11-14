@@ -24,3 +24,9 @@
   .hud-tl .big { font-size: 12.5px; line-height: 1.18; }
   .hud-tl .sub { font-size: 10.5px; line-height: 1.2; }
 }
+/* a cited figure in a narrow column: the title's second line and the legend set their lines closer, so the panel in
+   the band between them (measured by main.js each frame) keeps its room */
+@media (max-width: 520px) {
+  :root[data-embed][data-figure] .hud-tl .sub, :root[data-embed][data-figure] .hud-bl { line-height: 1.3; }
+  :root[data-embed][data-figure] .hud-bl { row-gap: 1px; }
+}

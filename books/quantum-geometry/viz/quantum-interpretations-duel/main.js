@@ -145,10 +145,14 @@
     'grw-collapse': { name: ['客观坍缩', 'Objective collapse'], short: ['客观坍缩', 'GRW collapse'],
       keeps: () => ['无需观察者的坍缩', 'observer-free collapse'],
       adds: (D) => [`新的随机动力学；q ≈ ${sci(D.grw)}`, `new stochastic dynamics; q ≈ ${sci(D.grw)}`],
+      // a narrow duel row that cannot hold the line above wrapped (the same claim and the same q, fewer words)
+      addsNarrow: (D) => [`新的随机动力学；q ≈ ${sci(D.grw)}`, `new dynamics; q ≈ ${sci(D.grw)}`],
       long: (D) => [`真正改写动力学，与退相干不同。示意参数 λ = 10⁻¹⁶ s⁻¹、t = 1 s：q = −expm1(−Nλt) = ${sci(D.grw)}。N = 10⁶ 时也只有 10⁻¹⁰，要 N ≳ 10¹⁶–10²³ 才快；按 p、1 − p 选一支是模型规定（MODEL）。`, `A real change of the dynamics, unlike decoherence. Illustrative λ = 10⁻¹⁶ s⁻¹, t = 1 s: q = −expm1(−Nλt) = ${sci(D.grw)}. Even at N = 10⁶ it is only 10⁻¹⁰; it takes N ≳ 10¹⁶–10²³ to be fast. Picking a branch with weights p, 1 − p is a model prescription (MODEL).`] },
     'ortho-open-dim': { name: ['正交开维', 'Orthogonal open dimension'], short: ['正交开维', 'Open dimension'],
       keeps: () => ['二次读数、纤维、余量方向', 'quadratic readouts, fibers, residual directions'],
       adds: () => ['时间 = 新维度：开放提议', 'time = a new dimension: an open proposal'],
+      // a narrow duel row: the wording of the OPEN box of the horizon card, beside this row's own red OPEN tag
+      addsNarrow: () => ['时间 = 新维度：开放提议', 'time = a new dimension? (open)'],
       long: () => ['保留有限观察者的读数、看不见的纤维、公因子的义务与余量方向（紫色箭头）。“时间是正交维的扩张”是作者的模型与开放提议：这些有限的代数结果不解决确定结果、ψ 本体、洛伦兹协变、量子引力或黑洞信息问题。', 'Keeps the finite observer\'s readouts, the unseen fibers, the common-factor obligation and the residual direction (violet arrow). "Time as orthogonal expansion" is the author\'s model and open proposal: these finite algebraic results do not solve definite outcomes, ψ-ontology, Lorentz covariance, quantum gravity or black-hole information.'] }
   };
   const lensName = (id) => L(...LENSES[id].name);
@@ -173,6 +177,7 @@
   const cv = $('cv'), stageEl = $('stage'), hudTl = $('hudTl'), lensBar = $('lensBar'), legendEl = $('legend');
   let ctx = null, W = 0, H = 0;
   const hits = [];                               // draggable regions of this frame
+  let tightStage = false;                        // drawStage: a cited card in a narrow column, its panel rows closer
   const face = (f) => (f === 'data' ? TRV.fonts.data : f === 'display' ? TRV.fonts.display : TRV.fonts.body);
   const font = (px, f, w) => `${w || 400} ${px}px ${face(f)}`;
   /** Text at (x, y); o: size, face, weight, align, base, alpha, max (shrink to fit). Nothing on the wordless cover. */
@@ -257,9 +262,9 @@
   /** A panel frame with a title; returns the inner rectangle. */
   function frame(x, y, w, h, title, nar) {
     box(x, y, w, h, { stroke: P.panelEdge, fill: P.cyan, alpha: 0.025, cut: 6 });
-    const th = nar ? 15 : 18;
+    const th = tightStage ? 13 : nar ? 15 : 18, pad = tightStage ? 4 : 6;    // a cited card in a narrow column: closer title rows
     if (title) T(x + 8, y + th / 2 + 2, title, P.dim, { size: nar ? 10 : 10.5, max: w - 16, weight: 600 });
-    return { x: x + 8, y: y + th + 2, w: w - 16, h: h - th - 6 };
+    return { x: x + 8, y: y + th + 2, w: w - 16, h: h - th - pad };
   }
 
   /* ---------- the friend's two records, drawn the way a lens reads them ---------- */
@@ -443,7 +448,7 @@
 
   /* ---------- the six readout pictures ---------- */
   function split3(R, nar, firstShare) {
-    const g = 8;
+    const g = tightStage ? 5 : 8;
     if (!nar) { const w = (R.w - 2 * g) / 3; return [[R.x, R.y, w, R.h], [R.x + w + g, R.y, w, R.h], [R.x + 2 * (w + g), R.y, w, R.h]]; }
     const h1 = Math.round(R.h * (firstShare || 0.55)), w2 = (R.w - g) / 2;
     return [[R.x, R.y, w2, h1], [R.x + w2 + g, R.y, w2, h1], [R.x, R.y + h1 + g, R.w, R.h - h1 - g]];
@@ -475,7 +480,7 @@
   }
 
   function focusAndOr(D, R, nar) {
-    const [A, Bq, C] = split3(R, nar), fs = nar ? 10 : 11;
+    const [A, Bq, C] = split3(R, nar, tightStage ? 0.54 : 0.55), fs = nar ? 10 : 11;
     const a = frame(...A, L('“与”：退相干后的混合 ρ', 'AND: the decohered mixture ρ'), nar);
     const ms = Math.min(a.w - 16, a.h - (nar ? 20 : 34));
     const ghost = model(Object.assign({}, state, { u: 0 })).rho;
@@ -487,10 +492,17 @@
     T(b.x, by - 8, `r² = ${fix(D.r2, 3)}`, P.cyan, { size: fs, face: 'data' });
     T(b.x + bw, by - 8, `τ = ${fix(D.tangle, 3)}`, P.magenta, { align: 'right', size: fs, face: 'data' });
     T(b.x, by + bh + 12, L(`纯度 Tr ρ² = ${fix(D.purity, 3)}`, `purity Tr ρ² = ${fix(D.purity, 3)}`), P.ink, { size: fs, face: 'data', max: b.w });
-    T(b.x, by + bh + 28, L(`可见度 V = ${fix(D.vis, 3)} · 相干质量 C = ${fix(D.deleted, 3)}`, `visibility V = ${fix(D.vis, 3)} · coherence mass C = ${fix(D.deleted, 3)}`), P.magenta, { size: fs - 1, face: 'data', max: b.w });
+    // visibility and coherence mass on one line; in a narrow panel that line does not fit, so each gets its own
+    const visTxt = `${L('可见度', 'visibility')} V = ${fix(D.vis, 3)}`, cohTxt = `${L('相干质量', 'coherence mass')} C = ${fix(D.deleted, 3)}`, visCoh = `${visTxt} · ${cohTxt}`;
+    ctx.font = font(fs - 1, 'data');
+    if (!nar || ctx.measureText(visCoh).width <= b.w) T(b.x, by + bh + 28, visCoh, P.magenta, { size: fs - 1, face: 'data', max: b.w });
+    else { T(b.x, by + bh + 28, visTxt, P.magenta, { size: fs - 1, face: 'data', max: b.w }); T(b.x, by + bh + 41, cohTxt, P.magenta, { size: fs - 1, face: 'data', max: b.w }); }
     if (!nar) TW(b.x, by + bh + 44, L('青色：留在实验室里的长度；品红：搬进环境的关联。', 'Cyan: the length left in the lab; magenta: the correlation moved into the environment.'), P.dim, b.w, { size: 10 });
     const c = frame(...C, L('“或”：抽出一行（模型）', 'OR: draw one row (model)'), nar);
-    const cw = nar ? 34 : Math.min(48, c.w * 0.2), ch = nar ? Math.min(46, c.h - 40) : Math.min(c.h * 0.48, 70), cx = c.x + (nar ? 8 : c.w * 0.1), cy = c.y + (nar ? 6 : 10);
+    const orLine = L(`ξ ${D.xi < D.p ? '<' : '≥'} p，于是抽出记录 ${D.sel}：这一步是模型的抽样，捏合不给它。`, `ξ ${D.xi < D.p ? '<' : '≥'} p, so record ${D.sel} is drawn: a model's sampling step, not something pinching provides.`);
+    // a narrow panel: the records leave room under them for the sentence about the draw (up to two lines), inside the panel
+    const drawLines = nar ? Math.min(2, wrap(orLine, c.w, fs - 1).length) : 0;
+    const cw = nar ? 34 : Math.min(48, c.w * 0.2), ch = nar ? Math.max(12, Math.min(46, c.h - 26 - drawLines * Math.round((fs - 1) * 1.32))) : Math.min(c.h * 0.48, 70), cx = c.x + (nar ? 8 : c.w * 0.1), cy = c.y + (nar ? 6 : 10);
     const r0 = { x: cx, y: cy, w: cw, h: ch }, r1 = { x: cx + cw + 12, y: cy, w: cw, h: ch };
     records('copenhagen', D, r0, r1, { size: fs });
     T(r0.x + cw / 2, cy + ch + 10, pct(D.p, 0), P.cyan, { align: 'center', size: fs - 1, face: 'data' });
@@ -505,7 +517,7 @@
       T(lx, ly + 17, '0', P.dim, { size: 9.5, face: 'data' }); T(lx + lw, ly + 17, '1', P.dim, { align: 'right', size: 9.5, face: 'data' });
       T(lx + lw * D.p, ly + 17, 'p', P.cyan, { align: 'center', size: 9.5, face: 'data' });
     }
-    TW(c.x, cy + ch + 24, L(`ξ ${D.xi < D.p ? '<' : '≥'} p，于是抽出记录 ${D.sel}：这一步是模型的抽样，捏合不给它。`, `ξ ${D.xi < D.p ? '<' : '≥'} p, so record ${D.sel} is drawn: a model's sampling step, not something pinching provides.`), P.dim, c.w, { size: fs - 1, lines: nar ? 2 : 3 });
+    TW(c.x, cy + ch + (nar ? 20 : 24), orLine, P.dim, c.w, { size: fs - 1, lines: nar ? 2 : 3 });
   }
 
   function focusBorn(D, R, nar) {
@@ -649,7 +661,7 @@
   }
 
   function focusHorizon(D, R, nar) {
-    const [A, Bq, C] = split3(R, nar, 0.56), fs = nar ? 10 : 11;
+    const [A, Bq, C] = split3(R, nar, tightStage ? 0.6 : 0.56), fs = nar ? 10 : 11;
     // entropy ledger in bits
     const a = frame(...A, nar ? L('熵账（比特）', 'Entropy (bits)') : L('熵账（比特）：整体不动，局部在涨', 'Entropy (bits): the whole still, the part growing'), nar);
     const base = a.y + a.h - (nar ? 22 : 30), top = a.y + 14, hb = base - top, bw = Math.max(10, Math.min(a.w * 0.15, 34));
@@ -673,20 +685,21 @@
 
     // the 16-state horizon: columns = the base readout b₀b₁b₂, rows = the unseen bit b₃
     const e = D.esc, b = frame(...Bq, L('16 个态的视界', 'A horizon of 16 states'), nar);
-    const cw = b.w / 8, ry = [b.y + (nar ? 22 : Math.max(26, b.h * 0.22)), b.y + (nar ? 44 : Math.max(52, b.h * 0.5))], rd = Math.max(3, Math.min(cw * 0.2, 6));
+    // a cited card in a narrow column: the two rows of states and the three lines under them sit closer (tl: line step)
+    const tl = tightStage ? 11 : 13, cw = b.w / 8, ry = [b.y + (tightStage ? 15 : nar ? 22 : Math.max(26, b.h * 0.22)), b.y + (tightStage ? 31 : nar ? 44 : Math.max(52, b.h * 0.5))], rd = Math.max(3, Math.min(cw * 0.2, 6));
     const fiberOf = new Map(); e.fibers.forEach((f, i) => f.forEach((k) => fiberOf.set(k, i)));
     for (let col = 0; col < 8; col++) {
       const x = b.x + cw * (col + 0.5), k0 = col, k1 = col + 8, same = fiberOf.get(k0) === fiberOf.get(k1);
-      T(x, ry[0] - (nar ? 13 : 18), `${col & 1}${(col >> 1) & 1}${(col >> 2) & 1}`, P.dim, { align: 'center', size: nar ? 8.5 : 9.5, face: 'data', max: cw });
+      T(x, ry[0] - (tightStage ? 10 : nar ? 13 : 18), `${col & 1}${(col >> 1) & 1}${(col >> 2) & 1}`, P.dim, { align: 'center', size: nar ? 8.5 : 9.5, face: 'data', max: cw });
       if (same) seg(x, ry[0], x, ry[1], P.magenta, { width: 2.4, sglow: 6 });
       [k0, k1].forEach((k, r) => dot(x, ry[r], rd, same ? P.magenta : P.cyan, { glow: 6 }));
     }
     const modeText = { none: L('只读 b₀b₁b₂', 'b₀b₁b₂ only'), parity: L('+ 奇偶 b₀⊕b₁⊕b₂⊕b₃', '+ parity b₀⊕b₁⊕b₂⊕b₃'), redundant: L('+ 冗余的 b₀⊕b₁', '+ redundant b₀⊕b₁') }[state.parity];
-    T(b.x, ry[1] + (nar ? 14 : 22), modeText, P.ink, { size: fs - 0.5, weight: 600, max: b.w });
+    T(b.x, ry[1] + (tightStage ? tl : nar ? 14 : 22), modeText, P.ink, { size: fs - 0.5, weight: 600, max: b.w });
     const col = e.pairs ? P.magenta : P.cyan, rate = e.pairs ? `${e.pairs}/240` : '0';
     if (nar) {
-      T(b.x, ry[1] + 27, L(`逃逸对 ${e.pairs} · 逃逸率 ${rate}`, `escape pairs ${e.pairs} · rate ${rate}`), col, { size: 9, face: 'data', max: b.w });
-      T(b.x, ry[1] + 39, L(`H₂ = ${fix(e.H2, 0)} 比特`, `H₂ = ${fix(e.H2, 0)} bit`) + (state.parity !== 'none' ? L(` · 捕获 ${e.capture}`, ` · capture ${e.capture}`) : ''), col, { size: 9, face: 'data', max: b.w });
+      T(b.x, ry[1] + (tightStage ? 2 * tl : 27), L(`逃逸对 ${e.pairs} · 逃逸率 ${rate}`, `escape pairs ${e.pairs} · rate ${rate}`), col, { size: 9, face: 'data', max: b.w });
+      T(b.x, ry[1] + (tightStage ? 3 * tl : 39), L(`H₂ = ${fix(e.H2, 0)} 比特`, `H₂ = ${fix(e.H2, 0)} bit`) + (state.parity !== 'none' ? L(` · 捕获 ${e.capture}`, ` · capture ${e.capture}`) : ''), col, { size: 9, face: 'data', max: b.w });
     } else {
       T(b.x, ry[1] + 38, L(`逃逸对 ${e.pairs} · 逃逸率 ${rate} · H₂ = ${fix(e.H2, 0)} 比特`, `escape pairs ${e.pairs} · rate ${rate} · H₂ = ${fix(e.H2, 0)} bit`), col, { size: fs - 1, face: 'data', max: b.w });
       if (state.parity !== 'none') T(b.x, ry[1] + 54, L(`唯一捕获 ${e.capture} 对${e.capture ? '：逃逸率下降' : '：逃逸率不降'}`, `unique capture ${e.capture}${e.capture ? ': the rate drops' : ': the rate does not drop'}`), P.ink, { size: fs - 1, max: b.w });
@@ -694,22 +707,69 @@
 
     // a finite layer S always leaves a unit residual e ⊥ S
     const c = frame(...C, L('有限层：总留一条正交方向', 'A finite layer leaves an orthogonal direction'), nar);
-    const pw = Math.min(c.w * (nar ? 0.42 : 0.7), 150), ph = Math.min(c.h * 0.24, 40), px = c.x + (nar ? 10 : (c.w - pw) / 2), py = c.y + c.h * (nar ? 0.58 : 0.58);
+    /* a cited card in a narrow column (a short panel): the layer S lies along the bottom left, e ⊥ S rises from it with
+       its two labels beside its tip, and the red OPEN box keeps the bottom right, clear of both */
+    const short = tightStage && nar;
+    const pw = Math.min(c.w * (short ? 0.3 : nar ? 0.42 : 0.7), 150), ph = short ? clamp(c.h * 0.3, 10, 22) : Math.min(c.h * 0.24, 40), px = c.x + (nar ? 10 : (c.w - pw) / 2), py = short ? c.y + c.h - ph / 2 - 3 : c.y + c.h * (nar ? 0.58 : 0.58);
     const sk = pw * 0.28;
     shape(() => { ctx.moveTo(px + sk, py - ph / 2); ctx.lineTo(px + pw, py - ph / 2); ctx.lineTo(px + pw - sk, py + ph / 2); ctx.lineTo(px, py + ph / 2); ctx.closePath(); }, { fill: P.cyan, alpha: 0.16, stroke: P.cyan, width: 1.2 });
     T(px + 6, py + ph / 2 - 8, 'S', P.cyan, { size: fs, face: 'data', weight: 600 });
-    const ox = px + pw / 2, oy = py, len = Math.min(c.h * 0.42, 70);
+    const ox = px + pw / 2, oy = py, len = short ? clamp(c.h - ph / 2 - 10, 12, 70) : Math.min(c.h * 0.42, 70);
     dot(ox, oy, 3, P.ink);
     arrow(ox, oy, ox, oy - len, P.violet, { width: 2.4, head: 9, sglow: 10 });
-    T(ox + 8, oy - len + 4, 'e ⊥ S', P.violet, { size: fs, face: 'data', weight: 600 });
-    T(ox + 8, oy - len + 4 + fs + 4, '‖I − P_S‖ = 1', P.violet, { size: fs - 1, face: 'data' });
-    if (py + ph / 2 + 14 < c.y + c.h - 30) T(ox, py + ph / 2 + 10, 'P_S e = 0', P.dim, { align: 'center', size: fs - 1.5, face: 'data' });
+    const eW = T(ox + 8, oy - len + 4, 'e ⊥ S', P.violet, { size: fs, face: 'data', weight: 600 });
+    if (short) T(ox + 8 + eW + 10, oy - len + 4, '‖I − P_S‖ = 1', P.violet, { size: fs - 1, face: 'data' });    // one row, over the OPEN box's row
+    else T(ox + 8, oy - len + 4 + fs + 4, '‖I − P_S‖ = 1', P.violet, { size: fs - 1, face: 'data' });
+    if (!short && py + ph / 2 + 14 < c.y + c.h - 30) T(ox, py + ph / 2 + 10, 'P_S e = 0', P.dim, { align: 'center', size: fs - 1.5, face: 'data' });
     // the genuine open problem, in red
     const ot = L('OPEN · 时间 = 新的维度？', 'OPEN · time = a new dimension?');
     ctx.font = font(fs - 1, 'body', 600);
-    const tw = Math.min(ctx.measureText(ot).width + 12, c.w), tx = nar ? c.x + c.w - tw : c.x + (c.w - tw) / 2, tyy = c.y + c.h - 16;
+    const tw = Math.min(ctx.measureText(ot).width + 12, c.w), tx = nar ? c.x + c.w - tw : c.x + (c.w - tw) / 2, tyy = short ? c.y + c.h - 9 : c.y + c.h - 16;
     if (!TRV.thumbMode) rect(tx, tyy - 8, tw, 16, { stroke: P.warn, width: 1, strokeAlpha: 0.9 });
     T(tx + 6, tyy, ot, P.warn, { size: fs - 1, weight: 600, max: tw - 10 });
+  }
+
+  /* The five rows of a cited card in a narrow column (tightStage): each row is as tall as its own words need, with the
+     two records at its left and, beside them, the lens's name (amber for the current lens) opening the "Keeps" line,
+     then "Adds" (and the red OPEN tag on the open-dimension row); the text column is the whole width right of the
+     records. The size steps from 9.5 to 8 px, then the shorter "Adds" lines of the lenses that have them, until the
+     five rows fit the band. */
+  function duelTightRows(D, R, y0) {
+    const n = LENS_ORDER.length, g = 3, x = R.x, w = R.w, gw = 11, tx = x + 6 + 2 * gw + 4 + 16, tw = x + w - 6 - tx, avail = R.y + R.h - y0 - (n - 1) * g;
+    const rowsAt = (size, narrowAdds) => LENS_ORDER.map((id) => {
+      const lens = LENSES[id], nm = L(...(lens.short || lens.name)), open = id === 'ortho-open-dim';
+      ctx.font = font(size, 'body', 700); const nameW = ctx.measureText(nm).width + 6 + (open ? 34 : 0);
+      const keeps = `${L('守住', 'Keeps')}: ${L(...lens.keeps(D))}`, adds = `${L('多付', 'Adds')}: ${L(...((narrowAdds && lens.addsNarrow) || lens.adds)(D))}`;
+      const k1 = wrap(keeps, Math.max(30, tw - nameW), size), rest = k1.length > 1 ? wrap(keeps.slice(k1[0].length).trim(), tw, size) : [];
+      const kl = [k1[0]].concat(rest), al = wrap(adds, tw, size), lh = Math.round(size * 1.18);
+      return { id, nm, open, nameW, kl, al, lh, need: Math.max(22, (kl.length + al.length) * lh + 6) };
+    });
+    let rows = null;
+    for (const narrowAdds of [false, true]) {
+      for (const size of [9.5, 9, 8.5, 8]) { const r = rowsAt(size, narrowAdds); if (r.reduce((t, q) => t + q.need, 0) <= avail) { rows = r.map((q) => Object.assign(q, { size })); break; } }
+      if (rows) break;
+    }
+    if (!rows) {        // still too tall at 8 px with the shorter lines: the lines step closer together, down to 7.5 px apart
+      rows = rowsAt(8, true);
+      const lines = rows.reduce((t, q) => t + q.kl.length + q.al.length, 0), lh = Math.max(7.5, (avail - 4 * n) / lines);
+      rows.forEach((q) => Object.assign(q, { size: 8, lh, need: (q.kl.length + q.al.length) * lh + 4 }));
+    }
+    const extra = Math.max(0, avail - rows.reduce((t, q) => t + q.need, 0)) / n;
+    let y = y0;
+    rows.forEach((q) => {
+      const h = q.need + extra, on = q.id === state.lens;
+      box(x, y, w, h, on ? { stroke: P.amber, width: 1.8, fill: P.amber, alpha: 0.05, cut: 6, sglow: 8 } : { stroke: P.panelEdge, fill: P.cyan, alpha: 0.02, cut: 6 });
+      hits.push({ kind: 'lens', id: q.id, x0: x, x1: x + w, y0: y, y1: y + h });
+      const gh = Math.max(10, h - 10), gx = x + 6, gy = y + 5;
+      records(q.id, D, { x: gx, y: gy, w: gw, h: gh }, { x: gx + gw + 4, y: gy, w: gw, h: gh },
+        { from: [gx - 4, gy + gh / 2], size: 8, gauge: { x: gx - 2, y: gy + gh + 1, w: 2 * gw + 8, h: 3 }, gaugeLabel: false, escape: Math.min(12, h * 0.4), escapeLabel: false });
+      const ty = y + (h - (q.kl.length + q.al.length) * q.lh) / 2;
+      T(tx, ty, q.nm, on ? P.amber : P.ink, { size: q.size, weight: 700, base: 'top' });
+      if (q.open) { const ox = tx + q.nameW - 34; rect(ox, ty - 1, 30, q.lh, { stroke: P.warn, width: 1 }); T(ox + 15, ty + q.lh / 2 - 1, 'OPEN', P.warn, { align: 'center', size: 7.5, face: 'data', weight: 600 }); }
+      q.kl.forEach((str, i) => T(i ? tx : tx + q.nameW, ty + i * q.lh, str, P.ink, { size: q.size, base: 'top' }));
+      q.al.forEach((str, i) => T(tx, ty + (q.kl.length + i) * q.lh, str, P.dim, { size: q.size, base: 'top' }));
+      y += h + g;
+    });
   }
 
   function focusDuel(D, R, nar) {
@@ -719,6 +779,7 @@
     const headH = TRV.thumbMode ? 0 : (nar ? 28 : 18);
     if (nar) TW(R.x + 2, R.y, head, P.ink, R.w - 4, { size: 9.5, lines: 2, lh: 13 }); else T(R.x + 2, R.y + 7, head, P.ink, { size: 10.5, max: R.w - 4 });
     const y0 = R.y + headH + 4, n = LENS_ORDER.length, g = 6;
+    if (nar && tightStage) { duelTightRows(D, R, y0); return; }
     LENS_ORDER.forEach((id, k) => {
       const lens = LENSES[id], on = id === state.lens;
       let x, y, w, h;
@@ -748,22 +809,50 @@
         records(id, D, { x: gx, y: gy, w: gw, h: gh }, { x: gx + gw + 4, y: gy, w: gw, h: gh },
           { from: [gx - 10, gy + gh / 2], size: 8.5, gauge: { x: gx - 2, y: gy + gh + 1, w: 2 * gw + 8, h: 3 }, gaugeLabel: false, escape: Math.min(16, h * 0.5), escapeLabel: false });
         const tx = gx + 2 * gw + 18, tw = x + w - tx - 6;
-        T(tx, y + h * 0.32, `${L('守住', 'Keeps')}: ${L(...lens.keeps(D))}`, P.ink, { size: 9.5, max: tw });
-        T(tx, y + h * 0.7, `${L('多付', 'Adds')}: ${L(...lens.adds(D))}`, P.dim, { size: 9.5, max: tw });
+        duelRowText(tx, y, tw, h, lens, D);
       }
     });
+  }
+  /** The text of a narrow duel row: "Keeps: …" (ink) and "Adds: …" (dim), each wrapped at its words inside the row's
+      text column and centred in the row, at 9.5, 9 or 8.5 px. Only where the row cannot hold that does a lens's shorter
+      equivalent of its "Adds" line (addsNarrow) come in, and only then the two shrinking single lines of before. */
+  function duelRowText(tx, y, tw, h, lens, D) {
+    if (TRV.thumbMode) return;
+    const keeps = `${L('守住', 'Keeps')}: ${L(...lens.keeps(D))}`, addsOf = (f) => `${L('多付', 'Adds')}: ${L(...f(D))}`;
+    const cands = [[keeps, addsOf(lens.adds)]].concat(lens.addsNarrow ? [[keeps, addsOf(lens.addsNarrow)]] : []);
+    for (const [k, a] of cands) {
+      for (const size of [9.5, 9, 8.5]) {
+        const lh = Math.round(size * 1.15), maxL = Math.floor((h - 3) / lh), kl = wrap(k, tw, size), al = wrap(a, tw, size);
+        ctx.font = font(size);
+        if (kl.length + al.length > maxL || kl.concat(al).some((s) => ctx.measureText(s).width > tw + 0.5)) continue;
+        const y0 = y + (h - (kl.length + al.length) * lh) / 2;
+        kl.forEach((s, i) => T(tx, y0 + i * lh, s, P.ink, { size, base: 'top' }));
+        al.forEach((s, i) => T(tx, y0 + (kl.length + i) * lh, s, P.dim, { size, base: 'top' }));
+        return;
+      }
+    }
+    const [k, a] = cands[cands.length - 1];
+    T(tx, y + h * 0.32, k, P.ink, { size: 9.5, max: tw });
+    T(tx, y + h * 0.7, a, P.dim, { size: 9.5, max: tw });
   }
   const FOCUS_DRAW = { cut: focusCut, andor: focusAndOr, born: focusBorn, bell: focusBell, horizon: focusHorizon, duel: focusDuel };
   const NARROW_READ = 170, NARROW_APP = 72;                // px: the readout picture a narrow stage needs, the compact apparatus
   const CAPTION_APPARATUS = { cut: true, andor: true };    // cards whose caption points at the apparatus (the cut, the environment)
 
   /* ---------- the stage ---------- */
+  /* Below the title block (a narrow stage), the lens chips are placed under the title as it reads in this frame, and
+     measured where the title stands by itself: a stack the theme made while the chips were still elsewhere (TRV.hudFit,
+     .hud-stack: the title moved under the chips) is not the title's place. TRV.hudFit then decides with the chips where
+     they now are, before the stage measures its band (reserves), so one paint leaves the title, the chips and the
+     drawing in agreement. */
   function placeLensBar() {
     const below = stageEl.clientWidth < 700;
     lensBar.classList.toggle('below', below); stageEl.classList.toggle('lens-below', below);
-    if (below) lensBar.style.setProperty('--lens-top', `${hudTl.offsetTop + hudTl.offsetHeight + 6}px`);
-    // a cited figure on a phone keeps its short stage for the pictures and, like the still, leaves the lens chips out
-    stageEl.classList.toggle('lens-off', !!TRV.figure && stageEl.clientWidth < 560);
+    if (below) {
+      stageEl.classList.remove('hud-stack');
+      lensBar.style.setProperty('--lens-top', `${hudTl.offsetTop + hudTl.offsetHeight + 6}px`);
+    }
+    TRV.hudFit();
   }
   function reserves() {
     if (TRV.thumbMode) return { top: 14, bottom: 14 };
@@ -778,6 +867,9 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
     hits.length = 0;
     const res = reserves(), padX = W < 560 ? 12 : 18, avail = H - res.top - res.bottom, nar = W < 560, gap = nar ? 10 : 14;
+    /* A cited card in a narrow column (a long note under it): its readout panels set their rows closer (tightStage), and
+       the lens stays marked on the chips and in the title block. */
+    tightStage = !TRV.thumbMode && TRV.figure && nar && avail < 300;
     let appH = TRV.thumbMode ? avail * 0.42 : clamp(avail * (nar ? 0.37 : 0.39), 92, 210);
     // a narrow stage too short for both pictures (a cited figure on a phone): the readout picture of the card, which its
     // caption describes, comes first. The shared apparatus shrinks to a compact strip and leaves the stage unless the
@@ -917,11 +1009,12 @@
   const hot30 = document.querySelector('.field .marks i.hot30');
   const showEvidence = () => document.querySelectorAll('#evidence [data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(state.focus); });
   function drawText(D) {
-    showEvidence(); placeLensBar();
+    showEvidence();
     $('hudBig').textContent = FOCUS_TITLE[state.focus]();
     $('hudSub').textContent = hudSub(D);
     const lg = LEGEND[state.focus]().join('');
     if (lg !== lastLegend) { legendEl.innerHTML = lg; lastLegend = lg; }
+    placeLensBar();     // after the title and the legend are written: the chips go under the title as it now reads
     $('pillLens').querySelector('strong').textContent = lensName(state.lens);
     $('pillAngle').querySelector('strong').textContent = `${fix(D.theta, 1)}°`;
     if (hot30) hot30.classList.toggle('is-active', Math.abs(state.theta - 30) < 0.5);   // amber only for the live θ = 30°

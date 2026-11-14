@@ -2123,8 +2123,8 @@
       "code": "LEAN//MAP",
       "title": "Lean 声明地图",
       "title_en": "The map of Lean declarations",
-      "summary": "本书引用的 580 条冻结声明按章排开：舞台从左到右是阅读顺序（序曲、三十九章与第三十章的六节、终章、附录 A、B 与 D），每一格是 trureturing.lock.json 里的一条声明，落在中文正文第一次引用它的那一章的柱子里；绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。时间轴是阅读位置，读到哪一章，那一章的格子就落定；读完正文，格数正好等于锁文件的条目数。点一格看它的种类、模块与源码行、在书中出现的每一章与附录 C 的序号；点一章的柱脚，青色的线连到那一章引用的每一条。第二十七、二十八章逐行解剖的八条定理与两张审计表各有一张卡。数据由页面目录里的 gen-data.py 从锁文件与章节生成，不手填。七张实验卡可以在第二十七、二十八章与附录 C 里单独引用。",
-      "summary_en": "The 580 frozen declarations the book cites, laid out by chapter: from left to right the stage follows the reading order (prelude, thirty-nine chapters with the six sections of Chapter 30, coda, Appendices A, B and D), and each cell is one entry of trureturing.lock.json, placed in the column of the chapter whose Chinese text cites it first; green cells are theorems (kind theorem in the lock), grey ones definitions, and hollow ones are reached by inline links only. The rail is the reading position: as a chapter is read its cells land, and at the end of the main text the number of cells equals the number of entries in the lock. Click a cell for its kind, module and source line, every chapter that cites it and its Appendix C entry; click the foot of a column and cyan lines run to everything that chapter cites. The eight theorems Chapters 27 and 28 dissect line by line and their two audit tables each have a card. The data is generated from the lock and the chapters by gen-data.py in the page's folder, never typed by hand. Each of the seven experiment cards can be cited on its own from Chapters 27 and 28 and Appendix C.",
+      "summary": "本书引用的 590 条冻结声明按章排开：舞台从左到右是阅读顺序（序曲、三十九章与第三十章的六节、终章、附录 A、B 与 D），每一格是 trureturing.lock.json 里的一条声明，落在中文正文第一次引用它的那一章的柱子里；绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。时间轴是阅读位置，读到哪一章，那一章的格子就落定；读完正文，格数正好等于锁文件的条目数。点一格看它的种类、模块与源码行、在书中出现的每一章与附录 C 的序号；点一章的柱脚，青色的线连到那一章引用的每一条。第二十七、二十八章逐行解剖的八条定理与两张审计表各有一张卡。数据由页面目录里的 gen-data.py 从锁文件与章节生成，不手填。七张实验卡可以在第二十七、二十八章与附录 C 里单独引用。",
+      "summary_en": "The 590 frozen declarations the book cites, laid out by chapter: from left to right the stage follows the reading order (prelude, thirty-nine chapters with the six sections of Chapter 30, coda, Appendices A, B and D), and each cell is one entry of trureturing.lock.json, placed in the column of the chapter whose Chinese text cites it first; green cells are theorems (kind theorem in the lock), grey ones definitions, and hollow ones are reached by inline links only. The rail is the reading position: as a chapter is read its cells land, and at the end of the main text the number of cells equals the number of entries in the lock. Click a cell for its kind, module and source line, every chapter that cites it and its Appendix C entry; click the foot of a column and cyan lines run to everything that chapter cites. The eight theorems Chapters 27 and 28 dissect line by line and their two audit tables each have a card. The data is generated from the lock and the chapters by gen-data.py in the page's folder, never typed by hand. Each of the seven experiment cards can be cited on its own from Chapters 27 and 28 and Appendix C.",
       "path": "lean-declaration-map/",
       "thumbnail": "lean-declaration-map/thumb.jpg",
       "status": "live",
@@ -3832,6 +3832,136 @@
         },
         {
           "gid": "D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        }
+      ]
+    },
+    {
+      "id": "comparison-oisc-engine",
+      "path": "comparison-oisc-engine/",
+      "title": "ORTHO//CMP 宇宙单指令比较引擎",
+      "title_en": "ORTHO//CMP cosmic comparison engine",
+      "status": "live",
+      "added": "2026-11-14",
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/GramRealizability.gram_realizability"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        }
+      ],
+      "code": "ORTHO//CMP",
+      "summary": "四个场景、一条时间轴：两个没有坐标的八槽 ±1 字逐槽比较，相同的槽累成同 s = cos θ，不同的槽撑开异 a = sin θ，平行四边形律给出两部分之和恒为 4；在 a ≠ 0 时两向比较的乘积 s² − κa² 只在 κ = −1 处落在 (1, 0)（从而对一切比较角保住单位预算）；八个字两两比较 28 次，半正定的格拉姆表经谱分解显影为三维的盒子，d² = 2(1 − G)；公平平方把 |u|²|v|² 拆成同² 与楔²，预算圆改写成闵可夫斯基间隔与光锥；装不下的正交残差立为新轴，有限位宽的前缀查表留下逃逸对，自比较 xₙ₊₁ = cos xₙ 收向 θ* ≈ 0.739。",
+      "summary_en": "Four scenes on one rail: two coordinate-free 8-slot ±1 words compared slot by slot, equal slots building the sameness s = cos θ and unequal ones the difference a = sin θ, which the parallelogram law keeps at a total of 4; for a ≠ 0 the two-way product s² − κa² lands on (1, 0) only at κ = −1 (preserving 1 across every comparison angle); eight words compared in 28 pairs give a positive semidefinite Gram table whose spectral embedding is a box in three dimensions with d² = 2(1 − G); fairness squaring splits |u|²|v|² into sameness² and wedge², and the budget circle is rewritten as the Minkowski interval with its light cone; an unclosed orthogonal residual stands up as a new axis, a finite-width prefix lookup leaves escape pairs, and the self-comparison xₙ₊₁ = cos xₙ closes in on θ* ≈ 0.739.",
+      "thumbnail": "comparison-oisc-engine/thumb.jpg",
+      "tags": [
+        "两两比较",
+        "格拉姆几何",
+        "正交残差",
+        "有限查表"
+      ],
+      "tags_en": [
+        "Pairwise comparison",
+        "Gram geometry",
+        "Orthogonal residual",
+        "Finite lookup"
+      ],
+      "theory": [
+        {
+          "label": "第 32 章 · 宇宙单指令比较引擎与零背景比较公理",
+          "label_en": "Chapter 32 · The cosmic comparison engine and the zero-background comparison axiom",
+          "href": "../zh/ch32-unified-field-and-meta-unification.html#sec-ch32-oisc-comparison-engine",
+          "href_en": "../en/ch32-unified-field-and-meta-unification.html#sec-ch32-oisc-comparison-engine"
+        }
+      ]
+    },
+    {
+      "id": "spherical-trihedron-cell",
+      "code": "ORTHO//CELL",
+      "title": "球面三面角原胞 · 正交一次与正交两次是同一块小弧面体的两个投影",
+      "title_en": "The spherical trihedron cell · orthogonal once and twice as two shadows of one small curved solid",
+      "summary": "单位球面上的直角三面角原胞 ΔT_ε：O、转点 B = e₂、A(ε) = (sin ε, cos ε, 0)、C(ε) = (0, cos ε, sin ε)。沿棱 OB 看，两面墙收成两条腿，一次的弧 AC 满足 cos c = cos²ε、c < √2 ε；沿墙走两步在 B 处拐 90°，墙旋子之积 U₂₃U₁₂ 多出 −sin²(ε/2) e₁e₃。球面帽比平直削面鼓出角超 Ω = 2 arctan(tan²(ε/2)) ≈ ε²/2，绕 A → B → C → A 搬运的箭头转回 Ω；det G = sin⁴ε，体积砖 sin²ε，共面两步 det G = 0。六张实验卡可单独引用。",
+      "summary_en": "The right-angled trihedron cell ΔT_ε on the unit sphere: O, the pivot B = e₂, A(ε) = (sin ε, cos ε, 0), C(ε) = (0, cos ε, sin ε). Down the ridge OB the walls collapse to two legs and the once arc AC has cos c = cos²ε, c < √2 ε; two steps along the walls turn 90° at B, and the wall rotors multiply to U₂₃U₁₂ with an extra −sin²(ε/2) e₁e₃. The cap bulges beyond the flat cut by the excess Ω = 2 arctan(tan²(ε/2)) ≈ ε²/2, an arrow carried round A → B → C → A comes back turned by Ω; det G = sin⁴ε, the volume brick sin²ε, and the coplanar two-step has det G = 0. Six experiment cards can be cited on their own.",
+      "path": "spherical-trihedron-cell/",
+      "thumbnail": "spherical-trihedron-cell/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-14",
+      "tags": [
+        "球面三角",
+        "角超",
+        "旋子",
+        "格拉姆行列式",
+        "平行移动"
+      ],
+      "tags_en": [
+        "spherical triangle",
+        "spherical excess",
+        "rotor",
+        "Gram determinant",
+        "parallel transport"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 · 无穷小球面三面角原胞",
+          "label_en": "Chapter 34 · The infinitesimal spherical trihedron cell",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-infinitesimal-spherical-trihedron",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-infinitesimal-spherical-trihedron"
+        },
+        {
+          "label": "第九章 · 初始结构与有限旋转字",
+          "label_en": "Chapter 9 · initial structure and finite rotation words",
+          "href": "../zh/ch09-axes-and-state-addressing.html#sec-finite-axis-words",
+          "href_en": "../en/ch09-axes-and-state-addressing.html#sec-finite-axis-words"
+        },
+        {
+          "label": "第十章 · 球面转序与贝里立体角",
+          "label_en": "Chapter 10 · spherical order and the Berry solid angle",
+          "href": "../zh/ch10-gram-geometry-and-order.html#sec-spherical-order-and-berry",
+          "href_en": "../en/ch10-gram-geometry-and-order.html#sec-spherical-order-and-berry"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
         },
         {
           "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
