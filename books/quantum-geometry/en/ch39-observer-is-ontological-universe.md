@@ -716,6 +716,36 @@ $$
 The entropy bound is the usual Shannon bound for $R$ positive numbers summing to $1$. If $m=0$ or $n=0$, then $R=1$ and the entropy is zero; at $m=n=1$, the nonzero part recovers the matrices in [@ex-ch39-p2e-positive-ket-handcalculation]. This calculation uses actual class counts without requiring their closed forms or substituting stationary probabilities. At fixed $K$, it bounds the cut entropy uniformly for this positive equal-amplitude family. It proves no entropy limit or bound independent of both $K$ and the cut lengths, and identifies no physical ground state or relation to Rauzy-boundary dimension. These counts carry no phase information. Whether changed phases preserve this spectrum requires a separate check; the joint sign change in the preceding example changes it.
 :::
 
+::: {.example #ex-ch39-p2e-exact-rank title="Exact Schmidt rank from short words to saturation"}
+Continue the paper derivation for the positive equal-amplitude state in [@ex-ch39-p2e-finite-kernel], and set $p=\min(m,K-1)$ and $q=\min(n,K-1)$. The class of left words with exactly $r$ trailing ones is nonempty precisely for $0\le r\le p$: use $0^{m-r}1^r$ when $r<m$, and the all-ones word when $r=m<K$; the empty word has $r=0$. On the right, $1^s0^{n-s}$ similarly realizes every $0\le s\le q$. Removing the zero rows and columns therefore leaves the coefficient kernel
+
+$$
+C_{\mathrm{occ}}=Z^{-1/2}D_A T D_B,
+\qquad T_{rs}=\mathbf 1_{\{r+s<K\}},
+$$
+
+where both $D_A=\operatorname{diag}(\sqrt{a_0},\ldots,\sqrt{a_p})$ and $D_B=\operatorname{diag}(\sqrt{b_0},\ldots,\sqrt{b_q})$ are invertible. Its rank is the rank of this $(p+1)\times(q+1)$ zero–one matrix.
+
+Write $v_r$ for row $r$ of $T$, with column coordinates $0,\ldots,q$. The zeroth row $v_0$ is all ones, and for $1\le r\le p$ the successive differences are
+
+$$
+v_r-v_{r-1}=
+\begin{cases}
+-e_{K-r},&K-r\le q,\\
+0,&K-r>q.
+\end{cases}
+$$
+
+Since $1\le K-r$, the nonzero differences occupy distinct nonzero column coordinates. There are $h=\max(0,p+q-K+1)$ of them. Taking differences and telescoping back shows that the row space is exactly the span of $v_0$ and these $h$ coordinate vectors. Column zero first forces the coefficient of $v_0$ to vanish in any linear relation; the remaining coordinates then force every other coefficient to vanish. Thus the original pure state has Schmidt rank
+
+$$
+R=1+\max(0,p+q-K+1).
+$$
+
+This gives exact finite-length boundaries: $R=K$ precisely when $m,n\ge K-1$, and $R=1$ precisely when $m=0$, $n=0$, or $m+n<K$. For two nonempty sides, this specified state becomes entangled exactly when the forbidden-word constraint can cross the cut, namely $m+n\ge K$. Its positive spectrum has $R$ entries: rank one gives zero entropy, whereas at higher rank every entry is strictly below one and the entropy is strictly positive. Full rank alone does not make those entries equal; whether the entropy reaches $\ln K$ still depends on the preceding spectrum. This derivation adds no Lean verification and establishes no entropy limit or physical ground-state conclusion.
+:::
+
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** In condensed-matter and atomic-physics literature, the order-$K = 2$ `NoAdjacentOnes` Hilbert space arises in two celebrated many-body settings: first, the topological Fibonacci-anyon "golden chain" of A. E. Feiguin et al. (*Phys. Rev. Lett.* **98**, 2007, 160409), where the fusion rule $\tau \times \tau = \mathbf{1} + \tau$ makes fusion-space dimensions grow as Fibonacci numbers; second, van der Waals $1/r^6$ Rydberg blockade arrays (modeled theoretically by I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301, and probed experimentally on a 51-atom quantum simulator by H. Bernien et al., *Nature* **551**, 2017, 579–584). Two scope boundaries apply whenever citing these physical realizations: first, nearest-neighbor pairwise Rydberg blockade forbids adjacent excitations $|11\rangle$ ($K = 2$, the PXP subspace), whereas simply extending pairwise blockade range forbids *all* pairs within distance $R_b$ (eliminating `101` along with `111`) and **does not** by itself enforce the $K > 2$ "no $K$ consecutive ones" constraint—realizing a $K > 2$ $K$-Bonacci subspace requires a dedicated multi-body $K$-local interaction; second, neither the anyon fusion chain nor a finite-blockade Rydberg Hamiltonian is formally identical to the exact zero-amplitude isometric `directContract` encoder of [@thm-ch39-p2e-direct-encoder-ranks].
 :::
