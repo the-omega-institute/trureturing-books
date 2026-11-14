@@ -11,7 +11,7 @@ theorem in trureturing.lock.json.
 import json
 import re
 
-from _coda import ROOT, ZH
+from _book_stats import DATA
 
 SIZE = (480, 230)
 ALT = {
@@ -26,30 +26,14 @@ ALT = {
 
 
 def tally():
-    lean = lit = open_ = 0
-    for f in sorted(ZH.glob("*.md")):
-        if f.name == "SUMMARY.md":
-            continue
-        lines = f.read_text(encoding="utf-8").splitlines()
-        for i, line in enumerate(lines):
-            m = re.match(r":::\s*\{\.(\w+)", line)
-            if not m:
-                continue
-            kind = m.group(1)
-            if kind in ("theorem", "lemma", "proposition", "corollary") and "lean=" in line:
-                lean += 1
-            elif kind in ("remark", "example") and ("文献结果" in line or (i + 1 < len(lines) and "文献结果" in lines[i + 1])):
-                lit += 1
-            elif kind in ("conjecture", "problem"):
-                open_ += 1
-    return lean, lit, open_
+    counts = DATA['environments']
+    return counts['lean_verified'], counts['literature'], counts['conjecture'] + counts['problem']
 
 
 def draw(fig):
     t = fig.t
     lean, lit, open_ = tally()
-    decls = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))["declarations"]
-    theorems = sum(1 for d in decls.values() if d.get("kind") == "theorem")
+    theorems = DATA['kinds'].get('theorem', 0)
     assert lean > lit > open_ > 0 and theorems >= 1
     x0, x1 = 128, 418
     scale = (x1 - x0) / max(lean, lit, open_)

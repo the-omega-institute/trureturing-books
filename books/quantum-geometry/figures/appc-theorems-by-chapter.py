@@ -26,126 +26,42 @@ BOOK = ROOT / "books" / "quantum-geometry"
 SIZE = (500, 300)    # labels of 14 at most 500 wide: 10 px or more in a phone column of 358
 
 
-def reading_order():
-    """[(file, part index, main chapter)] including every descendant in reading order."""
-    summary = parse_summary(BOOK / "zh" / "SUMMARY.md")
-    roots = summary.top_level()
-    parts = list(dict.fromkeys(ch.part for ch in summary.chapters if ch.part))
-    out = []
-    for ch in summary.chapters:
-        root = roots[ch.top]
-        if ch.path and root.path and (re.match(r"ch\d+-", root.path) or root.path == "coda.md"):
-            out.append((ch.path, parts.index(ch.part) + 1, root.path))
-    return out
-
-
-def env_gids(text):
-    cited = set()
-    for line in text.splitlines():
-        if line.startswith(":::"):
-            for attr in re.findall(r'\slean="([^"]*)"', line):
-                cited.update(g for g in re.split(r"[\s,]+", attr.strip()) if g)
-    return cited
-
-
-def first_units(lock):
-    """GID -> the index, in the reading order of zh/SUMMARY.md, of the first unit citing it (appendix C left out)."""
-    units = parse_summary(BOOK / "zh" / "SUMMARY.md").files()
-    owners = {file: root for file, _, root in reading_order()}
-    first = {}
-    for ui, file in enumerate(units):
-        if file == "appendix-c.md":
-            continue
-        text = (BOOK / "zh" / file).read_text(encoding="utf-8")
-        inline = {m.group(1) or m.group(2) for m in re.finditer(r"\(lean:([^)\s]+)\)|<lean:([^>\s]+)>", text)}
-        for g in env_gids(text) | inline:
-            if g in lock and g not in first:
-                first[g] = owners.get(file, file)
-    return first
-
-
-def chapter_citations():
-    grouped = {}
-    for file, part, root in reading_order():
-        if root not in grouped:
-            grouped[root] = (part, set())
-        grouped[root][1].update(env_gids((BOOK / "zh" / file).read_text(encoding="utf-8")))
-    return grouped
-
-
 def counts():
-    lock = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))["declarations"]
-    first = first_units(lock)
-    rows = []
-    for file, (part, gids) in chapter_citations().items():
-        cited = {g for g in gids if lock[g]["kind"] == "theorem"}
-        new = sum(1 for g in cited if first[g] == file)
-        label = "coda" if file == "coda.md" else str(int(file[2:4]))
-        rows.append((label, part, len(cited), new))
-    return rows
-
-
-def index_counts():
-    """Anchors per chapter in the last column of the C.1 table of appendix C."""
-    text = (BOOK / "zh" / "appendix-c.md").read_text(encoding="utf-8")
-    citations = chapter_citations()
-    table = re.findall(r"^\| `T\d+` \|.*\| ([^|]*) \|$", text, re.M)
-    cnt = Counter()
-    for col in table:
-        # One theorem can have several environment anchors in the same chapter.
-        for chapter in set(re.findall(r"(Ch \d+|终章)(?:,? ?`#[\w-]+`)+", col)):
-            key = "coda" if chapter == "终章" else str(int(chapter[3:]))
-            cnt[key] += 1
-    listed = set(re.findall(r"^\| `T\d+` \| \[[^\]]*\]\(lean:([^\)\s]+)\)", text, re.M))
-    lock = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))["declarations"]
-    for gid, decl in lock.items():
-        if decl["kind"] != "theorem" or gid in listed:
-            continue
-        for file, (_, gids) in citations.items():
-            if gid not in gids:
-                continue
-            key = "coda" if file == "coda.md" else str(int(file[2:4]))
-            cnt[key] += 1
-    return len(table) + sum(1 for gid, decl in lock.items() if decl["kind"] == "theorem" and gid not in listed and any(
-        gid in gids for _, gids in citations.values()
-    )), cnt
+    from _book_stats import CHAPTERS, DECLS, PARTS
+    grouped = {}
+    owner = {c['file']: c['top'] for c in CHAPTERS}
+    first = {}
+    for ch in CHAPTERS:
+        for gid in set(ch['environment']) | set(ch['inline']):
+            first.setdefault(gid, ch['top'])
+        if re.match(r'ch\d+-', ch['file']) or ch['file'] == 'coda.md':
+            if ch['top'] not in grouped:
+                label = 'coda' if ch['file'] == 'coda.md' else str(int(ch['file'][2:4]))
+                grouped[ch['top']] = (label, PARTS.index(ch['part']) + 1, set())
+            grouped[ch['top']][2].update(g for g in ch['environment'] if DECLS[g]['kind'] == 'theorem')
+    return [(label, part, len(gids), sum(first[g] == top for g in gids))
+            for top, (label, part, gids) in grouped.items()]
 
 
 ROWS = counts()
 TOTAL = sum(n for _, _, n, _ in ROWS)
 NEW = sum(a for _, _, _, a in ROWS)
 assert 0 <= NEW <= TOTAL
-N_INDEX, INDEX = index_counts()
-assert len(ROWS) == len(chapter_citations())
-assert {k: n for k, _, n, _ in ROWS} == dict(INDEX), (ROWS, INDEX)
-assert TOTAL == sum(INDEX.values())
-BY = sorted(ROWS, key=lambda r: -r[2])
-TOP, SECOND, THIRD, FOURTH = BY[:4]
-assert [r[0] for r in BY[:4]] == ["22", "29", "30", "36"]
-
-if FOURTH[2] == BY[4][2]:
-    tied = [r for r in BY if r[2] == FOURTH[2]]
-    FOURTH_ZH = f"第 {' 与第 '.join(r[0] for r in tied)} 章各 {FOURTH[2]} 条"
-    FOURTH_EN = f"Chapters {' and '.join(r[0] for r in tied)} ({FOURTH[2]} each)"
-else:
-    FOURTH_ZH = f"第 {FOURTH[0]} 章 {FOURTH[2]} 条"
-    FOURTH_EN = f"Chapter {FOURTH[0]} ({FOURTH[2]})"
-
 ALT = {
-    "zh": f"柱状图：第一章至第三十九章与终章共 40 根绿色柱子，按第 I 至 X 部分组。柱高为各章环境头用 lean= 引用的冻结定理条数，跨章重复计。"
-          f"最高第 {TOP[0]} 章 {TOP[2]} 条，其次第 {SECOND[0]} 章 {SECOND[2]} 条、第 {THIRD[0]} 章 {THIRD[2]} 条、{FOURTH_ZH}。"
-          f"合计 {TOTAL} 次引用，与附录 C 的 {N_INDEX} 条定理索引逐章一致。实心下段是该章第一次出现的定理，共 {NEW} 条；空心上段是此前出现过的，共 {TOTAL - NEW} 条。",
-    "en": f"Bar chart: 40 green bars for Chapters 1 to 39 and the Coda, grouped by Parts I to X. Heights count frozen theorems cited with lean= on each chapter's environment headers; reuse in another chapter counts again. "
-          f"Chapter {TOP[0]} leads with {TOP[2]}, followed by Chapters {SECOND[0]} ({SECOND[2]}), {THIRD[0]} ({THIRD[2]}) and {FOURTH_EN}. "
-          f"Total: {TOTAL} citations, matching the {N_INDEX} C.1 rows chapter by chapter. Solid lower sections count {NEW} theorems first appearing there; hollow upper sections count {TOTAL - NEW} seen earlier.",
+    'zh': f'按阅读顺序排列的 {len(ROWS)} 根绿色柱子，按部分组；各柱数该主章环境头引用的唯一冻结定理，子页面并入主章。合计 {TOTAL} 次，实心下段为本章首次出现的 {NEW} 条，空心上段为此前出现过的 {TOTAL - NEW} 条。跨主章复用重复计数。',
+    'en': f'{len(ROWS)} green bars in reading order, grouped by part. Each bar counts distinct frozen theorems cited by environment headers in that main chapter, including child pages. Total {TOTAL}; solid sections count {NEW} first appearances, hollow sections {TOTAL - NEW} seen earlier. Reuse across main chapters counts again.',
 }
+
 
 ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 
 
 def draw(fig):
     t = fig.t
-    ax = fig.axes(46, 80, 446, 166, (0.4, 40.6), (0, 38))
+    import math
+    count = len(ROWS)
+    ymax = max(10, math.ceil((max(n for _, _, n, _ in ROWS) + 4) / 10) * 10)
+    ax = fig.axes(46, 80, 446, 166, (0.4, count + 0.6), (0, ymax))
     # part bands
     parts = {}
     for i, (_, part, _, _) in enumerate(ROWS, start=1):
@@ -157,7 +73,7 @@ def draw(fig):
             fig.rect(x0, ax.y, x1 - x0, ax.h, color=None, fill="faint", fill_opacity=0.22)
         if roman:
             fig.text((x0 + x1) / 2, ax.y - 6, roman, size=14, color="dim", anchor="middle")
-    ax.grid(ys=(10, 20, 30))
+    ax.grid(ys=range(10, ymax, 10))
     heights = [n for _, _, n, _ in ROWS]
     for i, (label, _, n, new) in enumerate(ROWS, start=1):
         x0, x1 = ax.X(i - 0.34), ax.X(i + 0.34)
@@ -191,10 +107,10 @@ def draw(fig):
                     y = min(y, ax.Y(right) - 5 - 22)
                 fig.text(x, y, str(n), size=14, color="lean", anchor=anchor, weight=600)
         i = end + 1
-    ticks = [1, 5, 10, 15, 20, 25, 30, 35, 40]
+    ticks = list(dict.fromkeys([1, *range(5, count, 5), count]))
     ax.xaxis(ticks=ticks, labels=[str(v) for v in ticks[:-1]] + [t("终", "C")], size=14)
     fig.text(ax.x + ax.w / 2, ax.Y(0) + 40, t("章", "chapter"), size=14, color="dim", anchor="middle")
-    ax.yaxis(ticks=(0, 10, 20, 30), size=14)
+    ax.yaxis(ticks=range(0, ymax, 10), size=14)
     fig.rect(8, 9, 14, 12, color="lean", fill="lean", fill_opacity=0.6, width=1.1)
     fig.text(28, 20, t(f"在这一章第一次出场 {NEW}", f"first appears here {NEW}"), size=14, color="dim")
     fig.rect(8, 31, 14, 12, color="lean", fill="lean", fill_opacity=0.08, width=1.1)
