@@ -1167,6 +1167,7 @@
   /** Move the quantity on the rail (pauses the clock). */
   function setRail(t) { leave(); clock.pause(); clock.set(clamp(t, 0, clock.max)); }
   function setScene(sc) {
+    dragging = null;
     S.scene = sc;
     document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(sc); });
     const D = SC[sc];

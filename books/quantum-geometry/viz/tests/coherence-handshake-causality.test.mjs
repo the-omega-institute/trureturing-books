@@ -531,6 +531,20 @@ await page.click('[data-lang-set="zh"]'); await settle(page);
   await wrap.context().close();
 }
 
+/* ---------- changing scenes ends the active pointer drag ---------- */
+{
+  await set({ scene: 'paradox-cancel', tau: 0.25 });
+  const at = await LAB(() => window.__HANDSHAKE_LAB__.at('loop')), errorsBefore = T.errors.length;
+  await page.mouse.move(...at); await page.mouse.down();
+  await page.keyboard.press('3'); await settle(page);
+  const tau = (await state()).params.tau;
+  await page.mouse.move(at[0] + 40, at[1] + 10); await page.mouse.up(); await settle(page);
+  const after = await state();
+  check('drag: switching scenes while the pointer is held cancels the old handle',
+    after.scene === 'feynman-stationary' && near(after.params.tau, tau) && T.errors.length === errorsBefore,
+    T.errors.slice(errorsBefore).join(' | '));
+}
+
 /* ---------- presets, rail, keys, language, motion, touch ---------- */
 {
   const seen = [];
