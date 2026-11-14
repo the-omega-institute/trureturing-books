@@ -37,7 +37,10 @@ check('stage code uses no open-problem color', !/P\.warn|palette\.warn|--warn|--
 check('shared scripts only', await page.evaluate(()=>[...document.scripts].map(s=>s.getAttribute('src')).join()==='../assets/shell.js,../assets/kit.js,main.js'));
 const registry=JSON.parse(fs.readFileSync(path.join(DIR,'..','visualizations.json'),'utf8')).visualizations;
 const entry=registry.find(v=>v.id===ID);
-check('registry ends in triadic, horizon, stereographic order',registry.slice(-3).map(v=>v.id).join()==='triadic-nameless-sandbox,uncompleted-horizon-sandbox,stereographic-relativization-sandbox');
+const idx=id=>registry.findIndex(v=>v.id===id);
+check('registry preserves triadic, horizon, stereographic chapter order',
+  idx('triadic-nameless-sandbox')>=0&&idx('uncompleted-horizon-sandbox')>=0&&idx('stereographic-relativization-sandbox')>=0&&
+  idx('triadic-nameless-sandbox')<idx('uncompleted-horizon-sandbox')&&idx('uncompleted-horizon-sandbox')<idx('stereographic-relativization-sandbox'));
 check('live bilingual §38.7 registry and all five titled presets',entry.status==='live'&&entry.chapter===38&&entry.section==='38.7'&&entry.presets.join()===CARDS.join()&&CARDS.every(c=>entry.preset_titles[c].zh&&entry.preset_titles[c].en));
 await T.goto(BOOK,ID,'?lang=en');await settle(page);
 check('default: calm divergence, θ=0.65', (await state()).scene===CARDS[0]&&near((await state()).theta,0.65)&&!(await state()).playing);

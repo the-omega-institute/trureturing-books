@@ -1,7 +1,9 @@
 /* 舞台尺寸与语义色沿用共享主题。 */
 #stage { container-type: inline-size; }
-#cv { cursor: grab; touch-action: none; }
-#cv:active { cursor: grabbing; }
+/* 只有三维体积砖可拖动转视角；平面卡片让触摸滚动穿过画布。 */
+.stage:not(.still) #cv { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active { cursor: grabbing; }
+.stage.still #cv { cursor: default; touch-action: auto; }
 .hud-tl .big, .hud-tl .sub, .tau, .tag { text-transform: none; }
 .hud-tl .big { color: var(--sigma); }
 :root:not([data-figure]):not([data-shot]):not([data-thumb-mode]) .lab .center > #stage { min-height: max(400px, var(--hud-min-height, 0px), var(--plot-min-height, 0px)); }
@@ -15,7 +17,8 @@ dl.ro .key dd { color: var(--violet); }
 #stageLabels .cyan { color: var(--cyan); }
 #stageLabels .slate { color: var(--dim); }
 #stageLabels .amber { color: var(--amber); }
-#angleHandle { position: absolute; width: 32px; height: 32px; border: 2px solid var(--amber); border-radius: 50%; background: var(--sheet); color: var(--amber); transform: translate(-50%, -50%); pointer-events: auto; cursor: ew-resize; touch-action: none; }
+#angleHandle { position: absolute; z-index: 3; width: 32px; height: 32px; padding: 0; border: 2px solid var(--amber); border-radius: 50%; background: var(--sheet); color: var(--amber); text-transform: none; transform: translate(-50%, -50%); pointer-events: auto; cursor: ew-resize; touch-action: none; user-select: none; -webkit-user-select: none; }
+#angleHandle[hidden] { display: none; }
 #catalog { position: absolute; z-index: 2; font-family: var(--font-data); }
 .catalog-title { text-align: center; font-size: 11px; color: var(--sigma); margin-bottom: 5px; }
 #matrix { display: grid; gap: 2px; }

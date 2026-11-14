@@ -4047,6 +4047,108 @@
       ]
     },
     {
+      "id": "berry-sector-path-sandbox",
+      "code": "BERRY//PATH",
+      "title": "贝里扇锥体积、同点异相与路径积分选路",
+      "title_en": "Berry Sector Volume, Fiber Lift, and Path-Integral Selection",
+      "summary": "品红弧顶与实心扇锥包住青色弦四面体；同点路径抬升在紫色纤维上留下异相。生成树与基本回路区分规范选择和不变和乐，离散重叠链趋向立体角相位，双路径束与科纽螺线并置驻相相长和偏航相消。",
+      "summary_en": "A magenta cap and solid sector enclose the cyan chord tetrahedron; paths to the same endpoint retain distinct phases on a violet fiber. A tree and fundamental loop separate gauge choice from invariant holonomy. Discrete overlaps approach solid-angle phase, while paired bundles and Cornu spirals compare phase locking with cancellation.",
+      "path": "berry-sector-path-sandbox/",
+      "thumbnail": "berry-sector-path-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.6",
+      "presets": [
+        "sector-volume",
+        "hopf-fiber-lift",
+        "stokes-wilson-duality",
+        "pancharatnam-fan",
+        "feynman-stationary"
+      ],
+      "preset_titles": {
+        "sector-volume": {
+          "zh": "弧顶表面积与扇锥体积：A_cap = Ω = 3 V_sector",
+          "en": "Cap Area and Solid Sector Cone: A_cap = Ω = 3 V_sector"
+        },
+        "hopf-fiber-lift": {
+          "zh": "同点异相：霍普夫 S¹ 纤维上的两条路径抬升",
+          "en": "Same Base Point, Distinct Phases: Two Lifts on the Hopf S¹ Fiber"
+        },
+        "stokes-wilson-duality": {
+          "zh": "路径—相位对偶：威尔逊和乐配对与生成树锚定分类",
+          "en": "Path–Phase Duality: Wilson Holonomy Pairing and Tree-Anchored Classification"
+        },
+        "pancharatnam-fan": {
+          "zh": "离散巴格曼扇形剖分：N 步重叠链向立体角相位的收敛",
+          "en": "Discrete Bargmann Fan Triangulation: N-Step Overlap Chain to Solid-Angle Phase"
+        },
+        "feynman-stationary": {
+          "zh": "费曼路径束与科纽螺线：大圆驻相相长与偏航卷曲相消",
+          "en": "Feynman Path Bundle and Cornu Spiral: Geodesic Phase-Locking vs. Off-Path Coiling"
+        }
+      },
+      "tags": [
+        "贝里相位",
+        "扇锥体积",
+        "霍普夫纤维",
+        "规范不变性",
+        "驻相路径束"
+      ],
+      "tags_en": [
+        "Berry phase",
+        "Sector volume",
+        "Hopf fiber",
+        "Gauge invariance",
+        "Stationary-phase bundles"
+      ],
+      "theory": [
+        {
+          "label": "LEAN ✓ · 三点 Bargmann–Bloch 恒等式、有限重叠链分解、圆周双覆盖的截面障碍与历史抬升、命名生成树输运及锚定相位分类；六条冻结声明各自支持其陈述。",
+          "label_en": "LEAN ✓ · Triple Bargmann–Bloch identity, finite overlap-chain factorization, circle-double-cover section obstruction and history lift, named-tree transport and anchored phase classification; each frozen statement supports its own claim.",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html"
+        },
+        {
+          "label": "ARGUED · Girard 球面角超；三维散度／Stokes 推导 A_cap=Ω=3V_sector；Berry–Pancharatnam 联络给 γ_B=−Ω/2。圆周双覆盖定理不等同于 Hopf 丛定理。",
+          "label_en": "ARGUED · Girard spherical excess; the written three-dimensional divergence/Stokes derivation A_cap=Ω=3V_sector; the Berry–Pancharatnam connection gives γ_B=−Ω/2. Circle-double-cover results are distinct from Hopf-bundle results.",
+          "href": "https://doi.org/10.1098/rspa.1984.0023"
+        },
+        {
+          "label": "NUM · 独立计算弦四面体体积、球面立体角、规范回路乘积、纬圈内积及 Π_N 的模长和连续分支相位。",
+          "label_en": "NUM · Direct computation of chord-tetrahedron volume, spherical solid angle, gauge-loop product, latitude overlap, and the modulus and continuous-branch phase of Π_N.",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html"
+        },
+        {
+          "label": "MODEL · 紫色柱展开局部 Hopf 相位；41 条等权折线测地路径以 exp(ik_eff[L−L(0)]) 叠加，科纽型相量链展示驻相相长与偏航卷曲相消，不代表完整传播子。",
+          "label_en": "MODEL · The violet column unwraps local Hopf phase. Forty-one equally weighted broken geodesics sum exp(ik_eff[L−L(0)]); Cornu-type phasor chains illustrate stationary-phase reinforcement and off-path cancellation, rather than a full propagator.",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        }
+      ]
+    },
+    {
       "id": "uncompleted-horizon-sandbox",
       "code": "HORIZON//UNCOMPLETED",
       "title": "未完成的地平线 · 对角逃逸与二生三自举",

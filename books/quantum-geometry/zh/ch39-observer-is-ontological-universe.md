@@ -1116,7 +1116,70 @@ $$
 B_a=[a,a+\ell-1]\cap[1,N],\qquad M=N+\ell-1.
 $$
 
-即使两个截断区间相同，也保留它们各自的索引。每个位点恰在 $\ell$ 个块内：包含 $u$ 的索引正是 $u-\ell+1,\ldots,u$。令 $E_B$ 表示固定块外各位后，按合法字的均匀条件分布刷新整个块，并定义
+即使两个截断区间相同，也保留它们各自的索引。每个位点恰在 $\ell$ 个块内：包含 $u$ 的索引正是 $u-\ell+1,\ldots,u$。
+
+先把一次条件刷新写成实际合法字上的矩阵。对任意有限位点集 $B\subseteq[1,N]$，补集均在 $[1,N]$ 内取。令 $Z=\#W_N=z_N>0$（全零字合法），并对 $x,y\in W_N$ 定义
+
+$$
+\begin{aligned}
+\mathcal A_B(x)&=\{y\in W_N:y|_{B^c}=x|_{B^c}\},\\
+m_B(x)&=\#\mathcal A_B(x)>0,\\
+T_B(x,y)&=\frac{\mathbf1_{\{y\in\mathcal A_B(x)\}}}{m_B(x)},\\
+(E_Bf)(x)&=\sum_{y\in W_N}T_B(x,y)f(y).
+\end{aligned}
+$$
+
+因为 $x\in\mathcal A_B(x)$，分母非零。给定整个外部 $x|_{B^c}$，纤维的概率为 $m_B(x)/Z$，其中每个完整字的条件概率恰为 $(1/Z)/(m_B(x)/Z)=1/m_B(x)$。所以 $T_B$ 正是固定全部块外数据后的均匀合法字刷新；限制到 $B$ 就给出块内更新律。
+
+相同外部数据把 $W_N$ 分成互不相交的非空纤维。若 $y\in\mathcal A_B(x)$，则 $\mathcal A_B(y)=\mathcal A_B(x)$ 且 $m_B(y)=m_B(x)$；若二者不在同一纤维，两向矩阵元都为零。因此 $T_B$ 是非负实对称矩阵，每行把质量均分给该行所在纤维，每列之和也由对称性等于 $1$。特别地，联合律 $\pi(x)T_B(x,y)$ 的两个边缘都精确等于原来的均匀律：
+
+$$
+\begin{aligned}
+\sum_yT_B(x,y)&=1, &\sum_xT_B(x,y)&=1,\\
+\sum_y\pi(x)T_B(x,y)&=\frac1Z,
+&\sum_x\pi(x)T_B(x,y)&=\frac1Z.
+\end{aligned}
+$$
+
+对每个这样的纤维 $C$，记 $\bar f_C=(\#C)^{-1}\sum_{x\in C}f(x)$。$E_Bf$ 在 $C$ 上恒为 $\bar f_C$，再次平均不变，故 $E_B^2=E_B$。对任意复值 $f,g$，按纤维分组有限和得到
+
+$$
+\begin{aligned}
+\langle f,E_Bg\rangle_\pi
+&=\frac1Z\sum_C(\#C)\overline{\bar f_C}\,\bar g_C\\
+&=\langle E_Bf,g\rangle_\pi,\\
+\langle f,E_Bf\rangle_\pi
+&=\frac1Z\sum_C(\#C)|\bar f_C|^2\ge0.
+\end{aligned}
+$$
+
+所以 $E_B$ 自伴、正半定，且为投向纤维上常值函数的正交投影。这些性质来自实际纤维平均。相应的剩余能量也可逐纤维直接算出：展开复模平方并使用 $\sum_{x\in C}f(x)=(\#C)\bar f_C$，便有
+
+$$
+\begin{aligned}
+\sum_{x\in C}\overline{f(x)}(f(x)-\bar f_C)
+&=\sum_{x\in C}|f(x)|^2
+-\frac{\left|\sum_{x\in C}f(x)\right|^2}{\#C}\\
+&=\sum_{x\in C}|f(x)-\bar f_C|^2\\
+&=\frac1{2\#C}\sum_{x,y\in C}|f(x)-f(y)|^2.
+\end{aligned}
+$$
+
+最后一步同样只是展开有限和；交叉项以复共轭成对合并为实部。条件方差在这里定义为 $\operatorname{Var}(f\mid B^c)=E_B(|f-E_Bf|^2)$，使用复模平方。把上式对所有纤维求和并除以全局字数 $Z$，得到
+
+$$
+\begin{aligned}
+\operatorname{Re}\langle f,(I-E_B)f\rangle_\pi
+&=\frac1{2Z}\sum_x\sum_yT_B(x,y)|f(x)-f(y)|^2\\
+&=\frac1Z\sum_x\sum_yT_B(x,y)
+|f(y)-(E_Bf)(x)|^2\\
+&=\pi\!\left[\operatorname{Var}(f\mid B^c)\right].
+\end{aligned}
+$$
+
+左侧内积本已是非负实数，也等于 $\|f-E_Bf\|_\pi^2$。一个纤维 $C$ 的外部数据出现概率是 $\#C/Z$，其条件方差为 $(\#C)^{-1}\sum_{x\in C}|f(x)-\bar f_C|^2$；这解释了取外部平均后的全局因子 $1/Z$。当 $B=\varnothing$ 时 $E_B=I$；当 $B=[1,N]$ 时 $E_Bf=\pi f$。这些纤维恒等式对 $N=0$ 的单个空字也成立，但不赋予空链激发谱隙。
+
+现在对原来的块索引定义
 
 $$
 P_B=\frac1M\sum_a E_{B_a},\qquad
@@ -1124,17 +1187,11 @@ L_B=M(P_B-I),\qquad
 \mathcal E_B(f,f)=\sum_a\pi\!\left[\operatorname{Var}(f\mid B_a^c)\right].
 $$
 
-这里每个带索引的块都有速率 $1$ 的时钟，故 $\mathcal E_B(f,f)=\langle f,-L_Bf\rangle_\pi$。
+这里每个带索引的块都有速率 $1$ 的时钟。于是 $-L_B=\sum_a(I-E_{B_a})$；逐索引相加刚证明的能量恒等式，得到 $\mathcal E_B(f,f)=\langle f,-L_Bf\rangle_\pi$。重复块值仍按其时钟索引重复计入，不另加 $1/M$。
 
 **一个边界分歧只留下有限代价。** 先取在位点 $u$ 以外处处相同的两个合法字 $x,y$（也允许 $x=y$），并为两条链选择相同的块索引。若块含 $u$，块外完全相同，刷新时可以选取相同的整个块，于是分歧消失。
 
-对远处的块，需要比较的是固定全部块外数据后，限制到块内的条件分布。更一般地，取任意有限位点集 $B\subseteq[1,N]\setminus\{u\}$，并假设每个 $v\in B$ 都满足 $|v-u|\ge K$。对 $z=x,y$，记
-
-$$
-\mathcal A_B(z)=\{w\in W_N:w|_{B^c}=z|_{B^c}\},
-$$
-
-其中补集在 $[1,N]$ 内取。因为 $\pi$ 在 $W_N$ 上均匀，固定整个外部 $z|_{B^c}$ 后，完整字在 $\mathcal A_B(z)$ 上均匀分布；再限制到 $B$，记所得分布为 $\mu_B^z$。这两个完成字集合分别含 $x,y$，所以归一化分母非零。
+对远处的块，需要比较的是固定全部块外数据后，限制到块内的条件分布。更一般地，取任意有限位点集 $B\subseteq[1,N]\setminus\{u\}$，并假设每个 $v\in B$ 都满足 $|v-u|\ge K$。对 $z=x,y$，沿用上面定义的 $\mathcal A_B(z)$；把完整字在该纤维上的均匀条件律限制到 $B$，记为 $\mu_B^z$。这两个完成字集合分别含 $x,y$，所以归一化分母非零。
 
 把 $w\in\mathcal A_B(x)$ 的第 $u$ 位改为 $y_u$，其余各位不动，得到 $\Phi(w)$。不含 $u$ 的长度 $K$ 窗口保持不变；含 $u$ 的窗口不可能遇到 $B$，故改写后该窗口与合法字 $y$ 完全一致。因此 $\Phi(w)$ 合法，且在整个 $B^c$ 上等于 $y$。反向把第 $u$ 位改回 $x_u$，便得到逆映射。这个双射还逐位保留 $B$，故总完成字数以及每个块内赋值 $b\in\{0,1\}^B$ 的完成字数都相同。于是
 
@@ -1185,7 +1242,7 @@ $$
 \operatorname{Lip}(P_Bg)\le\left(1-\frac1M\right)\operatorname{Lip}(g).
 $$
 
-每个 $E_B$ 都是 $L^2(\pi)$ 中的正交条件投影，故 $P_B$ 自伴。非常数特征函数 $g$ 的 Lipschitz 半范数正且有限；若 $P_Bg=\mu g$，上式便给出 $|\mu|\le1-1/M$，并排除了特征值 $1$ 的额外特征函数。因此 $-L_B$ 的非常数谱至少为 $1$。按其正交特征分解，对所有复值函数都有
+上面的纤维计算已证明每个 $E_B$ 都是 $L^2(\pi)$ 中的正交条件投影，故 $P_B$ 自伴。非常数特征函数 $g$ 的 Lipschitz 半范数正且有限；若 $P_Bg=\mu g$，上式便给出 $|\mu|\le1-1/M$，并排除了特征值 $1$ 的额外特征函数。因此 $-L_B$ 的非常数谱至少为 $1$。按其正交特征分解和已证明的能量恒等式，对所有复值函数都有
 
 $$
 \operatorname{Var}_\pi(f)\le\mathcal E_B(f,f).

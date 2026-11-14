@@ -40,6 +40,10 @@ const registry=JSON.parse(fs.readFileSync(path.join(DIR,'..','visualizations.jso
 check('registry: live, bilingual, chapter 38.6 and all five cards',registry.status==='live'&&registry.title_en&&registry.chapter===38&&registry.section==='38.6'&&registry.presets.join()===CARDS.join());
 await T.goto(BOOK,ID,'?lang=en'); await settle(page);
 check('default full laboratory opens on bootstrap without playing',(await state()).scene==='bootstrap-ledger'&&!(await state()).playing);
+for(const card of ['bootstrap-ledger','lawvere-godel']) {
+  await pick(card);
+  check(`${card}: stage wheel leaves page scrolling available`,await page.$eval('#stage',el=>el.dispatchEvent(new WheelEvent('wheel',{deltaY:120,bubbles:true,cancelable:true})))===true);
+}
 await pick('bootstrap-ledger');
 let lastDet=null;
 for(const epsilon of [5,15,30,45,55,90,120,155,175]) {
@@ -57,11 +61,27 @@ for(const M of [2,5,12])for(const k of [1,3,6]) {
   check(`ledger M=${M}, k=${k}: enumerated new edges and positive net`,s.deltaPi===added.length&&s.resolved===k&&s.net===added.length-k&&s.net>0&&Number(await page.locator('#roDelta').innerText())===added.length);
 }
 await pick('bootstrap-ledger');
+const handleAt55=await page.locator('#angleHandle').boundingBox();
+await range('epsilon',120);
+const handleAt120=await page.locator('#angleHandle').boundingBox();
+check('angle handle position follows epsilon',Math.abs(handleAt120.x-handleAt55.x)>1);
+await range('epsilon',55);
 await page.locator('#angleHandle').scrollIntoViewIfNeeded();
 const handle=await page.locator('#angleHandle').boundingBox(), before=await state();
 await page.mouse.move(handle.x+handle.width/2,handle.y+handle.height/2);await page.mouse.down();
 await page.mouse.move(handle.x+handle.width/2+35,handle.y+handle.height/2,{steps:5});await page.mouse.up();await settle(page);
 check('stage angle handle changes geometry',(await state()).epsilon>before.epsilon+10&&(await state()).detG!==before.detG);
+const beforeCancel=await state();
+await page.dispatchEvent('#angleHandle','pointerdown',{pointerId:7,clientX:100});await settle(page);
+await page.dispatchEvent('#angleHandle','pointermove',{pointerId:7,clientX:120});await settle(page);
+check('angle drag stays active across redraws',(await state()).epsilon>beforeCancel.epsilon);
+await page.dispatchEvent('#angleHandle','pointercancel',{pointerId:7});await settle(page);
+const cancelledLabels=await page.locator('#stageLabels').innerText();
+await range('epsilon',30);
+await page.dispatchEvent('#angleHandle','pointermove',{pointerId:7,clientX:150});await settle(page);
+check('pointercancel clears angle drag',(await state()).epsilon===30);
+const updatedLabels=await page.locator('#stageLabels').innerText();
+check('stage labels follow epsilon after pointercancel',updatedLabels!==cancelledLabels&&updatedLabels.includes('sin ε e_{D+1} · 0.500'));
 
 function auditCatalog(s) {
   const functions=[];for(let word=0;word<2**s.n;word++)functions.push(Array.from({length:s.n},(_,x)=>Math.floor(word/2**x)%2).join(''));
@@ -152,7 +172,8 @@ for(const [width,height,mode] of [[1440,900,''],[1081,500,''],[390,844,''],[334,
   const p=await T.open(BOOK,ID,`?lang=${lang}&preset=bootstrap-ledger${mode}`,{viewport:{width,height},reducedMotion:'reduce'});
   const bad=[];
   for(const scheme of ['dark','light']) {
-    await p.emulateMedia({colorScheme:scheme});
+    await p.emulateMedia({colorScheme:scheme});await settle(p);
+    check(`night-console palette ${lang} ${width}×${height} ${scheme}: no palette override`,await p.evaluate(()=>document.documentElement.dataset.trPalette===undefined));
     for(const card of CARDS){
       await pick(card,p);await settle(p);bad.push(...(await geometryAudit(p)).map(x=>`${scheme}/${card}: ${x}`));bad.push(...await labelOverlaps(p));
       if(card==='lawvere-godel'){
