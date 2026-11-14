@@ -2,8 +2,9 @@
    Two scenes on one rail:
      · mirror: the plane of the two readings (x for A, y for B); both update at once, (x, y) ↦ (cos y, cos x).
        Beat by beat the pair may cross θ*; sampled every two beats each coordinate takes one step of
-       g = cos∘cos and closes in from one side. One round multiplies the error by about sin²θ*, the square of
-       the −sin θ* of one beat (two cosine evaluations per round).
+       g = cos∘cos and closes in from one side. Near θ* the local limiting factor of one round is sin²θ*, the
+       square of the local −sin θ* of one beat (two cosine evaluations per round); finite-step error ratios only
+       tend to these factors.
      · cut: two intervals A, B on the boundary of the upper half plane (static AdS₃ vacuum, Ryu–Takayanagi). The
        separate pair of geodesics against the connected pair; the shorter one counts. In units of c/3,
        S = ln(l/ε) per geodesic, so the crossing is d(l₁ + l₂ + d) = l₁l₂ and I = max(0, S_sep − S_conn).
@@ -192,7 +193,7 @@
       if (even) b.dot(n, h, P.sigma, 4.2, { ring: true, width: 1.6, alpha: round ? 1 : 0.55 });
       if (now) b.dot(n, h, P.amber, 3.2);
     }
-    const factor = round ? L(`每轮 ×${fix(LAM2, 3)}，一轮两次求值`, `×${fix(LAM2, 3)} a round, two evaluations each`) : L(`每拍 ×(−${fix(LAM, 3)})`, `×(−${fix(LAM, 3)}) a beat`);
+    const factor = round ? L(`局部因子：每轮 ×${fix(LAM2, 3)}，一轮两次求值`, `locally ×${fix(LAM2, 3)} a round, two evaluations each`) : L(`局部因子：每拍 ×(−${fix(LAM, 3)})`, `locally ×(−${fix(LAM, 3)}) a beat`);
     const eNow = O.xs[k] - THETA;
     b.text(NB + 0.7, 1.0, factor, ink, { align: 'right', base: 'top', size: fs, face: 'body' });
     b.text(NB + 0.7, 0.62, `n = ${k} · x − θ* = ${sgn(eNow, 4)}`, P.amber, { align: 'right', base: 'top', size: fs });
@@ -228,7 +229,7 @@
       g2.line(es.map((e, t) => (e > 0 ? [t, e] : null)), P.dim, { width: 1.2 });
       es.forEach((e, t) => e > 0 && g2.dot(t, e, t % 2 ? P.dim : P.sigma, t % 2 ? 2.4 : 4.2, t % 2 ? {} : { ring: true, width: 1.5 }));
       g2.vline(k, P.amber, { alpha: 0.6 }); if (es[k] > 0) g2.dot(k, es[k], P.amber, 4.5);
-      g2.legend([[P.dim, L('离 (θ*, θ*) 多远', 'distance to (θ*, θ*)')], [P.magenta, L('每拍 ×0.674 ＝ 每轮 ×0.454', '×0.674 a beat = ×0.454 a round'), 'dash']]);
+      g2.legend([[P.dim, L('离 (θ*, θ*) 多远', 'distance to (θ*, θ*)')], [P.magenta, L('局部参考：每拍 ×0.674 ＝ 每轮 ×0.454', 'local reference: ×0.674 a beat = ×0.454 a round'), 'dash']]);
       $('pBTitle').textContent = L('误差缩小：一轮恰是两拍', 'Shrinking: a round is exactly two beats'); $('pBMeta').textContent = es[k].toExponential(2).replace('-', '−');
       return;
     }
@@ -347,8 +348,8 @@
     connected: { scene: 'cut', l1: 1, l2: 1, at: tOf(0.2) }
   };
   const NOTES = {
-    alone: ['两人从同一个读数 0.1 出发：琥珀色的点始终在灰色对角线上，每一拍都越过 (θ*, θ*)，0.1 → 0.995 → 0.544 → 0.855……与孤立的余弦迭代一模一样，误差每拍乘约 −0.674。下方条带的横轴是余弦求值次数：每根灰色细柱是那一拍的误差 x − θ*，一上一下地交替。', 'Both start from the same reading 0.1: the amber point stays on the grey diagonal and crosses (θ*, θ*) at every beat, 0.1 → 0.995 → 0.544 → 0.855 …, exactly like the lone cosine iteration, the error multiplied by about −0.674 a beat. Along the band below, the count is cosine evaluations: each grey bar is that beat\'s error x − θ*, and they alternate up and down.'],
-    round: ['同一条轨道，每两拍取一次（空心的环）：0.1 → 0.544 → 0.656 → 0.702……全在 (θ*, θ*) 的同一侧单调逼近，每轮误差约乘 +0.454 = 0.674²。一轮含两次余弦求值：环只是“同一起点”那张卡里同一条轨道的偶数拍，同样多次余弦求值走到同一处——更稳，不是更快。下方条带里，带环的细柱落在偶数格上，全在零线下方。', 'The same orbit sampled every two beats (the hollow rings): 0.1 → 0.544 → 0.656 → 0.702 …, all on one side of (θ*, θ*), closing in monotonically, the error multiplied by about +0.454 = 0.674² a round. A round costs two cosine evaluations: the rings are just the even beats of the orbit in the “Same start” card, and the same number of cosine evaluations lands in the same place — steadier, not faster. In the band below, the ringed bars sit on the even counts, all below the zero line.'],
+    alone: ['两人从同一个读数 0.1 出发：琥珀色的点始终在灰色对角线上，每一拍都越过 (θ*, θ*)，0.1 → 0.995 → 0.544 → 0.855……与孤立的余弦迭代一模一样，在 θ* 附近误差每拍乘约 −0.674。下方条带的横轴是余弦求值次数：每根灰色细柱是那一拍的误差 x − θ*，一上一下地交替。', 'Both start from the same reading 0.1: the amber point stays on the grey diagonal and crosses (θ*, θ*) at every beat, 0.1 → 0.995 → 0.544 → 0.855 …, exactly like the lone cosine iteration; near θ* the error is multiplied by about −0.674 a beat. Along the band below, the count is cosine evaluations: each grey bar is that beat\'s error x − θ*, and they alternate up and down.'],
+    round: ['同一条轨道，每两拍取一次（空心的环）：0.1 → 0.544 → 0.656 → 0.702……全在 (θ*, θ*) 的同一侧单调逼近，在 θ* 附近每轮误差约乘 +0.454 = 0.674²。一轮含两次余弦求值：环只是“同一起点”那张卡里同一条轨道的偶数拍，同样多次余弦求值走到同一处——更稳，不是更快。下方条带里，带环的细柱落在偶数格上，全在零线下方。', 'The same orbit sampled every two beats (the hollow rings): 0.1 → 0.544 → 0.656 → 0.702 …, all on one side of (θ*, θ*), closing in monotonically; near θ* the error is multiplied by about +0.454 = 0.674² a round. A round costs two cosine evaluations: the rings are just the even beats of the orbit in the “Same start” card, and the same number of cosine evaluations lands in the same place — steadier, not faster. In the band below, the ringed bars sit on the even counts, all below the zero line.'],
     apart: ['A 从 1.5、B 从 0 出发：两条青色曲线 x = cos y 与 y = cos x 只在对角线上的 (θ*, θ*) 相交。空心的环收进这一点：A 的读数逐轮从上方单调下降，B 的读数逐轮从下方单调上升，没有别的平衡。', 'A starts at 1.5, B at 0: the cyan curves x = cos y and y = cos x meet only at (θ*, θ*) on the diagonal. The hollow rings close in on that point, A\'s reading falling monotonically from above round by round and B\'s rising from below; there is no other balance.'],
     transition: ['两段长 1 的区间从 d = 2.5 拉近：品红的是分开的两条半圆。到 d = √2 − 1 ≈ 0.414，连通的两条（间隙上的小半圆与整段上的大半圆）恰好一样长，两组都是品红。', 'Two intervals of length 1 come closer from d = 2.5: magenta is the separate pair of semicircles. At d = √2 − 1 ≈ 0.414 the connected pair (the small semicircle over the gap and the large one over the whole span) is exactly as long, and both pairs are magenta.'],
     connected: ['d = 0.2，比 0.414 更近：连通的割更短（品红），青色的纠缠楔从 A 连到 B 成为一片，领先阶互信息 ln(1/(0.2 × 2.2)) ≈ 0.82 > 0。', 'd = 0.2, closer than 0.414: the connected cut is shorter (magenta) and the cyan entanglement wedge reaches from A to B in one piece; the leading-order mutual information is ln(1/(0.2 × 2.2)) ≈ 0.82 > 0.']
