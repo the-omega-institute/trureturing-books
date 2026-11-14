@@ -30,3 +30,10 @@ academic_paper = "a4"
 
 [epub]
 embed_fonts = false
+
+# 统计索引是输出，不作为统计来源；校验只比对，构建自动刷新。
+[statistics]
+exclude = ["appendix-c.md"]
+
+[derived]
+command = ["python3", "books/quantum-geometry/sync-statistics.py"]
