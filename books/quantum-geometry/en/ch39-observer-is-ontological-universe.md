@@ -713,7 +713,7 @@ S(\rho_X)&=-\sum_{j=1}^{R}\nu_j\ln\nu_j,\\
 \end{aligned}
 $$
 
-The entropy bound is the usual Shannon bound for $R$ positive numbers summing to $1$. If $m=0$ or $n=0$, then $R=1$ and the entropy is zero; at $m=n=1$, the nonzero part recovers the matrices in [@ex-ch39-p2e-positive-ket-handcalculation]. This calculation uses actual class counts without requiring their closed forms or substituting stationary probabilities. At fixed $K$, it bounds the cut entropy uniformly for this positive equal-amplitude family. It proves no entropy limit or bound independent of both $K$ and the cut lengths, and identifies no physical ground state or relation to Rauzy-boundary dimension. These counts carry no phase information. Whether changed phases preserve this spectrum requires a separate check; the joint sign change in the preceding example changes it.
+The entropy bound is the usual Shannon bound for $R$ positive numbers summing to $1$. If $m=0$ or $n=0$, then $R=1$ and the entropy is zero; at $m=n=1$, the nonzero part recovers the matrices in [@ex-ch39-p2e-positive-ket-handcalculation]. This calculation uses actual class counts without requiring their closed forms or substituting stationary probabilities. At fixed $K$, it bounds the cut entropy uniformly for this positive equal-amplitude family. Further control in $K$ is given in [@ex-ch39-p2e-uniform-entropy]; the finite-kernel calculation alone proves no entropy limit and identifies no physical ground state or relation to Rauzy-boundary dimension. These counts carry no phase information. Whether changed phases preserve this spectrum requires a separate check; the joint sign change in the preceding example changes it.
 :::
 
 ::: {.example #ex-ch39-p2e-exact-rank title="Exact Schmidt rank from short words to saturation"}
@@ -745,6 +745,46 @@ $$
 This gives exact finite-length boundaries: $R=K$ precisely when $m,n\ge K-1$, and $R=1$ precisely when $m=0$, $n=0$, or $m+n<K$. For two nonempty sides, this specified state becomes entangled exactly when the forbidden-word constraint can cross the cut, namely $m+n\ge K$. Its positive spectrum has $R$ entries: rank one gives zero entropy, whereas at higher rank every entry is strictly below one and the entropy is strictly positive. Full rank alone does not make those entries equal; whether the entropy reaches $\ln K$ still depends on the preceding spectrum. This derivation adds no Lean verification and establishes no entropy limit or physical ground-state conclusion.
 :::
 
+
+::: {.example #ex-ch39-p2e-uniform-entropy title="Paper derivation: entanglement vanishes uniformly as the forbidden run grows"}
+Increasing the automaton's number of states need not increase the entanglement of this specified state. For the positive equal-amplitude family in [@ex-ch39-p2e-finite-kernel], a classical correlation inequality gives a bound uniform over all finite cuts. This remains a paper derivation and adds no Lean verification.
+
+Under the uniform law on binary words of length $m+n$, let $D$ mean that each half is legal, and let $E$ mean that an all-ones window of length $K$ crosses the cut. Represent a word by its set of one-positions. Then $D$ is closed under deleting positions, whereas $E$ is closed under adding them. The Harris–Kleitman inequality makes such a decreasing event and increasing event negatively correlated; this is a classical literature result (Kleitman, *Families of Non-disjoint Subsets*, [doi:10.1016/S0021-9800(66)80012-1](https://doi.org/10.1016/S0021-9800(66)80012-1), lemma on p.154). Consequently,
+
+$$
+\begin{aligned}
+\delta_{K;m,n}
+&:=\Pr(E\mid D)
+=1-\frac{z_{m+n}}{z_mz_n}\\
+&\le\Pr(E)\le d_K,
+\qquad d_K=(K-1)2^{-K}.
+\end{aligned}
+$$
+
+Here $\Pr(D)=z_mz_n/2^{m+n}>0$. Each length-$K$ window crossing the cut uses $K$ distinct positions and is all ones with uniform probability $2^{-K}$. There are at most $K-1$ such windows, so the final step is a union bound. Short or empty sides only reduce their number; with no such window, $E$ is empty.
+
+Let $\lvert u\rangle$ and $\lvert v\rangle$ be the normalized equal-amplitude superpositions of legal words on the two sides, and put $\lvert\phi\rangle=\lvert u\rangle\otimes\lvert v\rangle$. Counting their common nonzero coefficients gives
+
+$$
+|\langle\phi\mid\psi_{m,n}\rangle|^2
+=\frac{z_{m+n}}{z_mz_n}=1-\delta_{K;m,n}.
+$$
+
+If $\lambda_{\max}$ is the largest eigenvalue of the actual reduced state, the singular-value decomposition of its coefficient matrix gives $\lambda_{\max}\ge |\langle\phi\mid\psi_{m,n}\rangle|^2$: overlap with any unit product vector is at most the largest Schmidt coefficient. Thus $t:=1-\lambda_{\max}$ satisfies $0\le t\le\delta_{K;m,n}\le d_K\le1/4$. The last bound follows from $(K-1)\le2^{K-2}$ for every $K\ge2$.
+
+The preceding calculation bounds the rank by $K$, leaving at most $K-1$ other eigenvalues with total mass $t$. For $t>0$, divide these entries by $t$ and apply the usual finite-probability entropy bound; at $t=0$, use the continuous value. With $h(t)=-t\ln t-(1-t)\ln(1-t)$ and its continuous endpoint values,
+
+$$
+\begin{aligned}
+S_K(m,n)
+&\le h(t)+t\ln(K-1)\\
+&\le h(d_K)+d_K\ln(K-1)\\
+&\le (K-1)2^{-K}(1+K\ln2).
+\end{aligned}
+$$
+
+The second step uses the increase of $h$ on $[0,1/2]$ and $\ln(K-1)\ge0$. The third uses $-(1-d)\ln(1-d)\le d$ and substitutes $d_K$. The right-hand side tends to zero independently of $m,n$. Hence for every $\varepsilon>0$ there is a $K_0\ge2$, independent of the cut lengths, such that $S_K(m,n)<\varepsilon$ for every $K\ge K_0$ and every $m,n\ge0$. This concerns the specified state family: its rank can reach $K$ while the spectral mass outside its largest eigenvalue vanishes uniformly. It establishes no fixed-$K$ long-region entropy limit, specifies no physical ground state and does not resolve the relation between Rauzy-boundary dimension and entanglement scaling.
+:::
 
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** In condensed-matter and atomic-physics literature, the order-$K = 2$ `NoAdjacentOnes` Hilbert space arises in two celebrated many-body settings: first, the topological Fibonacci-anyon "golden chain" of A. E. Feiguin et al. (*Phys. Rev. Lett.* **98**, 2007, 160409), where the fusion rule $\tau \times \tau = \mathbf{1} + \tau$ makes fusion-space dimensions grow as Fibonacci numbers; second, van der Waals $1/r^6$ Rydberg blockade arrays (modeled theoretically by I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301, and probed experimentally on a 51-atom quantum simulator by H. Bernien et al., *Nature* **551**, 2017, 579–584). Two scope boundaries apply whenever citing these physical realizations: first, nearest-neighbor pairwise Rydberg blockade forbids adjacent excitations $|11\rangle$ ($K = 2$, the PXP subspace), whereas simply extending pairwise blockade range forbids *all* pairs within distance $R_b$ (eliminating `101` along with `111`) and **does not** by itself enforce the $K > 2$ "no $K$ consecutive ones" constraint—realizing a $K > 2$ $K$-Bonacci subspace requires a dedicated multi-body $K$-local interaction; second, neither the anyon fusion chain nor a finite-blockade Rydberg Hamiltonian is formally identical to the exact zero-amplitude isometric `directContract` encoder of [@thm-ch39-p2e-direct-encoder-ranks].
