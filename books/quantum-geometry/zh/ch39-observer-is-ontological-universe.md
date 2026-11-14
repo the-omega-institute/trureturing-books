@@ -640,6 +640,26 @@ $$
 其本征值 $1,0$ 各有重数 $1$，约化秩为 $1$，唯一非零施密特系数为 $1$，故 $S(\rho_X)=0$（约定 $0\ln0=0$）。这里在所有合法字上指定态，未固定首比特页，也未施加逻辑 `directContract`；前一定理则在该契约下联合选择编码器与页态，刻画可达秩与熵极值。本例不确定物理基态，也不推出一般固定 $K$ 的熵极限；后文开放问题仍然开放。
 :::
 
+::: {.example #ex-ch39-p2e-phase-counterexample title="手算：概率相同，纠缠不同"}
+沿用前例的 $m=n=1$ 与 $X\mid Y$ 切口，固定任意 $K\ge3$；合法字恰为 $00,01,10,11$。
+比较 $\lvert\psi_+\rangle=(\lvert00\rangle+\lvert01\rangle+\lvert10\rangle+\lvert11\rangle)/2$ 与 $\lvert\psi_{\mathrm{phase}}\rangle=(\lvert00\rangle+\lvert01\rangle+\lvert10\rangle-\lvert11\rangle)/2$：只将 $11$ 振幅的相位改为 $\pi$。
+两态的范数平方均为 $4(1/4)=1$，在计算基中每个字的概率均为 $1/4$。两侧按 $0,1$ 排列，后一态给出
+
+$$
+\begin{aligned}
+M_{\mathrm{phase}}&=\frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix},\\
+\rho_X&=\operatorname{Tr}_Y(\lvert\psi_{\mathrm{phase}}\rangle\langle\psi_{\mathrm{phase}}\rvert)=M_{\mathrm{phase}}M_{\mathrm{phase}}^*\\
+&=\frac14\begin{pmatrix}1+1&1-1\\1-1&1+1\end{pmatrix}=\frac{I_2}{2}.
+\end{aligned}
+$$
+
+部分迹中，右字 $y=0,1$ 对非对角元的贡献分别为 $1/4,-1/4$，恰好抵消。约化谱按重数列为 $(1/2,1/2)$（本征值 $1/2$ 的重数为 $2$），施密特系数为 $1/\sqrt2,1/\sqrt2$；自然对数下的纠缠熵为 $S(\rho_X)=-2(1/2)\ln(1/2)=\ln2$，而前例的 $\psi_+$ 给出 $0$。
+
+这个相位变化是联合受控变号操作 $\operatorname{diag}(1,1,1,-1)$，不是两个单比特局域相位操作的乘积：局域酉操作保持施密特系数，不能把 $\psi_+$ 的唯一非零施密特系数 $1$ 变成上述两个系数。
+
+因此，相同的合法字支撑、计数乃至计算基概率都不足以确定纠缠；所选正相位等幅态族仍是有意义的额外态规定。这只是有限态的纸面计算，不给出基态、物理实现或分形纠缠标度结论。
+:::
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="文献结果：斐波那契任意子黄金链与里德堡原子阻塞实验背景（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在凝聚态与原子分子光物理文献中，$K = 2$ 的禁邻 `11` 希尔伯特空间在两类著名多体系统中获得了物理实现或理论建模：其一是 A. E. Feiguin 等人提出的拓扑斐波那契任意子“黄金链”（golden chain）模型（*Phys. Rev. Lett.* **98**, 2007, 160409），其融合规则 $\tau \times \tau = \mathbf{1} + \tau$ 使有限链融合空间维数按斐波那契数增长；其二是里德堡（Rydberg）原子阵列中的偶极/范德瓦耳斯 $1/r^6$ 阻塞机制（理论建模见 I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301；51 原子量子模拟器实验见 H. Bernien et al., *Nature* **551**, 2017, 579–584）。引用这些物理背景时须注意两重边界：第一，最近邻两体里德堡阻塞刚好实现禁相邻激发 $|11\rangle$（对应 $K = 2$ 的 PXP 子空间），但单纯拉大两体阻塞半径只会禁止距离 $R_b$ 内的一切激发对（例如连 `101` 一并禁止），**并不会自动产生 $K > 2$ 的禁连续 $1^K$ 约束**——若要在物理哈密顿量中实现 $K > 2$ 的 $K$-Bonacci 子空间，必须另行设计专门的 $K$ 体局域相互作用；第二，任意子融合空间与有限阻塞比实验哈密顿量均非 [@thm-ch39-p2e-direct-encoder-ranks] 中精确零振幅等距直接编码器的形式同义物。
 :::
