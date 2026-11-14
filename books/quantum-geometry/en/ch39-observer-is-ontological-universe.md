@@ -660,6 +660,62 @@ This phase change is the joint controlled-sign operation $\operatorname{diag}(1,
 Thus identical admissible-word support, counts, and even computational-basis probabilities do not determine entanglement; the chosen positive-phase equal-amplitude family remains a meaningful additional specification of the state. This is a paper calculation for finite states, with no conclusion about ground states, physical realization, or fractal entanglement scaling.
 :::
 
+::: {.example #ex-ch39-p2e-finite-kernel title="Paper derivation: compressing the positive equal-amplitude state's reduced spectrum to K dimensions"}
+The preceding calculations extend to a finite matrix calculation for the same specified state family. This is a paper derivation, not a new Lean-verified result. Fix $K\ge2$ and any $m,n\ge0$. Let $W_L$ contain all length-$L$ binary words avoiding $1^K$, write $z_L=|W_L|$, and choose
+
+$$
+\lvert\psi_{m,n}\rangle
+=\frac1{\sqrt{Z}}\sum_{w\in W_{m+n}}\lvert w\rangle,
+\qquad Z=z_{m+n}>0.
+$$
+
+The all-zero word ensures $Z>0$. No first-bit page is fixed. Partition $W_m$ into classes $A_r$ by the length $r$ of the terminal run of ones, and $W_n$ into classes $B_s$ by the length $s$ of the initial run of ones; both lengths are $0$ for the empty word. Legality gives $0\le r,s<K$. Let $a_r=|A_r|$ and $b_s=|B_s|$ be the actual finite counts, allowing zero. For $x\in A_r$ and $y\in B_s$, concatenation is legal exactly when $r+s<K$, so
+
+$$
+Z=\sum_{r+s<K}a_r b_s.
+$$
+
+In the full computational-basis spaces of dimensions $2^m$ and $2^n$, assign each nonempty class its normalized indicator vector $u_r=\sum_{x\in A_r}|x\rangle/\sqrt{a_r}$ or $v_s=\sum_{y\in B_s}|y\rangle/\sqrt{b_s}$. Assign the zero vector to an empty class, without inverting the square root of zero. Form matrices $U,V$ from these columns and define the $K\times K$ matrix
+
+$$
+C_{rs}=\mathbf1_{\{r+s<K\}}\sqrt{\frac{a_r b_s}{Z}}.
+$$
+
+The actual state's coefficient matrix is $M_{xy}=\mathbf1_{\{xy\in W_{m+n}\}}/\sqrt Z$. Expand $UCV^*$ entry by entry: each legal $x,y$ belongs to exactly one nonempty class, and the normalization factors cancel; an illegal word or concatenation gives zero. Thus $M=UCV^*$. Distinct nonempty classes are disjoint, hence
+
+$$
+\begin{aligned}
+U^*U&=D_A=\operatorname{diag}(\mathbf1_{\{a_r>0\}}),\\
+V^*V&=D_B=\operatorname{diag}(\mathbf1_{\{b_s>0\}}),\\
+D_A C D_B&=C.
+\end{aligned}
+$$
+
+The last identity handles short words and empty classes: $U,V$ with zero columns are not isometric embeddings of the entire $K$-dimensional space. Taking the partial trace of the actual pure state now gives
+
+$$
+\begin{aligned}
+\rho_X&=MM^*=U G U^*,\qquad G=CC^*,\\
+G_{rr'}&=\frac{\sqrt{a_r a_{r'}}}{Z}
+\sum_{s=0}^{K-1-\max(r,r')}b_s.
+\end{aligned}
+$$
+
+The sum counts right words compatible with both left boundary runs. The matrix $G$ vanishes on empty left classes, while the restriction of $U$ to the coordinate space of nonempty classes is an isometric embedding. Consequently, $G$ and $\rho_X$ have the same positive eigenvalues with the same multiplicities. The right reduction has that positive spectrum too, since $C^*C$ and $CC^*$ have the same positive spectrum. If $R=\operatorname{rank}C$, the physical zero-eigenvalue multiplicities are $2^m-R$ and $2^n-R$; the auxiliary matrix $G$ instead has zero multiplicity $K-R$. These counts must be distinguished.
+
+Since $\operatorname{Tr}G=\sum_{r,s}|C_{rs}|^2=1$, list its positive eigenvalues with multiplicity as $\nu_1,\ldots,\nu_R$. The finite-cut entanglement entropy, using natural logarithms, is
+
+$$
+\begin{aligned}
+S(\rho_X)&=-\sum_{j=1}^{R}\nu_j\ln\nu_j,\\
+0\le S(\rho_X)&\le\ln R
+\le\ln\!\bigl(\min\{K,2^m,2^n\}\bigr).
+\end{aligned}
+$$
+
+The entropy bound is the usual Shannon bound for $R$ positive numbers summing to $1$. If $m=0$ or $n=0$, then $R=1$ and the entropy is zero; at $m=n=1$, the nonzero part recovers the matrices in [@ex-ch39-p2e-positive-ket-handcalculation]. This calculation uses actual class counts without requiring their closed forms or substituting stationary probabilities. At fixed $K$, it bounds the cut entropy uniformly for this positive equal-amplitude family. It proves no entropy limit or bound independent of both $K$ and the cut lengths, and identifies no physical ground state or relation to Rauzy-boundary dimension. These counts carry no phase information. Whether changed phases preserve this spectrum requires a separate check; the joint sign change in the preceding example changes it.
+:::
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** In condensed-matter and atomic-physics literature, the order-$K = 2$ `NoAdjacentOnes` Hilbert space arises in two celebrated many-body settings: first, the topological Fibonacci-anyon "golden chain" of A. E. Feiguin et al. (*Phys. Rev. Lett.* **98**, 2007, 160409), where the fusion rule $\tau \times \tau = \mathbf{1} + \tau$ makes fusion-space dimensions grow as Fibonacci numbers; second, van der Waals $1/r^6$ Rydberg blockade arrays (modeled theoretically by I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301, and probed experimentally on a 51-atom quantum simulator by H. Bernien et al., *Nature* **551**, 2017, 579–584). Two scope boundaries apply whenever citing these physical realizations: first, nearest-neighbor pairwise Rydberg blockade forbids adjacent excitations $|11\rangle$ ($K = 2$, the PXP subspace), whereas simply extending pairwise blockade range forbids *all* pairs within distance $R_b$ (eliminating `101` along with `111`) and **does not** by itself enforce the $K > 2$ "no $K$ consecutive ones" constraint—realizing a $K > 2$ $K$-Bonacci subspace requires a dedicated multi-body $K$-local interaction; second, neither the anyon fusion chain nor a finite-blockade Rydberg Hamiltonian is formally identical to the exact zero-amplitude isometric `directContract` encoder of [@thm-ch39-p2e-direct-encoder-ranks].
 :::
