@@ -3,7 +3,7 @@
 Three pictures: the split of a meeting of two unit vectors A, B into a cyan line (the shadow
 A·B = cos θ of B on A) and a magenta area (the parallelogram A∧B of size sin θ); the three
 diagnostic axes θ (line ↔ area), η (smooth ↔ polytope) and λ (outside point C ↔ inside the field)
-of §32.3, drawn as the corner of a box; and an observer moved from an outside point C into the
+of §32.6, drawn as the corner of a box; and an observer moved from an outside point C into the
 field, whose sight reaches 90° on a closed equator, the horizon.
 
 Colours follow the chapter's lab pages: cyan for lines and inner products, magenta for areas and

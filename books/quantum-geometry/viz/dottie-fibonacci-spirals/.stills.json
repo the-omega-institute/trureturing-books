@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "d33ce54ed527ed52eca7b21ce8bb8e0badcf1c12576a5e5bae6a924b4f9aabed"
+    },
+    "fig-whirl.zh.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "084f9e80201f9c792c1e2c591050cd9f8c90be8174f6ea12e76d950fd7408824"
+    },
+    "fig-pythagoras.zh.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "7e487c05eaabfd07eb6894af07ef0dd193e3cf13f66d0ebd3583ac57ba0efb87"
+    },
+    "fig-tilt.zh.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "b81a0b89feedf5979a8578352757f86e7ad85c5c249089dbc843d2d633736388"
+    },
+    "fig-zoom.zh.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "27441350513aa310f0d0343d19157eaf4d08af36e85c6b4b7a46623fd7ffb56b"
+    },
+    "fig-twin.zh.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "781d96f46e9c4051a5b89be341d3a7e2f9f834e4495a030791b463ac9c0483ec"
+    },
+    "fig-division.zh.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "8aa2b40adaab3a9533dfc447fa5c7cc306d1f5cc1027f78c68c62a2894c66ccb"
+    },
+    "fig-whirl.en.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "24108a8cb5d7610f3b028b7f465780275144b3011935f7aa63d52ff000b647d7"
+    },
+    "fig-pythagoras.en.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "d3d765b885fd0085615bba573f1d6e9e9f821b38148574932e810fe43dc8e274"
+    },
+    "fig-tilt.en.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "712318840f2cf9e939df4015df2dc282e03ad6aa8a4b4571f668d5c63f16b42c"
+    },
+    "fig-zoom.en.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "ba7c5bce2966533373e5abfaac24fbb998743343091031ed71acd07d174a7924"
+    },
+    "fig-twin.en.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "eb03795507bfe194b329b05b8f818a6e36e9603d34c4a1d23092c445caf12fb5"
+    },
+    "fig-division.en.jpg": {
+      "input": "be63e2318e7238e390c067db392affcdd6bad5d68a15665606b4ce5760daacbe",
+      "output": "c33dc9e9322eca1af59e96d1b2a7c2e3aabfdb5414730169f07d4619cade6af9"
+    }
+  }
+}

@@ -63,6 +63,12 @@
   - [30.6 Chapter Summary: The Orthogonal Convergence of Discrete Logic and Continuum Fluids](ch30-s06-summary.md)
 - [Chapter 31 The Essence of the Quantum Is Fairness: Fivefold Abolition of Geometric Privilege and Ergodic Statistical Holism](ch31-quantum-fairness.md)
 - [Chapter 32 Orthogonal Self-Referential Unified Field and Meta-Unification of Grand Foundational Programs](ch32-unified-field-and-meta-unification.md)
+  - [32.1 The Zero-Background Axiom of Comparison $\mathcal{A}_0$: Relational Extensionality, Orthogonal Parity, and Reciprocal Fairness](ch32-s01-axiom-of-comparison.md)
+  - [32.2 The Minimal Cosmic Comparison Machine: Single-Instruction-Set (OISC) Geometric Primitive](ch32-s02-oisc-comparison-engine.md)
+  - [32.3 Other Axioms as Corollaries: From the Axiom of Comparison $\mathcal{A}_0$ to Mathematical and Physical Axiom Systems](ch32-s03-axioms-as-corollaries.md)
+  - [32.4 Three Generative Laws Under Zero Background and the Machine-Verified Dual Loop](ch32-s04-generative-laws.md)
+  - [32.5 Co-Origin Derivation of Physical Fields and the Six-Domain Holographic Isomorphism Table](ch32-s05-physical-fields-and-six-domains.md)
+  - [32.6 Three-Dimensional Meta-Coordinates, the Quaternionic Golden Lattice Bridge, and Eight-Program Meta-Unification](ch32-s06-meta-unification-and-icosian-bridge.md)
 
 # Part IX Mutual Illumination — Universal Observers, Self-Referential Table Expansion, and Transcending Reincarnation
 
@@ -84,3 +90,4 @@
 - [Appendix B Clifford Algebra Cheat Sheet](appendix-b.md)
 - [Appendix C Master Index of Formalized Lean 4 Theorems and Open Problems](appendix-c.md)
 - [Appendix D Six Classical Open Quantum Puzzles and the Five-Interpretation Geometric Duel](appendix-d.md)
+- [Appendix E From the Axiom of Comparison to Mathematical and Physical Axiom Systems: Complete Deduction Chains, Intermediate-Hypothesis Audit, and Minimal Countermodels](appendix-e.md)

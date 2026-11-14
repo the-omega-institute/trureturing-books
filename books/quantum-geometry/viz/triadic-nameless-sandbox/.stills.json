@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "49df53f8ecef4a33dd29c3eaf7eddac5c72cde45b7f84377242e69a972f0ed4c"
+    },
+    "fig-bootstrap-core.zh.jpg": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "61727a273ad9bb9ab1209dcc9b349d5c1b1825ef0b0bf85642b37b09a1a92490"
+    },
+    "fig-cascade-corolla.zh.jpg": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "a515bed465b5b9a2e9a523d56d1d74f626a88dd920093523ddd9fdf7b9a18be1"
+    },
+    "fig-cyclic-triality.zh.jpg": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "302ec98bdbdfe33fc65549a8bd040abfc1424324a37cdb44baaa826085943c0d"
+    },
+    "fig-ladder-fade.zh.jpg": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "6e09edff42271f577c7334fd2240807f7b634ebb48e7aaa72ff834905702cdb7"
+    },
+    "fig-noumenon-breath.zh.jpg": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "86bae93d432f7d23a7c734fe9bf547cbe4bc44888e0430a9144126cef1899a69"
+    },
+    "fig-bootstrap-core.en.jpg": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "84ab5b72ad3efca2f01a09a8d74e455919cc7b6e24fcfecf679f7cf3791a62d2"
+    },
+    "fig-cascade-corolla.en.jpg": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "288b170391aaf9e3730c0b76301822383ebd28b9247d5d54aa6d93568168429c"
+    },
+    "fig-cyclic-triality.en.jpg": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "cedf6e501665ca956ca9ffef0b46feb4219c0fd993e1c51006e638226b28fc54"
+    },
+    "fig-ladder-fade.en.jpg": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "5d173da08766e8372b2e25c9295359adf73acbbafc9f5f14fe5a235af40d60e2"
+    },
+    "fig-noumenon-breath.en.jpg": {
+      "input": "648ae39d0cd2c3b1779823041c0bea8fc7e6b163da78612143a3c0b0b4c91282",
+      "output": "0d7aae09334f8e20bad512904bb9d7e8a4d2148b8dfbf7f4b101a4adee57678f"
+    }
+  }
+}

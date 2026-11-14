@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "9e53429193bb8efa1cdcc87e8c863a3ab54ac0dced6bf179853751229c71aa20"
+    },
+    "fig-cube.zh.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "1b3ed701a713f9b6bc32635ac116956bfb0556a481b3b2a1f1c571682603b55d"
+    },
+    "fig-icosians.zh.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "3f03f0c607676bd90ea824ab0db0e44956374d247eaa70e5bec88632721e0dee"
+    },
+    "fig-e8.zh.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "5f6f5e081a98ef8be40354efbab258272fa8854dc5800cac4d7b919ddf17947d"
+    },
+    "fig-fold.zh.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "c371a730f8f5bd1385595196688a6db85736fd3461335cee60ea20c0a9e8c429"
+    },
+    "fig-camps.zh.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "a05f03264330d5a3332d4378fe4339af6a25b65ac21c58926cd8793a3c5ad222"
+    },
+    "fig-crystal.zh.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "6c9052bec7dbdb276f67c0074965e912451b1924e38f837a3f6297953c5a589a"
+    },
+    "fig-cube.en.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "4830cadfb7c41d0dfea42633a8e425185221ef23520c9cafd2ee4c6e2ede3de3"
+    },
+    "fig-icosians.en.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "b912fdefa4a0a5c475c1ea4c5f1defab54af27931f82ccbc44a0269c4f333e3b"
+    },
+    "fig-e8.en.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "39d33d7bbe99b3d5feb35b48666dfedf20e0471a4087a377c816b583e5a96549"
+    },
+    "fig-fold.en.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "fbddb257a32e5a2e51db0324eb3ff532e760d913cda1f08fea2bcf2c94f71a4d"
+    },
+    "fig-camps.en.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "c1871820086ad7b7e435d02dacf12f5f571db514769c5b10bdeba92dd9db19b1"
+    },
+    "fig-crystal.en.jpg": {
+      "input": "a88cb1b1811b6a92cca9ae22498bffe288025aa7404a9acc7caf3cb45adf87b3",
+      "output": "303755ae5adc49fba26bd0f1bf8fa0dfbeaa69d81ce652416b32c7646dac1de9"
+    }
+  }
+}

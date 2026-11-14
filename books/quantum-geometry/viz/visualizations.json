@@ -2123,8 +2123,8 @@
       "code": "LEAN//MAP",
       "title": "Lean 声明地图",
       "title_en": "The map of Lean declarations",
-      "summary": "本书引用的 590 条冻结声明按章排开：舞台从左到右是阅读顺序（序曲、三十九章与第三十章的六节、终章、附录 A、B 与 D），每一格是 trureturing.lock.json 里的一条声明，落在中文正文第一次引用它的那一章的柱子里；绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。时间轴是阅读位置，读到哪一章，那一章的格子就落定；读完正文，格数正好等于锁文件的条目数。点一格看它的种类、模块与源码行、在书中出现的每一章与附录 C 的序号；点一章的柱脚，青色的线连到那一章引用的每一条。第二十七、二十八章逐行解剖的八条定理与两张审计表各有一张卡。数据由页面目录里的 gen-data.py 从锁文件与章节生成，不手填。七张实验卡可以在第二十七、二十八章与附录 C 里单独引用。",
-      "summary_en": "The 590 frozen declarations the book cites, laid out by chapter: from left to right the stage follows the reading order (prelude, thirty-nine chapters with the six sections of Chapter 30, coda, Appendices A, B and D), and each cell is one entry of trureturing.lock.json, placed in the column of the chapter whose Chinese text cites it first; green cells are theorems (kind theorem in the lock), grey ones definitions, and hollow ones are reached by inline links only. The rail is the reading position: as a chapter is read its cells land, and at the end of the main text the number of cells equals the number of entries in the lock. Click a cell for its kind, module and source line, every chapter that cites it and its Appendix C entry; click the foot of a column and cyan lines run to everything that chapter cites. The eight theorems Chapters 27 and 28 dissect line by line and their two audit tables each have a card. The data is generated from the lock and the chapters by gen-data.py in the page's folder, never typed by hand. Each of the seven experiment cards can be cited on its own from Chapters 27 and 28 and Appendix C.",
+      "summary": "本书引用的 591 条冻结声明按章排开：舞台从左到右是阅读顺序（序曲、三十九章与第三十章和第三十二章各六节、终章、附录 A、B、D 与 E），每一格是 trureturing.lock.json 里的一条声明，落在中文正文第一次引用它的那一章的柱子里；绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。时间轴是阅读位置，读到哪一章，那一章的格子就落定；读完正文，格数正好等于锁文件的条目数。点一格看它的种类、模块与源码行、在书中出现的每一章与附录 C 的序号；点一章的柱脚，青色的线连到那一章引用的每一条。第二十七、二十八章逐行解剖的八条定理与两张审计表各有一张卡。数据由页面目录里的 gen-data.py 从锁文件与章节生成，不手填。七张实验卡可以在第二十七、二十八章与附录 C 里单独引用。",
+      "summary_en": "The 591 frozen declarations the book cites, laid out by chapter: from left to right the stage follows the reading order (prelude, thirty-nine chapters with six sections each in Chapters 30 and 32, coda, Appendices A, B, D and E), and each cell is one entry of trureturing.lock.json, placed in the column of the chapter whose Chinese text cites it first; green cells are theorems (kind theorem in the lock), grey ones definitions, and hollow ones are reached by inline links only. The rail is the reading position: as a chapter is read its cells land, and at the end of the main text the number of cells equals the number of entries in the lock. Click a cell for its kind, module and source line, every chapter that cites it and its Appendix C entry; click the foot of a column and cyan lines run to everything that chapter cites. The eight theorems Chapters 27 and 28 dissect line by line and their two audit tables each have a card. The data is generated from the lock and the chapters by gen-data.py in the page's folder, never typed by hand. Each of the seven experiment cards can be cited on its own from Chapters 27 and 28 and Appendix C.",
       "path": "lean-declaration-map/",
       "thumbnail": "lean-declaration-map/thumb.jpg",
       "status": "live",
@@ -2426,15 +2426,33 @@
       ],
       "theory": [
         {
-          "label": "本书第三十二章 · §32.1–32.2",
-          "label_en": "Chapter 32 · §32.1–32.2",
-          "href": "../zh/ch32-unified-field-and-meta-unification.html",
-          "href_en": "../en/ch32-unified-field-and-meta-unification.html"
-        },
-        {
           "label": "Lean · 零光锥刚性",
           "label_en": "Lean · null-cone rigidity",
           "href": "{trureturing}/D5/S0/Certificates/MinkowskiNullConeRigidity.lean"
+        },
+        {
+          "label": "§32.4 生成律",
+          "label_en": "§32.4 Generative laws",
+          "href": "../zh/ch32-s04-generative-laws.html#sec-ch32-generative-laws",
+          "href_en": "../en/ch32-s04-generative-laws.html#sec-ch32-generative-laws"
+        },
+        {
+          "label": "§32.5 物理场",
+          "label_en": "§32.5 Physical fields",
+          "href": "../zh/ch32-s05-physical-fields-and-six-domains.html#sec-ch32-physical-fields",
+          "href_en": "../en/ch32-s05-physical-fields-and-six-domains.html#sec-ch32-physical-fields"
+        },
+        {
+          "label": "§32.5 六域综合",
+          "label_en": "§32.5 Six-domain synthesis",
+          "href": "../zh/ch32-s05-physical-fields-and-six-domains.html#sec-ch32-six-domain-synthesis",
+          "href_en": "../en/ch32-s05-physical-fields-and-six-domains.html#sec-ch32-six-domain-synthesis"
+        },
+        {
+          "label": "§32.5 零光锥、和乐与全息切面",
+          "label_en": "§32.5 Null cone, holonomy and holographic cut",
+          "href": "../zh/ch32-s05-physical-fields-and-six-domains.html#thm-ch32-null-cone-holonomy-and-holographic-cut",
+          "href_en": "../en/ch32-s05-physical-fields-and-six-domains.html#thm-ch32-null-cone-holonomy-and-holographic-cut"
         }
       ],
       "lean": [
@@ -2711,8 +2729,8 @@
       "code": "ORTHO//COMPASS",
       "title": "元统一罗盘与黄金四元数桥",
       "title_en": "The meta-unification compass and the golden quaternion bridge",
-      "summary": "第三十二章下半篇的两个画面：§32.3 的三根诊断轴（阶数 θ、分辨率 η、观察者 λ）张成立方体，§32.4 的八家统一纲领按总表原话落在各轴的三段之一（本书的比较诊断坐标），时间轴逐个读四大阵营；二元二十面体群 2I 的 120 个单位四元数在 ℤ[φ] 里精确算出，加上 φ⁻¹·2I 恰得 Q(q) = 2(a + b) = 2 的 240 个根，两两的 B 为整数、各有 56 个邻居、格拉姆行列式为 1，纯虚的 60 个从 E∥ 转到 E⊥ 时里外两层对调。",
-      "summary_en": "Two pictures from the second half of Chapter 32: the three diagnostic axes of §32.3 (grade θ, resolution η, observer λ) span a cube in which the eight unification programmes of §32.4 sit in one of three bands of each axis, by the words of the table (the book's comparative diagnostic coordinates), and the rail reads the four camps one by one; the 120 unit quaternions of the binary icosahedral group 2I are computed exactly in ℤ[φ], and with φ⁻¹·2I they give exactly the 240 vectors with Q(q) = 2(a + b) = 2, every B between them an integer, 56 neighbours each and Gram determinant 1, while the 60 pure ones swap shells when the projection turns from E∥ to E⊥.",
+      "summary": "第三十二章下半篇的两个画面：§32.6 的三根诊断轴（阶数 θ、分辨率 η、观察者 λ）张成立方体，§32.6 的八家统一纲领按总表原话落在各轴的三段之一（本书的比较诊断坐标），时间轴逐个读四大阵营；二元二十面体群 2I 的 120 个单位四元数在 ℤ[φ] 里精确算出，加上 φ⁻¹·2I 恰得 Q(q) = 2(a + b) = 2 的 240 个根，两两的 B 为整数、各有 56 个邻居、格拉姆行列式为 1，纯虚的 60 个从 E∥ 转到 E⊥ 时里外两层对调。",
+      "summary_en": "Two pictures from the second half of Chapter 32: the three diagnostic axes of §32.6 (grade θ, resolution η, observer λ) span a cube in which the eight unification programmes of §32.6 sit in one of three bands of each axis, by the words of the table (the book's comparative diagnostic coordinates), and the rail reads the four camps one by one; the 120 unit quaternions of the binary icosahedral group 2I are computed exactly in ℤ[φ], and with φ⁻¹·2I they give exactly the 240 vectors with Q(q) = 2(a + b) = 2, every B between them an integer, 56 neighbours each and Gram determinant 1, while the 60 pure ones swap shells when the projection turns from E∥ to E⊥.",
       "path": "meta-unification-compass/",
       "thumbnail": "meta-unification-compass/thumb.jpg",
       "status": "live",
@@ -2739,15 +2757,21 @@
       ],
       "theory": [
         {
-          "label": "本书第三十二章 · §32.3–32.4",
-          "label_en": "Chapter 32 · §32.3–32.4",
-          "href": "../zh/ch32-unified-field-and-meta-unification.html",
-          "href_en": "../en/ch32-unified-field-and-meta-unification.html"
-        },
-        {
           "label": "Lean · 黄金不动点",
           "label_en": "Lean · the golden fixed point",
           "href": "{trureturing}/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean"
+        },
+        {
+          "label": "§32.6 元坐标与二十面体四元数",
+          "label_en": "§32.6 Meta-coordinates and icosians",
+          "href": "../zh/ch32-s06-meta-unification-and-icosian-bridge.html#sec-ch32-meta-coordinates-and-icosians",
+          "href_en": "../en/ch32-s06-meta-unification-and-icosian-bridge.html#sec-ch32-meta-coordinates-and-icosians"
+        },
+        {
+          "label": "§32.6 元统一",
+          "label_en": "§32.6 Meta-unification",
+          "href": "../zh/ch32-s06-meta-unification-and-icosian-bridge.html#sec-ch32-meta-unification",
+          "href_en": "../en/ch32-s06-meta-unification-and-icosian-bridge.html#sec-ch32-meta-unification"
         }
       ],
       "lean": [
@@ -2852,10 +2876,10 @@
           "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-dottie-fibonacci-spirals"
         },
         {
-          "label": "第三十二章 §32.1 · 正交自指统一场中的双螺旋分工",
-          "label_en": "Chapter 32 §32.1 · Dual-spiral division of labor in the unified field",
-          "href": "../zh/ch32-unified-field-and-meta-unification.html#sec-ch32-generative-laws",
-          "href_en": "../en/ch32-unified-field-and-meta-unification.html#sec-ch32-generative-laws"
+          "label": "第三十二章 §32.4 · 正交自指统一场中的双螺旋分工",
+          "label_en": "Chapter 32 §32.4 · Dual-spiral division of labor in the unified field",
+          "href": "../zh/ch32-s04-generative-laws.html#sec-ch32-generative-laws",
+          "href_en": "../en/ch32-s04-generative-laws.html#sec-ch32-generative-laws"
         },
         {
           "label": "终章 · 卡西尼 ±1 接缝与黄金比的赫尔维茨界",
@@ -3897,8 +3921,8 @@
         {
           "label": "第 32 章 · 宇宙单指令比较引擎与零背景比较公理",
           "label_en": "Chapter 32 · The cosmic comparison engine and the zero-background comparison axiom",
-          "href": "../zh/ch32-unified-field-and-meta-unification.html#sec-ch32-oisc-comparison-engine",
-          "href_en": "../en/ch32-unified-field-and-meta-unification.html#sec-ch32-oisc-comparison-engine"
+          "href": "../zh/ch32-s02-oisc-comparison-engine.html#sec-ch32-oisc-comparison-engine",
+          "href_en": "../en/ch32-s02-oisc-comparison-engine.html#sec-ch32-oisc-comparison-engine"
         }
       ]
     },
@@ -3965,6 +3989,60 @@
         },
         {
           "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        }
+      ]
+    },
+    {
+      "id": "triadic-nameless-sandbox",
+      "code": "TRIAD//NOUMENON",
+      "title": "三元自举流形与去名相化沙盘",
+      "title_en": "Triadic Self-Bootstrapping & De-nominalization Sandbox",
+      "summary": "三元对称原胞：青色二态、琥珀比较与品红投影平权共处，递归生长 1 → 4 → 10 胞；语言切刀撤去幕布、投影线与标签，实体连续回融为黄金准周期呼吸。五张实验卡可独立引用。",
+      "summary_en": "A symmetric triadic cell gives equal standing to a cyan dyad, amber comparison and magenta projection. Boundary recursion grows 1 → 4 → 10 cells; withdrawing the linguistic cut dissolves screens, rays and tags into golden quasiperiodic breathing. Five independently citable experiments.",
+      "path": "triadic-nameless-sandbox/",
+      "thumbnail": "triadic-nameless-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-14",
+      "tags": [
+        "三元自举",
+        "格拉姆几何",
+        "递归花冠",
+        "去名相化",
+        "黄金呼吸"
+      ],
+      "tags_en": [
+        "Triadic bootstrap",
+        "Gram geometry",
+        "Recursive corolla",
+        "De-nominalization",
+        "Golden breathing"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 · 三元自举与去名相化",
+          "label_en": "Chapter 34 · Triadic bootstrap and beyond names",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-bootstrap-and-beyond-names",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-bootstrap-and-beyond-names"
+        },
+        {
+          "label": "§32.1 比较公理",
+          "label_en": "§32.1 Axiom of comparison",
+          "href": "../zh/ch32-s01-axiom-of-comparison.html#sec-ch32-axiom-of-comparison",
+          "href_en": "../en/ch32-s01-axiom-of-comparison.html#sec-ch32-axiom-of-comparison"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.moving_axis_invariance"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
         }
       ]
     }

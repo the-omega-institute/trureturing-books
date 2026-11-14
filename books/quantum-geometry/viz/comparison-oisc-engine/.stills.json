@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "b601a87f471a57d868437045af307941a5ce00807413c2899f90c0fb4e131c04"
+    },
+    "fig-oisc.zh.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "bb0fdcb4560fc697a57611057f1c31918c02dc7855f53af08b46f8e9bda1db68"
+    },
+    "fig-uncertainty.zh.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "174b47ea8935a5c2db0b84315f09509325114614874016644e09ac242ad88d10"
+    },
+    "fig-emergence.zh.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "28c7c1d39667329547242d477cccbb5205d2689a1bdd21c7f0e3bb663be0aced"
+    },
+    "fig-time-axis.zh.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "6fcf4740e9f36404562bae26a4542cf9c63f8e06640863674293f9f1fa0984cd"
+    },
+    "fig-lookup.zh.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "cf85bb9c86292593893f2bb9bba3c6efc0754249e844654eb9a3508d2e9d686c"
+    },
+    "fig-budget-cone.zh.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "57338ef4fa963c85dd7b75fa998bdc29e3dd5b48c7edd575cdd908d4a8b56ecd"
+    },
+    "fig-oisc.en.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "89beabceb31e852bd1ae2c0747362508ec20ee10b2dc40d34799d6f0832f2dfc"
+    },
+    "fig-uncertainty.en.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "06c297be74d5da498f8b2a7a547b605ab3c794fa150b16ff75908e5139ff85b1"
+    },
+    "fig-emergence.en.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "ac75e72b670100732dfaf24224101ebd1ad5b1e34e8f4af19caadfa48e607f98"
+    },
+    "fig-time-axis.en.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "4b5a2da7ab22ba5af6d50546489c160374061cf2ac2782f53f738577c19f398d"
+    },
+    "fig-lookup.en.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "cff7593ce6e7032efa3a5b80b6fa934812893b92f020da85631eed0ad71f4ea6"
+    },
+    "fig-budget-cone.en.jpg": {
+      "input": "ef73db92f128ab5b71e9840b9f9af1e316367c43ebe5c335d35c274c95585f0a",
+      "output": "e149004bfd4a74f7debf81b5d1200e15c0ecd6d6c5ef0316093e7d2ac8bbc92c"
+    }
+  }
+}

@@ -639,14 +639,14 @@ section: "Part VIII · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 31.4 · Theorem 32.1</p>
+  <p class="kicker">Theorem 31.4 · Theorem 32.10</p>
   <h2 class="t">Each round turns <em>2θ</em>; two quarter turns <em>reverse</em></h2>
 <TheoremCard class="compact mt-s" label="Theorem 31.4" title="Uniform amplification turns in a plane (item 2)" gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" cite="thm-ch31-horizon-landauer-ergodic-fairness">
 
 Let $J$, $C$ be isometries, $P$ a projection, and let $U = CJ$ have success overlap $p$: $(PU)^\dagger(PU) = p\,I$ with $0 < p < 1$; put $\theta = \arcsin\sqrt p$ and let $W$, $B$ be the success and failure parts. Then for every $n$, $(\operatorname{iterate}(U, P))^n\,U = \sin\bigl((2n + 1)\theta\bigr)\,W + \cos\bigl((2n + 1)\theta\bigr)\,B$.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Theorem 32.1" title="A skew-adjoint unitary squares to minus one (item 1)" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" cite="thm-ch32-generative-self-reference-and-zeckendorf">
+<TheoremCard class="compact mt-s" label="Theorem 32.10" title="A skew-adjoint unitary squares to minus one (item 1)" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" cite="thm-ch32-generative-self-reference-and-zeckendorf">
 
 Let $R$ be a finite square complex matrix with $R^\dagger = -R$ and $R R^\dagger = I_n$. Then $R^2 = -I_n$.
 
