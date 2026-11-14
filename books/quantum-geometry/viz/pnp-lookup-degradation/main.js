@@ -1284,9 +1284,10 @@
     } else if (!TRV.thumbMode) { pt = 56; pb = 48; }
     const pl = 16, pr = 16;
     const inner = { x: pl, y: pt, w: Math.max(40, W - pl - pr), h: Math.max(40, H - pt - pb) };
-    /* side: a stacked band too short for two readable panels one above the other (each under 110px: a cited card in a
-       narrow column; a phone's lab stage is taller) puts them side by side, each the full height of the band */
-    side = stacked && !TRV.thumbMode && inner.h < 230;
+    /* side: a stacked cited card (TRV.figure) always puts the two panels side by side, each the full height of the
+       band; any other stacked band too short for two readable panels one above the other (each under 110px) falls
+       back to the same layout, while a phone's taller lab stage keeps them top and bottom */
+    side = stacked && !TRV.thumbMode && (TRV.figure || inner.h < 230);
     lastLayout = { side, band: [pt, H - pb], panels: [] };
 
     if (S.scene === 'morph') {
