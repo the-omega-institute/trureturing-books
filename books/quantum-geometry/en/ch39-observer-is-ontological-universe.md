@@ -1126,7 +1126,28 @@ $$
 
 Each indexed block has its own rate-one clock, so $\mathcal E_B(f,f)=\langle f,-L_Bf\rangle_\pi$.
 
-**One boundary disagreement has a bounded cost.** Start with two legal words $x,y$ differing only at site $u$, and choose the same block index for both chains. If the block contains $u$, their exteriors agree, and identical whole-block refreshes erase the disagreement. If no length-$K$ window meets both $u$ and the block, the two conditional laws agree, so a synchronous refresh creates no new disagreement.
+**One boundary disagreement has a bounded cost.** Start with two legal words $x,y$ agreeing at every site other than $u$ (allowing $x=y$), and choose the same block index for both chains. If the block contains $u$, their exteriors agree, and identical whole-block refreshes erase the disagreement.
+
+For a distant block, we must compare the laws restricted to the block after conditioning on every exterior bit. More generally, take any finite set of sites $B\subseteq[1,N]\setminus\{u\}$ with $|v-u|\ge K$ for every $v\in B$. For $z=x,y$, write
+
+$$
+\mathcal A_B(z)=\{w\in W_N:w|_{B^c}=z|_{B^c}\},
+$$
+
+where the complement is taken in $[1,N]$. Since $\pi$ is uniform on $W_N$, conditioning on the entire exterior $z|_{B^c}$ gives the uniform law on the full words in $\mathcal A_B(z)$. Denote its restriction to $B$ by $\mu_B^z$. The two completion sets contain $x$ and $y$, respectively, so their normalizing denominators are nonzero.
+
+For $w\in\mathcal A_B(x)$, replace its bit at $u$ by $y_u$ and leave all other bits unchanged, obtaining $\Phi(w)$. A length-$K$ window avoiding $u$ is unchanged. A window containing $u$ cannot meet $B$, so after the replacement it agrees throughout with the legal word $y$. Thus $\Phi(w)$ is legal and agrees with $y$ on the entire exterior $B^c$. Replacing the bit at $u$ by $x_u$ gives the inverse map. This bijection preserves every bit in $B$, so it preserves both the total number of completions and the number with each assignment $b\in\{0,1\}^B$. Consequently,
+
+$$
+\begin{aligned}
+\mu_B^x(b)
+&=\frac{\#\{w\in\mathcal A_B(x):w|_B=b\}}{\#\mathcal A_B(x)}\\
+&=\frac{\#\{w\in\mathcal A_B(y):w|_B=b\}}{\#\mathcal A_B(y)}
+=\mu_B^y(b).
+\end{aligned}
+$$
+
+We may therefore draw the same assignment from this common block law for a synchronous refresh, creating no new disagreement. If $x_u\ne y_u$, the refreshed full words still differ at the exterior site $u$, and their full-word conditional laws are unequal. The argument only needs that no length-$K$ window meets both $u$ and $B$; the distance condition guarantees this. The set $B$ need not be contiguous, nonempty, or on one side of $u$. The cases $B=\varnothing$, $x=y$, and short chains $N<K$ are included (short chains have no such windows).
 
 There are at most $2R$ remaining affected blocks excluding $u$: a right block starts at one of $u+1,\ldots,u+R$, and a left block ends at one of $u-R,\ldots,u-1$. Truncation only reduces these index ranges. When $N<\ell$, coincident whole-chain blocks still count separately among the blocks containing $u$.
 
