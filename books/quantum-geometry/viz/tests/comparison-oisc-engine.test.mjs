@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Browser suite: quality gate + independent checks of the page's claims.
-import { session, stageFirstChecks, settle, until, playsAfter, openStill, cjkLeftovers, overflowX } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, stageView, settle, until, playsAfter, openStill, cjkLeftovers, overflowX } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'comparison-oisc-engine';
 const T = await session(), { check, page } = T;
@@ -119,8 +119,9 @@ for (const lang of ['zh', 'en']) {
   await settle(p);
   for (const c of ['oisc', 'emergence', 'uncertainty', 'time-axis', 'lookup', 'budget-cone']) {
     await p.click(`[data-preset="${c}"]`); await settle(p);
-    const r = await p.evaluate(() => { const a = document.querySelector('.hud-tl').getBoundingClientRect(), b = document.querySelector('#sceneChips').getBoundingClientRect(); return { hit: a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top, a: [a.top, a.bottom], b: [b.top, b.bottom] }; });
-    check(`phone ${lang} ${c}: title clear of the scene chips`, !r.hit, JSON.stringify(r));
+    // Compare visible text with individual buttons: their enclosing boxes also contain empty space.
+    const view = await stageView(p, '#stage');
+    check(`phone ${lang} ${c}: title clear of the scene chips`, view.hud.length === 0, view.hud.join(' | '));
     check(`phone ${lang} ${c}: no sideways scrolling`, (await overflowX(p)) <= 0);
   }
   await p.context().close();
