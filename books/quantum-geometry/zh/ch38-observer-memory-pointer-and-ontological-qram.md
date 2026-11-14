@@ -238,7 +238,7 @@ $$
 为了让读者亲手触摸“把页表自己的基址写进零号槽位”如何将 `p = *p` 化为最具体的有限离散代数，我们在下框中完整推演一座 $N$ 槽位页目录的多级解引用算术：
 
 ::: {.theorem #thm-ch38-recursive-page-table-walk title="递归页表遍历：数据读取、叶表内省与根闭包" lean="D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk"}
-设 `Address` 为任意类型，`lookup : Address \to \operatorname{Fin} N \to Address` 为页表读取映射，并取根地址、叶地址、数据地址以及索引 `selfSlot`、`i`、`j`。若
+设 `Address` 为任意类型，`lookup : Address → Fin N → Address` 为页表读取映射，并取根地址、叶地址、数据地址以及索引 `selfSlot`、`i`、`j`。若
 
 $$
 \operatorname{lookup}(root,selfSlot)=root,\qquad
