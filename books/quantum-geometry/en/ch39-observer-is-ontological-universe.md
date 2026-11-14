@@ -1084,7 +1084,113 @@ $$
 \operatorname{Var}_\pi(f)\le C_K\mathcal E(f,f).
 $$
 
-For example, a heat-bath gap bound $c_K>0$ would yield the full gap bound $\min\{1,2c_K\}$; conversely, a full gap bound $d_K>0$ would yield a heat-bath gap bound $d_K/2$. Neither the existence nor a value of such a constant uniform in length is proved here. The remaining question is thus precisely a uniform Poincaré estimate for this same hard-constraint heat-bath chain with open boundaries. Transfer-matrix mixing along word length controls spatial correlations; without a further theorem relating the two dynamics, it cannot replace this estimate in refresh time.
+For example, a heat-bath gap bound $c_K>0$ would yield the full gap bound $\min\{1,2c_K\}$; conversely, a full gap bound $d_K>0$ would yield a heat-bath gap bound $d_K/2$. This reduction alone proves neither the existence nor a value of such a constant uniform in length. The next example supplies an explicit uniform Poincaré estimate for this same hard-constraint heat-bath chain with open boundaries. Transfer-matrix mixing along word length controls spatial correlations; without a further theorem relating the two dynamics, it cannot replace this estimate in refresh time.
+:::
+
+::: {.example #ex-ch39-p2e-uniform-parent-gap title="Paper derivation: a uniform gap at fixed forbidden-run length"}
+A single refresh changes only one bit, but a zero interrupts every all-ones constraint crossing it. Refreshing several adjacent bits together lets a disagreement in the boundary conditions stop propagating at the first common zero. We turn this mechanism into an explicit bound independent of chain length. This is a paper derivation and adds no Lean verification.
+
+Retain the model of [@ex-ch39-p2e-heatbath-scale], fix an integer $K\ge2$, and put
+
+$$
+R=K-1,\qquad \ell=2K-1,\qquad C_K=\ell^2 2^\ell.
+$$
+
+For every $N\ge1$, we will prove
+
+$$
+\begin{aligned}
+\operatorname{Var}_\pi(f)&\le C_K\mathcal E(f,f)
+&&\text{for every }f:W_N\to\mathbb C,\\
+\lambda_{K,N}&\ge C_K^{-1},\\
+\Delta_{K,N}&\ge 2C_K^{-1}
+=\frac{2^{2-2K}}{(2K-1)^2}.
+\end{aligned}
+$$
+
+The constant does not depend on $N$. It is not asserted to be optimal or uniform in $K$.
+
+**First refresh blocks.** Number the sites $1,\ldots,N$. For every integer $a=2-\ell,\ldots,N$, retain the indexed nonempty interval
+
+$$
+B_a=[a,a+\ell-1]\cap[1,N],\qquad M=N+\ell-1.
+$$
+
+Even when two truncated intervals coincide, retain their separate indices. Each site belongs to exactly $\ell$ blocks: those containing $u$ have indices $u-\ell+1,\ldots,u$. Let $E_B$ refresh the entire block from the uniform legal-word conditional law with all exterior bits fixed, and define
+
+$$
+P_B=\frac1M\sum_a E_{B_a},\qquad
+L_B=M(P_B-I),\qquad
+\mathcal E_B(f,f)=\sum_a\pi\!\left[\operatorname{Var}(f\mid B_a^c)\right].
+$$
+
+Each indexed block has its own rate-one clock, so $\mathcal E_B(f,f)=\langle f,-L_Bf\rangle_\pi$.
+
+**One boundary disagreement has a bounded cost.** Start with two legal words $x,y$ differing only at site $u$, and choose the same block index for both chains. If the block contains $u$, their exteriors agree, and identical whole-block refreshes erase the disagreement. If no length-$K$ window meets both $u$ and the block, the two conditional laws agree, so a synchronous refresh creates no new disagreement.
+
+There are at most $2R$ remaining affected blocks excluding $u$: a right block starts at one of $u+1,\ldots,u+R$, and a left block ends at one of $u-R,\ldots,u-1$. Truncation only reduces these index ranges. When $N<\ell$, coincident whole-chain blocks still count separately among the blocks containing $u$.
+
+For an affected right block, sample its conditional law sequentially from left to right. Given any admissible sampled prefix of either chain, the conditional probability that the next bit is $0$ is at least $1/2$: changing the next bit of any legal completion from $1$ to $0$, with every other bit fixed, gives a distinct legal zero-completion. This is an injection because deleting a one cannot create an all-ones constraint violation.
+
+At each step use a fresh shared uniform random variable, with each chain's own conditional threshold, to choose the next bit. Given the full joint sampled past, the probability of a common zero is at least $1/2$. After the first common zero, the two conditional laws of the remaining suffix coincide: every contiguous window connecting earlier history to the unsampled suffix crosses that zero and already satisfies its constraint, while the exterior data at the far end agree. The rest of the suffix can therefore be sampled identically. Every step preserves each chain's conditional sampling law; stopping at a common zero does not alter either marginal.
+
+Let $T$ be the position of the first common zero. A disagreement at scanned position $j$ requires $T>j$, hence
+
+$$
+\Pr(X_j\ne Y_j)\le\Pr(T>j)\le2^{-j},\qquad
+\mathbb E\!\left[\sum_{j=1}^{|B|}\mathbf1_{X_j\ne Y_j}\right]\le1.
+$$
+
+Reverse the scan for a left block. Writing $d$ for Hamming distance, the complete one-step block refresh consequently satisfies
+
+$$
+\mathbb E[d(X',Y')]
+\le 1-\frac\ell M+\frac{2R}M
+=1-\frac1M
+\quad\text{when }d(x,y)=1.
+$$
+
+**From coupling to a block gap.** The legal-word set is closed under deleting ones. Deleting from $x$ to the coordinatewise intersection $x\cap y$ and then adding toward $y$ gives a legal single-bit path of length exactly $d(x,y)$. Glue the adjacent-word couplings along this path and apply the triangle inequality for Hamming distance. This extends the one-step expected-distance bound to every pair of words.
+
+For a function on this finite set, define
+
+$$
+\operatorname{Lip}(g)=\max_{x\ne y}\frac{|g(x)-g(y)|}{d(x,y)}.
+$$
+
+The coupling bound gives
+
+$$
+\operatorname{Lip}(P_Bg)\le\left(1-\frac1M\right)\operatorname{Lip}(g).
+$$
+
+Each $E_B$ is an orthogonal conditional projection in $L^2(\pi)$, so $P_B$ is self-adjoint. A nonconstant eigenfunction $g$ has a finite positive Lipschitz seminorm. If $P_Bg=\mu g$, the last inequality yields $|\mu|\le1-1/M$, also excluding additional eigenfunctions at eigenvalue $1$. Thus the nonconstant spectrum of $-L_B$ is at least $1$. Its orthogonal eigendecomposition gives, for every complex-valued function,
+
+$$
+\operatorname{Var}_\pi(f)\le\mathcal E_B(f,f).
+$$
+
+**Return the block energy to the single-site clocks.** Fix the exterior of one block, and let its conditional support $A$ have size $m$. This support is nonempty, closed under deletions, and satisfies $m\le2^\ell$. The legal path through the intersection between any $x,y\in A$ has length at most $\ell$. For a complex-valued function $g$, use the uniform variance identity, Cauchy–Schwarz along each path, and the bound of $m(m-1)/2$ on the number of unordered-pair paths using any edge:
+
+$$
+\begin{aligned}
+\operatorname{Var}_A(g)
+&=\frac1{m^2}\sum_{\{x,y\}\subset A}|g(x)-g(y)|^2\\
+&\le\frac\ell2\sum_{\{x,y\}\text{ a legal single-bit edge}}|g(x)-g(y)|^2\\
+&=\ell m\,\mathcal E_{\mathrm{site},A}(g,g)
+\le\ell2^\ell\mathcal E_{\mathrm{site},A}(g,g).
+\end{aligned}
+$$
+
+The equality uses the permitted flip rate $1/2$: each unordered edge has coefficient $1/(2m)$ in the conditional single-site energy. When $m=1$, both sides vanish. Average over the block exterior and sum over all block indices. Conditioning further on the other bits inside a block gives exactly the original single-site conditional law. Each site is counted $\ell$ times, so
+
+$$
+\mathcal E_B(f,f)\le\ell^2 2^\ell\mathcal E(f,f).
+$$
+
+Combine this with the block variance bound to obtain the stated Poincaré inequality and $\lambda_{K,N}\ge C_K^{-1}$. The full-space spectral comparison in [@ex-ch39-p2e-heatbath-scale] then gives $\Delta_{K,N}\ge2/C_K$, since $2/C_K<1$ for $K\ge2$. For example, $K=2$ gives $1/36$, and $K=3$ gives $1/400$. The empty chain $N=0$ still has no excited gap; the exact gap for a short chain $1\le N<K$ remains $2$.
+
+This establishes a gap uniform in chain length for the specified local parent at fixed $K$. Physical identification with an experimental Rydberg or anyon Hamiltonian, and correspondence with Rauzy-boundary dimension, remain separate questions.
 :::
 
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
