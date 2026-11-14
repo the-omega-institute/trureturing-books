@@ -1116,7 +1116,70 @@ $$
 B_a=[a,a+\ell-1]\cap[1,N],\qquad M=N+\ell-1.
 $$
 
-Even when two truncated intervals coincide, retain their separate indices. Each site belongs to exactly $\ell$ blocks: those containing $u$ have indices $u-\ell+1,\ldots,u$. Let $E_B$ refresh the entire block from the uniform legal-word conditional law with all exterior bits fixed, and define
+Even when two truncated intervals coincide, retain their separate indices. Each site belongs to exactly $\ell$ blocks: those containing $u$ have indices $u-\ell+1,\ldots,u$.
+
+First write one conditional refresh as a matrix on the actual legal words. For any finite set of sites $B\subseteq[1,N]$, take complements in $[1,N]$. Put $Z=\#W_N=z_N>0$ (the all-zero word is legal), and for $x,y\in W_N$ define
+
+$$
+\begin{aligned}
+\mathcal A_B(x)&=\{y\in W_N:y|_{B^c}=x|_{B^c}\},\\
+m_B(x)&=\#\mathcal A_B(x)>0,\\
+T_B(x,y)&=\frac{\mathbf1_{\{y\in\mathcal A_B(x)\}}}{m_B(x)},\\
+(E_Bf)(x)&=\sum_{y\in W_N}T_B(x,y)f(y).
+\end{aligned}
+$$
+
+The denominator is nonzero because $x\in\mathcal A_B(x)$. Given the entire exterior $x|_{B^c}$, the fiber has probability $m_B(x)/Z$, and each full word in it has conditional probability exactly $(1/Z)/(m_B(x)/Z)=1/m_B(x)$. Thus $T_B$ is precisely the uniform legal-word refresh with every exterior bit fixed; restricting to $B$ gives the block update law.
+
+Equal exterior data partition $W_N$ into disjoint nonempty fibers. If $y\in\mathcal A_B(x)$, then $\mathcal A_B(y)=\mathcal A_B(x)$ and $m_B(y)=m_B(x)$; if the words lie in different fibers, both matrix entries vanish. Hence $T_B$ is a nonnegative real symmetric matrix. Each row distributes unit mass uniformly over its fiber, and symmetry gives unit column sums as well. In particular, both marginals of the joint law $\pi(x)T_B(x,y)$ are exactly the original uniform law:
+
+$$
+\begin{aligned}
+\sum_yT_B(x,y)&=1, &\sum_xT_B(x,y)&=1,\\
+\sum_y\pi(x)T_B(x,y)&=\frac1Z,
+&\sum_x\pi(x)T_B(x,y)&=\frac1Z.
+\end{aligned}
+$$
+
+For each such fiber $C$, write $\bar f_C=(\#C)^{-1}\sum_{x\in C}f(x)$. The function $E_Bf$ equals $\bar f_C$ throughout $C$, so averaging again changes nothing: $E_B^2=E_B$. For arbitrary complex-valued $f,g$, group the finite sums by fibers to obtain
+
+$$
+\begin{aligned}
+\langle f,E_Bg\rangle_\pi
+&=\frac1Z\sum_C(\#C)\overline{\bar f_C}\,\bar g_C\\
+&=\langle E_Bf,g\rangle_\pi,\\
+\langle f,E_Bf\rangle_\pi
+&=\frac1Z\sum_C(\#C)|\bar f_C|^2\ge0.
+\end{aligned}
+$$
+
+Thus $E_B$ is self-adjoint, positive semidefinite, and the orthogonal projection onto functions constant on each fiber. These properties follow from the actual fiber averages. The residual energy can also be computed directly on each fiber: expand squared complex moduli and use $\sum_{x\in C}f(x)=(\#C)\bar f_C$ to get
+
+$$
+\begin{aligned}
+\sum_{x\in C}\overline{f(x)}(f(x)-\bar f_C)
+&=\sum_{x\in C}|f(x)|^2
+-\frac{\left|\sum_{x\in C}f(x)\right|^2}{\#C}\\
+&=\sum_{x\in C}|f(x)-\bar f_C|^2\\
+&=\frac1{2\#C}\sum_{x,y\in C}|f(x)-f(y)|^2.
+\end{aligned}
+$$
+
+The last step is another finite expansion, with conjugate cross terms paired into real parts. Here conditional variance means $\operatorname{Var}(f\mid B^c)=E_B(|f-E_Bf|^2)$, using squared complex modulus. Sum the identity over all fibers and divide by the global word count $Z$ to obtain
+
+$$
+\begin{aligned}
+\operatorname{Re}\langle f,(I-E_B)f\rangle_\pi
+&=\frac1{2Z}\sum_x\sum_yT_B(x,y)|f(x)-f(y)|^2\\
+&=\frac1Z\sum_x\sum_yT_B(x,y)
+|f(y)-(E_Bf)(x)|^2\\
+&=\pi\!\left[\operatorname{Var}(f\mid B^c)\right].
+\end{aligned}
+$$
+
+The inner product on the left is already real and nonnegative, and also equals $\|f-E_Bf\|_\pi^2$. The exterior data of a fiber $C$ occur with probability $\#C/Z$, and its conditional variance is $(\#C)^{-1}\sum_{x\in C}|f(x)-\bar f_C|^2$; this explains the global factor $1/Z$ after averaging over the exterior. For $B=\varnothing$, $E_B=I$; for $B=[1,N]$, $E_Bf=\pi f$. These fiber identities also hold for the single empty word at $N=0$, without assigning an excited gap to the empty chain.
+
+Now define, using the original block indices,
 
 $$
 P_B=\frac1M\sum_a E_{B_a},\qquad
@@ -1124,17 +1187,11 @@ L_B=M(P_B-I),\qquad
 \mathcal E_B(f,f)=\sum_a\pi\!\left[\operatorname{Var}(f\mid B_a^c)\right].
 $$
 
-Each indexed block has its own rate-one clock, so $\mathcal E_B(f,f)=\langle f,-L_Bf\rangle_\pi$.
+Each indexed block has its own rate-one clock. Thus $-L_B=\sum_a(I-E_{B_a})$; summing the energy identity just proved over these indices gives $\mathcal E_B(f,f)=\langle f,-L_Bf\rangle_\pi$. Repeated block values still contribute once per clock index, with no additional $1/M$.
 
 **One boundary disagreement has a bounded cost.** Start with two legal words $x,y$ agreeing at every site other than $u$ (allowing $x=y$), and choose the same block index for both chains. If the block contains $u$, their exteriors agree, and identical whole-block refreshes erase the disagreement.
 
-For a distant block, we must compare the laws restricted to the block after conditioning on every exterior bit. More generally, take any finite set of sites $B\subseteq[1,N]\setminus\{u\}$ with $|v-u|\ge K$ for every $v\in B$. For $z=x,y$, write
-
-$$
-\mathcal A_B(z)=\{w\in W_N:w|_{B^c}=z|_{B^c}\},
-$$
-
-where the complement is taken in $[1,N]$. Since $\pi$ is uniform on $W_N$, conditioning on the entire exterior $z|_{B^c}$ gives the uniform law on the full words in $\mathcal A_B(z)$. Denote its restriction to $B$ by $\mu_B^z$. The two completion sets contain $x$ and $y$, respectively, so their normalizing denominators are nonzero.
+For a distant block, we must compare the laws restricted to the block after conditioning on every exterior bit. More generally, take any finite set of sites $B\subseteq[1,N]\setminus\{u\}$ with $|v-u|\ge K$ for every $v\in B$. For $z=x,y$, use $\mathcal A_B(z)$ as defined above, and denote the restriction to $B$ of the uniform full-word conditional law on this fiber by $\mu_B^z$. The two completion sets contain $x$ and $y$, respectively, so their normalizing denominators are nonzero.
 
 For $w\in\mathcal A_B(x)$, replace its bit at $u$ by $y_u$ and leave all other bits unchanged, obtaining $\Phi(w)$. A length-$K$ window avoiding $u$ is unchanged. A window containing $u$ cannot meet $B$, so after the replacement it agrees throughout with the legal word $y$. Thus $\Phi(w)$ is legal and agrees with $y$ on the entire exterior $B^c$. Replacing the bit at $u$ by $x_u$ gives the inverse map. This bijection preserves every bit in $B$, so it preserves both the total number of completions and the number with each assignment $b\in\{0,1\}^B$. Consequently,
 
@@ -1185,7 +1242,7 @@ $$
 \operatorname{Lip}(P_Bg)\le\left(1-\frac1M\right)\operatorname{Lip}(g).
 $$
 
-Each $E_B$ is an orthogonal conditional projection in $L^2(\pi)$, so $P_B$ is self-adjoint. A nonconstant eigenfunction $g$ has a finite positive Lipschitz seminorm. If $P_Bg=\mu g$, the last inequality yields $|\mu|\le1-1/M$, also excluding additional eigenfunctions at eigenvalue $1$. Thus the nonconstant spectrum of $-L_B$ is at least $1$. Its orthogonal eigendecomposition gives, for every complex-valued function,
+The fiber calculation above proves that each $E_B$ is an orthogonal conditional projection in $L^2(\pi)$, so $P_B$ is self-adjoint. A nonconstant eigenfunction $g$ has a finite positive Lipschitz seminorm. If $P_Bg=\mu g$, the last inequality yields $|\mu|\le1-1/M$, also excluding additional eigenfunctions at eigenvalue $1$. Thus the nonconstant spectrum of $-L_B$ is at least $1$. Its orthogonal eigendecomposition and the proved energy identity give, for every complex-valued function,
 
 $$
 \operatorname{Var}_\pi(f)\le\mathcal E_B(f,f).
