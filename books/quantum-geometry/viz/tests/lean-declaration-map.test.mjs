@@ -52,6 +52,42 @@ for (const line of text[INDEX].split('\n')) {
 const columns = files.filter((f) => f !== INDEX);
 const CH27 = 'ch27-reading-frozen-proofs-i.md', CH28 = 'ch28-reading-frozen-proofs-ii.md';
 const citedBy = (f, mode) => GIDS.filter((g) => truth[g].cites.has(f) && (mode === 'all' || truth[g].cites.get(f) === 'e')).sort();
+// where the rail runs, read from each language's SUMMARY: a unit's label is the unit name its heading opens with
+// (序曲/Prelude, 第N章/Chapter N, a numbered subpage N.k, 终章/Coda, 附录 X/Appendix X), followed by one space before
+// the title as now written, or by a colon as in older headings; a title in none of these families keeps the older
+// rule (up to the colon, else the whole title). The rail starts at the label of columns[0] and ends at the label of
+// the last column; a text may name an appendix only if it has a column or is the index, and a list of the reading
+// order names exactly the appendices that have a column
+const UNIT_HEAD = /^(序曲|终章|第[零〇一二三四五六七八九十百]+章|附录\s*[A-Z]|Prelude|Coda|Chapter\s+\d+|Appendix\s+[A-Z]|\d+(?:\.\d+)+)(?=[\s：:]|$)/;
+const unitLabel = (raw) => {
+  const title = raw.trim(), head = UNIT_HEAD.exec(title);
+  if (head) return head[1].replace(/\s+/g, ' ');
+  const cut = [title.indexOf('：'), title.indexOf(':')].filter((k) => k > 0);
+  return (cut.length ? title.slice(0, Math.min(...cut)) : title).trim();
+};
+const LABEL = {};
+for (const lang of ['zh', 'en']) {
+  LABEL[lang] = {};
+  for (const line of fs.readFileSync(path.join(BOOK, lang, 'SUMMARY.md'), 'utf8').split('\n')) {
+    const a = line.indexOf('['), b = line.indexOf('](', a), c = line.indexOf('.md)', b);
+    if (a < 0 || b < 0 || c < 0) continue;
+    LABEL[lang][line.slice(b + 2, c + 3)] = unitLabel(line.slice(a + 1, b));
+  }
+}
+const appxLetter = (lang, f) => (/^(?:附录|Appendix)\s*([A-Z])$/.exec(LABEL[lang][f] || '') || [])[1];
+const railSays = (lang, txt) => {
+  const low = txt.toLowerCase(), start = low.indexOf(LABEL[lang][columns[0]].toLowerCase()), end = low.indexOf(LABEL[lang][columns[columns.length - 1]].toLowerCase());
+  const known = new Set([...columns, INDEX].map((f) => appxLetter(lang, f)).filter(Boolean));
+  const named = [...txt.matchAll(lang === 'zh' ? /附录\s*([A-Z])\b/g : /Appendix\s+([A-Z])\b/g)].map((m) => m[1]);
+  return start >= 0 && end > start && named.every((x) => known.has(x));
+};
+const ledeSays = (lang, txt) => {
+  const open = txt.indexOf(lang === 'zh' ? '（' : '('), close = txt.indexOf(lang === 'zh' ? '）' : ')', open), seq = txt.slice(open + 1, close);
+  const at = seq.search(lang === 'zh' ? /附录/ : /Appendi/), letters = at < 0 ? [] : [...seq.slice(at).matchAll(/\b([A-Z])\b/g)].map((m) => m[1]);
+  const want = columns.map((f) => appxLetter(lang, f)).filter(Boolean);
+  return open >= 0 && seq.toLowerCase().includes(LABEL[lang][columns[0]].toLowerCase()) && seq.toLowerCase().includes(LABEL[lang]['coda.md'].toLowerCase())
+    && JSON.stringify(letters) === JSON.stringify(want) && txt.slice(close).includes(LABEL[lang][INDEX]);
+};
 
 /* ---------- the page ---------- */
 const T = await session();
@@ -113,6 +149,11 @@ await page.click('#play'); s = await state();
 check('the play button pauses', !s.playing);
 const note = async () => (await page.textContent('#presetNote')).trim();
 check('WHOLE-BOOK note names the number of lock entries', (await note()).includes(`${GIDS.length} 格`));
+check('WHOLE-BOOK note: the rail runs from the first unit of SUMMARY to its last column, and names no appendix without a column except the index', railSays('zh', await note()), await note());
+for (const lang of ['zh', 'en']) {
+  const lede = await page.textContent(`#drawer .${lang} .lede`);
+  check(`drawer (${lang}): the reading order runs from the prelude to the coda and lists exactly the appendices with a column; the index is named outside it`, ledeSays(lang, lede), lede);
+}
 
 // CH27-FOUR, CH28-FOUR: the dissected theorems, from the foot of their chapter
 s = await pick('bedrock');
@@ -199,7 +240,9 @@ await page.fill('#q', ''); await settle(page); s = await state();
 check('clearing the search shows every cell again', s.q === '' && s.found.length === 0 && (await page.textContent('#qOut')).includes('输入声明名'));
 
 // English
-await page.click('[data-lang-set="en"]'); await pick('table28');
+await page.click('[data-lang-set="en"]'); await pick('all');
+check('English WHOLE-BOOK note: the same start and end of the rail', railSays('en', await note()), await note());
+await pick('table28');
 check('English note of CH28-TABLE carries the same numbers', (await note()).includes(`cites ${a28.length} declarations`) && (await note()).includes(`${in46} of them land in Parts IV–VI`), await note());
 await page.click('[data-lang-set="zh"]');
 
@@ -251,6 +294,182 @@ for (const [vw, vh] of [[334, 720], [390, 844], [1440, 900]]) {
   }
 }
 await setSrc(-1); await page.click('[data-lang-set="zh"]'); await page.setViewportSize({ width: 1440, height: 900 }); await settle(page, 60);
+
+/* ---------- every source link and the whole chapter-filter domain, in both languages, desktop and narrow ---------- */
+// Read once more, independently of the scans above and of the page: each language's SUMMARY gives the units and their
+// order (a regular expression over the link), each language's chapters give every unit's citations (lean="…" on :::
+// lines by a regular expression, inline links by substring). A cell's source link is built from the module and line
+// the lock records, never by cutting the GID at its last dot: a declaration name can carry dots of its own.
+const readBook = (lang) => {
+  const order = [];
+  for (const line of fs.readFileSync(path.join(BOOK, lang, 'SUMMARY.md'), 'utf8').split('\n')) {
+    const m = /\[([^\]]*)\]\(([^)\s]+\.md)\)/.exec(line);
+    if (m) order.push({ file: m[2], title: m[1].trim() });
+  }
+  const cites = {};
+  for (const { file } of order) {
+    const src = fs.readFileSync(path.join(BOOK, lang, file), 'utf8'), env = new Set();
+    for (const line of src.split('\n')) if (line.startsWith(':::')) for (const m of line.matchAll(/(?:^|\s)lean="([^"]*)"/g)) for (const g of m[1].split(/[\s,]+/)) if (g) env.add(g);
+    cites[file] = new Map();
+    for (const g of GIDS) if (env.has(g)) cites[file].set(g, 'e'); else if (src.includes(`(lean:${g})`) || src.includes(`<lean:${g}>`)) cites[file].set(g, 'i');
+  }
+  return { order, cites };
+};
+const BI = { zh: readBook('zh'), en: readBook('en') };
+const UNITS2 = BI.zh.order.map((u) => u.file), COLS2 = UNITS2.filter((f) => f !== INDEX), APPD = 'appendix-d.md', CD = COLS2.indexOf(APPD);
+check('both SUMMARY files list the same units in the same order; every unit but Appendix C is a column, the last one Appendix D',
+  JSON.stringify(BI.en.order.map((u) => u.file)) === JSON.stringify(UNITS2) && JSON.stringify(UNITS2) === JSON.stringify(files) && UNITS2.includes(INDEX)
+  && JSON.stringify(COLS2) === JSON.stringify(columns) && COLS2.length === UNITS2.length - 1 && CD === COLS2.length - 1, `${UNITS2.length} units, ${COLS2.length} columns, Appendix D at ${CD}`);
+const sameCites = (a, b) => a.size === b.size && [...a].every(([k, m]) => b.get(k) === m);
+const langDiff = UNITS2.filter((f) => !sameCites(BI.zh.cites[f], BI.en.cites[f]));
+check('every unit cites the same declarations, environment or inline, in Chinese and in English', langDiff.length === 0, langDiff.join(', '));
+const scanDiff = GIDS.filter((g) => !sameCites(new Map(UNITS2.filter((f) => BI.zh.cites[f].has(g)).map((f) => [f, BI.zh.cites[f].get(g)])), truth[g].cites));
+check('the second reading of the Chinese chapters finds every citation the first one found', scanDiff.length === 0, scanDiff.slice(0, 3).join(', '));
+const wantFocus = (c, mode) => (c < 0 ? [] : GIDS.filter((g) => BI.zh.cites[COLS2[c]].has(g) && (mode === 'all' || BI.zh.cites[COLS2[c]].get(g) === 'e')).sort());
+const anyEnv = (g) => UNITS2.some((f) => BI.zh.cites[f].get(g) === 'e');
+const KEEP = { all: () => true, theorem: (g) => lock.declarations[g].kind === 'theorem', inline: (g) => !anyEnv(g) };
+const firstIn = Object.fromEntries(GIDS.map((g) => [g, COLS2.find((f) => BI.zh.cites[f].has(g))]));
+const wantHref = (g) => `https://github.com/${lock.repo}/blob/${lock.commit}/${lock.declarations[g].module}.lean#L${lock.declarations[g].line}`;
+const DOTTED = ['D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot', "D5/S3/Weil/Mertens/Third.E₃.bound''"];
+const nested = GIDS.filter((g) => lock.declarations[g].module && g.slice(lock.declarations[g].module.length + 1).includes('.'));
+check('every GID begins with the module the lock records, and the two dotted declarations sit in a module shorter than the GID before its last dot',
+  GIDS.every((g) => lock.declarations[g].module && g.startsWith(`${lock.declarations[g].module}.`)) && DOTTED.every((g) => nested.includes(g) && g.slice(0, g.lastIndexOf('.')) !== lock.declarations[g].module), JSON.stringify(nested));
+const nameFits = (title, name) => !!name && (title === name || [' ', '：', ':'].some((sep) => title.startsWith(name + sep)));
+// A child page of SUMMARY (indented under its chapter) carries a subtitle, not its number, so the name the page shows
+// for it cannot be a prefix of that title: it must equal, exactly, the section name derived here from the indentation
+// (the k-th child of chapter n is 第<n in Chinese numerals>章·k / Section n.k). Every other unit keeps nameFits.
+const CNUM = '零一二三四五六七八九十', cnNum = (n) => (n <= 10 ? CNUM[n] : n < 20 ? `十${CNUM[n - 10]}` : `${CNUM[Math.floor(n / 10)]}十${n % 10 ? CNUM[n % 10] : ''}`);
+const SECTION = {};
+for (const lang of ['zh', 'en']) {
+  SECTION[lang] = {}; let parent = null, k = 0;
+  for (const line of fs.readFileSync(path.join(BOOK, lang, 'SUMMARY.md'), 'utf8').split('\n')) {
+    const m = /^(\s*)(?:-\s+)?\[[^\]]*\]\(([^)\s]+\.md)\)/.exec(line);
+    if (!m) continue;
+    if (!m[1].length) { const c = /^ch(\d+)-/.exec(m[2]); parent = c ? +c[1] : null; k = 0; continue; }
+    k++; SECTION[lang][m[2]] = lang === 'zh' ? `第${cnNum(parent)}章·${k}` : `Section ${parent}.${k}`;
+  }
+}
+const unitNameOk = (lang, file, title, shown) => (SECTION[lang][file] ? shown === SECTION[lang][file] : nameFits(title, shown));
+const CH30 = columns.findIndex((f) => f.startsWith('ch30-')), SEC30 = Object.keys(SECTION.zh);
+check('SUMMARY hierarchy: Chapter 30 has six child pages, columns right after it, named 第三十章·1 … ·6 / Section 30.1 … 30.6 in both languages',
+  SEC30.length === 6 && SEC30.every((f, k) => columns[CH30 + 1 + k] === f && f.startsWith(`ch30-s0${k + 1}-`) && SECTION.zh[f] === `第三十章·${k + 1}` && SECTION.en[f] === `Section 30.${k + 1}`)
+  && JSON.stringify(Object.keys(SECTION.en)) === JSON.stringify(SEC30) && columns.length === 50 && files.length === 51 && files.length - SEC30.length === 45, JSON.stringify({ CH30, SEC30, n: columns.length }));
+const SAYS = { zh: (name, n) => [`${name}引用 ${n} 条 · `, `${name}引用 ${n} 条声明`], en: (name, n) => [`${name} cites ${n} · `, `${name} cites ${n} declarations`] };
+const NONE = { zh: '无', en: 'none' }, CITES = { zh: '引用', en: ' cites ' };
+const readout = (p) => p.evaluate(() => {
+  const a = document.querySelector('#roModule a'), txt = (id) => document.getElementById(id).textContent.trim();
+  const { t, playing, preset, filter, src, srcCol, mode, sel, focus, arcs } = window.LEANMAP_DEBUG.state;   // all but the long list of landed cells
+  return { st: { t, playing, preset, filter, src, srcCol, mode, sel, focus, arcs }, cols: window.LEANMAP_DEBUG.columns(), shown: txt('oSrc'), hud: document.getElementById('hudSub').textContent, note: txt('roNote'), name: txt('roName'), mod: txt('roModule'), href: a && a.getAttribute('href'), abs: a && a.href, target: a && a.target, max: document.getElementById('src').max };
+});
+const showStage = (p) => p.evaluate(() => document.getElementById('stage').scrollIntoView({ block: 'center' }));
+// choose a column with the slider (c = −1 is “none”) or by clicking the foot of its column, as a reader does
+async function choose(p, how, c) {
+  if (how === 'slider') await p.evaluate((v) => { const el = document.getElementById('src'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, c);
+  else { const f = await p.evaluate((k) => window.LEANMAP_DEBUG.footAt(k), c); await p.mouse.click(f[0], f[1]); }
+  await settle(p);
+  return readout(p);
+}
+async function chips(p, filter, mode) { await p.click(`[data-filter="${filter}"]`); await settle(p); await p.click(`[data-mode="${mode}"]`); await settle(p); }
+// End rests the rail on the whole book; it neither waits for nor relies on playback reaching the end by itself
+async function toEnd(p) { await p.evaluate(() => document.activeElement && document.activeElement.blur && document.activeElement.blur()); await p.keyboard.press('End'); await settle(p); return (await readout(p)).st; }
+async function sweep(p, lang, how) {
+  const bad = []; let n = 0, wrong = 0;
+  for (const filter of ['all', 'theorem', 'inline']) {
+    for (const mode of ['all', 'env']) {
+      await chips(p, filter, mode);
+      if (how === 'foot') await showStage(p);
+      for (let c = how === 'slider' ? -1 : 0; c < NC; c++) {
+        const r = await choose(p, how, c), want = wantFocus(c, mode), file = c < 0 ? null : COLS2[c];
+        const title = file && BI[lang].order.find((u) => u.file === file).title, [hud, note] = SAYS[lang](r.shown, want.length);
+        const stack = c < 0 ? null : await p.evaluate((k) => window.LEANMAP_DEBUG.stack(k), c);
+        const ok = r.st.src === file && r.st.srcCol === (c < 0 ? null : c) && r.st.mode === mode && r.st.filter === filter && r.st.t === NC && !r.st.playing
+          && JSON.stringify(r.st.focus) === JSON.stringify(want) && JSON.stringify(r.st.arcs.cyan) === JSON.stringify(want.filter(KEEP[filter]))
+          && (c < 0 ? r.shown === NONE[lang] && !r.hud.includes(CITES[lang]) : unitNameOk(lang, file, title, r.shown) && r.hud.startsWith(hud) && r.note.startsWith(note))
+          && (stack == null || JSON.stringify([...stack].sort()) === JSON.stringify(GIDS.filter((g) => firstIn[g] === file && KEEP[filter](g)).sort()));
+        n++;
+        if (!ok) { wrong++; if (bad.length < 3) bad.push({ filter, mode, c, file, src: r.st.src, focus: r.st.focus.length, cyan: r.st.arcs.cyan.length, want: want.length, shown: r.shown, hud: r.hud }); }
+      }
+    }
+  }
+  return { n, wrong, bad };
+}
+async function appendixD(p, lang, how, tag) {
+  await chips(p, 'all', 'all'); await showStage(p);
+  if ((await readout(p)).st.srcCol === CD) await choose(p, how, how === 'slider' ? -1 : CD);   // start from another state
+  let r = await choose(p, how, CD);
+  const want = wantFocus(CD, 'all'), [hud] = SAYS[lang](r.shown, want.length);
+  check(`${tag}: the last column is Appendix D (Appendix C has none) and looks back over its own ${want.length} citations, not Appendix C's ${BI.zh.cites[INDEX].size}`,
+    want.length > 0 && want.length < BI.zh.cites[INDEX].size && r.st.src === APPD && r.st.srcCol === CD && JSON.stringify(r.st.focus) === JSON.stringify(want) && JSON.stringify(r.st.arcs.cyan) === JSON.stringify(want)
+    && nameFits(BI[lang].order.find((u) => u.file === APPD).title, r.shown) && r.hud.startsWith(hud) && r.max === String(NC - 1) && JSON.stringify(r.cols) === JSON.stringify(COLS2),
+    JSON.stringify({ src: r.st.src, focus: r.st.focus.length, want: want.length, shown: r.shown, hud: r.hud, max: r.max }));
+  await p.click('[data-mode="env"]'); await settle(p); r = await readout(p);
+  const wantEnv = wantFocus(CD, 'env');
+  check(`${tag}: “environments only” leaves Appendix D the ${wantEnv.length} lean= citations it has`, r.st.src === APPD && JSON.stringify(r.st.focus) === JSON.stringify(wantEnv) && r.hud.startsWith(SAYS[lang](r.shown, wantEnv.length)[0]), r.hud);
+  await p.click('[data-mode="all"]'); await settle(p);
+  await p.evaluate(() => document.activeElement && document.activeElement.blur && document.activeElement.blur());
+  await p.keyboard.press('ArrowLeft'); await settle(p); const before = (await readout(p)).st;
+  await p.keyboard.press('End'); await settle(p); const after = (await readout(p)).st;
+  const g = want.find((x) => amberWant(x, APPD).length > 0) || want[0];
+  await showStage(p); const at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), g);
+  await p.mouse.click(at[0], at[1]); await settle(p); const chosen = (await readout(p)).st;
+  await p.mouse.click(at[0], at[1]); await settle(p); const released = (await readout(p)).st;
+  check(`${tag}: Appendix D's cyan lines wait until the rail has read it (← then End), and a chosen cell it cites sends amber only to the other chapters`,
+    before.t === NC - 1 && before.arcs.cyan.length === 0 && JSON.stringify(before.focus) === JSON.stringify(want) && after.t === NC && !after.playing && JSON.stringify(after.arcs.cyan) === JSON.stringify(want)
+    && chosen.sel === g && JSON.stringify(chosen.arcs.amber) === JSON.stringify(amberWant(g, APPD)) && chosen.arcs.cyan.includes(g) && released.sel === null,
+    JSON.stringify({ before: [before.t, before.arcs.cyan.length], after: [after.t, after.arcs.cyan.length], g, amber: chosen.arcs.amber }));
+}
+// every cell chosen by pointer: its rendered link is the lock's module file and line at the pinned commit
+async function release(p) {
+  const sel = (await readout(p)).st.sel; if (!sel) return;
+  const at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), sel); await p.mouse.click(at[0], at[1]); await settle(p);
+}
+async function links(p, gids) {
+  await chips(p, 'all', 'all'); await showStage(p); await release(p);
+  const bad = []; let ok = 0;
+  for (const g of gids) {
+    const at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), g);
+    if (!at) { bad.push([g, 'no cell']); continue; }
+    await p.mouse.click(at[0], at[1]); await settle(p);
+    const r = await readout(p), want = wantHref(g);
+    if (r.st.sel === g && r.href === want && r.abs === new URL(want).href && r.target === '_blank' && r.mod === `${lock.declarations[g].module}.lean:${lock.declarations[g].line}` && g.endsWith(`.${r.name}`)) ok++;
+    else if (bad.length < 3) bad.push([g, r.st.sel, r.href]);
+  }
+  await release(p);
+  return { ok, bad };
+}
+async function frame(p, lang, tag, opts) {
+  if (opts.sweep) {
+    const sw = await sweep(p, lang, opts.sweep);
+    const how = opts.sweep === 'slider' ? `the chapter slider over none and all ${NC} columns` : `a click on the foot of each of the ${NC} columns`;
+    check(`${tag}: ${how} × every citation / environments only × all / theorems / inline: the source is that SUMMARY unit, its cyan lines and count are exactly its citations, and its column holds what first appears there`,
+      sw.wrong === 0 && sw.n === 3 * 2 * (NC + (opts.sweep === 'slider' ? 1 : 0)), JSON.stringify(sw));
+  }
+  await appendixD(p, lang, opts.sweep || 'foot', tag);
+  const lk = await links(p, DOTTED);
+  check(`${tag}: the two dotted declarations link to their modules' files at the lock's lines`, lk.ok === DOTTED.length, JSON.stringify(lk.bad));
+  if (opts.links) {
+    const all = await links(p, GIDS);
+    check(`${tag}: all ${GIDS.length} cells, chosen by pointer, link to the module file and line the lock records at the pinned commit`, all.ok === GIDS.length, JSON.stringify(all));
+  }
+}
+const LOCALE = { zh: 'zh-CN', en: 'en-US' };
+let st0 = await toEnd(page);
+check('desktop 1440 px (zh): End rests the rail on the whole book, not playing', st0.t === NC && !st0.playing);
+await frame(page, 'zh', 'desktop 1440 px (zh)', { sweep: 'slider', links: true });
+const desktopEn = await T.open('quantum-geometry', 'lean-declaration-map', '?lang=en', { viewport: { width: 1440, height: 900 }, locale: LOCALE.en });
+st0 = (await readout(desktopEn)).st;
+check('desktop 1440 px (en): the full page opens on the whole book read, not playing', st0.t === NC && !st0.playing && st0.preset === 'all');
+await frame(desktopEn, 'en', 'desktop 1440 px (en)', { sweep: 'foot' });
+// every frame checks Appendix D and the dotted names; the narrow ones sweep the filters, and the links of every cell are read
+// in two frames, one per language and width
+for (const [w, lang, sweepIt, linksIt] of [[334, 'zh', true, false], [334, 'en', true, true], [740, 'zh', false, false], [740, 'en', false, false]]) {
+  const p = await T.open('quantum-geometry', 'lean-declaration-map', `?embed=1&lang=${lang}`, { viewport: { width: w, height: 620 }, locale: LOCALE[lang] });
+  const tag = `in the book ${w} px (${lang})`;
+  const played = await until(p, () => { const d = window.LEANMAP_DEBUG.state; return d.playing && d.t > 0; });
+  st0 = await toEnd(p);
+  check(`${tag}: the full lab plays by itself once in view, and End stops it on the whole book`, played && st0.t === NC && !st0.playing);
+  await frame(p, lang, tag, sweepIt ? { sweep: 'foot', links: linksIt } : {});
+}
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

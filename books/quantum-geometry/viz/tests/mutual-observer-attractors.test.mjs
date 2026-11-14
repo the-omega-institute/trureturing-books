@@ -17,6 +17,16 @@ const state = async () => { await settle(page); return page.evaluate(() => windo
 const seek = async (t) => { await page.evaluate((v) => window.MOA_DEBUG.seek(v), t); return state(); };
 const card = async (id) => { await page.click(`[data-preset="${id}"]`); return state(); };
 const slide = async (id, v) => { await page.evaluate(([i, x]) => { const el = document.getElementById(i); el.value = String(x); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); return state(); };
+const headA = () => page.textContent('#pATitle');
+/** The heading of the first strip plot in the mirrors scene names both ways of looking and promises no pattern of
+    sides: whether A changes side at a beat depends on the start (see the side sweep below). */
+const neutralHead = ([zh, en]) => /逐拍/.test(zh) && /逐轮/.test(zh) && !/换边|交替|摇摆|同侧|异侧|越过|单侧/.test(zh)
+  && /beat by beat/i.test(en) && /round by round/i.test(en) && !/swap|altern|swing|cross|side|not each/i.test(en);
+const bothLangs = async (read) => {
+  const zh = await read(); await page.click('[data-lang-set="en"]'); await settle(page);
+  const en = await read(); await page.click('[data-lang-set="zh"]'); await settle(page);
+  return [zh, en];
+};
 
 /* ---------- independent references ---------- */
 function bisect(f, a, b) { let fa = f(a); for (let i = 0; i < 200; i++) { const m = (a + b) / 2, fm = f(m); if ((fm > 0) === (fa > 0)) { a = m; fa = fm; } else b = m; } return (a + b) / 2; }
@@ -45,6 +55,16 @@ check('APART: round by round A falls from above and B rises from below, never cr
   [0, 2, 4, 6, 8, 10].every((t) => s.xs[t] > s.xs[t + 2] && s.xs[t + 2] > THETA && s.ys[t] < s.ys[t + 2] && s.ys[t + 2] < THETA));
 check('APART: the error ratio over the last round is near the finite-difference slope of g', Math.abs(s.roundRatio - slopeG) < 0.01, `${s.roundRatio}`);
 check('APART: one beat, A reading B, multiplies the error by about the slope of cos', Math.abs(s.beatRatio - slopeF) < 0.01, `${s.beatRatio}`);
+// all 13 plotted states, not only the rounds: A above θ*, B below θ* at every beat, so A never changes side here
+check('APART: all 13 plotted states have A above θ* and B below θ* (page and two-chain reference)',
+  s.xs.length === 13 && s.ys.length === 13 && s.xs.every((x, t) => x > THETA && s.ys[t] < THETA && chainX(1.5, 0, t) > THETA && chainY(1.5, 0, t) < THETA));
+check('APART band: all 13 bars of A\'s error stand above θ*, each the two-chain error',
+  !!s.band && s.band.bars.length === 13 && s.band.bars.every((b) => b.sign > 0 && Math.abs(b.e - (chainX(1.5, 0, b.n) - THETA)) < 1e-13));
+{ const h = await bothLangs(headA);
+  check('APART: the strip heading (中/EN) names beat by beat and round by round and promises no change of side', s.view === 'round' && neutralHead(h), h.join(' | ')); }
+{ const blurb = await page.evaluate(() => `${document.querySelector('meta[name="description"]').content} ${document.querySelector('.tagline').textContent}`);
+  check('description and tagline: the pair may cross sides beat by beat, not "always alternates"',
+    (blurb.match(/逐拍可以换边/g) || []).length === 2 && (blurb.match(/may cross sides beat by beat/g) || []).length === 2 && !/左右交替|左右摇摆|alternating sides|swing from side to side/.test(blurb), blurb); }
 // no other balance: x = cos(cos x) changes sign exactly once on [−3, 3] (and so x = cos y, y = cos x meet once)
 let changes = 0, prev = g(-3) - (-3);
 for (let i = 1; i <= 60000; i++) { const x = -3 + 6 * i / 60000, v = g(x) - x; if ((v > 0) !== (prev > 0)) changes++; prev = v; }
@@ -97,6 +117,64 @@ check('the view chips switch to beat by beat', s.view === 'beat');
 const to = await page.evaluate(() => window.MOA_DEBUG.at(1.2, 0.4));
 await page.mouse.move(to[0], to[1]); await page.mouse.down(); await page.mouse.up(); s = await state();
 check('pressing on the stage puts the start there', Math.abs(s.x0 - 1.2) <= 0.011 && Math.abs(s.y0 - 0.4) <= 0.011, `${s.x0}, ${s.y0}`);
+
+// sides beat by beat. cos falls on [0, π/2] and the orbit stays there, so A's next error has the sign opposite to B's:
+// a start with both readings on one side of θ* crosses at every beat, one with them on opposite sides never does. The
+// two-chain reference decides, beat by beat, for opposite starts, equal low and high starts, mixed same-side starts and
+// starts next to θ*; the page's orbit and band must agree in both views, and the heading must stay true in either case.
+const STARTS = [[1.5, 0, 'keep'], [0, 1.5, 'keep'], [0.2, 0.2, 'cross'], [1.3, 1.3, 'cross'], [0.3, 0.6, 'cross'], [1, 1.4, 'cross'], [0.74, 0.73, 'keep'], [0.74, 0.75, 'cross']];
+const sides = (a, b) => Array.from({ length: 13 }, (_, t) => [Math.sign(chainX(a, b, t) - THETA), Math.sign(chainY(a, b, t) - THETA)]);
+const kind = (sd) => (sd.slice(1).every(([x, y], t) => x === -sd[t][0] && y === -sd[t][1]) ? 'cross'
+  : sd.every(([x, y]) => x === sd[0][0] && y === sd[0][1]) ? 'keep' : 'mixed');
+/** What the page shows for the start (a, b) against the reference: '' when it agrees, else why not. */
+const sideFault = (st, a, b, want) => {
+  const sd = sides(a, b), rule = sd[0][0] === sd[0][1] ? 'cross' : 'keep';
+  if (rule !== want || kind(sd) !== want) return `(${a}, ${b}): reference ${kind(sd)}, start rule ${rule}, expected ${want}`;
+  if (st.x0 !== a || st.y0 !== b || st.beat !== 12) return `(${a}, ${b}): page start (${st.x0}, ${st.y0}) at beat ${st.beat}`;
+  const err = Math.max(...st.xs.map((x, t) => Math.max(Math.abs(x - chainX(a, b, t)), Math.abs(st.ys[t] - chainY(a, b, t)))));
+  if (!(st.xs.length === 13 && err < 1e-14)) return `(${a}, ${b}): orbit off the two chains by ${err}`;
+  if (!st.xs.every((x, t) => Math.sign(x - THETA) === sd[t][0] && Math.sign(st.ys[t] - THETA) === sd[t][1])) return `(${a}, ${b}): sides differ from the reference`;
+  if (!(st.band && st.band.view === st.view && st.band.bars.length === 13 && st.band.bars.every((bar) => bar.sign === sd[bar.n][0]))) return `(${a}, ${b}): band signs differ`;
+  return '';
+};
+{
+  const faults = [], heads = new Set(), seen = { keep: 0, cross: 0 };
+  for (const view of ['beat', 'round']) {
+    await page.click(`[data-view="${view}"]`); s = await state();
+    if (s.view !== view || s.preset !== null) faults.push(`view chip ${view}: ${s.view}, card ${s.preset}`);
+    for (const [a, b, want] of STARTS) {
+      await slide('x0', a); await slide('y0', b); s = await seek(12);
+      const f = sideFault(s, a, b, want), h = await bothLangs(headA);
+      if (f) faults.push(`${view} ${f}`); else seen[want]++;
+      if (!neutralHead(h)) faults.push(`${view} (${a}, ${b}) heading: ${h.join(' | ')}`);
+      heads.add(h.join(' | '));
+    }
+  }
+  check('sides: same-side starts cross θ* at every beat, opposite-side starts never do — eight starts × both views, page = two chains, band agrees',
+    faults.length === 0 && seen.keep === 6 && seen.cross === 10, faults.slice(0, 3).join(' · '));
+  check('sides: the strip heading is one neutral heading in both views and for every start (中/EN)', heads.size === 1 && neutralHead([...heads][0].split(' | ')), [...heads].join(' / '));
+}
+{ // a card, then the sliders over it; then the other scene and back
+  const faults = [];
+  const look = async (tag, a, b, want, view, preset) => {
+    const h = await bothLangs(headA), f = sideFault(s, a, b, want);
+    if (f) faults.push(`${tag}: ${f}`);
+    if (s.view !== view || s.preset !== preset || s.scene !== 'mirror') faults.push(`${tag}: view ${s.view}, card ${s.preset}, scene ${s.scene}`);
+    if (!neutralHead(h)) faults.push(`${tag} heading: ${h.join(' | ')}`);
+  };
+  s = await card('apart'); s = await seek(12); await look('APART card', 1.5, 0, 'keep', 'round', 'apart');
+  s = await slide('y0', 0.6); s = await seek(12); await look('APART, then y₀ = 0.6', 1.5, 0.6, 'keep', 'round', null);
+  s = await slide('x0', 0.2); s = await seek(12); await look('then x₀ = 0.2', 0.2, 0.6, 'cross', 'round', null);
+  s = await card('alone'); s = await seek(12); await look('SAME-START card', 0.1, 0.1, 'cross', 'beat', 'alone');
+  s = await slide('x0', 1); s = await seek(12); await look('SAME-START, then x₀ = 1', 1, 0.1, 'keep', 'beat', null);
+  await page.click('[data-scene="cut"]'); s = await state();
+  const cutHead = await bothLangs(headA);
+  if (s.scene !== 'cut' || !/割/.test(cutHead[0]) || !/cut/i.test(cutHead[1])) faults.push(`cut scene heading: ${cutHead.join(' | ')}`);
+  await page.click('[data-scene="mirror"]'); s = await state();
+  if (s.t !== 0) faults.push(`back in the mirrors at t = ${s.t}`);
+  s = await seek(12); await look('back from the cut scene', 1, 0.1, 'keep', 'beat', null);
+  check('cards, sliders over them and the scene chips: the orbit, its sides and the neutral heading (中/EN) follow every change', faults.length === 0, faults.slice(0, 3).join(' · '));
+}
 
 // D-CRIT: the play stops where the two cuts tie, at the root of d(l₁ + l₂ + d) = l₁l₂
 s = await card('transition');

@@ -334,7 +334,7 @@
       g.line(cur, S.plane === 'two' ? P.magenta : P.cyan, { width: 2 });
       g.vline(S.eps, P.amber); g.dot(S.eps, phiOf(S.eps) / DEG, P.amber, 4.5);
       g.legend([[S.plane === 'two' ? P.magenta : P.cyan, L('余下的转角 φ', 'left-over angle φ')], [P.dim, L('ε²（弧度）', 'ε² (radians)'), 'dash']], { right: false });
-      $('plotTitle').innerHTML = L('<span>回路越大，余下的转角越大</span>', '<span>The bigger the loop, the bigger the turn left over</span>');
+      $('plotTitle').innerHTML = L('<span>回路大小与余下的转角</span>', '<span>Loop size and the turn left over</span>');
       $('plotMeta').textContent = `ε = ${S.eps}° · φ = ${fix(phiOf(S.eps) / DEG, 2)}°`;
     } else {
       const g = kit.plot(cv, { x: [0, 180], y: [0, 13], pad: [30, 10, 8, 22] });
