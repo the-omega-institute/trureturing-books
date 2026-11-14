@@ -887,6 +887,73 @@ The reused root, chain-mixing and spectral-perturbation tools are in this book's
 :::
 
 
+::: {.example #ex-ch39-p2e-local-parent title="Paper derivation: a local parent Hamiltonian for the positive equal-amplitude legal-word state"}
+The preceding entropy calculations specify a state. Can a local energy select it as its unique ground state? Start with two sites and the forbidden word `11`. In the basis $00,01,10,11$, take
+
+$$
+H_{2,2}=\begin{pmatrix}
+2&-1&-1&0\\
+-1&1&0&0\\
+-1&0&1&0\\
+0&0&0&1
+\end{pmatrix}.
+$$
+
+The upper block is the Laplacian of the three-vertex path $01\leftrightarrow00\leftrightarrow10$: equal amplitudes at neighboring vertices cost no energy. The final diagonal entry penalizes the illegal word `11`. The spectrum is $0,1,1,3$, and the unique normalized zero state, up to overall phase, is $(1,1,1,0)/\sqrt3$. We now extend this mechanism to every finite length. This is an application of the standard configuration-graph Laplacian method with a paper proof; the complete construction has not been verified in Lean.
+
+Fix $K\ge2$ and $N\ge0$. On the full space $\mathcal H_N=(\mathbb C^2)^{\otimes N}$, let $n_j=|1\rangle_j\langle1|$ and let $X_i$ flip bit $i$. Every length-$K$ window lies entirely within the chain, with no periodic wraparound. Define
+
+$$
+\begin{aligned}
+B_a&=\prod_{j=a}^{a+K-1}n_j
+\quad(1\le a\le N-K+1),\\
+\mathcal W_i&=\{a:1\le a\le N-K+1,\ a\le i<a+K\},\\
+C_i&=\prod_{a\in\mathcal W_i}
+\left(I-\prod_{\substack{a\le j<a+K\\j\ne i}}n_j\right),\\
+h_i&=C_i(I-X_i)C_i,\\
+H_{K,N}&=\sum_{i=1}^{N}h_i+\sum_{a=1}^{N-K+1}B_a.
+\end{aligned}
+$$
+
+Sums over empty index sets are $0$ and products are the identity, so there are no windows when $N<K$. The diagonal projector $C_i$ does not depend on the central bit and commutes with $X_i$. It examines only sites within distance $K-1$ of $i$: each $h_i$ is supported on at most $2K-1$ consecutive sites, truncated at the boundary, while each $B_a$ acts on $K$ sites. For $K=2$, $C_i$ is the product of vacancy projectors at the neighbors that lie within the chain.
+
+**How does the energy recognize legal words?** Fix a configuration $\eta$ outside site $i$, and write $\eta0,\eta1$ for the two words obtained by inserting the central bit at site $i$. Then $C_i(\eta)=1$ exactly when setting that bit to $1$ creates no forbidden window containing $i$. On this two-dimensional block, $h_i$ is
+
+$$
+\begin{pmatrix}1&-1\\-1&1\end{pmatrix};
+$$
+
+all other blocks vanish. Thus $h_i$ is positive semidefinite, as is the projector $B_a$. For an arbitrary $|\phi\rangle=\sum_w a_w|w\rangle$, let $\nu_K(w)$ count its all-$1$ windows of length $K$. The full-space energy identity is
+
+$$
+\begin{aligned}
+\langle\phi|H_{K,N}|\phi\rangle
+={}&\sum_{i=1}^{N}\ \sum_{\eta:C_i(\eta)=1}
+|a_{\eta0}-a_{\eta1}|^2\\
+&+\sum_{w\in\{0,1\}^N}\nu_K(w)|a_w|^2.
+\end{aligned}
+$$
+
+Each undirected flip pair with fixed exterior configuration is counted once, with no extra factor of $2$. Zero energy first forces every illegal-word amplitude to vanish. Deleting any $1$ from a legal word preserves legality and has $C_i=1$, so the first sum forces the two legal-word amplitudes to agree. Repeated deletion connects every legal word to the all-zero word.
+
+Conversely, a flip with $C_i=1$ preserves the legality status of the word: windows containing $i$ are legal at both endpoints, and all other windows are unchanged. Equal amplitudes on legal words and zero amplitudes on illegal words therefore annihilate every square and every penalty above. With $W_N$ again denoting all length-$N$ words avoiding $1^K$ and $z_N=|W_N|$, this gives
+
+$$
+\begin{aligned}
+|\Psi_{K,N}\rangle&=z_N^{-1/2}\sum_{w\in W_N}|w\rangle,\\
+\ker H_{K,N}&=\mathbb C|\Psi_{K,N}\rangle.
+\end{aligned}
+$$
+
+The ground-state ray is consequently unique on the full tensor space, and every positive local term separately vanishes on it: the model is frustration-free. Each term preserves the span of legal words; on that subspace, $\sum_i h_i$ is precisely the Laplacian of the legal single-bit flip graph. The illegality penalty promotes uniqueness on this restricted space to uniqueness on the full space. It is essential: removing it in the $K=N=2$ example leaves $|11\rangle$ as an additional zero state.
+
+**Length and physical interpretation.** For $N=0$, the space is the one-dimensional vacuum space and $H_{K,0}=0$; there is no excited level from which to define a gap. For each fixed $N\ge1$, the matrix is finite-dimensional and positive semidefinite with a one-dimensional kernel, so its first positive eigenvalue is strictly positive. This supplies no lower bound uniform in $N$. For $1\le N<K$, all $C_i=I$ and there is no penalty, giving $H_{K,N}=\sum_i(I-X_i)$, ground state $|+\rangle^{\otimes N}$, and gap exactly $2$.
+
+The finite-cut entropy and fixed-$K$ two-sided limit of the preceding positive equal-amplitude state thus also describe ground-state entanglement in this specifically designed model. This does not identify it with the state selected by a physical Rydberg array, golden chain, Tribonacci hopping chain, or Rauzy geometry, and does not resolve the open relation between fractal boundaries and entanglement scaling.
+
+Sources and correspondence: §15.9, Definition 15.22 and Proposition 15.23 of the [currently pinned theory volume](trureturing:docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md) already provide a legal-space local parent for $K=2$ with positive activities $a_i$, together with the deletion proof. Here $a_i=1$, the control projector checks every forbidden window containing the center, and full-space penalties are included. Proposition 15.25 explicitly identifies the failure of full-space uniqueness without a penalty. Equations (3)–(5) of [Lesanovsky's three-body model](https://arxiv.org/abs/1010.2349v2) provide related physical context; signs, positive scale, and boundary correspondence are given in Attribution 15.24 of that volume. The arbitrary-$K$ construction here is justified by the displayed energy identity, rather than attributed to that paper as a proved experimental implementation.
+:::
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** In condensed-matter and atomic-physics literature, the order-$K = 2$ `NoAdjacentOnes` Hilbert space arises in two celebrated many-body settings: first, the topological Fibonacci-anyon "golden chain" of A. E. Feiguin et al. (*Phys. Rev. Lett.* **98**, 2007, 160409), where the fusion rule $\tau \times \tau = \mathbf{1} + \tau$ makes fusion-space dimensions grow as Fibonacci numbers; second, van der Waals $1/r^6$ Rydberg blockade arrays (modeled theoretically by I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301, and probed experimentally on a 51-atom quantum simulator by H. Bernien et al., *Nature* **551**, 2017, 579–584). Two scope boundaries apply whenever citing these physical realizations: first, nearest-neighbor pairwise Rydberg blockade forbids adjacent excitations $|11\rangle$ ($K = 2$, the PXP subspace), whereas simply extending pairwise blockade range forbids *all* pairs within distance $R_b$ (eliminating `101` along with `111`) and **does not** by itself enforce the $K > 2$ "no $K$ consecutive ones" constraint—realizing a $K > 2$ $K$-Bonacci subspace requires a dedicated multi-body $K$-local interaction; second, neither the anyon fusion chain nor a finite-blockade Rydberg Hamiltonian is formally identical to the exact zero-amplitude isometric `directContract` encoder of [@thm-ch39-p2e-direct-encoder-ranks].
 :::
