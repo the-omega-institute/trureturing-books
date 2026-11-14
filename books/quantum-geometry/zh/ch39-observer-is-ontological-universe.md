@@ -1273,7 +1273,36 @@ $$
 \operatorname{Var}_\pi(f)\le\mathcal E_B(f,f).
 $$
 
-**把分块能量交还给单点时钟。** 固定任一块的外部数据，记其条件支持为 $A$，大小为 $m$。它非空、对删除封闭，且 $m\le2^\ell$。任意 $x,y\in A$ 之间上述经过交集的合法路径长度至多为 $\ell$。对复值函数 $g$，均匀方差恒等式、路径上的 Cauchy–Schwarz 不等式，以及每条边至多被全部 $m(m-1)/2$ 个无序字对使用，给出
+**把分块能量交还给单点时钟。** 固定一个块 $B=B_a$。对实际可出现的外部赋值 $e\in\{0,1\}^{B^c}$，记 $e\sqcup b$ 为把外部 $e$ 与块内赋值 $b$ 按坐标拼回的完整字，并定义
+
+$$
+\begin{aligned}
+A_e&=\{b\in\{0,1\}^B:e\sqcup b\in W_N\},\\
+m_e&=\#A_e,\qquad \pi_e(b)=\frac1{m_e}\quad(b\in A_e),\\
+f_e(b)&=f(e\sqcup b),\\
+\Pr_\pi(w|_{B^c}=e)&=\frac{m_e}{Z}.
+\end{aligned}
+$$
+
+可实现性保证 $m_e>0$，且固定外部后每个块内赋值恰对应一个完整字，所以 $\pi_e$ 就是实际的块内条件律。删除封闭性在这里仅作用于 $B$ 内的坐标：把 $b$ 中任意一些 $1$ 改成 $0$ 不会产生禁窗口，且整个外部 $e$ 保持不动。因此 $A_e$ 是非空的删除封闭族，$m_e\le2^{|B|}\le2^\ell$。
+
+再固定 $i\in B$ 以外的所有块内位，要求这些数据在 $A_e$ 中可实现。第 $i$ 位的条件支持只能是 $\{0\}$ 或 $\{0,1\}$，不会是 $\{1\}$：若 $1$ 可行，删除它便给出同一外部和其余各位下的可行值 $0$。均匀律 $\pi_e$ 在双点纤维上各赋概率 $1/2$，在单点纤维上保持不动。因此每站速率 $1$ 的条件热浴时钟在每条合法翻转边上的跳转速率恰为 $1/2$。
+
+记 $\mathscr D_e$ 为 $A_e$ 中相差一位的有序字对集合，$\mathscr U_e$ 为相应的无序边集合（每条边只计一次）。对任意复值函数 $g:A_e\to\mathbb C$，条件单点能量于是为
+
+$$
+\begin{aligned}
+\mathcal E_{\mathrm{site},A_e}(g,g)
+&:=\sum_{i\in B}\mathbb E_{\pi_e}
+\operatorname{Var}_{\pi_e}(g\mid B\setminus\{i\})\\
+&=\frac1{4m_e}\sum_{(b,c)\in\mathscr D_e}|g(b)-g(c)|^2\\
+&=\frac1{2m_e}\sum_{\{b,c\}\in\mathscr U_e}|g(b)-g(c)|^2.
+\end{aligned}
+$$
+
+这里方差仍使用复模平方。双点纤维的条件方差为 $|g(b)-g(c)|^2/4$，其 $\pi_e$ 质量为 $2/m_e$，故每条无序边的系数为 $1/(2m_e)$；单点纤维的贡献为零。
+
+暂记 $A=A_e$、$m=m_e$，沿用上面的删除封闭族路径估计。任意 $x,y\in A$ 之间经过交集的合法路径长度至多为 $\ell$。均匀方差恒等式、路径上的 Cauchy–Schwarz 不等式，以及每条边至多被全部 $m(m-1)/2$ 个无序字对使用，给出
 
 $$
 \begin{aligned}
@@ -1285,10 +1314,43 @@ $$
 \end{aligned}
 $$
 
-等式使用每个可行翻转速率为 $1/2$，故条件单点能量中每条无序边的系数为 $1/(2m)$。若 $m=1$，两边都为零。对块外数据取期望，再对全部块索引求和；在块内进一步固定其他各位，得到的正是原来的单点条件分布。每个位点恰被计入 $\ell$ 次，于是
+若 $m_e=1$，方差和所有能量都为零；$B=\varnothing$ 时 $A_e$ 只含空赋值，单点能量的空和也为零。
+
+现在把条件单点能量还原到原链。固定 $e$ 和 $b|_{B\setminus\{i\}}$，就是固定完整字在 $i^c=[1,N]\setminus\{i\}$ 上的全部数据。因此条件支持和各点概率都与原链的第 $i$ 站条件律完全相同。令 $v_i(w)=\operatorname{Var}_\pi(f\mid i^c)(w)$，便有
 
 $$
-\mathcal E_B(f,f)\le\ell^2 2^\ell\mathcal E(f,f).
+\mathcal E_{\mathrm{site},A_e}(f_e,f_e)
+=\sum_{i\in B}\frac1{m_e}\sum_{b\in A_e}v_i(e\sqcup b).
+$$
+
+以原链抽到的 $e=w|_{B^c}$ 为随机外部，按其实际概率 $m_e/Z$ 平均，得到
+
+$$
+\begin{aligned}
+\mathbb E_\pi[\mathcal E_{\mathrm{site},A_e}(f_e,f_e)]
+&=\sum_e\frac{m_e}{Z}\mathcal E_{\mathrm{site},A_e}(f_e,f_e)\\
+&=\frac1Z\sum_e\sum_{b\in A_e}\sum_{i\in B}v_i(e\sqcup b)\\
+&=\sum_{i\in B}\mathbb E_\pi[\operatorname{Var}_\pi(f\mid i^c)].
+\end{aligned}
+$$
+
+这里对 $e$ 的求和只取可实现的外部；各 $e\sqcup b$ 恰遍历一次 $W_N$。条件平均中的 $1/m_e$ 已与外部概率中的 $m_e$ 抵消，不再添加归一化因子。把删除封闭族的方差界用于 $f_e$，再按同一外部律平均，便得到每块的比较
+
+$$
+\mathbb E_\pi[\operatorname{Var}_\pi(f\mid B^c)]
+\le\ell2^\ell\sum_{i\in B}
+\mathbb E_\pi[\operatorname{Var}_\pi(f\mid i^c)].
+$$
+
+最后按原来的全部块索引 $a$ 求和。每个位点 $i$ 恰出现在 $a=i-\ell+1,\ldots,i$ 这 $\ell$ 个块中；即使短链上若干块都等于整链，它们各自速率 $1$ 的时钟仍分别计入。因此
+
+$$
+\begin{aligned}
+\mathcal E_B(f,f)
+&\le\ell2^\ell\sum_a\sum_{i\in B_a}
+\mathbb E_\pi[\operatorname{Var}_\pi(f\mid i^c)]\\
+&=\ell^2 2^\ell\mathcal E(f,f).
+\end{aligned}
 $$
 
 与分块方差界合并就得到所述 Poincaré 界及 $\lambda_{K,N}\ge C_K^{-1}$。再用 [@ex-ch39-p2e-heatbath-scale] 的完整空间谱比较，因为 $K\ge2$ 时 $2/C_K<1$，得到 $\Delta_{K,N}\ge2/C_K$。例如 $K=2$ 给出 $1/36$，$K=3$ 给出 $1/400$。空链 $N=0$ 仍没有激发谱隙；短链 $1\le N<K$ 的精确谱隙仍为 $2$。

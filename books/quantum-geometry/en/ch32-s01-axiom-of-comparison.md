@@ -20,7 +20,7 @@ Let $X$ be a raw domain of objects stripped of any external reference point $C$,
 2. **Clause II: Orthogonal Parity Decomposition**. Using $\frac{1}{2} \in \mathcal{A}$, swapping comparison slots decomposes every comparison uniquely into a swap-even **similarity channel** $S(x, y) := \frac{1}{2}\bigl(\mathrm{CMP}(x, y) + \mathrm{CMP}(y, x)\bigr)$ and a swap-odd **directed difference channel** $A(x, y) := \frac{1}{2}\bigl(\mathrm{CMP}(x, y) - \mathrm{CMP}(y, x)\bigr)$, with the `*`-involution reversing comparison order $\mathrm{CMP}(x, y)^* = \mathrm{CMP}(y, x)$:
 
    $$
-   \mathrm{CMP}(x, y) \;=\; S(x, y) + A(x, y), \qquad S(y, x) = S(x, y) = S(x, y)^*, \qquad A(y, x) = -A(x, y) = -A(x, y)^*.
+   \mathrm{CMP}(x, y) \;=\; S(x, y) + A(x, y), \qquad S(y, x) = S(x, y) = S(x, y)^*, \qquad A(y, x) = -A(x, y) = A(x, y)^*.
    $$
 
 3. **Clause III: Bidirectional Reciprocal Fairness**. For every pair $(x, y) \in X \times X$ on the unit comparison carrier $X$, round-trip comparison reversing subject and object conserves the algebraic unit budget:

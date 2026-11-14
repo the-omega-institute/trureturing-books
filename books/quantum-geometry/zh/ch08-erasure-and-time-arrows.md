@@ -202,10 +202,26 @@ $$
 - **幺正平衡的矩阵来源**：对任意联合密度态及联合幺正演化，[边缘熵变恒等式](lean:D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change) 给出 $\Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}} = I_{\mathrm{final}} - I_{\mathrm{initial}}$。实际偏迹下，[直积态的系统边缘态](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState)（`marginalRight`）与[热浴边缘态](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState)（`marginalLeft`）恢复各自因子，[直积态互信息为零](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState) 也允许奇异因子。因此，初态为直积态时，上式化为 $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$，不要求系统初态也是热态；
 - **代数推论**：消去 $\Delta S_{\mathrm{res}}$，得 $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$（其中 $\Delta S_{\mathrm{sys}}$ 为末减初的系统熵变化量，故 $-\Delta S_{\mathrm{sys}}$ 即 [@ex-landauer-one-bit-ledger] 中的系统熵减 $\Delta S_S$）。
 
-这里的熵用自然对数，以奈特为单位；矩阵来源中的 $D$ 是采用源中全函数对数约定的实值迹对数表达式，本书一般 DPI 使用的则是含支撑条件的扩展相对熵。吉布斯参考态正定，消除了热浴的支撑障碍，但共同载体、两种表述的转换与非负性在本应用中的衔接仍须核对。物理热量还要求 $Q = \operatorname{Re}\Tr\bigl(H_E(\rho_E' - \rho_E)\bigr)$，以及 $\beta = 1/(k_B T)$、$k_B > 0$、$T > 0$；任意实数 $\beta$ 的恒等式本身不提供正温热量不等式。
+矩阵来源中的 $D$ 采用源中全函数对数约定的实值迹对数表达式；本书一般 DPI 使用的则是含支撑条件的扩展相对熵。
+
+同一实际协议中，两项余量的非负性也可由既有矩阵结果接上。对末态的互信息，把 $S\times E$ 重标为 $S\times(\{*\}\times E)$，在单点中间系统上应用[强次可加性](lean:D5/S3/Quantum/Information/StrongSubadditivity.strong_subadditivity)。单点熵为零，另两个偏迹正是原末态的系统与热浴边缘态；[熵载体转换](lean:D5/S3/Quantum/Information/StrongSubadditivity.entropy_toMState)和[重标不变性](lean:D5/S3/Quantum/Information/StrongSubadditivity.entropy_relabelState)保留同一矩阵与自然对数熵，故 $I(S':E')\ge0$，不要求边缘态可逆。
+
+对热浴余量，参考吉布斯态 $\rho_E$ 正定，所以 $\ker\rho_E\subseteq\ker\rho_E'$ 自动成立。正半定、迹为一的矩阵均不超过单位矩阵；因此在同一热浴载体上，把[实际矩阵强 Klein 不等式](lean:D5/S3/Quantum/Divergence/SpectralCeilingRelativeEntropy.actual_matrix_spectral_ceiling_strong_klein)的谱上界取为 $M=1$，两项单位迹抵消，舍去非负的 Hilbert–Schmidt 余量，得到 $D(\rho_E'\|\rho_E)\ge0$。星代数等价下的函数演算将其中的两个矩阵对数送到能量差恒等式使用的同一个相对熵表达式。这里使用的始终是能量差恒等式中的实值迹对数表达式；正定吉布斯参考态保证了这次应用所需的支撑条件，末态仍可奇异。
+
+于是，对任意有限非空系统与热浴、任意系统密度态 $\rho_S$、厄米且固定的 $H_E$、任意实数 $\beta$、实际直积初态 $\rho_S\otimes\rho_E$ 及任意联合幺正演化，以上消元给出
+
+$$
+\begin{aligned}
+\beta Q
+&= S(\rho_S)-S(\rho_S')+I(S':E')+D(\rho_E'\|\rho_E) \\
+&\ge S(\rho_S)-S(\rho_S').
+\end{aligned}
+$$
+
+这里 $\rho_{SE}'=U(\rho_S\otimes\rho_E)U^*$，$\rho_S'=\Tr_E\rho_{SE}'$，$\rho_E'=\Tr_S\rho_{SE}'$：所有末态与偏迹都来自同一次演化，且 $Q=\operatorname{Re}\Tr\bigl(H_E(\rho_E'-\rho_E)\bigr)$。完整的[源推导](https://github.com/the-omega-institute/trureturing/blob/a313d1ce217f58f284d14d3b7d8231c5773b8d55/Blueprint/D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.md#product-initialization-and-the-landauer-application)复用这些声明，组装得到这条应用；[@prop-landauer-identity-from-balances] 则保留其两条实数平衡假设。熵用自然对数，以奈特为单位。系统初态无需热平衡、满秩或与某个哈密顿量对易，联合演化也不要求能量守恒。将所定义的固定 $H_E$ 浴能量增量识别为耗散热量仍是物理模型前提；只有在 $\beta=1/(k_B T)>0$、$k_B>0$、$T>0$ 时，除以 $\beta$ 才给出正温热量下界。
 :::
 
-下列命题仍将 [@rem-density-matrix-balance-inputs-literature] 中的平衡式作为实数假设，下界与取等判据另需两项非负性；这些纯实数推理的冻结来源不等于完整物理应用的验证。
+以下命题保留实数平衡假设。上面的应用已在所述有限直积吉布斯热浴模型中接上这些平衡及两项非负余量；将固定 $H_E$ 的浴能量增量解释为热量，仍是明确的物理模型前提。
 
 ::: {.proposition #prop-landauer-identity-from-balances title="由热浴平衡与幺正平衡推出热量—熵—信息恒等式" lean="D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances"}
 设 $\beta$、$Q$、$\Delta S_{\mathrm{sys}}$、$\Delta S_{\mathrm{res}}$、$I$、$D$ 为实数（Lean 中依次为 `beta`、`heat`、`systemEntropyChange`、`reservoirEntropyChange`、`mutualInformation`、`reservoirDivergence`）。若
@@ -241,7 +257,7 @@ $$
 平衡式说明差额 $\beta Q - (-\Delta S)$ 恰好等于 $I + D$（`landauer_slack_of_balance`）。两项非负，故差额非负，这是结论 1（`landauer_bound_of_balance`）。差额为零当且仅当 $I + D = 0$；在两项都非负时这等价于 $I = 0$ 且 $D = 0$（`add_eq_zero_iff_of_nonneg`），这是结论 2（`landauer_saturation_iff`）。结论 3 把结论 1 与“差额不为零”合起来（`landauer_strict_iff`）。完整证明由 Lean 内核检查。
 :::
 
-[@prop-landauer-identity-from-balances] 与 [@cor-landauer-bound-saturation] 是纯实数层面的陈述：它们不知道 $Q$ 是热量、$I$ 是互信息。它们保证的是账目本身不会出错——只要两条平衡式成立、两项余量非负，下界与取等条件就跟着成立。矩阵平衡式已有上述冻结来源，但完整物理应用的接口仍须核对；标量取等判据不提供零互信息或零相对熵的态刻画，也不证明重置、饱和协议或极限构造的可达性。
+实数恒等式与下界本身只谈实数。前面的矩阵应用在所述条件下，把这些数对应到同一个直积初态、联合幺正演化与实际末态偏迹。实数取等判据既不给出互信息或相对熵为零的状态分类，也不保证重置、饱和协议或极限构造可达。
 
 兰道尔界什么时候取不到等号？[@cor-landauer-bound-saturation] 的结论 2 给了判据：要么系统与热浴之间留下了关联（$I > 0$），要么热浴被推离了平衡（$D > 0$）。下面用能想到的最小热浴把这笔账算一遍。
 
@@ -358,8 +374,8 @@ $$
 
 在上述共轭重叠协议及记录不可访问的受限操作下，[@prop-surviving-copy-blocks-reversal] 给出局部不可恢复性：若有一份未逆转的记录副本满足命题条件，所选非零矩阵元不能复原。对于本章所讨论的先未读捏合、再丢弃旧信息并重置的记忆复用协议，阶段 A 产生的熵增与阶段 B 的热代价分别受 [@thm-entropy-production-coherence-deletion] 和 [@rem-landauer-thermodynamic-bridge-literature] 约束；可逆复制或反计算并不属于这个两阶段模型。
 
-::: {.remark #rem-landauer-thermodynamic-bridge-literature title="兰道尔擦除原理、贝内特可逆计算与 Reeb–Wolf 有限热浴不等式（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本章的 [@thm-dual-account-full] 与 [@thm-entropy-production-coherence-deletion] 在 Lean 4 中严格证明了**阶段 A（保单位基捏合抹除相干面积）**在无量纲信息论层面的精确恒等式 $S(\Pi(U\rho U^*)) - S(\rho) = D(U\rho U^* \,\|\, \Pi(U\rho U^*)) \ge 0$ 及相互无偏捏合熵增 $\ln d - S(\rho)$（对单比特纯态为 $\ln 2$ 奈特的系统熵增）。而在**阶段 B（非保单位逻辑重置，如将混合态 $\frac{1}{2}I_2$ 压缩回纯参考态 $\lvert 0\rangle\langle 0\rvert$）**中，将系统熵减 $\Delta S_S := S(\rho_S) - S(\rho_S')$ 乘以物理温度 $k_B T$ 换算为热浴焦耳热量 $\Delta Q$ 的热力学桥梁，来自以下经典物理文献：
+::: {.remark #rem-landauer-thermodynamic-bridge-literature title="Landauer、可逆计算与有限吉布斯热浴应用"}
+下面的有限吉布斯热浴恒等式与下界，经前面的应用接到既有矩阵声明。Landauer 与 Bennett 的物理解释和实现主张仍以文献为依据。阶段 A 保留其捏合定理；把浴能量增量解释为热量，并选择正温单位，则是阶段 B 的模型前提。
 
 1. **兰道尔擦除原理（R. Landauer, 1961）与贝内特逻辑可逆计算（C. H. Bennett, 1973, 1982）**：Rolf Landauer 在 *Irreversibility and heat generation in the computing process*（IBM J. Res. Dev. **5**, 183–191, 1961）中指出，逻辑不可逆的“多对一”非保单位重置操作（如 $\frac{1}{2}I_2 \mapsto \lvert 0\rangle\langle 0\rvert$）必须压缩计算寄存器的信息熵，按热力学第二定律向温度为 $T$ 的环境排放至少 $\Delta Q \ge k_B T \ln 2$ 的热量；Charles H. Bennett（IBM J. Res. Dev. **17**, 525–532, 1973；Int. J. Theor. Phys. **21**, 905–940, 1982）进而证明，任何计算本身都可以通过幺正/双射门可逆地完成（对应 [`unitaryConjugateState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.unitaryConjugateState) 的等熵性质 $S(U\rho U^*) = S(\rho)$），唯有在擦除重置辅助寄存器（ancilla resetting）时才必须支付兰道尔热代价，从而彻底消解了麦克斯韦妖（Maxwell's demon）悖论。
 2. **Reeb–Wolf 有限量子热浴精确兰道尔恒等式与不等式（D. Reeb & M. M. Wolf, 2014）**：在 *An improved Landauer principle with finite-size corrections*（New J. Phys. **16**, 103011, 2014）中，对于初始互不关联的系统 $\rho_S$ 与处于逆温度 $\beta = 1/(k_B T)$ 吉布斯热平衡态 $\rho_E = e^{-\beta H_E}/Z_E$ 的有限维量子热浴，在任意联合幺正演化 $\rho_{SE}' = U(\rho_S \otimes \rho_E)U^*$ 下，热浴吸收的热量 $\beta\Delta Q_{\mathrm{bath}} := \beta\Tr\bigl(H_E(\rho_E' - \rho_E)\bigr)$ 与系统熵减 $\Delta S_S := S(\rho_S) - S(\rho_S')$ 满足精确恒等式
@@ -368,7 +384,7 @@ $$
    $$
    其中联合互信息 $I(S' : E') \ge 0$ 与热浴相对熵 $D(\rho_E' \,\|\, \rho_E) \ge 0$ 均非负，从而在微观量子力学框架下无需热力学极限假设即严格导出 $\Delta Q_{\mathrm{bath}} \ge k_B T \Delta S_S$。
 
-上述涉及物理玻尔兹曼常数 $k_B$、热浴哈密顿量 $H_E$ 与焦耳热量 $\Delta Q_{\mathrm{bath}}$ 的阶段 B 热力学重置换算作为物理背景引述。热浴与联合幺正的矩阵平衡式已有 [@rem-density-matrix-balance-inputs-literature] 所列的冻结来源；[@prop-landauer-identity-from-balances] 保留两条实数平衡假设，[@cor-landauer-bound-saturation] 的下界、取等与严格判据还要求 $I \ge 0$、$D \ge 0$。本章未核对这些非负性及载体、支撑与物理单位接口的完整衔接，也不由标量取等条件宣称可达的重置或饱和协议；有限吉布斯热浴的纯态复位与理想极限仍按上述物理文献的条件理解。
+Reeb–Wolf 的定理 3（arXiv:1306.4352v3，DOI：10.1088/1367-2630/16/10/103011）给出了上述有限模型。[@rem-density-matrix-balance-inputs-literature] 已说明如何用既有矩阵声明，在同一实际直积初态、联合演化及末态偏迹上得到恒等式与两项非负性；将浴能量变化读作热量及采用正温物理单位，仍须上述模型解释。[@prop-landauer-identity-from-balances] 保留两条实数平衡假设，[@cor-landauer-bound-saturation] 的取等与严格判据仍是关于这些实数的条件结论。它们不构造可达的重置或饱和协议；这里的纯态复位只是逻辑操作的示意，并非有限吉布斯热浴中的可达性声明。本应用没有给出取等态分类、功耗、秩约化、无限维热浴或无限逆温度结论。
 :::
 
 ::: {.viz src="erasure-ledger" height="560"}

@@ -18,7 +18,7 @@ For versioned stills or posters, compare the committed image pixels and export c
 
 ## Formal and quantitative boundaries
 
-Resolve truncated signatures against the complete frozen declaration at the exact pin before changing an assertion. Preserve optimization and existence quantifiers: an attainable optimum need not be attained by a sampled construction. Check each green evidence box in full against its cited statement; instantiations or consequences derived manually need their own attribution outside the verified box.
+Resolve truncated signatures against the complete frozen declaration at the exact pin before changing an assertion. Preserve optimization and existence quantifiers: an attainable optimum need not be attained by a sampled construction. Separate a concrete machine's running-time upper bound from a complexity lower bound; check the cost model, input domain and quantification over algorithms before making a necessity claim. Check each green evidence box in full against its cited statement; instantiations or consequences derived manually need their own attribution outside the verified box.
 
 Check a countermodel against every hypothesis it claims to retain, including closure and normalization conditions. Record which conclusion fails and substantiate any claimed minimality.
 

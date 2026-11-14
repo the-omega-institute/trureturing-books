@@ -44,7 +44,7 @@ $$
 :::
 
 - **（四）同余分桶碰撞计数、粗粒化熵与局部搜索屏障：有限带宽比较的原像纤维**。有限观察者每次只能比对有限个投影特征位，微观态遂按读出核归入不可区分的原像纤维（[@thm-ch32-comparison-extensionality-and-lagrange] 第 2 款 `partition_inseparable_iff_kernel` 与[第 38 章 §38.4–§38.5](ch38-observer-memory-pointer-and-ontological-qram.md#sec-ch38-pnp-lookup-degradation)的 `escapePairs_without_eq_union`，`LEAN ✓`）。在含 $M$ 个微观态的单个读出桶内，`EscapePairs` 精确统计 $M(M-1)$ 个有序相异碰撞对；而粗粒化香农/玻尔兹曼熵则依赖显式微观态概率分布（仅在单桶均匀系综下等于 $\log_2 M$ 比特，对应物理热力学熵须在指明系综假设下归入 `MODEL`），缺乏全局导向场时被迫逐桶盲比则构成有限带宽下的指数级局部搜索屏障。
-- **（五）生命演化与科学定律：历史比较结果的快表记忆化（$T \mapsto T(T)$）**。如果在每一拍面对环境变化时都从零做 $O(2^n)$ 次原始逐位硬比，任何有限系统都会瞬间耗尽步数预算。DNA 遗传密码、大脑突触权重与人类数学定理库，在计算本质上都是把亿万次存活下来的高频比较预先编译成前缀路由快表 $T$（[第 35 章](ch35-light-pulse-and-self-referential-table.md)与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)），把指数级硬扫描压缩为深度 $b$ 的低步数前缀命中，同时每一拍物理比对与字典扫描依然严格支付非零有限机器步数（下方 [@thm-ch32-paid-name-comparison-and-dictionary]，`LEAN ✓`）。
+- **（五）生命演化与科学定律：历史比较结果的快表记忆化（$T \mapsto T(T)$）**。如果在每一拍面对环境变化时都从零做 $O(2^n)$ 次原始逐位硬比，任何有限系统都会瞬间耗尽步数预算。DNA 遗传密码、大脑突触权重与人类数学定理库，在计算本质上都是把亿万次存活下来的高频比较预先编译成前缀路由快表 $T$（[第 35 章](ch35-light-pulse-and-self-referential-table.md)与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)），把指数级硬扫描压缩为深度 $b$ 的低步数前缀命中，同时本文给出的逐位名字比对与字典扫描构造都在显式有限步数上界内完成（下方 [@thm-ch32-paid-name-comparison-and-dictionary]，`LEAN ✓`）。
 
 ::: {.viz src="comparison-oisc-engine" preset="lookup" height="520"}
 **读前 $b$ 位的前缀快表与自比较蛛网：省下的比较位数留下同桶逃逸对。** 十六个四位态只读前 $b$ 位时，深度为 $b$ 的前缀树只需 $b$ 次比较即可命中叶子，但同桶内留下 $16(2^{4-b}-1)$ 个分不开的逃逸对（`escapePairs_without_eq_union` `LEAN ✓`）；右侧时间轴运行自比较 $x_{n+1} = \cos x_n$，蛛网步步收向唯一正不动点 $\theta^* \approx 0.7391$（`rational_inverse_endpoint` `LEAN ✓`）。
@@ -86,7 +86,7 @@ $$
 :::
 
 ::: proof
-第 1 款将 `compareMachine` 的执行拆为扫描比对阶段与回卷复原阶段：在 `compare` 状态逐拍弹出 $a, b$ 首比特压入暂存栈 `savedLeft, savedRight` 并累计匹配标志位（若一侧提前耗尽则置匹配位为 `false` 并转入耗尽清栈分支），随后在 `restore` 阶段将两条暂存栈逐位倒回左、右主栈，总步数精确受限于往返两趟字长之和加常数状态切换开销 $2(\lvert a\rvert + \lvert b\rvert) + 4$。第 2 款在 `dictionaryStream` 上对字典条目数 $\lvert\mathrm{names}\rvert$ 归纳：每扫过一个词条，机器调用内嵌逐位比对子例程并在未命中时追加一元计数符 `true`，扫完整个流后回卷复原字典流与查询字，累计步数满足线性界 $(2\lvert\mathrm{query}\rvert + 12)\lvert\mathrm{names}\rvert + 4\bigl\lvert\operatorname{dictionaryStream}(\mathrm{names})\bigr\rvert + 3$。完整证明由 Lean 内核检查。
+第 1 款将 `compareMachine` 的执行拆为扫描比对阶段与回卷复原阶段：在 `compare` 状态逐拍弹出 $a, b$ 首比特压入暂存栈 `savedLeft, savedRight` 并累计匹配标志位（若一侧提前耗尽则置匹配位为 `false` 并转入耗尽清栈分支），随后在 `restore` 阶段将两条暂存栈逐位倒回左、右主栈，总步数精确受限于往返两趟字长之和加常数状态切换开销 $2(\lvert a\rvert + \lvert b\rvert) + 4$。第 2 款在 `dictionaryStream` 上对字典条目数 $\lvert\mathrm{names}\rvert$ 归纳：每读出一个词条，机器调用内嵌逐位比对子例程，由它复原查询字；未命中则追加一元计数符 `true` 后继续，首次命中或字典耗尽时便回卷，将已读历史逐位接回未读后缀之前，复原字典流，累计步数满足线性界 $(2\lvert\mathrm{query}\rvert + 12)\lvert\mathrm{names}\rvert + 4\bigl\lvert\operatorname{dictionaryStream}(\mathrm{names})\bigr\rvert + 3$。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch32-paid-name-comparison-and-dictionary] 为宇宙单指令集比较机钉死了一条物理与计算的共同铁律（`MODEL`）：**不存在不读比特就能瞬间知道 $a = b$ 的零步神谕，也不存在可逆保住双方身份而不付线性步数预算的免费比较**。带着 $\mathcal{A}_0$ 与这台有偿单指令比较机，我们现在进入[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)，将数学与物理的五大公理群正式铸造成经内核验证的推论链。
+[@thm-ch32-paid-name-comparison-and-dictionary] 为宇宙单指令集比较机提供了一本可核对的步数账（`MODEL`）：**上述两台机器逐位比较、逐项查找，并在给定步数上界内无损复原输入与字典纸带**。该运行保证针对这两项构造；比较算法的普适线性下界还需另行指定成本模型并证明。带着 $\mathcal{A}_0$ 与这台有偿单指令比较机，我们现在进入[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)，将数学与物理的五大公理群正式铸造成经内核验证的推论链。

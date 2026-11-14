@@ -2,7 +2,7 @@
   "next": {
     "T": 324,
     "D": 160,
-    "R": 173
+    "R": 177
   },
   "serials": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": "T001",
@@ -611,6 +611,10 @@
     "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_boundary_walk": "R172",
     "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_lower_bound": "T319",
     "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_upper_bound": "T320",
+    "D5/S3/Quantum/Divergence/SpectralCeilingRelativeEntropy.actual_matrix_spectral_ceiling_strong_klein": "R173",
+    "D5/S3/Quantum/Information/StrongSubadditivity.entropy_relabelState": "R174",
+    "D5/S3/Quantum/Information/StrongSubadditivity.entropy_toMState": "R175",
+    "D5/S3/Quantum/Information/StrongSubadditivity.strong_subadditivity": "R176",
     "D5/S3/Quantum/Routing/HannRouterProfiles.physical_profile_event": "T321",
     "D5/S3/Quantum/Routing/HannRouterProfiles.profile_separation_iff": "T322",
     "D5/S3/Quantum/Routing/HannSignedCertificate.signed_event": "T323",
