@@ -2,7 +2,7 @@
   "next": {
     "T": 318,
     "D": 115,
-    "R": 172
+    "R": 173
   },
   "serials": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": "T001",
@@ -606,6 +606,7 @@
     "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change": "R168",
     "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState": "R169",
     "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState": "R170",
-    "D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState": "R171"
+    "D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState": "R171",
+    "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_boundary_walk": "R172"
   }
 }
