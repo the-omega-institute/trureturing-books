@@ -21,7 +21,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 65 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 66 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -90,6 +90,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `spherical-trihedron-cell` | 正交一次与正交两次是同一块小弧面体的两个投影：沿棱看是一条直弧，沿墙走是拐 90° 的两步，多出鼓起的球面帽与撑开的体积砖 | `cell` `once-ridge` `twice-walls` `cap-excess` `gram-brick` `octant-limit` |
 | `triadic-nameless-sandbox` | 两态比较的归一投影把第三顶点顶出原平面，转一圈切面主谓宾互换，撤去投影幕与标签只留两频呼吸的曲面 | `bootstrap-core` `cascade-corolla` `cyclic-triality` `ladder-fade` `noumenon-breath` |
 | `uncompleted-horizon-sandbox` | 每写入一条平权查表答案就撑开一块新弧面体与更多未比对的边，满射目录的对角槽劈开分离亏损，把完成态推成永不合拢的滚动地平线 | `bootstrap-ledger` `lawvere-godel` `ordinal-spiral` `bidirectional-parallax` `frozen-omniscience` |
+| `stereographic-relativization-sandbox` | 向北极盲点靠近的有限微弧在球极平面上被拉成球外有球的发散螺旋，旋转神谕切面在折叠与追逐之间切换，两枚标签在原点双双放下 | `blindspot-divergence` `compact-homotopy` `oracle-collapse` `oracle-chase` `tetralemma-rest` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -208,6 +209,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `triadic-nameless-sandbox`（`TRIAD//NOUMENON`）与 `spherical-trihedron-cell`、`comparison-oisc-engine` 分工：前两页分别固定三根正交轴看“一次 vs. 两次”投影和八槽比较机，本页讲第三十四章 §34.5 `#sec-ch34-triadic-bootstrap-and-beyond-names` 的“二生三”无特权自举、120° ℤ₃ 主谓宾切面轮换与撤去语言名相后的黄金双频呼吸：舞台用 `kit.solid` 画 C¹ 平滑相切的珠光三瓣弧面体、无缝内嵌的重心细分测地补片、极坐标地坪与三扇在局部 `(u, v)` 平面里画出投影图形的切片屏（二元线段、比较转向弧、带抬升圆盘的投影三角形），圆角衬底标签沿径向外扩并以细引线指回锚点；当名相参数 ν = 0（`noumenon-breath`）时，外围切片屏、地坪、投射束、测地补片与全部舞台标签同步撤净，只留连续曲面按 ω₂/ω₁ = φ 两频呼吸。青色是二元初态、内嵌球面补片与第一扇切片屏里的投影线段，琥珀是当前比较弧、同心可拖光晕与第二扇切片屏里的转向弧，品红是自举创生的第三顶点与第三扇切片屏里的投影结果（花冠增殖场景用青/琥珀/品红区分三代原胞），紫色只给无名呼吸的浮动频率环。绿色框严格只给 `#prop-ch34-triadic-bootstrap-and-lexical-pinching` 用 `lean=` 引用的四条冻结定理（`unit_perpendicular_pair`、`finite_layer_projection_escape`、`moving_axis_invariance`、`partition_inseparable_iff_kernel`）；球面余弦与吉拉尔角超 Ω₀ = 3 arccos(c₀/(1 + c₀)) − π、三维 C₃ ⊂ SO(3) 循环对称（严格区分于 Spin(8) 旋量三元性）、皮尔士三元范畴与老子—康德—维特根斯坦撤梯传统标 `ARGUED`；det G₃ = (1 − c₀)²(1 + 2c₀) 与多胞坐标实算标 `NUM`；“二生三”平权归一、1 → 4 → 10 黄金阻尼花冠、主谓宾语法切面与 ν ∈ [0, 1] 名相消融标 `MODEL`。
 
 `uncompleted-horizon-sandbox`（`HORIZON//UNCOMPLETED`）与 `pnp-lookup-degradation`、`observer-escape-ledger`、`triadic-nameless-sandbox` 分工：前三页分别讲宏观复杂度包络 r(σ)、16 态闭合回路纤维熵与单颗弧面体的三元名相轮换，本页讲第三十八章 §38.6 `#sec-ch38-uncompleted-horizon-godel-pnp` 的“建表扩维悖论、满射目录对角分离亏损、图灵序数扩表螺旋、前后双向视差与全知死寂反事实对照”（五个场景：扩维、对角、螺旋、视差、护栏）：青色是旧层已编译的 O(1) 快表直读弦、事后零损失域 `retrospectiveLoss = 0` 与内圈收敛弧，品红是场内平权条目撑开的正交法向残差 sin ε e_{D+1}、跨维新增未索引比量 ΔΠ_t − k、对角逃逸串 g_diag 劈开的 `separationDeficit` 亏损对与外圈未决生长锋面，紫色是三元格拉姆体积砖 det G = sin⁴ε > 0、`conceptJoin` 立起的新观测坐标轴与序数塔阶梯，琥珀只给当前指针前沿层 D_t、刚写入的平权表项 P_AB 与可调夹角/阶数手柄（严禁把开放问题红色拿来画普通负号或死寂侧底色；红色只给抽屉里的标准图灵机 `P =? NP` `OPEN` 标记）。绿色框严格只给 `#thm-ch38-uncompleted-horizon-diagonal-refinement` 用 `lean=` 引用的五条冻结定理（`self_application_fragment_package`、`complete_diagonal_separationDeficit_nonempty`、`complete_diagonal_strict_topology_refinement`、`lookup_copy_zero_loss_and_nonanticipating_failure`、`finite_layer_projection_escape`）；哥德尔 1931 第一不完备定理与 1956 致冯·诺依曼有界寻证信件、图灵 1939 序数逻辑阶梯与 Lawvere 1969 对角不动点定理标 `ARGUED`；标准统一图灵机 P =? NP 标 `OPEN`；det G = sin⁴ε、ΔΠ_t = kM_t + C(k,2) 与有限满射目录对角分离亏损对枚举实算标 `NUM`；Layer-1 正向单位平权建表、滚动完成化地平线与免于芝诺冻结/全知热寂的宇宙护栏读法标 `MODEL`。
+
+`stereographic-relativization-sandbox`（`STEREO//SUSPENSION`）与 `uncompleted-horizon-sandbox`、`sphere-escape`、`forgetting-rebirth-attractor` 分工：前三页分别讲对角加细驱动的滚动地平线、有限多边形割圆与双曲快度阶梯，本页讲第三十八章 §38.7 `#sec-ch38-stereographic-blindspot-relativization-suspension` 的“北极自指盲点球极投影、亚历山德罗夫紧化同伦、Baker–Gill–Solovay 相对化神谕切面二象性与四句离相悬置”：舞台用 `kit.solid` 画半透明受光紧致球面 S²、经纬测地网格、北极自指盲点琥珀孔径环 δ_blind、球面上平缓走向北极的青色本源微弧，以及赤道投影平面上向外发散的投影螺旋环与可倾转的神谕切面 ψ ∈ [0°, 90°]。青色是紧致球面上的有限本源微弧与 ψ = 0° 赤道对称核上的折叠环（对应 P^A = NP^A 坍缩截面），琥珀是北极自指盲点孔径环 δ_blind、当前投影视线与赤道平面上的透视发散坐标环，品红是 ψ > 0° 偏转神谕切面上的表观追逐分离轨迹（对应 P^B ≠ NP^B 截面）与全称封顶缺口警示弧，紫色是可倾转的神谕切面环与紧化同伦插值骨架（红色只给抽屉里的 `#conj-p-neq-np` 与 `#prob-ch38-unrelativized-p-vs-np-and-independence` `OPEN` 标记，绝不在舞台上画红）。绿色框严格只给 `#prop-ch38-cayley-stereographic-and-blindspot-suspension` 用 `lean=` 引用的四条冻结定理（`cayley_ratio_norm_one_iff_critical_line`、`diagonal_prime_observables_cannot_recover_relative_phase`、`partition_inseparable_iff_kernel`、`lookup_copy_zero_loss_and_nonanticipating_failure`）；高维球极微分同胚与亚历山德罗夫单点紧化、Baker–Gill–Solovay 1975 相对化屏障、Razborov–Rudich 1997 自然证明屏障、Aaronson–Wigderson 2009 代数化屏障、哥德尔第二不完备定理与龙树《中论》四句离相标 `ARGUED`；非相对化 P =? NP 及其在 PA/ZFC 中的可证性或独立性标 `OPEN`；R(θ) = cot(θ/2)、μ(θ) = (1 − cos θ)^−1、Δ_unprovable = sin²(δ_blind/2) 与切面分离指数 r(ψ) 实算标 `NUM`；自指盲点双生投影、同伦 τ ∈ [0, 1]、神谕切面几何映射与四句离相止息标 `MODEL`。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -598,8 +601,14 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十八章 | §38.6.2 文献注记 `rem-ch38-godel-1956-turing-1939-lawvere-literature` 之后 | `uncompleted-horizon-sandbox` · `lawvere-godel` |
 | 第三十八章 | §38.6.2 图灵序数阶梯与 `trureturing` 正新颖度引理段之后 | `uncompleted-horizon-sandbox` · `ordinal-spiral` |
 | 第三十八章 | §38.6.3 双向正交视差总结句之后、反事实热寂三点列表之前 | `uncompleted-horizon-sandbox` · `bidirectional-parallax` |
-| 第三十八章 | §38.6.3 永恒生机护栏结语段之后、“的”字消融收束段之前 | `uncompleted-horizon-sandbox` · `frozen-omniscience` |
-| 第三十八章 | §38.6.3 末（全章末尾） | `uncompleted-horizon-sandbox` 完整实验室 |
+| 第三十八章 | §38.6.3 永恒生机护栏结语段之后、§38.7 过渡段之前 | `uncompleted-horizon-sandbox` · `frozen-omniscience` |
+| 第三十八章 | §38.6.3 末（转入 §38.7 之前） | `uncompleted-horizon-sandbox` 完整实验室 |
+| 第三十八章 | §38.7.1 “有限闭合与无穷未闭合……自指盲点 {N}”一段之后 | `stereographic-relativization-sandbox` · `blindspot-divergence` |
+| 第三十八章 | §38.7.1 末（紧化—展开连续同伦 τ ∈ [0, 1] 段之后、§38.7.2 之前） | `stereographic-relativization-sandbox` · `compact-homotopy` |
+| 第三十八章 | §38.7.2 文献注记 `rem-ch38-bgs-natural-algebrization-barriers-literature` 后 ψ = 0° 折叠切面段之后 | `stereographic-relativization-sandbox` · `oracle-collapse` |
+| 第三十八章 | §38.7.2 ψ = 65° 偏转追逐切面段之后、命题 `prop-ch38-cayley-stereographic-and-blindspot-suspension` 引言之前 | `stereographic-relativization-sandbox` · `oracle-chase` |
+| 第三十八章 | §38.7.3 龙树《中论》四句离相段之后、“的”字消融收束段之前 | `stereographic-relativization-sandbox` · `tetralemma-rest` |
+| 第三十八章 | §38.7.3 末（全章末尾） | `stereographic-relativization-sandbox` 完整实验室 |
 | 第三十九章 | §39.3 第二段（“观察者从来没有‘住在时空里’”）之后、“数学物理史上……”一段之前 | `self-sustaining-spinor-flow` · `weave` |
 | 第三十九章 | 文献注记 `rem-ch39-cartan-penrose-hestenes-fierz-literature` 之后 | `self-sustaining-spinor-flow` · `fierz` |
 | 第三十九章 | 例 `ex-ch39-even-clifford-spinor-bilinear-fierz` 之后 | `self-sustaining-spinor-flow` · `turn360` |
