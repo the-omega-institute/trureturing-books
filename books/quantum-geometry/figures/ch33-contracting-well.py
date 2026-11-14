@@ -12,11 +12,11 @@ from _ch33 import iterates, profile
 
 SIZE = (460, 216)
 ALT = {
-    "zh": "三条剖面并排。左：平坦的桌面，小球在一串扰动下一步步向右漂离起点。中：倒扣的碗，小球从顶点附近出发，每一步离顶点更远，"
+    "zh": "三条剖面并排。左：平坦的桌面，小球在一串左右扰动后漂离起点。中：倒扣的碗，小球从顶点附近出发，每一步离顶点更远，"
           "滑向碗边。右：碗形的势阱，小球被踢到右坡上，每一步离碗底的距离缩到不足一半，落向碗底那段青色的接受窗 W + u_i。"
           "每条剖面上，琥珀色的是小球现在的位置，灰色空心圈是之前的位置。",
-    "en": "Three profiles side by side. Left: a flat table; under a sequence of kicks the marble drifts step by step to "
-          "the right, away from where it started. Middle: an inverted bowl; starting near the top, the marble moves "
+    "en": "Three profiles side by side. Left: a flat table; after a sequence of kicks to the left and right the marble "
+          "has drifted away from where it started. Middle: an inverted bowl; starting near the top, the marble moves "
           "farther from it at every step, towards the rim. Right: a bowl-shaped well; kicked up the right slope, the "
           "marble cuts its distance from the bottom to less than half at every step, towards the short cyan window W + u_i there. On "
           "each profile the amber marble is where it is now, the grey rings where it was.",
