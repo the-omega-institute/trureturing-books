@@ -220,7 +220,7 @@ Moreover, $\operatorname{CycleCompletion}(E)$ is nonempty and has finite cardina
 Finiteness, acyclicity, and uniqueness of successors identify a tail in each weak component; applying the same argument to the reversed relation identifies its head. Every extending permutation bijects the tails with the heads. First returns to the heads identify the orbits of the original permutation with those of the component permutation, giving the equivalence between full-cycle completions. This equivalence gives the factorial count and nonemptiness. Conditioning and pushing forward finite uniform probability masses give the same completion law, and the endpoint equation transports component-successor marginals back to the original vertices. The full proof is checked by the Lean kernel.
 :::
 
-The edge identity $|E|=N-c$ and explicit event-probability ratio $(c-1)!/(N-1)!$ in the wider result below are not stated or checked by the cited Lean declaration; the full written proof below remains responsible for them. The next subsection treats static classification and counting under alternation. An alternating conditional law, undirected orientation, adaptive histories, queries, and `EXIT` require their own distribution and correspondence proofs.
+The edge identity $|E|=N-c$ and explicit event-probability ratio $(c-1)!/(N-1)!$ in the wider result below are not stated or checked by the cited Lean declaration; the full written proof below remains responsible for them. The next subsection treats static classification and counting under alternation; [@thm-undirected-cycle-orientation-fibers] gives the actual orientation fibers over the same ordinary undirected full cycle. Alternating conditional laws, undirected probability laws, adaptive histories, queries, and `EXIT` still require their own distribution and correspondence proofs.
 
 ::: {.theorem #thm-directed-forest-cycle-completion title="Single-cycle completion of a directed forest and its static uniform law" status="written-proof" proof="pf-directed-forest-cycle-completion" doi="10.1007/978-1-4684-0637-5_13" source="Section 8, p. 11" request="https://github.com/the-omega-institute/trureturing-requests/issues/11"}
 Let $V$ be a finite labelled set of cardinality $N\ge2$, and let $E\subseteq V\times V$. Suppose every vertex has at most one incoming and at most one outgoing edge in $E$, and $E$ has no directed cycle. Let $\mathcal C$ be the set of all weak components of $(V,E)$, including every isolated vertex, and suppose $c=|\mathcal C|\ge2$.
@@ -391,13 +391,114 @@ The direct source entry for this unbounded inventory count is [`compatible_cycle
 
 Both feasible and impossible cases can be checked by hand. For $E=\varnothing,n=2$, the four isolated vertices give $a=b=2,p=q=0$, and count $2$: $(r_1\ b_1\ r_2\ b_2)$ and $(r_1\ b_2\ r_2\ b_1)$. A single path $r_1\to b_1$ spanning all vertices has $m=q=0,p=1$; the component identity cycle gives its unique closure. The two oppositely directed paths at the start of this subsection have $m=0,p=q=1$, giving count zero. Thus the theorem assumes neither a completion, a positive count, a supplied path decomposition, nor strong connectivity.
 
+### 16.2.3 Undirected full cycles: two orientations of the same completed graph {#sec-undirected-cycle-orientation-fibers}
+
+On an undirected cycle through five labelled vertices, clockwise and counterclockwise traversal give different successor permutations with exactly the same edges. Forgetting direction must identify those two actual representations, rather than merely divide a count by two. The correspondence below keeps the original labelled vertices; the prescribed edges may even already form a complete cycle.
+
+The full application is developed in trureturing's [RotationFaces exposition](https://github.com/the-omega-institute/trureturing/blob/2731c2994260e6ac22ed3385bbc04b37a63ac7a3/Blueprint/D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.md). Its frozen supplier, [`cycle_boundary_walk`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_boundary_walk), identifies the two directions of a simple closed walk from an actual rotation system and an exact binary facial boundary. The broader statement below must first construct those inputs from graphs and permutations. It therefore retains a complete written proof rather than a Lean badge for the whole application.
+
+::: {.theorem #thm-undirected-cycle-orientation-fibers title="Orientation fibers and edge insertion for the same undirected full cycle" status="written-proof" proof="pf-undirected-cycle-orientation-fibers" repository="https://github.com/the-omega-institute/trureturing" source="RotationFaces, orientation-fiber application" request="https://github.com/the-omega-institute/trureturing-requests/issues/12"}
+Let $V$ be a finite labelled set with $|V|\ge3$, and let $F$ be any simple graph on $V$. Define
+
+$$
+\mathcal H(F)=\{C:\ C\text{ is a connected simple graph on }V,
+\deg_C(v)=2\ (v\in V),\ F\le C\}.
+$$
+
+Let $\mathcal L(F)$ contain all actual pairs $(E,\sigma)$ where $E\subseteq V\times V$ orients each edge of $F$ exactly once, contains no other edges, and has at most one incoming and one outgoing edge at each vertex; $\sigma\in\operatorname{Cyc}(V)$ extends $E$, meaning $E(u,v)\Rightarrow\sigma(u)=v$. Every isolate of $F$ remains in $V$. Define the undirected shadow by
+
+$$
+C_\sigma.\operatorname{Adj}(u,v)
+\quad\Longleftrightarrow\quad
+\sigma(u)=v\ \text{or}\ \sigma(v)=u.
+$$
+
+Then $(E,\sigma)\mapsto C_\sigma$ is onto $\mathcal H(F)$. Above the shadow of any $(E,\sigma)\in\mathcal L(F)$, the entire fiber consists of exactly the two distinct actual pairs
+
+$$
+(E,\sigma),\qquad(E^{\mathrm{op}},\sigma^{-1}),
+\qquad E^{\mathrm{op}}(u,v)\Longleftrightarrow E(v,u).
+$$
+
+Reversal $\iota(E,\sigma)=(E^{\mathrm{op}},\sigma^{-1})$ is an involution without fixed points and induces an equivalence
+
+$$
+\mathcal L(F)/\langle\iota\rangle\ \simeq\ \mathcal H(F).
+$$
+
+It sends each class to that same actual completed graph, preserving every adjacency event. The set $\mathcal H(F)$ may be empty.
+
+For any distinct $u,v\in V$, let $F+uv$ add just the undirected edge $\{u,v\}$. There is also an equivalence
+
+$$
+\mathcal L(F+uv)\ \simeq
+\{(E,\sigma)\in\mathcal L(F):C_\sigma.\operatorname{Adj}(u,v)\}.
+$$
+
+This equivalence keeps $\sigma$ and the same shadow and commutes with reversal. Neither $F$ nor $F+uv$ is required to be a forest: closing a spanning path and the case $F=C$ are included.
+:::
+
+::: {.proof #pf-undirected-cycle-orientation-fibers}
+**Construct an actual representation from the raw graph.** In a finite connected simple graph $C$ of degree two everywhere, start at any vertex and continue along edges, always avoiding the edge just traversed. Degree two makes each next step unique, and finiteness eventually forces a repeated vertex. The first repetition must return to the starting vertex: any other repeated vertex already has two neighbors on the simple path so far, and another arrival would require a third neighbor or an immediate backtrack. This gives a simple closed walk $p$. Both edges at each vertex of the cycle are already occupied, so no edge can leave it. Connectedness therefore makes its support all of $V$ and its undirected edges exactly those of $C$.
+
+Taking successors along $p$ defines a full-cycle permutation $\tau$ on $V$. Since $|V|\ge3$, it has neither fixed points nor two-cycles, and its shadow is exactly $C$. For $F\le C$, put
+
+$$
+E_\tau(x,y)\quad\Longleftrightarrow\quad
+F.\operatorname{Adj}(x,y)\ \text{and}\ \tau(x)=y.
+$$
+
+Every edge of $F$ has exactly one direction along $\tau$, with at most one incoming and one outgoing edge per vertex. Thus $(E_\tau,\tau)$ is an actual lift, giving the existence needed for surjectivity. No orientation, path decomposition or completion was supplied with $F$.
+
+**Read the shadow and orientation of any actual lift.** Conversely, take any $(E,\sigma)\in\mathcal L(F)$. The full-cycle condition makes every orbit have length $|V|$, so $\sigma(v)\ne v$ and $\sigma(v)\ne\sigma^{-1}(v)$. The shadow has exactly these two distinct neighbors at $v$, hence is simple and two-regular; the full permutation orbit makes it connected. Since $\sigma$ extends the chosen direction of every edge of $F$, we have $F\le C_\sigma$. In fact, for every $x,y$,
+
+$$
+E(x,y)\quad\Longleftrightarrow\quad
+F.\operatorname{Adj}(x,y)\ \text{and}\ \sigma(x)=y.
+$$
+
+If the implication from right to left failed, $E$ would have to choose the reverse edge, forcing both $\sigma(x)=y$ and $\sigma(y)=x$, a forbidden two-cycle. Thus $\sigma$ determines the entire pair. This describes all actual lifts, not merely the image of one construction.
+
+**Exhaust the two directions through the actual facial boundary.** Fix the raw graph $C$ and its spanning simple closed walk $p$, and take any full-cycle permutation $\sigma$ with shadow $C$. An actual oriented edge $d=(x,y)$ is a dart. At each vertex, interchange its two outgoing darts, pointing to $\sigma(x)$ and $\sigma^{-1}(x)$. This defines a rotation system $R$: its rotor orbits are exactly the two darts with the same first vertex. The facial successor reverses a dart and then applies this interchange. Label darts by
+
+$$
+\ell(x,y)=
+\begin{cases}1,&\sigma(x)=y,\\0,&\sigma^{-1}(x)=y,\end{cases}
+\qquad\ell(x,y)\in\mathbb F_2.
+$$
+
+The facial successor sends $(x,\sigma(x))$ to $(\sigma(x),\sigma^2(x))$ and $(x,\sigma^{-1}(x))$ to $(\sigma^{-1}(x),\sigma^{-2}(x))$, preserving the label in both cases. As it is a permutation, its inverse preserves the label too. Hence $\ell$ is constant on each actual facial orbit under all integer iterates and descends to a function $z$ on the face quotient, with $z(R.\operatorname{face}(d))=\ell(d)$. Opposite darts have opposite labels, so their sum in $\mathbb F_2$ is one on every undirected edge. Since $p$ traverses exactly all edges of $C$, this binary boundary is precisely the edge indicator of $p$.
+
+Every input of the frozen `cycle_boundary_walk` is now constructed: the actual graph is $C$, the rotation is $R$, the simple closed walk is $p$, the face function is $z$, and the boundary equality holds on every edge. It supplies $q=p$ or $q=p^{\mathrm{reverse}}$ and, for every actual dart,
+
+$$
+\bigl(z(R.\operatorname{face}(d)),z(R.\operatorname{face}(d^{\mathrm{op}}))\bigr)=(1,0)
+\quad\Longleftrightarrow\quad d\in q.\operatorname{darts}.
+$$
+
+The left side is exactly the successor direction of $\sigma$, so $\sigma=\tau$ or $\sigma=\tau^{-1}$. This applies to every actual lift. Global orientation coherence is a conclusion, and no Euler equation has been assumed.
+
+**Recover actual pairs, the quotient and edge insertion.** Applying this conclusion to two arbitrary lifts of the same shadow makes their permutations equal or inverse. The forced-orientation formula then makes the pairs equal or reversals. Reversing twice restores the original pair. A pair fixed by reversal would satisfy $\sigma^2=\operatorname{id}$, contradicting a full cycle of length at least three. Every fiber therefore consists of exactly the two distinct pairs stated above. Surjectivity and this exact fiber description identify reversal orbits with completed graphs. Each class still maps to the same $C_\sigma$, so every adjacency event is preserved.
+
+Finally, from $\mathcal L(F+uv)$ keep $\sigma$ and restrict $E$ to edges of $F$; its shadow still contains $uv$. Conversely, from any pair on the right keep $\sigma$ and define
+
+$$
+E'(x,y)\quad\Longleftrightarrow\quad
+(F+uv).\operatorname{Adj}(x,y)\ \text{and}\ \sigma(x)=y.
+$$
+
+The shadow contains $F+uv$, and absence of two-cycles selects exactly one direction for each edge. The permutation gives the incoming and outgoing bounds. Forced orientation shows that restriction and expansion are inverse and that the expansion is unique. Both keep the shadow; replacing $\sigma$ by its inverse reverses every selected direction, so both commute with $\iota$. Nothing in this argument excludes an insertion that closes the full cycle. This is a written proof, for which the author and reviewers are responsible.
+:::
+
+The two permutation representations of a simple full cycle have a classical antecedent: Greenhill, Janson, Kim and Wormald, *Permutation pseudographs and contiguity*, [doi:10.1017/S0963548301005065](https://doi.org/10.1017/S0963548301005065), p. 3, gives permutation multiplicities for two-regular pseudographs. Here the objects are ordinary simple full cycles on at least three vertices. On two vertices the inverse permutations coincide, and a disconnected union of cycles is not the shadow of one full-cycle permutation. That reference supplies the classical multiplicity provenance, rather than every strengthened correspondence and insertion clause above. No undirected probability law, alternating count, random-name or port law, adaptive-query bound or `EXIT` bound follows here.
+
 **Which bridges to a classical oracle lower bound remain?** [@thm-directed-forest-cycle-completion] gives the ordinary directed model's static uniform law, and [@thm-alternating-forest-classification] classifies and counts all actual completions of the alternating model. Three distinctions separate them from the glued-trees result in [@rem-qsvt-walks-literature]:
 
-1. **Graph distribution and orientation.** Ben-David et al. (*SIAM Journal on Computing* **53**(6), 2024, [doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975), §6.3.2, Lemmas 6.11–6.13, PDF pages 37–39) use one uniform cycle on each side's leaves for the self-weld, and a uniform alternating cycle between the two sides for the weld. [@thm-alternating-forest-classification] now supplies the directed alternating static classification and cardinality; it states neither an alternating conditional probability mass nor an explicit event-probability ratio. Passing to undirected cycles still requires orientation and representation multiplicities. An alternating conditional completion law still needs its own probability interface; the ordinary model's $1/(c-1)$ cannot simply be transferred.
+1. **Graph distribution and orientation.** Ben-David et al. (*SIAM Journal on Computing* **53**(6), 2024, [doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975), §6.3.2, Lemmas 6.11–6.13, PDF pages 37–39) use one uniform cycle on each side's leaves for the self-weld, and a uniform alternating cycle between the two sides for the weld. [@thm-alternating-forest-classification] now supplies the directed alternating static classification and cardinality; it states neither an alternating conditional probability mass nor an explicit event-probability ratio. For ordinary undirected full cycles, [@thm-undirected-cycle-orientation-fibers] now identifies orientations and representation multiplicities over the same actual completed graph: each fiber is exactly a pair of reversed lifts, with edge-insertion events preserved. This static correspondence supplies neither an undirected probability law nor an alternating extension. An alternating conditional completion law still needs its own probability interface; the ordinary model's $1/(c-1)$ cannot simply be transferred.
 2. **Conditioning information.** The ordinary directed theorem conditions only on all edges of fixed $E$ being present; the alternating theorem itself states only classification and counting. An adaptive algorithm's full query history also involves random names, query choices, answers listing all neighbors, and possibly color information. One must prove, on the same random graph realization, that these history conditions leave precisely the asserted uniform completion set, or establish the appropriate different conditional law. Replacing a history by $E$ does not establish this. The cited Ben-David et al. lemmas permit only queries to names already in the knowledge graph; queries outside it require a separate argument. Whether sparse random names provide additional information is also beyond this theorem.
 3. **Queries, embeddings, and success events.** In [quant-ph/0209131v2, Section IV](https://arxiv.org/abs/quant-ph/0209131v2), Childs et al. first handle guessed new names, colors, and games restricted to known names, then pass to random tree embeddings and bound collision and `EXIT` events to obtain the original Theorem 9. Ben-David et al.'s footnote 14 explicitly notes that queries returning all neighbors give an embedding tree with $O(t)$ vertices, not literally $t$. Their printed component lower bound $2^k-2t$, pair bound $2/(2^k-2t)$, and equation (6.4), $O(t^2/(2^k-t))$, are retained as separately stated in the source; no unproved explicit constant or parameter range is assembled from them here.
 
-The ordinary contraction law supplies static counting and conditioning; the alternating theorem adds classification and counting on the actual static carrier. Alternating conditional laws, undirected representation multiplicities, names, ports and history conditioning, query complexity, and the full classical `EXIT` lower bound still require their own models and proofs. The broader scope of [request #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) remains unfinished. The next section turns to the quantum side, studying a specified weighted path and its endpoint probability.
+The ordinary contraction law supplies static counting and conditioning; the alternating theorem adds classification and counting on the actual static carrier. The written proof in [@thm-undirected-cycle-orientation-fibers] adds orientation fibers, the reversal quotient and edge insertion over the same ordinary undirected full cycle. Undirected probability laws, alternating conditional laws and their undirected extension, names, ports and history conditioning, query complexity, and the full classical `EXIT` lower bound still require their own models and proofs. The broader scope of [request #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) remains unfinished. The next section turns to the quantum side, studying a specified weighted path and its endpoint probability.
 
 ## 16.3 The central-defect path: how an endpoint controls the spectrum {#sec-central-defect-gap}
 

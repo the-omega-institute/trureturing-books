@@ -1219,7 +1219,32 @@ $$
 \mathbb E\!\left[\sum_{j=1}^{|B|}\mathbf1_{X_j\ne Y_j}\right]\le1.
 $$
 
-Reverse the scan for a left block. Writing $d$ for Hamming distance, the complete one-step block refresh consequently satisfies
+Reverse the scan for a left block. Write $d$ for Hamming distance on full words.
+
+To turn the block coupling into one joint law of full words, restore the exterior data. For any block $B$, likewise let $\mu_B^z$ denote the restriction of $T_B(z,\cdot)$ to the block. For $z=x,y$ and an assignment $b\in\{0,1\}^B$, define
+
+$$
+R_z(b)_i=
+\begin{cases}
+b_i,&i\in B,\\
+z_i,&i\notin B.
+\end{cases}
+$$
+
+Restriction $w\mapsto w|_B$ is a bijection from $\mathcal A_B(z)$ onto the support of $\mu_B^z$, with inverse $R_z$: once the exterior is fixed, each feasible block assignment has exactly one full-word completion. Drawing from $\mu_B^z$ and restoring the exterior therefore gives exactly the full-word law $T_B(z,\cdot)$, supported on legal words. Let $J$ be the joint law of the two block updates constructed above. Draw $(b,c)\sim J$ and set $(X',Y')=(R_x(b),R_y(c))$ simultaneously. This defines one joint law $Q$ of legal full-word pairs, with marginals $T_B(x,\cdot)$ and $T_B(y,\cdot)$.
+
+When $u\notin B$, the exteriors agree everywhere except possibly at $u$. Write $\delta=\mathbf1_{\{x_u\ne y_u\}}$ and $d_B(b,c)=\sum_{i\in B}\mathbf1_{\{b_i\ne c_i\}}$. The pointwise distance identity and its expectation under this joint law are
+
+$$
+\begin{aligned}
+d(R_x(b),R_y(c))&=d_B(b,c)+\delta,\\
+\mathbb E_Q[d(X',Y')]&=\mathbb E_J[d_B(b,c)]+\delta.
+\end{aligned}
+$$
+
+Thus the synchronous coupling of a distant block leaves full-word distance exactly $\delta$. The scan coupling of an affected block has expected full-word distance at most $1+\delta$, hence at most $2$ for adjacent inputs. If the block contains $u$, the common full-word draw chosen earlier has distance $0$. For $x=y$, identical refreshes can be chosen for every block, keeping the full-word distance at $0$.
+
+Averaging these three cases over the block indices, the complete one-step block refresh satisfies
 
 $$
 \mathbb E[d(X',Y')]

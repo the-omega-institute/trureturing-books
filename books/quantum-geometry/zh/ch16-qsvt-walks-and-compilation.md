@@ -222,7 +222,7 @@ $(|\operatorname{Component}(E)|-1)!$（按自然数截断减法与阶乘），�
 先由有限性、无环性和后继的唯一性确定每个弱分量的尾，对反向关系作同样处理得到头。延拓置换把所有尾双射到所有头；沿头的首次返回识别原置换与分量置换的轨道，从而得到整圈补全之间的等价。等价给出阶乘计数及非空性，有限均匀概率质量的条件化与推前给出同一补全分布；端点等式再把分量后继的边缘概率传回原始顶点。完整证明由 Lean 内核检查。
 :::
 
-下面书面结论中的边数恒等式 $|E|=N-c$ 与显式事件概率比值 $(c-1)!/(N-1)!$ 未在所引 Lean 声明中陈述或核验，仍由后面的完整书面证明承担。交替约束下的静态分类与计数见下一小节；交替条件分布、无向方向、自适应历史、查询或 `EXIT` 的桥梁则另需相应的分布与对应证明。
+下面书面结论中的边数恒等式 $|E|=N-c$ 与显式事件概率比值 $(c-1)!/(N-1)!$ 未在所引 Lean 声明中陈述或核验，仍由后面的完整书面证明承担。交替约束下的静态分类与计数见下一小节；普通无向整圈的实际定向纤维与同图对应见 [@thm-undirected-cycle-orientation-fibers]。交替条件分布、无向概率分布、自适应历史、查询或 `EXIT` 的桥梁仍另需相应的分布与对应证明。
 
 ::: {.theorem #thm-directed-forest-cycle-completion title="有向森林的单环补全与静态均匀律" status="written-proof" proof="pf-directed-forest-cycle-completion" doi="10.1007/978-1-4684-0637-5_13" source="Section 8, p. 11" request="https://github.com/the-omega-institute/trureturing-requests/issues/11"}
 设 $V$ 为有 $N\ge2$ 个元素的有限标号集，$E\subseteq V\times V$。假定每个顶点在 $E$ 中至多有一条入边、至多有一条出边，且 $E$ 无有向循环。令 $\mathcal C$ 为 $(V,E)$ 的全部弱连通分量组成的集合，包含每一个孤立顶点，并假定 $c=|\mathcal C|\ge2$。
@@ -393,13 +393,114 @@ $$
 
 可行与不可行边界都能手算：$E=\varnothing,n=2$ 时，四个孤立点给出 $a=b=2,p=q=0$，计数 $2$，为 $(r_1\ b_1\ r_2\ b_2)$ 与 $(r_1\ b_2\ r_2\ b_1)$；一条 $r_1\to b_1$ 覆盖全体时，$m=q=0,p=1$，分量恒等圈给出唯一封口；本节开头的反向两路径给出 $m=0,p=q=1$，计数零。因此本定理不预设补全存在、正计数、给定路径分解或强连通性。
 
+### 16.2.3 无向整圈：两个方向与同一完成图 {#sec-undirected-cycle-orientation-fibers}
+
+五个点排成一个无向整圈，顺时针与逆时针是两个不同的后继置换，却给出完全相同的边。忘掉方向时，必须识别的是这两个实际表示，而不只是把一个计数除以二。下面在原来的标号顶点上完成这个对应；已知边甚至可以已经组成整圈。
+
+本节的完整应用见 trureturing 的 [RotationFaces 书面推导](https://github.com/the-omega-institute/trureturing/blob/2731c2994260e6ac22ed3385bbc04b37a63ac7a3/Blueprint/D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.md)。其中调用的冻结结果是 [`cycle_boundary_walk`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_boundary_walk)：它从实际旋转系统、简单闭游走及一个精确的二元面边界，辨认游走的两个方向。下面的较广陈述还要从原始图与置换构造这些输入，因此保留完整书面证明，不将整条应用标为 Lean 验证。
+
+::: {.theorem #thm-undirected-cycle-orientation-fibers title="同一无向整圈的定向纤维与加边对应" status="written-proof" proof="pf-undirected-cycle-orientation-fibers" repository="https://github.com/the-omega-institute/trureturing" source="RotationFaces, orientation-fiber application" request="https://github.com/the-omega-institute/trureturing-requests/issues/12"}
+设 $V$ 为有限标号集，$|V|\ge3$，$F$ 为 $V$ 上任意简单图。令
+
+$$
+\mathcal H(F)=\{C:\ C\text{ 是 }V\text{ 上连通的简单图},
+\deg_C(v)=2\ (v\in V),\ F\le C\}.
+$$
+
+令 $\mathcal L(F)$ 为全部实际二元组 $(E,\sigma)$，其中 $E\subseteq V\times V$ 将每条 $F$ 边恰好定向一次、不含其他边，每个顶点至多有一条入边及一条出边；$\sigma\in\operatorname{Cyc}(V)$ 延伸 $E$，即 $E(u,v)\Rightarrow\sigma(u)=v$。$F$ 的孤立点仍在 $V$ 中。定义其无向影图
+
+$$
+C_\sigma.\operatorname{Adj}(u,v)
+\quad\Longleftrightarrow\quad
+\sigma(u)=v\ \text{或}\ \sigma(v)=u.
+$$
+
+则 $(E,\sigma)\mapsto C_\sigma$ 是到 $\mathcal H(F)$ 的满射。对任意 $(E,\sigma)\in\mathcal L(F)$，同一影图的整个纤维恰为两个不同的实际二元组
+
+$$
+(E,\sigma),\qquad(E^{\mathrm{op}},\sigma^{-1}),
+\qquad E^{\mathrm{op}}(u,v)\Longleftrightarrow E(v,u).
+$$
+
+反向操作 $\iota(E,\sigma)=(E^{\mathrm{op}},\sigma^{-1})$ 是无不动点的对合，并诱导
+
+$$
+\mathcal L(F)/\langle\iota\rangle\ \simeq\ \mathcal H(F),
+$$
+
+将每个类送到原来那个实际完成图，因而保持每一对顶点的邻接事件。$\mathcal H(F)$ 可以为空。
+
+此外，对任意不同的 $u,v\in V$，记 $F+uv$ 为只添入无向边 $\{u,v\}$ 的简单图，则有等价
+
+$$
+\mathcal L(F+uv)\ \simeq
+\{(E,\sigma)\in\mathcal L(F):C_\sigma.\operatorname{Adj}(u,v)\}.
+$$
+
+这个等价保留 $\sigma$ 与同一影图，并与反向操作交换。不要求 $F$ 或 $F+uv$ 为森林；将覆盖全部顶点的路径封口、以及 $F=C$ 的情形都包括在内。
+:::
+
+::: {.proof #pf-undirected-cycle-orientation-fibers}
+**先从原始图得到一个实际表示。** 在有限连通二正则简单图 $C$ 中，从任意顶点出发沿边行走，每次避开刚经过的边。度为二使下一步唯一；有限性使行走最终重复顶点。首次重复只能回到起点：若首次重复的是别的顶点，它在已走过的简单路径中已有两个邻点，再次进入会造成第三个邻点，或立即沿原边折返。所得是简单闭游走 $p$。圈上每个点的两条边已全部占用，不会再有连到圈外的边；连通性因此使其支撑为全部 $V$，其无向边恰为 $C$ 的全部边。
+
+按 $p$ 的次序指定后继，得到 $V$ 上的整圈置换 $\tau$。因为 $|V|\ge3$，$\tau$ 没有不动点，也没有二循环；于是它的无向影图正是 $C$。对 $F\le C$，定义
+
+$$
+E_\tau(x,y)\quad\Longleftrightarrow\quad
+F.\operatorname{Adj}(x,y)\ \text{且}\ \tau(x)=y.
+$$
+
+每条 $F$ 边在 $\tau$ 中恰有一个方向。入、出邻点各至多一个，故 $(E_\tau,\tau)$ 是实际提升，证明满射所需的存在性。这里没有先给 $F$ 一个定向、路径分解或完成图。
+
+**任意实际提升的影图与定向。** 反过来，任取 $(E,\sigma)\in\mathcal L(F)$。整圈条件使每个顶点的轨道长度为 $|V|$，故 $\sigma(v)\ne v$，且 $\sigma(v)\ne\sigma^{-1}(v)$。影图在 $v$ 的邻点恰为这两个不同的点，因此它是简单二正则图；整条置换轨道又给出连通性。$E$ 对每条 $F$ 边所选的方向被 $\sigma$ 延伸，所以 $F\le C_\sigma$。更精确地，对所有 $x,y$ 都有
+
+$$
+E(x,y)\quad\Longleftrightarrow\quad
+F.\operatorname{Adj}(x,y)\ \text{且}\ \sigma(x)=y.
+$$
+
+从右向左的蕴含若失效，$E$ 就必须选择反方向，迫使 $\sigma(x)=y$ 与 $\sigma(y)=x$ 同时成立，违反无二循环。因而 $\sigma$ 决定的是整个二元组，而不只是一个选定构造的像。
+
+**用实际面边界穷尽两个方向。** 固定上述原始 $C$ 与覆盖全部顶点的 $p$，再任取影图为 $C$ 的整圈置换 $\sigma$。把实际有向边 $d=(x,y)$ 称为 dart；在每个顶点交换指向 $\sigma(x)$ 与 $\sigma^{-1}(x)$ 的两个 dart，得到旋转系统 $R$。它的旋转轨道恰为首顶点相同的两个 dart，满足旋转系统的定义。面后继先反向 dart，再作这次交换。给 dart 标上
+
+$$
+\ell(x,y)=
+\begin{cases}1,&\sigma(x)=y,\\0,&\sigma^{-1}(x)=y,\end{cases}
+\qquad\ell(x,y)\in\mathbb F_2.
+$$
+
+面后继将 $(x,\sigma(x))$ 送到 $(\sigma(x),\sigma^2(x))$，将 $(x,\sigma^{-1}(x))$ 送到 $(\sigma^{-1}(x),\sigma^{-2}(x))$，所以保持标签。由于面后继是置换，其逆也保持标签；故 $\ell$ 在全部整数步的实际面轨道上恒定，下降为面商集上的函数 $z$，满足 $z(R.\operatorname{face}(d))=\ell(d)$。相反的 dart 标签相反，每条无向边上的二元面边界都是 $1$。$p$ 恰好经过 $C$ 的全部边，故这个边界正是 $p$ 的边指标。
+
+现在冻结的 `cycle_boundary_walk` 的所有输入都已构造：实际图是 $C$，旋转是 $R$，简单闭游走是 $p$，面函数是 $z$，边界等式逐边成立。它给出 $q=p$ 或 $q=p^{\mathrm{reverse}}$，并对每个实际 dart 给出
+
+$$
+\bigl(z(R.\operatorname{face}(d)),z(R.\operatorname{face}(d^{\mathrm{op}}))\bigr)=(1,0)
+\quad\Longleftrightarrow\quad d\in q.\operatorname{darts}.
+$$
+
+左边恰是 $\sigma$ 的后继方向，故 $\sigma=\tau$ 或 $\sigma=\tau^{-1}$。这适用于每个实际提升，没有把全局定向一致性作为假设；也没有使用 Euler 方程。
+
+**实际二元组、取商与加边。** 将刚得的结论用于同一影图的两个任意提升，其置换相等或互逆；定向的强制公式使二元组相等或互为反向。反向两次还原原二元组。若一个提升等于其反向，就有 $\sigma^2=\operatorname{id}$，与长度至少三的整圈矛盾。因此每个纤维恰有上述两个不同元素。满射及这个精确纤维描述使反向轨道与完成图一一对应，而且每个类仍送到同一个 $C_\sigma$，所以逐项保持邻接事件。
+
+最后，从 $\mathcal L(F+uv)$ 出发，保持 $\sigma$，仅将 $E$ 限制到 $F$ 的边；其影图仍含 $uv$。反向从右边任意元素出发，保持 $\sigma$，定义
+
+$$
+E'(x,y)\quad\Longleftrightarrow\quad
+(F+uv).\operatorname{Adj}(x,y)\ \text{且}\ \sigma(x)=y.
+$$
+
+影图含 $F+uv$，无二循环使每条边恰选一次方向；入、出度约束由置换保证。强制定向公式说明限制与扩张互逆，且扩张唯一。两者保留影图；把 $\sigma$ 换为逆置换正好反转所有选择，所以它们与 $\iota$ 交换。整个论证容许加边后已经封成整圈。以上为书面证明，由作者与评审负责。
+:::
+
+简单整圈的两个置换表示有经典先例：Greenhill、Janson、Kim 与 Wormald，*Permutation pseudographs and contiguity*，[doi:10.1017/S0963548301005065](https://doi.org/10.1017/S0963548301005065)，原文第 3 页给出二正则伪图的置换重数。本节使用至少三个顶点的普通简单整圈；两顶点时逆置换相同，断开的多个圈也不是一个整圈置换的影图。该出处说明经典重数的谱系，不单独承担本节全部增强的对应与加边结论。这里没有推出无向概率分布、交替计数、随机名字或端口规律，也没有推出自适应查询与 `EXIT` 下界。
+
 **通向经典黑盒下界仍需哪些桥梁？** [@thm-directed-forest-cycle-completion] 给出普通有向模型的静态均匀律，[@thm-alternating-forest-classification] 给出交替模型全部实际补全的分类与计数。它们与 [@rem-qsvt-walks-literature] 的黏合树结果之间还有三层区别：
 
-1. **图的分布与方向。** Ben-David 等人（*SIAM Journal on Computing* **53**(6)，2024，[doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975)，§6.3.2，Lemmas 6.11–6.13，PDF 第 37–39 页）在 self-weld 中使用每侧叶子上的一个均匀整圈，在 weld 中使用两侧叶子间的均匀交替整圈。交替的有向静态分类与基数现由 [@thm-alternating-forest-classification] 给出；它没有陈述交替条件概率质量或显式事件概率比值。要转成无向圈，仍须处理定向与表示的重数；要得到交替约束下的条件补全分布，仍须另证相应概率接口，不能直接搬用普通模型的 $1/(c-1)$。
+1. **图的分布与方向。** Ben-David 等人（*SIAM Journal on Computing* **53**(6)，2024，[doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975)，§6.3.2，Lemmas 6.11–6.13，PDF 第 37–39 页）在 self-weld 中使用每侧叶子上的一个均匀整圈，在 weld 中使用两侧叶子间的均匀交替整圈。交替的有向静态分类与基数现由 [@thm-alternating-forest-classification] 给出；它没有陈述交替条件概率质量或显式事件概率比值。普通无向整圈的定向与表示重数现由 [@thm-undirected-cycle-orientation-fibers] 在同一实际完成图上给出：每个纤维恰为一对反向提升，并保留加边事件。该静态对应没有给出无向概率律或交替扩展；要得到交替约束下的条件补全分布，仍须另证相应概率接口，不能直接搬用普通模型的 $1/(c-1)$。
 2. **条件信息。** 普通有向定理只条件化于固定的 $E$ 边全部成立；交替定理本身只陈述分类与计数。自适应算法看到的完整查询历史还涉及随机名字、查询选择、全部邻居的回答及可能的颜色信息。必须在同一个随机图实现上证明这些历史条件恰好留下所声称的均匀补全集，或给出其他准确的条件律；把历史简写成 $E$ 并不能证明这一点。Ben-David 等人的上述引理只允许查询知识图中已有的名字，知识图外查询另有论证；随机稀疏名字是否提供额外信息也不由此定理回答。
 3. **查询、嵌入与成功事件。** Childs 等人 [quant-ph/0209131v2 第 IV 节](https://arxiv.org/abs/quant-ph/0209131v2) 先处理猜中新名字、颜色与已知名字查询的游戏转换，再转向树的随机嵌入，最后分别控制碰撞和 `EXIT` 事件，才得到原文 Theorem 9。Ben-David 等人脚注 14 特别说明：一次回答全部邻居的查询对应嵌入树中的 $O(t)$ 个顶点，并非严格 $t$ 个。其印刷论证中的分量下界 $2^k-2t$、配对界 $2/(2^k-2t)$ 与式 (6.4) 的 $O(t^2/(2^k-t))$ 各按原文保留；这里不将它们拼成未经证明的显式常数或参数范围。
 
-因此，普通收缩律提供静态计数与条件概率环节，交替定理补上静态实际载体的分类与计数；交替条件律、无向表示重数、名字与端口及历史条件化、查询复杂度与完整经典 `EXIT` 下界仍依赖各自的模型与证明。[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) 的更广范围仍未完成。下一节转到量子一侧，考察已经明确给定的加权路径及其端点概率。
+因此，普通收缩律提供静态计数与条件概率环节，交替定理补上静态实际载体的分类与计数，[@thm-undirected-cycle-orientation-fibers] 则以书面证明给出普通无向整圈的同图定向纤维、反向取商与加边对应。无向概率律、交替条件律及其无向扩展、名字与端口及历史条件化、查询复杂度与完整经典 `EXIT` 下界仍依赖各自的模型与证明。[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) 的更广范围仍未完成。下一节转到量子一侧，考察已经明确给定的加权路径及其端点概率。
 
 ## 16.3 中央缺陷路径：端点如何约束整个谱 {#sec-central-defect-gap}
 
