@@ -2,48 +2,48 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
       "output": "8c60c9f5aba2ba0fd318f56ecbcb96f9584628a9db47924a8d781f0718751a80"
     },
     "fig-sector-volume.zh.jpg": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
-      "output": "69bf4d3f0ddabd010550e314e0ce1ed5c45d746cec32d1aad0bc7b80d43ff193"
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "output": "fa89004d9b870e2aba381bf2ba4350851dd566f2c662f8e8f0df4e9a5890c908"
     },
     "fig-hopf-fiber-lift.zh.jpg": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
-      "output": "526d0fb542aa6966b75c08d4dc31dad109eada0d2f795180a0e599c080888f81"
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "output": "bbde4bdcbf01607c0e0a282a3e88cf399f5d2991092fe8cce0c0a38a6cfed170"
     },
     "fig-stokes-wilson-duality.zh.jpg": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
-      "output": "0a58641a0c4aa62c003929717dee14922855810dec43b0d0b80c00f98faf3265"
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "output": "4a19ca1277134ac9814aa5c78ede694d82aac9f5051ffe48f03207182e5ca3dd"
     },
     "fig-pancharatnam-fan.zh.jpg": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
-      "output": "46b3bb074ec5e04be08b5a3c6b2b9948daa4f1eb1b610f8f81d8c1082f836753"
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "output": "2db93f641bada3c6cf4c57e3180ee3d0e3f75b3f5486797876b5113e4e361c7a"
     },
     "fig-feynman-stationary.zh.jpg": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
-      "output": "6bc7e8f9dc2b59b8b27842b4a38c5da4d684f9d665e703827ce717aae26e7de7"
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "output": "7dc47dd949daadf0068b535f230af5870f36441464b5e91de41caa3c671aa8c3"
     },
     "fig-sector-volume.en.jpg": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
-      "output": "ec98640248a23a84fa758299f6250f2bc231c0bff077110d1763f8306965c3d7"
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "output": "74f0265349a69d71ad212b059476b1d97e5b361d01f1dac9b871a471622e667a"
     },
     "fig-hopf-fiber-lift.en.jpg": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
-      "output": "a8a1f27a9d36d425cb4fefefd3e90956cedcc05e92a5c1f8d38fea466b314c4c"
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "output": "6587377709a79ac4b8fb07437ac3d93783b242833cbbff1221e74349f0a1e868"
     },
     "fig-stokes-wilson-duality.en.jpg": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
-      "output": "8d2216670a3690f06685a3c9ef23d58c89874937bb0f291a2f5414927dfcb0a4"
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "output": "a03553c5f2d8fa71a04c1e7be0c1ac8982081a346a6a5256508bc3776f2cdf30"
     },
     "fig-pancharatnam-fan.en.jpg": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
-      "output": "c6a9cb64d61626fd0a7f3a6d0a2dca98855f25067b123138b9112ac049b4f105"
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "output": "670339133fdf9342e319f367d9a2fb660e322f45376d0febde1c28384f46a9c8"
     },
     "fig-feynman-stationary.en.jpg": {
-      "input": "dba3d826cec32d998dceca0d13001b2d72fede8200e883a2feba1a9bdcd3edc8",
-      "output": "4e3a8b3c8066ffd9f729e5e5dcaa3222ded3743962dde7176b6493f2acc327c3"
+      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "output": "ea26a3423990bc721c8ca0f99b9cb7b4ceb5ff8cb44472a64954405ed786c22d"
     }
   }
 }

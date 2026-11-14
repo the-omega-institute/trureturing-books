@@ -81,14 +81,16 @@
   });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
   for (const [id, v] of [['onPath', 0], ['offPath', 0.50]]) $(id).addEventListener('click', () => { clock.pause(); S.eta = v; sync(); paint(); });
+  // 抽屉在散文之后镜像右栏的全部依据框，手机与书内读者在同一处读到全部依据。
+  $('drawerEvidence').append(...[...$('evidence').querySelectorAll(':scope > .viz-claim')].map(node => node.cloneNode(true)));
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
-  $('theoryMobile').addEventListener('click', () => $('infoBtn').click());
   const swatches = items => items.map(([c, t]) => `<span><i class="sw ${c}"></i>${t}</span>`).join('');
+  const keys = items => items.map(([c, t]) => `<span class="key"><i class="sw ${c}"></i>${t}</span>`).join('');
   function text(G) {
     $('hudBig').textContent = L(...TITLES[S.scene]);
     const rows = [];
     const row = (label, id, value, color) => rows.push(`<div class="${color}"><dt>${label}</dt><dd><output id="${id}">${value}</output></dd></div>`);
-    let legend, key, sub, plotTitle, plotMeta, note;
+    let legend, key, sub, plotTitle, plotMeta, note, pills;
     if (S.scene === 'sector-volume' || S.scene === 'hopf-fiber-lift') {
       sub = S.scene === 'sector-volume' ? `ε = ${fix(S.eps, 0)}° · A_cap = ${fix(G.cap, 4)} · V_sector = ${fix(G.sector, 4)}` : `ε = ${fix(S.eps, 0)}° · Δγ_B = ${fix(G.gamma / DEG, 2)}° · C_Γ₁ = C_Γ₂`;
       row('A_cap = Ω', 'roCap', fix(G.cap, 6), 'mg'); row('V_sector = Ω/3', 'roSector', fix(G.sector, 6), 'mg');
@@ -99,6 +101,7 @@
       plotMeta = S.scene === 'sector-volume' ? 'NUM · ε ∈ [5°, 90°]' : `NUM · Δγ_B(t) = ${fix(G.liftPhase / DEG, 2)}°`;
       key = S.scene === 'sector-volume' ? [['mg', 'A_cap = 3V_sector'], ['cy', '3V_tetra'], ['vi', '|γ_B|']] : [['cy', 'γ₁ = 0'], ['vi', 'γ₂(t)'], ['am', `t = ${fix(clock.t, 2)}`]];
       note = L('单位球上的面积与扇锥体积；相位符号随正向回路约定。', 'Unit-sphere area and radial sector volume; the phase sign follows the oriented loop.');
+      pills = S.scene === 'sector-volume' ? [['ε', `${fix(S.eps, 0)}°`], ['γ_B', `${fix(G.gamma / DEG, 2)}°`]] : [['ε', `${fix(S.eps, 0)}°`], ['Δγ_B', `${fix(G.liftPhase / DEG, 2)}°`]];
     } else if (S.scene === 'stokes-wilson-duality') {
       sub = `α_g = ${fix(S.gauge, 0)}° · arg W = ${fix(G.gamma / DEG, 2)}° · |W| = 1`;
       for (let i = 0; i < 3; i++) row(['φ_AB', 'φ_BC', 'φ_CA'][i], `roEdge${i}`, `${fix(G.edgePhases[i] / DEG, 2)}°`, i < 2 ? 'cy' : 'mg');
@@ -108,6 +111,7 @@
       key = [['cy', 'φ_AB'], ['cy', 'φ_BC (−α_g)'], ['mg', 'arg W (invariant)']];
       plotTitle = L('边相位变化 · 闭合相位守恒', 'Changing edges · conserved loop phase'); plotMeta = 'NUM · U(1)';
       note = L('仅在 B 点作规范变换。树边相位增减抵消，非树边编码基本回路。', 'The gauge changes only at B. Tree-edge shifts cancel; the non-tree chord encodes the fundamental loop.');
+      pills = [['α_g', `${fix(S.gauge, 0)}°`], ['arg W', `${fix(G.gamma / DEG, 2)}°`]];
     } else if (S.scene === 'pancharatnam-fan') {
       sub = `N = ${S.steps} · θ₀ = ${fix(S.theta, 0)}° · |Π_N| = ${fix(G.fan.modulus, 4)} · −arg Π_N = ${fix(G.fan.phase / DEG, 2)}°`;
       row('|Π_N|', 'roModulus', fix(G.fan.modulus, 6), 'cy'); row('−arg Π_N', 'roFanPhase', `${fix(G.fan.phase / DEG, 3)}°`, 'vi');
@@ -115,7 +119,8 @@
       legend = [['vi', L('球面扇形肋', 'Spherical fan ribs')], ['am', L('离散重叠链', 'Discrete overlap chain')], ['mg', L('连续纬圈', 'Continuous latitude')]];
       key = [['cy', '|Π_N| → 1'], ['vi', '−arg Π_N'], ['mg', '−Ω/2']];
       plotTitle = L('模长恢复与相位收敛', 'Modulus recovery & phase convergence'); plotMeta = 'NUM · N = 3…36';
-      note = L('橙色边是短大圆弧；品红纬圈与它们在有限 N 时围住不同面积。', 'Amber edges are short great-circle arcs; the magenta latitude encloses a different area at finite N.');
+      note = L('琥珀色边是短大圆弧；品红纬圈与它们在有限 N 时围住不同面积。', 'Amber edges are short great-circle arcs; the magenta latitude encloses a different area at finite N.');
+      pills = [['N', String(S.steps)], ['−arg Π_N', `${fix(G.fan.phase / DEG, 2)}°`]];
     } else {
       sub = `M = 41 · k_eff = ${S.wave} · |A₄₁(0)| = ${fix(G.stationary.amplitude, 3)} · |A₄₁(${fix(S.eta, 2)})| = ${fix(G.steered.amplitude, 3)}`;
       row('η_ref = 0 · |A₄₁|', 'roReference', fix(G.stationary.amplitude, 6), 'cy'); row(`η₀ = ${fix(S.eta, 2)} · |A₄₁|`, 'roAmplitude', fix(G.steered.amplitude, 6), 'mg');
@@ -124,28 +129,30 @@
       key = [['cy', L('驻相累积', 'Stationary sum')], ['mg', L('偏航卷曲', 'Off-path coil')], ['am', `m = ${Math.round(clock.t * 41)}`]];
       plotTitle = L('科纽螺线 · 逐步相量和', 'Cornu spiral · cumulative phasors'); plotMeta = 'MODEL · Re A / Im A';
       note = L('两束各 41 条等权路径，束宽 ±0.20。相量链按路径参数排序；短箭头相消，长合量相长。', 'Each bundle has 41 equally weighted paths spanning ±0.20. Chains are ordered by path parameter; short resultants show cancellation.');
+      pills = [['η₀', fix(S.eta, 2)], [`|A₄₁(${fix(S.eta, 2)})|`, fix(G.steered.amplitude, 3)]];
     }
-    $('hudSub').textContent = sub; $('legend').innerHTML = swatches(legend); $('plotKey').innerHTML = swatches(key);
-    $('plotTitle').textContent = plotTitle; $('plotMeta').textContent = plotMeta; $('values').innerHTML = rows.join(''); $('readoutNote').textContent = note;
+    $('hudSub').textContent = sub; $('legend').innerHTML = swatches(legend);
+    $('plotTitle').textContent = plotTitle; $('plotMeta').innerHTML = `${plotMeta} · ${keys(key)}`; $('values').innerHTML = rows.join(''); $('readoutNote').textContent = note;
+    [[$('pillInName'), $('pillIn')], [$('pillOutName'), $('pillOut')]].forEach(([name, value], i) => { name.textContent = pills[i][0]; value.textContent = pills[i][1]; });
     TRV.hudFit();
   }
+  // 舞台只放几何：上沿让出标题块，下沿让出图例，球与标签都画在两者之间。
   function fit(G) {
     const W = $('stage').clientWidth, H = $('stage').clientHeight, rect = $('stage').getBoundingClientRect();
+    const legend = $('legend').getBoundingClientRect(), hasLegend = !TRV.thumbMode && legend.height > 0;
     const top = TRV.thumbMode ? 16 : $('hud').getBoundingClientRect().bottom - rect.top + 10;
-    $('stage').style.setProperty('--plot-top', `${Math.ceil(top + 4)}px`);
-    const band = $('plotBand').getBoundingClientRect(), sidePlot = !TRV.thumbMode && band.width < W * 0.6;
-    const geometryWidth = sidePlot ? band.left - rect.left - 12 : W;
-    const bottom = TRV.thumbMode || sidePlot ? H - 16 : band.top - rect.top - 8;
+    const bottom = hasLegend ? legend.top - rect.top - 8 : H - 16, geometryWidth = W;
     const points = [];
     for (let j = 0; j <= 16; j++) for (let k = 0; k < 24; k++) points.push(v3.sph(PI * j / 16, TAU * k / 24));
     if (S.scene === 'hopf-fiber-lift') for (let i = 0; i < 24; i++) for (const h of [0.2, 1.3]) points.push(fiber(G, TAU * i / 24, h));
+    if (S.scene === 'feynman-stationary') points.push(...cornu(G).corners);
     const y = sc.cam.yaw, p = sc.cam.pitch, right = [Math.cos(y), -Math.sin(y), 0], up = [Math.sin(y) * Math.sin(p), Math.cos(y) * Math.sin(p), Math.cos(p)];
     const xs = points.map(q => dot(q, right)), ys = points.map(q => dot(q, up));
     const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
     const pad = TRV.thumbMode ? 22 : geometryWidth < 500 ? 22 : 32, unit = Math.min((geometryWidth - 2 * pad) / (x1 - x0), Math.max(50, bottom - top - 26) / (y1 - y0));
     options.radius = unit / Math.min(W, H); options.cx = (geometryWidth / 2 - unit * (x0 + x1) / 2) / W;
     options.cy = ((top + bottom) / 2 + unit * (y0 + y1) / 2) / H;
-    bounds = { W, H, top, bottom, unit, geometryWidth, sidePlot };
+    bounds = { W, H, top, bottom, unit, geometryWidth };
   }
   function sphere(P) {
     const facing = sc.facing();
@@ -222,6 +229,33 @@
     handle = slerp(point(TAU * segment / n), point(TAU * (segment + 1) / n), u);
     sc.bead(handle, { key: 'fan-probe', color: P.amber, r: 5 });
   }
+  // 科纽复平面幕：立在球下方、正对默认视角，幕内按等比例画两条相量链。
+  const CORNU = { yaw: 3.35, pitch: 0.48, w: 1.5, h: 0.5, drop: 1.64 };
+  function cornu(G) {
+    const { yaw, pitch, w, h, drop } = CORNU, R = [Math.cos(yaw), -Math.sin(yaw), 0];
+    const U = [Math.sin(yaw) * Math.sin(pitch), Math.cos(yaw) * Math.sin(pitch), Math.cos(pitch)], c = mul(U, -drop);
+    const local = (a, b) => v3.add(c, v3.add(mul(R, a), mul(U, b)));
+    const all = [...G.stationary.chain, ...G.steered.chain], xs = all.map(q => q[0]), ys = all.map(q => q[1]);
+    const x0 = Math.min(-0.15, ...xs) - 0.05, x1 = Math.max(1.0, ...xs) + 0.05, y0 = Math.min(-0.1, ...ys) - 0.05, y1 = Math.max(0.2, ...ys) + 0.05;
+    const k = Math.min(2 * (w - 0.08) / (x1 - x0), 2 * (h - 0.07) / (y1 - y0)), mx = (x0 + x1) / 2, my = (y0 + y1) / 2;
+    const at = ([x, y]) => local((x - mx) * k, (y - my) * k);
+    return { local, at, x0, x1, y0, y1, corners: [[-w, -h], [w, -h], [w, h], [-w, h]].map(([a, b]) => local(a, b)) };
+  }
+  function cornuScreen(G, P) {
+    const screen = cornu(G);
+    sc.fan(screen.corners, { fill: P.sigma, alpha: 0.06 });
+    sc.line(screen.corners, { color: P.dim, alpha: 0.55, close: true, width: 1 });
+    sc.line([screen.at([screen.x0, 0]), screen.at([screen.x1, 0])], { color: P.dim, alpha: 0.5, width: 1 });
+    sc.line([screen.at([0, screen.y0]), screen.at([0, screen.y1])], { color: P.dim, alpha: 0.5, width: 1 });
+    sc.line([screen.at([1, -0.03]), screen.at([1, 0.03])], { color: P.dim, alpha: 0.7, width: 1 });
+    const i = Math.round(clock.t * 41);
+    for (const [b, color, key] of [[G.stationary, P.cyan, 'reference'], [G.steered, P.magenta, 'steered']]) {
+      sc.line(b.chain.map(screen.at), { color, width: 1.6, alpha: 0.9 });
+      sc.arrow(screen.at([0, 0]), screen.at(b.chain[41]), { color, width: 2.2, alpha: 0.8, headSize: 7 });
+      sc.bead(screen.at(b.chain[i]), { key: `cornu-${key}`, color: P.amber, r: 3.2 });
+    }
+    return screen;
+  }
   function feynman(G, P) {
     const s = Math.SQRT1_2, a = [-s, s, 0], c = [s, s, 0];
     for (const [center, color, prefix] of [[0, P.cyan, 'reference'], [S.eta, P.magenta, 'steered']]) {
@@ -236,7 +270,8 @@
     sc.line([...arc(a, handle), ...arc(handle, c).slice(1)], { color: P.amber, width: 2, alpha: 0.9 });
     sc.bead(handle, { key: 'eta-handle', color: P.amber, r: 5.5 });
     sc.bead(a, { key: 'feynman-A', color: P.cyan, r: 4 }); sc.bead(c, { key: 'feynman-C', color: P.cyan, r: 4 });
-    return { a, c };
+    const screen = cornuScreen(G, P);
+    return { a, c, plane: screen.local(-CORNU.w + 0.42, CORNU.h) };
   }
   function draw() {
     if (!clock || !cards || !fields) return;
@@ -261,7 +296,7 @@
     if (S.scene === 'hopf-fiber-lift') entries.push(['A', G.A, P.sigma], ['B', G.B, P.sigma], ['C', G.C, P.sigma], ['ψ_Γ₁', extra.lift1, P.violet], ['ψ_Γ₂', extra.lift2, P.violet]);
     if (S.scene === 'stokes-wilson-duality') entries.push(['A · root', G.A, P.cyan], ['B · α_g', handle, P.amber], ['C', G.C, P.sigma]);
     if (S.scene === 'pancharatnam-fan') entries.push(['N', NORTH, P.violet], [`N = ${S.steps}`, handle, P.amber]);
-    if (S.scene === 'feynman-stationary') entries.push(['A', extra.a, P.cyan], ['C', extra.c, P.cyan], [`η₀ = ${fix(S.eta, 2)}`, handle, P.amber]);
+    if (S.scene === 'feynman-stationary') entries.push(['A', extra.a, P.cyan], ['C', extra.c, P.cyan], [`η₀ = ${fix(S.eta, 2)}`, handle, P.amber], [L('复平面 A₄₁', 'Complex plane A₄₁'), extra.plane, P.sigma]);
     for (const [text, p, color] of entries) {
       const q = sc.p(p), w = ctx.measureText(text).width + 12, h = size + 10;
       const candidates = [[0, -18], [0, 19], [w / 2 + 10, 0], [-w / 2 - 10, 0], [0, -42], [0, 42], [w + 10, -15], [-w - 10, 15]];

@@ -88,6 +88,61 @@ function escapes(mode) {
   return { pairs, capture, rate: pairs / (states.length * (states.length - 1)), H2: Math.log2([...sizes.values()].reduce((sum, n) => sum + n ** 2, 0) / states.length) };
 }
 
+// The standard desktop lab of triadic-nameless-sandbox, measured rather than looked up: the grid's resolved tracks,
+// the column boxes in order, and the visible boxes of what each column holds. Returns what is wrong (empty when
+// nothing is). The side column scrolls on its own, so #evidence is brought into view there first, as a reader
+// would scroll it, and every scroll position is restored afterwards.
+const desktopLab = (p) => p.evaluate(() => {
+  const bad = [], q = (s) => document.querySelector(s), css = (e) => getComputedStyle(e), rect = (e) => e.getBoundingClientRect();
+  const shown = (e) => { if (!e || !e.getClientRects().length || css(e).visibility === 'hidden') return false; for (let a = e; a; a = a.parentElement) if (css(a).opacity === '0') return false; return true; };
+  // the box left visible by the viewport and by every clipping ancestor
+  const seen = (e) => {
+    const b = rect(e); let l = Math.max(b.left, 0), t = Math.max(b.top, 0), r = Math.min(b.right, innerWidth), d = Math.min(b.bottom, innerHeight);
+    for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) { const s = css(a); if (s.overflowX === 'visible' && s.overflowY === 'visible') continue; const c = rect(a); l = Math.max(l, c.left); t = Math.max(t, c.top); r = Math.min(r, c.right); d = Math.min(d, c.bottom); }
+    return { w: Math.max(0, r - l), h: Math.max(0, d - t) };
+  };
+  const visible = (e) => { const v = seen(e); return v.w > 0 && v.h > 0; };
+  const app = q('.app.lab'), grid = app && css(app), tracks = grid ? (grid.gridTemplateColumns.match(/[\d.]+px/g) || []).map(parseFloat) : [];
+  if (!grid || grid.display !== 'grid' || tracks.length !== 3 || !tracks.every((w) => w > 0)) bad.push(`.app.lab is not a three-column grid (${grid && grid.display}: ${grid && grid.gridTemplateColumns})`);
+  const names = ['deck', 'center', 'side'], cols = ['.app.lab > .col.deck', '.app.lab > .center', '.app.lab > .col.side'].map((s) => q(s)), [deck, center, side] = cols;
+  cols.forEach((c, i) => { if (!shown(c)) bad.push(`${names[i]} column is not rendered`); else if (!visible(c)) bad.push(`${names[i]} column has no visible box`); });
+  if (cols.every(shown)) {
+    const [d, c, s] = cols.map((e) => rect(e));
+    if (!(d.left >= -0.5 && d.right <= c.left + 0.5 && c.right <= s.left + 0.5 && s.right <= innerWidth + 0.5)) bad.push(`columns not ordered deck | center | side without overlap: ${[d, c, s].map((b) => `${Math.round(b.left)}–${Math.round(b.right)}`).join(', ')}`);
+    if (Math.min(d.bottom, c.bottom, s.bottom) - Math.max(d.top, c.top, s.top) <= 0) bad.push('the three columns do not share a row');
+    if (tracks.length === 3 && [d, c, s].some((b, i) => Math.abs(b.width - tracks[i]) > 1)) bad.push(`column widths ${[d, c, s].map((b) => Math.round(b.width)).join('/')} differ from grid tracks ${tracks.map((w) => Math.round(w)).join('/')}`);
+  }
+  const part = (sel, col, what) => {
+    const e = q(sel);
+    if (!e || !col || !col.contains(e)) { bad.push(`${what} is not in its column`); return null; }
+    if (!shown(e)) { bad.push(`${what} is not rendered`); return null; }
+    const b = rect(e), c = rect(col);
+    if (!(b.left >= c.left - 0.5 && b.right <= c.right + 0.5)) bad.push(`${what} sticks out of its column`);
+    return e;
+  };
+  const presets = part('.col.deck #presets', deck, '#presets'), stage = part('.center #stage', center, '#stage'), plot = part('.center .strip #plot', center, '.strip #plot');
+  const readouts = part('.col.side #readouts', side, '#readouts'), evidence = part('.col.side #evidence', side, '#evidence');
+  for (const [e, what] of [[presets, '#presets'], [stage, '#stage'], [readouts, '#readouts']]) if (e && !visible(e)) bad.push(`${what} has no visible box`);
+  const inStage = stage ? stage.querySelectorAll('#plot, .math-panel').length : -1;
+  if (inStage !== 0) bad.push(`#stage holds ${inStage} #plot / .math-panel`);
+  if (plot) {
+    if (plot.clientHeight < 54 || rect(plot).height < 54) bad.push(`.strip #plot is ${plot.clientHeight}px tall`);
+    if (stage && rect(plot).top < rect(stage).bottom - 0.5) bad.push('.strip #plot is not under the stage');
+  }
+  if (readouts && evidence && rect(evidence).top < rect(readouts).bottom - 0.5) bad.push('#evidence is not under #readouts');
+  if (evidence) {
+    const scrolls = [side, document.body, document.documentElement].map((e) => [e, e.scrollTop, e.scrollLeft]);
+    evidence.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    const v = seen(evidence);
+    if (!(v.w > 0 && v.h > 0)) bad.push(`#evidence has no visible box once scrolled into view (${Math.round(v.w)} × ${Math.round(v.h)})`);
+    for (const [e, top, left] of scrolls) { e.scrollTop = top; e.scrollLeft = left; }
+  }
+  const info = q('#infoBtn');
+  if (!info || !evidence || !evidence.contains(info) || info.closest('.status') || document.querySelectorAll('#infoBtn').length !== 1) bad.push('#infoBtn is not the single theory button inside #evidence (outside .status)');
+  else if (!shown(info)) bad.push('#infoBtn is not rendered');
+  return bad;
+});
+
 const T = await session();
 const { page, check } = T;
 try {
@@ -106,6 +161,21 @@ try {
   for (const mode of ['none', 'parity', 'redundant']) {
     const e = escapes(mode), resolved = mode === 'parity';
     check(`independent EscapePairs ${mode}: exact count, rate, entropy and unique capture`, e.pairs === (resolved ? 0 : 16) && e.capture === (resolved ? 16 : 0) && near(e.rate, resolved ? 0 : 1 / 15) && e.H2 === (resolved ? 0 : 1));
+  }
+
+  // Desktop at 1440 × 900, in an isolated page per language (the session page keeps its own viewport): the standard
+  // three-column lab as the page opens and after every card is picked from the deck.
+  for (const lang of ['zh', 'en']) {
+    const p = await T.open(BOOK, ID, `?lang=${lang}`, { viewport: { width: 1440, height: 900 }, locale: lang === 'zh' ? 'zh-CN' : 'en-US', reducedMotion: 'reduce' });
+    await settle(p);
+    const opened = await desktopLab(p), issues = [];
+    check(`desktop 1440 × 900 (${lang}): standard three-column lab (deck | stage over strip | readouts and evidence)`, opened.length === 0, opened.slice(0, 4).join(' | '));
+    for (const card of CARDS) {
+      await p.click(`.col.deck [data-preset="${card.id}"]`); await settle(p);
+      issues.push(...(await desktopLab(p)).map((x) => `${card.id}: ${x}`));
+    }
+    check(`desktop 1440 × 900 (${lang}): the three columns hold after every card`, issues.length === 0, issues.slice(0, 4).join(' | '));
+    await p.context().close();
   }
 
   const state = async () => { await settle(page); return page.evaluate(() => window.INTERPRETATIONS_DUEL_DEBUG.state); };
