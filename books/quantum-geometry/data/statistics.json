@@ -3,7 +3,7 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 171,
+    "theorem": 172,
     "lemma": 34,
     "proposition": 43,
     "corollary": 25,
@@ -12,16 +12,16 @@
     "problem": 3,
     "example": 106,
     "remark": 178,
-    "proof": 270,
-    "lean_verified": 271,
+    "proof": 271,
+    "lean_verified": 272,
     "written_proof": 2,
     "literature": 187
   },
-  "total": 590,
+  "total": 591,
   "kinds": {
     "def": 157,
     "inductive": 10,
-    "theorem": 423
+    "theorem": 424
   },
   "groups": {
     "theorems": [
@@ -80,6 +80,7 @@
       "D5/S3/Arith/Robin/FewDistinctPrimes.robin_of_card_primeFactors_le_eight",
       "D5/S3/Arith/Robin/OffLinePeak/OriginalLocalA.original_zero_robin5040_localA",
       "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape",
+      "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion",
       "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact",
       "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_face_sides",
       "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.face_odd_nice_cycle_orientation",
@@ -3910,6 +3911,18 @@
         }
       ]
     },
+    "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion": {
+      "kind": "theorem",
+      "name": "D5.S3.Combinatorics.Graph.LinearForests.DirectedForestCompletion.directed_forest_completion",
+      "citations": [
+        {
+          "file": "ch16-qsvt-walks-and-compilation.md",
+          "line": 207,
+          "id": "thm-directed-forest-completion-core",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Face": {
       "kind": "def",
       "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.Face",
@@ -5908,7 +5921,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 1109,
+          "line": 1131,
           "id": "def-polynomial-parity-roots",
           "via": "environment"
         }
@@ -5920,7 +5933,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 1109,
+          "line": 1131,
           "id": "def-polynomial-parity-roots",
           "via": "environment"
         }
@@ -5932,7 +5945,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 541,
+          "line": 563,
           "id": "thm-phase-unitary-completion",
           "via": "environment"
         }
@@ -5944,7 +5957,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 467,
+          "line": 489,
           "id": "thm-interval-sumsq-decomposition",
           "via": "environment"
         }
@@ -5956,7 +5969,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 762,
+          "line": 784,
           "id": "thm-signed-circle-phase-factorization",
           "via": "environment"
         }
@@ -5968,13 +5981,13 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 678,
+          "line": 700,
           "id": "thm-polynomial-phase-synthesis",
           "via": "environment"
         },
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 663,
+          "line": 685,
           "id": "",
           "via": "inline"
         }
@@ -5986,7 +5999,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 733,
+          "line": 755,
           "id": "def-phase-field-product",
           "via": "environment"
         }
@@ -5998,7 +6011,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 733,
+          "line": 755,
           "id": "def-phase-field-product",
           "via": "environment"
         }
@@ -6010,7 +6023,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 667,
+          "line": 689,
           "id": "def-phase-polynomial-fold",
           "via": "environment"
         }
@@ -6022,7 +6035,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 667,
+          "line": 689,
           "id": "def-phase-polynomial-fold",
           "via": "environment"
         }
@@ -6034,7 +6047,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 711,
+          "line": 733,
           "id": "",
           "via": "inline"
         }
@@ -6046,7 +6059,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 1083,
+          "line": 1105,
           "id": "def-native-reflection-phases",
           "via": "environment"
         }
@@ -6058,7 +6071,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 1123,
+          "line": 1145,
           "id": "thm-native-phase-projected-lifting",
           "via": "environment"
         }
@@ -6070,7 +6083,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 923,
+          "line": 945,
           "id": "def-singular-pair-frames",
           "via": "environment"
         }
@@ -6082,7 +6095,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 885,
+          "line": 907,
           "id": "def-projected-unitary-word",
           "via": "environment"
         }
@@ -6094,7 +6107,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 885,
+          "line": 907,
           "id": "def-projected-unitary-word",
           "via": "environment"
         }
@@ -6106,7 +6119,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 885,
+          "line": 907,
           "id": "def-projected-unitary-word",
           "via": "environment"
         }
@@ -6118,7 +6131,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 885,
+          "line": 907,
           "id": "def-projected-unitary-word",
           "via": "environment"
         }
@@ -6130,7 +6143,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 975,
+          "line": 997,
           "id": "thm-alternating-singular-pair-action",
           "via": "environment"
         }
@@ -6142,7 +6155,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 923,
+          "line": 945,
           "id": "def-singular-pair-frames",
           "via": "environment"
         }
@@ -6154,7 +6167,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 923,
+          "line": 945,
           "id": "def-singular-pair-frames",
           "via": "environment"
         }
@@ -6166,7 +6179,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 885,
+          "line": 907,
           "id": "def-projected-unitary-word",
           "via": "environment"
         }
@@ -6178,7 +6191,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 885,
+          "line": 907,
           "id": "def-projected-unitary-word",
           "via": "environment"
         }
@@ -6190,7 +6203,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 1013,
+          "line": 1035,
           "id": "thm-projected-unitary-polynomial-lifting",
           "via": "environment"
         }
@@ -6202,7 +6215,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 923,
+          "line": 945,
           "id": "def-singular-pair-frames",
           "via": "environment"
         }
@@ -7762,7 +7775,7 @@
         },
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 1251,
+          "line": 1273,
           "id": "prop-two-axis-finite-word",
           "via": "environment"
         },
@@ -13438,7 +13451,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 322,
+          "line": 344,
           "id": "thm-central-defect-spectral-gap",
           "via": "environment"
         }
@@ -13450,7 +13463,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 290,
+          "line": 312,
           "id": "thm-robin-endpoint-observability",
           "via": "environment"
         }
@@ -13942,7 +13955,7 @@
       "citations": [
         {
           "file": "ch16-qsvt-walks-and-compilation.md",
-          "line": 1359,
+          "line": 1381,
           "id": "cor-exact-source-query-count",
           "via": "environment"
         }
@@ -17622,6 +17635,7 @@
       "depth": 0,
       "environment": [
         "D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence",
+        "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion",
         "D5/S3/ContinuousObservables/IntervalSOSCompletion.Poly.evenRoot",
         "D5/S3/ContinuousObservables/IntervalSOSCompletion.Poly.oddRoot",
         "D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_phase_unitary_completion",

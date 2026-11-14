@@ -1,6 +1,6 @@
 {
   "next": {
-    "T": 314,
+    "T": 315,
     "D": 115,
     "R": 164
   },
@@ -122,6 +122,7 @@
     "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape": "T049",
     "D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum": "R039",
     "D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum": "R040",
+    "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion": "T314",
     "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Face": "D023",
     "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Rotation": "D024",
     "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.boundary": "D025",
