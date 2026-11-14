@@ -63,8 +63,8 @@
           "逐轮取样：0.544、0.656、0.702……始终从下方逼近。"
         ],
         [
-          "Each round shrinks the error by about zero point four five four, the square of zero point six seven four.",
-          "每一轮误差约乘 0.454，正是 0.674 的平方。"
+          "Near theta star, each round shrinks the error by a factor that tends to zero point four five four, the square of zero point six seven four.",
+          "在 θ* 附近，每轮误差比趋于 0.454，正是 0.674 的平方。"
         ],
         [
           "A round costs two readings: calm, not speed. These facts apply existing results; the decimals are computed on screen.",
@@ -74,7 +74,7 @@
       "cues": [
         {
           "line": 3,
-          "at": 3.0,
+          "at": 5.3,
           "kind": "chime"
         }
       ]

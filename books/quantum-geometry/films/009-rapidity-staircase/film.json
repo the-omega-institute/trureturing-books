@@ -6,7 +6,7 @@
   "summary_zh": "独自用 x ↦ cos x 省察自己的观察者，每一步都越过 θ* ≈ 0.739；互相丈量的两位观察者逐轮只从一侧逼近 θ*。从 θ* 出发，外部角度尺上等步走，第二步就撞上 90°；在快度 η = ∫ sec θ dθ 上等步走，则是一架阶梯，缝 1 − tanh η 永不闭合。复平面上，同一道边是单位圆：‖(s − 1)/s‖ = 1 当且仅当 Re s = 1/2，正如第三十六章的一条 Lean 定理所述。",
   "subject": "https://github.com/the-omega-institute/trureturing",
   "released": "2026-11-12",
-  "duration": "2:50",
+  "duration": "2:53",
   "resolution": "1280x720@30",
   "style": "trureturing cyberpunk · cosine cobweb, round samples, the angle dial, the rapidity staircase and the Cayley circles",
   "narration": {
