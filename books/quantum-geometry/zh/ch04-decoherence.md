@@ -261,7 +261,75 @@ $$
 
 这里的“类”按**记录向量完全相等**划分，同类内部的相干保留；只有类全是单点时，极限才是逐个基地址的完全去相干。若 $E_1=-E_0$，两向量虽然不相等，却有 $|G_{01}|=1$，不满足严格重叠界：作用只改变相位，不使这项相干的模衰减。向量不同，不能自动当作环境获得了可区分的记录。
 
-把 $\Phi_E^N$ 解释为连续碰撞，还需要每一步确实实现同一个约化信道；一种实现是每次使用新的、初始不相关的环境寄存器和相同记录耦合。反复访问同一环境或环境之间已有相关时，不能仅凭单次重叠套用 $G_{ij}^N$。本结果给出了放宽理想正交条件后的误差控制，归一化、严格重叠界与重复信道描述仍是模型前提；范数也是 Frobenius 范数，不能直接读作迹距离或实验判别错误率。
+::: {.remark #rem-ray-record-orbit title="按射线分组的代表归约与旋转相干块（应用推导）"}
+若改按**环境记录所在的单位射线**分组，上一段的全局相位冗余便可直接并入 [@thm-repeated-record-decay] 的应用推导，同时完整保留原受控记录信道 $\Phi_E$，而不能把记录向量 $E_i$ 改写成向量化密度矩阵 $\lvert E_i\rangle\langle E_i\rvert$（那样会把 Gram 矩阵元 $G_{ij}$ 替换成 $|G_{ij}|^2$，改变原有信道）。
+
+设 $d,e\in\mathbb{N}$ 为任意自然数，$E:\mathrm{Fin}\,d\to\mathrm{Fin}\,e\to\mathbb{C}$ 满足每条记录归一化 $\sum_a |E_i(a)|^2=1$，仍记
+
+$$
+G_{E,ij}=\sum_a E_i(a)\overline{E_j(a)},\qquad
+\Phi_E(\rho)_{ij}=G_{E,ij}\rho_{ij}.
+$$
+
+定义射线等价 $i\sim j$ 当且仅当存在单位模长复标量 $u\in\mathbb{C}$（$|u|=1$）把 $E_j$ 变成 $E_i$（$E_i=uE_j$），并令射线捏合映射 $P_{\mathrm{ray}}$ 保留且只保留同射线矩阵元：
+
+$$
+P_{\mathrm{ray}}(\rho)_{ij}=\begin{cases}\rho_{ij},&i\sim j,\\0,&i\not\sim j.\end{cases}
+$$
+
+从每条射线 $c$ 中选定一个单位代表向量 $R_c$，对每个系统地址 $i\in\mathrm{Fin}\,d$ 取代表记录 $R_i=R_{c(i)}$（代表记录仍按系统地址索引，同行使用同一个代表），则有 $E_i=u_i R_{c(i)}$ 且 $|u_i|=1$。在有限维复内积空间中，由 Cauchy–Schwarz 不等式 $|G_{R,ij}|\le\|R_i\|_2\|R_j\|_2=1$ 的等号判据，两个单位向量的内积模长达到上界当且仅当二者位于同一射线（$i\sim j$）；因此不同射线代表（$i\not\sim j$，即 $R_i\ne R_j$）的重叠模长必满足 $|G_{E,ij}|=|G_{R,ij}|<1$。由于跨射线下标对 $(i,j)$ 只有有限个，其重叠模长存在统一上界 $q\in[0,1)$（没有跨射线对时取 $q=0$）。该常数 $q$ 由给定记录族 $E$ 确定，对所有下标 $i,j$、步数 $N\in\mathbb{N}$ 与系统矩阵 $\rho$ 一致成立；这里不声称对所有记录族存在同一个正间隙。
+
+直接展开内积给出 $G_{E,ij}=u_i\overline{u_j}G_{R,ij}$。令单位对角矩阵 $U=\operatorname{diag}(u_i)$，则对任意 $N\in\mathbb{N}$ 与任意复系统矩阵 $\rho\in M_d(\mathbb{C})$，原信道的迭代与代表记录信道满足
+
+$$
+\Phi_E^N(\rho)=U^N\Phi_R^N(\rho)(U^N)^*.
+$$
+
+代表记录 $R$ 的向量相等类 $R_i=R_j$ 恰是原射线类 $i\sim j$，故其向量相等捏合 $\Pi_R$ 等于 $P_{\mathrm{ray}}$，且 $R_i\ne R_j$ 时 $|G_{R,ij}|\le q<1$。将 [@thm-repeated-record-decay] 应用于代表记录 $R$，再由单位对角共轭保持 Frobenius 范数，即得对所有自然数 $N\in\mathbb{N}$ 和任意复系统矩阵 $\rho\in M_d(\mathbb{C})$（无需额外密度矩阵、正性、单位迹或非空前提）：
+
+$$
+\bigl\|\Phi_E^N(\rho)-U^N P_{\mathrm{ray}}(\rho)(U^N)^*\bigr\|_{\mathrm F}
+\le q^N\bigl\|\rho-P_{\mathrm{ray}}(\rho)\bigr\|_{\mathrm F}.
+$$
+
+因此，射线分组下的极限比较对象是**运动中的相干块轨道** $U^N P_{\mathrm{ray}}(\rho)(U^N)^*$，而不是静态完全对角化。在同一射线上（$i\sim j$），$G_{E,ij}=u_i\overline{u_j}$，迭代 $N$ 步后相干模长 $|\rho_{ij}|$ 保持不变，而条件相位仍可随步数旋转。这些条件相位由实际受控耦合或相位校准确定；只知道单独环境记录的密度矩阵 $\lvert E_i\rangle\langle E_i\rvert$ 不能确定这些相位。一般量子信道在渐近演化中保留旋转分量的现象并非新物理发现（文献结果，未在本书形式化：见 Victor V. Albert, *Asymptotics of quantum channels: conserved quantities, an adiabatic limit, and matrix product states*, Quantum **3**, 151 (2019), DOI [10.22331/q-2019-06-06-151](https://doi.org/10.22331/q-2019-06-06-151)，第 2 节关于旋转点与渐近投影的讨论；该文仅提供一般信道背景，上式的有限记录范数界则由上述代表构造与 [@thm-repeated-record-decay] 直接导出）。
+:::
+
+::: {.example #ex-ray-record-rotation title="三条记录的手算：同射线相干旋转与跨射线指数收缩同时发生"}
+取 $d=3,e=2$ 与三条单位环境记录
+
+$$
+E_0=(1,0),\qquad
+E_1=(i,0),\qquad
+E_2=\left(\frac{3}{5},\frac{4}{5}\right).
+$$
+
+其中 $E_0$ 与 $E_1$ 仅差单位相位，射线类为 $\{0,1\}$ 与 $\{2\}$。选射线代表 $R_0=R_1=(1,0)$、$R_2=(3/5,4/5)$，可取相位 $u=(1,i,1)$，跨射线重叠模长 $|G_{02}|=|G_{12}|=3/5$，故取 $q=3/5$。
+
+设初态 $\rho\in M_3(\mathbb{C})$ 的所有 $3\times 3$ 矩阵元均为 $1/3$，它是归一化等权叠加纯态的密度矩阵。作用 $N$ 步后：
+
+1. **同射线相干旋转且模长不减**：下标 $(0,1)$ 同属一条射线，$G_{01}=1\cdot\overline{i}=-i$，故
+
+   $$
+   \bigl(\Phi_E^N(\rho)\bigr)_{01}=\frac{(-i)^N}{3},\qquad
+   \bigl|\bigl(\Phi_E^N(\rho)\bigr)_{01}\bigr|=\frac{1}{3},
+   $$
+
+   共轭元 $(1,0)$ 为 $i^N/3$，模长始终为 $1/3$。
+2. **跨射线项按 $(3/5)^N$ 收缩**：四个跨射线项 $(0,2),(2,0),(1,2),(2,1)$ 的模长均为 $\frac{1}{3}(3/5)^N$，因此到运动相干块 $U^N P_{\mathrm{ray}}(\rho)(U^N)^*$ 的 Frobenius 误差恰为
+
+   $$
+   \begin{aligned}
+   \bigl\|\Phi_E^N(\rho)-U^N P_{\mathrm{ray}}(\rho)(U^N)^*\bigr\|_{\mathrm F}
+   &=\sqrt{4\cdot\frac{1}{9}\left(\frac{3}{5}\right)^{2N}} \\
+   &=\frac{2}{3}\left(\frac{3}{5}\right)^N.
+   \end{aligned}
+   $$
+
+   在 $N=0$ 时误差为 $2/3$，$N=1$ 时为 $2/5$，$N=10$ 时为 $\frac{2}{3}(3/5)^{10}=0.0040310784$。
+:::
+
+把 $\Phi_E^N$ 解释为连续碰撞，还需要每一步确实实现同一个约化信道；一种实现是每次使用新的、初始不相关的环境寄存器和相同记录耦合。反复访问同一环境或环境之间已有相关时，不能仅凭单次重叠套用 $G_{ij}^N$。这一组结果给出了放宽理想正交条件后的误差控制：原向量分组定理 [@thm-repeated-record-decay] 仍将严格重叠界作为假设前提，而 [@rem-ray-record-orbit] 的射线应用则从有限单位记录推导该界；至于记录归一化、指定受控耦合以及同一约化信道反复作用的现实适用性，在两种表述下均仍是模型前提，需要独立的物理证据支持，且这里的 Frobenius 范数不能直接读作迹距离或实验判别错误率。
 
 **衰减到零，还算可逆吗？** [@prop-phase-damping-decay] 里的相干元每一步乘以 $c$，$N$ 步后只剩 $c^N\rho_{01}$，最终归零。4.1 节说过，单步退相干可以看成一次可逆耦合之后丢掉环境（[@thm-stinespring-dilation]、[@thm-reduced-access-defect]）。可“每一步都能这样看”与“所有步数合起来仍是同一个可逆演化的影子”是两回事：前者允许每一步各换一个扩张，后者要求一个酉算子 $U$ 一次管住全部的 $T^n$。下面的定理说，后者对任何压缩算子都成立。
 
