@@ -3,25 +3,25 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 173,
+    "theorem": 174,
     "lemma": 34,
     "proposition": 43,
     "corollary": 25,
     "definition": 38,
     "conjecture": 6,
-    "problem": 3,
+    "problem": 2,
     "example": 108,
     "remark": 178,
-    "proof": 272,
-    "lean_verified": 273,
+    "proof": 273,
+    "lean_verified": 274,
     "written_proof": 2,
     "literature": 187
   },
-  "total": 593,
+  "total": 594,
   "kinds": {
     "def": 157,
     "inductive": 10,
-    "theorem": 426
+    "theorem": 427
   },
   "groups": {
     "theorems": [
@@ -308,6 +308,7 @@
       "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot",
       "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction",
       "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation",
+      "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean.monitored_spectral_mean",
       "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law",
       "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula",
       "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff",
@@ -14809,7 +14810,7 @@
         },
         {
           "file": "ch07-geometric-time-and-speed-limits.md",
-          "line": 498,
+          "line": 528,
           "id": "",
           "via": "inline"
         }
@@ -15535,13 +15536,13 @@
       "citations": [
         {
           "file": "ch07-geometric-time-and-speed-limits.md",
-          "line": 467,
+          "line": 497,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch07-geometric-time-and-speed-limits.md",
-          "line": 480,
+          "line": 510,
           "id": "",
           "via": "inline"
         }
@@ -15553,7 +15554,7 @@
       "citations": [
         {
           "file": "ch07-geometric-time-and-speed-limits.md",
-          "line": 479,
+          "line": 509,
           "id": "thm-decoherence-freeze-critical",
           "via": "environment"
         }
@@ -15565,13 +15566,13 @@
       "citations": [
         {
           "file": "ch07-geometric-time-and-speed-limits.md",
-          "line": 461,
+          "line": 491,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch07-geometric-time-and-speed-limits.md",
-          "line": 480,
+          "line": 510,
           "id": "",
           "via": "inline"
         }
@@ -16030,6 +16031,18 @@
           "line": 280,
           "id": "",
           "via": "inline"
+        }
+      ]
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean.monitored_spectral_mean": {
+      "kind": "theorem",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredSpectralMean.monitored_spectral_mean",
+      "citations": [
+        {
+          "file": "ch07-geometric-time-and-speed-limits.md",
+          "line": 374,
+          "id": "prob-monitored-spectral-mean",
+          "via": "environment"
         }
       ]
     },
@@ -17429,7 +17442,8 @@
         "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation",
         "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnAmplitude",
         "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnProbability",
-        "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.survivalProbability"
+        "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.survivalProbability",
+        "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean.monitored_spectral_mean"
       ],
       "inline": [
         "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary",

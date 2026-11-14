@@ -1,6 +1,6 @@
 {
   "next": {
-    "T": 316,
+    "T": 317,
     "D": 115,
     "R": 165
   },
@@ -597,6 +597,7 @@
     "D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one": "R159",
     "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product": "T291",
     "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory.alternating_completion_classification": "T315",
-    "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory.compatible_cycle_card": "R164"
+    "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory.compatible_cycle_card": "R164",
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean.monitored_spectral_mean": "T316"
   }
 }
