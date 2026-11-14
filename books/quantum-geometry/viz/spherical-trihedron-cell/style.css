@@ -1,0 +1,48 @@
+/* ORTHO//CELL: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this page lives here:
+   the pointer on the stage, the book's colour rule (amber only for the current step, the handle and the loop cursor),
+   violet readouts, legend swatches, math kept out of uppercase, and the scene chips on narrow stages. Colours come from
+   the tokens (var(--cyan) …), never from literal colour values. */
+#cv { cursor: grab; touch-action: none; }
+#cv:active { cursor: grabbing; }
+#stage { container-type: inline-size; }
+
+/* the book's colour rule: the tagline and the drawer's bold leads are not "now" */
+.tagline em { color: var(--cyan); }
+.sheet li b { color: var(--cyan); }
+
+/* violet readouts: volume, rotor */
+dl.ro .v dd { color: var(--violet); }
+
+/* math never goes through an uppercase transform (ε, Ω, θ would change shape) */
+.chip .m { text-transform: none; letter-spacing: 0.02em; font-family: var(--font-data); }
+
+/* legend swatches */
+.sw.ink { background: var(--sigma); }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--dim) 0 4px, transparent 4px 7px); }
+.sw.dash.cy { background: repeating-linear-gradient(90deg, var(--cyan) 0 4px, transparent 4px 7px); }
+.sw.dash.mg { background: repeating-linear-gradient(90deg, var(--magenta) 0 4px, transparent 4px 7px); }
+.sw.ring { width: 10px; height: 10px; border-radius: 50%; background: transparent; border: 2px solid var(--amber); }
+
+/* the stage's own labels: numbers and blades keep their case */
+.stage .tag.raw.small { font-size: 11px; }
+.stage .tag.c-vi { color: var(--violet); }
+
+/* scene chips: on a narrow stage they go under the title (main.js sets --scene-top) */
+@container (max-width: 600px) {
+  .hud-tr { top: var(--scene-top, 58px); left: 16px; right: 16px; max-width: none; justify-content: flex-start; gap: 3px; }
+  .hud-tr .chip { padding: 3px 6px; font-size: 9.5px; letter-spacing: 0.05em; }
+  .hud-tl { left: 16px; max-width: calc(100% - 32px); }
+  .hud-tl .big { font-size: 12.5px; }
+  .hud-tl .sub { font-size: 11px; line-height: 1.3; }
+  .hud-bl { left: 14px; right: 14px; bottom: 10px; gap: 2px 10px; font-size: 10.5px; }
+}
+
+/* phones: a taller stage, so that the cell and its inset both have room */
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 68vh)) auto auto; }
+}
+
+/* The tour bar selects the card (and with it the scene) in a narrow cited figure. */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}
