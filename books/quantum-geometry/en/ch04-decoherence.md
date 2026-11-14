@@ -331,6 +331,65 @@ Let $\rho\in M_3(\mathbb{C})$ have all $3\times 3$ entries equal to $1/3$; it is
 
 Interpreting $\Phi_E^N$ as successive collisions also requires each step to implement the same reduced channel. One realization uses a fresh, initially uncorrelated environment register and the same recording interaction at every step. Reusing an environment or introducing correlations does not justify $G_{ij}^N$ from a one-step overlap alone. Together these results control the error after relaxing ideal orthogonality: the original vector-grouping theorem [@thm-repeated-record-decay] still assumes the strict overlap bound as a hypothesis, whereas the ray-grouping application in [@rem-ray-record-orbit] derives that bound from finitely many unit records; in both formulations, record normalization, the specified controlled coupling, and the physical applicability of a repeated reduced channel remain model premises requiring independent physical evidence, and the Frobenius norm must be distinguished from trace distance or an experimental discrimination error rate.
 
+::: {.remark #rem-retained-environment-defect title="Retained Environments and the Accumulated Defect Bound (Application Derivation)"}
+When the environment is retained rather than discarded and replaced, the actual reduced trajectory can be compared with the reset model without defining the true marginal trajectory as powers of a single channel. Let $\tau_k$ be actual joint density states evolved by a fixed joint unitary $U$ ($\tau_{k+1}=U\tau_k U^*$), $\rho_k=\Tr_{\mathrm{E}}(\tau_k)$ their system marginals, $\eta$ a fixed reference environment density state, and $R(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes\eta)U^*\bigr)$ the single-step reset channel. Write $D(\rho,\sigma)=\frac{1}{2}\|\rho-\sigma\|_1$ for half the trace norm of a state difference (the trace distance of [@def-trace-distance] below), and set $\delta_k=D(\tau_k,\,\rho_k\otimes\eta)$ for the step-$k$ joint factorization defect. The channel-contraction clause of [@prop-trace-distance-metric-contraction] below is stated for channels with identical input and output index types (such as the joint unitary conjugation $X\mapsto UXU^*$ and the same-index system reset channel $R$); for the rectangular partial trace $\Tr_{\mathrm{E}}$ from the joint space to the system, contractivity follows directly as an application derivation outside that frozen box: writing an Hermitian difference in Jordan form $A=P-Q$ with $P,Q$ positive semidefinite and $\operatorname{traceNorm}(A)=\Tr(P)+\Tr(Q)$, positivity and trace preservation of $\Tr_{\mathrm{E}}$ together with the trace-norm triangle inequality and $\operatorname{traceNorm}(B)=\Tr(B)$ for positive $B$ give $\operatorname{traceNorm}(\Tr_{\mathrm{E}}A)\le\operatorname{traceNorm}(\Tr_{\mathrm{E}}P)+\operatorname{traceNorm}(\Tr_{\mathrm{E}}Q)=\Tr(P)+\Tr(Q)=\operatorname{traceNorm}(A)$. Combining invariance of $D$ under tensoring with the fixed density state $\eta$ ($D(\rho\otimes\eta,\sigma\otimes\eta)=D(\rho,\sigma)$), the partial-trace and same-index reset-channel contractions above, and the triangle inequality over $0\le k<N$ gives
+
+$$
+\begin{aligned}
+D\bigl(\rho_{k+1},\,R(\rho_k)\bigr)&=D\Bigl(\Tr_{\mathrm{E}}(U\tau_k U^*),\,\Tr_{\mathrm{E}}\bigl(U(\rho_k\otimes\eta)U^*\bigr)\Bigr)\le D(\tau_k,\,\rho_k\otimes\eta)=\delta_k,\\
+D\bigl(R(\rho_k),\,R^{k+1}(\rho_0)\bigr)&=D\Bigl(\Tr_{\mathrm{E}}\bigl(U(\rho_k\otimes\eta)U^*\bigr),\,\Tr_{\mathrm{E}}\bigl(U(R^k(\rho_0)\otimes\eta)U^*\bigr)\Bigr)\le D\bigl(\rho_k,\,R^k(\rho_0)\bigr),\\
+D\bigl(\rho_N,\,R^N(\rho_0)\bigr)&\le\sum_{k=0}^{N-1}\delta_k.
+\end{aligned}
+$$
+
+Here the reference state $\eta$ may be mixed; this estimate neither defines the true marginal trajectory $\rho_k$ as the reset powers $R^k(\rho_0)$ nor assumes or proves that the defects $\delta_k$ are small.
+
+For a pure reference basis state $\eta=\lvert a\rangle\langle a\rvert$ ($a\in\mathrm{Fin}\,e$), the controlled-record action can be specified by the actual columns $U_{(i,b),\,(j,a)}=[j=i]\,E_i(b)$ on the reference environment input $a$. If $J$ embeds a system vector at environment coordinate $a$ ($J_{(i,b),\,j}=[j=i][b=a]$) and $W$ is the controlled-record matrix $W_{(i,b),\,j}=[j=i]\,E_i(b)$, these columns give $UJ=W$ and $\rho\otimes\lvert a\rangle\langle a\rvert=J\rho J^*$, so the partial-trace identity `environment_marginal_channel` derives $R(\rho)=\Tr_{\mathrm{E}}(W\rho W^*)=\Phi_E(\rho)$ (namely $\operatorname{recordChannel}(E)$) from the coupling. Furthermore, the $((j,a),(j,a))$ diagonal entry of $U^* U=I$ gives
+
+$$
+1=(U^* U)_{(j,a),\,(j,a)}=\sum_{i\in\mathrm{Fin}\,d}\,\sum_{b\in\mathrm{Fin}\,e}\bigl|U_{(i,b),\,(j,a)}\bigr|^2=\sum_{b\in\mathrm{Fin}\,e}|E_j(b)|^2,
+$$
+
+so record normalization $\sum_b |E_j(b)|^2=1$ follows from unitarity of these columns rather than entering as an independent hypothesis. Unitarity of $U$ alone, however, does not imply this controlled-record column form: the specified controlled coupling, the pure reference state $\lvert a\rangle\langle a\rvert$, and control of the joint defects $\delta_k$ remain physical model hypotheses. For literal vector-equality classes $E_i=E_j$, [@thm-repeated-record-decay] retains the strict cross-class overlap premise ($|G_{ij}|\le q<1$ whenever $E_i\ne E_j$); if the ray formulation of [@rem-ray-record-orbit] is used instead, the comparison target rotates as $U_{\mathrm{ray}}^N P_{\mathrm{ray}}(\rho_0)(U_{\mathrm{ray}}^N)^*$ (with diagonal address-phase matrix $U_{\mathrm{ray}}=\operatorname{diag}(u_i)$) and its finite unit-record separation bound $q<1$ applies across distinct rays ($i\not\sim j$).
+
+Under the remaining strict cross-class overlap premise, apply [@thm-repeated-record-decay] to $R^N(\rho_0)=\Phi_E^N(\rho_0)$. Since the Frobenius norm is bounded above by the trace norm ($\|M\|_{\mathrm F}\le\|M\|_1$) and $D(\rho,\sigma)=\frac{1}{2}\|\rho-\sigma\|_1$ uses the half-trace-norm convention, converting $D(\rho_N,R^N(\rho_0))$ to Frobenius norm introduces a factor of $2$, so the actual system marginal's Frobenius error relative to record-class pinching $\Pi_E(\rho_0)$ satisfies
+
+$$
+\begin{aligned}
+\bigl\|\rho_N-R^N(\rho_0)\bigr\|_{\mathrm F}&\le\bigl\|\rho_N-R^N(\rho_0)\bigr\|_1=2\,D\bigl(\rho_N,\,R^N(\rho_0)\bigr)\le 2\sum_{k=0}^{N-1}\delta_k,\\
+\bigl\|\rho_N-\Pi_E(\rho_0)\bigr\|_{\mathrm F}&\le 2\sum_{k=0}^{N-1}\delta_k+q^N\bigl\|\rho_0-\Pi_E(\rho_0)\bigr\|_{\mathrm F}.
+\end{aligned}
+$$
+
+(In the ray formulation of [@rem-ray-record-orbit], replacing $\Pi_E(\rho_0)$ on the left by the rotating target $U_{\mathrm{ray}}^N P_{\mathrm{ray}}(\rho_0)(U_{\mathrm{ray}}^N)^*$ and on the right by $P_{\mathrm{ray}}(\rho_0)$ yields the corresponding rotating-block bound with $q<1$ across distinct rays.) This combined inequality is application reasoning outside the displayed frozen declaration [@thm-repeated-record-decay], not an additional clause or new result of the cited GID.
+:::
+
+::: {.example #ex-retained-environment-cnot title="Two-Qubit Controlled Flip: Stationary Environment and Reset Deviation"}
+Stationarity of an environment marginal is not by itself a bound on the accumulated joint-state defects $\sum_{k<N}\delta_k$. For system-controlled $X$ on two qubits, $U=\lvert 0\rangle\langle 0\rvert\otimes I+\lvert 1\rangle\langle 1\rvert\otimes X$, start the system in the equatorial plus state $\rho_0=\lvert +\rangle\langle +\rvert=\frac{1}{2}\bigl(\begin{smallmatrix}1&1\\1&1\end{smallmatrix}\bigr)$, take the reference environment state $\eta_r=\frac{1}{2}(I+rX)=\frac{1}{2}\bigl(\begin{smallmatrix}1&r\\r&1\end{smallmatrix}\bigr)$ with $0\le r\le 1$, and evolve from the product initial state $\tau_0=\rho_0\otimes\eta_r$ via $\tau_{k+1}=U\tau_k U^*$:
+
+1. **Period-two actual evolution versus multiplication by $r$ under reset**: Because $X\eta_r X=\eta_r$, the actual environment marginal remains stationary at every step, $\Tr_{\mathrm{S}}(\tau_k)=\eta_r$. Meanwhile, the joint unitary $U$ has period $2$ ($U^2=I$), whereas the single-step reset channel $R(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes\eta_r)U^*\bigr)$ multiplies the system's transverse off-diagonal entries by $\Tr(\eta_r X)=r$. At even step $N=2m$, the actual system marginal and the reset iterate are therefore
+
+   $$
+   \rho_{2m}=\rho_0=\frac{1}{2}\begin{pmatrix}1&1\\1&1\end{pmatrix},\qquad
+   R^{2m}(\rho_0)=\frac{1}{2}\begin{pmatrix}1&r^{2m}\\r^{2m}&1\end{pmatrix}.
+   $$
+
+2. **Even-step trace distance and numerical comparison for a near-pure environment**: Direct evaluation of $\rho_{2m}-R^{2m}(\rho_0)=\frac{1-r^{2m}}{2}X$ and $\eta_1-\eta_r=\frac{1-r}{2}X$ gives both the trace distance between the actual system state and the reset iterate at even step $N=2m$ and the trace distance from $\eta_r$ to the pure plus state $\lvert +\rangle\langle +\rvert$:
+
+   $$
+   D\bigl(\rho_{2m},\,R^{2m}(\rho_0)\bigr)=\frac{1-r^{2m}}{2},\qquad
+   D\bigl(\eta_r,\,\lvert +\rangle\langle +\rvert\bigr)=\frac{1-r}{2}.
+   $$
+
+   For instance, at $r=0.99$ and $N=100$ ($m=50$), the environment's trace-distance impurity from $\lvert +\rangle\langle +\rvert$ is only $\frac{1-0.99}{2}=0.005$, yet the step-$100$ trace-distance discrepancy between the actual system marginal and the reset iterate reaches
+
+   $$
+   D\bigl(\rho_{100},\,R^{100}(\rho_0)\bigr)=\frac{1-0.99^{100}}{2}\approx 0.3169838293633854.
+   $$
+
+3. **Exact purity endpoint versus fixed-$N$ and time-uniform bounds**: At $r=1$, $\eta_1=\lvert +\rangle\langle +\rvert$ and the discrepancy vanishes identically ($0$ for all $N$), so this example does not refute an exactly pure, unchanged environment premise. Instead, it separates two distinct obligations: for any **fixed** step count $N=2m$, the discrepancy $\frac{1-r^{2m}}{2}\to 0$ as $r\to 1$; yet for any fixed $r\in[0,1)$, the even-time supremum is $\sup_{m\ge 1}\frac{1-r^{2m}}{2}=\frac{1}{2}$, so a stationary near-pure environment marginal does not by itself yield a reset approximation uniform in time. This elementary two-qubit calculation illustrates that mathematical distinction and does not claim a physical experiment, a novel result, or a universal explanation of open-system dynamics; controlling the joint correlations, identifying the physical coupling, and experimental support remain outside these mathematical applications.
+:::
+
 **Decay to zero: is it still reversible?** In [@prop-phase-damping-decay] the coherence is multiplied by $c$ at each step, leaving $c^N\rho_{01}$ after $N$ steps and finally zero. Section 4.1 showed that one step of decoherence can be seen as a reversible coupling followed by discarding the environment ([@thm-stinespring-dilation], [@thm-reduced-access-defect]). But "each step can be seen this way" and "all the steps together are still the shadow of one reversible evolution" are different claims: the first allows a different dilation at every step, the second asks one unitary $U$ to account for all the powers $T^n$ at once. The next theorem says that the second holds for every contraction.
 
 ::: {.theorem #thm-unitary-power-dilation title="Sz.-Nagy Unitary Power Dilation: Every Power of a Contraction Is a Shadow of the Same Unitary" lean="D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation"}

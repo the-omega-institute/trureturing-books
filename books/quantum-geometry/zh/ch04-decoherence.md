@@ -331,6 +331,65 @@ $$
 
 把 $\Phi_E^N$ 解释为连续碰撞，还需要每一步确实实现同一个约化信道；一种实现是每次使用新的、初始不相关的环境寄存器和相同记录耦合。反复访问同一环境或环境之间已有相关时，不能仅凭单次重叠套用 $G_{ij}^N$。这一组结果给出了放宽理想正交条件后的误差控制：原向量分组定理 [@thm-repeated-record-decay] 仍将严格重叠界作为假设前提，而 [@rem-ray-record-orbit] 的射线应用则从有限单位记录推导该界；至于记录归一化、指定受控耦合以及同一约化信道反复作用的现实适用性，在两种表述下均仍是模型前提，需要独立的物理证据支持，且这里的 Frobenius 范数不能直接读作迹距离或实验判别错误率。
 
+::: {.remark #rem-retained-environment-defect title="保留环境下的累积因子化缺陷界（应用推导）"}
+若环境未被丢弃更换而是随系统保留演化，也可以在不把真实边缘轨迹定义为信道幂的前提下，将真实约化态与重置模型直接比较。设 $\tau_k$ 为在固定联合幺正算子 $U$ 下演化的真实联合密度态（$\tau_{k+1}=U\tau_k U^*$），$\rho_k=\Tr_{\mathrm{E}}(\tau_k)$ 为其系统边缘态，$\eta$ 为固定的参考环境密度态，并定义单步重置信道 $R(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes\eta)U^*\bigr)$。记 $D(\rho,\sigma)=\frac{1}{2}\|\rho-\sigma\|_1$ 为态差迹范数的一半（即下文 [@def-trace-distance] 的迹距离），并记第 $k$ 步的联合因子化缺陷为 $\delta_k=D(\tau_k,\,\rho_k\otimes\eta)$。下文 [@prop-trace-distance-metric-contraction] 的信道收缩声明针对输入与输出同指标类型的信道（如联合空间上的幺正共轭 $X\mapsto UXU^*$ 及系统空间上的同指标重置信道 $R$）；对于从联合空间到系统空间的跨指标偏迹 $\Tr_{\mathrm{E}}$，其收缩性则作为该定理盒之外的应用推导直接给出：将任意厄米差写成正负部分解 $A=P-Q$（$P,Q$ 半正定且 $\operatorname{traceNorm}(A)=\Tr(P)+\Tr(Q)$），由 $\Tr_{\mathrm{E}}$ 的保正性与保迹性、迹范数三角不等式以及正算子恒等式 $\operatorname{traceNorm}(B)=\Tr(B)$，立得 $\operatorname{traceNorm}(\Tr_{\mathrm{E}}A)\le\operatorname{traceNorm}(\Tr_{\mathrm{E}}P)+\operatorname{traceNorm}(\Tr_{\mathrm{E}}Q)=\Tr(P)+\Tr(Q)=\operatorname{traceNorm}(A)$。结合 $D$ 在张量乘入固定密度态 $\eta$ 下的不变性（$D(\rho\otimes\eta,\sigma\otimes\eta)=D(\rho,\sigma)$）、上述偏迹与同指标重置信道 $R$ 的收缩性以及三角不等式，对 $0\le k<N$ 逐项累加得
+
+$$
+\begin{aligned}
+D\bigl(\rho_{k+1},\,R(\rho_k)\bigr)&=D\Bigl(\Tr_{\mathrm{E}}(U\tau_k U^*),\,\Tr_{\mathrm{E}}\bigl(U(\rho_k\otimes\eta)U^*\bigr)\Bigr)\le D(\tau_k,\,\rho_k\otimes\eta)=\delta_k,\\
+D\bigl(R(\rho_k),\,R^{k+1}(\rho_0)\bigr)&=D\Bigl(\Tr_{\mathrm{E}}\bigl(U(\rho_k\otimes\eta)U^*\bigr),\,\Tr_{\mathrm{E}}\bigl(U(R^k(\rho_0)\otimes\eta)U^*\bigr)\Bigr)\le D\bigl(\rho_k,\,R^k(\rho_0)\bigr),\\
+D\bigl(\rho_N,\,R^N(\rho_0)\bigr)&\le\sum_{k=0}^{N-1}\delta_k.
+\end{aligned}
+$$
+
+此处参考态 $\eta$ 可以是混合态；该估计既不将真实边缘轨迹 $\rho_k$ 定义为重置幂 $R^k(\rho_0)$，也不假定或证明缺陷 $\delta_k$ 很小。
+
+当参考态取为纯环境基态 $\eta=\lvert a\rangle\langle a\rvert$（$a\in\mathrm{Fin}\,e$）时，受控记录耦合可由 $U$ 在参考环境列 $(j,a)$ 上的真实矩阵元指定为 $U_{(i,b),\,(j,a)}=[j=i]\,E_i(b)$。设 $J$ 将系统向量嵌入环境坐标 $a$（$J_{(i,b),\,j}=[j=i][b=a]$），$W$ 为受控记录矩阵 $W_{(i,b),\,j}=[j=i]\,E_i(b)$，则这组列直接给出 $UJ=W$ 与 $\rho\otimes\lvert a\rangle\langle a\rvert=J\rho J^*$，由前文偏迹恒等式 `environment_marginal_channel` 立得 $R(\rho)=\Tr_{\mathrm{E}}(W\rho W^*)=\Phi_E(\rho)$（即 $\operatorname{recordChannel}(E)$）。同时，读取 $U^* U=I$ 的第 $((j,a),(j,a))$ 个对角元有
+
+$$
+1=(U^* U)_{(j,a),\,(j,a)}=\sum_{i\in\mathrm{Fin}\,d}\,\sum_{b\in\mathrm{Fin}\,e}\bigl|U_{(i,b),\,(j,a)}\bigr|^2=\sum_{b\in\mathrm{Fin}\,e}|E_j(b)|^2,
+$$
+
+故每条记录的归一化 $\sum_b |E_j(b)|^2=1$ 由这组受控幺正列直接导出，无需作为独立假设另行附加。但单独的 $U$ 幺正性并不推出上述受控列形式：指定的受控耦合列结构、纯参考基态 $\lvert a\rangle\langle a\rvert$ 以及联合相关缺陷 $\delta_k$ 的控制仍是物理模型假设。对于按字面向量相等划分的记录类 $E_i=E_j$，[@thm-repeated-record-decay] 仍需保留严格的跨类重叠上界（$E_i\ne E_j$ 时 $|G_{ij}|\le q<1$）；若改用 [@rem-ray-record-orbit] 的射线表述，则比较目标旋转为 $U_{\mathrm{ray}}^N P_{\mathrm{ray}}(\rho_0)(U_{\mathrm{ray}}^N)^*$（其中 $U_{\mathrm{ray}}=\operatorname{diag}(u_i)$ 为地址相位对角阵），且不同射线（$i\not\sim j$）之间的严格分离界 $q<1$ 由有限单位记录几何给出。
+
+在保留严格跨类重叠前提下，将 [@thm-repeated-record-decay] 应用于 $R^N(\rho_0)=\Phi_E^N(\rho_0)$。因 Frobenius 范数不超过迹范数（$\|M\|_{\mathrm F}\le\|M\|_1$），而 $D(\rho,\sigma)=\frac{1}{2}\|\rho-\sigma\|_1$ 采用半迹范数约定，将 $D(\rho_N,R^N(\rho_0))$ 换算为 Frobenius 范数会引入因子 $2$，从而真实系统边缘态相对于记录类捏合 $\Pi_E(\rho_0)$ 的 Frobenius 误差满足
+
+$$
+\begin{aligned}
+\bigl\|\rho_N-R^N(\rho_0)\bigr\|_{\mathrm F}&\le\bigl\|\rho_N-R^N(\rho_0)\bigr\|_1=2\,D\bigl(\rho_N,\,R^N(\rho_0)\bigr)\le 2\sum_{k=0}^{N-1}\delta_k,\\
+\bigl\|\rho_N-\Pi_E(\rho_0)\bigr\|_{\mathrm F}&\le 2\sum_{k=0}^{N-1}\delta_k+q^N\bigl\|\rho_0-\Pi_E(\rho_0)\bigr\|_{\mathrm F}.
+\end{aligned}
+$$
+
+（在 [@rem-ray-record-orbit] 的射线表述下，只需将左端的 $\Pi_E(\rho_0)$ 换为旋转目标 $U_{\mathrm{ray}}^N P_{\mathrm{ray}}(\rho_0)(U_{\mathrm{ray}}^N)^*$、右端换为 $P_{\mathrm{ray}}(\rho_0)$，即可对不同射线的分离界 $q<1$ 得到相应的旋转相干块误差界。）这一不等式是在定理盒之外联合既有估计所做的应用推理，不是所引 GID 冻结声明中的附加条款或新定理。
+:::
+
+::: {.example #ex-retained-environment-cnot title="双比特受控翻转：定常环境与重置偏离"}
+环境边缘态保持定常，并不自动给出累积联合缺陷 $\sum_{k<N}\delta_k$ 的上界。考察双比特上的系统受控 $X$ 门 $U=\lvert 0\rangle\langle 0\rvert\otimes I+\lvert 1\rangle\langle 1\rvert\otimes X$，取系统初态为赤道纯态 $\rho_0=\lvert +\rangle\langle +\rvert=\frac{1}{2}\bigl(\begin{smallmatrix}1&1\\1&1\end{smallmatrix}\bigr)$，参考环境态为 $\eta_r=\frac{1}{2}(I+rX)=\frac{1}{2}\bigl(\begin{smallmatrix}1&r\\r&1\end{smallmatrix}\bigr)$（$0\le r\le 1$），并从乘积初态 $\tau_0=\rho_0\otimes\eta_r$ 出发沿 $\tau_{k+1}=U\tau_k U^*$ 演化：
+
+1. **真实演化周期为 $2$，而重置信道逐次乘以 $r$**：因 $X\eta_r X=\eta_r$，真实环境边缘态在每一步均保持定常 $\Tr_{\mathrm{S}}(\tau_k)=\eta_r$。与此同时，联合幺正门满足 $U^2=I$（周期为 $2$），而单步重置信道 $R(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes\eta_r)U^*\bigr)$ 将系统的横向非对角元乘以 $\Tr(\eta_r X)=r$。因此在偶数步 $N=2m$ 时，真实系统边缘态与重置迭代态分别为
+
+   $$
+   \rho_{2m}=\rho_0=\frac{1}{2}\begin{pmatrix}1&1\\1&1\end{pmatrix},\qquad
+   R^{2m}(\rho_0)=\frac{1}{2}\begin{pmatrix}1&r^{2m}\\r^{2m}&1\end{pmatrix}.
+   $$
+
+2. **偶数步迹距离与近纯环境数值对比**：直接计算矩阵差 $\rho_{2m}-R^{2m}(\rho_0)=\frac{1-r^{2m}}{2}X$ 与 $\eta_1-\eta_r=\frac{1-r}{2}X$，可得偶数步 $N=2m$ 时真实系统态与重置迭代态的迹距离，以及 $\eta_r$ 到纯态 $\lvert +\rangle\langle +\rvert$ 的迹距离：
+
+   $$
+   D\bigl(\rho_{2m},\,R^{2m}(\rho_0)\bigr)=\frac{1-r^{2m}}{2},\qquad
+   D\bigl(\eta_r,\,\lvert +\rangle\langle +\rvert\bigr)=\frac{1-r}{2}.
+   $$
+
+   例如取 $r=0.99$、$N=100$（$m=50$），环境偏离纯态 $\lvert +\rangle\langle +\rvert$ 的迹距离不纯度仅为 $\frac{1-0.99}{2}=0.005$，但第 $100$ 步真实系统态与重置迭代态之间的迹距离偏离达到
+
+   $$
+   D\bigl(\rho_{100},\,R^{100}(\rho_0)\bigr)=\frac{1-0.99^{100}}{2}\approx 0.3169838293633854.
+   $$
+
+3. **精确纯态端点与两类极限命题的区分**：当 $r=1$ 时，$\eta_1=\lvert +\rangle\langle +\rvert$，上述迹距离偏离恒为 $0$；因此该算例并不否定“环境精确为纯态且保持不变”这一前提。它展示的是两件不同的数学义务：对任意**固定**步数 $N=2m$，当 $r\to 1$ 时偏离 $\frac{1-r^{2m}}{2}\to 0$；但对任意固定的 $r\in[0,1)$，关于偶数步时间的上确界恒为 $\sup_{m\ge 1}\frac{1-r^{2m}}{2}=\frac{1}{2}$，不能仅凭环境边缘态定常且单步接近纯态就断言时间一致的重置近似界。这一双比特手算仅用于说明上述数学区分，不声称物理实验、原创发现或开放系统演化的普适解释；联合相关性的实际控制、物理耦合的标定与实验验证仍处于这些数学应用之外。
+:::
+
 **衰减到零，还算可逆吗？** [@prop-phase-damping-decay] 里的相干元每一步乘以 $c$，$N$ 步后只剩 $c^N\rho_{01}$，最终归零。4.1 节说过，单步退相干可以看成一次可逆耦合之后丢掉环境（[@thm-stinespring-dilation]、[@thm-reduced-access-defect]）。可“每一步都能这样看”与“所有步数合起来仍是同一个可逆演化的影子”是两回事：前者允许每一步各换一个扩张，后者要求一个酉算子 $U$ 一次管住全部的 $T^n$。下面的定理说，后者对任何压缩算子都成立。
 
 ::: {.theorem #thm-unitary-power-dilation title="Sz.-Nagy 酉幂扩张：压缩算子的每一次幂都是同一个酉算子的影子" lean="D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation"}

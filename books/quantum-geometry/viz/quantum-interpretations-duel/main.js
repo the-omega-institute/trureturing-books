@@ -111,10 +111,10 @@
     // boost of A = (0, −1), B = (0, +1) in units c = 1, L = 1
     const beta = s.beta, G = 1 / Math.sqrt(1 - beta * beta), ev = (t, x) => [G * (t - beta * x), G * (x - beta * t)];
     const A1 = ev(0, -1), B1 = ev(0, 1), dt = B1[0] - A1[0], dx = B1[1] - A1[1];
-    // squaring and phase: (AB)(BA) for unit A = e₁, B = (c, s); R = [[0, −1], [1, 0]]; |+⟩, |−⟩ on Z and X
+    // squaring and phase: (AB)(BA) for unit A = e₁, B = (c, s); R = [[0, −1], [1, 0]]; |+⟩, |−⟩: probability P(Z = +1), expectation ⟨X⟩
     const AB = [c, sn], BA = [c, -sn], ABBA = cm(AB, BA);
     const R2 = [[0 * 0 + -1 * 1, 0 * -1 + -1 * 0], [1 * 0 + 0 * 1, 1 * -1 + 0 * 0]];
-    const plusZ = 0.5, minusZ = 0.5, plusX = 1, minusX = -1;      // ⟨±|P₀|±⟩ and ⟨±|X|±⟩ of (|0⟩ ± |1⟩)/√2
+    const plusP0 = 0.5, minusP0 = 0.5, plusX = 1, minusX = -1;    // P(Z = +1) = ⟨±|P₀|±⟩ and ⟨X⟩ = ⟨±|X|±⟩ of (|0⟩ ± |1⟩)/√2
     // Robertson–Schrödinger for |u_θ⟩ = (c, s), A = Z, B = X: u = Zψ − ⟨Z⟩ψ, v = Xψ − ⟨X⟩ψ
     const ez = c * c - sn * sn, ex = 2 * c * sn, u = [c - ez * c, -sn - ez * sn], v = [sn - ex * c, c - ex * sn];
     const varZ = u[0] * u[0] + u[1] * u[1], varX = v[0] * v[0] + v[1] * v[1], cov = u[0] * v[0] + u[1] * v[1];
@@ -122,7 +122,7 @@
     return {
       theta: s.theta, c, s: sn, p, q, N, u: s.u, gamma, rho, pinched, purity, deleted, vis, visFull, r2, tangle, S, Hp, dS: Hp - S,
       grw, oneMinusGamma, xi, sel, chshTerms, chsh, margA, margB, condPlus, beta, G, dt, dx, interval: dt * dt - dx * dx,
-      tA: A1[0], tB: B1[0], ABBA, R2, plusZ, minusZ, plusX, minusX, rob, esc: escapeLedger(s.parity)
+      tA: A1[0], tB: B1[0], ABBA, R2, plusP0, minusP0, plusX, minusX, rob, esc: escapeLedger(s.parity)
     };
   }
 
@@ -566,11 +566,12 @@
     dot(tx, ty, 3, P.ink);
     const ratio = ratioStr(D);
     T(tx, ty + (nar ? 28 : 34), L(`分支 1 : 1，权重 ${ratio} : 1`, `branches 1 : 1, weights ${ratio} : 1`), P.ink, { size: fs - 1, max: half - 8 });
-    // |+⟩ and |−⟩: Z readouts ½, ½ (cyan) · X readouts +1, −1 (magenta)
+    // |+⟩ and |−⟩: probabilities P(Z = +1) = ½, ½ (cyan) · expectations ⟨X⟩ = +1, −1 (magenta)
     const px0 = nar ? c.x + half + 6 : c.x + 6, pw = nar ? half - 10 : c.w - 12, py = nar ? c.y + 4 : c.y + c.h * 0.6, ph = nar ? c.h - 20 : c.h * 0.36;
-    const mid = py + ph / 2, unit = ph / 2 - 4, cw = Math.max(7, Math.min(16, pw / 9));
+    // the scale never turns over in a short panel: positive bars stand above the axis, negative ones below it
+    const mid = py + ph / 2, unit = Math.max(3, ph / 2 - 4), cw = Math.max(7, Math.min(16, pw / 9));
     seg(px0, mid, px0 + pw, mid, P.faint, { width: 1 });
-    const bars = [['Z', '+', D.plusZ, P.cyan], ['Z', '−', D.minusZ, P.cyan], ['X', '+', D.plusX, P.magenta], ['X', '−', D.minusX, P.magenta]];
+    const bars = [['P(Z = +1)', '+', D.plusP0, P.cyan], ['P(Z = +1)', '−', D.minusP0, P.cyan], ['⟨X⟩', '+', D.plusX, P.magenta], ['⟨X⟩', '−', D.minusX, P.magenta]];
     bars.forEach(([ob, st, v, col], k) => {
       const x = px0 + pw * (0.12 + k * 0.22) + (k > 1 ? pw * 0.04 : 0);
       rect(x, v >= 0 ? mid - unit * v : mid, cw, unit * Math.abs(v), { fill: col, alpha: 0.78, stroke: col });
@@ -753,12 +754,16 @@
     });
   }
   const FOCUS_DRAW = { cut: focusCut, andor: focusAndOr, born: focusBorn, bell: focusBell, horizon: focusHorizon, duel: focusDuel };
+  const NARROW_READ = 170, NARROW_APP = 72;                // px: the readout picture a narrow stage needs, the compact apparatus
+  const CAPTION_APPARATUS = { cut: true, andor: true };    // cards whose caption points at the apparatus (the cut, the environment)
 
   /* ---------- the stage ---------- */
   function placeLensBar() {
     const below = stageEl.clientWidth < 700;
     lensBar.classList.toggle('below', below); stageEl.classList.toggle('lens-below', below);
     if (below) lensBar.style.setProperty('--lens-top', `${hudTl.offsetTop + hudTl.offsetHeight + 6}px`);
+    // a cited figure on a phone keeps its short stage for the pictures and, like the still, leaves the lens chips out
+    stageEl.classList.toggle('lens-off', !!TRV.figure && stageEl.clientWidth < 560);
   }
   function reserves() {
     if (TRV.thumbMode) return { top: 14, bottom: 14 };
@@ -772,12 +777,18 @@
     W = cv.clientWidth; H = cv.clientHeight; ctx = cv.getContext('2d');
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
     hits.length = 0;
-    const res = reserves(), padX = W < 560 ? 12 : 18, avail = H - res.top - res.bottom, nar = W < 560;
-    const appH = TRV.thumbMode ? avail * 0.42 : clamp(avail * (nar ? 0.37 : 0.39), 92, 210), gap = nar ? 10 : 14;
-    const app = { x: padX, y: res.top, w: W - 2 * padX, h: appH };
-    const foc = { x: padX, y: res.top + appH + gap, w: W - 2 * padX, h: avail - appH - gap };
-    drawApparatus(D, app);
-    seg(padX, foc.y - gap / 2, W - padX, foc.y - gap / 2, P.panelEdge, { width: 1 });
+    const res = reserves(), padX = W < 560 ? 12 : 18, avail = H - res.top - res.bottom, nar = W < 560, gap = nar ? 10 : 14;
+    let appH = TRV.thumbMode ? avail * 0.42 : clamp(avail * (nar ? 0.37 : 0.39), 92, 210);
+    // a narrow stage too short for both pictures (a cited figure on a phone): the readout picture of the card, which its
+    // caption describes, comes first. The shared apparatus shrinks to a compact strip and leaves the stage unless the
+    // caption points at it (the cut, AND to OR); the full lab always shows both.
+    if (nar && !TRV.thumbMode && avail - appH - gap < NARROW_READ) {
+      appH = Math.max(NARROW_APP, avail - gap - NARROW_READ);
+      if (avail - appH - gap < NARROW_READ && !CAPTION_APPARATUS[state.focus]) appH = 0;
+    }
+    const app = { x: padX, y: res.top, w: W - 2 * padX, h: appH }, focY = appH ? res.top + appH + gap : res.top;
+    const foc = { x: padX, y: focY, w: W - 2 * padX, h: avail - (focY - res.top) };
+    if (appH) { drawApparatus(D, app); seg(padX, foc.y - gap / 2, W - padX, foc.y - gap / 2, P.panelEdge, { width: 1 }); }
     if (foc.h > 40) FOCUS_DRAW[state.focus](D, foc, nar);
   }
 
@@ -855,7 +866,7 @@
   const LEGEND = {
     cut: () => [SW('cy', '权重（对角）', 'weights (diagonal)'), SW('mg', '相干（非对角）', 'coherence (off-diagonal)'), SW('am', '当前：θ 箭头、透镜、切割', 'now: θ arrow, lens, cut')],
     andor: () => [SW('cy', '权重与 r²', 'weights and r²'), SW('mg', '相干与搬进环境的 τ', 'coherence, τ moved into E'), SW('am', '当前：θ、透镜、抽到的 ξ', 'now: θ, lens, drawn ξ')],
-    born: () => [SW('cy', '权重与影子', 'weights and shadows'), SW('mg', 'X 读数（相位）', 'X readout (phase)'), SW('am', '当前的 |u⟩', 'the current |u⟩'), SW('vi', 'R|u⟩ 与 R²|u⟩', 'R|u⟩ and R²|u⟩')],
+    born: () => [SW('cy', '权重与影子', 'weights and shadows'), SW('mg', 'X 的期望 ⟨X⟩（相位）', 'expectation ⟨X⟩ (phase)'), SW('am', '当前的 |u⟩', 'the current |u⟩'), SW('vi', 'R|u⟩ 与 R²|u⟩', 'R|u⟩ and R²|u⟩')],
     bell: () => [SW('cy', '局部（边缘）', 'local (marginals)'), SW('mg', '关联', 'correlation'), SW('am', '推动后的同时线', 'boosted simultaneity'), SW('vi', '测量轴', 'measurement axes')],
     horizon: () => [SW('cy', '分开的 / 捏合熵', 'separated / pinched entropy'), SW('mg', '逃逸对 / 约化熵', 'escape pairs / reduced entropy'), SW('vi', '余量方向', 'residual direction'), SW('wn', '开放问题', 'open problem')],
     duel: () => [SW('cy', '两行记录的权重', 'weights of the two records'), SW('am', '当前透镜与抽到的一行', 'current lens, drawn row'), SW('vi', 'q 与余量方向', 'q and residual direction'), SW('wn', '开放问题', 'open problem')]
@@ -874,11 +885,11 @@
         keySub: L('留在实验室的长度 + 搬进环境的关联', 'length left in the lab + correlation moved into E'),
         rows: [r(L('纯度 Tr ρ²', 'purity Tr ρ²'), fix(D.purity, 4)), r(L('相干质量 C', 'coherence mass C'), fix(D.deleted, 4), 'm'), r(L('可见度 V', 'visibility V'), fix(D.vis, 4), 'm'),
           r('γ', fix(D.gamma, 4), 'c'), r(L('种子 ξ → 记录', 'seeded ξ → record'), `${fix(D.xi, 3)} → ${D.sel}`, 'a'), r(L('GRW 的 q', 'GRW q'), sci(D.grw, 1))],
-        note: L('γ → 0 时 (r², τ, C, V) → (1/4, 3/4, 0, 0)，纯度 → 5/8：两行都还在，这是“与”。抽出一行是另一步（MODEL）。', 'As γ → 0, (r², τ, C, V) → (1/4, 3/4, 0, 0) and purity → 5/8: both rows are still there, which is AND. Drawing one row is a separate step (MODEL).') };
+        note: L('γ → 0 时 (r², τ, C, V) → ((2p − 1)², 4p(1 − p), 0, 0)，纯度 → p² + (1 − p)²，其中 p = cos²θ（θ = 30° 时即 (1/4, 3/4, 0, 0) 与 5/8）：两行的权重 p、1 − p 都还在，这是“与”。抽出一行是另一步（MODEL）。', 'As γ → 0, (r², τ, C, V) → ((2p − 1)², 4p(1 − p), 0, 0) and purity → p² + (1 − p)², where p = cos²θ (at θ = 30°: (1/4, 3/4, 0, 0) and 5/8): both rows keep their weights p and 1 − p, which is AND. Drawing one row is a separate step (MODEL).') };
       case 'born': return { aside: `θ = ${fix(D.theta, 1)}°`, keyL: L('条件（B = 0）· 无条件', 'conditional (B = 0) · unconditional'), key: `${pct(D.p)} / ${pct(D.q)} · ${pct(D.margA, 0)} / ${pct(1 - D.margA, 0)}`, keyCls: 'c-cy',
         keySub: L(`P(x = +1 | y = +1) = ${fix(D.condPlus, 4)} = cos²θ`, `P(x = +1 | y = +1) = ${fix(D.condPlus, 4)} = cos²θ`),
-        rows: [r('cos²θ + sin²θ', fix(D.p + D.q, 4), 'c'), r('(AB)(BA)', `${fix(D.ABBA[0], 4)} ${D.ABBA[1] >= 0 ? '+' : '−'} ${fix(Math.abs(D.ABBA[1]), 4)}i`), r(L('|+⟩、|−⟩ 的 Z 读数', '|+⟩, |−⟩ on Z'), `${fix(D.plusZ, 2)} · ${fix(D.minusZ, 2)}`, 'c'),
-          r(L('|+⟩、|−⟩ 的 X 读数', '|+⟩, |−⟩ on X'), `${sgn(D.plusX, 0)} · ${sgn(D.minusX, 0)}`, 'm'), r('(ΔZ)²(ΔX)² = C² + K² + G', `${fix(D.rob.prod, 4)} = ${fix(D.rob.C2, 4)} + 0 + ${fix(Math.abs(D.rob.G) < 1e-12 ? 0 : D.rob.G, 4)}`),
+        rows: [r('cos²θ + sin²θ', fix(D.p + D.q, 4), 'c'), r('(AB)(BA)', `${fix(D.ABBA[0], 4)} ${D.ABBA[1] >= 0 ? '+' : '−'} ${fix(Math.abs(D.ABBA[1]), 4)}i`), r(L('|+⟩、|−⟩ 的概率 P(Z\u00a0=\u00a0+1)', '|+⟩, |−⟩: probability P(Z\u00a0=\u00a0+1)'), `${fix(D.plusP0, 2)} · ${fix(D.minusP0, 2)}`, 'c'),
+          r(L('|+⟩、|−⟩ 的期望 ⟨X⟩', '|+⟩, |−⟩: expectation ⟨X⟩'), `${sgn(D.plusX, 0)} · ${sgn(D.minusX, 0)}`, 'm'), r('(ΔZ)²(ΔX)² = C² + K² + G', `${fix(D.rob.prod, 4)} = ${fix(D.rob.C2, 4)} + 0 + ${fix(Math.abs(D.rob.G) < 1e-12 ? 0 : D.rob.G, 4)}`),
           r('R²', `[[${fix(D.R2[0][0], 0)}, ${fix(D.R2[0][1], 0)}], [${fix(D.R2[1][0], 0)}, ${fix(D.R2[1][1], 0)}]] = −I`, 'v')],
         note: L('多世界数分支得 1 : 1，权重却是 cos²θ : sin²θ；为什么按权重下注是文献论证（ARGUED）。不加条件的边缘没有哪个旋钮能动。', 'Many-worlds counts 1 : 1 branches while the weights are cos²θ : sin²θ; why one should bet by weight is argued in the literature (ARGUED). No dial moves the unconditional marginal.') };
       case 'bell': return { aside: `β = ${sgn(D.beta, 2)}`, keyL: 'CHSH S', key: `${fix(D.chsh, 4)} > 2`, keyCls: 'c-mg',
@@ -974,7 +985,8 @@
   }
   const lensChips = kit.chips(lensBar, 'lens', (v) => { state.lens = v; paint(); });
   const parityChips = kit.chips($('parityChips'), 'parity', (v) => { state.parity = v; paint(); });
-  $('xiBtn').addEventListener('click', () => { state.xiDraw += 1; paint(); });
+  // a new ξ leaves the card: its caption states the card's own draw
+  $('xiBtn').addEventListener('click', () => { leave(); state.xiDraw += 1; paint(); });
   $('now').addEventListener('pointerdown', () => leave());
   $('rew').addEventListener('click', () => { leave(); clock.pause(); clock.set(0); });
 
@@ -1014,8 +1026,8 @@
       'N = 1: the amber cut separates S from the friend\'s record F. Below, left: the friend\'s pinched P(ρ) keeps only the cyan diagonal 0.75, 0.25; middle: Wigner with SF alone still sees the magenta −0.433; right: both magenta bars read 0.866, and raising N shrinks only "SF only".'],
     'and-to-or': ['N 涨到 10⁶：环境格被品红填满，γ → 0。左：ρ 的品红非对角消失，青色对角 0.75、0.25 都在，这是“与”；中：青色 r² 缩到 0.25，品红 τ 长到 0.75，合起来始终是 1；右：琥珀色的 ξ = 0.814 ≥ p，抽出记录 1，这一步是模型的抽样。',
       'N grows to 10⁶: the environment fills with magenta and γ → 0. Left: the magenta off-diagonal of ρ vanishes while the cyan 0.75 and 0.25 stay, which is AND; middle: cyan r² falls to 0.25 as magenta τ grows to 0.75, always summing to 1; right: the amber ξ = 0.814 ≥ p draws record 1, a model\'s sampling step.'],
-    'born-unequal': ['琥珀色的 |u⟩ 转到 30° 刻度，青色影子是 cos θ、sin θ，紫色虚线是 R|u⟩ 与 R²|u⟩ = −|u⟩。中：给定 B = 0，实心柱 75%、25%；不看 B，空心柱 50%、50%。右：两支分支 1 : 1，权重 3 : 1；|+⟩、|−⟩ 的青色 Z 读数都是 ½，只有品红的 X 读数分出 +1、−1。',
-      'The amber |u⟩ turns to the 30° mark; the cyan shadows are cos θ and sin θ, the dashed violet arrows R|u⟩ and R²|u⟩ = −|u⟩. Middle: given B = 0 the solid columns read 75%, 25%; with B unseen the hollow ones read 50%, 50%. Right: two branches 1 : 1, weights 3 : 1; on Z, |+⟩ and |−⟩ both read ½, only the magenta X splits +1, −1.'],
+    'born-unequal': ['琥珀色的 |u⟩ 转到 30° 刻度，青色影子是 cos θ、sin θ，紫色虚线是 R|u⟩ 与 R²|u⟩ = −|u⟩。中：给定 B = 0，实心柱 75%、25%；不看 B，空心柱 50%、50%。右：两支分支 1 : 1，权重 3 : 1；|+⟩、|−⟩ 的青色概率 P(Z\u00a0=\u00a0+1) 都是 ½，只有品红的期望 ⟨X⟩ 分出 +1、−1。',
+      'The amber |u⟩ turns to the 30° mark; the cyan shadows are cos θ and sin θ, the dashed violet arrows R|u⟩ and R²|u⟩ = −|u⟩. Middle: given B = 0 the solid columns read 75%, 25%; with B unseen the hollow ones read 50%, 50%. Right: two branches 1 : 1, weights 3 : 1; cyan P(Z\u00a0=\u00a0+1) = ½ for |+⟩ and |−⟩; only the magenta ⟨X⟩ splits +1, −1.'],
     'bell-epr': ['β 推到 +0.6：时空图里 A、B 类空分离，琥珀色的同时线倾斜，先后翻成“B 先于 A”，Δt′ = −1.50。左：紫色四轴是 CHSH 的设置，品红叠到 2.83，越过虚线 2，推动中不动。右：青色的 6 个局部格全是 0（边缘 50/50），关联全在品红的 3 × 3 格里。',
       'β is pushed to +0.6: A and B are spacelike, the amber lines of simultaneity tilt and the order flips to "B before A", Δt′ = −1.50. Left: the violet CHSH axes; magenta stacks to 2.83, past the dashed 2, unmoved by the boost. Right: the six cyan local cells are all 0 (marginals 50/50); the correlation sits in the magenta 3 × 3.'],
     'time-horizon': ['N 涨到 10⁴。左：整体的熵停在 0，品红的约化熵涨到 0.729 比特，青色的捏合熵 0.811，差 ΔS = 0.082。中：16 个态排成 8 列，每列两点由品红线连成逃逸对，共 16 对、1 比特；选“+ 奇偶”线全断开。右：紫色的 e 垂直于青色的层 S；红框是开放问题。',
