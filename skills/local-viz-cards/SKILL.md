@@ -21,7 +21,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 66 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 67 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -91,6 +91,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `triadic-nameless-sandbox` | 两态比较的归一投影把第三顶点顶出原平面，转一圈切面主谓宾互换，撤去投影幕与标签只留两频呼吸的曲面 | `bootstrap-core` `cascade-corolla` `cyclic-triality` `ladder-fade` `noumenon-breath` |
 | `uncompleted-horizon-sandbox` | 每写入一条平权查表答案就撑开一块新弧面体与更多未比对的边，满射目录的对角槽劈开分离亏损，把完成态推成永不合拢的滚动地平线 | `bootstrap-ledger` `lawvere-godel` `ordinal-spiral` `bidirectional-parallax` `frozen-omniscience` |
 | `stereographic-relativization-sandbox` | 向北极盲点靠近的有限微弧在球极平面上被拉成球外有球的发散螺旋，旋转神谕切面在折叠与追逐之间切换，两枚标签在原点双双放下 | `blindspot-divergence` `compact-homotopy` `oracle-collapse` `oracle-chase` `tetralemma-rest` |
+| `berry-sector-path-sandbox` | 球心扇锥体积是弧顶面积的三分之一并定出半角相位，同一点在霍普夫圆纤维上记下不同来路，离散扇形连乘在驻相处锁成测地线 | `sector-volume` `hopf-fiber-lift` `stokes-wilson-duality` `pancharatnam-fan` `feynman-stationary` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -211,6 +212,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `uncompleted-horizon-sandbox`（`HORIZON//UNCOMPLETED`）与 `pnp-lookup-degradation`、`observer-escape-ledger`、`triadic-nameless-sandbox` 分工：前三页分别讲宏观复杂度包络 r(σ)、16 态闭合回路纤维熵与单颗弧面体的三元名相轮换，本页讲第三十八章 §38.6 `#sec-ch38-uncompleted-horizon-godel-pnp` 的“建表扩维悖论、满射目录对角分离亏损、图灵序数扩表螺旋、前后双向视差与全知死寂反事实对照”（五个场景：扩维、对角、螺旋、视差、护栏）：青色是旧层已编译的 O(1) 快表直读弦、事后零损失域 `retrospectiveLoss = 0` 与内圈收敛弧，品红是场内平权条目撑开的正交法向残差 sin ε e_{D+1}、跨维新增未索引比量 ΔΠ_t − k、对角逃逸串 g_diag 劈开的 `separationDeficit` 亏损对与外圈未决生长锋面，紫色是三元格拉姆体积砖 det G = sin⁴ε > 0、`conceptJoin` 立起的新观测坐标轴与序数塔阶梯，琥珀只给当前指针前沿层 D_t、刚写入的平权表项 P_AB 与可调夹角/阶数手柄（严禁把开放问题红色拿来画普通负号或死寂侧底色；红色只给抽屉里的标准图灵机 `P =? NP` `OPEN` 标记）。绿色框严格只给 `#thm-ch38-uncompleted-horizon-diagonal-refinement` 用 `lean=` 引用的五条冻结定理（`self_application_fragment_package`、`complete_diagonal_separationDeficit_nonempty`、`complete_diagonal_strict_topology_refinement`、`lookup_copy_zero_loss_and_nonanticipating_failure`、`finite_layer_projection_escape`）；哥德尔 1931 第一不完备定理与 1956 致冯·诺依曼有界寻证信件、图灵 1939 序数逻辑阶梯与 Lawvere 1969 对角不动点定理标 `ARGUED`；标准统一图灵机 P =? NP 标 `OPEN`；det G = sin⁴ε、ΔΠ_t = kM_t + C(k,2) 与有限满射目录对角分离亏损对枚举实算标 `NUM`；Layer-1 正向单位平权建表、滚动完成化地平线与免于芝诺冻结/全知热寂的宇宙护栏读法标 `MODEL`。
 
 `stereographic-relativization-sandbox`（`STEREO//SUSPENSION`）与 `uncompleted-horizon-sandbox`、`sphere-escape`、`forgetting-rebirth-attractor` 分工：前三页分别讲对角加细驱动的滚动地平线、有限多边形割圆与双曲快度阶梯，本页讲第三十八章 §38.7 `#sec-ch38-stereographic-blindspot-relativization-suspension` 的“北极自指盲点球极投影、亚历山德罗夫紧化同伦、Baker–Gill–Solovay 相对化神谕切面二象性与四句离相悬置”：舞台用 `kit.solid` 画半透明受光紧致球面 S²、经纬测地网格、北极自指盲点琥珀孔径环 δ_blind、球面上平缓走向北极的青色本源微弧，以及赤道投影平面上向外发散的投影螺旋环与可倾转的神谕切面 ψ ∈ [0°, 90°]。青色是紧致球面上的有限本源微弧与 ψ = 0° 赤道对称核上的折叠环（对应 P^A = NP^A 坍缩截面），琥珀是北极自指盲点孔径环 δ_blind、当前投影视线与赤道平面上的透视发散坐标环，品红是 ψ > 0° 偏转神谕切面上的表观追逐分离轨迹（对应 P^B ≠ NP^B 截面）与全称封顶缺口警示弧，紫色是可倾转的神谕切面环与紧化同伦插值骨架（红色只给抽屉里的 `#conj-p-neq-np` 与 `#prob-ch38-unrelativized-p-vs-np-and-independence` `OPEN` 标记，绝不在舞台上画红）。绿色框严格只给 `#prop-ch38-cayley-stereographic-and-blindspot-suspension` 用 `lean=` 引用的四条冻结定理（`cayley_ratio_norm_one_iff_critical_line`、`diagonal_prime_observables_cannot_recover_relative_phase`、`partition_inseparable_iff_kernel`、`lookup_copy_zero_loss_and_nonanticipating_failure`）；高维球极微分同胚与亚历山德罗夫单点紧化、Baker–Gill–Solovay 1975 相对化屏障、Razborov–Rudich 1997 自然证明屏障、Aaronson–Wigderson 2009 代数化屏障、哥德尔第二不完备定理与龙树《中论》四句离相标 `ARGUED`；非相对化 P =? NP 及其在 PA/ZFC 中的可证性或独立性标 `OPEN`；R(θ) = cot(θ/2)、μ(θ) = (1 − cos θ)^−1、Δ_unprovable = sin²(δ_blind/2) 与切面分离指数 r(ψ) 实算标 `NUM`；自指盲点双生投影、同伦 τ ∈ [0, 1]、神谕切面几何映射与四句离相止息标 `MODEL`。
+
+`berry-sector-path-sandbox`（`BERRY//PATH`）与 `spherical-trihedron-cell`、`berry-loop`、`lattice-gauge-loop`、`coherence-handshake-causality` 分工：前四页分别讲直角三面角原胞的“一次 vs. 两次”正交双投影、整球环路立体角与毛球发旋、二维方格晶格规范弦回路、斯涅尔双端握手，本页讲第三十四章 §34.6 `#sec-ch34-berry-sector-volume-and-path-integral` 的“球心扇锥体积 V_sector = A_cap/3 = Ω/3、同点异相霍普夫 S¹ 纤维抬升、威尔逊路径—相位和乐对偶、离散巴格曼扇形剖分与费曼科纽螺线驻相选路”：舞台用 `kit.solid` 画半透明受光单位比较球面 S²、从球心围出的品红三维实心球扇锥与品红球面帽（严禁把球面帽或实心扇锥写成金色或琥珀色）、内嵌的青色平直弦四面体 OABC、右侧堇紫色霍普夫 S¹ 相位纤维柱，以及底部二维复平面科纽相量螺线与体积对照面板（舞台上绝不画红色，本节亦无 `OPEN` 条目）。青色是单步基准测地弧 Γ₁ = AC、平直弦四面体 V_tetra = (1/6) sin²ε、生成树 T 的无曲率树势 `rootPhase` 与测地驻点 η₀ = 0 附近的相长合矢量；品红是球面帽面积 A_cap = Ω、三维实心球扇锥体积 V_sector = Ω/3、闭合弦回路曲率通量与偏折弯路 η₀ ≠ 0 处自相抵消的科纽螺线；紫色是终点 C 上方的霍普夫 S¹ 相位纤维柱、旋量历史提升螺旋与离散巴格曼—潘查拉特纳姆扇形肋片；琥珀只给当前偏折路径 Γ(η) 与可拖步长/偏折手柄（ε、η₀）。绿色框严格只给 `#thm-ch34-berry-sector-holonomy-and-bargmann-lift` 用 `lean=` 引用的六条冻结定理（`triple_bargmann_bloch`、`bargmann_path_product`、`no_continuous_global_section`、`circle_double_cover_history_lift`、`selected_tree_transport`、`anchored_phase_classification`；正文 §34.6 例题另以推论引用 `latitude_dot`）；吉拉尔角超与高斯—博内定理、Pancharatnam–Bargmann–Simon–Berry 几何相位、Hopf–Dirac 主圆丛 S¹ ↪ S³ → S² 与 2s ∈ ℤ 量子化、Wess–Zumino / WZW 拓扑体积延拓、Mandelstam–Giles–Barrett 模局部规范等价重构联络定理及 Feynman–Klauder 自旋相干态路径积分标 `ARGUED`；三维斯托克斯扇锥体积 V_sector = Ω/3 对照 V_tetra = (1/6) sin²ε、余纬 60° 正 N 边形扇形积 Π_N = (3/4 + e^(2πi/N)/4)^N 与 41 路路径束科纽相干度 |A₄₁(η₀)| 实算标 `ARGUED` / `NUM`；公平平方基点残影、扇锥体积纤维账本与有限路径束驻相选路综合标 `MODEL`。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -540,7 +543,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十四章 | §34.5.2 末（$120^\circ$ $\mathbb{Z}_3$ 主谓宾切面轮换段之后、§34.5.3 之前） | `triadic-nameless-sandbox` · `cyclic-triality` |
 | 第三十四章 | §34.5.3 语词切分对照表与 $\nu = 0.35$ 半撤之梯段之后、命题 `prop-ch34-triadic-bootstrap-and-lexical-pinching` 之前 | `triadic-nameless-sandbox` · `ladder-fade` |
 | 第三十四章 | §34.5.3 “本体不可知，但是这么个感觉”收束段之后 | `triadic-nameless-sandbox` · `noumenon-breath` |
-| 第三十四章 | §34.5 末（全章末尾转入第三十五章一段之后） | `triadic-nameless-sandbox` 完整实验室 |
+| 第三十四章 | §34.5 末（转入 §34.6 一段之后） | `triadic-nameless-sandbox` 完整实验室 |
+| 第三十四章 | §34.6.1 末（三维斯托克斯扇锥体积、贝里相位与韦斯—祖米诺延拓辨析之后） | `berry-sector-path-sandbox` · `sector-volume` |
+| 第三十四章 | §34.6.2 同点异相霍普夫纤维抬升两路径对照之后、定理 `thm-ch34-berry-sector-holonomy-and-bargmann-lift` 之前 | `berry-sector-path-sandbox` · `hopf-fiber-lift` |
+| 第三十四章 | §34.6.3 末（单连通前提与 Mandelstam–Giles–Barrett 模规范重构边界之后） | `berry-sector-path-sandbox` · `stokes-wilson-duality` |
+| 第三十四章 | §34.6.4 第 1 条（离散 $N$ 步巴格曼—潘查拉特纳姆扇形剖分与相干态传播子）之后 | `berry-sector-path-sandbox` · `pancharatnam-fan` |
+| 第三十四章 | §34.6.4 第 2 条（科纽螺线驻相选路）之后、例 `ex-ch34-sector-volume-hopf-and-cornu-benchmark` 之前 | `berry-sector-path-sandbox` · `feynman-stationary` |
+| 第三十四章 | §34.6 末（全章末尾转入第三十五章一段之后） | `berry-sector-path-sandbox` 完整实验室 |
 | 第三十五章 | 第一节 Lean 三定理列表第 3 条（`finite_memory_history_capacity`）之后、“这里的清表”一段之前 | `self-referential-table` · `full` |
 | 第三十五章 | 第一节“因此，乘着光来……”一段之后、定理 `thm-ch35-null-pulse-and-record-blocking` 之前 | `self-referential-table` · `reset` |
 | 第三十五章 | “成长即扩表”一节三步列表之后、“下面我们将……”一段之前 | `self-referential-table` · `expand_table` |
