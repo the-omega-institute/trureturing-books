@@ -38,7 +38,7 @@ $$
 
 换言之，**一维的投影线段与不同方向绑死，无法跨正交轴直接相加；唯有升维到二维平方（面积/范数），方向手性在反对称外积中相互抵消，正交分量才能汇聚为守恒的总量！**
 
-一旦将斜边归一化为单位半径 $c = 1$，古老的勾股定理 $a^2 + b^2 = 1$ 立刻化身为统摄全书八部曲的**母体守恒律**：
+一旦将斜边归一化为单位半径 $c = 1$，古老的勾股定理 $a^2 + b^2 = 1$ 立刻化身为统摄全书十部曲的**母体守恒律**：
 
 1. **量子力学（第一部至第三部）**：测量投影的粒子内积项 $\cos\theta$ 与驱动旋转的波外积项 $\sin\theta$ 满足勾股恒等式 $\cos^2\theta + \sin^2\theta = 1$——玻恩规则概率守恒 $P(0) + P(1) = 1$（[`born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton)）与内积空间平行四边形/勾股范数律（[`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) 及互补测量概率勾股定理 [`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras)）不过是单位圆上的勾股定理；
 2. **狭义相对论（第五部第 17 章）**：闵可夫斯基时空中固有时流逝率 $d\tau/dt$ 与空间运动速率 $v/c$ 满足 $(d\tau/dt)^2 + (v/c)^2 = 1$（即 $d\tau^2 = dt^2 - dx^2/c^2$ 的正交重排，对应双曲旋量范数守恒 [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)）——所谓“光子以光速飞行时不经历固有时流逝”，只是勾股斜边 $1$ 全部投影到了空间轴 $v/c = 1$ 上，使得时间轴投影归零；
@@ -516,7 +516,7 @@ $$
 在本书的跨学科几何视野下，从希帕索斯直角三角形裂开的佩尔接缝（[@thm-ch29-silver-pell-remainder]）出发，对照上述文献评注（[@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-arithmetic-geometry-literature]），素数轴上的点数偏差振荡便与三维量子旋量球面 $S^3 \cong \mathrm{SU}(2)$ 向一维直径 $[-1, +1]$ 投下的余弦影子形成了深邃的几何同构意象。
 
 ::: {.viz src="pythagoras-number-escape" height="640"}
-**交互实验室 `ORTHO//PYTHAGORAS`**：沿着 $\pm 1$ 接缝走一遍的三个场景。佩尔接缝：$\sqrt{d}$ 的渐近分数沿直线越贴越近，$m^2 - d\,n^2$ 却是非零整数（$d = 5$ 时绿圈标出已由 Lean 验证的全部 $\pm 4$ 解）；线素数与面素数：半径 $\sqrt{p}$ 的圆上有没有格点；模 $p$ 数点：曲线 $y^2 = x^3 - x$ 的 $a_p$ 被哈塞界关住，线素数恰在零上，面素数的弗罗贝尼乌斯余弦等于高斯三角形的余弦。面素数是两平方和、线素数不是，已由 Lean 验证（[@thm-ch29-face-prime-two-squares]、[@lem-ch29-square-residues-mod-four]）；哈塞定理与佐藤—泰特分布是文献结果，未在本书形式化。
+**交互实验室 `ORTHO//PYTHAGORAS`**：沿着 $\pm 1$ 接缝走一遍的三个场景。佩尔接缝：$\sqrt{d}$ 的渐近分数沿直线越贴越近，$m^2 - d\,n^2$ 却是非零整数（$d = 5$ 时灰圈标出由 Lean 验证的 $\pm 4$ 解族中的点）；线素数与面素数：半径 $\sqrt{p}$ 的圆上有没有格点；模 $p$ 数点：曲线 $y^2 = x^3 - x$ 的 $a_p$ 被哈塞界关住，线素数恰在零上，面素数的弗罗贝尼乌斯余弦的绝对值等于以奇数边 $|a|$ 为邻边的高斯三角形余弦。面素数是两平方和、线素数不是，已由 Lean 验证（[@thm-ch29-face-prime-two-squares]、[@lem-ch29-square-residues-mod-four]）；哈塞定理与佐藤—泰特分布是文献结果，未在本书形式化。
 :::
 
 ---
@@ -820,7 +820,7 @@ $$
 需要注意 [@thm-ch29-born-handshake-and-phase-fairness] 的精确边界：第 1 款给出的结论是标量记录权重恒等式而非算子夹持式 $P_\psi P_\phi P_\psi = |\langle\phi|\psi\rangle|^2 P_\psi$（后者为上文归一化向量上的手工矩阵推导），第 3 款在单复变量情形下给出非负二次型 $c|z|^2$（$c \ge 0$），还需附加单位概率定标才固定 $c = 1$；定理本身属于多项式不变量与矩阵迹代数，并不单独证明物理超前波传播。取单比特参数化 $|\psi_\chi\rangle = e^{i\chi}(1, 0)^{\mathsf{T}}$ 与 $|\phi_\theta\rangle = (\cos(\theta/2), \sin(\theta/2))^{\mathsf{T}}$（布洛赫球面夹角为 $\theta$，希尔伯特空间交叠半角为 $\theta/2$，并用 $I - P_\phi$ 补全二元正交记录族以契合第 2 款前提），正向振幅 $a_{\mathrm{fwd}} = \cos(\theta/2)e^{i\chi}$ 与共轭回波 $a_{\mathrm{echo}} = \cos(\theta/2)e^{-i\chi}$ 随参考相位 $\chi$ 反向旋转，而它们的握手乘积纹丝不动地锁在 $p = \cos^2(\theta/2)$（在本书的 `MODEL` 诠释与下文 [@rem-ch29-transactional-tsvf-eraser-literature] 引述的交易诠释文献中，可将这对共轭因子直观读作跨越首尾边界的双向握手锁扣）：
 
 ::: {.viz src="coherence-handshake-causality" preset="born-handshake" height="500"}
-**单向振幅旋转而双端握手锁定卡（`born-handshake`）**：调节布洛赫夹角 $\theta \in [0, \pi]$ 与参考相位 $\chi \in [0, 2\pi]$，青色正向交叠箭头 $a_{\mathrm{fwd}} = \langle\phi|\psi\rangle$ 与品红共轭回波箭头 $a_{\mathrm{echo}} = \langle\psi|\phi\rangle$ 随 $\chi$ 反向旋转，而二者相乘结出的实数握手权重 $\operatorname{Tr}(P_\phi P_\psi) = \cos^2(\theta/2)$ 与两侧投影算子始终锁定不变。
+**单向振幅旋转而双端握手锁定卡（`born-handshake`）**：布洛赫夹角 $\theta \in [0, \pi]$ 与参考相位 $\chi \in [0, 2\pi]$ 均可调节；固定 $\theta$ 扫描 $\chi$ 时，青色正向交叠箭头 $a_{\mathrm{fwd}} = \langle\phi|\psi\rangle$ 与紫罗兰共轭回波箭头 $a_{\mathrm{echo}} = \langle\psi|\phi\rangle$ 反向旋转，而二者相乘结出的实数握手权重 $\operatorname{Tr}(P_\phi P_\psi) = \cos^2(\theta/2)$ 与两侧投影算子锁定不变；调节 $\theta$ 则改变 $P_\phi$ 与握手权重。
 :::
 
 ### 29.4.3 未来与过去的双向干涉：驻相束、弱值、延迟擦除无信令与格拉姆端点置换 {#sec-ch29-handshake-future-past}
@@ -876,10 +876,10 @@ $$
 把上述文献与手工恒等式放到直观几何舞台上，首先看到的是固定过去源点与未来终点时，有限折射路径扇如何围绕斯涅尔驻点 $s^*$ 聚拢相干度，而扇面两侧的高频相位卷绕如何近似抵消：
 
 ::: {.viz src="coherence-handshake-causality" preset="feynman-stationary" height="500"}
-**首尾双端锁定的有限驻相折射扇卡（`feynman-stationary`）**：连接过去源点 $A$ 与未来终点 $B$ 的 $M$ 条候选折射路径按横坐标 $s$ 排成首尾相接的复相量扇——琥珀色标出满足 $L'(s^*) = 0$（默认 $s^* \approx 0.6232$）的斯涅尔驻点及 $|\Delta\phi| \le \pi/4$ 同相束，两侧非驻相路径盘旋近似相消，并附单位根精确归零校准子图。
+**首尾双端锁定的有限驻相折射扇卡（`feynman-stationary`）**：连接过去源点 $A$ 与未来终点 $B$ 的 $M$ 条候选折射路径按横坐标 $s$ 排成首尾相接的复相量扇——青色标出满足 $L'(s^*) = 0$（默认 $s^* \approx 0.6232$）的斯涅尔驻点及 $|\Delta\phi| \le \pi/4$ 同相束，琥珀色标出当前加入的路径，两侧非驻相路径盘旋近似相消，并附单位根精确归零校准子图。
 :::
 
-再看双态矢量与延迟选择量子擦除舞台：旋转未来标记测量角 $\beta$ 时，符合分拣出的两支条件条纹 $p(j \mid +)$ 与 $p(j \mid -)$ 此起彼伏、反相互补，但过去屏幕的无条件总边缘 $p(j) = q_j$ 如磐石般纹丝不动；一旁的弱值小窗则在后选择趋近正交 $\eta \to \pi/2$ 时清晰标出成功率归零与分母无定义边界：
+再看双态矢量与延迟选择量子擦除舞台：旋转未来标记测量角 $\beta$ 时，符合分拣出的两支条件条纹 $p(j \mid +)$ 与 $p(j \mid -)$ 此起彼伏、反相互补，但过去屏幕的无条件总边缘 $p(j) = q_j$ 如磐石般纹丝不动（数值计算允许浮点舍入误差）；一旁的弱值小窗则在后选择趋近正交 $\eta \to \pi/2$ 时清晰标出成功率归零与分母无定义边界：
 
 ::: {.viz src="coherence-handshake-causality" preset="tsvf-eraser" height="500"}
 **未来选基擦除分拣与无条件边缘守恒卡（`tsvf-eraser`）**：调节未来标记基角 $\beta \in [0, \pi/2]$ 与可见度 $V \in [0, 1]$，直接由 $4\times 4$ 矩阵迹算出联合分布 $p(j, \pm)$、条件分布 $p(j \mid \pm)$ 与无条件过去总和 $p(j) = q_j$——未来擦除在符合子系综中显影反相条纹却绝不改动过去边缘；右侧弱值子窗展示 $Z_w = \tan\eta$ 并在 $\eta = \pi/2$（$p_{\mathrm{post}} = 0$）处显式标明“无定义”。
@@ -903,7 +903,7 @@ $$
 
    则 $|A_{\mathrm{loop}}(\delta)|^2 = \cos^2(\delta/2)$、$|A_{\mathrm{other}}(\delta)|^2 = \sin^2(\delta/2)$，恒有 $p_{\mathrm{loop}} + p_{\mathrm{other}} = 1$。在自否相位 $\delta = \pi$ 处，悖论端口振幅精确相消为 $|A_{\mathrm{loop}}(\pi)|^2 = 0$，全部概率 $1$ 转向相容互补端口 $A_{\mathrm{other}}(\pi)$；而在同相自洽点 $\delta = 0$ 处，闭环端口以概率 $1$ 稳定通行。从覆叠拓扑看，圆周平方双覆叠沿底空间绕行 $2\pi$ 一整圈会将纤维起点 $+1$ 连续提升至对径点 $-1$（绕满两圈 $4\pi$ 才回到 $+1$），唯有与未绕行的参考支路比对时，这一拓扑换叶负号才显现为干涉相消。
 2. **Deutsch 闭合类时曲线（CTC）的混合态不动点**（**文献结果**，D. Deutsch, *Phys. Rev. D* **44**, 3197, 1991）：在量子电路模型中，经典“外祖母翻转门”对应比特翻转幺正门 $X = \begin{pmatrix}0&1\\1&0\end{pmatrix}$（注意 $X$ 绝非全局相位 $-I$）。虽然经典布尔值 $\{0, 1\}$ 在 $x \mapsto 1 - x$ 下无不动点，但 Deutsch 提出的密度矩阵自洽条件 $\rho_{\mathrm{CTC}} = \Phi(\rho_{\mathrm{CTC}})$ 在混合态空间中恒有不动点——对纯共轭映射 $\rho \mapsto X\rho X^\dagger$，最大混态 $\rho_{\mathrm{CTC}} = I/2$ 满足 $X(I/2)X^\dagger = I/2$（需诚实指出：单靠幺正共轭 $X\rho X^\dagger = \rho$ 时不动点并不唯一，所有形如 $\frac{1}{2}(I + r_x X)$、$|r_x| \le 1$ 的态——包括纯态 $|+\rangle\langle+|$ 与 $|-\rangle\langle-|$——同样是不动点；唯有叠加去相干信道后才唯一筛出 $I/2$）。
-3. **离散分式自应用四重命运与连续余弦自指不动点**：在对角线与自应用映射层面，任意类型的条件对角线落点定理 [`diagonal_landing_fixed`](lean:D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed) 表明一旦某行落上对角线 $g(a_0) = \operatorname{diagonal}(f, g)$，对角元即满足自洽方程 $f(g(a_0, a_0)) = g(a_0, a_0)$；二元域 `Fin 2` 上的非退化分式自应用映射精确划分为四种代数命运；而在实区间 $[0, 1]$ 的连续标量投影反馈下，单调压缩曲线 $y = \cos\theta$ 与对角线 $y = \theta$ 唯一锁定正实自指不动点 $\cos\theta^* = \theta^* \approx 0.7390851332$（`NUM`：50 步二分法残差 $\le 10^{-15}$；注意 $\theta^*$ 与前文光学驻点 $s^*$、干涉相位 $\delta = 0$ 及黄金比互不相同，各自代表不同数学层面的自洽条件）。
+3. **离散分式自应用四重命运与连续余弦自指不动点**：在对角线与自应用映射层面，任意类型的条件对角线落点定理 [`diagonal_landing_fixed`](lean:D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed) 表明一旦某行落上对角线 $g(a_0) = \operatorname{diagonal}(f, g)$，对角元即满足自洽方程 $f(g(a_0, a_0)) = g(a_0, a_0)$；系数取自二元系数集 `Fin 2`（即 $\{0,1\}$，嵌入整数／有理数计算）的非退化分式自应用映射精确划分为四种代数命运；而在实区间 $[0, 1]$ 的连续标量投影反馈下，单调压缩曲线 $y = \cos\theta$ 与对角线 $y = \theta$ 唯一锁定正实自指不动点 $\cos\theta^* = \theta^* \approx 0.7390851332$（`NUM`：50 步二分法残差 $\le 10^{-15}$；注意 $\theta^*$ 与前文光学驻点 $s^*$、干涉相位 $\delta = 0$ 及黄金比互不相同，各自代表不同数学层面的自洽条件）。
 
 下面这条冻结定理将圆周双覆叠路径提升、二元分式自应用四重命运分类与 Dottie 有理逆幂级数端点统一收入内核保证：
 
@@ -920,7 +920,7 @@ $$
 :::
 
 ::: proof
-第 1 款调用二叶覆叠映射的同伦路径提升存在唯一性，对整圈路径 $t \mapsto e^{2\pi i t}$ 直接检验提升曲线 $t \mapsto e^{\pi i t}$ 在 $t = 0$ 取 $1$、在 $t = 1$ 取 $-1$；若存在连续全局截面，则将整圈路径复合该截面会导出起点与终点相等但又必须等于唯一提升终点 $-1 \neq 1$ 的矛盾。第 2 款在有限域 $\operatorname{Fin} 2$ 的全部 $16$ 个四元组中筛出非退化元，逐一核验二次系数与判别式对四类命运的互斥完备划分及黄金族判别式 $1^2 + 4 = 5$。第 3 款利用区间 $(0, 1)$ 上 $\cos\theta - \theta$ 的严格单调变号锁定唯一正实根 $\theta$，并由有理形式逆级数的系数界与阿贝尔端点收敛性证得在 $\pi$ 处的绝对可和与精确求和极限。完整证明由 Lean 内核检查。
+第 1 款调用二叶覆叠映射的同伦路径提升存在唯一性，对整圈路径 $t \mapsto e^{2\pi i t}$ 直接检验提升曲线 $t \mapsto e^{\pi i t}$ 在 $t = 0$ 取 $1$、在 $t = 1$ 取 $-1$；若存在连续全局截面，则将整圈路径复合该截面会导出起点与终点相等但又必须等于唯一提升终点 $-1 \neq 1$ 的矛盾。第 2 款在二元系数集 $\operatorname{Fin} 2$ 的全部 $16$ 个四元组中，以整数行列式筛出非退化元，逐一核验二次系数与判别式对四类命运的互斥完备划分及黄金族判别式 $1^2 + 4 = 5$。第 3 款由 $z+\sin z$ 的解析逆函数 $G$ 构造 $H(Y)=\sin(G(Y/2))$，将其泰勒系数与有理形式逆级数逐项识别；利用 $\pi < 13/4$ 位于已证解析圆盘内部得到绝对可和与求和值 $H(\pi)=\theta$，再由余弦单调性排除其他正实根。完整证明由 Lean 内核检查。
 :::
 
 下方实验卡将双臂相对相位干涉端口、Deutsch 比特翻转密度矩阵不动点小窗、圆周双覆叠 $2\pi$ 换叶提升与实标量 $\cos\theta^* = \theta^*$ 二分收敛曲线并列呈现，清晰展示不同数学机制如何各自消解自否振荡：

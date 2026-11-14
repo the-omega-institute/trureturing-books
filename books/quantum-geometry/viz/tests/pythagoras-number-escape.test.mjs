@@ -66,6 +66,122 @@ check('d = 5: the legend names the grey rings on m² − 5n² = ±4', s.d === 5 
 await setRange('dsel', 0); check('other values of d do not show the ±4 legend entry', !(await page.textContent('#legend')).includes('±4'));
 check('changing d leaves the experiment card', (await state()).preset === null);
 
+/* ---------- the error along the line, for every d and every convergent (23 × 15 = 345 states) ----------
+   Independent of the page twice over: the continued fraction comes from Euclid's algorithm on the rational bounds
+   S/B < √d < (S + 1)/B, S = ⌊√d·B⌋, B = 10¹²⁰ (not the page's surd recurrence), and the distance |m/n − √d| from the
+   fixed-point integer |m·10¹⁰⁰ − n·⌊√d·10¹⁰⁰⌋| / (n·10¹⁰⁰), exact to 10⁻¹⁰⁰ (not the page's quotient through m² − d·n²).
+   Plain floating-point subtraction m/n − √d rounds 35 of these 345 nonzero errors to exactly 0; every reader-facing
+   consumer (stage caption, readout, the log plot with its axis) must show the true positive value instead. */
+{
+  const isqrtN = (N) => { if (N < 2n) return N; let x = 1n << BigInt((N.toString(2).length >> 1) + 1); for (;;) { const y = (x + N / x) >> 1n; if (y >= x) return x; x = y; } };
+  const euclid = (num, den) => { const out = []; while (den) { out.push(num / den); [num, den] = [den, num % den]; } return out; };
+  const B = 10n ** 120n, FP = 10n ** 100n, DIG = 60n;
+  const oracle = {};   // d → [{ m, n, delta, dist, naive }] for k = 0 … 14
+  let cfDepth = Infinity, naiveZero = [];
+  for (const d of DS) {
+    const S = isqrtN(BigInt(d) * B * B), lo = euclid(S, B), hi = euclid(S + 1n, B);
+    let j = 0; while (j < lo.length - 1 && j < hi.length - 1 && lo[j] === hi[j]) j++;
+    cfDepth = Math.min(cfDepth, j);
+    const Sp = isqrtN(BigInt(d) * FP * FP), rows = [];
+    let h1 = 1n, h0 = lo[0], k1 = 0n, k0 = 1n;
+    for (let k = 0; k <= 14; k++) {
+      if (k) { [h1, h0] = [h0, lo[k] * h0 + h1]; [k1, k0] = [k0, lo[k] * k0 + k1]; }
+      const num = h0 * FP - k0 * Sp, q = (num < 0n ? -num : num) * 10n ** DIG / (k0 * FP);
+      const dist = parseFloat(`${q}e-${DIG}`), naive = Math.abs(Number(h0) / Number(k0) - Math.sqrt(d));
+      rows.push({ m: h0, n: k0, delta: h0 * h0 - BigInt(d) * k0 * k0, dist, naive });
+      if (naive === 0) naiveZero.push(`${d}:${k}`);
+    }
+    oracle[d] = rows;
+  }
+  check('independent continued fractions: the two rational bounds of √d share at least 15 partial quotients for every d', cfDepth >= 15, `shared depth ${cfDepth}`);
+  const all = DS.flatMap((d) => oracle[d].map((r, k) => ({ d, k, ...r })));
+  check('the oracle: 345 states, every distance |m/n − √d| finite and positive, smallest ≈ 4.17×10⁻³² (d = 37, k = 14)',
+    all.length === 345 && all.every((r) => Number.isFinite(r.dist) && r.dist > 0) && Math.abs(Math.min(...all.map((r) => r.dist)) / 4.1700729653528424e-32 - 1) < 1e-12);
+  const a514 = oracle[5][14];
+  check('the oracle at d = 5, k = 14: 1268860318/567451585, gap −1, distance 6.9442824247610065×10⁻¹⁹',
+    a514.m === 1268860318n && a514.n === 567451585n && a514.delta === -1n && Math.abs(a514.dist / 6.9442824247610065e-19 - 1) < 1e-15, String(a514.dist));
+  check('the hazard is real: plain subtraction m/n − √d gives exactly 0 for 35 of the 345 nonzero errors', naiveZero.length === 35, naiveZero.join(' '));
+
+  const SUP = { '⁻': '-', '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9' };
+  const readSci = (t) => { const r = /^([0-9.]+)(?:×10([⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+))?$/.exec(String(t).trim()); return r ? parseFloat(r[2] ? `${r[1]}e${[...r[2]].map((c) => SUP[c]).join('')}` : r[1]) : NaN; };
+  const readPow = (t) => { if (t === '1') return 0; const r = /^10([⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+)$/.exec(t); return r ? Number([...r[1]].map((c) => SUP[c]).join('')) : NaN; };
+  const shown = (t, v) => { const x = readSci(t); return x > 0 && Math.abs(x / v - 1) <= 0.0051; };   // three significant digits
+  // record what is actually drawn on the first strip plot: paths, dots and tick labels, frame by frame
+  const instrument = (pg) => pg.evaluate(() => {
+    const proto = CanvasRenderingContext2D.prototype, log = (window.__plotA = { ops: [] }), on = (c) => c.canvas && c.canvas.id === 'plotA';
+    const last = () => log.ops[log.ops.length - 1];
+    const wrap = (name, rec) => { const f = proto[name]; proto[name] = function (...a) { if (on(this)) rec(this, a); return f.apply(this, a); }; };
+    wrap('clearRect', () => { log.ops = []; });
+    wrap('beginPath', (c) => log.ops.push({ kind: 'path', pts: [], arcs: [], stroke: c.strokeStyle, fill: c.fillStyle }));
+    wrap('moveTo', (c, a) => { const p = last(); if (p && p.kind === 'path') p.pts.push([a[0], a[1]]); });
+    wrap('lineTo', (c, a) => { const p = last(); if (p && p.kind === 'path') p.pts.push([a[0], a[1]]); });
+    wrap('arc', (c, a) => { const p = last(); if (p && p.kind === 'path') { p.arcs.push([a[0], a[1], a[2]]); p.fill = c.fillStyle; } });
+    wrap('fillText', (c, a) => log.ops.push({ kind: 'text', text: String(a[0]), x: a[1], y: a[2], align: c.textAlign }));
+    const n = document.createElement('canvas').getContext('2d'), norm = (v) => { n.fillStyle = '#000000'; n.fillStyle = v; return n.fillStyle; };
+    log.colors = { cyan: norm(TRV.palette.cyan), magenta: norm(TRV.palette.magenta) };
+  });
+  /** Check one drawn frame of the plot against the oracle of d at step k; returns a list of failures. */
+  const plotFails = (log, d, k) => {
+    const rows = oracle[d], bad = [], texts = log.ops.filter((o) => o.kind === 'text'), paths = log.ops.filter((o) => o.kind === 'path');
+    const yt = texts.filter((t) => t.align === 'right').map((t) => ({ e: readPow(t.text), y: t.y })), xt = texts.filter((t) => t.align === 'center' && /^\d+$/.test(t.text)).map((t) => ({ k: Number(t.text), x: t.x }));
+    const frame = paths.find((p) => p.pts.length === 3 && p.pts[0][0] === p.pts[1][0] && p.pts[1][1] === p.pts[2][1]);
+    if (yt.length < 2 || yt.some((t) => !Number.isFinite(t.e)) || xt.length < 2 || !frame) return [`axes unreadable (${yt.length} y ticks, ${xt.length} x ticks)`];
+    const top = frame.pts[0][1], bottom = frame.pts[1][1] - 0.5, [ya, yb] = [yt[0], yt[yt.length - 1]], [xa, xb] = [xt[0], xt[xt.length - 1]];
+    const yOf = (v) => ya.y + (Math.log10(v) - ya.e) * (yb.y - ya.y) / (yb.e - ya.e), xOf = (j) => xa.x + (j - xa.k) * (xb.x - xa.x) / (xb.k - xa.k);
+    const eAt = (y) => ya.e + (y - ya.y) * (yb.e - ya.e) / (yb.y - ya.y), inside = (y) => y >= top - 0.5 && y <= bottom + 0.5;
+    if (!yt.some((t) => t.e === 0) || yt.some((t) => !inside(t.y)) || yt.some((t, i) => i && t.e >= yt[i - 1].e)) bad.push(`ticks ${yt.map((t) => t.e).join(',')}`);
+    const line = paths.find((p) => p.stroke === log.colors.cyan && p.pts.length === 15 && !p.arcs.length);
+    if (!line) bad.push('no 15-point cyan error line');
+    else rows.forEach((r, j) => { const [x, y] = line.pts[j]; if (Math.abs(x - xOf(j)) > 1 || Math.abs(y - yOf(r.dist)) > 2 || !inside(y)) bad.push(`line k=${j} at y=${y.toFixed(1)}, want ${yOf(r.dist).toFixed(1)} in [${top}, ${bottom}]`); });
+    const now = paths.filter((p) => p.arcs.length === 1 && p.fill === log.colors.cyan);
+    if (now.length !== 1 || Math.abs(now[0].arcs[0][0] - xOf(k)) > 1 || Math.abs(now[0].arcs[0][1] - yOf(rows[k].dist)) > 2 || !inside(now[0].arcs[0][1])) bad.push(`current cyan dot ${JSON.stringify(now.map((p) => p.arcs[0]))}`);
+    const gaps = paths.filter((p) => p.arcs.length === 1 && p.fill === log.colors.magenta);
+    if (gaps.length !== 16 || gaps.some((p) => { const j = Math.round((p.arcs[0][0] - xa.x) / (xb.x - xa.x) * (xb.k - xa.k) + xa.k); return !(j >= 0 && j <= 14) || Math.abs(p.arcs[0][1] - yOf(Math.abs(Number(rows[j].delta)))) > 2 || !inside(p.arcs[0][1]); })) bad.push(`gap dots (${gaps.length})`);
+    // the axis follows the data: the smallest error sits in the lowest fifth, not squeezed above a fixed floor or cut off below it
+    const minE = Math.log10(Math.min(...rows.map((r) => r.dist))), eBottom = eAt(bottom), eTop = eAt(top);
+    if (!(eBottom <= minE && (minE - eBottom) / (eTop - eBottom) <= 0.2 && eTop >= Math.log10(Math.max(...rows.map((r) => Math.abs(Number(r.delta))))))) bad.push(`range 10^${eBottom.toFixed(2)} … 10^${eTop.toFixed(2)} for smallest error 10^${minE.toFixed(2)}`);
+    return bad;
+  };
+  for (const lang of ['zh', 'en']) {
+    const pg = await T.newPage(); await T.goto(BOOK, ID, `?lang=${lang}`, pg); await settle(pg); await instrument(pg);
+    const st = async () => { await settle(pg); return pg.evaluate(() => window.PYTHAGORAS_DEBUG.state); };
+    let cfSame = true, exactGap = true, probeOk = true, hudOk = true, roOk = true, plotOk = true, zeroShown = true; const fails = [], probeWorst = { rel: 0, at: '' };
+    for (let i = 0; i < DS.length; i++) {
+      const d = DS[i];
+      await pg.evaluate((v) => { const el = document.getElementById('dsel'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, i); await settle(pg);
+      for (let k = 0; k <= 14; k++) {
+        await pg.evaluate((v) => window.PYTHAGORAS_DEBUG.seek(v), k); const s = await st(), r = oracle[d][k];
+        cfSame = cfSame && s.d === d && s.step === k && BigInt(s.m) === r.m && BigInt(s.n) === r.n;
+        exactGap = exactGap && s.delta === String(r.delta) && s.delta !== '0';
+        const rel = Math.abs(s.err / r.dist - 1);
+        if (rel > probeWorst.rel || !Number.isFinite(rel)) Object.assign(probeWorst, { rel, at: `${d}:${k}` });
+        probeOk = probeOk && Number.isFinite(s.err) && s.err > 0 && rel <= 1e-15 && s.errs.length === 15 && s.errs[k] === s.err && s.errs.every((e, j) => e > 0 && Math.abs(e / oracle[d][j].dist - 1) <= 1e-15);
+        const hud = await pg.textContent('#hudSub'), hv = (lang === 'zh' ? /沿线量差 (\S+?)，/ : /^Convergent \d+: (\S+) off along the line/).exec(hud), ro = await pg.textContent('#ro2');
+        if (!hv || !shown(hv[1], r.dist)) { hudOk = false; fails.push(`HUD ${d}:${k} “${hud}” vs ${r.dist}`); }
+        if (!shown(ro, r.dist)) { roOk = false; fails.push(`readout ${d}:${k} “${ro}” vs ${r.dist}`); }
+        if (r.naive === 0) zeroShown = zeroShown && !!hv && readSci(hv[1]) > 0 && readSci(ro) > 0;
+        const pf = plotFails(await pg.evaluate(() => window.__plotA), d, k);
+        if (pf.length) { plotOk = false; fails.push(`plot ${d}:${k}: ${pf.slice(0, 2).join('; ')}`); }
+      }
+    }
+    if (lang === 'zh') {
+      check('all 345 states: the page\'s convergents m/n equal the independent continued fraction', cfSame);
+      check('all 345 states: the exact gap m² − d·n² is kept as an integer record, never 0', exactGap);
+      check('all 345 states: the page\'s error |m/n − √d| is finite, positive and within 10⁻¹⁵ (relative) of the high-precision distance', probeOk, `worst ${probeWorst.rel.toExponential(2)} at ${probeWorst.at}`);
+    }
+    check(`${lang}: the stage caption shows the true nonzero error along the line in all 345 states (three digits)`, hudOk, fails.filter((f) => f.startsWith('HUD')).slice(0, 3).join(' | '));
+    check(`${lang}: the readout “error on the line” shows the true nonzero error in all 345 states`, roOk, fails.filter((f) => f.startsWith('readout')).slice(0, 3).join(' | '));
+    check(`${lang}: the 35 states that plain subtraction rounds to 0 read a positive error on the stage and in the readout`, zeroShown);
+    check(`${lang}: the log plot draws every error and gap of the current d at its true height, inside an axis read off the data, in all 345 states`, plotOk, fails.filter((f) => f.startsWith('plot')).slice(0, 3).join(' | '));
+    if (lang === 'zh') {
+      await pg.evaluate((v) => { const el = document.getElementById('dsel'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, DS.indexOf(5)); await settle(pg);
+      await pg.evaluate(() => window.PYTHAGORAS_DEBUG.seek(14)); await settle(pg);
+      check('d = 5, k = 14: the stage caption and the readout read 6.94×10⁻¹⁹, not 0', (await pg.textContent('#hudSub')).includes('沿线量差 6.94×10⁻¹⁹') && (await pg.textContent('#ro2')).trim() === '6.94×10⁻¹⁹');
+    }
+    await pg.close();
+  }
+}
+
 /* ---------- line primes and plane primes ---------- */
 await pick('five'); s = await state();
 check('PLANE-5: 5 = 1² + 2², x² ≡ −1 has the roots 2 and 3', s.scene === 'split' && s.p === 5 && s.two.join() === '1,2' && s.roots.join() === '2,3');
