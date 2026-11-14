@@ -10,7 +10,7 @@
     "definition": 38,
     "conjecture": 6,
     "problem": 3,
-    "example": 108,
+    "example": 109,
     "remark": 178,
     "proof": 272,
     "lean_verified": 273,
@@ -661,7 +661,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1390,
+          "line": 1496,
           "id": "",
           "via": "inline"
         },
@@ -1819,7 +1819,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1391,
+          "line": 1497,
           "id": "",
           "via": "inline"
         },
@@ -1855,7 +1855,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1391,
+          "line": 1497,
           "id": "",
           "via": "inline"
         },
@@ -1879,7 +1879,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1390,
+          "line": 1496,
           "id": "",
           "via": "inline"
         },
@@ -1915,7 +1915,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1390,
+          "line": 1496,
           "id": "",
           "via": "inline"
         },
@@ -1957,7 +1957,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1391,
+          "line": 1497,
           "id": "",
           "via": "inline"
         },
@@ -2029,7 +2029,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1391,
+          "line": 1497,
           "id": "",
           "via": "inline"
         },
@@ -3055,7 +3055,7 @@
       "citations": [
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1228,
+          "line": 1334,
           "id": "thm-ch39-p2e-aligned-tribonacci-windows",
           "via": "environment"
         }
@@ -3217,7 +3217,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1395,
+          "line": 1501,
           "id": "",
           "via": "inline"
         },
@@ -3415,7 +3415,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1392,
+          "line": 1498,
           "id": "",
           "via": "inline"
         },
@@ -3469,7 +3469,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1392,
+          "line": 1498,
           "id": "",
           "via": "inline"
         },
@@ -3523,7 +3523,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1392,
+          "line": 1498,
           "id": "",
           "via": "inline"
         },
@@ -4735,13 +4735,13 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1125,
+          "line": 1231,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1397,
+          "line": 1503,
           "id": "",
           "via": "inline"
         },
@@ -5539,7 +5539,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1392,
+          "line": 1498,
           "id": "",
           "via": "inline"
         },
@@ -5911,7 +5911,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1395,
+          "line": 1501,
           "id": "",
           "via": "inline"
         },
@@ -7597,7 +7597,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1393,
+          "line": 1499,
           "id": "",
           "via": "inline"
         },
@@ -7633,7 +7633,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1393,
+          "line": 1499,
           "id": "",
           "via": "inline"
         },
@@ -7669,7 +7669,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1393,
+          "line": 1499,
           "id": "",
           "via": "inline"
         },
@@ -7693,7 +7693,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1393,
+          "line": 1499,
           "id": "",
           "via": "inline"
         },
@@ -12295,7 +12295,7 @@
       "citations": [
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1188,
+          "line": 1294,
           "id": "thm-ch39-p2e-odd-repeat-inverse-mass",
           "via": "environment"
         }
@@ -12583,7 +12583,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1396,
+          "line": 1502,
           "id": "",
           "via": "inline"
         },
@@ -12619,7 +12619,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1396,
+          "line": 1502,
           "id": "",
           "via": "inline"
         },
@@ -16471,13 +16471,13 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1125,
+          "line": 1231,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1397,
+          "line": 1503,
           "id": "",
           "via": "inline"
         },
@@ -16495,13 +16495,13 @@
       "citations": [
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1112,
+          "line": 1218,
           "id": "thm-ch39-p2e-parry-escape-laws",
           "via": "environment"
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1397,
+          "line": 1503,
           "id": "",
           "via": "inline"
         },
