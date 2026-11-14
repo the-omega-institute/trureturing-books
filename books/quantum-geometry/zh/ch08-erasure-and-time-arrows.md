@@ -195,15 +195,17 @@ $$
 **两阶段：熵先记进系统，再付成热。** 阶段 A（转 90° 再捏合）里，熵那一栏升到 ln 2，热为 0；阶段 B 的理想复位把箭头拉回 |0⟩，熵那一栏回到 0，“付给环境的热”升到 ln 2，正好碰到“下界”那条横线。阶段 B 的热量是文献结果，“理想复位”是取等的理想极限，见 [@rem-landauer-thermodynamic-bridge-literature]。
 :::
 
-::: {.remark #rem-density-matrix-balance-inputs-literature title="密度矩阵层面的热浴平衡与幺正平衡（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** [@ex-landauer-one-bit-ledger] 的阶段 B 引用了不等式 $\beta\Delta Q_{\mathrm{bath}} \ge \Delta S_S$，其背后是一张三行的账单（密度矩阵层面的物理背景详见 [@rem-landauer-thermodynamic-bridge-literature]）：
+::: {.remark #rem-density-matrix-balance-inputs-literature title="密度矩阵层面的热浴平衡与幺正平衡：矩阵结果与物理接口"}
+[@ex-landauer-one-bit-ledger] 的阶段 B 引用了不等式 $\beta\Delta Q_{\mathrm{bath}} \ge \Delta S_S$。其背后的有限维矩阵平衡式已有冻结来源；把它们接到物理热量仍需额外条件（物理背景详见 [@rem-landauer-thermodynamic-bridge-literature]）：
 
-- **热浴平衡（文献输入）**：热浴吸收的热量（乘以逆温度）等于热浴的熵变加上热浴被推离平衡的相对熵，$\beta Q = \Delta S_{\mathrm{res}} + D$；
-- **幺正平衡（文献输入）**：系统与热浴初始无关联、联合演化是幺正的，所以末态互信息等于两边熵变之和，$I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$；
+- **热浴平衡的矩阵来源**：对有限非空载体、厄米 $H_E$、任意实数 $\beta$ 及吉布斯初态 $\rho_E = e^{-\beta H_E}/Z_E$，[热浴能量差恒等式](lean:D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference) 给出 $D = \beta\Delta E_E - \Delta S_{\mathrm{res}}$，末态可奇异且无需与 $H_E$ 对易。所用[吉布斯分解](lean:D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_variational_identity) 的无量纲生成元是 $K = -\beta H_E$，[吉布斯态正定性](lean:D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_state_posDef) 给出参考态正定；将同一固定 $H_E$ 的平均能量差识别为热量 $Q$ 后，才写成 $\beta Q = \Delta S_{\mathrm{res}} + D$；
+- **幺正平衡的矩阵来源**：对任意联合密度态及联合幺正演化，[边缘熵变恒等式](lean:D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change) 给出 $\Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}} = I_{\mathrm{final}} - I_{\mathrm{initial}}$。实际偏迹下，[直积态的系统边缘态](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState)（`marginalRight`）与[热浴边缘态](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState)（`marginalLeft`）恢复各自因子，[直积态互信息为零](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState) 也允许奇异因子。因此，初态为直积态时，上式化为 $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$，不要求系统初态也是热态；
 - **代数推论**：消去 $\Delta S_{\mathrm{res}}$，得 $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$（其中 $\Delta S_{\mathrm{sys}}$ 为末减初的系统熵变化量，故 $-\Delta S_{\mathrm{sys}}$ 即 [@ex-landauer-one-bit-ledger] 中的系统熵减 $\Delta S_S$）。
+
+这里的熵用自然对数，以奈特为单位；矩阵来源中的 $D$ 是采用源中全函数对数约定的实值迹对数表达式，本书一般 DPI 使用的则是含支撑条件的扩展相对熵。吉布斯参考态正定，消除了热浴的支撑障碍，但共同载体、两种表述的转换与非负性在本应用中的衔接仍须核对。物理热量还要求 $Q = \operatorname{Re}\Tr\bigl(H_E(\rho_E' - \rho_E)\bigr)$，以及 $\beta = 1/(k_B T)$、$k_B > 0$、$T > 0$；任意实数 $\beta$ 的恒等式本身不提供正温热量不等式。
 :::
 
-将 [@rem-density-matrix-balance-inputs-literature] 中的前两条平衡式作为实数公理假设，从前两行到第三行、再到下界与取等条件的纯实数推理已冻结在 Lean 里。
+下列命题仍将 [@rem-density-matrix-balance-inputs-literature] 中的平衡式作为实数假设，下界与取等判据另需两项非负性；这些纯实数推理的冻结来源不等于完整物理应用的验证。
 
 ::: {.proposition #prop-landauer-identity-from-balances title="由热浴平衡与幺正平衡推出热量—熵—信息恒等式" lean="D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances"}
 设 $\beta$、$Q$、$\Delta S_{\mathrm{sys}}$、$\Delta S_{\mathrm{res}}$、$I$、$D$ 为实数（Lean 中依次为 `beta`、`heat`、`systemEntropyChange`、`reservoirEntropyChange`、`mutualInformation`、`reservoirDivergence`）。若
@@ -239,16 +241,16 @@ $$
 平衡式说明差额 $\beta Q - (-\Delta S)$ 恰好等于 $I + D$（`landauer_slack_of_balance`）。两项非负，故差额非负，这是结论 1（`landauer_bound_of_balance`）。差额为零当且仅当 $I + D = 0$；在两项都非负时这等价于 $I = 0$ 且 $D = 0$（`add_eq_zero_iff_of_nonneg`），这是结论 2（`landauer_saturation_iff`）。结论 3 把结论 1 与“差额不为零”合起来（`landauer_strict_iff`）。完整证明由 Lean 内核检查。
 :::
 
-[@prop-landauer-identity-from-balances] 与 [@cor-landauer-bound-saturation] 是纯实数层面的陈述：它们不知道 $Q$ 是热量、$I$ 是互信息。它们保证的是账目本身不会出错——只要两条平衡式成立、两项余量非负，下界与取等条件就跟着成立。把字母换成物理量的那一步，仍由文献承担。
+[@prop-landauer-identity-from-balances] 与 [@cor-landauer-bound-saturation] 是纯实数层面的陈述：它们不知道 $Q$ 是热量、$I$ 是互信息。它们保证的是账目本身不会出错——只要两条平衡式成立、两项余量非负，下界与取等条件就跟着成立。矩阵平衡式已有上述冻结来源，但完整物理应用的接口仍须核对；标量取等判据不提供零互信息或零相对熵的态刻画，也不证明重置、饱和协议或极限构造的可达性。
 
 兰道尔界什么时候取不到等号？[@cor-landauer-bound-saturation] 的结论 2 给了判据：要么系统与热浴之间留下了关联（$I > 0$），要么热浴被推离了平衡（$D > 0$）。下面用能想到的最小热浴把这笔账算一遍。
 
 ::: {.figure src="ch08-bath-excess"}
-**一个热浴比特擦得越干净，多付的 $D$ 涨得越快，系统熵减却封顶在 $\ln 2$。** 每根柱子是下面例子表中的一行：总高度是热量 $\beta Q$（柱顶的数），灰色的一截是系统熵减 $-\Delta S_{\mathrm{sys}}$，虚线框的一截是热浴相对熵 $D$，互信息 $I = 0$。灰色的一截逼近 $\ln 2$ 那条虚线却不越过它，虚线框却越长越高。数值结果；两条平衡式是文献结果，未在本书形式化，账目恒等式见 [@prop-landauer-identity-from-balances]。
+**一个热浴比特擦得越干净，多付的 $D$ 涨得越快，系统熵减却封顶在 $\ln 2$。** 每根柱子是下面例子表中的一行：总高度是热量 $\beta Q$（柱顶的数），灰色的一截是系统熵减 $-\Delta S_{\mathrm{sys}}$，虚线框的一截是热浴相对熵 $D$，互信息 $I = 0$。灰色的一截逼近 $\ln 2$ 那条虚线却不越过它，虚线框却越长越高。数值结果；矩阵平衡式的来源与应用边界见 [@rem-density-matrix-balance-inputs-literature]，本图不构成矩阵协议的形式化验证，账目恒等式见 [@prop-landauer-identity-from-balances]。
 :::
 
 ::: {.example #ex-one-qubit-reservoir-swap-erasure title="用一个热浴量子比特擦除：有限热浴的超额热量"}
-本例中的两条密度矩阵平衡式属于**文献结果，未在本书形式化**；各项数值由定义直接计算，并用 [@prop-landauer-identity-from-balances] 的恒等式交叉核对。熵以奈特为单位。
+本例是**数值示例，不是矩阵协议的形式化验证**；两条密度矩阵平衡式的冻结来源及应用边界见 [@rem-density-matrix-balance-inputs-literature]。各项数值由定义直接计算，并用 [@prop-landauer-identity-from-balances] 的恒等式交叉核对。熵以奈特为单位。
 
 **模型。** 系统是最大混合的单比特 $\rho_S = \frac12 I_2$。热浴也是一个量子比特，处于吉布斯态 $\rho_E = \operatorname{diag}(p,\, 1 - p)$，其中 $p > \frac12$ 是基态布居数，能级间隔 $E$ 满足 $\beta E = \ln\frac{p}{1-p}$。联合幺正取交换门 SWAP：演化之后系统拿到 $\operatorname{diag}(p, 1-p)$，热浴拿到 $\frac12 I_2$，两者仍是直积态。
 
@@ -366,7 +368,7 @@ $$
    $$
    其中联合互信息 $I(S' : E') \ge 0$ 与热浴相对熵 $D(\rho_E' \,\|\, \rho_E) \ge 0$ 均非负，从而在微观量子力学框架下无需热力学极限假设即严格导出 $\Delta Q_{\mathrm{bath}} \ge k_B T \Delta S_S$。
 
-上述涉及物理玻尔兹曼常数 $k_B$、热浴哈密顿量 $H_E$ 与焦耳热量 $\Delta Q_{\mathrm{bath}}$ 的阶段 B 热力学重置换算作为物理背景引述。其中有一层已由 Lean 验证：只要承认热浴平衡 $\beta Q = \Delta S_{\mathrm{res}} + D$ 与幺正平衡 $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$ 这两条实数等式，第 2 条中的恒等式、下界及其取等条件就由 [@prop-landauer-identity-from-balances] 与 [@cor-landauer-bound-saturation] 给出。这两条平衡式本身（它们是关于吉布斯态、联合幺正演化与冯·诺依曼熵的命题）以及 $I \ge 0$、$D \ge 0$ 的非负性，仍属文献结果，不计入本书的 Lean 形式化验证账本。
+上述涉及物理玻尔兹曼常数 $k_B$、热浴哈密顿量 $H_E$ 与焦耳热量 $\Delta Q_{\mathrm{bath}}$ 的阶段 B 热力学重置换算作为物理背景引述。热浴与联合幺正的矩阵平衡式已有 [@rem-density-matrix-balance-inputs-literature] 所列的冻结来源；[@prop-landauer-identity-from-balances] 保留两条实数平衡假设，[@cor-landauer-bound-saturation] 的下界、取等与严格判据还要求 $I \ge 0$、$D \ge 0$。本章未核对这些非负性及载体、支撑与物理单位接口的完整衔接，也不由标量取等条件宣称可达的重置或饱和协议；有限吉布斯热浴的纯态复位与理想极限仍按上述物理文献的条件理解。
 :::
 
 ::: {.viz src="erasure-ledger" height="560"}

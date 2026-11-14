@@ -3197,6 +3197,22 @@
       "line": 118,
       "signature": "theorem entropy_freedom_segment {d : ℕ} [NeZero d] (rho : DensityState (Fin d)) : let omega"
     },
+    "D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_state_posDef": {
+      "module": "D5/S3/Quantum/Divergence/GibbsVariationalIdentity",
+      "name": "D5.S3.Quantum.Divergence.GibbsVariationalIdentity.gibbs_state_posDef",
+      "kind": "theorem",
+      "statement_id": "sha256:a2a5b66e92f74d67c7e2d5ba4112e1c43ffc95c5528cfc21d6b27d18552f5f5a",
+      "line": 69,
+      "signature": "theorem gibbs_state_posDef (H : CStarMatrix n n ℂ) (hH : IsSelfAdjoint H) : (CStarMatrix.ofMatrix.symm (gibbsState H hH).1).PosDef"
+    },
+    "D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_variational_identity": {
+      "module": "D5/S3/Quantum/Divergence/GibbsVariationalIdentity",
+      "name": "D5.S3.Quantum.Divergence.GibbsVariationalIdentity.gibbs_variational_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:a2a5b66e92f74d67c7e2d5ba4112e1c43ffc95c5528cfc21d6b27d18552f5f5a",
+      "line": 87,
+      "signature": "theorem gibbs_variational_identity (H : CStarMatrix n n ℂ) (hH : IsSelfAdjoint H) (rho : DensityState n) : Real.log (partitionFunction H) = (Matrix.trace (CStarMatrix.ofMatrix.symm (H * rho.1))).re + vonNeumannEntropy rho + quantumRelativeEntropy rho (gibbsState H hH)"
+    },
     "D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group": {
       "module": "D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup",
       "name": "D5.S3.Quantum.Dynamics.CalibratedUnitaryGroup.calibrated_group",
@@ -3605,6 +3621,22 @@
       "line": 750,
       "signature": "theorem bargmann_path_product (n : ℕ) (Ψ : Fin (n+1) → Fin 2 → ℂ) : bargmann Ψ = (∏ j : Fin n, star (Ψ j.castSucc) ⬝ᵥ Ψ j.succ) * (star (Ψ (Fin.last n)) ⬝ᵥ Ψ 0)"
     },
+    "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference": {
+      "module": "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity",
+      "name": "D5.S3.Quantum.Information.CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference",
+      "kind": "theorem",
+      "statement_id": "sha256:81e5d4c3c54523623d1cb3ffa11631f8043a86425e6161a03f1519b3710777e3",
+      "line": 42,
+      "signature": "theorem gibbs_relative_entropy_energy_difference [Nonempty n] (H : CStarMatrix n n ℂ) (hH : IsSelfAdjoint H) (beta : ℝ) (initial final : DensityState n) (hInitial : initial = thermalState H hH beta) : quantumRelativeEntropy final (thermalState H hH beta) = beta * (meanEnergy H final - meanEnergy H initial) - (vonNeumannEntropy final - vonNeumannEntropy initial)"
+    },
+    "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change": {
+      "module": "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity",
+      "name": "D5.S3.Quantum.Information.CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change",
+      "kind": "theorem",
+      "statement_id": "sha256:81e5d4c3c54523623d1cb3ffa11631f8043a86425e6161a03f1519b3710777e3",
+      "line": 104,
+      "signature": "theorem marginal_entropy_change_eq_mutual_information_change (U : Matrix (A × B) (A × B) ℂ) (hU : U ∈ Matrix.unitaryGroup (A × B) ℂ) (rho : DensityState (A × B)) : let final"
+    },
     "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.explicit_qubit_orientation": {
       "module": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann",
       "name": "D5.S3.Quantum.Information.GroupInvariantPsi.C129QubitBargmann.explicit_qubit_orientation",
@@ -3620,6 +3652,30 @@
       "statement_id": "sha256:9d24508d35d99b17cb22cc6d691a82d92563c7ffe6fb259bff0b1d3714941555",
       "line": 52,
       "signature": "theorem triple_bargmann_bloch (r₁ r₂ r₃ : Fin 3 → ℝ) : tripleBargmann r₁ r₂ r₃ = (((1 + r₁ ⬝ᵥ r₂ + r₂ ⬝ᵥ r₃ + r₃ ⬝ᵥ r₁ : ℝ) : ℂ) / 4) + (((r₁ ⬝ᵥ (r₂ ⨯₃ r₃) : ℝ) : ℂ) * Complex.I / 4)"
+    },
+    "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState": {
+      "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
+      "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.marginalLeft_productState",
+      "kind": "theorem",
+      "statement_id": "sha256:9ec1df9721285fac407a0803347b9035cea2b264d6c4f81851e81c97a0eb7dd3",
+      "line": 145,
+      "signature": "theorem marginalLeft_productState {A B : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B] (rho : DensityState A) (sigma : DensityState B) : marginalLeft (productState rho sigma) = sigma"
+    },
+    "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState": {
+      "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
+      "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.marginalRight_productState",
+      "kind": "theorem",
+      "statement_id": "sha256:9ec1df9721285fac407a0803347b9035cea2b264d6c4f81851e81c97a0eb7dd3",
+      "line": 155,
+      "signature": "theorem marginalRight_productState {A B : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B] (rho : DensityState A) (sigma : DensityState B) : marginalRight (productState rho sigma) = rho"
+    },
+    "D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState": {
+      "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
+      "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.quantumMutualInformation_productState",
+      "kind": "theorem",
+      "statement_id": "sha256:9ec1df9721285fac407a0803347b9035cea2b264d6c4f81851e81c97a0eb7dd3",
+      "line": 322,
+      "signature": "theorem quantumMutualInformation_productState {A B : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B] (rho : DensityState A) (sigma : DensityState B) : quantumMutualInformation (productState rho sigma) = 0"
     },
     "D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction": {
       "module": "D5/S3/Quantum/Information/QubitEntropyContraction",
