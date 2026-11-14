@@ -2,30 +2,30 @@
 
 本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，Lean 验证、书面证明与开放问题分别声明证据。下列 C.1–C.3 逐条核对 `trureturing.lock.json` 中的冻结声明（所钉 `trureturing@dev` 提交为 [{commit}](trureturing:)），C.4 另列开放问题与选定文献边界：
 
-1. **C.1 冻结定理总索引（308 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
-2. **C.2 形式化定义与代数载体总索引（114 项唯一声明：104 项 `def` + 10 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.3 行内辅助定理与定义索引（163 项声明：110 项 `theorem` + 53 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **585 项唯一声明**（$308 + 114 + 163 = 585$）。媒体引用在各行末尾另列，不改变上述分区。
+1. **C.1 冻结定理总索引（309 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
+2. **C.2 形式化定义与代数载体总索引（114 项唯一声明：104 项 `def` + 10 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.3 行内辅助定理与定义索引（163 项声明：110 项 `theorem` + 53 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **586 项唯一声明**（$309 + 114 + 163 = 586$）。媒体引用在各行末尾另列，不改变上述分区。
 3. **C.4 开放问题与未形式化前沿边界台账（11 项：6 个 `conjecture` + 3 个 `problem` 环境 + 2 项文献边界 `remark`）**：9 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
 
 第 16.3 节的 [@thm-central-defect-endpoint-average] 及其 [书面证明](ch16-qsvt-walks-and-compilation.md#pf-central-defect-endpoint-average) 不属于冻结声明，也不是开放问题。其 DOI、原文定位与[形式化请求 #10](https://github.com/the-omega-institute/trureturing-requests/issues/10) 随正文及自动生成的书面证明账本单列；不增加上述锁定声明、绿色图表或 C.4 的条数。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**585 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：418 格是定理，167 格是定义或归纳类型；422 个实心格被环境头以 `lean=` 引用，163 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
+**586 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：419 格是定理，167 格是定义或归纳类型；423 个实心格被环境头以 `lean=` 引用，163 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
 :::
 
 ---
 
-## C.1 已验证并冻结的 Lean 4 定理总索引（308 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
+## C.1 已验证并冻结的 Lean 4 定理总索引（309 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
 
-下表按 GID 的模块路径字母顺序列出 **308 条至少被一个 `:::` 环境头以 `lean=` 引用的唯一冻结定理**。第一至第三十九章与终章合计引用这些定理 424 次（同一 GID 每章计一次）；这 424 次引用分布在 268 个定理、引理、命题与推论环境及 2 个形式化 `example` 环境（`#ex-ch35-two-anchor-gram-corridor`、`#ex-ch37-gram-constraint-release`，共 270 个 `:::` 环境头）中。行内引用与媒体消费者另列在最后一栏，不增加柱高。第十六章相位合成与提升条目使用 `T295`–`T299`、`D098`–`D114` 与 `R163`；中央缺陷路径条目使用 `T300`–`T301`。第三十九章的两项新增应用依据使用 `T302`–`T303`；第三十二章与第三十四章的比较引擎、比较公理与极小三角弧面体原胞新增条目使用 `T304`–`T308`。
+下表按 GID 的模块路径字母顺序列出 **309 条至少被一个 `:::` 环境头以 `lean=` 引用的唯一冻结定理**。第一至第三十九章与终章合计引用这些定理 425 次（同一 GID 每章计一次）；这 425 次引用分布在 269 个定理、引理、命题与推论环境及 2 个形式化 `example` 环境（`#ex-ch35-two-anchor-gram-corridor`、`#ex-ch37-gram-constraint-release`，共 271 个 `:::` 环境头）中。行内引用与媒体消费者另列在最后一栏，不增加柱高。第十六章相位合成与提升条目使用 `T295`–`T299`、`D098`–`D114` 与 `R163`；中央缺陷路径条目使用 `T300`–`T301`。第三十九章的两项新增应用依据使用 `T302`–`T303`；第三十二章与第三十四章的比较引擎、比较公理与极小三角弧面体原胞新增条目使用 `T304`–`T308`；第十六章有向森林端点补全核心使用 `T309`。
 
 ::: {.figure src="appc-theorems-by-chapter"}
-**每一章带 `lean=` 的环境头引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，共 40 根绿色柱子，按第 I–X 部加浅色底纹。第二十二章最高，$35$ 条；其次第二十九章 $27$ 条、第三十章 $23$ 条、第三十三与第三十七章各 $19$ 条、第四、三十八、三十九章各 $18$ 条；第三十六章 $17$ 条；第二十四章 $16$ 条；第三十一章 $15$ 条；第十四章 $14$ 条、终章 $13$ 条；第十六章 $13$ 条；第三十二章 $12$ 条；第三十四章 $11$ 条；其余 24 章各 $4$ 到 $9$ 条。柱高合计 $424$，由脚本从中文章节与锁文件算出，并与下表最后一栏的环境锚点逐章核对；本节全部 $308$ 条定理均至少出现在一根柱子中。实心下段是在该章第一次出场的定理，共 $297$ 条；空心上段是此前已出场、在该章再次引用的定理，共 $127$ 条。同一条定理在不同章重复计，定义与仅有行内引用的声明不计。
+**每一章带 `lean=` 的环境头引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，共 40 根绿色柱子，按第 I–X 部加浅色底纹。第二十二章最高，$35$ 条；其次第二十九章 $27$ 条、第三十章 $23$ 条、第三十三与第三十七章各 $19$ 条、第四、三十八、三十九章各 $18$ 条；第三十六章 $17$ 条；第二十四章 $16$ 条；第三十一章 $15$ 条；第十四章 $14$ 条、终章 $13$ 条；第十六章 $14$ 条；第三十二章 $12$ 条；第三十四章 $11$ 条；其余 24 章各 $4$ 到 $9$ 条。柱高合计 $425$，由脚本从中文章节与锁文件算出，并与下表最后一栏的环境锚点逐章核对；本节全部 $309$ 条定理均至少出现在一根柱子中。实心下段是在该章第一次出场的定理，共 $298$ 条；空心上段是此前已出场、在该章再次引用的定理，共 $127$ 条。同一条定理在不同章重复计，定义与仅有行内引用的声明不计。
 :::
 
-下表按模块路径排序，这 $308$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族最大，占 $91$ 条；`FluidDynamics` 的 $18$ 条全在第八部。
+下表按模块路径排序，这 $309$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族最大，占 $91$ 条；`FluidDynamics` 的 $18$ 条全在第八部。
 
 ::: {.figure src="appc-modules-by-part"}
-**C.1 的 $308$ 条定理按模块族与首次出场的部分组。** 行是模块路径的前三段，较小的族合并为末行；列是第一至第十部与终章、附录。每条定理只计一次，放在中文正文最先引用它的部分；格中数字为条数，底色越深条数越多，空格为零。图不表示模块间的证明依赖。
+**C.1 的 $309$ 条定理按模块族与首次出场的部分组。** 行是模块路径的前三段，较小的族合并为末行；列是第一至第十部与终章、附录。每条定理只计一次，放在中文正文最先引用它的部分；格中数字为条数，底色越深条数越多，空格为零。图不表示模块间的证明依赖。
 :::
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
@@ -82,6 +82,7 @@
 | `T047` | [`D5.S3.Arith.Robin.FewDistinctPrimes.robin_of_card_primeFactors_le_eight`](lean:D5/S3/Arith/Robin/FewDistinctPrimes.robin_of_card_primeFactors_le_eight) | [{source}](lean:D5/S3/Arith/Robin/FewDistinctPrimes.robin_of_card_primeFactors_le_eight) | `theorem` | Ch 22 `#thm-robin-at-most-eight-primes` |
 | `T048` | [`D5.S3.Arith.Robin.OriginalLocalA.original_zero_robin5040_localA`](lean:D5/S3/Arith/Robin/OffLinePeak/OriginalLocalA.original_zero_robin5040_localA) | [{source}](lean:D5/S3/Arith/Robin/OffLinePeak/OriginalLocalA.original_zero_robin5040_localA) | `theorem` | Ch 22 `#thm-off-line-zero-robin-violation` |
 | `T049` | [`D5.S3.Axis.PrimeAxisEscape.prime_axis_escape`](lean:D5/S3/Axis/PrimeAxisEscape.prime_axis_escape) | [{source}](lean:D5/S3/Axis/PrimeAxisEscape.prime_axis_escape) | `theorem` | Ch 31 `#thm-ch31-prime-axis-escape`, 附录 A, 附录 D; media `viz/visualizations.json`, `viz/fairness-square-uncertainty-expansion/index.html` |
+| `T309` | [`D5.S3.Combinatorics.Graph.LinearForests.DirectedForestCompletion.directed_forest_completion`](lean:D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion) | [{source}](lean:D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion) | `theorem` | Ch 16 `#thm-directed-forest-completion-core` |
 | `T050` | [`D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact) | [{source}](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact) | `theorem` | Ch 30 `#thm-ch30-face-cycle-exact` |
 | `T051` | [`D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.cycle_face_sides`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_face_sides) | [{source}](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_face_sides) | `theorem` | Ch 30 `#thm-ch30-cycle-face-sides` |
 | `T052` | [`D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.face_odd_nice_cycle_orientation`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.face_odd_nice_cycle_orientation) | [{source}](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.face_odd_nice_cycle_orientation) | `theorem` | Ch 30 `#thm-ch30-face-odd-nice-cycle-orientation` |
@@ -343,7 +344,7 @@
 
 ## C.2 形式化定义、结构与归纳类型索引（114 项唯一声明） {#sec-appendix-c-definitions}
 
-下表列出被中文正文 `definition` 与 `example` 环境头以 `lean=` 引用的 **114 项唯一声明（104 项 `def`、10 项 `inductive`）**；它们与 C.1 的 308 条定理共同构成 **422 项被环境头引用的锁定声明**。媒体消费者在最后一栏另列，不决定分区。
+下表列出被中文正文 `definition` 与 `example` 环境头以 `lean=` 引用的 **114 项唯一声明（104 项 `def`、10 项 `inductive`）**；它们与 C.1 的 309 条定理共同构成 **423 项被环境头引用的锁定声明**。媒体消费者在最后一栏另列，不决定分区。
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -466,7 +467,7 @@
 
 ## C.3 行内引用的辅助定理与定义索引（163 项唯一声明） {#sec-appendix-c-inline}
 
-除 C.1 与 C.2 的 422 项环境引用声明外，另有 **163 项声明（110 项定理、53 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **585 项唯一声明**（$308 + 114 + 163 = 585$）。
+除 C.1 与 C.2 的 423 项环境引用声明外，另有 **163 项声明（110 项定理、53 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **586 项唯一声明**（$309 + 114 + 163 = 586$）。
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -671,22 +672,22 @@
 | :--- | :--- | :--- | :---: |
 | **上游仓库与分支** | `the-omega-institute/trureturing` 分支 `dev` | `site.toml` `[trureturing]` 配置与 `git merge-base --is-ancestor` | `PASS` |
 | **所钉提交 SHA** | [{commit}](trureturing:) | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
-| **冻结定理总数** | `308` 项环境引用定理（含行内共 `418` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
+| **冻结定理总数** | `309` 项环境引用定理（含行内共 `419` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
 | **辅助定义与结构数** | `114` 项环境定义/归纳类型；含行内共 `167` 项（`157` `def` + `10` `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s)`） | `PASS` |
 
 ::: {.figure src="appc-ledger"}
-**$585$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $308 + 9 + 101 = 418$，定义一行 $114 + 0 + 53 = 167$。虚线框按本附录的环境引用分区：C.1 $= 308$，C.2 $= 114$，C.3 $= 9 + 101 + 0 + 53 = 163$；媒体消费者不改变索引分区。
+**$586$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $309 + 9 + 101 = 419$，定义一行 $114 + 0 + 53 = 167$。虚线框按本附录的环境引用分区：C.1 $= 309$，C.2 $= 114$，C.3 $= 9 + 101 + 0 + 53 = 163$；媒体消费者不改变索引分区。
 :::
 
-这张账的第一行在声明地图上是 $418$ 格绿色：被环境头引用的 $308$ 格画成实心，其余 $9 + 101 = 110$ 格空心。
+这张账的第一行在声明地图上是 $419$ 格绿色：被环境头引用的 $309$ 格画成实心，其余 $9 + 101 = 110$ 格空心。
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 418 格：308 个实心格被环境头以 `lean=` 引用，110 个空心格只在中文正文的行内链接里出现。
+**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 419 格：309 个实心格被环境头以 `lean=` 引用，110 个空心格只在中文正文的行内链接里出现。
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-本附录 C.1 的 308 条环境引用定理、C.2 的 114 项环境引用定义/归纳类型与 C.3 的 163 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 585 项声明（418 项 `theorem` + 157 项 `def` + 10 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.4 的 9 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
+本附录 C.1 的 309 条环境引用定理、C.2 的 114 项环境引用定义/归纳类型与 C.3 的 163 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 586 项声明（419 项 `theorem` + 157 项 `def` + 10 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.4 的 9 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}
