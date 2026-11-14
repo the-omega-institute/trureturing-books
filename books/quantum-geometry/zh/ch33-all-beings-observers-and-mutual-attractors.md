@@ -21,7 +21,7 @@
 
 为什么近代机械论一边宣称“物质由盲目的微粒构成”，一边又在量子测量问题前惊慌失措，追问“究竟要长出多少神经元才算观察者、才能让波包坍缩”？从谱系学的手术刀看去，这纯属概念偶像制造的伪难题：先人为抽干万物身上的比量能力，把石头与电子贬为毫无内禀视角的“纯客体”，再反过来惊讶于“主体意识如何从死物质中凭空跳出”。
 
-回到全书第一性原理，两子相遇时的几何积分解（连续几何代数背景见[第 32 章](ch32-unified-field-and-meta-unification.md) [@rem-ch32-generative-laws-dottie-literature]）与**[第 31 章](ch31-quantum-fairness.md)的席位公平定理**（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款）早已给出了彻底平权的裁决：当纯态 $\psi$ 与纯态 $\phi$ 相遇比量时，秩一配对权重恒满足共轭互易律 $\lVert\phi^* \bullet_v \psi\rVert^2 = \lVert\psi^* \bullet_v \phi\rVert^2$。当一束阳光掠过山巅石英晶体时，绝不是等到几百万年后某个人类路过看了一眼，晶格才开始“存在”——石英晶格用自身的内禀对称轴投影光子的偏振方向，光子也同时用自身的动量相位探询晶格的间距。**每一次内积投影的交换，都是一次平视的相互观测；宇宙里根本没有只被丈量而不去丈量的“死客体”。**
+回到全书第一性原理，两子相遇时的几何积分解（连续几何代数背景见[第 32 章 §32.4](ch32-s04-generative-laws.md#sec-ch32-generative-laws) [@rem-ch32-generative-laws-dottie-literature]）与**[第 31 章](ch31-quantum-fairness.md)的席位公平定理**（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款）早已给出了彻底平权的裁决：当纯态 $\psi$ 与纯态 $\phi$ 相遇比量时，秩一配对权重恒满足共轭互易律 $\lVert\phi^* \bullet_v \psi\rVert^2 = \lVert\psi^* \bullet_v \phi\rVert^2$。当一束阳光掠过山巅石英晶体时，绝不是等到几百万年后某个人类路过看了一眼，晶格才开始“存在”——石英晶格用自身的内禀对称轴投影光子的偏振方向，光子也同时用自身的动量相位探询晶格的间距。**每一次内积投影的交换，都是一次平视的相互观测；宇宙里根本没有只被丈量而不去丈量的“死客体”。**
 
 一旦洗去人类中心主义的偏见，“观察者”在数学上究竟由什么极小结构定义？在进入任意有限维的一般定理之前，不妨先在最透明的 $2 \times 2$ 单量子比特账本上亲手算一遍：取完备正交记录基 $P_0 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ 与 $P_1 = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$，对任意含非对角相干项的密度矩阵 $\rho = \begin{pmatrix} a & c \\ \bar{c} & 1-a \end{pmatrix}$ 施加未读捏合算子，第一次作用便将非对角项彻底归零：
 

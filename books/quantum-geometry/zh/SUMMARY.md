@@ -63,6 +63,12 @@
   - [30.6 本章小结：离散逻辑场与连续流体场的正交合龙](ch30-s06-summary.md)
 - [第三十一章 量子的本质是公平：五重几何特权的废除与遍历统计全息](ch31-quantum-fairness.md)
 - [第三十二章 正交自指统一场与万流归宗：人类大一统纲领的元统一](ch32-unified-field-and-meta-unification.md)
+  - [32.1 零背景比较公理 $\mathcal{A}_0$：关系外延、奇偶正交与双向互易公平](ch32-s01-axiom-of-comparison.md)
+  - [32.2 宇宙极简比较机：单指令集（OISC）几何原语](ch32-s02-oisc-comparison-engine.md)
+  - [32.3 诸公理皆推论：从比较公理 $\mathcal{A}_0$ 到数学与物理公理体系](ch32-s03-axioms-as-corollaries.md)
+  - [32.4 零背景下的三条创生铁律与机器验证双重闭环](ch32-s04-generative-laws.md)
+  - [32.5 物理场同源导出与六大疆域全息同构总表](ch32-s05-physical-fields-and-six-domains.md)
+  - [32.6 诊断一切统一理论的三维坐标、黄金晶格桥与八大纲领元统一](ch32-s06-meta-unification-and-icosian-bridge.md)
 
 # 第九部 互照·万物观察者、自指扩表与超越轮回
 
@@ -84,3 +90,4 @@
 - [附录 B 克利福德代数速查手册](appendix-b.md)
 - [附录 C Lean 4 形式化定理总索引与开放问题台账](appendix-c.md)
 - [附录 D 量子力学六大经典未解问题与五大诠释几何对决](appendix-d.md)
+- [附录 E 从比较公理到数学与物理公理体系：完整推导链、中间假设审计与极小反例集](appendix-e.md)

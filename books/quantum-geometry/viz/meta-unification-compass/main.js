@@ -1,6 +1,6 @@
 /* ORTHO//COMPASS: two pictures from the second half of Chapter 32, on one rail.
-   Compass: the three diagnostic axes of §32.3 (θ grade, η resolution, λ observer) as a cube [0, 1]³; each of the
-          eight programmes of §32.4 sits in the band of each axis that the words of the §32.4 table name (one end,
+   Compass: the three diagnostic axes of §32.6 (θ grade, η resolution, λ observer) as a cube [0, 1]³; each of the
+          eight programmes of §32.6 sits in the band of each axis that the words of the §32.6 table name (one end,
           the other end, or the middle third when the table names neither or both). These places are the book's
           comparative diagnostic coordinates (MODEL); the rail reads the four camps one by one.
    Bridge: the binary icosahedral group 2I computed exactly in ℤ[φ]; the icosian ring with Q(q) = 2(a + b) for
@@ -209,7 +209,7 @@
   }
   const nrdText = ([a, b]) => (b === 0 ? String(a).replace('-', '−') : `${a === 0 ? '' : `${a} ${b < 0 ? '−' : '+'} `}${a === 0 && b < 0 ? '−' : ''}${Math.abs(b) === 1 ? '' : Math.abs(b)}φ`);
 
-  /* ---------- compass: the eight programmes, coded from the words of §32.4 ---------- */
+  /* ---------- compass: the eight programmes, coded from the words of §32.6 ---------- */
   const LO = 0.12, HI = 0.88;
   // [id, camp, θ, η, λ, short zh, short en, name zh, name en, why θ, why η, why λ] — middle values spread inside the middle third
   const PROG = [
@@ -540,7 +540,7 @@
         rows = row('wide', 'θ 阶数', 'θ grade', L(...p.why[0])) + row('wide', 'η 分辨率', 'η resolution', L(...p.why[1])) + row('wide', 'λ 观察者', 'λ observer', L(...p.why[2]))
           + row('', '阵营', 'camp', p.camp ? `${p.camp} · ${L(...CAMPS[p.camp])}` : L('本书（诠释）', 'the book (a reading)'));
         note = p === BOOK ? L('这是本书给自己标的位置，是诠释，不是结论：它不说明本书推出或取代了任何一家纲领。', 'This is where the book places itself, a reading and not a result: it does not say the book derives or replaces any programme.')
-          : L('坐标只说落在哪一段，依据就是上面引的 §32.4 原话；没点明的轴落在中段。这是本书的比较诊断，不是对这门学科的评判。', 'A coordinate says only which band, on the strength of the §32.4 words quoted above; an axis the table does not name falls in the middle band. This is the book\'s comparative diagnosis, not a verdict on the field.');
+          : L('坐标只说落在哪一段，依据就是上面引的 §32.6 原话；没点明的轴落在中段。这是本书的比较诊断，不是对这门学科的评判。', 'A coordinate says only which band, on the strength of the §32.6 words quoted above; an axis the table does not name falls in the middle band. This is the book\'s comparative diagnosis, not a verdict on the field.');
       } else {
         keyName = L('八家纲领 · 四大阵营', 'eight programmes · four camps');
         keyVal = camp ? PROG.filter((q) => q.camp === camp).map((q) => L(...q.short)).join(' ↔ ') : L('8 个点 · 每根轴三段', '8 dots · three bands per axis');
@@ -548,7 +548,7 @@
           + row('', '在面积（外积）一端', 'at the area (outer product) end', String(PROG.filter((q) => band(q.c[0]) === 2).length))
           + row('', '在多面体一端', 'at the polytope end', String(PROG.filter((q) => band(q.c[1]) === 2).length))
           + row('', '在球外 C 一端', 'at the outside-C end', String(PROG.filter((q) => band(q.c[2]) === 0).length));
-        note = L('每个点只说那一家在三根轴上各落在哪一段：§32.4 总表点明偏向哪一端，就落在那一端；没点明或两端都有，落在中段。点一个点看依据。', 'Each dot says only which band of each axis a programme falls in: where the §32.4 table names the end it leans to, it sits at that end; where it names neither or both, in the middle. Click a dot to see the words behind it.');
+        note = L('每个点只说那一家在三根轴上各落在哪一段：§32.6 总表点明偏向哪一端，就落在那一端；没点明或两端都有，落在中段。点一个点看依据。', 'Each dot says only which band of each axis a programme falls in: where the §32.6 table names the end it leans to, it sits at that end; where it names neither or both, in the middle. Click a dot to see the words behind it.');
       }
       aside = 'MODEL';
       pill = ['θ·η·λ', camp ? L(`阵营 ${camp}`, `CAMP ${camp}`) : '—'];
@@ -646,7 +646,7 @@
     fold: { scene: 'bridge', sel: PICKS[3][1], from: 2, to: 4, still: 4 }
   };
   const NOTES = {
-    cube: ['三根轴取自 §32.3：θ 从线（青）到面积（品红），η 从光滑到多面体，λ 从球外的点 C 到场内的观察者。八个点是 §32.4 的八家纲领，按总表原话落在各轴的三段之一（本书的诊断坐标）。', 'The three axes come from §32.3: θ runs from line (cyan) to area (magenta), η from smooth to polytope, λ from the outside point C to the observer inside. The eight dots are the eight programmes of §32.4, each in one of three bands of every axis according to the words of the table (the book\'s diagnostic coordinates).'],
+    cube: ['三根轴取自 §32.6：θ 从线（青）到面积（品红），η 从光滑到多面体，λ 从球外的点 C 到场内的观察者。八个点是 §32.6 的八家纲领，按总表原话落在各轴的三段之一（本书的诊断坐标）。', 'The three axes come from §32.6: θ runs from line (cyan) to area (magenta), η from smooth to polytope, λ from the outside point C to the observer inside. The eight dots are the eight programmes of §32.6, each in one of three bands of every axis according to the words of the table (the book\'s diagnostic coordinates).'],
     camps: ['时间轴逐个读四大阵营，每一对连成一条线，琥珀色是正在读的那一对：弦论与圈量子引力只在 η 上分开（光滑对多面体）；AdS/CFT 与扭量都贴着 λ 的球外一端；第三、第四阵营的两家在两三根轴上都不同。', 'The rail reads the four camps one by one and joins each pair with a line; the pair being read is amber. String theory and loop quantum gravity part only along η (smooth against polytope); AdS/CFT and twistors both sit at the outside end of λ; the two programmes of the third and fourth camps differ along two or three axes.'],
     crystal: ['画出本书给自己标的位置：θ 中段（几何积同时保留线与面积）、η 多面体一端、λ 场内一端。这是本书的诠释（MODEL），不是由八家纲领推出的结论。', 'The book\'s place for itself, drawn in: θ in the middle (the geometric product keeps line and area together), η at the polytope end, λ at the inside end. This is the book\'s reading (MODEL), not a conclusion derived from the eight programmes.'],
     icosians: ['二元二十面体群的 120 个单位四元数，去掉实部 w 投到三维，按 w 从 1 到 −1 一层层出现：1、12、20、12、30、12、20、12、1；实部为负的一半落在同样的位置，画成空心圈。琥珀圈是 (1 + i + j + k)/2：它那一层的 20 个位置围成实心的正十二面体，其余各层只画出棱。', 'The 120 unit quaternions of the binary icosahedral group, projected to three dimensions by dropping the real part w, appear shell by shell as w runs from 1 to −1: 1, 12, 20, 12, 30, 12, 20, 12, 1; the half with negative real part lands on the same places, drawn as open rings. The amber ring is (1 + i + j + k)/2: the 20 places of its shell enclose a solid dodecahedron, and the other shells are drawn by their edges.'],

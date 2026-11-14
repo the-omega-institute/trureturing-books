@@ -316,10 +316,10 @@ const readBook = (lang) => {
   return { order, cites };
 };
 const BI = { zh: readBook('zh'), en: readBook('en') };
-const UNITS2 = BI.zh.order.map((u) => u.file), COLS2 = UNITS2.filter((f) => f !== INDEX), APPD = 'appendix-d.md', CD = COLS2.indexOf(APPD);
-check('both SUMMARY files list the same units in the same order; every unit but Appendix C is a column, the last one Appendix D',
+const UNITS2 = BI.zh.order.map((u) => u.file), COLS2 = UNITS2.filter((f) => f !== INDEX), APPE = 'appendix-e.md', CE = COLS2.indexOf(APPE);
+check('both SUMMARY files list the same units in the same order; every unit but Appendix C is a column, the last one Appendix E',
   JSON.stringify(BI.en.order.map((u) => u.file)) === JSON.stringify(UNITS2) && JSON.stringify(UNITS2) === JSON.stringify(files) && UNITS2.includes(INDEX)
-  && JSON.stringify(COLS2) === JSON.stringify(columns) && COLS2.length === UNITS2.length - 1 && CD === COLS2.length - 1, `${UNITS2.length} units, ${COLS2.length} columns, Appendix D at ${CD}`);
+  && JSON.stringify(COLS2) === JSON.stringify(columns) && COLS2.length === UNITS2.length - 1 && CE === COLS2.length - 1, `${UNITS2.length} units, ${COLS2.length} columns, Appendix E at ${CE}`);
 const sameCites = (a, b) => a.size === b.size && [...a].every(([k, m]) => b.get(k) === m);
 const langDiff = UNITS2.filter((f) => !sameCites(BI.zh.cites[f], BI.en.cites[f]));
 check('every unit cites the same declarations, environment or inline, in Chinese and in English', langDiff.length === 0, langDiff.join(', '));
@@ -350,10 +350,15 @@ for (const lang of ['zh', 'en']) {
   }
 }
 const unitNameOk = (lang, file, title, shown) => (SECTION[lang][file] ? shown === SECTION[lang][file] : nameFits(title, shown));
-const CH30 = columns.findIndex((f) => f.startsWith('ch30-')), SEC30 = Object.keys(SECTION.zh);
-check('SUMMARY hierarchy: Chapter 30 has six child pages, columns right after it, named 第三十章·1 … ·6 / Section 30.1 … 30.6 in both languages',
-  SEC30.length === 6 && SEC30.every((f, k) => columns[CH30 + 1 + k] === f && f.startsWith(`ch30-s0${k + 1}-`) && SECTION.zh[f] === `第三十章·${k + 1}` && SECTION.en[f] === `Section 30.${k + 1}`)
-  && JSON.stringify(Object.keys(SECTION.en)) === JSON.stringify(SEC30) && columns.length === 50 && files.length === 51 && files.length - SEC30.length === 45, JSON.stringify({ CH30, SEC30, n: columns.length }));
+const CH30 = columns.findIndex((f) => f.startsWith('ch30-')), SEC30 = Object.keys(SECTION.zh).filter((f) => f.startsWith('ch30-s'));
+const CH32 = columns.findIndex((f) => f.startsWith('ch32-')), SEC32 = Object.keys(SECTION.zh).filter((f) => f.startsWith('ch32-s'));
+for (const [chapter, at, sections, name] of [[30, CH30, SEC30, '第三十章'], [32, CH32, SEC32, '第三十二章']]) {
+  check(`SUMMARY hierarchy: Chapter ${chapter} has six child pages directly after it, named consistently in both languages`,
+    sections.length === 6 && sections.every((f, k) => columns[at + 1 + k] === f && f.startsWith(`ch${chapter}-s0${k + 1}-`) && SECTION.zh[f] === `${name}·${k + 1}` && SECTION.en[f] === `Section ${chapter}.${k + 1}`), JSON.stringify({ chapter, at, sections }));
+}
+check('SUMMARY hierarchy: both languages have twelve child pages, 57 columns and 58 files including Appendix E',
+  JSON.stringify(Object.keys(SECTION.en)) === JSON.stringify([...SEC30, ...SEC32]) && columns.length === 57 && files.length === 58 && files.length - SEC30.length - SEC32.length === 46 && columns.at(-1) === APPE,
+  JSON.stringify({ columns: columns.length, files: files.length }));
 const SAYS = { zh: (name, n) => [`${name}引用 ${n} 条 · `, `${name}引用 ${n} 条声明`], en: (name, n) => [`${name} cites ${n} · `, `${name} cites ${n} declarations`] };
 const NONE = { zh: '无', en: 'none' }, CITES = { zh: '引用', en: ' cites ' };
 const readout = (p) => p.evaluate(() => {
@@ -393,29 +398,29 @@ async function sweep(p, lang, how) {
   }
   return { n, wrong, bad };
 }
-async function appendixD(p, lang, how, tag) {
+async function appendixE(p, lang, how, tag) {
   await chips(p, 'all', 'all'); await showStage(p);
-  if ((await readout(p)).st.srcCol === CD) await choose(p, how, how === 'slider' ? -1 : CD);   // start from another state
-  let r = await choose(p, how, CD);
-  const want = wantFocus(CD, 'all'), [hud] = SAYS[lang](r.shown, want.length);
-  check(`${tag}: the last column is Appendix D (Appendix C has none) and looks back over its own ${want.length} citations, not Appendix C's ${BI.zh.cites[INDEX].size}`,
-    want.length > 0 && want.length < BI.zh.cites[INDEX].size && r.st.src === APPD && r.st.srcCol === CD && JSON.stringify(r.st.focus) === JSON.stringify(want) && JSON.stringify(r.st.arcs.cyan) === JSON.stringify(want)
-    && nameFits(BI[lang].order.find((u) => u.file === APPD).title, r.shown) && r.hud.startsWith(hud) && r.max === String(NC - 1) && JSON.stringify(r.cols) === JSON.stringify(COLS2),
+  if ((await readout(p)).st.srcCol === CE) await choose(p, how, how === 'slider' ? -1 : CE);   // start from another state
+  let r = await choose(p, how, CE);
+  const want = wantFocus(CE, 'all'), [hud] = SAYS[lang](r.shown, want.length);
+  check(`${tag}: the last column is Appendix E (Appendix C has none) and looks back over its own ${want.length} citations, not Appendix C's ${BI.zh.cites[INDEX].size}`,
+    want.length > 0 && want.length < BI.zh.cites[INDEX].size && r.st.src === APPE && r.st.srcCol === CE && JSON.stringify(r.st.focus) === JSON.stringify(want) && JSON.stringify(r.st.arcs.cyan) === JSON.stringify(want)
+    && nameFits(BI[lang].order.find((u) => u.file === APPE).title, r.shown) && r.hud.startsWith(hud) && r.max === String(NC - 1) && JSON.stringify(r.cols) === JSON.stringify(COLS2),
     JSON.stringify({ src: r.st.src, focus: r.st.focus.length, want: want.length, shown: r.shown, hud: r.hud, max: r.max }));
   await p.click('[data-mode="env"]'); await settle(p); r = await readout(p);
-  const wantEnv = wantFocus(CD, 'env');
-  check(`${tag}: “environments only” leaves Appendix D the ${wantEnv.length} lean= citations it has`, r.st.src === APPD && JSON.stringify(r.st.focus) === JSON.stringify(wantEnv) && r.hud.startsWith(SAYS[lang](r.shown, wantEnv.length)[0]), r.hud);
+  const wantEnv = wantFocus(CE, 'env');
+  check(`${tag}: “environments only” leaves Appendix E the ${wantEnv.length} lean= citations it has`, r.st.src === APPE && JSON.stringify(r.st.focus) === JSON.stringify(wantEnv) && r.hud.startsWith(SAYS[lang](r.shown, wantEnv.length)[0]), r.hud);
   await p.click('[data-mode="all"]'); await settle(p);
   await p.evaluate(() => document.activeElement && document.activeElement.blur && document.activeElement.blur());
   await p.keyboard.press('ArrowLeft'); await settle(p); const before = (await readout(p)).st;
   await p.keyboard.press('End'); await settle(p); const after = (await readout(p)).st;
-  const g = want.find((x) => amberWant(x, APPD).length > 0) || want[0];
+  const g = want.find((x) => amberWant(x, APPE).length > 0) || want[0];
   await showStage(p); const at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), g);
   await p.mouse.click(at[0], at[1]); await settle(p); const chosen = (await readout(p)).st;
   await p.mouse.click(at[0], at[1]); await settle(p); const released = (await readout(p)).st;
-  check(`${tag}: Appendix D's cyan lines wait until the rail has read it (← then End), and a chosen cell it cites sends amber only to the other chapters`,
+  check(`${tag}: Appendix E's cyan lines wait until the rail has read it (← then End), and a chosen cell it cites sends amber only to the other chapters`,
     before.t === NC - 1 && before.arcs.cyan.length === 0 && JSON.stringify(before.focus) === JSON.stringify(want) && after.t === NC && !after.playing && JSON.stringify(after.arcs.cyan) === JSON.stringify(want)
-    && chosen.sel === g && JSON.stringify(chosen.arcs.amber) === JSON.stringify(amberWant(g, APPD)) && chosen.arcs.cyan.includes(g) && released.sel === null,
+    && chosen.sel === g && JSON.stringify(chosen.arcs.amber) === JSON.stringify(amberWant(g, APPE)) && chosen.arcs.cyan.includes(g) && released.sel === null,
     JSON.stringify({ before: [before.t, before.arcs.cyan.length], after: [after.t, after.arcs.cyan.length], g, amber: chosen.arcs.amber }));
 }
 // every cell chosen by pointer: its rendered link is the lock's module file and line at the pinned commit
@@ -444,7 +449,7 @@ async function frame(p, lang, tag, opts) {
     check(`${tag}: ${how} × every citation / environments only × all / theorems / inline: the source is that SUMMARY unit, its cyan lines and count are exactly its citations, and its column holds what first appears there`,
       sw.wrong === 0 && sw.n === 3 * 2 * (NC + (opts.sweep === 'slider' ? 1 : 0)), JSON.stringify(sw));
   }
-  await appendixD(p, lang, opts.sweep || 'foot', tag);
+  await appendixE(p, lang, opts.sweep || 'foot', tag);
   const lk = await links(p, DOTTED);
   check(`${tag}: the two dotted declarations link to their modules' files at the lock's lines`, lk.ok === DOTTED.length, JSON.stringify(lk.bad));
   if (opts.links) {
@@ -460,7 +465,7 @@ const desktopEn = await T.open('quantum-geometry', 'lean-declaration-map', '?lan
 st0 = (await readout(desktopEn)).st;
 check('desktop 1440 px (en): the full page opens on the whole book read, not playing', st0.t === NC && !st0.playing && st0.preset === 'all');
 await frame(desktopEn, 'en', 'desktop 1440 px (en)', { sweep: 'foot' });
-// every frame checks Appendix D and the dotted names; the narrow ones sweep the filters, and the links of every cell are read
+// every frame checks Appendix E and the dotted names; the narrow ones sweep the filters, and the links of every cell are read
 // in two frames, one per language and width
 for (const [w, lang, sweepIt, linksIt] of [[334, 'zh', true, false], [334, 'en', true, true], [740, 'zh', false, false], [740, 'en', false, false]]) {
   const p = await T.open('quantum-geometry', 'lean-declaration-map', `?embed=1&lang=${lang}`, { viewport: { width: w, height: 620 }, locale: LOCALE[lang] });
