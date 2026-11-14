@@ -671,6 +671,216 @@ No convergence rate is presumed, and the book's unverified status makes no claim
 Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. If a particle-number-conserving Slater ground state is chosen, its actual occupied projector $P_{\mathrm{occ}}$ must be constructed and its correlation matrix compressed to a chosen set of sites $I$ as $\chi_I P_{\mathrm{occ}}\chi_I$, where $\chi_I$ projects onto those sites. Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. Even resolving this limit would address only a gap premise. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
 :::
 
+::: {.remark #rem-ch39-p2e-tridiagonal-localization title="Tridiagonal Localization with Boundary Residuals (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** Abruptly cutting a whole-line vector to a finite interval leaves residuals at both ends; a taper of sine weights controls that cost quantitatively. Chandler-Wilde–Chonchaiya–Lindner, *On spectral inclusion sets and computing the spectra and pseudospectra of bounded linear operators* ([*J. Spectr. Theory* **14**, 719–804](https://doi.org/10.4171/JST/514), §5.1, Corollaries 5.2 and 5.4), supply the following tool. Let $A$ be a bounded tridiagonal operator on $\ell^2(\mathbb{Z})$, with $M_\pm=\sup_{i\in\mathbb{Z}}|A_{i,i\pm1}|$. For a bounded operator $B$ with nonzero domain, write $\nu(B)=\inf_{\|x\|_2=1}\|Bx\|_2$. For every integer $n\ge1$, let $E_{n,k}$ be the space of vectors supported on sites $k+1,\ldots,k+n$. Then
+
+$$
+\begin{aligned}
+\inf_{k\in\mathbb{Z}}\nu\!\left(A|_{E_{n,k}}\right)
+&\le \nu(A)+\varepsilon_n,\\
+\varepsilon_n&=2(M_-+M_+)\sin\frac{\pi}{2(n+1)}.
+\end{aligned}
+$$
+
+Only the input support is restricted; the output remains on the whole line. The corresponding $(n+2)\times n$ matrix retains both outgoing residual rows and cannot be replaced by the $n\times n$ compression that discards them. The bound takes an infimum over positions; an actual interval and unit vector can be chosen with arbitrary positive slack. This supplies an $\ell^2$ localization tool of order $1/n$, while the preceding Tribonacci open-chain question still requires zero-spectrum membership for the corresponding whole-line model, transplantation of an actual word interval with its neighboring sites into the specified finite open prefixes, and checks of length ratios and small scales. Those interfaces remain unverified in this book.
+:::
+
+A second finite-matrix route uses an odd repeated block. An odd shift exchanges even and odd bonds, allowing two strings of hopping ratios from forward substitution to be paired. The following bound expresses that cancellation in entries of the actual inverse matrix.
+
+::: {.theorem #thm-ch39-p2e-odd-repeat-inverse-mass title="Inverse-Mass Bound for an Odd Repeated Block" lean="D5/S3/Quantum/Dynamics/OddSquareGreenMass.odd_square_inverse_paired_mass"}
+Let $q\in\mathbb{N}$ and $t:\mathbb{N}\to\mathbb{R}$ satisfy $0<t(i)\le1$ for every $i\in\mathbb{N}$, and assume
+
+$$
+t(i+2q+1)=t(i)\qquad(0\le i<2q).
+$$
+
+Set $n=2q+1$. Index the lower bidiagonal matrix $L\in\mathbb{R}^{n\times n}$ from zero, with entries
+
+$$
+\begin{aligned}
+L_{i,i}&=t(2i) &&(0\le i<n),\\
+L_{i+1,i}&=-t(2i+1) &&(0\le i<n-1).
+\end{aligned}
+$$
+
+All other entries vanish. Write $G=L^{-1}$ and, for $0\le l<q$ and $0\le d<q-l$, define the paired mass
+
+$$
+\begin{aligned}
+P_{l,d}&=G_{l+d+1,l}\\
+&\quad+G_{q+l+d+1,q+l+1}.
+\end{aligned}
+$$
+
+Every displayed matrix index lies in $0,\ldots,2q$, and
+
+$$
+q(q+1)\le\sum_{l=0}^{q-1}\sum_{d=0}^{q-l-1}P_{l,d}.
+$$
+
+For $q=0$, both sums are empty and have value zero.
+:::
+
+::: proof
+The positive diagonal lets forward substitution produce the actual inverse. Odd repetition makes the product of the two positive entries in each pair exactly $1/[t(2l)t(2(l+d+1))]\ge1$, so their sum is at least $2$. The triangular index domain has $q(q+1)/2$ pairs, giving the bound. The full proof is checked by the Lean kernel.
+:::
+
+If $m=2q+1$, $s$ is even, $W_{s+i+m}=W_{s+i}$ for $0\le i<m-1$, and $s+2m\le N_j$, setting $t(i)=t_{W_{s+i}}$ matches this matrix model and a $2m$-site window inside the prefix. The following theorem constructs the required windows from the substitution word itself and compares their lengths uniformly with the prefix length.
+
+::: {.theorem #thm-ch39-p2e-aligned-tribonacci-windows title="Uniform Odd Repetition Windows in Actual Tribonacci Prefixes" lean="D5/S1/Words/TribonacciAlignedWindows.aligned_windows"}
+For the actual word $W$ above, the substitution lengths $L_j=|\sigma^j(A)|$, and the even prefix lengths $N_j=2\lfloor L_j/2\rfloor$, there are natural constants $K>0$ and $J\ge1$ such that every natural $j\ge J$ admits natural numbers $m,s$ satisfying
+
+$$
+\begin{aligned}
+m&\ge3,\qquad m\text{ is odd},\quad s\text{ is even},\\
+N_j&\le Km,\qquad s+2m\le N_j,\\
+W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
+\end{aligned}
+$$
+
+The last line holds for every natural $i$ in the displayed range; the constants $K,J$ do not vary with $j$.
+:::
+
+::: proof
+The formal proof takes $K=128$ and $J=4$. The two copies of $ABA$ in the fourth iterate supply the repeated blocks. Four substitution steps preserve oddness of all three letter-image lengths, giving an odd block length and an even starting position. A nonempty tail keeps the whole window inside the prefix after even rounding, and seven length-growth steps give the factor $128$. The example below spells out this construction; the full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-ch39-p2e-aligned-tribonacci-windows title="An Explicit Odd Repetition Window"}
+For each $j\ge4$, set $r=\lfloor(j-4)/4\rfloor$ and $k=4r$, so $k+4\le j\le k+7$. Split the fourth iterate into four pieces:
+
+$$
+\sigma^4(A)=ABAC\,\vert\,ABA\,\vert\,ABA\,\vert\,CAB.
+$$
+
+Write $a=\sigma^k(A)$, $b=\sigma^k(B)$, and $c=\sigma^k(C)$; the vertical bars indicate concatenation, not additional letters. Applying $k$ further substitutions gives
+
+$$
+\sigma^{k+4}(A)=(abac)\,(aba)\,(aba)\,(cab).
+$$
+
+Take $s=|abac|$ and $m=|aba|$. At every level divisible by four, the lengths of $a,b,c$ are all odd: at level zero each length is $1$, and the fourth images of the three letters contain $13,11,7$ letters, respectively, so four substitution steps preserve this oddness. Thus $s$ is even, $m\ge3$ is odd, and the two copies of $aba$ supply the required equality. The nonempty tail $cab$ ensures that rounding the prefix length down to an even number preserves the entire repeated window. Each substitution at most doubles length, giving
+
+$$
+\begin{aligned}
+N_j&\le L_j\le L_{k+7}\le128L_k\le128m,\\
+s+2m&\le N_j,\\
+W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
+\end{aligned}
+$$
+
+Here $s,m$ are nonnegative integers, and the constant $128$ is independent of $j$ and the hopping parameter $\rho$. This gives explicit choices of the constants and windows in [@thm-ch39-p2e-aligned-tribonacci-windows].
+:::
+
+::: {.example #ex-ch39-p2e-full-inverse-euclidean title="From Local Mass to a Euclidean Estimate for the Full Inverse"}
+Take a positive hopping sequence $t$ bounded above by $1$, and let $G=L(t,n)^{-1}$ be the full inverse of the bidiagonal block above. Suppose integers $q\ge1$ and $a\ge0$ satisfy $a+2q+1\le n$ and
+
+$$
+t\bigl(2a+i+(2q+1)\bigr)=t(2a+i)\qquad(0\le i<2q).
+$$
+
+Set $x=(1,\ldots,1)\in\mathbb R^n$ and $v=x/\sqrt n$. With Euclidean norms throughout,
+
+$$
+\|v\|_2=1,\qquad q(q+1)\le 2n\|Gv\|_2.
+$$
+
+This inverse retains all exterior sites on both sides of the window. The forward-substitution inverse formula shows that shifting both indices of the local inverse by $a$ gives exactly the corresponding entry of $G$. All entries of $G$ are nonnegative, so each of the two triangular regions in [@thm-ch39-p2e-odd-repeat-inverse-mass] embeds into the full matrix, giving
+
+$$
+q(q+1)\le2\sum_{i,j=0}^{n-1}G_{ij}.
+$$
+
+The factor $2$ lets us bound the two regions separately without an additional disjointness argument. Meanwhile, Cauchy–Schwarz gives
+
+$$
+\begin{aligned}
+\sum_{i,j=0}^{n-1}G_{ij}&=\langle x,Gx\rangle,\\
+&\le\|x\|_2\|Gx\|_2,\\
+&=n\|Gv\|_2.
+\end{aligned}
+$$
+
+Combining the inequalities proves the estimate. For the preceding window, the parameter correspondence is $m=2q+1$, $s=2a$, $N_j=2n$. This is an application of the existing inverse-mass result, the forward-substitution formula and Euclidean inequalities. It introduces no new formal declaration, and this example carries no separate Lean verification badge.
+:::
+
+::: {.example #ex-ch39-p2e-open-chain-residual title="From the Full Inverse to a Spectral Residual Bound for a Finite Open Chain"}
+For an integer $n\ge1$, take a real hopping sequence $t:\mathbb N\to\mathbb R$ with $t_k>0$ for every $k\in\mathbb N$. On $2n$ sites indexed by natural numbers starting at zero, define the actual open-chain matrix $H\in\mathbb R^{2n\times2n}$ by
+
+$$
+H_{ij}=\begin{cases}
+t_i,&i+1=j,\\
+t_j,&j+1=i,\\
+0,&\text{otherwise},
+\end{cases}
+\qquad 0\le i,j<2n.
+$$
+
+Its diagonal is zero, its last physical bond is $t_{2n-2}$, and there is no closing bond. When $n=1$, it consists of two sites joined only by $t_0$. Let $B=L(t,n)$ be the lower bidiagonal block above, so
+
+$$
+\begin{aligned}
+B_{i,i}&=t_{2i} &&(0\le i<n),\\
+B_{i,i-1}&=-t_{2i-1} &&(1\le i<n),
+\end{aligned}
+$$
+
+with all other entries zero. Lower triangularity gives $\det B=\prod_{i=0}^{n-1}t_{2i}>0$, so the ordinary matrix inverse $G=B^{-1}$ exists. For every Euclidean unit vector $v\in\mathbb R^n$, there are a real number $\lambda$ and a nonzero real vector $z\in\mathbb R^{2n}$ such that
+
+$$
+\begin{aligned}
+Hz&=\lambda z,\\
+|\lambda|\,\|Gv\|_2&\le1.
+\end{aligned}
+$$
+
+To see this, reorder coordinates into even sites followed by odd sites, and write $C_{ij}=H_{2i,2j+1}$. The diagonal entries of $C$ are $t_{2i}$, its subdiagonal entries are $t_{2i-1}$, and all other entries vanish. Set $D=\operatorname{diag}((-1)^i)_{i=0}^{n-1}$. Then $D^2=I$, and entrywise calculation gives
+
+$$
+\begin{aligned}
+H&=\begin{pmatrix}0&C\\C^{\mathsf T}&0\end{pmatrix},\\
+DCD&=B,\qquad CD=DB.
+\end{aligned}
+$$
+
+The first line denotes the reordered matrix. Construct an auxiliary vector $u$ by setting $u_{\mathrm{even}}=0$ and $u_{\mathrm{odd}}=DGv$. Since $BG=I$,
+
+$$
+\begin{aligned}
+(Hu)_{\mathrm{even}}&=CDGv=DBGv=Dv,\\
+(Hu)_{\mathrm{odd}}&=0,\\
+\|u\|_2&=\|Gv\|_2,\qquad \|Hu\|_2=1.
+\end{aligned}
+$$
+
+Here $D$ only changes coordinate signs, preserving the Euclidean norm; $BGv=v\ne0$ also ensures $u\ne0$. Since $H$ is a finite real symmetric matrix, take a real orthonormal eigenbasis $e_k$ with real eigenvalues $\lambda_k$ ($0\le k<2n$). Set $\alpha=\min_{0\le k<2n}|\lambda_k|$ and substitute $u=\sum_k c_ke_k$ into Parseval's identity to obtain
+
+$$
+\begin{aligned}
+\alpha^2\|u\|_2^2
+&=\alpha^2\sum_{k=0}^{2n-1}c_k^2,\\
+&\le\sum_{k=0}^{2n-1}\lambda_k^2c_k^2
+=\|Hu\|_2^2=1.
+\end{aligned}
+$$
+
+The finite nonempty set of eigenvalues contains an index $k_0$ with $|\lambda_{k_0}|=\alpha$. Choose $\lambda=\lambda_{k_0}$ and $z=e_{k_0}$; taking square roots gives the claimed inequality. The selected $z$ is an eigenvector; the auxiliary vector $u$ generally is not. This example requires no upper bound on the hoppings.
+
+If the upper-bound and repeated-window hypotheses of [@ex-ch39-p2e-full-inverse-euclidean] also hold, use the same unit vector $v$ as in that example to obtain
+
+$$
+\begin{aligned}
+|\lambda|q(q+1)
+&\le2n|\lambda|\,\|Gv\|_2\le2n,\\
+\delta:=\min_{\mu\in\operatorname{Spec}(H)}|\mu|
+&=|\lambda|\le\frac{2n}{q(q+1)}.
+\end{aligned}
+$$
+
+This converts the mass estimate for the full inverse into a bound on the spectral distance to zero energy for the same finite open chain.
+:::
+
+The example completes the spectral conversion for any finite open chain with positive hoppings. A rate along the full sequence of actual Tribonacci prefixes still requires an exact assembly of the word hoppings $t_i=t_{W_i}$, aligned repeated windows and full-inverse mass estimate under a single parameter convention, together with treatment of the initial short prefixes. This section has not established that, for every fixed $\rho\in(0,1)$, there are $C_\rho>0$ and an integer $J_\rho\ge1$ such that $\delta_{\rho,j}\le C_\rho/N_j$ for every $j\ge J_\rho$. Such a quantitative bound would imply the preceding open-chain limit; fractal entropy scaling still requires a separate argument involving physical states and spatial cuts.
+
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`, shift entropy and Abramov's formula carry status `Literature`, and fractal area scaling carries status `OPEN`.
 :::

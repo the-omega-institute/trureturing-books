@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "d77855ba196f70517af8fb7a3d7004b3022460a8",
-  "pinned_at": "2026-11-14T00:35:50Z",
+  "commit": "b4a6f25056b7d7451df9b06e226c74cfd85940ac",
+  "pinned_at": "2026-11-14T02:32:08Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -636,6 +636,14 @@
       "statement_id": "sha256:d35819009aa794a0b78237d4b9d53f418f29ff9fda45942dbbc5ed0de749b9cc",
       "line": 41,
       "signature": "noncomputable def silverSlope : Real"
+    },
+    "D5/S1/Words/TribonacciAlignedWindows.aligned_windows": {
+      "module": "D5/S1/Words/TribonacciAlignedWindows",
+      "name": "D5.S1.Words.TribonacciAlignedWindows.aligned_windows",
+      "kind": "theorem",
+      "statement_id": "sha256:12e36e1225ead25dfa83ca0158b01a590de046d8cf4b6a65e4b072259b731c61",
+      "line": 99,
+      "signature": "theorem aligned_windows : ∃ K : ℕ, 0 < K ∧ ∃ J : ℕ, 1 ≤ J ∧ ∀ j : ℕ, J ≤ j → ∃ m s : ℕ, 3 ≤ m ∧ Odd m ∧ Even s ∧ N j ≤ K*m ∧ s+2*m ≤ N j ∧ ∀ i : ℕ, i < m-1 → W (s+i+m) = W (s+i)"
     },
     "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff": {
       "module": "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint",
@@ -3220,6 +3228,14 @@
       "statement_id": "sha256:3bab964c7fe2ab39dea7a0b332d633f68051a87d107b430876d8ae3a87f3baeb",
       "line": 37,
       "signature": "theorem observer_pullback_trace_identity (channel : QuantumChannel d d) (heisenberg : MatrixAlgebra d →CP MatrixAlgebra d) (hduality : ∀ state effect : MatrixAlgebra d, Matrix.trace (channel.toCompletelyPositiveMap state * effect) = Matrix.trace (state * heisenberg effect)) (t : Nat) (rho : DensityState d) (effect : MatrixAlgebra d) : Matrix.trace ((evolvedState channel t rho).1 * effect) = Matrix.trace (rho.1 * ((fun A : MatrixAlgebra d => heisenberg A)^[t]) effect)"
+    },
+    "D5/S3/Quantum/Dynamics/OddSquareGreenMass.odd_square_inverse_paired_mass": {
+      "module": "D5/S3/Quantum/Dynamics/OddSquareGreenMass",
+      "name": "D5.S3.Quantum.Dynamics.OddSquareGreenMass.odd_square_inverse_paired_mass",
+      "kind": "theorem",
+      "statement_id": "sha256:8665a3799dac04c9e1ce83abcf91b59041dacf5e126238d51475356374cbcca0",
+      "line": 180,
+      "signature": "theorem odd_square_inverse_paired_mass (t : ℕ → ℝ) (q : ℕ) (ht : ∀ i, 0 < t i) (hu : ∀ i, t i ≤ 1) (hp : ∀ i < 2 * q, t (i + (2 * q + 1)) = t i) : (q : ℝ) * (q + 1) ≤ ∑ l : Fin q, ∑ d : Fin (q - l.val), ((lowerBlock t (2 * q + 1))⁻¹ ⟨l.val + d.val + 1, by have"
     },
     "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result": {
       "module": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation",

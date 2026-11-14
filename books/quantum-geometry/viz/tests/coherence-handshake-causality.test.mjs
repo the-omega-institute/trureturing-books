@@ -477,6 +477,74 @@ await page.click('[data-lang-set="zh"]'); await settle(page);
   await p2.context().close();
 }
 
+/* ---------- loop drag through a live header wrap (also run with VIZ_SLOW_FRAMES=1000) ---------- */
+{
+  const wrap = await T.open(BOOK, ID, '?lang=zh', { viewport: { width: 1408, height: 900 } });
+  await settle(wrap);
+  await wrap.click('[data-preset="paradox-cancel"]'); await settle(wrap);
+  await wrap.click('#loopSnaps [data-snap="0"]'); await settle(wrap);
+  await wrap.evaluate(async () => {
+    await document.fonts.ready;
+    // Font metrics move the natural wrap threshold between platforms. Leave one digit's room at τ = 0.
+    const header = document.querySelector('header.top'), brand = header.querySelector('.brand'), status = header.querySelector('.status');
+    status.style.flex = '0 0 auto';
+    const style = getComputedStyle(header), gap = parseFloat(style.columnGap);
+    const width = header.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    const digitStyle = getComputedStyle(status.querySelector('#pillKey strong'));
+    const ctx = document.createElement('canvas').getContext('2d'); ctx.font = digitStyle.font;
+    const room = ctx.measureText('0').width + (parseFloat(digitStyle.letterSpacing) || 0) + 2;
+    brand.style.flex = `0 0 ${width - status.getBoundingClientRect().width - gap - room}px`;
+  });
+  await settle(wrap);
+  const start = await wrap.evaluate(() => ({
+    at: window.__HANDSHAKE_LAB__.at('loop'),
+    top: document.querySelector('#cv').getBoundingClientRect().top,
+    tau: window.__HANDSHAKE_LAB__.state.params.tau
+  }));
+  check('loop wrap (1408 × 900, zh): drag starts at τ = 0', near(start.tau, 0));
+  await wrap.mouse.move(...start.at); await wrap.mouse.down();
+  let worst = 0, topShift = 0, pointerError = 0;
+  for (let degrees = 10; degrees <= 180; degrees += 10) {
+    const delta = degrees * DEG;
+    const before = await wrap.evaluate((point) => ({
+      target: window.__HANDSHAKE_LAB__.at('loop', point),
+      top: document.querySelector('#cv').getBoundingClientRect().top
+    }), [0.5 + 0.5 * Math.cos(delta), 0.5 * Math.sin(delta)]);
+    await wrap.mouse.move(...before.target); await settle(wrap);
+    const actual = await wrap.evaluate(() => ({
+      tau: window.__HANDSHAKE_LAB__.state.params.tau,
+      top: document.querySelector('#cv').getBoundingClientRect().top,
+      at: window.__HANDSHAKE_LAB__.at('loop')
+    }));
+    worst = Math.max(worst, Math.abs(actual.tau - degrees / 180));
+    topShift = Math.max(topShift, actual.top - start.top);
+    // A wrap moves the drawing after that input; the following input must follow the newly drawn circle.
+    if (near(actual.top, before.top)) pointerError = Math.max(pointerError,
+      Math.hypot(actual.at[0] - before.target[0], actual.at[1] - before.target[1]));
+  }
+  await wrap.mouse.up(); await settle(wrap);
+  const tau = await wrap.evaluate(() => window.__HANDSHAKE_LAB__.state.params.tau);
+  check('loop wrap (1408 × 900, zh): the header moves the canvas during the drag', topShift > 20, `canvas shift ${topShift}px`);
+  check('loop wrap (1408 × 900, zh): every pointer angle stays within the original τ tolerance', worst < 0.06, `max τ error ${worst}`);
+  check('loop wrap (1408 × 900, zh): the arrow follows the pointer after reflow', pointerError < 2, `max pointer error ${pointerError}px`);
+  check('loop wrap (1408 × 900, zh): the real mouse drag reaches δ = 180°', Math.abs(tau - 1) < 0.06, `τ ${tau}`);
+  await wrap.context().close();
+}
+
+/* ---------- changing scenes ends the active pointer drag ---------- */
+{
+  await set({ scene: 'paradox-cancel', tau: 0.25 });
+  const at = await LAB(() => window.__HANDSHAKE_LAB__.at('loop')), errorsBefore = T.errors.length;
+  await page.mouse.move(...at); await page.mouse.down();
+  await page.keyboard.press('3'); await settle(page);
+  const tau = (await state()).params.tau;
+  await page.mouse.move(at[0] + 40, at[1] + 10); await page.mouse.up(); await settle(page);
+  const after = await state();
+  check('drag: switching scenes while the pointer is held cancels the old handle',
+    after.scene === 'feynman-stationary' && near(after.params.tau, tau) && T.errors.length === errorsBefore,
+    T.errors.slice(errorsBefore).join(' | '));
+}
+
 /* ---------- presets, rail, keys, language, motion, touch ---------- */
 {
   const seen = [];
