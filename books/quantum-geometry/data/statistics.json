@@ -3,7 +3,7 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 179,
+    "theorem": 180,
     "lemma": 34,
     "proposition": 45,
     "corollary": 30,
@@ -12,16 +12,16 @@
     "problem": 3,
     "example": 112,
     "remark": 188,
-    "proof": 285,
-    "lean_verified": 285,
+    "proof": 286,
+    "lean_verified": 286,
     "written_proof": 3,
     "literature": 190
   },
-  "total": 608,
+  "total": 610,
   "kinds": {
     "def": 157,
     "inductive": 10,
-    "theorem": 441
+    "theorem": 443
   },
   "groups": {
     "theorems": [
@@ -154,6 +154,8 @@
       "D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone",
       "D5/S3/Fourier/GoldenModelSetDelone.norm_separation",
       "D5/S3/Fourier/TorusOrbitClosure.result",
+      "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_lower_bound",
+      "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_upper_bound",
       "D5/S3/Geometry/FixedPoint/Brouwer.Brouwer",
       "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover",
       "D5/S3/Geometry/Rauzy/TribonacciNullBoundary.rauzyFractal_frontier_volume_zero",
@@ -8101,6 +8103,30 @@
           "line": 249,
           "id": "",
           "via": "inline"
+        }
+      ]
+    },
+    "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_lower_bound": {
+      "kind": "theorem",
+      "name": "D5.S3.Geometry.BooleanRotationCodebook.finite_codebook_lower_bound",
+      "citations": [
+        {
+          "file": "ch35-light-pulse-and-self-referential-table.md",
+          "line": 347,
+          "id": "thm-ch35-uniform-rotation-codebook-capacity",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_upper_bound": {
+      "kind": "theorem",
+      "name": "D5.S3.Geometry.BooleanRotationCodebook.finite_codebook_upper_bound",
+      "citations": [
+        {
+          "file": "ch35-light-pulse-and-self-referential-table.md",
+          "line": 347,
+          "id": "thm-ch35-uniform-rotation-codebook-capacity",
+          "via": "environment"
         }
       ]
     },
@@ -19936,6 +19962,8 @@
         "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package",
         "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode",
         "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion",
+        "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_lower_bound",
+        "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_upper_bound",
         "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal",
         "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior",
         "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity",

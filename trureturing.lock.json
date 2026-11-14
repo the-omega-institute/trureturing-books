@@ -2245,6 +2245,22 @@
       "line": 24,
       "signature": "theorem result {I : Type*} [Fintype I] (g z : I → Circle) : z ∈ closure (range (fun n : ℕ => g ^ n)) ↔ ∀ k : I → ℤ, (∏ i, (g i) ^ (k i)) = 1 → (∏ i, (z i) ^ (k i)) = 1"
     },
+    "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_lower_bound": {
+      "module": "D5/S3/Geometry/BooleanRotationCodebook",
+      "name": "D5.S3.Geometry.BooleanRotationCodebook.finite_codebook_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:1c05fc7bddec088202fb9af7d1fcc0a5f58c9ba1086a320bcefa0b18d1af68f1",
+      "line": 410,
+      "signature": "theorem finite_codebook_lower_bound (n : ℕ) {L ε : ℝ} (hε : 0 < ε) (hL : 3 * ε < L) (C : Finset (Fin n → ℝ)) (hC : Adequate n L ε C) : (n.factorial : ℝ) * L ^ n ≤ (C.card : ℝ) * (2 * n).choose n * ε ^ n"
+    },
+    "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_upper_bound": {
+      "module": "D5/S3/Geometry/BooleanRotationCodebook",
+      "name": "D5.S3.Geometry.BooleanRotationCodebook.finite_codebook_upper_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:1c05fc7bddec088202fb9af7d1fcc0a5f58c9ba1086a320bcefa0b18d1af68f1",
+      "line": 527,
+      "signature": "theorem finite_codebook_upper_bound (n : ℕ) (hn : 0 < n) {L ε : ℝ} (hL : 0 < L) (hε : 0 < ε) : ∃ C : Finset (Fin n → ℝ), Adequate n L ε C ∧ C.card ≤ (⌈L * n / (2 * ε)⌉₊) ^ n ∧ (L = 2 * Real.pi → FixedDecoderAdequate n ε C)"
+    },
     "D5/S3/Geometry/FixedPoint/Brouwer.Brouwer": {
       "module": "D5/S3/Geometry/FixedPoint/Brouwer",
       "name": "D5.S3.Geometry.FixedPoint.Brouwer",

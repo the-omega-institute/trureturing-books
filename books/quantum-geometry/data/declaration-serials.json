@@ -1,6 +1,6 @@
 {
   "next": {
-    "T": 319,
+    "T": 321,
     "D": 115,
     "R": 177
   },
@@ -609,6 +609,8 @@
     "D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState": "R171",
     "D5/S3/Quantum/Routing/HannRouterDephasing.result": "T318",
     "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_boundary_walk": "R172",
+    "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_lower_bound": "T319",
+    "D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_upper_bound": "T320",
     "D5/S3/Quantum/Divergence/SpectralCeilingRelativeEntropy.actual_matrix_spectral_ceiling_strong_klein": "R173",
     "D5/S3/Quantum/Information/StrongSubadditivity.entropy_relabelState": "R174",
     "D5/S3/Quantum/Information/StrongSubadditivity.entropy_toMState": "R175",

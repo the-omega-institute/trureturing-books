@@ -289,6 +289,162 @@ By the planar rotation homomorphism $R(\alpha)R(\beta) = R(\alpha + \beta)$, the
 **Row $0$ holds the composition rule, and eight flat rows shrink to four.** With $n = 3$ and $w = (1, 0, 1)$, the flat table on the left fills $2^3 = 8$ cyan rows of "input $\mapsto$ parity"; on the right the violet Row $0$ holds the read-out rule $T(x) = \bigoplus_r x_r\,T(\mathbf{e}_r)$ above just three cyan basis rows. Amber marks the same query $x = 111$: the left table finds it in its last row, the right one computes $1\cdot 1 \oplus 1\cdot 0 \oplus 1\cdot 1 = 0$ through Row $0$, and both read out the same value (a literature result, not formalized in this book; see [@ex-ch35-self-indexing-table-rank-collapse]).
 :::
 
+### 35.3.1 Uniform Capacity Bounds for Finite Boolean Rotation Codebooks
+
+The preceding example compares row counts when a composition law is known. We now express “choose one row for each parameter, and let that row answer every Boolean query” as a geometric covering problem for a prescribed decoder. Take an integer $n\ge 1$ and a real number
+
+$$
+0<\varepsilon<\frac{2\pi}{3},
+$$
+
+and set
+
+$$
+Q_n=\{0,1\}^n,\qquad
+d_{2\pi}(t)=\inf_{k\in\mathbb Z}|t-2\pi k|.
+$$
+
+For a finite codebook $C\subset\mathbb R^n$, say that $C$ is adequate for $(n,\varepsilon)$ when
+
+$$
+\forall\theta\in\mathbb R^n\quad
+\exists\phi\in C\quad
+\forall x\in Q_n,\qquad
+d_{2\pi}\!\left(\sum_{i=1}^{n}x_i(\theta_i-\phi_i)\right)\le\varepsilon .
+$$
+
+The $\phi$ is one and the same codeword: it is selected after seeing $\theta$ and before seeing the query $x$, and it serves every query for that $\theta$; the finite set $C$ is fixed before all $\theta$. Writing the query by its support
+
+$$
+s_x=\{\,i:x_i=1\,\}\subseteq\{1,\ldots,n\}
+$$
+
+is only a change of notation, since
+
+$$
+\sum_{i\in s_x}(\theta_i-\phi_i)
+=\sum_{i=1}^{n}x_i(\theta_i-\phi_i).
+$$
+
+The fixed Row $0$ decoder is the literal real matrix
+
+$$
+R(\alpha)=
+\begin{pmatrix}
+\cos\alpha&-\sin\alpha\\
+\sin\alpha&\cos\alpha
+\end{pmatrix}\in SO(2).
+$$
+
+$$
+D_\phi(x)=R\!\left(\sum_{i=1}^{n}x_i\phi_i\right).
+$$
+
+Matrix equality means equality entry by entry as real matrices, and $R(\alpha+2\pi)=R(\alpha)$; there is no quotient by a global phase.
+
+This is the common $L=2\pi$ specialization of the general conclusions: the lower bound assumes $3\varepsilon<L$, the upper bound assumes $n>0,L>0,\varepsilon>0$, and the literal matrix clause takes $L=2\pi$. We use only the common range stated above.
+
+::: {.theorem #thm-ch35-uniform-rotation-codebook-capacity title="Uniform Capacity Bounds for Finite Boolean Rotation Codebooks" lean="D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_lower_bound D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_upper_bound"}
+For $n\ge1$ and $0<\varepsilon<2\pi/3$ as above:
+
+1. Every adequate finite codebook $C$ satisfies
+
+   $$
+   |C|\binom{2n}{n}\varepsilon^n\ge n!(2\pi)^n.
+   $$
+
+2. There exists an adequate finite codebook $C$ satisfying
+
+   $$
+   |C|\le\left\lceil\frac{\pi n}{\varepsilon}\right\rceil^n,
+   $$
+   and the same $C$ also satisfies the literal matrix-decoder condition: for every $\theta\in\mathbb R^n$, there is one $\phi\in C$ such that for every $x\in Q_n$, there is a real $\delta$ with
+
+   $$
+   |\delta|\le\varepsilon,\qquad
+   R\!\left(\sum_{i=1}^{n}x_i\theta_i\right)
+   =
+   R\!\left(\sum_{i=1}^{n}x_i\phi_i+\delta\right).
+   $$
+:::
+
+::: proof
+View $a=\theta-\phi$ as a residual on the torus $(\mathbb R/2\pi\mathbb Z)^n$. Fix $\phi$ and consider all residuals satisfying
+
+$$
+d_{2\pi}\!\left(\sum_{i\in s}a_i\right)\le\varepsilon
+$$
+
+for every subset $s$. Choose principal representatives in a centered fundamental box. Singleton subsets bound the principal coordinates; because $3\varepsilon<2\pi$, a subset sum of nonnegative coordinates cannot cross a full period and return to the error band. Induction as coordinates are added therefore gives
+
+$$
+\sum_i\max(a_i,0)\le\varepsilon.
+$$
+
+Repeating the argument for $-a$ gives
+
+$$
+\sum_i\max(-a_i,0)\le\varepsilon.
+$$
+
+Conversely, if these two total masses are at most $\varepsilon$, every subset sum lies in $[-\varepsilon,\varepsilon]$, and projection to the circle cannot increase its absolute value. In the principal representative box, the fixed-codeword error fiber is characterized by the signed body
+
+$$
+B_\varepsilon=
+\left\{a:
+\sum_i\max(a_i,0)\le\varepsilon,\quad
+\sum_i\max(-a_i,0)\le\varepsilon\right\}
+$$
+
+Compute the volume of $B_\varepsilon$ by partitioning according to coordinate signs. With $p$ nonnegative coordinates and $q=n-p$ nonpositive coordinates, one chamber is a product of two standard simplices, scaled by $\varepsilon$ and reflected on the second factor, so its $n$-dimensional volume is
+
+$$
+\frac{\varepsilon^n}{p!\,q!}.
+$$
+
+Distinct closed chambers meet only on coordinate hyperplanes, whose volume is zero. There are $\binom{n}{p}$ chambers with a given $p$, hence
+
+$$
+\begin{aligned}
+\operatorname{vol}(B_\varepsilon)
+&=\sum_{p=0}^{n}\binom{n}{p}\frac{\varepsilon^n}{p!(n-p)!}\\
+&=\frac{\varepsilon^n}{n!}\sum_{p=0}^{n}\binom{n}{p}^2\\
+&=\frac{\binom{2n}{n}\varepsilon^n}{n!}.
+\end{aligned}
+$$
+
+On the product torus, whose total Haar volume is $(2\pi)^n$, each codeword produces a translate of an error fiber whose lift to the principal box has volume at most $\operatorname{vol}(B_\varepsilon)$. Adequacy requires these translates to cover the whole torus; finite subadditivity therefore gives
+
+$$
+(2\pi)^n
+\le |C|\frac{\binom{2n}{n}\varepsilon^n}{n!},
+$$
+
+which rearranges to the lower bound.
+
+For the upper bound, use an equally spaced grid. Let
+
+$$
+m=\left\lceil\frac{\pi n}{\varepsilon}\right\rceil,
+$$
+
+take $m$ points $0,2\pi/m,\ldots,(m-1)2\pi/m$ on each coordinate circle, and let $C$ be their Cartesian product. For a given $\theta$, choose a nearest grid point on each coordinate circle; the circular error in one coordinate is at most $\pi/m\le\varepsilon/n$. These coordinate choices form one $\phi$, chosen independently of the query. For every support $s_x$, the triangle inequality gives
+
+$$
+d_{2\pi}\!\left(\sum_{i\in s_x}(\theta_i-\phi_i)\right)
+\le |s_x|\frac{\pi}{m}
+\le n\frac{\pi}{m}
+\le\varepsilon.
+$$
+
+The grid has at most $m^n$ points, giving the upper bound. Finally, at period $2\pi$, circular error at most $\varepsilon$ is equivalent to the existence of a real number satisfying $|\delta|\le\varepsilon$ such that the target angle and the stored angle plus $\delta$ differ by an integer multiple of $2\pi$; comparing the cosine and sine entries yields the literal real matrix equality in the theorem. The full proof is checked by the Lean kernel.
+:::
+
+The signed-body volume and its orthant-chamber decomposition have established precedents in Kovačević–Tan and in the Rogers–Shephard theory; here they explain the Euclidean volume calculation required by these conclusions, and are not presented as new discoveries. No equality between the bounds or optimality is asserted. The two capacity bounds quantify a finite $C$ fixed in advance together with the prescribed Row $0$ decoder: the lower bound concerns codebooks satisfying the uniform-query condition, and the upper bound supplies a concrete Cartesian grid. They assert no storage lower bound for arbitrary decoders, no running-time bound, finite-hardware implementation, learning or self-update convergence, and they do not identify codebook cardinality with storage bits. The $2^n\to n+1$ row comparison in the preceding example remains its labelled literature architecture example; the capacity statement here does not rewrite that comparison. Likewise, we do not claim an exact optimum for two-dimensional error $L/(3k)$, in particular the value $3k^2$, nor attach any broader parameter range or unfrozen joint-construction boundary to these two declarations.
+
+The admission and retention boundary for joint constructions remains open in the [two-dimensional issue](https://github.com/the-omega-institute/trureturing/issues/30256), as does the upstream public-theorem registration audit in the [registration issue](https://github.com/the-omega-institute/trureturing/issues/30194); neither is treated as closed here.
+
+
 ---
 
 ## 35.4 The Loop of Light and Its Hidden Trap: The Question Leading to Chapter 36 {#the-loop-of-light-and-its-hidden-trap-the-question-leading-to-chapter-36}
