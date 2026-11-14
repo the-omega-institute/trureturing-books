@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "f5a6211e591351e1a2bdeea0165c2ef29ad21b48",
-  "pinned_at": "2026-11-14T13:41:43Z",
+  "commit": "a79bb042b93f03887703825ec4661602f43d976e",
+  "pinned_at": "2026-11-14T16:40:23Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1025,7 +1025,7 @@
       "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces",
       "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.cycle_face_sides",
       "kind": "theorem",
-      "statement_id": "sha256:9032ba075919139f6d3a08f9c89a29531934475a811d90df2fab4d4c4f09d2ff",
+      "statement_id": "sha256:3a152f066f3a7afb840d54d358cbcf5f27ee53846f33f46c44e3947fb0821127",
       "line": 731,
       "signature": "theorem cycle_face_sides [Fintype V] [DecidableEq V] [DecidableRel G.Adj] (hc : G.Connected) (he : Nonempty G.Dart) (hEuler : (Fintype.card V : ℤ) - (Nat.card G.edgeSet : ℤ) + (Nat.card R.Face : ℤ) = 2) (a : V) (p : G.Walk a a) (hp : p.IsCycle) : ∃ (x : R.Face → ZMod 2) (I J : Set V), (∃ f, x f = 1) ∧ (∃ f, x f = 0) ∧ R.boundary x = (fun e : G.edgeSet => if e.val ∈ p.edges then 1 else 0) ∧ (∃ q : G.Walk a a, (q = p ∨ q = p.reverse) ∧ ∀ d : G.Dart, ((x (R.face d) = 1 ∧ x (R.face d.symm) = 0) ↔ d ∈ q.darts) ∧ ((x (R.face d) = 0 ∧ x (R.face d.symm) = 1) ↔ d ∈ q.reverse.darts)) ∧ (∀ v, v ∉ p.suppo"
     },
@@ -1033,7 +1033,7 @@
       "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces",
       "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.face_odd_nice_cycle_orientation",
       "kind": "theorem",
-      "statement_id": "sha256:9032ba075919139f6d3a08f9c89a29531934475a811d90df2fab4d4c4f09d2ff",
+      "statement_id": "sha256:3a152f066f3a7afb840d54d358cbcf5f27ee53846f33f46c44e3947fb0821127",
       "line": 886,
       "signature": "theorem face_odd_nice_cycle_orientation [Fintype V] [DecidableEq V] [DecidableRel G.Adj] (hc : G.Connected) (he : Nonempty G.Dart) (hEuler : (Fintype.card V : ℤ) - (Nat.card G.edgeSet : ℤ) + (Nat.card R.Face : ℤ) = 2) (hEven : Even (Fintype.card V)) : ∃ ε : G.Dart → ZMod 2, (∀ d, ε d.symm = 1 + ε d) ∧ (∀ f, R.faceOpposition ε f = 1) ∧ ∀ (a : V) (p : G.Walk a a), p.IsCycle → Even p.length → ∀ M : (G.induce {v | v ∉ p.support}).Subgraph, M.IsPerfectMatching → (p.darts.map ε).sum = 1"
     },
@@ -3700,6 +3700,14 @@
       "statement_id": "sha256:b941b8f988de974faf219875e0fcd12c6f75044ad1d886e25a6efa2b151d3b3b",
       "line": 62,
       "signature": "theorem finite_memory_history_capacity {N d : Nat} (rho E : Fin N → Matrix (Fin d) (Fin d) ℂ) (hRho : ∀ i, (rho i).PosSemidef ∧ (rho i).trace = 1) (hE : ∀ j, (E j).PosSemidef) (hSum : ∑ j, E j = 1) (hPairing : ∀ i j, (E j * rho i).trace = if i = j then 1 else 0) : N ≤ d"
+    },
+    "D5/S3/Quantum/Measurements/RelevantSpaceQuantumKac.pure_vector_quantum_kac": {
+      "module": "D5/S3/Quantum/Measurements/RelevantSpaceQuantumKac",
+      "name": "D5.S3.Quantum.Measurements.RelevantSpaceQuantumKac.pure_vector_quantum_kac",
+      "kind": "theorem",
+      "statement_id": "sha256:a47c14b8b5a9003995c237f9b15762deda525b0042f34134eb01b767f8f54493",
+      "line": 461,
+      "signature": "theorem pure_vector_quantum_kac (L : α → H →L[ℂ] H) (v : H) (hv : ‖v‖ = 1) (hTP : ∑ a, (L a).adjoint * L a = 1) (hunital : let C"
     },
     "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion": {
       "module": "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion",

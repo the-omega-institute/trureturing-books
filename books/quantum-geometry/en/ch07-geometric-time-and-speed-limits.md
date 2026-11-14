@@ -417,13 +417,109 @@ Finally choose an orthonormal eigenbasis of the cyclic unitary $W$. Each basis v
 
 This theorem concerns the stepwise pure-state projection-return protocol under finite-dimensional unitary evolution. Infinite-dimensional spectral-measure and winding formulations, general quantum instruments, and physical clock or speed-limit interpretations lie outside its scope.
 
-::: {.remark #rem-monitored-unital-kac title="A Quantum Kac Formula on the Relevant Space (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Integer mean return times also admit a route that does not begin by counting spectral points. Sinkovicz, Kurucz, Kiss and Asbóth, *Quantized recurrence time in iterated open quantum dynamics*, [arXiv:1411.0568v1](https://arxiv.org/abs/1411.0568v1), Sections II–III, Eqs. (11)–(20), consider a finite-dimensional system prepared in a pure state. Each step applies the same completely positive, trace-preserving channel, followed by a test for return to that initial state. The relevant space is spanned by the supports of states reachable from this preparation under the unmonitored evolution. If the channel preserves the identity operator on this relevant space, the mean first return time equals its dimension. The condition concerns the actual relevant space of this preparation. Complete positivity and trace preservation alone do not include it, and the dimension in the conclusion cannot be replaced by that of the whole ambient space.
+Integer mean return times also admit a route that does not begin by counting spectral points. Sinkovicz, Kurucz, Kiss and Asbóth, *Quantized recurrence time in iterated open quantum dynamics*, [arXiv:1411.0568v1](https://arxiv.org/abs/1411.0568v1), Sections II–III, Eqs. (11)–(20), study a protocol that tests for return to the initial state after each channel step. The key is to retain the unnormalized conditional state for “no return yet.” Its trace records the survival probability; summing these states before taking the trace connects the return mean to the dimension of the actual reachable space. The channel theorem follows below, including the operator identity in Eq. (18) of the paper.
 
-The mechanism retains the unnormalized conditional state for “no return yet.” Its trace is the survival probability; the difference between successive traces is the first-return probability. Summing these conditional states first, then taking the trace, connects the return mean to a space dimension. Under the stated conditions, Eq. (18) of the paper identifies this operator sum with the identity on the relevant space. Time counts detections after the first evolution step; unmonitored overlap probabilities cannot replace the monitored first-return probabilities.
+::: {.theorem #rem-monitored-unital-kac title="A Quantum Kac Formula on the Relevant Space" lean="D5/S3/Quantum/Measurements/RelevantSpaceQuantumKac.pure_vector_quantum_kac"}
+Let $H$ be any finite-dimensional complex inner-product space, $A$ a finite index set, and $L_a:H\to H$ ($a\in A$) complex-linear operators satisfying
 
-For the unitary evolution in this section, the relevant space is the cyclic space introduced above. [@prob-monitored-spectral-mean] connects the sum over actual survival histories to the cyclic dimension, then identifies that dimension with the number of distinct occupied spectral values; strict power contraction removes the long-time remainders in its proof. The theorem covers unitary pure-state return. The general channel result in this remark, requiring complete positivity, trace preservation, and preservation of the identity on the actual relevant space, remains a literature result beyond the unitary theorem.
+$$
+\sum_{a\in A}L_a^*L_a=I.
+$$
+
+Take a unit vector $v\in H$, $\norm v=1$, and put $P=\operatorname{rankOne}(v,v)$, so $Px=v\langle v,x\rangle$. For a finite word $w=(a_1,\ldots,a_m)$, write $L_wv=L_{a_1}\cdots L_{a_m}v$, with $L_{\varnothing}v=v$ for the empty word. Let $A^*$ denote all finite words, including the empty word. Define the relevant space of the original unmonitored Kraus words and its orthogonal projection by
+
+$$
+\begin{aligned}
+C&=\operatorname{span}_{\mathbb C}\{L_wv:w\in A^*\},\\
+\Pi_C&=\text{orthogonal projection onto }C.
+\end{aligned}
+$$
+
+On linear operators on $H$, define
+
+$$
+\begin{aligned}
+\mathcal E(X)&=\sum_{a\in A}L_aXL_a^*,\\
+\mathcal F(X)&=(I-P)\mathcal E(X)(I-P).
+\end{aligned}
+$$
+
+Assume $\mathcal E(\Pi_C)=\Pi_C$. Let $\rho_n=\mathcal F^{[n]}(P)$ ($n\in\mathbb N$, with $\rho_0=P$), and put
+
+$$
+p_{n+1}=\operatorname{Re}\Tr\bigl(P\mathcal E(\rho_n)\bigr).
+$$
+
+Then all four conclusions hold:
+
+1. The operator family $n\mapsto\rho_n$ sums to $\Pi_C$: $\operatorname{HasSum}(n\mapsto\rho_n,\Pi_C)$;
+2. For every $n\in\mathbb N$, $p_{n+1}\ge0$;
+3. $\displaystyle\sum_{n=0}^{\infty}p_{n+1}=1$;
+4. $\displaystyle\sum_{n=0}^{\infty}(n+1)p_{n+1}=\dim_{\mathbb C}C$.
+
+Conclusion 1 uses the norm topology on the finite-dimensional operator space; conclusions 3 and 4 also assert `HasSum` for the respective real families.
 :::
+
+::: proof
+**Identify the actual reachable space.** The space $C$ contains $v$ and is preserved by every $L_a$. Put $J_a=(I-P)L_a$, so $\mathcal F(X)=\sum_aJ_aXJ_a^*$. The span of all $J$ words applied to $v$ is also exactly $C$: in $J_ax=L_ax-PL_ax$, both terms belong to $C$. Conversely, the monitored-word space contains $v$, and $L_ax=J_ax+PL_ax$ with $PL_ax\in\mathbb Cv$, so every $L_a$ preserves it too. Induction on word length proves both inclusions. This establishes equality with the original reachable space.
+
+**A finite orbit carries positive mass in every relevant direction.** Each $\rho_n$ is positive semidefinite. If a vector lies in the kernel of $\sum_{n=0}^{\ell}\rho_n$, positivity forces it to be orthogonal to every monitored-word vector of length at most $\ell$, and conversely. Thus the support of this finite sum is exactly the span of those vectors. Finite dimension makes these increasing spaces reach $C$ at some $\ell$. Hence
+
+$$
+R=\sum_{n=0}^{\ell}\rho_n
+$$
+
+has support $C$, and its quadratic form is strictly positive on the unit sphere of $C$. Compactness supplies $\mu>0$ with $\operatorname{Re}\langle x,Rx\rangle\ge\mu\norm x^2$ for $x\in C$. Orthogonal decomposition along $C\oplus C^\perp$ extends this to the operator inequality $R\ge\mu\Pi_C$ on all of $H$. This is the finite faithful-orbit bound used in the kernel proof.
+
+**Telescope and remove the residual.** Since $P\Pi_C=\Pi_CP=P$ and $\mathcal E(\Pi_C)=\Pi_C$,
+
+$$
+\begin{aligned}
+\mathcal F(\Pi_C)&=\Pi_C-P,\\
+\sum_{n=0}^{N-1}\rho_n&=\Pi_C-\mathcal F^{[N]}(\Pi_C).
+\end{aligned}
+$$
+
+Take $\nu=\min(\mu,1/2)>0$, $b=\ell+1$, and $q=1-\nu\in[0,1)$. The finite lower bound gives $\mathcal F^{[b]}(\Pi_C)\le q\Pi_C$. The map $\mathcal F$ preserves positivity and operator order, and $\mathcal F(\Pi_C)\le\Pi_C$, so
+
+$$
+0\le\mathcal F^{[N]}(\Pi_C)
+\le q^{\lfloor N/b\rfloor}\Pi_C.
+$$
+
+The residual therefore decays geometrically. This also excludes nonzero invariant positive mass inside $C$: if $D\ge0$ is supported in $C$ and $\mathcal F(D)=D$, then $D\le c\Pi_C$ for some $c\ge0$, whence $D\le c\mathcal F^{[N]}(\Pi_C)\to0$ and $D=0$. Moreover, $0\le P\le\Pi_C$ implies $0\le\rho_N\le\mathcal F^{[N]}(\Pi_C)$, so the same geometric bound gives absolute summability. The telescoping identity consequently yields the operator `HasSum` in conclusion 1.
+
+**Pass from occupation operators to first-return statistics.** Set $s_n=\operatorname{Re}\Tr(\rho_n)$. Kraus completeness and cyclicity of trace give $\Tr\mathcal E(X)=\Tr X$. Since $(I-P)^2=I-P$,
+
+$$
+\begin{aligned}
+s_{n+1}&=s_n-\operatorname{Re}\Tr\bigl(P\mathcal E(\rho_n)\bigr),\\
+p_{n+1}&=s_n-s_{n+1}\ge0.
+\end{aligned}
+$$
+
+Nonnegativity follows from $P\mathcal E(\rho_n)P\ge0$, whose trace equals the trace above. Taking the trace of the operator series, and using the fact that an orthogonal projection has trace equal to its complex rank, gives
+
+$$
+\sum_{n=0}^{\infty}s_n=\operatorname{Re}\Tr\Pi_C=\dim_{\mathbb C}C.
+$$
+
+In particular, $s_n\to0$. Telescoping the differences with $s_0=\Tr P=1$ gives total return probability one. Finally interchange the sums of the nonnegative double family that equals $p_{j+1}$ when $i\le j$ and zero otherwise. Its row sums are $s_i$, and its column sums are $(j+1)p_{j+1}$, so
+
+$$
+\begin{aligned}
+\sum_{j=0}^{\infty}(j+1)p_{j+1}
+&=\sum_{i=0}^{\infty}\sum_{j=i}^{\infty}p_{j+1},\\
+&=\sum_{i=0}^{\infty}s_i=\dim_{\mathbb C}C.
+\end{aligned}
+$$
+
+The formal proof establishes these positivity, contraction and series arguments in orthonormal coordinates, then transports them back to the original space $H$. Coordinates intertwine each $L_a$, send the support of the rank-one operator to the initial line, and identify the image of the original $C$ with the matrix reachable space by induction on words. The isometry also transports the actual orthogonal projection. Matrix representation preserves multiplication, adjoints and trace, hence each of $\mathcal E$, $\mathcal F$, $\rho_n$ and $p_{n+1}$. The inverse continuous linear coordinate map transports the operator `HasSum`, and complex dimension is preserved. This yields all four conclusions on the original carrier. The full proof is checked by the Lean kernel.
+:::
+
+The extra condition preserves the identity on the relevant space: $\mathcal E(\Pi_C)=\Pi_C$. The CPTP normalization $\sum_aL_a^*L_a=I$ does not imply $\sum_aL_a\Pi_CL_a^*=\Pi_C$. Since $\Pi_C$ vanishes on $C^\perp$, global unitality $\mathcal E(I)=I$ is not required either. The theorem adds no assumption of adjoint invariance, irreducibility, primitivity or certain return; total return probability one is a conclusion. The state $\rho_n$ includes all preceding $n$ no-return measurements, so $p_{n+1}$ is the first-return probability at detection $n+1$. Unmonitored overlap probabilities cannot replace it.
+
+For the unitary evolution in this section, the relevant space is the cyclic space introduced above. [@prob-monitored-spectral-mean] additionally identifies its dimension with the number of distinct occupied spectral values; the general channel quantum Kac formula makes no such spectral count. Its mean counts discrete detection steps and supplies no physical clock or speed-limit bound. General quantum instruments and infinite-dimensional extensions are also outside this theorem's verification scope.
 
 ::: {.example #ex-first-return-qubit title="First-Return Statistics of a Rotating Qubit: The Mean Return Time Is Always 2, Whatever the Step"}
 Let a qubit turn through the Bloch angle $\delta$ about the $X$ axis at each step, $U = \cos\frac{\delta}{2}\,I - i\sin\frac{\delta}{2}\,X$, with initial state $v = \lvert 0\rangle$. Write $c = \cos\frac{\delta}{2}$ and $s = \sin\frac{\delta}{2}$, and assume $s \neq 0$.

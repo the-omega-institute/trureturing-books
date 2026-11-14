@@ -417,13 +417,109 @@ $$
 
 这里验证的是有限维酉演化下纯态的逐步投影返回协议。无限维的谱测度与绕数表述、一般量子仪器，以及物理时钟或速度界的解释均不属于这条定理。
 
-::: {.remark #rem-monitored-unital-kac title="相关空间上的量子 Kac 公式（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 平均返回时间的整数性还有一条不先数谱点的路线。Sinkovicz、Kurucz、Kiss 与 Asbóth，*Quantized recurrence time in iterated open quantum dynamics*，[arXiv:1411.0568v1](https://arxiv.org/abs/1411.0568v1)，第 II–III 节，式 (11)–(20)，考虑有限维系统：从纯态出发，每一步应用同一个完全正、保迹通道，随后测量是否回到初态。相关空间由这份初态在未监测演化中能够到达的态的支撑张成。若通道把相关空间上的恒等算子映回自身，则平均首次返回时间等于相关空间的维数。条件针对这份初态的实际相关空间；仅有完全正与保迹不包含它，也不能把结论中的维数换成整个环境空间的维数。
+平均返回时间的整数性还有一条不先数谱点的路线。Sinkovicz、Kurucz、Kiss 与 Asbóth，*Quantized recurrence time in iterated open quantum dynamics*，[arXiv:1411.0568v1](https://arxiv.org/abs/1411.0568v1)，第 II–III 节，式 (11)–(20)，研究每步通道演化之后检测是否回到初态的协议。关键是保留“尚未返回”的非归一化条件态：它的迹记录生存概率，把这些态先相加、再取迹，才把返回均值连接到实际可达空间的维数。下面给出这条通道定理；原文式 (18) 的算子恒等式也是结论的一部分。
 
-这条路线的核心是保留“尚未返回”的非归一化条件态。它的迹是生存概率；相邻两步的迹之差是首次返回概率。把各时刻的条件态相加，先得到一个算子，再取迹，便能把返回均值连接到空间维数。原文式 (18) 断言，在上述条件下，这个算子总和恰是相关空间的恒等算子。这里的时间从第一次演化后的检测算起，不能换成未经监测的重叠概率。
+::: {.theorem #rem-monitored-unital-kac title="相关空间上的量子 Kac 公式" lean="D5/S3/Quantum/Measurements/RelevantSpaceQuantumKac.pure_vector_quantum_kac"}
+设 $H$ 为任意有限维复内积空间，$A$ 为有限指标集，$L_a:H\to H$（$a\in A$）为复线性算子，满足
 
-对本节的幺正演化，相关空间就是前文的循环空间。[@prob-monitored-spectral-mean] 把实际生存历史的求和连接到循环空间维数，再把该维数认作不同占据谱值的个数；严格幂收缩在其证明中消去长时余项。该定理覆盖酉演化纯态返回的情形。本注的一般完全正、保迹且在实际相关空间上保恒等的通道结果仍仅引自文献，不由这条酉定理覆盖。
+$$
+\sum_{a\in A}L_a^*L_a=I.
+$$
+
+取单位向量 $v\in H$，$\norm v=1$，令 $P=\operatorname{rankOne}(v,v)$，即 $Px=v\langle v,x\rangle$。对有限词 $w=(a_1,\ldots,a_m)$，记 $L_wv=L_{a_1}\cdots L_{a_m}v$，并规定空词给出 $L_{\varnothing}v=v$。以 $A^*$ 表示所有有限词（含空词）的集合，定义原始未监测 Kraus 词的相关空间及其正交投影
+
+$$
+\begin{aligned}
+C&=\operatorname{span}_{\mathbb C}\{L_wv:w\in A^*\},\\
+\Pi_C&=\text{到 }C\text{ 的正交投影}.
+\end{aligned}
+$$
+
+在 $H$ 的线性算子上定义
+
+$$
+\begin{aligned}
+\mathcal E(X)&=\sum_{a\in A}L_aXL_a^*,\\
+\mathcal F(X)&=(I-P)\mathcal E(X)(I-P).
+\end{aligned}
+$$
+
+假设 $\mathcal E(\Pi_C)=\Pi_C$。令 $\rho_n=\mathcal F^{[n]}(P)$（$n\in\mathbb N$，$\rho_0=P$），并令
+
+$$
+p_{n+1}=\operatorname{Re}\Tr\bigl(P\mathcal E(\rho_n)\bigr).
+$$
+
+则以下四项同时成立：
+
+1. 算子族 $n\mapsto\rho_n$ 的和为 $\Pi_C$，即 $\operatorname{HasSum}(n\mapsto\rho_n,\Pi_C)$；
+2. 对每个 $n\in\mathbb N$，$p_{n+1}\ge0$；
+3. $\displaystyle\sum_{n=0}^{\infty}p_{n+1}=1$；
+4. $\displaystyle\sum_{n=0}^{\infty}(n+1)p_{n+1}=\dim_{\mathbb C}C$。
+
+第 1 项在有限维算子空间的范数拓扑中成立；第 3、4 项也分别断言相应实数族的 `HasSum`。
 :::
+
+::: proof
+**先找真正可达的空间。** $C$ 包含 $v$，且每个 $L_a$ 都保持 $C$。令 $J_a=(I-P)L_a$，则 $\mathcal F(X)=\sum_aJ_aXJ_a^*$。由所有 $J$ 词作用于 $v$ 张成的空间也恰是 $C$：$J_ax=L_ax-PL_ax$，两项都在 $C$ 中；反过来，这个监测词空间包含 $v$，而 $L_ax=J_ax+PL_ax$，其中 $PL_ax\in\mathbb Cv$，故它也被每个 $L_a$ 保持。对词长归纳便得到两个方向的包含。这一步没有把未监测轨道换成另一份可达空间；它证明两者相等。
+
+**有限轨道在每个相关方向上都有正质量。** 每个 $\rho_n$ 都半正定。若一个向量落在有限和 $\sum_{n=0}^{\ell}\rho_n$ 的核里，正性迫使它与所有长度不超过 $\ell$ 的监测词向量正交，反之亦然。因此这份有限和的支撑恰为这些词向量的张成空间。有限维性使这串递增空间在某个 $\ell$ 达到 $C$。于是
+
+$$
+R=\sum_{n=0}^{\ell}\rho_n
+$$
+
+的支撑是 $C$；其二次型在 $C$ 的单位球面上严格为正。由紧致性可取 $\mu>0$，使 $\operatorname{Re}\langle x,Rx\rangle\ge\mu\norm x^2$ 对 $x\in C$ 成立。沿 $C\oplus C^\perp$ 分解，把它延拓到整个 $H$，得到算子序中的 $R\ge\mu\Pi_C$。这正是内核证明所用的有限可达轨道正下界。
+
+**望远镜求和消去余项。** 由 $P\Pi_C=\Pi_CP=P$ 和假设 $\mathcal E(\Pi_C)=\Pi_C$，
+
+$$
+\begin{aligned}
+\mathcal F(\Pi_C)&=\Pi_C-P,\\
+\sum_{n=0}^{N-1}\rho_n&=\Pi_C-\mathcal F^{[N]}(\Pi_C).
+\end{aligned}
+$$
+
+取 $\nu=\min(\mu,1/2)>0$、$b=\ell+1$、$q=1-\nu\in[0,1)$，有限正下界给出 $\mathcal F^{[b]}(\Pi_C)\le q\Pi_C$。$\mathcal F$ 保持正性与算子序，且 $\mathcal F(\Pi_C)\le\Pi_C$，故
+
+$$
+0\le\mathcal F^{[N]}(\Pi_C)
+\le q^{\lfloor N/b\rfloor}\Pi_C.
+$$
+
+余项因而几何趋零。这也排除了 $C$ 内非零、不再流失的正质量：若 $D\ge0$ 支撑于 $C$ 且 $\mathcal F(D)=D$，则某个 $c\ge0$ 满足 $D\le c\Pi_C$，进而 $D\le c\mathcal F^{[N]}(\Pi_C)\to0$，只能 $D=0$。此外 $0\le P\le\Pi_C$ 给出 $0\le\rho_N\le\mathcal F^{[N]}(\Pi_C)$，同一个几何上界保证绝对可和。因此望远镜恒等式得到的不只是沿自然数部分和的极限，而是第 1 项的算子 `HasSum`。
+
+**从占据算子到首次返回统计。** 令 $s_n=\operatorname{Re}\Tr(\rho_n)$。Kraus 完备式与迹的循环性给出 $\Tr\mathcal E(X)=\Tr X$。又由 $(I-P)^2=I-P$，
+
+$$
+\begin{aligned}
+s_{n+1}&=s_n-\operatorname{Re}\Tr\bigl(P\mathcal E(\rho_n)\bigr),\\
+p_{n+1}&=s_n-s_{n+1}\ge0.
+\end{aligned}
+$$
+
+非负性来自 $P\mathcal E(\rho_n)P\ge0$，其迹等于上式中的迹。对算子级数取迹，正交投影的迹就是复维数，故
+
+$$
+\sum_{n=0}^{\infty}s_n=\operatorname{Re}\Tr\Pi_C=\dim_{\mathbb C}C.
+$$
+
+特别地 $s_n\to0$；以 $s_0=\Tr P=1$ 对差分求和，得到总返回概率 $1$。最后，对非负双重族（当 $i\le j$ 时取 $p_{j+1}$，否则取零）交换求和：每行之和是 $s_i$，每列之和是 $(j+1)p_{j+1}$，所以
+
+$$
+\begin{aligned}
+\sum_{j=0}^{\infty}(j+1)p_{j+1}
+&=\sum_{i=0}^{\infty}\sum_{j=i}^{\infty}p_{j+1},\\
+&=\sum_{i=0}^{\infty}s_i=\dim_{\mathbb C}C.
+\end{aligned}
+$$
+
+形式证明先在正交坐标中完成上述正性、收缩及级数论证，再把结果送回原始空间 $H$。正交坐标逐个交织 $L_a$，把秩一算子的支撑映为初始直线，并由词归纳把原始 $C$ 精确映为矩阵可达空间；等距性同时搬运真正的正交投影。坐标表示保持乘法、伴随与迹，因而逐项保持 $\mathcal E$、$\mathcal F$、$\rho_n$ 和 $p_{n+1}$；逆坐标的连续线性映射搬运算子 `HasSum`，复维数也保持不变。这给出原始载体上的四项结论。完整证明由 Lean 内核检查。
+:::
+
+这里的附加条件是保相关空间的恒等算子：$\mathcal E(\Pi_C)=\Pi_C$。CPTP 的归一化约束是 $\sum_aL_a^*L_a=I$，它并不推出 $\sum_aL_a\Pi_CL_a^*=\Pi_C$；而 $\Pi_C$ 在 $C^\perp$ 上为零，也无须要求 $\mathcal E(I)=I$。定理没有另加伴随不变性、不可约性、本原性或返回必然性；返回概率为 $1$ 是结论。$\rho_n$ 保留了前 $n$ 次未返回的检测，因此 $p_{n+1}$ 是第 $n+1$ 次检测的首次返回概率，不能用未监测的重叠概率替换。
+
+对本节的幺正演化，相关空间就是前文的循环空间。[@prob-monitored-spectral-mean] 进一步把该空间的维数认作不同占据谱值的个数；一般通道的量子 Kac 公式不作这种谱计数。这里的均值以离散检测步数计，不给出物理时钟或速度界；一般量子仪器与无限维扩展也不由这条定理验证。
 
 ::: {.example #ex-first-return-qubit title="旋转比特的首次返回统计：平均返回时间恒为 2，与步长无关"}
 设单比特每一步绕 $X$ 轴转过布洛赫角 $\delta$，即 $U = \cos\frac{\delta}{2}\,I - i\sin\frac{\delta}{2}\,X$，初态 $v = \lvert 0\rangle$。记 $c = \cos\frac{\delta}{2}$，$s = \sin\frac{\delta}{2}$，并设 $s \neq 0$。
