@@ -1,12 +1,12 @@
 # 现行整书准确性基线
 
-目录输入为已合入 main `402b5a2e444b264cd5bd7776b024b346f3bdd5e2`，以本提交的中英文 `SUMMARY.md` 为名册。每语 **58页、46个主单元**：序曲、39章、终章及附录A–E；两语文件、顺序与层级对应。所有正文、定理与证明、数值、物理条件、文献、图表、实验及影音说明均在整书目标内，保留作者风格与题记。
+目录输入为已合入 main `89e45e6baeae05d4864945d300f70f5ec3da0c72`，以该提交的中英文 `SUMMARY.md` 为名册；本次未提交修订仅涉及第8章计数与第35章图注及两份准确性文档。每语 **58页、46个主单元**：序曲、39章、终章及附录A–E；两语文件、顺序与层级对应。所有正文、定理与证明、数值、物理条件、文献、图表、实验及影音说明均在整书目标内，保留作者风格与题记。
 
-当前锁为 `trureturing@a79bb042b93f03887703825ec4661602f43d976e`／`dev`，解析604条声明。旧[51页／45单元基线](CONTENT-ACCURACY-CURRENT-20261114.md)固定于 `b5a75e5932b73a8a97399a764ff81d63d528930d`；更早35单元／9/35仅保留各自历史归属。已有阅读与审查未被清零，也不因换名册自动升级为当前接受。
+当前锁为 `trureturing@a313d1ce217f58f284d14d3b7d8231c5773b8d55`／`dev`，解析610条声明。前一基线 `402b5a2e444b264cd5bd7776b024b346f3bdd5e2` 的 pin `a79bb042b93f03887703825ec4661602f43d976e`／604条与当时的检查、阅读和审查保持历史归属。旧[51页／45单元基线](CONTENT-ACCURACY-CURRENT-20261114.md)固定于 `b5a75e5932b73a8a97399a764ff81d63d528930d`；更早35单元／9/35仅保留各自历史归属。已有阅读与审查未被清零，也不因换名册自动升级为当前接受。
 
 ## 全部页面与身份对应
 
-下表用正式 SUMMARY 解析器逐页排列。相对上述历史输入，每语31页源码相同、20页改变、7页新增、0页移除；“同／变／新增”只比较对应文件字节。“待核”指当前完整页面接受仍未证明，不表示从未阅读；单处修正、构建与哈希相同均不能替代正文、pin、媒体、输出和独立审查的依赖核对。
+下表用正式 SUMMARY 解析器逐页排列，对照 `89e45e6b` 的已提交源码。两语 SUMMARY 均与 `402b5a2e` 字节相同；每语相对该输入52页相同、6页改变（第8章、32.1、32.2、第35章、第39章、附录C），无增删。相对 `b5a75e59`，每语30页相同、21页改变、7页新增、0页移除；“同／变／新增”只比较对应文件字节。“待核”指当前完整页面接受仍未证明，不表示从未阅读；单处修正、构建与哈希相同均不能替代正文、pin、媒体、输出和独立审查的依赖核对。
 
 | 主单元 | SUMMARY页面 | 对历史中／英 | 中文完整接受 | 英文完整接受 |
 | --- | --- | --- | --- | --- |
@@ -57,7 +57,7 @@
 | 32 | 子页：`ch32-s06-meta-unification-and-icosian-bridge.md` | 新增／新增 | [待核](../../books/quantum-geometry/zh/ch32-s06-meta-unification-and-icosian-bridge.md) | [待核](../../books/quantum-geometry/en/ch32-s06-meta-unification-and-icosian-bridge.md) |
 | 33 | `ch33-all-beings-observers-and-mutual-attractors.md` | 变／变 | [待核](../../books/quantum-geometry/zh/ch33-all-beings-observers-and-mutual-attractors.md) | [待核](../../books/quantum-geometry/en/ch33-all-beings-observers-and-mutual-attractors.md) |
 | 34 | `ch34-orthogonality-degeneracy-and-observer-position.md` | 变／变 | [待核](../../books/quantum-geometry/zh/ch34-orthogonality-degeneracy-and-observer-position.md) | [待核](../../books/quantum-geometry/en/ch34-orthogonality-degeneracy-and-observer-position.md) |
-| 35 | `ch35-light-pulse-and-self-referential-table.md` | 同／同 | [待核](../../books/quantum-geometry/zh/ch35-light-pulse-and-self-referential-table.md) | [待核](../../books/quantum-geometry/en/ch35-light-pulse-and-self-referential-table.md) |
+| 35 | `ch35-light-pulse-and-self-referential-table.md` | 变／变 | [待核](../../books/quantum-geometry/zh/ch35-light-pulse-and-self-referential-table.md) | [待核](../../books/quantum-geometry/en/ch35-light-pulse-and-self-referential-table.md) |
 | 36 | `ch36-hyperbolic-steps-and-quotienting-reincarnation.md` | 变／变 | [待核](../../books/quantum-geometry/zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.md) | [待核](../../books/quantum-geometry/en/ch36-hyperbolic-steps-and-quotienting-reincarnation.md) |
 | 37 | `ch37-dreams-quantum-eraser-and-nonlocal-observer.md` | 同／同 | [待核](../../books/quantum-geometry/zh/ch37-dreams-quantum-eraser-and-nonlocal-observer.md) | [待核](../../books/quantum-geometry/en/ch37-dreams-quantum-eraser-and-nonlocal-observer.md) |
 | 38 | `ch38-observer-memory-pointer-and-ontological-qram.md` | 变／变 | [待核](../../books/quantum-geometry/zh/ch38-observer-memory-pointer-and-ontological-qram.md) | [待核](../../books/quantum-geometry/en/ch38-observer-memory-pointer-and-ontological-qram.md) |
@@ -69,20 +69,32 @@
 | 附录D | `appendix-d.md` | 同／同 | [待核](../../books/quantum-geometry/zh/appendix-d.md) | [待核](../../books/quantum-geometry/en/appendix-d.md) |
 | 附录E | `appendix-e.md` | 新增／新增 | [待核](../../books/quantum-geometry/zh/appendix-e.md) | [待核](../../books/quantum-geometry/en/appendix-e.md) |
 
-## 钉版差分的限定结论
+## 当前钉版与历史差分
 
-相对历史锁 `d77855ba196f70517af8fb7a3d7004b3022460a8` 的578条，当前新增26条、移除0条；3个既有条目只改变模块级 `statement_id`，锁内名称、种类、行号与签名均相同。它们是 `RotationFaces.cycle_face_sides`、`RotationFaces.face_odd_nice_cycle_orientation` 与 `CyclicMonitoredContraction.cyclic_future_kernel_eq_bot`。
+相对 `402b5a2e` 的604条锁记录，当前新增6条、移除0条；唯一既有变化是 `HannRouterDephasing.result` 的模块级 `statement_id`，其名称、种类、行号与签名不变。新增引用为：
 
-这两个模块的完整精确钉版源码已作旧新差分：`RotationFaces` 只有 `cycle_boundary_walk`，`CyclicMonitoredContraction` 只有 `initial_mem`、`unitary_mem`、`step_pow_coe` 从私有改为公开，其余字节一致。因此这三条目标声明、所在文件的定义、全局假设及证明未变；仅由这些摘要变化不产生新的书中修正。此结论只给出差分对应，不批准书中全部陈述、导入闭包或媒体。当前新增的 `cycle_boundary_walk` 锁条目也不能替代新引用正文的逐项校对。
+- `D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_lower_bound`
+- `D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_upper_bound`
+- `D5/S3/Quantum/Divergence/SpectralCeilingRelativeEntropy.actual_matrix_spectral_ceiling_strong_klein`
+- `D5/S3/Quantum/Information/StrongSubadditivity.entropy_relabelState`
+- `D5/S3/Quantum/Information/StrongSubadditivity.entropy_toMState`
+- `D5/S3/Quantum/Information/StrongSubadditivity.strong_subadditivity`
 
-## 已有证据与下一步范围
+Hann 模块在这两次精确 pin 之间仅将 `initialized_clean`、`address_card`、`sum_ket`、`sum_ket_conj` 四个辅助声明由私有改为公开；完整 `result` 陈述、证明及其后源码字节相同。这只支持第38章相关依赖的钉版对应，不构成该章或导入闭包接受。新增6条引用也仍须结合各自正文核对。
+
+历史 `402b5a2e`／604条相对 `b5a75e59` 的锁 `d77855ba196f70517af8fb7a3d7004b3022460a8`／578条，新增26条、移除0条；3个既有条目只改变模块级 `statement_id`，锁内名称、种类、行号与签名均相同：`RotationFaces.cycle_face_sides`、`RotationFaces.face_odd_nice_cycle_orientation` 与 `CyclicMonitoredContraction.cyclic_future_kernel_eq_bot`。当时完整源码差分确认仅 `cycle_boundary_walk` 及 `initial_mem`、`unitary_mem`、`step_pow_coe` 从私有改为公开，其余字节一致。此历史对应与其覆盖限制保留，不改称当前整书或媒体批准。
+
+## 历史局部证据的归属
 
 第33章六处事实／范围修正已有[限定来源与三席记录](CONTENT-ACCURACY-CH33-SCOPE.md)，对应[PR #302](https://github.com/the-omega-institute/trureturing-books/pull/302)。第36章与视频009的同类限定修正见[PR #305](https://github.com/the-omega-institute/trureturing-books/pull/305)，其审查与发布范围不扩张为完整影片或章节接受。各自动态CI、合入与部署状态以关联PR为准。
 
-本批仅同步实验目录中 `mutual-observer-attractors` 的中英简介，使每轮0.454及每拍0.674都明确为局部渐近因子；舞台、数值引擎、控件、标签、图片、GID与正文保持。数学依据为 `g(x)=cos(cos x)` 在 `r=cos r` 处的导数 `1−r²≈0.453753166`；从0.1出发首轮比值约0.304475456。目录措辞的修正不增加实验室或整页接受。
+`402b5a2e` 基线记录的实验目录修正仅使 `mutual-observer-attractors` 中英简介中的每轮0.454、每拍0.674明确为局部渐近因子，未改舞台或数值引擎。依据为 `g(x)=cos(cos x)` 在 `r=cos r` 处的导数 `1−r²≈0.453753166`，从0.1出发首轮比值约0.304475456。当时同步、目录构建与 `./tbook check` 通过（0错误、9条既有警告），候选 `6bc02a3a` 的三席审查两席批准、质量席非阻塞意见、0阻塞，见[PR #307](https://github.com/the-omega-institute/trureturing-books/pull/307)。这些检查与外部快照均属当时输入，不替代当前检查；目录措辞修正未增加实验室或整页接受。
 
-验证：同步与 `./tbook check` 通过，0错误、9条既有警告；当前 pin 已确认在配置的 `dev` 分支上。可视化目录构建成功，实际产物中两语简介及发布登记表与修正源码一致；字段差分仅上述两个字符串。另以独立目录枚举核对两语完整顺序、主单元数、逐页源码身份及历史差分。该简介不进入章节导出卡，因此本地未重复构建整书 PDF／EPUB；未改变舞台或图片，也未新增截图巡检。
+## 本次限定修正与未完成维度
 
-候选 `6bc02a3a` 经架构、质量、测试三席独立审查：两席批准，质量席给出非阻塞意见，0阻塞。独立复算支持两个局部因子，文件／名册／锁及完整两模块差分经核对，外部快照源检查同为0错误、9条警告；目录、发布登记表和书籍入口的实际消费者对应。审查只覆盖本批限定范围，发布状态见[PR #307](https://github.com/the-omega-institute/trureturing-books/pull/307)。
+- 第8章两语第二部总结按正式出版模型中的形式环境计数，由22条改为26条，第5／6／7／8章分布为5／5／9／7；不按GID数量或环境ID前缀推算。
+- 第35章 `ch35-gram-corridor` 两语图注改称已形式化格拉姆行列式公式的单位向量特例，保留原算例链接。当前精确 pin 的实内积空间定义、行列式与严格正性声明支持这一限定；`c=1,1/2,0` 及 `det=0,3/4,1` 与未改的图脚本、共用计算及两语SVG对应。数值代入不新增Lean声明，后续清表与生命解释仍属 `MODEL`。
 
-后续按表中现行页面逐项建立或映射完整两语阅读、正式声明、独立计算、物理／文献、媒体、输出与审查证据；未覆盖部分继续待核。普通HTML/PDF/EPUB按项目第9节构建与自动检查，只有规定触发时查看受影响页面；媒体按其实际变化和已有证据对应执行。此前耗尽的任务额度与未解决事项保持原归属。
+第8章已有当前完整双语源阅读与39项独立数值复算（`current-full-text-and-numerical-intake.json`）；本次与其章源摘要对应，除上述计数修正外字节保全。有限浴新增内容另有 `finite-bath-correspondence.json` 的精确源与Reeb–Wolf定理3原文对应；两份材料均来自 `qg-ch08-finite-bath-intake-20261115`，属于来源／数值 intake，不是完整章节、媒体、输出或独立接受。其余相关冻结模块、其他原始文献与媒体维度仍待补齐。第35章容量及Gram图注 intake 同样不批准完整章节；第39章在 `402b5a2e` 后已变，须核对当前内容，不能沿用文件相同的推断。
+
+每语58页的完整接受仍全部待核。后续继续逐页建立或映射双语正文、正式声明、独立计算、物理／文献、媒体、输出与独立审查证据；本次修正及名册／依赖差分不授予整章或整书批准。普通HTML/PDF/EPUB按项目第9节构建与自动检查，只有规定触发时查看受影响页面；未改生产器和图片不新增截图或重生要求。最终提交对应、独立三席、CI导出、合入及Pages由调用方接续，旧额度和未解决事项保留原归属。

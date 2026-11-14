@@ -393,7 +393,7 @@ Reeb–Wolf 的定理 3（arXiv:1306.4352v3，DOI：10.1088/1367-2630/16/10/1030
 
 ## 8.4 第二部总结与过渡：当一个平面装不下三次正交分叉，向三维球面跃迁 {#sec-part2-summary-bridge}
 
-至此，第二部《展翼·从线到面》的四章画卷已经全部展开。通过二十二条经 Lean 4 内核逐一验证的形式化定理、引理、命题与推论（第五、六、七章各五条，第八章七条），我们彻底打通了二维有向面积的几何脉络：
+至此，第二部《展翼·从线到面》的四章画卷已经全部展开。通过二十六条经 Lean 4 内核逐一验证的形式化定理、引理、命题与推论（第五至第八章依次为五、五、九、七条），我们彻底打通了二维有向面积的几何脉络：
 
 - **第五章**拆穿了虚数单位 $i$ 的神秘伪装，从平衡幺正和 $S = A + B$ 出发严格导出反自伴相对复结构 $J := 2AB^*$ 的平方律 $J^2 = -I$（[@thm-balanced-sum-skew-adjoint]、[@lemma-skew-adjoint-unitary-square]、[@thm-relative-complex-structure-square]）与相位锁定实分解（[@prop-phase-locked-overlap]），并以圆的二重覆盖定理（[@thm-circle-double-cover-history-lift]）说明“转一整圈旋子变号”是拓扑事实，将全部单比特量子门还原为三维布洛赫球上的克利福德旋子 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$；
 - **第六章**用几何积 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$ 终结了波粒二象性的百年割裂，以拉格朗日—格拉姆恒等式（[@thm-lagrange-gram-identity]）、罗伯逊—薛定谔四项守恒律（[@thm-robertson-schrodinger]）及其混合态不等式（[@thm-mixed-state-robertson]）、纯态记录互补圆 $D^2 + V^2 = 1$（[@thm-record-coherence-complementarity]）与捏合勾股分解（[@cor-pinching-pythagorean]）将教科书五大公设熔铸为一炉，并配以实时交互实验室 `ORTHO//QUBIT`；
