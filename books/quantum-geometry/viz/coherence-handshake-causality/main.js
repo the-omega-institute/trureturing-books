@@ -398,8 +398,12 @@
     for (const h of hits) { const d = Math.hypot(x - h.x, y - h.y); if (d < (h.r || 22) && d < bd) { best = h; bd = d; } }
     return best;
   }
-  const local = (ev) => { const b = $('cv').getBoundingClientRect(); return [ev.clientX - b.left, ev.clientY - b.top]; };
-  const toData = (g, ev) => { const q = local(ev); return [g.invX(q[0]), g.invY(q[1])]; };
+  const toData = (key, ev) => {
+    // A readout can wrap the header during a drag. Refresh the plot and use its matching viewport origin.
+    paint.now();
+    const g = hits.find((h) => h.key === key).plot;
+    return [g.invX(ev.clientX - g.viewport.left), g.invY(ev.clientY - g.viewport.top)];
+  };
 
   /** The free box of the stage: below the title, above the legend. */
   function freeBox() {
@@ -435,7 +439,9 @@
     return { x: r.x + 6, y: r.y + t, w: r.w - 12, h: r.h - t - 6 };
   }
   function area(r, xr, yr, equal) {
-    return kit.plot($('cv'), { x: xr, y: yr, pad: [r.x, stage.W - r.x - r.w, r.y, stage.H - r.y - r.h], equal: !!equal, clear: false });
+    const cv = $('cv'), viewport = cv.getBoundingClientRect();
+    const g = kit.plot(cv, { x: xr, y: yr, pad: [r.x, stage.W - r.x - r.w, r.y, stage.H - r.y - r.h], equal: !!equal, clear: false });
+    return Object.assign(g, { viewport });
   }
   /** The same, leaving room for tick labels on the left and below. */
   const areaAx = (r, xr, yr, equal, l, b) => area({ x: r.x + (l == null ? 34 : l), y: r.y + 4, w: r.w - (l == null ? 34 : l) - 6, h: r.h - 4 - (b == null ? 18 : b) }, xr, yr, equal);
@@ -502,7 +508,7 @@
       arrow(ga, 0, 0, c, s, P.sigma, { width: 2.2 });
       ga.dot(c, s, P.sigma, 7 * LW, { ring: true, width: 1.6 });
     });
-    hits.push({ key: 'B', x: ga.X(c), y: ga.Y(s), r: 24, drag: (ev) => { const q = toData(ga, ev); S.th = clamp(Math.atan2(Math.max(0, q[1]), q[0]), 0, PI); paint(); } });
+    hits.push({ key: 'B', plot: ga, x: ga.X(c), y: ga.Y(s), r: 24, drag: (ev) => { const q = toData('B', ev); S.th = clamp(Math.atan2(Math.max(0, q[1]), q[0]), 0, PI); paint(); } });
     if (!thumb) {
       tagS('bo-A', ga.X(1), ga.Y(0) + 13, 'A', 'raw c-cy');
       tagS('bo-B', ga.X(c * 1.13) + (c >= 0 ? 10 : -10), ga.Y(s * 1.13), 'B', 'raw ink');
@@ -527,7 +533,7 @@
       else gb.dot(0, 0, P.cyan, 7 * LW, { ring: true, width: 2 });
       gb.dot(tp[0], tp[1], P.violet, 6 * LW, { ring: true, width: 1.8 });
     });
-    hits.push({ key: 'phase', x: gb.X(tp[0]), y: gb.Y(tp[1]), r: 24, drag: (ev) => { const q = toData(gb, ev); S.Delta = ((Math.atan2(q[1], q[0] - m.a) % TAU) + TAU) % TAU; paint(); } });
+    hits.push({ key: 'phase', plot: gb, x: gb.X(tp[0]), y: gb.Y(tp[1]), r: 24, drag: (ev) => { const q = toData('phase', ev); S.Delta = ((Math.atan2(q[1], q[0] - m.a) % TAU) + TAU) % TAU; paint(); } });
     if (!thumb) {
       tagS('bo-a', gb.X(a / 2), gb.Y(0) + 14, 'a', 'raw ink');
       const mid = [(a + tp[0]) / 2, tp[1] / 2], nx = -tp[1], ny = tp[0] - a, nl = Math.hypot(nx, ny) || 1;
@@ -610,7 +616,7 @@
     const gc = cexp(m.chiPsi);
     g.line([[1.06 * gc[0], 1.06 * gc[1]], [1.22 * gc[0], 1.22 * gc[1]]], P.amber, { width: 2 * LW });
     g.dot(1.14 * gc[0], 1.14 * gc[1], P.amber, 5 * LW, { glow: 10 });
-    hits.push({ key: 'fwd', x: g.X(m.fwd[0]), y: g.Y(m.fwd[1]), r: 24, drag: (ev) => { const q = toData(g, ev); setRail(((Math.atan2(q[1], q[0]) + S.chiPhi) % TAU + TAU) % TAU); } });
+    hits.push({ key: 'fwd', plot: g, x: g.X(m.fwd[0]), y: g.Y(m.fwd[1]), r: 24, drag: (ev) => { const q = toData('fwd', ev); setRail(((Math.atan2(q[1], q[0]) + S.chiPhi) % TAU + TAU) % TAU); } });
     if (!thumb) {
       if (m.r > 0.18) {
         tagS('bh-f', g.X(m.fwd[0] * 1.18), g.Y(m.fwd[1] * 1.18) - 10, '⟨φ|ψ⟩', 'raw c-cy');
@@ -643,7 +649,7 @@
       g.dot(A[0], A[1], P.sigma, 4.5 * LW); g.dot(B[0], B[1], P.sigma, 4.5 * LW);
       g.dot(m.sCur, 0, P.amber, 5.5 * LW, { glow: 10 });
     });
-    hits.push({ key: 'cross', x: g.X(m.sCur), y: g.Y(0), r: 24, drag: (ev) => { const q = toData(g, ev), i = clamp(Math.round((q[0] + 2) / 5 * m.M - 0.5), 0, m.M - 1); setRail((i + 1) / m.M); } });
+    hits.push({ key: 'cross', plot: g, x: g.X(m.sCur), y: g.Y(0), r: 24, drag: (ev) => { const q = toData('cross', ev), i = clamp(Math.round((q[0] + 2) / 5 * m.M - 0.5), 0, m.M - 1); setRail((i + 1) / m.M); } });
     if (!thumb) {
       tagS('fy-A', g.X(A[0]) - 22, g.Y(A[1]) - 10, 'A (t₁)', 'raw ink small');
       tagS('fy-B', g.X(B[0]) + 24, g.Y(B[1]) + 10, 'B (t₂)', 'raw ink small');
@@ -725,7 +731,7 @@
     gd.line(circlePts(0, 0, 0.42, PI / 2, PI / 2 - b, 30), P.amber, { width: 1.4 * LW, alpha: 0.9 });
     gd.line([[-Math.sin(b), -Math.cos(b)], [Math.sin(b), Math.cos(b)]], P.amber, { width: 2 * LW });
     gd.dot(Math.sin(b), Math.cos(b), P.cyan, 6 * LW); gd.dot(-Math.sin(b), -Math.cos(b), P.magenta, 6 * LW);
-    hits.push({ key: 'beta', x: gd.X(Math.sin(b)), y: gd.Y(Math.cos(b)), r: 24, drag: (ev) => { const qq = toData(gd, ev); setRail(clamp(Math.atan2(qq[0], qq[1]), 0, PI / 2)); } });
+    hits.push({ key: 'beta', plot: gd, x: gd.X(Math.sin(b)), y: gd.Y(Math.cos(b)), r: 24, drag: (ev) => { const qq = toData('beta', ev); setRail(clamp(Math.atan2(qq[0], qq[1]), 0, PI / 2)); } });
     if (!thumb && id.h > 80) {
       tagIn('ts-z', id, gd.X(-0.8), gd.Y(1.0), L('|0⟩ 测路径', '|0⟩ which-path'), 'raw small c-dim');
       tagS('ts-x', gd.X(1.17) - 8, gd.Y(0) + 14, L('|+⟩ 擦除', '|+⟩ eraser'), 'raw small c-dim');
@@ -746,7 +752,7 @@
     const cosPts = []; for (let i = 0; i <= 120; i++) { const e = -PI / 2 + PI * i / 120; cosPts.push([e, Math.cos(e) ** 2]); }
     gp.area(cosPts, P.cyan, { alpha: 0.16 }); gp.line(cosPts, P.cyan, { width: 1.4 * LW });
     gp.dot(S.eta, wv.pPost, P.ink, 4.5 * LW);
-    hits.push({ key: 'eta', x: gw.X(S.eta), y: gw.Y(wv.defined ? clamp(wv.Zw[0], -4, 4) : 0), r: 24, drag: (ev) => { const qq = toData(gw, ev); S.eta = clamp(Math.round(qq[0] / DEG) * DEG, -PI / 2, PI / 2); paint(); } });
+    hits.push({ key: 'eta', plot: gw, x: gw.X(S.eta), y: gw.Y(wv.defined ? clamp(wv.Zw[0], -4, 4) : 0), r: 24, drag: (ev) => { const qq = toData('eta', ev); S.eta = clamp(Math.round(qq[0] / DEG) * DEG, -PI / 2, PI / 2); paint(); } });
     if (!thumb && iw.h > 80) {
       const txt = wv.defined ? `Z_w = tan η = ${nf(wv.Zw[0], 3)}` : L('Z_w 无定义（p_post = 0）', 'Z_w undefined (p_post = 0)');
       tagS('ts-w', wT.x + wT.w / 2, wT.y + 9, txt, 'raw small c-vi');
@@ -851,7 +857,7 @@
       if (Math.hypot(tip[0], tip[1]) > 0.02) arrow(ga, 0, 0, tip[0], tip[1], P.cyan, { width: 3 }); else ga.dot(0, 0, P.cyan, 7 * LW, { ring: true, width: 2 });
       ga.dot(tip[0], tip[1], P.violet, 6 * LW, { ring: true, width: 1.8 });
     });
-    hits.push({ key: 'loop', x: ga.X(tip[0]), y: ga.Y(tip[1]), r: 24, drag: (ev) => { const q = toData(ga, ev); let d = Math.atan2(q[1], q[0] - 0.5); if (d < 0) d += TAU; const t0 = S.tau, cand = [d / PI, d / PI + 2, d / PI - 2].filter((v) => v >= 0 && v <= 2); setRail(cand.reduce((b0, v) => (Math.abs(v - t0) < Math.abs(b0 - t0) ? v : b0), cand[0] == null ? 0 : cand[0])); } });
+    hits.push({ key: 'loop', plot: ga, x: ga.X(tip[0]), y: ga.Y(tip[1]), r: 24, drag: (ev) => { const q = toData('loop', ev); let d = Math.atan2(q[1], q[0] - 0.5); if (d < 0) d += TAU; const t0 = S.tau, cand = [d / PI, d / PI + 2, d / PI - 2].filter((v) => v >= 0 && v <= 2); setRail(cand.reduce((b0, v) => (Math.abs(v - t0) < Math.abs(b0 - t0) ? v : b0), cand[0] == null ? 0 : cand[0])); } });
     if (!thumb) {
       tagS('pc-ref', ga.X(0.25), ga.Y(0) + 14, L('参考臂 ½', 'reference ½'), 'raw small ink');
       const lm = [(0.5 + tip[0]) / 2, tip[1] / 2];
@@ -1331,8 +1337,12 @@
     weak: (eta) => weak(eta == null ? S.eta : eta),
     gramCheck,
     fates: () => JSON.parse(JSON.stringify(FATES)),
-    /** Viewport coordinates of a draggable handle of the current scene (B, phase, phi, fwd, cross, beta, eta, C, loop). */
-    at: (key) => { const h = hits.find((q) => q.key === key); if (!h) return null; const b = $('cv').getBoundingClientRect(); return [b.left + h.x, b.top + h.y]; }
+    /** Viewport coordinates of a handle, or a data point in its current 2D plot, without changing state. */
+    at: (key, point) => {
+      const h = hits.find((q) => q.key === key); if (!h) return null;
+      const b = h.plot ? h.plot.viewport : $('cv').getBoundingClientRect();
+      return point && h.plot ? [b.left + h.plot.X(point[0]), b.top + h.plot.Y(point[1])] : [b.left + h.x, b.top + h.y];
+    }
   };
   window.__HANDSHAKE_LAB__ = api;
   window.HANDSHAKE_DEBUG = api;

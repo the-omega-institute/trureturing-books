@@ -326,9 +326,54 @@ await page.click('[data-lang-set="zh"]'); await settle(page);
   check('fates: six nondegenerate maps, each with exactly one fate, live exactly for the two golden families', JSON.stringify(theirs) === JSON.stringify(mine) && (await LAB(() => window.__HANDSHAKE_LAB__.fates())).every((f) => f.fates.length === 1 && (f.fate === 'live') === f.phiFamily));
   await page.click('#loopSnaps [data-snap="0"]'); await settle(page);
   check('loop: the δ = 0 snap brightens the paradox port', near((await state()).math['paradox-cancel'].pLoop, 1));
-  const at = await LAB(() => window.__HANDSHAKE_LAB__.at('loop')), tgt = await LAB(() => { const L = window.__HANDSHAKE_LAB__; L.setState({ tau: 1 }); const q = L.at('loop'); L.setState({ tau: 0 }); return q; });
+  // Both endpoints come from the current τ = 0 layout; sampling never changes the header readout.
+  const { at, tgt } = await LAB(() => {
+    const L = window.__HANDSHAKE_LAB__;
+    return { at: L.at('loop'), tgt: L.at('loop', [0, 0]) };
+  });
   await page.mouse.move(at[0], at[1]); await page.mouse.down(); await page.mouse.move(tgt[0], tgt[1], { steps: 5 }); await page.mouse.up(); await settle(page);
   check('loop: dragging the violet loop arrow turns δ', Math.abs((await state()).params.tau - 1) < 0.06, String((await state()).params.tau));
+}
+
+/* ---------- loop drag through a live header wrap (also run with VIZ_SLOW_FRAMES=1000) ---------- */
+{
+  const wrap = await T.open(BOOK, ID, '?lang=zh', { viewport: { width: 1408, height: 900 } });
+  await settle(wrap);
+  await wrap.click('[data-preset="paradox-cancel"]'); await settle(wrap);
+  await wrap.click('#loopSnaps [data-snap="0"]'); await settle(wrap);
+  const start = await wrap.evaluate(() => ({
+    at: window.__HANDSHAKE_LAB__.at('loop'),
+    top: document.querySelector('#cv').getBoundingClientRect().top,
+    tau: window.__HANDSHAKE_LAB__.state.params.tau
+  }));
+  check('loop wrap (1408 × 900, zh): drag starts at τ = 0', near(start.tau, 0));
+  await wrap.mouse.move(...start.at); await wrap.mouse.down();
+  let worst = 0, topShift = 0, pointerError = 0;
+  for (let degrees = 10; degrees <= 180; degrees += 10) {
+    const delta = degrees * DEG;
+    const before = await wrap.evaluate((point) => ({
+      target: window.__HANDSHAKE_LAB__.at('loop', point),
+      top: document.querySelector('#cv').getBoundingClientRect().top
+    }), [0.5 + 0.5 * Math.cos(delta), 0.5 * Math.sin(delta)]);
+    await wrap.mouse.move(...before.target); await settle(wrap);
+    const actual = await wrap.evaluate(() => ({
+      tau: window.__HANDSHAKE_LAB__.state.params.tau,
+      top: document.querySelector('#cv').getBoundingClientRect().top,
+      at: window.__HANDSHAKE_LAB__.at('loop')
+    }));
+    worst = Math.max(worst, Math.abs(actual.tau - degrees / 180));
+    topShift = Math.max(topShift, actual.top - start.top);
+    // A wrap moves the drawing after that input; the following input must follow the newly drawn circle.
+    if (near(actual.top, before.top)) pointerError = Math.max(pointerError,
+      Math.hypot(actual.at[0] - before.target[0], actual.at[1] - before.target[1]));
+  }
+  await wrap.mouse.up(); await settle(wrap);
+  const tau = await wrap.evaluate(() => window.__HANDSHAKE_LAB__.state.params.tau);
+  check('loop wrap (1408 × 900, zh): the header moves the canvas during the drag', topShift > 20, `canvas shift ${topShift}px`);
+  check('loop wrap (1408 × 900, zh): every pointer angle stays within the original τ tolerance', worst < 0.06, `max τ error ${worst}`);
+  check('loop wrap (1408 × 900, zh): the arrow follows the pointer after reflow', pointerError < 2, `max pointer error ${pointerError}px`);
+  check('loop wrap (1408 × 900, zh): the real mouse drag reaches δ = 180°', Math.abs(tau - 1) < 0.06, `τ ${tau}`);
+  await wrap.context().close();
 }
 
 /* ---------- presets, rail, keys, language, motion, touch ---------- */
