@@ -668,6 +668,216 @@ $$
 要讨论物理空间切口的熵，还须指定多体哈密顿量、填充及态；若选择粒子数守恒的 Slater 基态，须构造其实际占据投影 $P_{\mathrm{occ}}$，并对选定格点子集 $I$ 取关联矩阵压缩 $\chi_I P_{\mathrm{occ}}\chi_I$，其中 $\chi_I$ 投影到这些格点。Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。即使上述极限得到解决，也只触及谱隙前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
 :::
 
+::: {.remark #rem-ch39-p2e-tridiagonal-localization title="保留端点残差的三对角局部化（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 将一个整轴向量硬截成有限区段，会在区段两端留下残差；逐渐收窄的正弦权窗可以定量控制这项代价。Chandler-Wilde–Chonchaiya–Lindner，*On spectral inclusion sets and computing the spectra and pseudospectra of bounded linear operators*（[*J. Spectr. Theory* **14**, 719–804](https://doi.org/10.4171/JST/514)，§5.1，推论 5.2、5.4）给出如下工具。设 $A$ 是 $\ell^2(\mathbb{Z})$ 上的有界三对角算子，$M_\pm=\sup_{i\in\mathbb{Z}}|A_{i,i\pm1}|$；对任意非零定义域的有界算子 $B$，记 $\nu(B)=\inf_{\|x\|_2=1}\|Bx\|_2$。对每个整数 $n\ge1$，令 $E_{n,k}$ 为仅支撑在站点 $k+1,\ldots,k+n$ 上的向量空间，则
+
+$$
+\begin{aligned}
+\inf_{k\in\mathbb{Z}}\nu\!\left(A|_{E_{n,k}}\right)
+&\le \nu(A)+\varepsilon_n,\\
+\varepsilon_n&=2(M_-+M_+)\sin\frac{\pi}{2(n+1)}.
+\end{aligned}
+$$
+
+这里仅限制输入支撑，输出仍在整轴上：对应的 $(n+2)\times n$ 矩阵保留两条向外的残差行，不能将它换成丢弃这两行的 $n\times n$ 压缩。该式对位置取下确界；选取实际区段与单位向量时可保留任意正余量。它提供了 $1/n$ 量级的 $\ell^2$ 局部化工具，却尚未闭合前面的 Tribonacci 开链问题：还须证明相应整轴模型的零谱前提，并把连同一层邻接站点的实际词区段转植进指定的有限开前缀，核对长度比例与小尺度情形。这些接口在本书中仍未验证。
+:::
+
+另一条有限矩阵路线利用奇数长度的重复：奇数平移把偶数键与奇数键互换，前代入中的两串跃迁比值因而可以配对。下面的下界把这一抵消机制写成实际逆矩阵的定量结论。
+
+::: {.theorem #thm-ch39-p2e-odd-repeat-inverse-mass title="奇数重复段的逆矩阵质量下界" lean="D5/S3/Quantum/Dynamics/OddSquareGreenMass.odd_square_inverse_paired_mass"}
+设 $q\in\mathbb{N}$，$t:\mathbb{N}\to\mathbb{R}$ 满足对每个 $i\in\mathbb{N}$ 都有 $0<t(i)\le1$，并且
+
+$$
+t(i+2q+1)=t(i)\qquad(0\le i<2q).
+$$
+
+令 $n=2q+1$。下双对角矩阵 $L\in\mathbb{R}^{n\times n}$ 从零编号，其非零位置为
+
+$$
+\begin{aligned}
+L_{i,i}&=t(2i) &&(0\le i<n),\\
+L_{i+1,i}&=-t(2i+1) &&(0\le i<n-1).
+\end{aligned}
+$$
+
+其余位置为零。记 $G=L^{-1}$；对 $0\le l<q$、$0\le d<q-l$，定义成对质量
+
+$$
+\begin{aligned}
+P_{l,d}&=G_{l+d+1,l}\\
+&\quad+G_{q+l+d+1,q+l+1}.
+\end{aligned}
+$$
+
+则所有这些矩阵指标都在 $0,\ldots,2q$ 内，且
+
+$$
+q(q+1)\le\sum_{l=0}^{q-1}\sum_{d=0}^{q-l-1}P_{l,d}.
+$$
+
+$q=0$ 时两重求和为空，按零计。
+:::
+
+::: proof
+正的对角元保证前代入给出实际逆矩阵。奇数重复使每对中的两个正项之积恰为 $1/[t(2l)t(2(l+d+1))]\ge1$，所以每对之和至少为 $2$。三角形指标域共有 $q(q+1)/2$ 对，求和即得下界。完整证明由 Lean 内核检查。
+:::
+
+若 $m=2q+1$、$s$ 为偶数，实际词满足 $W_{s+i+m}=W_{s+i}$（$0\le i<m-1$），且 $s+2m\le N_j$，则可取 $t(i)=t_{W_{s+i}}$ 来匹配这一矩阵模型及前缀内的 $2m$ 站点窗口。下面的定理从替代词本身给出所需窗口及其与前缀长度的统一比较。
+
+::: {.theorem #thm-ch39-p2e-aligned-tribonacci-windows title="实际 Tribonacci 前缀中的均匀奇数重复窗口" lean="D5/S1/Words/TribonacciAlignedWindows.aligned_windows"}
+对上述实际词 $W$、替代长度 $L_j=|\sigma^j(A)|$ 与偶数前缀长度 $N_j=2\lfloor L_j/2\rfloor$，存在自然数 $K>0$、$J\ge1$，使每个自然数 $j\ge J$ 都有自然数 $m,s$ 满足
+
+$$
+\begin{aligned}
+m&\ge3,\qquad m\text{ 为奇数},\quad s\text{ 为偶数},\\
+N_j&\le Km,\qquad s+2m\le N_j,\\
+W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
+\end{aligned}
+$$
+
+最后一行对范围内的每个自然数 $i$ 成立；常数 $K,J$ 不随 $j$ 改变。
+:::
+
+::: proof
+形式证明取 $K=128$、$J=4$。第四次替代中的两份 $ABA$ 提供重复块，四步替代保持三个字母像长度的奇性，从而给出奇数块长与偶数起点。非空尾段保证向下取偶数后仍包含整个窗口，七步长度增长给出因子 $128$。下面的例子展开这一构造；完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-ch39-p2e-aligned-tribonacci-windows title="奇数重复窗口的显式构造"}
+对每个 $j\ge4$，令 $r=\lfloor(j-4)/4\rfloor$、$k=4r$，于是 $k+4\le j\le k+7$。将第四次替代写成四段：
+
+$$
+\sigma^4(A)=ABAC\,\vert\,ABA\,\vert\,ABA\,\vert\,CAB.
+$$
+
+记 $a=\sigma^k(A)$、$b=\sigma^k(B)$、$c=\sigma^k(C)$，竖线表示拼接而非额外字母。再施加 $k$ 次替代，得到
+
+$$
+\sigma^{k+4}(A)=(abac)\,(aba)\,(aba)\,(cab).
+$$
+
+取 $s=|abac|$、$m=|aba|$。在每个四的倍数层，$a,b,c$ 的长度均为奇数：零层长度都是 $1$；第四次替代的三个字母像分别含 $13,11,7$ 个字母，故四步替代保持这三个长度的奇性。于是 $s$ 为偶数，$m\ge3$ 为奇数，且两份 $aba$ 给出所需的重复等式。尾段 $cab$ 非空，故将前缀长度向下取偶数仍保留整个重复窗口。每步替代至多使长度翻倍，因此
+
+$$
+\begin{aligned}
+N_j&\le L_j\le L_{k+7}\le128L_k\le128m,\\
+s+2m&\le N_j,\\
+W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
+\end{aligned}
+$$
+
+这里 $s,m$ 都是非负整数；常数 $128$ 与 $j$ 及跃迁参数 $\rho$ 无关。这给出 [@thm-ch39-p2e-aligned-tribonacci-windows] 中常数与窗口的具体选择。
+:::
+
+::: {.example #ex-ch39-p2e-full-inverse-euclidean title="从局部质量到完整逆矩阵的欧氏估计"}
+取正且不超过 $1$ 的跃迁序列 $t$，令 $G=L(t,n)^{-1}$ 为上述双对角块的完整逆矩阵。设整数 $q\ge1$、$a\ge0$ 满足 $a+2q+1\le n$，并且
+
+$$
+t\bigl(2a+i+(2q+1)\bigr)=t(2a+i)\qquad(0\le i<2q).
+$$
+
+令 $x=(1,\ldots,1)\in\mathbb R^n$，$v=x/\sqrt n$。所有范数都取欧氏范数，则
+
+$$
+\|v\|_2=1,\qquad q(q+1)\le 2n\|Gv\|_2.
+$$
+
+这里的逆矩阵保留窗口两侧的所有外部站点。前代入给出的逆元公式说明：把局部逆矩阵的行、列同时平移 $a$，恰得到 $G$ 中对应的元素。由于 $G$ 的所有元素非负，[@thm-ch39-p2e-odd-repeat-inverse-mass] 的两个三角区域各自嵌入全矩阵后，给出
+
+$$
+q(q+1)\le2\sum_{i,j=0}^{n-1}G_{ij}.
+$$
+
+因子 $2$ 允许分别控制这两个区域，无须额外证明它们互不重叠。另一方面，柯西—施瓦茨不等式给出
+
+$$
+\begin{aligned}
+\sum_{i,j=0}^{n-1}G_{ij}&=\langle x,Gx\rangle,\\
+&\le\|x\|_2\|Gx\|_2,\\
+&=n\|Gv\|_2.
+\end{aligned}
+$$
+
+合并即得所示估计。对前述窗口，参数对应为 $m=2q+1$、$s=2a$、$N_j=2n$。这是既有逆矩阵质量结论、前代入公式和欧氏不等式的应用推导，不新增形式化声明，本例不带独立的 Lean 验证徽章。
+:::
+
+::: {.example #ex-ch39-p2e-open-chain-residual title="从完整逆矩阵到有限开链的谱残差界"}
+对整数 $n\ge1$，取实跃迁序列 $t:\mathbb N\to\mathbb R$，满足每个 $k\in\mathbb N$ 都有 $t_k>0$。在按自然数从零编号的 $2n$ 个站点上，定义实际开链矩阵 $H\in\mathbb R^{2n\times2n}$：
+
+$$
+H_{ij}=\begin{cases}
+t_i,&i+1=j,\\
+t_j,&j+1=i,\\
+0,&\text{其他情形},
+\end{cases}
+\qquad 0\le i,j<2n.
+$$
+
+它的对角线为零，最后一条物理键为 $t_{2n-2}$，没有首尾闭合键；$n=1$ 时就是仅含键 $t_0$ 的两个站点。令 $B=L(t,n)$ 为前述下双对角块，即
+
+$$
+\begin{aligned}
+B_{i,i}&=t_{2i} &&(0\le i<n),\\
+B_{i,i-1}&=-t_{2i-1} &&(1\le i<n),
+\end{aligned}
+$$
+
+其余元素为零。下三角性给出 $\det B=\prod_{i=0}^{n-1}t_{2i}>0$，故普通矩阵逆 $G=B^{-1}$ 存在。对每个欧氏单位向量 $v\in\mathbb R^n$，都存在实数 $\lambda$ 和非零实向量 $z\in\mathbb R^{2n}$，使
+
+$$
+\begin{aligned}
+Hz&=\lambda z,\\
+|\lambda|\,\|Gv\|_2&\le1.
+\end{aligned}
+$$
+
+具体地，按偶站点、奇站点重排坐标，写 $C_{ij}=H_{2i,2j+1}$。矩阵 $C$ 的对角元为 $t_{2i}$，次对角元为 $t_{2i-1}$，其余元素为零。取 $D=\operatorname{diag}((-1)^i)_{i=0}^{n-1}$，则 $D^2=I$，且逐项计算得到
+
+$$
+\begin{aligned}
+H&=\begin{pmatrix}0&C\\C^{\mathsf T}&0\end{pmatrix},\\
+DCD&=B,\qquad CD=DB.
+\end{aligned}
+$$
+
+第一行表示重排后的矩阵。构造辅助向量 $u$，令 $u_{\mathrm{even}}=0$、$u_{\mathrm{odd}}=DGv$。由 $BG=I$，
+
+$$
+\begin{aligned}
+(Hu)_{\mathrm{even}}&=CDGv=DBGv=Dv,\\
+(Hu)_{\mathrm{odd}}&=0,\\
+\|u\|_2&=\|Gv\|_2,\qquad \|Hu\|_2=1.
+\end{aligned}
+$$
+
+这里 $D$ 只改变坐标符号，保持欧氏范数；$BGv=v\ne0$ 还保证 $u\ne0$。由于 $H$ 是有限维实对称矩阵，取它的实正交归一特征基 $e_k$，对应实特征值 $\lambda_k$（$0\le k<2n$）。令 $\alpha=\min_{0\le k<2n}|\lambda_k|$，将 $u=\sum_k c_ke_k$ 代入 Parseval 恒等式，得到
+
+$$
+\begin{aligned}
+\alpha^2\|u\|_2^2
+&=\alpha^2\sum_{k=0}^{2n-1}c_k^2,\\
+&\le\sum_{k=0}^{2n-1}\lambda_k^2c_k^2
+=\|Hu\|_2^2=1.
+\end{aligned}
+$$
+
+有限的非空特征值集合中存在 $k_0$ 使 $|\lambda_{k_0}|=\alpha$。取 $\lambda=\lambda_{k_0}$、$z=e_{k_0}$，开平方即得所示不等式。$z$ 是选出的特征向量，辅助向量 $u$ 一般并不是特征向量。本例不要求跃迁有上界。
+
+若还满足 [@ex-ch39-p2e-full-inverse-euclidean] 的上界与重复窗口假设，使用其中同一个单位向量 $v$，便有
+
+$$
+\begin{aligned}
+|\lambda|q(q+1)
+&\le2n|\lambda|\,\|Gv\|_2\le2n,\\
+\delta:=\min_{\mu\in\operatorname{Spec}(H)}|\mu|
+&=|\lambda|\le\frac{2n}{q(q+1)}.
+\end{aligned}
+$$
+
+这把完整逆矩阵的质量估计转成同一有限开链到零能量的谱距离界。
+:::
+
+上例完成了任意正跃迁有限开链的谱转换。实际 Tribonacci 前缀的全序列速率仍需把字跃迁 $t_i=t_{W_i}$、对齐重复窗口与完整逆矩阵质量估计在同一参数约定下精确拼接，并处理最初的短前缀。本节尚未建立：对每个固定 $\rho\in(0,1)$，存在 $C_\rho>0$ 与整数 $J_\rho\ge1$，使所有 $j\ge J_\rho$ 都满足 $\delta_{\rho,j}\le C_\rho/N_j$。这样的定量界可推出前述开链极限；分形熵标度仍需独立的物理态与空间切口论证。
+
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`，移位熵与阿布拉莫夫公式属 `文献结果`，分形面积律属 `OPEN`。
 :::
