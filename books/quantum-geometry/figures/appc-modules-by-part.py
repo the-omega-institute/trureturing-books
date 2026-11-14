@@ -22,52 +22,19 @@ ROWS_SHOWN = 11
 
 
 def data():
-    lock = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))["declarations"]
-    units, part, part_of = [], -1, {}
-    for line in (BOOK / "zh" / "SUMMARY.md").read_text(encoding="utf-8").splitlines():
-        if line.startswith("# ") and not line.startswith("# Summary"):
-            part += 1
-            continue
-        m = re.search(r"\]\(([^)]+\.md)\)", line)
-        if m:
-            units.append(m.group(1))
-            part_of[m.group(1)] = part
-    first = {}
-    env = set()
-    for file in units:
-        if file == "appendix-c.md":
-            continue
-        text = (BOOK / "zh" / file).read_text(encoding="utf-8")
-        cited = set()
-        for line in text.splitlines():
-            if line.startswith(":::"):
-                for attr in re.findall(r'\slean="([^"]*)"', line):
-                    found = {g for g in re.split(r"[\s,]+", attr.strip()) if g}
-                    cited.update(found)
-                    env.update(found)
-        cited |= {m.group(1) or m.group(2) for m in re.finditer(r"\(lean:([^)\s]+)\)|<lean:([^>\s]+)>", text)}
-        for g in cited:
-            if g in lock and g not in first:
-                first[g] = file
-    index = (BOOK / "zh" / "appendix-c.md").read_text(encoding="utf-8")
-    gids = re.findall(r"^\| `T\d+` \| \[[^\]]*\]\(lean:([^)\s]+)\)", index, re.M)
-    listed = set(gids)
-    gids += [g for g, d in lock.items() if d["kind"] == "theorem" and g in env and g not in listed]
-    assert len(gids) == len(set(gids))
-    assert set(gids) == {g for g in env if lock[g]["kind"] == "theorem"}
-    fam = lambda g: "/".join(g.split(".")[0].split("/")[:3])
+    from _book_stats import DATA, CHAPTERS, FIRST, PARTS
+    part_of = {c['file']: PARTS.index(c['part']) if c['part'] else -1 for c in CHAPTERS}
+    gids = DATA['groups']['theorems']
+    fam = lambda g: '/'.join(g.split('.')[0].split('/')[:3])
     sizes = Counter(fam(g) for g in gids)
     top = [f for f, _ in sizes.most_common(ROWS_SHOWN)]
     grid = defaultdict(Counter)
     for g in gids:
-        p = part_of[first[g]]
-        assert 0 <= p <= 10, (g, first[g])
-        grid[fam(g) if fam(g) in top else "*"][p] += 1
+        grid[fam(g) if fam(g) in top else '*'][part_of[FIRST[g]]] += 1
     return top, grid, sizes
 
 
 TOP, GRID, SIZES = data()
-assert TOP[0] == "D5/S3/Quantum" and set(GRID["D5/S3/FluidDynamics"]) == {7}
 TOTAL = sum(sum(c.values()) for c in GRID.values())
 assert TOTAL == sum(SIZES.values())
 COLS = Counter()
@@ -76,16 +43,10 @@ for c in GRID.values():
 assert sum(COLS.values()) == TOTAL
 
 ALT = {
-    "zh": f"一张计数格：行是 trureturing 的模块族，从上到下是 {'、'.join(f.split('/')[-1] for f in TOP)} 与其余各族；"
-          f"列是第一至第十部与“终章、附录”。每格写着这一族里在这一部第一次出场的定理条数，底色越深条数越多，空格为零。"
-          f"Quantum 一族最大，{SIZES[TOP[0]]} 条，分布在第一至第八部与第十部；FluidDynamics 的 {SIZES['D5/S3/FluidDynamics']} 条全在第八部；Zeros、Weil 只在第六部。"
-          f"合计 {TOTAL} 条，即附录 C 的 C.1 索引。",
-    "en": f"A grid of counts: the rows are module families of trureturing, from top to bottom {', '.join(f.split('/')[-1] for f in TOP)} "
-          f"and all others; the columns are Parts I to X and the coda with the appendices. Each cell gives how many theorems of that "
-          f"family first appear in that part, the darker the more, blank for none. The Quantum family is the largest, "
-          f"{SIZES[TOP[0]]} theorems, spread over Parts I to VIII and X; all {SIZES['D5/S3/FluidDynamics']} of FluidDynamics are in Part VIII; Zeros and Weil appear "
-          f"only in Part VI. They add up to {TOTAL}, the C.1 index of appendix C.",
+    "zh": f"模块族与首次出场的部的计数格。行是 {'、'.join(f.split('/')[-1] for f in TOP)} 与其余各族；列是第一至第十部与终章、附录。每格数字为条数，空格为零，合计 {TOTAL} 条。图不表示证明依赖。",
+    "en": f"Counts by module family and part of first appearance. Rows show {', '.join(f.split('/')[-1] for f in TOP)} and all others; columns show Parts I to X and the coda with appendices. Cells give counts, blanks mean zero; total {TOTAL}. This is not a proof-dependency graph.",
 }
+
 
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 
