@@ -9,7 +9,7 @@
 第 16.3 节的 [@thm-central-defect-endpoint-average] 及其 [书面证明](ch16-qsvt-walks-and-compilation.md#pf-central-defect-endpoint-average) 不属于冻结声明，也不是开放问题。其 DOI、原文定位与[形式化请求 #10](https://github.com/the-omega-institute/trureturing-requests/issues/10) 随正文及自动生成的书面证明账本单列；不增加上述锁定声明、绿色图表或 C.4 的条数。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**{{total}} 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：{{theorems}} 格是定理，{{definitions}} 格是定义或归纳类型；{{env}} 个实心格被环境头以 `lean=` 引用，{{R}} 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
+**{{total}} 格，一格一条锁定声明。** 时间轴从序曲读到附录 E（附录 C 本身不作落点），每条声明落在最先引用它的单元：{{theorems}} 格是定理，{{definitions}} 格是定义或归纳类型；{{env}} 个实心格被环境头以 `lean=` 引用，{{R}} 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
 :::
 
 ---

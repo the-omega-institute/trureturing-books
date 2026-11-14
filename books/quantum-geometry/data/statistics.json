@@ -5,17 +5,17 @@
   "environments": {
     "theorem": 173,
     "lemma": 34,
-    "proposition": 43,
-    "corollary": 25,
+    "proposition": 44,
+    "corollary": 30,
     "definition": 38,
     "conjecture": 6,
     "problem": 3,
-    "example": 107,
-    "remark": 178,
-    "proof": 272,
-    "lean_verified": 273,
+    "example": 109,
+    "remark": 186,
+    "proof": 278,
+    "lean_verified": 279,
     "written_proof": 2,
-    "literature": 187
+    "literature": 191
   },
   "total": 593,
   "kinds": {
@@ -630,14 +630,26 @@
       "name": "D5.S0.Automata.BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes",
       "citations": [
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 44,
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 26,
+          "id": "cor-ch32-successor-primes-and-zeckendorf",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 32,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch32-s04-generative-laws.md",
+          "line": 23,
           "id": "thm-ch32-generative-self-reference-and-zeckendorf",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 65,
+          "file": "ch32-s04-generative-laws.md",
+          "line": 44,
           "id": "",
           "via": "inline"
         },
@@ -710,6 +722,12 @@
         {
           "file": "appendix-a.md",
           "line": 806,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 111,
           "id": "",
           "via": "inline"
         },
@@ -906,14 +924,26 @@
           "via": "inline"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 145,
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 81,
+          "id": "cor-ch32-minkowski-holonomy-and-second-law",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 84,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch32-s05-physical-fields-and-six-domains.md",
+          "line": 31,
           "id": "thm-ch32-null-cone-holonomy-and-holographic-cut",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 148,
+          "file": "ch32-s05-physical-fields-and-six-domains.md",
+          "line": 34,
           "id": "",
           "via": "inline"
         },
@@ -974,6 +1004,18 @@
         {
           "file": "appendix-d.md",
           "line": 258,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 234,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 274,
           "id": "",
           "via": "inline"
         },
@@ -1063,7 +1105,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 223,
+          "line": 224,
           "id": "prop-ch34-null-cone-and-golden-cut-orientation",
           "via": "environment"
         },
@@ -1075,7 +1117,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 226,
+          "line": 227,
           "id": "",
           "via": "inline"
         },
@@ -1146,20 +1188,44 @@
       "name": "PredictiveThermodynamic.BinaryNames.name_compare_run",
       "citations": [
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 587,
+          "file": "ch32-s02-oisc-comparison-engine.md",
+          "line": 68,
           "id": "thm-ch32-paid-name-comparison-and-dictionary",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 590,
+          "file": "ch32-s02-oisc-comparison-engine.md",
+          "line": 71,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 81,
+          "id": "cor-ch32-minkowski-holonomy-and-second-law",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 87,
           "id": "",
           "via": "inline"
         },
         {
           "file": "appendix-a.md",
           "line": 862,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 253,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 275,
           "id": "",
           "via": "inline"
         }
@@ -1170,14 +1236,14 @@
       "name": "PredictiveThermodynamic.BinaryNames.dictionary_lookup_run",
       "citations": [
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 587,
+          "file": "ch32-s02-oisc-comparison-engine.md",
+          "line": 68,
           "id": "thm-ch32-paid-name-comparison-and-dictionary",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 598,
+          "file": "ch32-s02-oisc-comparison-engine.md",
+          "line": 79,
           "id": "",
           "via": "inline"
         },
@@ -1478,6 +1544,12 @@
         {
           "file": "appendix-a.md",
           "line": 680,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 89,
           "id": "",
           "via": "inline"
         },
@@ -2185,7 +2257,7 @@
       "citations": [
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 223,
+          "line": 224,
           "id": "prop-ch34-null-cone-and-golden-cut-orientation",
           "via": "environment"
         },
@@ -2197,7 +2269,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 232,
+          "line": 233,
           "id": "",
           "via": "inline"
         },
@@ -2514,14 +2586,14 @@
           "via": "inline"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 44,
+          "file": "ch32-s04-generative-laws.md",
+          "line": 23,
           "id": "thm-ch32-generative-self-reference-and-zeckendorf",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 59,
+          "file": "ch32-s04-generative-laws.md",
+          "line": 38,
           "id": "",
           "via": "inline"
         },
@@ -2610,14 +2682,14 @@
           "via": "inline"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 44,
+          "file": "ch32-s04-generative-laws.md",
+          "line": 23,
           "id": "thm-ch32-generative-self-reference-and-zeckendorf",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 53,
+          "file": "ch32-s04-generative-laws.md",
+          "line": 32,
           "id": "",
           "via": "inline"
         },
@@ -2826,8 +2898,8 @@
       "name": "D5.S1.Scale.fib_cassini_from_golden_norm",
       "citations": [
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 141,
+          "file": "ch32-s05-physical-fields-and-six-domains.md",
+          "line": 27,
           "id": "",
           "via": "inline"
         },
@@ -3342,6 +3414,18 @@
           "via": "inline"
         },
         {
+          "file": "appendix-e.md",
+          "line": 115,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 270,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -3852,6 +3936,18 @@
           "via": "environment"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 26,
+          "id": "cor-ch32-successor-primes-and-zeckendorf",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 30,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a.md",
           "line": 624,
           "id": "",
@@ -3860,6 +3956,18 @@
         {
           "file": "appendix-d.md",
           "line": 168,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 111,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 270,
           "id": "",
           "via": "inline"
         },
@@ -4332,6 +4440,18 @@
           "via": "inline"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 9,
+          "id": "cor-ch32-extensionality-and-quotient",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 14,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch39-observer-is-ontological-universe.md",
           "line": 120,
           "id": "thm-ch39-fiber-reconstruction-and-zeckendorf-thread",
@@ -4370,6 +4490,12 @@
         {
           "file": "appendix-d.md",
           "line": 261,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 86,
           "id": "",
           "via": "inline"
         },
@@ -4476,6 +4602,18 @@
           "via": "inline"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 9,
+          "id": "cor-ch32-extensionality-and-quotient",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 15,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch35-light-pulse-and-self-referential-table.md",
           "line": 228,
           "id": "thm-ch35-lawvere-diagonal-and-homoiconic-closure",
@@ -4496,6 +4634,18 @@
         {
           "file": "appendix-a.md",
           "line": 680,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 89,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 275,
           "id": "",
           "via": "inline"
         },
@@ -5334,14 +5484,26 @@
           "via": "inline"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 714,
+          "file": "ch32-s01-axiom-of-comparison.md",
+          "line": 43,
           "id": "thm-ch32-comparison-extensionality-and-lagrange",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 723,
+          "file": "ch32-s01-axiom-of-comparison.md",
+          "line": 52,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 9,
+          "id": "cor-ch32-extensionality-and-quotient",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 12,
           "id": "",
           "via": "inline"
         },
@@ -5359,8 +5521,14 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 106,
+          "line": 107,
           "id": "thm-ch34-readout-kernel-and-covariant-commutator",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
+          "line": 539,
+          "id": "prop-ch34-triadic-bootstrap-and-lexical-pinching",
           "via": "environment"
         },
         {
@@ -5371,7 +5539,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 109,
+          "line": 110,
           "id": "",
           "via": "inline"
         },
@@ -5390,6 +5558,18 @@
         {
           "file": "appendix-a.md",
           "line": 862,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 86,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 267,
           "id": "",
           "via": "inline"
         },
@@ -5413,6 +5593,12 @@
         },
         {
           "file": "viz/spherical-trihedron-cell/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/triadic-nameless-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -5484,6 +5670,18 @@
           "via": "inline"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 9,
+          "id": "cor-ch32-extensionality-and-quotient",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 13,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch36-hyperbolic-steps-and-quotienting-reincarnation.md",
           "line": 287,
           "id": "thm-ch36-quotient-annihilator-and-factorization",
@@ -5498,6 +5696,18 @@
         {
           "file": "appendix-a.md",
           "line": 694,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 86,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 267,
           "id": "",
           "via": "inline"
         },
@@ -6408,6 +6618,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-e.md",
+          "line": 115,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -7309,7 +7525,7 @@
       "citations": [
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 409,
+          "line": 410,
           "id": "thm-ch34-trihedron-cochain-and-moving-axis",
           "via": "environment"
         },
@@ -7321,7 +7537,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 412,
+          "line": 413,
           "id": "",
           "via": "inline"
         },
@@ -7765,8 +7981,14 @@
       "citations": [
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 409,
+          "line": 410,
           "id": "thm-ch34-trihedron-cochain-and-moving-axis",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
+          "line": 539,
+          "id": "prop-ch34-triadic-bootstrap-and-lexical-pinching",
           "via": "environment"
         },
         {
@@ -7777,7 +7999,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 418,
+          "line": 419,
           "id": "",
           "via": "inline"
         },
@@ -7786,6 +8008,18 @@
           "line": 876,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "viz/visualizations.json",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/triadic-nameless-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -7813,7 +8047,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 48,
+          "line": 49,
           "id": "thm-ch34-perpendicular-axis-and-pullback",
           "via": "environment"
         },
@@ -7825,7 +8059,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 57,
+          "line": 58,
           "id": "",
           "via": "inline"
         },
@@ -7921,8 +8155,14 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 48,
+          "line": 49,
           "id": "thm-ch34-perpendicular-axis-and-pullback",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
+          "line": 539,
+          "id": "prop-ch34-triadic-bootstrap-and-lexical-pinching",
           "via": "environment"
         },
         {
@@ -7933,7 +8173,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 51,
+          "line": 52,
           "id": "",
           "via": "inline"
         },
@@ -7957,6 +8197,12 @@
         },
         {
           "file": "viz/spherical-trihedron-cell/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/triadic-nameless-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -8148,14 +8394,26 @@
           "via": "inline"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 145,
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 81,
+          "id": "cor-ch32-minkowski-holonomy-and-second-law",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 85,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch32-s05-physical-fields-and-six-domains.md",
+          "line": 31,
           "id": "thm-ch32-null-cone-holonomy-and-holographic-cut",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 154,
+          "file": "ch32-s05-physical-fields-and-six-domains.md",
+          "line": 40,
           "id": "",
           "via": "inline"
         },
@@ -8168,6 +8426,18 @@
         {
           "file": "appendix-a.md",
           "line": 638,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 243,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 274,
           "id": "",
           "via": "inline"
         },
@@ -8820,6 +9090,18 @@
           "via": "inline"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 62,
+          "id": "cor-ch32-quantum-postulates-core",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 66,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "coda.md",
           "line": 559,
           "id": "",
@@ -8840,6 +9122,18 @@
         {
           "file": "appendix-a.md",
           "line": 834,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 168,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 272,
           "id": "",
           "via": "inline"
         },
@@ -9972,6 +10266,18 @@
           "via": "environment"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 43,
+          "id": "cor-ch32-parallelogram-quadratic-and-gram",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 47,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch33-all-beings-observers-and-mutual-attractors.md",
           "line": 330,
           "id": "thm-ch33-consensus-quadratic-and-gram",
@@ -10016,6 +10322,12 @@
         {
           "file": "appendix-d.md",
           "line": 254,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 140,
           "id": "",
           "via": "inline"
         },
@@ -10069,7 +10381,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 106,
+          "line": 107,
           "id": "thm-ch34-readout-kernel-and-covariant-commutator",
           "via": "environment"
         },
@@ -10081,7 +10393,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 115,
+          "line": 116,
           "id": "",
           "via": "inline"
         },
@@ -10146,6 +10458,18 @@
           "via": "environment"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 26,
+          "id": "cor-ch32-successor-primes-and-zeckendorf",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 29,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch33-all-beings-observers-and-mutual-attractors.md",
           "line": 486,
           "id": "thm-ch33-consensus-revision-and-escape",
@@ -10159,13 +10483,19 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 409,
+          "line": 410,
           "id": "thm-ch34-trihedron-cochain-and-moving-axis",
           "via": "environment"
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 422,
+          "line": 539,
+          "id": "prop-ch34-triadic-bootstrap-and-lexical-pinching",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
+          "line": 423,
           "id": "",
           "via": "inline"
         },
@@ -10224,6 +10554,18 @@
           "via": "inline"
         },
         {
+          "file": "appendix-e.md",
+          "line": 108,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 270,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -10264,6 +10606,12 @@
           "line": 0,
           "id": "",
           "via": "media"
+        },
+        {
+          "file": "viz/triadic-nameless-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -10272,14 +10620,14 @@
       "name": "D5.S3.Quantum.Algebra.FutureWordOrthogonalResidual.future_word_orthogonal_residual",
       "citations": [
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 714,
+          "file": "ch32-s01-axiom-of-comparison.md",
+          "line": 43,
           "id": "thm-ch32-comparison-extensionality-and-lagrange",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 717,
+          "file": "ch32-s01-axiom-of-comparison.md",
+          "line": 46,
           "id": "",
           "via": "inline"
         },
@@ -10308,8 +10656,32 @@
           "via": "inline"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 395,
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 43,
+          "id": "cor-ch32-parallelogram-quadratic-and-gram",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 49,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch32-s06-meta-unification-and-icosian-bridge.md",
+          "line": 68,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 142,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 269,
           "id": "",
           "via": "inline"
         },
@@ -10734,26 +11106,38 @@
           "via": "inline"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 44,
-          "id": "thm-ch32-generative-self-reference-and-zeckendorf",
-          "via": "environment"
-        },
-        {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 714,
+          "file": "ch32-s01-axiom-of-comparison.md",
+          "line": 43,
           "id": "thm-ch32-comparison-extensionality-and-lagrange",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 47,
+          "file": "ch32-s01-axiom-of-comparison.md",
+          "line": 64,
           "id": "",
           "via": "inline"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 735,
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 26,
+          "id": "cor-ch32-successor-primes-and-zeckendorf",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 31,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch32-s04-generative-laws.md",
+          "line": 23,
+          "id": "thm-ch32-generative-self-reference-and-zeckendorf",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s04-generative-laws.md",
+          "line": 26,
           "id": "",
           "via": "inline"
         },
@@ -10808,6 +11192,18 @@
         {
           "file": "appendix-d.md",
           "line": 255,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 113,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 270,
           "id": "",
           "via": "inline"
         },
@@ -12060,6 +12456,18 @@
           "via": "inline"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 81,
+          "id": "cor-ch32-minkowski-holonomy-and-second-law",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 86,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch33-all-beings-observers-and-mutual-attractors.md",
           "line": 385,
           "id": "thm-ch33-consensus-pinching-and-fixed-points",
@@ -12140,6 +12548,18 @@
         {
           "file": "appendix-d.md",
           "line": 263,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 251,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 274,
           "id": "",
           "via": "inline"
         },
@@ -12247,7 +12667,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 48,
+          "line": 49,
           "id": "thm-ch34-perpendicular-axis-and-pullback",
           "via": "environment"
         },
@@ -12259,7 +12679,7 @@
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 63,
+          "line": 64,
           "id": "",
           "via": "inline"
         },
@@ -12940,6 +13360,30 @@
           "line": 402,
           "id": "thm-busch-effect-density",
           "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 62,
+          "id": "cor-ch32-quantum-postulates-core",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 65,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 167,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 271,
+          "id": "",
+          "via": "inline"
         }
       ]
     },
@@ -13170,8 +13614,32 @@
           "via": "inline"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 62,
+          "id": "cor-ch32-quantum-postulates-core",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 68,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a.md",
           "line": 92,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 176,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 272,
           "id": "",
           "via": "inline"
         },
@@ -14280,14 +14748,14 @@
           "via": "inline"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 145,
+          "file": "ch32-s05-physical-fields-and-six-domains.md",
+          "line": 31,
           "id": "thm-ch32-null-cone-holonomy-and-holographic-cut",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 160,
+          "file": "ch32-s05-physical-fields-and-six-domains.md",
+          "line": 46,
           "id": "",
           "via": "inline"
         },
@@ -14994,26 +15462,38 @@
           "via": "inline"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 714,
+          "file": "ch32-s01-axiom-of-comparison.md",
+          "line": 43,
           "id": "thm-ch32-comparison-extensionality-and-lagrange",
           "via": "environment"
         },
         {
-          "file": "ch32-unified-field-and-meta-unification.md",
-          "line": 729,
+          "file": "ch32-s01-axiom-of-comparison.md",
+          "line": 58,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 43,
+          "id": "cor-ch32-parallelogram-quadratic-and-gram",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 48,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 409,
+          "line": 410,
           "id": "thm-ch34-trihedron-cochain-and-moving-axis",
           "via": "environment"
         },
         {
           "file": "ch34-orthogonality-degeneracy-and-observer-position.md",
-          "line": 420,
+          "line": 421,
           "id": "",
           "via": "inline"
         },
@@ -15068,6 +15548,24 @@
         {
           "file": "appendix-a.md",
           "line": 876,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 24,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 133,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 268,
           "id": "",
           "via": "inline"
         },
@@ -15282,6 +15780,18 @@
           "via": "inline"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 62,
+          "id": "cor-ch32-quantum-postulates-core",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 67,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a.md",
           "line": 624,
           "id": "",
@@ -15302,6 +15812,12 @@
         {
           "file": "appendix-d.md",
           "line": 256,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 168,
           "id": "",
           "via": "inline"
         },
@@ -16074,6 +16590,18 @@
           "via": "inline"
         },
         {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 43,
+          "id": "cor-ch32-parallelogram-quadratic-and-gram",
+          "via": "environment"
+        },
+        {
+          "file": "ch32-s03-axioms-as-corollaries.md",
+          "line": 46,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "coda.md",
           "line": 532,
           "id": "",
@@ -16118,6 +16646,18 @@
         {
           "file": "appendix-d.md",
           "line": 252,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 133,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-e.md",
+          "line": 269,
           "id": "",
           "via": "inline"
         },
@@ -18418,35 +18958,140 @@
       "part": "第八部 贯通·无时间因果、复杂性视界、量子公平与元统一",
       "number": "32",
       "depth": 0,
+      "environment": [],
+      "inline": []
+    },
+    {
+      "file": "ch32-s01-axiom-of-comparison.md",
+      "top": 32,
+      "part": "第八部 贯通·无时间因果、复杂性视界、量子公平与元统一",
+      "number": "32.1",
+      "depth": 1,
+      "environment": [
+        "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel",
+        "D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual",
+        "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary",
+        "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+      ],
+      "inline": [
+        "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel",
+        "D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual",
+        "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary",
+        "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+      ]
+    },
+    {
+      "file": "ch32-s02-oisc-comparison-engine.md",
+      "top": 32,
+      "part": "第八部 贯通·无时间因果、复杂性视界、量子公平与元统一",
+      "number": "32.2",
+      "depth": 1,
+      "environment": [
+        "D5/S0/Computability/BinaryNameComparison.name_compare_run",
+        "D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run"
+      ],
+      "inline": [
+        "D5/S0/Computability/BinaryNameComparison.name_compare_run",
+        "D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run"
+      ]
+    },
+    {
+      "file": "ch32-s03-axioms-as-corollaries.md",
+      "top": 32,
+      "part": "第八部 贯通·无时间因果、复杂性视界、量子公平与元统一",
+      "number": "32.3",
+      "depth": 1,
       "environment": [
         "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes",
         "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null",
         "D5/S0/Computability/BinaryNameComparison.name_compare_run",
-        "D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run",
-        "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique",
-        "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize",
+        "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape",
+        "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition",
+        "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode",
         "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel",
+        "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition",
         "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification",
-        "D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual",
+        "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight",
+        "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem",
+        "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape",
+        "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq",
         "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary",
-        "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result",
-        "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity",
+        "D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_density_representation",
+        "D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests",
+        "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+        "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger",
+        "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"
       ],
       "inline": [
         "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes",
         "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null",
         "D5/S0/Computability/BinaryNameComparison.name_compare_run",
-        "D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run",
-        "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique",
-        "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize",
-        "D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm",
+        "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape",
+        "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition",
+        "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode",
         "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel",
+        "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition",
         "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification",
-        "D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual",
+        "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight",
+        "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem",
+        "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape",
         "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq",
         "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary",
-        "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result",
-        "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity",
+        "D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_density_representation",
+        "D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests",
+        "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+        "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger",
+        "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"
+      ]
+    },
+    {
+      "file": "ch32-s04-generative-laws.md",
+      "top": 32,
+      "part": "第八部 贯通·无时间因果、复杂性视界、量子公平与元统一",
+      "number": "32.4",
+      "depth": 1,
+      "environment": [
+        "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes",
+        "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique",
+        "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize",
+        "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+      ],
+      "inline": [
+        "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes",
+        "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique",
+        "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize",
+        "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+      ]
+    },
+    {
+      "file": "ch32-s05-physical-fields-and-six-domains.md",
+      "top": 32,
+      "part": "第八部 贯通·无时间因果、复杂性视界、量子公平与元统一",
+      "number": "32.5",
+      "depth": 1,
+      "environment": [
+        "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null",
+        "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification",
+        "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
+      ],
+      "inline": [
+        "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null",
+        "D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm",
+        "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification",
+        "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
+      ]
+    },
+    {
+      "file": "ch32-s06-meta-unification-and-icosian-bridge.md",
+      "top": 32,
+      "part": "第八部 贯通·无时间因果、复杂性视界、量子公平与元统一",
+      "number": "32.6",
+      "depth": 1,
+      "environment": [],
+      "inline": [
+        "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"
       ]
     },
     {
@@ -19077,6 +19722,39 @@
         "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger",
         "D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest",
         "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass",
+        "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"
+      ]
+    },
+    {
+      "file": "appendix-e.md",
+      "top": 45,
+      "part": "终章与附录",
+      "number": "45",
+      "depth": 0,
+      "environment": [],
+      "inline": [
+        "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes",
+        "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null",
+        "D5/S0/Computability/BinaryNameComparison.name_compare_run",
+        "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package",
+        "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification",
+        "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape",
+        "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition",
+        "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode",
+        "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel",
+        "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition",
+        "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula",
+        "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification",
+        "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight",
+        "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem",
+        "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape",
+        "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq",
+        "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary",
+        "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity",
+        "D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_density_representation",
+        "D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests",
+        "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+        "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger",
         "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"
       ]
     }

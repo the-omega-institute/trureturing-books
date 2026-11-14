@@ -467,7 +467,7 @@ $$
 - **格里森定理**（A. M. Gleason, *Measures on the closed subspaces of a Hilbert space*, J. Math. Mech. **6**, 885–893, 1957）：要求可分希尔伯特空间维数满足 **$\dim\mathcal{H} \ge 3$**。在此维数前提下，闭子空间（正交投影）格上的任何可数可加概率测度 $\mu$（在有限维 $3 \le \dim\mathcal{H} < \infty$ 下归约为两两正交投影上的有限可加性），必唯一表示为某个半正定迹一算子 $\rho$ 的玻恩迹配对 $\mu(P) = \Tr(\rho P)$。**当 $\dim\mathcal{H} = 2$ 时，格里森定理在纯正交投影格上不成立**：因为二维空间中的每组正交基仅含两个对跖秩一投影 $\{P_{\vv{n}}, P_{-\vv{n}}\}$，不同测量轴之间不存在公共投影元来传递跨基连锁约束，故在 $S^2$ 上可以构造出无穷多满足逐对对跖之和为 $1$ 的非玻恩标架函数（frame functions）。
 - **布施定理**（P. Busch, *Quantum states and generalized observables: A simple proof of Gleason's theorem*, Phys. Rev. Lett. **91**, 120403, 2003）：若将可加性定义域从尖锐正交投影扩展到全体正半定广义测量效应（POVM 效应元 $0 \le E_i \le I$，要求每当 $\sum_i E_i \le I$ 时满足可加性 $\mu(\sum_i E_i) = \sum_i \mu(E_i)$），则对**一切维数 $\dim\mathcal{H} \ge 2$**（包含单量子比特 $\dim\mathcal{H} = 2$）唯一性全面恢复：任何广义概率测度必唯一表示为 $E \mapsto \Tr(\rho E)$。有限维情形已冻结，就是 [@thm-busch-effect-density]，它只要求有限可加；仍属文献结果的是无穷维希尔伯特空间上的形式，那里要求可数可加。
 
-本书所钉仓库聚焦于显式有限维矩阵构造与建设性归约（[@thm-born-probability-skeleton]、[@thm-born-modulus-square] 与 [@thm-rank-one-born-pairing]），并冻结了由最小确认出发的结构分解 [@thm-positive-dual-generation] 与有限维布施定理 [@thm-busch-effect-density]；格里森定理与无穷维的布施定理由经典文献给出，不列入本书的 Lean 验证声明账本。
+本书所钉仓库聚焦于显式有限维矩阵构造与建设性归约（[@thm-born-probability-skeleton]、[@thm-born-modulus-square] 与 [@thm-rank-one-born-pairing]），并冻结了由最小确认出发的结构分解 [@thm-positive-dual-generation] 与有限维布施定理 [@thm-busch-effect-density]（在[第 32 章 §32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-6-2) [@cor-ch32-quantum-postulates-core] 与[附录 E §E.5](appendix-e.md#sec-appe-quantum)中，[@thm-busch-effect-density] 将作为桥接假设 `H5`，把两子比较读数在一切有限维 $d \ge 2$ 上精确提升为玻恩规则推论）；格里森定理与无穷维的布施定理由经典文献给出，不列入本书的 Lean 验证声明账本。
 :::
 
 ::: {.viz src="pairwise-shutter" height="560"}
