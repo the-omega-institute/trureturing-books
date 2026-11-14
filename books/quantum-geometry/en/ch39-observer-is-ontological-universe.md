@@ -640,6 +640,26 @@ $$
 Its eigenvalues $1,0$ each have multiplicity $1$. The reduced rank is $1$, the sole nonzero Schmidt coefficient is $1$, and $S(\rho_X)=0$ (with $0\ln0=0$). Here we specify a state over all admissible words, without fixing first-bit pages or imposing the logical `directContract`; the preceding theorem instead characterizes attainable ranks and entropy extrema while jointly choosing the encoder and page states under that contract. This example determines no physical ground state or general entropy limit at fixed $K$; the subsequent open problems remain open.
 :::
 
+::: {.example #ex-ch39-p2e-phase-counterexample title="By Hand: Identical Probabilities, Different Entanglement"}
+Keep $m=n=1$ and the cut $X\mid Y$ from the preceding example, and fix any $K\ge3$; the admissible words are exactly $00,01,10,11$.
+Compare $\lvert\psi_+\rangle=(\lvert00\rangle+\lvert01\rangle+\lvert10\rangle+\lvert11\rangle)/2$ with $\lvert\psi_{\mathrm{phase}}\rangle=(\lvert00\rangle+\lvert01\rangle+\lvert10\rangle-\lvert11\rangle)/2$: only the phase of the $11$ amplitude changes, to $\pi$.
+Both states have squared norm $4(1/4)=1$, and each word has computational-basis probability $1/4$. Ordering each side as $0,1$, the latter state gives
+
+$$
+\begin{aligned}
+M_{\mathrm{phase}}&=\frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix},\\
+\rho_X&=\operatorname{Tr}_Y(\lvert\psi_{\mathrm{phase}}\rangle\langle\psi_{\mathrm{phase}}\rvert)=M_{\mathrm{phase}}M_{\mathrm{phase}}^*\\
+&=\frac14\begin{pmatrix}1+1&1-1\\1-1&1+1\end{pmatrix}=\frac{I_2}{2}.
+\end{aligned}
+$$
+
+In the partial trace, the right words $y=0,1$ contribute $1/4,-1/4$ to each off-diagonal entry, so they cancel. The reduced spectrum, listed with multiplicity, is $(1/2,1/2)$ (the eigenvalue $1/2$ has multiplicity $2$), and the Schmidt coefficients are $1/\sqrt2,1/\sqrt2$. With natural logarithms, the entanglement entropy is $S(\rho_X)=-2(1/2)\ln(1/2)=\ln2$, whereas the preceding example gives $0$ for $\psi_+$.
+
+This phase change is the joint controlled-sign operation $\operatorname{diag}(1,1,1,-1)$, not a product of single-qubit local phase operations: local unitaries preserve Schmidt coefficients and cannot turn the sole nonzero Schmidt coefficient $1$ of $\psi_+$ into the two coefficients above.
+
+Thus identical admissible-word support, counts, and even computational-basis probabilities do not determine entanglement; the chosen positive-phase equal-amplitude family remains a meaningful additional specification of the state. This is a paper calculation for finite states, with no conclusion about ground states, physical realization, or fractal entanglement scaling.
+:::
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** In condensed-matter and atomic-physics literature, the order-$K = 2$ `NoAdjacentOnes` Hilbert space arises in two celebrated many-body settings: first, the topological Fibonacci-anyon "golden chain" of A. E. Feiguin et al. (*Phys. Rev. Lett.* **98**, 2007, 160409), where the fusion rule $\tau \times \tau = \mathbf{1} + \tau$ makes fusion-space dimensions grow as Fibonacci numbers; second, van der Waals $1/r^6$ Rydberg blockade arrays (modeled theoretically by I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301, and probed experimentally on a 51-atom quantum simulator by H. Bernien et al., *Nature* **551**, 2017, 579–584). Two scope boundaries apply whenever citing these physical realizations: first, nearest-neighbor pairwise Rydberg blockade forbids adjacent excitations $|11\rangle$ ($K = 2$, the PXP subspace), whereas simply extending pairwise blockade range forbids *all* pairs within distance $R_b$ (eliminating `101` along with `111`) and **does not** by itself enforce the $K > 2$ "no $K$ consecutive ones" constraint—realizing a $K > 2$ $K$-Bonacci subspace requires a dedicated multi-body $K$-local interaction; second, neither the anyon fusion chain nor a finite-blockade Rydberg Hamiltonian is formally identical to the exact zero-amplitude isometric `directContract` encoder of [@thm-ch39-p2e-direct-encoder-ranks].
 :::
