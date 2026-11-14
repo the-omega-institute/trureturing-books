@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "b4a6f25056b7d7451df9b06e226c74cfd85940ac",
-  "pinned_at": "2026-11-14T02:32:08Z",
+  "commit": "454d9ac604c24532d847a81664404425ee18439b",
+  "pinned_at": "2026-11-14T11:22:27Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4177,7 +4177,7 @@
       "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction",
       "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredContraction.cyclic_future_kernel_eq_bot",
       "kind": "theorem",
-      "statement_id": "sha256:0fb6a694e7796081e5681b95c2177269cd9508ccd0dc04bcc111098f187f4313",
+      "statement_id": "sha256:8001628b65492fc63847ae0222f60c334645f820927f218b2b75e8a64282fbc3",
       "line": 75,
       "signature": "theorem cyclic_future_kernel_eq_bot (U : E ≃ₗᵢ[ℂ] E) (v : E) : (⨅ n : ℕ, LinearMap.ker ((cyclicClick U v).toLinearMap.comp ((cyclicStep U v).toLinearMap ^ n))) = ⊥"
     },
