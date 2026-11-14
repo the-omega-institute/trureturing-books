@@ -386,12 +386,19 @@
   const opts = {
     canvas: $('cv'), radius: 0.3, cx: 0.5, cy: 0.5, yaw: -0.5, pitch: 0.28, rotate: false, wheel: false,
     onChange: () => paint(),
-    onPick: (ev) => { const h = hitAt(ev); if (h) { dragging = h; leave(); clock.pause(); h.drag(ev); return true; } dragging = null; return false; },
-    onDrag: (ev) => { if (dragging) dragging.drag(ev); },
+    onPick: (ev) => { current(); const h = hitAt(ev); if (h) { dragging = h; leave(); clock.pause(); h.drag(ev); return true; } dragging = null; return false; },
+    // each move goes to the handle as the latest paint laid it out, not to the one pressed in an earlier layout
+    onDrag: (ev) => { if (!dragging) return; current(); dragging = hits.find((q) => q.key === dragging.key) || dragging; dragging.drag(ev); },
     onDrop: () => { dragging = null; }
   };
   const stage = kit.stage3($('stage'), opts);
-  let hits = [], dragging = null;
+  let hits = [], dragging = null, drawnIn = null;
+  const cvBox = () => { const b = $('cv').getBoundingClientRect(); return [b.left, b.top, b.width, b.height]; };
+  /** A paint lays the handles out in the canvas box it measured: their hit positions, the plot transforms the 2D drags
+      invert and the projection st.pick inverts all belong to that box, and a pointer is read against the live box. If
+      the page was laid out again since (the header wraps when the amber pill gains a digit, a resize), draw the frame
+      of this layout first. */
+  function current() { const b = cvBox(); if (!drawnIn || b.some((v, i) => v !== drawnIn[i])) paint.now(); }
   function hitAt(ev) {
     const b = $('cv').getBoundingClientRect(), x = ev.clientX - b.left, y = ev.clientY - b.top;
     let best = null, bd = Infinity;
@@ -1138,6 +1145,7 @@
     const box = freeBox(), lay = LAY[S.scene] ? LAY[S.scene](box) : null;
     if (lay && lay.sphere) { const mn = Math.min(box.W, box.H) || 1; opts.cx = lay.sphere.cx / (box.W || 1); opts.cy = lay.sphere.cy / (box.H || 1); opts.radius = lay.sphere.r / mn; }
     const ctx = stage.begin();
+    drawnIn = cvBox();
     DRAW[S.scene](m, box, ctx, lay);
     stage.end();
     drawPlots(m);
@@ -1332,7 +1340,7 @@
     gramCheck,
     fates: () => JSON.parse(JSON.stringify(FATES)),
     /** Viewport coordinates of a draggable handle of the current scene (B, phase, phi, fwd, cross, beta, eta, C, loop). */
-    at: (key) => { const h = hits.find((q) => q.key === key); if (!h) return null; const b = $('cv').getBoundingClientRect(); return [b.left + h.x, b.top + h.y]; }
+    at: (key) => { current(); const h = hits.find((q) => q.key === key); if (!h) return null; const b = $('cv').getBoundingClientRect(); return [b.left + h.x, b.top + h.y]; }
   };
   window.__HANDSHAKE_LAB__ = api;
   window.HANDSHAKE_DEBUG = api;

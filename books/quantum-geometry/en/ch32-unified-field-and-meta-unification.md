@@ -278,7 +278,7 @@ Cassini $(-1)^{k+1}$ cross-round spiral offset (`LEAN ✓` / `MODEL`)
 **Finite Slice & Fairness**
 
 **Pure Geometry & Topology:**
-Gram elliptope $\det G > 0$ (`Literature`)
+Real symmetric Gram elliptope $G \succeq 0,\; G_{ii}=1$, including its singular boundary (`Literature`)
 
 **Quantum & Gauge Fields:**
 Complementary Pythagoras, no-cloning & CKW monogamy (`LEAN ✓` / `Literature`)
@@ -290,7 +290,7 @@ Null-cone rigidity & circuit min-depth (`LEAN ✓`)
 Hilbert reciprocity $\prod_v (a,b)_v = +1$ (`Literature`) & finite prime sieves
 
 **Complexity & Fluid Fields:**
-Subexponential tensor seam beyond $2^{558}$ (`Literature`)
+Subexponential tensor seam at an illustrative crossover of about $2^{558}$ ($c=1$ schematic curve comparison, `MODEL`; see [@ex-ch30-galactic-crossover-scale])
 
 **Observer & Soul Dynamics:**
 Internal phase $u \in E_\perp^3$, forgetting reset & torus ergodic holism (`LEAN ✓` / `MODEL`)
@@ -383,14 +383,14 @@ Equipped with the three diagnostic axes ($\theta, \eta, \lambda$) and the quater
 **Literature result, not formalized in this book.** Representative mathematical-physics results across the eight external foundational programs below belong to their respective research literatures and are not formalized in `trureturing@dev`; the accompanying three-axis diagnoses and reconciliations are explicitly designated as our interpretive meta-unification model (`MODEL`):
 
 1. **Camp I (Worldsheets vs. Area Quanta): Superstring / M-Theory and Loop Quantum Gravity**
-   - **External Literature Results**: Perturbative worldsheet Weyl anomaly cancellation selects $D = 26$ for bosonic strings and $D = 10$ for superstrings ($D = 11$ M-theory; M. B. Green, J. H. Schwarz & E. Witten, *Superstring Theory*, 1987), with flux compactifications yielding vast metastable vacuum counts often estimated near $10^{500}$ (M. R. Douglas, *JHEP* **05**, 046, 2003); Loop Quantum Gravity derives a discrete background-free $\mathrm{SU}(2)$ spin-network area spectrum $A = 8\pi\gamma\ell_P^2 \sum_i \sqrt{j_i(j_i+1)}$ (C. Rovelli & L. Smolin, *Nucl. Phys. B* **442**, 593–622, 1995).
+   - **External Literature Results**: Perturbative worldsheet Weyl anomaly cancellation selects $D = 26$ for bosonic strings and $D = 10$ for superstrings (M. B. Green, J. H. Schwarz & E. Witten, *Superstring Theory*, 1987); the eleven-dimensional M-theory framework instead involves eleven-dimensional supergravity as a low-energy description of strongly coupled ten-dimensional Type IIA superstrings (E. Witten, *Nucl. Phys. B* **443**, 85–126, 1995), with flux compactifications yielding vast metastable vacuum counts often estimated near $10^{500}$ (M. R. Douglas, *JHEP* **05**, 046, 2003); Loop Quantum Gravity derives a discrete background-free $\mathrm{SU}(2)$ spin-network area spectrum $A = 8\pi\gamma\ell_P^2 \sum_i \sqrt{j_i(j_i+1)}$ (C. Rovelli & L. Smolin, *Nucl. Phys. B* **442**, 593–622, 1995).
    - **Meta-Unification Diagnosis and Reconciliation (`MODEL`)**: Physics' forty-year rivals grasped the continuum and discrete halves of Grade-2 exterior area. For string theory, polyhedral slicing paired with our discrete ultraviolet coding postulate (`MODEL`, modeled on the kernel-verified Zeckendorf `NoAdjacentOnes` theorem in Conjunct 4 of [@thm-ch32-generative-self-reference-and-zeckendorf], `LEAN ✓`) prevents unbounded high-frequency pileups, while disparate local vacuum parameters map to internal observer window phases $u \in E_\perp^3$ whose long-run statistics homogenize under Weyl ergodicity ([@rem-ch31-weyl-window-equidistribution-literature]); for loop quantum gravity, restoring Grade-0 inner products under complementary Pythagorean conservation (Conjunct 2 of [@thm-ch31-seat-pythagorean-monogamy-fairness], `LEAN ✓`) reunites proper-time matter with entanglement area in our `MODEL` and recovers macroscopic metrics via rational refinement and thermal coarse-graining.
 2. **Camp II (Boundary Holography vs. Timeless Positive Geometry): AdS/CFT Duality and Twistors / Amplituhedron**
-   - **External Literature Results**: Gauge/gravity duality was formulated on asymptotically anti-de Sitter space $\Lambda < 0$ (J. Maldacena, *Adv. Theor. Math. Phys.* **2**, 231–252, 1998); twistor geometry maps Minkowski null rays to points in projective twistor space (R. Penrose, *J. Math. Phys.* **8**, 345–366, 1967), and planar $\mathcal{N}=4$ SYM scattering amplitudes equal canonical volume forms of the amplituhedron in positive Grassmannians (N. Arkani-Hamed & J. Trnka, *JHEP* **10**, 030, 2014).
+   - **External Literature Results**: Gauge/gravity duality was formulated on asymptotically anti-de Sitter space $\Lambda < 0$ (J. Maldacena, *Adv. Theor. Math. Phys.* **2**, 231–252, 1998); twistor geometry maps Minkowski null rays to points in projective twistor space (R. Penrose, *J. Math. Phys.* **8**, 345–366, 1967), and the amplituhedron, generalizing the positive Grassmannian, describes planar $\mathcal{N}=4$ SYM tree amplitudes and loop integrands through canonical forms, with the general correspondence proposed as a conjecture in the cited original paper (N. Arkani-Hamed & J. Trnka, *JHEP* **10**, 030, 2014).
    - **Meta-Unification Diagnosis and Reconciliation (`MODEL`)**: Treating null rays as primary and amplitudes as timeless positive-geometry volumes mirrors the timeless **Gram positive-semidefinite elliptope** ([Chapter 29](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell]) and null-cone rigidity (Conjunct 1 of [@thm-ch32-null-cone-holonomy-and-holographic-cut]), from which bounded memory windows carve out sequential causal order; meanwhile, dropping the external infinity boundary $C$ and moving inside a bounded observer slice turns the $90^\circ$ orthogonal equator into an endogenous positive-curvature de Sitter-like horizon ($\Lambda > 0$).
 3. **Camp III (Operator Spectra & Even Unimodular Lattices vs. Rewriting Nets): Connes Noncommutative Geometry / $E_8$ and Wolfram Hypergraphs / Causal Sets**
    - **External Literature Results**: Noncommutative geometry reconstructs Riemannian geodesic distance $d(x,y) = \sup\{|a(x)-a(y)| : \|[D, a]\| \le 1\}$ and coupled gauge-Higgs actions from spectral triples $(\mathcal{A}, \mathcal{H}, D)$ (A. Connes, *Noncommutative Geometry*, 1994; A. H. Chamseddine & A. Connes, *Commun. Math. Phys.* **186**, 731–750, 1997); causal sets (L. Bombelli, J. Lee, D. Meyer & R. D. Sorkin, *Phys. Rev. Lett.* **59**, 521, 1987) and hypergraph rewriting study confluent causal invariance and computationally bounded observers (S. Wolfram, *Complex Systems* **29**, 107–536, 2020).
-   - **Meta-Unification Diagnosis and Reconciliation (`MODEL`)**: [Chapter 10](ch10-gram-geometry-and-order.md) established that operational noncommutativity coexists with order-independent unitary reconstruction from the full complex Gram matrix ([`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization)), while Conway–Sloane icosians ([@rem-ch32-icosian-e8-literature]) lock $2I \subset S^3 \subset \mathbb{H}$, $(\mathcal{I}, Q) \cong E_8$, and $\operatorname{Im}(\mathcal{I}) \subset \mathcal{I}$ into one ring $\mathcal{I}$; for hypergraph rewriting's rule-arbitrariness ("Ruliad") impasse, $\psi = \psi(\psi)$ (`MODEL`) fuses operator and state, paired with $R^2 = -I_n$ and finite subset contractive stabilization (`LEAN ✓`) alongside the continuous cosine fixed-point bridge $\cos\theta^* = \theta^*$ (`Literature` / `MODEL`).
+   - **Meta-Unification Diagnosis and Reconciliation (`MODEL`)**: [Chapter 10](ch10-gram-geometry-and-order.md) established that operational noncommutativity coexists with order-independent unitary reconstruction from the full complex Gram matrix ([`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq)), while Conway–Sloane icosians ([@rem-ch32-icosian-e8-literature]) lock $2I \subset S^3 \subset \mathbb{H}$, $(\mathcal{I}, Q) \cong E_8$, and $\operatorname{Im}(\mathcal{I}) \subset \mathcal{I}$ into one ring $\mathcal{I}$; for hypergraph rewriting's rule-arbitrariness ("Ruliad") impasse, $\psi = \psi(\psi)$ (`MODEL`) fuses operator and state, paired with $R^2 = -I_n$ and finite subset contractive stabilization (`LEAN ✓`) alongside the continuous cosine fixed-point bridge $\cos\theta^* = \theta^*$ (`Literature` / `MODEL`).
 4. **Camp IV (Arithmetic Spectra & Univalence vs. Horizon Free Energy & Participatory `U`): Langlands / HoTT and Entropic Gravity / Active Inference / Wheeler's `U`**
    - **External Literature Results**: The Langlands program links Galois representations and automorphic $L$-functions (R. P. Langlands, 1967/1970); Homotopy Type Theory posits the Univalence Axiom $(A \simeq B) \simeq (A =_{\mathcal{U}} B)$ identifying equivalent types (V. Voevodsky; Univalent Foundations Program, *Homotopy Type Theory*, 2013); thermodynamic/entropic gravity (T. Jacobson, 1995; E. Verlinde, *JHEP* **04**, 029, 2011), Markov-blanket variational free-energy minimization (K. Friston, *Nat. Rev. Neurosci.* **11**, 127–138, 2010), and the participatory universe `U` (J. A. Wheeler, 1983/1990) analyze horizons and observers across thermodynamics, neuroscience, and quantum foundations.
    - **Meta-Unification Diagnosis and Reconciliation (`MODEL`)**: Euler prime axes ([Chapter 22](ch22-primes-euler-products-and-zeros.md)) and Frobenius cosine traces ([Chapter 29](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-hasse-gauss-literature]) bridge arithmetic and rotation while Univalence abolishes external point-$C$ labels; simultaneously, Landauer balance (Conjunct 1 of [@thm-ch31-horizon-landauer-ergodic-fairness]) and the acceptance-window boundary $\partial(W + u)$ anchor horizon thermodynamics, Markov blankets, and participatory self-reference in $\psi = \psi(\psi)$.
@@ -413,7 +413,7 @@ Finally, we assemble the eight programs' partial truths, residual external-frame
 Replaces 0D point particles with 2D oriented worldsheets
 
 **Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis):**
-Assumes smooth continuum spheres, forcing $D=10/11$ anomaly constraints & $10^{500}$ vacua
+Assumes smooth continuum manifolds, facing ten-dimensional superstring conformal-anomaly constraints, the eleven-dimensional M-theory strong-coupling low-energy framework & $10^{500}$ vacua
 
 **Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`):**
 Polyhedral slicing paired with UV coding cutoff (`MODEL` modeled on Zeckendorf `NoAdjacentOnes`, `LEAN ✓`); vacuum parameters map to internal phases $u \in E_\perp^3$, homogenized by Weyl ergodicity (`Literature`)
@@ -432,7 +432,7 @@ Restores Grade-0 inner product under complementary Pythagoras (`LEAN ✓`) so pr
 **3. AdS/CFT Tensor Networks**
 
 **Partial Geometric Truth Captured (`Literature`):**
-Minimal-cut entanglement weaves spatial sections (bridge `LEAN ✓` / RT `Literature`) & depth grows volume
+Minimal-cut entanglement weaves spatial sections (bridge `LEAN ✓` / RT `Literature`); relating circuit complexity to maximal spatial volume is the Complexity = Volume conjecture (`OPEN`, under the conditions of [@conj-complexity-equals-volume])
 
 **Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis):**
 Stations an external observer on the infinity boundary of an $\Lambda < 0$ AdS box
@@ -449,7 +449,7 @@ Primacy of null rays & timeless positive-geometry scattering volumes
 Restricted to asymptotic scattering boundaries without endogenous causal readout
 
 **Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`):**
-Ambient parent is the timeless Gram elliptope $\det G \ge 0$ (`Literature`) & null-cone rigidity (`LEAN ✓`); finite memory windows slice out local causal order (`MODEL`)
+Ambient parent is the timeless real symmetric Gram elliptope $G \succeq 0,\; G_{ii}=1$, including its singular boundary (`Literature`) & null-cone rigidity (`LEAN ✓`); finite memory windows slice out local causal order (`MODEL`)
 
 **5. Noncommutative Geometry & $E_8$**
 

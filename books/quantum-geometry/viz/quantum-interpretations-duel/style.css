@@ -19,6 +19,8 @@
 /* main.js adds .below when the stage is too narrow for both: the chips then sit under the title (--lens-top) */
 .hud-tr.lens-bar.below { top: var(--lens-top, 56px); right: auto; left: 18px; max-width: calc(100% - 36px); justify-content: flex-start; }
 .stage.lens-below .hud-tl { max-width: calc(100% - 40px); }
+/* a cited figure on a phone (main.js adds .lens-off): the chips leave the short stage, as in the still */
+.stage.lens-off .hud-tr.lens-bar { display: none; }
 .hud-tl .sub { line-height: 1.3; }
 @media (max-width: 560px) {
   .hud-tl { top: 12px; left: 14px; }

@@ -2,9 +2,12 @@
    T is real symmetric and idempotent, so row i used as a ruler on column j gives back Σₖ TᵢₖTₖⱼ = Tᵢⱼ.
      rank  the rail is the rank r = 1 … N; the diagonal Tₖₖ adds up to the trace, which equals r; at r = N, T = I.
      read  the rail adds the products TᵢₖTₖⱼ one at a time; for a diagonal cell every term is the square Tₖⱼ².
-     heal  clicks add ε to Tᵢⱼ and Tⱼᵢ (Δ stays symmetric); T₀ = T + Δ, Tₘ₊₁ = 3Tₘ² − 2Tₘ³; the side panel shows the
-           eigenvalues of Tₘ (Jacobi rotations), pulled towards 0 and 1 by x ↦ 3x² − 2x³.
-     perp  ψ(θ) = cos θ·v₁ + sin θ·w with w = v_{r+1} orthogonal to every vₐ; ‖Tψ‖ = cos θ, zero at 90°.
+     heal  clicks add ε to Tᵢⱼ and Tⱼᵢ (Δ stays symmetric, every click accumulates); T₀ = T + Δ, Tₘ₊₁ = 3Tₘ² − 2Tₘ³; the
+           side panel shows the eigenvalues of Tₘ (Jacobi rotations), each moved by x ↦ 3x² − 2x³. The words report the
+           computed error of the step shown; "approximately idempotent" only when it is ≤ HEAL_TOL, and the one
+           asymptotic statement (same-rank projection) only under the sufficient condition ‖Δ‖₂ < HEAL_SAFE (strict).
+     perp  r < N: ψ(θ) = cos θ·v₁ + sin θ·w with w = v_{r+1} orthogonal to every vₐ; ‖Tψ‖ = cos θ, zero at 90°.
+           r = N: T = I has no nonzero complement; ψ = v₁ for every θ and Tψ = ψ.
    Colours: cyan = positive entries, the part kept by T (eigenvalues above ½); magenta = negative entries, the
    complement (eigenvalues below ½); amber = the current cell, term, step or rank. Read-only probe: TABLE_DEBUG.
    The solid (kit.solid, the left or upper part of the stage): a glass unit ball of a 3D slice span{q₁, q₂, q₃} of ℝᴺ
@@ -12,6 +15,7 @@
    computed: q ↦ λq with λ = qᵀAq, so the image is the rod, disc or whole ball of a projection (λ ∈ {0, 1}), or the
    ellipsoid of semi-axes |λ| of a healing step. The slice of each scene:
      rank, perp, heal untouched   basis vectors: r = 1 → {v₂, v₃ | v₁}, r < N → {v₁, v₂ | v_{r+1}}, r = N → the last three
+                                  (perp at r = N → {v₁, v₂ | v₃}: ψ = v₁ and its reading Tψ = ψ lie in the plane)
      read, r ≥ 3                  the plane of row i and column j (both in Im T) | v_{r+1} (in ker T), or any third at r = N
      heal with knocks             three eigenvectors of T₀ (Jacobi), common to every Tₘ, the most knocked ones
    The odd direction (after |) stands along the tilted normal n; the other two lie in the tilted plane. The table and
@@ -21,11 +25,12 @@
   const { kit, L } = TRV, { clamp, fix, v3, TAU } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
   const setText = (target, value) => { const el = typeof target === 'string' ? $(target) : target; if (el.textContent !== value) el.textContent = value; };
-  const MINUS = '−', M = 8, DEG = Math.PI / 180, HEAL_SAFE = (Math.sqrt(3) - 1) / 2;
+  const MINUS = '−', M = 8, DEG = Math.PI / 180, HEAL_SAFE = (Math.sqrt(3) - 1) / 2, HEAL_TOL = 1e-12;
 
   /* ---------- linear algebra ---------- */
   const zeros = (n) => Array.from({ length: n }, () => new Array(n).fill(0));
-  const mul = (A, B) => { const n = A.length, C = zeros(n); for (let i = 0; i < n; i++) for (let k = 0; k < n; k++) { const a = A[i][k]; if (a) for (let j = 0; j < n; j++) C[i][j] += a * B[k][j]; } return C; };
+  // skip exact zeros only: an entry that has overflowed (±∞, NaN) must spread to the product, never count as 0
+  const mul = (A, B) => { const n = A.length, C = zeros(n); for (let i = 0; i < n; i++) for (let k = 0; k < n; k++) { const a = A[i][k]; if (a !== 0) for (let j = 0; j < n; j++) C[i][j] += a * B[k][j]; } return C; };
   const lin = (a, A, b, B) => A.map((row, i) => row.map((x, j) => a * x + b * B[i][j]));
   const frob = (A) => Math.sqrt(A.reduce((s, row) => s + row.reduce((t, x) => t + x * x, 0), 0));
   const idemErr = (A) => frob(lin(1, mul(A, A), -1, A));
@@ -88,7 +93,8 @@
     for (let m = 0; m < M; m++) { const X = its[m], X2 = mul(X, X); its.push(lin(3, X2, -2, mul(X2, X))); }
     const eigs = its.map(eig), errs = its.map(idemErr), de = eig(D), dnorm = Math.max(Math.abs(de[0]), Math.abs(de[de.length - 1]));
     const rankErrs = Array.from({ length: S.N }, (_, k) => idemErr(tableOf(S.N, k + 1)));
-    cache = { key: key(), T, D, its, eigs, errs, dnorm, rankErrs, err: idemErr(T), sym: symErr(T), tr: trace(T) };
+    // the sufficient condition is strict: at ‖Δ‖₂ = (√3 − 1)/2 an eigenvalue 1 + ‖Δ‖₂ lands on the repelling ½ and stays
+    cache = { key: key(), T, D, its, eigs, errs, dnorm, safe: dnorm < HEAL_SAFE, rankErrs, err: idemErr(T), sym: symErr(T), tr: trace(T) };
     return cache;
   }
   const kOf = () => Math.min(S.N, Math.floor(clock.t + 1e-9));            // read: terms added so far
@@ -99,10 +105,14 @@
   const products = () => { const T = derive().T; return T.map((_, k) => T[S.i][k] * T[k][S.j]); };
   const partial = (k) => products().slice(0, k).reduce((s, x) => s + x, 0);
   const perpVecs = () => {
-    const th = thetaOf() * DEG, v = dct(S.N, 0), w = hasPerp() ? dct(S.N, S.r) : new Array(S.N).fill(0);
-    const psi = v.map((x, k) => Math.cos(th) * x + Math.sin(th) * w[k]);
-    return { v, w, psi, Tpsi: matvec(derive().T, psi), Tw: matvec(derive().T, w) };
+    const T = derive().T, v = dct(S.N, 0);
+    // r = N: T = I and no nonzero vector is orthogonal to every row, so there is nothing to turn ψ into: ψ stays the unit v₁
+    if (!hasPerp()) return { v, w: null, psi: v.slice(), Tpsi: matvec(T, v), Tw: null };
+    const th = thetaOf() * DEG, w = dct(S.N, S.r), psi = v.map((x, k) => Math.cos(th) * x + Math.sin(th) * w[k]);
+    return { v, w, psi, Tpsi: matvec(T, psi), Tw: matvec(T, w) };
   };
+  /** What the words may say about step m of the healing iteration: the computed error against HEAL_TOL, else nothing. */
+  const healStatus = (m) => { const D = derive(), e = D.errs[m]; return !S.kicks.length ? 'none' : !Number.isFinite(e) ? 'overflow' : e <= HEAL_TOL ? 'tol' : 'open'; };
 
   /* ---------- the 3D slice: three orthonormal directions of ℝᴺ that the matrix on the stage maps into themselves ---------- */
   const SUBD = '₀₁₂₃₄₅₆₇₈₉', subs = (n) => String(n).replace(/\d/g, (d) => SUBD[d]);
@@ -115,9 +125,10 @@
     if (D.hs) return D.hs;
     const es = eigsys(D.its[0]).map((e) => ({ vec: e.vec, l0: e.val, lm: D.its.map((X) => rayl(X, e.vec)) }));
     const K = es.filter((e) => e.lm[M] > 0.5).sort((a, b) => Math.abs(b.l0 - 1) - Math.abs(a.l0 - 1));
-    const Z = es.filter((e) => e.lm[M] <= 0.5).sort((a, b) => Math.abs(b.l0) - Math.abs(a.l0));
+    // a direction whose last step has left double precision (NaN, ±∞) is not kept: it never counts as above ½
+    const Z = es.filter((e) => !(e.lm[M] > 0.5)).sort((a, b) => Math.abs(b.l0) - Math.abs(a.l0));
     const pick = K.length >= 2 && Z.length ? [K[0], K[1], Z[0]] : K.length === 1 ? [Z[0], Z[1], K[0]] : !Z.length ? [K[0], K[1], K[2]] : [Z[0], Z[1], Z[2]];
-    D.hs = { pick, scale: Math.max(1, ...pick.map((e) => Math.max(...e.lm.map(Math.abs)))) };
+    D.hs = { pick, scale: Math.min(SEMI_MAX, Math.max(1, ...pick.map((e) => Math.max(...e.lm.filter(Number.isFinite).map(Math.abs))))) };
     return D.hs;
   }
   /** The slice of the scene: Q = [q_a, q_b, q_c] (q_c along the normal), the matrix A on the stage, λ = qᵀAq along each
@@ -126,7 +137,8 @@
     const N = S.N, r = S.r, sc = S.scene, T = derive().T, A = shown();
     if (sc === 'heal' && S.kicks.length) {
       const H = healPick(), m = mOf();
-      return { kind: 'heal', Q: H.pick.map((e) => e.vec), A, lam: H.pick.map((e) => e.lm[m]), kept: H.pick.map((e) => e.lm[M] > 0.5), names: ['q₁', 'q₂', 'q₃'], scale: H.scale, idx: null };
+      // colours follow the step shown (λ above ½ at step m), as the spectrum and the legend do; the pick above uses step M
+      return { kind: 'heal', Q: H.pick.map((e) => e.vec), A, lam: H.pick.map((e) => e.lm[m]), kept: H.pick.map((e) => e.lm[m] > 0.5), names: ['q₁', 'q₂', 'q₃'], scale: H.scale, idx: null };
     }
     let Q, names, idx = null;
     if (sc === 'read' && r >= 3) {   // the plane of row i and column j (both in Im T), and one free direction (in ker T)
@@ -137,14 +149,20 @@
       let q3 = r < N ? dct(N, r) : null;
       for (let k = 0; !q3 && k < N; k++) { const w = orth(dct(N, k), [u1, u2]); if (norm(w) > 0.3) q3 = unitv(w); }
       Q = [u1, u2, q3]; names = ['', '', r < N ? `v${subs(r + 1)}` : ''];
-    } else { idx = canonIdx(r, N); Q = idx.map((k) => dct(N, k)); names = idx.map((k) => `v${subs(k + 1)}`); }
+    } else {
+      // the 90° scene at r = N: ψ stays v₁, so the slice is the one that holds it (T = I keeps all three directions)
+      idx = sc === 'perp' && r === N ? [0, 1, 2] : canonIdx(r, N); Q = idx.map((k) => dct(N, k)); names = idx.map((k) => `v${subs(k + 1)}`);
+    }
     const lam = Q.map((q) => rayl(A, q));
     return { kind: 'proj', Q, A, lam, kept: lam.map((x) => x > 0.5), names, scale: 1, idx };
   }
   /** A vector of ℝᴺ in slice coordinates. */
   const sliceOf = (sl, v) => sl.Q.map((q) => dotv(q, v));
   /** Semi-axes of the image of the slice's unit ball: 1 or 0 for a projection, |λ| for a healing step. */
-  const semiOf = (sl) => (sl.kind === 'proj' ? sl.kept.map((k) => (k ? 1 : 0)) : sl.lam.map(Math.abs));
+  // a healing step far outside the glass (accumulated knocks can drive |λ| to 10³⁰⁰ before it overflows) is drawn up to
+  // SEMI_MAX ball radii, at the edge of the solid's box, and its label keeps the computed λ; an overflowed one draws nothing
+  const SEMI_MAX = 2, clipS = (x) => clamp(x, -SEMI_MAX, SEMI_MAX);
+  const semiOf = (sl) => (sl.kind === 'proj' ? sl.kept.map((k) => (k ? 1 : 0)) : sl.lam.map((x) => (Number.isFinite(x) ? Math.min(Math.abs(x), SEMI_MAX) : 0)));
   const FLAT = 0.004;   // a semi-axis below this (in units of the ball) is drawn flat
   const shapeOf = (sl) => { const nb = semiOf(sl).filter((x) => x > FLAT).length; return sl.kind === 'proj' && nb === 3 ? 'ball' : ['point', 'rod', 'disk', 'ellipsoid'][nb]; };
 
@@ -280,11 +298,16 @@
     }
   }
   function drawPerp(cv, b, W, H, words) {
-    const n = S.N, th = thetaOf(), V = perpVecs(), cmp = words && geo.layout.mode === 'compact';
+    const n = S.N, th = thetaOf(), V = perpVecs(), cmp = words && geo.layout.mode === 'compact', full = !hasPerp();
+    // r < N: the part cos θ is read and sin θ lies in the complement; r = N: T = I reads the whole unit state ψ = v₁
+    // back and I − T = 0 leaves no complement, so the two bars are the computed ‖Tψ‖ = 1 and ‖(I − T)ψ‖ = 0
+    const kept = full ? norm(V.Tpsi) : Math.cos(th * DEG), lost = full ? norm(V.psi.map((x, k) => x - V.Tpsi[k])) : Math.sin(th * DEG);
+    const keptS = full ? `‖Tψ‖ = ‖ψ‖ = ${fix(kept, 3)}` : `‖Tψ‖ = cos θ = ${fix(kept, 3)}`;
+    const lostS = full ? L(`‖(I − T)ψ‖ = ${fix(lost, 3)} · 没有正交补`, `‖(I − T)ψ‖ = ${fix(lost, 3)} · no complement`) : `‖(I − T)ψ‖ = sin θ = ${fix(lost, 3)}`, lostF = full ? 'body' : 'data';
     const cap = L('灰：状态 ψ 的分量 · 青：读出 Tψ', 'grey: the entries of ψ · cyan: the reading Tψ');
     // a phone's narrow panel: the caption in lines over the bars, the two readings in lines of their own under them
     const ctx0 = cv.getContext('2d'), fcap = cmp ? fitLines(ctx0, cap, b.w - 2, 9.5, 8.5) : null;
-    const rd = cmp ? [fitLines(ctx0, `‖Tψ‖ = cos θ = ${fix(Math.cos(th * DEG), 3)}`, b.w, 9, 8, 'data'), fitLines(ctx0, `‖(I − T)ψ‖ = sin θ = ${fix(Math.sin(th * DEG), 3)}`, b.w, 9, 8, 'data')] : null;
+    const rd = cmp ? [fitLines(ctx0, keptS, b.w, 9, 8, 'data'), fitLines(ctx0, lostS, b.w, 9, 8, lostF)] : null;
     const capH = cmp ? fcap.lines.length * (fcap.fs + 2) + 4 : 0, rdH = cmp ? rd.reduce((s, f) => s + f.lines.length * (f.fs + 2), 0) : 0;
     const top = cmp ? { x: b.x, y: b.y + capH, w: b.w, h: (b.h - capH - rdH - 12) * 0.72 } : { x: b.x, y: b.y, w: b.w, h: b.h * 0.7 };
     const bot = cmp ? { x: b.x, y: top.y + top.h + 4, w: b.w, h: (b.h - capH - rdH - 12) * 0.28 } : { x: b.x, y: b.y + b.h * 0.76, w: b.w, h: b.h * 0.24 };
@@ -296,8 +319,8 @@
       g.rect(0, q + 1.02, V.Tpsi[q], q + 1.38, P.cyan, { alpha: 0.85 });
     }
     const h = kit.plot(cv, { x: [0, 1.05], y: [0, 3], pad: padOf(bot, W, H, words ? (cmp ? 14 : 22) : 0, 4, 0, words && !cmp ? 2 : 0), clear: false });
-    h.rect(0, 1.75, Math.cos(th * DEG), 2.35, P.cyan, { alpha: 0.85 });
-    h.rect(0, 0.2, Math.sin(th * DEG), 0.8, P.magenta, { alpha: 0.85 });
+    h.rect(0, 1.75, kept, 2.35, P.cyan, { alpha: 0.85 });
+    if (lost > 1e-12) h.rect(0, 0.2, lost, 0.8, P.magenta, { alpha: 0.85 });
     h.vline(1, P.lineHot, { dash: [3, 3] });
     if (words) {
       const fs = cmp ? 9 : clamp(b.w / 34, 9.5, 12);
@@ -305,15 +328,16 @@
         drawLines(g.ctx, fcap, b.x + b.w / 2, b.y, P.dim);
         for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0) g.text(-a, q + 1, String(q + 1), P.dim, { align: 'right', dx: -3, size: fs });
         let y = bot.y + bot.h + 4;
-        rd.forEach((f, k) => { drawLines(h.ctx, f, b.x, y, k ? P.magenta : P.cyan, { align: 'left', face: 'data' }); y += f.lines.length * (f.fs + 2); });
+        rd.forEach((f, k) => { drawLines(h.ctx, f, b.x, y, k ? P.magenta : P.cyan, { align: 'left', face: k ? lostF : 'data' }); y += f.lines.length * (f.fs + 2); });
         return;
       }
       g.ctx.font = `${fs}px ${face('body')}`;
       const wc = g.ctx.measureText(cap).width, fc = wc > b.w - 22 ? Math.max(8, fs * (b.w - 22) / wc) : fs;   // shrunk to the width of the panel
-      g.text(0, 0.4, cap, P.dim, { align: 'center', base: 'bottom', dy: -2, size: fc, face: 'body' });   // above row 1 (y runs down)
+      // in the top margin the panel keeps for it (above row 1, y runs down), so the last row's bars never cover it
+      g.text(0, 0.4, cap, P.dim, { align: 'center', base: 'bottom', dy: -2, size: fc, face: 'body' });
       for (let q = 0; q < n; q++) if (n <= 8 || q % 2 === 0) g.text(-a, q + 1, String(q + 1), P.dim, { align: 'right', dx: -4, size: fs });
-      h.text(0, 2.4, `‖Tψ‖ = cos θ = ${fix(Math.cos(th * DEG), 3)}`, P.cyan, { base: 'bottom', size: fs });
-      h.text(0, 0.85, `‖(I − T)ψ‖ = sin θ = ${fix(Math.sin(th * DEG), 3)}`, P.magenta, { base: 'bottom', size: fs });
+      h.text(0, 2.4, keptS, P.cyan, { base: 'bottom', size: fs });
+      h.text(0, 0.85, lostS, P.magenta, { base: 'bottom', size: fs, face: lostF });
     }
   }
 
@@ -407,8 +431,8 @@
     bead('pole+', [0, 0, 1], poleCol, 5); bead('pole-', [0, 0, -1], poleCol, 5);
     const tip = (c, t) => { const n = Math.hypot(c[0], c[1], c[2]) || 1; return c.map((x) => x * (1 + t / n)); };
     if (sl.kind === 'heal') {                 // the eigenvalues of Tₘ along the three directions; amber: where Tₘ sends q₃
-      bead('step', ax(2, sl.lam[2]), P.amber, 5.5);
-      for (let k = 0; k < 3; k++) tagIn(`n${k}`, toW(ax(k, Math.max(1, s[k]) + 0.17)), `<span class="${kp[k] ? 'c-cy' : 'c-mg'}">λ = ${fix(sl.lam[k], 3)}</span>`, 'num');
+      if (Number.isFinite(sl.lam[2])) bead('step', ax(2, clipS(sl.lam[2])), P.amber, 5.5);
+      for (let k = 0; k < 3; k++) tagIn(`n${k}`, toW(ax(k, Math.max(1, s[k]) + 0.17)), `<span class="${kp[k] ? 'c-cy' : 'c-mg'}">${Number.isFinite(sl.lam[k]) ? `λ = ${fix(sl.lam[k], 3)}` : L('λ 溢出', 'λ overflow')}</span>`, 'num backed');
     } else if (sc === 'read') {               // row i and column j of the table, and the shadow of the column on the row
       const cc = sliceOf(sl, T.map((row) => row[S.j])), tij = T[S.i][S.j], sh = rc.map((x) => x * tij / (rn * rn));
       const lift = kp[0] && kp[1] ? 2.5 : 7;
@@ -447,6 +471,15 @@
       tagIn('Tpsi', toW(tp), 'Tψ', 'raw c-cy', { dy: 15 });
       tagIn('w', toW(ax(wk, 1.12)), 'w', 'raw c-mg', { dx: 16 });
       out.perp = { theta: thetaOf(), ps, tp, v1, w, tube: [tp, ps] };
+    } else if (sc === 'perp') {               // r = N: T = I, ψ = v₁ for every θ and its reading Tψ = ψ; no w, no complement
+      const V = perpVecs(), ps = sliceOf(sl, V.psi), tp = sliceOf(sl, V.Tpsi), v1 = sliceOf(sl, V.v);
+      // ψ (ink, wide) and Tψ (cyan, on top of it): the same arrow, since the full table reads ψ back unchanged
+      st.line([near(O, 0.5), near(toW(ps), 0.5)], { color: P.stage, width: 9 });
+      st.arrow(near(O, 2), near(toW(ps), 2), { color: P.ink, width: 5, headSize: 14 });
+      st.arrow(near(O, 4), near(toW(tp), 4), { color: P.cyan, width: 2.4, headSize: 10 });
+      bead('psi', ps, P.ink, 4.5); bead('Tpsi', tp, P.cyan, 4.5);
+      tagIn('psi', toW(ps), 'Tψ = ψ', 'raw c-cy', { dy: 15 });
+      out.perp = { theta: thetaOf(), ps, tp, v1, w: null, tube: null, full: true };
     } else {                                  // the basis vectors of the slice: kept ones as arrows, free ones dashed
       for (let k = 0; k < 3; k++) {
         const col = newest(k) ? P.amber : P.ink;
@@ -462,12 +495,14 @@
   function captionOf(sl, shape) {
     const sc = S.scene, SH = { point: ['一点', 'a point'], rod: ['杆', 'a rod'], disk: ['圆盘', 'a disc'], ball: ['整个球', 'the whole ball'], ellipsoid: ['椭球', 'an ellipsoid'] }[shape];
     const span = `⟨${sl.names.join(', ')}⟩`;
+    if (sl.kind === 'heal' && !sl.lam.every(Number.isFinite)) { const m = mOf(); return L(`示意切片：T₀ 的三条本征方向 · T${subs(m)} 已超出双精度范围，画不出像`, `model slice: three eigen-directions of T₀ · T${subs(m)} has left double precision, no image drawn`); }
     if (sl.kind === 'heal') { const m = mOf(); return L(`示意切片：T₀ 的三条本征方向 · T${subs(m)} 的像：${SH[0]}`, `model slice: three eigen-directions of T₀ · image under T${subs(m)}: ${SH[1]}`); }
     if (sc === 'read') {
       const tij = num(derive().T[S.i][S.j]);
       return S.r >= 3 ? L(`示意切片：第 ${S.i + 1} 行与第 ${S.j + 1} 列所张的面${sl.names[2] ? ` + ${sl.names[2]}` : ''} · 内积 ${tij}`, `model slice: plane of row ${S.i + 1} and column ${S.j + 1}${sl.names[2] ? ` + ${sl.names[2]}` : ''} · dot product ${tij}`)
         : L(`示意切片 ${span} · 第 ${S.i + 1} 行 · 第 ${S.j + 1} 列 = ${tij}`, `model slice ${span} · row ${S.i + 1} · column ${S.j + 1} = ${tij}`);
     }
+    if (sc === 'perp' && !hasPerp()) return L(`示意切片 ${span} · T = I：Tψ = ψ = v₁，没有正交补`, `model slice ${span} · T = I: Tψ = ψ = v₁, no complement`);
     if (sc === 'perp' && hasPerp()) return L(`示意切片 ${span}，w = ${S.r >= 2 ? sl.names[2] : sl.names[0]} · ‖Tψ‖ = cos θ = ${fix(Math.cos(thetaOf() * DEG), 3)}`, `model slice ${span}, w = ${S.r >= 2 ? sl.names[2] : sl.names[0]} · ‖Tψ‖ = cos θ = ${fix(Math.cos(thetaOf() * DEG), 3)}`);
     return L(`示意切片 ${span} · 单位球的像：${SH[0]}`, `model slice ${span} · image of the unit ball: ${SH[1]}`);
   }
@@ -487,6 +522,9 @@
   /** The three boxes of the stage (CSS pixels of the canvas): the ball on the left (wide) or on top (narrow). */
   function layoutOf(W, H, words) {
     if (!words) return { mode: 'cover', solid: { x: W * 0.02, y: H * 0.08, w: W * 0.36, h: H * 0.84 }, table: { x: W * 0.4, y: H * 0.08, w: W * 0.33, h: H * 0.84 }, panel: { x: W * 0.76, y: H * 0.1, w: W * 0.21, h: H * 0.8 } };
+    // the legend's offset to the right belongs to one layout (a cited figure in a book page) and is derived anew for
+    // every frame: a frame narrowed from a book page to a phone must not keep it, and every layout below measures the
+    // legend across the whole stage first
     const stEl = $('stage');
     stEl.classList.remove('legend-right');    // the legend is measured across the whole stage first (also in a frame that was wide)
     const st = stEl.getBoundingClientRect(), below = (el) => (el && el.getClientRects().length ? el.getBoundingClientRect().bottom - st.top : 0);
@@ -503,7 +541,7 @@
     if (wide && bx.w >= bx.h * 2.05 && TRV.figure && !TRV.still) {
       // a cited figure in a book page: the ball's column runs from under the title to the foot of the stage, and the
       // legend keeps to the right of it, under the table and the side panel
-      const cb = { x: bx.x, y: bx.y - 6, w: bx.w, h: H - bx.y - 12 };
+      const cb = { x: bx.x, y: bx.y - 6, w: bx.w, h: H - (bx.y - 6) - 12 };   // from 6 px over the boxes to 12 px over the foot
       const w3 = Math.round(clamp(cb.h - 20, bx.w * 0.36, bx.w * 0.42)), rx = bx.x + w3 + 16, rw = bx.w - w3 - 16;
       stEl.style.setProperty('--fig-legend-left', `${rx}px`); stEl.classList.add('legend-right');
       const bh = Math.max(80, H - top - Math.max(18, $('legend').offsetHeight + 20)), pw = Math.round(bx.w * 0.27), side = Math.min(bh, rw - pw - 22);
@@ -532,7 +570,10 @@
     geo.layout = Object.assign({ W, H }, lay);
     // the ball: sized to its box less the caption under it, centred in what is left
     const sl = sliceNow(), shape = shapeOf(sl), cap = words ? captionLines(ctx, captionOf(sl, shape), lay.solid.w) : { lines: [], fs: 0 };
-    const capH = cap.lines.length * (cap.fs + 4) + (words ? 6 : 0), ball = { x: lay.solid.x, y: lay.solid.y, w: lay.solid.w, h: lay.solid.h - capH };
+    // a caption broken over lines is set as the page's other text is (fs + 2 a line), so in a column whose height decides
+    // the ball a second line takes no more of it than it needs; a single line keeps its padding
+    const lead = cap.fs + (cap.lines.length > 1 ? 2 : 4);
+    const capH = cap.lines.length * lead + (words ? 6 : 0), ball = { x: lay.solid.x, y: lay.solid.y, w: lay.solid.w, h: lay.solid.h - capH };
     // the glass and anything the image pokes out of it; a short stage lets the ball fill its column almost to the edge
     const tight = lay.mode === 'columns' || lay.mode === 'compact', unit = Math.max(16, Math.min(ball.w, ball.h) / 2 * Math.min(tight ? 0.97 : 0.9, (tight ? 1 : 0.97) / sl.scale));
     geo.ballBox = lay.solid;
@@ -540,7 +581,7 @@
     stage.begin();
     geo.solid = Object.assign(drawSolid(stage, sl, shape), { unit: stage.unit, center: [stage.cx, stage.cy], ball, caption: cap.lines.slice() });
     stage.end();
-    cap.lines.forEach((s, k) => text(ctx, s, ball.x + ball.w / 2, ball.y + ball.h + 6 + (k + 0.5) * (cap.fs + 4), P.dim, { align: 'center', size: cap.fs, face: 'body' }));
+    cap.lines.forEach((s, k) => text(ctx, s, ball.x + ball.w / 2, ball.y + ball.h + 6 + (k + 0.5) * lead, P.dim, { align: 'center', size: cap.fs, face: 'body' }));
     if (TRV.thumbMode) {   // wordless cover: the ball, the table and its eigenvalues snapping to 0 and 1
       const gx = lay.table.x + lay.table.w / 2, gr = gx - (lay.solid.x + lay.solid.w), glow = ctx.createRadialGradient(gx, H * 0.5, 0, gx, H * 0.5, gr);   // fades out before the ball
       glow.addColorStop(0, TRV.alpha(P.cyan, 0.08)); glow.addColorStop(1, TRV.alpha(P.cyan, 0)); ctx.fillStyle = glow; ctx.fillRect(gx - gr, 0, 2 * gr, H);
@@ -554,7 +595,7 @@
     if (S.scene === 'read') drawRead(cv, pb, W, H, true);
     else if (S.scene === 'rank') drawRank(cv, pb, W, H, true);
     else if (S.scene === 'heal') drawHeal(cv, pb, W, H, true);
-    else if (hasPerp()) drawPerp(cv, pb, W, H, true);
+    else drawPerp(cv, pb, W, H, true);
   }
 
   /* ---------- the strip: is the table still idempotent ---------- */
@@ -569,10 +610,11 @@
     const g = kit.plot($('plot'), { x: xr, y: [FLOOR, 10], logY: true, pad: [44, 12, 10, 22] });
     const xt = sc === 'perp' ? [[0, '0°'], [45, '45°'], [90, '90°']] : Array.from({ length: xr[1] - xr[0] + 1 }, (_, q) => q + xr[0]).filter((v) => xr[1] - xr[0] <= 8 || v % 2 === 0);
     g.axes({ yTicks: [[1e-16, '10⁻¹⁶'], [1e-8, '10⁻⁸'], [1, '1']], xTicks: xt });
+    if (sc === 'heal') g.hline(HEAL_TOL, P.dim, { dash: [4, 3] });   // the named tolerance of "approximately idempotent"
     g.line(pts, P.cyan, { width: 2 });
     for (const p of pts) if (sc === 'heal' || sc === 'rank') g.dot(p[0], p[1], P.cyan, 3);
     g.vline(now, P.amber, { alpha: 0.8 });
-    g.legend([[P.cyan, L('‖T² − T‖（对数）', '‖T² − T‖ (log)')]]);
+    g.legend(sc === 'heal' ? [[P.cyan, L('‖T² − T‖（对数）', '‖T² − T‖ (log)')], [P.dim, L('虚线：容差 10⁻¹²', 'dashed: tolerance 10⁻¹²')]] : [[P.cyan, L('‖T² − T‖（对数）', '‖T² − T‖ (log)')]]);
     setText('plotMeta', `${L(sc === 'heal' ? `第 ${now} 步` : '当前', sc === 'heal' ? `step ${now}` : 'now')} · ${nowV.toExponential(1).replace('-', MINUS)}`);
   }
 
@@ -581,7 +623,8 @@
     read: [['cy box', '正的格、正的乘积；圆盘上行读为正的一半', 'positive cells/products; positive half disc'], ['mg box', '负的格、负的乘积；读为负的一半', 'negative cells/products; negative half disc'], ['am', '选中的格、刚加进来的一项；列在行上的影子', 'chosen cell/term; column’s shadow on row'], ['dm', '虚线：行（尺子）与列（被量）', 'dashed: row ruler, measured column']],
     rank: [['cy box', '正的格、对角格（越亮越大）；球里：像', 'positive/diagonal cells; brighter = larger; ball: image'], ['mg box', '负的格；读成 0 的方向', 'negative cells; directions read as 0'], ['am', '对角格之和（迹）；刚写进的一行', 'the sum of the diagonal (trace); the newest row'], ['dm', '虚线框：对角线', 'dashed: the diagonal']],
     heal: [['cy box', '正的格；½ 以上的本征值及其方向', 'positive cells; eigenvalues above ½, their directions'], ['mg box', '负的格；½ 以下的本征值及其方向', 'negative cells; eigenvalues below ½, their directions'], ['am', '被碰的格、当前这一步', 'the knocked cell, the current step']],
-    perp: [['cy box', '读出 Tψ、留在表里的 cos θ；圆盘：像', 'reading Tψ, retained cos θ; disc: image'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']]
+    perp: [['cy box', '读出 Tψ、留在表里的 cos θ；圆盘：像', 'reading Tψ, retained cos θ; disc: image'], ['mg box', '落在正交补里的 sin θ', 'the sin θ in the complement'], ['dm', '状态 ψ', 'the state ψ']],
+    perpFull: [['cy box', '读出 Tψ = ψ（T = I）；球里：整个球', 'the reading Tψ = ψ (T = I); in the ball: the whole ball'], ['dm', '状态 ψ = v₁', 'the state ψ = v₁']]
   };
   const setLabel = (id, zh, en) => { const h = `<span class="zh">${zh}</span><span class="en">${en}</span>`; if ($(id)._h !== h) { $(id).innerHTML = h; $(id)._h = h; } };
   const ex = (x) => (x === 0 ? '0' : x.toExponential(1).replace('-', MINUS));
@@ -606,25 +649,35 @@
       setLabel('roKeyLabel', '迹 = 秩', 'Trace = rank'); setText('roKey', `${fix(D.tr, 6)} = ${S.r}`); setText('roKeySub', L(`N = ${S.N} 个地址里占了 ${S.r} 个`, `${S.r} of N = ${S.N} addresses taken`));
       setLabel('ro1Label', '还空着的正交方向', 'Orthogonal directions still free'); setText('ro1', String(S.N - S.r));
     } else if (sc === 'heal') {
-      const m = mOf(), r0 = Math.round(trace(D.its[M]));
-      big = S.kicks.length ? L(`第 ${m} 步 · 幂等误差 ${ex(D.errs[m])}`, `Step ${m} · idempotency error ${ex(D.errs[m])}`) : L('还没碰：点表里的一格', 'Untouched: click a cell of the table');
-      hud = !S.kicks.length ? L('点一格，Tᵢⱼ 与 Tⱼᵢ 各加 ε，然后迭代 3T² − 2T³', 'a click adds ε to Tᵢⱼ and Tⱼᵢ, then 3T² − 2T³ is iterated')
-        : L(`本征值被拉向 0 与 1 · 迭代后迹 = ${fix(trace(D.its[M]), 4)}（原表 ${S.r}）`, `eigenvalues pulled to 0 and 1 · trace after the iteration ${fix(trace(D.its[M]), 4)} (the table had ${S.r})`);
-      note = !S.kicks.length ? L('没有扰动时 T 已经幂等，迭代一步也不动它。', 'Without a knock T is already idempotent and the iteration does not move it.')
-        : D.dnorm < HEAL_SAFE ? L(`‖Δ‖₂ = ${fix(D.dnorm, 3)} < 0.366：回到一张秩 ${r0} 的幂等表，离原表 ${fix(frob(lin(1, D.its[M], -1, D.T)), 3)}（很近，但一般不是原表）。`, `‖Δ‖₂ = ${fix(D.dnorm, 3)} < 0.366: back to an idempotent table of rank ${r0}, at distance ${fix(frob(lin(1, D.its[M], -1, D.T)), 3)} from the original (close, but in general not the original).`)
-          : D.dnorm < 0.5 ? L(`‖Δ‖₂ = ${fix(D.dnorm, 3)}，介于 0.366 与 ½ 之间：仍回到某个投影，秩是 ${r0}${r0 !== S.r ? '，变了' : ''}。`, `‖Δ‖₂ = ${fix(D.dnorm, 3)}, between 0.366 and ½: it still returns to some projection, of rank ${r0}${r0 !== S.r ? ' — changed' : ''}.`)
-            : L(`‖Δ‖₂ = ${fix(D.dnorm, 3)} ≥ ½：不在保证收敛的范围里。`, `‖Δ‖₂ = ${fix(D.dnorm, 3)} ≥ ½: outside the range where convergence is guaranteed.`);
-      setLabel('roKeyLabel', `幂等误差 ‖Tₘ² − Tₘ‖（第 ${m} 步）`, `Idempotency error ‖Tₘ² − Tₘ‖ (step ${m})`); setText('roKey', ex(D.errs[m]));
+      // finite facts first: the computed error of the step shown; then the one sufficient condition, and only when it holds
+      const m = mOf(), e = D.errs[m], st = healStatus(m), dn = fix(D.dnorm, 3);
+      big = S.kicks.length ? L(`第 ${m} 步 · 幂等误差 ${ex(e)}`, `Step ${m} · idempotency error ${ex(e)}`) : L('还没碰：点表里的一格', 'Untouched: click a cell of the table');
+      hud = st === 'none' ? L('点一格，Tᵢⱼ 与 Tⱼᵢ 各加 ε，然后迭代 3T² − 2T³', 'a click adds ε to Tᵢⱼ and Tⱼᵢ, then 3T² − 2T³ is iterated')
+        : st === 'overflow' ? L('数值溢出：这一步页面报告不了误差', 'overflow: the page cannot report this step’s error')
+          : st === 'tol' ? L('误差 ≤ 10⁻¹²：这一步在这个容差下近似幂等', 'error ≤ 10⁻¹²: approximately idempotent at this tolerance')
+            : D.safe ? L(`‖Δ‖₂ < (√3 − 1)/2：再迭代会趋向秩 ${S.r} 的投影；这一步还不幂等`, `‖Δ‖₂ < (√3 − 1)/2: further steps tend to a rank-${S.r} projection; not idempotent yet`)
+              : L('‖Δ‖₂ ≥ (√3 − 1)/2：不在充分条件内，只看实算的误差', '‖Δ‖₂ ≥ (√3 − 1)/2: outside the sufficient condition, only the computed error counts');
+      const cond = D.safe
+        ? L(`‖Δ‖₂ = ${dn}，严格小于 (√3 − 1)/2 ≈ 0.366：按文献结果，继续迭代会渐近趋向秩 ${S.r} 的投影（T₀ 在 ½ 以上本征值的谱投影，不一定是原表）。`, `‖Δ‖₂ = ${dn} is strictly below (√3 − 1)/2 ≈ 0.366: by the literature result, further steps tend asymptotically to a projection of rank ${S.r} (the spectral projection of T₀ onto its eigenvalues above ½, not necessarily the original table).`)
+        : L(`‖Δ‖₂ = ${dn}，不小于 (√3 − 1)/2 ≈ 0.366：这个充分条件不适用，页面既不预言极限，也不预言秩（‖Δ‖₂ < ½ 也不够）。`, `‖Δ‖₂ = ${dn} is not below (√3 − 1)/2 ≈ 0.366: the sufficient condition does not apply, and the page predicts neither a limit nor a rank (‖Δ‖₂ < ½ is not enough either).`);
+      const step = st === 'overflow' ? L(`第 ${m} 步的数已超出双精度范围，页面给不出误差。`, `At step ${m} the numbers have left the double-precision range; the page cannot give an error.`)
+        : st === 'tol' ? L(`第 ${m} 步实算的幂等误差 ${ex(e)} ≤ 10⁻¹²：在这个容差下近似幂等。`, `The computed idempotency error at step ${m}, ${ex(e)}, is ≤ 10⁻¹²: approximately idempotent at this tolerance.`)
+          : L(`第 ${m} 步实算的幂等误差是 ${ex(e)}，高于容差 10⁻¹²：这一步的表还不幂等。`, `The computed idempotency error at step ${m} is ${ex(e)}, above the tolerance 10⁻¹²: the table at this step is not idempotent yet.`);
+      note = st === 'none' ? L('没有扰动时 T 已经幂等，迭代一步也不动它。', 'Without a knock T is already idempotent and the iteration does not move it.') : `${cond} ${step}`;
+      setLabel('roKeyLabel', `幂等误差 ‖Tₘ² − Tₘ‖（第 ${m} 步）`, `Idempotency error ‖Tₘ² − Tₘ‖ (step ${m})`); setText('roKey', ex(e));
       setText('roKeySub', m > 0 && D.errs[m - 1] > 1e-14 ? L(`上一步 ${ex(D.errs[m - 1])}`, `previous step ${ex(D.errs[m - 1])}`) : '');
       setLabel('ro1Label', '扰动的大小 ‖Δ‖₂（谱范数）', 'Size of the knock ‖Δ‖₂ (spectral norm)'); setText('ro1', `${fix(D.dnorm, 3)} · ${S.kicks.length} ${L('次', S.kicks.length === 1 ? 'knock' : 'knocks')}`);
     } else {
-      const th = thetaOf(), V = perpVecs();
-      big = hasPerp() ? `θ = ${fix(th, 0)}° · ‖Tψ‖ = ${fix(norm(V.Tpsi), 3)}` : L('表写满了：没有正交补', 'The table is full: no complement');
-      hud = !hasPerp() ? L('r = N 时 T = I，任何状态都原样读回', 'at r = N, T = I and every state reads back unchanged') : th > 89.999 ? L('ψ 整个落在正交补里：读出 Tψ = 0', 'ψ lies entirely in the complement: the reading Tψ = 0') : L(`ψ = cos θ·v₁ + sin θ·w，w 与表里每一行正交`, `ψ = cos θ·v₁ + sin θ·w, with w orthogonal to every row of the table`);
-      note = L('只有留在表里的那一份 cos θ 被读出来；转到 90°，表对 ψ 一个字也读不出。', 'Only the part cos θ that lies in the table gets read; at 90° the table reads nothing at all from ψ.');
-      setLabel('roKeyLabel', '读出的长度 ‖Tψ‖', 'Length of the reading ‖Tψ‖'); setText('roKey', hasPerp() ? `${fix(norm(V.Tpsi), 6)}` : '—');
-      setText('roKeySub', hasPerp() ? `cos ${fix(th, 1)}° = ${fix(Math.cos(th * DEG), 6)}` : '');
-      setLabel('ro1Label', '正交补里的 w：‖Tw‖', 'The complement vector w: ‖Tw‖'); setText('ro1', hasPerp() ? ex(norm(V.Tw)) : '—');
+      const th = thetaOf(), V = perpVecs(), full = !hasPerp(), len = norm(V.Tpsi);
+      big = full ? L('表写满了：没有正交补', 'The table is full: no complement') : `θ = ${fix(th, 0)}° · ‖Tψ‖ = ${fix(len, 3)}`;
+      hud = full ? L('T = I：没有非零的正交补，单位态原样读回；ψ = v₁ 不随 θ 转', 'T = I: no nonzero complement, a unit state reads back unchanged; ψ = v₁ does not turn with θ')
+        : th > 89.999 ? L('ψ 整个落在正交补里：读出 Tψ = 0', 'ψ lies entirely in the complement: the reading Tψ = 0') : L(`ψ = cos θ·v₁ + sin θ·w，w 与表里每一行正交`, `ψ = cos θ·v₁ + sin θ·w, with w orthogonal to every row of the table`);
+      note = full ? L('写满的表 T = I 没有非零的正交补：任何单位态都原样读回，Tψ = ψ，‖Tψ‖ = 1。cos θ 与 sin θ 的拆分要 r < N 才有；这里 ψ 停在 v₁，时间轴上的 θ 不改变它。', 'The full table T = I has no nonzero complement: every unit state reads back unchanged, Tψ = ψ and ‖Tψ‖ = 1. The split into cos θ and sin θ needs r < N; here ψ stays at v₁ and the angle θ on the rail does not change it.')
+        : L('只有留在表里的那一份 cos θ 被读出来；转到 90°，表对 ψ 一个字也读不出。', 'Only the part cos θ that lies in the table gets read; at 90° the table reads nothing at all from ψ.');
+      setLabel('roKeyLabel', '读出的长度 ‖Tψ‖', 'Length of the reading ‖Tψ‖'); setText('roKey', fix(len, 6));
+      setText('roKeySub', full ? L('= ‖ψ‖：T = I 原样读回', '= ‖ψ‖: T = I reads it back unchanged') : `cos ${fix(th, 1)}° = ${fix(Math.cos(th * DEG), 6)}`);
+      if (full) { setLabel('ro1Label', '正交补', 'The complement'); setText('ro1', L('没有：维数 0', 'none: dimension 0')); }
+      else { setLabel('ro1Label', '正交补里的 w：‖Tw‖', 'The complement vector w: ‖Tw‖'); setText('ro1', ex(norm(V.Tw))); }
     }
     setLabel('ro2Label', '表的大小 · 秩', 'Size · rank'); setText('ro2', `${S.N} × ${S.N} · r = ${S.r}`);
     setLabel('ro3Label', '迹（舞台上这张表）', 'Trace (the table on the stage)'); setText('ro3', fix(trace(A), 4));
@@ -633,7 +686,7 @@
     setText('hudBig', big); setText('hudSub', hud); setText('roNote', note);
     setText($('pillSize').querySelector('strong'), `${S.N} × ${S.r}`);
     setText($('pillErr').querySelector('strong'), ex(idemErr(A)));
-    const leg = LEGEND[sc].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    const leg = LEGEND[sc === 'perp' && !hasPerp() ? 'perpFull' : sc].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
     setText('oRank', String(S.r));
   }
@@ -659,12 +712,15 @@
     document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(sc); });
     fitClock(sc === 'rank' && t == null ? S.r - 1 : t);
   }
-  function setN(n) {
+  /** The one owner of a size change (size chips, cards, cover): every index the state keeps stays inside the new table,
+      and a choice that is still valid is kept as it is. */
+  function resize(n) {
     S.N = n; S.r = Math.min(S.r, n); S.i = Math.min(S.i, n - 1); S.j = Math.min(S.j, n - 1);
     S.kicks = S.kicks.filter((k) => k.i < n && k.j < n);
+    if (S.hover && (S.hover[0] >= n || S.hover[1] >= n)) S.hover = null;
     $('rank').max = String(n); fRank.set(S.r); sizeChips.set(String(n), true);
-    fitClock(S.scene === 'rank' ? S.r - 1 : undefined);
   }
+  function setN(n) { resize(n); fitClock(S.scene === 'rank' ? S.r - 1 : undefined); }
   function setR(r) { S.r = clamp(Math.round(r), 1, S.N); fRank.set(S.r); if (S.scene === 'rank') { clock.pause(); clock.set(S.r - 1); } else paint(); }
   function select(i, j) { S.i = clamp(i, 0, S.N - 1); S.j = clamp(j, 0, S.N - 1); if (S.scene === 'read') fitClock(); else paint(); }
   function kick(i, j, eps) {
@@ -688,10 +744,14 @@
     return i >= 0 && j >= 0 && i < g.n && j < g.n ? [i, j] : null;
   };
   let downAt = null;
-  $('stage').addEventListener('pointerdown', (ev) => { downAt = [ev.clientX, ev.clientY]; });
+  // a press on a control is not the start of a turn (kit.chips keeps its click from reaching the stage)
+  $('stage').addEventListener('pointerdown', (ev) => { downAt = ev.target.closest('button, a, input, .chip') ? null : [ev.clientX, ev.clientY]; });
   $('stage').addEventListener('click', (ev) => {
+    // each press is used once; a click with no pointer press of its own (ev.detail 0: keyboard, assistive or scripted)
+    // never ends a turn
+    const d = ev.detail > 0 ? downAt : null; downAt = null;
     if (ev.target.closest('button, a, input, .chip')) return;
-    if (downAt && Math.hypot(ev.clientX - downAt[0], ev.clientY - downAt[1]) > 6) return;   // the end of a turn of the ball
+    if (d && Math.hypot(ev.clientX - d[0], ev.clientY - d[1]) > 6) return;   // the end of a turn of the ball
     const c = cellAt(ev); if (!c) return;
     leave();
     if (S.scene === 'heal') { kick(c[0], c[1]); clock.play(); }
@@ -719,13 +779,13 @@
     expand_table: ['一行一行写进两两正交的余弦向量：每多一行，对角格的和（琥珀色的框）就多 1，地址槽多占一个；条带里的幂等误差始终贴在机器精度上。', 'Orthogonal cosine vectors are written in one row at a time: each new row adds 1 to the sum of the diagonal (the amber frame) and takes one more address slot; the idempotency error in the strip stays at machine precision.'],
     full: ['r = N = 8：八个地址全被占满，表成了单位阵，青色只剩对角线。再也找不出与这八行都正交的第九个方向。', 'r = N = 8: all eight addresses are taken, the table is the identity, and cyan is left only on the diagonal. There is no ninth direction orthogonal to all eight rows.'],
     dual_read: ['第 1 行（横读，尺子）去读第 4 列（竖读，被量的状态）：四个乘积 T₁ₖTₖ₄ 有青有品红，逐项加起来（琥珀色的条）正好等于这一格 T₁₄（空心框）。点一个对角格，第 k 行与第 k 列是同一串数，乘积全是平方、全是青色，加起来回到 Tₖₖ 本身：这只是 T² = T 落在对角格上的一项，不是 Lawvere 对角线定理（无不动点时对角线逃出列表）的演示。', 'Row 1 (read across, the ruler) reads column 4 (read down, the state being measured): the four products T₁ₖTₖ₄, some cyan, some magenta, add up term by term (the amber bar) to exactly this cell T₁₄ (the hollow frame). Click a diagonal cell: row k and column k are the same numbers, so every product is a square, all cyan, and they add up to Tₖₖ itself. This is only T² = T read on a diagonal cell, not a picture of Lawvere’s diagonal theorem (the diagonal escaping every listing when there is no fixed point).'],
-    heal: ['往 (2, 5) 与 (5, 2) 各加 0.3，表不再幂等。每迭代一步 3T² − 2T³，右边的本征值就向 0 与 1 靠拢，条带里的误差一步比一步小得多，几步就到机器精度。', 'Add 0.3 to (2, 5) and (5, 2) and the table is no longer idempotent. With each step of 3T² − 2T³ the eigenvalues on the right move towards 0 and 1, and the error in the strip drops much faster each step, reaching machine precision in a few steps.'],
+    heal: ['往 (2, 5) 与 (5, 2) 各加 0.3，表不再幂等。每迭代一步 3T² − 2T³，右边的本征值就向 0 与 1 靠拢；这一次，条带里的误差一步比一步小得多，第 7 步降到 10⁻¹² 以下。', 'Add 0.3 to (2, 5) and (5, 2) and the table is no longer idempotent. With each step of 3T² − 2T³ the eigenvalues on the right move towards 0 and 1; for this knock the error in the strip drops much faster each step, below 10⁻¹² by step 7.'],
     orthogonal_zero: ['ψ 从表里的常值向量 v₁ 转向与表里每一行都正交的 w：读出 Tψ（青色）随 cos θ 缩短，落在正交补里的 sin θ（品红）随之变长；到 90°，读出归零。', 'ψ turns from the constant vector v₁, which is in the table, towards w, which is orthogonal to every row of it: the reading Tψ (cyan) shrinks with cos θ while the part sin θ in the complement (magenta) grows; at 90° the reading is zero.']
   };
   let booting = true;
   function applyPreset(id) {
     const p = PRESETS[id];
-    S.N = p.N; $('rank').max = String(p.N); sizeChips.set(String(p.N), true);
+    resize(p.N);                                   // a card may shrink the table: the kept cell must stay inside it
     S.r = p.r; fRank.set(p.r);
     S.kicks = (p.kicks || []).map((k) => Object.assign({}, k));
     if (p.cell) { S.i = p.cell[0]; S.j = p.cell[1]; } else if (p.kicks) { S.i = p.kicks[0].i; S.j = p.kicks[0].j; }
@@ -744,7 +804,7 @@
     "expand_table": ["逐行写入正交向量：每行使迹增 1，表始终保持幂等。", "Each new orthogonal row adds 1 to the trace; the table stays idempotent."],
     "full": ["八行填满八维空间，表成为单位阵，不存在第九个正交方向。", "Eight rows fill eight dimensions: T = I, with no ninth orthogonal direction."],
     "dual_read": ["横行与竖列逐项相乘求和，返回 T 的同一格，即 T² = T。", "A row times a column returns the same cell: T² = T."],
-    "heal": ["对称扰动破坏幂等性；迭代 3T² − 2T³ 将本征值推向 0 或 1。", "After a symmetric perturbation, 3T² − 2T³ drives eigenvalues towards 0 or 1."],
+    "heal": ["对称扰动 ‖Δ‖₂ = 0.3 < (√3 − 1)/2：迭代使本征值趋向 0 或 1，第 7 步实算误差 ≤ 10⁻¹²。", "Symmetric knock ‖Δ‖₂ = 0.3 < (√3 − 1)/2: eigenvalues tend to 0 or 1; error ≤ 10⁻¹² by step 7."],
     "orthogonal_zero": ["ψ 转入正交补时，读出 Tψ 按 cos θ 缩短，在 90° 归零。", "As ψ turns into the orthogonal complement, Tψ shrinks to zero at 90°."],
   };
   const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? FIGURE_NOTES : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
@@ -761,7 +821,8 @@
     get state() {
       const D = derive();
       return { scene: S.scene, N: S.N, r: S.r, i: S.i, j: S.j, eps: S.eps, kicks: S.kicks.map((k) => Object.assign({}, k)), t: clock.t, max: clock.max, playing: clock.playing,
-        preset: cards.current, k: kOf(), m: mOf(), theta: thetaOf(), trace: D.tr, err: D.err, sym: D.sym, dnorm: D.dnorm, errs: D.errs.slice(), partial: partial(kOf()) };
+        preset: cards.current, k: kOf(), m: mOf(), theta: thetaOf(), trace: D.tr, err: D.err, sym: D.sym, dnorm: D.dnorm, errs: D.errs.slice(), partial: partial(kOf()),
+        safe: D.safe, safeBound: HEAL_SAFE, tol: HEAL_TOL, heal: healStatus(mOf()) };
     },
     T: () => copy(derive().T), shown: () => copy(shown()), delta: () => copy(derive().D), iterates: () => derive().its.map(copy), eigs: (m) => derive().eigs[m == null ? mOf() : m].slice(),
     basis: () => Array.from({ length: S.r }, (_, k) => dct(S.N, k)), products: () => products(), perp: () => { const V = perpVecs(); return { v: V.v, w: V.w, psi: V.psi, Tpsi: V.Tpsi, Tw: V.Tw, has: hasPerp() }; },
@@ -773,8 +834,8 @@
     /** The boxes of the stage (canvas CSS pixels): the ball, the table, the side panel; with the table's cell grid. */
     layout: () => (geo.layout ? plain(Object.assign({}, geo.layout, { cells: geo.table ? { ox: geo.table.ox, oy: geo.table.oy, c: geo.table.c, n: geo.table.n } : null })) : null)
   };
-  /** Cover: an N = 12 table knocked out of shape, beside its eigenvalues snapping back to 0 and 1. */
-  window.TRV_THUMB = () => { S.N = 12; S.r = 5; S.kicks = [{ i: 2, j: 7, eps: 0.3 }, { i: 9, j: 9, eps: -0.25 }]; S.i = 2; S.j = 7; setScene('heal', M); paint.now(); };
+  /** Cover: an N = 12 table knocked out of shape (‖Δ‖₂ = 0.3), beside the eigenvalues of its eight computed steps. */
+  window.TRV_THUMB = () => { resize(12); S.r = 5; fRank.set(5); S.kicks = [{ i: 2, j: 7, eps: 0.3 }, { i: 9, j: 9, eps: -0.25 }]; S.i = 2; S.j = 7; setScene('heal', M); paint.now(); };
   cards.pick(cards.initial('dual_read'));   // a chapter may cite another card: ::: {.viz src="self-referential-table" preset="heal"}
   booting = false;
   paint();

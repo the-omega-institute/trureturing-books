@@ -139,7 +139,7 @@
 **文献结果，未在本书形式化（针对 Harrigan–Spekkens 本体模型分类与 PBR 定理；对角自指落点不动点、概念纤维分解与对角相位盲区见下引 `LEAN ✓` 链接）。**
 
 1. **主流物理困境（`文献结果`）**：
-   - **高维配置空间实体波之困**：在 Harrigan 与 Spekkens（2010）的本体模型分类中，若采信波函数是客观物理场（**$\psi$-ontic**），则 $N_{\mathrm{p}}$ 个粒子的波函数生活在 $3N_{\mathrm{p}}$ 维配置空间（或 $2^{N_{\mathrm{p}}}$ 维张量空间）而非三维物理空间中，测量瞬间高维波场如何坍缩令人生疑。
+   - **高维配置空间实体波之困**：在 Harrigan 与 Spekkens（2010）的本体模型分类中，**$\psi$-ontic** 指不同纯量子态对应的本体概率分布具有互不重叠的支持。若进一步采信波函数是客观物理场，则三维空间中 $N_{\mathrm{p}}$ 个粒子的位置波函数依赖 $3N_{\mathrm{p}}$ 个配置坐标，而非仅依赖三维位置（$2^{N_{\mathrm{p}}}$ 则是 $N_{\mathrm{p}}$ 个两能级子系统，即量子比特的张量积希尔伯特空间维数，与配置坐标数不同），测量瞬间高维波场如何坍缩令人生疑。
    - **PBR 不可能性定理的假设边界**：若采信波函数仅代表观察者对底层隐状态不完全了解的贝叶斯信念度（**$\psi$-epistemic**），2012 年 Pusey、Barrett 与 Rudolph 提出的 **PBR 定理**（*Nature Physics* 2012）证明：在假定存在客观底层实体态 $\lambda$ 且独立制备系统满足笛卡尔乘积**制备独立性公设（Preparation Independence Postulate）**的前提下，不同纯量子态对应的底层概率分布不能重叠——从而排除了固定底层实体态上的朴素统计无知模型（注：放弃固定底层 $\lambda$ 本体框架或制备独立性公设的关系方案不在 PBR 直接排除之列）。
 2. **正交开维几何对勘（`LEAN ✓` + `MODEL`）**：
    - **对角自指落点与概念纤维等价**：“实体波 vs. 主观无知”预设了先有独立于测量关系的绝对底层颗粒 $\lambda$。在 [第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) 与 [第 39 章](ch39-observer-is-ontological-universe.md) 的内生自指框架中，一旦表 $g : A \to A \to Y$ 在某行 $a_0$ 捕获关于 $f$ 的对角函数，其自应用格点必然成为不动点（[`diagonal_landing_fixed`](lean:D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed)，`LEAN ✓`，[@thm-ch38-self-mapped-diagonal-fixed-point]；二元分式自应用四重命运见 [`self_application_four_fates`](lean:D5/S0/Diagonal/SelfApplicationFates.self_application_four_fates)，[@thm-ch39-self-application-four-fates-and-diagonal-identity]），且任何读出映射 $q_C : X \to B$ 都将源空间等价分解为其观测纤维的依值直和（[`concept_fiber_decomposition`](lean:D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition)，`LEAN ✓`，[@thm-ch39-fiber-reconstruction-and-zeckendorf-thread]）：
@@ -217,7 +217,7 @@ $$
 支撑上述六题与六行对照的核心奠基文献按议题归纳如下：
 
 - **测量链与自指观察者**：von Neumann（1932）《量子力学的数学基础》过程 I/II 区分；Wigner（1961）密封实验室朋友悖论；Frauchiger & Renner（*Nat. Commun.* 9, 3711, 2018）扩展主体推理相容性不可能性定理。
-- **环境诱导退相干与单一结果边界**：Zurek（*Rev. Mod. Phys.* 75, 715, 2003）环境超选择与指针基；Schlosshauer（*Rev. Mod. Phys.* 77, 1279, 2005）关于退相干本身不导出单一结果的系统评述。
+- **环境诱导退相干与单一结果边界**：Zurek（*Rev. Mod. Phys.* 75, 715, 2003）环境超选择与指针基；Schlosshauer（*Rev. Mod. Phys.* 76, 1267, 2005）关于退相干本身不导出单一结果的系统评述。
 - **玻恩迹规则与复希尔伯特空间实验检验**：Jordan & von Neumann（*Ann. Math.* 36, 719, 1935）平行四边形逆定理；Gleason（*J. Math. Mech.* 6, 885, 1957）$d \ge 3$ 投影测度定理；Renou et al.（*Nature* 600, 625–629, 2021）独立局域张量源三节点网络判据与 Chen et al.（*Phys. Rev. Lett.* 128, 040403, 2022）、Li et al.（*Phys. Rev. Lett.* 128, 040402, 2022）的实验检验。
 - **贝尔非定域性与相对论无信令**：Einstein–Podolsky–Rosen（1935）；Bell（*Physics* 1, 195, 1964）；Tsirelson（*Lett. Math. Phys.* 4, 93, 1980）量子上界 $2\sqrt{2}$；Eberhard（*Nuovo Cimento B* 46, 392, 1978）保迹局域操作无信令定理；Hensen et al.、Giustina et al.、Shalm et al.（2015）无漏洞贝尔实验。
 - **波函数本体模型与五大流派原始文献**：Harrigan & Spekkens（*Found. Phys.* 40, 125, 2010）$\psi$-ontic / $\psi$-epistemic 严格定义；Pusey–Barrett–Rudolph（*Nat. Phys.* 8, 475, 2012）制备独立性下非重叠定理；Everett（1957）、Bohm（1952）、Ghirardi–Rimini–Weber（1986）、Penrose（1996）、Rovelli（1996）与 Fuchs–Mermin–Schack（2014）。

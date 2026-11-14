@@ -74,8 +74,17 @@
     onDrop: () => { drag = false; }
   });
   let drag = false;
-  /** Rough width of a label in CSS pixels (CJK characters are wider), to keep the disk's labels in their own part. */
-  const textW = (html) => { let w = 6; for (const ch of String(html).replace(/<[^>]*>/g, '')) w += /[⺀-鿿＀-￯]/.test(ch) ? 12.5 : 7; return w; };
+  /** Rough width of a label in CSS pixels (CJK characters are wider), to keep the disk's labels in their own part; a
+      label set on several lines (<br>) is as wide as its widest line. */
+  const textW = (html) => Math.max(...String(html).split(/<br\s*\/?>/i).map((line) => { let w = 6; for (const ch of line.replace(/<[^>]*>/g, '')) w += /[⺀-鿿＀-￯]/.test(ch) ? 12.5 : 7; return w; }));
+  /** The width in CSS pixels that a label of the disk part takes as the theme sets a .tag.raw label (the body face at
+      12 px, 0.04em apart, as written), measured on the flat canvas; a label on several lines is as wide as its widest. */
+  const labelW = (html) => {
+    const c = $('flat').getContext('2d'); c.save(); c.font = `12px ${TRV.fonts.body}`;
+    const w = Math.max(...String(html).split(/<br\s*\/?>/i).map((line) => { const t = line.replace(/<[^>]*>/g, ''); return c.measureText(t).width + [...t].length * 0.04 * 12; }));
+    c.restore();
+    return w;
+  };
   const tagAt = (key, x, y, html, cls) => {
     if (layout && layout.r2) { const r = layout.r2, hw = Math.min(r.w / 2, textW(html) / 2); x = clamp(x, r.x + hw, r.x + r.w - hw); }
     stage.tag(key, [x, y], html, cls, { screen: true });
@@ -138,8 +147,24 @@
     if (!TRV.thumbMode) {
       const fov = pow10(Math.round(Math.log10(U))), small = box.w < 230;
       tagAt('magU', box.x + box.w / 2, box.y + 13, small ? L(`视野 ${fov}`, `field ${fov}`) : L(`放大镜 · 视野宽 ${fov}`, `magnifier · field ${fov} wide`), 'raw ink');
-      // under the disk there is no room above the box: the gap is named inside it, or (a phone's figure) under it
-      tagAt('magG', box.x + box.w / 2, box.under ? box.y + box.h + 10 : small && !box.below ? box.y - 12 : box.y + box.h - 14, gap > 0 ? L(`缝 ${sci(gap)}`, `gap ${sci(gap)}`) : L('缝 = 0：撞上边界', 'gap = 0: on the rim'), 'raw mg');
+      // under the disk there is no room above the box: the gap is named inside it, or (a phone's figure) under it.
+      // Over a small box beside the disk or in its corner, a name that would reach back over the disk (a book column
+      // of about 480 to 560 px, whose legend takes the height) moves to the right of the rim, clear of the rim's own
+      // marks and the counts of the folded wheel, and where that column is narrower than the name it is set, whole, on
+      // two lines
+      const name = gap > 0 ? [L('缝', 'gap'), sci(gap), ' '] : [L('缝 = 0：', 'gap = 0:'), L('撞上边界', 'on the rim'), L('', ' ')];
+      let html = name[0] + name[2] + name[1], gx = box.x + box.w / 2, gy = box.under ? box.y + box.h + 10 : small && !box.below ? box.y - 12 : box.y + box.h - 14;
+      if (small && !box.below && !box.under) {
+        // where tagAt puts the name, and how wide it is as set: does its box meet the disk and the line of its rim?
+        const r2 = layout.r2, hw = Math.min(r2.w / 2, textW(html) / 2), w = labelW(html), x0 = clamp(gx, r2.x + hw, r2.x + r2.w - hw) - w / 2;
+        const dx = Math.max(x0 - g.X(0), 0, g.X(0) - x0 - w), dy = Math.max(gy - 9 - g.Y(0), 0, g.Y(0) - gy - 9);
+        if (dx * dx + dy * dy < (g.scale + 2) ** 2) {
+          const left = g.X(1) + 4;
+          if (w > r2.x + r2.w - left) { html = `${name[0]}<br>${name[1]}`; gy -= 9; }
+          gx = Math.max(gx, left + labelW(html) / 2);
+        }
+      }
+      tagAt('magG', gx, gy, html, 'raw mg');
     }
     return { U, X, Y };
   }
@@ -343,6 +368,8 @@
   /** The two parts of the stage, in CSS pixels of the canvas: r3 for the solid, r2 for the disk and its magnifier.
       A wide stage puts them side by side (the solid on the left), a narrow one above each other (the solid on top). */
   function regions() {
+    // the legend is measured across the whole stage first, whatever the frame was before: a book page's frame that
+    // narrows to a phone's must not keep the book page's legend offset (it would start beyond the narrow frame's edge)
     $('stage').classList.remove('legend-right');
     const cv = $('flat'), st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
     const thumb = TRV.thumbMode, W = cv.clientWidth, H = cv.clientHeight;
