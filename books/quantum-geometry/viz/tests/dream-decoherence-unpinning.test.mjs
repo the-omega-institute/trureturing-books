@@ -254,6 +254,36 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
   check(`the English still of ${card} keeps its legend on one line`, lh < 4, `${lh}`);
   await fg.context().close();
 }
+/* the whole lab in a chapter's frame on a phone (334 × 620, English): where the title's second line meets the scene
+   buttons, the theme puts the title block under them (.hud-stack); the box the layout gives the apparatus and the flat
+   panels then starts below the last line of the title block as it is shown, and no canvas draws under its words */
+{
+  const fr = await T.open(BOOK, ID, '?embed=1&lang=en', { viewport: { width: 334, height: 620 }, locale: 'en-US' });
+  await settle(fr, 120);
+  for (const card of ['blocks', 'half_erase', 'wake_snap']) {
+    await fr.click(`[data-preset="${card}"]`);
+    await fr.evaluate(() => { window.TRV.kit.pause(); window.TRV.kit.flush(); });
+    const r = await fr.evaluate(() => {
+      const st = document.getElementById('stage'), sr = st.getBoundingClientRect(), P = window.DREAM_DEBUG.panels;
+      const text = (id) => { const rg = document.createRange(); rg.selectNodeContents(document.getElementById(id)); return rg.getBoundingClientRect(); };
+      const ink = (cv, b) => {
+        if (!cv || cv.style.visibility === 'hidden') return 0;
+        const cp = document.createElement('canvas'); cp.width = cv.width; cp.height = cv.height; const c = cp.getContext('2d'); c.drawImage(cv, 0, 0);
+        const d = c.getImageData(0, 0, cp.width, cp.height).data, cb = cv.getBoundingClientRect(), k = cv.width / cb.width;
+        let n = 0;
+        for (let y = Math.max(0, Math.floor((b.top - cb.top) * k)); y < Math.min(cp.height, Math.ceil((b.bottom - cb.top) * k)); y++)
+          for (let x = Math.max(0, Math.floor((b.left - cb.left) * k)); x < Math.min(cp.width, Math.ceil((b.right - cb.left) * k)); x++) if (d[4 * (y * cp.width + x) + 3] > 8) n++;
+        return n;
+      };
+      const cvs = [document.getElementById('flat'), st.querySelector('canvas.solid-gl'), document.getElementById('cv')];
+      const under = ['hudBig', 'hudSub'].reduce((s, id) => s + cvs.reduce((t, cv) => t + ink(cv, text(id)), 0), 0);
+      return { stacked: st.classList.contains('hud-stack'), words: Math.round(Math.max(text('hudBig').bottom, text('hudSub').bottom) - sr.top), top: Math.round(Math.min(P.r3.y, P.region.y, P.fit.t)), under };
+    });
+    check(`lab in a 334 × 620 frame, English, ${card}: the apparatus and the panels start below the title block as shown, nothing drawn under its words`,
+      r.top >= r.words && r.under === 0, JSON.stringify(r));
+  }
+  await fr.context().close();
+}
 
 /* ---------- the solid apparatus: the same state as geometry, against the independent ρ ---------- */
 {

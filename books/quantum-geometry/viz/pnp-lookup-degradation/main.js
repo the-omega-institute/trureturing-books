@@ -224,6 +224,9 @@
 
   let lastPhaseBox = null;
   let lastStacked = false;
+  /** Set by drawStage: the two panels of a short narrow band sit side by side (narrow panels: short titles, fewer ticks). */
+  let side = false;
+  let lastLayout = null;   // drawStage: the band between the title block and the legend, and the twin scene's two panels
 
   /* ---------- Drawing Helpers ---------- */
   function subBox(rect, pad) {
@@ -257,22 +260,46 @@
     }
   }
 
-  function drawPanelFrame(ctx, B, lw, titleZh, titleEn, accent) {
+  /** The panel's box and its title above it; short (zh, en) is the title used where the long one does not fit. */
+  function drawPanelFrame(ctx, B, lw, titleZh, titleEn, accent, short) {
     ctx.strokeStyle = accent ? TRV.alpha(accent, 0.52) : P.panelEdge;
     ctx.lineWidth = 1.1 * lw;
     ctx.strokeRect(B.bx, B.by, B.bw, B.bh);
     if (!TRV.thumbMode && titleZh) {
       ctx.font = font(10.5, 'display', 600);
+      let title = L(titleZh, titleEn);
+      if (short && ctx.measureText(title).width > B.bw + 2) title = L(short[0], short[1]);
       ctx.fillStyle = P.dim;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'bottom';
-      ctx.fillText(L(titleZh, titleEn), B.bx + 2, B.by - 5);
+      ctx.fillText(title, B.bx + 2, B.by - 5);
     }
+  }
+
+  /** In a narrow side-by-side panel (side): a line of text that would run past the box steps its font down in
+      proportion (to 7px at the least) and then moves inside the box, so that the clip cuts off no value; the font is
+      restored after each line. Returns the function that removes the wrapper. */
+  function fitTextIn(ctx, B) {
+    const own = Object.prototype.hasOwnProperty.call(ctx, 'fillText'), orig = ctx.fillText;
+    const left = B.bx + 3, right = B.bx + B.bw - 3, room = right - left;
+    ctx.fillText = function (str, x, y, maxW) {
+      const f0 = this.font;
+      let w = this.measureText(str).width;
+      const m = /(\d+(?:\.\d+)?)px/.exec(f0);
+      if (m && w > room) { this.font = f0.replace(m[0], `${Math.max(7, (+m[1] * room) / w).toFixed(2)}px`); w = this.measureText(str).width; }
+      // still too long at 7px: the line is set in the box's width (the canvas narrows its letters a little)
+      const fitW = Math.min(w, room), a = this.textAlign, x0 = a === 'center' ? x - fitW / 2 : a === 'right' || a === 'end' ? x - fitW : x;
+      const dx = x0 < left ? left - x0 : x0 + fitW > right ? right - (x0 + fitW) : 0;
+      const out = orig.call(this, str, x + dx, y, w > room ? Math.min(room, maxW == null ? room : maxW) : maxW);
+      this.font = f0;
+      return out;
+    };
+    return () => { if (own) ctx.fillText = orig; else delete ctx.fillText; };
   }
 
   /* ---------- Left Panel: Physical Lookup Routing Morphology (d = 0..6 & Ladder) ---------- */
   function drawMorphPanel(ctx, rect, lw, showSubTitle) {
-    const pad = TRV.thumbMode ? [14, 14, 14, 14] : [14, 14, showSubTitle ? 22 : 10, 14];
+    const pad = TRV.thumbMode ? [14, 14, 14, 14] : side ? [0, 0, showSubTitle ? 20 : 10, 4] : [14, 14, showSubTitle ? 22 : 10, 14];
     const B = subBox(rect, pad);
     const d = activeStage();
     const u = clamp(clock.t / TMAX, 0, 1);
@@ -281,11 +308,13 @@
     drawPanelFrame(
       ctx, B, lw,
       showSubTitle ? (S.sweep ? '七阶查表退化与生命逆向建表' : `物理查表路由形态 · d = ${d}`) : '',
-      showSubTitle ? (S.sweep ? '7-stage cascade & life table-building' : `Physical lookup routing · d = ${d}`) : ''
+      showSubTitle ? (S.sweep ? '7-stage cascade & life table-building' : `Physical lookup routing · d = ${d}`) : '',
+      null, S.sweep ? ['七阶查表退化', '7-stage cascade'] : [`路由 · d = ${d}`, `Routing · d = ${d}`]
     );
     ctx.beginPath();
     ctx.rect(B.bx, B.by, B.bw, B.bh);
     ctx.clip();
+    const unfit = side && !TRV.thumbMode ? fitTextIn(ctx, B) : null;
 
     if (S.sweep) {
       drawLadderCascade(ctx, B, lw, d, clock.t);
@@ -304,6 +333,7 @@
     } else {
       drawMorphD6(ctx, B, lw, u);
     }
+    if (unfit) unfit();
     ctx.restore();
   }
 
@@ -590,19 +620,29 @@
       ctx.fillText('1584 + F₈(21) = 1605  (wdigits = [17, 6])', B.bx + 8, B.by + 6);
       ctx.fillStyle = P.violet;
       ctx.fillText(L(st.rule[0], st.rule[1]), B.bx + 8, B.by + 20);
+      const floorLab = compact ? L('◂ 下界 k ≥ m−2 = 6', '◂ floor k ≥ m−2 = 6') : L('◂ LEAN ✓ 下穿硬墙 k ≥ m−2 = 6', '◂ LEAN ✓ floor k ≥ m−2 = 6');
+      const waveLab = compact ? L('Frougny 进位 ▸', 'Frougny wave ▸') : L('Frougny 上行进位波 ▸', 'Frougny upward wave ▸');
+      // the two ends of the strip share the bottom line: where they would meet (a narrow panel) both step down in size
+      const pair = ctx.measureText(floorLab).width + ctx.measureText(waveLab).width, k = Math.min(1, (B.bw - 26) / pair);
+      if (k < 1) ctx.font = font(Math.max(7, 10 * k), 'data', 600);
       ctx.fillStyle = P.cyan;
       ctx.textBaseline = 'bottom';
-      ctx.fillText(compact ? L('◂ 下界 k ≥ m−2 = 6', '◂ floor k ≥ m−2 = 6') : L('◂ LEAN ✓ 下穿硬墙 k ≥ m−2 = 6', '◂ LEAN ✓ floor k ≥ m−2 = 6'), B.bx + 8, B.by + B.bh - 5);
+      ctx.fillText(floorLab, B.bx + 8, B.by + B.bh - 5);
       ctx.fillStyle = P.magenta;
       ctx.textAlign = 'right';
-      ctx.fillText(compact ? L('Frougny 进位 ▸', 'Frougny wave ▸') : L('Frougny 上行进位波 ▸', 'Frougny upward wave ▸'), B.bx + B.bw - 8, B.by + B.bh - 5);
+      ctx.fillText(waveLab, B.bx + B.bw - 8, B.by + B.bh - 5);
     }
   }
 
   // d = 3 (MODEL): S = 2^{σn} bits packed in a ball under the holographic bound, radius R ∝ 2^{σn/2}, light-speed wave 2R/c
   function drawMorphD3(ctx, B, lw, u, sig) {
-    const cx = B.bx + B.bw * 0.50, cy = B.by + B.bh * 0.53;
-    const maxR = Math.min(B.bw, B.bh) * 0.36;
+    const cx = B.bx + B.bw * 0.50;
+    let cy = B.by + B.bh * 0.53, maxR = Math.min(B.bw, B.bh) * 0.36;
+    if (side && !TRV.thumbMode) {
+      // a narrow panel: the ball keeps to the room between the three lines at the top and the readout at the bottom
+      const top = B.by + 44, bot = B.by + B.bh - 18;
+      cy = (top + bot) / 2; maxR = Math.max(10, Math.min(B.bw * 0.36, (bot - top) / 2));
+    }
     const rHoriz = maxR; // Schwarzschild / Bekenstein saturation envelope at σ = 1
     // Visual sphere radius scales monotonically with σ: R(σ)/R_max = 0.18 + 0.82 * sqrt(σ)
     const rSphere = maxR * (0.18 + 0.82 * Math.sqrt(clamp(sig, 0, 1)));
@@ -715,19 +755,34 @@
       ctx.fillStyle = P.cyan;
       ctx.fillText(wireLine, B.bx + 8, ty0);
       ctx.font = font(10, 'data', 600);
+      const nowLab = compact ? `σ=${fix(sig, 2)} · r=${fix(rCur, 3)}` : `σ = ${fix(sig, 2)} · r_eff = ${fix(rCur, 3)}`, optLab = compact ? 'σ*=2/3 ⇒ r=1/3' : 'σ* = 2/3 ⇒ r_min = 1/3';
+      // the readout and the optimum share the bottom line: where they would meet (a narrow panel) both step down in size
+      const pair = ctx.measureText(nowLab).width + ctx.measureText(optLab).width, k = Math.min(1, (B.bw - 26) / pair);
+      if (k < 1) ctx.font = font(Math.max(7, 10 * k), 'data', 600);
       ctx.fillStyle = P.amber;
       ctx.textBaseline = 'bottom';
-      ctx.fillText(compact ? `σ=${fix(sig, 2)} · r=${fix(rCur, 3)}` : `σ = ${fix(sig, 2)} · r_eff = ${fix(rCur, 3)}`, B.bx + 8, B.by + B.bh - 5);
+      ctx.fillText(nowLab, B.bx + 8, B.by + B.bh - 5);
       ctx.fillStyle = P.magenta;
       ctx.textAlign = 'right';
-      ctx.fillText(compact ? 'σ*=2/3 ⇒ r=1/3' : 'σ* = 2/3 ⇒ r_min = 1/3', B.bx + B.bw - 8, B.by + B.bh - 5);
+      ctx.fillText(optLab, B.bx + B.bw - 8, B.by + B.bh - 5);
     }
   }
 
   // d = 4: 2D coherent quantum superposition pointer in span{|s⊥⟩, |x*⟩} rotating under Grover reflections (MODEL envelope (1 − σ)/2)
   function drawMorphD4(ctx, B, lw, u, sig) {
-    const cx = B.bx + B.bw * 0.48, cy = B.by + B.bh * 0.64;
-    const R = Math.min(B.bw * 0.62, B.bh * 0.54);
+    // The line on the meeting endpoints: one line where the panel is wide enough; otherwise (a narrow frame) it breaks
+    // after its colon into two lines, and the quarter circle sits below the three lines of text instead of under them.
+    const meetLab = L('两端相等: r_Grover(0) = r_wire(1) = 0.500', 'Endpoints meet: r_Grover(0) = r_wire(1) = 0.500');
+    ctx.font = font(10, 'data', 600);
+    // a short narrow panel (side by side) leaves out the envelope and the meeting endpoints, which the line under the
+    // title states (r_Q = (1−σ)/2; Grover 0.500 at σ = 0 equals the σ = 1 wire delay), and gives the quarter circle the
+    // box between the |x*⟩ label and the readout
+    const terse = side && !TRV.thumbMode && B.bh < 140;
+    const meetWrap = !TRV.thumbMode && !terse && ctx.measureText(meetLab).width > B.bw - 16;
+    const cx = B.bx + B.bw * (terse ? 0.3 : 0.48);
+    let cy = B.by + B.bh * 0.64, R = Math.min(B.bw * 0.62, B.bh * 0.54);
+    if (meetWrap) { cy = B.by + B.bh - 20; R = Math.max(18, Math.min(R, cy - B.by - 52)); }
+    if (terse) { cy = B.by + B.bh - 20; R = Math.max(14, Math.min(B.bw * 0.55, cy - B.by - 8)); }
     const theta0 = 0.16; // initial overlap angle
     const kRot = clamp(Math.floor(u * 5 + 1e-9), 0, 4); // 0..4 Grover reflection steps -> (2k+1)theta0
     const thetaCur = Math.min(Math.PI / 2, (2 * u * 4.5 + 1) * theta0);
@@ -787,9 +842,13 @@
       ctx.textAlign = 'left';
       ctx.textBaseline = 'top';
       ctx.fillStyle = P.cyan;
-      ctx.fillText('MODEL r_Q(σ) = (1 − σ)/2', B.bx + 8, B.by + 6);
+      if (!terse) ctx.fillText('MODEL r_Q(σ) = (1 − σ)/2', B.bx + 8, B.by + 6);
       ctx.fillStyle = P.violet;
-      ctx.fillText(L('两端相等: r_Grover(0) = r_wire(1) = 0.500', 'Endpoints meet: r_Grover(0) = r_wire(1) = 0.500'), B.bx + 8, B.by + 20);
+      if (terse) { /* both in the line under the title */ } else if (meetWrap) {
+        const cut = meetLab.indexOf(': ');
+        ctx.fillText(meetLab.slice(0, cut + 1), B.bx + 8, B.by + 20);
+        ctx.fillText(meetLab.slice(cut + 2), B.bx + 8, B.by + 34);
+      } else ctx.fillText(meetLab, B.bx + 8, B.by + 20);
       ctx.fillStyle = P.cyan;
       ctx.fillText('|x*⟩', cx + 6, cy - R - 2);
       ctx.fillStyle = P.dim;
@@ -957,7 +1016,13 @@
   function drawLadderCascade(ctx, B, lw, activeD) {
     const topY = B.by + 16, botY = B.by + B.bh - 14;
     const rowH = (botY - topY) / 7;
-    const barX0 = B.bx + 76, barW = Math.max(40, B.bw - 154);
+    // a narrow panel: the name and value columns as wide as their text, the bars take what is left between them
+    let barX0 = B.bx + 76, barW = Math.max(40, B.bw - 154);
+    if (side && !TRV.thumbMode) {
+      ctx.font = font(9.5, 'data', 700);
+      const labW = Math.max(...STAGES.slice(0, 7).map((st, j) => ctx.measureText(`d=${j} ${st.code.slice(0, 6)}`).width)), valW = ctx.measureText('0.000').width;
+      barX0 = B.bx + 8 + labW + 6; barW = Math.max(14, B.bx + B.bw - 24 - valW - 6 - barX0);
+    }
 
     for (let j = 0; j <= 6; j++) {
       const cy = topY + (j + 0.5) * rowH;
@@ -1010,7 +1075,7 @@
 
   /* ---------- Right Panel: Spacetime–Gravity Trade-Off Phase Diagram ---------- */
   function drawPhasePanel(ctx, rect, lw, showSubTitle) {
-    const pad = TRV.thumbMode ? [32, 16, 16, 28] : [42, 18, showSubTitle ? 22 : 12, 30];
+    const pad = TRV.thumbMode ? [32, 16, 16, 28] : side ? [28, 6, showSubTitle ? 20 : 12, 28] : [42, 18, showSubTitle ? 22 : 12, 30];
     const B = subBox(rect, pad);
     const X = (s) => B.bx + clamp(s, 0, 1) * B.bw;
     const Y = (r) => B.by + B.bh - clamp(r, 0, 1.06) * (B.bh / 1.06);
@@ -1021,7 +1086,8 @@
     drawPanelFrame(
       ctx, B, lw,
       showSubTitle ? '时空—引力权衡相图 · MODEL 包络 σ vs r_eff(σ)' : '',
-      showSubTitle ? 'Phase diagram · MODEL envelopes σ vs r_eff(σ)' : ''
+      showSubTitle ? 'Phase diagram · MODEL envelopes σ vs r_eff(σ)' : '',
+      null, ['相图 · MODEL', 'Phase · MODEL']
     );
 
     // Subtle gridlines & tick labels
@@ -1039,14 +1105,16 @@
       ctx.fillStyle = P.dim;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
-      for (const [v, lbl] of [[0, '0'], [0.5, '0.5'], [2 / 3, '2/3'], [1, '1']]) {
+      // a narrow panel: 0.5 would sit on 2/3, so the axis keeps 0, 2/3 and 1 (the gridline at 0.5 stays)
+      for (const [v, lbl] of (B.bw < 150 ? [[0, '0'], [2 / 3, '2/3'], [1, '1']] : [[0, '0'], [0.5, '0.5'], [2 / 3, '2/3'], [1, '1']])) {
         ctx.fillText(lbl, X(v), B.by + B.bh + 4);
       }
       ctx.fillText('σ = (log₂S)/n', B.bx + B.bw * 0.5, B.by + B.bh + 16);
 
       ctx.textAlign = 'right';
       ctx.textBaseline = 'middle';
-      for (const [v, lbl] of [[0, '0'], [1 / 3, '1/3'], [0.5, '0.5'], [1, '1.0']]) {
+      // a short panel: 0.5 would sit on 1/3, so the axis keeps 0, 1/3 and 1.0 (the gridline at 0.5 stays)
+      for (const [v, lbl] of (B.bh < 100 ? [[0, '0'], [1 / 3, '1/3'], [1, '1.0']] : [[0, '0'], [1 / 3, '1/3'], [0.5, '0.5'], [1, '1.0']])) {
         ctx.fillText(lbl, B.bx - 5, Y(v));
       }
     }
@@ -1205,10 +1273,22 @@
     const lw = TRV.thumbMode ? 2.0 : 1;
     const stacked = W < 540;
     lastStacked = stacked;
-    const pt = TRV.thumbMode ? 16 : (stacked ? 96 : 56);
-    const pb = TRV.thumbMode ? 16 : (stacked ? 68 : 48);
+    /* a stacked (narrow) stage draws in the band between the title block (and the scene buttons) and the legend, as
+       they are laid out this frame; a wide stage keeps its margins */
+    let pt = 16, pb = 16;
+    if (!TRV.thumbMode && stacked) {
+      const sr = $('stage').getBoundingClientRect(), cr = cv.getBoundingClientRect(), lg = $('legend').getBoundingClientRect();
+      const hudB = Math.max(...['.hud-tl', '#sceneChips'].map((q) => document.querySelector(q)).filter(Boolean).map((el) => el.getBoundingClientRect().bottom));
+      pt = Math.max(20, hudB - cr.top + 6);
+      pb = Math.max(14, cr.bottom - (lg.height > 0 ? lg.top : sr.bottom - 12) + 4);
+    } else if (!TRV.thumbMode) { pt = 56; pb = 48; }
     const pl = 16, pr = 16;
     const inner = { x: pl, y: pt, w: Math.max(40, W - pl - pr), h: Math.max(40, H - pt - pb) };
+    /* side: a stacked cited card (TRV.figure) always puts the two panels side by side, each the full height of the
+       band; any other stacked band too short for two readable panels one above the other (each under 110px) falls
+       back to the same layout, while a phone's taller lab stage keeps them top and bottom */
+    side = stacked && !TRV.thumbMode && (TRV.figure || inner.h < 230);
+    lastLayout = { side, band: [pt, H - pb], panels: [] };
 
     if (S.scene === 'morph') {
       lastPhaseBox = null;
@@ -1216,13 +1296,14 @@
     } else if (S.scene === 'phase') {
       drawPhasePanel(ctx, inner, lw, false);
     } else {
-      const gap = 10;
-      const r1 = stacked
+      const gap = side ? 6 : 10, wL = side ? (inner.w - gap) * 0.56 : (inner.w - gap) / 2;
+      const r1 = stacked && !side
         ? { x: inner.x, y: inner.y, w: inner.w, h: (inner.h - gap) / 2 }
-        : { x: inner.x, y: inner.y, w: (inner.w - gap) / 2, h: inner.h };
-      const r2 = stacked
+        : { x: inner.x, y: inner.y, w: wL, h: inner.h };
+      const r2 = stacked && !side
         ? { x: inner.x, y: inner.y + (inner.h + gap) / 2, w: inner.w, h: (inner.h - gap) / 2 }
-        : { x: inner.x + (inner.w + gap) / 2, y: inner.y, w: (inner.w - gap) / 2, h: inner.h };
+        : { x: inner.x + wL + gap, y: inner.y, w: inner.w - wL - gap, h: inner.h };
+      lastLayout.panels = [r1, r2].map((r) => ({ x: r.x, y: r.y, w: r.w, h: r.h }));
       drawMorphPanel(ctx, r1, lw, true);
       drawPhasePanel(ctx, r2, lw, true);
     }
@@ -1385,7 +1466,8 @@
       );
   }
 
-  const paint = kit.painter(() => { drawStage(); drawPlots(); drawText(); }, [$('stage'), $('plotA'), $('plotB')]);
+  // the text first: the stage measures the title block and the legend as this frame lays them out
+  const paint = kit.painter(() => { drawText(); drawStage(); drawPlots(); }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- Controls & Clock ---------- */
   let stopAt = null;
@@ -1605,6 +1687,7 @@
         stopAt,
         preset: cards.current,
         stacked: lastStacked,
+        layout: lastLayout && JSON.parse(JSON.stringify(lastLayout)),
         holoOptimum: opt,
         groverAtZero: rQuantumCurve(0, 'blackbox'),
         wireAtOne: rWireCurve(1),

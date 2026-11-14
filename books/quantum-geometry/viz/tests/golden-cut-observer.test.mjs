@@ -5,6 +5,7 @@
 // the admissible shifts of a fixed patch by brute force over a grid, Fibonacci numbers with their own BigInt recurrence,
 // the golden rotation by repeated addition, and the triacontahedron as a zonotope through its support function.
 import { session, stageFirstChecks, solidChecks, settle, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
+import { plotBudgetChecks } from './plot-budget.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'golden-cut-observer';
 const T = await session();
@@ -19,6 +20,30 @@ const chosen = (u) => LATTICE.filter((p) => p.c >= LO + u - 1e-12 && p.c <= HI +
 
 // the cover is the cut scene, a flat plot drawn on #flat over the solid's canvases
 await stageFirstChecks(T, BOOK, ID, { cover: '#flat' });
+// every chart drawn with kit.plot keeps its readable height in each cited figure, still, cover and lab viewport.
+// The WINDOW card is the lit triacontahedron alone: its cited figure shows no strip, and 334 px wide the tour bar takes
+// the place of the scene buttons (style.css), so it draws no chart. There each state must show the solid instead: the
+// triacontahedron scene, the flat chart canvas hidden, the WebGL canvas filling the stage, and an opaque body over
+// ≥ 12% of it whose light and shade spread (σ ≥ 0.04), the thresholds of the solid gate (solidChecks). The frame is
+// drawn and read in one task, after a context that rested in the book has come back and compiled.
+const litSolidStage = (page) => page.evaluate(async () => {
+  const kit = window.TRV.kit, sc = window.TRV.solids && window.TRV.solids[0];
+  if (!sc) return { ok: false, detail: 'no kit.solid stage' };
+  await sc.ready; await kit.ready(); kit.flush(); await kit.ready(); kit.flush();
+  const gl = sc.el.querySelector('canvas.solid-gl'), scene = window.CUT_DEBUG.state.scene, flatHidden = document.getElementById('flat').hidden;
+  if (!gl) return { ok: false, detail: `scene ${scene}: no WebGL canvas on the stage` };
+  const st = sc.el.getBoundingClientRect(), r = gl.getBoundingClientRect(), cover = (r.width * r.height) / (st.width * st.height);
+  const shown = getComputedStyle(gl).visibility !== 'hidden' && r.width > 0 && r.height > 0;
+  const cp = document.createElement('canvas'); cp.width = gl.width; cp.height = gl.height;
+  const c = cp.getContext('2d'); c.drawImage(gl, 0, 0);
+  const d = c.getImageData(0, 0, cp.width, cp.height).data;
+  let n = 0, all = 0, s1 = 0, s2 = 0;
+  for (let i = 0; i < d.length; i += 4 * 3) { all++; if (d[i + 3] < 250) continue; const y = (0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]) / 255; n++; s1 += y; s2 += y * y; }
+  const share = all ? n / all : 0, mean = n ? s1 / n : 0, spread = n ? Math.sqrt(Math.max(0, s2 / n - mean * mean)) : 0;
+  return { ok: scene === 'window3' && flatHidden && shown && cover >= 0.95 && share >= 0.12 && spread >= 0.04,
+    detail: `scene ${scene}, #flat ${flatHidden ? 'hidden' : 'shown'}, WebGL canvas ${shown ? 'shown' : 'hidden'} over ${(cover * 100).toFixed(1)}% of the stage, body ${(share * 100).toFixed(1)}%, σ = ${spread.toFixed(3)}` };
+});
+await plotBudgetChecks(T, BOOK, ID, { stageOnly: { window: litSolidStage } });
 
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);
