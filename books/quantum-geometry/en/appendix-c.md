@@ -2,8 +2,8 @@
 
 This appendix serves as the **Master Audit Ledger** of the epistemic boundaries governing this monograph. Under the Prelude's contract, Lean verification, written proofs, and open problems declare their evidence separately. Sections C.1–C.3 audit the frozen declarations in `trureturing.lock.json` at the pinned `trureturing@dev` commit [{commit}](trureturing:); C.4 lists open problems and selected literature boundaries:
 
-1. **C.1 Frozen Theorem Index (317 Unique `theorem` Declarations)**: This section contains every locked declaration of kind `theorem` cited by `lean="<GID>"` on at least one `:::` environment header in the Chinese edition. Each citation must resolve to a kernel-verified, frozen theorem at the pinned commit.
-2. **C.2 Formal Definition and Carrier Index (114 Unique Declarations: 104 `def` + 10 `inductive`)**: Definitions and inductive types cited by `lean=` on Chinese environment headers; **C.3 Inline Auxiliary Theorems and Definitions (171 Declarations: 118 `theorem` + 53 `def`)** contains the remaining declarations, which no environment header cites. The three disjoint sections cover all **602 unique declarations** in `trureturing.lock.json` ($317 + 114 + 171 = 602$). Media consumers are listed separately at the end of each row and do not determine the partition.
+1. **C.1 Frozen Theorem Index (318 Unique `theorem` Declarations)**: This section contains every locked declaration of kind `theorem` cited by `lean="<GID>"` on at least one `:::` environment header in the Chinese edition. Each citation must resolve to a kernel-verified, frozen theorem at the pinned commit.
+2. **C.2 Formal Definition and Carrier Index (114 Unique Declarations: 104 `def` + 10 `inductive`)**: Definitions and inductive types cited by `lean=` on Chinese environment headers; **C.3 Inline Auxiliary Theorems and Definitions (171 Declarations: 118 `theorem` + 53 `def`)** contains the remaining declarations, which no environment header cites. The three disjoint sections cover all **603 unique declarations** in `trureturing.lock.json` ($318 + 114 + 171 = 603$). Media consumers are listed separately at the end of each row and do not determine the partition.
 3. **C.4 Open Problems and Literature Boundary Register**: None of the 9 open environments carries a `lean` attribute; the other two entries are explicitly attributed external literature boundaries and are excluded from the count of verified declarations.
 
 Section 7.3’s [@prob-monitored-spectral-mean] proves four conclusions for finite-dimensional unitary pure-state monitored return: the occupied spectrum is finite, its cardinality equals the cyclic dimension, the weighted first-return sum equals that cardinality, and total return probability is one. In the same section, [@rem-monitored-unital-kac] also proves the occupation-operator sum, nonnegative return probabilities, total probability one, and mean equal to the relevant dimension for CPTP channels on any finite-dimensional complex inner-product space that preserve the identity on the actual relevant space. Both belong to C.1. General quantum instruments, infinite dimensions, and physical clocks remain outside these two theorems.
@@ -11,24 +11,24 @@ Section 7.3’s [@prob-monitored-spectral-mean] proves four conclusions for fini
 Section 16.3's [@thm-central-defect-endpoint-average] and its [written proof](ch16-qsvt-walks-and-compilation.md#pf-central-defect-endpoint-average) are neither frozen declarations nor open problems. Their DOI, source locator, and [formalization request #10](https://github.com/the-omega-institute/trureturing-requests/issues/10) appear in the text and the automatically generated written-proof ledger. They add nothing to the locked-declaration totals, green charts, or C.4 counts above.
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**602 cells, one for each locked declaration.** The timeline runs from the Prelude to Appendix E, with Appendix C itself excluded as a landing column. Each declaration lands in the first unit that cites it: 435 cells are theorems and 167 are definitions or inductive types; 431 filled cells are cited by `lean=` on environment headers, while 171 hollow cells appear only inline. Each declaration occupies one cell regardless of reuse. The C.1 chart below instead counts only the theorems cited by each chapter’s environment headers, counting them again in different chapters.
+**603 cells, one for each locked declaration.** The timeline runs from the Prelude to Appendix E, with Appendix C itself excluded as a landing column. Each declaration lands in the first unit that cites it: 436 cells are theorems and 167 are definitions or inductive types; 432 filled cells are cited by `lean=` on environment headers, while 171 hollow cells appear only inline. Each declaration occupies one cell regardless of reuse. The C.1 chart below instead counts only the theorems cited by each chapter’s environment headers, counting them again in different chapters.
 :::
 
 ---
 
-## C.1 Verified and Frozen Lean 4 Theorems (317 Unique `theorem` GIDs) {#sec-appendix-c-theorems}
+## C.1 Verified and Frozen Lean 4 Theorems (318 Unique `theorem` GIDs) {#sec-appendix-c-theorems}
 
-The table lists 317 distinct frozen theorems cited by environment headers. Inline references and media consumers appear in the final column without increasing bar heights. Existing serials remain stable within a partition; new entries receive new serials, and rows are sorted by module path.
+The table lists 318 distinct frozen theorems cited by environment headers. Inline references and media consumers appear in the final column without increasing bar heights. Existing serials remain stable within a partition; new entries receive new serials, and rows are sorted by module path.
 
 
 ::: {.figure src="appc-theorems-by-chapter"}
-**Frozen theorems cited by each chapter’s `lean=` environment headers.** Bars follow the reading order of the main chapters and Coda, with part bands behind them. Heights sum to $452$, computed by the publication parser and lock file; all $317$ indexed theorems appear in at least one bar. Solid sections count $306$ theorems first appearing in that chapter; hollow sections count $146$ previously encountered citations. Reuse across main chapters counts again; child pages are grouped with their parent, and definitions and inline-only citations are excluded.
+**Frozen theorems cited by each chapter’s `lean=` environment headers.** Bars follow the reading order of the main chapters and Coda, with part bands behind them. Heights sum to $453$, computed by the publication parser and lock file; all $318$ indexed theorems appear in at least one bar. Solid sections count $307$ theorems first appearing in that chapter; hollow sections count $146$ previously encountered citations. Reuse across main chapters counts again; child pages are grouped with their parent, and definitions and inline-only citations are excluded.
 :::
 
 Rows are sorted by module path. The grid below shows their distribution across module families and parts of first appearance; counts follow the chapter citations automatically.
 
 ::: {.figure src="appc-modules-by-part"}
-**The $317$ theorems of C.1 by module family and part of first appearance.** Rows group the first three module-path segments, with smaller families combined in the last row; columns cover Parts I–X and the coda with the appendices. Each theorem counts once, in the part whose Chinese text first cites it. Cells give counts, darker for more, blank for zero; they do not represent proof dependencies.
+**The $318$ theorems of C.1 by module family and part of first appearance.** Rows group the first three module-path segments, with smaller families combined in the last row; columns cover Parts I–X and the coda with the appendices. Each theorem counts once, in the part whose Chinese text first cites it. Cells give counts, darker for more, blank for zero; they do not represent proof dependencies.
 :::
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
@@ -282,6 +282,7 @@ Rows are sorted by module path. The grid below shows their distribution across m
 | `T224` | [`D5.S3.Quantum.Recovery.CoherentUniformAmplification.uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation) | [{source}](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation) | `theorem` | Ch 15 `#thm-grover-uniform-rotation`, Ch 30, Ch 31 `#thm-ch31-horizon-landauer-ergodic-fairness`, Ch 31, Appendix A; media `slides/overview/slides.en.md`, `slides/overview/slides.md`, `viz/grover-reflections/index.html`, `viz/timeless-causal-crystal/index.html`, `viz/visualizations.json` |
 | `T225` | [`D5.S3.Quantum.Recovery.FiniteKrausReversibility.scalar_products_construct_left_inverse`](lean:D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse) | [{source}](lean:D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse) | `theorem` | Ch 14 `#thm-finite-kraus-recovery-sufficiency` |
 | `T226` | [`D5.S3.Quantum.Recovery.OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery`](lean:D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery) | [{source}](lean:D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery) | `theorem` | Ch 14 `#prop-orthogonal-syndrome-recovery`, Ch 28; media `viz/syndrome-decoding/index.html`, `viz/visualizations.json` |
+| `T318` | [`D5.S3.Quantum.Routing.HannRouterDephasing.result`](lean:D5/S3/Quantum/Routing/HannRouterDephasing.result) | [{source}](lean:D5/S3/Quantum/Routing/HannRouterDephasing.result) | `theorem` | Ch 38 `#thm-ch38-single-hold-router-dephasing` |
 | `T305` | [`D5.S3.Quantum.Routing.HannSpatialQram.correctness`](lean:D5/S3/Quantum/Routing/HannSpatialQram.correctness) | [{source}](lean:D5/S3/Quantum/Routing/HannSpatialQram.correctness) | `theorem` | Ch 38 `#thm-ch38-spatial-qutrit-qram-correctness` |
 | `T306` | [`D5.S3.Quantum.Routing.ReversibleQram.correctness`](lean:D5/S3/Quantum/Routing/ReversibleQram.correctness) | [{source}](lean:D5/S3/Quantum/Routing/ReversibleQram.correctness) | `theorem` | Ch 38 `#thm-ch38-reversible-qram-correctness` |
 | `T227` | [`D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC_CAR`](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR) | [{source}](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR) | `theorem` | Ch 14 `#thm-jordan-wigner-car` |
@@ -355,7 +356,7 @@ Rows are sorted by module path. The grid below shows their distribution across m
 
 ## C.2 Formal Definitions, Structures, and Inductive Types (114 Unique Declarations) {#sec-appendix-c-definitions}
 
-The table lists **114 unique declarations (104 `def` and 10 `inductive`)** cited by `lean=` on Chinese `definition` and `example` environment headers. Together with the 317 theorems of C.1 they form **431 locked declarations cited by environment headers**. Media consumers appear in the last column and do not determine the partition.
+The table lists **114 unique declarations (104 `def` and 10 `inductive`)** cited by `lean=` on Chinese `definition` and `example` environment headers. Together with the 318 theorems of C.1 they form **432 locked declarations cited by environment headers**. Media consumers appear in the last column and do not determine the partition.
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
 | :--- | :--- | :--- | :--- | :--- |
@@ -478,7 +479,7 @@ The table lists **114 unique declarations (104 `def` and 10 `inductive`)** cited
 
 ## C.3 Inline-Referenced Auxiliary Theorems and Definitions (171 Unique Declarations) {#sec-appendix-c-inline}
 
-Beyond the 431 environment-cited declarations in C.1 and C.2, **171 declarations (118 theorems and 53 definitions)** appear only through inline links in the Chinese units, with no `lean=` citation on any `:::` environment header. They include three media-consumed theorems formerly placed in C.1; their media consumers remain listed, without changing their inline classification. The three sections cover all **602 unique locked declarations** ($317 + 114 + 171 = 602$).
+Beyond the 432 environment-cited declarations in C.1 and C.2, **171 declarations (118 theorems and 53 definitions)** appear only through inline links in the Chinese units, with no `lean=` citation on any `:::` environment header. They include three media-consumed theorems formerly placed in C.1; their media consumers remain listed, without changing their inline classification. The three sections cover all **603 unique locked declarations** ($318 + 114 + 171 = 603$).
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Inline Reference Chapters |
 | :--- | :--- | :--- | :--- | :--- |
@@ -691,22 +692,22 @@ Every build and release of this book mechanically enforces the following five ve
 | :--- | :--- | :--- | :---: |
 | **Upstream Repository & Branch** | `the-omega-institute/trureturing` branch `dev` | `site.toml` `[trureturing]` config & `git merge-base --is-ancestor` check | `PASS` |
 | **Pinned Commit SHA** | [{commit}](trureturing:) | Locked in `trureturing.lock.json` `commit` field | `PASS` |
-| **Frozen Theorem Count** | `317` environment-cited theorems (`435` total entries of `kind == "theorem"` including inline references) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices and `statement_id` digests | `PASS` |
+| **Frozen Theorem Count** | `318` environment-cited theorems (`436` total entries of `kind == "theorem"` including inline references) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices and `statement_id` digests | `PASS` |
 | **Auxiliary Definition / Structure Count** | `114` environment-cited definitions/inductive types; `167` in total (`157` `def` + `10` `inductive`) including inline references | Kept in C.2 and never counted as `theorem / lemma / proposition / corollary` boxes | `PASS` |
 | **Bilingual Structural Alignment** | 100% parity between `zh` and `en` chapter order, env IDs, and Lean citations | Checked item-by-item by `./tbook check` (`0 error(s)`) | `PASS` |
 
 ::: {.figure src="appc-ledger"}
-**The ledger of the $602$ locked declarations: kind × citation mode.** Rows are theorems and definitions; columns are environment-header `lean=` citations, inline text with media consumers, and inline links alone. The theorem row is $317 + 9 + 109 = 435$ and the definition row $114 + 0 + 53 = 167$. Dashed frames follow the environment-based indexes: C.1 $= 317$, C.2 $= 114$, C.3 $= 9 + 109 + 0 + 53 = 171$. Media consumers do not change the index partition.
+**The ledger of the $603$ locked declarations: kind × citation mode.** Rows are theorems and definitions; columns are environment-header `lean=` citations, inline text with media consumers, and inline links alone. The theorem row is $318 + 9 + 109 = 436$ and the definition row $114 + 0 + 53 = 167$. Dashed frames follow the environment-based indexes: C.1 $= 318$, C.2 $= 114$, C.3 $= 9 + 109 + 0 + 53 = 171$. Media consumers do not change the index partition.
 :::
 
-The first row of this ledger is the $435$ green cells of the declaration map: the $317$ cited on environment headers are filled, the other $9 + 109 = 118$ hollow.
+The first row of this ledger is the $436$ green cells of the declaration map: the $318$ cited on environment headers are filled, the other $9 + 109 = 118$ hollow.
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**Theorems only.** The map keeps the 435 locked entries of kind `theorem`: 317 filled cells cited by `lean=` on environment headers and 118 hollow cells appearing only in inline links in the Chinese text.
+**Theorems only.** The map keeps the 436 locked entries of kind `theorem`: 318 filled cells cited by `lean=` on environment headers and 118 hollow cells appearing only in inline links in the Chinese text.
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="Verification Boundary Note for the Complete Declaration Index"}
-The 317 environment-cited theorems in C.1, 114 environment-cited definitions/inductive types in C.2, and 171 inline declarations in C.3 form a disjoint cover of all 602 entries in `trureturing.lock.json` (435 `theorem` + 157 `def` + 10 `inductive`). Source links resolve at the pinned `trureturing@dev` commit [{commit}](trureturing:). The 9 open environments and two literature boundaries in C.4 are excluded from those locked declarations; index membership, explanatory prose and kernel proof have distinct roles.
+The 318 environment-cited theorems in C.1, 114 environment-cited definitions/inductive types in C.2, and 171 inline declarations in C.3 form a disjoint cover of all 603 entries in `trureturing.lock.json` (436 `theorem` + 157 `def` + 10 `inductive`). Source links resolve at the pinned `trureturing@dev` commit [{commit}](trureturing:). The 9 open environments and two literature boundaries in C.4 are excluded from those locked declarations; index membership, explanatory prose and kernel proof have distinct roles.
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}

@@ -2,47 +2,47 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "010dc9e135a0d76d9a5cec9ee84dce8aeed07e5ab348b93ef77688f862e3dcb8"
     },
     "fig-blindspot-divergence.zh.jpg": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "7d5df257f1439eb18c3ff903e4a9cbed26b37c2e772d1b03d068a687921a2878"
     },
     "fig-compact-homotopy.zh.jpg": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "2f1e5aa6314d2ef535530ef16e655edadad64ad70bf50439825146398f1eeefd"
     },
     "fig-oracle-collapse.zh.jpg": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "ab7386e7ad67c5ff40e9e556ddb028d95cc836b5a6a8aed78cc8f4b249be5c92"
     },
     "fig-oracle-chase.zh.jpg": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "7b4de5c5784b405a329b9f7a438dd7ebaab6e24e6a0eddcd71b3e4a00dd9c798"
     },
     "fig-tetralemma-rest.zh.jpg": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "477b75558483089603eed49941c029f0193203032ed876bd774875129ca0fff6"
     },
     "fig-blindspot-divergence.en.jpg": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "5d99ab72035879f02ed7a9ee086885c2a31eedcf3b8519b1f3853350040f8b4d"
     },
     "fig-compact-homotopy.en.jpg": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "465497de35b51d7ce9c32b15a15f9c6af18ba34eab965cf90b670b4bb004a501"
     },
     "fig-oracle-collapse.en.jpg": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "b38866c2f81e6b3d81655a8d1b5c8c7fcfa136e3c53fb843e46b70fed4c82492"
     },
     "fig-oracle-chase.en.jpg": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "36226061abc57f265f28b05cc801dfb3bf850bad3fb07c5e69ae38140d22ad72"
     },
     "fig-tetralemma-rest.en.jpg": {
-      "input": "e083a1c2f446970792023a2cc96a66300185d9e4e00efd53ccdbdf30beba07bd",
+      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
       "output": "9a871e0fd3c6fa49618c445f93c07237ef05991c34ce41b164a161c95e9b7b9b"
     }
   }

@@ -6,7 +6,7 @@ Across the nine preceding parts and [Chapter 37](ch37-dreams-quantum-eraser-and-
 
 Dissected genealogically, that "heavy-matter-hauled-through-a-box" idol manufactures three classic pseudo-mysteries at a single stroke: if the global causal crystal is timeless static geometry, why do we experience an unceasing flow of "time" every second? If global quantum evolution is strictly unitary and reversible, why does a single local observation trigger apparent irreversible "collapse"? And if an observer is merely fragile flesh, why is it locked inside a narrow five-sense corridor by day yet able to roam across continents in dreams by night, while wondering what becomes of its accumulated memory when the bodily frame dissolves?
 
-In this architectural pivot chapter leading into [Chapter 39](ch39-observer-is-ontological-universe.md)'s non-dual culmination, we invert that heavy picture completely through the clean engineering primitives of computer systems architecture (within our three-tier epistemic contract, this cross-domain hardware mapping is explicitly designated as our **`MODEL` (interpretive model)**, anchored on twenty-six frozen Lean 4 kernel theorems, while all external quantum-architecture, entanglement-monogamy, and operating-system paging results reside strictly inside attributed literature remarks):
+In this architectural pivot chapter leading into [Chapter 39](ch39-observer-is-ontological-universe.md)'s non-dual culmination, we invert that heavy picture completely through the clean engineering primitives of computer systems architecture (within our three-tier epistemic contract, this cross-domain hardware mapping is explicitly designated as our **`MODEL` (interpretive model)**, anchored on twenty-seven frozen Lean 4 kernel theorems, while all external quantum-architecture, entanglement-monogamy, and operating-system paging results reside strictly inside attributed literature remarks):
 
 1. **Clean Separation of Static Ontological QRAM from the Lightweight Memory Pointer (`ptr`)**: Not a single cell of the universe's holographic data array ever moves; what slides, addresses, and dereferences across the static lattice is a featherweight observer address register;
 2. **Five-Part Hardware Anatomy of the Observer Memory Pointer**: Internal orthogonal phase, bodily five-sense bounds, nocturnal dream superposition, learning caches, and non-clonable shared references map one-for-one onto a rigorous register-and-`MMU` architecture;
@@ -223,6 +223,288 @@ The theorem [@thm-ch38-spatial-qutrit-qram-correctness] verifies this **ideal sp
 ::: {.viz src="pointer-ontology-deref" preset="qram_tree" height="500"}
 **One address sets only the 6 switches on one path.** Address 41 = 101001₂ enters at the root and each tick sets one level by one bit: after six ticks the cyan path reaches cell 42, and only these 6 of the 63 switches light up; at the same moment the amber scan head at the bottom has read just 6 cells. The depth and the switch count follow the bucket-brigade QRAM of [@rem-ch38-qram-page-wootters-literature] (literature result, not formalized in this book).
 :::
+
+Start with a hand calculation at depth one in the Hann sequential spatial circuit above. The two addresses are $a_0=(\mathrm{false},())$ and $a_1=(\mathrm{true},())$, the input bus is $\mathrm{false}$, and each address has amplitude $1/\sqrt2$; the classical memory $D$ is arbitrary and fixed. After the complete load, the sole router has label $0$ or $1$, respectively. For $0\le q\le1$, use an orthonormal basis $e_*,e_W,e_0,e_1$ of a four-dimensional environment to store one local record:
+
+$$
+\begin{aligned}
+r_0&=\sqrt q\,e_*+\sqrt{1-q}\,e_0,\\
+r_1&=\sqrt q\,e_*+\sqrt{1-q}\,e_1.
+\end{aligned}
+$$
+
+Each record has norm $1$, and their cross overlap is $q$. Continuing through the original ideal gates gives the two orthogonal output basis vectors $\lvert o_i\rangle=\lvert\operatorname{clean}(1,a_i,D(a_i))\rangle$: since the input bus is false, its XOR with $D(a_i)$ is simply $D(a_i)$. The joint system–environment vector is
+
+$$
+\frac{\lvert o_0\rangle\otimes r_0
++\lvert o_1\rangle\otimes r_1}{\sqrt2}.
+$$
+
+Ignoring the environment means summing the record outer product attached to each system matrix entry over the environment basis. In the output basis $(o_0,o_1)$, the record overlap matrix $K_{1,q}$, the reduced state, and the coordinates of the ideal vector are
+
+$$
+\begin{aligned}
+K_{1,q}&=\begin{pmatrix}1&q\\q&1\end{pmatrix},\\
+\rho_{\mathrm{out}}&=\frac12 K_{1,q},\\
+u&=\frac1{\sqrt2}\begin{pmatrix}1\\1\end{pmatrix}.
+\end{aligned}
+$$
+
+The **squared fidelity** with this ideal pure state is $F=u^\dagger\rho_{\mathrm{out}}u$, so
+
+$$
+\begin{aligned}
+F&=\frac{1+q+q+1}{4}\\
+ &=\frac{1+q}{2}.
+\end{aligned}
+$$
+
+At $q=1/2$, this gives $F=3/4$. The quantity calculated here is the squared fidelity itself; no further square root is taken.
+
+Fix the noise scope precisely. After the actual sequential load `load n n` of [@thm-ch38-spatial-qutrit-qram-correctness], apply the same local record coupling once, independently at every actual internal router. Then perform the original bus exchange, spatial transport, fixed classical leaf readout, and inverse of the complete forward circuit. All gates, address slots, the external bus, and spatial rails remain ideal. The preceding ideal reversible Boolean network, the ideal Hann spatial qutrit circuit, and this circuit with a single router hold are three separately specified finite objects. The literature path illustration above retains the interpretation given in [@rem-ch38-qram-page-wootters-literature].
+
+To specify the complete output, retain the previously defined $A_n$, $Q=\{W,0,1\}$, and $S_n=\operatorname{State}(n)$. Let $n\in\mathbb N$, including $0$, $N=2^n$, $q\in[0,1]$, and let $D:A_n\to\operatorname{Bool}$ be any fixed classical memory. The notation below abbreviates objects in `HannRouterDephasing`; `load`, `clean`, `initialized`, and the remaining circuit operations retain their `HannSpatialQram` definitions above.
+
+Each router's environment coordinates are $\{*\}\sqcup Q$: `none` and `some s` in `Option Qutrit`. For any label $s\in Q$, write
+
+$$
+r_s=\sqrt q\,e_*+\sqrt{1-q}\,e_s.
+$$
+
+Its coordinate $r_s(e)$ is exactly `localRecord q s e`. For a complex $Q\times Q$ matrix $X$, let $\operatorname{diag}_Q(X)$ retain only the diagonal entries in the $W,0,1$ basis, and let $\mathcal E_q(X)$ be the local marginal matrix obtained by multiplying each $X_{st}$ by $\sum_e r_s(e)\overline{r_t(e)}$. The basis index set $\mathcal E_n$ for all independent environments is `Environment n`:
+
+$$
+\begin{aligned}
+\mathcal E_0&=\operatorname{Unit},\\
+\mathcal E_{n+1}&=(\{*\}\sqcup Q)
+\times\mathcal E_n\times\mathcal E_n.
+\end{aligned}
+$$
+
+Let $I_n$ be the internal router positions of `Tree n`: empty at depth zero, and consisting at each branch of the root router and the two copies of the child positions. Incident and output rails do not belong to $I_n$. For any tree configuration $t$, let $t_v$ be the router label at position $v$. The product record and its overlap in density-matrix orientation are
+
+$$
+\begin{aligned}
+R_t(e)&=\prod_{v\in I_n}r_{t_v}(e_v),\\
+\Omega_q(t,u)&=\sum_{e\in\mathcal E_n}
+ R_t(e)\overline{R_u(e)}.
+\end{aligned}
+$$
+
+These are `environmentRecord` and `recordOverlap`, respectively; the depth-zero product is $1$. Write $m(t,u)=\#\{v\in I_n:t_v\ne u_v\}$ for `routerMismatch`, which counts only internal router coordinates.
+
+For $s\in S_n$, let $T(s)=s.2.2$ be its spatial-tree projection. Put $L_n=\operatorname{load}(n,n)$ and $P_{n,D}=\operatorname{postLoad}(n,D)$. The latter performs `exchange`, `transport`, `readLeaves n D`, and `(forward n).symm`, in that order, preserving all uninvolved coordinates of the full system at each step. Abbreviate the actual loaded trees and the inverse images by
+
+$$
+\begin{aligned}
+\tau_{a,b}&=T\bigl(L_n(\operatorname{clean}(n,a,b))\bigr),\\
+v_s&=P_{n,D}^{-1}(s),\\
+w_s&=L_n^{-1}(v_s).
+\end{aligned}
+$$
+
+For any joint complex amplitudes $\psi:A_n\times\operatorname{Bool}\to\mathbb C$, let $\alpha_\psi=\operatorname{initialized}(n,\psi)$. Define the joint amplitudes $J_\psi$ and the system matrix $\rho_{\mathrm{out}}$ on the complete physical basis:
+
+$$
+\begin{aligned}
+J_\psi(s,e)&=\alpha_\psi(w_s)R_{T(v_s)}(e),\\
+\rho_{\mathrm{out}}(s,t)
+ &=\Omega_q\bigl(T(v_s),T(v_t)\bigr)\\
+ &\quad\cdot\alpha_\psi(w_s)
+ \overline{\alpha_\psi(w_t)}.
+\end{aligned}
+$$
+
+These are exactly `jointOutput n q D ψ` and `noisyOutput n q D ψ`. The records attach to the actual router configuration after loading and before the ideal continuation. The next theorem gives their environment partial-trace relationship.
+
+The function `addressWord n a` writes an address as a length-$n$ Boolean word in the actual loading order, with the first bit first: the empty address gives the empty word, and $(c,a)$ prepends $c$ to the tail address word. Let $\ell(a,a')$ be the length of their longest common prefix, namely the length of `BinaryWordGeometry.lcp`. Define
+
+$$
+\begin{aligned}
+d_n(a,a')&=\begin{cases}
+0,&a=a',\\
+2(n-\ell(a,a'))-1,&a\ne a',
+\end{cases}\\
+K_{n,q}(a,a')&=\begin{cases}
+1,&a=a',\\
+q^{2(n-\ell(a,a'))-1},&a\ne a'.
+\end{cases}
+\end{aligned}
+$$
+
+Here $K_{n,q}$ is the real-valued `kernel`. Distinct addresses have $\ell<n$, so their exponent is a positive integer. Equal addresses have the separately specified value $1$, including at $q=0$ and at the unique empty address.
+
+Write $\mathcal C_n=\{\operatorname{clean}(n,a,b):a\in A_n,\ b\in\operatorname{Bool}\}$. Label the ideal output by the input address and bus:
+
+$$
+\begin{aligned}
+o_{a,b}&=\operatorname{clean}(n,a,b\mathbin{\oplus}D(a)),\\
+\lvert\phi_\psi\rangle
+ &=\sum_{a\in A_n}\sum_{b\in\operatorname{Bool}}
+ \psi(a,b)\lvert o_{a,b}\rangle.
+\end{aligned}
+$$
+
+Here $o_{a,b}$ is `outputBasis n D (a,b)`, and $\phi_\psi:S_n\to\mathbb C$ is the full coordinate vector `idealOutput n D ψ`. Define the address weights, the real quadratic form, and the squared fidelity by
+
+$$
+\begin{aligned}
+p_a&=\sum_{b\in\operatorname{Bool}}|\psi(a,b)|^2,\\
+E_{n,q}(p)&=\sum_{a\in A_n}\sum_{a'\in A_n}
+ p_a p_{a'}K_{n,q}(a,a'),\\
+F_{n,q,D}(\psi)
+ &=\langle\phi_\psi\rvert\rho_{\mathrm{out}}
+ \lvert\phi_\psi\rangle\\
+ &=\sum_{s,t\in S_n}\overline{\phi_\psi(s)}
+ \rho_{\mathrm{out}}(s,t)\phi_\psi(t).
+\end{aligned}
+$$
+
+These are `addressProbability`, `addressEnergy`, and `squaredFidelity`, respectively; $|z|^2$ is `Complex.normSq z`. The condition `Normalized n ψ` means
+
+$$
+\sum_{a\in A_n}\sum_{b\in\operatorname{Bool}}
+ |\psi(a,b)|^2=1.
+$$
+
+No factorization of $\psi(a,b)$ into separate address and bus amplitudes is required. Finally, write `minimumFidelity n q` as
+
+$$
+\begin{aligned}
+f_n(q)&=\frac{1+\displaystyle\sum_{j=0}^{n-1}
+ 2^j q^{2j+1}}{2^n}\\
+ &=2^{-n}\left(1+\sum_{j=1}^{n}
+ 2^{j-1}q^{2j-1}\right),
+\end{aligned}
+$$
+
+where both sums are empty at $n=0$. Write $h_n$ for `uniformInput n`: $h_n(a,b)=1/\sqrt{2^n}$ when $b=\mathrm{false}$ and $0$ when $b=\mathrm{true}$.
+
+::: {.theorem #thm-ch38-single-hold-router-dephasing title="A Single Router Hold: Dephasing, Complete Output, and Sharp Squared Fidelity" lean="D5/S3/Quantum/Routing/HannRouterDephasing.result"}
+For every $n\in\mathbb N$, $q\in[0,1]$, and fixed classical memory $D:A_n\to\operatorname{Bool}$, use the actual load, independent local records, and original ideal continuation specified above. The following hold.
+
+1. For any complex $Q\times Q$ matrix $X$, the local environment partial trace gives the channel
+
+   $$
+   \mathcal E_q(X)=qX+(1-q)\operatorname{diag}_Q(X),
+   $$
+
+   where $\operatorname{diag}_Q$ retains only the diagonal entries in the $W,0,1$ basis. Entrywise, for every $s,t\in Q$,
+
+   $$
+   \begin{aligned}
+   &\left(\sum_{e\in\{*\}\sqcup Q}
+   r_s(e)\overline{r_t(e)}\right)X_{st}\\
+   &\quad=qX_{st}+(1-q)
+   \begin{cases}X_{st},&s=t,\\0,&s\ne t.\end{cases}
+   \end{aligned}
+   $$
+
+   For every $t\in\operatorname{Tree}(n)$, $\Omega_q(t,t)=1$.
+
+2. For all $a,a'\in A_n$ and $b,b'\in\operatorname{Bool}$, the actual loaded trees satisfy
+
+   $$
+   \begin{aligned}
+   m(\tau_{a,b},\tau_{a',b'})&=d_n(a,a'),\\
+   \Omega_q(\tau_{a,b},\tau_{a',b'})&=K_{n,q}(a,a').
+   \end{aligned}
+   $$
+
+   The right sides are independent of both bus labels; the real number $K_{n,q}$ is naturally embedded in the complex equality.
+
+3. For arbitrary complex amplitudes $\psi$, without requiring normalization, the complete environment partial trace satisfies, for all $s,t\in S_n$,
+
+   $$
+   \sum_{e\in\mathcal E_n}
+   J_\psi(s,e)\overline{J_\psi(t,e)}
+   =\rho_{\mathrm{out}}(s,t).
+   $$
+
+   For all $a,a',b,b'$, every clean output matrix entry is
+
+   $$
+   \begin{aligned}
+   &\rho_{\mathrm{out}}(o_{a,b},o_{a',b'})\\
+   &\quad=\psi(a,b)\overline{\psi(a',b')}
+   K_{n,q}(a,a').
+   \end{aligned}
+   $$
+
+   If $s\notin\mathcal C_n$ or $t\notin\mathcal C_n$, then $\rho_{\mathrm{out}}(s,t)=0$. Thus the matrix is supported on the span of the clean output basis vectors.
+
+4. If $\psi$ is normalized, the complete ideal output vector is normalized too, and the squared fidelity is real and satisfies
+
+   $$
+   \begin{aligned}
+   \sum_{s\in S_n}|\phi_\psi(s)|^2&=1,\\
+   F_{n,q,D}(\psi)&=E_{n,q}(p)\\
+   &=\sum_{a,a'\in A_n}p_a p_{a'}K_{n,q}(a,a')\\
+   &\ge f_n(q).
+   \end{aligned}
+   $$
+
+5. The input $h_n$ is normalized, and for every address $a$,
+
+   $$
+   \begin{aligned}
+   h_n(a,\mathrm{false})&=2^{-n/2},\\
+   h_n(a,\mathrm{true})&=0,\\
+   F_{n,q,D}(h_n)&=f_n(q),\\
+   f_0(q)&=1.
+   \end{aligned}
+   $$
+
+   The amplitude $2^{-n/2}$ is positive and real. This input attains the bound for every $n,q,D$ above.
+:::
+
+::: proof
+First use correctness of the actual `load n n` to identify its tree projection with `programmed n a n`. Equal addresses give equal routers throughout. If distinct addresses share a prefix of length $\ell$, their first $\ell$ routers agree. At the first differing bit, one router stores $0$ and the other stores $1$, contributing one mismatch. Beyond that point the paths enter disjoint subtrees. Each tail contains $n-\ell-1$ occupied routers, while the other configuration has the waiting label $W$ at those positions. The total mismatch count is therefore
+
+$$
+1+2(n-\ell-1)=2(n-\ell)-1.
+$$
+
+The bus remains in its separate external coordinate during loading, so neither $b$ nor $b'$ enters the count. A local record overlap is $1$ for equal labels and $q$ for unequal labels. Independence multiplies these overlaps, giving $K_{n,q}$ on actual loaded trees and self-overlap $1$ on every tree. The local matrix-entry identity also gives $qX+(1-q)\operatorname{diag}_Q(X)$ directly.
+
+Keep the environment records fixed and apply the original $P_{n,D}$ to the system alone. The ideal query sends each clean input to $o_{a,b}$. Pulling amplitudes back along the inverse permutations on the complete system basis gives precisely the definitions of $J_\psi$ and $\rho_{\mathrm{out}}$. Summing over the environment coordinates proves the partial-trace identity. Initialized amplitudes vanish outside the clean input basis, and the ideal query maps that basis bijectively onto the clean output basis. This determines every clean entry and every zero entry outside its span.
+
+Substituting the ideal vector into the complete system double sum gives $|\psi(a,b)|^2|\psi(a',b')|^2K_{n,q}(a,a')$ for each pair of input labels. Summing independently over both bus labels leaves $p_a p_{a'}$, yielding the exact real quadratic form. No independence of address and bus amplitudes is assumed.
+
+For the bound, induct on the binary-tree depth. Split real address weights at depth $n+1$ by their first bit into $p_0,p_1$, with masses $s=\sum_a p_0(a)$ and $t=\sum_a p_1(a)$, and put $c=q^{2n+1}$. Within a branch the kernel is the depth-$n$ kernel; between branches it is the constant $c$. Hence
+
+$$
+\begin{aligned}
+E_{n+1,q}(p)&=E_{n,q}(p_0)+E_{n,q}(p_1)\\
+ &\quad+2cst,\\
+f_{n+1}(q)&=\frac{f_n(q)+c}{2}.
+\end{aligned}
+$$
+
+The induction uses the homogeneous bound $E_{n,q}(p_i)\ge f_n(q)(\sum_a p_i(a))^2$ for arbitrary total mass. Since $0\le q\le1$, the same recurrence gives $f_n(q)\ge c$. The sum of the branch bounds exceeds the required homogeneous bound by the nonnegative remainder
+
+$$
+\begin{aligned}
+&f_n(q)(s^2+t^2)+2cst\\
+&\quad-f_{n+1}(q)(s+t)^2\\
+&=\frac{f_n(q)-c}{2}(s-t)^2\ge0.
+\end{aligned}
+$$
+
+At depth zero the quadratic form is the square of the total mass; normalization sets that mass to $1$ and gives the stated bound. Finally, every kernel row has the same sum:
+
+$$
+\begin{aligned}
+\sum_{a'\in A_n}K_{n,q}(a,a')
+ &=1+\sum_{j=0}^{n-1}2^j q^{2j+1}\\
+ &=2^n f_n(q).
+\end{aligned}
+$$
+
+The uniform input $h_n$ has probability $2^{-n}$ at each of the $2^n$ addresses, with total probability $1$. The constant row sum therefore gives $F_{n,q,D}(h_n)=f_n(q)$. This supplies an attaining input and makes the bound sharp. The full proof is checked by the Lean kernel.
+:::
+
+Substitution into the finite sum gives the closed endpoints $f_n(0)=2^{-n}$ and $f_n(1)=1$. For any normalized input, $q=0$ removes only terms between distinct addresses, giving $F=\sum_a p_a^2$, with uniform address weights attaining $2^{-n}$. At $q=1$ every kernel entry is $1$, so $F=(\sum_a p_a)^2=1$. At $n=0$ there are no routers; the empty product and empty sum give $F=1$ for every normalized input and all $q\in[0,1]$. These conclusions concern the single independent router hold and otherwise ideal gates specified in [@thm-ch38-single-hold-router-dephasing]. This adds a channel result for the finite Hann circuit above. The ideal Boolean network, ideal Hann query, and external literature retain their stated scopes. The result does not cover gate noise, correlated or repeated holds, or hardware fault tolerance, and does not prove the infinite address ontology or the observer-pointer `MODEL` consequences below.
 
 Viewed alongside [@rem-ch38-qram-page-wootters-literature], separating the dynamic pointer register from the static memory array immediately yields two structural **`MODEL` (interpretive model)** consequences:
 
