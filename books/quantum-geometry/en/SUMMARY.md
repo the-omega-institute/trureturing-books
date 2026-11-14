@@ -1,6 +1,6 @@
 # Summary
 
-[Prelude: Point, Line, Plane, Sphere, and the One Beyond the Sphere](README.md)
+[Prelude Point, Line, Plane, Sphere, and the One Beyond the Sphere](README.md)
 
 # Part I Breaking Illusions — From Point to Line: Pairwise Measurement and Zero-Redundancy Projection
 
@@ -49,18 +49,18 @@
 - [Chapter 25 Reducing Matrices to XOR: Three-Bit Blades and the XOR–Pauli Geometric Algebra Engine](ch25-rewriting-and-xor.md)
 - [Chapter 26 Single-Qubit Rotor Compilation: Bloch Geometry Theorems and the ZYZ Euler Compiler](ch26-single-qubit-rotor-compilation.md)
 - [Chapter 27 Inside the Lean 4 Axiom Sanctuary (Part I): From the Parallelogram Law to Finite Record Pinching](ch27-reading-frozen-proofs-i.md)
-- [Chapter 28 Inside the Lean 4 Axiom Sanctuary (Part II): From Rank-One Born Reduction to the Closure of $\psi = \psi(\psi)$](ch28-reading-frozen-proofs-ii.md)
+- [Chapter 28 Inside the Lean 4 Axiom Sanctuary (Part II): From Rank-One Born Reduction to Unread Fixed Points and $\psi = \psi(\psi)$](ch28-reading-frozen-proofs-ii.md)
 
 # Part VIII Synthesis — Timeless Causality, Complexity Horizons, Quantum Fairness, and Meta-Unification
 
 - [Chapter 29 Timeless Causality and the Gram Compatible Space: From the Pythagorean Pell Seam to Elliptic-Curve Tori](ch29-timeless-causality-and-gram-space.md)
 - [Chapter 30 Fields ($P$) and Lines ($NP$): From the Exponential Time Hypothesis (ETH) to Navier–Stokes Vortex Filaments](ch30-fields-lines-eth-and-navier-stokes.md)
-  - [Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$—The Orthogonal Horizon and the Firewall of the Living Journey](ch30-s01-global-field.md)
-  - ["$P$ Is a Field, $NP$ Is a Line"—The Witness Thread, the Guiding Field, and Hairy-Ball Curl](ch30-s02-witness-lines.md)
-  - [The Exponential Time Hypothesis (ETH), 2026 Tensor-Network Rank Reduction, and the Cosmic Horizon: Scale and Interpretation of Upper-Bound Curves](ch30-s03-eth-and-horizons.md)
-  - [A Field Analogy Between Navier–Stokes and $P$ vs. $NP$ — Lamb Bivectors, 3D Vortex Stretching, and Arnold Geodesics](ch30-s04-navier-stokes.md)
-  - ["Quantum Entanglement, P=NP, Entropy" — The Orthogonal Triad of Partial-Trace Horizons, Pythagorean Conservation, and Tensor-Cut Bond Dimension](ch30-s05-entanglement-and-entropy.md)
-  - [Chapter Summary: The Orthogonal Convergence of Discrete Logic and Continuum Fluids](ch30-s06-summary.md)
+  - [30.1 Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$—The Orthogonal Horizon and the Firewall of the Living Journey](ch30-s01-global-field.md)
+  - [30.2 "$P$ Is a Field, $NP$ Is a Line"—The Witness Thread, the Guiding Field, and Hairy-Ball Curl](ch30-s02-witness-lines.md)
+  - [30.3 The Exponential Time Hypothesis (ETH), 2026 Tensor-Network Rank Reduction, and the Cosmic Horizon: Scale and Interpretation of Upper-Bound Curves](ch30-s03-eth-and-horizons.md)
+  - [30.4 A Field Analogy Between Navier–Stokes and $P$ vs. $NP$ — Lamb Bivectors, 3D Vortex Stretching, and Arnold Geodesics](ch30-s04-navier-stokes.md)
+  - [30.5 "Quantum Entanglement, P=NP, Entropy" — The Orthogonal Triad of Partial-Trace Horizons, Pythagorean Conservation, and Tensor-Cut Bond Dimension](ch30-s05-entanglement-and-entropy.md)
+  - [30.6 Chapter Summary: The Orthogonal Convergence of Discrete Logic and Continuum Fluids](ch30-s06-summary.md)
 - [Chapter 31 The Essence of the Quantum Is Fairness: Fivefold Abolition of Geometric Privilege and Ergodic Statistical Holism](ch31-quantum-fairness.md)
 - [Chapter 32 Orthogonal Self-Referential Unified Field and Meta-Unification of Grand Foundational Programs](ch32-unified-field-and-meta-unification.md)
 
@@ -79,8 +79,8 @@
 
 # Coda and Appendices
 
-- [Coda: Outside All Spheres](coda.md)
-- [Appendix A: Dictionary of Conventional vs. Geometric Quantum Terms](appendix-a.md)
-- [Appendix B: Clifford Algebra Cheat Sheet](appendix-b.md)
-- [Appendix C: Complete Index of Locked trureturing Declarations](appendix-c.md)
-- [Appendix D: Six Classical Open Quantum Puzzles and the Five-Interpretation Geometric Duel](appendix-d.md)
+- [Coda Outside All Spheres](coda.md)
+- [Appendix A Dictionary of Conventional vs. Geometric Quantum Terms](appendix-a.md)
+- [Appendix B Clifford Algebra Cheat Sheet](appendix-b.md)
+- [Appendix C Master Index of Formalized Lean 4 Theorems and Open Problems](appendix-c.md)
+- [Appendix D Six Classical Open Quantum Puzzles and the Five-Interpretation Geometric Duel](appendix-d.md)

@@ -1,10 +1,10 @@
-"""锁定声明的对账：种类 × 出现方式（附录 C §C.4）。
-The ledger of the locked declarations: kind × how the book cites them (appendix C, C.4).
+"""锁定声明的对账：种类 × 出现方式（附录 C §C.5）。
+The ledger of the locked declarations: kind × how the book cites them (appendix C, C.5).
 
 Nothing is typed by hand. Kinds come from trureturing.lock.json (theorem; def and inductive together). How a
 declaration is cited comes from the Chinese chapters, appendix C left out: by a `lean="…"` attribute on a `:::`
 line (an environment), else by media consumers listed in the index, else by inline links only. C.1 (serial T…)
-contains environment-cited theorems, C.2 (D…) environment-cited definitions, and C.2.1 (R…) the remaining entries.
+contains environment-cited theorems, C.2 (D…) environment-cited definitions, and C.3 (R…) the remaining entries.
 Media consumers do not change that partition.
 """
 
@@ -58,17 +58,17 @@ assert IDX == {"T": GET("thm", "env"), "D": GET("def", "env"),
                "R": sum(GET(k, h) for k in ("thm", "def") for h in ("media", "inline"))}
 
 ALT = {
-    "zh": "一张两行三列的账：行是定理与定义，列是“定理或定义环境里用 lean= 引用”“由媒体引用、正文只以行内链接提到”“只在行内链接里出现”。"
+    "zh": "一张两行三列的账：行是定理与定义，列是“任意 ::: 环境头以 lean= 引用（包括 example 环境）”“由媒体引用、正文只以行内链接提到”“只在行内链接里出现”。"
           f"定理一行是 {GET('thm', 'env')}、{GET('thm', 'media')}、{GET('thm', 'inline')}，合计 {THM}；"
           f"定义一行是 {GET('def', 'env')}、{GET('def', 'media')}、{GET('def', 'inline')}，合计 {DEF}；总计 {THM + DEF}。"
           f"三个虚线框标出附录 C 的三张索引：C.1 = {IDX['T']}，C.2 = {IDX['D']}，"
-          f"C.2.1 = {GET('thm', 'media')} + {GET('thm', 'inline')} + {GET('def', 'media')} + {GET('def', 'inline')} = {IDX['R']}。",
+          f"C.3 = {GET('thm', 'media')} + {GET('thm', 'inline')} + {GET('def', 'media')} + {GET('def', 'inline')} = {IDX['R']}。",
     "en": "A ledger of two rows and three columns: the rows are theorems and definitions, the columns are cited with lean= in "
           f"an environment, cited by media and only inline in the text, and reached by inline links only. The theorem row reads "
           f"{GET('thm', 'env')}, {GET('thm', 'media')}, {GET('thm', 'inline')}, total {THM}; "
           f"the definition row {GET('def', 'env')}, {GET('def', 'media')}, {GET('def', 'inline')}, total {DEF}; in all {THM + DEF}. "
           f"Three dashed frames mark the three indexes of appendix C: C.1 = {IDX['T']}, C.2 = {IDX['D']}, "
-          f"C.2.1 = {GET('thm', 'media')} + {GET('thm', 'inline')} + {GET('def', 'media')} + {GET('def', 'inline')} = {IDX['R']}.",
+          f"C.3 = {GET('thm', 'media')} + {GET('thm', 'inline')} + {GET('def', 'media')} + {GET('def', 'inline')} = {IDX['R']}.",
 }
 
 
@@ -100,5 +100,5 @@ def draw(fig):
     yb = Y0 + 2 * CH + 22
     fig.text(X0 + CW / 2, Y0 - 12, f"C.1 = {IDX['T']}", size=15, color="ink", anchor="middle", middle=True)
     fig.text(X0 + CW / 2, yb, f"C.2 = {IDX['D']}", size=15, color="ink", anchor="middle", middle=True)
-    fig.text(X0 + 2 * CW, yb, f"C.2.1 = {IDX['R']}", size=15, color="ink", anchor="middle", middle=True)
+    fig.text(X0 + 2 * CW, yb, f"C.3 = {IDX['R']}", size=15, color="ink", anchor="middle", middle=True)
     fig.text(8, 22, t(f"锁文件 {THM + DEF} 条声明：种类 × 出现方式", f"the {THM + DEF} entries of the lock: kind × how they are cited"), size=15, color="dim")

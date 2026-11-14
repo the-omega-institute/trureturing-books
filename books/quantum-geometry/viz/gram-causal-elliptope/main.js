@@ -173,38 +173,13 @@
     return [kit.clamp(v[1] / K, -1, 1), kit.clamp(v[2] / K, -1, 1)];
   }
   /* The solid: the elliptope 1 − x² − y² − z² + 2xyz ≥ 0, cut open at the history's x so that the slice faces the
-     viewer; the part x > x_history is kept as faint outlines. With x = sin s, y = sin t its two sheets are
-     z = xy ± √((1−x²)(1−y²)) = cos(s − t) and −cos(s + t), so the grid lines of the surface are the lines x = const and
-     y = const: two of the three inner products held fixed. */
-  const NS = 40, NT = 48, HALF = Math.PI / 2;
-  const sheet = (sign) => (s, t) => [Math.sin(s), Math.sin(t), sign > 0 ? Math.cos(s - t) : -Math.cos(s + t)];
-  /** The slice x = c0 of the elliptope: r = 1 its edge (det G₃ = 0), r < 1 inside; p = (u + v)/√2, q = (u − v)/√2. */
-  function slicePoint(c0, r, a) {
-    const u = r * Math.sqrt(1 + c0) * Math.cos(a), v = r * Math.sqrt(1 - c0) * Math.sin(a);
-    return [c0, (u + v) / Math.SQRT2, (u - v) / Math.SQRT2];
-  }
+     viewer; the part x > x_history is kept as faint outlines. Its geometry (two sheets whose grid lines are the lines
+     x = const and y = const, the cut face, the outlines) is shared with film 008: model.js, QG_ELLIPTOPE. */
+  const NS = 40, NT = 48;
   /** The solid as drawn, in (x, y, z): rows[j][i] of the two sheets on s ∈ [−π/2, asin x], t ∈ [−π/2, π/2]
       (row j: t fixed, so y fixed; column i: s fixed, so x fixed), and the cut face (row j: radius j/6 of the slice). */
-  function solidModel() {
-    const x = sp().x, s1 = Math.asin(x);
-    const rows = (f) => { const out = []; for (let j = 0; j <= NT; j++) { const r = []; for (let i = 0; i <= NS; i++) r.push(f(-HALF + (s1 + HALF) * i / NS, -HALF + Math.PI * j / NT)); out.push(r); } return out; };
-    const cap = []; for (let j = 0; j <= 6; j++) { const r = []; for (let i = 0; i <= 72; i++) r.push(slicePoint(x, Math.max(j / 6, 1e-3), kit.TAU * i / 72)); cap.push(r); }
-    return { cut: x, upper: rows(sheet(1)), lower: rows(sheet(-1)), cap };
-  }
-  function drawSolid() {
-    const st = stage, m = solidModel(), toW = (rows) => rows.map((r) => r.map((p) => W(...p)));
-    const grid = { every: [5, 6] };
-    st.surface('upper', toW(m.upper), { color: P.violet, back: P.violet, grid, id: 'elliptope' });
-    st.surface('lower', toW(m.lower), { color: P.violet, back: P.violet, grid, id: 'elliptope' });
-    st.surface('cap', toW(m.cap), { color: P.violet, back: P.violet, id: 'slice' });
-    // the part beyond the cut, as outlines: the y-lines of the two sheets carried on, and two x-slices
-    const s1 = Math.asin(m.cut);
-    for (let j = 0; j <= NT; j += 6) {
-      const t = -HALF + Math.PI * j / NT;
-      for (const sg of [1, -1]) { const pts = []; for (let i = 0; i <= 16; i++) pts.push(W(...sheet(sg)(s1 + (HALF - s1) * i / 16, t))); st.line(pts, { color: P.violet, width: 0.9, alpha: 0.55 }); }
-    }
-    for (const f of [1 / 3, 2 / 3]) { const c0 = Math.sin(s1 + (HALF - s1) * f), pts = []; for (let i = 0; i <= 72; i++) pts.push(W(...slicePoint(c0, 1, kit.TAU * i / 72))); st.line(pts, { color: P.violet, width: 0.9, alpha: 0.55 }); }
-  }
+  const solidModel = () => QG_ELLIPTOPE.model(sp().x, { ns: NS, nt: NT });
+  const drawSolid = () => QG_ELLIPTOPE.draw(stage, solidModel(), { scale: K, color: P.violet });
   function drawStage(f) {
     const st = stage, s = sp(), x = s.x;
     st.begin();
@@ -358,10 +333,10 @@
   }
   // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
   const FIGURE_NOTES = {
-    "elliptope": ["历史固定 x 后，候选只能落在 det G₃ ≥ 0 的切面内，青线标出 z 的可行窗口。", "With history fixing x, the candidate stays in the det G₃ ≥ 0 slice; the cyan segment is the allowed z window."],
-    "narrow": ["记忆从一步增至五步，品红椭圆逐层内嵌，青色可行窗口收窄，Q 始终在内。", "As memory grows from one step to five, nested magenta ellipses narrow the cyan window while Q stays inside."],
-    "flat": ["同一历史压回三维：记忆加深后可行区域退化为边界，再缩为孤立点，det G = 0。", "Squeeze the history into 3D: deeper memory reduces the feasible region to its boundary, then isolated points, det G = 0."],
-    "violate": ["候选在第三圈内、第四圈外：D₅ 首先变负，这张表无法在内积空间实现。", "Inside ring three but outside ring four, the candidate makes D₅ negative: no inner-product space realizes this table."],
+    "elliptope": ["历史固定 x 后，候选只能落在 det G₃ ≥ 0 的切面内，青线标出 z 的可行窗口。", "History fixes x: det G₃ ≥ 0 bounds the slice; cyan marks the allowed z window."],
+    "narrow": ["记忆从一步增至五步，品红椭圆逐层内嵌，青色可行窗口收窄，Q 始终在内。", "Memory 1 → 5: nested magenta ellipses narrow the cyan window; Q stays inside."],
+    "flat": ["同一历史压回三维：记忆加深后可行区域退化为边界，再缩为孤立点，det G = 0。", "History in 3D: deeper memory leaves boundaries, then isolated points; det G = 0."],
+    "violate": ["候选在第三圈内、第四圈外：D₅ 首先变负，这张表无法在内积空间实现。", "Inside ring 3, outside ring 4: D₅ < 0; no inner-product space realizes the table."],
   };
   const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：在截面里拖动琥珀色的 Q，或拖滑块、换记忆深度、换空间。拖动空白处旋转舞台。随时可以再选一张卡。', 'Free play: drag the amber Q in the slice, or move the sliders, change the depth of memory or the space. Drag empty space to rotate the stage. Pick a card again at any time.'] });

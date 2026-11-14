@@ -25,6 +25,7 @@
     "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed",
     "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
   ],
+  "solid": true,
   "outputs": {
     "narrated_720p": "quantum-geometry_006_720p_narrated.mp4",
     "cover": "quantum-geometry_006_cover.jpg"

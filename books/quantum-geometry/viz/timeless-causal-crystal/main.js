@@ -493,9 +493,13 @@
   }
   // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
   const FIGURE_NOTES = {
-    "window": ["实向量夹角 60° 与 45° 固定时，A·C 只能在 cos 105° 与 cos 15° 之间，边界共面。", "For real vectors with angles 60° and 45° fixed, A·C stays between cos 105° and cos 15°; edges are coplanar."],
-    "sos": ["2-SAT 消解闭包停在阶 2；随机 3-XOR/3-SAT 的文献平方和下界不推出 P ≠ NP。", "2-SAT resolution closes at order 2; literature sum-of-squares lower bounds for random 3-XOR/3-SAT do not settle P ≠ NP."],
-    "wilderness": ["青色探针沿丝到达目标，通道外的品红探针被涡旋困住；这是示意模型。", "The cyan probe follows the thread to the target; magenta probes outside the channel are trapped: a schematic model."],
+    "window": ["实向量夹角 60°、45°：A·C ∈ [cos 105°, cos 15°]，边界共面。", "Real vectors at 60°, 45°: A·C ∈ [cos 105°, cos 15°]; coplanar at the edges."],
+    "sos": ["2-SAT 消解闭包停在阶 2；随机 3-XOR/3-SAT 的文献平方和下界不推出 P ≠ NP。", "2-SAT closes at order 2; random 3-XOR/3-SAT SoS bounds leave P ≠ NP open."],
+    "wilderness": ["青色探针沿丝到达目标，通道外的品红探针被涡旋困住；这是示意模型。", "Model: cyan follows the thread to the target; off-channel magenta gets trapped."],
+    "impossible": ["夹角 30°、40° 却要求 A·C = −0.5：det G < 0，无向量可实现。", "Angles 30°, 40°, yet A·C = −0.5: det G < 0, so no vectors realize this."],
+    "right": ["前两个夹角均为 90°：第三条内积可取 [−1, 1] 中任意值。", "With both angles 90°, the third inner product can be any value in [−1, 1]."],
+    "crystal": ["十二页同时画在球上；播放只移动琥珀色读头，读头所在处是“现在”。", "All 12 pages stay on the sphere; only the amber head moves to mark “now”."],
+    "thread": ["256 个候选：每步转向目标 7.2°，12 步后几乎对准。", "256 candidates: 7.2° per step towards the target; nearly aligned after 12 steps."],
   };
   const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、拖滑块、在球上拖动 C、在荒野里点一下放一根探针。随时可以再选一张卡。', 'Free play: switch scenes, move the sliders, drag C on the sphere, click the wilderness to drop a probe. Pick a card again at any time.'] });

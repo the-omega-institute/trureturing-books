@@ -23,6 +23,10 @@
     "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word",
     "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot"
   ],
+  "solid": true,
+  "scripts": [
+    "viz/two-angle-addressing/model.js"
+  ],
   "outputs": {
     "narrated_720p": "quantum-geometry_003_720p_narrated.mp4",
     "cover": "quantum-geometry_003_cover.jpg"

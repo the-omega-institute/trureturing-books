@@ -23,7 +23,11 @@
    The rotors are built in a small Cl(3,0) algebra (blade masks and XOR, as RotorCompiler in the chapter). On load,
    FILM.init recomputes every number the film prints, compares the six-decimal values with those printed in the
    chapter, checks the sandwich against the ZYZ matrix and against Rodrigues' formula for the single axis, and
-   pushes any disagreement to window.FILM_ERRORS, which stops the render. */
+   pushes any disagreement to window.FILM_ERRORS, which stops the render.
+
+   The Bloch sphere is drawn as a solid: the glass ball of the lab page two-angle-addressing, and each turn as a lit arc
+   with the fan its in-plane part sweeps round the turn's axis, from the model of the lab page zyz-compile (both pages'
+   model.js); FILM.init checks that the drawn sweeps follow the rotor path. */
 'use strict';
 
 /* ======================================================================= */
@@ -123,6 +127,13 @@ FILM.init.push(() => {
   /* the single axis */
   if (Math.abs(V3.norm(ZY_FOLD.n) - 1) > 1e-12 || !(ZY_FOLDERR < 1e-12)) fail('single-axis turn: ' + ZY_FOLDERR);
   if ((ZY_FOLD.phi * 180 / Math.PI).toFixed(1) !== '67.9') fail('fold angle ' + ZY_FOLD.phi);
+  /* the drawn sweeps (the lab page's QG_ZYZ.sweep about the fixed axes) follow the rotor path of the chain */
+  [['z', 'ga'], ['y', 'be'], ['z', 'al']].forEach(([ax, ang], k) => {
+    for (const q of [0.25, 0.5, 1]) {
+      const w0 = zyChainVec(E1, k / 3), arc = QG_ZYZ.sweep(w0, QG_ZYZ.AXIS[ax], ZY[ang] * q, Math.PI / 90).arc;
+      if (V3.norm(V3.sub(arc[arc.length - 1], zyChainVec(E1, (k + q) / 3))) > 1e-12) fail(`drawn sweep ${k} leaves the rotor path`);
+    }
+  });
   /* the gates */
   if (r6(ZY_T[0]) !== 0.92388 || r6(ZY_T[3]) !== -0.382683 || Math.abs(ZY_T[5]) + Math.abs(ZY_T[6]) > 1e-15) fail('T rotor');
   if (Math.abs(ZY_H[0]) > 1e-15 || r6(ZY_H[3]) !== -0.707107 || r6(ZY_H[6]) !== -0.707107 || Math.abs(ZY_H[5]) > 1e-15) fail('H rotor');
@@ -190,61 +201,53 @@ function zyView(cx, cy, R, yaw, el) {
     const X = p[0] * cw - p[1] * sw, Y = p[0] * sw + p[1] * cw, Z = p[2];
     return [cx + X * R, cy - (Z * ce + Y * se) * R, Y * ce - Z * se];
   };
-  V.cx = cx; V.cy = cy; V.R = R;
+  V.cx = cx; V.cy = cy; V.R = R; V.yaw = yaw; V.el = el;
   return V;
 }
-/* a parametric 3-D curve: front runs bright, back runs faint */
+/* The Bloch sphere is a solid shot whose camera is the view V (same yaw, pitch, scale and centre). zyBegin opens it and
+   hangs it on V; while it is open the helpers below draw their geometry into it and queue their 2D labels, and zyEnd
+   draws the shot and then the queued labels on top. The ball is the glass ball of the lab page two-angle-addressing
+   (viz/two-angle-addressing/model.js, QG_SPHERE); each turn's shadow, fan and arc is the sweep of the lab page
+   zyz-compile (viz/zyz-compile/model.js, QG_ZYZ). Alphas inside the shot are absolute. */
+function zyBegin(V, key) {
+  const h = Math.round(1.45 * V.R), x = Math.round(V.cx - h), y = Math.max(0, Math.round(V.cy - h));
+  V.sh = solid(key, { x, y, w: 2 * h, h: Math.min(2 * h, H - y), yaw: V.yaw, pitch: V.el, unit: V.R, cx: V.cx - x, cy: V.cy - y, px: true });
+  V.labels = [];
+  V.sh.begin();
+  return V.sh;
+}
+function zyEnd(V) { V.sh.end(1); V.sh = null; const L = V.labels; V.labels = []; L.forEach(f => f()); }
+const zyLabel = (V, f) => { if (V.sh) V.labels.push(f); else f(); };
+/* a parametric 3-D curve inside the glass: the run behind the centre plane at aB / aF of the front's alpha */
 function zyPath(V, fn, n, col, aF, aB, lw = 2, dash = false) {
-  if (aF <= 0.003 && aB <= 0.003) return;
+  if ((aF <= 0.003 && aB <= 0.003) || !V.sh) return;
   const pts = [];
-  for (let i = 0; i <= n; i++) pts.push(V(fn(i / n)));
-  let run = [pts[0]], back = pts[0][2] > 0;
-  const flush = () => {
-    if (run.length < 2) return;
-    const r = run;
-    if (dash) { ctx.save(); ctx.setLineDash([10, 9]); }
-    curve(k => r[Math.round(k * (r.length - 1))], r.length - 1, col, back ? aB : aF, back ? lw * 0.7 : lw);
-    if (dash) ctx.restore();
-  };
-  for (let i = 1; i < pts.length; i++) {
-    const b = pts[i][2] > 0;
-    run.push(pts[i]);
-    if (b !== back) { flush(); run = [pts[i]]; back = b; }
-  }
-  flush();
+  for (let i = 0; i <= n; i++) pts.push(fn(i / n));
+  QG_SPHERE.seg(V.sh, pts, { color: col, width: lw, alpha: Math.max(aF, aB), back: aF > 0 ? Math.min(1, aB / aF) : 1, dash: dash ? [10, 9] : undefined });
 }
 function zySphere(V, a, o = {}) {
   if (a <= 0.003) return;
-  dot(V.cx - V.R * 0.18, V.cy - V.R * 0.22, V.R * 1.25, 'b', 0.08 * a);
-  ring(V.cx, V.cy, V.R, C.cyan, 0.8 * a, 2.4);
-  ring(V.cx, V.cy, V.R + 8, C.cyan, 0.16 * a, 1);
-  for (const lat of [-60, -30, 0, 30, 60]) {
-    const r = Math.cos(lat * ZY_DEG), z = Math.sin(lat * ZY_DEG), eq = lat === 0;
-    zyPath(V, s => [r * Math.cos(TAU * s), r * Math.sin(TAU * s), z], 72, eq ? C.cyan : C.blue, a * (eq ? 0.6 : 0.34), a * (eq ? 0.2 : 0.09), eq ? 2 : 1.2);
-  }
-  for (let k = 0; k < 6; k++) {
-    const ph = k * Math.PI / 6;
-    zyPath(V, s => [Math.sin(TAU * s) * Math.cos(ph), Math.sin(TAU * s) * Math.sin(ph), Math.cos(TAU * s)], 72, C.blue, a * 0.28, a * 0.08, 1.1);
-  }
+  QG_SPHERE.ball(V.sh, { glass: C.cyan, ink: C.blue, width: 1.5, alpha: 0.6 * a, back: 0.35, shell: { alpha: 0.08 * a, rim: 0.5 * a } });
   /* coordinate axes; o.hi = { z: k, y: k } highlights a rotation axis in violet */
-  const c0 = V([0, 0, 0]), hi = o.hi || {};
+  const hi = o.hi || {};
   for (const [e, l] of [[E1, 'x'], [E2, 'y'], [E3, 'z']]) {
     const h = clamp(hi[l] || 0), col = h > 0 ? mix(C.dim, C.vio, h) : C.dim;
-    const pn = V(V3.sc(-1.25, e)), pp = V(V3.sc(1.3, e)), pl = V(V3.sc(1.45, e));
-    dashed(pn[0], pn[1], c0[0], c0[1], col, (0.45 + 0.4 * h) * a, 1.4 + 1.6 * h);
-    arrow(c0[0], c0[1], pp[0], pp[1], col, (0.7 + 0.3 * h) * a, 1.6 + 2.4 * h);
-    txt(l, pl[0], pl[1] + 9, { size: 26 + 6 * h, fam: F.math, w: 700, align: 'center', c: col, a: 0.95 * a });
+    V.sh.line([V3.sc(-1.25, e), [0, 0, 0]], { color: col, width: 1.4 + 1.6 * h, alpha: (0.45 + 0.4 * h) * a, dash: [10, 9] });
+    V.sh.arrow([0, 0, 0], V3.sc(1.3, e), { color: col, width: 1.6 + 2.4 * h, headSize: 16, alpha: (0.7 + 0.3 * h) * a });
+    zyLabel(V, () => { const pl = V(V3.sc(1.45, e)); txt(l, pl[0], pl[1] + 9, { size: 26 + 6 * h, fam: F.math, w: 700, align: 'center', c: col, a: 0.95 * a }); });
   }
 }
-/* an arrow from the centre to v with a glowing tip and an optional label beside the tip */
+/* an arrow from the centre (or o.from) to v with a lit head, a bead at the tip and an optional label beside the tip */
 function zyVec(V, v, col, a, o = {}) {
   if (a <= 0.003) return;
-  const c0 = o.from ? V(o.from) : V([0, 0, 0]), p = V(v);
-  arrow(c0[0], c0[1], p[0], p[1], col, a, o.lw || 4);
-  if (o.tip !== false) dot(p[0], p[1], o.r || 14, o.pearl || 'g', a);
+  V.sh.arrow(o.from || [0, 0, 0], v, { color: col, width: o.lw || 4, headSize: 18, alpha: a });
+  if (o.tip !== false) V.sh.bead(v, { color: col, r: (o.r || 14) * 0.6, alpha: a });
   if (!o.label) return;
-  const dx = p[0] - c0[0], dy = p[1] - c0[1], L = Math.hypot(dx, dy) || 1, off = o.off || 34;
-  txt(o.label, p[0] + dx / L * off, p[1] + dy / L * off + 9, { size: o.size || 28, fam: F.math, w: 700, align: 'center', c: col, a });
+  zyLabel(V, () => {
+    const c0 = o.from ? V(o.from) : V([0, 0, 0]), p = V(v);
+    const dx = p[0] - c0[0], dy = p[1] - c0[1], L = Math.hypot(dx, dy) || 1, off = o.off || 34;
+    txt(o.label, p[0] + dx / L * off, p[1] + dy / L * off + 9, { size: o.size || 28, fam: F.math, w: 700, align: 'center', c: col, a });
+  });
 }
 /* coloured runs on one baseline: parts = [[text, colour, 'sub'?], …]; 'sub' draws a small lowered run */
 function zyRich(parts, x, y, o = {}) {
@@ -262,15 +265,12 @@ function zyRich(parts, x, y, o = {}) {
 }
 /* R_u(text) as rich parts */
 const zyR = (u, arg, col) => [['R', col], [u, col, 'sub'], [`(${arg})`, col]];
-/* a filled sector in the plane z = h of radius r, from angle t0 to t1 */
-function zyWedge(V, h, r, t0, t1, col, a) {
-  if (a <= 0.003 || Math.abs(t1 - t0) < 1e-3) return;
-  const c = V([0, 0, h]), n = Math.max(4, Math.ceil(Math.abs(t1 - t0) * 30));
-  ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = rgba(col, 0.22);
-  ctx.beginPath(); ctx.moveTo(c[0], c[1]);
-  for (let i = 0; i <= n; i++) { const t = t0 + (t1 - t0) * i / n, p = V([r * Math.cos(t), r * Math.sin(t), h]); ctx.lineTo(p[0], p[1]); }
-  ctx.closePath(); ctx.fill(); ctx.restore();
-  zyPath(V, s => [r * Math.cos(t0 + (t1 - t0) * s), r * Math.sin(t0 + (t1 - t0) * s), h], n, col, a, a * 0.6, 3);
+/* the fan the in-plane part sweeps when the point p (at height p[2]) turns about z by ang: QG_ZYZ.sweep, lit rim */
+function zyWedge(V, p, ang, col, a, key) {
+  if (a <= 0.003 || Math.abs(ang) < 1e-3) return;
+  const sw = QG_ZYZ.sweep(p, E3, ang, 2 * ZY_DEG);
+  V.sh.fan(sw.fan, { fill: col, alpha: 0.24 * a });
+  V.sh.tube(key, sw.arc, { color: col, width: 3, alpha: a });
 }
 /* a 2×2 or 3×3 bracketed matrix; y is the baseline of the first row */
 function zyMat(x, y, cells, a, o = {}) {
@@ -310,17 +310,23 @@ function zyTripod(V, R, a, o = {}) {
   BASIS.forEach((e, k) => {
     const v = CL.apply(R, e);
     if (k === 0) zyVec(V, v, C.now, a, { label: o.labels === false ? null : names[0], off: 44, size: 26 });
-    else zyVec(V, v, C.white, a * 0.8, { lw: 2.5, r: 9, pearl: 'w', label: o.labels === false ? null : names[k], off: 40, size: 24 });
+    else zyVec(V, v, C.white, a * 0.8, { lw: 2.5, r: 9, label: o.labels === false ? null : names[k], off: 40, size: 24 });
   });
 }
-/* the trail of the three turns from v0 up to progress p: done segments white, the current one amber */
+/* the three turns from v0 up to progress p: each a lit arc with the fan its in-plane part sweeps round the turn's axis
+   (QG_ZYZ.sweep); finished turns white with faint fans, the turn in progress amber with its shadow on the axis (cyan)
+   and a magenta fan */
+const ZY_TURNS = [['z', 'ga'], ['y', 'be'], ['z', 'al']];
 function zyTrail(V, v0, p, a, o = {}) {
-  const [pg, pb, pa] = zyChainParts(p);
-  const seg = [[pg, s => zyChainVec(v0, s / 3)], [pb, s => zyChainVec(v0, (1 + s) / 3)], [pa, s => zyChainVec(v0, (2 + s) / 3)]];
-  seg.forEach(([q, fn], k) => {
+  const parts = zyChainParts(p);
+  ZY_TURNS.forEach(([ax, ang], k) => {
+    const q = parts[k];
     if (q <= 0.002) return;
-    const cur = q < 1 || (k === 2 && o.endAmber);
-    zyPath(V, s => fn(q * s), Math.max(6, Math.ceil(q * 40)), cur ? C.now : C.white, a * (cur ? 1 : 0.85), a * 0.4, cur ? 4 : 3);
+    const cur = q < 1 || (k === 2 && o.endAmber), w0 = zyChainVec(v0, k / 3), u = QG_ZYZ.AXIS[ax];
+    const sw = QG_ZYZ.sweep(w0, u, ZY[ang] * q, 2 * ZY_DEG);
+    V.sh.fan(sw.fan, { fill: C.mag, alpha: (cur ? 0.22 : 0.08) * a });
+    V.sh.tube('trail' + k, sw.arc, { color: cur ? C.now : C.white, width: cur ? 4 : 3, alpha: (cur ? 1 : 0.85) * a });
+    if (cur && V3.norm(sw.c) > 0.02) V.sh.line([[0, 0, 0], sw.c], { color: C.cyan, width: 3.5, alpha: 0.9 * a });
   });
 }
 
@@ -333,6 +339,30 @@ function zyHalfTheta(S) {
 }
 SCENES.half = S => {
   const u = S.u, L0 = lineAt(S, 0);
+  const ma = at(S, 0, 0.9, -0.1) * clamp((S.d - u) / 0.5);
+  const th = zyHalfTheta(S), v0 = ZY_HALF_V, R = CL.rotor('z', th), v = CL.apply(R, v0);
+  const V = zyView(520, 520, 280, -2.2 + 0.03 * u, 0.32);
+  const r = Math.sqrt(3) / 2;
+  const halves = Q(S, 3, 'two half angles', 0.6) * ma;
+  const shd = Q(S, 2, 'The shadow', 0.6) * ma, pl = Q(S, 3, 'The part in the plane', 0.6) * ma;
+  /* the solid first: the plane z = ½ in which the in-plane part turns, the swept fan (in two halves once they are
+     named), the shadow on the axis (cyan), the turning in-plane part (magenta) and the arrow; then the 2D on top */
+  if (ma > 0) {
+    zyBegin(V, 'sphere');
+    zySphere(V, ma, { hi: { z: 1 } });
+    zyPath(V, s => [r * Math.cos(TAU * s), r * Math.sin(TAU * s), 0.5], 72, C.mag, 0.35 * ma, 0.12 * ma, 1.4);
+    if (halves > 0) {
+      zyWedge(V, v0, th / 2, C.mag, ma, 'half1');
+      zyWedge(V, [0.94 * r * Math.cos(th / 2), 0.94 * r * Math.sin(th / 2), 0.5], th / 2, mix(C.mag, C.white, 0.25), ma, 'half2');
+      V.sh.line([[0, 0, 0.5], [r * 1.04 * Math.cos(th / 2), r * 1.04 * Math.sin(th / 2), 0.5]], { color: C.white, width: 2, alpha: halves, dash: [10, 9] });
+    } else zyWedge(V, v0, th, C.mag, ma, 'half1');
+    V.sh.line([[0, 0, 0], v0], { color: C.white, width: 1.6, alpha: 0.4 * ma, dash: [10, 9] });
+    V.sh.arrow([0, 0, 0], [0, 0, 0.5], { color: C.cyan, width: 5 + 3 * shd, headSize: 18, alpha: ma });
+    if (shd > 0) V.sh.bead([0, 0, 0.5], { color: C.cyan, r: 9 + 6 * shd, alpha: shd * (1 - 0.6 * pl) });
+    V.sh.arrow([0, 0, 0.5], v, { color: C.mag, width: 3 + 2 * pl, headSize: 16, alpha: ma });
+    zyVec(V, v, C.now, ma, { label: 'v', off: 30 });
+    zyEnd(V);
+  }
   /* opening title during the lead */
   const ta = clamp(u / 0.5) * (1 - clamp((u - L0.s + 0.2) / 0.6));
   if (ta > 0) {
@@ -343,36 +373,16 @@ SCENES.half = S => {
     txt(scramble('ZYZ AND THE SANDWICH ACTION', p, 7), W / 2, 640, { size: 36, fam: F.orb, w: 900, align: 'center', c: C.white, a: ta * 0.9, ls: 4 });
     txt('HALF ANGLE · THREE TURNS · ONE AXIS · ON THE SPHERE', W / 2, 712, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.mag, a: ta * 0.9, ls: 5 });
   }
-  const ma = at(S, 0, 0.9, -0.1) * clamp((S.d - u) / 0.5);
   if (ma <= 0) return;
   badgeQ(S, [[0, null, 'computed']]);
-  const th = zyHalfTheta(S), v0 = ZY_HALF_V, R = CL.rotor('z', th), v = CL.apply(R, v0);
-  const V = zyView(520, 520, 280, -2.2 + 0.03 * u, 0.32);
-  zySphere(V, ma, { hi: { z: 1 } });
-  const r = Math.sqrt(3) / 2;
-  /* the plane z = ½ in which the in-plane part turns, and the swept sector */
-  zyPath(V, s => [r * Math.cos(TAU * s), r * Math.sin(TAU * s), 0.5], 72, C.mag, 0.35 * ma, 0.12 * ma, 1.4);
-  const halves = Q(S, 3, 'two half angles', 0.6) * ma;
   if (halves > 0) {
-    zyWedge(V, 0.5, r, 0, th / 2, C.mag, ma);
-    zyWedge(V, 0.5, r * 0.94, th / 2, th, mix(C.mag, C.white, 0.25), ma);
-    const pb = V([r * 1.04 * Math.cos(th / 2), r * 1.04 * Math.sin(th / 2), 0.5]), c = V([0, 0, 0.5]);
-    dashed(c[0], c[1], pb[0], pb[1], C.white, halves, 2);
     const l1 = V([r * 0.62 * Math.cos(th / 4), r * 0.62 * Math.sin(th / 4), 0.5]);
     const l2 = V([r * 0.62 * Math.cos(3 * th / 4), r * 0.62 * Math.sin(3 * th / 4), 0.5]);
     txt('θ/2', l1[0], l1[1] + 9, { size: 24, fam: F.math, w: 700, align: 'center', c: C.white, a: halves });
     txt('θ/2', l2[0], l2[1] + 9, { size: 24, fam: F.math, w: 700, align: 'center', c: C.white, a: halves });
-  } else zyWedge(V, 0.5, r, 0, th, C.mag, ma);
-  /* the start arrow, the shadow on the axis (cyan) and the turning in-plane part (magenta) */
-  const p0 = V(v0), c0 = V([0, 0, 0]);
-  dashed(c0[0], c0[1], p0[0], p0[1], C.white, 0.4 * ma, 1.6);
-  const sh = Q(S, 2, 'The shadow', 0.6) * ma, pl = Q(S, 3, 'The part in the plane', 0.6) * ma;
+  }
   const ps = V([0, 0, 0.5]);
-  arrow(c0[0], c0[1], ps[0], ps[1], C.cyan, ma, 5 + 3 * sh);
-  if (sh > 0) dot(ps[0], ps[1], 16 + 10 * sh, 'c', sh * (1 - 0.6 * pl));
-  arrow(ps[0], ps[1], V(v)[0], V(v)[1], C.mag, ma, 3 + 2 * pl);
   txt('½e₃', ps[0] - 28, ps[1] + 2, { size: 26, fam: F.math, w: 700, align: 'right', c: C.cyan, a: ma });
-  zyVec(V, v, C.now, ma, { label: 'v', off: 30 });
   /* the angle readout under the sphere */
   zyRich([['θ = ', C.white], [zyDeg(th), C.now], ['    θ/2 = ', C.white], [zyDeg(th / 2), C.vio]], 130, 214, { size: 26, fam: F.mono, a: ma * at(S, 0, 0.6, 1.4) });
 
@@ -434,12 +444,13 @@ SCENES.chain = S => {
   const pre = Q(S, 0, 'about z', 0.4) * (1 - Q(S, 0, 'then y', 0.3)) + Q(S, 0, 'z again', 0.4) * (1 - at(S, 1, 0.4));
   const preY = Q(S, 0, 'then y', 0.4) * (1 - Q(S, 0, 'z again', 0.3));
   const V = zyView(520, 520, 280, -2.2 + 0.03 * u, 0.32);
+  const R = zyChainRotor(p);
+  zyBegin(V, 'sphere');
   zySphere(V, a, { hi: { z: Math.max(hiZ, pre), y: Math.max(hiY, preY) } });
   zyTrail(V, E1, p, a);
-  const R = zyChainRotor(p);
-  const p0 = V(E1);
-  ring(p0[0], p0[1], 16, C.white, 0.8 * a, 2);
+  V.sh.ring(E1, { color: C.white, r: 10, normal: E1, alpha: 0.8 * a });
   zyTripod(V, R, a);
+  zyEnd(V);
 
   /* panel: the three factors, acting right to left */
   const x = 1010, w = 790, y = 170;
@@ -547,34 +558,33 @@ SCENES.fold = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'argued'], [1, 'Here the axis', 'computed']]);
   const V = zyView(520, 520, 280, -1.1 + 0.01 * u, 0.4);
+  const end = ZY_COLS[0], n = ZY_FOLD.n, na = Q(S, 1, 'the axis comes', 0.6) * a;
+  const t0 = phraseAt(S, 1, 'sixty-seven'), t1 = phraseAt(S, 2, 'lands exactly') + 0.6;
+  const fp = ease(clamp((u - t0 + 0.4) / Math.max(0.8, t1 - t0 + 0.4)));
+  const land = Q(S, 2, 'lands exactly', 0.5, 0.6) * a;
+  zyBegin(V, 'sphere');
   zySphere(V, a);
   /* the three turns, finished, in white */
   zyTrail(V, E1, 1, a * 0.9);
-  const p0 = V(E1), end = ZY_COLS[0], pe = V(end), c0 = V([0, 0, 0]);
-  ring(p0[0], p0[1], 16, C.white, 0.9 * a, 2);
-  txt('e₁', p0[0] - 30, p0[1] + 34, { size: 26, fam: F.math, w: 700, align: 'center', c: C.white, a });
-  /* the single axis n and the single turn by φ */
-  const n = ZY_FOLD.n, na = Q(S, 1, 'the axis comes', 0.6) * a;
+  V.sh.ring(E1, { color: C.white, r: 10, normal: E1, alpha: 0.9 * a });
+  /* the single axis n, the circle e₁ rides about it, and the single turn by φ (the page's dashed violet arc) */
   if (na > 0) {
-    const nB = V(V3.sc(-1.3, n)), nA = V(V3.sc(1.35, n)), nl = V(V3.sc(1.5, n));
-    dashed(nB[0], nB[1], nA[0], nA[1], C.vio, na, 3);
-    dot(nA[0], nA[1], 12, 'v', na);
-    txt('n', nl[0] + 6, nl[1] + 8, { size: 32, fam: F.math, w: 700, align: 'center', c: C.vio, a: na });
-    /* the circle e₁ rides about n */
+    V.sh.line([V3.sc(-1.3, n), V3.sc(1.35, n)], { color: C.vio, width: 3, alpha: na, dash: [10, 9] });
+    V.sh.bead(V3.sc(1.35, n), { color: C.vio, r: 7, alpha: na });
     const par = V3.sc(V3.dot(n, E1), n), perp = V3.sub(E1, par), w2 = V3.cross(n, perp);
     zyPath(V, s => V3.add(par, V3.add(V3.sc(Math.cos(TAU * s), perp), V3.sc(Math.sin(TAU * s), w2))), 96, C.vio, 0.3 * na, 0.12 * na, 1.4);
   }
-  const t0 = phraseAt(S, 1, 'sixty-seven'), t1 = phraseAt(S, 2, 'lands exactly') + 0.6;
-  const fp = ease(clamp((u - t0 + 0.4) / Math.max(0.8, t1 - t0 + 0.4)));
   if (fp > 0) {
-    zyPath(V, s => V3.rot(n, ZY_FOLD.phi * fp * s, E1), 60, C.vio, a, a * 0.5, 4, true);
-    const q = V(V3.rot(n, ZY_FOLD.phi * fp, E1));
-    dot(q[0], q[1], 13, 'v', a);
+    V.sh.line(QG_ZYZ.arcAbout(E1, n, ZY_FOLD.phi * fp, 2 * ZY_DEG), { color: C.vio, width: 4, alpha: a, dash: [10, 8] });
+    V.sh.bead(V3.rot(n, ZY_FOLD.phi * fp, E1), { color: C.vio, r: 8, alpha: a });
   }
-  const land = Q(S, 2, 'lands exactly', 0.5, 0.6) * a;
-  dot(pe[0], pe[1], 15 + 14 * land, 'g', a);
+  V.sh.arrow([0, 0, 0], end, { color: C.now, width: 3, headSize: 16, alpha: a * 0.9 });
+  V.sh.bead(end, { color: C.now, r: 9 + 8 * land, alpha: a });
+  zyEnd(V);
+  const p0 = V(E1), pe = V(end);
+  txt('e₁', p0[0] - 30, p0[1] + 34, { size: 26, fam: F.math, w: 700, align: 'center', c: C.white, a });
+  if (na > 0) { const nl = V(V3.sc(1.5, n)); txt('n', nl[0] + 6, nl[1] + 8, { size: 32, fam: F.math, w: 700, align: 'center', c: C.vio, a: na }); }
   if (land > 0) ring(pe[0], pe[1], 26 + 30 * (1 - land), C.now, land, 2.5);
-  arrow(c0[0], c0[1], pe[0], pe[1], C.now, a * 0.9, 3);
 
   /* the literature result */
   const x = 1010, w = 790, y = 170;
@@ -615,23 +625,26 @@ SCENES.gates = S => {
   const blink = 1 - 0.85 * clamp(1 - Math.abs(u - (L1.s - 0.25)) / 0.25);
   const V = zyView(520, 520, 280, -2.2 + 0.03 * u, 0.32);
   const hiZ = st.gate === 'T' ? at(S, 0, 0.6, 0.4) : (st.g > 0 && st.g < 0.995 ? 1 : 0), hiY = st.gate === 'H' && st.b > 0 && st.b < 0.995 ? 1 : 0;
+  const ax = st.gate === 'T' ? 0 : Q(S, 2, 'It swaps', 0.6, 0.8) * a;
+  zyBegin(V, 'sphere');
   zySphere(V, a, { hi: { z: hiZ, y: hiY } });
-  if (st.gate === 'T') {
-    const tT = Math.acos(Math.min(1, st.R[0])) * 2;
-    zyPath(V, s => [Math.cos(tT * s), Math.sin(tT * s), 0], 30, C.now, a, a * 0.5, 4);
-  } else {
-    if (st.g > 0) zyPath(V, s => CL.apply(CL.rotor('z', Math.PI * st.g * s), E1), 40, st.g < 1 ? C.now : C.white, a, a * 0.5, st.g < 1 ? 4 : 3);
-    if (st.b > 0) zyPath(V, s => CL.apply(CL.mul(CL.rotor('y', Math.PI / 2 * st.b * s), CL.rotor('z', Math.PI)), E1), 40, st.b < 1 ? C.now : C.white, a, a * 0.5, st.b < 1 ? 4 : 3);
-    const ax = Q(S, 2, 'It swaps', 0.6, 0.8) * a;
-    if (ax > 0) {
-      const nB = V(V3.sc(-1.3, ZY_HAX.n)), nA = V(V3.sc(1.35, ZY_HAX.n));
-      dashed(nB[0], nB[1], nA[0], nA[1], C.vio, ax, 3);
-      txt('(e₁ + e₃)/√2', nB[0] + 16, nB[1] + 20, { size: 22, fam: F.math, w: 700, c: C.vio, a: ax });
-    }
+  /* each turn of e₁ as a lit arc with the fan it sweeps (QG_ZYZ.sweep): amber while it runs, white when done */
+  const turn = (w0, u0, ang, done, key) => {
+    if (Math.abs(ang) < 1e-3) return;
+    const sw = QG_ZYZ.sweep(w0, u0, ang, 2 * ZY_DEG);
+    V.sh.fan(sw.fan, { fill: C.mag, alpha: (done ? 0.08 : 0.22) * a });
+    V.sh.tube(key, sw.arc, { color: done ? C.white : C.now, width: done ? 3 : 4, alpha: a });
+  };
+  if (st.gate === 'T') turn(E1, E3, Math.acos(Math.min(1, st.R[0])) * 2, false, 'gT');
+  else {
+    if (st.g > 0) turn(E1, E3, Math.PI * st.g, st.g >= 1, 'gH1');
+    if (st.b > 0) turn(CL.apply(CL.rotor('z', Math.PI), E1), E2, Math.PI / 2 * st.b, st.b >= 1, 'gH2');
+    if (ax > 0) V.sh.line([V3.sc(-1.3, ZY_HAX.n), V3.sc(1.35, ZY_HAX.n)], { color: C.vio, width: 3, alpha: ax, dash: [10, 9] });
   }
-  const p0 = V(E1);
-  ring(p0[0], p0[1], 16, C.white, 0.7 * a, 2);
+  V.sh.ring(E1, { color: C.white, r: 10, normal: E1, alpha: 0.7 * a });
   zyTripod(V, st.R, a * blink);
+  zyEnd(V);
+  if (ax > 0) { const nB = V(V3.sc(-1.3, ZY_HAX.n)); txt('(e₁ + e₃)/√2', nB[0] + 16, nB[1] + 20, { size: 22, fam: F.math, w: 700, c: C.vio, a: ax }); }
 
   const x = 1010, w = 790, y = 170;
   const ta = a * (st.gate === 'T' ? 1 : 0.45);
@@ -664,17 +677,18 @@ SCENES.sphere = S => {
   const p = ease(clamp((u - L0.s) / Math.max(1, L2.e - L0.s)));
   const v = zyChainVec(E1, p);
   const V = zyView(520, 520, 280, -2.2 + 0.03 * u, 0.32);
+  const mi = Q(S, 3, 'positive semidefinite', 0.6) * a, m = V3.sc(ZY_MIX, v);
+  zyBegin(V, 'sphere');
   zySphere(V, a);
   zyTrail(V, E1, p, a * 0.9);
   zyVec(V, v, C.now, a, { label: 'v', off: 30 });
   /* the mixed state blochMatrix(1, 0.6 v): inside the ball */
-  const mi = Q(S, 3, 'positive semidefinite', 0.6) * a;
   if (mi > 0) {
-    const m = V3.sc(ZY_MIX, v), pm = V(m);
     zyPath(V, s => [ZY_MIX * Math.cos(TAU * s), ZY_MIX * Math.sin(TAU * s), 0], 72, C.white, 0.35 * mi, 0.15 * mi, 1.4, true);
-    dot(pm[0], pm[1], 16, 'w', mi);
-    txt('0.6 v', pm[0] + 22, pm[1] + 40, { size: 24, fam: F.math, w: 700, c: C.white, a: mi });
+    V.sh.bead(m, { color: C.white, r: 9, alpha: mi });
   }
+  zyEnd(V);
+  if (mi > 0) { const pm = V(m); txt('0.6 v', pm[0] + 22, pm[1] + 40, { size: 24, fam: F.math, w: 700, c: C.white, a: mi }); }
   const pure = Q(S, 2, 'Bloch vector of length', 0.5, 0.2);
   if (pure > 0) ring(V.cx, V.cy, V.R, C.lean, pure * a * 0.9, 4);
 
@@ -717,14 +731,15 @@ FILM.poster = () => {
   const t = 70.0, si = 3;
   background(t, TL.scenes[si], si, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.3, a: 0.2, cx: 1340, cy: 420, camZ: 7, lw: 1.3, dots: false });
-  const V = zyView(500, 520, 300, -1.0, 0.4);
+  const V = zyView(500, 520, 300, -1.0, 0.4), n = ZY_FOLD.n;
+  zyBegin(V, 'poster');
   zySphere(V, 1, { hi: { z: 0.6, y: 0.6 } });
   zyTrail(V, E1, 1, 1);
-  const n = ZY_FOLD.n, nB = V(V3.sc(-1.3, n)), nA = V(V3.sc(1.35, n));
-  dashed(nB[0], nB[1], nA[0], nA[1], C.vio, 1, 3);
-  zyPath(V, s => V3.rot(n, ZY_FOLD.phi * s, E1), 60, C.vio, 1, 0.5, 4, true);
-  const p0 = V(E1); ring(p0[0], p0[1], 16, C.white, 0.9, 2);
+  V.sh.line([V3.sc(-1.3, n), V3.sc(1.35, n)], { color: C.vio, width: 3, dash: [10, 9] });
+  V.sh.line(QG_ZYZ.arcAbout(E1, n, ZY_FOLD.phi, 2 * ZY_DEG), { color: C.vio, width: 4, dash: [10, 8] });
+  V.sh.ring(E1, { color: C.white, r: 10, normal: E1, alpha: 0.9 });
   zyTripod(V, ZY_R, 1, { labels: false });
+  zyEnd(V);
   const [tz1, tz2] = DATA.film.title_zh.split('：');
   txt(tz1, 1330, 250, { size: 70, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt(tz2, 1330, 336, { size: 62, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });

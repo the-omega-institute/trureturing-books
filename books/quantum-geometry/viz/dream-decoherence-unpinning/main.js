@@ -423,6 +423,26 @@
   let panelInfo = null;
   /** A cited figure in a phone's frame (about 334 × 500): style.css tightens the same frames with the same query. */
   const compact = () => TRV.figure && !TRV.still && window.matchMedia('(max-width: 480px)').matches;
+  /** Where the drawing may run on a stage other than a phone's figure (stage pixels): from under the title block and the
+      scene buttons (top) to above the legend (bottom). Both are measured, so a title, a second line or a legend that
+      takes more lines (another language, other font metrics) moves them. */
+  function bands() {
+    const sr = $('stage').getBoundingClientRect(), below = (el) => (el.getClientRects().length ? el.getBoundingClientRect().bottom - sr.top : 0);
+    return { top: TRV.thumbMode ? 24 : Math.max(46, below($('hudSub')), below($('sceneChips'))) + 10, bottom: TRV.thumbMode ? 24 : Math.max(18, $('legend').offsetHeight + 20) };
+  }
+  /** A narrow stage (a phone's lab) stacks the apparatus band over the panels. The panels need the height that keeps
+      the grid ≥ NARROW.grid px (80 with a margin), the band keeps its share of the rest and never less than NARROW.floor;
+      need(rec) is that height of the panels and the share of the band. */
+  const NARROW = { grid: 88, floor: 70, gap: 8 };
+  const narrowNeed = (rec) => ({ panels: (NARROW.grid + (TRV.thumbMode ? 6 : 30) + (rec && !TRV.thumbMode ? 52 : 0)) / (rec ? 0.64 : 0.58), share: rec ? 0.24 : 0.32 });
+  /** The height a narrow lab stage asks for (0 elsewhere): the title block and the legend as they are now, plus the band
+      at its share and the panels at their need. kit.plot passes it to the lab, whose stage grows to it and the page
+      scrolls; a cited figure and a still keep their frame (kit.plot ignores the request there). */
+  function stageAsk() {
+    if (TRV.figure || TRV.still || $('flat').clientWidth - 32 >= 560) return 0;
+    const { top, bottom } = bands(), n = narrowNeed(S.scene === 'record');
+    return Math.ceil(top + bottom + Math.max(NARROW.floor + NARROW.gap + n.panels, (NARROW.gap + n.panels) / (1 - n.share)));
+  }
   function layout(Wd, Ht) {
     const sr = $('stage').getBoundingClientRect(), below = (el) => (el.getClientRects().length ? el.getBoundingClientRect().bottom - sr.top : 0);
     const rec = S.scene === 'record';
@@ -438,8 +458,7 @@
       const half = Math.round((pr.w - 10) / 2), rx = pr.x + half + 10, rw = pr.w - half - 10, dh = Math.round(pr.h * 0.56);
       return { cmp: true, r3, pr, mat: { x: pr.x, y: pr.y, w: half, h: pr.h, recX: pr.x, recW: half, cmp: true }, dsc: { x: rx, y: pr.y, w: rw, h: dh }, scr: { x: rx, y: pr.y + dh + 4, w: rw, h: pr.h - dh - 4 } };
     }
-    const top = TRV.thumbMode ? 24 : Math.max(46, below($('hudSub')), below($('sceneChips'))) + 10;
-    const bottom = TRV.thumbMode ? 24 : Math.max(18, $('legend').offsetHeight + 20);
+    const { top, bottom } = bands();
     const x0 = 16, w = Wd - 32, h = Math.max(80, Ht - top - bottom);
     let r3, pr;
     if (w >= 560 && h < 300) {
@@ -453,7 +472,12 @@
       const mw = Math.round(pr.w * 0.44), rx = pr.x + mw + 14, rw = pr.x + pr.w - rx, dh = Math.round(pr.h * 0.52);
       return { r3, pr, mat: { x: pr.x, y: pr.y, w: mw, h: pr.h, recX: pr.x + 14, recW: mw - 14 }, dsc: { x: rx, y: pr.y, w: rw, h: dh }, scr: { x: rx, y: pr.y + dh + 18, w: rw, h: pr.h - dh - 18 } };
     }
-    else { const bh = Math.round(w >= 560 ? Math.max(110, Math.min(h * 0.55, h - (rec ? 172 : 150))) : Math.max(70, h * (rec ? 0.24 : 0.32))); r3 = { x: x0, y: top, w, h: bh }; pr = { x: x0, y: top + bh + 8, w, h: h - bh - 8 }; }
+    else {
+      // a narrow stage (a phone): the stage has asked for the height of both (stageAsk); the band gives way first
+      const n = narrowNeed(rec);
+      const bh = Math.round(w >= 560 ? Math.max(110, Math.min(h * 0.55, h - (rec ? 172 : 150))) : Math.max(NARROW.floor, Math.min(h * n.share, h - NARROW.gap - n.panels)));
+      r3 = { x: x0, y: top, w, h: bh }; pr = { x: x0, y: top + bh + NARROW.gap, w, h: h - bh - NARROW.gap };
+    }
     const wide = pr.w >= 560 || (pr.w >= 400 && pr.w >= 1.45 * pr.h), fr = rec ? 0.64 : 0.58;   // stacked: the matrix row's share
     let mat = wide ? { x: pr.x, y: pr.y, w: Math.min(pr.w * (rec ? 0.36 : 0.46), pr.h + 30), h: pr.h } : { x: pr.x, y: pr.y, w: pr.w, h: pr.h * fr };
     let dsc = null;
@@ -467,7 +491,12 @@
     return { r3, pr, mat, dsc, scr };
   }
   function drawStage() {
-    const g0 = kit.plot($('flat'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, Wd = g0.W, Ht = g0.H, m = current(), words = !TRV.thumbMode;
+    // a narrow lab stage asks for the height its title block, legend, band and panels take; when it has just grown to
+    // it, the canvas is fitted again to the new height before anything is laid out
+    const ask = stageAsk(), opts = { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0], ...(ask ? { minHeight: ask } : {}) };
+    let g0 = kit.plot($('flat'), opts);
+    if (ask && !g0.drawable) g0 = kit.plot($('flat'), opts);
+    const ctx = g0.ctx, Wd = g0.W, Ht = g0.H, m = current(), words = !TRV.thumbMode;
     const lay = layout(Wd, Ht), { r3, pr } = lay, cmp = !!lay.cmp;
     // the apparatus, fitted to its box in the default view, with room under it for the names of the places and, where
     // its sides leave no room for the words saying what it stands for, a line above it; on a phone (a low band) the
@@ -538,21 +567,38 @@
   };
   /** The stage title shares its row with the scene buttons: on a narrow stage, where the full title would run under
       them, drop the scene name and keep the key quantity; if even that does not fit, move the title block below the
-      buttons. In a still the buttons are hidden and the full title stays where it is. */
+      buttons. Its second line (sub) starts right under the buttons' row, so it keeps HUD_GAP px clear of them: the
+      theme (TRV.hudFit) moves the whole block under the buttons as soon as any of its lines meets one, and a fraction
+      of a pixel of font metrics decides that on another machine. TRV.hudFit then runs here, before the stage is laid
+      out, so the layout measures the block where it ends up. In a still the buttons are hidden and the full title
+      stays where it is. */
+  const HUD_GAP = 3;
   const overlaps = (a, b) => a.right > b.left - 6 && a.left < b.right && a.top < b.bottom && b.top < a.bottom;
-  function setHud(full, short) {
-    const big = $('hudBig'), chips = $('sceneChips'), tl = big.parentElement;
-    big.textContent = full; tl.style.marginTop = '';
+  /** The rectangles of the lines of text under el (not the boxes around them: what TRV.hudFit compares). */
+  const lineRects = (el) => {
+    const out = [], rg = document.createRange(), w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    for (let t = w.nextNode(); t; t = w.nextNode()) { rg.selectNodeContents(t); for (const r of rg.getClientRects()) if (r.width > 0 && r.height > 0) out.push(r); }
+    return out;
+  };
+  function setHud(full, short, subText) {
+    const big = $('hudBig'), sub = $('hudSub'), chips = $('sceneChips'), tl = big.parentElement;
+    big.textContent = full; setText('hudSub', subText); tl.style.marginTop = ''; sub.style.marginTop = '';
     if (TRV.thumbMode || TRV.shot || chips.offsetParent === null) return;
-    // measure in the title's own row: where a title still met the buttons, the theme (TRV.hudFit, once the text is
-    // written and after each draw) has set the stage .hud-stack and put the title under them, where the full title
-    // never meets them and would stay
+    // measure in the title's own row: where a title still met the buttons, the theme has set the stage .hud-stack and
+    // put the title under them, where the full title never meets them and would stay
     $('stage').classList.remove('hud-stack');
     const b = chips.getBoundingClientRect(), ink = () => { const r = document.createRange(); r.selectNodeContents(big); return r.getBoundingClientRect(); };
-    if (!overlaps(ink(), b)) return;
-    big.textContent = short;
-    const a = ink();
-    if (overlaps(a, b)) tl.style.marginTop = `${Math.ceil(b.bottom - a.top + 4)}px`;
+    if (overlaps(ink(), b)) {
+      big.textContent = short;
+      const a = ink();
+      if (overlaps(a, b)) tl.style.marginTop = `${Math.ceil(b.bottom - a.top + 4)}px`;
+    }
+    // the second line: HUD_GAP px under the lowest button it runs beside
+    const btns = [...chips.children].map((c) => c.getBoundingClientRect()).filter((r) => r.width > 0 && r.height > 0);
+    let push = 0;
+    for (const l of lineRects(sub)) for (const r of btns) if (l.left < r.right && r.left < l.right && l.top < r.bottom + HUD_GAP && r.top < l.bottom) push = Math.max(push, r.bottom + HUD_GAP - l.top);
+    if (push > 0) sub.style.marginTop = `${Math.ceil(push)}px`;
+    TRV.hudFit();
   }
   const setRo = (k, zh, en, val) => { $(`roL${k}`).textContent = L(zh, en); $(`ro${k}`).textContent = val; };
   function drawText() {
@@ -561,8 +607,7 @@
     $('roAside').textContent = S.scene === 'record' ? 'ρ₀₁' : S.scene === 'wake' ? 'P₀' : 'λ';
     if (S.scene === 'anchor') {
       const lam = lamNow(), c0 = crossNorm(anchored(0, S.fam), S.fam), c = crossNorm(m.rho, S.fam), ent = H(eig);
-      setHud(L(`锚点 · λ = ${fix(lam, 2)}`, `Anchors · λ = ${fix(lam, 2)}`), `λ = ${fix(lam, 2)}`);
-      setText('hudSub', L(`${S.fam === 'fine' ? '锚点：逐个位置' : '锚点：躯体 | 其余三处'} · 跨块相干剩 ${fix(100 * (1 - lam), 0)}% · 对角不动 · 熵 S = ${fix(ent, 2)}`, `${S.fam === 'fine' ? 'anchors: every place' : 'anchors: body | the other three'} · ${fix(100 * (1 - lam), 0)}% of the cross-block coherence left · diagonal fixed · entropy S = ${fix(ent, 2)}`));
+      setHud(L(`锚点 · λ = ${fix(lam, 2)}`, `Anchors · λ = ${fix(lam, 2)}`), `λ = ${fix(lam, 2)}`, L(`${S.fam === 'fine' ? '锚点：逐个位置' : '锚点：躯体 | 其余三处'} · 跨块相干剩 ${fix(100 * (1 - lam), 0)}% · 对角不动 · 熵 S = ${fix(ent, 2)}`, `${S.fam === 'fine' ? 'anchors: every place' : 'anchors: body | the other three'} · ${fix(100 * (1 - lam), 0)}% of the cross-block coherence left · diagonal fixed · entropy S = ${fix(ent, 2)}`));
       $('roKeyL').textContent = L('跨块相干的模长', 'modulus of the cross-block coherence');
       $('roKey').textContent = fix(c, 3); $('roKeySub').textContent = L(` = (1 − λ) × 出发时的 ${fix(c0, 3)}`, ` = (1 − λ) × ${fix(c0, 3)} at the start`);
       setRo(1, '锚点强度 λ', 'anchor strength λ', fix(lam, 3));
@@ -577,9 +622,9 @@
       $('pillKey').querySelector('strong').textContent = `S ${fix(ent, 3)}`;
     } else if (S.scene === 'record') {
       const z = m.rho[0][1], k = Math.min(4, Math.floor(clock.t + 1e-9)), c = overlap(), prod = cmul(z, [2, 0]);
-      setHud(L(`记录 · ρ₀₁ = ${fmtC(z, 2)}`, `Records · ρ₀₁ = ${fmtC(z, 2)}`), `ρ₀₁ = ${fmtC(z, 2)}`);
       const stepNow = clock.t <= 1e-9 ? 0 : Math.min(4, Math.ceil(clock.t - 1e-9));
-      setText('hudSub', `${L(...STEP_TEXT[stepNow])} · ${L(`每份记录的重叠 c = ${fmtC(c, 2)}`, `overlap of each record c = ${fmtC(c, 2)}`)}`);
+      setHud(L(`记录 · ρ₀₁ = ${fmtC(z, 2)}`, `Records · ρ₀₁ = ${fmtC(z, 2)}`), `ρ₀₁ = ${fmtC(z, 2)}`,
+        `${L(...STEP_TEXT[stepNow])} · ${L(`每份记录的重叠 c = ${fmtC(c, 2)}`, `overlap of each record c = ${fmtC(c, 2)}`)}`);
       $('roKeyL').textContent = L('非对角元 ρ₀₁', 'off-diagonal entry ρ₀₁');
       $('roKey').textContent = fmtC(z, 3); $('roKeySub').textContent = L(' 出发时 1/2', ' 1/2 at the start');
       setRo(1, '已完成的步数', 'steps done', `${k} / 4`);
@@ -595,8 +640,7 @@
       $('pillKey').querySelector('strong').textContent = fmtC(z, 2);
     } else {
       const s = clock.t, keep = m.rho[0][0][0], pf = 1 - keep, pAt = (l) => 1 - anchored(l, 'fine')[0][0][0];
-      setHud(L(`醒来 · 遗忘 ${fix(pf, 2)}`, `Waking · forgotten ${fix(pf, 2)}`), L(`遗忘 ${fix(pf, 2)}`, `forgotten ${fix(pf, 2)}`));
-      setText('hudSub', L(`读出 P₀ = |x₀⟩⟨x₀| · 进度 ${fix(100 * s, 0)}% · 梦中 λ = ${fix(S.lamDream, 2)}`, `readout P₀ = |x₀⟩⟨x₀| · ${fix(100 * s, 0)}% done · dream λ = ${fix(S.lamDream, 2)}`));
+      setHud(L(`醒来 · 遗忘 ${fix(pf, 2)}`, `Waking · forgotten ${fix(pf, 2)}`), L(`遗忘 ${fix(pf, 2)}`, `forgotten ${fix(pf, 2)}`), L(`读出 P₀ = |x₀⟩⟨x₀| · 进度 ${fix(100 * s, 0)}% · 梦中 λ = ${fix(S.lamDream, 2)}`, `readout P₀ = |x₀⟩⟨x₀| · ${fix(100 * s, 0)}% done · dream λ = ${fix(S.lamDream, 2)}`));
       $('roKeyL').textContent = L('遗忘的权重 1 − Tr(P₀ρ)', 'forgotten weight 1 − Tr(P₀ρ)');
       $('roKey').textContent = fix(pf, 3); $('roKeySub').textContent = L(' = 1 − |⟨x₀|Ψ⟩|²', ' = 1 − |⟨x₀|Ψ⟩|²');
       setRo(1, '读出进度', 'readout progress', `${fix(100 * s, 0)}%`);

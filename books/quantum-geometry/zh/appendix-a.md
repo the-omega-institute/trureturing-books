@@ -1,4 +1,4 @@
-# 附录 A：传统量子力学与几何语言对照词典
+# 附录 A 传统量子力学与几何语言对照词典 {#附录-a传统量子力学与几何语言对照词典}
 
 传统量子力学教材通常建立在抽象希尔伯特空间、厄米算符谱分解与复矩阵索引之上：初学者虽然能熟练推演狄拉克符号 $|\psi\rangle$ 与对易子 $[A, B]$，却往往难以看清每一行代数背后的空间方向、有向面积、球面曲率与拓扑障碍。本附录将全书十部曲三十九章、终章及[附录 D](appendix-d.md)涉及的**传统量子力学/数理逻辑术语**、**本书的几何直觉语言**、**Lean 4 形式化声明（`trureturing@dev` GID）**、**一行核心不变量**与**认识论状态（Epistemic Status）**汇入逐条对照词典，供读者随时检索。
 
@@ -8,7 +8,7 @@
 
 ---
 
-## 全书概念与形式化锚点总对照表 {#sec-appendix-a-master-table}
+## A.1 全书概念与形式化锚点总对照表 {#sec-appendix-a-master-table}
 
 ::: {.remark #rem-appendix-a-master-dictionary title="传统术语、几何直觉与形式化锚点总对照表（含文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化（针对词典中标有 `文献结果` 的外部文献子项；标有 `LEAN ✓` 并附有具体 GID 链接的条目已在本书形式化验证，标有 `OPEN` 的条目为尚未解决的开放猜想，标有 `MODEL` 的条目为几何诠释模型）。**
@@ -856,7 +856,7 @@ $\mathbf{M}_{\mathrm{cons}} = \sum_{j=1}^N w_j\,\mathbf{n}_j\mathbf{n}_j^{\maths
 
 ---
 
-## 十部曲核心符号与算子速查指南 {#sec-appendix-a-part-by-part}
+## A.2 十部曲核心符号与算子速查指南 {#sec-appendix-a-part-by-part}
 
 为了帮助读者在阅读具体章节时快速定位代数记号与 Lean 源码之间的映射，以下按部曲归纳最常出现的翻译法则：
 
@@ -879,7 +879,7 @@ $\mathbf{M}_{\mathrm{cons}} = \sum_{j=1}^N w_j\,\mathbf{n}_j\mathbf{n}_j^{\maths
 
 ---
 
-## 全书 76 条原始思想命题与主题综合总台账（A01–A76） {#sec-appendix-a-verbatim-ledger}
+## A.3 全书 76 条原始思想命题与主题综合总台账（A01–A76） {#sec-appendix-a-verbatim-ledger}
 
 ::: {.remark #rem-appendix-a-epistemic-boundary title="76 条原始思想命题总台账与对照词典的形式化边界声明"}
 **文献结果，未在本书形式化（针对下表综合栏中引述的外部文献结论；已验证形式定理与开放猜想的分界说明见表末）。** 下表完整收录了贯通全书序曲、三十九章正文、终章与[附录 D](appendix-d.md)的 **76 条核心原始命题（`A01`–`A76`）**，将每一句原始追问与直觉论断严格映射到对应的几何机制与章节锚点：

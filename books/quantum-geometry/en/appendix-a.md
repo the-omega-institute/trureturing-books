@@ -1,4 +1,4 @@
-# Appendix A: Dictionary of Conventional vs. Geometric Quantum Terms
+# Appendix A Dictionary of Conventional vs. Geometric Quantum Terms {#appendix-a-dictionary-of-conventional-vs-geometric-quantum-terms}
 
 Conventional quantum mechanics textbooks are written in the language of abstract Hilbert spaces, spectral decompositions of Hermitian operators, and complex matrix indices. While students quickly learn to manipulate Dirac ket notation $|\psi\rangle$ and commutators $[A, B]$, the underlying spatial directions, oriented bivector areas, spherical curvature defects, and topological obstructions often remain hidden behind algebraic formalism. This appendix provides a master translation dictionary across all ten parts (thirty-nine chapters), the Coda, and [Appendix D](appendix-d.md)—aligning **Conventional Physics / Mathematics Terms**, **Geometric Intuition Terms**, **Lean 4 Formal Objects / Locked `trureturing@dev` GIDs**, **One-Line Invariants**, and **Epistemic Status**.
 
@@ -8,7 +8,7 @@ Conventional quantum mechanics textbooks are written in the language of abstract
 
 ---
 
-## Master Translation Dictionary Across All Ten Parts, Coda, and Appendix D {#sec-appendix-a-master-table}
+## A.1 Master Translation Dictionary Across All Ten Parts, Coda, and Appendix D {#sec-appendix-a-master-table}
 
 ::: {.remark #rem-appendix-a-master-dictionary title="Master Dictionary of Conventional, Geometric, and Formal Terms (Including literature result, not formalized in this book)"}
 **Literature result, not formalized in this book (for sub-clauses tagged `Literature`; entries tagged `LEAN ✓` with clickable GID links are kernel-verified in this book, `OPEN` marks unresolved open conjectures, and `MODEL` marks interpretive geometric models).**
@@ -856,7 +856,7 @@ $\mathbf{M}_{\mathrm{cons}} = \sum_{j=1}^N w_j\,\mathbf{n}_j\mathbf{n}_j^{\maths
 
 ---
 
-## Ten-Part Geometric Translation Guide {#sec-appendix-a-part-by-part}
+## A.2 Ten-Part Geometric Translation Guide {#sec-appendix-a-part-by-part}
 
 To help readers translate quickly between standard textbook notation and the formal Lean 4 modules while reading individual chapters, we summarize the core translation rules part by part:
 
@@ -879,7 +879,7 @@ To help readers translate quickly between standard textbook notation and the for
 
 ---
 
-## Complete 76-Entry Verbatim Proposition and Thematic Synthesis Table (A01–A76) {#sec-appendix-a-verbatim-ledger}
+## A.3 Complete 76-Entry Verbatim Proposition and Thematic Synthesis Table (A01–A76) {#sec-appendix-a-verbatim-ledger}
 
 ::: {.remark #rem-appendix-a-epistemic-boundary title="Epistemic Boundary Declaration for the 76-Entry Verbatim Ledger and Appendix A"}
 **Literature result, not formalized in this book (for external literature results summarized in the synthesis column below; see the full three-tier epistemic boundary note at the bottom of this box).** The table below catalogs all **76 foundational authorial propositions (`A01`–`A76`)** spanning the Prelude, Chapters 1–39, the Coda, and [Appendix D](appendix-d.md), mapping each original insight to its exact geometric mechanism and chapter anchor:

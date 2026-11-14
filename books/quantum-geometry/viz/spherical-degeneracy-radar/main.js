@@ -491,12 +491,12 @@
   // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
   const FIGURE_NOTES = {
     "meridian": ["θ = 60°、φ = 90°：两态不同，但盲圈上的观察者两次都读出约 0.79。", "At θ = 60°, φ = 90°, the states differ but an observer on the blind circle reads about 0.79 for both."],
-    "sweep": ["φ 转动时盲圈绕极轴旋转，所有盲圈只交于 ±e₃，北极两路读数始终为 0.5。", "As φ turns, blind circles rotate about the polar axis and meet only at ±e₃; the North Pole always reads 0.5 twice."],
+    "sweep": ["φ 转动时盲圈绕极轴旋转，所有盲圈只交于 ±e₃，北极两路读数始终为 0.5。", "Blind circles rotate and meet only at ±e₃; the North Pole reads 0.5 both ways."],
     "tilted": ["观察者倾斜 45°：读数差约为 0.61 sin φ，φ = 90° 时两路约为 0.35 与 0.97。", "Tilt the observer 45°: the gap is about 0.61 sin φ; at φ = 90° the readings are about 0.35 and 0.97."],
     "hops": ["一步与两步同到 +e₃，随行旗却差 90°，差旋子为 D ≈ 0.71 − 0.71e₁e₂。", "One hop and two both reach +e₃, but their flags differ by 90°: D ≈ 0.71 − 0.71e₁e₂."],
     "equator": ["α = 60° 时，两种转动后的赤道只在 ±e₃ 相交，e₂ 观察者读出约 0.87 与 0。", "At α = 60°, the two rotated equators meet only at ±e₃; the e₂ observer reads about 0.87 and 0."],
-    "pullback": ["共同转动态与反向拉回观察者给出相同读数；ψ = 120° 时约为 0.61 与 −0.62。", "Turning both states agrees with pulling the observer back; at ψ = 120° both ways read about 0.61 and −0.62."],
-    "frames": ["转动初始标架，盲圈随之旋转；北极观察者始终在盲圈上，两路读数都是 0.5。", "Turn the initial frame: the blind circle turns with it; the North Pole stays on every circle and reads 0.5 twice."],
+    "pullback": ["共同转动态与反向拉回观察者给出相同读数；ψ = 120° 时约为 0.61 与 −0.62。", "Turn both states or pull the observer back: at ψ = 120°, both read ≈ 0.61, −0.62."],
+    "frames": ["转动初始标架，盲圈随之旋转；北极观察者始终在盲圈上，两路读数都是 0.5。", "Turn the frame: the blind circle turns; the North Pole stays on it and reads 0.5."],
   };
   const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：拖动琥珀色的观察者、换场景、拖时间轴或改转角。随时可以再选一张卡。', 'Free play: drag the amber observer, change the scene, scrub the rail or change the angles. Pick a card again at any time.'] });

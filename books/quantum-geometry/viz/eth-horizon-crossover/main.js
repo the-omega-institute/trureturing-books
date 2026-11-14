@@ -420,7 +420,7 @@
     "atoms": ["n = 2²⁶⁶ 时示意指数约 0.494，仍高于 PPSZ 的 0.386。", "At n = 2²⁶⁶, the schematic exponent is still 0.494, above PPSZ’s 0.386."],
     "cross": ["c = 1 时示意曲线直到 n ≈ 2⁵⁵⁸ 才与 0.386 相交。", "For c = 1, the schematic curve meets 0.386 only at n ≈ 2⁵⁵⁸."],
     "constant": ["c 减半，示意交叉点从 2⁵⁵⁸ 移至约 2⁵⁷；大 O 不决定这个常数。", "Halving c moves the schematic crossover from 2⁵⁵⁸ to about 2⁵⁷; big O does not fix c."],
-    "bridge": ["桥图锥域内最大秩等于最小割 6；单次抽样可更低，此定理不支持 3-SAT 算法主张。", "In the bridge-graph cone, maximum rank equals min-cut 6; samples may be lower, and this gives no 3-SAT algorithm."],
+    "bridge": ["桥图锥域内最大秩等于最小割 6；单次抽样可更低，此定理不支持 3-SAT 算法主张。", "Cone: max rank = min-cut 6; samples may be lower. No 3-SAT algorithm follows."],
     "narrow": ["外割为 5，三桥只容 3：5 × 5 流矩阵的秩至多为 3，这组维数在锥域外。", "Outer cuts are 5, but bridges carry only 3: the 5 × 5 flow matrix has rank at most 3, outside the cone."],
     "geometric": ["λⱼ = 2^−(j+1)、τ = 1/8：三根柱过线，总预算 1 给出柱数上界 8。", "For λⱼ = 2^−(j+1) and τ = 1/8, three bars clear the line; budget 1 bounds their count by 8."],
   };

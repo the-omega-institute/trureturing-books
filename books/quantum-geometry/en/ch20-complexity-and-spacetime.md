@@ -1,4 +1,4 @@
-# Gate Complexity as Volume: Black-Hole Interior Growth, Wormhole Bridges, and Computational Complexity Boundaries
+# Chapter 20 Gate Complexity as Volume: Black-Hole Interior Growth, Wormhole Bridges, and Computational Complexity Boundaries {#gate-complexity-as-volume-black-hole-interior-growth-wormhole-bridges-and-computational-complexity-boundaries}
 
 > *"P/NP depends on the initial structure; some initial structures can yield P=NP. Handling infinity is, at heart, factorization: finding how to “cancel” infinity by repeatedly building on known results about it. P/NP also concerns lookup algorithms, order, and the order of memory. Count everything in quantum gates. The central problem is a general method for proving a proposition."*
 
@@ -14,7 +14,7 @@ Before taking a single step, we state the epistemological status of the opening 
 **Figure 20.** The chapter at a glance. Panel I, toy schematic curves: the cyan $S(t) = \min(2t, 4)$ runs into the grey dashed level $4$ at $t = 2$ and goes flat, while the magenta $C(t) = 2t$ keeps climbing. Panel II, a two-qubit circuit: the first $\mathrm{CNOT}$ turns the label of wire 1 from cyan $z_1$ into the magenta even label $z_0 \oplus z_1$ (birth), $R_z$ puts its phase in there, and the second $\mathrm{CNOT}$ returns it to $z_1$ (return), $2$ $\mathrm{CNOT}$s in all; the green tag is the CNOT lower bound ([@prop-reflection-cnot-lower-bound]). Panel III: the cyan P sits inside NP, and the red question mark between them is the open $\mathrm{P}\neq\mathrm{NP}$ ([@conj-p-neq-np]).
 :::
 
-## Gate count, parallel depth, and growth models {#sec-circuit-depth-growth}
+## 20.1 Gate count, parallel depth, and growth models {#sec-circuit-depth-growth}
 
 Whenever we ask how "complex" a quantum circuit is, our first duty is to keep four distinct notions separate: **total gate count** (the total number of elementary gates in a circuit list), **parallel circuit depth** (the minimum number of time layers required when gates on disjoint sites execute simultaneously), **continuous Nielsen geodesic length** on the unitary group, and laboratory **physical time $t$**.
 
@@ -114,7 +114,7 @@ Remember that these combinatorial layer counts inside a specific integrable circ
 **Nine gates, three layers.** N = 8, S = {3, 6}: the cyan bricks light up layer by layer — KN, U5, U2 in layer 0, U7, U4, U1 in layer 1, K1, U3, U6 in layer 2 — and top out on the white line; the grey dashed line is the 4 layers the old formula predicts ([@ex-open-circuit-depths]).
 :::
 
-## Black-hole interiors and the complexity–volume conjecture {#sec-complexity-volume-conjecture}
+## 20.2 Black-hole interiors and the complexity–volume conjecture {#sec-complexity-volume-conjecture}
 
 Why is formal verification indispensable even for finite combinatorial circuit depths? Because small-parameter patterns can easily mislead intuition.
 
@@ -188,7 +188,7 @@ Scope and open boundaries: $V_{\mathrm{ren}}(\Sigma_t)$ is the **spatial volume 
 **Whether this rising line is a volume, nobody has proved.** The red mark covers the rising stretch of the magenta line: the entropy stopped long ago, and this line is still climbing. Reading that stretch as the volume of a slice through the black-hole interior is the complexity = volume conjecture ([@conj-complexity-equals-volume]); no volume is drawn on the stage.
 :::
 
-## Entanglement bridges and the scope of ER=EPR {#sec-er-epr-conjecture}
+## 20.3 Entanglement bridges and the scope of ER=EPR {#sec-er-epr-conjecture}
 
 While holographic conjectures motivate studying how many gates are needed to build highly entangled states, what can we prove rigorously about worst-case two-qubit gate counts in finite-dimensional circuit synthesis?
 
@@ -279,7 +279,7 @@ In entangled bipartite systems that admit a semiclassical gravitational descript
 Scope and open boundaries: This conjectural duality **does not imply** that an arbitrary pair of entangled laboratory qubits possesses a smooth classical spacetime wormhole, **does not permit** superluminal communication (respecting the quantum no-signaling principle), and requires additional direct coupling between the two boundaries to render a wormhole traversable. See J. Maldacena & L. Susskind, *Fortschr. Phys.* **61**, 781–811 (2013), DOI: `10.1002/prop.201300020`.
 :::
 
-## Computational models, resource bounds, and P≠NP {#sec-computational-complexity-boundary}
+## 20.4 Computational models, resource bounds, and P≠NP {#sec-computational-complexity-boundary}
 
 In this final section, we contrast exponential gate-synthesis bounds with linear graph traversals and standard Turing machine complexity classes.
 
@@ -347,7 +347,7 @@ $$
 Scope and open boundaries: Both a proof and a refutation remain open; the answer cannot be deduced from choices of quantum measurement basis, uncounted lookup-table preprocessing, physical gate-synthesis counts, or gravitational spacetime geometry. See S. A. Cook, *Proc. 3rd Annual ACM STOC*, pp. 151–158 (1971), DOI: `10.1145/800157.805047`.
 :::
 
-### From Spacetime Gate Counts to Timeless Causality and the Field–Line Divide {#sec-timeless-crystal-page-numbers}
+### 20.4.1 From Spacetime Gate Counts to Timeless Causality and the Field–Line Divide {#sec-timeless-crystal-page-numbers}
 
 At the close of Part V, the four Lean-verified results of this chapter — the closed-form minimum parallel depth $L = \lfloor N/(\kappa+1)\rfloor + 1$ of open-boundary integrable circuits ([@thm-open-circuit-min-depth]), the refutation of two literature depth formulas ([@lemma-open-circuit-depth-refutation]), the exponential $\mathrm{CNOT}$ lower bound $2^{2n-1} + 2n - 2$ for reflection-symmetric diagonal unitaries ([@prop-reflection-cnot-lower-bound]), and the even parity of closed walks on even cycles ([@cor-even-cycle-length]) — stand alongside the three open frontier conjectures ([@conj-complexity-equals-volume], [@conj-er-equals-epr], [@conj-p-neq-np]) to establish a clear geometric principle: under fixed gate sets and bounded interaction locality, any local observer who wishes to bridge an entanglement cut or synthesize a high-dimensional reflection-symmetric phase must pay an irreducible rotational price in parallel depth $L$ or two-qubit gate count.
 

@@ -372,6 +372,53 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
     check(`${what}: the apparatus fills its box, runs under no flat panel or words, and the grid stays ≥ 80 px`, clear(r) && lab >= 80, JSON.stringify([r, lab]));
     await pg.context().close();
   }
+  /* another machine's font metrics: on a phone the second line of the title runs right under the scene buttons, and
+     the theme (TRV.hudFit) moves the whole title block under the buttons as soon as any of its lines meets one. On the
+     CI runner it once did so after the page had laid the apparatus out under the block where it was, and the
+     apparatus ran under the second line. With the buttons 2 px taller than here the title keeps its row, its second
+     line keeps clear of the buttons, the apparatus starts under it and runs under no words, and the grid stays ≥ 80 px. */
+  for (const [what, q] of [['390 phone, scene buttons 2 px taller', '?lang=en&preset=unpin_body'], ['390 phone, records, scene buttons 2 px taller', '?lang=zh&preset=quantum_eraser']]) {
+    const pg = await T.open(BOOK, ID, q, { viewport: { width: 390, height: 844 } });
+    await pg.addStyleTag({ content: '#sceneChips .chip { padding-bottom: 6px; }' });
+    await pg.evaluate(() => window.dispatchEvent(new Event('resize')));
+    await settle(pg, 120);
+    const r = await clearOfPanels(pg);
+    const lay = await pg.evaluate(() => {
+      const st = document.getElementById('stage'), sr = st.getBoundingClientRect(), rg = document.createRange(), P = window.DREAM_DEBUG.panels;
+      rg.selectNodeContents(document.getElementById('hudSub'));
+      return { stacked: st.classList.contains('hud-stack'), subBottom: rg.getBoundingClientRect().bottom - sr.top, top: P.r3.y, grid: P.grid.size };
+    });
+    check(`${what}: the title keeps its row, the apparatus starts under its second line and runs under no flat panel or words, and the grid stays ≥ 80 px`,
+      clear(r) && !lay.stacked && lay.top >= lay.subBottom && lay.grid >= 80, JSON.stringify([r, lay]));
+    await pg.context().close();
+  }
+  /* the height of a phone's stage: its title block and its legend take as many lines as the language, the step and the
+     font metrics give them (on the CI runner the English legend of the record scene took two lines more than here, and
+     a stage of fixed height left the grid 74 px). In both languages, in the record scene at every step and in the anchor
+     scene, as here and with the second line and the legend set larger, the stage holds the title block, the apparatus
+     band (≥ 70 px), the panels and the legend one under the other: the apparatus starts under the title block and runs
+     under no panel or words, the panels end above the legend, and the grid stays ≥ 80 px. */
+  {
+    const LARGER = '.hud-tl .sub { font-size: 13.5px; line-height: 1.5; } #legend { font-size: 13px; line-height: 1.5; }';
+    for (const lang of ['en', 'zh']) for (const [card, css] of [['quantum_eraser', ''], ['quantum_eraser', LARGER], ['unpin_body', LARGER]]) {
+      const pg = await T.open(BOOK, ID, `?lang=${lang}&preset=${card}`, { viewport: { width: 390, height: 844 }, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+      if (css) { await pg.addStyleTag({ content: css }); await pg.evaluate(() => window.dispatchEvent(new Event('resize'))); }
+      await settle(pg, 120);
+      const bad = [];
+      for (const t of card === 'quantum_eraser' ? [0, 1, 2, 3, 4] : [null]) {
+        if (t != null) { await pg.evaluate((v) => window.DREAM_DEBUG.seek(v), t); await settle(pg); }
+        const r = await clearOfPanels(pg);
+        const lay = await pg.evaluate(() => {
+          const fb = document.getElementById('flat').getBoundingClientRect(), rg = document.createRange(), P = window.DREAM_DEBUG.panels;
+          rg.selectNodeContents(document.getElementById('hudSub'));
+          return { subBottom: rg.getBoundingClientRect().bottom - fb.top, top: P.r3.y, band: P.r3.h, end: P.region.y + P.region.h, legend: document.getElementById('legend').getBoundingClientRect().top - fb.top, grid: P.grid.size };
+        });
+        if (!(clear(r) && lay.top >= lay.subBottom && lay.band >= 70 && lay.end <= lay.legend + 0.5 && lay.grid >= 80)) bad.push(`${t == null ? 'start' : `step ${t}`}: ${JSON.stringify([r.under, +r.body.toFixed(2), lay])}`);
+      }
+      check(`390 phone, ${lang}, ${card}${css ? ', second line and legend set larger' : ''}: title block, apparatus band ≥ 70 px, panels and legend one under the other, nothing under the words, and the grid stays ≥ 80 px`, !bad.length, bad.join(' | '));
+      await pg.context().close();
+    }
+  }
 
   /* marks on both faces of the plate: the plate hides one face's beads, whichever way the camera turns */
   await pick('waking'); await seek(0);

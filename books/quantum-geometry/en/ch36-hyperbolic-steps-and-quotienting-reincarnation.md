@@ -1,4 +1,4 @@
-# Infinite Discrete Steps and Quotienting Out Reincarnation: How the Hyperbolic Horizon Staircase Ends the Return-to-Light Loop
+# Chapter 36 Infinite Discrete Steps and Quotienting Out Reincarnation: How the Hyperbolic Horizon Staircase Ends the Return-to-Light Loop {#infinite-discrete-steps-and-quotienting-out-reincarnation-how-the-hyperbolic-horizon-staircase-ends-the-return-to-light-loop}
 
 > *"Yet in theory returning to light can be turned into infinitely many discrete steps—that is, preventing the state of returning to light, because returning to light is itself undergoing reincarnation; and once we understand all of this, reincarnation loses all meaning."*
 
@@ -26,7 +26,7 @@ Within our geometric observer model (`MODEL`), the instant a bounded observer sl
 
 ---
 
-## Why "Returning to Pure Light" Is Reincarnation: The $\cos 90^\circ = 0$ Amnesia Cliff
+## 36.1 Why "Returning to Pure Light" Is Reincarnation: The $\cos 90^\circ = 0$ Amnesia Cliff {#why-returning-to-pure-light-is-reincarnation-the-cos900-amnesia-cliff}
 
 Continue with the preceding chapter's model: memory is read through a chosen axial bias, and erasure means complete unread standard-basis pinching with inaccessible environment records. Picture a bounded observer rotating through inclination $\theta$ while recording pairwise comparison invariants into its self-referential lookup table $T$. Its ability to recognize its own identity from one step to the next—and to read the structural invariants distilled by prior experience—depends entirely on retaining a nonzero projection $\cos\theta > 0$ along its one-dimensional idempotent line ([Chapter 3](ch03-projectors-and-duality.md), $P^2 = P$). What happens if, seduced by unbounded wave expansion, it steps straight onto the equatorial cliff at $\theta = 90^\circ$?
 
@@ -103,7 +103,7 @@ Set $D := \rho - \operatorname{pinching}(\rho)$. For Conjunct 1, idempotence $\o
 
 ---
 
-## Blocking Return to Light by Infinite Discrete Steps: Intrinsic Hyperbolic Rapidity and the Asymptotic Staircase
+## 36.2 Blocking Return to Light by Infinite Discrete Steps: Intrinsic Hyperbolic Rapidity and the Asymptotic Staircase {#blocking-return-to-light-by-infinite-discrete-steps-intrinsic-hyperbolic-rapidity-and-the-asymptotic-staircase}
 
 How, then, can the first half of our chapter epigraph—*"returning to light can be turned into infinitely many discrete steps, preventing the state of returning to light"*—be realized with mathematical precision?
 
@@ -221,7 +221,7 @@ The staircase of this section starts at the same $\theta^*$ that the mutual refe
 
 ---
 
-## Understanding as Liberation: Quotienting Out Reincarnation in Generator Space
+## 36.3 Understanding as Liberation: Quotienting Out Reincarnation in Generator Space {#understanding-as-liberation-quotienting-out-reincarnation-in-generator-space}
 
 Yet even the infinite hyperbolic staircase is only half of the liberation promised by our epigraph. Read its closing clause once more:
 
@@ -352,7 +352,7 @@ We synthesize these three existential and geometric regimes within our interpret
 
 ---
 
-## p-adic Zero-Carry Lookup Trees, Prime Observer Expansion, and Blocking Reincarnation {#sec-ch36-padic-prime-table-expansion}
+## 36.4 p-adic Zero-Carry Lookup Trees, Prime Observer Expansion, and Blocking Reincarnation {#sec-ch36-padic-prime-table-expansion}
 
 The preceding sections answered the "return-to-light loop" on the **hyperbolic angular side**: the inverse Gudermannian rapidity staircase $\eta_k = \eta_0 + k\,\Delta\eta$ pushes the $\theta = 90^\circ$ pure-light cliff to $\eta = +\infty$, keeping the unclosed polyhedral seam $\delta_k = \frac{\pi}{2} - \theta_k > 0$ open forever. Yet returning to the computational insight of [Chapter 35](ch35-light-pulse-and-self-referential-table.md)—that biological and cognitive growth is in essence **table expansion**—raises an immediate arithmetic question: **in purely discrete addressing and number theory, what is the concrete data structure of this expanding lookup table $T$? Why does ordinary real addition threaten local memory through cascading carries, and what arithmetic structure enables endless collision-free table expansion without ever triggering an amnesiac reset?**
 

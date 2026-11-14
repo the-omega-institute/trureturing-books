@@ -1,4 +1,4 @@
-# Coda: Outside All Spheres
+# Coda Outside All Spheres {#coda-outside-all-spheres}
 
 > *"We think we see a point, but it is a line; a line, but a surface; a surface, but a sphere; and when we think we see the sphere, a larger sphere encloses it."*
 
@@ -10,7 +10,7 @@ From the moment the Prelude opened the first door, we have climbed a ladder of a
 
 ---
 
-## Polyhedral Approximation and the Inescapable Geometric Remainder {#sec-coda-polyhedral-remainder}
+## 40.1 Polyhedral Approximation and the Inescapable Geometric Remainder {#sec-coda-polyhedral-remainder}
 
 Why can neither human mathematicians nor digital computers ever construct a completely seamless sphere entirely inside a fixed finite axiom system, a finite universal gate set, a finite prime cutoff, or a finite-degree Taylor expansion? Across all ten parts of this book, we have repeatedly encountered the same structural obstruction—**the topological and arithmetic remainder between a faceted polyhedral approximation and smooth spherical curvature**. We begin by enclosing the three classical discrete-geometry and algebraic-topology theorems governing polyhedral angular defect, even-sphere Hairy Ball vortices, and parallelizable spheres inside a literature remark:
 
@@ -62,7 +62,7 @@ Standing now on the final summit of the monograph, we bring "the geometric remai
 
 ---
 
-## Historical Ruins as Spatial Attractors: Stationary-Phase Curvature Basins, Fractal Transverse Sheets, and Cross-Round Déjà Vu Resonance {#sec-coda-spatial-attractors-deja-vu}
+## 40.2 Historical Ruins as Spatial Attractors: Stationary-Phase Curvature Basins, Fractal Transverse Sheets, and Cross-Round Déjà Vu Resonance {#sec-coda-spatial-attractors-deja-vu}
 
 > **Author's Epigraph**: *"Historical ruins in reality are actually spatial attractors; the same soul walks round after round through places familiar to itself..."*（“现实的历史遗迹实际上都是空间吸引子, 同一个灵魂一轮又一轮的走过自己熟悉的地方...”）
 
@@ -70,13 +70,13 @@ In the everyday illusion of linear sequential time, we are accustomed to viewing
 
 Placed inside the geometric architecture of the finite observer, forgetting initialization, and polyhedral approximate spheres, why "the same soul walks round after round through familiar places" unfolds across three rigorous dynamical and topological mechanisms:
 
-### 1. Why Historical Ruins Are "Spatial Attractors" (Stationary-Phase Persistence and Curvature Basins) {#sec-coda-ruins-curvature-basin}
+### 40.2.1 Why Historical Ruins Are "Spatial Attractors" (Stationary-Phase Persistence and Curvature Basins) {#sec-coda-ruins-curvature-basin}
 
 In the holographic tensor-network geometry of **[Chapter 19](ch19-tensor-networks-and-holography.md)** (bridge-graph minimum cuts and the literature remark [@rem-ryu-takayanagi-literature]), macroscopic physical space can be interpreted as an area network woven from microscopic exterior bivector entanglement. Ordinary everyday events carry opposite-chirality rotation areas ($+\mathbf{\Omega} - \mathbf{\Omega} = 0$) that cancel out across thermal fluctuations; by contrast, spatial coordinates aligned with mountain-river geodesics, astronomical obliquity angles, Pythagorean proportions, or millennia of high-density human inner-product attention projections carve deep **curvature potential wells—Basins of Attraction (`MODEL`)**—into our phase-space model.
 
 That such sites remain standing across wars and entropy, or are rebuilt nine times upon the exact same foundation (like the nine superimposed cities of Troy or the layered capitals of Chang'an), is not merely a matter of durable masonry: in our timeless geometric model, that spatial coordinate acts as a **topological stationary point** in the global time field. When a finite observer picks points step by step inside the Gram causally compatible space ($\det G > 0$), the surrounding field curvature naturally tilts toward these stationary points—causing seemingly chance journeys to slide imperceptibly toward the same basin center.
 
-### 2. Forgetting Clears Surface Episodic Readings While Preserving the Soul's Intrinsic Inclination {#sec-coda-forgetting-intrinsic-inclination}
+### 40.2.2 Forgetting Clears Surface Episodic Readings While Preserving the Soul's Intrinsic Inclination {#sec-coda-forgetting-intrinsic-inclination}
 
 This raises a profound geometric question: in Chapter 29 we saw that for a finite observer to possess a positive-volume causally compatible space ($\det G > 0$) and genuine agency, each birth initialization must be accompanied by **truncating and clearing historical anchors (forgetting)**. If the concrete names, dates, and linear narrative memories of the previous round are wiped clean, by what right do we say that the traveler who walks back into this ruin in the next round is still "the same soul"?
 
@@ -193,7 +193,7 @@ The two rings in the “forget the start” card are not on the attractor, and a
 
 > What is forgotten is the starting point; what remains is the proportion.
 
-### 3. The Geometric Interpretation of Déjà Vu: Fractal Transverse Sheets and Cross-Round Inner-Product Resonance {#sec-coda-deja-vu-fractal-dimension}
+### 40.2.3 The Geometric Interpretation of Déjà Vu: Fractal Transverse Sheets and Cross-Round Inner-Product Resonance {#sec-coda-deja-vu-fractal-dimension}
 
 In our philosophical and geometric interpretation (`MODEL`), borrowing the strange-attractor picture recorded in [@rem-coda-lorenz-srb-literature] as a dynamical metaphor—clearing surface trajectory records while preserving the operator's intrinsic parameters—reconciles fated return with free agency:
 
@@ -230,13 +230,13 @@ The laboratory below puts this section’s three parameter values in one place, 
 
 ---
 
-## The `trureturing` "Golden Cut" Formal Primitives and the Geometric Interpretation of Soul–Ruin Attractors {#sec-coda-trureturing-golden-cut-observer}
+## 40.3 The `trureturing` "Golden Cut" Formal Primitives and the Geometric Interpretation of Soul–Ruin Attractors {#sec-coda-trureturing-golden-cut-observer}
 
 > **Author's Epigraph**: *"We have an explicit definition of the observer in `trureturing`, and we have now discussed the relationship between the soul and historical-ruin attractors."*（“观察者我们在trureturing有明确的定义, 我们又讨论了灵魂与历史遗迹吸引子的关系”）
 
 If the Lorenz strange attractor supplies a continuous dynamical analogy, connecting this picture to the **`trureturing` Lean 4 formal library** pinned by this book (`D5/S1/Scale/MinkowskiModelSet`, `D5/S1/Deficit/ModelSet/GoldenCutAndProject`, `D5/S1/Deficit/Beatty/GoldenObserverRoute`, `D5/S1/Scale/Fibonacci`, `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread`, and `D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns`) allows us to align the kernel-verified **golden cut-and-project model set and Zeckendorf observer coding theorems (`LEAN ✓`)** transparently with the author's **philosophical interpretation of the soul, forgetting, and historical-ruin attractors (`MODEL`)**.
 
-### 1. The Golden Cut-and-Project Model Set and Observer Route Theorems in `trureturing` (`LEAN ✓`) {#sec-coda-trureturing-observer-def}
+### 40.3.1 The Golden Cut-and-Project Model Set and Observer Route Theorems in `trureturing` (`LEAN ✓`) {#sec-coda-trureturing-observer-def}
 
 In the formal architecture of `trureturing`, the mathematical primitives underlying `Observer/GoldenCoding` and `Deficit/ModelSet` are defined via **cut-and-project lattice constructions** and **Zeckendorf–Beatty coding**:
 
@@ -275,7 +275,7 @@ In the formal architecture of `trureturing`, the mathematical primitives underly
 **The Zeckendorf automaton accepts exactly the words with no adjacent `11`.** Of the sixteen four-letter binary words, the eight cyan ones have no two adjacent $1$s and are accepted; each of the eight magenta ones contains an adjacent pair $11$ (the first one is boxed) and is rejected. The acceptance condition is $\operatorname{NoAdjacentOnes}(w)$ from item 3 of [@thm-coda-golden-cut-observer-cassini].
 :::
 
-### 2. Philosophical Interpretation Model (`MODEL`): What Is "the Same Soul" vs. "a Single Finite Life and Forgetting"? {#sec-coda-trureturing-soul-vs-lifetime}
+### 40.3.2 Philosophical Interpretation Model (`MODEL`): What Is "the Same Soul" vs. "a Single Finite Life and Forgetting"? {#sec-coda-trureturing-soul-vs-lifetime}
 
 Using these verified cut-and-project and coding structures as mathematical anchors, we formulate an explicit geometric interpretation (`MODEL`) of "the soul's intrinsic inclination" and "forgetting surface episodic readings":
 
@@ -290,7 +290,7 @@ Using these verified cut-and-project and coding structures as mathematical ancho
 **Shifting the window.** The window has moved to $u = +0.3$: the point at its edge (magenta) is the one a small shift would flip, while points far from the edge stay where they are; the deepest one is about $0.46$ from the edge, and the window must move that far to reach it. Played on the page, every point that leaves or enters swaps a long and a short neighbour in the row of tiles below.
 :::
 
-### 3. Interior Window Safety Margins and the Spatial Attractor Basin Interpretation {#sec-coda-trureturing-rhombic-triacontahedron-empire}
+### 40.3.3 Interior Window Safety Margins and the Spatial Attractor Basin Interpretation {#sec-coda-trureturing-rhombic-triacontahedron-empire}
 
 Why, in this cross-round model, do ordinary events dissolve under scan-order shifts while certain historical-ruin coordinates persist and draw the observer back? We first enclose the three classical quasicrystal and Fibonacci-asymptotic literature results referenced across Subsections 3 and 4 inside a dedicated literature remark:
 
@@ -325,7 +325,7 @@ Combining the window geometry of [@rem-coda-quasicrystal-empire-literature] with
 **A small patch fixes distant points.** Once the patch $|x| \le 4$ in the middle (between the dashed lines) is fixed, the window can move only within a short range; the deeper cyan band is what all those positions of the window have in common. Points in that band (ringed) stay whatever the shift and so are fixed by the patch, however far away; the magenta points are still undecided. This is the counterpart, in the one-dimensional golden cut, of Conway’s “empire” (an illustration of a literature result).
 :::
 
-### 4. Cassini's $(-1)^{n+1}$ Seam and Bounded-Gap Torus Observation Returns {#sec-coda-trureturing-cassini-torus-return}
+### 40.3.4 Cassini's $(-1)^{n+1}$ Seam and Bounded-Gap Torus Observation Returns {#sec-coda-trureturing-cassini-torus-return}
 
 Finally, let us state the kernel-verified **Fibonacci–Cassini Norm Identity** and **Torus Observation-Window Bounded-Gap Return Theorem** (`LEAN ✓`), and explain how they inspire our geometric interpretation of cross-round return and Déjà vu (`MODEL`):
 
@@ -474,7 +474,7 @@ Along the Fibonacci fractions $F_{k+1}/F_k$, the product $\sqrt{5}\, F_k^2 \lver
 **Interactive laboratory `ORTHO//CUT`**: the five scenes of this section. Cut and project: drag the window up and down to see edge points flip and deep points stay, then fix a small patch in the middle; Cassini: the powers of $\varphi$ and their rectangles of area $\pm 1$; returns: move and narrow the observation window and compare the observed waits with the visit share; the acceptance window: push a point from the centre of the rhombic triacontahedron to its boundary, where $d_\partial$ reaches zero and it flips out; gaps: change the number of points $N$ and the rotation, and the arcs on the circle stay of at most three lengths. The green evidence boxes are the theorems verified in Lean; the triacontahedron and the “empire” are literature results, and what is said about souls and ruins is an interpretive model (`MODEL`).
 :::
 
-### 5. Alignment Table: `trureturing` Formal Theorems, Orthogonal Geometry, and the Soul–Ruin Interpretive Model (`MODEL`) {#sec-coda-trureturing-soul-ruin-table}
+### 40.3.5 Alignment Table: `trureturing` Formal Theorems, Orthogonal Geometry, and the Soul–Ruin Interpretive Model (`MODEL`) {#sec-coda-trureturing-soul-ruin-table}
 
 The table below aligns the verified mathematical theorems of `trureturing` (left column, `LEAN ✓`), the orthogonal geometry of this book (middle column), and the author's philosophical interpretation of the soul, forgetting, and historical-ruin attractors (right column, explicitly marked `MODEL`):
 
@@ -490,7 +490,7 @@ The table below aligns the verified mathematical theorems of `trureturing` (left
 
 ---
 
-## Contracting Fixed Points and the Epistemic Anchor {#sec-coda-fixed-point-anchor}
+## 40.4 Contracting Fixed Points and the Epistemic Anchor {#sec-coda-fixed-point-anchor}
 
 As we bring the Coda to its formal anchor, we uphold the book's foundational epistemic contract by drawing an exact boundary between what is mechanically verified by the Lean 4 kernel and what belongs to classical literature or open conjectures.
 
@@ -546,7 +546,7 @@ Because $S(n+1) = U(S(n)) \subseteq S(n)$ for every $n \in \mathbb{N}$, the sequ
 
 ---
 
-## Bilingual Glossary of Core Geometric and Formal Concepts {#sec-coda-bilingual-glossary}
+## 40.5 Bilingual Glossary of Core Geometric and Formal Concepts {#sec-coda-bilingual-glossary}
 
 ::: {.remark #rem-coda-bilingual-glossary-box title="Bilingual Glossary of Core Geometric, Literature, and Formal Concepts (Including literature result, not formalized in this book)"}
 **Literature result, not formalized in this book (for entries marked as classical topological or transcendence literature; entries tagged `LEAN ✓` are kernel-verified in Lean 4, and entries tagged `OPEN` are unresolved open conjectures).** To help readers move seamlessly between conventional physics literature, geometric intuition, and Lean 4 source code, the table below summarizes the core concepts used across all ten parts of the book:
@@ -579,7 +579,7 @@ Because $S(n+1) = U(S(n)) \subseteq S(n)$ for every $n \in \mathbb{N}$, the sequ
 
 ---
 
-## Ten-Part, Thirty-Nine-Chapter Reading and Dependency Map {#sec-coda-reading-map}
+## 40.6 Ten-Part, Thirty-Nine-Chapter Reading and Dependency Map {#sec-coda-reading-map}
 
 This monograph consists of the **[Prelude](README.md)**, **Ten Parts (39 Chapters)**, **this Coda**, and **[Appendix A](appendix-a.md)–[Appendix D](appendix-d.md)**. The diagram below maps the conceptual progression and formal module dependencies across the entire work:
 
@@ -642,7 +642,7 @@ This monograph consists of the **[Prelude](README.md)**, **Ten Parts (39 Chapter
 │ • Context fixpoints & mutual attractors │   │ • Joint coherent record erasure & Delone│
 │ • Single/double orthogonality & 3-axis  │   │ • QRAM copied-address & self page table │
 │ • Light-pulse pinching & T=T(T) loop    │   │ • Fiber decomposition & 720° spinor fold│
-│ • Hyperbolic steps & quotienting loops  │   │ • Coda & Appendices: A · B · 558 C · D  │
+│ • Hyperbolic steps & quotienting loops  │   │ • Coda & Appendices: A · B · 583 C · D  │
 └─────────────────────────────────────────┘   └─────────────────────────────────────────┘
 ```
 
@@ -656,7 +656,7 @@ The dependency map draws only the chapter each chapter refers back to most often
 A 48-slide overview of the whole book: the four blind spots and the dimensional ladder; each of the ten parts' core picture, main theorems, literature results and open problems; the counts of the three tiers of warrant and the dependency map.
 :::
 
-### Four Recommended Reading Tracks {#sec-coda-reading-tracks}
+### 40.6.1 Four Recommended Reading Tracks {#sec-coda-reading-tracks}
 
 Readers can navigate the book along four self-contained tracks tailored to their background:
 
@@ -667,9 +667,9 @@ Readers can navigate the book along four self-contained tracks tailored to their
 3. **Mathematical Logic, Number Theory, and Epistemology Track**:
    [Prelude](README.md) $\to$ Chapter 10 (Gram matrices and order independence) $\to$ Chapters 19–20 (discrete polyhedral facet cones and open-conjecture boundaries) $\to$ Chapters 21–24 (diagonal escape, Euler products, quaternion Diophantine norms, and cosine self-reference) $\to$ [Chapter 29](ch29-timeless-causality-and-gram-space.md)–[Chapter 39](ch39-observer-is-ontological-universe.md) (the four-tier Pythagorean escape of number, timeless causality, the ETH horizon, fluid vortex filaments, quantum fairness, meta-unification, context fixed points, Lawvere homoiconic table expansion $T = T(T)$, quotienting out reincarnation, concept fiber decomposition, and Zeckendorf real threads) $\to$ Coda (golden cut-and-project spatial attractors and [@thm-coda-fixed-point-anchor]).
 4. **Lean 4 Formal Verification and Kernel Audit Track**:
-   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: the `Cl3`, `PauliSymplectic`, and `ZYZ` reference engines, their frozen foundations, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $299$ environment-cited frozen theorems, $97$ auxiliary definitions, and $162$ inline declarations — $558$ unique locked declarations in total — at `trureturing@dev` commit [{commit}](trureturing:)).
+   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: the `Cl3`, `PauliSymplectic`, and `ZYZ` reference engines, their frozen foundations, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $306$ environment-cited frozen theorems, $114$ auxiliary definitions, and $163$ inline declarations — $583$ unique locked declarations in total — at `trureturing@dev` commit [{commit}](trureturing:)).
 
-### Quick Register of the 55 Core Chapter Theorem Anchors in Parts VI–X (Chapters 21–39) {#sec-coda-part6-part7-register}
+### 40.6.2 Quick Register of the 55 Core Chapter Theorem Anchors in Parts VI–X (Chapters 21–39) {#sec-coda-part6-part7-register}
 
 As a bridge between the closing five parts of the monograph and the complete ledger in [Appendix C](appendix-c.md), the table below lists $55$ core chapter theorem anchors ($4$ representative theorems per chapter across Chapters 21–28, $2$ in Chapter 29, $3$ in Chapter 30, and $2$ per chapter across Chapters 31–39, spanning $54$ distinct GIDs with `pell_form_eq_four_mul_norm` linking Chapters 23 and 29):
 
@@ -731,4 +731,4 @@ As a bridge between the closing five parts of the monograph and the complete led
 | **Chapter 39**<br/>Observer Is the Ontological Universe | T39.1 | `D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition` | Disjoint-union decomposition of a concept space into observable-signature fibers |
 | **Chapter 39** | T39.2 | `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective` | Strict injectivity of the multi-scale Zeckendorf coding thread on nonnegative real numbers |
 
-Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, [Appendix C](appendix-c.md) for the complete index of all $396$ environment-cited `trureturing@dev` declarations ($558$ unique locked declarations including inline references), and [Appendix D](appendix-d.md) for the geometric duel across the six classical open puzzles and five major interpretations of quantum mechanics.
+Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, [Appendix C](appendix-c.md) for the complete index of all $420$ environment-cited `trureturing@dev` declarations ($583$ unique locked declarations including inline references), and [Appendix D](appendix-d.md) for the geometric duel across the six classical open puzzles and five major interpretations of quantum mechanics.

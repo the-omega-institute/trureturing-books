@@ -21,7 +21,8 @@
   :root[data-embed][data-figure] .app.lab > footer.rail .tau { font-size: 15px; }
 }
 
-/* The apparatus and its matrix stack vertically in the full phone laboratory. */
+/* The apparatus and its matrix stack vertically in the full phone laboratory: the stage is at least 520 px or 84vh,
+   and never shorter than the height main.js measures and asks for through kit.plot (title block, band, panels, legend). */
 @media (max-width: 520px) {
-  :root:not([data-embed]) .lab .center { grid-template-rows: minmax(520px, 84vh) auto auto; }
+  :root:not([data-embed]) .lab .center { grid-template-rows: minmax(min-content, max(520px, 84vh)) auto auto; }
 }

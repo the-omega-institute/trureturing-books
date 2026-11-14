@@ -1,4 +1,4 @@
-# Orthogonal Self-Referential Unified Field and Meta-Unification of Grand Foundational Programs
+# Chapter 32 Orthogonal Self-Referential Unified Field and Meta-Unification of Grand Foundational Programs {#orthogonal-self-referential-unified-field-and-meta-unification-of-grand-foundational-programs}
 
 > *"It seems we can construct a complete unified field theory... We can unify all related theories that have ever sought unification. At the moment the last bracket separating operator from state is shattered and ten thousand streams converge into $\psi = \psi(\psi)$, all the blind seekers finally behold the entire universe in one and the same beam of light."*
 

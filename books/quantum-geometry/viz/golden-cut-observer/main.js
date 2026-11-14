@@ -682,12 +682,15 @@
   }
   // Cited figures use a single sentence; the full laboratory keeps the detailed card notes.
   const FIGURE_NOTES = {
-    "cut": ["黄金格点经长度 1 的闭窗筛选：投影通常间隔 φ 或 φ²，双端点入窗另生一段 1。", "A closed window of length 1 selects golden lattice points: gaps are φ or φ², with one extra gap 1 from both endpoints."],
+    "cut": ["黄金格点经长度 1 的闭窗筛选：投影通常间隔 φ 或 φ²，双端点入窗另生一段 1。", "Closed window of length 1: gaps φ or φ²; both endpoints add one gap of length 1."],
     "empire": ["固定 |x| ≤ 4 的小片会限制窗口移动，连远方始终留在窗内的点也随之固定。", "Fixing the patch |x| ≤ 4 restricts the window; even distant points that stay inside throughout are fixed."],
     "cassini": ["φ 的幂交替贴近横轴，长方形面积始终为 |FₖFₖ₊₂ − Fₖ₊₁²| = 1。", "Powers of φ approach the axis alternately; each rectangle has area |FₖFₖ₊₂ − Fₖ₊₁²| = 1."],
-    "returns": ["黄金角轨道反复进入 (0.2, 0.8)；品红括号仅标出已画步骤中的最长回归间隔。", "The golden-angle orbit revisits (0.2, 0.8); the magenta bracket is the longest gap among the drawn steps only."],
+    "returns": ["黄金角轨道反复进入 (0.2, 0.8)；品红括号仅标出已画步骤中的最长回归间隔。", "Orbit revisits (0.2, 0.8); magenta marks the longest gap in the drawn steps only."],
     "narrow": ["窄窗 (0.45, 0.55) 使回归更稀；图中 233 步的最长间隔不是定理所保证的 M。", "The narrow window (0.45, 0.55) makes visits rarer; the sample’s longest gap is not the theorem’s M."],
-    "window": ["菱形三十面体内，点到边界的距离 d∂ 是可容扰动的半径；靠边时半径缩小。", "Inside the rhombic triacontahedron, distance d∂ to the boundary is the disturbance radius; it shrinks near an edge."],
+    "window": ["菱形三十面体内，点到边界的距离 d∂ 是可容扰动的半径；靠边时半径缩小。", "Rhombic triacontahedron: boundary distance d∂ is the disturbance radius."],
+    "phason": ["移动窗口：品红边界点进出，相邻长短砖对调；内部点不动。", "Edge points enter or leave; long and short tiles swap, while inner points stay."],
+    "gaps": ["黄金角前 13 点：5 段青色短弧、8 段品红长弧，弧长只有两种。", "13 golden-angle points: 5 short cyan arcs and 8 long magenta arcs, two lengths."],
+    "pi": ["π − 3、N = 114：圈内短弧约 3×10⁻⁵，最长弧约为它的 294 倍。", "π − 3, N = 114: ringed arc ≈ 3×10⁻⁵; longest/shortest ≈ 294."],
   };
   const cards = kit.cards($('presets'), { presets: PRESETS, notes: TRV.figure ? { ...NOTES, ...FIGURE_NOTES } : NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：上下拖动窗口，拖时间轴，换场景，固定一小片，或改观测窗。随时可以再选一张卡。', 'Free play: drag the window up and down, scrub the rail, change the scene, fix a patch or change the observation window. Pick a card again at any time.'] });
