@@ -3,7 +3,7 @@
 本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，Lean 验证、书面证明与开放问题分别声明证据。下列 C.1–C.3 逐条核对 `trureturing.lock.json` 中的冻结声明（所钉 `trureturing@dev` 提交为 [{commit}](trureturing:)），C.4 另列开放问题与选定文献边界：
 
 1. **C.1 冻结定理总索引（318 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
-2. **C.2 形式化定义与代数载体总索引（114 项唯一声明：104 项 `def` + 10 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.3 行内辅助定理与定义索引（172 项声明：119 项 `theorem` + 53 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **604 项唯一声明**（$318 + 114 + 172 = 604$）。媒体引用在各行末尾另列，不改变上述分区。
+2. **C.2 形式化定义与代数载体总索引（114 项唯一声明：104 项 `def` + 10 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.3 行内辅助定理与定义索引（176 项声明：123 项 `theorem` + 53 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **608 项唯一声明**（$318 + 114 + 176 = 608$）。媒体引用在各行末尾另列，不改变上述分区。
 3. **C.4 开放问题与未形式化前沿边界台账**：9 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
 
 第 7.3 节的 [@prob-monitored-spectral-mean] 已证明有限维酉监测纯态的四项结论：占据谱有限，其基数等于循环空间维数，加权首次返回概率之和等于该基数，总返回概率为一。同节的 [@rem-monitored-unital-kac] 还证明任意有限维复内积空间上、保实际相关空间恒等算子的 CPTP 通道的占据算子和、返回概率非负性、总概率一与均值等于相关维数。两者列入 C.1；一般量子仪器、无限维与物理时钟仍在这两条定理的范围之外。
@@ -11,7 +11,7 @@
 第 16.3 节的 [@thm-central-defect-endpoint-average] 及其 [书面证明](ch16-qsvt-walks-and-compilation.md#pf-central-defect-endpoint-average) 不属于冻结声明，也不是开放问题。其 DOI、原文定位与[形式化请求 #10](https://github.com/the-omega-institute/trureturing-requests/issues/10) 随正文及自动生成的书面证明账本单列；不增加上述锁定声明、绿色图表或 C.4 的条数。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**604 格，一格一条锁定声明。** 时间轴从序曲读到附录 E（附录 C 本身不作落点），每条声明落在最先引用它的单元：437 格是定理，167 格是定义或归纳类型；432 个实心格被环境头以 `lean=` 引用，172 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
+**608 格，一格一条锁定声明。** 时间轴从序曲读到附录 E（附录 C 本身不作落点），每条声明落在最先引用它的单元：441 格是定理，167 格是定义或归纳类型；432 个实心格被环境头以 `lean=` 引用，176 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
 :::
 
 ---
@@ -476,9 +476,9 @@
 
 ---
 
-## C.3 行内引用的辅助定理与定义索引（172 项唯一声明） {#sec-appendix-c-inline}
+## C.3 行内引用的辅助定理与定义索引（176 项唯一声明） {#sec-appendix-c-inline}
 
-除 C.1 与 C.2 的 432 项环境引用声明外，另有 **172 项声明（119 项定理、53 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **604 项唯一声明**（$318 + 114 + 172 = 604$）。
+除 C.1 与 C.2 的 432 项环境引用声明外，另有 **176 项声明（123 项定理、53 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **608 项唯一声明**（$318 + 114 + 176 = 608$）。
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -605,6 +605,7 @@
 | `R117` | [`D5.S3.Quantum.Divergence.DualAccountFull.entropy_freedom_segment`](lean:D5/S3/Quantum/Divergence/DualAccountFull.entropy_freedom_segment) | [{source}](lean:D5/S3/Quantum/Divergence/DualAccountFull.entropy_freedom_segment) | `theorem` | Ch 8 |
 | `R165` | [`D5.S3.Quantum.Divergence.GibbsVariationalIdentity.gibbs_state_posDef`](lean:D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_state_posDef) | [{source}](lean:D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_state_posDef) | `theorem` | Ch 8 |
 | `R166` | [`D5.S3.Quantum.Divergence.GibbsVariationalIdentity.gibbs_variational_identity`](lean:D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_variational_identity) | [{source}](lean:D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_variational_identity) | `theorem` | Ch 8 |
+| `R173` | [`D5.S3.Quantum.Divergence.SpectralCeilingRelativeEntropy.actual_matrix_spectral_ceiling_strong_klein`](lean:D5/S3/Quantum/Divergence/SpectralCeilingRelativeEntropy.actual_matrix_spectral_ceiling_strong_klein) | [{source}](lean:D5/S3/Quantum/Divergence/SpectralCeilingRelativeEntropy.actual_matrix_spectral_ceiling_strong_klein) | `theorem` | Ch 8 |
 | `R118` | [`D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) | [{source}](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) | `theorem` | Ch 7, Ch 31 |
 | `R119` | [`D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.pureDensityState`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.pureDensityState) | [{source}](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.pureDensityState) | `def` | Ch 11 |
 | `R120` | [`D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.basisPinchingState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.basisPinchingState) | [{source}](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.basisPinchingState) | `def` | Ch 8 |
@@ -627,6 +628,9 @@
 | `R171` | [`D5.S3.Quantum.Information.PartialTraceMutualInformation.quantumMutualInformation_productState`](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState) | [{source}](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState) | `theorem` | Ch 8 |
 | `R160` | [`D5.S3.Quantum.Information.QubitEntropyContraction.qubit_holevo_contraction`](lean:D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction) | [{source}](lean:D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction) | `theorem` | Ch 3 |
 | `R161` | [`D5.S3.Quantum.Information.QubitNormalFormState.qubit_state_entropy`](lean:D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy) | [{source}](lean:D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy) | `theorem` | Ch 3 |
+| `R174` | [`D5.S3.Quantum.Information.StrongSubadditivity.entropy_relabelState`](lean:D5/S3/Quantum/Information/StrongSubadditivity.entropy_relabelState) | [{source}](lean:D5/S3/Quantum/Information/StrongSubadditivity.entropy_relabelState) | `theorem` | Ch 8 |
+| `R175` | [`D5.S3.Quantum.Information.StrongSubadditivity.entropy_toMState`](lean:D5/S3/Quantum/Information/StrongSubadditivity.entropy_toMState) | [{source}](lean:D5/S3/Quantum/Information/StrongSubadditivity.entropy_toMState) | `theorem` | Ch 8 |
+| `R176` | [`D5.S3.Quantum.Information.StrongSubadditivity.strong_subadditivity`](lean:D5/S3/Quantum/Information/StrongSubadditivity.strong_subadditivity) | [{source}](lean:D5/S3/Quantum/Information/StrongSubadditivity.strong_subadditivity) | `theorem` | Ch 8 |
 | `R133` | [`D5.S3.Quantum.Measurement.FourQubitParentConstruction.B`](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.B) | [{source}](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.B) | `def` | Ch 1 |
 | `R134` | [`D5.S3.Quantum.Measurement.FourQubitParentConstruction.scalarB`](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.scalarB) | [{source}](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.scalarB) | `def` | Ch 1 |
 | `R135` | [`D5.S3.Quantum.Recovery.KrausLeftInverseNecessity.left_inverse_error_products`](lean:D5/S3/Quantum/Recovery/KrausLeftInverseNecessity.left_inverse_error_products) | [{source}](lean:D5/S3/Quantum/Recovery/KrausLeftInverseNecessity.left_inverse_error_products) | `theorem` | Ch 14 |
@@ -656,7 +660,7 @@
 | `R159` | [`D5.S3.Zeros.ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one`](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | [{source}](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | `theorem` | Ch 22 |
 
 ::: {.viz src="lean-declaration-map" preset="inline" height="500"}
-**只靠行内链接出现的那些。** 地图保留 172 个空心格：119 格绿色的定理、53 格灰色的定义，全部列在本节。这里的“行内”仅描述中文正文的引用方式；其中有些声明也被媒体使用。
+**只靠行内链接出现的那些。** 地图保留 176 个空心格：123 格绿色的定理、53 格灰色的定义，全部列在本节。这里的“行内”仅描述中文正文的引用方式；其中有些声明也被媒体使用。
 :::
 
 ---
@@ -692,22 +696,22 @@
 | :--- | :--- | :--- | :---: |
 | **上游仓库与分支** | `the-omega-institute/trureturing` 分支 `dev` | `site.toml` `[trureturing]` 配置与 `git merge-base --is-ancestor` | `PASS` |
 | **所钉提交 SHA** | [{commit}](trureturing:) | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
-| **冻结定理总数** | `318` 项环境引用定理（含行内共 `437` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
+| **冻结定理总数** | `318` 项环境引用定理（含行内共 `441` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
 | **辅助定义与结构数** | `114` 项环境定义/归纳类型；含行内共 `167` 项（`157` `def` + `10` `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s)`） | `PASS` |
 
 ::: {.figure src="appc-ledger"}
-**$604$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $318 + 9 + 110 = 437$，定义一行 $114 + 0 + 53 = 167$。虚线框按本附录的环境引用分区：C.1 $= 318$，C.2 $= 114$，C.3 $= 9 + 110 + 0 + 53 = 172$；媒体消费者不改变索引分区。
+**$608$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $318 + 9 + 114 = 441$，定义一行 $114 + 0 + 53 = 167$。虚线框按本附录的环境引用分区：C.1 $= 318$，C.2 $= 114$，C.3 $= 9 + 114 + 0 + 53 = 176$；媒体消费者不改变索引分区。
 :::
 
-这张账的第一行在声明地图上是 $437$ 格绿色：被环境头引用的 $318$ 格画成实心，其余 $9 + 110 = 119$ 格空心。
+这张账的第一行在声明地图上是 $441$ 格绿色：被环境头引用的 $318$ 格画成实心，其余 $9 + 114 = 123$ 格空心。
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 437 格：318 个实心格被环境头以 `lean=` 引用，119 个空心格只在中文正文的行内链接里出现。
+**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 441 格：318 个实心格被环境头以 `lean=` 引用，123 个空心格只在中文正文的行内链接里出现。
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-本附录 C.1 的 318 条环境引用定理、C.2 的 114 项环境引用定义/归纳类型与 C.3 的 172 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 604 项声明（437 项 `theorem` + 157 项 `def` + 10 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.4 的 9 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
+本附录 C.1 的 318 条环境引用定理、C.2 的 114 项环境引用定义/归纳类型与 C.3 的 176 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 608 项声明（441 项 `theorem` + 157 项 `def` + 10 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.4 的 9 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}
