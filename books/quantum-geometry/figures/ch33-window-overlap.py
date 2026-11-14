@@ -10,7 +10,7 @@ Vol(W_AB)/Vol(W) is computed and printed.
 
 from _ch33 import windows
 
-SIZE = (440, 290)
+SIZE = (440, 300)
 ALT = {
     "zh": "两个同样大小、彼此错开一段距离的正十边形，左边是接受窗 W + u_A，右边是 W + u_B，中心各有一个点。"
           "两窗重叠的部分涂成青色，标着 W_AB，是双方共同看见的部分；各自多出的部分涂成品红，只有一方看见。"

@@ -1,10 +1,12 @@
 # 附录 C Lean 4 形式化定理总索引与开放问题台账 {#附录-clean-4-形式化定理总索引与开放问题台账}
 
-本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 [{commit}](trureturing:)）中接受逐条核验：
+本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，Lean 验证、书面证明与开放问题分别声明证据。下列 C.1–C.3 逐条核对 `trureturing.lock.json` 中的冻结声明（所钉 `trureturing@dev` 提交为 [{commit}](trureturing:)），C.4 另列开放问题与选定文献边界：
 
 1. **C.1 冻结定理总索引（303 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
 2. **C.2 形式化定义与代数载体总索引（114 项唯一声明：104 项 `def` + 10 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.3 行内辅助定理与定义索引（163 项声明：110 项 `theorem` + 53 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **580 项唯一声明**（$303 + 114 + 163 = 580$）。媒体引用在各行末尾另列，不改变上述分区。
 3. **C.4 开放问题与未形式化前沿边界台账（11 项：6 个 `conjecture` + 3 个 `problem` 环境 + 2 项文献边界 `remark`）**：9 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
+
+第 16.3 节的 [@thm-central-defect-endpoint-average] 及其 [书面证明](ch16-qsvt-walks-and-compilation.md#pf-central-defect-endpoint-average) 不属于冻结声明，也不是开放问题。其 DOI、原文定位与[形式化请求 #10](https://github.com/the-omega-institute/trureturing-requests/issues/10) 随正文及自动生成的书面证明账本单列；不增加上述锁定声明、绿色图表或 C.4 的条数。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
 **580 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：413 格是定理，167 格是定义或归纳类型；417 个实心格被环境头以 `lean=` 引用，163 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
@@ -533,7 +535,7 @@
 | `R163` | [`D5.S3.ContinuousObservables.PhaseSynthesis.unstepW`](lean:D5/S3/ContinuousObservables/PhaseSynthesis.unstepW) | [{source}](lean:D5/S3/ContinuousObservables/PhaseSynthesis.unstepW) | `def` | Ch 16 |
 | `R068` | [`D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.fluid_gap_from_mixed`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.fluid_gap_from_mixed) | [{source}](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.fluid_gap_from_mixed) | `theorem` | Ch 30 |
 | `R069` | [`D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.mixed_condition_fails`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_condition_fails) | [{source}](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_condition_fails) | `theorem` | Ch 30 |
-| `R070` | [`D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.mixed_witness`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness) | [{source}](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness) | `theorem` | Ch 30 |
+| `R070` | [`D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.mixed_witness`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness) | [{source}](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness) | `theorem` | Ch 30; media `viz/navier-stokes-p-np/index.html` |
 | `R071` | [`D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.no_fluid_predictor_from_mixed`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_fluid_predictor_from_mixed) | [{source}](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_fluid_predictor_from_mixed) | `theorem` | Ch 30 |
 | `R072` | [`D5.S3.FluidDynamics.Fourier.MildPathRegularity.all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) | [{source}](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) | `theorem` | Ch 30, 终章, 附录 A |
 | `R073` | [`D5.S3.FluidDynamics.Vortices.AlternatingPolygonJordan.actual_normal_form`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonJordan.actual_normal_form) | [{source}](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonJordan.actual_normal_form) | `theorem` | Ch 30 |
@@ -557,7 +559,7 @@
 | `R091` | [`D5.S3.Observer.Conditioning.conditionalState`](lean:D5/S3/Observer/Conditioning.conditionalState) | [{source}](lean:D5/S3/Observer/Conditioning.conditionalState) | `def` | Ch 2 |
 | `R092` | [`D5.S3.Observer.Conditioning.recordWeight`](lean:D5/S3/Observer/Conditioning.recordWeight) | [{source}](lean:D5/S3/Observer/Conditioning.recordWeight) | `def` | Ch 2 |
 | `R093` | [`D5.S3.Observer.Conditioning.unreadState`](lean:D5/S3/Observer/Conditioning.unreadState) | [{source}](lean:D5/S3/Observer/Conditioning.unreadState) | `def` | Ch 3 |
-| `R094` | [`D5.S3.Observer.Reversal.QuadraticObservationClosure.observed_increment`](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment) | [{source}](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment) | `theorem` | Ch 30 |
+| `R094` | [`D5.S3.Observer.Reversal.QuadraticObservationClosure.observed_increment`](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment) | [{source}](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment) | `theorem` | Ch 30; media `viz/navier-stokes-p-np/index.html` |
 | `R095` | [`D5.S3.Observer.Tomography.FiniteStageExpansion.finite_stage_expansion`](lean:D5/S3/Observer/Tomography/FiniteStageExpansion.finite_stage_expansion) | [{source}](lean:D5/S3/Observer/Tomography/FiniteStageExpansion.finite_stage_expansion) | `theorem` | Ch 31, 附录 A |
 | `R096` | [`D5.S3.ObserverMemory.Dynamics.ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently`](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently) | [{source}](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently) | `theorem` | Ch 31, 附录 A; media `viz/visualizations.json`, `viz/fairness-square-uncertainty-expansion/index.html` |
 | `R097` | [`D5.S3.ObserverMemory.FourierFibers.GoldenScaleCharacterDeckBlindness.golden_helix_step_changes_level`](lean:D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_step_changes_level) | [{source}](lean:D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_step_changes_level) | `theorem` | Ch 31, 附录 A |
@@ -669,10 +671,10 @@
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s)`） | `PASS` |
 
 ::: {.figure src="appc-ledger"}
-**$580$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $303 + 7 + 103 = 413$，定义一行 $114 + 0 + 53 = 167$。虚线框按本附录的环境引用分区：C.1 $= 303$，C.2 $= 114$，C.3 $= 7 + 103 + 0 + 53 = 163$；媒体消费者不改变索引分区。
+**$580$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 $303 + 9 + 101 = 413$，定义一行 $114 + 0 + 53 = 167$。虚线框按本附录的环境引用分区：C.1 $= 303$，C.2 $= 114$，C.3 $= 9 + 101 + 0 + 53 = 163$；媒体消费者不改变索引分区。
 :::
 
-这张账的第一行在声明地图上是 $413$ 格绿色：被环境头引用的 $303$ 格画成实心，其余 $7 + 103 = 110$ 格空心。
+这张账的第一行在声明地图上是 $413$ 格绿色：被环境头引用的 $303$ 格画成实心，其余 $9 + 101 = 110$ 格空心。
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
 **只看定理。** 地图只保留锁文件里种类为 `theorem` 的 413 格：303 个实心格被环境头以 `lean=` 引用，110 个空心格只在中文正文的行内链接里出现。

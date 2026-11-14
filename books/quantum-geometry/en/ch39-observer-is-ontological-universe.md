@@ -589,6 +589,57 @@ $$
 
 Every integer rank pair with $1 \le r_0 \le 6$ and $1 \le r_1 \le 5$ is realizable: $r_0 = r_1 = K = 3$ is one valid choice among thirty, whereas the maximal attainable ranks are $(6, 5)$ with maximal page entropies $(\ln 6, \ln 5)$.
 
+::: {.example #ex-ch39-p2e-positive-ket-handcalculation title="By Hand: Positive Equal-Amplitude Admissible-Word States Across the Same Cut"}
+This is a paper calculation for a specified finite state, not a new Lean-verified theorem. Set $m=n=1$ (that is, $m_X=m_Y=1$), cutting a two-bit word across $X\mid Y$. For $K=2$, the admissible words are exactly $00,01,10$; choose the positive equal-amplitude coherent state
+
+$$
+\lvert\psi\rangle=\frac{\lvert00\rangle+\lvert01\rangle+\lvert10\rangle}{\sqrt3},
+\qquad \langle\psi\mid\psi\rangle=\frac{3}{3}=1.
+$$
+
+Ordering the words on each side as $0,1$, the coefficient matrix and partial trace are
+
+$$
+\begin{aligned}
+M&=\frac1{\sqrt3}\begin{pmatrix}1&1\\1&0\end{pmatrix},\\
+\rho_X&=\operatorname{Tr}_Y(\lvert\psi\rangle\langle\psi\rvert)
+=MM^*=\frac13\begin{pmatrix}2&1\\1&1\end{pmatrix}.
+\end{aligned}
+$$
+
+Explicitly, $\rho_{xx'}=\sum_{y=0}^1 M_{xy}\overline{M_{x'y}}$: $00$ and $10$ share the right word $y=0$, leaving off-diagonal entries $\rho_{01}=\rho_{10}=1/3$. Hence
+
+$$
+\begin{aligned}
+\det(tI-\rho_X)&=t^2-t+\frac19,\\
+\lambda_+&=\frac{3+\sqrt5}{6},\qquad
+\lambda_-=\frac{3-\sqrt5}{6}.
+\end{aligned}
+$$
+
+Each eigenvalue has multiplicity $1$; both are positive and sum to $1$. The reduced rank is $2$, and the Schmidt coefficients are $\sqrt{\lambda_+},\sqrt{\lambda_-}$. Using natural logarithms, the entanglement entropy is
+
+$$
+S(\rho_X)=-\lambda_+\ln\lambda_+-\lambda_-\ln\lambda_->0.
+$$
+
+Neither counting three words nor taking $\ln3$ gives this entropy; replacing the ket by a uniform diagonal classical mixture of the three words removes those coherence terms.
+
+Across the same cut, every $K\ge3$ admits all four words $00,01,10,11$. The chosen positive equal-amplitude state is then
+
+$$
+\begin{aligned}
+\lvert\psi\rangle&=\frac{\lvert00\rangle+\lvert01\rangle+\lvert10\rangle+\lvert11\rangle}{2}
+=\lvert+\rangle\otimes\lvert+\rangle,\\
+\lvert+\rangle&=\frac{\lvert0\rangle+\lvert1\rangle}{\sqrt2},\qquad
+\langle\psi\mid\psi\rangle=4\left(\frac12\right)^2=1,\\
+\rho_X&=\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix}.
+\end{aligned}
+$$
+
+Its eigenvalues $1,0$ each have multiplicity $1$. The reduced rank is $1$, the sole nonzero Schmidt coefficient is $1$, and $S(\rho_X)=0$ (with $0\ln0=0$). Here we specify a state over all admissible words, without fixing first-bit pages or imposing the logical `directContract`; the preceding theorem instead characterizes attainable ranks and entropy extrema while jointly choosing the encoder and page states under that contract. This example determines no physical ground state or general entropy limit at fixed $K$; the subsequent open problems remain open.
+:::
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** In condensed-matter and atomic-physics literature, the order-$K = 2$ `NoAdjacentOnes` Hilbert space arises in two celebrated many-body settings: first, the topological Fibonacci-anyon "golden chain" of A. E. Feiguin et al. (*Phys. Rev. Lett.* **98**, 2007, 160409), where the fusion rule $\tau \times \tau = \mathbf{1} + \tau$ makes fusion-space dimensions grow as Fibonacci numbers; second, van der Waals $1/r^6$ Rydberg blockade arrays (modeled theoretically by I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301, and probed experimentally on a 51-atom quantum simulator by H. Bernien et al., *Nature* **551**, 2017, 579–584). Two scope boundaries apply whenever citing these physical realizations: first, nearest-neighbor pairwise Rydberg blockade forbids adjacent excitations $|11\rangle$ ($K = 2$, the PXP subspace), whereas simply extending pairwise blockade range forbids *all* pairs within distance $R_b$ (eliminating `101` along with `111`) and **does not** by itself enforce the $K > 2$ "no $K$ consecutive ones" constraint—realizing a $K > 2$ $K$-Bonacci subspace requires a dedicated multi-body $K$-local interaction; second, neither the anyon fusion chain nor a finite-blockade Rydberg Hamiltonian is formally identical to the exact zero-amplitude isometric `directContract` encoder of [@thm-ch39-p2e-direct-encoder-ranks].
 :::
