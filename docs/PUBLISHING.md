@@ -17,6 +17,8 @@
 
 所有构建命令都接受 `--book <slug>`（可重复）与 `--lang <code>`（可重复）。所选的书都没有 `--lang` 指定的语言版本时，构建报错退出（退出码 2），不会静默跳过。
 
+EPUB 保留原生 MathML。超宽公式与表格在各自容器内横向滚动，保留完整内容和阅读字号；页面本身应随阅读栏宽度重排。EPUBCheck 验证结构，不能代替已知版面问题处的阅读检查；浏览器原生 MathML 的检查也不等于 Apple Books 实测认证。
+
 视频与其他产物一样随站点构建：站点在 `_site/<slug>/films/<film id>/<文件>` 同源托管视频（Content-Type 与按字节范围请求都正确，iOS Safari 需要这两点；Release 附件的地址在那里不能播放），不再为单个视频发 Release；视频计入 GitHub Pages 站点 1 GB 的上限。只构建、托管 `film.json` 的 `outputs` 所列的文件：默认只有 720p 旁白版与封面，50 秒的示例视频共约 6.5 MB（视频 6.1 MB、封面 0.5 MB，另有提交的海报 0.16 MB），约合每分钟 8 MB；同时列出 1080p 旁白版、1080p 与 720p 纯配乐时约 70 MB（每分钟约 84 MB）。渲染视频需要视频工具链（`bash theme/film/setup.sh` 与系统的 ffmpeg）。环境变量 `TBOOK_FILMS` 决定缓存未命中时怎么办：`auto`（默认）有工具链就渲染，没有则警告，站点不含该视频；`require` 无法渲染即构建失败；`skip` 从不渲染。三种情况下缓存命中的视频都照常恢复。
 
 学术预印本的官方技术要求与项目版式选择见 [PDF-TYPOGRAPHY.md](PDF-TYPOGRAPHY.md)。
@@ -37,8 +39,8 @@ EPUB 按 Apple Books 的要求生成：EPUB 3、MathML 数学、PNG 封面、导
 
 | 工作流 | 触发 | 作用 |
 | --- | --- | --- |
-| `ci.yml` | PR、推送到 main、手动、被调用、每周（只跑 `viz-slow`） | `check` 作业：`./tbook check`、`./tbook theme --check`、全部单元测试、可视化登记校验与幻灯片检查（模板仓库另跑 `./tbook template manifest --check`，并在删去示例书的工作树中、以及用 `site.toml` 的 `[books] hide = ["example-*"]` 隐藏示例书的工作树中重跑检查与单元测试：下游书库可以隐藏或删除示例书，甚至暂时没有书，CI 照样通过）；`build` 作业：HTML、屏幕 PDF、印刷 PDF、学术 PDF、EPUB 分 5 个作业并行，产物按 `books-html-html`、`books-dist-pdf-screen`、`books-dist-pdf-print`、`books-dist-pdf-academic`、`books-dist-epub` 分别上传；`viz` 作业：可视化浏览器回归测试，分 8 片并行（`node tools/node/viz-test.mjs --shard i/8`；每个页面的测试约一分钟，页面多了串行跑会让后面的每次运行排上大半个小时）；`viz-slow` 作业：同样的测试以慢帧（`--slow`，即 `VIZ_SLOW_FRAMES=1000`）分 8 片再跑一遍，只在手动运行（输入 `slow_frames`，默认勾选）与每周三的定时运行中出现，定时运行只跑它，PR 与推送不跑；`media` 作业：幻灯片构建与 PDF；`films` 作业：视频分 4 片严格构建（`TBOOK_FILMS=require`；默认分支推送与 tag 的被调用运行由 Pages / 发版工作流构建视频）。`build`、`media`、`films` 经构建缓存（§5）恢复未变的单元，从不保存；调用者须授予 `contents: read`、`actions: read` 与 `pages: read` |
-| `pages.yml` | 推送到 `main`、手动 | `./tbook check` 后构建全部（含视频，`TBOOK_FILMS=require`）并部署 GitHub Pages；Pages 尚未启用时只构建、不部署，并在作业摘要中提示。唯一保存构建缓存的工作流（§5），同一时间只运行一个 |
+| `ci.yml` | PR、推送到 main、手动、被调用、每周 | 先由仅需标准库的 `tools/ci/plan.py` 生成计划，再启动选中的结构／Lean、theme、unit、manifest、静态媒体、模板兼容检查族，以及按书籍启用格式展开的导出、精确 suite、film 和 slide 集合；空集合不开 runner；同一导出格式合并所选书籍，复用一次安装。viz 最多 8 片、film 最多 4 片，先选择再分片，每项恰一次。稳定必需检查名仍为 **Check**，移到末尾用 `always()` 核对全部计划任务，失败、取消和意外跳过均不通过。调用者须授予 `contents: read`、`actions: read` 与 `pages: read` |
+| `pages.yml` | 推送到 `main`、手动 | 共用影响规则，以独立的成功部署覆盖为基准；无站点影响且已有有效部署时跳过安装和构建。需要输出时仍 `./tbook check`、`./tbook build all`，恢复未变单元、补建缺失单元、清理删除内容后完整部署；Pages 未启用时只构建并提示，不记录部署覆盖。唯一保存构建缓存的工作流（§5），同一时间只运行一个 |
 | `release.yml` | tag `<slug>-v<version>`（单本，须等于 `book.toml` 的 version）或 `v*`（全部书，仅下游书库，如 `v2026.11.08`、`v3.0.0`） | 构建整个站点（含视频），创建 GitHub Release，附所选书的 PDF、EPUB 与幻灯片 PDF（`<slug>-<deck>-<lang>.pdf`），以及全站的构建缓存（`cache-*.tar` 与 `build-cache.json`，§5）；Release 先建为草稿，附件全部上传后才发布，已发布的 Release 不再改动附件；只有语义化版本的预发布（`book.toml` 的 `1.0.0-rc.1`，或 tag `v3.0.0-rc.1`）标为 pre-release；以日期开头的版本（`YYYY.MM.DD`、`YYYY-MM-DD` 或 `YYYYMMDD`，月、日补零）无论后面跟什么都是正式发布，如同一天的第二次发布 `v2026.11.08-2`；以 `film-` 开头、不指向任何书的 tag（旧的逐片视频 tag）只给出提示并跳过，不发布任何东西，可以删除；`site.toml` 的 `[books] hide` 隐藏的书不发布：`v*` 不含它们，指向它们的 `<slug>-v*` 失败并说明原因 |
 | `lean-verify.yml` | 每周、手动、可被 Release 调用 | Lake 工程深度验证被引用定理的公理闭包 |
 | `trureturing-bump.yml` | 每周、手动 | 把所钉的 trureturing 提交升级到最新并开 PR；标题前缀 `[refused]`（目标提交不在 `site.toml` 的分支上或无法核实）、`[unresolved]`（有引用无法解析）、`[pin failed]`、`[check fails]`、`[review statements]` 提示需要处理的情况；前三种 PR 不改锁文件，与 `[check fails]` 一样以草稿开出 |
@@ -46,6 +48,8 @@ EPUB 按 Apple Books 的要求生成：EPUB 3、MathML 数学、PNG 封面、导
 | `template-release.yml` | tag `v*`（仅模板仓库） | 核对版本与清单、跑 CI 后发布模板版本，附示例站点的构建缓存（同样先建草稿、上传后发布） |
 
 检查与构建作业（`ci.yml`、`pages.yml`、`release.yml` 的构建、`trureturing-bump.yml`）通过组合动作 `.github/actions/setup` 安装工具链（Python 3.12 + requirements、Node 22 + `npm ci`、按需安装 Chromium、mdBook 0.5.4、CJK 字体；`films: 'true'` 且有（未隐藏的）书带视频时另装 ffmpeg 与备用字体，运行 `theme/film/setup.sh` 安装 `theme/film/requirements.txt` 并下载 Kokoro 模型到 `.cache/film/models`）。
+
+`ci.yml` 的验证作业先完成普通单元测试及模板仓库的删除／隐藏示例兼容检查，再用同一安装动作启用 Chromium，执行 `PYTHONPATH=tools python tools/tests/test_export_layout.py` 的必需 EPUB 布局回归。普通测试发现模式按工具链体检的 Chromium 可用性保持可选；独立入口遇到缺依赖、跳过或失败均以非零状态退出，验证作业时限仍为 30 分钟。
 
 CI 中没有 trureturing 的 checkout，`./tbook check` 通过 GitHub compare API 核对所钉提交在 `site.toml` 的分支上；GitHub Actions 中无法判定即为错误。因此 `ci.yml`、`pages.yml`、`release.yml` 的检查步骤把 `github.token` 作为 `GITHUB_TOKEN` 传入（`trureturing-bump.yml` 用作业的 `GH_TOKEN`），这些作业至少需要 `contents: read` 权限。
 
@@ -59,9 +63,45 @@ CI 中没有 trureturing 的 checkout，`./tbook check` 通过 GitHub compare AP
 
 容器运行方式见 [容器工具链](CONTAINERS.md)：上游提供预装全部工具、浏览器、字体与语音模型的镜像，避免每次作业依赖 Ubuntu 软件源。
 
-**慢帧复查（`viz-slow`）。** 无头浏览器在忙碌的 runner 上可能一秒才给一帧；测试若为过渡或播放等了固定时间，在快机器上通过、在那里偶发失败。`node tools/node/viz-test.mjs [<book>] --slow` 把动画帧拉开到一秒一帧再跑全部（或一本书的）测试，下游 36 个页面分 4 片约需 20 分钟，故不放进 PR 的 CI。何时跑：新写或改了某个页面的测试，交付前在本地对那个测试跑一次（`VIZ_SLOW_FRAMES=1000 node books/<book>/viz/tests/<id>.test.mjs`）；改了共享运行时（`theme/viz/kit.js`、`shell.js`）或测试工具（`tools/node/viz-testkit.mjs`）、升级模板之后，以及 CI 上出现时过时不过的可视化失败时，在 Actions 中手动运行 CI（`slow_frames` 勾选）；其余由每周的定时运行兜底，失败时看作业日志里的 `FAIL` 行，按 `skills/book-viz` 改成 `settle(page)` / `until(page, …)`。`viz-validate` 对测试里的 `waitForTimeout(…)` 报警告，提前指出这类写法。
+**选择入口与成功基准。** PR 核对实际 checkout 的 merge parents：head 须与事件相同，base 须等于事件 base 或为其后继；base 前进时按实际被测 merge 重新规划，联合完整累计 `merge-base…head` 差异及可信基准至 merge tree 的差异，base 更新也会纳入。main 不用 push 的 `before` 充当覆盖基准，而是寻找最近可比的成功记录；先前失败或取消的变更不会丢失。手动与 `workflow_call` 的 `selection_mode=auto|full`、`base`（可选的预期成功基准）和 `head`（可选的预期 checkout）含义相同；被调用运行以调用方上下文规划，发布时仍由原发布作业完整组装站点。手动运行按同 ref 查找成功记录，非默认分支的记录只供该分支使用；PR、main、定时与被调用运行读取默认分支的可追溯祖先覆盖，分支记录不能成为默认分支覆盖。显式 `full` 用于诊断和全量验收。
 
-开发分支在 PR 上运行完整 CI，不再同时因分支 push 重复跑一轮；尚未开 PR 时可手动运行。PR 与 main 上被新提交取代的 CI 会取消，Pages 仍串行保存缓存并部署。默认分支名称若不是 main，需同步调整 `ci.yml` / `pages.yml` 的 push 分支过滤。
+覆盖工件 `tbook-coverage-normal|films|slow|pages` 保留 90 天，记录 SHA、profile、选择器版本、运行时、工具／检查定义摘要、run ID、attempt 与继承的来源 ID。只读取同仓库、对应工作流与所需分支上已完成且成功的 push／手动／定时运行；PR 自产记录与缓存始终不读。只有末尾汇总成功才写记录，读取时还核对整个运行的最终成功结论与 attempt。每个来源工作流搜索限最近 100 个成功运行；工件过期、权限/API/历史缺失、定义或运行时不可比均在摘要显示 **full fallback**，不能当成空集合。Pages 计划作业以 `deployments: read` 核对覆盖所指的 `github-pages` 部署仍为成功状态；CI 成功不能替代部署成功。
+
+影片独立使用 `films` 成功覆盖：CI 实际承担所选影片并通过末尾 Check 时可记录；main／tag push 将影片留给 Pages／Release，不写影片覆盖。Pages 完整严格构建与末尾汇总成功时记录影片覆盖，即使未启用部署也可记录；无构建的 Pages 运行不推进它。影片选择在 CI 与 Pages 的可信成功影片记录中取较新的祖先，以该 SHA 累计比较；已有覆盖且未变的影片跳过。normal 覆盖单独推进不会清除影片责任：Pages 失败、取消或影片证据缺失后，文档 PR／手动 CI 仍选待验证影片，main 仍交给 Pages；全部影片证据缺失时只将影片责任全量回退。影片覆盖不替代独立部署覆盖，也不读取 PR 自产缓存。
+
+纯 `docs/`、`skills/`、项目说明等已知工程文档没有重型消费者；模板仍核对 manifest。未知根路径与共享工具／依赖先保守全量；书内未登记 suite 的额外文件读取先扩大到所属书。现有导出键覆盖整本书，因此书内变动选择该书全部启用格式与语言，不擅自缩窄缓存输入。正文变化覆盖读取 preset／lang／height 的 `stageFirstChecks`；影片的 `film.json scripts` 保留反向依赖；solid 核心与 vendor 变化覆盖实际 viz 与 film 读者。隐藏／删除书不生成假分片，Pages 仍完整组装以删除旧输出。
+
+**额外测试依赖。** 书库可维护自有 `books/<slug>/viz/tests/dependencies.json`，登记每个 suite 在常规对象目录和静态 import 之外读取的文件。路径从仓库根起算，可用 glob；不能用绝对路径或 `..`。声明不存在的 suite、错误 schema 或损坏 JSON 会使计划失败，不能静默跳过。正文仍保守传播到该书全部 suite。以下为通用示例，不要求模板修改书籍内容：
+
+```json
+{
+  "schema": "tbook-ci-dependencies-v1",
+  "suites": {
+    "declaration-map.test.mjs": [
+      "trureturing.lock.json",
+      "books/my-book/zh/SUMMARY.md",
+      "books/my-book/zh/*.md"
+    ],
+    "readout.test.mjs": ["books/my-book/en/*.md", "books/my-book/assets/**"]
+  }
+}
+```
+
+声明须完整列出 suite 的额外读取；没有声明时，任何该书变动都会选择该书未登记的 suite。相对 import 自动跟踪，动态计算的路径、额外页面导航、子进程、文件存在性查询及生成数据的源文件仍须登记。声明是与实际源码对应的完整读取契约；schema 校验、空列表或 glob 未匹配本身不证明没有读取。新增或改变这些读取时须同步复核声明。模板单测用独立 Git fixture 验证传播与回退，不硬编码下游书名。
+
+可比增量模式下，`theme/`、`templates/`、`i18n/` 的执行选择统一沿消费者输入传播，不以共享前缀或资源角色缺失覆盖已知非读者。suite 的输入是自身源码、自身对象目录、registry、支持的相对 import 及完整额外读取声明；声明所列 JS/MJS 模块的相对 import 也会展开，因此同一构造新增 vendor/helper 成员不依赖另一个文件名名单。任一树缺少适用声明（包括新增 suite）时，该 suite 对共享资源仍保守入选，范围跨所有可见书。`kit.solid()` 才加载实体核心及其 vendor 闭包，hub 的 JS/CSS 只由实际打开 hub 的 suite 读取；真实的章节／SUMMARY、CHSH 额外导航、缩略图存在性和 helper 读取仍须完整表达。
+
+影片选择与 `video_unit` 共用 `tools/tbook/film_inputs.py` 的文件输入构造：影片目录及原有排除项、`theme/film/`（排除 `site/`）、`tokens.mjs`、列出的 classic scripts，以及条件 solid 核心／vendor。目录构造覆盖未来成员增删；`engine_data` 和 npm 数据的源路径另外保留，包括书籍元数据、锁文件、包锁和中英主题表／可选本地覆盖。中英语言集合与 `engine_strings` 共用；原本不存在的覆盖文件也有依赖。该提取保留原有文件与生成值的哈希顺序、排除项和输出键范围，源路径不代替生成值进入键。
+
+删除沿旧依赖传播，重命名两端分别分析，已删除消费者不执行。新旧树都必须支持该消费者总结；新增影片或任一端发现不受支持的内联 module import 时，保留该影片的共享读取不确定性，书内变化则保留所属书的这些未知影片。影片脚本在 `out/index.html` 中内联，不能把原源码目录的相对 import 当作实际 URL 的完备证明。现有影片构造的完整性以前提为：脚本自包含，额外资源由已列输入和条件构造提供；任意自定义网络、文件系统、动态生成读取没有通用额外依赖接口，须复核实际源码，无法建立对应时保守扩大影片责任。已有路径、schema、空匹配和当前消费者计数都不证明语义完整；选择器也不宣称能自动发现任意 JavaScript 中未申报的读取。不确定性属于缺少适用总结的消费者，不因一个资源名不存在或缺少角色标签而产生；影片未知不会扩大已有完整总结的浏览器非读者。
+
+浏览器非读者仍可能是发布消费者：`publish_assets` 向每本书复制实体、hub 与 vendor 资源。因此上述执行选择不缩减书籍导出、静态检查、slide 或完整 Pages 组装责任。影片站点资源仍复制发布，但不因而重新渲染非读者影片。工具／检查定义、安装依赖和无法建立整体范围的未知输入，以及显式 full 和不可比成功覆盖，继续遵守既有全量语义。
+
+精确集合通过 JSON 环境变量传给 `viz-test.mjs --selection-env`、`films.py --selection-env`，拒绝不存在、隐藏或重复项。slide 集合按 deck 执行；整书集合沿用原 slides 单元键，部分集合可恢复完整单元，冷构建只运行选中 deck，且不把部分产物写入整书缓存。
+
+**慢帧复查（`viz-slow`）。** `--slow` 令 `VIZ_SLOW_FRAMES=1000`，用于发现固定等待时间造成的偶发失败。每周三的本工作流定时入口只选择 slow profile；手动运行由 `slow_frames` 控制，调用者也可明确传入。slow 使用独立成功基准：相同输入、运行时与检查定义已经覆盖时不开 runner；首次或基准失效则全量 slow fallback。共享运行时、测试工具或 suite 改动后的本地复查仍见 [book-viz](../skills/book-viz/SKILL.md)。
+
+开发分支在 PR 上运行选择后的 CI，不再因分支 push 重复运行；尚未开 PR 时可手动运行。PR 与 main 被新提交取代的 CI 会取消，Pages 仍串行保存缓存并部署。默认分支名称若不是 main，需同步调整两个工作流的 push 分支过滤。分支保护继续要求稳定的 **Check**；媒体分片数量现在动态变化；若曾将单个矩阵检查设为必需检查，维护者须改为 Check。
 
 ## 5. 构建缓存
 
@@ -75,7 +115,7 @@ CI 中没有 trureturing 的 checkout，`./tbook check` 通过 GitHub compare AP
 
 PR 复用 Pages 构建：默认分支成功的 `pages.yml` 在构建后上传 `tbook-build-store`（保留 7 天，含隐藏文件，不压缩已压缩的视频）。PR 用 GitHub API 选择默认分支最近 20 次成功 Pages 运行中仍有工件的一次，核对 workflow ID、源仓库、分支、事件（只允许 push / workflow_dispatch）、完成状态与结果，再按不可混淆的 run ID / artifact ID 下载。需要 `actions: read`；被调用的 CI 的调用者也须授予它。权限不足、工件过期或下载失败时照常构建，仍可从 Release 恢复。PR 自己的 Actions 缓存与工件始终不读；每个构建单元仍按当前输入键与逐文件摘要验证。信任边界见 `docs/VERIFICATION.md` §2。
 
-仍会重复渲染的情形：改动了视频输入的 PR 仍须渲染，视频按完整的影片分成 4 片（`python tools/ci/films.py --shard i/4`），所有未隐藏的书共用有序列表，空分片通过，缺工具链或渲染失败会失败。合入后 Pages 渲染并保存新键，此后 PR 即可复用，无须等待发版。工件超过 7 天、从未成功构建 Pages，或 PR 的输入与默认分支和 Release 都不同，仍会重建。分片减少等待时间，冷构建总计算量不会随之减少；8 片可视化与 4 片影片也会增加工具链安装开销与并发需求。
+仍会重复渲染的情形：改动了视频输入且缓存未命中的 PR 仍须渲染。CI 先选择待验证影片，再按完整影片动态分成最多 4 个非空分片，每片通过 `python tools/ci/films.py --selection-env CI_ITEMS` 执行分配的精确集合，所选影片各执行一次；空集合不开影片作业。所选影片缓存未命中时，缺工具链或渲染失败会使作业失败。合入后 Pages 渲染并保存新键，此后 PR 即可复用，无须等待发版。工件超过 7 天、从未成功构建 Pages，或 PR 的输入与默认分支和 Release 都不同，仍会重建。可视化同样先选择 suite，再动态分成最多 8 个非空分片，所选 suite 各执行一次，空集合不开作业。分片减少等待时间，冷构建总计算量不会随之减少；多个分片也会增加工具链安装开销与并发需求。
 
 键中的工具版本：Node 取主版本（Chromium 由 `package-lock.json` 中的 Playwright 决定，不单独计入），Pandoc、Typst 取“主.次”（精确版本钉在 `requirements.txt`），mdBook 取精确版本（CI 安装的正是 0.5.4）；其余精确版本由 `package-lock.json`、`theme/film/requirements.txt` 与 `.github/actions/setup` 钉住。所以运行器镜像更新 Node 补丁版本或 ffmpeg 包修订，不会让缓存与已发布的 Release 失效。视频的键覆盖 git 列出的视频文件（不含 `out/`、`poster.jpg`、`README.md`）、`theme/film/`（不含 `site/`）、`theme/generated/tokens.mjs`、`tools/tbook/film.py`、引擎绘制的数据（书的代号、版本与标题，所钉提交，引用的声明及其陈述摘要，片内文字）、`package-lock.json` 中 @fontsource 字体与 Playwright 的版本、Kokoro 模型版本与 Node 主版本；不含站点地址，也不含探测到的 ffmpeg、Chromium 与视频 Python，所以没有视频工具链的构建（`TBOOK_FILMS=auto|skip`）也能恢复视频。
 
