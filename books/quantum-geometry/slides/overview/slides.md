@@ -789,7 +789,7 @@ section: "第十部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 38.5 · Theorem 39.7</p>
+  <p class="kicker">Theorem 38.6 · Theorem 39.7</p>
   <h2 class="t">非正交的态<em>不能深拷贝</em>；平方双覆叠<em>没有连续截面</em></h2>
 <TheoremCard class="compact mt-s" label="定理38.6" title="禁通用深拷贝的内积判据（第 2 款）" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
 

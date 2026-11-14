@@ -4045,6 +4045,145 @@
           "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
         }
       ]
+    },
+    {
+      "id": "uncompleted-horizon-sandbox",
+      "code": "HORIZON//UNCOMPLETED",
+      "title": "未完成的地平线 · 对角逃逸与二生三自举",
+      "title_en": "The uncompleted horizon · diagonal escape and triadic bootstrap",
+      "summary": "五张实验卡：三态格拉姆体积砖与建表组合账本、满射布尔目录的对角分离与 conceptJoin、有限序数扩表螺旋、同层前后视差，以及全知冻结反事实护栏。",
+      "summary_en": "Five experiments: a three-state Gram brick and table-building ledger, diagonal separation and conceptJoin over a surjective Boolean catalog, a finite ordinal spiral, two perspectives on one frontier, and a counterfactual omniscience guardrail.",
+      "path": "uncompleted-horizon-sandbox/",
+      "thumbnail": "uncompleted-horizon-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-14",
+      "chapter": 38,
+      "section": "38.6",
+      "presets": [
+        "bootstrap-ledger",
+        "lawvere-godel",
+        "ordinal-spiral",
+        "bidirectional-parallax",
+        "frozen-omniscience"
+      ],
+      "tags": [
+        "建表扩维",
+        "对角分离亏损",
+        "序数螺旋",
+        "双向视差",
+        "反事实护栏"
+      ],
+      "tags_en": [
+        "Bootstrap expansion",
+        "Diagonal separation deficit",
+        "Ordinal spiral",
+        "Bidirectional parallax",
+        "Counterfactual guardrail"
+      ],
+      "theory": [
+        {
+          "label": "第三十八章 §38.6 · 未完成的地平线",
+          "label_en": "Chapter 38 §38.6 · The uncompleted horizon",
+          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-uncompleted-horizon-godel-pnp",
+          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-uncompleted-horizon-godel-pnp"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        }
+      ]
+    },
+    {
+      "id": "stereographic-relativization-sandbox",
+      "code": "STEREO//SUSPENSION",
+      "title": "北极自指盲点球极投影、BGS 相对化切面与四句离相沙盘",
+      "title_en": "North-Pole Blind-Spot Stereographic Projection, BGS Relativization Slices, and Tetralemma Sandtable",
+      "summary": "青色有限微弧向北极盲点回返，琥珀平面坐标展开；紫色同伦与神谕切面连接折叠和追逐，品红盲点球冠始终留下非零封顶缺口。五张实验卡区分文献、数值、模型与开放问题。",
+      "summary_en": "A finite cyan arc returns toward the polar blind spot while amber chart coordinates unfold. Violet homotopy ribs and oracle slices connect folding and pursuit; the magenta blind cap retains a positive closure gap. Five experiments distinguish literature, numbers, interpretations and open problems.",
+      "path": "stereographic-relativization-sandbox/",
+      "thumbnail": "stereographic-relativization-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-14",
+      "chapter": 38,
+      "section": "38.7",
+      "presets": [
+        "blindspot-divergence",
+        "compact-homotopy",
+        "oracle-collapse",
+        "oracle-chase",
+        "tetralemma-rest"
+      ],
+      "preset_titles": {
+        "blindspot-divergence": {
+          "zh": "北极自指盲点与球极投影发散",
+          "en": "North-Pole blind spot and stereographic divergence"
+        },
+        "compact-homotopy": {
+          "zh": "亚历山德罗夫紧化—展开同伦",
+          "en": "Alexandroff compactification–unfolding homotopy"
+        },
+        "oracle-collapse": {
+          "zh": "BGS 折叠神谕切面",
+          "en": "BGS collapsing oracle slice"
+        },
+        "oracle-chase": {
+          "zh": "BGS 分离追逐切面与盲点缺口",
+          "en": "BGS separating pursuit slice and blind-cap gap"
+        },
+        "tetralemma-rest": {
+          "zh": "四句离相与双生投影止息",
+          "en": "Tetralemma suspension and twin-projection rest"
+        }
+      },
+      "tags": [
+        "球极投影",
+        "北极盲点",
+        "紧化同伦",
+        "相对化屏障",
+        "四句离相"
+      ],
+      "tags_en": [
+        "Stereographic projection",
+        "Polar blind spot",
+        "Compactification homotopy",
+        "Relativization barrier",
+        "Tetralemma suspension"
+      ],
+      "theory": [
+        {
+          "label": "第三十八章 §38.7 · 北极自指盲点与四句离相",
+          "label_en": "Chapter 38 §38.7 · North-Pole blind spot and tetralemma suspension",
+          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-stereographic-blindspot-relativization-suspension",
+          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-stereographic-blindspot-relativization-suspension"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure"
+        }
+      ]
     }
   ]
 }

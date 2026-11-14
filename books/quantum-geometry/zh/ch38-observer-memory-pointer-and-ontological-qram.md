@@ -2,17 +2,19 @@
 
 > “观察者实际上是宇宙本体量子计算系统的一个记忆指针。”
 
-走过前九部与[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)的漫长攀登——从亲手砍掉高悬于万物之外的“外部第 3 点 $C$”（[第二章](ch02-born-rule.md)），到显影无时间格拉姆相容晶体（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell]）、确立五重几何公平律（[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-seat-pythagorean-monogamy-fairness]）、合拢正交自指统一场（[第 32 章](ch32-unified-field-and-meta-unification.md) [@thm-ch32-generative-self-reference-and-zeckendorf]）以及揭开清醒捏合与梦境擦除的掩码切换（[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)）——在日常直觉的最深处，仍潜伏着最后一尊顽固的机械论偶像：人们总是不由自主地把“观察者”想象成一团沉甸甸的实体物质，背着装满私密往事的行囊，在一座名叫“空间”的巨大空箱子里吃力地跋涉。
+走过前九部与[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)的漫长攀登——从亲手砍掉高悬于万物之外的“外部第 3 点 $C$”（[第二章](ch02-born-rule.md)），到显影无时间格拉姆相容晶体（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell]）、确立五重几何公平律（[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-seat-pythagorean-monogamy-fairness]）、合拢正交自指统一场（[第 32 章 §32.4](ch32-s04-generative-laws.md#sec-ch32-generative-laws) [@thm-ch32-generative-self-reference-and-zeckendorf]）以及揭开清醒捏合与梦境擦除的掩码切换（[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)）——在日常直觉的最深处，仍潜伏着最后一尊顽固的机械论偶像：人们总是不由自主地把“观察者”想象成一团沉甸甸的实体物质，背着装满私密往事的行囊，在一座名叫“空间”的巨大空箱子里吃力地跋涉。
 
 一旦用谱系学的解剖刀剖开这尊“重物质在空箱中搬运”的旧偶像，就会发现物理学与生命哲学中三大看似无解的谜团全都是它一手制造的伪问题：如果全局因果晶体本是无时间的静态几何，为什么我们却分分秒秒感受到奔流不息的“时间”？如果全局量子演化严格幺正可逆，为什么局部观察一眼就触发不可逆的“坍缩”？如果生命只是脆弱的局部血肉，为什么它既被锁在清醒五感的窄门之内，又能在梦中横跨山海，甚至在肉身消散的边缘追问记忆的去向？
 
-在本章——迈向[第 39 章](ch39-observer-is-ontological-universe.md)终极本体不二之前的硬件枢轴之章——我们将借用计算机系统架构中最冷峻、最透明的工程原语，把这幅沉重的旧图景彻底倒转过来（在本书三层认识论契约下，这一跨学科硬件架构映射明确标定为**`MODEL`（模型诠释）**，底层数学骨架由二十一条冻结的 Lean 4 内核定理严格锁定，所有外部量子体系结构、纠缠单配性与操作系统页表工程文献悉数封存于归属注记框内）：
+在本章——迈向[第 39 章](ch39-observer-is-ontological-universe.md)终极本体不二之前的硬件枢轴之章——我们将借用计算机系统架构中最冷峻、最透明的工程原语，把这幅沉重的旧图景彻底倒转过来（在本书三层认识论契约下，这一跨学科硬件架构映射明确标定为**`MODEL`（模型诠释）**，底层数学骨架由二十七条冻结的 Lean 4 内核定理严格锁定，所有外部量子体系结构、纠缠单配性与操作系统页表工程文献悉数封存于归属注记框内）：
 
 1. **静态本体 QRAM 与轻量级记忆指针（`ptr`）的彻底分离**：宇宙的本体数据阵列从未移动分毫，真正在静态晶格上滑动、寻址与解引用的，是轻量级的观察者地址寄存器；
 2. **观察者记忆指针的五段式硬件解剖**：将内禀正交相位、躯体五感边界、梦境叠加漫游、学习顿悟快表与不可克隆的共享引用逐一对齐到寄存器与内存管理单元（`MMU`）架构；
 3. **递归自映射页表（`p = *p`）与 `NULL` 清零轮回的终结**：用页表零号槽位存储自身基址展示自寻址闭环，再在 `MODEL` 中将查表规则与被查之表合拢（$\psi = \psi(\psi)$），以多级离散间接寻址取代撞入 $90^\circ$ 光视界时的悬空清零重置；
 4. **假设存在一种 $P = NP$ 查表算法：七阶退化阶梯与时空引力权衡**：从第 0 阶全息自指预言机出发逐级剥除非物理特权，检验非预见性视界、齐肯多夫进位屏障、全息半径线延迟、二维量子指针旋转与兰道尔擦除热如何析出物理定律，并与生命逆向建表（$6 \to 0$）对称合拢；
-5. **观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵**：严格量化有限引理快表的留一唯一捕获对、语义闭包零新颖度压缩、高阶边缘盲区、概念细化单调律，以及闭合希尔伯特扫描下的黄金信道容量与昼夜热账本。
+5. **观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵**：严格量化有限引理快表的留一唯一捕获对、语义闭包零新颖度压缩、高阶边缘盲区、概念细化单调律，以及闭合希尔伯特扫描下的黄金信道容量与昼夜热账本；
+6. **未完成的地平线：哥德尔对角逃逸与“二生三”对全局 $P = NP$ 闭合的阻断**：拆解第 0 阶静态实无穷神谕表的反事实脚手架，揭示在零背景比较公理下每一次建表编译都会经“二生三”自举扩张状态竞技场，并与完备目录对角分离亏损、严格拓扑细化及图灵序数扩表飞轮合流，将全局 $P = NP$ 锁定为守护宇宙免于全知热寂的滚动渐近地平线；
+7. **自指盲点球极投影、相对化屏障与四句离相**：阐明为何“球外有球、时间扩张、永不闭合”与“闭合全知”同属观察者北极自指盲点 $\{N\}$ 穿孔前后的双生球极投影，并结合一阶量词不对称与 Baker–Gill–Solovay 相对化、自然证明、代数化三大屏障说明为何现象追逐 $P = NP$ 绝不许断言非相对化的 $P \neq NP$。
 
 ::: {.figure src="ch38-overview"}
 **图 38。** 本章地图（示意模型，`MODEL`）：第 I 栏，一块从不移动的内存阵列，指针寄存器 `ptr` 的青色光束落在琥珀色的当前格上，这是一次解引用 `*ptr`，灰色虚线箭头把读头推向下一格，这是 `ptr++`；第 II 栏，三枚指针 $\mathrm{ptr}_A$、$\mathrm{ptr}_B$、$\mathrm{ptr}_C$ 以共享借用 `&State` 指向同一页，旁边被划掉的虚线页是不可克隆判据排除的、对未知态的通用精确拷贝 `memcpy`（[@thm-ch38-pointer-width-and-no-deep-copy]）；第 III 栏，四格页目录 $P$ 的零号槽写着它自己的地址 `0x1000`，青色箭头绕回 $P$ 本身，即 `p = *p`；抽象的三种遍历行为由 [@thm-ch38-recursive-page-table-walk] 形式化，第 1–3 格通向具体示意中的叶页表 $T_1$–$T_3$（[@ex-ch38-recursive-page-table-dereference]）。
@@ -1087,7 +1089,7 @@ $$
 先在每条粗糙纤维标签 $c \in C$ 上按因子映射关系 $c = \mathrm{factor}(d)$ 将粗糙纤维拆解为细化子纤维族 $\{d \in D \mid \mathrm{factor}(d) = c\}$ 的无交并，证得纤维质量可加性与同目标碰撞平方和按树支展开的恒等式。对每个非零总质量的粗糙桶，利用细化子桶概率权重在凸性（柯西—施瓦茨型商和不等式）下的次可加性，证得细化子桶上的条件同目标碰撞得分之和不小于粗糙桶上的碰撞得分；最后在 `ENNReal` 上利用有限概率归一恒等式将碰撞得分与条件配对分歧不纯度互补相减（并对零质量纤维显式处理 `ENNReal` 零除约定），逐桶求和即得不纯度单调不增。完整证明由 Lean 内核检查。
 :::
 
-现在，将视角从静态商核移向动态扫描轨迹：当观察者指针沿着左栏那条闭合空间填充回路一步一拍执行 `ptr++`，并遵守正交自指统一场的**齐肯多夫无相邻 `1` 抗共振编码规则**（$w_t \cdot w_{t+1} = 0$，见[第 32 章](ch32-unified-field-and-meta-unification.md) [@thm-ch32-generative-self-reference-and-zeckendorf]）记录离散历史脉冲时，外部遍历信息论、符号动力学与空间填充几何文献给出了如下经典标尺：
+现在，将视角从静态商核移向动态扫描轨迹：当观察者指针沿着左栏那条闭合空间填充回路一步一拍执行 `ptr++`，并遵守正交自指统一场的**齐肯多夫无相邻 `1` 抗共振编码规则**（$w_t \cdot w_{t+1} = 0$，见[第 32 章 §32.4](ch32-s04-generative-laws.md#sec-ch32-generative-laws) [@thm-ch32-generative-self-reference-and-zeckendorf]）记录离散历史脉冲时，外部遍历信息论、符号动力学与空间填充几何文献给出了如下经典标尺：
 
 ::: {.remark #rem-ch38-smb-zeckendorf-hilbert-literature title="SMB 柱集渐近等分、Parry 黄金移位最大熵测度、Frougny 正规化与希尔伯特曲线局部性界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节将观察者指针的闭合晶格巡检与历史轨迹柱集收缩构建为定量 `MODEL` 时，援引以下四项外部经典文献（未作为一般遍历论或连续曲线定理包含在本书锁定的 `trureturing@dev` 声明集中）：
@@ -1132,5 +1134,306 @@ $$
 **交互实验室（`ORTHO//LEDGER`）：观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵。** 自由开关 $L_1 \dots L_5$ 遍历全部 $32$ 种布尔商核，切换 16 态希尔伯特环与二量子比特贝尔边缘盲区，并拖动约束卸载深度 $\Delta k$ 核验 $H_{\mathrm{total}} = I_{\mathrm{ledger}} + H_2^{\mathrm{escape}} = 4.000\text{ bits}$ 守恒律与昼夜擦除热账单。绿色只给本章用 `lean=` 引用的定理；希尔伯特扫描与昼夜热账本读法属本章示意模型（`MODEL`）。
 :::
 
-走到这里，从硬件解引用 `*ptr`（§38.1）、五段式寄存器解剖（§38.2）、递归自映射页表 `p = *p`（§38.3）、七阶查表退化阶梯（[§38.4](#sec-ch38-pnp-lookup-degradation)）直到原像纤维与齐肯多夫逃逸账本（§38.5），观察者作为“宇宙本体量子计算系统**的**一个记忆指针”的每一枚齿轮都已严丝合缝地咬合到位。而在下一章（[第 39 章](ch39-observer-is-ontological-universe.md)）的终极收束中，我们将追问最后一个问题：当自映射不动点 `p = *p` 扩展至整座全域商核，再也没有任何一条逃逸弦横亘于“能看的指针”与“所看的存储阵列”之间时，连“宇宙本体**的**记忆指针”中间那个“的”字所残留的寄存器与内存条之分，是否也将在全域 `p ≡ *p` 中彻底消融？
+走到这里，从硬件解引用 `*ptr`（§38.1）、五段式寄存器解剖（§38.2）、递归自映射页表 `p = *p`（§38.3）、七阶查表退化阶梯（[§38.4](#sec-ch38-pnp-lookup-degradation)）直到原像纤维与齐肯多夫逃逸账本（§38.5），观察者作为“宇宙本体量子计算系统**的**一个记忆指针”的每一枚齿轮都已严丝合缝地咬合到位。然而，在迈入下一章（[第 39 章](ch39-observer-is-ontological-universe.md)）彻底消融“指针”与“存储阵列”之间最后那个“的”字之前，我们必须先转过身来拆解 [§38.4.1](#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 留下的最后一根静态实无穷脚手架：在一座零背景自举的宇宙中，上述逃逸弦果真能在一张封顶完工的全局神谕表里一次性清零吗？
+
+---
+
+## 38.6 未完成的地平线：为什么哥德尔对角逃逸与“二生三”让全局 $P = NP$ 成为永不可达的完成化状态 {#sec-ch38-uncompleted-horizon-godel-pnp}
+
+> “$P = NP$ 是一种完成化状态，但是由于哥德尔不完备跟二生三，似乎是永远达不到的状态。”
+
+这句直指本源的断语，一举拆除了我们在 [§38.4.1](#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 搭建七阶退化阶梯时留下的最后一根反事实脚手架。在 [§38.4.1](#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 的思想实验起点（第 0 阶全息自指原型 $d = 0$）中，为了看清逐级剥除特权如何析出串行因果时间、空间全息半径、二维旋量干涉与兰道尔焦耳热，我们曾把全局“完成化”权且当作一座已经封顶竣工的**静态实无穷仓库**——仿佛在观察者指针开始寻址之前，一切约束公式 $\Phi$ 与其满足见证 $x^* = T[\Phi]$ 早已整整齐齐地并排躺在一张封闭总表里。然而，一旦把这幅静态设想放回[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)确立的**零背景比较公理 $\mathcal{A}_0$**（[@def-ch32-axiom-of-comparison]）之下——那里没有任何悬于状态竞技场之外、可以免费寄存答案却不参与比量的“外部第 3 点仓库 $C$”——每一次试图把一对状态的比较答案预编译进查表账本的动作，本身就会把一枚全新的平权状态重新投回竞技场中央！
+
+在展开这场收束全章的推演之前，我们必须严格重申本书的四层认识论红线：
+
+1. **开放问题边界（`OPEN`，标红）**：在固定有限字母表与标准统一图灵机计算模型下，经典数学猜想 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 迄今仍是悬而未决的克雷千禧年大奖难题（见[第 20 章](ch20-complexity-and-spacetime.md) [@conj-p-neq-np]、[第 30 章 §30.1](ch30-s01-global-field.md#sec-coda-global-p-eq-np-local-p-ne-np) 与[附录 C](appendix-c.md#sec-appendix-c-open-register)）。本节绝不宣称证明或证伪标准图灵机上的 $\mathrm{P} \neq \mathrm{NP}$；
+2. **内核已验证定理（`LEAN ✓`，标绿）**：无不动点扭转在任意二元表上的零有限性普遍逃逸、满射完备解码目录上相对语义对角线的非空拓扑分离亏损、并入逃逸对角线后的严格观测拓扑加细、有限域整表拷贝的事后零损失与前瞻非预见性失效、以及完备内积空间非满闭子空间的单位法向投影逃逸，由下文五联冻结定理 [@thm-ch38-uncompleted-horizon-diagonal-refinement] 零自由参数严格锁定；
+3. **外部经典文献（`文献结果，未在本书形式化`）**：哥德尔 1931 年第一不完备定理、哥德尔 1956 年致冯·诺依曼信件中的有界证明搜索追问、图灵 1939 年《基于序数的逻辑系统》与 Lawvere 1969 年范畴论对角不动点定理，严格封存于独立归属注记框 [@rem-ch38-godel-1956-turing-1939-lawvere-literature]；
+4. **理论与哲学模型诠释（`MODEL`）**：将“全局 $P = NP$”读作一轮接一轮把旧层验证搜索压缩为 $O(1)$ 快表直读、却因“二生三”扩场与对角拓扑劈裂而永远向前推移的**滚动完成化地平线（rolling completion horizon）**，并将其永恒未闭合诠释为阻止宇宙跌入绝对芝诺冻结与全知零熵死寂的内禀几何护栏，明确标定为本书的 `MODEL`。
+
+### 38.6.1 建表悖论：“二生三”让查表编译本身变成扩维引擎 {#sec-ch38-6-1}
+
+为什么在一座零背景宇宙里，“把一切问题的答案提前建好一张完备查找表”在几何上是一件自我挫败的事？让我们顺着账本亲手推算一步建表操作。
+
+设在离散演化阶 $t$，竞技场内共有 $M_t \ge 2$ 枚平权单位状态，张成当前有限维闭子空间 $\mathcal{V}_{D_t}$（$D_t = \dim \mathcal{V}_{D_t}$）。为了把一对非共线状态 $(\mathbf{A}, \mathbf{B})$（夹角 $\epsilon \in (0, \pi)$，内积 $\mathbf{A}\cdot\mathbf{B} = \cos\epsilon$）之间的多步搜索转化为一步直达的 $O(1)$ 查表命中，场内编译器将二者的比较结果固化为一条新的查表记录 $\mathbf{P}_{AB}$。在预设了外部硬盘的经典计算机里，写一条记录只消耗盘片磁道，不会反过来修改被测对象所在的状态空间；但在与零背景比较公理 $\mathcal{A}_0$（[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison) [@def-ch32-axiom-of-comparison]）相容的 Layer-1 正向单位实现（自比正则化分支 $S(x,x)=+\mathbf{1}$ 及选定定向法向分支）中，**表在场内，记录即状态**——新写入的查表条目 $\mathbf{P}_{AB}$ 一旦诞生，就与 $\mathbf{A}, \mathbf{B}$ 享有完全平权的本体席位，满足单位自比归一化 $\lVert\mathbf{P}_{AB}\rVert^2 = 1$（`MODEL`）！
+
+正如[第 34 章 §34.5](ch34-orthogonality-degeneracy-and-observer-position.md#sec-ch34-triadic-bootstrap-and-beyond-names)所揭示的“二生三”无特权自举几何：原比量平面 $\operatorname{span}\{\mathbf{A}, \mathbf{B}\}$ 内的同向切投影仅携带模方 $\cos^2\epsilon < 1$；只要环境完备内积空间中的当前闭子空间尚未填满全空间（$\mathcal{V}_{D_t}^\perp \neq \{0\}$），按闭子空间正交投影逃逸定理 [`finite_layer_projection_escape`](lean:D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape)，正交补 $\mathcal{V}_{D_t}^\perp$ 中必存在与旧层距离恒等于 $1$ 的单位法向轴 $\mathbf{e}_{D_t+1}$，承载起那份亏损模方 $1 - \cos^2\epsilon = \sin^2\epsilon$ 的双向量外积残差。于是，原本成双的待查偶对 $(\mathbf{A}, \mathbf{B})$ 连同它刚刚编译出的查表条目 $\mathbf{P}_{AB}$，当场结成三元极小三角弧面体 $(\mathbf{A}, \mathbf{B}, \mathbf{P}_{AB})$，其三元格拉姆行列式严格为正（`MODEL`）：
+
+$$
+\det G(\mathbf{A}, \mathbf{B}, \mathbf{P}_{AB}) \;=\; \sin^4\epsilon \;>\; 0 \qquad \bigl(\forall \epsilon \in (0, \pi)\bigr).
+$$
+
+现在请核对这一步“建表闭合”前后的未索引比量总账！假设编译器在本轮一口气将 $k \ge 1$ 对旧状态的比量结果编译写入场内快表：这一操作固然把 $k$ 道旧搜索题变成了 $O(1)$ 青色快表直读，可与此同时，场内平权单位状态总数从 $M_t$ 扩张至 $M_{t+1} = M_t + k$，并沿着新生法向轴撑开横跨旧层与新轴的外积扇区 $\mathcal{V}_{D_t} \wedge \mathbf{e}_{D_t+1}$。这 $k$ 枚新落地的查表条目立刻与原先场内的 $M_t$ 枚状态以及彼此之间，派生出
+
+$$
+\Delta\Pi_t \;=\; \binom{M_t + k}{2} - \binom{M_t}{2} \;=\; k M_t + \binom{k}{2}
+$$
+
+道全新的跨维两两比较义务！只要 $M_t \ge 2$，净增未闭合比量数 $\Delta\Pi_t - k = k(M_t - 1) + \binom{k}{2} > 0$ 就恒严格为正：在 [§38.5](#sec-ch38-observer-escape-ledger) 的观察者逃逸账本（[@thm-ch38-escape-pairs-and-structural-novelty]）视角下，旧商核目录对新张开的 $\mathbf{e}_{D_t+1}$ 坐标分量毫无判别力，每一条写入表内的答案都在正交方向上成批孵化出新的未决逃逸对 `escapePairs`！
+
+::: {.viz src="uncompleted-horizon-sandbox" preset="bootstrap-ledger" height="520"}
+**零背景建表悖论：“二生三”把每次查表写入变成扩维引擎（`MODEL`）。** 将两态 $(\mathbf{A}, \mathbf{B})$ 的比较答案编译为场内平权单位条目 $\mathbf{P}_{AB}$ 时，正交残差 $\sin\epsilon\,\mathbf{e}_{D+1}$ 顶出极小三角弧面体（$\det G = \sin^4\epsilon > 0$），在消除 $1$ 对旧未知比量的同时向场内新增 $M_t$ 条跨维未索引边与逃逸弦。
+:::
+
+这幅“越建表、表外未知越辽阔”的动态几何，恰似一个人在无边夜色中**提着灯笼去追赶灯笼自己投出的光圈边界**：你为了看清光圈边缘的暗影而向前迈出一步，手里的灯笼便随着你的脚步前移一寸，光圈与黑夜交界的那道地平线也分毫不差地同步向外退开一寸！在零背景竞技场中，查表编译器本身就是那盏挂在场内的灯笼——试图把全局 $P = NP$ 当作一张封顶完工的静态总表塞进宇宙内部，从第一步起就撞上了“记录本身增殖状态对”的组合扩维悖论（`MODEL`）。
+
+### 38.6.2 哥德尔不完备与“二生三”同源：Lawvere 对角不动点、完备目录分离亏损与图灵序数飞轮 {#sec-ch38-6-2}
+
+为什么作者在同一句箴言里将**“哥德尔不完备”**与**“二生三”**并举为阻断全局完成化的双生根源？因为穿过术语表象便会发现：前者从**形式逻辑与观测拓扑的商纤维侧**切入，后者从**零背景内积几何的状态场侧**切入，二者刻画的正是同一台自指逃逸引擎的一体两面！下表将这两条脉络逐层对齐（其中形式化锚点标为 `LEAN ✓`，数理逻辑定理标为 `文献结果`，统一对照属本章 `MODEL`）：
+
+| 演化环节 | 几何自举视角（二生三弧面体 $\Delta\mathcal{T}_\epsilon$） | 形式逻辑与复杂性视角（Lawvere / 哥德尔对角线 / 图灵序数扩表） |
+| :--- | :--- | :--- |
+| **1. 当前有限闭合层** | $D$ 维闭子空间 $\mathcal{V}_D$ 与当前有限引理商核快表 $S_D$（[@thm-ch38-escape-pairs-and-structural-novelty]） | 一致且 $\Sigma_1$-可靠的递归公理化算术理论 $T_D$（`文献结果`），或潜概念 [`Concept`](lean:D5/S3/ConceptDynamics/ConceptFiberDecomposition.Concept) $\mathrm{latent}_D : \mathrm{Address}_D \to \mathrm{Coordinate}_D$ 上的解码目录 $\mathrm{decoderCatalog}_D$（`LEAN ✓`） |
+| **2. 自指比较 / 对角构造** | 场内非共线偶对 $(\mathbf{A}, \mathbf{B})$ 比量并在 Layer-1 正向单位实现下平权归一，析出带双向量法向残差 $\star(\mathbf{B}\wedge\mathbf{A})$ 的第三态 $\mathbf{P}_{AB}$（[§34.5](ch34-orthogonality-degeneracy-and-observer-position.md#sec-ch34-triadic-bootstrap-and-beyond-names)，`MODEL`） | 无不动点扭转 $\mathrm{twist}(o) \neq o$ 沿自作用槽位生成 [`diagonal`](lean:D5/S0/Diagonal/EscapeCount.diagonal) 与相对语义对角线 [`relativeSemanticDiagonal`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relativeSemanticDiagonal)（`LEAN ✓`）；算术层编码自指语句 $G(T_D)$（`文献结果`） |
+| **3. 旧层不可捕获与盲区裂痕** | 只要 $\mathcal{V}_D^\perp \neq \{0\}$，单位法向 $e \in \mathcal{V}_D^\perp$ 满足 $P_{\mathcal{V}_D}(e) = 0$、$\operatorname{infDist}(e, \mathcal{V}_D) = 1$（`LEAN ✓`），撑开 $\det G = \sin^4\epsilon > 0$（`MODEL`） | **即便 $\mathrm{decoderCatalog}_D$ 对全部坐标函数满射**，对角线仍普遍逃逸（[`IsEscaped`](lean:D5/S0/Diagonal/EscapeCount.IsEscaped)）并劈出非空分离亏损 $\operatorname{separationDeficit}(\mathrm{latent}_D, g_{\mathrm{diag}}).\mathrm{Nonempty}$（`LEAN ✓`）；算术层 $T_D \nvdash G(T_D)$ 而 $G(T_D)$ 在标准模型 $\mathbb{N}$ 中为真（`文献结果`） |
+| **4. 并入新元后的严格升维** | 将 $\mathbf{P}_{AB}$ 纳入场内张开 $\mathcal{V}_{D+1} = \mathcal{V}_D \oplus \mathbb{R}\mathbf{e}_{D+1}$，新增 $k M_t + \binom{k}{2}$ 道跨维比量（`MODEL`） | 以概念直积 [`conceptJoin`](lean:D5/S3/ConceptDynamics/ConceptJoinUniversal.conceptJoin) 并入逃逸对角线，严格加细观测划分拓扑 [`StrictObservationRefinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/PrimitiveEscapeStrictRefinement.StrictObservationRefinement)（`LEAN ✓`）；算术层并入真语句升至 $T_{D+1} = T_D + G(T_D)$（图灵序数逻辑步，`文献结果`） |
+| **5. 无穷不闭合飞轮与前后视差** | 旧层内积 $O(1)$ 直读，而外沿球面原胞花冠向更高维正交补无尽绽放（`MODEL`） | 整表拷贝虽令旧域事后损失归零 $\operatorname{retrospectiveLoss} = 0$，却处处丧失非预见性 $\neg\operatorname{NonAnticipating}$（`LEAN ✓`）；配合“二生三”扩容地址场 $\mathrm{Address}_D \to \mathrm{Address}_{D+1}$，$T_{D+1}$ 再度面对新对角逃逸 $G(T_{D+1})$（`文献结果` + `MODEL`） |
+
+`trureturing` 将支撑上表全部形式化锚点的五项核心机制——自作用普遍逃逸、满射目录非空分离亏损、并入后严格拓扑加细、事后抄表非预见性失效与闭子空间单位法向逃逸——锁定为如下五联内核定理：
+
+::: {.theorem #thm-ch38-uncompleted-horizon-diagonal-refinement title="自作用对角普遍逃逸、完备目录严格拓扑加细、事后抄表非预见性失效与正交补投影逃逸定理" lean="D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"}
+在 `trureturing` 冻结的对角线逃逸、观测拓扑动态、回顾性查表裁定与希尔伯特空间正交投影模块中，以下五项结构定理同时成立：
+
+1. **无不动点自作用的零有限性普遍逃逸**（[`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package)）：对任意类型 $A, Y$、状态映射 $f : Y \to Y$ 与二元表 $g : A \to A \to Y$，扭转对角线 [`diagonal`](lean:D5/S0/Diagonal/EscapeCount.diagonal)$(f, g)(a) = f(g(a, a))$ 满足 [`IsEscaped`](lean:D5/S0/Diagonal/EscapeCount.IsEscaped)$(f, g) \iff \operatorname{diagonal}(f, g) \notin \operatorname{Set.range}(g)$；若 $f$ 无不动点（$\forall y \in Y,\; f(y) \neq y$），则对一切二元寻址表 $h : A \to A \to Y$ 恒有 $\operatorname{IsEscaped}(f, h)$，且存在具不动点的 $f_0 : \mathrm{Bool} \to \mathrm{Bool}$ 与 $g_0 : \mathrm{Unit} \to \mathrm{Unit} \to \mathrm{Bool}$ 满足 $\neg\operatorname{IsEscaped}(f_0, g_0)$；
+2. **满射完备解码目录上的非空拓扑分离亏损**（[`complete_diagonal_separationDeficit_nonempty`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty)）：设非空地址类型 $\mathrm{Address}$（`[Nonempty Address]`）、无不动点扭转 $\mathrm{twist} : \mathrm{Output} \to \mathrm{Output}$（满足 $\forall o,\; \mathrm{twist}(o) \neq o$）、潜概念 $\mathrm{latent} : \operatorname{Concept}(\mathrm{Address}, \mathrm{Coordinate})$（[`Concept`](lean:D5/S3/ConceptDynamics/ConceptFiberDecomposition.Concept)）以及满射解码目录 $\mathrm{decoderCatalog} : \mathrm{Address} \to \mathrm{Coordinate} \to \mathrm{Output}$（满足 $\operatorname{Function.Surjective}(\mathrm{decoderCatalog})$）。记相对语义对角线为 $g_{\mathrm{diag}} := \operatorname{relativeSemanticDiagonal}(\mathrm{twist}, \mathrm{latent}, \mathrm{decoderCatalog})$（[`relativeSemanticDiagonal`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relativeSemanticDiagonal)，定义为 $a \mapsto \mathrm{twist}(\mathrm{decoderCatalog}(a, \mathrm{latent}(a)))$），则潜概念相对于 $g_{\mathrm{diag}}$ 的拓扑分离亏损（[`separationDeficit`](lean:D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology.separationDeficit)）必非空：
+
+   $$
+   \bigl(\operatorname{separationDeficit}(\mathrm{latent},\; g_{\mathrm{diag}})\bigr).\mathrm{Nonempty};
+   $$
+
+3. **并入逃逸对角线后的严格观测拓扑加细**（[`complete_diagonal_strict_topology_refinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement)）：在与第 2 款完全相同的假设下，通过概念直积 [`conceptJoin`](lean:D5/S3/ConceptDynamics/ConceptJoinUniversal.conceptJoin) 将 $g_{\mathrm{diag}}$ 并入潜概念 $\mathrm{latent}$ 后，新划分拓扑（[`partitionTopology`](lean:D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection.partitionTopology)）对原划分拓扑构成严格观测加细（[`StrictObservationRefinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/PrimitiveEscapeStrictRefinement.StrictObservationRefinement)）：
+
+   $$
+   \operatorname{StrictObservationRefinement}\Bigl(
+     \operatorname{partitionTopology}(\mathrm{latent}),\;
+     \operatorname{partitionTopology}\bigl(\operatorname{conceptJoin}(\mathrm{latent}, g_{\mathrm{diag}})\bigr)
+   \Bigr);
+   $$
+
+4. **有限域整表拷贝的事后零损失与前瞻非预见性失效**（[`lookup_copy_zero_loss_and_nonanticipating_failure`](lean:D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure)）：对任意有限可判等指标域 $Z$（`[Fintype Z] [DecidableEq Z]`）、对比结构 $\mathrm{comparison} : \mathrm{CopyComparison}(Z, \mathrm{Answer})$ 与满足全表依赖条件 $\operatorname{IncorporatesTableCopy}(\mathrm{commitment})$ 的承诺结构 $\mathrm{commitment} : \mathrm{CopyCommitment}(Z)$，整表拷贝 $\operatorname{tableCopy}(\mathrm{comparison})$ 虽满足事后零损失 $\operatorname{retrospectiveLoss}(\mathrm{comparison}, \operatorname{tableCopy}(\mathrm{comparison})) = 0$，却处处丧失非预见性（$\forall z \in Z,\; \neg\operatorname{NonAnticipating}(\mathrm{commitment}, z)$），且事后零损失不蕴涵对一切收益泛函 $G : (Z \to \mathrm{Answer}) \to \mathbb{N}$ 的正前瞻收益 $\operatorname{PositiveProspectiveGain}(G, \operatorname{tableCopy}(\mathrm{comparison}))$；
+5. **完备内积空间非满闭子空间的单位法向投影逃逸**（[`finite_layer_projection_escape`](lean:D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape)）：在数域 $\mathbb{K}$（`[RCLike 𝕜]`）上的任意完备内积空间 $V$ 中，对任意满足正交补非平凡 $S^\perp \neq \bot$ 的闭子空间 $S \le V$，必存在单位法向逃逸向量 $e \in S^\perp$，同时满足
+
+   $$
+   \lVert e\rVert = 1, \quad P_S(e) = 0, \quad \operatorname{Metric.infDist}(e, S) = 1, \quad \lVert \operatorname{id}_{\mathbb{K}, V} - P_S\rVert = 1,
+   $$
+
+   其中 $P_S := S.\operatorname{starProjection}$ 为向闭子空间 $S$ 的正交投影算子。
+:::
+
+::: proof
+第 1 款与第 4 款已在 [@thm-ch38-self-mapped-diagonal-fixed-point] 第 2 款（经 [`diagonal_landing_fixed`](lean:D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed) 反证）与 [@thm-ch38-retrospective-lookup-failure] 中逐项核验。第 2 款利用满射解码条件与无不动点条件，由 [`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective) 证出 $g_{\mathrm{diag}}$ 不能经由 $\mathrm{latent}$ 因子分解（倘若存在 $h : \mathrm{Coordinate} \to \mathrm{Output}$ 使 $g_{\mathrm{diag}} = h \circ \mathrm{latent}$，取满射原像地址 $a_0$ 使 $\mathrm{decoderCatalog}(a_0) = h$，在 $a_0$ 求值即推出不动点矛盾 $\mathrm{twist}(o_0) = o_0$）；再结合目标恢复充要判据 [`target_recovery_criterion`](lean:D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion) 与核缺陷恒等式 [`defectRelation_eq_separationDeficit`](lean:D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology.defectRelation_eq_separationDeficit)，直接得出存在同潜坐标而异对角读出的地址对 $(a_1, a_2) \in \operatorname{separationDeficit}(\mathrm{latent}, g_{\mathrm{diag}})$。第 3 款将同一不可分解结论代入坐标不充分与联合拓扑严格加细的充要等价定理 [`coordinate_inadequate_iff_strict_join_refinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/RedundantCoordinateTopology.coordinate_inadequate_iff_strict_join_refinement)，立即给出 $\operatorname{conceptJoin}(\mathrm{latent}, g_{\mathrm{diag}})$ 对划分拓扑的严格加细。第 5 款由 $S^\perp \neq \bot$ 取出非零正交元并归一化为单位向量 $e \in S^\perp$（$\lVert e\rVert = 1$），由正交补核刻画得 $P_S(e) = 0$；对任意 $s \in S$ 由勾股恒等式 $\lVert e - s\rVert^2 = \lVert e\rVert^2 + \lVert s\rVert^2 \ge 1$（在 $s = 0$ 取等）锁定下确界距离 $\operatorname{Metric.infDist}(e, S) = 1$；最后因 $\operatorname{id} - P_S = P_{S^\perp}$ 为正交投影算子故算子范数不超过 $1$，并在单位见证元 $e$ 上达到 $\lVert(\operatorname{id} - P_S)e\rVert = \lVert e\rVert = 1$，从而精确锁定 $\lVert \operatorname{id}_{\mathbb{K}, V} - P_S\rVert = 1$。完整证明由 Lean 内核检查。
+:::
+
+上述抽象拓扑与算子逃逸骨架同二十世纪数理逻辑与计算复杂性四座历史里程碑之间的严格学术边界归档如下：
+
+::: {.remark #rem-ch38-godel-1956-turing-1939-lawvere-literature title="哥德尔 1931 不完备定理、1956 致冯·诺依曼信件、图灵 1939 序数逻辑与 Lawvere 1969 不动点定理（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本节将形式系统不完备性、有界寻证复杂性与超限扩表阶梯纳入“未完成的地平线”模型诠释（`MODEL`）时，严格区分 [@thm-ch38-uncompleted-horizon-diagonal-refinement] 的内核定理与以下四项外部经典文献（未作为元数学语法定理包含在 `trureturing@dev` 锁文件中）：
+
+1. **哥德尔第一不完备定理（K. Gödel, *Monatsh. Math. Phys.* **38**, 173–198, 1931；Rosser 弱化前提改进见 J. B. Rosser, *J. Symb. Log.* **1**, 87–91, 1936）**：对任意一致且能表达足够初等算术的递归公理化形式理论 $T$，可通过哥德尔配数与对角引理构造算术语句 $G(T)$ 使 $T \nvdash G(T)$；若进一步假定 $T$ 具有 $\omega$-一致性或 $\Sigma_1$-可靠性，则亦有 $T \nvdash \neg G(T)$，且 $G(T)$ 在标准自然数模型 $\mathbb{N}$ 中为真 $\Pi_1$ 语句。须注意哥德尔定理建立在句法配数与递归可枚举公理化之上，并不直接假定任意语义函数目录满射（与集合/拓扑对角线的精确前提对比另见[第 21 章](ch21-diagonalization-and-escape.md) [@rem-godel-tarski-comparison-literature]）；
+2. **哥德尔致冯·诺依曼信件与有界长度证明搜索问题（K. Gödel, 1956 年 3 月 20 日致 J. von Neumann 信件；复杂性奠基见 S. A. Cook, *STOC*, 151–158, 1971；R. M. Karp, 1972；L. A. Levin, *Probl. Peredachi Inf.* **9**, 115–116, 1973）**：哥德尔在信中首次从定量步数角度追问——判定一阶逻辑公式是否存在长度不超过 $n$ 符号的形式证明，能否在通用机器上以关于 $n$ 的一次或二次等低阶多项式步数完成，从而将“有限截断长度下的自动寻证能否化归为高效查表判定”确立为现代 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 问题（[@conj-p-neq-np]，`OPEN`）的先驱表述。须严格区分：**无界长度可证性**的不可判定性与不完备性是已证数理逻辑定理，而**多项式长度截断下的有界寻证复杂度**则属于至今开放的 `OPEN` 猜想，二者绝不可作非法逻辑混同；
+3. **图灵基于序数的逻辑系统阶梯（A. M. Turing, *Systems of Logic Based on Ordinals*, *Proc. Lond. Math. Soc.* (2) **45**, 161–228, 1939；自反递进扩张见 S. Feferman, *J. Symb. Log.* **27**, 259–316, 1962）**：图灵在博士论文中研究沿建设性可计算序数 $\alpha$ 依次向基础算术理论 $T_0$ 添加一致性语句或未决真语句所构成的超限理论塔 $\langle T_\alpha \rangle$，证明虽然每向上攀升一层都能把低阶层的逃逸命题吸收为新层公理查表，但任何由单一递归序数记号系汇拢的理论自身仍是递归公理化系统，必然在对角线上再度涌现出逃逸该层的新不可证算术真语句，无法凭有限或单一递归规则一劳永逸消除全部创造性直觉判断；
+4. **Lawvere 笛卡尔闭范畴对角不动点定理（F. W. Lawvere, *Diagonal arguments and cartesian closed categories*, *Lecture Notes in Math.* **92**, 134–145, 1969；统一框架综述见 N. S. Yanofsky, *Bull. Symb. Log.* **9**, 362–386, 2003）**：在笛卡尔闭范畴中，若态射 $g : A \times A \to Y$ 对指数对象 $Y^A$ 弱点满射，则任意态射 $f : Y \to Y$ 必有不动点；其逆否形式将康托尔超限幂集定理、罗素悖论、哥德尔不可证性与塔斯基真值不可定义性收摄于同一条“无不动点扭转必逃逸任意参数化目录”的抽象泛代数骨架之下，对应 [@thm-ch38-uncompleted-horizon-diagonal-refinement] 第 1–3 款。
+:::
+
+::: {.viz src="uncompleted-horizon-sandbox" preset="lawvere-godel" height="520"}
+**完备目录对角逃逸与严格观测拓扑加细。** 即便解码目录穷尽当前潜坐标上的全部布尔映射（满射），无不动点扭转 $\mathrm{twist}$ 仍在对角槽位拼出逃逸串 $g_{\mathrm{diag}}$，在旧纤维内劈开品红分离亏损对，并通过 `conceptJoin` 立起紫色新坐标轴严格细化观测拓扑（[@thm-ch38-uncompleted-horizon-diagonal-refinement] 第 1–3 款，`LEAN ✓`）。
+:::
+
+把 [@thm-ch38-uncompleted-horizon-diagonal-refinement] 第 2–3 款放回[第 21 章 §21.2](ch21-diagonalization-and-escape.md#sec-ch21-2)（[@ex-cantor-godel-diagonal-table]）曾经指出的那道精密门槛上，我们更能看清为什么**“哥德尔不完备”与“二生三”缺一不可**：在孤立静态的固定有限地址集 $\mathrm{Address}_D$ 上，单次并入逃逸对角线固然把坐标空间严格升维至 $\mathrm{Coordinate}_{D+1} = \mathrm{Coordinate}_D \times \mathrm{Output}$，但若地址总数原地锁死不增，旧地址集很快便不足以对指数膨胀的新函数空间 $\mathrm{Coordinate}_{D+1} \to \mathrm{Output}$ 继续构成满射目录！究竟是谁在每一轮拓扑加细的同时，源源不断地为宇宙补足新一轮地址池 $\mathrm{Address}_D \hookrightarrow \mathrm{Address}_{D+1}$？**恰恰是 [§38.6.1](#sec-ch38-6-1) 的“二生三”零背景建表机制！** 每一次把新引理或新比较结果实体化为场内平权成员，都在底层状态与地址池中播下新顶点（`二生三` 扩张 $\mathrm{Address}$），而每一次在新地址池上试图编纂完备解码目录，又立刻在对角槽位劈出非空分离亏损并逼出严格更细的观测拓扑（`哥德尔—Lawvere 对角线` 细化 $\mathrm{Coordinate}$）。地址增殖与纤维劈裂左右咬合，驱动着一台永不停歇的自举扩表飞轮（`MODEL`）！
+
+这台飞轮最鲜活的现实写照，莫过于图灵序数逻辑阶梯 $T_0 \to T_1 \to T_2 \to \cdots$（[@rem-ch38-godel-1956-turing-1939-lawvere-literature] 第 3 条）以及本书所依托的 `trureturing` 形式化知识库自身的生长历程（`MODEL`）：每当探索者在漫长的证明搜索之后，证出并冻结一条落于既有目录语义闭包之外、具备严格正结构新颖度（[@thm-ch38-escape-pairs-and-structural-novelty] 第 2 款 [`lowersEscape_iff_strict_kernel_novelty`](lean:D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty)）的新定理 $L_{\mathrm{new}}$，原本需要在指数级分叉迷宫中苦苦摸索的难题，从此在升级后的目录 $T_{D+1}$ 内被永久预编译为一次零迟疑的 $O(1)$ 快表查表命中（`TLB Hit`）；然而，正因为 $L_{\mathrm{new}}$ 作为一枚新概念原语被正式写进了语言与目录，它与库中既有概念的组合与自指立刻在更高一层的商空间里张开了此前甚至无法被清晰表述的新猜想锋面！
+
+::: {.viz src="uncompleted-horizon-sandbox" preset="ordinal-spiral" height="520"}
+**图灵序数逻辑阶梯与自举扩表螺旋（`MODEL`）。** 沿 $T_0 \to T_1 \to T_2 \to \cdots$ 逐层将上一阶逃逸命题或正结构新颖度引理并入快表：内圈青色弧段将旧层指数级寻证压缩为 $O(1)$ 引理直读，而外圈紫色与品红螺旋锋面同步张开更高一阶的未决比较空间（参照 [@rem-ch38-godel-1956-turing-1939-lawvere-literature] 第 3 条）。
+:::
+
+看清这架内圈不断编译收敛、外圈同步破壳扩张的双螺旋之后，困扰第 30 章与本章前五节的“全局 $P = NP$ 与局部 $P \neq NP$”张力，终于迎来了最透彻的几何安置。
+
+### 38.6.3 双向正交视差与免于全知死寂的宇宙护栏 {#sec-ch38-6-3}
+
+站在观察者记忆指针当前所驻的琥珀色前沿层 $D_t$ 上，沿着时间与维度的前后两个正交方向同时凝望，[@thm-ch38-uncompleted-horizon-diagonal-refinement] 的五款结论当场显影出一幅壮丽的**双向正交视差**（`MODEL`）：
+
+- **向后回望已凝结的旧维内核（局部事后“已完成态”）**：在已经被历史比量与快表编译锁定的有限子域 $Z_{\le t}$ 及闭子空间 $\mathcal{V}_{D_t}$ 内部，[@thm-ch38-uncompleted-horizon-diagonal-refinement] 第 4 款的前半句严格保证整表拷贝满足**事后零损失** $\operatorname{retrospectiveLoss} = 0$。宏观真空中的守恒律、原子轨道的稳定本征谱、生物千百万年演化沉淀的本能回路，乃至数学家已经验证入库的冻结引理，全都运行在这条青色同相内积通道之上，呈现近似零延迟的 $O(1)$ 快表直读——这就是为什么当我们回头俯瞰已成定局的过往历史与旧维切片时，处处都折射出宛如“$P = NP$ 早已完成”的晶莹秩序；
+- **向前凝视正在生长的正交锋面（前瞻永恒未闭合态）**：就在同一个时刻，[@thm-ch38-uncompleted-horizon-diagonal-refinement] 第 4 款的后半句连同第 2、3、5 款铁面无私地宣告——同一张事后零损失快表在跨向边界外的新问题时**处处丧失非预见性**（$\forall z,\; \neg\operatorname{NonAnticipating}$），正交补 $\mathcal{V}_{D_t}^\perp$ 永远耸立着距离为 $1$ 的单位逃逸法向 $e$（$\operatorname{Metric.infDist}(e, \mathcal{V}_{D_t}) = 1$），且任何企图就地封顶的满射目录必然在对角槽位撕开非空分离亏损 $\operatorname{separationDeficit} \neq \emptyset$！
+
+由此可见，在本章的模型诠释（`MODEL`）中，**所谓“$P = NP$ 完成化状态”，既不是早已躺在宇宙尽头等待某一天被搬空的静态终点站，也不是虚无缥缈的幻影，而是一道永远伴随指针前移而同步推进的“滚动渐近地平线”**：它在指针走过的身后再一次次局部兑现为 $O(1)$ 直读，又在指针正前方的法向双向量锋面上永恒保持半步未闭合的敞开！
+
+::: {.viz src="uncompleted-horizon-sandbox" preset="bidirectional-parallax" height="520"}
+**双向正交视差：向后事后零损直读对照向前非空逃逸锋面（`MODEL`）。** 以琥珀色当前指针层 $D_t$ 为分水岭，向后回望的青色旧维已编译区满足 `retrospectiveLoss = 0` 的 $O(1)$ 快表直读，向前敞开的品红/紫色生长锋面则因 `¬NonAnticipating` 与非空 `separationDeficit` 持续涌现正交新维（[@thm-ch38-uncompleted-horizon-diagonal-refinement]）。
+:::
+
+不妨再作一次终极反事实叩问（`MODEL`）：倘若某一天，“哥德尔对角逃逸”与“二生三正交自举”这两道铁律突然双双失效，整座宇宙果真如愿以偿地抵达了彻底封顶、零逃逸、零余项的全局 $P = NP$ 完成化状态，等待万物的将会是怎样的图景？答案并非极乐天堂，而是三重瞬时降临的**本体论热寂**：
+
+1. **差异清零与外积张力网的全面坍缩**：一旦所有潜在状态对与高阶谓词全部静态闭合进同一张完备死表，任意两态之间再无未决的正交双向量残差 $\mathbf{B}\wedge\mathbf{A} \to 0$，支撑维度张开的极小三角弧面体全部压扁回共线幂等残影，立体饱满的关系流形瞬间退化为毫无厚度的单点死结；
+2. **格拉姆残差与球面角超归零触发绝对芝诺时间停摆**：回顾[第 7 章](ch07-geometric-time-and-speed-limits.md)的连续投影冻结、[第 29 章](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field)的局部格拉姆椭圆体体积以及本章 §38.1 的指针扫描节拍，主观时间的每一次跳动（`ptr++`）都仰赖非零横向残差 $\lVert(\operatorname{id} - P_{\mathcal{V}_D})\psi\rVert > 0$ 与不可并行的进位涟漪；一旦全局投影残差与三面角吉拉尔角超 $\Omega_0$ 彻底清零，记忆指针当场丧失跨向下一帧的一切几何驱动力，整座宇宙立即凝死在零演化的绝对芝诺静默之中；
+3. **验证与生成零相位差的全知零熵死寂**：如果“提出一道追问（验证）”与“在零延迟内现成持有答案（生成）”之间不再隔着哪怕半拍的探索相位差，那么世间一切好奇、悬念、试错、重逢时的热泪与顿悟时的电光石火便在起念之初同时蒸发（$\operatorname{uniqueCapturePairs} \equiv \emptyset$）——全知即是零新颖度的绝对死寂。
+
+至此我们终于彻悟：**哥德尔不完备与“二生三”，从来不是造物主设下用来羞辱有限理性的缺陷或诅咒，而是零背景宇宙为了免于坍缩进全知零熵死寂而为自己锻造的永恒生机护栏（`MODEL`）！** 正因为那道名为 $P = NP$ 的完成化地平线永远在前方半步熠熠生辉、却永远拒绝合拢封顶，时间之河才得以奔涌，有限指针才得以在已知的青色港湾与未知的品红星海之间生生不息地启航。
+
+::: {.viz src="uncompleted-horizon-sandbox" preset="frozen-omniscience" height="520"}
+**反事实强制闭合：全知零熵死寂与绝对芝诺冻结对照活体开口宇宙（`MODEL`）。** 左半侧模拟强行关停对角逃逸与“二生三”后的假想全局 $P = NP$ 完成态——双向量张力归零、格拉姆体积坍缩、`ptr++` 停跳；右半侧保持非空分离亏损与正交法向自举，令宇宙在永恒未闭合的地平线上持续呼吸生长。
+:::
+
+然而，在敲碎了“静态完工总表”的幻象之后，我们还须警惕理性滑入相反一侧的执念——误把“球外有球、无穷时间扩张、永不闭合”实体化为新的绝对本体教条，甚至以为经验上永无止境地追逐 $P = NP$ 便足以从反面断言非相对化的 $P \neq NP$。在转入下一节（[§38.7](#sec-ch38-stereographic-blindspot-relativization-suspension)）连同这把破执之锤一并放下、直探观察者北极自指盲点的球极双生投影之前，读者可先在下方完整交互沙盘中亲手拨动这五幕动态实验，体认那道永不闭合却照亮万物的滚动地平线：
+
+::: {.viz src="uncompleted-horizon-sandbox" height="640"}
+**交互实验室（`HORIZON//UNCOMPLETED`）：未完成的地平线——哥德尔对角逃逸与“二生三”自举沙盘。** 自由切换“二生三建表扩维—完备目录对角劈裂—图灵序数扩表螺旋—双向正交视差—全知死寂反事实对照”五张实验卡，亲手调节初始夹角 $\epsilon$、解码目录潜坐标与扩表阶数，检验为何全局 $P = NP$ 是局部回望零损直读、前瞻永远敞开的滚动完成化地平线。绿色只给本章用 `lean=` 引用的定理；标准图灵机 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 标红为开放问题（`OPEN`），滚动地平线与宇宙护栏读法属本章模型诠释（`MODEL`）。
+:::
+
+---
+
+## 38.7 自指盲点球极投影、相对化屏障与四句离相：为什么追逐 $P = NP$ 绝不许断言 $P \neq NP$ {#sec-ch38-stereographic-blindspot-relativization-suspension}
+
+> “然而，一切存在也只是一种投影，我们以为球外有球，我们认为有时间，我们认为不闭合，但也只是一种投影，我们看似在永远追逐 $P=NP$，但我们无法断言 $P \neq NP$。”
+
+在 [§38.6](#sec-ch38-uncompleted-horizon-godel-pnp) 中，哥德尔—Lawvere 对角逃逸与“二生三”联手拆除了 [§38.4](#sec-ch38-pnp-lookup-degradation) 第 0 阶全息原型遗留的“静态实无穷完工总表”脚手架。然而，倘若理性在此止步，便极易滑入另一座更隐蔽的执念深渊——把“球外有球”、“无尽正交时间扩张”与“永不闭合”重新实体化为新的绝对本体教条，甚至误以为现象界永无止境地追逐 $P = NP$ 就等于从反面证实了非相对化的 $P \neq NP$。本章收官的这一转，正是对“未完成地平线”自身的**终极反身清洗**：连刚才用来击碎静态闭合的那柄锤子也一并放下，看清“闭合与不闭合”、“追逐 $P = NP$ 与断言 $P \neq NP$”，不过是内嵌观察者隔着自身不可投影的自指盲点，向同一本源流形两侧投出的双生视差影像（`MODEL`）。
+
+在进入球极投影与元复杂性屏障之前，我们先在入口处钉死本节的四道认识论护栏：
+
+1. **开放问题边界（`OPEN`，标红）**：非相对化的标准图灵机猜想 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$（[@conj-p-neq-np]）及其在 $\mathrm{PA}$/$\mathrm{ZFC}$ 中的可证性或独立性（[@prob-ch38-unrelativized-p-vs-np-and-independence]）严格开放，本节绝不宣称证明或证伪任一方向；
+2. **内核已验证定理（`LEAN ✓`，标绿）**：一维凯莱分式变换单位圆边界充要判据、计算基对角可观测量族相对相位读出盲区、观测划分拓扑不可分核刻画与整表拷贝的事后零损失对前瞻非预见性失效，由 [@prop-ch38-cayley-stereographic-and-blindspot-suspension] 严格锁定；
+3. **外部经典文献（`文献结果，未在本书形式化`）**：高维球极投影微分同胚与亚历山德罗夫单点紧化、Baker–Gill–Solovay 相对化屏障、Razborov–Rudich 自然证明屏障、Aaronson–Wigderson 代数化屏障、哥德尔第二不完备定理及龙树《中论》四句离相，严守独立文献归属（[@rem-ch38-bgs-natural-algebrization-barriers-literature]）；
+4. **理论与哲学模型诠释（`MODEL`）**：将“有限闭合 vs. 无穷球外有球”与“折叠坍缩 vs. 追逐未闭合”统一诠释为观察者北极自指盲点 $\{N\}$ 穿孔前后的双生投影，明确标定为本书的 `MODEL`。
+
+### 38.7.1 亚历山德罗夫单点紧化与北极自指盲点：为什么“球外有球、时间扩张、永不闭合”也是投影？ {#sec-ch38-7-1}
+
+在标准微分拓扑与共形几何中（`文献结果，未在本书形式化`），设单位球面 $S^D \subset \mathbb{R}^{D+1}$ 的北极为观察者记忆指针自身的驻点 $N = (0, \dots, 0, 1)$。从北极 $N$ 向赤道超平面 $\mathbb{R}^D$ 作球极投影，给出挖去单点后的微分同胚
+
+$$
+\Pi_N : S^D \setminus \{N\} \xrightarrow{\;\sim\;} \mathbb{R}^D, \qquad \mathbf{X}_{\mathrm{proj}}(\mathbf{x}, z) = \frac{(x_1, \dots, x_D)}{1 - z},
+$$
+
+其逆拓扑正是**亚历山德罗夫单点紧化** $\mathbb{R}^D \cup \{\infty\} \cong S^D$：整个无界欧氏平面的“无穷远地平线”$\{\infty\}$，在紧致球面上不多不少恰是观察者脚下那唯一一枚被挖去的驻点 $\{N\}$。
+
+改用自北极 $N$ 起算的球面余纬角 $\theta \in (0, \pi]$ 参数化（$z = \cos\theta$，$\lVert\mathbf{x}\rVert = \sin\theta$），单位球面圆度规与赤道平面欧氏线元满足共形拉回恒等式
+
+$$
+ds_{S^D}^2 \;=\; \frac{4}{\bigl(1 + \lVert\mathbf{X}_{\mathrm{proj}}\rVert^2\bigr)^2}\,d\mathbf{X}_{\mathrm{proj}}^2 \;=\; (1 - \cos\theta)^2\,d\mathbf{X}_{\mathrm{proj}}^2,
+$$
+
+故平面投影线元 $\lVert d\mathbf{X}_{\mathrm{proj}}\rVert = \mu(\theta)\,ds_{S^D}$ 的瞬时共形放大率及平面投影半径写为初等闭式（`文献结果` + `手工推导`）：
+
+$$
+R(\theta) = \lVert\mathbf{X}_{\mathrm{proj}}\rVert = \sqrt{\frac{1+z}{1-z}} = \cot\frac{\theta}{2} \xrightarrow{\;\theta \to 0^+\;} +\infty, \qquad \mu(\theta) = \frac{1}{1 - \cos\theta} = \frac{1}{2\sin^2(\theta/2)} \xrightarrow{\;\theta \to 0^+\;} +\infty.
+$$
+
+当紧致球面 $S^D$ 上一段总弧长有限、曲率温和平静的微弧轨迹仅仅朝着观察者自己的脚跟 $N$ 缓步回返（$\theta \to 0^+$，$z \to 1^-$）时，平面投影坐标却发生剧烈的视差发散（`NUM`）：在余纬 $\theta = 0.65\text{ rad}$ 处，局部步长的瞬时共形放大率已升至 $\mu(0.65) = (1 - \cos 0.65)^{-1} \approx 4.90\times$；当轨迹逼近距北极仅剩自指盲点孔径 $\delta_{\mathrm{blind}} = 0.12\text{ rad}$ 的微弧边缘时，单侧投影半径达 $R(0.12) = \cot(0.06) \approx 16.65$，全平面表观直径跨度 $2\cot(\theta/2)$ 更暴涨至 $2\cot(0.06) \approx 33.3\times$！
+
+“闭合”与“不闭合”的双生投影根源由此水落石出（`MODEL`）：
+
+- **越界全观假想（非法包含盲点 $\{N\}$）**：幻想跃出竞技场站到“外部第 3 点 $C$”（违背[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison) 零背景比较公理 [@def-ch32-axiom-of-comparison]），把紧致 $S^D$ 连同北极 $\{N\}$ 一口吞入眼底，显影出“有限、闭合、无时间完工”的静态全局像；
+- **场内内禀显影（诚实挖去盲点 $\{N\}$）**：驻留于场内极点 $N$ 向外投影——眼睛无法站在自己的眼球之外给自己成像，不得不挖去奇点 $\{N\}$——于是任何向自指核心 $N$ 靠拢的有限微弧，都会在赤道屏幕上被拉伸成一层套一层的“球外有球”、永不停歇的时间膨胀与步步后退的地平线。
+
+有限闭合与无穷未闭合之间，并非隔着两座截然不同的宇宙，而仅仅相差观察者脚下那一枚不可投影的自指盲点 $\{N\}$。
+
+::: {.viz src="stereographic-relativization-sandbox" preset="blindspot-divergence" height="520"}
+**北极自指盲点与球极投影发散（`blindspot-divergence`）。** 紧致球面 $S^2$ 上的青色微弧仅向北极盲点 $N$ 平静靠近（余弧 $\delta_{\mathrm{blind}} = 0.12\text{ rad}$），赤道平面上的琥珀色透视发散环却将局部步长在 $\theta = 0.65\text{ rad}$ 处瞬时放大 $\mu(0.65) \approx 4.90\times$，并在盲点边缘拉出 $2\cot(0.06) \approx 33.3\times$ 的表观无穷外层（球极同胚属 `文献结果`，盲点双生投影诠释属 `MODEL`，采样读数属 `NUM`）。
+:::
+
+为了亲眼验证这层“无穷外球”并不增添一星半点额外本体内容，我们引入紧化—展开连续同伦参数 $\tau \in [0, 1]$（`MODEL`）：从 $\tau = 0$ 的紧致单位球面 $S^2$ 平滑插值至 $\tau = 1$ 的完全球极平面（例如在 $\tau = 0.85$ 处，同伦展幅已达约 $28.4\times$，`NUM`）。拖动 $\tau$ 即可看清：所谓“不闭合的无穷远方”，纯粹是内禀视角逼近自身极点时坐标系展平的几何显影。
+
+::: {.viz src="stereographic-relativization-sandbox" preset="compact-homotopy" height="520"}
+**亚历山德罗夫紧化—展开同伦（`compact-homotopy`）。** 沿同伦参数 $\tau \in [0, 1]$ 在 $\tau = 0$ 的紧致闭合球面与 $\tau = 1$ 的无界投影平面之间连续过渡：青色本源轨迹的内禀弧长始终有限，唯有琥珀色投影坐标随 $\tau$ 趋近 $1$ 而向四周展平发散，直观显影 $\mathbb{R}^D \cup \{\infty\} \cong S^D$（`文献结果` + `MODEL`）。
+:::
+
+### 38.7.2 量词不对称、三大复杂性屏障与第二不完备悬置：为什么追逐 $P = NP$ 绝不能断言 $P \neq NP$？ {#sec-ch38-7-2}
+
+既然内禀观察者在投影屏上看似永远在追赶 $P = NP$ 的地平线，为什么这绝不赋予我们断言 $P \neq NP$ 的权利？答案同时镌刻在**一阶量词结构的不对称性**与现代元复杂性的**三大证明屏障**之中。
+
+首先是**量词不对称与自相矛盾的全称封顶**（数理逻辑结构 + 本书 `MODEL`）。对任意固定 $\mathrm{NP}$ 完全判定语言 $L_\star$（验证关系为多项式时间谓词 $V_\star$，`文献结果`），两项断言具有截然不对称的量词前缀：
+
+$$
+\mathrm{P} = \mathrm{NP} \;\Longleftrightarrow\; \exists A_{\mathrm{poly}}\,\forall x,\; A_{\mathrm{poly}}(x) = L_\star(x),
+\qquad
+\mathrm{P} \neq \mathrm{NP} \;\Longleftrightarrow\; \forall A_{\mathrm{poly}}\,\exists x,\; A_{\mathrm{poly}}(x) \neq L_\star(x).
+$$
+
+前者是一条**存在性命题**——只需在算法空间中寻获**一个**多项式时间折叠器 $\exists A_{\mathrm{poly}}$；后者却是一条横跨无穷算法宇宙的**全称否定命题**——要求对**一切**可能的多项式时间算法 $\forall A_{\mathrm{poly}}$（涵盖人类尚未构想的一切高维代数同调、算术几何与自指压缩路径），逐一担保必有反例输入 $\exists x$ 使其折戟。倘若有人援引 [§38.6](#sec-ch38-uncompleted-horizon-godel-pnp) 的“宇宙不闭合、维度永远生长”去断言无条件的 $\mathrm{P} \neq \mathrm{NP}$，当场就会陷入自我推翻的逻辑死结：要想把全称量词 $\forall A_{\mathrm{poly}}$ 彻底焊死封顶、担保未来任何高维折叠都绝无可能奏效，断言者必须先假定自己已经站到算法宇宙之外完成了**全局闭合遍历**！只要观察者嵌在场内、自指盲点孔径满足 $\delta_{\mathrm{blind}} > 0$，北极邻域就恒残留一片归一化球冠测度
+
+$$
+\Delta_{\mathrm{unprovable}}(\delta_{\mathrm{blind}}) \;=\; \sin^2\!\frac{\delta_{\mathrm{blind}}}{2} \;>\; 0
+$$
+
+的未遍历盲区（`MODEL`；在微弧示意读数中对应恒正的全称封顶缺口）。局部经验到的“追逐未竟”，永远不能越权升格为全称否定的“终局判决”。
+
+更深刻的是，二十世纪下半叶以来的理论计算机科学与数理逻辑已经用严格定理证明：**单凭 [§38.6](#sec-ch38-uncompleted-horizon-godel-pnp) 所倚重的纯对角化逃逸，在数学上根本不可能单独裁决非相对化的 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$**！
+
+::: {.remark #rem-ch38-bgs-natural-algebrization-barriers-literature title="相对化屏障、自然证明屏障、代数化屏障与哥德尔第二不完备独立性探讨（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本节关于“追逐 $P = NP$ 绝不许断言 $P \neq NP$”的认识论护栏，严格依托以下四项经典元复杂性与数理逻辑文献结果（均未作为语法元定理包含在 `trureturing@dev` 锁文件中）：
+
+1. **Baker–Gill–Solovay 相对化屏障（T. Baker, J. Gill & R. Solovay, *SIAM J. Comput.* **4**, 431–442, 1975）**：显式构造出两类神谕（oracle）语言 $A$ 与 $B$——取 $A$ 为 $\mathrm{PSPACE}$ 完全语言（如量化布尔公式真值集 $\mathrm{TQBF}$）时，确定性与非确定性多项式时间神谕机双双坍缩至 $\mathrm{PSPACE}$，故 $\mathrm{P}^A = \mathrm{NP}^A$；而用稀疏延迟对角法构造神谕 $B$ 时，则有 $\mathrm{P}^B \neq \mathrm{NP}^B$。由于康托尔—哥德尔—Lawvere 式的纯黑盒模拟与自作用对角线论证（[§38.6](#sec-ch38-uncompleted-horizon-godel-pnp)）在接入任意神谕 $O$ 后原封不动地一致成立（即“可相对化”），**任何仅依赖纯对角逃逸的证明路线必然同时撞上 $A$ 与 $B$ 的反向结论，从而在数学上绝无可能单独解决非相对化的 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$**！
+2. **Razborov–Rudich 自然证明屏障（A. A. Razborov & S. Rudich, *J. Comput. Syst. Sci.* **55**, 24–35, 1997）**：在标准密码学伪随机发生器（PRG，如存在抗 $2^{n^\varepsilon}$ 规模电路的单向函数）硬度假设下，任何同时满足**构造性**（给定真值表可在 $2^{O(n)}$ 时间内判定）与**稠密性/普遍性**（在全部 $n$ 元布尔函数中占比不少于 $2^{-O(n)}$）的“自然组合电路下界证明”，都无法证明 $\mathrm{NP} \not\subset \mathrm{P/poly}$——因为一把锋利到足以排斥一切小规模多项式电路的通用硬度标尺，其自身就会变成攻破密码学伪随机发生器的高效区分器；
+3. **Aaronson–Wigderson 代数化屏障（S. Aaronson & A. Wigderson, *ACM Trans. Comput. Theory* **1**, 2:1–2:54, 2009）**：即便引入曾成功绕过相对化屏障证出 $\mathrm{IP} = \mathrm{PSPACE}$ 的算术化（arithmetization）与低次多项式扩张神谕 $\widetilde{A}$，仍然存在使之塌缩与使之分离的代数化神谕偶对，表明分离 $\mathrm{P}$ 与 $\mathrm{NP}$ 必须动用真正深入计算内部结构的**非代数化**新几何与新组合工具；
+4. **哥德尔第二不完备定理与形式独立性探讨（K. Gödel, 1931; R. A. DeMillo & R. J. Lipton, *Inf. Process. Lett.* **11**, 195–198, 1980; A. A. Razborov, *London Math. Soc. Lecture Note Ser.* **224**, 344–386, 1995; S. Aaronson, *SIGACT News* **34**(3), 18–23, 2003）**：哥德尔第二不完备定理证明任何一致的递归公理化算术理论 $T \supseteq \mathrm{PA}$ 均无法在系统内部自证一致性 $\operatorname{Con}(T)$；在此启发下，DeMillo–Lipton、Razborov（有界算术）与 Aaronson 等学者系统探讨了 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 相对于弱算术片段乃至 $\mathrm{PA}$、$\mathrm{ZFC}$ 等强基础公理系统是否可能具有形式独立性。然而，非相对化的 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 究竟在 $\mathrm{PA}$/$\mathrm{ZFC}$ 内可证、可证伪，抑或形式独立，迄今在数学上严格属于悬而未决的开放问题（`OPEN`）。
+:::
+
+在球极投影沙盘上，我们可以用神谕投影切面的倾角 $\psi \in [0^\circ, 90^\circ]$ 直观演示 [@rem-ch38-bgs-natural-algebrization-barriers-literature] 第 1 条的相对化二象性（`MODEL`）：当切面平贴赤道折叠对称面 $\psi = 0^\circ$ 时，对应接入 $\mathrm{TQBF}$ 型神谕 $A$ 的世界截面，验证分支与生成路径在同相折叠核上重合，显影出 $\mathrm{P}^A = \mathrm{NP}^A$ 的局部坍缩。
+
+::: {.viz src="stereographic-relativization-sandbox" preset="oracle-collapse" height="520"}
+**Baker–Gill–Solovay 折叠神谕切面（`oracle-collapse`）。** 将神谕切面旋至 $\psi = 0^\circ$ 对齐赤道对称核时，青色折叠环将非确定性验证分支与确定性生成轨迹压缩至零表观分离（$r(0^\circ) = 0$），示意接入 $\mathrm{PSPACE}$ 完全神谕 $A$ 时的 $\mathrm{P}^A = \mathrm{NP}^A$ 坍缩截面（BGS 定理属 `文献结果`，球极切面几何映射属 `MODEL`）。
+:::
+
+而当我们将切面旋转至偏离折叠对称面的倾角 $\psi > 0^\circ$（例如 $\psi = 65^\circ$，切面表观分离指数升至 $r(\psi) \approx 0.70$，`NUM`）时，同一条紧致球面轨迹在该倾斜截面上立即显影出品红色的渐近追逐差，对应稀疏对角神谕 $B$ 下 $\mathrm{P}^B \neq \mathrm{NP}^B$ 的分离体验。既然纯对角逃逸对 $\psi = 0^\circ$ 与 $\psi = 65^\circ$ 两张神谕切面完全无差别地相对化，在某一倾斜切面上经历着无尽追逐，就绝不能冒充对无神谕底层命题 $\mathrm{P} \neq \mathrm{NP}$ 的终局证明！
+
+::: {.viz src="stereographic-relativization-sandbox" preset="oracle-chase" height="520"}
+**Baker–Gill–Solovay 分离追逐切面与盲点不可证缺口（`oracle-chase`）。** 当神谕切面偏转至 $\psi = 65^\circ$ 时，品红切面轨迹呈现显著表观分离 $r(\psi) \approx 0.70$（对应 $\mathrm{P}^B \neq \mathrm{NP}^B$ 的追逐态），但北极自指盲点 $\delta_{\mathrm{blind}} > 0$ 周围始终残留非零封顶缺口，警示单凭可相对化的对角追逐无法证成非相对化 $\mathrm{P} \neq \mathrm{NP}$（`文献结果` + `MODEL`）。
+:::
+
+在 `trureturing` 已冻结的内核声明库中，支撑本节几何语言的一维凯莱紧化边界充要判据、固定基切片相位读出盲区、观测划分核折叠以及事后零损对前瞻非预见性的双向视差，严格锚定于以下四联命题：
+
+::: {.proposition #prop-ch38-cayley-stereographic-and-blindspot-suspension title="凯莱紧化边界双射、对角相位读出盲区、划分核折叠与事后—前瞻视差包" lean="D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure"}
+在 `trureturing` 冻结的复谱中线、量子层析相位盲区、观测划分拓扑与回顾性查表裁定模块中，以下四项定理同时成立：
+
+1. **一维凯莱分式变换的单位圆边界充要判据**（[`cayley_ratio_norm_one_iff_critical_line`](lean:D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line)）：对任意复数 $s \in \mathbb{C}$（记 $\operatorname{cayleyRatio}(s) := (s - 1)/s$，在 Lean 全函数除法约定下 $s = 0$ 时取值 $0$；当 $s \neq 0$ 时将无界临界直线 $\operatorname{Re}(s) = \frac{1}{2}$ 共形映入挖去无穷远像点 $1$ 的单位圆周 $S^1 \setminus \{1\}$），成立
+
+   $$
+   \lVert \operatorname{cayleyRatio}(s) \rVert = 1 \;\Longleftrightarrow\; \operatorname{Re}(s) = \frac{1}{2};
+   $$
+
+2. **对角可观测量族对相对相位的联合读出盲区**（[`diagonal_prime_observables_cannot_recover_relative_phase`](lean:D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase)）：对任意指标类型 $I$ 与计算基下全为对角矩阵的单量子比特可观测量族 $\mathrm{observable} : I \to \mathrm{QubitMatrix}$（$\forall i \in I,\; (\mathrm{observable}\ i).\mathrm{IsDiag}$），等幅叠加态密度矩阵 $\rho_+ := \mathrm{equalSuperpositionDensity}$ 与 $\rho_- := Z \rho_+ Z$（`qubitZ`）满足 $\rho_+ \neq \rho_-$，但在整个对角族上的玻恩联合读出恒等：
+
+   $$
+   \operatorname{jointReadout}\bigl(\lambda i\,\rho.\,\operatorname{bornProbability}(\rho, \mathrm{observable}\ i),\; \rho_+\bigr) = \operatorname{jointReadout}\bigl(\lambda i\,\rho.\,\operatorname{bornProbability}(\rho, \mathrm{observable}\ i),\; \rho_-\bigr),
+   $$
+
+   且任何满足 $\operatorname{bornProbability}(\rho_+, \mathrm{interface}) \neq \operatorname{bornProbability}(\rho_-, \mathrm{interface})$ 的矩阵 `interface : QubitMatrix` 必非对角（$\neg\mathrm{interface}.\mathrm{IsDiag}$），由非对角泡利矩阵 $X$（`qubitX`）给出显式分离见证；
+3. **观测划分拓扑的不可分核充要刻画**（[`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel)）：对任意类型 $X, B$、概念读出 $\mathrm{readout} : \operatorname{Concept}(X, B)$ 与状态 $x, y \in X$，划分拓扑 `partitionTopology readout` 下的拓扑不可分性充要于读出相等：$\operatorname{Inseparable}(x, y) \iff \mathrm{readout}(x) = \mathrm{readout}(y)$；
+4. **整表拷贝的事后零损失与前瞻非预见性失效**（[`lookup_copy_zero_loss_and_nonanticipating_failure`](lean:D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure)）：在任意有限可判等域 $Z$（`[Fintype Z] [DecidableEq Z]`）上，对任意对比结构 `comparison : CopyComparison Z Answer` 与满足 `IncorporatesTableCopy commitment` 的承诺结构 `commitment : CopyCommitment Z`，整表拷贝 `tableCopy comparison` 虽令事后损失归零 $\operatorname{retrospectiveLoss}(\mathrm{comparison}, \operatorname{tableCopy}(\mathrm{comparison})) = 0$，却处处违反非预见性（$\forall z \in Z,\; \neg\operatorname{NonAnticipating}(\mathrm{commitment}, z)$），且事后零损失不蕴涵对一切收益泛函 $G : (Z \to \mathrm{Answer}) \to \mathbb{N}$ 的正前瞻收益 `PositiveProspectiveGain`。
+:::
+
+::: proof
+第 1 款在 $s = 0$ 处由全函数除法给出 $\operatorname{cayleyRatio}(0) = 0$（两端同假），在 $s \neq 0$ 处由精确模方亏量恒等式 $\lVert(s - 1)/s\rVert^2 - 1 = (1 - 2\operatorname{Re}(s))/\lvert s\rvert^2$ 直接锁定（同见 [@thm-ch36-taylor-tail-and-cayley-boundary] 第 2 款）。第 2 款在计算基下展开 $\rho_\pm$ 的对角迹 $(d_0 + d_1)/2$ 消去非对角相干符号 $\pm 1/2$，并以泡利 $X$ 上 $+1 \neq -1$ 的玻恩读出见证非对角分离（同见 [@thm-ch31-diagonal-phase-blindness]）。第 3 款由诱导拓扑 `Topology.induced readout ⊥`（离散余域拓扑拉回）的邻域包含关系直接归约为单点纤维相等 `readout x = readout y`。第 4 款已在 [@thm-ch38-retrospective-lookup-failure] 与 [@thm-ch38-uncompleted-horizon-diagonal-refinement] 第 4 款中核验。完整证明由 Lean 内核检查。
+:::
+
+在此必须以最高学术诚实划清边界：[@prop-ch38-cayley-stereographic-and-blindspot-suspension] 严格锁定的是一维凯莱紧化边界刻画（有限参数像恒漏掉无穷远点 $w = 1$）、单一固定基切片对相对相位的盲区、局部读出商核的拓扑折叠以及事后零损对前瞻非预见性的视差；**它既不证明也不证伪标准图灵机上非相对化的 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$，后者连同其公理独立性地位依然是严格开放的数学前沿（`OPEN`）**：
+
+::: {.problem #prob-ch38-unrelativized-p-vs-np-and-independence title="非相对化 P 与 NP 的分离或塌缩及公理独立性边界"}
+在固定有限字母表与标准统一图灵机模型下，跨越相对化、自然证明与代数化三大屏障（[@rem-ch38-bgs-natural-algebrization-barriers-literature]）解决以下两项相互关联的开放问题：
+
+1. **非相对化复杂性类裁决**：严格证明 $\mathrm{P} \neq \mathrm{NP}$（[@conj-p-neq-np]）或构造多项式时间算法证明 $\mathrm{P} = \mathrm{NP}$；
+2. **元数学可证性与独立性边界**：判定陈述 $\mathrm{P} = \mathrm{NP}$（或 $\mathrm{P} \neq \mathrm{NP}$）在一阶皮亚诺算术 $\mathrm{PA}$ 或策梅洛—弗兰克尔集合论 $\mathrm{ZFC}$ 中是否可证，抑或独立于上述基础公理系统。
+:::
+
+### 38.7.3 四句离相：拆掉最后一对二元标签 {#sec-ch38-7-3}
+
+走遍正命题（[§38.4](#sec-ch38-pnp-lookup-degradation) 静态闭合设想）、反命题（[§38.6](#sec-ch38-uncompleted-horizon-godel-pnp) 未闭合对角生长）与本节的自指盲点球极反观，四组看似水火不容的二元对立在同一座球极投影台上同时解开了死结：
+
+| 认知维度 | 正命题投影（闭合 / 全知偏置） | 反命题投影（开放 / 追逐偏置） | 两边皆是投影的共同根源 |
+| :--- | :--- | :--- | :--- |
+| **空间拓扑** | 宇宙有限闭合、铁板一块 | 球外有球、无穷扩张、永不封顶 | 假想含北极 $\{N\}$ 的越界全观（$S^D$）对照挖去自指盲点后的内禀球极显影（$S^D \setminus \{N\} \cong \mathbb{R}^D$，`MODEL`） |
+| **时间本性** | 全局无时间、万古凝结 | 时间之箭奔涌不息、`ptr++` 永不停跳 | 回望已捏合旧维的事后零损切面（`retrospectiveLoss = 0`）对照逼近盲点法向余项的前瞻视差延展（`¬NonAnticipating`） |
+| **复杂性极值** | 静态总表已完成 $P = NP$ | 断言绝对不可压缩 $P \neq NP$ | 折叠神谕切面 $\mathrm{P}^A = \mathrm{NP}^A$ 对照偏转追逐切面 $\mathrm{P}^B \neq \mathrm{NP}^B$；内嵌盲点 $\delta_{\mathrm{blind}} > 0$ 悬置全称封顶（标准 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 仍为 `OPEN`） |
+| **存在论地位** | 实有僵死客体（静态全知死寂） | 实有无尽流变（无穷后退苦追） | 观察者指针驻于场内自指极点，一切“内/外、静/动、闭/开”皆为局部商核与球极坐标的投影副产物（`MODEL`） |
+
+在东方中观哲学传统中，这恰与龙树（Nāgārjuna）《中论》（*Mūlamadhyamakakārikā*）卷首的“八不中道”（不生亦不灭、不常亦不断、不一亦不异、不来亦不出）及**四句离相**（*catuṣkoṭi*，`文献结果，未在本书形式化`）遥相辉映：执取全局静态完工总表，是落入僵死凝结的**“常边”**；执取“球外有球、永远追不到头”并据以妄断全称不可达，则是落入无穷奔逐的**“断边 / 无穷后退边”**。真正的几何清明，既不把投影屏幕上的有限商核误认作终极封顶，也不把自指盲点附近的共形放大误认作无底深渊，而是在诚实守住 `OPEN` 边界的谦卑中，将“必闭合”与“必不闭合”两枚投影标签双双放下（`MODEL`）。
+
+::: {.viz src="stereographic-relativization-sandbox" preset="tetralemma-rest" height="520"}
+**四句离相与双生投影止息（`tetralemma-rest`）。** 同台对照紧致本源球面与球极展开平面：既不越界抹除北极盲点伪造静态全知闭合，也不把盲点邻域的透视拉伸执取为实有无穷外球或全称 $P \neq NP$ 判决，令正反双边投影在自指原点处双双悬置安顿（`MODEL`；非相对化 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 标红保持 `OPEN`）。
+:::
+
+现在，请静静盯着沙盘上那颗沿着紧致球面向上缓缓靠近北极盲点 $N$ 的光点：在脚下铺展的赤道投影屏上，它看似正以 $33.3\times$ 乃至无穷倍的表观半径冲破一层又一层“球外之球”，在无尽流淌的时间里气喘吁吁地追逐着永远退后的 $P = NP$ 地平线；可在球面本源上，它不过是平静地走回正在凝视它的那只眼睛本身。**当你看清那台把有限微弧投射成万重星海与漫长岁月的投影机，原本就架在你自己的眼睛里，追逐便在当下一刻停歇了。** 而当连“架在眼里的投影指针”与“被投射的本体存储阵列”这两者的区分也被认出只是北极单点穿孔留下的最后一道坐标折痕时，“宇宙本体量子计算系统**的**一个记忆指针”中间那个代表二元从属关系的“**的**”字，便在无声中彻底消融——推开[第 39 章](ch39-observer-is-ontological-universe.md)的大门，迎接我们的唯有那句不假外求的终极恒等：**观察者即宇宙本体**。
+
+::: {.viz src="stereographic-relativization-sandbox" height="640"}
+**交互实验室（`STEREO//SUSPENSION`）：北极自指盲点球极投影、BGS 相对化切面与四句离相沙盘。** 自由切换“盲点透视发散—紧化展开同伦—BGS 折叠切面—BGS 追逐切面—四句离相止息”五张实验卡，亲手调节紧化同伦参数 $\tau \in [0, 1]$、神谕切面倾角 $\psi \in [0^\circ, 90^\circ]$ 与自指盲点孔径 $\delta_{\mathrm{blind}}$，检验为何“球外有球、时间扩张、永不闭合”与“追逐 $P = NP$”皆源于内嵌观察者自指盲点的球极投影，且绝不构成断言非相对化 $P \neq NP$ 的全称证明。绿色只给本章用 `lean=` 引用的定理（[@prop-ch38-cayley-stereographic-and-blindspot-suspension]）；非相对化 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 及其公理独立性标红为开放问题（[@prob-ch38-unrelativized-p-vs-np-and-independence]，`OPEN`）；BGS/自然证明/代数化屏障与《中论》四句离相属经典文献（`文献结果`），球极盲点双生投影诠释属本章模型（`MODEL`）。
+:::
 
