@@ -331,7 +331,10 @@ await page.click('[data-lang-set="zh"]'); await settle(page);
     const L = window.__HANDSHAKE_LAB__;
     return { at: L.at('loop'), tgt: L.at('loop', [0, 0]) };
   });
-  await page.mouse.move(at[0], at[1]); await page.mouse.down(); await page.mouse.move(tgt[0], tgt[1], { steps: 5 }); await page.mouse.up(); await settle(page);
+  await page.mouse.move(at[0], at[1]); await page.mouse.down(); await page.mouse.move(tgt[0], tgt[1], { steps: 5 }); await settle(page);
+  // Keep the pointer down if the header has moved the endpoint to a new viewport position.
+  const currentTarget = await LAB(() => window.__HANDSHAKE_LAB__.at('loop', [0, 0]));
+  await page.mouse.move(...currentTarget); await page.mouse.up(); await settle(page);
   check('loop: dragging the violet loop arrow turns δ', Math.abs((await state()).params.tau - 1) < 0.06, String((await state()).params.tau));
 }
 
@@ -341,6 +344,19 @@ await page.click('[data-lang-set="zh"]'); await settle(page);
   await settle(wrap);
   await wrap.click('[data-preset="paradox-cancel"]'); await settle(wrap);
   await wrap.click('#loopSnaps [data-snap="0"]'); await settle(wrap);
+  await wrap.evaluate(async () => {
+    await document.fonts.ready;
+    // Font metrics move the natural wrap threshold between platforms. Leave one digit's room at τ = 0.
+    const header = document.querySelector('header.top'), brand = header.querySelector('.brand'), status = header.querySelector('.status');
+    status.style.flex = '0 0 auto';
+    const style = getComputedStyle(header), gap = parseFloat(style.columnGap);
+    const width = header.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    const digitStyle = getComputedStyle(status.querySelector('#pillKey strong'));
+    const ctx = document.createElement('canvas').getContext('2d'); ctx.font = digitStyle.font;
+    const room = ctx.measureText('0').width + (parseFloat(digitStyle.letterSpacing) || 0) + 2;
+    brand.style.flex = `0 0 ${width - status.getBoundingClientRect().width - gap - room}px`;
+  });
+  await settle(wrap);
   const start = await wrap.evaluate(() => ({
     at: window.__HANDSHAKE_LAB__.at('loop'),
     top: document.querySelector('#cv').getBoundingClientRect().top,
