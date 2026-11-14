@@ -196,7 +196,11 @@ $$
 
 经典黏合树论证里有一个容易被“随机接到尚未使用的端点”掩盖的约束：目标是一个覆盖全部叶子的圈，不能提前把一个小分量封口。先把这个约束放在一个静态、有方向的模型里看清楚。设已知边为 $a\to b$、$c\to d$，另有孤立点 $e$。三个分量是 $(a,b)$、$(c,d)$、$(e)$；补成一个有向整圈只有 $(a\ b\ c\ d\ e)$ 与 $(a\ b\ e\ c\ d)$ 两种置换。于是 $b$ 的后继在 $c,e$ 之间各占一半，接回 $a$ 的概率为零。$b\to a$ 虽不破坏入度、出度上界，却会把其余顶点留在圈外。
 
-这里用到的是经典的置换收缩对应。Gessel，*Generalized Rook Polynomials and Orthogonal Polynomials*（1989，159–176，[doi:10.1007/978-1-4684-0637-5_13](https://doi.org/10.1007/978-1-4684-0637-5_13)，[作者原文](https://people.brandeis.edu/~gessel/homepage/papers/rookp.pdf)）第 2 节将相容条件定义为不重复行、列，第 3 节第 5 页以满足条件集合的实际交集定义 $T_n^A$，第 8 节第 11 页给出置换收缩双射，并说明循环数相差所规定边中的有向循环数。下面将无有向循环的情形写成保留分量端点的对应，再推导均匀概率；端点公式与概率表述是这里展开的推论，并非源文逐字陈述。不主张数学新颖性；当前未找到覆盖完整结论的匹配冻结声明，以下保留书面证明，形式化需求登记于[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11)。
+这里用到的是经典的置换收缩对应。Gessel，*Generalized Rook Polynomials and Orthogonal Polynomials*（1989，159–176，[doi:10.1007/978-1-4684-0637-5_13](https://doi.org/10.1007/978-1-4684-0637-5_13)，[作者原文](https://people.brandeis.edu/~gessel/homepage/papers/rookp.pdf)）第 2 节将相容条件定义为不重复行、列，第 3 节第 5 页以满足条件集合的实际交集定义 $T_n^A$，第 8 节第 11 页给出置换收缩双射，并说明循环数相差所规定边中的有向循环数。
+
+更贴近下面端点、计数与概率表述的出处是 Boaz Tsaban，*Permutation graphs, fast forward permutations, and sampling the cycle structure of a permutation*，*Journal of Algorithms* **47**（2003），104–121，[doi:10.1016/S0196-6774(03)00017-8](https://doi.org/10.1016/S0196-6774(03)00017-8)。该文第 107–109 页的 Lemma 1.1 从无有向循环的部分置换图得到路径分量及其唯一最小、最大端点；Lemma 1.2 通过连接这些端点穷尽单环补全，给出阶乘计数；Lemma 1.3 区分同分量封口与异分量合并；Definition 1.4 与 Lemma 1.5 则给出正、逆向置换查询中的均匀端点选择与查询序列概率。这些端点、计数与概率规律已有文献依据，并非始于本书。
+
+下面将这些经典结果写成同一顶点集上的实际补全集、端点双射与静态条件分布，并保留完整书面证明。Tsaban 的查询模型只涉及置换及逆置换的取值，并不直接覆盖黏合树的完整自适应查询历史。不主张数学新颖性；当前未找到覆盖完整结论的匹配冻结声明，以下保留书面证明，形式化需求登记于[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11)。
 
 ::: {.theorem #thm-directed-forest-cycle-completion title="有向森林的单环补全与静态均匀律" status="written-proof" proof="pf-directed-forest-cycle-completion" doi="10.1007/978-1-4684-0637-5_13" source="Section 8, p. 11" request="https://github.com/the-omega-institute/trureturing-requests/issues/11"}
 设 $V$ 为有 $N\ge2$ 个元素的有限标号集，$E\subseteq V\times V$。假定每个顶点在 $E$ 中至多有一条入边、至多有一条出边，且 $E$ 无有向循环。令 $\mathcal C$ 为 $(V,E)$ 的全部弱连通分量组成的集合，包含每一个孤立顶点，并假定 $c=|\mathcal C|\ge2$。
@@ -241,7 +245,7 @@ $$
 :::
 
 ::: {.proof #pf-directed-forest-cycle-completion}
-这是 Gessel 第 8 节收缩对应在无有向循环情形下的端点展开，以下同时证明补全存在与对应的穷尽性。
+以下将 Tsaban 的分量端点、单环补全与均匀律展开为静态书面证明；其中的收缩对应也见 Gessel 第 8 节。补全存在与对应的穷尽性均在证明中明确给出。
 
 **从原始边集得到路径。** 从任意顶点沿唯一前驱反向追溯。有限性与无有向循环保证追溯终止于一个无入边的顶点 $h$。从 $h$ 沿唯一后继正向追溯，同样不会重复顶点，最终停于一个无出边的顶点 $q$。所得路径的内部顶点已经各有一条入边、一条出边；$h$ 无入边，$q$ 无出边。因此没有路径外顶点能通过一条 $E$ 边与路径相接。路径恰好是起始顶点所在的整个弱连通分量。沿它只能在 $h$ 没有前驱、在 $q$ 没有后继，路径次序与两端均唯一。无边时这就是单顶点路径。逐分量相加 $|A|-1$ 条边，得到 $|E|=N-c$，并未预设任何路径列表。
 
