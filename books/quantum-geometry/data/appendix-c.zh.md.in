@@ -6,7 +6,7 @@
 2. **C.2 形式化定义与代数载体总索引（{{D}} 项唯一声明：{{D_def}} 项 `def` + {{inductive}} 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.3 行内辅助定理与定义索引（{{R}} 项声明：{{R_theorem}} 项 `theorem` + {{R_def}} 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **{{total}} 项唯一声明**（${{T}} + {{D}} + {{R}} = {{total}}$）。媒体引用在各行末尾另列，不改变上述分区。
 3. **C.4 开放问题与未形式化前沿边界台账**：{{open}} 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
 
-第 7.3 节的 [@prob-monitored-spectral-mean] 已证明有限维酉监测纯态的四项结论：占据谱有限，其基数等于循环空间维数，加权首次返回概率之和等于该基数，总返回概率为一。它列入 C.1，不再属于 C.4 的形式化缺口；一般通道、无限维与物理时钟的边界仍按第七章分别说明。
+第 7.3 节的 [@prob-monitored-spectral-mean] 已证明有限维酉监测纯态的四项结论：占据谱有限，其基数等于循环空间维数，加权首次返回概率之和等于该基数，总返回概率为一。同节的 [@rem-monitored-unital-kac] 还证明任意有限维复内积空间上、保实际相关空间恒等算子的 CPTP 通道的占据算子和、返回概率非负性、总概率一与均值等于相关维数。两者列入 C.1；一般量子仪器、无限维与物理时钟仍在这两条定理的范围之外。
 
 第 16.3 节的 [@thm-central-defect-endpoint-average] 及其 [书面证明](ch16-qsvt-walks-and-compilation.md#pf-central-defect-endpoint-average) 不属于冻结声明，也不是开放问题。其 DOI、原文定位与[形式化请求 #10](https://github.com/the-omega-institute/trureturing-requests/issues/10) 随正文及自动生成的书面证明账本单列；不增加上述锁定声明、绿色图表或 C.4 的条数。
 
