@@ -220,7 +220,7 @@ Moreover, $\operatorname{CycleCompletion}(E)$ is nonempty and has finite cardina
 Finiteness, acyclicity, and uniqueness of successors identify a tail in each weak component; applying the same argument to the reversed relation identifies its head. Every extending permutation bijects the tails with the heads. First returns to the heads identify the orbits of the original permutation with those of the component permutation, giving the equivalence between full-cycle completions. This equivalence gives the factorial count and nonemptiness. Conditioning and pushing forward finite uniform probability masses give the same completion law, and the endpoint equation transports component-successor marginals back to the original vertices. The full proof is checked by the Lean kernel.
 :::
 
-The edge identity $|E|=N-c$ and explicit event-probability ratio $(c-1)!/(N-1)!$ in the wider result below are not stated or checked by the cited Lean declaration; the full written proof below remains responsible for them. Bridges concerning undirected orientation, alternating cycles, adaptive histories, queries, or `EXIT` require their own distribution and correspondence proofs.
+The edge identity $|E|=N-c$ and explicit event-probability ratio $(c-1)!/(N-1)!$ in the wider result below are not stated or checked by the cited Lean declaration; the full written proof below remains responsible for them. The next subsection treats static classification and counting under alternation. An alternating conditional law, undirected orientation, adaptive histories, queries, and `EXIT` require their own distribution and correspondence proofs.
 
 ::: {.theorem #thm-directed-forest-cycle-completion title="Single-cycle completion of a directed forest and its static uniform law" status="written-proof" proof="pf-directed-forest-cycle-completion" doi="10.1007/978-1-4684-0637-5_13" source="Section 8, p. 11" request="https://github.com/the-omega-institute/trureturing-requests/issues/11"}
 Let $V$ be a finite labelled set of cardinality $N\ge2$, and let $E\subseteq V\times V$. Suppose every vertex has at most one incoming and at most one outgoing edge in $E$, and $E$ has no directed cycle. Let $\mathcal C$ be the set of all weak components of $(V,E)$, including every isolated vertex, and suppose $c=|\mathcal C|\ge2$.
@@ -282,13 +282,122 @@ Finally, since $c\ge2$, a single-orbit $\pi$ cannot fix $A$, and the same-compon
 
 Frieze–Suen, *Counting the Number of Hamilton Cycles in Random Digraphs* ([doi:10.1002/rsa.3240030303](https://doi.org/10.1002/rsa.3240030303), [original, pages 4–5](https://www.math.cmu.edu/~af1p/Texfiles/hamsuen.pdf)), also contract directed paths to identify uniquely all Hamilton cycles containing the prescribed edges, obtaining the count $(n-t-1)!$. Their prescribed $t$ edges belong to an already given Hamilton cycle. Here extension existence is first proved for arbitrary raw $E$ satisfying the hypotheses, and $c=N-|E|$ then gives the same count; existence must not be assumed in advance.
 
-**Which bridges to a classical oracle lower bound remain?** [@thm-directed-forest-cycle-completion] exactly excludes early closure in a static directed completion. Three distinctions separate it from the glued-trees result in [@rem-qsvt-walks-literature]:
+### 16.2.2 Alternating forests: counting with both endpoint colors retained {#sec-alternating-forest-classification}
 
-1. **Graph distribution and orientation.** Ben-David et al. (*SIAM Journal on Computing* **53**(6), 2024, [doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975), §6.3.2, Lemmas 6.11–6.13, PDF pages 37–39) use one uniform cycle on each side's leaves for the self-weld, and a uniform alternating cycle between the two sides for the weld. Our theorem concerns ordinary directed single-cycle permutations. Passing to undirected cycles requires accounting for orientation and representation multiplicities; passing to bipartite alternating cycles requires a separate completion law respecting alternation. The value $1/(c-1)$ cannot simply be transferred.
-2. **Conditioning information.** The theorem conditions only on all edges of fixed $E$ being present. An adaptive algorithm's full query history also involves random names, query choices, answers listing all neighbors, and possibly color information. One must prove, on the same random graph realization, that these history conditions leave precisely the asserted uniform completion set, or establish the appropriate different conditional law. Replacing a history by $E$ does not establish this. The cited Ben-David et al. lemmas permit only queries to names already in the knowledge graph; queries outside it require a separate argument. Whether sparse random names provide additional information is also beyond this theorem.
+Ordinary contraction treats each path as one label. Requiring the full cycle to alternate red and blue also requires retaining each path's head and tail colors. The smallest obstruction already occurs with two edges: $r_1\to b_1$ and $b_2\to r_2$ each alternate, yet cannot form an alternating full cycle on all four vertices, because both available connectors would lead to a head of the same color. In contrast, $r_1\to b_1$ and $r_2\to b_2$ have the unique completion $(r_1\ b_1\ r_2\ b_2)$. These are actual labelled vertices; contraction does not merge the component labels.
+
+Write $R,B$ for red and blue (`false,true` in the source), with $\overline R=B$ and $\overline B=R$. For any finite set $X$, define
+
+$$
+\operatorname{Cyc}(X)=\{\rho\in\operatorname{Perm}(X):
+ X\ne\varnothing,\ \rho.\mathrm{IsCycleOn}(X)\}.
+$$
+
+Here the set in `IsCycleOn` is the whole carrier. Thus $\operatorname{Cyc}(\varnothing)=\varnothing$, whereas the identity on a singleton is a full cycle. Cycle notation suppresses only the starting point: cyclic rotations of $(x_0\ x_1\cdots x_{j-1})$ describe the same permutation, while reversing the order generally describes another permutation. There is no further quotient by reversal.
+
+::: {.theorem #thm-alternating-forest-classification title="Alternating completion classification and four count branches for a balanced two-color raw forest" lean="D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory.alternating_completion_classification"}
+For every natural number $n$, finite labelled set $V$, relation $E\subseteq V\times V$, and coloring $k:V\to\{R,B\}$, assume that each vertex has at most one outgoing and at most one incoming $E$-neighbor; $\operatorname{TransGen}(E)$ is irreflexive; every $E$-edge joins opposite colors; and $|k^{-1}(R)|=|k^{-1}(B)|=n$.
+
+Let $\mathcal C=V/\operatorname{EqvGen}(E)$ be the actual weak-component quotient of all vertices by the equivalence relation generated by $E$, including every isolated vertex; write $[x]_E$ for a vertex's quotient class. Let $\operatorname{Head}(E)$ and $\operatorname{Tail}(E)$ be the actual vertex subtypes with no incoming and no outgoing edge, respectively, and define
+
+$$
+\Omega_k(E)=\{\sigma\in\operatorname{Cyc}(V):
+ \ \sigma(x)=y\text{ whenever }E(x,y),\quad
+ k(\sigma(x))\ne k(x)\text{ for every }x\in V\}.
+$$
+
+There are equivalences
+
+$$
+\begin{aligned}
+t&:\mathcal C\simeq\operatorname{Tail}(E),\\
+h&:\mathcal C\simeq\operatorname{Head}(E),\\
+\Phi&:\Omega_k(E)\simeq
+ \{\tau\in\operatorname{Cyc}(\mathcal C):
+    k(t(A))\ne k(h(\tau(A)))\text{ for every }A\in\mathcal C\},
+\end{aligned}
+$$
+
+with actual component membership $[t(A)]_E=A$ and $[h(A)]_E=A$, and the connector equation, for every $\sigma\in\Omega_k(E)$ and $A\in\mathcal C$,
+
+$$
+\sigma(t(A))=h\bigl(\Phi(\sigma)(A)\bigr).
+$$
+
+Using these same endpoints, define the four actual component counts
+
+$$
+\begin{aligned}
+a&=|\{A:(k(h(A)),k(t(A)))=(R,R)\}|,\\
+b&=|\{A:(k(h(A)),k(t(A)))=(B,B)\}|,\\
+p&=|\{A:(k(h(A)),k(t(A)))=(R,B)\}|,\\
+q&=|\{A:(k(h(A)),k(t(A)))=(B,R)\}|.
+\end{aligned}
+$$
+
+Then $a=b$, $|\mathcal C|=a+b+p+q$, and $n\ne0\Rightarrow |\mathcal C|>0$. Put $m=a=b$. The cardinality is
+
+$$
+|\Omega_k(E)|=
+\begin{cases}
+0,&n=0,\\
+m(m+p-1)!(m+q-1)!,&n>0,\ m>0,\\
+(p+q-1)!,&n>0,\ m=0,\ p+q>0,\ pq=0,\\
+0,&n>0,\ m=0,\ p>0,\ q>0.
+\end{cases}
+$$
+
+All subtraction is truncated natural-number subtraction, and $0!=1$. When $n>0,m=0$, the condition $p+q>0$ follows from the component total and nonemptiness above; it is not an additional hypothesis.
+:::
+
+::: proof
+**Actual endpoints and all completions.** Follow the unique predecessors and successors in raw $E$. Finiteness and acyclicity make both searches terminate; the path argument in the preceding subsection identifies the resulting path with the entire weak component, yielding the bijections $h,t$ and both quotient-membership equations. An isolated vertex is its own head and tail. Neither a path decomposition nor a completion is supplied in advance.
+
+For any actual permutation extending $E$, successors of non-tail vertices and predecessors of non-head vertices are already fixed. Injectivity and surjectivity therefore make the remaining tails biject precisely with all heads, determining a unique component permutation $\tau$. Conversely, retain every internal path edge and add $t(A)\to h(\tau(A))$; this recovers the original permutation pointwise. After visiting a head, the walk must traverse its entire component, and the next head visited is exactly $h(\tau(A))$. This first-return correspondence identifies the orbits on both sides. The original permutation is consequently a full cycle exactly when $\tau$ is a component full cycle. Internal edges already alternate, so alternation everywhere is equivalent to opposite colors at every tail connector. Restricting the correspondence gives $\Phi$ on the whole of $\Omega_k(E)$, with its connector equation, rather than the image of a selected construction. The quotient map carries nonemptiness of $V$ to nonemptiness of $\mathcal C$; a representative of a quotient class gives the converse. Both sides thus obey this subsection's nonempty-cycle convention, including its exclusion of the empty carrier.
+
+**Balance from occupied incoming and outgoing edges.** The raw edges biject red vertices having an outgoing edge with blue vertices having an incoming edge. Unique successors define the map, unique predecessors give injectivity, incoming-edge existence gives surjectivity, and edge alternation fixes the colors. Write $u$ for their common cardinality. Subtracting these occupied vertices from the two color fibers, both of size $n$, gives
+
+$$
+\begin{aligned}
+|\{x\in\operatorname{Tail}(E):k(x)=R\}|&=n-u,\\
+|\{x\in\operatorname{Head}(E):k(x)=B\}|&=n-u.
+\end{aligned}
+$$
+
+Transporting along $t,h$, the two sides are $a+q$ and $b+q$, respectively, so $a=b$. The four endpoint types partition all components, giving the total. If $n>0$, the original red fiber is nonempty, hence so is the quotient. Each conclusion follows from the raw hypotheses.
+
+**Component labels as auxiliary two-state arcs.** Set
+$s(A)=k(h(A))$ and $d(A)=\overline{k(t(A))}$.
+Regard each actual component label $A$ as an auxiliary arc $s(A)\to d(A)$. Compatibility is exactly $d(A)=s(\tau(A))$. Thus $a,b$ count crossing arcs $R\to B,B\to R$, while $p,q$ count loops at $R,B$; the source-state fibers have sizes $r=m+p$ and $\ell=m+q$. A loop here is an auxiliary arc, not an edge of the original forest. Parallel arcs retain distinct component labels.
+
+**Delete a loop and reinsert it before its actual successor.** For $m>0$, use strong induction on the number of component labels. If $c$ is a loop at state $z$, the retained carrier $L=\mathcal C\setminus\{c\}$ still has $m>0$ crossing arcs in each direction. Therefore $L$ and both source-state fibers remain nonempty. This nonemptiness requirement is essential.
+
+Take any compatible full cycle $\tau$ on the original carrier. Since another label remains, $y=\tau(c)\ne c$; compatibility gives $s(y)=z$. Delete $c$ by connecting its actual predecessor directly to $y$, obtaining a permutation $\rho$ of $L$. Compatibility survives: the sole rewritten connection satisfies $d(\tau^{-1}(c))=s(c)=s(y)$. Conversely, for any compatible full cycle $\rho$ on $L$ and any slot $y\in L$ with $s(y)=z$, replace $\rho^{-1}(y)\to y$ by $\rho^{-1}(y)\to c\to y$. These operations are inverse. First returns skipping $c$ take one or two steps and preserve orbit relations among all retained labels; $c$ belongs to the same orbit as $y$. Hence there is one full cycle before deletion exactly when there is one afterward.
+
+This is a product bijection between all actual full cycles and all retained full cycles paired with all slots of the required state. Deleting a red loop leaves a source fiber of size $r-1$, multiplying the count by $r-1$; a blue loop gives the factor $\ell-1$. Both retained source fibers have at least $m$ elements, so the identity $j(j-1)!=j!$ for $j>0$ advances the factorial recurrence. No deletion step treats a singleton loop as insertion into an empty carrier.
+
+**The first-return base case with crossing arcs only.** With no loops, there are $m>0$ labels in each source-state fiber $L_R,L_B$. Restricting any compatible permutation gives bijections $f:L_R\simeq L_B$ and $g:L_B\simeq L_R$; conversely, every such pair combines into a unique actual permutation on the two fibers. Every blue label enters the red fiber in one step, and a red label's first return takes exactly two steps, with return permutation $\kappa=g\circ f$. All labels lie in one orbit exactly when $\kappa\in\operatorname{Cyc}(L_R)$. The complete parameters are therefore an arbitrary bijection $f$ and an arbitrary red-fiber full cycle $\kappa$, with $g=\kappa\circ f^{-1}$ uniquely recovered. This accounts for every compatible permutation. The base count is
+
+$$
+m!\,(m-1)!=m\bigl((m-1)!\bigr)^2.
+$$
+
+Fix an order for reinserting the $p,q$ labelled loops. The red slot counts are $m,m+1,\ldots,m+p-1$, and the blue slot counts are $m,m+1,\ldots,m+q-1$, yielding $m(r-1)!(\ell-1)!$.
+
+**Zero crossing inventory and the empty carrier.** If $m=0$, every auxiliary arc is a loop, and compatible permutations preserve source color. When $p,q$ are both positive, the two nonempty color sets cannot lie in one orbit, so the count is zero. If $pq=0$ and $p+q>0$, source color is constant and every full cycle on the labels is compatible. Fixing one label as the written starting point leaves the other labels free to appear in any order, giving $(p+q-1)!$. This includes the identity cycle of a single loop, treated separately from deletion with a nonempty retained carrier. Finally, if $n=0$, both color fibers are empty, so $V$ and $\mathcal C$ are empty. The explicit nonemptiness condition gives zero actual completions; truncated subtraction followed by $0!$ must not introduce an empty cycle. Transporting these counts through $\Phi$ gives the four branches. The full proof is checked by the Lean kernel.
+:::
+
+The direct source entry for this unbounded inventory count is [`compatible_cycle_card`](lean:D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory.compatible_cycle_card). The positive-crossing branch has classical BEST provenance: Paidi Creed and Mary Cryan, *The number of Euler tours of random directed graphs*, *Electronic Journal of Combinatorics* **20**(3) (2013), P13, [doi:10.37236/2377](https://doi.org/10.37236/2377), Theorem 1, pages 2–3 ([original](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v20i3p13/pdf)). Pages 1–2 identify Euler tours modulo cyclic rotation only; the discussion and footnote following the theorem allow loops and parallel arcs. For $m>0$, the auxiliary two-state graph is strongly connected. There are $m$ spanning in-trees into either root, and outdegrees $m+p,m+q$, so BEST gives the same positive-inventory formula. The formal proof here uses actual deletion, insertion, and first returns rather than a general BEST theorem as a black box. Ordinary forest contraction retains the Tsaban and Gessel provenance given above. The empty carrier, disconnected zero-crossing inventories, endpoint balance, and complete raw-forest synthesis are not attributed verbatim to those sources, and no literature novelty is claimed.
+
+Both feasible and impossible cases can be checked by hand. For $E=\varnothing,n=2$, the four isolated vertices give $a=b=2,p=q=0$, and count $2$: $(r_1\ b_1\ r_2\ b_2)$ and $(r_1\ b_2\ r_2\ b_1)$. A single path $r_1\to b_1$ spanning all vertices has $m=q=0,p=1$; the component identity cycle gives its unique closure. The two oppositely directed paths at the start of this subsection have $m=0,p=q=1$, giving count zero. Thus the theorem assumes neither a completion, a positive count, a supplied path decomposition, nor strong connectivity.
+
+**Which bridges to a classical oracle lower bound remain?** [@thm-directed-forest-cycle-completion] gives the ordinary directed model's static uniform law, and [@thm-alternating-forest-classification] classifies and counts all actual completions of the alternating model. Three distinctions separate them from the glued-trees result in [@rem-qsvt-walks-literature]:
+
+1. **Graph distribution and orientation.** Ben-David et al. (*SIAM Journal on Computing* **53**(6), 2024, [doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975), §6.3.2, Lemmas 6.11–6.13, PDF pages 37–39) use one uniform cycle on each side's leaves for the self-weld, and a uniform alternating cycle between the two sides for the weld. [@thm-alternating-forest-classification] now supplies the directed alternating static classification and cardinality; it states neither an alternating conditional probability mass nor an explicit event-probability ratio. Passing to undirected cycles still requires orientation and representation multiplicities. An alternating conditional completion law still needs its own probability interface; the ordinary model's $1/(c-1)$ cannot simply be transferred.
+2. **Conditioning information.** The ordinary directed theorem conditions only on all edges of fixed $E$ being present; the alternating theorem itself states only classification and counting. An adaptive algorithm's full query history also involves random names, query choices, answers listing all neighbors, and possibly color information. One must prove, on the same random graph realization, that these history conditions leave precisely the asserted uniform completion set, or establish the appropriate different conditional law. Replacing a history by $E$ does not establish this. The cited Ben-David et al. lemmas permit only queries to names already in the knowledge graph; queries outside it require a separate argument. Whether sparse random names provide additional information is also beyond this theorem.
 3. **Queries, embeddings, and success events.** In [quant-ph/0209131v2, Section IV](https://arxiv.org/abs/quant-ph/0209131v2), Childs et al. first handle guessed new names, colors, and games restricted to known names, then pass to random tree embeddings and bound collision and `EXIT` events to obtain the original Theorem 9. Ben-David et al.'s footnote 14 explicitly notes that queries returning all neighbors give an embedding tree with $O(t)$ vertices, not literally $t$. Their printed component lower bound $2^k-2t$, pair bound $2/(2^k-2t)$, and equation (6.4), $O(t^2/(2^k-t))$, are retained as separately stated in the source; no unproved explicit constant or parameter range is assembled from them here.
 
-The contraction law thus supplies a complete static counting and conditional-probability step. Query complexity, adaptive histories on the same realization, and the full classical `EXIT` lower bound still require their own models and proofs. The next section turns to the quantum side, studying a specified weighted path and its endpoint probability.
+The ordinary contraction law supplies static counting and conditioning; the alternating theorem adds classification and counting on the actual static carrier. Alternating conditional laws, undirected representation multiplicities, names, ports and history conditioning, query complexity, and the full classical `EXIT` lower bound still require their own models and proofs. The broader scope of [request #11](https://github.com/the-omega-institute/trureturing-requests/issues/11) remains unfinished. The next section turns to the quantum side, studying a specified weighted path and its endpoint probability.
 
 ## 16.3 The central-defect path: how an endpoint controls the spectrum {#sec-central-defect-gap}
 
