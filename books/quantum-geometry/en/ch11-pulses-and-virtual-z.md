@@ -131,6 +131,150 @@ This effective hardware picture echoes the epigraph's geometric intuition (`MODE
 **Area $\pi/2$, a quarter turn.** A square pulse of $10\,\mathrm{MHz}$ for $25\,\mathrm{ns}$: the magenta area on the left is $\pi/2$; on the right the amber state leaves the north pole and turns about the violet $X$ axis through a magenta sector of the same size, stopping on the equator with $P(0) = 1/2$. The area law is a literature result ([@rem-rwa-pulse-area-literature]), not formalized in this book.
 :::
 
+### 11.2.1 Cancellation of the Fast Term: From the Actual Path to Integral Action {#sec-rwa-integral-action}
+
+The area law describes the fixed-axis average model exactly. Comparing it with the actual laboratory path requires an estimate of the discarded term. We use the integral-action method of Burgarth, Facchi, Gramegna, and Yuasa, *One bound to rule them all: from Adiabatic to Zeno* ([arXiv:2111.08961v2](https://arxiv.org/abs/2111.08961v2), Lemma 1, Eqs. 2.3–2.6; §3.3.1, Eqs. 3.27–3.34). Their envelope example uses zero phase; the derivation here treats exact resonance and an arbitrary fixed phase. It is a mathematical application of a literature method, **not an additional Lean-verified result in this book or a formal verification of the entire hardware control process**.
+
+**Objects and assumptions.** Set $\hbar=1$, $\omega=\omega_0=\omega_d>0$, a constant real phase $\varphi$, and $T\geq0$. Real functions $\Omega,\Omega'$ are continuous on $[0,T]$, with $d\Omega/dt=\Omega'$ on $(0,T)$; assume $M\geq0$ bounds $|\Omega(s)|$ for every $s\in[0,T]$. Only continuity on the closed interval and the interior derivative relation are required; a differentiable extension beyond it is unnecessary. All matrices below lie in $M_2(\mathbb C)$, and every matrix norm is the spectral norm, the operator norm induced by the Euclidean vector norm. The laboratory model is
+
+$$
+H_{\mathrm{lab}}(s)=\frac{\omega}{2}Z
+  +\Omega(s)\cos(\omega s+\varphi)X.
+$$
+
+**Construct the original path first.** On the matrix Banach space, take the identity contraction semigroup $S(t)A=A$ and the left-multiplication coefficient $B_H(s)A=-iH(s)A$. A continuous $H$ is bounded on the finite closed interval, so the original nonautonomous Dyson–Phillips construction applies. Its source and scope are in the [pinned source repository](trureturing:), at `D5/S3/Quantum/Analysis/NonautonomousDysonPhillips.lean` (`evolution`, `nonautonomous_bounded_perturbation`) and `Blueprint/D5/S3/Quantum/Analysis/NonautonomousDysonPhillips.md`. Specifically, take
+
+$$
+\begin{aligned}
+F_0(t)&=I,\\
+F_{n+1}(t)&=-i\int_0^t H(s)F_n(s)\,ds,\\
+U_H(t)&=\sum_{n=0}^{\infty}F_n(t)
+       =\operatorname{evolution}(S,B_H,t,0)I.
+\end{aligned}
+$$
+
+These are matrix-valued Bochner integrals retaining the left multiplication order. If $\norm{H(s)}\leq K_H$, then $\norm{F_n(t)}\leq(K_Ht)^n/n!$; the series converges uniformly to the unique continuous mild path
+
+$$
+U_H(t)=I-i\int_0^t H(s)U_H(s)\,ds.
+$$
+
+The fundamental theorem of calculus gives the interior derivative $U_H'=-iHU_H$. Hermiticity $H^*=H$ then gives $(U_H^*U_H)'=0$; the initial value and continuity imply $U_H^*U_H=I$, hence unitarity for finite square matrices. These differential, Hermitian, and physical identifications are applications of the existence and uniqueness supplier just cited. Let $U_{\mathrm{lab}}=U_{H_{\mathrm{lab}}}$. Laboratory generators at different times generally do not commute, so this path cannot be replaced by exponentiating their integral directly.
+
+**Actual rotating path and average path.** Put $V(t)=e^{+i\omega tZ/2}$ and $U_2(t)=V(t)U_{\mathrm{lab}}(t)$. The product rule and $VXV^*=\cos(\omega t)X-\sin(\omega t)Y$ give
+
+$$
+\begin{aligned}
+H_1(s)=H_{\mathrm{avg}}(s)
+ &=\frac{\Omega(s)}2(\cos\varphi X+\sin\varphi Y),\\
+\Delta(s)
+ &=\frac{\Omega(s)}2
+   [\cos(2\omega s+\varphi)X-\sin(2\omega s+\varphi)Y],\\
+H_2(s)&=V(s)H_{\mathrm{lab}}(s)V(s)^*\\
+ &\quad+iV'(s)V(s)^*\\
+ &=H_1(s)+\Delta(s),\\
+ U_2'&=-iH_2U_2.
+\end{aligned}
+$$
+
+Here $H_1$ is the effective generator used in the area law above after dropping the fast term; $H_2$ retains it. Both are continuous and Hermitian. Write $N_\varphi=\cos\varphi X+\sin\varphi Y$ and $\theta(t)=\int_0^t\Omega(s)\,ds$. The candidate path
+
+$$
+U_1(t)=\exp[-i\theta(t)N_\varphi/2]
+$$
+
+satisfies $U_1(0)=I$ and $U_1'=-iH_1U_1$. After integration, mild uniqueness identifies $U_1$ with the path supplied by the same original construction for $H_1$. Thus the area exponential identifies the evolution of the average model; it is not assumed to solve the laboratory equation. Both $U_1$ and $U_2$ are unitary and start at $I$.
+
+**A reusable integral-action identity.** For any two continuous Hermitian generators and their normalized evolution paths, define
+
+$$
+P(t)=\int_0^t[H_2(s)-H_1(s)]\,ds.
+$$
+
+For fixed $t$, differentiate $G_t(s)=U_1(t)U_1(s)^*[I+iP(s)]U_2(s)$. Using $P'=H_2-H_1$ gives
+
+$$
+G_t'(s)=-U_1(t)U_1(s)^*
+  [H_1(s)P(s)-P(s)H_2(s)]U_2(s).
+$$
+
+The endpoints are $G_t(0)=U_1(t)$ and $G_t(t)=[I+iP(t)]U_2(t)$. Integrating and rearranging yields the identity from Lemma 1, with the multiplication order retained:
+
+$$
+\begin{aligned}
+U_2(t)-U_1(t)
+ &=-iP(t)U_2(t)\\
+ &\quad-\int_0^t U_1(t)U_1(s)^*
+   [H_1(s)P(s)-P(s)H_2(s)]U_2(s)\,ds.
+\end{aligned}
+$$
+
+Unitary multiplication on either side preserves the spectral norm, so the triangle inequality gives
+
+$$
+\begin{aligned}
+\norm{U_2(t)-U_1(t)}
+ &\leq\norm{P(t)}\\
+ &\quad+\int_0^t\norm{P(s)}
+    [\norm{H_1(s)}+\norm{H_2(s)}]\,ds.
+\end{aligned}
+$$
+
+**Endpoints and envelope variation.** For this pulse, $P(t)=\int_0^t\Delta(s)\,ds$. Set
+
+$$
+\begin{aligned}
+q(t)&=\int_0^t\Omega(s)e^{i(2\omega s+\varphi)}\,ds,\\
+P(t)&=\frac12\begin{pmatrix}0&q(t)\\\overline{q(t)}&0\end{pmatrix},\\
+\norm{P(t)}&=\frac{|q(t)|}{2}.
+\end{aligned}
+$$
+
+The norm relation follows from $P^*P=|q|^2I/4$. Integrating the scalar oscillatory integral by parts retains both endpoints explicitly:
+
+$$
+\begin{aligned}
+q(t)&=\frac{\Omega(t)e^{i(2\omega t+\varphi)}
+             -\Omega(0)e^{i\varphi}}{2i\omega}\\
+ &\quad-\frac1{2i\omega}\int_0^t
+                  \Omega'(s)e^{i(2\omega s+\varphi)}\,ds,\\
+\norm{P(t)}
+ &\leq\frac{|\Omega(t)|+|\Omega(0)|
+                  +\int_0^t|\Omega'(s)|\,ds}{4\omega}\\
+ &\leq\frac{2M+\int_0^T|\Omega'(s)|\,ds}{4\omega}
+   =:K_T.
+\end{aligned}
+$$
+
+A Pauli matrix along a fixed unit axis has spectral norm $1$, so $\norm{H_1(s)}=\norm{\Delta(s)}=|\Omega(s)|/2$ and $\norm{H_2(s)}\leq|\Omega(s)|$. Substituting in the integral-action inequality and extending the nonnegative integrals from $t$ to $T$ gives, for **every** $t\in[0,T]$,
+
+$$
+\begin{aligned}
+&\norm{U_2(t)-U_1(t)}\\
+&\quad\leq K_T\left(1+\frac32\int_0^T|\Omega(s)|\,ds\right)\\
+&\quad=\frac{2M+\int_0^T|\Omega'(s)|\,ds}{4\omega}\\
+&\qquad\times\left(1+\frac32\int_0^T|\Omega(s)|\,ds\right).
+\end{aligned}
+$$
+
+This is also the same norm error bound between $U_{\mathrm{lab}}(t)$ and $V(t)^*U_1(t)$ in the laboratory frame. **Cancellation occurs under integration:** $\norm{\Delta(s)}=|\Omega(s)|/2$ does not decrease with $\omega$, whereas the primitive is $O(1/\omega)$, controlled by endpoints and total envelope variation. Increasing the carrier frequency with the envelope and finite window fixed therefore controls this model's approximation error. Equal areas alone do not determine the actual laboratory propagator.
+
+**A hand calculation and its boundaries.** Choose a time unit and normalize angular frequencies by its inverse. Take $T=1$, $\Omega(s)=1+s$, $\Omega'(s)=1$, and $M=2$. Then
+
+$$
+\begin{aligned}
+&\int_0^1|\Omega'(s)|\,ds=1,\\
+&\int_0^1|\Omega(s)|\,ds=\frac32,\\
+&K_1\left(1+\frac32\int_0^1|\Omega(s)|\,ds\right)\\
+&\quad=\frac5{4\omega}\left(1+\frac94\right)
+  =\frac{65}{16\omega}.
+\end{aligned}
+$$
+
+This holds for all $t\in[0,1]$ and every fixed $\varphi$. In physical units, $\omega,\Omega,M$ are angular frequencies and $\Omega'$ has units of inverse time squared; $\int|\Omega|$ is dimensionless, while $\int|\Omega'|$ has the same units as $M$. The error bound is consequently dimensionless; frequencies in Hz cannot be substituted directly for angular frequencies. If $\Omega\equiv0$, then $U_2=U_1=I$; for any admissible envelope, the paths also agree exactly at $t=0$. These are identity cases, not claims that the bound from a coarse $M$ is tight.
+
+The model remains an isolated, exactly resonant two-level system. Square-pulse paths containing switching corners or jumps, phase modulation, detuning, and higher-level leakage fall outside these $C^1$ comparison hypotheses. The ideal fixed-axis area law can hold for more general integrable envelopes; that does not remove the regularity assumptions of this error comparison. The quantity estimated here is the spectral-norm distance between unitary propagators. It differs from the next section's real-trace error for `pulse0` under Frobenius-norm hypotheses and is not experimental gate infidelity. The physical modeling retains its literature status in [@rem-rwa-pulse-area-literature] and [@rem-pulses-literature].
+
 ## 11.3 Ordered Pulses and an Error Bound {#sec-ordered-pulse-control}
 
 When three distinct generators $A, B, C$ are applied sequentially in finite steps $t > 0$ rather than along a single commuting axis, higher-order noncommuting corrections appear.
