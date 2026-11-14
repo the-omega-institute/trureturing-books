@@ -289,6 +289,164 @@ $$
 **第 $0$ 行存下合成规则，$8$ 行死表缩成 $4$ 行。** 取 $n = 3$、$w = (1, 0, 1)$：左边的逐行死表写满 $2^3 = 8$ 行青色的“输入 $\mapsto$ 奇偶值”；右边紫色的第 $0$ 行存放读出规则 $T(x) = \bigoplus_r x_r\,T(\mathbf{e}_r)$，下面只有三条青色的基行。琥珀色是同一个查询 $x = 111$：左边查到最后一行，右边按第 $0$ 行算出 $1\cdot 1 \oplus 1\cdot 0 \oplus 1\cdot 1 = 0$，两边读出相同（文献结果，未在本书形式化，见 [@ex-ch35-self-indexing-table-rank-collapse]）。
 :::
 
+### 35.3.1 有限布尔旋转码本的统一容量界
+
+原例子比较的是已知合成律下的行数；现在把“对每个参数只选一行、而这一行回答全部布尔查询”写成一个固定解码器的几何覆盖问题。取整数 $n\ge 1$ 与实数
+
+$$
+0<\varepsilon<\frac{2\pi}{3},
+$$
+
+令
+
+$$
+Q_n=\{0,1\}^n,\qquad
+d_{2\pi}(t)=\inf_{k\in\mathbb Z}|t-2\pi k|.
+$$
+
+对有限码本 $C\subset\mathbb R^n$，称 $C$ 对 $(n,\varepsilon)$ 充分，是指
+
+$$
+\forall\theta\in\mathbb R^n\quad
+\exists\phi\in C\quad
+\forall x\in Q_n,\qquad
+d_{2\pi}\!\left(\sum_{i=1}^{n}x_i(\theta_i-\phi_i)\right)\le\varepsilon .
+$$
+
+这里的 $\phi$ 是同一个码字：它在看到 $\theta$ 后、看到查询 $x$ 前选定，并服务该 $\theta$ 的全部查询；有限集合 $C$ 则在所有 $\theta$ 之前固定。把查询写成支持集
+
+$$
+s_x=\{\,i:x_i=1\,\}\subseteq\{1,\ldots,n\}
+$$
+
+只是一种记号变换，因为
+
+$$
+\sum_{i\in s_x}(\theta_i-\phi_i)
+=\sum_{i=1}^{n}x_i(\theta_i-\phi_i).
+$$
+
+固定的行 $0$ 解码器是字面实矩阵
+
+$$
+R(\alpha)=
+\begin{pmatrix}
+\cos\alpha&-\sin\alpha\\
+\sin\alpha&\cos\alpha
+\end{pmatrix}\in SO(2).
+$$
+
+$$
+D_\phi(x)=R\!\left(\sum_{i=1}^{n}x_i\phi_i\right).
+$$
+
+矩阵按四个实数条目逐项相等，且 $R(\alpha+2\pi)=R(\alpha)$；这里没有把矩阵再按整体相位取商。
+
+这是把周期 $L=2\pi$ 代入一般结论的共同特例：下界的一般无绕回条件是 $3\varepsilon<L$，上界的一般条件是 $n>0,L>0,\varepsilon>0$，而字面矩阵附加句取 $L=2\pi$。本节统一采用上述共同范围。
+
+::: {.theorem #thm-ch35-uniform-rotation-codebook-capacity title="有限布尔旋转码本的统一容量界" lean="D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_lower_bound D5/S3/Geometry/BooleanRotationCodebook.finite_codebook_upper_bound"}
+在上述 $n\ge1$ 与 $0<\varepsilon<2\pi/3$ 的范围内：
+
+1. 每个充分的有限码本 $C$ 都满足
+
+   $$
+   |C|\binom{2n}{n}\varepsilon^n\ge n!(2\pi)^n.
+   $$
+
+2. 存在一个充分的有限码本 $C$，满足
+
+   $$
+   |C|\le\left\lceil\frac{\pi n}{\varepsilon}\right\rceil^n,
+   $$
+   并且同一个 $C$ 还满足字面矩阵解码条件：对每个 $\theta\in\mathbb R^n$，存在一个 $\phi\in C$，使得对每个 $x\in Q_n$，存在实数 $\delta$ 满足
+
+   $$
+   |\delta|\le\varepsilon,\qquad
+   R\!\left(\sum_{i=1}^{n}x_i\theta_i\right)
+   =
+   R\!\left(\sum_{i=1}^{n}x_i\phi_i+\delta\right).
+   $$
+:::
+
+::: proof
+把 $a=\theta-\phi$ 看成环面 $(\mathbb R/2\pi\mathbb Z)^n$ 上的残差。先固定一个 $\phi$，考察对每个子集 $s$ 都满足
+
+$$
+d_{2\pi}\!\left(\sum_{i\in s}a_i\right)\le\varepsilon
+$$
+
+的残差。在每个坐标取中心基本域的代表元后，单点子集给出坐标的主值范围；由于 $3\varepsilon<2\pi$，非负坐标的任意子集和不能跨过一个完整周期而又回到误差带内。逐个加入坐标的归纳因此得到
+
+$$
+\sum_i\max(a_i,0)\le\varepsilon.
+$$
+
+对 $-a$ 重复同一论证，得到
+
+$$
+\sum_i\max(-a_i,0)\le\varepsilon.
+$$
+
+反过来，若这两个总质量都不超过 $\varepsilon$，任意子集和都落在 $[-\varepsilon,\varepsilon]$ 内；投影到圆周不会增大绝对值，于是所有布尔查询都满足误差要求。在中心基本域的主值表示中，固定码字的误差纤维由这个带符号体
+
+$$
+B_\varepsilon=
+\left\{a:
+\sum_i\max(a_i,0)\le\varepsilon,\quad
+\sum_i\max(-a_i,0)\le\varepsilon\right\}
+$$
+
+控制。
+
+体积计算把 $B_\varepsilon$ 按坐标正负号分成闭腔室。若有 $p$ 个非负坐标与 $q=n-p$ 个非正坐标，一个腔室是两个标准单纯形的直积，分别乘以 $\varepsilon$ 并对第二个因子取反，所以其 $n$ 维体积为
+
+$$
+\frac{\varepsilon^n}{p!\,q!}.
+$$
+
+不同闭腔室只会在坐标为零的超平面上相交，那些交集的体积为零。共有 $\binom{n}{p}$ 个给定 $p$ 的腔室，故
+
+$$
+\begin{aligned}
+\operatorname{vol}(B_\varepsilon)
+&=\sum_{p=0}^{n}\binom{n}{p}\frac{\varepsilon^n}{p!(n-p)!}\\
+&=\frac{\varepsilon^n}{n!}\sum_{p=0}^{n}\binom{n}{p}^2\\
+&=\frac{\binom{2n}{n}\varepsilon^n}{n!}.
+\end{aligned}
+$$
+
+在总 Haar 体积为 $(2\pi)^n$ 的乘积环面上，每个码字给出一个平移误差纤维；把它提升到中心基本域后，其体积至多为 $\operatorname{vol}(B_\varepsilon)$。充分性要求这些平移覆盖整个环面；有限并的次可加性于是给出
+
+$$
+(2\pi)^n
+\le |C|\frac{\binom{2n}{n}\varepsilon^n}{n!},
+$$
+
+整理即得下界。
+
+上界采用等距网格。令
+
+$$
+m=\left\lceil\frac{\pi n}{\varepsilon}\right\rceil,
+$$
+
+在每个坐标圆周上取 $m$ 个点 $0,2\pi/m,\ldots,(m-1)2\pi/m$，令 $C$ 为这些坐标点的笛卡尔积。对给定的 $\theta$，每个坐标都选一个圆周最近网格点，单坐标圆周误差至多 $\pi/m\le\varepsilon/n$。同一个坐标选择组成一个 $\phi$，它与查询无关；对任意支持集 $s_x$，三角不等式给出
+
+$$
+d_{2\pi}\!\left(\sum_{i\in s_x}(\theta_i-\phi_i)\right)
+\le |s_x|\frac{\pi}{m}
+\le n\frac{\pi}{m}
+\le\varepsilon.
+$$
+
+网格的大小至多 $m^n$，这就是上界。最后，在 $2\pi$ 周期下，圆周误差不超过 $\varepsilon$ 等价于存在 $|\delta|\le\varepsilon$，使目标角与存储角加上 $\delta$ 后相差一个 $2\pi$ 的整数倍；逐项比较余弦和正弦便得到定理中的字面实矩阵等式。完整证明由 Lean 内核检查。
+:::
+
+上面的带符号体积与正交腔室分解有 Kovačević–Tan 以及 Rogers–Shephard 理论的既有先例；这里使用它们来解释上述结论所需的欧氏体积计算，不把该体积公式称为新发现。上下界不声称相等或最优。两条容量界量化的是一个预先固定的有限 $C$ 与指定的行 $0$ 解码器：下界针对满足上述统一查询条件的码本，上界给出一个具体笛卡尔网格。它们没有推出任意解码器的存储下界、运行时间、有限硬件实现、学习或自更新收敛，也没有把码本基数当作存储位数。原例子中的 $2^n\to n+1$ 行数比较仍是其已标注的文献架构例子；这里的容量不改写那个比较。类似地，本节不声称二维误差 $L/(3k)$ 下精确最优基数 $3k^2$，也不把任何更一般的参数范围或未冻结的联合构造边界附加到这两条声明上。
+
+联合构造的准入与保留边界仍见[二维问题](https://github.com/the-omega-institute/trureturing/issues/30256)，上游公开定理的登记审计仍见[登记问题](https://github.com/the-omega-institute/trureturing/issues/30194)；本节不把两者视为已闭合。
+
+
 ---
 
 ## 35.4 光之闭环与它的隐秘陷阱：通往第三十六章的追问 {#光之闭环与它的隐秘陷阱通往第三十六章的追问}
