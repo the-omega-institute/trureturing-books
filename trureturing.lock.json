@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "b4a6f25056b7d7451df9b06e226c74cfd85940ac",
-  "pinned_at": "2026-11-14T00:00:34Z",
+  "pinned_at": "2026-11-14T02:32:08Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -828,6 +828,30 @@
       "statement_id": "sha256:dbf7c2a7836c7330538b443a6fbc66e43e2a7f9dc0e8fd55e98f7cdab4ee22af",
       "line": 272,
       "signature": "theorem golden_resource_unique_optimum {n : ℕ} (hn : 1 ≤ n) : goldenResourceObjective (1 / 25) n ≤ goldenResourceObjective (1 / 25) 5040 ∧ (goldenResourceObjective (1 / 25) n = goldenResourceObjective (1 / 25) 5040 ↔ n = 5040)"
+    },
+    "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_invariant": {
+      "module": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient",
+      "name": "D5.S3.Arith.RepeatingDecimal.RepeatingDecimalQuotient.long_division_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:5abc9a924c79bebaaa007bb67ce76a5f19dc06d6f32a6afd8e03bb1e61e6ef59",
+      "line": 39,
+      "signature": "theorem long_division_invariant (b p q n : ℕ) : q * longDivisionPrefix b p q n + remainder b p q n = b ^ n * p"
+    },
+    "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_period": {
+      "module": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient",
+      "name": "D5.S3.Arith.RepeatingDecimal.RepeatingDecimalQuotient.long_division_period",
+      "kind": "theorem",
+      "statement_id": "sha256:5abc9a924c79bebaaa007bb67ce76a5f19dc06d6f32a6afd8e03bb1e61e6ef59",
+      "line": 125,
+      "signature": "theorem long_division_period {b p q : ℕ} (hb : 1 < b) (hp : p < q) (L : ℕ) (hL : q ∣ b ^ L - 1) : Function.Periodic (digit b p q) L ∧ ((b : ℝ) ^ L - 1) * ((p : ℝ) / q) = (longDivisionPrefix b p q L : ℝ)"
+    },
+    "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_value": {
+      "module": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient",
+      "name": "D5.S3.Arith.RepeatingDecimal.RepeatingDecimalQuotient.long_division_value",
+      "kind": "theorem",
+      "statement_id": "sha256:5abc9a924c79bebaaa007bb67ce76a5f19dc06d6f32a6afd8e03bb1e61e6ef59",
+      "line": 88,
+      "signature": "theorem long_division_value {b p q : ℕ} (hb : 1 < b) (hp : p < q) : HasSum (fun n => (digit b p q n : ℝ) / (b : ℝ) ^ (n + 1)) ((p : ℝ) / q) ∧ Tendsto (fun n => (longDivisionPrefix b p q n : ℝ) / (b : ℝ) ^ n) atTop (𝓝 ((p : ℝ) / q))"
     },
     "D5/S3/Arith/Robin/CompleteMertensPeak.U": {
       "module": "D5/S3/Arith/Robin/CompleteMertensPeak",
@@ -3748,6 +3772,22 @@
       "statement_id": "sha256:27a50d53ea4b7ef105570f1c854b960f2a96fb04b4ba357796287115baf6237b",
       "line": 67,
       "signature": "theorem orthogonal_syndrome_recovery (S : s → Matrix n d ℂ) (hS : OrthogonalSyndromes S) (sigma : Matrix s s ℂ) (rho : Matrix d d ℂ) : syndromeDecoding S (syndromeEncoding S sigma rho) = Matrix.trace sigma • rho"
+    },
+    "D5/S3/Quantum/Routing/HannSpatialQram.correctness": {
+      "module": "D5/S3/Quantum/Routing/HannSpatialQram",
+      "name": "D5.S3.Quantum.Routing.HannSpatialQram.correctness",
+      "kind": "theorem",
+      "statement_id": "sha256:535492acd5585141a50f634a6c31134a749d52d58728b88ab5396e4185c507a3",
+      "line": 303,
+      "signature": "theorem correctness : (∀ (n : ℕ) (a : Address n) (b : Qutrit) (k : ℕ), k ≤ n → load n k (loading n a b 0) = loading n a b k) ∧ (∀ (n : ℕ) (a : Address n) (p : Qutrit), transport n (input n (programmed n a n) p) = arrived n a p ∧ ∀ i : Address n, leaf n (transport n (input n (programmed n a n) p)) i = if i = a then p else wait) ∧ (∀ (n : ℕ) (D : Address n → Bool) (a : Address n) (b : Bool), query n D (clean n a b) = clean n a (xor b (D a))) ∧ (∀ (n : ℕ) (D : Address n → Bool), (queryMatrix n D)ᴴ * queryMatrix n D = 1 ∧ queryMatrix n D * (queryMatrix n D)ᴴ = 1 ∧ ∀ ψ : Address n × Bool → ℂ, query"
+    },
+    "D5/S3/Quantum/Routing/ReversibleQram.correctness": {
+      "module": "D5/S3/Quantum/Routing/ReversibleQram",
+      "name": "D5.S3.Quantum.Routing.ReversibleQram.correctness",
+      "kind": "theorem",
+      "statement_id": "sha256:07ebdbb032c2a26a85df415803daff40fa76a8bbf442745abc31db865e604f59",
+      "line": 208,
+      "signature": "theorem correctness : (∀ (n : ℕ) (a i : Address n) (e : Bool), leaf n (route n a (clean n e)) i = if i = a then e else false) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (w : Wires n) (r : G), query n D (a, w, r) = (a, w, r + readAmount n D (route n a w))) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (r : G), query n D (a, clean n true, r) = (a, clean n true, r + D a)) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] [Fintype G] [DecidableEq G] (D : Address n → G), (queryMatrix n D)ᴴ * queryMatrix n D = 1 ∧ queryMatrix n D * (queryMatrix"
     },
     "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR": {
       "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",

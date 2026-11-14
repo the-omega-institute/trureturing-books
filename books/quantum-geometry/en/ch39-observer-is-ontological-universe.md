@@ -851,7 +851,10 @@ We use $W$'s first $N-1$ letters to label bonds; sites $0$ and $N-1$ are not joi
 **Finite open-prefix gap interface, unverified in this book.** Set
 
 $$
-L_j=\lvert\sigma^j(A)\rvert,\qquad N_j=2\lfloor L_j/2\rfloor,\qquad h_{\rho,j}=h_{N_j}\quad(j\ge1).
+\begin{aligned}
+L_j&=\lvert\sigma^j(A)\rvert,\qquad N_j=2\lfloor L_j/2\rfloor,\\
+h_{\rho,j}&=h_{N_j}\quad(j\ge1).
+\end{aligned}
 $$
 
 For every fixed $\rho\in(0,1)$, along these deterministic open prefixes with an even number of sites, does

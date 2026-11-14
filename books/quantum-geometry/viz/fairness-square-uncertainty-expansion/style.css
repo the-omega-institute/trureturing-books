@@ -14,10 +14,14 @@
 .tag sub, .hud-tl sub, dl.ro sub, .hud-bl sub { font-size: 0.72em; line-height: 0; vertical-align: -0.3em; }
 .tag.num sub { font-size: 0.8em; }
 :root:not([data-shot]) .hud-tl { max-width: calc(100% - 170px); }
+/* The 2D scenes (.stage.still) show no camera buttons: their title may take the width the buttons would need, so it
+   wraps onto fewer lines and leaves the drawing more height. */
+:root:not([data-shot]) .stage.still > .hud-tl { max-width: calc(100% - 40px); }
 @media (max-width: 560px) {
   .hud-tr { top: 10px; right: 12px; }
   #stageCam .chip { padding: 3px 7px; font-size: 10.5px; }
   :root:not([data-shot]) .hud-tl, .hud-tl { left: 14px; right: 14px; max-width: calc(100% - 128px); }
+  :root:not([data-shot]) .stage.still > .hud-tl { max-width: calc(100% - 28px); }
   .hud-tl .big { font-size: 12.5px; line-height: 1.2; }
   .hud-tl .sub { font-size: 10.5px; line-height: 1.25; }
 }

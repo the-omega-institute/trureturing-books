@@ -1,6 +1,6 @@
 // Independent regression checks for the sealed lab, its six cards and five interpretation lenses.
 import { readFileSync } from 'node:fs';
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, settle, until, routeLocalFonts } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'quantum-interpretations-duel';
 const LENSES = ['copenhagen', 'many-worlds', 'pilot-wave', 'grw-collapse', 'ortho-open-dim'];
@@ -308,6 +308,46 @@ try {
     check(`${card.id}: automatic sweep stops at its stated landmark`, await until(page, (stop) => { const d = window.INTERPRETATIONS_DUEL_DEBUG.state; return !d.playing && Math.abs(d.t - stop) < 1e-12; }, card.stop));
     s = await state();
     check(`${card.id}: automatic endpoint restores the promised experiment`, s.thetaDeg === 30 && s.N === Math.round(10 ** card.u) && near(s.beta, card.beta));
+  }
+  // The five-way card cited in a narrow column (334 × 520, its chapter's frame): five lens rows, each tall enough to read,
+  // inside the band between the title block with the lens chips and the legend (they once shared about 50 px).
+  for (const lang of ['zh', 'en']) {
+    const fig = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=five-way-duel`, { viewport: { width: 334, height: 520 }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+    await settle(fig, 200);
+    const r = await fig.evaluate(() => {
+      const cv = document.getElementById('cv').getBoundingClientRect(), box = (id) => document.getElementById(id).getBoundingClientRect();
+      return { top: Math.max(box('hudTl').bottom, box('lensBar').bottom) - cv.top, bottom: box('legend').top - cv.top,
+        rows: window.INTERPRETATIONS_DUEL_DEBUG.handles().filter((h) => h.kind === 'lens').map((h) => [Math.round(h.y0), Math.round(h.y1)]) };
+    });
+    check(`five-way-duel cited at 334 × 520 (${lang}): five lens rows of at least 20 px inside the band between the title block and the legend`,
+      r.rows.length === 5 && r.rows.every(([a, b]) => b - a >= 20 && a >= r.top - 0.5 && b <= r.bottom + 0.5), JSON.stringify(r));
+    await fig.context().close();
+  }
+  // The same figure when animation frames come late (every 400 ms, as on a loaded machine): the lens chips sit just under
+  // the title block as it reads, not where a stack of an earlier frame put the title (they once stayed 32 px low and
+  // the five rows ran into the legend), and the rows keep their band.
+  for (const lang of ['zh', 'en']) {
+    const ctx = await T.browser.newContext({ viewport: { width: 334, height: 520 }, locale: lang === 'zh' ? 'zh-CN' : 'en-US', deviceScaleFactor: 1 });
+    await routeLocalFonts(ctx, T.origin);
+    await ctx.addInitScript(() => {
+      const raf = window.requestAnimationFrame.bind(window);
+      window.requestAnimationFrame = (cb) => setTimeout(() => raf(cb), 400);
+      window.cancelAnimationFrame = (id) => clearTimeout(id);
+    });
+    const fig = await ctx.newPage();
+    fig.on('pageerror', (e) => T.errors.push(`pageerror: ${e.message}`));
+    await fig.goto(T.url(BOOK, ID, `?embed=1&lang=${lang}&preset=five-way-duel`), { waitUntil: 'load' });
+    await fig.evaluate(() => document.fonts && document.fonts.ready);
+    await settle(fig, 200);
+    const r = await fig.evaluate(() => {
+      const cv = document.getElementById('cv').getBoundingClientRect(), box = (id) => document.getElementById(id).getBoundingClientRect();
+      return { title: box('hudTl').bottom - cv.top, chips: [box('lensBar').top - cv.top, box('lensBar').bottom - cv.top], below: document.getElementById('lensBar').classList.contains('below'),
+        top: Math.max(box('hudTl').bottom, box('lensBar').bottom) - cv.top, bottom: box('legend').top - cv.top,
+        rows: window.INTERPRETATIONS_DUEL_DEBUG.handles().filter((h) => h.kind === 'lens').map((h) => [Math.round(h.y0), Math.round(h.y1)]) };
+    });
+    check(`five-way-duel cited at 334 × 520 (${lang}), frames every 400 ms: the lens chips sit just under the title block (0 … 8 px) and the five rows of at least 20 px keep the band`,
+      r.below && r.chips[0] - r.title >= 0 && r.chips[0] - r.title <= 8 && r.rows.length === 5 && r.rows.every(([a, b]) => b - a >= 20 && a >= r.top - 0.5 && b <= r.bottom + 0.5), JSON.stringify(r));
+    await ctx.close();
   }
 
   // Probability against expectation (born-unequal), and the AND-to-OR limit note under ordinary overrides.

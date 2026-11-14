@@ -1,5 +1,17 @@
 /* ORTHO//CUT: everything comes from the shared lab layout (../assets/theme.css). */
 .sheet .evh { margin: 16px 0 6px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.14em; color: var(--cyan); text-transform: uppercase; }
+/* five scene chips: on a phone they take one row at the top of the stage, in either language (shell.js puts the title
+   below them) */
+@media (max-width: 520px) {
+  .hud-tr { gap: 3px; }
+  .hud-tr .chip { padding: 4px 4px; letter-spacing: 0.04em; }
+}
+/* a cited figure in a narrow column: the title's second line and the legend set their lines closer, so the drawing in
+   the band between them (measured by main.js each frame) keeps its room */
+@media (max-width: 520px) {
+  :root[data-embed][data-figure] .hud-tl .sub, :root[data-embed][data-figure] .hud-bl { line-height: 1.3; }
+  :root[data-embed][data-figure] .hud-bl { row-gap: 1px; }
+}
 
 /* The tour bar selects the scene in a narrow cited figure. */
 @media (max-width: 480px) {

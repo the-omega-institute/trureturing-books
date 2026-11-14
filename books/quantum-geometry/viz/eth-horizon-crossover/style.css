@@ -1,6 +1,13 @@
 /* ORTHO//HORIZON: everything comes from the shared lab layout (../assets/theme.css). */
 .sheet .evh { margin: 16px 0 6px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.14em; color: var(--cyan); text-transform: uppercase; }
 
+/* a cited figure in a narrow column: the title's second line and the legend set their lines closer, so the drawing in
+   the band between them (measured by main.js each frame) keeps its room */
+@media (max-width: 520px) {
+  :root[data-embed][data-figure] .hud-tl .sub, :root[data-embed][data-figure] .hud-bl { line-height: 1.3; }
+  :root[data-embed][data-figure] .hud-bl { row-gap: 1px; }
+}
+
 /* The tour bar selects the scene in a narrow cited figure. */
 @media (max-width: 480px) {
   :root[data-embed][data-figure] .stage .hud-tr { display: none; }
