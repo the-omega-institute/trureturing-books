@@ -494,6 +494,62 @@ $$
 将上述支集性质与前文的衰减条件对照，即可厘清不同模型前提之间的相容边界。若在保持纯环境 $p$ 的同时还要求满足 [@thm-repeated-record-decay] 按字面向量划分的严格跨类重叠界（$E_i\ne E_j$ 时 $|G_{ij}|\le q<1$），则因任意两个受占地址 $i,j\in S$ 的重叠模长恒为 $|G_{ij}|=|u_i\overline{u_j}|=1$，不可能满足 $1\le q<1$；故 $S$ 上的所有受占记录向量必须按字面完全相等（对同一公共单位相位 $u$ 有 $E_i=u\lvert a\rangle$），此时 $R_p(\rho)=\rho$，该输入态相对于记录类捏合的误差 $\|\rho-\Pi_E(\rho)\|_{\mathrm F}$ 恒为零。若采用 [@rem-ray-record-orbit] 的射线表述，则 $S$ 上的受占记录 $E_i=u_i\lvert a\rangle$ 共处同一条射线 $\mathbb{C}\lvert a\rangle$，不存在跨射线受占对，射线捏合误差 $\|\rho-P_{\mathrm{ray}}(\rho)\|_{\mathrm F}$ 同样为零，仅保留相位轨道 $(u_i\overline{u_j})^k\rho_{ij}$ 的相干旋转。在整个分析中，必须将**真实完整环境边缘态的精确纯度** $\Tr_{\mathrm{S}}(\tau)=p$ 与以下五类不同条件严格区分：单条条件记录向量 $\lvert E_i\rangle$ 的纯态性（在任何受控记录模型中 $\lvert E_i\rangle$ 本身皆为单位纯态，但其加权边缘态 $\sum_i\rho_{ii}\lvert E_i\rangle\langle E_i\rvert$ 仍可因记录分岔而混合）、全局联合态 $\tau$ 的纯态性、仅在定义 $R_p$ 时人为选作比较基准的纯参考态 $p$、混合环境边缘态的定常性（如 [@ex-retained-environment-cnot]），以及近似纯度（[@rem-pure-environment-marginal-defect] 中的 $\varepsilon_k>0$）——这五者均不能替代两端边缘态精确为 $p$ 的前提。上述结论均基于有限维矩阵、偏迹与受控记录恒等式的分析推演，不声称逆命题、无穷维推广、原创数学发现或实验验证。
 :::
 
+::: {.remark #rem-actual-environment-purity-loss title="真实输出环境纯度对单步系统相干损失的控制（应用推导）"}
+[@rem-pure-environment-marginal-defect] 与 [@rem-pure-record-support-compatibility] 均以预先选定的纯环境参考基态 $p=\lvert a\rangle\langle a\rvert$ 作为比较基准。若不预先指定任何参考射线，也能直接将单步受控记录后的**系统纯度（及副对角相干）损失**与**真实输出环境边缘态的纯度**相比较（以下仍为定理盒之外的有限维分析应用推导，不构成所引冻结声明的附加条款或新的形式化定理）。先看最直观的单比特手算（$d=2$）：设两条单位环境记录 $E_0,E_1$ 的内积重叠为 $G_{01}=\sum_b E_0(b)\overline{E_1(b)}$。若系统初态取赤道纯叠加态 $\rho=\lvert +\rangle\langle +\rvert=\frac{1}{2}\bigl(\begin{smallmatrix}1&1\\1&1\end{smallmatrix}\bigr)$（对角布居 $p_0=p_1=\frac{1}{2}$，副对角元模平方 $|\rho_{01}|^2=|\rho_{10}|^2=\frac{1}{4}$），则受控记录后系统约化态 $\rho'$ 的副对角元乘以 $G_{01}$ 与 $\overline{G_{01}}$，系统纯度从 $F_2(\rho)=\Tr(\rho^2)=1$ 降为 $F_2(\rho')=\Tr(\rho'^2)=\frac{1}{2}+\frac{1}{2}|G_{01}|^2$，纯度损失恰为 $L_2=F_2(\rho)-F_2(\rho')=\frac{1-|G_{01}|^2}{2}$；与此同时，真实输出环境边缘态 $\sigma_{\mathrm{E}}=\frac{1}{2}\lvert E_0\rangle\langle E_0\rvert+\frac{1}{2}\lvert E_1\rangle\langle E_1\rvert$ 的纯度为 $q=F_2(\sigma_{\mathrm{E}})=\Tr(\sigma_{\mathrm{E}}^2)=\frac{1+|G_{01}|^2}{2}$，其线性熵 $\Delta=1-q=\frac{1-|G_{01}|^2}{2}$ 与 $L_2$ 完全相等。反之，若系统初态改取球心最大混合态 $\rho=\frac{1}{2}I_2$ 且两条环境记录正交（$G_{01}=0$），则系统边缘态保持 $\rho'=\rho=\frac{1}{2}I_2$ 不变（$L_2=0$），而真实输出环境仍等权分岔为两条正交记录的混合态（$q=\frac{1}{2}$，$\Delta=1-q=\frac{1}{2}$）：
+
+$$
+\begin{aligned}
+\rho=\lvert +\rangle\langle +\rvert:\quad & L_2=F_2(\rho)-F_2(\rho')=\frac{1-|G_{01}|^2}{2}=1-q=\Delta,\\
+\rho=\frac{1}{2}I_2\;\;(G_{01}=0):\quad & L_2=0<\frac{1}{2}=1-q=\Delta.
+\end{aligned}
+$$
+
+将这一手算推广到任意有限维系统与环境（$d,e\in\mathbb{N}$）：设 $\rho\in M_d(\mathbb{C})$ 为半正定且迹为 $1$ 的系统密度矩阵，每条环境记录 $E_i\in\mathbb{C}^e$（$i\in\mathrm{Fin}\,d$）满足归一化 $\sum_{b\in\mathrm{Fin}\,e}|E_i(b)|^2=1$，沿用 [@thm-repeated-record-decay] 的记号写对角布居 $p_i=\rho_{ii}\ge 0$ 及 Gram 矩阵元 $G_{ij}=\sum_{b\in\mathrm{Fin}\,e}E_i(b)\overline{E_j(b)}$。定义受控记录矩阵 $W_{(i,b),\,j}=[j=i]\,E_i(b)$（记录归一化使 $W^*W=I_d$ 为保内积等距算子），并令联合记录态及其两个真实偏迹边缘态为
+
+$$
+\begin{aligned}
+X&=W\rho W^*,\qquad \sigma_{\mathrm{E}}=\Tr_{\mathrm{S}}(X),\qquad \rho'=\Tr_{\mathrm{E}}(X),\\
+F_2(A)&=\|A\|_{\mathrm F}^2=\sum_{i,j}|A_{ij}|^2,\qquad C_2(A)=\|A-\operatorname{diag}(A)\|_{\mathrm F}^2=\sum_{i\ne j}|A_{ij}|^2.
+\end{aligned}
+$$
+
+此处 $\sigma_{\mathrm{E}}$ 与 $\rho'$ 是同一个记录联合态 $X$ 的两个真实边缘态；记号 $F_2(A)$ 与 $C_2(A)$ 中的下标 $2$ 明确表示它们本身已是按本章 Frobenius 范数 $\|A\|_{\mathrm F}=\bigl(\sum_{i,j}|A_{ij}|^2\bigr)^{1/2}$ 定义的**平方量**（即全部矩阵元或全部副对角元的模平方和，而非对某个范数再取二次平方）。若要把 $X=W\rho W^*$ 解释为某个联合幺正算子 $U$ 的真实单步输出 $U(\rho\otimes\lvert a\rangle\langle a\rvert)U^*$，则初始联合态必须取纯初始环境下的乘积态 $\rho\otimes\lvert a\rangle\langle a\rvert$（$a\in\mathrm{Fin}\,e$），且 $U$ 满足 [@rem-retained-environment-defect] 中指定的受控列条件 $UJ=W$（即 $U_{(i,b),\,(j,a)}=[j=i]\,E_i(b)$）；下述系数为 $1$ 的不等式仅在这一纯初始环境与归一化有限记录的前提下成立，不对混合初始环境断言。
+
+直接展开对系统的偏迹 $\sigma_{\mathrm{E}}=\Tr_{\mathrm{S}}(W\rho W^*)$，其第 $(b,c)$ 个矩阵元为 $(\sigma_{\mathrm{E}})_{b,c}=\sum_{i\in\mathrm{Fin}\,d}p_i E_i(b)\overline{E_i(c)}$，对全部 $b,c\in\mathrm{Fin}\,e$ 求模平方和即得真实输出环境的纯度 $q=F_2(\sigma_{\mathrm{E}})=\sum_{i,j\in\mathrm{Fin}\,d}p_i p_j|G_{ij}|^2$（等价地，将各记录向量 $E_i$ 排成 $e\times d$ 矩阵 $B$ 的列，则 $\sigma_{\mathrm{E}}=B\operatorname{diag}(p)B^*$ 且 $(B^*B)_{ij}=\overline{G_{ij}}$，由迹的循环性同样给出 $\Tr(\sigma_{\mathrm{E}}^2)=\sum_{i,j}p_i p_j|G_{ij}|^2$）。另一方面，前文 [@thm-repeated-record-decay] 所用的偏迹恒等式 `environment_marginal_channel` 给出 $\rho'_{ij}=G_{ij}\rho_{ij}$。因输入态 $\rho$ 与两个边缘态 $\rho',\sigma_{\mathrm{E}}$ 均为厄米密度矩阵，对它们而言 $F_2(A)=\Tr(A^2)$。记系统纯度损失为 $L_2=F_2(\rho)-F_2(\rho')$，输出环境的线性熵为 $\Delta=1-q=1-F_2(\sigma_{\mathrm{E}})$；利用 $\sum_{i,j}p_i p_j=\bigl(\sum_i p_i\bigr)^2=1$、记录归一化给出的 $G_{ii}=1$ 与 $|G_{ij}|\le 1$，以及 [@rem-pure-environment-marginal-defect] 中半正定矩阵 $\rho$ 的矩阵元上界 $|\rho_{ij}|^2\le\rho_{ii}\rho_{jj}=p_i p_j$，逐项比较非负项 $1-|G_{ij}|^2\ge 0$ 立得
+
+$$
+\begin{aligned}
+(\sigma_{\mathrm{E}})_{b,c}&=\sum_{i\in\mathrm{Fin}\,d}p_i E_i(b)\overline{E_i(c)},\qquad q=F_2(\sigma_{\mathrm{E}})=\sum_{i,j\in\mathrm{Fin}\,d}p_i p_j|G_{ij}|^2,\\
+L_2&=F_2(\rho)-F_2(\rho')=C_2(\rho)-C_2(\rho')=\sum_{i,j\in\mathrm{Fin}\,d}|\rho_{ij}|^2\bigl(1-|G_{ij}|^2\bigr),\\
+\Delta&=1-q=1-F_2(\sigma_{\mathrm{E}})=\sum_{i,j\in\mathrm{Fin}\,d}p_i p_j\bigl(1-|G_{ij}|^2\bigr),\qquad 0\le L_2\le 1-q=\Delta.
+\end{aligned}
+$$
+
+这一估计完全由记录归一化与半正定矩阵元上界直接导出：既不需要选定参考比较射线，也不需要对布居数 $p_i$ 施加正下界或假设 $\rho$ 满秩（当 $p_i=0$ 时，$|\rho_{ij}|^2\le p_i p_j$ 自动迫使 $\rho_{ij}=0$，不会产生任何零除或例外）。由于对角元满足 $\rho'_{ii}=G_{ii}\rho_{ii}=\rho_{ii}$ 而保持不变，系统纯度损失 $L_2$ 精确等于副对角 Frobenius 相干模平方和的减少量 $C_2(\rho)-C_2(\rho')$；注意它是前后两态各自平方范数之差，**而不是**态差矩阵的 Frobenius 范数平方 $F_2(\rho-\rho')=\|\rho-\rho'\|_{\mathrm F}^2$。当系统初态 $\rho$ 为纯态时，对一切 $i,j$ 均有 $|\rho_{ij}|^2=p_i p_j$，故等号恒成立（$L_2=1-q=\Delta$）；而对一般混合系统初态则仅成立不等式 $L_2\le 1-q$，如上文球心最大混合态 $\frac{1}{2}I_2$ 配正交记录即给出 $L_2=0<\frac{1}{2}=1-q$。
+
+特别地，当真实输出环境边缘态具有单位纯度 $q=F_2(\sigma_{\mathrm{E}})=1$（即 $\Delta=1-q=0$）时，非负求和式 $\sum_{i,j}p_i p_j(1-|G_{ij}|^2)=0$ 迫使布居支集 $S=\{i\in\mathrm{Fin}\,d:p_i>0\}$ 上的每一对受占地址 $i,j\in S$ 均满足 $|G_{ij}|=1$。由单位向量上 Cauchy–Schwarz 不等式取等号的充要条件，所有受占记录必共处同一条单位输出射线：存在某个单位环境向量 $v\in\mathbb{C}^e$（$\sum_{b\in\mathrm{Fin}\,e}|v(b)|^2=1$）及单位复相位 $u_i\in\mathbb{C}$（$i\in S$ 时 $|u_i|=1$），使得 $E_i=u_i v$（$i\in S$）。在该输入态 $\rho$ 上，系统仅经历相应的对角相位旋转 $\rho'_{ij}=u_i\overline{u_j}\rho_{ij}$（$S$ 之外仍恒为零），相干模长处处守恒（$L_2=0$）。然而，由于此处并未固定输入参考态，公共输出射线 $v$ **不必等于**初始环境参考基态 $\lvert a\rangle$，输出系统态 $\rho'$ 也**不必等于**输入态 $\rho$。例如对单比特初态 $\rho=\lvert +\rangle\langle +\rvert$ 取反向共线记录 $E_0=v$、$E_1=-v$，则输出环境边缘态 $\sigma_{\mathrm{E}}=\lvert v\rangle\langle v\rvert$ 纯度为 $1$（$L_2=\Delta=0$），但系统边缘态被翻转为正交的西极纯态 $\rho'=\lvert -\rangle\langle -\rvert$，按后文 [@def-trace-distance] 计算的半迹范数距离高达 $D(\rho,\rho')=\frac{1}{2}\|\rho-\rho'\|_1=1$：
+
+$$
+\begin{aligned}
+q=1\;\;(\Delta=0)\quad&\Longrightarrow\quad E_i=u_i v,\quad |u_i|=1\quad (i\in S),\qquad \rho'_{ij}=u_i\overline{u_j}\rho_{ij}\quad (i,j\in S),\\
+E_0=v,\;E_1=-v,\;\rho=\lvert +\rangle\langle +\rvert\quad&\Longrightarrow\quad \rho'=\lvert -\rangle\langle -\rvert,\quad L_2=\Delta=0,\quad D(\rho,\rho')=1.
+\end{aligned}
+$$
+
+不仅如此，与 [@rem-pure-record-support-compatibility] 中跨跃迁两端保持**同一个**参考纯态 $p=\lvert a\rangle\langle a\rvert$ 因而导出固定 $U$ 下不变受占子空间与后续全部步数保纯的结论截然不同：单步输出环境若仅仅落入**另一条**纯射线 $\lvert v\rangle\ne\lvert a\rangle$，对于同一个固定联合幺正算子 $U$ 的后续演化**并不提供任何未来保纯或相干保持保证**。具体而言，在三维环境标准正交基 $\{\lvert 0\rangle,\lvert 1\rangle,\lvert 2\rangle\}$（$e=3$）与单控制比特（$d=2$）上，取受控幺正算子 $U=\lvert 0\rangle\langle 0\rvert\otimes V_0+\lvert 1\rangle\langle 1\rvert\otimes V_1$，其中 $V_0$ 交换 $\lvert 0\rangle\leftrightarrow\lvert 1\rangle$ 并固定 $\lvert 2\rangle$，而 $V_1$ 作三元循环置换 $\lvert 0\rangle\mapsto\lvert 1\rangle\mapsto\lvert 2\rangle\mapsto\lvert 0\rangle$。从环境初态 $\lvert 0\rangle$ 与系统赤道纯态 $\rho_0=\lvert +\rangle\langle +\rvert$ 出发：第一次接触后，两条条件记录同为 $V_0\lvert 0\rangle=V_1\lvert 0\rangle=\lvert 1\rangle$，联合态为 $\tau_1=\lvert +\rangle\langle +\rvert\otimes\lvert 1\rangle\langle 1\rvert$，首步输出环境纯度 $q_1=1$ 且系统完整保留全部相干 $\rho_1=\lvert +\rangle\langle +\rvert$；但保留该环境再作用一次同一个 $U$ 时，两条分支上的环境从 $\lvert 1\rangle$ 分别演化为正交的 $V_0\lvert 1\rangle=\lvert 0\rangle$ 与 $V_1\lvert 1\rangle=\lvert 2\rangle$，第二步系统边缘态 $\rho_2=\frac{1}{2}I_2$ 的横向相干被彻底抹去：
+
+$$
+\begin{aligned}
+V_0\lvert 0\rangle&=\lvert 1\rangle,\quad V_0\lvert 1\rangle=\lvert 0\rangle,\quad V_0\lvert 2\rangle=\lvert 2\rangle,\qquad
+V_1\lvert 0\rangle=\lvert 1\rangle,\quad V_1\lvert 1\rangle=\lvert 2\rangle,\quad V_1\lvert 2\rangle=\lvert 0\rangle,\\
+\tau_1&=\lvert +\rangle\langle +\rvert\otimes\lvert 1\rangle\langle 1\rvert\quad (q_1=1,\;\rho_1=\lvert +\rangle\langle +\rvert),\qquad
+\rho_2=\frac{1}{2}I_2,\quad \sigma_{\mathrm{E},2}=\frac{1}{2}\bigl(\lvert 0\rangle\langle 0\rvert+\lvert 2\rangle\langle 2\rvert\bigr)\quad (q_2=\frac{1}{2}).
+\end{aligned}
+$$
+
+综上，当输出环境线性熵 $\Delta=1-q$ 较小时，不等式 $0\le L_2\le 1-q=\Delta$ 精确控制的是**依赖于输入态的相干模平方损失总和**；由于 $\Delta=\sum_{i,j}p_i p_j(1-|G_{ij}|^2)$ 按输入布居权重 $p_i p_j$ 加权，当某些布居数可以任意微小时，微小的 $\Delta$ 并不能一致控制每一对下标上的相对相干损失因子 $1-|G_{ij}|^2$，也不能控制态间迹距离 $D(\rho,\rho')$。这一单步比较同样不提供多步重置信道等同性、保留环境轨迹的单调性、关于时间一致成立的误差界或指数衰减律，也不主张任何数学原创性或实验验证。
+:::
+
 **衰减到零，还算可逆吗？** [@prop-phase-damping-decay] 里的相干元每一步乘以 $c$，$N$ 步后只剩 $c^N\rho_{01}$，最终归零。4.1 节说过，单步退相干可以看成一次可逆耦合之后丢掉环境（[@thm-stinespring-dilation]、[@thm-reduced-access-defect]）。可“每一步都能这样看”与“所有步数合起来仍是同一个可逆演化的影子”是两回事：前者允许每一步各换一个扩张，后者要求一个酉算子 $U$ 一次管住全部的 $T^n$。下面的定理说，后者对任何压缩算子都成立。
 
 ::: {.theorem #thm-unitary-power-dilation title="Sz.-Nagy 酉幂扩张：压缩算子的每一次幂都是同一个酉算子的影子" lean="D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation"}
