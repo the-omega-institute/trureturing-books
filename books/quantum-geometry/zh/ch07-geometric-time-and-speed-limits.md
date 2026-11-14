@@ -369,30 +369,60 @@ $$
 紧致性在这里把“每个方向都有损失”变成“所有方向共享一个严格损失界”。形式证明通过正交坐标把 $A,B$ 化为保守的单通道矩阵系统，复用无暗空间的有限步收缩估计，取同样的 $N=d$ 与 $q=\norm{A^d}_{\mathrm{op}}$。完整证明由 Lean 内核检查。
 :::
 
-这个界可以依赖于 $U,v$，并未给出对所有系统统一的收缩常数。关于监测返回的文献背景，见 Grünbaum、Velázquez、Werner 与 Werner，*Recurrence for discrete time unitary evolutions*，arXiv:1202.3903v3，Theorem 2。
+这个界可以依赖于 $U,v$，并未给出对所有系统统一的收缩常数。下面给出有限维监测返回的完整均值结论，其文献来源是 Grünbaum、Velázquez、Werner 与 Werner，*Recurrence for discrete time unitary evolutions*，[arXiv:1202.3903v3](https://arxiv.org/abs/1202.3903v3)，Theorem 2。
 
-::: {.problem #prob-monitored-spectral-mean title="形式化缺口：从实际监测历史到占据谱点数"}
-对任意有限维复内积空间、幺正 $U$ 与单位向量 $v$，沿用 [@def-monitored-return] 的 $p_{n+1}=\lvert\langle v,UT^nv\rangle\rvert^2$。定义占据谱集合
-
-$$
-S=\{\lambda\in\mathbb C:\exists w\in E,\ Uw=\lambda w\ \text{且}\ \langle w,v\rangle\ne0\}.
-$$
-
-需要完成的形式化陈述是：若 $\sum_{n=0}^{\infty}p_{n+1}=1$，则 $S$ 有限，且
+::: {.theorem #prob-monitored-spectral-mean title="有限维酉监测返回：均值等于不同占据谱值的个数" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean.monitored_spectral_mean"}
+设 $E$ 为任意有限维复内积空间，$U:E\simeq_{\mathrm{li}}[\mathbb C]E$ 为幺正算子，$v\in E$ 且 $\norm v=1$。令 $P_v$ 为到 $\mathbb Cv$ 的正交投影，$T=(I-P_v)U$，并沿用 [@def-monitored-return] 的实际首次返回概率 $p_{n+1}=\lvert\langle v,UT^nv\rangle\rvert^2$。定义实际前向循环空间与占据谱集合
 
 $$
-\sum_{n=0}^{\infty}(n+1)p_{n+1}=\#S.
+\begin{aligned}
+C&=\operatorname{span}_{\mathbb C}\{U^n v:n\in\mathbb N\},\\
+S&=\{\lambda\in\mathbb C:\exists w\in E,\ Uw=\lambda w\ \text{且}\ \langle w,v\rangle\ne0\}.
+\end{aligned}
 $$
 
-这是已知文献定理的形式化缺口，数学上不作为未解决猜想。上面的循环空间与收缩论证仍需连接到算子迹的收敛求和、生存概率尾和到首次返回均值的转换，以及 $\dim C=\#S$；最后一式数的是不同占据谱值，并非本征值的代数重数。有限步守恒或某个正次幂严格收缩，都不能单独替代这条完整结论。
+则以下四项同时成立：
+
+1. $S$ 有限；
+2. $\#S=\dim_{\mathbb C}C$；
+3. 加权首次返回级数收敛，且 $\sum_{n=0}^{\infty}(n+1)p_{n+1}=\#S$；
+4. 首次返回概率级数收敛，且 $\sum_{n=0}^{\infty}p_{n+1}=1$。
+
+后两项对应 Lean 中的 `HasSum`。返回必然性是结论，无须另作假设；$\#S$ 数的是不同占据谱值，不计本征空间维数或代数重数。
 :::
+
+::: proof
+在 $C$ 上记 $W=U|_C$、$A=T|_C$。有限维性使单射 $W$ 满射，故 $W$ 仍幺正。单位向量条件给出 $I_C-AA^*=\lvert v\rangle\langle v\rvert$；逐项共轭并相消可得
+
+$$
+\sum_{n=0}^{H-1}\lvert A^nv\rangle\langle A^nv\rvert
+=I_C-A^H(A^H)^*.
+$$
+
+取迹，再对 [@prop-monitored-return-conservation] 的 $p_{n+1}=s_n-s_{n+1}$ 作有限分部求和，得到
+
+$$
+\begin{aligned}
+\sum_{n=0}^{H-1}s_n
+&=\dim_{\mathbb C}C-\operatorname{Re}\Tr\bigl(A^H(A^H)^*\bigr),\\
+\sum_{n=0}^{H-1}(n+1)p_{n+1}
+&=\sum_{n=0}^{H-1}s_n-Hs_H.
+\end{aligned}
+$$
+
+由 [@rem-monitored-cyclic-power-contraction]，沿共尾时刻 $H=kN$ 有 $\norm{A^{kN}}_{\mathrm{op}}\le q^k$ 及 $s_{kN}\le q^{2k}$，其中 $0\le q<1$。迹余项趋于零，$kN s_{kN}$ 也由 $kq^{2k}\to0$ 趋于零。非负项部分和单调，把这条共尾子列的极限提升为整个级数的和，得到加权和为 $\dim_{\mathbb C}C$。有限概率守恒与同一生存尾界给出总返回概率为 $1$。
+
+最后对循环酉算子 $W$ 取正交归一本征基。每个基向量与 $v$ 的内积非零，否则它就是 [@rem-monitored-cyclic-observability] 排除的永久暗态。两个基向量若有相同本征值，就能取一个非零线性组合使其与 $v$ 正交，产生同样矛盾，故这些本征值两两不同。反过来，环境空间中任何占据本征向量投影到 $C$ 后仍非零；这个投影保持其与 $v$ 的内积并与 $U$ 交换，因而得到同一本征值的循环本征向量。在上述本征基中展开，便认出它的本征值。于是 $S$ 恰为这些两两不同的循环本征值的集合，有限且基数为 $\dim_{\mathbb C}C$。完整证明由 Lean 内核检查。
+:::
+
+这里验证的是有限维酉演化下纯态的逐步投影返回协议。无限维的谱测度与绕数表述、一般量子仪器，以及物理时钟或速度界的解释均不属于这条定理。
 
 ::: {.remark #rem-monitored-unital-kac title="相关空间上的量子 Kac 公式（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 平均返回时间的整数性还有一条不先数谱点的路线。Sinkovicz、Kurucz、Kiss 与 Asbóth，*Quantized recurrence time in iterated open quantum dynamics*，[arXiv:1411.0568v1](https://arxiv.org/abs/1411.0568v1)，第 II–III 节，式 (11)–(20)，考虑有限维系统：从纯态出发，每一步应用同一个完全正、保迹通道，随后测量是否回到初态。相关空间由这份初态在未监测演化中能够到达的态的支撑张成。若通道把相关空间上的恒等算子映回自身，则平均首次返回时间等于相关空间的维数。条件针对这份初态的实际相关空间；仅有完全正与保迹不包含它，也不能把结论中的维数换成整个环境空间的维数。
 
 这条路线的核心是保留“尚未返回”的非归一化条件态。它的迹是生存概率；相邻两步的迹之差是首次返回概率。把各时刻的条件态相加，先得到一个算子，再取迹，便能把返回均值连接到空间维数。原文式 (18) 断言，在上述条件下，这个算子总和恰是相关空间的恒等算子。这里的时间从第一次演化后的检测算起，不能换成未经监测的重叠概率。
 
-对本节的幺正演化，相关空间就是前文的循环空间。这提示了 [@prob-monitored-spectral-mean] 的两条接口：一条把实际生存历史的总和连接到循环空间维数，另一条把该维数连接到不同占据谱值的个数。前文的严格幂收缩为消去长时余项提供了控制，但不直接给出算子总和恒等式；两条接口仍须分别完成形式化。本注只陈述已发表结果及其适用条件，不新增本书的 Lean 结论。
+对本节的幺正演化，相关空间就是前文的循环空间。[@prob-monitored-spectral-mean] 把实际生存历史的求和连接到循环空间维数，再把该维数认作不同占据谱值的个数；严格幂收缩在其证明中消去长时余项。该定理覆盖酉演化纯态返回的情形。本注的一般完全正、保迹且在实际相关空间上保恒等的通道结果仍仅引自文献，不由这条酉定理覆盖。
 :::
 
 ::: {.example #ex-first-return-qubit title="旋转比特的首次返回统计：平均返回时间恒为 2，与步长无关"}
@@ -434,7 +464,7 @@ $\delta = \frac{\pi}{4}$ 一行的 $p_1 = 0.853553$ 就是 [@ex-zeno-strobe-free
 
 **读法。** 步长越小，第一步就返回的概率越接近 $1$，这是芝诺冻结；可是万一第一步没有返回（概率 $s^2$），回来平均要再等 $\frac{1}{s^2}$ 步。两者相乘恰好补回 $1$ 步：$c^2\cdot 1 + s^2\cdot\bigl(1 + \frac{1}{s^2}\bigr) = 2$。探测得再勤，改变的只是分布的形状，改变不了均值。
 
-**一般情形（文献结果，未在本书形式化）。** Grünbaum、Velázquez、Werner 与 Werner（Commun. Math. Phys. **320**, 543, 2013）证明：对有限维情形，只要返回是必然的，平均首次探测返回时间就取整数值，等于初态在 $U$ 的本征子空间上有非零分量的不同本征值的个数。本例中这个数是 $2$。对 $3$ 维与 $4$ 维的随机幺正所作的数值模拟给出均值 $3.000000$ 与 $4.000000$。
+**有限维酉情形。** [@prob-monitored-spectral-mean] 给出返回必然性，并证明平均首次探测返回时间等于不同占据谱值的个数，因而是整数。本例中这个数是 $2$。对 $3$ 维与 $4$ 维的随机幺正所作的数值模拟给出均值 $3.000000$ 与 $4.000000$。
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="mean" height="500"}
@@ -607,7 +637,7 @@ $$
 
 本评注的界于是逐端给出 $\theta_{\mathrm{FS}}(a,m_k)\le\mathrm{energy}\cdot\tau/\hbar$。再加上两个末态确实正交，条件定理才给出 $\tau\ge\pi\hbar/(4\cdot\mathrm{energy})$。只把两个公式的符号改成一样，或只挑一个几何中点，并不能保证这些轨道、制备与共同资源界存在。上例的等权二能级轨道提供了这样的特定实现：以轨道中点为锚，两个端点位于相反的半程，$\tau=\tau_\perp/2$；因而半程的 $\pi/4$ 与全程的 $\pi/2$ 相容。
 
-记录计数还独立需要总接触预算 $\sum_i\tau(i)\le T$；物理上用顺序且不重叠的接触区间来保证它时，应另行核对，不能从角位移界推出。这里得到的是给定有限维自治哈密顿量的文献速度界，不是任意开放、受驱或无界动力学的结论，也不是普适时钟滴答律。它不计算受监测的完整首次返回均值，也不补足 [@prob-monitored-spectral-mean] 中的谱计数与算子求和步骤。
+记录计数还独立需要总接触预算 $\sum_i\tau(i)\le T$；物理上用顺序且不重叠的接触区间来保证它时，应另行核对，不能从角位移界推出。这里得到的是给定有限维自治哈密顿量的文献速度界，不是任意开放、受驱或无界动力学的结论，也不是普适时钟滴答律。受监测的完整首次返回均值由 [@prob-monitored-spectral-mean] 对有限维酉纯态协议另行给出，其谱计数与算子求和证明不建立上述动力学速度界或物理接触预算。
 
 1. **Mandelstam–Tamm 能量方差速度极限（L. Mandelstam & I. Tamm, 1945）**：*The uncertainty relation between energy and time in non-relativistic quantum mechanics*（J. Phys. USSR **9**, 249–254, 1945）及 Anandan–Aharonov 的射影几何表述（Phys. Rev. Lett. **65**, 1697, 1990）是上述推导的经典背景。轨道的路长速度是 $\Delta H/\hbar$；一般轨道不必沿测地线运动，但端点测地线夹角不超过路长。Deffner–Campbell 综述的精确定位已列于上文。
 2. **Margolus–Levitin 平均能量速度极限（N. Margolus & L. B. Levitin, 1998）**：在 *The maximum speed of dynamical evolution*（Physica D **120**, 188–195, 1998）中，利用三角不等式 $\cos x \ge 1 - \frac{2}{\pi}(x + \sin x)$ 对谱展开求界，证明了相对于基态零点能 $E_0 = 0$ 的平均能量 $\langle H\rangle$ 同样限制正交演化时间：

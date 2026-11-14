@@ -4,7 +4,9 @@
 
 1. **C.1 冻结定理总索引（{{T}} 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
 2. **C.2 形式化定义与代数载体总索引（{{D}} 项唯一声明：{{D_def}} 项 `def` + {{inductive}} 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.3 行内辅助定理与定义索引（{{R}} 项声明：{{R_theorem}} 项 `theorem` + {{R_def}} 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **{{total}} 项唯一声明**（${{T}} + {{D}} + {{R}} = {{total}}$）。媒体引用在各行末尾另列，不改变上述分区。
-3. **C.4 开放问题与未形式化前沿边界台账（11 项：6 个 `conjecture` + 3 个 `problem` 环境 + 2 项文献边界 `remark`）**：9 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
+3. **C.4 开放问题与未形式化前沿边界台账**：{{open}} 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
+
+第 7.3 节的 [@prob-monitored-spectral-mean] 已证明有限维酉监测纯态的四项结论：占据谱有限，其基数等于循环空间维数，加权首次返回概率之和等于该基数，总返回概率为一。它列入 C.1，不再属于 C.4 的形式化缺口；一般通道、无限维与物理时钟的边界仍按第七章分别说明。
 
 第 16.3 节的 [@thm-central-defect-endpoint-average] 及其 [书面证明](ch16-qsvt-walks-and-compilation.md#pf-central-defect-endpoint-average) 不属于冻结声明，也不是开放问题。其 DOI、原文定位与[形式化请求 #10](https://github.com/the-omega-institute/trureturing-requests/issues/10) 随正文及自动生成的书面证明账本单列；不增加上述锁定声明、绿色图表或 C.4 的条数。
 
@@ -58,10 +60,10 @@
 
 ---
 
-## C.4 开放猜想与未形式化前沿问题登记表（11 项：6 个猜想 + 3 个开放问题 + 2 项文献边界——零 `lean` 属性） {#sec-appendix-c-open-register}
+## C.4 开放猜想与未形式化前沿问题登记表（零 `lean` 属性） {#sec-appendix-c-open-register}
 
 ::: {.remark #rem-appendix-c-open-literature-register title="开放猜想与外部文献边界登记表（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化（仅指下表 `O6`、`O7` 的外部文献边界登记；`O1`–`O5`、`O8` 是 `conjecture`，`O9`–`O11` 是 `problem`）。** 全书共 {{open}} 个开放环境，均不带 `lean` 属性；开放猜想、开放问题与经典文献结果分别说明，绝不混入已验证声明的计数。
+**文献结果，未在本书形式化（仅指下表 `O6`、`O7` 的外部文献边界登记；`O1`–`O5`、`O8` 是 `conjecture`，`O9`–`O10` 是 `problem`）。** 全书共 {{open}} 个开放环境，均不带 `lean` 属性；开放猜想、开放问题与经典文献结果分别说明，绝不混入已验证声明的计数。
 
 | # | 环境锚点 ID | 所在章节 | 猜想 / 开放问题名称 | 核心数学或物理陈述摘要 | Lean 属性 | 徽章状态 |
 | :---: | :--- | :---: | :--- | :--- | :---: | :---: |
@@ -75,7 +77,6 @@
 | O8 | `#conj-coda-navier-stokes-regularity` | `CH30` | 无外力三维不可压缩纳维—斯托克斯全局光滑性猜想（克雷千禧年陈述 A / B） | 给定正粘性 $\nu > 0$ 与恒零外力 $\mathbf{f} \equiv \mathbf{0}$，对 $\mathbb{R}^3$（或 $\mathbb{T}^3$）上任意光滑无散度速降（或周期）初值 $\mathbf{u}_0$，自治流体是否在 $[0, \infty)$ 上恒存在有限动能全局光滑解，抑或发生有限时间爆破（OpenAI 受迫 C / D 是官方题目的一条解答路线；外部文献与发布的形式化另见 [@rem-ch30-navier-stokes-forced-literature]，不属本书冻结定理） | 无（严禁） | `OPEN`（红） |
 | O9 | `#prob-ch39-p2e-fractal-horizon` | `CH39` | 皮索切投量子多体系统的劳齐分形视界纠缠标度 | 对 $K \ge 3$ 的皮索切投系统，是否存在严格构造的局域有能隙基态或编码态族，使 $R \to \infty$ 时的纠缠熵由内部劳齐边界维数 $D_F$ 支配（如 $S_{\mathrm{ent}}(R) \asymp R^{D_F}$ 或分形修正项），并给出通常余维一面积律失效或保持的谱间隙与局域性判据；现有有限编码与零测边界定理不证明该物理标度 | 无（严禁） | `OPEN`（红） |
 | O10 | `#prob-appendix-d-time-horizon` | 附录 D | 相对论协变态约化、涌现时钟与蒸发黑洞视界幺正性的统一动力学 | 建立不依赖特权洛伦兹叶分解或外部时钟的测量动力学，从惠勒—德维特约束导出热力学时间箭头，并协调霍金辐射的佩奇纯化与近视界真空纠缠之间的 AMPS 张力；有限维熵与有限竞技场逃逸定理只提供局部代数类比 | 无（严禁） | `OPEN`（红） |
-| O11 | `#prob-monitored-spectral-mean` | `CH07` | 实际监测返回历史到占据谱点数的形式化缺口（Grünbaum–Velázquez–Werner–Werner 定理 2） | 对有限维复内积空间、幺正算符 $U$ 与单位初态 $v$，设监测首次返回概率为 $p_{n+1} = \lvert\langle v, U T^n v\rangle\rvert^2$，占据谱集合为 $S = \{\lambda \in \mathbb{C} : \exists w \in E,\; Uw = \lambda w \text{ 且 } \langle w, v\rangle \neq 0\}$；若 $\sum_{n=0}^{\infty} p_{n+1} = 1$，则 $S$ 有限且首次返回均值恒等式 $\sum_{n=0}^{\infty}(n+1)p_{n+1} = \#S$ 成立（已知文献定理的形式化缺口，非未解决数学猜想） | 无（严禁） | `OPEN`（红） |
 
 :::
 

@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "614139f08bbdbd95c253e470e5692da66bdc5ad6",
-  "pinned_at": "2026-11-14T14:20:49Z",
+  "pinned_at": "2026-11-14T16:29:37Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4268,6 +4268,14 @@
       "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
       "line": 67,
       "signature": "def survivalProbability (U : E ≃ₗᵢ[ℂ] E) (v : E) (n : ℕ) : ℝ"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean.monitored_spectral_mean": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredSpectralMean.monitored_spectral_mean",
+      "kind": "theorem",
+      "statement_id": "sha256:4814468ecc84e1ef38bfa78828a7dde5cd86c90c6e638f95c97c195788ed1754",
+      "line": 364,
+      "signature": "theorem monitored_spectral_mean (U : E ≃ₗᵢ[ℂ] E) (v : E) (hv : ‖v‖ = 1) : (occupiedSpectrum U v).Finite ∧ (occupiedSpectrum U v).ncard = Module.finrank ℂ (cyclicSpace U v) ∧ HasSum (fun n : ℕ => (n + 1 : ℝ) * returnProbability U v (n + 1)) ((occupiedSpectrum U v).ncard : ℝ) ∧ HasSum (fun n : ℕ => returnProbability U v (n + 1)) 1"
     },
     "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law": {
       "module": "D5/S3/QuantumContext/ParallelogramNormLaw",

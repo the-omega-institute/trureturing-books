@@ -369,30 +369,60 @@ $$
 Compactness turns a loss in every direction into one strict loss bound shared by all directions. The formal proof expresses $A,B$ in orthonormal coordinates as a conservative single-channel matrix system and reuses the finite-step contraction estimate for zero dark space, choosing the same $N=d$ and $q=\norm{A^d}_{\mathrm{op}}$. The full proof is checked by the Lean kernel.
 :::
 
-The bound may depend on $U,v$; it is not a uniform constant across all systems. For monitored-return background, see Grünbaum, Velázquez, Werner and Werner, *Recurrence for discrete time unitary evolutions*, arXiv:1202.3903v3, Theorem 2.
+The bound may depend on $U,v$; it is not a uniform constant across all systems. The complete finite-dimensional monitored mean law follows below. Its literature source is Grünbaum, Velázquez, Werner and Werner, *Recurrence for discrete time unitary evolutions*, [arXiv:1202.3903v3](https://arxiv.org/abs/1202.3903v3), Theorem 2.
 
-::: {.problem #prob-monitored-spectral-mean title="Formalization gap: from actual monitored histories to occupied spectral points"}
-For every finite-dimensional complex inner-product space, unitary $U$, and unit vector $v$, retain $p_{n+1}=\lvert\langle v,UT^nv\rangle\rvert^2$ from [@def-monitored-return]. Define the occupied spectrum by
-
-$$
-S=\{\lambda\in\mathbb C:\exists w\in E,\ Uw=\lambda w\ \text{and}\ \langle w,v\rangle\ne0\}.
-$$
-
-The formalization target is: if $\sum_{n=0}^{\infty}p_{n+1}=1$, then $S$ is finite and
+::: {.theorem #prob-monitored-spectral-mean title="Finite-dimensional unitary monitored return: the mean counts distinct occupied spectral values" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean.monitored_spectral_mean"}
+Let $E$ be any finite-dimensional complex inner-product space, $U:E\simeq_{\mathrm{li}}[\mathbb C]E$ a unitary operator, and $v\in E$ with $\norm v=1$. Let $P_v$ be the orthogonal projection onto $\mathbb Cv$, put $T=(I-P_v)U$, and retain the actual first-return probability $p_{n+1}=\lvert\langle v,UT^nv\rangle\rvert^2$ from [@def-monitored-return]. Define the actual forward cyclic space and occupied spectrum by
 
 $$
-\sum_{n=0}^{\infty}(n+1)p_{n+1}=\#S.
+\begin{aligned}
+C&=\operatorname{span}_{\mathbb C}\{U^n v:n\in\mathbb N\},\\
+S&=\{\lambda\in\mathbb C:\exists w\in E,\ Uw=\lambda w\ \text{and}\ \langle w,v\rangle\ne0\}.
+\end{aligned}
 $$
 
-This is a gap in the formalization of a known literature theorem, not an unsolved mathematical conjecture. The cyclic-space and contraction arguments still need a convergent operator-trace sum, the conversion from survival tails to the first-return mean, and the identity $\dim C=\#S$. That identity counts distinct occupied spectral values rather than algebraic eigenvalue multiplicity. Neither finite conservation nor one strictly contracting power alone states this full conclusion.
+Then all four conclusions hold:
+
+1. $S$ is finite;
+2. $\#S=\dim_{\mathbb C}C$;
+3. The weighted first-return series converges, with $\sum_{n=0}^{\infty}(n+1)p_{n+1}=\#S$;
+4. The first-return probability series converges, with $\sum_{n=0}^{\infty}p_{n+1}=1$.
+
+The last two conclusions correspond to `HasSum` in Lean. Certain return is a conclusion, with no separate recurrence assumption. The cardinality $\#S$ counts distinct occupied spectral values, irrespective of eigenspace dimension or algebraic multiplicity.
 :::
+
+::: proof
+On $C$, write $W=U|_C$ and $A=T|_C$. Finite dimension makes the injective restriction $W$ surjective, so it is still unitary. The unit-vector assumption gives $I_C-AA^*=\lvert v\rangle\langle v\rvert$. Conjugating term by term and telescoping yields
+
+$$
+\sum_{n=0}^{H-1}\lvert A^nv\rangle\langle A^nv\rvert
+=I_C-A^H(A^H)^*.
+$$
+
+Take the trace, then apply finite summation by parts to $p_{n+1}=s_n-s_{n+1}$ from [@prop-monitored-return-conservation]:
+
+$$
+\begin{aligned}
+\sum_{n=0}^{H-1}s_n
+&=\dim_{\mathbb C}C-\operatorname{Re}\Tr\bigl(A^H(A^H)^*\bigr),\\
+\sum_{n=0}^{H-1}(n+1)p_{n+1}
+&=\sum_{n=0}^{H-1}s_n-Hs_H.
+\end{aligned}
+$$
+
+By [@rem-monitored-cyclic-power-contraction], along the cofinal horizons $H=kN$ we have $\norm{A^{kN}}_{\mathrm{op}}\le q^k$ and $s_{kN}\le q^{2k}$, where $0\le q<1$. The trace remainder tends to zero, and so does $kN s_{kN}$, using $kq^{2k}\to0$. Monotonicity of the nonnegative partial sums extends this cofinal limit to the whole series, giving weighted sum $\dim_{\mathbb C}C$. Finite probability conservation and the same survival-tail bound give total return probability $1$.
+
+Finally choose an orthonormal eigenbasis of the cyclic unitary $W$. Each basis vector has nonzero overlap with $v$, since otherwise it would be a permanent dark state excluded by [@rem-monitored-cyclic-observability]. Two basis vectors with the same eigenvalue would admit a nonzero linear combination orthogonal to $v$, giving the same contradiction. Their eigenvalues are therefore distinct. Conversely, every occupied ambient eigenvector projects to a nonzero vector in $C$: this projection preserves its overlap with $v$ and commutes with $U$, yielding a cyclic eigenvector with the same eigenvalue. Expansion in the chosen eigenbasis identifies that eigenvalue. Thus $S$ is exactly the set of these distinct cyclic eigenvalues, finite with cardinality $\dim_{\mathbb C}C$. The full proof is checked by the Lean kernel.
+:::
+
+This theorem concerns the stepwise pure-state projection-return protocol under finite-dimensional unitary evolution. Infinite-dimensional spectral-measure and winding formulations, general quantum instruments, and physical clock or speed-limit interpretations lie outside its scope.
 
 ::: {.remark #rem-monitored-unital-kac title="A Quantum Kac Formula on the Relevant Space (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Integer mean return times also admit a route that does not begin by counting spectral points. Sinkovicz, Kurucz, Kiss and Asbóth, *Quantized recurrence time in iterated open quantum dynamics*, [arXiv:1411.0568v1](https://arxiv.org/abs/1411.0568v1), Sections II–III, Eqs. (11)–(20), consider a finite-dimensional system prepared in a pure state. Each step applies the same completely positive, trace-preserving channel, followed by a test for return to that initial state. The relevant space is spanned by the supports of states reachable from this preparation under the unmonitored evolution. If the channel preserves the identity operator on this relevant space, the mean first return time equals its dimension. The condition concerns the actual relevant space of this preparation. Complete positivity and trace preservation alone do not include it, and the dimension in the conclusion cannot be replaced by that of the whole ambient space.
 
 The mechanism retains the unnormalized conditional state for “no return yet.” Its trace is the survival probability; the difference between successive traces is the first-return probability. Summing these conditional states first, then taking the trace, connects the return mean to a space dimension. Under the stated conditions, Eq. (18) of the paper identifies this operator sum with the identity on the relevant space. Time counts detections after the first evolution step; unmonitored overlap probabilities cannot replace the monitored first-return probabilities.
 
-For the unitary evolution in this section, the relevant space is the cyclic space introduced above. This separates two interfaces in [@prob-monitored-spectral-mean]: one connects the sum over actual survival histories to the cyclic dimension, and the other identifies that dimension with the number of distinct occupied spectral values. The strict power contraction proved above controls long-time remainders but does not itself supply the operator-sum identity. Both interfaces still require formalization. This remark states the published result and its conditions; it adds no Lean conclusion to the book.
+For the unitary evolution in this section, the relevant space is the cyclic space introduced above. [@prob-monitored-spectral-mean] connects the sum over actual survival histories to the cyclic dimension, then identifies that dimension with the number of distinct occupied spectral values; strict power contraction removes the long-time remainders in its proof. The theorem covers unitary pure-state return. The general channel result in this remark, requiring complete positivity, trace preservation, and preservation of the identity on the actual relevant space, remains a literature result beyond the unitary theorem.
 :::
 
 ::: {.example #ex-first-return-qubit title="First-Return Statistics of a Rotating Qubit: The Mean Return Time Is Always 2, Whatever the Step"}
@@ -434,7 +464,7 @@ The entry $p_1 = 0.853553$ in the row $\delta = \frac{\pi}{4}$ is the single-ste
 
 **Reading.** The smaller the step, the closer the probability of returning at the very first probe comes to $1$; this is Zeno freezing. But if the first probe finds no return (probability $s^2$), coming back takes $\frac{1}{s^2}$ further steps on average. The product makes up exactly one step: $c^2\cdot 1 + s^2\cdot\bigl(1 + \frac{1}{s^2}\bigr) = 2$. However diligently one probes, only the shape of the distribution changes, not its mean.
 
-**The general case (literature result, not formalized in this book).** Grünbaum, Velázquez, Werner, and Werner (Commun. Math. Phys. **320**, 543, 2013) proved that in finite dimension, whenever return is certain, the mean first detected return time is an integer, equal to the number of distinct eigenvalues of $U$ on whose eigenspaces the initial state has a nonzero component. Here that number is $2$. Numerical simulation with random unitaries in dimensions $3$ and $4$ gives means $3.000000$ and $4.000000$.
+**The finite-dimensional unitary case.** [@prob-monitored-spectral-mean] gives certain return and proves that the mean first detected return time equals the number of distinct occupied spectral values, hence is an integer. Here that number is $2$. Numerical simulation with random unitaries in dimensions $3$ and $4$ gives means $3.000000$ and $4.000000$.
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="mean" height="500"}
@@ -605,7 +635,7 @@ $$
 
 The bound in this remark then gives $\theta_{\mathrm{FS}}(a,m_k)\le\mathrm{energy}\cdot\tau/\hbar$ for each endpoint. Only with actual orthogonality of the two endpoints does the conditional theorem yield $\tau\ge\pi\hbar/(4\cdot\mathrm{energy})$. Using matching symbols in two formulas, or merely choosing a geometric midpoint, cannot supply the trajectories, preparation, and common resource bound. The equal-weight two-level orbit above supplies a particular realization: take its temporal midpoint as anchor, with the two endpoints on opposite half-orbits and $\tau=\tau_\perp/2$. The half-orbit factor $\pi/4$ is thus consistent with the full-orbit factor $\pi/2$.
 
-Counting records independently requires the total contact budget $\sum_i\tau(i)\le T$. When sequential, nonoverlapping contact intervals justify that physical budget, their timing must be checked separately; the angle bound does not establish it. The result here is a literature speed bound for the specified finite-dimensional autonomous Hamiltonian, with no claim for arbitrary open, driven, or unbounded dynamics or for a universal clock tick. It computes no full monitored first-return mean and supplies neither the spectral counting nor the operator-summation steps missing in [@prob-monitored-spectral-mean].
+Counting records independently requires the total contact budget $\sum_i\tau(i)\le T$. When sequential, nonoverlapping contact intervals justify that physical budget, their timing must be checked separately; the angle bound does not establish it. The result here is a literature speed bound for the specified finite-dimensional autonomous Hamiltonian, with no claim for arbitrary open, driven, or unbounded dynamics or for a universal clock tick. The full monitored first-return mean is given separately by [@prob-monitored-spectral-mean] for the finite-dimensional unitary pure-state protocol. Its spectral counting and operator-summation proof establish neither this dynamical speed bound nor the physical contact budget.
 
 1. **Mandelstam–Tamm energy-variance speed limit (L. Mandelstam & I. Tamm, 1945)**: *The uncertainty relation between energy and time in non-relativistic quantum mechanics* (J. Phys. USSR **9**, 249–254, 1945) and the projective formulation of Anandan and Aharonov (Phys. Rev. Lett. **65**, 1697, 1990) provide the classical background to the derivation above. The orbit has path-length speed $\Delta H/\hbar$. A general orbit need not follow a geodesic, but its endpoint geodesic angle cannot exceed its length. The exact locator in the Deffner–Campbell review appears above.
 2. **Margolus–Levitin mean-energy speed limit (N. Margolus & L. B. Levitin, 1998)**: In *The maximum speed of dynamical evolution* (Physica D **120**, 188–195, 1998), bounding the spectral expansion via $\cos x \ge 1 - \frac{2}{\pi}(x + \sin x)$ shows that the mean energy $\langle H\rangle$ above the ground state $E_0 = 0$ imposes the complementary bound
