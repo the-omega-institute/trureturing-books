@@ -6,7 +6,7 @@
 
 一旦用谱系学的解剖刀剖开这尊“重物质在空箱中搬运”的旧偶像，就会发现物理学与生命哲学中三大看似无解的谜团全都是它一手制造的伪问题：如果全局因果晶体本是无时间的静态几何，为什么我们却分分秒秒感受到奔流不息的“时间”？如果全局量子演化严格幺正可逆，为什么局部观察一眼就触发不可逆的“坍缩”？如果生命只是脆弱的局部血肉，为什么它既被锁在清醒五感的窄门之内，又能在梦中横跨山海，甚至在肉身消散的边缘追问记忆的去向？
 
-在本章——迈向[第 39 章](ch39-observer-is-ontological-universe.md)终极本体不二之前的硬件枢轴之章——我们将借用计算机系统架构中最冷峻、最透明的工程原语，把这幅沉重的旧图景彻底倒转过来（在本书三层认识论契约下，这一跨学科硬件架构映射明确标定为**`MODEL`（模型诠释）**，底层数学骨架由二十六条冻结的 Lean 4 内核定理严格锁定，所有外部量子体系结构、纠缠单配性与操作系统页表工程文献悉数封存于归属注记框内）：
+在本章——迈向[第 39 章](ch39-observer-is-ontological-universe.md)终极本体不二之前的硬件枢轴之章——我们将借用计算机系统架构中最冷峻、最透明的工程原语，把这幅沉重的旧图景彻底倒转过来（在本书三层认识论契约下，这一跨学科硬件架构映射明确标定为**`MODEL`（模型诠释）**，底层数学骨架由二十七条冻结的 Lean 4 内核定理严格锁定，所有外部量子体系结构、纠缠单配性与操作系统页表工程文献悉数封存于归属注记框内）：
 
 1. **静态本体 QRAM 与轻量级记忆指针（`ptr`）的彻底分离**：宇宙的本体数据阵列从未移动分毫，真正在静态晶格上滑动、寻址与解引用的，是轻量级的观察者地址寄存器；
 2. **观察者记忆指针的五段式硬件解剖**：将内禀正交相位、躯体五感边界、梦境叠加漫游、学习顿悟快表与不可克隆的共享引用逐一对齐到寄存器与内存管理单元（`MMU`）架构；
@@ -223,6 +223,288 @@ correctness :
 ::: {.viz src="pointer-ontology-deref" preset="qram_tree" height="500"}
 **一个地址只拨动一条路上的 6 个开关。** 地址 41 = 101001₂ 从树根进来，每一拍按一位拨一层：六拍后青色的路通到第 42 格，63 个开关里只亮这 6 个；同一时刻，底部琥珀色的扫描读头才读过 6 格。树的深度与开关数照 [@rem-ch38-qram-page-wootters-literature] 的桶链式 QRAM 画出（文献结果，未在本书形式化）。
 :::
+
+先在前述 Hann 顺序空间电路的深度一情形手算一次。两个地址是 $a_0=(\mathrm{false},())$、$a_1=(\mathrm{true},())$，输入总线为 $\mathrm{false}$，地址振幅各为 $1/\sqrt2$；经典存储 $D$ 任意固定。完整装载后，唯一的路由器分别处于 $0$、$1$。取 $0\le q\le1$，用四维环境的正交归一基 $e_*,e_W,e_0,e_1$ 保存一次局部记录：
+
+$$
+\begin{aligned}
+r_0&=\sqrt q\,e_*+\sqrt{1-q}\,e_0,\\
+r_1&=\sqrt q\,e_*+\sqrt{1-q}\,e_1.
+\end{aligned}
+$$
+
+两条记录各自范数为 $1$，交叉重叠为 $q$。继续执行原来的理想门后，两条正交输出基矢为 $\lvert o_i\rangle=\lvert\operatorname{clean}(1,a_i,D(a_i))\rangle$；总线初值为假，所以这里的异或结果就是 $D(a_i)$。系统与环境的联合向量为
+
+$$
+\frac{\lvert o_0\rangle\otimes r_0
++\lvert o_1\rangle\otimes r_1}{\sqrt2}.
+$$
+
+忽略环境，就是将每个系统矩阵元所乘的记录外积沿环境基求和。在输出基 $(o_0,o_1)$ 上，记录的重叠矩阵 $K_{1,q}$、约化态与理想向量的坐标分别为
+
+$$
+\begin{aligned}
+K_{1,q}&=\begin{pmatrix}1&q\\q&1\end{pmatrix},\\
+\rho_{\mathrm{out}}&=\frac12 K_{1,q},\\
+u&=\frac1{\sqrt2}\begin{pmatrix}1\\1\end{pmatrix}.
+\end{aligned}
+$$
+
+相对于这个理想纯态的**平方保真度**取 $F=u^\dagger\rho_{\mathrm{out}}u$，于是
+
+$$
+\begin{aligned}
+F&=\frac{1+q+q+1}{4}\\
+ &=\frac{1+q}{2}.
+\end{aligned}
+$$
+
+$q=1/2$ 时得到 $F=3/4$。这里计算的是平方保真度本身，不再对它取平方根。
+
+现在固定这一噪声范围：在 [@thm-ch38-spatial-qutrit-qram-correctness] 的实际顺序装载 `load n n` 之后，对每个实际内部路由器独立施加一次相同的局部记录耦合，随后执行原来的总线交换、空间输运、固定经典数据的叶读出与完整前向过程的逆。门、地址槽、外部总线和空间轨道均保持理想。前述理想布尔可逆网络、理想 Hann 空间三态电路与这里插入单次路由器保持阶段的电路，是三个须分别指定的有限对象；上图的文献路径示意仍按 [@rem-ch38-qram-page-wootters-literature] 解释。
+
+为给出完整输出，沿用已定义的 $A_n$、$Q=\{W,0,1\}$ 与 $S_n=\operatorname{State}(n)$。令 $n\in\mathbb N$，包括 $0$，$N=2^n$，$q\in[0,1]$，$D:A_n\to\operatorname{Bool}$ 为任意固定经典存储。以下缩写对应 `HannRouterDephasing` 中的对象；其中 `load`、`clean`、`initialized` 与其余电路操作仍取前述 `HannSpatialQram` 定义。
+
+每个路由器的环境坐标是 $\{*\}\sqcup Q$，即 `Option Qutrit` 的 `none` 与 `some s`。对任意标签 $s\in Q$，记
+
+$$
+r_s=\sqrt q\,e_*+\sqrt{1-q}\,e_s.
+$$
+
+其坐标 $r_s(e)$ 正是 `localRecord q s e`。对 $Q\times Q$ 复矩阵 $X$，$\operatorname{diag}_Q(X)$ 表示只保留 $W,0,1$ 基中对角元的矩阵；$\mathcal E_q(X)$ 表示将每个 $X_{st}$ 乘以 $\sum_e r_s(e)\overline{r_t(e)}$ 所得的局部边缘矩阵。所有独立环境的基指标集合 $\mathcal E_n$ 对应 `Environment n`：
+
+$$
+\begin{aligned}
+\mathcal E_0&=\operatorname{Unit},\\
+\mathcal E_{n+1}&=(\{*\}\sqcup Q)
+\times\mathcal E_n\times\mathcal E_n.
+\end{aligned}
+$$
+
+记 $I_n$ 为 `Tree n` 的内部路由器位置集：深度零为空，每个分叉由根路由器与左右两份子树位置组成；入射和输出轨道不在 $I_n$ 中。对任意树配置 $t$，令 $t_v$ 是位置 $v$ 的路由标签。乘积记录及其密度矩阵方向的重叠为
+
+$$
+\begin{aligned}
+R_t(e)&=\prod_{v\in I_n}r_{t_v}(e_v),\\
+\Omega_q(t,u)&=\sum_{e\in\mathcal E_n}
+ R_t(e)\overline{R_u(e)}.
+\end{aligned}
+$$
+
+它们分别对应 `environmentRecord`、`recordOverlap`；深度零的乘积为 $1$。令 $m(t,u)=\#\{v\in I_n:t_v\ne u_v\}$，即只数内部路由坐标的 `routerMismatch`。
+
+对 $s\in S_n$，记 $T(s)=s.2.2$ 为其空间树投影。令 $L_n=\operatorname{load}(n,n)$，$P_{n,D}=\operatorname{postLoad}(n,D)$；后者按顺序执行 `exchange`、`transport`、`readLeaves n D`、`(forward n).symm`，每步在完整系统上保留未涉及的坐标。实际装载树与逆像缩写为
+
+$$
+\begin{aligned}
+\tau_{a,b}&=T\bigl(L_n(\operatorname{clean}(n,a,b))\bigr),\\
+v_s&=P_{n,D}^{-1}(s),\\
+w_s&=L_n^{-1}(v_s).
+\end{aligned}
+$$
+
+对任意联合复振幅 $\psi:A_n\times\operatorname{Bool}\to\mathbb C$，令 $\alpha_\psi=\operatorname{initialized}(n,\psi)$。在整个物理基空间上定义联合振幅 $J_\psi$ 与系统矩阵 $\rho_{\mathrm{out}}$：
+
+$$
+\begin{aligned}
+J_\psi(s,e)&=\alpha_\psi(w_s)R_{T(v_s)}(e),\\
+\rho_{\mathrm{out}}(s,t)
+ &=\Omega_q\bigl(T(v_s),T(v_t)\bigr)\\
+ &\quad\cdot\alpha_\psi(w_s)
+ \overline{\alpha_\psi(w_t)}.
+\end{aligned}
+$$
+
+这正是 `jointOutput n q D ψ` 与 `noisyOutput n q D ψ`，记录附着在实际装载之后、理想后续门之前的路由配置上。下一定理给出两者的环境偏迹关系。
+
+`addressWord n a` 按实际装载次序把地址写成首位在前的长度 $n$ 布尔字：空地址对应空字，$(c,a)$ 对应在尾地址字前添 $c$。记 $\ell(a,a')$ 为这两个字的最长公共前缀长度，即 `BinaryWordGeometry.lcp` 的长度。定义
+
+$$
+\begin{aligned}
+d_n(a,a')&=\begin{cases}
+0,&a=a',\\
+2(n-\ell(a,a'))-1,&a\ne a',
+\end{cases}\\
+K_{n,q}(a,a')&=\begin{cases}
+1,&a=a',\\
+q^{2(n-\ell(a,a'))-1},&a\ne a'.
+\end{cases}
+\end{aligned}
+$$
+
+$K_{n,q}$ 对应实值的 `kernel`。不同地址时 $\ell<n$，故指数为正整数；相同地址单独取值 $1$，也适用于 $q=0$ 和唯一空地址。
+
+记 $\mathcal C_n=\{\operatorname{clean}(n,a,b):a\in A_n,\ b\in\operatorname{Bool}\}$。以输入地址和总线标签标记理想输出：
+
+$$
+\begin{aligned}
+o_{a,b}&=\operatorname{clean}(n,a,b\mathbin{\oplus}D(a)),\\
+\lvert\phi_\psi\rangle
+ &=\sum_{a\in A_n}\sum_{b\in\operatorname{Bool}}
+ \psi(a,b)\lvert o_{a,b}\rangle.
+\end{aligned}
+$$
+
+$o_{a,b}$ 对应 `outputBasis n D (a,b)`，$\phi_\psi:S_n\to\mathbb C$ 是 `idealOutput n D ψ` 的完整坐标向量。定义地址权重、实二次型及平方保真度：
+
+$$
+\begin{aligned}
+p_a&=\sum_{b\in\operatorname{Bool}}|\psi(a,b)|^2,\\
+E_{n,q}(p)&=\sum_{a\in A_n}\sum_{a'\in A_n}
+ p_a p_{a'}K_{n,q}(a,a'),\\
+F_{n,q,D}(\psi)
+ &=\langle\phi_\psi\rvert\rho_{\mathrm{out}}
+ \lvert\phi_\psi\rangle\\
+ &=\sum_{s,t\in S_n}\overline{\phi_\psi(s)}
+ \rho_{\mathrm{out}}(s,t)\phi_\psi(t).
+\end{aligned}
+$$
+
+三者分别对应 `addressProbability`、`addressEnergy`、`squaredFidelity`；$|z|^2$ 对应 `Complex.normSq z`。`Normalized n ψ` 的条件是
+
+$$
+\sum_{a\in A_n}\sum_{b\in\operatorname{Bool}}
+ |\psi(a,b)|^2=1.
+$$
+
+不要求 $\psi(a,b)$ 分解为地址振幅与总线振幅的乘积。最后，记 `minimumFidelity n q` 为
+
+$$
+\begin{aligned}
+f_n(q)&=\frac{1+\displaystyle\sum_{j=0}^{n-1}
+ 2^j q^{2j+1}}{2^n}\\
+ &=2^{-n}\left(1+\sum_{j=1}^{n}
+ 2^{j-1}q^{2j-1}\right),
+\end{aligned}
+$$
+
+其中 $n=0$ 时两种求和均为空。`uniformInput n` 记为 $h_n$：当 $b=\mathrm{false}$ 时 $h_n(a,b)=1/\sqrt{2^n}$，当 $b=\mathrm{true}$ 时为 $0$。
+
+::: {.theorem #thm-ch38-single-hold-router-dephasing title="单次路由器保持阶段的退相干、完整输出与平方保真度的尖锐下界" lean="D5/S3/Quantum/Routing/HannRouterDephasing.result"}
+对每个 $n\in\mathbb N$、$q\in[0,1]$ 及每个固定经典存储 $D:A_n\to\operatorname{Bool}$，采用上述实际装载、独立局部记录与原理想后续门，有以下结论。
+
+1. 对任意 $Q\times Q$ 复矩阵 $X$，局部环境偏迹给出信道
+
+   $$
+   \mathcal E_q(X)=qX+(1-q)\operatorname{diag}_Q(X),
+   $$
+
+   其中 $\operatorname{diag}_Q$ 只保留 $W,0,1$ 基中的对角元。逐项地，对每个 $s,t\in Q$，
+
+   $$
+   \begin{aligned}
+   &\left(\sum_{e\in\{*\}\sqcup Q}
+   r_s(e)\overline{r_t(e)}\right)X_{st}\\
+   &\quad=qX_{st}+(1-q)
+   \begin{cases}X_{st},&s=t,\\0,&s\ne t.\end{cases}
+   \end{aligned}
+   $$
+
+   对每个 $t\in\operatorname{Tree}(n)$，$\Omega_q(t,t)=1$。
+
+2. 对所有 $a,a'\in A_n$ 与 $b,b'\in\operatorname{Bool}$，实际装载树满足
+
+   $$
+   \begin{aligned}
+   m(\tau_{a,b},\tau_{a',b'})&=d_n(a,a'),\\
+   \Omega_q(\tau_{a,b},\tau_{a',b'})&=K_{n,q}(a,a').
+   \end{aligned}
+   $$
+
+   右端与两个总线标签均无关；实数 $K_{n,q}$ 在复等式中取其自然嵌入。
+
+3. 对任意复振幅 $\psi$，不要求归一化，对所有 $s,t\in S_n$，完整环境偏迹为
+
+   $$
+   \sum_{e\in\mathcal E_n}
+   J_\psi(s,e)\overline{J_\psi(t,e)}
+   =\rho_{\mathrm{out}}(s,t).
+   $$
+
+   对所有 $a,a',b,b'$，每个干净输出矩阵元为
+
+   $$
+   \begin{aligned}
+   &\rho_{\mathrm{out}}(o_{a,b},o_{a',b'})\\
+   &\quad=\psi(a,b)\overline{\psi(a',b')}
+   K_{n,q}(a,a').
+   \end{aligned}
+   $$
+
+   若 $s\notin\mathcal C_n$ 或 $t\notin\mathcal C_n$，则 $\rho_{\mathrm{out}}(s,t)=0$；因此矩阵支撑于干净输出基矢的张成空间。
+
+4. 若 $\psi$ 归一化，则理想完整输出向量也归一化，且平方保真度为实数并满足
+
+   $$
+   \begin{aligned}
+   \sum_{s\in S_n}|\phi_\psi(s)|^2&=1,\\
+   F_{n,q,D}(\psi)&=E_{n,q}(p)\\
+   &=\sum_{a,a'\in A_n}p_a p_{a'}K_{n,q}(a,a')\\
+   &\ge f_n(q).
+   \end{aligned}
+   $$
+
+5. $h_n$ 是归一化输入，并且对每个地址 $a$，
+
+   $$
+   \begin{aligned}
+   h_n(a,\mathrm{false})&=2^{-n/2},\\
+   h_n(a,\mathrm{true})&=0,\\
+   F_{n,q,D}(h_n)&=f_n(q),\\
+   f_0(q)&=1.
+   \end{aligned}
+   $$
+
+   这里 $2^{-n/2}$ 取正实值；该输入对所有上述 $n,q,D$ 均达到下界。
+:::
+
+::: proof
+先沿实际 `load n n` 的装载正确性，把树投影识别为 `programmed n a n`。地址相同则所有路由器相同。地址不同而公共前缀长为 $\ell$ 时，前 $\ell$ 个路由器一致；第一次分歧处，一个路由器保存 $0$，另一个保存 $1$，贡献一次失配。分歧之后，两条路径进入互不相交的子树：每条尾路径上有 $n-\ell-1$ 个已占据路由器，而另一配置在这些位置为等待态 $W$。所以总失配数为
+
+$$
+1+2(n-\ell-1)=2(n-\ell)-1.
+$$
+
+装载时总线仍在独立的外部坐标，故这个计数不含 $b,b'$。每个局部记录重叠在标签相同时为 $1$，不同时为 $q$；独立环境使这些重叠相乘，得到实际装载树的 $K_{n,q}$，并使任意树的自重叠为 $1$。局部矩阵元公式也直接给出 $qX+(1-q)\operatorname{diag}_Q(X)$。
+
+保持环境记录不变，只对系统施加原来的 $P_{n,D}$。理想查询把每个干净输入送到 $o_{a,b}$；在完整系统基上按逆置换拉回振幅，正得到 $J_\psi$ 与 $\rho_{\mathrm{out}}$ 的定义。沿环境坐标求和给出偏迹等式。初始化振幅在干净输入以外为零，而理想查询把干净基双射到干净基，因而所有干净矩阵元及离开该张成空间的零矩阵元都得到确定。
+
+将理想向量代入完整系统双重求和，每对输入标签贡献 $|\psi(a,b)|^2|\psi(a',b')|^2K_{n,q}(a,a')$。分别对两个总线标签求和，留下 $p_a p_{a'}$，得到精确的实二次型；这里没有假设地址与总线的振幅独立。
+
+下界沿二叉树深度归纳。将深度 $n+1$ 的实地址权重按首位分成 $p_0,p_1$，记其总质量为 $s=\sum_a p_0(a)$、$t=\sum_a p_1(a)$，令 $c=q^{2n+1}$。同支核是深度 $n$ 的核，异支核恒为 $c$，所以
+
+$$
+\begin{aligned}
+E_{n+1,q}(p)&=E_{n,q}(p_0)+E_{n,q}(p_1)\\
+ &\quad+2cst,\\
+f_{n+1}(q)&=\frac{f_n(q)+c}{2}.
+\end{aligned}
+$$
+
+归纳对任意总质量使用齐次下界 $E_{n,q}(p_i)\ge f_n(q)(\sum_a p_i(a))^2$。由 $0\le q\le1$，同一递推给出 $f_n(q)\ge c$。因此两支下界相加后，超过所需齐次界的余项为
+
+$$
+\begin{aligned}
+&f_n(q)(s^2+t^2)+2cst\\
+&\quad-f_{n+1}(q)(s+t)^2\\
+&=\frac{f_n(q)-c}{2}(s-t)^2\ge0.
+\end{aligned}
+$$
+
+深度零的二次型就是总质量的平方；归一化时总质量为 $1$，遂得下界。最后，每行核的和相同：
+
+$$
+\begin{aligned}
+\sum_{a'\in A_n}K_{n,q}(a,a')
+ &=1+\sum_{j=0}^{n-1}2^j q^{2j+1}\\
+ &=2^n f_n(q).
+\end{aligned}
+$$
+
+均匀输入 $h_n$ 在 $2^n$ 个地址上的概率均为 $2^{-n}$，总概率为 $1$；常行和遂给出 $F_{n,q,D}(h_n)=f_n(q)$。这个输入达到下界，因而下界是尖锐的。完整证明由 Lean 内核检查。
+:::
+
+直接代入有限和可得闭区间两端 $f_n(0)=2^{-n}$、$f_n(1)=1$。对任意归一化输入，$q=0$ 时仅消去不同地址间的项，故 $F=\sum_a p_a^2$，均匀地址权重达到 $2^{-n}$；$q=1$ 时所有核元均为 $1$，故 $F=(\sum_a p_a)^2=1$。$n=0$ 时没有路由器，空乘积与空和给出任意归一化输入在所有 $q\in[0,1]$ 下的 $F=1$。这些结论都属于 [@thm-ch38-single-hold-router-dephasing] 指定的单次独立路由器保持阶段与其余理想门。它补充了前述有限 Hann 电路的信道结论；原来的理想布尔网络、理想 Hann 查询与外部文献各按其陈述解释。这里不涉及门噪声、相关或重复保持阶段、现实硬件容错，也不证明下面无限地址本体及观察者指针的 `MODEL` 后果。
 
 对照 [@rem-ch38-qram-page-wootters-literature]，指针与本体存储分离架构立即推演出两条贯通全书的核心**`MODEL`（模型诠释）**结论：
 
