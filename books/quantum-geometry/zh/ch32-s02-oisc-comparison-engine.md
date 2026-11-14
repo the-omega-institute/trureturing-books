@@ -86,7 +86,7 @@ $$
 :::
 
 ::: proof
-第 1 款将 `compareMachine` 的执行拆为扫描比对阶段与回卷复原阶段：在 `compare` 状态逐拍弹出 $a, b$ 首比特压入暂存栈 `savedLeft, savedRight` 并累计匹配标志位（若一侧提前耗尽则置匹配位为 `false` 并转入耗尽清栈分支），随后在 `restore` 阶段将两条暂存栈逐位倒回左、右主栈，总步数精确受限于往返两趟字长之和加常数状态切换开销 $2(\lvert a\rvert + \lvert b\rvert) + 4$。第 2 款在 `dictionaryStream` 上对字典条目数 $\lvert\mathrm{names}\rvert$ 归纳：每扫过一个词条，机器调用内嵌逐位比对子例程并在未命中时追加一元计数符 `true`，扫完整个流后回卷复原字典流与查询字，累计步数满足线性界 $(2\lvert\mathrm{query}\rvert + 12)\lvert\mathrm{names}\rvert + 4\bigl\lvert\operatorname{dictionaryStream}(\mathrm{names})\bigr\rvert + 3$。完整证明由 Lean 内核检查。
+第 1 款将 `compareMachine` 的执行拆为扫描比对阶段与回卷复原阶段：在 `compare` 状态逐拍弹出 $a, b$ 首比特压入暂存栈 `savedLeft, savedRight` 并累计匹配标志位（若一侧提前耗尽则置匹配位为 `false` 并转入耗尽清栈分支），随后在 `restore` 阶段将两条暂存栈逐位倒回左、右主栈，总步数精确受限于往返两趟字长之和加常数状态切换开销 $2(\lvert a\rvert + \lvert b\rvert) + 4$。第 2 款在 `dictionaryStream` 上对字典条目数 $\lvert\mathrm{names}\rvert$ 归纳：每读出一个词条，机器调用内嵌逐位比对子例程，由它复原查询字；未命中则追加一元计数符 `true` 后继续，首次命中或字典耗尽时便回卷，将已读历史逐位接回未读后缀之前，复原字典流，累计步数满足线性界 $(2\lvert\mathrm{query}\rvert + 12)\lvert\mathrm{names}\rvert + 4\bigl\lvert\operatorname{dictionaryStream}(\mathrm{names})\bigr\rvert + 3$。完整证明由 Lean 内核检查。
 :::
 
 [@thm-ch32-paid-name-comparison-and-dictionary] 为宇宙单指令集比较机提供了一本可核对的步数账（`MODEL`）：**上述两台机器逐位比较、逐项查找，并在给定步数上界内无损复原输入与字典纸带**。该运行保证针对这两项构造；比较算法的普适线性下界还需另行指定成本模型并证明。带着 $\mathcal{A}_0$ 与这台有偿单指令比较机，我们现在进入[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)，将数学与物理的五大公理群正式铸造成经内核验证的推论链。
