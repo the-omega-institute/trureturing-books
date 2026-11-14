@@ -506,6 +506,595 @@ $$
 
 直接代入有限和可得闭区间两端 $f_n(0)=2^{-n}$、$f_n(1)=1$。对任意归一化输入，$q=0$ 时仅消去不同地址间的项，故 $F=\sum_a p_a^2$，均匀地址权重达到 $2^{-n}$；$q=1$ 时所有核元均为 $1$，故 $F=(\sum_a p_a)^2=1$。$n=0$ 时没有路由器，空乘积与空和给出任意归一化输入在所有 $q\in[0,1]$ 下的 $F=1$。这些结论都属于 [@thm-ch38-single-hold-router-dephasing] 指定的单次独立路由器保持阶段与其余理想门。它补充了前述有限 Hann 电路的信道结论；原来的理想布尔网络、理想 Hann 查询与外部文献各按其陈述解释。这里不涉及门噪声、相关或重复保持阶段、现实硬件容错，也不证明下面无限地址本体及观察者指针的 `MODEL` 后果。
 
+**异质路由器：环境究竟分辨了哪些地址？** 上面的同质保持阶段给每个路由器相同的 $q$。现在只放开这一处：每个实际内部路由器 $v$ 有自己的 $q(v)\in[0,1]$，仍在完整顺序装载后独立记录一次，随后执行原来的理想后续门。$q(v)=1$ 时，局部环境只保留共同坐标，读不出该路由器的标签；$q(v)=0$ 时，它完整区分 $W,0,1$。因此，地址数与不同环境记录的数目可以不同。要描述这种退化，先逐个找到被记录的物理坐标，再把具有相同可见标签的地址归为一类。
+
+::: {.definition #def-ch38-profile-routers title="实际内部路由器与装载标签" lean="D5/S3/Quantum/Routing/HannRouterProfiles.Router D5/S3/Quantum/Routing/HannRouterProfiles.routerLabel D5/S3/Quantum/Routing/HannRouterProfiles.snoc D5/S3/Quantum/Routing/HannRouterProfiles.deepest D5/S3/Quantum/Routing/HannRouterProfiles.loadedLabel"}
+沿用首位在前的地址 $A_0=\{()\}$、$A_{m+1}=\operatorname{Bool}\times A_m$，以及 $Q=\{W,0,1\}$、空间树与完整系统基空间 $S_n$。以下对象取自 `HannRouterProfiles`；电路操作仍取自 `HannSpatialQram`。
+
+具体地，$\operatorname{Tree}(m)=Q\times\operatorname{Interior}(m)$，$\operatorname{Interior}(0)=\operatorname{Unit}$，$\operatorname{Interior}(m+1)=Q\times\operatorname{Tree}(m)\times\operatorname{Tree}(m)$，而 $S_n=(\operatorname{Fin}(n)\to Q)\times Q\times\operatorname{Tree}(n)$。树的首坐标是入射模式，内部结构的首坐标才是路由器。
+
+内部路由器位置集为
+
+$$
+I_0=\varnothing,\qquad
+I_{m+1}=\{\mathrm{root}\}\sqcup(\operatorname{Bool}\times I_m).
+$$
+
+它对应 `Router n`；根对应 `none`，$(c,v)$ 对应 `some (c,v)`，其中假选左子树，真选右子树。`routerLabel n t v` 只读树 $t$ 的路由器字段，记为 $t_v$；入射模式和输出轨道均不在 $I_n$ 中。
+
+令 $L_n=\operatorname{load}(n,n)$，$T(s)$ 为系统配置 $s$ 的树投影。对 $a\in A_n$、任意外部三态总线标签 $\beta\in Q$，定义
+
+$$
+\begin{aligned}
+\tau_{a,\beta}&=T\bigl(L_n(\operatorname{loading}(n,a,\beta,0))\bigr),\\
+\lambda_{a,\beta}(v)&=(\tau_{a,\beta})_v.
+\end{aligned}
+$$
+
+第二行即 `loadedLabel n a β v`。`snoc m u c` 在 $u\in A_m$ 的末尾添加一位 $c$；$d_m(u)=\operatorname{deepest}(m,u)\in I_{m+1}$ 是沿前缀 $u$ 到达的最深层路由器。它按地址首位在前的顺序递归定位。
+:::
+
+实际装载正确性给出 $\tau_{a,\beta}=\operatorname{programmed}(n,a,n)$，所以 $\lambda_{a,\beta}$ 与 $\beta$ 无关；下文也写作 $\lambda_a$。这里读的是装载完成时的树，并非另造一个只有路径名字的抽象地址编码。路径外的路由器仍有实际的 $W$ 标签，也参与环境记录。
+
+::: {.definition #def-ch38-profile-records title="异质局部记录与物理张量环境" lean="D5/S3/Quantum/Routing/HannRouterProfiles.Environment D5/S3/Quantum/Routing/HannRouterProfiles.treeRecord D5/S3/Quantum/Routing/HannRouterProfiles.record"}
+给定 $q:I_n\to[0,1]$，在每个位置 $v$ 使用一份具有正交归一基 $e_*,e_W,e_0,e_1$ 的环境，局部记录为
+
+$$
+r_{v,s}=\sqrt{q(v)}\,e_*+\sqrt{1-q(v)}\,e_s,
+\qquad s\in Q.
+$$
+
+这是 `HannRouterDephasing.localRecord (q v) s`。环境基指标集为 $\mathcal E_n=(\{*\}\sqcup Q)^{I_n}$，对应本节的 `Environment n`。对任意 $t\in\operatorname{Tree}(n)$，定义
+
+$$
+\begin{aligned}
+\mathcal R_t(e)&=\prod_{v\in I_n}r_{v,t_v}(e_v),\\
+R_a(e)&=\prod_{v\in I_n}r_{v,\lambda_{a,W}(v)}(e_v).
+\end{aligned}
+$$
+
+两者分别为 `treeRecord n q t` 与 `record n q a`。$n=0$ 时环境只有一个基指标，两个空乘积都为 $1$。
+
+局部耦合将路由器基矢 $\lvert s\rangle$ 连同空白环境送到 $\lvert s\rangle\otimes r_{v,s}$；各位置独立耦合后，树基矢对应 $\lvert t\rangle\otimes\mathcal R_t$，其他系统坐标保持原值。
+:::
+
+::: {.definition #def-ch38-active-profiles title="实现的活跃轮廓与类记录" lean="D5/S3/Quantum/Routing/HannRouterProfiles.SameProfile D5/S3/Quantum/Routing/HannRouterProfiles.Separates D5/S3/Quantum/Routing/HannRouterProfiles.Profile D5/S3/Quantum/Routing/HannRouterProfiles.profile D5/S3/Quantum/Routing/HannRouterProfiles.classRecord"}
+位置 $v$ 称为活跃的，当且仅当 $q(v)<1$。对任意实值函数 $q:I_n\to\mathbb R$，`SameProfile n q a a' β β'` 表示
+
+$$
+\forall v\in I_n,\quad q(v)<1\ \Longrightarrow\
+\lambda_{a,\beta}(v)=\lambda_{a',\beta'}(v).
+$$
+
+`Separates n q` 表示对所有 $a,a'\in A_n$ 与 $\beta,\beta'\in Q$，这个条件都蕴含 $a=a'$。记 $\pi(a)$ 为 $\lambda_{a,W}$ 在活跃位置上的限制，$C_{n,q}=\pi(A_n)$ 为其实际像；它们对应 `profile` 与 `Profile`。不被任何地址实现的标签组合不属于 $C_{n,q}$。
+
+在 $q(v)\in[0,1]$ 的物理范围内，类记录 $R_c$ 是任取满足 $\pi(a)=c$ 的代表地址所得的 $R_a$，对应 `classRecord`。相同类在活跃位置标签相同；其余位置的 $q(v)=1$，记录恒为 $e_*$，故此定义不依赖代表的选择。
+:::
+
+::: {.theorem #thm-ch38-profile-separation title="最深层物理路由器的精确分辨条件" lean="D5/S3/Quantum/Routing/HannRouterProfiles.profile_separation_iff"}
+对任意 $m\in\mathbb N$ 及任意实值函数 $q:I_{m+1}\to\mathbb R$，不要求区间限制，
+
+$$
+\begin{aligned}
+&\bigl[\forall a,a'\in A_{m+1},\ \forall\beta,\beta'\in Q,\\
+&\qquad\operatorname{SameProfile}(m+1,q,a,a',\beta,\beta')
+\ \Longrightarrow\ a=a'\bigr]\\
+&\qquad\Longleftrightarrow\quad
+\forall u\in A_m,\ q(d_m(u))<1.
+\end{aligned}
+$$
+:::
+
+::: {.proof #pf-ch38-profile-separation}
+把任意地址写成 $\operatorname{snoc}(m,u,c)$。实际装载树在最深层位置满足
+
+$$
+\lambda_{\operatorname{snoc}(m,u,c),\beta}(d_m(i))
+=\begin{cases}\operatorname{encode}(c),&i=u,\\W,&i\ne u.\end{cases}
+$$
+
+同一前缀 $u$ 下的两个末位兄弟地址，除 $d_m(u)$ 外的所有内部路由器标签都相同。若这个最深层位置不活跃，两个不同地址便具有相同活跃轮廓，必要性成立。反过来，若所有最深层位置都活跃，就观察第一个地址前缀下的 $d_m(u)$：不同前缀给出编码标签与 $W$ 的区别；相同前缀则由编码标签区分最后一位。装载标签不依赖外部总线，所以论证同时允许两个任意、彼此不同的总线标签。这一分辨条件本身只是组合陈述；物理记录的平方根与归一化仍使用闭区间假设。完整证明由 Lean 内核检查。
+:::
+
+::: {.definition #def-ch38-profile-gram-energy title="复格拉姆矩阵、类系数和与能量" lean="D5/S3/Quantum/Routing/HannRouterProfiles.gram D5/S3/Quantum/Routing/HannRouterProfiles.classSum D5/S3/Quantum/Routing/HannRouterProfiles.addressEnergy D5/S3/Quantum/Routing/HannRouterProfiles.classEnergy"}
+在上述物理范围内，定义密度矩阵方向的复格拉姆矩阵
+
+$$
+G(a,a')=\sum_{e\in\mathcal E_n}R_a(e)\overline{R_{a'}(e)}.
+$$
+
+它对应 `gram n q`。对任意复系数 $z:A_n\to\mathbb C$，类系数和为
+
+$$
+(\Sigma_qz)_c=\sum_{a:\pi(a)=c}z_a,
+$$
+
+对应 `classSum`；同一有限和也用于实系数。对任意实向量 $p:A_n\to\mathbb R$ 与 $x:C_{n,q}\to\mathbb R$，定义
+
+$$
+\begin{aligned}
+E_q(p)&=\sum_{a,a'\in A_n}p_ap_{a'}\operatorname{Re}G(a,a'),\\
+H_q(x)&=\sum_{e\in\mathcal E_n}
+\left|\sum_{c\in C_{n,q}}x_cR_c(e)\right|^2.
+\end{aligned}
+$$
+
+它们分别对应 `addressEnergy` 与 `classEnergy`。这里 $|z|^2$ 是 `Complex.normSq z`；这些能量定义本身不要求系数非负或总和为 $1$。
+:::
+
+::: {.definition #def-ch38-profile-laws title="概率单纯形、类质量与最深层活跃性" lean="D5/S3/Quantum/Routing/HannRouterProfiles.AddressDistribution D5/S3/Quantum/Routing/HannRouterProfiles.ClassDistribution D5/S3/Quantum/Routing/HannRouterProfiles.classMass D5/S3/Quantum/Routing/HannRouterProfiles.inputDistribution D5/S3/Quantum/Routing/HannRouterProfiles.distributionInput D5/S3/Quantum/Routing/HannRouterProfiles.DeepestActive"}
+记 $\Delta(A_n)$、$\Delta(C_{n,q})$ 为各自的概率单纯形，即非负权重总和为 $1$ 的集合，对应 `AddressDistribution` 与 `ClassDistribution`。类质量映射 `classMass` 为
+
+$$
+(\pi_*p)_c=\sum_{a:\pi(a)=c}p_a.
+$$
+
+对任意联合复振幅 $\psi:A_n\times\operatorname{Bool}\to\mathbb C$，令 $p^\psi_a=\sum_b|\psi(a,b)|^2$。若 $\sum_{a,b}|\psi(a,b)|^2=1$，称其归一化；此时 $p^\psi\in\Delta(A_n)$，即 `inputDistribution`。不要求地址与总线的乘积态形式。对 $p\in\Delta(A_n)$，`distributionInput` 为
+
+$$
+\psi_p(a,b)=\begin{cases}\sqrt{p_a},&b=\mathrm{false},\\0,&b=\mathrm{true},\end{cases}
+$$
+
+其中平方根作为非负实数嵌入 $\mathbb C$。
+
+`DeepestActive n q` 在 $n=0$ 时为真；在 $n=m+1$ 时表示 $\forall u\in A_m,\ q(d_m(u))<1$。
+:::
+
+::: {.definition #def-ch38-profile-output title="实际保持阶段的完整输出与平方保真度" lean="D5/S3/Quantum/Routing/HannRouterProfiles.jointOutput D5/S3/Quantum/Routing/HannRouterProfiles.noisyOutput D5/S3/Quantum/Routing/HannRouterProfiles.squaredFidelity"}
+固定任意经典存储 $D:A_n\to\operatorname{Bool}$。沿用 $P_{n,D}=\operatorname{postLoad}(n,D)$，依次执行原来的总线交换、空间输运、叶读出及完整前向过程的逆；它不作用于环境。对 $s\in S_n$ 记
+
+$$
+v_s=P_{n,D}^{-1}(s),\qquad w_s=L_n^{-1}(v_s),\qquad
+\alpha_\psi=\operatorname{initialized}(n,\psi).
+$$
+
+异质记录的联合振幅、完整系统密度矩阵与平方保真度定义为
+
+$$
+\begin{aligned}
+J^q_\psi(s,e)&=\alpha_\psi(w_s)\mathcal R_{T(v_s)}(e),\\
+\rho^q_\psi(s,t)&=\sum_{e\in\mathcal E_n}
+J^q_\psi(s,e)\overline{J^q_\psi(t,e)},\\
+F^q_D(\psi)&=\sum_{s,t\in S_n}
+\overline{\phi_\psi(s)}\rho^q_\psi(s,t)\phi_\psi(t).
+\end{aligned}
+$$
+
+这里 $o_{a,b}=\operatorname{clean}(n,a,b\mathbin{\oplus}D(a))$，$\phi_\psi=\sum_{a,b}\psi(a,b)\lvert o_{a,b}\rangle$ 是原来的完整理想输出。上述三式对应本节的 `jointOutput`、`noisyOutput` 与 `squaredFidelity`，求和遍及整个物理系统 $S_n$，仅偏迹掉独立路由器环境。对未归一化振幅，三式仍按相同有限和定义；平方保真度的态比较含义用于归一化输入。
+
+其中 $\operatorname{clean}(n,a,b)=\operatorname{loading}(n,a,\operatorname{encode}(b),0)$：地址槽保存编码地址，外部总线保存编码布尔位，树为真空。初始化满足 $\alpha_\psi(\operatorname{clean}(n,a,b))=\psi(a,b)$，在所有其他基配置上为零。
+:::
+
+::: {.theorem #thm-ch38-physical-profile-event title="异质物理轮廓、复系数核与全部保真度极小输入" lean="D5/S3/Quantum/Routing/HannRouterProfiles.physical_profile_event"}
+对每个 $n\in\mathbb N$、每个实值路由器函数 $q:I_n\to\mathbb R$，假设对所有 $v\in I_n$ 均有 $0\le q(v)\le1$；固定任意经典存储 $D:A_n\to\operatorname{Bool}$。采用上述实际装载、独立单次记录与原理想后续门，以下各款同时成立。
+
+1. **(P1) 任意总线的实际装载记录。** 对所有 $a\in A_n$、$\beta\in Q$，$\mathcal R_{\tau_{a,\beta}}=R_a$，等式为整个环境坐标函数的相等。
+2. **(P2) 任意树的记录归一化。** 对所有 $t\in\operatorname{Tree}(n)$，$\sum_e|\mathcal R_t(e)|^2=1$。
+3. **(P3) 类与可见标签等价。** 对所有 $a,a'\in A_n$、$\beta,\beta'\in Q$，
+
+   $$
+   \pi(a)=\pi(a')\ \Longleftrightarrow\
+   \forall v\in I_n,\ q(v)<1\Rightarrow
+   \lambda_{a,\beta}(v)=\lambda_{a',\beta'}(v).
+   $$
+
+4. **(P4) 类记录复线性无关。** $\{R_c:c\in C_{n,q}\}$ 在 $\mathbb C$ 上线性无关。
+5. **(P5) 精确秩。** $\operatorname{rank}_{\mathbb C}G=|C_{n,q}|$。
+6. **(P6) 任意复系数的完整核。** 对所有 $z:A_n\to\mathbb C$，
+
+   $$
+   Gz=0\ \Longleftrightarrow\
+   \forall c\in C_{n,q},\ \sum_{a:\pi(a)=c}z_a=0.
+   $$
+
+7. **(P7) 全秩充要条件。** $\operatorname{rank}_{\mathbb C}G=2^n$ 当且仅当 `DeepestActive n q`。
+8. **(P8) 深度零的秩。** 若 $n=0$，则 $\operatorname{rank}_{\mathbb C}G=1$。
+9. **(P9) 类质量分解。** 对每个 $p\in\Delta(A_n)$，$E_q(p)=H_q(\pi_*p)$。
+10. **(P10) 完整理想输出的逆像。** 对任意复振幅 $\psi$ 与所有 $s\in S_n$，$\phi_\psi(s)=\alpha_\psi(w_s)$，无需归一化。
+11. **(P11) 每个干净输出矩阵元。** 对任意复振幅 $\psi$ 及所有 $a,a'\in A_n$、$b,b'\in\operatorname{Bool}$，
+
+    $$
+    \rho^q_\psi(o_{a,b},o_{a',b'})
+    =\psi(a,b)\overline{\psi(a',b')}G(a,a').
+    $$
+
+12. **(P12) 完整系统的精确保真度式。** 对任意复振幅 $\psi$，$F^q_D(\psi)=E_q(p^\psi)$，右端自然嵌入 $\mathbb C$；无需归一化，该值为实数。
+13. **(P13) 两个完整向量的归一化。** 若 $\psi$ 归一化，则
+
+    $$
+    \begin{aligned}
+    \sum_{s\in S_n}\sum_{e\in\mathcal E_n}|J^q_\psi(s,e)|^2&=1,\\
+    \sum_{s\in S_n}|\phi_\psi(s)|^2&=1.
+    \end{aligned}
+    $$
+
+14. **(P14) 每个地址概率律可实现。** 对每个 $p\in\Delta(A_n)$，$\psi_p$ 归一化，且其 `inputDistribution` 恰为 $p$。
+15. **(P15) 唯一类极小点与全部极小纤维。** 存在 $\mu^*\in\Delta(C_{n,q})$，满足 $H_q(\mu^*)\le H_q(\nu)$ 对所有 $\nu\in\Delta(C_{n,q})$ 成立；任何也满足此极小条件的类概率律均等于 $\mu^*$。映射 $\pi_*:\Delta(A_n)\to\Delta(C_{n,q})$ 为满射。对每个 $p\in\Delta(A_n)$，
+
+    $$
+    \begin{aligned}
+    &[\forall r\in\Delta(A_n),\ E_q(p)\le E_q(r)]\\
+    &\qquad\Longleftrightarrow\quad \pi_*p=\mu^*.
+    \end{aligned}
+    $$
+
+    对每个归一化联合输入 $\psi$，
+
+    $$
+    \begin{aligned}
+    &[\forall\varphi\ \text{归一化},\
+    \operatorname{Re}F^q_D(\psi)\le\operatorname{Re}F^q_D(\varphi)]\\
+    &\qquad\Longleftrightarrow\quad \pi_*p^\psi=\mu^*.
+    \end{aligned}
+    $$
+
+    全部极小地址律正是满足 $p_a\ge0$、$\sum_ap_a=1$、$\sum_{a:\pi(a)=c}p_a=\mu^*_c$ 的整个集合；不要求类权重或地址权重严格为正。
+:::
+
+::: {.proof #pf-ch38-physical-profile-event}
+实际装载树等于完整编程树，立刻给出 P1 与 P3 中对任意外部三态总线的独立性。对任意两种局部标签 $s,t$，逐项相乘四个环境坐标得到
+
+$$
+\sum_\eta r_{v,s}(\eta)\overline{r_{v,t}(\eta)}
+=\begin{cases}1,&s=t,\\q(v),&s\ne t.\end{cases}
+$$
+
+相同标签贡献 $q(v)+(1-q(v))=1$；不同标签只共享共同坐标。有限张量积把各节点的重叠相乘。因此任意树记录的范数为 $1$，得到 P2；地址格拉姆元也可直接读成 $\prod_{v:\lambda_a(v)\ne\lambda_{a'}(v)}q(v)$。空乘积保留深度零和两端点，不需要除以任何 $q(v)$。
+
+为看清 P4，给每个实现的类 $c$ 选择一个实际环境基指标 $e^{(c)}$：活跃节点取该类的标签坐标，其余节点取共同坐标。于是
+
+$$
+\begin{aligned}
+R_d(e^{(c)})&=\begin{cases}\delta_q,&d=c,\\0,&d\ne c,\end{cases}\\
+\delta_q&=\prod_{v:q(v)<1}\sqrt{1-q(v)}>0.
+\end{aligned}
+$$
+
+在这个坐标上求值，就能从任意类记录的复线性组合中单独取出第 $c$ 个系数。令列矩阵 $M(e,a)=R_a(e)$。记录都是实数，所以本节密度方向的 $G$ 同时等于 $M^\dagger M$。格拉姆矩阵与列矩阵具有相同的核和秩；而
+
+$$
+\sum_a z_aR_a=\sum_c(\Sigma_qz)_cR_c.
+$$
+
+结合类记录线性无关及 $\pi$ 到实际像的满射，便得 P5、P6。再由 [@thm-ch38-profile-separation]，类映射在正深度单射恰好要求所有最深层路由器活跃，得到 P7。深度零只有空地址与单位记录，$G=(1)$，P8 成立，此时 `DeepestActive` 没有额外限制。
+
+把实地址系数按类合并，记录叠加的平方范数正是 $E_q$，从而给出 P9。类记录的线性无关还说明：若实向量 $x\ne0$，则 $H_q(x)>0$。展开平方范数，得到中点缺口
+
+$$
+H_q\!\left(\frac{x+y}{2}\right)
+=\frac{H_q(x)+H_q(y)}2-\frac{H_q(x-y)}4.
+$$
+
+类概率单纯形非空且紧，$H_q$ 连续，因而取得极小值。若有两个不同极小点，中点仍在单纯形内，而上式严格降低能量，矛盾。故极小类律唯一；这一步不要求极小点位于单纯形内部。
+
+每个类都有代表地址。将某一类的质量全部放在它的一个代表上，就把任意类概率律提升为地址概率律，包括零质量的类。因此 $\pi_*$ 为满射。P9 与类极小点的唯一性遂给出 P15 的地址等价式，允许在各类内作任意非负分配。若 $\mu^*_c=0$，该类内每个地址权重都必须为零；这仍属于同一个完整纤维。
+
+物理输出部分使用原来的实际电路。理想查询将 $\operatorname{clean}(n,a,b)$ 送到 $o_{a,b}$；逆置换拉回初始化振幅，给出 P10。在这个输出基上，$J^q_\psi(o_{a,b},e)=\psi(a,b)R_a(e)$，环境偏迹遂给出 P11。对于整个 $S_n$，联合振幅与密度矩阵仍由定义中的逆像和环境和确定；没有把系统先缩成只有地址的模型。由 P2、P10 及理想置换保持范数，联合向量与理想向量的范数均为 $1$，得到 P13。
+
+将 P11 代入完整理想输出的期望值，每对输入标签贡献 $|\psi(a,b)|^2|\psi(a',b')|^2G(a,a')$。对 $b,b'$ 分别求和即得 P12，且不需要乘积态假设或归一化假设。对于 P14，非负平方根使 $\sum_b|\psi_p(a,b)|^2=p_a$，再对 $a$ 求和便是 $1$。因此每个地址律都有归一化联合输入实现；结合 P12，地址律上的极小条件与所有归一化联合输入上的极小条件完全等价，完成 P15。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-ch38-heterogeneous-profile-fiber title="深度二：三种记录与一条最优地址纤维"}
+取深度 $2$，将根、左子、右子路由器依次记为 $r,\ell,h$，令 $q(r)=1$、$q(\ell)=0$、$q(h)=1$。地址按首位在前写作 $00,01,10,11$。实际装载标签逐项为
+
+$$
+\begin{array}{c|ccc}
+a&r&\ell&h\\\hline
+00&0&0&W\\
+01&0&1&W\\
+10&1&W&0\\
+11&1&W&1
+\end{array}
+$$
+
+只有左子路由器活跃。根与右子环境的记录均为 $e_*$，故按 $(r,\ell,h)$ 的张量顺序，
+
+$$
+\begin{aligned}
+R_{00}&=e_*\otimes e_0\otimes e_*,\\
+R_{01}&=e_*\otimes e_1\otimes e_*,\\
+R_{10}=R_{11}&=e_*\otimes e_W\otimes e_*.
+\end{aligned}
+$$
+
+这直接给出三个实现的类 $c_0=\{00\}$、$c_1=\{01\}$、$c_W=\{10,11\}$，以及
+
+$$
+G=\begin{pmatrix}
+1&0&0&0\\0&1&0&0\\0&0&1&1\\0&0&1&1
+\end{pmatrix}.
+$$
+
+其秩为 $3$，复系数核恰为 $z_{00}=z_{01}=0$、$z_{10}+z_{11}=0$。右子最深层路由器不活跃，正好对应两个兄弟地址合为一类。三个类记录正交归一，所以对类质量 $(x,y,z)$ 有 $H_q=x^2+y^2+z^2$。在 $x+y+z=1$ 下，
+
+$$
+x^2+y^2+z^2-\frac13
+=\left(x-\frac13\right)^2+
+\left(y-\frac13\right)^2+\left(z-\frac13\right)^2.
+$$
+
+唯一极小类律为 $(1/3,1/3,1/3)$，最小平方保真度为 $1/3$。全部极小地址律为
+
+$$
+(p_{00},p_{01},p_{10},p_{11})
+=\left(\frac13,\frac13,t,\frac13-t\right),
+\qquad 0\le t\le\frac13.
+$$
+
+两端各有一个零地址权重；不应在写纤维时把它们删掉。均匀地址律的类质量为 $(1/4,1/4,1/2)$，能量为 $3/8>1/3$。对每个固定经典 $D$，任意归一化联合复输入都是极小输入，当且仅当其三个类质量分别为 $1/3$；允许的复相位、类内地址分配及地址—总线纠缠均由这个条件保留。这些数值由上述实际记录手算得到，是 [@thm-ch38-physical-profile-event] 的具体代入。
+:::
+
+::: {.remark #rem-ch38-profile-scope title="秩、极小纤维与物理适用范围"}
+P6 描述的是复格拉姆矩阵作用于地址系数向量的核，不能把它改称密度矩阵信道的核。P15 的唯一性也只属于类概率律；同一最优类质量内的全部非负地址分配都保留，联合输入还可具有不同相位与纠缠。一般情形没有要求 $\mu^*$ 满支撑，也没有给出任意异质参数下最小值的闭式公式或求解算法。上例说明同质情形的均匀地址最优结论不能无条件移用。
+
+深度零时没有路由器，只有一个地址和一个类；单位记录给出 $G=(1)$，归一化输入的 $F=1$。若所有节点都取 $q(v)=1$，所有地址也只有一个类，$G$ 的每个元素均为 $1$，每个地址概率律都在极小纤维内。正深度的全秩条件只要求每个最深层路由器活跃，不要求所有祖先活跃；这里的“活跃”专指环境具有标签分辨能力，并不表示该路由器在每个地址分支都被编程。
+
+本节仍只处理有限实际内部路由器、固定经典数据、完整顺序装载后的一次独立路由器记录及其余理想门。它不扩展到含噪后续门、门噪声、相关记录、重复保持阶段或现实硬件容错，也不赋予无限地址本体和观察者指针的 `MODEL` 诠释以新的物理证明。后文的诠释应继续按其自身前提阅读。
+:::
+
+**带符号重叠：从地址轮廓到有序复系数证书。** 前面的 Profiles 用四坐标实记录描述 $q(v)\in[0,1]$ 时的地址分辨。现在保留实际装载标签，改用三坐标复 Fourier 记录，把局部重叠参数的范围扩展到闭区间 $[-1/2,1]$。本段研究这些记录的复线性叠加、真空是否属于其像，以及一份明确递归给出的有序核列表；这需要同时保留两个端点。
+
+沿用 [@def-ch38-profile-routers] 的 $Q=\{W,0,1\}$、首位在前的地址 $A_0=\{()\}$、$A_{n+1}=\operatorname{Bool}\times A_n$，以及内部路由器位置 $I_0=\varnothing$、$I_{n+1}=\{\mathrm{root}\}\sqcup(\operatorname{Bool}\times I_n)$。根为 `none`，子位置为 `some (b,v)`；$b=0,1$ 分别表示假、真，即左、右。这里的 $0,1$ 作为标签时指 $Q$ 中对应的编码标签。
+
+仍令 $L_n=\operatorname{load}(n,n)$，$T$ 为系统配置的树投影，并使用
+
+$$
+\lambda_{a,\beta}(v)
+=\operatorname{routerLabel}\bigl(n,T(L_n(\operatorname{loading}(n,a,\beta,0))),v\bigr)
+=\operatorname{loadedLabel}(n,a,\beta,v).
+$$
+
+这是完整顺序装载后的实际路由器标签，路径外的 $W$ 标签也包括在内。实际装载与编程树的对应关系如前；虽然这些标签不依赖外部总线，本段始终保留任意 $\beta\in Q$，包括等待标签 $W$。
+
+::: {.definition #def-ch38-signed-fourier-records title="三坐标 Fourier 记录与复系数空间" lean="D5/S3/Quantum/Routing/HannSignedCertificate.omega D5/S3/Quantum/Routing/HannSignedCertificate.labelIndex D5/S3/Quantum/Routing/HannSignedCertificate.localRecord D5/S3/Quantum/Routing/HannSignedCertificate.Environment D5/S3/Quantum/Routing/HannSignedCertificate.Coeff"}
+置 $\omega=\exp(2\pi\mathrm i/3)$，$j(W)=0$、$j(0)=1$、$j(1)=2$，其中指数为整数。对 $r\in[-1/2,1]$、$s\in Q$，定义
+
+$$
+f_{r,s}=\left(
+\sqrt{\frac{1+2r}{3}},\quad
+\sqrt{\frac{1-r}{3}}\,\omega^{j(s)},\quad
+\sqrt{\frac{1-r}{3}}\,\omega^{-j(s)}
+\right)\in\mathbb C^3.
+$$
+
+三个坐标依次由 $\operatorname{Fin}(3)=\{0,1,2\}$ 索引。平方根均为非负实平方根，再嵌入 $\mathbb C$；记录的坐标一般为复数。记
+
+$$
+\mathcal F_n=I_n\to\operatorname{Fin}(3),\qquad
+\mathcal C_n=A_n\to\mathbb C.
+$$
+
+它们分别对应本段的 `Environment n` 与 `Coeff n`。记录空间为 $\mathcal F_n\to\mathbb C$。$\mathcal F_n$ 与前面四坐标记录的环境指标集 $\mathcal E_n$ 分开记号。
+:::
+
+::: {.definition #def-ch38-signed-synthesis title="共同赋值的子树限制、实际记录与合成映射" lean="D5/S3/Quantum/Routing/HannSignedCertificate.restrict D5/S3/Quantum/Routing/HannSignedCertificate.childEnvironment D5/S3/Quantum/Routing/HannSignedCertificate.record D5/S3/Quantum/Routing/HannSignedCertificate.vacuumRecord D5/S3/Quantum/Routing/HannSignedCertificate.synthesis D5/S3/Quantum/Routing/HannSignedCertificate.embed"}
+固定一个任意异质实赋值 $q:I_n\to\mathbb R$，并要求每个位置都满足 $-1/2\le q(v)\le1$。对任意 $a\in A_n$、$\beta\in Q$、$e\in\mathcal F_n$，定义实际记录、全等待真空记录与复线性合成映射
+
+$$
+\begin{aligned}
+\widehat R_{n,q,\beta,a}(e)
+&=\prod_{v\in I_n}f_{q(v),\lambda_{a,\beta}(v)}(e(v)),\\
+V_{n,q}(e)&=\prod_{v\in I_n}f_{q(v),W}(e(v)),\\
+(S_{n,q,\beta}x)(e)
+&=\sum_{a\in A_n}x(a)\widehat R_{n,q,\beta,a}(e),
+\qquad x\in\mathcal C_n.
+\end{aligned}
+$$
+
+在深度 $n+1$，根参数为 $r=q(\mathrm{root})$；对 $b\in\{0,1\}$，子树参数与环境坐标为
+
+$$
+q_b(v)=q(\operatorname{some}(b,v)),\qquad
+e_b(v)=e(\operatorname{some}(b,v)).
+$$
+
+它们对应 `restrict n q b` 与 `childEnvironment n e b`。每次继续进入子树都再次作这样的限制，故所有前缀上的输入都来自同一个 $q$，没有把不同节点的参数认同，也没有另选子树参数。根、左子树、右子树是下文张量坐标的顺序。
+
+零延拓 $J_b:\mathcal C_n\to\mathcal C_{n+1}$ 定义为
+
+$$
+(J_bx)(c,a)=
+\begin{cases}x(a),&c=b,\\0,&c\ne b.\end{cases}
+$$
+
+深度 $0$ 没有路由器，$A_0$ 与 $\mathcal F_0$ 各有一个元素；所有空乘积为 $1$，所以实际记录与真空记录均为单位函数，$S_{0,q,\beta}x=x(())$。
+:::
+
+::: {.definition #def-ch38-signed-recursion title="维数数据、有序核列表与优先真空代表的规定递归" lean="D5/S3/Quantum/Routing/HannSignedCertificate.Output D5/S3/Quantum/Routing/HannSignedCertificate.Output.flag D5/S3/Quantum/Routing/HannSignedCertificate.inherited D5/S3/Quantum/Routing/HannSignedCertificate.step D5/S3/Quantum/Routing/HannSignedCertificate.outputs"}
+递归输出 $(d,K,U)$ 对应 `outputs n q`：$d\in\mathbb N$，$K$ 为 $\mathcal C_n$ 中向量的有序列表，$U\in\operatorname{Option}(\mathcal C_n)$。布尔标志 $t$ 严格定义为 $U.\mathrm{isSome}$：$U=\operatorname{Some}(u)$ 时 $t=\mathrm{true}$，$U=\operatorname{None}$ 时 $t=\mathrm{false}$。$U$ 是按规则选出的代表，不预先声称它是唯一原像；此处的列表 $K$ 也不同于前面同质情形的标量核函数。
+
+叶端即深度 $0$ 的输出为
+
+$$
+d=1,\qquad K=[],\qquad
+U=\operatorname{Some}(\delta_{()}),\qquad t=\mathrm{true},
+\qquad \delta_{()}(())=1.
+$$
+
+在深度 $n+1$，先对 $q_0,q_1$ 递归，得到 $(d_0,K_0,U_0,t_0)$、$(d_1,K_1,U_1,t_1)$。置
+
+$$
+H=\operatorname{map}(J_0,K_0)\mathbin{+\!+}\operatorname{map}(J_1,K_1),
+$$
+
+其中 $+\!+$ 表示列表连接：先保留左子列表的原顺序，再保留右子列表的原顺序。根参数 $r=q(\mathrm{root})\in[-1/2,1]$ 决定
+
+$$
+d=\begin{cases}
+d_0+d_1,&r<1,\\
+d_0+d_1-\mathbf 1_{t_0\land t_1},&r=1.
+\end{cases}
+$$
+
+指标 $\mathbf 1_{t_0\land t_1}$ 在两个子标志都为真时为 $1$，其余为 $0$。这里及下文 $2^n-d$ 的减法均为自然数截断减法：$a-b=\max(a-b,0)$。
+
+有序列表的完整规则为
+
+$$
+K=\begin{cases}
+H\mathbin{+\!+}[J_0u_0-J_1u_1],
+&r=1,\ U_0=\operatorname{Some}(u_0),\ U_1=\operatorname{Some}(u_1),\\
+H,&\text{其余情形}.
+\end{cases}
+$$
+
+即只在上端点且两个子真空代表都存在时，在末尾追加这一条差向量；没有消元、重排、缩放或去重。
+
+代表与标志的全部分支为
+
+$$
+\begin{array}{c|c|c}
+\text{根参数与子条件}&U&t\\ \hline
+r=-1/2,\ U_0=\operatorname{Some}(u_0),\ U_1=\operatorname{Some}(u_1)
+&\operatorname{Some}(-J_0u_0-J_1u_1)&\mathrm{true}\\
+r=-1/2,\ \text{至少一个子代表不存在}
+&\operatorname{None}&\mathrm{false}\\
+-1/2<r<1&\operatorname{None}&\mathrm{false}\\
+r=1,\ U_0=\operatorname{Some}(u_0)
+&\operatorname{Some}(J_0u_0)&\mathrm{true}\\
+r=1,\ U_0=\operatorname{None},\ U_1=\operatorname{Some}(u_1)
+&\operatorname{Some}(J_1u_1)&\mathrm{true}\\
+r=1,\ U_0=U_1=\operatorname{None}
+&\operatorname{None}&\mathrm{false}
+\end{array}
+$$
+
+因此下端点的 $t=t_0\land t_1$，内部的 $t=\mathrm{false}$，上端点的 $t=t_0\lor t_1$。上端点两边均有代表时仍优先选左边；下端点必须保留两个负号。各子输出都有 $d_b>0$，所以上端点实际扣除 $1$ 的分支不会发生下溢。
+:::
+
+::: {.definition #def-ch38-signed-gram-orientations title="标准方向与密度方向的复 Gram 矩阵" lean="D5/S3/Quantum/Routing/HannSignedCertificate.recordMatrix D5/S3/Quantum/Routing/HannSignedCertificate.standardGram D5/S3/Quantum/Routing/HannSignedCertificate.densityGram"}
+固定 $n,q,\beta$，以下省略记录和映射的这些下标。矩阵 $M$ 的行由环境坐标索引、列由地址索引：$M(e,a)=\widehat R_a(e)$，故 $Mx=Sx$。定义
+
+$$
+\begin{aligned}
+G^{\mathrm{std}}&=M^{\mathrm H}M,\\
+G^{\mathrm{std}}(a,b)&=\sum_{e\in\mathcal F_n}\overline{\widehat R_a(e)}\,\widehat R_b(e),\\
+G^{\mathrm{den}}(a,b)&=\sum_{e\in\mathcal F_n}\widehat R_a(e)\,\overline{\widehat R_b(e)}.
+\end{aligned}
+$$
+
+$M^{\mathrm H}$ 表示共轭转置。这两种方向一般互为逐项共轭；下面用实值局部重叠的乘积证明本情形中它们相等，然后才把标准 Gram 的核与秩结论用于密度方向。
+:::
+
+::: {.theorem #thm-ch38-signed-coefficient-event title="实际装载记录的完整带符号系数与 Gram 证书" lean="D5/S3/Quantum/Routing/HannSignedCertificate.signed_event"}
+对每个自然数深度 $n\ge0$、每个实赋值 $q:I_n\to\mathbb R$，假设
+
+$$
+\forall v\in I_n,\qquad -\frac12\le q(v)\le1.
+$$
+
+对每个外部三态总线标签 $\beta\in Q$，取上述实际记录与规定递归的 $(d,K,U,t)$；置 $m=|K|$，$K_i=K.\mathrm{get}(i)$，$i\in\operatorname{Fin}(m)$。以下各项同时成立。
+
+1. 合成像的复维数为 $\dim_{\mathbb C}\operatorname{range}S=d$。
+2. 有序核列表的长度为 $|K|=2^n-d$，减法采用上述自然数截断约定。
+3. 真空成员关系双向成立：$V_{n,q}\in\operatorname{range}S\ \Longleftrightarrow\ t=\mathrm{true}$。特别地，$t=\mathrm{false}$，亦即 $U=\operatorname{None}$，意味着真空不属于合成像。
+4. 对每个 $u\in\mathcal C_n$，若 $U=\operatorname{Some}(u)$，则 $Su=V_{n,q}$。
+5. 对每个复系数向量 $x\in\mathcal C_n$，
+
+   $$
+   Sx=0\quad\Longleftrightarrow\quad
+   \exists!\,\alpha:\operatorname{Fin}(m)\to\mathbb C,\qquad
+   x=\sum_{i\in\operatorname{Fin}(m)}\alpha(i)K_i.
+   $$
+
+   唯一性针对这份有序列表的全部复系数：任何另一组给出同一展开的系数都逐项等于 $\alpha$。
+6. 对所有 $a,b\in A_n$，标准 Gram 元由实际装载标签给出：
+
+   $$
+   G^{\mathrm{std}}(a,b)=
+   \left(\prod_{v\in I_n}
+   \begin{cases}
+   1,&\lambda_{a,\beta}(v)=\lambda_{b,\beta}(v),\\
+   q(v),&\lambda_{a,\beta}(v)\ne\lambda_{b,\beta}(v)
+   \end{cases}\right)\in\mathbb R\subset\mathbb C.
+   $$
+
+7. 密度方向与标准方向相等：$G^{\mathrm{den}}=G^{\mathrm{std}}$。
+8. 作为作用在地址复系数空间 $\mathcal C_n$ 上的线性映射，$\ker(G^{\mathrm{den}}\cdot)=\ker S$。
+9. 密度方向矩阵的复秩为 $\operatorname{rank}_{\mathbb C}G^{\mathrm{den}}=d$。
+:::
+
+::: proof
+先沿实际树结构归纳，始终使用同一赋值的子树限制。局部 Fourier 恒等式来自 $\omega^3=1$ 与 $1+\omega+\omega^2=0$；特别地，
+
+$$
+f_{1,s}=f_{1,W},\qquad
+f_{-1/2,W}=-f_{-1/2,0}-f_{-1/2,1}.
+$$
+
+在深度 $n+1$，以 $S_b=S_{n,q_b,\beta}$、$V_b=V_{n,q_b}$ 简写。实际装载标签把记录与真空按根、左、右分成
+
+$$
+\begin{aligned}
+\widehat R_{n+1,q,\beta,(0,a)}
+&=f_{r,0}\otimes\widehat R_{n,q_0,\beta,a}\otimes V_1,\\
+\widehat R_{n+1,q,\beta,(1,a)}
+&=f_{r,1}\otimes V_0\otimes\widehat R_{n,q_1,\beta,a},\\
+V_{n+1,q}&=f_{r,W}\otimes V_0\otimes V_1.
+\end{aligned}
+$$
+
+这里张量等式指相应环境坐标函数的逐点乘积。对 $x_b(a)=x(b,a)$，有 $x=J_0x_0+J_1x_1$，从而
+
+$$
+Sx=f_{r,0}\otimes(S_0x_0)\otimes V_1
++f_{r,1}\otimes V_0\otimes(S_1x_1).
+$$
+
+真空在整个区间内都非零。具体选取 $e_*(v)=1$ 当 $q(v)=-1/2$，其余取 $e_*(v)=0$；下端点的等待记录在坐标 $1$ 为 $\sqrt{1/2}>0$，其余位置的坐标 $0$ 为 $\sqrt{(1+2q(v))/3}>0$。有限乘积因此非零，深度 $0$ 则为单位空积。这个非零性允许在子树等式中选定非零真空坐标并消去其因子。
+
+为同时处理核与真空，考虑任意 $c\in\mathbb C$ 及方程 $Sx=cV_{n+1,q}$。当 $r<1$ 时，局部方程
+
+$$
+f_{r,0}A+f_{r,1}B=f_{r,W}C
+$$
+
+的坐标 $1,2$ 强制 $A=B=-C$；若还满足 $r\ne-1/2$，非零的坐标 $0$ 又强制 $C=0$。把此式用于上述张量分解，并在非零子真空坐标上消因子，得到
+
+$$
+S_0x_0=-cV_0,\qquad S_1x_1=-cV_1,
+\qquad r\ne-1/2\ \Longrightarrow\ c=0.
+$$
+
+取 $c=0$，两个子向量都在各自的核内，所以继承列表已涵盖全部核。取 $c=1$，只有下端点可能出现真空原像，而且两个子树都必须有真空原像；归纳假设把这等价为 $t_0\land t_1$。局部下端点恒等式给出反向构造 $-J_0u_0-J_1u_1$。内部 $-1/2<r<1$ 的 $c=1$ 不可能成立，故这里断言的是真空非成员，而非仅仅未选出代表。
+
+当 $r=1$ 时，三个局部记录相同。利用两个子真空的非零性，方程 $Sx=cV_{n+1,q}$ 给出一个共同标量 $z\in\mathbb C$，满足
+
+$$
+S_0x_0=zV_0,\qquad S_1x_1=(c-z)V_1.
+$$
+
+若某子树没有真空原像，其对应的标量必须为零：否则用该非零标量的逆缩放，就会构造出真空原像。取 $c=1$，两标量之和为 $1$，故至少一棵子树有真空原像；反过来，任一子代表零延拓后都给出父真空。这说明上端点的标志为 $t_0\lor t_1$，并验证优先左边的规定代表。
+
+取 $c=0$。若两边都有代表，则
+
+$$
+\begin{aligned}
+x={}&J_0(x_0-zu_0)+J_1(x_1+zu_1)\\
+&+z(J_0u_0-J_1u_1).
+\end{aligned}
+$$
+
+前两项来自子核，最后一项正是规定追加的碰撞向量。若至少一边没有代表，相应标量强制 $z=0$，继承列表便已完备。$J_0,J_1$ 各自单射且支撑不相交，故继承保留复线性无关性。两代表存在时，新增差向量不在继承列表的张成中：先取左地址分量再施加 $S_0$，继承列表都给出零，差向量却给出非零的 $V_0$。因此整个规定列表既完备又复线性无关。
+
+叶端直接给出单位代表与空核列表。上述归纳还保持每条列表向量的合成为零、所选代表合成为真空，以及 $d>0$ 和 $|K|+d=2^n$。由 $\dim_{\mathbb C}\mathcal C_n=2^n$、秩—零化度公式及列表的完备性与独立性，得到像维数、列表长度与唯一复系数展开；真空的两个方向和代表方程则已在各分支中得到。这证明前五项。
+
+最后处理共轭方向。对整个闭区间内的 $r$ 及任意 $s,t\in Q$，局部记录满足
+
+$$
+\sum_{i\in\operatorname{Fin}(3)}\overline{f_{r,s}(i)}\,f_{r,t}(i)
+=\begin{cases}1,&s=t,\\r,&s\ne t.\end{cases}
+$$
+
+将有限环境求和与节点乘积展开、交换，便把 $G^{\mathrm{std}}(a,b)$ 写成这些实局部重叠的乘积，得到第六项。因此 $G^{\mathrm{den}}(a,b)=\overline{G^{\mathrm{std}}(a,b)}=G^{\mathrm{std}}(a,b)$；这里使用的是重叠乘积为实数，而不是记录坐标为实数。再以 $G^{\mathrm{std}}=M^{\mathrm H}M$ 和 $M\cdot=S$，应用标准 Gram 的核、秩恒等式，得到最后两项。完整证明由 Lean 内核检查。
+:::
+
+深度零也完整落在定理范围内：$d=1$、$K=[]$、$t=\mathrm{true}$，$S$ 是一维恒等映射，$V=1$，两种 Gram 都是 $(1)$、秩为 $1$。第五项此时的系数域为 $\operatorname{Fin}(0)$；唯一的空系数族只展开出零向量，空和为零。对任意更深前缀，把原 $q$ 逐层限制到该子树即可应用同一陈述，无须正深度、同质参数或布尔总线的额外假设。下端点改变真空的成员条件而不追加核向量；上端点只有在两边真空都可合成时才追加一条核向量并扣除一维。
+
+与 Profiles 的衔接只经过重叠：在共同范围 $q(v)\in[0,1]$，前面的四坐标实记录 $\sqrt{q(v)}e_*+\sqrt{1-q(v)}e_s$ 同样有“同标签为 $1$、异标签为 $q(v)$”的局部重叠，故其实际装载记录的 Gram 元与这里相应的实乘积一致。两套记录使用不同环境、不同坐标，不能据此把它们逐坐标认同，也不能把前面的物理输出结论直接延伸到带符号区间。
+
+本定理的核始终是地址复系数合成映射的核。这里没有给出带符号区间的含噪输出或装载后续演化定理、Schur 算子空间的核、Choi 秩、递归的计算效率或硬件性能结论，也没有为后面的本体与观察者诠释增加证明。以下进入 `MODEL` 时，仍须保留这些范围界线。
+
 对照 [@rem-ch38-qram-page-wootters-literature]，指针与本体存储分离架构立即推演出两条贯通全书的核心**`MODEL`（模型诠释）**结论：
 
 1. **为什么全局阵列是无时间 $P = NP$，而局部指针必须顺着 `ptr++` 逐帧流逝时间？**
