@@ -20,7 +20,7 @@
 2. **条款 II：奇偶正交分解（Orthogonal Parity Decomposition）**。利用 $\frac{1}{2} \in \mathcal{A}$ 将主客体对换算子拆解为偶对称的**求同通道** $S(x, y) := \frac{1}{2}\bigl(\mathrm{CMP}(x, y) + \mathrm{CMP}(y, x)\bigr)$ 与奇反对称的**求异通道** $A(x, y) := \frac{1}{2}\bigl(\mathrm{CMP}(x, y) - \mathrm{CMP}(y, x)\bigr)$，且 `*`-对合精确反转比较方向 $\mathrm{CMP}(x, y)^* = \mathrm{CMP}(y, x)$：
 
    $$
-   \mathrm{CMP}(x, y) \;=\; S(x, y) + A(x, y), \qquad S(y, x) = S(x, y) = S(x, y)^*, \qquad A(y, x) = -A(x, y) = -A(x, y)^*.
+   \mathrm{CMP}(x, y) \;=\; S(x, y) + A(x, y), \qquad S(y, x) = S(x, y) = S(x, y)^*, \qquad A(y, x) = -A(x, y) = A(x, y)^*.
    $$
 
 3. **条款 III：双向互易公平（Bidirectional Reciprocal Fairness）**。在单位比较载体 $X$ 上，对任意对象对 $(x, y) \in X \times X$，交换主客体次序后的往返比较乘积守恒代数单位元总预算：
