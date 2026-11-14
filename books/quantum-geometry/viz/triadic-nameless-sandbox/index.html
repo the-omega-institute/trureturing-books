@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="TRIAD//NOUMENON · Triadic Self-Bootstrapping &amp; De-nominalization Sandbox">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TRIAD//NOUMENON 三元自举流形与去名相化沙盘</title>
+<meta name="description" content="三元几何、自繁衍花冠与黄金呼吸 / Triadic geometry, a proliferating corolla and golden breathing">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="triadic-nameless-sandbox">
+<div class="app lab" id="app">
+<header class="top">
+  <div class="brand">
+    <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+    <h1 class="logo" data-text="TRIAD//NOUMENON">TRIAD<b>//</b>NOUMENON</h1>
+    <div class="tagline"><span class="zh">三元自举流形与去名相化沙盘 · <em>同一胞体，三种角色；撤去名字，曲面仍在呼吸。</em></span><span class="en">Triadic Self-Bootstrapping &amp; De-nominalization Sandbox · <em>One cell, three roles; withdraw the names and the surface keeps breathing.</em></span></div>
+  </div>
+  <div class="status"><span class="pill hot">c₀ <strong id="pillC">0.72</strong></span><span class="pill">det G₃ <strong id="pillG">—</strong></span><div class="langs" role="group" aria-label="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div></div>
+</header>
+<aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+  <section class="panel sec">
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+    <div class="presets cards" id="presets">
+      <button class="preset" data-preset="bootstrap-core" aria-pressed="false"><span class="code">BOOTSTRAP</span><span class="cn zh">二生三：平权的投影撑起弧面体</span><span class="cn en">Two begets three: the projection opens a curved cell</span></button>
+      <button class="preset" data-preset="cascade-corolla" aria-pressed="false"><span class="code">COROLLA</span><span class="cn zh">无外部注入：1 → 4 → 10 胞花冠</span><span class="cn en">Zero input: a corolla of 1 → 4 → 10 cells</span></button>
+      <button class="preset" data-preset="cyclic-triality" aria-pressed="false"><span class="code">TRIALITY</span><span class="cn zh">胞体不动，三种角色轮换</span><span class="cn en">The body stays still; the three roles cycle</span></button>
+      <button class="preset" data-preset="ladder-fade" aria-pressed="false"><span class="code">WITHDRAW</span><span class="cn zh">撤梯半消融：幕布与轮廓回融</span><span class="cn en">Half-withdrawn ladder: screens and contours dissolve</span></button>
+      <button class="preset" data-preset="noumenon-breath" aria-pressed="false"><span class="code">NAMELESS</span><span class="cn zh">去名相：只留下黄金呼吸</span><span class="cn en">Beyond names: golden breathing alone</span></button>
+    </div>
+    <p class="note" id="presetNote"></p>
+  </section>
+  <section class="panel sec" id="ctlPanel">
+    <h2><span class="zh">切刀与角色</span><span class="en">Cuts and roles</span></h2>
+    <div class="field"><label for="nuLang"><span class="zh">语言退相干度 ν</span><span class="en">Linguistic cut ν</span></label><output id="oNu" for="nuLang">0.90</output><input id="nuLang" type="range" min="0" max="1" step="0.01" value="0.90"></div>
+    <div class="field"><label for="c0"><span class="zh">两两内积 c₀</span><span class="en">Pairwise dot c₀</span></label><output id="oC" for="c0">0.72</output><input id="c0" type="range" min="0.20" max="0.90" step="0.01" value="0.72"></div>
+    <h3><span class="zh">递归深度</span><span class="en">Generation depth</span></h3>
+    <div class="chips" id="GenDepth" role="group" aria-label="胞数" data-aria-en="Cell count"><button class="chip" data-depth="1" aria-pressed="true"><span class="zh">1 胞</span><span class="en">1 cell</span></button><button class="chip" data-depth="2" aria-pressed="false"><span class="zh">4 胞</span><span class="en">4 cells</span></button><button class="chip" data-depth="3" aria-pressed="false"><span class="zh">10 胞</span><span class="en">10 cells</span></button></div>
+    <h3><span class="zh">Z₃ 轮换 120°</span><span class="en">Rotate role 120°</span></h3>
+    <div class="chips" id="RoleIndex" role="group" aria-label="角色" data-aria-en="Role"><button class="chip" data-role="0" aria-pressed="true">r = 0</button><button class="chip" data-role="1" aria-pressed="false">r = 1</button><button class="chip" data-role="2" aria-pressed="false">r = 2</button></div>
+    <p class="note"><span class="zh">拖动琥珀比较珠或下方曲线改变 c₀；拖空白转动实体。时间轴是 τ，花冠沿它递归生长。</span><span class="en">Drag the amber comparison bead or the plot to change c₀; drag empty space to orbit. The rail is τ, along which the corolla grows.</span></p>
+  </section>
+</aside>
+<main class="center">
+  <div class="stage" id="stage" data-thumb aria-label="珠光三元胞体、投影幕与无名流形" data-aria-en="Pearlescent triadic body, projection panes and nameless manifold">
+    <canvas class="fill" id="cv"></canvas><div class="scan"></div><div class="vig"></div>
+    <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+    <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+      <button class="chip" data-scene="iso" aria-pressed="true"><span class="zh">全景</span><span class="en">Overview</span></button><button class="chip" data-scene="noun" aria-pressed="false"><span class="zh">二元幕</span><span class="en">Dyad</span></button><button class="chip" data-scene="verb" aria-pressed="false"><span class="zh">比较幕</span><span class="en">Action</span></button><button class="chip" data-scene="proj" aria-pressed="false"><span class="zh">投影幕</span><span class="en">Lift</span></button><button class="chip" data-scene="noumenon" aria-pressed="false"><span class="zh">无名态</span><span class="en">Nameless</span></button>
+    </div>
+    <div class="hud-bl" id="legend"></div>
+  </div>
+  <div class="tour" id="tour"><button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button><div class="what"></div><button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button></div>
+  <div class="strip"><section class="panel"><div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div><canvas id="plot" aria-label="内积与呼吸曲线" data-aria-en="Overlap and breathing curves"></canvas></section></div>
+</main>
+<aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+  <section class="panel sec" id="readouts" aria-live="polite">
+    <h2><span class="zh">原胞读数</span><span class="en">Cell readouts</span><span class="aside">NUM</span></h2>
+    <dl class="ro">
+      <div class="key"><dt>det G₃</dt><dd><b id="roDet">—</b><span id="roCells"></span></dd></div>
+      <div class="c"><dt><span class="zh">测地角 θ₀ / 不动角 θ*</span><span class="en">Arc θ₀ / fixed angle θ*</span></dt><dd id="roTheta">—</dd></div>
+      <div class="m"><dt><span class="zh">正交抬升 β</span><span class="en">Orthogonal lift β</span></dt><dd id="roBeta">—</dd></div>
+      <div><dt>α² + β²</dt><dd id="roUnit">—</dd></div>
+      <div class="v"><dt><span class="zh">吉拉尔角超 Ω₀</span><span class="en">Girard excess Ω₀</span></dt><dd id="roOmega">—</dd></div>
+      <div><dt><span class="zh">切刀权重 w / 呼吸比</span><span class="en">Cut weight w / frequency ratio</span></dt><dd id="roCut">—</dd></div>
+    </dl>
+    <p class="note"><span class="zh">G₃ 对角线为 1，非对角线全为 c₀；Vₖ = α Sᵢⱼ + β Aᵢⱼ。投影归一化后与原二态同在 S²，数值上平权服从比较公理 A₀。</span><span class="en">G₃ has diagonal 1 and off-diagonal c₀; Vₖ = α Sᵢⱼ + β Aᵢⱼ. The normalized projection shares S² with the dyad and obeys comparison axiom A₀ on equal terms in this example.</span></p>
+  </section>
+  <section class="panel sec" id="evidence">
+    <h2><span class="zh">依据</span><span class="en">Evidence</span></h2>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">任意两根三维向量存在公共单位法线；此处取 Aᵢⱼ。</span><span class="en">Any pair of vectors in three dimensions has a common unit normal; here we take Aᵢⱼ.</span><a data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair" href="#" target="_blank" rel="noopener"><code>unit_perpendicular_pair</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">闭子空间的正交余空间非零时，存在投影为零、距原空间为 1 的单位向量，互补投影范数为 1。此处 S = span(Vᵢ,Vⱼ)，Aᵢⱼ 是该单位方向。</span><span class="en">A closed subspace with nonzero orthogonal complement admits a unit vector with zero projection and distance 1 from the subspace; the complementary projection has norm 1. Here S = span(Vᵢ,Vⱼ), with unit direction Aᵢⱼ.</span><a data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>finite_layer_projection_escape</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">若二态函数对所有旋转后的两根非平行轴之轴圆作用局部不变，则对任意保向旋转不变。这是有前提的一般定理；此处内积是实例，Z₃ 角色重命名另由数值核对。</span><span class="en">If a pair function is locally invariant under axis-circle actions about both rotated nonparallel axes, it is invariant under every orientation-preserving rotation. This theorem has hypotheses; the dot product is an instance, while the Z₃ role relabeling is checked numerically.</span><a data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.moving_axis_invariance" href="#" target="_blank" rel="noopener"><code>moving_axis_invariance</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">读出诱导的划分拓扑中，两点不可分当且仅当读出相同；三块幕各自隐藏不同方向。</span><span class="en">In the partition topology induced by a readout, two points are inseparable exactly when their readouts agree; each screen hides a different direction.</span><a data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>partition_inseparable_iff_kernel</code></a></span></div>
+    <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：吉拉尔定理 Ω₀ = 3 arccos(c₀/(1+c₀)) − π；三阶等相关格拉姆行列式 det G₃ = (1−c₀)²(1+2c₀)；皮尔士关于三元关系不可约性的论述属于哲学文献，不由这些数值确证。</span><span class="en">Literature results, not formalized in this book: Girard’s theorem Ω₀ = 3 arccos(c₀/(1+c₀)) − π and the equicorrelation Gram determinant det G₃ = (1−c₀)²(1+2c₀). Peirce’s irreducibility of triadic relations is a philosophical literature claim, not established by these numbers.</span></span></div>
+    <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">二元、比较与投影是同一胞体的三种切片，连“最小球面三面角”也是语言投影：这是本书的哲学／几何模型。黄金阻尼花冠、切刀同伦与黄金呼吸也都是模型。</span><span class="en">Dyad, comparison and projection as three slices of one cell, with even “minimal spherical trihedron” a linguistic projection, is the book’s philosophical/geometric model. The golden-damped corolla, cut homotopy and golden breathing are models too.</span></span></div>
+    <div class="lean num"><span class="ok">NUM</span><span><span class="zh">全部数值由双精度实时计算；曲面与递归胞体是数值演示，不是证明。</span><span class="en">All numbers are computed live in double precision; surfaces and recursive cells are numerical illustrations, not a proof.</span></span></div>
+    <button class="chip" id="infoBtn"><span class="zh">理论接口</span><span class="en">Theory interface</span></button>
+  </section>
+</aside>
+<footer class="rail"><div class="transport"><button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to start">⏮</button><button class="tbtn" id="play" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▶</button><span class="chips" id="speedChips"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span></div><div class="clock"><span class="tau" id="tau"></span><input type="range" id="now" min="0" max="12" step="any" value="0" aria-label="呼吸与生长时间" data-aria-en="Breathing and growth time"></div><div class="keys"><kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>R</kbd> <span class="zh">轮换</span><span class="en">cycle</span></div></footer>
+</div>
+<div class="drawer" id="drawer" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="row"><h2 id="drawerTitle"><span class="zh">自举与撤梯</span><span class="en">Bootstrap and withdrawal</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+  <div class="zh"><p class="lede">这是几何与哲学模型的数值沙盘，不是证明。</p><p>三顶点满足 Vₘ·Vₙ = c₀，单位角平分线 Sᵢⱼ 与公共法线 Aᵢⱼ 正交，Vₖ = α Sᵢⱼ + β Aᵢⱼ，α²+β² = 1。三代胞数为 1、4、10：跨边界中点沿背离父胞的球面切向走 δℓ = 0.42 φ⁻⁽ℓ⁻¹⁾，φ = (1+√5)/2；跨边切向法线取 N = ±unit(Pₐ × Pᵦ)，按父胞质心选择外向符号。双叉积 (Pₐ × Pᵦ) × M 沿边大圆，会给出退化子胞。它是明确选定的递归模型，不声称无重叠的球面铺砌。</p><p>ν²(3−2ν) 连续混合锐利胞体与无名曲面。无名曲面的 R = 0.78[1+0.18 sin³θ cos(3(φ−π/6)−ω₁τ)+0.09 sin(2θ) cos(ω₂τ)]，两频率比为黄金比。ν &lt; 0.15 时撤去所有舞台标签、幕布、投影线与顶点珠，只保留隐藏原点与未标定的浮环。此处“无界”指无周期闭合的持续呼吸，半径仍有界。</p><p class="lede refs">书中：<a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-bootstrap-and-beyond-names" target="_top">§34 三元自举与去名相化</a> · <a href="../../zh/ch32-s01-axiom-of-comparison.html#sec-ch32-axiom-of-comparison" target="_top">§32.1 比较公理</a></p></div>
+  <div class="en"><p class="lede">This is a numerical sandbox for geometric and philosophical models, not a proof.</p><p>The vertices obey Vₘ·Vₙ = c₀; the unit bisector Sᵢⱼ and common normal Aᵢⱼ are orthogonal, and Vₖ = α Sᵢⱼ + β Aᵢⱼ with α²+β² = 1. The three generations have 1, 4 and 10 cells: from each frontier midpoint a spherical tangent step δℓ = 0.42 φ⁻⁽ℓ⁻¹⁾ points away from the parent, with φ = (1+√5)/2. The cross-edge tangent normal is N = ±unit(Pₐ × Pᵦ), with its outward sign chosen from the parent centroid. The double cross product (Pₐ × Pᵦ) × M runs along the edge great circle and would give a degenerate child. This is a specified recursive model, without a claim of a nonoverlapping tessellation.</p><p>The weight ν²(3−2ν) continuously blends the sharp cell with the nameless surface R = 0.78[1+0.18 sin³θ cos(3(φ−π/6)−ω₁τ)+0.09 sin(2θ) cos(ω₂τ)]. The two frequencies have the golden ratio. At ν &lt; 0.15 every stage label, screen, projection ray and vertex bead withdraws, leaving a hidden origin and an uncalibrated floating ring. “Unbounded” means continuing without a closed period; the radius remains bounded.</p><p class="lede refs">In the book: <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-bootstrap-and-beyond-names" target="_top">§34 Triadic bootstrap and beyond names</a> · <a href="../../en/ch32-s01-axiom-of-comparison.html#sec-ch32-axiom-of-comparison" target="_top">§32.1 Comparison axiom</a></p></div>
+</div></div>
+<script src="main.js"></script>
+</body>
+</html>

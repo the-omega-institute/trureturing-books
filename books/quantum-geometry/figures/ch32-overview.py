@@ -2,10 +2,10 @@
 Chapter 32 at a glance: a meeting of two splits into a line and an area, the three axes for
 diagnosing unified theories, and the outside point C moved into the field.
 
-Panel I (§32.1–32.2): unit vectors A, B at θ = 55°; the cyan shadow A·B = cos θ and the magenta
-parallelogram A∧B with height sin θ (asserted in _ch32). Panel II (§32.3): the corner of the
+Panel I (§32.4–32.5): unit vectors A, B at θ = 55°; the cyan shadow A·B = cos θ and the magenta
+parallelogram A∧B with height sin θ (asserted in _ch32). Panel II (§32.6): the corner of the
 diagnostic box, θ line → area, η smooth → polytope, λ outside C → inside; no programme is placed
-(the lab card cube does that). Panel III (§32.4): an observer at the north pole, sight lines a
+(the lab card cube does that). Panel III (§32.6): an observer at the north pole, sight lines a
 quarter turn long, the closed equator at 90° as the horizon; the outside point C is struck out.
 The axes and the horizon reading are the chapter's interpretive model (MODEL).
 """

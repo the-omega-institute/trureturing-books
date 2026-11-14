@@ -639,14 +639,14 @@ section: "第八部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 31.4 · Theorem 32.1</p>
+  <p class="kicker">Theorem 31.4 · Theorem 32.10</p>
   <h2 class="t">放大每轮只转 <em>2θ</em>；连转两次四分之一圈<em>恰好反向</em></h2>
 <TheoremCard class="compact mt-s" label="定理31.4" title="相干一致放大的平面步进旋转（第 2 款）" gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" cite="thm-ch31-horizon-landauer-ergodic-fairness">
 
 设 $J$、$C$ 等距，$P$ 是投影，$U = CJ$ 的成功重叠率为 $p$：$(PU)^\dagger(PU) = p\,I$，$0 < p < 1$；记 $\theta = \arcsin\sqrt p$，$W$、$B$ 为成功与失败分量。则对每个 $n$，$(\operatorname{iterate}(U, P))^n\,U = \sin\bigl((2n + 1)\theta\bigr)\,W + \cos\bigl((2n + 1)\theta\bigr)\,B$。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="定理32.1" title="反自伴幺正复结构的二次旋转反号（第 1 款）" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" cite="thm-ch32-generative-self-reference-and-zeckendorf">
+<TheoremCard class="compact mt-s" label="定理32.10" title="反自伴幺正复结构的二次旋转反号（第 1 款）" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" cite="thm-ch32-generative-self-reference-and-zeckendorf">
 
 设 $R$ 是有限维复方阵，满足 $R^\dagger = -R$ 且 $R R^\dagger = I_n$。则 $R^2 = -I_n$。
 

@@ -1,4 +1,4 @@
-/* ORTHO//CMP · 宇宙单指令比较引擎 · the cosmic comparison engine (chapter 32, §32.5–§32.6).
+/* ORTHO//CMP · 宇宙单指令比较引擎 · the cosmic comparison engine (chapter 32, §32.1–§32.2).
    Four scenes share one rail; each scene (and sub-mode) says what the rail means and keeps its own position on it:
      · primitive (rail: slots compared, 0…8): two bipolar words w_A, w_B ∈ {±1}⁸/√8 are multiplied slot by slot. Equal
        slots (XNOR) and unequal slots (XOR) are counted: s = ⟨w_A, w_B⟩ = (m − d)/8 = cos θ, a = √(1 − s²) = sin θ,
