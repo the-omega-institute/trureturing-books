@@ -27,6 +27,9 @@ const bothLangs = async (read) => {
   const en = await read(); await page.click('[data-lang-set="zh"]'); await settle(page);
   return [zh, en];
 };
+/** −sin θ* and sin²θ* are local limiting factors near θ*, not finite-step identities: a [中, EN] pair that says so. */
+const localPair = ([zh, en]) => /局部|θ\* ?附近/.test(zh) && /\blocal|near θ\*/i.test(en);
+const num = (txt) => parseFloat(String(txt).replace(/−/g, '-').replace(/\s/g, ''));
 
 /* ---------- independent references ---------- */
 function bisect(f, a, b) { let fa = f(a); for (let i = 0; i < 200; i++) { const m = (a + b) / 2, fm = f(m); if ((fm > 0) === (fa > 0)) { a = m; fa = fm; } else b = m; } return (a + b) / 2; }
@@ -89,6 +92,9 @@ check('SAME-START: beats 0–5 match the isolated column of the chapter\'s table
   check('SAME-START band: the bars alternate above and below θ* at every count', B && B.bars.slice(0, 12).every((b, i) => b.sign === -B.bars[i + 1].sign));
   check('SAME-START band: it names the factor of one beat, −sin θ* (finite differences, 3 decimals)', B && B.factor.includes(`−${(-slopeF).toFixed(3)}`), B && B.factor);
   check('SAME-START band: the amber readout is the error at this count', B && Math.abs(B.now - (chainX(0.1, 0.1, 12) - THETA)) < 1e-14); }
+{ const fac = await bothLangs(async () => (await state()).band.factor), note = await bothLangs(() => page.textContent('#presetNote'));
+  check('SAME-START (中/EN): the band\'s beat factor −0.674 and the card note\'s are marked local, near θ*',
+    localPair(fac) && localPair(note) && fac.every((f) => f.includes(`−${(-slopeF).toFixed(3)}`)) && note.every((n) => n.includes('0.674')), `${fac.join(' | ')} / ${note.join(' | ')}`); }
 s = await card('round');
 s = await seek(10);
 { const B = s.band;
@@ -101,6 +107,37 @@ check('ONE-ROUND: the round samples stay below θ* and rise monotonically', [0, 
 { // the card note: the rings are the even beats of the same-start orbit, so 2k cosine evaluations land in the same place either way
   let x = 0.1, ok = true; for (let n = 0; n <= 10; n++) { if (Math.abs(s.xs[n] - x) > 1e-14) ok = false; x = Math.cos(x); }
   check('ONE-ROUND: no speed-up — beat n of the orbit is n plain cosine evaluations of 0.1, and the ring after k rounds is beat 2k', ok); }
+{ // finite rounds against the local factor: from 0.1 the first round's error ratio is ≈ 0.3045, well below sin²θ* ≈ 0.4538,
+  // and the later rounds only rise towards it. The key readout shows each finite ratio; the band, the card note, the
+  // theory drawer and the clause of the meta description that states 0.454 call it a factor near θ* (中/EN), and the
+  // evidence box keeps its "local factor".
+  const e = (t) => chainX(0.1, 0.1, t) - THETA, beats = [2, 4, 6, 8, 10], want = beats.map((t) => e(t) / e(t - 2));
+  check('ONE-ROUND: from 0.1 the first round\'s error ratio is ≈ 0.3045, materially below the local factor sin²θ* (two-chain reference)',
+    Math.abs(want[0] - 0.304475456045) < 1e-9 && slopeG - want[0] > 0.1, `${want[0]} vs ${slopeG}`);
+  check('ONE-ROUND: the finite round ratios rise towards sin²θ* without reaching it (0.3045, 0.4274, 0.4450, …)',
+    want.every((r, i) => r < slopeG && (i === 0 || r > want[i - 1])) && slopeG - want[4] < 0.005, want.join(', '));
+  let fault = '';
+  for (const [i, t] of beats.entries()) {
+    s = await seek(t);
+    if (!(s.view === 'round' && s.beat === t && Math.abs(s.roundRatio - want[i]) < 1e-12 && Math.abs(num(s.readout) - want[i]) < 5.1e-5)) fault = fault || `beat ${t}: ${s.readout} (${s.roundRatio}) vs ${want[i]}`;
+  }
+  s = await seek(2);
+  check('ONE-ROUND: the live key readout is each finite round ratio; at beat 2 it reads ≈ 0.3045, not the local 0.4538',
+    !fault && s.beat === 2 && Math.abs(num(s.readout) - want[0]) < 5.1e-5 && Math.abs(num(s.readout) - slopeG) > 0.1, fault || s.readout);
+  const fac = await bothLangs(async () => (await state()).band.factor), note = await bothLangs(() => page.textContent('#presetNote'));
+  check('ONE-ROUND (中/EN): while the readout shows 0.3045, the band names sin²θ* as the local factor of a two-evaluation round, and the card note says near θ*',
+    localPair(fac) && /两次求值/.test(fac[0]) && /two evaluations/.test(fac[1]) && fac.every((f) => f.includes(slopeG.toFixed(3))) && localPair(note) && note.every((n) => n.includes('0.454')),
+    `${fac.join(' | ')} / ${note.join(' | ')}`);
+  const drawer = await page.evaluate(() => ['zh', 'en'].map((l) => [...document.querySelectorAll(`#drawer .${l} li`)].map((li) => li.textContent).find((x) => /sin²θ\*/.test(x)) || ''));
+  const argued = await page.evaluate(() => [...document.querySelectorAll('#evidence .lean.argued')].map((el) => [el.querySelector('.zh').textContent, el.querySelector('.en').textContent])
+    .find(([zh]) => /ex-ch33-mutual-cosine-monotonic-lock/.test(zh)) || ['', '']);
+  // the meta description: its Chinese half ends at the last 。; every clause of either half that states 0.454 is marked near θ*
+  const meta = await page.evaluate(() => { const d = document.querySelector('meta[name="description"]').content, cut = d.lastIndexOf('。') + 1;
+    return [d.slice(0, cut).split(/[，；：。]/), d.slice(cut).split(/[,;:] |\. /)].map((cl) => cl.filter((c) => c.includes('0.454'))); });
+  const metaLocal = meta.every((cl) => cl.length > 0) && meta[0].every((zh) => meta[1].every((en) => localPair([zh, en])));
+  check('theory drawer and meta description (中/EN): beats and rounds give 0.4538 and −0.6736 as factors near θ*, the description\'s 0.454 a round is near θ*; the evidence box keeps "local factor"',
+    localPair(drawer) && drawer.every((d) => d.includes('0.4538') && d.includes('0.6736')) && metaLocal && /局部因子/.test(argued[0]) && /local factor/.test(argued[1]),
+    `${drawer.join(' | ')} / ${meta.flat().join(' | ')}`); }
 
 // any start in [0, 1.5]²: rounds monotone towards θ* and the limit is the consensus point
 let okAll = true;
