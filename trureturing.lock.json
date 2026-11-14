@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "f5a6211e591351e1a2bdeea0165c2ef29ad21b48",
-  "pinned_at": "2026-11-14T12:41:54Z",
+  "pinned_at": "2026-11-14T13:41:43Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -940,6 +940,22 @@
       "statement_id": "sha256:06adbb3f4d3939fb35410fe6889c079d1e4cccc07d7e50ba905727637b633ea3",
       "line": 197,
       "signature": "theorem power_fiber_card_eq_one_add_character_sum (χ : MulChar F ℂ) {d : ℕ} (hd : 0 < d) (hχ : orderOf χ = d) (a : F) : (Nat.card {x : F // x ^ d = a} : ℂ) = 1 + ∑ i ∈ Ico 1 d, (χ ^ i) a"
+    },
+    "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory.alternating_completion_classification": {
+      "module": "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory",
+      "name": "D5.S3.Combinatorics.Graph.LinearForests.CompatibleCycleInventory.alternating_completion_classification",
+      "kind": "theorem",
+      "statement_id": "sha256:e84402ddd297869a2fec33844071df00e8c88bbbda29e774b87cb9c51e335c7a",
+      "line": 683,
+      "signature": "theorem alternating_completion_classification [Finite V] (n : ℕ) (E : V → V → Prop) (k : V → Bool) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (hk : ∀ x y, E x y → k x ≠ k y) (hr : Nat.card (Side k false) = n) (hb : Nat.card (Side k true) = n) : ∃ (t : Component E ≃ Tail E) (h : Component E ≃ Head E) (Φ : AlternatingCompletion E k ≃ Compatible (fun A => k (h A)) (fun A => !(k (t A)))), (∀ A, Quotient.mk (EqvGen.setoid E) (t A).1 = A) ∧ (∀ A, Quotient.mk (EqvGen.setoid E) (h A).1 = A) ∧ (∀ σ A, σ.1 (t A) = h ((Φ σ).1 A)) ∧ let s"
+    },
+    "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory.compatible_cycle_card": {
+      "module": "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory",
+      "name": "D5.S3.Combinatorics.Graph.LinearForests.CompatibleCycleInventory.compatible_cycle_card",
+      "kind": "theorem",
+      "statement_id": "sha256:e84402ddd297869a2fec33844071df00e8c88bbbda29e774b87cb9c51e335c7a",
+      "line": 496,
+      "signature": "theorem compatible_cycle_card [Finite C] (s d : C → Bool) (hb : inventory s d false true = inventory s d true false) : Nat.card (Compatible s d) = if Nat.card C = 0 then 0 else if 0 < inventory s d false true then inventory s d false true * (Nat.card (Side s false) - 1).factorial * (Nat.card (Side s true) - 1).factorial else if inventory s d false false = 0 ∨ inventory s d true true = 0 then (Nat.card C - 1).factorial else 0"
     },
     "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion": {
       "module": "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion",
