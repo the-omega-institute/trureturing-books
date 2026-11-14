@@ -376,12 +376,12 @@ await solidChecks(withReadySolid(T), BOOK, ID, page);
 
 /* ---------- cited figures at the size a chapter shows them ----------
    A chapter cites a card in an iframe 500 px high: about 334 px wide on a 390 px phone, 760 px in a book page. In the
-   phone's frame a long note once took ~180 px of the 500 and left the stage ~210 px: the tower and the disk shrank to a few pixels, and the disk, its magnifier and their labels ran into the legend collided with the
-   captions and the legend, and the lit solid shrank to a few per cent of the stage. These checks look at the frame
-   itself: nothing scrolls; the complete note stays short and needs no internal scrolling; the stage keeps most of
-   the frame; no ink of the flat canvas or the WebGL canvas and no label lies under the title, its second line or the
-   legend; the solid draws nothing inside the flat drawings; labels stay on the stage and apart; the lit solid covers
-   ≥ 12 % of the stage at the card's first and last frame; and the exact disk keeps a radius ≥ 40 px. */
+   phone's frame a long note once took ~180 px of the 500 and left the stage ~210 px: the disk, its magnifier and their
+   labels collided with the captions and the legend, and the lit solid shrank to a few per cent of the stage. These
+   checks look at the frame itself: nothing scrolls; the complete note stays short and needs no internal scrolling; the
+   stage keeps most of the frame; no ink of the flat canvas or the WebGL canvas and no label lies under the title, its
+   second line or the legend; the solid draws nothing inside the flat drawings; labels stay on the stage and apart; the
+   lit solid covers ≥ 12 % of the stage at the card's first and last frame; and the exact disk keeps a radius ≥ 40 px. */
 {
   const FIG = ['erase_reset', 'cayley', 'staircase', 'klein_vs_poincare', 'quotient_fold'];
   /** Everything about the frame, in viewport pixels; `panels` and `read` come from the page's own probe. */
@@ -465,6 +465,38 @@ await solidChecks(withReadySolid(T), BOOK, ID, page);
   }
 }
 
+/* ---------- a book column narrower than the page (about 480 to 560 px) ----------
+   There the legend set to the right of the solid takes most of the height, and the magnifier beside the disk (or in
+   its corner) is small. Over FOLD THE WHEEL's last frame the name of its gap (“gap = 0: on the rim”) once stood centred
+   over the box and reached back across the rim, onto the counts of the folded points. Checked here on the frame itself:
+   the wheel is folded, the nearest point of the name's box lies outside the drawn disk (an independent distance from
+   the disk's centre to a rectangle), and the labels stay on the stage and apart. */
+{
+  const near = (b, c) => Math.hypot(Math.max(b.x - c.cx, 0, c.cx - b.x - b.w), Math.max(b.y - c.cy, 0, c.cy - b.y - b.h));
+  const cut = (a, b) => Math.max(0, Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x)) * Math.max(0, Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y));
+  const bad = [];
+  for (const [w, lang] of [[500, 'en'], [520, 'zh']]) {
+    const pg = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=quotient_fold`, { viewport: { width: w, height: 500 }, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
+    await until(pg, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].contexts > 0, null, 120000);
+    await until(pg, (d) => !window[d].state.playing, 'SAMSARA_DEBUG', 120000);
+    await settle(pg);
+    const f = await pg.evaluate(() => {
+      const st = document.getElementById('stage'), sr = st.getBoundingClientRect(), fb = document.getElementById('flat').getBoundingClientRect(), d = window.SAMSARA_DEBUG.solid.disk;
+      const tags = [...st.querySelectorAll('.tags .tag')].filter((t) => !t.hidden && t.textContent.trim() && t.getClientRects().length)
+        .map((t) => { const b = t.getBoundingClientRect(); return [t.textContent.trim(), { x: b.left, y: b.top, w: b.width, h: b.height }]; });
+      return { fold: window.SAMSARA_DEBUG.state.fold, stage: { x: sr.left, y: sr.top, w: sr.width, h: sr.height }, disk: { cx: fb.left + d.cx, cy: fb.top + d.cy, R: d.R }, tags };
+    });
+    const id = `${w} × 500, ${lang}`, name = f.tags.find(([t]) => /^(gap|缝)/i.test(t)), clear = name ? near(name[1], f.disk) - f.disk.R : -Infinity;
+    if (!(f.fold === 1 && clear >= 1)) bad.push(`${id}: fold ${f.fold}, ${name ? `“${name[0]}” ${clear.toFixed(1)} px outside the rim` : 'no name of the gap'}`);
+    for (const [t, b] of f.tags) if (b.x < f.stage.x - 1 || b.y < f.stage.y - 1 || b.x + b.w > f.stage.x + f.stage.w + 1 || b.y + b.h > f.stage.y + f.stage.h + 1) bad.push(`${id}: off stage: ${t}`);
+    for (let i = 0; i < f.tags.length; i++) for (let j = i + 1; j < f.tags.length; j++) {
+      const a = f.tags[i][1], b = f.tags[j][1];
+      if (cut(a, b) > 0.3 * Math.min(a.w * a.h, b.w * b.h)) bad.push(`${id}: ${f.tags[i][0]} / ${f.tags[j][0]}`);
+    }
+    await pg.context().close();
+  }
+  check('cited figure, book column 500 / 520 × 500, FOLD THE WHEEL: the name of the gap keeps outside the disk, and every label stays on the stage, apart from the others', !bad.length, bad.slice(0, 4).join(' | '));
+}
 
 // Publication stills use clock coordinates and retain the values the captions describe.
 for (const lang of ['zh', 'en']) for (const [card, time] of [['staircase', 8], ['erase_reset', Wk.n0 + Wk.p + 2]]) {
