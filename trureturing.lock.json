@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "b4a6f25056b7d7451df9b06e226c74cfd85940ac",
-  "pinned_at": "2026-11-13T20:42:57Z",
+  "pinned_at": "2026-11-14T00:00:34Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1477,6 +1477,22 @@
       "line": 45,
       "signature": "theorem pentagon_golden_cosines : 2 * Real.cos (Real.pi / 5) = Real.goldenRatio ∧ 2 * Real.cos (2 * Real.pi / 5) = Real.goldenRatio⁻¹ ∧ 2 * Real.cos (Real.pi / 5) + 2 * Real.cos (2 * Real.pi / 5) = Real.sqrt 5 ∧ Irrational (2 * Real.cos (2 * Real.pi / 5))"
     },
+    "D5/S3/ContinuousObservables/IntervalSOSCompletion.Poly.evenRoot": {
+      "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
+      "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.Poly.evenRoot",
+      "kind": "def",
+      "statement_id": "sha256:804deaf76d19d115e9674a9ff4fb54d294112b6294fd125432c2fb4823a4d433",
+      "line": 198,
+      "signature": "noncomputable def evenRoot (P : ℂ[X]) : ℂ[X]"
+    },
+    "D5/S3/ContinuousObservables/IntervalSOSCompletion.Poly.oddRoot": {
+      "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
+      "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.Poly.oddRoot",
+      "kind": "def",
+      "statement_id": "sha256:804deaf76d19d115e9674a9ff4fb54d294112b6294fd125432c2fb4823a4d433",
+      "line": 200,
+      "signature": "noncomputable def oddRoot (P : ℂ[X]) : ℂ[X]"
+    },
     "D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_phase_unitary_completion": {
       "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
       "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_phase_unitary_completion",
@@ -1492,6 +1508,174 @@
       "statement_id": "sha256:804deaf76d19d115e9674a9ff4fb54d294112b6294fd125432c2fb4823a4d433",
       "line": 845,
       "signature": "theorem exists_sumsq_decomposition (k : ℕ) (A : ℝ[X]) (hAe : IsEven (A.map (algebraMap ℝ ℂ))) (hAd : A.natDegree ≤ 2 * k) (hA : ∀ x ∈ Set.Icc (-1 : ℝ) 1, 0 ≤ A.eval x) : ∃ B C : ℝ[X], A = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1)"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.exists_phase_factorization": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.exists_phase_factorization",
+      "kind": "theorem",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 395,
+      "signature": "theorem exists_phase_factorization (k : ℕ) (p : ℝ[X]) (hp : p.natDegree ≤ k) (hpar : HasParity (p.map (algebraMap ℝ ℂ)) k) (hbound : ∀ x ∈ Set.Icc (-1 : ℝ) 1, p.eval x ^ 2 ≤ 1) : ∃ (B C : ℝ[X]) (U : CyclicObservable 2) (φ₀ : ℝ) (Φ : List ℝ), 1 - p ^ 2 = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1) ∧ U = phaseCompletion p B C ∧ star U * U = 1 ∧ U * star U = 1 ∧ (∀ t, (U t).det = 1) ∧ (∀ t, (U t 0 0).re = p.eval (windingPhase t).re) ∧ Φ.length = k ∧ qspPolyW φ₀ Φ = (p.map "
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.exists_phases": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.exists_phases",
+      "kind": "theorem",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 247,
+      "signature": "theorem exists_phases (k : ℕ) (P Q : ℂ[X]) (hP : P.natDegree ≤ k) (hQ : Q.natDegree ≤ k - 1) (hQ0 : k = 0 → Q = 0) (hPpar : HasParity P k) (hQpar : HasParity Q (k - 1)) (hunit : P * conjP P + (1 - X ^ 2) * Q * conjP Q = 1) : ∃ φ₀ : ℝ, ∃ Φ : List ℝ, Φ.length = k ∧ qspPolyW φ₀ Φ = (P, Q)"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.phaseDiagonal": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.phaseDiagonal",
+      "kind": "def",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 313,
+      "signature": "noncomputable def phaseDiagonal (φ : ℝ) : CyclicObservable 2"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.phaseProduct": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.phaseProduct",
+      "kind": "def",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 317,
+      "signature": "noncomputable def phaseProduct (φ₀ : ℝ) (Φ : List ℝ) : CyclicObservable 2"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.qspPolyW": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.qspPolyW",
+      "kind": "def",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 97,
+      "signature": "noncomputable def qspPolyW (φ₀ : ℝ) (Φ : List ℝ) : ℂ[X] × ℂ[X]"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.stepW": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.stepW",
+      "kind": "def",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 93,
+      "signature": "noncomputable def stepW (φ : ℝ) (PQ : ℂ[X] × ℂ[X]) : ℂ[X] × ℂ[X]"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.unstepW": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.unstepW",
+      "kind": "def",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 106,
+      "signature": "noncomputable def unstepW (φ : ℝ) (PQ : ℂ[X] × ℂ[X]) : ℂ[X] × ℂ[X]"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesisLifting.cor8Phases": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesisLifting",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesisLifting.cor8Phases",
+      "kind": "def",
+      "statement_id": "sha256:7cd122c6ad66130811ead27238ded1a6b6b254f3e13522907095521fb512bb3b",
+      "line": 126,
+      "signature": "noncomputable def cor8Phases (φ₀ : ℝ) (Φ' : List ℝ) (hΦ : Φ' ≠ []) : List ℝ"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesisLifting.native_phase_lifting": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesisLifting",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesisLifting.native_phase_lifting",
+      "kind": "theorem",
+      "statement_id": "sha256:7cd122c6ad66130811ead27238ded1a6b6b254f3e13522907095521fb512bb3b",
+      "line": 199,
+      "signature": "theorem native_phase_lifting {H : Type u} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [FiniteDimensional ℂ H] (rawU Pi PiTilde : H →ₗ[ℂ] H) (hU : star rawU * rawU = 1) (hU' : rawU * star rawU = 1) (hPi : IsStarProjection Pi) (hPiTilde : IsStarProjection PiTilde) (d : ℕ) (hd : 0 < d) (p : ℝ[X]) (hp : p.natDegree ≤ d) (hpar : HasParity (p.map (algebraMap ℝ ℂ)) d) (hbound : ∀ x ∈ Set.Icc (-1 : ℝ) 1, |p.eval x| ≤ 1) : ∃ (B C : ℝ[X]) (Ufield : D5.S3.ContinuousObservables.CentralWinding.CyclicObservable 2) (φ₀ : ℝ) (Φ : List ℝ) (hne : Φ ≠ []), 1 - p ^ 2 = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.IsSingularPair": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.IsSingularPair",
+      "kind": "inductive",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 508,
+      "signature": "structure IsSingularPair (E : ProjUnitaryEncoding ℋ) (ψ : ℋ) (σ : ℝ) : Prop where P_eq : E.P ψ = ψ nonneg : 0 ≤ σ le_one : σ ≤ 1 gram : (E.encoded†) (E.encoded ψ) = ((σ : ℂ) ^ 2) • ψ section Defs variable (E : ProjUnitaryEncoding ℋ) noncomputable def lvOf (ψ : ℋ) (σ : ℝ) : ℋ"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.Rref": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.Scalar.Rref",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 143,
+      "signature": "noncomputable def Rref (x : ℝ) : M₂"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.phaseZ": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.Scalar.phaseZ",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 146,
+      "signature": "noncomputable def phaseZ (φ : ℝ) : M₂"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.seqR": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.Scalar.seqR",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 149,
+      "signature": "noncomputable def seqR : List ℝ → ℝ → M₂ | [], _ => 1 | φ :: Φ, x => phaseZ φ * Rref x * seqR Φ x noncomputable def Wrot (x : ℝ) : M₂"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.altSeq": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.altSeq",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 188,
+      "signature": "noncomputable def altSeq (E : ProjUnitaryEncoding ℋ) : List ℝ → L ℋ | [] => 1 | φ :: Φ => (if Even Φ.length then phaseOp E.P' φ * E.U else phaseOp E.P φ * E.U†) * altSeq E Φ variable (E : ProjUnitaryEncoding ℋ) @[simp] private theorem altSeq_cons (φ : ℝ) (Φ : List ℝ) : altSeq E (φ :: Φ) = (if Even Φ.length then phaseOp E.P' φ * E.U else phaseOp E.P φ * E.U†) * altSeq E Φ"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.altSeq_apply_singular": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.altSeq_apply_singular",
+      "kind": "theorem",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 704,
+      "signature": "theorem altSeq_apply_singular (h : IsSingularPair E ψ σ) (Φ : List ℝ) : altSeq E Φ ψ = (seqR Φ σ) 0 0 • (if Even Φ.length then ψ else lvOf E ψ σ) + (seqR Φ σ) 1 0 • (if Even Φ.length then rvpOf E ψ σ else lvtOf E ψ σ)"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvOf": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.lvOf",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 522,
+      "signature": "noncomputable def lvOf (ψ : ℋ) (σ : ℝ) : ℋ"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvtOf": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.lvtOf",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 525,
+      "signature": "noncomputable def lvtOf (ψ : ℋ) (σ : ℝ) : ℋ"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.ofRaw": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.ofRaw",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 738,
+      "signature": "noncomputable def ofRaw (U P Pt : H →ₗ[ℂ] H) (hU : star U * U = 1) (hU' : U * star U = 1) (hP : IsStarProjection P) (hPt : IsStarProjection Pt) : ProjUnitaryEncoding H where U"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.phaseOp": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.phaseOp",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 174,
+      "signature": "noncomputable def phaseOp (P : L ℋ) (φ : ℝ) : L ℋ"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.polynomial_lifting": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.polynomial_lifting",
+      "kind": "theorem",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 756,
+      "signature": "theorem polynomial_lifting (E : ProjUnitaryEncoding H) (Ψ : List ℝ) (R : ℂ[X]) (hscalar : ∀ x ∈ Set.Icc (0 : ℝ) 1, seqR Ψ x 0 0 = if Even Ψ.length then R.eval ((x : ℂ) ^ 2) else (x : ℂ) * R.eval ((x : ℂ) ^ 2)) : (Even Ψ.length → E.P * altSeq E Ψ * E.P = E.P * aeval (E.encoded† * E.encoded) R * E.P) ∧ (Odd Ψ.length → E.P' * altSeq E Ψ * E.P = E.encoded * aeval (E.encoded† * E.encoded) R)"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.rvpOf": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.rvpOf",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 528,
+      "signature": "noncomputable def rvpOf (ψ : ℋ) (σ : ℝ) : ℋ"
     },
     "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance": {
       "module": "D5/S3/DivergenceSupport/LandauerBound",
@@ -3372,6 +3556,22 @@
       "statement_id": "sha256:372df8dafb6e47b8241406c70dd19eac4711a686a00f7219508d684aafe46d13",
       "line": 510,
       "signature": "theorem result : claim"
+    },
+    "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.central_spectral_gap": {
+      "module": "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap",
+      "name": "D5.S3.Quantum.Matrix.CentralSqrtTwoDefectGap.central_spectral_gap",
+      "kind": "theorem",
+      "statement_id": "sha256:db4e46e74ee00801b8429452173160860d3d486955c18142ca6d4ae7401fd518",
+      "line": 732,
+      "signature": "theorem central_spectral_gap (n : ℕ) (lambda : Fin (2 * (n + 1) - 1 + 1) → ℝ) (hlambda : Finset.univ.val.map lambda = (centralDefect (n + 1) (by omega)).charpoly.roots) (i j : Fin (2 * (n + 1) - 1 + 1)) (hij : i ≠ j) : (2 * Real.sqrt 2 / (1 + Real.sqrt 2) ^ 2) / (n + 1 : ℝ) ^ 3 ≤ |lambda i - lambda j|"
+    },
+    "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.recurrence_endpoint_observability": {
+      "module": "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap",
+      "name": "D5.S3.Quantum.Matrix.CentralSqrtTwoDefectGap.recurrence_endpoint_observability",
+      "kind": "theorem",
+      "statement_id": "sha256:db4e46e74ee00801b8429452173160860d3d486955c18142ca6d4ae7401fd518",
+      "line": 141,
+      "signature": "theorem recurrence_endpoint_observability (n : ℕ) (hn : 1 ≤ n) (t b : ℝ) (y : ℕ → ℝ) (hzero : y 0 = 0) (hrec : ∀ j, j + 2 ≤ n + 1 → y (j + 2) = t * y (j + 1) - y j) (hboundary : y (n + 1) = b * y n) : (∑ j ∈ Finset.range n, y (j + 1) ^ 2) ≤ (1 + |b|) ^ 2 * (n : ℝ) ^ 3 * y n ^ 2"
     },
     "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B": {
       "module": "D5/S3/Quantum/Measurement/Bloch/QubitBloch",
