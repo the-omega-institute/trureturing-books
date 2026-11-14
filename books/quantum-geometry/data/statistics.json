@@ -3,7 +3,7 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 174,
+    "theorem": 175,
     "lemma": 34,
     "proposition": 44,
     "corollary": 30,
@@ -11,11 +11,11 @@
     "conjecture": 6,
     "problem": 2,
     "example": 111,
-    "remark": 186,
-    "proof": 279,
-    "lean_verified": 280,
+    "remark": 187,
+    "proof": 280,
+    "lean_verified": 281,
     "written_proof": 2,
-    "literature": 191
+    "literature": 192
   },
   "total": 594,
   "kinds": {
@@ -1262,13 +1262,13 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 532,
+          "line": 533,
           "id": "thm-ch38-lookup-program-upper-bound",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 655,
+          "line": 656,
           "id": "",
           "via": "inline"
         },
@@ -1310,7 +1310,19 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 394,
+          "line": 395,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 905,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 914,
           "id": "",
           "via": "inline"
         }
@@ -1334,7 +1346,19 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 388,
+          "line": 389,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 904,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 914,
           "id": "",
           "via": "inline"
         }
@@ -1376,25 +1400,31 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 385,
+          "line": 386,
           "id": "thm-ch38-self-mapped-diagonal-fixed-point",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 388,
+          "line": 389,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 527,
+          "line": 528,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 655,
+          "line": 656,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 941,
           "id": "",
           "via": "inline"
         },
@@ -1532,19 +1562,37 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 385,
+          "line": 386,
           "id": "thm-ch38-self-mapped-diagonal-fixed-point",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 394,
+          "line": 911,
+          "id": "thm-ch38-uncompleted-horizon-diagonal-refinement",
+          "via": "environment"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 395,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 914,
           "id": "",
           "via": "inline"
         },
         {
           "file": "appendix-a.md",
           "line": 680,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a.md",
+          "line": 890,
           "id": "",
           "via": "inline"
         },
@@ -1562,6 +1610,12 @@
         },
         {
           "file": "viz/self-referential-table/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/uncompleted-horizon-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -1586,7 +1640,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 413,
+          "line": 414,
           "id": "thm-ch38-recursive-page-table-walk",
           "via": "environment"
         }
@@ -1598,7 +1652,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 370,
+          "line": 371,
           "id": "thm-ch38-discrete-sech-positive",
           "via": "environment"
         }
@@ -2468,7 +2522,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 821,
+          "line": 822,
           "id": "thm-ch38-zeckendorf-uniform-avoidance-count",
           "via": "environment"
         },
@@ -2498,13 +2552,13 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 577,
+          "line": 578,
           "id": "thm-ch38-zeckendorf-carry-barrier",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 657,
+          "line": 658,
           "id": "",
           "via": "inline"
         },
@@ -2552,7 +2606,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 400,
+          "line": 401,
           "id": "",
           "via": "inline"
         }
@@ -2600,13 +2654,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 385,
+          "line": 386,
           "id": "thm-ch38-self-mapped-diagonal-fixed-point",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 400,
+          "line": 401,
           "id": "",
           "via": "inline"
         },
@@ -3788,7 +3842,7 @@
         },
         {
           "file": "appendix-a.md",
-          "line": 979,
+          "line": 993,
           "id": "",
           "via": "inline"
         }
@@ -3812,7 +3866,7 @@
         },
         {
           "file": "appendix-a.md",
-          "line": 979,
+          "line": 993,
           "id": "",
           "via": "inline"
         }
@@ -4415,6 +4469,18 @@
           "line": 23,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 903,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 915,
+          "id": "",
+          "via": "inline"
         }
       ]
     },
@@ -4535,6 +4601,18 @@
           "line": 116,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 906,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 921,
+          "id": "",
+          "via": "inline"
         }
       ]
     },
@@ -4563,6 +4641,18 @@
         {
           "file": "ch35-light-pulse-and-self-referential-table.md",
           "line": 236,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 904,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 915,
           "id": "",
           "via": "inline"
         }
@@ -4705,6 +4795,12 @@
           "via": "inline"
         },
         {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 941,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a.md",
           "line": 568,
           "id": "",
@@ -4718,19 +4814,37 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 558,
+          "line": 559,
           "id": "thm-ch38-retrospective-lookup-failure",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 656,
+          "line": 911,
+          "id": "thm-ch38-uncompleted-horizon-diagonal-refinement",
+          "via": "environment"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 657,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 930,
           "id": "",
           "via": "inline"
         },
         {
           "file": "appendix-a.md",
           "line": 764,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a.md",
+          "line": 890,
           "id": "",
           "via": "inline"
         },
@@ -4742,6 +4856,12 @@
         },
         {
           "file": "viz/pnp-lookup-degradation/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/uncompleted-horizon-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -4757,6 +4877,12 @@
           "line": 35,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 921,
+          "id": "",
+          "via": "inline"
         }
       ]
     },
@@ -4766,7 +4892,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 790,
+          "line": 791,
           "id": "thm-ch38-refinement-impurity-monotonicity",
           "via": "environment"
         },
@@ -4796,13 +4922,13 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 719,
+          "line": 720,
           "id": "thm-ch38-escape-pairs-and-structural-novelty",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 722,
+          "line": 723,
           "id": "",
           "via": "inline"
         },
@@ -4838,13 +4964,13 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 719,
+          "line": 720,
           "id": "thm-ch38-escape-pairs-and-structural-novelty",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 722,
+          "line": 723,
           "id": "",
           "via": "inline"
         },
@@ -4994,13 +5120,19 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 719,
+          "line": 720,
           "id": "thm-ch38-escape-pairs-and-structural-novelty",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 732,
+          "line": 733,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 961,
           "id": "",
           "via": "inline"
         },
@@ -5030,13 +5162,13 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 719,
+          "line": 720,
           "id": "thm-ch38-escape-pairs-and-structural-novelty",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 732,
+          "line": 733,
           "id": "",
           "via": "inline"
         },
@@ -5405,6 +5537,36 @@
           "line": 102,
           "id": "lem-complete-diagonal-separation-deficit",
           "via": "environment"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 911,
+          "id": "thm-ch38-uncompleted-horizon-diagonal-refinement",
+          "via": "environment"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 915,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a.md",
+          "line": 890,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "viz/visualizations.json",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/uncompleted-horizon-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -5417,6 +5579,36 @@
           "line": 124,
           "id": "prop-complete-diagonal-strict-refinement",
           "via": "environment"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 911,
+          "id": "thm-ch38-uncompleted-horizon-diagonal-refinement",
+          "via": "environment"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 921,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a.md",
+          "line": 890,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "viz/visualizations.json",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/uncompleted-horizon-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -5615,6 +5807,18 @@
           "line": 122,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 906,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 921,
+          "id": "",
+          "via": "inline"
         }
       ]
     },
@@ -5625,6 +5829,12 @@
         {
           "file": "ch21-diagonalization-and-escape.md",
           "line": 136,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 941,
           "id": "",
           "via": "inline"
         }
@@ -5639,6 +5849,12 @@
           "line": 111,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 941,
+          "id": "",
+          "via": "inline"
         }
       ]
     },
@@ -5651,6 +5867,12 @@
           "line": 63,
           "id": "def-separation-deficit",
           "via": "environment"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 915,
+          "id": "",
+          "via": "inline"
         }
       ]
     },
@@ -5805,6 +6027,12 @@
         {
           "file": "ch35-light-pulse-and-self-referential-table.md",
           "line": 131,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 941,
           "id": "",
           "via": "inline"
         },
@@ -6482,13 +6710,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 623,
+          "line": 624,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 660,
+          "line": 661,
           "id": "",
           "via": "inline"
         },
@@ -10513,6 +10741,24 @@
           "via": "inline"
         },
         {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 911,
+          "id": "thm-ch38-uncompleted-horizon-diagonal-refinement",
+          "via": "environment"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 877,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 931,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a.md",
           "line": 624,
           "id": "",
@@ -10539,6 +10785,12 @@
         {
           "file": "appendix-a.md",
           "line": 876,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a.md",
+          "line": 890,
           "id": "",
           "via": "inline"
         },
@@ -10610,6 +10862,12 @@
         },
         {
           "file": "viz/triadic-nameless-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/uncompleted-horizon-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -11918,13 +12176,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 251,
+          "line": 252,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 281,
+          "line": 282,
           "id": "",
           "via": "inline"
         },
@@ -11978,7 +12236,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 250,
+          "line": 251,
           "id": "thm-ch38-copied-address-dereference-and-access-defect",
           "via": "environment"
         },
@@ -12104,7 +12362,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 250,
+          "line": 251,
           "id": "thm-ch38-copied-address-dereference-and-access-defect",
           "via": "environment"
         },
@@ -14108,13 +14366,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 292,
+          "line": 293,
           "id": "thm-ch38-pointer-width-and-no-deep-copy",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 295,
+          "line": 296,
           "id": "",
           "via": "inline"
         },
@@ -14186,13 +14444,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 292,
+          "line": 293,
           "id": "thm-ch38-pointer-width-and-no-deep-copy",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 301,
+          "line": 302,
           "id": "",
           "via": "inline"
         },
@@ -14600,7 +14858,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 165,
+          "line": 166,
           "id": "thm-ch38-spatial-qutrit-qram-correctness",
           "via": "environment"
         }
@@ -14612,7 +14870,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 105,
+          "line": 106,
           "id": "thm-ch38-reversible-qram-correctness",
           "via": "environment"
         }
@@ -17018,7 +17276,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 814,
+          "line": 815,
           "id": "",
           "via": "inline"
         },
@@ -19346,6 +19604,9 @@
         "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.uniqueCapturePairs_eq_sdiff",
         "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty",
         "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.structurallyLowersEscape_iff_lowersEscape",
+        "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty",
+        "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement",
+        "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape",
         "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect",
         "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect",
         "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity",
@@ -19362,12 +19623,25 @@
         "D5/S1/Digit/ZeckendorfCarryBarrier.lower_support_carry_barrier",
         "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap",
         "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique",
+        "D5/S3/ConceptDynamics/ConceptFiberDecomposition.Concept",
+        "D5/S3/ConceptDynamics/ConceptJoinUniversal.conceptJoin",
+        "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relativeSemanticDiagonal",
+        "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective",
         "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure",
+        "D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection.partitionTopology",
         "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union",
         "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.uniqueCapturePairs_eq_sdiff",
         "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty",
         "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.structurallyLowersEscape_iff_lowersEscape",
+        "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty",
+        "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement",
+        "D5/S3/ConceptDynamics/ObservationTopology/PrimitiveEscapeStrictRefinement.StrictObservationRefinement",
+        "D5/S3/ConceptDynamics/ObservationTopology/RedundantCoordinateTopology.coordinate_inadequate_iff_strict_join_refinement",
+        "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology.defectRelation_eq_separationDeficit",
+        "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology.separationDeficit",
+        "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion",
         "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance",
+        "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape",
         "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior",
         "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity",
         "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion",
@@ -19577,6 +19851,8 @@
         "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point",
         "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points",
         "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor",
+        "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty",
+        "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement",
         "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement",
         "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel",
         "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition",

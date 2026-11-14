@@ -4045,6 +4045,66 @@
           "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
         }
       ]
+    },
+    {
+      "id": "uncompleted-horizon-sandbox",
+      "code": "HORIZON//UNCOMPLETED",
+      "title": "未完成的地平线 · 对角逃逸与二生三自举",
+      "title_en": "The uncompleted horizon · diagonal escape and triadic bootstrap",
+      "summary": "五张实验卡：三态格拉姆体积砖与建表组合账本、满射布尔目录的对角分离与 conceptJoin、有限序数扩表螺旋、同层前后视差，以及全知冻结反事实护栏。",
+      "summary_en": "Five experiments: a three-state Gram brick and table-building ledger, diagonal separation and conceptJoin over a surjective Boolean catalog, a finite ordinal spiral, two perspectives on one frontier, and a counterfactual omniscience guardrail.",
+      "path": "uncompleted-horizon-sandbox/",
+      "thumbnail": "uncompleted-horizon-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-14",
+      "chapter": 38,
+      "section": "38.6",
+      "presets": [
+        "bootstrap-ledger",
+        "lawvere-godel",
+        "ordinal-spiral",
+        "bidirectional-parallax",
+        "frozen-omniscience"
+      ],
+      "tags": [
+        "建表扩维",
+        "对角分离亏损",
+        "序数螺旋",
+        "双向视差",
+        "反事实护栏"
+      ],
+      "tags_en": [
+        "Bootstrap expansion",
+        "Diagonal separation deficit",
+        "Ordinal spiral",
+        "Bidirectional parallax",
+        "Counterfactual guardrail"
+      ],
+      "theory": [
+        {
+          "label": "第三十八章 §38.6 · 未完成的地平线",
+          "label_en": "Chapter 38 §38.6 · The uncompleted horizon",
+          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-uncompleted-horizon-godel-pnp",
+          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-uncompleted-horizon-godel-pnp"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        }
+      ]
     }
   ]
 }
