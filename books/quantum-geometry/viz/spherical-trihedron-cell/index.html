@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//CELL · The spherical trihedron cell: once and twice as two shadows of one solid">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//CELL 球面三面角原胞 · 正交一次与正交两次是同一块小弧面体的两个投影</title>
+<meta name="description" content="单位球面上的直角三面角原胞 ΔT_ε：原点 O、转点 B = e₂、两面互相垂直的坐标墙上的 A(ε) = (sin ε, cos ε, 0) 与 C(ε) = (0, cos ε, sin ε)。沿棱 OB 看，两面墙收成两条腿，一次的弧 AC 满足 cos c = cos²ε、c < √2 ε；沿两面墙走，两次的路 A → B → C 在 B 处拐 90°，两枚墙旋子之积 U₂₃U₁₂ 多出 −sin²(ε/2) e₁e₃。品红的球面帽比青色的平直削面鼓出一块，角超 Ω = 2 arctan(tan²(ε/2)) ≈ ε²/2；沿 A → B → C → A 平行移动的箭头回来时转过 Ω。三态格拉姆行列式 det G = sin⁴ε，体积砖 sin²ε；把第二面墙摊平成共面两步，det G = 0。The right-angled spherical trihedron cell ΔT_ε on the unit sphere: the origin O, the pivot B = e₂, and A(ε) = (sin ε, cos ε, 0), C(ε) = (0, cos ε, sin ε) on two perpendicular coordinate walls. Seen down the ridge OB, the walls collapse to two legs and the once arc AC has cos c = cos²ε, c < √2 ε; walked along the walls, the twice path A → B → C turns 90° at B, and the product of the two wall rotors U₂₃U₁₂ carries an extra −sin²(ε/2) e₁e₃. The magenta spherical cap bulges beyond the cyan flat cut by the excess Ω = 2 arctan(tan²(ε/2)) ≈ ε²/2; an arrow carried round A → B → C → A comes back turned by Ω. The three-state Gram determinant is det G = sin⁴ε, the volume brick sin²ε; laying the second wall flat into a coplanar two-step gives det G = 0.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="spherical-trihedron-cell">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//CELL">ORTHO<b>//</b>CELL</h1>
+      <div class="tagline">
+        <span class="zh">球面三面角原胞 · <em>正交一次与正交两次是同一块小弧面体的两个投影：沿棱看是一条弧，沿墙走是拐 90° 的两步，多出来的是一块鼓起的面积和一块撑开的体积</em></span>
+        <span class="en">The spherical trihedron cell · <em>orthogonal once and orthogonal twice are two shadows of one small curved solid: down the ridge it is one arc, along the walls it is two steps with a 90° turn, and what is left over is a bulging area and an opened volume</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="pillEps"><span class="zh">步长</span><span class="en">STEP</span> <strong>—</strong></span>
+      <span class="pill" id="pillOmega"><span class="zh">角超</span><span class="en">EXCESS</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="cell" aria-pressed="false"><span class="code">CELL</span><span class="cn zh">三面墙加一块鼓起的帽：小弧面体</span><span class="cn en">Three walls and a bulging cap: the small curved solid</span></button>
+        <button class="preset" data-preset="once-ridge" aria-pressed="false"><span class="code">ONCE-RIDGE</span><span class="cn zh">沿棱看：两面墙收成两条腿，一次只剩一条弧</span><span class="cn en">Down the ridge: two walls become two legs, once is one arc</span></button>
+        <button class="preset" data-preset="twice-walls" aria-pressed="false"><span class="code">TWICE-WALLS</span><span class="cn zh">沿墙走两步：在转点拐九十度</span><span class="cn en">Two steps along the walls: a right-angle turn at the pivot</span></button>
+        <button class="preset" data-preset="cap-excess" aria-pressed="false"><span class="code">CAP-EXCESS</span><span class="cn zh">帽比平面多出的角，箭头绕一圈转回来</span><span class="cn en">The angle the cap adds; an arrow carried round comes back turned</span></button>
+        <button class="preset" data-preset="gram-brick" aria-pressed="false"><span class="code">GRAM-BRICK</span><span class="cn zh">共面两步体积为零，三面角撑出一块砖</span><span class="cn en">Coplanar steps hold no volume; the trihedron opens a brick</span></button>
+        <button class="preset" data-preset="octant-limit" aria-pressed="false"><span class="code">OCTANT-LIMIT</span><span class="cn zh">步长到九十度：原胞长成整个八分球</span><span class="cn en">The step grows to ninety degrees: the cell is the whole octant</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">步长与图层</span><span class="en">Step and layers</span><span class="aside"><span class="zh">也可拖动琥珀色的手柄</span><span class="en">or drag the amber handle</span></span></h2>
+      <div class="field">
+        <label for="eps"><span class="zh">步长 ε</span><span class="en">Step ε</span><small class="zh">每面墙里转过的角</small><small class="en">the turn inside each wall</small></label><output id="oEps" for="eps">38°</output>
+        <input type="range" id="eps" min="5" max="90" step="1" value="38">
+      </div>
+      <div class="field">
+        <label for="loop"><span class="zh">回路位置 t</span><span class="en">Loop position t</span><small>A → B → C → A</small></label><output id="oLoop" for="loop">1.00</output>
+        <input type="range" id="loop" min="0" max="1" step="0.01" value="1">
+      </div>
+      <div class="chips" role="group" aria-label="图层" data-aria-en="Layers">
+        <button class="chip" id="flatBtn" aria-pressed="true"><span class="zh">平直削面</span><span class="en">Flat cut</span></button>
+        <button class="chip" id="transBtn" aria-pressed="true"><span class="zh">平行移动</span><span class="en">Transport</span></button>
+      </div>
+      <p class="note"><span class="zh">时间轴在“原胞”“一次”“格拉姆”三个场景里就是步长 ε，在“两次”里是沿墙走的步数，在“角超”里是回路位置 t。</span><span class="en">The rail is the step ε in the Cell, Once and Gram scenes, the walk along the walls in Twice, and the loop position t in Excess.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：单位球面上的直角三面角原胞，三面平墙、一块品红的球面帽、青色的平直削面，以及沿棱的投影、沿墙的两步、平行移动的箭头和格拉姆体积砖" data-aria-en="Stage: the right-angled trihedron cell on the unit sphere, its three flat walls, a magenta spherical cap and a cyan flat cut, with the view down the ridge, the two steps along the walls, the carried arrow and the Gram volume brick">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="cell" aria-pressed="true"><span class="zh">原胞</span><span class="en">Cell</span></button>
+        <button class="chip" data-scene="once" aria-pressed="false"><span class="zh">一次</span><span class="en">Once</span></button>
+        <button class="chip" data-scene="twice" aria-pressed="false"><span class="zh">两次</span><span class="en">Twice</span></button>
+        <button class="chip" data-scene="excess" aria-pressed="false"><span class="zh">角超</span><span class="en">Excess</span></button>
+        <button class="chip" data-scene="brick" aria-pressed="false"><span class="zh">格拉姆</span><span class="en">Gram</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="条带小图" data-aria-en="Strip plot"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="dtKey"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="dt1"></dt><dd id="ro1">—</dd></div>
+        <div><dt id="dt2"></dt><dd id="ro2">—</dd></div>
+        <div class="c"><dt id="dt3"></dt><dd id="ro3">—</dd></div>
+        <div class="m"><dt id="dt4"></dt><dd id="ro4">—</dd></div>
+        <div class="v"><dt id="dt5"></dt><dd id="ro5">—</dd></div>
+        <div class="v"><dt id="dt6"></dt><dd id="ro6">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">公共单位法线：三维空间里任意两根向量 a、b 都有一根单位向量 n 同时与两者正交。页面取 a = A(ε)、b = C(ε)，n = (C × A)/|C × A|；B 沿 n 的分量 B·n 就是体积砖的高，|C × A|·(B·n) = sin²ε。共面两步（ε &lt; 90°）里 n = ±e₃，B·n = 0，砖压扁成一张纸。已冻结：</span><span class="en">A common unit normal: any two vectors a, b of three-dimensional space have a unit vector n orthogonal to both. The page takes a = A(ε), b = C(ε) and n = (C × A)/|C × A|; the component B·n of B along n is the height of the volume brick, and |C × A|·(B·n) = sin²ε. For the coplanar two-step (ε &lt; 90°) n = ±e₃ and B·n = 0: the brick is pressed into a sheet. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair" href="#" target="_blank" rel="noopener"><code>unit_perpendicular_pair</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">拉格朗日—格拉姆恒等式：(Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ ΣᵢΣⱼ (uᵢvⱼ − uⱼvᵢ)²。页面取 u = A、v = C 的三个坐标：左边 1 − cos⁴ε 是这一对的 2 × 2 格拉姆行列式，右边是楔积 A∧C 三个分量的平方和 (sin ε cos ε)² + sin⁴ε + (sin ε cos ε)²，两边由页面分别算出。已冻结：</span><span class="en">The Lagrange–Gram identity: (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ ΣᵢΣⱼ (uᵢvⱼ − uⱼvᵢ)². The page takes u = A and v = C: the left side 1 − cos⁴ε is the 2 × 2 Gram determinant of the pair, the right side is the sum of the squares of the three parts of the wedge A∧C, (sin ε cos ε)² + sin⁴ε + (sin ε cos ε)², each side computed separately. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">两轴有限字：两根不平行的轴 a、b（⟪a, b⟫² &lt; ‖a‖²‖b‖²）之下，三维空间里任意行列式为 1 的正交变换都等于一串有限个字母之积，每个字母都保持 a 或 b 不动。页面的“两次”是长度为 2 的一串：U₁₂ 保持 e₃ 不动，U₂₃ 保持 e₁ 不动，e₃ 与 e₁ 不平行。定理只说这样的有限字存在，不给步数，也不给算法。已冻结：</span><span class="en">Finite two-axis words: for two non-parallel axes a, b (⟪a, b⟫² &lt; ‖a‖²‖b‖²), every orthogonal map of three-dimensional space with determinant 1 is a product of finitely many letters, each of which keeps a or b fixed. The page’s “twice” is a word of length 2: U₁₂ keeps e₃ fixed and U₂₃ keeps e₁ fixed, and e₃ is not parallel to e₁. The theorem only says that such finite words exist; it gives no length and no algorithm. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="#" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">协变换位子：在任意环里，若 U·f = f′·U，则 U·f − f·U = (f′ − f)·U。页面在 Cl(3,0) 里取 U = U₂₃、f = U₁₂、f′ = U₂₃U₁₂Ũ₂₃：两边由页面分别乘出，都等于 −2 sin²(ε/2) e₁e₃。两步换个次序，差别只落在 e₁e₃ 这一块上。已冻结：</span><span class="en">The covariant commutator: in any ring, if U·f = f′·U then U·f − f·U = (f′ − f)·U. The page takes, in Cl(3,0), U = U₂₃, f = U₁₂ and f′ = U₂₃U₁₂Ũ₂₃: it multiplies out both sides separately, and both equal −2 sin²(ε/2) e₁e₃. Swapping the order of the two steps changes only the e₁e₃ part. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula" href="#" target="_blank" rel="noopener"><code>covariant_commutator_formula</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">读出划分拓扑的不可分核：在读出映射诱导的划分拓扑里，两点拓扑不可分当且仅当读出相同。“一次”场景的读出是沿棱 OB 的投影 x ↦ (x₁, x₃)：O 与 B 的读出都是 (0, 0)，两者不可分，整条棱收成一个点，两面墙收成两条腿。已冻结：</span><span class="en">The kernel of the readout partition topology: in the partition topology a readout induces, two points are topologically inseparable exactly when their readouts agree. In the Once scene the readout is the projection down the ridge OB, x ↦ (x₁, x₃): O and B both read (0, 0), so they are inseparable; the whole ridge shrinks to one point and the two walls to two legs. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>partition_inseparable_iff_kernel</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限层投影逃逸：闭子空间 S 的正交残差 S⊥ 不为零时，S⊥ 里有一根单位向量 e：S 的投影把它送到 0，它到 S 的距离恰为 1，互补投影 I − P_S 的范数为 1。页面取 S 为第一面墙所在的平面 e₁∧e₂、e = e₃：共面两步整个落在 S 里（det G = 0），C(ε) 在 e₃ 上的分量 sin ε 把原胞撑出这个平面。已冻结：</span><span class="en">Finite-layer projection escape: when the orthogonal residual S⊥ of a closed subspace S is nonzero, it holds a unit vector e that the projection onto S sends to 0, that lies at distance exactly 1 from S, and the complementary projection I − P_S has norm 1. The page takes S to be the plane e₁∧e₂ of the first wall and e = e₃: the coplanar two-step lies wholly in S (det G = 0), and the component sin ε of C(ε) along e₃ lifts the cell out of that plane. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>finite_layer_projection_escape</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：球面直角三角形 cos c = cos a cos b 与 tan α = tan a / sin b，所以腿长都是 ε 时 cos c = cos²ε、tan α = tan γ = sec ε；吉拉尔定理 Ω = α + β + γ − π 给出 Ω = 2 arctan(sec ε) − π/2 = 2 arctan(tan²(ε/2))。页面用向量逐项算出这些角，不证明这些公式。</span><span class="en">Literature result, not formalized in this book: a right spherical triangle has cos c = cos a cos b and tan α = tan a / sin b, so with both legs ε, cos c = cos²ε and tan α = tan γ = sec ε; Girard’s theorem Ω = α + β + γ − π gives Ω = 2 arctan(sec ε) − π/2 = 2 arctan(tan²(ε/2)). The page computes these angles from vectors; it does not prove the formulas.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：高斯—博内（平行移动绕测地三角形一圈，箭头转过所围面积 Ω）、自旋 1/2 的贝里相位 −Ω/2、Cl⁺(3,0) 里三枚边旋子之积 U_CA U₂₃ U₁₂ = exp(−(Ω/2) A⋆)（A⋆ 是 A 处切平面的单位双矢量），以及 Regge 离散单纯形把曲率集中在棱角上的做法。页面数值地乘出旋子、搬运箭头，不证明这些结论。</span><span class="en">Literature results, not formalized in this book: Gauss–Bonnet (an arrow carried once round a geodesic triangle turns by the enclosed area Ω), the spin-½ Berry phase −Ω/2, the Cl⁺(3,0) product of the three edge rotors U_CA U₂₃ U₁₂ = exp(−(Ω/2) A⋆) (A⋆ the unit bivector of the tangent plane at A), and Regge’s discrete simplices, which put curvature on the corners. The page multiplies the rotors and carries the arrow numerically; it does not prove these results.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“正交一次与正交两次是同一块三角弧面体的两个投影”是作者的几何诠释；“格拉姆”场景里灰色的 ε_min 带（普朗克式的最小步长）与离散球面剖分都是示意模型，带的位置是为画图选的，不是测量值。</span><span class="en">“Orthogonal once and orthogonal twice are two shadows of one curved triangular solid” is the author’s geometric interpretation; the grey ε_min band of the Gram scene (a Planck-like smallest step) and a discrete tessellation of the sphere are schematic models, and the band’s place is chosen for the drawing, not measured.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的每个数都由页面当场算出：顶点、格拉姆矩阵与行列式、三重积、球面角与平直角、角超、Cl(3,0) 里逐刀片相乘的旋子、沿三条测地边逐段搬运的箭头。这是数值演示，不是证明。</span><span class="en">Every number on the page is computed on the spot: the vertices, the Gram matrices and their determinants, the triple product, the spherical and flat angles, the excess, the rotors multiplied blade by blade in Cl(3,0), and the arrow carried leg by leg along the three geodesic edges. This is a numerical illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：步长 ε、沿墙的步数或回路位置 t" data-aria-en="Rail: the step ε, the walk along the walls or the loop position t">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>F</kbd> <span class="zh">平直削面</span><span class="en">flat cut</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是单位比较球面 S² ⊂ ℝ³ 上的一块直角三面角原胞 ΔT_ε。本页是数值演示，不是证明：每个数都由页面当场算出（NUM），定理只在下面写明的那一个实例上演示。</p>
+      <ol>
+        <li><b>原胞。</b>O = (0, 0, 0)，转点 B = e₂，A(ε) = (sin ε, cos ε, 0) 在墙 e₂∧e₁ 里，C(ε) = (0, cos ε, sin ε) 在墙 e₂∧e₃ 里。三面平墙 OBA、OBC、OAC 加一块外凸的球面帽 △ABC 围成三面角原胞；A∧B∧C = sin²ε e₁e₂e₃。</li>
+        <li><b>正交一次（沿棱看）。</b>沿 OB 正投影到 e₁∧e₃ 平面，O 与 B 落在同一点，两面墙变成长 sin ε 的两条腿，A⊥ = (sin ε, 0)、C⊥ = (0, sin ε)。一次的弧 AC 满足 cos c_ε = A·C = cos²ε，c_ε = arccos(cos²ε) = √2 ε (1 − ε²/12 + O(ε⁴)) &lt; √2 ε：平直的勾股只在一阶成立。</li>
+        <li><b>正交两次（沿墙走）。</b>先在墙 e₁∧e₂ 里从 A 走到 B，在 B 处拐 β = 90°，再在墙 e₂∧e₃ 里走到 C。两枚墙旋子 U₁₂(ε) = cos(ε/2) − sin(ε/2) e₁e₂、U₂₃(ε) = cos(ε/2) − sin(ε/2) e₂e₃ 之积 U₂₃U₁₂ = cos²(ε/2) − sin(ε/2)cos(ε/2)(e₁e₂ + e₂e₃) − sin²(ε/2) e₁e₃，四个分量的平方和为 (cos²(ε/2) + sin²(ε/2))² = 1。次序对调只改变 e₁e₃ 的符号：U₂₃U₁₂ − U₁₂U₂₃ = −2 sin²(ε/2) e₁e₃。</li>
+        <li><b>球面帽与平直削面。</b>平直削面 △ABC 的三个内角和为 180°，B 处 cos β_flat = sin²(ε/2)，β_flat &lt; 90°。球面帽上 β = 90°、α = γ = arctan(sec ε) = π/4 + ε²/4 + O(ε⁴) &gt; 45°，角超 Ω(ε) = α + β + γ − π = 2 arctan(tan²(ε/2)) = ε²/2 + ε⁴/12 + O(ε⁶) &gt; 0。</li>
+        <li><b>两件要分开的事。</b>（a）精确：沿测地三角形 A → B → C → A 平行移动，箭头转过 Ω(ε)；三枚边旋子之积 U_CA U₂₃ U₁₂ = exp(−(Ω/2) A⋆)，自旋 1/2 的相位是 −Ω/2，对 (0, π/2] 里每个 ε 都成立。（b）近似：只走两面坐标墙的 U₂₃U₁₂ 里，e₁e₃ 分量 −sin²(ε/2) ≈ −ε²/4 与 −Ω/2 ≈ −ε²/4 只在最低阶 O(ε²) 一致；ε 变大两者分开（ε = 48° 时 −0.165 对 −0.196，ε = 90° 时 −0.5 对 −π/4 ≈ −0.785）。在八分球极限 ε = 90°，三条边都落在坐标面里，三枚坐标旋子之积正好是 exp(−(π/4) e₂e₃)，Ω = π/2。</li>
+        <li><b>格拉姆体积砖。</b>G(ΔT_ε) = [[1, cos ε, cos²ε], [cos ε, 1, cos ε], [cos²ε, cos ε, 1]]，det G = (1 − cos²ε)² = sin⁴ε &gt; 0，平行六面体体积 √det G = sin²ε（四面体 sin²ε / 6，球扇形 Ω/3）。共面两步 A_cop = (sin ε, cos ε, 0)、B、C_cop = (−sin ε, cos ε, 0) 的 A_cop·C_cop = cos 2ε，det G 恒为 0：困在一个圆里，没有体积。</li>
+        <li><b>冻结定理。</b>页面引用六条已冻结的 Lean 定理（LEAN ✓）：<a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair" href="#" target="_blank" rel="noopener"><code>unit_perpendicular_pair</code></a>、<a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="#" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a>、<a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>partition_inseparable_iff_kernel</code></a>、<a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula" href="#" target="_blank" rel="noopener"><code>covariant_commutator_formula</code></a>、<a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a>、<a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>finite_layer_projection_escape</code></a>。它们是一般陈述，页面只演示它们在这块原胞上的样子；球面三角、吉拉尔、高斯—博内、贝里相位、旋子代数与 Regge 单纯形是文献结果（ARGUED），“两个投影”的说法与 ε_min 是模型（MODEL）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch09-axes-and-state-addressing.html#sec-finite-axis-words" target="_top">第九章 · 初始结构与有限旋转字</a> · <a href="../../zh/ch10-gram-geometry-and-order.html#sec-spherical-order-and-berry" target="_top">第十章 · 球面转序与贝里立体角</a> · <a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-octant-rotor-holonomy" target="_top">第三十四章 · 八分球面与旋子曲率</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is one right-angled trihedron cell ΔT_ε on the unit comparison sphere S² ⊂ ℝ³. The page is a numerical illustration, not a proof: every number is computed on the spot (NUM), and each theorem is shown only on the one instance written below.</p>
+      <ol>
+        <li><b>The cell.</b> O = (0, 0, 0), the pivot B = e₂, A(ε) = (sin ε, cos ε, 0) in the wall e₂∧e₁ and C(ε) = (0, cos ε, sin ε) in the wall e₂∧e₃. Three flat walls OBA, OBC, OAC and an outward-bulging spherical cap △ABC bound the trihedron cell; A∧B∧C = sin²ε e₁e₂e₃.</li>
+        <li><b>Orthogonal once (down the ridge).</b> Project along OB onto the plane e₁∧e₃: O and B land on one point, the two walls become two legs of length sin ε, A⊥ = (sin ε, 0) and C⊥ = (0, sin ε). The once arc AC has cos c_ε = A·C = cos²ε, c_ε = arccos(cos²ε) = √2 ε (1 − ε²/12 + O(ε⁴)) &lt; √2 ε: flat Pythagoras holds only to first order.</li>
+        <li><b>Orthogonal twice (along the walls).</b> First walk from A to B in the wall e₁∧e₂, turn β = 90° at B, then walk to C in the wall e₂∧e₃. The two wall rotors U₁₂(ε) = cos(ε/2) − sin(ε/2) e₁e₂ and U₂₃(ε) = cos(ε/2) − sin(ε/2) e₂e₃ multiply to U₂₃U₁₂ = cos²(ε/2) − sin(ε/2)cos(ε/2)(e₁e₂ + e₂e₃) − sin²(ε/2) e₁e₃, whose four parts have squares summing to (cos²(ε/2) + sin²(ε/2))² = 1. Swapping the order only flips the sign of the e₁e₃ part: U₂₃U₁₂ − U₁₂U₂₃ = −2 sin²(ε/2) e₁e₃.</li>
+        <li><b>The cap and the flat cut.</b> The flat cut △ABC has interior angles summing to 180°, with cos β_flat = sin²(ε/2) at B, so β_flat &lt; 90°. On the spherical cap β = 90° and α = γ = arctan(sec ε) = π/4 + ε²/4 + O(ε⁴) &gt; 45°, so the excess is Ω(ε) = α + β + γ − π = 2 arctan(tan²(ε/2)) = ε²/2 + ε⁴/12 + O(ε⁶) &gt; 0.</li>
+        <li><b>Two things to keep apart.</b> (a) Exact: carried once round the geodesic triangle A → B → C → A, an arrow turns by Ω(ε); the product of the three edge rotors is U_CA U₂₃ U₁₂ = exp(−(Ω/2) A⋆), and the spin-½ phase is −Ω/2, for every ε in (0, π/2]. (b) Approximate: in U₂₃U₁₂, which walks only the two coordinate walls, the e₁e₃ part −sin²(ε/2) ≈ −ε²/4 agrees with −Ω/2 ≈ −ε²/4 only at the lowest order O(ε²); as ε grows they part (−0.165 against −0.196 at ε = 48°, −0.5 against −π/4 ≈ −0.785 at ε = 90°). At the octant limit ε = 90° all three edges lie in coordinate planes, and the product of the three coordinate rotors is exactly exp(−(π/4) e₂e₃), with Ω = π/2.</li>
+        <li><b>The Gram volume brick.</b> G(ΔT_ε) = [[1, cos ε, cos²ε], [cos ε, 1, cos ε], [cos²ε, cos ε, 1]], det G = (1 − cos²ε)² = sin⁴ε &gt; 0, parallelepiped volume √det G = sin²ε (tetrahedron sin²ε / 6, spherical sector Ω/3). The coplanar two-step A_cop = (sin ε, cos ε, 0), B, C_cop = (−sin ε, cos ε, 0) has A_cop·C_cop = cos 2ε and det G = 0 identically: trapped in one circle, with no volume.</li>
+        <li><b>Frozen theorems.</b> The page cites six frozen Lean theorems (LEAN ✓): <a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair" href="#" target="_blank" rel="noopener"><code>unit_perpendicular_pair</code></a>, <a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="#" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a>, <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>partition_inseparable_iff_kernel</code></a>, <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula" href="#" target="_blank" rel="noopener"><code>covariant_commutator_formula</code></a>, <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a> and <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>finite_layer_projection_escape</code></a>. They are general statements; the page only shows what they look like on this cell. Spherical trigonometry, Girard, Gauss–Bonnet, the Berry phase, the rotor algebra and Regge simplices are literature results (ARGUED); the “two shadows” reading and ε_min are models (MODEL).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch09-axes-and-state-addressing.html#sec-finite-axis-words" target="_top">Chapter 9 · initial structure and finite rotation words</a> · <a href="../../en/ch10-gram-geometry-and-order.html#sec-spherical-order-and-berry" target="_top">Chapter 10 · spherical order and the Berry solid angle</a> · <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-octant-rotor-holonomy" target="_top">Chapter 34 · the octant and rotor curvature</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
