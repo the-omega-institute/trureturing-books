@@ -2,7 +2,6 @@
 (() => {
   'use strict';
   const { kit, L } = TRV, { v3, fix } = kit, $ = id => document.getElementById(id);
-  if (matchMedia('(prefers-color-scheme: light)').matches) document.documentElement.dataset.trPalette = 'paper';
   const PI = Math.PI, TURN = 2 * PI, N = [0, 0, 1];
   const CHART_SCALE = 0.16, LIFT = 0.8, FLOOR = -1.15;
   const POWER = Math.log((28.4 - 1) / (2 / Math.tan(0.06) - 1)) / Math.log(0.85);
@@ -31,7 +30,7 @@
   let clock, cards, fields, frame, bounds, pills = [], transition;
   const options = { canvas: $('cv'), yaw: -0.28, pitch: 0.43, radius: 0.15, wheel: false, onChange: () => paint() };
   const sc = kit.solid($('stage'), options);
-  const paint = kit.painter(draw, [$('stage')]);
+  const paint = kit.painter(draw, [$('stage'), $('plot')]);
   const source = (theta, phi) => v3.sph(theta, phi);
   const project = p => [p[0] / (1 - p[2]), p[1] / (1 - p[2]), 0];
   const lifted = p => v3.add(p, [0, 0, LIFT]);
@@ -72,13 +71,26 @@
     }
   });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
+  // 抽屉在散文之后镜像右栏的全部依据框；开放问题只在抽屉里。
+  $('drawerEvidence').append(...[...$('evidence').querySelectorAll(':scope > .lean')].map(node => node.cloneNode(true)));
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
+  const keys = items => items.map(([c, t]) => `<span class="key"><i class="sw ${c}"></i>${t}</span>`).join('');
 
   function text(G) {
     $('hudBig').textContent = L(...TITLES[S.scene]);
-    $('hudSub').textContent = `τ = ${fix(S.tau, 2)} · ψ = ${fix(S.psi, 0)}° · δ_blind = ${fix(S.delta_blind, 2)} rad`;
-    for (const [id, value] of Object.entries({ roTheta: `${fix(G.theta, 2)} rad`, roMu: `${fix(G.mu, 2)}×`,
-      roSpanMax: `${fix(G.spanMax, 1)}×`, roSpan: `${fix(G.span, 1)}×`, roSeparation: fix(G.separation, 2), roGap: `${fix(100 * G.gap, 2)}% > 0` })) $(id).textContent = value;
+    const read = { roTheta: `${fix(G.theta, 2)} rad`, roMu: `${fix(G.mu, 2)}×`,
+      roSpanMax: `${fix(G.spanMax, 1)}×`, roSpan: `${fix(G.span, 1)}×`, roSeparation: fix(G.separation, 2), roGap: `${fix(100 * G.gap, 2)}% > 0` };
+    for (const [id, value] of Object.entries(read)) $(id).textContent = value;
+    // 舞台说明只写这张卡在图上看得见的那几个数，完整读数在右栏。
+    const sub = {
+      'blindspot-divergence': `θ = ${read.roTheta} · μ(θ) = ${read.roMu} · 2R(δ) = ${read.roSpanMax}`,
+      'compact-homotopy': `τ = ${fix(S.tau, 2)} · H(τ) = ${read.roSpan} · 2R(δ) = ${read.roSpanMax}`,
+      'oracle-collapse': `ψ = ${fix(S.psi, 0)}° · r(ψ) = ${read.roSeparation} · δ_blind = ${fix(S.delta_blind, 2)} rad`,
+      'oracle-chase': `ψ = ${fix(S.psi, 0)}° · r(ψ) = ${read.roSeparation} · Δ = ${read.roGap}`,
+      'tetralemma-rest': `τ = ${fix(S.tau, 2)} · ψ = ${fix(S.psi, 0)}° · δ_blind = ${fix(S.delta_blind, 2)} rad`
+    };
+    $('hudSub').textContent = sub[S.scene];
+    $('pillTheta').textContent = read.roTheta; $('pillSpan').textContent = read.roSpanMax;
     const legend = [['cy', L('有限本源弧', 'Finite source arc')], ['am', L('盲点／透视坐标', 'Aperture / chart')],
       ['vi', L('切面／同伦', 'Slice / homotopy')], [G.collapsed ? 'cy' : 'mg', G.collapsed ? L('折叠重合', 'Folded coincidence') : L('追逐／封顶缺口', 'Pursuit / cap gap')]];
     $('legend').innerHTML = legend.map(([c, t]) => `<span><i class="sw ${c}"></i>${t}</span>`).join('');
@@ -167,7 +179,43 @@
       }), { color: P.magenta, width: 1.9, alpha: 0.75 * emphasis });
       sc.circle([0, 0, FLOOR - 0.012], N, groundRadius + 0.20 * G.separation, { color: P.magenta, width: 2.5, alpha: S.scene === 'oracle-chase' ? 0.90 : 0.40 });
     }
-    sc.end(); drawPills(G, P, pole);
+    sc.end(); drawPills(G, P, pole); drawPlot(G, P);
+  }
+  // 条带小图：沿这张卡唯一在变的那个量，画出它驱动的曲线；琥珀珠是当前值。
+  function drawPlot(G, P) {
+    const cv = $('plot'), narrow = cv.clientWidth < 420, pad = [42, 14, 10, 22];
+    const plotKind = S.scene === 'compact-homotopy' ? 'homotopy' : S.scene.startsWith('oracle') ? 'slice' : 'divergence';
+    let title, meta, key;
+    if (plotKind === 'divergence') {
+      const g = kit.plot(cv, { x: [0, 1.9], y: [0.4, 1000], pad, logY: true });
+      g.axes({ xTicks: narrow ? [0, 0.65, 1.9] : [0, 0.65, 1, 1.5, 1.9], yTicks: [[1, '1×'], [10, '10×'], [100, '100×'], [1000, '1000×']] });
+      g.rect(0, 0.4, S.delta_blind, 1000, P.magenta, { alpha: 0.16 });
+      const thetas = samples(220, q => S.delta_blind + (1.9 - S.delta_blind) * q);
+      g.line(thetas.map(t => [t, 1 / Math.tan(t / 2)]), P.ink, { width: 1.8, alpha: 0.85 });
+      g.line(thetas.map(t => [t, 1 / (1 - Math.cos(t))]), P.magenta, { width: 2 });
+      g.vline(G.theta, P.amber, { alpha: 0.6, dash: [3, 4] });
+      g.dot(G.theta, 1 / Math.tan(G.theta / 2), P.amber, 3.2); g.dot(G.theta, G.mu, P.amber, 4.2);
+      g.dot(S.delta_blind, G.rimRadius, P.ink, 3, { ring: true });
+      title = L('越靠近北极，坐标放大得越快', 'Closer to the pole, the chart stretches faster');
+      meta = L('NUM · 横轴 θ（rad）· 对数纵轴', 'NUM · θ (rad) across · log scale'); key = [['ik', 'R(θ) = cot(θ/2)'], ['mg', 'μ(θ) = 1/(1−cos θ)'], ['am', `θ = ${fix(G.theta, 2)}`]];
+    } else if (plotKind === 'homotopy') {
+      const top = Math.ceil((G.spanMax * 1.12) / 10) * 10, g = kit.plot(cv, { x: [0, 1], y: [0, top], pad });
+      g.axes({ xTicks: [0, 0.5, 0.85, 1], yTicks: [[1, '1×'], [Math.round(top / 2), `${Math.round(top / 2)}×`], [top, `${top}×`]], xLabel: 'τ' });
+      g.hline(G.spanMax, P.ink, { dash: [4, 4], alpha: 0.55 });
+      g.line(samples(200, q => [q, 1 + (G.spanMax - 1) * q ** POWER]), P.violet, { width: 2.2 });
+      g.vline(S.tau, P.amber, { alpha: 0.6, dash: [3, 4] }); g.dot(S.tau, G.span, P.amber, 4.2);
+      title = L('同伦把展幅从 1× 拉到 2R(δ)', 'The homotopy stretches the span from 1× to 2R(δ)');
+      meta = 'MODEL · NUM'; key = [['vi', 'H(τ)'], ['ik', `2R(δ) = ${fix(G.spanMax, 1)}×`], ['am', `τ = ${fix(S.tau, 2)}`]];
+    } else {
+      const g = kit.plot(cv, { x: [0, 90], y: [0, 0.85], pad });
+      g.axes({ xTicks: [0, 30, 65, 90], yTicks: [0, 0.4, 0.772], yFmt: v => fix(v, v === 0 ? 0 : 2), xLabel: 'ψ (°)' });
+      g.line(samples(180, q => [90 * q, 0.772 * Math.sin(q * PI / 2)]), P.magenta, { width: 2 });
+      g.dot(0, 0, P.cyan, 4.2);
+      g.vline(S.psi, P.amber, { alpha: 0.6, dash: [3, 4] }); g.dot(S.psi, G.separation, P.amber, 4.2);
+      title = L('切面倾角越大，图示分离越大', 'The steeper the slice, the wider the drawn separation');
+      meta = 'MODEL'; key = [['mg', 'r(ψ) = 0.772 sin ψ'], ['cy', 'r(0) = 0'], ['am', `ψ = ${fix(S.psi, 0)}°`]];
+    }
+    $('plotTitle').textContent = title; $('plotMeta').innerHTML = `${meta} · ${keys(key)}`;
   }
   function drawPills(G, P, pole) {
     const cv = sc.overlay(), dpr = TRV.fitCanvas(cv), ctx = cv.getContext('2d');

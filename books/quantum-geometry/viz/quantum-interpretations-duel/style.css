@@ -5,9 +5,8 @@
 #cv.grabbing { cursor: grabbing; }
 .chip { text-transform: none; }
 
-/* a wider stage on desktop: slimmer side columns and a lower strip */
+/* a lower strip on desktop; the three columns are the shared lab grid of ../assets/theme.css */
 @media (min-width: 1081px) {
-  .app.lab { grid-template-columns: minmax(232px, 268px) minmax(0, 1fr) minmax(252px, 300px); }
   .lab .strip { height: 146px; }
 }
 

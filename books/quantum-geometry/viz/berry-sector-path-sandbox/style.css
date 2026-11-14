@@ -1,61 +1,32 @@
-/* 球面与数学条带共用一个可引用的舞台。 */
-.app.lab { grid-template-columns: minmax(238px, 268px) minmax(0, 1fr); }
-.lab .center { grid-template-rows: minmax(560px, 1fr) auto; }
-.presets.cards { grid-template-columns: minmax(0, 1fr); }
-.preset { padding: 9px 11px; border-radius: 7px; }
+/* 球面舞台的局部样式；三栏版式与颜色由共享主题提供。 */
 .field[hidden], [data-scenes][hidden] { display: none; }
 #controls input[type=range]::-webkit-slider-thumb { border-color: var(--amber); box-shadow: 0 0 10px var(--amber); }
 #controls input[type=range]::-moz-range-thumb { border-color: var(--amber); box-shadow: 0 0 10px var(--amber); }
-#stage { container-type: inline-size; touch-action: none; cursor: grab; }
-#stage:active { cursor: grabbing; }
-.hud-tl { left: 18px; top: 15px; max-width: calc(100% - 36px); pointer-events: none; }
-.hud-tl .big { color: var(--sigma); font-size: 16px; }
-.hud-tl .big, .hud-tl .sub, .tau, .plot-head h2 { text-transform: none; }
-.hud-tl .sub { line-height: 1.5; letter-spacing: 0; color: var(--ink); font-size: 12px; }
-#plotBand { left: 14px; right: 14px; bottom: 12px; display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 6px; pointer-events: none; }
-#legend, #plotKey { display: flex; flex-wrap: wrap; gap: 3px 14px; font: 10px var(--font-data); line-height: 1.5; }
-#legend span, #plotKey span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
-.math-panel { display: flex; flex-direction: column; height: clamp(148px, 24vh, 200px); background: color-mix(in srgb, var(--stage) 94%, transparent); border: 1px solid var(--panel-edge); border-radius: 8px; padding: 8px 10px 6px; min-width: 0; min-height: 0; }
-.plot-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1px 10px; align-items: baseline; }
-.plot-head h2 { font: 600 12px var(--font-display); margin: 0; color: var(--ink); letter-spacing: 0.02em; }
-.plot-head span { font: 10px var(--font-data); color: var(--dim); }
-#plot { width: 100%; flex: 1; min-height: 54px; display: block; }
-#plotKey { font-size: 9px; gap: 2px 12px; }
-.sw.cy { background: var(--cyan); } .sw.mg { background: var(--magenta); }
-.sw.vi { background: var(--violet); } .sw.am { background: var(--amber); }
-.sw { width: 15px; height: 2px; display: inline-block; flex: none; }
-#values dt { font-size: 11px; overflow-wrap: anywhere; }
-#values dd { font-size: 13px; font-variant-numeric: tabular-nums; }
+.stage:not(.still) #cv { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active { cursor: grabbing; }
+#stage { container-type: inline-size; }
+.tagline em { color: var(--cyan); }
+.hud-tl .big { color: var(--sigma); }
+.hud-tl .big, .hud-tl .sub, #plotTitle, #plotMeta, .tau, .pill { text-transform: none; }
+.hud-tl .sub { line-height: 1.45; }
+#plot { touch-action: none; }
+#plotMeta .key { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+#plotMeta .key + .key { margin-left: 10px; }
+#plotMeta .sw { width: 13px; height: 2px; }
+#values dt { overflow-wrap: anywhere; }
+#values dd { font-variant-numeric: tabular-nums; }
 #values .mg dd { color: var(--magenta); } #values .cy dd { color: var(--cyan); }
 #values .vi dd { color: var(--violet); } #values .am dd { color: var(--amber); }
-.sheet .row { align-items: flex-start; gap: 10px; }
-#drawerClose { flex: none; }
 .viz-claim-lean .lean { border-color: var(--ok); }
-:root[data-thumb-mode] #plotBand { display: none; }
-:root[data-shot] .math-panel { height: clamp(148px, 28vh, 238px); }
-:root[data-embed] .lab .center { grid-template-rows: minmax(min-content, clamp(360px, calc(100vh - 140px), 560px)) auto; }
-:root[data-embed][data-figure] .lab .center { grid-template-rows: minmax(0, 1fr) auto; }
-@media (max-height: 680px) {
-  @container (min-width: 620px) {
-    #plotBand { left: auto; width: 42%; top: var(--plot-top, 88px); bottom: 12px; }
-    .math-panel { height: auto; flex: 1; }
-  }
-}
-@media (max-width: 1080px) {
-  .app.lab { grid-template-columns: minmax(0, 1fr); }
-  .lab .center { grid-template-rows: minmax(min-content, max(540px, 72vh)) auto; }
-}
+.sheet .row { align-items: flex-start; }
+.sheet .evidence-title { margin-top: 14px; font-size: 13px; }
+#drawerClose { flex: none; }
 @container (max-width: 620px) {
-  .hud-tl { left: 12px; top: 12px; max-width: calc(100% - 24px); }
-  .hud-tl .big { font-size: 12px; letter-spacing: 0.03em; }
-  .hud-tl .sub { font-size: 10px; }
-  #plotBand { left: 9px; right: 9px; bottom: 9px; gap: 5px; }
-  .math-panel { padding: 6px 6px 5px; height: 156px; }
-  .plot-head h2 { font-size: 11px; }
-  #legend { font-size: 9px; gap: 3px 10px; }
-  #plotKey { font-size: 8px; gap: 2px 9px; }
+  .hud-tl { left: 12px; max-width: calc(100% - 24px); }
+  .hud-tl .big { font-size: 12px; letter-spacing: 0.06em; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.35; }
+  .hud-bl { left: 12px; right: 12px; bottom: 9px; gap: 3px 10px; font-size: 10px; }
 }
 @media (max-width: 520px) {
-  .logo { font-size: clamp(18px, 5vw, 25px); }
-  .tagline { font-size: 11px; }
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 65vh)) auto auto; }
 }

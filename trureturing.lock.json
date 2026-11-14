@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "0ec20c2954b1266b48e12b054c3bfb75a63ea7bc",
-  "pinned_at": "2026-11-14T23:16:30Z",
+  "commit": "f010e3713174c4df2b28c8f8c4d9ff3c41e46a05",
+  "pinned_at": "2026-11-14T23:48:40Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",

@@ -13236,7 +13236,7 @@
       "citations": [
         {
           "file": "ch11-pulses-and-virtual-z.md",
-          "line": 227,
+          "line": 371,
           "id": "cor-frame-pullback-readout",
           "via": "environment"
         },
@@ -13386,7 +13386,7 @@
       "citations": [
         {
           "file": "ch11-pulses-and-virtual-z.md",
-          "line": 150,
+          "line": 294,
           "id": "prop-ordered-pulse-error",
           "via": "environment"
         },

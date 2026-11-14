@@ -131,6 +131,150 @@ $$
 **面积 $\pi/2$，转四分之一圈。** $10\,\mathrm{MHz}$、$25\,\mathrm{ns}$ 的方波：左边品红的面积是 $\pi/2$；右边琥珀色的态从北极出发，绕紫色的 $X$ 轴转过同样大小的品红扇形，停在赤道上，$P(0) = 1/2$。面积律是文献结果（[@rem-rwa-pulse-area-literature]），未在本书形式化。
 :::
 
+### 11.2.1 快振项如何抵消：从实际路径到积分作用量 {#sec-rwa-integral-action}
+
+面积律精确描述的是固定轴的平均模型。实际实验室路径与它相差多少，还须估计被略去的项。下面采用 Burgarth、Facchi、Gramegna 与 Yuasa 的 *One bound to rule them all: from Adiabatic to Zeno*（[arXiv:2111.08961v2](https://arxiv.org/abs/2111.08961v2)，Lemma 1，式 2.3–2.6；§3.3.1，式 3.27–3.34）的积分作用量方法。该节的包络示例取零相位；这里写出严格共振、任意固定相位的应用推导，仍属文献方法的数学阐释，**不作为本书新增的 Lean 验证条目，也不构成整个硬件控制过程的形式化证明**。
+
+**对象与假设。** 取 $\hbar=1$，$\omega=\omega_0=\omega_d>0$，实常数相位 $\varphi$，$T\geq0$。实函数 $\Omega,\Omega'$ 在 $[0,T]$ 上连续，且在 $(0,T)$ 内 $d\Omega/dt=\Omega'$；设 $M\geq0$ 满足对所有 $s\in[0,T]$ 都有 $|\Omega(s)|\leq M$。这里仅要求闭区间上的连续性与内部导数关系，不要求区间外的延拓可微。以下矩阵属于 $M_2(\mathbb C)$，所有矩阵范数均为谱范数，即欧氏向量范数诱导的算子范数。实验室模型为
+
+$$
+H_{\mathrm{lab}}(s)=\frac{\omega}{2}Z
+  +\Omega(s)\cos(\omega s+\varphi)X.
+$$
+
+**先构造原路径。** 在矩阵 Banach 空间上取恒等收缩半群 $S(t)A=A$，以及左乘系数 $B_H(s)A=-iH(s)A$。连续的 $H$ 在有限闭区间上有界，因此原始非自治 Dyson–Phillips 构造适用。其源码与适用边界见[所钉源码库](trureturing:)中的 `D5/S3/Quantum/Analysis/NonautonomousDysonPhillips.lean`（`evolution`、`nonautonomous_bounded_perturbation`）及 `Blueprint/D5/S3/Quantum/Analysis/NonautonomousDysonPhillips.md`。具体取
+
+$$
+\begin{aligned}
+F_0(t)&=I,\\
+F_{n+1}(t)&=-i\int_0^t H(s)F_n(s)\,ds,\\
+U_H(t)&=\sum_{n=0}^{\infty}F_n(t)
+       =\operatorname{evolution}(S,B_H,t,0)I.
+\end{aligned}
+$$
+
+这些是保留左乘顺序的矩阵值 Bochner 积分。若 $\norm{H(s)}\leq K_H$，则 $\norm{F_n(t)}\leq(K_Ht)^n/n!$，级数一致收敛，给出唯一连续温和路径
+
+$$
+U_H(t)=I-i\int_0^t H(s)U_H(s)\,ds.
+$$
+
+微积分基本定理给出内部导数 $U_H'=-iHU_H$。厄米性 $H^*=H$ 随即给出 $(U_H^*U_H)'=0$；结合初值与连续性，有 $U_H^*U_H=I$，有限方阵因而幺正。此处的微分、厄米性与物理模型辨认是对上述存在唯一性供应者的应用说明。令 $U_{\mathrm{lab}}=U_{H_{\mathrm{lab}}}$；实验室生成元在不同时刻一般不对易，不能把这条路径替换成积分后直接取矩阵指数。
+
+**实际旋转路径与平均路径。** 令 $V(t)=e^{+i\omega tZ/2}$、$U_2(t)=V(t)U_{\mathrm{lab}}(t)$，由乘积求导与 $VXV^*=\cos(\omega t)X-\sin(\omega t)Y$ 得
+
+$$
+\begin{aligned}
+H_1(s)=H_{\mathrm{avg}}(s)
+ &=\frac{\Omega(s)}2(\cos\varphi X+\sin\varphi Y),\\
+\Delta(s)
+ &=\frac{\Omega(s)}2
+   [\cos(2\omega s+\varphi)X-\sin(2\omega s+\varphi)Y],\\
+H_2(s)&=V(s)H_{\mathrm{lab}}(s)V(s)^*\\
+ &\quad+iV'(s)V(s)^*\\
+ &=H_1(s)+\Delta(s),\\
+ U_2'&=-iH_2U_2.
+\end{aligned}
+$$
+
+这里 $H_1$ 是上段面积律中略去快振项后的有效生成元，$H_2$ 则保留了它。两者均连续、厄米。记 $N_\varphi=\cos\varphi X+\sin\varphi Y$、$\theta(t)=\int_0^t\Omega(s)\,ds$，则候选路径
+
+$$
+U_1(t)=\exp[-i\theta(t)N_\varphi/2]
+$$
+
+满足 $U_1(0)=I$、$U_1'=-iH_1U_1$。积分后由温和唯一性，$U_1$ 正是同一原始构造对 $H_1$ 给出的路径。这说明面积指数确实辨认了平均模型的演化，而不是把它假设为实验室解。$U_1,U_2$ 均幺正且从 $I$ 出发。
+
+**可复用的积分作用量恒等式。** 对任意两条连续厄米生成元及其归一化演化路径，定义
+
+$$
+P(t)=\int_0^t[H_2(s)-H_1(s)]\,ds.
+$$
+
+固定 $t$，对 $G_t(s)=U_1(t)U_1(s)^*[I+iP(s)]U_2(s)$ 求导，利用 $P'=H_2-H_1$，得到
+
+$$
+G_t'(s)=-U_1(t)U_1(s)^*
+  [H_1(s)P(s)-P(s)H_2(s)]U_2(s).
+$$
+
+端点为 $G_t(0)=U_1(t)$ 与 $G_t(t)=[I+iP(t)]U_2(t)$。积分并移项即得文献 Lemma 1 的恒等式，乘积顺序必须保留：
+
+$$
+\begin{aligned}
+U_2(t)-U_1(t)
+ &=-iP(t)U_2(t)\\
+ &\quad-\int_0^t U_1(t)U_1(s)^*
+   [H_1(s)P(s)-P(s)H_2(s)]U_2(s)\,ds.
+\end{aligned}
+$$
+
+幺正左右乘不改变谱范数，三角不等式于是给出
+
+$$
+\begin{aligned}
+\norm{U_2(t)-U_1(t)}
+ &\leq\norm{P(t)}\\
+ &\quad+\int_0^t\norm{P(s)}
+    [\norm{H_1(s)}+\norm{H_2(s)}]\,ds.
+\end{aligned}
+$$
+
+**端点与包络变化量。** 对本节的脉冲，$P(t)=\int_0^t\Delta(s)\,ds$。令
+
+$$
+\begin{aligned}
+q(t)&=\int_0^t\Omega(s)e^{i(2\omega s+\varphi)}\,ds,\\
+P(t)&=\frac12\begin{pmatrix}0&q(t)\\\overline{q(t)}&0\end{pmatrix},\\
+\norm{P(t)}&=\frac{|q(t)|}{2}.
+\end{aligned}
+$$
+
+最后的范数关系由 $P^*P=|q|^2I/4$ 得到。对标量振荡积分分部积分，明确保留两个端点：
+
+$$
+\begin{aligned}
+q(t)&=\frac{\Omega(t)e^{i(2\omega t+\varphi)}
+             -\Omega(0)e^{i\varphi}}{2i\omega}\\
+ &\quad-\frac1{2i\omega}\int_0^t
+                  \Omega'(s)e^{i(2\omega s+\varphi)}\,ds,\\
+\norm{P(t)}
+ &\leq\frac{|\Omega(t)|+|\Omega(0)|
+                  +\int_0^t|\Omega'(s)|\,ds}{4\omega}\\
+ &\leq\frac{2M+\int_0^T|\Omega'(s)|\,ds}{4\omega}
+   =:K_T.
+\end{aligned}
+$$
+
+固定轴 Pauli 矩阵的谱范数为 $1$，所以 $\norm{H_1(s)}=\norm{\Delta(s)}=|\Omega(s)|/2$，且 $\norm{H_2(s)}\leq|\Omega(s)|$。代入积分作用量不等式，并用非负积分从 $t$ 放大到 $T$，对**每个** $t\in[0,T]$ 得到
+
+$$
+\begin{aligned}
+&\norm{U_2(t)-U_1(t)}\\
+&\quad\leq K_T\left(1+\frac32\int_0^T|\Omega(s)|\,ds\right)\\
+&\quad=\frac{2M+\int_0^T|\Omega'(s)|\,ds}{4\omega}\\
+&\qquad\times\left(1+\frac32\int_0^T|\Omega(s)|\,ds\right).
+\end{aligned}
+$$
+
+这也等于对实验室路径 $U_{\mathrm{lab}}(t)$ 与 $V(t)^*U_1(t)$ 的同一范数误差估计。**抵消发生在积分中：** $\norm{\Delta(s)}=|\Omega(s)|/2$ 不随 $\omega$ 减小，积分原函数却由端点与包络总变化量控制为 $O(1/\omega)$。因此固定包络与有限窗口后增大载频可控制此模型的近似误差；面积相等本身不能确定实际实验室传播子。
+
+**手算核对与边界。** 选定时间单位，并以其倒数归一化角频率后，取 $T=1$、$\Omega(s)=1+s$、$\Omega'(s)=1$、$M=2$。此时
+
+$$
+\begin{aligned}
+&\int_0^1|\Omega'(s)|\,ds=1,\\
+&\int_0^1|\Omega(s)|\,ds=\frac32,\\
+&K_1\left(1+\frac32\int_0^1|\Omega(s)|\,ds\right)\\
+&\quad=\frac5{4\omega}\left(1+\frac94\right)
+  =\frac{65}{16\omega}.
+\end{aligned}
+$$
+
+该界适用于全部 $t\in[0,1]$ 与任意固定 $\varphi$。在物理单位中，$\omega,\Omega,M$ 是角频率，$\Omega'$ 的量纲是时间的负二次方；$\int|\Omega|$ 无量纲，$\int|\Omega'|$ 与 $M$ 同量纲，误差界因而无量纲，不能把以 Hz 表示的频率直接代入角频率位置。若 $\Omega\equiv0$，则 $U_2=U_1=I$；对任意允许的包络，$t=0$ 也精确相等。这些是恒等情形，不说明用粗略 $M$ 得到的上界是紧的。
+
+这里仍是孤立、严格共振的二能级模型。含切换角点或跳变的方波路径、相位调制、失谐及高能级泄漏不在这组 $C^1$ 比较假设内；理想固定轴面积律可以适用于更一般的可积包络，不能据此省去上述误差比较的正则性前提。本节估计的是两个幺正传播子的谱范数距离，与下一节 `pulse0` 的弗罗贝尼乌斯范数前提下的实部迹误差不同，也不是实验门不保真度。物理建模的文献身份仍见 [@rem-rwa-pulse-area-literature] 与 [@rem-pulses-literature]。
+
 ## 11.3 有序脉冲与误差界 {#sec-ordered-pulse-control}
 
 在上一节的共振脉冲面积公式里，我们享受了一项至关重要的便利：单段脉冲内部相位 $\varphi$ 固定，生成元在时间上处处对易。然而，一旦我们在电路里**依次串接三个不同方向的脉冲生成元** $A, B, C$（比如为了合成多轴旋转或探测三阶非对易几何响应），指数生成元在有限步长 $t > 0$ 下的高阶非对易展开项就会浮现出来。

@@ -2,48 +2,48 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "010dc9e135a0d76d9a5cec9ee84dce8aeed07e5ab348b93ef77688f862e3dcb8"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "6cd699b3b41b2931a543b766fcaa6e67b1ea17de1465bb9b1daa5f34767e6882"
     },
     "fig-blindspot-divergence.zh.jpg": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "7d5df257f1439eb18c3ff903e4a9cbed26b37c2e772d1b03d068a687921a2878"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "b54e098c70d37fa0a270f5d9c37d060666ea1ec8ac15de592e40302d6d17d796"
     },
     "fig-compact-homotopy.zh.jpg": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "2f1e5aa6314d2ef535530ef16e655edadad64ad70bf50439825146398f1eeefd"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "de6a92012c252f8883b2cd600b9603457f2d9efb843be96c2b5474b3f3b2c808"
     },
     "fig-oracle-collapse.zh.jpg": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "ab7386e7ad67c5ff40e9e556ddb028d95cc836b5a6a8aed78cc8f4b249be5c92"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "286d41f6408124c35958acb9d1d2691d6dc255eda983e6a7cd97b34193aa8678"
     },
     "fig-oracle-chase.zh.jpg": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "7b4de5c5784b405a329b9f7a438dd7ebaab6e24e6a0eddcd71b3e4a00dd9c798"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "c76e64235477339ca8d1c3d76f342df751d9e5a90ef16fd00da7a0c6d752e2e7"
     },
     "fig-tetralemma-rest.zh.jpg": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "477b75558483089603eed49941c029f0193203032ed876bd774875129ca0fff6"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "0cbaf4034d5b6fdbc6ed50151cb615f7a7fd1e7338a32d19584217e69e2b22b1"
     },
     "fig-blindspot-divergence.en.jpg": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "5d99ab72035879f02ed7a9ee086885c2a31eedcf3b8519b1f3853350040f8b4d"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "ee172a778724c42424baa00bc10ae56c0a9e3c0ed41ca24b43faa0e524b4400a"
     },
     "fig-compact-homotopy.en.jpg": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "465497de35b51d7ce9c32b15a15f9c6af18ba34eab965cf90b670b4bb004a501"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "6992897866410b988733a0430a28123913ff5ccbe017cd0957df88ff78c17e64"
     },
     "fig-oracle-collapse.en.jpg": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "b38866c2f81e6b3d81655a8d1b5c8c7fcfa136e3c53fb843e46b70fed4c82492"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "7969609751212d434261e1ae9248d28c19e8382343739ee5e644be4323f3caa5"
     },
     "fig-oracle-chase.en.jpg": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "36226061abc57f265f28b05cc801dfb3bf850bad3fb07c5e69ae38140d22ad72"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "13bae9fa915d248db743aaf00095cc3771171e68b7d7111e8a193dad86348c88"
     },
     "fig-tetralemma-rest.en.jpg": {
-      "input": "cfe0e47f49c79dc4c3816acc3afbbe0aff34f79e1953d181523461e38c850f67",
-      "output": "9a871e0fd3c6fa49618c445f93c07237ef05991c34ce41b164a161c95e9b7b9b"
+      "input": "d94ca6f88f50f5746b00a6ef86474c95218aba3848b919bf794eee1d616d0339",
+      "output": "e0d866bdc4d466fbeb6566abfa00466f94f6f1812353c76227a98c4a518d9a89"
     }
   }
 }
