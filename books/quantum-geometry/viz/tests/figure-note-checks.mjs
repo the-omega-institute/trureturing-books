@@ -25,7 +25,9 @@ const pages = [
   ['fixed-point-convergence', 'golden'],
   ['gram-causal-elliptope', 'elliptope'],
   ['spherical-degeneracy-radar', 'meridian'],
-  ['pisot-clifford-rauzy-sandtable', 'zeckendorf']
+  ['pisot-clifford-rauzy-sandtable', 'zeckendorf'],
+  ['comparison-oisc-engine', 'oisc'],
+  ['spherical-trihedron-cell', 'cell']
 ];
 
 /** Read in the page: the note of the current card, its glyphs, and the regions of the cited frame. */

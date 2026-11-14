@@ -331,11 +331,11 @@ $$
 
 1. **纯态两角参数化与单比特门三参数欧拉分解**（参见 M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary Ed., Cambridge University Press, 2010, §1.2 与 §4.2）：两角公式 $\vv{r}(\theta, \varphi) = (\sin\theta\cos\varphi, \sin\theta\sin\varphi, \cos\theta)$ 与 $\lvert\psi\rangle = \cos(\theta/2)\lvert 0\rangle + e^{i\varphi}\sin(\theta/2)\lvert 1\rangle$ 仅参数化**单比特纯态射线**（从固定北极出发的轨道点）。若要分解任意单比特幺正门 $U \in U(2)$，除将北极送往目标轴的两个角度外，还必须包含绕轴自转的第三个欧拉角以及可能的全局相位因子 $e^{i\alpha}$（即 $U = e^{i\alpha} R_z(\beta) R_y(\gamma) R_z(\delta)$）。
 2. **有限旋转字存在性与门计数复杂度的严格区分**：[@thm-two-axis-finite-word] 仅证明在允许连续轴圆 $\operatorname{axisCircle}(a), \operatorname{axisCircle}(b)$ 的前提下存在某个有限乘积列表表示目标旋转 $R \in \mathrm{SO}(3)$。这一纯存在性定理不给出最短字长上界，不涉及有限离散门集编译（如 Solovay–Kitaev 定理），更不能等同于对计算复杂性问题 $\mathrm{P}$ 与 $\mathrm{NP}$ 的判定。
-3. **有理六轴覆盖的文献来源与几何范畴**：[@prop-rational-six-axis-cover] 中的显式有理六轴构造源自对 D. Feldman & A. Wilce（arXiv:2608.13320v1, Question 3）相关问题的形式化解答，正如源码模块所载，本书不主张该六轴构造的原始发现权。同时，[@prop-rational-six-axis-cover] 与 [@cor-six-colors-necessary] 讨论的是**不含正交向量对的球面开子集覆盖**（$\operatorname{OrthogonalityFree}$），而非微分拓扑中球面切丛的全局光滑标架问题——后者属于下一章将专门剖析的毛球定理与霍普纤维丛范畴。
+3. **有理六轴覆盖的文献来源与几何范畴**：[@prop-rational-six-axis-cover] 中的显式有理六轴构造源自对 D. Feldman & A. Wilce（arXiv:2608.13320v1, Question 3）相关问题的形式化解答，正如源码模块所载，本书不主张该六轴构造的原始发现权。同时，[@prop-rational-six-axis-cover] 与 [@cor-six-colors-necessary] 讨论的是**不含正交向量对的球面开子集覆盖**（$\operatorname{OrthogonalityFree}$），而非微分拓扑中球面切丛的全局光滑标架问题——后者属于[下一章](ch10-gram-geometry-and-order.md)将专门剖析的毛球定理与霍普纤维丛范畴。
 :::
 
 ::: {.viz src="two-angle-addressing" height="560"}
 **两角寻址与旋转字的完整实验室。** 拖动白色的目标圈、改两根紫色转轴的夹角 $\alpha$，看琥珀色的点按怎样的旋转字走过去，青色虚线圈如何限制它每一步能离开北极多远；换到“覆盖”场景，在同一颗球上比较六根有理轴与三根坐标轴的 $45^\circ$ 球冠。绿色框只给 [@thm-two-axis-finite-word]、[@prop-rational-six-axis-cover] 与 [@cor-six-colors-necessary]；旋转字的构造与球面取样是页面的数值演示。
 :::
 
-现在，我们已经能够用三元正交轴定位球面上的任意方向，并用六块无正交盲区的有理开集覆盖整颗 $S^2$。然而，一旦我们在球面上真正连续走动起来，一个困扰了物理学界整整一百年的幽灵立刻迎面扑来：**既然在球面上“先绕 $X$ 转、再绕 $Y$ 转”和“先绕 $Y$ 转、再绕 $X$ 转”会停在完全不同的终点（$R_x R_y \neq R_y R_x$），为什么作者却说“量子的本质是两两比较，永远一致，顺序无关”？** 让我们翻开[下一章](ch10-gram-geometry-and-order.md)，揭开格拉姆矩阵与贝里相位的几何谜底。
+现在，我们已经能够用三元正交轴定位球面上的任意方向，并用六块无正交盲区的有理开集覆盖整颗 $S^2$（而到了[第 34 章 §34.4](ch34-orthogonality-degeneracy-and-observer-position.md#sec-ch34-infinitesimal-spherical-trihedron)，我们还将揭示本章的“正交一次”与“正交两次”实为球面上一枚极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的两种正交投影）。然而，一旦我们在球面上真正连续走动起来，一个困扰了物理学界整整一百年的幽灵立刻迎面扑来：**既然在球面上“先绕 $X$ 转、再绕 $Y$ 转”和“先绕 $Y$ 转、再绕 $X$ 转”会停在完全不同的终点（$R_x R_y \neq R_y R_x$），为什么作者却说“量子的本质是两两比较，永远一致，顺序无关”？** 让我们翻开[下一章](ch10-gram-geometry-and-order.md)，揭开格拉姆矩阵与贝里相位的几何谜底。

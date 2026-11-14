@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//CMP · Cosmic comparison engine: sameness, difference, Gram geometry and new axes">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//CMP 宇宙单指令比较引擎 · 求同生点，存异生面，残差开维</title>
+<meta name="description" content="四个场景、一条时间轴：两个没有坐标的八槽 ±1 字逐槽比较，相同的槽累成同 s = cos θ，不同的槽撑开异 a = sin θ，平行四边形律给出两部分之和恒为 4；在 a ≠ 0 时两向比较的乘积 s² − κa² 只在 κ = −1 处落在 (1, 0)（从而对一切比较角保住单位预算）；八个字两两比较 28 次，半正定的格拉姆表经谱分解显影为三维的盒子，d² = 2(1 − G)；公平平方把 |u|²|v|² 拆成同² 与楔²，预算圆改写成闵可夫斯基间隔与光锥；装不下的正交残差立为新轴，有限位宽的前缀查表留下逃逸对，自比较 xₙ₊₁ = cos xₙ 收向 θ* ≈ 0.739。Four scenes on one rail: two coordinate-free 8-slot ±1 words compared slot by slot, equal slots building the sameness s = cos θ and unequal ones the difference a = sin θ, which the parallelogram law keeps at a total of 4; for a ≠ 0 the two-way product s² − κa² lands on (1, 0) only at κ = −1 (preserving 1 across every comparison angle); eight words compared in 28 pairs give a positive semidefinite Gram table whose spectral embedding is a box in three dimensions with d² = 2(1 − G); fairness squaring splits |u|²|v|² into sameness² and wedge², and the budget circle is rewritten as the Minkowski interval with its light cone; an unclosed orthogonal residual stands up as a new axis, a finite-width prefix lookup leaves escape pairs, and the self-comparison xₙ₊₁ = cos xₙ closes in on θ* ≈ 0.739.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="comparison-oisc-engine">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//CMP">ORTHO<b>//</b>CMP</h1>
+      <div class="tagline">
+        <span class="zh">宇宙单指令比较引擎 · <em>不预设坐标：一次两两比较拆出求同与存异，半正定相似表显影为几何，装不下的残差立为新轴。</em></span>
+        <span class="en">Cosmic comparison engine · <em>No preset coordinates: one pairwise comparison splits into sameness and difference, a positive semidefinite similarity table becomes geometry, and an unclosed residual stands up as a new axis.</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill" id="pillNow"><span class="zh">时间轴</span><span class="en">RAIL</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><span class="zh">卡</span><span class="en">CARD</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="oisc" aria-pressed="false"><span class="code">CMP-DUAL</span><span class="cn zh">一次比较：同与异，两向乘积为一</span><span class="cn en">One comparison: same, different, product one</span></button>
+        <button class="preset" data-preset="emergence" aria-pressed="false"><span class="code">GRAM-SPACE</span><span class="cn zh">二十八次比较显影出三维的盒子</span><span class="cn en">Twenty-eight comparisons develop a box</span></button>
+        <button class="preset" data-preset="uncertainty" aria-pressed="false"><span class="code">FAIR-SQ</span><span class="cn zh">公平平方：同² 加楔²，楔是下界</span><span class="cn en">Fair square: sameness² plus a wedge floor</span></button>
+        <button class="preset" data-preset="time-axis" aria-pressed="false"><span class="code">NEW-AXIS</span><span class="cn zh">装不下的残差立为新轴</span><span class="cn en">An unclosed residual stands up as an axis</span></button>
+        <button class="preset" data-preset="lookup" aria-pressed="false"><span class="code">MEMO-TRIE</span><span class="cn zh">读两位的前缀表与自比较</span><span class="cn en">A two-bit prefix table and self-comparison</span></button>
+        <button class="preset" data-preset="budget-cone" aria-pressed="false"><span class="code">MINKOWSKI</span><span class="cn zh">预算圆改写成光锥</span><span class="cn en">The budget circle becomes a light cone</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="primitive">
+      <h2><span class="zh">两个字</span><span class="en">Two words</span><span class="aside">w<sub>A</sub>, w<sub>B</sub> ∈ {±1}⁸/√8</span></h2>
+      <div class="slots" id="slots" role="group" aria-label="两个字的八个槽；点 w_B 的槽翻转它" data-aria-en="The eight slots of both words; tap a slot of w_B to flip it"></div>
+      <div class="chips" id="wordChips" role="group" aria-label="w_B 的几个例子" data-aria-en="Example words w_B">
+        <button class="chip" data-word="w60" aria-pressed="true"><span class="m">θ = 60°</span></button>
+        <button class="chip" data-word="w90" aria-pressed="false"><span class="m">θ = 90°</span></button>
+        <button class="chip" data-word="w0" aria-pressed="false"><span class="m">w<sub>B</sub> = w<sub>A</sub></span></button>
+        <button class="chip" data-word="w180" aria-pressed="false"><span class="m">w<sub>B</sub> = −w<sub>A</sub></span></button>
+      </div>
+      <div class="field">
+        <label for="kappa"><span class="zh">纯差自乘</span><span class="en">Pure difference squared</span><small>Î² = κ</small></label><output id="oKappa" for="kappa">−1.00</output>
+        <input type="range" id="kappa" min="-1" max="1" step="0.05" value="-1">
+      </div>
+      <div class="chips">
+        <button class="chip" id="kappaFair" aria-pressed="true"><span class="zh">回到</span><span class="en">Back to</span> <span class="m">κ = −1</span></button>
+      </div>
+      <p class="note"><span class="zh">点 w<sub>B</sub> 的槽（这里或舞台上）翻转它。时间轴逐槽比较：圆上画的是前 k 槽的比较，比完八槽就是 w<sub>A</sub> 与 w<sub>B</sub> 本身。κ 只是页面的对照旋钮：纯差方向自乘得 κ。</span><span class="en">Tap a slot of w<sub>B</sub> (here or on the stage) to flip it. The rail compares slot by slot: the circle shows the comparison of the first k slots, and after all eight it is w<sub>A</sub> against w<sub>B</sub> itself. κ is only the page's control dial: the pure difference squares to κ.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="lattice" hidden>
+      <h2><span class="zh">一组字</span><span class="en">A set of words</span><span class="aside">G = WWᵀ</span></h2>
+      <div class="chips" id="setChips" role="group" aria-label="字组" data-aria-en="Word set">
+        <button class="chip" data-set="box8" aria-pressed="true"><span class="zh">八角盒</span><span class="en">Box of eight</span></button>
+        <button class="chip" data-set="octa6" aria-pressed="false"><span class="zh">正八面体</span><span class="en">Octahedron</span></button>
+        <button class="chip" data-set="perturbed" aria-pressed="false"><span class="zh">翻一位</span><span class="en">One bit flipped</span></button>
+      </div>
+      <p class="note"><span class="zh">时间轴按 (0, 1)、(0, 2)、…、(6, 7) 的次序逐对揭开格拉姆表。点舞台上的一个字，看它那一行 G。八角盒的三个方向分到 3、3、2 个槽，所以是盒子而不是立方体；翻一位让秩升到 4，三维放不下。</span><span class="en">The rail reveals the Gram table pair by pair in the order (0, 1), (0, 2), …, (6, 7). Tap a word on the stage to read its row of G. The box gives its three directions 3, 3 and 2 slots, so it is a box rather than a cube; flipping one bit lifts the rank to 4, which three dimensions cannot hold.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="folding" hidden>
+      <h2><span class="zh">两种折法</span><span class="en">Two foldings</span><span class="aside">ū v · c dτ</span></h2>
+      <div class="chips" id="foldChips" role="group" aria-label="折法" data-aria-en="Folding">
+        <button class="chip" data-fold="lagrange" aria-pressed="true"><span class="zh">同与楔</span><span class="en">Sameness and wedge</span></button>
+        <button class="chip" data-fold="minkowski" aria-pressed="false"><span class="zh">预算与光锥</span><span class="en">Budget and light cone</span></button>
+      </div>
+      <div class="field" data-sub="lagrange">
+        <label for="vlen"><span class="zh">v 的长度</span><span class="en">Length of v</span><small>|v|</small></label><output id="oVlen" for="vlen">1.00</output>
+        <input type="range" id="vlen" min="0.3" max="1.25" step="0.01" value="1">
+      </div>
+      <p class="note" data-sub="lagrange"><span class="zh">u 固定在 20°；时间轴转动 v 的方向（0 到 180°），也可以在左边直接拖琥珀色的 v。右边把比较 ū v 画成一个点：横向是同，纵向是楔。</span><span class="en">u is fixed at 20°; the rail turns v from 0 to 180°, or drag the amber v on the left. On the right the comparison ū v is one point: across is sameness, up is the wedge.</span></p>
+      <p class="note" data-sub="minkowski" hidden><span class="zh">时间轴把分配角 θ 从 0 扫到 90°；也可以拖左边圆上的琥珀点，或右边的事件。c dt 取 1。</span><span class="en">The rail sweeps the allocation angle θ from 0 to 90°; or drag the amber point on the circle, or the event on the right. c dt is set to 1.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="expansion" hidden>
+      <h2><span class="zh">表外的东西</span><span class="en">What the table misses</span><span class="aside">(I − P)w · b</span></h2>
+      <div class="chips" id="expChips" role="group" aria-label="开维的两面" data-aria-en="Two sides of expansion">
+        <button class="chip" data-exp="residual" aria-pressed="true"><span class="zh">残差立轴</span><span class="en">Residual axis</span></button>
+        <button class="chip" data-exp="memo" aria-pressed="false"><span class="zh">查表与自比</span><span class="en">Lookup and self-comparison</span></button>
+      </div>
+      <div class="field" data-sub="residual">
+        <label for="phi"><span class="zh">表内的方向</span><span class="en">Direction inside the table</span><small>φ</small></label><output id="oPhi" for="phi">35°</output>
+        <input type="range" id="phi" min="0" max="359" step="1" value="35">
+      </div>
+      <div class="chips" id="bitsChips" data-sub="memo" hidden role="group" aria-label="读出的前缀位数" data-aria-en="Prefix bits read">
+        <button class="chip" data-bits="1" aria-pressed="false"><span class="m">b = 1</span></button>
+        <button class="chip" data-bits="2" aria-pressed="true"><span class="m">b = 2</span></button>
+        <button class="chip" data-bits="3" aria-pressed="false"><span class="m">b = 3</span></button>
+        <button class="chip" data-bits="4" aria-pressed="false"><span class="m">b = 4</span></button>
+      </div>
+      <p class="note" data-sub="residual"><span class="zh">时间轴把新来的态 w 抬离旧平面（β 从 0 到 90°）；也可以拖琥珀色的端点。φ 只转它在表内的方向，残差的长短只看 β。</span><span class="en">The rail lifts the new state w out of the old plane (β from 0 to 90°); or drag its amber tip. φ only turns its direction inside the table; the length of the residual depends on β alone.</span></p>
+      <p class="note" data-sub="memo" hidden><span class="zh">只读前 b 位：前缀相同的态落进同一个桶，桶里的每一对都分不开。点一片叶子换查找的键。时间轴走自比较 xₙ₊₁ = cos xₙ（x₀ = 0）。</span><span class="en">Read only the first b bits: states with the same prefix share a bucket, and every pair in a bucket stays unresolved. Tap a leaf to change the lookup key. The rail runs the self-comparison xₙ₊₁ = cos xₙ (x₀ = 0).</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：两个字的逐槽比较与比较圆，格拉姆表显影的三维点阵，公平平方与闵可夫斯基改写，残差新轴、前缀树与自比较蛛网" data-aria-en="Stage: the slot-by-slot comparison of two words and the comparison circle, the 3D points developed from the Gram table, fairness squaring and the Minkowski rewriting, the residual axis, the prefix trie and the self-comparison cobweb">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="primitive" aria-pressed="true"><span class="zh">原语</span><span class="en">Primitive</span></button>
+        <button class="chip" data-scene="lattice" aria-pressed="false"><span class="zh">显影</span><span class="en">Geometry</span></button>
+        <button class="chip" data-scene="folding" aria-pressed="false"><span class="zh">折痕</span><span class="en">Folding</span></button>
+        <button class="chip" data-scene="expansion" aria-pressed="false"><span class="zh">开维</span><span class="en">Expansion</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景的第一张小图" data-aria-en="First small plot of the scene"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="本场景的第二张小图" data-aria-en="Second small plot of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div class="wide"><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean" data-scenes="primitive"><span class="ok">LEAN ✓</span><span><span class="zh">实内积空间里 ‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²)。取 x = w<sub>A</sub>、y = w<sub>B</sub>（单位向量）：相同的槽给出 ‖w<sub>A</sub> + w<sub>B</sub>‖² = m/2，不同的槽给出 ‖w<sub>A</sub> − w<sub>B</sub>‖² = d/2，两者相加恒为 4。已冻结：</span><span class="en">In a real inner-product space ‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²). With x = w<sub>A</sub> and y = w<sub>B</sub> (unit vectors) the equal slots give ‖w<sub>A</sub> + w<sub>B</sub>‖² = m/2 and the unequal ones ‖w<sub>A</sub> − w<sub>B</sub>‖² = d/2, always adding up to 4. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law" href="#" target="_blank" rel="noopener"><code>inner_product_norm_parallelogram_law</code></a></span></div>
+      <div class="lean" data-scenes="primitive"><span class="ok">LEAN ✓</span><span><span class="zh">对记录测量 P，若第 k 个投影是秩一的 |φ⟩⟨φ|、态是纯态 |ψ⟩⟨ψ|，记录权重等于 |⟨φ, ψ⟩|² = Tr(ρP<sub>k</sub>)，未读态是各条件态按权重之和。取 φ = w<sub>A</sub>、ψ = w<sub>B</sub>，读数“Born 权重 s²”就是这个数；页面不画整套记录测量。已冻结：</span><span class="en">For a record measurement P whose k-th projection is the rank-one |φ⟩⟨φ| and a pure state |ψ⟩⟨ψ|, the record weight is |⟨φ, ψ⟩|² = Tr(ρP<sub>k</sub>), and the unread state is the weighted sum of the conditional states. With φ = w<sub>A</sub> and ψ = w<sub>B</sub> the readout “Born weight s²” is this number; the page does not draw the whole record measurement. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="#" target="_blank" rel="noopener"><code>rank_one_born_pairing_weight</code></a></span></div>
+      <div class="lean" data-scenes="primitive"><span class="ok">LEAN ✓</span><span><span class="zh">复方阵 R 若 Rᴴ = −R 且 RRᴴ = 1，则 R² = −1。纯差 Î = [[0, −1], [1, 0]] 斜伴随且酉，所以 Î² = −1，即 κ = −1。a ≠ 0 时 κ 取别的值会让乘积离开 (1, 0)（a = 0 时对任意 κ 都留在 (1, 0)，唯独 κ = −1 对每个夹角都保住 1）：那是页面的代数对照，不是这条定理的内容。已冻结：</span><span class="en">If a complex square matrix R has Rᴴ = −R and RRᴴ = 1, then R² = −1. The pure difference Î = [[0, −1], [1, 0]] is skew-adjoint and unitary, so Î² = −1, that is κ = −1. When a ≠ 0, other values of κ move the product off (1, 0) (for a = 0 it stays on (1, 0) for any κ, and only κ = −1 preserves 1 across every comparison angle): that is the page's algebra, not part of this theorem. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="#" target="_blank" rel="noopener"><code>square_eq_neg_one_of_skewAdjoint_unitary</code></a></span></div>
+      <div class="lean argued" data-scenes="primitive"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：只有一条指令（如 SUBLEQ，减后小于等于零即跳转）的计算机在无界存储下即可通用（F. Mavaddat &amp; B. Parhami, Int. J. Electrical Engineering Education 25 (1988) 327–334）；范数来自内积当且仅当它满足平行四边形律（P. Jordan &amp; J. von Neumann, Ann. of Math. 36 (1935) 719–723）；维数至少为 3 时，投影上的概率测度都是 Tr(ρP)（A. M. Gleason, J. Math. Mech. 6 (1957) 885–893）。</span><span class="en">Literature results, not formalized in this book: a computer with a single instruction (such as SUBLEQ, subtract and branch if the result is at most zero) is universal given unbounded memory (F. Mavaddat &amp; B. Parhami, Int. J. Electrical Engineering Education 25 (1988) 327–334); a norm comes from an inner product iff it satisfies the parallelogram law (P. Jordan &amp; J. von Neumann, Ann. of Math. 36 (1935) 719–723); in dimension at least 3 every probability measure on projections is Tr(ρP) (A. M. Gleason, J. Math. Mech. 6 (1957) 885–893).</span></span></div>
+      <div class="lean" data-scenes="lattice" hidden><span class="ok">LEAN ✓</span><span><span class="zh">复完备内积空间上，连续算子 Q 为正，当且仅当存在 O 使 Q = O†O，且 ⟨Qx, y⟩ = ⟨Ox, Oy⟩。页面用它的有限实情形：G = WWᵀ ⪰ 0，谱因子 X = V√Λ 给出 G = XXᵀ（复化之后的初等应用，不是字面陈述）。已冻结：</span><span class="en">On a complete complex inner-product space a continuous operator Q is positive iff Q = O†O for some O, with ⟨Qx, y⟩ = ⟨Ox, Oy⟩. The page uses its finite real case: G = WWᵀ ⪰ 0, and the spectral factor X = V√Λ gives G = XXᵀ (an elementary application after complexification, not its literal statement). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/GramRealizability.gram_realizability" href="#" target="_blank" rel="noopener"><code>gram_realizability</code></a></span></div>
+      <div class="lean argued" data-scenes="lattice" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：有限距离表能由欧氏空间中的点实现，当且仅当由它导出的（中心化）格拉姆矩阵半正定，所需维数就是它的秩（I. J. Schoenberg, Ann. of Math. 36 (1935) 724–732；Trans. Amer. Math. Soc. 44 (1938) 522–536；G. Young &amp; A. S. Householder, Psychometrika 3 (1938) 19–22）。页面直接分解单位字的 G，不做中心化。</span><span class="en">Literature result, not formalized in this book: a finite distance table is realised by points of a Euclidean space iff the (centred) Gram matrix derived from it is positive semidefinite, and the dimension needed is its rank (I. J. Schoenberg, Ann. of Math. 36 (1935) 724–732; Trans. Amer. Math. Soc. 44 (1938) 522–536; G. Young &amp; A. S. Householder, Psychometrika 3 (1938) 19–22). The page factors the G of unit words directly, without centring.</span></span></div>
+      <div class="lean" data-scenes="folding" hidden><span class="ok">LEAN ✓</span><span><span class="zh">有限指标集上的实数族：(Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)²/2。两个分量时就是 (s₁² + a₁²)(s₂² + a₂²) = (s₁s₂ + a₁a₂)² + (a₁s₂ − s₁a₂)²：青色的同² 加品红的楔²。已冻结：</span><span class="en">For real families over a finite index set: (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)²/2. With two components it reads (s₁² + a₁²)(s₂² + a₂²) = (s₁s₂ + a₁a₂)² + (a₁s₂ − s₁a₂)²: cyan sameness² plus magenta wedge². Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+      <div class="lean" data-scenes="folding" hidden><span class="ok">LEAN ✓</span><span><span class="zh">对称算子 A、B 与单位向量 ψ，中心化向量 u = Aψ − ⟨A⟩ψ、v = Bψ − ⟨B⟩ψ 满足 ‖u‖²‖v‖² = cov² + |⟨[A, B]⟩/2i|² + G，G ≥ 0，且 Re⟨u, v⟩ = cov、Im⟨u, v⟩ = ⟨[A, B]⟩/2i。舞台上的比较 ū v 是一个复数（G = 0）：实部是青色的同，虚部是品红的楔，楔像交换子那一项一样垫在 |u||v| 下面；页面没有画算子 A、B。已冻结：</span><span class="en">For symmetric operators A, B and a unit vector ψ, the centred vectors u = Aψ − ⟨A⟩ψ and v = Bψ − ⟨B⟩ψ satisfy ‖u‖²‖v‖² = cov² + |⟨[A, B]⟩/2i|² + G with G ≥ 0, Re⟨u, v⟩ = cov and Im⟨u, v⟩ = ⟨[A, B]⟩/2i. The comparison ū v on the stage is one complex number (G = 0): its real part is the cyan sameness and its imaginary part the magenta wedge, which sits under |u||v| as the commutator term does; the page draws no operators A, B. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger" href="#" target="_blank" rel="noopener"><code>robertson_schrodinger</code></a></span></div>
+      <div class="lean" data-scenes="folding" hidden><span class="ok">LEAN ✓</span><span><span class="zh">ℝ × ℝᵈ 上的实二次型若在闵可夫斯基形式为零处都为零，它就等于 S(1, 0) 乘闵可夫斯基形式。改写后的预算 (c dt)² − dx² 恰在光锥 dx = ±c dt 上为零；零锥相同的二次不变量都只是它的倍数。已冻结：</span><span class="en">A real quadratic form on ℝ × ℝᵈ that vanishes wherever the Minkowski form vanishes equals S(1, 0) times the Minkowski form. The rewritten budget (c dt)² − dx² vanishes exactly on the light cone dx = ±c dt; any quadratic invariant with the same null cone is a multiple of it. Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" href="#" target="_blank" rel="noopener"><code>eq_smul_minkowski_of_null</code></a></span></div>
+      <div class="lean" data-scenes="expansion" hidden><span class="ok">LEAN ✓</span><span><span class="zh">闭子空间 S 的正交补不为零时，S⊥ 中有单位向量 e：P<sub>S</sub>e = 0，e 到 S 的距离恰为 1，‖I − P<sub>S</sub>‖ = 1。舞台上 S = 𝒱₂ = span(e₁, e₂)，β &gt; 0 时 e = r/‖r‖ = e₃。它不说物理空间长出了新维度。已冻结：</span><span class="en">If a closed subspace S has a nonzero orthogonal complement, S⊥ contains a unit vector e with P<sub>S</sub>e = 0, at distance exactly 1 from S, and ‖I − P<sub>S</sub>‖ = 1. On the stage S = 𝒱₂ = span(e₁, e₂) and, for β &gt; 0, e = r/‖r‖ = e₃. It does not say that physical space grows a new dimension. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>finite_layer_projection_escape</code></a></span></div>
+      <div class="lean" data-scenes="expansion" hidden><span class="ok">LEAN ✓</span><span><span class="zh">对任意目录与其中一个指标：去掉这个指标后的逃逸对（选定的检验分不开的有序不同对），等于全目录的逃逸对并上只有这个指标能分开的对。舞台上目录是十六个四位态的前 b 位；去掉第 b 位，读数里的 16(2<sup>5−b</sup> − 1) = 16(2<sup>4−b</sup> − 1) + 16·2<sup>4−b</sup> 是页面枚举的计数。已冻结：</span><span class="en">For any catalog and any of its indices: the escape pairs (ordered distinct pairs the selected tests cannot tell apart) of the catalog without that index are the escape pairs of the full catalog together with the pairs only that index separates. On the stage the catalog is the first b bits of sixteen four-bit states; dropping bit b, the readout 16(2<sup>5−b</sup> − 1) = 16(2<sup>4−b</sup> − 1) + 16·2<sup>4−b</sup> is counted by enumeration on the page. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union" href="#" target="_blank" rel="noopener"><code>escapePairs_without_eq_union</code></a></span></div>
+      <div class="lean" data-scenes="expansion" hidden><span class="ok">LEAN ✓</span><span><span class="zh">存在 θ ∈ (0, 1) 使 cos θ = θ，它在正实数中唯一，并且一个有理系数幂级数在 π 处绝对可和、其和为 θ。右边的蛛网 xₙ₊₁ = cos xₙ 是页面的数值，不是这条定理的内容。已冻结：</span><span class="en">There is θ ∈ (0, 1) with cos θ = θ, unique among positive reals, and a power series with rational coefficients is absolutely summable at π with sum θ. The cobweb xₙ₊₁ = cos xₙ on the right is the page's numerics, not part of this statement. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint" href="#" target="_blank" rel="noopener"><code>rational_inverse_endpoint</code></a></span></div>
+      <div class="lean open" data-scenes="expansion" hidden><span class="ok">OPEN</span><span><span class="zh">开放问题：查表能否总是代替搜索（标准猜想 P ≠ NP 尚未解决），以及残差出现时物理的希尔伯特空间是否真的长出新的维度。舞台只演示固定 ℝ³ 里格拉姆秩从 2 升到 3，以及十六个四位态的有限个桶。</span><span class="en">Open questions: whether lookup can always replace search (the standard conjecture P ≠ NP is unresolved), and whether a physical Hilbert space really grows a new dimension when a residual appears. The stage only shows a Gram rank rising from 2 to 3 inside a fixed ℝ³, and finitely many buckets of sixteen four-bit states.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：内积、格拉姆表、特征值（雅可比法）、嵌入坐标、距离、同² 与楔²、闵可夫斯基量、格拉姆秩（阈值 10⁻⁹）、逃逸对的枚举与蛛网迭代都按双精度实时算出。</span><span class="en">A numerical illustration on the page, not a proof: inner products, Gram tables, eigenvalues (Jacobi), embedded coordinates, distances, sameness² and wedge², the Minkowski quantities, Gram ranks (threshold 10⁻⁹), the enumeration of escape pairs and the cobweb are computed live in double precision.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">本书的诠释与页面的显示模型：把每次比较读成宇宙单指令计算机的唯一指令，把“比较之前没有坐标”读成零背景比较公理 A₀；κ 旋钮；k = 0 与 k = 28 之间节点位置的插值；把预算圆读成闵可夫斯基间隔；把残差读成新的时间轴。这些都没有在这里得到证明。</span><span class="en">The book's interpretation and the page's display models: reading every comparison as the one instruction of a cosmic one-instruction computer, and “no coordinates before comparison” as the zero-background comparison axiom A₀; the κ dial; the interpolation of node positions between k = 0 and k = 28; reading the budget circle as the Minkowski interval; reading the residual as a new time axis. None of these is proved here.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：已比较的槽、揭开的对、v 的方向、分配角、倾角或自比较的步数" data-aria-en="Rail: slots compared, pairs revealed, direction of v, allocation angle, tilt or self-comparison steps">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>4</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">四个场景回答第 32 章 §32.5–§32.6 的同一个问题：不预设任何坐标、只做两两比较时，几何从哪里来，装不下的东西又去哪里。本页是数值演示，不是证明；每个数都在页面上实时算出，模型与诠释分开标注。</p>
+      <ol>
+        <li><b>原语：一次两两比较。</b>w<sub>A</sub> = σ<sub>A</sub>/√8、w<sub>B</sub> = σ<sub>B</sub>/√8 ∈ {±1}⁸/√8（槽符号 σ<sub>A,j</sub>, σ<sub>B,j</sub> ∈ {±1}）是单位向量，逐槽相乘：相同的槽（XNOR）m 个，不同的槽（XOR）d 个，s = ⟨w<sub>A</sub>, w<sub>B</sub>⟩ = (m − d)/8 = cos θ，a = √(1 − s²) = sin θ。同时 ‖w<sub>A</sub> + w<sub>B</sub>‖² = m/2、‖w<sub>A</sub> − w<sub>B</sub>‖² = d/2，两者之和恒为 4（平行四边形律）。时间轴上，圆画的是前 k 槽的比较：两个截断的字各自归一之后的夹角，cos θ<sub>k</sub> = (1/k)Σ<sub>j&lt;k</sub>σ<sub>A,j</sub>σ<sub>B,j</sub> = (8/k)Σ<sub>j&lt;k</sub>w<sub>A</sub>[j]w<sub>B</sub>[j]；k = 8 时就是两个字本身。</li>
+        <li><b>两向的公平。</b>在 (w<sub>A</sub>, e⊥) 平面里 w<sub>B</sub> = s·w<sub>A</sub> + a·e⊥，记 CMP(A, B) = s + aÎ、CMP(B, A) = s − aÎ。若纯差方向自乘 Î² = κ，两向之积是 s² − κa²，而 Î(−Î) = −κ。a ≠ 0 时乘积等于 1 当且仅当 κ = −1：这是页面的代数。Î = [[0, −1], [1, 0]] 是斜伴随的酉矩阵，已冻结的定理给出它的平方是 −1；κ 旋钮只是对照，不是物理参数。</li>
+        <li><b>显影：相似表成为几何。</b>M 个字的格拉姆表 G = WWᵀ 对称半正定，Gᵢᵢ = 1。雅可比法求 G = VΛVᵀ，取前三个特征值得 Xᵢ = (√λ₁vᵢ₁, √λ₂vᵢ₂, √λ₃vᵢ₃)；秩不超过 3 时 G = XXᵀ，每一对都有 d²ᵢⱼ = ‖Xᵢ − Xⱼ‖² = 2(1 − Gᵢⱼ)。嵌入只确定到一个正交变换，页面用两对字的差把它转正。八个不同的 ±1 八槽单位字不可能落在立方体的八个角上（那要三个方向分到同样多的槽，而 8 不被 3 整除），所以默认的是 3、3、2 个槽的八角盒；正八面体是 ± 三条沃尔什行；“翻一位”把一个字的一个槽翻过来，秩升到 4，只取前三维时距离不再全对。k = 0 与 k = 28 之间节点的位置是显示用的插值，只有表填满时的位置是谱嵌入；小图里的谱把未揭开的项按 0 读，这张半张表不一定半正定。</li>
+        <li><b>折痕：公平平方与楔。</b>把 u = (s₁, a₁)、v = (s₂, a₂) 读成复数，比较 ū v = (s₁s₂ + a₁a₂) + i(s₁a₂ − a₁s₂)，|ū v|² = |u|²|v|²，即 (s₁² + a₁²)(s₂² + a₂²) = (s₁s₂ + a₁a₂)² + (a₁s₂ − s₁a₂)²，这是拉格朗日恒等式在两个分量时的形状。镜像 ū = (s₁, −a₁) 与 u 相乘只剩 |u|²（手性折叠）；v 与 u 共线时楔为零（u ∧ u = 0）。楔不为零时 |u||v| 不能小于 |u ∧ v|：罗伯逊–薛定谔恒等式里，交换子那一项正是中心化向量内积的虚部，这里的楔扮演它的角色；页面没有画算子。</li>
+        <li><b>预算与光锥。</b>单位比较预算 (dτ/dt)² + (dx/(c dt))² = cos²θ + sin²θ = 1 移项即 (c dτ)² = (c dt)² − dx²：同一条代数恒等式，把它读成闵可夫斯基间隔是本书的诠释。θ = 90° 时 dx = c dt、dτ = 0，世界线贴上光锥。已冻结的定理说：在零锥上为零的二次型只能是闵可夫斯基形式的倍数。</li>
+        <li><b>开维：装不下的残差。</b>旧的表张成 𝒱₂ = span(e₁, e₂)。新态 w(β) = cos β(cos φ e₁ + sin φ e₂) + sin β e₃ 在表里的投影长 cos β，残差 r = (I − P)w = sin β e₃ 与 e₁、e₂ 的比较都为零；{e₁, e₂, w} 的格拉姆行列式是 sin²β，β &gt; 0 时秩从 2 升到 3。这一切都在固定的 ℝ³ 里：页面不说物理空间长出了新维度。</li>
+        <li><b>查表：有限的位宽。</b>十六个四位态只读前 b 位：同一前缀的态落进一个桶，桶里分不开的有序对就是逃逸对，共 16(2<sup>4−b</sup> − 1) 个（无序的是 C(2<sup>4−b</sup>, 2)·2<sup>b</sup>）。去掉第 b 位，逃逸对等于原来的逃逸对并上只有第 b 位能分开的对：16(2<sup>5−b</sup> − 1) = 16(2<sup>4−b</sup> − 1) + 16·2<sup>4−b</sup>（页面枚举计数）。深度为 b 的前缀树做一次查找只比较 b 次。</li>
+        <li><b>自比较。</b>xₙ₊₁ = cos xₙ 从 x₀ = 0 出发，收向满足 cos θ* = θ* 的 θ* ≈ 0.7390851332；每步误差大约乘 sin θ* ≈ 0.674（页面数值）。已冻结的定理给出 θ* 在 (0, 1) 中存在、在正实数中唯一，并由一个有理系数幂级数在 π 处求和得到；它不陈述蛛网迭代的收敛。</li>
+        <li><b>宇宙单指令比较引擎与零背景公理 A₀。</b>把每一次比较读成宇宙唯一的一条指令（类比单指令计算机的 SUBLEQ），把“比较之前没有坐标”读成零背景比较公理 A₀，是本书的诠释。单指令计算机的通用性、平行四边形律刻画内积、距离表的欧氏可实现性与格里森定理是文献结果，未在本书形式化；P ≠ NP 与物理希尔伯特空间的维数增长是开放问题。</li>
+      </ol>
+      <h3 class="evh">十条已冻结的声明</h3>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T01 · 实内积空间里 ‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²)。<a class="leanref" data-lean-gid="D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law" href="#" target="_blank" rel="noopener"><code>ParallelogramNormLaw</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T02 · 秩一记录投影 |φ⟩⟨φ| 与纯态 |ψ⟩⟨ψ|：记录权重 = |⟨φ, ψ⟩|² = Tr(ρP)，未读态是条件态的加权和。<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="#" target="_blank" rel="noopener"><code>RankOneBornPairingWeight</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T03 · Rᴴ = −R 且 RRᴴ = 1 ⇒ R² = −1。<a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="#" target="_blank" rel="noopener"><code>BalancedUnitaryComplexStructure</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T04 · 复完备内积空间上 Q ≥ 0 ⇔ Q = O†O 且 ⟨Qx, y⟩ = ⟨Ox, Oy⟩。<a class="leanref" data-lean-gid="D5/S3/QuantumBounds/GramRealizability.gram_realizability" href="#" target="_blank" rel="noopener"><code>GramRealizability</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T05 · (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)²/2。<a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>LagrangeGramIdentity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T06 · 对称 A、B 与单位 ψ：‖u‖²‖v‖² = cov² + |⟨[A, B]⟩/2i|² + G，G ≥ 0。<a class="leanref" data-lean-gid="D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger" href="#" target="_blank" rel="noopener"><code>RobertsonSchrodinger</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T07 · S⊥ ≠ 0 ⇒ 有单位 e ∈ S⊥：P<sub>S</sub>e = 0、到 S 的距离为 1、‖I − P<sub>S</sub>‖ = 1。<a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>FiniteLayerProjectionEscape</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T08 · 在闵可夫斯基零锥上为零的二次型 = S(1, 0)·闵可夫斯基形式。<a class="leanref" data-lean-gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" href="#" target="_blank" rel="noopener"><code>MinkowskiNullConeRigidity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T09 · 去掉一个指标后的逃逸对 = 全目录的逃逸对 ∪ 只被它分开的对。<a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union" href="#" target="_blank" rel="noopener"><code>EscapePairs</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T10 · 存在 θ ∈ (0, 1)，cos θ = θ，在正实数中唯一，且是一个有理系数级数在 π 处的和。<a class="leanref" data-lean-gid="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint" href="#" target="_blank" rel="noopener"><code>DottieInverseSeries</code></a></span></div>
+      <p class="lede refs">书中：<a href="../../zh/ch32-unified-field-and-meta-unification.html#sec-ch32-oisc-comparison-engine" target="_top">第 32 章 · 宇宙单指令比较引擎与零背景比较公理</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Four scenes answer one question of §32.5–§32.6 in chapter 32: with no preset coordinates and nothing but pairwise comparison, where does geometry come from, and where does what does not fit go? The page is a numerical illustration, not a proof; every number is computed live on the page, and models and interpretations are labelled apart.</p>
+      <ol>
+        <li><b>Primitive: one pairwise comparison.</b> w<sub>A</sub> = σ<sub>A</sub>/√8, w<sub>B</sub> = σ<sub>B</sub>/√8 ∈ {±1}⁸/√8 (slot signs σ<sub>A,j</sub>, σ<sub>B,j</sub> ∈ {±1}) are unit vectors multiplied slot by slot: m equal slots (XNOR), d unequal slots (XOR), s = ⟨w<sub>A</sub>, w<sub>B</sub>⟩ = (m − d)/8 = cos θ and a = √(1 − s²) = sin θ. At the same time ‖w<sub>A</sub> + w<sub>B</sub>‖² = m/2 and ‖w<sub>A</sub> − w<sub>B</sub>‖² = d/2 always add up to 4 (the parallelogram law). Along the rail the circle shows the comparison of the first k slots: the angle between the two truncated words, each renormalised, cos θ<sub>k</sub> = (1/k)Σ<sub>j&lt;k</sub>σ<sub>A,j</sub>σ<sub>B,j</sub> = (8/k)Σ<sub>j&lt;k</sub>w<sub>A</sub>[j]w<sub>B</sub>[j]; at k = 8 it is the two words themselves.</li>
+        <li><b>Two-way fairness.</b> In the (w<sub>A</sub>, e⊥) plane w<sub>B</sub> = s·w<sub>A</sub> + a·e⊥; write CMP(A, B) = s + aÎ and CMP(B, A) = s − aÎ. If the pure difference squares to Î² = κ, the two-way product is s² − κa², and Î(−Î) = −κ. For a ≠ 0 the product equals 1 iff κ = −1: this is the page's algebra. Î = [[0, −1], [1, 0]] is a skew-adjoint unitary, and the frozen theorem gives its square as −1; the κ dial is only a control, not a physical parameter.</li>
+        <li><b>Geometry: the similarity table develops.</b> The Gram table G = WWᵀ of M words is symmetric positive semidefinite with Gᵢᵢ = 1. Jacobi's method gives G = VΛVᵀ, and the top three eigenvalues give Xᵢ = (√λ₁vᵢ₁, √λ₂vᵢ₂, √λ₃vᵢ₃); when the rank is at most 3, G = XXᵀ and every pair has d²ᵢⱼ = ‖Xᵢ − Xⱼ‖² = 2(1 − Gᵢⱼ). The embedding is fixed only up to an orthogonal map, which the page straightens with the differences of two pairs of words. Eight distinct unit ±1 words of eight slots cannot sit on the corners of a cube (the three directions would need equally many slots, and 3 does not divide 8), so the default is the box of 3, 3 and 2 slots; the octahedron is ± three Walsh rows; “one bit flipped” flips one slot of one word, the rank rises to 4, and the top three dimensions no longer get every distance right. Node positions between k = 0 and k = 28 are a display interpolation; only the positions of the full table are the spectral embedding. The spectrum in the small plot reads unrevealed entries as 0, and that half-filled table need not be positive semidefinite.</li>
+        <li><b>Folding: fair squares and the wedge.</b> Reading u = (s₁, a₁) and v = (s₂, a₂) as complex numbers, the comparison ū v = (s₁s₂ + a₁a₂) + i(s₁a₂ − a₁s₂) has |ū v|² = |u|²|v|², that is (s₁² + a₁²)(s₂² + a₂²) = (s₁s₂ + a₁a₂)² + (a₁s₂ − s₁a₂)², the shape of Lagrange's identity for two components. The mirror ū = (s₁, −a₁) times u leaves only |u|² (chirality folding); when v lies along u the wedge vanishes (u ∧ u = 0). Otherwise |u||v| cannot fall below |u ∧ v|: in the Robertson–Schrödinger identity the commutator term is exactly the imaginary part of the inner product of the centred vectors, and the wedge plays that role here; the page draws no operators.</li>
+        <li><b>Budget and light cone.</b> The unit comparison budget (dτ/dt)² + (dx/(c dt))² = cos²θ + sin²θ = 1 rearranges into (c dτ)² = (c dt)² − dx²: the same algebraic identity, and reading it as the Minkowski interval is the book's interpretation. At θ = 90° dx = c dt and dτ = 0: the worldline meets the light cone. The frozen theorem says that a quadratic form vanishing on the null cone can only be a multiple of the Minkowski form.</li>
+        <li><b>Expansion: the residual that does not fit.</b> The old table spans 𝒱₂ = span(e₁, e₂). A new state w(β) = cos β(cos φ e₁ + sin φ e₂) + sin β e₃ projects into the table with length cos β; the residual r = (I − P)w = sin β e₃ compares to zero with both e₁ and e₂; the Gram determinant of {e₁, e₂, w} is sin²β, and for β &gt; 0 the rank rises from 2 to 3. All of this happens inside a fixed ℝ³: the page does not say that physical space grows a new dimension.</li>
+        <li><b>Lookup: finite width.</b> Sixteen four-bit states read only through their first b bits: states with the same prefix share a bucket, and the ordered pairs a bucket cannot separate are the escape pairs, 16(2<sup>4−b</sup> − 1) of them (C(2<sup>4−b</sup>, 2)·2<sup>b</sup> unordered). Dropping bit b, the escape pairs are the old escape pairs together with the pairs only bit b separates: 16(2<sup>5−b</sup> − 1) = 16(2<sup>4−b</sup> − 1) + 16·2<sup>4−b</sup> (counted by enumeration on the page). A prefix trie of depth b answers a lookup with b comparisons.</li>
+        <li><b>Self-comparison.</b> xₙ₊₁ = cos xₙ from x₀ = 0 closes in on the θ* ≈ 0.7390851332 with cos θ* = θ*; each step multiplies the error by roughly sin θ* ≈ 0.674 (page numerics). The frozen theorem gives θ* in (0, 1), unique among positive reals, as the sum at π of a power series with rational coefficients; it says nothing about the convergence of the cobweb.</li>
+        <li><b>The cosmic comparison engine and the zero-background axiom A₀.</b> Reading every comparison as the universe's one instruction (by analogy with the SUBLEQ of one-instruction computers), and “no coordinates before comparison” as the zero-background comparison axiom A₀, is the book's interpretation. The universality of one-instruction computers, the parallelogram characterisation of inner products, the Euclidean realisability of distance tables and Gleason's theorem are literature results, not formalized in this book; P ≠ NP and the growth of a physical Hilbert space's dimension are open questions.</li>
+      </ol>
+      <h3 class="evh">Ten frozen declarations</h3>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T01 · In a real inner-product space ‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²). <a class="leanref" data-lean-gid="D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law" href="#" target="_blank" rel="noopener"><code>ParallelogramNormLaw</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T02 · Rank-one record projection |φ⟩⟨φ| and pure state |ψ⟩⟨ψ|: record weight = |⟨φ, ψ⟩|² = Tr(ρP); the unread state is the weighted sum of conditional states. <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="#" target="_blank" rel="noopener"><code>RankOneBornPairingWeight</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T03 · Rᴴ = −R and RRᴴ = 1 ⇒ R² = −1. <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="#" target="_blank" rel="noopener"><code>BalancedUnitaryComplexStructure</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T04 · On a complete complex inner-product space Q ≥ 0 ⇔ Q = O†O with ⟨Qx, y⟩ = ⟨Ox, Oy⟩. <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/GramRealizability.gram_realizability" href="#" target="_blank" rel="noopener"><code>GramRealizability</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T05 · (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)²/2. <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>LagrangeGramIdentity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T06 · Symmetric A, B and unit ψ: ‖u‖²‖v‖² = cov² + |⟨[A, B]⟩/2i|² + G with G ≥ 0. <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger" href="#" target="_blank" rel="noopener"><code>RobertsonSchrodinger</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T07 · S⊥ ≠ 0 gives a unit e ∈ S⊥ with P<sub>S</sub>e = 0, distance 1 from S, and ‖I − P<sub>S</sub>‖ = 1. <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>FiniteLayerProjectionEscape</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T08 · A quadratic form vanishing on the Minkowski null cone = S(1, 0) · the Minkowski form. <a class="leanref" data-lean-gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" href="#" target="_blank" rel="noopener"><code>MinkowskiNullConeRigidity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T09 · Escape pairs without one index = escape pairs of the full catalog ∪ the pairs only that index separates. <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union" href="#" target="_blank" rel="noopener"><code>EscapePairs</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span>T10 · There is θ ∈ (0, 1) with cos θ = θ, unique among positive reals, the sum at π of a series with rational coefficients. <a class="leanref" data-lean-gid="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint" href="#" target="_blank" rel="noopener"><code>DottieInverseSeries</code></a></span></div>
+      <p class="lede refs">In the book: <a href="../../en/ch32-unified-field-and-meta-unification.html#sec-ch32-oisc-comparison-engine" target="_top">Chapter 32 · The cosmic comparison engine and the zero-background comparison axiom</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

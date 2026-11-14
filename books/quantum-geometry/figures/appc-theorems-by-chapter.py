@@ -92,9 +92,10 @@ def index_counts():
     table = re.findall(r"^\| `T\d+` \|.*\| ([^|]*) \|$", text, re.M)
     cnt = Counter()
     for col in table:
-        for m in re.finditer(r"(Ch \d+|终章)((?:,? ?`#[\w-]+`)+)", col):
-            key = "coda" if m.group(1) == "终章" else str(int(m.group(1)[3:]))
-            cnt[key] += m.group(2).count("#")
+        # One theorem can have several environment anchors in the same chapter.
+        for chapter in set(re.findall(r"(Ch \d+|终章)(?:,? ?`#[\w-]+`)+", col)):
+            key = "coda" if chapter == "终章" else str(int(chapter[3:]))
+            cnt[key] += 1
     listed = set(re.findall(r"^\| `T\d+` \| \[[^\]]*\]\(lean:([^\)\s]+)\)", text, re.M))
     lock = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))["declarations"]
     for gid, decl in lock.items():

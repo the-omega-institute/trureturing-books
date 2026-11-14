@@ -589,6 +589,133 @@ $$
 
 Every integer rank pair with $1 \le r_0 \le 6$ and $1 \le r_1 \le 5$ is realizable: $r_0 = r_1 = K = 3$ is one valid choice among thirty, whereas the maximal attainable ranks are $(6, 5)$ with maximal page entropies $(\ln 6, \ln 5)$.
 
+::: {.example #ex-ch39-p2e-positive-ket-handcalculation title="By Hand: Positive Equal-Amplitude Admissible-Word States Across the Same Cut"}
+This is a paper calculation for a specified finite state, not a new Lean-verified theorem. Set $m=n=1$ (that is, $m_X=m_Y=1$), cutting a two-bit word across $X\mid Y$. For $K=2$, the admissible words are exactly $00,01,10$; choose the positive equal-amplitude coherent state
+
+$$
+\lvert\psi\rangle=\frac{\lvert00\rangle+\lvert01\rangle+\lvert10\rangle}{\sqrt3},
+\qquad \langle\psi\mid\psi\rangle=\frac{3}{3}=1.
+$$
+
+Ordering the words on each side as $0,1$, the coefficient matrix and partial trace are
+
+$$
+\begin{aligned}
+M&=\frac1{\sqrt3}\begin{pmatrix}1&1\\1&0\end{pmatrix},\\
+\rho_X&=\operatorname{Tr}_Y(\lvert\psi\rangle\langle\psi\rvert)
+=MM^*=\frac13\begin{pmatrix}2&1\\1&1\end{pmatrix}.
+\end{aligned}
+$$
+
+Explicitly, $\rho_{xx'}=\sum_{y=0}^1 M_{xy}\overline{M_{x'y}}$: $00$ and $10$ share the right word $y=0$, leaving off-diagonal entries $\rho_{01}=\rho_{10}=1/3$. Hence
+
+$$
+\begin{aligned}
+\det(tI-\rho_X)&=t^2-t+\frac19,\\
+\lambda_+&=\frac{3+\sqrt5}{6},\qquad
+\lambda_-=\frac{3-\sqrt5}{6}.
+\end{aligned}
+$$
+
+Each eigenvalue has multiplicity $1$; both are positive and sum to $1$. The reduced rank is $2$, and the Schmidt coefficients are $\sqrt{\lambda_+},\sqrt{\lambda_-}$. Using natural logarithms, the entanglement entropy is
+
+$$
+S(\rho_X)=-\lambda_+\ln\lambda_+-\lambda_-\ln\lambda_->0.
+$$
+
+Neither counting three words nor taking $\ln3$ gives this entropy; replacing the ket by a uniform diagonal classical mixture of the three words removes those coherence terms.
+
+Across the same cut, every $K\ge3$ admits all four words $00,01,10,11$. The chosen positive equal-amplitude state is then
+
+$$
+\begin{aligned}
+\lvert\psi\rangle&=\frac{\lvert00\rangle+\lvert01\rangle+\lvert10\rangle+\lvert11\rangle}{2}
+=\lvert+\rangle\otimes\lvert+\rangle,\\
+\lvert+\rangle&=\frac{\lvert0\rangle+\lvert1\rangle}{\sqrt2},\qquad
+\langle\psi\mid\psi\rangle=4\left(\frac12\right)^2=1,\\
+\rho_X&=\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix}.
+\end{aligned}
+$$
+
+Its eigenvalues $1,0$ each have multiplicity $1$. The reduced rank is $1$, the sole nonzero Schmidt coefficient is $1$, and $S(\rho_X)=0$ (with $0\ln0=0$). Here we specify a state over all admissible words, without fixing first-bit pages or imposing the logical `directContract`; the preceding theorem instead characterizes attainable ranks and entropy extrema while jointly choosing the encoder and page states under that contract. This example determines no physical ground state or general entropy limit at fixed $K$; the subsequent open problems remain open.
+:::
+
+::: {.example #ex-ch39-p2e-phase-counterexample title="By Hand: Identical Probabilities, Different Entanglement"}
+Keep $m=n=1$ and the cut $X\mid Y$ from the preceding example, and fix any $K\ge3$; the admissible words are exactly $00,01,10,11$.
+Compare $\lvert\psi_+\rangle=(\lvert00\rangle+\lvert01\rangle+\lvert10\rangle+\lvert11\rangle)/2$ with $\lvert\psi_{\mathrm{phase}}\rangle=(\lvert00\rangle+\lvert01\rangle+\lvert10\rangle-\lvert11\rangle)/2$: only the phase of the $11$ amplitude changes, to $\pi$.
+Both states have squared norm $4(1/4)=1$, and each word has computational-basis probability $1/4$. Ordering each side as $0,1$, the latter state gives
+
+$$
+\begin{aligned}
+M_{\mathrm{phase}}&=\frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix},\\
+\rho_X&=\operatorname{Tr}_Y(\lvert\psi_{\mathrm{phase}}\rangle\langle\psi_{\mathrm{phase}}\rvert)=M_{\mathrm{phase}}M_{\mathrm{phase}}^*\\
+&=\frac14\begin{pmatrix}1+1&1-1\\1-1&1+1\end{pmatrix}=\frac{I_2}{2}.
+\end{aligned}
+$$
+
+In the partial trace, the right words $y=0,1$ contribute $1/4,-1/4$ to each off-diagonal entry, so they cancel. The reduced spectrum, listed with multiplicity, is $(1/2,1/2)$ (the eigenvalue $1/2$ has multiplicity $2$), and the Schmidt coefficients are $1/\sqrt2,1/\sqrt2$. With natural logarithms, the entanglement entropy is $S(\rho_X)=-2(1/2)\ln(1/2)=\ln2$, whereas the preceding example gives $0$ for $\psi_+$.
+
+This phase change is the joint controlled-sign operation $\operatorname{diag}(1,1,1,-1)$, not a product of single-qubit local phase operations: local unitaries preserve Schmidt coefficients and cannot turn the sole nonzero Schmidt coefficient $1$ of $\psi_+$ into the two coefficients above.
+
+Thus identical admissible-word support, counts, and even computational-basis probabilities do not determine entanglement; the chosen positive-phase equal-amplitude family remains a meaningful additional specification of the state. This is a paper calculation for finite states, with no conclusion about ground states, physical realization, or fractal entanglement scaling.
+:::
+
+::: {.example #ex-ch39-p2e-finite-kernel title="Paper derivation: compressing the positive equal-amplitude state's reduced spectrum to K dimensions"}
+The preceding calculations extend to a finite matrix calculation for the same specified state family. This is a paper derivation, not a new Lean-verified result. Fix $K\ge2$ and any $m,n\ge0$. Let $W_L$ contain all length-$L$ binary words avoiding $1^K$, write $z_L=|W_L|$, and choose
+
+$$
+\lvert\psi_{m,n}\rangle
+=\frac1{\sqrt{Z}}\sum_{w\in W_{m+n}}\lvert w\rangle,
+\qquad Z=z_{m+n}>0.
+$$
+
+The all-zero word ensures $Z>0$. No first-bit page is fixed. Partition $W_m$ into classes $A_r$ by the length $r$ of the terminal run of ones, and $W_n$ into classes $B_s$ by the length $s$ of the initial run of ones; both lengths are $0$ for the empty word. Legality gives $0\le r,s<K$. Let $a_r=|A_r|$ and $b_s=|B_s|$ be the actual finite counts, allowing zero. For $x\in A_r$ and $y\in B_s$, concatenation is legal exactly when $r+s<K$, so
+
+$$
+Z=\sum_{r+s<K}a_r b_s.
+$$
+
+In the full computational-basis spaces of dimensions $2^m$ and $2^n$, assign each nonempty class its normalized indicator vector $u_r=\sum_{x\in A_r}|x\rangle/\sqrt{a_r}$ or $v_s=\sum_{y\in B_s}|y\rangle/\sqrt{b_s}$. Assign the zero vector to an empty class, without inverting the square root of zero. Form matrices $U,V$ from these columns and define the $K\times K$ matrix
+
+$$
+C_{rs}=\mathbf1_{\{r+s<K\}}\sqrt{\frac{a_r b_s}{Z}}.
+$$
+
+The actual state's coefficient matrix is $M_{xy}=\mathbf1_{\{xy\in W_{m+n}\}}/\sqrt Z$. Expand $UCV^*$ entry by entry: each legal $x,y$ belongs to exactly one nonempty class, and the normalization factors cancel; an illegal word or concatenation gives zero. Thus $M=UCV^*$. Distinct nonempty classes are disjoint, hence
+
+$$
+\begin{aligned}
+U^*U&=D_A=\operatorname{diag}(\mathbf1_{\{a_r>0\}}),\\
+V^*V&=D_B=\operatorname{diag}(\mathbf1_{\{b_s>0\}}),\\
+D_A C D_B&=C.
+\end{aligned}
+$$
+
+The last identity handles short words and empty classes: $U,V$ with zero columns are not isometric embeddings of the entire $K$-dimensional space. Taking the partial trace of the actual pure state now gives
+
+$$
+\begin{aligned}
+\rho_X&=MM^*=U G U^*,\qquad G=CC^*,\\
+G_{rr'}&=\frac{\sqrt{a_r a_{r'}}}{Z}
+\sum_{s=0}^{K-1-\max(r,r')}b_s.
+\end{aligned}
+$$
+
+The sum counts right words compatible with both left boundary runs. The matrix $G$ vanishes on empty left classes, while the restriction of $U$ to the coordinate space of nonempty classes is an isometric embedding. Consequently, $G$ and $\rho_X$ have the same positive eigenvalues with the same multiplicities. The right reduction has that positive spectrum too, since $C^*C$ and $CC^*$ have the same positive spectrum. If $R=\operatorname{rank}C$, the physical zero-eigenvalue multiplicities are $2^m-R$ and $2^n-R$; the auxiliary matrix $G$ instead has zero multiplicity $K-R$. These counts must be distinguished.
+
+Since $\operatorname{Tr}G=\sum_{r,s}|C_{rs}|^2=1$, list its positive eigenvalues with multiplicity as $\nu_1,\ldots,\nu_R$. The finite-cut entanglement entropy, using natural logarithms, is
+
+$$
+\begin{aligned}
+S(\rho_X)&=-\sum_{j=1}^{R}\nu_j\ln\nu_j,\\
+0\le S(\rho_X)&\le\ln R
+\le\ln\!\bigl(\min\{K,2^m,2^n\}\bigr).
+\end{aligned}
+$$
+
+The entropy bound is the usual Shannon bound for $R$ positive numbers summing to $1$. If $m=0$ or $n=0$, then $R=1$ and the entropy is zero; at $m=n=1$, the nonzero part recovers the matrices in [@ex-ch39-p2e-positive-ket-handcalculation]. This calculation uses actual class counts without requiring their closed forms or substituting stationary probabilities. At fixed $K$, it bounds the cut entropy uniformly for this positive equal-amplitude family. It proves no entropy limit or bound independent of both $K$ and the cut lengths, and identifies no physical ground state or relation to Rauzy-boundary dimension. These counts carry no phase information. Whether changed phases preserve this spectrum requires a separate check; the joint sign change in the preceding example changes it.
+:::
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** In condensed-matter and atomic-physics literature, the order-$K = 2$ `NoAdjacentOnes` Hilbert space arises in two celebrated many-body settings: first, the topological Fibonacci-anyon "golden chain" of A. E. Feiguin et al. (*Phys. Rev. Lett.* **98**, 2007, 160409), where the fusion rule $\tau \times \tau = \mathbf{1} + \tau$ makes fusion-space dimensions grow as Fibonacci numbers; second, van der Waals $1/r^6$ Rydberg blockade arrays (modeled theoretically by I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301, and probed experimentally on a 51-atom quantum simulator by H. Bernien et al., *Nature* **551**, 2017, 579–584). Two scope boundaries apply whenever citing these physical realizations: first, nearest-neighbor pairwise Rydberg blockade forbids adjacent excitations $|11\rangle$ ($K = 2$, the PXP subspace), whereas simply extending pairwise blockade range forbids *all* pairs within distance $R_b$ (eliminating `101` along with `111`) and **does not** by itself enforce the $K > 2$ "no $K$ consecutive ones" constraint—realizing a $K > 2$ $K$-Bonacci subspace requires a dedicated multi-body $K$-local interaction; second, neither the anyon fusion chain nor a finite-blockade Rydberg Hamiltonian is formally identical to the exact zero-amplitude isometric `directContract` encoder of [@thm-ch39-p2e-direct-encoder-ranks].
 :::

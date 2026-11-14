@@ -589,6 +589,133 @@ $$
 
 此时区间 $1 \le r_0 \le 6$ 与 $1 \le r_1 \le 5$ 内的任意整点秩对均可实现：$r_0 = r_1 = K = 3$ 只是其中一种合法选择，而最大可达秩实为 $(6, 5)$，对应最大页纠缠熵 $(\ln 6, \ln 5)$。
 
+::: {.example #ex-ch39-p2e-positive-ket-handcalculation title="手算：同一切口上的正等幅合法字态"}
+这是指定有限态的纸面计算，不是新增的 Lean 验证定理。取 $m=n=1$（即 $m_X=m_Y=1$），沿 $X\mid Y$ 切开两比特字。$K=2$ 时，合法字恰为 $00,01,10$；选择正等幅相干态
+
+$$
+\lvert\psi\rangle=\frac{\lvert00\rangle+\lvert01\rangle+\lvert10\rangle}{\sqrt3},
+\qquad \langle\psi\mid\psi\rangle=\frac{3}{3}=1.
+$$
+
+两侧均按字序 $0,1$ 排列，系数矩阵与部分迹为
+
+$$
+\begin{aligned}
+M&=\frac1{\sqrt3}\begin{pmatrix}1&1\\1&0\end{pmatrix},\\
+\rho_X&=\operatorname{Tr}_Y(\lvert\psi\rangle\langle\psi\rvert)
+=MM^*=\frac13\begin{pmatrix}2&1\\1&1\end{pmatrix}.
+\end{aligned}
+$$
+
+具体地，$\rho_{xx'}=\sum_{y=0}^1 M_{xy}\overline{M_{x'y}}$：$00$ 与 $10$ 共享右字 $y=0$，故留下非对角元 $\rho_{01}=\rho_{10}=1/3$。因此
+
+$$
+\begin{aligned}
+\det(tI-\rho_X)&=t^2-t+\frac19,\\
+\lambda_+&=\frac{3+\sqrt5}{6},\qquad
+\lambda_-=\frac{3-\sqrt5}{6}.
+\end{aligned}
+$$
+
+两本征值各有重数 $1$，均为正且和为 $1$；约化秩为 $2$，施密特系数为 $\sqrt{\lambda_+},\sqrt{\lambda_-}$。以自然对数计，纠缠熵是
+
+$$
+S(\rho_X)=-\lambda_+\ln\lambda_+-\lambda_-\ln\lambda_->0.
+$$
+
+仅数出三个字或取 $\ln3$ 都不能得到这个熵；将三字等概率混成对角经典混合态，会抹去上述相干项。
+
+同一切口上，每个 $K\ge3$ 都允许全部四字 $00,01,10,11$。此时所选正等幅态为
+
+$$
+\begin{aligned}
+\lvert\psi\rangle&=\frac{\lvert00\rangle+\lvert01\rangle+\lvert10\rangle+\lvert11\rangle}{2}
+=\lvert+\rangle\otimes\lvert+\rangle,\\
+\lvert+\rangle&=\frac{\lvert0\rangle+\lvert1\rangle}{\sqrt2},\qquad
+\langle\psi\mid\psi\rangle=4\left(\frac12\right)^2=1,\\
+\rho_X&=\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix}.
+\end{aligned}
+$$
+
+其本征值 $1,0$ 各有重数 $1$，约化秩为 $1$，唯一非零施密特系数为 $1$，故 $S(\rho_X)=0$（约定 $0\ln0=0$）。这里在所有合法字上指定态，未固定首比特页，也未施加逻辑 `directContract`；前一定理则在该契约下联合选择编码器与页态，刻画可达秩与熵极值。本例不确定物理基态，也不推出一般固定 $K$ 的熵极限；后文开放问题仍然开放。
+:::
+
+::: {.example #ex-ch39-p2e-phase-counterexample title="手算：概率相同，纠缠不同"}
+沿用前例的 $m=n=1$ 与 $X\mid Y$ 切口，固定任意 $K\ge3$；合法字恰为 $00,01,10,11$。
+比较 $\lvert\psi_+\rangle=(\lvert00\rangle+\lvert01\rangle+\lvert10\rangle+\lvert11\rangle)/2$ 与 $\lvert\psi_{\mathrm{phase}}\rangle=(\lvert00\rangle+\lvert01\rangle+\lvert10\rangle-\lvert11\rangle)/2$：只将 $11$ 振幅的相位改为 $\pi$。
+两态的范数平方均为 $4(1/4)=1$，在计算基中每个字的概率均为 $1/4$。两侧按 $0,1$ 排列，后一态给出
+
+$$
+\begin{aligned}
+M_{\mathrm{phase}}&=\frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix},\\
+\rho_X&=\operatorname{Tr}_Y(\lvert\psi_{\mathrm{phase}}\rangle\langle\psi_{\mathrm{phase}}\rvert)=M_{\mathrm{phase}}M_{\mathrm{phase}}^*\\
+&=\frac14\begin{pmatrix}1+1&1-1\\1-1&1+1\end{pmatrix}=\frac{I_2}{2}.
+\end{aligned}
+$$
+
+部分迹中，右字 $y=0,1$ 对非对角元的贡献分别为 $1/4,-1/4$，恰好抵消。约化谱按重数列为 $(1/2,1/2)$（本征值 $1/2$ 的重数为 $2$），施密特系数为 $1/\sqrt2,1/\sqrt2$；自然对数下的纠缠熵为 $S(\rho_X)=-2(1/2)\ln(1/2)=\ln2$，而前例的 $\psi_+$ 给出 $0$。
+
+这个相位变化是联合受控变号操作 $\operatorname{diag}(1,1,1,-1)$，不是两个单比特局域相位操作的乘积：局域酉操作保持施密特系数，不能把 $\psi_+$ 的唯一非零施密特系数 $1$ 变成上述两个系数。
+
+因此，相同的合法字支撑、计数乃至计算基概率都不足以确定纠缠；所选正相位等幅态族仍是有意义的额外态规定。这只是有限态的纸面计算，不给出基态、物理实现或分形纠缠标度结论。
+:::
+
+::: {.example #ex-ch39-p2e-finite-kernel title="纸面推导：将正等幅态的约化谱压缩到 K 维"}
+前两个手算可以推广为同一指定态族的有限矩阵计算。以下是纸面推导，不是新增的 Lean 验证结果。固定 $K\ge2$ 与任意 $m,n\ge0$，令 $W_L$ 为全部禁连续 $1^K$ 的长 $L$ 二进制字，$z_L=|W_L|$，并选取
+
+$$
+\lvert\psi_{m,n}\rangle
+=\frac1{\sqrt{Z}}\sum_{w\in W_{m+n}}\lvert w\rangle,
+\qquad Z=z_{m+n}>0.
+$$
+
+全零字保证 $Z>0$，这里仍未固定首比特页。以末端连续 `1` 的长度 $r$ 将 $W_m$ 分为 $A_r$，以开头连续 `1` 的长度 $s$ 将 $W_n$ 分为 $B_s$；空字的这两个长度都取 $0$。因为字本身合法，$0\le r,s<K$。记实际有限计数为 $a_r=|A_r|$、$b_s=|B_s|$，允许它们为 $0$。左右字 $x\in A_r$、$y\in B_s$ 的拼接合法当且仅当 $r+s<K$，所以
+
+$$
+Z=\sum_{r+s<K}a_r b_s.
+$$
+
+在完整的 $2^m$、$2^n$ 维计算基空间内，为每个非空类取归一化指标向量 $u_r=\sum_{x\in A_r}|x\rangle/\sqrt{a_r}$、$v_s=\sum_{y\in B_s}|y\rangle/\sqrt{b_s}$；空类对应零向量，不对 $0$ 开方后取倒数。以它们为列组成 $U,V$，再定义 $K\times K$ 矩阵
+
+$$
+C_{rs}=\mathbf1_{\{r+s<K\}}\sqrt{\frac{a_r b_s}{Z}}.
+$$
+
+实际态的系数矩阵为 $M_{xy}=\mathbf1_{\{xy\in W_{m+n}\}}/\sqrt Z$。逐项展开 $UCV^*$：合法 $x,y$ 各只落入一个非空类，归一化因子抵消；非法字或非法拼接的系数为 $0$。因此 $M=UCV^*$。非空类彼此不交，故
+
+$$
+\begin{aligned}
+U^*U&=D_A=\operatorname{diag}(\mathbf1_{\{a_r>0\}}),\\
+V^*V&=D_B=\operatorname{diag}(\mathbf1_{\{b_s>0\}}),\\
+D_A C D_B&=C.
+\end{aligned}
+$$
+
+最后一式处理了短字和空类：不能把带零列的 $U,V$ 当成整个 $K$ 维空间上的等距嵌入。现在对实际纯态作部分迹，得到
+
+$$
+\begin{aligned}
+\rho_X&=MM^*=U G U^*,\qquad G=CC^*,\\
+G_{rr'}&=\frac{\sqrt{a_r a_{r'}}}{Z}
+\sum_{s=0}^{K-1-\max(r,r')}b_s.
+\end{aligned}
+$$
+
+这个和只数能与两条左端游程同时相接的右字。$G$ 在空的左类上为零，而 $U$ 限制到非空类张成的坐标空间后是等距嵌入；所以 $G$ 与 $\rho_X$ 的全部正本征值及其重数相同。右约化态亦有同一正谱，因为 $C^*C$ 与 $CC^*$ 的正谱相同。若 $R=\operatorname{rank}C$，两侧物理零本征值的重数分别为 $2^m-R$、$2^n-R$；辅助矩阵 $G$ 的零重数则是 $K-R$，三者不能混用。
+
+由 $\operatorname{Tr}G=\sum_{r,s}|C_{rs}|^2=1$，将正本征值按重数记为 $\nu_1,\ldots,\nu_R$，有限切口的自然对数纠缠熵就是
+
+$$
+\begin{aligned}
+S(\rho_X)&=-\sum_{j=1}^{R}\nu_j\ln\nu_j,\\
+0\le S(\rho_X)&\le\ln R
+\le\ln\!\bigl(\min\{K,2^m,2^n\}\bigr).
+\end{aligned}
+$$
+
+熵上界用的是 $R$ 个正数之和为 $1$ 的通常 Shannon 熵界。$m=0$ 或 $n=0$ 时 $R=1$、熵为 $0$；$m=n=1$ 时，上式的非零部分给回 [@ex-ch39-p2e-positive-ket-handcalculation] 的矩阵。这个计算使用实际类计数，不要求先给出它们的闭式，也不把有限计数替换为平稳概率。固定 $K$ 时，它使此正等幅态族的切口熵一致有界；它不证明熵极限存在，不给出同时独立于 $K$ 与切口长度的统一熵界，也不指定物理基态或建立劳齐边界维数与纠缠的关系。这些计数不包含相位信息；改变相位后是否仍有同一谱，须另外核对，前例的联合变号即改变谱。
+:::
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="文献结果：斐波那契任意子黄金链与里德堡原子阻塞实验背景（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在凝聚态与原子分子光物理文献中，$K = 2$ 的禁邻 `11` 希尔伯特空间在两类著名多体系统中获得了物理实现或理论建模：其一是 A. E. Feiguin 等人提出的拓扑斐波那契任意子“黄金链”（golden chain）模型（*Phys. Rev. Lett.* **98**, 2007, 160409），其融合规则 $\tau \times \tau = \mathbf{1} + \tau$ 使有限链融合空间维数按斐波那契数增长；其二是里德堡（Rydberg）原子阵列中的偶极/范德瓦耳斯 $1/r^6$ 阻塞机制（理论建模见 I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301；51 原子量子模拟器实验见 H. Bernien et al., *Nature* **551**, 2017, 579–584）。引用这些物理背景时须注意两重边界：第一，最近邻两体里德堡阻塞刚好实现禁相邻激发 $|11\rangle$（对应 $K = 2$ 的 PXP 子空间），但单纯拉大两体阻塞半径只会禁止距离 $R_b$ 内的一切激发对（例如连 `101` 一并禁止），**并不会自动产生 $K > 2$ 的禁连续 $1^K$ 约束**——若要在物理哈密顿量中实现 $K > 2$ 的 $K$-Bonacci 子空间，必须另行设计专门的 $K$ 体局域相互作用；第二，任意子融合空间与有限阻塞比实验哈密顿量均非 [@thm-ch39-p2e-direct-encoder-ranks] 中精确零振幅等距直接编码器的形式同义物。
 :::
