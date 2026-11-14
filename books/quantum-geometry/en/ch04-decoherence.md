@@ -390,6 +390,78 @@ Stationarity of an environment marginal is not by itself a bound on the accumula
 3. **Exact purity endpoint versus fixed-$N$ and time-uniform bounds**: At $r=1$, $\eta_1=\lvert +\rangle\langle +\rvert$ and the discrepancy vanishes identically ($0$ for all $N$), so this example does not refute an exactly pure, unchanged environment premise. Instead, it separates two distinct obligations: for any **fixed** step count $N=2m$, the discrepancy $\frac{1-r^{2m}}{2}\to 0$ as $r\to 1$; yet for any fixed $r\in[0,1)$, the even-time supremum is $\sup_{m\ge 1}\frac{1-r^{2m}}{2}=\frac{1}{2}$, so a stationary near-pure environment marginal does not by itself yield a reset approximation uniform in time. This elementary two-qubit calculation illustrates that mathematical distinction and does not claim a physical experiment, a novel result, or a universal explanation of open-system dynamics; controlling the joint correlations, identifying the physical coupling, and experimental support remain outside these mathematical applications.
 :::
 
+::: {.remark #rem-pure-environment-marginal-defect title="Exact-Purity Marginal Factorization and the Near-Pure Single-Step Defect Bound (Application Derivation)"}
+In contrast to the stationary mixed environment marginal of [@ex-retained-environment-cnot], **exact purity of the actual environment marginal** has a stronger algebraic consequence, while **near purity** relative to a specified pure state directly bounds the single-step factorization defect (all statements below are application derivations outside frozen theorem boxes, not additional clauses of the cited frozen declarations or new formal theorems):
+
+1. **Tensor factorization from an exactly pure actual environment marginal**: Let $X\in M_{\mathrm{Fin}\,d\times\mathrm{Fin}\,e}(\mathbb{C})$ be a finite-dimensional positive semidefinite joint matrix of trace $1$, writing $\Tr_{\mathrm{S}}(X)$ for the partial trace over the system (with entry $(b,b')$ equal to $\sum_i X_{(i,b),\,(i,b')}$) and $\Tr_{\mathrm{E}}(X)$ for the partial trace over the environment (with entry $(i,j)$ equal to $\sum_b X_{(i,b),\,(j,b)}$). Fix an environment basis index $a\in\mathrm{Fin}\,e$ and its pure basis projector $p=\lvert a\rangle\langle a\rvert$ ($p_{b,b'}=\delta_{b,a}\delta_{b',a}$). If the actual environment marginal satisfies $\Tr_{\mathrm{S}}(X)=p=\lvert a\rangle\langle a\rvert$, then for every $b\ne a$ the environment diagonal entry vanishes:
+
+   $$
+   0=p_{b,b}=\bigl(\Tr_{\mathrm{S}}(X)\bigr)_{b,b}=\sum_{i\in\mathrm{Fin}\,d}X_{(i,b),\,(i,b)}.
+   $$
+
+   Because $X$ is positive semidefinite, every joint diagonal entry satisfies $X_{(i,b),\,(i,b)}\ge 0$; a sum of nonnegative real numbers vanishes if and only if each summand vanishes, so $X_{(i,b),\,(i,b)}=0$ for all $i$ and all $b\ne a$. By the positive semidefinite entry bound $|X_{\alpha,\beta}|^2\le X_{\alpha,\alpha}X_{\beta,\beta}$ (from Cauchy–Schwarz on the columns of $\sqrt{X}$), every joint entry with $b\ne a$ or $b'\ne a$ satisfies $X_{(i,b),\,(j,b')}=0$; thus all joint rows and columns outside $a$ vanish identically. The remaining $(a,a)$ environment block is precisely the actual system marginal $\bigl(\Tr_{\mathrm{E}}(X)\bigr)_{i,j}=\sum_b X_{(i,b),\,(j,b)}=X_{(i,a),\,(j,a)}$, giving
+
+   $$
+   X=\bigl(\Tr_{\mathrm{E}}(X)\bigr)\otimes p.
+   $$
+
+   Neither a global pure-state assumption on $X$ nor a separately assumed product condition is needed; however, this factorization is an algebraic consequence of $\Tr_{\mathrm{S}}(X)=p$ and does not prove that the actual environment marginal of a physical system remains pure.
+
+2. **Reset powers from an exact pure marginal at every input step of a finite horizon**: Fix a finite horizon $N\in\mathbb{N}$ and a joint unitary $U$, evolve the actual joint states by $\tau_{k+1}=U\tau_k U^*$ with system marginals $\rho_k=\Tr_{\mathrm{E}}(\tau_k)$, and define explicitly the pure-reference single-step reset map
+
+   $$
+   R_p(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes p)U^*\bigr).
+   $$
+
+   If at every input step $0\le k<N$, $\tau_k$ is positive semidefinite (and trace-one) and its actual environment marginal is the exact same pure projector $\Tr_{\mathrm{S}}(\tau_k)=p$, then item 1 gives $\tau_k=\rho_k\otimes p$ at each input $0\le k<N$, so $\rho_{k+1}=\Tr_{\mathrm{E}}(U\tau_k U^*)=\Tr_{\mathrm{E}}\bigl(U(\rho_k\otimes p)U^*\bigr)=R_p(\rho_k)$. Induction on $k$ yields
+
+   $$
+   \rho_N=R_p^N(\rho_0),
+   $$
+
+   including $N=0$ ($R_p^0(\rho_0)=\rho_0$). Exact purity at the required inputs $k<N$ therefore removes the independent product-state assumption, but $\Tr_{\mathrm{S}}(\tau_k)=p$ at each input $k<N$ remains an explicit physical premise at every such step: it is not proved by unitarity of $U$, must not be overgeneralized to all physical systems, and is distinct from stationarity of a mixed marginal alone, from approximate purity, and from merely choosing a pure state $p$ as a comparison reference.
+
+3. **Dimension-independent single-step defect bound for a near-pure actual marginal**: For any finite-dimensional positive semidefinite joint matrix $X\in M_{\mathrm{Fin}\,d\times\mathrm{Fin}\,e}(\mathbb{C})$ with $\Tr(X)=1$, fix an environment basis point $a\in\mathrm{Fin}\,e$ and pure projector $p=\lvert a\rangle\langle a\rvert$, set $\sigma=\Tr_{\mathrm{E}}(X)$ for the actual system marginal, and define the leakage outside $a$ by
+
+   $$
+   \varepsilon=1-\operatorname{Re}\Bigl(\bigl(\Tr_{\mathrm{S}}(X)\bigr)_{a,a}\Bigr)\in[0,1].
+   $$
+
+   With the half-trace-norm convention $D(A,B)=\frac{1}{2}\operatorname{traceNorm}(A-B)=\frac{1}{2}\|A-B\|_1$ and with no product assumption on $X$, the single-step defect to $\sigma\otimes p$ satisfies the dimension-independent bound
+
+   $$
+   D(X,\,\sigma\otimes p)\le\sqrt{\varepsilon}+\frac{\varepsilon}{2}.
+   $$
+
+   The self-contained proof combines two estimates. First, set the joint orthogonal projector $P=I\otimes p$ ($P^*=P=P^2$), take the positive semidefinite square root $S=\sqrt{X}$ ($S^*=S$, $S^2=X$), and put $C=PS$. Using $\Tr(PX)=\bigl(\Tr_{\mathrm{S}}(X)\bigr)_{a,a}=1-\varepsilon$ and $(I-P)^2=I-P$, the Frobenius norms satisfy $\|S\|_{\mathrm F}^2=\Tr(X)=1$, $\|C\|_{\mathrm F}^2=\Tr(S^* P^2 S)=\Tr(PX)=1-\varepsilon\le 1$, and $\|S-C\|_{\mathrm F}^2=\Tr\bigl(S^*(I-P)^2 S\bigr)=\Tr\bigl((I-P)X\bigr)=\varepsilon$, so $\|S\|_{\mathrm F}=1$, $\|C\|_{\mathrm F}\le 1$, and $\|S-C\|_{\mathrm F}=\|S^*-C^*\|_{\mathrm F}=\sqrt{\varepsilon}$. Expanding $X-PXP=SS^*-CC^*$ as $(S-C)S^*+C(S^*-C^*)$ and applying the trace-norm triangle inequality together with the Cauchy–Schwarz product bound $\operatorname{traceNorm}(AB)\le\|A\|_{\mathrm F}\|B\|_{\mathrm F}$ gives
+
+   $$
+   \begin{aligned}
+   \operatorname{traceNorm}(X-PXP)&\le\operatorname{traceNorm}\bigl((S-C)S^*\bigr)+\operatorname{traceNorm}\bigl(C(S^*-C^*)\bigr) \\
+   &\le\|S-C\|_{\mathrm F}\|S^*\|_{\mathrm F}+\|C\|_{\mathrm F}\|S^*-C^*\|_{\mathrm F}\le 2\sqrt{\varepsilon}.
+   \end{aligned}
+   $$
+
+   Second, write $(A_b)_{i,j}=X_{(i,b),\,(j,b)}$ for the $(b,b)$ diagonal environment block of $X$, and abbreviate the $a$-block as $A_0=A_a$. Then $PXP=A_0\otimes p$, while $\sigma-A_0=\sum_{b\ne a}A_b$ is the sum of the discarded positive semidefinite diagonal environment blocks; hence $\sigma-A_0$ and $(\sigma-A_0)\otimes p$ are positive semidefinite, and the trace norm of $(\sigma-A_0)\otimes p$ equals its trace:
+
+   $$
+   \begin{aligned}
+   \operatorname{traceNorm}\bigl((\sigma-A_0)\otimes p\bigr)&=\Tr\bigl((\sigma-A_0)\otimes p\bigr) \\
+   &=\bigl(\Tr(\sigma)-\Tr(A_0)\bigr)\Tr(p)=1-(1-\varepsilon)=\varepsilon.
+   \end{aligned}
+   $$
+
+   Splitting $X-\sigma\otimes p=(X-PXP)-\bigl((\sigma-A_0)\otimes p\bigr)$, applying the trace-norm triangle inequality, and dividing by $2$ yields $D(X,\sigma\otimes p)\le\frac{1}{2}(2\sqrt{\varepsilon}+\varepsilon)=\sqrt{\varepsilon}+\frac{\varepsilon}{2}$.
+
+4. **Finite-horizon trajectory sum, controlled-record identification, and distinction between $R_p$ and $R_\eta$**: Along an actual trajectory $\tau_{k+1}=U\tau_k U^*$, define the step-$k$ leakage $\varepsilon_k=1-\operatorname{Re}\bigl((\Tr_{\mathrm{S}}\tau_k)_{a,a}\bigr)\in[0,1]$ relative to the same fixed pure basis state $p=\lvert a\rangle\langle a\rvert$, so that $\delta_{k,p}=D(\tau_k,\rho_k\otimes p)\le\sqrt{\varepsilon_k}+\varepsilon_k/2$. Substituting this into the accumulated defect estimate of [@rem-retained-environment-defect] for the pure-reference reset map $R_p$ gives, for every finite horizon $N\in\mathbb{N}$,
+
+   $$
+   D\bigl(\rho_N,\,R_p^N(\rho_0)\bigr)\le\sum_{k=0}^{N-1}\left(\sqrt{\varepsilon_k}+\frac{\varepsilon_k}{2}\right).
+   $$
+
+   Only when $R_p$ is identified with the controlled-record channel $\Phi_E$ under the actual controlled-column hypothesis $U_{(i,b),\,(j,a)}=[j=i]\,E_i(b)$ already explained in [@rem-retained-environment-defect] (together with the cross-class overlap bound $|G_{ij}|\le q<1$, or the ray-separation bound of [@rem-ray-record-orbit]) can this finite-horizon sum also supply the actual-trajectory Frobenius pinching error budget. Crucially, the comparison targets must be kept distinct: the defect bound above measures deviation $D(\tau_k,\rho_k\otimes p)$ relative to the **pure projector** $p$ and directly controls the pure-reference reset map $R_p(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes p)U^*\bigr)$; it **does not automatically establish** either $R_p=R_\eta$ or an error bound for a mixed-reference reset map $R_\eta(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes\eta)U^*\bigr)$ (distinct reference states need not induce distinct reset maps — for example, $U=I$ induces the identity system map for every trace-one environment reference — but unless $R_p=R_\eta$ is independently established, replacing $\eta$ by $p$ requires a separate comparison between $R_p$ and $R_\eta$ and their iterates), so this pure-reference defect bound cannot be applied directly to the mixed-reference CNOT reset channel $R_{\eta_r}$ ($0\le r<1$) of [@ex-retained-environment-cnot]. Finally, this bound is a one-step estimate whose trajectory application sums over the finite horizon $N$; it proves neither physical smallness of $\varepsilon_k$ nor an error bound uniform in time.
+:::
+
 **Decay to zero: is it still reversible?** In [@prop-phase-damping-decay] the coherence is multiplied by $c$ at each step, leaving $c^N\rho_{01}$ after $N$ steps and finally zero. Section 4.1 showed that one step of decoherence can be seen as a reversible coupling followed by discarding the environment ([@thm-stinespring-dilation], [@thm-reduced-access-defect]). But "each step can be seen this way" and "all the steps together are still the shadow of one reversible evolution" are different claims: the first allows a different dilation at every step, the second asks one unitary $U$ to account for all the powers $T^n$ at once. The next theorem says that the second holds for every contraction.
 
 ::: {.theorem #thm-unitary-power-dilation title="Sz.-Nagy Unitary Power Dilation: Every Power of a Contraction Is a Shadow of the Same Unitary" lean="D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation"}
@@ -407,13 +479,13 @@ The Lean proof has two steps, and the second is exactly a "collision model".
 (2) All steps: the collision model. Take $H = \ell^2(\mathbb{Z};\, E \oplus E)$, with one copy of the system and one of the environment at every integer site. $U$ first applies $J$ at every site at once and then moves every environment component one site to the right; a product of two unitaries, it is unitary. $V$ puts $x$ into the system component of site 0, and $V^{\dagger}$ reads back the system component of site 0. Induction on $n$ shows that after $n$ steps the system component of site 0 is $T^n x$, its environment component is zero, and all sites with negative index are zero. The reason is that at every step the system at site 0 meets a blank environment arriving from the left, while the used environment leaves to the right and never comes back. The full proof is checked by the Lean kernel.
 :::
 
-**Why the environment must be infinite.** For nonzero $E$, the space $H$ built in the proof is infinite-dimensional, and this is not laziness (a manual derivation): if $\lVert T^n x\rVert \to 0$ for some unit vector $x$, no finite-dimensional $H$ can satisfy [@thm-unitary-power-dilation]. The unitaries of a finite-dimensional space form a compact set, so the sequence $U^n$ has a convergent subsequence $U^{n_k} \to W$; choosing it so that the gaps $m_k = n_{k+1} - n_k$ tend to infinity gives $U^{m_k} = U^{n_{k+1}}(U^{n_k})^{-1} \to W W^{-1} = I$. Hence
+**Why the total dilation space $H$ must be infinite-dimensional.** When a decaying vector exists, building an infinite-dimensional total dilation space $H$ in the proof is not laziness (this is manual application reasoning, not formalized in this book; the frozen existence theorem [@thm-unitary-power-dilation] does not itself assert this corollary): fix complete complex Hilbert spaces $E$ and $H$, bounded linear operators $T : E \to E$ and $V : E \to H$, and a fixed unitary operator $U$ on $H$, and suppose that for some nonzero vector $x \in E$ ($x \neq 0$) with $\lVert T^n x\rVert \to 0$, the same pair $(U, V)$ satisfies the exact all-power compression $V^{\dagger} U^n V x = T^n x$ for every $n \in \mathbb{N}$ (note that the $n = 0$ case already gives $V^{\dagger} V x = T^0 x = x$, so a separate global isometry or contraction assumption is not even needed for this contradiction). If the **total dilation space $H$ is finite-dimensional**, the bounded-operator space on $H$ is finite-dimensional and its unitary group is closed and bounded, hence compact. By compact-group recurrence of powers (or elementary extraction of a convergent subsequence $U^{n_k} \to W$ with strictly increasing gaps $m_k = n_{k+1} - n_k \to \infty$, so that $U^{m_k} = U^{n_{k+1}}(U^{n_k})^{-1} \to W W^{-1} = I$), there exists a strictly increasing sequence of arbitrarily late powers $m_k \to \infty$ with $U^{m_k} \to I$. Continuity of the compressed observable $W \mapsto \lVert V^{\dagger} W V x\rVert$ then yields, along this subsequence,
 
 $$
-\langle x, T^{m_k}x\rangle = \langle Vx, U^{m_k}Vx\rangle \to \langle Vx, Vx\rangle = 1,
+\lVert T^{m_k} x\rVert = \lVert V^{\dagger} U^{m_k} V x\rVert \;\longrightarrow\; \lVert V^{\dagger} I V x\rVert = \lVert x\rVert > 0,
 $$
 
-while the left side has modulus at most $\lVert T^{m_k}x\rVert \to 0$, a contradiction. A finite environment sooner or later sends the leaked amplitude back; a decay that never returns needs an infinite environment to hold it.
+contradicting $\lVert T^n x\rVert \to 0$! Whenever $T$ has a nonzero decaying vector $\lVert T^n x\rVert \to 0$, any exact common compression of all natural powers therefore requires the **total dilation space $H$ to be infinite-dimensional**. Crucially, the premise used by compactness is finite dimensionality of the **entire dilation space $H$**, not of the environment alone: when the system space $E$ can be infinite-dimensional, a finite-dimensional environment does not make the total space $H$ finite-dimensional, so this argument yields no obstruction from environment dimension alone; only when $E$ itself is finite-dimensional (such as $E = \mathbb{C}$ in the next example) does infinite total dimension of $H$ force an infinite-dimensional auxiliary environment. Moreover, this compact-group return argument provides no quantitative return-time bound, claims no general exact periodicity, and excludes neither finite-horizon dilations ($n \le N$) nor finite-horizon approximations.
 
 ::: {.example #ex-halmos-one-step-recurrence title="A One-Step Dilation Only Covers One Step: at c = 0.8 the Leaked Amplitude Comes Back"}
 Take the simplest contraction, $E = \mathbb{C}$ and $T = c = 0.8$: the factor by which the coherence of [@prop-phase-damping-decay] is multiplied at each step. With $s = \sqrt{1 - c^2} = 0.6$, the Halmos construction of step (1) of the proof gives
@@ -437,7 +509,7 @@ From the second step on, a single environment sends the leaked amplitude back; a
 :::
 
 ::: {.figure src="ch04-fresh-environment"}
-**The same environment sends the amplitude back; only a fresh one lets it go for good.** The cyan points are $c^n$ ($c = 0.8$) at cell $0$ of the collision model, which meets a fresh environment at every step and decays to zero ([@thm-unitary-power-dilation]); the grey points are $(J^n)_{00} = \cos n\varphi$ for the same environment used again and again, swinging between $-1$ and $1$ and back at $0.999$ at $n = 39$ (the circled point). Both columns of numbers are the hand computation of [@ex-halmos-one-step-recurrence]; that a finite environment must send the amplitude back is the text's hand argument, not formalized in this book.
+**The same environment sends the amplitude back; only a fresh one lets it go for good.** The cyan points are $c^n$ ($c = 0.8$) at cell $0$ of the collision model, which meets a fresh environment at every step and decays to zero ([@thm-unitary-power-dilation]); the grey points are $(J^n)_{00} = \cos n\varphi$ for the same environment used again and again, swinging between $-1$ and $1$ and back at $0.999$ at $n = 39$ (the circled point). Both columns of numbers are the hand computation of [@ex-halmos-one-step-recurrence]; that a finite-dimensional total dilation space must send the amplitude back is the text's manual application argument, not formalized in this book.
 :::
 
 > Leaked amplitude does not come back, not because it has vanished, but because the environment that meets the system is always a fresh one.

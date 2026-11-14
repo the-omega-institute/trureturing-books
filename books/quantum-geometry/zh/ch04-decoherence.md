@@ -390,6 +390,78 @@ $$
 3. **精确纯态端点与两类极限命题的区分**：当 $r=1$ 时，$\eta_1=\lvert +\rangle\langle +\rvert$，上述迹距离偏离恒为 $0$；因此该算例并不否定“环境精确为纯态且保持不变”这一前提。它展示的是两件不同的数学义务：对任意**固定**步数 $N=2m$，当 $r\to 1$ 时偏离 $\frac{1-r^{2m}}{2}\to 0$；但对任意固定的 $r\in[0,1)$，关于偶数步时间的上确界恒为 $\sup_{m\ge 1}\frac{1-r^{2m}}{2}=\frac{1}{2}$，不能仅凭环境边缘态定常且单步接近纯态就断言时间一致的重置近似界。这一双比特手算仅用于说明上述数学区分，不声称物理实验、原创发现或开放系统演化的普适解释；联合相关性的实际控制、物理耦合的标定与实验验证仍处于这些数学应用之外。
 :::
 
+::: {.remark #rem-pure-environment-marginal-defect title="环境边缘态的精确纯度因子化与近纯态单步缺陷界（应用推导）"}
+与 [@ex-retained-environment-cnot] 中混合环境边缘态仅保持定常不同，**真实环境边缘态的精确纯度**具有更强的代数后果；而当真实环境边缘态仅接近指定纯态时，其偏离量则可直接控制单步因子化缺陷（以下均为定理盒之外的应用推导，不构成所引冻结声明的附加条款或新的形式化定理）：
+
+1. **真实环境边缘态精确为纯基态时的张量积因子化**：设 $X\in M_{\mathrm{Fin}\,d\times\mathrm{Fin}\,e}(\mathbb{C})$ 为有限维半正定且迹为 $1$ 的联合矩阵，记对系统求偏迹为 $\Tr_{\mathrm{S}}(X)$（其第 $(b,b')$ 元为 $\sum_i X_{(i,b),\,(i,b')}$），对环境求偏迹为 $\Tr_{\mathrm{E}}(X)$（其第 $(i,j)$ 元为 $\sum_b X_{(i,b),\,(j,b)}$）。固定环境基下标 $a\in\mathrm{Fin}\,e$ 及纯基态投影 $p=\lvert a\rangle\langle a\rvert$（矩阵元 $p_{b,b'}=\delta_{b,a}\delta_{b',a}$）。若真实环境边缘态精确满足 $\Tr_{\mathrm{S}}(X)=p=\lvert a\rangle\langle a\rvert$，则对任意 $b\ne a$，环境对角元满足
+
+   $$
+   0=p_{b,b}=\bigl(\Tr_{\mathrm{S}}(X)\bigr)_{b,b}=\sum_{i\in\mathrm{Fin}\,d}X_{(i,b),\,(i,b)}.
+   $$
+
+   因 $X$ 半正定，每个联合对角元 $X_{(i,b),\,(i,b)}\ge 0$；非负实数之和为零迫使每一项各自为零，即对所有 $i$ 与所有 $b\ne a$ 均有 $X_{(i,b),\,(i,b)}=0$。再由半正定矩阵的矩阵元上界 $|X_{\alpha,\beta}|^2\le X_{\alpha,\alpha}X_{\beta,\beta}$（对平方根 $\sqrt{X}$ 的列向量应用 Cauchy–Schwarz 不等式），凡满足 $b\ne a$ 或 $b'\ne a$ 的联合矩阵元必有 $X_{(i,b),\,(j,b')}=0$，即 $a$ 之外的所有联合行与列恒为零。唯一保留下来的 $(a,a)$ 环境块恰为真实系统边缘态 $\bigl(\Tr_{\mathrm{E}}(X)\bigr)_{i,j}=\sum_b X_{(i,b),\,(j,b)}=X_{(i,a),\,(j,a)}$，从而
+
+   $$
+   X=\bigl(\Tr_{\mathrm{E}}(X)\bigr)\otimes p.
+   $$
+
+   这一因子化无需额外假设全局联合态 $X$ 为纯态，也无需事先假定 $X$ 为乘积态；但它只是从“真实环境边缘态等于 $p$”出发的代数推论，并不证明物理演化中的真实环境边缘态会保持为纯态。
+
+2. **有限步轨迹上各输入步精确纯边缘态导出重置幂**：固定有限步数 $N\in\mathbb{N}$ 与联合幺正算子 $U$，令真实联合密度态按 $\tau_{k+1}=U\tau_k U^*$ 演化，记真实系统边缘态为 $\rho_k=\Tr_{\mathrm{E}}(\tau_k)$，并显式定义对应于纯投影 $p=\lvert a\rangle\langle a\rvert$ 的单步重置映射
+
+   $$
+   R_p(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes p)U^*\bigr).
+   $$
+
+   若在每一个输入步 $0\le k<N$ 上，$\tau_k$ 半正定（且迹为 $1$）且真实环境边缘态均精确等于同一个纯投影 $\Tr_{\mathrm{S}}(\tau_k)=p$，则由第 1 条知在每个输入步 $0\le k<N$ 上均有 $\tau_k=\rho_k\otimes p$，从而 $\rho_{k+1}=\Tr_{\mathrm{E}}(U\tau_k U^*)=\Tr_{\mathrm{E}}\bigl(U(\rho_k\otimes p)U^*\bigr)=R_p(\rho_k)$。对 $k$ 归纳即得
+
+   $$
+   \rho_N=R_p^N(\rho_0),
+   $$
+
+   其中包含 $N=0$ 的恒等情形（$R_p^0(\rho_0)=\rho_0$）。因此在所需输入步 $k<N$ 上假设真实环境边缘态精确为同一个纯态 $p$，即可省去独立的乘积态假设；但“在每个输入步 $k<N$ 上 $\Tr_{\mathrm{S}}(\tau_k)=p$”本身仍是逐步施加的物理模型前提，不能由 $U$ 的幺正性导出，不能泛化为一切开放量子系统的普遍性质，也必须与单纯的环境边缘态定常性、近似纯度或仅供比较而人为选定的纯参考态严格区分。
+
+3. **近纯真实环境边缘态的与维数无关单步因子化缺陷界**：对任意有限维半正定且 $\Tr(X)=1$ 的联合矩阵 $X\in M_{\mathrm{Fin}\,d\times\mathrm{Fin}\,e}(\mathbb{C})$，固定环境基点 $a\in\mathrm{Fin}\,e$ 与纯投影 $p=\lvert a\rangle\langle a\rvert$，记真实系统边缘态为 $\sigma=\Tr_{\mathrm{E}}(X)$，并定义环境在基态 $a$ 之外的布居漏出量
+
+   $$
+   \varepsilon=1-\operatorname{Re}\Bigl(\bigl(\Tr_{\mathrm{S}}(X)\bigr)_{a,a}\Bigr)\in[0,1].
+   $$
+
+   沿用半迹范数约定 $D(A,B)=\frac{1}{2}\operatorname{traceNorm}(A-B)=\frac{1}{2}\|A-B\|_1$，无需对 $X$ 作任何乘积态假设，即有与系统维数 $d$ 和环境维数 $e$ 均无关的单步缺陷界
+
+   $$
+   D(X,\,\sigma\otimes p)\le\sqrt{\varepsilon}+\frac{\varepsilon}{2}.
+   $$
+
+   其自包含证明机制由两步估计合成。首先，令联合正交投影 $P=I\otimes p$（满足 $P^*=P=P^2$），取半正定平方根 $S=\sqrt{X}$（$S^*=S$，$S^2=X$）并置 $C=PS$。由 $\Tr(PX)=\bigl(\Tr_{\mathrm{S}}(X)\bigr)_{a,a}=1-\varepsilon$ 与 $(I-P)^2=I-P$，Frobenius 范数满足 $\|S\|_{\mathrm F}^2=\Tr(X)=1$、$\|C\|_{\mathrm F}^2=\Tr(S^* P^2 S)=\Tr(PX)=1-\varepsilon\le 1$ 以及 $\|S-C\|_{\mathrm F}^2=\Tr\bigl(S^*(I-P)^2 S\bigr)=\Tr\bigl((I-P)X\bigr)=\varepsilon$，即 $\|S\|_{\mathrm F}=1$、$\|C\|_{\mathrm F}\le 1$、$\|S-C\|_{\mathrm F}=\|S^*-C^*\|_{\mathrm F}=\sqrt{\varepsilon}$。将 $X-PXP=SS^*-CC^*$ 展开为 $(S-C)S^*+C(S^*-C^*)$，应用迹范数三角不等式与乘积迹范数受 Frobenius 范数之积控制的不等式 $\operatorname{traceNorm}(AB)\le\|A\|_{\mathrm F}\|B\|_{\mathrm F}$，可得
+
+   $$
+   \begin{aligned}
+   \operatorname{traceNorm}(X-PXP)&\le\operatorname{traceNorm}\bigl((S-C)S^*\bigr)+\operatorname{traceNorm}\bigl(C(S^*-C^*)\bigr) \\
+   &\le\|S-C\|_{\mathrm F}\|S^*\|_{\mathrm F}+\|C\|_{\mathrm F}\|S^*-C^*\|_{\mathrm F}\le 2\sqrt{\varepsilon}.
+   \end{aligned}
+   $$
+
+   其次，记 $X$ 在环境指标 $b$ 上的对角块为 $(A_b)_{i,j}=X_{(i,b),\,(j,b)}$，并简记 $a$ 块为 $A_0=A_a$。则 $PXP=A_0\otimes p$，而差矩阵 $\sigma-A_0=\sum_{b\ne a}A_b$ 是其余环境对角主子块之和；每个对角主子块 $A_b$ 均半正定，故 $\sigma-A_0$ 与 $(\sigma-A_0)\otimes p$ 亦半正定，其迹范数等于其迹：
+
+   $$
+   \begin{aligned}
+   \operatorname{traceNorm}\bigl((\sigma-A_0)\otimes p\bigr)&=\Tr\bigl((\sigma-A_0)\otimes p\bigr) \\
+   &=\bigl(\Tr(\sigma)-\Tr(A_0)\bigr)\Tr(p)=1-(1-\varepsilon)=\varepsilon.
+   \end{aligned}
+   $$
+
+   最后利用 $X-\sigma\otimes p=(X-PXP)-\bigl((\sigma-A_0)\otimes p\bigr)$，由迹范数三角不等式并除以 $2$，立得 $D(X,\sigma\otimes p)\le\frac{1}{2}(2\sqrt{\varepsilon}+\varepsilon)=\sqrt{\varepsilon}+\frac{\varepsilon}{2}$。
+
+4. **有限步轨迹累加、受控记录条件与纯/混合重置参考的区分**：对真实演化轨迹 $\tau_{k+1}=U\tau_k U^*$，相对于同一个固定纯基态 $p=\lvert a\rangle\langle a\rvert$ 定义第 $k$ 步漏出量 $\varepsilon_k=1-\operatorname{Re}\bigl((\Tr_{\mathrm{S}}\tau_k)_{a,a}\bigr)\in[0,1]$，则单步纯参考缺陷满足 $\delta_{k,p}=D(\tau_k,\rho_k\otimes p)\le\sqrt{\varepsilon_k}+\varepsilon_k/2$。代入 [@rem-retained-environment-defect] 针对纯参考重置映射 $R_p$ 的累加不等式，对任意有限步数 $N\in\mathbb{N}$ 有
+
+   $$
+   D\bigl(\rho_N,\,R_p^N(\rho_0)\bigr)\le\sum_{k=0}^{N-1}\left(\sqrt{\varepsilon_k}+\frac{\varepsilon_k}{2}\right).
+   $$
+
+   仅当在 [@rem-retained-environment-defect] 已说明的实际受控列假设 $U_{(i,b),\,(j,a)}=[j=i]\,E_i(b)$ 下能够将 $R_p$ 认同为受控记录信道 $\Phi_E$（并配合跨类重叠界 $|G_{ij}|\le q<1$ 或 [@rem-ray-record-orbit] 的射线分离界）时，上述有限步累加和才能进一步给出真实轨迹对记录类捏合的 Frobenius 误差预算。同时必须区分比较目标：上述缺陷界衡量的是相对于**纯投影** $p$ 的偏离 $D(\tau_k,\rho_k\otimes p)$，其直接受控的比较对象是 $R_p(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes p)U^*\bigr)$，**并不自动给出** $R_p$ 与混合参考重置映射 $R_\eta(\rho)=\Tr_{\mathrm{E}}\bigl(U(\rho\otimes\eta)U^*\bigr)$ 相等或针对 $R_\eta$ 的误差界（不同参考态未必导出不同的重置映射，例如 $U=I$ 对任意迹为 $1$ 的环境参考态均导出系统恒等映射；但除非独立证明 $R_p=R_\eta$，将 $\eta$ 替换为 $p$ 仍需对 $R_p$ 与 $R_\eta$ 及其迭代另作比较），因此不能将该纯参考界直接套用于 [@ex-retained-environment-cnot] 中以混合态 $\eta_r$（$0\le r<1$）定义的重置信道 $R_{\eta_r}$。此外，这一单步估计在轨迹上按有限步数 $N$ 累加，既不证明具体物理系统中 $\varepsilon_k$ 必然微小，也不自动给出关于时间 $N$ 一致成立的小误差界。
+:::
+
 **衰减到零，还算可逆吗？** [@prop-phase-damping-decay] 里的相干元每一步乘以 $c$，$N$ 步后只剩 $c^N\rho_{01}$，最终归零。4.1 节说过，单步退相干可以看成一次可逆耦合之后丢掉环境（[@thm-stinespring-dilation]、[@thm-reduced-access-defect]）。可“每一步都能这样看”与“所有步数合起来仍是同一个可逆演化的影子”是两回事：前者允许每一步各换一个扩张，后者要求一个酉算子 $U$ 一次管住全部的 $T^n$。下面的定理说，后者对任何压缩算子都成立。
 
 ::: {.theorem #thm-unitary-power-dilation title="Sz.-Nagy 酉幂扩张：压缩算子的每一次幂都是同一个酉算子的影子" lean="D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation"}
@@ -407,13 +479,13 @@ Lean 的证明分两步，第二步正是“碰撞模型”。
 （2）全部步数：碰撞模型。取 $H = \ell^2(\mathbb{Z};\, E \oplus E)$，每个整数格点上有一份系统、一份环境。$U$ 先在每个格点上同时做一次 $J$，再让所有环境分量向右移一格；两个酉算子之积仍是酉算子。$V$ 把 $x$ 放进第 0 格的系统分量，$V^{\dagger}$ 读回第 0 格的系统分量。对 $n$ 归纳：$n$ 步之后，第 0 格的系统分量是 $T^n x$，第 0 格的环境分量为零，负号格点全为零。原因是第 0 格的系统每一步都迎来从左边移来的空白环境，用过的环境向右离开，再也不回来。完整证明由 Lean 内核检查。
 :::
 
-**为什么环境必须无穷大。** 当 $E$ 非零时，证明里构造的 $H$ 是无穷维的，这并非偷懒（手工推导）：若对某个单位向量 $x$ 有 $\lVert T^n x\rVert \to 0$，则任何有限维的 $H$ 都满足不了 [@thm-unitary-power-dilation]。有限维空间上的酉算子构成紧集，序列 $U^n$ 有收敛子列 $U^{n_k} \to W$；把子列取得使间隔 $m_k = n_{k+1} - n_k$ 趋于无穷，就有 $U^{m_k} = U^{n_{k+1}}(U^{n_k})^{-1} \to W W^{-1} = I$。于是
+**为什么总扩张空间 $H$ 必须无穷维。** 当存在衰减向量时，证明里把总扩张空间 $H$ 构造成无穷维并非偷懒（以下是正文的手工应用推导，未在本书形式化；已冻结的存在性定理 [@thm-unitary-power-dilation] 本身不直接陈述该推论）：固定完备复希尔伯特空间 $E, H$、有界线性算子 $T : E \to E$ 与 $V : E \to H$ 以及 $H$ 上的固定酉算子 $U$，假设对某个非零向量 $x \in E$（$x \neq 0$）有 $\lVert T^n x\rVert \to 0$，且同一个 $(U, V)$ 对一切自然数幂 $n \in \mathbb{N}$ 精确满足全幂次压缩 $V^{\dagger} U^n V x = T^n x$（其中 $n = 0$ 已给出 $V^{\dagger} V x = T^0 x = x$，故这项矛盾推导甚至无需单独假定 $V$ 全局保内积或 $\lVert T\rVert \le 1$）。若**总扩张空间 $H$ 是有限维的**，则 $H$ 上的有界算子空间有限维，其酉群既闭且有界，因而紧致。由紧群中的幂序列回返性质（或直接从 $U^n$ 中抽取收敛子列 $U^{n_k} \to W$ 并使严格递增的下标间隔 $m_k = n_{k+1} - n_k \to \infty$，从而 $U^{m_k} = U^{n_{k+1}}(U^{n_k})^{-1} \to W W^{-1} = I$），存在严格递增的任意晚幂次子列 $m_k \to \infty$ 使 $U^{m_k} \to I$。对连续的压缩观测函数 $W \mapsto \lVert V^{\dagger} W V x\rVert$ 取极限，沿该子列有
 
 $$
-\langle x, T^{m_k}x\rangle = \langle Vx, U^{m_k}Vx\rangle \to \langle Vx, Vx\rangle = 1,
+\lVert T^{m_k} x\rVert = \lVert V^{\dagger} U^{m_k} V x\rVert \;\longrightarrow\; \lVert V^{\dagger} I V x\rVert = \lVert x\rVert > 0,
 $$
 
-可左边的模不超过 $\lVert T^{m_k}x\rVert \to 0$，矛盾。有限的环境迟早会把漏出去的振幅送回来；一去不返的衰减，要一个无穷大的环境来装。
+这与全序列衰减 $\lVert T^n x\rVert \to 0$ 矛盾！因此，只要 $T$ 拥有非零衰减向量 $\lVert T^n x\rVert \to 0$，对所有自然数幂的精确共同酉压缩就要求**总扩张空间 $H$ 必为无穷维**。注意这里紧致性所用的前提是**整个总扩张空间 $H$ 有限维**，而非单独的“环境有限维”：当系统空间 $E$ 本身可能无穷维时，有限维环境并不会使总空间 $H$ 成为有限维，故单凭环境维数有限不能推出上述阻碍；只有在系统 $E$ 本身有限维（如下例 $E = \mathbb{C}$）时，总空间 $H$ 无穷维才迫使辅助环境无穷维。同时，这一紧群回返论证不给出定量的回返时间上界，不声称一般的精确周期性，也不排除有限步（$n \le N$）的精确扩张或有限步近似。
 
 ::: {.example #ex-halmos-one-step-recurrence title="一步扩张只管一步：c = 0.8 时，漏出去的振幅会回来"}
 取最简单的压缩：$E = \mathbb{C}$、$T = c = 0.8$，它就是 [@prop-phase-damping-decay] 里相干元每步所乘的那个因子。记 $s = \sqrt{1 - c^2} = 0.6$，证明第（1）步的 Halmos 构造给出
@@ -437,7 +509,7 @@ $$
 :::
 
 ::: {.figure src="ch04-fresh-environment"}
-**同一份环境会把振幅送回来，新环境才一去不返。** 青色的点列是碰撞模型第 $0$ 格的 $c^n$（$c = 0.8$），每一步迎来一份新环境，一路衰减到零（[@thm-unitary-power-dilation]）；灰色的点列是同一份环境反复使用时的 $(J^n)_{00} = \cos n\varphi$，在 $-1$ 与 $1$ 之间来回摆，到 $n = 39$ 回到 $0.999$（圈出的那一点）。两列数值来自 [@ex-halmos-one-step-recurrence] 的手算；“有限环境必回返”是正文的手工推导，未在本书形式化。
+**同一份环境会把振幅送回来，新环境才一去不返。** 青色的点列是碰撞模型第 $0$ 格的 $c^n$（$c = 0.8$），每一步迎来一份新环境，一路衰减到零（[@thm-unitary-power-dilation]）；灰色的点列是同一份环境反复使用时的 $(J^n)_{00} = \cos n\varphi$，在 $-1$ 与 $1$ 之间来回摆，到 $n = 39$ 回到 $0.999$（圈出的那一点）。两列数值来自 [@ex-halmos-one-step-recurrence] 的手算；“有限维总扩张空间必回返”是正文的手工应用推导，未在本书形式化。
 :::
 
 > 漏出去的振幅不回来，不是因为它消失了，而是因为迎面来的环境永远是新的。
