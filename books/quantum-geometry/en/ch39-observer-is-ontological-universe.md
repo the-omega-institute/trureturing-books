@@ -713,7 +713,7 @@ S(\rho_X)&=-\sum_{j=1}^{R}\nu_j\ln\nu_j,\\
 \end{aligned}
 $$
 
-The entropy bound is the usual Shannon bound for $R$ positive numbers summing to $1$. If $m=0$ or $n=0$, then $R=1$ and the entropy is zero; at $m=n=1$, the nonzero part recovers the matrices in [@ex-ch39-p2e-positive-ket-handcalculation]. This calculation uses actual class counts without requiring their closed forms or substituting stationary probabilities. At fixed $K$, it bounds the cut entropy uniformly for this positive equal-amplitude family. It proves no entropy limit or bound independent of both $K$ and the cut lengths, and identifies no physical ground state or relation to Rauzy-boundary dimension. These counts carry no phase information. Whether changed phases preserve this spectrum requires a separate check; the joint sign change in the preceding example changes it.
+The entropy bound is the usual Shannon bound for $R$ positive numbers summing to $1$. If $m=0$ or $n=0$, then $R=1$ and the entropy is zero; at $m=n=1$, the nonzero part recovers the matrices in [@ex-ch39-p2e-positive-ket-handcalculation]. This calculation uses actual class counts without requiring their closed forms or substituting stationary probabilities. At fixed $K$, it bounds the cut entropy uniformly for this positive equal-amplitude family. Further control in $K$ is given in [@ex-ch39-p2e-uniform-entropy]; the finite-kernel calculation alone proves no entropy limit and identifies no physical ground state or relation to Rauzy-boundary dimension. These counts carry no phase information. Whether changed phases preserve this spectrum requires a separate check; the joint sign change in the preceding example changes it.
 :::
 
 ::: {.example #ex-ch39-p2e-exact-rank title="Exact Schmidt rank from short words to saturation"}
@@ -743,6 +743,147 @@ R=1+\max(0,p+q-K+1).
 $$
 
 This gives exact finite-length boundaries: $R=K$ precisely when $m,n\ge K-1$, and $R=1$ precisely when $m=0$, $n=0$, or $m+n<K$. For two nonempty sides, this specified state becomes entangled exactly when the forbidden-word constraint can cross the cut, namely $m+n\ge K$. Its positive spectrum has $R$ entries: rank one gives zero entropy, whereas at higher rank every entry is strictly below one and the entropy is strictly positive. Full rank alone does not make those entries equal; whether the entropy reaches $\ln K$ still depends on the preceding spectrum. This derivation adds no Lean verification and establishes no entropy limit or physical ground-state conclusion.
+:::
+
+
+::: {.example #ex-ch39-p2e-uniform-entropy title="Paper derivation: entanglement vanishes uniformly as the forbidden run grows"}
+Increasing the automaton's number of states need not increase the entanglement of this specified state. For the positive equal-amplitude family in [@ex-ch39-p2e-finite-kernel], a classical correlation inequality gives a bound uniform over all finite cuts. This remains a paper derivation and adds no Lean verification.
+
+Under the uniform law on binary words of length $m+n$, let $D$ mean that each half is legal, and let $E$ mean that an all-ones window of length $K$ crosses the cut. Represent a word by its set of one-positions. Then $D$ is closed under deleting positions, whereas $E$ is closed under adding them. The Harris–Kleitman inequality makes such a decreasing event and increasing event negatively correlated; this is a classical literature result (Kleitman, *Families of Non-disjoint Subsets*, [doi:10.1016/S0021-9800(66)80012-1](https://doi.org/10.1016/S0021-9800(66)80012-1), lemma on p.154). Consequently,
+
+$$
+\begin{aligned}
+\delta_{K;m,n}
+&:=\Pr(E\mid D)
+=1-\frac{z_{m+n}}{z_mz_n}\\
+&\le\Pr(E)\le d_K,
+\qquad d_K=(K-1)2^{-K}.
+\end{aligned}
+$$
+
+Here $\Pr(D)=z_mz_n/2^{m+n}>0$. Each length-$K$ window crossing the cut uses $K$ distinct positions and is all ones with uniform probability $2^{-K}$. There are at most $K-1$ such windows, so the final step is a union bound. Short or empty sides only reduce their number; with no such window, $E$ is empty.
+
+Let $\lvert u\rangle$ and $\lvert v\rangle$ be the normalized equal-amplitude superpositions of legal words on the two sides, and put $\lvert\phi\rangle=\lvert u\rangle\otimes\lvert v\rangle$. Counting their common nonzero coefficients gives
+
+$$
+|\langle\phi\mid\psi_{m,n}\rangle|^2
+=\frac{z_{m+n}}{z_mz_n}=1-\delta_{K;m,n}.
+$$
+
+If $\lambda_{\max}$ is the largest eigenvalue of the actual reduced state, the singular-value decomposition of its coefficient matrix gives $\lambda_{\max}\ge |\langle\phi\mid\psi_{m,n}\rangle|^2$: overlap with any unit product vector is at most the largest Schmidt coefficient. Thus $t:=1-\lambda_{\max}$ satisfies $0\le t\le\delta_{K;m,n}\le d_K\le1/4$. The last bound follows from $(K-1)\le2^{K-2}$ for every $K\ge2$.
+
+The preceding calculation bounds the rank by $K$, leaving at most $K-1$ other eigenvalues with total mass $t$. For $t>0$, divide these entries by $t$ and apply the usual finite-probability entropy bound; at $t=0$, use the continuous value. With $h(t)=-t\ln t-(1-t)\ln(1-t)$ and its continuous endpoint values,
+
+$$
+\begin{aligned}
+S_K(m,n)
+&\le h(t)+t\ln(K-1)\\
+&\le h(d_K)+d_K\ln(K-1)\\
+&\le (K-1)2^{-K}(1+K\ln2).
+\end{aligned}
+$$
+
+The second step uses the increase of $h$ on $[0,1/2]$ and $\ln(K-1)\ge0$. The third uses $-(1-d)\ln(1-d)\le d$ and substitutes $d_K$. The right-hand side tends to zero independently of $m,n$. Hence for every $\varepsilon>0$ there is a $K_0\ge2$, independent of the cut lengths, such that $S_K(m,n)<\varepsilon$ for every $K\ge K_0$ and every $m,n\ge0$. This concerns the specified state family: its rank can reach $K$ while the spectral mass outside its largest eigenvalue vanishes uniformly. It establishes no fixed-$K$ long-region entropy limit, specifies no physical ground state and does not resolve the relation between Rauzy-boundary dimension and entanglement scaling.
+:::
+
+::: {.example #ex-ch39-p2e-fixed-order-entropy-limit title="Paper derivation: the two-sided entropy limit at fixed forbidden-run order"}
+Fix $K\ge2$ and let both sides of the cut grow. The question shifts from how many Schmidt coefficients are nonzero to how their mass settles. Continue with the actual positive equal-amplitude state of [@ex-ch39-p2e-finite-kernel]: all binary words avoiding $1^K$ participate, without a fixed first bit or occupation number. This is a paper derivation; the complete application has not been compiled in Lean and specifies no physical ground state.
+
+Let $W_L$ be the legal words of length $L$, and $z_L=|W_L|$, including $z_0=1$. Set $\beta=\beta_K$, $p=\beta^{-1}$, and
+
+$$
+\begin{aligned}
+w_j&=\sum_{a=1}^{K-j}p^a\quad(0\le j<K),\\
+T&=\sum_{j=0}^{K-1}p^j w_j=\sum_{a=1}^{K}a p^a.
+\end{aligned}
+$$
+
+The root equation gives $1<\beta<2$ and $\sum_{a=1}^Kp^a=1$, hence $w_0=1$, $p\le w_j\le1$, and $T>0$. Define real $K\times K$ matrices
+
+$$
+\begin{aligned}
+C^\infty_{rs}&=\mathbf1_{\{r+s<K\}}\frac{p^{(r+s+1)/2}}{\sqrt T},\\
+G^\infty_{rr'}&=\frac{p^{(r+r')/2}w_{\max(r,r')}}{T}.
+\end{aligned}
+$$
+
+We will show that $G^\infty=C^\infty(C^\infty)^*$ is positive definite with trace one. For its eigenvalues $\lambda_1,\ldots,\lambda_K$, listed with multiplicity, the actual state's entropy satisfies
+
+$$
+\begin{aligned}
+\lim_{\min(m,n)\to\infty}S_K(m,n)
+&=S_K^\infty:=-\sum_{i=1}^{K}\lambda_i\ln\lambda_i,\\
+0&<S_K^\infty<\ln K.
+\end{aligned}
+$$
+
+Both lengths must diverge, but their relative growth rates are unrestricted.
+
+**First recover the actual free-boundary counts.** Use the signed Parry chain $Q$ of the next section, on states $(b,j)\in\{\mathrm{false},\mathrm{true}\}\times\{0,\ldots,K-1\}$. Reading $0$ at $(b,j)$ flips the sign and resets to $(!b,0)$ with weight $p/w_j$; reading $1$ preserves the sign and advances to $(b,j+1)$ with weight $p w_{j+1}/w_j$, allowed only when $j+1<K$. From $x_0=(\mathrm{false},0)$, every legal word gives exactly one allowed path, and adjacent states uniquely recover each bit. The terminal sign is unrestricted: there is no extra factor of two or closing condition.
+
+The weight of a length-$L$ path ending at run $j$ telescopes to $p^Lw_j$. If $N_L(b,j)$ counts paths ending at $(b,j)$, expansion of matrix multiplication gives
+
+$$
+\begin{aligned}
+(Q^L)_{x_0,(b,j)}&=N_L(b,j)p^Lw_j,\\
+z_Lp^L&=\sum_{b,j}\frac{(Q^L)_{x_0,(b,j)}}{w_j}.
+\end{aligned}
+$$
+
+The terminal factor $1/w_j$ is essential: free-boundary counts are not obtained by simply taking a stationary marginal. The existing chain mixing bound and stationary law are
+
+$$
+\begin{aligned}
+\pi(b,j)&=\frac{p^jw_j}{2T},\\
+\operatorname{TV}(Q^L(x,\cdot),\pi)
+&\le\theta_L:=(3/4)^{\lfloor L/3\rfloor}.
+\end{aligned}
+$$
+
+Total variation is half the finite $\ell^1$ distance. Since $w_j\ge p$, summing with the terminal reweighting yields
+
+$$
+\begin{aligned}
+z_Lp^L&=c+\varepsilon_L,\\
+c&=\sum_{b,j}\frac{\pi(b,j)}{w_j}
+=\frac{\sum_{j=0}^{K-1}p^j}{T}=\frac1{pT}>0,\\
+|\varepsilon_L|&\le\frac2p\theta_L.
+\end{aligned}
+$$
+
+The last identity for $c$ uses the root equation. This connects chain mixing to the actual word count with free boundaries.
+
+**Then return from endpoint counts to the quantum state.** Once $m,n\ge K$, a left word with terminal run exactly $r$ has the unique form $u\,0\,1^r$, with $u\in W_{m-r-1}$; a right word with initial run exactly $s$ has the unique form $1^s\,0\,v$, with $v\in W_{n-s-1}$. The inserted zero prevents a forbidden run across the join, so these are actual bijections: $a_r=z_{m-r-1}$ and $b_s=z_{n-s-1}$. There is no all-ones exception in this eventual range.
+
+The finite-kernel derivation uses normalized indicators of nonempty classes to factor the actual coefficient matrix as $M=UC^{m,n}V^*$, where
+
+$$
+C^{m,n}_{rs}=\mathbf1_{\{r+s<K\}}\sqrt{\frac{a_rb_s}{z_{m+n}}}.
+$$
+
+Thus the positive eigenvalues of the actual reduced state, with multiplicities, are exactly those of $G^{m,n}=C^{m,n}(C^{m,n})^*$. Additional physical zero eigenvalues contribute no entropy. For $r+s<K$, substitution of the count asymptotic gives
+
+$$
+(C^{m,n}_{rs})^2
+=p^{r+s+2}\frac{(c+\varepsilon_{m-r-1})(c+\varepsilon_{n-s-1})}
+{c+\varepsilon_{m+n}}
+\longrightarrow\frac{p^{r+s+1}}T.
+$$
+
+All shifted indices are at least $\min(m,n)-K$, so the same vanishing bound $2\theta_{\min(m,n)-K}/p$ controls every error in these finitely many expressions. The denominator tends to $c>0$. Taking nonnegative square roots gives the joint tail limit $C^{m,n}\to C^\infty$, and hence $G^{m,n}\to G^\infty$. Direct multiplication gives the displayed formula for $G^\infty$, with $\operatorname{Tr}G^\infty=\sum_r p^rw_r/T=1$. For comparison, a standalone half-word's endpoint frequency tends to $a_r/z_m\to p^{r+1}$, whereas the stationary run mass is $p^rw_r/T$. The latter appears on the limiting Gram matrix's diagonal, but its off-diagonal entries must also be retained.
+
+**Finally control spectrum and entropy.** Fixed dimension $K$ turns entrywise convergence into operator-norm convergence, for example through $\|E\|_{\mathrm{op}}\le K\max_{r,s}|E_{rs}|$. Apply the ordered-eigenvalue perturbation bound to the two Hermitian Gram matrices:
+
+$$
+|\lambda_i(G^{m,n})-\lambda_i(G^\infty)|
+\le\|G^{m,n}-G^\infty\|_{\mathrm{op}}\longrightarrow0.
+$$
+
+Ordering retains every multiplicity and needs no simple-spectrum assumption. The function $\eta(x)=-x\ln x$ has the continuous endpoint value $\eta(0)=0$, so the fixed sum of $K$ terms converges. The actual-spectrum correspondence above makes this the physical reduced state's entropy limit.
+
+Reversing the columns of $C^\infty$ gives a triangular matrix with constant diagonal $p^{K/2}/\sqrt T$, so $\det G^\infty=p^{K^2}/T^K>0$. Its $K\ge2$ eigenvalues are strictly positive and sum to one, making the entropy strictly positive. Strict convexity bounds entropy by $\ln K$, with equality only when every eigenvalue is $1/K$; the Hermitian spectral theorem would then force $G^\infty=I_K/K$. But $G^\infty_{0,1}=\sqrt p\,w_1/T>0$, ruling out equality.
+
+The reused root, chain-mixing and spectral-perturbation tools are in this book's [currently pinned source](trureturing:), in `DBonacci/PerronRoot`, `ParryTwistedComparison.parry_mixing_and_complete_prefix` and `HermitianEigenvaluePerturbation.abs_eigenvalue_sub_eigenvalue_le_norm`; entropy continuity and Hermitian diagonalization use standard results of pinned Mathlib. The path counting, terminal reweighting and actual-state limit bridge are written out above, but the complete application has no Lean verification. $S_K^\infty$ is entanglement across one cut, distinct from the per-step shift entropy $\log_2\beta_K$; the uniform bound in [@ex-ch39-p2e-uniform-entropy] also passes to $S_K^\infty$. Fixed-side limits, changed phases, physical ground states and Rauzy-boundary entropy laws each need their own argument.
 :::
 
 
@@ -811,7 +952,10 @@ We use $W$'s first $N-1$ letters to label bonds; sites $0$ and $N-1$ are not joi
 **Finite open-prefix gap interface, unverified in this book.** Set
 
 $$
-L_j=\lvert\sigma^j(A)\rvert,\qquad N_j=2\lfloor L_j/2\rfloor,\qquad h_{\rho,j}=h_{N_j}\quad(j\ge1).
+\begin{aligned}
+L_j&=\lvert\sigma^j(A)\rvert,\qquad N_j=2\lfloor L_j/2\rfloor,\\
+h_{\rho,j}&=h_{N_j}\quad(j\ge1).
+\end{aligned}
 $$
 
 For every fixed $\rho\in(0,1)$, along these deterministic open prefixes with an even number of sites, does

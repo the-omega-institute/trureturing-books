@@ -5,10 +5,13 @@
 // orbit and its Cayley images (inversion in the circle), the radial offsets quoted in the chapter, the quartic F along
 // the critical line, and ξ(½ + it) from a different method (Borwein's series for η and the Lanczos Γ).
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { plotBudgetChecks } from './plot-budget.mjs';
 
 const T = await session();
 const { check } = T;
 await stageFirstChecks(T, 'quantum-geometry', 'critical-mirror');
+// every chart drawn with kit.plot keeps its readable height in each cited figure, still, cover and lab viewport
+await plotBudgetChecks(T, 'quantum-geometry', 'critical-mirror');
 
 const page = await T.goto('quantum-geometry', 'critical-mirror', '?lang=zh');
 await settle(page, 300);

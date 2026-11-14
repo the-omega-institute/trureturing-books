@@ -713,7 +713,7 @@ S(\rho_X)&=-\sum_{j=1}^{R}\nu_j\ln\nu_j,\\
 \end{aligned}
 $$
 
-熵上界用的是 $R$ 个正数之和为 $1$ 的通常 Shannon 熵界。$m=0$ 或 $n=0$ 时 $R=1$、熵为 $0$；$m=n=1$ 时，上式的非零部分给回 [@ex-ch39-p2e-positive-ket-handcalculation] 的矩阵。这个计算使用实际类计数，不要求先给出它们的闭式，也不把有限计数替换为平稳概率。固定 $K$ 时，它使此正等幅态族的切口熵一致有界；它不证明熵极限存在，不给出同时独立于 $K$ 与切口长度的统一熵界，也不指定物理基态或建立劳齐边界维数与纠缠的关系。这些计数不包含相位信息；改变相位后是否仍有同一谱，须另外核对，前例的联合变号即改变谱。
+熵上界用的是 $R$ 个正数之和为 $1$ 的通常 Shannon 熵界。$m=0$ 或 $n=0$ 时 $R=1$、熵为 $0$；$m=n=1$ 时，上式的非零部分给回 [@ex-ch39-p2e-positive-ket-handcalculation] 的矩阵。这个计算使用实际类计数，不要求先给出它们的闭式，也不把有限计数替换为平稳概率。固定 $K$ 时，它使此正等幅态族的切口熵一致有界。对 $K$ 的进一步控制见 [@ex-ch39-p2e-uniform-entropy]；这里的有限核计算本身不证明熵极限存在，也不指定物理基态或建立劳齐边界维数与纠缠的关系。这些计数不包含相位信息；改变相位后是否仍有同一谱，须另外核对，前例的联合变号即改变谱。
 :::
 
 ::: {.example #ex-ch39-p2e-exact-rank title="短词到饱和：精确施密特秩"}
@@ -743,6 +743,147 @@ R=1+\max(0,p+q-K+1).
 $$
 
 这给出精确的有限长度边界：$R=K$ 当且仅当 $m,n\ge K-1$；$R=1$ 当且仅当 $m=0$、$n=0$ 或 $m+n<K$。对非空的两侧，禁字约束能跨过切口时，即 $m+n\ge K$，这个选定态才出现纠缠。纯态的正谱有 $R$ 项，故 $R=1$ 时熵为零，$R>1$ 时每项都严格小于 $1$，熵严格为正。满秩本身不保证正谱等权，熵是否达到 $\ln K$ 仍须读取前例的谱。这里没有新增 Lean 验证，也没有建立熵极限或物理基态的结论。
+:::
+
+
+::: {.example #ex-ch39-p2e-uniform-entropy title="纸面推导：禁戒变长时，纠缠一致消失"}
+自动机的状态数随 $K$ 增加，并不迫使这个选定态的纠缠增加。对 [@ex-ch39-p2e-finite-kernel] 的全正等幅态，可用经典相关不等式得到对所有有限切口统一的估计。以下仍是纸面推导，不新增 Lean 验证。
+
+在长 $m+n$ 的均匀二进制字上，令 $D$ 表示左右两半分别合法，$E$ 表示有一个跨过切口的全 $1$ 长 $K$ 窗。把字表示为其 $1$ 的位置集合，则 $D$ 对删去位置封闭，$E$ 对加入位置封闭。Harris–Kleitman 不等式给出这种下降事件与上升事件的负相关；这是经典文献结果（Kleitman, *Families of Non-disjoint Subsets*, [doi:10.1016/S0021-9800(66)80012-1](https://doi.org/10.1016/S0021-9800(66)80012-1)，第 154 页引理）。因此
+
+$$
+\begin{aligned}
+\delta_{K;m,n}
+&:=\Pr(E\mid D)
+=1-\frac{z_{m+n}}{z_mz_n}\\
+&\le\Pr(E)\le d_K,
+\qquad d_K=(K-1)2^{-K}.
+\end{aligned}
+$$
+
+这里 $\Pr(D)=z_mz_n/2^{m+n}>0$。任一跨切口长 $K$ 窗占有 $K$ 个互异位点，在均匀字下全为 $1$ 的概率是 $2^{-K}$；这种窗至多有 $K-1$ 个，故最后一步只是并集上界。短侧或空侧只会减少窗数；当没有这样的窗时 $E$ 为空。
+
+令 $\lvert u\rangle$、$\lvert v\rangle$ 分别为左右合法字的归一化等幅叠加，$\lvert\phi\rangle=\lvert u\rangle\otimes\lvert v\rangle$。直接清点共同非零系数得到
+
+$$
+|\langle\phi\mid\psi_{m,n}\rangle|^2
+=\frac{z_{m+n}}{z_mz_n}=1-\delta_{K;m,n}.
+$$
+
+若 $\lambda_{\max}$ 是实际约化态的最大本征值，系数矩阵的奇异值分解给出 $\lambda_{\max}\ge |\langle\phi\mid\psi_{m,n}\rangle|^2$：任意单位乘积向量与纯态的重叠不超过最大施密特系数。于是 $t:=1-\lambda_{\max}$ 满足 $0\le t\le\delta_{K;m,n}\le d_K\le1/4$。最后一个界由 $(K-1)\le2^{K-2}$ 得到，适用于全部 $K\ge2$。
+
+前例已给出秩至多为 $K$，故除最大本征值外最多还有 $K-1$ 项，和为 $t$。$t>0$ 时将它们除以 $t$，用通常的有限概率熵界；$t=0$ 时直接取连续值。记 $h(t)=-t\ln t-(1-t)\ln(1-t)$，两端取连续值，则
+
+$$
+\begin{aligned}
+S_K(m,n)
+&\le h(t)+t\ln(K-1)\\
+&\le h(d_K)+d_K\ln(K-1)\\
+&\le (K-1)2^{-K}(1+K\ln2).
+\end{aligned}
+$$
+
+第二步用 $h$ 在 $[0,1/2]$ 上递增及 $\ln(K-1)\ge0$；第三步用 $-(1-d)\ln(1-d)\le d$，再代入 $d_K$。右端趋于 $0$，且不依赖 $m,n$。所以对每个 $\varepsilon>0$，存在与切口长度无关的 $K_0\ge2$，使所有 $K\ge K_0$、$m,n\ge0$ 都满足 $S_K(m,n)<\varepsilon$。这是这个指定态族的结果：秩可以达到 $K$，但除最大本征值之外的谱质量仍一致趋于零。它不建立固定 $K$ 的长区间熵极限，不指定物理基态，也不解答劳齐边界维数与纠缠标度之间的开放问题。
+:::
+
+::: {.example #ex-ch39-p2e-fixed-order-entropy-limit title="纸面推导：固定禁串阶数的双侧熵极限"}
+固定 $K\ge2$，让切口两侧都变长，问题便从“有多少个非零 Schmidt 系数”变成“这些系数的质量怎样稳定下来”。这里继续研究 [@ex-ch39-p2e-finite-kernel] 的实际正等幅态：所有不含 $1^K$ 的二进制字都参与叠加，不固定首位或粒子数。以下是纸面推导，完整应用尚未编译为 Lean；它不指定物理基态。
+
+记 $W_L$ 为合法长度 $L$ 的字集，$z_L=|W_L|$，其中 $z_0=1$。令 $\beta=\beta_K$、$p=\beta^{-1}$，并定义
+
+$$
+\begin{aligned}
+w_j&=\sum_{a=1}^{K-j}p^a\quad(0\le j<K),\\
+T&=\sum_{j=0}^{K-1}p^j w_j=\sum_{a=1}^{K}a p^a.
+\end{aligned}
+$$
+
+根方程给出 $1<\beta<2$、$\sum_{a=1}^Kp^a=1$，故 $w_0=1$、$p\le w_j\le1$ 且 $T>0$。定义实 $K\times K$ 矩阵
+
+$$
+\begin{aligned}
+C^\infty_{rs}&=\mathbf1_{\{r+s<K\}}\frac{p^{(r+s+1)/2}}{\sqrt T},\\
+G^\infty_{rr'}&=\frac{p^{(r+r')/2}w_{\max(r,r')}}{T}.
+\end{aligned}
+$$
+
+下面证明 $G^\infty=C^\infty(C^\infty)^*$ 正定且迹为 $1$。对其按重数列出的特征值 $\lambda_1,\ldots,\lambda_K$，实际态的熵满足
+
+$$
+\begin{aligned}
+\lim_{\min(m,n)\to\infty}S_K(m,n)
+&=S_K^\infty:=-\sum_{i=1}^{K}\lambda_i\ln\lambda_i,\\
+0&<S_K^\infty<\ln K.
+\end{aligned}
+$$
+
+两个长度必须同时趋于无穷，但不要求按相同比例增长。
+
+**先恢复自由端点的实际字数。** 使用下一节的有符号 Parry 链 $Q$，状态为 $(b,j)\in\{\mathrm{false},\mathrm{true}\}\times\{0,\ldots,K-1\}$。从 $(b,j)$ 读到 $0$ 时翻转符号并重置到 $(!b,0)$，权重为 $p/w_j$；读到 $1$ 时保持符号并前进到 $(b,j+1)$，权重为 $p w_{j+1}/w_j$，仅在 $j+1<K$ 时允许。从 $x_0=(\mathrm{false},0)$ 出发，每个合法字恰好对应一条允许路径；相邻状态又唯一恢复每一位。末端符号不受限制，不额外乘以 $2$，也不要求路径闭合。
+
+长度 $L$、末端游程为 $j$ 的路径权重望远镜消去为 $p^Lw_j$。若 $N_L(b,j)$ 是到达 $(b,j)$ 的路径数，矩阵乘法展开便给出
+
+$$
+\begin{aligned}
+(Q^L)_{x_0,(b,j)}&=N_L(b,j)p^Lw_j,\\
+z_Lp^L&=\sum_{b,j}\frac{(Q^L)_{x_0,(b,j)}}{w_j}.
+\end{aligned}
+$$
+
+末端因子 $1/w_j$ 不能省略：自由端点计数不是直接取平稳边缘分布。已有链混合界与平稳律为
+
+$$
+\begin{aligned}
+\pi(b,j)&=\frac{p^jw_j}{2T},\\
+\operatorname{TV}(Q^L(x,\cdot),\pi)
+&\le\theta_L:=(3/4)^{\lfloor L/3\rfloor}.
+\end{aligned}
+$$
+
+总变差取有限 $\ell^1$ 距离的一半。由 $w_j\ge p$，对末端重加权求和得到
+
+$$
+\begin{aligned}
+z_Lp^L&=c+\varepsilon_L,\\
+c&=\sum_{b,j}\frac{\pi(b,j)}{w_j}
+=\frac{\sum_{j=0}^{K-1}p^j}{T}=\frac1{pT}>0,\\
+|\varepsilon_L|&\le\frac2p\theta_L.
+\end{aligned}
+$$
+
+常数 $c$ 的最后一个等式使用根方程。这一步把链混合接到了实际自由边界字数上。
+
+**再把端点字数接回量子态。** 当 $m,n\ge K$ 时，左侧末端恰有 $r$ 个 $1$ 的字唯一写成 $u\,0\,1^r$，其中 $u\in W_{m-r-1}$；右侧首端恰有 $s$ 个 $1$ 的字唯一写成 $1^s\,0\,v$，其中 $v\in W_{n-s-1}$。插入的 $0$ 阻断跨接处的禁串，故这些是实际双射，有 $a_r=z_{m-r-1}$、$b_s=z_{n-s-1}$；该最终范围内没有全 $1$ 字的例外。
+
+有限核推导由非空类的归一化示性向量给出实际系数矩阵 $M=UC^{m,n}V^*$，其中
+
+$$
+C^{m,n}_{rs}=\mathbf1_{\{r+s<K\}}\sqrt{\frac{a_rb_s}{z_{m+n}}}.
+$$
+
+因此实际约化态的正特征值及重数恰由 $G^{m,n}=C^{m,n}(C^{m,n})^*$ 给出；物理空间多出的零特征值不贡献熵。对 $r+s<K$，代入字数渐近式得到
+
+$$
+(C^{m,n}_{rs})^2
+=p^{r+s+2}\frac{(c+\varepsilon_{m-r-1})(c+\varepsilon_{n-s-1})}
+{c+\varepsilon_{m+n}}
+\longrightarrow\frac{p^{r+s+1}}T.
+$$
+
+全部移位指标至少为 $\min(m,n)-K$，故同一个趋于零的量 $2\theta_{\min(m,n)-K}/p$ 控制全部有限个误差项。分母趋于正数 $c$，取非负平方根得到联合尾部极限 $C^{m,n}\to C^\infty$，继而 $G^{m,n}\to G^\infty$。直接相乘给出所显示的 $G^\infty$ 公式，且 $\operatorname{Tr}G^\infty=\sum_r p^rw_r/T=1$。作为对照，单独半字的端点频率趋于 $a_r/z_m\to p^{r+1}$；平稳游程质量则为 $p^rw_r/T$。后者出现在极限 Gram 矩阵的对角线上，但非对角元仍须保留。
+
+**最后控制谱与熵。** 固定维数 $K$ 使逐项收敛推出算子范数收敛，例如 $\|E\|_{\mathrm{op}}\le K\max_{r,s}|E_{rs}|$。对两个 Hermitian Gram 矩阵应用有序特征值扰动界，
+
+$$
+|\lambda_i(G^{m,n})-\lambda_i(G^\infty)|
+\le\|G^{m,n}-G^\infty\|_{\mathrm{op}}\longrightarrow0.
+$$
+
+排序保留全部重数，不要求单谱。函数 $\eta(x)=-x\ln x$ 取连续端点值 $\eta(0)=0$，故固定 $K$ 项之和收敛；通过上述实际谱对应，这正是物理约化态的熵极限。
+
+把 $C^\infty$ 的列倒序后得到三角矩阵，对角元均为 $p^{K/2}/\sqrt T$，所以 $\det G^\infty=p^{K^2}/T^K>0$。它的 $K\ge2$ 个特征值都严格为正且和为 $1$，故熵严格为正。严格凸性给出熵不超过 $\ln K$，等号仅在全部特征值为 $1/K$ 时成立；Hermitian 谱定理此时迫使 $G^\infty=I_K/K$。然而 $G^\infty_{0,1}=\sqrt p\,w_1/T>0$，排除了等号。
+
+所复用的根方程、链混合与谱扰动工具见本书[当前所钉源码](trureturing:)中的 `DBonacci/PerronRoot`、`ParryTwistedComparison.parry_mixing_and_complete_prefix` 与 `HermitianEigenvaluePerturbation.abs_eigenvalue_sub_eigenvalue_le_norm`；连续熵函数与 Hermitian 对角化采用所钉 Mathlib 的标准结果。路径计数、末端重加权及实际态的极限连接已在上面完整写出，但尚未取得完整应用的 Lean 验证。$S_K^\infty$ 是一次切口的纠缠熵，区别于每步移位熵 $\log_2\beta_K$；[@ex-ch39-p2e-uniform-entropy] 的一致界也传递给 $S_K^\infty$。固定一侧长度、改变相位、物理基态与 Rauzy 边界熵律仍需各自的论证。
 :::
 
 
@@ -811,7 +952,10 @@ $$
 **本书未验证的有限开链间隙接口。** 令
 
 $$
-L_j=\lvert\sigma^j(A)\rvert,\qquad N_j=2\lfloor L_j/2\rfloor,\qquad h_{\rho,j}=h_{N_j}\quad(j\ge1).
+\begin{aligned}
+L_j&=\lvert\sigma^j(A)\rvert,\qquad N_j=2\lfloor L_j/2\rfloor,\\
+h_{\rho,j}&=h_{N_j}\quad(j\ge1).
+\end{aligned}
 $$
 
 对每个固定的 $\rho\in(0,1)$，沿上述确定的偶数格点开前缀，是否有

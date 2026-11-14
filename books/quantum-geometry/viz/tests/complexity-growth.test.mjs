@@ -14,6 +14,7 @@
 // It reads the page through window.GROWTH_DEBUG.
 import { readFileSync } from 'node:fs';
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { plotBudgetChecks } from './plot-budget.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'complexity-growth';
 const T = await session();
@@ -97,6 +98,8 @@ function schmidtWeights(st) {
 
 /* ---------- the gates every stage-first page must pass ---------- */
 await stageFirstChecks(T, BOOK, ID);
+// every chart drawn with kit.plot keeps its readable height in each cited figure, still, cover and lab viewport
+await plotBudgetChecks(T, BOOK, ID);
 
 /* ---------- page-specific checks ---------- */
 const page = await T.goto(BOOK, ID, '?lang=zh');

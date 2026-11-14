@@ -656,7 +656,10 @@
     const leg = LEG[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
   }
-  const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plotA')]);
+  // setHud measures the title with the stage's .hud-stack taken off; once the title and its second line are written,
+  // the theme decides again whether the title block goes under the scene buttons (where the second line meets them),
+  // so the layout below measures the title block where it is shown, not where it stood while being measured
+  const paint = kit.painter(() => { drawText(); TRV.hudFit(); drawStage(); drawPlot(); }, [$('stage'), $('plotA')]);
 
   /* ---------- controls ---------- */
   let stopAt = null;

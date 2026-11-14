@@ -380,6 +380,28 @@ for (const lang of ['zh', 'en']) {
   }
 }
 
+/* ---------- 9. Cited cards in a narrow column (334 × 500, as on a phone page): one panel fills the band ---------- */
+// Each chapter card opens on its still; the panel the card is about (the tree, the cliff and prime ladder, the ledger)
+// must fill the band between the title block and the legend as laid out (never under either), and the tree must keep
+// the height its layers need: a stacked trio of panels once left it a strip a few pixels high.
+for (const lang of ['zh', 'en']) {
+  const bad = [];
+  for (const [pid, st] of ALL_PRESETS) {
+    const fig = await T.open(BOOK, ID, `?embed=1&lang=${lang}&preset=${pid}`, { viewport: { width: 334, height: 500 }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+    await settle(fig, 200);
+    await fig.evaluate((t) => window.PADIC_DEBUG.seek(t), st); await settle(fig, 120);
+    const r = await fig.evaluate(() => {
+      const cv = document.getElementById('cv').getBoundingClientRect(), lg = document.getElementById('legend').getBoundingClientRect();
+      const hud = Math.max(document.querySelector('.hud-tl').getBoundingClientRect().bottom, document.getElementById('sceneChips').getBoundingClientRect().bottom) - cv.top;
+      return { L: window.PADIC_DEBUG.state.layout, hud, legend: lg.top - cv.top };
+    });
+    const m = r.L && r.L.main, treeOK = r.L && (st === 12 || pid === 'adelic' || r.L.tree >= 92);
+    if (!(r.L && r.L.focus && m.y >= r.hud && m.y + m.h <= r.legend && m.h >= 120 && treeOK)) bad.push(`${pid}: ${JSON.stringify(r)}`);
+    await fig.context().close();
+  }
+  check(`cited cards at 334 × 500 (${lang}): one panel fills the band between the title block and the legend, at least 120 px high, the tree at least 92 px`, bad.length === 0, bad.join(' | '));
+}
+
 await page.setViewportSize({ width: 1440, height: 900 }); await settle(page, 120);
 s = await state();
 check('Dual scene lays out panels side-by-side on wide 1440px viewport', s.stacked === false);

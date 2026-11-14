@@ -1007,14 +1007,15 @@ class PullRequestCacheTests(unittest.TestCase):
             conditions = trureturing_cache_steps(self.WORKFLOWS / name)
             self.assertEqual(len(conditions), 1, name)
             cond = conditions[0]
+            plan_context = {"fromJSON(needs.plan.outputs.plan).selections.normal.checks.structure": True}
             self.assertTrue(cond, f"{name}: the .cache/trureturing step needs an if:")
             out = {"same": "false"} if "steps.target" in cond else {}
             for ctx in ok:
                 self.assertIn(ctx["event"], events, name)
-                self.assertTrue(gha_if(cond, **ctx, **out), f"{name}: {ctx}")
+                self.assertTrue(gha_if(cond, **ctx, **out, context=plan_context), f"{name}: {ctx}")
             for ctx in untrusted:
                 if ctx["event"] in events:
-                    self.assertFalse(gha_if(cond, **ctx, **out), f"{name}: {ctx}")
+                    self.assertFalse(gha_if(cond, **ctx, **out, context=plan_context), f"{name}: {ctx}")
         self.assertEqual(trureturing_cache_steps(self.WORKFLOWS.parent / "actions" / "setup" / "action.yml"), [])
 
     def setup_steps(self) -> list[dict]:
@@ -1116,6 +1117,7 @@ class PullRequestCacheTests(unittest.TestCase):
                     cond = " ".join([m.group(3), *m.group(4).split()])
                     # a skipped restore step leaves its outputs empty
                     context = {k: "" for k in re.findall(r"steps\.[\w-]+\.outputs\.[\w-]+", cond)}
+                    context["fromJSON(needs.plan.outputs.plan).selections.normal.checks.structure"] = True
                     for event in pr_events:
                         self.assertFalse(gha_if(cond, event=event, ref="refs/pull/7/merge", context=context),
                                          f"{name}: {uses} on {event}")
@@ -1206,6 +1208,31 @@ fi
 """
 
 
+class ExportRegressionWorkflowTests(unittest.TestCase):
+    def test_required_browser_export_runs_after_all_ordinary_unit_rounds(self):
+        workflow = GITHUB_DIR / "workflows" / "ci.yml"
+        steps = workflow_jobs(workflow)["validate"]
+        rounds = [i for i, step in enumerate(steps)
+                  if "python -m unittest discover -s tools/tests" in step.get("run", "")]
+        self.assertEqual(len(rounds), 3)
+        setups = [(i, step) for i, step in enumerate(steps) if step.get("uses") == "./.github/actions/setup"]
+        self.assertEqual(len(setups), 2)
+        (early, ordinary), (late, browser) = setups
+        self.assertLess(early, min(rounds))
+        self.assertEqual(ordinary["with"]["browsers"], "false")
+        self.assertGreater(late, max(rounds))
+        self.assertEqual(browser["with"]["browsers"], "true")
+        required, = [(i, step) for i, step in enumerate(steps)
+                     if step.get("run") == "python tools/tests/test_export_layout.py"]
+        self.assertGreater(required[0], late)
+        self.assertEqual(required[1]["if"], browser["if"])
+        self.assertIn("checks.unit ||", browser["if"])
+        self.assertIn("checks.compat", browser["if"])
+        self.assertNotIn("continue-on-error", required[1])
+        validate = workflow.read_text().split("\n  validate:\n", 1)[1].split("\n  build:\n", 1)[0]
+        self.assertIn("timeout-minutes: 30", validate)
+
+
 class BuildCacheWorkflowTests(unittest.TestCase):
     """The build cache store (.cache/artifacts) in GitHub Actions: who restores and who saves it, the builds
     that use it, and the releases that carry it (docs/PUBLISHING.md §5, docs/VERIFICATION.md §2)."""
@@ -1283,7 +1310,7 @@ class BuildCacheWorkflowTests(unittest.TestCase):
     def building_jobs(self) -> dict[tuple[str, str], list[dict]]:
         return {(wf.name, job): steps for wf in sorted(self.WORKFLOWS.glob("*.yml"))
                 for job, steps in workflow_jobs(wf).items()
-                if any(re.search(r"^(?:\./tbook build\b|python tools/ci/films.py\b)", s.get("run", ""), re.M) for s in steps)}
+                if any(re.search(r"^(?:\./tbook build\b|python tools/ci/films.py\b|python tools/ci/run.py slides(?:\s|$))", s.get("run", ""), re.M) for s in steps)}
 
     def test_builds_go_through_the_cache(self):
         """Every job that builds restores the store first (outside pull requests: the action decides), looks
@@ -1295,7 +1322,7 @@ class BuildCacheWorkflowTests(unittest.TestCase):
                                      ("release.yml", "build"), ("template-release.yml", "site")})
         for (wf, job), steps in jobs.items():
             where = f"{wf}, job {job}"
-            builds = [i for i, s in enumerate(steps) if re.search(r"^(?:\./tbook build\b|python tools/ci/films.py\b)", s.get("run", ""), re.M)]
+            builds = [i for i, s in enumerate(steps) if re.search(r"^(?:\./tbook build\b|python tools/ci/films.py\b|python tools/ci/run.py slides(?:\s|$))", s.get("run", ""), re.M)]
             cache = [(i, s["with"].get("mode")) for i, s in enumerate(steps) if s.get("uses") == "./.github/actions/build-cache"]
             restores = [i for i, mode in cache if mode == "restore"]
             saves = [i for i, mode in cache if mode == "save"]
@@ -1377,13 +1404,30 @@ class BuildCacheWorkflowTests(unittest.TestCase):
         """ci.yml leaves the films to pages.yml on the default branch and to the release workflows on tags,
         which build them (pages.yml also stores them); a film is not rendered by two runs of one push."""
         text = (self.WORKFLOWS / "ci.yml").read_text(encoding="utf-8")
-        match = re.search(r"(?ms)^  films:\n.*?^    if: >-\n(.*?)^    runs-on:", text)
-        self.assertTrue(match)
-        condition = " ".join(match.group(1).split())
-        self.assertFalse(gha_if(condition, event="push", ref="refs/heads/main"))
-        self.assertFalse(gha_if(condition, event="push", ref="refs/tags/v1.0.0"))
-        self.assertTrue(gha_if(condition, event="workflow_dispatch", ref="refs/heads/feature"))
-        self.assertTrue(gha_if(condition, event="pull_request", ref="refs/pull/7/merge"))
+        self.assertIn("if: needs.plan.outputs.films == 'true'", text)
+        # Event behavior is exercised on real Git trees in test_ci_performance;
+        # the workflow must consume that decision without a second event classifier.
+        self.assertIn("matrix: ${{ fromJSON(needs.plan.outputs.film_matrix) }}", text)
+        from test_ci_performance import planner
+        self.assertEqual(planner.event_profiles("push", False), ["normal", "films"])
+
+    def test_film_coverage_is_uploaded_after_responsibility_verification(self):
+        for workflow, job in (("ci.yml", "check"), ("pages.yml", "coverage")):
+            steps = workflow_jobs(self.WORKFLOWS / workflow)[job]
+            verify = next(s for s in steps if "--verify" in s.get("run", ""))
+            upload = next(s for s in steps if s["with"].get("name") == "tbook-coverage-films")
+            self.assertLess(steps.index(verify), steps.index(upload))
+            self.assertEqual(upload["with"]["path"], "coverage/films.json")
+            self.assertEqual(upload["with"]["if-no-files-found"], "error")
+            for publish in ("true", "false"):
+                for responsible in (True, False):
+                    context = {"needs.plan.outputs.publish": publish}
+                    if workflow == "ci.yml":
+                        context["fromJSON(needs.plan.outputs.plan).coverage.films"] = {} if responsible else None
+                    else:
+                        context["needs.plan.outputs.site"] = str(responsible).lower()
+                    self.assertEqual(gha_if(upload["if"], event="workflow_dispatch", ref="refs/heads/main",
+                                             context=context), publish == "true" and responsible)
 
     def test_pages_build_step_times_out_before_the_job(self):
         """A step that runs out of time fails and the save still runs; a job that does is cancelled and
