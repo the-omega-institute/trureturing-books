@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "b4a6f25056b7d7451df9b06e226c74cfd85940ac",
-  "pinned_at": "2026-11-14T02:32:08Z",
+  "commit": "f30910648f634ea657606cff32b832bc7353d8e3",
+  "pinned_at": "2026-11-14T11:13:14Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4177,7 +4177,7 @@
       "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction",
       "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredContraction.cyclic_future_kernel_eq_bot",
       "kind": "theorem",
-      "statement_id": "sha256:0fb6a694e7796081e5681b95c2177269cd9508ccd0dc04bcc111098f187f4313",
+      "statement_id": "sha256:8001628b65492fc63847ae0222f60c334645f820927f218b2b75e8a64282fbc3",
       "line": 75,
       "signature": "theorem cyclic_future_kernel_eq_bot (U : E ≃ₗᵢ[ℂ] E) (v : E) : (⨅ n : ℕ, LinearMap.ker ((cyclicClick U v).toLinearMap.comp ((cyclicStep U v).toLinearMap ^ n))) = ⊥"
     },
@@ -4236,6 +4236,14 @@
       "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
       "line": 67,
       "signature": "def survivalProbability (U : E ≃ₗᵢ[ℂ] E) (v : E) (n : ℕ) : ℝ"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean.monitored_spectral_mean": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredSpectralMean.monitored_spectral_mean",
+      "kind": "theorem",
+      "statement_id": "sha256:4814468ecc84e1ef38bfa78828a7dde5cd86c90c6e638f95c97c195788ed1754",
+      "line": 364,
+      "signature": "theorem monitored_spectral_mean (U : E ≃ₗᵢ[ℂ] E) (v : E) (hv : ‖v‖ = 1) : (occupiedSpectrum U v).Finite ∧ (occupiedSpectrum U v).ncard = Module.finrank ℂ (cyclicSpace U v) ∧ HasSum (fun n : ℕ => (n + 1 : ℝ) * returnProbability U v (n + 1)) ((occupiedSpectrum U v).ncard : ℝ) ∧ HasSum (fun n : ℕ => returnProbability U v (n + 1)) 1"
     },
     "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law": {
       "module": "D5/S3/QuantumContext/ParallelogramNormLaw",
