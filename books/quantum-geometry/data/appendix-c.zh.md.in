@@ -1,0 +1,112 @@
+# 附录 C Lean 4 形式化定理总索引与开放问题台账 {#附录-clean-4-形式化定理总索引与开放问题台账}
+
+本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，Lean 验证、书面证明与开放问题分别声明证据。下列 C.1–C.3 逐条核对 `trureturing.lock.json` 中的冻结声明（所钉 `trureturing@dev` 提交为 [{commit}](trureturing:)），C.4 另列开放问题与选定文献边界：
+
+1. **C.1 冻结定理总索引（{{T}} 条唯一 `theorem` 声明）**：凡在中文正文任一 `:::` 环境头中以 `lean="<GID>"` 引用、且锁文件种类为 `theorem` 的声明，均列入本节；每条引用必须解析为所钉提交中已由 Lean 4 内核验证并冻结的定理。
+2. **C.2 形式化定义与代数载体总索引（{{D}} 项唯一声明：{{D_def}} 项 `def` + {{inductive}} 项 `inductive`）**：列出被中文正文 `:::` 环境头以 `lean=` 引用的定义与归纳类型；**C.3 行内辅助定理与定义索引（{{R}} 项声明：{{R_theorem}} 项 `theorem` + {{R_def}} 项 `def`）**列出其余未被环境头引用的锁定声明。三节互不重叠，完整覆盖 `trureturing.lock.json` 的 **{{total}} 项唯一声明**（${{T}} + {{D}} + {{R}} = {{total}}$）。媒体引用在各行末尾另列，不改变上述分区。
+3. **C.4 开放问题与未形式化前沿边界台账（11 项：6 个 `conjecture` + 3 个 `problem` 环境 + 2 项文献边界 `remark`）**：9 个开放环境均不带 `lean` 属性；另外两项明确标为外部文献边界，绝不与 Lean 已验证声明混计。
+
+第 16.3 节的 [@thm-central-defect-endpoint-average] 及其 [书面证明](ch16-qsvt-walks-and-compilation.md#pf-central-defect-endpoint-average) 不属于冻结声明，也不是开放问题。其 DOI、原文定位与[形式化请求 #10](https://github.com/the-omega-institute/trureturing-requests/issues/10) 随正文及自动生成的书面证明账本单列；不增加上述锁定声明、绿色图表或 C.4 的条数。
+
+::: {.viz src="lean-declaration-map" preset="all" height="500"}
+**{{total}} 格，一格一条锁定声明。** 时间轴从序曲读到附录 D（附录 C 本身不作落点），每条声明落在最先引用它的单元：{{theorems}} 格是定理，{{definitions}} 格是定义或归纳类型；{{env}} 个实心格被环境头以 `lean=` 引用，{{R}} 个空心格只在行内出现。每条声明只占一格，跨章复用不另计；下文 C.1 的柱状图则只数各章环境头引用的定理，并在不同章重复计数。
+:::
+
+---
+
+## C.1 已验证并冻结的 Lean 4 定理总索引（{{T}} 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
+
+下表列出正文环境头引用的 {{T}} 条唯一冻结定理。行内引用与媒体消费者另列在最后一栏，不增加柱高。序号在声明继续留在同一分区时保持不变，新声明追加序号；各行按模块路径排序。
+
+::: {.figure src="appc-theorems-by-chapter"}
+**每一章带 `lean=` 的环境头引用了多少条冻结定理。** 横轴按阅读顺序列出主章与终章，按部加浅色底纹。柱高合计 ${{chapter_total}}$，由正式正文解析器与锁文件计算；本节 ${{T}}$ 条定理均至少出现在一根柱子中。实心下段是在该章第一次出场的定理，共 ${{chapter_new}}$ 条；空心上段是在此前单元已出场、本章再次引用的定理，共 ${{chapter_reused}}$ 条。同一定理在不同主章重复计，子页面并入所属主章，定义与仅行内引用不计。
+:::
+
+下表按模块路径排序；下面的计数格显示各模块族与首次出场的部分布，条数随正文引用自动更新。
+
+::: {.figure src="appc-modules-by-part"}
+**C.1 的 ${{T}}$ 条定理按模块族与首次出场的部分组。** 行是模块路径的前三段，较小的族合并为末行；列是第一至第十部与终章、附录。每条定理只计一次，放在中文正文最先引用它的部分；格中数字为条数，底色越深条数越多，空格为零。图不表示模块间的证明依赖。
+:::
+
+| 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
+| :--- | :--- | :--- | :--- | :--- |
+{{table_T}}
+
+---
+
+## C.2 形式化定义、结构与归纳类型索引（{{D}} 项唯一声明） {#sec-appendix-c-definitions}
+
+下表列出被中文正文 `definition` 与 `example` 环境头以 `lean=` 引用的 **{{D}} 项唯一声明（{{D_def}} 项 `def`、{{inductive}} 项 `inductive`）**；它们与 C.1 的 {{T}} 条定理共同构成 **{{env}} 项被环境头引用的锁定声明**。媒体消费者在最后一栏另列，不决定分区。
+
+| 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
+| :--- | :--- | :--- | :--- | :--- |
+{{table_D}}
+
+---
+
+## C.3 行内引用的辅助定理与定义索引（{{R}} 项唯一声明） {#sec-appendix-c-inline}
+
+除 C.1 与 C.2 的 {{env}} 项环境引用声明外，另有 **{{R}} 项声明（{{R_theorem}} 项定理、{{R_def}} 项定义）**在中文正文各单元中只通过行内链接出现，未被任何 `:::` 环境头以 `lean=` 引用。它们包括旧版 C.1 中仅由媒体消费的三项定理；媒体引用保留在行末，但不改变本节的行内分区。三节共同覆盖锁文件全部 **{{total}} 项唯一声明**（${{T}} + {{D}} + {{R}} = {{total}}$）。
+
+| 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
+| :--- | :--- | :--- | :--- | :--- |
+{{table_R}}
+
+::: {.viz src="lean-declaration-map" preset="inline" height="500"}
+**只靠行内链接出现的那些。** 地图保留 {{R}} 个空心格：{{R_theorem}} 格绿色的定理、{{R_def}} 格灰色的定义，全部列在本节。这里的“行内”仅描述中文正文的引用方式；其中有些声明也被媒体使用。
+:::
+
+---
+
+## C.4 开放猜想与未形式化前沿问题登记表（11 项：6 个猜想 + 3 个开放问题 + 2 项文献边界——零 `lean` 属性） {#sec-appendix-c-open-register}
+
+::: {.remark #rem-appendix-c-open-literature-register title="开放猜想与外部文献边界登记表（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化（仅指下表 `O6`、`O7` 的外部文献边界登记；`O1`–`O5`、`O8` 是 `conjecture`，`O9`–`O11` 是 `problem`）。** 全书共 {{open}} 个开放环境，均不带 `lean` 属性；开放猜想、开放问题与经典文献结果分别说明，绝不混入已验证声明的计数。
+
+| # | 环境锚点 ID | 所在章节 | 猜想 / 开放问题名称 | 核心数学或物理陈述摘要 | Lean 属性 | 徽章状态 |
+| :---: | :--- | :---: | :--- | :--- | :---: | :---: |
+| O1 | `#conj-complexity-equals-volume` | `CH20` | 复杂度等于体积（CV 猜想，Susskind） | 渐近 AdS 黑洞内部最大空间切片体积 $V(t)$ 与边界量子态制备电路复杂度 $\mathcal{C}(t)$ 成正比：$\mathcal{C}(t) \sim V(t)/(G_N \ell_{\mathrm{AdS}})$ | 无（严禁） | `OPEN`（红） |
+| O2 | `#conj-er-equals-epr` | `CH20` | $\mathrm{ER}=\mathrm{EPR}$ 虫洞—纠缠对偶猜想（Maldacena–Susskind） | 引力时空中不可穿越爱因斯坦—罗森桥（ER 虫洞）与远距量子比特最大纠缠对（EPR 态）在非微扰量子引力中几何等价 | 无（严禁） | `OPEN`（红） |
+| O3 | `#conj-p-neq-np` | `CH20`（`CH30` / 终章引用） | $\mathrm{P} \neq \mathrm{NP}$ 计算复杂度分离猜想 | 在标准统一图灵机计算模型与有限字母表编码下，存在一个属于非确定性多项式时间类 $\mathrm{NP}$ 的形式语言不属于确定性多项式时间类 $\mathrm{P}$（$\mathrm{P} \neq \mathrm{NP}$） | 无（严禁） | `OPEN`（红） |
+| O4 | `#conj-riemann-hypothesis` | `CH22` | 黎曼猜想（Riemann Hypothesis） | 黎曼 $\zeta(s)$ 函数的一切非平凡零点均位于临界对称轴 $\operatorname{Re}(s) = 1/2$ 上 | 无（严禁） | `OPEN`（红） |
+| O5 | `#conj-schanuel-dottie` | `CH24` | 沙努埃尔猜想在余弦不动点 $\theta^*$ 与圆周率 $\pi$ 上的代数无关性推论 | 沙努埃尔猜想（Schanuel's Conjecture）蕴涵 Dottie 自指不动点 $\theta^* = \cos\theta^*$ 与圆周率 $\pi$ 在 $\mathbb{Q}$ 上代数无关（$\operatorname{tr.deg}_{\mathbb{Q}}\mathbb{Q}(\theta^*, \pi) = 2$；伴随文献注记 `#rem-banach-dottie-hairy-ball-literature` 另述 Chow 关于 $\theta^* \notin \mathrm{EL}$ 的条件定理） | 无（严禁） | `OPEN`（红） |
+| O6 | `#rem-ryu-takayanagi-literature` | `CH19` | 连续 AdS/CFT 笠—高柳（Ryu–Takayanagi）全息纠缠熵公式 | 连续反德西特时空极小曲面面积 $S(A) = \operatorname{Area}(\gamma_A)/(4G_N)$ 的完整泛函与量子极值曲面证明（本书仅形式化离散桥图最大流最小割定理） | 无（文献） | `文献结果` |
+| O7 | `#rem-diophantine-z-in-q-literature` | `CH23` | 有理数域上的希尔伯特第十问题 $H_{10}(\mathbb{Q})$ 与 $\mathbb{Z} \subset \mathbb{Q}$ 存在性定义 | $\mathbb{Z}$ 在 $\mathbb{Q}$ 中是否存在纯存在量词（$\exists$）丢番图定义及 $H_{10}(\mathbb{Q})$ 的可判定性（Koenigsmann 2016 给出 $\forall\exists$ 一阶刻画，但 $H_{10}(\mathbb{Q})$ 仍开放） | 无（文献） | `OPEN / 文献` |
+| O8 | `#conj-coda-navier-stokes-regularity` | `CH30` | 无外力三维不可压缩纳维—斯托克斯全局光滑性猜想（克雷千禧年陈述 A / B） | 给定正粘性 $\nu > 0$ 与恒零外力 $\mathbf{f} \equiv \mathbf{0}$，对 $\mathbb{R}^3$（或 $\mathbb{T}^3$）上任意光滑无散度速降（或周期）初值 $\mathbf{u}_0$，自治流体是否在 $[0, \infty)$ 上恒存在有限动能全局光滑解，抑或发生有限时间爆破（OpenAI 受迫 C / D 是官方题目的一条解答路线；外部文献与发布的形式化另见 [@rem-ch30-navier-stokes-forced-literature]，不属本书冻结定理） | 无（严禁） | `OPEN`（红） |
+| O9 | `#prob-ch39-p2e-fractal-horizon` | `CH39` | 皮索切投量子多体系统的劳齐分形视界纠缠标度 | 对 $K \ge 3$ 的皮索切投系统，是否存在严格构造的局域有能隙基态或编码态族，使 $R \to \infty$ 时的纠缠熵由内部劳齐边界维数 $D_F$ 支配（如 $S_{\mathrm{ent}}(R) \asymp R^{D_F}$ 或分形修正项），并给出通常余维一面积律失效或保持的谱间隙与局域性判据；现有有限编码与零测边界定理不证明该物理标度 | 无（严禁） | `OPEN`（红） |
+| O10 | `#prob-appendix-d-time-horizon` | 附录 D | 相对论协变态约化、涌现时钟与蒸发黑洞视界幺正性的统一动力学 | 建立不依赖特权洛伦兹叶分解或外部时钟的测量动力学，从惠勒—德维特约束导出热力学时间箭头，并协调霍金辐射的佩奇纯化与近视界真空纠缠之间的 AMPS 张力；有限维熵与有限竞技场逃逸定理只提供局部代数类比 | 无（严禁） | `OPEN`（红） |
+| O11 | `#prob-monitored-spectral-mean` | `CH07` | 实际监测返回历史到占据谱点数的形式化缺口（Grünbaum–Velázquez–Werner–Werner 定理 2） | 对有限维复内积空间、幺正算符 $U$ 与单位初态 $v$，设监测首次返回概率为 $p_{n+1} = \lvert\langle v, U T^n v\rangle\rvert^2$，占据谱集合为 $S = \{\lambda \in \mathbb{C} : \exists w \in E,\; Uw = \lambda w \text{ 且 } \langle w, v\rangle \neq 0\}$；若 $\sum_{n=0}^{\infty} p_{n+1} = 1$，则 $S$ 有限且首次返回均值恒等式 $\sum_{n=0}^{\infty}(n+1)p_{n+1} = \#S$ 成立（已知文献定理的形式化缺口，非未解决数学猜想） | 无（严禁） | `OPEN`（红） |
+
+:::
+
+---
+
+## C.5 所钉提交与内核完整性核验清单 {#sec-appendix-c-integrity-checklist}
+
+本书的每一次构建与发布均通过 `./tbook pin` 与 `./tbook check` 执行以下五项机械核验：
+
+| 核验项 | 目标参数 / 契约值 | 核验命令 / 工具链机制 | 状态 |
+| :--- | :--- | :--- | :---: |
+| **上游仓库与分支** | `the-omega-institute/trureturing` 分支 `dev` | `site.toml` `[trureturing]` 配置与 `git merge-base --is-ancestor` | `PASS` |
+| **所钉提交 SHA** | [{commit}](trureturing:) | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
+| **冻结定理总数** | `{{T}}` 项环境引用定理（含行内共 `{{theorems}}` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
+| **辅助定义与结构数** | `{{D}}` 项环境定义/归纳类型；含行内共 `{{definitions}}` 项（`{{defs}}` `def` + `{{inductive}}` `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
+| **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s)`） | `PASS` |
+
+::: {.figure src="appc-ledger"}
+**${{total}}$ 条锁定声明的对账：种类 × 出现方式。** 两行是定理与定义，三列是环境头的 `lean=` 引用、仅行内出现但有媒体消费者、仅有行内链接。定理一行 ${{T}} + {{thm_media}} + {{thm_inline}} = {{theorems}}$，定义一行 ${{D}} + {{def_media}} + {{R_def}} = {{definitions}}$。虚线框按本附录的环境引用分区：C.1 $= {{T}}$，C.2 $= {{D}}$，C.3 $= {{thm_media}} + {{thm_inline}} + {{def_media}} + {{R_def}} = {{R}}$；媒体消费者不改变索引分区。
+:::
+
+这张账的第一行在声明地图上是 ${{theorems}}$ 格绿色：被环境头引用的 ${{T}}$ 格画成实心，其余 ${{thm_media}} + {{thm_inline}} = {{R_theorem}}$ 格空心。
+
+::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
+**只看定理。** 地图只保留锁文件里种类为 `theorem` 的 {{theorems}} 格：{{T}} 个实心格被环境头以 `lean=` 引用，{{R_theorem}} 个空心格只在中文正文的行内链接里出现。
+:::
+
+::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
+本附录 C.1 的 {{T}} 条环境引用定理、C.2 的 {{D}} 项环境引用定义/归纳类型与 C.3 的 {{R}} 项行内声明，互不重叠地覆盖 `trureturing.lock.json` 的全部 {{total}} 项声明（{{theorems}} 项 `theorem` + {{defs}} 项 `def` + {{inductive}} 项 `inductive`），源码链接均指向所钉的 `trureturing@dev` 提交 [{commit}](trureturing:)。C.4 的 {{open}} 个开放环境与 2 项文献边界不计入这些锁定声明；索引登记、正文解释与内核证明各有明确边界。
+:::
+
+::: {.viz src="lean-declaration-map" height="560"}
+完整的声明地图：点一格看它的种类、模块与源码行、在书中出现的每一章与本附录的序号；点一章的柱脚，看那一章引用了哪些；拖动时间轴，看各章依次落定。
+:::

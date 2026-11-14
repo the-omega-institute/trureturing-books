@@ -21,34 +21,13 @@ SIZE = (460, 330)    # at most 460 wide with labels of 13 or more: 10 px or more
 
 
 def counts():
-    lock = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))["declarations"]
-    parts, units, part = [], [], -1
-    for line in (BOOK / "zh" / "SUMMARY.md").read_text(encoding="utf-8").splitlines():
-        h = re.match(r"^# (.+)$", line)
-        if h and not line.startswith("# Summary"):
-            parts.append(h.group(1).strip())
-            part = len(parts) - 1
-            continue
-        m = re.search(r"\[(.+)\]\(([^)]+\.md)\)", line)
-        if m:
-            units.append((m.group(2), part))
-    cited = [set() for _ in parts]
-    for file, p in units:
-        if p < 0:
-            continue
-        for line in (BOOK / "zh" / file).read_text(encoding="utf-8").splitlines():
-            if line.startswith(":::"):
-                for attr in re.findall(r'\slean="([^"]*)"', line):
-                    for gid in re.split(r"[\s,]+", attr.strip()):
-                        if gid:
-                            assert gid in lock, f"{file}: {gid} is not in the lock"
-                            cited[p].add(gid)
-    assert len(parts) == 11 and parts[3].startswith("第四部") and parts[5].startswith("第六部") and parts[10].startswith("终章")
-    rows = []
-    for gids in cited:
-        thm = sum(1 for g in gids if lock[g]["kind"] == "theorem")
-        rows.append((thm, len(gids) - thm))
-    return rows
+    from _book_stats import CHAPTERS, DECLS, PARTS
+    cited = [set() for _ in PARTS]
+    for ch in CHAPTERS:
+        if ch['part']:
+            cited[PARTS.index(ch['part'])].update(ch['environment'])
+    return [(sum(DECLS[g]['kind'] == 'theorem' for g in gids),
+             sum(DECLS[g]['kind'] != 'theorem' for g in gids)) for gids in cited]
 
 
 ROWS = counts()

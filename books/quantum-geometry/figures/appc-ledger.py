@@ -19,32 +19,14 @@ SIZE = (500, 300)    # labels of 15 at most 500 wide: 10 px or more in a phone c
 
 
 def ledger():
-    lock = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))["declarations"]
-    env = set()
-    for f in sorted((BOOK / "zh").glob("*.md")):
-        if f.name in ("appendix-c.md", "SUMMARY.md"):
-            continue
-        for line in f.read_text(encoding="utf-8").splitlines():
-            if line.startswith(":::"):
-                for attr in re.findall(r'\slean="([^"]*)"', line):
-                    env.update(g for g in re.split(r"[\s,]+", attr.strip()) if g)
-    index = (BOOK / "zh" / "appendix-c.md").read_text(encoding="utf-8")
-    serial = {g: s for s, g in re.findall(r"^\| `([TDR])\d+` \| \[[^\]]*\]\(lean:([^)\s]+)\)", index, re.M)}
-    media = {m.group(1) for m in re.finditer(r"^\| `[TDR]\d+` \| \[[^\]]*\]\(lean:([^)\s]+)\).*; media ", index, re.M)}
-    # Appendix C is updated in the prose pass; account for newly locked
-    # declarations already cited by an environment while their rows are pending.
-    for g, d in lock.items():
-        if g in env and g not in serial:
-            serial[g] = "T" if d["kind"] == "theorem" else "D"
-    assert set(serial) == set(lock)
+    from _book_stats import DATA, DECLS
     cell = {}
-    for g, d in lock.items():
-        kind = "thm" if d["kind"] == "theorem" else "def"
-        how = "env" if g in env else "media" if g in media else "inline"
-        cell[(kind, how)] = cell.get((kind, how), 0) + 1
-        # the indexes of appendix C are exactly these groups
-        assert serial[g] == ("T" if kind == "thm" and how == "env" else "D" if how == "env" else "R"), g
-    return cell, {k: sum(1 for s in serial.values() if s == k) for k in "TDR"}
+    for gid, d in DECLS.items():
+        via = {c['via'] for c in d['citations']}
+        kind = 'thm' if d['kind'] == 'theorem' else 'def'
+        how = 'env' if 'environment' in via else 'media' if 'media' in via else 'inline'
+        cell[kind, how] = cell.get((kind, how), 0) + 1
+    return cell, {p: len(DATA['groups'][g]) for p, g in [('T', 'theorems'), ('D', 'definitions'), ('R', 'inline')]}
 
 
 CELL, IDX = ledger()

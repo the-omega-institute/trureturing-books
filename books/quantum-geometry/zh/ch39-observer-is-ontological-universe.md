@@ -887,6 +887,206 @@ $$
 :::
 
 
+::: {.example #ex-ch39-p2e-local-parent title="纸面推导：选取合法字正等幅态的局域父哈密顿量"}
+前面的熵计算指定了一个态。能否反过来写出一个局域能量，使它成为唯一基态？先看两个位置、禁止 `11` 的最小例子。在基 $00,01,10,11$ 中取
+
+$$
+H_{2,2}=\begin{pmatrix}
+2&-1&-1&0\\
+-1&1&0&0\\
+-1&0&1&0\\
+0&0&0&1
+\end{pmatrix}.
+$$
+
+左上角是三顶点路径图 $01\leftrightarrow00\leftrightarrow10$ 的拉普拉斯矩阵：相邻顶点振幅相等时没有能量代价。最后一个对角元给非法字 `11` 加罚。谱为 $0,1,1,3$，唯一归一化零态到整体相位为 $(1,1,1,0)/\sqrt3$。下面把这个机制推广到所有有限长度。以下是标准配置图拉普拉斯方法的应用与纸面证明，完整构造尚未取得 Lean 验证。
+
+固定 $K\ge2$、$N\ge0$，在完整空间 $\mathcal H_N=(\mathbb C^2)^{\otimes N}$ 中，令 $n_j=|1\rangle_j\langle1|$，$X_i$ 为第 $i$ 位的翻转算子。所有长度 $K$ 的窗口都完全位于链内，不作周期回绕。定义
+
+$$
+\begin{aligned}
+B_a&=\prod_{j=a}^{a+K-1}n_j
+\quad(1\le a\le N-K+1),\\
+\mathcal W_i&=\{a:1\le a\le N-K+1,\ a\le i<a+K\},\\
+C_i&=\prod_{a\in\mathcal W_i}
+\left(I-\prod_{\substack{a\le j<a+K\\j\ne i}}n_j\right),\\
+h_i&=C_i(I-X_i)C_i,\\
+H_{K,N}&=\sum_{i=1}^{N}h_i+\sum_{a=1}^{N-K+1}B_a.
+\end{aligned}
+$$
+
+空指标集上的和取 $0$、积取恒等算子，故 $N<K$ 时没有窗口。$C_i$ 是对角投影，不依赖中心位，与 $X_i$ 对易。它只检查距 $i$ 至多 $K-1$ 的位置：每一项 $h_i$ 支撑于至多 $2K-1$ 个连续位置，边界处截断；$B_a$ 支撑于 $K$ 个位置。$K=2$ 时 $C_i$ 就是链内相邻位置的空位投影之积。
+
+**能量怎样识别合法字？** 固定第 $i$ 位之外的配置 $\eta$，记对应的两个字为 $\eta0,\eta1$，中心数字均插在位置 $i$。$C_i(\eta)=1$ 当且仅当把中心置为 $1$ 不会形成任何包含 $i$ 的禁窗口。在这样的二维块上，$h_i$ 为
+
+$$
+\begin{pmatrix}1&-1\\-1&1\end{pmatrix};
+$$
+
+其余块为零，因此 $h_i$ 正半定。$B_a$ 也是正投影。对任意 $|\phi\rangle=\sum_w a_w|w\rangle$，令 $\nu_K(w)$ 为字 $w$ 中全 $1$ 的长度 $K$ 窗口数，得到完整空间上的能量恒等式
+
+$$
+\begin{aligned}
+\langle\phi|H_{K,N}|\phi\rangle
+={}&\sum_{i=1}^{N}\ \sum_{\eta:C_i(\eta)=1}
+|a_{\eta0}-a_{\eta1}|^2\\
+&+\sum_{w\in\{0,1\}^N}\nu_K(w)|a_w|^2.
+\end{aligned}
+$$
+
+每个固定外部配置的无向翻转对只计一次，不另乘 $2$。零能量首先迫使所有非法字的振幅为零。对于合法字，删除任意一个 $1$ 都保持合法，而且该位置的 $C_i=1$，所以第一项又迫使这一对合法字的振幅相等。逐位删除到全零字，便把所有合法字连在一起。
+
+反过来，一次满足 $C_i=1$ 的翻转不会改变字的合法性：包含 $i$ 的窗口在两个端点都不违规，其他窗口不受翻转影响。因此令合法字振幅相同、非法字振幅为零，会逐项消去上述全部平方项和罚项。若 $W_N$ 仍表示不含 $1^K$ 的全部长度 $N$ 字、$z_N=|W_N|$，则
+
+$$
+\begin{aligned}
+|\Psi_{K,N}\rangle&=z_N^{-1/2}\sum_{w\in W_N}|w\rangle,\\
+\ker H_{K,N}&=\mathbb C|\Psi_{K,N}\rangle.
+\end{aligned}
+$$
+
+这既证明了完整张量空间中的唯一基态射线，也证明它同时使每一局域正项取零，即无挫折。合法字张成的子空间被各项保持；限制在该空间时，$\sum_i h_i$ 正是单比特合法翻转图的拉普拉斯。非法性罚项使这个限制空间中的唯一性提升到完整空间中的唯一性，不能省略：上面的 $K=N=2$ 例子若删去罚项，$|11\rangle$ 就多出一个零态。
+
+**长度与物理解释的边界。** $N=0$ 时空间是一维真空空间，$H_{K,0}=0$，没有激发能级可定义谱隙。每个固定 $N\ge1$ 的矩阵都是有限维、正半定且恰有一维核，因而其第一正本征值严格大于零；这里没有给出对所有 $N$ 一致的下界。当 $1\le N<K$ 时，$C_i=I$ 且无罚项，$H_{K,N}=\sum_i(I-X_i)$，基态为 $|+\rangle^{\otimes N}$，谱隙恰为 $2$。
+
+因此，前面实际正等幅态的有限切口熵与固定 $K$ 双侧极限，也是这个专门设计模型的基态纠缠结果。这不把它识别为真实里德堡阵列、黄金链、Tribonacci 跃迁链或 Rauzy 几何所选出的态，也不解决分形边界与纠缠标度的开放问题。
+
+来源与对应：本书[当前所钉源码](trureturing:) 中的理论卷 `docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md` §15.9、定义 15.22 与命题 15.23 已给出 $K=2$、正活动 $a_i$ 的合法空间局域父及逐位删除证明；这里取 $a_i=1$，把控制投影写成所有包含中心的禁窗口，并补入全空间罚项。该卷命题 15.25 明确指出不加罚项时全空间唯一性失败。[Lesanovsky 的三体模型](https://arxiv.org/abs/1010.2349v2)式 (3)–(5) 提供相关物理背景，符号、正尺度及边界对应见该卷数学引文 15.24；这里的任意 $K$ 构造由上述能量恒等式承担，不将其归为该文已证明的实验实现。
+:::
+
+::: {.example #ex-ch39-p2e-heatbath-scale title="纸面推导：每站速率一的热浴链与完整空间谱隙"}
+[@ex-ch39-p2e-local-parent] 的配置图拉普拉斯还给出一个精确的随机动力学对应。固定 $K\ge2$、$N\ge1$，沿用开放边界的 $W_N,z_N,C_i,h_i,B_a,H_{K,N}$ 与 $|\Psi_{K,N}\rangle$，简记 $z=z_N$。在合法字上取均匀律 $\pi(w)=1/z$。以下直接给出这一应用的纸面推导。
+
+**一次刷新怎样作用？** 对位置 $i$，记 $\mathrm{outside}_i$ 为除第 $i$ 位外的全部位。对一个在 $W_N$ 中出现的外部配置 $\eta$，令
+
+$$
+\begin{aligned}
+F_i(\eta)&=\{w\in W_N:w_{-i}=\eta\},\\
+(E_i f)(w)&=\frac1{|F_i(w_{-i})|}
+\sum_{v\in F_i(w_{-i})}f(v).
+\end{aligned}
+$$
+
+这就是给定 $\mathrm{outside}_i$ 的条件期望。把合法字的一位置零总是合法，故每个非空纤维或为 $\{\eta0,\eta1\}$，或为只能取零的单点 $\{\eta0\}$；中心位均插在位置 $i$。在双点纤维上 $C_i=1$，而在强制零的单点纤维上 $C_i=0$。因此相应的矩阵为
+
+$$
+\begin{aligned}
+E_i&=\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix},\\
+h_i&=\begin{pmatrix}1&-1\\-1&1\end{pmatrix}=2(I-E_i),
+\end{aligned}
+$$
+
+其中最后的等式按函数值与合法基矢的对应来读；单点纤维上 $E_i=I$，两边均为零。
+
+让每个位置有独立的速率 $1$ 泊松钟；钟响时，按上述条件律重新抽取该位，允许抽回原值。这条热浴链作用在函数上的连续时间生成元是
+
+$$
+L=\sum_{i=1}^N(E_i-I).
+$$
+
+于是每条合法翻转边的跳转速率为 $1/2$。全链每单位时间平均有 $N$ 次刷新尝试。若 $P=N^{-1}\sum_iE_i$ 是每步均匀随机选一站刷新的离散时间算子，则
+
+$$
+-L=N(I-P).
+$$
+
+全链总速率 $1$ 的刷新过程则有生成元 $P-I=L/N$，两种时钟相差因子 $N$。
+
+**从条件方差到量子能量。** 允许 $f,g:W_N\to\mathbb C$，约定内积对第一变量共轭线性，并定义
+
+$$
+\begin{aligned}
+\langle f,g\rangle_\pi&=\frac1z\sum_{w\in W_N}\overline{f(w)}g(w),\\
+\pi f&=\frac1z\sum_{w\in W_N}f(w),\\
+\operatorname{Var}_\pi(f)&=\frac1z\sum_{w\in W_N}|f(w)-\pi f|^2.
+\end{aligned}
+$$
+
+逐纤维平均使 $E_i$ 成为这个内积下的正交投影：它自伴、幂等，像空间是在每个纤维上为常数的函数。因此
+
+$$
+\begin{aligned}
+\mathcal E(f,f)&:=-\langle f,Lf\rangle_\pi\\
+&=\sum_i\|f-E_if\|_\pi^2\\
+&=\sum_i\mathbb E_\pi\operatorname{Var}
+(f\mid\mathrm{outside}_i)\\
+&=\frac1{2z}\sum_{\{u,v\}\in\mathscr E_N}|f(u)-f(v)|^2,
+\end{aligned}
+$$
+
+这里条件方差为 $E_i(|f-E_if|^2)$，$\mathscr E_N$ 是相差一位的无向合法字对集合，每条边只计一次。系数可逐对核对：双点纤维的条件方差为 $|f(u)-f(v)|^2/4$，纤维的 $\pi$ 质量为 $2/z$；单点纤维贡献为零。这也证明 $-L$ 自伴且正半定。
+
+令 $\mathcal H_{\mathrm{legal}}=\operatorname{span}\{|w\rangle:w\in W_N\}$，定义
+
+$$
+Uf=z^{-1/2}\sum_{w\in W_N}f(w)|w\rangle.
+$$
+
+由内积公式，$U:L^2(\pi)\to\mathcal H_{\mathrm{legal}}$ 保内积且满射，故为酉映射。罚项在合法空间为零，逐纤维的矩阵等式于是给出
+
+$$
+\begin{aligned}
+H_{\mathrm{legal}}
+&:=H_{K,N}|_{\mathcal H_{\mathrm{legal}}}
+=U(-2L)U^{-1}\\
+&=2N\,U(I-P)U^{-1},\\
+\langle Uf,H_{K,N}Uf\rangle&=2\mathcal E(f,f),\\
+U1&=|\Psi_{K,N}\rangle,\\
+\langle\Psi_{K,N}|Uf\rangle&=\pi f.
+\end{aligned}
+$$
+
+因此零均值恰对应于与基态正交，方差恰是去掉基态分量后的范数平方。
+
+**为何合法空间的谱隙足够？** 合法字可逐位删除 $1$ 到全零字，故合法翻转图连通；$N\ge1$、$K\ge2$ 又保证全零字与仅首位为 $1$ 的字都是顶点。能量的边平方和因此恰在常数函数上为零，$-L$ 的第一正本征值 $\lambda_{K,N}$ 存在，且
+
+$$
+\lambda_{K,N}=\inf_{f\not\equiv\mathrm{constant}}
+\frac{\mathcal E(f,f)}{\operatorname{Var}_\pi(f)}>0.
+$$
+
+这里的变分公式直接来自有限维自伴算子的谱分解：减去均值后，把函数展开在正本征值的正交本征基上，商是这些本征值的加权平均，最小本征向量取到下确界。
+
+还须控制 $\mathcal H_{\mathrm{illegal}}=\mathcal H_{\mathrm{legal}}^\perp$。父例已证明 $C_i$ 允许的翻转保持合法性状态；因此每个 $h_i$ 保持这两个空间，对角的 $B_a$ 也如此。若非法空间非空，则对其中的任意 $|\chi\rangle=\sum_{w\notin W_N}a_w|w\rangle$，每个非法字至少含一个禁窗口，故
+
+$$
+\begin{aligned}
+\langle\chi,H_{K,N}\chi\rangle
+&\ge\sum_{w\notin W_N}\nu_K(w)|a_w|^2\\
+&\ge\|\chi\|^2.
+\end{aligned}
+$$
+
+第一步使用各 $h_i\ge0$，第二步使用 $\nu_K(w)\ge1$。设完整 $H_{K,N}$ 的第一正本征值为 $\Delta_{K,N}$。任意与基态正交的向量唯一分成 $Uf+\chi$，其中 $\pi f=0$，两块之间没有交叉能量，因而
+
+$$
+\begin{aligned}
+\langle Uf+\chi,H_{K,N}(Uf+\chi)\rangle
+&\ge2\lambda_{K,N}\|f\|_\pi^2+\|\chi\|^2,\\
+\min\{1,2\lambda_{K,N}\}
+&\le\Delta_{K,N}\le2\lambda_{K,N}.
+\end{aligned}
+$$
+
+上界取合法空间内的最小正本征向量即可。若非法空间为空，则始终 $\chi=0$，实际有更精确的等式 $\Delta_{K,N}=2\lambda_{K,N}$，不能凭空添入能量为 $1$ 的激发态。
+
+**两个精确的边界核对。** 当 $1\le N<K$ 时所有字都合法，非法空间为空，$E_i=(I+X_i)/2$。乘积字符 $f_A(w)=(-1)^{\sum_{i\in A}w_i}$（$A\subseteq\{1,\ldots,N\}$）构成函数空间的正交基，满足 $-Lf_A=|A|f_A$，故 $\lambda_{K,N}=1$、$\Delta_{K,N}=2$，也包括 $N=1$。当 $K=N=2$ 时，在合法字次序 $00,01,10$ 下
+
+$$
+-L=\frac12\begin{pmatrix}2&-1&-1\\-1&1&0\\-1&0&1\end{pmatrix}.
+$$
+
+向量 $(1,1,1)$、$(0,1,-1)$、$(-2,1,1)$ 的本征值依次为 $0,1/2,3/2$。非法字 $11$ 的两个 $h_i$ 均为零而罚能为 $1$，故完整谱为 $0,1,1,3$，与父例一致。
+
+固定 $K$ 后，上面的两侧界说明：$\inf_{N\ge1}\Delta_{K,N}>0$ 当且仅当 $\inf_{N\ge1}\lambda_{K,N}>0$。由变分公式，这又当且仅当存在只依赖 $K$ 的有限常数 $C_K>0$，使所有 $N\ge1$ 及所有复值函数满足
+
+$$
+\operatorname{Var}_\pi(f)\le C_K\mathcal E(f,f).
+$$
+
+例如热浴谱隙下界 $c_K>0$ 将给出完整谱隙下界 $\min\{1,2c_K\}$；反向的完整谱隙下界 $d_K>0$ 将给出热浴谱隙下界 $d_K/2$。这里未证明这样的长度一致常数存在，也未给出其数值。剩余问题因而精确归结为同一硬约束、开放边界热浴链的长度一致 Poincaré 估计。沿字长方向的转移矩阵混合控制空间相关；若无进一步联系两种动力学的定理，它不能代替这里刷新时间方向的估计。
+:::
+
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="文献结果：斐波那契任意子黄金链与里德堡原子阻塞实验背景（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在凝聚态与原子分子光物理文献中，$K = 2$ 的禁邻 `11` 希尔伯特空间在两类著名多体系统中获得了物理实现或理论建模：其一是 A. E. Feiguin 等人提出的拓扑斐波那契任意子“黄金链”（golden chain）模型（*Phys. Rev. Lett.* **98**, 2007, 160409），其融合规则 $\tau \times \tau = \mathbf{1} + \tau$ 使有限链融合空间维数按斐波那契数增长；其二是里德堡（Rydberg）原子阵列中的偶极/范德瓦耳斯 $1/r^6$ 阻塞机制（理论建模见 I. Lesanovsky, *Phys. Rev. Lett.* **106**, 2011, 025301；51 原子量子模拟器实验见 H. Bernien et al., *Nature* **551**, 2017, 579–584）。引用这些物理背景时须注意两重边界：第一，最近邻两体里德堡阻塞刚好实现禁相邻激发 $|11\rangle$（对应 $K = 2$ 的 PXP 子空间），但单纯拉大两体阻塞半径只会禁止距离 $R_b$ 内的一切激发对（例如连 `101` 一并禁止），**并不会自动产生 $K > 2$ 的禁连续 $1^K$ 约束**——若要在物理哈密顿量中实现 $K > 2$ 的 $K$-Bonacci 子空间，必须另行设计专门的 $K$ 体局域相互作用；第二，任意子融合空间与有限阻塞比实验哈密顿量均非 [@thm-ch39-p2e-direct-encoder-ranks] 中精确零振幅等距直接编码器的形式同义物。
 :::

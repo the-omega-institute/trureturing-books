@@ -1,0 +1,9 @@
+{
+  "schema": "tbook-viz-parts-v1",
+  "suites": {
+    "self-referential-table.test.mjs": [
+      "checks",
+      "transitions"
+    ]
+  }
+}

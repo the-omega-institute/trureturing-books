@@ -83,7 +83,7 @@
    - 与同章的实验卡分工：实验卡给能亲手推的情形，静态图给印刷版与 EPUB 也要看得见的构造；两者紧邻时不画同一个画面。
    - **章节里的图一律用 `::: {.figure}`** 引用脚本生成的静态图，不放手绘或直接嵌入的图片文件。
    - **媒体块不连排**：静态图、实验卡、视频不三块连排，相邻两块之间要隔着正文，每块紧跟在讲到它的那句话之后。
-6. **锁文件或 `lean=` 引用变动后要重出的东西**：`lean-declaration-map` 页面的数据由脚本从 `trureturing.lock.json` 与中文章节生成并写进它的 `main.js`；`./tbook pin`、`./tbook pin --refresh` 或增删章节里的 `lean=` 引用之后，运行 `python3 books/quantum-geometry/viz/lean-declaration-map/gen-data.py`，再 `node tools/node/viz-thumbs.mjs quantum-geometry lean-declaration-map` 重新出图并提交（它的浏览器测试会核对条目数与锁文件一致，数据过期时失败）。由锁文件算数的静态图（声明分布图）同样会被 `./tbook check` 判为过期：运行 `./tbook fig build --book quantum-geometry` 后提交。
+6. **统计与派生产物统一刷新**：附录 C 的计数与声明索引、声明地图数据和五张统计图由 `./tbook sync --book quantum-geometry` 生成，构建前也会自动执行；`./tbook check` 只检查是否过期。修改正文、目录或钉版后运行同步，提交实际改变的输出。统计来源是正式出版解析器与锁文件；附录 C 的声明链接从引用统计输入排除，不手填总数、排名或重复实现计数规则。附录论述修改 `books/quantum-geometry/data/appendix-c.{zh,en}.md.in`，不直接改生成的章节；中英顺序与环境仍须逐条对齐。`data/declaration-serials.json` 保存稳定编号，不因增项重编号已有条目。地图缩略图与静帧由内容摘要判断是否重出，无变化时不启动浏览器；`.stills.json` 随图提交。已有画面未变且先前检查范围适用时复用画面证据，只对实际改变的画面补看；修改舞台、布局或数学行为时仍执行对应测试与看图。详见 `docs/project/STATISTICS.md`。
 
 ## 7. 多智能体协同分工与五路并行工作流
 

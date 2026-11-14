@@ -17,9 +17,31 @@
 // uniform few-step promise (N = r = 8, ε = −0.36 on (6, 7)) and the old ‖Δ‖₂ < ½ guarantee (T = I, Δ = aEᵢᵢ).
 import { session, stageFirstChecks, solidChecks, solidPixels, settle, until, openStill } from '../../../../tools/node/viz-testkit.mjs';
 import { withReadySolid } from './solid-readiness.mjs';
+import { transitionChecks } from './self-referential-table-transitions.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'self-referential-table';
+const part = process.env.VIZ_TEST_PART || 'all';
+if (!['all', 'checks', 'transitions'].includes(part)) throw new Error(`unknown execution part: ${part}`);
 const T = await session();
+if (part === 'transitions') {
+  // Fresh-session prerequisites: the same Chinese page, fonts, solid and settled controls.
+  const page = await T.goto(BOOK, ID, '?lang=zh');
+  await page.evaluate(() => document.fonts.ready);
+  await until(page, () => window.TRV.solids?.[0]?.contexts > 0, null, 120000);
+  await page.evaluate(async () => { await window.TRV.solids[0].ready; window.TRV.kit.flush(); });
+  await settle(page);
+  // Recreate the original sweep's preceding size-regression state, without repeating its assertions.
+  await page.click('[data-size="12"]'); await page.click('[data-scene="read"]'); await settle(page);
+  const last = await page.evaluate(() => window.TABLE_DEBUG.point.cell(11, 11));
+  await page.mouse.click(last.x, last.y); await settle(page);
+  await page.click('[data-preset="reset"]'); await settle(page);
+  await page.click('[data-scene="read"]'); await settle(page);
+  const start = await page.evaluate(() => window.TABLE_DEBUG.state);
+  if (start.N !== 8 || start.r !== 1 || start.i !== 7 || start.j !== 7 || start.scene !== 'read') throw new Error('transition bootstrap differs from the original sweep');
+  await transitionChecks(T, page);
+  if (T.errors.length) throw new Error(T.errors.join(' | '));
+  await T.finish();
+}
 const { check } = T;
 
 /* ---------- independent linear algebra ---------- */
@@ -445,66 +467,7 @@ await pick('reset'); await page.click('[data-scene="read"]');
 const readAfter = await (async () => { try { return { s: await state(), p: await dbg(() => window.TABLE_DEBUG.products()), M: await dbg(() => window.TABLE_DEBUG.T()) }; } catch (err) { return { err: String(err.message || err).split('\n')[0] }; } })();
 check('…then RANK 1 and Read: the selection is moved inside the 8 × 8 table, and reading works',
   !readAfter.err && readAfter.s.N === 8 && readAfter.s.i === 7 && readAfter.s.j === 7 && readAfter.p.length === 8 && Math.abs(readAfter.s.partial - readAfter.M[7][7]) < 1e-15 && T.errors.length === 0, readAfter.err || T.errors.slice(0, 2).join(' | '));
-// Every transition the controls offer: 3 sizes × 4 scenes × 6 cards, with a selection on each side of each card size
-// (coordinates 0, 3, 4, 7, 8, 11 that exist in the source table: valid or not in rows and columns independently).
-// Expected: a card that names its own cell selects it; any other card keeps the selection when it still fits and
-// otherwise moves each coordinate to the last row or column; then Read reads exactly that cell.
-const CARD_N = { reset: 8, expand_table: 8, full: 8, dual_read: 4, heal: 8, orthogonal_zero: 8 }, CARD_CELL = { dual_read: [0, 3], heal: [1, 4] };
-// The same transitions in chunks of one size × scene × card, with the page settling in between: every press redraws the
-// lit solid, and some eight thousand WebGL frames in one synchronous evaluate exhaust the renderer.
-const sweep = await (async () => {
-  const dom = await page.evaluate(() => ({
-    sizes: [...document.querySelectorAll('#sizeChips [data-size]')].map((b) => +b.dataset.size),
-    scenes: [...document.querySelectorAll('#sceneChips [data-scene]')].map((b) => b.dataset.scene),
-    cards: [...document.querySelectorAll('#presets [data-preset]')].map((b) => b.dataset.preset)
-  }));
-  const rows = [], errs = [];
-  for (const n of dom.sizes) for (const sc of dom.scenes) for (const id of dom.cards) {
-    const part = await page.evaluate(([n, sc, id]) => {
-      const dbg = window.TABLE_DEBUG, kit = window.TRV.kit, q = (sel) => document.querySelector(sel), errs = [];
-      const onErr = (e) => errs.push(String(e.message || e)); window.addEventListener('error', onErr);
-      const press = (sel) => { q(sel).click(); kit.flush(); };
-      const cell = (i, j) => { const p = dbg.point.cell(i, j); q('#cv').dispatchEvent(new MouseEvent('click', { bubbles: true, clientX: p.x, clientY: p.y })); kit.flush(); };
-      const rows = [];
-      for (const i of [0, 3, 4, 7, 8, 11].filter((x) => x < n)) for (const j of [0, 3, 4, 7, 8, 11].filter((x) => x < n)) {
-        const row = { n, sc, id, i, j };
-        try {
-          press(`[data-size="${n}"]`); press('[data-scene="read"]'); cell(i, j);
-          const a = dbg.state; row.before = [a.N, a.i, a.j];
-          press(`[data-scene="${sc}"]`); press(`[data-preset="${id}"]`);
-          const b = dbg.state;
-          row.after = { N: b.N, r: b.r, i: b.i, j: b.j, kicks: b.kicks, rankMax: +q('#rank').max, rankVal: +q('#rank').value, chip: +q('#sizeChips [aria-pressed="true"]').dataset.size };
-          press('[data-scene="read"]');
-          const c = dbg.state, p = dbg.products(), T = dbg.T();
-          row.read = { N: c.N, i: c.i, j: c.j, len: p.length, partial: c.partial, Tij: T[c.i] ? T[c.i][c.j] : NaN };
-        } catch (e) { row.error = String((e && e.message) || e); }
-        rows.push(row);
-      }
-      window.removeEventListener('error', onErr);
-      return { rows, errs };
-    }, [n, sc, id]);
-    rows.push(...part.rows); errs.push(...part.errs);
-    await settle(page);
-  }
-  return { rows, errs, sizes: dom.sizes, scenes: dom.scenes, cards: dom.cards };
-})();
-check('transition domain from the controls: sizes 4/8/12, four scenes, six cards (card sizes 4 and 8)', sweep.sizes.join() === '4,8,12' && sweep.scenes.length === 4 && sweep.cards.length === 6 && sweep.cards.every((c) => CARD_N[c]));
-let transOk = true, keptOk = true, movedOk = true, nKept = 0, nMoved = 0;
-const transDetail = [];
-for (const u of sweep.rows) {
-  const tag = `${u.n}/${u.sc}/${u.id}/(${u.i + 1}, ${u.j + 1})`;
-  if (u.error || !u.after || !u.read) { transOk = false; transDetail.push(`${tag}: ${u.error}`); continue; }
-  const N2 = CARD_N[u.id], want = CARD_CELL[u.id] || [Math.min(u.i, N2 - 1), Math.min(u.j, N2 - 1)], a = u.after;
-  const valid = a.N === N2 && a.i === want[0] && a.j === want[1] && a.i < a.N && a.j < a.N && a.r >= 1 && a.r <= a.N && a.rankMax === a.N && a.rankVal === a.r && a.chip === a.N && a.kicks.every((k) => k.i < a.N && k.j < a.N);
-  const read = u.read.N === N2 && u.read.i === want[0] && u.read.j === want[1] && u.read.len === N2 && Math.abs(u.read.partial - u.read.Tij) < 1e-12;
-  if (u.before.join() !== [u.n, u.i, u.j].join() || !valid || !read) { transOk = false; transDetail.push(`${tag}: ${JSON.stringify([u.before, a.N, a.i, a.j, u.read])}`); }
-  if (!CARD_CELL[u.id]) {
-    if (u.i < N2 && u.j < N2) { nKept++; if (a.i !== u.i || a.j !== u.j) keptOk = false; } else { nMoved++; if (!(a.i < N2 && a.j < N2)) movedOk = false; }
-  }
-}
-check(`every size × scene × card × selection transition leaves a valid selection, and Read reads it (${sweep.rows.length} transitions)`, transOk && sweep.rows.length === 4 * 6 * (4 + 16 + 36) && sweep.errs.length === 0, `${transDetail.slice(0, 3).join(' | ')} ${sweep.errs.slice(0, 2).join(' | ')}`);
-check('a selection that still fits the card’s table is kept as it was', keptOk && nKept > 0, `${nKept} kept`);
-check('a selection outside the card’s table is moved inside it (row and column independently)', movedOk && nMoved > 0, `${nMoved} moved`);
+if (part === 'all') await transitionChecks(T, page);
 // the cover sets N = 12 through the same owner; cards after it keep or move its selection like any other
 await page.evaluate(() => window.TRV_THUMB()); s = await state();
 check('cover state: N = 12, r = 5, cell (3, 8), the size chip and rank slider follow', s.N === 12 && s.r === 5 && s.i === 2 && s.j === 7 && (await page.evaluate(() => document.getElementById('rank').max)) === '12' && (await page.evaluate(() => document.querySelector('#sizeChips [aria-pressed="true"]').dataset.size)) === '12');

@@ -1,0 +1,113 @@
+# Appendix C Master Index of Formalized Lean 4 Theorems and Open Problems {#appendix-c-master-index-of-formalized-lean-4-theorems-and-open-problems}
+
+This appendix serves as the **Master Audit Ledger** of the epistemic boundaries governing this monograph. Under the Prelude's contract, Lean verification, written proofs, and open problems declare their evidence separately. Sections C.1–C.3 audit the frozen declarations in `trureturing.lock.json` at the pinned `trureturing@dev` commit [{commit}](trureturing:); C.4 lists open problems and selected literature boundaries:
+
+1. **C.1 Frozen Theorem Index ({{T}} Unique `theorem` Declarations)**: This section contains every locked declaration of kind `theorem` cited by `lean="<GID>"` on at least one `:::` environment header in the Chinese edition. Each citation must resolve to a kernel-verified, frozen theorem at the pinned commit.
+2. **C.2 Formal Definition and Carrier Index ({{D}} Unique Declarations: {{D_def}} `def` + {{inductive}} `inductive`)**: Definitions and inductive types cited by `lean=` on Chinese environment headers; **C.3 Inline Auxiliary Theorems and Definitions ({{R}} Declarations: {{R_theorem}} `theorem` + {{R_def}} `def`)** contains the remaining declarations, which no environment header cites. The three disjoint sections cover all **{{total}} unique declarations** in `trureturing.lock.json` (${{T}} + {{D}} + {{R}} = {{total}}$). Media consumers are listed separately at the end of each row and do not determine the partition.
+3. **C.4 Open Problems and Literature Boundary Register (11 Entries: 6 `conjecture` + 3 `problem` Environments + 2 Literature `remark` Boundaries)**: None of the nine open environments carries a `lean` attribute; the other two entries are explicitly attributed external literature boundaries and are excluded from the count of verified declarations.
+
+Section 16.3's [@thm-central-defect-endpoint-average] and its [written proof](ch16-qsvt-walks-and-compilation.md#pf-central-defect-endpoint-average) are neither frozen declarations nor open problems. Their DOI, source locator, and [formalization request #10](https://github.com/the-omega-institute/trureturing-requests/issues/10) appear in the text and the automatically generated written-proof ledger. They add nothing to the locked-declaration totals, green charts, or C.4 counts above.
+
+::: {.viz src="lean-declaration-map" preset="all" height="500"}
+**{{total}} cells, one for each locked declaration.** The timeline runs from the Prelude to Appendix D, with Appendix C itself excluded as a landing column. Each declaration lands in the first unit that cites it: {{theorems}} cells are theorems and {{definitions}} are definitions or inductive types; {{env}} filled cells are cited by `lean=` on environment headers, while {{R}} hollow cells appear only inline. Each declaration occupies one cell regardless of reuse. The C.1 chart below instead counts only the theorems cited by each chapter’s environment headers, counting them again in different chapters.
+:::
+
+---
+
+## C.1 Verified and Frozen Lean 4 Theorems ({{T}} Unique `theorem` GIDs) {#sec-appendix-c-theorems}
+
+The table lists {{T}} distinct frozen theorems cited by environment headers. Inline references and media consumers appear in the final column without increasing bar heights. Existing serials remain stable within a partition; new entries receive new serials, and rows are sorted by module path.
+
+
+::: {.figure src="appc-theorems-by-chapter"}
+**Frozen theorems cited by each chapter’s `lean=` environment headers.** Bars follow the reading order of the main chapters and Coda, with part bands behind them. Heights sum to ${{chapter_total}}$, computed by the publication parser and lock file; all ${{T}}$ indexed theorems appear in at least one bar. Solid sections count ${{chapter_new}}$ theorems first appearing in that chapter; hollow sections count ${{chapter_reused}}$ previously encountered citations. Reuse across main chapters counts again; child pages are grouped with their parent, and definitions and inline-only citations are excluded.
+:::
+
+Rows are sorted by module path. The grid below shows their distribution across module families and parts of first appearance; counts follow the chapter citations automatically.
+
+::: {.figure src="appc-modules-by-part"}
+**The ${{T}}$ theorems of C.1 by module family and part of first appearance.** Rows group the first three module-path segments, with smaller families combined in the last row; columns cover Parts I–X and the coda with the appendices. Each theorem counts once, in the part whose Chinese text first cites it. Cells give counts, darker for more, blank for zero; they do not represent proof dependencies.
+:::
+
+| ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
+| :--- | :--- | :--- | :--- | :--- |
+{{table_T}}
+
+---
+
+## C.2 Formal Definitions, Structures, and Inductive Types ({{D}} Unique Declarations) {#sec-appendix-c-definitions}
+
+The table lists **{{D}} unique declarations ({{D_def}} `def` and {{inductive}} `inductive`)** cited by `lean=` on Chinese `definition` and `example` environment headers. Together with the {{T}} theorems of C.1 they form **{{env}} locked declarations cited by environment headers**. Media consumers appear in the last column and do not determine the partition.
+
+| ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
+| :--- | :--- | :--- | :--- | :--- |
+{{table_D}}
+
+---
+
+## C.3 Inline-Referenced Auxiliary Theorems and Definitions ({{R}} Unique Declarations) {#sec-appendix-c-inline}
+
+Beyond the {{env}} environment-cited declarations in C.1 and C.2, **{{R}} declarations ({{R_theorem}} theorems and {{R_def}} definitions)** appear only through inline links in the Chinese units, with no `lean=` citation on any `:::` environment header. They include three media-consumed theorems formerly placed in C.1; their media consumers remain listed, without changing their inline classification. The three sections cover all **{{total}} unique locked declarations** (${{T}} + {{D}} + {{R}} = {{total}}$).
+
+| ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Inline Reference Chapters |
+| :--- | :--- | :--- | :--- | :--- |
+{{table_R}}
+
+::: {.viz src="lean-declaration-map" preset="inline" height="500"}
+**The ones reached by inline links alone.** The map keeps {{R}} hollow cells: {{R_theorem}} green theorems and {{R_def}} grey definitions, all listed in this section. “Inline” describes their citation mode in the Chinese edition; some also have media consumers.
+:::
+
+---
+
+## C.4 Open Conjectures and Unformalized Problems (11 Entries: 6 Conjectures + 3 Open Problems + 2 Literature Boundaries — Zero `lean` Attributes) {#sec-appendix-c-open-register}
+
+::: {.remark #rem-appendix-c-open-literature-register title="Register of Open Conjectures and External Literature Boundaries (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book (only for external literature boundary entries `O6` and `O7` below; `O1`–`O5` and `O8` are `conjecture` environments, while `O9`–`O11` are `problem` environments).** The book contains nine open environments, all without a `lean` attribute. Open conjectures, open problems and classical literature results are identified separately and excluded from the count of verified declarations.
+
+| # | Environment Anchor ID | Chapter | Conjecture / Frontier Problem Title | Core Mathematical or Physical Statement Summary | `lean` Attribute | Badge Status |
+| :---: | :--- | :---: | :--- | :--- | :---: | :---: |
+| O1 | `#conj-complexity-equals-volume` | `CH20` | Complexity Equals Volume (CV Conjecture, Susskind) | Maximal interior spatial slice volume $V(t)$ of an asymptotic AdS black hole scales proportionally to boundary state circuit complexity $\mathcal{C}(t) \sim V(t)/(G_N \ell_{\mathrm{AdS}})$ | None (Forbidden) | `OPEN` (Red) |
+| O2 | `#conj-er-equals-epr` | `CH20` | $\mathrm{ER}=\mathrm{EPR}$ Wormhole–Entanglement Duality (Maldacena–Susskind) | Non-traversable Einstein–Rosen bridges (ER wormholes) in bulk gravity are geometrically dual to maximally entangled EPR pairs in non-perturbative quantum gravity | None (Forbidden) | `OPEN` (Red) |
+| O3 | `#conj-p-neq-np` | `CH20` (cited in `CH30` / Coda) | $\mathrm{P} \neq \mathrm{NP}$ Complexity Separation Conjecture | Under the standard uniform Turing-machine computational model over a finite alphabet, there exists a formal language in $\mathrm{NP}$ that does not belong to $\mathrm{P}$ ($\mathrm{P} \neq \mathrm{NP}$) | None (Forbidden) | `OPEN` (Red) |
+| O4 | `#conj-riemann-hypothesis` | `CH22` | The Riemann Hypothesis | Every nontrivial zero of the Riemann zeta function $\zeta(s)$ lies on the critical symmetry line $\operatorname{Re}(s) = 1/2$ | None (Forbidden) | `OPEN` (Red) |
+| O5 | `#conj-schanuel-dottie` | `CH24` | Schanuel's Conjecture Applied to the Algebraic Independence of $\theta^*$ and $\pi$ | Schanuel's conjecture implies that the self-referential Dottie root $\theta^* = \cos\theta^*$ and $\pi$ are algebraically independent over $\mathbb{Q}$ ($\operatorname{tr.deg}_{\mathbb{Q}}\mathbb{Q}(\theta^*, \pi) = 2$; Chow's conditional result $\theta^* \notin \mathrm{EL}$ is noted separately in `#rem-banach-dottie-hairy-ball-literature`) | None (Forbidden) | `OPEN` (Red) |
+| O6 | `#rem-ryu-takayanagi-literature` | `CH19` | Continuous AdS/CFT Ryu–Takayanagi Minimal-Surface Formula | Full continuum gravitational path-integral derivation of $S(A) = \operatorname{Area}(\gamma_A)/(4G_N)$ (this book formalizes only the discrete `BridgeGraph` quantum max-flow min-cut theorem) | None (Literature) | `Literature` |
+| O7 | `#rem-diophantine-z-in-q-literature` | `CH23` | Hilbert's Tenth Problem over $\mathbb{Q}$ ($H_{10}(\mathbb{Q})$) & Existential Definability of $\mathbb{Z} \subset \mathbb{Q}$ | Whether $\mathbb{Z}$ admits a purely existential ($\exists$) Diophantine definition in $\mathbb{Q}$ and whether $H_{10}(\mathbb{Q})$ is decidable (Koenigsmann 2016 proved a $\forall\exists$ first-order characterization, while $H_{10}(\mathbb{Q})$ remains open) | None (Literature) | `OPEN / Lit.` |
+| O8 | `#conj-coda-navier-stokes-regularity` | `CH30` | Unforced 3D Incompressible Navier–Stokes Global Regularity Conjecture (Clay Millennium Statements A / B) | For strictly positive viscosity $\nu > 0$ and identically zero external force $\mathbf{f} \equiv \mathbf{0}$, whether every smooth divergence-free rapidly decaying (on $\mathbb{R}^3$) or periodic (on $\mathbb{T}^3$) initial velocity $\mathbf{u}_0$ admits a global smooth finite-energy solution on $[0, \infty)$ or develops finite-time blow-up (OpenAI's forced C / D result follows an accepted route in the official problem; see [@rem-ch30-navier-stokes-forced-literature] for external literature and its published formalization, outside this book's frozen theorems) | None (Forbidden) | `OPEN` (Red) |
+| O9 | `#prob-ch39-p2e-fractal-horizon` | `CH39` | Rauzy Fractal-Horizon Entanglement Scaling in Pisot Cut-and-Project Quantum Many-Body Systems | For $K \ge 3$ Pisot cut-and-project systems, can a rigorously constructed family of local gapped ground states or encoded states have asymptotic entanglement governed by the internal Rauzy boundary dimension $D_F$, such as $S_{\mathrm{ent}}(R) \asymp R^{D_F}$ or a fractal correction, with spectral-gap and locality criteria for preserving or violating the usual codimension-one area law? Finite encoding and null-boundary theorems do not prove this physical scaling | None (Forbidden) | `OPEN` (Red) |
+| O10 | `#prob-appendix-d-time-horizon` | Appendix D | Unified Dynamics for Covariant State Reduction, Emergent Clocks and Evaporating-Horizon Unitarity | Construct measurement dynamics without privileged Lorentz foliations or external clocks, derive the thermodynamic arrow from the Wheeler–DeWitt constraint, and reconcile late Page purification of Hawking radiation with smooth near-horizon vacuum entanglement (AMPS); finite-dimensional entropy and finite-arena escape theorems provide local algebraic analogies only | None (Forbidden) | `OPEN` (Red) |
+| O11 | `#prob-monitored-spectral-mean` | `CH07` | Formalization Gap from Monitored Return Histories to Occupied Spectral Cardinality (Grünbaum–Velázquez–Werner–Werner Theorem 2) | For any finite-dimensional complex inner-product space, unitary $U$, and unit vector $v$ with monitored first-return probabilities $p_{n+1} = \lvert\langle v, U T^n v\rangle\rvert^2$ and occupied spectrum $S = \{\lambda \in \mathbb{C} : \exists w \in E,\; Uw = \lambda w \text{ and } \langle w, v\rangle \neq 0\}$, formalize that $\sum_{n=0}^{\infty} p_{n+1} = 1$ implies $S$ is finite and $\sum_{n=0}^{\infty}(n+1)p_{n+1} = \#S$ (a formalization gap for a known literature theorem, not an unsolved mathematical conjecture) | None (Forbidden) | `OPEN` (Red) |
+
+:::
+
+---
+
+## C.5 Pinned Commit & Kernel Integrity Checklist {#sec-appendix-c-integrity-checklist}
+
+Every build and release of this book mechanically enforces the following five verification gates via `./tbook pin` and `./tbook check`:
+
+| Verification Gate | Target Parameter / Contract Value | Toolchain Mechanism | Status |
+| :--- | :--- | :--- | :---: |
+| **Upstream Repository & Branch** | `the-omega-institute/trureturing` branch `dev` | `site.toml` `[trureturing]` config & `git merge-base --is-ancestor` check | `PASS` |
+| **Pinned Commit SHA** | [{commit}](trureturing:) | Locked in `trureturing.lock.json` `commit` field | `PASS` |
+| **Frozen Theorem Count** | `{{T}}` environment-cited theorems (`{{theorems}}` total entries of `kind == "theorem"` including inline references) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices and `statement_id` digests | `PASS` |
+| **Auxiliary Definition / Structure Count** | `{{D}}` environment-cited definitions/inductive types; `{{definitions}}` in total (`{{defs}}` `def` + `{{inductive}}` `inductive`) including inline references | Kept in C.2 and never counted as `theorem / lemma / proposition / corollary` boxes | `PASS` |
+| **Bilingual Structural Alignment** | 100% parity between `zh` and `en` chapter order, env IDs, and Lean citations | Checked item-by-item by `./tbook check` (`0 error(s)`) | `PASS` |
+
+::: {.figure src="appc-ledger"}
+**The ledger of the ${{total}}$ locked declarations: kind × citation mode.** Rows are theorems and definitions; columns are environment-header `lean=` citations, inline text with media consumers, and inline links alone. The theorem row is ${{T}} + {{thm_media}} + {{thm_inline}} = {{theorems}}$ and the definition row ${{D}} + {{def_media}} + {{R_def}} = {{definitions}}$. Dashed frames follow the environment-based indexes: C.1 $= {{T}}$, C.2 $= {{D}}$, C.3 $= {{thm_media}} + {{thm_inline}} + {{def_media}} + {{R_def}} = {{R}}$. Media consumers do not change the index partition.
+:::
+
+The first row of this ledger is the ${{theorems}}$ green cells of the declaration map: the ${{T}}$ cited on environment headers are filled, the other ${{thm_media}} + {{thm_inline}} = {{R_theorem}}$ hollow.
+
+::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
+**Theorems only.** The map keeps the {{theorems}} locked entries of kind `theorem`: {{T}} filled cells cited by `lean=` on environment headers and {{R_theorem}} hollow cells appearing only in inline links in the Chinese text.
+:::
+
+::: {.remark #rem-appendix-c-epistemic-boundary title="Verification Boundary Note for the Complete Declaration Index"}
+The {{T}} environment-cited theorems in C.1, {{D}} environment-cited definitions/inductive types in C.2, and {{R}} inline declarations in C.3 form a disjoint cover of all {{total}} entries in `trureturing.lock.json` ({{theorems}} `theorem` + {{defs}} `def` + 10 `inductive`). Source links resolve at the pinned `trureturing@dev` commit [{commit}](trureturing:). The nine open environments and two literature boundaries in C.4 are excluded from those locked declarations; index membership, explanatory prose and kernel proof have distinct roles.
+:::
+
+::: {.viz src="lean-declaration-map" height="560"}
+The whole map of declarations: click a cell for its kind, module and source line, every chapter that cites it and its entry in this appendix; click the foot of a column to see what that chapter cites; scrub the rail to watch the chapters land one after another.
+:::

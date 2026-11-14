@@ -51,32 +51,30 @@ def units_and_parts(lang: str):
     return units, parts
 
 
-def main() -> int:
+def generated(data=None, serials=None) -> str:
     lock = json.loads((ROOT / "trureturing.lock.json").read_text(encoding="utf-8"))
     decls = lock["declarations"]
     units_zh, parts_zh = units_and_parts("zh")
     units_en, parts_en = units_and_parts("en")
     assert [u[0] for u in units_zh] == [u[0] for u in units_en], "zh and en SUMMARY.md list different files"
 
-    cites = {gid: [] for gid in decls}          # gid -> [[unit, 'e' | 'i'], …]
+    if data is None:
+        from tbook import config, stats
+        data = stats.collect(config.load_book(str(BOOK)))
+    if serials is None:
+        serials = json.loads((BOOK / "data/declaration-serials.json").read_text(encoding="utf-8"))["serials"]
+    assert set(data["declarations"]) == set(decls), "this single-book map must cover the entire lock"
+    cites = {gid: [] for gid in decls}
     for ui, (file, _, _) in enumerate(units_zh):
-        text = (BOOK / "zh" / file).read_text(encoding="utf-8")
-        env, inline = set(), set()
-        for line in text.splitlines():
-            if line.startswith(":::"):
-                for attr in re.findall(r'\slean="([^"]*)"', line):
-                    env.update(g for g in re.split(r"[\s,]+", attr.strip()) if g)
-        for m in re.finditer(r"\(lean:([^)\s]+)\)|<lean:([^>\s]+)>", text):
-            inline.add(m.group(1) or m.group(2))
+        if file == INDEX:
+            for gid in decls:
+                cites[gid].append([ui, "i"])
+            continue
+        chapter = next(c for c in data["chapters"] if c["file"] == file)
+        env, inline = set(chapter["environment"]), set(chapter["inline"])
         for gid in env | inline:
-            if gid not in decls:
-                if gid in env:
-                    raise SystemExit(f"{file}: lean=\"{gid}\" is not in trureturing.lock.json")
-                continue                         # e.g. the placeholder `lean:GID` in prose
             cites[gid].append([ui, "e" if gid in env else "i"])
-
-    index_text = (BOOK / "zh" / INDEX).read_text(encoding="utf-8")
-    serial = {g: s for s, g in re.findall(r"^\| `([TDR]\d+)` \| \[[^\]]*\]\(lean:([^)\s]+)\)", index_text, re.M)}
+    serial = serials
 
     index_unit = [u[0] for u in units_zh].index(INDEX)
     rows, missing = [], []
@@ -125,13 +123,20 @@ def main() -> int:
         raise SystemExit(f"{MAIN}: markers {BEGIN} … {END} not found")
     head, rest = src.split(BEGIN, 1)
     _, tail = rest.split(END, 1)
-    MAIN.write_text(head + block + tail, encoding="utf-8")
+    return head + block + tail
 
-    kinds = {k: sum(1 for r in rows if decls[r[0]]["kind"] == k) for k in KINDS}
-    env = sum(1 for r in rows if any(c[1] == "e" for c in r[2]))
-    print(f"{len(rows)} declarations {kinds}; {env} cited by a lean= environment, {len(rows) - env} only inline; "
-          f"{len(units)} units, {len(parts)} parts; {sum(1 for r in rows if r[3])} with an Appendix C serial")
-    return 0
+
+def main() -> int:
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--check', action='store_true')
+    args = parser.parse_args()
+    wanted = generated()
+    changed = MAIN.read_text(encoding='utf-8') != wanted
+    if changed and not args.check:
+        MAIN.write_text(wanted, encoding='utf-8')
+    print(f'lean-declaration-map: {"stale" if changed and args.check else "updated" if changed else "up to date"}')
+    return 1 if changed and args.check else 0
 
 
 if __name__ == "__main__":
