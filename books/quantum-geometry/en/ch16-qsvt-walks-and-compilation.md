@@ -192,6 +192,80 @@ Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 
 :::
 
+### 16.2.1 Static Directed Forests: Completing One Global Cycle {#sec-directed-forest-cycle-completion}
+
+In the classical glued-trees argument, “connect randomly to an unused endpoint” can conceal a constraint: the target is one cycle through all leaves, so a small component must not close early. First isolate this constraint in a static directed model. Suppose the prescribed edges are $a\to b$ and $c\to d$, with an isolated vertex $e$. The three components are $(a,b)$, $(c,d)$, and $(e)$; the only single-cycle completions are the permutations $(a\ b\ c\ d\ e)$ and $(a\ b\ e\ c\ d)$. Thus the successor of $b$ is equally likely to be $c$ or $e$, and is never $a$. Adding $b\to a$ respects the degree bounds but leaves the other vertices outside that cycle.
+
+The underlying permutation-contraction correspondence is classical. Gessel, *Generalized Rook Polynomials and Orthogonal Polynomials* (1989, 159–176, [doi:10.1007/978-1-4684-0637-5_13](https://doi.org/10.1007/978-1-4684-0637-5_13), [author's original](https://people.brandeis.edu/~gessel/homepage/papers/rookp.pdf)), defines compatible conditions by distinct rows and columns in Section 2, defines $T_n^A$ as the actual intersection of satisfying sets in Section 3, page 5, and gives the permutation-contraction bijection in Section 8, page 11. The cycle count changes by the number of directed cycles among the prescribed edges. Below we make the component endpoints explicit in the acyclic case and derive the uniform law. The endpoint and probability formulas are deductions developed here, not verbatim statements from the source. No mathematical novelty is claimed. No matching frozen declaration covering the complete result was located at the current pin; the result retains a written proof, with formalization registered in [request #11](https://github.com/the-omega-institute/trureturing-requests/issues/11).
+
+::: {.theorem #thm-directed-forest-cycle-completion title="Single-cycle completion of a directed forest and its static uniform law" status="written-proof" proof="pf-directed-forest-cycle-completion" doi="10.1007/978-1-4684-0637-5_13" source="Section 8, p. 11" request="https://github.com/the-omega-institute/trureturing-requests/issues/11"}
+Let $V$ be a finite labelled set of cardinality $N\ge2$, and let $E\subseteq V\times V$. Suppose every vertex has at most one incoming and at most one outgoing edge in $E$, and $E$ has no directed cycle. Let $\mathcal C$ be the set of all weak components of $(V,E)$, including every isolated vertex, and suppose $c=|\mathcal C|\ge2$.
+
+Each component $A$ is a directed path uniquely determined by $E$, with a unique head $h(A)$ having no incoming edge and a unique tail $q(A)$ having no outgoing edge. For an isolated component $\{v\}$ both endpoints are $v$. Moreover, $|E|=N-c$. For a nonempty finite set $X$, write $\operatorname{Cyc}(X)$ for its permutations with exactly one orbit. Define the actual completion sets
+
+$$
+\begin{aligned}
+\Omega_0&=\operatorname{Cyc}(V),\\
+\Omega_E&=\{\sigma\in\Omega_0:\quad
+       \sigma(u)=v\ \text{for every }(u,v)\in E\}.
+\end{aligned}
+$$
+
+Then $\Omega_E\ne\varnothing$, and there is a bijection
+
+$$
+\begin{aligned}
+\Phi:\Omega_E&\simeq\operatorname{Cyc}(\mathcal C),\\
+\sigma(q(A))&=h\bigl(\Phi(\sigma)(A)\bigr)
+\quad(A\in\mathcal C).
+\end{aligned}
+$$
+
+The endpoint equation uniquely determines $\Phi(\sigma)$. The inverse retains every $E$-edge and adds $q(A)\to h(\pi(A))$ for each $A$. It exhausts $\Omega_E$, rather than merely constructing a family within it.
+
+We have $|\Omega_E|=(c-1)!$. Let $\nu_0$ be uniform on $\Omega_0$ and $\mu_E$ uniform on $\Omega_E$. Then
+
+$$
+\nu_0(\Omega_E)=\frac{(c-1)!}{(N-1)!}>0,
+$$
+
+and conditioning $\nu_0$ on extension of $E$ gives exactly $\mu_E$. The pushforward of $\mu_E$ under $\Phi$ is uniform on $\operatorname{Cyc}(\mathcal C)$. For every $A,B\in\mathcal C$,
+
+$$
+\mu_E\{\sigma:\sigma(q(A))=h(B)\}
+=\begin{cases}
+0,&A=B,\\
+\dfrac{1}{c-1},&A\ne B.
+\end{cases}
+$$
+:::
+
+::: {.proof #pf-directed-forest-cycle-completion}
+This expands the endpoints in the acyclic case of Gessel's Section 8 correspondence, proving both existence of a completion and exhaustiveness of the correspondence.
+
+**Derive the paths from the raw edge set.** From any vertex, follow its unique predecessor backwards. Finiteness and the absence of directed cycles force this process to end at a vertex $h$ with no incoming edge. Following the unique successor forwards from $h$ likewise visits no vertex twice and ends at a vertex $q$ with no outgoing edge. Every internal vertex already has an incoming and an outgoing edge; $h$ has no incoming edge and $q$ no outgoing edge. Thus no vertex outside this path can be joined to it by an $E$-edge. The path is exactly the starting vertex's entire weak component. Only $h$ lacks a predecessor and only $q$ lacks a successor, so its order and endpoints are unique. An isolated vertex gives a path of length zero. Summing $|A|-1$ edges over all components gives $|E|=N-c$, without assuming a supplied path list.
+
+**Contract every actual extending permutation.** First take any permutation $\sigma$ of $V$ extending $E$, without assuming it has only one orbit. Every non-head already has its incoming edge fixed by $E$. Injectivity forces the image of each tail to be a head. Surjectivity supplies a preimage for every head, and that preimage must be a tail because the images of non-tails are fixed inside their paths. Hence $\sigma$ bijects all tails with all heads, uniquely determining a component permutation $\pi$ by $\sigma(q(A))=h(\pi(A))$.
+
+Conversely, for any permutation $\pi$ of $\mathcal C$, retain the successors within each path and specify the successors of tails by this equation. Each non-head has its original path predecessor, and each head has exactly the tail of $\pi^{-1}(A)$ as predecessor. The resulting map is a permutation of $V$ extending $E$. These operations are pointwise inverses. Following the lifted permutation traverses every vertex of the current path before entering the head of the component specified by $\pi$. Its orbits therefore correspond bijectively to those of $\pi$; in particular, one has exactly one orbit if and only if the other does. Restriction gives the asserted $\Phi$ on all of $\Omega_E$.
+
+**Count and condition.** Fix a component $A_0$. Arrange all components as $A_0,A_1,\ldots,A_{c-1}$, connect them in that order, and return from the last to $A_0$. This gives a single-orbit $\pi$ and hence an actual completion, proving nonemptiness. Starting at fixed $A_0$, each component cycle has exactly one such ordering, so there are $(c-1)!$ of them. Likewise $|\Omega_0|=(N-1)!$. Each $\sigma\in\Omega_E$ originally has mass $1/(N-1)!$; dividing by the positive event probability $(c-1)!/(N-1)!$ gives conditional mass $1/(c-1)!$. A bijection has one preimage per point, so its pushforward is uniform as well.
+
+Finally, since $c\ge2$, a single-orbit $\pi$ cannot fix $A$, and the same-component endpoint event is empty. For $A\ne B$, start the component cycle at $A$ and require $B$ next. The remaining $c-2$ components can appear in any order, giving $(c-2)!$ possibilities. The endpoint probability is $(c-2)!/(c-1)!=1/(c-1)$, including $0!=1$ when $c=2$. This is a written proof, for which the author and reviewers are responsible.
+:::
+
+**Boundaries and the obstruction.** Isolated vertices must enter the component count: if $E=\varnothing$, then $c=N$, and the theorem recovers the uniform law on all single cycles. In particular, when $N=c=2$, the unique completion exchanges the two vertices; it is a directed two-cycle, not a two-sided polygon in an undirected simple graph. When $c=2$, each tail must lead to the other component's head. The final closure at $c=1$ lies outside the theorem's probability formula: a path already spanning all vertices must then close from its tail to its own head. The presence of other components makes early closure an obstruction; the degree bounds alone do not forbid it.
+
+Frieze–Suen, *Counting the Number of Hamilton Cycles in Random Digraphs* ([doi:10.1002/rsa.3240030303](https://doi.org/10.1002/rsa.3240030303), [original, pages 4–5](https://www.math.cmu.edu/~af1p/Texfiles/hamsuen.pdf)), also contract directed paths to identify uniquely all Hamilton cycles containing the prescribed edges, obtaining the count $(n-t-1)!$. Their prescribed $t$ edges belong to an already given Hamilton cycle. Here extension existence is first proved for arbitrary raw $E$ satisfying the hypotheses, and $c=N-|E|$ then gives the same count; existence must not be assumed in advance.
+
+**Which bridges to a classical oracle lower bound remain?** [@thm-directed-forest-cycle-completion] exactly excludes early closure in a static directed completion. Three distinctions separate it from the glued-trees result in [@rem-qsvt-walks-literature]:
+
+1. **Graph distribution and orientation.** Ben-David et al. (*SIAM Journal on Computing* **53**(6), 2024, [doi:10.1137/23M1573975](https://doi.org/10.1137/23M1573975), §6.3.2, Lemmas 6.11–6.13, PDF pages 37–39) use one uniform cycle on each side's leaves for the self-weld, and a uniform alternating cycle between the two sides for the weld. Our theorem concerns ordinary directed single-cycle permutations. Passing to undirected cycles requires accounting for orientation and representation multiplicities; passing to bipartite alternating cycles requires a separate completion law respecting alternation. The value $1/(c-1)$ cannot simply be transferred.
+2. **Conditioning information.** The theorem conditions only on all edges of fixed $E$ being present. An adaptive algorithm's full query history also involves random names, query choices, answers listing all neighbors, and possibly color information. One must prove, on the same random graph realization, that these history conditions leave precisely the asserted uniform completion set, or establish the appropriate different conditional law. Replacing a history by $E$ does not establish this. The cited Ben-David et al. lemmas permit only queries to names already in the knowledge graph; queries outside it require a separate argument. Whether sparse random names provide additional information is also beyond this theorem.
+3. **Queries, embeddings, and success events.** In [quant-ph/0209131v2, Section IV](https://arxiv.org/abs/quant-ph/0209131v2), Childs et al. first handle guessed new names, colors, and games restricted to known names, then pass to random tree embeddings and bound collision and `EXIT` events to obtain the original Theorem 9. Ben-David et al.'s footnote 14 explicitly notes that queries returning all neighbors give an embedding tree with $O(t)$ vertices, not literally $t$. Their printed component lower bound $2^k-2t$, pair bound $2/(2^k-2t)$, and equation (6.4), $O(t^2/(2^k-t))$, are retained as separately stated in the source; no unproved explicit constant or parameter range is assembled from them here.
+
+The contraction law thus supplies a complete static counting and conditional-probability step. Query complexity, adaptive histories on the same realization, and the full classical `EXIT` lower bound still require their own models and proofs. The next section turns to the quantum side, studying a specified weighted path and its endpoint probability.
+
 ## 16.3 The central-defect path: how an endpoint controls the spectrum {#sec-central-defect-gap}
 
 Equations (25)–(27) of the same Childs et al. version use tree depth $d\ge1$ and $2d+2$ columns, indexed by $j=0,\ldots,2d+1$, with sizes $N_j=2^{\min(j,2d+1-j)}$. With normalized column vectors $|q_j\rangle=N_j^{-1/2}\sum_{v\text{ in column }j}|v\rangle$ and the graph Hamiltonian equal to $\gamma$ times adjacency, $\gamma=1/\sqrt2$, the paper's column reduction gives ordinary weights $\sqrt2\gamma=1$ and central weight $2\gamma=\sqrt2$. Thus the path parameter here is $n=d+1$, and column $j$ is zero-based path coordinate $j$. This graph-to-path identification is a literature reduction; its complete column-count, rectangular-intertwining and matrix-exponential application has not been checked in Lean for this book. The theorems below act directly on the explicitly specified $J_n$.
