@@ -1,11 +1,11 @@
 # trureturing 书库 · trureturing Books
 
-**每一条定理都经 Lean 内核验证的双语形式化专著与教材书库。**  
-*Bilingual formal monographs and self-contained textbooks in which every theorem is kernel-verified in Lean.*
+**显式区分 Lean 验证、书面证明与开放问题的双语专著与教材书库。**
+*Bilingual monographs and self-contained textbooks that distinguish Lean verification, written proofs, and open problems.*
 
-本书库中的每一部专著均遵循“书负责解释，Lean 负责成立”的分工契约：所有正式的 `theorem`、`lemma`、`proposition` 与 `corollary` 均按全局标识符（GID）绑定至 [trureturing](https://github.com/the-omega-institute/trureturing)（`dev` 分支，精确提交锁定于 [trureturing.lock.json](trureturing.lock.json)）中已经 Lean 4 内核验证并冻结的声明。同一份中英双语源码同步导出为在线 HTML（构建期 KaTeX 排版与源码永久链接）、PDF（深色屏幕版、白底印刷版与 A4 单栏研究预印本）及兼容 Apple Books 的 EPUB 3。
+本书库中的每一部专著均明确声明定理的证据：Lean 验证结果按全局标识符（GID）绑定至 [trureturing](https://github.com/the-omega-institute/trureturing)（`dev` 分支，精确提交锁定于 [trureturing.lock.json](trureturing.lock.json)）中已经 Lean 4 内核验证并冻结的声明；无匹配冻结声明的源文已证结果按书面证明规则关联完整论证、来源与形式化请求，由作者与评审负责。同一份中英双语源码同步导出为在线 HTML（构建期 KaTeX 排版与源码永久链接）、PDF（深色屏幕版、白底印刷版与 A4 单栏研究预印本）及兼容 Apple Books 的 EPUB 3。
 
-Every formal `theorem`, `lemma`, `proposition`, and `corollary` in this library cites a declaration verified by the Lean 4 kernel and frozen on the `dev` branch of [trureturing](https://github.com/the-omega-institute/trureturing), pinned in [trureturing.lock.json](trureturing.lock.json). The aligned Chinese and English editions publish online HTML, screen and print PDFs, single-column research preprint PDFs, and MathML-enabled EPUB 3.
+Each theorem declares its evidence. Lean-verified results cite declarations verified by the Lean 4 kernel and frozen on the `dev` branch of [trureturing](https://github.com/the-omega-institute/trureturing), pinned in [trureturing.lock.json](trureturing.lock.json). Proved source results without a matching frozen declaration carry an explicit written-proof status, a complete argument, provenance, and a formalization request; authors and reviewers are responsible for those proofs. The aligned Chinese and English editions publish online HTML, screen and print PDFs, single-column research preprint PDFs, and MathML-enabled EPUB 3.
 
 ---
 
@@ -42,8 +42,8 @@ Every formal `theorem`, `lemma`, `proposition`, and `corollary` in this library 
 
 ## 形式化验证契约 · Verification Contract
 
-1. **Lean 内核验证定理（绿色 `LEAN ✓`）**：凡使用 `theorem`、`lemma`、`proposition`、`corollary` 环境的条目，均通过 `lean="<GID>"` 指向 `trureturing@dev` 所钉提交中状态片 `Golden/Frozen/state/<module>.lean.json` 已冻结为 `theorem` 的声明，书末自动生成带源码行号链接的形式化验证账本（[trureturing.lock.json](trureturing.lock.json) 同时解析 `definition` 环境与行内代码链接所引用的 Lean `def`/`inductive` 声明以生成源码链接，但仅有 `theorem` 类声明驱动正式定理盒并获授绿色 `LEAN ✓` 徽章 / *[trureturing.lock.json](trureturing.lock.json) also resolves referenced Lean `def`/`inductive` declarations for `definition` blocks and inline code links, while only `theorem`-kind declarations power formal theorem boxes and receive the green `LEAN ✓` badge*）。
-2. **经典文献结果（常规边框 `remark` / `example`）**：数学物理文献中已有严格证明、但尚未在本书所钉仓库形式化的背景定理（如 Gleason 定理、Busch 定理、Stinespring 扩张定理、Lindemann–Weierstrass 定理），统一置于 `remark` 或 `example` 环境中，并显式标明“文献结果，未在本书形式化” / *Literature result, not formalized in this book*。
+1. **Lean 内核验证定理（绿色 `LEAN ✓`）**：定理类环境默认通过 `lean="<GID>"` 指向 `trureturing@dev` 所钉提交中状态片 `Golden/Frozen/state/<module>.lean.json` 已冻结为 `theorem` 的声明，显式书面证明适用下一条。书末自动生成带源码行号链接的形式化验证账本（[trureturing.lock.json](trureturing.lock.json) 同时解析 `definition` 环境与行内代码链接所引用的 Lean `def`/`inductive` 声明以生成源码链接；只有所引 GID 全部解析为 `theorem` 的结论才获授绿色 `LEAN ✓` 徽章 / *the lock also resolves referenced Lean definitions and inductive types, while the green badge requires every cited GID to resolve to a frozen theorem*）。
+2. **文献结果与书面证明（不计入 Lean 验证）**：背景结果可置于 `remark` 或 `example` 中，显式标明“文献结果，未在本书形式化” / *Literature result, not formalized in this book*。源文已证而无匹配冻结声明的结果也可使用定理类环境，须声明 `status="written-proof"`、关联每版完整证明，提供 DOI 或源论文仓库、原文定位与已登记的形式化请求；紫色书面证明徽章不代表 Lean 验证 / *An explicit written-proof result links a complete proof in each edition, provenance, and a registered formalization request; its violet badge does not claim Lean verification.*
 3. **开放问题与猜想（红色 `OPEN`）**：尚未解决的猜想与开放问题统一使用 `conjecture` 或 `problem` 环境，绝不附加 Lean 引用。
 
 校验模型与流水线细节见 [docs/VERIFICATION.md](docs/VERIFICATION.md)，写作语法规范见 [docs/AUTHORING.md](docs/AUTHORING.md)，仓库架构见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。
