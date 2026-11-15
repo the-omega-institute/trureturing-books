@@ -43,7 +43,7 @@ $$
 Lean 声明 [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation) 先由 `sq_abs` 消去绝对值符号，再直接调用实双曲平方差引理 `Real.cosh_sq_sub_sinh_sq` 完成归约。完整证明由 Lean 内核检查。
 :::
 
-按照本书的三层认识论契约，我们必须看清 [@thm-hyperbolic-norm] 的精确边界：定理保留了源码中的绝对值记号 $|\cosh r|^2 - |\sinh r|^2 = 1$（为复双曲参数模平方守恒预留统一接口，在实数域上等价于 $\cosh^2 r - \sinh^2 r = 1$），但它本身只是一条纯粹的实双曲函数恒等式——它既不包含“光速在一切惯性系中恒定”的物理公设，也不自带动力学演化方程或旋量双覆盖群拓扑。
+按照本书的三层认识论契约，我们必须看清 [@thm-hyperbolic-norm] 的精确边界：定理保留了源码中的绝对值记号 $|\cosh r|^2 - |\sinh r|^2 = 1$（与玻戈留波夫变换所用的模平方范数记号一致，在实数域上等价于 $\cosh^2 r - \sinh^2 r = 1$），但它本身只是一条纯粹的实双曲函数恒等式——它既不包含“光速在一切惯性系中恒定”的物理公设，也不自带动力学演化方程或旋量双覆盖群拓扑。
 
 然而，一旦有了 [@thm-hyperbolic-norm] 这把代数钥匙，洛伦兹变换里所有看似笨拙的分数根号都会在有理算术下瞬间消融。让我们亲手算一个完全不需要计算器的整数比特例。
 
@@ -258,7 +258,7 @@ $$
 （当 $\Delta w = 0$ 时取等号 $\Delta\tau = \Delta t$，当 $\Delta w \neq 0$ 时取严格不等号 $\Delta\tau < \Delta t$；严格分类下，$\Delta w \neq 0$ 且 $q(\Delta v) = 0$ 为非零类光零线位移，$\Delta\tau = 0$）。对于由多段匀速直线运动拼接而成的折线世界线 $\gamma = (\Delta v_1, \Delta v_2, \dots, \Delta v_m)$，总固有时是各段固有时的算术和 $\tau(\gamma) = \sum_{k=1}^m \sqrt{q(\Delta v_k)}$（物理单位制下为 $\tau_{\mathrm{phys}}(\gamma) = \sum_{k=1}^m \sqrt{q(\Delta v_k)}/c$）。许多初学者在这里容易犯一个致命的逻辑混淆：既然洛伦兹变换保持每一段位移的二次型 $q(\Delta v_k)$ 不变，为什么连接相同起点与终点的两条不同世界线（例如著名的双生子往返路径与原地留守路径）会有不同的总固有时？下面的手算例子把这一区别算得一清二楚。
 
 ::: {.figure src="ch17-proper-time-budget"}
-**同样的 $\Delta t = 5$，空间走得越远，固有时越少。** 青色曲线是 $\Delta\tau = \sqrt{25 - \Delta x^2}$，处处在白色虚线 $\Delta t = 5$ 之下：静止时 $\Delta\tau = \Delta t = 5$，例题的第一段 $(5, 3)$ 得 $4$，沿光锥的 $(5, 5)$ 得 $0$。这条曲线是四分之一圆 $\Delta\tau^2 + \Delta x^2 = \Delta t^2$。
+**同样的 $\Delta t = 5$，空间走得越远，固有时越少。** 青色曲线是 $\Delta\tau = \sqrt{25 - \Delta x^2}$，处处不高于白色虚线 $\Delta t = 5$：静止时 $\Delta\tau = \Delta t = 5$，例题的第一段 $(5, 3)$ 得 $4$，沿光锥的 $(5, 5)$ 得 $0$。这条曲线是四分之一圆 $\Delta\tau^2 + \Delta x^2 = \Delta t^2$。
 :::
 
 ::: {.example #ex-two-worldline-segments title="两段折线世界线与静止世界线的固有时比较"}

@@ -11,7 +11,7 @@
     "conjecture": 6,
     "problem": 3,
     "example": 124,
-    "remark": 204,
+    "remark": 205,
     "proof": 316,
     "lean_verified": 318,
     "written_proof": 3,
@@ -6316,13 +6316,13 @@
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 144,
+          "line": 208,
           "id": "thm-ch33-consensus-redundant-records-and-kernel",
           "via": "environment"
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 160,
+          "line": 224,
           "id": "",
           "via": "inline"
         },
@@ -6742,13 +6742,13 @@
       "citations": [
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 206,
+          "line": 270,
           "id": "thm-ch33-consensus-revision-and-escape",
           "via": "environment"
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 209,
+          "line": 273,
           "id": "",
           "via": "inline"
         },
@@ -10654,13 +10654,13 @@
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 88,
+          "line": 152,
           "id": "thm-ch33-consensus-pinching-and-fixed-points",
           "via": "environment"
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 103,
+          "line": 167,
           "id": "",
           "via": "inline"
         },
@@ -11890,13 +11890,13 @@
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 144,
+          "line": 208,
           "id": "thm-ch33-consensus-redundant-records-and-kernel",
           "via": "environment"
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 147,
+          "line": 211,
           "id": "",
           "via": "inline"
         },
@@ -11962,13 +11962,13 @@
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 144,
+          "line": 208,
           "id": "thm-ch33-consensus-redundant-records-and-kernel",
           "via": "environment"
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 153,
+          "line": 217,
           "id": "",
           "via": "inline"
         },
@@ -12592,13 +12592,13 @@
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 206,
+          "line": 270,
           "id": "thm-ch33-consensus-revision-and-escape",
           "via": "environment"
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 216,
+          "line": 280,
           "id": "",
           "via": "inline"
         },
@@ -14482,13 +14482,13 @@
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 144,
+          "line": 208,
           "id": "thm-ch33-consensus-redundant-records-and-kernel",
           "via": "environment"
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 159,
+          "line": 223,
           "id": "",
           "via": "inline"
         },
@@ -14896,13 +14896,13 @@
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 88,
+          "line": 152,
           "id": "thm-ch33-consensus-pinching-and-fixed-points",
           "via": "environment"
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 97,
+          "line": 161,
           "id": "",
           "via": "inline"
         },
@@ -17062,7 +17062,7 @@
       "citations": [
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 187,
+          "line": 251,
           "id": "thm-ch33-axis-contraction-commutator",
           "via": "environment"
         }
@@ -17074,7 +17074,7 @@
       "citations": [
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 187,
+          "line": 251,
           "id": "thm-ch33-axis-contraction-commutator",
           "via": "environment"
         }
@@ -17086,7 +17086,7 @@
       "citations": [
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 187,
+          "line": 251,
           "id": "thm-ch33-axis-contraction-commutator",
           "via": "environment"
         }
@@ -20632,13 +20632,13 @@
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 88,
+          "line": 152,
           "id": "thm-ch33-consensus-pinching-and-fixed-points",
           "via": "environment"
         },
         {
           "file": "ch33-s05-consensus-and-pointer-bases.md",
-          "line": 91,
+          "line": 155,
           "id": "",
           "via": "inline"
         },
