@@ -35,7 +35,7 @@
 
 ## 并入 main604 后的钉版复核（ccaf）
 
-- **候选**：`b26c1081c713b40dc320f45174dfb2ea77e644f2` 合并本批提交 `686fdfa0` 与 main604，除本批 4 个路径外与 main604 字节相同。本页 `index.html`（SHA-256 `5a2d8258…`）、`main.js`、`style.css` 与双语第八章自 main471 起未变。
+- **候选**：`b26c1081c713b40dc320f45174dfb2ea77e644f2` 合并本批提交 `686fdfa0` 与 main604，除本批 4 个路径外与 main604 字节相同。本页 `index.html`（SHA-256 `5a2d8258…`）自本批提交 `686fdfa0` 起未变；`main.js`、`style.css` 与双语第八章自 main471 起未变。
 - **锁**：f010 → ccaf 只改提交号与钉版时间、`D5/S1/Words/TribonacciAlignedWindows.aligned_windows` 的 `statement_id`，并新增 `D5/S1/Words/TribonacciPrefixRefutation.result`。页面与第八章涉及的 34 个 GID 锁条目逐条相同；从本地只读检出重算 13 个模块的 39 个源码、状态与蓝图文件，ccaf 与 f010 上 SHA-256 全部相同；ccaf 是该检出 `origin/dev` 的祖先。第八章固定到 `a313d1ce` 的源推导链接是既有写法，该蓝图文件与 ccaf 上字节相同。
 - **静帧**：锁文件计入静帧输入摘要，并入后本页 13 张图标为过期。把锁换回 f010 版本重算即得原摘要，说明其余输入（页面、运行时、配色、字体、截图工具）都未变。`viz-thumbs` 重出 13 张，全部与已提交字节相同，只更新 `.stills.json` 的 13 个输入摘要；`--check` 为最新。
 - **浏览器**：锁也是 `stageFirstChecks` 里 Lean 链接检查的输入，故在当前输入上复跑本页套件一次：368/368 通过。`VIZ_SLOW_FRAMES=1000` 未复跑，那次结果仍归 main471。
