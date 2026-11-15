@@ -51,7 +51,7 @@ $$
 
 从实际联合动力学出发，需要区分以下三个对象：反复施加同一个约化信道、在同一个有限联合空间上反复施加同一个酉算子，以及每一步使用新环境的碰撞模型。前面的 Gram 系数幂公式属于第一个对象；它没有证明后两个对象与它相同。
 
-以下是文献结果及其书面应用推导，尚无本项交付的 Lean 验证。David Wallace，*Recurrence Theorems: a unified account*，DOI [10.1063/1.4907384](https://doi.org/10.1063/1.4907384)，[全文](https://arxiv.org/html/1306.3925)，定理 6 证明有限维、有界、保内积动力学的统一度量回返；定理 8–9 将回返推广到全有界、保距离的度量动力学。这里不使用依赖每步投影检测的“受监测回返”：每次检测都会改变实际演化，不能用其返回概率替代未受监测的酉幂。
+以下区分文献结果、既有 Lean 结果的精确应用，以及尚未形式化的联合态与偏迹推导。David Wallace，*Recurrence Theorems: a unified account*，DOI [10.1063/1.4907384](https://doi.org/10.1063/1.4907384)，[全文](https://arxiv.org/html/1306.3925)，定理 6 证明有限维、有界、保内积动力学的统一度量回返；定理 8–9 将回返推广到全有界、保距离的度量动力学。这里不使用依赖每步投影检测的“受监测回返”：每次检测都会改变实际演化，不能用其返回概率替代未受监测的酉幂。
 
 ### 任意晚的共同回返
 
@@ -125,6 +125,8 @@ $$
 
 这些书面推导没有给出最优回返时间、数值上可行的搜索算法、精确周期、热耗散或实验支持。有限维联合空间是关键条件；单独的环境有限维不足以控制一个无限维系统。若环境或酉算子随目标时间窗更换、环境不断补充新自由度、中间作测量或重置，模型已经改变。任意给定有限时间窗上的精确实现或近似均不被上述全时间障碍排除。
 
-现有 Lean 的 `RepeatedRecordExponentialDecay`、`EnvironmentMarginalChannel` 与 `UnitaryPowerDilation` 分别供应重复约化信道、单次记录偏迹及共同全幂压缩的存在性，尚未找到完整匹配这里共同回返及实际复用环境结论的声明。仓内 V84 理论卷定理 6.1 已有更强的书面回返陈述，不将上述应用计作原创发现。形式化须复用已有成果、处理对应理论卷的摄入与 atom，并经当前 kernel、公理闭包及准入核验；书面证明不能替代这些步骤。研究入口为 [trureturing #30767](https://github.com/the-omega-institute/trureturing/issues/30767)。
+现有 Lean 的 `RepeatedRecordExponentialDecay`、`EnvironmentMarginalChannel` 与 `UnitaryPowerDilation` 分别供应重复约化信道、单次记录偏迹及共同全幂压缩的存在性。任意晚的有限向量集共同回返可直接复用钉版 Mathlib 的 `mapClusterPt_one_atTop_pow`：有限维有界算子空间是 proper 的，酉群闭且有界，故紧；对紧群幂在单位元的聚点性质，应用有限多个向量读数的共同邻域即可。这个精确应用包含空集合与零维空间，已通过 Lean 核验，只依赖标准逻辑公理，不新增绑定包装声明。对应来源为 [Mathlib SubmonoidClosure](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Topology/Algebra/Group/SubmonoidClosure.lean)。
+
+`UnitaryPowerDilation` 的既有 Blueprint 也已用该紧群路线解释非零衰减向量的有限总维数障碍。这里的联合密度矩阵、偏迹与固定相干读数应用仍为书面推导，不冒领相应 Lean 验证。仓内 V84 理论卷定理 6.1 已有更强的书面回返及时间上界陈述，不将上述应用计作原创发现；若新增对应形式化声明，仍须经该理论卷的摄入与 atom 路径及准入核验。研究入口为 [trureturing #30767](https://github.com/the-omega-institute/trureturing/issues/30767)。
 
 仍需推进的独立问题是有限时间窗的资源—误差关系：在固定系统、选定衰减率和误差范数后，允许使用一个依赖窗口 $N$ 的有限环境，研究其维数如何控制对 $0\le n\le N$ 全部约化信道的共同逼近。一个终端时刻的 Stinespring 实现不自动实现全部前缀；每个输入态分别有好的环境，也不等于同一个环境对全部输入和未触碰参照都有效。该后继问题尚未完成现有成果检索或正式选题，不作新增定理声明。
