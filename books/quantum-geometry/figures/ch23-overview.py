@@ -19,13 +19,13 @@ WRAP = True
 ALT = {
     "zh": "三栏。第一栏：六角排列的艾森斯坦格点，青色的圆是范数 7，穿过 12 个格点；两块品红的平行四边形是 t = −1 与 t = 2 时两根基矢张成的格子，"
           "一块端正、一块剪斜，面积相同。第二栏：(g, ḡ) 平面上两支品红的双曲线 gḡ = +1 与 gḡ = −1，黄金单位 φⁿ 交替落在两支上，"
-          "旁边标着 (2, 0)、(1, 1)、(3, 1)、(4, 2)，即卢卡斯数与斐波那契数。第三栏：按分母 1 到 6 分行排开的有理数，越往下越密；"
+          "旁边标着 (2, 0)、(1, 1)、(3, 1)，即卢卡斯数与斐波那契数。第三栏：有理数按分母 1 到 6 分行排开；"
           "最上面一行分母为 1 的青色大点就是整数。下方紫色标签写着文献结果：Koenigsmann 2016 用全称量词定义 ℤ；红色标签写着开放问题：能否只用存在量词。",
     "en": "Three panels. Panel I: the hexagonal Eisenstein lattice; the cyan circle of norm 7 passes through 12 lattice points; "
           "two magenta parallelograms are the cells spanned by the two basis vectors at t = −1 and t = 2, one upright, one "
           "sheared, with the same area. Panel II: the (g, ḡ) plane with two magenta hyperbolas gḡ = +1 and gḡ = −1; the golden "
-          "units φⁿ land alternately on the two branches, labelled (2, 0), (1, 1), (3, 1), (4, 2), the Lucas and Fibonacci "
-          "numbers. Panel III: rational numbers laid out in rows by denominator 1 to 6, denser row by row; the top row of large "
+          "units φⁿ land alternately on the two branches, labelled (2, 0), (1, 1), (3, 1), the Lucas and Fibonacci "
+          "numbers. Panel III: rational numbers laid out in rows by denominator 1 to 6; the top row of large "
           "cyan dots, denominator 1, is the integers. Below, a violet tag gives the literature result (Koenigsmann 2016 defines "
           "ℤ with universal quantifiers) and a red tag the open question (whether existential quantifiers alone suffice).",
 }

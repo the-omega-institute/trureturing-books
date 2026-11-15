@@ -1,6 +1,6 @@
 # 39.5.8 帕里平稳律、逃逸对计数与分形视界熵问题 {#sec-ch39-p2e-entropy}
 
-在讨论“熵”这一极易发生概念滑移的词之前，我们必须先把 `trureturing` 中已由内核锁定的有限/马尔可夫定律，与遍历论文献中的移位拓扑熵及尚未解决的分形纠缠标度猜想逐一拆开。
+在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及遍历论文献中的熵比较。前两者已有对应的 Lean 验证结果；下文的最大熵与诱导回归熵仍按文献结果呈现，分形纠缠标度则保留为开放问题。
 
 在马尔可夫链侧，对任意阶数 $k \ge 2$，令互反帕里参数为 $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$。在带绝对符号位与当前连续 `1` 游程长度的有向状态空间 $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ 上，定义后缀权重 $w_j = \operatorname{suffixWeight}(k, p, j) = \sum_{a=0}^{k-j-1} p^{a+1}$、归一化常数 $Z_k = \sum_{j=0}^{k-1} p^j w_j$、符号翻转对合 $\operatorname{flip}(b, j) = (!b, j)$，以及重置转移核 $P_k = \operatorname{kernel}(k, p)$：从状态 $s = (b, j)$ 出发，以概率 $p / w_j$ 翻转符号并重置游程至 $(!b, 0)$，当 $j + 1 < k$ 时以概率 $p\, w_{j+1} / w_j$ 保持符号并推进游程至 $(b, j + 1)$，其余转移概率为 $0$。对应状态分布定义为
 
@@ -22,6 +22,72 @@ $$
 ::: proof
 因 $\beta_k$ 在 $k \ge 2$ 上自 $\beta_2 = \varphi$ 严格递增趋向 $2$，其倒数 $p = \beta_k^{-1}$ 严格落在 $(1/2, \varphi^{-1}]$ 内；将特征方程 $\beta_k^k = \sum_{i=0}^{k-1} \beta_k^i$ 两边同乘 $\beta_k^{-k}$ 即得 $\sum_{a=1}^k p^a = 1$。由此可知每个后缀部分和 $w_j = \sum_{a=1}^{k-j} p^a$ 至少包含首项 $p > 0$ 且不超过全和 $1$，并满足末端值 $w_{k-1} = p$ 与向后递推 $w_j = p + p w_{j+1}$（$j + 1 < k$），故 $P_k$ 各元素非负且每行重置项与递增项之和恰为 $(p + p w_{j+1})/w_j = 1$（末端行重置项恰为 $p/p = 1$）。再把左特征幂 $p^j$ 与右特征权重 $w_j$ 相乘并均分给正负两个符号页，流入 $(b, 0)$ 的平稳总质量等于 $\sum_j \frac{p^j w_j}{2 Z_k} \cdot \frac{p}{w_j} = \frac{p}{2 Z_k}\sum_{j=0}^{k-1} p^j = \frac{w_0}{2 Z_k} = \pi_k(b, 0)$，流入 $(b, j+1)$ 的质量亦精确等于 $\frac{p^j w_j}{2 Z_k}\cdot\frac{p w_{j+1}}{w_j} = \pi_k(b, j+1)$，且对合 $\operatorname{flip}$ 仅翻转不影响公式的符号分量。完整证明由 Lean 内核检查。
 :::
+
+有限状态只记录“现在的符号与游程”。若要恢复整条轨道，还须给出所有整数时刻的关系位，并指定原点的一个绝对符号。令 $\mathrm{false}=0$、$\mathrm{true}=1$，$\neg$ 表示布尔取反，$\oplus$ 表示异或；定义实际的双向路径空间
+
+$$
+\begin{aligned}
+X_k&=\operatorname{RelationPath}(k)\\
+&=\{r:\mathbb Z\to\mathrm{Bool}\mid
+  \forall u\in\mathbb Z,\ \exists i\in\{0,\ldots,k-1\},\ r_{u+i}=\mathrm{false}\},\\
+Y_k&=\operatorname{ResetPath}(k)\\
+&=\{x:\mathbb Z\to\operatorname{State}(k)\mid
+  \forall t\in\mathbb Z,\ P_k(x_t,x_{t+1})>0\}.
+\end{aligned}
+$$
+
+这里仍取 $k\ge2$、$p=\operatorname{parryParameter}(k)$ 及上述 $P_k=\operatorname{kernel}(k,p)$。$\mathrm{Bool}$ 与 $\operatorname{Fin}k$ 带离散可测结构，函数空间带由各坐标柱集生成的乘积 $\sigma$-代数，$X_k$、$Y_k$ 带相应的子空间可测结构，$\mathrm{Bool}\times X_k$ 带乘积可测结构。对状态 $s=(b,j)$，写 $a(s)=b$、$j(s)=j$（计算下标时把 $j\in\operatorname{Fin}k$ 视为自然数）。给定原点符号 $b$ 与 $r\in X_k$，源码的 `signAt` 在两个时间方向都只作有限次异或：
+
+$$
+\begin{aligned}
+\operatorname{signAt}(b,r,n)
+ &=b\oplus\bigoplus_{i=0}^{n-1}\neg r_i &&(n\in\mathbb N),\\
+\operatorname{signAt}(b,r,-n)
+ &=b\oplus\bigoplus_{i=0}^{n-1}\neg r_{-i-1} &&(n\in\mathbb N,\ n\ge1).
+\end{aligned}
+$$
+
+空异或取 $\mathrm{false}$。因此原点值为 $b$，且在每个 $t\in\mathbb Z$ 都满足 $a_{t+1}=a_t\oplus\neg r_t$；关系位为真时保持符号，为假时翻转符号。
+
+::: {.theorem #thm-ch39-p2e-native-bilateral-reset-coding title="双向重置路径的可测坐标重建与锚点斜移位" lean="D5/S3/TotalVariation/ParryBilateralLaw.bilateral_reset_coding"}
+对每个自然数 $k\ge2$，存在可测等价 $e:\mathrm{Bool}\times X_k\simeq_{\mathrm m}Y_k$，即双射及其逆映射均可测，并同时满足：
+
+1. 对每个 $b\in\mathrm{Bool}$、$r\in X_k$ 与 $t\in\mathbb Z$，$a(e(b,r)_t)=\operatorname{signAt}(b,r,t)$。
+2. 对每个 $z=(b,r)\in\mathrm{Bool}\times X_k$ 与 $t\in\mathbb Z$，令 $j=j(e(z)_t)$，则 $0\le j<k$，并且
+
+   $$
+   r_{t-j-1}=\mathrm{false},\qquad
+   \forall i\in\mathbb N,\ i<j\ \Longrightarrow\ r_{t-i-1}=\mathrm{true}.
+   $$
+
+3. 对每条 $x\in Y_k$，逆映射精确为
+
+   $$
+   \begin{aligned}
+   e^{-1}(x)&=(a(x_0),\operatorname{readRelation}(x)),\\
+   \operatorname{readRelation}(x)_t
+     &=\neg\bigl(a(x_t)\oplus a(x_{t+1})\bigr)\quad(t\in\mathbb Z).
+   \end{aligned}
+   $$
+
+   特别地，读出的关系路径属于 $X_k$。
+4. 令 $(\operatorname{relationShift}r)_t=r_{t+1}$。对所有 $(b,r)\in\mathrm{Bool}\times X_k$ 及 $t\in\mathbb Z$，有精确的锚点斜移位公式
+
+   $$
+   e\bigl(b\oplus\neg r_0,\operatorname{relationShift}r\bigr)_t
+     =e(b,r)_{t+1}.
+   $$
+:::
+
+::: proof
+对任意整数 $t$，前面的 $k$ 位 $r_{t-k},\ldots,r_{t-1}$ 中至少有一个假位。取使 $r_{t-j-1}=\mathrm{false}$ 的最小自然数 $j$，便有 $j<k$，且所有更近的位都为真；这也唯一刻画了后缀。随时间前进一步，假位使后缀归零，真位使后缀加一。把它与上述双向有限异或得到的符号配成状态，定义 $e(b,r)_t$。由于 $p>0$ 且每个 $w_j>0$，$P_k(s,s')>0$ 恰好对应两类边：翻号并归零，或同号并把后缀加一（后缀始终小于 $k$）。故所构造路径确在 $Y_k$。
+
+反过来，任意 $x\in Y_k$ 的正核边都遵循这两条规则。从时刻 $t$ 的后缀 $j$ 向过去回溯：前 $j$ 条边必须同号递增，再前一条边必须翻号归零，给出第 2 项的最近零位刻画。对任意整数块起点 $u$，在 $t=u+k$ 应用这一刻画，就在 $u,\ldots,u+k-1$ 内找到一个读出的假位，故 `readRelation` 属于 $X_k$。原点符号及相邻符号的异或恢复关系位；符号递推在正、负两个方向唯一，后缀又由最近零位唯一确定，因此第 3 项确为双向逆映射。
+
+每个固定时刻的后缀只读前面至多 $k$ 位，符号只读原点锚点与有限段关系位，逆映射的每个关系坐标只读两个相邻状态。因此这些坐标映射在所述乘积及子空间可测结构上均可测。最后，把时间原点移到 $1$，新锚点必为 $b\oplus\neg r_0$；平移后的符号递推与最近零位刻画不变，由两者的唯一性得到第 4 项。完整证明由 Lean 内核检查。
+:::
+
+这给出每条受支持双向路径在每个整数原点的可测坐标重建，没有把时间截成非负半轴，也没有把 $Y_k$ 扩成任意状态路径。斜移位会更新锚点：固定选 $b=\mathrm{false}$ 虽可给每条关系路径选一条提升，却不能由此得到与移位交换的固定符号页。此编码定理没有指定路径上的概率测度，因而不提供不变概率律的存在性，也不提供锚点公平且独立的联合律。它同样没有建立完整柯尔莫哥洛夫—西奈熵的生成分割接口、对所有不变概率测度的熵比较，或等号情形的唯一性；这些熵结论在本书仍未形式化。可测坐标已经接通，熵接口仍需单独建立。
 
 在这一平稳律旁，还有两条各自独立的形式化定量定律共同约束边界碰撞与观测盲区：其一是帕里边界柱集上界定理 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)，它对给定的 $n \ge 1$ 组正游程对集合 $C$（每段 `1` 游程 $< k$ 且编码长度不超过视界 $R$）证明，左右边界选定前缀的平稳质量分别不超过 $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ 与 $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$（这是精确概率不等式，而非分形维数或熵值公式）；其二是与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5 一脉相承的有限竞技场信息逃逸率判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，它证明在基数 $q \ge 2$ 的非退化有限状态集上，观测目录 $S$ 无法区分的有序相异状态对集合 $E(S)$ 定义出归一化有理逃逸率 $e(S) = |E(S)|/[q(q-1)]$，而某项观测 $i$ 严格降低逃逸率当且仅当其唯一捕获对计数 $|U_i| > 0$（且差值恰为 $|U_i|/[q(q-1)]$）。有限有序逃逸对比例 $e(S)$、量子态冯·诺依曼熵 $S(\sigma_b)$ 与无限移位系统的遍历熵在数学定义上彼此独立，绝不可混为一谈。
 
