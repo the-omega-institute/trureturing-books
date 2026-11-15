@@ -1686,7 +1686,7 @@ $$
 \delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}\longrightarrow0\qquad(j\to\infty)?
 $$
 
-No convergence rate is presumed, and the book's unverified status makes no claim of a new external conjecture. Finite invertibility, membership of zero in an infinite-volume spectrum, finite-resolution density of states, or criticality in the sense of Anderson localization cannot directly replace this limit question with its specified boundaries and prefix sequence. Krebbekx–Moustaj–Dajani–Morais Smith, *Multifractal Properties of Tribonacci Chains* ([*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204), §§II.B.1, III.A.1, and V), use periodic approximants and perturbative renormalization to study physical spectra and criticality; we do not read this as the finite open-chain statement above for all $\rho\in(0,1)$.
+The book's unverified status makes no claim of a new external conjecture. Below, [@ex-ch39-p2e-tribonacci-prefix-rate] gives a quantitative paper derivation of this limit; its complete assembly has not undergone an exact Lean check. Finite invertibility, membership of zero in an infinite-volume spectrum, finite-resolution density of states, or criticality in the sense of Anderson localization cannot directly replace this limit question with its specified boundaries and prefix sequence. Krebbekx–Moustaj–Dajani–Morais Smith, *Multifractal Properties of Tribonacci Chains* ([*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204), §§II.B.1, III.A.1, and V), use periodic approximants and perturbative renormalization to study physical spectra and criticality; we do not read this as the finite open-chain statement above for all $\rho\in(0,1)$.
 
 Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. If a particle-number-conserving Slater ground state is chosen, its actual occupied projector $P_{\mathrm{occ}}$ must be constructed and its correlation matrix compressed to a chosen set of sites $I$ as $\chi_I P_{\mathrm{occ}}\chi_I$, where $\chi_I$ projects onto those sites. Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. Even resolving this limit would address only a gap premise. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
 :::
@@ -2056,7 +2056,40 @@ $$
 This converts the mass estimate for the full inverse into a bound on the spectral distance to zero energy for the same finite open chain.
 :::
 
-The example completes the spectral conversion for any finite open chain with positive hoppings. A rate along the full sequence of actual Tribonacci prefixes still requires an exact assembly of the word hoppings $t_i=t_{W_i}$, aligned repeated windows and full-inverse mass estimate under a single parameter convention, together with treatment of the initial short prefixes. This section has not established that, for every fixed $\rho\in(0,1)$, there are $C_\rho>0$ and an integer $J_\rho\ge1$ such that $\delta_{\rho,j}\le C_\rho/N_j$ for every $j\ge J_\rho$. Such a quantitative bound would imply the preceding open-chain limit; fractal entropy scaling still requires a separate argument involving physical states and spatial cuts.
+::: {.example #ex-ch39-p2e-tribonacci-prefix-rate title="A paper spectral bound for the specified even open prefixes"}
+Return to the actual word $W$. Fix $0<\rho<1$ and set $t(i)=t_{W_i}$, with $t_A=\rho^2$, $t_B=\rho$ and $t_C=1$. These hoppings satisfy $0<t(i)\le1$ at every position. For each $j\ge4$, use the explicit window in [@ex-ch39-p2e-aligned-tribonacci-windows] and write
+
+$$
+\begin{aligned}
+m&=2q+1,\qquad s=2a,\qquad N_j=2n,\\
+q&\ge1,\qquad a+m\le n,\qquad N_j\le128m.
+\end{aligned}
+$$
+
+Here $q,a,n$ are natural numbers. Equal letters have equal hoppings, so the word identity inside the window gives
+
+$$
+t\bigl(2a+i+(2q+1)\bigr)=t(2a+i)\qquad(0\le i<2q).
+$$
+
+The preceding two examples therefore apply to this same $N_j$-site open chain: the local matrix is the block for the shifted hoppings $t(2a+\cdot)$, while the full inverse remains $L(t,n)^{-1}$ for the entire prefix. No external sites are removed and no closing bond is added. Use their common unit vector $v$ to obtain $\delta_{\rho,j}q(q+1)\le N_j$. Since $q\ge1$,
+
+$$
+\begin{aligned}
+9q(q+1)-2(2q+1)^2&=(q-1)(q+2)\ge0,\\
+N_j\delta_{\rho,j}
+&\le\frac{N_j^2}{q(q+1)}
+\le\frac{128^2(2q+1)^2}{q(q+1)}
+\le73728.
+\end{aligned}
+$$
+
+The constant $73728=128^2\cdot9/2$ is independent of both $j$ and $\rho$; no optimality is claimed. Every substitution iterate starts with $A$. The substitution erases no letter, and this initial letter adds at least one letter, so $L_{j+1}\ge L_j+1$ and $L_j\ge j+1$. Hence $N_j\ge L_j-1\ge j$, and $\delta_{\rho,j}\le73728/N_j\to0$. This tail conclusion needs no separate estimate for $j=1,2,3$.
+
+This is a paper application of the displayed window construction, full-inverse mass estimate and finite-dimensional spectral conversion, with no separate Lean verification badge. An exact check of the complete assembly must still cover the numerical window constants, actual word hoppings and shifted indices, full-inverse embedding and common unit vector; see the [formalization interface](https://github.com/the-omega-institute/trureturing/issues/30166). This finite open-chain spectral bound neither constructs a many-body ground state nor determines entanglement across a spatial cut or the dimension of the Rauzy boundary.
+:::
+
+The example gives a paper $1/N_j$ bound and convergence to zero for the specified even open prefixes. Fractal entropy scaling still requires a separate argument involving physical states and spatial cuts; those parts of [@prob-ch39-p2e-fractal-horizon] remain open.
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`, shift entropy and Abramov's formula carry status `Literature`, and fractal area scaling carries status `OPEN`.

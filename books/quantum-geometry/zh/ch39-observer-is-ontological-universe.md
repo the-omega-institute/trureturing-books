@@ -1686,7 +1686,7 @@ $$
 \delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}\longrightarrow0\qquad(j\to\infty)?
 $$
 
-这里不预设收敛速率，也不把“本书未验证”当作外部新猜想的声明。有限矩阵的可逆性、无限体积谱中零点的归属、有限分辨率态密度或 Anderson 局域化意义下的临界性，都不能直接替代这一指定边界与前缀序列的极限问题。Krebbekx–Moustaj–Dajani–Morais Smith 的 *Multifractal Properties of Tribonacci Chains*（[*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204)，§II.B.1、§III.A.1、§V）采用周期逼近与微扰重整化研究物理谱及临界性；本书不将其解释为上述对所有 $\rho\in(0,1)$ 的有限开链结论。
+不把“本书未验证”当作外部新猜想的声明。下文 [@ex-ch39-p2e-tribonacci-prefix-rate] 给出这一极限的纸面定量推导，其完整组合尚未完成精确 Lean 核验。有限矩阵的可逆性、无限体积谱中零点的归属、有限分辨率态密度或 Anderson 局域化意义下的临界性，都不能直接替代这一指定边界与前缀序列的极限问题。Krebbekx–Moustaj–Dajani–Morais Smith 的 *Multifractal Properties of Tribonacci Chains*（[*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204)，§II.B.1、§III.A.1、§V）采用周期逼近与微扰重整化研究物理谱及临界性；本书不将其解释为上述对所有 $\rho\in(0,1)$ 的有限开链结论。
 
 要讨论物理空间切口的熵，还须指定多体哈密顿量、填充及态；若选择粒子数守恒的 Slater 基态，须构造其实际占据投影 $P_{\mathrm{occ}}$，并对选定格点子集 $I$ 取关联矩阵压缩 $\chi_I P_{\mathrm{occ}}\chi_I$，其中 $\chi_I$ 投影到这些格点。Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。即使上述极限得到解决，也只触及谱隙前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
 :::
@@ -2056,7 +2056,40 @@ $$
 这把完整逆矩阵的质量估计转成同一有限开链到零能量的谱距离界。
 :::
 
-上例完成了任意正跃迁有限开链的谱转换。实际 Tribonacci 前缀的全序列速率仍需把字跃迁 $t_i=t_{W_i}$、对齐重复窗口与完整逆矩阵质量估计在同一参数约定下精确拼接，并处理最初的短前缀。本节尚未建立：对每个固定 $\rho\in(0,1)$，存在 $C_\rho>0$ 与整数 $J_\rho\ge1$，使所有 $j\ge J_\rho$ 都满足 $\delta_{\rho,j}\le C_\rho/N_j$。这样的定量界可推出前述开链极限；分形熵标度仍需独立的物理态与空间切口论证。
+::: {.example #ex-ch39-p2e-tribonacci-prefix-rate title="指定偶数开前缀的纸面谱界"}
+回到实际词 $W$，固定 $0<\rho<1$，令 $t(i)=t_{W_i}$，其中 $t_A=\rho^2$、$t_B=\rho$、$t_C=1$。这些跃迁在所有位置都满足 $0<t(i)\le1$。对每个 $j\ge4$，采用 [@ex-ch39-p2e-aligned-tribonacci-windows] 的显式窗口，写
+
+$$
+\begin{aligned}
+m&=2q+1,\qquad s=2a,\qquad N_j=2n,\\
+q&\ge1,\qquad a+m\le n,\qquad N_j\le128m.
+\end{aligned}
+$$
+
+这里 $q,a,n$ 都是自然数。相同字母具有相同跃迁，所以窗口中的字等式给出
+
+$$
+t\bigl(2a+i+(2q+1)\bigr)=t(2a+i)\qquad(0\le i<2q).
+$$
+
+因此前两个例子适用于这同一条 $N_j$ 站点开链：局部矩阵是移位跃迁 $t(2a+\cdot)$ 的块，完整逆矩阵仍取全前缀的 $L(t,n)^{-1}$，没有删除窗口外的站点，也没有添加闭合键。取其中同一个单位向量 $v$，得到 $\delta_{\rho,j}q(q+1)\le N_j$。由 $q\ge1$，
+
+$$
+\begin{aligned}
+9q(q+1)-2(2q+1)^2&=(q-1)(q+2)\ge0,\\
+N_j\delta_{\rho,j}
+&\le\frac{N_j^2}{q(q+1)}
+\le\frac{128^2(2q+1)^2}{q(q+1)}
+\le73728.
+\end{aligned}
+$$
+
+常数 $73728=128^2\cdot9/2$ 与 $j$ 和 $\rho$ 无关，不声称最优。每个替代迭代都以 $A$ 开头；替代不擦除字母，而这个首字母至少增加一个字母，所以 $L_{j+1}\ge L_j+1$、$L_j\ge j+1$，进而 $N_j\ge L_j-1\ge j$。故 $\delta_{\rho,j}\le73728/N_j\to0$。这一尾段结论不要求另行估计 $j=1,2,3$。
+
+这是所列窗口构造、完整逆矩阵质量估计与有限维谱转换的纸面应用推导，不带独立 Lean 验证徽章。完整组合的精确核验仍须覆盖数值窗口常数、实际字跃迁与移位下标、完整逆矩阵嵌入及共同单位向量，见[形式化接口](https://github.com/the-omega-institute/trureturing/issues/30166)。有限开链的这一谱界不构造多体基态，也不确定空间切口的纠缠熵或劳齐边界的维数。
+:::
+
+上例给出指定偶数开前缀的纸面 $1/N_j$ 界与趋零结论。分形熵标度仍需独立的物理态与空间切口论证；[@prob-ch39-p2e-fractal-horizon] 的这些部分保持开放。
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`，移位熵与阿布拉莫夫公式属 `文献结果`，分形面积律属 `OPEN`。
