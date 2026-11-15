@@ -1814,7 +1814,56 @@ An empty interval has zero charge and satisfies the same inequality directly. He
 :::
 
 ::: {.remark #rem-ch39-p2e-tribonacci-refutation-boundaries title="Alternating Discrepancy, Spectral Literature, and Physical Scope"}
-**Literature background and scope, not a formalized physical conclusion of this book.** The square in the prefix estimate $|q_n|\ge n^2$ is a square of the substitution level $n$; [@thm-ch39-p2e-tribonacci-uniform-log-squared] controls every length at every start. The former exhibits sufficiently large actual prefix charges and rules out a uniform logarithmic bound; the latter supplies a uniform squared-logarithmic upper bound. Their quantifiers differ. We do not infer an optimal asymptotic rate over all lengths, exact $\Theta((\log m)^2)$ scaling, or a sharp constant here. Determining the optimal rate remains a further question. The bond-word prefix length $m_n$ cannot be identified directly with the specified even site count $N_j$.
+**Literature background and scope, not a formalized physical conclusion of this book.** The square in the prefix estimate $|q_n|\ge n^2$ is a square of the substitution level $n$, but the existing length estimates also determine the worst-case order. In this remark, write $Q(s,m)=F(W_{[s,s+m)})$, with charges and lengths viewed as real numbers in the following inequalities. For $n\ge1$, we already have $0<\log(m_n+2)\le n\log39$. Both sides are nonnegative and $\log39>0$, so squaring and applying [@thm-ch39-p2e-tribonacci-uniform-log-squared] gives, with one $C>0$,
+
+$$
+\begin{aligned}
+\frac{(\log(m_n+2))^2}{(\log39)^2}
+&\le n^2\le|q_n|=|Q(0,m_n)|\\
+&\le C(\log(m_n+2))^2.
+\end{aligned}
+$$
+
+The recursion gives $m_{n+1}=|\sigma^{4(n+1)}(C)|+m_n>m_n$, since every letter image is nonempty. These actual prefix lengths therefore increase strictly and are unbounded, giving matching squared-logarithmic bounds along this sequence. At $n=0$, we have $m_0=q_0=0$, outside the scope of this positive lower bound.
+
+To distinguish a length cutoff from an exact length, define in this remark
+
+$$
+\begin{aligned}
+P(M)&=\max_{\substack{m\in\mathbb N\\0\le m\le M}}|Q(0,m)|,\\
+R(M)&=\sup_{\substack{s\in\mathbb N\\m\in\mathbb N,\ m\le M}}|Q(s,m)|.
+\end{aligned}
+$$
+
+Here $M\in\mathbb N$; in $R(M)$, the start $s$ ranges over all natural numbers, without a restriction by $M$. The maximum defining $P(M)$ is over a nonempty finite set, and the uniform upper bound makes the nonempty set defining $R(M)$ bounded above. For every positive natural $M$, the same constant $C>0$ satisfies
+
+$$
+\begin{aligned}
+\frac{(\log(M+2))^2}{4(\log39)^2}
+&\le P(M)\le R(M)\\
+&\le C(\log(M+2))^2.
+\end{aligned}
+$$
+
+The lower bound follows directly from the existing prefix estimates. For $M\ge13$, take $n=\lfloor\log_{13}M\rfloor\ge1$. Then $13^n\le M<13^{n+1}$ and $m_n\le13^n\le M$, so $P(M)\ge|Q(0,m_n)|\ge n^2$. Also, $M+2\le3M$ gives
+
+$$
+\begin{aligned}
+\log(M+2)&\le\log3+\log M\\
+&\le\log3+(n+1)\log13\\
+&\le(n+1)\log39\le2n\log39.
+\end{aligned}
+$$
+
+Squaring and dividing by the positive number $4(\log39)^2$ proves the required lower bound. For $1\le M\le12$, use the actual one-letter prefix $W_{[0,1)}=A$, whose charge is $Q(0,1)=2$, so $P(M)\ge2$. Meanwhile, $\log(M+2)\le\log14<\log39$, so the required lower bound's left side is less than $1/4$. For the upper bound, for every $m\le M$ and arbitrary $s\in\mathbb N$, apply the uniform estimate and $0<\log(m+2)\le\log(M+2)$, then take the maximum or supremum. Taking $s=0$ gives $P(M)\le R(M)$. Thus the prefix running maximum and the running supremum over all starts both have squared-logarithmic order: the uniform upper bound has sharp worst-case order. No constant is optimized here. At $M=0$, we have $P(0)=R(0)=0$, so the displayed positive lower bound fails.
+
+Statements at every exact length require a separate distinction. Complete $A$ images supply another family of actual prefixes: put $\ell_n=|\sigma^{4n}(A)|$. The preceding identity $a_n=2$ and actual prefix containment give
+
+$$
+Q(0,\ell_n)=2,\qquad \ell_n\ge4n+1\qquad(n\in\mathbb N).
+$$
+
+The length bound follows from $\sigma^{k+1}(A)=\sigma^k(A)\sigma^k(B)$ for $k\ge0$: every $B$ image is nonempty, so the length starts at one and increases by at least one per step. Hence $\ell_n\to\infty$, while $|Q(0,\ell_n)|/(\log(\ell_n+2))^2\to0$. There are no $c>0$ and $m_0\in\mathbb N$ such that every $m\ge m_0$ satisfies $|Q(0,m)|\ge c(\log(m+2))^2$. Requiring this lower bound simultaneously at all starts also fails, since it includes start zero. If instead the exact length is fixed before taking the supremum over starts, write $E(m)=\sup_{s\in\mathbb N}|Q(s,m)|$. Whether there exist $c>0$ and $m_0\in\mathbb N$ such that every $m\ge m_0$ satisfies $E(m)\ge c(\log(m+2))^2$ is not determined by this argument: constant charge at one start does not control other starts, and a running maximum may select a shorter length. Optimal constants are likewise undetermined here. The bond-word prefix length $m_n$ cannot be identified directly with the specified even site count $N_j$.
 
 Adamczewski, *Symbolic discrepancy and self-similar dynamics* ([doi:10.5802/aif.2079](https://doi.org/10.5802/aif.2079), Theorem 1 and Propositions 10–11), provides a general framework for substitution discrepancy and cancellation in the critical spectrum. The existence of a suitable zero-mean letter weight in its weighted lower bounds does not automatically select the position-alternating weight here. Encoding position parity in an enlarged alphabet would require separate checks of primitivity, frequencies, weights, and cancellation conditions. The proof above computes directly on the original word; it neither uses that existence statement to select its weights nor claims literature novelty for the mechanism or explicit formula.
 
