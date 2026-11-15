@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "f010e3713174c4df2b28c8f8c4d9ff3c41e46a05",
-  "pinned_at": "2026-11-14T23:48:40Z",
+  "commit": "ccaf12043b8eaa43581decc99f584528f3564871",
+  "pinned_at": "2026-11-15T01:02:13Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -657,9 +657,17 @@
       "module": "D5/S1/Words/TribonacciAlignedWindows",
       "name": "D5.S1.Words.TribonacciAlignedWindows.aligned_windows",
       "kind": "theorem",
-      "statement_id": "sha256:12e36e1225ead25dfa83ca0158b01a590de046d8cf4b6a65e4b072259b731c61",
+      "statement_id": "sha256:ed51a299e4851d6b91bf6c9e9f6b769b68e9a7c06631da9b4c59cab82676709c",
       "line": 99,
       "signature": "theorem aligned_windows : ∃ K : ℕ, 0 < K ∧ ∃ J : ℕ, 1 ≤ J ∧ ∀ j : ℕ, J ≤ j → ∃ m s : ℕ, 3 ≤ m ∧ Odd m ∧ Even s ∧ N j ≤ K*m ∧ s+2*m ≤ N j ∧ ∀ i : ℕ, i < m-1 → W (s+i+m) = W (s+i)"
+    },
+    "D5/S1/Words/TribonacciPrefixRefutation.result": {
+      "module": "D5/S1/Words/TribonacciPrefixRefutation",
+      "name": "D5.S1.Words.TribonacciPrefixRefutation.result",
+      "kind": "theorem",
+      "statement_id": "sha256:6c31f23e5cf0428d465913af0499bddbca7257a9b97e9f6b2b77fca5586949e5",
+      "line": 255,
+      "signature": "theorem result : ¬ claim"
     },
     "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff": {
       "module": "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint",

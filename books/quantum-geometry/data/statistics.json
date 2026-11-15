@@ -3,7 +3,7 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 183,
+    "theorem": 184,
     "lemma": 34,
     "proposition": 45,
     "corollary": 30,
@@ -11,17 +11,17 @@
     "conjecture": 6,
     "problem": 3,
     "example": 113,
-    "remark": 189,
-    "proof": 289,
-    "lean_verified": 289,
+    "remark": 190,
+    "proof": 290,
+    "lean_verified": 290,
     "written_proof": 3,
     "literature": 190
   },
-  "total": 658,
+  "total": 659,
   "kinds": {
     "def": 201,
     "inductive": 11,
-    "theorem": 446
+    "theorem": 447
   },
   "groups": {
     "theorems": [
@@ -59,6 +59,7 @@
       "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation",
       "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_phase_mass",
       "D5/S1/Words/TribonacciAlignedWindows.aligned_windows",
+      "D5/S1/Words/TribonacciPrefixRefutation.result",
       "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff",
       "D5/S3/Analytic/Isolation/RiemannZetaPositiveRealSign.riemannZeta_ofReal_sign",
       "D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one",
@@ -738,7 +739,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1764,
+          "line": 1921,
           "id": "",
           "via": "inline"
         },
@@ -2010,7 +2011,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1765,
+          "line": 1922,
           "id": "",
           "via": "inline"
         },
@@ -2046,7 +2047,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1765,
+          "line": 1922,
           "id": "",
           "via": "inline"
         },
@@ -2070,7 +2071,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1764,
+          "line": 1921,
           "id": "",
           "via": "inline"
         },
@@ -2106,7 +2107,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1764,
+          "line": 1921,
           "id": "",
           "via": "inline"
         },
@@ -2148,7 +2149,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1765,
+          "line": 1922,
           "id": "",
           "via": "inline"
         },
@@ -2220,7 +2221,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1765,
+          "line": 1922,
           "id": "",
           "via": "inline"
         },
@@ -3246,8 +3247,20 @@
       "citations": [
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1602,
+          "line": 1759,
           "id": "thm-ch39-p2e-aligned-tribonacci-windows",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S1/Words/TribonacciPrefixRefutation.result": {
+      "kind": "theorem",
+      "name": "D5.S1.Words.TribonacciPrefixRefutation.result",
+      "citations": [
+        {
+          "file": "ch39-observer-is-ontological-universe.md",
+          "line": 1565,
+          "id": "thm-ch39-p2e-tribonacci-prefix-log-refutation",
           "via": "environment"
         }
       ]
@@ -3408,7 +3421,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1769,
+          "line": 1926,
           "id": "",
           "via": "inline"
         },
@@ -3618,7 +3631,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1766,
+          "line": 1923,
           "id": "",
           "via": "inline"
         },
@@ -3672,7 +3685,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1766,
+          "line": 1923,
           "id": "",
           "via": "inline"
         },
@@ -3726,7 +3739,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1766,
+          "line": 1923,
           "id": "",
           "via": "inline"
         },
@@ -5118,7 +5131,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1771,
+          "line": 1928,
           "id": "",
           "via": "inline"
         },
@@ -6096,7 +6109,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1766,
+          "line": 1923,
           "id": "",
           "via": "inline"
         },
@@ -6528,7 +6541,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1769,
+          "line": 1926,
           "id": "",
           "via": "inline"
         },
@@ -8244,7 +8257,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1767,
+          "line": 1924,
           "id": "",
           "via": "inline"
         },
@@ -8280,7 +8293,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1767,
+          "line": 1924,
           "id": "",
           "via": "inline"
         },
@@ -8316,7 +8329,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1767,
+          "line": 1924,
           "id": "",
           "via": "inline"
         },
@@ -8340,7 +8353,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1767,
+          "line": 1924,
           "id": "",
           "via": "inline"
         },
@@ -13290,7 +13303,7 @@
       "citations": [
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1562,
+          "line": 1719,
           "id": "thm-ch39-p2e-odd-repeat-inverse-mass",
           "via": "environment"
         }
@@ -13578,7 +13591,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1770,
+          "line": 1927,
           "id": "",
           "via": "inline"
         },
@@ -13614,7 +13627,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1770,
+          "line": 1927,
           "id": "",
           "via": "inline"
         },
@@ -18390,7 +18403,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1771,
+          "line": 1928,
           "id": "",
           "via": "inline"
         },
@@ -18414,7 +18427,7 @@
         },
         {
           "file": "ch39-observer-is-ontological-universe.md",
-          "line": 1771,
+          "line": 1928,
           "id": "",
           "via": "inline"
         },
@@ -20844,6 +20857,7 @@
         "D5/S0/Diagonal/SelfApplicationFates.self_application_four_fates",
         "D5/S0/Tower/DBonacci/Irreducibility.dbonacci_complex_root_location",
         "D5/S1/Words/TribonacciAlignedWindows.aligned_windows",
+        "D5/S1/Words/TribonacciPrefixRefutation.result",
         "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition",
         "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor",
         "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric",

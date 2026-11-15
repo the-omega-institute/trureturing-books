@@ -1543,6 +1543,163 @@ $$
 要讨论物理空间切口的熵，还须指定多体哈密顿量、填充及态；若选择粒子数守恒的 Slater 基态，须构造其实际占据投影 $P_{\mathrm{occ}}$，并对选定格点子集 $I$ 取关联矩阵压缩 $\chi_I P_{\mathrm{occ}}\chi_I$，其中 $\chi_I$ 投影到这些格点。Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。即使上述极限得到解决，也只触及谱隙前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
 :::
 
+在这个实际词上，普通字母计数的平衡性与按位置奇偶加权的和是不同的量。沿用 $A=0$、$B=1$、$C=2$ 的字母编码，取整数权重
+
+$$
+\begin{aligned}
+w(A)&=2,\qquad w(B)=1,\qquad w(C)=0,\\
+F(v)&=\sum_{r=0}^{|v|-1}(-1)^r w(v_r),\\
+W_{[s,s+m)}&=W_sW_{s+1}\cdots W_{s+m-1}.
+\end{aligned}
+$$
+
+这里 $s,m\in\mathbb N$，位置从零编号；空字 $\varepsilon$ 满足 $F(\varepsilon)=0$。每个区段的首项都取正号，与全局起点 $s$ 的奇偶无关。前面的跃迁恰为 $t_X=\rho^{w(X)}$，故有限乘积满足
+
+$$
+\prod_{r=0}^{m-1}t_{W_{s+r}}^{\,(-1)^r}
+=\rho^{F(W_{[s,s+m)})}.
+$$
+
+这说明交替电荷为什么会进入跃迁比值的估计，却尚未给出谱界。下面的精确陈述与构造来自 [Tribonacci 前缀反例的源证明](https://github.com/the-omega-institute/trureturing/pull/30577)。
+
+::: {.theorem #thm-ch39-p2e-tribonacci-prefix-log-refutation title="实际 Tribonacci 词的统一对数区段界不成立" lean="D5/S1/Words/TribonacciPrefixRefutation.result"}
+对上述固定的实际词 $W$ 与整数权重 $w$，有
+
+$$
+\neg\left(
+\begin{aligned}
+&\exists K\in\mathbb R,\quad 0<K\ \land\\
+&\forall s,m\in\mathbb N,\quad
+\left|F(W_{[s,s+m)})\right|
+\le K\log(m+2)
+\end{aligned}
+\right).
+$$
+
+不等式中的整数电荷与自然数长度均视为实数，$\log$ 为自然对数；量词包含 $m=0$，没有长度下限或起点限制。
+:::
+
+::: proof
+取 $\tau=\sigma^4$，将其逐字延伸到有限字。四次实际替代给出
+
+$$
+\begin{aligned}
+\tau(A)&=ABACABAABACAB,&|\tau(A)|&=13,\\
+\tau(B)&=ABACABAABAC,&|\tau(B)|&=11,\\
+\tau(C)&=ABACABA,&|\tau(C)|&=7.
+\end{aligned}
+$$
+
+每个 $\tau^n(X)$ 的长度都为奇数：$n=0$ 时长度为一；下一层分别拼接 $13$、$11$ 或 $7$ 个前层奇长块，故可对所有字母同时归纳。任意有限字的拼接恒等式为
+
+$$
+F(uv)=F(u)+(-1)^{|u|}F(v).
+$$
+
+因此，展开 $\tau^{n+1}(X)$ 时，每个前层块都翻转下一块的符号。令 $a_n=F(\tau^n(A))$、$b_n=F(\tau^n(B))$、$c_n=F(\tau^n(C))$。在上述三个实际像中逐块交替取号，得到对每个 $n\in\mathbb N$ 都成立的递推
+
+$$
+\begin{aligned}
+(a_0,b_0,c_0)&=(2,1,0),\\
+a_{n+1}&=a_n,\\
+b_{n+1}&=2a_n-b_n,\\
+c_{n+1}&=4a_n-2b_n-c_n.
+\end{aligned}
+$$
+
+由 $a_{n+1}=a_n$ 与初值知 $a_n=2$，于是 $b$ 的递推化为 $b_{n+1}-2=-(b_n-2)$。再令 $d_n=(-1)^n(c_n-2)$，$c$ 的递推化为 $d_{n+1}=d_n-2$，且 $d_0=-2$。于是全层数的解为
+
+$$
+\begin{aligned}
+a_n&=2,\\
+b_n&=2-(-1)^n,\\
+c_n&=2-(2n+2)(-1)^n.
+\end{aligned}
+$$
+
+整块 $A$ 像的电荷恒为 $2$，却不能控制它内部的前缀。定义具体的有限字族
+
+$$
+U_0=\varepsilon,\qquad
+U_{n+1}=\tau^{n+1}(C)U_n,\qquad m_n=|U_n|.
+$$
+
+新块接在前面。逐字恒等式 $\tau(A)=\tau(C)\,A\,BACAB$ 给出
+
+$$
+\tau^{n+1}(A)=
+\tau^{n+1}(C)\,\tau^n(A)\,\tau^n(BACAB).
+$$
+
+空字 $U_0$ 是 $A$ 的前缀；若 $\tau^n(A)=U_nR_n$，则上式变成
+
+$$
+\tau^{n+1}(A)=
+U_{n+1}R_n\,\tau^n(BACAB).
+$$
+
+归纳可知 $U_n$ 是 $\tau^n(A)=\sigma^{4n}(A)$ 的实际前缀，因而
+
+$$
+W_{[0,m_n)}=U_n.
+$$
+
+这一步使用的正是从 $A$ 出发的原始无限词，没有另设出现位置假设，也没有循环闭合或位置平移。三个四步像都非空，故 $m_n>0$（$n\ge1$）；对所有字母同时归纳，每层至多拼接十三个前层像，得到 $|\tau^n(X)|\le13^n$。结合前缀包含关系，
+
+$$
+0<m_n\le|\tau^n(A)|\le13^n\qquad(n\ge1).
+$$
+
+令 $q_n=F(U_n)$。新接在前面的 $\tau^{n+1}(C)$ 长为奇数，所以
+
+$$
+q_0=0,\qquad q_{n+1}=c_{n+1}-q_n.
+$$
+
+为显式解出这次累积，令 $r_n=(-1)^n(q_n-1)$。代入 $c_{n+1}$ 的公式，得到 $r_0=-1$ 与 $r_{n+1}=r_n-(2n+4)$。求和即得
+
+$$
+\begin{aligned}
+q_n&=1-(-1)^n(n^2+3n+1)\\
+&=\begin{cases}
+-n(n+3),&n\text{ 为偶数},\\
+(n+1)(n+2),&n\text{ 为奇数}.
+\end{cases}
+\end{aligned}
+$$
+
+故 $|q_n|\ge n^2$，包括 $n=0$。另一方面，当 $n\ge1$ 时，$13^n\ge1$ 且 $3\le3^n$，故 $m_n+2\le13^n+2\le3\cdot13^n\le39^n$，从而
+
+$$
+\log(m_n+2)\le n\log39.
+$$
+
+现在假设定理中被否定的统一界成立，取其常数 $K>0$，再取自然数 $n>K\log39$。因 $K\log39>0$，有 $n\ge1$。在真正从零开始的前缀上，
+
+$$
+\begin{aligned}
+\left|F(W_{[0,m_n)})\right|
+&=|q_n|\ge n^2\\
+&>Kn\log39
+\ge K\log(m_n+2),
+\end{aligned}
+$$
+
+与 $s=0$、$m=m_n$ 时的统一界矛盾。这个反证覆盖每个正实数 $K$；从零开始的具体反例族是证明中的构造，不是另加假设，也不是由有限样本外推的结论。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-ch39-p2e-tribonacci-refutation-boundaries title="交替偏差、谱文献与物理适用边界"}
+**文献背景与适用边界，未作为本书的物理形式化结论。** 上面的平方是替代层数 $n$ 的平方。该反证没有给出所有长度上的最优上界，也没有否定或证明 $O((\log(m+2))^2)$ 的统一上界。$m_n$ 是键字的前缀长度，不能直接等同于前面指定的偶数格点数 $N_j$。
+
+Adamczewski，*Symbolic discrepancy and self-similar dynamics*（[doi:10.5802/aif.2079](https://doi.org/10.5802/aif.2079)，定理 1、命题 10–11）提供替代系统偏差与临界谱消去的一般框架。其加权下界中存在合适零均值字母权重的结论，并不自动指定这里随位置交替的权重；若把位置奇偶性编码进扩充字母表，还须另行核对本原性、频率、权重与消去条件。上面的证明直接计算原始字，既不借用该存在性结论来指定权重，也不据此主张机制或具体公式的文献新颖性。
+
+对物理谱量，Juhász 从开边界横场 Ising 链得到辅助矩阵方法（[doi:10.1103/PhysRevB.106.064204](https://doi.org/10.1103/PhysRevB.106.064204)，arXiv:2206.11575v2）：式 (6) 的 $2L\times2L$ 零对角开链矩阵（$L>1$，相邻耦合均非零）的正本征值，等于式 (7) 双对角矩阵的奇异值；式 (18)、(28) 给出最小正值的有限链上下界。其附录 B 式 (B4) 将常用近似能隙放在严格下界之下，该近似因而不能充作真能隙的上界。这里可比较的是辅助矩阵的谱问题，不能直接把原 Ising 多体能隙认作本跃迁链的多体能隙。
+
+Hermisson 对多字母替代的边缘重整化特征值与无穷动力学指数的讨论（[doi:10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304)，arXiv:cond-mat/9808238，第 11 页）没有在该处给出本字的特定标度。Hida 的 Fibonacci XXZ 分析（[doi:10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296)，arXiv:cond-mat/0404606v2）中，式 (38) 的 $\Delta E\sim\exp[-\kappa(\log N)^2]$ 属于强弱耦合分离下的相互作用各向同性模型的微扰重整化；式 (28) 的自由 XY 情形给出的是有限指数幂律 $\Delta E\sim N^{-z}$。这些结论不替代对本链实际有限矩阵、端点、奇偶截断与所求谱量的核对。
+
+[@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线；它没有反驳某个多项式谱隙界，没有决定指定偶数开前缀的 $\delta_{\rho,j}$ 及其速率，也没有构造多体态或证明空间纠缠标度。后面的奇数重复窗口与完整逆矩阵质量路线仍须按各自前提拼接；[@prob-ch39-p2e-fractal-horizon] 的物理态、空间切口与劳齐边界对应仍需独立建立。
+:::
+
 ::: {.remark #rem-ch39-p2e-tridiagonal-localization title="保留端点残差的三对角局部化（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 将一个整轴向量硬截成有限区段，会在区段两端留下残差；逐渐收窄的正弦权窗可以定量控制这项代价。Chandler-Wilde–Chonchaiya–Lindner，*On spectral inclusion sets and computing the spectra and pseudospectra of bounded linear operators*（[*J. Spectr. Theory* **14**, 719–804](https://doi.org/10.4171/JST/514)，§5.1，推论 5.2、5.4）给出如下工具。设 $A$ 是 $\ell^2(\mathbb{Z})$ 上的有界三对角算子，$M_\pm=\sup_{i\in\mathbb{Z}}|A_{i,i\pm1}|$；对任意非零定义域的有界算子 $B$，记 $\nu(B)=\inf_{\|x\|_2=1}\|Bx\|_2$。对每个整数 $n\ge1$，令 $E_{n,k}$ 为仅支撑在站点 $k+1,\ldots,k+n$ 上的向量空间，则
 

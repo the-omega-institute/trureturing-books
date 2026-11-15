@@ -1543,6 +1543,163 @@ No convergence rate is presumed, and the book's unverified status makes no claim
 Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. If a particle-number-conserving Slater ground state is chosen, its actual occupied projector $P_{\mathrm{occ}}$ must be constructed and its correlation matrix compressed to a chosen set of sites $I$ as $\chi_I P_{\mathrm{occ}}\chi_I$, where $\chi_I$ projects onto those sites. Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. Even resolving this limit would address only a gap premise. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
 :::
 
+For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
+
+$$
+\begin{aligned}
+w(A)&=2,\qquad w(B)=1,\qquad w(C)=0,\\
+F(v)&=\sum_{r=0}^{|v|-1}(-1)^r w(v_r),\\
+W_{[s,s+m)}&=W_sW_{s+1}\cdots W_{s+m-1}.
+\end{aligned}
+$$
+
+Here $s,m\in\mathbb N$, positions start at zero, and the empty word $\varepsilon$ has $F(\varepsilon)=0$. Each interval starts with a positive sign, independently of the parity of its global start $s$. The preceding hoppings are exactly $t_X=\rho^{w(X)}$, so finite products satisfy
+
+$$
+\prod_{r=0}^{m-1}t_{W_{s+r}}^{\,(-1)^r}
+=\rho^{F(W_{[s,s+m)})}.
+$$
+
+This explains why alternating charge enters estimates of hopping ratios, without yet giving a spectral bound. The exact statement and construction below come from the [source proof of the Tribonacci prefix refutation](https://github.com/the-omega-institute/trureturing/pull/30577).
+
+::: {.theorem #thm-ch39-p2e-tribonacci-prefix-log-refutation title="Failure of a Uniform Logarithmic Interval Bound for the Actual Tribonacci Word" lean="D5/S1/Words/TribonacciPrefixRefutation.result"}
+For the fixed actual word $W$ and integer weights $w$ above,
+
+$$
+\neg\left(
+\begin{aligned}
+&\exists K\in\mathbb R,\quad 0<K\ \land\\
+&\forall s,m\in\mathbb N,\quad
+\left|F(W_{[s,s+m)})\right|
+\le K\log(m+2)
+\end{aligned}
+\right).
+$$
+
+In this inequality, the integer charge and natural-number length are viewed as real numbers, and $\log$ is the natural logarithm. The quantifiers include $m=0$, with no lower length cutoff or restriction on the start.
+:::
+
+::: proof
+Set $\tau=\sigma^4$ and extend it to finite words by concatenation. Four literal substitution steps give
+
+$$
+\begin{aligned}
+\tau(A)&=ABACABAABACAB,&|\tau(A)|&=13,\\
+\tau(B)&=ABACABAABAC,&|\tau(B)|&=11,\\
+\tau(C)&=ABACABA,&|\tau(C)|&=7.
+\end{aligned}
+$$
+
+Every $\tau^n(X)$ has odd length: at $n=0$ its length is one, and the next level concatenates $13$, $11$, or $7$ preceding-level blocks of odd length. This proves the assertion simultaneously for all letters by induction. For arbitrary finite words, concatenation satisfies
+
+$$
+F(uv)=F(u)+(-1)^{|u|}F(v).
+$$
+
+Thus, when expanding $\tau^{n+1}(X)$, each preceding-level block reverses the sign of the next block. Write $a_n=F(\tau^n(A))$, $b_n=F(\tau^n(B))$, and $c_n=F(\tau^n(C))$. Alternating block signs in the three literal images above gives the recurrence, valid for every $n\in\mathbb N$,
+
+$$
+\begin{aligned}
+(a_0,b_0,c_0)&=(2,1,0),\\
+a_{n+1}&=a_n,\\
+b_{n+1}&=2a_n-b_n,\\
+c_{n+1}&=4a_n-2b_n-c_n.
+\end{aligned}
+$$
+
+The recurrence $a_{n+1}=a_n$ and its initial value give $a_n=2$, so the recurrence for $b$ becomes $b_{n+1}-2=-(b_n-2)$. Set $d_n=(-1)^n(c_n-2)$; the recurrence for $c$ becomes $d_{n+1}=d_n-2$, with $d_0=-2$. The solution at every level is therefore
+
+$$
+\begin{aligned}
+a_n&=2,\\
+b_n&=2-(-1)^n,\\
+c_n&=2-(2n+2)(-1)^n.
+\end{aligned}
+$$
+
+The charge of a whole $A$ image remains $2$, but this does not control its internal prefixes. Define the explicit finite-word family
+
+$$
+U_0=\varepsilon,\qquad
+U_{n+1}=\tau^{n+1}(C)U_n,\qquad m_n=|U_n|.
+$$
+
+The new block is prepended. The literal identity $\tau(A)=\tau(C)\,A\,BACAB$ gives
+
+$$
+\tau^{n+1}(A)=
+\tau^{n+1}(C)\,\tau^n(A)\,\tau^n(BACAB).
+$$
+
+The empty word $U_0$ is a prefix of $A$. If $\tau^n(A)=U_nR_n$, the identity becomes
+
+$$
+\tau^{n+1}(A)=
+U_{n+1}R_n\,\tau^n(BACAB).
+$$
+
+Inductively, $U_n$ is a literal prefix of $\tau^n(A)=\sigma^{4n}(A)$, hence
+
+$$
+W_{[0,m_n)}=U_n.
+$$
+
+This uses the original infinite word starting from $A$, with no additional occurrence assumption, cyclic closure, or position shift. All three fourth images are nonempty, so $m_n>0$ for $n\ge1$. Simultaneous induction over all letters uses at most thirteen preceding-level images at each step and gives $|\tau^n(X)|\le13^n$. Prefix containment then yields
+
+$$
+0<m_n\le|\tau^n(A)|\le13^n\qquad(n\ge1).
+$$
+
+Let $q_n=F(U_n)$. The prepended block $\tau^{n+1}(C)$ has odd length, so
+
+$$
+q_0=0,\qquad q_{n+1}=c_{n+1}-q_n.
+$$
+
+To solve this accumulation explicitly, set $r_n=(-1)^n(q_n-1)$. Substitution of the formula for $c_{n+1}$ gives $r_0=-1$ and $r_{n+1}=r_n-(2n+4)$. Summation yields
+
+$$
+\begin{aligned}
+q_n&=1-(-1)^n(n^2+3n+1)\\
+&=\begin{cases}
+-n(n+3),&n\text{ even},\\
+(n+1)(n+2),&n\text{ odd}.
+\end{cases}
+\end{aligned}
+$$
+
+Consequently $|q_n|\ge n^2$, including $n=0$. For $n\ge1$, we have $13^n\ge1$ and $3\le3^n$, so the length bound gives $m_n+2\le13^n+2\le3\cdot13^n\le39^n$, and therefore
+
+$$
+\log(m_n+2)\le n\log39.
+$$
+
+Now suppose the uniform bound negated in the theorem holds. Take its constant $K>0$ and choose a natural number $n>K\log39$. Since $K\log39>0$, we have $n\ge1$. On an actual prefix starting at zero,
+
+$$
+\begin{aligned}
+\left|F(W_{[0,m_n)})\right|
+&=|q_n|\ge n^2\\
+&>Kn\log39
+\ge K\log(m_n+2),
+\end{aligned}
+$$
+
+contradicting the uniform bound at $s=0$, $m=m_n$. This contradiction covers every positive real $K$. The explicit family starting at zero is a construction within the proof, with no extra hypothesis and no extrapolation from finite samples. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark #rem-ch39-p2e-tribonacci-refutation-boundaries title="Alternating Discrepancy, Spectral Literature, and Physical Scope"}
+**Literature background and scope, not a formalized physical conclusion of this book.** The square above is a square of the substitution level $n$. The refutation gives no optimal upper bound for all lengths, and neither refutes nor proves a uniform $O((\log(m+2))^2)$ upper bound. The bond-word prefix length $m_n$ cannot be identified directly with the specified even site count $N_j$.
+
+Adamczewski, *Symbolic discrepancy and self-similar dynamics* ([doi:10.5802/aif.2079](https://doi.org/10.5802/aif.2079), Theorem 1 and Propositions 10–11), provides a general framework for substitution discrepancy and cancellation in the critical spectrum. The existence of a suitable zero-mean letter weight in its weighted lower bounds does not automatically select the position-alternating weight here. Encoding position parity in an enlarged alphabet would require separate checks of primitivity, frequencies, weights, and cancellation conditions. The proof above computes directly on the original word; it neither uses that existence statement to select its weights nor claims literature novelty for the mechanism or explicit formula.
+
+For physical spectral quantities, Juhász derives an auxiliary-matrix method from an open transverse-field Ising chain ([doi:10.1103/PhysRevB.106.064204](https://doi.org/10.1103/PhysRevB.106.064204), arXiv:2206.11575v2). The positive eigenvalues of the $2L\times2L$ zero-diagonal path matrix in Eq. (6), with $L>1$ and all adjacent couplings nonzero, are the singular values of the bidiagonal matrix in Eq. (7). Equations (18) and (28) give finite-chain lower and upper bounds on the smallest positive value. Appendix B, Eq. (B4), places a commonly used approximate gap below the rigorous lower bound, so that approximation cannot serve as an upper bound on the true gap. The comparison concerns the auxiliary matrix's spectrum; it does not identify the original Ising many-body gap with a many-body gap of this hopping chain.
+
+Hermisson's discussion of multi-letter substitutions with marginal renormalization eigenvalues and infinite dynamical exponent ([doi:10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304), arXiv:cond-mat/9808238, p. 11) gives no specific scaling for this word in that passage. In Hida's Fibonacci XXZ analysis ([doi:10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296), arXiv:cond-mat/0404606v2), the scale $\Delta E\sim\exp[-\kappa(\log N)^2]$ in Eq. (38) comes from perturbative renormalization of the interacting isotropic model with separated strong and weak couplings. The free XY case in Eq. (28) instead gives a finite power-law exponent, $\Delta E\sim N^{-z}$. These conclusions do not replace checks of this chain's actual finite matrices, endpoints, parity truncations, and spectral quantity.
+
+[@thm-ch39-p2e-tribonacci-prefix-log-refutation] rules out using this uniform logarithmic interval bound as a premise for an inverse-matrix estimate. It does not refute a polynomial spectral-gap bound, determine $\delta_{\rho,j}$ or its rate along the specified even open prefixes, construct a many-body state, or prove a spatial-entanglement law. The subsequent route through odd repetition windows and full-inverse mass still requires assembly under its own premises. Relating physical states, spatial cuts, and the Rauzy boundary in [@prob-ch39-p2e-fractal-horizon] remains a separate task.
+:::
+
 ::: {.remark #rem-ch39-p2e-tridiagonal-localization title="Tridiagonal Localization with Boundary Residuals (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** Abruptly cutting a whole-line vector to a finite interval leaves residuals at both ends; a taper of sine weights controls that cost quantitatively. Chandler-Wilde–Chonchaiya–Lindner, *On spectral inclusion sets and computing the spectra and pseudospectra of bounded linear operators* ([*J. Spectr. Theory* **14**, 719–804](https://doi.org/10.4171/JST/514), §5.1, Corollaries 5.2 and 5.4), supply the following tool. Let $A$ be a bounded tridiagonal operator on $\ell^2(\mathbb{Z})$, with $M_\pm=\sup_{i\in\mathbb{Z}}|A_{i,i\pm1}|$. For a bounded operator $B$ with nonzero domain, write $\nu(B)=\inf_{\|x\|_2=1}\|Bx\|_2$. For every integer $n\ge1$, let $E_{n,k}$ be the space of vectors supported on sites $k+1,\ldots,k+n$. Then
 
