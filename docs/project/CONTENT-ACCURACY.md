@@ -2,7 +2,7 @@
 
 第32.2节的具体运行上界与字典首次命中回卷修正见[限定修正记录](CONTENT-ACCURACY-CH32-BOUNDS.md)；只覆盖所列中英文说明、相关冻结依赖与通用校对方法，不增加完整页面接受数。
 
-现行整书名册与依赖边界见[当前基线](CONTENT-ACCURACY-CURRENT.md)：该基线固定记录整合快照 `d20c811592cbeb4a4a4ce167161b1e25617b58a5` 及其上的两份文档修订，主线比较基准为已整合的 mainfcf `fcf6fdda1a7fd6c4e94c2ff7fc2f6f2502a691f1`；每语58页、46个主单元，pin `f010e3713174c4df2b28c8f8c4d9ff3c41e46a05`／`dev`、610条声明。历史 main9 与 mainbe3 的章源相同，各自相对 main89 每语57同／1变（第11章）；mainfcf 相对 main9 为57同／1变（第39章），相对 main89 为56同／2变。d20 相对 mainfcf 为56同／2变（第8、35章），相对 main89 为54同／4变（第8、11、35、39章），相对 `402b5a2e` 仍为51同／7变，相对 `b5a75e59` 仍为29同／22变／7新增。PR #313 的两项双语纠正来自基于 main89 的分支提交 `c4b75f0f`，此前 R1 文档修正由调用方提交为 `e906bc30`；两者均为 d20 祖先，均不在上述 mainfcf 快照中。CI、合入与部署状态以 [PR #313](https://github.com/the-omega-institute/trureturing-books/pull/313) 为准。第8章旧源阅读／39项复算仅按除计数行之外的字节对应复用，计数行另核；有限浴来源对应及第35章 intake 均不构成完整章节接受。第11／39章新增内容、当前 pin 的其余依赖、统计／声明地图及 main312 新媒体仍分维度待核。全部116个语言页面接受槽继续待核；历史402b／b5／main89／29d／b472 检查与审查保留原输入归属。
+现行整书名册与依赖边界见[当前基线](CONTENT-ACCURACY-CURRENT.md)：该基线固定记录整合快照 `8e3ebbb8e87990ece5144bc4e5fa2ef82231adb8` 及其上的两份文档修订，主线比较基准为已整合的 maine6cd `e6cd4ab188769b56215280658e50978ad96064df`；每语58页、46个主单元，pin `f010e3713174c4df2b28c8f8c4d9ff3c41e46a05`／`dev`、658条声明。历史 main9 与 mainbe3 的章源相同，各自相对 main89 每语57同／1变（第11章）；mainfcf 相对 main9 为57同／1变（第39章）。maine6cd 相对 mainfcf 为56同／2变（第38章、附录C），相对 main89 为54同／4变。8e3 相对 maine6cd 为56同／2变（第8、35章），相对 mainfcf 为54同／4变，相对 main89 为52同／6变（第8、11、35、38、39章及附录C），相对 `402b5a2e` 为50同／8变，相对 `b5a75e59` 仍为29同／22变／7新增。PR #313 的两项双语纠正来自基于 main89 的分支提交 `c4b75f0f`，此前 R1 文档修正提交为 `e906bc30`，main315 对应修订提交为 `0045856f`；三者均为 8e3 祖先，均不在上述 maine6cd 主线快照中。CI、合入与部署状态以 [PR #313](https://github.com/the-omega-institute/trureturing-books/pull/313) 为准。第8章旧源阅读／39项复算仅按除计数行之外的字节对应复用，计数行另核；有限浴来源对应及第35章 intake 均不构成完整章节接受。第11／38／39章新增内容、当前 pin 的其余依赖及48项新增引用、统计／图件／幻灯片／声明地图及 main312 媒体仍分维度待核。全部116个语言页面接受槽继续待核；历史402b／b5／main89／29d／b472／d20 检查与审查保留原输入归属。
 
 第32.1节的反自伴符号修正见[限定修正记录](CONTENT-ACCURACY-CH32-PARITY.md)：中英文各删除一个多余负号，三席独立审查均批准、0阻塞，已对接 main `ace7223d`。旧导出保持原输入归属，新增第35章及锁记录不由此获得准确性接受。
 
@@ -1440,9 +1440,11 @@ Conrad定理2.1／4.1只支持后期亨泽尔表述，不能认证1897／1908原
 此项只覆盖上述源对应与分级修正：原七个正式结果盒及证明、稳定 ID 和媒体序列保留；标量结果仍保留其平衡与非负性假设。完整 Landauer 应用的载体与支撑桥梁、物理热量解释和可达性不由这些行内引用自动取得。相关实验仍为带明确初态条件的数值模型，理想重置曲线不构成实际有限浴协议。独立核对包括双语、源绑定、实验标签和受影响派生物；这不是完整第八章或新增媒体的准确性批准，不增加历史整章覆盖数。范围与出版入口见 [PR #289](https://github.com/the-omega-institute/trureturing-books/pull/289)；完整有限维应用另见 [上游 PR #30492](https://github.com/the-omega-institute/trureturing/pull/30492)。
 
 
-## PR #313 批次的 mainfcf 整合快照（2026-11-15）
+## PR #313 批次的历史 mainfcf 整合快照（2026-11-15）
 
-本次基于整合快照 `d20c811592cbeb4a4a4ce167161b1e25617b58a5` 修订两份准确性文档；主线比较基准为 mainfcf `fcf6fdda1a7fd6c4e94c2ff7fc2f6f2502a691f1`。相对该主线的出版差分严格为第8／35章中英各一行和两份准确性文档，共六路径。四行纠正与分支提交 `c4b75f0f` 及此前 R1 封存字节一致；本次其余 tracked bytes 与输入 d20 一致，依赖链接保留。c4 基于 main89，此前 R1 文档修正提交为 `e906bc30`；两者均为 d20 祖先，均不在上述 mainfcf 快照中。CI、合入与部署的动态状态以 [PR #313](https://github.com/the-omega-institute/trureturing-books/pull/313) 为准。
+以下记录固定于上一轮 d20／mainfcf 候选，其规范结果为 `integration-main-fcf6/evidence/implementation-result.json`，精确提交为 `0045856f`，不替代当前整合检查或整书接受。
+
+当时基于整合快照 `d20c811592cbeb4a4a4ce167161b1e25617b58a5` 修订两份准确性文档；主线比较基准为 mainfcf `fcf6fdda1a7fd6c4e94c2ff7fc2f6f2502a691f1`。相对该主线的出版差分严格为第8／35章中英各一行和两份准确性文档，共六路径。四行纠正与分支提交 `c4b75f0f` 及此前 R1 封存字节一致；本次其余 tracked bytes 与输入 d20 一致，依赖链接保留。c4 基于 main89，此前 R1 文档修正提交为 `e906bc30`；两者均为 d20 祖先，均不在上述 mainfcf 快照中。CI、合入与部署的动态状态以 [PR #313](https://github.com/the-omega-institute/trureturing-books/pull/313) 为准。
 
 官方 SUMMARY 解析器得到中英文各58页、46根页。历史 main9／mainbe3 相对 main89 各为57同／1变（第11章）；mainfcf 相对 main9 为57同／1变（第39章），相对 main89 为56同／2变。d20 相对 mainfcf 为56同／2变（第8、35章），相对 main89 为54同／4变，相对402b仍为51同／7变（第8、11、32.1、32.2、35、39、附录C），相对b5仍为29同／22变／7新增。mainbe3 `be3e49085febd40a9f1a2cd9574746f6b4e037ba` 的第11章中英各新增144行原生 Dyson／演化与 C1 共振包络界说明，统计、声明地图 `.stills.json` 与14张已发布静帧同时变化。其后 main312 改变三个实验室的生产器／测试／静帧等34路径，未改章源、SUMMARY、pin 或工具；main315 仅改变双语第39章的相邻耦合／分块谱隙推导及统计数据，共3路径。各批主线变化均不因整合或 PR313 的局部证据取得来源、完整页面或媒体接受。
 
@@ -1451,3 +1453,16 @@ Conrad定理2.1／4.1只支持后期亨泽尔表述，不能认证1897／1908原
 历史输入 `29d092932301f91a4b875bb9010649935e27a14e`／mainbe3 的 check 为0错误、9条既有警告，双语 HTML 与纠正文字／链接断言通过，英文搜索索引另报12,805,627 bytes；原证据保留在 `integration-main-be3/evidence/`，其中字符计数不当作 UTF-8 字节数。历史 b472 加 R1 文档修正的候选（后提交为 e906）也已通过空白、源／双语、check、双语 HTML 与纠正文字／链接检查，check 为0错误、9条既有警告，英文搜索索引报告12,805,627 bytes，证据保留在 `repair-r1/evidence/`。两批均保留原输入归属，不改称 d20 检查。
 
 本次 d20 加两份文档修订的候选另跑适用的空白、正式源／双语检查、正常 `./tbook check`、双语 HTML 构建及两项纠正的文字／链接断言，均通过；check 为0错误、12条警告（1个未引用序曲图、8个历史影片 subject_commit，以及第16章形式化请求 #11／#12／#10 的3条 HTTP 403 在线核验警告），英文 HTML 报搜索索引12,812,919 bytes 大小警告，无生成的 tracked 变更。实际输入、警告数值、产物 UTF-8 字节数／Unicode 字符数及最终候选的依赖对应见外部 `integration-main-fcf6/evidence/` 的 `current-checks.json`、`html-current-assertions.json`、`preservation-and-doc-checks.json`、`validation-correspondence.json` 和 `final-candidate.json`；完整证据前缀为 `/private/tmp/qg-current-book-stale-claims-evidence-20261115/`。上述在线请求核验仍受限；自动输出证据只覆盖两项纠正，main312 媒体与116个完整语言页面仍待核。普通导出按项目第9节以构建和适用自动检查验收，规定触发时才查看受影响页面；本次未做截图／逐页阅读矩阵、本地 PDF／EPUB 或媒体重生成。调用方接续最终提交对应、R2 三席、CI 的 PDF／EPUB 与适用导出校验、合入及成功 Pages；本次不增加完整章节或整书接受，旧额度与未解决事项保留原归属。
+
+
+## PR #313 批次的 maine6cd 整合快照（2026-11-15）
+
+本次输入为 `8e3ebbb8e87990ece5144bc4e5fa2ef82231adb8`，已整合 maine6cd `e6cd4ab188769b56215280658e50978ad96064df`。相对该主线仍严格为第8／35章中英各一行和两份准确性文档，共六路径；四行与 c4、R1 修正及上一轮 0045 的封存字节一致，其余 tracked bytes 与依赖链接保全。分支提交 c4／e906／0045 的祖先身份与 main 快照分开记录，动态状态见 [PR #313](https://github.com/the-omega-institute/trureturing-books/pull/313)。
+
+main314 相对 mainfcf 共36路径：中英文第38章各新增589行异质路由剖面与带符号证书说明，双语附录C、统计、稳定声明序号、五组双语统计图、概览幻灯片与图副本、声明地图数据／`.stills.json` 及13张 JPG（12张卡片静帧及封面）更新。SUMMARY 与 pin 未变；原 f010／dev 的610条解析记录全部保全，新增48条 `HannRouterProfiles`／`HannSignedCertificate` 引用，无移除或既有记录变化，当前658条；锁 SHA-256 为 `b703269f73bf665e01edb2bac5bc38fe6dbfd706446e36867a71083880c3aff2`。第38章每语91个不同引用 GID 包含这48项；当前锁相对402b为54新增／0移除，原 HannRouterDephasing 模块摘要变化保留其历史解释。第11／38／39章新增内容、48项完整声明解释、统计／图件／幻灯片／地图与 main312 媒体均不因本次整合或局部证据取得准确性接受。
+
+正式 SUMMARY／出版解析器得到两语各58页、46根页；差分见现行基线。两语第二部正式环境仍为5／5／9／7=26，相关33项源／Frozen state 绑定、`TwoAnchorGram` 的定义、行列式与严格正性三项及相对 a313 的依赖字节另核；单位向量特例 `1−c²`、`c=1,1/2,0` 对应 `0,3/4,1`，与未改生产器及双语 SVG 一致。上一轮规范结果与 0045、当前四行章源／相关完整源建立实际对应，仅支持两项纠正；上一轮 check／HTML 仍保留 d20 输入身份。
+
+本次 8e3 加两份文档修订的候选另跑适用的空白、正式源／双语检查、`TRURETURING_DIR=/Users/auricstudio/trureturing TBOOK_REPO=the-omega-institute/trureturing-books ./tbook check`、中英文 HTML 构建及两项纠正的文字／链接断言，均通过；check 为0错误、12条警告（1个未引用序曲图、8个历史影片 subject_commit，以及第16章形式化请求 #11／#12／#10 的3条 HTTP 403 在线核验警告），英文 HTML 报搜索索引12,914,417 bytes 大小警告。四个受影响 HTML 页的文字、Gram 片段目标、f010 源链接、未解析引用及 KaTeX 错误检查通过；上述警告未指向这四页的版式，在线请求核验仍受限。正常构建同步后 tracked bytes 无生成差分，声明地图提示15张图保持最新、未启动浏览器；未改生产器或重生媒体。实际检查输入与最终文档摘要分别封存，最终仅两份文档补记结果，相关章源、SUMMARY、锁、配置、工具、生产器与媒体依赖均与检查／构建输入相同。证据在 `/private/tmp/qg-current-book-stale-claims-evidence-20261115/integration-main-e6cd/evidence/` 的 `current-check-input.json`、`current-checks.json`、`source-bilingual-current.json`、`incoming-main314-correspondence.json`、`html-current-assertions.json`、`preservation-and-doc-checks.json`、`validation-correspondence.json` 及 `final-candidate.json`；UTF-8 字节数与 Unicode 字符数分别记录。自动输出证据仅覆盖两项纠正，不授予第11／38／39章、附录C、48项新增引用、统计／图件／幻灯片／地图或整书准确性接受。
+
+旧额度不重启；没有新增章源缺陷或完整页面批准。116个完整语言页面的来源、计算／文献、媒体、输出及独立审查维度继续待核。普通导出按项目第9节构建与适用自动检查验收，规定触发时才查看受影响页面；本次未做截图／逐页阅读矩阵、本地 PDF／EPUB 或媒体重生成。调用方负责最终提交对应、已固定的 R2 三席、CI 的 PDF／EPUB 与适用导出校验、合入和成功 Pages；旧缺口保留原输入归属。
