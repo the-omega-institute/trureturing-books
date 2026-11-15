@@ -84,6 +84,24 @@ def draw(fig):
         if new:          # first appears in this chapter: solid
             fig.rect(x0, ax.Y(new), x1 - x0, ax.Y(0) - ax.Y(new), color="lean", fill="lean", fill_opacity=0.6, width=1.1)
 
+    # Shared runs and single bars use the same padded text-box collision check.
+    # Preserve the direction-aware anchors and move only colliding labels upward.
+    placed = []
+
+    def value_label(x, y, n, anchor="middle"):
+        width = fig.measure(str(n), 14)
+        left = x - (width if anchor == "end" else width / 2 if anchor == "middle" else 0) - 2
+        right = left + width + 4
+        while True:
+            collisions = [top for l, top, r, bottom in placed
+                          if left < r + 4 and l < right + 4
+                          and y - 14 < bottom + 4 and top < y + 4 + 4]
+            if not collisions:
+                break
+            y = min(collisions) - 8
+        placed.append((left, y - 14, right, y + 4))
+        fig.text(x, y, str(n), size=14, color="lean", anchor=anchor, weight=600)
+
     i = 1
     while i <= len(heights):
         n = heights[i - 1]
@@ -94,7 +112,7 @@ def draw(fig):
             if end > i:
                 # Adjacent equal bars share one label and a cap spanning the run.
                 fig.line(ax.X(i - 0.28), ax.Y(n) - 2.5, ax.X(end + 0.28), ax.Y(n) - 2.5, color="lean", width=1)
-                fig.text(ax.X((i + end) / 2), ax.Y(n) - 6, str(n), size=14, color="lean", anchor="middle", weight=600)
+                value_label(ax.X((i + end) / 2), ax.Y(n) - 6, n)
             else:
                 # A single label leans away from a taller neighbour, within the canvas.
                 x0, x1 = ax.X(i - 0.34), ax.X(i + 0.34)
@@ -107,7 +125,7 @@ def draw(fig):
                 if n > right >= 13:
                     # Keep the 20 px text boxes of nearby descending labels apart.
                     y = min(y, ax.Y(right) - 5 - 22)
-                fig.text(x, y, str(n), size=14, color="lean", anchor=anchor, weight=600)
+                value_label(x, y, n, anchor)
         i = end + 1
     ticks = list(dict.fromkeys([1, *range(5, count, 5), count]))
     ax.xaxis(ticks=ticks, labels=[str(v) for v in ticks[:-1]] + [t("终", "C")], size=14)
