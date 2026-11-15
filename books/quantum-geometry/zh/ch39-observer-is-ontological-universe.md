@@ -1688,8 +1688,133 @@ $$
 与 $s=0$、$m=m_n$ 时的统一界矛盾。这个反证覆盖每个正实数 $K$；从零开始的具体反例族是证明中的构造，不是另加假设，也不是由有限样本外推的结论。完整证明由 Lean 内核检查。
 :::
 
+反例族说明某些真实前缀的电荷可以逐层累积；要控制任意起点、任意长度的区段，还须同时控制每层块内部的所有前缀。这里可以复用一个与 Tribonacci 字母表无关的估计：每层至多留下一块未走完的子块，其余完整子块的电荷逐层相加。
+
+::: {.lemma #lem-ch39-p2e-substitution-prefix-envelope title="替代词的逐层前缀包络" lean="D5/S1/Words/SubstitutionPrefixEnvelope.prefix_envelope"}
+设 $\mathcal A$ 为任意字母表，$w:\mathcal A\to\mathbb Z$ 为整数权重，$f$ 将每个字母映为一个有限字，并按拼接延伸到有限字。约定 $f^0(a)$ 为单字母字 $a$，且
+
+$$
+Q(v)=\sum_{r=0}^{|v|-1}(-1)^r w(v_r).
+$$
+
+设 $M\in\mathbb Z$、$B\in\mathbb N$、$H:\mathbb N\to\mathbb Z$ 满足
+
+$$
+\begin{aligned}
+&0\le M,\qquad 0\le H(i)
+&&\text{对所有 }i\in\mathbb N,\\
+&|w(a)|\le M,\qquad |f(a)|\le B
+&&\text{对所有 }a\in\mathcal A,\\
+&|Q(f^i(a))|\le H(i)
+&&\text{对所有 }i\in\mathbb N,\ a\in\mathcal A.
+\end{aligned}
+$$
+
+则对所有 $j,t\in\mathbb N$ 与 $a\in\mathcal A$，
+
+$$
+\left|Q\bigl(\operatorname{take}_t(f^j(a))\bigr)\right|
+\le P(j):=M+B\sum_{i=0}^{j-1}H(i).
+$$
+
+其中 $\operatorname{take}_t$ 取前 $\min(t,|f^j(a)|)$ 个字母，$j=0$ 时求和为空。结论包含空前缀、整个像与超出字长的截取指标；不要求字母表有限、像非空或像长具有特定奇偶性。
+:::
+
+::: proof
+局部从正号开始的交替和满足 $Q(uv)=Q(u)+(-1)^{|u|}Q(v)$，所以 $|Q(uv)|\le|Q(u)|+|Q(v)|$。零层像只是一个字母，所有前缀的绝对电荷至多为 $M$。将 $f^{j+1}(a)$ 写成由 $f(a)$ 指定的至多 $B$ 个 $j$ 层子块，任意前缀由若干完整子块与至多一个子块的前缀组成。完整部分贡献至多 $BH(j)$，未完成的部分由归纳假设控制在 $P(j)$ 内，故总量至多 $P(j)+BH(j)=P(j+1)$。若截取指标超过总长，则只有完整块；空像同样不增加电荷。整个归纳只用绝对值估计，不丢掉拼接时的相位。完整证明由 Lean 内核检查。
+:::
+
+对于实际 Tribonacci 词，完整块的电荷公式给出线性的 $H(j)$，上式便给出二次的 $P(j)$。还需把任意实际区段放进合适层数的块中，才能得到与起点无关的界。
+
+::: {.theorem #thm-ch39-p2e-tribonacci-uniform-log-squared title="实际 Tribonacci 词的统一对数平方区段界" lean="D5/S1/Words/TribonacciUniformLogSquared.uniform_log_squared"}
+取 $\sigma(A)=AB$、$\sigma(B)=AC$、$\sigma(C)=A$，令 $W=\lim_{n\to\infty}\sigma^n(A)$ 为从 $A$ 出发、从零编号的无限词。赋予整数权重 $w(A)=2$、$w(B)=1$、$w(C)=0$，并在每个区段内部从正号开始定义
+
+$$
+F(W_{[s,s+m)})=\sum_{r=0}^{m-1}(-1)^r w(W_{s+r}).
+$$
+
+存在一个与起点及长度都无关的实常数 $C>0$，使
+
+$$
+\forall s,m\in\mathbb N,\qquad
+\left|F(W_{[s,s+m)})\right|
+\le C\bigl(\log(m+2)\bigr)^2.
+$$
+
+整数电荷与自然数长度在不等式中视为实数，$\log$ 为自然对数。量词包含 $m=0$，此时电荷为零；即使 $s$ 为奇数，区段首项仍取正号。
+:::
+
+::: proof
+**完整块到前缀。** 沿用 $\tau=\sigma^4$。它的三个像长分别为 $13,11,7$。前面求出的完整块电荷为 $2$、$2-(-1)^j$ 与 $2-(2j+2)(-1)^j$，因此对所有字母 $X$ 与层数 $j$，
+
+$$
+|F(\tau^j(X))|\le H(j):=2j+4.
+$$
+
+把 [@lem-ch39-p2e-substitution-prefix-envelope] 用于 $M=2$、$B=13$ 与此 $H$，得到每个 $j$ 层像的所有前缀的共同包络
+
+$$
+\begin{aligned}
+P(j)&=2+13\sum_{i=0}^{j-1}(2i+4)\\
+&=2+13j^2+39j.
+\end{aligned}
+$$
+
+这是对所有截取位置的控制，不能仅由完整 $A$ 块的恒定电荷 $2$ 代替。
+
+**前缀到局部区段。** 设 $v$ 是 $T=\tau^j(X)\tau^j(Y)$ 的一个连续子字。$T$ 的每个前缀至多由这两个块各自的一个前缀拼成，故其绝对电荷至多为 $2P(j)$。若 $R$ 是 $v$ 之前的前缀，则 $R$ 与 $Rv$ 都是 $T$ 的前缀，而
+
+$$
+F(Rv)-F(R)=(-1)^{|R|}F(v).
+$$
+
+取绝对值得到
+
+$$
+|F(v)|\le4P(j)\le156(j+1)^2\qquad(j\in\mathbb N).
+$$
+
+这个两块估计不要求块长为奇数，也不预设这两个块在无限词中的出现位置。只落在一个块内的区段也适用，因为它是 $\tau^j(X)\tau^j(X)$ 的连续子字。
+
+**实际词中的包含关系。** 三个 $\tau$ 像的长度都至少为 $7$。从零层长度为一出发，对所有字母同时归纳，每一步至少拼接七个前层像，故
+
+$$
+|\tau^j(X)|\ge7^j\qquad\text{对所有 }j\in\mathbb N,\ X\in\{A,B,C\}.
+$$
+
+现在固定任意 $s$ 与 $m>0$，取 $k=\lfloor\log_7 m\rfloor$、$j=k+1$，使 $7^k\le m<7^j$。选足够大的 $N\ge j$，使 $s+m\le|\tau^N(A)|$。由于这些 $A$ 像是 $W$ 的实际前缀，$W_{[s,s+m)}$ 恰等于从 $\tau^N(A)$ 删去前 $s$ 个字母后再取 $m$ 个字母的字。迭代的拼接恒等式进一步给出
+
+$$
+\tau^N(A)=\tau^j\bigl(\tau^{N-j}(A)\bigr).
+$$
+
+右边是按实际出现顺序排列的 $j$ 层块，且每一块都严格长于 $m$。从区段首字母所在块开始，长度为 $m$ 的区段只能留在这一块内，或进入紧随其后的第二块；若进入第二块，剩余长度小于 $m$，不可能穿过整个第二块。若首块已经是最后一块，则总长度条件保证区段在该块内结束。因此，整个实际区段确实包含于一块或两块相邻像中，可以应用上一段的 $156(j+1)^2$ 界。选择较高的 $N$ 只为容纳起点 $s$；决定估计大小的 $j$ 只由 $m$ 决定。
+
+**层数到长度。** 由 $2^k\le7^k\le m$ 与对数的单调性，
+
+$$
+\begin{aligned}
+k\log2&\le\log(m+2),\\
+\log2&\le\log(m+2),\\
+(j+1)\log2=(k+2)\log2&\le3\log(m+2).
+\end{aligned}
+$$
+
+两边非负且 $\log2>0$，所以平方并代入区段估计，得到
+
+$$
+\begin{aligned}
+|F(W_{[s,s+m)})|
+&\le156(j+1)^2\\
+&\le\frac{1404}{(\log2)^2}\bigl(\log(m+2)\bigr)^2.
+\end{aligned}
+$$
+
+空区段的电荷为零，另行直接满足同一不等式。于是 $C=1404/(\log2)^2>0$ 是存在量词的一个充分见证；这里没有优化这个常数。完整证明由 Lean 内核检查。
+:::
+
 ::: {.remark #rem-ch39-p2e-tribonacci-refutation-boundaries title="交替偏差、谱文献与物理适用边界"}
-**文献背景与适用边界，未作为本书的物理形式化结论。** 上面的平方是替代层数 $n$ 的平方。该反证没有给出所有长度上的最优上界，也没有否定或证明 $O((\log(m+2))^2)$ 的统一上界。$m_n$ 是键字的前缀长度，不能直接等同于前面指定的偶数格点数 $N_j$。
+**文献背景与适用边界，未作为本书的物理形式化结论。** 前缀反例中 $|q_n|\ge n^2$ 的平方是替代层数 $n$ 的平方；[@thm-ch39-p2e-tribonacci-uniform-log-squared] 则控制每个长度与每个起点。前者说明存在足够大的真实前缀电荷并否定统一对数界，后者给出统一对数平方上界。二者的量词不同；这里不据此宣布所有长度上的最优渐近率、精确 $\Theta((\log m)^2)$ 标度或最优常数。最优率问题仍留待进一步分析。$m_n$ 是键字的前缀长度，不能直接等同于前面指定的偶数格点数 $N_j$。
 
 Adamczewski，*Symbolic discrepancy and self-similar dynamics*（[doi:10.5802/aif.2079](https://doi.org/10.5802/aif.2079)，定理 1、命题 10–11）提供替代系统偏差与临界谱消去的一般框架。其加权下界中存在合适零均值字母权重的结论，并不自动指定这里随位置交替的权重；若把位置奇偶性编码进扩充字母表，还须另行核对本原性、频率、权重与消去条件。上面的证明直接计算原始字，既不借用该存在性结论来指定权重，也不据此主张机制或具体公式的文献新颖性。
 
@@ -1697,7 +1822,7 @@ Adamczewski，*Symbolic discrepancy and self-similar dynamics*（[doi:10.5802/ai
 
 Hermisson 对多字母替代的边缘重整化特征值与无穷动力学指数的讨论（[doi:10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304)，arXiv:cond-mat/9808238，第 11 页）没有在该处给出本字的特定标度。Hida 的 Fibonacci XXZ 分析（[doi:10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296)，arXiv:cond-mat/0404606v2）中，式 (38) 的 $\Delta E\sim\exp[-\kappa(\log N)^2]$ 属于强弱耦合分离下的相互作用各向同性模型的微扰重整化；式 (28) 的自由 XY 情形给出的是有限指数幂律 $\Delta E\sim N^{-z}$。这些结论不替代对本链实际有限矩阵、端点、奇偶截断与所求谱量的核对。
 
-[@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线；它没有反驳某个多项式谱隙界，没有决定指定偶数开前缀的 $\delta_{\rho,j}$ 及其速率，也没有构造多体态或证明空间纠缠标度。后面的奇数重复窗口与完整逆矩阵质量路线仍须按各自前提拼接；[@prob-ch39-p2e-fractal-horizon] 的物理态、空间切口与劳齐边界对应仍需独立建立。
+[@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线。[@thm-ch39-p2e-tribonacci-uniform-log-squared] 提供的是实际词上、对起点一致的交替电荷控制；结合前面的有限乘积恒等式，它可作为分析跃迁比值的组合输入。它本身没有给出完整逆矩阵的范数或质量估计，因而没有决定指定偶数开前缀的 $\delta_{\rho,j}$ 及其速率，也没有反驳某个多项式谱隙界。后面的奇数重复窗口与完整逆矩阵质量路线仍须按各自前提拼接。沿前述 Slater 态路线讨论空间纠缠时，还须构造实际占据投影并分析空间压缩；物理态、空间切口与劳齐边界的对应及 [@prob-ch39-p2e-fractal-horizon] 的熵标度仍需独立建立。
 :::
 
 ::: {.remark #rem-ch39-p2e-tridiagonal-localization title="保留端点残差的三对角局部化（文献结果，未在本书形式化）"}

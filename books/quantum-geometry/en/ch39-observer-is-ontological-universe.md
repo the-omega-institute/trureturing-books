@@ -1688,8 +1688,133 @@ $$
 contradicting the uniform bound at $s=0$, $m=m_n$. This contradiction covers every positive real $K$. The explicit family starting at zero is a construction within the proof, with no extra hypothesis and no extrapolation from finite samples. The full proof is checked by the Lean kernel.
 :::
 
+The counterexample family shows how charge can accumulate across levels in certain actual prefixes. Controlling intervals of every length at every start also requires control of all prefixes inside each level's blocks. A reusable estimate, independent of the Tribonacci alphabet, supplies this step: at each level, at most one child block remains unfinished, while the charges of the complete children contribute a sum over levels.
+
+::: {.lemma #lem-ch39-p2e-substitution-prefix-envelope title="A Level Prefix Envelope for Substitution Words" lean="D5/S1/Words/SubstitutionPrefixEnvelope.prefix_envelope"}
+Let $\mathcal A$ be any alphabet, let $w:\mathcal A\to\mathbb Z$ be an integer weight, and let $f$ send each letter to a finite word, extended to finite words by concatenation. Take $f^0(a)$ to be the one-letter word $a$, and set
+
+$$
+Q(v)=\sum_{r=0}^{|v|-1}(-1)^r w(v_r).
+$$
+
+Suppose $M\in\mathbb Z$, $B\in\mathbb N$, and $H:\mathbb N\to\mathbb Z$ satisfy
+
+$$
+\begin{aligned}
+&0\le M,\qquad 0\le H(i)
+&&\text{for every }i\in\mathbb N,\\
+&|w(a)|\le M,\qquad |f(a)|\le B
+&&\text{for every }a\in\mathcal A,\\
+&|Q(f^i(a))|\le H(i)
+&&\text{for every }i\in\mathbb N,\ a\in\mathcal A.
+\end{aligned}
+$$
+
+Then, for every $j,t\in\mathbb N$ and $a\in\mathcal A$,
+
+$$
+\left|Q\bigl(\operatorname{take}_t(f^j(a))\bigr)\right|
+\le P(j):=M+B\sum_{i=0}^{j-1}H(i).
+$$
+
+Here $\operatorname{take}_t$ takes the first $\min(t,|f^j(a)|)$ letters, and the sum is empty at $j=0$. The conclusion includes empty prefixes, whole images, and indices beyond the word's end. It requires neither a finite alphabet, nonempty images, nor any prescribed parity of image lengths.
+:::
+
+::: proof
+The alternating charge with a local positive first sign satisfies $Q(uv)=Q(u)+(-1)^{|u|}Q(v)$, hence $|Q(uv)|\le|Q(u)|+|Q(v)|$. A level-zero image is a single letter, so every prefix has absolute charge at most $M$. Write $f^{j+1}(a)$ as the concatenation of at most $B$ level-$j$ children specified by $f(a)$. Each prefix consists of complete children followed by at most one child's prefix. The complete part contributes at most $BH(j)$, and induction bounds the unfinished part by $P(j)$, giving $P(j)+BH(j)=P(j+1)$. An index beyond the total length leaves only complete blocks; empty images add no charge. This induction uses absolute values while retaining the exact concatenation phase. The full proof is checked by the Lean kernel.
+:::
+
+For the literal Tribonacci word, the complete-block charge formulas give a linear $H(j)$, so this estimate yields a quadratic $P(j)$. To obtain a bound independent of the start, we must also place each actual interval inside blocks at a suitable level.
+
+::: {.theorem #thm-ch39-p2e-tribonacci-uniform-log-squared title="A Uniform Squared-Logarithmic Interval Bound for the Actual Tribonacci Word" lean="D5/S1/Words/TribonacciUniformLogSquared.uniform_log_squared"}
+Take $\sigma(A)=AB$, $\sigma(B)=AC$, and $\sigma(C)=A$, and let $W=\lim_{n\to\infty}\sigma^n(A)$ be the infinite word starting from $A$, indexed from zero. Assign integer weights $w(A)=2$, $w(B)=1$, and $w(C)=0$, and define the charge with a positive first sign within each interval:
+
+$$
+F(W_{[s,s+m)})=\sum_{r=0}^{m-1}(-1)^r w(W_{s+r}).
+$$
+
+There exists a real constant $C>0$, independent of both start and length, such that
+
+$$
+\forall s,m\in\mathbb N,\qquad
+\left|F(W_{[s,s+m)})\right|
+\le C\bigl(\log(m+2)\bigr)^2.
+$$
+
+The integer charge and natural-number length are viewed as real numbers in this inequality, and $\log$ is the natural logarithm. The quantifiers include $m=0$, when the charge is zero. The first sign remains positive even when $s$ is odd.
+:::
+
+::: proof
+**From complete blocks to prefixes.** Retain $\tau=\sigma^4$, whose three image lengths are $13,11,7$. The complete-block charges computed above are $2$, $2-(-1)^j$, and $2-(2j+2)(-1)^j$. Thus, for every letter $X$ and level $j$,
+
+$$
+|F(\tau^j(X))|\le H(j):=2j+4.
+$$
+
+Apply [@lem-ch39-p2e-substitution-prefix-envelope] with $M=2$, $B=13$, and this $H$. Every prefix of every level-$j$ image has the common envelope
+
+$$
+\begin{aligned}
+P(j)&=2+13\sum_{i=0}^{j-1}(2i+4)\\
+&=2+13j^2+39j.
+\end{aligned}
+$$
+
+This controls every truncation position; the constant charge $2$ of a complete $A$ block cannot replace it.
+
+**From prefixes to local intervals.** Let $v$ be a contiguous subword of $T=\tau^j(X)\tau^j(Y)$. Each prefix of $T$ is the concatenation of at most one prefix from each block, so its absolute charge is at most $2P(j)$. If $R$ is the prefix preceding $v$, then both $R$ and $Rv$ are prefixes of $T$, and
+
+$$
+F(Rv)-F(R)=(-1)^{|R|}F(v).
+$$
+
+Taking absolute values gives
+
+$$
+|F(v)|\le4P(j)\le156(j+1)^2\qquad(j\in\mathbb N).
+$$
+
+This two-block estimate requires no odd-length hypothesis and assumes no occurrence of these blocks in the infinite word. An interval contained in a single block also qualifies, since it is a contiguous subword of $\tau^j(X)\tau^j(X)$.
+
+**Containment in the actual word.** Each $\tau$ image has length at least $7$. Starting with length one at level zero, simultaneous induction over all letters concatenates at least seven preceding-level images at every step, giving
+
+$$
+|\tau^j(X)|\ge7^j\qquad\text{for every }j\in\mathbb N,\ X\in\{A,B,C\}.
+$$
+
+Now fix any $s$ and $m>0$. Take $k=\lfloor\log_7 m\rfloor$ and $j=k+1$, so $7^k\le m<7^j$. Choose $N\ge j$ large enough that $s+m\le|\tau^N(A)|$. These $A$ images are actual prefixes of $W$, so $W_{[s,s+m)}$ is exactly the word obtained by dropping the first $s$ letters of $\tau^N(A)$ and taking the next $m$. The concatenation identity for substitution iterates gives
+
+$$
+\tau^N(A)=\tau^j\bigl(\tau^{N-j}(A)\bigr).
+$$
+
+The right side is a concatenation of level-$j$ blocks in their actual order, each strictly longer than $m$. Starting in the block containing its first letter, an interval of length $m$ either stays there or enters the immediately following block. In the latter case its remaining length is less than $m$, so it cannot cross the entire second block. If the starting block is already the last one, the total-length condition ensures that the interval ends inside it. Thus the whole actual interval lies in one block or two adjacent blocks, and the bound $156(j+1)^2$ applies. The higher level $N$ merely accommodates the start $s$; the level $j$ determining the bound depends only on $m$.
+
+**From level to length.** Since $2^k\le7^k\le m$, monotonicity of the logarithm gives
+
+$$
+\begin{aligned}
+k\log2&\le\log(m+2),\\
+\log2&\le\log(m+2),\\
+(j+1)\log2=(k+2)\log2&\le3\log(m+2).
+\end{aligned}
+$$
+
+Both sides are nonnegative and $\log2>0$. Squaring and inserting the interval estimate yields
+
+$$
+\begin{aligned}
+|F(W_{[s,s+m)})|
+&\le156(j+1)^2\\
+&\le\frac{1404}{(\log2)^2}\bigl(\log(m+2)\bigr)^2.
+\end{aligned}
+$$
+
+An empty interval has zero charge and satisfies the same inequality directly. Hence $C=1404/(\log2)^2>0$ is one sufficient witness for the existential statement; no optimization of this constant is asserted. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.remark #rem-ch39-p2e-tribonacci-refutation-boundaries title="Alternating Discrepancy, Spectral Literature, and Physical Scope"}
-**Literature background and scope, not a formalized physical conclusion of this book.** The square above is a square of the substitution level $n$. The refutation gives no optimal upper bound for all lengths, and neither refutes nor proves a uniform $O((\log(m+2))^2)$ upper bound. The bond-word prefix length $m_n$ cannot be identified directly with the specified even site count $N_j$.
+**Literature background and scope, not a formalized physical conclusion of this book.** The square in the prefix estimate $|q_n|\ge n^2$ is a square of the substitution level $n$; [@thm-ch39-p2e-tribonacci-uniform-log-squared] controls every length at every start. The former exhibits sufficiently large actual prefix charges and rules out a uniform logarithmic bound; the latter supplies a uniform squared-logarithmic upper bound. Their quantifiers differ. We do not infer an optimal asymptotic rate over all lengths, exact $\Theta((\log m)^2)$ scaling, or a sharp constant here. Determining the optimal rate remains a further question. The bond-word prefix length $m_n$ cannot be identified directly with the specified even site count $N_j$.
 
 Adamczewski, *Symbolic discrepancy and self-similar dynamics* ([doi:10.5802/aif.2079](https://doi.org/10.5802/aif.2079), Theorem 1 and Propositions 10–11), provides a general framework for substitution discrepancy and cancellation in the critical spectrum. The existence of a suitable zero-mean letter weight in its weighted lower bounds does not automatically select the position-alternating weight here. Encoding position parity in an enlarged alphabet would require separate checks of primitivity, frequencies, weights, and cancellation conditions. The proof above computes directly on the original word; it neither uses that existence statement to select its weights nor claims literature novelty for the mechanism or explicit formula.
 
@@ -1697,7 +1822,7 @@ For physical spectral quantities, Juhász derives an auxiliary-matrix method fro
 
 Hermisson's discussion of multi-letter substitutions with marginal renormalization eigenvalues and infinite dynamical exponent ([doi:10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304), arXiv:cond-mat/9808238, p. 11) gives no specific scaling for this word in that passage. In Hida's Fibonacci XXZ analysis ([doi:10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296), arXiv:cond-mat/0404606v2), the scale $\Delta E\sim\exp[-\kappa(\log N)^2]$ in Eq. (38) comes from perturbative renormalization of the interacting isotropic model with separated strong and weak couplings. The free XY case in Eq. (28) instead gives a finite power-law exponent, $\Delta E\sim N^{-z}$. These conclusions do not replace checks of this chain's actual finite matrices, endpoints, parity truncations, and spectral quantity.
 
-[@thm-ch39-p2e-tribonacci-prefix-log-refutation] rules out using this uniform logarithmic interval bound as a premise for an inverse-matrix estimate. It does not refute a polynomial spectral-gap bound, determine $\delta_{\rho,j}$ or its rate along the specified even open prefixes, construct a many-body state, or prove a spatial-entanglement law. The subsequent route through odd repetition windows and full-inverse mass still requires assembly under its own premises. Relating physical states, spatial cuts, and the Rauzy boundary in [@prob-ch39-p2e-fractal-horizon] remains a separate task.
+[@thm-ch39-p2e-tribonacci-prefix-log-refutation] rules out using the uniform logarithmic interval bound as a premise for an inverse-matrix estimate. [@thm-ch39-p2e-tribonacci-uniform-log-squared] supplies control of alternating charge on the actual word, uniformly over starts. Together with the finite-product identity above, it provides a combinatorial input for analyzing hopping ratios. It gives no full-inverse norm or mass estimate by itself, and therefore determines neither $\delta_{\rho,j}$ nor its rate along the specified even open prefixes; it also does not refute a polynomial spectral-gap bound. The subsequent route through odd repetition windows and full-inverse mass still requires assembly under its own premises. For the Slater-state route described above, spatial entanglement additionally requires construction of the actual occupied projector and analysis of its spatial compression. Relating physical states, spatial cuts, and the Rauzy boundary, and establishing the entropy scaling in [@prob-ch39-p2e-fractal-horizon], remain separate tasks.
 :::
 
 ::: {.remark #rem-ch39-p2e-tridiagonal-localization title="Tridiagonal Localization with Boundary Residuals (Literature result, not formalized in this book)"}
