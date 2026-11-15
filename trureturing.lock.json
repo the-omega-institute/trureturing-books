@@ -3613,6 +3613,14 @@
       "line": 97,
       "signature": "theorem unitary_phase_of_connected_ray_tests (A : Matrix ι ι ℂ) (hA : A ∈ Matrix.unitaryGroup ι ℂ) (hcoord : ∀ i : ι, PreservesRay A (Pi.single i 1)) (tests : Set (ι → ℂ)) (htests : ∀ x ∈ tests, PreservesRay A x) (hconnect : RaySupportConnected tests) : ∃ c : ℂ, ‖c‖ = 1 ∧ A = c • (1 : Matrix ι ι ℂ)"
     },
+    "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation": {
+      "module": "D5/S3/Quantum/GleasonComplexRepresentation",
+      "name": "Gleason.ProjectionPackage.gleason_representation",
+      "kind": "theorem",
+      "statement_id": "sha256:dd9874dc790ed4367402ce8fce42837ee0c9f1b2ff1ccb61b47c1769440a4326",
+      "line": 899,
+      "signature": "theorem ProjectionPackage.gleason_representation (OP : ProjectionPackage N) (hN : 3 ≤ N) : ∃! ρ : Matrix (Fin N) (Fin N) ℂ, ρ.PosSemidef ∧ ρ.trace = 1 ∧ ∀ P, IsStarProjection P → OP.p P = ((ρ * P).trace).re"
+    },
     "D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace": {
       "module": "D5/S3/Quantum/Information/ActualPureQubitGeometry",
       "name": "D5.S3.Quantum.Information.ActualPureQubitCostInfimum.blochMatrix_trace",

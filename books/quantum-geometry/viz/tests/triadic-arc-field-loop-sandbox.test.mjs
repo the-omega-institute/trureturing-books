@@ -81,6 +81,14 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const dot = (a, b) => a.reduce((sum, x, i) => sum + x * b[i], 0);
 const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
 const state = (p = page) => p.evaluate(() => window.TRIAD_LOOP_DEBUG.state);
+async function waitPreset(p, card, timeout = 3000) {
+  const expected = { card, ...CARDS[card] };
+  return until(p, ({ card: id, stage, view }) => {
+    const s = window.TRIAD_LOOP_DEBUG.state;
+    return s.preset === id && s.triadStage === stage && s.stageIndex === stage
+      && s.arcAngleDeg === 60 && s.cancelSharpness === 1 && s.view === view && !s.playing && s.max === 1;
+  }, expected, timeout);
+}
 async function input(selector, value, p = page) {
   await p.locator(selector).evaluate((el, v) => { el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, value);
   await settle(p);
@@ -101,7 +109,9 @@ async function pause(p = page) {
   if ((await state(p)).playing) await p.click('#play');
   await settle(p);
 }
-async function pick(card, p = page) { await p.click(`[data-preset="${card}"]`); await settle(p); await pause(p); }
+async function pick(card, p = page) {
+  await p.click(`[data-preset="${card}"]`); await settle(p); await pause(p); await waitPreset(p, card);
+}
 const picture = async () => createHash('sha256').update(await page.locator('#stage').screenshot({ animations: 'disabled' })).digest('hex');
 
 // 带主元的高斯消元独立求行列式，不调用页面的余子式函数。
@@ -443,6 +453,7 @@ for (const lang of ['zh', 'en']) {
   check('first visibility: native scrolling starts playback', await playsAfter(p,
     () => p.locator('#stage').scrollIntoViewIfNeeded(), () => window.TRIAD_LOOP_DEBUG.state));
   await pause(p);
+  await waitPreset(p, 'arc-seed-triad');
   checkPreset(await state(p), 'arc-seed-triad', 'first visibility after pause');
   await p.close();
 }
@@ -501,6 +512,7 @@ for (const scheme of ['dark', 'light']) {
       if (embed) { if (i) { await p.click('[data-tour="next"]'); await settle(p); } await pause(p); }
       else await pick(card, p);
       await p.locator('#stage').scrollIntoViewIfNeeded(); await settle(p);
+      await waitPreset(p, card);
       checkPreset(await state(p), card, `${tag}/${card}`);
       const view = await stageView(p, '#stage', figure), overlaps = await labelOverlaps(p, '.stage .tag', 0);
       check(`${tag}/${card}: zero layout, HUD or label overlaps and horizontal overflow`, view.layout.length === 0 && view.hud.length === 0

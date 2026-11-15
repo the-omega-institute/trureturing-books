@@ -4,7 +4,7 @@
 
 在[第一章](ch01-measurement.md)末尾，我们把单量子比特从双分量复列向量（四个实坐标）的迷雾中解放出来，还原成了三维单位球面 $S^2$ 上的一根实单位向量 $\vv{a}$。现在，让我们面对量子力学最核心的定量问题：当已知状态 $\vv{a}$ 与探测方向 $\vv{b}$ 相遇时，为什么探测器报出“相符”的概率恰好等于希尔伯特空间夹角余弦的平方 $\cos^2(\theta/2)$，换算到布洛赫球面上又恰好等于 $\frac{1 + \cos\theta}{2}$？
 
-在传统教科书里，“玻恩定则（Born's rule，$p = |\langle\phi\mid\psi\rangle|^2$）”往往被当作一条从天而降的独立公设：狄拉克与冯·诺依曼要求你先接受它，因为“实验测出来就是模平方”。本章将用奥卡姆剃刀砍掉冗余的“第 3 点 $C$”，展示玻恩法则并非外加在几何之上的突兀统计补丁，而是**两子零冗余内积投影与勾股模长守恒所诱导的典范无坐标基迹配对**（其中 [@thm-born-probability-skeleton] 严格确立迹配对满足概率公理的**充分性**，而排除其他非标准赋值所需的效应可加性**唯一性**在有限维由章末 [@thm-busch-effect-density] 给出，只在投影格上要求可加时的情形见 [@rem-gleason-literature]）。
+在传统教科书里，“玻恩定则（Born's rule，$p = |\langle\phi\mid\psi\rangle|^2$）”往往被当作一条从天而降的独立公设：狄拉克与冯·诺依曼要求你先接受它，因为“实验测出来就是模平方”。本章将用奥卡姆剃刀砍掉冗余的“第 3 点 $C$”，展示玻恩法则并非外加在几何之上的突兀统计补丁，而是**两子零冗余内积投影与勾股模长守恒所诱导的典范无坐标基迹配对**（其中 [@thm-born-probability-skeleton] 严格确立迹配对满足概率公理的**充分性**，而排除其他非标准赋值所需的效应可加性**唯一性**在有限维由章末 [@thm-busch-effect-density] 给出；有限复维 $N\ge3$ 的投影格唯一性见 [@thm-gleason-finite-projection]，更广范围见 [@rem-gleason-literature]）。
 
 ::: {.figure src="ch02-overview"}
 **图 2。** 本章地图：第 I 栏，灰色虚线的外部竖轴 $C$ 被划掉，青色的箭头 $A$ 自己当轴，琥珀色的箭头 $B$ 与它只隔一个角 $\theta$；第 II 栏，从琥珀色的 $\vv{b}$ 向青色的 $\vv{a}$ 线作垂线，垂足就是 $C$，青色粗线是影子 $\vv{c}$，品红虚线是垂直的剩余；第 III 栏，布洛赫球上相隔 $180^\circ$ 的 $\lvert 0\rangle$ 与 $\lvert 1\rangle$，在希尔伯特空间里只相隔 $90^\circ$。
@@ -208,7 +208,7 @@ $$
 - 四次方之和 $\cos^4(\theta/2) + \sin^4(\theta/2)$ 在 $\theta = 90^\circ$ 时等于 $\frac{1}{4} + \frac{1}{4} = \frac{1}{2} \neq 1$，一半的概率凭空人间蒸发；
 - **唯独二次方之和** $\cos^2(\theta/2) + \sin^2(\theta/2) \equiv 1$ 对宇宙中一切夹角 $\theta$ 恒等于 $1$！
 
-换句话说，**玻恩概率法则在几何上体现为欧几里得—希尔伯特空间勾股定理与典范无坐标基迹配对的自然结合。** 在重叠模长的幂次候选族 $|\langle\phi\mid\psi\rangle|^p$ 之中，正交完备通道总权重恒为 $1$ 的要求唯一挑出了二次幂 $p = 2$；在一般算子层面上，[@thm-born-probability-skeleton] 严格证明了典范迹配对 $\Tr(\rho P)$ 构成合法概率赋值的**充分性**，而若要在任意一般标架函数或广义测量效应中彻底排除非玻恩赋值以获得严格的**唯一性**，则还需补充跨基正交可加或正效应可加前提（有限维效应上的唯一性见下文 [@thm-busch-effect-density]，投影格上的情形见 [@rem-gleason-literature]）。
+换句话说，**玻恩概率法则在几何上体现为欧几里得—希尔伯特空间勾股定理与典范无坐标基迹配对的自然结合。** 在重叠模长的幂次候选族 $|\langle\phi\mid\psi\rangle|^p$ 之中，正交完备通道总权重恒为 $1$ 的要求唯一挑出了二次幂 $p = 2$；在一般算子层面上，[@thm-born-probability-skeleton] 严格证明了典范迹配对 $\Tr(\rho P)$ 构成合法概率赋值的**充分性**，而若要在任意一般标架函数或广义测量效应中彻底排除非玻恩赋值以获得严格的**唯一性**，则还需补充跨基正交可加或正效应可加前提（有限维效应上的唯一性见下文 [@thm-busch-effect-density]，有限复维投影格上的唯一性见 [@thm-gleason-finite-projection]，更广范围见 [@rem-gleason-literature]）。
 
 现在，让我们用 [@prop-qubit-bloch-core] 与 [@thm-rank-one-born-pairing] 联手，兑现第一章末尾留下的承诺，亲手揭开布洛赫球面夹角 $\theta$ 与希尔伯特空间半角 $\theta/2$ 的换算关系。
 
@@ -395,7 +395,7 @@ $$
 
 > 不必先立坐标再测量；读数最亮的方向，就是读数自己挑出的坐标轴。
 
-有三条界线要说清。第一，[@thm-positive-dual-generation] 的长度界是 $\dim A$，在单比特上是 $4$；实际只剥出两层，是因为 $\mathbb{C}^2$ 里至多有两个互相正交的单位向量（$\Tr(p_i p_j) = 0$ 即 $\langle\psi_i\mid\psi_j\rangle = 0$），这个更紧的界 $2$ 是本例的手工观察，不是定理的结论。第二，单比特满足七项是上面的手工推导；所引 Lean 文件在文件头写明，紧致归一化基上的应用与状态一侧的谱桥是另外的数学义务，不在这条定理之内。第三，这条定理分解的是在探针上为正的读数，回答“读数由什么组成”；它没有断言“满足可加性的概率赋值必取迹配对形式”。那个唯一性问题在有限维效应上由下面的 [@thm-busch-effect-density] 回答；投影格上的格里森定理见 [@rem-gleason-literature]。
+有三条界线要说清。第一，[@thm-positive-dual-generation] 的长度界是 $\dim A$，在单比特上是 $4$；实际只剥出两层，是因为 $\mathbb{C}^2$ 里至多有两个互相正交的单位向量（$\Tr(p_i p_j) = 0$ 即 $\langle\psi_i\mid\psi_j\rangle = 0$），这个更紧的界 $2$ 是本例的手工观察，不是定理的结论。第二，单比特满足七项是上面的手工推导；所引 Lean 文件在文件头写明，紧致归一化基上的应用与状态一侧的谱桥是另外的数学义务，不在这条定理之内。第三，这条定理分解的是在探针上为正的读数，回答“读数由什么组成”；它没有断言“满足可加性的概率赋值必取迹配对形式”。那个唯一性问题在有限维效应上由下面的 [@thm-busch-effect-density] 回答；有限复维 $N\ge3$ 的投影格情形由 [@thm-gleason-finite-projection] 回答，更广范围见 [@rem-gleason-literature]。
 
 **反过来问：读数一定是迹配对吗？** 前面的定理说，给定密度矩阵 $\rho$，迹配对 $E \mapsto \Tr(\rho E)$ 是合法的概率赋值。反方向的问题是：一台仪器对每个效应 $E$ 报出一个概率 $p(E)$，这些概率可加，那么仪器背后是否一定藏着一个 $\rho$？若只在投影上要求可加，二维时答案是否定的（见 [@rem-gleason-literature]）；把可加性推广到效应，有限维里答案是肯定的，而且已经冻结。
 
@@ -461,13 +461,23 @@ $$
 
 > 投影只问“是或否”，效应还能问“多少”；一旦能问“多少”，概率就只剩迹配对这一种写法。
 
-::: {.remark #rem-gleason-literature title="格里森定理与无穷维的布施定理（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本章的 [@thm-born-probability-skeleton] 严格证明了“充分性方向”：任何半正定且迹为 $1$ 的密度矩阵 $\rho$，通过典范无坐标基迹配对 $P \mapsto \Tr(\rho P)$ 都会在正交投影算子格上诱导出一个归一化、可加且实非负的概率权重。要反过来确立“唯一性方向”（即任何满足可加性公理的概率赋值必取迹配对形式），则依赖数学物理中的两条经典逆定理及其精确的维数与定义域前提；其中有限维效应上的情形已冻结为 [@thm-busch-effect-density]：
+::: {.theorem #thm-gleason-finite-projection title="有限复维投影赋值的格里森表示" lean="D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation"}
+设 $N$ 为有限自然数且 $3 \le N$。令 $p : M_N(\mathbb{C}) \to \mathbb{R}$ 为定义在全部复矩阵上的实值函数，满足：对每个星投影 $P$（$P^* = P$ 且 $P^2 = P$）有 $p(P) \ge 0$；$p(I) = 1$；若星投影 $P,Q$ 满足 $PQ = 0$，则 $p(P + Q) = p(P) + p(Q)$。则存在唯一 $\rho \in M_N(\mathbb{C})$，使 $\rho$ 半正定、$\operatorname{Tr}(\rho) = 1$，并且对每个星投影 $P$ 都有
 
-- **格里森定理**（A. M. Gleason, *Measures on the closed subspaces of a Hilbert space*, J. Math. Mech. **6**, 885–893, 1957）：要求可分希尔伯特空间维数满足 **$\dim\mathcal{H} \ge 3$**。在此维数前提下，闭子空间（正交投影）格上的任何可数可加概率测度 $\mu$（在有限维 $3 \le \dim\mathcal{H} < \infty$ 下归约为两两正交投影上的有限可加性），必唯一表示为某个半正定迹一算子 $\rho$ 的玻恩迹配对 $\mu(P) = \Tr(\rho P)$。**当 $\dim\mathcal{H} = 2$ 时，格里森定理在纯正交投影格上不成立**：因为二维空间中的每组正交基仅含两个对跖秩一投影 $\{P_{\vv{n}}, P_{-\vv{n}}\}$，不同测量轴之间不存在公共投影元来传递跨基连锁约束，故在 $S^2$ 上可以构造出无穷多满足逐对对跖之和为 $1$ 的非玻恩标架函数（frame functions）。
+$$
+p(P) = \operatorname{Re}\operatorname{Tr}(\rho P).
+$$
+
+这里的假设只约束 $p$ 在星投影上的取值；它不把 $p$ 在一般效应或其他矩阵上的取值延拓为可加函数。二维纯投影格、实系数空间、无限维空间和全体效应上的可加性分别属于不同的边界，不能由此声明合并得到。
+:::
+
+::: {.remark #rem-gleason-literature title="格里森定理与布施定理的更广文献边界"}
+本章的 [@thm-gleason-finite-projection] 已在 Lean 内核冻结有限复矩阵 $N\ge3$、星投影域上的格里森表示；[@thm-born-probability-skeleton] 则严格证明了从密度矩阵出发的“充分性方向”。下列更广的定义域、标量域和维数范围仍属于文献边界；其中有限维效应上的情形已冻结为 [@thm-busch-effect-density]：
+
+- **格里森的更广闭子空间定理**（A. M. Gleason, *Measures on the closed subspaces of a Hilbert space*, J. Math. Mech. **6**, 885–893, 1957）：在可分实或复希尔伯特空间中，维数至少为 $3$ 时，闭子空间（正交投影）格上的相应可数可加结论覆盖比本书定声明更广的空间范围；**当维数为 $2$ 时，纯正交投影格上的格里森结论不成立**，因为二维空间中的每组正交基仅含两个对跖秩一投影 $\{P_{\vv{n}}, P_{-\vv{n}}\}$，不同测量轴之间不存在公共投影元来传递跨基连锁约束，故在 $S^2$ 上可以构造出满足逐对对跖之和为 $1$ 的非玻恩标架函数（frame functions）。
 - **布施定理**（P. Busch, *Quantum states and generalized observables: A simple proof of Gleason's theorem*, Phys. Rev. Lett. **91**, 120403, 2003）：若将可加性定义域从尖锐正交投影扩展到全体正半定广义测量效应（POVM 效应元 $0 \le E_i \le I$，要求每当 $\sum_i E_i \le I$ 时满足可加性 $\mu(\sum_i E_i) = \sum_i \mu(E_i)$），则对**一切维数 $\dim\mathcal{H} \ge 2$**（包含单量子比特 $\dim\mathcal{H} = 2$）唯一性全面恢复：任何广义概率测度必唯一表示为 $E \mapsto \Tr(\rho E)$。有限维情形已冻结，就是 [@thm-busch-effect-density]，它只要求有限可加；仍属文献结果的是无穷维希尔伯特空间上的形式，那里要求可数可加。
 
-本书所钉仓库聚焦于显式有限维矩阵构造与建设性归约（[@thm-born-probability-skeleton]、[@thm-born-modulus-square] 与 [@thm-rank-one-born-pairing]），并冻结了由最小确认出发的结构分解 [@thm-positive-dual-generation] 与有限维布施定理 [@thm-busch-effect-density]（在[第 32 章 §32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-6-2) [@cor-ch32-quantum-postulates-core] 与[附录 E §E.5](appendix-e.md#sec-appe-quantum)中，[@thm-busch-effect-density] 将作为桥接假设 `H5`，把两子比较读数在一切有限维 $d \ge 2$ 上精确提升为玻恩规则推论）；格里森定理与无穷维的布施定理由经典文献给出，不列入本书的 Lean 验证声明账本。
+本书所钉仓库聚焦于显式有限维矩阵构造与建设性归约（[@thm-born-probability-skeleton]、[@thm-born-modulus-square] 与 [@thm-rank-one-born-pairing]），并冻结了由最小确认出发的结构分解 [@thm-positive-dual-generation]、有限复维投影格里森定理 [@thm-gleason-finite-projection] 与有限维布施定理 [@thm-busch-effect-density]（在[第 32 章 §32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-6-2) [@cor-ch32-quantum-postulates-core] 与[附录 E §E.5](appendix-e.md#sec-appe-quantum)中，[@thm-busch-effect-density] 将作为桥接假设 `H5`，把两子比较读数在一切有限维 $d \ge 2$ 上精确提升为玻恩规则推论）；格里森定理的更广实空间与无限维形式、以及无限维的布施定理，仍由经典文献给出，不列入本书的 Lean 验证声明账本。
 :::
 
 ::: {.viz src="pairwise-shutter" height="560"}
