@@ -1,0 +1,93 @@
+/* HORIZON//THERMO：版式与颜色由共享主题提供；这里只放本页自己的东西：舞台指针、两个琥珀手柄、控件行、巡览条里的时钟按钮、
+   读数的颜色角色、读数栏里的小 SVG 图与图例色块。颜色只来自令牌（var(--cyan) …），不写色值。 */
+#stageWrap { container-type: inline-size; }
+/* 只有活舞台接管指针；静态图（封面、引用图）让触摸直接滚过 */
+.stage:not(.still) #stage { cursor: grab; touch-action: none; }
+.stage:not(.still) #stage:active { cursor: grabbing; }
+.stage.still #stage { cursor: default; touch-action: auto; }
+
+.logo span { color: var(--cyan); font-weight: 700; }
+.tagline em, .sheet li b { color: var(--cyan); }
+.hud-tl .big { color: var(--sigma); }
+.hud-tl .big, .hud-tl .sub, #plotTitle, #plotMeta, .tau { text-transform: none; }
+.hud-tl .sub { line-height: 1.4; }
+
+/* 控件行：吸附 θ*、N_A 步进、模流开关与朗道尔脉冲 */
+.btnrow { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 8px; }
+.btnrow .chip { min-width: 0; }
+#flowBtn[aria-pressed="true"] { border-color: var(--amber); color: var(--amber); }
+
+/* 琥珀手柄：施密特矢量的尖端与视界穹顶的右脚；它们是按钮，所以拖它们不会转动相机 */
+.handle { position: absolute; z-index: 3; width: 30px; height: 30px; padding: 0; margin: 0; border: 2px solid var(--amber); border-radius: 50%;
+  background: color-mix(in srgb, var(--amber) 12%, transparent); transform: translate(-50%, -50%); cursor: grab; touch-action: none;
+  user-select: none; -webkit-user-select: none; box-shadow: 0 0 10px color-mix(in srgb, var(--amber) 55%, transparent); }
+.handle:active, .handle.dragging { cursor: grabbing; background: color-mix(in srgb, var(--amber) 28%, transparent); }
+.handle[hidden] { display: none; }
+.stage.still .handle { pointer-events: none; }
+:root[data-thumb-mode] .handle { display: none; }
+
+/* 巡览条：◀ 与（引用图里）⏮ ▷ 在左，卡名居中，▶ 在右。时钟按钮只在被引用的图里出现，那里时间轴不再重复它们 */
+.tour .tour-l { grid-column: 1; grid-row: 1; display: flex; gap: 4px; }
+.tour .tour-clock { display: none; }
+:root[data-embed][data-figure] .tour .tour-clock { display: inline-grid; }
+:root[data-embed][data-figure] footer.rail #rew, :root[data-embed][data-figure] footer.rail #play { display: none; }
+/* 窄的引用图（手机上的正文）：卡名需要整行宽度，时钟按钮回到时间轴；舞台只留弧、穹顶、Page 柱与刻度盘，不放路标按钮 */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .tour .tour-clock { display: none; }
+  :root[data-embed][data-figure] footer.rail #rew, :root[data-embed][data-figure] footer.rail #play { display: inline-grid; }
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}
+
+/* 时间轴右侧：一行提示、一行公式 */
+.keys #hint, .keys #formula { display: block; }
+.keys #formula { font-family: var(--font-data); color: var(--ink); font-size: 10.5px; margin-top: 2px; }
+
+/* 读数按角色着色：青 = 线与内积，品红 = 熵与被切断的，紫 = 模流与温度 */
+dl.ro .v dd { color: var(--violet); }
+dl.ro .key dd output { color: var(--magenta); }
+dl.ro dd output { font: inherit; color: inherit; }
+
+/* 读数栏里的小图：左 S_A(θ)，右 Page 柱 S(N_A)；只写颜色角色 */
+.mini { margin: 10px 0 4px; text-transform: none; }
+.mini svg { display: block; width: 100%; height: auto; overflow: visible; }
+.mini text { font-family: var(--font-data); font-size: 9px; fill: var(--dim); }
+.mini text.t { fill: var(--ink); font-size: 9.5px; }
+.mini .ax { stroke: var(--line-hot); stroke-width: 1; fill: none; }
+.mini .ref { stroke: var(--dim); stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+.mini .cy { stroke: var(--cyan); stroke-width: 1.8; fill: none; }
+.mini .mgl { stroke: var(--magenta); stroke-width: 1.6; fill: none; }
+.mini .mg { fill: color-mix(in srgb, var(--magenta) 55%, transparent); stroke: var(--magenta); stroke-width: 1; }
+.mini .vi { stroke: var(--violet); stroke-width: 1.2; fill: none; stroke-dasharray: 2 2; }
+.mini .am { fill: var(--amber); stroke: none; }
+.mini .amr { fill: none; stroke: var(--amber); stroke-width: 1.6; }
+
+/* 图例色块 */
+.sw.ring { width: 10px; height: 10px; border-radius: 50%; background: transparent; border: 2px solid var(--amber); }
+.sw.ghost { background: transparent; border-top: 2px dashed var(--dim); height: 0; }
+
+/* 舞台标签保留大小写（N_A、θ、S_A） */
+.stage .tag.raw { text-transform: none; }
+.stage .tag.c-vi { color: var(--violet); }
+.stage .tag.c-am { color: var(--amber); }
+.stage .tag.c-cy { color: var(--cyan); }
+.stage .tag.c-mg { color: var(--magenta); }
+
+@container (max-width: 620px) {
+  .hud-tr { gap: 3px; }
+  .hud-tr .chip { padding: 3px 5px; font-size: 9.5px; letter-spacing: 0.03em; }
+  .hud-tl { left: 12px; max-width: calc(100% - 24px); }
+  .hud-tl .big { font-size: 12px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.35; }
+  .hud-bl { left: 12px; right: 12px; bottom: 9px; gap: 2px 10px; font-size: 10px; }
+  .stage .tag.raw { font-size: 10.5px; }
+  .handle { width: 26px; height: 26px; }
+}
+
+/* 单栏的整页（窄窗口、短屏）：给弧与穹顶一个更高的舞台，页面照常向下滚动 */
+@media (max-width: 1080px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(460px, 66vh)) auto auto; }
+}
+/* 手机：同上 */
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 66vh)) auto auto; }
+}

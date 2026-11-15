@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "8302194ea3ea2eda41565ca275edadeec95da3fc71fcb90d7e1b38dd170224b6"
+    },
+    "fig-omniscient-zero.zh.jpg": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "94fee2dbc9c406b6c6bc9cc6a3f78d6810a0de745e7ea3e17f8bce1915b702a0"
+    },
+    "fig-isolated-zeno.zh.jpg": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "064a883d6c65f8357b5be7a520cd064b51bf04426e7f7b6c584645fcc2798407"
+    },
+    "fig-horizon-page-curve.zh.jpg": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "edc9b894d766f06767d1c45de6de9ba8906c7f0b5635ad01e7a5b48cd859e4ed"
+    },
+    "fig-modular-unruh-heat.zh.jpg": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "1c2fef6e4c5676e59e65b12827d5baecb5b28ffefe42f1ada9872835f612bbfe"
+    },
+    "fig-dottie-living-steady.zh.jpg": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "9333e4d5f21012a3325a4090f000ed503c1928bd6e8edab788948b3c66c474fa"
+    },
+    "fig-omniscient-zero.en.jpg": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "a7415c2c4f236b0b2e948327e46445e51f3abd8f245fa8a749f08eb4bf34cfbb"
+    },
+    "fig-isolated-zeno.en.jpg": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "f5e15c7a159053197880efef1e454922528f520f6d1d0dc17fd2c853e2be4207"
+    },
+    "fig-horizon-page-curve.en.jpg": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "7257f65a98c50a24d5df3383b29557584c3c72af33a191fd52a31286f0a25720"
+    },
+    "fig-modular-unruh-heat.en.jpg": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "09cc009b66edb7b33f289714b9f4c1e7a9e158b340a98d6b77da9131558eca5f"
+    },
+    "fig-dottie-living-steady.en.jpg": {
+      "input": "19dd1a05416565347cbc8a2d78a42a419b0237ade07e454773ecec7818d40400",
+      "output": "ec89f4342d7ff9e32160c36e6b83fa98b5625455ff404d84672981be940bd793"
+    }
+  }
+}
