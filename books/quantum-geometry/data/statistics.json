@@ -3,25 +3,25 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 180,
+    "theorem": 183,
     "lemma": 34,
     "proposition": 45,
     "corollary": 30,
-    "definition": 38,
+    "definition": 48,
     "conjecture": 6,
     "problem": 3,
-    "example": 112,
-    "remark": 188,
-    "proof": 286,
-    "lean_verified": 286,
+    "example": 113,
+    "remark": 189,
+    "proof": 289,
+    "lean_verified": 289,
     "written_proof": 3,
     "literature": 190
   },
-  "total": 610,
+  "total": 658,
   "kinds": {
-    "def": 157,
-    "inductive": 10,
-    "theorem": 443
+    "def": 201,
+    "inductive": 11,
+    "theorem": 446
   },
   "groups": {
     "theorems": [
@@ -277,6 +277,9 @@
       "D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse",
       "D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery",
       "D5/S3/Quantum/Routing/HannRouterDephasing.result",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.physical_profile_event",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.profile_separation_iff",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.signed_event",
       "D5/S3/Quantum/Routing/HannSpatialQram.correctness",
       "D5/S3/Quantum/Routing/ReversibleQram.correctness",
       "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR",
@@ -433,6 +436,51 @@
       "D5/S3/Quantum/Foundation/LeastConfirmationGeneration.ConfirmationSystem",
       "D5/S3/Quantum/Foundation/LeastConfirmationGeneration.Positive",
       "D5/S3/Quantum/Foundation/RayPhaseRigidity.PreservesRay",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.AddressDistribution",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.ClassDistribution",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.DeepestActive",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.Environment",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.Profile",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.Router",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.SameProfile",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.Separates",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.addressEnergy",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.classEnergy",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.classMass",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.classRecord",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.classSum",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.deepest",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.distributionInput",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.gram",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.inputDistribution",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.jointOutput",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.loadedLabel",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.noisyOutput",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.profile",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.record",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.routerLabel",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.snoc",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.squaredFidelity",
+      "D5/S3/Quantum/Routing/HannRouterProfiles.treeRecord",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.Coeff",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.Environment",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.Output",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.Output.flag",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.childEnvironment",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.densityGram",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.embed",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.inherited",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.labelIndex",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.localRecord",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.omega",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.outputs",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.record",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.recordMatrix",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.restrict",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.standardGram",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.step",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.synthesis",
+      "D5/S3/Quantum/Routing/HannSignedCertificate.vacuumRecord",
       "D5/S3/QuantumBounds/ClassicalFiberBound.DeterministicFiberModel",
       "D5/S3/QuantumBounds/ClassicalFiberBound.boolValue",
       "D5/S3/QuantumBounds/ClassicalFiberBound.chshAt",
@@ -1278,13 +1326,13 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 816,
+          "line": 1405,
           "id": "thm-ch38-lookup-program-upper-bound",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 939,
+          "line": 1528,
           "id": "",
           "via": "inline"
         },
@@ -1326,19 +1374,19 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 678,
+          "line": 1267,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1188,
+          "line": 1777,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1197,
+          "line": 1786,
           "id": "",
           "via": "inline"
         }
@@ -1362,19 +1410,19 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 672,
+          "line": 1261,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1187,
+          "line": 1776,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1197,
+          "line": 1786,
           "id": "",
           "via": "inline"
         }
@@ -1416,31 +1464,31 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 669,
+          "line": 1258,
           "id": "thm-ch38-self-mapped-diagonal-fixed-point",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 672,
+          "line": 1261,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 811,
+          "line": 1400,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 939,
+          "line": 1528,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1224,
+          "line": 1813,
           "id": "",
           "via": "inline"
         },
@@ -1578,25 +1626,25 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 669,
+          "line": 1258,
           "id": "thm-ch38-self-mapped-diagonal-fixed-point",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1194,
+          "line": 1783,
           "id": "thm-ch38-uncompleted-horizon-diagonal-refinement",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 678,
+          "line": 1267,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1197,
+          "line": 1786,
           "id": "",
           "via": "inline"
         },
@@ -1656,7 +1704,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 697,
+          "line": 1286,
           "id": "thm-ch38-recursive-page-table-walk",
           "via": "environment"
         }
@@ -1668,7 +1716,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 654,
+          "line": 1243,
           "id": "thm-ch38-discrete-sech-positive",
           "via": "environment"
         }
@@ -2538,7 +2586,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1105,
+          "line": 1694,
           "id": "thm-ch38-zeckendorf-uniform-avoidance-count",
           "via": "environment"
         },
@@ -2568,13 +2616,13 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 861,
+          "line": 1450,
           "id": "thm-ch38-zeckendorf-carry-barrier",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 941,
+          "line": 1530,
           "id": "",
           "via": "inline"
         },
@@ -2622,7 +2670,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 684,
+          "line": 1273,
           "id": "",
           "via": "inline"
         }
@@ -2670,13 +2718,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 669,
+          "line": 1258,
           "id": "thm-ch38-self-mapped-diagonal-fixed-point",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 684,
+          "line": 1273,
           "id": "",
           "via": "inline"
         },
@@ -4500,13 +4548,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1186,
+          "line": 1775,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1198,
+          "line": 1787,
           "id": "",
           "via": "inline"
         }
@@ -4632,13 +4680,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1189,
+          "line": 1778,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1204,
+          "line": 1793,
           "id": "",
           "via": "inline"
         }
@@ -4674,13 +4722,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1187,
+          "line": 1776,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1198,
+          "line": 1787,
           "id": "",
           "via": "inline"
         }
@@ -4824,7 +4872,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1224,
+          "line": 1813,
           "id": "",
           "via": "inline"
         },
@@ -4842,37 +4890,37 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 842,
+          "line": 1431,
           "id": "thm-ch38-retrospective-lookup-failure",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1194,
+          "line": 1783,
           "id": "thm-ch38-uncompleted-horizon-diagonal-refinement",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1384,
+          "line": 1973,
           "id": "prop-ch38-cayley-stereographic-and-blindspot-suspension",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 940,
+          "line": 1529,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1213,
+          "line": 1802,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1401,
+          "line": 1990,
           "id": "",
           "via": "inline"
         },
@@ -4932,7 +4980,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1204,
+          "line": 1793,
           "id": "",
           "via": "inline"
         }
@@ -4944,7 +4992,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1074,
+          "line": 1663,
           "id": "thm-ch38-refinement-impurity-monotonicity",
           "via": "environment"
         },
@@ -4974,13 +5022,13 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1003,
+          "line": 1592,
           "id": "thm-ch38-escape-pairs-and-structural-novelty",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1006,
+          "line": 1595,
           "id": "",
           "via": "inline"
         },
@@ -5016,13 +5064,13 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1003,
+          "line": 1592,
           "id": "thm-ch38-escape-pairs-and-structural-novelty",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1006,
+          "line": 1595,
           "id": "",
           "via": "inline"
         },
@@ -5172,19 +5220,19 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1003,
+          "line": 1592,
           "id": "thm-ch38-escape-pairs-and-structural-novelty",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1016,
+          "line": 1605,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1244,
+          "line": 1833,
           "id": "",
           "via": "inline"
         },
@@ -5214,13 +5262,13 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1003,
+          "line": 1592,
           "id": "thm-ch38-escape-pairs-and-structural-novelty",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1016,
+          "line": 1605,
           "id": "",
           "via": "inline"
         },
@@ -5592,13 +5640,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1194,
+          "line": 1783,
           "id": "thm-ch38-uncompleted-horizon-diagonal-refinement",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1198,
+          "line": 1787,
           "id": "",
           "via": "inline"
         },
@@ -5634,13 +5682,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1194,
+          "line": 1783,
           "id": "thm-ch38-uncompleted-horizon-diagonal-refinement",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1204,
+          "line": 1793,
           "id": "",
           "via": "inline"
         },
@@ -5790,13 +5838,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1384,
+          "line": 1973,
           "id": "prop-ch38-cayley-stereographic-and-blindspot-suspension",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1400,
+          "line": 1989,
           "id": "",
           "via": "inline"
         },
@@ -5886,13 +5934,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1189,
+          "line": 1778,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1204,
+          "line": 1793,
           "id": "",
           "via": "inline"
         }
@@ -5910,7 +5958,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1224,
+          "line": 1813,
           "id": "",
           "via": "inline"
         }
@@ -5928,7 +5976,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1224,
+          "line": 1813,
           "id": "",
           "via": "inline"
         }
@@ -5946,7 +5994,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1198,
+          "line": 1787,
           "id": "",
           "via": "inline"
         }
@@ -6108,7 +6156,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1224,
+          "line": 1813,
           "id": "",
           "via": "inline"
         },
@@ -6840,13 +6888,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 907,
+          "line": 1496,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 944,
+          "line": 1533,
           "id": "",
           "via": "inline"
         },
@@ -8724,13 +8772,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1384,
+          "line": 1973,
           "id": "prop-ch38-cayley-stereographic-and-blindspot-suspension",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1387,
+          "line": 1976,
           "id": "",
           "via": "inline"
         },
@@ -10974,19 +11022,19 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1194,
+          "line": 1783,
           "id": "thm-ch38-uncompleted-horizon-diagonal-refinement",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1160,
+          "line": 1749,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1214,
+          "line": 1803,
           "id": "",
           "via": "inline"
         },
@@ -12408,13 +12456,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 535,
+          "line": 1124,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 565,
+          "line": 1154,
           "id": "",
           "via": "inline"
         },
@@ -12468,7 +12516,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 534,
+          "line": 1123,
           "id": "thm-ch38-copied-address-dereference-and-access-defect",
           "via": "environment"
         },
@@ -12594,7 +12642,7 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 534,
+          "line": 1123,
           "id": "thm-ch38-copied-address-dereference-and-access-defect",
           "via": "environment"
         },
@@ -14796,13 +14844,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 576,
+          "line": 1165,
           "id": "thm-ch38-pointer-width-and-no-deep-copy",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 579,
+          "line": 1168,
           "id": "",
           "via": "inline"
         },
@@ -14886,13 +14934,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 576,
+          "line": 1165,
           "id": "thm-ch38-pointer-width-and-no-deep-copy",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 585,
+          "line": 1174,
           "id": "",
           "via": "inline"
         },
@@ -15306,6 +15354,582 @@
         }
       ]
     },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.AddressDistribution": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.AddressDistribution",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 625,
+          "id": "def-ch38-profile-laws",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.ClassDistribution": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.ClassDistribution",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 625,
+          "id": "def-ch38-profile-laws",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.DeepestActive": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.DeepestActive",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 625,
+          "id": "def-ch38-profile-laws",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.Environment": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.Environment",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 539,
+          "id": "def-ch38-profile-records",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.Profile": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.Profile",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 561,
+          "id": "def-ch38-active-profiles",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.Router": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.Router",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 511,
+          "id": "def-ch38-profile-routers",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.SameProfile": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.SameProfile",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 561,
+          "id": "def-ch38-active-profiles",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.Separates": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.Separates",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 561,
+          "id": "def-ch38-active-profiles",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.addressEnergy": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.addressEnergy",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 599,
+          "id": "def-ch38-profile-gram-energy",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.classEnergy": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.classEnergy",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 599,
+          "id": "def-ch38-profile-gram-energy",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.classMass": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.classMass",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 625,
+          "id": "def-ch38-profile-laws",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.classRecord": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.classRecord",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 561,
+          "id": "def-ch38-active-profiles",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.classSum": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.classSum",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 599,
+          "id": "def-ch38-profile-gram-energy",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.deepest": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.deepest",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 511,
+          "id": "def-ch38-profile-routers",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.distributionInput": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.distributionInput",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 625,
+          "id": "def-ch38-profile-laws",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.gram": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.gram",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 599,
+          "id": "def-ch38-profile-gram-energy",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.inputDistribution": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.inputDistribution",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 625,
+          "id": "def-ch38-profile-laws",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.jointOutput": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.jointOutput",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 643,
+          "id": "def-ch38-profile-output",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.loadedLabel": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.loadedLabel",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 511,
+          "id": "def-ch38-profile-routers",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.noisyOutput": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.noisyOutput",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 643,
+          "id": "def-ch38-profile-output",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.physical_profile_event": {
+      "kind": "theorem",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.physical_profile_event",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 668,
+          "id": "thm-ch38-physical-profile-event",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.profile": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.profile",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 561,
+          "id": "def-ch38-active-profiles",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.profile_separation_iff": {
+      "kind": "theorem",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.profile_separation_iff",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 574,
+          "id": "thm-ch38-profile-separation",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.record": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.record",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 539,
+          "id": "def-ch38-profile-records",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.routerLabel": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.routerLabel",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 511,
+          "id": "def-ch38-profile-routers",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.snoc": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.snoc",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 511,
+          "id": "def-ch38-profile-routers",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.squaredFidelity": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.squaredFidelity",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 643,
+          "id": "def-ch38-profile-output",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.treeRecord": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.treeRecord",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 539,
+          "id": "def-ch38-profile-records",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.Coeff": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Coeff",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 849,
+          "id": "def-ch38-signed-fourier-records",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.Environment": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Environment",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 849,
+          "id": "def-ch38-signed-fourier-records",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.Output": {
+      "kind": "inductive",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Output",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 903,
+          "id": "def-ch38-signed-recursion",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.Output.flag": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Output.flag",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 903,
+          "id": "def-ch38-signed-recursion",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.childEnvironment": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.childEnvironment",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 870,
+          "id": "def-ch38-signed-synthesis",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.densityGram": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.densityGram",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 965,
+          "id": "def-ch38-signed-gram-orientations",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.embed": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.embed",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 870,
+          "id": "def-ch38-signed-synthesis",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.inherited": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.inherited",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 903,
+          "id": "def-ch38-signed-recursion",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.labelIndex": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.labelIndex",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 849,
+          "id": "def-ch38-signed-fourier-records",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.localRecord": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.localRecord",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 849,
+          "id": "def-ch38-signed-fourier-records",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.omega": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.omega",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 849,
+          "id": "def-ch38-signed-fourier-records",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.outputs": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.outputs",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 903,
+          "id": "def-ch38-signed-recursion",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.record": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.record",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 870,
+          "id": "def-ch38-signed-synthesis",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.recordMatrix": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.recordMatrix",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 965,
+          "id": "def-ch38-signed-gram-orientations",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.restrict": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.restrict",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 870,
+          "id": "def-ch38-signed-synthesis",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.signed_event": {
+      "kind": "theorem",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.signed_event",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 979,
+          "id": "thm-ch38-signed-coefficient-event",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.standardGram": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.standardGram",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 965,
+          "id": "def-ch38-signed-gram-orientations",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.step": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.step",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 903,
+          "id": "def-ch38-signed-recursion",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.synthesis": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.synthesis",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 870,
+          "id": "def-ch38-signed-synthesis",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.vacuumRecord": {
+      "kind": "def",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.vacuumRecord",
+      "citations": [
+        {
+          "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
+          "line": 870,
+          "id": "def-ch38-signed-synthesis",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/Quantum/Routing/HannSpatialQram.correctness": {
       "kind": "theorem",
       "name": "D5.S3.Quantum.Routing.HannSpatialQram.correctness",
@@ -15666,13 +16290,13 @@
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1384,
+          "line": 1973,
           "id": "prop-ch38-cayley-stereographic-and-blindspot-suspension",
           "via": "environment"
         },
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1393,
+          "line": 1982,
           "id": "",
           "via": "inline"
         },
@@ -17754,7 +18378,7 @@
       "citations": [
         {
           "file": "ch38-observer-memory-pointer-and-ontological-qram.md",
-          "line": 1098,
+          "line": 1687,
           "id": "",
           "via": "inline"
         },
@@ -20119,6 +20743,54 @@
         "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity",
         "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion",
         "D5/S3/Quantum/Routing/HannRouterDephasing.result",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.AddressDistribution",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.ClassDistribution",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.DeepestActive",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.Environment",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.Profile",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.Router",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.SameProfile",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.Separates",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.addressEnergy",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.classEnergy",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.classMass",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.classRecord",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.classSum",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.deepest",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.distributionInput",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.gram",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.inputDistribution",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.jointOutput",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.loadedLabel",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.noisyOutput",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.physical_profile_event",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.profile",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.profile_separation_iff",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.record",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.routerLabel",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.snoc",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.squaredFidelity",
+        "D5/S3/Quantum/Routing/HannRouterProfiles.treeRecord",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.Coeff",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.Environment",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.Output",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.Output.flag",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.childEnvironment",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.densityGram",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.embed",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.inherited",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.labelIndex",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.localRecord",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.omega",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.outputs",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.record",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.recordMatrix",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.restrict",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.signed_event",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.standardGram",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.step",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.synthesis",
+        "D5/S3/Quantum/Routing/HannSignedCertificate.vacuumRecord",
         "D5/S3/Quantum/Routing/HannSpatialQram.correctness",
         "D5/S3/Quantum/Routing/ReversibleQram.correctness",
         "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase"
