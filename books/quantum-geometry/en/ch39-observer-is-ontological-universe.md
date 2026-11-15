@@ -1093,7 +1093,28 @@ $$
 Uf=z^{-1/2}\sum_{w\in W_N}f(w)|w\rangle.
 $$
 
-The inner-product formula shows that $U:L^2(\pi)\to\mathcal H_{\mathrm{legal}}$ preserves inner products and is onto, hence unitary. Penalties vanish on the legal space, so the fiberwise matrix identity gives
+To read this correspondence in the reverse direction for native complex amplitudes, write $Z=z=z_N$, so $\pi(w)=1/Z$. Any legally supported vector $|\psi_L\rangle=\sum_{w\in W_N}a_w|w\rangle$ has the explicit inverse image
+
+$$
+(U^{-1}\psi_L)(w)=f(w)=\sqrt Z\,a_w.
+$$
+
+For another legally supported vector $|\phi_L\rangle=\sum_{w\in W_N}b_w|w\rangle$, put $g(w)=\sqrt Z\,b_w$. The pairing, conjugate-linear in its first argument, and the norm satisfy
+
+$$
+\begin{aligned}
+\langle f,g\rangle_\pi
+&=\frac1Z\sum_{w\in W_N}
+\overline{\sqrt Z\,a_w}\sqrt Z\,b_w\\
+&=\sum_{w\in W_N}\overline{a_w}b_w
+=\langle\psi_L,\phi_L\rangle,\\
+\|f\|_\pi^2
+&=\frac1Z\sum_{w\in W_N}|\sqrt Z\,a_w|^2
+=\|\psi_L\|^2.
+\end{aligned}
+$$
+
+All sums are finite and $Z>0$, so arbitrary legal complex amplitudes have a unique inverse image without further integrability or normalization assumptions. Thus $U:L^2(\pi)\to\mathcal H_{\mathrm{legal}}$ preserves inner products and is onto, hence unitary. Penalties vanish on the legal space, so the fiberwise matrix identity gives
 
 $$
 \begin{aligned}
@@ -1107,7 +1128,26 @@ U1&=|\Psi_{K,N}\rangle,\\
 \end{aligned}
 $$
 
-Mean zero thus corresponds exactly to orthogonality to the ground state, and variance is the squared norm after removing the ground-state component.
+For these native amplitudes, set $\beta=\langle\Psi_{K,N}|\psi_L\rangle$. The finite mean and variance formulas become
+
+$$
+\begin{aligned}
+\pi f&=\frac1Z\sum_{w\in W_N}\sqrt Z\,a_w
+=\beta,\\
+\operatorname{Var}_\pi(f)
+&=\|f\|_\pi^2-|\pi f|^2\\
+&=\|\psi_L\|^2-|\beta|^2
+=\|\psi_L-\beta\Psi_{K,N}\|^2.
+\end{aligned}
+$$
+
+Mean zero therefore corresponds exactly to orthogonality to the ground state. Writing $Q(A,\phi)=\langle\phi,A\phi\rangle$ for the quadratic form of a native self-adjoint operator, we also have, site by site,
+
+$$
+Q(h_i,\psi_L)=2\|f-E_if\|_\pi^2.
+$$
+
+Summing over sites recovers the total-energy identity above, $Q(H_{K,N},\psi_L)=2\mathcal E(f,f)$; every $B_a$ has zero quadratic form on legal support. The coefficient $2$ continues to correspond to clocks of rate $1$ per site.
 
 **Why does the legal-space gap suffice?** Clearing one $1$ at a time connects every legal word to the all-zero word, so the legal flip graph is connected. Since $N\ge1$ and $K\ge2$, both the all-zero word and the word with only its first bit equal to $1$ are vertices. The edge energy therefore vanishes exactly on constant functions. The first positive eigenvalue $\lambda_{K,N}$ of $-L$ exists and satisfies
 
@@ -1529,7 +1569,44 @@ $$
 
 Combine this with the block variance bound to obtain the stated Poincaré inequality and $\lambda_{K,N}\ge C_K^{-1}$. The full-space spectral comparison in [@ex-ch39-p2e-heatbath-scale] then gives $\Delta_{K,N}\ge2/C_K$, since $2/C_K<1$ for $K\ge2$. For example, $K=2$ gives $1/36$, and $K=3$ gives $1/400$. The empty chain $N=0$ still has no excited gap; the exact gap for a short chain $1\le N<K$ remains $2$.
 
-This establishes a gap uniform in chain length for the specified local parent at fixed $K$. Physical identification with an experimental Rydberg or anyon Hamiltonian, and correspondence with Rauzy-boundary dimension, remain separate questions.
+**From the gap to an energy estimate for arbitrary amplitudes.** Fix $K\ge2,N\ge1$ and abbreviate $H=H_{K,N}$, $\Psi=\Psi_{K,N}$. Any complex vector $|\psi\rangle=\sum_{w\in\Omega_N}a_w|w\rangle$ in the full Boolean-word space splits according to the actual legal and illegal words as
+
+$$
+\begin{aligned}
+\psi&=\psi_L+\psi_I,\\
+|\psi_L\rangle&=\sum_{w\in W_N}a_w|w\rangle,\\
+|\psi_I\rangle&=\sum_{w\in\Omega_N\setminus W_N}a_w|w\rangle,\\
+\beta&=\langle\Psi|\psi\rangle
+=\langle\Psi|\psi_L\rangle.
+\end{aligned}
+$$
+
+Take the inverse image from the preceding example, $f(w)=\sqrt Z\,a_w$, with $Z=|W_N|$. The normalization and energy identities checked above, followed by this example's Poincaré bound for the actual chain, give
+
+$$
+\begin{aligned}
+\pi f&=\beta,\\
+\operatorname{Var}_\pi(f)&=\|\psi_L\|^2-|\beta|^2,\\
+Q(H,\psi_L)&=2\mathcal E(f,f)\\
+&\ge\frac2{C_K}
+\bigl(\|\psi_L\|^2-|\beta|^2\bigr).
+\end{aligned}
+$$
+
+The parent example's matrix-entry expansion gives zero entries between the legal and illegal sectors, so their cross energy vanishes. The preceding example's illegal-penalty estimate gives $Q(H,\psi_I)\ge\|\psi_I\|^2$. Since $C_K=(2K-1)^2 2^{2K-1}\ge72$, set $c_K=2/C_K\le1$ and combine these estimates:
+
+$$
+\begin{aligned}
+Q(H,\psi)&=Q(H,\psi_L)+Q(H,\psi_I)\\
+&\ge c_K\bigl(\|\psi_L\|^2-|\beta|^2\bigr)
++\|\psi_I\|^2\\
+&\ge c_K\bigl(\|\psi\|^2-|\langle\Psi|\psi\rangle|^2\bigr).
+\end{aligned}
+$$
+
+This is the native operator inequality $H\ge c_K(I-|\Psi\rangle\langle\Psi|)$ in the sense of quadratic forms. The vector need be neither normalized nor orthogonal to the ground state; for $\|\psi\|=1$, the residual on the right is $1-|\langle\Psi|\psi\rangle|^2$. When $1\le N<K$, every word is legal and $\psi_I=0$, so the same derivation applies. At $N=0$ there is only the one-dimensional vacuum: both energy and the residual after removing the ground-state component vanish, giving no excited-gap claim.
+
+This explicitly applies the derived gap, uniform in chain length at fixed $K$, to an arbitrary-state energy estimate. It remains an application of the paper derivation above and adds no Lean verification. Physical identification with an experimental Rydberg or anyon Hamiltonian, and correspondence with Rauzy-boundary dimension, remain separate questions.
 :::
 
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}

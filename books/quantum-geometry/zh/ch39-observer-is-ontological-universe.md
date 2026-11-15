@@ -1093,7 +1093,28 @@ $$
 Uf=z^{-1/2}\sum_{w\in W_N}f(w)|w\rangle.
 $$
 
-由内积公式，$U:L^2(\pi)\to\mathcal H_{\mathrm{legal}}$ 保内积且满射，故为酉映射。罚项在合法空间为零，逐纤维的矩阵等式于是给出
+把这个对应反向用于原生复振幅时，记 $Z=z=z_N$，所以 $\pi(w)=1/Z$。任意合法支撑向量 $|\psi_L\rangle=\sum_{w\in W_N}a_w|w\rangle$ 的逆像显式为
+
+$$
+(U^{-1}\psi_L)(w)=f(w)=\sqrt Z\,a_w.
+$$
+
+若另一个合法支撑向量为 $|\phi_L\rangle=\sum_{w\in W_N}b_w|w\rangle$、$g(w)=\sqrt Z\,b_w$，则对第一变量取共轭的配对与范数满足
+
+$$
+\begin{aligned}
+\langle f,g\rangle_\pi
+&=\frac1Z\sum_{w\in W_N}
+\overline{\sqrt Z\,a_w}\sqrt Z\,b_w\\
+&=\sum_{w\in W_N}\overline{a_w}b_w
+=\langle\psi_L,\phi_L\rangle,\\
+\|f\|_\pi^2
+&=\frac1Z\sum_{w\in W_N}|\sqrt Z\,a_w|^2
+=\|\psi_L\|^2.
+\end{aligned}
+$$
+
+这些和都是有限和，且 $Z>0$；因此任意合法复振幅都给出唯一逆像，无需额外的可积性或归一化假设。$U:L^2(\pi)\to\mathcal H_{\mathrm{legal}}$ 保内积且满射，故为酉映射。罚项在合法空间为零，逐纤维的矩阵等式于是给出
 
 $$
 \begin{aligned}
@@ -1107,7 +1128,26 @@ U1&=|\Psi_{K,N}\rangle,\\
 \end{aligned}
 $$
 
-因此零均值恰对应于与基态正交，方差恰是去掉基态分量后的范数平方。
+对上述原生振幅，令 $\beta=\langle\Psi_{K,N}|\psi_L\rangle$。有限均值与方差公式具体成为
+
+$$
+\begin{aligned}
+\pi f&=\frac1Z\sum_{w\in W_N}\sqrt Z\,a_w
+=\beta,\\
+\operatorname{Var}_\pi(f)
+&=\|f\|_\pi^2-|\pi f|^2\\
+&=\|\psi_L\|^2-|\beta|^2
+=\|\psi_L-\beta\Psi_{K,N}\|^2.
+\end{aligned}
+$$
+
+因此零均值恰对应于与基态正交。把原生自伴算符的二次型记为 $Q(A,\phi)=\langle\phi,A\phi\rangle$，逐站还有
+
+$$
+Q(h_i,\psi_L)=2\|f-E_if\|_\pi^2.
+$$
+
+对站点求和即恢复上面的总能量恒等式 $Q(H_{K,N},\psi_L)=2\mathcal E(f,f)$；合法支撑上所有 $B_a$ 的二次型均为零。这里的系数 $2$ 始终对应每站速率 $1$ 的时钟。
 
 **为何合法空间的谱隙足够？** 合法字可逐位删除 $1$ 到全零字，故合法翻转图连通；$N\ge1$、$K\ge2$ 又保证全零字与仅首位为 $1$ 的字都是顶点。能量的边平方和因此恰在常数函数上为零，$-L$ 的第一正本征值 $\lambda_{K,N}$ 存在，且
 
@@ -1529,7 +1569,44 @@ $$
 
 与分块方差界合并就得到所述 Poincaré 界及 $\lambda_{K,N}\ge C_K^{-1}$。再用 [@ex-ch39-p2e-heatbath-scale] 的完整空间谱比较，因为 $K\ge2$ 时 $2/C_K<1$，得到 $\Delta_{K,N}\ge2/C_K$。例如 $K=2$ 给出 $1/36$，$K=3$ 给出 $1/400$。空链 $N=0$ 仍没有激发谱隙；短链 $1\le N<K$ 的精确谱隙仍为 $2$。
 
-这个结论补齐的是所设计局域母哈密顿量在固定 $K$ 下的链长一致谱隙。它没有把该模型等同于实际里德堡或任意子哈密顿量，也没有建立与 Rauzy 边界维数的物理对应。
+**从谱隙到任意振幅的能量估计。** 固定 $K\ge2,N\ge1$，简记 $H=H_{K,N}$、$\Psi=\Psi_{K,N}$。任意完整布尔字空间中的复向量 $|\psi\rangle=\sum_{w\in\Omega_N}a_w|w\rangle$ 都按实际合法字与非法字分解为
+
+$$
+\begin{aligned}
+\psi&=\psi_L+\psi_I,\\
+|\psi_L\rangle&=\sum_{w\in W_N}a_w|w\rangle,\\
+|\psi_I\rangle&=\sum_{w\in\Omega_N\setminus W_N}a_w|w\rangle,\\
+\beta&=\langle\Psi|\psi\rangle
+=\langle\Psi|\psi_L\rangle.
+\end{aligned}
+$$
+
+取上例的逆像 $f(w)=\sqrt Z\,a_w$，其中 $Z=|W_N|$。由已经逐项核对的归一化与能量恒等式，再用本例的实际 Poincaré 界，得到
+
+$$
+\begin{aligned}
+\pi f&=\beta,\\
+\operatorname{Var}_\pi(f)&=\|\psi_L\|^2-|\beta|^2,\\
+Q(H,\psi_L)&=2\mathcal E(f,f)\\
+&\ge\frac2{C_K}
+\bigl(\|\psi_L\|^2-|\beta|^2\bigr).
+\end{aligned}
+$$
+
+父例的矩阵元展开已给出合法与非法扇区之间的零矩阵元，因此两块没有交叉能量；上例的非法罚能估计给出 $Q(H,\psi_I)\ge\|\psi_I\|^2$。由于 $C_K=(2K-1)^2 2^{2K-1}\ge72$，令 $c_K=2/C_K\le1$，便可合并为
+
+$$
+\begin{aligned}
+Q(H,\psi)&=Q(H,\psi_L)+Q(H,\psi_I)\\
+&\ge c_K\bigl(\|\psi_L\|^2-|\beta|^2\bigr)
++\|\psi_I\|^2\\
+&\ge c_K\bigl(\|\psi\|^2-|\langle\Psi|\psi\rangle|^2\bigr).
+\end{aligned}
+$$
+
+这就是二次型意义下的原生算符不等式 $H\ge c_K(I-|\Psi\rangle\langle\Psi|)$。向量无需归一化，也无需与基态正交；若 $\|\psi\|=1$，右侧残量就是 $1-|\langle\Psi|\psi\rangle|^2$。当 $1\le N<K$ 时所有字合法，$\psi_I=0$，同一推导仍成立。$N=0$ 只有一维真空，能量与去掉基态后的残量都为零，不能据此声称存在激发谱隙。
+
+这把已推导的固定 $K$、链长一致谱隙明确用于任意态的能量估计，仍是上述纸面推导的应用，不新增 Lean 验证。它没有把该模型等同于实际里德堡或任意子哈密顿量，也没有建立与 Rauzy 边界维数的物理对应。
 :::
 
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="文献结果：斐波那契任意子黄金链与里德堡原子阻塞实验背景（文献结果，未在本书形式化）"}
