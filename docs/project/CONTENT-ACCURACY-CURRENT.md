@@ -1,12 +1,12 @@
 # 现行整书准确性基线
 
-当前候选为 HEAD `b472479af8ae86415d8db0a0bccee293548865ed` 加两份准确性文档的未提交修正，已整合主线快照 main9 `9ceb215bdd01d75f8898ebd3ca02f0fbbe49ddec`；以该主线的中英文 `SUMMARY.md` 为名册。PR #313 的第8章计数与第35章图注两项双语纠正来自分支提交 `c4b75f0f4fe462b0f2343e805c7ecba1a3a29924`，基于 main89 `89e45e6baeae05d4864945d300f70f5ec3da0c72`；c4 是当前候选的祖先，但不在 main89、mainbe3 或 main9 中。CI、合入与部署的动态状态以 [PR #313](https://github.com/the-omega-institute/trureturing-books/pull/313) 为准。每语 **58页、46个主单元**：序曲、39章、终章及附录A–E；两语文件、顺序与层级对应。所有正文、定理与证明、数值、物理条件、文献、图表、实验及影音说明均在整书目标内，保留作者风格与题记。
+本基线固定记录整合快照 `d20c811592cbeb4a4a4ce167161b1e25617b58a5`，主线比较基准为已整合的 mainfcf `fcf6fdda1a7fd6c4e94c2ff7fc2f6f2502a691f1`；以该主线的中英文 `SUMMARY.md` 为名册。本次检查候选为该快照上的两份准确性文档修订。PR #313 的第8章计数与第35章图注两项双语纠正来自分支提交 `c4b75f0f4fe462b0f2343e805c7ecba1a3a29924`，基于 main89 `89e45e6baeae05d4864945d300f70f5ec3da0c72`；此前两份文档的 R1 修正已由调用方提交为 `e906bc306128ca56fcc068ad1ebe173325fb4160`。c4、e906 均为 d20 整合快照的祖先，均不在上述 mainfcf 快照中；分支修正不称作主线已有内容。CI、合入与部署的动态状态以 [PR #313](https://github.com/the-omega-institute/trureturing-books/pull/313) 为准。每语 **58页、46个主单元**：序曲、39章、终章及附录A–E；两语文件、顺序与层级对应。所有正文、定理与证明、数值、物理条件、文献、图表、实验及影音说明均在整书目标内，保留作者风格与题记。
 
 当前锁为 `trureturing@f010e3713174c4df2b28c8f8c4d9ff3c41e46a05`／`dev`，解析610条声明，锁 SHA-256 为 `b7508bf86e44f3862a0f311298bcb8209a55930ea71311c99cb3d272d3d56c6a`；相对 main89 的 pin `a313d1ce217f58f284d14d3b7d8231c5773b8d55`，声明键、记录与数量均不变。前一基线 `402b5a2e444b264cd5bd7776b024b346f3bdd5e2` 的 pin `a79bb042b93f03887703825ec4661602f43d976e`／604条与当时的检查、阅读和审查保持历史归属。旧[51页／45单元基线](CONTENT-ACCURACY-CURRENT-20261114.md)固定于 `b5a75e5932b73a8a97399a764ff81d63d528930d`；更早35单元／9/35仅保留各自历史归属。已有阅读与审查未被清零，也不因换名册自动升级为当前接受。
 
 ## 全部页面与身份对应
 
-下表用正式 SUMMARY 解析器逐页排列，“对历史”列比较当前 b472 候选与 `b5a75e59`。两语 SUMMARY 均与 `402b5a2e` 字节相同。主线快照 main9 与 mainbe3 的章源相同：各自相对 main89 每语57页相同、1页改变（第11章）。当前候选另有第8／35章纠正，相对 main89 为55页相同、3页改变（第8、11、35章）；相对 `402b5a2e` 为51页相同、7页改变（第8、11、32.1、32.2、35、39章及附录C），均无增删。候选相对 `b5a75e59` 为29页相同、22页改变、7页新增、0页移除。“同／变／新增”只比较对应文件字节。“待核”指当前完整页面接受仍未证明，不表示从未阅读；单处修正、构建与哈希相同均不能替代正文、pin、媒体、输出和独立审查的依赖核对。
+下表用正式 SUMMARY 解析器逐页排列，“对历史”列比较 d20 整合快照与 `b5a75e59`。两语 SUMMARY 均与 `402b5a2e` 字节相同。历史主线快照 main9 与 mainbe3 的章源相同：各自相对 main89 每语57页相同、1页改变（第11章）；mainfcf 相对 main9 每语57页相同、1页改变（第39章），相对 main89 为56页相同、2页改变（第11、39章）。d20 另含第8／35章纠正，相对 mainfcf 每语56页相同、2页改变，相对 main89 为54页相同、4页改变（第8、11、35、39章）；相对 `402b5a2e` 仍为51页相同、7页改变（第8、11、32.1、32.2、35、39章及附录C），均无增删。d20 相对 `b5a75e59` 仍为29页相同、22页改变、7页新增、0页移除。“同／变／新增”只比较对应文件字节。“待核”指当前完整页面接受仍未证明，不表示从未阅读；单处修正、构建与哈希相同均不能替代正文、pin、媒体、输出和独立审查的依赖核对。
 
 | 主单元 | SUMMARY页面 | 对历史中／英 | 中文完整接受 | 英文完整接受 |
 | --- | --- | --- | --- | --- |
@@ -95,19 +95,21 @@ Hann 模块在这两次精确 pin 之间仅将 `initialized_clean`、`address_ca
 - PR #313 的第8章两语第二部总结按正式出版模型中的形式环境计数，由22条改为26条，第5／6／7／8章分布为5／5／9／7；不按GID数量或环境ID前缀推算。
 - PR #313 的第35章 `ch35-gram-corridor` 两语图注改称已形式化格拉姆行列式公式的单位向量特例，保留原算例链接。当前 f010 精确 pin 的实内积空间定义、行列式与严格正性声明支持这一限定；`c=1,1/2,0` 及 `det=0,3/4,1` 与未改的图脚本、共用计算及两语SVG对应。数值代入不新增Lean声明，后续清表与生命解释仍属 `MODEL`。
 
-第8章在 main89 输入已有完整双语源阅读与39项独立数值复算（`current-full-text-and-numerical-intake.json`）。当前候选相对 main89 每语只改了上述计数一行；其余章源字节对应，计数行已按当前正式出版模型另核。旧阅读／39项复算仅按此对应复用，不称当前全文重读或完整章节、媒体、输出接受。有限浴新增内容另有 `finite-bath-correspondence.json` 的精确源与Reeb–Wolf定理3原文对应；两份材料均来自 `qg-ch08-finite-bath-intake-20261115`，属于来源／数值 intake，不是完整章节、媒体、输出或独立接受。其余相关冻结模块、其他原始文献与媒体维度仍待补齐。第35章容量及Gram图注 intake 同样不批准完整章节；第39章在 `402b5a2e` 后已变，须核对当前内容，不能沿用文件相同的推断。
+第8章在 main89 输入已有完整双语源阅读与39项独立数值复算（`current-full-text-and-numerical-intake.json`）。d20 整合快照的第8章相对 main89 每语只改了上述计数一行；其余章源字节对应，计数行已按当前正式出版模型另核。旧阅读／39项复算仅按此对应复用，不称当前全文重读或完整章节、媒体、输出接受。有限浴新增内容另有 `finite-bath-correspondence.json` 的精确源与Reeb–Wolf定理3原文对应；两份材料均来自 `qg-ch08-finite-bath-intake-20261115`，属于来源／数值 intake，不是完整章节、媒体、输出或独立接受。其余相关冻结模块、其他原始文献与媒体维度仍待补齐。第35章容量及Gram图注 intake 同样不批准完整章节；第39章在 `402b5a2e` 后已变，本次又随 main315 更新推导；其完整页面仍须核对，不能沿用文件相同的推断。
 
 每语58页的完整接受仍全部待核。后续继续逐页建立或映射双语正文、正式声明、独立计算、物理／文献、媒体、输出与独立审查证据；PR #313 修正及本次名册／依赖差分不授予整章或整书批准。普通HTML/PDF/EPUB按项目第9节构建与自动检查，只有规定触发时查看受影响页面；未改生产器和图片不新增截图或重生要求。最终提交对应、独立三席、CI导出、合入及Pages由调用方接续，旧额度和未解决事项保留原归属。
 
 
-## main9 集成后的当前批次（2026-11-15）
+## mainfcf 整合快照的限定批次（2026-11-15）
 
-PR #306 在 mainbe3 `be3e49085febd40a9f1a2cd9574746f6b4e037ba` 中为中英文第11章各加入144行原生 Dyson／演化与 C1 共振包络界说明；该页相对 main89、402b 均为新变化。统计文件、声明地图 `.stills.json` 与14张已发布声明地图静帧也随主线变化。main9 的 PR #312 又改变 `berry-sector-path-sandbox`、`stereographic-relativization-sandbox`、`quantum-interpretations-duel` 的生产器／测试／静帧等34个路径，未改章源、SUMMARY、pin 或工具。上述来源、完整页面、媒体、派生产物与独立审查仍分别待核；主线合入与文件身份均不增加准确性接受。
+PR #306 在 mainbe3 `be3e49085febd40a9f1a2cd9574746f6b4e037ba` 中为中英文第11章各加入144行原生 Dyson／演化与 C1 共振包络界说明；该页相对 main89、402b 均为新变化。统计文件、声明地图 `.stills.json` 与14张已发布声明地图静帧也随主线变化。main9 的 PR #312 又改变 `berry-sector-path-sandbox`、`stereographic-relativization-sandbox`、`quantum-interpretations-duel` 的生产器／测试／静帧等34个路径，未改章源、SUMMARY、pin 或工具。mainfcf 的 PR #315 随后仅改变中英文第39章的相邻耦合／分块谱隙推导及 `data/statistics.json`，共3个路径；未改第8／11／35章、SUMMARY、pin、媒体、工具或规则。上述来源、完整页面、媒体、派生产物与独立审查仍分别待核；主线合入与文件身份均不增加准确性接受。
 
-当前 b472 候选的正式名册及差分见上表；相对 main9 的出版差分严格为第8／35章中英各一行和两份准确性文档，共六路径。锁由 main89 的 `a313d1ce` 前进至 `f010e3713174c4df2b28c8f8c4d9ff3c41e46a05`，仍为 `dev`、610条，声明键与记录逐项相同；当前 pin 在 `/Users/auricstudio/trureturing` 的 `origin/dev` 祖先链上。两语第二部正式环境仍为5／5／9／7=26。
+d20 整合快照及本次文档修订的正式名册及差分见上表；相对 mainfcf 的出版差分严格为第8／35章中英各一行和两份准确性文档，共六路径。锁由 main89 的 `a313d1ce` 前进至 `f010e3713174c4df2b28c8f8c4d9ff3c41e46a05`，仍为 `dev`、610条，声明键与记录逐项相同；当前 pin 在 `/Users/auricstudio/trureturing` 的 `origin/dev` 祖先链上。两语第二部正式环境仍为5／5／9／7=26。
 
-当前 f010 精确源与 Frozen state 对应支持 PR #313 的两项范围：第二部26个正式环境的锁定 GID 均与源／状态片的名称、种类和 `statement_id` 对应；第35章 `TwoAnchorGram` 的定义、行列式公式和严格正性三项也逐项对应，且其 source、Blueprint、state 相对 a313 字节相同。有限浴来源、完整章节、媒体、输出与独立审查仍分别待核；第11章新增内容不从 PR313 的第8章／第35章 evidence 继承接受。
+当前 f010 精确源与 Frozen state 对应支持 PR #313 的两项范围：第二部26个正式环境的锁定 GID 均与源／状态片的名称、种类和 `statement_id` 对应；第35章 `TwoAnchorGram` 的定义、行列式公式和严格正性三项也逐项对应，且其 source、Blueprint、state 相对 a313 字节相同。有限浴来源、完整章节、媒体、输出与独立审查仍分别待核；第11章和第39章新增内容不从 PR313 的第8章／第35章证据继承接受。
 
 历史输入 `29d092932301f91a4b875bb9010649935e27a14e`／mainbe3 的 `integration-main-be3/evidence/` 保留原归属：当时 check 为0错误、9条既有警告，双语 HTML 及纠正文字／链接断言通过，英文搜索索引报告12,805,627 bytes。该历史构建元数据的字符计数不当作 UTF-8 字节数，也不升级为 b472 的检查。
 
-本次 b472 未提交候选另跑 `git diff --check`、正式源／双语检查、`TRURETURING_DIR=/Users/auricstudio/trureturing TBOOK_REPO=the-omega-institute/trureturing-books ./tbook check` 及双语 HTML 构建与受影响文字／链接断言，均通过；check 为0错误、9条既有警告（1个未引用序曲图、8个历史影片 subject_commit），英文 HTML 仍报搜索索引12,805,627 bytes 警告，无生成的 tracked 变更。输入哈希、实际结果及正确区分 UTF-8 字节数／Unicode 字符数的产物元数据见 `repair-r1/evidence/` 的 `current-checks.json`、`html-current-assertions.json` 和 `final-candidate.json`。该自动输出证据只覆盖两项纠正，不接受 main312 媒体或完整页面。未做截图／逐页阅读矩阵、本地 PDF／EPUB 或媒体重生成；最终提交对应、R2 三席、CI 的 PDF／EPUB 与适用导出校验、合入和 Pages 由调用方接续。
+历史 b472 加 R1 文档修正的候选（后提交为 e906）的空白、正式源／双语、check、双语 HTML 及纠正文字／链接检查均通过，check 为0错误、9条既有警告，英文搜索索引报告12,805,627 bytes。`repair-r1/evidence/` 的 `current-checks.json`、`html-current-assertions.json` 和 `final-candidate.json` 保留该输入，不替代 d20 整合后的检查。
+
+本次 d20 加两份文档修订的候选另跑适用的空白、正式源／双语检查、`TRURETURING_DIR=/Users/auricstudio/trureturing TBOOK_REPO=the-omega-institute/trureturing-books ./tbook check`、双语 HTML 构建及两项纠正的文字／链接断言，均通过；check 为0错误、12条警告（1个未引用序曲图、8个历史影片 subject_commit，以及第16章形式化请求 #11／#12／#10 的3条 HTTP 403 在线核验警告），英文 HTML 报搜索索引12,812,919 bytes 大小警告。实际输入、警告数值、产物 UTF-8 字节数／Unicode 字符数及最终候选的依赖对应见外部 `integration-main-fcf6/evidence/` 的 `current-checks.json`、`html-current-assertions.json`、`preservation-and-doc-checks.json`、`validation-correspondence.json` 和 `final-candidate.json`；完整证据前缀为 `/private/tmp/qg-current-book-stale-claims-evidence-20261115/`。仅两份文档相对输入 d20 改动，四行章源纠正、其余 tracked bytes 与依赖链接保全，无生成的 tracked 变更。上述在线请求核验仍受限；自动输出证据只覆盖两项纠正，不接受第11／39章完整页面、main312 媒体或整书。未做截图／逐页阅读矩阵、本地 PDF／EPUB 或媒体重生成；最终提交对应、R2 三席、CI 的 PDF／EPUB 与适用导出校验、合入和成功 Pages 由调用方接续。
