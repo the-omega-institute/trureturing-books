@@ -154,7 +154,7 @@ $$
 **Twist one corner, and the phases on its two edges run through every value.** On a single square only corner 1 turns, a full circle (the amber gauge hand): the hands on $e_0$ and $e_1$ turn opposite ways, each passing $1, i, -1, -i$, and the faint arcs are the angles they have swept; the magenta loop phase at the centre stays at $i$, with no arc on its dial.
 :::
 
-Because $g$ can rotate the phase at each endpoint independently, the phase on a single open edge is never gauge-invariant by itself. To synchronize phases across the graph, we select a **named spanning tree** (`NamedSpanningTree`) $T \subseteq E$ and a reference root vertex $r \in V$:
+For a single open edge with distinct, unanchored endpoints, $g$ can rotate the phase at each endpoint independently, so the edge phase is not gauge-invariant by itself. To synchronize phases across the graph, we select a **named spanning tree** (`NamedSpanningTree`) $T \subseteq E$ and a reference root vertex $r \in V$:
 
 - Every tree edge $e \in T$ is non-loop ($\forall e \in T,\; s(e) \neq t(e)$);
 - The undirected endpoint map $e \mapsto \{s(e), t(e)\}$ is injective on $T$ (no parallel tree edges);
