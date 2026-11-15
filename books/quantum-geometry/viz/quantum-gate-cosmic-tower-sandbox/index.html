@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="GATE//TOWER · Quantum-Gate Minimal-Arc Trihedron &amp; Six-Tier Cosmic Concept Tower">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GATE//TOWER 量子门极小圆弧体与六层宇宙概念塔</title>
+<meta name="description" content="两扇正交的极小量子门来回走一圈合不拢，换位子留下的旋转角与它们撑起的球面三角形角超同阶；纠缠门把乘积态推离 Segre 环面；六层概念塔每层都按 1—3—3—1 四拍走完，顶层的体收成上一层的点，4π 后回到比较原语。Two orthogonal minimal gates walked round a loop do not close: the commutator leaves a turn of the same order as the excess of the spherical triangle they span; an entangling gate pushes a product state off the Segre torus; every tier of the six-tier concept tower runs the 1—3—3—1 four beats, its volume closes into the next point, and after 4π the top returns to the comparison primitive.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="quantum-gate-cosmic-tower-sandbox">
+<div class="app lab" id="app">
+<header class="top">
+  <div class="brand">
+    <a class="crumb" href="../"><span class="zh">◂ 可视化索引 · 第 34 章 · §34.15</span><span class="en">◂ Visualizations · Ch. 34 · §34.15</span></a>
+    <h1 class="logo" data-text="GATE//TOWER">GATE<span>//</span>TOWER</h1>
+    <div class="tagline"><span class="zh">量子门极小圆弧体与六层宇宙概念塔 · <em>两扇正交小门走一圈合不拢，剩下的那一点转角就是它们撑开的面积；每一层都是同一块小弧面体。</em></span><span class="en">Quantum-gate minimal-arc trihedron &amp; six-tier cosmic concept tower · <em>Walk two small orthogonal gates round a loop and it does not close; the turn left over is the area they span, and every tier is the same small curved solid.</em></span></div>
+  </div>
+  <div class="status"><span class="pill hot" id="tierPill">L1 <strong>Λ²</strong></span><span class="pill" id="lensPill"><span class="zh">名相</span><span class="en">PHENOMENAL</span></span><div class="langs" role="group" aria-label="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div></div>
+</header>
+<aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+  <section class="panel sec">
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§34.15</span></h2>
+    <div class="presets cards" id="presets">
+      <button class="preset" data-preset="gate-commutator-trihedron" aria-pressed="false"><span class="code">COMMUTATOR · ΔT</span><span class="cn zh">正交双门换位角盈 U<sub>x</sub>†U<sub>y</sub>†U<sub>x</sub>U<sub>y</sub> 与极小圆弧体</span><span class="cn en">Orthogonal gate commutator &amp; minimal-arc trihedron</span></button>
+      <button class="preset" data-preset="entangling-segre-escape" aria-pressed="false"><span class="code">SEGRE · WEDGE</span><span class="cn zh">双比特纠缠门“二生三”偏离 Segre 流形</span><span class="cn en">2-qubit entangling gate &amp; Segre wedge escape</span></button>
+      <button class="preset" data-preset="octave-1331-grammar" aria-pressed="false"><span class="code">1—3—3—1</span><span class="cn zh">通用四拍语法：点·线·面·体 ↔ 粒子·波·场</span><span class="cn en">Universal 1—3—3—1 four-beat octave grammar</span></button>
+      <button class="preset" data-preset="six-tier-cosmic-tower" aria-pressed="false"><span class="code">L0 … L5 · TOWER</span><span class="cn zh">自底向上六层宇宙概念塔与双透镜剥衣</span><span class="cn en">Six-tier cosmic tower (L0..L5) &amp; dual-lens unmasking</span></button>
+      <button class="preset" data-preset="mobius-ouroboros-closure" aria-pressed="false"><span class="code">4π ↺ CMP</span><span class="cn zh">顶层 4π 单侧莫比乌斯闭合回环 L5 ↺ L0</span><span class="cn en">4π Möbius ouroboros return (L5 ↺ L0 CMP)</span></button>
+    </div>
+    <p class="note" id="presetNote"></p>
+  </section>
+  <section class="panel sec" id="ctlPanel">
+    <h2><span class="zh">塔层 · 四拍 · 门步</span><span class="en">Tier · beat · gate step</span></h2>
+    <button class="lens-toggle" id="lensToggleBtn" type="button" aria-pressed="false"><span class="seg off"><span class="zh">物理时空显影名相</span><span class="en">Phenomenal Physics View</span></span><span class="seg on"><span class="zh">量子门极小圆弧体统一本相</span><span class="en">Unified Quantum-Gate Substrate</span></span></button>
+    <div class="field"><label for="towerTier"><span class="zh">六层概念塔层级 ℓ</span><span class="en">Concept-tower tier ℓ</span></label><output for="towerTier">L1</output><input id="towerTier" type="range" min="0" max="5" step="1" value="1"></div>
+    <div class="field"><label for="gradeBeat"><span class="zh">层内四拍 Λ<sup>k</sup></span><span class="en">Beat within the tier Λ<sup>k</sup></span></label><output for="gradeBeat">Λ²</output><input id="gradeBeat" type="range" min="0" max="3" step="1" value="2"></div>
+    <div class="field"><label for="gateAngleDeg"><span class="zh">极小门步长 ε（第二张卡为纠缠角 η）</span><span class="en">Gate step ε (entangling angle η on card 2)</span></label><output for="gateAngleDeg">45°</output><input id="gateAngleDeg" type="range" min="0" max="90" step="1" value="45"></div>
+    <p class="note"><span class="zh">拖舞台上的琥珀手柄改 ε；拖空白处转动视角。时间轴是层内四拍：Λ⁰ 点 → Λ¹ 线 → Λ² 面 → Λ³ 体，体收成上一层的点。</span><span class="en">Drag the amber handle on the stage to change ε; drag empty space to orbit. The rail is the four beats of a tier: Λ⁰ point → Λ¹ line → Λ² face → Λ³ volume, and the volume closes into the point of the next tier.</span></p>
+  </section>
+</aside>
+<main class="center">
+  <div class="stage" id="stage" data-thumb aria-label="舞台：受光的布洛赫核、极小圆弧体、Segre 环面、六层概念塔与莫比乌斯回环" data-aria-en="Stage: the lit Bloch core, the minimal-arc trihedron, the Segre torus, the six-tier concept tower and the Möbius return">
+    <canvas class="fill" id="cv"></canvas><div class="scan"></div><div class="vig"></div>
+    <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+    <div class="hud-tr chips" id="tierChips" role="group" aria-label="塔层" data-aria-en="Tier">
+      <button class="chip" data-tier-chip="0" aria-pressed="false" aria-label="L0 原语 CMP" data-aria-en="L0 comparison primitive">L0</button><button class="chip" data-tier-chip="1" aria-pressed="true" aria-label="L1 量子门" data-aria-en="L1 quantum gate">L1</button><button class="chip" data-tier-chip="2" aria-pressed="false" aria-label="L2 粒子" data-aria-en="L2 particle">L2</button><button class="chip" data-tier-chip="3" aria-pressed="false" aria-label="L3 场与波" data-aria-en="L3 field and wave">L3</button><button class="chip" data-tier-chip="4" aria-pressed="false" aria-label="L4 时空" data-aria-en="L4 spacetime">L4</button><button class="chip" data-tier-chip="5" aria-pressed="false" aria-label="L5 觉知 4π ↺ CMP" data-aria-en="L5 awareness, 4π back to CMP">L5</button>
+    </div>
+    <button class="handle" id="gateArcHandle" type="button" aria-label="拖动改变门步长 ε" data-aria-en="Drag to change the gate step ε" hidden></button>
+    <div class="hud-bl" id="legend"></div>
+  </div>
+  <div class="tour" id="tour"><button class="tbtn" id="prevBtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button><div class="what" id="tourBody"></div><button class="tbtn" id="nextBtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button></div>
+  <div class="strip"><section class="panel"><div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div><canvas id="plot" aria-label="条带小图" data-aria-en="Strip plot"></canvas></section></div>
+</main>
+<aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+  <section class="panel sec" id="readouts" aria-live="polite">
+    <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">NUM</span></h2>
+    <dl class="ro">
+      <div class="key"><dt><span class="zh">当前塔层与四拍（1—3—3—1）</span><span class="en">Active tier &amp; grade (1—3—3—1)</span></dt><dd><b id="roTier">—</b><span id="roTierSub"></span></dd></div>
+      <div class="c"><dt><span class="zh">门步长 ε</span><span class="en">Gate step ε</span></dt><dd><output id="roEps">—</output></dd></div>
+      <div class="v"><dt><span class="zh">换位子旋量相位 ½Φ<sub>comm</sub></span><span class="en">Commutator spinor phase ½Φ<sub>comm</sub></span></dt><dd><output id="roComm">—</output></dd></div>
+      <div class="m"><dt><span class="zh">三面角角超 Ω(ΔT<sub>ε</sub>)</span><span class="en">Trihedral excess Ω(ΔT<sub>ε</sub>)</span></dt><dd><output id="roOmega">—</output></dd></div>
+      <div class="m"><dt><span class="zh">Segre 共生度 |sin η| 与 CHSH</span><span class="en">Segre concurrence |sin η| &amp; CHSH</span></dt><dd><output id="roSegre">—</output></dd></div>
+      <div><dt><span class="zh">本层不变量</span><span class="en">Tier invariant</span></dt><dd><output id="roInv">—</output></dd></div>
+      <div><dt><span class="zh">透镜</span><span class="en">Lens mode</span></dt><dd><output id="roLens">—</output></dd></div>
+    </dl>
+    <p class="note"><span class="zh">换位子由 2 × 2 复矩阵当场相乘，tr C/2 与闭式 1 − 2 sin⁴(ε/2) 逐位比对；小 ε 时 ½Φ、Ω 与 ε²/2 同阶，ε 变大后三者分开。</span><span class="en">The commutator is multiplied out from 2 × 2 complex matrices on the spot and tr C/2 is compared with the closed form 1 − 2 sin⁴(ε/2); for small ε, ½Φ, Ω and ε²/2 agree to leading order, and they separate as ε grows.</span></p>
+  </section>
+  <section class="panel sec" id="evidence">
+    <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">拉格朗日恒等式：(Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)²/2。页面在 L0 取两个单位比较向量：线² + 面积² = 1：</span><span class="en">The Lagrange identity: (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)²/2. On L0 the page takes two unit comparison vectors: line² + area² = 1: </span><a data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">ZX = −XZ，X、Z 自伴，X² = Z² = 1。两扇正交门的生成元反对易，所以换位子不是恒等：</span><span class="en">ZX = −XZ, X and Z are self-adjoint, X² = Z² = 1. The generators of two orthogonal gates anticommute, so their commutator is not the identity: </span><a data-lean-gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" href="#" target="_blank" rel="noopener"><code>qubit_weyl_star</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">三维向量 a 的泡利矩阵 B a = [[a₂, a₀ − i a₁], [a₀ + i a₁, −a₂]]。页面用它造 U<sub>x</sub>、U<sub>y</sub>，并从换位子读回残余转轴 n：</span><span class="en">The Pauli matrix of a vector a is B a = [[a₂, a₀ − i a₁], [a₀ + i a₁, −a₂]]. The page builds U<sub>x</sub> and U<sub>y</sub> with it and reads the residual axis n back from the commutator: </span><a data-lean-gid="D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core" href="#" target="_blank" rel="noopener"><code>B_formula_core</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">两根不平行的轴 a、b 下，三维里行列式为 1 的每个正交变换都是有限个字母之积，每个字母固定 a 或 b。换位子本身就是 x、y 两轴上的四字母字；定理只说存在，不给步数：</span><span class="en">For two non-parallel axes a, b every orthogonal map of three-space with determinant 1 is a finite product of letters, each fixing a or b. The commutator is itself a four-letter word on the x and y axes; the theorem gives existence, not a length: </span><a data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="#" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">A₀、A₁、B₀、B₁ 是自伴对合；若一侧的两个观测量对易，则 CHSH 算子 S 满足 S² = 4。超过 2 必须两侧都不对易：</span><span class="en">A₀, A₁, B₀, B₁ are self-adjoint involutions; if the pair on one side commutes, the CHSH operator obeys S² = 4. Going past 2 needs non-commuting pairs on both sides: </span><a data-lean-gid="D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes" href="#" target="_blank" rel="noopener"><code>chsh_square_eq_four_of_local_pair_commutes</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">贝尔向量归一，其密度半正定、迹 1、秩 1、幂等；单比特边缘是 I/2，不幂等。η = 90° 时纠缠门正好走到贝尔态：</span><span class="en">The Bell vector is normalized; its density is positive, of trace 1, rank 1 and idempotent, and its one-qubit marginal is I/2, which is not idempotent. At η = 90° the entangling gate lands exactly on the Bell state: </span><a data-lean-gid="D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal" href="#" target="_blank" rel="noopener"><code>bell_pure_state_has_maximally_mixed_marginal</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">det G(u, v, w) &gt; 0 当且仅当 u、v、w 线性无关。三面角的三个顶点方向 N、A、B 有 det G = sin⁴ε，ε &gt; 0 时撑开一块体：</span><span class="en">det G(u, v, w) &gt; 0 exactly when u, v, w are linearly independent. The vertex directions N, A, B of the trihedron have det G = sin⁴ε, so for ε &gt; 0 they span a volume: </span><a data-lean-gid="D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff" href="#" target="_blank" rel="noopener"><code>three_anchor_gram_det_pos_iff</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">若尔当–维格纳构造的每个格点 i 都有 cᵢcᵢ† + cᵢ†cᵢ = 1。页面在 L2 用 N = 3 的 8 × 8 矩阵核对：</span><span class="en">Each site i of the Jordan–Wigner construction has cᵢcᵢ† + cᵢ†cᵢ = 1. On L2 the page checks it with the 8 × 8 matrices of N = 3: </span><a data-lean-gid="D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR" href="#" target="_blank" rel="noopener"><code>fullC_CAR</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">带命名生成树与锚点集 R 的图上，坐标映射 χ 在锚定规范下不变、恰好分开规范轨道，并有连续乘法截面；商群同构于 m + k − n 个圆周之积。三面角的三条棱、一个锚点：只剩 1 个规范不变相位，就是这圈的和乐：</span><span class="en">On a graph with a named spanning tree and anchor set R, the coordinate map χ is invariant under anchored gauge moves, separates exactly the gauge orbits and has a continuous multiplicative section; the quotient is a product of m + k − n circles. Three edges of the trihedron and one anchor leave one gauge-invariant phase, the holonomy of the loop: </span><a data-lean-gid="D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification" href="#" target="_blank" rel="noopener"><code>anchored_phase_classification</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">ZMod m 的每个加法子群 H：Σ<sub>h∈H</sub> f(h) = (|H|/m) Σ<sub>k∈H⊥</sub> f̂(k)。页面在 L3 取 m = 12、H = ⟨4⟩，波场采样两边逐项核对：</span><span class="en">For every additive subgroup H of ZMod m: Σ<sub>h∈H</sub> f(h) = (|H|/m) Σ<sub>k∈H⊥</sub> f̂(k). On L3 the page takes m = 12, H = ⟨4⟩ and checks both sides on the sampled wave: </span><a data-lean-gid="D5/S3/Fourier/FinitePoisson.finite_poisson_summation" href="#" target="_blank" rel="noopener"><code>finite_poisson_summation</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">在闵氏零锥上处处为零的二次型 S 等于 S(1, 0) 乘闵氏型：光锥定下度规，只差一个尺度。这是 L4 的外衣：</span><span class="en">A quadratic form S that vanishes on every Minkowski-null vector equals S(1, 0) times the Minkowski form: the light cone fixes the metric up to scale. This is the costume of L4: </span><a data-lean-gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" href="#" target="_blank" rel="noopener"><code>eq_smul_minkowski_of_null</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">ρ<sub>k+1</sub> = 𝒫(Uρ<sub>k</sub>U†) 时，每步熵增 S(ρ<sub>k+1</sub>) − S(ρ<sub>k</sub>) 等于删去的相干的相对熵 D(Uρ<sub>k</sub>U† ‖ 𝒫(Uρ<sub>k</sub>U†)) ≥ 0，N 步逐项相加。页面在 L4 取 U = U<sub>x</sub>(ε)、ρ₀ = |0⟩⟨0|：</span><span class="en">With ρ<sub>k+1</sub> = 𝒫(Uρ<sub>k</sub>U†) each step raises the entropy by the relative entropy of the deleted coherence, D(Uρ<sub>k</sub>U† ‖ 𝒫(Uρ<sub>k</sub>U†)) ≥ 0, and N steps add up. On L4 the page takes U = U<sub>x</sub>(ε) and ρ₀ = |0⟩⟨0|: </span><a data-lean-gid="D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" href="#" target="_blank" rel="noopener"><code>entropy_production_coherence_deletion_identity</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">圆周双覆盖 z ↦ z²：起点与底路径唯一决定抬升；没有连续的整体截面；底上走满一圈，抬升从 1 走到 −1。再走一圈才回到 1，这是莫比乌斯回环的 4π：</span><span class="en">The circle double cover z ↦ z²: the start and the base path determine the lift uniquely; there is no continuous global section; one full base turn takes the lift from 1 to −1. A second turn brings it back to 1, the 4π of the Möbius return: </span><a data-lean-gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift" href="#" target="_blank" rel="noopener"><code>circle_double_cover_history_lift</code></a></span></div>
+    <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：正交双门换位子 U<sub>x</sub>†U<sub>y</sub>†U<sub>x</sub>U<sub>y</sub> 的迹 tr C/2 = 1 − 2 sin⁴(ε/2) 与残余转轴 n ∝ (−sin(ε/2), sin(ε/2), cos(ε/2))；直角球面三角形的角超 tan(Ω/2) = tan²(ε/2)（吉拉尔）；纯两比特态的共生度 C = 2|c₀₀c₁₁ − c₀₁c₁₀|，乘积态 C = 0 构成 Segre 簇；纯态 CHSH 最大值 2√(1 + C²)（霍罗德茨基）。</span><span class="en">Literature results, not formalized in this book: the commutator U<sub>x</sub>†U<sub>y</sub>†U<sub>x</sub>U<sub>y</sub> of two orthogonal gates has tr C/2 = 1 − 2 sin⁴(ε/2) and residual axis n ∝ (−sin(ε/2), sin(ε/2), cos(ε/2)); a right spherical triangle has excess tan(Ω/2) = tan²(ε/2) (Girard); a pure two-qubit state has concurrence C = 2|c₀₀c₁₁ − c₀₁c₁₀|, and the product states C = 0 form the Segre variety; the CHSH maximum of a pure state is 2√(1 + C²) (Horodecki).</span></span></div>
+    <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">六层宇宙概念塔 L0–L5、各层的物理外衣、“门 ≡ ΔT<sub>ε</sub>”的统一透镜、1—3—3—1 四拍里 Λ³ ≡ Λ⁰<sub>ℓ+1</sub> 的重整化漏斗与顶层莫比乌斯回环，都是作者的模型；层与定理的对应是编排，不是推论。Segre 环面是实振幅切片的球极投影。</span><span class="en">The six-tier cosmic concept tower L0–L5, the physics costume of each tier, the unified lens “gate ≡ ΔT<sub>ε</sub>”, the renormalization funnel Λ³ ≡ Λ⁰<sub>ℓ+1</sub> of the 1—3—3—1 beats and the Möbius return at the top are models of the author; pairing tiers with theorems is an arrangement, not a deduction. The Segre torus is a stereographic picture of the real-amplitude slice.</span></span></div>
+    <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面的每个数都当场算出：矩阵换位子的迹与闭式之差（&lt; 10⁻¹⁵）、两种算法的角超、4 维态的共生度与约化密度、相关矩阵给出的 CHSH 最大值、N = 3 的反对易子、Z₁₂ 上的泊松求和、θ* = 0.7390851332151607 的 |cos θ* − θ*|、U(2π) = −I 与 U(4π) = +I。这是数值演示。</span><span class="en">Every number on the page is computed on the spot: the trace of the matrix commutator against its closed form (&lt; 10⁻¹⁵), the excess by two methods, the concurrence and reduced density of the four-amplitude state, the CHSH maximum from the correlation matrix, the anticommutators for N = 3, Poisson summation on Z₁₂, |cos θ* − θ*| for θ* = 0.7390851332151607, U(2π) = −I and U(4π) = +I. This is a numerical illustration.</span></span></div>
+    <button class="chip" id="infoBtn"><span class="zh">理论接口</span><span class="en">Theory interface</span></button>
+  </section>
+</aside>
+<footer class="rail"><div class="transport"><button class="tbtn" id="rewindBtn" aria-label="回到第一拍" data-aria-en="Back to the first beat">⏮</button><button class="tbtn" id="playBtn" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▶</button><span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span></div><div class="clock"><span class="tau" id="tourStep"></span><input type="range" id="now" min="0" max="4" step="any" value="2" aria-label="层内四拍 s" data-aria-en="The four beats of a tier, s"></div><div class="keys"><span id="hint"></span><span id="formula"></span></div></footer>
+</div>
+<div class="drawer" id="drawer" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="row"><h2 id="drawerTitle"><span class="zh">量子门与宇宙概念塔</span><span class="en">The quantum gate and the cosmic concept tower</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+  <div class="zh">
+    <p class="lede">本页是数值与模型演示，不是证明：每个数都由页面当场算出（NUM），每条 Lean 定理只在下面写明的那个实例上演示。</p>
+    <ol>
+      <li><b>换位子。</b>U<sub>x</sub>(ε) = cos(ε/2) − i sin(ε/2) X，U<sub>y</sub>(ε) 同理。C = U<sub>x</sub>†U<sub>y</sub>†U<sub>x</sub>U<sub>y</sub> 的迹 tr C/2 = 1 − 2 sin⁴(ε/2)，所以 C 是绕 n ∝ (−sin(ε/2), sin(ε/2), cos(ε/2)) 转 Φ = 2 arccos(1 − 2 sin⁴(ε/2)) 的旋转。从北极 N 出发依次走 U<sub>y</sub>、U<sub>x</sub>、U<sub>y</sub>†、U<sub>x</sub>† 四段弧，终点差了一截：这是品红的缺口。</li>
+      <li><b>极小圆弧体。</b>N、A = U<sub>y</sub>(ε)N、B = U<sub>x</sub>(ε)N 围成直角球面三角形 ΔT<sub>ε</sub>，两条腿都是 ε，角超 Ω = 2 arctan(tan²(ε/2))。小 ε 时 ½Φ ≈ Ω ≈ ε²/2：换位子的旋量相位与三角形的面积同阶。det G(N, A, B) = sin⁴ε。</li>
+      <li><b>Segre 环面。</b>纠缠门 exp(−i(η/2)(XY + YX)/2) 把 |00⟩ 送到 cos(η/2)|00⟩ + sin(η/2)|11⟩：共生度 |sin η|、单比特线性熵 ½ sin²η、CHSH 最大值 2√(1 + sin²η)。实振幅的两比特态构成 S³，乘积态 det c = 0 是一张环面；球极投影后，态从环面出发，沿品红的楔方向走向贝尔态的圆。</li>
+      <li><b>1—3—3—1 四拍。</b>三面角有 1 个顶点、3 条棱、3 面墙、1 块体，对应 Λ⁰、Λ¹、Λ²、Λ³ 的维数 1、3、3、1。模型把每层的体收成上一层的点（Λ³ ≡ Λ⁰<sub>ℓ+1</sub>），六层自下而上：L0 原语比较、L1 量子门、L2 粒子、L3 场与波、L4 时空、L5 觉知。</li>
+      <li><b>4π 回环。</b>莫比乌斯带上搬运的法向走一圈变号，走两圈复原：U(2π) = −I，U(4π) = +I。模型让 L5 经这条回环回到 L0 的比较原语。余弦不动点 θ* = cos θ* ≈ 0.7391 是 L5 的自指读数。</li>
+    </ol>
+    <div class="lean open"><span class="ok">OPEN</span><span>3 + 1 维量子引力，以及杨–米尔斯理论连续极限的存在与质量间隙，都是开放问题；本页的塔不声称解决它们。</span></div>
+    <p class="lede refs">书中：<a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-gate-and-cosmic-concept-tower" target="_top">§34.15 量子门与宇宙概念塔</a></p>
+  </div>
+  <div class="en">
+    <p class="lede">This page is a numerical and model illustration, not a proof: every number is computed on the spot (NUM), and each Lean theorem is shown only on the instance written below.</p>
+    <ol>
+      <li><b>The commutator.</b> U<sub>x</sub>(ε) = cos(ε/2) − i sin(ε/2) X, and U<sub>y</sub>(ε) alike. C = U<sub>x</sub>†U<sub>y</sub>†U<sub>x</sub>U<sub>y</sub> has tr C/2 = 1 − 2 sin⁴(ε/2), so C turns by Φ = 2 arccos(1 − 2 sin⁴(ε/2)) about n ∝ (−sin(ε/2), sin(ε/2), cos(ε/2)). Starting at the north pole N and walking the four arcs U<sub>y</sub>, U<sub>x</sub>, U<sub>y</sub>†, U<sub>x</sub>† ends short of N: that is the magenta gap.</li>
+      <li><b>The minimal-arc trihedron.</b> N, A = U<sub>y</sub>(ε)N and B = U<sub>x</sub>(ε)N bound the right spherical triangle ΔT<sub>ε</sub> with both legs ε and excess Ω = 2 arctan(tan²(ε/2)). For small ε, ½Φ ≈ Ω ≈ ε²/2: the spinor phase of the commutator is of the order of the area of the triangle. det G(N, A, B) = sin⁴ε.</li>
+      <li><b>The Segre torus.</b> The entangling gate exp(−i(η/2)(XY + YX)/2) takes |00⟩ to cos(η/2)|00⟩ + sin(η/2)|11⟩: concurrence |sin η|, one-qubit linear entropy ½ sin²η, CHSH maximum 2√(1 + sin²η). Real two-qubit states form S³ and the product states det c = 0 a torus in it; after stereographic projection the state leaves the torus along the magenta wedge direction towards the circle of the Bell state.</li>
+      <li><b>The 1—3—3—1 beats.</b> A trihedron has 1 apex, 3 edges, 3 walls and 1 solid, matching the dimensions 1, 3, 3, 1 of Λ⁰, Λ¹, Λ², Λ³. The model closes the volume of each tier into the point of the next (Λ³ ≡ Λ⁰<sub>ℓ+1</sub>), six tiers from the bottom: L0 comparison primitive, L1 quantum gate, L2 particle, L3 field and wave, L4 spacetime, L5 awareness.</li>
+      <li><b>The 4π return.</b> A normal carried round the Möbius band changes sign after one turn and comes back after two: U(2π) = −I, U(4π) = +I. The model lets L5 return along this loop to the comparison primitive of L0. The cosine fixed point θ* = cos θ* ≈ 0.7391 is the self-referential reading of L5.</li>
+    </ol>
+    <div class="lean open"><span class="ok">OPEN</span><span>Quantum gravity in 3 + 1 dimensions, and the existence and mass gap of the continuum limit of Yang–Mills theory, are open problems; the tower on this page does not claim to settle them.</span></div>
+    <p class="lede refs">In the book: <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-gate-and-cosmic-concept-tower" target="_top">§34.15 The quantum gate and the cosmic concept tower</a></p>
+  </div>
+</div></div>
+<script src="main.js"></script>
+</body>
+</html>

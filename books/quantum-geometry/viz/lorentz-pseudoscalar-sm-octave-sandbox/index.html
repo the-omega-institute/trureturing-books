@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="LORENTZ//OCTAVE · Lorentz Pseudoscalar and Standard-Model Octave Sandbox">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LORENTZ//OCTAVE · 洛伦兹伪标量与标准模型八度沙盘</title>
+<meta name="description" content="三条正交线闭合成体 I₃，I₃² = −1：这个负号就是洛伦兹度规里的负号；预算 c dt 花在空间位移 dx 上，余下的才是固有时 c dτ，β = 1 时一点不剩。点·线·面·体的维数 1·3·3·1 合为 8，三色楔成一体 det G₃ = 1，体再封成新的一点：质子与它的 π 介子汤川场。Three orthogonal lines close into the volume I₃ with I₃² = −1, the minus sign of the Lorentz metric; the budget c dt spent on the drift dx leaves the proper time c dτ, nothing at β = 1. Point, line, plane and volume have dimensions 1·3·3·1, eight in all; three colors wedge into one volume with det G₃ = 1, which seals into a new point: the proton and the Yukawa field of its pion.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="lorentz-pseudoscalar-sm-octave-sandbox">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 第 34 章 · §34.14</span><span class="en">◂ Ch. 34 · §34.14</span></a>
+      <h1 class="logo" data-text="LORENTZ//OCTAVE">LORENTZ<span>//</span>OCTAVE</h1>
+      <div class="tagline"><span class="zh">洛伦兹伪标量与标准模型八度 · <em>体的平方是 −1；光把预算全给空间；三色成体，再封成新的一点</em></span><span class="en">Lorentz pseudoscalar and the SM octave · <em>a volume squares to −1; light spends all of the budget on space; three colors seal into a new point</em></span></div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="modePill"><span class="zh">阶</span><span class="en">Grade</span> <strong>—</strong></span>
+      <span class="pill" id="budgetPill">dτ/dt <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§34.14</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="pseudoscalar-minus-sign" aria-pressed="false"><span class="code">I₃² = −1</span><span class="cn zh">三维体闭合伪标量 I₃² = −1 与洛伦兹负号</span><span class="cn en">3D volume pseudoscalar I₃² = −1 and the Lorentz minus sign</span></button>
+        <button class="preset" data-preset="proper-time-budget-cone" aria-pressed="false"><span class="code">(c dτ)² = c²dt² − dx²</span><span class="cn zh">空间路径预算消长与固有时余量</span><span class="cn en">Spatial path budget and proper-time remainder</span></button>
+        <button class="preset" data-preset="sm-123-gauge-grades" aria-pressed="false"><span class="code">U(1)×SU(2)×SU(3)</span><span class="cn zh">标准模型 1—2—3 与点·线·面·体四阶本相</span><span class="cn en">SM 1—2—3 gauge ceiling and the grades Λ⁰…Λ³</span></button>
+        <button class="preset" data-preset="color-confinement-baryon" aria-pressed="false"><span class="code">1—3—3—1 · r∧g∧b</span><span class="cn zh">色禁闭祛魅：三色楔积成体归点</span><span class="cn en">Color confinement: three colors wedge into a singlet</span></button>
+        <button class="preset" data-preset="pion-yukawa-octave-handoff" aria-pressed="false"><span class="code">p⁺ · π · λ<sub>π</sub></span><span class="cn zh">跨层粒子—场接力：质子新点与 π 介子汤川场</span><span class="cn en">Cross-level relay: proton point and pion Yukawa field</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">八度与预算</span><span class="en">Octave and budget</span></h2>
+      <div class="field">
+        <label for="smOctaveStage"><span class="zh">八度阶 Λ<sup>k</sup></span><span class="en">Octave grade Λ<sup>k</sup></span><small class="zh">点 → 线 → 面 → 体 → 新点</small><small class="en">point → line → plane → volume → new point</small></label><output for="smOctaveStage" id="oStage">3</output>
+        <input type="range" id="smOctaveStage" min="0" max="4" step="1" value="3">
+      </div>
+      <div class="field">
+        <label for="betaOverC"><span class="zh">空间位移抽调比 β = v/c</span><span class="en">Spatial drift share β = v/c</span><small class="zh">也可拖动舞台上的琥珀手柄</small><small class="en">or drag the amber handle on the stage</small></label><output for="betaOverC" id="oBeta">0.35</output>
+        <input type="range" id="betaOverC" min="0" max="1" step="0.01" value="0.35">
+      </div>
+      <div class="field">
+        <label for="pionRangeScale"><span class="zh">汤川屏蔽程 λ<sub>π</sub>（fm）</span><span class="en">Yukawa range λ<sub>π</sub> (fm)</span><small class="zh">本书模型读作希格斯耦合标度</small><small class="en">read by the book as a Higgs coupling scale</small></label><output for="pionRangeScale" id="oLambda">1.414</output>
+        <input type="range" id="pionRangeScale" min="0.40" max="2.50" step="0.01" value="1.41">
+      </div>
+      <p class="note"><span class="zh">时间轴是坐标时间 c t：体内的相位按固有时 c τ = c t·√(1 − β²) 前进，β 越大走得越慢。拖动空白处转动视角；右上角的芯片直接跳到某一阶。</span><span class="en">The rail is coordinate time c t: the phase inside the volume advances with proper time c τ = c t·√(1 − β²), slower as β grows. Drag empty space to orbit; the chips at the top right jump to a grade.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：立方体角上的点、三条线、三个面与一个体，空间位移表盘、预算穹顶与质子—中子对" data-aria-en="Stage: the point, three lines, three planes and one volume at a cube corner, the drift dial, the budget dome and the proton–neutron pair">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="gradeChips" role="group" aria-label="八度阶" data-aria-en="Octave grade">
+        <button class="chip" data-grade="0" aria-pressed="false">Λ<sup>0</sup></button><button class="chip" data-grade="1" aria-pressed="false">Λ<sup>1</sup></button><button class="chip" data-grade="2" aria-pressed="false">Λ<sup>2</sup></button><button class="chip" data-grade="3" aria-pressed="true">Λ<sup>3</sup></button><button class="chip" data-grade="4" aria-pressed="false">Λ<sup>0</sup><sub>ℓ+1</sub></button>
+      </div>
+      <button type="button" class="handle" id="velocityHandle" aria-label="拖动改变空间位移 β" data-aria-en="Drag to change the drift β" hidden></button>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" id="prevBtn" data-tour="prev" aria-label="上一张卡" data-aria-en="Previous card">◀</button>
+      <button class="tbtn" id="rewindBtn" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <div class="what"></div>
+      <button class="tbtn" id="playBtn" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▶</button>
+      <button class="tbtn" id="nextBtn" data-tour="next" aria-label="下一张卡" data-aria-en="Next card">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="条带小图：预算曲线、外代数维数或汤川通量" data-aria-en="Strip plot: budget curves, exterior-algebra dimensions or Yukawa flux"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">NUM</span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">体的平方 I₃² = (σ₁σ₂σ₃)²</span><span class="en">square of the volume I₃² = (σ₁σ₂σ₃)²</span></dt><dd><b><output id="roI3">−1.0000</output></b><span id="roI3Sub"></span></dd></div>
+        <div class="m"><dt><span class="zh">位移 β = v/c · 空间份额 β²</span><span class="en">drift β = v/c · spatial share β²</span></dt><dd><output id="roBeta">—</output></dd></div>
+        <div class="v"><dt><span class="zh">驻波余量 dτ/dt = √(1 − β²)</span><span class="en">standing-wave remainder dτ/dt = √(1 − β²)</span></dt><dd><output id="roTau">—</output></dd></div>
+        <div class="c"><dt><span class="zh">巴伊利斯 p <span class="bar">p</span> = 1 − β²</span><span class="en">Baylis p <span class="bar">p</span> = 1 − β²</span></dt><dd><output id="roBaylis">—</output></dd></div>
+        <div><dt><span class="zh">当前阶与维数 1·3·3·1</span><span class="en">active grade and dimensions 1·3·3·1</span></dt><dd><output id="roGrade">—</output></dd></div>
+        <div class="v"><dt><span class="zh">三色格拉姆行列式 det G₃</span><span class="en">color Gram determinant det G₃</span></dt><dd><output id="roGram">—</output></dd></div>
+        <div class="m"><dt><span class="zh">汤川通量 (1 + r/λ)e<sup>−r/λ</sup>，r = r<sub>p</sub></span><span class="en">Yukawa flux (1 + r/λ)e<sup>−r/λ</sup> at r = r<sub>p</sub></span></dt><dd><output id="roYukawa">—</output></dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">§34.14</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">泡利对 X、Z 自伴、平方为 1，且 ZX = −XZ。页面由它造 Y = iXZ 与 I₃ = XYZ = iX²Z² = i·1，于是 I₃² = −1：2 × 2 复矩阵逐项相乘，对角为 −1、−1：</span><span class="en">The Pauli pair X, Z is self-adjoint and squares to 1, with ZX = −XZ. From it the page builds Y = iXZ and I₃ = XYZ = iX²Z² = i·1, so I₃² = −1: multiplying the 2 × 2 complex matrices entry by entry gives the diagonal −1, −1: </span><a data-lean-gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" href="#" target="_blank" rel="noopener"><code>qubit_weyl_star</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">实坐标 a 给出 B(a) = a₀X + a₁Y + a₂Z = [[a₂, a₀ − i a₁], [a₀ + i a₁, −a₂]]。页面把空间位移写成 B(βê)，巴伊利斯旁矢 p = 1 + B(βê)，矩阵相乘得 p <span class="bar">p</span> = (1 + B)(1 − B) = (1 − β²)·1：</span><span class="en">Real coordinates a give B(a) = a₀X + a₁Y + a₂Z = [[a₂, a₀ − i a₁], [a₀ + i a₁, −a₂]]. The page writes the drift as B(βê) and the Baylis paravector as p = 1 + B(βê); the matrix product gives p <span class="bar">p</span> = (1 + B)(1 − B) = (1 − β²)·1: </span><a data-lean-gid="D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core" href="#" target="_blank" rel="noopener"><code>B_formula_core</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对实数 r，|cosh r|² − |sinh r|² = 1。页面取 r = 快度 η = artanh β，于是 γ = cosh η、γβ = sinh η，γ²(1 − β²) = 1，dτ/dt = 1/γ：</span><span class="en">For real r, |cosh r|² − |sinh r|² = 1. The page takes r to be the rapidity η = artanh β, so γ = cosh η, γβ = sinh η, γ²(1 − β²) = 1 and dτ/dt = 1/γ: </span><a data-lean-gid="D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation" href="#" target="_blank" rel="noopener"><code>bogoliubov_norm_conservation</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">在整个光锥 t² = ‖w‖² 上为零的实二次型，必是闵可夫斯基型 t² − ‖w‖² 的倍数（任意空间维数）。光锥定下了负号：β = 1 落在锥上，(c dτ)² = 0：</span><span class="en">A real quadratic form that vanishes on the whole light cone t² = ‖w‖² is a multiple of the Minkowski form t² − ‖w‖² (in any spatial dimension). The light cone fixes the minus sign: β = 1 lies on the cone, where (c dτ)² = 0: </span><a data-lean-gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" href="#" target="_blank" rel="noopener"><code>eq_smul_minkowski_of_null</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">若尔当—维格纳费米子满足 c<sub>i</sub>c<sub>i</sub>† + c<sub>i</sub>†c<sub>i</sub> = 1。页面在三个模式 r、g、b 的 8 × 8 矩阵上逐项核对：</span><span class="en">Jordan–Wigner fermions satisfy c<sub>i</sub>c<sub>i</sub>† + c<sub>i</sub>†c<sub>i</sub> = 1. The page checks it entry by entry on the 8 × 8 matrices of three modes r, g, b: </span><a data-lean-gid="D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR" href="#" target="_blank" rel="noopener"><code>fullC_CAR</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">i &lt; j 时 c<sub>i</sub>c<sub>j</sub> + c<sub>j</sub>c<sub>i</sub> = 0。取伴随即得 c<sub>r</sub>†c<sub>g</sub>†c<sub>b</sub>† = −c<sub>g</sub>†c<sub>r</sub>†c<sub>b</sub>†：交换两色差一个负号，与楔积 r∧g∧b = −g∧r∧b 的符号规则一致，页面在 8 × 8 矩阵上核对：</span><span class="en">For i &lt; j, c<sub>i</sub>c<sub>j</sub> + c<sub>j</sub>c<sub>i</sub> = 0. Taking adjoints gives c<sub>r</sub>†c<sub>g</sub>†c<sub>b</sub>† = −c<sub>g</sub>†c<sub>r</sub>†c<sub>b</sub>†: swapping two colors costs a minus sign, the sign rule of the wedge r∧g∧b = −g∧r∧b; the page checks it on the 8 × 8 matrices: </span><a data-lean-gid="D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_anticomm_of_lt" href="#" target="_blank" rel="noopener"><code>fullC_anticomm_of_lt</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">沿命名生成树输运的根相位：根处为 1，沿树边 φ(t<sub>e</sub>) = u<sub>e</sub>φ(s<sub>e</sub>)，规范变换下 φ(a) ↦ g(a)φ(a)g(r)⁻¹，且连续、可乘。页面在三色三角形（3 个点、3 条边、树取 2 条）上用 U(1) 边相位核对协变：</span><span class="en">The root phase transported along a named spanning tree is 1 at the root, obeys φ(t<sub>e</sub>) = u<sub>e</sub>φ(s<sub>e</sub>) on tree edges, becomes g(a)φ(a)g(r)⁻¹ under a gauge change, and is continuous and multiplicative. The page checks the covariance with U(1) edge phases on the color triangle (3 points, 3 edges, a tree of 2): </span><a data-lean-gid="D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport" href="#" target="_blank" rel="noopener"><code>selected_tree_transport</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限命名多重图上，边相位场模锚定规范变换由 m + k − n 个圆周坐标完全分类，其中独立回路数 c = m + 1 − n。三色三角形 m = 3、n = 3、一个锚点 k = 1：只剩 1 个坐标，即绕三角形一圈的和乐，规范变换改不动它（Λ² 上的曲率）：</span><span class="en">On a finite named multigraph, edge phase fields modulo anchored gauge changes are classified by m + k − n circle coordinates, with c = m + 1 − n independent loops. For the color triangle, m = 3, n = 3 and one anchor k = 1 leave a single coordinate, the holonomy round the triangle, which no gauge change moves (the curvature on Λ²): </span><a data-lean-gid="D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification" href="#" target="_blank" rel="noopener"><code>anchored_phase_classification</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">两根不平行的轴下，三维里任一行列式为 1 的正交变换都是绕这两根轴转动的有限字。页面取 e₁、e₂，核对 R<sub>e₃</sub>(φ) = R<sub>e₁</sub>(90°)R<sub>e₂</sub>(φ)R<sub>e₁</sub>(−90°)；定理只说存在，不给步数：</span><span class="en">For two nonparallel axes, every orthogonal map of three-dimensional space with determinant 1 is a finite word of turns about them. The page takes e₁, e₂ and checks R<sub>e₃</sub>(φ) = R<sub>e₁</sub>(90°)R<sub>e₂</sub>(φ)R<sub>e₁</sub>(−90°); the theorem says such a word exists and gives no length: </span><a data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="#" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">三向量格拉姆行列式为正，当且仅当三者线性无关。三色 r、g、b 两两正交时 det G₃ = 1；第三色与 g 重合时 det G₃ = 0，体塌成面：</span><span class="en">The Gram determinant of three vectors is positive exactly when they are linearly independent. Three mutually orthogonal colors r, g, b give det G₃ = 1; a third color equal to g gives det G₃ = 0 and the volume collapses into a plane: </span><a data-lean-gid="D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff" href="#" target="_blank" rel="noopener"><code>three_anchor_gram_det_pos_iff</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">完备、两两正交的自伴投影族给出的未读映射 ρ ↦ Σ<sub>k</sub> P<sub>k</sub>ρP<sub>k</sub> 是幂等的。页面取三色投影 P<sub>r</sub>、P<sub>g</sub>、P<sub>b</sub>，对一个色空间密度矩阵核对：捏合两次与捏合一次相同：</span><span class="en">For a complete family of pairwise orthogonal self-adjoint projections, the unread map ρ ↦ Σ<sub>k</sub> P<sub>k</sub>ρP<sub>k</sub> is idempotent. The page takes the color projections P<sub>r</sub>, P<sub>g</sub>, P<sub>b</sub> and checks on a color density matrix that pinching twice equals pinching once: </span><a data-lean-gid="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent" href="#" target="_blank" rel="noopener"><code>finite_record_pinching_idempotent</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">ZMod m 的任一加法子群 H 上，Σ<sub>h∈H</sub> f(h) = (|H|/m)·Σ<sub>k∈H⊥</sub> f̂(k)。页面取 m = 12、三阶子群 H = {0, 4, 8}，f 为环上 12 个格点的汤川通量，两边之差小于 10⁻¹⁴：</span><span class="en">For every additive subgroup H of ZMod m, Σ<sub>h∈H</sub> f(h) = (|H|/m)·Σ<sub>k∈H⊥</sub> f̂(k). The page takes m = 12, the subgroup H = {0, 4, 8} of order three and f the Yukawa flux on 12 sites of a ring; the two sides differ by less than 10⁻¹⁴: </span><a data-lean-gid="D5/S3/Fourier/FinitePoisson.finite_poisson_summation" href="#" target="_blank" rel="noopener"><code>finite_poisson_summation</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：克利福德代数 Cl(3,0) 中 I₃ = e₁e₂e₃ 满足 I₃² = −1 且与一切元素对易；巴伊利斯旁矢量 p = p⁰ + p 与其克利福德共轭之积 p <span class="bar">p</span> = (p⁰)² − |p|²；狭义相对论的固有时 (c dτ)² = c²dt² − dx²；汤川势 e<sup>−r/λ</sup>/r 穿过半径 r 球面的力通量占库仑值的 (1 + r/λ)e<sup>−r/λ</sup>，λ<sub>π</sub> = ħ/(m<sub>π</sub>c) ≈ 1.414 fm（Yukawa 1935）；质子电荷半径 r<sub>p</sub> = 0.8409 fm（μ 子氢）；三维外代数各阶维数 C(3, k) = 1、3、3、1。</span><span class="en">Literature results, not formalized in this book: in the Clifford algebra Cl(3,0), I₃ = e₁e₂e₃ satisfies I₃² = −1 and commutes with everything; a Baylis paravector p = p⁰ + p times its Clifford conjugate gives p <span class="bar">p</span> = (p⁰)² − |p|²; special-relativistic proper time (c dτ)² = c²dt² − dx²; the force flux of the Yukawa potential e<sup>−r/λ</sup>/r through a sphere of radius r is (1 + r/λ)e<sup>−r/λ</sup> of the Coulomb value, with λ<sub>π</sub> = ħ/(m<sub>π</sub>c) ≈ 1.414 fm (Yukawa 1935); the proton charge radius r<sub>p</sub> = 0.8409 fm (muonic hydrogen); the grades of the three-dimensional exterior algebra have dimensions C(3, k) = 1, 3, 3, 1.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">把时间读作闭合的三维体 I₃（它的平方 −1 就是洛伦兹负号），把 U(1)×SU(2)×SU(3) 的 1—2—3 读作点·线·面·体四阶在三维封顶，把质子读作上一层的体封成的新点 Λ⁰<sub>ℓ+1</sub>，并把 λ<sub>π</sub> 读作希格斯耦合标度，都是本书的模型；驻波余量、涡旋环、胶子联络线与 π 介子脉冲都是示意画法。</span><span class="en">Reading time as the closed three-dimensional volume I₃ (its square −1 being the Lorentz minus sign), reading the 1—2—3 of U(1)×SU(2)×SU(3) as the four grades point, line, plane, volume capped in three dimensions, reading the proton as the new point Λ⁰<sub>ℓ+1</sub> into which the volume of the level below seals, and reading λ<sub>π</sub> as a Higgs coupling scale are the book's model; the standing-wave remainder, vortex rings, gluon connection lines and pion pulse are schematic drawings.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的每个数都当场算出：2 × 2 复矩阵的 I₃²、p <span class="bar">p</span> 与 (I₃ + βê)² 的标量部 −1 + β²，预算 β² + (dτ/dt)² = 1，快度，维数 1·3·3·1，格拉姆行列式，电荷 uud = +1 与 udd = 0，若尔当—维格纳 8 × 8 矩阵，树输运的协变，捏合幂等与泊松求和。这是数值演示，不是证明。</span><span class="en">Every number on the page is computed on the spot: I₃², p <span class="bar">p</span> and the scalar part −1 + β² of (I₃ + βê)² from 2 × 2 complex matrices, the budget β² + (dτ/dt)² = 1, the rapidity, the dimensions 1·3·3·1, Gram determinants, the charges uud = +1 and udd = 0, the Jordan–Wigner 8 × 8 matrices, the covariance of tree transport, pinching idempotence and Poisson summation. This is a numerical illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口</span><span class="en">Theory interface</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="4" step="any" value="0" aria-label="时间轴：坐标时间 c t" data-aria-en="Rail: coordinate time c t">
+    </div>
+    <div class="keys"><span id="hint"></span> · <span id="formula"></span></div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">这是数值演示，不是证明：每个数都由页面当场算出（NUM），每条 Lean 定理只在下面写明的那个实例上演示，文献结果标 ARGUED，本书的诠释标 MODEL。</p>
+      <ol>
+        <li><b>体的平方。</b>立方体角上从同一点出发的三条棱 e₁、e₂、e₃ 两两正交。I₃ = e₁e₂e₃ 把线 e₃ 送到与它正交的面 e₁₂，再送回 −e₃：e<sup>I₃θ</sup>e₃ = cos θ·e₃ + sin θ·e₁₂，θ = π 时为 −e₃。用泡利矩阵代表，I₃ = σ₁σ₂σ₃ = i·1，I₃² = −1。页面让 θ 随固有时前进：θ = π·cτ，cτ = ct·√(1 − β²)。</li>
+        <li><b>预算。</b>每一步坐标时间 c dt 是一份预算：花在空间位移上的是 dx = β c dt，余下的是固有时 c dτ，(c dτ)² = c²dt² − dx²。舞台上的穹顶半径就是 c dt：位移尖端正上方的穹顶高度恰为 c dτ，到表盘边缘 β = 1 时为零，那里是光。若把 β 写成旁矢 p = 1 + βê，p <span class="bar">p</span> = 1 − β²；把多重矢量 I₃ + βê 平方，标量部是 −1 + β² = −(dτ/dt)²。</li>
+        <li><b>1·3·3·1。</b>立方体角上过同一顶点的元素：1 个点、3 条棱、3 个面、1 个体，正是外代数 Λ⁰…Λ³ 的维数，合为 8。本书把 U(1)×SU(2)×SU(3) 的 1—2—3 读作这四阶在三维封顶（MODEL）；页面只显示维数，不声称由此推出规范群。</li>
+        <li><b>三色成体。</b>三种颜色是三条两两正交的单位方向 r、g、b，它们的楔积是体，格拉姆行列式 det G₃ = 1；第三色与 g 重合时体塌成面，det G₃ = 0。若尔当—维格纳费米子的反对易让交换两色差一个负号，这是楔积的符号规则。</li>
+        <li><b>新的一点。</b>体封成质子 p⁺ = uud（电荷 2/3 + 2/3 − 1/3 = +1），中子 n = udd 电荷为 0。两个核子之间剩下的是 π 介子的汤川场：穿过半径 r 球面的通量占库仑值的 (1 + r/λ)e<sup>−r/λ</sup>，λ<sub>π</sub> = ħ/(m<sub>π</sub>c) = 1.414 fm，在质子半径 r<sub>p</sub> = 0.8409 fm 处约为 0.880。</li>
+      </ol>
+      <p class="lede">开放问题（不在本页的任何读数里）：</p>
+      <div class="lean open"><span class="ok">OPEN</span><span>3 + 1 维杨—米尔斯理论的存在与质量间隙（克雷千禧难题）；附录 E 的 H9 把 3 + 1 维连续统极限留在推导声称之外。</span></div>
+      <div class="lean open"><span class="ok">OPEN</span><span>标准模型手征费米子的非微扰格点构造：非阿贝尔手征规范理论的严格格点正规化尚未解决；附录 E 的 H8 只选定 (1, d) 签名与局部纤维联络。</span></div>
+      <p class="lede refs">书中：<a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-lorentz-pseudoscalar-and-sm-octave" target="_top">第 34 章 §34.14 · 洛伦兹伪标量与标准模型八度</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">This is a numerical illustration, not a proof: every number is computed on the spot by the page (NUM), each Lean theorem is shown only on the instance written below, literature results are marked ARGUED and the book's interpretation MODEL.</p>
+      <ol>
+        <li><b>The square of the volume.</b> The three edges e₁, e₂, e₃ leaving one corner of the cube are mutually orthogonal. I₃ = e₁e₂e₃ sends the line e₃ to the orthogonal plane e₁₂ and then back to −e₃: e<sup>I₃θ</sup>e₃ = cos θ·e₃ + sin θ·e₁₂, which is −e₃ at θ = π. With Pauli matrices, I₃ = σ₁σ₂σ₃ = i·1 and I₃² = −1. The page lets θ advance with proper time: θ = π·cτ, cτ = ct·√(1 − β²).</li>
+        <li><b>The budget.</b> Each step of coordinate time c dt is a budget: what goes into the drift is dx = β c dt, what remains is the proper time c dτ, (c dτ)² = c²dt² − dx². The dome on the stage has radius c dt: right above the tip of the drift its height is exactly c dτ, and at the rim of the dial, β = 1, it is zero: that is light. Writing β as the paravector p = 1 + βê gives p <span class="bar">p</span> = 1 − β²; squaring the multivector I₃ + βê gives the scalar part −1 + β² = −(dτ/dt)².</li>
+        <li><b>1·3·3·1.</b> The elements of the cube through one corner: 1 point, 3 edges, 3 faces, 1 volume, exactly the dimensions of the exterior algebra Λ⁰…Λ³, eight in all. The book reads the 1—2—3 of U(1)×SU(2)×SU(3) as these four grades capped in three dimensions (MODEL); the page shows the dimensions and does not claim that the gauge groups follow from them.</li>
+        <li><b>Three colors make a volume.</b> The three colors are three mutually orthogonal unit directions r, g, b; their wedge is a volume with Gram determinant det G₃ = 1. When the third color coincides with g the volume collapses into a plane and det G₃ = 0. The anticommutation of Jordan–Wigner fermions makes the swap of two colors cost a minus sign, the sign rule of the wedge.</li>
+        <li><b>A new point.</b> The volume seals into the proton p⁺ = uud (charge 2/3 + 2/3 − 1/3 = +1); the neutron n = udd has charge 0. What is left between two nucleons is the Yukawa field of the pion: the flux through a sphere of radius r is (1 + r/λ)e<sup>−r/λ</sup> of the Coulomb value, with λ<sub>π</sub> = ħ/(m<sub>π</sub>c) = 1.414 fm, about 0.880 at the proton radius r<sub>p</sub> = 0.8409 fm.</li>
+      </ol>
+      <p class="lede">Open problems (in none of the readouts of this page):</p>
+      <div class="lean open"><span class="ok">OPEN</span><span>Existence and mass gap of Yang–Mills theory in 3 + 1 dimensions (a Clay Millennium Problem); hypothesis H9 of Appendix E keeps the 3 + 1 dimensional continuum limit outside the claims of the derivation.</span></div>
+      <div class="lean open"><span class="ok">OPEN</span><span>A nonperturbative lattice construction of the chiral fermions of the Standard Model: a rigorous lattice regularization of non-Abelian chiral gauge theories is still unsolved; hypothesis H8 of Appendix E only fixes the (1, d) signature and local fiber connections.</span></div>
+      <p class="lede refs">In the book: <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-lorentz-pseudoscalar-and-sm-octave" target="_top">Chapter 34 §34.14 · Lorentz pseudoscalar and the Standard-Model octave</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -21,7 +21,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 67 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 77 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -89,9 +89,19 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `comparison-oisc-engine` | 不预设坐标的两两比较拆出求同与存异：双向乘积在 Î² = −1 守住单位预算，二十八次比较显影出三维八角盒，装不下的残差立为新轴 | `oisc` `emergence` `uncertainty` `time-axis` `lookup` `budget-cone` |
 | `spherical-trihedron-cell` | 正交一次与正交两次是同一块小弧面体的两个投影：沿棱看是一条直弧，沿墙走是拐 90° 的两步，多出鼓起的球面帽与撑开的体积砖 | `cell` `once-ridge` `twice-walls` `cap-excess` `gram-brick` `octant-limit` |
 | `triadic-nameless-sandbox` | 两态比较的归一投影把第三顶点顶出原平面，转一圈切面主谓宾互换，撤去投影幕与标签只留两频呼吸的曲面 | `bootstrap-core` `cascade-corolla` `cyclic-triality` `ladder-fade` `noumenon-breath` |
+| `berry-sector-path-sandbox` | 球心扇锥体积是弧顶面积的三分之一并定出半角相位，同一点在霍普夫圆纤维上记下不同来路，离散扇形连乘在驻相处锁成测地线 | `sector-volume` `hopf-fiber-lift` `stokes-wilson-duality` `pancharatnam-fan` `feynman-stationary` |
+| `standing-wave-volume-sandbox` | 同一点汇聚多条来路相位，无理失配绕圈抵消成虚空，整圈锁相的闭合回路在加密采样下凝成具有排斥刚性的驻波体积 | `multi-phase-point` `circle-density-pushforward` `void-cancellation` `bohr-sommerfeld-quantization` `standing-volume-emergence` |
+| `clifford-monad-tiling-sandbox` | 单枚圆弧体把点权、路径梯度、贝里相位与扇锥体积合一，多胞拼接时内部共享边界成对抵消、各阶几何量向外表面分流 | `monad-four-in-one` `gradient-path-phase-lock` `hodge-stokes-duality` `multicell-boundary-cancellation` `macroscopic-grade-sieve` |
+| `reversal-diagonal-cascade-sandbox` | 一个维度装不下的残差与同点异相碰撞逐级撑开线、面、体与时间，追问来路触发对角逃逸并借二次正交切出可达核 | `gram-overflow-cascade` `time-from-phase-collision` `arrival-diagonal-escape` `reversal-dual-cut` `concept-obstruction-cascade` |
+| `trihedron-rigidity-truss-sandbox` | 新旧概念两两可比织成全连通桁架：四连杆可晃而正四面体静定锁死三维，五点以上的冗余边化作雷吉铰链角亏与时序翻转 | `complete-graph-triangulation` `downward-irreducibility-lock` `floppy-c4-vs-rigid-k4` `maxwell-laman-polynomial` `regge-curvature-glow` |
+| `quantum-arc-macro-integral-sandbox` | 微观量子步是带二阶矢高与双覆叠的极小圆弧微分元，万千圆弧经驻相相消与桶内捏合积分为惯性直线、力场轨道与热熵 | `arc-sagitta-ito` `quantum-three-hallmarks` `curve-stitches-straight` `force-from-phase-gradient` `calculus-duality-zoom` |
+| `triadic-arc-field-loop-sandbox` | 同一枚极小圆弧按一、二、三阶展开成线粒子、面波与体场，体场的驻相与傅里叶聚焦又反过来生出定域粒子 | `arc-seed-triad` `line-particle-worldline` `surface-wave-sagitta` `volume-field-condensation` `reversal-field-to-particle` |
+| `octave-point-volume-field-sandbox` | 三维外代数的 1—3—3—1 回文与霍奇对偶把本层闭合体积归零为下一层的点，格林互逆与紫外穿衣让粒子与场互为表里 | `pascal-hodge-1331` `octave-helix-zoom` `green-yukawa-reciprocity` `dressed-uv-cutoff` `position-momentum-duality` |
+| `lorentz-pseudoscalar-sm-octave-sandbox` | 三维体积伪标量平方给出洛伦兹负号与固有时驻波预算，标准模型 1—2—3 规范群、色禁闭与汤川核力沿八度跨层接力 | `pseudoscalar-minus-sign` `proper-time-budget-cone` `sm-123-gauge-grades` `color-confinement-baryon` `pion-yukawa-octave-handoff` |
+| `quantum-gate-cosmic-tower-sandbox` | 非对易单比特门换位与双比特纠缠门直接张开极小圆弧体，按 1—3—3—1 四拍语法贯通六层概念塔并经 4π 莫比乌斯带归零 | `gate-commutator-trihedron` `entangling-segre-escape` `octave-1331-grammar` `six-tier-cosmic-tower` `mobius-ouroboros-closure` |
+| `coset-breaking-conservation-tower-sandbox` | 对称破缺与诺特守恒共分同一笔勾股比较预算，戈德斯通流经希格斯 2 + 1 = 3 或 Skyrmion 拓扑缠绕闭合成体并串起五塔接力 | `pythagorean-coset-ledger` `goldstone-vs-higgs-closure` `skyrmion-baryon-winding` `superconductor-crystal-meissner` `five-family-cascade-relay` |
 | `uncompleted-horizon-sandbox` | 每写入一条平权查表答案就撑开一块新弧面体与更多未比对的边，满射目录的对角槽劈开分离亏损，把完成态推成永不合拢的滚动地平线 | `bootstrap-ledger` `lawvere-godel` `ordinal-spiral` `bidirectional-parallax` `frozen-omniscience` |
 | `stereographic-relativization-sandbox` | 向北极盲点靠近的有限微弧在球极平面上被拉成球外有球的发散螺旋，旋转神谕切面在折叠与追逐之间切换，两枚标签在原点双双放下 | `blindspot-divergence` `compact-homotopy` `oracle-collapse` `oracle-chase` `tetralemma-rest` |
-| `berry-sector-path-sandbox` | 球心扇锥体积是弧顶面积的三分之一并定出半角相位，同一点在霍普夫圆纤维上记下不同来路，离散扇形连乘在驻相处锁成测地线 | `sector-volume` `hopf-fiber-lift` `stokes-wilson-duality` `pancharatnam-fan` `feynman-stationary` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -549,7 +559,67 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十四章 | §34.6.3 末（单连通前提与 Mandelstam–Giles–Barrett 模规范重构边界之后） | `berry-sector-path-sandbox` · `stokes-wilson-duality` |
 | 第三十四章 | §34.6.4 第 1 条（离散 $N$ 步巴格曼—潘查拉特纳姆扇形剖分与相干态传播子）之后 | `berry-sector-path-sandbox` · `pancharatnam-fan` |
 | 第三十四章 | §34.6.4 第 2 条（科纽螺线驻相选路）之后、例 `ex-ch34-sector-volume-hopf-and-cornu-benchmark` 之前 | `berry-sector-path-sandbox` · `feynman-stationary` |
-| 第三十四章 | §34.6 末（全章末尾转入第三十五章一段之后） | `berry-sector-path-sandbox` 完整实验室 |
+| 第三十四章 | §34.6 末（转入 §34.7 一段之后） | `berry-sector-path-sandbox` 完整实验室 |
+| 第三十四章 | §34.7.1 相位积分泛函段之后、定理 `thm-ch34-phase-cancellation-and-standing-sieve` 引言之前 | `standing-wave-volume-sandbox` · `multi-phase-point` |
+| 第三十四章 | §34.7.2 末（零坐标余弦均值恒等式 $\lvert\Psi(x)\rvert^2 = \langle\cos\gamma_B\rangle_x$ 段之后） | `standing-wave-volume-sandbox` · `circle-density-pushforward` |
+| 第三十四章 | §34.7.3 第 1 条（黄金无理转角遍历相消造就虚空）之后 | `standing-wave-volume-sandbox` · `void-cancellation` |
+| 第三十四章 | §34.7.3 末（玻尔—索末菲整圈锁相、泡利排斥刚性与全息驻波成像列表之后） | `standing-wave-volume-sandbox` · `bohr-sommerfeld-quantization` |
+| 第三十四章 | §34.7.4 本体翻转对照总表解读段之后、例 `ex-ch34-standing-wave-density-sweep-benchmark` 之前 | `standing-wave-volume-sandbox` · `standing-volume-emergence` |
+| 第三十四章 | §34.7 末（转入 §34.8 一段之后） | `standing-wave-volume-sandbox` 完整实验室 |
+| 第三十四章 | §34.8.1 末（单胞 $N = 1$ 四阶等权共存段之后、定理 `thm-ch34-clifford-monad-and-boundary-cancellation` 引言之前） | `clifford-monad-tiling-sandbox` · `monad-four-in-one` |
+| 第三十四章 | §34.8.2 第 2 条（非交换二阶点梯度锁定内禀贝里相位）之后 | `clifford-monad-tiling-sandbox` · `gradient-path-phase-lock` |
+| 第三十四章 | §34.8.2 末（三维霍奇对偶与极小斯托克斯同构之后） | `clifford-monad-tiling-sandbox` · `hodge-stokes-duality` |
+| 第三十四章 | §34.8.3 $N = 1 \to 4 \to 16 \to 64$ 球面三角网格剖分内部边抵消段之后 | `clifford-monad-tiling-sandbox` · `multicell-boundary-cancellation` |
+| 第三十四章 | §34.8.3 $N = 27$ 三维胞腔堆叠各阶分化段之后、例 `ex-ch34-clifford-monad-and-tiling-cancellation-benchmark` 之前 | `clifford-monad-tiling-sandbox` · `macroscopic-grade-sieve` |
+| 第三十四章 | §34.8 末（转入 §34.9 一段之后） | `clifford-monad-tiling-sandbox` 完整实验室 |
+| 第三十四章 | §34.9.1 格拉姆行列式逐阶溢出（点→线→面→体积）列表之后 | `reversal-diagonal-cascade-sandbox` · `gram-overflow-cascade` |
+| 第三十四章 | §34.9.1 末（同点异相碰撞撑开时间轴一段之后、§34.9.2 之前） | `reversal-diagonal-cascade-sandbox` · `time-from-phase-collision` |
+| 第三十四章 | §34.9.2 末（对角逃逸不完备塔 $T \to T' \to T''$ 段之后、§34.9.3 之前） | `reversal-diagonal-cascade-sandbox` · `arrival-diagonal-escape` |
+| 第三十四章 | §34.9.3 末（二次正交闭包 $M^{\perp\perp} = \overline{M}$ 解读段之后、§34.9.4 之前） | `reversal-diagonal-cascade-sandbox` · `reversal-dual-cut` |
+| 第三十四章 | §34.9.4 五阶阻塞—生成元概念级联总表之后 | `reversal-diagonal-cascade-sandbox` · `concept-obstruction-cascade` |
+| 第三十四章 | §34.9 末（转入 §34.10 过渡段之后） | `reversal-diagonal-cascade-sandbox` 完整实验室 |
+| 第三十四章 | §34.10.1 末（全连通可比图 $K_N$ 三元闭环剖分段之后、§34.10.2 之前） | `trihedron-rigidity-truss-sandbox` · `complete-graph-triangulation` |
+| 第三十四章 | §34.10.2.1 末（最小紧致非交换单李代数 $\dim = 3$ 地板之后、§34.10.2.2 之前） | `trihedron-rigidity-truss-sandbox` · `downward-irreducibility-lock` |
+| 第三十四章 | §34.10.2.2 末（$k$-SAT 向 $3$-SAT 三元子句归约之后、§34.10.3 之前） | `trihedron-rigidity-truss-sandbox` · `floppy-c4-vs-rigid-k4` |
+| 第三十四章 | §34.10.3 第 1 条（$N = 4$ 麦克斯韦—拉曼三维刚性多项式静定锁死）之后 | `trihedron-rigidity-truss-sandbox` · `maxwell-laman-polynomial` |
+| 第三十四章 | §34.10.3 末（全连通比较网刚性与雷吉角亏对照表之后、§34.10.4 之前） | `trihedron-rigidity-truss-sandbox` · `regge-curvature-glow` |
+| 第三十四章 | §34.10 末（转入 §34.11 一段之后） | `trihedron-rigidity-truss-sandbox` 完整实验室 |
+| 第三十四章 | §34.11.1 二阶圆弧矢高与费曼—伊藤二次标度段之后 | `quantum-arc-macro-integral-sandbox` · `arc-sagitta-ito` |
+| 第三十四章 | §34.11.1 量子力学三大标志性特征列表之后、定理 `thm-ch34-quantum-arc-differential-and-macro-integral` 引言之前 | `quantum-arc-macro-integral-sandbox` · `quantum-three-hallmarks` |
+| 第三十四章 | §34.11.2 第 1 条（第一支柱“以曲拼直”横向手性对消）之后 | `quantum-arc-macro-integral-sandbox` · `curve-stitches-straight` |
+| 第三十四章 | §34.11.2 末（第四支柱“同相成体、漏相化热”之后、§34.11.3 之前） | `quantum-arc-macro-integral-sandbox` · `force-from-phase-gradient` |
+| 第三十四章 | §34.11.3 开篇引出段之后、微积分对偶六维总表之前 | `quantum-arc-macro-integral-sandbox` · `calculus-duality-zoom` |
+| 第三十四章 | §34.11 末（转入 §34.12 一段之后） | `quantum-arc-macro-integral-sandbox` 完整实验室 |
+| 第三十四章 | §34.12.1 末（“万物皆为场等价于极小圆弧积分为场”之后、§34.12.2 之前） | `triadic-arc-field-loop-sandbox` · `arc-seed-triad` |
+| 第三十四章 | §34.12.2 第一阶（$O(\epsilon^1)$ 圆弧切向弦步与粒子世界线）之后 | `triadic-arc-field-loop-sandbox` · `line-particle-worldline` |
+| 第三十四章 | §34.12.2 第二阶（$O(\epsilon^2)$ 圆弧法向矢高与波动干涉）之后 | `triadic-arc-field-loop-sandbox` · `surface-wave-sagitta` |
+| 第三十四章 | §34.12.2 末（第三阶 $O(\epsilon^3)$ 圆弧体元与场凝聚之后、§34.12.3 之前） | `triadic-arc-field-loop-sandbox` · `volume-field-condensation` |
+| 第三十四章 | §34.12.3 末（$\epsilon \to 0$ 压平归零对照实验段之后、§34.12.4 之前） | `triadic-arc-field-loop-sandbox` · `reversal-field-to-particle` |
+| 第三十四章 | §34.12 末（转入 §34.13 一段之后） | `triadic-arc-field-loop-sandbox` 完整实验室 |
+| 第三十四章 | §34.13.1 杨辉三角 `1—3—3—1` 饱和三维体积元旋转各向同性段之后 | `octave-point-volume-field-sandbox` · `pascal-hodge-1331` |
+| 第三十四章 | §34.13.1 末（跨层级八度螺旋等同 $\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$ 公式之后、§34.13.2 之前） | `octave-point-volume-field-sandbox` · `octave-helix-zoom` |
+| 第三十四章 | §34.13.2 第 1 条（亥姆霍兹—汤川与施温格正算符逆格林互逆）之后 | `octave-point-volume-field-sandbox` · `green-yukawa-reciprocity` |
+| 第三十四章 | §34.13.2 第 2 条（Delone 最小间距紫外截断与穿衣态）之后 | `octave-point-volume-field-sandbox` · `dressed-uv-cutoff` |
+| 第三十四章 | §34.13.2 末（第 3 条位置—动量共轭傅里叶与有限泊松直通恒等式之后、§34.13.3 之前） | `octave-point-volume-field-sandbox` · `position-momentum-duality` |
+| 第三十四章 | §34.13 末（转入 §34.14 设问段之后） | `octave-point-volume-field-sandbox` 完整实验室 |
+| 第三十四章 | §34.14.1 第 2 条（三维体积伪标量 $\mathbf{I}_3^2 = -1$ 与 APS 副矢量双度规同源推导）之后 | `lorentz-pseudoscalar-sm-octave-sandbox` · `pseudoscalar-minus-sign` |
+| 第三十四章 | §34.14.1 末（第 3 条固有时原地驻波闭合预算与零光锥刚性之后、§34.14.2 之前） | `lorentz-pseudoscalar-sm-octave-sandbox` · `proper-time-budget-cone` |
+| 第三十四章 | §34.14.2 末（标准模型 `1—2—3` 规范群与“点·线·面·体”四阶粒子表解读段之后、§34.14.3 之前） | `lorentz-pseudoscalar-sm-octave-sandbox` · `sm-123-gauge-grades` |
+| 第三十四章 | §34.14.3 第 1 条（$\mathrm{SU}(3)_C$ 色禁闭与重子/介子跨八度复合点生成）之后 | `lorentz-pseudoscalar-sm-octave-sandbox` · `color-confinement-baryon` |
+| 第三十四章 | §34.14.3 末（三代驻波猜想与夸克—核子—原子跨层汤川/库仑八度接力之后、§34.14.4 之前） | `lorentz-pseudoscalar-sm-octave-sandbox` · `pion-yukawa-octave-handoff` |
+| 第三十四章 | §34.14 末（转入 §34.15 设问段之后） | `lorentz-pseudoscalar-sm-octave-sandbox` 完整实验室 |
+| 第三十四章 | §34.15.1 第 2 条（单比特非对易门换位回路张开极小圆弧体）之后 | `quantum-gate-cosmic-tower-sandbox` · `gate-commutator-trihedron` |
+| 第三十四章 | §34.15.1 末（第 3 条双比特纠缠门撕开可分 Segre 流形之后、§34.15.2 之前） | `quantum-gate-cosmic-tower-sandbox` · `entangling-segre-escape` |
+| 第三十四章 | §34.15.2 末（`1—3—3—1` 通用四拍语法与内禀时间节拍之后、§34.15.3 之前） | `quantum-gate-cosmic-tower-sandbox` · `octave-1331-grammar` |
+| 第三十四章 | §34.15.3 自底向上六层宇宙概念塔（`L0`–`L5`）总表之后 | `quantum-gate-cosmic-tower-sandbox` · `six-tier-cosmic-tower` |
+| 第三十四章 | §34.15.3 末（$4\pi$ 旋量双覆叠单侧莫比乌斯本体回环段之后、§34.15.4 之前） | `quantum-gate-cosmic-tower-sandbox` · `mobius-ouroboros-closure` |
+| 第三十四章 | §34.15 末（转入 §34.16 过渡段之后） | `quantum-gate-cosmic-tower-sandbox` 完整实验室 |
+| 第三十四章 | §34.16.1 末（破缺—守恒勾股拆账与嘉当—CCWZ 曲率之后、§34.16.2 之前） | `coset-breaking-conservation-tower-sandbox` · `pythagorean-coset-ledger` |
+| 第三十四章 | §34.16.2 第 1 条（局域规范安德森—希格斯 `2 + 1 = 3` 纵向吸收体闭合）之后 | `coset-breaking-conservation-tower-sandbox` · `goldstone-vs-higgs-closure` |
+| 第三十四章 | §34.16.2 末（第 2 条全局手征 $\pi_3(G/H) = \mathbb{Z}$ Skyrmion 拓扑缠绕之后、§34.16.3 之前） | `coset-breaking-conservation-tower-sandbox` · `skyrmion-baryon-winding` |
+| 第三十四章 | §34.16.3 五大破缺—守恒概念塔总表及塔 IV 超导晶格同台解读段之后 | `coset-breaking-conservation-tower-sandbox` · `superconductor-crystal-meissner` |
+| 第三十四章 | §34.16.3 末（五塔跨层接力链列表之后、§34.16.4 之前） | `coset-breaking-conservation-tower-sandbox` · `five-family-cascade-relay` |
+| 第三十四章 | §34.16 末（全章十六阶总收官转入第三十五章一段之后） | `coset-breaking-conservation-tower-sandbox` 完整实验室 |
 | 第三十五章 | 第一节 Lean 三定理列表第 3 条（`finite_memory_history_capacity`）之后、“这里的清表”一段之前 | `self-referential-table` · `full` |
 | 第三十五章 | 第一节“因此，乘着光来……”一段之后、定理 `thm-ch35-null-pulse-and-record-blocking` 之前 | `self-referential-table` · `reset` |
 | 第三十五章 | “成长即扩表”一节三步列表之后、“下面我们将……”一段之前 | `self-referential-table` · `expand_table` |

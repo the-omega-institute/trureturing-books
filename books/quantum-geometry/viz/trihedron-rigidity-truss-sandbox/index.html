@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="TRUSS//RIGIDITY · 3D Trihedron Rigidity Truss and K_N Complete-Graph Triangulation">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TRUSS//RIGIDITY · 极小圆弧体三维刚性桁架与 K_N 新旧概念全连通剖分沙盘</title>
+<meta name="description" content="单位比较球面上的 N 个概念与它们之间的比较弧：全员两两比较 K_N 把关系剖分成共边的极小弧面体 ΔT_ε，格拉姆表锁死，桁架只剩整体转动；砍掉对角比较，只剩一圈 C_N，扰动一推它就保持边长剪切。计数 E(K_N) − (3N − 6) = (N − 3)(N − 4)/2 在 N = 3、4 为零，之后多出的比较落成棱上的角亏。Concepts on the unit comparison sphere and their comparison arcs: all-pairs comparison K_N triangulates the relations into edge-sharing minimal arc-bodies ΔT_ε, the Gram table locks and the truss can only turn as a whole; cut the diagonals and the bare cycle C_N shears under a push while every side keeps its length. The count E(K_N) − (3N − 6) = (N − 3)(N − 4)/2 vanishes at N = 3, 4; beyond that the extra comparisons land as hinge deficits.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="trihedron-rigidity-truss-sandbox">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="TRUSS//RIGIDITY">TRUSS<b>//</b>RIGIDITY</h1>
+      <div class="tagline"><span class="zh">新概念要和每一个旧概念都比一遍 · <em>比全了，关系剖分成一块块刚性的小弧面体；砍掉对角比较，整圈一推就歪</em></span><span class="en">A new concept is compared with every old one · <em>compare all pairs and the relations split into rigid little arc-bodies; cut the diagonals and the ring shears at a push</em></span></div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillE"><span class="zh">比较</span><span class="en">COMPARISONS</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillDelta">ΔE <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§34.10</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="complete-graph-triangulation" aria-pressed="false"><span class="code">K<sub>N</sub> · TRIANGULATE</span><span class="cn zh">新概念 C₅ 向四个旧概念各发一条比较弧</span><span class="cn en">The new concept C₅ fires one arc to each of four old ones</span></button>
+        <button class="preset" data-preset="downward-irreducibility-lock" aria-pressed="false"><span class="code">ΔT · IRREDUCIBLE</span><span class="cn zh">三个概念撑出一块弯曲的小弧面体，压不回平面</span><span class="cn en">Three concepts span a curved arc-body that will not flatten</span></button>
+        <button class="preset" data-preset="floppy-c4-vs-rigid-k4" aria-pressed="false"><span class="code">C₄ ⇄ K₄</span><span class="cn zh">缺两条对角比较的四边形一推就剪切</span><span class="cn en">A four-ring missing two diagonals shears at a push</span></button>
+        <button class="preset" data-preset="maxwell-laman-polynomial" aria-pressed="false"><span class="code">ΔE(N) · ROOTS</span><span class="cn zh">只在三个与四个概念时，两两比较恰好够刚</span><span class="cn en">Only at three and four concepts are all pairs exactly enough</span></button>
+        <button class="preset" data-preset="regge-curvature-glow" aria-pressed="false"><span class="code">K₇ · REGGE</span><span class="cn zh">多出的六条比较落成棱角上的曲率</span><span class="cn en">Six extra comparisons land as curvature on the hinges</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">比较拓扑</span><span class="en">Comparison topology</span><span class="aside"><span class="zh">一键切换</span><span class="en">one click</span></span></h2>
+      <div class="chips mode-toggle" id="topologyMode" role="group" aria-label="比较拓扑" data-aria-en="Comparison topology">
+        <button class="chip" data-mode="complete" aria-pressed="true"><span class="zh">全员两两比较 K<sub>N</sub></span><span class="en">All-Pairs K<sub>N</sub></span></button>
+        <button class="chip" data-mode="missing-diagonals" aria-pressed="false"><span class="zh">砍掉对角比较</span><span class="en">Cut Diagonals</span></button>
+      </div>
+      <div class="ctl-row">
+        <span class="ctl-label"><span class="zh">概念数 N</span><span class="en">Concepts N</span></span>
+        <div class="chips" id="nodeCount" role="group" aria-label="概念数 N" data-aria-en="Concept count N">
+          <button class="chip" data-n="3" aria-pressed="false">3</button><button class="chip" data-n="4" aria-pressed="false">4</button><button class="chip" data-n="5" aria-pressed="true">5</button><button class="chip" data-n="6" aria-pressed="false">6</button><button class="chip" data-n="7" aria-pressed="false">7</button><button class="chip" data-n="8" aria-pressed="false">8</button>
+        </div>
+      </div>
+      <button class="chip spawn" id="spawnBtn"><span class="zh">+ 生成新概念</span><span class="en">+ Spawn Concept</span></button>
+      <div class="field">
+        <label for="perturbTorque"><span class="zh">扰动力矩 τ</span><span class="en">Perturbation torque τ</span><small class="zh">也可拖动舞台上的琥珀手柄</small><small class="en">or drag the amber handle on the stage</small></label><output for="perturbTorque">0.35</output>
+        <input type="range" id="perturbTorque" min="0" max="1" step="0.01" value="0.35">
+      </div>
+      <div class="field">
+        <label for="apertureDeg"><span class="zh">孔径 ε（边长）</span><span class="en">Aperture ε (side)</span><small class="zh">每块 ΔT<sub>ε</sub> 的边弧</small><small class="en">the side arc of each ΔT<sub>ε</sub></small></label><output for="apertureDeg">60°</output>
+        <input type="range" id="apertureDeg" min="25" max="80" step="1" value="60">
+      </div>
+      <p class="note"><span class="zh">时间轴是扰动的相位 t：推力为 τ cos 2πt 加上手柄的推量。拖动空白处转动视角。</span><span class="en">The rail is the phase t of the perturbation: the push is τ cos 2πt plus what the handle adds. Drag empty space to orbit.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：单位比较球面上的概念节点、比较弧与极小弧面体 ΔT_ε，可推动的琥珀手柄" data-aria-en="Stage: concept nodes on the unit comparison sphere, their comparison arcs and minimal arc-bodies ΔT_ε, with an amber handle to push">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="stageMode" role="group" aria-label="比较拓扑" data-aria-en="Comparison topology">
+        <button class="chip" data-stage-mode="complete" aria-pressed="true">K<sub>N</sub></button>
+        <button class="chip" data-stage-mode="missing-diagonals" aria-pressed="false"><span class="zh">砍对角</span><span class="en">Cut</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+      <button type="button" class="shear-handle" id="shearHandle" aria-label="拖动推桁架" data-aria-en="Drag to push the truss" hidden></button>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一张卡" data-aria-en="Previous card">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一张卡" data-aria-en="Next card">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="条带小图" data-aria-en="Strip plot"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">NUM</span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="dtKey"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="dt1"></dt><dd id="ro1">—</dd></div>
+        <div class="m"><dt id="dt2"></dt><dd id="ro2">—</dd></div>
+        <div class="c"><dt id="dt3"></dt><dd id="ro3">—</dd></div>
+        <div class="v"><dt id="dt4"></dt><dd id="ro4">—</dd></div>
+        <div class="m"><dt id="dt5"></dt><dd id="ro5">—</dd></div>
+        <div><dt id="dt6"></dt><dd id="ro6">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">格拉姆刚性：复矩阵 A、B 若 BᴴB = AᴴA，则有幺正矩阵 U 使 B = UA。页面把 N 个概念的布洛赫向量排成 3 × N 的列；全员两两比较给出整张格拉姆表 AᵀA，表不变，布局就只能整体转动，所以全员模式下扰动前后格拉姆表的最大差 max|ΔG| = 0。定理只保证 U 存在，不构造它：</span><span class="en">Gram rigidity: for complex matrices A, B with BᴴB = AᴴA there is a unitary U with B = UA. The page lines up the Bloch vectors of the N concepts as the columns of a 3 × N matrix; comparing all pairs gives the whole Gram table AᵀA, and with the table fixed the layout can only turn as a whole, so in all-pairs mode the largest Gram change under a push is max|ΔG| = 0. The theorem says U exists; it does not construct it: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq" href="#" target="_blank" rel="noopener"><code>exists_unitary_mul_eq_of_conjTranspose_mul_eq</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">纯态在单位球面上：2 × 2 厄米矩阵 M 由它的迹与布洛赫向量重建；若 tr M = 1 且 M² = M，则 ‖bloch M‖ = 1。页面给每个概念造 ρ = (I + r·σ)/2，核对 tr ρ = 1、ρ² = ρ，读回 |r| = 1：</span><span class="en">Pure states sit on the unit sphere: a 2 × 2 Hermitian M is rebuilt from its trace and its Bloch vector, and tr M = 1 with M² = M gives ‖bloch M‖ = 1. The page builds ρ = (I + r·σ)/2 for each concept, checks tr ρ = 1 and ρ² = ρ, and reads back |r| = 1: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" href="#" target="_blank" rel="noopener"><code>bloch_geometry_of_isHermitian</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">三锚格拉姆行列式：det G(u, v, w) = ‖u‖²‖v‖²‖w‖² + 2⟨u,v⟩⟨u,w⟩⟨v,w⟩ − ‖u‖²⟨v,w⟩² − ‖v‖²⟨u,w⟩² − ‖w‖²⟨u,v⟩²。页面取 C₁、C₂、C₃，两两内积 c = cos ε，得 det G₃ = 1 + 2c³ − 3c²；ε = 60° 时为 0.5：</span><span class="en">The three-anchor Gram determinant: det G(u, v, w) = ‖u‖²‖v‖²‖w‖² + 2⟨u,v⟩⟨u,w⟩⟨v,w⟩ − ‖u‖²⟨v,w⟩² − ‖v‖²⟨u,w⟩² − ‖w‖²⟨u,v⟩². The page takes C₁, C₂, C₃ with pairwise inner product c = cos ε, so det G₃ = 1 + 2c³ − 3c², which is 0.5 at ε = 60°: </span><a class="leanref" data-lean-gid="D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula" href="#" target="_blank" rel="noopener"><code>three_anchor_gram_det_formula</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">det G(u, v, w) &gt; 0 当且仅当 u、v、w 线性无关。1 + 2c³ − 3c² = (1 − c)²(1 + 2c) 在 0 &lt; ε &lt; 120° 时为正：三个概念张成三维，ΔT<sub>ε</sub> 不塌成平面三角或线段：</span><span class="en">det G(u, v, w) &gt; 0 exactly when u, v, w are linearly independent. 1 + 2c³ − 3c² = (1 − c)²(1 + 2c) is positive for 0 &lt; ε &lt; 120°: the three concepts span three dimensions and ΔT<sub>ε</sub> does not collapse into a flat triangle or a segment: </span><a class="leanref" data-lean-gid="D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff" href="#" target="_blank" rel="noopener"><code>three_anchor_gram_det_pos_iff</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">单位向量上 fsAngle(a, c) ≤ fsAngle(a, b) + fsAngle(b, c)，其中 fsAngle = arccos|⟨a, b⟩|。页面由布洛赫向量造旋量，fsAngle 是球面弧长的一半；ΔT<sub>ε</sub> 三边各 ε/2，松弛 ε/2 + ε/2 − ε/2 = ε/2 ≥ 0：</span><span class="en">On unit vectors fsAngle(a, c) ≤ fsAngle(a, b) + fsAngle(b, c), with fsAngle = arccos|⟨a, b⟩|. The page builds spinors from the Bloch vectors, so fsAngle is half the arc on the sphere; each side of ΔT<sub>ε</sub> is ε/2 and the slack is ε/2 + ε/2 − ε/2 = ε/2 ≥ 0: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle" href="#" target="_blank" rel="noopener"><code>fs_angle_triangle</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">两轴有限字：两根不平行的轴 a、b 下，三维里任意行列式为 1 的正交变换都是有限个字母之积，每个字母保持 a 或 b 不动。全员比较锁住之后桁架只剩整体转动 U；取 a = C₁、b = C₂（夹角 ε，不平行），U 可写成绕这两根轴的有限字。定理只说存在，不给步数或算法：</span><span class="en">Finite two-axis words: for two non-parallel axes a, b, every orthogonal map of three-dimensional space with determinant 1 is a finite product of letters, each keeping a or b fixed. Once all pairs lock the truss, its only freedom is a global turn U; with a = C₁ and b = C₂ (angle ε, not parallel) U is a finite word in turns about these two axes. The theorem says such a word exists; it gives no length and no algorithm: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="#" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">面圈正合：连通图的旋转系统满足 V − E + F = 2 时，面的 ZMod 2 标号的边界在每条边上等于两侧面之和，边界为零当且仅当标号为常数，面边界恰好张成圈空间。页面把扇形剖分与背面补齐成一张三角化球面，数出 V − E + F = 2（定理的前提），并枚举全部 2<sup>F</sup> 个标号核对“边界为零 ⇔ 常数”；E = 3N − 6、F = 2N − 4 来自页面的计数 3F = 2E，不是定理的结论：</span><span class="en">Face–cycle exactness: for a rotation system on a connected graph with V − E + F = 2, the ZMod 2 boundary of a face labelling equals, on each edge, the sum of its two faces; the boundary vanishes exactly for constant labellings, and face boundaries span the cycle space. The page closes the fan of arc-bodies with a back side into a triangulated sphere, counts V − E + F = 2 (the theorem's hypothesis) and runs through all 2<sup>F</sup> labellings to check “zero boundary ⇔ constant”; E = 3N − 6 and F = 2N − 4 come from the page's count 3F = 2E, not from the theorem: </span><a class="leanref" data-lean-gid="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact" href="#" target="_blank" rel="noopener"><code>face_cycle_exact</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">四面体缺陷与修复：有限单纯形上的 2-上链 F，各锚点 r 的面误差之和等于四面体缺陷数；某个锚点 r 满足 |V|·faceErrors(r) ≤ tetraDefects；任一边上链都有 tetraDefects ≤ 4|V|·edgeErrors；四面体上边界处处为零当且仅当 F 是某条边上链的上边界。页面取 F(i, j, k) = 三角形 C<sub>i</sub>C<sub>j</sub>C<sub>k</sub> 的带号立体角，数出全部 N⁴ 个有序四元组的缺陷，核对前两条：</span><span class="en">Tetrahedral defects and repair: for a 2-cochain F on a finite simplex, the face errors summed over anchors r equal the tetrahedral defects; some anchor r has |V|·faceErrors(r) ≤ tetraDefects; every edge cochain has tetraDefects ≤ 4|V|·edgeErrors; and the tetrahedral coboundary vanishes everywhere exactly when F is the coboundary of an edge cochain. The page takes F(i, j, k) = the signed solid angle of the triangle C<sub>i</sub>C<sub>j</sub>C<sub>k</sub>, counts the defects over all N⁴ ordered quadruples and checks the first two parts: </span><a class="leanref" data-lean-gid="D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness" href="#" target="_blank" rel="noopener"><code>tetra_defects_incidence_repair_and_exactness</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：麦克斯韦计数（三维 N 个自由节点的桁架要 3N − 6 根杆才可能刚性，少一根至少留一个软模）；亨内贝格加点（新节点用 3 根杆接上刚性桁架，桁架仍刚性）；吉拉尔定理 Ω = α + β + γ − π 与等边球面三角形 cos A = c/(1 + c)；雷杰离散引力把曲率放在棱上，角亏 δ = 2π − Σθ<sub>k</sub>；正四面体二面角 arccos(1/3)，五个绕一条棱留下 2π − 5 arccos(1/3) ≈ 7.356° 的缝。</span><span class="en">Literature results, not formalized in this book: Maxwell counting (a truss of N free nodes in three dimensions needs 3N − 6 bars to be rigid; each bar fewer leaves at least one floppy mode); Henneberg vertex addition (a new node tied to a rigid truss by 3 bars keeps it rigid); Girard's theorem Ω = α + β + γ − π and cos A = c/(1 + c) for an equilateral spherical triangle; Regge calculus puts curvature on hinges with deficit δ = 2π − Σθ<sub>k</sub>; the regular tetrahedron has dihedral angle arccos(1/3), and five round one edge leave a gap 2π − 5 arccos(1/3) ≈ 7.356°.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的每个数都由页面当场算出：节点位置、格拉姆表与行列式、球面角与角超、沿链精确保持边长的剪切（边长偏差 &lt; 10⁻¹²）、对角余弦、边数与面数、立体角上链的缺陷、ZMod 2 标号的枚举。这是数值演示，不是证明。</span><span class="en">Every number on the page is computed on the spot: node positions, Gram tables and determinants, spherical angles and excess, the shear that keeps every side length exactly along the chain (side drift &lt; 10⁻¹²), diagonal cosines, edge and face counts, the defects of the solid-angle cochain, and the enumeration of ZMod 2 labellings. This is a numerical illustration, not a proof.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“概念是比较球面上的节点、比较是节点间的弧（杆）”是作者的诠释。三维麦克斯韦计数把节点当成三维里的自由点（贴在球面上时计数是 2N − 3）；扰动 τ cos 2πt、对角撑杆上的琥珀应力（软模本要把它拉长或压短的量）与雷杰辉光 ΔE·(2π − 5 arccos(1/3)) 都是示意模型。</span><span class="en">“Concepts are nodes on the comparison sphere and comparisons are arcs (bars) between them” is the author's interpretation. The three-dimensional Maxwell count treats nodes as free points of space (pinned to the sphere the count is 2N − 3); the push τ cos 2πt, the amber stress on the diagonal struts (how far the floppy mode would stretch or squeeze them) and the Regge glow ΔE·(2π − 5 arccos(1/3)) are schematic models.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="1" aria-label="时间轴：扰动相位 t" data-aria-en="Rail: the perturbation phase t">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>D</kbd> <span class="zh">切换对角</span><span class="en">diagonals</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是单位比较球面 S² ⊂ ℝ³ 上的 N 个概念 C₁, …, C<sub>N</sub>（3 ≤ N ≤ 8）与它们之间的比较弧。本页是数值演示，不是证明：每个数都由页面当场算出（NUM），每条定理只在下面写明的那一个实例上演示。</p>
+      <ol>
+        <li><b>布局。</b>C₁ 是枢纽；C₂, …, C₇ 依次绕 C₁ 排在弧距 ε 处，相邻两根辐条相隔等边球面三角形的顶角 A(ε) = arccos(c/(1 + c))，c = cos ε，所以每个扇形 C₁C<sub>k</sub>C<sub>k+1</sub> 都是边长 ε 的极小弧面体 ΔT<sub>ε</sub>；C₈ 是 C₁ 关于弧 C₄C₅ 的镜像，补上第六块。整体只做一次刚性转动，让概念团对准镜头。</li>
+        <li><b>计数。</b>全员两两比较有 E(K<sub>N</sub>) = N(N − 1)/2 条弧；三维里 N 个自由节点的桁架刚好刚性需要 3N − 6 根杆（麦克斯韦计数，文献结果）。差 ΔE = (N − 3)(N − 4)/2 只在 N = 3、4 为零：三个与四个概念时，“全都比一遍”恰好等于“刚好够刚”；N ≥ 5 多出的比较是冗余的，它们必须彼此相容。每个新概念 C<sub>k</sub> 先用离它最近的三个旧概念定住（青色），其余比较为冗余（品红），合计 3N − 6 条定位比较。</li>
+        <li><b>砍掉对角。</b>只留一圈 C<sub>N</sub>（边都是 ε）时 E = N，ΔE = 6 − 2N；N = 4 时 ΔE = −2。软模数按三维计数为 3N − 6 − N，贴在球面上为 N − 3：四边形有一个剪切自由度。页面让链上的内角随推力变化，最后一个节点由两圆相交闭合，每条边长保持到 10⁻¹² 以内；菱形的两条对角余弦始终满足 (1 + c₁₃)(1 + c₂₄) = 4 cos²ε，这是四个单位向量的格拉姆表秩不超过 3 的结果。补回两条对角（K₄），c₁₃、c₂₄ 被定住，ε = 60° 时停在 (0.5, −1/3)：这块四面体由两个共边的 ΔT<sub>60°</sub> 组成。注意边长全为 60° 的 K₄ 在 S² 上不存在：它的格拉姆表秩为 4。</li>
+        <li><b>不可下塌。</b>三个概念的格拉姆行列式 det G₃ = 1 + 2c³ − 3c² = (1 − c)²(1 + 2c) 在 0 &lt; ε &lt; 120° 时为正，三者线性无关；球面三角形的角超 Ω = 3A(ε) − π &gt; 0，而平直弦三角形内角和恰为 π、角超为 0，塌成线段时 det G₃ = 0。</li>
+        <li><b>棱上的曲率。</b>ε = 60° 时 A = arccos(1/3)，恰是正四面体的二面角：五块 ΔT<sub>60°</sub> 绕 C₁ 合不拢，留下 2π − 5 arccos(1/3) ≈ 7.356° 的缝，与五个正四面体绕一条棱留下的缝相同。雷杰离散引力把这种缝读成集中在棱上的曲率（文献结果）；页面的“雷杰辉光” ΔE·(2π − 5 arccos(1/3)) 是示意量（MODEL），它只是把冗余比较数换成角度，不是测量值。</li>
+        <li><b>上链缺陷。</b>取 F(i, j, k) 为三角形 C<sub>i</sub>C<sub>j</sub>C<sub>k</sub> 的带号立体角 2 atan2(C<sub>i</sub>·(C<sub>j</sub> × C<sub>k</sub>), 1 + C<sub>i</sub>·C<sub>j</sub> + C<sub>j</sub>·C<sub>k</sub> + C<sub>k</sub>·C<sub>i</sub>)。概念都在一个开半球里时，四面体上边界处处为零，F 是边上链的上边界；某个四元组的四面体把球心包进去时，上边界是 ±4π，缺陷数随之出现。</li>
+        <li><b>冻结定理。</b>依据栏的八条 Lean 定理都是一般陈述，页面只演示它们在这个布局上的样子：exists_unitary_mul_eq_of_conjTranspose_mul_eq、bloch_geometry_of_isHermitian、three_anchor_gram_det_formula、three_anchor_gram_det_pos_iff、fs_angle_triangle、two_axis_finite_word、face_cycle_exact、tetra_defects_incidence_repair_and_exactness。麦克斯韦计数、亨内贝格加点、吉拉尔定理与雷杰离散引力是文献结果（ARGUED），“概念—比较桁架”的说法、扰动、应力与辉光是模型（MODEL）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability" target="_top">第三十四章 · 极小三面角的刚性与三维稳定</a> · <a href="https://doi.org/10.1080/14786446408643668" target="_blank" rel="noopener">Maxwell 1864</a> · <a href="https://doi.org/10.1007/BF02733251" target="_blank" rel="noopener">Regge 1961</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage shows N concepts C₁, …, C<sub>N</sub> (3 ≤ N ≤ 8) on the unit comparison sphere S² ⊂ ℝ³ and the comparison arcs between them. The page is a numerical illustration, not a proof: every number is computed on the spot (NUM), and each theorem is shown only on the one instance written below.</p>
+      <ol>
+        <li><b>The layout.</b> C₁ is the hub; C₂, …, C₇ sit round it at arc distance ε, consecutive spokes separated by the angle of the equilateral spherical triangle, A(ε) = arccos(c/(1 + c)) with c = cos ε, so each sector C₁C<sub>k</sub>C<sub>k+1</sub> is a minimal arc-body ΔT<sub>ε</sub> of side ε; C₈ is the mirror image of C₁ across the arc C₄C₅ and adds a sixth one. A single rigid turn points the cluster at the camera.</li>
+        <li><b>The count.</b> Comparing all pairs gives E(K<sub>N</sub>) = N(N − 1)/2 arcs; a truss of N free nodes in three dimensions needs exactly 3N − 6 bars to be rigid (Maxwell counting, a literature result). The difference ΔE = (N − 3)(N − 4)/2 vanishes only at N = 3, 4: with three or four concepts, “compare everything” is exactly “just rigid”; from N = 5 on the extra comparisons are redundant and must agree with each other. Each new concept C<sub>k</sub> is pinned first by its three nearest older concepts (cyan); its other comparisons are redundant (magenta); the pinning comparisons number 3N − 6.</li>
+        <li><b>Cutting the diagonals.</b> Keeping only the ring C<sub>N</sub> (all sides ε) gives E = N and ΔE = 6 − 2N, which is −2 at N = 4. The floppy modes number 3N − 6 − N by the three-dimensional count and N − 3 on the sphere: the four-ring has one shear. The page lets the interior angles along the chain follow the push and closes the last node on two circles, keeping every side length within 10⁻¹²; the two diagonal cosines of the rhombus always satisfy (1 + c₁₃)(1 + c₂₄) = 4 cos²ε, because the Gram table of four unit vectors has rank at most 3. Putting both diagonals back (K₄) fixes c₁₃ and c₂₄; at ε = 60° they rest at (0.5, −1/3): this tetrahedron is two ΔT<sub>60°</sub> sharing an edge. Note that a K₄ with all six arcs equal to 60° does not exist on S²: its Gram table has rank 4.</li>
+        <li><b>No collapse.</b> The Gram determinant of three concepts, det G₃ = 1 + 2c³ − 3c² = (1 − c)²(1 + 2c), is positive for 0 &lt; ε &lt; 120°, so the three are linearly independent; the spherical triangle has excess Ω = 3A(ε) − π &gt; 0, whereas the flat chord triangle has angle sum exactly π and no excess, and a collapse onto a segment has det G₃ = 0.</li>
+        <li><b>Curvature on the hinges.</b> At ε = 60°, A = arccos(1/3), exactly the dihedral angle of the regular tetrahedron: five ΔT<sub>60°</sub> round C₁ do not close and leave a gap 2π − 5 arccos(1/3) ≈ 7.356°, the same gap five regular tetrahedra leave round an edge. Regge calculus reads such gaps as curvature concentrated on hinges (a literature result); the page's “Regge glow” ΔE·(2π − 5 arccos(1/3)) is a schematic quantity (MODEL) that only turns the number of redundant comparisons into an angle; it is not a measurement.</li>
+        <li><b>Cochain defects.</b> Take F(i, j, k) to be the signed solid angle of the triangle C<sub>i</sub>C<sub>j</sub>C<sub>k</sub>, 2 atan2(C<sub>i</sub>·(C<sub>j</sub> × C<sub>k</sub>), 1 + C<sub>i</sub>·C<sub>j</sub> + C<sub>j</sub>·C<sub>k</sub> + C<sub>k</sub>·C<sub>i</sub>). While the concepts lie in one open hemisphere the tetrahedral coboundary vanishes everywhere and F is the coboundary of an edge cochain; once the tetrahedron of a quadruple encloses the centre, its coboundary is ±4π and defects appear.</li>
+        <li><b>Frozen theorems.</b> The eight Lean theorems of the evidence panel are general statements; the page only shows what they look like on this layout: exists_unitary_mul_eq_of_conjTranspose_mul_eq, bloch_geometry_of_isHermitian, three_anchor_gram_det_formula, three_anchor_gram_det_pos_iff, fs_angle_triangle, two_axis_finite_word, face_cycle_exact, tetra_defects_incidence_repair_and_exactness. Maxwell counting, Henneberg vertex addition, Girard's theorem and Regge calculus are literature results (ARGUED); the “concept–comparison truss” reading, the push, the stress and the glow are models (MODEL).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability" target="_top">Chapter 34 · Rigidity of the minimal trihedron and three-dimensional stability</a> · <a href="https://doi.org/10.1080/14786446408643668" target="_blank" rel="noopener">Maxwell 1864</a> · <a href="https://doi.org/10.1007/BF02733251" target="_blank" rel="noopener">Regge 1961</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

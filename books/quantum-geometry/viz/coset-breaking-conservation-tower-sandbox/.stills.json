@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "569169f8ca8a212b6f3e0a03a135ed497b81d55f37d85d4ac4766696961f68ea"
+    },
+    "fig-pythagorean-coset-ledger.zh.jpg": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "54ae015cf71e75e851ede701ebccf399516fd5eeb28409d163d8ed8bf4edb36d"
+    },
+    "fig-goldstone-vs-higgs-closure.zh.jpg": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "30639c41861ef78e06aade8b673b8b2787a7636b3ebdcaae41e816cba012dc34"
+    },
+    "fig-skyrmion-baryon-winding.zh.jpg": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "f66349f8282698518ce46b6eb82ebdf116663f296bda31b09fd270de1dd130ea"
+    },
+    "fig-superconductor-crystal-meissner.zh.jpg": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "1caf6fcd614af3235324e9013d197d0f27d22631f51fe27505c5d37e32c23558"
+    },
+    "fig-five-family-cascade-relay.zh.jpg": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "1070cb9ba7cafa2cda250d2ddfad61a01a9f70370e479d14fa95c7024a2ef9e0"
+    },
+    "fig-pythagorean-coset-ledger.en.jpg": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "c88cf76f593b5ff724d299a4cf7c9a3efbdde2c0b28ee5b4f1eabb18ad8c3082"
+    },
+    "fig-goldstone-vs-higgs-closure.en.jpg": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "3b282287899953e4e380eda3710e6b38f2a80a18610bf4ba5f750e560949fa29"
+    },
+    "fig-skyrmion-baryon-winding.en.jpg": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "10648b1d80fce79bd4781bf894b40efa3c93a1f625e4268d3f3e32e9ddd78cca"
+    },
+    "fig-superconductor-crystal-meissner.en.jpg": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "0e1c5d036906dca4379895dc403c7fc171695fbe18b0eb833a528c6e80719269"
+    },
+    "fig-five-family-cascade-relay.en.jpg": {
+      "input": "af00182df728d58820d8763df2c5cb65c4acf931b9944df955e824a49215a7c1",
+      "output": "2538eb059770105d4b0ee406459da154a35034edc4b21c9820abf1e2f14c8397"
+    }
+  }
+}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ARC//MACRO · Minimal Quantum Arcs and the Macroscopic Path Integral">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ARC//MACRO 量子极小圆弧与路径积分宏观缝合</title>
+<meta name="description" content="极小圆弧的矢高、41 条弧链的相位叠加与受力轨道 / Minimal-arc sagitta, 41 phased arc chains and the forced orbit">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="quantum-arc-macro-integral-sandbox">
+<div class="app lab" id="app">
+<header class="top">
+  <div class="brand">
+    <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+    <h1 class="logo" data-text="ARC//MACRO">ARC<b>//</b>MACRO</h1>
+    <div class="tagline"><span class="zh">量子极小圆弧与路径积分宏观缝合 · <em>每一小段都是弯的；叠起来走出直线，相位一偏就弯成受力轨道。</em></span><span class="en">Minimal Quantum Arcs and the Macroscopic Path Integral · <em>Every piece is curved; together they walk a straight line, and a phase tilt bends it into a forced orbit.</em></span></div>
+  </div>
+  <div class="status"><span class="pill hot">N <strong id="pillN">64</strong></span><span class="pill">Σ <span class="zh">矢高</span><span class="en">sagitta</span> <strong id="pillSag">0.500</strong></span><div class="langs" role="group" aria-label="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div></div>
+</header>
+<aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+  <section class="panel sec">
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+    <div class="presets cards" id="presets">
+      <button class="preset" data-preset="arc-sagitta-ito" aria-pressed="false"><span class="code">SAGITTA</span><span class="cn zh">切线与矢高：伊东鼓包不消失</span><span class="cn en">Tangent vs sagitta: the Itô bulge survives</span></button>
+      <button class="preset" data-preset="quantum-three-hallmarks" aria-pressed="false"><span class="code">HALLMARKS</span><span class="cn zh">一段极小弧上的三个量子印记</span><span class="cn en">Three quantum hallmarks on one minimal arc</span></button>
+      <button class="preset" data-preset="curve-stitches-straight" aria-pressed="false"><span class="code">STITCH</span><span class="cn zh">以曲拼直：41 条弧链相消成直线</span><span class="cn en">Curves stitch a line: 41 arc chains cancel</span></button>
+      <button class="preset" data-preset="force-from-phase-gradient" aria-pressed="false"><span class="code">FORCE</span><span class="cn zh">相位梯度把直线弯成受力轨道</span><span class="cn en">A phase gradient bends the line into a force</span></button>
+      <button class="preset" data-preset="calculus-duality-zoom" aria-pressed="false"><span class="code">ZOOM</span><span class="cn zh">δ ↔ ∫：从微弧到宏观轨道</span><span class="cn en">δ ↔ ∫: from micro-arcs to the macro orbit</span></button>
+    </div>
+    <p class="note" id="presetNote"></p>
+  </section>
+  <section class="panel sec" id="ctlPanel">
+    <h2><span class="zh">标度与相位</span><span class="en">Scaling and phase</span></h2>
+    <h3><span class="zh">标度方式</span><span class="en">Scaling</span></h3>
+    <div class="chips" id="scalingMode" role="group" aria-label="标度方式" data-aria-en="Scaling mode"><button class="chip" data-mode="feynman-ito" aria-pressed="true"><span class="zh">费曼—伊东 ε ~ 1/√N</span><span class="en">Feynman–Itô ε ~ 1/√N</span></button><button class="chip" data-mode="newton-smooth" aria-pressed="false"><span class="zh">牛顿光滑 ε ~ 1/N</span><span class="en">Newton smooth ε ~ 1/N</span></button></div>
+    <h3><span class="zh">细分段数 N</span><span class="en">Subdivision N</span></h3>
+    <div class="chips" id="stepCount" role="group" aria-label="细分段数 N" data-aria-en="Subdivision count N"><button class="chip" data-steps="1" aria-pressed="false">1</button><button class="chip" data-steps="4" aria-pressed="false">4</button><button class="chip" data-steps="16" aria-pressed="false">16</button><button class="chip" data-steps="64" aria-pressed="true">64</button><button class="chip" data-steps="256" aria-pressed="false">256</button></div>
+    <div class="field"><label for="arcScale"><span class="zh">轨道尺度 Θ（弧度）</span><span class="en">Trajectory scale Θ (rad)</span></label><output id="oTheta" for="arcScale">1.00</output><input id="arcScale" type="range" min="0.20" max="1.40" step="0.01" value="1.00"></div>
+    <div class="field"><label for="phaseGradient"><span class="zh">横向相位梯度 β</span><span class="en">Transverse phase gradient β</span></label><output id="oBeta" for="phaseGradient">0.00</output><input id="phaseGradient" type="range" min="-1" max="1" step="0.05" value="0"></div>
+    <p class="note"><span class="zh">拖动琥珀圆环（弧的终点）直接拉长或缩短 Θ；拖空白处转动视角。时间轴推进当前这一步，按 N 键轮换段数。</span><span class="en">Drag the amber ring at the end of the arc to stretch or shrink Θ; drag empty space to orbit. The rail advances the current step; press N to cycle the step count.</span></p>
+  </section>
+</aside>
+<main class="center">
+  <div class="stage" id="stage" data-thumb aria-label="单位球面上的极小圆弧、弧链路径束与宏观轨道" data-aria-en="Minimal arcs, arc-chain bundles and the macroscopic orbit on the unit sphere">
+    <canvas class="fill" id="cv"></canvas><div class="scan"></div><div class="vig"></div>
+    <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+    <button type="button" id="arcHandle" class="arc-handle" hidden aria-label="拖动改变轨道尺度 Θ" data-aria-en="Drag to change the trajectory scale Θ"></button>
+    <div class="hud-bl" id="legend"></div>
+  </div>
+  <div class="tour" id="tour"><button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button><div class="what"></div><button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button></div>
+  <div class="strip"><section class="panel"><div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div><canvas id="plot" aria-label="矢高、路径束与宏观通道曲线" data-aria-en="Sagitta, path-bundle and macroscopic channel curves"></canvas></section></div>
+</main>
+<aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+  <section class="panel sec" id="readouts" aria-live="polite">
+    <h2><span class="zh">同步读数</span><span class="en">Live readouts</span><span class="aside">NUM</span></h2>
+    <dl class="ro">
+      <div class="key"><dt><span class="zh">累计矢高 N(1 − cos ε)</span><span class="en">Cumulative sagitta N(1 − cos ε)</span></dt><dd><b id="roSag">—</b><span id="roSagNote"></span></dd></div>
+      <div class="a"><dt><span class="zh">单步 ε</span><span class="en">Step ε</span></dt><dd id="roEps">—</dd></div>
+      <div class="c"><dt><span class="zh">切线 sin ε · 矢高 1 − cos ε</span><span class="en">Tangent sin ε · sagitta 1 − cos ε</span></dt><dd id="roTanSag">—</dd></div>
+      <div class="v"><dt><span class="zh">特罗特误差</span><span class="en">Trotter error</span></dt><dd id="roTrotter">—</dd></div>
+      <div class="c"><dt><span class="zh">驻相脊线曲率 κ</span><span class="en">Spine curvature κ</span></dt><dd id="roKappa">—</dd></div>
+      <div class="c"><dt><span class="zh">41 路相量和 |A₄₁|</span><span class="en">41-path phasor sum |A₄₁|</span></dt><dd id="roAmp">—</dd></div>
+      <div class="m"><dt><span class="zh">粗粒化熵税 ΔS</span><span class="en">Coarse-graining tax ΔS</span></dt><dd id="roTax">—</dd></div>
+    </dl>
+    <p class="note" id="readoutNote"></p>
+  </section>
+  <section class="panel sec" id="evidence">
+    <h2><span class="zh">依据</span><span class="en">Evidence</span></h2>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">拉格朗日—格拉姆恒等式：(Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣΣ(uᵢvⱼ − uⱼvᵢ)²。取 u 为弧的起点、v 为终点，即 1 − cos²ε = sin²ε，锁住切线与矢高。</span><span class="en">The Lagrange–Gram identity: (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣΣ(uᵢvⱼ − uⱼvᵢ)². With u the start and v the end of the arc it reads 1 − cos²ε = sin²ε, locking tangent and sagitta together.</span><a data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">完备赋范代数中，‖z‖ ≤ r 时，exp z 减去前 n 项泰勒和的范数不超过 rⁿ/n!·eʳ。本页对 2×2 转动生成元 z = εJ 逐项核对；n = 2 的余项对角元就是矢高 1 − cos ε。</span><span class="en">In a complete normed algebra, ‖z‖ ≤ r bounds the norm of exp z minus its first n Taylor terms by rⁿ/n!·eʳ. The page checks it term by term for the 2×2 rotation generator z = εJ; the diagonal of the n = 2 remainder is the sagitta 1 − cos ε.</span><a data-lean-gid="D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le" href="#" target="_blank" rel="noopener"><code>exp_tail_le</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">李—特罗特乘积公式：(exp(A/n)·exp(B/n))ⁿ → exp(A + B)（n → ∞）。本页取 so(3) 中 A = ΘK<sub>x</sub>、B = ΘK<sub>y</sub>，算出各 N 的误差。</span><span class="en">The Lie–Trotter product formula: (exp(A/n)·exp(B/n))ⁿ → exp(A + B) as n → ∞. The page takes A = ΘK<sub>x</sub>, B = ΘK<sub>y</sub> in so(3) and computes the error at each N.</span><a data-lean-gid="D5/S3/Quantum/Analysis/TrotterProduct.trotter_product" href="#" target="_blank" rel="noopener"><code>trotter_product</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对称算子 A、B 与单位态 ψ：‖u‖²‖v‖² = cov² + |C½|² + G、0 ≤ G、Re⟨u, v⟩ = cov、Im⟨u, v⟩ = C½。本页取 σ<sub>x</sub>、σ<sub>y</sub>，C½ = ⟨σ<sub>z</sub>⟩ 是对易子下限。</span><span class="en">For symmetric A, B and a unit state ψ: ‖u‖²‖v‖² = cov² + |C½|² + G, 0 ≤ G, Re⟨u, v⟩ = cov and Im⟨u, v⟩ = C½. The page takes σ<sub>x</sub>, σ<sub>y</sub>; C½ = ⟨σ<sub>z</sub>⟩ is the commutator floor.</span><a data-lean-gid="D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger" href="#" target="_blank" rel="noopener"><code>robertson_schrodinger</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">圆周平方双覆叠：路径的提升由初值唯一确定，没有连续全局截面，绕底圆一整圈（360°）的提升终点为 −1。</span><span class="en">The circle squaring double cover: a lift of a path is fixed by its initial point, there is no continuous global section, and one full turn (360°) lifts to the endpoint −1.</span><a data-lean-gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift" href="#" target="_blank" rel="noopener"><code>circle_double_cover_history_lift</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">黄金窗口模型集是 Delone 集，填充半径 1/2、覆盖半径 3：相异点之间至少相距 1。</span><span class="en">The golden-window model set is a Delone set with packing radius 1/2 and covering radius 3: distinct points are at least 1 apart.</span><a data-lean-gid="D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone" href="#" target="_blank" rel="noopener"><code>exists_golden_modelSet_delone</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限 Bargmann 回路等于相邻态内积之积再乘闭合内积。本页每条路径相位里的面积项，就是沿这条路径、再沿测地线闭合的旋量内积连乘。</span><span class="en">A finite Bargmann cycle factors into successive overlaps times the closing overlap. The area term in the phase of each path on this page is exactly that product of spinor overlaps along the path, closed by the geodesic.</span><a data-lean-gid="D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product" href="#" target="_blank" rel="noopener"><code>bargmann_path_product</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">完全单纯形上的二上链 F：各锚点的面误差之和等于四面体缺陷数，缺陷可由边误差控制，且四面体上边缘为零当且仅当 F 由某个边上链精确修补。</span><span class="en">For a two-cochain F on a complete simplex: the face errors summed over anchors equal the tetrahedral defect count, defects are bounded by edge errors, and the tetrahedral coboundary vanishes exactly when an edge cochain reproduces F.</span><a data-lean-gid="D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness" href="#" target="_blank" rel="noopener"><code>tetra_defects_incidence_repair_and_exactness</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">反复“幺正转动后基底捏合”：每一步的冯·诺依曼熵增等于转动后态对其捏合态的相对熵，且非负；N 步之和等于总熵增。</span><span class="en">Repeated unitary turn then basis pinching: each step raises the von Neumann entropy by the relative entropy of the turned state to its pinching, which is nonnegative; N steps sum to the total rise.</span><a data-lean-gid="D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" href="#" target="_blank" rel="noopener"><code>entropy_production_coherence_deletion_identity</code></a></span></div>
+    <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：伊东积分的二次变差 (dW)² = dt；费曼路径积分的驻相近似选出 δS = 0 的经典轨道；贝里曲率的斯托克斯公式与洛伦兹力类比；Regge 演算把曲率集中在铰链上。</span><span class="en">Literature results, not formalized in this book: the quadratic variation (dW)² = dt of the Itô integral; stationary phase in the Feynman path integral selects the classical orbit δS = 0; the Stokes formula of Berry curvature and its Lorentz-force analogy; Regge calculus concentrates curvature on hinges.</span></span></div>
+    <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">41 条等权拱形路径、相位 Φ = k[ΔL − 2βΩ/Θ]、伊东锯齿链、把最小步长读成 Delone 填充半径、四条宏观通道的解读，都是本页的示意模型，不是完整传播子。</span><span class="en">The 41 equally weighted arching paths, the phase Φ = k[ΔL − 2βΩ/Θ], the Itô sawtooth chain, reading the minimal step as a Delone packing radius, and the four macroscopic channels are an illustrative model of this page, not a full propagator.</span></span></div>
+    <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面直接计算：sin ε、1 − cos ε、角超、累计矢高、so(3) 特罗特误差、σ<sub>x</sub>σ<sub>y</sub> 方差分解、平方根连续抬升、黄金模型集间隙、相量和、回路 ∮A 与面通量 ∬F、铰链转角与捏合熵；曲面与弧链是数值演示，不是证明。</span><span class="en">Computed on the page: sin ε, 1 − cos ε, the excess, cumulative sagitta, the so(3) Trotter error, the σ<sub>x</sub>σ<sub>y</sub> variance split, the continuous square-root lift, golden model-set gaps, phasor sums, the loop ∮A against the flux ∬F, hinge turns and pinching entropy; surfaces and arc chains are numerical illustrations, not a proof.</span></span></div>
+    <button class="chip" id="infoBtn"><span class="zh">理论接口</span><span class="en">Theory interface</span></button>
+  </section>
+</aside>
+<footer class="rail"><div class="transport"><button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to start">⏮</button><button class="tbtn" id="play" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▶</button><span class="chips" id="speedChips"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span></div><div class="clock"><span class="tau" id="tau"></span><input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="当前这一步的进度 t" data-aria-en="Progress t of the current step"></div><div class="keys"><kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>N</kbd> <span class="zh">段数</span><span class="en">steps</span></div></footer>
+</div>
+<div class="drawer" id="drawer" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="row"><h2 id="drawerTitle"><span class="zh">极小圆弧与宏观积分</span><span class="en">Minimal arcs and the macroscopic integral</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+  <div class="zh"><p class="lede">这是数值演示与示意模型，不是证明。右栏九条 Lean 验证各自只担保它的冻结陈述；把它们拼成“微弧缝合宏观物理”的叙事属于模型解读。</p><p>弧与矢高：起点 A、终点 B 相隔 ε，切线长 sin ε，弧比切线鼓出 <b>1 − cos ε = 2 sin²(ε/2)</b>。费曼—伊东模式 ε = Θ/√N：N(1 − cos ε) → Θ²/2（Θ = 1 时 N = 1…256 全部大于 0.45）；牛顿模式 ε = Θ/N：N(1 − cos ε) ≈ Θ²/(2N) → 0。伊东链画成三角锯齿：偶数顶点在脊线上，奇数顶点交替偏出 a = arccos(cos ε / cos(Θ/N))，每段恰为 ε。</p><p>路径束：41 条路径 λₘ(s) = ηₘ·4s(1 − s)，ηₘ = 0.4Θ(m − 20)/20，在 (ψ, λ) 经纬坐标里从 A = (−Θ/2, 0) 拱到 B = (Θ/2, 0)。相位 <b>Φₘ = k[L(ηₘ) − L(0) − 2βΩ(ηₘ)/Θ]</b>，k = 30/Θ，L 是球面长度，Ω 是与测地线之间的带号面积，由沿路径再沿测地线闭合的 Bargmann 旋量内积连乘的辐角给出（Ω = −2 arg Π）。β = 0 时 Φ 是 η 的偶函数、Ω 是奇函数，±Ω 成对相消，驻相点 η* = 0；β ≠ 0 时 η* 与 β 同号。</p><p>斯托克斯核对：同一块球面小片，∮A 由边界多边形的转角按高斯—博内算出，∬F 由扇形三角剖分的立体角相加算出，Bargmann 连乘给第三条路线，三者互不调用。熵税：从 |0⟩ 出发，每步绕 y 轴转 ε 再在 z 基底捏合，z 分量乘以 cos ε。</p><p class="lede refs">书中：<a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-arc-and-macro-integral" target="_top">第 34 章 · 量子极小圆弧与宏观积分</a> · <a href="https://doi.org/10.1103/RevModPhys.20.367" target="_blank" rel="noopener">Feynman (1948)</a> · <a href="https://doi.org/10.1098/rspa.1984.0023" target="_blank" rel="noopener">Berry (1984)</a></p></div>
+  <div class="en"><p class="lede">This is a numerical illustration and an illustrative model, not a proof. Each of the nine Lean results in the side panel supports only its own frozen statement; stitching them into a story of micro-arcs building macroscopic physics is a model reading.</p><p>Arc and sagitta: start A and end B are ε apart; the tangent has length sin ε and the arc bulges past it by <b>1 − cos ε = 2 sin²(ε/2)</b>. Feynman–Itô mode ε = Θ/√N: N(1 − cos ε) → Θ²/2 (above 0.45 for every N = 1…256 at Θ = 1); Newton mode ε = Θ/N: N(1 − cos ε) ≈ Θ²/(2N) → 0. The Itô chain is drawn as a triangular sawtooth: even vertices on the spine, odd vertices alternately offset by a = arccos(cos ε / cos(Θ/N)), so that every step is exactly ε.</p><p>Path bundle: 41 paths λₘ(s) = ηₘ·4s(1 − s), ηₘ = 0.4Θ(m − 20)/20, arch in (ψ, λ) coordinates from A = (−Θ/2, 0) to B = (Θ/2, 0). Phase <b>Φₘ = k[L(ηₘ) − L(0) − 2βΩ(ηₘ)/Θ]</b> with k = 30/Θ, L the spherical length and Ω the signed area to the geodesic, read from the argument of the Bargmann product of spinor overlaps along the path closed by the geodesic (Ω = −2 arg Π). At β = 0, Φ is even in η and Ω is odd, the ±Ω pairs cancel and the stationary point is η* = 0; for β ≠ 0, η* has the sign of β.</p><p>Stokes check: for the same spherical patch, ∮A comes from the turning angles of the boundary polygon by Gauss–Bonnet and ∬F from the solid angles of a fan triangulation, and the Bargmann product gives a third route; none of them calls another. Entropy tax: from |0⟩, each step turns by ε about the y axis and pinches in the z basis, multiplying the z component by cos ε.</p><p class="lede refs">In the book: <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-arc-and-macro-integral" target="_top">Chapter 34 · Minimal quantum arcs and the macroscopic integral</a> · <a href="https://doi.org/10.1103/RevModPhys.20.367" target="_blank" rel="noopener">Feynman (1948)</a> · <a href="https://doi.org/10.1098/rspa.1984.0023" target="_blank" rel="noopener">Berry (1984)</a></p></div>
+</div></div>
+<script src="main.js"></script>
+</body>
+</html>

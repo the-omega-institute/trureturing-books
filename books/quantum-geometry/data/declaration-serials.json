@@ -1,6 +1,6 @@
 {
   "next": {
-    "T": 325,
+    "T": 328,
     "D": 160,
     "R": 177
   },
@@ -325,7 +325,7 @@
     "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently": "R096",
     "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_fourier_readout_step": "T139",
     "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_step_changes_level": "R097",
-    "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.level_fourier_joint_readout_detects_step": "R098",
+    "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.level_fourier_joint_readout_detects_step": "T325",
     "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal": "T140",
     "D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply": "R099",
     "D5/S3/ObserverMemory/JointCoherentReversal.reverseChannelOn": "R100",
@@ -346,7 +346,7 @@
     "D5/S3/PrimeForms/ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq": "T150",
     "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem": "T151",
     "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula": "T152",
-    "D5/S3/Quantum/Algebra/DoubleOrthogonalClosure.double_orthogonal_complement_eq_closure": "R104",
+    "D5/S3/Quantum/Algebra/DoubleOrthogonalClosure.double_orthogonal_complement_eq_closure": "T326",
     "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape": "T153",
     "D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual": "T313",
     "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq": "T154",
@@ -501,7 +501,7 @@
     "D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty": "T240",
     "D5/S3/QuantumBounds/Designs/MixedStateRobertson.mixed_state_robertson_uncertainty": "T241",
     "D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle": "R137",
-    "D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle": "R138",
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle": "T327",
     "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound": "R139",
     "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound": "T242",
     "D5/S3/QuantumBounds/GramRealizability.gram_realizability": "T243",

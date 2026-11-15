@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "62486edfaa1babc8ee40d3ae19b3ea02cba7ca8b0c0ed6394fcd14d71ec984ea"
+    },
+    "fig-arc-sagitta-ito.zh.jpg": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "4d128915584c3e41b44af526b72ec085c102dfc23fb39bffcef2b61747b25ebf"
+    },
+    "fig-quantum-three-hallmarks.zh.jpg": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "d8736549a1962a57506c4d262934bb28973fbf2aacfe4b179b8c7109d9ea1703"
+    },
+    "fig-curve-stitches-straight.zh.jpg": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "764bca2aed982b9ebf2f950f82872991d6403f11a7b65243ade336615f2ba9a2"
+    },
+    "fig-force-from-phase-gradient.zh.jpg": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "834a5ead76061e723abeee762a08ed1ce431d64b11eb0b84a6f1a1342589ef44"
+    },
+    "fig-calculus-duality-zoom.zh.jpg": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "a291a6c067b5019441e3c6e6c18e66c027a36c38603da691074276b563230a62"
+    },
+    "fig-arc-sagitta-ito.en.jpg": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "513bb574ccfd3e2178b80ab5679a120ac0a62e120a30ab14ff1938da0fd17d7c"
+    },
+    "fig-quantum-three-hallmarks.en.jpg": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "7346348f1ee243c986e02a0b333445f1781211e1dc51c569ceee72aa4661a95c"
+    },
+    "fig-curve-stitches-straight.en.jpg": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "1d61545fde2d82d69163a13a113e6c78ddf731fdaee535869e9cfd8ba7815fe5"
+    },
+    "fig-force-from-phase-gradient.en.jpg": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "291328b5dc7e9c8448cc61f949c3e6ab093cc407bea1a0acecf30ba4e024293f"
+    },
+    "fig-calculus-duality-zoom.en.jpg": {
+      "input": "08046380a8d82af66f5b795b4525782dfb7a5eb5d8e0b6953fe6320a8eba0734",
+      "output": "81929db74b26081dcf3b872288b7def2e3bf922469d7e12c8fc2845b0a3d908d"
+    }
+  }
+}

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="REVERSAL//CASCADE · Dual-infinite path cut, diagonal escape, and concept cascade">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>REVERSAL//CASCADE · 反者道之动：双无限路径切口、来路对角化与概念开维级联</title>
+<meta name="description" content="比较信息注入 I_cmp 让 ℝ⁴ 里的比较锚点逐个溢出新的正交轴：det G₂ = sin²ε、det G₃ = sin⁴ε、det G₄ = sin⁶ε，点 → 线 → 面 → 体；同位反相的 ψ₊、ψ₋ 在三维读出里留下逃逸对，相位切口 T 使其归零；K × K 来路相位表的对角翻转 Γ_diag[k] = T[k][k] + 2 (mod 4) 仍到达 x，却与每一行在对角格不同；M = span((3, 4)/5) 的整数投影给出 P_M + P_M⊥ = I、P_M P_M⊥ = 0，不可达耦合 κ₋ 从 1 降到 0 时切口消融成雾；五个概念的溢出—生成元级联。Comparison information I_cmp makes the comparison anchors in ℝ⁴ overflow into new orthogonal axes one at a time: det G₂ = sin²ε, det G₃ = sin⁴ε, det G₄ = sin⁶ε, point → line → surface → volume; the opposite-phase twins ψ₊, ψ₋ at one locus leave escape pairs in the three-dimensional readouts, and the phase cut T removes them; the diagonal flip Γ_diag[k] = T[k][k] + 2 (mod 4) of a K × K arrival-phase table still reaches x but differs from every row at its diagonal cell; integer projections for M = span((3, 4)/5) give P_M + P_M⊥ = I and P_M P_M⊥ = 0, and as the unreachable coupling κ₋ falls from 1 to 0 the cut dissolves into haze; the overflow-to-generator cascade of five concepts.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="reversal-diagonal-cascade-sandbox">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="REVERSAL//CASCADE">REVERSAL<b>//</b>CASCADE</h1>
+      <div class="tagline">
+        <span class="zh">反者道之动 · <em>概念从两侧同时被刻出：到得了它的路收向它，到不了的路在切口折回；每一级比较的溢出，都撑开下一根轴</em></span>
+        <span class="en">Reversal is the movement of the Dao · <em>a concept is carved from both sides at once: the paths that reach it converge, the paths that cannot are turned back at the cut; what overflows each level of comparison opens the next axis</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="pillDim"><span class="zh">维度</span><span class="en">DIM</span> <strong>—</strong></span>
+      <span class="pill" id="pillKappa">κ₋ <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言" data-aria-en="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="gram-overflow-cascade" aria-pressed="false"><span class="code">GRAM-OVERFLOW</span><span class="cn zh">比较溢出撑开新轴：点 → 线 → 面 → 体</span><span class="cn en">Each overflow opens an axis: point → volume</span></button>
+        <button class="preset" data-preset="time-from-phase-collision" aria-pressed="false"><span class="code">PHASE-COLLISION</span><span class="cn zh">同位反相的两个态相撞，逼出时间轴</span><span class="cn en">Opposite phases in one place force time</span></button>
+        <button class="preset" data-preset="arrival-diagonal-escape" aria-pressed="false"><span class="code">DIAGONAL-ESCAPE</span><span class="cn zh">列出所有来路，对角翻转仍造出一条新路</span><span class="cn en">A diagonal flip builds an unlisted way in</span></button>
+        <button class="preset" data-preset="reversal-dual-cut" aria-pressed="false"><span class="code">DUAL-CUT</span><span class="cn zh">反者道之动：两侧之路在切口相遇</span><span class="cn en">Reversal: both sides meet at the cut</span></button>
+        <button class="preset" data-preset="concept-obstruction-cascade" aria-pressed="false"><span class="code">CASCADE</span><span class="cn zh">每一级的溢出成为下一级的生成元</span><span class="cn en">Each overflow becomes the next generator</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">注入、切口与列表</span><span class="en">Injection, cut and list</span><span class="aside"><span class="zh">也可拖动琥珀色的 κ 手柄</span><span class="en">or drag the amber κ handle</span></span></h2>
+      <div class="field">
+        <label for="infoInject"><span class="zh">比较信息注入 I<sub>cmp</sub></span><span class="en">Comparison information I<sub>cmp</sub></span><small class="zh">每越过一个阈值，多一个比较锚点</small><small class="en">one more comparison anchor past each threshold</small></label><output id="oInfo" for="infoInject">2.85</output>
+        <input type="range" id="infoInject" min="0" max="4" step="0.05" value="2.85">
+      </div>
+      <div class="chips" id="stageChips" role="group" aria-label="概念维度" data-aria-en="Concept dimension">
+        <button class="chip" data-stage="point" aria-pressed="false"><span class="zh">0D 点</span><span class="en">0D point</span></button>
+        <button class="chip" data-stage="line" aria-pressed="false"><span class="zh">1D 线</span><span class="en">1D line</span></button>
+        <button class="chip" data-stage="surface" aria-pressed="false"><span class="zh">2D 面</span><span class="en">2D surface</span></button>
+        <button class="chip" data-stage="volume" aria-pressed="false"><span class="zh">3D 体</span><span class="en">3D volume</span></button>
+        <button class="chip" data-stage="time" aria-pressed="false"><span class="zh">3+1D 时间</span><span class="en">3+1D time</span></button>
+      </div>
+      <div class="field">
+        <label for="negCoupling"><span class="zh">不可达耦合 κ<sub>−</sub></span><span class="en">Unreachable coupling κ<sub>−</sub></span><small class="zh">到不了的路被折回的程度</small><small class="en">how strongly unreachable paths are turned back</small></label><output id="oKappa" for="negCoupling">1.00</output>
+        <input type="range" id="negCoupling" min="0" max="1" step="0.01" value="1">
+      </div>
+      <div class="field">
+        <label for="tableSize"><span class="zh">来路表大小 K</span><span class="en">Arrival table size K</span><small class="zh">列出的路数，也是每条路的步数</small><small class="en">listed paths, and steps per path</small></label><output id="oK" for="tableSize">5</output>
+        <input type="range" id="tableSize" min="3" max="7" step="1" value="5">
+      </div>
+      <p class="note"><span class="zh">时间轴是流动相位 τ：播放时波前收缩与折回、相位绕纤维转动、探针沿对角路径前进、脉冲沿级联传递。页面算出的数都不随 τ 改变。</span><span class="en">The rail is the flow phase τ: playing it moves the wavefronts in and back out, turns the phase round the fiber, walks a probe along the diagonal path and sends a pulse down the cascade. None of the computed numbers depends on τ.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：比较锚点在新轴上的残差撑出点、线、面、体；相位纤维分开同位反相的两个态；来路相位表与对角路径汇入 x；正交补切口的两侧之路；五个概念的溢出—生成元级联" data-aria-en="Stage: the residuals of the comparison anchors along new axes open a point, a line, a surface and a volume; a phase fiber separates two opposite-phase states at one locus; the arrival-phase table and the diagonal path converge on x; the paths on the two sides of an orthogonal-complement cut; the overflow-to-generator cascade of five concepts">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="ladder" aria-pressed="true"><span class="zh">阶梯</span><span class="en">Ladder</span></button>
+        <button class="chip" data-scene="time" aria-pressed="false"><span class="zh">时间</span><span class="en">Time</span></button>
+        <button class="chip" data-scene="arrival" aria-pressed="false"><span class="zh">来路</span><span class="en">Arrival</span></button>
+        <button class="chip" data-scene="cut" aria-pressed="false"><span class="zh">切口</span><span class="en">Cut</span></button>
+        <button class="chip" data-scene="cascade" aria-pressed="false"><span class="zh">级联</span><span class="en">Cascade</span></button>
+      </div>
+      <button class="cut-handle" id="cutHandle" type="button" aria-label="拖动改变不可达耦合 κ₋（方向键微调）" data-aria-en="Drag to change the unreachable coupling κ₋ (arrow keys fine-tune)" hidden>κ</button>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="条带小图" data-aria-en="Strip plot"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">NUM</span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">当前概念 · 秩</span><span class="en">Concept · rank</span></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt>det G<sub>2</sub> = sin²ε</dt><dd id="roG2">—</dd></div>
+        <div class="m"><dt>det G<sub>3</sub> = sin⁴ε</dt><dd id="roG3">—</dd></div>
+        <div class="v"><dt>det G<sub>4</sub> = sin⁶ε</dt><dd id="roG4">—</dd></div>
+        <div><dt><span class="zh">逃逸对：三维 → 加 T</span><span class="en">Escape pairs: 3D → with T</span></dt><dd id="roEsc">—</dd></div>
+        <div class="m"><dt><span class="zh">切口锐度 · 区分信息</span><span class="en">Cut sharpness · distinction</span></dt><dd id="roCut">—</dd></div>
+        <div class="v"><dt><span class="zh">Γ<sub>diag</sub> 逃出的行</span><span class="en">Rows Γ<sub>diag</sub> escapes</span></dt><dd id="roDiag">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">单位记录的重叠：内积空间里范数为 1 的记录，⟨记录 i, 记录 j⟩ = 1 当且仅当两条记录相同，“重叠为 1”是一个等价关系。页面的 0D 点：唯一的自比较 CMP(x, x) = ⟨x, x⟩ = 1；在第一个阈值之前，第二个锚点与 x 的重叠为 1，所以它就是 x，秩停在 1。已冻结：</span><span class="en">Overlap of unit records: for records of norm 1 in an inner-product space, ⟨record i, record j⟩ = 1 exactly when the two records are equal, and “overlap 1” is an equivalence relation. On the 0D point of the page the one self-comparison is CMP(x, x) = ⟨x, x⟩ = 1; before the first threshold the second anchor has overlap 1 with x, so it is x, and the rank stays 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization" href="#" target="_blank" rel="noopener"><code>unit_gram_overlap_characterization</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">两锚格拉姆判据：实内积空间里 0 &lt; det G(u, v) 当且仅当 u、v 线性无关。页面取 u = x、v = a₂：det G₂ = |u|²|v|² − ⟨u, v⟩² = sin²ε，越过 I<sub>cmp</sub> = 0.5 后为正，点溢出成线。已冻结：</span><span class="en">The two-anchor Gram criterion: in a real inner-product space, 0 &lt; det G(u, v) exactly when u and v are linearly independent. The page takes u = x and v = a₂: det G₂ = |u|²|v|² − ⟨u, v⟩² = sin²ε, positive past I<sub>cmp</sub> = 0.5, where the point overflows into a line. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff" href="#" target="_blank" rel="noopener"><code>two_anchor_gram_det_pos_iff</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">三锚格拉姆判据：0 &lt; det G(u, v, w) 当且仅当 u、v、w 线性无关。页面取 x、a₂、a₃，按三锚公式 1 + 2abc − a² − b² − c² 算出 det G₃ = sin⁴ε，越过 I<sub>cmp</sub> = 1.5 后为正，线溢出成面。已冻结：</span><span class="en">The three-anchor Gram criterion: 0 &lt; det G(u, v, w) exactly when u, v and w are linearly independent. The page takes x, a₂ and a₃ and computes det G₃ = sin⁴ε by the three-anchor formula 1 + 2abc − a² − b² − c²; it is positive past I<sub>cmp</sub> = 1.5, where the line overflows into a surface. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff" href="#" target="_blank" rel="noopener"><code>three_anchor_gram_det_pos_iff</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限层投影逃逸：闭子空间 S 的正交残差 S⊥ 不为零时，S⊥ 里有单位向量 e：S 的投影把它送到 0，它到 S 的距离恰为 1，互补投影 I − P<sub>S</sub> 的范数为 1。页面取 S 为已有锚点的张成：新锚点在 S 外的残差是 sin ε 乘一根新轴，归一化后就是这样的 e（品红箭头）。已冻结：</span><span class="en">Finite-layer projection escape: when the orthogonal residual S⊥ of a closed subspace S is nonzero, it holds a unit vector e that the projection onto S sends to 0, that lies at distance exactly 1 from S, and the complementary projection I − P<sub>S</sub> has norm 1. The page takes S to be the span of the anchors so far: the residual of the new anchor off S is sin ε times a fresh axis, and normalised it is such an e (the magenta arrows). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape" href="#" target="_blank" rel="noopener"><code>finite_layer_projection_escape</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">逃逸下降与严格核新颖性：在至少有两个态的有限竞技场上，一条读出降低逃逸率，当且仅当把它加进其余读出时联合核严格变小。页面的竞技场是四面体的四个顶点加上质心处的 ψ₊、ψ₋；读出 x、y、z、|ψ|² 留下 2 个有序逃逸对，加上相位切口 T 后为 0。已冻结：</span><span class="en">Lowered escape and strict kernel novelty: on a finite arena with at least two states, one readout lowers the escape rate exactly when adding it to the other readouts strictly shrinks their joint kernel. The arena of the page is the four vertices of the tetrahedron plus ψ₊ and ψ₋ at its centroid; the readouts x, y, z and |ψ|² leave 2 ordered escape pairs, and with the phase cut T there are 0. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty" href="#" target="_blank" rel="noopener"><code>lowersEscape_iff_strict_kernel_novelty</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">相对语义对角：对没有不动点的扭转 twist，对角 a ↦ twist(目录 a (latent a)) 与目录列出的每一个解码 目录 a ∘ latent 都不同。页面：表 T 的第 r 行是来路 Γ<sub>r</sub>，latent 是步序号，twist(y) = y + 2 (mod 4)；Γ<sub>diag</sub>[k] = T[k][k] + 2 在第 k 步与第 k 行相差 π。已冻结：</span><span class="en">The relative semantic diagonal: for a twist with no fixed point, the diagonal a ↦ twist(catalog a (latent a)) differs from every listed decode catalog a ∘ latent. On the page row r of the table T is the path Γ<sub>r</sub>, latent is the step index and twist(y) = y + 2 (mod 4); Γ<sub>diag</sub>[k] = T[k][k] + 2 differs from row k by π at step k. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode" href="#" target="_blank" rel="noopener"><code>relative_semantic_diagonal_ne_listed_decode</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">完备对角的严格拓扑加细：地址非空、扭转无不动点、解码目录满射时，把对角并入 latent 得到的划分拓扑严格细于 latent 的划分拓扑。页面的单坐标实例：K² 条步记录的 latent 都是“到达 x”（1 类），它们的象限目录覆盖全部四个象限；并入扭转后的对角，分成 4 类。已冻结：</span><span class="en">Strict topology refinement by a complete diagonal: with a nonempty address set, a twist with no fixed point and a surjective decoder catalog, joining the diagonal to latent gives a partition topology strictly finer than that of latent. The one-coordinate instance of the page: all K² step records have the latent “arrives at x” (1 class), and their quadrant catalog covers all four quadrants; joining the twisted diagonal splits them into 4 classes. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement" href="#" target="_blank" rel="noopener"><code>complete_diagonal_strict_topology_refinement</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">正交补投影恒等式：闭子空间 M 有 P<sub>M⊥</sub> = I − P<sub>M</sub>，两者都幂等，P<sub>M</sub>P<sub>M⊥</sub> = P<sub>M⊥</sub>P<sub>M</sub> = 0，P<sub>M</sub> + P<sub>M⊥</sub> = I。页面取 ℝ² 里 M = span((3, 4)/5)，两个投影的分子都是整数（分母 25），这些恒等式逐项精确为零。已冻结：</span><span class="en">The orthogonal-complement projection identities: for a closed subspace M, P<sub>M⊥</sub> = I − P<sub>M</sub>, both are idempotent, P<sub>M</sub>P<sub>M⊥</sub> = P<sub>M⊥</sub>P<sub>M</sub> = 0 and P<sub>M</sub> + P<sub>M⊥</sub> = I. The page takes M = span((3, 4)/5) in ℝ²; both projections have integer numerators over 25, so each identity holds entry by entry with an exact zero. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities" href="#" target="_blank" rel="noopener"><code>orthogonal_complement_projection_identities</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">双重正交补是闭包：M⊥⊥ 等于 M 的拓扑闭包。页面从 M⊥ = span((−4, 3)) 再取一次正交补，得到的投影与 P<sub>M</sub> 逐项相同；有限维的 M 本身闭合。已冻结：</span><span class="en">The double orthogonal complement is the closure: M⊥⊥ equals the topological closure of M. The page takes the orthogonal complement of M⊥ = span((−4, 3)) once more and gets a projection equal to P<sub>M</sub> entry by entry; a finite-dimensional M is closed. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/DoubleOrthogonalClosure.double_orthogonal_complement_eq_closure" href="#" target="_blank" rel="noopener"><code>double_orthogonal_complement_eq_closure</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：康托尔 1891 年的对角论证（无穷的二元序列列不尽）、哥德尔 1931 年的对角构造，以及香农 1948 年的二元熵 H₂。页面只在有限表上演示一次翻转，不证明这些结论。</span><span class="en">Literature results, not formalized in this book: the 1891 diagonal argument of Cantor (infinite binary sequences cannot be listed), the 1931 diagonal construction of Gödel, and the 1948 binary entropy H₂ of Shannon. The page shows one flip on a finite table; it does not prove these results.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“反者道之动”（《道德经》第四十章）读作从两侧同时刻出概念的切口，是作者的诠释。步长 ε = 18°(1 + I<sub>cmp</sub>) 与阈值 0.5、1.5、2.5、3.5（每注入一份比较信息多一个锚点），耦合 κ₋ 与插值 P<sub>eff</sub> = P<sub>M</sub> + (1 − κ₋)P<sub>M⊥</sub>，区分信息 1 − H₂(1/(2 − κ₋))，把第四根轴画成相位螺旋，把 ℝ⁴ 的残差画在三维里，以及级联箭头与背景的雾，都是为画面选定的模型。</span><span class="en">Reading “reversal is the movement of the Dao” (Daodejing, chapter 40) as a cut that carves a concept from both sides is an interpretation by the author. The step ε = 18°(1 + I<sub>cmp</sub>) with thresholds 0.5, 1.5, 2.5 and 3.5 (one more anchor per unit of injected comparison), the coupling κ₋ with the interpolation P<sub>eff</sub> = P<sub>M</sub> + (1 − κ₋)P<sub>M⊥</sub>, the distinction 1 − H₂(1/(2 − κ₋)), the fourth axis drawn as a phase helix, the residuals of ℝ⁴ drawn in three dimensions, and the cascade arrows and the background haze are models chosen for the drawing.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的每个数都由页面当场算出：ℝ⁴ 里的锚点、格拉姆矩阵与行列式、格拉姆—施密特残差、整数分子的投影矩阵、K × K 表与对角路径、有限竞技场上的逃逸对与划分类数、二元熵。这是数值演示，不是证明。</span><span class="en">Every number on the page is computed on the spot: the anchors in ℝ⁴, the Gram matrices and determinants, the Gram–Schmidt residuals, the projection matrices with integer numerators, the K × K table and its diagonal path, the escape pairs and partition classes of the finite arena, and the binary entropy. This is a numerical illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="1" aria-label="时间轴：流动相位 τ" data-aria-en="Rail: the flow phase τ">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>5</kbd> <span class="zh">概念维度</span><span class="en">concept dimension</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">“反者道之动”：一个概念不是只从一侧长出来的。能到达它的路收向它，到不了它的路在边界折回；两侧在同一道切口相遇，切口越锐，概念越清楚。本页是数值演示，不是证明：每个数都由页面当场算出（NUM），定理只在下面写明的那个有限实例上演示。</p>
+      <ol>
+        <li><b>比较阶梯。</b>ℝ⁴ 里第一个锚点是 x = e₁，唯一的自比较 CMP(x, x) = 1（0D 点）。比较信息 I<sub>cmp</sub> 每越过一个阈值 0.5、1.5、2.5，就多一个锚点 a<sub>k+1</sub> = cos ε e₁ + sin ε e<sub>k+1</sub>，ε = 18°(1 + I<sub>cmp</sub>)；未越过时它与 x 重叠为 1，就是 x 本身。格拉姆行列式按两锚、三锚与 4 × 4 公式算出：det G₂ = sin²ε、det G₃ = sin⁴ε、det G₄ = sin⁶ε，为正当且仅当锚点线性无关。秩依次为 1、2、3、4：点、线、面、体。</li>
+        <li><b>溢出撑开新轴。</b>新锚点在旧张成之外的残差是 sin ε e<sub>k+1</sub>，归一化后是一根单位向量：旧投影把它送到 0，它离旧张成的距离恰为 1。舞台画的是各锚点在 x 之外的残差：青色线段长 √det G₂，品红三角形面积 √det G₃ / 2，紫色四面体体积 √det G₄ / 6；品红箭头从旧概念的中心沿新轴伸出。</li>
+        <li><b>相位碰撞与时间轴。</b>从 I<sub>cmp</sub> = 3.5 起，四面体质心处有一对反相的态 ψ₊ 与 ψ₋ = −ψ₊。有限竞技场是四个顶点上的 ψ₊ 加上这一对；读出是坐标 x、y、z、公平平方 |ψ|² 与相位切口 T。前四条读出留下 2 个有序逃逸对（ψ₊ 与 ψ₋ 互相分不开），加上 T 后为 0：T 降低逃逸率，等价于它使联合核严格变小。把 T 画成沿第四根轴上升的螺旋是模型。</li>
+        <li><b>来路的对角化。</b>K × K 表 T[r][c] ∈ {0, 1, 2, 3} 记录列出的第 r 条来路 Γ<sub>r</sub> → x 在第 c 步的相位象限（0、π/2、π、3π/2）。扭转 twist(y) = y + 2 (mod 4) 没有不动点；对角路径 Γ<sub>diag</sub>[k] = twist(T[k][k]) 在第 k 步与第 k 行相差 π，所以不等于表中任何一行，最后一步仍汇入 x。加细用单坐标实例：K² 条步记录的 latent 都是“到达 x”，只有 1 类；它们的象限目录覆盖全部四个象限，并入扭转后的对角读出后分成 4 类。</li>
+        <li><b>双无限切口。</b>路径振幅取在 ℝ² 里，M = span((3, 4)/5)：P<sub>M</sub> = [[9, 12], [12, 16]] / 25，P<sub>M⊥</sub> = [[16, −12], [−12, 9]] / 25。分子都是整数，所以 P<sub>M</sub>P<sub>M⊥</sub> = 0、P<sub>M</sub> + P<sub>M⊥</sub> = I、P<sub>M</sub>² = P<sub>M</sub> 逐项精确；从 M⊥ = span((−4, 3)) 再取一次正交补，投影回到 P<sub>M</sub>。模型 P<sub>eff</sub>(κ₋) = P<sub>M</sub> + (1 − κ₋)P<sub>M⊥</sub>：可达权重 Tr P<sub>M</sub> = 1，不可达权重 1 − κ₋，切口锐度 κ₋，区分信息 1 − H₂(1/(2 − κ₋)) 比特。κ₋ = 0 时 P<sub>eff</sub> = I，两侧不再有分别，概念化进背景的雾。</li>
+        <li><b>级联。</b>点 → 线：溢出 sin ε = √(det G₂ / det G₁)；线 → 面：√(det G₃ / det G₂)；面 → 体：√(det G₄ / det G₃)；体 → 时间：T 独自捕获的逃逸对。每一级的溢出量与下一级生成元的长度相等，这是残差的定义；把它读成“阻碍变成生成元”的级联，是作者的诠释（MODEL）。</li>
+        <li><b>冻结定理。</b>页面引用九条已冻结的 Lean 定理（依据面板里的 LEAN ✓）：<code>unit_gram_overlap_characterization</code>、<code>two_anchor_gram_det_pos_iff</code>、<code>three_anchor_gram_det_pos_iff</code>、<code>finite_layer_projection_escape</code>、<code>lowersEscape_iff_strict_kernel_novelty</code>、<code>relative_semantic_diagonal_ne_listed_decode</code>、<code>complete_diagonal_strict_topology_refinement</code>、<code>orthogonal_complement_projection_identities</code>、<code>double_orthogonal_complement_eq_closure</code>。它们是一般陈述，页面只演示它们在上面这些有限实例上的样子。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-reversal-diagonal-and-concept-cascade" target="_top">第三十四章 §34.9 · 反者道之动：来路对角化与概念开维级联</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">“Reversal is the movement of the Dao”: a concept does not grow from one side only. The paths that can reach it converge on it, the paths that cannot are turned back at its boundary; the two sides meet at one cut, and the sharper the cut, the clearer the concept. The page is a numerical illustration, not a proof: every number is computed on the spot (NUM), and each theorem is shown only on the finite instance written below.</p>
+      <ol>
+        <li><b>The comparison ladder.</b> The first anchor in ℝ⁴ is x = e₁, with the one self-comparison CMP(x, x) = 1 (the 0D point). Each time the comparison information I<sub>cmp</sub> passes a threshold 0.5, 1.5, 2.5, one more anchor a<sub>k+1</sub> = cos ε e₁ + sin ε e<sub>k+1</sub> joins, with ε = 18°(1 + I<sub>cmp</sub>); before that it has overlap 1 with x and is x itself. The Gram determinants are computed by the two-anchor, three-anchor and 4 × 4 formulas: det G₂ = sin²ε, det G₃ = sin⁴ε, det G₄ = sin⁶ε, positive exactly when the anchors are linearly independent. The rank runs 1, 2, 3, 4: point, line, surface, volume.</li>
+        <li><b>Overflow opens a new axis.</b> The residual of a new anchor off the old span is sin ε e<sub>k+1</sub>; normalised it is a unit vector that the old projection sends to 0 and that lies at distance exactly 1 from the old span. The stage draws the residual of each anchor off x: the cyan segment has length √det G₂, the magenta triangle area √det G₃ / 2, the violet tetrahedron volume √det G₄ / 6; the magenta arrows leave the centre of the old concept along the new axis.</li>
+        <li><b>Phase collision and the time axis.</b> From I<sub>cmp</sub> = 3.5 the centroid of the tetrahedron holds a pair of opposite-phase states ψ₊ and ψ₋ = −ψ₊. The finite arena is ψ₊ at the four vertices plus this pair; the readouts are the coordinates x, y, z, the fairness square |ψ|² and the phase cut T. The first four readouts leave 2 ordered escape pairs (ψ₊ and ψ₋ cannot be told apart), and with T there are 0: T lowers the escape rate, which is the same as T strictly shrinking the joint kernel. Drawing T as a helix rising along a fourth axis is a model.</li>
+        <li><b>Diagonalising the ways in.</b> The K × K table T[r][c] ∈ {0, 1, 2, 3} records the phase quadrant (0, π/2, π, 3π/2) of step c of the listed path Γ<sub>r</sub> → x. The twist twist(y) = y + 2 (mod 4) has no fixed point; the diagonal path Γ<sub>diag</sub>[k] = twist(T[k][k]) differs from row k by π at step k, so it equals no row of the table, and its last step still runs into x. The refinement uses a one-coordinate instance: all K² step records have the latent “arrives at x”, one class; their quadrant catalog covers all four quadrants, and joining the twisted diagonal readout splits them into 4 classes.</li>
+        <li><b>The dual-infinite cut.</b> Path amplitudes live in ℝ², with M = span((3, 4)/5): P<sub>M</sub> = [[9, 12], [12, 16]] / 25 and P<sub>M⊥</sub> = [[16, −12], [−12, 9]] / 25. The numerators are integers, so P<sub>M</sub>P<sub>M⊥</sub> = 0, P<sub>M</sub> + P<sub>M⊥</sub> = I and P<sub>M</sub>² = P<sub>M</sub> hold exactly entry by entry; taking the orthogonal complement of M⊥ = span((−4, 3)) once more gives P<sub>M</sub> back. The model P<sub>eff</sub>(κ₋) = P<sub>M</sub> + (1 − κ₋)P<sub>M⊥</sub> has reachable weight Tr P<sub>M</sub> = 1, unreachable weight 1 − κ₋, cut sharpness κ₋ and distinction 1 − H₂(1/(2 − κ₋)) bits. At κ₋ = 0, P<sub>eff</sub> = I: the two sides are no longer told apart, and the concept melts into the background haze.</li>
+        <li><b>The cascade.</b> Point → line: the overflow sin ε = √(det G₂ / det G₁); line → surface: √(det G₃ / det G₂); surface → volume: √(det G₄ / det G₃); volume → time: the escape pairs T alone captures. The overflow of each level equals the length of the next generator, which is what a residual is; reading this as a cascade in which each obstruction becomes a generator is an interpretation by the author (MODEL).</li>
+        <li><b>Frozen theorems.</b> The page cites nine frozen Lean theorems (LEAN ✓ in the evidence panel): <code>unit_gram_overlap_characterization</code>, <code>two_anchor_gram_det_pos_iff</code>, <code>three_anchor_gram_det_pos_iff</code>, <code>finite_layer_projection_escape</code>, <code>lowersEscape_iff_strict_kernel_novelty</code>, <code>relative_semantic_diagonal_ne_listed_decode</code>, <code>complete_diagonal_strict_topology_refinement</code>, <code>orthogonal_complement_projection_identities</code> and <code>double_orthogonal_complement_eq_closure</code>. They are general statements; the page only shows what they look like on the finite instances above.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-reversal-diagonal-and-concept-cascade" target="_top">Chapter 34 §34.9 · Reversal: diagonalising the ways in and the concept cascade</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

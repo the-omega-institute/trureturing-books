@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "a8486eb55197bf982d1ff5e9a580102320777f479651baa65a25ca236f31dec4"
+    },
+    "fig-gram-overflow-cascade.zh.jpg": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "a4759c412cb2b2f19e391f4524f107c8f84db832813b8c80b9946da4216f266a"
+    },
+    "fig-time-from-phase-collision.zh.jpg": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "4007bea4fd1d2163fabd3432e9e22a0554ae8bfde240175ef9c974ddd173f333"
+    },
+    "fig-arrival-diagonal-escape.zh.jpg": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "ffbae7ce7eb4b20088d23cc5b123b264a275ff4e6f24c345bf39870f46d0d95f"
+    },
+    "fig-reversal-dual-cut.zh.jpg": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "8ada084931008229b9fb834eaecb66b847290f2e16a2be07dda7d8382dc98f9c"
+    },
+    "fig-concept-obstruction-cascade.zh.jpg": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "4a24f1bdf10bf57bb76200ca73ca2eb03d0aa2fd0e9b9b0d27651db372e46411"
+    },
+    "fig-gram-overflow-cascade.en.jpg": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "c9f6b34fa49e0b06aa0a1ed5b13a18442619d7cf838f8837b92166eb91385868"
+    },
+    "fig-time-from-phase-collision.en.jpg": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "64517214955a8ad423a6aa04825615d47dd382420a6d38a196bce9430fa4d93f"
+    },
+    "fig-arrival-diagonal-escape.en.jpg": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "db0e36daf70bbef84c00b1afb3c4b6ff3e4859e4c9c7dc435943166a701b108a"
+    },
+    "fig-reversal-dual-cut.en.jpg": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "01c628033f99947c73329bd14fc0ade67c9ba114fb740cf277d65384de0b5d4b"
+    },
+    "fig-concept-obstruction-cascade.en.jpg": {
+      "input": "70872745d461a8c83fae13ea12d98091d3d3cf306c3df30e2a3fdba25ffc9ab3",
+      "output": "d97e7932782c389b7e00a23cddaa516450537c8e87605f49e5adf8a38e932f6a"
+    }
+  }
+}

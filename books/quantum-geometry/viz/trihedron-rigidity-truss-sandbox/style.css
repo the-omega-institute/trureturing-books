@@ -1,0 +1,79 @@
+/* TRUSS//RIGIDITY: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this page lives
+   here: the pointer on the stage, the two-way topology toggle, the amber push handle, the book's colour rule and the
+   legend swatches. Colours come from the tokens (var(--cyan) …), never from literal colour values. */
+#stage { container-type: inline-size; }
+/* the orbit and the handle take the pointer only on a live stage; a still (cover, cited shot) lets touch scroll through */
+.stage:not(.still) #cv { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active { cursor: grabbing; }
+.stage.still #cv { cursor: default; touch-action: auto; }
+
+/* the book's colour rule: the tagline and the drawer's bold leads are not "now" */
+.tagline em { color: var(--cyan); }
+.sheet li b { color: var(--cyan); }
+.hud-tl .big { color: var(--sigma); }
+.hud-tl .big, .hud-tl .sub, .tau { text-transform: none; }
+.hud-tl .sub { line-height: 1.4; }
+
+/* the topology toggle: two wide buttons at the top of the controls, one click to weld or cut the diagonals */
+.mode-toggle { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px; margin: 2px 0 12px; }
+.mode-toggle .chip { padding: 9px 8px; font-size: 12px; line-height: 1.25; text-align: center; white-space: normal; border-width: 1px; }
+.mode-toggle .chip[data-mode="complete"][aria-pressed="true"] { background: var(--cyan); color: var(--on-accent); border-color: var(--cyan); }
+.mode-toggle .chip[data-mode="missing-diagonals"][aria-pressed="true"] { background: var(--magenta); color: var(--on-accent); border-color: var(--magenta); }
+.hud-tr .chip[data-stage-mode="missing-diagonals"][aria-pressed="true"] { background: var(--magenta); color: var(--on-accent); }
+
+.ctl-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin-bottom: 8px; }
+.ctl-label { font-family: var(--font-data); font-size: 11px; color: var(--dim); }
+#nodeCount { display: flex; flex-wrap: wrap; gap: 4px; }
+#nodeCount .chip { min-width: 30px; padding: 4px 7px; text-align: center; }
+.chip.spawn { width: 100%; margin: 0 0 12px; padding: 7px 8px; border-style: dashed; border-color: var(--amber); color: var(--amber); }
+.chip.spawn[hidden] { display: none; }
+
+/* the push handle: an amber ring on the stage at the projected vertex; a button, so the orbit leaves it alone */
+.shear-handle { position: absolute; z-index: 3; width: 30px; height: 30px; padding: 0; margin: 0; border: 2px solid var(--amber); border-radius: 50%;
+  background: color-mix(in srgb, var(--amber) 14%, transparent); transform: translate(-50%, -50%); cursor: grab; touch-action: none;
+  user-select: none; -webkit-user-select: none; box-shadow: 0 0 10px color-mix(in srgb, var(--amber) 55%, transparent); }
+.shear-handle:active, .shear-handle.dragging { cursor: grabbing; background: color-mix(in srgb, var(--amber) 30%, transparent); }
+.shear-handle[hidden] { display: none; }
+.stage.still .shear-handle { pointer-events: none; }
+:root[data-thumb-mode] .shear-handle { display: none; }
+
+/* readouts by role: cyan = comparisons and lines, magenta = what is left over, violet = volume */
+dl.ro .c dd { color: var(--cyan); }
+dl.ro .m dd { color: var(--magenta); }
+dl.ro .v dd { color: var(--violet); }
+dl.ro dd { overflow-wrap: anywhere; }
+
+/* legend swatches */
+.sw.ink { background: var(--sigma); }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--dim) 0 4px, transparent 4px 7px); }
+.sw.dash.am { background: repeating-linear-gradient(90deg, var(--amber) 0 4px, transparent 4px 7px); }
+.sw.ring { width: 10px; height: 10px; border-radius: 50%; background: transparent; border: 2px solid var(--amber); }
+
+/* the stage's own labels keep their case (C₁, Ω, δ) */
+.stage .tag.raw { text-transform: none; }
+.stage .tag.raw.small { font-size: 11px; }
+.stage .tag.c-vi { color: var(--violet); }
+.stage .tag.c-am { color: var(--amber); }
+.stage .tag.c-cy { color: var(--cyan); }
+.stage .tag.c-mg { color: var(--magenta); }
+
+@container (max-width: 600px) {
+  .hud-tl { left: 14px; max-width: calc(100% - 28px); }
+  .hud-tl .big { font-size: 12.5px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.3; }
+  .hud-tr .chip { padding: 3px 6px; font-size: 9.5px; letter-spacing: 0.05em; }
+  .hud-bl { left: 12px; right: 12px; bottom: 9px; gap: 2px 10px; font-size: 10px; }
+  .stage .tag.raw { font-size: 10.5px; }
+  .shear-handle { width: 26px; height: 26px; }
+}
+
+/* phones: a taller stage for the sphere */
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]) .lab .center { grid-template-rows: minmax(min-content, max(470px, 66vh)) auto auto; }
+  .logo { font-size: clamp(17px, 5vw, 24px); }
+}
+
+/* a narrow cited figure: the tour bar picks the card; the stage keeps the sphere */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}
