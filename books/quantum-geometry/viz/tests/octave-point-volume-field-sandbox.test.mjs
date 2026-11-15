@@ -88,7 +88,10 @@ async function pause(p = page) {
   // 先交付两帧并短暂收敛，让 kit.autoplay 的初次 IntersectionObserver 回调完成。
   await p.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   await settle(p, 50);
-  if ((await state(p)).playing) await p.click('#play');
+  // 读取与按键放在同一个页面任务里：Playwright 点击前会把播放键滚入视野、舞台可能随之离开视野，
+  // kit.autoplay 的观察器若在读取之后、点击之前先暂停，点击就会重新开播。同步执行时观察器回调插不进来；
+  // 仍由播放键自己的处理函数暂停，已暂停时不按。
+  await p.evaluate(() => { if (window.OCTAVE_FIELD_DEBUG.state.playing) document.getElementById('play').click(); });
   await settle(p);
 }
 async function pick(card, p = page) {
@@ -485,6 +488,44 @@ await page.click('#infoBtn'); await settle(page);
 check('theory drawer opens as a dialog', await page.locator('#drawer [role="dialog"]').isVisible());
 await page.keyboard.press('Escape'); await settle(page);
 check('Escape closes the theory drawer', await page.locator('#drawer').evaluate(el => el.hidden));
+
+// 回归：可见性观察器的暂停落在 pause() 读到“正在播放”与按下播放键之间。观察器回调只在任务之间运行：
+// 受信任的点击来自读取之后的输入任务，在它捕获阶段同步送达；页面内同步点击与读取同属一个任务，
+// 只能排到下一个任务送达。送达的动作与 kit.autoplay 看不见舞台时相同：共享 kit.pause()。
+// 740×1100 下舞台与播放键同屏，点击不滚动，真实观察器启动时钟后不再介入。
+{
+  const p = await T.open(BOOK, ID, '?embed=1&lang=en', { viewport: { width: 740, height: 1100 }, locale: 'en-US', reducedMotion: 'reduce' });
+  await settle(p);
+  const started = await until(p, () => window.OCTAVE_FIELD_DEBUG.state.playing);
+  const setup = await p.evaluate(() => {
+    const play = document.getElementById('play'), b = play.getBoundingClientRect(), s = document.getElementById('stage').getBoundingClientRect();
+    const rec = window.__octavePauseBoundary = { queued: false, delivered: false, clicks: 0, playingAtDelivery: null };
+    const deliver = () => { rec.playingAtDelivery = window.OCTAVE_FIELD_DEBUG.state.playing; TRV.kit.pause(); rec.delivered = true; };
+    addEventListener('click', e => {
+      if (e.target !== play) return;
+      rec.clicks++;
+      if (rec.queued) return;
+      rec.queued = true;
+      if (e.isTrusted) deliver(); else setTimeout(deliver);
+    }, true);
+    return { state: window.OCTAVE_FIELD_DEBUG.state, playInView: b.top >= 0 && b.bottom <= innerHeight,
+      stageRatio: (Math.min(s.bottom, innerHeight) - Math.max(s.top, 0)) / s.height };
+  });
+  check('observer boundary: kit.autoplay plays the helix card with stage and play key in view', started && setup.state.playing
+    && setup.state.preset === 'octave-helix-zoom' && setup.playInView && setup.stageRatio >= 0.5,
+    JSON.stringify({ started, playing: setup.state.playing, preset: setup.state.preset, playInView: setup.playInView, stageRatio: setup.stageRatio }));
+  await pause(p);
+  const delivered = await until(p, () => window.__octavePauseBoundary.delivered);
+  const after = await state(p), rec = await p.evaluate(() => ({ ...window.__octavePauseBoundary }));
+  check('observer boundary: the visibility pause is delivered after the read', delivered && rec.clicks === 1, JSON.stringify(rec));
+  check('observer boundary: pause() leaves the clock paused', !after.playing && await p.locator('#play').getAttribute('aria-pressed') === 'false',
+    JSON.stringify({ playing: after.playing, t: after.t, ...rec }));
+  await pause(p);
+  const again = await state(p), clicks = await p.evaluate(() => window.__octavePauseBoundary.clicks);
+  check('observer boundary: a second pause() is idempotent', !again.playing && again.t === after.t && clicks === rec.clicks,
+    JSON.stringify({ playing: again.playing, t: [after.t, again.t], clicks: [rec.clicks, clicks] }));
+  await p.context().close();
+}
 
 // 双语 × 深浅系统主题 × 桌面／短屏／手机／书内／窄引用卡；逐卡检查布局与数学。
 for (const colorScheme of ['dark', 'light']) for (const lang of ['zh', 'en']) for (const [width, height, embed, figure] of [

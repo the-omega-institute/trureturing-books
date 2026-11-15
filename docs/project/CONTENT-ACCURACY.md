@@ -1468,3 +1468,12 @@ main314 相对 mainfcf 共36路径：中英文第38章各新增589行异质路�
 本次 8e3 加两份文档修订的候选另跑适用的空白、正式源／双语检查、`TRURETURING_DIR=/Users/auricstudio/trureturing TBOOK_REPO=the-omega-institute/trureturing-books ./tbook check`、中英文 HTML 构建及两项纠正的文字／链接断言，均通过；check 为0错误、12条警告（1个未引用序曲图、8个历史影片 subject_commit，以及第16章形式化请求 #11／#12／#10 的3条 HTTP 403 在线核验警告），英文 HTML 报搜索索引12,914,417 bytes 大小警告。四个受影响 HTML 页的文字、Gram 片段目标、f010 源链接、未解析引用及 KaTeX 错误检查通过；上述警告未指向这四页的版式，在线请求核验仍受限。正常构建同步后 tracked bytes 无生成差分，声明地图提示15张图保持最新、未启动浏览器；未改生产器或重生媒体。实际检查输入与最终文档摘要分别封存，最终仅两份文档补记结果，相关章源、SUMMARY、锁、配置、工具、生产器与媒体依赖均与检查／构建输入相同。证据在 `/private/tmp/qg-current-book-stale-claims-evidence-20261115/integration-main-e6cd/evidence/` 的 `current-check-input.json`、`current-checks.json`、`source-bilingual-current.json`、`incoming-main314-correspondence.json`、`html-current-assertions.json`、`preservation-and-doc-checks.json`、`validation-correspondence.json` 及 `final-candidate.json`；UTF-8 字节数与 Unicode 字符数分别记录。自动输出证据仅覆盖两项纠正，不授予第11／38／39章、附录C、48项新增引用、统计／图件／幻灯片／地图或整书准确性接受。
 
 旧额度不重启；没有新增章源缺陷或完整页面批准。116个完整语言页面的来源、计算／文献、媒体、输出及独立审查维度继续待核。普通导出按项目第9节构建与适用自动检查验收，规定触发时才查看受影响页面；本次未做截图／逐页阅读矩阵、本地 PDF／EPUB 或媒体重生成。调用方负责最终提交对应、已固定的 R2 三席、CI 的 PDF／EPUB 与适用导出校验、合入和成功 Pages；旧缺口保留原输入归属。
+
+
+## 第34章核子质量归因的有限修正（2026-11-15）
+
+确认项 `CH34-NUCLEON-MASS-ATTRIBUTION`：输入 `14ea786f0701`、pin `ccaf12043b8e` 的 §34.16 基准算例、五塔表／接力、附录 A 两处摘要及陪集塔实验室，把流质量参数的朴素减法误作核子物理质量分解。中英同步明确 $\overline{\mathrm{MS}}$、2 GeV 下的重整化流质量；保留 8.99 MeV、质子 99.0419% 与中子 98.7760% 的算术，仅作标度比较。补充质量标量算符及扣除真空、归一化的静止核子矩阵元，引用 Ji hep-ph/9410274 式 (27)–(30) 和 Yang 等 arXiv:1808.08677 式 (1)–(6)；本次复读相关定义段，未重新通读两篇全文。实验室及其现有测试统一改用 `protonNaiveScaleRemainder`，未另立通用贡献比例。
+
+独立复算两语各36个表格值及质量减法；原数值测试谓词、ID／GID、题记、形式／证明块与媒体顺序保全。同步后无统计差分；正常检查为0错误、9条既有警告（1张未引用序曲图、8项影片历史钉版）。正常／1000 ms慢帧测试各1147/1147，无警告或跳过。规定截图及受影响读数已按阅读尺寸查看；重出11张图均与输入字节相同，仅刷新静帧清单，四张相关静帧按800×450复看。双语HTML、六个PDF变体及两份EPUB构建通过；受影响文本／公式／链接自动检查通过，EPUBCheck启用且未报告错误、警告或跳过。HTML仅报英文搜索索引较大（14,676,293 bytes）。普通导出未作截图矩阵。
+
+此项不授予完整§34.16、第34章、附录或媒体准确性接受。实验室短窗读数需滚动、接力文字换行及组合横线放大后的轻微偏移保留供独立审查；既有无关警告和旧义务不重置。最终候选独立架构／质量／测试审查、提交对应、PR／CI／合入／Pages由调用方负责，全书116个完整语言页面接受槽继续待核。

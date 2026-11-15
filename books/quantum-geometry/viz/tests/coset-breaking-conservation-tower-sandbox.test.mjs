@@ -106,7 +106,7 @@ async function pick(card, p = page) {
 function checkMath(s, tag) {
   const eta = s.ssbDepth, g = s.gaugeCoupling, eps = Math.PI * eta / 2;
   const sin2w = 1 - (80.377 / 91.1876) ** 2;
-  const proton = (938.272 - 8.99) / 938.272;
+  const naiveRemainder = (938.272 - 8.99) / 938.272;   // 1 − (2m_u + m_d)/m_p: a naive scale comparison only
   const flux = 6.62607015e-34 / (2 * 1.602176634e-19);
   check(`${tag}: state exposes finite controls`, Number.isInteger(s.familyIndex) && s.familyIndex >= 0 && s.familyIndex <= 4
     && near(s.ssbDepth, eta) && near(s.gaugeCoupling, g) && Number.isFinite(s.anchorAzimuthRad));
@@ -118,7 +118,7 @@ function checkMath(s, tag) {
   check(`${tag}: Maurer–Cartan and electroweak ledgers`, s.maurerCartanResidual < 1e-11
     && s.electroweakDofBefore === 12 && s.electroweakDofAfter === 12);
   check(`${tag}: physical constants are independently reconstructed`, near(s.weinbergSin2OnShell, sin2w, 1e-14)
-    && near(s.protonChiralMassFraction, proton, 1e-14) && near(s.fluxQuantumWb, flux, 1e-30));
+    && near(s.protonNaiveScaleRemainder, naiveRemainder, 1e-14) && near(s.fluxQuantumWb, flux, 1e-30));
   check(`${tag}: Skyrmion winding is B=1 away from the symmetric point`, s.skyrmionBaryonNumber === (eta > 0 ? 1 : 0));
 }
 
@@ -136,6 +136,7 @@ for (const [file, source] of Object.entries(sources)) {
 }
 check('source: shared three-column grid and wheel:false', !/grid-template-columns\s*:/i.test(sources['style.css']) && /wheel:\s*false/.test(sources['main.js']));
 check('source: all five public presets remain in order', same([...sources['index.html'].matchAll(/data-preset="([^"]+)"/g)].map(m => m[1]), Object.keys(CARDS)));
+check('source: no proton-mass attribution of the naive quark-mass remainder', !/protonChiralMassFraction|PROTON_FRACTION|非希格斯|not Higgs|Higgs-given|希格斯给的/.test(sources['index.html'] + sources['main.js']));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find(v => v.id === ID);
 check('registry: live §34.16 entry with five bilingual cards and twelve GIDs', entry.status === 'live' && entry.chapter === 34 && entry.section === '34.16'
   && same(entry.presets, Object.keys(CARDS)) && entry.presets.every(c => entry.preset_titles[c].zh && entry.preset_titles[c].en)
@@ -170,6 +171,45 @@ for (const lang of ['zh', 'en']) {
       && Number(await page.locator(`[data-preset="${card}"]`).getAttribute('data-still')) === CARDS[card].still);
     checkMath(s, `${lang}/${card}`);
   }
+}
+
+// m_u, m_d are MS-bar running parameters (μ = 2 GeV): 1 − (2m_u + m_d)/m_p is a naive scale comparison, never a share of
+// the proton mass. The family-2 readout, its note, the NUM box, the relay strip and the drawer must say so in both
+// languages; the drawer defines the quark-mass term as a nucleon expectation value of H_m, with no substitute fraction.
+const NAIVE_PCT = `${(100 * (938.272 - 8.99) / 938.272).toFixed(2)}%`;
+const ATTRIBUTION = /非希格斯|not Higgs|Higgs-given|希格斯给的|chiral\s*\/\s*gluonic|手征\s*\/\s*胶子|质子质量不是|of the proton mass is not/i;
+const SUBSTITUTE = /12\.5\s*%|(?<![\d.])9\s*%|(?<![\d.])1\/8(?![\d.])/;
+const NAIVE = { zh: /朴素标度/, en: /naive (?:scale|comparison of (?:two )?scales)/ };
+const NOT_SHARE = { zh: /不是质(?:子质)?量(?:的)?分解比例/, en: /not a (?:mass-decomposition fraction|fraction of any decomposition of the proton mass)/ };
+for (const lang of ['zh', 'en']) {
+  await page.click(`[data-lang-set="${lang}"]`); await settle(page);
+  await pick('skyrmion-baryon-winding');
+  const t = await page.evaluate(l => ({
+    charge: document.querySelector('#roCharge').textContent, note: document.querySelector('#roNote').textContent,
+    num: document.querySelector(`#evidence .lean.num .${l}`).textContent,
+    argued: document.querySelector(`#evidence .lean.argued .${l}`).textContent,
+    drawer: document.querySelector(`#drawer .sheet > .${l}`).textContent, visible: document.body.innerText
+  }), lang);
+  check(`${lang}: family-2 readout calls the remainder a naive scale comparison, not a mass share`, t.charge.includes(NAIVE_PCT)
+    && NAIVE[lang].test(t.charge) && NOT_SHARE[lang].test(t.charge) && !ATTRIBUTION.test(t.charge)
+    && ['MS-bar', 'μ = 2 GeV', '2.16 MeV', '4.67 MeV'].every(x => t.note.includes(x)), `${t.charge} | ${t.note}`);
+  check(`${lang}: NUM box names MS-bar running parameters and no proton-mass fraction`, t.num.includes(NAIVE_PCT)
+    && ['MS-bar', 'μ = 2 GeV', '2.16 MeV', '4.67 MeV', '(938.272 − 8.99)/938.272'].every(x => t.num.includes(x))
+    && NAIVE[lang].test(t.num) && NOT_SHARE[lang].test(t.num) && !ATTRIBUTION.test(t.num), t.num);
+  check(`${lang}: drawer defines the quark-mass term as ⟨N|Hm|N⟩/⟨N|N⟩ with its primary sources`,
+    ['⟨N|Hm|N⟩/⟨N|N⟩', 'Hm = Σf ∫ d³x mf q̄f qf', 'hep-ph/9410274', '(27)–(30)', 'arXiv:1808.08677', '(1)–(6)', 'MS-bar', NAIVE_PCT].every(x => t.drawer.includes(x))
+    && NAIVE[lang].test(t.drawer) && NOT_SHARE[lang].test(t.drawer) && !ATTRIBUTION.test(t.drawer) && !SUBSTITUTE.test(t.drawer));
+  check(`${lang}: ARGUED keeps QCD generating most of the proton mass`, t.argued.includes(lang === 'zh' ? 'QCD 生成质子质量的绝大部分' : 'QCD generating most of the proton mass'));
+  check(`${lang}: no visible text attributes the remainder to a mass source or substitutes a fraction`, !ATTRIBUTION.test(t.visible) && !SUBSTITUTE.test(t.visible));
+  await pick('five-family-cascade-relay');
+  const meta = await page.locator('#plotMeta').textContent();
+  check(`${lang}: relay strip labels 2m_u + m_d as a naive MS-bar scale with no percentage of m_p`, meta.includes('8.99 MeV') && meta.includes('MS-bar')
+    && NAIVE[lang].test(meta) && !meta.includes('%') && !ATTRIBUTION.test(meta), meta);
+}
+{
+  const s = await state();
+  check('debug API: the remainder is exposed under its arithmetic-scale name only', Object.hasOwn(s, 'protonNaiveScaleRemainder')
+    && !Object.hasOwn(s, 'protonChiralMassFraction') && !Object.keys(s).some(k => /chiral|fraction/i.test(k)));
 }
 
 // Real sliders cover interior values and both endpoints. Family chips and the range input must stay synchronized.
