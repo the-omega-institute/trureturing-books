@@ -1540,7 +1540,55 @@ $$
 
 [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 证明：对每个固定的 $\rho\in(0,1)$，$\delta_{\rho,j}\to0$，且覆盖全部充分大的 $j$。该结论不指定收敛速率，也不声称关于 $\rho$ 的一致收敛。有限矩阵的可逆性、无限体积谱中零点的归属、有限分辨率态密度或 Anderson 局域化意义下的临界性，都不能直接替代这一指定边界与前缀序列的极限证明。Krebbekx–Moustaj–Dajani–Morais Smith 的 *Multifractal Properties of Tribonacci Chains*（[*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204)，§II.B.1、§III.A.1、§V）采用周期逼近与微扰重整化研究物理谱及临界性；本书不将其解释为上述对所有 $\rho\in(0,1)$ 的有限开链结论。
 
-要讨论物理空间切口的熵，还须指定多体哈密顿量、填充及态；若选择粒子数守恒的 Slater 基态，须构造其实际占据投影 $P_{\mathrm{occ}}$，并对选定格点子集 $I$ 取关联矩阵压缩 $\chi_I P_{\mathrm{occ}}\chi_I$，其中 $\chi_I$ 投影到这些格点。Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。上述极限只处理这一单粒子谱前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
+**实际 Slater 态与关联矩阵约定。** 要讨论物理空间切口的熵，还须指定多体哈密顿量、填充及态。以下是文献构造与文献结果，未在本书形式化。让这 $N$ 个原始格点保持自然顺序 $0,\ldots,N-1$，以布尔占据串的占据子集 $S$ 标记正交归一基 $\lvert S\rangle$。选取整数 $0\le k\le N$ 和复矩阵 $V\in\mathbb{C}^{N\times k}$，其列是所占据的正交归一单粒子模式，即 $V^\dagger V=I_k$。对大小为 $k$ 的 $S$，令 $V_S$ 按递增格点顺序保留这些行，列顺序保持不变，定义实际的多体振幅
+
+$$
+\langle S\mid\Psi_V\rangle=
+\begin{cases}
+\det(V_S),&\lvert S\rvert=k,\\
+0,&\lvert S\rvert\ne k.
+\end{cases}
+$$
+
+这就是 Slater 行列式在有序占据基中的展开；空行列式取 $1$，所以 $k=0$ 给出真空。这里的占据基已经归一化，振幅不再乘以 $1/\sqrt{k!}$。Dereziński 的 [*Clifford algebras and fermions*](https://www.fuw.edu.pl/~derezins/clifford.pdf)，§7.1–7.2 式 (7.51)–(7.54)，给出 CAR、有序占据基与归一化 Slater 行列式。这一态的选择保留了振幅与费米符号；仅找一个具有所需关联矩阵的密度矩阵不能替代它。把它用于上述跃迁链的基态时，仍须指定所占模式、填充及多体哈密顿量，并核对能量最小性。
+
+令 $P=VV^\dagger$，$\rho_V=\lvert\Psi_V\rangle\langle\Psi_V\rvert$，并令 $c_i$ 为按原始格点顺序定义的费米湮灭算符。关联矩阵的指标约定为
+
+$$
+\begin{aligned}
+K_{ij}&=\Tr(\rho_V c_j^\dagger c_i)=P_{ij},\\
+C_{ij}&=\Tr(\rho_V c_i^\dagger c_j)=P_{ji},\qquad C=P^{\mathsf T}.
+\end{aligned}
+$$
+
+Dereziński 的定理 8.1，特别是式 (8.103) 的 $\omega_\pi(d\Gamma(h))=\Tr(\pi h)$，支持这一二点函数约定。Peschel，[*Calculation of reduced density matrices from correlation functions*](https://arxiv.org/pdf/cond-mat/0212631v1)，式 (7)、(9)–(10)，采用上面的 $C$ 约定；其式 (12) 中的转置不能略去。对实投影矩阵，两种记法可以重合；推广到复模式时必须保留转置区别。Peschel 还明确指出：对非 Slater 态，按同一二点函数重建的自由费米密度矩阵一般不能复现其他期望值。因此，关联矩阵相合本身不能确定一般密度矩阵。
+
+**空间压缩的完整谱。** 对上述 Slater 态，指定由 $\ell$ 个原始格点组成的空间区域 $I$。令 $V_I$ 只保留这些格点的行，并把 $P_I=V_I V_I^\dagger$ 看作作用在该区域上的 $\ell\times\ell$ 压缩矩阵，而不是补集上带额外零空间的 $N\times N$ 矩阵。文献中的费米子系统约定下，若 $\nu_1,\ldots,\nu_\ell\in[0,1]$ 是它的全部特征值，包括 $0$、$1$ 与重复值，则约化密度矩阵 $\rho_I$ 的特征值多重集恰有 $2^\ell$ 项，按所有占据串逐项列为
+
+$$
+\begin{aligned}
+b_a(0)&=1-\nu_a,\qquad b_a(1)=\nu_a,\\
+\lambda_{\boldsymbol n}&=\prod_{a=1}^{\ell}b_a(n_a),\qquad
+\boldsymbol n\in\{0,1\}^{\ell}.
+\end{aligned}
+$$
+
+相同数值按重数保留，零特征值也保留；显式选择两个因子避免了端点处的 $0^0$。例如，一个完全空或完全满的模式仍贡献一对特征值 $1,0$，不能从完整密度谱中删去。$\ell=0$ 时空乘积为 $1$，密度谱只有这一项。使用自然对数，熵为
+
+$$
+\begin{aligned}
+S(\rho_I)&=\sum_{a=1}^{\ell}h(\nu_a),\\
+h(x)&=-x\log x-(1-x)\log(1-x).
+\end{aligned}
+$$
+
+这里 $x\log x$ 在 $x=0$ 时按连续延拓取 $0$，故 $h(0)=h(1)=0$；若以比特计量，需将熵除以 $\log 2$。Peschel 的式 (8)–(11) 给出约化自由费米密度矩阵的模式描述；Klich，[*Lower entropy bounds and particle number fluctuations in a Fermi sea*](https://arxiv.org/pdf/quant-ph/0406068v2)，式 (4) 的投影模式分解、式 (7) 及其后的 $\operatorname{diag}(1-d_i,d_i)$ 约化因子与式 (11)，给出这一乘积谱和熵公式的依据。更一般的粒子数规范不变高斯密度矩阵也有同样配方，此时压缩的是其单粒子关联算符，不要求全空间关联算符为投影。高斯性是这里的假设，不能由所期待的谱公式倒推。含 $0$ 或 $1$ 时，Peschel 式 (12) 的矩阵对数不能直接使用；上述因子与连续延拓保留了这些端点。
+
+占据模式上的 $k\times k$ Gram 矩阵 $V_I^\dagger V_I$ 与 $P_I$ 有相同的非零谱，但两者维数可以不同。只掌握前者的谱还不足以列出空间密度矩阵的全部 $2^\ell$ 个特征值：必须把非零压缩谱按重数保留，再用零补足到 $\ell$ 项。熵求和中零模式贡献为零，容易掩盖这一完整谱的维数差别。这些谱关系是已有文献结论；本书尚需建立它们与具体占据载体的对应。
+
+**尚待形式化的空间接口。** 直接目标限定为 $0\le\ell\le N$ 时的连续前缀 $I=\{0,\ldots,\ell-1\}$：在原始布尔占据载体上，对同一个行列式态 $\rho_V$，按原始格点的张量顺序迹去最后 $N-\ell$ 个格点，证明所得普通张量部分迹具有上面的完整多重集与端点安全的熵公式，包括 $\ell=0,N$，并使用全部 $\ell$ 个压缩特征值及其重数。Klich 的式 (7) 使用适当的费米张量积；它本身不替本书证明这一字面上的有序格点张量部分迹对应。任意不连续格点子集还涉及 Jordan–Wigner 字符串与费米子系统选择，须另行建立对应。以所需空间谱为前提的条件命题也不会构造出该态或完成这一目标。这里的文献说明不提供归一化、二点函数、基态、高斯性或空间谱的新 Lean 编译证据，地址数位切口仍不能充当物理空间切口。
+
+Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。上述极限只处理这一单粒子谱前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
 :::
 
 在这个实际词上，普通字母计数的平衡性与按位置奇偶加权的和是不同的量。沿用 $A=0$、$B=1$、$C=2$ 的字母编码，取整数权重

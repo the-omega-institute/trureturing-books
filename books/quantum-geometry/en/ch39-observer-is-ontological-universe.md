@@ -1540,7 +1540,55 @@ $$
 
 [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] proves that, for every fixed $\rho\in(0,1)$, $\delta_{\rho,j}\to0$, covering every sufficiently large $j$. It specifies no convergence rate and makes no claim of convergence uniform in $\rho$. Finite invertibility, membership of zero in an infinite-volume spectrum, finite-resolution density of states, or criticality in the sense of Anderson localization cannot directly replace the limit proof for these specified boundaries and prefix sequence. Krebbekx–Moustaj–Dajani–Morais Smith, *Multifractal Properties of Tribonacci Chains* ([*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204), §§II.B.1, III.A.1, and V), use periodic approximants and perturbative renormalization to study physical spectra and criticality; we do not read this as the finite open-chain statement above for all $\rho\in(0,1)$.
 
-Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. If a particle-number-conserving Slater ground state is chosen, its actual occupied projector $P_{\mathrm{occ}}$ must be constructed and its correlation matrix compressed to a chosen set of sites $I$ as $\chi_I P_{\mathrm{occ}}\chi_I$, where $\chi_I$ projects onto those sites. Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. The limit addresses only this single-particle spectral premise. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
+**The actual Slater state and correlation conventions.** Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. The following construction and results come from the literature and are not formalized in this book. Keep the $N$ original sites in their natural order $0,\ldots,N-1$, and label the orthonormal Boolean occupation basis $\lvert S\rangle$ by its subsets of occupied sites $S$. Choose an integer $0\le k\le N$ and a complex matrix $V\in\mathbb{C}^{N\times k}$ whose columns are the occupied orthonormal single-particle modes, so $V^\dagger V=I_k$. For a subset $S$ of size $k$, let $V_S$ retain those rows in increasing site order, with the column order unchanged. Define the actual many-body amplitudes by
+
+$$
+\langle S\mid\Psi_V\rangle=
+\begin{cases}
+\det(V_S),&\lvert S\rvert=k,\\
+0,&\lvert S\rvert\ne k.
+\end{cases}
+$$
+
+This is the Slater determinant expanded in the ordered occupation basis. The empty determinant is $1$, so $k=0$ gives the vacuum. Since the occupation basis is already normalized, no additional factor $1/\sqrt{k!}$ multiplies these amplitudes. Dereziński, [*Clifford algebras and fermions*](https://www.fuw.edu.pl/~derezins/clifford.pdf), §§7.1–7.2, Eqs. (7.51)–(7.54), supplies the CAR, ordered occupation basis, and normalized Slater determinant. This choice specifies the amplitudes and fermionic signs; merely finding a density matrix with the desired correlations cannot replace it. To use this state as a ground state of the hopping chain above, the occupied modes, filling, and many-body Hamiltonian still need to be specified and energy minimization verified.
+
+Set $P=VV^\dagger$ and $\rho_V=\lvert\Psi_V\rangle\langle\Psi_V\rvert$, and let $c_i$ be the fermionic annihilator defined using the original site order. The correlation conventions are
+
+$$
+\begin{aligned}
+K_{ij}&=\Tr(\rho_V c_j^\dagger c_i)=P_{ij},\\
+C_{ij}&=\Tr(\rho_V c_i^\dagger c_j)=P_{ji},\qquad C=P^{\mathsf T}.
+\end{aligned}
+$$
+
+Dereziński's Theorem 8.1, particularly $\omega_\pi(d\Gamma(h))=\Tr(\pi h)$ in Eq. (8.103), supports this two-point convention. Peschel, [*Calculation of reduced density matrices from correlation functions*](https://arxiv.org/pdf/cond-mat/0212631v1), Eqs. (7), (9)–(10), uses the convention $C$ above; the transpose in his Eq. (12) must be retained. For real projection matrices the two conventions can coincide, but complex modes require the distinction. Peschel also explicitly notes that, for a non-Slater state, the free-fermion density matrix reconstructed from the same two-point function generally fails to reproduce other expectation values. Correlation agreement alone therefore does not determine a general density matrix.
+
+**The complete spectrum of a spatial compression.** For this Slater state, specify a spatial region $I$ consisting of $\ell$ original sites. Let $V_I$ retain those site rows and regard $P_I=V_I V_I^\dagger$ as the $\ell\times\ell$ compression acting on the region, rather than an $N\times N$ matrix with an additional zero space on its complement. Under the literature's fermionic subsystem convention, if $\nu_1,\ldots,\nu_\ell\in[0,1]$ are all its eigenvalues, including $0$, $1$, and repetitions, the eigenvalue multiset of the reduced density matrix $\rho_I$ has exactly $2^\ell$ entries, indexed by every occupation string as
+
+$$
+\begin{aligned}
+b_a(0)&=1-\nu_a,\qquad b_a(1)=\nu_a,\\
+\lambda_{\boldsymbol n}&=\prod_{a=1}^{\ell}b_a(n_a),\qquad
+\boldsymbol n\in\{0,1\}^{\ell}.
+\end{aligned}
+$$
+
+Equal values retain their multiplicities, and zero eigenvalues remain in the list. Selecting the two factors explicitly avoids $0^0$ at the endpoints. A completely empty or completely filled mode, for example, still contributes the eigenvalue pair $1,0$ and cannot be dropped from the complete density spectrum. For $\ell=0$ the empty product is $1$, the sole density eigenvalue. With natural logarithms, the entropy is
+
+$$
+\begin{aligned}
+S(\rho_I)&=\sum_{a=1}^{\ell}h(\nu_a),\\
+h(x)&=-x\log x-(1-x)\log(1-x).
+\end{aligned}
+$$
+
+Here $x\log x$ is extended continuously to $0$ at $x=0$, so $h(0)=h(1)=0$; entropy in bits requires division by $\log 2$. Peschel's Eqs. (8)–(11) give the mode description of the reduced free-fermion density matrix. Klich, [*Lower entropy bounds and particle number fluctuations in a Fermi sea*](https://arxiv.org/pdf/quant-ph/0406068v2), supplies the projected-mode decomposition in Eq. (4), Eq. (7) and its subsequent reduced factors $\operatorname{diag}(1-d_i,d_i)$, and the entropy in Eq. (11), supporting this product spectrum and entropy formula. The same recipe holds more generally for gauge-invariant Gaussian density matrices, using the compressed one-particle correlation operator, which need not be a projection on the full space. Gaussianity is a hypothesis here and cannot be inferred from the desired spectrum formula. When $0$ or $1$ occurs, the matrix logarithm in Peschel's Eq. (12) cannot be used directly; the factors and continuous extension above retain these endpoints.
+
+The $k\times k$ occupied-mode Gram matrix $V_I^\dagger V_I$ has the same nonzero spectrum as $P_I$, but the two dimensions may differ. Its spectrum alone does not list all $2^\ell$ spatial density eigenvalues: retain the nonzero compressed eigenvalues with their multiplicities, then pad with zeros to obtain $\ell$ entries. Zero modes contribute nothing to the entropy sum, which can conceal this dimension difference in the complete spectrum. These spectral relations are established literature results; their correspondence with the specific occupation carrier still needs to be formalized here.
+
+**The remaining spatial formalization.** The immediate target is the contiguous prefix $I=\{0,\ldots,\ell-1\}$ for $0\le\ell\le N$. On the original Boolean occupation carrier, trace out the last $N-\ell$ sites of this same determinant state $\rho_V$ in the original site tensor order. The obligation is to prove that this ordinary tensor partial trace has the complete multiset and endpoint-safe entropy above, including $\ell=0,N$, using all $\ell$ compressed eigenvalues with their multiplicities. Klich's Eq. (7) uses an appropriate fermionic tensor product; it does not by itself prove this literal ordered-site tensor partial-trace correspondence in our formalization. Arbitrary noncontiguous site subsets also involve Jordan–Wigner strings and a choice of fermionic subsystem, requiring a separate correspondence. A conditional statement assuming the desired spatial spectrum neither constructs this state nor completes the target. This literature exposition supplies no new Lean compilation evidence for normalization, two-point functions, ground-state status, Gaussianity, or the spatial spectrum, and an address-digit cut still cannot serve as the physical spatial cut.
+
+Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. The limit addresses only this single-particle spectral premise. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
 :::
 
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
