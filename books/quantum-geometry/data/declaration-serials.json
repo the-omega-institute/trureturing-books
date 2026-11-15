@@ -1,6 +1,6 @@
 {
   "next": {
-    "T": 338,
+    "T": 341,
     "D": 160,
     "R": 177
   },
@@ -673,6 +673,9 @@
     "D5/S3/Quantum/Routing/HannUniformSection.uniform_section": "T334",
     "D5/S3/Quantum/Routing/HannUniformSection.zero_certificate": "T335",
     "D5/S1/Words/AdmissibleWords/KBonacciEmittedTail.prefix_coupling_emitted_tail": "T336",
-    "D5/S3/QuadraticForms/ChordalPsdCompletion.exists_posSemidef_completion": "T337"
+    "D5/S3/QuadraticForms/ChordalPsdCompletion.exists_posSemidef_completion": "T337",
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator": "T338",
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal": "T339",
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisOuter_eq_implies_parallel": "T340"
   }
 }

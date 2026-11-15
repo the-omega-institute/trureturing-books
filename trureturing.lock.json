@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "6a50b8f5bb4f5bf8b46d270a2bca1ccc4a3e3f85",
-  "pinned_at": "2026-11-15T13:42:30Z",
+  "commit": "71964ff84c1a9d569b46ade40eb35fb02ec1ecef",
+  "pinned_at": "2026-11-15T13:16:49Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -3804,6 +3804,30 @@
       "statement_id": "sha256:db4e46e74ee00801b8429452173160860d3d486955c18142ca6d4ae7401fd518",
       "line": 141,
       "signature": "theorem recurrence_endpoint_observability (n : ℕ) (hn : 1 ≤ n) (t b : ℝ) (y : ℕ → ℝ) (hzero : y 0 = 0) (hrec : ∀ j, j + 2 ≤ n + 1 → y (j + 2) = t * y (j + 1) - y j) (hboundary : y (n + 1) = b * y n) : (∑ j ∈ Finset.range n, y (j + 1) ^ 2) ≤ (1 + |b|) ^ 2 * (n : ℝ) ^ 3 * y n ^ 2"
+    },
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator": {
+      "module": "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator",
+      "name": "D5.S3.Quantum.Measurement.Bloch.axisContraction_commutator",
+      "kind": "theorem",
+      "statement_id": "sha256:6ef80fb01a07748ac5663420c8cde9059b0a15c141a0f98a26f7ace4a0ee818f",
+      "line": 62,
+      "signature": "theorem axisContraction_commutator (n m : Fin 3 → ℝ) (c d : ℝ) : axisContraction n c * axisContraction m d - axisContraction m d * axisContraction n c = ((1 - c) * (1 - d) * axisDot n m) • (axisOuter n m - axisOuter m n)"
+    },
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal": {
+      "module": "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator",
+      "name": "D5.S3.Quantum.Measurement.Bloch.axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal",
+      "kind": "theorem",
+      "statement_id": "sha256:6ef80fb01a07748ac5663420c8cde9059b0a15c141a0f98a26f7ace4a0ee818f",
+      "line": 71,
+      "signature": "theorem axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal {n m : Fin 3 → ℝ} {c d : ℝ} (hn : n ≠ 0) (hparallel : ¬ ∃ s : ℝ, m = s • n) (hdot : axisDot n m ≠ 0) (hc : c ≠ 1) (hd : d ≠ 1) : axisContraction n c * axisContraction m d - axisContraction m d * axisContraction n c ≠ 0"
+    },
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisOuter_eq_implies_parallel": {
+      "module": "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator",
+      "name": "D5.S3.Quantum.Measurement.Bloch.axisOuter_eq_implies_parallel",
+      "kind": "theorem",
+      "statement_id": "sha256:6ef80fb01a07748ac5663420c8cde9059b0a15c141a0f98a26f7ace4a0ee818f",
+      "line": 41,
+      "signature": "theorem axisOuter_eq_implies_parallel {n m : Fin 3 → ℝ} (hn : n ≠ 0) (h : axisOuter n m = axisOuter m n) : ∃ s : ℝ, m = s • n"
     },
     "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B": {
       "module": "D5/S3/Quantum/Measurement/Bloch/QubitBloch",

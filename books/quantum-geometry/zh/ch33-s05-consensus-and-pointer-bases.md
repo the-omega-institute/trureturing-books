@@ -4,7 +4,7 @@
 
 前四节已经消融了“活主体 vs. 死客体”的断崖，并展示了两位观察者如何结成互吸引子双螺旋；但要将隐藏在传统教科书背后的“外部第 3 点裁判 $C$”彻底连根拔除，我们还必须正面回答退相干理论最核心的追问（原话台账见[附录 A](appendix-a-s03-verbatim-ledger.md#sec-appendix-a-verbatim-ledger) `A76`）：**当无数观察者汇聚成宏观环境时，为什么量子态会沿着某一组特定的“经典指针基（pointer basis）”去相干，而不是沿着别的方向？脱离了具体观察者群体的丈量轴分布，宇宙中真的预先刻着一套“绝对客观存在”的优选坐标吗？**
 
-标准教材在讲退相干时，往往先默认“系统与外部环境通过某个固定的对角相互作用哈密顿量耦合”，再由此推导出对角基存活、非对角相干衰减。然而，只要我们回到本章“万物皆为观察者”的第一性原理就会看穿：**所谓“环境”，根本不是一块置身事外的死背景板，而是围绕被测系统展开两子比量的一群内生观察者 $\{\mathcal{O}_1, \dots, \mathcal{O}_N\}$！** 系统本身是一颗处处平权的单位布洛赫球面 $S^2$，球面上没有任何一条方向天生带着“经典特权”；唯有当周围观察者群体的丈量轴 $\{\mathbf{n}_1, \dots, \mathbf{n}_N\}$ 在二阶张量层面上结成**共识主轴**时，纵向极化才得以存留、横向相干才被一致抹平。一旦观察者轴各向同性散开，球体便向球心均匀收缩而不存在任何优选指针基；一旦观察者分化为两团正交共识泡，局部指针事实便不再能拼成单一的脱语境全局布尔真值表。本节严格遵循三层认识论契约：代数投影、相位二次型、记录捏合、多副本反演阻断、划分拓扑核、冲突修正非对易与正交余项逃逸由十二条冻结的 Lean 4 定理（`LEAN ✓`）锚定，二阶共识张量、泡利去相干矩阵乘积与双分支互信息曲线作为显式初等推导与数值实算（`手工推导` / `NUM`）呈现，量子达尔文主义与扩展维格纳朋友局域友好性禁行定理归入物理文献（`文献结果`），而“共识选择决定去相干方向、无脱观察者绝对客观存在”的总括标定为本书几何模型（`MODEL`）。
+标准教材在讲退相干时，往往先默认“系统与外部环境通过某个固定的对角相互作用哈密顿量耦合”，再由此推导出对角基存活、非对角相干衰减。然而，只要我们回到本章“万物皆为观察者”的第一性原理就会看穿：**所谓“环境”，根本不是一块置身事外的死背景板，而是围绕被测系统展开两子比量的一群内生观察者 $\{\mathcal{O}_1, \dots, \mathcal{O}_N\}$！** 系统本身是一颗处处平权的单位布洛赫球面 $S^2$，球面上没有任何一条方向天生带着“经典特权”；唯有当周围观察者群体的丈量轴 $\{\mathbf{n}_1, \dots, \mathbf{n}_N\}$ 在二阶张量层面上结成**共识主轴**时，纵向极化才得以存留、横向相干才被一致抹平。一旦观察者轴各向同性散开，球体便向球心均匀收缩而不存在任何优选指针基；一旦观察者分化为两团正交共识泡，局部指针事实便不再能拼成单一的脱语境全局布尔真值表。本节严格遵循三层认识论契约：代数投影、相位二次型、记录捏合、参数化布洛赫轴收缩换位子、多副本反演阻断、划分拓扑核、冲突修正非对易与正交余项逃逸由十五条冻结的 Lean 4 定理（`LEAN ✓`）锚定，二阶共识张量、泡利去相干矩阵乘积与双分支互信息曲线作为显式初等推导与数值实算（`手工推导` / `NUM`）呈现，量子达尔文主义与扩展维格纳朋友局域友好性禁行定理归入物理文献（`文献结果`），而“共识选择决定去相干方向、无脱观察者绝对客观存在”的总括标定为本书几何模型（`MODEL`）。
 
 ## 33.5.1 二阶共识结构张量、符号规范不变性与各向同性迷雾 {#sec-ch33-consensus-tensor-axis}
 
@@ -178,13 +178,30 @@ $$
 
 现在我们逼近最富戏剧性的极限思想实验：**假如宇宙中没有统一的单一共识，而是同时存在着两团相互隔离、丈量轴彼此垂直（$90^\circ$）的观察者共识泡——比如一团锁在 $Z$ 轴上的观察者泡 $\mathcal{C}_A$ 与另一团锁在 $X$ 轴上的观察者泡 $\mathcal{C}_B$——会发生什么？**
 
-先在单比特布洛赫空间里把账算得一清二楚，切忌张冠李戴（`手工推导`）：若把两团等权正交观察者合写成一个总张量 $\mathbf{M}_{AB} = \frac{1}{2}(\mathbf{x}\mathbf{x}^{\mathsf{T}} + \mathbf{z}\mathbf{z}^{\mathsf{T}})$，其降序本征谱为 $(\frac{1}{2}, \frac{1}{2}, 0)$，主谱隙 $\Delta\lambda = 0$——尽管 $\mathcal{C}_A$ 内部有明确的 $Z$ 指针、$\mathcal{C}_B$ 内部有明确的 $X$ 指针，两泡合并后**根本不存在唯一的全局顶层指针轴**，在两泡均以非零强度耦合时，两者的公共未读不动点集合坍缩为球心孤点 $\{\frac{1}{2}I_2\}$。更有意思的是，对于**未读（unread）**泡利去相干超算符，两轴矩阵换位子恒满足
+先在单比特布洛赫空间里把账算得一清二楚，切忌张冠李戴（`手工推导`）：若把两团等权正交观察者合写成一个总张量 $\mathbf{M}_{AB} = \frac{1}{2}(\mathbf{x}\mathbf{x}^{\mathsf{T}} + \mathbf{z}\mathbf{z}^{\mathsf{T}})$，其降序本征谱为 $(\frac{1}{2}, \frac{1}{2}, 0)$，主谱隙 $\Delta\lambda = 0$——尽管 $\mathcal{C}_A$ 内部有明确的 $Z$ 指针、$\mathcal{C}_B$ 内部有明确的 $X$ 指针，两泡合并后**根本不存在唯一的全局顶层指针轴**，在两泡均以非零强度耦合时，两者的公共未读不动点集合坍缩为球心孤点 $\{\frac{1}{2}I_2\}$。写成 $\mathbf{K}(\mathbf{n},c) = cI_3 + (1-c)\mathbf{n}\mathbf{n}^{\mathsf{T}}$ 后，参数化布洛赫轴结果 [@thm-ch33-axis-contraction-commutator] 给出**未读（unread）**泡利去相干超算符的精确矩阵换位子：
 
 $$
 [\mathbf{K}_{\mathbf{n}}, \mathbf{K}_{\mathbf{m}}] \;=\; (1 - \cos\alpha_n)(1 - \cos\alpha_m)(\mathbf{n}\cdot\mathbf{m})\bigl(\mathbf{n}\mathbf{m}^{\mathsf{T}} - \mathbf{m}\mathbf{n}^{\mathsf{T}}\bigr),
 $$
 
-它在平行（$\mathbf{n}\cdot\mathbf{m} = \pm 1,\; \mathbf{n}\mathbf{m}^{\mathsf{T}} = \mathbf{m}\mathbf{n}^{\mathsf{T}}$）**与严格正交**（$\mathbf{n}\cdot\mathbf{m} = 0$）两处均精确为零（唯有斜交如 $45^\circ$ 时未读信道才不对易）！因此，$90^\circ$ 正交双泡的先后次序冲突**并非**来自未读退相干信道，而是来自**选择性条件更新（selective instrument）** $\mathcal{J}_{\mathbf{n},+}(\rho) = P_{\mathbf{n},+}\rho P_{\mathbf{n},+}$（其中 $P_{\mathbf{n},+} = \frac{1}{2}(I_2 + \mathbf{n}\cdot\vec{\sigma})$）：从最大混态 $\frac{1}{2}I_2$ 出发，先读 $Z_+$ 再读 $X_+$ 得到 $\mathcal{J}_{X,+}(\mathcal{J}_{Z,+}(\frac{1}{2}I_2)) = \frac{1}{4}P_{X,+}$，而先读 $X_+$ 再读 $Z_+$ 得到 $\mathcal{J}_{Z,+}(\mathcal{J}_{X,+}(\frac{1}{2}I_2)) = \frac{1}{4}P_{Z,+}$——两条分支发生概率同为 $\frac{1}{4}$，归一化条件终态却分别落在 $|+X\rangle$ 与 $|+Z\rangle$（未归一化希尔伯特—施密特范数差恰为 $\frac{1}{4}$）。在离散信念集合修正层面，冲突重置更新的非对易性与有限共识子空间外的单位正交逃逸则由以下两条冻结定理精确刻画：
+::: {.theorem #thm-ch33-axis-contraction-commutator title="参数化布洛赫轴收缩换位子恒等式与斜交轴非对易判据" lean="D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisOuter_eq_implies_parallel D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal"}
+冻结的布洛赫轴模块给出三条代数事实。第一，若第一根轴向量非零，且交换两轴后秩一外积矩阵不变，则第二根轴是第一根轴的实数倍。第二，对任意三坐标向量 $\mathbf{n},\mathbf{m}$ 与实数因子 $c,d$，有
+
+$$
+\mathbf{K}(\mathbf{n},c)\mathbf{K}(\mathbf{m},d)-\mathbf{K}(\mathbf{m},d)\mathbf{K}(\mathbf{n},c)
+= (1-c)(1-d)(\mathbf{n}\cdot\mathbf{m})\bigl(\mathbf{n}\mathbf{m}^{\mathsf T}-\mathbf{m}\mathbf{n}^{\mathsf T}\bigr).
+$$
+
+因此，只要第一根轴非零、第二根轴不平行、两轴点积非零且 $c,d\ne 1$，换位子就非零。
+:::
+
+::: proof
+第一条事实选取 $n_i\ne 0$ 的坐标 $i$。外积相等给出对每个 $j$ 都有 $n_i m_j=m_i n_j$，因而 $\mathbf{m}=(m_i/n_i)\mathbf{n}$。恒等式逐元展开两个矩阵乘积与有限的三坐标点积，再将所得多项式表达式归一化。对于非对易结论，第一条事实与不平行假设说明反对称外积差非零；非零点积与 $c,d\ne 1$ 又使其标量系数非零。完整证明由 Lean 内核检查。
+:::
+
+在 §33.5.2 的单比特信道解释中，轴是单位向量，且 $c=\cos\alpha_n$、$d=\cos\alpha_m$ 位于 $[0,1]$；Lean 结果本身是代数矩阵命题，不声称某个 CPTP 实现。作为精确代数实例，取 $\mathbf{e}=(1,0,0)$、$\mathbf{m}=(3/5,4/5,0)$、$c=1/2$、$d=1/3$。$\mathbf{K}(\mathbf{e},c)\mathbf{K}(\mathbf{m},d)$ 与 $\mathbf{K}(\mathbf{m},d)\mathbf{K}(\mathbf{e},c)$ 的 $(0,1)$ 元分别为 $8/25$ 与 $4/25$。
+
+对于单位轴，这一换位子在平行（$\mathbf{n}\cdot\mathbf{m} = \pm 1$）**与严格正交**（$\mathbf{n}\cdot\mathbf{m} = 0$）两处均精确为零；在 $45^\circ$ 等斜交情形且两个因子均不等于 $1$ 时则非零。因此，$90^\circ$ 正交双泡的先后次序冲突**并非**来自未读退相干信道，而是来自**选择性条件更新（selective instrument）** $\mathcal{J}_{\mathbf{n},+}(\rho) = P_{\mathbf{n},+}\rho P_{\mathbf{n},+}$（其中 $P_{\mathbf{n},+} = \frac{1}{2}(I_2 + \mathbf{n}\cdot\vec{\sigma})$）：从最大混态 $\frac{1}{2}I_2$ 出发，先读 $Z_+$ 再读 $X_+$ 得到 $\mathcal{J}_{X,+}(\mathcal{J}_{Z,+}(\frac{1}{2}I_2)) = \frac{1}{4}P_{X,+}$，而先读 $X_+$ 再读 $Z_+$ 得到 $\mathcal{J}_{Z,+}(\mathcal{J}_{X,+}(\frac{1}{2}I_2)) = \frac{1}{4}P_{Z,+}$——两条分支发生概率同为 $\frac{1}{4}$，归一化条件终态却分别落在 $|+X\rangle$ 与 $|+Z\rangle$（未归一化希尔伯特—施密特范数差恰为 $\frac{1}{4}$）。在离散信念集合修正层面，冲突重置更新的非对易性与有限共识子空间外的单位正交逃逸则由以下两条冻结定理精确刻画：
 
 ::: {.theorem #thm-ch33-consensus-revision-and-escape title="冲突信念修正次序非对易性与闭子空间正交余项单位逃逸定理" lean="D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"}
 在 `trureturing` 冻结的概念冲突修正与有限层投影逃逸模块中，以下两项定理同时成立：
@@ -248,7 +265,7 @@ $$
 至此，我们将“预设绝对客观实在观”与本章建立的“多观察者共识去相干观”收束为下框五维对照总表：
 
 ::: {.remark #rem-ch33-consensus-vs-absolute-objectivity title="预设绝对客观实在观与多观察者共识去相干观的五维对照及分布式共识类比"}
-**模型综合与三层依据边界说明（`MODEL` / `LEAN ✓` / `文献结果`）。** 下表汇总本节五重机制：凡涉共同相位二次厄米表出、格拉姆算子分解、正交补投影、单比特捏合勾股、全捏合相对熵增、未读不动点、幸存副本阻断、偏迹访问缺陷、划分拓扑核、冲突修正非对易与正交逃逸之处均由 [@thm-ch33-consensus-quadratic-and-gram]–[@thm-ch33-consensus-revision-and-escape] 锚定（`LEAN ✓`）；凡涉量子达尔文主义与真正局域友好性不等式之处归入 [@rem-ch33-quantum-darwinism-local-friendliness-literature]（`文献结果`）；而将经典客观性类比于分布式容错账本（如 L. Lamport, R. Shostak & M. Pease, *ACM Trans. Program. Lang. Syst.* **4**, 382–401, 1982 拜占庭将军法定人数共识：没有凌驾网络之上的中央上帝时钟，稳定的公共历史由多数诚实副本的冗余一致锁定，但量子共识通过半正定并矢收缩 $\mathbf{M}_{\mathrm{cons}}$ 与受控分支纠缠运作而非经典签名投票）则明确归属本书诠释模型（`MODEL`）：
+**模型综合与三层依据边界说明（`MODEL` / `LEAN ✓` / `文献结果`）。** 下表汇总本节五重机制：凡涉共同相位二次厄米表出、格拉姆算子分解、正交补投影、单比特捏合勾股、全捏合相对熵增、未读不动点、参数化斜交轴收缩换位子、幸存副本阻断、偏迹访问缺陷、划分拓扑核、冲突修正非对易与正交逃逸之处均由 [@thm-ch33-consensus-quadratic-and-gram]、[@thm-ch33-consensus-pinching-and-fixed-points]、[@thm-ch33-consensus-redundant-records-and-kernel]、[@thm-ch33-axis-contraction-commutator] 与 [@thm-ch33-consensus-revision-and-escape] 锚定（`LEAN ✓`）；凡涉量子达尔文主义与真正局域友好性不等式之处归入 [@rem-ch33-quantum-darwinism-local-friendliness-literature]（`文献结果`）；而将经典客观性类比于分布式容错账本（如 L. Lamport, R. Shostak & M. Pease, *ACM Trans. Program. Lang. Syst.* **4**, 382–401, 1982 拜占庭将军法定人数共识：没有凌驾网络之上的中央上帝时钟，稳定的公共历史由多数诚实副本的冗余一致锁定，但量子共识通过半正定并矢收缩 $\mathbf{M}_{\mathrm{cons}}$ 与受控分支纠缠运作而非经典签名投票）则明确归属本书诠释模型（`MODEL`）：
 
 | 对照维度 | 预设绝对客观实在观（隐含“外部第 3 点 $C$”） | 多观察者共识去相干观（本书形式—几何综合） |
 | :--- | :--- | :--- |
@@ -256,13 +273,13 @@ $$
 | **2. 轴符号与相位规范** | 易将一阶方向均值 $\sum w_j\mathbf{n}_j$ 当作集体方向，或混淆轴端重标与量子态相等 | 轴向正负重标 $(-\mathbf{n}_j)(-\mathbf{n}_j)^{\mathsf{T}} = \mathbf{n}_j\mathbf{n}_j^{\mathsf{T}}$ 保持二阶张量逐元不变（不把对径正交纯态混为一谈），复态矢共同相位不变性唯一锁定二阶厄米型与正算子格拉姆分解（[@thm-ch33-consensus-quadratic-and-gram]） |
 | **3. 去相干动力学机制** | 把退相干当成神秘环境单向吞噬相干的黑箱，混淆有限步与连续近似 | 单步泡利信道精确保持轴向分量、按 $\cos\alpha$ 压缩横向圆盘；严格区分有序乘积、系综平均步 $\overline{\mathbf{K}}$ 与弱耦合林德布拉德生成元 $I_3 - \mathbf{M}_{\mathrm{cons}}$，全捏合极限满足勾股分解与相对熵增恒等式（[@thm-ch33-consensus-pinching-and-fixed-points]） |
 | **4. 宏观“客观性”本质** | 认为宏观事实脱离观察者记录而独立存在，局部不可逆即全局物理毁灭 | 纯双分支对齐态下互信息内部平台 $I(S:\mathcal{O}_m) \approx H_2(p_0)$ 源于多副本冗余广播，局部不可逆源于未控幸存副本与偏迹访问缺陷，公共账本对应读出核与不变公因子（[@thm-ch33-consensus-redundant-records-and-kernel]、[@thm-ch33-contextual-attractor-and-common-factor]） |
-| **5. 隔离双泡与新轴拓荒** | 默认一切局部观测记录总能拼进同一张脱语境全局布尔真值表，未见维度即不存在 | 正交双泡未读信道对易而选择性更新与冲突修正非对易，双编码实验室以 $F_{\mathrm{LF}} \approx 7.0838 > 6$ 违背真正局域友好性界；平面外拓荒轴凭正交残差 $|\sin\beta|$ 使共识张量升秩 $2 \to 3$，尽管旧生成元下未记录方向按 $e^{-t}$ 最快衰减（[@thm-ch33-consensus-revision-and-escape]、[@rem-ch33-quantum-darwinism-local-friendliness-literature]） |
+| **5. 隔离双泡与新轴拓荒** | 默认一切局部观测记录总能拼进同一张脱语境全局布尔真值表，未见维度即不存在 | 正交双泡未读信道对易；斜交且非平行、非正交的轴在两个收缩均非恒等时具有非零未读换位子；选择性更新与冲突修正非对易，双编码实验室以 $F_{\mathrm{LF}} \approx 7.0838 > 6$ 违背真正局域友好性界；平面外拓荒轴凭正交残差 $|\sin\beta|$ 使共识张量升秩 $2 \to 3$，尽管旧生成元下未记录方向按 $e^{-t}$ 最快衰减（[@thm-ch33-axis-contraction-commutator]、[@thm-ch33-consensus-revision-and-escape]、[@rem-ch33-quantum-darwinism-local-friendliness-literature]） |
 :::
 
 请进入下方完整交互实验室 `ORTHO//CONSENSUS`，在同一座三维椭球、冗余片段圆弧与双编码实验室舞台上自由切换全部六个预设场景，亲手拨动观察者轴分布、去相干耦合角、已读片段规模、白噪声可见度与拓荒倾角，核验共识指针基如何从无特权的平权球面中涌现：
 
 ::: {.viz src="observer-consensus-decoherence" height="640"}
-**交互实验室 `ORTHO//CONSENSUS`**：多观察者共识张量、去相干指针基涌现与无绝对客观事实综合沙盘。集成 `isotropic-fog`（六轴均分 $\mathbf{M}_{\mathrm{cons}}=\frac{1}{3}I_3$ 无优选指针轴球心收缩）、`axis-consensus`（共线共识纵向守恒 $\Gamma_\parallel=1$、横向 $(\cos\alpha)^k$ 衰减与 $\alpha=\pi/2$ 完全捏合）、`phase-gauge`（轴端正负翻转不改张量元与复态矢共同相位二次厄米小窗）、`darwinism-plateau`（$N=16$ 纯双分支精确互信息平台、受控逆门残余相干与四步相位证书）、`dual-wigner-bubbles`（正交双泡未读对易 vs. 选择性分岔、冲突修正非对易及真正局域友好性 $F_{\mathrm{LF}} \approx 7.0838 > 6$ 违背见证）与 `new-axis-pioneers`（平面外正交残差 $\sin\beta$ 升秩 $2 \to 3$ 与旧生成元 $e^{-t}$ 最快阻尼对照）六大场景。绿色徽章严格限定于本节引用的十二条 Lean 冻结定理；量子达尔文主义、LF 禁行界与分布式共识类比分别标示文献、数值与模型依据。
+**交互实验室 `ORTHO//CONSENSUS`**：多观察者共识张量、去相干指针基涌现与无绝对客观事实综合沙盘。集成 `isotropic-fog`（六轴均分 $\mathbf{M}_{\mathrm{cons}}=\frac{1}{3}I_3$ 无优选指针轴球心收缩）、`axis-consensus`（共线共识纵向守恒 $\Gamma_\parallel=1$、横向 $(\cos\alpha)^k$ 衰减与 $\alpha=\pi/2$ 完全捏合）、`phase-gauge`（轴端正负翻转不改张量元与复态矢共同相位二次厄米小窗）、`darwinism-plateau`（$N=16$ 纯双分支精确互信息平台、受控逆门残余相干与四步相位证书）、`dual-wigner-bubbles`（正交双泡未读对易、斜交轴换位子开关、选择性分岔、冲突修正非对易及真正局域友好性 $F_{\mathrm{LF}} \approx 7.0838 > 6$ 违背见证）与 `new-axis-pioneers`（平面外正交残差 $\sin\beta$ 升秩 $2 \to 3$ 与旧生成元 $e^{-t}$ 最快阻尼对照）六大场景。绿色方框覆盖本实验室已经呈现的十二条冻结声明；本节总共引用十五条冻结声明。量子达尔文主义与 LF 禁行界标示文献依据；数值曲线及 LF 违背值标示数值依据；分布式共识类比标示模型依据。
 :::
 
 然而，当万物都在没有外部参考点 $C$ 的单位球面上彼此丈量、结成互吸引子双螺旋并由多观察者共识涌现局部指针轴时，一个紧迫的几何追问也随之浮出水面：**在一颗处处对称、没有中心刻度的球面上，一位观察者究竟是如何确定自己此刻所处的“位置”的？为什么单凭一个方向的内积读数还会留下一整圈赤道的迷茫，而偏偏只有“正交（$90^\circ$）”的退化与破缺，才能在茫茫状态空间里为观察者钉下唯一的坐标？** 下一章（[第 34 章](ch34-orthogonality-degeneracy-and-observer-position.md)），我们将推开这道关于“正交性如何定位观察者位置”的几何之门。
