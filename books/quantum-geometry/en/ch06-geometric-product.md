@@ -325,7 +325,7 @@ Nothing replaces trying it. Below is the full interactive laboratory **`ORTHO//Q
 - **What a detector sees**: the lower left plot reads the line as the probabilities $\cos^2(\theta/2)$ and $\sin^2(\theta/2)$ of the two clicks, and the area as the contrast of two-path interference fringes. This reading is a schematic model, not a simulation of an apparatus.
 - **Gates are rotors**: press `X, Y, Z, H, S, T` or choose your own angle, and the state vector turns on the sphere; the lower right plot draws the line $\vv{A}\cdot\vv{B}$ together with the scalar part $w$ of the rotor. When the vector is back after one turn, $w = -1$, and only after two turns is it $+1$ again; $HZH$ and $X$ are the same turn of the sphere, yet their rotors differ by a sign.
 
-Each of the eight experiment cards on the left makes one point; the figures in the text of this chapter and of [Chapter 5](ch05-complex-phase-and-rotors.md) are some of those cards.
+Each of the seven experiment cards on the left makes one point; the figures in the text of this chapter and of [Chapter 5](ch05-complex-phase-and-rotors.md) are some of those cards.
 
 ::: {.viz src="qubit-geometry" height="620"}
 Interactive laboratory `ORTHO//QUBIT`: the line $\vv{A}\cdot\vv{B}$ and the area $\vv{A}\wedge\vv{B}$ on the Bloch sphere, the detector's clicks and fringes, and the double cover: one turn for the vector, two for the rotor. The numbers on the page are a numerical illustration; the cited theorems are checked by the Lean kernel.

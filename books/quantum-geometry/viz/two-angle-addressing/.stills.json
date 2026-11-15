@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "aaf8955efe4c9469804a1560f55d85617c3d7d8a20c54794b5de6fa8f4abbc56"
+    },
+    "fig-tilt.zh.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "772acbe7fa642624887ad358e33ae0fc138995c2e1d1f9759fe76aa66291a743"
+    },
+    "fig-address.zh.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "4e3332141423c815ed7252f448f8093d4e1dc21291f0edebace9c843b8c16e20"
+    },
+    "fig-pole.zh.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "8af171adbbcd9a013e0ebabe296e58b1f41c7d97b257617208cd38bf169b4cf1"
+    },
+    "fig-skew.zh.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "354efe5fff7d02a32b2e81b387c1f6a9502f7239fdc91bc4eed9909dccd9eb65"
+    },
+    "fig-narrow.zh.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "90318a3461da1453202cf9a7c8ee24a7c1a2e422f96fb5f5950524aa26e048cd"
+    },
+    "fig-trotter.zh.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "ee48328831d4c238430a0c935ecb1d3b97e092710d36674434890951f369aaaa"
+    },
+    "fig-three.zh.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "28c3b86ab0291c3303ba5ea9df861677d7ba9f7892752ad4f6a8d9c767c4402c"
+    },
+    "fig-six.zh.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "2a346cc87c357973e1e9a3f742683af960e9f54b6b57cd3f3e5e91ba1320272b"
+    },
+    "fig-tilt.en.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "df3d67ae8e876f9ee033207f85823c6c59a2556ce0a395fd152cc4e3ee35e9bf"
+    },
+    "fig-address.en.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "206d5ba2c608c3d07742bdabfb628d94fb1a737c0a43ad843bfc41a7f82d0f04"
+    },
+    "fig-pole.en.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "2eff283a5b6daf920b2ce6983523238c8c5f288176acabe8b65b49d26961e529"
+    },
+    "fig-skew.en.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "f033cb64f40250fccfc4ee3fd4c9e31061806366ee77cbf816713c5a5281694d"
+    },
+    "fig-narrow.en.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "5fc5bda119696dbb8aa8c8535002ff7fffe04c0cf884d8919c9f1d6eccc0e068"
+    },
+    "fig-trotter.en.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "635d979472d6ffea3617d8bf10820819a04229460f153b3332416f293149f958"
+    },
+    "fig-three.en.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "5d906cd6068846e47e946221e61347c2a2caf61d0fa1797db4a0cb14d2cb039a"
+    },
+    "fig-six.en.jpg": {
+      "input": "618a009be7b1be99de243c4573ff81a4d2d812107f597501ff53f5841a1d9d51",
+      "output": "297577160beb85fb8a5f16e4f18200846a3b1f4fde7bdc71a557e35aae106aec"
+    }
+  }
+}
