@@ -1,0 +1,105 @@
+/* ECHO//IMAGINARY：版式与颜色由共享主题提供；这里只放本页自己的东西：舞台指针、琥珀态矢手柄、巡览条里的时钟按钮、
+   读数的颜色角色、两张内联小图与图例色块。颜色只来自令牌（var(--cyan) …），不写色值。 */
+#stage { container-type: inline-size; }
+/* 只有活舞台接管指针；静态图（封面、引用图）让触摸直接滚过 */
+.stage:not(.still) #cv { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active { cursor: grabbing; }
+.stage.still #cv { cursor: default; touch-action: auto; }
+
+.logo span { color: var(--cyan); font-weight: 700; }
+.tagline em, .sheet li b { color: var(--cyan); }
+.hud-tl .big { color: var(--sigma); }
+.hud-tl .big, .hud-tl .sub, #plotTitle, #plotMeta, .tau { text-transform: none; }
+.hud-tl .sub { line-height: 1.4; }
+
+/* 态矢手柄：舞台上 V 尖端投影处的琥珀圆环；它是按钮，所以拖它不会转动相机 */
+.handle { position: absolute; z-index: 3; width: 30px; height: 30px; padding: 0; margin: 0; border: 2px solid var(--amber); border-radius: 50%;
+  background: color-mix(in srgb, var(--amber) 12%, transparent); transform: translate(-50%, -50%); cursor: grab; touch-action: none;
+  user-select: none; -webkit-user-select: none; box-shadow: 0 0 10px color-mix(in srgb, var(--amber) 55%, transparent); }
+.handle:active, .handle.dragging { cursor: grabbing; background: color-mix(in srgb, var(--amber) 28%, transparent); }
+.handle[hidden] { display: none; }
+.stage.still .handle { pointer-events: none; }
+:root[data-thumb-mode] .handle { display: none; }
+
+/* 巡览条：◀ 与（引用图里）⏮ ▷ 在左，卡名居中，▶ 在右。时钟按钮只在被引用的图里出现，那里时间轴不再重复它们 */
+.tour .tour-l { grid-column: 1; grid-row: 1; display: flex; gap: 4px; }
+.tour .tour-clock { display: none; }
+:root[data-embed][data-figure] .tour .tour-clock { display: inline-grid; }
+:root[data-embed][data-figure] footer.rail #rew, :root[data-embed][data-figure] footer.rail #play { display: none; }
+/* 窄的引用图（手机上的正文）：卡名需要整行宽度，时钟按钮回到时间轴；舞台只留几何体，不放视角按钮 */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .tour .tour-clock { display: none; }
+  :root[data-embed][data-figure] footer.rail #rew, :root[data-embed][data-figure] footer.rail #play { display: inline-grid; }
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}
+
+/* 控制区：吸附与 ×i 两个按钮一行，演化方程两枚芯片一行；数学保留大小写 */
+#ctlPanel .chip, .hud-tr .chip { text-transform: none; }
+#ctlPanel .btnrow, #ctlPanel .evo { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 8px; }
+#turnBtn { min-width: 48px; font-family: var(--font-data); }
+
+/* 时间轴右侧：品牌、一行提示、一行公式 */
+.keys .rail-brand, .keys #hint, .keys #formula { display: block; }
+.keys .rail-brand { font-family: var(--font-display); letter-spacing: 0.08em; color: var(--ink); font-size: 11px; }
+.keys .rail-brand b { color: var(--cyan); }
+.keys #formula { font-family: var(--font-data); color: var(--ink); font-size: 10.5px; margin-top: 2px; }
+
+/* 读数按角色着色：琥珀 = 往返回声，青 = 影子，品红 = 逃出与盲区，紫 = 锥与旋子 */
+dl.ro .key.a dd b, dl.ro .key.a dd output { color: var(--amber); }
+dl.ro .v dd { color: var(--violet); }
+dl.ro dd output { font: inherit; color: inherit; }
+
+/* 两张内联小图：马吕斯—玻恩曲线与复平面转盘；描边与填充只取令牌 */
+.figs { display: flex; gap: 8px; margin-top: 8px; align-items: flex-start; }
+.mini { margin: 0; min-width: 0; flex: 1 1 0; }
+.mini#bornFig { flex-grow: 1.7; }
+.mini svg { display: block; width: 100%; height: auto; overflow: visible; }
+.mini figcaption { font-size: 10.5px; color: var(--dim); margin-top: 2px; line-height: 1.3; }
+.mini .ax { stroke: var(--line-hot); stroke-width: 1; fill: none; }
+.mini .grid { stroke: var(--panel-edge); stroke-width: 0.8; fill: none; }
+.mini .cy { stroke: var(--cyan); fill: none; stroke-width: 1.8; }
+.mini .am { stroke: var(--amber); fill: none; stroke-width: 2; }
+.mini .mg { stroke: var(--magenta); fill: none; stroke-width: 1.8; }
+.mini .vi { stroke: var(--violet); fill: none; stroke-width: 2.2; }
+.mini .ik { stroke: var(--ink); fill: none; stroke-width: 1.5; stroke-dasharray: 3 2.5; }
+.mini .now { stroke: var(--amber); stroke-width: 1; stroke-dasharray: 2 2; fill: none; }
+.mini .area-mg { fill: color-mix(in srgb, var(--magenta) 16%, transparent); stroke: none; }
+.mini .dot-am { fill: var(--amber); stroke: none; }
+.mini .dot-cy { fill: var(--cyan); stroke: none; }
+.mini .dot-mg { fill: var(--magenta); stroke: none; }
+.mini .dot-ik { fill: var(--ink); stroke: none; }
+.mini .dot-vi { fill: var(--violet); stroke: none; }
+.mini text { font-family: var(--font-data); font-size: 8.5px; fill: var(--dim); }
+.mini text.t-cy { fill: var(--cyan); } .mini text.t-am { fill: var(--amber); } .mini text.t-mg { fill: var(--magenta); }
+.mini text.t-vi { fill: var(--violet); } .mini text.t-ik { fill: var(--ink); }
+
+/* 图例色块 */
+.sw.ring { width: 10px; height: 10px; border-radius: 50%; background: transparent; border: 2px solid var(--amber); }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 7px); }
+
+/* 舞台标签保留大小写（I、V、θ、e⊥） */
+.stage .tag.raw { text-transform: none; }
+.stage .tag.c-vi { color: var(--violet); }
+.stage .tag.c-am { color: var(--amber); }
+.stage .tag.c-cy { color: var(--cyan); }
+.stage .tag.c-mg { color: var(--magenta); }
+
+@container (max-width: 620px) {
+  .hud-tr { gap: 3px; }
+  .hud-tr .chip { padding: 3px 5px; font-size: 9.5px; letter-spacing: 0.03em; }
+  .hud-tl { left: 12px; max-width: calc(100% - 24px); }
+  .hud-tl .big { font-size: 12px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.35; }
+  .hud-bl { left: 12px; right: 12px; bottom: 9px; gap: 2px 10px; font-size: 10px; }
+  .stage .tag.raw { font-size: 10.5px; }
+  .handle { width: 26px; height: 26px; }
+}
+
+/* 单栏的整页（窄窗口、短屏）：给球与锥一个更高的舞台，页面照常向下滚动 */
+@media (max-width: 1080px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(460px, 66vh)) auto auto; }
+}
+/* 手机：同上 */
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 66vh)) auto auto; }
+}

@@ -140,6 +140,175 @@ $$
 For a non-abelian gauge group, closed-loop holonomy transforms by basepoint conjugation $U_\square \mapsto g_0 U_\square g_0^{-1}$, so only its **conjugacy class** or Wilson loop trace $\Tr U_\square$ is gauge-invariant. The continuum small-plaquette expansion above belongs to differential-geometric approximation theory, whereas the frozen Lean theorems in the next two sections ([@thm-tree-phase-transport] and [@cor-anchored-phase-classification]) apply strictly to exact discrete abelian unit-circle phases $\operatorname{Circle} = U(1)$ on named graphs without any continuum limit, and must not be promoted into continuum non-abelian Yang–Mills theorems. See Y. Aharonov & D. Bohm, *Phys. Rev.* **115**, 485 (1959), DOI: `10.1103/PhysRev.115.485`; and K. G. Wilson, *Phys. Rev. D* **10**, 2445 (1974), DOI: `10.1103/PhysRevD.10.2445`.
 :::
 
+::: {.remark #rem-actual-small-loop-cubic-remainder title="A cubic remainder for actual small-loop transport (Manual application, not formalized in this book)"}
+**Manual application, not formalized in this book.** The preceding plaquette approximation admits a uniform error bound in a precise local matrix model. We solve the parallel transport equation on each edge of the same connection and then compute the closed product; the four edge transports are not freely assigned lattice data. Authors and reviewers are responsible for the derivation below. This complete inference has no corresponding Lean kernel proof or axiom-closure verification here; generic transport existence, Taylor bounds, and exponential tail estimates do not by themselves formalize their combined application to this loop.
+
+Let $n\geq1$, let $\Omega\subset\mathbb{R}^4$ be open, and let $A=\sum_{k=0}^3 A_k\,dx^k$ be a smooth matrix-valued one-form with skew-Hermitian coefficients $A_k(y)\in M_n(\mathbb{C})$, so $A_k(y)^*=-A_k(y)$. Fix $x\in\Omega$ and distinct coordinate directions $\mu,\nu$. Use $D_k=\partial_k+A_k$ and write
+
+$$
+F=F_{\mu\nu}(x)
+=\bigl(\partial_\mu A_\nu-\partial_\nu A_\mu+[A_\mu,A_\nu]\bigr)(x).
+$$
+
+All matrices carry the operator norm $\|\cdot\|_{\mathrm{op}}$ induced by the standard Hermitian inner product on $\mathbb{C}^n$; $\exp Z=\sum_{m=0}^{\infty}Z^m/m!$ is the ordinary matrix power-series exponential. Every constant below is chosen from this fixed local model before choosing the side lengths $s,t$. The conclusion is that there exist $C\geq0$ and $\delta>0$ such that, for all $s,t\geq0$ with $s+t<\delta$, the positive rectangle
+
+$$
+x\longrightarrow x+s e_\mu
+\longrightarrow x+s e_\mu+t e_\nu
+\longrightarrow x+t e_\nu\longrightarrow x
+$$
+
+lies in $\Omega$, and each edge has a unique actual parallel transport solution, initially $I$ on the first edge and inheriting the preceding terminal matrix on every subsequent edge. Its final value $H$ satisfies
+
+$$
+\|H-\exp(-stF)\|_{\mathrm{op}}\leq C(s+t)^3.
+$$
+
+**A common neighborhood and actual edge solutions.** Choose $R>0$ with $\overline B(x,2R)\subset\Omega$, then fix $0<\delta\leq\min(R,1)$. For $y\in\overline B(x,R)$, $|h|\leq\delta$, and $0\leq u\leq1$, every signed coordinate edge $y+uh e_k$ remains in the larger closed ball. Smoothness and compactness give common constants $M_0,M_1,M_2\geq0$, chosen to bound all coefficients on that ball:
+
+$$
+\|A_k\|_{\mathrm{op}}\leq M_0,\qquad
+\|DA_k\|\leq M_1,\qquad
+\|D^2A_k\|\leq M_2.
+$$
+
+The last two norms use Euclidean input norms and the matrix operator norm on the output. For $\gamma(u)=y+uh e_k$, set $K_h(u)=-hA_k(y+uh e_k)$ and recursively define
+
+$$
+\begin{aligned}
+T_0(u)&=I,\\
+T_m(u)&=\int_0^u K_h(v)T_{m-1}(v)\,dv\quad(m\geq1),\\
+W_k(y,h;u)&=\sum_{m=0}^{\infty}T_m(u),\qquad
+U_k(y,h)=W_k(y,h;1).
+\end{aligned}
+$$
+
+Iterated integration gives $\|T_m(u)\|_{\mathrm{op}}\leq(M_0|h|u)^m/m!$, so the series converges uniformly. Substituting the series into the integral equation and integrating term by term gives $W_k(u)=I+\int_0^u K_h(v)W_k(v)\,dv$. The integrand is continuous, hence $W_k$ is $C^1$ and $W_k'=K_hW_k$. For any inherited initial matrix $P$, the function $V(u)=W_k(y,h;u)P$ therefore actually solves
+
+$$
+V'(u)=-A(\gamma(u))[\gamma'(u)]V(u),\qquad V(0)=P.
+$$
+
+For two solutions with the same initial value, iterating the integral equation for their difference $Z$ gives $\|Z(u)\|_{\mathrm{op}}\leq\sup_{[0,1]}\|Z\|_{\mathrm{op}}(M_0|h|u)^m/m!$. Letting $m\to\infty$ proves uniqueness. This is the usual Dyson construction and linear ODE uniqueness argument: existence of the actual transport has been constructed, rather than assumed. In particular, $W_k=U_k=I$ when $h=0$.
+
+**A uniform second-order expansion for signed edges.** Temporarily write $f(u)=A_k(y+uh e_k)$, $c=A_k(y)$, and $d=\partial_kA_k(y)$. Taylor's integral remainder for the first integral term gives
+
+$$
+\left\|-h\int_0^1 f(u)\,du+hc+\frac{h^2}{2}d\right\|_{\mathrm{op}}
+\leq\frac{M_2}{6}|h|^3.
+$$
+
+The second Dyson term is $h^2\int_0^1\int_0^u f(u)f(v)\,dv\,du$. The identity
+
+$$
+f(u)f(v)-c^2=(f(u)-c)f(v)+c(f(v)-c)
+$$
+
+preserves multiplication order. Together with $\|f(u)-c\|_{\mathrm{op}}\leq M_1|h|u$, it bounds the difference from $h^2c^2/2$ by
+
+$$
+M_0M_1|h|^3\int_0^1\int_0^u(u+v)\,dv\,du
+=\frac{M_0M_1}{2}|h|^3.
+$$
+
+The tail of order at least three satisfies
+
+$$
+\left\|\sum_{m\geq3}T_m(1)\right\|_{\mathrm{op}}
+\leq\sum_{m\geq3}\frac{(M_0|h|)^m}{m!}
+\leq\frac{e^{M_0\delta}M_0^3}{6}|h|^3.
+$$
+
+Adding these bounds and taking $K=M_2/6+M_0M_1/2+e^{M_0\delta}M_0^3/6$ yields, uniformly for all the specified $y,k$ and positive, negative, or zero $h$,
+
+$$
+\left\|U_k(y,h)-I+hc-\frac{h^2}{2}(c^2-d)\right\|_{\mathrm{op}}
+\leq K|h|^3.
+$$
+
+**The four actual edge expansions and their order.** Write $a=A_\mu(x)$, $b=A_\nu(x)$, $a_\ell=(\partial_\ell A_\mu)(x)$, and $b_\ell=(\partial_\ell A_\nu)(x)$. In positive path order, take
+
+$$
+\begin{aligned}
+U_1&=U_\mu(x,s),&
+U_2&=U_\nu(x+s e_\mu,t),\\
+U_3&=U_\mu(x+s e_\mu+t e_\nu,-s),&
+U_4&=U_\nu(x+t e_\nu,-t).
+\end{aligned}
+$$
+
+Set $\rho=s+t<\delta$. All these basepoints lie in the smaller closed ball. To move each edge expansion to the common basepoint $x$, use, for the required displacements $z$ with $\|z\|\leq\rho$,
+
+$$
+\begin{aligned}
+\|A_k(x+z)-A_k(x)-DA_k(x)z\|_{\mathrm{op}}
+&\leq\tfrac12M_2\rho^2,\\
+\|A_k(x+z)^2-A_k(x)^2\|_{\mathrm{op}}
+&\leq2M_0M_1\rho,\\
+\|\partial_kA_k(x+z)-\partial_kA_k(x)\|_{\mathrm{op}}
+&\leq M_2\rho.
+\end{aligned}
+$$
+
+The first error is multiplied by $|h|$, and the other two by $h^2/2$; each contribution is bounded by a fixed constant times $\rho^3$. Thus the common choice $K'=K+M_0M_1+M_2$ gives
+
+$$
+\begin{aligned}
+U_1&=I-sa+\tfrac12s^2(a^2-a_\mu)+R_1,\\
+U_2&=I-tb-stb_\mu+\tfrac12t^2(b^2-b_\nu)+R_2,\\
+U_3&=I+sa+\tfrac12s^2(a^2+a_\mu)+sta_\nu+R_3,\\
+U_4&=I+tb+\tfrac12t^2(b^2+b_\nu)+R_4,\\
+\|R_j\|_{\mathrm{op}}&\leq K'\rho^3\quad(j=1,2,3,4).
+\end{aligned}
+$$
+
+The third edge runs left from the upper-right corner and the fourth runs down; their positive signs follow automatically from signed $h$. Let $W_j(u)$ denote the corresponding identity-initialized solution on edge $j$. The solutions with inherited initial matrices are successively $W_1$, $W_2U_1$, $W_3U_2U_1$, and $W_4U_3U_2U_1$, so the actual terminal product is indeed $H=U_4U_3U_2U_1$.
+
+**A bounded product remainder, beyond order notation.** Write $U_j=P_j+R_j$, where $P_j=I+L_j+Q_j$ is the displayed polynomial of degrees one and two. Choose a common constant $B\geq1$ bounding all $\|U_j\|_{\mathrm{op}}$ and $\|P_j\|_{\mathrm{op}}$: the Dyson bound gives $e^{M_0\delta}$ for the former, while fixed coefficients and $\rho\leq1$ bound the latter. With empty products interpreted as $I$, telescoping gives
+
+$$
+H-P_4P_3P_2P_1
+=\sum_{j=1}^4 U_4\cdots U_{j+1}R_jP_{j-1}\cdots P_1,
+$$
+
+whose norm is at most $4B^3K'\rho^3$. The linear terms in the polynomial product cancel, and its quadratic terms are explicitly
+
+$$
+\begin{aligned}
+\sum_j Q_j&=s^2a^2+t^2b^2+st(a_\nu-b_\mu),\\
+\sum_{i>j}L_iL_j&=-s^2a^2-t^2b^2+st(ba-ab),\\
+\sum_j Q_j+\sum_{i>j}L_iL_j&=-stF.
+\end{aligned}
+$$
+
+The remaining polynomial is a finite sum $\sum_{3\leq p+q\leq8}s^pt^q C_{pq}$ over nonnegative integers $p,q$, with coefficient matrices determined solely by the fixed $a,b,a_\ell,b_\ell$. Choose $C_{\mathrm{pol}}=\sum\|C_{pq}\|_{\mathrm{op}}$. Since $s^pt^q\leq\rho^{p+q}\leq\rho^3$, this remainder has norm at most $C_{\mathrm{pol}}\rho^3$. Consequently,
+
+$$
+\|H-I+stF\|_{\mathrm{op}}\leq C_0\rho^3,
+\qquad C_0=4B^3K'+C_{\mathrm{pol}}.
+$$
+
+Finally, the ordinary matrix exponential tail gives
+
+$$
+\begin{aligned}
+\|\exp(-stF)-I+stF\|_{\mathrm{op}}
+&\leq\tfrac12e^{st\|F\|_{\mathrm{op}}}(st\|F\|_{\mathrm{op}})^2\\
+&\leq\tfrac12e^{\delta^2\|F\|_{\mathrm{op}}}\|F\|_{\mathrm{op}}^2\rho^4.
+\end{aligned}
+$$
+
+Take $C=C_0+e^{\delta^2\|F\|_{\mathrm{op}}}\|F\|_{\mathrm{op}}^2/2$. The triangle inequality and $\rho\leq1$ absorb the quartic term into the cubic bound, proving the stated conclusion. None of $R,\delta,M_0,M_1,M_2,K,K',B,C_{\mathrm{pol}},C$ is reselected as $s,t$ vary. Zero side lengths are included: zero-edge transport is $I$. For any edge, the time-reversed solution $W_k(y,h;1-u)$ and $W_k(y+h e_k,-h;u)U_k(y,h)$ satisfy the same reversed-edge ODE and both equal $U_k(y,h)$ at $u=0$. Uniqueness at $u=1$ gives
+
+$$
+U_k(y+h e_k,-h)U_k(y,h)=I.
+$$
+
+Thus when $s=0$ or $t=0$, the forward and reverse edges cancel exactly, giving $H=I$, and the estimate still holds.
+
+**Literature and scope.** Theorem 8 of R. L. Karp, F. Mansouri, and J. S. Rno, `hep-th/9903221v1` (DOI: `10.48550/arXiv.hep-th/9903221`), gives an ordered curvature surface-integral relation, rather than the literal uniform cubic bound stated here. Its Eq. (48) gives $-F$ under $(A_1,A_0)=(-A_\mu,-A_\nu)$; the indices and path ordering in Eqs. (49)–(50) must be read with the paper's conventions, whereas the ODE and edge order above fix our sign directly. Equation (1.1) of `arXiv:2004.04700v2` (DOI: `10.1088/1361-6382/abb874`) gives only a square-loop $o(\varepsilon^2)$ asymptotic, not this uniform cubic estimate in two side lengths. The quantitative bound here is the manual application written out above; neither these papers nor generic estimates supply formal verification of this inference. In the physical-potential convention, $-stF=(iq/\hbar)stF^{\mathrm{phys}}_{\mu\nu}(x)$, consistent with the phase and orientation in the preceding remark. The scope remains actual parallel transport of one smooth skew-Hermitian matrix connection in a fixed neighborhood. The constants are local; the argument supplies no global uniform bound, physical verification, or continuum limit for an arbitrary lattice model.
+:::
+
 ## 18.3 Phase transport on a selected spanning tree {#sec-tree-gauge-transport}
 
 Let us now analyze abelian $U(1)$ gauge fields on an arbitrary graph completely, without a single continuum approximation.

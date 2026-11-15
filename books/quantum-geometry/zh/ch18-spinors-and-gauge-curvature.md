@@ -140,6 +140,175 @@ $$
 对于非阿贝尔规范群（如 $SU(N)$），沿闭合回路绕行一周的平行移动和乐（holonomy）在基点规范变换下按群共轭 $U_\square \mapsto g_0 U_\square g_0^{-1}$ 变换，因此只有其**共轭类**或威尔逊圈迹（Wilson loop trace，$\Tr U_\square$）才是规范不变量。必须明确：上述无穷小方格展开式属于连续统微积分近似，而本章随后两节经 Lean 验证的定理（[@thm-tree-phase-transport] 与 [@cor-anchored-phase-classification]）严格建立在命名图上的精确离散阿贝尔单位圆群 $\operatorname{Circle} = U(1)$ 相位之上，既不依赖任何连续极限近似，也不能直接提升为非阿贝尔连续规范场定理。参见 Y. Aharonov & D. Bohm, *Phys. Rev.* **115**, 485 (1959), DOI: `10.1103/PhysRev.115.485`；以及 K. G. Wilson, *Phys. Rev. D* **10**, 2445 (1974), DOI: `10.1103/PhysRevD.10.2445`。
 :::
 
+::: {.remark #rem-actual-small-loop-cubic-remainder title="实际小回路的三阶余项（手工应用，未在本书形式化）"}
+**手工应用，未在本书形式化。** 上一注记的小方格近似可以在一个明确的局部矩阵模型中给出统一误差界。这里逐边求解同一联络的平行移动方程，再计算闭合乘积；不把四条边的输运当作可自由指定的晶格数据。下面的推导由作者与评审负责，没有对应这一完整推论的 Lean 内核证明或公理闭包核验；一般的输运存在性、泰勒估计与指数尾项估计本身不等于已经形式化了它们在这里的组合应用。
+
+设 $n\geq1$，$\Omega\subset\mathbb{R}^4$ 为开集，$A=\sum_{k=0}^3 A_k\,dx^k$ 为光滑矩阵一形式，且每个 $A_k(y)\in M_n(\mathbb{C})$ 都反厄米，即 $A_k(y)^*=-A_k(y)$。固定 $x\in\Omega$ 与不同的坐标方向 $\mu,\nu$，采用 $D_k=\partial_k+A_k$，记
+
+$$
+F=F_{\mu\nu}(x)
+=\bigl(\partial_\mu A_\nu-\partial_\nu A_\mu+[A_\mu,A_\nu]\bigr)(x).
+$$
+
+所有矩阵都使用标准厄米内积在 $\mathbb{C}^n$ 上诱导的算子范数 $\|\cdot\|_{\mathrm{op}}$；$\exp Z=\sum_{m=0}^{\infty}Z^m/m!$ 是普通矩阵幂级数指数。下文中的常数只由这个固定的局部模型选定，先于边长 $s,t$ 的选择。结论是：存在 $C\geq0$、$\delta>0$，对一切 $s,t\geq0$、$s+t<\delta$，正向矩形
+
+$$
+x\longrightarrow x+s e_\mu
+\longrightarrow x+s e_\mu+t e_\nu
+\longrightarrow x+t e_\nu\longrightarrow x
+$$
+
+位于 $\Omega$ 内，各边有唯一的实际平行移动解，第一条边以 $I$ 为初值，以后各边继承上一边的终值；其最终值 $H$ 满足
+
+$$
+\|H-\exp(-stF)\|_{\mathrm{op}}\leq C(s+t)^3.
+$$
+
+**共同邻域与实际边解。** 选 $R>0$ 使闭球 $\overline B(x,2R)\subset\Omega$，再固定 $0<\delta\leq\min(R,1)$。当 $y\in\overline B(x,R)$、$|h|\leq\delta$、$0\leq u\leq1$ 时，所有带符号的坐标边 $y+uh e_k$ 都留在大闭球内。由光滑性与紧性，先取共同常数 $M_0,M_1,M_2\geq0$，使大闭球上所有 $k$ 满足
+
+$$
+\|A_k\|_{\mathrm{op}}\leq M_0,\qquad
+\|DA_k\|\leq M_1,\qquad
+\|D^2A_k\|\leq M_2.
+$$
+
+后两个范数用欧氏输入范数与矩阵算子输出范数诱导。对边 $\gamma(u)=y+uh e_k$，令 $K_h(u)=-hA_k(y+uh e_k)$，递归定义
+
+$$
+\begin{aligned}
+T_0(u)&=I,\\
+T_m(u)&=\int_0^u K_h(v)T_{m-1}(v)\,dv\quad(m\geq1),\\
+W_k(y,h;u)&=\sum_{m=0}^{\infty}T_m(u),\qquad
+U_k(y,h)=W_k(y,h;1).
+\end{aligned}
+$$
+
+迭代积分给出 $\|T_m(u)\|_{\mathrm{op}}\leq(M_0|h|u)^m/m!$，故级数一致收敛。把级数代入积分方程并逐项积分，得到 $W_k(u)=I+\int_0^u K_h(v)W_k(v)\,dv$；连续的被积函数保证 $W_k$ 为 $C^1$ 且 $W_k'=K_hW_k$。因此，对任意继承的初值矩阵 $P$，$V(u)=W_k(y,h;u)P$ 确实满足
+
+$$
+V'(u)=-A(\gamma(u))[\gamma'(u)]V(u),\qquad V(0)=P.
+$$
+
+若两个解初值相同，其差 $Z$ 的积分方程迭代 $m$ 次给出 $\|Z(u)\|_{\mathrm{op}}\leq\sup_{[0,1]}\|Z\|_{\mathrm{op}}(M_0|h|u)^m/m!$；令 $m\to\infty$ 即得唯一性。这是通常的 Dyson 构造及线性 ODE 唯一性论证，实际输运的存在性已经在构造中给出，并非额外假设。特别地，$h=0$ 时 $W_k=U_k=I$。
+
+**对正负边长统一的二阶展开。** 暂记 $f(u)=A_k(y+uh e_k)$、$c=A_k(y)$、$d=\partial_kA_k(y)$。一阶积分项的泰勒积分余项给出
+
+$$
+\left\|-h\int_0^1 f(u)\,du+hc+\frac{h^2}{2}d\right\|_{\mathrm{op}}
+\leq\frac{M_2}{6}|h|^3.
+$$
+
+二阶 Dyson 项是 $h^2\int_0^1\int_0^u f(u)f(v)\,dv\,du$。利用保持乘法次序的恒等式
+
+$$
+f(u)f(v)-c^2=(f(u)-c)f(v)+c(f(v)-c)
+$$
+
+以及 $\|f(u)-c\|_{\mathrm{op}}\leq M_1|h|u$，其与 $h^2c^2/2$ 的差不超过
+
+$$
+M_0M_1|h|^3\int_0^1\int_0^u(u+v)\,dv\,du
+=\frac{M_0M_1}{2}|h|^3.
+$$
+
+阶数至少为三的尾项满足
+
+$$
+\left\|\sum_{m\geq3}T_m(1)\right\|_{\mathrm{op}}
+\leq\sum_{m\geq3}\frac{(M_0|h|)^m}{m!}
+\leq\frac{e^{M_0\delta}M_0^3}{6}|h|^3.
+$$
+
+三式相加，取 $K=M_2/6+M_0M_1/2+e^{M_0\delta}M_0^3/6$，得到对上述所有 $y,k$ 及正、负、零 $h$ 共同成立的估计
+
+$$
+\left\|U_k(y,h)-I+hc-\frac{h^2}{2}(c^2-d)\right\|_{\mathrm{op}}
+\leq K|h|^3.
+$$
+
+**四条实际边的展开与次序。** 记 $a=A_\mu(x)$、$b=A_\nu(x)$、$a_\ell=(\partial_\ell A_\mu)(x)$、$b_\ell=(\partial_\ell A_\nu)(x)$。沿上面的正向路径，分别取
+
+$$
+\begin{aligned}
+U_1&=U_\mu(x,s),&
+U_2&=U_\nu(x+s e_\mu,t),\\
+U_3&=U_\mu(x+s e_\mu+t e_\nu,-s),&
+U_4&=U_\nu(x+t e_\nu,-t).
+\end{aligned}
+$$
+
+设 $\rho=s+t<\delta$。这些基点都在小闭球内。为将各边的展开搬到同一基点 $x$，对所需位移 $z$（$\|z\|\leq\rho$）使用
+
+$$
+\begin{aligned}
+\|A_k(x+z)-A_k(x)-DA_k(x)z\|_{\mathrm{op}}
+&\leq\tfrac12M_2\rho^2,\\
+\|A_k(x+z)^2-A_k(x)^2\|_{\mathrm{op}}
+&\leq2M_0M_1\rho,\\
+\|\partial_kA_k(x+z)-\partial_kA_k(x)\|_{\mathrm{op}}
+&\leq M_2\rho.
+\end{aligned}
+$$
+
+第一式的误差再乘 $|h|$，后两式的误差再乘 $h^2/2$，都至多为固定常数乘 $\rho^3$。因而可统一取 $K'=K+M_0M_1+M_2$，逐边得到
+
+$$
+\begin{aligned}
+U_1&=I-sa+\tfrac12s^2(a^2-a_\mu)+R_1,\\
+U_2&=I-tb-stb_\mu+\tfrac12t^2(b^2-b_\nu)+R_2,\\
+U_3&=I+sa+\tfrac12s^2(a^2+a_\mu)+sta_\nu+R_3,\\
+U_4&=I+tb+\tfrac12t^2(b^2+b_\nu)+R_4,\\
+\|R_j\|_{\mathrm{op}}&\leq K'\rho^3\quad(j=1,2,3,4).
+\end{aligned}
+$$
+
+这里第三条边从右上角向左走，第四条边向下走；其正号由带符号的 $h$ 自动产生。以 $W_j(u)$ 记第 $j$ 条边相应的单位初值解，各边继承初值的解依次为 $W_1$、$W_2U_1$、$W_3U_2U_1$、$W_4U_3U_2U_1$，所以终值的乘法次序确实为 $H=U_4U_3U_2U_1$。
+
+**乘积余项有界，而不只写阶符号。** 写 $U_j=P_j+R_j$，其中 $P_j=I+L_j+Q_j$ 是上式的一次、二次多项式部分。可先选共同常数 $B\geq1$ 界定所有 $\|U_j\|_{\mathrm{op}}$ 与 $\|P_j\|_{\mathrm{op}}$：前者由 Dyson 级数不超过 $e^{M_0\delta}$，后者由固定系数及 $\rho\leq1$ 有界。用空乘积为 $I$ 的约定，望远镜分解为
+
+$$
+H-P_4P_3P_2P_1
+=\sum_{j=1}^4 U_4\cdots U_{j+1}R_jP_{j-1}\cdots P_1,
+$$
+
+故其范数至多 $4B^3K'\rho^3$。多项式乘积的一次项消去，二次项可直接核算为
+
+$$
+\begin{aligned}
+\sum_j Q_j&=s^2a^2+t^2b^2+st(a_\nu-b_\mu),\\
+\sum_{i>j}L_iL_j&=-s^2a^2-t^2b^2+st(ba-ab),\\
+\sum_j Q_j+\sum_{i>j}L_iL_j&=-stF.
+\end{aligned}
+$$
+
+其余部分是对非负整数 $p,q$ 的有限和 $\sum_{3\leq p+q\leq8}s^pt^q C_{pq}$，系数矩阵仅由固定的 $a,b,a_\ell,b_\ell$ 决定。先取 $C_{\mathrm{pol}}=\sum\|C_{pq}\|_{\mathrm{op}}$；由于 $s^pt^q\leq\rho^{p+q}\leq\rho^3$，这部分的范数至多 $C_{\mathrm{pol}}\rho^3$。于是
+
+$$
+\|H-I+stF\|_{\mathrm{op}}\leq C_0\rho^3,
+\qquad C_0=4B^3K'+C_{\mathrm{pol}}.
+$$
+
+最后，普通矩阵指数的尾项给出
+
+$$
+\begin{aligned}
+\|\exp(-stF)-I+stF\|_{\mathrm{op}}
+&\leq\tfrac12e^{st\|F\|_{\mathrm{op}}}(st\|F\|_{\mathrm{op}})^2\\
+&\leq\tfrac12e^{\delta^2\|F\|_{\mathrm{op}}}\|F\|_{\mathrm{op}}^2\rho^4.
+\end{aligned}
+$$
+
+取 $C=C_0+e^{\delta^2\|F\|_{\mathrm{op}}}\|F\|_{\mathrm{op}}^2/2$，由三角不等式与 $\rho\leq1$ 将四阶项吸收到三阶界中，即得所述结论。$R,\delta,M_0,M_1,M_2,K,K',B,C_{\mathrm{pol}},C$ 均不随 $s,t$ 改选。零边长没有被排除：零边解为 $I$。对一条边，时间反向的解 $W_k(y,h;1-u)$ 与 $W_k(y+h e_k,-h;u)U_k(y,h)$ 满足同一个反向边 ODE，且在 $u=0$ 都取值 $U_k(y,h)$。由唯一性，在 $u=1$ 得
+
+$$
+U_k(y+h e_k,-h)U_k(y,h)=I.
+$$
+
+故 $s=0$ 或 $t=0$ 时正反向边恰好消去，整个回路给出 $H=I$，估计仍成立。
+
+**文献与适用边界。** R. L. Karp、F. Mansouri 与 J. S. Rno，`hep-th/9903221v1`，定理 8（DOI: `10.48550/arXiv.hep-th/9903221`）给出的是有序曲率曲面积分关系，并非这里逐字陈述的统一三阶界。其式 (48) 在 $(A_1,A_0)=(-A_\mu,-A_\nu)$ 的代入下给出 $-F$；式 (49)–(50) 的指标与路径次序须连同原文约定阅读，这里的符号则由上述 ODE 和四边顺序直接固定。`arXiv:2004.04700v2` 的式 (1.1)（DOI: `10.1088/1361-6382/abb874`）只给出正方形小回路的 $o(\varepsilon^2)$ 渐近式，也不是本注记的双边长统一三阶估计。这里的定量界是上面完整写出的手工应用，不冒用这些文献或一般估计的形式化证据。在物理势约定下，$-stF=(iq/\hbar)stF^{\mathrm{phys}}_{\mu\nu}(x)$，与上一注记的相位和定向一致。适用对象始终是固定邻域内同一光滑反厄米矩阵联络的实际平行移动；常数是局部的，不提供全局一致界、物理实证或任意晶格模型的连续极限。
+:::
+
 ## 18.3 选定生成树上的相位输运 {#sec-tree-gauge-transport}
 
 现在，让我们在无需任何连续统微积分近似的前提下，把图上的阿贝尔 $U(1)$ 规范场彻底算穿。
