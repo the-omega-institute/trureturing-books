@@ -3,7 +3,7 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 204,
+    "theorem": 205,
     "lemma": 34,
     "proposition": 45,
     "corollary": 31,
@@ -12,16 +12,16 @@
     "problem": 3,
     "example": 124,
     "remark": 204,
-    "proof": 309,
-    "lean_verified": 311,
+    "proof": 310,
+    "lean_verified": 312,
     "written_proof": 3,
     "literature": 198
   },
-  "total": 673,
+  "total": 674,
   "kinds": {
     "def": 201,
     "inductive": 11,
-    "theorem": 461
+    "theorem": 462
   },
   "groups": {
     "theorems": [
@@ -55,6 +55,7 @@
       "D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm",
       "D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec",
       "D5/S1/Words/AdmissibleWords/KBonacciEmittedTail.prefix_coupling_emitted_tail",
+      "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence",
       "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_determinant",
       "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_error_formula",
       "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation",
@@ -3317,6 +3318,18 @@
           "file": "ch39-s05-s07-cut-entanglement.md",
           "line": 814,
           "id": "thm-ch39-p2e-native-emitted-tail",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence": {
+      "kind": "theorem",
+      "name": "D5.S1.Words.AdmissibleWords.KBonacciConditionalBlockCoupling.prefix_coupling_supported_coalescence",
+      "citations": [
+        {
+          "file": "ch39-s05-s07-cut-entanglement.md",
+          "line": 830,
+          "id": "thm-ch39-p2e-native-supported-coalescence",
           "via": "environment"
         }
       ]
@@ -25124,6 +25137,7 @@
       "depth": 2,
       "environment": [
         "D5/S1/Words/AdmissibleWords/KBonacciEmittedTail.prefix_coupling_emitted_tail",
+        "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence",
         "D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy"
       ],
       "inline": [

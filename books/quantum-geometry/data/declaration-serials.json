@@ -1,6 +1,6 @@
 {
   "next": {
-    "T": 342,
+    "T": 343,
     "D": 160,
     "R": 177
   },
@@ -677,6 +677,7 @@
     "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator": "T338",
     "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal": "T339",
     "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisOuter_eq_implies_parallel": "T340",
-    "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le": "T341"
+    "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le": "T341",
+    "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence": "T342"
   }
 }

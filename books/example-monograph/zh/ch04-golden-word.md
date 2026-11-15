@@ -379,6 +379,15 @@ $$
 
 乘积取遍全体素数 $p$。
 
+这里的 $\beta(v)=S(v)-v\psi$ 正是源码中的 `o5Beta v`。对素数 $p$，原始局部因子定义为
+
+$$
+\operatorname{germLocalFactor}(s,p)
+=\sum_{v=0}^{\infty}p^{-s\beta(v)}.
+$$
+
+这沿用源码 `germLocalFactor` 的参数顺序 $s,p$，包含 $v=0$ 的常数项 $1$，没有提取或除去任何校正因子。
+
 ::: {.conjecture #conj-independence title="独立性猜想 O-5"}
 存在函数 $Z \colon \mathbb{C} \to \mathbb{C}$，同时满足：
 
@@ -401,6 +410,41 @@ O-5 是开放问题，不是定理，本书不为它引用任何 Lean 声明。t
 
 trureturing 在 `GoldenWindowZeroObstruction` 模块中证明了两条与 O-5 有关的结果，都不决定它。一条说：若某个函数在半平面 $\operatorname{Re} s > r$（$0 < r < 1/\varphi^2$）上解析、在 $\operatorname{Re} s > 1/\varphi^2$ 上等于 $E$，并在这个半平面内、条件 3 的带中有一个实部不等于 $1/(2\varphi^2)$ 的零点，那么满足条件 1、2 且在 $\operatorname{Re} s > r$ 上额外满足一种正规形式条件（Mathlib 的 `MeromorphicNFOn`）的候选，都不满足条件 3。另一条说：只改动一点的函数值，就能让亚纯的候选在该点不解析，从而避开条件 3 在这一点的检验。Blueprint 据此说明，前者并不否定原始的 O-5 陈述，后者则把原陈述的一个局限写成了定理。
 
+对单个素数的局部因子，可以给出一个无条件的精确零点结论。
+
+::: {.theorem #thm-o5-prime-two-local-zero title="素数 $2$ 的原始局部因子零点" lean="D5/S3/Analytic/GermWindow/GermZeroCertificate.germLocalFactor_two_has_zero_near_candidate"}
+令复数圆心
+
+$$
+c=\frac{23815329946211908}{10^{17}}
++\frac{5256712292901926}{10^{15}}\,i.
+$$
+
+存在 $z\in\mathbb C$，使得
+
+$$
+\|z-c\|<10^{-8},\qquad
+\operatorname{germLocalFactor}(z,2)=0.
+$$
+:::
+
+::: proof
+令 $G(s)=\sum_{v=0}^{60}2^{-s\beta(v)}$，即源码中的 `g 60 s`。对这 $61$ 项及其导数的实部、虚部逐项建立有理上下界，求和后得到 $\|G(c)\|<4/10^{10}$ 与 $\operatorname{Re}G'(c)>187/100$。在以 $c$ 为中心、半边长为 $1/(2\cdot10^8)$ 的闭矩形上，曲率界 $\|G''(s)\|\le400$ 控制一次 Taylor 余项，而一致尾界 $\|\operatorname{germLocalFactor}(s,2)-G(s)\|<58/10^{11}$ 控制截断误差。仿射比较函数 $G(c)+G'(c)(s-c)$ 在矩形内有一个单零点，其边界模长大于两种误差之和。`GermZeroCertificateReduction` 中已有的矩形 Rouché 归约因此给出原始局部因子在该矩形内的零点；矩形包含于所述开球。完整证明由 Lean 内核检查。
+:::
+
+定理盒只陈述这个精确开球内的存在性。球的位置还可由初等有理界直接确定：圆心与半径满足
+
+$$
+\begin{aligned}
+\frac15&<\operatorname{Re}c-10^{-8},\\
+\operatorname{Re}c+10^{-8}&<\frac14.
+\end{aligned}
+$$
+
+由 $|\operatorname{Re}z-\operatorname{Re}c|\le\|z-c\|<10^{-8}$，球中每一点的实部都在 $(1/5,1/4)$ 内。再用 $8/5<\varphi<5/3$、$\varphi^2=\varphi+1$ 与 $\varphi^3=2\varphi+1$，得到 $1/(2\varphi^3)<1/8$、$1/(2\varphi^2)<1/5$ 和 $1/\varphi^2>1/3$。因此整个球都在条件 3 的原始窗口内，且在结构线 $\operatorname{Re}s=1/(2\varphi^2)$ 的右侧；这是定理盒之外的位置推论。
+
+这里确实发生了局部因子消零，但定理没有断言原始无穷乘积 `tprod` 所定义的 $E(z)$ 为零，也没有断言某个延拓胚在该点为零。这个球位于条件 2 的原始相等域之外；若要把局部零点传递给延拓后的整体乘积，还须建立相应的因子分解与解析或亚纯延拓等式，并核对余下乘积在该点的行为及可能的零极点相消。上述正规形式与单点改值的限制仍然适用：本定理不否定只要求 `MeromorphicOn` 的原始 O-5，也不证明或反驳 Riemann 猜想。
+
 ::: {.remark #rem-o5-continuation-route title="O-5 的延拓路线与剩余接口"}
 **文献结果，未在本书形式化。** Bhowmik–Essouabri–Lichtin（BEL）的多变量 Euler 乘积方法提供了一条延拓路线[^bel-continuation]。对有限个解析函数 $\ell_j$ 和整数 $a_j$，其引理 1 的证明允许局部因子形如 $1+\sum_j a_jp^{-\ell_j(s)}+R_p(s)$，其中 $R_p$ 在目标域上解析，且对素数 $p$ 和域内的 $s$ 一致为 $O(p^{-2})$。在 $W(\ell;\delta)=\{s:\operatorname{Re}\ell_j(s)>\delta\text{ 对所有 }j\}$（$\delta>0$）上，反复消去低阶项可提取有限个整数次幂的 $\zeta$ 因子，留下全纯、绝对收敛的余项乘积。整数幂保证提取的因子仍是亚纯函数；这是一种已知的文献方法，并不是本书已经完成的 O-5 应用。
 
@@ -418,11 +462,13 @@ W(\ell;\epsilon\varphi^2)=H_\epsilon,
 \qquad W(\ell;1)=H_{1/\varphi^2}.
 $$
 
-这给出待核验应用的参数与截断目标；下条评注补出任意有限阶的整数多变量消去及其无除法的复数求值恒等式。尚须把该恒等式接到上述解析尾项，实现一致 $O(p^{-2})$ 估计，并在多重指标到权重的对应中处理同权重项的合并，以及重新引入商式时负校正指数带来的分母；形式的一元系数恒等式或固定阶消去式不能单独完成这一步。随后还须证明余项素数乘积局部一致收敛，为**每个** $\epsilon>0$ 构造延拓，并使重叠半平面上的正规形式亚纯代表相容，拼成 $H_0$ 上的函数；一个固定截断不够。条件 2 还要求在原始域 $H_{1/\varphi^2}$ 的**每一点**都等于 $E(s)$，包括表面奇点可去时应取的值。亚纯函数胚相等，并不保证任意仅满足 `MeromorphicOn` 的函数逐点相等，所以上述正规形式与单点改值的限制仍须保留。这些解析实现与拼接尚未在本书中形式化；该路线也不给出局部因子或乘积的非零性，更不给出条件 3 的零点定位。O-5 仍然开放，条件 3 仍需另行研究。
+这些参数给出原始函数胚的截断目标；[@rem-o5-finite-cancellation] 保留完整的有限代数论证，[@thm-o5-finite-integer-cancellation] 则同时给出任意有限阶消去与其一致解析求值。应用该定理之前，仍须为实际的无限尾项 $R_p(s)=\sum_{v>M}p^{-s\beta(v)}$ 建立上述解析性与统一界，并证明它确实是原始局部因子减去保留项的余项。随后可取 $J=\{1,\ldots,M\}$、$a_v=1$、$b_v=\beta(v)$、$m=\varphi^2$、$A=(1-2^{-\epsilon\sqrt5})^{-1}$，再选 $N$ 使 $(N+1)\epsilon m\ge2$。该有限定理允许相等或有有理关系的权重，并在这个半平面上控制负校正指数带来的分母；不必先把同权重的多重指标合并。
+
+此后仍须建立相应的 $\zeta$ 因子分解恒等式，证明余项素数乘积局部一致收敛，为**每个** $\epsilon>0$ 构造延拓，并使重叠半平面上的正规形式亚纯代表相容，拼成 $H_0$ 上的函数；一个固定截断不够。条件 2 还要求在原始域 $H_{1/\varphi^2}$ 的**每一点**都等于 $E(s)$，包括表面奇点可去时应取的值。亚纯函数胚相等，并不保证任意仅满足 `MeromorphicOn` 的函数逐点相等，所以上述正规形式与单点改值的限制仍须保留。这些原始尾项接口、无穷乘积与拼接步骤尚未在本书中形式化；有限定理也不给出局部因子或乘积的非零性，更不给出条件 3 的零点定位。O-5 仍然开放，条件 3 仍需另行研究。
 :::
 
 ::: {.remark #rem-o5-finite-cancellation title="整数 Euler 消去的有限代数形式"}
-**文献展开与书面有限推论，未在本书形式化。** Delabarre 在第 2.2 节引理 2 中给出已发表的整数指数展开[^delabarre-cancellation]。用有限变量集 $J$ 重记其变量，令 $a_j\in\mathbb Z$、$S=\sum_{j\in J}|a_j|$。当 $S>0$ 且每个 $|Y_j|<1/S$ 时，
+**文献中的无穷展开与有限消去的完整论证。** Delabarre 在第 2.2 节引理 2 中给出已发表的整数指数展开[^delabarre-cancellation]。用有限变量集 $J$ 重记其变量，令 $a_j\in\mathbb Z$、$S=\sum_{j\in J}|a_j|$。当 $S>0$ 且每个 $|Y_j|<1/S$ 时，
 
 $$
 Q(Y):=1+\sum_{j\in J}a_jY_j
@@ -430,7 +476,7 @@ Q(Y):=1+\sum_{j\in J}a_jY_j
 \qquad \gamma(\nu)\in\mathbb Z,
 $$
 
-这里 $Y^\nu=\prod_jY_j^{\nu_j}$，右侧绝对收敛；原文式 (6) 给出指数公式，评注 4 指出可按总次数归纳证明其整数性。若 $S=0$（包括 $J$ 为空），则 $Q=1$，可直接取所有指数为零，不使用 $1/S$。若把展开写成 $Q\prod_\nu(1-Y^\nu)^{c_\nu}=1$，校正指数的符号约定就是 $c_\nu=-\gamma(\nu)$。下面是这种消去法清除分母后的**书面有限推论及证明**，并非引理 2 的逐字陈述，也不主张新的文献方法或已完成 Lean 验证。
+这里 $Y^\nu=\prod_jY_j^{\nu_j}$，右侧绝对收敛；原文式 (6) 给出指数公式，评注 4 指出可按总次数归纳证明其整数性。若 $S=0$（包括 $J$ 为空），则 $Q=1$，可直接取所有指数为零，不使用 $1/S$。若把展开写成 $Q\prod_\nu(1-Y^\nu)^{c_\nu}=1$，校正指数的符号约定就是 $c_\nu=-\gamma(\nu)$。下面保留这种消去法清除分母后的**完整书面论证**，作为 [@thm-o5-finite-integer-cancellation] 代数部分的解释。有限多项式结论并非引理 2 的逐字陈述，也不主张新的文献方法；上面的已发表无穷展开并不是下述有限 Lean 定理的结论。
 
 在 $\mathbb Z[X_j:j\in J]$ 中，记 $|\nu|=\sum_j\nu_j$、$X^\nu=\prod_jX_j^{\nu_j}$，并任取 $N\in\mathbb N$。有限集
 
@@ -449,7 +495,7 @@ QU&=V+\sum_{t\in T}h_tX^t,
 \end{aligned}
 $$
 
-这里 $T$ 有限、$h_t\in\mathbb Z$，所有幂的指数都是自然数；负的 $c_\nu$ 只使相应因子进入 $V$。特别地，$N=0$ 时 $E_N$ 为空，$U=V=1$，余项为 $Q-1$，其常数项为零，但余项一般不为零。
+这里取 $H_{\mathrm{poly}}=QU-V$、$T=\operatorname{supp}(H_{\mathrm{poly}})$、$h_t=[X^t]H_{\mathrm{poly}}\in\mathbb Z$，所有幂的指数都是自然数；负的 $c_\nu$ 只使相应因子进入 $V$。特别地，$N=0$ 时 $E_N$ 为空，$U=V=1$，余项为 $Q-1$，其常数项为零，但余项一般不为零。
 
 为证明此式，令 $\mathcal F_d$ 为总次数小于 $d$ 的系数全为零的多项式集合。有限系数卷积中每一项的次数相加，故 $\mathcal F_d$ 对加减和任意多项式乘法封闭，且
 
@@ -494,18 +540,123 @@ $$
 Q(z)U(z)=V(z)+\sum_{t\in T}h_tz^t
 $$
 
-在每个 $z$ 都成立，即使某个 $1-z^\nu=0$；这里没有除法。代入 $z_j=p^{-b_js}$ 后，不同多重指标可能因权重的有理关系而合并，但不会破坏这个恒等式。它尚不提供余项的一致解析估计、可除性或非零性，也不完成上条评注的素数乘积、正规形式拼接和逐点相等义务。有限代数证明与其 Lean 形式化应分别核验；本书尚未把这一任意阶结论列为 Lean 结果，O-5 的条件 2、3 仍未由此解决。
+在每个 $z$ 都成立，即使某个 $1-z^\nu=0$；这里没有除法。代入 $z_j=p^{-b_js}$ 后，不同多重指标可能因权重的有理关系而合并，但不会破坏这个恒等式。这个多项式恒等式本身不包含一致解析估计、可除性或非零性。下面的定理另给出带明确假设的一致解析结论；原始尾项、素数乘积、正规形式拼接和逐点相等义务仍如上条评注所述，O-5 的条件 2、3 不由有限消去解决。
 :::
+
+::: {.theorem #thm-o5-finite-integer-cancellation title="有限整数 Euler 消去及其一致解析求值" lean="D5/S3/Analytic/EulerGerm/FiniteIntegerEulerCancellation.finite_integer_euler_cancellation"}
+对每个有限集 $J$、每个整数系数族 $a:J\to\mathbb Z$ 和每个 $N\in\mathbb N$，存在 $c:E_N\to\mathbb Z$，使下述各项同时成立。这里 $J$ 允许为空，$N$ 允许为 $0$，$a_j$ 与 $c(u)$ 均无符号限制；$|u|=\sum_j u_j$，$E_N=\{u:J\to\mathbb N:1\le|u|\le N\}$。对这个 $c$ 定义
+
+$$
+\begin{aligned}
+Q&=1+\sum_j a_jX_j,\\
+U&=\prod_{u\in E_N}(1-X^u)^{\max(c(u),0)},\\
+V&=\prod_{u\in E_N}(1-X^u)^{\max(-c(u),0)},\\
+H_{\mathrm{poly}}&=QU-V,\qquad T=\operatorname{supp}(H_{\mathrm{poly}}),\\
+h_t&=[X^t]H_{\mathrm{poly}}\quad(t\in T).
+\end{aligned}
+$$
+
+$T$ 是实际的有限多项式支集。令 $d$ 为 `Data` 中的有限数据，指标集为 $J,E_N,T$，其各字段为
+
+$$
+\begin{aligned}
+d.\mathrm{linear}(j)&=a_j,&d.\mathrm{mode}(u,j)&=u_j,\\
+d.\mathrm{power}(u)&=c(u),&d.\mathrm{tailMode}(t,j)&=t_j,\\
+d.\mathrm{tailCoeff}(t)&=h_t.
+\end{aligned}
+$$
+
+这正是 `tailData a (polynomialMode N) c`；`polynomialMode` 只把有限集上的普通函数转成相同的有限支集多重指标。
+
+1. 对每个 $u:J\to\mathbb N$，若 $|u|\le N$，则 $[X^u]H_{\mathrm{poly}}=0$。
+2. $d$ 满足 `Data.Certificate`，即对所有 $z\in\mathbb C^J$，
+
+   $$
+   Q(z)U(z)=V(z)+\sum_{t\in T}h_tz^t.
+   $$
+
+   这包括校正二项式 $1-z^u$ 为零的点；此式只用自然数次幂，不含除法。
+3. 对每个 $u\in E_N$，$1\le\sum_jd.\mathrm{mode}(u,j)\le N$。
+4. 对每个 $t\in T$，$N+1\le\sum_jd.\mathrm{tailMode}(t,j)$。
+5. 对每个 $b:J\to\mathbb R$ 和每个 $m,\epsilon,A\in\mathbb R$，若
+
+   $$
+   \begin{aligned}
+   &m>0,\qquad b_j\ge m\quad(j\in J),\\
+   &\epsilon>0,\qquad A\ge0,\qquad 2\le(N+1)\epsilon m,
+   \end{aligned}
+   $$
+
+   则存在 $C\in\mathbb R$、$C\ge0$，使对每个族 $R:\operatorname{Primes}\to(\mathbb C\to\mathbb C)$，只要对所有素数 $p$ 都有
+
+   $$
+   \begin{aligned}
+   &\operatorname{AnalyticOnNhd}_{\mathbb C}(R_p,H_\epsilon),\\
+   &\|R_p(s)\|\le A/p^2\quad(s\in H_\epsilon),
+   \end{aligned}
+   $$
+
+   就对所有素数 $p$ 都有
+
+   $$
+   \begin{aligned}
+   &\operatorname{AnalyticOnNhd}_{\mathbb C}(K_p,H_\epsilon),\\
+   &\|K_p(s)-1\|\le C/p^2\quad(s\in H_\epsilon).
+   \end{aligned}
+   $$
+
+   这里 $H_\epsilon=\{s\in\mathbb C:\operatorname{Re}s>\epsilon\}$，并定义
+
+   $$
+   \begin{aligned}
+   z_j(p,s)&=\exp(-b_js\log p),\\
+   K_p(s)&=\bigl(Q(z(p,s))+R_p(s)\bigr)
+   \prod_{u\in E_N}(1-z(p,s)^u)^{c(u)}.
+   \end{aligned}
+   $$
+
+   $\log p$ 是正实数 $p$ 的实对数，$K_p$ 正是 `Data.corrected`，其中幂为整数次幂。`AnalyticOnNhd` 指函数在集合每一点的某个邻域中复解析。
+
+量词顺序为：先给定 $J,a,N$，再选 $c$；该 $c$ 同时适用于全部 $b,m,\epsilon,A$。固定后四者并满足假设后，先选 $C$，再任取整个扰动族 $R$；$C$ 同时适用于全部素数和整个半平面。截断条件允许等号，不要求权重互异或有理无关。
+:::
+
+::: proof
+[@rem-o5-finite-cancellation] 的完整逐层论证解释了代数部分。Lean 用变量理想的幂表示总次数过滤，逐层消去后补齐 $E_N$ 上未使用的零指数；有限支集与普通函数多重指标之间的转换保持总次数。残差支集中的每个系数非零，故第一项推出第四项；对该实际支集作多项式求值，就得到第二项的全体复数证书。
+
+解析部分复用 `evaluated_certificate_uniform`。令 $q=\exp(-m\epsilon\log2)<1$。在 $H_\epsilon$ 上每个校正单项式的模至多为 $q$，所以 $1-z^u$ 不为零，整数次幂在此解析。令
+
+$$
+\begin{aligned}
+U_0&=\prod_{u\in E_N}(1+q)^{\max(c(u),0)},\\
+V_0&=\prod_{u\in E_N}(1-q)^{\max(-c(u),0)}>0,\\
+D_0&=\sum_{t\in T}|h_t|.
+\end{aligned}
+$$
+
+次数间隙与 $(N+1)\epsilon m\ge2$ 给出每个尾单项式的模至多为 $p^{-2}$。仅在已证明 $V(z)\ne0$ 的这个半平面上，把证书改写为
+
+$$
+K_p(s)-1=\frac{\sum_{t\in T}h_tz^t+R_p(s)U(z)}{V(z)}.
+$$
+
+于是可取 $C=(D_0+AU_0)/V_0$，它不依赖 $R,p,s$。这里的除法只用于此解析域内的估计，并不把全体复数上的多项式证书改成在二项式零点处也可相除的断言。完整证明由 Lean 内核检查。
+:::
+
+这个结果只构造有限代数校正并给出满足假设时的逐素数解析估计。它不证明上述实际无限 $\beta$ 尾项满足假设，不构造无穷素数乘积或全局延拓，也不声称 $K_p$ 或乘积非零。[@thm-o5-prime-two-local-zero] 的局部零点与上述正规形式、单点改值限制均保持原来的范围；O-5 及黎曼猜想不由此得到证明或反驳。
 
 [^bel-continuation]: G. Bhowmik, D. Essouabri, B. Lichtin, *Meromorphic continuation of multivariable Euler products*, [DOI: 10.1515/forum.2007.044](https://doi.org/10.1515/forum.2007.044)。这里的原文定位采用[作者预印本](https://arxiv.org/pdf/math/0502508v1)第 1.1 节：引理 1 及其证明，第 5–8 页，尤其式 (2)–(4) 中的一致解析扰动；定理 1 及其证明，第 8–10 页，将方法用于单位多圆盘上常数项为零、Taylor 系数为整数的解析幂级数。这些文献结论未在本书形式化。
 
 [^delabarre-cancellation]: L. Delabarre, *Extension of Estermann's theorem to Euler products associated to a multivariate polynomial*, *Bulletin de la Société Mathématique de France* **141**(2) (2013), 225–265，[DOI: 10.24033/bsmf.2647](https://doi.org/10.24033/bsmf.2647)，[期刊原文](https://www.numdam.org/item/BSMF_2013__141_2_225_0.pdf)。第 1.1 节规定系数为整数；第 2.2 节引理 2、式 (5)–(6) 与评注 4 见印刷页 233，证明见 234–235 页。这里引用的是已发表的整数指数展开；本评注另行完整写出其有限消去形式的证明。
 
-O-5 的原始陈述及上述正规形式和单点改值限制，出自 trureturing 所钉提交中的下列文件：
+O-5 的原始陈述、上述局部零点与有限消去结果及正规形式和单点改值限制，出自 trureturing 所钉提交中的下列文件：
 
 - `D5/X_Frontier/Hearts.lean`：O-5 的陈述 `o5_independence` 及其中的定义；
 - `README.md` 与 `docs/VISION.md`：把 O-5 列为开放问题；
 - `Blueprint/D5/X_Frontier/GoldenWindowZeroObstruction.md`：上面两条已证结果；
-- `Blueprint/D5/S1/Deficit/Beatty/GoldenSpectralCoordinate.md`：换算 $\varphi^2 \cdot 1/(2\varphi^2) = 1/2$。
+- `Blueprint/D5/S1/Deficit/Beatty/GoldenSpectralCoordinate.md`：换算 $\varphi^2 \cdot 1/(2\varphi^2) = 1/2$；
+- `D5/S3/Analytic/GoldenEulerBeta.lean` 与 `D5/S3/Analytic/EulerGerm/GoldenLocalFactor.lean`：`o5Beta` 与原始局部因子 `germLocalFactor` 的定义；
+- [`GermZeroCertificate`](lean:D5/S3/Analytic/GermWindow/GermZeroCertificate.germLocalFactor_two_has_zero_near_candidate)：[@thm-o5-prime-two-local-zero] 的公开声明；圆心与矩形归约在同目录的 `GermZeroCertificateReduction.lean`，曲率界在 `GermZeroCertificateJet.lean`；
+- [`FiniteIntegerEulerCancellation`](lean:D5/S3/Analytic/EulerGerm/FiniteIntegerEulerCancellation.finite_integer_euler_cancellation)：[@thm-o5-finite-integer-cancellation] 的声明，以及同模块中的 `linearPolynomial`、`correctionProduct`、`residual`、`FunctionMode`、`polynomialMode` 与 `tailData`；对应说明为 `Blueprint/D5/S3/Analytic/EulerGerm/FiniteIntegerEulerCancellation.md`；
+- [`EvaluatedEulerCertificate`](lean:D5/S3/Analytic/EulerGerm/EvaluatedEulerCertificate.evaluated_certificate_uniform)：一致解析求值所复用的声明，以及同模块中的 `Data`、`Data.Certificate`、`point` 与 `Data.corrected`。
 
 [^conv]: 在 `Hearts.lean` 中，$Z$ 的亚纯性是 Mathlib 的 `MeromorphicOn`，它不约束函数在极点处取什么值；条件 3 要求 $Z$ 在 $s$ 处解析（`AnalyticAt`），正是为了让零点的判断不受这些值影响。$E$ 中的无穷和与无穷积是 Lean 的无条件和与无条件积，不收敛时 Lean 赋予约定值（和为 $0$，积为 $1$）；猜想只在 $\operatorname{Re} s > 1/\varphi^2$ 上用到 $E$。

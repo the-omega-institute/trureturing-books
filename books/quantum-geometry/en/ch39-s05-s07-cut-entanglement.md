@@ -825,7 +825,100 @@ This retains `prefixCoupling`'s initial `resetReady` test, recursive branch, and
 Use counting induction in each fixed completion fiber: changing a selected free coordinate from `true` to `false` is an injection, so the event that the first $j$ selected coordinates are all `true` has mass at most $2^{-j}$. In the `resetReady` branch the two outputs agree coordinatewise on free sites, so the event reduces exactly to that all-`true` counting bound. In the recursive branch the emitted head is the sampled bit pair; the `(false,false)` child contributes zero to the event, while every positive-mass other child enters the corresponding refined fibers and uses the induction hypothesis, with the half-failure budget supplying the next factor $1/2$. Zero-mass and impossible refinements contribute nothing. The induction applies directly to the original `prefixCoupling`, without replacing its initial test or independent fallback. The full proof is checked by the Lean kernel.
 :::
 
-This bound concerns only the native complete output event “the first $j$ selected coordinates contain no common zero.” It does not prove that the paper's shared-threshold construction has the same law as the native coupling, supported coalescence after an emitted common zero, simultaneous reflection support transport, or complete pointwise assembly; each still requires separate verification.
+The common-zero tail bound controls the probability of not yet seeing a common zero. To use it to control later disagreements, one also needs agreement of the complete outputs after a common zero. In an increasing scan of all free coordinates, a common `false` at the head leaves every coordinate to its left fixed. If the farther fixed data also agree, the original reset condition holds. The following statement places this mechanism directly on the output support of the same $P$.
+
+::: {.theorem #thm-ch39-p2e-native-supported-coalescence title="Common-Zero Coalescence on the Complete Output Support of the Original Conditional Coupling" lean="D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence"}
+For every $k,n\in\mathbb N$ with $0<k$, take a duplicate-free (`Nodup`) list $s:\operatorname{List}(\operatorname{Fin}(n))$ strictly increasing in coordinate value, and a finite fixed set $F:\operatorname{Finset}(\operatorname{Fin}(n))$ such that, for every $i\in\operatorname{Fin}(n)$, $i\in s$ if and only if $i\notin F$. Take arbitrary histories $x,y:W_n$ and witnesses $h_x,h_y$ that the original completion fibers $C(k,n,F,x)$ and $C(k,n,F,y)$ are nonempty. Assume further that
+
+$$
+\forall i\in s,\;\forall t\in F,\quad i<t\ \Longrightarrow\ x(t)=y(t).
+$$
+
+For every complete output pair $w=(w_1,w_2)\in W_n\times W_n$ with $P(s,F,x,y,h_x,h_y)(w)\ne0$, and all $r,q\in\operatorname{Fin}(|s|)$ with $r\le q$,
+
+$$
+w_1(s[r])=\mathrm{false}\ \land\ w_2(s[r])=\mathrm{false}
+\quad\Longrightarrow\quad w_1(s[q])=w_2(s[q]).
+$$
+
+Here $s[r]$ is the scan coordinate at the zero-based index $r$; the histories $x,y$ need not themselves be admissible words. The conclusion is vacuous for an empty scan, including $n=0$. The statement includes $F=\varnothing$, $x=y$, an initially satisfied reset condition, $r=q$, and $k=1$.
+:::
+
+::: proof
+Induct on the scan list, retaining the same complete output pair $w$ throughout. If `resetReady` holds initially, the original definition chooses a reset coordinate $z$ and an actual legal representative $v$ from the completion fiber of $y$. Map support for the reset law writes $w$ as $(u,\operatorname{resetMap}(z,v,u))$. Every coordinate at or before $z$ is fixed, so every free scan coordinate lies strictly after $z$, where `resetMap` retains $u$. Thus the two complete outputs agree at every scanned coordinate. This uses an actual legal representative rather than assuming the arbitrary history is legal; the chosen reset coordinate need not be the head just scanned.
+
+Otherwise, a nonempty scan samples the head bit pair from the original next-bit coupling. Bind support supplies a bit pair of nonzero mass and retains the same $w$ in the support of its child law. Both refined completion fibers for this bit pair are nonempty. The original definition retains both independent fallback branches for impossible refinements; the corresponding bit pairs simply have zero mass. The child's exact completion-law marginals and fixed-coordinate property together identify the head of $w$ with the sampled bit pair. If the common zero is at the head, both sampled bits are therefore `false`. Strict order, complement cover, and agreement at farther fixed coordinates make the refined histories satisfy `resetReady`, so the reset argument gives agreement at every remaining scanned position. If the common zero occurs later, strict order, complement cover, and farther fixed agreement pass to the refined histories, and induction applies to the same $w$, including when the child has already reset. For $r=q$, equality follows directly because both values are `false`; an empty scan has no finite index to choose. The full proof is checked by the Lean kernel.
+:::
+
+Under all the hypotheses of [@thm-ch39-p2e-native-supported-coalescence], its conclusion combines with [@thm-ch39-p2e-native-emitted-tail] on the same native joint law to bound pointwise disagreement and finite Hamming cost. Explicitly, retain $k>0$ and $n\in\mathbb N$; let $s$ be duplicate-free, strictly increasing in coordinate value, and enumerate exactly the complement of $F$. The two original completion fibers of the arbitrary histories $x,y$ are nonempty, and $i<t$ implies $x(t)=y(t)$ whenever $i\in s$ and $t\in F$. The histories themselves need not be admissible. Fix
+
+$$
+\begin{aligned}
+m&=|s|,\qquad a=\tfrac12\in\mathbb R_{\ge0}\cup\{\infty\},\\
+P&=P(s,F,x,y,h_x,h_y).
+\end{aligned}
+$$
+
+Throughout, $P$ is the original `prefixCoupling` above, including its initial `resetReady` test, actual completion-representative choices, and both independent fallback branches for impossible refinements. For a zero-based index $q\in\operatorname{Fin}(m)$, define the disagreement indicator and scan cost, with values in the extended nonnegative reals, by
+
+$$
+\begin{aligned}
+D_q(w)&=\mathbf1_{\{w_1(s[q])\ne w_2(s[q])\}},\\
+H_s(w)&=\sum_{q\in\operatorname{Fin}(m)}D_q(w)
+=\operatorname{scanHamming}(s,w).
+\end{aligned}
+$$
+
+$H_s$ counts disagreements only at scanned coordinates; absence of duplicates makes each free coordinate count exactly once. Relative to the paper construction's one-based numbering above, this $q$ corresponds to $j=q+1$. This correspondence of indices does not identify the two joint laws.
+
+Fix $q$ and a complete output with $P(w)\ne0$. A common `false` among the first $q+1$ scanned positions has some zero-based index $r\le q$, so supported coalescence forces agreement at position $q$. Taking the contrapositive gives
+
+$$
+\{w:D_q(w)=1\}\cap\operatorname{supp}(P)
+\subseteq A_{q+1}\cap\operatorname{supp}(P).
+$$
+
+Here $A_j$ retains its preceding definition: it excludes common zeros, permits $(\mathrm{true},\mathrm{true})$, and does not require disagreement at every position. Outside the support, $P(w)=0$, so the weighted term vanishes even where the event inclusion need not hold. Thus every complete output satisfies
+
+$$
+P(w)D_q(w)\le P(w)\mathbf1_{A_{q+1}(w)}.
+$$
+
+Summing these nonnegative terms and applying the tail bound to this same $P$ at $j=q+1\le m$ yields
+
+$$
+\begin{aligned}
+\Pr_P(D_q=1)
+&=\operatorname{mean}(P,D_q)\\
+&\le\operatorname{mean}(P,\mathbf1_{A_{q+1}})
+\le a^{q+1}.
+\end{aligned}
+$$
+
+Now add the pointwise bounds under the same joint law. Both the complete-pair space $W_n\times W_n$ and the scan index set are finite. Writing the nonnegative sum in `mean` as a finite sum, distributing multiplication, and exchanging the two finite sums gives
+
+$$
+\begin{aligned}
+\operatorname{mean}(P,H_s)
+&=\sum_{w\in W_n\times W_n}P(w)
+  \sum_{q\in\operatorname{Fin}(m)}D_q(w)\\
+&=\sum_{q\in\operatorname{Fin}(m)}\operatorname{mean}(P,D_q)\\
+&\le\sum_{q=0}^{m-1}a^{q+1}=1-a^m.
+\end{aligned}
+$$
+
+The final geometric identity uses lawful subtraction in the extended nonnegative reals. First take $b=1/2$ in $\mathbb R_{\ge0}$. The finite geometric-sum identity gives
+
+$$
+\left(\sum_{q=0}^{m-1}b^q\right)(1-b)=1-b^m,
+\qquad 1-b=b.
+$$
+
+Hence $\sum_{q=0}^{m-1}b^{q+1}=1-b^m$. The standard embedding $\mathbb R_{\ge0}\hookrightarrow\mathbb R_{\ge0}\cup\{\infty\}$ preserves finite sums, powers, and truncated subtraction, giving the displayed identity for $a$. Here $b^m\le1$, and every term and the result are finite; no infinite quantity is canceled. The mean calculation uses only finite sums and requires no independence between disagreement events at different positions.
+
+When $m=0$, the pointwise statement is vacuous, $H_s=0$, and the right side is $1-a^0=0$; this includes $n=0$. For a nonempty scan, the endpoint $q=m-1$ uses precisely the whole-scan event $A_m$ and gives $a^m$, retaining the last position. Empty $F$, equal histories $x=y$, an initial reset, and $k=1$ all remain within the same hypotheses, with no exclusion of degenerate cases and no change of coupling.
+
+This is an application of the two cited results to one native joint law; neither Lean declaration individually states these combined inequalities. The two original completion-law marginals of `prefixCoupling` are already established. The remaining step for the actual block refresh below is to identify the relevant completion fibers, their restrictions, and the laws after restoring exterior data with this example's $\mu_B^z$ and $T_B(z,\cdot)$. For left blocks, simultaneous transport of both outputs, support, and events through `Fin.rev` also remains to be supplied. Equality in law between the paper's shared-threshold construction and the native joint law is not supplied here and does not follow from these estimates. The preceding paper derivation therefore retains its boundary as a complete P2E application; no physical identification with an experimental Hamiltonian is established here.
 
 Reverse the scan for a left block. Write $d$ for Hamming distance on full words.
 
