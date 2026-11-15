@@ -221,7 +221,117 @@ One common signing must close the entire cycle. Individually admissible edge ove
 
 To see both directions, identify the real plane isometrically with $\mathbb C$ and represent each unit vector by $z_i$ on the unit circle. The quotient $q_i=z_{i+1}/z_i$ has real part $a_i$, so its argument is $\varepsilon_i\arccos(a_i)$ for one of the two signs, including the real-axis endpoints. The quotient product telescopes to one, and the circle exponential has period $2\pi$, giving the integer winding condition. Conversely, use the prefix products of $\exp(i\varepsilon_i\theta_i)$ as vertex points. The total product is one, so the final edge wraps back to the initial point; cosine evenness gives each prescribed overlap.
 
-This is a written application of the existing circle, inner-product and finite-product APIs, without a separate retained Lean statement or new verification badge for the cycle variant. The full criterion and derivation are in the [source completion Blueprint application](https://github.com/the-omega-institute/trureturing/pull/30905). Classical sources are Eisenberg-Nagy–Laurent–Varvitsiotis, [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2), Definition 1.1 and Lemma 2.1, and Laurent–Varvitsiotis, [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1), Lemma 7; the latter locator refers specifically to v1. No uniqueness, dynamics, probability law, physical realization or larger-dimensional completion criterion is asserted here.
+This is a written application of the existing circle, inner-product and finite-product APIs, without a separate retained Lean statement or new verification badge for the cycle variant. The full criterion and derivation are in the [source completion Blueprint application](https://github.com/the-omega-institute/trureturing/pull/30905). Classical sources are Eisenberg-Nagy–Laurent–Varvitsiotis, [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2), Definition 1.1 and Lemma 2.1, and Laurent–Varvitsiotis, [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1), Lemma 7; the latter locator refers specifically to v1. No uniqueness, dynamics, probability law or physical realization is asserted here; a separate three-dimensional completion criterion is given in [@thm-ch29-cycle-rank-three-completion].
+:::
+
+The planar criterion assigns one of two directions to each edge angle and asks for one common signing that closes the cycle. What changes when the unit vectors may leave a common plane? An individual bound $a_i\in[-1,1]$ still says only that this pair of vectors can exist. The question is whether **all** the edges can close in the **same real three-dimensional space**. The answer replaces the planar signed-angle equation by inequalities for every odd subset of edges.
+
+::: {.theorem #thm-ch29-cycle-rank-three-completion title="Real cycle completion with rank at most three" lean="D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff"}
+Let $n\ge3$ be any natural number, set $I=\operatorname{Fin}n=\{0,\ldots,n-1\}$, and let $\operatorname{next}(i)=i+1\pmod n$. Let $a:I\to\mathbb R$ be any function satisfying $-1\le a_i\le1$ for every $i\in I$, and put $\theta_i=\arccos(a_i)\in[0,\pi]$. The following are equivalent:
+
+1. There is a real matrix $B$ with rows and columns indexed by $I$ such that
+
+   $$
+   \begin{aligned}
+   B&\succeq0,&\operatorname{rank}_{\mathbb R}(B)&\le3,\\
+   B_{ii}&=1,&B_{i,\operatorname{next}(i)}&=a_i\quad(i\in I).
+   \end{aligned}
+   $$
+
+2. Every subset $F\subseteq I$ of odd cardinality satisfies
+
+   $$
+   \sum_{i\in F}\theta_i-\sum_{i\in I\setminus F}\theta_i
+   \le\bigl(|F|_{\mathbb R}-1\bigr)\pi.
+   $$
+
+Here $I\setminus F$ is the complement within the whole of $\operatorname{Fin}n$, and $|F|_{\mathbb R}$ is the finite cardinality $|F|\in\mathbb N$ cast to the real numbers; subtraction on the right is real subtraction. No completion matrix or global vector realization is supplied as a premise. All endpoints $a_i=\pm1$, repeated vectors, realizations that do not span three-dimensional space, and singular completions are included. The rank bound is at most three, not necessarily exactly three.
+:::
+
+::: proof
+We explain the proof through angle constraints, closed chains of unit vectors in one three-dimensional space, and Gram matrices. Let $\vartheta$ be a finite list of angles in $[0,\pi]$. For a subset $F$ of its indices define
+
+$$
+C_{\vartheta}(F)
+=\sum_{i\in F}(\pi-\vartheta_i)
+ +\sum_{i\notin F}\vartheta_i,
+$$
+
+where the second sum runs over all remaining indices of that list. Expanding the expression shows that the odd-subset inequality is exactly $C_{\vartheta}(F)\ge\pi$. Every summand is nonnegative. Two different subsets $F,G$ differ at some index, which contributes $(\pi-\vartheta_i)+\vartheta_i=\pi$ to their combined cost. Thus
+
+$$
+C_{\vartheta}(F)+C_{\vartheta}(G)\ge\pi\qquad(F\ne G).
+$$
+
+**Eliminate two consecutive edges simultaneously.** Write the angle list as $(\alpha,\beta,\vartheta)$, with $R$ the index set of $\vartheta$. We want to replace the first two edges by one edge of angle $\gamma$. The local triangle requires
+
+$$
+0\le\gamma\le\pi,\qquad
+|\alpha-\beta|\le\gamma
+\le\min(\alpha+\beta,\,2\pi-\alpha-\beta).
+$$
+
+This interval alone is insufficient: the same $\gamma$ must satisfy every odd-subset inequality for the shorter list $(\gamma,\vartheta)$. An odd subset that omits the new edge leaves an odd-cardinality $S\subseteq R$ and requires $\gamma\ge\pi-C_{\vartheta}(S)$. A subset that contains the new edge leaves an even-cardinality $S$ and requires $\gamma\le C_{\vartheta}(S)$.
+
+Take the finite maximum
+
+$$
+\begin{aligned}
+M&=\max\Bigl(\{0\}\cup
+ \{\pi-C_{\vartheta}(S):S\subseteq R,\ |S|\text{ is odd}\}\Bigr),\\
+\gamma&=\max(|\alpha-\beta|,M).
+\end{aligned}
+$$
+
+Including $0$ makes the maximum defined even when there is no odd subset. For odd $S$, the original constraints obtained by including neither or both of the first two edges give
+
+$$
+\pi-C_{\vartheta}(S)
+\le\min(\alpha+\beta,\,2\pi-\alpha-\beta).
+$$
+
+For even $S$, including just one of those edges in turn gives $|\alpha-\beta|\le C_{\vartheta}(S)$. For odd $T$ and even $S$, the bound on the combined costs of different subsets gives $\pi-C_{\vartheta}(T)\le C_{\vartheta}(S)$. Consequently this **one** $\gamma$ satisfies all the lower and upper bounds simultaneously. The angle ranges and nonnegative costs also give $0\le\gamma\le\pi$. This transfers the global constraints to a shorter cycle; it does not choose separate, potentially incompatible intermediate angles for individual edges.
+
+**Insert a unit vector in three dimensions.** The triangle interval above is equivalent to requiring that each of $\alpha,\beta,\gamma\in[0,\pi]$ be at most the sum of the other two, with total at most $2\pi$. First take
+
+$$
+\begin{aligned}
+x&=(1,0,0),\\
+y&=(\cos\gamma,\sin\gamma,0),\\
+z(t)&=(\cos\alpha,\sin\alpha\cos t,\sin\alpha\sin t).
+\end{aligned}
+$$
+
+All three vectors have unit norm, and
+
+$$
+\langle y,z(t)\rangle
+=\cos\alpha\cos\gamma+\sin\alpha\sin\gamma\cos t.
+$$
+
+The triangle conditions place $\cos\beta$ between the values at $t=\pi$ and $t=0$, namely $\cos(\alpha+\gamma)$ and $\cos(\alpha-\gamma)$. When $\alpha+\gamma>\pi$, use $\cos(\alpha+\gamma)=\cos(2\pi-\alpha-\gamma)$ and the perimeter bound. Continuity and the intermediate value theorem supply the required $t$. There is no division by $\sin\alpha\sin\gamma$, so vanishing coefficients, coincident endpoints and antipodal endpoints remain covered.
+
+If the shorter chain already has endpoints $x',y'$, their unit norms and inner product $\cos\gamma$ give the same two-vector Gram table as $x,y$. The map sending $x,y$ to $x',y'$ first preserves inner products on their spans, then extends to an ambient isometry of $\mathbb R^3$ by choosing orthonormal bases in the orthogonal complements. This remains valid for linearly dependent endpoints. Apply the isometry to the new vector $z(t)$ and insert it between the old endpoints; every other vector in the old chain stays fixed.
+
+**Closed-chain induction and both directions.** Represent $m$ edges by $m+1$ unit vectors with equal first and last vectors, always in the same $\mathbb R^3$. The induction uses zero and one edge as base cases. For zero edges choose one unit vector. For one edge the only odd subset forces its angle to be zero, so repeat the same vector. For a longer list, simultaneous elimination supplies a shorter list. Construct its closed chain by induction, then insert the removed middle vector using the triangle construction. Equality of the endpoints survives, so the last cyclic edge also has its prescribed inner product. The resulting Gram matrix is $B=X^TX$, where $X$ has three rows. It is positive semidefinite, has diagonal one and all prescribed cyclic entries, and has real rank at most three.
+
+Conversely, factor a matrix $B$ from the first condition into real Gram vectors in the same $\mathbb R^3$, using its PSD property and rank bound. Diagonal one gives unit norms; each edge angle is precisely $\arccos(a_i)$. Remove the middle vector of three consecutive vectors and let $\gamma$ be the angle between the two outer ones. The angle triangle inequality gives the difference lower bound and $\gamma\le\alpha+\beta$. Applying it again after negating the middle vector gives $\gamma\le2\pi-\alpha-\beta$. Induction gives cost at least $\pi$ for every odd subset of the shorter chain. To restore the two edges, classify an original odd subset by whether it contains neither, one, or both of them. The corresponding costs are $\alpha+\beta+C_{\vartheta}(S)$, either $\pi-\alpha+\beta+C_{\vartheta}(S)$ or $\pi+\alpha-\beta+C_{\vartheta}(S)$, and $2\pi-\alpha-\beta+C_{\vartheta}(S)$. The shorter-chain bounds and triangle interval make each at least $\pi$. This recovers **every** original odd-subset condition. The full proof is checked by the Lean kernel.
+:::
+
+The classical source is E.-Nagy–Laurent–Varvitsiotis, [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2), Corollary 2.1, equation (5), and the subsequent discussion of the rank-three bound. Multiplying that paper's normalized angles by $\pi$ gives the inequalities here. See also Laurent–Varvitsiotis, [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1), Lemma 3. This is established mathematics.
+
+Compare [@rem-ch29-planar-cycle-compatibility]: in two dimensions, one signing must make the signed-angle sum belong to $2\pi\mathbb Z$. Three dimensions allow the chain to bend out of a plane, and the complete odd-subset inequalities give the exact criterion. The theorem asserts existence in a fixed three-dimensional space, without a supplied global realization. It specifies no unique completion, probability law, physical dynamics or computational complexity bound. It does not settle the separate question of choosing factors continuously over parameters in [@rem-ch29-continuous-gram-selection].
+
+::: {.example #ex-ch29-cycle-rank-three-sharpness title="Three zero overlaps: a written calculation showing sharpness"}
+**Written illustrative calculation, not a separate theorem carrying a Lean citation.** Take $n=3$ and prescribe $a_0=a_1=a_2=0$ on the three cyclic edges. Then $\theta_0=\theta_1=\theta_2=\pi/2$. The odd subsets are singletons and the full set. Their inequalities read $-\pi/2\le0$ and $3\pi/2\le2\pi$, respectively, so the three-dimensional criterion holds.
+
+Any real PSD completion is symmetric. The three cyclic edges already specify every pair of distinct indices; together with diagonal one they force
+
+$$
+B=I_3=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}.
+$$
+
+Since $\det I_3=1$, its rank is three, so no completion of rank at most two exists. On the other hand, $I_3$ itself is PSD and is the Gram matrix of the standard orthonormal basis $e_1,e_2,e_3\in\mathbb R^3$, so the three-dimensional bound is attained. The planar criterion gives the same obstruction: a sum of three terms $\pm\pi/2$ cannot be an integer multiple of $2\pi$. Thus the uniform bound three cannot be replaced by two for all cycle data. This does not say that every completable input must attain rank three.
 :::
 
 ::: {.viz src="gram-causal-elliptope" preset="narrow" height="500"}

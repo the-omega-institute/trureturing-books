@@ -221,7 +221,117 @@ $$
 
 两个方向可如下看出。把实平面等距认作 $\mathbb C$，用单位圆上的 $z_i$ 表示单位向量。商 $q_i=z_{i+1}/z_i$ 的实部为 $a_i$，故其辐角可写成某个符号下的 $\varepsilon_i\arccos(a_i)$，实轴端点也包括在内。商的乘积望远镜相消为一，圆周指数的周期为 $2\pi$，于是得到整数绕行条件。反过来，以 $\exp(i\varepsilon_i\theta_i)$ 的前缀积作为顶点。总乘积为一，保证最后一条边回到起点；余弦的偶性给出每个指定重叠。
 
-这是现有圆周、内积与有限乘积接口的书面应用，不为环图变体另立保留的 Lean 声明或新增验证徽章。完整判据与推导见源仓补全结果的 [Blueprint 应用说明](https://github.com/the-omega-institute/trureturing/pull/30905)。经典来源为 Eisenberg-Nagy–Laurent–Varvitsiotis 的 [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2)，定义 1.1、引理 2.1，以及 Laurent–Varvitsiotis 的 [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1)，引理 7；后者定位专指 v1。这里不主张唯一性、动力学、概率律、物理实现或更高维补全判据。
+这是现有圆周、内积与有限乘积接口的书面应用，不为环图变体另立保留的 Lean 声明或新增验证徽章。完整判据与推导见源仓补全结果的 [Blueprint 应用说明](https://github.com/the-omega-institute/trureturing/pull/30905)。经典来源为 Eisenberg-Nagy–Laurent–Varvitsiotis 的 [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2)，定义 1.1、引理 2.1，以及 Laurent–Varvitsiotis 的 [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1)，引理 7；后者定位专指 v1。这里不主张唯一性、动力学、概率律或物理实现；三维补全的另一判据见 [@thm-ch29-cycle-rank-three-completion]。
+:::
+
+平面判据把每条边的转角分成正负两个方向，再要求同一套符号绕环闭合。若允许单位向量离开同一平面，约束会怎样改变？单条边的 $a_i\in[-1,1]$ 仍只说明这一对向量可以存在；真正的问题是，所有边能否在**同一个实三维空间**里同时闭合。答案不再要求平面的带符号角度和为整周，而由全部奇数子集的角度不等式给出。
+
+::: {.theorem #thm-ch29-cycle-rank-three-completion title="环图的秩至多三实半正定补全判据" lean="D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff"}
+任取自然数 $n\ge3$，令 $I=\operatorname{Fin}n=\{0,\ldots,n-1\}$，$\operatorname{next}(i)=i+1\pmod n$。给定任意函数 $a:I\to\mathbb R$，满足对每个 $i\in I$ 都有 $-1\le a_i\le1$，并记 $\theta_i=\arccos(a_i)\in[0,\pi]$。以下两项等价：
+
+1. 存在以 $I$ 为行列指标的实矩阵 $B$，满足
+
+   $$
+   \begin{aligned}
+   B&\succeq0,&\operatorname{rank}_{\mathbb R}(B)&\le3,\\
+   B_{ii}&=1,&B_{i,\operatorname{next}(i)}&=a_i\quad(i\in I).
+   \end{aligned}
+   $$
+
+2. 对每个基数为奇数的子集 $F\subseteq I$，都有
+
+   $$
+   \sum_{i\in F}\theta_i-\sum_{i\in I\setminus F}\theta_i
+   \le\bigl(|F|_{\mathbb R}-1\bigr)\pi.
+   $$
+
+这里 $I\setminus F$ 是在整个 $\operatorname{Fin}n$ 内取的补集，$|F|_{\mathbb R}$ 表示将有限基数 $|F|\in\mathbb N$ 转为实数；右侧的减法是实数减法。条件中没有预先给定补全矩阵或整体向量实现。所有端点 $a_i=\pm1$、重复向量、不张满三维空间的实现与奇异补全均包括在内；秩界是至多三，不要求恰好为三。
+:::
+
+::: proof
+以下按角度条件、同一三维空间中的闭合单位向量链、Gram 矩阵三步解释证明。设有限角度列表 $\vartheta$ 的每个分量都在 $[0,\pi]$。对其指标子集 $F$ 定义
+
+$$
+C_{\vartheta}(F)
+=\sum_{i\in F}(\pi-\vartheta_i)
+ +\sum_{i\notin F}\vartheta_i,
+$$
+
+其中第二个和遍历该列表的其余全部指标。展开后，奇数子集不等式恰好是 $C_{\vartheta}(F)\ge\pi$。每一项非负；而两个不同子集 $F,G$ 至少在一个指标上选择不同，该指标对两个代价之和贡献 $(\pi-\vartheta_i)+\vartheta_i=\pi$，因此
+
+$$
+C_{\vartheta}(F)+C_{\vartheta}(G)\ge\pi\qquad(F\ne G).
+$$
+
+**同时消去两条相邻边。** 把角度列表写成 $(\alpha,\beta,\vartheta)$，$\vartheta$ 的指标集记为 $R$。希望用一条角度为 $\gamma$ 的边代替前两条边。局部三角形要求
+
+$$
+0\le\gamma\le\pi,\qquad
+|\alpha-\beta|\le\gamma
+\le\min(\alpha+\beta,\,2\pi-\alpha-\beta).
+$$
+
+但仅满足这个区间还不够：同一个 $\gamma$ 必须使较短列表 $(\gamma,\vartheta)$ 的全部奇数子集不等式成立。若奇数子集不含新边，其余指标组成奇数基数的 $S\subseteq R$，条件为 $\gamma\ge\pi-C_{\vartheta}(S)$；若包含新边，其余指标组成偶数基数的 $S$，条件为 $\gamma\le C_{\vartheta}(S)$。
+
+取有限最大值
+
+$$
+\begin{aligned}
+M&=\max\Bigl(\{0\}\cup
+ \{\pi-C_{\vartheta}(S):S\subseteq R,\ |S|\text{ 为奇数}\}\Bigr),\\
+\gamma&=\max(|\alpha-\beta|,M).
+\end{aligned}
+$$
+
+这里加入 $0$，所以即使没有奇数子集，最大值仍有定义。原列表的奇数条件，对奇数 $S$ 分别选入前两条边的零条或两条，给出
+
+$$
+\pi-C_{\vartheta}(S)
+\le\min(\alpha+\beta,\,2\pi-\alpha-\beta).
+$$
+
+对偶数 $S$ 分别只选入前两条边中的一条，则给出 $|\alpha-\beta|\le C_{\vartheta}(S)$。再对奇数 $T$ 与偶数 $S$ 使用不同子集的代价和下界，得到 $\pi-C_{\vartheta}(T)\le C_{\vartheta}(S)$。所以这个**同一个** $\gamma$ 同时满足全部上下界；由角度范围与代价非负，还得到 $0\le\gamma\le\pi$。这一步把全环约束传给较短的环，而不是逐条边各自选择一个互不相容的中间角。
+
+**在三维中插回一个单位向量。** 上面的三角区间等价于三条角度 $\alpha,\beta,\gamma\in[0,\pi]$ 各不超过其余两条之和，且总和不超过 $2\pi$。先取
+
+$$
+\begin{aligned}
+x&=(1,0,0),\\
+y&=(\cos\gamma,\sin\gamma,0),\\
+z(t)&=(\cos\alpha,\sin\alpha\cos t,\sin\alpha\sin t).
+\end{aligned}
+$$
+
+三者都是单位向量，且
+
+$$
+\langle y,z(t)\rangle
+=\cos\alpha\cos\gamma+\sin\alpha\sin\gamma\cos t.
+$$
+
+三角条件保证 $\cos\beta$ 位于 $t=\pi$ 与 $t=0$ 时的值 $\cos(\alpha+\gamma)$ 和 $\cos(\alpha-\gamma)$ 之间；当 $\alpha+\gamma>\pi$ 时，用 $\cos(\alpha+\gamma)=\cos(2\pi-\alpha-\gamma)$ 和周长上界处理。连续性与介值定理便给出所需的 $t$。这不除以 $\sin\alpha\sin\gamma$，故系数为零、端点重合或对径时仍适用。
+
+若较短链中的实际端点是 $x',y'$，它们的单位范数与内积 $\cos\gamma$ 使二元 Gram 表与 $x,y$ 相同。把 $x,y$ 送到 $x',y'$ 的映射先在其张成空间上保持内积，再通过正交补上的正交基扩张为 $\mathbb R^3$ 的环境等距。即使端点线性相关，这一步仍成立。将该等距作用于新向量 $z(t)$，即可在原端点之间插入新点；旧链的其他向量全部保持不动。
+
+**闭链归纳与两个方向。** 用首尾相同的 $m+1$ 个单位向量表示 $m$ 条边的闭链，所有向量始终在同一个 $\mathbb R^3$ 内。归纳使用零边与一边作基例：零边取一个单位向量；一边时唯一奇数子集迫使该角为零，重复同一向量即可。对更长列表，同时消元给出较短列表，归纳构造其闭链，再按上面的三角形插回被删去的中间向量。末端与起点的相等关系保留，所以最后一条循环边也满足指定内积。对所得向量族取 Gram 矩阵 $B=X^TX$，其中 $X$ 只有三行，就得到半正定性、对角元一、全部指定循环边及 $\operatorname{rank}_{\mathbb R}(B)\le3$。
+
+反过来，给定第一项中的 $B$，实半正定 Gram 分解与秩界将其分解为同一 $\mathbb R^3$ 内的向量；对角元一保证单位范数。每条边的角度正是 $\arccos(a_i)$。在三个连续向量中删去中间向量，令 $\gamma$ 为两个外端点的夹角。角度三角不等式给出差角下界与 $\gamma\le\alpha+\beta$；将中间向量取负后再用三角不等式，得到 $\gamma\le2\pi-\alpha-\beta$。归纳得较短闭链的奇数代价均至少为 $\pi$。恢复两条边时，按一个奇数子集包含被删两边的零条、一条或两条分类，所需代价分别是 $\alpha+\beta+C_{\vartheta}(S)$、$\pi-\alpha+\beta+C_{\vartheta}(S)$ 或 $\pi+\alpha-\beta+C_{\vartheta}(S)$、$2\pi-\alpha-\beta+C_{\vartheta}(S)$；较短链的上下界与三角区间保证它们均至少为 $\pi$。这恢复了原列表的**全部**奇数子集条件。完整证明由 Lean 内核检查。
+:::
+
+经典来源是 E.-Nagy–Laurent–Varvitsiotis 的 [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2)，推论 2.1 的式 (5) 及其后关于三维秩界的讨论：将文中的归一化角度乘以 $\pi$，即得这里的角度不等式；另见 Laurent–Varvitsiotis 的 [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1)，引理 3。这里陈述的是既有数学结果。
+
+与 [@rem-ch29-planar-cycle-compatibility] 相比，二维要求存在一套使带符号角度和属于 $2\pi\mathbb Z$ 的符号；三维允许折出平面，精确条件改由全部奇数子集不等式表达。定理给出固定三维空间中的存在性，没有预设整体实现，也不指定唯一补全、概率律、物理动力学或算法复杂度。它不解决 [@rem-ch29-continuous-gram-selection] 中随参数连续选取因子的另一个问题。
+
+::: {.example #ex-ch29-cycle-rank-three-sharpness title="三个零重叠：三维上界的书面锐度算例"}
+**书面说明性计算，不是另一个带 Lean 引用的定理。** 取 $n=3$，三条循环边均指定 $a_0=a_1=a_2=0$。此时 $\theta_0=\theta_1=\theta_2=\pi/2$。奇数子集只有单点集与全集：前者的不等式为 $-\pi/2\le0$，后者为 $3\pi/2\le2\pi$，所以三维条件成立。
+
+任意实半正定补全都是对称矩阵；三个循环边已经给出三对不同指标之间的全部条目，连同对角元一，强制
+
+$$
+B=I_3=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}.
+$$
+
+$\det I_3=1$，故其秩为三，不能有秩至多二的补全。另一方面，$I_3$ 本身半正定，标准正交基 $e_1,e_2,e_3\in\mathbb R^3$ 的 Gram 矩阵就是它，因此三维界确实达到。这也能从平面判据看出：三个 $\pm\pi/2$ 的和不可能是 $2\pi$ 的整数倍。这个例子说明统一上界三不能对所有循环数据改成二，并不说每个可补全输入都必须达到秩三。
 :::
 
 ::: {.viz src="gram-causal-elliptope" preset="narrow" height="500"}

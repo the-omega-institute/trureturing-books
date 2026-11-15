@@ -3,25 +3,25 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 205,
+    "theorem": 206,
     "lemma": 34,
     "proposition": 45,
     "corollary": 31,
     "definition": 48,
     "conjecture": 6,
     "problem": 3,
-    "example": 124,
+    "example": 125,
     "remark": 204,
-    "proof": 310,
-    "lean_verified": 312,
+    "proof": 311,
+    "lean_verified": 313,
     "written_proof": 3,
     "literature": 198
   },
-  "total": 674,
+  "total": 675,
   "kinds": {
     "def": 201,
     "inductive": 11,
-    "theorem": 462
+    "theorem": 463
   },
   "groups": {
     "theorems": [
@@ -199,6 +199,7 @@
       "D5/S3/PrimeForms/SumTwoSquaresClassification.eq_sq_add_sq_iff_even_factorization",
       "D5/S3/PrimeForms/ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq",
       "D5/S3/QuadraticForms/ChordalPsdCompletion.exists_posSemidef_completion",
+      "D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff",
       "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le",
       "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem",
       "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula",
@@ -4024,13 +4025,13 @@
         },
         {
           "file": "ch29-s03-timeless-gram-causality.md",
-          "line": 254,
+          "line": 364,
           "id": "thm-ch29-gram-rigidity-and-pell",
           "via": "environment"
         },
         {
           "file": "ch29-s03-timeless-gram-causality.md",
-          "line": 257,
+          "line": 367,
           "id": "",
           "via": "inline"
         },
@@ -12190,6 +12191,18 @@
         }
       ]
     },
+    "D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff": {
+      "kind": "theorem",
+      "name": "D5.S3.QuadraticForms.CycleRankThreePsdCompletion.cycle_rank_three_iff",
+      "citations": [
+        {
+          "file": "ch29-s03-timeless-gram-causality.md",
+          "line": 229,
+          "id": "thm-ch29-cycle-rank-three-completion",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le": {
       "kind": "theorem",
       "name": "D5.S3.QuadraticForms.RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le",
@@ -17386,7 +17399,7 @@
         },
         {
           "file": "ch29-s03-timeless-gram-causality.md",
-          "line": 254,
+          "line": 364,
           "id": "thm-ch29-gram-rigidity-and-pell",
           "via": "environment"
         },
@@ -17398,7 +17411,7 @@
         },
         {
           "file": "ch29-s03-timeless-gram-causality.md",
-          "line": 263,
+          "line": 373,
           "id": "",
           "via": "inline"
         },
@@ -23515,6 +23528,7 @@
       "environment": [
         "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm",
         "D5/S3/QuadraticForms/ChordalPsdCompletion.exists_posSemidef_completion",
+        "D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff",
         "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le",
         "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
       ],
