@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ARITH//SCHUR · Scalar Schur elimination on the divisor graph">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ARITH//SCHUR · 整除图上的标量舒尔消元</title>
+<meta name="description" content="同一组终端上的舒尔补与消元次序无关，填充与运算量却随次序而变；丢弃小元只是近似，反复平方也不保证放大。The Schur complement on fixed terminals does not depend on the elimination order, while fill and work do; dropping small entries is only an approximation, and repeated squaring guarantees no amplification.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="arithmetic-schur-lab">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ARITH//SCHUR">ARITH<b>//</b>SCHUR</h1>
+      <div class="tagline">
+        <span class="zh">整除图上的标量舒尔消元 · <em>终端上的舒尔补与消元次序无关；填充与运算量却随次序而变。丢弃小元只是近似，反复平方也不保证放大。</em>数值演示，不是证明。</span>
+        <span class="en">Scalar Schur elimination on the divisor graph · <em>the Schur complement on the terminals does not depend on the order; fill and work do. Dropping small entries is only an approximation, and repeated squaring guarantees no amplification.</em> A numerical illustration, not a proof.</span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillParam">N <strong>—</strong></span>
+      <span class="pill hot" id="pillKey">fill <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验卡" data-aria-en="Experiment cards">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§34.18</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="natural" aria-pressed="false"><span class="code">NATURAL</span><span class="cn zh">自然次序：先消 2，4 与 6 之间长出填充</span><span class="cn en">Natural order: 2 first, a fill grows between 4 and 6</span></button>
+        <button class="preset" data-preset="leaf" aria-pressed="false"><span class="code">LEAF</span><span class="cn zh">叶优先：先消 4，没有填充，舒尔补相同</span><span class="cn en">Leaf first: 4 first, no fill, the same Schur complement</span></button>
+        <button class="preset" data-preset="drop" aria-pressed="false"><span class="code">DROP</span><span class="cn zh">丢掉小于 ε 的元：残差离开舍入量级</span><span class="cn en">Drop entries below ε: the residual leaves roundoff</span></button>
+        <button class="preset" data-preset="square" aria-pressed="false"><span class="code">SQUARE</span><span class="cn zh">反复平方：变稠，却不放大</span><span class="cn en">Repeated squaring: denser, not amplified</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="三维整除图：顶点按 (v₂(n), v₃(n), log 余因子) 摆放，原边、填充边与当前主元" data-aria-en="3D divisor graph: vertices placed at (v₂(n), v₃(n), log of the cofactor), original edges, fill edges and the current pivot">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="elim" aria-pressed="true"><span class="zh">消元</span><span class="en">Eliminate</span></button><button class="chip" data-scene="square" aria-pressed="false"><span class="zh">平方</span><span class="en">Square</span></button>
+      </div>
+      <button type="button" class="handle" id="handle" aria-label="拖动手柄" data-aria-en="Drag the handle" hidden></button>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel"><div class="head"><h2 id="plotATitle"></h2><span id="plotAMeta"></span></div><canvas id="plotA" aria-label="条带小图一" data-aria-en="Strip plot one"></canvas></section>
+      <section class="panel"><div class="head"><h2 id="plotBTitle"></h2><span id="plotBMeta"></span></div><canvas id="plotB" aria-label="条带小图二" data-aria-en="Strip plot two"></canvas></section>
+    </div>
+  </main>
+
+  <aside class="col side" id="evidence" aria-label="控制、读数与依据" data-aria-en="Controls, readouts and evidence">
+    <button class="chip" id="infoBtn"><span class="zh">理论接口 · 这不是证明</span><span class="en">Theory interface · not a proof</span></button>
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">参数</span><span class="en">Parameters</span><span class="aside">G = L + αI · α = 0.25</span></h2>
+      <div class="field"><label for="size"><span class="zh">顶点 2…N</span><span class="en">Vertices 2…N</span><small class="zh">终端：4n &gt; 3N</small><small class="en">terminals: 4n &gt; 3N</small></label><output id="oSize" for="size">12</output><input type="range" id="size" min="6" max="24" step="1" value="12"></div>
+      <div class="grp" data-scene="elim">
+        <div class="chips" id="orderChips" role="group" aria-label="消元次序" data-aria-en="Elimination order"><button class="chip" data-order="natural" aria-pressed="true"><span class="zh">自然次序</span><span class="en">Natural</span></button><button class="chip" data-order="leaf" aria-pressed="false"><span class="zh">叶优先</span><span class="en">Leaf first</span></button></div>
+        <div class="field"><label for="eps"><span class="zh">丢弃阈值 ε</span><span class="en">Drop threshold ε</span><small class="zh">只作用于最终舒尔补的非对角元</small><small class="en">final Schur off-diagonals only</small></label><output id="oEps" for="eps">0.000</output><input type="range" id="eps" min="0" max="0.5" step="0.005" value="0"></div>
+        <p class="note"><span class="zh">时间轴是消元步数 k；也可把琥珀环拖到另一个待消顶点上。</span><span class="en">The rail is the step k; or drag the amber ring onto another vertex of the order.</span></p>
+      </div>
+      <div class="grp" data-scene="square" hidden>
+        <div class="field"><label for="depth"><span class="zh">平方次数 d（时间轴同步）</span><span class="en">Squarings d (the rail follows)</span><small class="zh">也可拖标尺上的琥珀环</small><small class="en">or drag the amber ring on the gauge</small></label><output id="oDepth" for="depth">3</output><input type="range" id="depth" min="0" max="6" step="1" value="3"></div>
+      </div>
+    </section>
+    <section class="panel sec" id="readouts">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">NUM</span></h2>
+      <dl class="ro" id="roList"></dl>
+      <p class="note" id="roNote"></p>
+    </section>
+    <section class="panel sec" id="leanPanel">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">NUM · MODEL · ARGUED · OPEN</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面当场算出：G = L + αI、逐步的标量舒尔更新及其中的乘、减、除次数、填充、最小主元、b = e<sub>N</sub> 沿消元的约化与回代、原方程残差 ‖Gx − b‖、丢弃后的弗罗贝尼乌斯范数与残差、P 的 2<sup>d</sup> 次幂的非零元与行和。资源计数的范围：消元只计舒尔更新本身，不含建 G、约化 b、终端求解、回代、残差、缓存与绘制；平方只计所示算法的 d 次稠密乘积，n² 是一个输出矩阵的元数。页面一次算好并缓存 d = 0…6 的全部层，这些计数不是页面的总工作量或总存储，也不是运行时间的断言。数值演示，不是证明。</span><span class="en">Computed live: G = L + αI, every scalar Schur update with the multiplications, subtractions and divisions in it, the fill, the smallest pivot, b = e<sub>N</sub> reduced along the elimination and back-substituted, the residual ‖Gx − b‖ of the original system, the discarded Frobenius norm and residual after dropping, the nonzeros and row sums of P to the power 2<sup>d</sup>. The scope of the resource counts: elimination counts the Schur updates only, not building G, reducing b, the terminal solve, back substitution, the residual, caches or painting; squaring counts the d dense products of the displayed algorithm, and n² is the number of entries of one output matrix. The page computes and caches all levels d = 0…6 at once, so these counts are neither the total work nor the total storage of the page, and no running-time claim is made. A numerical illustration, not a proof.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">整除图、α = 0.25、终端 4n &gt; 3N、b = e<sub>N</sub>、顶点的位置与叶优先的平局规则都是画面的选择。舒尔补恒等式是代数事实，与稀疏性和复杂度无关；丢弃之后不保证半正定，也没有自动的误差定理。反复平方可以收缩、不放大，不保证“共振爆发”；与黎曼猜想的类比是有条件的类比。</span><span class="en">The divisor graph, α = 0.25, the terminals 4n &gt; 3N, b = e<sub>N</sub>, the vertex positions and the tie rule of leaf-first are choices for the picture. The Schur identity is algebra, not a statement about sparsity or complexity; after dropping, positive semidefiniteness is not certified and no error theorem applies automatically. Repeated squaring may contract and does not amplify, so no “resonance explosion” is guaranteed; the analogy with the Riemann hypothesis is conditional.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：Burnol（<a href="https://arxiv.org/abs/math/0103058v2" target="_blank" rel="noopener">arXiv:math/0103058v2</a>）定理 1.3 处理的是 D<sub>λ</sub>：χ = 1<sub>(0,1)</sub> 到由 x ↦ {θ/x}（λ ≤ θ ≤ 1，{·} 为分数部分）张成的连续伸缩空间 B<sub>λ</sub> 的距离；它给出 λ → 0<sup>+</sup> 时关于 D<sub>λ</sub> 的 liminf 下界，不是有限整数格拉姆问题，也不是任何有限 N 的等式；<a href="https://arxiv.org/abs/1207.6583v3" target="_blank" rel="noopener">arXiv:1207.6583v3</a> 中的 4/7 只在该文所述范围内成立，不是物理的墙。</span><span class="en">Literature results, not formalized in this book: Theorem 1.3 of Burnol (<a href="https://arxiv.org/abs/math/0103058v2" target="_blank" rel="noopener">arXiv:math/0103058v2</a>) concerns D<sub>λ</sub>, the distance from χ = 1<sub>(0,1)</sub> to the continuous-dilation span B<sub>λ</sub> of x ↦ {θ/x}, λ ≤ θ ≤ 1 ({·} the fractional part); it gives a lower bound for a liminf involving D<sub>λ</sub> as λ → 0<sup>+</sup>, not the finite integer Gram problem and not an equality at any finite N; the 4/7 of <a href="https://arxiv.org/abs/1207.6583v3" target="_blank" rel="noopener">arXiv:1207.6583v3</a> holds within the scope stated there and is not a physical wall.</span></span></div>
+      <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">开放问题：黎曼猜想。页面上的有限矩阵计算与它没有推出关系，不作任何断言。</span><span class="en">Open problem: the Riemann hypothesis. The finite matrix computations of this page imply nothing about it, and the page asserts nothing.</span></span></div>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="3" step="any" value="1" aria-label="时间轴" data-aria-en="Rail">
+    </div>
+    <div class="keys"><kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一步</span><span class="en">one step</span> · <span class="zh">拖空白处转视角</span><span class="en">drag empty space to orbit</span></div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 整除图上的标量舒尔消元</span><span class="en">Theory interface · scalar Schur elimination on the divisor graph</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">这是数值演示，不是证明。页面在一个有限的整除图上逐个标量地做消元，每个数都由页面算出（NUM）。</p>
+      <ol>
+        <li><b>图与矩阵。</b>顶点 2…N（N ∈ [6, 24]），d 与 n 互不相等且 d | n 时连一条边。W 是邻接矩阵，L = diag(deg) − W，G = L + αI，α = 0.25，于是 G 正定。顶点 n 放在 (v₂(n), v₃(n), log(n/2<sup>v₂</sup>3<sup>v₃</sup>))：三个坐标一起唯一确定 n，没有两个顶点重合；坐标各自居中缩放。</li>
+        <li><b>终端与消元。</b>终端是 4n &gt; 3N 的顶点，两种次序都保留它们，只消去其余顶点。消去主元 p 时，对它的每一对邻居 i、j 做 G<sub>ij</sub> ← G<sub>ij</sub> − G<sub>ip</sub>G<sub>pj</sub>/G<sub>pp</sub>；原来为零的位置变成非零就是一条填充边。自然次序按标号从小到大；叶优先每步取当前度数最小的顶点，平局取标号大的。N = 6、终端 {5, 6} 时，自然次序先消 2，它的邻居 4 与 6 之间长出填充；叶优先先消 4（与 3 同为叶，取标号大的），再消 3、2，没有任何填充。页面数的运算只是这些舒尔更新：每个邻居一次除法，每对邻居一次乘法与一次减法；建 G、约化 b、终端求解、回代、残差、缓存与绘制都不计入。</li>
+        <li><b>舒尔补与次序无关。</b>终端上的舒尔补 S = G<sub>TT</sub> − G<sub>TE</sub>G<sub>EE</sub><sup>−1</sup>G<sub>ET</sub> 是代数恒等式，与消元次序无关；两种次序得到同一个 S（差在舍入量级）。填充、非零元个数与运算次数却随次序而变；这只是这个例子里看到的，不是复杂度定理。</li>
+        <li><b>求解与残差。</b>b = e<sub>N</sub>（最大标号）。b 沿消元同样约化，解 S x<sub>T</sub> = b<sub>T</sub>，再按相反次序回代，最后在原来的 G 上算 ‖Gx − b‖：精确消元时它在舍入量级。</li>
+        <li><b>丢弃。</b>把最终 S 中 |S<sub>ij</sub>| &lt; ε 的非对角元对称地置零，对角元不动，记下丢掉部分的弗罗贝尼乌斯范数，用它求解并回代，再算原方程的残差。DROP 卡取 N = 16、终端 13…16：最终 S 的三个耦合约为 −0.125、−0.417、−0.285，ε = 0.2 只丢掉 14 与 15 之间的那一个，丢掉的范数与原方程残差都明显不为零。N = 12（终端 10、11、12）时唯一的耦合约为 −0.542，ε ≤ 0.5 一个也丢不掉。这是近似：页面不证明丢弃后的矩阵半正定，也不给误差界。</li>
+        <li><b>反复平方。</b>P = I − τL，τ = 1/(1 + 最大度数)：P 非负、行和为 1。做 d 次稠密乘法得到 P<sup>2<sup>d</sup></sup>：所示算法的这 d 次稠密乘积共 d·n³ 次乘法与 d·n²(n − 1) 次加法；n² 是一个输出矩阵的元数，不是浏览器、缓存或工作区的总存储。页面实际一次算好并缓存 d = 0…6 的全部层，所以这些计数不是页面的总工作量，也不构成任何运行时间复杂度的断言。非负且行随机的矩阵谱半径 ≤ 1，这是标准的界，页面只核对行和与非负性，不是数值证明。平方可以让权重摊开、收缩，不会放大，所以不保证任何“共振爆发”。</li>
+        <li><b>文献的边界。</b>Burnol（arXiv:math/0103058v2）定理 1.3 的对象是 D<sub>λ</sub>，即 χ = 1<sub>(0,1)</sub> 到由 x ↦ {θ/x}（λ ≤ θ ≤ 1）张成的连续伸缩空间 B<sub>λ</sub> 的距离，结论是 λ → 0<sup>+</sup> 时关于 D<sub>λ</sub> 的 liminf 下界；它不是本页这类有限整数格拉姆问题，也不是任何有限 N 的等式。arXiv:1207.6583v3 中的 4/7 只在该文所述范围内成立，不是物理的墙。页面不承诺热带（min-plus）计算百分之百精确，也不承诺 MERA 的多项式代价；与黎曼猜想的联系只是有条件的类比。</li>
+      </ol>
+      <p class="lede refs">来源：<a href="https://arxiv.org/abs/math/0103058v2" target="_blank" rel="noopener">arXiv:math/0103058v2</a> · <a href="https://arxiv.org/abs/1207.6583v3" target="_blank" rel="noopener">arXiv:1207.6583v3</a>。书中：<a href="../../zh/ch34-s18-gram-window-and-consensus.html#sec-ch34-18-5" target="_top">§34.18 格拉姆窗口、舒尔补可行走廊与多观察者共识</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">This is a numerical illustration, not a proof. The page eliminates scalar by scalar on a finite divisor graph, and every number is computed on the page (NUM).</p>
+      <ol>
+        <li><b>Graph and matrix.</b> Vertices 2…N (N ∈ [6, 24]), with an edge between unequal d and n when d | n. W is the adjacency matrix, L = diag(deg) − W and G = L + αI with α = 0.25, so G is positive definite. Vertex n sits at (v₂(n), v₃(n), log(n/2<sup>v₂</sup>3<sup>v₃</sup>)): the three coordinates together determine n, so no two vertices coincide; each coordinate is centred and scaled on its own.</li>
+        <li><b>Terminals and elimination.</b> The terminals are the vertices with 4n &gt; 3N; both orders keep them and eliminate only the others. Eliminating the pivot p updates every pair of its neighbours i, j by G<sub>ij</sub> ← G<sub>ij</sub> − G<sub>ip</sub>G<sub>pj</sub>/G<sub>pp</sub>; a position that was zero and becomes nonzero is a fill edge. The natural order goes up by label; leaf-first takes at each step a vertex of smallest current degree, ties going to the larger label. For N = 6 with terminals {5, 6}, the natural order eliminates 2 first and a fill grows between its neighbours 4 and 6; leaf-first eliminates 4 first (a leaf like 3, the larger label), then 3 and 2, with no fill at all. The operations the page counts are these Schur updates only: one division per neighbour, one multiplication and one subtraction per pair of neighbours; building G, reducing b, the terminal solve, back substitution, the residual, caches and painting are not counted.</li>
+        <li><b>The Schur complement does not depend on the order.</b> The Schur complement on the terminals, S = G<sub>TT</sub> − G<sub>TE</sub>G<sub>EE</sub><sup>−1</sup>G<sub>ET</sub>, is an algebraic identity, independent of the order of elimination: both orders give the same S (up to rounding). The fill, the number of nonzeros and the operation counts do depend on the order; that is what this example shows, not a complexity theorem.</li>
+        <li><b>Solve and residual.</b> b = e<sub>N</sub> (the largest label). b is reduced along the same elimination, S x<sub>T</sub> = b<sub>T</sub> is solved, the eliminated unknowns are back-substituted in reverse order, and ‖Gx − b‖ is computed with the original G: with exact elimination it is at rounding level.</li>
+        <li><b>Dropping.</b> The off-diagonal entries of the final S with |S<sub>ij</sub>| &lt; ε are set to zero symmetrically, the diagonal is kept, the Frobenius norm of what was dropped is recorded, and the system is solved and back-substituted with it before the residual of the original system is computed. The DROP card takes N = 16 with terminals 13…16: the final S has three couplings, about −0.125, −0.417 and −0.285, and ε = 0.2 drops only the one between 14 and 15, so the dropped norm and the residual of the original system are both visibly nonzero. At N = 12 (terminals 10, 11, 12) the only coupling is about −0.542, and no ε ≤ 0.5 drops anything. This is an approximation: the page does not prove the dropped matrix positive semidefinite and gives no error bound.</li>
+        <li><b>Repeated squaring.</b> P = I − τL with τ = 1/(1 + the largest degree): P is nonnegative with row sums 1. d dense products give P<sup>2<sup>d</sup></sup>: these d dense products of the displayed algorithm take d·n³ scalar multiplications and d·n²(n − 1) additions; n² is the number of entries of one output matrix, not the total storage of the browser, the caches or the working memory. The page actually computes and caches all levels d = 0…6 at once, so these counts are not the total work of the page and make no running-time complexity claim. A nonnegative row-stochastic matrix has spectral radius ≤ 1; this is the standard bound, and the page only checks the row sums and the signs, which is not a numerical proof. Squaring may spread and contract the weights and does not amplify them, so no “resonance explosion” is guaranteed.</li>
+        <li><b>The scope of the literature.</b> Theorem 1.3 of Burnol (arXiv:math/0103058v2) concerns D<sub>λ</sub>, the distance from χ = 1<sub>(0,1)</sub> to the continuous-dilation span B<sub>λ</sub> of x ↦ {θ/x}, λ ≤ θ ≤ 1, and proves a lower bound for a liminf involving D<sub>λ</sub> as λ → 0<sup>+</sup>; it is not a finite integer Gram problem like this page's, nor an equality at any finite N. The 4/7 of arXiv:1207.6583v3 holds within the scope stated there and is not a physical wall. The page promises neither 100% exact tropical (min-plus) computation nor a polynomial cost for MERA; its link to the Riemann hypothesis is a conditional analogy only.</li>
+      </ol>
+      <p class="lede refs">Sources: <a href="https://arxiv.org/abs/math/0103058v2" target="_blank" rel="noopener">arXiv:math/0103058v2</a> · <a href="https://arxiv.org/abs/1207.6583v3" target="_blank" rel="noopener">arXiv:1207.6583v3</a>. In the book: <a href="../../en/ch34-s18-gram-window-and-consensus.html#sec-ch34-18-5" target="_top">§34.18 The Gram window, the Schur feasibility corridor and multi-observer consensus</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

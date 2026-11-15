@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "a952d7114a19b77e1f9c0e4b07f45bc3db2bc673f8040eef38c3ed6d76239fc2",
+      "output": "4a757754d9fb2e5b460ea2003701c9b8be7dc2f7e1d90e1727b67a586d1e2727"
+    },
+    "fig-domain.zh.jpg": {
+      "input": "a952d7114a19b77e1f9c0e4b07f45bc3db2bc673f8040eef38c3ed6d76239fc2",
+      "output": "3fafd95e3338a742678f0e8144b760d9b0faab6fecdeeef4cb747e1f62b8d34d"
+    },
+    "fig-partial.zh.jpg": {
+      "input": "a952d7114a19b77e1f9c0e4b07f45bc3db2bc673f8040eef38c3ed6d76239fc2",
+      "output": "504a9f9289c7fa407a8f1e7720e04448aa10f45d3b0065c7a46268c6c157b1ab"
+    },
+    "fig-powers.zh.jpg": {
+      "input": "a952d7114a19b77e1f9c0e4b07f45bc3db2bc673f8040eef38c3ed6d76239fc2",
+      "output": "586cbbf7e618296d21411337d6ccf091747b783ce4f8ad6f24e8278536bee3d9"
+    },
+    "fig-domain.en.jpg": {
+      "input": "a952d7114a19b77e1f9c0e4b07f45bc3db2bc673f8040eef38c3ed6d76239fc2",
+      "output": "74b1a7c79ab5b17e5e7e8a0357e9fbb21a8b3e1350cb1bc60d6a0a648aa58af9"
+    },
+    "fig-partial.en.jpg": {
+      "input": "a952d7114a19b77e1f9c0e4b07f45bc3db2bc673f8040eef38c3ed6d76239fc2",
+      "output": "12ba37d2e71eb433a39e6b3e7b498b8d4162bdc0b0bc1a9910e7dd9b2341c12b"
+    },
+    "fig-powers.en.jpg": {
+      "input": "a952d7114a19b77e1f9c0e4b07f45bc3db2bc673f8040eef38c3ed6d76239fc2",
+      "output": "25d45fdde43ca4c58bdff6faaf5e2d0500689c960778e38f92110c55dd1379c5"
+    }
+  }
+}

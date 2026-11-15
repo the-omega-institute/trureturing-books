@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ZETA//SPECTRUM · Finite sums, a synthetic quartet and a finite line-zero sample">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ZETA//SPECTRUM · 有限和、合成四根与有限零点样本</title>
+<meta name="description" content="有限部分和与有限欧拉积是两种不同的有限近似；对称不等于零点在直线上；显式公式只取十个线上零点时是一个没有余项界的有限样本。Finite partial sums and finite Euler products are two different finite approximants; symmetry does not put zeros on the line; the explicit formula with ten line zeros is a finite sample without a remainder bound.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="zeta-spectrum-lab">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ZETA//SPECTRUM">ZETA<b>//</b>SPECTRUM</h1>
+      <div class="tagline">
+        <span class="zh">有限和、合成四根与有限零点样本 · <em>有限和不是 ζ(s)；对称推不出零点在直线上；十个零点给出的只是没有余项界的有限样本。</em>数值演示，不是证明。</span>
+        <span class="en">Finite sums, a synthetic quartet and a finite line-zero sample · <em>a finite sum is not ζ(s); symmetry does not put zeros on the line; ten zeros give a finite sample with no remainder bound.</em> A numerical illustration, not a proof.</span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillParam">s <strong>—</strong></span>
+      <span class="pill hot" id="pillKey">n <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验卡" data-aria-en="Experiment cards">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§22.4</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="domain" aria-pressed="false"><span class="code">DOMAIN</span><span class="cn zh">σ > 1：有限和与有限欧拉积走向同一处</span><span class="cn en">σ > 1: finite sum and finite Euler product head the same way</span></button>
+        <button class="preset" data-preset="partial" aria-pressed="false"><span class="code">PARTIAL</span><span class="cn zh">σ = ½：有限和，不是解析延拓</span><span class="cn en">σ = ½: a finite sum, not the analytic continuation</span></button>
+        <button class="preset" data-preset="quartet" aria-pressed="false"><span class="code">QUARTET</span><span class="cn zh">合成四根：两种对称都在，根却不在线上</span><span class="cn en">Synthetic quartet: both symmetries hold, the roots are off the line</span></button>
+        <button class="preset" data-preset="powers" aria-pressed="false"><span class="code">POWERS</span><span class="cn zh">素数幂阶梯与十个线上零点的有限截断</span><span class="cn en">The prime-power stair and a ten-zero truncation</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="三维舞台：部分和相量折线、合成多项式的复平面高度图，或素数幂阶梯与分层的有限谱近似" data-aria-en="3D stage: the phasor polyline of partial sums, the height map of a synthetic polynomial over the complex plane, or the prime-power stair with layered finite spectral approximations">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="phasor" aria-pressed="true"><span class="zh">部分和</span><span class="en">Sums</span></button><button class="chip" data-scene="quartet" aria-pressed="false"><span class="zh">四根</span><span class="en">Quartet</span></button><button class="chip" data-scene="powers" aria-pressed="false"><span class="zh">阶梯</span><span class="en">Stair</span></button>
+      </div>
+      <button type="button" class="handle" id="handle" aria-label="拖动手柄" data-aria-en="Drag the handle" hidden></button>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel"><div class="head"><h2 id="plotATitle"></h2><span id="plotAMeta"></span></div><canvas id="plotA" aria-label="条带小图一" data-aria-en="Strip plot one"></canvas></section>
+      <section class="panel"><div class="head"><h2 id="plotBTitle"></h2><span id="plotBMeta"></span></div><canvas id="plotB" aria-label="条带小图二" data-aria-en="Strip plot two"></canvas></section>
+    </div>
+  </main>
+
+  <aside class="col side" id="evidence" aria-label="控制、读数与依据" data-aria-en="Controls, readouts and evidence">
+    <button class="chip" id="infoBtn"><span class="zh">理论接口 · 这不是证明</span><span class="en">Theory interface · not a proof</span></button>
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">参数</span><span class="en">Parameters</span><span class="aside">s = σ + it</span></h2>
+      <div class="grp" data-scene="phasor">
+        <div class="field"><label for="sigma"><span class="zh">实部 σ</span><span class="en">Real part σ</span><small class="zh">也可拖 2<sup>−s</sup> 处的琥珀环</small><small class="en">or drag the amber ring at 2<sup>−s</sup></small></label><output id="oSigma" for="sigma">1.600</output><input type="range" id="sigma" min="0.2" max="2.5" step="0.01" value="1.6"></div>
+        <div class="field"><label for="tim"><span class="zh">虚部 t</span><span class="en">Imaginary part t</span></label><output id="oTim" for="tim">6.000</output><input type="range" id="tim" min="0" max="35" step="any" value="6"></div>
+        <div class="field"><label for="terms"><span class="zh">项数 N</span><span class="en">Terms N</span><small class="zh">有限截断</small><small class="en">finite cutoff</small></label><output id="oTerms" for="terms">48</output><input type="range" id="terms" min="8" max="96" step="1" value="48"></div>
+      </div>
+      <div class="grp" data-scene="quartet" hidden>
+        <div class="field"><label for="beta"><span class="zh">实部 β（时间轴同步）</span><span class="en">Real part β (the rail follows)</span><small class="zh">也可拖根上的琥珀环</small><small class="en">or drag the amber ring on the root</small></label><output id="oBeta" for="beta">0.300</output><input type="range" id="beta" min="0.2" max="0.8" step="0.001" value="0.3"></div>
+        <p class="note"><span class="zh">γ = 0.7 固定。四个根 β ± iγ 与 1 − β ± iγ。</span><span class="en">γ = 0.7 is fixed. The four roots are β ± iγ and 1 − β ± iγ.</span></p>
+      </div>
+      <div class="grp" data-scene="powers" hidden>
+        <div class="field"><label for="xval"><span class="zh">位置 x</span><span class="en">Position x</span><small class="zh">也可拖阶梯上的琥珀环</small><small class="en">or drag the amber ring on the stair</small></label><output id="oXval" for="xval">9.00</output><input type="range" id="xval" min="1.2" max="20" step="0.01" value="9"></div>
+      </div>
+    </section>
+    <section class="panel sec" id="readouts">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">NUM</span></h2>
+      <dl class="ro" id="roList"></dl>
+      <p class="note" id="roNote"></p>
+    </section>
+    <section class="panel sec" id="leanPanel">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">NUM · MODEL · ARGUED · OPEN</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面当场按双精度算出：部分和 S<sub>n</sub>(s)、素数 p ≤ N 上的有限欧拉积、由逆狄利克雷卷积得到的 μ(n) 与 Σ μ(n) n<sup>−s</sup>、合成多项式 Q 的值与对称残差、ψ₀(x) 与十个零点的截断和。这些都是有限计算，不带误差证书；数值演示，不是证明。</span><span class="en">Computed live in double precision: the partial sums S<sub>n</sub>(s), the finite Euler product over primes p ≤ N, μ(n) from the inverse Dirichlet convolution and Σ μ(n) n<sup>−s</sup>, the values and symmetry residuals of the synthetic polynomial Q, ψ₀(x) and the ten-zero truncated sum. All are finite computations without an error certificate; a numerical illustration, not a proof.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">经典公式的适用条件与出处。σ > 1 时狄利克雷级数与欧拉积都收敛到 ζ(s)（ζ 的这些表示见 <a href="https://dlmf.nist.gov/25.2" target="_blank" rel="noopener">DLMF §25.2</a>）；这两个恒等式在本书 <a href="../../zh/ch22-s02-dirichlet-euler-identity.html#sec-ch22-2" target="_top">§22.2</a> 以冻结的 Lean 声明引用，本页只计算它们的有限截断，不另加验证标记。以下是文献结果，未在本书形式化：σ > 1 时 1/ζ(s) = Σ μ(n) n<sup>−s</sup>（<a href="https://dlmf.nist.gov/27.4.E5" target="_blank" rel="noopener">DLMF 27.4.E5</a>），狄利克雷卷积与莫比乌斯反演见 <a href="https://dlmf.nist.gov/27.5" target="_blank" rel="noopener">DLMF §27.5</a>；<a href="https://dlmf.nist.gov/25.16" target="_blank" rel="noopener">DLMF §25.16</a> 只给出 ψ(x) 的定义与渐近式；x > 1 上遍历全部非平凡零点的完整逐点显式公式见 H. Davenport, <i>Multiplicative Number Theory</i>, 3rd ed., Ch. 17，或本书 <a href="../../zh/ch22-s04-critical-line-and-rh.html#sec-ch22-4-1" target="_top">§22.4.1</a>；零点纵坐标的数值见 <a href="https://dlmf.nist.gov/25.10" target="_blank" rel="noopener">DLMF §25.10</a>。</span><span class="en">Where the classical formulas apply, and their sources. For σ > 1 the Dirichlet series and the Euler product both converge to ζ(s) (these representations of ζ: <a href="https://dlmf.nist.gov/25.2" target="_blank" rel="noopener">DLMF §25.2</a>); the book cites these two identities with frozen Lean declarations in <a href="../../en/ch22-s02-dirichlet-euler-identity.html#sec-ch22-2" target="_top">§22.2</a>, and this page only computes their finite truncations, with no verification mark of its own. Literature results, not formalized in this book: for σ > 1, 1/ζ(s) = Σ μ(n) n<sup>−s</sup> (<a href="https://dlmf.nist.gov/27.4.E5" target="_blank" rel="noopener">DLMF 27.4.E5</a>), with Dirichlet convolution and Möbius inversion in <a href="https://dlmf.nist.gov/27.5" target="_blank" rel="noopener">DLMF §27.5</a>; <a href="https://dlmf.nist.gov/25.16" target="_blank" rel="noopener">DLMF §25.16</a> gives only the definition and the asymptotics of ψ(x); the full pointwise explicit formula for x > 1, over all nontrivial zeros, is in H. Davenport, <i>Multiplicative Number Theory</i>, 3rd ed., Ch. 17, or in the book at <a href="../../en/ch22-s04-critical-line-and-rh.html#sec-ch22-4-1" target="_top">§22.4.1</a>; numerical zero ordinates are tabulated in <a href="https://dlmf.nist.gov/25.10" target="_blank" rel="noopener">DLMF §25.10</a>.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">四根多项式 Q 是合成模型，不是 ζ；高度画成 √|Q(s)| 的缩放值。有限截断 N 只是级数的自然截断，既不是 Dijkstra 最短路，也不是物理的芝诺效应；“几何划分 / 莫比乌斯外部”的说法是本书的诠释。</span><span class="en">The quartet polynomial Q is a synthetic model, not ζ; its height is drawn as a rescaled √|Q(s)|. The finite cutoff N is just the natural truncation of the series, neither Dijkstra's shortest path nor a physical Zeno effect; the “geometric partition / Möbius exterior” reading is this book's interpretation.</span></span></div>
+      <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">开放问题：黎曼猜想——所有非平凡零点的实部都是 ½。页面不对它作任何断言；有限个线上零点的数值样本不能证明它：数值核验只覆盖有限的范围，推不出全部零点。</span><span class="en">Open problem: the Riemann hypothesis — every nontrivial zero has real part ½. The page asserts nothing about it; a numerical sample of finitely many zeros on the line cannot prove it: numerical checks cover a finite range and cannot settle all zeros.</span></span></div>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="47" step="any" value="47" aria-label="时间轴" data-aria-en="Rail">
+    </div>
+    <div class="keys"><kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一步</span><span class="en">one step</span> · <span class="zh">拖空白处转视角</span><span class="en">drag empty space to orbit</span></div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 有限和、合成四根与有限零点样本</span><span class="en">Theory interface · finite sums, a synthetic quartet and a finite line-zero sample</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">这是数值演示，不是证明。页面只做有限计算：有限个项、有限个素数、十个零点；它既不计算解析延拓，也不给任何误差证书。</p>
+      <ol>
+        <li><b>两种有限近似。</b>S<sub>N</sub>(s) = Σ<sub>n≤N</sub> n<sup>−s</sup> 是有限部分和，E<sub>N</sub>(s) = ∏<sub>p≤N</sub> (1 − p<sup>−s</sup>)<sup>−1</sup> 是有限欧拉积；舞台把每一步 n<sup>−s</sup> = n<sup>−σ</sup>e<sup>−it log n</sup> 首尾相接，沿 log n 轴抬起，屏上是它在复平面上的投影。σ > 1 时两者都收敛到 ζ(s)（DLMF §25.2；本书 §22.2 以冻结的 Lean 声明引用这两个恒等式），但有限 N 下两者一般不相等：页面只列出它们的差，不称其中任何一个为 ζ(s)，也不对每个 N 作普遍断言。σ ≤ 1 时不画欧拉积。</li>
+        <li><b>有限和不是解析延拓。</b>σ ≤ 1 时狄利克雷级数不收敛，ζ(s) 由解析延拓定义；页面不计算解析延拓。σ = ½、t 取第一个零点纵坐标时，S<sub>N</sub> 并不接近 0，随 N 增加还在转。</li>
+        <li><b>莫比乌斯函数。</b>μ 由狄利克雷卷积的逆算出：μ(1) = 1，n > 1 时 μ(n) = −Σ<sub>d|n, d&lt;n</sub> μ(d)，于是 Σ<sub>d|n</sub> μ(d) = [n = 1]（狄利克雷卷积与反演见 DLMF §27.5）。Σ μ(n) n<sup>−s</sup> 只在 σ > 1 绝对收敛到 1/ζ(s)（DLMF 27.4.E5）；页面列出有限乘积 S<sub>N</sub>·M<sub>N</sub> 与 1 的距离，σ ≤ 1 时不作任何断言。</li>
+        <li><b>合成四根。</b>Q(s) = (s − β − iγ)(s − β + iγ)(s − 1 + β − iγ)(s − 1 + β + iγ)，γ = 0.7。它满足 Q(1 − s) = Q(s) 与 Q(s̄) = Q(s) 的共轭，但 β ≠ ½ 时根离开直线 σ = ½，距离 |β − ½|。这只说明“这两种对称本身推不出根在直线上”；它是模型，不涉及 ζ 的零点在哪里。</li>
+        <li><b>显式公式与有限截断。</b>对 x > 1，ψ₀(x) = x − lim<sub>T→∞</sub> Σ<sub>|Im ρ|&lt;T</sub> x<sup>ρ</sup>/ρ − log 2π − ½ log(1 − x<sup>−2</sup>)，求和遍历全部非平凡零点 ρ（不论是否在直线上，按重数计），按对称的高度截断取极限；ψ₀ 在跳点取左右极限的平均。这一完整的逐点公式见 H. Davenport, <i>Multiplicative Number Theory</i>, 3rd ed., Ch. 17 与本书 §22.4.1；DLMF §25.16 只给出 ψ 的定义与渐近式。页面只取前十个已知的正纵坐标 γ<sub>k</sub>（数值见 DLMF §25.10），把共轭成对写成 2 Re(x<sup>½+iγ</sup>/(½ + iγ))：这是有限线上零点样本，没有余项界。</li>
+        <li><b>阶梯。</b>ψ₀(x) = Σ<sub>n&lt;x</sub> Λ(n)，x 恰为素数幂时再加 ½Λ(x)。Λ(n) = log p 当 n = p<sup>k</sup>，否则为 0：阶梯在 4、8、9、16 这些素数幂处也跳，不只在素数处跳。</li>
+        <li><b>有限截断 N。</b>N 是级数最自然的截断，不是 Dijkstra 的最短路算法，也不是物理的芝诺效应；章中“几何划分 / 莫比乌斯外部”的说法是诠释，页面实际做的是有限的逆狄利克雷卷积。</li>
+      </ol>
+      <p class="lede refs">来源：<a href="https://dlmf.nist.gov/25.2" target="_blank" rel="noopener">DLMF §25.2</a>（ζ 的表示）· <a href="https://dlmf.nist.gov/27.4.E5" target="_blank" rel="noopener">DLMF 27.4.E5</a>（莫比乌斯倒数级数）· <a href="https://dlmf.nist.gov/27.5" target="_blank" rel="noopener">DLMF §27.5</a>（卷积与反演）· <a href="https://dlmf.nist.gov/25.10" target="_blank" rel="noopener">DLMF §25.10</a>（零点）· <a href="https://dlmf.nist.gov/25.16" target="_blank" rel="noopener">DLMF §25.16</a>（ψ 的定义与渐近式）· H. Davenport, <i>Multiplicative Number Theory</i>, 3rd ed., Ch. 17（完整显式公式）。书中：<a href="../../zh/ch22-s02-dirichlet-euler-identity.html#sec-ch22-2" target="_top">§22.2 极点留数、狄利克雷级数与欧拉乘积的形式化恒等式</a> · <a href="../../zh/ch22-s04-critical-line-and-rh.html#sec-ch22-4-1" target="_top">§22.4 临界对称轴与黎曼猜想的认识论边界</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">This is a numerical illustration, not a proof. The page does finite computations only: finitely many terms, finitely many primes, ten zeros; it neither computes the analytic continuation nor gives any error certificate.</p>
+      <ol>
+        <li><b>Two finite approximants.</b> S<sub>N</sub>(s) = Σ<sub>n≤N</sub> n<sup>−s</sup> is a finite partial sum and E<sub>N</sub>(s) = ∏<sub>p≤N</sub> (1 − p<sup>−s</sup>)<sup>−1</sup> a finite Euler product; the stage puts the steps n<sup>−s</sup> = n<sup>−σ</sup>e<sup>−it log n</sup> head to tail and lifts them along the log n axis, and the screen shows their projection on the complex plane. For σ > 1 both converge to ζ(s) (DLMF §25.2; the book cites these two identities with frozen Lean declarations in §22.2), but at finite N they are in general not equal: the page lists their difference, calls neither of them ζ(s) and makes no universal claim about every N. For σ ≤ 1 no Euler product is drawn.</li>
+        <li><b>A finite sum is not the analytic continuation.</b> For σ ≤ 1 the Dirichlet series does not converge and ζ(s) is defined by analytic continuation, which the page does not compute. At σ = ½ with t at the first zero ordinate, S<sub>N</sub> is not near 0 and keeps turning as N grows.</li>
+        <li><b>The Möbius function.</b> μ is computed as the inverse under Dirichlet convolution: μ(1) = 1 and, for n > 1, μ(n) = −Σ<sub>d|n, d&lt;n</sub> μ(d), so that Σ<sub>d|n</sub> μ(d) = [n = 1] (Dirichlet convolution and inversion: DLMF §27.5). Σ μ(n) n<sup>−s</sup> converges absolutely to 1/ζ(s) only for σ > 1 (DLMF 27.4.E5); the page lists the distance of the finite product S<sub>N</sub>·M<sub>N</sub> from 1 and asserts nothing for σ ≤ 1.</li>
+        <li><b>The synthetic quartet.</b> Q(s) = (s − β − iγ)(s − β + iγ)(s − 1 + β − iγ)(s − 1 + β + iγ), γ = 0.7. It satisfies Q(1 − s) = Q(s) and Q(s̄) = the conjugate of Q(s), yet for β ≠ ½ its roots sit off the line σ = ½, at distance |β − ½|. This only shows that these two symmetries by themselves do not put roots on the line; it is a model and says nothing about where the zeros of ζ are.</li>
+        <li><b>The explicit formula and its truncation.</b> For x > 1, ψ₀(x) = x − lim<sub>T→∞</sub> Σ<sub>|Im ρ|&lt;T</sub> x<sup>ρ</sup>/ρ − log 2π − ½ log(1 − x<sup>−2</sup>), the sum running over all nontrivial zeros ρ (on the line or not, counted with multiplicity) with the limit taken over symmetric heights; ψ₀ takes the mean of its left and right limits at a jump. This full pointwise formula is in H. Davenport, <i>Multiplicative Number Theory</i>, 3rd ed., Ch. 17, and in the book at §22.4.1; DLMF §25.16 gives only the definition and the asymptotics of ψ. The page takes only the first ten known positive ordinates γ<sub>k</sub> (numerical values: DLMF §25.10) and writes each conjugate pair as 2 Re(x<sup>½+iγ</sup>/(½ + iγ)): a finite line-zero sample with no remainder bound.</li>
+        <li><b>The stair.</b> ψ₀(x) = Σ<sub>n&lt;x</sub> Λ(n), plus ½Λ(x) when x is itself a prime power. Λ(n) = log p when n = p<sup>k</sup> and 0 otherwise: the stair also steps at prime powers such as 4, 8, 9 and 16, not only at primes.</li>
+        <li><b>The finite cutoff N.</b> N is the most natural truncation of the series, neither Dijkstra's shortest-path algorithm nor a physical Zeno effect; the chapter's “geometric partition / Möbius exterior” wording is an interpretation, and what the page actually does is a finite inverse Dirichlet convolution.</li>
+      </ol>
+      <p class="lede refs">Sources: <a href="https://dlmf.nist.gov/25.2" target="_blank" rel="noopener">DLMF §25.2</a> (representations of ζ) · <a href="https://dlmf.nist.gov/27.4.E5" target="_blank" rel="noopener">DLMF 27.4.E5</a> (the Möbius series of 1/ζ) · <a href="https://dlmf.nist.gov/27.5" target="_blank" rel="noopener">DLMF §27.5</a> (convolution and inversion) · <a href="https://dlmf.nist.gov/25.10" target="_blank" rel="noopener">DLMF §25.10</a> (zeros) · <a href="https://dlmf.nist.gov/25.16" target="_blank" rel="noopener">DLMF §25.16</a> (definition and asymptotics of ψ) · H. Davenport, <i>Multiplicative Number Theory</i>, 3rd ed., Ch. 17 (the full explicit formula). In the book: <a href="../../en/ch22-s02-dirichlet-euler-identity.html#sec-ch22-2" target="_top">§22.2 Formal identities for the residue, the Dirichlet series and the Euler product</a> · <a href="../../en/ch22-s04-critical-line-and-rh.html#sec-ch22-4-1" target="_top">§22.4 The critical axis and the epistemic boundary of the Riemann hypothesis</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
