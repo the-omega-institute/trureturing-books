@@ -1,6 +1,6 @@
-"""CNOT 下界数的是导线上的奇偶标签：每个非零偶标签都要诞生一次，每次诞生都要一次奇复原来抵消。
-The CNOT lower bound counts parity labels on the wires: every nonzero even label must be born once, and
-every birth must be undone by an odd return.
+"""CNOT 下界数的是导线上的奇偶标签：每个所需的非零偶标签都要出现，奇加奇的偶诞生与奇复原则须在总次数上平衡。
+The CNOT lower bound counts parity labels on the wires: every required nonzero even label must appear,
+while odd-plus-odd births and odd returns must balance in total.
 
 Left, n = 1 (two qubits): CNOT(control 0, target 1), R_z on wire 1, CNOT(control 0, target 1). The wire labels
 in F₂² are tracked gate by gate (wire 0 keeps z₀; wire 1 goes z₁ → z₀ ⊕ z₁ → z₁); the circuit matrix is checked
