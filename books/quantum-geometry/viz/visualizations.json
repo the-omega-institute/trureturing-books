@@ -5244,6 +5244,327 @@
           "gid": "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure"
         }
       ]
+    },
+    {
+      "id": "bounded-horizon-thermodynamics-sandbox",
+      "code": "HORIZON//THERMO",
+      "title": "HORIZON//THERMO · 受限视界与热力学：贝尔弧、Page 曲线、模流与自指稳态",
+      "title_en": "HORIZON//THERMO · Bounded Horizons and Thermodynamics: Bell Arcs, the Page Curve, Modular Flow and a Self-Referential Steady State",
+      "summary": "六条贝尔弧穿过可拖动的视界：从全局纯态的 S = 0，到半视界切断六条弧时的 6 比特 Page 峰值，再对照积态的零熵读数。五张实验卡展示约化态、模流相位、模温度与朗道尔擦除热，并以冻石与热寂之间的自指稳态作示意模型；矩阵计算与依据分层并列呈现。",
+      "summary_en": "Six Bell arcs cross a draggable horizon: move from a global pure state with S = 0 to the 6-bit Page peak when a half horizon cuts all six arcs, then compare the zero-entropy product state. Five experiments display reduced states, modular phase flow, modular temperature and Landauer erasure heat, ending with an illustrative self-referential steady state between stone and heat death. Matrix calculations appear alongside their evidence levels.",
+      "path": "bounded-horizon-thermodynamics-sandbox/",
+      "thumbnail": "bounded-horizon-thermodynamics-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.17",
+      "presets": [
+        "omniscient-zero",
+        "isolated-zeno",
+        "horizon-page-curve",
+        "modular-unruh-heat",
+        "dottie-living-steady"
+      ],
+      "preset_titles": {
+        "omniscient-zero": {
+          "zh": "全视界：六条弧完整，全局纯态 S = 0",
+          "en": "Full horizon: six arcs unbroken, global S = 0"
+        },
+        "isolated-zeno": {
+          "zh": "积态 |00⟩：零切断、SA = 0、Teff = 0 的冻石",
+          "en": "Product state |00⟩: nothing severed, SA = 0, Teff = 0"
+        },
+        "horizon-page-curve": {
+          "zh": "半视界切断六条贝尔弧：Page 柱峰值 6 比特",
+          "en": "Half horizon severs six Bell arcs: the Page peak of 6 bits"
+        },
+        "modular-unruh-heat": {
+          "zh": "模流相位环流、模温度与朗道尔擦除热",
+          "en": "Modular phase flow, modular temperature and Landauer heat"
+        },
+        "dottie-living-steady": {
+          "zh": "冻石 0° 与热寂 45° 之间的自指稳态",
+          "en": "The self-referential steady state between stone and heat death"
+        }
+      },
+      "tags": [
+        "受限视界",
+        "跨视界纠缠",
+        "Page 曲线",
+        "模流",
+        "朗道尔热",
+        "自指稳态"
+      ],
+      "tags_en": [
+        "Bounded horizon",
+        "Cross-horizon entanglement",
+        "Page curve",
+        "Modular flow",
+        "Landauer heat",
+        "Self-referential steady state"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.17 · 受限不妄我、跨视界纠缠与热力学涌现",
+          "label_en": "Chapter 34 §34.17 · Bounded non-delusional selfhood, cross-horizon entanglement and emergent thermodynamics",
+          "href": "../zh/ch34-s17-entanglement-horizon-and-thermodynamics.html#sec-ch34-entanglement-horizon-and-thermodynamics",
+          "href_en": "../en/ch34-s17-entanglement-horizon-and-thermodynamics.html#sec-ch34-entanglement-horizon-and-thermodynamics"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change"
+        },
+        {
+          "gid": "D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances"
+        },
+        {
+          "gid": "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance"
+        },
+        {
+          "gid": "D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        }
+      ]
+    },
+    {
+      "id": "gram-window-consensus-sandbox",
+      "code": "GRAM//CONSENSUS",
+      "title": "GRAM//CONSENSUS · 格拉姆窗口与共识：舒尔补走廊、黄金三角、过约束与遗忘",
+      "title_en": "GRAM//CONSENSUS · Gram Windows and Consensus: Schur Corridors, the Golden Triangle, Overconstraint and Forgetting",
+      "summary": "在同一颗球上拖动候选方向，观察格拉姆窗口的舒尔补裕度与双帽透镜走廊。五张实验卡从三记录黄金窗推进到九记录过约束，再移去最旧记录使走廊重开，最后比较两位观察者的共识与共同遗忘；实时矩阵计算区分可行方向、记忆容量与擦除热的依据。",
+      "summary_en": "Drag a candidate direction on one sphere and inspect the Gram window’s Schur margin and two-cap lens. Five experiments progress from a golden window with three records to an over-constrained window with nine, remove the oldest record to reopen the corridor, and compare two observers’ consensus and joint forgetting. Live matrix calculations distinguish the evidence for feasible directions, memory capacity and erasure heat.",
+      "path": "gram-window-consensus-sandbox/",
+      "thumbnail": "gram-window-consensus-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.18",
+      "presets": [
+        "schur-cap-corridor",
+        "golden-triangle-m3",
+        "overconstrained-lock-m9",
+        "forgetting-reopen",
+        "dual-window-consensus"
+      ],
+      "preset_titles": {
+        "schur-cap-corridor": {
+          "zh": "舒尔补裕度与双帽透镜走廊",
+          "en": "Schur margin and the two-cap lens"
+        },
+        "golden-triangle-m3": {
+          "zh": "三维满秩黄金窗：曲边三角走廊",
+          "en": "Full-rank golden window: a curved triangle"
+        },
+        "overconstrained-lock-m9": {
+          "zh": "过约束紧窗：走廊被勒到关死",
+          "en": "Over-constrained window: the corridor shuts"
+        },
+        "forgetting-reopen": {
+          "zh": "遗忘最旧的记录：走廊重开",
+          "en": "Forget the oldest record: the corridor reopens"
+        },
+        "dual-window-consensus": {
+          "zh": "两位观察者的共识与共同遗忘",
+          "en": "Consensus of two observers, healed by forgetting"
+        }
+      },
+      "tags": [
+        "格拉姆窗口",
+        "舒尔补",
+        "可行走廊",
+        "过约束",
+        "共同遗忘",
+        "多观察者共识"
+      ],
+      "tags_en": [
+        "Gram window",
+        "Schur complement",
+        "Feasible corridor",
+        "Overconstraint",
+        "Joint forgetting",
+        "Multi-observer consensus"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.18 · 格拉姆窗口、舒尔补可行走廊与多观察者共识",
+          "label_en": "Chapter 34 §34.18 · Gram window, Schur corridor and multi-observer consensus",
+          "href": "../zh/ch34-s18-gram-window-and-consensus.html#sec-ch34-gram-window-and-consensus",
+          "href_en": "../en/ch34-s18-gram-window-and-consensus.html#sec-ch34-gram-window-and-consensus"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/GramRealizability.gram_realizability"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        },
+        {
+          "gid": "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
+        },
+        {
+          "gid": "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance"
+        }
+      ]
+    },
+    {
+      "id": "roundtrip-born-imaginary-blindspot-sandbox",
+      "code": "ECHO//IMAGINARY",
+      "title": "ECHO//IMAGINARY · 玻恩往返与虚数盲区：双投影回声、方位锥与薛定谔圆弧",
+      "title_en": "ECHO//IMAGINARY · The Born Round Trip and Imaginary Blind Spot: Double-Projection Echo, Azimuth Cone and Schrödinger Arc",
+      "summary": "从 I → V → I 的双投影回声 cos²θ 出发，在球面上绕方位锥一周，比较单基读数与转过 90° 的基对相位的响应。五张实验卡把玻恩权重、盲平面、两次乘 i 的四分之一转身与薛定谔圆弧串在一起；矩阵读数展示范数守恒，并对照去掉 i 后的衰减模型。",
+      "summary_en": "Start with the double-projection echo cos²θ of I → V → I, circle the azimuth cone on the sphere, and compare phase readings in one basis and a basis turned through 90°. Five experiments connect Born weights, the blind plane, two quarter turns by i and the Schrödinger arc. Matrix readings display norm conservation alongside the decay model obtained by removing i.",
+      "path": "roundtrip-born-imaginary-blindspot-sandbox/",
+      "thumbnail": "roundtrip-born-imaginary-blindspot-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.19",
+      "presets": [
+        "radar-roundtrip-born",
+        "azimuth-cone-blindspot",
+        "observer-first-person-90",
+        "imaginary-double-turn",
+        "schrodinger-arc-engine"
+      ],
+      "preset_titles": {
+        "radar-roundtrip-born": {
+          "zh": "雷达往返：I → V → I 的玻恩回声",
+          "en": "Radar round trip: the Born echo of I → V → I"
+        },
+        "azimuth-cone-blindspot": {
+          "zh": "方位锥纤维：θ* 上绕一圈，回声一个数位也不变",
+          "en": "The azimuth cone: once round at θ*, the echo keeps every digit"
+        },
+        "observer-first-person-90": {
+          "zh": "第一人称：Z 读 0.5，转 90° 的基读出相位",
+          "en": "First person: Z reads 0.5, the turned basis reads the phase"
+        },
+        "imaginary-double-turn": {
+          "zh": "虚数的两次转身：先进盲区，再回到 −I",
+          "en": "The two quarter turns of i: into the blind spot, then back to −I"
+        },
+        "schrodinger-arc-engine": {
+          "zh": "薛定谔圆弧引擎：有 i 守住范数，没有 i 就漏光",
+          "en": "Schrödinger arc engine: with i the norm holds, without it the norm drains"
+        }
+      },
+      "tags": [
+        "往返双投影",
+        "玻恩平方律",
+        "方位锥",
+        "相位盲区",
+        "复结构",
+        "薛定谔演化"
+      ],
+      "tags_en": [
+        "Round-trip double projection",
+        "Born square law",
+        "Azimuth cone",
+        "Phase blind spot",
+        "Complex structure",
+        "Schrödinger evolution"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.19 · 往返双投影、玻恩平方律与虚数盲区",
+          "label_en": "Chapter 34 §34.19 · Round-trip double projection, the Born square law and the imaginary blind spot",
+          "href": "../zh/ch34-s19-roundtrip-projection-and-imaginary-blindspot.html#sec-ch34-roundtrip-projection-and-imaginary-blindspot",
+          "href_en": "../en/ch34-s19-roundtrip-projection-and-imaginary-blindspot.html#sec-ch34-roundtrip-projection-and-imaginary-blindspot"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/FiniteDimensional.born_probability_skeleton"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary"
+        }
+      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "next": {
-    "T": 349,
+    "T": 351,
     "D": 161,
     "R": 182
   },
@@ -602,10 +602,10 @@
     "D5/S3/Quantum/Measurements/RelevantSpaceQuantumKac.pure_vector_quantum_kac": "T317",
     "D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_state_posDef": "R165",
     "D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_variational_identity": "R166",
-    "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference": "R167",
+    "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference": "T349",
     "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change": "R168",
     "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState": "R169",
-    "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState": "R170",
+    "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState": "T350",
     "D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState": "R171",
     "D5/S3/Quantum/Routing/HannRouterDephasing.result": "T318",
     "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_boundary_walk": "R172",
