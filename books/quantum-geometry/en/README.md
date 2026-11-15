@@ -16,6 +16,8 @@ Whenever physics has appeared haunted by paradox, the culprit has almost always 
 
 In the figure, $O$, $A$, and $B$ are unit vectors. In the plane panel, $\theta$ is the directed angle from $A$ to $B$ measured in the fixed orientation $\hat{I}$.
 
+On a first reading, hold onto one question: **what information about the object is missing from the shadow you can see?** The ray and turntable let you practise asking it; the sphere, ambient space, and self-referential iteration each add one idea later. These demonstrations explain the book's imagery; the quantum-state and measurement conventions still need to be established in subsequent chapters.
+
 ## 0.1 First Blind Spot: Mistaking a Line for a Point {#sec-blindspot-1}
 
 **What we take to be a point is in fact a line.**
@@ -30,15 +32,29 @@ Step half a pace to the side and the dot immediately unfolds into what it always
 **Step half a pace aside and the bright point unfolds into a ray.** The four circles show one cyan ray of unit length from four angles. With the angle between sight and ray $\alpha = 0^\circ$, only a bright point remains in the middle; as $\alpha$ grows to $20^\circ$, $45^\circ$ and $90^\circ$, the visible length is $\sin\alpha \approx 0.34$, $0.71$ and $1$.
 :::
 
+Change the viewing angle yourself. The cyan original ray below has a fixed length; only its projection along the retinal direction changes. Drag the angle from head-on to side-on and watch the dot unfold.
+
+::: {.viz src="prelude-dimensions" preset="head-on" height="500"}
+**The ray stays the same length; your viewing angle changes.** Head-on, its projection is a point; at $45^\circ$, the unit ray projects to a length of about $0.707$; side-on, its full length is visible. This is a geometric model of orthogonal projection.
+:::
+
 > A "particle" is merely the bruise left on the retina when a ray meets the eye head-on; "substance" is what grammar invents when the gaze refuses to turn.
 
 ## 0.2 Second Blind Spot: Mistaking a Plane for a Line {#sec-blindspot-2}
 
 **What we take to be a line is in fact a plane.**
 
-Now stand a coin upright spinning at constant angular speed on a tabletop — or place a vertical peg on the rim of a steadily turning phonograph platter — and lower your eye until it is flush with the edge of the table.
+Place a small upright peg on the rim of a horizontal turntable and let it rotate at a constant angular speed. Look down from above first: the peg goes around the centre, always in the same disc. Then lower your eye to the level of the disc and read only its left-to-right position. To isolate the geometry, the following model ignores the peg's height, the disc's thickness, and perspective, using orthogonal projection.
 
-From that edge-on vantage, the broad two-dimensional disc vanishes. All you see is a peg shuttling back and forth along a one-dimensional segment, racing through the center, slowing as if against an invisible spring near the rim, halting, and reversing course according to $\cos(\omega t)$. If you stubbornly deny the existence of the orthogonal depth dimension across the tabletop, you are forced to invent elaborate hidden mechanics for a "one-dimensional particle": why does its speed peak at the origin? And when two pegs cross the center ($\cos 90^\circ = 0$ and $\cos 270^\circ = 0$) at the exact same spot on your line, how does one "know" to move left next while the other moves right? Must each carry a secret metaphysical ledger inside?
+Keep two objects distinct: **the whole disc projects onto a fixed line segment; the peg projects onto a point moving along that segment.** The disc has not become a line, and the peg is not actually travelling back and forth on a straight track. This view simply discards the front-to-back position within the disc, retaining only the left-to-right position.
+
+The next card keeps both views visible. Press play and watch the amber peg go around the circle. Then pause and drag it: the peg and its shadow below always line up vertically.
+
+::: {.viz src="prelude-dimensions" preset="shadow" height="500"}
+**Around a circle above, back and forth below: the same peg in both views.** A dashed line joins the amber peg to its edge-on shadow; the cyan segment remains the fixed projected extent of the disc. At a turn of $60^\circ$, the shadow's horizontal coordinate is $0.5$. During a full turn, it moves fastest through the centre and stops and reverses at each end. Velocities in the figure are measured in units of the peg's constant speed.
+:::
+
+You do not need the cosine formula yet. Starting at the rightmost point and moving counterclockwise, the peg reaches the top of the circle: its shadow crosses the centre moving left. After passing the leftmost point, it reaches the bottom: the shadow crosses the centre again, now moving right. The shadow occupies the same position twice, while the peg occupies two different positions on the circle. For a unit-radius turntable with angular speed $\omega$, that horizontal coordinate is written $\cos(\omega t)$. It is a projected coordinate, not a probability.
 
 Raise your head three inches and the mystery evaporates. There is no invisible spring and no occult ledger — only a unit direction $\vv{b}$ rotating uniformly in the plane. Measured in the fixed orientation $\hat{I}$, the directed angle from the unit reference direction $\vv{a}$ to $\vv{b}$ is $\theta \equiv \omega t \pmod{2\pi}$. The two directions span the **oriented area** $\vv{a} \wedge \vv{b} = \sin\theta\,\hat{I}$: the signed area changes with this angle while the oriented plane $\hat{I}$ stays fixed.
 
@@ -46,7 +62,19 @@ Raise your head three inches and the mystery evaporates. There is no invisible s
 **Seen edge-on, the shadows at $90^\circ$ and $270^\circ$ coincide but run opposite ways.** Above is the magenta turntable seen from overhead, with the amber direction $\vv{b}$ at $\theta = 90^\circ$ and $\theta = 270^\circ$, each with a small velocity arrow. Dashed lines drop both onto the cyan segment below, where they land on the same point $\cos\theta = 0$. On the disc one moves left and the other right, and so do their shadows.
 :::
 
-The "complex phase factors," "imaginary unit $i$," and "unitary gate matrices" that intimidate students in standard quantum computing textbooks are nothing more than this spinning platter seen edge-on. The unit bivector $\hat{I}$ satisfies $\hat{I}^2 = -1$ not because nature traffics in "imaginary" numbers, but because two successive $90^\circ$ orthogonal turns within the same plane ($90^\circ + 90^\circ = 180^\circ$) reverse the direction of every vector in that plane. When we peer at two-dimensional quantum gate rotations from the thin edge of our one-dimensional classical timeline, uniform rotation of a direction within the plane masquerades as the waxing and waning of probability amplitudes along a line.
+Now put those two moments side by side and advance them slightly to check your understanding: the two points initially project onto the centre, then their shadows move apart in opposite directions. The current horizontal position alone cannot recover the position on the circle or determine which way the shadow moves next.
+
+::: {.viz src="prelude-dimensions" preset="compare" height="500"}
+**The same shadow position, opposite directions of motion.** The cyan and magenta points sit at $90^\circ$ and $270^\circ$, both projecting onto the centre; their velocity arrows point left and right. Drag the timeline forward a little and the shadows separate. Velocities in the figure are measured in units of the peg's constant speed.
+:::
+
+For now, “mistaking a plane for a line” means just this: **reading planar motion through a one-dimensional projection loses information.** Once that is clear, you can continue without first accepting the physical and philosophical interpretations that follow. The video walks through the same turntable example again.
+
+::: {.film src="011-prelude-dimensions"}
+**Understand the Shadow: From a Disc to a Line.** Follow the peg around the circle, watch its shadow move back and forth, then compare two passages through the centre in opposite directions. English narration with Chinese and English subtitles.
+:::
+
+The turntable also offers an entry point to complex-plane rotation: two successive $90^\circ$ turns in the same plane reverse a direction, corresponding to the planar rotation generator $\hat{I}^2 = -1$ (developed in Chapters 5 and 6). But **this classical projection example does not itself derive Born's rule, quantum interference, or general quantum gates**; connecting complex amplitudes to measurement weights requires explicit definitions of quantum states and measurements. Comparing a coordinate axis to a “classical timeline” is likewise an interpretation: the hidden front-to-back coordinate in this disc remains a spatial coordinate.
 
 ## 0.3 Third Blind Spot: Mistaking a Sphere for a Plane {#sec-blindspot-3}
 
@@ -72,7 +100,13 @@ See H. P. Robertson, *The Uncertainty Principle* (1929, DOI [10.1103/PhysRev.34.
 **Fix the polar angle, sweep only the phase, and the path is a latitude circle.** The amber state sits at polar angle $\theta = 50^\circ$; as the relative phase $\varphi$ turns, it travels along the cyan latitude circle. Only at $\theta = 90^\circ$ is that circle the magenta equator, the section cut by a plane through the centre.
 :::
 
-None of the three represents a breakdown of logic or a capricious throw of dice — each reflects orthogonal algebra and bundle geometry projected onto local frames.
+Use the next card to distinguish a latitude circle from a great circle: keep the polar angle fixed and let the amber point turn around the vertical axis. Then set the polar angle to $90^\circ$ and watch the cyan latitude meet the magenta equator.
+
+::: {.viz src="prelude-dimensions" preset="latitude" height="500"}
+**One full turn does not cover the sphere.** At a polar angle of $50^\circ$, the amber point stays on the cyan latitude. The magenta equator lies in a plane through the centre; the latitude does not. This is a numerical illustration of spherical coordinates.
+:::
+
+The three effects above have distinct algebraic or geometric mechanisms; the classical observation that projections lose information does not derive them from one another.
 
 ## 0.4 Fourth Blind Spot: The Sphere Beyond Spheres {#sec-blindspot-4}
 
@@ -88,10 +122,22 @@ Were you trapped strictly inside the two-dimensional sheet $\operatorname{span}\
 
 Now apply that exact distinction to the oriented three-dimensional space $I_3$ itself. Note an essential fact of exterior algebra: **within oriented $\mathbb{R}^3$ alone, the Hodge dual of the top-degree volume element is a scalar, $\star_3 I_3 = 1$, not a fourth vector!** Whenever you seek to represent the totality $I_3$ as a new normal axis — obtaining a **fourth orthogonal normal vector** $\vv{e}_4 = \star_4(\vv{e}_1 \wedge \vv{e}_2 \wedge \vv{e}_3)$ perpendicular to $\vv{e}_1, \vv{e}_2, \vv{e}_3$ — mathematics requires **first specifying an oriented four-dimensional ambient space $\mathbb{R}^4 \supset \mathbb{R}^3$** (and, to iterate indefinitely, an explicit tower of ambient embeddings $\mathbb{R}^n \hookrightarrow \mathbb{R}^{n+1}$ equipped with $\star_{n+1}$). The instant you step back into that ambient fourth dimension to survey the unit two-sphere $S^2 \subset \mathbb{R}^3$ from outside, while the newly adjoined one-dimensional normal axis $\mathbb{R}\vv{e}_4$ by itself has only the zero-dimensional two-pole unit sphere $S^0 = \{\pm\vv{e}_4\}$, the combined four-dimensional ambient space $\mathbb{R}^4 = \mathbb{R}^3 \oplus \mathbb{R}\vv{e}_4$ has unit sphere $S^3 \subset \mathbb{R}^4$ — within which the original $S^2 \subset \mathbb{R}^3 \times \{0\}$ embeds as the equatorial subsphere $x_4 = 0$ and $\pm\vv{e}_4$ sit as its north and south poles (generally, $\mathbb{R}^n \hookrightarrow \mathbb{R}^{n+1} = \mathbb{R}^n \oplus \mathbb{R}\vv{e}_{n+1}$ embeds $S^{n-1}$ equatorially into $S^n$)!
 
+When four dimensions are hard to picture, return to the visible case of two dimensions embedded in three. The old unit circle stays on the equator, without changing its radius. What is new is the direction perpendicular to its plane, with poles off the equator. “Larger sphere” here means an extra ambient dimension, not a larger radius.
+
+::: {.viz src="prelude-dimensions" preset="normal" height="500"}
+**The old circle stays put; a new direction becomes available.** The cyan unit circle is the equator of the new unit sphere. The violet new axis passes through both poles, and the amber point can leave the equator. The drawing shows $\mathbb{R}^2$ embedded in $\mathbb{R}^3$ to help interpret the higher-dimensional embedding in the text.
+:::
+
 Representing a subspace by a normal line requires an ambient space large enough to contain that normal; within a fixed sphere, no single internal vantage captures everything at once. Anchor yourself to one ruler $\vv{o}$, and the orthogonal equator at $90^\circ$ falls into the unbiased horizon $\cos 90^\circ = 0$; abandon every preferred axis and average uniformly over the sphere, and north cancels south, east cancels west, $\frac{1}{4\pi}\int_{S^2} \vv{a}\,d\Omega = \vv{0}$, collapsing the state to the featureless maximally mixed center $\rho_* = \frac{1}{2}I$ ([Chapter 4](ch04-decoherence.md)). Framed explicitly as a **philosophical and structural analogy** — rather than an identity deduced from three-dimensional linear algebra alone — this interplay between internal horizons and ambient lifting parallels Gödelian incompleteness in formal logic (whose exact diagonalization theorems are established formally in Part VI, Chapter 21).
 
 ::: {.figure src="prelude-average"}
 **Give up every direction, average over the whole sphere, and the arrows cancel back to the centre.** Twelve cyan arrows point to the twelve vertices of a regular icosahedron, spread evenly in all directions, each paired with one pointing the opposite way; they add up to zero, and the average sits at the centre, the maximally mixed state $\rho_* = \frac{1}{2}I$.
+:::
+
+Unpack “averaging” as well: the next card replaces the continuous spherical average with three equally weighted antipodal pairs, whose mean vector is also zero. This mixes different preparation directions; it does not turn a single measurement outcome into zero.
+
+::: {.viz src="prelude-dimensions" preset="average" height="500"}
+**Opposite directions cancel, leaving the mean at the centre.** The cyan directions form opposite pairs. Once the equal-weight mixture is complete, the amber mean vector has shrunk to the centre. This is a mixture of finitely many symmetric directions.
 :::
 
 ## 0.5 Final Awakening: From Beyond the Sphere Back to $\psi = \psi(\psi)$ {#sec-awakening}
@@ -125,6 +171,12 @@ Two classical theorems of analysis and transcendental number theory govern the r
 
 1. **Global convergence and uniqueness (Banach fixed-point theorem)**: For every initial value $\theta_0 \in \mathbb{R}$, the first iterate satisfies $\theta_1 = \cos\theta_0 \in [-1, 1]$ and the second enters the compact invariant interval $\theta_2 = \cos\theta_1 \in [0, 1]$. Since $|\cos'(\theta)| = |\sin\theta| \le \sin 1 < 1$ on $[0, 1]$, Banach's contraction theorem guarantees a unique real fixed point $\theta^* \approx 0.7390851332\dots$ (the Dottie number) on $[0, 1]$ — hence on all of $\mathbb{R}$ — with $\lim_{k \to \infty} \theta_k = \theta^*$ for every $\theta_0 \in \mathbb{R}$.
 2. **Transcendence of $\theta^*$ over $\mathbb{Q}$ (Lindemann–Weierstrass theorem)**: The fixed point $\theta^*$ is **transcendental** ($\theta^* \notin \overline{\mathbb{Q}}$). Indeed, $\theta^* \neq 0$ since $\cos 0 = 1 \neq 0$; if $\theta^*$ were algebraic, the distinct algebraic exponents $i\theta^*, -i\theta^*, 0$ would make $e^{i\theta^*}$, $e^{-i\theta^*}$, and $e^0 = 1$ linearly independent over $\overline{\mathbb{Q}}$ by the Lindemann–Weierstrass theorem, forcing $\cos\theta^* - \theta^* = \frac{1}{2}e^{i\theta^*} + \frac{1}{2}e^{-i\theta^*} - \theta^* e^0 \neq 0$, a contradiction. By the same theorem, **every rational or algebraic number $q \in \overline{\mathbb{Q}}$ leaves a strictly nonzero residual $|\cos q - q| > 0$**: for $q = 0$, $|\cos 0 - 0| = 1 > 0$; for any nonzero algebraic $q \in \overline{\mathbb{Q}} \setminus \{0\}$, $\cos q$ is transcendental and therefore cannot equal the algebraic number $q$.
+:::
+
+Finally, try using a reading as the next input. Angles here are in radians: the initial value $1$ means one radian. In each round, read the cosine and put that number back on the horizontal axis. Watch the first six steps alternate toward the crossing before worrying about transcendental numbers.
+
+::: {.viz src="prelude-dimensions" preset="cosine" height="500"}
+**Read it out, then feed it back.** The cyan curve gives the cosine reading, the grey diagonal turns it into the next input, and the amber path shows the first six iterations starting at $1$. The picture is a finite numerical computation; convergence, uniqueness, and transcendence retain the literature status of [@rem-prelude-dottie-literature].
 :::
 
 Ask one further interpretive question: what does the outer function $\cos(\cdot)$ itself express? In the power series $\cos(\theta) = \sum_{k=0}^\infty \frac{(-1)^k}{(2k)!}\theta^{2k}$, the even powers $2k$ reflect even-order return to the principal axis, the alternating signs $(-1)^k$ reflect orientation reversal under two $90^\circ$ planar turns ($\hat{I}^2 = -1$), and the factorials $(2k)!$ divide out permutation order. In this authorial reading, as the infinite nesting $\theta^* = \cos(\cos(\cos(\cdots)))$ reaches its limit, the operator $\cos$ and the fixed-point state $\theta^*$ meet in the symbolic emblem on our title page:
@@ -193,3 +245,10 @@ The violet bar counts only literature remarks and examples. Results explicitly m
 | Observer focus / active state | Amber | Used in figures and UI elements solely to mark the observer's currently selected measurement axis or active reading position. |
 
 3. **Role of Proof Blocks**: A `Proof` (`proof`) block follows its theorem box to illuminate the underlying geometric and algebraic mechanism. Explanations of Lean results conclude with *"The full proof is checked by the Lean kernel."* A written-proof result instead links a complete, sourced argument and makes no such Lean claim. The automatically generated **Formal Verification Ledger** records the pinned `trureturing` commit hash, formalized declaration links, and frozen statement digests, and lists written proofs separately with their sources and requests so readers can audit each kind of evidence.
+
+
+After reading the prelude, revisit its seven cards in the full laboratory. Ask what the ray, disc, or sphere retains, and what the current view leaves out. For the turntable, begin with the card showing circular motion above and back-and-forth motion below.
+
+::: {.viz src="prelude-dimensions" height="620"}
+The prelude geometry laboratory: viewing angle, disc and shadow, coincident positions with opposite motion, latitude circles, an added normal direction, equal-weight mixing, and cosine iteration. Models, numerical computations, and literature results are labelled separately.
+:::

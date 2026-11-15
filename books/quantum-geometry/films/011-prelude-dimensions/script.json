@@ -1,0 +1,38 @@
+{
+  "voice": "af_heart",
+  "speed": 0.9,
+  "music": {"bpm": 72, "progression": "a-minor"},
+  "scenes": [
+    {"id": "disc", "name": "TOP VIEW", "lead": 3.2, "tail": 0.5, "music": [1.0, 0.3, 0.2, 0.0, 0.0], "lines": [
+      ["Here is a disc lying flat on a table, seen from above, with a small peg standing at its rim.", "桌上平放着一个圆盘，我们从正上方往下看；圆盘边缘立着一根小木桩。"],
+      ["The disc turns steadily, counterclockwise. It is always a whole flat surface; the peg is one point on its edge.", "圆盘匀速地逆时针转动。它始终是一整张平面，木桩只是它边缘上的一个点。"]
+    ]},
+    {"id": "edge", "name": "EDGE VIEW", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.4, 0.0, 0.1], "lines": [
+      ["Now lower your eye to table level, and look at the same disc from the side.", "现在把眼睛降到桌面的高度，从侧面看同一个圆盘。"],
+      ["Model this view as a straight projection: each point keeps its left-right position and loses its depth.", "把这种看法当作正交投影的模型：每一点保留左右位置，丢掉前后深度。"],
+      ["So the shadow of the disc is a line segment, and the shadow of the peg is a point.", "于是，圆盘的影子是一段线，木桩的影子是一个点。"]
+    ], "cues": [{"line": 2, "at": 3.2, "kind": "chime"}]},
+    {"id": "lap", "name": "ONE LAP", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.2, 0.2], "lines": [
+      ["Follow one slow lap. The peg on the disc keeps the same speed all the way round.", "慢慢跟着走一圈。圆盘上的木桩一路保持同样的速度。"],
+      ["Its shadow does not. It races through the middle, slows near the ends, stops, and turns back.", "它的影子却不是这样：在中间飞快穿过，靠近两端变慢，停住，再掉头。"],
+      ["One angle, theta, tells where the peg is. The shadow sits at x equals cosine theta.", "一个角 θ 就说明木桩在哪里；影子的位置是 x = cos θ。"],
+      ["In units of the peg's speed, the shadow's velocity is minus sine theta, zero at both ends.", "以木桩的恒定速度为单位，影子的速度是 −sin θ，在两端为零。"]
+    ]},
+    {"id": "same", "name": "SAME SHADOW", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.7, 0.4, 0.3], "lines": [
+      ["Compare two moments: the peg at ninety degrees, and the peg at two hundred seventy degrees.", "比较两个时刻：木桩在 90°，以及木桩在 270°。"],
+      ["Both shadows sit in the middle, at x equals zero. Yet one heads left, the other right.", "两个影子都落在正中，x = 0；可一个往左走，一个往右走。"],
+      ["Turn both forward by the same small angle, fifteen degrees, and the two shadows split apart.", "让两者都再前进同样的小角度 15°，两个影子随即分开。"],
+      ["The shadows started at one position, but that does not mean the original states were the same.", "两个影子起初在同一位置，但这并不代表原来的状态相同。"]
+    ], "cues": [{"line": 2, "at": 3.4, "kind": "impact"}]},
+    {"id": "lift", "name": "LIFT YOUR EYES", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Lift your eyes, and the line opens back into the disc. Now read two numbers, not one.", "抬起视线，线段重新展开成圆盘。现在读两个数，而不是一个。"],
+      ["Across, x equals cosine theta. In the hidden direction, y equals sine theta: plus one at ninety, minus one at two seventy.", "左右方向 x = cos θ；被藏起来的方向 y = sin θ：90° 处为 +1，270° 处为 −1。"],
+      ["No extra spring acts on the shadow: the steady turn, seen whole, explains every stop and reversal.", "影子上没有额外的弹簧：把匀速转动看完整，每一次停住与掉头都有了解释。"],
+      ["One caution. This is an illustration of lost information, not a derivation of quantum mechanics.", "提醒一句：这只是信息丢失的示意，不是对量子力学的推导。"]
+    ], "cues": [{"line": 1, "at": 3.0, "kind": "chime"}]},
+    {"id": "next", "name": "NEXT STEP", "lead": 0.5, "tail": 4.2, "music": [1.0, 0.5, 0.4, 0.2, 0.1], "lines": [
+      ["The prelude goes on to explore a sphere. Keep asking which parts of a shape a view can hide.", "序曲接下来还会探索球面。继续问：一种看法会把物体的哪些部分藏起来？"],
+      ["Each time, ask first what the view shows, then what it leaves out. Then read on in the prelude.", "每一次，先问看见了什么，再问漏掉了什么；然后接着读序曲。"]
+    ], "cues": [{"line": 1, "at": 4.4, "kind": "chime"}]}
+  ]
+}
