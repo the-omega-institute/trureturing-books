@@ -1253,25 +1253,128 @@ $$
 \quad\text{当 }d(x,y)=1.
 $$
 
-**从耦合到分块谱隙。** 合法字集对删除 $1$ 封闭。由 $x$ 先删到逐位交 $x\cap y$，再添到 $y$，得到长度恰为 $d(x,y)$ 的合法单比特路径。沿这条路径拼接相邻字的上述耦合，再用汉明距离的三角不等式，可把一步期望距离估计推广到所有字对。
-
-对有限集上的函数定义
+**从耦合到分块谱隙。** 这里仅需相邻合法字的实际耦合。先把其有限求和形式写清楚：简记 $T_a=E_{B_a}$，对每个有向相邻字对 $(s,t)$ 和每个原时钟索引 $a$，令 $Q_a(s,t;v,w)$ 为上面构造的同一个刷新后完整字联合律的质量。它满足
 
 $$
-\operatorname{Lip}(g)=\max_{x\ne y}\frac{|g(x)-g(y)|}{d(x,y)}.
+\begin{aligned}
+Q_a(s,t;v,w)&\ge0,\\
+\sum_wQ_a(s,t;v,w)&=T_{B_a}(s,v),\\
+\sum_vQ_a(s,t;v,w)&=T_{B_a}(t,w),\\
+\sum_{v,w}Q_a(s,t;v,w)&=\sum_vT_{B_a}(s,v)=1.
+\end{aligned}
 $$
 
-耦合估计给出
+所有字指标均在原来的 $W_N$ 中。最后一式由第一边缘及已证明的行和推出。用这个联合律定义完整汉明代价
 
 $$
-\operatorname{Lip}(P_Bg)\le\left(1-\frac1M\right)\operatorname{Lip}(g).
+C_a(s,t)=\sum_{v,w}Q_a(s,t;v,w)d(v,w).
 $$
 
-上面的纤维计算已证明每个 $E_B$ 都是 $L^2(\pi)$ 中的正交条件投影，故 $P_B$ 自伴。非常数特征函数 $g$ 的 Lipschitz 半范数正且有限；若 $P_Bg=\mu g$，上式便给出 $|\mu|\le1-1/M$，并排除了特征值 $1$ 的额外特征函数。因此 $-L_B$ 的非常数谱至少为 $1$。按其正交特征分解和已证明的能量恒等式，对所有复值函数都有
+因为 $0\le d(v,w)\le N$ 且总质量为 $1$，$C_a(s,t)$ 是 $[0,N]$ 内的有限实数。含分歧位的 $\ell$ 个索引代价为零，至多 $2R$ 个受影响索引代价不超过 $2$，其余代价为 $1$。因此对这些同一实际耦合，
 
 $$
-\operatorname{Var}_\pi(f)\le\mathcal E_B(f,f).
+\begin{aligned}
+\sum_a(C_a(s,t)-1)&\le-\ell+2R=-1,\\
+\sum_a C_a(s,t)&\le M-1.
+\end{aligned}
 $$
+
+这里索引数恰为 $N-(2-\ell)+1=M=N+\ell-1\ge\ell\ge3$，所以第二行只是展开第一行的 $M$ 个减一项。若均匀选取一个索引，联合质量为 $M^{-1}\sum_aQ_a(s,t;v,w)$，总质量为 $1$，两个边缘为 $P_B(s,\cdot)$ 与 $P_B(t,\cdot)$，期望完整距离为 $M^{-1}\sum_aC_a(s,t)$。这也说明前面的一步期望估计中 $1/M$ 的来源；重复截断块仍逐索引计数。
+
+现在看函数差。合法字集对删除 $1$ 封闭。由 $x$ 先删到逐位交 $x\cap y$，再添到 $y$，路径的前半段始终逐位不超过 $x$，后半段始终逐位不超过 $y$，故全程合法。每个相异坐标恰翻转一次，路径长度为 $d(x,y)$；任何单比特路径至少需要这么多步。因此合法翻转图的最短路距离就是完整汉明距离。$N\ge1,K\ge2$ 保证全零字和仅首位为 $1$ 的字构成一条边，图的边集非空。
+
+对任意 $g:W_N\to\mathbb C$，定义有限相邻边最大值及全局半范数
+
+$$
+\begin{aligned}
+L_{\partial}(g)&=\max_{d(s,t)=1}|g(s)-g(t)|,\\
+\operatorname{Lip}(g)&=\max_{x\ne y}
+\frac{|g(x)-g(y)|}{d(x,y)}.
+\end{aligned}
+$$
+
+两者的最大值都在非空有限集上取到。沿上述路径对函数差使用三角不等式，得 $|g(x)-g(y)|\le L_{\partial}(g)d(x,y)$，所以 $\operatorname{Lip}(g)\le L_{\partial}(g)$；把相邻字对代入全局最大值给出反向不等式。故两者相等，并且恰在 $g$ 为常数时等于零。尤其非常数函数的相邻边最大值严格为正且有限。
+
+固定一条相邻边和一个时钟，两个原边缘给出如下同一联合律下的比较：
+
+$$
+\begin{aligned}
+(T_ag)(s)-(T_ag)(t)
+&=\sum_{v,w}Q_a(s,t;v,w)(g(v)-g(w)),\\
+|(T_ag)(s)-(T_ag)(t)|
+&\le\sum_{v,w}Q_a(s,t;v,w)|g(v)-g(w)|\\
+&\le L_{\partial}(g)C_a(s,t).
+\end{aligned}
+$$
+
+等式分别使用行边缘与列边缘；不等式使用质量非负以及刚证明的全局函数差界。再对原来的 $M$ 个时钟平均，直接在每条边上得到
+
+$$
+\begin{aligned}
+|(P_Bg)(s)-(P_Bg)(t)|
+&\le\frac{L_{\partial}(g)}M\sum_aC_a(s,t)\\
+&\le\left(1-\frac1M\right)L_{\partial}(g).
+\end{aligned}
+$$
+
+沿合法最短路相加这些函数差估计，便对任意 $x,y\in W_N$ 得到
+
+$$
+\begin{aligned}
+|(P_Bg)(x)-(P_Bg)(y)|
+&\le\left(1-\frac1M\right)\operatorname{Lip}(g)d(x,y),\\
+\operatorname{Lip}(P_Bg)
+&\le\left(1-\frac1M\right)\operatorname{Lip}(g).
+\end{aligned}
+$$
+
+这一步只延伸函数差的界，不要求为非相邻字对构造联合律。若非常数特征函数满足 $P_Bg=\mu g$，半范数的齐次性和严格正性立即给出已述的绝对值界 $|\mu|\le1-1/M$，也排除了特征值 $1$ 的额外特征函数。
+
+生成元的下界还可以在一条取到最大值的边上直接读出。令
+
+$$
+A=-L_B=\sum_a(I-T_a)=M(I-P_B).
+$$
+
+设实值非常数函数 $h$ 满足 $Ah=\lambda h$，$\lambda\in\mathbb R$。取达到 $L=L_{\partial}(h)>0$ 的边，必要时交换端点，使 $h(s)-h(t)=L$。在这条边上使用刚才各时钟的比较，并相减两端的特征函数方程，得
+
+$$
+\begin{aligned}
+(M-\lambda)L
+&=\sum_a\bigl((T_ah)(s)-(T_ah)(t)\bigr)\\
+&\le L\sum_aC_a(s,t)\le L(M-1).
+\end{aligned}
+$$
+
+除以严格正的有限数 $L$，即得 $\lambda\ge1$。此处是每个索引速率 $1$ 的生成元下界；若把总刷新速率改为 $1$，生成元才是 $-A/M$，对应下界为 $1/M$。
+
+上述特征函数比较依赖实际边缘与代价，不依赖矩阵对称性。实对称性用于下一步谱分解：各 $T_a$ 的实际纤维矩阵实对称，故 $A$ 在均匀内积下有实正交归一特征基。行和为 $1$ 给出 $A1=0$，前面的比较排除了所有非常数零特征函数；又因 $\|1\|_\pi^2=Z/Z=1$，可取 $e_0=1$，其余 $e_j$ 均与常数正交，特征值 $\lambda_j\ge1$。条件投影及其补投影的正性还给出 $0\le P_B\le I$，所以离散时间特征值非负；其绝对值收缩界本身已由边上的估计得到。
+
+对任意实值 $h$，令 $u=h-\pi h=\sum_{j=1}^{Z-1}c_je_j$。由正交归一性和自伴性，
+
+$$
+\begin{aligned}
+\operatorname{Var}_\pi(h)=\|u\|_\pi^2
+&=\sum_{j=1}^{Z-1}c_j^2\\
+&\le\sum_{j=1}^{Z-1}\lambda_jc_j^2
+=\langle u,Au\rangle_\pi\\
+&=\langle h,Ah\rangle_\pi.
+\end{aligned}
+$$
+
+最后的等式使用 $A1=0$ 以及 $\langle1,Ah\rangle_\pi=\langle A1,h\rangle_\pi=0$；归一化始终是原来的 $\pi=1/Z$。对复值 $f=h+ik$，实矩阵 $A$ 分别作用于实部与虚部，方差与能量分别相加：
+
+$$
+\begin{aligned}
+\operatorname{Var}_\pi(f)
+&=\operatorname{Var}_\pi(h)+\operatorname{Var}_\pi(k)\\
+&\le\langle h,Ah\rangle_\pi+\langle k,Ak\rangle_\pi\\
+&=\operatorname{Re}\langle f,Af\rangle_\pi
+=\mathcal E_B(f,f).
+\end{aligned}
+$$
+
+最后一步正是上面按原时钟求和的复值条件方差恒等式。因此原有的复值分块方差界来自有限标量谱分解，无须增加全字对耦合假设。
 
 **把分块能量交还给单点时钟。** 固定一个块 $B=B_a$。对实际可出现的外部赋值 $e\in\{0,1\}^{B^c}$，记 $e\sqcup b$ 为把外部 $e$ 与块内赋值 $b$ 按坐标拼回的完整字，并定义
 

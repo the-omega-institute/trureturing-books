@@ -1253,25 +1253,128 @@ $$
 \quad\text{when }d(x,y)=1.
 $$
 
-**From coupling to a block gap.** The legal-word set is closed under deleting ones. Deleting from $x$ to the coordinatewise intersection $x\cap y$ and then adding toward $y$ gives a legal single-bit path of length exactly $d(x,y)$. Glue the adjacent-word couplings along this path and apply the triangle inequality for Hamming distance. This extends the one-step expected-distance bound to every pair of words.
-
-For a function on this finite set, define
+**From coupling to a block gap.** Only the actual couplings of adjacent legal words are needed here. First make their finite sums explicit. Write $T_a=E_{B_a}$, and for each oriented adjacent pair $(s,t)$ and each original clock index $a$, let $Q_a(s,t;v,w)$ be the mass of the single joint law of refreshed full words constructed above. It satisfies
 
 $$
-\operatorname{Lip}(g)=\max_{x\ne y}\frac{|g(x)-g(y)|}{d(x,y)}.
+\begin{aligned}
+Q_a(s,t;v,w)&\ge0,\\
+\sum_wQ_a(s,t;v,w)&=T_{B_a}(s,v),\\
+\sum_vQ_a(s,t;v,w)&=T_{B_a}(t,w),\\
+\sum_{v,w}Q_a(s,t;v,w)&=\sum_vT_{B_a}(s,v)=1.
+\end{aligned}
 $$
 
-The coupling bound gives
+All word indices range over the original $W_N$. The last equality follows from the first marginal and the row sum already proved. Define the full Hamming cost using this joint law:
 
 $$
-\operatorname{Lip}(P_Bg)\le\left(1-\frac1M\right)\operatorname{Lip}(g).
+C_a(s,t)=\sum_{v,w}Q_a(s,t;v,w)d(v,w).
 $$
 
-The fiber calculation above proves that each $E_B$ is an orthogonal conditional projection in $L^2(\pi)$, so $P_B$ is self-adjoint. A nonconstant eigenfunction $g$ has a finite positive Lipschitz seminorm. If $P_Bg=\mu g$, the last inequality yields $|\mu|\le1-1/M$, also excluding additional eigenfunctions at eigenvalue $1$. Thus the nonconstant spectrum of $-L_B$ is at least $1$. Its orthogonal eigendecomposition and the proved energy identity give, for every complex-valued function,
+Since $0\le d(v,w)\le N$ and the total mass is $1$, $C_a(s,t)$ is a finite real number in $[0,N]$. The $\ell$ indices containing the disagreement site have cost zero, at most $2R$ affected indices have cost at most $2$, and all remaining indices have cost $1$. Thus, for these same actual couplings,
 
 $$
-\operatorname{Var}_\pi(f)\le\mathcal E_B(f,f).
+\begin{aligned}
+\sum_a(C_a(s,t)-1)&\le-\ell+2R=-1,\\
+\sum_a C_a(s,t)&\le M-1.
+\end{aligned}
 $$
+
+There are exactly $N-(2-\ell)+1=M=N+\ell-1\ge\ell\ge3$ indices, so the second line simply expands the $M$ subtracted ones in the first. Choosing an index uniformly gives joint mass $M^{-1}\sum_aQ_a(s,t;v,w)$, with total mass $1$, marginals $P_B(s,\cdot)$ and $P_B(t,\cdot)$, and expected full distance $M^{-1}\sum_aC_a(s,t)$. This also derives the factor $1/M$ in the preceding one-step expectation bound. Coincident clipped blocks continue to count separately by index.
+
+Now consider function differences. The legal-word set is closed under deleting ones. Delete from $x$ to the coordinatewise intersection $x\cap y$, then add toward $y$. Every word on the first part is coordinatewise at most $x$, and every word on the second is coordinatewise at most $y$, so the entire path is legal. Each differing coordinate flips exactly once, giving length $d(x,y)$; any single-bit path needs at least that many steps. The shortest-path distance in the legal flip graph is therefore full Hamming distance. Since $N\ge1$ and $K\ge2$, the all-zero word and the word with only its first bit set form an edge, so the edge set is nonempty.
+
+For any $g:W_N\to\mathbb C$, define the finite maximum over adjacent edges and the global seminorm by
+
+$$
+\begin{aligned}
+L_{\partial}(g)&=\max_{d(s,t)=1}|g(s)-g(t)|,\\
+\operatorname{Lip}(g)&=\max_{x\ne y}
+\frac{|g(x)-g(y)|}{d(x,y)}.
+\end{aligned}
+$$
+
+Both maxima are attained on nonempty finite sets. The triangle inequality for function differences along the path gives $|g(x)-g(y)|\le L_{\partial}(g)d(x,y)$, hence $\operatorname{Lip}(g)\le L_{\partial}(g)$. Substituting adjacent pairs in the global maximum gives the reverse inequality. The two quantities are equal and vanish exactly when $g$ is constant. In particular, a nonconstant function has a strictly positive, finite maximum edge oscillation.
+
+Fix an adjacent edge and a clock. The two original marginals give the following comparison under one common joint law:
+
+$$
+\begin{aligned}
+(T_ag)(s)-(T_ag)(t)
+&=\sum_{v,w}Q_a(s,t;v,w)(g(v)-g(w)),\\
+|(T_ag)(s)-(T_ag)(t)|
+&\le\sum_{v,w}Q_a(s,t;v,w)|g(v)-g(w)|\\
+&\le L_{\partial}(g)C_a(s,t).
+\end{aligned}
+$$
+
+The equality uses the row and column marginals, respectively. The inequalities use nonnegative masses and the global function-difference bound just proved. Averaging over the original $M$ clocks now gives, directly on each edge,
+
+$$
+\begin{aligned}
+|(P_Bg)(s)-(P_Bg)(t)|
+&\le\frac{L_{\partial}(g)}M\sum_aC_a(s,t)\\
+&\le\left(1-\frac1M\right)L_{\partial}(g).
+\end{aligned}
+$$
+
+Sum these function-difference bounds along a legal shortest path to obtain, for every $x,y\in W_N$,
+
+$$
+\begin{aligned}
+|(P_Bg)(x)-(P_Bg)(y)|
+&\le\left(1-\frac1M\right)\operatorname{Lip}(g)d(x,y),\\
+\operatorname{Lip}(P_Bg)
+&\le\left(1-\frac1M\right)\operatorname{Lip}(g).
+\end{aligned}
+$$
+
+This extends the bound on function differences without requiring a joint law for nonadjacent inputs. If a nonconstant eigenfunction satisfies $P_Bg=\mu g$, homogeneity and strict positivity of the seminorm immediately give the stated absolute bound $|\mu|\le1-1/M$, excluding additional eigenfunctions at eigenvalue $1$ as well.
+
+The generator bound can also be read directly from an edge attaining the maximum. Put
+
+$$
+A=-L_B=\sum_a(I-T_a)=M(I-P_B).
+$$
+
+Let a nonconstant real function $h$ satisfy $Ah=\lambda h$, with $\lambda\in\mathbb R$. Choose an edge attaining $L=L_{\partial}(h)>0$, and reverse its orientation if necessary so that $h(s)-h(t)=L$. Apply the comparison for each clock on this edge and subtract the eigenfunction equations at its endpoints:
+
+$$
+\begin{aligned}
+(M-\lambda)L
+&=\sum_a\bigl((T_ah)(s)-(T_ah)(t)\bigr)\\
+&\le L\sum_aC_a(s,t)\le L(M-1).
+\end{aligned}
+$$
+
+Dividing by the strictly positive finite number $L$ gives $\lambda\ge1$. This is the bound for a generator with rate $1$ at each index. Changing the total refresh rate to $1$ would give generator $-A/M$ and the corresponding bound $1/M$.
+
+The eigenfunction comparison uses the actual marginals and costs and does not require matrix symmetry. Real symmetry enters the spectral passage: each $T_a$ is the actual real symmetric fiber matrix, so $A$ has a real orthonormal eigenbasis for the uniform inner product. Unit row sums give $A1=0$, and the comparison excludes every nonconstant zero eigenfunction. Since $\|1\|_\pi^2=Z/Z=1$, we may take $e_0=1$, with the remaining $e_j$ orthogonal to constants and their eigenvalues $\lambda_j\ge1$. Positivity of the conditional projections and their complementary projections also gives $0\le P_B\le I$, hence nonnegative discrete-time eigenvalues; the absolute contraction bound itself already follows from the edge estimate.
+
+For any real $h$, put $u=h-\pi h=\sum_{j=1}^{Z-1}c_je_j$. Orthonormality and self-adjointness give
+
+$$
+\begin{aligned}
+\operatorname{Var}_\pi(h)=\|u\|_\pi^2
+&=\sum_{j=1}^{Z-1}c_j^2\\
+&\le\sum_{j=1}^{Z-1}\lambda_jc_j^2
+=\langle u,Au\rangle_\pi\\
+&=\langle h,Ah\rangle_\pi.
+\end{aligned}
+$$
+
+The last equality uses $A1=0$ and $\langle1,Ah\rangle_\pi=\langle A1,h\rangle_\pi=0$. The normalization remains the original $\pi=1/Z$ throughout. For complex $f=h+ik$, the real matrix $A$ acts separately on the real and imaginary parts, and variance and energy split additively:
+
+$$
+\begin{aligned}
+\operatorname{Var}_\pi(f)
+&=\operatorname{Var}_\pi(h)+\operatorname{Var}_\pi(k)\\
+&\le\langle h,Ah\rangle_\pi+\langle k,Ak\rangle_\pi\\
+&=\operatorname{Re}\langle f,Af\rangle_\pi
+=\mathcal E_B(f,f).
+\end{aligned}
+$$
+
+The last step is exactly the complex conditional-variance identity summed over the original clocks above. The original complex block variance bound thus follows from finite scalar spectral decomposition, without an additional all-pair coupling assumption.
 
 **Return the block energy to the single-site clocks.** Fix a block $B=B_a$. For a realizable exterior assignment $e\in\{0,1\}^{B^c}$, write $e\sqcup b$ for the full word obtained by joining $e$ to a block assignment $b$, and define
 
