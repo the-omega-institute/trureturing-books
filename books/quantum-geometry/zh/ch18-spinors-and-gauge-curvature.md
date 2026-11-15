@@ -46,7 +46,7 @@ $$
 :::
 
 ::: proof
-在 $\operatorname{Fin} 2 \times \operatorname{Fin} 2$ 的四个矩阵元位置上直接展开乘法与共轭转置：$\operatorname{qubitZ}\cdot\operatorname{qubitX} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$，而 $\operatorname{qubitX}\cdot\operatorname{qubitZ} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -\operatorname{qubitZ}\cdot\operatorname{qubitX}$；两矩阵均为实对称矩阵且各行构成标准正交组，故自伴性与平方归一性逐项成立。完整证明由 Lean 内核检查。
+在 $\operatorname{Fin} 2 \times \operatorname{Fin} 2$ 的四个矩阵元位置上直接展开乘法与共轭转置：$\operatorname{qubitZ}\cdot\operatorname{qubitX} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$，而 $\operatorname{qubitX}\cdot\operatorname{qubitZ} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -\operatorname{qubitZ}\cdot\operatorname{qubitX}$；固定矩阵 $\operatorname{qubitX}$ 与 $\operatorname{qubitZ}$ 均为实对称矩阵且各行构成标准正交组，故自伴性与平方归一性逐项成立。完整证明由 Lean 内核检查。
 :::
 
 请留意 [@lemma-qubit-clifford-pair] 在本章中的精确角色：它是狄拉克线性化（将平方和 $p^2 + m^2$ 因式分解为一阶矩阵算子平方）在最简二维空间上的**有限维代数起点**，而不是四维时空连续狄拉克偏微分方程的形式化。利用这对二阶反交换矩阵，我们可以立即手算出一个透明的二维手性耦合模型。

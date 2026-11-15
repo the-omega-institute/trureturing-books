@@ -46,7 +46,7 @@ $$
 :::
 
 ::: proof
-Direct matrix multiplication over `Fin 2 × Fin 2` gives $\operatorname{qubitZ}\cdot\operatorname{qubitX} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ and $\operatorname{qubitX}\cdot\operatorname{qubitZ} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -\operatorname{qubitZ}\cdot\operatorname{qubitX}$. Because both matrices have real entries symmetric across the main diagonal with unit row norms, self-adjointness and $\operatorname{qubitX}^2 = \operatorname{qubitZ}^2 = 1$ follow entrywise. The full proof is checked by the Lean kernel.
+Direct matrix multiplication over `Fin 2 × Fin 2` gives $\operatorname{qubitZ}\cdot\operatorname{qubitX} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ and $\operatorname{qubitX}\cdot\operatorname{qubitZ} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -\operatorname{qubitZ}\cdot\operatorname{qubitX}$. Because the fixed matrices $\operatorname{qubitX}$ and $\operatorname{qubitZ}$ have real entries symmetric across the main diagonal with unit row norms, self-adjointness and $\operatorname{qubitX}^2 = \operatorname{qubitZ}^2 = 1$ follow entrywise. The full proof is checked by the Lean kernel.
 :::
 
 Note the precise scope of [@lemma-qubit-clifford-pair] in this chapter: it is the finite-dimensional two-component algebraic starting point for Dirac-type linearization of $p^2 + m^2$, not a formalization of the four-dimensional continuum Dirac partial differential equation. Using this pair, we can immediately work out an explicit two-component chiral coupling example by hand.
