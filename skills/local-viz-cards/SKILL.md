@@ -29,7 +29,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 80 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 81 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -113,6 +113,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `bounded-horizon-thermodynamics-sandbox` | 视界切断几条嵌套纠缠弧就生出多少切口熵，全看见与零纠缠都归零，模流绕切口转出有效温度并在冻石与热寂之间显出余弦不动点稳态 | `omniscient-zero` `isolated-zeno` `horizon-page-curve` `modular-unruh-heat` `dottie-living-steady` |
 | `gram-window-consensus-sandbox` | 每多记一条历史记录就多加一顶相干球冠把可行走廊越收越窄直至锁死，遗忘最旧记录重开走廊，两人同步遗忘才修复共享共识 | `schur-cap-corridor` `golden-triangle-m3` `overconstrained-lock-m9` `forgetting-reopen` `dual-window-consensus` |
 | `roundtrip-born-imaginary-blindspot-sandbox` | 单程投影只给影子 cos θ，往返回到自身轴 I 才读出玻恩回声 cos²θ；垂直于 I 的盲平面在 I 上恒读 0，转进盲区的那一下就是虚数 i | `radar-roundtrip-born` `azimuth-cone-blindspot` `observer-first-person-90` `imaginary-double-turn` `schrodinger-arc-engine` |
+| `prelude-dimensions` | 影子少一维，同一个位置可以藏着不同的运动 | `head-on` `shadow` `compare` `latitude` `normal` `average` `cosine` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -264,12 +265,22 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `roundtrip-born-imaginary-blindspot-sandbox`（`ECHO//IMAGINARY`）与 `pairwise-shutter`、`repeated-projection`、`fairness-square-uncertainty-expansion` 分工：前三页分别讲快门离散抽样计数、布洛赫球未读捏合幂等与开口螺旋算术逃逸，本页讲第三十四章 §34.19 `#sec-ch34-roundtrip-projection-and-imaginary-blindspot` 的全章收官命题——“观察者站在自身轴 I 上看不见 90° 垂直盲平面 span{e₁, e₂}，单程只得青色影子 cos θ，往返双投影 I → (cos θ)V → (cos²θ)I 才给出琥珀玻恩回声 cos²θ，而转进 90° 盲区的那一下正是虚数 i（×i² = −1）与薛定谔保范圆弧时间引擎 e^(−iωt)”：舞台用 `kit.solid` 画观察者轴 I、与 I 垂直的品红盲平面圆盘、等倾角紫色方位锥、两段折返雷达脉冲与盛住画面的下半球碗，顶部切换外部三维、沿 I 轴侧看盲边与转 90° 基俯视盲平面三种视角；青色是单程投影影子 cos θ、两段折返投影线与薛定谔保范圆弧轨迹，品红是 90° 垂直盲平面、逃逸高度 sin θ 与盲区亏量 sin²θ，紫色是 360° 等倾角方位盲锥与 ×i 双直角旋子平面，琥珀只给观察者基准轴 I、可拖动的当前态矢 V 与落回 I 轴的当前玻恩回声点 cos²θ（实数衰减对照线用中性虚线，红色只给抽屉里的测量单结果问题 `OPEN` 标记）。绿色框严格只给页面引用的十条冻结定理（`rank_one_born_pairing_weight`、`born_probability_skeleton`、`lagrange_gram_identity`、`orthogonal_complement_projection_identities`、`partition_inseparable_iff_kernel`、`diagonal_prime_observables_cannot_recover_relative_phase`、`robertson_schrodinger`、`square_eq_neg_one_of_skewAdjoint_unitary`、`projection_probability_flow`、`energy_eigenstate_stationary`）；玻恩定则、马吕斯 cos²θ 偏振律与笛卡尔 1637 年“imaginaires”词源标 `ARGUED`；cos θ、cos²θ、sin²θ、锥冠立体角 2π(1 − cos θ)、盲圆周长 2π sin θ、换位子界 |sin 2θ sin φ|、e^(−2t) 与牛顿法解 θ* 实算标 `NUM`；三维单位向量画法（显式标明布洛赫极角为 2θ）与“对于我 I 看不见即为虚 i”第一人称诠释标 `MODEL`。
 
+`prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
+
 ## 正文里的引用（中英文版本位置与卡名相同）
 
 按章排列；同一章内按正文里出现的先后。
 
 | 章节 | 位置 | 引用 |
 | --- | --- | --- |
+| 序曲 | §0.1 静态射线图之后的观看角度操作段 | `prelude-dimensions` · `head-on` |
+| 序曲 | §0.2 区分圆盘与木桩的投影之后 | `prelude-dimensions` · `shadow` |
+| 序曲 | §0.2 静态转盘图之后的两个时刻对照段 | `prelude-dimensions` · `compare` |
+| 序曲 | §0.3 静态纬圈图之后的操作段 | `prelude-dimensions` · `latitude` |
+| 序曲 | §0.4 解释“更大”指多一维、半径不变之后 | `prelude-dimensions` · `normal` |
+| 序曲 | §0.4 静态平均图之后，区分混合与单次测量之后 | `prelude-dimensions` · `average` |
+| 序曲 | §0.5 余弦不动点文献注记之后、哲学追问之前 | `prelude-dimensions` · `cosine` |
+| 序曲 | 章末回看问题之后 | `prelude-dimensions` 完整实验室 |
 | 第一章 | §1.2 快门插图 `ch01-shutter` 之后、“全能属性账本”一段之前 | `pairwise-shutter` · `clicks` |
 | 第一章 | §1.3 例 `ex-bloch-six-poles` 之后、“至此，我们已经完成了第一场大扫除”之前 | `qubit-geometry` · `poles` |
 | 第二章 | §2.1 “矩阵的迹”一段之后、定义 `def-born-probability` 之前 | `pairwise-shutter` · `turn` |

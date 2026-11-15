@@ -381,9 +381,9 @@ section: "Part V · picture"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 19 · three candidate cuts</p>
-  <h2 class="t">The width-three bridge graph has <em>three candidate cuts</em></h2>
-  <img src="./img/ch19-three-cuts.en.svg" alt="Three dashed cuts across the width-three bridge graph; the minimum cut is the smallest of the three." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="kicker">Chapter 19 · three source bounds</p>
+  <h2 class="t">The source uses <em>three cut-capacity bounds</em></h2>
+  <img src="./img/ch19-three-cuts.en.svg" alt="Three dashed cuts across the width-three bridge graph show the three cut-capacity bounds used by the source; in this worked example, the minimum cut is the smallest of the three." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">Take <Tex t="(a, b, c, d) = (2, 3, 2, 3)" />: cutting legs <Tex t="a, d" /> costs <Tex t="ad = 6" />, cutting legs <Tex t="b, c" /> costs <Tex t="bc = 6" />, the slanted cut costs more; the minimum cut is the smallest of the three.</p>
 </div>
 <Source>Chapter 19, ch19-three-cuts</Source>

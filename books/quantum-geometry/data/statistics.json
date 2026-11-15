@@ -11,7 +11,7 @@
     "conjecture": 6,
     "problem": 3,
     "example": 127,
-    "remark": 208,
+    "remark": 209,
     "proof": 319,
     "lean_verified": 321,
     "written_proof": 3,
@@ -10246,13 +10246,13 @@
       "citations": [
         {
           "file": "ch18-spinors-and-gauge-curvature.md",
-          "line": 229,
+          "line": 398,
           "id": "cor-anchored-phase-classification",
           "via": "environment"
         },
         {
           "file": "ch18-spinors-and-gauge-curvature.md",
-          "line": 221,
+          "line": 390,
           "id": "",
           "via": "inline"
         },
@@ -10492,7 +10492,7 @@
       "citations": [
         {
           "file": "ch18-spinors-and-gauge-curvature.md",
-          "line": 169,
+          "line": 338,
           "id": "thm-tree-phase-transport",
           "via": "environment"
         },

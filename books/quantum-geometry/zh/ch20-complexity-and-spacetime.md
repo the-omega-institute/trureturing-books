@@ -258,7 +258,7 @@ $$
 :::
 
 ::: {.figure src="ch20-parity-labels"}
-**CNOT 下界数的是导线上的奇偶标签：每个非零偶标签都要诞生一次，每次诞生都要一次奇复原来抵消。** 左栏是 $n = 1$ 的两比特电路：导线 0 始终是青色的 $z_0$；导线 1 先是青色的 $z_1$，第一个 $\mathrm{CNOT}$（偶诞生）后变成品红的 $z_0 \oplus z_1$，$R_z$ 在它上面注入相位，第二个 $\mathrm{CNOT}$（奇复原）后又回到青色的 $z_1$，合计 $1 + 1 = 2$ 个 $\mathrm{CNOT}$；脚本逐元核对过这条电路等于 $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ 乘一个全局相位。右栏是 $n = 2$ 时必须在导线上出现的 $7$ 个品红的非零偶奇偶标签，加上至少 $3$ 次复原，合计下界 $10$；绿色标签是 [@prop-reflection-cnot-lower-bound]。图不说明 $10$ 能否达到。
+**CNOT 下界数的是导线上的奇偶标签：每个所需的非零偶标签都要出现，奇加奇的偶诞生与奇复原则须在总次数上平衡。** 左栏是 $n = 1$ 的两比特电路：导线 0 始终是青色的 $z_0$；导线 1 先是青色的 $z_1$，第一个 $\mathrm{CNOT}$（偶诞生）后变成品红的 $z_0 \oplus z_1$，$R_z$ 在它上面注入相位，第二个 $\mathrm{CNOT}$（奇复原）后又回到青色的 $z_1$，合计 $1 + 1 = 2$ 个 $\mathrm{CNOT}$；脚本逐元核对过这条电路等于 $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ 乘一个全局相位。右栏是 $n = 2$ 时必须在导线上出现的 $7$ 个品红的非零偶奇偶标签，加上至少 $3$ 次复原，合计下界 $10$；绿色标签是 [@prop-reflection-cnot-lower-bound]。图不说明 $10$ 能否达到。
 :::
 
 按照认识论诚实原则，必须指出 [@prop-reflection-cnot-lower-bound] 的三条严格边界：
@@ -351,7 +351,7 @@ $$
 
 ### 20.4.1 从时空门计数通往无时间因果与场线分野 {#sec-timeless-crystal-page-numbers}
 
-走到第五部收官处，本章经 Lean 4 内核形式化验证的四条结果——开放边界可积电路最小并行深度闭式解 $L = \lfloor N/(\kappa+1)\rfloor + 1$（[@thm-open-circuit-min-depth]）、两条文献深度公式的反例证伪（[@lemma-open-circuit-depth-refutation]）、反射对称对角酉算子的指数级 $\mathrm{CNOT}$ 门计数下界 $2^{2n-1} + 2n - 2$（[@prop-reflection-cnot-lower-bound]）以及偶圈图闭合遍历步长偶性（[@cor-even-cycle-length]）——与三大开放猜想（[@conj-complexity-equals-volume]、[@conj-er-equals-epr]、[@conj-p-neq-np]）共同立起了一座清晰的几何坐标：在固定门集与局域相互作用约束下，局域观察者要想跨越空间纠缠割或对齐高维反射对称相位，必须实打实地付出最少层数 $L$ 或指数级双比特门数的旋转代价。
+走到第五部收官处，本章经 Lean 4 内核形式化验证的四条结果——固定有序开放边界可积电路族在 $1 \le \kappa$、$2\kappa \le N$ 下的最小并行深度闭式解 $L = \lfloor N/(\kappa+1)\rfloor + 1$（[@thm-open-circuit-min-depth]）、两条文献深度公式的反例证伪（[@lemma-open-circuit-depth-refutation]）、对每个正整数 $n$，都存在 $2n$ 比特反射对称对角酉算子的显式困难见证，其在无辅助比特的固定门集 $\{\mathrm{CNOT}, R_z\}$ 下精确合成（允许全局因子）所需的指数级 $\mathrm{CNOT}$ 门计数下界为 $2^{2n-1} + 2n - 2$（[@prop-reflection-cnot-lower-bound]），以及偶圈图标准闭合遍历的精确步长（[@cor-even-cycle-length]）——与三大开放猜想（[@conj-complexity-equals-volume]、[@conj-er-equals-epr]、[@conj-p-neq-np]）共同立起了一座清晰的几何坐标：在各自的固定电路族与门集约束下，最少层数 $L$ 与困难见证的指数级双比特门数各有严格的适用边界；本书再从中读出局域观察者跨越空间纠缠割、对齐高维相位所付旋转代价的几何诠释。
 
 这自然引出了一个更深层的本体论与复杂性追问：如果[第十章](ch10-gram-geometry-and-order.md)揭示的格拉姆矩阵重构具有“两两比较、永远一致、顺序无关”的无时间几何刚性，那么为什么局域观察者依然必须承受并行深度 $L$ 的硬下界与 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 的正交视界？在跨越第六部“球外之球”（对角线逃逸、素数谱与 $\psi = \psi(\psi)$）与第七部“机械法典”（无矩阵克利福德引擎、ZYZ 旋转器编译与 Lean 4 源码审计）之后，我们将在**第八部**给出完整的展开：
 
