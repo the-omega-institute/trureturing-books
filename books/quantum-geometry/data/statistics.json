@@ -9,13 +9,13 @@
     "corollary": 31,
     "definition": 49,
     "conjecture": 6,
-    "problem": 3,
-    "example": 127,
-    "remark": 208,
+    "problem": 6,
+    "example": 130,
+    "remark": 211,
     "proof": 319,
     "lean_verified": 321,
     "written_proof": 3,
-    "literature": 199
+    "literature": 202
   },
   "total": 686,
   "kinds": {

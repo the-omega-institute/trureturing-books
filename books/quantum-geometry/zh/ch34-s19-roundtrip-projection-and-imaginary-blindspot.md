@@ -273,3 +273,79 @@ $$
 ::: {.viz src="roundtrip-born-imaginary-blindspot-sandbox" height="640"}
 **往返双投影平方律（$\cos^2\theta$）与观察者 `I` 的正交虚数盲区（`i`）完整交互实验室（`ECHO//IMAGINARY`）。** 在同一座三维琥珀色自我轴 `I` 与 $90^\circ$ 品红垂直盲平面 `i` 舞台上自由切换“雷达往返双投影与玻恩回声—$\theta^*$ 紫色方位盲锥与对角相位失明—第一人称侧看盲边与转 $90^\circ$ 基显相—`×i` 双直角旋子翻转—薛定谔青色保范圆弧对比实数衰减”五张实验卡，连续拖动极角 $\theta \in [0^\circ, 90^\circ]$、盲平面初相 $\varphi_0 \in [0^\circ, 360^\circ)$ 与演化相位 $\omega t$（琥珀色标出当前选定态矢 $\mathbf{V}$ 与玻恩回声 $\cos^2\theta$），同屏核验青色单程影子 $\cos\theta$ 与往返折线、品红盲区亏量 $\sin^2\theta$ 及紫色方位锥/旋子平面如何统摄实与虚；右侧依据栏十枚绿色 `LEAN ✓` 徽章逐一对应舞台实时验算的十条 `trureturing` 内核定理实例。
 :::
+
+## 34.19.5 有限势垒与时间双缝：把虚数盲区放回可测协议 {#sec-ch34-19-5}
+
+前四小节在有限维内积空间中讨论了 $90^\circ$ 正交盲区与往返平方读出。将这一视角延伸到连续波散射与时域干涉时，首先要把微分方程的解析结构与几何比喻严格分开：在一维定态薛定谔方程中，经典禁区（$E < V_0$）内出现虚数波数 $k_{\mathrm{in}} = i\kappa$ 是边值问题的标准**解析描述**；至于把势垒入口比作“波幅在实空间发生 $90^\circ$ 拐弯”或“沿正交盲区切出极小圆弧割弦”，则是本书的**作者几何诠释**，并未由相邻小节的 Lean 定理（[@thm-ch34-roundtrip-born-and-imaginary-blindspot]）推出。任何关于隧穿相位或干涉可见度的物理判断，都必须落回边界条件完备、探针耦合明确的可测协议中检验。
+
+### 34.19.5.1 有限方势垒的双分支匹配与幺正流守恒 {#sec-ch34-19-5-1}
+
+取归一化单位 $\hbar = 1$、$m = \frac{1}{2}$、$V_0 = 1$（即 $2m = 1$、$\frac{\hbar^2}{2m} = 1$、$\frac{\hbar}{m} = 2$），考察区间 $[0, L]$ 上的实值矩形势垒：垒内 $V(x) = 1$，外侧 $x < 0$ 与 $x > L$ 同为零势且无吸收损耗。当入射能量满足 $0 < E < 1$ 时，记外侧实波数 $k = \sqrt{E}$、垒内实衰减率 $\kappa = \sqrt{1 - E}$。在仅从左侧单侧入射的散射边界条件下，全空间定态波函数分段写为
+
+$$
+\psi(x) \;=\; \begin{cases}
+e^{ikx} + r\,e^{-ikx}, & x < 0, \\
+A\,e^{\kappa x} + B\,e^{-\kappa x}, & 0 \le x \le L, \\
+t\,e^{ikx}, & x > L.
+\end{cases}
+$$
+
+在 $x = 0$ 与 $x = L$ 两处**同时连续匹配 $\psi$ 与一阶导数 $\psi'$**，四个线性方程把垒内增长分支 $A e^{\kappa x}$ 与衰减分支 $B e^{-\kappa x}$ 一并锁入解中。对垒内解 $\psi(x) = A e^{\kappa x} + B e^{-\kappa x}$ 直接计算概率流密度 $j = (\hbar/m)\operatorname{Im}(\overline{\psi}\,\psi') = 2\operatorname{Im}(\overline{\psi}\,\psi')$，实指数自乘项虚部恒消，交叉项给出
+
+$$
+j \;=\; -4\kappa\,\operatorname{Im}(\overline{A} B) \;=\; 4\kappa\,\operatorname{Im}(\overline{B} A).
+$$
+
+由此可见，单独任一实指数分支（$A = 0$ 或 $B = 0$）均为零流；唯有 $A, B$ 两支同时非零，且二者具有非平凡的**相对复相位**（$\overline{A} B \notin \mathbb{R}$）时，该相对相位决定的交叉流才非零。同时须注意：在左侧 $x < 0$ 区域，尽管入射波与反射波叠加形成部分驻波形态的模方空间起伏，只要 $|r| < 1$（非全反射），左侧叠加场的净流绝不为零，而是严格等于垒内交叉流与右侧透射流，即 $2k(1 - |r|^2) = 4\kappa\operatorname{Im}(\overline{B} A) = 2k|t|^2$。结合实势与外侧同势，反射率 $R = |r|^2$ 与透射率 $T = |t|^2$ 严格满足 $R + T = 1$，消去中间系数手算即得精确透射率：
+
+$$
+T \;=\; \left[1 + \frac{\sinh^2(\kappa L)}{4E(1 - E)}\right]^{-1}.
+$$
+
+::: {.example #ex-ch34-square-barrier-half-height title="半高方势垒 E = 0.5, L = 2 的精确闭式与 WKB 边界辨析"}
+取 $E = 0.5$、$L = 2$，则 $k = \kappa = \frac{1}{\sqrt{2}}$，$4E(1 - E) = 1$，$\kappa L = \sqrt{2}$。代入上式无需任何小数近似，直接得到精确闭式
+
+$$
+T \;=\; \bigl[1 + \sinh^2(\sqrt{2})\bigr]^{-1} \;=\; \operatorname{sech}^2(\sqrt{2}), \qquad R \;=\; 1 - T \;=\; \tanh^2(\sqrt{2}),
+$$
+
+对应复透射幅 $t = e^{-i\sqrt{2}}\operatorname{sech}(\sqrt{2})$、反射幅 $r = -i\tanh(\sqrt{2})$。注意半经典 WKB 近似仅给出主指数因子 $\exp\bigl(-2\int_0^L \kappa(x)\,dx\bigr) = e^{-2\kappa L}$；矩形势垒在 $x = 0, L$ 处具有尖锐不连续边界，缓变势前提在此失效，完整渐近式的前因子（$\kappa L \gg 1$ 时精确式渐近于 $16E(1-E)e^{-2\kappa L}$）与光滑势转折点连接公式均须另行计算。
+:::
+
+::: {.viz src="scattering-temporal-bridge" preset="barrier" height="500"}
+**有限方势垒双分支匹配的三维波场（`barrier`）。** 三维 $(x, \operatorname{Re}\psi, \operatorname{Im}\psi)$ 舞台沿紫色坐标轴同时绘出青色第一分支、品红色第二分支与紫色合成波函数曲线。仅紫色合成波函数 $\psi$ 与 $\psi'$ 在势垒界面处连续衔接，琥珀色标记指示当前选定位置。
+:::
+
+### 34.19.5.2 时间双缝的能量条纹、标记内积与探测协议边界 {#sec-ch34-19-5-2}
+
+若把两道散射通道改置于时间轴上，在时刻 $t_1, t_2$ 开启的两扇理想超快时间窗便构成**时间双缝**。设两扇窗的复振幅分别为 $A_1 \neq 0$ 与 $A_2$，并各自携带归一化路径标记态 $\lvert m_1\rangle, \lvert m_2\rangle$。定义有向时差 $\Delta t := t_1 - t_2 \neq 0$，从总态矢量 $A_1 e^{-iEt_1/\hbar}\lvert m_1\rangle + A_2 e^{-iEt_2/\hbar}\lvert m_2\rangle$ 中提取公因子 $A_1 e^{-iEt_1/\hbar}$，即得第二支相对时间相位因子 $\exp[iE(t_1 - t_2)/\hbar] = \exp(iE\Delta t/\hbar)$（若改按正延时 $\tau := t_2 - t_1 > 0$ 记号，则有 $\Delta t = -\tau$，对应 $q = -E\tau/\hbar$，二者完全一致而无正负号冲突）。令幅值比 $a := |A_2 / A_1| \ge 0$，将一般复内积 $\langle m_1 \mid m_2\rangle$ 的辐角与 $\arg(A_2 / A_1)$ 一并并入总附加相位 $\varphi \in \mathbb{R}$，并记实非负标记重叠度 $\mu := |\langle m_1 \mid m_2\rangle| \in [0, 1]$ 以及无量纲相位变量 $q := E\Delta t/\hbar$，则约化双分支与交互媒体的归一化参数严格一致：$z_1 = 1$，$z_2 = a\exp\bigl(i(q + \varphi)\bigr)$。注意理想脉冲核下未归一化的两路合成模平方 $|A_1|^2\bigl(1 + a^2 + 2a\mu\cos(q + \varphi)\bigr)$ 在无穷能量轴 $E \in (-\infty, \infty)$ 上积分发散，**并不是对全能量归一的概率密度**；对标记空间求迹并除以不相干基线 $|A_1|^2(1 + a^2)$，得到**相对于不相干基线 $1 + a^2$ 的相对谱强度**：
+
+$$
+P(E) \;=\; \frac{1 + a^2 + 2a\mu\cos(q + \varphi)}{1 + a^2}, \qquad q \;=\; \frac{E\Delta t}{\hbar}.
+$$
+
+真实有限持续时间脉冲须在此相对调制因子之外再乘有限带宽频谱包络 $|f(E)|^2$ 方可作能量归一化。在本节正幅值比 $a > 0$、正标记重叠度 $\mu > 0$ 与相位 $\varphi$ **均与能量 $E$ 无关**的模型下，相位 $q + \varphi$ 随 $E$ 以常数斜率 $\Delta t/\hbar$ 线性推进；当 $\Delta t \ne 0$ 时，相邻干涉条纹具备恒定能量间距 $\Delta E = \frac{2\pi\hbar}{|\Delta t|} = \frac{h}{|\Delta t|}$。由恒等下界 $1 + a^2 + 2a\mu\cos(q + \varphi) \ge (1 - a)^2 + 2a(1 - \mu) \ge 0$ 可知，非平凡**完全相消** $P(E_0) = 0$ 当且仅当满足等幅 $a = 1$、完全不可区分 $\mu = 1$ 且 $q(E_0) + \varphi \equiv \pi \pmod{2\pi}$ 时成立；在上述常参量且 $\Delta t \ne 0$ 的条件下，此类相消仅在**孤立能量点 $E_0$** 处发生，绝不会在整个无限能量谱或具有非零谱宽的有限脉冲包络全频段上同时相消。
+
+::: {.viz src="scattering-temporal-bridge" preset="cancel" height="500"}
+**时间双缝在单一能量节点的等幅反相相消（`cancel`）。** 三维舞台沿紫色坐标轴展示等幅且无标记区分（$a = 1, \mu = 1$）下的青色第一分支、品红色第二分支与紫色合成轨迹。琥珀色标记指示当前选定状态点，在相对相位达 $\pi$ 的单一能量节点处两支反向抵消使紫色合成幅收拢至零轴。
+:::
+
+反之，当两扇时间窗留下正交可区分标记使 $\mu = 0$ 时，$P(E) \equiv 1$ 恒成立：这只是相对条纹消失的**消干涉**，不相干基线 $|A_1|^2(1 + a^2) > 0$ 依然保持正通量而非归零。同理，在势垒或双缝间引入探针能测得何种信号，取决于具体的**探针耦合强度、后选择条件、介质吸收与弱测量读出协议**，不能笼统泛称为“截桥”。尤其在共振原子系综透射光子的弱测量实验中，实验测得的**负弱值**对应**后选择子系综下的原子激发时间**（光子透射条件下原子处于激发态的时间弱值），绝不是负的粒子空间过垒飞行时间。
+
+::: {.viz src="scattering-temporal-bridge" preset="marked" height="500"}
+**正交路径标记消除时间双缝干涉起伏（`marked`）。** 三维舞台沿紫色坐标轴绘出正交路径标记（$a = 1, \mu = 0, \varphi = \pi, q = 0$）下的青色第一分支与品红色第二分支，琥珀色标记指示当前选定点。画中 $\sqrt{\mu}$ 加权合成幅归零，而紫色非相干本底 $(1 - \mu)(1 + a^2) > 0$ 仍保持，相对谱强度 $P = 1$。
+:::
+
+::: {.remark #rem-ch34-temporal-slit-and-weak-dwell-literature title="时间双缝衍射与后选择原子激发时间负弱值的文献索引（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 四项代表性时域衍射与弱值实验分别为：（1）阿秒光电离时间双缝实验：F. Lindner 等，*"Attosecond Double-Slit Experiment"*，*Phys. Rev. Lett.* **95**, 040401 (2005)，[https://doi.org/10.1103/PhysRevLett.95.040401](https://doi.org/10.1103/PhysRevLett.95.040401)；（2）光学频率超快时间双缝衍射：R. Tirole 等，*"Double-slit time diffraction at optical frequencies"*，*Nat. Phys.* (2023)，[https://doi.org/10.1038/s41567-023-01993-w](https://doi.org/10.1038/s41567-023-01993-w)（基于氧化铟锡 ITO 薄膜超快调制）；（3）泵浦驱动时变强耦合下的磁子模式时间衍射：*"Time-Varying Strong Coupling and the Induced Time Diffraction of Magnon Modes"* (2025)，[https://arxiv.org/abs/2411.06801](https://arxiv.org/abs/2411.06801) 与 [https://doi.org/10.1103/jc1c-k3ll](https://doi.org/10.1103/jc1c-k3ll)（系泵浦调控磁子模式实验，并非 2023 年 ITO 光学薄膜的同一装置）；（4）透射光子后选择下原子激发时间的负弱值实验：*"Experimental Observation of Negative Weak Values for the Time Atoms Spend in the Excited State as a Photon Is Transmitted"*，*Phys. Rev. Lett.* **136**, 153601 (2026)，[https://doi.org/10.1103/gjfq-k9dv](https://doi.org/10.1103/gjfq-k9dv)（预印本见 [https://arxiv.org/abs/2409.03680](https://arxiv.org/abs/2409.03680)，所测负弱值是后选择原子激发时间，而非负粒子过垒时间）。
+:::
+
+::: {.problem #prob-ch34-arc-scattering-falsifiability title="圆弧盲区诠释超出标准散射的可证伪协议要求（开放问题）"}
+若将“正交盲区圆弧割弦”仅作为薛定谔边值问题与双通道干涉的几何重述，其可观测预言已完全由 $T(E, L)$ 与相对谱强度 $P(E)$ 决定。若主张该圆弧诠释蕴涵超出标准线性散射或弱测量理论的新物理效应，则必须明确给出探针耦合哈密顿量、吸收损耗与后选择读出协议，并在指定参数区间内导出与标准透射率 $T$ 或条纹可见度 $\frac{2a\mu}{1 + a^2}$ 定量可区分、可被实验直接证伪的预测。
+:::
+
+下方完整实验室将有限势垒匹配与双时间窗干涉各预设整合于同一三维交互主舞台，供读者切换核验分支相位与合成轨迹：
+
+::: {.viz src="scattering-temporal-bridge" height="640"}
+**有限势垒隧穿与时间双缝三维交互实验室（`scattering-temporal-bridge`）。** 三维主舞台沿紫色坐标轴统一呈现青色第一分支、品红色第二分支与紫色合成轨迹，覆盖有限势垒散射与双时间窗干涉各预设场景。琥珀色标记指示当前选定点，配合完整实验室控件可核对幅值比 $a$、标记重叠度 $\mu$ 与相对相位对合成幅的支配作用。
+:::

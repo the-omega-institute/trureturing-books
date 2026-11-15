@@ -4,7 +4,7 @@ This appendix serves as the **Master Audit Ledger** of the epistemic boundaries 
 
 1. **C.1 Frozen Theorem Index (350 Unique `theorem` Declarations)**: This section contains every locked declaration of kind `theorem` cited by `lean="<GID>"` on at least one `:::` environment header in the Chinese edition. Each citation must resolve to a kernel-verified, frozen theorem at the pinned commit.
 2. **C.2 Formal Definition and Carrier Index (160 Unique Declarations: 149 `def` + 11 `inductive`)**: Definitions and inductive types cited by `lean=` on Chinese environment headers; **C.3 Inline Auxiliary Theorems and Definitions (176 Declarations: 121 `theorem` + 55 `def`)** contains the remaining declarations, which no environment header cites. The three disjoint sections cover all **686 unique declarations** in `trureturing.lock.json` ($350 + 160 + 176 = 686$). Media consumers are listed separately at the end of each row and do not determine the partition.
-3. **C.4 Open Problems and Literature Boundary Register**: None of the 9 open environments carries a `lean` attribute; the other two entries are explicitly attributed external literature boundaries and are excluded from the count of verified declarations.
+3. **C.4 Open Problems and Literature Boundary Register**: None of the 12 open environments carries a `lean` attribute; the other two entries are explicitly attributed external literature boundaries and are excluded from the count of verified declarations.
 
 Section 7.3’s [@prob-monitored-spectral-mean] proves four conclusions for finite-dimensional unitary pure-state monitored return: the occupied spectrum is finite, its cardinality equals the cyclic dimension, the weighted first-return sum equals that cardinality, and total return probability is one. In the same section, [@rem-monitored-unital-kac] also proves the occupation-operator sum, nonnegative return probabilities, total probability one, and mean equal to the relevant dimension for CPTP channels on any finite-dimensional complex inner-product space that preserve the identity on the actual relevant space. Both belong to C.1. General quantum instruments, infinite dimensions, and physical clocks remain outside these two theorems.
 
@@ -747,7 +747,7 @@ Beyond the 510 environment-cited declarations in C.1 and C.2, **176 declarations
 ## C.4 Open Conjectures and Unformalized Problems (Zero `lean` Attributes) {#sec-appendix-c-open-register}
 
 ::: {.remark #rem-appendix-c-open-literature-register title="Register of Open Conjectures and External Literature Boundaries (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book (only for external literature boundary entries `O6` and `O7` below; `O1`–`O5` and `O8` are `conjecture` environments, while `O9`–`O11` are `problem` environments).** The book contains 9 open environments, all without a `lean` attribute. Open conjectures, open problems and classical literature results are identified separately and excluded from the count of verified declarations.
+**Literature result, not formalized in this book (only for external literature boundary entries `O6` and `O7` below; `O1`–`O5` and `O8` are `conjecture` environments, while `O9`–`O11` are `problem` environments).** The book contains 12 open environments, all without a `lean` attribute. Open conjectures, open problems and classical literature results are identified separately and excluded from the count of verified declarations.
 
 | # | Environment Anchor ID | Chapter | Conjecture / Frontier Problem Title | Core Mathematical or Physical Statement Summary | `lean` Attribute | Badge Status |
 | :---: | :--- | :---: | :--- | :--- | :---: | :---: |
@@ -790,7 +790,7 @@ The first row of this ledger is the $471$ green cells of the declaration map: th
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="Verification Boundary Note for the Complete Declaration Index"}
-The 350 environment-cited theorems in C.1, 160 environment-cited definitions/inductive types in C.2, and 176 inline declarations in C.3 form a disjoint cover of all 686 entries in `trureturing.lock.json` (471 `theorem` + 204 `def` + 11 `inductive`). Source links resolve at the pinned `trureturing@dev` commit [{commit}](trureturing:). The 9 open environments and two literature boundaries in C.4 are excluded from those locked declarations; index membership, explanatory prose and kernel proof have distinct roles.
+The 350 environment-cited theorems in C.1, 160 environment-cited definitions/inductive types in C.2, and 176 inline declarations in C.3 form a disjoint cover of all 686 entries in `trureturing.lock.json` (471 `theorem` + 204 `def` + 11 `inductive`). Source links resolve at the pinned `trureturing@dev` commit [{commit}](trureturing:). The 12 open environments and two literature boundaries in C.4 are excluded from those locked declarations; index membership, explanatory prose and kernel proof have distinct roles.
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}

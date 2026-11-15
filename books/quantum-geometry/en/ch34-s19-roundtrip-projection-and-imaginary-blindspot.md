@@ -273,3 +273,79 @@ Carrying this nineteen-rung key—where real and imaginary share one root, break
 ::: {.viz src="roundtrip-born-imaginary-blindspot-sandbox" height="640"}
 **Round-trip double projection ($\cos^2\theta$) and the observer `I` orthogonal imaginary blind spot (`i`) interactive laboratory (`ECHO//IMAGINARY`).** Switch freely among Radar Round-Trip & Born Echo, $\theta^*$ Violet Azimuthal Blind Cone & Diagonal Phase Blindness, First-Person Edge-On Blindness & $90^\circ$ Basis Pivot, `×i` Double Quarter-Turn Rotor, and Schrödinger Cyan Circular-Arc Engine vs. Real Decay on a unified 3D stage of amber self-axis `I` and $90^\circ$ magenta blind plane `i`, scrubbing polar angle $\theta \in [0^\circ, 90^\circ]$, initial blind-plane phase $\varphi_0 \in [0^\circ, 360^\circ)$, and phase $\omega t$ (amber marks the active state $\mathbf{V}$ and Born echo $\cos^2\theta$) to inspect the cyan one-way shadow $\cos\theta$ and round-trip zig-zag, magenta blind deficit $\sin^2\theta$, and violet azimuth cone / rotor plane; the ten green `LEAN ✓` badges in the evidence column verify live numerical instances of ten `trureturing` kernel theorems on the stage.
 :::
+
+## 34.19.5 Finite Potential Barriers and Temporal Double Slits: Returning the Imaginary Blind Spot to Measurable Protocols {#sec-ch34-19-5}
+
+The preceding four subsections examined the $90^\circ$ orthogonal blind spot and round-trip squared readout in finite-dimensional inner-product spaces. Extending this viewpoint to continuous-wave scattering and time-domain interference requires separating the analytic structure of differential equations sharply from geometric metaphor: in the one-dimensional stationary Schrödinger equation, the appearance of an imaginary wavenumber $k_{\mathrm{in}} = i\kappa$ inside a classically forbidden region ($E < V_0$) is the standard **analytic description** of a boundary-value problem; likening the barrier entrance to a "$90^\circ$ turn of wave amplitude in real space" or "cutting a chord across a minimal arc through an orthogonal blind spot" is an **authorial geometric interpretation** of this book and is not derived from the adjacent Lean theorem ([@thm-ch34-roundtrip-born-and-imaginary-blindspot]). Any physical claim regarding tunneling phase or interference visibility must be tested within a measurable protocol specifying complete boundary conditions and explicit probe couplings.
+
+### 34.19.5.1 Two-Branch Matching and Unitary Current Conservation in a Finite Square Barrier {#sec-ch34-19-5-1}
+
+In normalized units $\hbar = 1$, $m = \frac{1}{2}$, and $V_0 = 1$ (so $2m = 1$, $\frac{\hbar^2}{2m} = 1$, and $\frac{\hbar}{m} = 2$), consider a real rectangular barrier on $[0, L]$: $V(x) = 1$ inside the barrier, and zero potential without absorptive loss on both exterior regions $x < 0$ and $x > L$. For incident energy $0 < E < 1$, write the exterior real wavenumber as $k = \sqrt{E}$ and the interior real decay rate as $\kappa = \sqrt{1 - E}$. Under scattering boundary conditions with unit incidence solely from the left, the stationary wavefunction across all space takes the piecewise form
+
+$$
+\psi(x) \;=\; \begin{cases}
+e^{ikx} + r\,e^{-ikx}, & x < 0, \\
+A\,e^{\kappa x} + B\,e^{-\kappa x}, & 0 \le x \le L, \\
+t\,e^{ikx}, & x > L.
+\end{cases}
+$$
+
+Enforcing **simultaneous continuity of $\psi$ and its first derivative $\psi'$** at both $x = 0$ and $x = L$ yields four linear equations that lock both the growing branch $A e^{\kappa x}$ and the decaying branch $B e^{-\kappa x}$ into the interior solution. Direct evaluation of the probability current density $j = (\hbar/m)\operatorname{Im}(\overline{\psi}\,\psi') = 2\operatorname{Im}(\overline{\psi}\,\psi')$ on $\psi(x) = A e^{\kappa x} + B e^{-\kappa x}$ cancels the self-terms of each real exponential identically, leaving only the cross-term
+
+$$
+j \;=\; -4\kappa\,\operatorname{Im}(\overline{A} B) \;=\; 4\kappa\,\operatorname{Im}(\overline{B} A).
+$$
+
+Consequently, either real exponential branch alone ($A = 0$ or $B = 0$) carries zero current; only when both $A$ and $B$ are nonzero with a nontrivial **relative complex phase** ($\overline{A} B \notin \mathbb{R}$) does this cross-current become nonzero. Note also that on the left exterior $x < 0$, although the superposition of incident and reflected waves produces a partially standing spatial modulation of $|\psi(x)|^2$, whenever $|r| < 1$ this envelope does **not** imply zero net flux: the net left-hand current equals both the interior cross-current and the transmitted current on the right, $2k(1 - |r|^2) = 4\kappa\operatorname{Im}(\overline{B} A) = 2k|t|^2$. With a real potential and equal exterior potentials, the reflectance $R = |r|^2$ and transmittance $T = |t|^2$ strictly satisfy $R + T = 1$, and eliminating the interior coefficients by hand gives the exact transmittance:
+
+$$
+T \;=\; \left[1 + \frac{\sinh^2(\kappa L)}{4E(1 - E)}\right]^{-1}.
+$$
+
+::: {.example #ex-ch34-square-barrier-half-height title="Exact Closed Form for the Half-Height Square Barrier E = 0.5, L = 2 vs. WKB Boundaries"}
+Setting $E = 0.5$ and $L = 2$ gives $k = \kappa = \frac{1}{\sqrt{2}}$, $4E(1 - E) = 1$, and $\kappa L = \sqrt{2}$. Substitution without any decimal approximation yields the exact closed forms
+
+$$
+T \;=\; \bigl[1 + \sinh^2(\sqrt{2})\bigr]^{-1} \;=\; \operatorname{sech}^2(\sqrt{2}), \qquad R \;=\; 1 - T \;=\; \tanh^2(\sqrt{2}),
+$$
+
+with complex transmission amplitude $t = e^{-i\sqrt{2}}\operatorname{sech}(\sqrt{2})$ and reflection amplitude $r = -i\tanh(\sqrt{2})$. Note that the semiclassical WKB approximation captures only the leading exponential factor $\exp\bigl(-2\int_0^L \kappa(x)\,dx\bigr) = e^{-2\kappa L}$; because a rectangular barrier has sharp discontinuous steps at $x = 0$ and $x = L$, the slowly varying potential assumption fails at the boundaries, so both the exact large-$\kappa L$ prefactor ($16E(1-E)e^{-2\kappa L}$ for $\kappa L \gg 1$) and smooth turning-point connection formulas require separate derivations.
+:::
+
+::: {.viz src="scattering-temporal-bridge" preset="barrier" height="500"}
+**Three-dimensional wavefield of two-branch matching across a finite square barrier (`barrier`).** The 3D $(x, \operatorname{Re}\psi, \operatorname{Im}\psi)$ stage plots the cyan first branch, the magenta second branch, and the purple resultant wavefunction curve along the purple coordinate axes. Only the purple resultant $\psi$ and $\psi'$ join continuously across the barrier interfaces, with the amber marker indicating the currently selected position.
+:::
+
+### 34.19.5.2 Energy Fringes, Marker Inner Products, and Probe Protocol Boundaries in Temporal Double Slits {#sec-ch34-19-5-2}
+
+Placing two scattering channels along the time axis instead, two idealized ultrafast temporal windows opened at instants $t_1$ and $t_2$ form a **temporal double slit**. Let the two windows carry complex amplitudes $A_1 \neq 0$ and $A_2$ coupled to normalized path-marker states $\lvert m_1\rangle$ and $\lvert m_2\rangle$. Defining the directed time difference $\Delta t := t_1 - t_2 \neq 0$ and factoring $A_1 e^{-iEt_1/\hbar}$ out of the total state vector $A_1 e^{-iEt_1/\hbar}\lvert m_1\rangle + A_2 e^{-iEt_2/\hbar}\lvert m_2\rangle$ yields the second-branch temporal phase factor $\exp[iE(t_1 - t_2)/\hbar] = \exp(iE\Delta t/\hbar)$ (if one instead writes a positive delay $\tau := t_2 - t_1 > 0$, then $\Delta t = -\tau$ and $q = -E\tau/\hbar$, avoiding any sign discrepancy). Setting the amplitude ratio $a := |A_2 / A_1| \ge 0$, absorbing both $\arg\langle m_1 \mid m_2\rangle$ and $\arg(A_2 / A_1)$ into the total offset phase $\varphi \in \mathbb{R}$, and defining the real non-negative marker overlap $\mu := |\langle m_1 \mid m_2\rangle| \in [0, 1]$ together with $q := E\Delta t/\hbar$, the reduced two-branch parametrization matches the interactive media convention identically: $z_1 = 1$ and $z_2 = a\exp\bigl(i(q + \varphi)\bigr)$. Because the unnormalized norm-squared $|A_1|^2\bigl(1 + a^2 + 2a\mu\cos(q + \varphi)\bigr)$ under idealized impulse windows diverges when integrated over $E \in (-\infty, \infty)$, it is **not a probability density normalized over all energies**; tracing over the marker space and dividing by the incoherent baseline $|A_1|^2(1 + a^2)$ defines the **relative spectral intensity** with respect to the incoherent baseline $1 + a^2$:
+
+$$
+P(E) \;=\; \frac{1 + a^2 + 2a\mu\cos(q + \varphi)}{1 + a^2}, \qquad q \;=\; \frac{E\Delta t}{\hbar}.
+$$
+
+Physical pulses of finite duration additionally multiply this relative modulation by a finite-bandwidth spectral envelope $|f(E)|^2$ prior to energy normalization. Under this section's model where $a > 0$, $\mu > 0$, and $\varphi$ are **independent of energy $E$**, the phase $q + \varphi$ advances linearly in $E$ with constant slope $\Delta t/\hbar$; when $\Delta t \ne 0$, adjacent interference fringes have uniform energy spacing $\Delta E = \frac{2\pi\hbar}{|\Delta t|} = \frac{h}{|\Delta t|}$. From the lower bound $1 + a^2 + 2a\mu\cos(q + \varphi) \ge (1 - a)^2 + 2a(1 - \mu) \ge 0$, nontrivial **complete destructive cancellation** $P(E_0) = 0$ holds if and only if equal amplitudes $a = 1$, indistinguishable markers $\mu = 1$, and $q(E_0) + \varphi \equiv \pi \pmod{2\pi}$ are satisfied; under these constant parameters with $\Delta t \ne 0$, such cancellation occurs **only at isolated energy nodes $E_0$**—never across the entire infinite energy axis nor across an entire finite-pulse envelope of nonzero spectral width.
+
+::: {.viz src="scattering-temporal-bridge" preset="cancel" height="500"}
+**Equal-amplitude out-of-phase cancellation at a single energy node (`cancel`).** The 3D stage displays the cyan first branch, the magenta second branch, and the purple resultant trajectory along the purple coordinate axes for equal amplitudes and indistinguishable markers ($a = 1, \mu = 1$). The amber marker indicates the currently selected state, showing the two branches canceling at a single $\pi$-phase energy node so the purple resultant collapses onto the axis.
+:::
+
+Conversely, when orthogonal path markers render the two windows fully distinguishable ($\mu = 0$), $P(E) \equiv 1$ identically: interference fringes vanish relative to the positive incoherent baseline $|A_1|^2(1 + a^2) > 0$, rather than reducing total flux to zero. Likewise, what an intermediate probe registers inside a barrier or between slits depends on the specific **probe coupling strength, postselection condition, medium absorption, and weak-measurement readout protocol**, and cannot be lumped under a vague "bridge-cutting" slogan. In particular, in weak-measurement experiments on photons transmitted through a resonant atomic ensemble, the observed **negative weak value** measures the **postselected atomic excitation time** (the weak value of the time atoms spend in the excited state conditioned on photon transmission), never a negative spatial transit time of a particle crossing a barrier.
+
+::: {.viz src="scattering-temporal-bridge" preset="marked" height="500"}
+**Orthogonal path markers eliminating temporal double-slit modulation (`marked`).** The 3D stage plots the cyan first branch and the magenta second branch along the purple coordinate axes under orthogonal path markers ($a = 1, \mu = 0, \varphi = \pi, q = 0$), with the amber marker indicating the current point. In the plot, the $\sqrt{\mu}$-weighted resultant amplitude vanishes while the purple incoherent floor $(1 - \mu)(1 + a^2) > 0$ persists, giving relative spectral intensity $P = 1$.
+:::
+
+::: {.remark #rem-ch34-temporal-slit-and-weak-dwell-literature title="Literature Index on Temporal Double-Slit Diffraction and Negative Weak Atomic Excitation Times (Literature Results, Not Formalized Here)"}
+**Literature results, not formalized in this book.** Four representative experiments on time-domain diffraction and weak values are: (1) attosecond photoionization temporal double slit: F. Lindner *et al.*, *"Attosecond Double-Slit Experiment"*, *Phys. Rev. Lett.* **95**, 040401 (2005), [https://doi.org/10.1103/PhysRevLett.95.040401](https://doi.org/10.1103/PhysRevLett.95.040401); (2) optical-frequency ultrafast temporal double-slit diffraction: R. Tirole *et al.*, *"Double-slit time diffraction at optical frequencies"*, *Nat. Phys.* (2023), [https://doi.org/10.1038/s41567-023-01993-w](https://doi.org/10.1038/s41567-023-01993-w) (using ultrafast modulation in indium tin oxide, ITO, thin films); (3) pump-driven time diffraction of magnon modes under time-varying strong coupling: *"Time-Varying Strong Coupling and the Induced Time Diffraction of Magnon Modes"* (2025), [https://arxiv.org/abs/2411.06801](https://arxiv.org/abs/2411.06801) and [https://doi.org/10.1103/jc1c-k3ll](https://doi.org/10.1103/jc1c-k3ll) (a pump-modulated magnon-mode platform distinct from the 2023 ITO optical-film experiment); and (4) negative weak values of atomic excitation time for postselected transmitted photons: *"Experimental Observation of Negative Weak Values for the Time Atoms Spend in the Excited State as a Photon Is Transmitted"*, *Phys. Rev. Lett.* **136**, 153601 (2026), [https://doi.org/10.1103/gjfq-k9dv](https://doi.org/10.1103/gjfq-k9dv) (preprint [https://arxiv.org/abs/2409.03680](https://arxiv.org/abs/2409.03680); the measured negative weak value is the postselected atomic excitation dwell time, not a negative spatial barrier traversal time).
+:::
+
+::: {.problem #prob-ch34-arc-scattering-falsifiability title="Falsifiable Protocol Requirements for Arc Blind-Spot Interpretations Beyond Standard Scattering (Open Problem)"}
+If the "chord across an orthogonal blind-spot arc" is used purely as a geometric restatement of the Schrödinger boundary-value problem and two-pathway interference, all of its observable predictions are already fixed by $T(E, L)$ and the relative spectral intensity $P(E)$. Claiming that this arc picture entails new physical effects beyond standard linear scattering or weak-measurement theory requires specifying an explicit probe-coupling Hamiltonian, absorptive loss model, and postselected readout protocol that yield quantitatively distinguishable, experimentally falsifiable deviations from the standard transmittance $T$ or fringe visibility $\frac{2a\mu}{1 + a^2}$ over a stated parameter regime.
+:::
+
+The full interactive laboratory below unifies the finite-barrier matching and temporal double-slit presets on a single 3D stage so readers can inspect branch phases and resultant trajectories side by side:
+
+::: {.viz src="scattering-temporal-bridge" height="640"}
+**Three-dimensional interactive laboratory for finite-barrier tunneling and temporal double slits (`scattering-temporal-bridge`).** The 3D stage presents the cyan first branch, the magenta second branch, and the purple resultant trajectory along the purple coordinate axes across all barrier-scattering and two-window interference presets. The amber marker indicates the currently selected state, while the full laboratory controls let readers test how the amplitude ratio $a$, marker overlap $\mu$, and relative phase govern the resultant amplitude.
+:::
