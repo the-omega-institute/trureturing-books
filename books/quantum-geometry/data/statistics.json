@@ -3,7 +3,7 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 199,
+    "theorem": 200,
     "lemma": 34,
     "proposition": 45,
     "corollary": 31,
@@ -13,15 +13,15 @@
     "example": 124,
     "remark": 201,
     "proof": 305,
-    "lean_verified": 306,
+    "lean_verified": 307,
     "written_proof": 3,
     "literature": 198
   },
-  "total": 664,
+  "total": 667,
   "kinds": {
     "def": 201,
     "inductive": 11,
-    "theorem": 452
+    "theorem": 455
   },
   "groups": {
     "theorems": [
@@ -285,6 +285,9 @@
       "D5/S3/Quantum/Routing/HannRouterProfiles.profile_separation_iff",
       "D5/S3/Quantum/Routing/HannSignedCertificate.signed_event",
       "D5/S3/Quantum/Routing/HannSpatialQram.correctness",
+      "D5/S3/Quantum/Routing/HannUniformSection.binary_conformal_kernel",
+      "D5/S3/Quantum/Routing/HannUniformSection.uniform_section",
+      "D5/S3/Quantum/Routing/HannUniformSection.zero_certificate",
       "D5/S3/Quantum/Routing/ReversibleQram.correctness",
       "D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound",
       "D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized",
@@ -14166,13 +14169,13 @@
         },
         {
           "file": "ch38-s01-static-qram.md",
-          "line": 1100,
+          "line": 1134,
           "id": "",
           "via": "inline"
         },
         {
           "file": "ch38-s01-static-qram.md",
-          "line": 1130,
+          "line": 1164,
           "id": "",
           "via": "inline"
         },
@@ -14226,7 +14229,7 @@
         },
         {
           "file": "ch38-s01-static-qram.md",
-          "line": 1099,
+          "line": 1133,
           "id": "thm-ch38-copied-address-dereference-and-access-defect",
           "via": "environment"
         },
@@ -14352,7 +14355,7 @@
         },
         {
           "file": "ch38-s01-static-qram.md",
-          "line": 1099,
+          "line": 1133,
           "id": "thm-ch38-copied-address-dereference-and-access-defect",
           "via": "environment"
         },
@@ -18242,6 +18245,42 @@
           "file": "ch38-s01-static-qram.md",
           "line": 143,
           "id": "thm-ch38-spatial-qutrit-qram-correctness",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannUniformSection.binary_conformal_kernel": {
+      "kind": "theorem",
+      "name": "D5.S3.Quantum.Routing.HannUniformSection.binary_conformal_kernel",
+      "citations": [
+        {
+          "file": "ch38-s01-static-qram.md",
+          "line": 1077,
+          "id": "thm-ch38-hann-uniform-original-section",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannUniformSection.uniform_section": {
+      "kind": "theorem",
+      "name": "D5.S3.Quantum.Routing.HannUniformSection.uniform_section",
+      "citations": [
+        {
+          "file": "ch38-s01-static-qram.md",
+          "line": 1077,
+          "id": "thm-ch38-hann-uniform-original-section",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/Routing/HannUniformSection.zero_certificate": {
+      "kind": "theorem",
+      "name": "D5.S3.Quantum.Routing.HannUniformSection.zero_certificate",
+      "citations": [
+        {
+          "file": "ch38-s01-static-qram.md",
+          "line": 1077,
+          "id": "thm-ch38-hann-uniform-original-section",
           "via": "environment"
         }
       ]
@@ -24683,6 +24722,9 @@
         "D5/S3/Quantum/Routing/HannSignedCertificate.synthesis",
         "D5/S3/Quantum/Routing/HannSignedCertificate.vacuumRecord",
         "D5/S3/Quantum/Routing/HannSpatialQram.correctness",
+        "D5/S3/Quantum/Routing/HannUniformSection.binary_conformal_kernel",
+        "D5/S3/Quantum/Routing/HannUniformSection.uniform_section",
+        "D5/S3/Quantum/Routing/HannUniformSection.zero_certificate",
         "D5/S3/Quantum/Routing/ReversibleQram.correctness"
       ],
       "inline": [

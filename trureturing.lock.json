@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "ccaf12043b8eaa43581decc99f584528f3564871",
-  "pinned_at": "2026-11-15T01:51:14Z",
+  "commit": "f754db1698cc41acde0508e8b261477b708e2095",
+  "pinned_at": "2026-11-15T09:44:26Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -657,7 +657,7 @@
       "module": "D5/S1/Words/TribonacciAlignedWindows",
       "name": "D5.S1.Words.TribonacciAlignedWindows.aligned_windows",
       "kind": "theorem",
-      "statement_id": "sha256:ed51a299e4851d6b91bf6c9e9f6b769b68e9a7c06631da9b4c59cab82676709c",
+      "statement_id": "sha256:114922f5456de1bf2641fe038c678bea692fbd9bb8260247f474229db7f9e81b",
       "line": 99,
       "signature": "theorem aligned_windows : ∃ K : ℕ, 0 < K ∧ ∃ J : ℕ, 1 ≤ J ∧ ∀ j : ℕ, J ≤ j → ∃ m s : ℕ, 3 ≤ m ∧ Odd m ∧ Even s ∧ N j ≤ K*m ∧ s+2*m ≤ N j ∧ ∀ i : ℕ, i < m-1 → W (s+i+m) = W (s+i)"
     },
@@ -921,7 +921,7 @@
       "module": "D5/S3/Arith/Robin/PrimeFiberPropagation",
       "name": "D5.S3.Arith.Robin.PrimeFiberPropagation.divisorRatio",
       "kind": "def",
-      "statement_id": "sha256:b248b6a9786eb684c74b1cf5c1a4415c8327fd1bdfdab8d38211a92e95bc0c63",
+      "statement_id": "sha256:09b57a4ff5f4eafa7ec9e6e74be0d0775e883f7b8ae5a3e08a9676955b4989a4",
       "line": 28,
       "signature": "def divisorRatio (n : ℕ) : ℝ"
     },
@@ -3353,7 +3353,7 @@
       "module": "D5/S3/Quantum/Dynamics/OddSquareGreenMass",
       "name": "D5.S3.Quantum.Dynamics.OddSquareGreenMass.odd_square_inverse_paired_mass",
       "kind": "theorem",
-      "statement_id": "sha256:8665a3799dac04c9e1ce83abcf91b59041dacf5e126238d51475356374cbcca0",
+      "statement_id": "sha256:4762d6e1af2e745be63d29650ab3d5ea0c5d6f901bb66b682d4134bc085c24e2",
       "line": 180,
       "signature": "theorem odd_square_inverse_paired_mass (t : ℕ → ℝ) (q : ℕ) (ht : ∀ i, 0 < t i) (hu : ∀ i, t i ≤ 1) (hp : ∀ i < 2 * q, t (i + (2 * q + 1)) = t i) : (q : ℝ) * (q + 1) ≤ ∑ l : Fin q, ∑ d : Fin (q - l.val), ((lowerBlock t (2 * q + 1))⁻¹ ⟨l.val + d.val + 1, by have"
     },
@@ -4169,7 +4169,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Coeff",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 80,
       "signature": "abbrev Coeff (n : ℕ)"
     },
@@ -4177,7 +4177,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Environment",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 79,
       "signature": "abbrev Environment (n : ℕ)"
     },
@@ -4185,7 +4185,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Output",
       "kind": "inductive",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 153,
       "signature": "structure Output (n : ℕ) where dimension : ℕ kernel : List (Coeff n) representative : Option (Coeff n) def Output.flag {n : ℕ} (o : Output n) : Bool"
     },
@@ -4193,7 +4193,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Output.flag",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 158,
       "signature": "def Output.flag {n : ℕ} (o : Output n) : Bool"
     },
@@ -4201,7 +4201,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.childEnvironment",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 86,
       "signature": "def childEnvironment (n : ℕ) (e : Environment (n + 1)) (b : Bool) : Environment n"
     },
@@ -4209,7 +4209,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.densityGram",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 876,
       "signature": "def densityGram (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) : Matrix (Address n) (Address n) ℂ"
     },
@@ -4217,7 +4217,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.embed",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 105,
       "signature": "def embed (n : ℕ) (b : Bool) (x : Coeff n) : Coeff (n + 1)"
     },
@@ -4225,7 +4225,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.inherited",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 161,
       "signature": "def inherited (n : ℕ) (l r : Output n) : List (Coeff (n + 1))"
     },
@@ -4233,7 +4233,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.labelIndex",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 56,
       "signature": "def labelIndex : Qutrit → ℤ | .wait => 0 | .zero => 1 | .one => 2 /-- The three specified Fourier coordinates, with nonnegative real square roots. -/ def localRecord (q : ℝ) (s : Qutrit) (e : Fin 3) : ℂ"
     },
@@ -4241,7 +4241,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.localRecord",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 62,
       "signature": "def localRecord (q : ℝ) (s : Qutrit) (e : Fin 3) : ℂ"
     },
@@ -4249,7 +4249,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.omega",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 27,
       "signature": "def omega : ℂ"
     },
@@ -4257,7 +4257,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.outputs",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 185,
       "signature": "def outputs : (n : ℕ) → (Router n → ℝ) → Output n | 0, _ => ⟨1, [], some (fun _ => 1)⟩ | n + 1, q => step n (q none) (outputs n (restrict n q false)) (outputs n (restrict n q true)) /-- Sound coefficient data and the exact dimension/list accounting. -/ structure Sound (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) (o : Output n) : Prop where kernel_sound : ∀ x ∈ o.kernel, synthesis n q bus x = 0 representative_sound : ∀ u, o.representative = some u → synthesis n q bus u = vacuumRecord n q dimension_positive : 0 < o.dimension count : o.kernel.length + o.dimension = 2 ^ n private theorem inherited_so"
     },
@@ -4265,7 +4265,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.record",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 90,
       "signature": "def record (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) (a : Address n) (e : Environment n) : ℂ"
     },
@@ -4273,7 +4273,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.recordMatrix",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 868,
       "signature": "def recordMatrix (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) : Matrix (Environment n) (Address n) ℂ"
     },
@@ -4281,7 +4281,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.restrict",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 83,
       "signature": "def restrict (n : ℕ) (q : Router (n + 1) → ℝ) (b : Bool) : Router n → ℝ"
     },
@@ -4289,7 +4289,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.signed_event",
       "kind": "theorem",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 964,
       "signature": "theorem signed_event (n : ℕ) (q : Router n → ℝ) (hq : ∀ v, -(1 / 2 : ℝ) ≤ q v) (hq' : ∀ v, q v ≤ 1) (bus : Qutrit) : Module.finrank ℂ (LinearMap.range (synthesis n q bus)) = (outputs n q).dimension ∧ (outputs n q).kernel.length = 2 ^ n - (outputs n q).dimension ∧ (vacuumRecord n q ∈ LinearMap.range (synthesis n q bus) ↔ (outputs n q).flag = true) ∧ (∀ u, (outputs n q).representative = some u → synthesis n q bus u = vacuumRecord n q) ∧ (∀ x, synthesis n q bus x = 0 ↔ ∃! α : Fin (outputs n q).kernel.length → ℂ, x = ∑ i, α i • (outputs n q).kernel.get i) ∧ (∀ a b, standardGram n q bus a b = ((∏ v"
     },
@@ -4297,7 +4297,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.standardGram",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 871,
       "signature": "def standardGram (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) : Matrix (Address n) (Address n) ℂ"
     },
@@ -4305,7 +4305,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.step",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 165,
       "signature": "def step (n : ℕ) (q : ℝ) (l r : Output n) : Output (n + 1)"
     },
@@ -4313,7 +4313,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.synthesis",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 98,
       "signature": "def synthesis (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) : Coeff n →ₗ[ℂ] (Environment n → ℂ) where toFun x e"
     },
@@ -4321,7 +4321,7 @@
       "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
       "name": "D5.S3.Quantum.Routing.HannSignedCertificate.vacuumRecord",
       "kind": "def",
-      "statement_id": "sha256:071bb36c1145008575e9dc18547dacb74f94aebac25cc4f661c4ea1b5c2057a1",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
       "line": 94,
       "signature": "def vacuumRecord (n : ℕ) (q : Router n → ℝ) (e : Environment n) : ℂ"
     },
@@ -4332,6 +4332,30 @@
       "statement_id": "sha256:535492acd5585141a50f634a6c31134a749d52d58728b88ab5396e4185c507a3",
       "line": 303,
       "signature": "theorem correctness : (∀ (n : ℕ) (a : Address n) (b : Qutrit) (k : ℕ), k ≤ n → load n k (loading n a b 0) = loading n a b k) ∧ (∀ (n : ℕ) (a : Address n) (p : Qutrit), transport n (input n (programmed n a n) p) = arrived n a p ∧ ∀ i : Address n, leaf n (transport n (input n (programmed n a n) p)) i = if i = a then p else wait) ∧ (∀ (n : ℕ) (D : Address n → Bool) (a : Address n) (b : Bool), query n D (clean n a b) = clean n a (xor b (D a))) ∧ (∀ (n : ℕ) (D : Address n → Bool), (queryMatrix n D)ᴴ * queryMatrix n D = 1 ∧ queryMatrix n D * (queryMatrix n D)ᴴ = 1 ∧ ∀ ψ : Address n × Bool → ℂ, query"
+    },
+    "D5/S3/Quantum/Routing/HannUniformSection.binary_conformal_kernel": {
+      "module": "D5/S3/Quantum/Routing/HannUniformSection",
+      "name": "D5.S3.Quantum.Routing.HannUniformSection.binary_conformal_kernel",
+      "kind": "theorem",
+      "statement_id": "sha256:88a64587fddf0d9468390a936427674e96d030bbdfcc14ca017d4ee5d01fc586",
+      "line": 313,
+      "signature": "theorem binary_conformal_kernel (n : ℕ) (q : Router n → ℝ) (x : Address n → ℝ) (c : Node n → ℝ) (hx : ∀ a, 0 ≤ x a) (hxn : x ≠ 0) (hk : (matrix n q).mulVec (Sum.elim x c) = 0) : ∃ (u : Address n → ℝ) (d : Node n → ℝ), (matrix n q).mulVec (Sum.elim u d) = 0 ∧ u ≠ 0 ∧ (∀ a, u a = 0 ∨ u a = 1) ∧ (∀ a, u a ≠ 0 → 0 < x a) ∧ (∀ v, d v = 0 ∨ d v = -1 ∨ d v = 1) ∧ (∀ v, d v ≠ 0 → SignType.sign (d v) = SignType.sign (c v)) ∧ SignType.sign (d (root n)) = SignType.sign (c (root n))"
+    },
+    "D5/S3/Quantum/Routing/HannUniformSection.uniform_section": {
+      "module": "D5/S3/Quantum/Routing/HannUniformSection",
+      "name": "D5.S3.Quantum.Routing.HannUniformSection.uniform_section",
+      "kind": "theorem",
+      "statement_id": "sha256:88a64587fddf0d9468390a936427674e96d030bbdfcc14ca017d4ee5d01fc586",
+      "line": 593,
+      "signature": "theorem uniform_section (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) (hq : ∀ v, -(1 / 2 : ℝ) ≤ q v ∧ q v ≤ 1) : (Section n q bus = ∅ ∨ ∃ l r : ℝ, l ≤ r ∧ Section n q bus = Set.Icc l r ∧ UniformEndpoint n q bus l ∧ UniformEndpoint n q bus r) ∧ (0 ∈ Section n q bus → ∃ S : Finset (Address n), S.Nonempty ∧ (∑ a ∈ S, record n q bus a) = 0)"
+    },
+    "D5/S3/Quantum/Routing/HannUniformSection.zero_certificate": {
+      "module": "D5/S3/Quantum/Routing/HannUniformSection",
+      "name": "D5.S3.Quantum.Routing.HannUniformSection.zero_certificate",
+      "kind": "theorem",
+      "statement_id": "sha256:88a64587fddf0d9468390a936427674e96d030bbdfcc14ca017d4ee5d01fc586",
+      "line": 344,
+      "signature": "theorem zero_certificate (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) (hq : ∀ v, -(1 / 2 : ℝ) ≤ q v ∧ q v ≤ 1) (p : Address n → ℝ) (hp : ∀ a, 0 ≤ p a) (hm : (∑ a, p a) = 1) (hz : synthesis n q bus (fun a => (p a : ℂ)) = 0) : ∃ S : Finset (Address n), S.Nonempty ∧ (∀ a ∈ S, 0 < p a) ∧ (∑ a ∈ S, record n q bus a) = 0"
     },
     "D5/S3/Quantum/Routing/ReversibleQram.correctness": {
       "module": "D5/S3/Quantum/Routing/ReversibleQram",

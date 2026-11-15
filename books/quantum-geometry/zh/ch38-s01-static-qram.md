@@ -1065,12 +1065,46 @@ $$
 将有限环境求和与节点乘积展开、交换，便把 $G^{\mathrm{std}}(a,b)$ 写成这些实局部重叠的乘积，得到第六项。因此 $G^{\mathrm{den}}(a,b)=\overline{G^{\mathrm{std}}(a,b)}=G^{\mathrm{std}}(a,b)$；这里使用的是重叠乘积为实数，而不是记录坐标为实数。再以 $G^{\mathrm{std}}=M^{\mathrm H}M$ 和 $M\cdot=S$，应用标准 Gram 的核、秩恒等式，得到最后两项。完整证明由 Lean 内核检查。
 :::
 
+
+
 深度零也完整落在定理范围内：$d=1$、$K=[]$、$t=\mathrm{true}$，$S$ 是一维恒等映射，$V=1$，两种 Gram 都是 $(1)$、秩为 $1$。第五项此时的系数域为 $\operatorname{Fin}(0)$；唯一的空系数族只展开出零向量，空和为零。对任意更深前缀，把原 $q$ 逐层限制到该子树即可应用同一陈述，无须正深度、同质参数或布尔总线的额外假设。下端点改变真空的成员条件而不追加核向量；上端点只有在两边真空都可合成时才追加一条核向量并扣除一维。
 
 与 Profiles 的衔接只经过重叠：在共同范围 $q(v)\in[0,1]$，前面的四坐标实记录 $\sqrt{q(v)}e_*+\sqrt{1-q(v)}e_s$ 同样有“同标签为 $1$、异标签为 $q(v)$”的局部重叠，故其实际装载记录的 Gram 元与这里相应的实乘积一致。两套记录使用不同环境、不同坐标，不能据此把它们逐坐标认同，也不能把前面的物理输出结论直接延伸到带符号区间。
 
 本定理的核始终是地址复系数合成映射的核。这里没有给出带符号区间的含噪输出或装载后续演化定理、Schur 算子空间的核、Choi 秩、递归的计算效率或硬件性能结论，也没有为后面的本体与观察者诠释增加证明。以下进入 `MODEL` 时，仍须保留这些范围界线。
 
+
+::: {.theorem #thm-ch38-hann-uniform-original-section title="实际带符号 Hann 记录的原始叶均匀截面与零和证书" lean="D5/S3/Quantum/Routing/HannUniformSection.binary_conformal_kernel D5/S3/Quantum/Routing/HannUniformSection.zero_certificate D5/S3/Quantum/Routing/HannUniformSection.uniform_section"}
+固定有限深度 $n$、异质路由参数 $q : \operatorname{Router}(n) \to \mathbb{R}$ 与三能级总线 `bus`，并假设每个路由节点都满足
+
+$$
+-\frac12 \le q(v) \le 1.
+$$
+
+这里的 `Section n q bus` 精确定义为所有实数 $z$ 的集合：存在一个只定义在原始叶地址 $a\in\operatorname{Address}(n)$ 上的概率分布 $p$，满足 $p(a)\ge0$、$\sum_a p(a)=1$，并且实际 signed Hann 记录的合成为真空记录的实数倍：
+
+$$
+\sum_{a\in\operatorname{Address}(n)} (p(a):\mathbb C)\,\operatorname{record}(n,q,\mathrm{bus},a)
+= (z:\mathbb C)\,\operatorname{vacuumRecord}(n,q).
+$$
+
+则以下结论同时成立。
+
+1. 任意非负且不为零的原始叶坐标核向量，都含有一个叶坐标取 $0/1$、节点坐标取 $0,\pm1$ 的同核证书；非零的叶坐标只出现在原向量的正支撑中，节点坐标保留原节点及根的符号。
+2. 若某个上述概率分布 $p$ 使 $z=0$，则存在一个非空的原始叶子子集 $S$，其中每个叶子的概率严格为正，且
+   $$
+   \sum_{a\in S}\operatorname{record}(n,q,\mathrm{bus},a)=0.
+   $$
+   这里的零可以是截面的内部点，不要求它是端点。
+3. `Section n q bus` 要么为空，要么是一个闭区间 $[l,r]$；两个端点都由原始叶子上的均匀分布达到。也就是说，存在非空有限子集 $S$ 及 $e\in\{-1,0,1\}$，使
+   $$
+   \sum_{a\in S}\operatorname{record}(n,q,\mathrm{bus},a)=(e:\mathbb C)\,\operatorname{vacuumRecord}(n,q),
+   \qquad z=\frac{e}{|S|},
+   $$
+   且 $1\le |S|\le 2^n$；左右端点可以由不同的子集达到。
+
+这是有限深度的 signed Hann 实数概率模型中的定理。它不把 signed record 解释成物理量子信道，不给出硬件实现、算法复杂度或计算时间结论，也不把任意可行概率分布断言为均匀分布。完整证明由 `trureturing` 的 Lean 内核检查。
+:::
 对照 [@rem-ch38-qram-page-wootters-literature]，指针与本体存储分离架构立即推演出两条贯通全书的核心**`MODEL`（模型诠释）**结论：
 
 1. **为什么全局阵列是无时间 $P = NP$，而局部指针必须顺着 `ptr++` 逐帧流逝时间？**
