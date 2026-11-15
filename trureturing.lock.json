@@ -5157,6 +5157,14 @@
       "line": 416,
       "signature": "theorem sphere_two_open_orthogonality_free_cover_lower_six {k : ℕ} (U : Fin k → Set (sphere (0 : EuclideanSpace ℝ (Fin 3)) 1)) (hopen : ∀ i, IsOpen (U i)) (hcover : ∀ x, ∃ i, x ∈ U i) (hfree : ∀ i, OrthogonalityFree (U i)) : 6 ≤ k"
     },
+    "D5/S3/TotalVariation/ParryBilateralLaw.bilateral_reset_coding": {
+      "module": "D5/S3/TotalVariation/ParryBilateralLaw",
+      "name": "D5.S3.TotalVariation.ParryBilateralLaw.bilateral_reset_coding",
+      "kind": "theorem",
+      "statement_id": "sha256:a2c5f795fdcab2a4c50f9e294d743517d7692456a5111f391e21592ffc077842",
+      "line": 59,
+      "signature": "theorem bilateral_reset_coding (k : ℕ) (hk : 2 ≤ k) : ∃ e : (Bool × RelationPath k) ≃ᵐ ResetPath k, (∀ (b : Bool) (r : RelationPath k) (t : ℤ), ((e (b, r)).val t).1 = signAt b r.val t) ∧ (∀ (z : Bool × RelationPath k) (t : ℤ), let j"
+    },
     "D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound": {
       "module": "D5/S3/TotalVariation/ParryBoundaryCylinderBound",
       "name": "D5.S3.TotalVariation.ParryBoundaryCylinderBound.parry_boundary_cylinder_bound",
