@@ -85,7 +85,19 @@ async function input(selector, value, p = page) {
   await p.locator(selector).evaluate((el, v) => { el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, value);
   await settle(p);
 }
+// 书内窄框里，按到播放键要先滚动；舞台若因此不足半屏，页面自己的原生可见性观察器会先暂停时钟。
+// 新建观察器的首次回调与页面观察器对这次滚动的裁决同批或更晚送达，等到它，再读到的 playing 才算数。
+const visibilityJudged = (p) => p.locator('#stage').evaluate(el => new Promise(resolve => {
+  const observer = new IntersectionObserver(() => { observer.disconnect(); resolve(); });
+  observer.observe(el);
+}));
+const stageShare = (p) => p.locator('#stage').evaluate(el => {
+  const r = el.getBoundingClientRect();
+  return Math.max(0, Math.min(innerHeight, r.bottom) - Math.max(0, r.top)) / r.height;
+});
+// 先滚到播放键并等可见性裁决，再按读数决定是否按下；读与按之间不再有滚动，按键不会把已暂停的时钟重新播放。
 async function pause(p = page) {
+  await p.locator('#play').scrollIntoViewIfNeeded(); await visibilityJudged(p);
   if ((await state(p)).playing) await p.click('#play');
   await settle(p);
 }
@@ -210,10 +222,16 @@ function checkMath(s, tag) {
   if (s.arcAngleDeg === 0) check(`${tag}: all six grades extinguish exactly`, [s.order1ChordSin, s.order2Sagitta,
     s.order2GirardExcess, s.order3SectorVol, s.order3DetG3, s.order3BargmannIm].every(v => v === 0));
 }
+// 精确停帧逐项比对；失败时只列出偏离的字段及其实际值与期望值。
+function presetMismatch(s, card) {
+  const p = CARDS[card], want = { preset: card, triadStage: p.stage, stageIndex: p.stage, arcAngleDeg: 60,
+    cancelSharpness: 1, view: p.view, playing: false, max: 1 };
+  return Object.fromEntries(Object.entries(want).filter(([k, v]) => (k === 'playing' ? !!s.playing : s[k]) !== v)
+    .map(([k, v]) => [k, { actual: s[k], expected: v }]));
+}
 function checkPreset(s, card, tag) {
-  const p = CARDS[card];
-  check(`${tag}: exact preset controls`, s.preset === card && s.triadStage === p.stage && s.stageIndex === p.stage
-    && s.arcAngleDeg === 60 && s.cancelSharpness === 1 && s.view === p.view && !s.playing && s.max === 1);
+  const mismatch = presetMismatch(s, card);
+  check(`${tag}: exact preset controls`, Object.keys(mismatch).length === 0, JSON.stringify({ mismatch, t: s.t }));
   checkMath(s, tag);
 }
 async function checkLinks(p, tag) {
@@ -427,6 +445,34 @@ for (const lang of ['zh', 'en']) {
   await pause(p);
   checkPreset(await state(p), 'arc-seed-triad', 'first visibility after pause');
   await p.close();
+}
+
+// 书内 740×620 的窄框：舞台在视野中播放时，滚到播放键会让舞台不足半屏，页面的原生观察器先行暂停。
+// 确定性重放失败次序：滚动前读到的 playing 若留到滚动之后才按键，会把时钟重新播放，与精确停帧只差 playing 一项。
+{
+  const card = 'volume-field-condensation', tag = 'transport reach 740x620';
+  const p = await T.open(BOOK, ID, '?lang=en&embed=1', { viewport: { width: 740, height: 620 }, locale: 'en-US', reducedMotion: 'reduce' });
+  await settle(p); await p.locator('#stage').scrollIntoViewIfNeeded(); await settle(p);
+  check(`${tag}: first visibility starts playback`, await until(p, () => window.TRIAD_LOOP_DEBUG.state.playing));
+  for (let i = 0; i < 3; i++) { await p.click('[data-tour="next"]'); await settle(p); }
+  check(`${tag}: tour reaches the card playing with the stage in view`, (await state(p)).preset === card
+    && (await state(p)).playing && await stageShare(p) >= 0.5);
+  await pause(p); await p.locator('#stage').scrollIntoViewIfNeeded(); await settle(p);
+  checkPreset(await state(p), card, `${tag}/pause from view`);
+  await p.click('[data-tour="prev"]'); await settle(p); await p.click('[data-tour="next"]'); await settle(p);
+  const stale = await state(p), shareBefore = await stageShare(p);
+  await p.locator('#play').scrollIntoViewIfNeeded(); await visibilityJudged(p);
+  const judged = await state(p), shareAfter = await stageShare(p);
+  check(`${tag}: reaching the transport drops the stage below half view and the page observer pauses before any press`,
+    stale.preset === card && stale.playing && shareBefore >= 0.5 && shareAfter < 0.5 && !judged.playing,
+    JSON.stringify({ stalePlaying: stale.playing, shareBefore, shareAfter, judgedPlaying: judged.playing }));
+  await p.click('#play'); await settle(p);
+  const restarted = presetMismatch(await state(p), card);
+  check(`${tag}: a press decided before the scroll restarts the clock and only playing leaves the exact frame`,
+    same(restarted, { playing: { actual: true, expected: false } }), JSON.stringify(restarted));
+  await pause(p); await p.locator('#stage').scrollIntoViewIfNeeded(); await settle(p);
+  checkPreset(await state(p), card, `${tag}/pause after the stale press`);
+  await p.context().close();
 }
 
 // 两种系统配色 × 双语 × 桌面、短屏、手机、书内与窄引用框，每张卡都核对布局与数学。
