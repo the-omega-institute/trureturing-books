@@ -1,5 +1,7 @@
 # quantum-geometry 内容准确性覆盖与证据
 
+第16章有限门凸包的维数与初态限定修正见[限定修正记录](CONTENT-ACCURACY-CH16-POLYTOPE-PROSE.md)：只覆盖双语导言与16.8的四处散文、相关数学见证及依赖验证；当前每语154页、共308个语言页面接受槽，本批不增加完整页面或整章接受。
+
 第15章有限特征标求和的归一化、双向求和域与相消说明修正见[限定修正记录](CONTENT-ACCURACY-CH15-FOURIER-PROSE.md)：只覆盖所列双语说明及其依赖，PDF／EPUB 的本地工具链限制与 CI 义务单列，不增加完整页面或整章接受数。
 
 第13章 CHSH 有符号开角说明的修正见[限定修正记录](CONTENT-ACCURACY-CH13-SIGNED-OPENINGS.md)：只覆盖 `chsh-dial` 的中英 `NUM` 说明及相关验证，不增加完整页面或整章接受数。
