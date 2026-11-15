@@ -25,10 +25,16 @@
   const ZR = 0.54, ZBASE = -0.2, R_A = 0.085;                    // rim height (V = V_max), bottom of the dish, anchor
   /** The level the bowl is cut at: V_max = λ max(1.15 η⁴, 0.4), λ = 1, so the hilltop V(0) = λη⁴ always lies inside. */
   const vmaxOf = (eta) => Math.max(1.15 * eta ** 4, 0.4);
+  // mq = 2m_u + m_d (MeV) of the MS-bar running masses at μ = 2 GeV, m_u = 2.16 and m_d = 4.67: renormalized,
+  // scheme-dependent parameters of the QCD Lagrangian, not pieces of the proton mass
   const PHYS = { mW: 80.377, mZ: 91.1876, mp: 938.272, mq: 8.99, vEW: 246.22, h: 6.62607015e-34, e: 1.602176634e-19, MPl: 1.220890e19 };
   const FLUX = PHYS.h / (2 * PHYS.e);                            // Φ₀ = h/2e (exact SI constants)
   const SIN2W = 1 - (PHYS.mW / PHYS.mZ) ** 2;                    // on-shell weak mixing
-  const PROTON_FRACTION = (PHYS.mp - PHYS.mq) / PHYS.mp;         // the part of m_p that is not 2m_u + m_d
+  /** 1 − (2m_u + m_d)/m_p: arithmetic on two numbers, a naive comparison of scales only. It is not the share of m_p
+      carried by any term: the quark-mass term is the vacuum-subtracted, normalized rest-frame nucleon expectation value
+      of H_m = Σ_f ∫ d³x m_f q̄_f q_f (Ji, hep-ph/9410274, Eqs. 27–30; Yang et al., arXiv:1808.08677, Eqs. 1–6), not the
+      valence count times a running mass. The page computes no value for that term. */
+  const NAIVE_SCALE_REMAINDER = (PHYS.mp - PHYS.mq) / PHYS.mp;
   let THETA_STAR = 0.7; for (let i = 0; i < 200; i++) THETA_STAR = Math.cos(THETA_STAR);
   const VIEW0 = [-0.55, 0.5];
   const COVER = 0.44;                                             // √(share of the stage the bowl's silhouette may take)
@@ -574,14 +580,14 @@
     const f = S.family;
     if (f === 0) return `P<sup>μ</sup> ${L('（诺特流守恒）', '(Noether current)')} · M<sub>Pl</sub> = 1.2209×10¹⁹ GeV`;
     if (f === 1) return `Q = T₃ + Y/2 · sin²θ<sub>W</sub> = ${fix(SIN2W, 5)}`;
-    if (f === 2) return `B = ${M.B} · m<sub>p</sub> = 938.27 MeV · ${fix(100 * PROTON_FRACTION, 2)}% ${L('非希格斯', 'not Higgs')}`;
+    if (f === 2) return `B = ${M.B} · m<sub>p</sub> = 938.27 MeV · ${L('朴素标度比较', 'naive scale comparison')} 1 − (2m<sub>u</sub> + m<sub>d</sub>)/m<sub>p</sub> = ${fix(100 * NAIVE_SCALE_REMAINDER, 2)}%${L('，不是质量分解比例', ', not a mass-decomposition fraction')}`;
     if (f === 3) return `Φ₀ = h/2e = ${(FLUX * 1e15).toFixed(9)}×10⁻¹⁵ Wb`;
     return `θ* = cos θ* = ${fix(THETA_STAR, 7)}`;
   }
   const NOTES_RO = [
     ['ε 只由 η 决定：锚点绕槽转一整圈，Ω 与 cos²ε + sin²ε 一个数位也不变。', 'ε depends on η alone: turn the anchor once round the trough and neither Ω nor cos²ε + sin²ε moves by a digit.'],
     ['阿贝尔希格斯树图质量 m<sub>V</sub> = g η v₀（v₀ = 1）；自由度 2 + 2 = 3 + 1。', 'Abelian Higgs tree-level mass m<sub>V</sub> = g η v₀ (v₀ = 1); degrees of freedom 2 + 2 = 3 + 1.'],
-    ['重子数只依赖 F 在两端的值：任何从 π 降到 0 的剖面都给 B = 1。', 'The baryon number depends only on the end values of F: any profile falling from π to 0 gives B = 1.'],
+    ['重子数只依赖 F 在两端的值：任何从 π 降到 0 的剖面都给 B = 1。m<sub>u</sub> = 2.16 MeV、m<sub>d</sub> = 4.67 MeV 是 MS-bar（μ = 2 GeV）下重整化的跑动参数，与 m<sub>p</sub> 并列只是朴素的标度比较；夸克质量项是 H<sub>m</sub> 在静止核子态里的期望值，不是价夸克数乘参数。', 'The baryon number depends only on the end values of F: any profile falling from π to 0 gives B = 1. m<sub>u</sub> = 2.16 MeV and m<sub>d</sub> = 4.67 MeV are renormalized running parameters in MS-bar at μ = 2 GeV; set beside m<sub>p</sub> they give only a naive comparison of scales. The quark-mass term is the expectation value of H<sub>m</sub> in the nucleon at rest, not the valence count times a parameter.'],
     ['涡核处 |Φ| = 0 正是帽顶；绕核一圈相位转 2π，所围磁通是一个 Φ₀。', 'In the core |Φ| = 0 is the hilltop; once round it the phase turns by 2π and the enclosed flux is one Φ₀.'],
     ['每座塔按 dim G = dim H + dim G/H 拆账；把引力与共识读成陪集塔是本书的模型。', 'Each tower keeps the books dim G = dim H + dim G/H; reading gravity and consensus as coset towers is a model of this book.']
   ];
@@ -684,7 +690,7 @@
         if (cur) g.rect(k + 0.62, 0, k + 1.38, top + 0.4, P.amber, { fill: false, stroke: P.amber, width: 1.6 });
         g.text(k + 1, top + 1.3, M.on ? `${x.dimH} + ${x.dimG - x.dimH}` : `${x.dimG} + 0`, cur ? P.amber : P.ink, { align: 'center', size: 10 });
       });
-      meta = `v = 246.22 GeV → 2m<sub>u</sub> + m<sub>d</sub> ≈ 8.99 MeV → m<sub>p</sub> = 938.27 MeV (${fix(100 * PROTON_FRACTION, 2)}%) → Φ₀ → θ* = ${fix(THETA_STAR, 4)}`;
+      meta = `v = 246.22 GeV → 2m<sub>u</sub> + m<sub>d</sub> ≈ 8.99 MeV${L('（MS-bar 2 GeV，朴素标度）', ' (MS-bar at 2 GeV, a naive scale)')} → m<sub>p</sub> = 938.27 MeV → Φ₀ → θ* = ${fix(THETA_STAR, 4)}`;
     }
     $('plotMeta').innerHTML = meta;
   }
@@ -783,7 +789,7 @@
         maurerCartanResidual: I.maurerCartan.residual, curvatureResidual: I.maurerCartan.curvatureResidual,
         electroweakDofBefore: 4 * 2 + 4, electroweakDofAfter: 3 * 3 + 2 + 1, abelianDofBefore: 2 + 2, abelianDofAfter: 3 + 1,
         weinbergSin2OnShell: SIN2W, skyrmionBaryonNumber: M.B, skyrmionBaryonQuadrature: M.Bq,
-        protonChiralMassFraction: PROTON_FRACTION, fluxQuantumWb: FLUX, thetaStar: THETA_STAR,
+        protonNaiveScaleRemainder: NAIVE_SCALE_REMAINDER, fluxQuantumWb: FLUX, thetaStar: THETA_STAR,
         vectorMass: M.mV, screeningLength: Number.isFinite(M.lambdaV) ? M.lambdaV : null, kappa: Number.isFinite(M.kappa) ? M.kappa : null,
         troughRadius: M.rt, rhoMax: M.rhoMax, anchor: M.anchor, relayIndex: M.relay,
         families: FAM.map((x) => ({ code: x.code, dimG: x.dimG, dimH: x.dimH, dimCoset: x.dimG - x.dimH, azimuthDeg: x.az })),
