@@ -260,7 +260,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第六章 | §6.1 末 | `qubit-geometry` · `half` |
 | 第六章 | §6.3 可见度 $V$ 与可区分度 $D$ 的两条定义之后 | `double-slit-marker` · `partial` |
 | 第六章 | §6.3 “性质 3 是另一端”与“回到 6.1 节的那一颗比特”两句之后、捏合推论引言之前 | `qubit-geometry` · `area` |
-| 第六章 | §6.3 惠勒延迟选择算例 `ex-wheeler-delayed-choice-tradeoff` 之后、文献注记之前（这张卡先按路径读、再擦除重读，`delayed` 只留在完整实验室里） | `double-slit-marker` · `erase` |
+| 第六章 | §6.3 惠勒延迟选择算例 `ex-wheeler-delayed-choice-tradeoff` 之后、文献注记之前（这张卡比较同一未测准备的两种备选读法：路径分组或擦除基分组；`delayed` 只留在完整实验室里） | `double-slit-marker` · `erase` |
 | 第六章 | §6.3 文献注记 `rem-englert-greenberger-literature` 之后 | `double-slit-marker` · `mixed` |
 | 第六章 | §6.4 | `qubit-geometry` 完整实验室 |
 | 第六章 | §6.4 `qubit-geometry` 完整实验室之后，隔一句介绍 `SLIT//MARKER` 的过渡句 | `double-slit-marker` 完整实验室 |

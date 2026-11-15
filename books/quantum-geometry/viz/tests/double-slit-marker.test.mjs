@@ -4,7 +4,9 @@
 // stageFirstChecks first; then the page's own claims, checked against computations written here and never by calling
 // the page's functions: the screen law from 2×2 complex density matrices (marker state, slit unitaries, a partial
 // trace), the reading directions as eigenvectors, the distinguishability as a trace norm, the hits by a
-// Kolmogorov–Smirnov test against the law, the rows by binomial counts and a contrast estimator of our own.
+// Kolmogorov–Smirnov test against the law, the rows by binomial counts and a contrast estimator of our own. The ERASER
+// card is a comparison of two alternative readouts on the same stored hits; the suite also computes (Lüders rule) why it
+// cannot be a path readout followed by an erasing one, and where the coherence is when α = 90°.
 import { session, stageFirstChecks, settle, until, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'double-slit-marker', NMAX = 1600;
@@ -121,6 +123,15 @@ check('WAVE: the counted contrast is near 1', Math.abs(estimate(hits.map((h) => 
 await pick('which'); s = await seek(NMAX); hits = await D(() => window.SLIT_DEBUG.hits()); md = model(90, 1);
 check('WHICH-PATH: α = 90°, V = 0, D = 1, no fringes in the hits', s.alpha === 90 && near(s.V, 0, 1e-12) && near(s.D, 1, 1e-12) && Math.abs(estimate(hits.map((h) => h.x))) < 0.1 && ks(hits.map((h) => h.x), env) < 0.041);
 const unreadX = hits.map((h) => h.x);
+// α = 90°: the reduced path state has no off-diagonal mass, and it has not moved into the marker: the marker's own
+// reduced state ½(ρ_L + ρ_R) has none either; the cross block ½ U_L ρ U_R† of the joint path–marker state keeps it
+{
+  const ML = ret(md, 0), MR = ret(md, 1), mk = [0, 1].map((i) => [0, 1].map((j) => C((ML[i][j].re + MR[i][j].re) / 2, (ML[i][j].im + MR[i][j].im) / 2)));
+  const off = (A) => A[0][1].re ** 2 + A[0][1].im ** 2 + A[1][0].re ** 2 + A[1][0].im ** 2;
+  const X = mmul(mmul(md.U[0], md.rho), dag(md.U[1])), cross = 2 * X.flat().reduce((t, z) => t + z.re * z.re + z.im * z.im, 0) / 4;
+  const noteW = await page.textContent('#roNote');
+  check('WHICH-PATH: neither the reduced path state nor the marker’s own state keeps off-diagonal mass; the cross blocks of the joint state keep ½, and the note puts the coherence there, not in the marker', near(mass(md), 0, 1e-15) && near(s.mass, 0, 1e-12) && off(mk) < 1e-15 && near(cross, 0.5, 1e-12) && /联合关联/.test(noteW) && /没有搬进标记/.test(noteW), `${off(mk)} ${cross} ${noteW}`);
+}
 
 await pick('delayed'); s = await state();
 check('DELAYED: the marker is to be read for the path, but only after the hits are in', s.reader === 'path' && s.hold && s.split === 0 && s.n < NMAX);
@@ -136,19 +147,37 @@ let p1 = mass1(md, dirs.path[0]), n1 = rowsOf(hits, 0).length;
 check('DELAYED: half the hits are read as “left”, as the law gives', near(p1, 0.5, 1e-9) && Math.abs(n1 - NMAX * p1) < 4 * Math.sqrt(NMAX * p1 * (1 - p1)), `${n1}`);
 check('DELAYED: neither row shows fringes', Math.abs(estimate(rowsOf(hits, 0))) < 0.2 && Math.abs(estimate(rowsOf(hits, 1))) < 0.2);
 await pick('erase'); s = await state();
-check('ERASER: the marker again waits for the hits, to be read for the path first and to erase afterwards', s.hold && s.reader === 'path' && s.then === 'erase');
-// the last hit starts the card's own sequence: sort by the path (700 ms), pause (1400 ms), gather (450 ms), sort to erase
-// (700 ms). settle() flushes twice and so also ends the pause, leaving the path rows only for the gather, which separate
-// calls can miss on a busy runner: land the last hit, end the sort alone (one flush does not end the pause it schedules)
-// and read the state and the hits in that same task
-const first = await D((n) => { const before = window.SLIT_DEBUG.state; window.SLIT_DEBUG.seek(n); window.TRV.kit.flush(); return { before, st: window.SLIT_DEBUG.state, hits: window.SLIT_DEBUG.hits() }; }, NMAX);
+check('ERASER: the marker again waits for the hits; the card will sort them under the path readout first and under the alternative erasing readout afterwards', s.hold && s.reader === 'path' && s.then === 'erase');
+const eraseCard = await D(() => { const b = document.querySelector('[data-preset="erase"]'); return { zh: b.querySelector('.cn.zh').textContent, en: b.querySelector('.cn.en').textContent }; });
+const noteZh = await page.textContent('#presetNote');
+check('ERASER: the card and its note present two alternative readouts compared on the same hits, not a reading followed by a re-reading', s.compare === true && /二选一/.test(eraseCard.zh) && !/重读|先.*再/.test(eraseCard.zh) && /alternative/.test(eraseCard.en) && !/again|then/i.test(eraseCard.en) && /只能选一种/.test(noteZh) && /对照/.test(noteZh), `${eraseCard.zh} | ${eraseCard.en} | ${noteZh.slice(0, 60)}`);
+// the last hit starts the card's own comparison: sorted under the path readout (700 ms), pause (1400 ms), gather
+// (450 ms), sorted under the erasing readout (700 ms). settle() flushes twice and so also ends the pause, leaving the path
+// rows only for the gather, which separate calls can miss on a busy runner: land the last hit, end the sort alone (one
+// flush does not end the pause it schedules) and read the state, the hits and the HUD in that same task
+const first = await D((n) => { const before = window.SLIT_DEBUG.state; window.SLIT_DEBUG.seek(n); window.TRV.kit.flush(); return { before, st: window.SLIT_DEBUG.state, hits: window.SLIT_DEBUG.hits(), hud: document.getElementById('hudSub').textContent }; }, NMAX);
 s = first.st; hits = first.hits;
-check('ERASER: once the hits are in, they are first sorted by the path reading, none moved', first.before.hold && first.before.n < NMAX && s.n === NMAX && !s.hold && s.reader === 'path' && s.split === 1 && s.then === 'erase' && hits.length === NMAX && hits.every((h, i) => h.x === unreadX[i] && (h.row === 0 || h.row === 1)) && Math.abs(estimate(rowsOf(hits, 0))) < 0.2 && Math.abs(estimate(rowsOf(hits, 1))) < 0.2, `${JSON.stringify({ before: first.before.hold, reader: s.reader, split: s.split, then: s.then })} ${estimate(rowsOf(hits, 0))} ${estimate(rowsOf(hits, 1))}`);
-check('ERASER: then, by itself, the card gathers them back and reads them again to erase', await until(page, () => { const d = window.SLIT_DEBUG.state; return d.reader === 'erase' && d.split === 1 && d.then === null; }));
+check('ERASER: once the hits are in, they are first sorted as the path readout would sort them, none moved', first.before.hold && first.before.n < NMAX && s.n === NMAX && !s.hold && s.reader === 'path' && s.split === 1 && s.then === 'erase' && hits.length === NMAX && hits.every((h, i) => h.x === unreadX[i] && (h.row === 0 || h.row === 1)) && Math.abs(estimate(rowsOf(hits, 0))) < 0.2 && Math.abs(estimate(rowsOf(hits, 1))) < 0.2, `${JSON.stringify({ before: first.before.hold, reader: s.reader, split: s.split, then: s.then })} ${estimate(rowsOf(hits, 0))} ${estimate(rowsOf(hits, 1))}`);
+check('ERASER: while the path rows are shown, the HUD names them as one of the alternatives', first.st.compare === true && /对照/.test(first.hud) && /按路径读/.test(first.hud), first.hud);
+check('ERASER: then, by itself, the card gathers them back and sorts them under the alternative erasing readout', await until(page, () => { const d = window.SLIT_DEBUG.state; return d.reader === 'erase' && d.split === 1 && d.then === null; }));
 await settle(page); s = await state(); hits = await D(() => window.SLIT_DEBUG.hits());
 const ep = estimate(rowsOf(hits, 0)), em = estimate(rowsOf(hits, 1));
-check('ERASER: the same hits again; one row has fringes, the other anti-fringes', s.reader === 'erase' && hits.every((h, i) => h.x === unreadX[i]) && ep > 0.8 && em < -0.8, `${ep} ${em}`);
+const hudE = await page.textContent('#hudSub'), toastE = await page.textContent('#toast');
+check('ERASER: the HUD names the erasing rows as the other alternative, and the switch says it is not a second reading of the marker', s.compare === true && /对照/.test(hudE) && /二选一/.test(hudE) && /不是对标记的第二次读出/.test(toastE), `${hudE} | ${toastE}`);
+check('ERASER: the same stored hits under the erasing readout; one row has fringes, the other anti-fringes', s.reader === 'erase' && hits.every((h, i) => h.x === unreadX[i]) && ep > 0.8 && em < -0.8, `${ep} ${em}`);
 check('ERASER: the two rows add up to every hit', rowsOf(hits, 0).length + rowsOf(hits, 1).length === NMAX && (await lawMatches(s)) < 1e-12);
+// why the card compares alternatives and does not read twice: after a projective path readout at α = 90° the marker is
+// left along a path direction d, so an erasing readout afterwards sorts the hits with weight ⟨e, d⟩² and no cos kx term
+// (Lüders rule); the erasing readout chosen instead gives fringes and anti-fringes of full contrast. Matrices here.
+{
+  const md9 = model(90, 1), rd = readers(md9), dot = (u, v) => u[0] * v[0] + u[1] * v[1];
+  const seq = (x, e) => rd.path.reduce((t, d) => t + joint(md9, x, d) * dot(e, d) ** 2, 0);
+  const FX = Array.from({ length: 401 }, (_, i) => -0.5 + i / 400);      // holds x = 0 and x = ±1/8, where cos kx = ±1
+  const flat = rd.erase.map((e) => Math.max(...FX.map((x) => Math.abs(seq(x, e) / env(x) - seq(0, e) / env(0)))));
+  const vis = (f) => { const v = FX.map((x) => f(x) / env(x)), hi = Math.max(...v), lo = Math.min(...v); return (hi - lo) / (hi + lo); };
+  const alt = rd.erase.map((e) => vis((x) => joint(md9, x, e)));
+  check('…a path readout followed by an erasing one would leave both rows without fringes; the erasing readout chosen instead gives fringes of full contrast', flat.every((d) => d < 1e-12) && alt.every((v) => near(v, 1, 1e-9)), `${flat} ${alt}`);
+}
 await pick('mixed'); s = await seek(NMAX); md = model(60, 0.5);
 check('MIXED: λ = 0.5: V = 0.5 still, D = 0.433, D² + V² = 0.4375 < 1', s.lambda === 0.5 && near(s.V, 0.5, 1e-12) && near(s.D, readers(md).dTrace, 1e-12) && near(s.sum, 0.4375, 1e-12));
 check('MIXED: the path of the point stays inside the circle, on the arc (cos α, λ·sin α)', [10, 40, 80].every((a) => { const m = model(a, 0.5); return visibility(m) ** 2 + readers(m).dTrace ** 2 < 1; }));
@@ -183,6 +212,14 @@ check('Space plays the hits in', await until(page, () => { const d = window.SLIT
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 await page.click('[data-lang-set="en"]'); await settle(page, 150);
 for (const r of ['none', 'path', 'erase']) { await page.click(`#readerChips [data-reader="${r}"]`); await settle(page); const left = await cjkLeftovers(page); check(`English: no Chinese left with the reader ${r}`, left.length === 0, left.slice(0, 3).join(' | ')); }
+await pick('erase');
+const noteEn = await page.textContent('#presetNote');
+check('English ERASER: the note presents two alternative readouts compared on the same stored hits', /only one of the two/.test(noteEn) && /for comparison/.test(noteEn) && /not a path reading followed by/.test(noteEn), noteEn.slice(0, 120));
+await D((n) => window.SLIT_DEBUG.seek(n), NMAX);
+const erasedEn = await until(page, () => { const d = window.SLIT_DEBUG.state; return d.reader === 'erase' && d.split === 1 && d.then === null; });
+await settle(page);
+const hudEn = await page.textContent('#hudSub'), toastEn = await page.textContent('#toast'), leftEn = await cjkLeftovers(page);
+check('English ERASER: the erasing rows are named as the other alternative, the switch is not a second reading, and no Chinese is left', erasedEn && /one or the other/.test(hudEn) && /not a second reading/.test(toastEn) && leftEn.length === 0, `${hudEn} | ${toastEn} | ${leftEn.slice(0, 3).join(' | ')}`);
 
 // the stills that chapter 6 prints: the reading splits the hits (it does not copy them), and the rows are named as the caption says
 {
@@ -194,6 +231,7 @@ for (const r of ['none', 'path', 'erase']) { await page.click(`#readerChips [dat
     check(`still ${id}: all ${NMAX} hits are in, and the two rows split them (${rows.join(' + ')} = ${hits.length})`, st.n === NMAX && hits.length === NMAX && rows[0] + rows[1] === NMAX && rows.every((k) => k > 0) && st.reader === (id === 'delayed' ? 'path' : 'erase'));
     const body = await shot.evaluate(() => document.getElementById('stage').innerText + document.getElementById('legend').innerText);
     check(`still ${id}: the legend writes r with a subscript R, not r_R`, !/r_[LR]/.test(body) && /rR/.test(await shot.evaluate(() => document.getElementById('legend').textContent)));
+    if (id === 'erase') check('still erase: the frame names the rows as the alternative erasing readout and their fringes as conditional', /对照/.test(body) && /二选一/.test(body) && /条件条纹/.test(body), body.replace(/\s+/g, ' ').slice(0, 160));
   }
 }
 
