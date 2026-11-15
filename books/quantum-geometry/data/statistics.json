@@ -3,7 +3,7 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 194,
+    "theorem": 198,
     "lemma": 34,
     "proposition": 45,
     "corollary": 30,
@@ -11,17 +11,17 @@
     "conjecture": 6,
     "problem": 3,
     "example": 123,
-    "remark": 200,
-    "proof": 300,
-    "lean_verified": 300,
+    "remark": 201,
+    "proof": 304,
+    "lean_verified": 304,
     "written_proof": 3,
     "literature": 200
   },
-  "total": 659,
+  "total": 663,
   "kinds": {
     "def": 201,
     "inductive": 11,
-    "theorem": 447
+    "theorem": 451
   },
   "groups": {
     "theorems": [
@@ -285,6 +285,10 @@
       "D5/S3/Quantum/Routing/HannSignedCertificate.signed_event",
       "D5/S3/Quantum/Routing/HannSpatialQram.correctness",
       "D5/S3/Quantum/Routing/ReversibleQram.correctness",
+      "D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound",
+      "D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized",
+      "D5/S3/Quantum/ShorCountingMarginal.shor_mixture_peak_lower_bound",
+      "D5/S3/Quantum/ShorCountingMarginal.shor_qpe_probability_mixture",
       "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR",
       "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_anticomm_of_lt",
       "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_mixed_anticomm_of_lt",
@@ -18025,6 +18029,54 @@
         }
       ]
     },
+    "D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound": {
+      "kind": "theorem",
+      "name": "QuantumPhaseEstimationGeneral.qpe_arbitrary_phase_lower_bound",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 321,
+          "id": "thm-qpe-arbitrary-phase-lower-bound",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized": {
+      "kind": "theorem",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_distribution_normalized",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 278,
+          "id": "thm-shor-distribution-normalized",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_mixture_peak_lower_bound": {
+      "kind": "theorem",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_mixture_peak_lower_bound",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 293,
+          "id": "thm-shor-mixture-peak-lower-bound",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_qpe_probability_mixture": {
+      "kind": "theorem",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_qpe_probability_mixture",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 262,
+          "id": "thm-shor-qpe-probability-mixture",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR": {
       "kind": "theorem",
       "name": "D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC_CAR",
@@ -22270,7 +22322,11 @@
         "D5/S3/Fourier/FinitePoisson.finite_poisson_summation",
         "D5/S3/Fourier/FinitePoisson.sum_annihilator_character",
         "D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation",
-        "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"
+        "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation",
+        "D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound",
+        "D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized",
+        "D5/S3/Quantum/ShorCountingMarginal.shor_mixture_peak_lower_bound",
+        "D5/S3/Quantum/ShorCountingMarginal.shor_qpe_probability_mixture"
       ],
       "inline": []
     },

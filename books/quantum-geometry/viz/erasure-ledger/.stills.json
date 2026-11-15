@@ -2,55 +2,55 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "a0de92939cf61844c455d31f591f69b3d0d5d39a6eccffc6f6db8848388e6a7f"
     },
     "fig-pinch.zh.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "20b00fe28a2915a673472b35a1b1ed4d56c3a509b513ea9602313064496cd4bf"
     },
     "fig-dpi.zh.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "7177931d26d86c7f83d6fb54596cc1bd3b94092024d2ea2671ef76df051dca90"
     },
     "fig-steps.zh.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "9ddee1158fca36f46556f0b60e1dfc7f0843e265af9cdea7e1533f49b4e64663"
     },
     "fig-cycle.zh.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "fce44474acf67b9a21e4994d9801026e66d9da085c83c6a0cbbb7ac539bcc134"
     },
     "fig-bath.zh.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "b7b1ed289310a4353c1b52ac07eefdd31423f3f21da3a77d3a7a3b3125ff9ede"
     },
     "fig-copy.zh.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "94ff61f7782c7caee6be470b7123166ed1c1693358fa5d3f868fa93c3fc6e510"
     },
     "fig-pinch.en.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "97efced1d07696bd1de8825ec0139b301400c5982c0d08e0082a86b7ad3cf3f0"
     },
     "fig-dpi.en.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "c2b0231b9e1e137f87228c6f56a1706b0e46d4344c0056d15fb5417470065f3a"
     },
     "fig-steps.en.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "b80496e74abed377246cde228b51ea47d9c34c107192e9071bfcd4b33c0f995e"
     },
     "fig-cycle.en.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "928b71db1af7d3784d0cd8c0b4bdaa77c7ab88bc31ca5acff1668a70d9218009"
     },
     "fig-bath.en.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "629005ef43336b917ee1170b007d722acc990962e250429fd50ec6975522c2d9"
     },
     "fig-copy.en.jpg": {
-      "input": "6a48a73aa0a4a94e14062b701e33be438eabccba5fff21c5eda7fb06ee3e75fe",
+      "input": "29d281d67f72fd0c765613d4466c00c8d180ca02eb3be195a929281d524fa148",
       "output": "f727ccb9b0400a62fc253be0bb27d04115bf4a5e35d1510b1747194b1ccc80f1"
     }
   }

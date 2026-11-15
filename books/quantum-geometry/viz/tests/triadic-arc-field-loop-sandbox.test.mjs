@@ -410,6 +410,25 @@ for (const lang of ['zh', 'en']) {
   check(`drawer ${lang}: close button closes`, !(await page.locator('#drawer').isVisible()));
 }
 
+// 先把舞台滚出视口再启动页面，确定性覆盖首次可见回调晚于暂停的情形；不替换观察器或时钟。
+{
+  const p = await T.newPage();
+  await p.setViewportSize({ width: 740, height: 620 });
+  await p.emulateMedia({ colorScheme: 'light', reducedMotion: 'reduce' });
+  await p.route(`**/${ID}/main.js`, async route => {
+    await p.locator('#ctlPanel').scrollIntoViewIfNeeded();
+    await route.continue();
+  });
+  await T.goto(BOOK, ID, '?lang=en&embed=1', p); await settle(p);
+  const box = await p.locator('#stage').boundingBox();
+  check('first visibility: offscreen boot keeps the clock paused', box.y + box.height <= 0 && !(await state(p)).playing);
+  check('first visibility: native scrolling starts playback', await playsAfter(p,
+    () => p.locator('#stage').scrollIntoViewIfNeeded(), () => window.TRIAD_LOOP_DEBUG.state));
+  await pause(p);
+  checkPreset(await state(p), 'arc-seed-triad', 'first visibility after pause');
+  await p.close();
+}
+
 // 两种系统配色 × 双语 × 桌面、短屏、手机、书内与窄引用框，每张卡都核对布局与数学。
 for (const scheme of ['dark', 'light']) {
   contextScheme = scheme;
@@ -426,6 +445,12 @@ for (const scheme of ['dark', 'light']) {
       matchMedia(`(prefers-color-scheme: ${s})`).matches && document.documentElement.dataset.trPalette === undefined, scheme));
     await checkLinks(p, tag);
     if (!embed && width > 1080) await desktopContract(p, tag);
+    // 首次进入视野会异步自动播放；先等它开始，再暂停，随后才能读取精确停帧。
+    if (embed) {
+      await p.locator('#stage').scrollIntoViewIfNeeded(); await settle(p);
+      check(`${tag}: first visibility starts playback`, await until(p, () => window.TRIAD_LOOP_DEBUG.state.playing));
+      await pause(p);
+    }
     for (const [i, card] of Object.keys(CARDS).entries()) {
       if (embed) { if (i) { await p.click('[data-tour="next"]'); await settle(p); } await pause(p); }
       else await pick(card, p);

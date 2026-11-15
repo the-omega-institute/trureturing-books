@@ -2,47 +2,47 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "eeab08943db3681d3656b820ef27ec169d7f5d4496c3a9e5b201c2ad4df8e930"
     },
     "fig-complete-graph-triangulation.zh.jpg": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "040678c3910b72e1d335b36d99a15154d9d5aa5280a3dec43e29b77ddbe1b805"
     },
     "fig-downward-irreducibility-lock.zh.jpg": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "4bca3e53713468901222e90f37d0ca9f55fcdf128152f11d9610bc901966739d"
     },
     "fig-floppy-c4-vs-rigid-k4.zh.jpg": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "7b88c9c2e2d4c638ca5ae0f94cec24bc85bdb3b3a1224f320255bdc26438ac5c"
     },
     "fig-maxwell-laman-polynomial.zh.jpg": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "4b7f1a551e894dec95b72e42fe377e235c4d0cd90ea106ad8a0101113a59b3d5"
     },
     "fig-regge-curvature-glow.zh.jpg": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "094f58045b397b6c50a957410186527bf79168e531f2710b3301254b4fe79a42"
     },
     "fig-complete-graph-triangulation.en.jpg": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "3ab9f9b8f517581790962503a21805645bf930daf889ee0d00e04977f85f342b"
     },
     "fig-downward-irreducibility-lock.en.jpg": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "2885bed6aea05e132602619bee0678bb4ae49fc5e614a4c83258ab05062ccfd9"
     },
     "fig-floppy-c4-vs-rigid-k4.en.jpg": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "a4754720be58b3a30fa209d80d493c65311903edb29f802843082b46b3f77fa5"
     },
     "fig-maxwell-laman-polynomial.en.jpg": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "f4c697ed71ed01f71b34f2b86d0f09281f9c7f052fb00b3b9ff82ccf2c0f35f9"
     },
     "fig-regge-curvature-glow.en.jpg": {
-      "input": "42fecfd2c8551bd8267d99ef14d10deb62c5a29d314f44cb168cf1c575cc463f",
+      "input": "4441a5dc341051c364f6f7a1a2bd78f6e11a09aec53dbe56d95f3ffa5888ce04",
       "output": "8ace99f3c6c28b4e88b5d8d59d18406694d5327e3321be01bd46404159bd416b"
     }
   }

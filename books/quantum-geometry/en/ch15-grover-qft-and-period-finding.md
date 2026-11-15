@@ -236,10 +236,231 @@ In the example with $m = 32$ and period $r = 8$, the comb of positions $H = \{0,
 **The peaks are $Q/r$ apart, not $r$.** $Q = 32$ and period $r = 8$: the cyan comb $H = \{0, 8, 16, 24\}$ on the register has only $4$ cells, $8$ apart; after the sweep the spectrum keeps $8$ equal bars, each $\frac{1}{8}$, at $0, 4, 8, \dots, 28$, exactly the $8$ frequencies of $H^\perp$, spaced $Q/r = 4$ apart. At $k = 4$ the four cyan arrows all point right and the chain has length $4$; $\lvert H\rvert \cdot \lvert H^\perp\rvert = 4 \cdot 8 = 32$ ([@cor-finite-poisson-period]). In the example, $Q = 16$ and $r = 4$ happen to give $r = Q/r = 4$, so the two combs coincide.
 :::
 ::: {.remark #rem-shor-divisibility-boundary-literature title="Scope Boundaries Between Finite Poisson Summation and Non-Divisible Shor Order Recovery (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Two critical boundaries govern how [@cor-finite-poisson-period] connects to Shor's algorithm — in particular, the Dirichlet/Fejér kernel concentration for $r \nmid Q$ and continued-fraction denominator recovery in Item 2 belong to the quantum-algorithms literature (see [@rem-grover-qft-shor-literature] below) and are not formalized in this book:
+**Literature result, not formalized in this book.** To connect [@cor-finite-poisson-period] to Shor's algorithm, first distinguish two boundaries, then derive the counting-register distribution from the actual input when the period need not divide the register size. The exact marginal, normalization, and pointwise bound are stated next with their frozen declarations; the derivation below explains those statements, while the full algorithmic claims remain in [@rem-grover-qft-shor-literature].
 
 1. **Finite Poisson summation is not the full Shor factoring theorem**: [@cor-finite-poisson-period] is an algebraic identity on $\mathrm{ZMod}\,m$, not a formalization of Shor's full success probability, continued-fraction recovery theorem, or polynomial gate complexity (which are detailed in [@rem-grover-qft-shor-literature]).
-2. **Exact divisibility ($r \mid Q$) versus general non-divisibility ($r \nmid Q$)**: Non-resonant frequencies vanish identically only when the period $r$ divides the register size $m = Q$. When $r \nmid Q$, the Fourier transform exhibits a peaked Dirichlet/Fejér kernel around multiples of $Q/r$ rather than exact zeros, requiring continued-fraction rounding to extract $r$.
+2. **Exact divisibility ($r \mid Q$) versus general non-divisibility ($r \nmid Q$)**: When $r \mid Q$, a complete periodic comb is a coset of a subgroup of $\mathrm{ZMod}\,Q$, so non-resonant frequencies vanish **exactly** by [@prop-finite-character-cancellation]. When $r \nmid Q$, the comb cut off at the register boundary does not support this use of the subgroup identity. One must calculate a finite geometric sum. After obtaining a probability bound near a peak, recovering the order from a frequency approximation remains a separate number-theoretic task.
+
+:::
+
+::: {.theorem #thm-shor-qpe-probability-mixture title="Actual-input Shor counting marginal" lean="D5/S3/Quantum/ShorCountingMarginal.shor_qpe_probability_mixture"}
+For every parameter record $c$ (with modulus at least $2$, a coprime natural base, target width whose dimension $D=2^{\mathrm{width}}$ contains the modulus, and period $r=\operatorname{orderOf}(a:\mathrm{ZMod}\,N)>0$), every control width $n\in\mathbb N$, and every $y\in\mathrm{Fin}(2^n)$,
+
+$$
+\operatorname{normSquared}\!\left(\operatorname{runQPE}\,c.\operatorname{modularOperator}\,n\,c.\operatorname{input}\,y\right)
+=\frac{1}{r}\sum_{s\in\mathrm{Fin}\,r}
+\operatorname{probability}\!\left(2^n,\frac{s.\operatorname{val}}{r},y\right).
+$$
+
+Here `normSquared` sums the squared moduli over every one of the $D$ physical target coordinates. The input is the record's computational basis vector at coordinate $1$; the equality gives the marginal probability of the specified counting outcome after summing over the entire work register.
+:::
+
+::: proof
+The frozen declaration expands the actual basis input into the orthonormal Fourier eigenstates of its modular orbit, applies the controlled powers and inverse Fourier transform, and uses orthogonality to remove the cross terms. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-shor-distribution-normalized title="Normalization of the actual Shor counting marginal" lean="D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized"}
+For every parameter record $c$, writing $r=c.\operatorname{period}$, and every $n\in\mathbb N$,
+
+$$
+\sum_{y\in\mathrm{Fin}(2^n)}
+\operatorname{normSquared}\!\left(\operatorname{runQPE}\,c.\operatorname{modularOperator}\,n\,c.\operatorname{input}\,y\right)=1.
+$$
+
+This includes the edge case $n=0$, where the control register has the single outcome $y=0$.
+:::
+
+::: proof
+Summing the actual-input mixture over all counting outcomes invokes the normalized arbitrary-phase kernels; the period factor cancels because the period is positive. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-shor-mixture-peak-lower-bound title="Pointwise nearest-grid lower bound for the actual marginal" lean="D5/S3/Quantum/ShorCountingMarginal.shor_mixture_peak_lower_bound"}
+For every parameter record $c$, writing $r=c.\operatorname{period}$, every $n\in\mathbb N$, every $s\in\mathrm{Fin}\,r$, and every $b\in\mathrm{Fin}(2^n)$, assume
+
+$$
+\operatorname{Nearest}\!\left(2^n,\frac{s.\operatorname{val}}{r},b\right).
+$$
+
+By definition, this assumption means
+
+$$
+\exists z\in\mathbb Z,\ \left|\frac{s.\operatorname{val}}{r}-\frac{b.\operatorname{val}}{2^n}-z\right|\le\frac{1}{2\cdot2^n}.
+$$
+
+Then
+
+$$
+\frac{1}{r}\,\frac{4}{\pi^2}
+\le
+\operatorname{normSquared}\!\left(\operatorname{runQPE}\,c.\operatorname{modularOperator}\,n\,c.\operatorname{input}\,b\right).
+$$
+
+This is a pointwise statement for the selected phase and grid label; distinct phases may select the same label, so it is not an aggregate-event probability.
+:::
+
+::: proof
+The arbitrary-phase bound supplies $4/\pi^2$ for the selected eigenphase. The actual mixture has weight $1/r$ for that component, and all other squared norms are nonnegative. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-qpe-arbitrary-phase-lower-bound title="Circular nearest-grid bound for one phase" lean="D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound"}
+For every $N\in\mathbb N$ with $0<N$, every real phase $\theta$, and every $b\in\mathrm{Fin}\,N$, assume
+
+$$
+\operatorname{Nearest}(N,\theta,b).
+$$
+
+By definition, this assumption means
+
+$$
+\exists z\in\mathbb Z,\ \left|\theta-\frac{b.\operatorname{val}}{N}-z\right|\le\frac{1}{2N}.
+$$
+
+We have
+
+$$
+\frac{4}{\pi^2}\le\operatorname{probability}(N,\theta,b).
+$$
+
+The integer shift makes this a circular condition, including both midpoint ties and the $0/1$ seam.
+:::
+
+::: proof
+The proof shifts the phase by the supplied integer, evaluates the finite geometric sum, applies the sine bounds on the nearest interval, and squares the resulting $2/\pi$ amplitude estimate. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark #rem-shor-actual-input-marginal title="Actual-input derivation and the remaining Shor boundaries"}
+The following derivation explains the four frozen statements above. It remains deliberately narrower than the full Shor algorithm: the aggregate success event, continued-fraction recovery, coprime sampling, factor extraction, and gate complexity stay in [@rem-grover-qft-shor-literature].
+
+**The actual input is $|1\rangle$.** Let the modulus be $N\ge2$ and the natural-number base $a$ satisfy $\gcd(a,N)=1$. The work register has $w$ qubits and dimension $D=2^w$, with only $N\le D$ required. Independently, the counting register has size $Q=2^n$ for any natural number $n$, including $0$. Work basis labels are $t\in\mathrm{Fin}\,D$; the padded modular permutation and its linear action are
+
+$$
+\begin{aligned}
+\pi_a(t)&=\begin{cases}at\bmod N,&t<N,\\t,&N\le t<D,\end{cases}\\
+U_a|t\rangle&=|\pi_a(t)\rangle.
+\end{aligned}
+$$
+
+Coprimality makes multiplication modulo $N$ a permutation, while the extra padding coordinates stay fixed. Set $r=\operatorname{orderOf}(a:\mathrm{ZMod}\,N)>0$ and write $t_j=a^j\bmod N$ for $0\le j<r$. These $r$ basis vectors are distinct, and $U_a|t_j\rangle=|t_{j+1\bmod r}\rangle$. The circuit starts in the basis vector $|1\rangle=|t_0\rangle$: it requires neither prior knowledge of $r$ nor preparation of an unknown eigenstate. The order $r$ is a parameter used to analyze this actual modular cycle.
+
+**Where does the uniform phase mixture come from?** On this cycle define the normalized Fourier vectors
+
+$$
+\begin{aligned}
+|u_s\rangle&=\frac{1}{\sqrt r}\sum_{j=0}^{r-1}e^{-2\pi i sj/r}|t_j\rangle,
+\qquad 0\le s<r,\\
+U_a|u_s\rangle&=e^{+2\pi i s/r}|u_s\rangle,\\
+\langle u_s\mid u_{s'}\rangle&=\delta_{ss'},
+\qquad |1\rangle=\frac{1}{\sqrt r}\sum_{s=0}^{r-1}|u_s\rangle.
+\end{aligned}
+$$
+
+The negative sign in the first line matches the positive sign in the second: shifting the orbit index from $j$ to $j+1$ extracts $e^{+2\pi i s/r}$. Orthogonality follows by summing $r$th roots of unity. Summing over $s$ then leaves only $j=0$, yielding the last identity. This is a coherent decomposition of a pure state, without assuming an initially sampled classical phase. These vectors span the orbit subspace; they are not asserted to form an eigenbasis of the entire $D$-dimensional work space.
+
+**Two factors of $1/\sqrt Q$ give $1/Q$ in the amplitude.** After uniform preparation of the counting register, the binary control bits apply powers $U_a^{2^j}$. On branch $x=\sum_j x_j2^j$, their product is $U_a^x$. Thus the actual joint state before the Fourier transform is
+
+$$
+|\Psi_{\mathrm{pre}}\rangle
+=\frac{1}{\sqrt Q}\sum_{x=0}^{Q-1}|x\rangle U_a^x|1\rangle
+=\frac{1}{\sqrt Q}\sum_{x=0}^{Q-1}|x\rangle|a^x\bmod N\rangle.
+$$
+
+First use the source's inverse transform $\mathcal F_- =\mathcal F_+^{-1}$, whose matrix elements are $Q^{-1/2}e^{-2\pi i kx/Q}$. Let $v_-(k)$ be the work vector at counting outcome $k$ after this transform. Then
+
+$$
+\begin{aligned}
+v_-(k)&=\frac{1}{Q}\sum_{x=0}^{Q-1}e^{-2\pi i kx/Q}|a^x\bmod N\rangle\\
+&=\frac{1}{\sqrt r}\sum_{s=0}^{r-1}A_Q(s/r,k)|u_s\rangle,\\
+A_Q(\theta,k)&=\frac{1}{Q}\sum_{x=0}^{Q-1}e^{2\pi i x(\theta-k/Q)},\\
+p_Q(\theta,k)&=|A_Q(\theta,k)|^2.
+\end{aligned}
+$$
+
+The factor $1/Q$ includes both the $1/\sqrt Q$ from uniform input preparation and the $1/\sqrt Q$ from the inverse Fourier transform. Neither may be omitted.
+
+**The actual probability sums over every work outcome.** The unconditional counting-register marginal is
+
+$$
+\begin{aligned}
+P_-(k)&=\sum_{t=0}^{D-1}|v_-(k)(t)|^2\\
+&=\frac{1}{r}\sum_{s=0}^{r-1}p_Q(s/r,k).
+\end{aligned}
+$$
+
+The left side includes all $D$ coordinates. Coordinates outside the orbit, including the padding, have zero amplitude for this input. On the right, the uniform weight $1/r$ follows from eliminating cross terms with $\langle u_s\mid u_{s'}\rangle=\delta_{ss'}$. This is neither the probability for a single eigenphase nor the comb distribution conditioned on a particular work outcome. For any real phase $\theta$, expanding the square and using orthogonality of $Q$th roots of unity gives a direct normalization check:
+
+$$
+\begin{aligned}
+\sum_{k=0}^{Q-1}p_Q(\theta,k)
+&=\frac{1}{Q^2}\sum_{x,x'=0}^{Q-1}e^{2\pi i(x-x')\theta}
+  \sum_{k=0}^{Q-1}e^{-2\pi i k(x-x')/Q}\\
+&=\frac{1}{Q^2}\sum_{x=0}^{Q-1}Q=1,\\
+\sum_{k=0}^{Q-1}P_-(k)&=\frac{1}{r}\sum_{s=0}^{r-1}1=1.
+\end{aligned}
+$$
+
+Here $x,x'$ both range from $0$ to $Q-1$, so the inner sum is $Q$ precisely when $x=x'$ and is zero otherwise. At $n=0$, $Q=1$, the controlled-power sequence is empty, $A_1(\theta,0)=1$, and the sole counting outcome still has actual probability $P_-(0)=1$. At $r=1$, the orbit consists only of $|1\rangle$ and the mixture has just the phase-$0$ component, so $P_-(0)=1$ and every other counting outcome has probability zero. None of this uses $r\mid Q$, $Q>r^2$, or $n>0$.
+
+**The chapter's positive-exponent convention reflects the output.** Let $e:\mathrm{Fin}\,Q\simeq\mathrm{ZMod}\,Q$ be `ZMod.finEquiv`, identifying labels by their least nonnegative representatives, and write $\rho(k)=e^{-1}(-e(k))$, namely $(-k)\bmod Q$. For any coordinate function $f$ under this identification, the unnormalized negative-exponent `ZMod.dft` used in this section satisfies
+
+$$
+\begin{aligned}
+(\mathcal F_-f)(k)&=\frac{1}{\sqrt Q}(\mathrm{ZMod.dft}\,f)(e(k)),\\
+(\mathcal F_+f)(\rho(k))&=(\mathcal F_-f)(k).
+\end{aligned}
+$$
+
+Thus, if the final transform follows this chapter's $\mathcal F_+$ convention, the same work vector occurs at the reflected label: $v_+(\rho(k))=v_-(k)$, hence $P_+(\rho(k))=P_-(k)$. The phase label remains $s/r$. An inverse-transform outcome near $sQ/r$ corresponds to $\rho(k)$ for the positive transform; changing the Fourier sign cannot silently leave the peak label unchanged.
+
+**The nearest-grid lower bound is pointwise.** Fix any $s\in\mathrm{Fin}\,r$ and $b\in\mathrm{Fin}\,Q$ satisfying the circular nearest-grid condition
+
+$$
+\exists z\in\mathbb Z,\qquad
+\left|\frac{s}{r}-\frac{b}{Q}-z\right|\le\frac{1}{2Q}.
+$$
+
+Either midpoint choice is allowed, including a tie across the $0/1$ seam. Put $\delta=s/r-b/Q-z$; shifting the phase by an integer does not change $A_Q$. If $\delta=0$, then $A_Q(s/r,b)=1$. Otherwise, the finite geometric sum gives
+
+$$
+|A_Q(s/r,b)|
+=\frac{|\sin(\pi Q\delta)|}{Q|\sin(\pi\delta)|}
+\ge\frac{2Q|\delta|}{Q\pi|\delta|}
+=\frac{2}{\pi}.
+$$
+
+The inequalities are $|\sin u|\ge2|u|/\pi$ for $|\pi Q\delta|\le\pi/2$ and $|\sin u|\le|u|$. The denominator is strictly positive in this nonzero branch. Squaring gives separate bounds for a phase component and the actual marginal:
+
+$$
+\begin{aligned}
+p_Q(s/r,b)&\ge\frac{4}{\pi^2},\\
+P_-(b)&\ge\frac{1}{r}p_Q(s/r,b)\ge\frac{4}{r\pi^2},\\
+P_+(\rho(b))&\ge\frac{4}{r\pi^2}.
+\end{aligned}
+$$
+
+The quantifiers cover every $n\ge0$, every phase index $s<r$, and every $b<Q$ satisfying the nearest-grid condition. Different $s$ can select the same $b$, especially when $Q<r$. These pointwise bounds cannot simply be added as though they referred to distinct measurement events.
+
+**A small non-divisible example: $N=7,a=2,D=8,Q=4,r=3$.** The modular cycle is $1,2,4$, and the state before the transform is
+
+$$
+|\Psi_{\mathrm{pre}}\rangle
+=\frac12\bigl(|0\rangle|1\rangle+|1\rangle|2\rangle
++|2\rangle|4\rangle+|3\rangle|1\rangle\bigr).
+$$
+
+At $k=0$, $v_-(0)=(2|1\rangle+|2\rangle+|4\rangle)/4$, so the actual probability is $(4+1+1)/16=3/8$. The phase kernels also give $p_4(0,0)=1$ and $p_4(1/3,0)=p_4(2/3,0)=1/16$, whose uniform mixture is $(1+1/16+1/16)/3=3/8$. But conditioning on work outcome $2$ before the final Fourier transform leaves the counting state $|1\rangle$, giving probability $1/4$ at each of the four Fourier outcomes. Expanding every coordinate shows the full distinction:
+
+| Counting label $k$ | Actual $P_-(k)$ | Conditional $P_-(k\mid t=2)$ |
+| --- | --- | --- |
+| $0$ | $3/8$ | $1/4$ |
+| $1$ | $1/4$ | $1/4$ |
+| $2$ | $1/8$ | $1/4$ |
+| $3$ | $1/4$ | $1/4$ |
+
+Work outcomes $1,2,4$ have probabilities $1/2,1/4,1/4$, respectively. Averaging their conditional distributions with these weights gives the actual marginal. Here $3\nmid4$ and $Q<r^2$, yet all the formulas above apply. This example makes no claim about continued-fraction recovery or integer factorization.
+
+The frozen mathematical source is [`D5/S3/Quantum/ShorCountingMarginal.lean`](https://github.com/the-omega-institute/trureturing/blob/0ee6636c21a9d8fb2bafd11c91a8fb6247154a25/D5/S3/Quantum/ShorCountingMarginal.lean) at the merged trureturing commit `0ee6636c21a9d8fb2bafd11c91a8fb6247154a25`: its `Parameters.shor_qpe_probability_mixture`, `shor_distribution_normalized`, and `shor_mixture_peak_lower_bound` are cited above, and its `QuantumPhaseEstimationGeneral.qpe_arbitrary_phase_lower_bound` supplies the per-phase estimate. The source parameters `modulus, base, width, dimension, period` correspond to $N,a,w,D,r$; `runQPE` uses $\mathcal F_-$, and `normSquared` sums squared coordinate moduli over the entire work register. The transplant preserves the supplier's Apache 2.0 notice and source reference in the Lean file. The literature basis for the surrounding algorithmic discussion is R. Cleve, A. Ekert, C. Macchiavello, and M. Mosca, *Quantum Algorithms Revisited*, [arXiv:quant-ph/9708016](https://arxiv.org/abs/quant-ph/9708016), §§5–6, Eqs. (5.2)–(5.4) and (6.1)–(6.4).
+
+The scope of this application is the actual-input marginal, its normalization, and a pointwise nearest-grid lower bound. Aggregate-event success probability, continued-fraction recovery, coprime sampling, integer factorization, and gate complexity retain their literature status in [@rem-grover-qft-shor-literature]. No guarantee for arbitrary non-power-of-two $Q$, every conditioned posterior comb, or hardware implementation follows here.
 :::
 
 ::: {.viz src="phase-gears" preset="leak" height="500"}

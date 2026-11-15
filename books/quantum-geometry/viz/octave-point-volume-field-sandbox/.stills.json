@@ -2,47 +2,47 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "803d29394cbbc11a702f7f1c1fe1319d3af182874a78a157758a98c3b89c9a68"
     },
     "fig-pascal-hodge-1331.zh.jpg": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "2f2993ae9913bb7225fbca34ae6aa513525ce2fc24ec1e01327398e7084eb7ba"
     },
     "fig-octave-helix-zoom.zh.jpg": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "2e17a31365061bc693adcebee71c773fcb4843189cdde4dcfabd11303bc73750"
     },
     "fig-green-yukawa-reciprocity.zh.jpg": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "156ff54fb9548f10cc4a21938d0a4ca31ca53c4ed5222a6d4a0ca41f309dbfae"
     },
     "fig-dressed-uv-cutoff.zh.jpg": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "26dcc4e39672eb5b95799ec4483a164dbcee70f34a0018b412710b6067eebc8a"
     },
     "fig-position-momentum-duality.zh.jpg": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "c905794c55c558a0cd6989d96c3c28ff6a907980d1aa62c706ef74c5978f13fc"
     },
     "fig-pascal-hodge-1331.en.jpg": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "d5e541222d4922f39c96894f38f7478c389327cdfd98cfd617d7c1b828fa4a20"
     },
     "fig-octave-helix-zoom.en.jpg": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "d1c9e38e8bcb49d38c88c1d06757e6c267d9efa4678a6b939165765f52a84c53"
     },
     "fig-green-yukawa-reciprocity.en.jpg": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "c2b7c133a86f91887c2cbbc63a2013953cc7ae25b186649dd605801b0a97b8c8"
     },
     "fig-dressed-uv-cutoff.en.jpg": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "3e19848abdf24744fafc3ffc1b47c4ef4e2862905c9bc5e8cf942f5d71d2e13c"
     },
     "fig-position-momentum-duality.en.jpg": {
-      "input": "a8ab81f0fed19cd263b7e48d57c896fbb4d5436917e93ec99d6b0fce30a26890",
+      "input": "3dc724eb8263a44ce2f3a61d35ce102be5dc9e2f91071161cc8356c169be1d3f",
       "output": "89e490448bff97390de6a2aa5e7fdd62afaa26ffefd4ee3822e913d81e9096c1"
     }
   }
