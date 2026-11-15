@@ -1,5 +1,7 @@
 # quantum-geometry 内容准确性覆盖与证据
 
+第13章 CHSH 有符号开角说明的修正见[限定修正记录](CONTENT-ACCURACY-CH13-SIGNED-OPENINGS.md)：只覆盖 `chsh-dial` 的中英 `NUM` 说明及相关验证，不增加完整页面或整章接受数。
+
 第8章擦除账本页面有限热浴说明的陈旧限定修正见[限定修正记录](CONTENT-ACCURACY-ERASURE-FINITE-BATH.md)；只覆盖 `erasure-ledger` 依据栏 `ARGUED` 框与理论抽屉第3条的中英文说明及工具刷新的静帧摘要，不增加完整页面接受数，116个语言页面接受槽与整书目标继续待核。
 
 第32.2节的具体运行上界与字典首次命中回卷修正见[限定修正记录](CONTENT-ACCURACY-CH32-BOUNDS.md)；只覆盖所列中英文说明、相关冻结依赖与通用校对方法，不增加完整页面接受数。
