@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "5d972d45df1d31ccb15aaa28ac5561dccabaa5c6",
-  "pinned_at": "2026-11-15T20:32:27Z",
+  "commit": "3119957fe9f2a389cf480368c5ca0f51a0d02f65",
+  "pinned_at": "2026-11-15T21:05:04Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4573,6 +4573,14 @@
       "line": 215,
       "signature": "theorem fullC_mixed_anticomm_of_lt {N : ℕ} (i j : Fin N) (hij : i < j) : fullC i * (fullC j)ᴴ + (fullC j)ᴴ * fullC i = 0"
     },
+    "D5/S3/Quantum/Subentropy/QubitBoundary.qubit_subentropy_near_pure": {
+      "module": "D5/S3/Quantum/Subentropy/QubitBoundary",
+      "name": "D5.S3.Quantum.Subentropy.QubitBoundary.qubit_subentropy_near_pure",
+      "kind": "theorem",
+      "statement_id": "sha256:b64cbfc7f241d6eca52067fa57f532696ef90458007cfb3acfeffe3c8a0d991a",
+      "line": 74,
+      "signature": "theorem qubit_subentropy_near_pure (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A.PosSemidef) (htr : A.trace = 1) : let δ"
+    },
     "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained": {
       "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",
       "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound.QMaxFlow_attained",
@@ -5073,7 +5081,7 @@
       "module": "D5/S3/Topology/QuandleMarkovColoring",
       "name": "D5.S3.Topology.QuandleMarkovColoring.ClosedColorings",
       "kind": "def",
-      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "statement_id": "sha256:74aa766338e48e1ea08b7b69b072dab4b909bbcfc0e018fcbfa9ae4a877ef218",
       "line": 249,
       "signature": "abbrev ClosedColorings (Q : Type*) [Rack Q] {n : ℕ} (b : Artin n)"
     },
@@ -5081,7 +5089,7 @@
       "module": "D5/S3/Topology/QuandleMarkovColoring",
       "name": "D5.S3.Topology.QuandleMarkovColoring.Colors",
       "kind": "def",
-      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "statement_id": "sha256:74aa766338e48e1ea08b7b69b072dab4b909bbcfc0e018fcbfa9ae4a877ef218",
       "line": 25,
       "signature": "abbrev Colors (n : ℕ)"
     },
@@ -5089,7 +5097,7 @@
       "module": "D5/S3/Topology/QuandleMarkovColoring",
       "name": "D5.S3.Topology.QuandleMarkovColoring.braidAction",
       "kind": "def",
-      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "statement_id": "sha256:74aa766338e48e1ea08b7b69b072dab4b909bbcfc0e018fcbfa9ae4a877ef218",
       "line": 153,
       "signature": "def braidAction (n : ℕ) : Artin n →* Equiv.Perm (Colors Q n)"
     },
@@ -5097,7 +5105,7 @@
       "module": "D5/S3/Topology/QuandleMarkovColoring",
       "name": "D5.S3.Topology.QuandleMarkovColoring.coloringCount",
       "kind": "def",
-      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "statement_id": "sha256:74aa766338e48e1ea08b7b69b072dab4b909bbcfc0e018fcbfa9ae4a877ef218",
       "line": 338,
       "signature": "noncomputable def coloringCount (Q : Type*) [Rack Q] [Finite Q] (b : PositiveBraid) : ℕ"
     },
@@ -5105,7 +5113,7 @@
       "module": "D5/S3/Topology/QuandleMarkovColoring",
       "name": "D5.S3.Topology.QuandleMarkovColoring.conjugationEquiv",
       "kind": "def",
-      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "statement_id": "sha256:74aa766338e48e1ea08b7b69b072dab4b909bbcfc0e018fcbfa9ae4a877ef218",
       "line": 325,
       "signature": "def conjugationEquiv (n : ℕ) (b c : Artin n) : ClosedColorings Q b ≃ ClosedColorings Q (c * b * c⁻¹) where toFun d"
     },
@@ -5113,7 +5121,7 @@
       "module": "D5/S3/Topology/QuandleMarkovColoring",
       "name": "D5.S3.Topology.QuandleMarkovColoring.negativeStabilizationEquiv",
       "kind": "def",
-      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "statement_id": "sha256:74aa766338e48e1ea08b7b69b072dab4b909bbcfc0e018fcbfa9ae4a877ef218",
       "line": 305,
       "signature": "def negativeStabilizationEquiv (n : ℕ) (hn : 0 < n) (b : Artin n) : ClosedColorings Q b ≃ ClosedColorings Q (strandInclusion n b * (lastGenerator n hn)⁻¹) where toFun c"
     },
@@ -5121,7 +5129,7 @@
       "module": "D5/S3/Topology/QuandleMarkovColoring",
       "name": "D5.S3.Topology.QuandleMarkovColoring.positiveStabilizationEquiv",
       "kind": "def",
-      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "statement_id": "sha256:74aa766338e48e1ea08b7b69b072dab4b909bbcfc0e018fcbfa9ae4a877ef218",
       "line": 285,
       "signature": "def positiveStabilizationEquiv (n : ℕ) (hn : 0 < n) (b : Artin n) : ClosedColorings Q b ≃ ClosedColorings Q (strandInclusion n b * lastGenerator n hn) where toFun c"
     },
@@ -5129,7 +5137,7 @@
       "module": "D5/S3/Topology/QuandleMarkovColoring",
       "name": "D5.S3.Topology.QuandleMarkovColoring.quandle_coloring_markov_invariant",
       "kind": "theorem",
-      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "statement_id": "sha256:74aa766338e48e1ea08b7b69b072dab4b909bbcfc0e018fcbfa9ae4a877ef218",
       "line": 342,
       "signature": "theorem quandle_coloring_markov_invariant [Finite Q] {b c : PositiveBraid} (h : MarkovEquivalent b c) : coloringCount Q b = coloringCount Q c"
     },

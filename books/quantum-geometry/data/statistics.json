@@ -3,25 +3,25 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 214,
+    "theorem": 215,
     "lemma": 34,
     "proposition": 45,
     "corollary": 31,
     "definition": 49,
     "conjecture": 6,
     "problem": 3,
-    "example": 127,
-    "remark": 209,
-    "proof": 319,
-    "lean_verified": 321,
+    "example": 130,
+    "remark": 212,
+    "proof": 320,
+    "lean_verified": 322,
     "written_proof": 3,
     "literature": 199
   },
-  "total": 686,
+  "total": 687,
   "kinds": {
     "def": 204,
     "inductive": 11,
-    "theorem": 471
+    "theorem": 472
   },
   "groups": {
     "theorems": [
@@ -311,6 +311,7 @@
       "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR",
       "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_anticomm_of_lt",
       "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_mixed_anticomm_of_lt",
+      "D5/S3/Quantum/Subentropy/QubitBoundary.qubit_subentropy_near_pure",
       "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained",
       "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut",
       "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut",
@@ -19570,6 +19571,18 @@
         }
       ]
     },
+    "D5/S3/Quantum/Subentropy/QubitBoundary.qubit_subentropy_near_pure": {
+      "kind": "theorem",
+      "name": "D5.S3.Quantum.Subentropy.QubitBoundary.qubit_subentropy_near_pure",
+      "citations": [
+        {
+          "file": "ch34-s04-infinitesimal-trihedron.md",
+          "line": 165,
+          "id": "thm-ch34-qubit-subentropy-near-pure",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained": {
       "kind": "theorem",
       "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound.QMaxFlow_attained",
@@ -25417,6 +25430,7 @@
         "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness",
         "D5/S3/Geometry/TwoAxisFiniteRotation.moving_axis_invariance",
         "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape",
+        "D5/S3/Quantum/Subentropy/QubitBoundary.qubit_subentropy_near_pure",
         "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
       ],
       "inline": [

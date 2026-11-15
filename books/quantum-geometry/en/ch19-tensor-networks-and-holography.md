@@ -246,7 +246,7 @@ The full proof is checked by the Lean kernel.
 Respect the exact boundaries of [@thm-bridge-quantum-maxflow-mincut]:
 
 - No extra geometric structure beyond the matrix contraction `flow` is assumed: the theorem applies to the width-three (`Fin 3`) Kronecker bridge $\sum_{r \in \operatorname{Fin} 3} M_r \otimes N_r$ over $\mathbb{C}$;
-- Every positivity, ordering, and quadratic cone hypothesis ($0 < a \le b$, $0 < c \le d$, $a^2 + b^2 \le 3ab$, $c^2 + d^2 \le 3cd$) is essential;
+- The theorem is stated under the listed positivity, ordering, and quadratic cone hypotheses ($0 < a \le b$, $0 < c \le d$, $a^2 + b^2 \le 3ab$, $c^2 + d^2 \le 3cd$);
 - The theorem does **not** generalize unconditionally to arbitrary tensor networks, full MERA hierarchies, continuum AdS/CFT, or the Ryu–Takayanagi formula.
 
 ::: {.figure src="ch19-discrete-vs-rt"}

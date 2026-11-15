@@ -222,6 +222,69 @@ $$
 3. **本书内核验证锚点（`LEAN ✓`）与模型诠释（`MODEL`）**：三点巴格曼布洛赫体积迹、任意长秩一链路径乘积、圆周双覆盖唯一历史提升与无全局连续截面、以及命名生成树输运与锚定回路相位分类已由 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift]（连同 [@cor-latitude-complex-overlap]）在 Lean 内核中严格验证；三维欧氏球扇锥体积恒等式 $V_{\mathrm{sector}} = \frac{1}{3}A_{\mathrm{cap}}$ 及折线测地变分属初等微积分手工推导；而将公平平方基点残影、扇锥体积纤维账本与 $41$ 路离散路径束科纽螺线选路统合于极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的跨节图景，则属本书理论模型（`MODEL`）。
 :::
 
+::: {.remark #rem-ch34-subentropy-gaussian-vs-feynman-loop title="subentropy 高斯表示、振荡路径积分与闭环和乐"}
+**证据分级**：本注记衔接既有有限维 subentropy 数学性质（行列式正高斯表示、矩形格拉姆不变性 $Q(VV^*) = Q(V^*V)$ 与纯态 $Q = 0$，以及已锁定的 `bargmann_path_product`）与级数收敛及闭环和乐的手工分析。
+
+1. **正高斯辅助表示与振荡费曼振幅的区别**：对 $t > 0$ 与有限维密度算符 $\rho \ge 0$、$\operatorname{Tr}\rho = 1$，subentropy 积分核中的逆行列式拥有严格的有限维复高斯积分表示：
+
+   $$
+   \begin{aligned}
+   \det(I + \rho/t)^{-1} &= \int_{\mathbb{C}^d} \frac{d^{2d}z}{\pi^d}\,e^{-z^\dagger(I + \rho/t)z} \\
+   &= \mathbb{E}_{z \sim \mathrm{CN}(0, I)}\bigl[e^{-z^\dagger\rho z / t}\bigr].
+   \end{aligned}
+   $$
+
+   该恒等式虽然将谱核写成辅助复矢量的配分函数期望，但它是 $\mathbb{C}^d$ 上对谱尺度参数 $t$ 定义的正高斯测度，既不包含时间切片哈密顿动力学耦合，也不能替代产生相干相消的振荡实时间振幅 $e^{iS/\hbar}\mathcal{D}x$。另一方面，对系综 $\rho = \sum_a p_a |\psi_a\rangle\langle\psi_a|$ 构造加权格拉姆矩阵 $G_{ab} = \sqrt{p_a p_b}\langle\psi_a|\psi_b\rangle$，矩形格拉姆不变性保证 $Q(\rho) = Q(G)$，而 $\operatorname{Tr}\rho^k = \operatorname{Tr}G^k$ 展开为态指标闭环上的巴格曼乘积之和；但级数 $\ln\det(I + sG) = \sum_{k\ge 1}\frac{(-1)^{k+1}s^k}{k}\operatorname{Tr}G^k$ 在开域 $|s|\lVert G\rVert < 1$ 内绝对收敛（边界 $|s|\lVert G\rVert = 1$ 上亦可收敛，例如 $G = [1]$、$s = 1$ 的交错调和级数），在缺乏额外控制时仍不可直接逐项代入 $s = 1/t$ 的整个 $t > 0$ 半轴积分。
+2. **光滑闭环的曲率—面积和乐与步长平方和归零独立**：沿固定余纬 $\theta_0$ 圈把光滑闭环等分为 $N$ 步时，单步角 $\beta_j = O(N^{-1})$ 使局部步长平方和 $\sum_{j=1}^N \beta_j^2 = O(N^{-1}) \to 0$（相邻态内积模长损失 $|\Pi_N| \to 1$），而闭合回路的几何相位收敛至 $\gamma = -\pi(1 - \cos\theta_0)$。这一非零和乐是连续依赖所围球冠立体角（面积）的曲率—面积和乐，并非拓扑不变量；只要全局演化保持纯态且不与环境记录纠缠，全程仍有 $Q = 0$。下文算例表明，非零 $Q$ 源自环境记录被部分迹擦除后留下的历史混态。
+:::
+
+::: {.example #ex-ch34-complex-action-history-subentropy-erasure title="复作用量双历史模型、记录态格拉姆与约化历史 subentropy"}
+**证据分级**：本例为贯通隧穿抑制、时间双缝干涉与[第 37 章 §37.2](ch37-s02-dream-quantum-erasure.md)标记擦除的两历史理论模型与手工计算（`MODEL` + 手工推导，复用纯态 $Q = 0$ 与单比特 $q(r)$，未在本书作为新增 Lean 定理锁定）。
+
+在半经典两历史拟设下，设两条正交早／晚出射模式 $|1\rangle, |2\rangle$（$\langle 1|2\rangle = 0$）各自携带复作用量振幅
+
+$$
+a_j = C_j\exp\!\left(\frac{i\Phi_j - K_j}{\hbar}\right) \qquad (j = 1, 2),
+$$
+
+其中 $K_j \ge 0$ 刻画势垒指数抑制，$\Phi_j$ 刻画相位积累；记条件透射／出射总权重（通量）为 $N = |a_1|^2 + |a_2|^2 > 0$，早历史占比为 $p = |a_1|^2 / N \in (0, 1)$，一致相对相位为 $\phi = \arg(a_1^* a_2)$。当两历史分别耦合至归一化记录态 $|e_1\rangle, |e_2\rangle$（记录重叠 $g = \langle e_2|e_1\rangle$，模长 $v = |g| \in [0, 1]$）时，全局联合纯态
+
+$$
+|\Psi\rangle = \sqrt{p}\,|1\rangle|e_1\rangle + e^{i\phi}\sqrt{1-p}\,|2\rangle|e_2\rangle
+$$
+
+满足 $Q(|\Psi\rangle\langle\Psi|) = 0$。对环境记录取部分迹，得到约化历史密度矩阵
+
+$$
+\rho_{\mathrm{hist}} = \operatorname{Tr}_E(|\Psi\rangle\langle\Psi|) = \begin{pmatrix} p & \sqrt{p(1-p)}\,e^{-i\phi}g \\ \sqrt{p(1-p)}\,e^{i\phi}\overline{g} & 1-p \end{pmatrix},
+$$
+
+其行列式与布洛赫半径平方为
+
+$$
+\begin{aligned}
+\delta &= \det\rho_{\mathrm{hist}} = p(1-p)(1 - v^2), \\
+r^2 &= (2p - 1)^2 + 4p(1-p)v^2,
+\end{aligned}
+$$
+
+因此约化历史态的 subentropy 精确等于 $Q(\rho_{\mathrm{hist}}) = q(r)$。若两个相差 $\Delta t = t_2 - t_1$ 的时间门在频率分析器上具有相同谱包络 $S_0(E)$ 且携带相对相位 $E\Delta t/\hbar + \alpha(E)$，则能量谱干涉强度呈现余弦调制
+
+$$
+\begin{aligned}
+I(E) &\propto S_0(E)\Bigl[1 + \mathcal{V}\cos\!\left(\frac{E\Delta t}{\hbar} + \alpha(E)\right)\Bigr], \\
+\mathcal{V} &= 2\sqrt{p(1-p)}\,v.
+\end{aligned}
+$$
+
+由此直接得出四项结构关系：
+
+1. **条纹周期与全暗条纹条件**：当附加相位 $\alpha$ 不依赖于能量 $E$ 时，干涉相位因子具有精确周期 $\Delta E = h/\Delta t$；当 $\alpha(E)$ 在单条纹尺度内变化可忽略时，条纹间距近似为 $h/\Delta t$（常数 $\alpha$ 是充分而非必要条件，例如周期性调制的 $\alpha(E)$ 仍可保留该基本周期）；极小值完全归零的**全暗条纹**（$\mathcal{V} = 1$）仅在相干振幅完全相等（$p = \frac{1}{2}$，即 $|a_1| = |a_2|$）且记录态完全相干（$v = 1$）时同时出现。
+2. **权重失衡、可见度与条件通量之分界**：由于 $r^2 = (2p - 1)^2 + \mathcal{V}^2$，只有在等权情形 $p = \frac{1}{2}$ 下才有 $r = v = \mathcal{V}$ 与 $Q(\rho_{\mathrm{hist}}) = q(\mathcal{V})$；此时记两条记录态的夹角 $\theta = \arccos|g| \in [0, \frac{\pi}{2}]$，由行列式关系 $\delta = \frac{1}{4}\sin^2\theta$ 并应用[§34.4 单比特近纯态 subentropy 核比较定理](ch34-s04-infinitesimal-trihedron.md#thm-ch34-qubit-subentropy-near-pure)，手工可得首阶渐近 $Q(\rho_{\mathrm{hist}}) = \frac{\theta^2}{4} + O(\theta^4|\ln\theta|)$（记录行列式表达式与双历史物理映射本身仍为模型级手工推导，未作 Lean 形式化）。一旦 $p \neq \frac{1}{2}$，仅凭可见度 $\mathcal{V}$ 无法反推出 $Q(\rho_{\mathrm{hist}})$。同时，记录重叠 $v$（相干分辨度）与条件通量 $N$（或透射率 $T$）彼此独立，不能混为一谈。
+3. **时间分离脉冲的频率重逢**：时间支撑互不交叠的两个脉冲（如 $\psi(t) = f(t-t_1) + e^{i\alpha}f(t-t_2)$）无需在真实空间中由后包追上前包，只要先后进入同一频率分析器，其傅里叶变换便会在同一能量通道产生相干条纹。
+4. **势垒后标记守恒总透射率 $T$**：在透射出势垒**之后**施加等距哪一时刻标记（参看[§37.2](ch37-s02-dream-quantum-erasure.md)），可令 $v \to 0$ 抹除条纹并抬升 $Q(\rho_{\mathrm{hist}})$，同时严格保持总透射概率 $T$ 不变；若在势垒内部置入连续探测器，则须具体指定耦合哈密顿量与反作用，并不存在“观测必同时令 $T$ 与条纹一起消失”的普适结论。
+:::
+
 至此，我们在单一切片上由正交简并盲区反演出观察者站位，以“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$，又在 §34.6 证得其品红扇锥体积 $V_{\mathrm{sector}} = \frac{1}{3}A_{\mathrm{cap}}$ 在霍普夫相位纤维上记下来路并借科纽螺线筛出测地线。然而，只要对刚才的叙述再往前追问半步，整座经典几何直觉就会迎来一场彻底的**本体因果倒转**：在 §34.6 的语言里，我们仿佛仍默认“先有一块现成的弧面体体积摆在那里，路径随后穿过体积去攒下贝里相位”；可既然 $\Delta\mathcal{T}_\epsilon$ 上任意一点都能汇入无数条路径与无数种相位积分，为什么整个宇宙没有被无穷多路相位淹没成一片混沌白噪？所谓“实心体积”本身，究竟是路径穿行的先验容器，还是万千相位积分在相互抵消后唯一幸存下来的**驻波节点**？先在下方 `BERRY//PATH` 完整交互实验室中亲手转动三维扇锥、抬升霍普夫纤维并拨动科纽螺线手柄，随后进入 §34.7 揭开这场从“体积承载路径”到“未抵消相位积分驻波凝成体积”的终极翻转：
 
 ::: {.viz src="berry-sector-path-sandbox" height="640"}
