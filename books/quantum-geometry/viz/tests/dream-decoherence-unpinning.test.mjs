@@ -537,6 +537,34 @@ for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
   }
 }
 
+// The first frames of the record scene: a clock a hair past 0 (as one short animation frame leaves it) draws without a
+// page error and still shows the start, and the integer ends of the steps are drawn and read where they stand.
+{
+  const pg = await T.open(BOOK, ID, '?lang=en&preset=quantum_eraser', { viewport: { width: 1440, height: 900 }, locale: 'en-US' });
+  await settle(pg, 120);
+  const n0 = T.errors.length, bad = [];
+  for (const t of [0, 1e-12, 5e-10, 1 - 1e-12, 1, 2.5, 4 - 1e-12, 4]) {
+    await pg.evaluate((v) => window.DREAM_DEBUG.seek(v), t); await settle(pg);
+    const q = await pg.evaluate(() => ({ t: window.DREAM_DEBUG.state.t, playing: window.DREAM_DEBUG.state.playing, done: document.getElementById('ro1').textContent }));
+    const want = `${Math.min(4, Math.floor(t + 1e-9))} / 4`;
+    if (q.t !== t || q.playing || q.done !== want || T.errors.length > n0) bad.push(`t = ${t}: ${JSON.stringify(q)} want ${want} ${T.errors.slice(n0).join(' | ')}`);
+  }
+  check('record scene: a clock just past 0 and at each step boundary draws without a page error and reads the steps done', !bad.length, bad.join(' | '));
+  // copy 0's record box, as pixels: at a hair past 0 as at the start, while copy 0 is being written lit (only the frame
+  // and the label change there; the box still says not written yet)
+  const box0 = async (t) => {
+    await pg.evaluate((v) => window.DREAM_DEBUG.seek(v), t); await settle(pg);
+    const c = await pg.evaluate(() => {
+      const P = window.DREAM_DEBUG.panels, b = document.getElementById('flat').getBoundingClientRect(), m = P.mat, g = P.grid;
+      const x = m.recX != null ? m.recX : g.x0, w = m.recW || g.size;
+      return { x: b.left + x, y: b.top + g.y0 + g.size + (m.cmp ? 8 : 10), width: (w - 8) / 2, height: m.cmp ? 32 : 40 };
+    });
+    return pg.screenshot({ clip: c });
+  };
+  const [at0, hair, writing] = [await box0(0), await box0(1e-12), await box0(0.5)];
+  check('record scene: copy 0\'s box a hair past 0 looks as at the start, and is lit while copy 0 is written', hair.equals(at0) && !writing.equals(at0), `hair = start ${hair.equals(at0)}, writing = start ${writing.equals(at0)}`);
+  await pg.context().close();
+}
 
 // Publication stills use clock coordinates and retain the values the captions describe.
 for (const lang of ['zh', 'en']) for (const [card, time] of [['half_erase', 3], ['quantum_eraser', 4]]) {
