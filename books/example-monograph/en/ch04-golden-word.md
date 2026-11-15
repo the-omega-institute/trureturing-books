@@ -379,6 +379,15 @@ $$
 
 the product running over all primes $p$.
 
+Here $\beta(v)=S(v)-v\psi$ is exactly `o5Beta v` in the source. For a prime $p$, the original local factor is defined by
+
+$$
+\operatorname{germLocalFactor}(s,p)
+=\sum_{v=0}^{\infty}p^{-s\beta(v)}.
+$$
+
+This follows the argument order $s,p$ of `germLocalFactor` in the source and includes the constant term $1$ at $v=0$; no correction factors have been extracted or divided out.
+
 ::: {.conjecture #conj-independence title="The independence conjecture O-5"}
 There is a function $Z \colon \mathbb{C} \to \mathbb{C}$ such that:
 
@@ -401,6 +410,41 @@ O-5 is an open problem, not a theorem, and this book cites no Lean declaration f
 
 trureturing proves two results about O-5 in the module `GoldenWindowZeroObstruction`, and neither settles it. One says: if some function is analytic on a half-plane $\operatorname{Re} s > r$ (with $0 < r < 1/\varphi^2$), equals $E$ for $\operatorname{Re} s > 1/\varphi^2$, and has a zero inside that half-plane and inside the band of condition 3 whose real part differs from $1/(2\varphi^2)$, then no candidate that satisfies conditions 1 and 2 and, on $\operatorname{Re} s > r$, also a normal-form condition (Mathlib's `MeromorphicNFOn`) satisfies condition 3. The other says: changing the value of a meromorphic candidate at a single point makes it non-analytic there, which evades condition 3 at that point. The Blueprint concludes that the first does not refute the original O-5 statement, and that the second turns a limitation of that statement into a theorem.
 
+For one local factor, the following theorem locates a zero without additional hypotheses.
+
+::: {.theorem #thm-o5-prime-two-local-zero title="A zero of the original local factor at prime $2$" lean="D5/S3/Analytic/GermWindow/GermZeroCertificate.germLocalFactor_two_has_zero_near_candidate"}
+Let the complex center be
+
+$$
+c=\frac{23815329946211908}{10^{17}}
++\frac{5256712292901926}{10^{15}}\,i.
+$$
+
+There exists $z\in\mathbb C$ such that
+
+$$
+\|z-c\|<10^{-8},\qquad
+\operatorname{germLocalFactor}(z,2)=0.
+$$
+:::
+
+::: proof
+Put $G(s)=\sum_{v=0}^{60}2^{-s\beta(v)}$, written `g 60 s` in the source. Rational enclosures for the real and imaginary parts of all $61$ terms and their derivatives give $\|G(c)\|<4/10^{10}$ and $\operatorname{Re}G'(c)>187/100$ after summation. On the closed square centered at $c$ with half-side $1/(2\cdot10^8)$, the curvature bound $\|G''(s)\|\le400$ controls the first-order Taylor remainder, while the uniform tail bound $\|\operatorname{germLocalFactor}(s,2)-G(s)\|<58/10^{11}$ controls the truncation error. The affine comparison function $G(c)+G'(c)(s-c)$ has a simple zero in the square, and its modulus on the boundary exceeds the sum of these errors. The existing rectangle Rouché reduction in `GermZeroCertificateReduction` therefore gives a zero of the original local factor in that square, which lies inside the stated open ball. The full proof is checked by the Lean kernel.
+:::
+
+The theorem states only existence in this exact open ball. Its position also follows directly from elementary rational bounds: the center and radius satisfy
+
+$$
+\begin{aligned}
+\frac15&<\operatorname{Re}c-10^{-8},\\
+\operatorname{Re}c+10^{-8}&<\frac14.
+\end{aligned}
+$$
+
+Since $|\operatorname{Re}z-\operatorname{Re}c|\le\|z-c\|<10^{-8}$, every point in the ball has real part in $(1/5,1/4)$. Using $8/5<\varphi<5/3$, $\varphi^2=\varphi+1$ and $\varphi^3=2\varphi+1$ gives $1/(2\varphi^3)<1/8$, $1/(2\varphi^2)<1/5$ and $1/\varphi^2>1/3$. The entire ball therefore lies in the original window of condition 3, to the right of the structural line $\operatorname{Re}s=1/(2\varphi^2)$; this placement is a consequence stated outside the theorem box.
+
+There is indeed cancellation within the local factor, but the theorem asserts neither $E(z)=0$ for the original infinite product defined by `tprod` nor a zero of a continued germ. The ball lies outside the original agreement domain in condition 2. Transferring a local zero to a continuation of the full product still requires a suitable factorization and analytic or meromorphic continuation identities, together with control of the remaining product at that point and any cancellation between zeros and poles. The normal-form and single-point modification limitations above still apply: this theorem does not refute the original O-5 statement with its bare `MeromorphicOn` requirement, and it neither proves nor refutes the Riemann hypothesis.
+
 ::: {.remark #rem-o5-continuation-route title="A continuation route for O-5 and its remaining interfaces"}
 **Literature result, not formalized in this book.** The multivariable Euler product method of Bhowmik–Essouabri–Lichtin (BEL) offers a route to continuation[^bel-continuation]. For finitely many analytic functions $\ell_j$ and integers $a_j$, the proof of their Lemma 1 allows local factors of the form $1+\sum_j a_jp^{-\ell_j(s)}+R_p(s)$, where $R_p$ is analytic on the target domain and uniformly $O(p^{-2})$ in both the prime $p$ and $s$ in that domain. On $W(\ell;\delta)=\{s:\operatorname{Re}\ell_j(s)>\delta\text{ for all }j\}$ ($\delta>0$), repeated cancellation of low-order terms extracts finitely many integer powers of $\zeta$ functions, leaving a holomorphic, absolutely convergent remainder product. Integer powers keep the extracted factors meromorphic; this is an established literature method whose application to O-5 has not been completed in this book.
 
@@ -418,11 +462,13 @@ W(\ell;\epsilon\varphi^2)=H_\epsilon,
 \qquad W(\ell;1)=H_{1/\varphi^2}.
 $$
 
-This supplies parameters and a truncation target for an application still to be checked; the next remark supplies integer multivariate cancellation to any finite order and its identity under complex evaluation without division. That identity must still be connected to the analytic tail above to obtain a uniform $O(p^{-2})$ bound, with equal-weight terms grouped under the map from multi-indices to weights and denominators from negative correction exponents handled when quotients are reintroduced; formal univariate coefficient identities or fixed-order cancellation formulas alone do not supply this step. One must then prove locally uniform convergence of the remainder product over primes, construct a continuation for **every** $\epsilon>0$, and make normal-form meromorphic representatives compatible on overlapping half-planes to obtain a function on $H_0$; one fixed truncation does not suffice. Condition 2 also requires equality with $E(s)$ at **every point** of the original domain $H_{1/\varphi^2}$, including the values assigned at apparent singularities that are removable. Equality of meromorphic germs does not ensure pointwise equality of arbitrary functions satisfying only `MeromorphicOn`, so the normal-form and single-point modification limitations above remain relevant. These analytic realizations and gluing steps have not been formalized in this book; the route also gives no nonvanishing assertion for local factors or the product, and no zero localization as required by condition 3. O-5 remains open, and condition 3 requires separate study.
+These parameters specify a truncation target for the original germ. [@rem-o5-finite-cancellation] retains the complete finite algebraic argument, while [@thm-o5-finite-integer-cancellation] gives both cancellation to arbitrary finite order and its uniform analytic evaluation. Before applying that theorem, one must still establish the analyticity and uniform bound above for the actual infinite tail $R_p(s)=\sum_{v>M}p^{-s\beta(v)}$, and identify it with the original local factor minus the retained terms. One can then take $J=\{1,\ldots,M\}$, $a_v=1$, $b_v=\beta(v)$, $m=\varphi^2$, $A=(1-2^{-\epsilon\sqrt5})^{-1}$, and choose $N$ with $(N+1)\epsilon m\ge2$. The finite theorem allows repeated or rationally dependent weights and controls the denominators introduced by negative correction exponents on this half-plane; grouping equal-weight multi-indices is unnecessary for this step.
+
+One must still establish the corresponding factorization identities involving $\zeta$ functions, prove locally uniform convergence of the remainder product over primes, construct a continuation for **every** $\epsilon>0$, and make normal-form meromorphic representatives compatible on overlapping half-planes to obtain a function on $H_0$; one fixed truncation does not suffice. Condition 2 also requires equality with $E(s)$ at **every point** of the original domain $H_{1/\varphi^2}$, including the values assigned at apparent singularities that are removable. Equality of meromorphic germs does not ensure pointwise equality of arbitrary functions satisfying only `MeromorphicOn`, so the normal-form and single-point modification limitations above remain relevant. These interfaces for the original tail, infinite products and gluing steps have not been formalized in this book. The finite theorem also gives no nonvanishing assertion for local factors or the product, and no zero localization as required by condition 3. O-5 remains open, and condition 3 requires separate study.
 :::
 
 ::: {.remark #rem-o5-finite-cancellation title="A finite algebraic form of integer Euler cancellation"}
-**Published expansion and written finite deduction, not formalized in this book.** Delabarre's §2.2, Lemma 2, gives a published expansion with integer exponents[^delabarre-cancellation]. Relabel its variables by a finite set $J$, with $a_j\in\mathbb Z$ and $S=\sum_{j\in J}|a_j|$. If $S>0$ and every $|Y_j|<1/S$, then
+**The published infinite expansion and the complete finite cancellation argument.** Delabarre's §2.2, Lemma 2, gives a published expansion with integer exponents[^delabarre-cancellation]. Relabel its variables by a finite set $J$, with $a_j\in\mathbb Z$ and $S=\sum_{j\in J}|a_j|$. If $S>0$ and every $|Y_j|<1/S$, then
 
 $$
 Q(Y):=1+\sum_{j\in J}a_jY_j
@@ -430,7 +476,7 @@ Q(Y):=1+\sum_{j\in J}a_jY_j
 \qquad \gamma(\nu)\in\mathbb Z,
 $$
 
-where $Y^\nu=\prod_jY_j^{\nu_j}$, with absolute convergence on the right. Equation (6) gives the exponents explicitly, and Remark 4 notes that their integrality can be proved by induction on total degree. If $S=0$ (including empty $J$), then $Q=1$ and all exponents may be taken to be zero, without using $1/S$. Writing the expansion as $Q\prod_\nu(1-Y^\nu)^{c_\nu}=1$ sets the correction sign convention $c_\nu=-\gamma(\nu)$. What follows is a **written finite deduction and proof** of this cancellation method after clearing denominators, rather than the literal statement of Lemma 2. It claims neither a new literature method nor completed Lean verification.
+where $Y^\nu=\prod_jY_j^{\nu_j}$, with absolute convergence on the right. Equation (6) gives the exponents explicitly, and Remark 4 notes that their integrality can be proved by induction on total degree. If $S=0$ (including empty $J$), then $Q=1$ and all exponents may be taken to be zero, without using $1/S$. Writing the expansion as $Q\prod_\nu(1-Y^\nu)^{c_\nu}=1$ sets the correction sign convention $c_\nu=-\gamma(\nu)$. The **complete written argument** below retains this cancellation method after clearing denominators and explains the algebraic part of [@thm-o5-finite-integer-cancellation]. The finite polynomial conclusion is not the literal statement of Lemma 2 and claims no new literature method; the published infinite expansion above is not a conclusion of the finite Lean theorem below.
 
 Work in $\mathbb Z[X_j:j\in J]$, write $|\nu|=\sum_j\nu_j$ and $X^\nu=\prod_jX_j^{\nu_j}$, and take any $N\in\mathbb N$. Consider the finite set
 
@@ -449,7 +495,7 @@ QU&=V+\sum_{t\in T}h_tX^t,
 \end{aligned}
 $$
 
-Here $T$ is finite, $h_t\in\mathbb Z$, and every power has a natural-number exponent; a negative $c_\nu$ places its factor in $V$. In particular, for $N=0$, $E_N$ is empty, $U=V=1$, and the remainder is $Q-1$. Its constant coefficient is zero, but the remainder need not vanish.
+Here take $H_{\mathrm{poly}}=QU-V$, $T=\operatorname{supp}(H_{\mathrm{poly}})$ and $h_t=[X^t]H_{\mathrm{poly}}\in\mathbb Z$; every power has a natural-number exponent, and a negative $c_\nu$ places its factor in $V$. In particular, for $N=0$, $E_N$ is empty, $U=V=1$, and the remainder is $Q-1$. Its constant coefficient is zero, but the remainder need not vanish.
 
 For a proof, let $\mathcal F_d$ consist of polynomials whose coefficients in total degrees below $d$ vanish. Degrees add in every term of the finite coefficient convolution, so $\mathcal F_d$ is closed under addition, subtraction and multiplication by any polynomial, and
 
@@ -494,18 +540,123 @@ $$
 Q(z)U(z)=V(z)+\sum_{t\in T}h_tz^t
 $$
 
-holds at every $z$, even when some $1-z^\nu=0$; there is no division. After substituting $z_j=p^{-b_js}$, rational relations among weights may make distinct multi-indices coincide in weight, but do not invalidate this identity. It supplies no uniform analytic remainder estimate, divisibility or nonvanishing assertion, and does not complete the preceding remark's obligations concerning prime products, normal-form gluing and pointwise agreement. The finite algebraic proof and its Lean formalization require separate verification; this book does not yet list this arbitrary-order conclusion as a Lean result, and it settles neither condition 2 nor condition 3 of O-5.
+holds at every $z$, even when some $1-z^\nu=0$; there is no division. After substituting $z_j=p^{-b_js}$, rational relations among weights may make distinct multi-indices coincide in weight, but do not invalidate this identity. This polynomial identity alone contains no uniform analytic estimate, divisibility or nonvanishing assertion. The following theorem separately gives a uniform analytic conclusion under explicit hypotheses. The obligations concerning the original tail, prime products, normal-form gluing and pointwise agreement remain as described in the preceding remark; finite cancellation settles neither condition 2 nor condition 3 of O-5.
 :::
+
+::: {.theorem #thm-o5-finite-integer-cancellation title="Finite integer Euler cancellation and uniform analytic evaluation" lean="D5/S3/Analytic/EulerGerm/FiniteIntegerEulerCancellation.finite_integer_euler_cancellation"}
+For every finite set $J$, every integer coefficient family $a:J\to\mathbb Z$, and every $N\in\mathbb N$, there exists $c:E_N\to\mathbb Z$ for which all the following conclusions hold. The set $J$ may be empty, $N$ may be $0$, and both $a_j$ and $c(u)$ have arbitrary signs. Write $|u|=\sum_j u_j$ and $E_N=\{u:J\to\mathbb N:1\le|u|\le N\}$. For this $c$, define
+
+$$
+\begin{aligned}
+Q&=1+\sum_j a_jX_j,\\
+U&=\prod_{u\in E_N}(1-X^u)^{\max(c(u),0)},\\
+V&=\prod_{u\in E_N}(1-X^u)^{\max(-c(u),0)},\\
+H_{\mathrm{poly}}&=QU-V,\qquad T=\operatorname{supp}(H_{\mathrm{poly}}),\\
+h_t&=[X^t]H_{\mathrm{poly}}\quad(t\in T).
+\end{aligned}
+$$
+
+Thus $T$ is the actual finite polynomial support. Let $d$ be the finite `Data` with index sets $J,E_N,T$ and fields
+
+$$
+\begin{aligned}
+d.\mathrm{linear}(j)&=a_j,&d.\mathrm{mode}(u,j)&=u_j,\\
+d.\mathrm{power}(u)&=c(u),&d.\mathrm{tailMode}(t,j)&=t_j,\\
+d.\mathrm{tailCoeff}(t)&=h_t.
+\end{aligned}
+$$
+
+This is exactly `tailData a (polynomialMode N) c`; `polynomialMode` converts an ordinary function on the finite set to the same finitely supported multi-index.
+
+1. For every $u:J\to\mathbb N$, if $|u|\le N$, then $[X^u]H_{\mathrm{poly}}=0$.
+2. The data $d$ satisfy `Data.Certificate`: for every $z\in\mathbb C^J$,
+
+   $$
+   Q(z)U(z)=V(z)+\sum_{t\in T}h_tz^t.
+   $$
+
+   This includes zeros of the correcting binomials $1-z^u$; the identity uses only natural powers and involves no division.
+3. For every $u\in E_N$, $1\le\sum_jd.\mathrm{mode}(u,j)\le N$.
+4. For every $t\in T$, $N+1\le\sum_jd.\mathrm{tailMode}(t,j)$.
+5. For every $b:J\to\mathbb R$ and every $m,\epsilon,A\in\mathbb R$ satisfying
+
+   $$
+   \begin{aligned}
+   &m>0,\qquad b_j\ge m\quad(j\in J),\\
+   &\epsilon>0,\qquad A\ge0,\qquad 2\le(N+1)\epsilon m,
+   \end{aligned}
+   $$
+
+   there exists $C\in\mathbb R$, $C\ge0$, such that for every family $R:\operatorname{Primes}\to(\mathbb C\to\mathbb C)$, if for all primes $p$,
+
+   $$
+   \begin{aligned}
+   &\operatorname{AnalyticOnNhd}_{\mathbb C}(R_p,H_\epsilon),\\
+   &\|R_p(s)\|\le A/p^2\quad(s\in H_\epsilon),
+   \end{aligned}
+   $$
+
+   then for all primes $p$,
+
+   $$
+   \begin{aligned}
+   &\operatorname{AnalyticOnNhd}_{\mathbb C}(K_p,H_\epsilon),\\
+   &\|K_p(s)-1\|\le C/p^2\quad(s\in H_\epsilon).
+   \end{aligned}
+   $$
+
+   Here $H_\epsilon=\{s\in\mathbb C:\operatorname{Re}s>\epsilon\}$ and
+
+   $$
+   \begin{aligned}
+   z_j(p,s)&=\exp(-b_js\log p),\\
+   K_p(s)&=\bigl(Q(z(p,s))+R_p(s)\bigr)
+   \prod_{u\in E_N}(1-z(p,s)^u)^{c(u)}.
+   \end{aligned}
+   $$
+
+   The logarithm is the real logarithm of the positive real number $p$. This $K_p$ is exactly `Data.corrected`, with integer powers. `AnalyticOnNhd` means complex analyticity in a neighborhood of each point of the set.
+
+The quantifier order is as follows: $J,a,N$ are given first, and then $c$ is chosen; the same $c$ works for every $b,m,\epsilon,A$. Once those four parameters are fixed and satisfy the hypotheses, $C$ is chosen before the entire perturbation family $R$; it works for all primes and the whole half-plane. Equality is allowed in the cutoff, and the weights need not be distinct or rationally independent.
+:::
+
+::: proof
+The complete layer argument in [@rem-o5-finite-cancellation] explains the algebraic part. Lean expresses the total-degree filtration through powers of the variable ideal, cancels each layer, and fills unused modes in $E_N$ with zero exponents. Passing between finitely supported and ordinary function multi-indices preserves total degree. Every coefficient in the residual's actual support is nonzero, so conclusion 1 gives conclusion 4; evaluating the polynomial over that support gives the certificate for every complex vector in conclusion 2.
+
+The analytic part reuses `evaluated_certificate_uniform`. Put $q=\exp(-m\epsilon\log2)<1$. On $H_\epsilon$, every correcting monomial has modulus at most $q$, so $1-z^u$ is nonzero and its integer powers are analytic there. Set
+
+$$
+\begin{aligned}
+U_0&=\prod_{u\in E_N}(1+q)^{\max(c(u),0)},\\
+V_0&=\prod_{u\in E_N}(1-q)^{\max(-c(u),0)}>0,\\
+D_0&=\sum_{t\in T}|h_t|.
+\end{aligned}
+$$
+
+The degree gap and $(N+1)\epsilon m\ge2$ bound each tail monomial by $p^{-2}$. On this half-plane, where $V(z)\ne0$ has been established, the certificate gives
+
+$$
+K_p(s)-1=\frac{\sum_{t\in T}h_tz^t+R_p(s)U(z)}{V(z)}.
+$$
+
+Thus one may take $C=(D_0+AU_0)/V_0$, independently of $R,p,s$. Division is used only for the estimate on this analytic domain; the polynomial certificate for every complex vector makes no claim that division remains valid at binomial zeros. The full proof is checked by the Lean kernel.
+:::
+
+This result constructs finite algebraic corrections and gives a per-prime analytic estimate under its hypotheses. It does not establish those hypotheses for the actual infinite $\beta$ tail above, construct an infinite prime product or a global continuation, or assert that $K_p$ or the product is nonzero. The local zero in [@thm-o5-prime-two-local-zero] and the normal-form and single-point modification limitations retain their stated scope. Neither O-5 nor the Riemann hypothesis is proved or refuted by this result.
 
 [^bel-continuation]: G. Bhowmik, D. Essouabri, B. Lichtin, *Meromorphic continuation of multivariable Euler products*, [DOI: 10.1515/forum.2007.044](https://doi.org/10.1515/forum.2007.044). Source locations here refer to the [authors' preprint](https://arxiv.org/pdf/math/0502508v1), §1.1: Lemma 1 and its proof, pp. 5–8, especially the uniform analytic perturbations in equations (2)–(4); Theorem 1 and its proof, pp. 8–10, apply the method to analytic power series on the unit polydisc with zero constant term and integer Taylor coefficients. These literature results are not formalized in this book.
 
 [^delabarre-cancellation]: L. Delabarre, *Extension of Estermann's theorem to Euler products associated to a multivariate polynomial*, *Bulletin de la Société Mathématique de France* **141**(2) (2013), 225–265, [DOI: 10.24033/bsmf.2647](https://doi.org/10.24033/bsmf.2647), [journal article](https://www.numdam.org/item/BSMF_2013__141_2_225_0.pdf). Section 1.1 specifies integer coefficients; §2.2, Lemma 2, equations (5)–(6) and Remark 4 are on printed p. 233, with the proof on pp. 234–235. The cited result is the published integer-exponent expansion; this remark separately gives a complete proof of its finite cancellation form.
 
-The original statement of O-5 and the normal-form and single-point modification limitations above come from these files at the pinned trureturing commit:
+The original statement of O-5, the local zero and finite cancellation results above, and the normal-form and single-point modification limitations come from these files at the pinned trureturing commit:
 
 - `D5/X_Frontier/Hearts.lean`: the statement `o5_independence` and the definitions it uses;
 - `README.md` and `docs/VISION.md`: O-5 listed as open;
 - `Blueprint/D5/X_Frontier/GoldenWindowZeroObstruction.md`: the two proved results above;
-- `Blueprint/D5/S1/Deficit/Beatty/GoldenSpectralCoordinate.md`: the change of scale $\varphi^2 \cdot 1/(2\varphi^2) = 1/2$.
+- `Blueprint/D5/S1/Deficit/Beatty/GoldenSpectralCoordinate.md`: the change of scale $\varphi^2 \cdot 1/(2\varphi^2) = 1/2$;
+- `D5/S3/Analytic/GoldenEulerBeta.lean` and `D5/S3/Analytic/EulerGerm/GoldenLocalFactor.lean`: the definitions of `o5Beta` and the original local factor `germLocalFactor`;
+- [`GermZeroCertificate`](lean:D5/S3/Analytic/GermWindow/GermZeroCertificate.germLocalFactor_two_has_zero_near_candidate): the public declaration for [@thm-o5-prime-two-local-zero]; the center and rectangle reduction are in `GermZeroCertificateReduction.lean` in the same directory, and the curvature bound is in `GermZeroCertificateJet.lean`;
+- [`FiniteIntegerEulerCancellation`](lean:D5/S3/Analytic/EulerGerm/FiniteIntegerEulerCancellation.finite_integer_euler_cancellation): the declaration for [@thm-o5-finite-integer-cancellation] and the definitions `linearPolynomial`, `correctionProduct`, `residual`, `FunctionMode`, `polynomialMode` and `tailData` in the same module; its commentary is `Blueprint/D5/S3/Analytic/EulerGerm/FiniteIntegerEulerCancellation.md`;
+- [`EvaluatedEulerCertificate`](lean:D5/S3/Analytic/EulerGerm/EvaluatedEulerCertificate.evaluated_certificate_uniform): the uniform analytic evaluation theorem reused here, and the definitions `Data`, `Data.Certificate`, `point` and `Data.corrected` in the same module.
 
 [^conv]: In `Hearts.lean`, meromorphy of $Z$ is Mathlib's `MeromorphicOn`, which places no constraint on the values a function takes at its poles; condition 3 asks for $Z$ to be analytic at $s$ (`AnalyticAt`) precisely so that the zero test does not depend on those values. The infinite sum and product in $E$ are Lean's unconditional sum and product, which take conventional values when they do not converge (sum $0$, product $1$); the conjecture uses $E$ only where $\operatorname{Re} s > 1/\varphi^2$.
