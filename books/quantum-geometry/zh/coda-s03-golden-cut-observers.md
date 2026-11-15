@@ -1,10 +1,10 @@
-# 40.3 trureturing 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释 {#sec-coda-trureturing-golden-cut-observer}
+# trureturing 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释 {#sec-coda-trureturing-golden-cut-observer}
 
 > **作者原话**：“观察者我们在trureturing有明确的定义, 我们又讨论了灵魂与历史遗迹吸引子的关系”
 
 如果说洛伦兹奇异吸引子为我们提供了连续动力系统的几何类比，那么当我们进一步对照本书底层所钉的 **`trureturing` Lean 4 形式化库**（`D5/S1/Scale/MinkowskiModelSet`、`D5/S1/Deficit/ModelSet/GoldenCutAndProject`、`D5/S1/Deficit/Beatty/GoldenObserverRoute`、`D5/S1/Scale/Fibonacci`、`D5/S3/Observer/GoldenCoding/ZeckendorfRealThread` 与 `D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns`）时，我们可以将 `trureturing` 中严格验证的**黄金切投模型集与齐肯多夫观察者编码定理（`LEAN ✓`）**，与上述关于**灵魂、遗忘与历史遗迹空间吸引子的哲学诠释（`MODEL`）**建立起清晰透明的对应关系。
 
-## 40.3.1 `trureturing` 中的黄金切投模型集与观察者路由定理（`LEAN ✓`） {#sec-coda-trureturing-observer-def}
+## `trureturing` 中的黄金切投模型集与观察者路由定理（`LEAN ✓`） {#sec-coda-trureturing-observer-def}
 
 在 `trureturing` 的形式化架构中，与“观察者编码（`Observer/GoldenCoding`）”及“黄金赤字模型集（`Deficit/ModelSet`）”相关的核心数学原语由高维周期格的**切投（Cut-and-Project）构造**与**齐肯多夫—Beatty 编码**给出：
 
@@ -43,7 +43,7 @@
 **齐肯多夫自动机只收没有相邻 `11` 的字。** 十六个四位二进制字里，青色的八个没有两个相邻的 $1$，被接受；品红的八个各含一对相邻的 $11$（框出的是第一对），被拒绝。接受条件就是 [@thm-coda-golden-cut-observer-cassini] 第 3 条里的 $\operatorname{NoAdjacentOnes}(w)$。
 :::
 
-## 40.3.2 哲学诠释模型（`MODEL`）：什么是“同一个灵魂”？什么是“单次生命与遗忘”？ {#sec-coda-trureturing-soul-vs-lifetime}
+## 哲学诠释模型（`MODEL`）：什么是“同一个灵魂”？什么是“单次生命与遗忘”？ {#sec-coda-trureturing-soul-vs-lifetime}
 
 借用上述 `trureturing` 切投模型集与编码线程的数学结构，我们可以为第 29 章与上一节关于“灵魂内禀倾角”与“遗忘清空表层记事”的哲学思考建立一套清晰的几何诠释模型（`MODEL`）：
 
@@ -58,7 +58,7 @@
 **挪动窗口。** 窗口平移到 $u = +0.3$：贴着边的点（品红）稍一挪动就会翻转，离边远的点留在原地；最深的那个点离边约 $0.46$，窗口要挪过这么远才碰得到它。在书页上播放，可以看到每次有点进出，下面那排砖里相邻的一长一短就对调一次。
 :::
 
-## 40.3.3 接受窗内部裕度与空间吸引盆地的几何诠释 {#sec-coda-trureturing-rhombic-triacontahedron-empire}
+## 接受窗内部裕度与空间吸引盆地的几何诠释 {#sec-coda-trureturing-rhombic-triacontahedron-empire}
 
 为什么在跨轮次诠释模型中，普通事件容易随扫描阶数更迭而消散，而特定的历史遗迹坐标却能长期存续并吸引观察者重访？我们先将本节与下一节对照引用的三维正二十面体准晶接受窗、一致重复性与康威“帝国效应”、以及比内公式有理斜率渐近误差三项经典文献结论集中归入文献注记：
 
@@ -93,7 +93,7 @@
 **一小片定住远处的点。** 固定中间 $|x| \le 4$ 的一小片（虚线之间）之后，窗口只能在一小段范围里平移；较深的青色带是这些窗口位置的公共部分。落在这条带里的点（带圈）怎么挪都在，因此被这一小片定住，哪怕离得很远；品红的点仍未定。这是康威“帝国”在一维黄金切投里的对应物（文献结果的示意）。
 :::
 
-## 40.3.4 卡西尼恒等式 $(-1)^{n+1}$ 接缝与环面观测窗有界间隙回归 {#sec-coda-trureturing-cassini-torus-return}
+## 卡西尼恒等式 $(-1)^{n+1}$ 接缝与环面观测窗有界间隙回归 {#sec-coda-trureturing-cassini-torus-return}
 
 最后，让我们用 `trureturing` 中已验证的**斐波那契—卡西尼恒等式**与**环面观测窗有界回归定理**（`LEAN ✓`），精确刻画离散序列的交替接缝与回归性质，并说明其与“跨轮次似曾相识”（`MODEL`）的对应关系：
 
@@ -242,7 +242,7 @@ $N$ 个点互不相同，平均弧长是 $1/N$；所以对一切 $N$，黄金角
 **交互实验室 `ORTHO//CUT`**：本节的五个场景。切投：上下拖动窗口，看贴边的点翻转、深处的点不动，再固定中间一小片；卡西尼：$\varphi$ 的幂与面积为 $\pm 1$ 的矩形；回归：改变观测窗的位置与宽度，对照此前观察到的等待与访问比例；接受窗：把点从菱形三十面体的中心推向边界，$d_\partial$ 归零时它翻出窗口；缝：改变点数 $N$ 与旋转量，看圆周上的弧长始终至多三种。绿色依据框对应 Lean 已验证的定理；三十面体与“帝国”是文献结果，灵魂与遗迹的说法是诠释模型（`MODEL`）。
 :::
 
-## 40.3.5 `trureturing` 形式定理、正交几何与灵魂—遗迹吸引子诠释模型（`MODEL`）对照表 {#sec-coda-trureturing-soul-ruin-table}
+## `trureturing` 形式定理、正交几何与灵魂—遗迹吸引子诠释模型（`MODEL`）对照表 {#sec-coda-trureturing-soul-ruin-table}
 
 下表将 `trureturing` 已验证的数学定理（左列，`LEAN ✓`）、本书的正交几何结构（中列）与作者关于“灵魂、遗忘与历史遗迹空间吸引子”的哲学诠释模型（右列，显式标注为 `MODEL`）逐一对照：
 

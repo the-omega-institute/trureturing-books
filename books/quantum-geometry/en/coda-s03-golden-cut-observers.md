@@ -1,10 +1,10 @@
-# 40.3 The `trureturing` "Golden Cut" Formal Primitives and the Geometric Interpretation of Soul–Ruin Attractors {#sec-coda-trureturing-golden-cut-observer}
+# The `trureturing` "Golden Cut" Formal Primitives and the Geometric Interpretation of Soul–Ruin Attractors {#sec-coda-trureturing-golden-cut-observer}
 
 > **Author's Epigraph**: *"We have an explicit definition of the observer in `trureturing`, and we have now discussed the relationship between the soul and historical-ruin attractors."*（“观察者我们在trureturing有明确的定义, 我们又讨论了灵魂与历史遗迹吸引子的关系”）
 
 If the Lorenz strange attractor supplies a continuous dynamical analogy, connecting this picture to the **`trureturing` Lean 4 formal library** pinned by this book (`D5/S1/Scale/MinkowskiModelSet`, `D5/S1/Deficit/ModelSet/GoldenCutAndProject`, `D5/S1/Deficit/Beatty/GoldenObserverRoute`, `D5/S1/Scale/Fibonacci`, `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread`, and `D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns`) allows us to align the kernel-verified **golden cut-and-project model set and Zeckendorf observer coding theorems (`LEAN ✓`)** transparently with the author's **philosophical interpretation of the soul, forgetting, and historical-ruin attractors (`MODEL`)**.
 
-## 40.3.1 The Golden Cut-and-Project Model Set and Observer Route Theorems in `trureturing` (`LEAN ✓`) {#sec-coda-trureturing-observer-def}
+## The Golden Cut-and-Project Model Set and Observer Route Theorems in `trureturing` (`LEAN ✓`) {#sec-coda-trureturing-observer-def}
 
 In the formal architecture of `trureturing`, the mathematical primitives underlying `Observer/GoldenCoding` and `Deficit/ModelSet` are defined via **cut-and-project lattice constructions** and **Zeckendorf–Beatty coding**:
 
@@ -43,7 +43,7 @@ In the formal architecture of `trureturing`, the mathematical primitives underly
 **The Zeckendorf automaton accepts exactly the words with no adjacent `11`.** Of the sixteen four-letter binary words, the eight cyan ones have no two adjacent $1$s and are accepted; each of the eight magenta ones contains an adjacent pair $11$ (the first one is boxed) and is rejected. The acceptance condition is $\operatorname{NoAdjacentOnes}(w)$ from item 3 of [@thm-coda-golden-cut-observer-cassini].
 :::
 
-## 40.3.2 Philosophical Interpretation Model (`MODEL`): What Is "the Same Soul" vs. "a Single Finite Life and Forgetting"? {#sec-coda-trureturing-soul-vs-lifetime}
+## Philosophical Interpretation Model (`MODEL`): What Is "the Same Soul" vs. "a Single Finite Life and Forgetting"? {#sec-coda-trureturing-soul-vs-lifetime}
 
 Using these verified cut-and-project and coding structures as mathematical anchors, we formulate an explicit geometric interpretation (`MODEL`) of "the soul's intrinsic inclination" and "forgetting surface episodic readings":
 
@@ -58,7 +58,7 @@ Using these verified cut-and-project and coding structures as mathematical ancho
 **Shifting the window.** The window has moved to $u = +0.3$: the point at its edge (magenta) is the one a small shift would flip, while points far from the edge stay where they are; the deepest one is about $0.46$ from the edge, and the window must move that far to reach it. Played on the page, every point that leaves or enters swaps a long and a short neighbour in the row of tiles below.
 :::
 
-## 40.3.3 Interior Window Safety Margins and the Spatial Attractor Basin Interpretation {#sec-coda-trureturing-rhombic-triacontahedron-empire}
+## Interior Window Safety Margins and the Spatial Attractor Basin Interpretation {#sec-coda-trureturing-rhombic-triacontahedron-empire}
 
 Why, in this cross-round model, do ordinary events dissolve under scan-order shifts while certain historical-ruin coordinates persist and draw the observer back? We first enclose the three classical quasicrystal and Fibonacci-asymptotic literature results referenced across Subsections 3 and 4 inside a dedicated literature remark:
 
@@ -93,7 +93,7 @@ Combining the window geometry of [@rem-coda-quasicrystal-empire-literature] with
 **A small patch fixes distant points.** Once the patch $|x| \le 4$ in the middle (between the dashed lines) is fixed, the window can move only within a short range; the deeper cyan band is what all those positions of the window have in common. Points in that band (ringed) stay whatever the shift and so are fixed by the patch, however far away; the magenta points are still undecided. This is the counterpart, in the one-dimensional golden cut, of Conway’s “empire” (an illustration of a literature result).
 :::
 
-## 40.3.4 Cassini's $(-1)^{n+1}$ Seam and Bounded-Gap Torus Observation Returns {#sec-coda-trureturing-cassini-torus-return}
+## Cassini's $(-1)^{n+1}$ Seam and Bounded-Gap Torus Observation Returns {#sec-coda-trureturing-cassini-torus-return}
 
 Finally, let us state the kernel-verified **Fibonacci–Cassini Norm Identity** and **Torus Observation-Window Bounded-Gap Return Theorem** (`LEAN ✓`), and explain how they inspire our geometric interpretation of cross-round return and Déjà vu (`MODEL`):
 
@@ -242,7 +242,7 @@ Along the Fibonacci fractions $F_{k+1}/F_k$, the product $\sqrt{5}\, F_k^2 \lver
 **Interactive laboratory `ORTHO//CUT`**: the five scenes of this section. Cut and project: drag the window up and down to see edge points flip and deep points stay, then fix a small patch in the middle; Cassini: the powers of $\varphi$ and their rectangles of area $\pm 1$; returns: move and narrow the observation window and compare the observed waits with the visit share; the acceptance window: push a point from the centre of the rhombic triacontahedron to its boundary, where $d_\partial$ reaches zero and it flips out; gaps: change the number of points $N$ and the rotation, and the arcs on the circle stay of at most three lengths. The green evidence boxes are the theorems verified in Lean; the triacontahedron and the “empire” are literature results, and what is said about souls and ruins is an interpretive model (`MODEL`).
 :::
 
-## 40.3.5 Alignment Table: `trureturing` Formal Theorems, Orthogonal Geometry, and the Soul–Ruin Interpretive Model (`MODEL`) {#sec-coda-trureturing-soul-ruin-table}
+## Alignment Table: `trureturing` Formal Theorems, Orthogonal Geometry, and the Soul–Ruin Interpretive Model (`MODEL`) {#sec-coda-trureturing-soul-ruin-table}
 
 The table below aligns the verified mathematical theorems of `trureturing` (left column, `LEAN ✓`), the orthogonal geometry of this book (middle column), and the author's philosophical interpretation of the soul, forgetting, and historical-ruin attractors (right column, explicitly marked `MODEL`):
 

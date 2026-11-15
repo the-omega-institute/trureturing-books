@@ -173,12 +173,12 @@
 # 终章与附录
 
 - [终章 在所有的球之外](coda.md)
-  - [40.1 多面体近似与不可抹平的几何余项](coda-s01-polyhedral-remainders.md)
-  - [40.2 历史遗迹作为空间吸引子：驻相曲率盆地、分形横截叶层与似曾相识的跨轮次共振](coda-s02-spatial-attractors.md)
-  - [40.3 trureturing 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释](coda-s03-golden-cut-observers.md)
-  - [40.4 收缩不动点与形式认识论锚点](coda-s04-fixed-point-anchors.md)
-  - [40.5 核心几何与形式概念双语术语表](coda-s05-bilingual-glossary.md)
-  - [40.6 全书十部曲三十九章阅读与依赖导图](coda-s06-reading-map.md)
+  - [多面体近似与不可抹平的几何余项](coda-s01-polyhedral-remainders.md)
+  - [历史遗迹作为空间吸引子：驻相曲率盆地、分形横截叶层与似曾相识的跨轮次共振](coda-s02-spatial-attractors.md)
+  - [trureturing 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释](coda-s03-golden-cut-observers.md)
+  - [收缩不动点与形式认识论锚点](coda-s04-fixed-point-anchors.md)
+  - [核心几何与形式概念双语术语表](coda-s05-bilingual-glossary.md)
+  - [全书十部曲三十九章阅读与依赖导图](coda-s06-reading-map.md)
 - [附录 A 传统量子力学与几何语言对照词典](appendix-a.md)
   - [A.1 全书概念与形式化锚点总对照表](appendix-a-s01-master-dictionary.md)
   - [A.2 十部曲核心符号与算子速查指南](appendix-a-s02-symbols-and-operators.md)

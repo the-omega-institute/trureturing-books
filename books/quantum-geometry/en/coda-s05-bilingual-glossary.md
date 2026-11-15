@@ -1,4 +1,4 @@
-# 40.5 Bilingual Glossary of Core Geometric and Formal Concepts {#sec-coda-bilingual-glossary}
+# Bilingual Glossary of Core Geometric and Formal Concepts {#sec-coda-bilingual-glossary}
 
 ::: {.remark #rem-coda-bilingual-glossary-box title="Bilingual Glossary of Core Geometric, Literature, and Formal Concepts (Including literature result, not formalized in this book)"}
 **Literature result, not formalized in this book (for entries marked as classical topological or transcendence literature; entries tagged `LEAN ✓` are kernel-verified in Lean 4, and entries tagged `OPEN` are unresolved open conjectures).** To help readers move seamlessly between conventional physics literature, geometric intuition, and Lean 4 source code, the table below summarizes the core concepts used across all ten parts of the book:

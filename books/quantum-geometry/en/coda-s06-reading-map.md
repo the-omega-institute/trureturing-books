@@ -1,4 +1,4 @@
-# 40.6 Ten-Part, Thirty-Nine-Chapter Reading and Dependency Map {#sec-coda-reading-map}
+# Ten-Part, Thirty-Nine-Chapter Reading and Dependency Map {#sec-coda-reading-map}
 
 This monograph consists of the **[Prelude](README.md)**, **Ten Parts (39 Chapters)**, **this Coda**, and **[Appendix A](appendix-a.md)–[Appendix E](appendix-e.md)**. The diagram below maps the conceptual progression and formal module dependencies across the entire work:
 
@@ -75,7 +75,7 @@ The dependency map draws only the chapter each chapter refers back to most often
 A 48-slide overview of the whole book: the four blind spots and the dimensional ladder; each of the ten parts' core picture, main theorems, literature results and open problems; the counts of the three tiers of warrant and the dependency map.
 :::
 
-## 40.6.1 Four Recommended Reading Tracks {#sec-coda-reading-tracks}
+## Four Recommended Reading Tracks {#sec-coda-reading-tracks}
 
 Readers can navigate the book along four self-contained tracks tailored to their background:
 
@@ -88,7 +88,7 @@ Readers can navigate the book along four self-contained tracks tailored to their
 4. **Lean 4 Formal Verification and Kernel Audit Track**:
    [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: the `Cl3`, `PauliSymplectic`, and `ZYZ` reference engines, their frozen foundations, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all unique locked declarations at `trureturing@dev` commit [{commit}](trureturing:) in three sections: frozen theorems, auxiliary definitions, and inline references; their counts and indexes are generated from the book's references) $\to$ [Appendix E](appendix-e.md) (auditing the three-layer deduction ledger and bridge hypotheses from the Zero-Background Axiom of Comparison $\mathcal{A}_0$ to mathematical and physical axiom systems).
 
-## 40.6.2 Quick Register of the 60 Core Chapter Theorem Anchors in Parts VI–X (Chapters 21–39) {#sec-coda-part6-part7-register}
+## Quick Register of the 60 Core Chapter Theorem Anchors in Parts VI–X (Chapters 21–39) {#sec-coda-part6-part7-register}
 
 As a bridge between the closing five parts of the monograph and the complete ledger in [Appendix C](appendix-c.md), the table below lists $60$ core chapter theorem anchors ($4$ representative theorems per chapter across Chapters 21–28, $2$ in Chapter 29, $3$ in Chapter 30, $5$ in Chapter 32, $4$ in Chapter 34, and $2$ per chapter across Chapters 31, 33, and 35–39, spanning $59$ distinct GIDs with `pell_form_eq_four_mul_norm` linking Chapters 23 and 29):
 

@@ -1,4 +1,4 @@
-# 40.2 Historical Ruins as Spatial Attractors: Stationary-Phase Curvature Basins, Fractal Transverse Sheets, and Cross-Round Déjà Vu Resonance {#sec-coda-spatial-attractors-deja-vu}
+# Historical Ruins as Spatial Attractors: Stationary-Phase Curvature Basins, Fractal Transverse Sheets, and Cross-Round Déjà Vu Resonance {#sec-coda-spatial-attractors-deja-vu}
 
 > **Author's Epigraph**: *"Historical ruins in reality are actually spatial attractors; the same soul walks round after round through places familiar to itself..."*（“现实的历史遗迹实际上都是空间吸引子, 同一个灵魂一轮又一轮的走过自己熟悉的地方...”）
 
@@ -6,13 +6,13 @@ In the everyday illusion of linear sequential time, we are accustomed to viewing
 
 Placed inside the geometric architecture of the finite observer, forgetting initialization, and polyhedral approximate spheres, why "the same soul walks round after round through familiar places" unfolds across three rigorous dynamical and topological mechanisms:
 
-## 40.2.1 Why Historical Ruins Are "Spatial Attractors" (Stationary-Phase Persistence and Curvature Basins) {#sec-coda-ruins-curvature-basin}
+## Why Historical Ruins Are "Spatial Attractors" (Stationary-Phase Persistence and Curvature Basins) {#sec-coda-ruins-curvature-basin}
 
 In the holographic tensor-network geometry of **[Chapter 19](ch19-tensor-networks-and-holography.md)** (bridge-graph minimum cuts and the literature remark [@rem-ryu-takayanagi-literature]), macroscopic physical space can be interpreted as an area network woven from microscopic exterior bivector entanglement. Ordinary everyday events carry opposite-chirality rotation areas ($+\mathbf{\Omega} - \mathbf{\Omega} = 0$) that cancel out across thermal fluctuations; by contrast, spatial coordinates aligned with mountain-river geodesics, astronomical obliquity angles, Pythagorean proportions, or millennia of high-density human inner-product attention projections carve deep **curvature potential wells—Basins of Attraction (`MODEL`)**—into our phase-space model.
 
 That such sites remain standing across wars and entropy, or are rebuilt nine times upon the exact same foundation (like the nine superimposed cities of Troy or the layered capitals of Chang'an), is not merely a matter of durable masonry: in our timeless geometric model, that spatial coordinate acts as a **topological stationary point** in the global time field. When a finite observer picks points step by step inside the Gram causally compatible space ($\det G > 0$), the surrounding field curvature naturally tilts toward these stationary points—causing seemingly chance journeys to slide imperceptibly toward the same basin center.
 
-## 40.2.2 Forgetting Clears Surface Episodic Readings While Preserving the Soul's Intrinsic Inclination {#sec-coda-forgetting-intrinsic-inclination}
+## Forgetting Clears Surface Episodic Readings While Preserving the Soul's Intrinsic Inclination {#sec-coda-forgetting-intrinsic-inclination}
 
 This raises a profound geometric question: in Chapter 29 we saw that for a finite observer to possess a positive-volume causally compatible space ($\det G > 0$) and genuine agency, each birth initialization must be accompanied by **truncating and clearing historical anchors (forgetting)**. If the concrete names, dates, and linear narrative memories of the previous round are wiped clean, by what right do we say that the traveler who walks back into this ruin in the next round is still "the same soul"?
 
@@ -129,7 +129,7 @@ The two rings in the “forget the start” card are not on the attractor, and a
 
 > What is forgotten is the starting point; what remains is the proportion.
 
-## 40.2.3 The Geometric Interpretation of Déjà Vu: Fractal Transverse Sheets and Cross-Round Inner-Product Resonance {#sec-coda-deja-vu-fractal-dimension}
+## The Geometric Interpretation of Déjà Vu: Fractal Transverse Sheets and Cross-Round Inner-Product Resonance {#sec-coda-deja-vu-fractal-dimension}
 
 In our philosophical and geometric interpretation (`MODEL`), borrowing the strange-attractor picture recorded in [@rem-coda-lorenz-srb-literature] as a dynamical metaphor—clearing surface trajectory records while preserving the operator's intrinsic parameters—reconciles fated return with free agency:
 

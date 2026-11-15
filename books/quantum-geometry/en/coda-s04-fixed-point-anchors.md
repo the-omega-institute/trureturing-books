@@ -1,4 +1,4 @@
-# 40.4 Contracting Fixed Points and the Epistemic Anchor {#sec-coda-fixed-point-anchor}
+# Contracting Fixed Points and the Epistemic Anchor {#sec-coda-fixed-point-anchor}
 
 As we bring the Coda to its formal anchor, we uphold the book's foundational epistemic contract by drawing an exact boundary between what is mechanically verified by the Lean 4 kernel and what belongs to classical literature or open conjectures.
 

@@ -1,4 +1,4 @@
-# 40.1 Polyhedral Approximation and the Inescapable Geometric Remainder {#sec-coda-polyhedral-remainder}
+# Polyhedral Approximation and the Inescapable Geometric Remainder {#sec-coda-polyhedral-remainder}
 
 Why can neither human mathematicians nor digital computers ever construct a completely seamless sphere entirely inside a fixed finite axiom system, a finite universal gate set, a finite prime cutoff, or a finite-degree Taylor expansion? Across all ten parts of this book, we have repeatedly encountered the same structural obstruction—**the topological and arithmetic remainder between a faceted polyhedral approximation and smooth spherical curvature**. We begin by enclosing the three classical discrete-geometry and algebraic-topology theorems governing polyhedral angular defect, even-sphere Hairy Ball vortices, and parallelizable spheres inside a literature remark:
 

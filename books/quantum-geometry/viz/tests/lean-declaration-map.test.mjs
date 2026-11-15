@@ -6,6 +6,7 @@
 // search per locked GID, attribute split by hand), never by calling the page's own code or gen-data.py.
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
@@ -91,10 +92,20 @@ const ledeSays = (lang, txt) => {
 
 // Each language's SUMMARY once more, as a tree of any depth: a link's depth is its indentation in steps of two spaces,
 // its parent the nearest link one step shallower. A top unit is known by the head of its title (序曲/Prelude, 第N章/
-// Chapter N, 终章/Coda, 附录 X/Appendix X); the coda counts as the chapter after the last one. A child page's title opens
-// with its full number, which must be its parent's number followed by its place among its siblings (4.1, 39.5.7, 40.1,
-// A.1), and its file must be its parent's stem followed by -sNN (ch39-s05-s07-…, coda-s01-…, appendix-a-s01-…). The
-// short name under a column and the name the page gives a unit come from this tree alone, never from the page.
+// Chapter N, 终章/Coda, 附录 X/Appendix X). The roots book.toml lists under [numbering.unnumbered] (read here by Python's
+// tomllib, not by the book's loader) take no chapter number: the chapters after them keep counting on, and their trees
+// are located on the map by the configured prefix instead (Coda.1, Coda.1.2, …). A child page's number is its parent's
+// number followed by its place among its siblings (4.1, 39.5.7, Coda.1, A.1), and its file is its parent's stem followed
+// by -sNN (ch39-s05-s07-…, coda-s01-…, appendix-a-s01-…). In a numbered tree the title opens with that number; in an
+// unnumbered tree no title or heading of the pages opens with a number, old (40.1) or locator (Coda.1): the locator is the
+// map's, not the headings'. The short name under a column and the name the page gives a unit come from this tree alone,
+// never from the page.
+const UNNUMBERED = JSON.parse(execFileSync('python3', ['-I', '-c',
+  'import json, sys, tomllib\nwith open(sys.argv[1], "rb") as f: print(json.dumps(tomllib.load(f).get("numbering", {}).get("unnumbered", {})))',
+  path.join(BOOK, 'book.toml')], { encoding: 'utf8' }));
+const reEsc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** The ATX headings of a page outside fenced code. */
+const headings = (file) => { let fence = false; return file.split('\n').filter((l) => { if (/^\s*(```|~~~)/.test(l)) fence = !fence; return !fence && /^#{1,6}\s/.test(l); }).map((l) => l.replace(/^#{1,6}\s+/, '')); };
 const CNUM = '零一二三四五六七八九十', cnNum = (n) => (n <= 10 ? CNUM[n] : n < 20 ? `十${CNUM[n - 10]}` : `${CNUM[Math.floor(n / 10)]}十${n % 10 ? CNUM[n % 10] : ''}`);
 const cnValue = (s) => { const k = s.indexOf('十'); return k < 0 ? CNUM.indexOf(s) : (k ? CNUM.indexOf(s[0]) : 1) * 10 + (k < s.length - 1 ? CNUM.indexOf(s[k + 1]) : 0); };
 const pad2 = (k) => String(k).padStart(2, '0');
@@ -111,34 +122,43 @@ for (const lang of ['zh', 'en']) {
     if (m) raw.push({ indent: m[1].length, title: m[2].trim(), file: m[3] });
   }
   const head = (title) => { for (const [re, f] of TOP_HEAD[lang]) { const m = re.exec(title); if (m) return f(m); } return [null, null]; };
-  const last = Math.max(...raw.filter((r) => !r.indent).map((r) => head(r.title)).filter(([k]) => k === 'chapter').map(([, n]) => +n));
   for (const r of raw) {
     const depth = r.indent / 2, parent = depth ? trail[depth - 1] : null;
     if (!Number.isInteger(depth) || (depth && !parent)) { bad.push(`${r.file}: indented ${r.indent} spaces`); continue; }
     const node = { file: r.file, title: r.title, depth, parent, children: [] };
     if (!depth) {
-      const [kind, n] = head(r.title), num = kind === 'coda' ? String(last + 1) : n;
+      // an unnumbered root is the one book.toml names, never guessed from its title; its number is its prefix
+      const prefix = Object.hasOwn(UNNUMBERED, r.file) ? UNNUMBERED[r.file] : null, [kind, n] = head(r.title), num = prefix ?? n ?? '';
       const stem = kind === 'chapter' ? `ch${pad2(+num)}` : kind === 'coda' ? 'coda' : kind === 'appendix' ? `appendix-${num.toLowerCase()}` : 'README';
-      Object.assign(node, { kind, num, stem, root: node });
+      Object.assign(node, { kind, num, stem, root: node, unnumbered: prefix != null });
       if (!kind) bad.push(`${r.file}: a top unit whose title opens with no unit name`);
       else if (kind === 'chapter' ? !r.file.startsWith(`${stem}-`) : r.file !== `${stem}.md`) bad.push(`${r.file}: not filed as ${stem}`);
+      if ((kind === 'coda') !== node.unnumbered) bad.push(`${r.file}: ${node.unnumbered ? 'unnumbered in book.toml but not the coda' : 'the coda, but book.toml leaves it numbered'}`);
       node.short = kind === 'coda' ? ['终', 'Co'][li] : num;
       node.name = kind ? NAMES[kind](num)[li] : null;
       if (kind && !r.title.startsWith(`${node.name} `)) bad.push(`${r.file}: the title does not open with ${node.name}`);
     } else {
       const k = parent.children.length + 1, num = `${parent.num}.${k}`, stem = `${parent.stem}-s${pad2(k)}`, root = parent.root;
       const rest = num.slice(root.num.length + 1);
-      Object.assign(node, { kind: 'section', num, stem, root, k, short: num });
-      node.name = root.kind === 'chapter' ? [`第${cnNum(+root.num)}章·${rest}`, `Section ${num}`][li]
-        : root.kind === 'coda' ? [`终章·${rest}`, `Coda ${num}`][li] : root.kind === 'appendix' ? [`附录 ${num}`, `Appendix ${num}`][li] : null;
+      Object.assign(node, { kind: 'section', num, stem, root, k, short: num, unnumbered: root.unnumbered });
+      node.name = root.unnumbered ? [`${root.name}·${rest}`, num][li]
+        : root.kind === 'chapter' ? [`第${cnNum(+root.num)}章·${rest}`, `Section ${num}`][li] : root.kind === 'appendix' ? [`附录 ${num}`, `Appendix ${num}`][li] : null;
       if (!node.name) bad.push(`${r.file}: a child of ${root.file}, which has no number`);
-      if (!r.title.startsWith(`${num} `)) bad.push(`${r.file}: the title opens with ${r.title.split(' ')[0]}, not ${num} (child ${k} of ${parent.num})`);
+      if (!root.unnumbered && !r.title.startsWith(`${num} `)) bad.push(`${r.file}: the title opens with ${r.title.split(' ')[0]}, not ${num} (child ${k} of ${parent.num})`);
       if (!r.file.startsWith(`${stem}-`)) bad.push(`${r.file}: not filed as ${stem}-… (child ${k} of ${parent.file})`);
       parent.children.push(node);
+    }
+    if (node.root.unnumbered) {
+      // no number left in the titles of an unnumbered tree: neither an old chapter number (40.1) nor the map's locator
+      const numbered = new RegExp(`^(?:\\d+(?:\\.\\d+)*|${reEsc(node.root.num)}(?:\\.\\d+)+)(?=[\\s：:]|$)`);
+      const page = fs.readFileSync(path.join(BOOK, lang, r.file), 'utf8');
+      for (const t of [r.title, ...headings(page)]) if (numbered.test(t)) bad.push(`${r.file}: “${t.slice(0, 24)}” keeps a number in an unnumbered tree`);
     }
     trail[depth] = node; trail.length = depth + 1;
     nodes.push(node);
   }
+  const roots = new Set(nodes.filter((n) => !n.depth).map((n) => n.file));
+  for (const file of Object.keys(UNNUMBERED)) if (!roots.has(file)) bad.push(`book.toml: numbering.unnumbered names ${file}, not a top unit of SUMMARY`);
   TREE[lang] = { nodes, bad };
   NODE[lang] = Object.fromEntries(nodes.map((n) => [n.file, n]));
 }
@@ -305,7 +325,8 @@ await page.click('[data-lang-set="zh"]');
 
 // The names under the stage and under the strip, read from the fillText calls on #cv and #plot and measured there, at
 // the narrowest phone, a phone and a desktop width, in both languages, with no column chosen and with 30.4, 39.5.7,
-// 40.1 and A.1 chosen (a section, a section of a section, a section of the coda and one of an appendix):
+// Coda.1 and A.1 chosen (a section, a section of a section, the first section of the unnumbered coda and one of an
+// appendix):
 //   · each name is the short number the SUMMARY tree gives one column; its span holds that column's foot (on the strip:
 //     the tick after that column, where kit.plot snaps it to the pixel grid) and lies inside the canvas; only the
 //     chosen name may sit off its column's centre, and only it may be a section's number; no two names touch;
@@ -325,11 +346,14 @@ const GROUP = BANDS[BANDS.length - 1];   // the coda and the appendices
 const SHORT_COL = Object.fromEntries(['zh', 'en'].map((lang) => [lang, new Map(columns.map((f, c) => [NODE[lang][f].short, c]))]));
 check('every column has a short name of its own in each language', ['zh', 'en'].every((lang) => SHORT_COL[lang].size === NC));
 const colOfNum = (num) => columns.findIndex((f) => NODE.zh[f].depth > 0 && NODE.zh[f].num === num);
-const CHOSEN = ['30.4', '39.5.7', '40.1', 'A.1'].map(colOfNum);
-check('the axis checks choose 30.4 (depth 2), 39.5.7 (depth 3), 40.1 (under the coda) and A.1 (under Appendix A)',
-  CHOSEN.every((c) => c >= 0) && JSON.stringify(CHOSEN.map((c) => NODE.zh[columns[c]].depth)) === '[1,2,1,1]'
-  && NODE.zh[columns[CHOSEN[2]]].root.kind === 'coda' && NODE.zh[columns[CHOSEN[3]]].root.kind === 'appendix', JSON.stringify(CHOSEN));
+const CHOSEN = ['30.4', '39.5.7', 'Coda.1', 'A.1'].map(colOfNum);
 const CODA = columns.findIndex((f) => NODE.zh[f].kind === 'coda'), APPX = columns.findIndex((f) => NODE.zh[f].kind === 'appendix');
+const codaFirst = CHOSEN[2] >= 0 && NODE.zh[columns[CHOSEN[2]]];
+check('the axis checks choose 30.4 (depth 2), 39.5.7 (depth 3), Coda.1 (the first page under the unnumbered coda) and A.1 (under Appendix A)',
+  CHOSEN.every((c) => c >= 0) && JSON.stringify(CHOSEN.map((c) => NODE.zh[columns[c]].depth)) === '[1,2,1,1]'
+  && codaFirst.root.kind === 'coda' && codaFirst.root.unnumbered && codaFirst.parent === codaFirst.root && codaFirst.root.children[0] === codaFirst
+  && codaFirst.root.file === columns[CODA] && CHOSEN[2] === CODA + 1 && ['zh', 'en'].every((lang) => NODE[lang][columns[CHOSEN[2]]].short === 'Coda.1')
+  && NODE.zh[columns[CHOSEN[3]]].root.kind === 'appendix', JSON.stringify(CHOSEN));
 const TENS = columns.map((f, c) => c).filter((c) => NODE.zh[columns[c]].kind === 'chapter' && +NODE.zh[columns[c]].num % 10 === 0);
 await page.evaluate(() => {
   const R = window.__axisRec = { on: false, texts: [] };
@@ -464,20 +488,23 @@ check('every GID begins with the module the lock records, and the two dotted dec
   GIDS.every((g) => lock.declarations[g].module && g.startsWith(`${lock.declarations[g].module}.`)) && DOTTED.every((g) => nested.includes(g) && g.slice(0, g.lastIndexOf('.')) !== lock.declarations[g].module), JSON.stringify(nested));
 const nameFits = (title, name) => !!name && (title === name || [' ', '：', ':'].some((sep) => title.startsWith(name + sep)));
 // The name the page gives a unit (the chapter slider, the HUD, the notes) is the one derived from the SUMMARY tree:
-// 第N章 / Chapter N for a chapter, 第N章·5.1 / Section N.5.1 for a section at any depth under it, 终章·1 / Coda 40.1
-// under the coda, 附录 A.1 / Appendix A.1 under an appendix.
+// 第N章 / Chapter N for a chapter, 第N章·5.1 / Section N.5.1 for a section at any depth under it, 终章·1 / Coda.1
+// under the unnumbered coda, 附录 A.1 / Appendix A.1 under an appendix.
 const unitNameOk = (lang, file, title, shown) => !!NODE[lang][file] && shown === NODE[lang][file].name;
 for (const lang of ['zh', 'en']) {
-  check(`SUMMARY tree (${lang}): every child page, at any depth, is numbered by its parent and its place among its siblings and filed under its parent's stem; every top unit opens with its own name`,
+  check(`SUMMARY tree (${lang}): every child page, at any depth, is numbered by its parent and its place among its siblings and filed under its parent's stem; every top unit opens with its own name; the roots book.toml leaves unnumbered are the coda, and no title or heading in their trees keeps a number`,
     TREE[lang].bad.length === 0, TREE[lang].bad.slice(0, 4).join(' | '));
 }
 const shape = (lang) => TREE[lang].nodes.map((n) => [n.file, n.depth, n.parent && n.parent.file, n.num]);
 check('SUMMARY tree: both languages have the same pages in the same order, at the same depth, under the same parents, with the same numbers',
   JSON.stringify(shape('zh')) === JSON.stringify(shape('en')) && JSON.stringify(TREE.zh.nodes.map((n) => n.file)) === JSON.stringify(files));
 const tops = TREE.zh.nodes.filter((n) => !n.depth), chaps = tops.filter((n) => n.kind === 'chapter').map((n) => +n.num), appx = tops.filter((n) => n.kind === 'appendix').map((n) => n.num);
-check('SUMMARY tree: the top units run prelude, chapters 1, 2, … in order, the coda, then the appendices A, B, … in order',
+const codaTree = TREE.zh.nodes.filter((n) => n.root.kind === 'coda'), lastChap = Math.max(...chaps);
+check(`SUMMARY tree: the top units run prelude, chapters 1, 2, … in order, the coda, then the appendices A, B, … in order; the coda takes no chapter number (no ${lastChap + 1}) and its pages are located as ${UNNUMBERED['coda.md']}.k`,
   tops[0].kind === 'prelude' && chaps.every((n, i) => n === i + 1) && JSON.stringify(tops.map((n) => n.kind)) === JSON.stringify(['prelude', ...chaps.map(() => 'chapter'), 'coda', ...appx.map(() => 'appendix')])
-  && appx.every((x, i) => x === String.fromCharCode(65 + i)), JSON.stringify(tops.map((n) => n.short)));
+  && appx.every((x, i) => x === String.fromCharCode(65 + i))
+  && codaTree.length > 1 && codaTree.every((n) => n.unnumbered && n.num.startsWith(UNNUMBERED['coda.md']) && !/^\d/.test(n.short))
+  && !TREE.zh.nodes.some((n) => n.num === String(lastChap + 1) || n.num.startsWith(`${lastChap + 1}.`)), JSON.stringify(tops.map((n) => n.short)));
 const kids = TREE.zh.nodes.filter((n) => n.depth), deepest = Math.max(...TREE.zh.nodes.map((n) => n.depth));
 const parents = new Set(kids.map((n) => n.parent.file));
 check(`SUMMARY tree: ${kids.length} child pages under ${parents.size} parents, to depth ${deepest + 1}; ${files.length} pages, ${columns.length} columns (every page but Appendix C), the last one Appendix E`,

@@ -10,9 +10,9 @@ From the moment the Prelude opened the first door, we have climbed a ladder of a
 
 ---
 
-- [40.1 Polyhedral Approximation and the Inescapable Geometric Remainder](coda-s01-polyhedral-remainders.md)
-- [40.2 Historical Ruins as Spatial Attractors: Stationary-Phase Curvature Basins, Fractal Transverse Sheets, and Cross-Round Déjà Vu Resonance](coda-s02-spatial-attractors.md)
-- [40.3 The `trureturing` "Golden Cut" Formal Primitives and the Geometric Interpretation of Soul–Ruin Attractors](coda-s03-golden-cut-observers.md)
-- [40.4 Contracting Fixed Points and the Epistemic Anchor](coda-s04-fixed-point-anchors.md)
-- [40.5 Bilingual Glossary of Core Geometric and Formal Concepts](coda-s05-bilingual-glossary.md)
-- [40.6 Ten-Part, Thirty-Nine-Chapter Reading and Dependency Map](coda-s06-reading-map.md)
+- [Polyhedral Approximation and the Inescapable Geometric Remainder](coda-s01-polyhedral-remainders.md)
+- [Historical Ruins as Spatial Attractors: Stationary-Phase Curvature Basins, Fractal Transverse Sheets, and Cross-Round Déjà Vu Resonance](coda-s02-spatial-attractors.md)
+- [The `trureturing` "Golden Cut" Formal Primitives and the Geometric Interpretation of Soul–Ruin Attractors](coda-s03-golden-cut-observers.md)
+- [Contracting Fixed Points and the Epistemic Anchor](coda-s04-fixed-point-anchors.md)
+- [Bilingual Glossary of Core Geometric and Formal Concepts](coda-s05-bilingual-glossary.md)
+- [Ten-Part, Thirty-Nine-Chapter Reading and Dependency Map](coda-s06-reading-map.md)
