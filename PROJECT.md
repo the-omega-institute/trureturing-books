@@ -65,7 +65,7 @@
 1. **交互可视化（`books/<slug>/viz/<id>/`）按模板技能 `skills/book-viz` 的方法制作：舞台优先，每张实验卡都是正文可以单独引用的图**（本书的颜色用语、卡片与引用位置见 `skills/local-viz-cards/SKILL.md`）：
    - **执行载体**：一律通过命令行直接调用 `claude` CLI（`claude -p --model opus ...`，**严禁使用 Claude Subagent**）。
    - **版式服从内容**：按对象选舞台（布洛赫球、格点、矩阵、曲线），舞台占页面主体，读者直接拖动对象本身；不把不同主题套进同一副骨架。`books/example-monograph/viz/golden-carry/` 是“分步账本”这一种形态的示例，只在对象本身是逐步改写的记号串时采用。
-   - **硬约束**：页面只加载 `../assets/theme.css`、`style.css`、`../assets/shell.js`、`../assets/kit.js` 与底部的 `main.js`，使用共享的实验室版式 `.app.lab`；依据框只用 `theme/viz/theme.css` 定义的 `.lean`、`.lean.num`、`.lean.model`、`.lean.argued`、`.lean.open`；不自造主题切换、私有运行时或非标徽章；颜色语义全书一致（绿色只给 Lean 已验证，琥珀色只给当前选择）。
+   - **硬约束**：页面只加载 `../assets/theme.css`、`style.css`、`../assets/shell.js`、`../assets/kit.js` 与底部的 `main.js`，使用共享的实验室版式 `.app.lab`；全书交互页面统一遵循与 `triadic-nameless-sandbox` 一致的三栏暗色实验室壳层（左栏 `#rail` 放双透镜切换与递进实验卡，中栏为主舞台 `#stage`、舞台外下方的对照小图条 `.strip` 与底部播放条 `.bar`，右栏 `#evidence` 放顶部原理抽屉按钮 `#infoBtn`、参数控件/实时读数与依据框），严禁另起双栏或顶栏覆盖层布局，严禁把 `.strip` 辅助小图塞进 `#stage` 内部抢占三维视口，严禁在实验室页面内混入 `data-tr-palette` 浅色切换；依据框只用 `theme/viz/theme.css` 定义的 `.lean`、`.lean.num`、`.lean.model`、`.lean.argued`、`.lean.open`；不自造主题切换、私有运行时或非标徽章；颜色语义全书一致（绿色只给 Lean 已验证，琥珀色只给当前选择）。
    - **按卡引用**：正文讲到哪个情形，就在那句话旁用 `::: {.viz src="<id>" preset="<卡>" height="500"}` 引用那张卡，中英文版本的位置与卡名相同；每个可视化在所属章节末尾保留一处不带 `preset` 的完整实验室。卡片说明与图注只说图里看得见的东西，并使用与图例相同的颜色词和符号。
    - **质量门**：每个页面的浏览器测试先过 `stageFirstChecks`，再用测试里另写的独立算法核对页面声称的每条性质；改动后运行 `node tools/node/viz-shots.mjs quantum-geometry <id>` 亲眼看桌面、书内、手机与封面四种画面，并用 `node tools/node/viz-thumbs.mjs quantum-geometry <id>` 重新生成封面与被引用卡的静态图。
 2. **讲解视频（`books/<slug>/films/<NNN>-<name>/`）严格对齐 `books/example-monograph/films/001-golden-deficit/`**：
