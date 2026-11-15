@@ -825,7 +825,32 @@ This retains `prefixCoupling`'s initial `resetReady` test, recursive branch, and
 Use counting induction in each fixed completion fiber: changing a selected free coordinate from `true` to `false` is an injection, so the event that the first $j$ selected coordinates are all `true` has mass at most $2^{-j}$. In the `resetReady` branch the two outputs agree coordinatewise on free sites, so the event reduces exactly to that all-`true` counting bound. In the recursive branch the emitted head is the sampled bit pair; the `(false,false)` child contributes zero to the event, while every positive-mass other child enters the corresponding refined fibers and uses the induction hypothesis, with the half-failure budget supplying the next factor $1/2$. Zero-mass and impossible refinements contribute nothing. The induction applies directly to the original `prefixCoupling`, without replacing its initial test or independent fallback. The full proof is checked by the Lean kernel.
 :::
 
-This bound concerns only the native complete output event “the first $j$ selected coordinates contain no common zero.” It does not prove that the paper's shared-threshold construction has the same law as the native coupling, supported coalescence after an emitted common zero, simultaneous reflection support transport, or complete pointwise assembly; each still requires separate verification.
+The common-zero tail bound controls the probability of not yet seeing a common zero. To use it to control later disagreements, one also needs agreement of the complete outputs after a common zero. In an increasing scan of all free coordinates, a common `false` at the head leaves every coordinate to its left fixed. If the farther fixed data also agree, the original reset condition holds. The following statement places this mechanism directly on the output support of the same $P$.
+
+::: {.theorem #thm-ch39-p2e-native-supported-coalescence title="Common-Zero Coalescence on the Complete Output Support of the Original Conditional Coupling" lean="D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence"}
+For every $k,n\in\mathbb N$ with $0<k$, take a duplicate-free (`Nodup`) list $s:\operatorname{List}(\operatorname{Fin}(n))$ strictly increasing in coordinate value, and a finite fixed set $F:\operatorname{Finset}(\operatorname{Fin}(n))$ such that, for every $i\in\operatorname{Fin}(n)$, $i\in s$ if and only if $i\notin F$. Take arbitrary histories $x,y:W_n$ and witnesses $h_x,h_y$ that the original completion fibers $C(k,n,F,x)$ and $C(k,n,F,y)$ are nonempty. Assume further that
+
+$$
+\forall i\in s,\;\forall t\in F,\quad i<t\ \Longrightarrow\ x(t)=y(t).
+$$
+
+For every complete output pair $w=(w_1,w_2)\in W_n\times W_n$ with $P(s,F,x,y,h_x,h_y)(w)\ne0$, and all $r,q\in\operatorname{Fin}(|s|)$ with $r\le q$,
+
+$$
+w_1(s[r])=\mathrm{false}\ \land\ w_2(s[r])=\mathrm{false}
+\quad\Longrightarrow\quad w_1(s[q])=w_2(s[q]).
+$$
+
+Here $s[r]$ is the scan coordinate at the zero-based index $r$; the histories $x,y$ need not themselves be admissible words. The conclusion is vacuous for an empty scan, including $n=0$. The statement includes $F=\varnothing$, $x=y$, an initially satisfied reset condition, $r=q$, and $k=1$.
+:::
+
+::: proof
+Induct on the scan list, retaining the same complete output pair $w$ throughout. If `resetReady` holds initially, the original definition chooses a reset coordinate $z$ and an actual legal representative $v$ from the completion fiber of $y$. Map support for the reset law writes $w$ as $(u,\operatorname{resetMap}(z,v,u))$. Every coordinate at or before $z$ is fixed, so every free scan coordinate lies strictly after $z$, where `resetMap` retains $u$. Thus the two complete outputs agree at every scanned coordinate. This uses an actual legal representative rather than assuming the arbitrary history is legal; the chosen reset coordinate need not be the head just scanned.
+
+Otherwise, a nonempty scan samples the head bit pair from the original next-bit coupling. Bind support supplies a bit pair of nonzero mass and retains the same $w$ in the support of its child law. Both refined completion fibers for this bit pair are nonempty. The original definition retains both independent fallback branches for impossible refinements; the corresponding bit pairs simply have zero mass. The child's exact completion-law marginals and fixed-coordinate property together identify the head of $w$ with the sampled bit pair. If the common zero is at the head, both sampled bits are therefore `false`. Strict order, complement cover, and agreement at farther fixed coordinates make the refined histories satisfy `resetReady`, so the reset argument gives agreement at every remaining scanned position. If the common zero occurs later, strict order, complement cover, and farther fixed agreement pass to the refined histories, and induction applies to the same $w$, including when the child has already reset. For $r=q$, equality follows directly because both values are `false`; an empty scan has no finite index to choose. The full proof is checked by the Lean kernel.
+:::
+
+[@thm-ch39-p2e-native-emitted-tail] bounds the event $A_j$ under the weaker assumption of duplicate-free free coordinates. Under its stronger displayed hypotheses, [@thm-ch39-p2e-native-supported-coalescence] gives a support implication for complete outputs of the same native $P$. The latter concerns emitted outputs beyond a latent `resetReady` condition on histories and introduces no new shared-threshold law. Applying these two results to event inclusion under one joint law and assembling the finite mean Hamming bound remain separate application obligations. Simultaneous transport of both outputs, support, and events through `Fin.rev` also requires a separate proof. Neither cited Lean declaration itself contains a pointwise geometric inequality or asserts equality in law between the paper's shared-threshold construction and the native distribution. The preceding paper derivation and its limits as a complete application remain in place.
 
 Reverse the scan for a left block. Write $d$ for Hamming distance on full words.
 
