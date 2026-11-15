@@ -222,6 +222,69 @@ We assemble reproducible closed-form and numerical benchmarks across all three m
 3. **Kernel-Verified Anchors (`LEAN ✓`) and Book Synthesis (`MODEL`)**: The three-point Bargmann Bloch trace, rank-one chain product, circle double-cover history lift and no-section obstruction, and spanning-tree / anchored-loop phase classification are kernel-verified in [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] (together with [@cor-latitude-complex-overlap]); the 3D Stokes identity $V_{\mathrm{sector}} = \frac{1}{3}A_{\mathrm{cap}}$ and broken-geodesic variations are exact elementary derivations; and unifying fairness-squared base shadows, sector-volume fiber memory, and $41$-path Cornu stationary-phase selection on $\Delta\mathcal{T}_\epsilon$ constitutes this book's `MODEL`.
 :::
 
+::: {.remark #rem-ch34-subentropy-gaussian-vs-feynman-loop title="Gaussian Representation of Subentropy, Oscillatory Path Integrals, and Loop Holonomy"}
+**Epistemic status**: This remark pairs reused finite-dimensional mathematical facts for subentropy (positive complex Gaussian representation, rectangular Gram invariance $Q(VV^*) = Q(V^*V)$, pure-state $Q = 0$, and pinned `bargmann_path_product`) with hand analysis of series convergence and loop holonomy.
+
+1. **Positive Gaussian representation vs. oscillatory Feynman amplitudes**: For $t > 0$ and any finite-dimensional density operator $\rho \ge 0$ with $\operatorname{Tr}\rho = 1$, the inverse determinant inside $Q(\rho)$ admits the exact finite-dimensional complex Gaussian representation
+
+   $$
+   \begin{aligned}
+   \det(I + \rho/t)^{-1} &= \int_{\mathbb{C}^d} \frac{d^{2d}z}{\pi^d}\,e^{-z^\dagger(I + \rho/t)z} \\
+   &= \mathbb{E}_{z \sim \mathrm{CN}(0, I)}\bigl[e^{-z^\dagger\rho z / t}\bigr].
+   \end{aligned}
+   $$
+
+   Although this expresses the spectral kernel as an auxiliary partition expectation, it is a positive Gaussian integral on $\mathbb{C}^d$ indexed by the spectral parameter $t$; it contains no time-sliced Hamiltonian coupling and cannot serve as an oscillatory real-time amplitude weight $e^{iS/\hbar}\mathcal{D}x$. Separately, for an ensemble $\rho = \sum_a p_a |\psi_a\rangle\langle\psi_a|$ with weighted Gram matrix $G_{ab} = \sqrt{p_a p_b}\langle\psi_a|\psi_b\rangle$, rectangular Gram invariance gives $Q(\rho) = Q(G)$, while $\operatorname{Tr}\rho^k = \operatorname{Tr}G^k$ expands into Bargmann products around closed state-index loops; however, $\ln\det(I + sG) = \sum_{k\ge 1}\frac{(-1)^{k+1}s^k}{k}\operatorname{Tr}G^k$ converges absolutely on the sufficient open domain $|s|\lVert G\rVert < 1$ (boundary cases with $|s|\lVert G\rVert = 1$ can still converge, e.g., $G=[1], s=1$), and without further control it cannot be substituted and integrated term-by-term over the entire $t > 0$ half-axis.
+2. **Curvature–area holonomy of smooth loops vs. vanishing squared-step sum**: Subdividing a smooth latitude circle at colatitude $\theta_0$ into $N$ equal steps gives $\beta_j = O(N^{-1})$, so the local squared-step sum $\sum_{j=1}^N \beta_j^2 = O(N^{-1}) \to 0$ (and $|\Pi_N| \to 1$) while the closed-loop geometric phase converges to $\gamma = -\pi(1 - \cos\theta_0)$. This nonzero holonomy depends continuously on the enclosed cap area (solid angle) as a curvature–area holonomy rather than a topological invariant; so long as global evolution stays pure and unentangled with records, $Q = 0$ throughout. Nonzero $Q$ arises instead from tracing out distinguishing history records, as shown next.
+:::
+
+::: {.example #ex-ch34-complex-action-history-subentropy-erasure title="Complex-Action Two-History Model, Record Gram Matrix, and Reduced-History Subentropy"}
+**Epistemic status**: This is a theoretical `MODEL` and hand calculation linking tunneling suppression, temporal double-slit interference, and marker erasure in [Chapter 37 §37.2](ch37-s02-dream-quantum-erasure.md) (reusing pure-state $Q = 0$ and qubit $q(r)$; not pinned as a new Lean theorem).
+
+Under a semiclassical two-history ansatz, let two orthogonal early and late output modes $|1\rangle, |2\rangle$ ($\langle 1|2\rangle = 0$) carry complex-action amplitudes
+
+$$
+a_j = C_j\exp\!\left(\frac{i\Phi_j - K_j}{\hbar}\right) \qquad (j = 1, 2),
+$$
+
+where $K_j \ge 0$ sets exponential suppression and $\Phi_j$ sets phase accumulation. Let $N = |a_1|^2 + |a_2|^2 > 0$ be the conditional output weight (throughput), $p = |a_1|^2/N \in (0, 1)$ the early-history weight, and $\phi = \arg(a_1^* a_2)$ the consistent relative phase. Coupling the two histories to normalized record states $|e_1\rangle, |e_2\rangle$ with overlap $g = \langle e_2|e_1\rangle$ and $v = |g| \in [0, 1]$ keeps the global state pure,
+
+$$
+|\Psi\rangle = \sqrt{p}\,|1\rangle|e_1\rangle + e^{i\phi}\sqrt{1-p}\,|2\rangle|e_2\rangle,
+$$
+
+with $Q(|\Psi\rangle\langle\Psi|) = 0$. Tracing out the records yields the reduced history density matrix
+
+$$
+\rho_{\mathrm{hist}} = \operatorname{Tr}_E(|\Psi\rangle\langle\Psi|) = \begin{pmatrix} p & \sqrt{p(1-p)}\,e^{-i\phi}g \\ \sqrt{p(1-p)}\,e^{i\phi}\overline{g} & 1-p \end{pmatrix},
+$$
+
+whose determinant and squared Bloch radius are
+
+$$
+\begin{aligned}
+\delta &= \det\rho_{\mathrm{hist}} = p(1-p)(1 - v^2), \\
+r^2 &= (2p - 1)^2 + 4p(1-p)v^2,
+\end{aligned}
+$$
+
+giving exact reduced-history subentropy $Q(\rho_{\mathrm{hist}}) = q(r)$. When two gates separated by $\Delta t = t_2 - t_1$ share identical spectral envelopes $S_0(E)$ and relative phase $E\Delta t/\hbar + \alpha(E)$, the frequency-resolved spectrum exhibits cosine fringes
+
+$$
+\begin{aligned}
+I(E) &\propto S_0(E)\Bigl[1 + \mathcal{V}\cos\!\left(\frac{E\Delta t}{\hbar} + \alpha(E)\right)\Bigr], \\
+\mathcal{V} &= 2\sqrt{p(1-p)}\,v.
+\end{aligned}
+$$
+
+Four structural consequences follow directly:
+
+1. **Fringe spacing and perfect dark fringes**: When the extra phase $\alpha$ has no $E$-dependence, the interference phase factor has exact period $\Delta E = h/\Delta t$, and when $\alpha(E)$ varies negligibly over one fringe, the fringe spacing is approximately $h/\Delta t$ (constant $\alpha$ is sufficient rather than necessary, since a periodic $\alpha(E)$ can still preserve that fundamental period). **Perfect dark fringes** ($\mathcal{V} = 1$, vanishing minima) occur **only** when the coherent amplitudes are equal ($p = \frac{1}{2}$, $|a_1| = |a_2|$) and record coherence is complete ($v = 1$).
+2. **Weight imbalance, visibility, and conditional throughput**: Since $r^2 = (2p - 1)^2 + \mathcal{V}^2$, the relation $Q(\rho_{\mathrm{hist}}) = q(\mathcal{V})$ holds **only** at balanced weight $p = \frac{1}{2}$ (where $r = v = \mathcal{V}$; writing $\theta = \arccos|g| \in [0, \frac{\pi}{2}]$ gives $\delta = \frac{1}{4}\sin^2\theta$, and applying the [near-pure qubit subentropy bound in §34.4](ch34-s04-infinitesimal-trihedron.md#thm-ch34-qubit-subentropy-near-pure) yields by hand $Q(\rho_{\mathrm{hist}}) = \frac{\theta^2}{4} + O(\theta^4|\ln\theta|)$ as $\theta \to 0$, while the record-determinant formula and physical mapping remain unformalized model derivations). For imbalanced weights ($p \neq \frac{1}{2}$), measuring visibility $\mathcal{V}$ alone cannot determine $Q(\rho_{\mathrm{hist}})$. Moreover, record overlap $v$ and conditional throughput $N$ (or transmission $T$) are distinct quantities.
+3. **Frequency-domain interference of time-disjoint pulses**: Two pulses with disjoint temporal support (such as $\psi(t) = f(t-t_1) + e^{i\alpha}f(t-t_2)$) interfere in energy readout without spatially catching up, because the spectrometer superposes their Fourier amplitudes at each energy $E$.
+4. **Post-transmission marking preserves total $T$**: Applying an isometric which-time marker *after* barrier transmission (see [§37.2](ch37-s02-dream-quantum-erasure.md)) can drive $v \to 0$ to erase spectral fringes and raise $Q(\rho_{\mathrm{hist}})$ while strictly preserving total transmission $T$. Conversely, placing a detector *inside* the barrier requires specifying its coupling Hamiltonian and backreaction; there is no universal theorem forcing $T$ and fringes to collapse simultaneously.
+:::
+
 Across §§34.1–34.6, orthogonality blind spots inverted the observer's axis, the "two-begets-three" bootstrap opened the elementary curved cell $\Delta\mathcal{T}_\epsilon$, and its magenta spherical-sector cone volume $V_{\mathrm{sector}} = \frac{1}{3}A_{\mathrm{cap}}$ recorded arrival histories along the hidden Hopf fiber to select classical geodesics via Cornu interference. Yet press just half a step further and the entire classical narrative undergoes a radical **ontological inversion**: in §34.6 we still spoke *as though* the curved surface and solid bulk of $\Delta\mathcal{T}_\epsilon$ sat there beforehand as a ready-made container across which paths subsequently traveled to accumulate Berry phases. If infinitely many comparison paths carrying infinitely many phase integrals converge onto *every* point of $\Delta\mathcal{T}_\epsilon$, why is the universe not drowned in uniform phase noise—and what is "volume" itself once the container-first premise is turned upside down? Explore all five cards of the `BERRY//PATH` interactive laboratory below before turning to §34.7, where volume is revealed not as a pre-existing stage for paths, but as the surviving standing-wave nodal locus where omnidirectional phase integrals fail to cancel out:
 
 ::: {.viz src="berry-sector-path-sandbox" height="640"}

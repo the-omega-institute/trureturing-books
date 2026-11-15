@@ -162,6 +162,96 @@ Evaluating $\Delta\mathcal{T}_\epsilon$ at $\epsilon = 15^\circ$ ($\frac{\pi}{12
 3. **Book Interpretive Model (`MODEL`)**: Reading once- and twice-orthogonal operations as dual shadows of $\Delta\mathcal{T}_\epsilon$, positing a finite-bandwidth minimal step $\epsilon_{\min} > 0$ with curvature quantum $\Omega_{\min} \approx \frac{1}{2}\epsilon_{\min}^2$, and linking discrete trihedral tiling of smooth spheres to $K = 3$ Rauzy fractal torsion constitute this book's `MODEL`.
 :::
 
+::: {.theorem #thm-ch34-qubit-subentropy-near-pure title="Near-Pure Qubit Subentropy Kernel Comparison Bound" lean="D5/S3/Quantum/Subentropy/QubitBoundary.qubit_subentropy_near_pure"}
+Let $A \in M_2(\mathbb{C})$ be any $2\times 2$ complex positive semidefinite matrix ($A \succeq 0$) with $\operatorname{Tr}(A) = 1$, set $\delta := \operatorname{Re}(\det A)$, and let $Q(A)$ denote the matrix subentropy in natural-logarithm units. Then:
+
+1. $0 \le \delta \le \frac{1}{4}$;
+2. if $\delta = 0$, then $Q(A) = 0$;
+3. if $0 < \delta$, then
+
+$$
+0 \le \delta - Q(A) \le \frac{\delta^2\ln(1/\delta)}{1 - \delta}.
+$$
+:::
+
+::: proof
+Because $A \in M_2(\mathbb{C})$ is positive semidefinite with $\operatorname{Tr}(A) = 1$, $A$ is Hermitian with eigenvalues $\lambda_1, \lambda_2 \ge 0$ summing to $1$. Hence $\det A = \lambda_1\lambda_2 \in \mathbb{R}$ and $\delta = \operatorname{Re}(\det A) = \lambda_1(1 - \lambda_1) \in [0, \frac{1}{4}]$.
+
+When $\delta = 0$, one eigenvalue is $0$ and the other is $1$, so $A$ is a rank-one projector with $\det(I + A/t) = 1 + t^{-1}$. Thus the integrand $\frac{t}{1+t} - \frac{1}{\det(I + A/t)}$ vanishes identically and $Q(A) = 0$, without dividing by zero or evaluating a logarithm at zero.
+
+When $0 < \delta \le \frac{1}{4}$, the characteristic polynomial gives $\det(I + A/t) = 1 + t^{-1} + \delta t^{-2}$, reducing the determinant-integral definition to
+
+$$
+Q(A) = \int_0^\infty \frac{\delta t}{(1+t)(t^2 + t + \delta)}\,dt.
+$$
+
+Subtracting this from $\delta = \int_0^\infty \frac{\delta}{(1+t)^2}\,dt = \int_0^\infty \frac{\delta t}{(1+t)(t^2 + t)}\,dt$ yields the nonnegative deficit integral
+
+$$
+\delta - Q(A) = \int_0^\infty \frac{\delta^2}{(1+t)^2(t^2 + t + \delta)}\,dt \ge 0.
+$$
+
+For all $t \ge 0$ and $0 < \delta \le \frac{1}{4}$, the inequality $(1+t)(t^2 + t + \delta) = (t + \delta) + t^3 + 2t^2 + \delta t \ge t + \delta > 0$ gives the pointwise bound
+
+$$
+\frac{\delta^2}{(1+t)^2(t^2 + t + \delta)} \le \frac{\delta^2}{(1+t)(t+\delta)}.
+$$
+
+Since $0 < \delta \le \frac{1}{4}$ ensures $1 - \delta > 0$ and $1/\delta > 0$, integrating over $(0, \infty)$ yields
+
+$$
+\begin{aligned}
+0 \le \delta - Q(A) &\le \delta^2 \int_0^\infty \frac{dt}{(1+t)(t+\delta)} \\
+&= \frac{\delta^2\ln(1/\delta)}{1 - \delta}.
+\end{aligned}
+$$
+
+The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-ch34-trihedron-subentropy-and-kernel title="Equal-Mixture Subentropy and Near-Pure Application on the Minimal Trihedron"}
+**Epistemic status**: This example reuses the finite-dimensional determinant-integral definition of subentropy, pure-state vanishing, the qubit spectral formula, and the [near-pure qubit subentropy bound](#thm-ch34-qubit-subentropy-near-pure); the small-angle expansion for the equal-weight trihedron mixture and its geometric comparison remain explicit hand applications (not Lean-verified mappings).
+
+For any finite-dimensional positive semidefinite unit-trace density operator $\rho$, subentropy in natural-log units (`nats`) is defined by
+
+$$
+Q(\rho) = \int_0^\infty \left[\frac{t}{1+t} - \frac{1}{\det(I + \rho/t)}\right]dt.
+$$
+
+Although $Q$ differs from von Neumann entropy $S(\rho) = -\operatorname{Tr}(\rho\ln\rho)$ on mixed states, like $S$ it vanishes on every normalized rank-one pure state ($Q = 0$). For a single-qubit state $\rho = \frac{1}{2}(I + \mathbf{r}\cdot\boldsymbol{\sigma})$ of Bloch radius $r \in [0, 1]$, with eigenvalues $a = \frac{1+r}{2}$, $b = \frac{1-r}{2}$, and determinant $\delta = \det\rho = \frac{1-r^2}{4} \in [0, \frac{1}{4}]$, the spectral formula and its endpoints give
+
+$$
+q(r) := Q(\rho) = -\frac{a^2\ln a - b^2\ln b}{r} \quad (0 < r < 1),
+$$
+
+with $q(0) = \ln 2 - \frac{1}{2}$ and $q(1) = 0$. By the [near-pure qubit subentropy bound](#thm-ch34-qubit-subentropy-near-pure), $Q(\rho) = \delta + O(\delta^2|\ln\delta|)$ as $\delta \to 0^+$.
+
+Now mix the three vertex pure states of $\Delta\mathcal{T}_\epsilon$ equally into the mixed state $\bar{\rho} = \frac{1}{3}(\rho_A + \rho_B + \rho_C)$ (a globally coherent pure state still has $Q = 0$). From $\mathbf{A} = (\sin\epsilon, c, 0)$, $\mathbf{B} = (0, 1, 0)$, and $\mathbf{C} = (0, c, \sin\epsilon)$ ($c = \cos\epsilon$), the mean Bloch vector is $\bar{\mathbf{r}} = \frac{1}{3}(\sin\epsilon, 1 + 2c, \sin\epsilon)$, with squared radius and determinant
+
+$$
+\begin{aligned}
+r^2 &= \frac{3 + 4c + 2c^2}{9}, \\
+\delta &= \frac{1 - r^2}{4} = \frac{(1-c)(3+c)}{18} = \frac{\epsilon^2}{9} - \frac{5\epsilon^4}{216} + O(\epsilon^6).
+\end{aligned}
+$$
+
+Applying the near-pure expansion by hand yields the small-angle comparison between equal-mixture subentropy and closed-loop Berry phase:
+
+$$
+\begin{aligned}
+Q(\bar{\rho}) &= \frac{\epsilon^2}{9} + O(\epsilon^4|\ln\epsilon|), \\
+\gamma &= -\frac{1}{2}\Omega(\epsilon) = -\frac{\epsilon^2}{4} + O(\epsilon^4).
+\end{aligned}
+$$
+:::
+
+::: {.remark #rem-ch34-trihedron-subentropy-vs-berry-and-gram title="Geometric Phase, Mixed-State Subentropy, and Real vs. Complex Gram Determinants"}
+**Epistemic status**: Aside from the formal near-pure qubit bound above, the equal-mixture trihedron application, operational distinction, and real/complex linear-algebra comparisons in this remark remain hand derivations and standard linear-algebraic facts (not pinned as Lean theorems or physical mappings).
+
+1. **Geometric phase and mixed-state subentropy measure distinct operations**: Coherent parallel transport around the geodesic loop $\mathbf{A} \to \mathbf{B} \to \mathbf{C} \to \mathbf{A}$ preserves a rank-one pure state, so $Q = 0$ even though $\gamma = -\Omega/2 \neq 0$. Conversely, $Q(\bar{\rho}) \sim \epsilon^2/9$ measures spectral spread produced by discarding the vertex preparation label in the equal-weight ensemble. Reversing loop orientation flips the sign of $\gamma$ while leaving $\bar{\rho}$ and $Q$ unchanged, whereas varying the preparation weights alters $Q$ without changing $\Omega$. Thus $Q(\bar{\rho})/|\gamma| \to 4/9$ is specific to the equal-weight mixture rather than a universal proportionality between $Q$ and Berry phase.
+2. **Real 3D Bloch volume vs. 2D complex spinor Gram determinant**: The real Gram determinant $\det[(\mathbf{n}_a\cdot\mathbf{n}_b)_{a,b=A,B,C}] = \sin^4\epsilon > 0$ ($\epsilon \in (0, \frac{\pi}{2}]$) measures the parallelotope volume spanned by three unit vectors in $\mathbb{R}^3$. By contrast, the corresponding normalized spinors $|\psi_A\rangle, |\psi_B\rangle, |\psi_C\rangle$ lie in $\mathbb{C}^2$ and are therefore linearly dependent, forcing their $3\times 3$ complex Gram determinant to vanish identically: $\det[(\langle\psi_a|\psi_b\rangle)_{a,b=A,B,C}] = 0$ (matching $e_3(\bar{\rho}) = 0$). For a single qubit, $Q$ is fixed solely by $\delta = e_2$; higher-order complex Gram invariants enter $Q$ only in Hilbert-space dimension $d \ge 3$.
+:::
+
 The four-row table below summarizes the dual projections and invariants of $\Delta\mathcal{T}_\epsilon$:
 
 | Projection Slice / Scale Regime | Projected Geometric Appearance | Core Algebraic Invariant | Emergent Physical & Geometric Law |
