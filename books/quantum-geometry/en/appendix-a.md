@@ -10,4 +10,4 @@ Conventional quantum mechanics textbooks are written in the language of abstract
 
 - [A.1 Master Translation Dictionary Across All Ten Parts, Coda, and Appendices D–E](appendix-a-s01-master-dictionary.md)
 - [A.2 Ten-Part Geometric Translation Guide](appendix-a-s02-symbols-and-operators.md)
-- [A.3 Complete 94-Entry Verbatim Proposition and Thematic Synthesis Table (A01–A94)](appendix-a-s03-verbatim-ledger.md)
+- [A.3 Complete 97-Entry Verbatim Proposition and Thematic Synthesis Table (A01–A97)](appendix-a-s03-verbatim-ledger.md)

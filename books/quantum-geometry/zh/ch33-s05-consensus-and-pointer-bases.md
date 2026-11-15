@@ -83,6 +83,70 @@ $$
 
 这一公式一举照亮了“共识决定去相干方向”的定量机制：当全体正权重观察者达成**完全共线共识**（$\lambda_1 = 1,\; \lambda_2 = \lambda_3 = 0,\; \kappa = 1$）时，沿共识指针轴 $\mathbf{e}_{\mathrm{ptr}}$ 的纵向极化衰减率为 $1 - \lambda_1 = 0$，有限信道与连续极限均严格给出 $\Gamma_\parallel = 1$（指针布居数分毫无损），而垂直于指针轴的横向相干圆盘在有限对齐信道下精确按 $\Gamma_{\perp,2} = \Gamma_{\perp,3} = (\cos\alpha)^N$ 指数塌缩（小 $\alpha$ 时渐近逼近 $e^{-\frac{1}{2}N\alpha^2}$，例如 $\alpha = 0.4, N = 16$ 时有限值为 $(\cos 0.4)^{16} \approx 0.2683$，连续近似为 $e^{-1.28} \approx 0.2780$，二者不得在有限 $\alpha$ 下直接画等号）；若观察者仅达成部分共识（$\lambda_2 < \lambda_1 < 1$），长时间下三模皆向最大混态 $\frac{1}{2}I_2$ 衰减，但纵向对横向的相对存活比按 $e^{t(\lambda_1 - \lambda_2)}$ 指数拉开，使主本征线涌现为有限时间内的准稳定指针轴。
 
+::: {.remark #rem-ch33-ordered-history-coverage-loss title="同一有限有序历程的初始覆盖量与损失界（手工推导，未形式化）"}
+有限有序乘积虽然不能由汇总共识张量重建，却仍可直接从本节的投影分解、正交勾股恒等式与有限 Cauchy–Schwarz 不等式得到一个覆盖量与损失的比较。固定任意整数 $L \ge 1$、一条实际实现的有序历程 $\{(\mathbf{n}_j,\alpha_j)\}_{j=1}^L$，其中 $\|\mathbf{n}_j\|=1$、$\alpha_j\in[0,\pi/2]$，以及任意初始向量 $\mathbf{r}\in\mathbb{R}^3$。记
+
+$$
+\begin{aligned}
+c_j&=\cos\alpha_j\in[0,1], & a_j&=1-c_j,\\
+P_j&=\mathbf{n}_j\mathbf{n}_j^{\mathsf{T}}, & Q_j&=I_3-P_j,\\
+\mathbf{x}_0&=\mathbf{r}, & \mathbf{x}_j&=(P_j+c_jQ_j)\mathbf{x}_{j-1}\quad(1\le j\le L).
+\end{aligned}
+$$
+
+这里 $P_j$ 与 $Q_j$ 分别是轴线及其正交补的正交投影，范数均为欧氏范数。定义**初始覆盖量**与**窗口损失**
+
+$$
+\begin{aligned}
+C_L(\mathbf{r})&:=\sum_{j=1}^L a_j\|Q_j\mathbf{r}\|^2,\\
+D_L(\mathbf{r})&:=\|\mathbf{r}\|^2-\|\mathbf{x}_L\|^2.
+\end{aligned}
+$$
+
+覆盖量把这条历程中的每根轴都作用于同一个初始向量；损失则沿这条历程实际产生的中间向量计算。两者满足
+
+$$
+C_L(\mathbf{r})\;\le\;\frac{L(L+1)}{2}\,D_L(\mathbf{r}).
+$$
+
+逐步推导如下。由 $P_i\mathbf{x}_{i-1}\perp Q_i\mathbf{x}_{i-1}$，保留的纵向部分在范数平方相减时消去，故每步损失 $d_i$ 与位移满足
+
+$$
+\begin{aligned}
+d_i&:=\|\mathbf{x}_{i-1}\|^2-\|\mathbf{x}_i\|^2
+     =(1-c_i^2)\|Q_i\mathbf{x}_{i-1}\|^2\ge0,\\
+\mathbf{x}_{i-1}-\mathbf{x}_i&=(1-c_i)Q_i\mathbf{x}_{i-1},\\
+\|\mathbf{x}_{i-1}-\mathbf{x}_i\|^2
+     &=(1-c_i)^2\|Q_i\mathbf{x}_{i-1}\|^2\le d_i,\\
+\sum_{i=1}^L d_i&=D_L(\mathbf{r}).
+\end{aligned}
+$$
+
+其中不等式用到 $(1-c_i)^2\le1-c_i^2$；最后一行沿同一历程裂项相消。现在固定 $1\le j\le L$，令 $\mathbf{v}_i=Q_j(\mathbf{x}_{i-1}-\mathbf{x}_i)$（$1\le i<j$），并令 $\mathbf{v}_j=Q_j\mathbf{x}_{j-1}$。投影的线性性与此前缀的裂项相消给出
+
+$$
+\sum_{i=1}^j\mathbf{v}_i
+=Q_j\left(\sum_{i=1}^{j-1}(\mathbf{x}_{i-1}-\mathbf{x}_i)+\mathbf{x}_{j-1}\right)
+=Q_j\mathbf{r}.
+$$
+
+对 $i<j$，由正交投影不增范数及 $0\le a_j\le1$，有 $a_j\|\mathbf{v}_i\|^2\le\|\mathbf{x}_{i-1}-\mathbf{x}_i\|^2\le d_i$；末项则由 $a_j=1-c_j\le1-c_j^2$ 得 $a_j\|\mathbf{v}_j\|^2\le d_j$。于是三角不等式与有限 Cauchy–Schwarz 不等式给出
+
+$$
+\begin{aligned}
+a_j\|Q_j\mathbf{r}\|^2
+&\le a_j\left(\sum_{i=1}^j\|\mathbf{v}_i\|\right)^2\\
+&\le j\sum_{i=1}^j a_j\|\mathbf{v}_i\|^2
+\le j\sum_{i=1}^j d_i
+\le jD_L(\mathbf{r}).
+\end{aligned}
+$$
+
+再对 $j$ 求和，并用 $\sum_{j=1}^L j=L(L+1)/2$，便得到所述三角形系数的界。若对所考察的初始向量已有相对覆盖下界 $C_L(\mathbf{r})\ge\gamma\|\mathbf{r}\|^2$（$\gamma>0$），则**同一有限窗口**必有 $D_L(\mathbf{r})\ge\frac{2\gamma}{L(L+1)}\|\mathbf{r}\|^2$；非零初始向量因此有严格正的损失。这并不自动提供后续窗口的覆盖下界，也不把这一实际有序历程等同于独立同分布抽样的系综平均、汇总张量的谱衰减或弱耦合连续极限。
+
+整个推导没有除以 $a_j$、$c_j$ 或向量范数，也不要求轴互异、因子对易、严格衰减或正的覆盖下界才能成立。因此 $L=1$、$\alpha_j=0$ 或 $\pi/2$、重复或共线轴以及 $\mathbf{r}=0$ 均包括在内。它在上述线性模型中对所有 $\mathbf{r}\in\mathbb{R}^3$ 成立；只有 $\|\mathbf{r}\|\le1$ 才对应物理密度态，$D_L$ 是范数平方损失，不是熵产或现实测量的实验证据。此处完整推论仅为手工推导，尚未作精确 Lean 陈述的编译、内核验证或公理闭包检查；相邻冻结定理不构成这条完整推论的形式化验证。系数来自上述有限求和，不主张其最优性。
+:::
+
 更进一步，在完全捏合极限 $\alpha = \frac{\pi}{2}$ 下（经幺正基变换将指针轴旋至计算基），被删去的横向圆盘分量 $\rho_{+-} = \frac{1}{2}(r_2 - i r_3)$ 恰是希尔伯特—施密特勾股分解中的正交余项，单步全捏合的冯·诺依曼熵增精确等于量子相对熵，而后续重复同轴捏合因幂等律（[@thm-ch33-observer-pinching-and-memory-spectrum] 第 1 款）熵增归零，最终不动点恰由跨记录块相干归零刻画：
 
 ::: {.theorem #thm-ch33-consensus-pinching-and-fixed-points title="单比特捏合希尔伯特—施密特勾股恒等式、相干删除熵产恒等式与未读记录不动点判据" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity D5/S3/Observer/Conditioning.unreadState_fixed_iff"}

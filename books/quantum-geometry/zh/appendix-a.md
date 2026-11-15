@@ -10,4 +10,4 @@
 
 - [A.1 全书概念与形式化锚点总对照表](appendix-a-s01-master-dictionary.md)
 - [A.2 十部曲核心符号与算子速查指南](appendix-a-s02-symbols-and-operators.md)
-- [A.3 全书 94 条原始思想命题与主题综合总台账（A01–A94）](appendix-a-s03-verbatim-ledger.md)
+- [A.3 全书 97 条原始思想命题与主题综合总台账（A01–A97）](appendix-a-s03-verbatim-ledger.md)

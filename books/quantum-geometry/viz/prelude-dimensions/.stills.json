@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "901caccd977073193eb4977a895bf91a462495b6e59d11538a46ede82be69592"
+    },
+    "fig-head-on.zh.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "083ba006c22ede3b4e577a4361780f3d53ebd632a4c6a02f1669c4309a7de69a"
+    },
+    "fig-shadow.zh.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "d3aba512f68ea16a9354ec5b80274a162b3ab8ad3d9973c8ed0b163c4d7e6c64"
+    },
+    "fig-compare.zh.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "d523fe6d06a08ad137c2468a07eaf9d1ab6aff5874d67c3716c4d50c5deebf5f"
+    },
+    "fig-latitude.zh.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "1583ab7e41429f87076a1d511bb04c913b4339134c139d43b05931c46239bebc"
+    },
+    "fig-normal.zh.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "360a242136129608dbce48fa1c4158a5417a637b5969c13c7b2d1ae8f4f993ca"
+    },
+    "fig-average.zh.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "19edd8b62e15069f4b2cd3f5a9a9f05a5af36e2afa54682752b0fab38aa1c4f9"
+    },
+    "fig-cosine.zh.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "d5d2a03f366be3825d0a6ed3e94d09050343d41369032498885acbe2eb982c6b"
+    },
+    "fig-head-on.en.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "78d1e848a857553613d24d76f310e24858606c67f92e329d8be3f34cdcc10a06"
+    },
+    "fig-shadow.en.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "2dfe4a0296ab8b7d80fcb157c4bd7bb213383d07c44e722fd22c9cc9269563f2"
+    },
+    "fig-compare.en.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "17bf271e9dab45a1c2840206aade99eab87bc151ff2295abdde2a0b4e655515e"
+    },
+    "fig-latitude.en.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "f3d3c6141c89d89fab5ea6a9b26c0a8e064634bd2c7792127d2118e2db4c51b8"
+    },
+    "fig-normal.en.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "70ce12bd9bee586b8baa64b22afd7ef9494847cf0109b3089f35b229101917a6"
+    },
+    "fig-average.en.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "776e19ab6d32673fc03284c27e96d0c3a9295f844bfba5f634c8a04739f11408"
+    },
+    "fig-cosine.en.jpg": {
+      "input": "e152087e15056b4dfff4ef0703d50255b20fdf790d53695803782f6da9c4ab73",
+      "output": "cdf4b3f1675fd18a867a6a78c18c616e77449b960057a3b676f62a44b0691567"
+    }
+  }
+}

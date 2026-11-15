@@ -162,6 +162,96 @@ $$
 3. **本书几何诠释与物理模型（`MODEL`）**：将“正交一次”与“正交两次”诠释为同一枚球面直角三面角原胞 $\Delta\mathcal{T}_\epsilon$ 的双重正交投影、引入有限带宽最小分辨步长 $\epsilon_{\min} > 0$ 与最小曲率量子 $\Omega_{\min} \approx \frac{1}{2}\epsilon_{\min}^2$，以及将离散弧面体拼砖对接至光滑球面近似和三阶劳齐分形扭率，均属本书原创理论模型（`MODEL`）。
 :::
 
+::: {.theorem #thm-ch34-qubit-subentropy-near-pure title="单比特近纯态 subentropy 核比较上界" lean="D5/S3/Quantum/Subentropy/QubitBoundary.qubit_subentropy_near_pure"}
+设 $A \in M_2(\mathbb{C})$ 为任意 $2\times 2$ 复半正定且迹为一的矩阵（$A \succeq 0$，$\operatorname{Tr}(A) = 1$），记 $\delta := \operatorname{Re}(\det A)$，并记 $Q(A)$ 为自然对数单位下的矩阵 subentropy。则：
+
+1. $0 \le \delta \le \frac{1}{4}$；
+2. 若 $\delta = 0$，则 $Q(A) = 0$；
+3. 若 $0 < \delta$，则
+
+$$
+0 \le \delta - Q(A) \le \frac{\delta^2\ln(1/\delta)}{1 - \delta}.
+$$
+:::
+
+::: proof
+由 $A \in M_2(\mathbb{C})$ 半正定且 $\operatorname{Tr}(A) = 1$，$A$ 为厄米矩阵且两个特征值 $\lambda_1, \lambda_2 \ge 0$ 满足 $\lambda_1 + \lambda_2 = 1$，从而 $\det A = \lambda_1\lambda_2 \in \mathbb{R}$，且 $\delta = \operatorname{Re}(\det A) = \lambda_1(1 - \lambda_1) \in [0, \frac{1}{4}]$。
+
+当 $\delta = 0$ 时，必有一个特征值为 $0$、另一个为 $1$，$A$ 为秩一投影算符，此时 $\det(I + A/t) = 1 + t^{-1}$，被积函数 $\frac{t}{1+t} - \frac{1}{\det(I + A/t)}$ 恒为零，故 $Q(A) = 0$（此处不涉及对 $\delta = 0$ 取倒数或对数）。
+
+当 $0 < \delta \le \frac{1}{4}$ 时，由特征多项式得 $\det(I + A/t) = 1 + t^{-1} + \delta t^{-2}$，代入矩阵 subentropy 积分定义化为
+
+$$
+Q(A) = \int_0^\infty \frac{\delta t}{(1+t)(t^2 + t + \delta)}\,dt.
+$$
+
+利用 $\delta = \int_0^\infty \frac{\delta}{(1+t)^2}\,dt = \int_0^\infty \frac{\delta t}{(1+t)(t^2 + t)}\,dt$ 相减，得非负亏格积分表示
+
+$$
+\delta - Q(A) = \int_0^\infty \frac{\delta^2}{(1+t)^2(t^2 + t + \delta)}\,dt \ge 0.
+$$
+
+对一切 $t \ge 0$ 与 $0 < \delta \le \frac{1}{4}$，恒有 $(1+t)(t^2 + t + \delta) = (t + \delta) + t^3 + 2t^2 + \delta t \ge t + \delta > 0$，从而得到逐点控制
+
+$$
+\frac{\delta^2}{(1+t)^2(t^2 + t + \delta)} \le \frac{\delta^2}{(1+t)(t+\delta)}.
+$$
+
+由于 $0 < \delta \le \frac{1}{4}$ 保证 $1 - \delta > 0$ 且 $1/\delta > 0$，对 $(0, \infty)$ 积分即得
+
+$$
+\begin{aligned}
+0 \le \delta - Q(A) &\le \delta^2 \int_0^\infty \frac{dt}{(1+t)(t+\delta)} \\
+&= \frac{\delta^2\ln(1/\delta)}{1 - \delta}.
+\end{aligned}
+$$
+
+完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-ch34-trihedron-subentropy-and-kernel title="极小三角弧面体的等权混态 subentropy 与近纯态应用"}
+**证据分级**：本例复用既有有限维 subentropy 行列式积分定义、纯态归零律、单比特谱公式及[单比特近纯态核比较定理](#thm-ch34-qubit-subentropy-near-pure)；三面角原胞等权混合的小角展开与其几何对照仍为显式手工应用（未作为 Lean 映射锁定）。
+
+对任意有限维半正定、迹为一的密度算符 $\rho$，自然对数单位下的 subentropy 定义为
+
+$$
+Q(\rho) = \int_0^\infty \left[\frac{t}{1+t} - \frac{1}{\det(I + \rho/t)}\right]dt.
+$$
+
+它与冯·诺依曼熵 $S(\rho) = -\operatorname{Tr}(\rho\ln\rho)$ 不同，而在一切归一化秩一纯态上恒为零（$Q = 0$）。对于布洛赫半径 $r \in [0, 1]$ 的单比特态 $\rho = \frac{1}{2}(I + \mathbf{r}\cdot\boldsymbol{\sigma})$，设本征值为 $a = \frac{1+r}{2}$、$b = \frac{1-r}{2}$，行列式为 $\delta = \det\rho = \frac{1-r^2}{4} \in [0, \frac{1}{4}]$，则既有谱公式及端点延拓给出
+
+$$
+q(r) := Q(\rho) = -\frac{a^2\ln a - b^2\ln b}{r} \quad (0 < r < 1),
+$$
+
+且 $q(0) = \ln 2 - \frac{1}{2}$、$q(1) = 0$。由[单比特近纯态核比较定理](#thm-ch34-qubit-subentropy-near-pure)可知，在近纯态极限 $\delta \to 0^+$ 下成立渐近展开 $Q(\rho) = \delta + O(\delta^2|\ln\delta|)$。
+
+现将本节直角三面角原胞 $\Delta\mathcal{T}_\epsilon$ 的三个顶点纯态等权混合为混态 $\bar{\rho} = \frac{1}{3}(\rho_A + \rho_B + \rho_C)$（全局相干纯态仍满足 $Q = 0$）。由 $\mathbf{A} = (\sin\epsilon, c, 0)$、$\mathbf{B} = (0, 1, 0)$、$\mathbf{C} = (0, c, \sin\epsilon)$（$c = \cos\epsilon$），平均布洛赫矢为 $\bar{\mathbf{r}} = \frac{1}{3}(\sin\epsilon, 1 + 2c, \sin\epsilon)$，其半径平方与行列式分别为
+
+$$
+\begin{aligned}
+r^2 &= \frac{3 + 4c + 2c^2}{9}, \\
+\delta &= \frac{1 - r^2}{4} = \frac{(1-c)(3+c)}{18} = \frac{\epsilon^2}{9} - \frac{5\epsilon^4}{216} + O(\epsilon^6).
+\end{aligned}
+$$
+
+手工代入上述近纯态渐近展开，即得等权原胞混合态 subentropy 与闭环贝里相位的小角对比：
+
+$$
+\begin{aligned}
+Q(\bar{\rho}) &= \frac{\epsilon^2}{9} + O(\epsilon^4|\ln\epsilon|), \\
+\gamma &= -\frac{1}{2}\Omega(\epsilon) = -\frac{\epsilon^2}{4} + O(\epsilon^4).
+\end{aligned}
+$$
+:::
+
+::: {.remark #rem-ch34-trihedron-subentropy-vs-berry-and-gram title="闭环几何相位、混态 subentropy 与实／复格拉姆行列式"}
+**证据分级**：除上文已核验的单比特近纯态上界定理外，本注记所讨论的三面角等权混合应用、操作含义区分与实／复线性代数对照仍为手工推导与标准线性代数事实（未作为新增 Lean 定理或物理映射锁定）。
+
+1. **几何相位与统计混态 subentropy 分属不同操作**：若系统沿测地三角形回路 $\mathbf{A} \to \mathbf{B} \to \mathbf{C} \to \mathbf{A}$ 作纯态相干平行移动，终态仍为归一化秩一纯态，因此 $Q = 0$ 而几何相位为 $\gamma = -\Omega/2 \neq 0$。反之，等权混合态的 $Q(\bar{\rho}) \sim \epsilon^2/9$ 源自舍弃顶点制备标签后的统计混态谱收缩。倒转闭环方向会使 $\gamma$ 反号而保持 $\bar{\rho}$ 与 $Q$ 不变；调整三个顶点的制备权重会改变 $Q$ 而不改变立体角 $\Omega$。因此，小角下的比值 $Q(\bar{\rho})/|\gamma| \to 4/9$ 仅刻画等权混合这一特定态制备，并不存在普适的 $Q$ 与贝里相位换算律。
+2. **三维实布洛赫体积与二维复旋量格拉姆之别**：前文针对三根实单位布洛赫矢算得实格拉姆行列式 $\det[(\mathbf{n}_a\cdot\mathbf{n}_b)_{a,b=A,B,C}] = \sin^4\epsilon > 0$（$\epsilon \in (0, \frac{\pi}{2}]$），它度量 $\mathbb{R}^3$ 中三矢张成的体积；而对应的三个归一化旋量 $|\psi_A\rangle, |\psi_B\rangle, |\psi_C\rangle$ 同处二维复希尔伯特空间 $\mathbb{C}^2$ 中而必然线性相关，故其 $3\times 3$ 复内积格拉姆行列式恒为零：$\det[(\langle\psi_a|\psi_b\rangle)_{a,b=A,B,C}] = 0$（反映混态的三阶对称不变量 $e_3(\bar{\rho}) = 0$）。在单比特空间中 $Q$ 完全由二阶量 $\delta = e_2$ 决定；只有当态空间维数 $d \ge 3$ 时，更高阶的复内积格拉姆结构才会影响 $Q$。
+:::
+
 下表将极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的四重视角与涌现定律收拢为一张对照卡片：
 
 | 观察切面 / 极限尺度 | 投影后的几何表象 | 核心代数不变量 | 涌现的物理与几何定律 |

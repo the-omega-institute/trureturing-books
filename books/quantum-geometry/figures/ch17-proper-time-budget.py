@@ -11,11 +11,11 @@ import math
 SIZE = (480, 320)
 ALT = {
     "zh": "一张曲线图：横轴是一段位移的空间长度 |Δx|，从 0 到 5；纵轴是它的固有时 Δτ。白色虚线是 Δt = 5 这条水平线。"
-          "青色的曲线 Δτ = √(25 − Δx²) 从左上角 (0, 5) 开始，处处在虚线之下，经过 (3, 4)，落到 (5, 0)。"
+          "青色的曲线 Δτ = √(25 − Δx²) 从左上角 (0, 5) 开始，处处不高于虚线，经过 (3, 4)，落到 (5, 0)。"
           "三个点分别标着：静止 Δτ = Δt = 5；例题第一段 (5, 3)，Δτ = 4；光锥上 Δτ = 0。",
     "en": "A graph: the horizontal axis is the spatial length |Δx| of a segment, from 0 to 5; the vertical axis is its proper "
           "time Δτ. The white dashed line is the level Δt = 5. The cyan curve Δτ = √(25 − Δx²) starts at (0, 5) top left, stays "
-          "below the dashed line, passes (3, 4) and comes down to (5, 0). The three points read: at rest Δτ = Δt = 5; the first "
+          "at or below the dashed line, passes (3, 4) and comes down to (5, 0). The three points read: at rest Δτ = Δt = 5; the first "
           "leg (5, 3) of the worked example, Δτ = 4; on the light cone Δτ = 0.",
 }
 

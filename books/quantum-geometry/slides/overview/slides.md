@@ -381,9 +381,9 @@ section: "第五部 · 图景"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 19 · three candidate cuts</p>
-  <h2 class="t">切断宽度三桥图只有<em>三道候选割</em></h2>
-  <img src="./img/ch19-three-cuts.zh.svg" alt="宽度三桥图上三道虚线割，最小割取三者中最小的。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="kicker">Chapter 19 · three source bounds</p>
+  <h2 class="t">源码采用的<em>三项割容量上界</em></h2>
+  <img src="./img/ch19-three-cuts.zh.svg" alt="宽度三桥图上的三道虚线表示源码采用的三项割容量上界；图中算例的最小割取三者中最小的。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">取 <Tex t="(a, b, c, d) = (2, 3, 2, 3)" />：横切腿 <Tex t="a, d" /> 容量 <Tex t="ad = 6" />，横切腿 <Tex t="b, c" /> 容量 <Tex t="bc = 6" />，斜切的一道更大；最小割取三者中最小的。</p>
 </div>
 <Source>第十九章 ch19-three-cuts</Source>
