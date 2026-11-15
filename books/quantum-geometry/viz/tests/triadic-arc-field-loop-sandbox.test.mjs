@@ -86,7 +86,7 @@ async function input(selector, value, p = page) {
   await settle(p);
 }
 async function pause(p = page) {
-  if ((await state(p)).playing) await p.click('#play');
+  await p.locator('#play').evaluate(button => { if (button.getAttribute('aria-pressed') === 'true') button.click(); });
   await settle(p);
 }
 async function pick(card, p = page) { await p.click(`[data-preset="${card}"]`); await settle(p); await pause(p); }
