@@ -83,6 +83,70 @@ with eigenvalues $(1, \cos\alpha, \cos\alpha)$: the component along $\mathbf{n}$
 
 This makes the emergence of a pointer direction quantitatively transparent: under **unanimous collinear consensus** ($\lambda_1 = 1,\; \lambda_2 = \lambda_3 = 0,\; \kappa = 1$), the longitudinal decay rate $1 - \lambda_1 = 0$ vanishes so both finite and limiting channels give $\Gamma_\parallel = 1$ exactly (pointer populations survive untouched), while the transverse coherence disk contracts by $\Gamma_{\perp,2} = \Gamma_{\perp,3} = (\cos\alpha)^N$ in the finite channel and $\exp(-\frac{1}{2}N\alpha^2)$ in the weak limit (e.g., at $\alpha = 0.4, N = 16$: $(\cos 0.4)^{16} \approx 0.2683$ vs. $e^{-1.28} \approx 0.2780$, agreeing asymptotically for small $\alpha$ rather than identically at finite $\alpha$); under partial consensus ($\lambda_2 < \lambda_1 < 1$), all modes decay toward $\frac{1}{2}I_2$ at infinite time, yet longitudinal-to-transverse survival grows exponentially as $e^{t(\lambda_1 - \lambda_2)}$, singling out the leading eigenspace as a finite-time preferred pointer line.
 
+::: {.remark #rem-ch33-ordered-history-coverage-loss title="Initial Coverage and Loss Along the Same Finite Ordered History (Manual Derivation, Not Formalized)"}
+Although the aggregate consensus tensor does not reconstruct a finite ordered product, this section's projection decomposition, orthogonal Pythagorean identity, and finite Cauchy–Schwarz inequality directly yield a comparison between coverage and loss. Fix any integer $L\ge1$, any realized ordered history $\{(\mathbf{n}_j,\alpha_j)\}_{j=1}^L$ with $\|\mathbf{n}_j\|=1$ and $\alpha_j\in[0,\pi/2]$, and any initial vector $\mathbf{r}\in\mathbb{R}^3$. Write
+
+$$
+\begin{aligned}
+c_j&=\cos\alpha_j\in[0,1], & a_j&=1-c_j,\\
+P_j&=\mathbf{n}_j\mathbf{n}_j^{\mathsf{T}}, & Q_j&=I_3-P_j,\\
+\mathbf{x}_0&=\mathbf{r}, & \mathbf{x}_j&=(P_j+c_jQ_j)\mathbf{x}_{j-1}\quad(1\le j\le L).
+\end{aligned}
+$$
+
+Here $P_j$ and $Q_j$ are the orthogonal projections onto the axis and its orthogonal complement, respectively, and all norms are Euclidean. Define the **initial coverage** and **window loss** by
+
+$$
+\begin{aligned}
+C_L(\mathbf{r})&:=\sum_{j=1}^L a_j\|Q_j\mathbf{r}\|^2,\\
+D_L(\mathbf{r})&:=\|\mathbf{r}\|^2-\|\mathbf{x}_L\|^2.
+\end{aligned}
+$$
+
+Coverage evaluates every axis in this history against the same initial vector; loss follows the intermediate vectors actually produced by that history. They satisfy
+
+$$
+C_L(\mathbf{r})\;\le\;\frac{L(L+1)}{2}\,D_L(\mathbf{r}).
+$$
+
+To derive this step by step, use $P_i\mathbf{x}_{i-1}\perp Q_i\mathbf{x}_{i-1}$: the preserved longitudinal contribution cancels when subtracting squared norms, so the loss $d_i$ and displacement at each step satisfy
+
+$$
+\begin{aligned}
+d_i&:=\|\mathbf{x}_{i-1}\|^2-\|\mathbf{x}_i\|^2
+     =(1-c_i^2)\|Q_i\mathbf{x}_{i-1}\|^2\ge0,\\
+\mathbf{x}_{i-1}-\mathbf{x}_i&=(1-c_i)Q_i\mathbf{x}_{i-1},\\
+\|\mathbf{x}_{i-1}-\mathbf{x}_i\|^2
+     &=(1-c_i)^2\|Q_i\mathbf{x}_{i-1}\|^2\le d_i,\\
+\sum_{i=1}^L d_i&=D_L(\mathbf{r}).
+\end{aligned}
+$$
+
+The inequality uses $(1-c_i)^2\le1-c_i^2$, and the final line telescopes along the same history. Now fix $1\le j\le L$, put $\mathbf{v}_i=Q_j(\mathbf{x}_{i-1}-\mathbf{x}_i)$ for $1\le i<j$, and put $\mathbf{v}_j=Q_j\mathbf{x}_{j-1}$. Linearity of the projection and telescoping over this prefix give
+
+$$
+\sum_{i=1}^j\mathbf{v}_i
+=Q_j\left(\sum_{i=1}^{j-1}(\mathbf{x}_{i-1}-\mathbf{x}_i)+\mathbf{x}_{j-1}\right)
+=Q_j\mathbf{r}.
+$$
+
+For $i<j$, contractivity of orthogonal projection and $0\le a_j\le1$ give $a_j\|\mathbf{v}_i\|^2\le\|\mathbf{x}_{i-1}-\mathbf{x}_i\|^2\le d_i$. For the terminal term, $a_j=1-c_j\le1-c_j^2$ gives $a_j\|\mathbf{v}_j\|^2\le d_j$. The triangle inequality and finite Cauchy–Schwarz inequality therefore yield
+
+$$
+\begin{aligned}
+a_j\|Q_j\mathbf{r}\|^2
+&\le a_j\left(\sum_{i=1}^j\|\mathbf{v}_i\|\right)^2\\
+&\le j\sum_{i=1}^j a_j\|\mathbf{v}_i\|^2
+\le j\sum_{i=1}^j d_i
+\le jD_L(\mathbf{r}).
+\end{aligned}
+$$
+
+Summing over $j$ and using $\sum_{j=1}^L j=L(L+1)/2$ gives the stated triangular coefficient. If the initial vector under consideration has a relative coverage lower bound $C_L(\mathbf{r})\ge\gamma\|\mathbf{r}\|^2$ with $\gamma>0$, then **the same finite window** has $D_L(\mathbf{r})\ge\frac{2\gamma}{L(L+1)}\|\mathbf{r}\|^2$, hence strictly positive loss for a nonzero initial vector. This supplies no automatic coverage lower bound for later windows and does not identify the realized ordered history with an ensemble mean under independent identically distributed sampling, spectral decay of the aggregate tensor, or a weak-coupling continuous limit.
+
+The derivation never divides by $a_j$, $c_j$, or a vector norm, and its validity requires neither distinct axes, commuting factors, strict damping, nor a positive coverage lower bound. It therefore includes $L=1$, $\alpha_j=0$ or $\pi/2$, repeated or collinear axes, and $\mathbf{r}=0$. It holds for every $\mathbf{r}\in\mathbb{R}^3$ within the stated linear model; only $\|\mathbf{r}\|\le1$ corresponds to a physical density state, and $D_L$ is squared-norm loss, not entropy production or experimental evidence about real measurements. This complete inference is a manual derivation: no exact Lean statement has been compiled, kernel-verified, or checked for axiom closure. The adjacent frozen theorems do not constitute formal verification of this full inference. The coefficient comes from the finite sum above; no optimality is claimed.
+:::
+
 At the full-pinching endpoint $\alpha = \frac{\pi}{2}$ (after rotating the pointer basis into the computational basis), the deleted transverse quadratures $\rho_{+-} = \frac{1}{2}(r_2 - i r_3)$ form the exact orthogonal remainder of Hilbert–Schmidt Pythagorean splitting, each full-pinching step produces von Neumann entropy equal to quantum relative entropy while subsequent aligned passes add zero entropy by idempotence ([@thm-ch33-observer-pinching-and-memory-spectrum], Conjunct 1), and fixed states are characterized by vanishing cross-record blocks:
 
 ::: {.theorem #thm-ch33-consensus-pinching-and-fixed-points title="Qubit Pinching Hilbert–Schmidt Pythagoras, Coherence-Deletion Entropy Identity, and Unread Record Fixed Points" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity D5/S3/Observer/Conditioning.unreadState_fixed_iff"}
