@@ -46,7 +46,7 @@ $$
 :::
 
 ::: proof
-在 $\operatorname{Fin} 2 \times \operatorname{Fin} 2$ 的四个矩阵元位置上直接展开乘法与共轭转置：$\operatorname{qubitZ}\cdot\operatorname{qubitX} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$，而 $\operatorname{qubitX}\cdot\operatorname{qubitZ} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -\operatorname{qubitZ}\cdot\operatorname{qubitX}$；两矩阵均为实对称矩阵且对角平方和为 $1$，故自伴性与平方归一性逐项成立。完整证明由 Lean 内核检查。
+在 $\operatorname{Fin} 2 \times \operatorname{Fin} 2$ 的四个矩阵元位置上直接展开乘法与共轭转置：$\operatorname{qubitZ}\cdot\operatorname{qubitX} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$，而 $\operatorname{qubitX}\cdot\operatorname{qubitZ} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -\operatorname{qubitZ}\cdot\operatorname{qubitX}$；固定矩阵 $\operatorname{qubitX}$ 与 $\operatorname{qubitZ}$ 均为实对称矩阵且各行构成标准正交组，故自伴性与平方归一性逐项成立。完整证明由 Lean 内核检查。
 :::
 
 请留意 [@lemma-qubit-clifford-pair] 在本章中的精确角色：它是狄拉克线性化（将平方和 $p^2 + m^2$ 因式分解为一阶矩阵算子平方）在最简二维空间上的**有限维代数起点**，而不是四维时空连续狄拉克偏微分方程的形式化。利用这对二阶反交换矩阵，我们可以立即手算出一个透明的二维手性耦合模型。
@@ -323,7 +323,7 @@ $$
 **拧一个顶点，相邻两条边的相位转遍所有值。** 单个方格上只拧顶点 1 一整圈（琥珀色的规范指针）：$e_0$ 与 $e_1$ 上的指针一个顺转、一个逆转，各自经过 $1, i, -1, -i$，淡白的弧是它们已经扫过的角度；方格中心品红的回路相位始终停在 $i$，表盘上没有弧。
 :::
 
-为什么单个边相位 $u(e)$ 本身不是物理可观测量？因为只要调整端点 $s(e)$ 与 $t(e)$ 的局部相位基准 $g$，就能把一条孤立边上的相位拧成任意值！要在整张图上建立一套统一的相位参照系，最自然的几何操作是在图上选定一棵**命名生成树**（`NamedSpanningTree`）$T \subseteq E$ 与一个参考根顶点 $r \in V$：
+为什么两端互异、均未锚定的单条开放边，其相位 $u(e)$ 本身不是物理可观测量？因为只要自由调整端点 $s(e)$ 与 $t(e)$ 的局部相位基准 $g$，就能把这条边上的相位拧成任意值！要在整张图上建立一套统一的相位参照系，最自然的几何操作是在图上选定一棵**命名生成树**（`NamedSpanningTree`）$T \subseteq E$ 与一个参考根顶点 $r \in V$：
 
 - 树边集合 $T$ 中的每条边都不是自环（$\forall e \in T,\; s(e) \neq t(e)$）；
 - 树边到无向边集合的映射 $e \mapsto \{s(e), t(e)\}$ 是单射（$T$ 内无平行重边）；
