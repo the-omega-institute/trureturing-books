@@ -50,7 +50,7 @@ $$
 
 We use $W$'s first $N-1$ letters to label bonds; sites $0$ and $N-1$ are not joined. The paper's digit tensors encode this single-particle site index. Cutting binary or Tribonacci address indices does not specify a real-space many-body bipartition. This also limits the analogy with the direct-encoder entanglement ranks in §39.5.7: it does not identify a uniform superposition of legal words with a Slater ground state of this hopping chain.
 
-**Finite open-prefix gap interface, unverified in this book.** Set
+**Spectral distance for the specified even open prefixes.** Set
 
 $$
 \begin{aligned}
@@ -59,15 +59,15 @@ h_{\rho,j}&=h_{N_j}\quad(j\ge1).
 \end{aligned}
 $$
 
-For every fixed $\rho\in(0,1)$, along these deterministic open prefixes with an even number of sites, does
+For every fixed $\rho\in(0,1)$, the paper argument below proves that these deterministic open prefixes with an even number of sites satisfy
 
 $$
-\delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}\longrightarrow0\qquad(j\to\infty)?
+\delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}\longrightarrow0\qquad(j\to\infty).
 $$
 
-The book's unverified status makes no claim of a new external conjecture. Below, [@ex-ch39-p2e-tribonacci-prefix-rate] gives a quantitative paper derivation of this limit; its complete assembly has not undergone an exact Lean check. Finite invertibility, membership of zero in an infinite-volume spectrum, finite-resolution density of states, or criticality in the sense of Anderson localization cannot directly replace this limit question with its specified boundaries and prefix sequence. Krebbekx–Moustaj–Dajani–Morais Smith, *Multifractal Properties of Tribonacci Chains* ([*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204), §§II.B.1, III.A.1, and V), use periodic approximants and perturbative renormalization to study physical spectra and criticality; we do not read this as the finite open-chain statement above for all $\rho\in(0,1)$.
+Below, [@ex-ch39-p2e-tribonacci-prefix-rate] gives a quantitative paper derivation of this limit and shows that convergence is uniform over $0<\rho<1$. The complete application remains a paper proof in this book, without a separate Lean verification badge or a claim to resolve a new external conjecture. Finite invertibility, membership of zero in an infinite-volume spectrum, finite-resolution density of states, or criticality in the sense of Anderson localization cannot directly replace this limit question with its specified boundaries and prefix sequence. Krebbekx–Moustaj–Dajani–Morais Smith, *Multifractal Properties of Tribonacci Chains* ([*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204), §§II.B.1, III.A.1, and V), use periodic approximants and perturbative renormalization to study physical spectra and criticality; we do not read this as the finite open-chain statement above for all $\rho\in(0,1)$.
 
-Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. If a particle-number-conserving Slater ground state is chosen, its actual occupied projector $P_{\mathrm{occ}}$ must be constructed and its correlation matrix compressed to a chosen set of sites $I$ as $\chi_I P_{\mathrm{occ}}\chi_I$, where $\chi_I$ projects onto those sites. Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. Even resolving this limit would address only a gap premise. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
+Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. If a particle-number-conserving Slater ground state is chosen, its actual occupied projector $P_{\mathrm{occ}}$ must be constructed and its correlation matrix compressed to a chosen set of sites $I$ as $\chi_I P_{\mathrm{occ}}\chi_I$, where $\chi_I$ projects onto those sites. Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. This limit addresses only the specified single-particle spectral distance. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
 :::
 
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
@@ -371,7 +371,7 @@ t_j,&j+1=i,\\
 \qquad 0\le i,j<2n.
 $$
 
-Its diagonal is zero, its last physical bond is $t_{2n-2}$, and there is no closing bond. When $n=1$, it consists of two sites joined only by $t_0$. Let $B=L(t,n)$ be the lower bidiagonal block above, so
+Its diagonal is zero, its last physical bond is $t_{2n-2}$, and there is no closing bond. When $n=1$, it consists of two sites joined only by $t_0$. The same entrywise formula defines a Hermitian matrix on $\mathbb C^{2n}$. A real orthonormal eigenbasis of the symmetric matrix is also a complex orthonormal eigenbasis, with the same real eigenvalues. The spectral-distance estimates below therefore apply to the complex open chain defined earlier. Let $B=L(t,n)$ be the lower bidiagonal block above, so
 
 $$
 \begin{aligned}
@@ -465,7 +465,21 @@ $$
 
 The constant $73728=128^2\cdot9/2$ is independent of both $j$ and $\rho$; no optimality is claimed. Every substitution iterate starts with $A$. The substitution erases no letter, and this initial letter adds at least one letter, so $L_{j+1}\ge L_j+1$ and $L_j\ge j+1$. Hence $N_j\ge L_j-1\ge j$, and $\delta_{\rho,j}\le73728/N_j\to0$. This tail conclusion needs no separate estimate for $j=1,2,3$.
 
-This is a paper application of the displayed window construction, full-inverse mass estimate and finite-dimensional spectral conversion, with no separate Lean verification badge. An exact check of the complete assembly must still cover the numerical window constants, actual word hoppings and shifted indices, full-inverse embedding and common unit vector; see the [formalization interface](https://github.com/the-omega-institute/trureturing/issues/30166). This finite open-chain spectral bound neither constructs a many-body ground state nor determines entanglement across a spatial cut or the dimension of the Rauzy boundary.
+The bound also gives uniform convergence in the hopping parameter. For any $\varepsilon>0$, take
+
+$$
+J=\max\left\{4,\left\lfloor\frac{73728}{\varepsilon}\right\rfloor+1\right\}.
+$$
+
+Since $N_j\ge j$, every $j\ge J$ and every $0<\rho<1$ satisfy
+
+$$
+0\le\delta_{\rho,j}\le\frac{73728}{N_j}\le\frac{73728}{j}<\varepsilon.
+$$
+
+Here $J$ is independent of $\rho$. The conclusion covers the entire open interval; it does not include the degenerate endpoint model at $\rho=0$.
+
+This is a paper application of the displayed window construction, full-inverse mass estimate and finite-dimensional spectral conversion, with no separate Lean verification badge; the parameter correspondence and formal sources are given in the [formalization interface](https://github.com/the-omega-institute/trureturing/issues/30166). This finite open-chain spectral bound neither constructs a many-body ground state nor determines entanglement across a spatial cut or the dimension of the Rauzy boundary.
 :::
 
 The example gives a paper $1/N_j$ bound and convergence to zero for the specified even open prefixes. Fractal entropy scaling still requires a separate argument involving physical states and spatial cuts; those parts of [@prob-ch39-p2e-fractal-horizon] remain open.
