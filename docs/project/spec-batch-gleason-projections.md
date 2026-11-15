@@ -6,7 +6,7 @@
 
 | 项目 | 精确值 |
 | --- | --- |
-| trureturing 提交 | `e526f0f5e3a1e84b05f05c0c009eab920bc3a06f`，与[书库锁文件](../../trureturing.lock.json)一致 |
+| trureturing 提交 | `ccaf12043b8eaa43581decc99f584528f3564871`，与[书库锁文件](../../trureturing.lock.json)一致 |
 | 源模块 | `D5/S3/Quantum/GleasonComplexRepresentation.lean` |
 | Lean 全名 | `Gleason.ProjectionPackage.gleason_representation` |
 | 消费端 GID | `D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation` |
@@ -15,7 +15,7 @@
 | 冻结种类 | `theorem` |
 | 状态 `statement_id` | `sha256:dd9874dc790ed4367402ce8fce42837ee0c9f1b2ff1ccb61b47c1769440a4326` |
 
-`statement_id` 是该模块冻结状态携带的身份，不能当作单独这条定理签名的散列。声明位于[固定源码第 899 行](https://github.com/the-omega-institute/trureturing/blob/e526f0f5e3a1e84b05f05c0c009eab920bc3a06f/D5/S3/Quantum/GleasonComplexRepresentation.lean#L899)，对应[固定冻结状态](https://github.com/the-omega-institute/trureturing/blob/e526f0f5e3a1e84b05f05c0c009eab920bc3a06f/Golden/Frozen/state/D5/S3/Quantum/GleasonComplexRepresentation.lean.json)。源码与冻结名称键共同确定消费者可引用的声明。
+`statement_id` 是该模块冻结状态携带的身份，不能当作单独这条定理签名的散列。声明位于[固定源码第 899 行](https://github.com/the-omega-institute/trureturing/blob/ccaf12043b8eaa43581decc99f584528f3564871/D5/S3/Quantum/GleasonComplexRepresentation.lean#L899)，对应[固定冻结状态](https://github.com/the-omega-institute/trureturing/blob/ccaf12043b8eaa43581decc99f584528f3564871/Golden/Frozen/state/D5/S3/Quantum/GleasonComplexRepresentation.lean.json)。源码与冻结名称键共同确定消费者可引用的声明。
 
 当前锁文件有 **549 条声明引用**，尚无上述 GID；中英文书稿也尚无该定理的 `lean` 引用。钉到包含定理的提交，不等于已经把它纳入书稿的验证账本。后续正文新增引用后，须按[项目规则](../../PROJECT.md)通过 `./tbook pin --refresh` 解析，并同步相关声明地图与图件；本规格不改变锁文件或既有环境 ID。
 
@@ -34,7 +34,7 @@ end Gleason
 
 这里唯一的外层隐式参数是 `{N : ℕ}`；没有另外的类型类前提，也没有待提供的实三维核心引理、连续性或可测性假设。源码中的条件版 `gleason_representation_of_core` 接收 `hcore : CoreLemma`，但消费端目标是上面的无此参数版本：同模块 `coreLemma` 已提供该核心结论。
 
-`ProjectionPackage` 来自同一提交的[投影几何源码](https://github.com/the-omega-institute/trureturing/blob/e526f0f5e3a1e84b05f05c0c009eab920bc3a06f/D5/S3/Quantum/GleasonFrameGeometry.lean#L102)，结构的全部字段如下。
+`ProjectionPackage` 来自同一提交的[投影几何源码](https://github.com/the-omega-institute/trureturing/blob/ccaf12043b8eaa43581decc99f584528f3564871/D5/S3/Quantum/GleasonFrameGeometry.lean#L102)，结构的全部字段如下。
 
 ```lean
 namespace Gleason
@@ -124,7 +124,7 @@ $$
 
 ## 6. 文献与源码归属
 
-数学文献锚为 Andrew M. Gleason，*Measures on the Closed Subspaces of a Hilbert Space*，*Journal of Mathematics and Mechanics* **6**，885–893（1957），[DOI: 10.1512/iumj.1957.6.56050](https://doi.org/10.1512/iumj.1957.6.56050)。固定源码与[归属说明](https://github.com/the-omega-institute/trureturing/blob/e526f0f5e3a1e84b05f05c0c009eab920bc3a06f/Library/notes/gleason1957measures.md)定位 Lemma 3.4 于 pp. 891–892、Theorem 3.5 于 p. 892、Theorem 4.1 于 pp. 892–893。后者是可分实或复希尔伯特空间上的正迹类表示文献结果，不能把其全部范围归给当前有限维 GID。
+数学文献锚为 Andrew M. Gleason，*Measures on the Closed Subspaces of a Hilbert Space*，*Journal of Mathematics and Mechanics* **6**，885–893（1957），[DOI: 10.1512/iumj.1957.6.56050](https://doi.org/10.1512/iumj.1957.6.56050)。固定源码与[归属说明](https://github.com/the-omega-institute/trureturing/blob/ccaf12043b8eaa43581decc99f584528f3564871/Library/notes/gleason1957measures.md)定位 Lemma 3.4 于 pp. 891–892、Theorem 3.5 于 p. 892、Theorem 4.1 于 pp. 892–893。后者是可分实或复希尔伯特空间上的正迹类表示文献结果，不能把其全部范围归给当前有限维 GID。
 
 源码头部署名 **Zayn Blore**，采用 **Apache-2.0**，改编自 [`zblore/csd-lean4@07e2273b0180e69b4cb8f84e9d2200faa19fe07d`](https://github.com/zblore/csd-lean4/tree/07e2273b0180e69b4cb8f84e9d2200faa19fe07d/CsdLean4/Mathlib/Analysis/InnerProductSpace/Gleason)。完整许可证保留在上述固定归属说明中；该说明记载此上游源码闭包没有 `NOTICE`。此处只记录来源与接口，不复制证明实现或许可证全文，也不作新的登记审计结论。
 

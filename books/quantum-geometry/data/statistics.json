@@ -3,7 +3,7 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 198,
+    "theorem": 199,
     "lemma": 34,
     "proposition": 45,
     "corollary": 31,
@@ -13,15 +13,15 @@
     "example": 123,
     "remark": 201,
     "proof": 305,
-    "lean_verified": 305,
+    "lean_verified": 306,
     "written_proof": 3,
-    "literature": 200
+    "literature": 198
   },
-  "total": 663,
+  "total": 664,
   "kinds": {
     "def": 201,
     "inductive": 11,
-    "theorem": 451
+    "theorem": 452
   },
   "groups": {
     "theorems": [
@@ -253,6 +253,7 @@
       "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_triangle",
       "D5/S3/Quantum/Foundation/LeastConfirmationGeneration.positive_dual_generation",
       "D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests",
+      "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation",
       "D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace",
       "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_blochMatrix",
       "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian",
@@ -16151,6 +16152,18 @@
         }
       ]
     },
+    "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation": {
+      "kind": "theorem",
+      "name": "Gleason.ProjectionPackage.gleason_representation",
+      "citations": [
+        {
+          "file": "ch02-born-rule.md",
+          "line": 464,
+          "id": "thm-gleason-finite-projection",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace": {
       "kind": "theorem",
       "name": "D5.S3.Quantum.Information.ActualPureQubitCostInfimum.blochMatrix_trace",
@@ -22170,7 +22183,8 @@
         "D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_trace_unique",
         "D5/S3/Quantum/Foundation/LeastConfirmationGeneration.ConfirmationSystem",
         "D5/S3/Quantum/Foundation/LeastConfirmationGeneration.Positive",
-        "D5/S3/Quantum/Foundation/LeastConfirmationGeneration.positive_dual_generation"
+        "D5/S3/Quantum/Foundation/LeastConfirmationGeneration.positive_dual_generation",
+        "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation"
       ],
       "inline": [
         "D5/S3/Observer/Conditioning.IsRecordMeasurement",
