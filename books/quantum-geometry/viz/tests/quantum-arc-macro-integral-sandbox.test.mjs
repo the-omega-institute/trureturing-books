@@ -36,7 +36,7 @@ const GIDS = [
   'D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness',
   'D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity'
 ];
-const THEORY = ['zh', 'en'].map(lang => `../../${lang}/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-arc-and-macro-integral`);
+const THEORY = ['zh', 'en'].map(lang => `../../${lang}/ch34-s11-quantum-arcs-and-macro-integrals.html#sec-ch34-quantum-arc-and-macro-integral`);
 const sources = Object.fromEntries(['index.html', 'main.js', 'style.css'].map(file => [file, fs.readFileSync(path.join(DIR, file), 'utf8')]));
 const entry = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'visualizations.json'), 'utf8')).visualizations.find(v => v.id === ID);
 const near = (a, b, tol = 1e-11) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= tol;

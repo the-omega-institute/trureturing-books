@@ -1387,7 +1387,7 @@ EPUB、EPUBCheck 与 PDF 阅读尺度子集未完成：本次可用的命名系�
 
 ## 2026-11-13：第39章必要条件的英文对齐（F39-P01，待首次独立审查）
 
-输入 main `9f5f3d5637dcc4deedd8163bc22a4383d4491f5b`，pin `bb452a18f3e77a2c4e50864d2d7bce34fb73a040/dev`（551 条声明）。[英文 §39.5.7](../../books/quantum-geometry/en/ch39-observer-is-ontological-universe.md#sec-ch39-p2e-entanglement) 的秩 $K$ 说明仅将 `if and only if` 改为 `only if`，对齐权威中文的必要条件；冻结定理的联合存在性要求两页上界均至少为 1，单页条件不足以支撑原充要断言。独立枚举 `N=300, K=2, m_X=4, m_Y=12, b=1` 得 `M=(239,62)`、`c_X=(5,3)`、`c_Y=(233,144)`、`a=(0,2)`、`n=(144,0)`，故 `R_0=0, R_1=2`：虽 `1≤K≤R_1`，联合可达矩形为空。原算例复算得 `(R_0,R_1)=(6,5)`；中文、定理、GID、算例及媒体均保持原字节。
+输入 main `9f5f3d5637dcc4deedd8163bc22a4383d4491f5b`，pin `bb452a18f3e77a2c4e50864d2d7bce34fb73a040/dev`（551 条声明）。[英文 §39.5.7](../../books/quantum-geometry/en/ch39-s05-s07-cut-entanglement.md#sec-ch39-p2e-entanglement) 的秩 $K$ 说明仅将 `if and only if` 改为 `only if`，对齐权威中文的必要条件；冻结定理的联合存在性要求两页上界均至少为 1，单页条件不足以支撑原充要断言。独立枚举 `N=300, K=2, m_X=4, m_Y=12, b=1` 得 `M=(239,62)`、`c_X=(5,3)`、`c_Y=(233,144)`、`a=(0,2)`、`n=(144,0)`，故 `R_0=0, R_1=2`：虽 `1≤K≤R_1`，联合可达矩形为空。原算例复算得 `(R_0,R_1)=(6,5)`；中文、定理、GID、算例及媒体均保持原字节。
 
 本次证据限于该说明及相邻定理的源文、当前 pin 的相关完整声明／Frozen 绑定、静态枚举与字节／结构保全。一次正常 `./tbook check` 退出 0，**0 错误／9 条既有警告**（八条影片历史 `subject_commit` 与一条 `prelude-parts` 未引用图）。首次三席独立审查（INITIAL R1）、当前受影响 HTML／PDF／EPUB 构建与实际阅读、CI／合入／Pages 均待调用方完成；本次不增加完整单元批准，全 45 单元／90 语言行目标继续进行，最终整书导出／采纳保留 1 未用。
 

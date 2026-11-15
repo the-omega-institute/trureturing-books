@@ -49,10 +49,12 @@ def planned():
             vals[f'{kind}_{how}'] = cells[kind, how]
     grouped = {}
     first = {}
+    top_files = {ch['top']: ch['file'] for ch in data['chapters'] if ch['depth'] == 0}
+    roots = {ch['file']: top_files[ch['top']] for ch in data['chapters']}
     for ch in data['chapters']:
         for gid in set(ch['environment']) | set(ch['inline']):
             first.setdefault(gid, ch['top'])
-        if re.match(r'ch\d+-', ch['file']) or ch['file'] == 'coda.md':
+        if re.match(r'ch\d+-', roots[ch['file']]) or roots[ch['file']] == 'coda.md':
             grouped.setdefault(ch['top'], set()).update(g for g in ch['environment'] if decls[g]['kind'] == 'theorem')
     vals['chapter_total'] = sum(map(len, grouped.values()))
     vals['chapter_new'] = sum(first.get(g) == top for top, gids in grouped.items() for g in gids)
@@ -65,7 +67,7 @@ def planned():
                BOOK / 'data/statistics.json': json.dumps(data, ensure_ascii=False, indent=2) + '\n'}
 
     def loc(c, lang):
-        file = c['file']
+        file = roots.get(c['file'], c['file'])
         match = re.match(r'ch(\d+)-', file)
         if match:
             label = f'Ch {int(match[1])}'

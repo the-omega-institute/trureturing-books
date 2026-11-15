@@ -31,7 +31,7 @@ const GIDS = [
   'D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent',
   'D5/S3/Fourier/FinitePoisson.finite_poisson_summation'
 ];
-const THEORY = ['zh', 'en'].map(lang => `../../${lang}/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-lorentz-pseudoscalar-and-sm-octave`);
+const THEORY = ['zh', 'en'].map(lang => `../../${lang}/ch34-s14-lorentz-and-standard-model-octave.html#sec-ch34-lorentz-pseudoscalar-and-sm-octave`);
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const near = (a, b, eps = 1e-12) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= eps;
 const number = text => Number(text.replace(/−/g, '-'));

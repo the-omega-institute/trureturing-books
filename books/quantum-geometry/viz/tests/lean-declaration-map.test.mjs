@@ -89,6 +89,60 @@ const ledeSays = (lang, txt) => {
     && JSON.stringify(letters) === JSON.stringify(want) && txt.slice(close).includes(LABEL[lang][INDEX]);
 };
 
+// Each language's SUMMARY once more, as a tree of any depth: a link's depth is its indentation in steps of two spaces,
+// its parent the nearest link one step shallower. A top unit is known by the head of its title (序曲/Prelude, 第N章/
+// Chapter N, 终章/Coda, 附录 X/Appendix X); the coda counts as the chapter after the last one. A child page's title opens
+// with its full number, which must be its parent's number followed by its place among its siblings (4.1, 39.5.7, 40.1,
+// A.1), and its file must be its parent's stem followed by -sNN (ch39-s05-s07-…, coda-s01-…, appendix-a-s01-…). The
+// short name under a column and the name the page gives a unit come from this tree alone, never from the page.
+const CNUM = '零一二三四五六七八九十', cnNum = (n) => (n <= 10 ? CNUM[n] : n < 20 ? `十${CNUM[n - 10]}` : `${CNUM[Math.floor(n / 10)]}十${n % 10 ? CNUM[n % 10] : ''}`);
+const cnValue = (s) => { const k = s.indexOf('十'); return k < 0 ? CNUM.indexOf(s) : (k ? CNUM.indexOf(s[0]) : 1) * 10 + (k < s.length - 1 ? CNUM.indexOf(s[k + 1]) : 0); };
+const pad2 = (k) => String(k).padStart(2, '0');
+const TOP_HEAD = {
+  zh: [[/^序曲\s/, () => ['prelude', '0']], [/^第([一二三四五六七八九十]+)章\s/, (m) => ['chapter', String(cnValue(m[1]))]], [/^终章\s/, () => ['coda', null]], [/^附录 ([A-Z])\s/, (m) => ['appendix', m[1]]]],
+  en: [[/^Prelude\s/, () => ['prelude', '0']], [/^Chapter (\d+)\s/, (m) => ['chapter', String(+m[1])]], [/^Coda\s/, () => ['coda', null]], [/^Appendix ([A-Z])\s/, (m) => ['appendix', m[1]]]]
+};
+const NAMES = { prelude: () => ['序曲', 'Prelude'], chapter: (n) => [`第${cnNum(+n)}章`, `Chapter ${n}`], coda: () => ['终章', 'Coda'], appendix: (x) => [`附录 ${x}`, `Appendix ${x}`] };
+const TREE = {}, NODE = {};
+for (const lang of ['zh', 'en']) {
+  const raw = [], nodes = [], trail = [], bad = [], li = lang === 'zh' ? 0 : 1;
+  for (const line of fs.readFileSync(path.join(BOOK, lang, 'SUMMARY.md'), 'utf8').split('\n')) {
+    const m = /^( *)(?:-\s+)?\[(.*)\]\(([^)\s]+\.md)\)\s*$/.exec(line);
+    if (m) raw.push({ indent: m[1].length, title: m[2].trim(), file: m[3] });
+  }
+  const head = (title) => { for (const [re, f] of TOP_HEAD[lang]) { const m = re.exec(title); if (m) return f(m); } return [null, null]; };
+  const last = Math.max(...raw.filter((r) => !r.indent).map((r) => head(r.title)).filter(([k]) => k === 'chapter').map(([, n]) => +n));
+  for (const r of raw) {
+    const depth = r.indent / 2, parent = depth ? trail[depth - 1] : null;
+    if (!Number.isInteger(depth) || (depth && !parent)) { bad.push(`${r.file}: indented ${r.indent} spaces`); continue; }
+    const node = { file: r.file, title: r.title, depth, parent, children: [] };
+    if (!depth) {
+      const [kind, n] = head(r.title), num = kind === 'coda' ? String(last + 1) : n;
+      const stem = kind === 'chapter' ? `ch${pad2(+num)}` : kind === 'coda' ? 'coda' : kind === 'appendix' ? `appendix-${num.toLowerCase()}` : 'README';
+      Object.assign(node, { kind, num, stem, root: node });
+      if (!kind) bad.push(`${r.file}: a top unit whose title opens with no unit name`);
+      else if (kind === 'chapter' ? !r.file.startsWith(`${stem}-`) : r.file !== `${stem}.md`) bad.push(`${r.file}: not filed as ${stem}`);
+      node.short = kind === 'coda' ? ['终', 'Co'][li] : num;
+      node.name = kind ? NAMES[kind](num)[li] : null;
+      if (kind && !r.title.startsWith(`${node.name} `)) bad.push(`${r.file}: the title does not open with ${node.name}`);
+    } else {
+      const k = parent.children.length + 1, num = `${parent.num}.${k}`, stem = `${parent.stem}-s${pad2(k)}`, root = parent.root;
+      const rest = num.slice(root.num.length + 1);
+      Object.assign(node, { kind: 'section', num, stem, root, k, short: num });
+      node.name = root.kind === 'chapter' ? [`第${cnNum(+root.num)}章·${rest}`, `Section ${num}`][li]
+        : root.kind === 'coda' ? [`终章·${rest}`, `Coda ${num}`][li] : root.kind === 'appendix' ? [`附录 ${num}`, `Appendix ${num}`][li] : null;
+      if (!node.name) bad.push(`${r.file}: a child of ${root.file}, which has no number`);
+      if (!r.title.startsWith(`${num} `)) bad.push(`${r.file}: the title opens with ${r.title.split(' ')[0]}, not ${num} (child ${k} of ${parent.num})`);
+      if (!r.file.startsWith(`${stem}-`)) bad.push(`${r.file}: not filed as ${stem}-… (child ${k} of ${parent.file})`);
+      parent.children.push(node);
+    }
+    trail[depth] = node; trail.length = depth + 1;
+    nodes.push(node);
+  }
+  TREE[lang] = { nodes, bad };
+  NODE[lang] = Object.fromEntries(nodes.map((n) => [n.file, n]));
+}
+
 /* ---------- the page ---------- */
 const T = await session();
 const { check } = T;
@@ -100,6 +154,9 @@ const state = async () => { await settle(page); return page.evaluate(() => windo
 const seek = async (t) => { await page.evaluate((v) => window.LEANMAP_DEBUG.seek(v), t); return state(); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); return state(); };
 const NC = columns.length;
+// A pointer presses whole CSS pixels: Chromium truncates a fractional mouse coordinate, which at the 153 columns of a
+// phone (under 2 px each) can land on the next column. Press the whole pixel nearest the probe's point instead.
+const press = (p, xy) => p.mouse.click(Math.round(xy[0]), Math.round(xy[1]));
 
 check('page carries its id', (await page.evaluate(() => document.body.dataset.vizId)) === 'lean-declaration-map');
 
@@ -107,7 +164,7 @@ const mainSource = fs.readFileSync(path.join(BOOK, 'viz/lean-declaration-map/mai
 check('the coda group tries Coda & App. before the dot fallback',
   /roman = \[[^\n]*'·'\]\[p\]/.test(mainSource)
   && /const compact = [^\n]*'Coda & App\.'/.test(mainSource)
-  && /const lab = \[name, \.\.\.compact\]\.find\(fits\) \|\| roman;/.test(mainSource));
+  && /const lab = \[name, \.\.\.compact\]\.find\(fits\) \|\| roman\b/.test(mainSource));
 
 // the data block against the lock and the chapters
 const rows = await page.evaluate(() => window.LEANMAP_DEBUG.rows());
@@ -209,13 +266,13 @@ await page.click('[data-mode="env"]'); s = await state();
 check('“environments only” keeps the lean= citations of that chapter', JSON.stringify(s.focus) === JSON.stringify(citedBy('ch22-primes-euler-products-and-zeros.md', 'env')) && s.mode === 'env');
 await page.click('[data-mode="all"]');
 const foot = await page.evaluate((c) => window.LEANMAP_DEBUG.footAt(c), columns.indexOf('ch13-entanglement-and-chsh.md'));
-await page.mouse.click(foot[0], foot[1]); s = await state();
+await press(page, foot); s = await state();
 check('clicking the foot of a column looks back from that chapter', s.src === 'ch13-entanglement-and-chsh.md', String(s.src));
 const someDef = GIDS.find((g) => lock.declarations[g].kind === 'def' && truth[g].home === 'ch23-diophantine-definability.md');
 const at = await page.evaluate((g) => window.LEANMAP_DEBUG.cellAt(g), someDef);
-await page.mouse.click(at[0], at[1]); s = await state(); r = await ro();
+await press(page, at); s = await state(); r = await ro();
 check('clicking a cell chooses it and the readouts follow', s.sel === someDef && r.kind.includes('def') && r.serial === serialOf[someDef] && !r.kind.includes('theorem'), JSON.stringify([s.sel, r]));
-await page.mouse.click(at[0], at[1]); s = await state();
+await press(page, at); s = await state();
 check('clicking the chosen cell again lets it go', s.sel === null);
 await page.click('#rew'); s = await state();
 check('⏮ goes back to the prelude: nothing has landed', s.t === 0 && s.met === 0);
@@ -246,50 +303,121 @@ await pick('table28');
 check('English note of CH28-TABLE carries the same numbers', (await note()).includes(`cites ${a28.length} declarations`) && (await note()).includes(`${in46} of them land in Parts IV–VI`), await note());
 await page.click('[data-lang-set="zh"]');
 
-// the column names under the stage, read from the fillText calls on #cv and measured there: at the narrowest phone,
-// phone and desktop width, in both languages, with no column chosen and with section 30.4 chosen, no two names touch,
-// each stands at the foot of its own column and reads as derived here from the file name; both ends and every fifth
-// chapter keep their names, the coda-and-appendices group keeps at least two, and only the chosen column carries its
-// name, in full, in cyan
-const shortName = (f, en) => f === 'README.md' ? '0' : f === 'coda.md' ? (en ? 'Co' : '终') : f.startsWith('appendix-') ? f[9].toUpperCase()
-  : f.replace(/^ch(\d+)(?:-s(\d+))?-.*$/, (m, a, b) => (b ? `${+a}.${+b}` : String(+a)));
+// The names under the stage and under the strip, read from the fillText calls on #cv and #plot and measured there, at
+// the narrowest phone, a phone and a desktop width, in both languages, with no column chosen and with 30.4, 39.5.7,
+// 40.1 and A.1 chosen (a section, a section of a section, a section of the coda and one of an appendix):
+//   · each name is the short number the SUMMARY tree gives one column; its span holds that column's foot (on the strip:
+//     the tick after that column, where kit.plot snaps it to the pixel grid) and lies inside the canvas; only the
+//     chosen name may sit off its column's centre, and only it may be a section's number; no two names touch;
+//   · both ends keep their names; the chosen column shows its full number in cyan, the only cyan name;
+//   · the chapters give the direction (every tenth when nothing is chosen, otherwise at least three from ≤ 10 to ≥ 30),
+//     and the coda group keeps the coda, its first appendix and its last column when nothing is chosen, at least one
+//     name otherwise, and its part name 终… / Coda…;
+//   · a chapter, the coda or an appendix goes unnamed only where its name, measured in the same font and centred on its
+//     column, would come within 2 px of a drawn name: names are thinned by measured width, not by a fixed step;
+//   · every part is named once, over its own band, by its heading or its roman numeral, no two part names touching.
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+const PART_HEAD = Object.fromEntries(['zh', 'en'].map((lang) => [lang, fs.readFileSync(path.join(BOOK, lang, 'SUMMARY.md'), 'utf8').split('\n')
+  .filter((l) => l.startsWith('# ') && !l.startsWith('# Summary')).map((l) => l.slice(2).trim())]));
+const BANDS = [];
+columns.forEach((f, c) => { const p = partOf[f], b = BANDS[BANDS.length - 1]; if (p < 0) return; if (b && b.p === p) b.last = c; else BANDS.push({ p, first: c, last: c }); });
+const GROUP = BANDS[BANDS.length - 1];   // the coda and the appendices
+const SHORT_COL = Object.fromEntries(['zh', 'en'].map((lang) => [lang, new Map(columns.map((f, c) => [NODE[lang][f].short, c]))]));
+check('every column has a short name of its own in each language', ['zh', 'en'].every((lang) => SHORT_COL[lang].size === NC));
+const colOfNum = (num) => columns.findIndex((f) => NODE.zh[f].depth > 0 && NODE.zh[f].num === num);
+const CHOSEN = ['30.4', '39.5.7', '40.1', 'A.1'].map(colOfNum);
+check('the axis checks choose 30.4 (depth 2), 39.5.7 (depth 3), 40.1 (under the coda) and A.1 (under Appendix A)',
+  CHOSEN.every((c) => c >= 0) && JSON.stringify(CHOSEN.map((c) => NODE.zh[columns[c]].depth)) === '[1,2,1,1]'
+  && NODE.zh[columns[CHOSEN[2]]].root.kind === 'coda' && NODE.zh[columns[CHOSEN[3]]].root.kind === 'appendix', JSON.stringify(CHOSEN));
+const CODA = columns.findIndex((f) => NODE.zh[f].kind === 'coda'), APPX = columns.findIndex((f) => NODE.zh[f].kind === 'appendix');
+const TENS = columns.map((f, c) => c).filter((c) => NODE.zh[columns[c]].kind === 'chapter' && +NODE.zh[columns[c]].num % 10 === 0);
 await page.evaluate(() => {
-  const ctx = document.getElementById('cv').getContext('2d'), R = window.__axisRec = { on: false, texts: [] };
-  const orig = ctx.fillText;
-  ctx.fillText = function (text, x, y) {
-    if (R.on) { const m = this.getTransform(), k = devicePixelRatio; R.texts.push({ text: String(text), x: (m.a * x + m.e) / k, y: (m.d * y + m.f) / k, w: this.measureText(String(text)).width * m.a / k, align: this.textAlign, style: this.fillStyle }); }
-    return orig.apply(this, arguments);
-  };
+  const R = window.__axisRec = { on: false, texts: [] };
+  for (const id of ['cv', 'plot']) {
+    const ctx = document.getElementById(id).getContext('2d'), orig = ctx.fillText;
+    ctx.fillText = function (text, x, y) {
+      if (R.on) { const m = this.getTransform(), k = devicePixelRatio; R.texts.push({ id, text: String(text), x: (m.a * x + m.e) / k, y: (m.d * y + m.f) / k, w: this.measureText(String(text)).width * m.a / k, align: this.textAlign, font: this.font, style: this.fillStyle }); }
+      return orig.apply(this, arguments);
+    };
+  }
 });
-const axisNames = () => page.evaluate((n) => {
-  const R = window.__axisRec, b = document.getElementById('cv').getBoundingClientRect();
+const axisRead = () => page.evaluate((n) => {
+  const R = window.__axisRec, cv = document.getElementById('cv'), pl = document.getElementById('plot'), b = cv.getBoundingClientRect(), q = pl.getBoundingClientRect();
   R.texts = []; R.on = true; window.TRV.kit.flush(); R.on = false;
-  const feet = Array.from({ length: n }, (_, c) => window.LEANMAP_DEBUG.footAt(c).map((v, i) => v - (i ? b.top : b.left)));
   const norm = (v) => { const s = document.createElement('canvas').getContext('2d'); s.fillStyle = v; return s.fillStyle; };
-  return { names: R.texts.filter((t) => t.align === 'center' && Math.abs(t.y - feet[0][1]) <= 8).map((t) => ({ ...t, cyan: norm(t.style) === norm(window.TRV.palette.cyan) })), feet };
+  const feet = Array.from({ length: n }, (_, c) => window.LEANMAP_DEBUG.footAt(c)).map(([x, y]) => [x - b.left, y - b.top]);
+  const ticks = Array.from({ length: n + 1 }, (_, v) => window.LEANMAP_DEBUG.tickAt(v)).map(([x, y]) => [x - q.left, y - q.top]);
+  return { texts: R.texts.filter((t) => t.align === 'center').map((t) => ({ ...t, cyan: norm(t.style) === norm(window.TRV.palette.cyan) })), feet, ticks, W: cv.clientWidth, PW: pl.clientWidth };
 }, NC);
-const S304 = columns.indexOf('ch30-s04-navier-stokes.md'), groupFrom = columns.indexOf('coda.md');
+const measure = (font, list) => page.evaluate(([f, l]) => { const c = document.createElement('canvas').getContext('2d'); c.font = f; return l.map((s) => c.measureText(s).width); }, [font, list]);
+const touching = (list) => { const row = [...list].sort((p, q) => p.x - q.x); return row.slice(1).map((t, i) => [row[i], t]).filter(([p, q]) => (q.x - q.w / 2) - (p.x + p.w / 2) < 1).map(([p, q]) => `${p.text}|${q.text}`); };
+/** One row of names against the tree: at(c) is column c's anchor on that canvas, W its width, chosen a column or null. */
+async function axisAudit(lang, names, at, W, chosen) {
+  const bad = [], seen = new Map();
+  for (const t of names) {
+    const c = SHORT_COL[lang].get(t.text), l = t.x - t.w / 2, r = t.x + t.w / 2;
+    if (c == null || seen.has(c)) { bad.push(`${t.text}: ${c == null ? 'names no column' : 'drawn twice'}`); continue; }
+    seen.set(c, t);
+    const x = at(c), edge = l < 0.5 || r > W - 0.5;
+    if (!(l <= x - 0.5 && x + 0.5 <= r)) bad.push(`${t.text}: not over its column`);
+    else if (c !== chosen && !edge && Math.abs(t.x - x) >= 0.5) bad.push(`${t.text}: off its column's centre`);
+    if (l < -0.5 || r > W + 0.5) bad.push(`${t.text}: outside the canvas`);
+    if (NODE[lang][columns[c]].depth && c !== chosen) bad.push(`${t.text}: a section that is not chosen`);
+  }
+  const missing = columns.map((f, c) => c).filter((c) => !NODE[lang][columns[c]].depth && !seen.has(c));
+  const ws = names.length ? await measure(names[0].font, missing.map((c) => NODE[lang][columns[c]].short)) : missing.map(() => 0);
+  const roomy = missing.filter((c, i) => {
+    const w = ws[i], x = Math.min(Math.max(at(c), w / 2), W - w / 2);
+    return !names.some((t) => x - w / 2 < t.x + t.w / 2 + 2.01 && x + w / 2 > t.x - t.w / 2 - 2.01);
+  }).map((c) => NODE[lang][columns[c]].short);
+  return { seen, bad, touch: touching(names), roomy };
+}
+/** The part names: one per band, over it, the heading's first word(s) or the roman numeral (the last group: 终… / Coda…). */
+function partAudit(lang, parts, feet) {
+  const cw = feet[1][0] - feet[0][0], bad = [], named = new Map();
+  for (const t of parts) {
+    const b = BANDS.find((k) => t.x >= feet[k.first][0] - cw / 2 - 0.5 && t.x <= feet[k.last][0] + cw / 2 + 0.5);
+    if (!b) { bad.push(`${t.text}: over no part`); continue; }
+    if (named.has(b.p)) bad.push(`${t.text}: a second name of part ${b.p + 1}`);
+    named.set(b.p, t.text);
+    const head = PART_HEAD[lang][b.p], word = lang === 'zh' ? head.split(' ')[0] : head.split(' ').slice(0, 2).join(' ');
+    if (!(b === GROUP ? t.text.startsWith(lang === 'zh' ? '终' : 'Coda') : t.text === word || t.text === ROMAN[b.p])) bad.push(`${t.text}: not a name of part ${b.p + 1}`);
+  }
+  return { bad, touch: touching(parts), unnamed: BANDS.filter((b) => !named.has(b.p)).map((b) => b.p + 1), group: named.get(GROUP.p) };
+}
 const setSrc = (v) => page.evaluate((x) => { const el = document.getElementById('src'); el.value = String(x); el.dispatchEvent(new Event('input', { bubbles: true })); }, v);
 for (const [vw, vh] of [[334, 720], [390, 844], [1440, 900]]) {
   await page.setViewportSize({ width: vw, height: vh }); await settle(page, 60);
   for (const lang of ['zh', 'en']) {
     await page.click(`[data-lang-set="${lang}"]`);
-    for (const chosen of [null, S304]) {
+    for (const chosen of [null, ...CHOSEN]) {
       await setSrc(chosen == null ? -1 : chosen); await settle(page);
-      const { names, feet } = await axisNames(), at = {}, bad = [];
-      for (const t of names) {
-        const c = feet.findIndex((f) => Math.abs(f[0] - t.x) < 0.5);
-        if (c < 0 || t.text !== shortName(columns[c], lang === 'en') || at[c]) bad.push(t.text); else at[c] = t;
-      }
-      const row = [...names].sort((p, q) => p.x - q.x);
-      const touch = row.slice(1).map((t, i) => [row[i], t]).filter(([p, q]) => (q.x - q.w / 2) - (p.x + p.w / 2) < 1).map(([p, q]) => `${p.text}|${q.text}`);
-      const keep = [0, NC - 1, ...[5, 10, 15, 20, 25, 30, 35].map((k) => columns.findIndex((f) => f.startsWith(`ch${String(k).padStart(2, '0')}-`)))].filter((c) => c !== chosen && !at[c]);
-      const group = Object.keys(at).filter((c) => +c >= groupFrom).length;
+      const A = await axisRead(), footY = A.feet[0][1], short = chosen == null ? null : NODE[lang][columns[chosen]].short;
+      const names = A.texts.filter((t) => t.id === 'cv' && Math.abs(t.y - footY) <= 8), parts = A.texts.filter((t) => t.id === 'cv' && t.y - footY > 8 && t.y - footY <= 24);
+      const au = await axisAudit(lang, names, (c) => A.feet[c][0], A.W, chosen), pa = partAudit(lang, parts, A.feet);
+      const tag = `${vw}px ${lang}${chosen == null ? '' : `, ${short} chosen`}`;
+      check(`column names (${tag}): each is the short number of one column, over its foot and inside the stage; only the chosen one may be a section; none touching`,
+        names.length > 0 && !au.bad.length && !au.touch.length, JSON.stringify({ bad: au.bad, touch: au.touch }));
+      const chapters = [...au.seen.keys()].filter((c) => NODE.zh[columns[c]].kind === 'chapter').map((c) => +NODE.zh[columns[c]].num).sort((a, b) => a - b);
+      const group = [...au.seen.keys()].filter((c) => c >= GROUP.first).map((c) => NODE[lang][columns[c]].short);
+      const dir = chosen == null ? TENS.every((c) => au.seen.has(c)) : chapters.length >= 3 && chapters[0] <= 10 && chapters.at(-1) >= 30;
+      const nav = (chosen == null ? [CODA, APPX, NC - 1].every((c) => au.seen.has(c)) : group.length >= 1) && pa.group != null;
+      check(`column names (${tag}): both ends stay, the chapters keep the direction (${chosen == null ? 'every tenth' : 'three or more, from ≤ 10 to ≥ 30'}), the coda group keeps ${chosen == null ? 'the coda, its first appendix and its last column' : 'a name'} and its part name`,
+        au.seen.has(0) && au.seen.has(NC - 1) && dir && nav, JSON.stringify({ ends: [au.seen.has(0), au.seen.has(NC - 1)], chapters, group, part: pa.group }));
+      check(`column names (${tag}): a chapter, the coda or an appendix is left out only where its measured name would touch a drawn one`, !au.roomy.length, JSON.stringify(au.roomy));
       const cyan = names.filter((t) => t.cyan).map((t) => t.text);
-      const tag = `${vw}px ${lang}${chosen == null ? '' : ', 30.4 chosen'}`;
-      check(`column names (${tag}): each at its own column's foot, named from its file, none touching`, !bad.length && !touch.length, JSON.stringify({ bad, touch }));
-      check(`column names (${tag}): both ends, every fifth chapter and two names of the coda group stay`, !keep.length && group >= 2, JSON.stringify({ missing: keep.map((c) => columns[c]), group }));
-      check(`column names (${tag}): ${chosen == null ? 'no name is cyan' : 'the chosen section reads 30.4 in cyan, the only cyan name'}`, chosen == null ? !cyan.length : JSON.stringify(cyan) === '["30.4"]' && at[chosen] && at[chosen].cyan, JSON.stringify(cyan));
+      check(`column names (${tag}): ${chosen == null ? 'no name is cyan' : `the chosen column reads ${short} in full, in cyan, the only cyan name`}`,
+        chosen == null ? !cyan.length : JSON.stringify(cyan) === JSON.stringify([short]) && au.seen.has(chosen) && au.seen.get(chosen).cyan, JSON.stringify(cyan));
+      check(`part names (${tag}): every part named once over its own band, by its heading or its roman numeral, the coda group by 终… / Coda…, none touching`,
+        !pa.bad.length && !pa.touch.length && !pa.unnamed.length, JSON.stringify(pa));
+      if (chosen != null) continue;
+      const strip = A.texts.filter((t) => t.id === 'plot' && Math.abs(t.y - A.ticks[0][1]) <= 8);
+      // kit.plot draws a tick label at the tick's pixel-snapped place, Math.round(x) + 0.5
+      const sa = await axisAudit(lang, strip, (c) => Math.round(A.ticks[c + 1][0]) + 0.5, A.PW, null);
+      check(`strip names (${vw}px ${lang}): each names the tick after one column by its short number, inside the strip; no section; none touching`,
+        strip.length > 0 && !sa.bad.length && !sa.touch.length, JSON.stringify({ bad: sa.bad, touch: sa.touch }));
+      check(`strip names (${vw}px ${lang}): both ends, every tenth chapter, the coda and its first appendix stay; any other chapter or appendix is left out only where it would touch`,
+        [0, NC - 1, CODA, APPX, ...TENS].every((c) => sa.seen.has(c)) && !sa.roomy.length, JSON.stringify({ shown: strip.map((t) => t.text), roomy: sa.roomy }));
     }
   }
 }
@@ -335,30 +463,27 @@ const nested = GIDS.filter((g) => lock.declarations[g].module && g.slice(lock.de
 check('every GID begins with the module the lock records, and the two dotted declarations sit in a module shorter than the GID before its last dot',
   GIDS.every((g) => lock.declarations[g].module && g.startsWith(`${lock.declarations[g].module}.`)) && DOTTED.every((g) => nested.includes(g) && g.slice(0, g.lastIndexOf('.')) !== lock.declarations[g].module), JSON.stringify(nested));
 const nameFits = (title, name) => !!name && (title === name || [' ', '：', ':'].some((sep) => title.startsWith(name + sep)));
-// A child page of SUMMARY (indented under its chapter) carries a subtitle, not its number, so the name the page shows
-// for it cannot be a prefix of that title: it must equal, exactly, the section name derived here from the indentation
-// (the k-th child of chapter n is 第<n in Chinese numerals>章·k / Section n.k). Every other unit keeps nameFits.
-const CNUM = '零一二三四五六七八九十', cnNum = (n) => (n <= 10 ? CNUM[n] : n < 20 ? `十${CNUM[n - 10]}` : `${CNUM[Math.floor(n / 10)]}十${n % 10 ? CNUM[n % 10] : ''}`);
-const SECTION = {};
+// The name the page gives a unit (the chapter slider, the HUD, the notes) is the one derived from the SUMMARY tree:
+// 第N章 / Chapter N for a chapter, 第N章·5.1 / Section N.5.1 for a section at any depth under it, 终章·1 / Coda 40.1
+// under the coda, 附录 A.1 / Appendix A.1 under an appendix.
+const unitNameOk = (lang, file, title, shown) => !!NODE[lang][file] && shown === NODE[lang][file].name;
 for (const lang of ['zh', 'en']) {
-  SECTION[lang] = {}; let parent = null, k = 0;
-  for (const line of fs.readFileSync(path.join(BOOK, lang, 'SUMMARY.md'), 'utf8').split('\n')) {
-    const m = /^(\s*)(?:-\s+)?\[[^\]]*\]\(([^)\s]+\.md)\)/.exec(line);
-    if (!m) continue;
-    if (!m[1].length) { const c = /^ch(\d+)-/.exec(m[2]); parent = c ? +c[1] : null; k = 0; continue; }
-    k++; SECTION[lang][m[2]] = lang === 'zh' ? `第${cnNum(parent)}章·${k}` : `Section ${parent}.${k}`;
-  }
+  check(`SUMMARY tree (${lang}): every child page, at any depth, is numbered by its parent and its place among its siblings and filed under its parent's stem; every top unit opens with its own name`,
+    TREE[lang].bad.length === 0, TREE[lang].bad.slice(0, 4).join(' | '));
 }
-const unitNameOk = (lang, file, title, shown) => (SECTION[lang][file] ? shown === SECTION[lang][file] : nameFits(title, shown));
-const CH30 = columns.findIndex((f) => f.startsWith('ch30-')), SEC30 = Object.keys(SECTION.zh).filter((f) => f.startsWith('ch30-s'));
-const CH32 = columns.findIndex((f) => f.startsWith('ch32-')), SEC32 = Object.keys(SECTION.zh).filter((f) => f.startsWith('ch32-s'));
-for (const [chapter, at, sections, name] of [[30, CH30, SEC30, '第三十章'], [32, CH32, SEC32, '第三十二章']]) {
-  check(`SUMMARY hierarchy: Chapter ${chapter} has six child pages directly after it, named consistently in both languages`,
-    sections.length === 6 && sections.every((f, k) => columns[at + 1 + k] === f && f.startsWith(`ch${chapter}-s0${k + 1}-`) && SECTION.zh[f] === `${name}·${k + 1}` && SECTION.en[f] === `Section ${chapter}.${k + 1}`), JSON.stringify({ chapter, at, sections }));
-}
-check('SUMMARY hierarchy: both languages have twelve child pages, 57 columns and 58 files including Appendix E',
-  JSON.stringify(Object.keys(SECTION.en)) === JSON.stringify([...SEC30, ...SEC32]) && columns.length === 57 && files.length === 58 && files.length - SEC30.length - SEC32.length === 46 && columns.at(-1) === APPE,
-  JSON.stringify({ columns: columns.length, files: files.length }));
+const shape = (lang) => TREE[lang].nodes.map((n) => [n.file, n.depth, n.parent && n.parent.file, n.num]);
+check('SUMMARY tree: both languages have the same pages in the same order, at the same depth, under the same parents, with the same numbers',
+  JSON.stringify(shape('zh')) === JSON.stringify(shape('en')) && JSON.stringify(TREE.zh.nodes.map((n) => n.file)) === JSON.stringify(files));
+const tops = TREE.zh.nodes.filter((n) => !n.depth), chaps = tops.filter((n) => n.kind === 'chapter').map((n) => +n.num), appx = tops.filter((n) => n.kind === 'appendix').map((n) => n.num);
+check('SUMMARY tree: the top units run prelude, chapters 1, 2, … in order, the coda, then the appendices A, B, … in order',
+  tops[0].kind === 'prelude' && chaps.every((n, i) => n === i + 1) && JSON.stringify(tops.map((n) => n.kind)) === JSON.stringify(['prelude', ...chaps.map(() => 'chapter'), 'coda', ...appx.map(() => 'appendix')])
+  && appx.every((x, i) => x === String.fromCharCode(65 + i)), JSON.stringify(tops.map((n) => n.short)));
+const kids = TREE.zh.nodes.filter((n) => n.depth), deepest = Math.max(...TREE.zh.nodes.map((n) => n.depth));
+const parents = new Set(kids.map((n) => n.parent.file));
+check(`SUMMARY tree: ${kids.length} child pages under ${parents.size} parents, to depth ${deepest + 1}; ${files.length} pages, ${columns.length} columns (every page but Appendix C), the last one Appendix E`,
+  files.length === TREE.zh.nodes.length && columns.length === files.length - 1 && !columns.includes(INDEX) && columns.at(-1) === APPE
+  && kids.every((n) => columns.indexOf(n.file) > columns.indexOf(n.parent.file)) && deepest >= 1,
+  JSON.stringify({ columns: columns.length, files: files.length, kids: kids.length }));
 const SAYS = { zh: (name, n) => [`${name}引用 ${n} 条 · `, `${name}引用 ${n} 条声明`], en: (name, n) => [`${name} cites ${n} · `, `${name} cites ${n} declarations`] };
 const NONE = { zh: '无', en: 'none' }, CITES = { zh: '引用', en: ' cites ' };
 const readout = (p) => p.evaluate(() => {
@@ -370,7 +495,7 @@ const showStage = (p) => p.evaluate(() => document.getElementById('stage').scrol
 // choose a column with the slider (c = −1 is “none”) or by clicking the foot of its column, as a reader does
 async function choose(p, how, c) {
   if (how === 'slider') await p.evaluate((v) => { const el = document.getElementById('src'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, c);
-  else { const f = await p.evaluate((k) => window.LEANMAP_DEBUG.footAt(k), c); await p.mouse.click(f[0], f[1]); }
+  else { const f = await p.evaluate((k) => window.LEANMAP_DEBUG.footAt(k), c); await press(p, f); }
   await settle(p);
   return readout(p);
 }
@@ -416,8 +541,8 @@ async function appendixE(p, lang, how, tag) {
   await p.keyboard.press('End'); await settle(p); const after = (await readout(p)).st;
   const g = want.find((x) => amberWant(x, APPE).length > 0) || want[0];
   await showStage(p); const at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), g);
-  await p.mouse.click(at[0], at[1]); await settle(p); const chosen = (await readout(p)).st;
-  await p.mouse.click(at[0], at[1]); await settle(p); const released = (await readout(p)).st;
+  await press(p, at); await settle(p); const chosen = (await readout(p)).st;
+  await press(p, at); await settle(p); const released = (await readout(p)).st;
   check(`${tag}: Appendix E's cyan lines wait until the rail has read it (← then End), and a chosen cell it cites sends amber only to the other chapters`,
     before.t === NC - 1 && before.arcs.cyan.length === 0 && JSON.stringify(before.focus) === JSON.stringify(want) && after.t === NC && !after.playing && JSON.stringify(after.arcs.cyan) === JSON.stringify(want)
     && chosen.sel === g && JSON.stringify(chosen.arcs.amber) === JSON.stringify(amberWant(g, APPE)) && chosen.arcs.cyan.includes(g) && released.sel === null,
@@ -426,7 +551,7 @@ async function appendixE(p, lang, how, tag) {
 // every cell chosen by pointer: its rendered link is the lock's module file and line at the pinned commit
 async function release(p) {
   const sel = (await readout(p)).st.sel; if (!sel) return;
-  const at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), sel); await p.mouse.click(at[0], at[1]); await settle(p);
+  const at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), sel); await press(p, at); await settle(p);
 }
 async function links(p, gids) {
   await chips(p, 'all', 'all'); await showStage(p); await release(p);
@@ -434,7 +559,7 @@ async function links(p, gids) {
   for (const g of gids) {
     const at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), g);
     if (!at) { bad.push([g, 'no cell']); continue; }
-    await p.mouse.click(at[0], at[1]); await settle(p);
+    await press(p, at); await settle(p);
     const r = await readout(p), want = wantHref(g);
     if (r.st.sel === g && r.href === want && r.abs === new URL(want).href && r.target === '_blank' && r.mod === `${lock.declarations[g].module}.lean:${lock.declarations[g].line}` && g.endsWith(`.${r.name}`)) ok++;
     else if (bad.length < 3) bad.push([g, r.st.sel, r.href]);

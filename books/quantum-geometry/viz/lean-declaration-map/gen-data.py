@@ -93,6 +93,15 @@ def generated(data=None, serials=None) -> str:
         chapter = chapters[file]
         if chapter.depth:
             numbers = chapter.number
+            appendix = re.match(r"appendix-([a-z])-", file)
+            if appendix:
+                letter = appendix.group(1).upper()
+                short = letter + "." + ".".join(map(str, numbers[1:]))
+                return [short, f"附录 {short}" if lang == "zh" else f"Appendix {short}"]
+            if file.startswith("coda-"):
+                short = chapter.number_label
+                return [short, "终章·" + ".".join(map(str, numbers[1:]))
+                        if lang == "zh" else f"Coda {short}"]
             short = chapter.number_label
             return [short, f"第{cn_number(numbers[0])}章·" + ".".join(map(str, numbers[1:]))
                     if lang == "zh" else f"Section {short}"]

@@ -1,0 +1,494 @@
+# 39.5.8 Parry Stationary Law, Escape-Pair Counting, and the Fractal Horizon Entropy Problem {#sec-ch39-p2e-entropy}
+
+Because the word "entropy" invites conceptual slippage across disciplines, we separate the finite and Markovian laws verified in `trureturing` from classical ergodic shift-entropy theorems and from open questions on fractal entanglement scaling.
+
+On the Markov-chain side, for each integer order $k \ge 2$, let $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$ be the reciprocal Perron parameter. On the signed run-length state space $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ recording an absolute sign bit together with the current run length of `1`s, define the right-eigenvector suffix weights $w_j = \operatorname{suffixWeight}(k, p, j) = \sum_{a=0}^{k-j-1} p^{a+1}$, normalizer $Z_k = \sum_{j=0}^{k-1} p^j w_j$, sign involution $\operatorname{flip}(b, j) = (!b, j)$, and reset transition kernel $P_k = \operatorname{kernel}(k, p)$: from $s = (b, j)$, the chain flips sign and resets to $(!b, 0)$ with probability $p / w_j$, advances to $(b, j + 1)$ with probability $p\, w_{j+1} / w_j$ whenever $j + 1 < k$, and assigns probability $0$ to all other transitions. Define the signed stationary distribution
+
+$$
+\pi_k(b, j) = \operatorname{parryLaw}\bigl(k, (b, j)\bigr) = \frac{p^j w_j}{2 Z_k}.
+$$
+
+Row-stochasticity, normalization, stationarity, and sign-flip fairness of this signed reset chain are all verified by the Lean kernel:
+
+::: {.theorem #thm-ch39-p2e-parry-escape-laws title="Parry Stochastic Kernel, Stationary Distribution, and Sign-Flip Symmetry on the Signed K-Bonacci Reset Chain" lean="D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law"}
+For every natural order $k \ge 2$, set $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$. On $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$:
+
+1. **Reciprocal root range and unit power sum**: $1/2 < p \le \varphi^{-1}$ and $\sum_{a=1}^k p^a = 1$;
+2. **Suffix-weight and normalizer bounds**: $p \le w_j \le 1$ for every $j \in \operatorname{Fin} k$, and $1 \le Z_k$;
+3. **Nonnegative row-stochastic kernel**: $P_k(s, t) \ge 0$ for all $s, t \in \operatorname{State}(k)$, and $\sum_t P_k(s, t) = 1$ for every $s$;
+4. **Stationarity and sign-flip symmetry**: $\pi_k(s) \ge 0$ for all $s$, $\sum_s \pi_k(s) = 1$, $\sum_s \pi_k(s) P_k(s, t) = \pi_k(t)$ for every target state $t \in \operatorname{State}(k)$, and $\pi_k(\operatorname{flip}(s)) = \pi_k(s)$ for every $s$.
+:::
+
+::: proof
+Because $\beta_k$ increases strictly from $\beta_2 = \varphi$ toward $2$ on $k \ge 2$, its reciprocal $p = \beta_k^{-1}$ lies in $(1/2, \varphi^{-1}]$, and multiplying $\beta_k^k = \sum_{i=0}^{k-1} \beta_k^i$ by $\beta_k^{-k}$ gives $\sum_{a=1}^k p^a = 1$. Every partial sum $w_j = \sum_{a=1}^{k-j} p^a$ therefore satisfies $p \le w_j \le 1$, terminal value $w_{k-1} = p$, and backward recurrence $w_j = p + p w_{j+1}$ for $j + 1 < k$, making all entries of $P_k$ nonnegative with row sums $(p + p w_{j+1})/w_j = 1$ (and $p/p = 1$ at $j = k - 1$). Weighting by the left/right product $p^j w_j / (2 Z_k)$, total mass flowing into $(b, 0)$ equals $\sum_j \frac{p^j w_j}{2 Z_k}\cdot\frac{p}{w_j} = \frac{p}{2 Z_k}\sum_{j=0}^{k-1} p^j = \frac{w_0}{2 Z_k} = \pi_k(b, 0)$, mass flowing into $(b, j+1)$ equals $\frac{p^j w_j}{2 Z_k}\cdot\frac{p w_{j+1}}{w_j} = \pi_k(b, j+1)$, and $\operatorname{flip}$ complements only the sign bit on which $\pi_k$ does not depend. The full proof is checked by the Lean kernel.
+:::
+
+Alongside this stationary reset law stand two independent formal quantitative bounds governing boundary collisions and observational blind spots: first, the boundary cylinder inequality [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound), which proves for any finite collection $C$ of $n \ge 1$ positive run-length pairs (with each `1`-run $< k$ and encoded length at most $R$) that the left- and right-boundary selected-prefix stationary masses are bounded above by $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ and $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$ respectively (an exact probability inequality, not a Hausdorff-dimension or entropy formula); second, continuing the ledger of [Chapter 38](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5, the finite-arena information-escape criterion [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos), which proves on a nondegenerate finite arena of cardinality $q \ge 2$ that the set $E(S)$ of ordered distinct state pairs indistinguishable under catalog $S$ defines a normalized rational escape rate $e(S) = |E(S)|/[q(q-1)]$, and that observation $i$ strictly lowers escape rate if and only if its unique-capture count satisfies $|U_i| > 0$ (with exact drop $|U_i|/[q(q-1)]$). Rational ordered-pair escape rate $e(S)$, von Neumann page entropy $S(\sigma_b)$, and infinite-shift ergodic entropy are distinct mathematical quantities and are never conflated here.
+
+::: {.remark #rem-ch39-p2e-abramov-literature title="Literature Result: Parry's Maximal-Entropy Markov Measure and Abramov's Induced-Return Entropy Formula (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** In classical ergodic theory, W. Parry (*Trans. Amer. Math. Soc.* **112**, 1964, 55–66) proved that an irreducible topological Markov shift carries a unique intrinsic Markov measure of maximal entropy, giving the $1^K$-free subshift topological (and maximal Kolmogorov–Sinai) entropy $h_{\mathrm{top}}(\Sigma_K) = \log_2 \beta_K\;\text{bits/step}$ (`NUM`: approximately $0.69424$, $0.87915$, and $0.94678\;\text{bits/step}$ at $K = 2, 3, 4$, rising monotonically toward $1\;\text{bit/step}$ as $\beta_K \nearrow 2$). Separately, L. M. Abramov (*Dokl. Akad. Nauk SSSR* **128**, 1959, 647–650) proved that for a probability-preserving ergodic system $(X, \mathcal{B}, \mu, T)$ and a measurable return set $A \in \mathcal{B}$ with $\mu(A) > 0$, the first-return induced transformation $T_A$ under normalized conditional measure $\mu_A$ satisfies
+
+$$
+h_{\mu_A}(T_A) = \frac{h_\mu(T)}{\mu(A)}.
+$$
+
+Applying either literature theorem requires respecting its hypotheses and units: [@thm-ch39-p2e-parry-escape-laws] certifies the stochastic kernel and stationary weights on $\operatorname{State}(k)$ without formalizing Kolmogorov–Sinai shift entropy or Abramov's theorem in the inspected lock, and any induced-return calculation must keep entropy *per return* $h_{\mu_A}(T_A)$ distinct from entropy *per original step* $h_\mu(T)$ rather than transferring it by analogy to irreversible readouts or finite $p$-adic trees.
+:::
+
+Whether the transverse Rauzy boundary Hausdorff dimension $D_F = \dim_H(\partial\mathcal{R}_K)$ governs anomalous entanglement scaling in Pisot cut-and-project quantum many-body states remains an open mathematical-physics problem:
+
+::: {.problem #prob-ch39-p2e-fractal-horizon title="Open Problem: Rauzy Fractal-Horizon Entanglement Scaling in Pisot Cut-and-Project Quantum Many-Body Systems"}
+Consider an order-$K \ge 3$ Pisot cut-and-project point set or locally constrained many-body Hamiltonian whose internal acceptance window $\mathcal{R}_K$ has a fractal boundary of Hausdorff dimension strictly exceeding its integer codimension (for instance, at $K = 3$ where literature gives $D_F = \dim_H(\partial\mathcal{R}_3) \approx 1.09336 > 1$). Does there exist a rigorously constructed family of gapped local ground states or cut-and-project encoded states whose bipartite entanglement entropy $S_{\mathrm{ent}}(R)$ across a region of linear scale $R \to \infty$ obeys an anomalous scaling law governed by $D_F$ (such as a leading term $S_{\mathrm{ent}}(R) \asymp R^{D_F}$ or a subleading fractal correction with certified coefficient), together with necessary and sufficient spectral-gap and locality criteria separating standard codimension-one area laws from fractal-boundary enhancement? Throughout this book, any "fractal horizon area law" of the form $S_{\mathrm{ent}} \propto R^{D_F}$ is posed strictly as an open problem (`OPEN`) and heuristic model (`MODEL`), never as a proved theorem or gravitational area law.
+:::
+
+::: {.remark #rem-ch39-p2e-physical-tribonacci-interface title="Physical Tribonacci Hopping Chain and a Finite Open-Chain Interface (Literature model, not formalized in this book)"}
+**Literature model, not formalized in this book.** A concrete physical object to investigate is a nearest-neighbor hopping chain with zero on-site potential. Following Kolehmainen–Lado–Moustaj, *One-dimensional quasicrystals with tensor-network finite-state automata* ([arXiv:2609.06040v1](https://arxiv.org/pdf/2609.06040v1), §III, Eqs. (2)–(3), and Appendix B.2), take the substitution $\sigma(A)=AB$, $\sigma(B)=AC$, $\sigma(C)=A$ and its infinite fixed word starting from $A$, $W=\lim_{j\to\infty}\sigma^j(A)$, indexed from $W_0$. Fix $0<\rho<1$ and use $t_C=1$ as the energy unit, setting $t_A=\rho^2$, $t_B=\rho$, so $t_A/t_B=t_B/t_C=\rho$. For every integer $N\ge2$, define on the single-particle site space $\mathbb{C}^N$, with basis $\{\lvert i\rangle:0\le i<N\}$,
+
+$$
+h_N=\sum_{i=0}^{N-2}t_{W_i}\bigl(\lvert i\rangle\langle i+1\rvert+\lvert i+1\rangle\langle i\rvert\bigr).
+$$
+
+We use $W$'s first $N-1$ letters to label bonds; sites $0$ and $N-1$ are not joined. The paper's digit tensors encode this single-particle site index. Cutting binary or Tribonacci address indices does not specify a real-space many-body bipartition. This also limits the analogy with the direct-encoder entanglement ranks in §39.5.7: it does not identify a uniform superposition of legal words with a Slater ground state of this hopping chain.
+
+**Finite open-prefix gap interface, unverified in this book.** Set
+
+$$
+\begin{aligned}
+L_j&=\lvert\sigma^j(A)\rvert,\qquad N_j=2\lfloor L_j/2\rfloor,\\
+h_{\rho,j}&=h_{N_j}\quad(j\ge1).
+\end{aligned}
+$$
+
+For every fixed $\rho\in(0,1)$, along these deterministic open prefixes with an even number of sites, does
+
+$$
+\delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}\longrightarrow0\qquad(j\to\infty)?
+$$
+
+The book's unverified status makes no claim of a new external conjecture. Below, [@ex-ch39-p2e-tribonacci-prefix-rate] gives a quantitative paper derivation of this limit; its complete assembly has not undergone an exact Lean check. Finite invertibility, membership of zero in an infinite-volume spectrum, finite-resolution density of states, or criticality in the sense of Anderson localization cannot directly replace this limit question with its specified boundaries and prefix sequence. Krebbekx–Moustaj–Dajani–Morais Smith, *Multifractal Properties of Tribonacci Chains* ([*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204), §§II.B.1, III.A.1, and V), use periodic approximants and perturbative renormalization to study physical spectra and criticality; we do not read this as the finite open-chain statement above for all $\rho\in(0,1)$.
+
+Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. If a particle-number-conserving Slater ground state is chosen, its actual occupied projector $P_{\mathrm{occ}}$ must be constructed and its correlation matrix compressed to a chosen set of sites $I$ as $\chi_I P_{\mathrm{occ}}\chi_I$, where $\chi_I$ projects onto those sites. Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. Even resolving this limit would address only a gap premise. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
+:::
+
+For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
+
+$$
+\begin{aligned}
+w(A)&=2,\qquad w(B)=1,\qquad w(C)=0,\\
+F(v)&=\sum_{r=0}^{|v|-1}(-1)^r w(v_r),\\
+W_{[s,s+m)}&=W_sW_{s+1}\cdots W_{s+m-1}.
+\end{aligned}
+$$
+
+Here $s,m\in\mathbb N$, positions start at zero, and the empty word $\varepsilon$ has $F(\varepsilon)=0$. Each interval starts with a positive sign, independently of the parity of its global start $s$. The preceding hoppings are exactly $t_X=\rho^{w(X)}$, so finite products satisfy
+
+$$
+\prod_{r=0}^{m-1}t_{W_{s+r}}^{\,(-1)^r}
+=\rho^{F(W_{[s,s+m)})}.
+$$
+
+This explains why alternating charge enters estimates of hopping ratios, without yet giving a spectral bound. The exact statement and construction below come from the [source proof of the Tribonacci prefix refutation](https://github.com/the-omega-institute/trureturing/pull/30577).
+
+::: {.theorem #thm-ch39-p2e-tribonacci-prefix-log-refutation title="Failure of a Uniform Logarithmic Interval Bound for the Actual Tribonacci Word" lean="D5/S1/Words/TribonacciPrefixRefutation.result"}
+For the fixed actual word $W$ and integer weights $w$ above,
+
+$$
+\neg\left(
+\begin{aligned}
+&\exists K\in\mathbb R,\quad 0<K\ \land\\
+&\forall s,m\in\mathbb N,\quad
+\left|F(W_{[s,s+m)})\right|
+\le K\log(m+2)
+\end{aligned}
+\right).
+$$
+
+In this inequality, the integer charge and natural-number length are viewed as real numbers, and $\log$ is the natural logarithm. The quantifiers include $m=0$, with no lower length cutoff or restriction on the start.
+:::
+
+::: proof
+Set $\tau=\sigma^4$ and extend it to finite words by concatenation. Four literal substitution steps give
+
+$$
+\begin{aligned}
+\tau(A)&=ABACABAABACAB,&|\tau(A)|&=13,\\
+\tau(B)&=ABACABAABAC,&|\tau(B)|&=11,\\
+\tau(C)&=ABACABA,&|\tau(C)|&=7.
+\end{aligned}
+$$
+
+Every $\tau^n(X)$ has odd length: at $n=0$ its length is one, and the next level concatenates $13$, $11$, or $7$ preceding-level blocks of odd length. This proves the assertion simultaneously for all letters by induction. For arbitrary finite words, concatenation satisfies
+
+$$
+F(uv)=F(u)+(-1)^{|u|}F(v).
+$$
+
+Thus, when expanding $\tau^{n+1}(X)$, each preceding-level block reverses the sign of the next block. Write $a_n=F(\tau^n(A))$, $b_n=F(\tau^n(B))$, and $c_n=F(\tau^n(C))$. Alternating block signs in the three literal images above gives the recurrence, valid for every $n\in\mathbb N$,
+
+$$
+\begin{aligned}
+(a_0,b_0,c_0)&=(2,1,0),\\
+a_{n+1}&=a_n,\\
+b_{n+1}&=2a_n-b_n,\\
+c_{n+1}&=4a_n-2b_n-c_n.
+\end{aligned}
+$$
+
+The recurrence $a_{n+1}=a_n$ and its initial value give $a_n=2$, so the recurrence for $b$ becomes $b_{n+1}-2=-(b_n-2)$. Set $d_n=(-1)^n(c_n-2)$; the recurrence for $c$ becomes $d_{n+1}=d_n-2$, with $d_0=-2$. The solution at every level is therefore
+
+$$
+\begin{aligned}
+a_n&=2,\\
+b_n&=2-(-1)^n,\\
+c_n&=2-(2n+2)(-1)^n.
+\end{aligned}
+$$
+
+The charge of a whole $A$ image remains $2$, but this does not control its internal prefixes. Define the explicit finite-word family
+
+$$
+U_0=\varepsilon,\qquad
+U_{n+1}=\tau^{n+1}(C)U_n,\qquad m_n=|U_n|.
+$$
+
+The new block is prepended. The literal identity $\tau(A)=\tau(C)\,A\,BACAB$ gives
+
+$$
+\tau^{n+1}(A)=
+\tau^{n+1}(C)\,\tau^n(A)\,\tau^n(BACAB).
+$$
+
+The empty word $U_0$ is a prefix of $A$. If $\tau^n(A)=U_nR_n$, the identity becomes
+
+$$
+\tau^{n+1}(A)=
+U_{n+1}R_n\,\tau^n(BACAB).
+$$
+
+Inductively, $U_n$ is a literal prefix of $\tau^n(A)=\sigma^{4n}(A)$, hence
+
+$$
+W_{[0,m_n)}=U_n.
+$$
+
+This uses the original infinite word starting from $A$, with no additional occurrence assumption, cyclic closure, or position shift. All three fourth images are nonempty, so $m_n>0$ for $n\ge1$. Simultaneous induction over all letters uses at most thirteen preceding-level images at each step and gives $|\tau^n(X)|\le13^n$. Prefix containment then yields
+
+$$
+0<m_n\le|\tau^n(A)|\le13^n\qquad(n\ge1).
+$$
+
+Let $q_n=F(U_n)$. The prepended block $\tau^{n+1}(C)$ has odd length, so
+
+$$
+q_0=0,\qquad q_{n+1}=c_{n+1}-q_n.
+$$
+
+To solve this accumulation explicitly, set $r_n=(-1)^n(q_n-1)$. Substitution of the formula for $c_{n+1}$ gives $r_0=-1$ and $r_{n+1}=r_n-(2n+4)$. Summation yields
+
+$$
+\begin{aligned}
+q_n&=1-(-1)^n(n^2+3n+1)\\
+&=\begin{cases}
+-n(n+3),&n\text{ even},\\
+(n+1)(n+2),&n\text{ odd}.
+\end{cases}
+\end{aligned}
+$$
+
+Consequently $|q_n|\ge n^2$, including $n=0$. For $n\ge1$, we have $13^n\ge1$ and $3\le3^n$, so the length bound gives $m_n+2\le13^n+2\le3\cdot13^n\le39^n$, and therefore
+
+$$
+\log(m_n+2)\le n\log39.
+$$
+
+Now suppose the uniform bound negated in the theorem holds. Take its constant $K>0$ and choose a natural number $n>K\log39$. Since $K\log39>0$, we have $n\ge1$. On an actual prefix starting at zero,
+
+$$
+\begin{aligned}
+\left|F(W_{[0,m_n)})\right|
+&=|q_n|\ge n^2\\
+&>Kn\log39
+\ge K\log(m_n+2),
+\end{aligned}
+$$
+
+contradicting the uniform bound at $s=0$, $m=m_n$. This contradiction covers every positive real $K$. The explicit family starting at zero is a construction within the proof, with no extra hypothesis and no extrapolation from finite samples. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark #rem-ch39-p2e-tribonacci-refutation-boundaries title="Alternating Discrepancy, Spectral Literature, and Physical Scope"}
+**Literature background and scope, not a formalized physical conclusion of this book.** The square above is a square of the substitution level $n$. The refutation gives no optimal upper bound for all lengths, and neither refutes nor proves a uniform $O((\log(m+2))^2)$ upper bound. The bond-word prefix length $m_n$ cannot be identified directly with the specified even site count $N_j$.
+
+Adamczewski, *Symbolic discrepancy and self-similar dynamics* ([doi:10.5802/aif.2079](https://doi.org/10.5802/aif.2079), Theorem 1 and Propositions 10–11), provides a general framework for substitution discrepancy and cancellation in the critical spectrum. The existence of a suitable zero-mean letter weight in its weighted lower bounds does not automatically select the position-alternating weight here. Encoding position parity in an enlarged alphabet would require separate checks of primitivity, frequencies, weights, and cancellation conditions. The proof above computes directly on the original word; it neither uses that existence statement to select its weights nor claims literature novelty for the mechanism or explicit formula.
+
+For physical spectral quantities, Juhász derives an auxiliary-matrix method from an open transverse-field Ising chain ([doi:10.1103/PhysRevB.106.064204](https://doi.org/10.1103/PhysRevB.106.064204), arXiv:2206.11575v2). The positive eigenvalues of the $2L\times2L$ zero-diagonal path matrix in Eq. (6), with $L>1$ and all adjacent couplings nonzero, are the singular values of the bidiagonal matrix in Eq. (7). Equations (18) and (28) give finite-chain lower and upper bounds on the smallest positive value. Appendix B, Eq. (B4), places a commonly used approximate gap below the rigorous lower bound, so that approximation cannot serve as an upper bound on the true gap. The comparison concerns the auxiliary matrix's spectrum; it does not identify the original Ising many-body gap with a many-body gap of this hopping chain.
+
+Hermisson's discussion of multi-letter substitutions with marginal renormalization eigenvalues and infinite dynamical exponent ([doi:10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304), arXiv:cond-mat/9808238, p. 11) gives no specific scaling for this word in that passage. In Hida's Fibonacci XXZ analysis ([doi:10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296), arXiv:cond-mat/0404606v2), the scale $\Delta E\sim\exp[-\kappa(\log N)^2]$ in Eq. (38) comes from perturbative renormalization of the interacting isotropic model with separated strong and weak couplings. The free XY case in Eq. (28) instead gives a finite power-law exponent, $\Delta E\sim N^{-z}$. These conclusions do not replace checks of this chain's actual finite matrices, endpoints, parity truncations, and spectral quantity.
+
+[@thm-ch39-p2e-tribonacci-prefix-log-refutation] rules out using this uniform logarithmic interval bound as a premise for an inverse-matrix estimate. It does not refute a polynomial spectral-gap bound, determine $\delta_{\rho,j}$ or its rate along the specified even open prefixes, construct a many-body state, or prove a spatial-entanglement law. The subsequent route through odd repetition windows and full-inverse mass still requires assembly under its own premises. Relating physical states, spatial cuts, and the Rauzy boundary in [@prob-ch39-p2e-fractal-horizon] remains a separate task.
+:::
+
+::: {.remark #rem-ch39-p2e-tridiagonal-localization title="Tridiagonal Localization with Boundary Residuals (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** Abruptly cutting a whole-line vector to a finite interval leaves residuals at both ends; a taper of sine weights controls that cost quantitatively. Chandler-Wilde–Chonchaiya–Lindner, *On spectral inclusion sets and computing the spectra and pseudospectra of bounded linear operators* ([*J. Spectr. Theory* **14**, 719–804](https://doi.org/10.4171/JST/514), §5.1, Corollaries 5.2 and 5.4), supply the following tool. Let $A$ be a bounded tridiagonal operator on $\ell^2(\mathbb{Z})$, with $M_\pm=\sup_{i\in\mathbb{Z}}|A_{i,i\pm1}|$. For a bounded operator $B$ with nonzero domain, write $\nu(B)=\inf_{\|x\|_2=1}\|Bx\|_2$. For every integer $n\ge1$, let $E_{n,k}$ be the space of vectors supported on sites $k+1,\ldots,k+n$. Then
+
+$$
+\begin{aligned}
+\inf_{k\in\mathbb{Z}}\nu\!\left(A|_{E_{n,k}}\right)
+&\le \nu(A)+\varepsilon_n,\\
+\varepsilon_n&=2(M_-+M_+)\sin\frac{\pi}{2(n+1)}.
+\end{aligned}
+$$
+
+Only the input support is restricted; the output remains on the whole line. The corresponding $(n+2)\times n$ matrix retains both outgoing residual rows and cannot be replaced by the $n\times n$ compression that discards them. The bound takes an infimum over positions; an actual interval and unit vector can be chosen with arbitrary positive slack. This supplies an $\ell^2$ localization tool of order $1/n$, while the preceding Tribonacci open-chain question still requires zero-spectrum membership for the corresponding whole-line model, transplantation of an actual word interval with its neighboring sites into the specified finite open prefixes, and checks of length ratios and small scales. Those interfaces remain unverified in this book.
+:::
+
+A second finite-matrix route uses an odd repeated block. An odd shift exchanges even and odd bonds, allowing two strings of hopping ratios from forward substitution to be paired. The following bound expresses that cancellation in entries of the actual inverse matrix.
+
+::: {.theorem #thm-ch39-p2e-odd-repeat-inverse-mass title="Inverse-Mass Bound for an Odd Repeated Block" lean="D5/S3/Quantum/Dynamics/OddSquareGreenMass.odd_square_inverse_paired_mass"}
+Let $q\in\mathbb{N}$ and $t:\mathbb{N}\to\mathbb{R}$ satisfy $0<t(i)\le1$ for every $i\in\mathbb{N}$, and assume
+
+$$
+t(i+2q+1)=t(i)\qquad(0\le i<2q).
+$$
+
+Set $n=2q+1$. Index the lower bidiagonal matrix $L\in\mathbb{R}^{n\times n}$ from zero, with entries
+
+$$
+\begin{aligned}
+L_{i,i}&=t(2i) &&(0\le i<n),\\
+L_{i+1,i}&=-t(2i+1) &&(0\le i<n-1).
+\end{aligned}
+$$
+
+All other entries vanish. Write $G=L^{-1}$ and, for $0\le l<q$ and $0\le d<q-l$, define the paired mass
+
+$$
+\begin{aligned}
+P_{l,d}&=G_{l+d+1,l}\\
+&\quad+G_{q+l+d+1,q+l+1}.
+\end{aligned}
+$$
+
+Every displayed matrix index lies in $0,\ldots,2q$, and
+
+$$
+q(q+1)\le\sum_{l=0}^{q-1}\sum_{d=0}^{q-l-1}P_{l,d}.
+$$
+
+For $q=0$, both sums are empty and have value zero.
+:::
+
+::: proof
+The positive diagonal lets forward substitution produce the actual inverse. Odd repetition makes the product of the two positive entries in each pair exactly $1/[t(2l)t(2(l+d+1))]\ge1$, so their sum is at least $2$. The triangular index domain has $q(q+1)/2$ pairs, giving the bound. The full proof is checked by the Lean kernel.
+:::
+
+If $m=2q+1$, $s$ is even, $W_{s+i+m}=W_{s+i}$ for $0\le i<m-1$, and $s+2m\le N_j$, setting $t(i)=t_{W_{s+i}}$ matches this matrix model and a $2m$-site window inside the prefix. The following theorem constructs the required windows from the substitution word itself and compares their lengths uniformly with the prefix length.
+
+::: {.theorem #thm-ch39-p2e-aligned-tribonacci-windows title="Uniform Odd Repetition Windows in Actual Tribonacci Prefixes" lean="D5/S1/Words/TribonacciAlignedWindows.aligned_windows"}
+For the actual word $W$ above, the substitution lengths $L_j=|\sigma^j(A)|$, and the even prefix lengths $N_j=2\lfloor L_j/2\rfloor$, there are natural constants $K>0$ and $J\ge1$ such that every natural $j\ge J$ admits natural numbers $m,s$ satisfying
+
+$$
+\begin{aligned}
+m&\ge3,\qquad m\text{ is odd},\quad s\text{ is even},\\
+N_j&\le Km,\qquad s+2m\le N_j,\\
+W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
+\end{aligned}
+$$
+
+The last line holds for every natural $i$ in the displayed range; the constants $K,J$ do not vary with $j$.
+:::
+
+::: proof
+The formal proof takes $K=128$ and $J=4$. The two copies of $ABA$ in the fourth iterate supply the repeated blocks. Four substitution steps preserve oddness of all three letter-image lengths, giving an odd block length and an even starting position. A nonempty tail keeps the whole window inside the prefix after even rounding, and seven length-growth steps give the factor $128$. The example below spells out this construction; the full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-ch39-p2e-aligned-tribonacci-windows title="An Explicit Odd Repetition Window"}
+For each $j\ge4$, set $r=\lfloor(j-4)/4\rfloor$ and $k=4r$, so $k+4\le j\le k+7$. Split the fourth iterate into four pieces:
+
+$$
+\sigma^4(A)=ABAC\,\vert\,ABA\,\vert\,ABA\,\vert\,CAB.
+$$
+
+Write $a=\sigma^k(A)$, $b=\sigma^k(B)$, and $c=\sigma^k(C)$; the vertical bars indicate concatenation, not additional letters. Applying $k$ further substitutions gives
+
+$$
+\sigma^{k+4}(A)=(abac)\,(aba)\,(aba)\,(cab).
+$$
+
+Take $s=|abac|$ and $m=|aba|$. At every level divisible by four, the lengths of $a,b,c$ are all odd: at level zero each length is $1$, and the fourth images of the three letters contain $13,11,7$ letters, respectively, so four substitution steps preserve this oddness. Thus $s$ is even, $m\ge3$ is odd, and the two copies of $aba$ supply the required equality. The nonempty tail $cab$ ensures that rounding the prefix length down to an even number preserves the entire repeated window. Each substitution at most doubles length, giving
+
+$$
+\begin{aligned}
+N_j&\le L_j\le L_{k+7}\le128L_k\le128m,\\
+s+2m&\le N_j,\\
+W_{s+i+m}&=W_{s+i}\qquad(0\le i<m-1).
+\end{aligned}
+$$
+
+Here $s,m$ are nonnegative integers, and the constant $128$ is independent of $j$ and the hopping parameter $\rho$. This gives explicit choices of the constants and windows in [@thm-ch39-p2e-aligned-tribonacci-windows].
+:::
+
+::: {.example #ex-ch39-p2e-full-inverse-euclidean title="From Local Mass to a Euclidean Estimate for the Full Inverse"}
+Take a positive hopping sequence $t$ bounded above by $1$, and let $G=L(t,n)^{-1}$ be the full inverse of the bidiagonal block above. Suppose integers $q\ge1$ and $a\ge0$ satisfy $a+2q+1\le n$ and
+
+$$
+t\bigl(2a+i+(2q+1)\bigr)=t(2a+i)\qquad(0\le i<2q).
+$$
+
+Set $x=(1,\ldots,1)\in\mathbb R^n$ and $v=x/\sqrt n$. With Euclidean norms throughout,
+
+$$
+\|v\|_2=1,\qquad q(q+1)\le 2n\|Gv\|_2.
+$$
+
+This inverse retains all exterior sites on both sides of the window. The forward-substitution inverse formula shows that shifting both indices of the local inverse by $a$ gives exactly the corresponding entry of $G$. All entries of $G$ are nonnegative, so each of the two triangular regions in [@thm-ch39-p2e-odd-repeat-inverse-mass] embeds into the full matrix, giving
+
+$$
+q(q+1)\le2\sum_{i,j=0}^{n-1}G_{ij}.
+$$
+
+The factor $2$ lets us bound the two regions separately without an additional disjointness argument. Meanwhile, Cauchy–Schwarz gives
+
+$$
+\begin{aligned}
+\sum_{i,j=0}^{n-1}G_{ij}&=\langle x,Gx\rangle,\\
+&\le\|x\|_2\|Gx\|_2,\\
+&=n\|Gv\|_2.
+\end{aligned}
+$$
+
+Combining the inequalities proves the estimate. For the preceding window, the parameter correspondence is $m=2q+1$, $s=2a$, $N_j=2n$. This is an application of the existing inverse-mass result, the forward-substitution formula and Euclidean inequalities. It introduces no new formal declaration, and this example carries no separate Lean verification badge.
+:::
+
+::: {.example #ex-ch39-p2e-open-chain-residual title="From the Full Inverse to a Spectral Residual Bound for a Finite Open Chain"}
+For an integer $n\ge1$, take a real hopping sequence $t:\mathbb N\to\mathbb R$ with $t_k>0$ for every $k\in\mathbb N$. On $2n$ sites indexed by natural numbers starting at zero, define the actual open-chain matrix $H\in\mathbb R^{2n\times2n}$ by
+
+$$
+H_{ij}=\begin{cases}
+t_i,&i+1=j,\\
+t_j,&j+1=i,\\
+0,&\text{otherwise},
+\end{cases}
+\qquad 0\le i,j<2n.
+$$
+
+Its diagonal is zero, its last physical bond is $t_{2n-2}$, and there is no closing bond. When $n=1$, it consists of two sites joined only by $t_0$. Let $B=L(t,n)$ be the lower bidiagonal block above, so
+
+$$
+\begin{aligned}
+B_{i,i}&=t_{2i} &&(0\le i<n),\\
+B_{i,i-1}&=-t_{2i-1} &&(1\le i<n),
+\end{aligned}
+$$
+
+with all other entries zero. Lower triangularity gives $\det B=\prod_{i=0}^{n-1}t_{2i}>0$, so the ordinary matrix inverse $G=B^{-1}$ exists. For every Euclidean unit vector $v\in\mathbb R^n$, there are a real number $\lambda$ and a nonzero real vector $z\in\mathbb R^{2n}$ such that
+
+$$
+\begin{aligned}
+Hz&=\lambda z,\\
+|\lambda|\,\|Gv\|_2&\le1.
+\end{aligned}
+$$
+
+To see this, reorder coordinates into even sites followed by odd sites, and write $C_{ij}=H_{2i,2j+1}$. The diagonal entries of $C$ are $t_{2i}$, its subdiagonal entries are $t_{2i-1}$, and all other entries vanish. Set $D=\operatorname{diag}((-1)^i)_{i=0}^{n-1}$. Then $D^2=I$, and entrywise calculation gives
+
+$$
+\begin{aligned}
+H&=\begin{pmatrix}0&C\\C^{\mathsf T}&0\end{pmatrix},\\
+DCD&=B,\qquad CD=DB.
+\end{aligned}
+$$
+
+The first line denotes the reordered matrix. Construct an auxiliary vector $u$ by setting $u_{\mathrm{even}}=0$ and $u_{\mathrm{odd}}=DGv$. Since $BG=I$,
+
+$$
+\begin{aligned}
+(Hu)_{\mathrm{even}}&=CDGv=DBGv=Dv,\\
+(Hu)_{\mathrm{odd}}&=0,\\
+\|u\|_2&=\|Gv\|_2,\qquad \|Hu\|_2=1.
+\end{aligned}
+$$
+
+Here $D$ only changes coordinate signs, preserving the Euclidean norm; $BGv=v\ne0$ also ensures $u\ne0$. Since $H$ is a finite real symmetric matrix, take a real orthonormal eigenbasis $e_k$ with real eigenvalues $\lambda_k$ ($0\le k<2n$). Set $\alpha=\min_{0\le k<2n}|\lambda_k|$ and substitute $u=\sum_k c_ke_k$ into Parseval's identity to obtain
+
+$$
+\begin{aligned}
+\alpha^2\|u\|_2^2
+&=\alpha^2\sum_{k=0}^{2n-1}c_k^2,\\
+&\le\sum_{k=0}^{2n-1}\lambda_k^2c_k^2
+=\|Hu\|_2^2=1.
+\end{aligned}
+$$
+
+The finite nonempty set of eigenvalues contains an index $k_0$ with $|\lambda_{k_0}|=\alpha$. Choose $\lambda=\lambda_{k_0}$ and $z=e_{k_0}$; taking square roots gives the claimed inequality. The selected $z$ is an eigenvector; the auxiliary vector $u$ generally is not. This example requires no upper bound on the hoppings.
+
+If the upper-bound and repeated-window hypotheses of [@ex-ch39-p2e-full-inverse-euclidean] also hold, use the same unit vector $v$ as in that example to obtain
+
+$$
+\begin{aligned}
+|\lambda|q(q+1)
+&\le2n|\lambda|\,\|Gv\|_2\le2n,\\
+\delta:=\min_{\mu\in\operatorname{Spec}(H)}|\mu|
+&=|\lambda|\le\frac{2n}{q(q+1)}.
+\end{aligned}
+$$
+
+This converts the mass estimate for the full inverse into a bound on the spectral distance to zero energy for the same finite open chain.
+:::
+
+::: {.example #ex-ch39-p2e-tribonacci-prefix-rate title="A paper spectral bound for the specified even open prefixes"}
+Return to the actual word $W$. Fix $0<\rho<1$ and set $t(i)=t_{W_i}$, with $t_A=\rho^2$, $t_B=\rho$ and $t_C=1$. These hoppings satisfy $0<t(i)\le1$ at every position. For each $j\ge4$, use the explicit window in [@ex-ch39-p2e-aligned-tribonacci-windows] and write
+
+$$
+\begin{aligned}
+m&=2q+1,\qquad s=2a,\qquad N_j=2n,\\
+q&\ge1,\qquad a+m\le n,\qquad N_j\le128m.
+\end{aligned}
+$$
+
+Here $q,a,n$ are natural numbers. Equal letters have equal hoppings, so the word identity inside the window gives
+
+$$
+t\bigl(2a+i+(2q+1)\bigr)=t(2a+i)\qquad(0\le i<2q).
+$$
+
+The preceding two examples therefore apply to this same $N_j$-site open chain: the local matrix is the block for the shifted hoppings $t(2a+\cdot)$, while the full inverse remains $L(t,n)^{-1}$ for the entire prefix. No external sites are removed and no closing bond is added. Use their common unit vector $v$ to obtain $\delta_{\rho,j}q(q+1)\le N_j$. Since $q\ge1$,
+
+$$
+\begin{aligned}
+9q(q+1)-2(2q+1)^2&=(q-1)(q+2)\ge0,\\
+N_j\delta_{\rho,j}
+&\le\frac{N_j^2}{q(q+1)}
+\le\frac{128^2(2q+1)^2}{q(q+1)}
+\le73728.
+\end{aligned}
+$$
+
+The constant $73728=128^2\cdot9/2$ is independent of both $j$ and $\rho$; no optimality is claimed. Every substitution iterate starts with $A$. The substitution erases no letter, and this initial letter adds at least one letter, so $L_{j+1}\ge L_j+1$ and $L_j\ge j+1$. Hence $N_j\ge L_j-1\ge j$, and $\delta_{\rho,j}\le73728/N_j\to0$. This tail conclusion needs no separate estimate for $j=1,2,3$.
+
+This is a paper application of the displayed window construction, full-inverse mass estimate and finite-dimensional spectral conversion, with no separate Lean verification badge. An exact check of the complete assembly must still cover the numerical window constants, actual word hoppings and shifted indices, full-inverse embedding and common unit vector; see the [formalization interface](https://github.com/the-omega-institute/trureturing/issues/30166). This finite open-chain spectral bound neither constructs a many-body ground state nor determines entanglement across a spatial cut or the dimension of the Rauzy boundary.
+:::
+
+The example gives a paper $1/N_j$ bound and convergence to zero for the specified even open prefixes. Fractal entropy scaling still requires a separate argument involving physical states and spatial cuts; those parts of [@prob-ch39-p2e-fractal-horizon] remain open.
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
+**Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`, shift entropy and Abramov's formula carry status `Literature`, and fractal area scaling carries status `OPEN`.
+:::
+
+We can now gather all eight concepts into a single line-break-free epistemic alignment table so that the formal core, classical literature, numerical evaluations, and interpretive boundaries of every link stand side by side:
+
+| Eight-Concept Link | Exact Mathematical Object & Representative Frozen Declarations | Epistemic Status & Scope Boundary |
+| :--- | :--- | :--- |
+| **1. Zeckendorf Forbidden Language** | $K = 2$ `NoAdjacentOnes` automaton [`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes) (Conjunct 3 of [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread]), exact admissible-word count [`dbonacci_name_card`](lean:D5/S0/Tower/DBonacci/Names.dbonacci_name_card) ($F_{Q+2}$), and short-prefix full power [`dbonacci_name_card_of_lt`](lean:D5/S0/Tower/DBonacci/Names.dbonacci_name_card_of_lt) | `LEAN ✓` (with explicit carrier conversion between `List (Fin 2)` and `Fin Q → Bool`) |
+| **2. $K$-Bonacci Pisot Spectrum** | Polynomial irreducibility over $\mathbb{Z}$ and $\mathbb{Q}$ [`dbonacci_irreducible`](lean:D5/S0/Tower/DBonacci/Irreducibility.dbonacci_irreducible), Perron identity $2-\beta_K=\beta_K^{-K}$ [`two_sub_dbonacciPerronRoot_eq_inv_pow`](lean:D5/S0/Tower/DBonacci/PerronRoot.two_sub_dbonacciPerronRoot_eq_inv_pow), limit $\beta_K \to 2$ [`dbonacciPerronRoot_tendsto_two`](lean:D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_tendsto_two), and unit-disk conjugate contraction [`dbonacci_complex_root_location`](lean:D5/S0/Tower/DBonacci/Irreducibility.dbonacci_complex_root_location) ([@thm-ch39-p2e-kbonacci-pisot]) | `LEAN ✓` (algebraic root-location theorem); decimals such as $\beta_3 \approx 1.839287$ are `NUM` |
+| **3. $p$-adic Residue Tree & Ultrametric** | Mod-$p^k$ least distinguishing precision $v_p(x-y)+1$ [`first_distinguishing_precision`](lean:D5/S3/Arith/Congruence/PadicPrecisionBlindSpot.first_distinguishing_precision), valuation distance [`observation_distance_eq_padic_valuation`](lean:D5/S3/Arith/Congruence/PadicObservationDistance.observation_distance_eq_padic_valuation), congruence-fiber intersection [`congruenceFiber_eq_closedBall_inter_range`](lean:D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range), and finite-horizon refinement ultrametric [`refinementDistance_ultrametric`](lean:D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric) ([@thm-ch39-p2e-padic-readout]) | `LEAN ✓` (as separate formal objects); cross-system identification of $p$-adic and $K$-Bonacci trees is `MODEL` |
+| **4. $K=3$ Rauzy Internal Window** | Exponent-zero nonempty interior [`rauzyFractal_interior_nonempty`](lean:D5/S3/Geometry/Rauzy/TribonacciInterior.rauzyFractal_interior_nonempty), regular closure [`rauzyFractal_closure_interior`](lean:D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_closure_interior), exact three-branch prefix cover [`rauzyFractal_prefix_cover`](lean:D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_prefix_cover) ([@thm-ch39-p2e-rauzy-regular-window]), and zero planar boundary area [`rauzyFractal_frontier_volume_zero`](lean:D5/S3/Geometry/Rauzy/TribonacciNullBoundary.rauzyFractal_frontier_volume_zero) ([@thm-ch39-p2e-rauzy-null-boundary]) | `LEAN ✓` (set topology & zero 2D area); tiling, disk homeomorphism, and $\dim_H \partial\mathcal{R}_3 \approx 1.09336$ are `Literature` + `NUM` ([@rem-ch39-p2e-rauzy-literature]) |
+| **5. Clifford Line–Plane Split** | Cubic Minkowski real-linear coordinate embedding $E_\parallel^1 \oplus E_\perp^2$ and internal damped rotor $\beta_3^{-1/2}(\cos\vartheta + B_\perp\sin\vartheta)$ | `MODEL` (requires declared basis/metric; observer line–plane dictionary in [@rem-ch39-p2e-unification-model]) |
+| **6. Self-Referential Scale Comparison** | Positive cosine fixed-point endpoint $\cos\theta^* = \theta^*$ [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) alongside Tribonacci conjugate norm $|\alpha| = \beta_3^{-1/2}$ [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) | `LEAN ✓` (separate identities) + `Literature` (transcendence of $\theta^*$) + `NUM` ($\approx 0.234\%$ proximity, strictly unequal) + `MODEL` ($\psi=\psi(\psi)$ motif, [@ex-ch39-p2e-pisot-dottie-numerics]) |
+| **7. Cross-Cut Direct-Encoder Ranks** | Attainable page-rank rectangle $1 \le r_b \le R_b$ and sharp entropy bound $\ln R_b$ under $\tau(x)+\iota(y)<K$ [`complete_original_direct_rank_entropy`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy) ([@thm-ch39-p2e-direct-encoder-ranks]) with spectral necessity [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) | `LEAN ✓` (rank $K$ conditional on $K \le R_b$, not universal) + `NUM` (e.g. $R_0=6, R_1=5$) + `Literature` (golden chain & Rydberg arrays, [@rem-ch39-p2e-rydberg-anyon-literature]) |
+| **8. Parry Law, Escape Pairs & Entropy** | Signed reset-chain Parry stationary law [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law) ([@thm-ch39-p2e-parry-escape-laws]), boundary cylinder bound [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound), and finite escape-pair criterion [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓` (finite & Markovian laws) + `Literature` ($\log_2\beta_K$ & Abramov formula, [@rem-ch39-p2e-abramov-literature]) + `OPEN` (fractal-horizon scaling, [@prob-ch39-p2e-fractal-horizon]) |
+
+Stepping the order dial from $K = 2$ to $K = 3$ and beyond in the full laboratory below brings the multi-facet geometry of Chapter 39's self-referential ontology $\psi \equiv \psi(\psi)$ into immediate visual focus: at $K = 2$, the transverse contracting space is still a one-dimensional segment; the instant $K$ reaches $3$, complex conjugate roots spin out the three-branch self-covering, null-boundary Rauzy fractal window in the orthogonal plane; and across every order, kernel-verified counts, unit-disk root bounds, refinement ultrametrics, attainable rank rectangles, and Parry stationary weights form the green formal backbone supporting clearly demarcated classical literature, numerical experiments, and geometric synthesis. With all thirty-nine chapters of the main text now complete, let us push open the final door of this book and step into the [Coda](coda.md), *Outside All Spheres*.
+
+::: {.viz src="pisot-clifford-rauzy-sandtable" height="640"}
+**Interactive Laboratory `ORTHO//RAUZY`**: Eight-concept Zeckendorf–Pisot–Rauzy sandtable. Switch freely across all eight preset cards above, vary recurrence order $K$, prime radix $p$, word-length horizon, and 3D viewing angle, and drag points across the physical line and internal plane: inspect $1^K$-free word counts, unit-disk Pisot conjugate contraction, mod-$p^k$ residue-tree splitting depth, the $K = 3$ three-branch Rauzy internal window (and computed internal-coordinate sample at $K = 4$), numerical comparison between $\theta^*$ and $|\alpha|_{K=3}$, the cross-cut feasible rank rectangle $[1, R_0] \times [1, R_1]$, and the Parry stationary weights alongside finite escape pairs. Green badges mark Lean-verified theorems exclusively, while literature results, numerical computations, interpretive models, and open problems carry their respective distinct labels.
+:::

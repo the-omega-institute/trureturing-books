@@ -133,7 +133,7 @@ check('ROOMS: α, β ride along unchanged (S₂ᵀ of the damaged state is (α, 
     }));
     const b = r.s.branches[0], mod = model(b.err, r.s.theta);
     const on = [0, 1, 2, 3, 4, 5, 6, 7].filter((i) => Math.abs(mod.dam[i]) > 1e-9), syn = `(${mod.syn.map((v) => (v ? '−1' : '+1')).join(',')})`;
-    const md = fs.readFileSync(new URL(`../../${lang}/ch14-cloning-codes-and-braids.md`, import.meta.url), 'utf8');
+    const md = fs.readFileSync(new URL(`../../${lang}/ch14-s03-logical-recovery.md`, import.meta.url), 'utf8');
     const cap = (/::: \{\.viz src="syndrome-decoding" preset="rooms"[^}]*\}\n([\s\S]*?)\n:::/.exec(md) || [, ''])[1];
     check(`ROOMS still (${lang}): stops after the checks are read, before the decoder acts (no amber flip on the stage)`, r.s.t === 2 && r.amber === 0 && !r.sub.includes(lang === 'zh' ? '翻回' : 'flip'), JSON.stringify([r.s.t, r.amber, r.sub]));
     check(`ROOMS still (${lang}): both lights on and the bars in room ${syn}, the other three empty (matrices)`, mod.syn.join() === '1,1' && b.syn.join() === mod.syn.join() && r.big.includes(syn.replace(',', ', ')) && vecEq(b.amps[2], mod.dam));

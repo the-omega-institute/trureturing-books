@@ -26,7 +26,7 @@ const GIDS = [
   'D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact',
   'D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness'
 ];
-const THEORY = ['zh', 'en'].map(lang => `../../${lang}/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability`);
+const THEORY = ['zh', 'en'].map(lang => `../../${lang}/ch34-s10-trihedron-rigidity.html#sec-ch34-trihedron-rigidity-and-3d-stability`);
 const T = await session(), { page, check } = T;
 
 // 在页面脚本前安装观察器，连共享质量门创建的独立页面也记录根节点调色板写入。

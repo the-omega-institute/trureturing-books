@@ -27,10 +27,10 @@ const GIDS = [
   'D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch',
   'D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness'
 ];
-const CHAPTER = 'ch34-orthogonality-degeneracy-and-observer-position.html';
+const CHAPTER = 'ch34-s12-triadic-duality.html';
 const THEORY = ['zh', 'en'].flatMap(lang => [
   `../../${lang}/${CHAPTER}#sec-ch34-triadic-duality-and-field-loop`,
-  `../../${lang}/${CHAPTER}#sec-ch34-infinitesimal-spherical-trihedron`
+  `../../${lang}/ch34-s04-infinitesimal-trihedron.html#sec-ch34-infinitesimal-spherical-trihedron`
 ]);
 const T = await session(), { page, check } = T;
 

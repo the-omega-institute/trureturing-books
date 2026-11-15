@@ -30,13 +30,15 @@ def counts():
     from _book_stats import CHAPTERS, DECLS, PARTS
     grouped = {}
     owner = {c['file']: c['top'] for c in CHAPTERS}
+    top_files = {c['top']: c['file'] for c in CHAPTERS if c['depth'] == 0}
     first = {}
     for ch in CHAPTERS:
         for gid in set(ch['environment']) | set(ch['inline']):
             first.setdefault(gid, ch['top'])
-        if re.match(r'ch\d+-', ch['file']) or ch['file'] == 'coda.md':
+        root = top_files[ch['top']]
+        if re.match(r'ch\d+-', root) or root == 'coda.md':
             if ch['top'] not in grouped:
-                label = 'coda' if ch['file'] == 'coda.md' else str(int(ch['file'][2:4]))
+                label = 'coda' if root == 'coda.md' else str(int(root[2:4]))
                 grouped[ch['top']] = (label, PARTS.index(ch['part']) + 1, set())
             grouped[ch['top']][2].update(g for g in ch['environment'] if DECLS[g]['kind'] == 'theorem')
     return [(label, part, len(gids), sum(first[g] == top for g in gids))

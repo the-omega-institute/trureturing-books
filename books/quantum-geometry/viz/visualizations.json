@@ -128,14 +128,14 @@
         {
           "label": "第二十二章 · 欧拉素数乘积",
           "label_en": "Chapter 22 · The Euler prime product",
-          "href": "../zh/ch22-primes-euler-products-and-zeros.html#thm-riemann-zeta-euler-product",
-          "href_en": "../en/ch22-primes-euler-products-and-zeros.html#thm-riemann-zeta-euler-product"
+          "href": "../zh/ch22-s02-dirichlet-euler-identity.html#thm-riemann-zeta-euler-product",
+          "href_en": "../en/ch22-s02-dirichlet-euler-identity.html#thm-riemann-zeta-euler-product"
         },
         {
           "label": "第二十四章 · 余弦不动点与 ψ = ψ(ψ)",
           "label_en": "Chapter 24 · Cosine fixed points and ψ = ψ(ψ)",
-          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-4",
-          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-4"
+          "href": "../zh/ch24-s04-cosine-and-spherical-fixed-points.html#sec-ch24-4",
+          "href_en": "../en/ch24-s04-cosine-and-spherical-fixed-points.html#sec-ch24-4"
         },
         {
           "label": "Lean 源码 · RelativeSemanticDiagonal.lean",
@@ -204,26 +204,26 @@
         {
           "label": "第 29 章 · 第二幕 希帕索斯之裂与佩尔余项",
           "label_en": "Chapter 29 · Act II, Hippasus’s crack and the Pell remainder",
-          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-pythagoras-act2",
-          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-pythagoras-act2"
+          "href": "../zh/ch29-s01-pythagoras-and-number-systems.html#sec-coda-pythagoras-act2",
+          "href_en": "../en/ch29-s01-pythagoras-and-number-systems.html#sec-coda-pythagoras-act2"
         },
         {
           "label": "第 29 章 · ±1 佩尔接缝将奇素数一分为二：线素数与面素数",
           "label_en": "Chapter 29 · The ±1 Pell seam splits the odd primes: line and plane primes",
-          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-pell-prime-splitting",
-          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-pell-prime-splitting"
+          "href": "../zh/ch29-s02-prime-seams-and-elliptic-tori.html#sec-coda-pell-prime-splitting",
+          "href_en": "../en/ch29-s02-prime-seams-and-elliptic-tori.html#sec-coda-pell-prime-splitting"
         },
         {
           "label": "第 29 章 · 同余数椭圆曲线环面",
           "label_en": "Chapter 29 · The congruent-number elliptic torus",
-          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-congruent-elliptic-torus",
-          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-congruent-elliptic-torus"
+          "href": "../zh/ch29-s02-prime-seams-and-elliptic-tori.html#sec-coda-congruent-elliptic-torus",
+          "href_en": "../en/ch29-s02-prime-seams-and-elliptic-tori.html#sec-coda-congruent-elliptic-torus"
         },
         {
           "label": "第 29 章 · 哈塞定理、弗罗贝尼乌斯余弦与佐藤—泰特分布",
           "label_en": "Chapter 29 · Hasse’s theorem, the Frobenius cosine and Sato–Tate",
-          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-hasse-sato-tate",
-          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-hasse-sato-tate"
+          "href": "../zh/ch29-s02-prime-seams-and-elliptic-tori.html#sec-coda-hasse-sato-tate",
+          "href_en": "../en/ch29-s02-prime-seams-and-elliptic-tori.html#sec-coda-hasse-sato-tate"
         },
         {
           "label": "第一章 · 实内积空间的平行四边形范数律",
@@ -294,14 +294,14 @@
         {
           "label": "第 29 章 · 顺序无关、无时间之网与几何因果的必然性",
           "label_en": "Chapter 29 · Order-independence, the timeless web and the necessity of causality",
-          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-timeless-causality",
-          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-timeless-causality"
+          "href": "../zh/ch29-s03-timeless-gram-causality.html#sec-coda-timeless-causality",
+          "href_en": "../en/ch29-s03-timeless-gram-causality.html#sec-coda-timeless-causality"
         },
         {
           "label": "第 29 章 · 第四层 有限观察者与因果相容空间",
           "label_en": "Chapter 29 · Level 4, the finite observer and the compatible space",
-          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field",
-          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field"
+          "href": "../zh/ch29-s03-timeless-gram-causality.html#sec-coda-finite-observer-time-field",
+          "href_en": "../en/ch29-s03-timeless-gram-causality.html#sec-coda-finite-observer-time-field"
         },
         {
           "label": "第 30 章 · 全局静态场与有限观察者",
@@ -480,14 +480,14 @@
         {
           "label": "终章 · 历史遗迹作为空间吸引子",
           "label_en": "Coda · Historical ruins as spatial attractors",
-          "href": "../zh/coda.html#sec-coda-spatial-attractors-deja-vu",
-          "href_en": "../en/coda.html#sec-coda-spatial-attractors-deja-vu"
+          "href": "../zh/coda-s02-spatial-attractors.html#sec-coda-spatial-attractors-deja-vu",
+          "href_en": "../en/coda-s02-spatial-attractors.html#sec-coda-spatial-attractors-deja-vu"
         },
         {
           "label": "终章 · 似曾相识的几何诠释与维数估计",
           "label_en": "Coda · The geometry of déjà vu and the dimension estimate",
-          "href": "../zh/coda.html#sec-coda-deja-vu-fractal-dimension",
-          "href_en": "../en/coda.html#sec-coda-deja-vu-fractal-dimension"
+          "href": "../zh/coda-s02-spatial-attractors.html#sec-coda-deja-vu-fractal-dimension",
+          "href_en": "../en/coda-s02-spatial-attractors.html#sec-coda-deja-vu-fractal-dimension"
         }
       ],
       "lean": []
@@ -525,20 +525,20 @@
         {
           "label": "终章 · 黄金切投模型集与观察者路由定理",
           "label_en": "Coda · The golden cut-and-project set and the observer route",
-          "href": "../zh/coda.html#sec-coda-trureturing-observer-def",
-          "href_en": "../en/coda.html#sec-coda-trureturing-observer-def"
+          "href": "../zh/coda-s03-golden-cut-observers.html#sec-coda-trureturing-observer-def",
+          "href_en": "../en/coda-s03-golden-cut-observers.html#sec-coda-trureturing-observer-def"
         },
         {
           "label": "终章 · 菱形三十面体接受窗与“帝国效应”",
           "label_en": "Coda · The rhombic triacontahedron and the “empire effect”",
-          "href": "../zh/coda.html#sec-coda-trureturing-rhombic-triacontahedron-empire",
-          "href_en": "../en/coda.html#sec-coda-trureturing-rhombic-triacontahedron-empire"
+          "href": "../zh/coda-s03-golden-cut-observers.html#sec-coda-trureturing-rhombic-triacontahedron-empire",
+          "href_en": "../en/coda-s03-golden-cut-observers.html#sec-coda-trureturing-rhombic-triacontahedron-empire"
         },
         {
           "label": "终章 · 卡西尼接缝与有界间隙回归",
           "label_en": "Coda · The Cassini seam and returns with bounded gaps",
-          "href": "../zh/coda.html#sec-coda-trureturing-cassini-torus-return",
-          "href_en": "../en/coda.html#sec-coda-trureturing-cassini-torus-return"
+          "href": "../zh/coda-s03-golden-cut-observers.html#sec-coda-trureturing-cassini-torus-return",
+          "href_en": "../en/coda-s03-golden-cut-observers.html#sec-coda-trureturing-cassini-torus-return"
         }
       ],
       "lean": [
@@ -669,20 +669,20 @@
         {
           "label": "第 4.1 节 · 纯态是球皮，混合态是截短的线",
           "label_en": "§4.1 · Pure states are the shell, mixed states are shorter chords",
-          "href": "../zh/ch04-decoherence.html#sec-ch04-1",
-          "href_en": "../en/ch04-decoherence.html#sec-ch04-1"
+          "href": "../zh/ch04-s01-pure-and-mixed-states.html#sec-ch04-1",
+          "href_en": "../en/ch04-s01-pure-and-mixed-states.html#sec-ch04-1"
         },
         {
           "label": "第 4.2 节 · 不用背 Kraus 算符看懂三种量子噪声",
           "label_en": "§4.2 · Quantum noise geometrically, without Kraus operators",
-          "href": "../zh/ch04-decoherence.html#sec-ch04-2",
-          "href_en": "../en/ch04-decoherence.html#sec-ch04-2"
+          "href": "../zh/ch04-s02-quantum-noise.html#sec-ch04-2",
+          "href_en": "../en/ch04-s02-quantum-noise.html#sec-ch04-2"
         },
         {
           "label": "第 4.3 节 · 最大混合死点",
           "label_en": "§4.3 · The maximally mixed dead center",
-          "href": "../zh/ch04-decoherence.html#sec-ch04-3",
-          "href_en": "../en/ch04-decoherence.html#sec-ch04-3"
+          "href": "../zh/ch04-s03-maximally-mixed-state.html#sec-ch04-3",
+          "href_en": "../en/ch04-s03-maximally-mixed-state.html#sec-ch04-3"
         },
         {
           "label": "Lean 源码 · NorthPoleBallCriterion.lean",
@@ -1313,8 +1313,8 @@
         {
           "label": "本书第十四章 · 正交综合征中的逻辑恢复",
           "label_en": "Chapter 14 · logical recovery on orthogonal syndromes",
-          "href": "../zh/ch14-cloning-codes-and-braids.html#sec-orthogonal-syndrome-recovery",
-          "href_en": "../en/ch14-cloning-codes-and-braids.html#sec-orthogonal-syndrome-recovery"
+          "href": "../zh/ch14-s03-logical-recovery.html#sec-orthogonal-syndrome-recovery",
+          "href_en": "../en/ch14-s03-logical-recovery.html#sec-orthogonal-syndrome-recovery"
         },
         {
           "label": "Blueprint · OrthogonalSyndromeDecoding",
@@ -1360,14 +1360,14 @@
         {
           "label": "本书第十四章 · 二维编织与第三正交方向",
           "label_en": "Chapter 14 · planar braids and the third orthogonal direction",
-          "href": "../zh/ch14-cloning-codes-and-braids.html#sec-braids-and-third-axis",
-          "href_en": "../en/ch14-cloning-codes-and-braids.html#sec-braids-and-third-axis"
+          "href": "../zh/ch14-s04-braids-and-third-axis.html#sec-braids-and-third-axis",
+          "href_en": "../en/ch14-s04-braids-and-third-axis.html#sec-braids-and-third-axis"
         },
         {
           "label": "本书第十四章 · Markov 稳定化与着色计数",
           "label_en": "Chapter 14 · Markov stabilization and coloring counts",
-          "href": "../zh/ch14-cloning-codes-and-braids.html#sec-markov-stabilization-coloring-count",
-          "href_en": "../en/ch14-cloning-codes-and-braids.html#sec-markov-stabilization-coloring-count"
+          "href": "../zh/ch14-s05-markov-stabilization.html#sec-markov-stabilization-coloring-count",
+          "href_en": "../en/ch14-s05-markov-stabilization.html#sec-markov-stabilization-coloring-count"
         },
         {
           "label": "Blueprint · BraidColoringTransport",
@@ -1415,14 +1415,14 @@
         {
           "label": "第十六章 · 图上游走：相干叠加与适用边界",
           "label_en": "Chapter 16 · Walks on graphs: coherence and its limits",
-          "href": "../zh/ch16-qsvt-walks-and-compilation.html#sec-quantum-walk-interference",
-          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#sec-quantum-walk-interference"
+          "href": "../zh/ch16-s02-quantum-walks.html#sec-quantum-walk-interference",
+          "href_en": "../en/ch16-s02-quantum-walks.html#sec-quantum-walk-interference"
         },
         {
           "label": "第十六章 · 对称硬币引理",
           "label_en": "Chapter 16 · The symmetric-coin lemma",
-          "href": "../zh/ch16-qsvt-walks-and-compilation.html#lemma-symmetric-coin-walk",
-          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#lemma-symmetric-coin-walk"
+          "href": "../zh/ch16-s02-quantum-walks.html#lemma-symmetric-coin-walk",
+          "href_en": "../en/ch16-s02-quantum-walks.html#lemma-symmetric-coin-walk"
         },
         {
           "label": "Lean 源码 · SymmetricCoinMaximalWalkEntanglement",
@@ -1467,14 +1467,14 @@
         {
           "label": "第十六章 · 有限门字与三维割圆多面体",
           "label_en": "Chapter 16 · Finite gate words and the polytope",
-          "href": "../zh/ch16-qsvt-walks-and-compilation.html#sec-finite-gate-polytope",
-          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#sec-finite-gate-polytope"
+          "href": "../zh/ch16-s08-finite-gate-polytopes.html#sec-finite-gate-polytope",
+          "href_en": "../en/ch16-s08-finite-gate-polytopes.html#sec-finite-gate-polytope"
         },
         {
           "label": "第十六章 · L ≤ 3 的五顶点验算",
           "label_en": "Chapter 16 · The five vertices for L ≤ 3",
-          "href": "../zh/ch16-qsvt-walks-and-compilation.html#ex-finite-ht-polytope",
-          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#ex-finite-ht-polytope"
+          "href": "../zh/ch16-s09-compilation-error-and-count.html#ex-finite-ht-polytope",
+          "href_en": "../en/ch16-s09-compilation-error-and-count.html#ex-finite-ht-polytope"
         },
         {
           "label": "Lean 源码 · TwoAxisFiniteRotation",
@@ -1896,14 +1896,14 @@
         {
           "label": "第二十二章 · 极点留数、狄利克雷级数与欧拉乘积",
           "label_en": "Chapter 22 · The residue, the Dirichlet series and the Euler product",
-          "href": "../zh/ch22-primes-euler-products-and-zeros.html#sec-ch22-2",
-          "href_en": "../en/ch22-primes-euler-products-and-zeros.html#sec-ch22-2"
+          "href": "../zh/ch22-s02-dirichlet-euler-identity.html#sec-ch22-2",
+          "href_en": "../en/ch22-s02-dirichlet-euler-identity.html#sec-ch22-2"
         },
         {
           "label": "第二十二章 · 有限素数筛的截断余项",
           "label_en": "Chapter 22 · The remainder of a finite prime sieve",
-          "href": "../zh/ch22-primes-euler-products-and-zeros.html#ex-prime-log-orthogonality-and-sieve",
-          "href_en": "../en/ch22-primes-euler-products-and-zeros.html#ex-prime-log-orthogonality-and-sieve"
+          "href": "../zh/ch22-s03-finite-prime-sieves.html#ex-prime-log-orthogonality-and-sieve",
+          "href_en": "../en/ch22-s03-finite-prime-sieves.html#ex-prime-log-orthogonality-and-sieve"
         }
       ],
       "lean": [
@@ -2099,14 +2099,14 @@
         {
           "label": "第二十四章 §24.3 · 代数自指的唯一黄金锁",
           "label_en": "Chapter 24 §24.3 · The unique algebraic golden lock",
-          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-3",
-          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-3"
+          "href": "../zh/ch24-s03-golden-self-reference.html#sec-ch24-3",
+          "href_en": "../en/ch24-s03-golden-self-reference.html#sec-ch24-3"
         },
         {
           "label": "第二十四章 §24.5 · 真实收敛率、导数加速与有理读数的裂缝",
           "label_en": "Chapter 24 §24.5 · True rate, derivative speed-up and the rational seam",
-          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-5",
-          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-5"
+          "href": "../zh/ch24-s05-convergence-and-acceleration.html#sec-ch24-5",
+          "href_en": "../en/ch24-s05-convergence-and-acceleration.html#sec-ch24-5"
         }
       ],
       "lean": [
@@ -2644,14 +2644,14 @@
         {
           "label": "第 29 章 · 第二层 斯宾诺莎三角形与格拉姆刚性",
           "label_en": "Chapter 29 · Level 2, Spinoza's triangle and Gram rigidity",
-          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-hume-spinoza-gram",
-          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-hume-spinoza-gram"
+          "href": "../zh/ch29-s03-timeless-gram-causality.html#sec-coda-hume-spinoza-gram",
+          "href_en": "../en/ch29-s03-timeless-gram-causality.html#sec-coda-hume-spinoza-gram"
         },
         {
           "label": "第 29 章 · 第四层 有限观察者与因果相容空间",
           "label_en": "Chapter 29 · Level 4, the finite observer and the compatible space",
-          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field",
-          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field"
+          "href": "../zh/ch29-s03-timeless-gram-causality.html#sec-coda-finite-observer-time-field",
+          "href_en": "../en/ch29-s03-timeless-gram-causality.html#sec-coda-finite-observer-time-field"
         },
         {
           "label": "Lean 源码 · LagrangeGramIdentity.lean",
@@ -2817,14 +2817,14 @@
         {
           "label": "第二十九章 · 同余数椭圆曲线环面",
           "label_en": "Chapter 29 · The congruent-number elliptic torus",
-          "href": "../zh/ch29-timeless-causality-and-gram-space.html#rem-ch29-elliptic-torus-literature",
-          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#rem-ch29-elliptic-torus-literature"
+          "href": "../zh/ch29-s02-prime-seams-and-elliptic-tori.html#rem-ch29-elliptic-torus-literature",
+          "href_en": "../en/ch29-s02-prime-seams-and-elliptic-tori.html#rem-ch29-elliptic-torus-literature"
         },
         {
           "label": "终章 · 多面体近似与不可抹平的几何余项",
           "label_en": "End chapter · Polyhedral approximation and its remainder",
-          "href": "../zh/coda.html#sec-coda-polyhedral-remainder",
-          "href_en": "../en/coda.html#sec-coda-polyhedral-remainder"
+          "href": "../zh/coda-s01-polyhedral-remainders.html#sec-coda-polyhedral-remainder",
+          "href_en": "../en/coda-s01-polyhedral-remainders.html#sec-coda-polyhedral-remainder"
         },
         {
           "label": "trureturing · DiagonalTopologicalEscape.lean",
@@ -2872,8 +2872,8 @@
         {
           "label": "第二十四章 §24.5 · 双螺旋对应：从一维黄金连分数到二维余弦回旋方格",
           "label_en": "Chapter 24 §24.5 · Twin-spiral correspondence: golden continued fraction to cosine whirling squares",
-          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-dottie-fibonacci-spirals",
-          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-dottie-fibonacci-spirals"
+          "href": "../zh/ch24-s05-convergence-and-acceleration.html#sec-ch24-dottie-fibonacci-spirals",
+          "href_en": "../en/ch24-s05-convergence-and-acceleration.html#sec-ch24-dottie-fibonacci-spirals"
         },
         {
           "label": "第三十二章 §32.4 · 正交自指统一场中的双螺旋分工",
@@ -2884,8 +2884,8 @@
         {
           "label": "终章 · 卡西尼 ±1 接缝与黄金比的赫尔维茨界",
           "label_en": "Coda · Cassini's ±1 seam and the Hurwitz bound at the golden ratio",
-          "href": "../zh/coda.html#thm-coda-golden-hurwitz",
-          "href_en": "../en/coda.html#thm-coda-golden-hurwitz"
+          "href": "../zh/coda-s03-golden-cut-observers.html#thm-coda-golden-hurwitz",
+          "href_en": "../en/coda-s03-golden-cut-observers.html#thm-coda-golden-hurwitz"
         },
         {
           "label": "Lean 源码 · GoldenInverseBranchFixedPoint.lean",
@@ -2942,8 +2942,8 @@
         {
           "label": "第二十二章 §22.4 · 临界对称轴与黎曼猜想的认识论边界",
           "label_en": "Chapter 22 §22.4 · The critical line and the epistemic boundary of the Riemann hypothesis",
-          "href": "../zh/ch22-primes-euler-products-and-zeros.html#sec-ch22-4",
-          "href_en": "../en/ch22-primes-euler-products-and-zeros.html#sec-ch22-4"
+          "href": "../zh/ch22-s04-critical-line-and-rh.html#sec-ch22-4",
+          "href_en": "../en/ch22-s04-critical-line-and-rh.html#sec-ch22-4"
         }
       ],
       "lean": [
@@ -3113,8 +3113,8 @@
         {
           "label": "第三十一章 · 公平、平方与正交扩维",
           "label_en": "Chapter 31 · Fairness, squaring & expansion",
-          "href": "../zh/ch31-quantum-fairness.html#sec-ch31-fairness-square-expansion",
-          "href_en": "../en/ch31-quantum-fairness.html#sec-ch31-fairness-square-expansion"
+          "href": "../zh/ch31-s04-fairness-and-dimensional-expansion.html#sec-ch31-fairness-square-expansion",
+          "href_en": "../en/ch31-s04-fairness-and-dimensional-expansion.html#sec-ch31-fairness-square-expansion"
         },
         {
           "label": "第六章 · 罗伯逊—薛定谔恒等式",
@@ -3208,8 +3208,8 @@
         {
           "label": "第三十六章 §36.4 · p 进零进位查表树、素数观察者扩表与阻断轮回",
           "label_en": "Chapter 36 §36.4 · p-adic zero-carry lookup trees, prime expansion & blocking samsara",
-          "href": "../zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#sec-ch36-padic-prime-table-expansion",
-          "href_en": "../en/ch36-hyperbolic-steps-and-quotienting-reincarnation.html#sec-ch36-padic-prime-table-expansion"
+          "href": "../zh/ch36-s04-padic-table-expansion.html#sec-ch36-padic-prime-table-expansion",
+          "href_en": "../en/ch36-s04-padic-table-expansion.html#sec-ch36-padic-prime-table-expansion"
         },
         {
           "label": "OstrowskiClassification.lean",
@@ -3283,8 +3283,8 @@
         {
           "label": "本书第三十七章 · 梦的预退相干与似曾相识",
           "label_en": "Chapter 37 · Dream pre-decoherence and déjà vu",
-          "href": "../zh/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#sec-ch37-dream-pre-decoherence-deja-vu",
-          "href_en": "../en/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#sec-ch37-dream-pre-decoherence-deja-vu"
+          "href": "../zh/ch37-s05-future-selection-and-deja-vu.html#sec-ch37-dream-pre-decoherence-deja-vu",
+          "href_en": "../en/ch37-s05-future-selection-and-deja-vu.html#sec-ch37-dream-pre-decoherence-deja-vu"
         },
         {
           "label": "有限记录捏合幂等（Blueprint）",
@@ -3380,8 +3380,8 @@
         {
           "label": "第三十八章 §38.4 · P=NP 查表算法的七阶退化与全息引力权衡",
           "label_en": "Chapter 38 §38.4 · 7-stage degradation of a P=NP lookup oracle",
-          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-pnp-lookup-degradation",
-          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-pnp-lookup-degradation"
+          "href": "../zh/ch38-s04-lookup-degradation.html#sec-ch38-pnp-lookup-degradation",
+          "href_en": "../en/ch38-s04-lookup-degradation.html#sec-ch38-pnp-lookup-degradation"
         },
         {
           "label": "Lean 源码 · LookupProgramUpperBound.lean",
@@ -3450,8 +3450,8 @@
         {
           "label": "第三十八章 §38.5 · 观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵",
           "label_en": "Chapter 38 §38.5 · Observer escape ledger, preimage fibers and Hilbert–Zeckendorf entropy",
-          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-observer-escape-ledger",
-          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-observer-escape-ledger"
+          "href": "../zh/ch38-s05-escape-ledger-and-entropy.html#sec-ch38-observer-escape-ledger",
+          "href_en": "../en/ch38-s05-escape-ledger-and-entropy.html#sec-ch38-observer-escape-ledger"
         },
         {
           "label": "第十三章 · 局域边缘扇区与关联扇区的正交分解及边缘盲区定理",
@@ -3538,8 +3538,8 @@
         {
           "label": "第三十九章 · 齐肯多夫、皮索与劳齐",
           "label_en": "Chapter 39 · Zeckendorf, Pisot & Rauzy",
-          "href": "../zh/ch39-observer-is-ontological-universe.html#sec-ch39-pisot-clifford-rauzy",
-          "href_en": "../en/ch39-observer-is-ontological-universe.html#sec-ch39-pisot-clifford-rauzy"
+          "href": "../zh/ch39-s05-pisot-clifford-rauzy.html#sec-ch39-pisot-clifford-rauzy",
+          "href_en": "../en/ch39-s05-pisot-clifford-rauzy.html#sec-ch39-pisot-clifford-rauzy"
         },
         {
           "label": "trureturing · RauzyFractal.lean",
@@ -3732,8 +3732,8 @@
         {
           "label": "第 29 章 · 相干握手与因果",
           "label_en": "Chapter 29 · The coherence handshake and causality",
-          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-ch29-coherence-handshake-causality",
-          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-ch29-coherence-handshake-causality"
+          "href": "../zh/ch29-s04-coherence-and-handshake.html#sec-ch29-coherence-handshake-causality",
+          "href_en": "../en/ch29-s04-coherence-and-handshake.html#sec-ch29-coherence-handshake-causality"
         },
         {
           "label": "Lean 源码 · RankOneBornPairingWeight.lean",
@@ -3819,8 +3819,8 @@
         {
           "label": "第三十三章 · 共识、去相干与指针轴",
           "label_en": "Chapter 33 · Consensus, decoherence and the pointer axis",
-          "href": "../zh/ch33-all-beings-observers-and-mutual-attractors.html#sec-ch33-consensus-decoherence-pointer",
-          "href_en": "../en/ch33-all-beings-observers-and-mutual-attractors.html#sec-ch33-consensus-decoherence-pointer"
+          "href": "../zh/ch33-s05-consensus-and-pointer-bases.html#sec-ch33-consensus-decoherence-pointer",
+          "href_en": "../en/ch33-s05-consensus-and-pointer-bases.html#sec-ch33-consensus-decoherence-pointer"
         }
       ],
       "lean": [
@@ -3955,8 +3955,8 @@
         {
           "label": "第 34 章 · 无穷小球面三面角原胞",
           "label_en": "Chapter 34 · The infinitesimal spherical trihedron cell",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-infinitesimal-spherical-trihedron",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-infinitesimal-spherical-trihedron"
+          "href": "../zh/ch34-s04-infinitesimal-trihedron.html#sec-ch34-infinitesimal-spherical-trihedron",
+          "href_en": "../en/ch34-s04-infinitesimal-trihedron.html#sec-ch34-infinitesimal-spherical-trihedron"
         },
         {
           "label": "第九章 · 初始结构与有限旋转字",
@@ -4021,8 +4021,8 @@
         {
           "label": "第 34 章 · 三元自举与去名相化",
           "label_en": "Chapter 34 · Triadic bootstrap and beyond names",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-bootstrap-and-beyond-names",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-bootstrap-and-beyond-names"
+          "href": "../zh/ch34-s05-triadic-bootstrap.html#sec-ch34-triadic-bootstrap-and-beyond-names",
+          "href_en": "../en/ch34-s05-triadic-bootstrap.html#sec-ch34-triadic-bootstrap-and-beyond-names"
         },
         {
           "label": "§32.1 比较公理",
@@ -4186,8 +4186,8 @@
         {
           "label": "第三十四章 §34.7 · 相位积分驻波成体与三维体积涌现",
           "label_en": "Chapter 34 §34.7 · Phase-integral standing waves and emergent volume",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-standing-wave-volume-emergence",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-standing-wave-volume-emergence"
+          "href": "../zh/ch34-s07-standing-wave-volume.html#sec-ch34-standing-wave-volume-emergence",
+          "href_en": "../en/ch34-s07-standing-wave-volume.html#sec-ch34-standing-wave-volume-emergence"
         }
       ],
       "lean": [
@@ -4254,8 +4254,8 @@
         {
           "label": "第三十四章 §34.8 · 极小圆弧体四位一体与多胞抵消",
           "label_en": "Chapter 34 §34.8 · The minimal Clifford monad and multi-cell cancellation",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-clifford-monad-tiling",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-clifford-monad-tiling"
+          "href": "../zh/ch34-s08-clifford-monads.html#sec-ch34-clifford-monad-tiling",
+          "href_en": "../en/ch34-s08-clifford-monads.html#sec-ch34-clifford-monad-tiling"
         }
       ],
       "lean": [
@@ -4339,8 +4339,8 @@
         {
           "label": "第三十四章 §34.9 · 反者道之动：来路对角化与概念开维级联",
           "label_en": "Chapter 34 §34.9 · Reversal: diagonalising the ways in and the concept cascade",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-reversal-diagonal-and-concept-cascade",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-reversal-diagonal-and-concept-cascade"
+          "href": "../zh/ch34-s09-reversal-and-concept-cascade.html#sec-ch34-reversal-diagonal-and-concept-cascade",
+          "href_en": "../en/ch34-s09-reversal-and-concept-cascade.html#sec-ch34-reversal-diagonal-and-concept-cascade"
         }
       ],
       "lean": [
@@ -4433,8 +4433,8 @@
         {
           "label": "LEAN ✓ · 格拉姆刚性 B = UA、纯态布洛赫范数为 1、三锚格拉姆行列式公式与正性判据、FS 角三角不等式、两轴有限字、面圈正合、四面体缺陷修复；八条冻结声明各自支持其陈述。",
           "label_en": "LEAN ✓ · Gram rigidity B = UA, unit Bloch norm of pure states, the three-anchor Gram determinant formula and positivity criterion, the FS-angle triangle inequality, finite two-axis words, face–cycle exactness and tetrahedral defect repair; each of the eight frozen statements supports its own claim.",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability"
+          "href": "../zh/ch34-s10-trihedron-rigidity.html#sec-ch34-trihedron-rigidity-and-3d-stability",
+          "href_en": "../en/ch34-s10-trihedron-rigidity.html#sec-ch34-trihedron-rigidity-and-3d-stability"
         },
         {
           "label": "ARGUED · 麦克斯韦计数 3N − 6、亨内贝格加点、吉拉尔角超与等边球面三角形 cos A = c/(1 + c)、雷杰角亏 δ = 2π − Σθ 与 2π − 5 arccos(1/3)；文献结果，未在本书形式化。",
@@ -4444,14 +4444,14 @@
         {
           "label": "NUM · 节点位置、格拉姆表与行列式、球面角与角超、精确保边长的剪切链、对角余弦、欧拉计数与 ZMod 2 标号枚举、立体角上链的四面体缺陷均由页面当场计算。",
           "label_en": "NUM · Node positions, Gram tables and determinants, spherical angles and excess, the exact side-keeping shear chain, diagonal cosines, the Euler count with the ZMod 2 labelling enumeration and the tetrahedral defects of the solid-angle cochain are computed on the spot.",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability"
+          "href": "../zh/ch34-s10-trihedron-rigidity.html#sec-ch34-trihedron-rigidity-and-3d-stability",
+          "href_en": "../en/ch34-s10-trihedron-rigidity.html#sec-ch34-trihedron-rigidity-and-3d-stability"
         },
         {
           "label": "MODEL · “概念—比较桁架”是作者的诠释；扰动 τ cos 2πt、撑杆应力与雷杰辉光 ΔE·(2π − 5 arccos(1/3)) 是示意量；三维计数把节点当作自由点（贴在球面上时为 2N − 3）。",
           "label_en": "MODEL · The “concept–comparison truss” is the author's interpretation; the push τ cos 2πt, the strut stress and the Regge glow ΔE·(2π − 5 arccos(1/3)) are schematic; the three-dimensional count treats nodes as free points (2N − 3 when pinned to the sphere).",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability"
+          "href": "../zh/ch34-s10-trihedron-rigidity.html#sec-ch34-trihedron-rigidity-and-3d-stability",
+          "href_en": "../en/ch34-s10-trihedron-rigidity.html#sec-ch34-trihedron-rigidity-and-3d-stability"
         }
       ],
       "lean": [
@@ -4519,8 +4519,8 @@
         {
           "label": "第 34 章 · 量子极小圆弧与宏观积分",
           "label_en": "Chapter 34 · Minimal quantum arcs and the macroscopic integral",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-arc-and-macro-integral",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-arc-and-macro-integral"
+          "href": "../zh/ch34-s11-quantum-arcs-and-macro-integrals.html#sec-ch34-quantum-arc-and-macro-integral",
+          "href_en": "../en/ch34-s11-quantum-arcs-and-macro-integrals.html#sec-ch34-quantum-arc-and-macro-integral"
         },
         {
           "label": "ARGUED · 费曼 (1948)：路径积分与驻相选路",
@@ -4623,8 +4623,8 @@
         {
           "label": "LEAN ✓ · 有限泊松求和与零化子特征和、无理平均趋于哈尔积分、正交补投影恒等式、拉格朗日—格拉姆恒等式、两轴有限字、三锚点格拉姆行列式、三点巴格曼—布洛赫恒等式、单纯二上链修补与精确性；九条冻结声明各自支持页面上对应的实例。",
           "label_en": "LEAN ✓ · Finite Poisson summation and annihilator character sums, irrational averages tending to the Haar integral, orthogonal-complement projection identities, the Lagrange–Gram identity, finite two-axis words, the three-anchor Gram determinant, the triple Bargmann–Bloch identity, and repair and exactness of simplicial two-cochains; each of the nine frozen statements supports its own instance on the page.",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop"
+          "href": "../zh/ch34-s12-triadic-duality.html#sec-ch34-triadic-duality-and-field-loop",
+          "href_en": "../en/ch34-s12-triadic-duality.html#sec-ch34-triadic-duality-and-field-loop"
         },
         {
           "label": "ARGUED · 吉拉尔球面角超、扇锥体积 Ω/3、巴格曼不变量辐角与立体角之半、外代数最高次数 3、路径积分的离壳相消与驻相选路。",
@@ -4634,14 +4634,14 @@
         {
           "label": "NUM · 独立计算投影、格拉姆行列式、球面角与角超、2 × 2 复矩阵之积的迹、离散傅里叶变换与特征和、整数上边缘。",
           "label_en": "NUM · Direct computation of the projections, the Gram determinant, the spherical angles and excess, the trace of a product of 2 × 2 complex matrices, the discrete Fourier transform and character sums, and the integer coboundary.",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop"
+          "href": "../zh/ch34-s12-triadic-duality.html#sec-ch34-triadic-duality-and-field-loop",
+          "href_en": "../en/ch34-s12-triadic-duality.html#sec-ch34-triadic-duality-and-field-loop"
         },
         {
           "label": "MODEL · 一弧三相（线 ↔ 粒子、面 ↔ 波、体 ↔ 场）与反者道之动回环是本书的诠释；十二格的摆放、三相着色、缠绕 W 与相消锐度 κ 是画面模型，只有 W = 1、κ = 1 时才是定理中的特征和。",
           "label_en": "MODEL · One arc, three phases (line ↔ particle, surface ↔ wave, volume ↔ field) and the reversal loop are the interpretation of the book; the twelve-site placement, the phase colouring, the winding W and the cancellation sharpness κ are picture models, and only W = 1 with κ = 1 gives the character sum of the theorems.",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop"
+          "href": "../zh/ch34-s12-triadic-duality.html#sec-ch34-triadic-duality-and-field-loop",
+          "href_en": "../en/ch34-s12-triadic-duality.html#sec-ch34-triadic-duality-and-field-loop"
         }
       ],
       "lean": [
@@ -4734,14 +4734,14 @@
         {
           "label": "第 34 章 · 点体八度与粒子—场层级",
           "label_en": "Chapter 34 · Point–volume octave and the particle–field hierarchy",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field"
+          "href": "../zh/ch34-s13-point-volume-octave.html#sec-ch34-point-volume-octave-and-particle-field",
+          "href_en": "../en/ch34-s13-point-volume-octave.html#sec-ch34-point-volume-octave-and-particle-field"
         },
         {
           "label": "LEAN ✓ · 单位记录内积、三向量格拉姆展开、三点巴格曼—布洛赫恒等式、正交补投影、记录捏合幂等、黄金螺旋傅里叶读出与层级联合读出、有限泊松求和与零化子特征和、黄金模型集德洛内；十条冻结声明各自支持其陈述。",
           "label_en": "LEAN ✓ · Unit-record overlap, the three-vector Gram expansion, the triple Bargmann–Bloch identity, orthogonal-complement projections, record pinching idempotence, the golden helix Fourier readout and the joint level readout, finite Poisson summation and annihilator character sums, and the golden model set Delone property; each of the ten frozen statements supports its own claim.",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field"
+          "href": "../zh/ch34-s13-point-volume-octave.html#sec-ch34-point-volume-octave-and-particle-field",
+          "href_en": "../en/ch34-s13-point-volume-octave.html#sec-ch34-point-volume-octave-and-particle-field"
         },
         {
           "label": "ARGUED · 汤川型格林函数与连续极限 e^{−mr}/(4πr)（文献结果，未在本书形式化）",
@@ -4751,8 +4751,8 @@
         {
           "label": "MODEL · 八度坐标与螺旋位置 s = (z + 1)/4、层级重整化诠释、黄金角场丝、红外底 μ² = 1/81、缀饰半径以堆积半径 1/2 为底、探针到子群 H 的取法。",
           "label_en": "MODEL · The octave coordinate on the helix s = (z + 1)/4, the hierarchical renormalization reading, golden-angle filaments, the infrared floor μ² = 1/81, the dressing radius floored at the packing radius 1/2, and the choice of the subgroup H from the probe.",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field"
+          "href": "../zh/ch34-s13-point-volume-octave.html#sec-ch34-point-volume-octave-and-particle-field",
+          "href_en": "../en/ch34-s13-point-volume-octave.html#sec-ch34-point-volume-octave-and-particle-field"
         }
       ],
       "lean": [
@@ -4850,8 +4850,8 @@
         {
           "label": "第 34 章 §34.14 · 洛伦兹伪标量与标准模型八度",
           "label_en": "Chapter 34 §34.14 · Lorentz pseudoscalar and the Standard-Model octave",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-lorentz-pseudoscalar-and-sm-octave",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-lorentz-pseudoscalar-and-sm-octave"
+          "href": "../zh/ch34-s14-lorentz-and-standard-model-octave.html#sec-ch34-lorentz-pseudoscalar-and-sm-octave",
+          "href_en": "../en/ch34-s14-lorentz-and-standard-model-octave.html#sec-ch34-lorentz-pseudoscalar-and-sm-octave"
         }
       ],
       "lean": [
@@ -4955,8 +4955,8 @@
         {
           "label": "第 34 章 §34.15 · 量子门与宇宙概念塔",
           "label_en": "Chapter 34 §34.15 · The quantum gate and the cosmic concept tower",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-gate-and-cosmic-concept-tower",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-gate-and-cosmic-concept-tower"
+          "href": "../zh/ch34-s15-quantum-gates-and-concept-tower.html#sec-ch34-quantum-gate-and-cosmic-concept-tower",
+          "href_en": "../en/ch34-s15-quantum-gates-and-concept-tower.html#sec-ch34-quantum-gate-and-cosmic-concept-tower"
         }
       ],
       "lean": [
@@ -5063,8 +5063,8 @@
         {
           "label": "第 34 章 §34.16 · 破缺—守恒陪集概念塔",
           "label_en": "Chapter 34 §34.16 · Breaking–conservation coset towers",
-          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-coset-breaking-conservation-towers",
-          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-coset-breaking-conservation-towers"
+          "href": "../zh/ch34-s16-coset-breaking-and-conservation.html#sec-ch34-coset-breaking-conservation-towers",
+          "href_en": "../en/ch34-s16-coset-breaking-and-conservation.html#sec-ch34-coset-breaking-conservation-towers"
         }
       ],
       "lean": [
@@ -5144,8 +5144,8 @@
         {
           "label": "第三十八章 §38.6 · 未完成的地平线",
           "label_en": "Chapter 38 §38.6 · The uncompleted horizon",
-          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-uncompleted-horizon-godel-pnp",
-          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-uncompleted-horizon-godel-pnp"
+          "href": "../zh/ch38-s06-uncompleted-horizon.html#sec-ch38-uncompleted-horizon-godel-pnp",
+          "href_en": "../en/ch38-s06-uncompleted-horizon.html#sec-ch38-uncompleted-horizon-godel-pnp"
         }
       ],
       "lean": [
@@ -5226,8 +5226,8 @@
         {
           "label": "第三十八章 §38.7 · 北极自指盲点与四句离相",
           "label_en": "Chapter 38 §38.7 · North-Pole blind spot and tetralemma suspension",
-          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-stereographic-blindspot-relativization-suspension",
-          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html#sec-ch38-stereographic-blindspot-relativization-suspension"
+          "href": "../zh/ch38-s07-blindspot-and-relativization.html#sec-ch38-stereographic-blindspot-relativization-suspension",
+          "href_en": "../en/ch38-s07-blindspot-and-relativization.html#sec-ch38-stereographic-blindspot-relativization-suspension"
         }
       ],
       "lean": [
