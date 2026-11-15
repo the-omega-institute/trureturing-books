@@ -184,6 +184,46 @@ The conclusion is a **common realization in some finite-dimensional space**. It 
 If every local window also has real matrix rank $\le d$, principal-block rank monotonicity supplies the clique rank hypotheses; the rank-bounded chordal theorem then gives a rank-$\le d$ completion and a Gram factor in $\mathbb R^d$. With diagonal one, the factor vectors are unit vectors. This is a written application of the general theorem, not a separately compiled end-to-end theorem for the band graph and window ranks; fixed $\mathbb R^3$ or $\mathbb R^6$ still requires that local rank premise, so fixed dimension does not follow automatically. The rank extension is the Laurent–Varvitsiotis (2014) result, DOI [10.1007/s10107-013-0648-x](https://doi.org/10.1007/s10107-013-0648-x), author version [arXiv:1204.0734](https://arxiv.org/abs/1204.0734), discussed in its introduction and Lemma 2. The case $d=0$ remains meaningful: nonempty diagonal-one data cannot satisfy the rank-zero premise.
 :::
 
+::: {.remark #rem-ch29-continuous-gram-selection title="Pointwise Gram existence does not imply a continuous choice"}
+The finite rank-bounded completion theorem is an existence statement for each fixed table. Even for a continuous family of full tables of constant rank, a continuous factor in the smallest ambient dimension need not exist. Here is a written application of the circle double-cover obstruction in [@thm-circle-double-cover-history-lift], rather than a separate Lean theorem for the matrix variant.
+
+Give $S=\{z\in\mathbb C:|z|=1\}$ its inherited topology and set
+
+$$
+A(z)=\frac12\begin{pmatrix}1+\operatorname{Re}z&\operatorname{Im}z\\\operatorname{Im}z&1-\operatorname{Re}z\end{pmatrix}.
+$$
+
+This is a continuous real matrix field. Writing $x=\operatorname{Re}z$ and $y=\operatorname{Im}z$, the identity $x^2+y^2=1$ gives $A^T=A$, $A^2=A$ and $\operatorname{tr}A=1$. Hence $A=A^TA$ is positive semidefinite; as a projection its real rank equals its trace, so the rank is exactly one everywhere.
+
+Nevertheless, there are no continuous functions $p_0,p_1:S\to\mathbb R$ satisfying
+
+$$
+\begin{aligned}
+p_0(z)^2&=(1+x)/2,\\
+p_0(z)p_1(z)&=y/2,\\
+p_1(z)^2&=(1-x)/2
+\end{aligned}
+$$
+
+at every point. Such a pair would give a continuous $w=p_0+ip_1$ with $|w|=1$ and $w^2=z$, exactly the global section excluded by [@thm-circle-double-cover-history-lift]. The literal norm-one carrier here and the metric unit-sphere carrier of that theorem are homeomorphic by the identity on complex values.
+
+For each individual $z$, a square root exists, so a one-row Gram factor exists pointwise. With two rows, the continuous choice $P(z)=A(z)$ satisfies $P(z)^TP(z)=A(z)$. Thus constant rank and pointwise existence alone do not provide a continuous one-row choice; the example does not obstruct larger ambient dimensions. It supplies no probability law, dynamics, physical realization or claim about all parameter spaces. Classical context: Hatcher, [*Algebraic Topology*, Chapter 1](https://pi.math.cornell.edu/~hatcher/AT/ATch1.pdf), printed pp. 56 and 61, and [*Vector Bundles & K-Theory*, version 2.2](https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf), printed pp. 7–8. The matrix correspondence and its boundaries are detailed in the owning [Blueprint application](https://github.com/the-omega-institute/trureturing/pull/30885).
+:::
+
+::: {.remark #rem-ch29-planar-cycle-compatibility title="A joint angle condition for planar cycle data"}
+The chordal hypothesis matters when local overlap tables are replaced by a cycle mask. Fix $n\ge3$ cyclically ordered vertices, prescribe a real overlap $a_i\in[-1,1]$ between vertex $i$ and its successor modulo $n$, and put $\theta_i=\arccos(a_i)\in[0,\pi]$. Unit vectors $p_i\in\mathbb R^2$ with exactly those adjacent inner products exist if and only if there are signs $\varepsilon_i\in\{-1,1\}$ and $k\in\mathbb Z$ such that
+
+$$
+\sum_{i=0}^{n-1}\varepsilon_i\theta_i=2\pi k.
+$$
+
+One common signing must close the entire cycle. Individually admissible edge overlaps do not supply this joint condition. The criterion includes $a_i=\pm1$, repeated vectors and nonspanning families: the associated Gram rank is **at most two**, not necessarily exactly two. For $n\ge4$, the cycle is nonchordal; this is a separate planar criterion, not an application of the chordal-completion theorem.
+
+To see both directions, identify the real plane isometrically with $\mathbb C$ and represent each unit vector by $z_i$ on the unit circle. The quotient $q_i=z_{i+1}/z_i$ has real part $a_i$, so its argument is $\varepsilon_i\arccos(a_i)$ for one of the two signs, including the real-axis endpoints. The quotient product telescopes to one, and the circle exponential has period $2\pi$, giving the integer winding condition. Conversely, use the prefix products of $\exp(i\varepsilon_i\theta_i)$ as vertex points. The total product is one, so the final edge wraps back to the initial point; cosine evenness gives each prescribed overlap.
+
+This is a written application of the existing circle, inner-product and finite-product APIs, without a separate retained Lean statement or new verification badge for the cycle variant. The full criterion and derivation are in the [source completion Blueprint application](https://github.com/the-omega-institute/trureturing/pull/30905). Classical sources are Eisenberg-Nagy–Laurent–Varvitsiotis, [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2), Definition 1.1 and Lemma 2.1, and Laurent–Varvitsiotis, [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1), Lemma 7; the latter locator refers specifically to v1. No uniqueness, dynamics, probability law, physical realization or larger-dimensional completion criterion is asserted here.
+:::
+
 ::: {.viz src="gram-causal-elliptope" preset="narrow" height="500"}
 **One more step remembered, one ring narrower.** The rail adds history from $M = 1$ to $M = 5$: each older anchor adds a magenta ellipse to the slice, nested inside the last, and the cyan window through the amber $\mathbf{Q}$ narrows with it, from all of $[-1, 1]$ to about a quarter of that, with $\mathbf{Q}$ inside throughout. The events live in $\mathbb{R}^6$, so every depth keeps an inside; reading the compatible space as a finite observer's room for choice is this book's interpretation (`MODEL`).
 :::
