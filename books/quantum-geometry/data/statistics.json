@@ -3,25 +3,25 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 206,
+    "theorem": 208,
     "lemma": 34,
     "proposition": 45,
     "corollary": 31,
-    "definition": 48,
+    "definition": 49,
     "conjecture": 6,
     "problem": 3,
     "example": 125,
     "remark": 204,
-    "proof": 311,
-    "lean_verified": 313,
+    "proof": 313,
+    "lean_verified": 315,
     "written_proof": 3,
-    "literature": 198
+    "literature": 197
   },
-  "total": 675,
+  "total": 682,
   "kinds": {
-    "def": 201,
+    "def": 204,
     "inductive": 11,
-    "theorem": 463
+    "theorem": 467
   },
   "groups": {
     "theorems": [
@@ -297,6 +297,8 @@
       "D5/S3/Quantum/Routing/HannUniformSection.uniform_section",
       "D5/S3/Quantum/Routing/HannUniformSection.zero_certificate",
       "D5/S3/Quantum/Routing/ReversibleQram.correctness",
+      "D5/S3/Quantum/ShorContinuedFractions.shor_coprime_candidate",
+      "D5/S3/Quantum/ShorContinuedFractions.shor_nearest_candidate",
       "D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound",
       "D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized",
       "D5/S3/Quantum/ShorCountingMarginal.shor_mixture_peak_lower_bound",
@@ -382,6 +384,7 @@
       "D5/S0/Diagonal/SelfApplicationFates.determinant",
       "D5/S0/Diagonal/SelfApplicationFates.discriminant",
       "D5/S0/Diagonal/SelfApplicationFates.fixedCoefficients",
+      "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.candidates",
       "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap",
       "D5/S1/Recurrence/PellCompanionGcd.P",
       "D5/S1/Recurrence/PellCompanionGcd.Q",
@@ -561,6 +564,10 @@
       "D5/S1/Deficit/ModelSet/GoldenModelSetDensity.golden_model_set_density",
       "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_model_set_self_similar",
       "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_window_volume",
+      "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents",
+      "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff",
+      "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced",
+      "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den",
       "D5/S1/Words/Mechanical/MechanicalBalance.lowerMechanicalWindowTrueCount_eq_floor",
       "D5/S1/Words/Mechanical/MechanicalDensity.lower_mechanical_window_true_discrepancy",
       "D5/S3/Arith/ExponentExchange/PrefixNormalForm.exists_antitone_exponent_form",
@@ -2652,6 +2659,66 @@
         {
           "file": "coda-s04-fixed-point-anchors.md",
           "line": 36,
+          "id": "",
+          "via": "inline"
+        }
+      ]
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.candidates": {
+      "kind": "def",
+      "name": "QuantumShorContinuedFractions.candidates",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 484,
+          "id": "def-shor-observable-candidates",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents": {
+      "kind": "def",
+      "name": "QuantumShorContinuedFractions.convergents",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 495,
+          "id": "",
+          "via": "inline"
+        }
+      ]
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff": {
+      "kind": "theorem",
+      "name": "QuantumShorContinuedFractions.mem_convergents_iff",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 497,
+          "id": "",
+          "via": "inline"
+        }
+      ]
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced": {
+      "kind": "def",
+      "name": "QuantumShorContinuedFractions.reduced",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 497,
+          "id": "",
+          "via": "inline"
+        }
+      ]
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den": {
+      "kind": "theorem",
+      "name": "QuantumShorContinuedFractions.reduced_den",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 497,
           "id": "",
           "via": "inline"
         }
@@ -18401,6 +18468,30 @@
         }
       ]
     },
+    "D5/S3/Quantum/ShorContinuedFractions.shor_coprime_candidate": {
+      "kind": "theorem",
+      "name": "QuantumShorContinuedFractions.shor_coprime_candidate",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 536,
+          "id": "thm-shor-coprime-candidate",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/ShorContinuedFractions.shor_nearest_candidate": {
+      "kind": "theorem",
+      "name": "QuantumShorContinuedFractions.shor_nearest_candidate",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 499,
+          "id": "thm-shor-nearest-candidate",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound": {
       "kind": "theorem",
       "name": "QuantumPhaseEstimationGeneral.qpe_arbitrary_phase_lower_bound",
@@ -22771,16 +22862,24 @@
       "number": "15",
       "depth": 0,
       "environment": [
+        "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.candidates",
         "D5/S3/Fourier/FinitePoisson.finite_poisson_summation",
         "D5/S3/Fourier/FinitePoisson.sum_annihilator_character",
         "D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation",
         "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation",
+        "D5/S3/Quantum/ShorContinuedFractions.shor_coprime_candidate",
+        "D5/S3/Quantum/ShorContinuedFractions.shor_nearest_candidate",
         "D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound",
         "D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized",
         "D5/S3/Quantum/ShorCountingMarginal.shor_mixture_peak_lower_bound",
         "D5/S3/Quantum/ShorCountingMarginal.shor_qpe_probability_mixture"
       ],
-      "inline": []
+      "inline": [
+        "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents",
+        "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff",
+        "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced",
+        "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den"
+      ]
     },
     {
       "file": "ch16-qsvt-walks-and-compilation.md",

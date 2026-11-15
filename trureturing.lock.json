@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "6998cc6a39562699c218d8e75ad96c43a911d435",
-  "pinned_at": "2026-11-15T17:29:08Z",
+  "pinned_at": "2026-11-15T18:11:35Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -468,6 +468,46 @@
       "statement_id": "sha256:d8572323fb2bb07500f22dc0392d3bd8e43f0a48362aa3a9ea465558678db2e1",
       "line": 182,
       "signature": "theorem golden_window_volume : volume goldenWindow = 1"
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.candidates": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+      "name": "QuantumShorContinuedFractions.candidates",
+      "kind": "def",
+      "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
+      "line": 87,
+      "signature": "def candidates (y Q N : ℕ) : List ℚ"
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+      "name": "QuantumShorContinuedFractions.convergents",
+      "kind": "def",
+      "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
+      "line": 37,
+      "signature": "def convergents (x : ℚ) : List ℚ"
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+      "name": "QuantumShorContinuedFractions.mem_convergents_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
+      "line": 67,
+      "signature": "theorem mem_convergents_iff (x z : ℚ) : z ∈ convergents x ↔ ∃ k, Real.convergent (x : ℝ) k = z"
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+      "name": "QuantumShorContinuedFractions.reduced",
+      "kind": "def",
+      "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
+      "line": 91,
+      "signature": "def reduced (s r : ℕ) : ℚ"
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+      "name": "QuantumShorContinuedFractions.reduced_den",
+      "kind": "theorem",
+      "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
+      "line": 93,
+      "signature": "theorem reduced_den (s r : ℕ) (hr : 0 < r) : (reduced s r).den = r / Nat.gcd s r"
     },
     "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound": {
       "module": "D5/S1/Depth/GoldenHurwitzBound",
@@ -4428,6 +4468,22 @@
       "statement_id": "sha256:07ebdbb032c2a26a85df415803daff40fa76a8bbf442745abc31db865e604f59",
       "line": 208,
       "signature": "theorem correctness : (∀ (n : ℕ) (a i : Address n) (e : Bool), leaf n (route n a (clean n e)) i = if i = a then e else false) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (w : Wires n) (r : G), query n D (a, w, r) = (a, w, r + readAmount n D (route n a w))) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (r : G), query n D (a, clean n true, r) = (a, clean n true, r + D a)) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] [Fintype G] [DecidableEq G] (D : Address n → G), (queryMatrix n D)ᴴ * queryMatrix n D = 1 ∧ queryMatrix n D * (queryMatrix"
+    },
+    "D5/S3/Quantum/ShorContinuedFractions.shor_coprime_candidate": {
+      "module": "D5/S3/Quantum/ShorContinuedFractions",
+      "name": "QuantumShorContinuedFractions.shor_coprime_candidate",
+      "kind": "theorem",
+      "statement_id": "sha256:96eaed2aaf87cb3727a47b03370d0deef045c75b0551a5fef99e99a7a31eb504",
+      "line": 127,
+      "signature": "theorem shor_coprime_candidate (c : Parameters) (n : ℕ) (hsize : c.modulus ^ 2 ≤ 2 ^ n) (s : Fin c.period) (y : Fin (2 ^ n)) (hnear : Nearest (2 ^ n) (s.val / (c.period : ℝ)) y) (hcop : Nat.Coprime s.val c.period) : c.period ∈ (candidates y.val (2 ^ n) c.modulus).map Rat.den"
+    },
+    "D5/S3/Quantum/ShorContinuedFractions.shor_nearest_candidate": {
+      "module": "D5/S3/Quantum/ShorContinuedFractions",
+      "name": "QuantumShorContinuedFractions.shor_nearest_candidate",
+      "kind": "theorem",
+      "statement_id": "sha256:96eaed2aaf87cb3727a47b03370d0deef045c75b0551a5fef99e99a7a31eb504",
+      "line": 116,
+      "signature": "theorem shor_nearest_candidate (c : Parameters) (n : ℕ) (hsize : c.modulus ^ 2 ≤ 2 ^ n) (s : Fin c.period) (y : Fin (2 ^ n)) (hnear : Nearest (2 ^ n) (s.val / (c.period : ℝ)) y) : reduced s.val c.period ∈ candidates y.val (2 ^ n) c.modulus ∧ (reduced s.val c.period).den ∣ c.period"
     },
     "D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound": {
       "module": "D5/S3/Quantum/ShorCountingMarginal",

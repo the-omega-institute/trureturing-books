@@ -2,47 +2,47 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "6b5332e894630fa723f0ffe56306689609e1a1647c40ca1a257fc17ba5dc0978"
     },
     "fig-bootstrap-ledger.zh.jpg": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "4723fb16e1ecbefe991c0ed347d5f3bf9b4c3d139168ae8c00424dd5c3063831"
     },
     "fig-lawvere-godel.zh.jpg": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "272814a7d35aa1581f592deab4f4330d81b7f9babb719bd2de8e27f33e6c8888"
     },
     "fig-ordinal-spiral.zh.jpg": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "226136492aa8bfcb6a94bb103714e77f369d2e0cd434d22f508975bc1c8240de"
     },
     "fig-bidirectional-parallax.zh.jpg": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "4feaced63543ef50071de3930ff6a4dbff4f2af304b5a2e13491c37ca7f3eec2"
     },
     "fig-frozen-omniscience.zh.jpg": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "5f756f210be1f3d7212f7797341b32c29ef612f283277adf73106b31d494dab8"
     },
     "fig-bootstrap-ledger.en.jpg": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "59a6a7d5e163bf422fba63db0f4a359186a3fb61b55234fa5604411b04921a76"
     },
     "fig-lawvere-godel.en.jpg": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "098cc4d6d2d809587b886b80fd21eb9cff75105e116d568f94282e5149d2cb31"
     },
     "fig-ordinal-spiral.en.jpg": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "1066c8d11394bbb96476ff7f9f05f4c8109549d7d17bf9a05a251c3fcb0d4f8b"
     },
     "fig-bidirectional-parallax.en.jpg": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "bcaed5b467ff83ec21714578848f49cdafec1b6c1500946b1ccc3bda02a5d4ef"
     },
     "fig-frozen-omniscience.en.jpg": {
-      "input": "7e16df63e87402559efa0dcf59632ee6024e6568b98682dd334b35ec290364d1",
+      "input": "0c0ff8e83197c09238851e253fec648b3e05bfab3ad70a9820b8633ec30fc0d7",
       "output": "7ed0101980f565485290ae8da249c71fcdacdf8e3bfa61f6398098c0427c47f5"
     }
   }

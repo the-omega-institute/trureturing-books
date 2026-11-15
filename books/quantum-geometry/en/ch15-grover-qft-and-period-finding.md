@@ -235,11 +235,11 @@ In the example with $m = 32$ and period $r = 8$, the comb of positions $H = \{0,
 ::: {.viz src="phase-gears" preset="dual" height="500"}
 **The peaks are $Q/r$ apart, not $r$.** $Q = 32$ and period $r = 8$: the cyan comb $H = \{0, 8, 16, 24\}$ on the register has only $4$ cells, $8$ apart; after the sweep the spectrum keeps $8$ equal bars, each $\frac{1}{8}$, at $0, 4, 8, \dots, 28$, exactly the $8$ frequencies of $H^\perp$, spaced $Q/r = 4$ apart. At $k = 4$ the four cyan arrows all point right and the chain has length $4$; $\lvert H\rvert \cdot \lvert H^\perp\rvert = 4 \cdot 8 = 32$ ([@cor-finite-poisson-period]). In the example, $Q = 16$ and $r = 4$ happen to give $r = Q/r = 4$, so the two combs coincide.
 :::
-::: {.remark #rem-shor-divisibility-boundary-literature title="Scope Boundaries Between Finite Poisson Summation and Non-Divisible Shor Order Recovery (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** To connect [@cor-finite-poisson-period] to Shor's algorithm, first distinguish two boundaries, then derive the counting-register distribution from the actual input when the period need not divide the register size. The exact marginal, normalization, and pointwise bound are stated next with their frozen declarations; the derivation below explains those statements, while the full algorithmic claims remain in [@rem-grover-qft-shor-literature].
+::: {.remark #rem-shor-divisibility-boundary-literature title="Boundaries between finite Poisson summation, conditional candidates, and the full Shor algorithm"}
+**Scope.** To connect [@cor-finite-poisson-period] to Shor's algorithm, first distinguish two boundaries, then derive the counting-register distribution from the actual input when the period need not divide the register size. The exact marginal, normalization, and pointwise bound are stated next with their frozen declarations; the derivation below explains those statements, while the full algorithmic claims remain in [@rem-grover-qft-shor-literature].
 
-1. **Finite Poisson summation is not the full Shor factoring theorem**: [@cor-finite-poisson-period] is an algebraic identity on $\mathrm{ZMod}\,m$, not a formalization of Shor's full success probability, continued-fraction recovery theorem, or polynomial gate complexity (which are detailed in [@rem-grover-qft-shor-literature]).
-2. **Exact divisibility ($r \mid Q$) versus general non-divisibility ($r \nmid Q$)**: When $r \mid Q$, a complete periodic comb is a coset of a subgroup of $\mathrm{ZMod}\,Q$, so non-resonant frequencies vanish **exactly** by [@prop-finite-character-cancellation]. When $r \nmid Q$, the comb cut off at the register boundary does not support this use of the subgroup identity. One must calculate a finite geometric sum. After obtaining a probability bound near a peak, recovering the order from a frequency approximation remains a separate number-theoretic task.
+1. **Finite Poisson summation is not the full Shor factoring theorem**: [@cor-finite-poisson-period] is an algebraic identity on $\mathrm{ZMod}\,m$, not a formalization of Shor's full success probability, continued-fraction recovery theorem, or polynomial gate complexity. Conditional candidate membership is supplied separately by [@thm-shor-nearest-candidate] and [@thm-shor-coprime-candidate]; the full algorithmic boundaries remain in [@rem-grover-qft-shor-literature].
+2. **Exact divisibility ($r \mid Q$) versus general non-divisibility ($r \nmid Q$)**: When $r \mid Q$, a complete periodic comb is a coset of a subgroup of $\mathrm{ZMod}\,Q$, so non-resonant frequencies vanish **exactly** by [@prop-finite-character-cancellation]. When $r \nmid Q$, the comb cut off at the register boundary does not support this use of the subgroup identity. One must calculate a finite geometric sum. After obtaining a probability bound near a peak, passing from a frequency approximation to candidates remains a separate number-theoretic task; the conditional theorems below settle its membership component.
 
 :::
 
@@ -329,7 +329,7 @@ The proof shifts the phase by the supplied integer, evaluates the finite geometr
 :::
 
 ::: {.remark #rem-shor-actual-input-marginal title="Actual-input derivation and the remaining Shor boundaries"}
-The following derivation explains the four frozen statements above. It remains deliberately narrower than the full Shor algorithm: the aggregate success event, continued-fraction recovery, coprime sampling, factor extraction, and gate complexity stay in [@rem-grover-qft-shor-literature].
+The following derivation explains the four frozen statements above; the later [@thm-shor-nearest-candidate] and [@thm-shor-coprime-candidate] separately establish conditional continued-fraction candidate membership. It remains deliberately narrower than the full Shor algorithm: the aggregate success event, coprime sampling, factor extraction, and gate complexity stay in [@rem-grover-qft-shor-literature].
 
 **The actual input is $|1\rangle$.** Let the modulus be $N\ge2$ and the natural-number base $a$ satisfy $\gcd(a,N)=1$. The work register has $w$ qubits and dimension $D=2^w$, with only $N\le D$ required. Independently, the counting register has size $Q=2^n$ for any natural number $n$, including $0$. Work basis labels are $t\in\mathrm{Fin}\,D$; the padded modular permutation and its linear action are
 
@@ -460,11 +460,100 @@ Work outcomes $1,2,4$ have probabilities $1/2,1/4,1/4$, respectively. Averaging 
 
 The frozen mathematical source is [`D5/S3/Quantum/ShorCountingMarginal.lean`](https://github.com/the-omega-institute/trureturing/blob/0ee6636c21a9d8fb2bafd11c91a8fb6247154a25/D5/S3/Quantum/ShorCountingMarginal.lean) at the merged trureturing commit `0ee6636c21a9d8fb2bafd11c91a8fb6247154a25`: its `Parameters.shor_qpe_probability_mixture`, `shor_distribution_normalized`, and `shor_mixture_peak_lower_bound` are cited above, and its `QuantumPhaseEstimationGeneral.qpe_arbitrary_phase_lower_bound` supplies the per-phase estimate. The source parameters `modulus, base, width, dimension, period` correspond to $N,a,w,D,r$; `runQPE` uses $\mathcal F_-$, and `normSquared` sums squared coordinate moduli over the entire work register. The transplant preserves the supplier's Apache 2.0 notice and source reference in the Lean file. The literature basis for the surrounding algorithmic discussion is R. Cleve, A. Ekert, C. Macchiavello, and M. Mosca, *Quantum Algorithms Revisited*, [arXiv:quant-ph/9708016](https://arxiv.org/abs/quant-ph/9708016), §§5–6, Eqs. (5.2)–(5.4) and (6.1)–(6.4).
 
-The scope of this application is the actual-input marginal, its normalization, and a pointwise nearest-grid lower bound. Aggregate-event success probability, continued-fraction recovery, coprime sampling, integer factorization, and gate complexity retain their literature status in [@rem-grover-qft-shor-literature]. No guarantee for arbitrary non-power-of-two $Q$, every conditioned posterior comb, or hardware implementation follows here.
+The scope of this application is the actual-input marginal, its normalization, and a pointwise nearest-grid lower bound. Conditional candidate membership is treated separately below; aggregate-event success probability, coprime sampling, certified order selection, integer factorization, and gate complexity retain their literature status in [@rem-grover-qft-shor-literature]. No guarantee for arbitrary non-power-of-two $Q$, every conditioned posterior comb, or hardware implementation follows here.
 :::
 
+Passing from the distribution to postprocessing requires a number-theoretic bridge. The earlier $N=7,Q=4,r=3$ example concerns only the marginal: $N^2=49>4$, so it cannot instantiate the recovery results below. Now impose the resolution condition $N^2\le Q$ and ask a deterministic question: given the measured integer, which finite list is guaranteed to contain the required fraction?
+
+::: {.definition #def-shor-observable-candidates title="Finite continued-fraction candidates from observable inputs" lean="D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.candidates"}
+For natural numbers $y,Q,N$, let $C(x)$ be the finite list of continued-fraction convergents of a rational $x$. Define
+
+$$
+\operatorname{candidates}(y,Q,N)
+=\bigl[z\in C(y/Q)\mid\operatorname{den}(z)<N\bigr].
+$$
+
+Its only inputs are the measured integer $y$, counting capacity $Q$, and modulus $N$. The unknown order $r$ and phase index $s$ are not inputs. Each rational is represented in lowest terms with positive denominator.
+:::
+
+How is $C(x)$ actually enumerated? Put $a_0=\lfloor x\rfloor$ and $f=x-a_0$. If $f=0$, return $[a_0]$. Otherwise recursively enumerate $C(1/f)$, replace each entry $z$ by $a_0+1/z$, and prepend $a_0$. For example, $21/64$ starts with $a_0=0$, then $64/21=3+1/21$, yielding $[0,1/3,21/64]$. The positive reduced denominator strictly decreases at every recursive call, making the list finite; this supplies no operation-count or bit-complexity bound. The source definition [`convergents`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents) also accepts negative rationals, zero, and integers. Totalized rational division defines candidates even at $Q=0$, although the application below always has $Q>0$.
+
+This is a list of genuine real continued-fraction convergents. The exact correspondence [`mem_convergents_iff`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff) says that, for any rationals $x,z$, membership $z\in C(x)$ is equivalent to the existence of $k\in\mathbb N$ with $\operatorname{Real.convergent}(x,k)=z$. The real definition repeats the terminal value after a rational expansion terminates; the finite list only needs to retain that value. Write [`reduced`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced) for the rational $s/r$. For $r>0$, its denominator formula [`reduced_den`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den) is $d=r/\gcd(s,r)$.
+
+::: {.theorem #thm-shor-nearest-candidate title="Conditional candidate membership for a nearest sample" lean="D5/S3/Quantum/ShorContinuedFractions.shor_nearest_candidate"}
+For every actual padded modular-multiplication record $c:\operatorname{Parameters}$, write $N=c.\operatorname{modulus}\ge2$ and $a=c.\operatorname{base}\in\mathbb N$, with $\gcd(a,N)=1$. Its work width $w=c.\operatorname{width}$ satisfies $N\le2^w$, and its true order $r=c.\operatorname{period}=\operatorname{orderOf}(a:\mathrm{ZMod}\,N)$ satisfies $0<r<N$. For every independently chosen counting width $n\in\mathbb N$, put $Q=2^n$. For every $s\in\mathrm{Fin}\,r$ and $y\in\mathrm{Fin}\,Q$, assume
+
+$$
+N^2\le Q,\qquad
+\operatorname{Nearest}\!\left(Q,\frac{s.\operatorname{val}}r,y\right).
+$$
+
+Then
+
+$$
+\begin{aligned}
+\operatorname{reduced}(s.\operatorname{val},r)
+&\in\operatorname{candidates}(y.\operatorname{val},Q,N),\\
+\operatorname{den}\bigl(\operatorname{reduced}(s.\operatorname{val},r)\bigr)&\mid r.
+\end{aligned}
+$$
+:::
+
+::: proof
+Excluding wrap-around turns circular nearestness into ordinary absolute error at most $1/(2Q)$. If $d$ is the reduced denominator, $d\le r<N$ and $N^2\le Q$ give $d^2<Q$, so the error is strictly below $1/(2d^2)$. Legendre's approximation theorem supplies a real-convergent index; the finite-list correspondence gives actual membership, and $d<N$ passes the candidate filter. The denominator formula $d=r/\gcd(s.\operatorname{val},r)$ gives $d\mid r$. The full proof is checked by the Lean kernel.
+:::
+
+The hypothesis is $\operatorname{Nearest}$ itself. As defined above, it asserts the existence of an integer $z$ such that
+
+$$
+\left|\frac{s.\operatorname{val}}r-\frac{y.\operatorname{val}}Q-z\right|\le\frac1{2Q}.
+$$
+
+Why can no wrap occur here? Put $\theta=s.\operatorname{val}/r$ and $u=y.\operatorname{val}/Q$. Then $0\le\theta\le1-1/r$ and $0\le u\le1-1/Q$. The nearest nonzero integer shifts, $z=1$ and $z=-1$, give errors at least $1/r$ and $1/Q$, respectively, both strictly greater than $1/(2Q)$; more distant integers are also excluded. Thus $z=0$. The non-strict nearest-grid hypothesis still admits either rounding tie. Strictness in Legendre's radius comes from the denominator's square:
+
+$$
+\left|\frac{y.\operatorname{val}}Q-\frac{s.\operatorname{val}}r\right|
+\le\frac1{2Q}<\frac1{2d^2},
+\qquad d\le r<N,\quad N^2\le Q.
+$$
+
+::: {.theorem #thm-shor-coprime-candidate title="Conditional true-order membership for a coprime phase" lean="D5/S3/Quantum/ShorContinuedFractions.shor_coprime_candidate"}
+For every actual record $c$ above ($N\ge2$, $\gcd(a,N)=1$, $N\le2^w$, and $0<r=\operatorname{orderOf}(a:\mathrm{ZMod}\,N)<N$), every independent counting width $n\in\mathbb N$, $Q=2^n$, $s\in\mathrm{Fin}\,r$, and $y\in\mathrm{Fin}\,Q$, assume
+
+$$
+N^2\le Q,\qquad
+\operatorname{Nearest}\!\left(Q,\frac{s.\operatorname{val}}r,y\right),\qquad
+\gcd(s.\operatorname{val},r)=1.
+$$
+
+Then the true order occurs in the list of candidate denominators:
+
+$$
+r\in\operatorname{map}\bigl(\operatorname{den},
+\operatorname{candidates}(y.\operatorname{val},Q,N)\bigr).
+$$
+:::
+
+::: proof
+By [@thm-shor-nearest-candidate], the reduced phase belongs to the candidates. Coprimality makes its denominator $r/\gcd(s.\operatorname{val},r)$ equal to $r$. The full proof is checked by the Lean kernel.
+:::
+
+The latent parameters $r,s$ describe hypotheses about the measurement; they are unknown when computing the candidates. The second result places the true order in a finite list without certifying how to select it. The first result's divisibility conclusion concerns only the distinguished reduced phase, never every candidate. The following are independent exact rational computations, without additional Lean badges for the examples:
+
+| $N,a,Q;r,s,y$ | Nearest error and bound | $\operatorname{candidates}(y,Q,N)$ |
+| --- | --- | --- |
+| $7,2,64;3,1,21$ | $1/192\le1/128$ | $[0,1/3]$ |
+| $13,4,256;6,1,43$ | $1/768\le1/512$ | $[0,1/5,1/6]$ |
+| $7,2,64;3,0,0$ | $0\le1/128$ | $[0]$ |
+
+The first row's full list was computed by Euclidean recursion above; $21/64$ is removed because its denominator is not below $7$. The second row's full list is $[0,1/5,1/6,21/125,43/256]$. Filtering retains both the correct denominator $6$ and the denominator $5$, which does not divide $6$. Thus neither “take the last candidate” nor “pass one modular-exponentiation test” is an exact-order selection algorithm certified here. Even a passing test $a^d\equiv1\pmod N$ alone establishes only $r\mid d$: the tested exponent is a multiple of the order, and need not equal it.
+
+The rational zero has denominator $1$, so the first theorem includes $s=0$. When $r=1$, the sole phase is $s=0$ and $\gcd(0,1)=1$, so the second theorem applies too. The recovery conditions $N\ge2$ and $N^2\le2^n$ exclude $n=0$, whereas the preceding marginal permits it. Neither candidate theorem requires $r\mid Q$ or identifies work width $w$ with counting width $n$. With this chapter's positive-exponent final transform $\mathcal F_+$, first reflect the observed label $k_+$ to $y=\rho(k_+)=(-k_+)\bmod Q$, then use nearestness for the same phase $s/r$ and compute these candidates. Keeping the label unchanged would change the phase being approximated.
+
+These results come from `ShorContinuedFractions` and `FiniteRationalConvergents` at the pinned source. Both modules retain the provenance and Apache 2.0 license of *Finite-register phase estimation and spectral Shor order finding* ([solanaqubits/leanbook, fixed revision](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)). Source audit [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) still has three validated items and one unfinished item: the broader clock statement and independent ideal-sampling product law are not settled by this specialization to the modular bound. The separate earlier marginal-source audit [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) still has three validated and fifty-nine unfinished items. These statuses describe coverage, not a refutation of the mathematical proofs above. Candidate membership establishes no aggregate success probability, random coprimality rate, repeated-sample independence, certified selector, factor extraction, classical bit complexity, quantum gate complexity, or hardware performance; the boundaries in [@rem-grover-qft-shor-literature] remain.
+
 ::: {.viz src="phase-gears" preset="leak" height="500"}
-**When the period does not divide, the peaks spread.** $Q = 64$ and period $6$: the magenta marks $sQ/r$ fall between integers at $10.67$, $21.33$ and so on, and each peak spreads over neighbouring cells — $k = 11$ has $0.115$, $k = 10$ only $0.026$, and the six cells nearest $sQ/r$ carry $0.80$ together; the continued fraction of the amber-framed $k = 11$ reads $\frac{1}{6}$. This concentration and the continued-fraction recovery are literature results, not formalized in this book.
+**When the period does not divide, the peaks spread.** $Q = 64$ and period $6$: the magenta marks $sQ/r$ fall between integers at $10.67$, $21.33$ and so on, and each peak spreads over neighbouring cells — $k = 11$ has $0.115$, $k = 10$ only $0.026$, and the six cells nearest $sQ/r$ carry $0.80$ together; the continued fraction of the amber-framed $k = 11$ reads $\frac{1}{6}$. This card specifies no actual modulus and base with which to check $N^2\le Q$, so its concentration and reading remain a numerical teaching example. The conditional membership theorems above do not certify this card's last-convergent rule or identify its conditioned-comb peak heights with the actual marginal probabilities.
 :::
 
 Let us now work through the four-part calculation covering Grover search at $N = 4$ and $N = 8$, the $3$-qubit QFT phase gears at $x = 5$, Shor order finding for $N = 15$, and the finite Poisson cross-check on $\mathrm{ZMod}\,16$.
@@ -537,15 +626,15 @@ The order is then read off a peak: $k = 4$ and $12$ give the order $4$ directly,
 
 ::: {.remark #rem-grover-qft-shor-literature title="Grover Query Lower Bounds, QFT Circuit Complexity, and Shor's Factoring Algorithm (Literature Result, Not Formalized in This Book)"}
 <!-- alias: #rem-shor-factoring-literature -->
-**Literature result, not formalized in this book.** To complement the frozen algebraic results of this chapter ([@thm-grover-uniform-rotation], [@lemma-phase-kickback-weyl], [@prop-finite-character-cancellation], and [@cor-finite-poisson-period]), three major results from the quantum algorithms literature should be noted:
+**Literature result, not formalized in this book.** To complement the frozen algebraic results of this chapter ([@thm-grover-uniform-rotation], [@lemma-phase-kickback-weyl], [@prop-finite-character-cancellation], and [@cor-finite-poisson-period]), the chapter also establishes the actual-input marginal and pointwise bounds ([@thm-shor-qpe-probability-mixture]–[@thm-qpe-arbitrary-phase-lower-bound]), followed by conditional candidate membership in [@thm-shor-nearest-candidate] and [@thm-shor-coprime-candidate]. These supply no certified selector. The surrounding full algorithmic and complexity results remain literature results:
 
 1. **Grover's algorithm and query lower bounds** (L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866; G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055): For unstructured search among $N$ candidates with a known number $M$ of marked items and the promise $1 \le M \le N/4$, start from the uniform superposition and choose the iteration count using the known initial success probability $p = M/N$. Amplitude amplification then raises the success probability to $\ge 1 - M/N$ using $O(\sqrt{N/M})$ queries to the marking oracle. Under this sparse-solution promise, any quantum black-box algorithm finding a marked item with bounded error requires $\Omega(\sqrt{N/M})$ queries (by reduction from the single-solution black-box lower bound of Bennett, Bernstein, Brassard, and Vazirani, 1997): the quadratic speedup reaches the quantum geometric limit for this oracle task.
 2. **Gate complexity of the QFT circuit**: Expanding the $Q = 2^q$-point QFT into the binary product form of [@ex-grover-four-shor-fifteen] requires $q$ Hadamard gates, $q(q-1)/2$ controlled phase gates, and $\lfloor q/2\rfloor$ SWAP gates, totaling $O(q^2) = O((\log Q)^2)$ ideal gates. The input is an already prepared quantum state, and the output Fourier coefficients remain encoded in quantum amplitudes; loading arbitrary input data, reading out all coefficients classically, and synthesizing the ideal phase gates over a finite discrete gate set are outside this count.
-3. **Shor's factoring algorithm and continued-fraction order recovery** (P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172): For a general odd composite $N$ with $r \nmid Q$ ($N^2 \le Q < 2N^2$), Dirichlet-kernel concentration guarantees that QFT sampling lands within $|k/Q - s/r| < \frac{1}{2r^2}$ with constant probability, from which continued-fraction expansion uniquely recovers $s/r$; when $\gcd(s, r) = 1$ (with probability $\varphi(r)/r = \Omega(1/\log\log r)$), testing $r$ and applying the classical randomized reduction from factoring to order finding factors $N$ in polynomial time. (Note that describing period finding as "canceling an infinite period down to $1$" is a heuristic metaphor, not a formalized mathematical claim.)
+3. **Shor's factoring algorithm and continued-fraction order recovery** (P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172): For a general odd composite $N$ with $r \nmid Q$ ($N^2 \le Q < 2N^2$), Dirichlet-kernel concentration guarantees that QFT sampling lands within $|k/Q - s/r| < \frac{1}{2r^2}$ with constant probability, under the actual parameter and nearestness hypotheses, membership of the reduced phase in finite candidates is now covered by [@thm-shor-nearest-candidate], while certified selection remains a separate task. When $\gcd(s, r) = 1$ (with probability $\varphi(r)/r = \Omega(1/\log\log r)$), testing $r$ and applying the classical randomized reduction from factoring to order finding factors $N$ in polynomial time. (Note that describing period finding as "canceling an infinite period down to $1$" is a heuristic metaphor, not a formalized mathematical claim.)
 :::
 
 ::: {.viz src="phase-gears" height="560"}
-The full lab of phase gears and the period: change the register size $Q$, the period $r$ and the offset, and click a bar to choose a frequency $k$ and watch its phase arrows laid head to tail; when $r$ divides $Q$ and the comb is a complete coset (offset $x_0<r$), the off-resonant chains close to zero ([@prop-finite-character-cancellation]). This page's comb does not wrap: truncating it at the boundary changes peak heights and leaves off-resonant weight. When $r$ does not divide $Q$, the spectrum is still the finite sum over the comb's actual cells: in Shor's setting (offset $x_0<r$, the comb running to the end of the register, $Q \ge N^2 > r^2$) the peaks concentrate near $sQ/r$, and the order read by continued fractions must still be checked (a literature result, not formalized in this book); a truncated comb can lose that concentration, and a single cell gives a flat spectrum.
+The full lab of phase gears and the period: change the register size $Q$, the period $r$ and the offset, and click a bar to choose a frequency $k$ and watch its phase arrows laid head to tail; when $r$ divides $Q$ and the comb is a complete coset (offset $x_0<r$), the off-resonant chains close to zero ([@prop-finite-character-cancellation]). This page's comb does not wrap: truncating it at the boundary changes peak heights and leaves off-resonant weight. When $r$ does not divide $Q$, the spectrum is still the finite sum over the comb's actual cells: in Shor's setting (offset $x_0<r$, the comb running to the end of the register, $Q \ge N^2 > r^2$) the peaks concentrate near $sQ/r$; this aggregate concentration retains its literature status, and the page's continued-fraction reading must still be checked. [@thm-shor-nearest-candidate] guarantees only candidate membership under the actual parameter, resolution, and nearestness hypotheses; a truncated comb can lose that concentration, and a single cell gives a flat spectrum.
 :::
 
 Seeing how Grover's planar rotations and the QFT's Fourier cancellation operate, two deeper questions arise: **can we unify search, phase estimation, Hamiltonian simulation, and matrix inversion under a single Chebyshev polynomial recurrence on two-dimensional blocks (Quantum Singular Value Transformation, QSVT)? And when we compile continuous rotations into finite words over a discrete gate set $\{H, T\}$, how do finite-vertex polytopes approximate the sphere?** Let us enter the concluding chapter of Part IV — [Chapter 16](ch16-qsvt-walks-and-compilation.md).

@@ -28,14 +28,14 @@ For each supported control combination that selects a different mathematical cur
 
 ## Validation by affected dependency
 
-Choose the smallest meaningful checks during editing, then complete applicable project-required validation within the assignment's permissions. Record the actual candidate, result and limits; an unrun check remains pending.
+Choose the smallest meaningful checks during editing, then complete applicable project-required validation within the assignment's permissions. Follow [PROJECT §10](../../../PROJECT.md): run `./tbook test --list` before `./tbook test` with the same comparison base; limit browser tests, screenshots, stills and manual image checks to affected objects. Reuse evidence only after confirming correspondence to current dependencies and scope. Record the actual candidate, result and limits; an unrun check remains pending.
 
 | Affected material | Evidence needed |
 | --- | --- |
-| Chapter text, environments or GIDs | `./tbook check`; bilingual environment/GID/media alignment; affected source/state comparison at the current pin |
+| Chapter text, environments or GIDs | `./tbook check --book <slug>` for affected books; bilingual environment/GID/media alignment; affected source/state comparison at the current pin |
 | Formula, table or physical quantity | Independent calculation with domain, protocol assumptions and rounding stated |
-| Image or SVG | Relevant structural/internal-reference checks and visual inspection at the output's reading size |
-| Interactive implementation | Project browser tests with independent cases for supported controls; required shots inspected and cited stills refreshed, per [project media rules](../../../PROJECT.md) |
+| Image or SVG | Relevant structural/internal-reference checks; inspect new or visually changed outputs and relevant visual/readability findings at the output's reading size, per [book-figure](../../book-figure/SKILL.md) |
+| Interactive implementation | Project-selected browser tests with independent cases for affected supported controls; inspect affected shots and refresh affected cited stills when stage, layout or mathematical behavior changes, per [project media rules](../../../PROJECT.md) |
 | Caption alone, producer dependencies unchanged | Verify its claims against the producer/source; reuse covered producer/still evidence only after dependency correspondence. Validate affected bilingual outputs; wording alone does not require regenerated lab shots/stills |
 | Derived artifact after source/pin integration | Check current inputs under the generator's existing invariants, retaining its assertions; follow [project rules](../../../PROJECT.md) and [book-figure](../../book-figure/SKILL.md) for regeneration |
 | HTML/PDF/EPUB/site | Affected builds, EPUBCheck for EPUB, and applicable automated checks; inspect affected pages only for related errors/warnings or explicit visual/layout checks and repairs, per [book-export](../../book-export/SKILL.md). Ordinary prose or formula edits do not require screenshots, page-by-page reading or a language/theme/viewport matrix |

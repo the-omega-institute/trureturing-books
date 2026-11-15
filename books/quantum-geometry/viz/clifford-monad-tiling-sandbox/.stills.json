@@ -2,47 +2,47 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
-      "output": "68e0f8c2a1144e3d25d946f810ea92675ad05835a8b14ca800aeb858a9111ac6"
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
+      "output": "21d07c5a9b43dab819a413973e314a67b124e500b07d5c8de7ba6778ee1d5aac"
     },
     "fig-monad-four-in-one.zh.jpg": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
       "output": "7414d74a1d6e5c601c081d3707adc5b03c6c99a739f85e5f06b6e93e441ff723"
     },
     "fig-gradient-path-phase-lock.zh.jpg": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
       "output": "2e7e6800cdd54fc03bad4aa44b2736aafe2fc20634a637e0cb08401f6476a13a"
     },
     "fig-hodge-stokes-duality.zh.jpg": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
       "output": "b289e1e171907086aa28659b6d39f230f047a21d99896c5b05c4720ae7609c77"
     },
     "fig-multicell-boundary-cancellation.zh.jpg": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
       "output": "4a2a6d8caa1323e6770d3995a50d71c26dea6cd6364d7586365dfef06cef4041"
     },
     "fig-macroscopic-grade-sieve.zh.jpg": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
       "output": "4a94018fa4e1f05322d7f6c5e201862d30469469688e96bedc1a796740a0544b"
     },
     "fig-monad-four-in-one.en.jpg": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
       "output": "d72ff9607cbc13d5b91106e0f29eefd8e69b7098e21d957ae4d3cf0d8a51c58e"
     },
     "fig-gradient-path-phase-lock.en.jpg": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
       "output": "1356fa4420b45a2b65777d66bb7c75477bb58960586dd1d667a124a31bd62322"
     },
     "fig-hodge-stokes-duality.en.jpg": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
       "output": "4878a4a34cff23b66dc905f71fc09a4905bd2d22efe5eb6ac8f63ac1376d11dc"
     },
     "fig-multicell-boundary-cancellation.en.jpg": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
       "output": "f5692cce6aee2c46da6c1d675a6d3ab20f006f9d824ef2ee8a0b9fc6d39ec0f2"
     },
     "fig-macroscopic-grade-sieve.en.jpg": {
-      "input": "3784ee3d1a14c417f2038f6129e397e4056f0552b3bc2b67b62cf951e2c9bc90",
+      "input": "77c0dbd2c492186d17f49cd14129bb9cd76c45420732107f56c200be0609fb21",
       "output": "f2cc44b41d30e9604bd28e9722f0bbd3ae63097709420396c637d2e210251fa7"
     }
   }

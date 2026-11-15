@@ -455,14 +455,14 @@ $$
 \le \frac{p^{-2}}{1-2^{-\epsilon\sqrt5}}.
 $$
 
-这一估计的纸面依据是用 $p^{-\epsilon(\sqrt5\,v-1)}$ 控制各项，再求比值为 $p^{-\epsilon\sqrt5}$ 的几何级数；解析性则需衔接局部一致收敛。保留的权重为 $b_v=\beta(v)$（$1\le v\le M$），取 $\ell_v(s)=b_vs$、$a_v=1$。其最小权重为 $\beta(1)=\varphi^2$，因此 BEL 的域在此对应为
+这一估计的纸面依据是用 $p^{-\epsilon(\sqrt5\,v-1)}$ 控制各项，再求比值为 $p^{-\epsilon\sqrt5}$ 的几何级数。完整局部因子的解析性已有现成结果：[`germLocalFactor_analyticOnNhd_pos`](lean:D5/S3/Analytic/EulerGerm/LocalFactorZeroDivisor.germLocalFactor_analyticOnNhd_pos) 对每个素数 $p$ 证明 $F_p$ 在 $H_0$ 上解析。有限保留和是整函数，因此 $F_p$ 减去该有限和也在 $H_0$ 上解析；这给出了余项解析性的来源。实际尾项级数与这个差函数的识别，以及上式对 $p$、$s$ 一致的估计，仍须接合到后续形式化接口。保留的权重为 $b_v=\beta(v)$（$1\le v\le M$），取 $\ell_v(s)=b_vs$、$a_v=1$。其最小权重为 $\beta(1)=\varphi^2$，因此 BEL 的域在此对应为
 
 $$
 W(\ell;\epsilon\varphi^2)=H_\epsilon,
 \qquad W(\ell;1)=H_{1/\varphi^2}.
 $$
 
-这些参数给出原始函数胚的截断目标；[@rem-o5-finite-cancellation] 保留完整的有限代数论证，[@thm-o5-finite-integer-cancellation] 则同时给出任意有限阶消去与其一致解析求值。应用该定理之前，仍须为实际的无限尾项 $R_p(s)=\sum_{v>M}p^{-s\beta(v)}$ 建立上述解析性与统一界，并证明它确实是原始局部因子减去保留项的余项。随后可取 $J=\{1,\ldots,M\}$、$a_v=1$、$b_v=\beta(v)$、$m=\varphi^2$、$A=(1-2^{-\epsilon\sqrt5})^{-1}$，再选 $N$ 使 $(N+1)\epsilon m\ge2$。该有限定理允许相等或有有理关系的权重，并在这个半平面上控制负校正指数带来的分母；不必先把同权重的多重指标合并。
+这些参数给出原始函数胚的截断目标；[@rem-o5-finite-cancellation] 保留完整的有限代数论证，[@thm-o5-finite-integer-cancellation] 则同时给出任意有限阶消去与其一致解析求值。应用该定理之前，仍须将实际的无限尾项 $R_p(s)=\sum_{v>M}p^{-s\beta(v)}$ 与上述解析差函数识别，并核对统一界及有限定理要求的余项族。随后可取 $J=\{1,\ldots,M\}$、$a_v=1$、$b_v=\beta(v)$、$m=\varphi^2$、$A=(1-2^{-\epsilon\sqrt5})^{-1}$，再选 $N$ 使 $(N+1)\epsilon m\ge2$。该有限定理允许相等或有有理关系的权重，并在这个半平面上控制负校正指数带来的分母；不必先把同权重的多重指标合并。
 
 此后仍须建立相应的 $\zeta$ 因子分解恒等式，证明余项素数乘积局部一致收敛，为**每个** $\epsilon>0$ 构造延拓，并使重叠半平面上的正规形式亚纯代表相容，拼成 $H_0$ 上的函数；一个固定截断不够。条件 2 还要求在原始域 $H_{1/\varphi^2}$ 的**每一点**都等于 $E(s)$，包括表面奇点可去时应取的值。亚纯函数胚相等，并不保证任意仅满足 `MeromorphicOn` 的函数逐点相等，所以上述正规形式与单点改值的限制仍须保留。这些原始尾项接口、无穷乘积与拼接步骤尚未在本书中形式化；有限定理也不给出局部因子或乘积的非零性，更不给出条件 3 的零点定位。O-5 仍然开放，条件 3 仍需另行研究。
 :::

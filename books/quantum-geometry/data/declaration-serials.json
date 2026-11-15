@@ -1,8 +1,8 @@
 {
   "next": {
-    "T": 344,
-    "D": 160,
-    "R": 177
+    "T": 346,
+    "D": 161,
+    "R": 181
   },
   "serials": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": "T001",
@@ -679,6 +679,13 @@
     "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisOuter_eq_implies_parallel": "T340",
     "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le": "T341",
     "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence": "T342",
-    "D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff": "T343"
+    "D5/S3/Quantum/ShorContinuedFractions.shor_coprime_candidate": "T343",
+    "D5/S3/Quantum/ShorContinuedFractions.shor_nearest_candidate": "T344",
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.candidates": "D160",
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents": "R177",
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff": "R178",
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced": "R179",
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den": "R180",
+    "D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff": "T345"
   }
 }
