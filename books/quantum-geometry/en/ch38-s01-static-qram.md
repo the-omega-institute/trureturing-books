@@ -1065,12 +1065,46 @@ $$
 Expanding and interchanging the finite environment sum and node product expresses $G^{\mathrm{std}}(a,b)$ as a product of these real local overlaps, proving the sixth assertion. Hence $G^{\mathrm{den}}(a,b)=\overline{G^{\mathrm{std}}(a,b)}=G^{\mathrm{std}}(a,b)$. This uses reality of the overlap product, without assuming real record coordinates. With $G^{\mathrm{std}}=M^{\mathrm H}M$ and $M\cdot=S$, the standard Gram kernel and rank identities give the last two assertions. The full proof is checked by the Lean kernel.
 :::
 
+
+
 Depth zero is fully included: $d=1$, $K=[]$, $t=\mathrm{true}$, $S$ is the one-dimensional identity, $V=1$, and both Gram matrices are $(1)$ with rank $1$. In the fifth assertion the coefficient domain is then $\operatorname{Fin}(0)$; the unique empty coefficient family expands only to the zero vector, with empty sum zero. At any deeper prefix, successively restricting the original $q$ to that subtree gives another instance of the same statement. There is no extra positive-depth, homogeneous-parameter, or Boolean-bus assumption. The lower endpoint changes vacuum membership without appending a kernel vector; the upper endpoint appends one kernel vector and subtracts one dimension only when both child vacua can be synthesized.
 
 The connection to Profiles passes through overlaps. On the common range $q(v)\in[0,1]$, the preceding four-coordinate real records $\sqrt{q(v)}e_*+\sqrt{1-q(v)}e_s$ also have local overlap $1$ for equal labels and $q(v)$ for distinct labels. Their actual loaded-record Gram entries therefore equal the corresponding real product here. The two constructions have different environments and coordinates. This comparison does not identify their coordinates or extend the preceding physical output conclusions directly to the signed interval.
 
 The kernel in this theorem is throughout the kernel of synthesis on complex address coefficients. No signed-interval theorem for noisy output or post-loading continuation is supplied here, nor a kernel on a Schur operator space, a Choi rank, or a claim about computational efficiency or hardware performance. The theorem also adds no proof to the subsequent interpretation of ontology and observers. These scope boundaries remain in force as the discussion turns to `MODEL`.
 
+
+::: {.theorem #thm-ch38-hann-uniform-original-section title="Uniform original-leaf sections for the actual signed Hann records" lean="D5/S3/Quantum/Routing/HannUniformSection.binary_conformal_kernel D5/S3/Quantum/Routing/HannUniformSection.zero_certificate D5/S3/Quantum/Routing/HannUniformSection.uniform_section"}
+Fix a finite depth $n$, a heterogeneous router assignment $q : \operatorname{Router}(n) \to \mathbb{R}$, and a qutrit bus, with
+
+$$
+-\frac12 \le q(v) \le 1
+$$
+
+for every router node $v$. Here `Section n q bus` means exactly the set of real numbers $z$ for which there is a probability distribution on the original leaf addresses $a\in\operatorname{Address}(n)$ with $p(a)\ge0$, $\sum_a p(a)=1$, and the actual signed Hann records synthesize to a real multiple of the vacuum record:
+
+$$
+\sum_{a\in\operatorname{Address}(n)} (p(a):\mathbb C)\,\operatorname{record}(n,q,\mathrm{bus},a)
+= (z:\mathbb C)\,\operatorname{vacuumRecord}(n,q).
+$$
+
+Then all of the following hold.
+
+1. Every nonnegative nonzero original-leaf kernel vector contains a same-kernel certificate whose leaf coordinates are $0$ or $1$ and whose node coordinates are $0$, $1$, or $-1$; its nonzero leaf coordinates stay inside the original positive support, while the node coordinates preserve the original node and root signs.
+2. If one such probability distribution $p$ realizes $z=0$, there is a nonempty subset $S$ of original leaves, every one of whose probabilities is strictly positive, such that
+   $$
+   \sum_{a\in S}\operatorname{record}(n,q,\mathrm{bus},a)=0.
+   $$
+   Thus zero may be an interior point of the section; it need not be an endpoint.
+3. `Section n q bus` is either empty or a closed interval $[l,r]$, and both endpoints are attained by uniform distributions on original leaves. More precisely, for each endpoint there are a nonempty finite subset $S$ and $e\in\{-1,0,1\}$ such that
+   $$
+   \sum_{a\in S}\operatorname{record}(n,q,\mathrm{bus},a)=(e:\mathbb C)\,\operatorname{vacuumRecord}(n,q),
+   \qquad z=\frac{e}{|S|},
+   $$
+   with $1\le |S|\le 2^n$; the two endpoints may use different subsets.
+
+This is a theorem about the finite-depth real probability model of the stated signed Hann records. It does not interpret signed records as physical quantum channels, and it supplies no hardware, algorithmic-complexity, or running-time claim; nor does every feasible probability distribution become uniform. The complete proof is checked by the Lean kernel in `trureturing`.
+:::
 Viewed alongside [@rem-ch38-qram-page-wootters-literature], separating the dynamic pointer register from the static memory array immediately yields two structural **`MODEL` (interpretive model)** consequences:
 
 1. **Why the Global Memory Array Is Timelessly $P = NP$ While Any Finite Pointer Must Step Sequentially via `ptr++`**:

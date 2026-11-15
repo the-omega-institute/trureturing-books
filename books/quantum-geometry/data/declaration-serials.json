@@ -1,6 +1,6 @@
 {
   "next": {
-    "T": 333,
+    "T": 336,
     "D": 160,
     "R": 177
   },
@@ -668,6 +668,9 @@
     "D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized": "T329",
     "D5/S3/Quantum/ShorCountingMarginal.shor_mixture_peak_lower_bound": "T330",
     "D5/S3/Quantum/ShorCountingMarginal.shor_qpe_probability_mixture": "T331",
-    "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation": "T332"
+    "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation": "T332",
+    "D5/S3/Quantum/Routing/HannUniformSection.binary_conformal_kernel": "T333",
+    "D5/S3/Quantum/Routing/HannUniformSection.uniform_section": "T334",
+    "D5/S3/Quantum/Routing/HannUniformSection.zero_certificate": "T335"
   }
 }
