@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "aabd791d2f884763e9d795ad4197317e4109360fcfc77f26c7a935478ee116bf"
+    },
+    "fig-basis.zh.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "0fa4c73643d4d2ba891dd10ef77090c52398a9bab10beae0a35798a8572f7f5f"
+    },
+    "fig-cancel.zh.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "d174ed415d294578ad44e0f40321f26cc4e770cf52a3dc498d3532b46b8d31d7"
+    },
+    "fig-four.zh.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "059e329c4561bbfc2ba8e1a01e9652016d61c283d08e6145129ccd82be6bc458"
+    },
+    "fig-dual.zh.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "5261faa801324968f5a93eba204b322b0a9e6cac72536841618252a54d2dd2bc"
+    },
+    "fig-leak.zh.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "f2c82b9c7d0a210fd4f4c3d4bfcf8040ee8368d3db59a211cf5227182dad3c28"
+    },
+    "fig-read.zh.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "a15f0c956f7d0e98623b81a22071ba318a0915f8b7f0eb8b434c6d3333ed0433"
+    },
+    "fig-basis.en.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "790415f13e9665c60fcbd8ecd680f53c01590092255fd4b185ea1cff74f11c85"
+    },
+    "fig-cancel.en.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "fe9cf5fb6751cdd9b08d3033063915a0f02b0b2b444936a53945f008cbc7f6d5"
+    },
+    "fig-four.en.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "dd17b03ea3ceb6bb77e9908e2ec79ad566d1a6f206462b08ce99a93d63990d9d"
+    },
+    "fig-dual.en.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "000528ea28da5d746daf18ecbd70a4a2ed253b8191910712a22b2d1ea2f96735"
+    },
+    "fig-leak.en.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "f7fe88b3f04513bc12c7820ad2875fd23edfa81c32dfd83ce6a7b61a7b8a90f7"
+    },
+    "fig-read.en.jpg": {
+      "input": "0d213363dbfe6448a5956fc898d95098068cc711150eef2fef3562f9f20ba3f9",
+      "output": "8833fd113f19cd389ffe70c924e823edc26dc07f740c613d10bc4e8ea6552a3d"
+    }
+  }
+}

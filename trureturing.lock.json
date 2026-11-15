@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "0f44c839f5dfd63fb2555576812593d951073110",
-  "pinned_at": "2026-11-15T16:46:26Z",
+  "commit": "bcb6fb5c9c0b7383484392cf3b32defb1cbf77a3",
+  "pinned_at": "2026-11-15T18:30:33Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -508,6 +508,14 @@
       "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
       "line": 93,
       "signature": "theorem reduced_den (s r : ℕ) (hr : 0 < r) : (reduced s r).den = r / Nat.gcd s r"
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength",
+      "name": "QuantumShorContinuedFractions.convergents_length_log",
+      "kind": "theorem",
+      "statement_id": "sha256:db83d7726d5fdcb9f3e330b3679847bee1057c710ec49cda6c40bd083e68fbf4",
+      "line": 58,
+      "signature": "theorem convergents_length_log (x : ℚ) : (convergents x).length ≤ 2 * Nat.log 2 x.den + 1"
     },
     "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound": {
       "module": "D5/S1/Depth/GoldenHurwitzBound",
@@ -2833,7 +2841,7 @@
       "module": "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion",
       "name": "D5.S3.QuadraticForms.RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le",
       "kind": "theorem",
-      "statement_id": "sha256:6d512978b77f76b6a1b7f3691d37eaebc380626ce369ea30735588047df1c518",
+      "statement_id": "sha256:2529f90abca87c8361b0361257bad8c163fe9735b03e772db780e4d9976ec917",
       "line": 265,
       "signature": "theorem exists_posSemidef_completion_rank_le {V : Type u} [Finite V] (d : ℕ) (G : SimpleGraph V) (hG : G.IsChordal) (A : Matrix V V ℝ) (hA : ∀ C : Set V, G.IsClique C → (A.submatrix (Subtype.val : C → V) (Subtype.val : C → V)).PosSemidef ∧ (A.submatrix (Subtype.val : C → V) (Subtype.val : C → V)).rank ≤ d) : ∃ B : Matrix V V ℝ, B.PosSemidef ∧ B.rank ≤ d ∧ ∀ i j, i = j ∨ G.Adj i j → B i j = A i j"
     },
@@ -3685,6 +3693,22 @@
       "line": 97,
       "signature": "theorem unitary_phase_of_connected_ray_tests (A : Matrix ι ι ℂ) (hA : A ∈ Matrix.unitaryGroup ι ℂ) (hcoord : ∀ i : ι, PreservesRay A (Pi.single i 1)) (tests : Set (ι → ℂ)) (htests : ∀ x ∈ tests, PreservesRay A x) (hconnect : RaySupportConnected tests) : ∃ c : ℂ, ‖c‖ = 1 ∧ A = c • (1 : Matrix ι ι ℂ)"
     },
+    "D5/S3/Quantum/FourierCircuit/Correctness.circuit_action": {
+      "module": "D5/S3/Quantum/FourierCircuit/Correctness",
+      "name": "QuantumAlg.QuantumFourierTransform.Source.circuit_action",
+      "kind": "theorem",
+      "statement_id": "sha256:fff846fef66b22a395637a8978df0d695ea6cd4a802b5809377b61ab7be3b47d",
+      "line": 32,
+      "signature": "theorem circuit_action (oracles : OracleModel) (q : Nat) (environment : oracles.Interpretation) (v : Fin (2 ^ q) → ℂ) : Matrix.mulVec (onBinaryLabels (circuit oracles q) environment) v = QuantumPhaseEstimationGeneral.QFT (2 ^ q) v"
+    },
+    "D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources.qftSource_circuit_event_count": {
+      "module": "D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources",
+      "name": "QuantumAlg.QuantumFourierTransform.Source.qftSource_circuit_event_count",
+      "kind": "theorem",
+      "statement_id": "sha256:29f0424e2386e0d675fc12e12f82d21c487d943d53b7c12598846855bf5023a6",
+      "line": 99,
+      "signature": "public lemma qftSource_circuit_event_count (n : Nat) : ResourcePool.count event (circuit oracles n).eventCost = n * (if .gate .hadamard = event then 1 else 0) + n.choose 2 * (if .gate .controlledPhase = event then 1 else 0) + (n / 2) * (if .gate .swap = event then 1 else 0)"
+    },
     "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation": {
       "module": "D5/S3/Quantum/GleasonComplexRepresentation",
       "name": "Gleason.ProjectionPackage.gleason_representation",
@@ -3956,6 +3980,14 @@
       "statement_id": "sha256:b655c2b0b304d3a523be8f5022da59f14187460754f17bba688e25cd3b2bbd9a",
       "line": 24,
       "signature": "theorem unit_gram_overlap_characterization {𝕜 Index E : Type*} [RCLike 𝕜] [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] (record : Index → E) (normalized : ∀ i, ‖record i‖ = 1) : (∀ i j, ⟪record i, record j⟫_𝕜 = 1 ↔ record i = record j) ∧ Equivalence (fun i j => ⟪record i, record j⟫_𝕜 = 1)"
+    },
+    "D5/S3/Quantum/QPECircularTail.qpe_circular_tail_le": {
+      "module": "D5/S3/Quantum/QPECircularTail",
+      "name": "QuantumPhaseEstimationGeneral.qpe_circular_tail_le",
+      "kind": "theorem",
+      "statement_id": "sha256:595452d2f91a1749bcf473baeffce53b7139999733b0acbe43999b4b06cea4e0",
+      "line": 385,
+      "signature": "theorem qpe_circular_tail_le (t : ℕ) (φ ρ : ℝ) (hrho : 0 < ρ) : (∑ j ∈ Finset.univ.filter (fun j : Fin (2 ^ t) => ρ ≤ ‖((φ - (j.val : ℝ) / (2 : ℝ) ^ t : ℝ) : UnitAddCircle)‖), probability (2 ^ t) φ j) ≤ 1 / (2 * (2 : ℝ) ^ t * ρ) + 1 / (2 * ((2 : ℝ) ^ t * ρ) ^ 2)"
     },
     "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine": {
       "module": "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction",
@@ -4484,6 +4516,14 @@
       "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
       "line": 144,
       "signature": "theorem qpe_arbitrary_phase_lower_bound (N : ℕ) (hN : 0 < N) (θ : ℝ) (b : Fin N) (hnear : Nearest N θ b) : 4 / Real.pi ^ 2 ≤ probability N θ b"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.qpe_probability_normalized": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumPhaseEstimationGeneral.qpe_probability_normalized",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 300,
+      "signature": "theorem qpe_probability_normalized {N : ℕ} (hN : 0 < N) (θ : ℝ) : (∑ y : Fin N, probability N θ y) = 1"
     },
     "D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized": {
       "module": "D5/S3/Quantum/ShorCountingMarginal",

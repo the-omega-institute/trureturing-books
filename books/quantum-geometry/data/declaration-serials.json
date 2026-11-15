@@ -1,8 +1,8 @@
 {
   "next": {
-    "T": 345,
+    "T": 349,
     "D": 161,
-    "R": 181
+    "R": 182
   },
   "serials": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": "T001",
@@ -685,6 +685,11 @@
     "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents": "R177",
     "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff": "R178",
     "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced": "R179",
-    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den": "R180"
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den": "R180",
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log": "T345",
+    "D5/S3/Quantum/FourierCircuit/Correctness.circuit_action": "T346",
+    "D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources.qftSource_circuit_event_count": "T347",
+    "D5/S3/Quantum/QPECircularTail.qpe_circular_tail_le": "T348",
+    "D5/S3/Quantum/ShorCountingMarginal.qpe_probability_normalized": "R181"
   }
 }

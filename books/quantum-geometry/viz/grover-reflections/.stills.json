@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "d6056b92dee475be7b7c78c0051e3e057defa02b9e66f2f7833c1e008c6f06bc",
+      "output": "b48df767b8fd7176287d2751d5befc0233cf77157d8c0660191759a563374032"
+    },
+    "fig-sqrt.zh.jpg": {
+      "input": "d6056b92dee475be7b7c78c0051e3e057defa02b9e66f2f7833c1e008c6f06bc",
+      "output": "d44397be56018d4753976eedf19848b45b134b602c209a14106f5c423162f861"
+    },
+    "fig-over.zh.jpg": {
+      "input": "d6056b92dee475be7b7c78c0051e3e057defa02b9e66f2f7833c1e008c6f06bc",
+      "output": "7da07d7d69880817b3d00f2b5e93728300a5dca54be8b2bde1096c17f7da13f8"
+    },
+    "fig-four.zh.jpg": {
+      "input": "d6056b92dee475be7b7c78c0051e3e057defa02b9e66f2f7833c1e008c6f06bc",
+      "output": "598a0ad0ad90d5f27ff9416b7257a53d78a94a6eb47eaf5268c8352829ddb4f1"
+    },
+    "fig-eight.zh.jpg": {
+      "input": "d6056b92dee475be7b7c78c0051e3e057defa02b9e66f2f7833c1e008c6f06bc",
+      "output": "6917d959c373a71b44da12375e064245b3bb04daad5b23a633a2fd40aa1b8c54"
+    },
+    "fig-sqrt.en.jpg": {
+      "input": "d6056b92dee475be7b7c78c0051e3e057defa02b9e66f2f7833c1e008c6f06bc",
+      "output": "eb48ab647805bdbf395760c6bef1a5d9217558ce5c9633cf06fff3cd1d32a827"
+    },
+    "fig-over.en.jpg": {
+      "input": "d6056b92dee475be7b7c78c0051e3e057defa02b9e66f2f7833c1e008c6f06bc",
+      "output": "cd6815239e843bddc537ac71f265775dfaad5157925c6dbfbafac0a41df1b0d7"
+    },
+    "fig-four.en.jpg": {
+      "input": "d6056b92dee475be7b7c78c0051e3e057defa02b9e66f2f7833c1e008c6f06bc",
+      "output": "6d89bc07b824a30fb5cb80ca5b92f2ccd5d57bc03f01a06eb68271f26fa1ca50"
+    },
+    "fig-eight.en.jpg": {
+      "input": "d6056b92dee475be7b7c78c0051e3e057defa02b9e66f2f7833c1e008c6f06bc",
+      "output": "c811eae9c407547d84ec3bb82848e7e7ad0d804bb212225b57f10f507d4c67db"
+    }
+  }
+}

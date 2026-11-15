@@ -258,7 +258,7 @@ $$
 (with equality $\Delta\tau = \Delta t$ at rest $\Delta w = 0$, strict inequality $\Delta\tau < \Delta t$ when $\Delta w \neq 0$, and $\Delta\tau = 0$ on a strict null ray with $\Delta w \neq 0$ and $q(\Delta v) = 0$). Along a piecewise inertial worldline $\gamma = (\Delta v_1, \Delta v_2, \dots, \Delta v_m)$, total proper time in $c = 1$ units is the sum $\tau(\gamma) = \sum_{k=1}^m \sqrt{q(\Delta v_k)}$ (or $\tau_{\mathrm{phys}}(\gamma) = \sum_{k=1}^m \sqrt{q(\Delta v_k)}/c$ in physical clock units). A common pitfall is to confuse Lorentz invariance of each segment's quadratic form $q(\Delta v_k)$ with path independence of total proper time between fixed endpoints. The next concrete example resolves that confusion completely.
 
 ::: {.figure src="ch17-proper-time-budget"}
-**For the same $\Delta t = 5$, the farther a segment travels in space, the less proper time it records.** The cyan curve $\Delta\tau = \sqrt{25 - \Delta x^2}$ stays everywhere below the white dashed line $\Delta t = 5$: at rest $\Delta\tau = \Delta t = 5$, the first leg $(5, 3)$ of the example gives $4$, and $(5, 5)$ along the light cone gives $0$. The curve is a quarter circle, $\Delta\tau^2 + \Delta x^2 = \Delta t^2$.
+**For the same $\Delta t = 5$, the farther a segment travels in space, the less proper time it records.** The cyan curve $\Delta\tau = \sqrt{25 - \Delta x^2}$ stays at or below the white dashed line $\Delta t = 5$: at rest $\Delta\tau = \Delta t = 5$, the first leg $(5, 3)$ of the example gives $4$, and $(5, 5)$ along the light cone gives $0$. The curve is a quarter circle, $\Delta\tau^2 + \Delta x^2 = \Delta t^2$.
 :::
 
 ::: {.example #ex-two-worldline-segments title="Proper-Time Comparison Between a Two-Segment Worldline and a Rest Worldline"}

@@ -122,7 +122,7 @@ The full lab of Grover's two reflections: drag the initial state on mirror 2 to 
 Whereas Grover's algorithm rotates states in a real two-dimensional plane, the Quantum Fourier Transform (QFT) and phase estimation wind relative phases around equatorial circles like meshed binary gears (Figure 15, Panel II).
 
 ::: {.viz src="phase-gears" preset="basis" height="500"}
-**A row of gears, each half as fast.** $Q = 8$ with the single cell $x = 5$: each cell along the rail turns the three violet gears by $\frac{1}{2}$, $\frac{1}{4}$ and $\frac{1}{8}$ of a turn, and at $5$ they rest at $\pi$, $\frac{\pi}{2}$ and $\frac{5\pi}{4}$; frequency $k = 7$ uses all three, and the one cyan arrow of the chain points at their sum, $\frac{3\pi}{4}$. The spectrum is flat, every bar $\frac{1}{8}$. The binary product form of the QFT is a literature result, not formalized in this book.
+**A row of gears, each half as fast.** $Q = 8$ with the single cell $x = 5$: each cell along the rail turns the three violet gears by $\frac{1}{2}$, $\frac{1}{4}$ and $\frac{1}{8}$ of a turn, and at $5$ they rest at $\pi$, $\frac{\pi}{2}$ and $\frac{5\pi}{4}$; frequency $k = 7$ uses all three, and the one cyan arrow of the chain points at their sum, $\frac{3\pi}{4}$. The spectrum is flat, every bar $\frac{1}{8}$. The actual circuit's positive-exponent action is given by [@thm-qft-circuit-action]; these animated gears illustrate its label convention.
 :::
 
 At the algebraic foundation of phase kickback lies the conjugation law of discrete Weyl shift and clock operators on $\mathrm{ZMod}\,M$ ($M \in \mathbb{N}$ with `[NeZero M]`). In `WeylDisplacementConjugation`, with $\omega_M = \mathrm{windowRoot}(M) = \exp(2\pi i / M)$, the $M \times M$ building blocks on $M_{\mathrm{Fin}\,M}(\mathbb{C})$ are:
@@ -156,7 +156,52 @@ Three details of [@lemma-phase-kickback-weyl] should be noted:
 
 1. **Subtraction in $\mathrm{ZMod}\,M$ precedes `.val`**: The exponent $(b \cdot c - a \cdot d).\mathrm{val}$ is computed by subtracting $a \cdot d$ from $b \cdot c$ inside $\mathrm{ZMod}\,M$ first and then taking its natural-number representative `.val` in $\{0, \dots, M-1\}$.
 2. **Conjugate transpose `star` and the positive phase convention**: Here `star` is the conjugate transpose $(\cdot)^*$, and the positive sign in $\omega_M^{(bc - ad).\mathrm{val}}$ matches $\omega_M = \exp(+2\pi i / M)$, the shift action $(X\psi)_i = \psi_{i-1}$, and the operator order $X^e Z^f$.
-3. **Scope**: [@lemma-phase-kickback-weyl] establishes the algebraic core of finite Weyl phase kickback, not the full polynomial-gate decomposition of the multi-qubit QFT circuit into controlled phase and Hadamard gates (worked out in [@ex-grover-four-shor-fifteen], with the gate count and input/output boundaries discussed in [@rem-grover-qft-shor-literature]).
+3. **Scope**: [@lemma-phase-kickback-weyl] gives the algebraic phase kickback of finite Weyl conjugation. The actual multi-qubit QFT action and native event counts are supplied separately by [@thm-qft-circuit-action] and [@thm-qft-native-event-count]; they do not follow directly from the Weyl conjugation formula.
+
+Turning the gears into a circuit equality requires fixing both instruction order and binary labels. We use the actual recursive `QuantumAlg.QuantumFourierTransform.Source.circuit`: each layer executes a leading Hadamard, its ordered controlled-phase prefix, and the embedded recursive tail, followed by the terminal disjoint bit-reversal SWAP network. `onBinaryLabels` identifies its execution matrix with integer labels $0,\ldots,2^q-1$ in big-endian order, with the most significant bit first.
+
+::: {.theorem #thm-qft-circuit-action title="Exact action of the actual QFT circuit on every complex vector" lean="D5/S3/Quantum/FourierCircuit/Correctness.circuit_action"}
+For every $\operatorname{oracles}:\operatorname{OracleModel}$, every natural width $q$, every interpretation $\operatorname{environment}:\operatorname{oracles.Interpretation}$, and every complex vector $v:\mathrm{Fin}(2^q)\to\mathbb C$, let $U$ be the execution matrix of the circuit above under `onBinaryLabels`. Then
+
+$$
+\begin{aligned}
+U v&=\mathcal F_+(v),\\
+(\mathcal F_+(v))(k)&=\frac{1}{\sqrt{2^q}}
+\sum_{x\in\mathrm{Fin}(2^q)}e^{+2\pi i k.\operatorname{val}\,x.\operatorname{val}/2^q}v(x)
+\quad(k\in\mathrm{Fin}(2^q)).
+\end{aligned}
+$$
+
+This is exact equality of complex vectors, including global phase. Neither normalization of $v$ nor $q>0$ is required.
+:::
+
+::: proof
+Width induction computes the entries of the actual circuit before the terminal swaps, with the output label bit reversed. The terminal SWAP network cancels this reversal. The resulting entries are the positive Fourier kernel times $1/\sqrt{2^q}$; summing over input coordinates gives the equality on every vector. The full proof is checked by the Lean kernel.
+:::
+
+Execution and accounting observe the same `circuit`; an abstract Fourier operator alone does not supply circuit costs. Write $\delta(g,e)=1$ when the native gate event $g$ equals $e$, and $0$ otherwise.
+
+::: {.theorem #thm-qft-native-event-count title="Every native event count of the same QFT circuit" lean="D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources.qftSource_circuit_event_count"}
+For every $\operatorname{oracles}:\operatorname{OracleModel}$, every event $e:\operatorname{Resource.Event}(\operatorname{quantum}(\operatorname{FourierGate.model},\operatorname{oracles}))$, and every $q\in\mathbb N$, the `eventCost` of the circuit $\operatorname{circuit}(\operatorname{oracles},q)$ above satisfies
+
+$$
+\begin{aligned}
+\operatorname{count}(e,\operatorname{eventCost})
+&=q\,\delta(H,e)+\binom q2\delta(\operatorname{controlledPhase},e)\\
+&\quad+\lfloor q/2\rfloor\,\delta(\operatorname{SWAP},e).
+\end{aligned}
+$$
+
+Here $H$, $\operatorname{controlledPhase}$, and $\operatorname{SWAP}$ denote their native gate events. Their occurrence counts are respectively $q$, $\binom q2$, and $\lfloor q/2\rfloor$. Every other event, including oracle events, has count zero; at $q=0$ all counts are zero.
+:::
+
+::: proof
+Each actual layer contributes one Hadamard and the controlled phases in its specified prefix. Embedding the tail preserves its event counts; width induction accumulates $q$ and $\binom q2$. The terminal reversal contains $\lfloor q/2\rfloor$ SWAPs. Sequential composition gives the formula for every event coordinate. The full proof is checked by the Lean kernel.
+:::
+
+At $q=3$ there are $3$ Hadamards, $3$ controlled phases, and $1$ SWAP: $7$ ideal native occurrences. At $q=0$ the one-coordinate transform is the identity and uses no gates. These counts exclude input loading, full classical coefficient readout, synthesis over a finite discrete gate set, and hardware costs. The later three-qubit product formula explains this big-endian, positive-exponent convention by hand; it does not certify every geometric tensor identity or interactive behavior on the page.
+
+The actual recursive circuit proofs and event counts are supplied by QudeLeap Team's [Lean-QuantumAlg, fixed revision](https://github.com/QudeLeap/Lean-QuantumAlg/tree/971dc8be8a153a116b6d7cd748f984d545861b00); the transplanted source retains its Apache 2.0 license and attribution. Source audit [#30752](https://github.com/the-omega-institute/trureturing/issues/30752) still has three validated, seven unresolved, and fifty-six incomplete items. These two citations do not settle the remaining supplier-library audit.
 
 ## 15.3 Finite Character Orthogonality and Nonresonant Cancellation {#sec-period-frequency-cancellation}
 
@@ -328,8 +373,46 @@ The integer shift makes this a circular condition, including both midpoint ties 
 The proof shifts the phase by the supplied integer, evaluates the finite geometric sum, applies the sine bounds on the nearest interval, and squares the resulting $2/\pi$ amplitude estimate. The full proof is checked by the Lean kernel.
 :::
 
+A nearest-grid lower bound concerns one bar. Controlling the total weight outside a window requires summing the tail. In the inverse-Fourier convention, write
+
+$$
+\begin{aligned}
+A_Q(\theta,j)&=\frac1Q\sum_{x=0}^{Q-1}e^{2\pi i x(\theta-j.\operatorname{val}/Q)},\\
+p_Q(\theta,j)&=|A_Q(\theta,j)|^2=\operatorname{probability}(Q,\theta,j),\\
+d_Q(\theta,j)&=\left\|\left(\theta-\frac{j.\operatorname{val}}Q:\mathbb R/\mathbb Z\right)\right\|.
+\end{aligned}
+$$
+
+The last line is exactly Lean's `UnitAddCircle` norm: circular distance after reducing the error modulo integers, with values in $[0,1/2]$. We use $\varepsilon$ for the radius to distinguish it from the label reflection $\rho$ below.
+
+::: {.theorem #thm-qpe-circular-tail title="Circular-window tail for single-phase QPE" lean="D5/S3/Quantum/QPECircularTail.qpe_circular_tail_le"}
+For every $n\in\mathbb N$, every real phase $\theta\in\mathbb R$, and every real radius $\varepsilon>0$, put $Q=2^n$. Then
+
+$$
+\sum_{\substack{j\in\mathrm{Fin}\,Q\\\varepsilon\le d_Q(\theta,j)}}p_Q(\theta,j)
+\le\frac1{2Q\varepsilon}+\frac1{2(Q\varepsilon)^2}.
+$$
+
+The bad event includes labels at distance exactly $\varepsilon$. The phase need not lie in $[0,1)$, and no nearest-grid, order, or coprimality hypothesis is required.
+:::
+
+::: proof
+Subtract a nearest integer from each error to obtain absolute value at most $1/2$. The geometric sum and a sine lower bound give $|A_Q(\theta,j)|\le1/(2Qd_Q(\theta,j))$ at positive distance. Lift the labels to integers; reduction modulo $Q$ proves that the lifts are distinct. Squaring and summing reduces the estimate to a finite reciprocal-square tail on each side of the center. Retain each side's first term and bound the rest by a telescoping sum of reciprocal differences, yielding the stated constants. The full proof is checked by the Lean kernel.
+:::
+
+Combining the tail with [normalization of the single-phase kernel](lean:D5/S3/Quantum/ShorCountingMarginal.qpe_probability_normalized), partition all labels into the bad event and its strict good window to obtain the direct consequence
+
+$$
+\sum_{\substack{j\in\mathrm{Fin}\,Q\\d_Q(\theta,j)<\varepsilon}}p_Q(\theta,j)
+\ge1-\frac1{2Q\varepsilon}-\frac1{2(Q\varepsilon)^2}.
+$$
+
+This applies the cited tail and normalization, without introducing another frozen declaration. The good-window inequality is strict: equality with the radius belongs to the bad event. At $Q=128$ and $\varepsilon=1/16$, $Q\varepsilon=8$, the tail bound is $1/16+1/128=9/128$, and the strict good window has mass at least $119/128$, for every real phase. The theorem includes $n=0$, negative phases, integer shifts, the $0/1$ seam, and midpoint ties. When $\varepsilon>1/2$, the bad event is empty. A bound larger than $1$ merely means that this estimate is loose at that scale.
+
+The supplied proof comes from QudeLeap Team's [Lean-QuantumAlg, fixed revision](https://github.com/QudeLeap/Lean-QuantumAlg/tree/971dc8be8a153a116b6d7cd748f984d545861b00), retaining its attribution and Apache 2.0 license. The single-shot estimate appears in Lin Lin, *Lecture Notes on Quantum Algorithms for Scientific Computation*, [arXiv:2201.08309v1](https://arxiv.org/abs/2201.08309v1), §3.5, equations (3.48)–(3.50). This sums only the existing inverse-Fourier single-phase kernel. It does not automatically establish aggregate success for the Shor eigenphase mixture, concentration of every conditioned comb, a repeated-sampling law, or factor extraction. With a positive final $\mathcal F_+$, first reflect the label by $\rho(k)=(-k)\bmod Q$, as below, before using the same phase.
+
 ::: {.remark #rem-shor-actual-input-marginal title="Actual-input derivation and the remaining Shor boundaries"}
-The following derivation explains the four frozen statements above; the later [@thm-shor-nearest-candidate] and [@thm-shor-coprime-candidate] separately establish conditional continued-fraction candidate membership. It remains deliberately narrower than the full Shor algorithm: the aggregate success event, coprime sampling, factor extraction, and gate complexity stay in [@rem-grover-qft-shor-literature].
+The following actual-input derivation explains the four statements about the marginal, normalization, and pointwise lower bounds; the later [@thm-shor-nearest-candidate] and [@thm-shor-coprime-candidate] separately establish conditional continued-fraction candidate membership. It remains deliberately narrower than the full Shor algorithm: the aggregate success event, coprime sampling, factor extraction, and gate complexity stay in [@rem-grover-qft-shor-literature].
 
 **The actual input is $|1\rangle$.** Let the modulus be $N\ge2$ and the natural-number base $a$ satisfy $\gcd(a,N)=1$. The work register has $w$ qubits and dimension $D=2^w$, with only $N\le D$ required. Independently, the counting register has size $Q=2^n$ for any natural number $n$, including $0$. Work basis labels are $t\in\mathrm{Fin}\,D$; the padded modular permutation and its linear action are
 
@@ -476,9 +559,44 @@ $$
 Its only inputs are the measured integer $y$, counting capacity $Q$, and modulus $N$. The unknown order $r$ and phase index $s$ are not inputs. Each rational is represented in lowest terms with positive denominator.
 :::
 
-How is $C(x)$ actually enumerated? Put $a_0=\lfloor x\rfloor$ and $f=x-a_0$. If $f=0$, return $[a_0]$. Otherwise recursively enumerate $C(1/f)$, replace each entry $z$ by $a_0+1/z$, and prepend $a_0$. For example, $21/64$ starts with $a_0=0$, then $64/21=3+1/21$, yielding $[0,1/3,21/64]$. The positive reduced denominator strictly decreases at every recursive call, making the list finite; this supplies no operation-count or bit-complexity bound. The source definition [`convergents`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents) also accepts negative rationals, zero, and integers. Totalized rational division defines candidates even at $Q=0$, although the application below always has $Q>0$.
+How is $C(x)$ actually enumerated? Put $a_0=\lfloor x\rfloor$ and $f=x-a_0$. If $f=0$, return $[a_0]$. Otherwise recursively enumerate $C(1/f)$, replace each entry $z$ by $a_0+1/z$, and prepend $a_0$. For example, $21/64$ starts with $a_0=0$, then $64/21=3+1/21$, yielding $[0,1/3,21/64]$. The positive reduced denominator strictly decreases at every recursive call, making the list finite. Below we also bound its length, while distinguishing stage counts from actual work. The source definition [`convergents`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents) also accepts negative rationals, zero, and integers. Totalized rational division defines candidates even at $Q=0$, although the application below always has $Q>0$.
 
 This is a list of genuine real continued-fraction convergents. The exact correspondence [`mem_convergents_iff`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff) says that, for any rationals $x,z$, membership $z\in C(x)$ is equivalent to the existence of $k\in\mathbb N$ with $\operatorname{Real.convergent}(x,k)=z$. The real definition repeats the terminal value after a rational expansion terminates; the finite list only needs to retain that value. Write [`reduced`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced) for the rational $s/r$. For $r>0$, its denominator formula [`reduced_den`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den) is $d=r/\gcd(s,r)$.
+
+Beyond termination, the list's length can be bounded. Write $d=\operatorname{den}(x)$ for the canonical positive reduced denominator of a rational $x$, and read $\operatorname{Nat.log}(2,d)$ as $\lfloor\log_2d\rfloor$; here $d\ge1$ always.
+
+::: {.theorem #thm-rational-convergents-log-length title="Logarithmic length of the rational convergent list" lean="D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log"}
+For every rational $x\in\mathbb Q$,
+
+$$
+\operatorname{length}(C(x))\le2\operatorname{Nat.log}(2,\operatorname{den}(x))+1.
+$$
+
+This includes negative rationals, zero, and integers. An integer has denominator $1$ and a singleton list, attaining equality.
+:::
+
+::: proof
+Use strong induction on the positive reduced denominator. An integer terminates immediately. If the reciprocal fractional part is still nonintegral, the denominators after two and one recursive steps sum to at most the original denominator, and the former is strictly smaller than the latter. Thus two steps at least halve the denominator. Monotonicity of the natural logarithm and its multiplication-by-two identity account for the two removed entries before applying the induction hypothesis. The full proof is checked by the Lean kernel.
+:::
+
+For the observable candidates, only $y,Q,N\in\mathbb N$ and $Q>0$ are needed. Filtering cannot increase length, and
+
+$$
+\operatorname{den}(y/Q)=\frac{Q}{\gcd(y,Q)}\le Q.
+$$
+
+Applying [@thm-rational-convergents-log-length] and monotonicity of the natural logarithm gives
+
+$$
+\begin{aligned}
+\operatorname{length}(\operatorname{candidates}(y,Q,N))
+&\le2\operatorname{Nat.log}(2,Q)+1,\\
+\operatorname{length}(\operatorname{candidates}(y,2^n,N))&\le2n+1
+\quad(n\in\mathbb N).
+\end{aligned}
+$$
+
+This application requires neither $y<Q$ nor $N>0$. At $n=0$ the bound is $1$; at $N=0$ the filtered list is empty. It counts entries or Euclidean recursive stages. It supplies no bound on all the repeated `map` work, arithmetic bit complexity, or gate complexity. A short list does not certify an exact selector or make every candidate denominator divide the true order. The recovery results below still require their actual parameters, resolution, nearestness, and coprimality hypotheses.
 
 ::: {.theorem #thm-shor-nearest-candidate title="Conditional candidate membership for a nearest sample" lean="D5/S3/Quantum/ShorContinuedFractions.shor_nearest_candidate"}
 For every actual padded modular-multiplication record $c:\operatorname{Parameters}$, write $N=c.\operatorname{modulus}\ge2$ and $a=c.\operatorname{base}\in\mathbb N$, with $\gcd(a,N)=1$. Its work width $w=c.\operatorname{width}$ satisfies $N\le2^w$, and its true order $r=c.\operatorname{period}=\operatorname{orderOf}(a:\mathrm{ZMod}\,N)$ satisfies $0<r<N$. For every independently chosen counting width $n\in\mathbb N$, put $Q=2^n$. For every $s\in\mathrm{Fin}\,r$ and $y\in\mathrm{Fin}\,Q$, assume
@@ -550,7 +668,7 @@ The first row's full list was computed by Euclidean recursion above; $21/64$ is 
 
 The rational zero has denominator $1$, so the first theorem includes $s=0$. When $r=1$, the sole phase is $s=0$ and $\gcd(0,1)=1$, so the second theorem applies too. The recovery conditions $N\ge2$ and $N^2\le2^n$ exclude $n=0$, whereas the preceding marginal permits it. Neither candidate theorem requires $r\mid Q$ or identifies work width $w$ with counting width $n$. With this chapter's positive-exponent final transform $\mathcal F_+$, first reflect the observed label $k_+$ to $y=\rho(k_+)=(-k_+)\bmod Q$, then use nearestness for the same phase $s/r$ and compute these candidates. Keeping the label unchanged would change the phase being approximated.
 
-These results come from `ShorContinuedFractions` and `FiniteRationalConvergents` at the pinned source. Both modules retain the provenance and Apache 2.0 license of *Finite-register phase estimation and spectral Shor order finding* ([solanaqubits/leanbook, fixed revision](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)). Source audit [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) still has three validated items and one unfinished item: the broader clock statement and independent ideal-sampling product law are not settled by this specialization to the modular bound. The separate earlier marginal-source audit [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) still has three validated and fifty-nine unfinished items. These statuses describe coverage, not a refutation of the mathematical proofs above. Candidate membership establishes no aggregate success probability, random coprimality rate, repeated-sample independence, certified selector, factor extraction, classical bit complexity, quantum gate complexity, or hardware performance; the boundaries in [@rem-grover-qft-shor-literature] remain.
+These results come from `ShorContinuedFractions`, `FiniteRationalConvergents`, and `FiniteRationalConvergentsLength` at the pinned source. The rational-list and length proofs are supplied by aicyberg; the modules retain the provenance and Apache 2.0 license of *Finite-register phase estimation and spectral Shor order finding* ([solanaqubits/leanbook, fixed revision](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)). Source audit [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) still has three validated items and one unfinished item: the broader clock statement and independent ideal-sampling product law are not settled by this specialization to the modular bound. The separate earlier marginal-source audit [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) still has three validated and fifty-nine unfinished items. These statuses describe coverage, not a refutation of the mathematical proofs above. Candidate membership establishes no aggregate success probability, random coprimality rate, repeated-sample independence, certified selector, factor extraction, classical bit complexity, quantum gate complexity, or hardware performance; the boundaries in [@rem-grover-qft-shor-literature] remain.
 
 ::: {.viz src="phase-gears" preset="leak" height="500"}
 **When the period does not divide, the peaks spread.** $Q = 64$ and period $6$: the magenta marks $sQ/r$ fall between integers at $10.67$, $21.33$ and so on, and each peak spreads over neighbouring cells — $k = 11$ has $0.115$, $k = 10$ only $0.026$, and the six cells nearest $sQ/r$ carry $0.80$ together; the continued fraction of the amber-framed $k = 11$ reads $\frac{1}{6}$. This card specifies no actual modulus and base with which to check $N^2\le Q$, so its concentration and reading remain a numerical teaching example. The conditional membership theorems above do not certify this card's last-convergent rule or identify its conditioned-comb peak heights with the actual marginal probabilities.
@@ -558,8 +676,8 @@ These results come from `ShorContinuedFractions` and `FiniteRationalConvergents`
 
 Let us now work through the four-part calculation covering Grover search at $N = 4$ and $N = 8$, the $3$-qubit QFT phase gears at $x = 5$, Shor order finding for $N = 15$, and the finite Poisson cross-check on $\mathrm{ZMod}\,16$.
 
-::: {.example #ex-grover-four-shor-fifteen title="Grover Search for N=4 and N=8, 3-Qubit QFT Phase Gears, and Shor Order Finding for N=15 (With Literature Context, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Steps 1 and 4 below instantiate this chapter's kernel-verified [@thm-grover-uniform-rotation], [@prop-finite-character-cancellation], and [@cor-finite-poisson-period], whereas the binary tensor-product QFT decomposition with bit-reversal SWAPs in Step 2 and the Shor order-finding and classical $\gcd(a^{r/2} \pm 1, N)$ factoring reduction in Step 3 belong to the quantum-algorithms literature (see [@rem-grover-qft-shor-literature] below) and are not formalized in this book.
+::: {.example #ex-grover-four-shor-fifteen title="Grover Search for N=4 and N=8, 3-Qubit QFT Phase Gears, and Shor Order Finding for N=15: Hand Calculations and Evidence Boundaries"}
+Steps 1 and 4 instantiate [@thm-grover-uniform-rotation], [@prop-finite-character-cancellation], and [@cor-finite-poisson-period]. Step 2 expands the three-qubit phases in the positive-exponent, big-endian convention with terminal bit reversal of [@thm-qft-circuit-action]. The hand-derived tensor product explains that convention without certifying every tensor identity. The complete Shor order-finding and classical $\gcd(a^{r/2} \pm 1,N)$ factoring reduction in Step 3 remain literature results, not formalized in this book (see [@rem-grover-qft-shor-literature]).
 
 This example provides a four-part hand-calculated verification:
 
@@ -624,12 +742,12 @@ The order is then read off a peak: $k = 4$ and $12$ give the order $4$ directly,
 **Reading the order from a peak.** The same spectrum: $k = 4$ and $12$ give $\frac{4}{16} = \frac{1}{4}$ and $\frac{12}{16} = \frac{3}{4}$, whose denominator is the order $4$; the amber-framed $k = 8$ only gives $\frac{1}{2}$, and $2$ is a proper divisor of the order that must be checked again; $k = 0$ carries nothing.
 :::
 
-::: {.remark #rem-grover-qft-shor-literature title="Grover Query Lower Bounds, QFT Circuit Complexity, and Shor's Factoring Algorithm (Literature Result, Not Formalized in This Book)"}
+::: {.remark #rem-grover-qft-shor-literature title="Grover Query Lower Bounds, Ideal QFT Counts, and the Full Shor Algorithm: Boundaries"}
 <!-- alias: #rem-shor-factoring-literature -->
-**Literature result, not formalized in this book.** To complement the frozen algebraic results of this chapter ([@thm-grover-uniform-rotation], [@lemma-phase-kickback-weyl], [@prop-finite-character-cancellation], and [@cor-finite-poisson-period]), the chapter also establishes the actual-input marginal and pointwise bounds ([@thm-shor-qpe-probability-mixture]–[@thm-qpe-arbitrary-phase-lower-bound]), followed by conditional candidate membership in [@thm-shor-nearest-candidate] and [@thm-shor-coprime-candidate]. These supply no certified selector. The surrounding full algorithmic and complexity results remain literature results:
+The chapter cites Lean results for uniform amplitude amplification, Weyl conjugation, character cancellation, and finite Poisson summation, together with the actual QFT circuit action and native event counts ([@thm-qft-circuit-action], [@thm-qft-native-event-count]), the single-phase circular tail ([@thm-qpe-circular-tail]), the actual-input marginal and pointwise bounds, rational-list length, and conditional candidate membership. These supply no certified selector. Items 1 and 3 below remain **literature results, not formalized in this book**; item 2 summarizes the cited circuit counts and their cost boundaries.
 
 1. **Grover's algorithm and query lower bounds** (L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866; G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055): For unstructured search among $N$ candidates with a known number $M$ of marked items and the promise $1 \le M \le N/4$, start from the uniform superposition and choose the iteration count using the known initial success probability $p = M/N$. Amplitude amplification then raises the success probability to $\ge 1 - M/N$ using $O(\sqrt{N/M})$ queries to the marking oracle. Under this sparse-solution promise, any quantum black-box algorithm finding a marked item with bounded error requires $\Omega(\sqrt{N/M})$ queries (by reduction from the single-solution black-box lower bound of Bennett, Bernstein, Brassard, and Vazirani, 1997): the quadratic speedup reaches the quantum geometric limit for this oracle task.
-2. **Gate complexity of the QFT circuit**: Expanding the $Q = 2^q$-point QFT into the binary product form of [@ex-grover-four-shor-fifteen] requires $q$ Hadamard gates, $q(q-1)/2$ controlled phase gates, and $\lfloor q/2\rfloor$ SWAP gates, totaling $O(q^2) = O((\log Q)^2)$ ideal gates. The input is an already prepared quantum state, and the output Fourier coefficients remain encoded in quantum amplitudes; loading arbitrary input data, reading out all coefficients classically, and synthesizing the ideal phase gates over a finite discrete gate set are outside this count.
+2. **Ideal native gate count of the same QFT circuit**: [@thm-qft-native-event-count] gives $q$ Hadamards, $q(q-1)/2$ controlled phases, and $\lfloor q/2\rfloor$ SWAPs, totaling $\frac{q(q+1)}2+\lfloor q/2\rfloor$ ideal native occurrences. The usual asymptotic count is therefore $O(q^2)=O((\log Q)^2)$ for $Q=2^q$; [@thm-qft-circuit-action] gives its exact positive-exponent action on a prepared complex vector. Loading arbitrary input data, full classical Fourier-coefficient readout, synthesis of ideal phase gates over a finite discrete gate set, and hardware performance are outside this count.
 3. **Shor's factoring algorithm and continued-fraction order recovery** (P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172): For a general odd composite $N$ with $r \nmid Q$ ($N^2 \le Q < 2N^2$), Dirichlet-kernel concentration guarantees that QFT sampling lands within $|k/Q - s/r| < \frac{1}{2r^2}$ with constant probability, under the actual parameter and nearestness hypotheses, membership of the reduced phase in finite candidates is now covered by [@thm-shor-nearest-candidate], while certified selection remains a separate task. When $\gcd(s, r) = 1$ (with probability $\varphi(r)/r = \Omega(1/\log\log r)$), testing $r$ and applying the classical randomized reduction from factoring to order finding factors $N$ in polynomial time. (Note that describing period finding as "canceling an infinite period down to $1$" is a heuristic metaphor, not a formalized mathematical claim.)
 :::
 

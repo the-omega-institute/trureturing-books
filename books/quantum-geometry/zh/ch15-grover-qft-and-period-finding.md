@@ -124,7 +124,7 @@ Grover 两次反射的完整实验室：拖动镜 2 上的初始态改 $\theta$�
 如果说 Grover 搜索靠的是在实平面里一步旋转 $2\theta$，那么量子傅里叶变换（QFT）与相位估计靠的就是在复赤道圆周上拧转不同齿比的**相位齿轮**（见图 15 面板 II）。
 
 ::: {.viz src="phase-gears" preset="basis" height="500"}
-**一排逐级减半转速的齿轮。** $Q = 8$、只有一格 $x = 5$：时间轴每走一格，三只紫色齿轮分别转 $\frac{1}{2}$、$\frac{1}{4}$、$\frac{1}{8}$ 圈，走到 $5$ 时停在 $\pi$、$\frac{\pi}{2}$、$\frac{5\pi}{4}$；频率 $k = 7$ 用上三只，链上唯一一支青色箭头指向它们的和 $\frac{3\pi}{4}$。谱是平的，每根柱子都是 $\frac{1}{8}$。QFT 的二进制乘积分解是文献结果，未在本书形式化。
+**一排逐级减半转速的齿轮。** $Q = 8$、只有一格 $x = 5$：时间轴每走一格，三只紫色齿轮分别转 $\frac{1}{2}$、$\frac{1}{4}$、$\frac{1}{8}$ 圈，走到 $5$ 时停在 $\pi$、$\frac{\pi}{2}$、$\frac{5\pi}{4}$；频率 $k = 7$ 用上三只，链上唯一一支青色箭头指向它们的和 $\frac{3\pi}{4}$。谱是平的，每根柱子都是 $\frac{1}{8}$。实际电路的正指数作用见 [@thm-qft-circuit-action]；这里的齿轮动画是这一位序规范的教学演示。
 :::
 
 在代数底层，一切离散相位反冲（phase kickback）都源于有限循环群 $\mathrm{ZMod}\,M$（$M \in \mathbb{N}$，带 `[NeZero M]`）上平移算子与时钟算子的共轭对易律。在源码模块 `WeylDisplacementConjugation` 中，记 $M$ 次本原单位根为 $\omega_M = \mathrm{windowRoot}(M) = \exp(2\pi i / M)$，在 $M_{\mathrm{Fin}\,M}(\mathbb{C})$ 上定义：
@@ -158,7 +158,52 @@ $$
 
 1. **模 $M$ 减法先于 `.val` 取值**：指数 $(b \cdot c - a \cdot d).\mathrm{val}$ 是先在环 $\mathrm{ZMod}\,M$ 内部完成乘法与减法，再通过 `.val` 取出 $\{0, 1, \dots, M-1\}$ 中的代表元整数作为 $\mathrm{windowRoot}(M)$ 的自然数幂次。
 2. **共轭转置 `star` 与相位正号规范**：式中的 $\mathrm{star}$ 表示矩阵共轭转置 $(\cdot)^*$；由于源码定义 $\mathrm{windowRoot}(M) = \exp(+2\pi i / M)$ 且移位作用为 $(X\psi)_i = \psi_{i-1}$、算子次序为 $X^{e.\mathrm{val}} Z^{f.\mathrm{val}}$，共轭后指数恰好是正号 $(b \cdot c - a \cdot d).\mathrm{val}$。
-3. **代数核心与完整 QFT 电路的边界**：[@lemma-phase-kickback-weyl] 给出了有限 Weyl 代数中“用位移共轭提取辛相位”的精确算子恒等式；而多比特受控相位门与 Hadamard 门如何拼装成多项式门数的量子傅里叶变换（QFT）电路，我们将在 [@ex-grover-four-shor-fifteen] 第二步中按显式二进制位序手算展开，并在 [@rem-grover-qft-shor-literature] 中说明其门数与输入输出边界。
+3. **适用范围**：[@lemma-phase-kickback-weyl] 只给出有限 Weyl 共轭的代数相位反冲；实际多比特 QFT 电路的作用与原生事件计数分别由 [@thm-qft-circuit-action] 与 [@thm-qft-native-event-count] 单独给出，不能从 Weyl 共轭式直接推出。
+
+把齿轮图变成电路等式，必须同时固定门的次序与二进制标号。这里使用源码 `QuantumAlg.QuantumFourierTransform.Source.circuit` 的同一个递归电路：每层先作首位 Hadamard，再作按间距排列的受控相位门，随后执行嵌入的尾部递归，最后作互不相交的位反转 SWAP。`onBinaryLabels` 将其执行矩阵按大端二进制标号（最高有效位在前）对应到整数 $0,\ldots,2^q-1$。
+
+::: {.theorem #thm-qft-circuit-action title="实际 QFT 电路对任意复向量的精确作用" lean="D5/S3/Quantum/FourierCircuit/Correctness.circuit_action"}
+对任意 $\operatorname{oracles}:\operatorname{OracleModel}$、任意自然数宽度 $q$、任意解释 $\operatorname{environment}:\operatorname{oracles.Interpretation}$ 及任意复向量 $v:\mathrm{Fin}(2^q)\to\mathbb C$，令 $U$ 为上述电路经 `onBinaryLabels` 对应后的执行矩阵，则
+
+$$
+\begin{aligned}
+U v&=\mathcal F_+(v),\\
+(\mathcal F_+(v))(k)&=\frac{1}{\sqrt{2^q}}
+\sum_{x\in\mathrm{Fin}(2^q)}e^{+2\pi i k.\operatorname{val}\,x.\operatorname{val}/2^q}v(x)
+\quad(k\in\mathrm{Fin}(2^q)).
+\end{aligned}
+$$
+
+等式是复向量的精确相等，包括整体相位；不要求 $v$ 归一化，也不要求 $q>0$。
+:::
+
+::: proof
+按宽度归纳计算未作末端交换的实际电路矩阵元，其中输出标号带有位反转；末端 SWAP 网络的执行恰好消去这次反转。所得矩阵元是正指数傅里叶核乘 $1/\sqrt{2^q}$，对输入坐标求和便得到任意向量的等式。完整证明由 Lean 内核检查。
+:::
+
+执行与计数观察的是同一个 `circuit`，不能给另一个抽象傅里叶算子直接贴上电路成本。记 $\delta(g,e)$ 在原生门事件 $g$ 等于事件 $e$ 时为 $1$，否则为 $0$。
+
+::: {.theorem #thm-qft-native-event-count title="同一 QFT 电路的全部原生事件计数" lean="D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources.qftSource_circuit_event_count"}
+对任意 $\operatorname{oracles}:\operatorname{OracleModel}$、任意事件 $e:\operatorname{Resource.Event}(\operatorname{quantum}(\operatorname{FourierGate.model},\operatorname{oracles}))$ 与任意 $q\in\mathbb N$，上述电路 $\operatorname{circuit}(\operatorname{oracles},q)$ 的 `eventCost` 满足
+
+$$
+\begin{aligned}
+\operatorname{count}(e,\operatorname{eventCost})
+&=q\,\delta(H,e)+\binom q2\delta(\operatorname{controlledPhase},e)\\
+&\quad+\lfloor q/2\rfloor\,\delta(\operatorname{SWAP},e).
+\end{aligned}
+$$
+
+这里 $H$、$\operatorname{controlledPhase}$、$\operatorname{SWAP}$ 均指对应的原生门事件。因此其出现次数分别为 $q$、$\binom q2$、$\lfloor q/2\rfloor$；所有其他事件（包括 oracle 事件）出现次数为零，$q=0$ 时全部为零。
+:::
+
+::: proof
+每层实际指令贡献一个 Hadamard 与指定前缀中的受控相位门；嵌入尾部保持事件计数，宽度归纳累加出 $q$ 与 $\binom q2$。末端反转包含 $\lfloor q/2\rfloor$ 个 SWAP，两部分顺序复合给出对任意事件坐标的公式。完整证明由 Lean 内核检查。
+:::
+
+例如 $q=3$ 时是 $3$ 个 Hadamard、$3$ 个受控相位与 $1$ 个 SWAP，共 $7$ 次理想原生门出现；$q=0$ 的单坐标变换是恒等变换，门数为零。这些计数不包括输入装载、全部傅里叶系数的经典读出、有限离散门集综合或硬件成本。后面的三比特乘积式是这一大端、正指数规范的手算解释，不把页面的全部几何张量恒等式或交互行为一并纳入验证。
+
+上述实际递归电路证明与事件计数来自 QudeLeap Team 的 [Lean-QuantumAlg 固定版本](https://github.com/QudeLeap/Lean-QuantumAlg/tree/971dc8be8a153a116b6d7cd748f984d545861b00)，移植源码保留 Apache 2.0 许可与来源注记。来源审计 [#30752](https://github.com/the-omega-institute/trureturing/issues/30752) 仍为三项已验证、七项待解决、五十六项未完成；这两条引用不代表供给库的其余内容已通过审计。
 
 ## 15.3 有限字符正交与非共振相消 {#sec-period-frequency-cancellation}
 
@@ -344,8 +389,46 @@ $$
 证明把相位按给定整数移位，计算有限几何和，在最近区间使用正弦不等式，再将 $2/\pi$ 的振幅估计平方。完整证明由 Lean 内核检查。
 :::
 
+最近格点下界只盯住一根柱子；若要控制一个窗口外所有柱子的总重量，就必须对尾部求和。沿用逆傅里叶规范，记
+
+$$
+\begin{aligned}
+A_Q(\theta,j)&=\frac1Q\sum_{x=0}^{Q-1}e^{2\pi i x(\theta-j.\operatorname{val}/Q)},\\
+p_Q(\theta,j)&=|A_Q(\theta,j)|^2=\operatorname{probability}(Q,\theta,j),\\
+d_Q(\theta,j)&=\left\|\left(\theta-\frac{j.\operatorname{val}}Q:\mathbb R/\mathbb Z\right)\right\|.
+\end{aligned}
+$$
+
+最后一行精确对应 Lean 的 `UnitAddCircle` 范数，即误差模整数后的圆周距离，取值在 $[0,1/2]$。半径写作 $\varepsilon$，以区别于下文反射标号的 $\rho$。
+
+::: {.theorem #thm-qpe-circular-tail title="单相位 QPE 的圆周窗口尾界" lean="D5/S3/Quantum/QPECircularTail.qpe_circular_tail_le"}
+对每个 $n\in\mathbb N$、每个实相位 $\theta\in\mathbb R$ 和每个实半径 $\varepsilon>0$，令 $Q=2^n$，则
+
+$$
+\sum_{\substack{j\in\mathrm{Fin}\,Q\\\varepsilon\le d_Q(\theta,j)}}p_Q(\theta,j)
+\le\frac1{2Q\varepsilon}+\frac1{2(Q\varepsilon)^2}.
+$$
+
+坏事件包含距离恰等于 $\varepsilon$ 的标签；相位不必属于 $[0,1)$，不需要最近格点、阶或互素性假设。
+:::
+
+::: proof
+把每个误差减去最近整数，使其绝对值不超过 $1/2$。几何和与正弦下界给出正距离处 $|A_Q(\theta,j)|\le1/(2Qd_Q(\theta,j))$。将标签提升为整数后，模 $Q$ 还原证明这些提升互异；平方并求和便归结为中心两侧的有限倒平方尾和。每侧保留首项，再用倒数差的望远镜和控制其余项，得到所述两个常数。完整证明由 Lean 内核检查。
+:::
+
+结合单相位核的[归一化](lean:D5/S3/Quantum/ShorCountingMarginal.qpe_probability_normalized)，把所有标签分成上述坏事件与严格好窗口，可得以下直接推论：
+
+$$
+\sum_{\substack{j\in\mathrm{Fin}\,Q\\d_Q(\theta,j)<\varepsilon}}p_Q(\theta,j)
+\ge1-\frac1{2Q\varepsilon}-\frac1{2(Q\varepsilon)^2}.
+$$
+
+这是对所引尾界与归一化的应用，不另设冻结声明。注意好窗口的严格不等号：若距离等于半径，它属于坏事件。$Q=128$、$\varepsilon=1/16$ 时，$Q\varepsilon=8$，尾界为 $1/16+1/128=9/128$，严格好窗口的质量至少为 $119/128$，对所有实相位都成立。$n=0$、负相位、整数移位、$0/1$ 接缝与中点并列均在定理范围内；$\varepsilon>1/2$ 时坏事件为空。上界可能大于 $1$，这只表示估计在该尺度不尖锐。
+
+尾界的供给证明来自 QudeLeap Team 的 [Lean-QuantumAlg 固定版本](https://github.com/QudeLeap/Lean-QuantumAlg/tree/971dc8be8a153a116b6d7cd748f984d545861b00)，保留来源与 Apache 2.0 许可；所用单次估计见 Lin Lin，*Lecture Notes on Quantum Algorithms for Scientific Computation*，[arXiv:2201.08309v1](https://arxiv.org/abs/2201.08309v1)，§3.5，式 (3.48)–(3.50)。这里仅对既有逆傅里叶单相位核求和，没有自动得到 Shor 本征相位混合的总成功率、任意条件梳子的集中、重复采样规律或因子提取保证。若末端改用正指数 $\mathcal F_+$，须按下文的 $\rho(k)=(-k)\bmod Q$ 反射标号后再使用同一个相位。
+
 ::: {.remark #rem-shor-actual-input-marginal title="实际输入推导与 Shor 的剩余边界"}
-下面的推导解释上述四条冻结声明；其后的 [@thm-shor-nearest-candidate] 与 [@thm-shor-coprime-candidate] 另行给出有条件的连分数候选成员资格。范围仍严格小于完整 Shor 算法：总事件成功概率、互素采样、因子提取与门复杂度仍见 [@rem-grover-qft-shor-literature]。
+下面的实际输入推导解释边缘分布、归一化与逐点下界的四条声明；其后的 [@thm-shor-nearest-candidate] 与 [@thm-shor-coprime-candidate] 另行给出有条件的连分数候选成员资格。范围仍严格小于完整 Shor 算法：总事件成功概率、互素采样、因子提取与门复杂度仍见 [@rem-grover-qft-shor-literature]。
 
 **实际装入的是 $|1\rangle$。** 设模数 $N \ge 2$、自然数底数 $a$ 满足 $\gcd(a,N)=1$。工作寄存器有 $w$ 个比特，维数 $D=2^w$，只要求 $N\le D$；计数寄存器独立地取 $Q=2^n$，$n$ 为任意自然数，包括 $0$。工作基标号是 $t\in\mathrm{Fin}\,D$，补齐后的模乘置换及其线性作用为
 
@@ -492,9 +575,44 @@ $$
 列表只接收测量整数 $y$、计数容量 $Q$ 与模数 $N$；不接收未知阶 $r$ 或相位指标 $s$。每个有理数都按正分母的既约形式表示。
 :::
 
-怎样真正列出 $C(x)$？写 $a_0=\lfloor x\rfloor$、$f=x-a_0$。若 $f=0$，返回单项列表 $[a_0]$；否则先递归列出 $C(1/f)$，把其中每项 $z$ 变为 $a_0+1/z$，再在前端接上 $a_0$。例如 $21/64$ 的第一层给出 $a_0=0$，下一层计算 $64/21=3+1/21$，最终得到 $[0,1/3,21/64]$。递归时正的既约分母严格下降，故列表有限；这没有给出运算次数或位复杂度上界。源码的 [`convergents`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents) 对负有理数、零与整数同样有定义；候选定义也按有理数除法的全函数约定接收 $Q=0$，但下述应用始终有 $Q>0$。
+怎样真正列出 $C(x)$？写 $a_0=\lfloor x\rfloor$、$f=x-a_0$。若 $f=0$，返回单项列表 $[a_0]$；否则先递归列出 $C(1/f)$，把其中每项 $z$ 变为 $a_0+1/z$，再在前端接上 $a_0$。例如 $21/64$ 的第一层给出 $a_0=0$，下一层计算 $64/21=3+1/21$，最终得到 $[0,1/3,21/64]$。递归时正的既约分母严格下降，故列表有限；下文进一步给出列表长度界，并区分阶段数与实际运算成本。源码的 [`convergents`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents) 对负有理数、零与整数同样有定义；候选定义也按有理数除法的全函数约定接收 $Q=0$，但下述应用始终有 $Q>0$。
 
 这份列表与真正的实连分数相连，而非另造一个近似列表。[`mem_convergents_iff`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff) 给出的精确对应是：对任意有理数 $x,z$，$z\in C(x)$ 当且仅当存在 $k\in\mathbb N$ 使 $\operatorname{Real.convergent}(x,k)=z$。实数版本在有理数终止之后重复末项；有限列表只需保留这个值。以下用 [`reduced`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced) 记有理数 $s/r$；当 $r>0$ 时，其分母公式 [`reduced_den`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den) 为 $d=r/\gcd(s,r)$。
+
+有限性之外，还可以控制列表有多长。记 $d=\operatorname{den}(x)$ 为有理数 $x$ 的规范正既约分母，并把 $\operatorname{Nat.log}(2,d)$ 读作 $\lfloor\log_2d\rfloor$；这里总有 $d\ge1$。
+
+::: {.theorem #thm-rational-convergents-log-length title="有理渐近分数列表的对数长度界" lean="D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log"}
+对每个有理数 $x\in\mathbb Q$，
+
+$$
+\operatorname{length}(C(x))\le2\operatorname{Nat.log}(2,\operatorname{den}(x))+1.
+$$
+
+这包括负有理数、零与整数。整数的分母为 $1$，其列表为单项，等号成立。
+:::
+
+::: proof
+对正既约分母作强归纳。整数直接终止；若倒数小数部分仍非整数，连续两次递归后的分母与一次递归后的分母之和不超过原分母，且前者严格小于后者，所以两步后的分母不超过原分母的一半。自然数对数的单调性与乘二公式支付这两项列表长度，再用归纳假设。完整证明由 Lean 内核检查。
+:::
+
+应用到可观察候选，只需 $y,Q,N\in\mathbb N$ 与 $Q>0$。过滤不能增加列表长度，且
+
+$$
+\operatorname{den}(y/Q)=\frac{Q}{\gcd(y,Q)}\le Q.
+$$
+
+于是由 [@thm-rational-convergents-log-length] 与自然数对数的单调性得到
+
+$$
+\begin{aligned}
+\operatorname{length}(\operatorname{candidates}(y,Q,N))
+&\le2\operatorname{Nat.log}(2,Q)+1,\\
+\operatorname{length}(\operatorname{candidates}(y,2^n,N))&\le2n+1
+\quad(n\in\mathbb N).
+\end{aligned}
+$$
+
+这是所引长度界的应用，不要求 $y<Q$，也不要求 $N>0$；$n=0$ 时上界为 $1$，$N=0$ 时过滤后的列表为空。所计的是列表项数或欧几里得递归阶段数；递归定义中逐层 `map` 的总工作量、算术位复杂度与门复杂度没有由此给出。较短的列表也没有认证精确选择器，更没有使每个候选分母都整除真阶。下面的恢复结论仍须保留各自的实际参数、分辨率、最近条件与互素性假设。
 
 ::: {.theorem #thm-shor-nearest-candidate title="最近样本的条件候选成员资格" lean="D5/S3/Quantum/ShorContinuedFractions.shor_nearest_candidate"}
 对每个实际补齐模乘的参数记录 $c:\operatorname{Parameters}$，记模数 $N=c.\operatorname{modulus}\ge2$、自然数底数 $a=c.\operatorname{base}$，其中 $\gcd(a,N)=1$；工作宽度 $w=c.\operatorname{width}$ 满足 $N\le2^w$，真阶 $r=c.\operatorname{period}=\operatorname{orderOf}(a:\mathrm{ZMod}\,N)$ 满足 $0<r<N$。对任意独立选取的计数宽度 $n\in\mathbb N$，令 $Q=2^n$。对每个 $s\in\mathrm{Fin}\,r$ 与 $y\in\mathrm{Fin}\,Q$，假设
@@ -566,7 +684,7 @@ $r,s$ 是刻画测量结果的潜在假设参数，读者运行候选计算时�
 
 零有理数的分母为 $1$，所以 $s=0$ 仍在第一条定理范围内；$r=1$ 时唯一相位是 $s=0$，且 $\gcd(0,1)=1$，第二条同样适用。恢复条件 $N\ge2$、$N^2\le2^n$ 排除了 $n=0$，而前面的边缘分布允许 $n=0$。两条候选定理均不要求 $r\mid Q$，也不把工作宽度 $w$ 与计数宽度 $n$ 等同。若实验末端使用本章的正指数 $\mathcal F_+$，对观察标号 $k_+$ 应先取 $y=\rho(k_+)=(-k_+)\bmod Q$，再检查针对同一相位 $s/r$ 的最近条件并计算这里的候选；直接保留原标号会改变所逼近的相位。
 
-这些结论取自所钉源码的 `ShorContinuedFractions` 与 `FiniteRationalConvergents`；两模块保留供给源 *Finite-register phase estimation and spectral Shor order finding*（[solanaqubits/leanbook，固定版本](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)）的来源与 Apache 2.0 许可。来源审计 [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) 仍为三项已验证、一项未完成：更一般的时钟结论与独立理想采样乘积律没有因本节的模数界特化而一并解决。此前实际边缘分布的独立来源审计 [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) 仍为三项已验证、五十九项未完成。这些审计状态描述覆盖范围，不是否定上述数学证明。总成功概率、随机互素率、重复采样独立性、精确选择器、因子提取、经典位复杂度、量子门复杂度与硬件表现均未由候选成员资格推出，仍须保留 [@rem-grover-qft-shor-literature] 的边界。
+这些结论取自所钉源码的 `ShorContinuedFractions`、`FiniteRationalConvergents` 与 `FiniteRationalConvergentsLength`；有理列表与长度证明由 aicyberg 提供，模块保留供给源 *Finite-register phase estimation and spectral Shor order finding*（[solanaqubits/leanbook，固定版本](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)）的来源与 Apache 2.0 许可。来源审计 [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) 仍为三项已验证、一项未完成：更一般的时钟结论与独立理想采样乘积律没有因本节的模数界特化而一并解决。此前实际边缘分布的独立来源审计 [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) 仍为三项已验证、五十九项未完成。这些审计状态描述覆盖范围，不是否定上述数学证明。总成功概率、随机互素率、重复采样独立性、精确选择器、因子提取、经典位复杂度、量子门复杂度与硬件表现均未由候选成员资格推出，仍须保留 [@rem-grover-qft-shor-literature] 的边界。
 
 ::: {.viz src="phase-gears" preset="leak" height="500"}
 **不整除时峰摊开。** $Q = 64$、周期 $6$：品红的 $sQ/r$ 落在 $10.67$、$21.33$ 等整数之间，峰摊到相邻的格，$k = 11$ 高 $0.115$、$k = 10$ 只有 $0.026$，离 $sQ/r$ 最近的六格合计 $0.80$；琥珀色框住的 $k = 11$ 用连分数读出 $\frac{1}{6}$。本卡没有指定实际模数与底数，不能据此核对 $N^2\le Q$，所以这里的集中与读数保持教学数值演示的身份；上述条件成员定理不认证本卡“取最后一个渐近分数”的读法，也不把这些条件梳子的峰高认作实际边缘概率。
@@ -574,8 +692,8 @@ $r,s$ 是刻画测量结果的潜在假设参数，读者运行候选计算时�
 
 下面，让我们通过一个四步完整手算算例，把 $N=4$ 与 $N=8$ 的 Grover 搜索、$3$ 比特 QFT 的二进制相位齿轮、$N=15$ 的 Shor 周期寻找以及 $\mathrm{ZMod}\,16$ 上的字符和与泊松公式逐一验算到底。
 
-::: {.example #ex-grover-four-shor-fifteen title="Grover N=4/N=8 搜索、3 比特 QFT 相位齿轮与 Shor N=15 阶寻找完整验算（含文献说明，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本例第一步与第四步具体验算本章经内核验证的 [@thm-grover-uniform-rotation]、[@prop-finite-character-cancellation] 与 [@cor-finite-poisson-period]；而第二步中含末端位反转 SWAP 门的二进制张量积 QFT 分解，以及第三步中 Shor 阶寻找与最大公因数分解归约 $\gcd(a^{r/2} \pm 1, N)$，均属量子算法文献内容（详见下文 [@rem-grover-qft-shor-literature]），未在本书形式化。
+::: {.example #ex-grover-four-shor-fifteen title="Grover N=4/N=8 搜索、3 比特 QFT 相位齿轮与 Shor N=15 阶寻找手算及证据边界"}
+本例第一步与第四步具体验算本章的 [@thm-grover-uniform-rotation]、[@prop-finite-character-cancellation] 与 [@cor-finite-poisson-period]；第二步按 [@thm-qft-circuit-action] 的正指数、大端、含末端位反转规范展开三比特相位。手算的张量乘积式用于解释这一规范，不额外认证所有张量恒等式。第三步的完整 Shor 阶寻找与最大公因数分解归约 $\gcd(a^{r/2} \pm 1,N)$ 仍属文献结果，未在本书形式化（见 [@rem-grover-qft-shor-literature]）。
 
 本例分四步完成本章全部核心公式的具体数值检验：
 
@@ -692,12 +810,12 @@ $N = 8$ 时走两步仍差一点，成功概率停在 $\frac{121}{128}$。
 **由峰读出阶。** 同一个谱：$k = 4$ 与 $12$ 给出 $\frac{4}{16} = \frac{1}{4}$、$\frac{12}{16} = \frac{3}{4}$，分母是阶 $4$；琥珀色框住的 $k = 8$ 只给出 $\frac{1}{2}$，分母 $2$ 是阶的真因子，要再检验；$k = 0$ 不含信息。
 :::
 
-::: {.remark #rem-grover-qft-shor-literature title="Grover 查询下界、QFT 电路分解与 Shor 大数分解完整算法定理（文献结果，未在本书形式化）"}
+::: {.remark #rem-grover-qft-shor-literature title="Grover 查询下界、QFT 理想计数与完整 Shor 算法的边界"}
 <!-- alias: #rem-shor-factoring-literature -->
-**文献结果，未在本书形式化。** 本章的形式化定理严格覆盖了均匀振幅放大的不变平面旋转恒等式（[@thm-grover-uniform-rotation]）、有限 Weyl 位移算子的共轭相位反冲（[@lemma-phase-kickback-weyl]）、零化子特征标正交相消（[@prop-finite-character-cancellation]）与有限泊松求和公式（[@cor-finite-poisson-period]）。本章还给出了实际输入的边缘分布及逐点下界（[@thm-shor-qpe-probability-mixture]–[@thm-qpe-arbitrary-phase-lower-bound]），并在 [@thm-shor-nearest-candidate] 与 [@thm-shor-coprime-candidate] 中给出条件候选成员资格；这些不提供精确选择器。围绕这些结果的完整算法与复杂度结论仍来自以下文献：
+本章的 Lean 引用覆盖均匀振幅放大、Weyl 共轭、字符相消与有限泊松恒等式，以及实际 QFT 电路作用与原生事件计数（[@thm-qft-circuit-action]、[@thm-qft-native-event-count]）、单相位圆周尾界（[@thm-qpe-circular-tail]）、实际输入边缘分布与逐点下界、有理列表长度和条件候选成员资格。它们不提供精确选择器。以下第 1、3 项仍是**文献结果，未在本书形式化**；第 2 项只总结上述电路的理想计数及其成本边界。
 
 1. **Grover 搜索与黑盒查询复杂度下界**（L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866；G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055）：在已知解数 $M$、承诺 $1 \le M \le N/4$ 的 $N$ 元无结构搜索中，从均匀叠加态出发，按已知初始成功概率 $p = M/N$ 选取迭代步数，振幅放大以 $O(\sqrt{N/M})$ 次标记黑盒查询将成功概率提升至 $\ge 1 - M/N$。这一稀疏解承诺下，任何量子黑盒算法要以常数有界误差找到解，都需要 $\Omega(\sqrt{N/M})$ 次查询（由 Bennett–Bernstein–Brassard–Vazirani (1997) 的单解黑盒下界归约得到），证实这一黑盒任务中的二次加速已达量子几何极限。
-2. **量子傅里叶变换（QFT）的多项式门分解**：在 $q$ 比特寄存器（$Q = 2^q$）上，将正指数单位化 QFT 展开为 [@ex-grover-four-shor-fifteen] 第二步中的二进制乘积形式后，每一层输出比特仅需 $1$ 个 Hadamard 门与至多 $q - 1$ 个受控二进相位门 $R_k = \operatorname{diag}(1, e^{2\pi i / 2^k})$，加上末端 $\lfloor q/2\rfloor$ 个 SWAP 门，按这些理想门计数，总门数为 $\frac{q(q+1)}{2} + \lfloor\frac{q}{2}\rfloor = O(q^2) = O((\log Q)^2)$。这里的输入是已制备的量子态，输出的傅里叶系数仍编码在量子振幅中；任意输入数据的装载、全部系数的经典读出，以及将理想相位门综合到有限离散门集的成本，都不包含在这一门数中。
+2. **同一 QFT 电路的理想原生门数**：[@thm-qft-native-event-count] 给出 $q$ 个 Hadamard、$q(q-1)/2$ 个受控相位和 $\lfloor q/2\rfloor$ 个 SWAP，合计 $\frac{q(q+1)}2+\lfloor q/2\rfloor$ 次理想原生门出现。由此作通常的渐近计数，得到 $O(q^2)=O((\log Q)^2)$（$Q=2^q$）；电路对已制备复向量的精确正指数作用由 [@thm-qft-circuit-action] 给出。任意输入数据的装载、全部傅里叶系数的经典读出、理想相位门到有限离散门集的综合及硬件性能，都不包含在这个计数中。
 3. **Shor 大数分解与阶寻找的完整正确性条件**（P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172）：对于一般合数 $N$（非偶、非素数幂）与随机互素底数 $a$，乘法阶 $r$ 通常不整除 $Q = 2^q$。Shor 算法选取 $N^2 \le Q < 2N^2$，通过可逆模幂电路在 $O((\log N)^3)$ 基本门内制备周期叠加态，再经 QFT 采样频点 $k$。利用有限几何级数（Dirichlet 核）下界，落入满足 $\bigl|\frac{k}{Q} - \frac{s}{r}\bigr| \le \frac{1}{2Q} < \frac{1}{2r^2}$ 的最近整数频点 $k$ 的总概率满足常数下界，其中，在实际参数与最近条件下，既约相位属于有限候选的部分现已由 [@thm-shor-nearest-candidate] 覆盖；从候选认证精确选择仍是额外任务。当 $\gcd(s, r) = 1$（其概率由欧拉函数下界 $\varphi(r)/r = \Omega(1/\log\log r)$ 保证）时即可获得真阶 $r$，结合经典数论引理（奇素因子幂相异时 $\Pr[r \text{ 为偶且 } a^{r/2} \not\equiv -1 \pmod N] \ge 1 - 2^{-(k-1)} \ge 1/2$）完成多项式时间随机化分解。（注：将周期提取比作“把无穷周期因式约分到 $1$”属于启发式几何直觉，绝非已形式化的数学结论。）
 :::
 

@@ -3,7 +3,7 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 207,
+    "theorem": 211,
     "lemma": 34,
     "proposition": 45,
     "corollary": 31,
@@ -12,16 +12,16 @@
     "problem": 3,
     "example": 124,
     "remark": 204,
-    "proof": 312,
-    "lean_verified": 314,
+    "proof": 316,
+    "lean_verified": 318,
     "written_proof": 3,
-    "literature": 197
+    "literature": 196
   },
-  "total": 681,
+  "total": 686,
   "kinds": {
     "def": 204,
     "inductive": 11,
-    "theorem": 466
+    "theorem": 471
   },
   "groups": {
     "theorems": [
@@ -41,6 +41,7 @@
       "D5/S0/Diagonal/SelfApplicationFates.self_application_four_fates",
       "D5/S0/Tower/DBonacci/Irreducibility.dbonacci_complex_root_location",
       "D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project",
+      "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log",
       "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound",
       "D5/S1/Digit/ZeckendorfAvoidanceCount.uniform_avoidance_count",
       "D5/S1/Digit/ZeckendorfCarryBarrier.lower_support_carry_barrier",
@@ -257,6 +258,8 @@
       "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_triangle",
       "D5/S3/Quantum/Foundation/LeastConfirmationGeneration.positive_dual_generation",
       "D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests",
+      "D5/S3/Quantum/FourierCircuit/Correctness.circuit_action",
+      "D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources.qftSource_circuit_event_count",
       "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation",
       "D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace",
       "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_blochMatrix",
@@ -279,6 +282,7 @@
       "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion",
       "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity",
       "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization",
+      "D5/S3/Quantum/QPECircularTail.qpe_circular_tail_le",
       "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine",
       "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction",
       "D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector",
@@ -687,6 +691,7 @@
       "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B",
       "D5/S3/Quantum/Measurement/Bloch/QubitBloch.scalarB",
       "D5/S3/Quantum/Recovery/KrausLeftInverseNecessity.left_inverse_error_products",
+      "D5/S3/Quantum/ShorCountingMarginal.qpe_probability_normalized",
       "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.residualMass",
       "D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle",
       "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound",
@@ -2669,7 +2674,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 484,
+          "line": 567,
           "id": "def-shor-observable-candidates",
           "via": "environment"
         }
@@ -2681,7 +2686,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 495,
+          "line": 578,
           "id": "",
           "via": "inline"
         }
@@ -2693,7 +2698,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 497,
+          "line": 580,
           "id": "",
           "via": "inline"
         }
@@ -2705,7 +2710,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 497,
+          "line": 580,
           "id": "",
           "via": "inline"
         }
@@ -2717,9 +2722,21 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 497,
+          "line": 580,
           "id": "",
           "via": "inline"
+        }
+      ]
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log": {
+      "kind": "theorem",
+      "name": "QuantumShorContinuedFractions.convergents_length_log",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 584,
+          "id": "thm-rational-convergents-log-length",
+          "via": "environment"
         }
       ]
     },
@@ -8663,7 +8680,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 223,
+          "line": 268,
           "id": "cor-finite-poisson-period",
           "via": "environment"
         },
@@ -8855,7 +8872,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 181,
+          "line": 226,
           "id": "prop-finite-character-cancellation",
           "via": "environment"
         },
@@ -16277,6 +16294,30 @@
         }
       ]
     },
+    "D5/S3/Quantum/FourierCircuit/Correctness.circuit_action": {
+      "kind": "theorem",
+      "name": "QuantumAlg.QuantumFourierTransform.Source.circuit_action",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 165,
+          "id": "thm-qft-circuit-action",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources.qftSource_circuit_event_count": {
+      "kind": "theorem",
+      "name": "QuantumAlg.QuantumFourierTransform.Source.qftSource_circuit_event_count",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 186,
+          "id": "thm-qft-native-event-count",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation": {
       "kind": "theorem",
       "name": "Gleason.ProjectionPackage.gleason_representation",
@@ -17543,6 +17584,18 @@
         }
       ]
     },
+    "D5/S3/Quantum/QPECircularTail.qpe_circular_tail_le": {
+      "kind": "theorem",
+      "name": "QuantumPhaseEstimationGeneral.qpe_circular_tail_le",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 404,
+          "id": "thm-qpe-circular-tail",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine": {
       "kind": "theorem",
       "name": "D5.S3.Quantum.QuantumChannels.FiniteRecordCosineObstruction.coefficient_gamma_le_cosine",
@@ -18461,7 +18514,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 536,
+          "line": 654,
           "id": "thm-shor-coprime-candidate",
           "via": "environment"
         }
@@ -18473,7 +18526,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 499,
+          "line": 617,
           "id": "thm-shor-nearest-candidate",
           "via": "environment"
         }
@@ -18485,9 +18538,21 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 321,
+          "line": 366,
           "id": "thm-qpe-arbitrary-phase-lower-bound",
           "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.qpe_probability_normalized": {
+      "kind": "theorem",
+      "name": "QuantumPhaseEstimationGeneral.qpe_probability_normalized",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 419,
+          "id": "",
+          "via": "inline"
         }
       ]
     },
@@ -18497,7 +18562,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 278,
+          "line": 323,
           "id": "thm-shor-distribution-normalized",
           "via": "environment"
         }
@@ -18509,7 +18574,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 293,
+          "line": 338,
           "id": "thm-shor-mixture-peak-lower-bound",
           "via": "environment"
         }
@@ -18521,7 +18586,7 @@
       "citations": [
         {
           "file": "ch15-grover-qft-and-period-finding.md",
-          "line": 262,
+          "line": 307,
           "id": "thm-shor-qpe-probability-mixture",
           "via": "environment"
         }
@@ -22850,9 +22915,13 @@
       "depth": 0,
       "environment": [
         "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.candidates",
+        "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log",
         "D5/S3/Fourier/FinitePoisson.finite_poisson_summation",
         "D5/S3/Fourier/FinitePoisson.sum_annihilator_character",
         "D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation",
+        "D5/S3/Quantum/FourierCircuit/Correctness.circuit_action",
+        "D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources.qftSource_circuit_event_count",
+        "D5/S3/Quantum/QPECircularTail.qpe_circular_tail_le",
         "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation",
         "D5/S3/Quantum/ShorContinuedFractions.shor_coprime_candidate",
         "D5/S3/Quantum/ShorContinuedFractions.shor_nearest_candidate",
@@ -22865,7 +22934,8 @@
         "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents",
         "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff",
         "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced",
-        "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den"
+        "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den",
+        "D5/S3/Quantum/ShorCountingMarginal.qpe_probability_normalized"
       ]
     },
     {
