@@ -3,19 +3,19 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 212,
+    "theorem": 215,
     "lemma": 34,
     "proposition": 45,
     "corollary": 31,
     "definition": 49,
     "conjecture": 6,
     "problem": 3,
-    "example": 124,
-    "remark": 205,
-    "proof": 317,
-    "lean_verified": 319,
+    "example": 127,
+    "remark": 208,
+    "proof": 320,
+    "lean_verified": 322,
     "written_proof": 3,
-    "literature": 196
+    "literature": 199
   },
   "total": 687,
   "kinds": {
@@ -267,8 +267,10 @@
       "D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef",
       "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot",
       "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product",
+      "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference",
       "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.explicit_qubit_orientation",
       "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch",
+      "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState",
       "D5/S3/Quantum/Magic/ReflectionDiagonalCNOTLowerBound.result",
       "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.central_spectral_gap",
       "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.recurrence_endpoint_observability",
@@ -679,10 +681,8 @@
       "D5/S3/Quantum/FiniteDimensional.QubitMatrix",
       "D5/S3/Quantum/Foundation/LeastConfirmationGeneration.zeroSpan",
       "D5/S3/Quantum/Foundation/RayPhaseRigidity.RaySupportConnected",
-      "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference",
       "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change",
       "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState",
-      "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState",
       "D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState",
       "D5/S3/Quantum/Information/QubitEntropyContraction.qubit_holevo_contraction",
       "D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy",
@@ -821,7 +821,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -1151,7 +1151,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -1403,7 +1403,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -3700,6 +3700,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 193,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch39-s05-s06-self-reference-scales.md",
           "line": 6,
           "id": "",
@@ -3732,6 +3744,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 1048,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
           "id": "",
           "via": "inline"
         },
@@ -3773,6 +3791,12 @@
         },
         {
           "file": "viz/comparison-oisc-engine/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -5183,7 +5207,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -5398,6 +5422,18 @@
       "name": "D5.S3.ConceptDynamics.Information.RefinementImpurityMonotonicity.refinement_impurity_monotone",
       "citations": [
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 112,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 284,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch38-s05-escape-ledger-and-entropy.md",
           "line": 106,
           "id": "thm-ch38-refinement-impurity-monotonicity",
@@ -5406,6 +5442,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 768,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
           "id": "",
           "via": "inline"
         },
@@ -5440,6 +5482,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 89,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch38-s05-escape-ledger-and-entropy.md",
           "line": 35,
           "id": "thm-ch38-escape-pairs-and-structural-novelty",
@@ -5464,6 +5518,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -5477,6 +5537,12 @@
         },
         {
           "file": "viz/comparison-oisc-engine/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -6004,6 +6070,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 162,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch39-s04-orthogonal-self-folding.md",
           "line": 24,
           "id": "prop-ch39-orthogonal-folding-and-objective-common-factor",
@@ -6046,6 +6124,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-d.md",
           "line": 37,
           "id": "",
@@ -6071,6 +6155,12 @@
         },
         {
           "file": "viz/coset-breaking-conservation-tower-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -6376,6 +6466,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 79,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 265,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch38-s07-blindspot-and-relativization.md",
           "line": 100,
           "id": "prop-ch38-cayley-stereographic-and-blindspot-suspension",
@@ -6419,7 +6521,13 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1090,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -6473,6 +6581,12 @@
         },
         {
           "file": "viz/stereographic-relativization-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/roundtrip-born-imaginary-blindspot-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -6892,6 +7006,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 79,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 265,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch39-s03-spinors-and-spacetime.md",
           "line": 72,
           "id": "thm-ch39-double-cover-no-section-and-720-lift",
@@ -6936,6 +7062,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 1034,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -7498,6 +7630,30 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 169,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 124,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 284,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch38-s04-lookup-degradation.md",
           "line": 106,
           "id": "",
@@ -7516,6 +7672,18 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -7523,6 +7691,18 @@
         },
         {
           "file": "viz/pnp-lookup-degradation/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -7546,6 +7726,24 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 169,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -7553,6 +7751,12 @@
         },
         {
           "file": "viz/erasure-ledger/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -7576,6 +7780,24 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 169,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 316,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -7583,6 +7805,12 @@
         },
         {
           "file": "viz/erasure-ledger/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -8633,7 +8861,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -8825,7 +9053,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -9635,7 +9863,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -9977,7 +10205,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -10193,7 +10421,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -10402,6 +10630,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 44,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 614,
           "id": "",
@@ -10416,6 +10656,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 824,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -11026,6 +11272,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 44,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "coda-s05-bilingual-glossary.md",
           "line": 11,
           "id": "",
@@ -11046,6 +11304,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 824,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -11093,6 +11357,12 @@
         },
         {
           "file": "viz/comparison-oisc-engine/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/roundtrip-born-imaginary-blindspot-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -11902,6 +12172,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 112,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch35-light-pulse-and-self-referential-table.md",
           "line": 66,
           "id": "thm-ch35-null-pulse-and-record-blocking",
@@ -11932,6 +12214,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -11945,6 +12233,12 @@
         },
         {
           "file": "viz/observer-consensus-decoherence/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -12334,6 +12628,24 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 20,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 45,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 614,
           "id": "",
@@ -12354,6 +12666,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 838,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -12634,6 +12952,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 45,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch37-s05-future-selection-and-deja-vu.md",
           "line": 17,
           "id": "thm-ch37-p2g-open-escape-and-krylov",
@@ -12707,7 +13037,13 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -12794,6 +13130,12 @@
           "line": 0,
           "id": "",
           "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -12874,8 +13216,32 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 14,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 154,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 964,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
           "id": "",
           "via": "inline"
         },
@@ -12899,6 +13265,12 @@
         },
         {
           "file": "viz/trihedron-rigidity-truss-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -13120,6 +13492,42 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 39,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 100,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 11,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 64,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch37-s05-future-selection-and-deja-vu.md",
           "line": 17,
           "id": "thm-ch37-p2g-open-escape-and-krylov",
@@ -13174,6 +13582,18 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -13211,6 +13631,18 @@
         },
         {
           "file": "viz/octave-point-volume-field-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/roundtrip-born-imaginary-blindspot-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -13300,6 +13732,18 @@
           "via": "environment"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 138,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch39-s04-orthogonal-self-folding.md",
           "line": 24,
           "id": "prop-ch39-orthogonal-folding-and-objective-common-factor",
@@ -13320,6 +13764,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 782,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -13438,6 +13888,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 138,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch39-s04-orthogonal-self-folding.md",
           "line": 47,
           "id": "",
@@ -13475,7 +13937,13 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1090,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -13535,6 +14003,12 @@
         },
         {
           "file": "viz/comparison-oisc-engine/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/roundtrip-born-imaginary-blindspot-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -13853,7 +14327,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -14494,6 +14968,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 39,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch38-s01-static-qram.md",
           "line": 1133,
           "id": "thm-ch38-copied-address-dereference-and-access-defect",
@@ -14520,6 +15006,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 838,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
           "id": "",
           "via": "inline"
         },
@@ -14558,6 +15050,12 @@
           "line": 0,
           "id": "",
           "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -14584,6 +15082,24 @@
           "via": "environment"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 168,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -14591,6 +15107,12 @@
         },
         {
           "file": "viz/erasure-ledger/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -14722,8 +15244,26 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 161,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 265,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 810,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -14753,6 +15293,12 @@
         },
         {
           "file": "viz/quantum-interpretations-duel/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/roundtrip-born-imaginary-blindspot-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -14944,6 +15490,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 168,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch37-s01-known-data-decoherence.md",
           "line": 44,
           "id": "thm-ch37-known-data-pinching-and-entropy-tax",
@@ -15024,6 +15582,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -15110,6 +15674,12 @@
           "line": 0,
           "id": "",
           "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -15190,8 +15760,26 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 43,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 656,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -15418,6 +16006,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 155,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 236,
           "id": "",
@@ -15426,6 +16026,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 936,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -15443,6 +16049,12 @@
         },
         {
           "file": "viz/clifford-monad-tiling-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/roundtrip-born-imaginary-blindspot-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -15508,6 +16120,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 91,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 180,
           "id": "",
@@ -15522,6 +16146,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 1034,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
           "id": "",
           "via": "inline"
         },
@@ -15551,6 +16181,12 @@
         },
         {
           "file": "viz/quantum-gate-cosmic-tower-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -15640,6 +16276,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 32,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 572,
           "id": "",
@@ -15660,6 +16308,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 824,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
           "id": "",
           "via": "inline"
         },
@@ -15701,6 +16355,12 @@
         },
         {
           "file": "viz/coherence-handshake-causality/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -15760,6 +16420,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 45,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "coda-s05-bilingual-glossary.md",
           "line": 9,
           "id": "",
@@ -15768,6 +16440,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 12,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -15785,6 +16463,12 @@
         },
         {
           "file": "viz/lean-declaration-map/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/roundtrip-born-imaginary-blindspot-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -16001,7 +16685,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -16265,7 +16949,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -16625,7 +17309,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -16682,6 +17366,36 @@
           "line": 201,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 161,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "viz/visualizations.json",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -16694,6 +17408,36 @@
           "line": 202,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 169,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 316,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "viz/visualizations.json",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -16721,7 +17465,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -16859,7 +17603,7 @@
         },
         {
           "file": "appendix-a-s01-master-dictionary.md",
-          "line": 1062,
+          "line": 1104,
           "id": "",
           "via": "inline"
         },
@@ -16928,6 +17672,36 @@
           "line": 202,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 47,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 316,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "viz/visualizations.json",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -16940,6 +17714,36 @@
           "line": 202,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 47,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "viz/visualizations.json",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -17278,6 +18082,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 15,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch35-light-pulse-and-self-referential-table.md",
           "line": 66,
           "id": "thm-ch35-null-pulse-and-record-blocking",
@@ -17320,6 +18136,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -17327,6 +18149,12 @@
         },
         {
           "file": "viz/self-referential-table/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -17536,6 +18364,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 13,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 208,
           "id": "",
@@ -17560,6 +18400,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -17573,6 +18419,12 @@
         },
         {
           "file": "viz/octave-point-volume-field-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -19018,6 +19870,18 @@
           "via": "environment"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 96,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch38-s07-blindspot-and-relativization.md",
           "line": 100,
           "id": "prop-ch38-cayley-stereographic-and-blindspot-suspension",
@@ -19044,6 +19908,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 894,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -19079,6 +19949,12 @@
         },
         {
           "file": "viz/stereographic-relativization-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/roundtrip-born-imaginary-blindspot-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -19474,6 +20350,24 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 14,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 154,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch37-s05-future-selection-and-deja-vu.md",
           "line": 116,
           "id": "thm-ch37-p2g-gram-realizability",
@@ -19504,6 +20398,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -19529,6 +20429,12 @@
         },
         {
           "file": "viz/comparison-oisc-engine/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -19684,6 +20590,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 64,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch37-s05-future-selection-and-deja-vu.md",
           "line": 116,
           "id": "thm-ch37-p2g-gram-realizability",
@@ -19764,6 +20682,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 1048,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -19871,6 +20795,12 @@
         },
         {
           "file": "viz/coset-breaking-conservation-tower-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/roundtrip-born-imaginary-blindspot-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -20086,6 +21016,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 171,
+          "id": "thm-ch34-roundtrip-born-and-imaginary-blindspot",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+          "line": 97,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 614,
           "id": "",
@@ -20100,6 +21042,12 @@
         {
           "file": "appendix-a-s01-master-dictionary.md",
           "line": 978,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1090,
           "id": "",
           "via": "inline"
         },
@@ -20147,6 +21095,12 @@
         },
         {
           "file": "viz/quantum-arc-macro-integral-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/roundtrip-born-imaginary-blindspot-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -20644,6 +21598,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 207,
+          "id": "thm-ch34-bounded-horizon-entanglement-thermodynamics",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+          "line": 90,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch36-s01-light-and-memory.md",
           "line": 38,
           "id": "thm-ch36-pinching-skeleton-and-discarded-coherence",
@@ -20680,6 +21646,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1062,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -20699,6 +21671,12 @@
         },
         {
           "file": "viz/observer-consensus-decoherence/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/bounded-horizon-thermodynamics-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -21094,6 +22072,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 65,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch37-s02-dream-quantum-erasure.md",
           "line": 7,
           "id": "ex-ch37-gram-constraint-release",
@@ -21118,6 +22108,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -21131,6 +22127,12 @@
         },
         {
           "file": "viz/octave-point-volume-field-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -21238,6 +22240,24 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 65,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 90,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch37-s02-dream-quantum-erasure.md",
           "line": 7,
           "id": "ex-ch37-gram-constraint-release",
@@ -21286,6 +22306,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -21326,6 +22352,12 @@
           "line": 0,
           "id": "",
           "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -21358,6 +22390,18 @@
           "via": "inline"
         },
         {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 55,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "ch35-light-pulse-and-self-referential-table.md",
           "line": 44,
           "id": "ex-ch35-two-anchor-gram-corridor",
@@ -21368,6 +22412,24 @@
           "line": 45,
           "id": "",
           "via": "inline"
+        },
+        {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "viz/visualizations.json",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
         }
       ]
     },
@@ -21384,6 +22446,18 @@
         {
           "file": "ch34-s09-reversal-and-concept-cascade.md",
           "line": 16,
+          "id": "",
+          "via": "inline"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 175,
+          "id": "thm-ch34-gram-window-schur-and-consensus",
+          "via": "environment"
+        },
+        {
+          "file": "ch34-s18-gram-window-and-consensus.md",
+          "line": 55,
           "id": "",
           "via": "inline"
         },
@@ -21406,6 +22480,12 @@
           "via": "inline"
         },
         {
+          "file": "appendix-a-s01-master-dictionary.md",
+          "line": 1076,
+          "id": "",
+          "via": "inline"
+        },
+        {
           "file": "viz/visualizations.json",
           "line": 0,
           "id": "",
@@ -21413,6 +22493,12 @@
         },
         {
           "file": "viz/reversal-diagonal-cascade-sandbox/index.html",
+          "line": 0,
+          "id": "",
+          "via": "media"
+        },
+        {
+          "file": "viz/gram-window-consensus-sandbox/index.html",
           "line": 0,
           "id": "",
           "via": "media"
@@ -24696,6 +25782,119 @@
       ]
     },
     {
+      "file": "ch34-s17-entanglement-horizon-and-thermodynamics.md",
+      "top": 34,
+      "part": "第九部 互照·万物观察者、自指扩表与超越轮回",
+      "number": "34.17",
+      "depth": 1,
+      "environment": [
+        "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint",
+        "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union",
+        "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance",
+        "D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances",
+        "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect",
+        "D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi",
+        "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity",
+        "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal",
+        "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot",
+        "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference",
+        "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState",
+        "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+      ],
+      "inline": [
+        "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint",
+        "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union",
+        "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance",
+        "D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances",
+        "D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff",
+        "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect",
+        "D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi",
+        "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity",
+        "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal",
+        "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot",
+        "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference",
+        "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change",
+        "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState",
+        "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState",
+        "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+      ]
+    },
+    {
+      "file": "ch34-s18-gram-window-and-consensus.md",
+      "top": 34,
+      "part": "第九部 互照·万物观察者、自指扩表与超越轮回",
+      "number": "34.18",
+      "depth": 1,
+      "environment": [
+        "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor",
+        "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal",
+        "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape",
+        "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq",
+        "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities",
+        "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity",
+        "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization",
+        "D5/S3/QuantumBounds/GramRealizability.gram_realizability",
+        "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula",
+        "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff",
+        "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula",
+        "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff"
+      ],
+      "inline": [
+        "D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity.refinement_impurity_monotone",
+        "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor",
+        "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance",
+        "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal",
+        "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape",
+        "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq",
+        "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities",
+        "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity",
+        "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization",
+        "D5/S3/QuantumBounds/GramRealizability.gram_realizability",
+        "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula",
+        "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff",
+        "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula",
+        "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff"
+      ]
+    },
+    {
+      "file": "ch34-s19-roundtrip-projection-and-imaginary-blindspot.md",
+      "top": 34,
+      "part": "第九部 互照·万物观察者、自指扩表与超越轮回",
+      "number": "34.19",
+      "depth": 1,
+      "environment": [
+        "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction",
+        "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight",
+        "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem",
+        "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities",
+        "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square",
+        "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary",
+        "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity",
+        "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow",
+        "D5/S3/Quantum/FiniteDimensional.born_probability_skeleton",
+        "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase",
+        "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+        "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger"
+      ],
+      "inline": [
+        "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel",
+        "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift",
+        "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction",
+        "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight",
+        "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem",
+        "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities",
+        "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square",
+        "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary",
+        "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary",
+        "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity",
+        "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow",
+        "D5/S3/Quantum/FiniteDimensional.born_probability_skeleton",
+        "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase",
+        "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+        "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger"
+      ]
+    },
+    {
       "file": "ch35-light-pulse-and-self-referential-table.md",
       "top": 35,
       "part": "第九部 互照·万物观察者、自指扩表与超越轮回",
@@ -25609,6 +26808,8 @@
         "D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate",
         "D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate",
         "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance",
+        "D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances",
+        "D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff",
         "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula",
         "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure",
         "D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path",
@@ -25667,6 +26868,7 @@
         "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior",
         "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect",
         "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect",
+        "D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi",
         "D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group",
         "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary",
         "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity",
@@ -25685,8 +26887,12 @@
         "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian",
         "D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef",
         "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product",
+        "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference",
+        "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change",
         "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.explicit_qubit_orientation",
         "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch",
+        "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState",
+        "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState",
         "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core",
         "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity",
         "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion",
@@ -25710,6 +26916,7 @@
         "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law",
         "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula",
         "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff",
+        "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula",
         "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff",
         "D5/S3/QuantumStates/PhaseLockedOverlap.phase_locked_overlap_is_rotated_real",
         "D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound",
