@@ -2,47 +2,47 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "69e83cd5ef7ca988a6b80d8422d91b48bf58619aaa5fe8f4a96a10b17b4c9928"
     },
     "fig-gate-commutator-trihedron.zh.jpg": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "acec7a97a1393cb5ce279bb524504eb510e48818078895c4198cfffad39372c9"
     },
     "fig-entangling-segre-escape.zh.jpg": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "38f317dbe4052b24971fa7d41636101a36c73e51bb56bffcb528a10346a67b26"
     },
     "fig-octave-1331-grammar.zh.jpg": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "c16512dae3f7ebe679fcffcf315593fd0a2e751bdc23951286aede7f9c9bb2a1"
     },
     "fig-six-tier-cosmic-tower.zh.jpg": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "c778c49c59b73c1b564caabd842389b92f7ec7dee34805dc0fcd02aa0dc9c835"
     },
     "fig-mobius-ouroboros-closure.zh.jpg": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "e67a6d5ddfd45cc9dc1f7d36e22ee98b7a7f8d33086be4e3c565c34b4cbeb4bb"
     },
     "fig-gate-commutator-trihedron.en.jpg": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "580740911d9f1d87368771a235c6f2afd26224eb43b28abf38f1b88ca3214539"
     },
     "fig-entangling-segre-escape.en.jpg": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "55fdf872f181ee48c7654828aa852f22d9b32689050b53ed40362f74d60e2268"
     },
     "fig-octave-1331-grammar.en.jpg": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "4cabfd2ded102ef7f9466d0b166ccc7c73419a974fc6632bc5932287f5139c38"
     },
     "fig-six-tier-cosmic-tower.en.jpg": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "18effef0a377d86c8a2265d3a128200961a9d885cf29025207109212b0a68224"
     },
     "fig-mobius-ouroboros-closure.en.jpg": {
-      "input": "9b189715fb25b8221b75c03b17e7eaaab18ae0ea971a29a381f63b9727ae902f",
+      "input": "25615fe2c24b002056fec4c4801df3a662095a9e65d236bb0bb8afbf7a107d99",
       "output": "e8e42f9fbc81d726eb0560acd04d8266f35fca1c965e9498f421aa40bdd71794"
     }
   }

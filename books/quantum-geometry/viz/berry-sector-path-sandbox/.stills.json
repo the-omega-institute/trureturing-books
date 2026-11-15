@@ -2,47 +2,47 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "8c60c9f5aba2ba0fd318f56ecbcb96f9584628a9db47924a8d781f0718751a80"
     },
     "fig-sector-volume.zh.jpg": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "fa89004d9b870e2aba381bf2ba4350851dd566f2c662f8e8f0df4e9a5890c908"
     },
     "fig-hopf-fiber-lift.zh.jpg": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "bbde4bdcbf01607c0e0a282a3e88cf399f5d2991092fe8cce0c0a38a6cfed170"
     },
     "fig-stokes-wilson-duality.zh.jpg": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "4a19ca1277134ac9814aa5c78ede694d82aac9f5051ffe48f03207182e5ca3dd"
     },
     "fig-pancharatnam-fan.zh.jpg": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "2db93f641bada3c6cf4c57e3180ee3d0e3f75b3f5486797876b5113e4e361c7a"
     },
     "fig-feynman-stationary.zh.jpg": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "7dc47dd949daadf0068b535f230af5870f36441464b5e91de41caa3c671aa8c3"
     },
     "fig-sector-volume.en.jpg": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "74f0265349a69d71ad212b059476b1d97e5b361d01f1dac9b871a471622e667a"
     },
     "fig-hopf-fiber-lift.en.jpg": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "6587377709a79ac4b8fb07437ac3d93783b242833cbbff1221e74349f0a1e868"
     },
     "fig-stokes-wilson-duality.en.jpg": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "a03553c5f2d8fa71a04c1e7be0c1ac8982081a346a6a5256508bc3776f2cdf30"
     },
     "fig-pancharatnam-fan.en.jpg": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "670339133fdf9342e319f367d9a2fb660e322f45376d0febde1c28384f46a9c8"
     },
     "fig-feynman-stationary.en.jpg": {
-      "input": "f6c472c40cf67585f61618e23b98ef9741852c831a0547a57640f417a6b49c94",
+      "input": "b61990b11b82477f549d3e700ba11bb4a06fff0d5100bef048d073e3fe94fde3",
       "output": "ea26a3423990bc721c8ca0f99b9cb7b4ceb5ff8cb44472a64954405ed786c22d"
     }
   }

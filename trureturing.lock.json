@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "ccaf12043b8eaa43581decc99f584528f3564871",
-  "pinned_at": "2026-11-15T01:02:13Z",
+  "pinned_at": "2026-11-15T01:51:14Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4332,6 +4332,38 @@
       "statement_id": "sha256:07ebdbb032c2a26a85df415803daff40fa76a8bbf442745abc31db865e604f59",
       "line": 208,
       "signature": "theorem correctness : (∀ (n : ℕ) (a i : Address n) (e : Bool), leaf n (route n a (clean n e)) i = if i = a then e else false) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (w : Wires n) (r : G), query n D (a, w, r) = (a, w, r + readAmount n D (route n a w))) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (r : G), query n D (a, clean n true, r) = (a, clean n true, r + D a)) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] [Fintype G] [DecidableEq G] (D : Address n → G), (queryMatrix n D)ᴴ * queryMatrix n D = 1 ∧ queryMatrix n D * (queryMatrix"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumPhaseEstimationGeneral.qpe_arbitrary_phase_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 144,
+      "signature": "theorem qpe_arbitrary_phase_lower_bound (N : ℕ) (hN : 0 < N) (θ : ℝ) (b : Fin N) (hnear : Nearest N θ b) : 4 / Real.pi ^ 2 ≤ probability N θ b"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_distribution_normalized",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 685,
+      "signature": "theorem shor_distribution_normalized (n : ℕ) : (∑ y : Fin (2 ^ n), normSquared (runQPE c.modularOperator n c.input y)) = 1"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_mixture_peak_lower_bound": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_mixture_peak_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 692,
+      "signature": "theorem shor_mixture_peak_lower_bound (n : ℕ) (s : Fin c.period) (b : Fin (2 ^ n)) (hb : Nearest (2 ^ n) (s.val / c.period) b) : (c.period : ℝ)⁻¹ * (4 / Real.pi ^ 2) ≤ normSquared (runQPE c.modularOperator n c.input b)"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_qpe_probability_mixture": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_qpe_probability_mixture",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 671,
+      "signature": "theorem shor_qpe_probability_mixture (n : ℕ) (y : Fin (2 ^ n)) : normSquared (runQPE c.modularOperator n c.input y) = (c.period : ℝ)⁻¹ * ∑ s : Fin c.period, probability (2 ^ n) (s.val / c.period) y"
     },
     "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR": {
       "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",
