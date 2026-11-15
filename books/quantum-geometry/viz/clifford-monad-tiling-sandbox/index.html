@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="MONAD//TILING · Minimal Clifford monad and multi-cell cancellation">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MONAD//TILING · 极小圆弧体四位一体与多胞抵消分化</title>
+<meta name="description" content="单位球面上的极小圆弧体 ΔT_ε：A = (1, 0, 0)、B = (cos ε, sin ε, 0)、C = (cos ε, 0, sin ε)。一个单元同时是标量相融 cos ε（Λ⁰）、一步与梯度 sin ε（Λ¹）、球面帽 Ω = 2 arctan(tan²(ε/2))（Λ²）与扇形体积 Ω/3（Λ³）。铺成 N = k² 个球面小三角形或 3 × 3 × 3 个体胞，内部的有向边与面两两反向抵消，只剩外沿、节点、脊线、外表面与体积，按 N 的 0、1/3、2/3、1 次幂分开。The minimal arc cell ΔT_ε on the unit sphere: A = (1, 0, 0), B = (cos ε, sin ε, 0), C = (cos ε, 0, sin ε). One cell is at once the scalar compatibility cos ε (Λ⁰), the step and gradient sin ε (Λ¹), the spherical cap Ω = 2 arctan(tan²(ε/2)) (Λ²) and the sector volume Ω/3 (Λ³). Tiled into N = k² small spherical triangles or 3 × 3 × 3 solid cells, interior directed edges and faces cancel in opposite pairs; only the rim, the node, the spine, the outer surface and the volume remain, separated by the powers 0, 1/3, 2/3 and 1 of N.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="clifford-monad-tiling-sandbox">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="MONAD//TILING">MONAD<b>//</b>TILING</h1>
+      <div class="tagline">
+        <span class="zh">极小圆弧体 · <em>一个单元里，标量、一步、面积与体积是同一件东西；铺成 N 个单元，内部两两抵消，剩下的点、线、面、体按 N 的不同次幂分开</em></span>
+        <span class="en">The minimal arc cell · <em>in one cell the scalar, the step, the area and the volume are one thing; tile N cells and the inside cancels in pairs, leaving a point, a line, a surface and a volume that grow as different powers of N</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="pillN">N <strong>1</strong></span>
+      <span class="pill" id="pillEps">ε <strong>60°</strong></span>
+      <div class="langs" role="group" aria-label="语言" data-aria-en="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="monad-four-in-one" aria-pressed="false"><span class="code">MONAD</span><span class="cn zh">一个单元，四个阶合在一起</span><span class="cn en">One cell, four grades in one</span></button>
+        <button class="preset" data-preset="gradient-path-phase-lock" aria-pressed="false"><span class="code">PHASE-LOCK</span><span class="cn zh">推一下 B：梯度、弧长与相位一起动</span><span class="cn en">Push B: gradient, arc and phase move together</span></button>
+        <button class="preset" data-preset="hodge-stokes-duality" aria-pressed="false"><span class="code">HODGE-STOKES</span><span class="cn zh">边界环流等于曲面通量，法向垂直于两边</span><span class="cn en">Rim circulation equals surface flux; the normal is square to both legs</span></button>
+        <button class="preset" data-preset="multicell-boundary-cancellation" aria-pressed="false"><span class="code">CANCEL</span><span class="cn zh">十六个小单元：内部箭头成对抵消</span><span class="cn en">Sixteen small cells: inner arrows cancel in pairs</span></button>
+        <button class="preset" data-preset="macroscopic-grade-sieve" aria-pressed="false"><span class="code">SIEVE</span><span class="cn zh">二十七个体胞：点、线、面、体分开长</span><span class="cn en">Twenty-seven solid cells: point, line, surface, volume part ways</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">单元数与步长</span><span class="en">Cells and step</span><span class="aside"><span class="zh">也可拖动琥珀色的 B</span><span class="en">or drag the amber B</span></span></h2>
+      <div class="field">
+        <label><span class="zh">单元数 N</span><span class="en">Cells N</span><small class="zh">k² 个球面小三角形；27 = 3 × 3 × 3 体胞</small><small class="en">k² spherical triangles; 27 = 3 × 3 × 3 solid cells</small></label>
+        <div class="chips" id="cellCount" role="group" aria-label="单元数 N" data-aria-en="Cell count N">
+          <button class="chip" data-n="1" aria-pressed="true">1</button><button class="chip" data-n="4" aria-pressed="false">4</button><button class="chip" data-n="9" aria-pressed="false">9</button><button class="chip" data-n="16" aria-pressed="false">16</button><button class="chip" data-n="27" aria-pressed="false">27</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="epsilon"><span class="zh">比较步长 ε</span><span class="en">Comparison step ε</span><small class="zh">A 到 B、A 到 C 的弧</small><small class="en">the arc from A to B and from A to C</small></label><output id="oEps" for="epsilon">60°</output>
+        <input type="range" id="epsilon" min="15" max="90" step="1" value="60">
+      </div>
+      <div class="field">
+        <label for="cancel"><span class="zh">抵消混合 λ</span><span class="en">Cancellation blend λ</span><small class="zh">0：全部内部边与墙；1：只剩边界</small><small class="en">0: every inner edge and wall; 1: the boundary only</small></label><output id="oCancel" for="cancel">0.00</output>
+        <input type="range" id="cancel" min="0" max="1" step="0.01" value="0">
+      </div>
+      <p class="note"><span class="zh">时间轴就是 λ：播放时内部箭头一遍遍汇拢、抵消。右上角的透镜切换四个阶的看法；空白处拖动转动视角。</span><span class="en">The rail is λ: playing lets the inner arrows gather and cancel again and again. The lens at the top right switches how the four grades are shown; drag empty space to turn the view.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：单位球面上的极小圆弧体，从原点 O 出发的扇形体积、品红的球面帽、琥珀色的边界与青色的相融，以及铺开的小单元和成对抵消的内部箭头" data-aria-en="Stage: the minimal arc cell on the unit sphere, its sector volume from the origin O, the magenta cap, the amber boundary and the cyan compatibility, with the tiled small cells and their inner arrows cancelling in pairs">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="lens" role="group" aria-label="克利福德与霍奇透镜" data-aria-en="Clifford and Hodge lens">
+        <button class="chip" data-lens="all" aria-pressed="true"><span class="m">Cl₃ All</span></button>
+        <button class="chip" data-lens="hodge03" aria-pressed="false"><span class="m"><span class="hs">⋆</span>(Λ⁰⇄Λ³)</span></button>
+        <button class="chip" data-lens="hodge12" aria-pressed="false"><span class="m"><span class="hs">⋆</span>(Λ¹⇄Λ²)</span></button>
+      </div>
+      <button class="eps-handle" id="epsHandle" type="button" aria-label="拖动 B 改变步长 ε（← → 逐度）" data-aria-en="Drag B to change the step ε (← → by one degree)"><span class="m">B</span></button>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="条带小图" data-aria-en="Strip plot"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="dtKey"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="dt1"></dt><dd id="ro1">—</dd></div>
+        <div class="a"><dt id="dt2"></dt><dd id="ro2">—</dd></div>
+        <div class="m"><dt id="dt3"></dt><dd id="ro3">—</dd></div>
+        <div class="v"><dt id="dt4"></dt><dd id="ro4">—</dd></div>
+        <div><dt id="dt5"></dt><dd id="ro5">—</dd></div>
+        <div><dt id="dt6"></dt><dd id="ro6">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">拉格朗日—格拉姆恒等式：(Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ ΣᵢΣⱼ (uᵢvⱼ − uⱼvᵢ)²。页面取 u = A、v = B：标量部分 (A·B)² = cos²ε 与楔积 A∧B 的平方和 sin²ε 分别算出，两者相加为 1。已冻结：</span><span class="en">The Lagrange–Gram identity: (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ ΣᵢΣⱼ (uᵢvⱼ − uⱼvᵢ)². The page takes u = A and v = B: the scalar part (A·B)² = cos²ε and the sum of squares sin²ε of the wedge A∧B are computed separately and add up to 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">公共单位法线：ℝ³ 里任意两根向量 a、b 都有一根单位向量 n 与两者都正交。页面取 a = A、b = B，n = (A × B)/|A × B|，即 <span class="hs">⋆</span>(A∧B) 的方向，并核对 max(|n·A|, |n·B|) &lt; 10⁻¹²。已冻结：</span><span class="en">A common unit normal: any two vectors a, b of ℝ³ have a unit vector n orthogonal to both. The page takes a = A, b = B and n = (A × B)/|A × B|, the direction of <span class="hs">⋆</span>(A∧B), and checks max(|n·A|, |n·B|) &lt; 10⁻¹². Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair" href="#" target="_blank" rel="noopener"><code>unit_perpendicular_pair</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">单比特三点巴格曼迹：Tr(P(r₁)P(r₂)P(r₃)) = (1 + r₁·r₂ + r₂·r₃ + r₃·r₁)/4 + i r₁·(r₂ × r₃)/4，P(r) = ½(I + r·σ)。页面取 (r₁, r₂, r₃) = (A, C, B)，即贝里相位的次序：Im Δ₃ = A·(C × B)/4 = −¼ sin²ε，等于四面体 OABC 体积 sin²ε/6 的 −3/2 倍；每个小单元的角超也由它自己的巴格曼乘积的辐角乘 2 得到。已冻结：</span><span class="en">The single-qubit three-point Bargmann trace: Tr(P(r₁)P(r₂)P(r₃)) = (1 + r₁·r₂ + r₂·r₃ + r₃·r₁)/4 + i r₁·(r₂ × r₃)/4, with P(r) = ½(I + r·σ). The page takes (r₁, r₂, r₃) = (A, C, B), the order of the Berry phase: Im Δ₃ = A·(C × B)/4 = −¼ sin²ε, which is −3/2 times the volume sin²ε/6 of the tetrahedron OABC; the excess of each small cell is likewise twice the argument of its own Bargmann product. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch" href="#" target="_blank" rel="noopener"><code>triple_bargmann_bloch</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">投影概率流：H 厄米、P 是星投影、ρ 是密度态时，p(t) = Tr(ρ_t P) 是实数，导数 p′(t) = Re(i Tr(ρ_t (HP − PH)))；H 与 P 对易时 p 不变。页面取 ρ = P(B)、P = P(A)、H = ½ n·σ（n 同上）：对易子公式给出 p′(0) = −½ sin ε，A 的玻恩权重 cos²(ε/2) 以梯度 sin ε 的一半流走。已冻结：</span><span class="en">Projection probability flow: for a Hermitian H, a star projection P and a density state ρ, p(t) = Tr(ρ_t P) is real with derivative p′(t) = Re(i Tr(ρ_t (HP − PH))); when H commutes with P, p stays constant. The page takes ρ = P(B), P = P(A) and H = ½ n·σ (n as above): the commutator formula gives p′(0) = −½ sin ε, so the Born weight cos²(ε/2) of A drains at half the gradient sin ε. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow" href="#" target="_blank" rel="noopener"><code>projection_probability_flow</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">面边界恰为圈空间：连通图带顶点旋转、满足 V − E + F = 2 时，𝔽₂ 上的面边界映射给每条边的值是它两侧两个面的值之和，核恰为常函数，像恰为圈空间。页面的剖分满足 V − E + F = 2（页面算出）；把 k² 个小面记 1、外面记 0，内部边得 1 + 1 = 0，只有 3k 条外沿边得 1。带方向的 ±δΓ 在实数上的抵消是页面自己的计算（NUM）。已冻结：</span><span class="en">Face boundaries are exactly the cycle space: for a connected graph with a vertex rotation and V − E + F = 2, the 𝔽₂ face-boundary map gives each edge the sum of the two faces on its sides; its kernel is exactly the constant functions and its image exactly the cycle space. The subdivision on the page has V − E + F = 2 (computed by the page); marking the k² small faces 1 and the outer face 0, every inner edge gets 1 + 1 = 0 and only the 3k rim edges get 1. The oriented ±δΓ cancellation over the reals is computed by the page itself (NUM). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact" href="#" target="_blank" rel="noopener"><code>face_cycle_exact</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">单纯二上链精确修补：有限非空顶点集 V 上的二上链 F 满足 Σ_r faceErrors(F, r) = tetraDefects(F)，某锚点 r 有 |V|·faceErrors(F, r) ≤ tetraDefects(F)，对任意边赋值有 tetraDefects(F) ≤ 4|V|·edgeErrors；并且四面体上边缘 F(i, j, k) − F(r, j, k) + F(r, i, k) − F(r, i, j) 处处为零，当且仅当 F(i, j, k) = edge(j, k) − edge(i, k) + edge(i, j)。页面在当前曲面的顶点上取 edge(i, j) = arg⟨ψᵢ|ψⱼ⟩，F 是它的上边缘（每个小三角形上等于其巴格曼相位），数出上边缘非零的四元组：0。已冻结：</span><span class="en">Exact repair of simplicial 2-cochains: a 2-cochain F on a finite nonempty vertex set V has Σ_r faceErrors(F, r) = tetraDefects(F), some anchor r with |V|·faceErrors(F, r) ≤ tetraDefects(F), and tetraDefects(F) ≤ 4|V|·edgeErrors for every edge assignment; and the tetrahedral coboundary F(i, j, k) − F(r, j, k) + F(r, i, k) − F(r, i, j) vanishes everywhere exactly when F(i, j, k) = edge(j, k) − edge(i, k) + edge(i, j). On the vertices of the current surface the page takes edge(i, j) = arg⟨ψᵢ|ψⱼ⟩ and F its coboundary (on each small triangle, its Bargmann phase), and counts the quadruples with a nonzero coboundary: 0. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness" href="#" target="_blank" rel="noopener"><code>tetra_defects_incidence_repair_and_exactness</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：吉拉尔角超 Ω = α + β + γ − π；三角形立体角 tan(Ω/2) = |a·(b × c)| / (1 + a·b + b·c + c·a)（Van Oosterom–Strackee）；高斯—博内（沿测地三角形平行移动一圈转过 Ω）与斯托克斯定理 ∮∂Σ A = ∬Σ F；自旋 ½ 的贝里相位 −Ω/2；链复形的 ∂∂ = 0；克利福德代数 Cl₃ 的霍奇对偶。页面数值地演示它们，不证明它们。</span><span class="en">Literature results, not formalized in this book: the Girard excess Ω = α + β + γ − π; the solid angle of a triangle, tan(Ω/2) = |a·(b × c)| / (1 + a·b + b·c + c·a) (Van Oosterom–Strackee); Gauss–Bonnet (an arrow carried once round a geodesic triangle turns by Ω) and the Stokes theorem ∮∂Σ A = ∬Σ F; the spin-½ Berry phase −Ω/2; ∂∂ = 0 for chain complexes; Hodge duality in the Clifford algebra Cl₃. The page illustrates them numerically and does not prove them.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的每个数都由页面当场算出：顶点与剖分、关联计数、沿每条测地边搬运的标架角 δΓ、每个小单元的巴格曼角超、2 × 2 复矩阵的迹、上边缘四元组。这是数值演示，不是证明。</span><span class="en">Every number on the page is computed on the spot: the vertices and the subdivision, the incidence counts, the frame angles δΓ carried along each geodesic edge, the Bargmann excess of each small cell, the traces of 2 × 2 complex matrices and the coboundary quadruples. This is a numerical illustration, not a proof.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“四个阶在一个单元里合一”与“宏观按 N⁰、N<sup>1/3</sup>、N<sup>2/3</sup>、N¹ 筛出节点、脊线、外表面与体积”是作者的几何诠释；抵消混合 λ 只是画面参数；3 × 3 × 3 体胞画在半径 0.4 到 1 之间，使每个体胞的六个面都有面积，这是为画图做的选择。</span><span class="en">“Four grades fused in one cell” and “the macroscopic sieve that separates a node, a spine, an outer surface and a volume as N⁰, N<sup>1/3</sup>, N<sup>2/3</sup>, N¹” are a geometric interpretation by the author; the cancellation blend λ is a drawing parameter; the 3 × 3 × 3 solid cells are drawn between radii 0.4 and 1 so that all six faces of each cell have area, a choice made for the drawing.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到 λ = 0" data-aria-en="Back to λ = 0">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：抵消混合 λ" data-aria-en="Rail: the cancellation blend λ">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>L</kbd> <span class="zh">透镜</span><span class="en">lens</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是单位球面 S² ⊂ ℝ³ 上的极小圆弧体 ΔT_ε 及其剖分。本页是数值演示，不是证明：每个数都由页面当场算出（NUM），冻结定理只在下面写明的实例上演示。</p>
+      <ol>
+        <li><b>单元。</b>A = (1, 0, 0)，B = (cos ε, sin ε, 0)，C = (cos ε, 0, sin ε)。从原点 O 出发的三面平墙 OAB、OBC、OCA 加一块外凸的球面帽 △ABC 围成一个扇形体。</li>
+        <li><b>四个阶。</b>Λ⁰：相融 A·B = A·C = cos ε；Λ¹：弧长 ε，单位态在 B 处的切向梯度 |A − (A·B)B| = sin ε；Λ²：球面帽的角超 Ω = 2 arctan(tan²(ε/2))；Λ³：扇形体积 Ω/3（平直四面体 OABC 的体积是 sin²ε/6）。在 N = 1 的单元里，每个阶都只数到 1 个对象：1⁰ = 1¹ = 1² = 1³ = 1。</li>
+        <li><b>相位锁定。</b>拉格朗日—格拉姆给出 cos²ε + sin²ε = 1；巴格曼迹给出 Δ₃ = Tr(P_A P_C P_B) 的虚部 −¼ sin²ε 与辐角 −Ω/2（自旋 ½ 的贝里相位）；投影概率流给出 A 的玻恩权重的变化率 −½ sin ε。三者由同一个 B 驱动。</li>
+        <li><b>霍奇与斯托克斯。</b><span class="hs">⋆</span>(A∧B) = A × B = sin ε e₃ 与 A、B 都正交，长度等于 A∧B 张成的平行四边形面积；<span class="hs">⋆</span>(A∧B∧C) = det[A, B, C] = sin²ε 是一个标量。页面在一个不含零点的切标架下沿每条测地边搬运标架，得到连接量 δΓ；沿边界求和 ∮∂Σ = −Ω，与各小三角形的巴格曼角超之和 −ΣΩᵢ 是两种独立算法。</li>
+        <li><b>多胞抵消。</b>N = k² 时把 ΔT_ε 按重心格剖成 k² 个测地小三角形：有向边 3k² 条，内部边成对反向（3k(k − 1) 条）抵消，剩 3k 条外沿；内部净环流为 0，小角超之和等于 Ω。N = 27 时取 3 层径向壳 × 3 × 3 个测地四边形的体胞（参数立方的 3 × 3 × 3 剖分）：有向面 162 个，内部 108 个成对抵消，剩 54 个边界面，边界面的边界为零（∂∂ = 0），V − E + F − C = 1。</li>
+        <li><b>宏观筛。</b>λ = 1 时只剩一个节点（N⁰）、穿过 3 层的脊线（N<sup>1/3</sup>）、9 块外表面（N<sup>2/3</sup>）与 27 格体积（N¹）；在 N = 1 处四条曲线交于同一点 (1, 1)。这一分阶读法是模型（MODEL）。</li>
+        <li><b>冻结定理。</b>页面引用六条已冻结的 Lean 定理（LEAN ✓）：<a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a>、<a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair" href="#" target="_blank" rel="noopener"><code>unit_perpendicular_pair</code></a>、<a class="leanref" data-lean-gid="D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch" href="#" target="_blank" rel="noopener"><code>triple_bargmann_bloch</code></a>、<a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow" href="#" target="_blank" rel="noopener"><code>projection_probability_flow</code></a>、<a class="leanref" data-lean-gid="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact" href="#" target="_blank" rel="noopener"><code>face_cycle_exact</code></a>、<a class="leanref" data-lean-gid="D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness" href="#" target="_blank" rel="noopener"><code>tetra_defects_incidence_repair_and_exactness</code></a>。它们是一般陈述，页面只演示它们在这些单元上的样子；吉拉尔、立体角公式、高斯—博内、斯托克斯、贝里相位、∂∂ = 0 与霍奇对偶是文献结果（ARGUED）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-clifford-monad-tiling" target="_top">第三十四章 · 极小圆弧体与多胞抵消</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is the minimal arc cell ΔT_ε on the unit sphere S² ⊂ ℝ³ and its subdivisions. The page is a numerical illustration, not a proof: every number is computed on the spot (NUM), and each frozen theorem is shown only on the instance written below.</p>
+      <ol>
+        <li><b>The cell.</b> A = (1, 0, 0), B = (cos ε, sin ε, 0), C = (cos ε, 0, sin ε). Three flat walls OAB, OBC, OCA from the origin O and an outward-bulging spherical cap △ABC bound a sector.</li>
+        <li><b>Four grades.</b> Λ⁰: the compatibility A·B = A·C = cos ε; Λ¹: the arc ε and the tangent gradient of the unit state at B, |A − (A·B)B| = sin ε; Λ²: the excess of the cap, Ω = 2 arctan(tan²(ε/2)); Λ³: the sector volume Ω/3 (the flat tetrahedron OABC holds sin²ε/6). In the cell N = 1 each grade counts exactly one object: 1⁰ = 1¹ = 1² = 1³ = 1.</li>
+        <li><b>Phase lock.</b> Lagrange–Gram gives cos²ε + sin²ε = 1; the Bargmann trace gives Δ₃ = Tr(P_A P_C P_B) with imaginary part −¼ sin²ε and argument −Ω/2 (the spin-½ Berry phase); the projection probability flow gives the rate −½ sin ε at which the Born weight of A changes. One B drives all three.</li>
+        <li><b>Hodge and Stokes.</b> <span class="hs">⋆</span>(A∧B) = A × B = sin ε e₃ is orthogonal to A and B, and its length is the area of the parallelogram spanned by A∧B; <span class="hs">⋆</span>(A∧B∧C) = det[A, B, C] = sin²ε is a scalar. In a tangent frame without zeros the page carries the frame along each geodesic edge to get the connection δΓ; the sum along the boundary, ∮∂Σ = −Ω, and the sum −ΣΩᵢ of the Bargmann excesses of the small triangles are two independent computations.</li>
+        <li><b>Multi-cell cancellation.</b> For N = k² the cell is cut along its barycentric lattice into k² geodesic triangles: 3k² directed edges, of which the inner ones come in opposite pairs (3k(k − 1) of them) and cancel, leaving 3k rim edges; the inner net circulation is 0 and the small excesses add up to Ω. For N = 27 the page takes 3 radial shells × 3 × 3 geodesic quadrilaterals (the 3 × 3 × 3 subdivision of a parameter cube): 162 directed faces, 108 inner ones cancelling in pairs, 54 boundary faces whose boundary is zero (∂∂ = 0), and V − E + F − C = 1.</li>
+        <li><b>The macroscopic sieve.</b> At λ = 1 only one node (N⁰), a spine through the 3 shells (N<sup>1/3</sup>), 9 outer faces (N<sup>2/3</sup>) and 27 cells of volume (N¹) remain; at N = 1 the four curves meet in one point (1, 1). This graded reading is a model (MODEL).</li>
+        <li><b>Frozen theorems.</b> The page cites six frozen Lean theorems (LEAN ✓): <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a>, <a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair" href="#" target="_blank" rel="noopener"><code>unit_perpendicular_pair</code></a>, <a class="leanref" data-lean-gid="D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch" href="#" target="_blank" rel="noopener"><code>triple_bargmann_bloch</code></a>, <a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow" href="#" target="_blank" rel="noopener"><code>projection_probability_flow</code></a>, <a class="leanref" data-lean-gid="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact" href="#" target="_blank" rel="noopener"><code>face_cycle_exact</code></a> and <a class="leanref" data-lean-gid="D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness" href="#" target="_blank" rel="noopener"><code>tetra_defects_incidence_repair_and_exactness</code></a>. They are general statements; the page only shows what they look like on these cells. Girard, the solid-angle formula, Gauss–Bonnet, Stokes, the Berry phase, ∂∂ = 0 and Hodge duality are literature results (ARGUED).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-clifford-monad-tiling" target="_top">Chapter 34 · the minimal arc cell and multi-cell cancellation</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

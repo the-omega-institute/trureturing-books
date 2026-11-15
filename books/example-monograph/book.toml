@@ -12,12 +12,12 @@ zh = "黄金整数与可观测性"
 en = "Golden Integers and Observability"
 
 [book.subtitle]
-zh = "一本每条定理都经 Lean 内核验证的示例专著"
-en = "A sample monograph whose every theorem is kernel-verified in Lean"
+zh = "区分 Lean 验证与文献书面证明的示例专著"
+en = "A sample monograph distinguishing Lean verification from written proofs in the literature"
 
 [book.description]
-zh = "四章与一个附录：从 Zeckendorf 表示的进位亏量出发，经由反驳猜想的有限证书与读数的可观测性，到细化、记忆与熵，再到黄金词与回归。每条定理都引用 trureturing 中已冻结的 Lean 声明，开放问题明确标出；附交互可视化、讲解视频与演示文稿。"
-en = "Four chapters and an appendix: from the carry deficit of Zeckendorf representations, through finite certificates that refute conjectures and the observability of readouts, to refinement, memory and entropy, and on to the golden word and its returns. Every theorem cites a Lean declaration frozen in trureturing, and open problems are marked as open. With an interactive visualization, an explainer film and a slide deck."
+zh = "四章与一个附录：从 Zeckendorf 表示的进位亏量出发，经由反驳猜想的有限证书与读数的可观测性，到细化、记忆与熵，再到黄金词与回归。定理分别引用 trureturing 中已冻结的 Lean 声明或明确标注的文献书面证明，开放问题明确标出；附交互可视化、讲解视频与演示文稿。"
+en = "Four chapters and an appendix: from the carry deficit of Zeckendorf representations, through finite certificates that refute conjectures and the observability of readouts, to refinement, memory and entropy, and on to the golden word and its returns. Theorems cite either Lean declarations frozen in trureturing or explicitly identified written proofs from the literature, and open problems are marked as open. With an interactive visualization, an explainer film and a slide deck."
 
 [outputs]
 html = true

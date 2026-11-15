@@ -155,16 +155,123 @@ The table gives the values for $n = 1, \dots, 12$; $1/\sqrt5 \approx 0.4472136$.
 | 11 | 89 | 144 | 0.005025 | 0.447225 | +0.000011 |
 | 12 | 144 | 233 | 0.003106 | 0.447209 | −0.000004 |
 
-::: {.problem #prob-revival-spectrum title="The full revival spectrum"}
-[@thm-revival-score] covers only the subsequence of Fibonacci times. Two places in trureturing say what remains unresolved:
+Fibonacci times give one limit. Which other finite limits become possible if we allow all return times? For a fixed real quadratic irrational, the literature gives a complete answer. We first state the general theorem of Dhanda and Haynes, then translate it into the nearest-integer distance used in this chapter[^dhanda-haynes].
 
-- `Blueprint/D5/S3/ObserverMemory/GoldenRevivalScore.md`: this result closes only the Fibonacci extremal subsequence, and the full spectrum classification and global optimality remain unresolved[^hurwitz];
-- the search log at the top of `D5/S3/ObserverMemory/GoldenRevivalScore.lean`: the theorem asserts neither a full Lagrange–Markov spectrum classification nor global optimality.
+::: {.theorem #thm-quadratic-accumulation title="Accumulation points of normalized approximations to a real quadratic irrational" status="written-proof" proof="pf-quadratic-accumulation" doi="10.1016/j.jnt.2024.09.002" source="Theorem 4" request="https://github.com/the-omega-institute/trureturing-requests/issues/111"}
+Let $D\ge2$ be a squarefree integer, $A,B\in\mathbb Q$ with $B\ne0$, $\alpha=A+B\sqrt D$, and $K=\mathbb Q(\alpha)$. Put
 
-trureturing has not yet stated either question as a precise proposition, and this book does not supply one on its behalf.
+$$
+\begin{aligned}
+\Lambda&=\mathbb Z+\alpha\mathbb Z,\\
+\Lambda^*&=\{s\in K:\operatorname{Tr}_{K/\mathbb Q}(s\lambda)\in\mathbb Z
+\text{ for all }\lambda\in\Lambda\}.
+\end{aligned}
+$$
+
+Let $\mathcal A_1(\alpha)$ be the set of accumulation points in $\mathbb R$ of
+
+$$
+\mathrm{NA}_1(\alpha)=\{|q|(q\alpha-p):q\in\mathbb Z\setminus\{0\},\ p\in\mathbb Z\}:
+$$
+
+every neighborhood of an accumulation point contains an element of this set different from the point itself. Then
+
+$$
+\mathcal A_1(\alpha)=
+\{\pm2B\sqrt D\,\operatorname N_{K/\mathbb Q}(s):s\in\Lambda^*\setminus\{0\}\}.
+$$
+
+Here the trace and norm are $\operatorname{Tr}_{K/\mathbb Q}(x)=x+x'$ and $\operatorname N_{K/\mathbb Q}(x)=xx'$, respectively, where the prime denotes conjugation sending $\sqrt D$ to $-\sqrt D$. There is no coprimality condition on $p,q$.
 :::
 
-[^hurwitz]: trureturing does not say exactly what "global optimality" means here; what follows is one possible reading. If it is read as "the lower limit of $q\norm{q\varphi}$ over all positive integers $q$ is $1/\sqrt5$", it is a classical result (A. Hurwitz, Ueber die angenäherte Darstellung der Irrationalzahlen durch rationale Brüche, *Math. Ann.* 39 (1891), 279–284). trureturing has frozen the bound needed for one half of it: `golden_hurwitz_bound` in the module `D5/S1/Depth/GoldenHurwitzBound` says that every rational number $r$ with reduced denominator $d$ satisfies $|\varphi - r| > 1/(\sqrt5 d^2 + d)$, from which a paper argument gives a lower limit of at least $1/\sqrt5$; on the other hand, $\norm{F_n\varphi} = |F_n\varphi - F_{n+1}|$ for $n \ge 2$, so [@thm-revival-score] gives at most $1/\sqrt5$. The combined statement about the lower limit is neither frozen in trureturing nor formalized in this book.
+::: {.proof #pf-quadratic-accumulation}
+We expand the argument of Section 6, Lemmas 18–19, and Section 7, equations (35)–(36), of the source. Write $\alpha_0^*,\alpha_1^*$ for the basis dual to $1,\alpha$ under the trace pairing. Section 2.3 considers the multiplier ring
+
+$$
+\mathcal Z_\Lambda=\{v\in\mathcal O_K:v\Lambda\subseteq\Lambda\},
+$$
+
+where $\mathcal O_K$ is the ring of algebraic integers in $K$. Its units preserve $\Lambda^*$ under multiplication. The unit lattice of Lemma 13 in that section supplies, in the quadratic case, positive dominant units $u_k\to\infty$, with conjugates satisfying $|u_k'|=u_k^{-1}$. Lemma 18 states that for each $C>0$ there is a finite set $S_C\subseteq\Lambda^*$ such that every integer pair with $q>0$ and $q|q\alpha-p|\le C$ admits a representation
+
+$$
+q\alpha_0^*+p\alpha_1^*=su,
+\qquad s\in S_C,\quad u\in\mathcal Z_\Lambda^\times,
+$$
+
+with $u$ dominant; here $|u|$ and $|u'|$ are comparable, within fixed positive factors, to $q$ and $q^{-1}$, respectively. This finite reduction comes from dividing a dual-lattice element whose two embeddings are $O(q)$ and $O(q^{-1})$ by such a unit, leaving a bounded lattice set.
+
+For any fixed $s\in\Lambda^*\setminus\{0\}$ and such a unit $u$, set $t=su$ and take the integers
+
+$$
+q_u=\operatorname{Tr}_{K/\mathbb Q}(t),\qquad
+p_u=\operatorname{Tr}_{K/\mathbb Q}(t\alpha).
+$$
+
+Expanding the traces gives the one-dimensional formulas of Lemma 19:
+
+$$
+\begin{aligned}
+q_u\alpha-p_u&=(\alpha-\alpha')t'=2B\sqrt D\,t',\\
+\gamma_u:=|q_u|\,|t'|
+&=|\operatorname N_{K/\mathbb Q}(s)|\left|1+\frac{t'}{t}\right|.
+\end{aligned}
+$$
+
+A unit has norm of absolute value $1$. As $|u|\to\infty$, we have $t'/t\to0$, so $\gamma_u\to|\operatorname N_{K/\mathbb Q}(s)|$, while $|q_u|(q_u\alpha-p_u)=\pm2B\sqrt D\,\gamma_u$.
+
+First we show that every accumulation point belongs to the stated norm set. Choose distinct normalized approximation values tending to an accumulation point. They are bounded. Bounded $|q|$ would allow only finitely many corresponding $p$, contradicting distinctness, so we can pass to a subsequence with $|q|\to\infty$. The map $(q,p)\mapsto(-q,-p)$ negates the normalized value, so it suffices to treat positive-denominator sequences and their negatives. Using the finite set in Lemma 18, pass to a further subsequence with a fixed nonzero $s$; the corresponding dominant units satisfy $|u|\to\infty$. The formulas above allow only the limits $\pm2B\sqrt D\,|\operatorname N_{K/\mathbb Q}(s)|$, which belong to the right-hand side of the theorem.
+
+Conversely, fix any nonzero $s\in\Lambda^*$ and let $u=u_k\to\infty$. Then $q_{u_k}$ is eventually nonzero, and the absolute values of the normalized approximations tend to $2|B|\sqrt D\,|\operatorname N_{K/\mathbb Q}(s)|$. We must ensure a genuine accumulation point of the set, rather than repetition of a single value. The expression above from equation (33) guarantees $\gamma_u\ne|\operatorname N_{K/\mathbb Q}(s)|$: equality would force the nonzero real number $t'/t$ to be $-2$, but conjugating $t'=-2t$ would give $t=4t$, contradicting $t\ne0$. On a subsequence with constant sign, set elements different from their limit therefore tend to one of the two signed limits. Symmetry of $\mathrm{NA}_1(\alpha)$ about $0$ gives the other sign as well. This proves the reverse inclusion. Allowing both signs also makes the norm set unchanged when the norm is replaced by its absolute value.
+:::
+
+[^dhanda-haynes]: Kavita Dhanda and Alan Haynes, *Accumulation points of normalized approximations*, *Journal of Number Theory* 268 (2025), 1–38, DOI: [10.1016/j.jnt.2024.09.002](https://doi.org/10.1016/j.jnt.2024.09.002). The general statement is Theorem 4; the trace dual is defined in Section 2.3, and the proof uses Section 6, Lemmas 18–19, and Section 7. An accessible [primary version](https://arxiv.org/html/2310.00173v2) is available.
+
+Now specialize to $\alpha=\varphi$. First compare the parameters in the two questions. Let $\mathcal C_\varphi$ be the set of all finite limits of $q_j\norm{q_j\varphi}$ along strictly increasing positive integers $q_j$. Given $x\in\mathcal A_1(\varphi)$, choose distinct set values tending to $x$. Bounded normalized errors allow only finitely many values at any finite collection of denominators, so we can extract a subsequence with strictly increasing $|q_j|$. Negate $q_j,p_j$ together when necessary to make the denominators positive, leaving the absolute errors unchanged. Since eventually $|q_j\varphi-p_j|=O(1/q_j)<1/2$, the integer $p_j$ is eventually the nearest integer. Thus $q_j\norm{q_j\varphi}\to|x|$.
+
+Conversely, suppose positive integers $q_j$ increase strictly and $q_j\norm{q_j\varphi}\to L$. Choose a nearest integer $p_j$ for each $q_j$, and pass to a subsequence on which the error has constant sign. Then $q_j(q_j\varphi-p_j)\to x$ with $|x|=L$. These signed values are distinct: equality of values at positive denominators $q,r$ with corresponding integers $p,s$ would imply
+
+$$
+(q^2-r^2)\varphi=qp-rs;
+$$
+
+irrationality of $\varphi$ forces $q=r$. Hence $x$ is a genuine accumulation point of the set used in the source, so $x\in\mathcal A_1(\varphi)$. Together, the two directions give $\mathcal C_\varphi=\{|x|:x\in\mathcal A_1(\varphi)\}$.
+
+The trace dual can also be computed by hand. The basis dual to $1,\varphi$ is $(\varphi-1)/\sqrt5,\ 1/\sqrt5$: the trace pairings of the first element with $1,\varphi$ are $1,0$, and those of the second are $0,1$. Thus
+
+$$
+\Lambda^*=\frac1{\sqrt5}(\mathbb Z+\varphi\mathbb Z).
+$$
+
+Write $z=a-b\varphi$ with $a,b\in\mathbb Z$. Then
+
+$$
+\begin{aligned}
+Q(a,b):=\operatorname N_{K/\mathbb Q}(z)&=a^2-ab-b^2,\\
+\operatorname N_{K/\mathbb Q}(\sqrt5)&=-5,\\
+\operatorname N_{K/\mathbb Q}(z/\sqrt5)&=-Q(a,b)/5.
+\end{aligned}
+$$
+
+The denominator's norm $-5$ determines the minus sign in the last identity. Taking $A=B=1/2$ and $D=5$ in [@thm-quadratic-accumulation], retaining both signs first and then taking absolute values, gives
+
+$$
+\begin{aligned}
+\mathcal A_1(\varphi)
+&=\left\{\pm\frac{Q(a,b)}{\sqrt5}:(a,b)\in\mathbb Z^2\setminus\{(0,0)\}\right\},\\
+\mathcal C_\varphi
+&=\left\{\frac{|a^2-ab-b^2|}{\sqrt5}:(a,b)\in\mathbb Z^2\setminus\{(0,0)\}\right\}.
+\end{aligned}
+$$
+
+A nonzero integer pair has nonzero norm, since both $a-b\varphi$ and its conjugate are nonzero. No coprimality condition is imposed here either. These formulas are written deductions from the golden specialization of the general literature theorem and the two-way correspondence above.
+
+::: {.remark #prob-revival-spectrum title="The literature result and the formalization boundary"}
+The Lean verification in [@thm-revival-score] covers only Fibonacci times. The complete set of finite accumulation points for fixed $\varphi$ follows from [@thm-quadratic-accumulation] and the conversion above; this classification should therefore not be listed as a mathematically open problem. Neither of the frozen declarations in `GoldenRevivalScore` and `GoldenHurwitzBound` cited here contains the full accumulation-set equality.
+
+The phrases "full revival spectrum" and "global optimality" in `Blueprint/D5/S3/ObserverMemory/GoldenRevivalScore.md` are not precisely defined[^hurwitz]; the corresponding Lean file also explicitly disclaims a full Lagrange–Markov spectrum classification. The accumulation set for a fixed quadratic irrational differs from a spectrum problem in which $\alpha$ varies. The literature result for the former does not automatically settle those broader, unformulated statements. The [formalization request](https://github.com/the-omega-institute/trureturing-requests/issues/111) records the need for the general quadratic accumulation theorem and the scope of related declarations.
+:::
+
+[^hurwitz]: trureturing does not say exactly what "global optimality" means here; what follows is one possible reading. If it is read as "the lower limit of $q\norm{q\varphi}$ over all positive integers $q$ is $1/\sqrt5$", it is a classical result (A. Hurwitz, Ueber die angenäherte Darstellung der Irrationalzahlen durch rationale Brüche, *Math. Ann.* 39 (1891), 279–284). trureturing has frozen the bound needed for one half of it: `golden_hurwitz_bound` in the module `D5/S1/Depth/GoldenHurwitzBound` says that every rational number $r$ with reduced denominator $d$ satisfies $|\varphi - r| > 1/(\sqrt5 d^2 + d)$, from which a paper argument gives a lower limit of at least $1/\sqrt5$; on the other hand, $\norm{F_n\varphi} = |F_n\varphi - F_{n+1}|$ for $n \ge 2$, so [@thm-revival-score] gives at most $1/\sqrt5$. The combined statement about the lower limit is not contained in those cited frozen declarations and is not formalized in this book.
 
 ## A use for the deficit {#sec-almost-additive}
 

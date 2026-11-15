@@ -1,0 +1,86 @@
+/* LORENTZ//OCTAVE: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this page lives
+   here: the pointer on the stage, the amber drift handle, the tour bar's two transport buttons, the colour roles of the
+   readouts and labels. Colours come from the tokens (var(--cyan) …), never from literal colour values. */
+#stage { container-type: inline-size; }
+/* the orbit and the handle take the pointer only on a live stage; a still (cover, cited shot) lets touch scroll through */
+.stage:not(.still) #cv { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active { cursor: grabbing; }
+.stage.still #cv { cursor: default; touch-action: auto; }
+
+/* the logo's separator and the book's colour rule: the tagline and the drawer's bold leads are not "now" */
+.logo > span { color: var(--cyan); font-weight: 700; }
+.tagline em { color: var(--cyan); }
+.sheet li b { color: var(--cyan); }
+.sheet ol + .lede { margin-top: 14px; }
+/* the Clifford conjugate p̄: an overline, since a combining macron drifts off the letter in these faces */
+.bar { text-decoration: overline; text-decoration-thickness: 1px; text-underline-offset: 0; }
+.hud-tl .big { color: var(--sigma); }
+.hud-tl .big, .hud-tl .sub, .tau, #plotTitle, #plotMeta, .keys { text-transform: none; }
+.hud-tl .sub { line-height: 1.4; }
+.preset .code { text-transform: none; letter-spacing: 0.06em; }
+
+/* the drift handle: an amber ring on the tip of dx = β c dt; a button, so the orbit leaves it alone */
+.stage .handle { position: absolute; z-index: 3; left: 0; top: 0; width: 28px; height: 28px; padding: 0; margin: 0; border: 2px solid var(--amber); border-radius: 50%;
+  background: color-mix(in srgb, var(--amber) 14%, transparent); transform: translate(-50%, -50%); cursor: grab; touch-action: none;
+  user-select: none; -webkit-user-select: none; box-shadow: 0 0 10px color-mix(in srgb, var(--amber) 55%, transparent); }
+.stage .handle:active, .stage .handle.dragging { cursor: grabbing; background: color-mix(in srgb, var(--amber) 30%, transparent); }
+.stage .handle:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.stage .handle[hidden] { display: none; }
+.stage.still .handle { pointer-events: none; }
+:root[data-thumb-mode] .stage .handle { display: none; }
+
+/* the tour bar: ◀ ⏮ title ▶ ▶, the note across the width under them */
+.tour { grid-template-columns: auto auto minmax(0, 1fr) auto auto; }
+.tour #prevBtn { grid-column: 1; grid-row: 1; }
+.tour #rewindBtn { grid-column: 2; grid-row: 1; }
+.tour .what b { grid-column: 3; grid-row: 1; }
+.tour #playBtn { grid-column: 4; grid-row: 1; }
+.tour #nextBtn { grid-column: 5; grid-row: 1; }
+/* a cited figure keeps ◀ title ▶: the rail under it carries ⏮ and ▶ */
+:root[data-embed][data-figure] .tour { grid-template-columns: auto minmax(0, 1fr) auto; }
+:root[data-embed][data-figure] .tour #rewindBtn, :root[data-embed][data-figure] .tour #playBtn { display: none; }
+:root[data-embed][data-figure] .tour .what b { grid-column: 2; }
+:root[data-embed][data-figure] .tour #nextBtn { grid-column: 3; }
+
+/* readouts by role: cyan = lines and the budget, magenta = what escapes (drift, field), violet = volume and remainder */
+dl.ro .c dd { color: var(--cyan); }
+dl.ro .m dd { color: var(--magenta); }
+dl.ro .v dd { color: var(--violet); }
+dl.ro dd output { font: inherit; color: inherit; }
+dl.ro .key dd b output { font-size: 19px; }
+.keys { font-family: var(--font-data); }
+.keys #formula { color: var(--ink); }
+
+/* the stage's own labels keep their case (e₁, Λ³, β) */
+.stage .tag.raw { text-transform: none; }
+.stage .tag.backed { border-radius: 999px; padding: 2px 9px; background: var(--sheet); border: 1px solid var(--panel-edge); text-shadow: none; }
+.stage .tag.c-vi { color: var(--violet); }
+.stage .tag.c-am { color: var(--amber); }
+.stage .tag.c-cy { color: var(--cyan); }
+.stage .tag.c-mg { color: var(--magenta); }
+
+@container (max-width: 620px) {
+  .hud-tl { left: 14px; max-width: calc(100% - 28px); }
+  .hud-tl .big { font-size: 12px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.3; }
+  .hud-tr { gap: 3px; }
+  .hud-tr .chip { padding: 3px 5px; font-size: 9.5px; letter-spacing: 0.02em; }
+  .hud-bl { left: 12px; right: 12px; bottom: 9px; gap: 2px 10px; font-size: 10px; }
+  .stage .tag.raw { font-size: 10.5px; }
+  .stage .handle { width: 24px; height: 24px; }
+}
+
+/* one column (tablets, a narrow window): the stage keeps most of a short screen */
+@media (max-width: 1080px) and (min-width: 521px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 74vh)) auto auto; }
+}
+/* phones: a taller stage for the corner and its dial */
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 65vh)) auto auto; }
+  .logo { font-size: clamp(17px, 5vw, 24px); }
+}
+
+/* a narrow cited figure: the tour bar picks the card; the stage keeps the corner */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}

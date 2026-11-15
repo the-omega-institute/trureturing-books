@@ -155,16 +155,123 @@ $$
 | 11 | 89 | 144 | 0.005025 | 0.447225 | +0.000011 |
 | 12 | 144 | 233 | 0.003106 | 0.447209 | −0.000004 |
 
-::: {.problem #prob-revival-spectrum title="完整的回归谱"}
-[@thm-revival-score] 只处理 Fibonacci 时刻这一个子序列。trureturing 中有两处说明还有什么没有解决：
+Fibonacci 时刻给出一个极限；如果允许所有回归时刻，还能得到哪些有限极限？对固定的实二次无理数，这已有文献中的完整答案。下面先陈述 Dhanda–Haynes 的一般定理，再把它换成本章的最近整数距离[^dhanda-haynes]。
 
-- `Blueprint/D5/S3/ObserverMemory/GoldenRevivalScore.md`：这一结果只解决了 Fibonacci 极值子序列，完整回归谱的分类与全局最优性仍未解决[^hurwitz]；
-- `D5/S3/ObserverMemory/GoldenRevivalScore.lean` 开头的检索记录：该定理不断言完整的 Lagrange–Markov 谱分类，也不断言全局最优性。
+::: {.theorem #thm-quadratic-accumulation title="实二次无理数的归一化逼近聚点" status="written-proof" proof="pf-quadratic-accumulation" doi="10.1016/j.jnt.2024.09.002" source="Theorem 4" request="https://github.com/the-omega-institute/trureturing-requests/issues/111"}
+设 $D\ge2$ 是无平方因子的整数，$A,B\in\mathbb Q$，$B\ne0$，$\alpha=A+B\sqrt D$，$K=\mathbb Q(\alpha)$。令
 
-trureturing 还没有把这两个问题写成精确的命题，本书也不替它补写。
+$$
+\begin{aligned}
+\Lambda&=\mathbb Z+\alpha\mathbb Z,\\
+\Lambda^*&=\{s\in K:\operatorname{Tr}_{K/\mathbb Q}(s\lambda)\in\mathbb Z
+\text{ 对所有 }\lambda\in\Lambda\}.
+\end{aligned}
+$$
+
+记 $\mathcal A_1(\alpha)$ 为实数集
+
+$$
+\mathrm{NA}_1(\alpha)=\{|q|(q\alpha-p):q\in\mathbb Z\setminus\{0\},\ p\in\mathbb Z\}
+$$
+
+在 $\mathbb R$ 中的聚点集：每个聚点的任意邻域都含有不同于它的集合元素。则
+
+$$
+\mathcal A_1(\alpha)=
+\{\pm2B\sqrt D\,\operatorname N_{K/\mathbb Q}(s):s\in\Lambda^*\setminus\{0\}\}.
+$$
+
+这里的迹与范数分别为 $\operatorname{Tr}_{K/\mathbb Q}(x)=x+x'$、$\operatorname N_{K/\mathbb Q}(x)=xx'$，撇号表示把 $\sqrt D$ 换成 $-\sqrt D$ 的共轭。$p,q$ 不要求互素。
 :::
 
-[^hurwitz]: trureturing 没有说明这里的“全局最优”具体指什么，下面只是一种读法。若把它理解为“对全体正整数 $q$，$q\norm{q\varphi}$ 的下极限等于 $1/\sqrt5$”，这是经典结果（A. Hurwitz, Ueber die angenäherte Darstellung der Irrationalzahlen durch rationale Brüche, *Math. Ann.* 39 (1891), 279–284）。trureturing 已冻结其中一半所需的界：模块 `D5/S1/Depth/GoldenHurwitzBound` 中的 `golden_hurwitz_bound` 说，对每个既约分母为 $d$ 的有理数 $r$，$|\varphi - r| > 1/(\sqrt5 d^2 + d)$，由此用纸面推理可得这个下极限不小于 $1/\sqrt5$；另一方面，$n \ge 2$ 时 $\norm{F_n\varphi} = |F_n\varphi - F_{n+1}|$，所以 [@thm-revival-score] 给出它不大于 $1/\sqrt5$。把两者合成的下极限陈述既没有在 trureturing 中冻结，也没有在本书中形式化。
+::: {.proof #pf-quadratic-accumulation}
+以下展开原文第 6 节引理 18–19 与第 7 节式 (35)–(36) 的论证。记 $\alpha_0^*,\alpha_1^*$ 为基 $1,\alpha$ 关于迹配对的对偶基。原文第 2.3 节考虑乘子环
+
+$$
+\mathcal Z_\Lambda=\{v\in\mathcal O_K:v\Lambda\subseteq\Lambda\},
+$$
+
+其中 $\mathcal O_K$ 为 $K$ 的代数整数环。它的单位乘法保持 $\Lambda^*$；由该节引理 13 的单位格，在二次情形可取正的主导单位 $u_k\to\infty$，其共轭满足 $|u_k'|=u_k^{-1}$。引理 18 说明：对每个 $C>0$，存在有限集 $S_C\subseteq\Lambda^*$，使得所有满足 $q>0$、$q|q\alpha-p|\le C$ 的整数对都可写成
+
+$$
+q\alpha_0^*+p\alpha_1^*=su,
+\qquad s\in S_C,\quad u\in\mathcal Z_\Lambda^\times
+$$
+
+且 $u$ 是主导单位；此时 $|u|$ 与 $q$、$|u'|$ 与 $q^{-1}$ 分别在固定正常数倍内可比。这个有限约化来自把两嵌入下分别为 $O(q)$、$O(q^{-1})$ 的对偶格元素除以这样的单位，得到有界格集。
+
+对任意固定的 $s\in\Lambda^*\setminus\{0\}$ 和这样的单位 $u$，令 $t=su$，并取整数
+
+$$
+q_u=\operatorname{Tr}_{K/\mathbb Q}(t),\qquad
+p_u=\operatorname{Tr}_{K/\mathbb Q}(t\alpha).
+$$
+
+直接展开迹，得到引理 19 在一维的公式
+
+$$
+\begin{aligned}
+q_u\alpha-p_u&=(\alpha-\alpha')t'=2B\sqrt D\,t',\\
+\gamma_u:=|q_u|\,|t'|
+&=|\operatorname N_{K/\mathbb Q}(s)|\left|1+\frac{t'}{t}\right|.
+\end{aligned}
+$$
+
+单位的范数绝对值为 $1$；当 $|u|\to\infty$ 时，$t'/t\to0$，故 $\gamma_u\to|\operatorname N_{K/\mathbb Q}(s)|$，而 $|q_u|(q_u\alpha-p_u)=\pm2B\sqrt D\,\gamma_u$。
+
+先证聚点集包含在所述范数集合中。取趋于某个聚点的互异归一化逼近值。它们有界；若 $|q|$ 有界，则相应的 $p$ 也只有有限多个，与互异性矛盾。因此可取 $|q|\to\infty$ 的子序列。变换 $(q,p)\mapsto(-q,-p)$ 把归一化值变号，所以只需处理正分母序列及其相反数。用引理 18 的有限集再取子序列，可固定非零的 $s$，相应的主导单位满足 $|u|\to\infty$。上式给出的极限只能是 $\pm2B\sqrt D\,|\operatorname N_{K/\mathbb Q}(s)|$，属于定理右边。
+
+反过来，固定任意非零 $s\in\Lambda^*$，令 $u=u_k\to\infty$。此时 $q_{u_k}$ 最终非零，上式的绝对值趋于 $2|B|\sqrt D\,|\operatorname N_{K/\mathbb Q}(s)|$。还须保证这给出集合的真正聚点，而非重复同一个值。原文式 (33) 的上述表达式保证 $\gamma_u\ne|\operatorname N_{K/\mathbb Q}(s)|$：若相等，则非零实数 $t'/t$ 只能是 $-2$；但 $t'=-2t$ 再取共轭会给出 $t=4t$，与 $t\ne0$ 矛盾。取符号固定的子序列，便有不同于极限的集合元素趋于两种符号之一的极限；再用 $\mathrm{NA}_1(\alpha)$ 关于 $0$ 的对称性，两个符号都成为聚点。这证明了反向包含。上述两种符号也使范数取绝对值与否给出同一个集合。
+:::
+
+[^dhanda-haynes]: Kavita Dhanda, Alan Haynes, *Accumulation points of normalized approximations*, *Journal of Number Theory* 268 (2025), 1–38，DOI：[10.1016/j.jnt.2024.09.002](https://doi.org/10.1016/j.jnt.2024.09.002)。一般陈述见 Theorem 4，迹对偶见第 2.3 节，证明见第 6 节引理 18–19 与第 7 节；可读[原文版本](https://arxiv.org/html/2310.00173v2)。
+
+现在专门取 $\alpha=\varphi$。先核对两种问题的参数：令 $\mathcal C_\varphi$ 为沿严格递增正整数 $q_j$ 的 $q_j\norm{q_j\varphi}$ 的所有有限极限组成的集合。从 $x\in\mathcal A_1(\varphi)$ 出发，取互异集合值趋于 $x$；有界归一化误差在有限多个分母处只能给出有限多个值，故可抽取 $|q_j|$ 严格递增的子序列。必要时同时把 $q_j,p_j$ 变号，使分母为正，绝对误差不变。由于 $|q_j\varphi-p_j|=O(1/q_j)<1/2$ 最终成立，$p_j$ 最终就是最近整数，所以 $q_j\norm{q_j\varphi}\to|x|$。
+
+反过来，若正整数 $q_j$ 严格递增且 $q_j\norm{q_j\varphi}\to L$，为每个 $q_j$ 取最近整数 $p_j$，再取误差符号固定的子序列，就有 $q_j(q_j\varphi-p_j)\to x$ 且 $|x|=L$。这些带符号的值互不相同：若正分母 $q,r$ 与对应整数 $p,s$ 给出同一个值，则
+
+$$
+(q^2-r^2)\varphi=qp-rs;
+$$
+
+$\varphi$ 的无理性迫使 $q=r$。因此这确为原文所用的集合聚点，$x\in\mathcal A_1(\varphi)$。两向合起来，$\mathcal C_\varphi=\{|x|:x\in\mathcal A_1(\varphi)\}$。
+
+迹对偶也可以手算。$1,\varphi$ 的对偶基是 $(\varphi-1)/\sqrt5,\ 1/\sqrt5$：前者与 $1,\varphi$ 的迹配对依次为 $1,0$，后者依次为 $0,1$。所以
+
+$$
+\Lambda^*=\frac1{\sqrt5}(\mathbb Z+\varphi\mathbb Z).
+$$
+
+写 $z=a-b\varphi$，其中 $a,b\in\mathbb Z$，则
+
+$$
+\begin{aligned}
+Q(a,b):=\operatorname N_{K/\mathbb Q}(z)&=a^2-ab-b^2,\\
+\operatorname N_{K/\mathbb Q}(\sqrt5)&=-5,\\
+\operatorname N_{K/\mathbb Q}(z/\sqrt5)&=-Q(a,b)/5.
+\end{aligned}
+$$
+
+分母的范数 $-5$ 决定了最后一式的负号。在 [@thm-quadratic-accumulation] 中取 $A=B=1/2$、$D=5$，先保留两种符号，再取绝对值，便得到
+
+$$
+\begin{aligned}
+\mathcal A_1(\varphi)
+&=\left\{\pm\frac{Q(a,b)}{\sqrt5}:(a,b)\in\mathbb Z^2\setminus\{(0,0)\}\right\},\\
+\mathcal C_\varphi
+&=\left\{\frac{|a^2-ab-b^2|}{\sqrt5}:(a,b)\in\mathbb Z^2\setminus\{(0,0)\}\right\}.
+\end{aligned}
+$$
+
+非零整数对的范数不会为零，因为 $a-b\varphi$ 及其共轭都非零。这里仍不加互素条件；这些公式是一般文献定理的黄金比特例与上述双向对应所得的书面推导。
+
+::: {.remark #prob-revival-spectrum title="回归谱的文献结论与形式化边界"}
+[@thm-revival-score] 的 Lean 验证只处理 Fibonacci 时刻；固定 $\varphi$ 的所有实聚点则由 [@thm-quadratic-accumulation] 及上面的换算给出，不能再把这个分类列为数学开放问题。本章引用的 `GoldenRevivalScore` 与 `GoldenHurwitzBound` 冻结声明都不包含这个完整聚点集等式。
+
+`Blueprint/D5/S3/ObserverMemory/GoldenRevivalScore.md` 所说的“完整回归谱”与“全局最优性”没有精确定义[^hurwitz]；对应 Lean 文件也明确不声称完整的 Lagrange–Markov 谱分类。固定一个二次无理数的聚点集与让 $\alpha$ 变化的谱问题不同，前者的文献结果并不自动解决这些更宽泛、尚未写成命题的表述。一般二次聚点定理的形式化需求及相关声明的适用范围见[形式化请求](https://github.com/the-omega-institute/trureturing-requests/issues/111)。
+:::
+
+[^hurwitz]: trureturing 没有说明这里的“全局最优”具体指什么，下面只是一种读法。若把它理解为“对全体正整数 $q$，$q\norm{q\varphi}$ 的下极限等于 $1/\sqrt5$”，这是经典结果（A. Hurwitz, Ueber die angenäherte Darstellung der Irrationalzahlen durch rationale Brüche, *Math. Ann.* 39 (1891), 279–284）。trureturing 已冻结其中一半所需的界：模块 `D5/S1/Depth/GoldenHurwitzBound` 中的 `golden_hurwitz_bound` 说，对每个既约分母为 $d$ 的有理数 $r$，$|\varphi - r| > 1/(\sqrt5 d^2 + d)$，由此用纸面推理可得这个下极限不小于 $1/\sqrt5$；另一方面，$n \ge 2$ 时 $\norm{F_n\varphi} = |F_n\varphi - F_{n+1}|$，所以 [@thm-revival-score] 给出它不大于 $1/\sqrt5$。把两者合成的下极限陈述不在上述引用的冻结声明中，本书也未把它形式化。
 
 ## 亏量的一个用处 {#sec-almost-additive}
 

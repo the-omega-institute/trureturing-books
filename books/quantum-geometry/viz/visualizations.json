@@ -4149,6 +4149,964 @@
       ]
     },
     {
+      "id": "standing-wave-volume-sandbox",
+      "code": "VOLUME//STANDING",
+      "title": "VOLUME//STANDING · 相位积分驻波成体与三维体积涌现",
+      "title_en": "VOLUME//STANDING · Phase-integral standing waves and emergent volume",
+      "summary": "同一点 x 收到 M 条比较路径的相位，平均 Ψ_M = (1/M) Σ e^{ikδ}，|Ψ_M|² 等于全部路径对回路相位的余弦平均。黄金步长下相位铺满圆周、Ψ_M → 0；步长是整圈时全部同相。单位球上的极小扇形 ΔT_ε（立体角 Ω = 2 arctan(tan²(ε/2))，体积 Ω/3）内外 63 个候选点：扇形外的品红伪影在 M = 3 时还在，M = 64 时消失，只剩扇形里的驻波晶核，涌现体积收拢到 Ω/3。五张实验卡可单独引用。",
+      "summary_en": "One point x receives the phases of M comparison paths; their average Ψ_M = (1/M) Σ e^{ikδ} has |Ψ_M|² equal to the mean cosine of the loop phases of all pairs. At the golden step the phases fill the circle and Ψ_M → 0; at a whole-turn step every arrival agrees. Around the minimal sector ΔT_ε of the unit sphere (solid angle Ω = 2 arctan(tan²(ε/2)), volume Ω/3) sit 63 candidate points: the magenta artifacts outside the sector are still there at M = 3 and gone at M = 64, leaving the standing-wave core inside, whose emergent volume settles on Ω/3. Five experiment cards can be cited on their own.",
+      "path": "standing-wave-volume-sandbox/",
+      "thumbnail": "standing-wave-volume-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.7",
+      "presets": [
+        "multi-phase-point",
+        "circle-density-pushforward",
+        "void-cancellation",
+        "bohr-sommerfeld-quantization",
+        "standing-volume-emergence"
+      ],
+      "tags": [
+        "驻波",
+        "相位积分",
+        "哈尔平均",
+        "有限泊松求和",
+        "球面扇形体积"
+      ],
+      "tags_en": [
+        "standing wave",
+        "phase integral",
+        "Haar average",
+        "finite Poisson summation",
+        "spherical sector volume"
+      ],
+      "theory": [
+        {
+          "label": "第三十四章 §34.7 · 相位积分驻波成体与三维体积涌现",
+          "label_en": "Chapter 34 §34.7 · Phase-integral standing waves and emergent volume",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-standing-wave-volume-emergence",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-standing-wave-volume-emergence"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch"
+        },
+        {
+          "gid": "D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar"
+        },
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.sum_annihilator_character"
+        },
+        {
+          "gid": "D5/S3/QuantumStates/PhaseLockedOverlap.phase_locked_overlap_is_rotated_real"
+        }
+      ]
+    },
+    {
+      "id": "clifford-monad-tiling-sandbox",
+      "code": "MONAD//TILING",
+      "title": "MONAD//TILING · 极小圆弧体四位一体与多胞抵消分化",
+      "title_en": "MONAD//TILING · Minimal Clifford monad and multi-cell cancellation",
+      "summary": "单位球面上的极小圆弧体 ΔT_ε：A = (1, 0, 0)、B = (cos ε, sin ε, 0)、C = (cos ε, 0, sin ε)。一个单元同时是标量相融 cos ε（Λ⁰）、一步 ε 与切向梯度 sin ε（Λ¹）、球面帽角超 Ω = 2 arctan(tan²(ε/2))（Λ²）与扇形体积 Ω/3（Λ³）；Im Tr(P_A P_C P_B) = −¼ sin²ε，cos²ε + sin²ε = 1，⋆(A∧B) 与 A、B 正交，边界环流与曲面通量同为 −Ω。铺成 N = k² 个球面小三角形时 3k² 条有向边里 3k(k − 1) 条成对抵消、只剩 3k 条外沿；铺成 3 × 3 × 3 体胞时 162 个有向面里 108 个抵消、剩 54 个边界面，节点、脊线、外表面与体积按 N 的 0、1/3、2/3、1 次幂分开。五张实验卡可单独引用。",
+      "summary_en": "The minimal arc cell ΔT_ε on the unit sphere: A = (1, 0, 0), B = (cos ε, sin ε, 0), C = (cos ε, 0, sin ε). One cell is at once the scalar compatibility cos ε (Λ⁰), the step ε and tangent gradient sin ε (Λ¹), the cap excess Ω = 2 arctan(tan²(ε/2)) (Λ²) and the sector volume Ω/3 (Λ³); Im Tr(P_A P_C P_B) = −¼ sin²ε, cos²ε + sin²ε = 1, ⋆(A∧B) is orthogonal to A and B, and the rim circulation and the surface flux are both −Ω. Tiled into N = k² spherical triangles, 3k(k − 1) of the 3k² directed edges cancel in pairs and 3k rim edges remain; tiled into 3 × 3 × 3 solid cells, 108 of 162 directed faces cancel and 54 boundary faces remain, while the node, the spine, the outer surface and the volume grow as N to the powers 0, 1/3, 2/3 and 1. Five experiment cards can be cited on their own.",
+      "path": "clifford-monad-tiling-sandbox/",
+      "thumbnail": "clifford-monad-tiling-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.8",
+      "presets": [
+        "monad-four-in-one",
+        "gradient-path-phase-lock",
+        "hodge-stokes-duality",
+        "multicell-boundary-cancellation",
+        "macroscopic-grade-sieve"
+      ],
+      "tags": [
+        "极小圆弧体",
+        "克利福德四阶",
+        "霍奇对偶",
+        "斯托克斯",
+        "边界抵消",
+        "宏观分阶"
+      ],
+      "tags_en": [
+        "Minimal arc cell",
+        "Clifford grades",
+        "Hodge duality",
+        "Stokes",
+        "Boundary cancellation",
+        "Macroscopic grading"
+      ],
+      "theory": [
+        {
+          "label": "第三十四章 §34.8 · 极小圆弧体四位一体与多胞抵消",
+          "label_en": "Chapter 34 §34.8 · The minimal Clifford monad and multi-cell cancellation",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-clifford-monad-tiling",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-clifford-monad-tiling"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch"
+        }
+      ]
+    },
+    {
+      "id": "reversal-diagonal-cascade-sandbox",
+      "code": "REVERSAL//CASCADE",
+      "title": "反者道之动：双无限路径切口、来路对角化与概念开维级联",
+      "title_en": "Dual-Infinite Path Cut, Diagonal Escape and Concept Cascade",
+      "summary": "五张实验卡：比较信息注入 I_cmp 让 ℝ⁴ 里的比较锚点逐个溢出新的正交轴（det G₂ = sin²ε、det G₃ = sin⁴ε、det G₄ = sin⁶ε，点 → 线 → 面 → 体）；同位反相的 ψ₊、ψ₋ 在三维读出里留下逃逸对，相位切口 T 使其归零；K × K 来路相位表的对角翻转 Γ_diag[k] = T[k][k] + 2 (mod 4) 仍到达 x，却与每一行在对角格不同；M = span((3, 4)/5) 的整数投影给出 P_M + P_M⊥ = I、P_M P_M⊥ = 0，不可达耦合 κ₋ 从 1 降到 0 时切口与概念一起消融成雾；五个概念的溢出—生成元级联。",
+      "summary_en": "Five experiment cards: comparison information I_cmp makes the comparison anchors in ℝ⁴ overflow into new orthogonal axes one at a time (det G₂ = sin²ε, det G₃ = sin⁴ε, det G₄ = sin⁶ε; point → line → surface → volume); the opposite-phase twins ψ₊, ψ₋ at one locus leave escape pairs in the three-dimensional readouts, and the phase cut T removes them; the diagonal flip Γ_diag[k] = T[k][k] + 2 (mod 4) of a K × K arrival-phase table still reaches x yet differs from every row at its diagonal cell; integer projections for M = span((3, 4)/5) give P_M + P_M⊥ = I and P_M P_M⊥ = 0, and as the unreachable coupling κ₋ falls from 1 to 0 the cut and the concept dissolve into haze together; the overflow-to-generator cascade of five concepts.",
+      "path": "reversal-diagonal-cascade-sandbox/",
+      "thumbnail": "reversal-diagonal-cascade-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.9",
+      "presets": [
+        "gram-overflow-cascade",
+        "time-from-phase-collision",
+        "arrival-diagonal-escape",
+        "reversal-dual-cut",
+        "concept-obstruction-cascade"
+      ],
+      "preset_titles": {
+        "gram-overflow-cascade": {
+          "zh": "比较溢出撑开新轴：点 → 线 → 面 → 体",
+          "en": "Each overflow opens an axis: point → volume"
+        },
+        "time-from-phase-collision": {
+          "zh": "同位反相的两个态相撞，逼出时间轴",
+          "en": "Opposite phases in one place force time"
+        },
+        "arrival-diagonal-escape": {
+          "zh": "列出所有来路，对角翻转仍造出一条新路",
+          "en": "A diagonal flip builds an unlisted way in"
+        },
+        "reversal-dual-cut": {
+          "zh": "反者道之动：两侧之路在切口相遇",
+          "en": "Reversal: both sides meet at the cut"
+        },
+        "concept-obstruction-cascade": {
+          "zh": "每一级的溢出成为下一级的生成元",
+          "en": "Each overflow becomes the next generator"
+        }
+      },
+      "tags": [
+        "反者道之动",
+        "格拉姆阶梯",
+        "相位碰撞",
+        "对角逃逸",
+        "正交补切口"
+      ],
+      "tags_en": [
+        "Reversal",
+        "Gram ladder",
+        "Phase collision",
+        "Diagonal escape",
+        "Orthogonal-complement cut"
+      ],
+      "theory": [
+        {
+          "label": "第三十四章 §34.9 · 反者道之动：来路对角化与概念开维级联",
+          "label_en": "Chapter 34 §34.9 · Reversal: diagonalising the ways in and the concept cascade",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-reversal-diagonal-and-concept-cascade",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-reversal-diagonal-and-concept-cascade"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/DoubleOrthogonalClosure.double_orthogonal_complement_eq_closure"
+        }
+      ]
+    },
+    {
+      "id": "trihedron-rigidity-truss-sandbox",
+      "code": "TRUSS//RIGIDITY",
+      "title": "TRUSS//RIGIDITY · 极小圆弧体三维刚性桁架与 K_N 新旧概念全连通剖分沙盘",
+      "title_en": "TRUSS//RIGIDITY · 3D Trihedron Rigidity Truss and K_N Complete-Graph Triangulation",
+      "summary": "单位比较球面上的 N 个概念：全员两两比较 K_N 把关系剖分成共边的紫色极小弧面体 ΔT_ε，格拉姆表锁死，扰动只成为撑杆上的琥珀应力；砍掉对角比较只剩一圈 C_N，一推就保持边长剪切。E(K_N) − (3N − 6) = (N − 3)(N − 4)/2 只在 N = 3、4 为零，多出的比较落成棱上的角亏。",
+      "summary_en": "N concepts on the unit comparison sphere: comparing all pairs, K_N, splits the relations into edge-sharing violet minimal arc-bodies ΔT_ε, locks the Gram table and turns a push into amber strut stress; cutting the diagonals leaves a ring C_N that shears at a push with every side kept. E(K_N) − (3N − 6) = (N − 3)(N − 4)/2 vanishes only at N = 3, 4; the extra comparisons land as hinge deficits.",
+      "path": "trihedron-rigidity-truss-sandbox/",
+      "thumbnail": "trihedron-rigidity-truss-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.10",
+      "presets": [
+        "complete-graph-triangulation",
+        "downward-irreducibility-lock",
+        "floppy-c4-vs-rigid-k4",
+        "maxwell-laman-polynomial",
+        "regge-curvature-glow"
+      ],
+      "preset_titles": {
+        "complete-graph-triangulation": {
+          "zh": "新概念全员比较：K_N 剖分成共边的极小弧面体 ΔT_ε",
+          "en": "All-Pairs Comparison of a New Concept: K_N Splits into Edge-Sharing Arc-Bodies ΔT_ε"
+        },
+        "downward-irreducibility-lock": {
+          "zh": "向下不可约：det G₃ > 0 的弯曲弧面体压不回平面",
+          "en": "Downward Irreducibility: a Curved Arc-Body with det G₃ > 0 Will Not Flatten"
+        },
+        "floppy-c4-vs-rigid-k4": {
+          "zh": "缺对角的 C₄ 保边长剪切，焊回对角的 K₄ 锁死",
+          "en": "Floppy C₄ Shears with Its Sides Kept; K₄ with Welded Diagonals Locks"
+        },
+        "maxwell-laman-polynomial": {
+          "zh": "ΔE(N) = (N − 3)(N − 4)/2：只在 N = 3、4 恰好刚性",
+          "en": "ΔE(N) = (N − 3)(N − 4)/2: Just Rigid Only at N = 3, 4"
+        },
+        "regge-curvature-glow": {
+          "zh": "K₇ 的六条冗余比较与绕 C₁ 的 7.36° 角亏",
+          "en": "The Six Redundant Comparisons of K₇ and the 7.36° Deficit round C₁"
+        }
+      },
+      "tags": [
+        "刚性桁架",
+        "全连通图",
+        "麦克斯韦计数",
+        "格拉姆刚性",
+        "雷杰角亏"
+      ],
+      "tags_en": [
+        "Rigid truss",
+        "Complete graph",
+        "Maxwell counting",
+        "Gram rigidity",
+        "Regge deficit"
+      ],
+      "theory": [
+        {
+          "label": "LEAN ✓ · 格拉姆刚性 B = UA、纯态布洛赫范数为 1、三锚格拉姆行列式公式与正性判据、FS 角三角不等式、两轴有限字、面圈正合、四面体缺陷修复；八条冻结声明各自支持其陈述。",
+          "label_en": "LEAN ✓ · Gram rigidity B = UA, unit Bloch norm of pure states, the three-anchor Gram determinant formula and positivity criterion, the FS-angle triangle inequality, finite two-axis words, face–cycle exactness and tetrahedral defect repair; each of the eight frozen statements supports its own claim.",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability"
+        },
+        {
+          "label": "ARGUED · 麦克斯韦计数 3N − 6、亨内贝格加点、吉拉尔角超与等边球面三角形 cos A = c/(1 + c)、雷杰角亏 δ = 2π − Σθ 与 2π − 5 arccos(1/3)；文献结果，未在本书形式化。",
+          "label_en": "ARGUED · Maxwell counting 3N − 6, Henneberg vertex addition, Girard excess with cos A = c/(1 + c) for an equilateral spherical triangle, Regge deficit δ = 2π − Σθ and 2π − 5 arccos(1/3); literature results, not formalized in this book.",
+          "href": "https://doi.org/10.1007/BF02733251"
+        },
+        {
+          "label": "NUM · 节点位置、格拉姆表与行列式、球面角与角超、精确保边长的剪切链、对角余弦、欧拉计数与 ZMod 2 标号枚举、立体角上链的四面体缺陷均由页面当场计算。",
+          "label_en": "NUM · Node positions, Gram tables and determinants, spherical angles and excess, the exact side-keeping shear chain, diagonal cosines, the Euler count with the ZMod 2 labelling enumeration and the tetrahedral defects of the solid-angle cochain are computed on the spot.",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability"
+        },
+        {
+          "label": "MODEL · “概念—比较桁架”是作者的诠释；扰动 τ cos 2πt、撑杆应力与雷杰辉光 ΔE·(2π − 5 arccos(1/3)) 是示意量；三维计数把节点当作自由点（贴在球面上时为 2N − 3）。",
+          "label_en": "MODEL · The “concept–comparison truss” is the author's interpretation; the push τ cos 2πt, the strut stress and the Regge glow ΔE·(2π − 5 arccos(1/3)) are schematic; the three-dimensional count treats nodes as free points (2N − 3 when pinned to the sphere).",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-trihedron-rigidity-and-3d-stability"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        }
+      ]
+    },
+    {
+      "id": "quantum-arc-macro-integral-sandbox",
+      "code": "ARC//MACRO",
+      "title": "量子极小圆弧与路径积分宏观缝合",
+      "title_en": "Minimal Quantum Arcs and the Macroscopic Path Integral",
+      "summary": "单位球面上一段极小圆弧比切线多鼓出矢高 1 − cos ε；费曼—伊东步长 ε = Θ/√N 的累计矢高趋于 Θ²/2，牛顿步长 ε = Θ/N 的趋于 0。41 条拱形弧链按相位相加：β = 0 时 ±Ω 成对相消，只剩青色驻相直线；横向相位梯度 β 把它弯成受力轨道，回路 ∮A 等于面通量 ∬F。五张实验卡可独立引用。",
+      "summary_en": "On the unit sphere a minimal arc bulges past its tangent by the sagitta 1 − cos ε. Feynman–Itô steps ε = Θ/√N keep the cumulative sagitta near Θ²/2, while Newton steps ε = Θ/N send it to 0. Forty-one arching arc chains add as phasors: at β = 0 the ±Ω pairs cancel and leave one cyan stationary line; a transverse phase gradient β bends it into a forced orbit, with the loop ∮A equal to the flux ∬F. Five independently citable experiments.",
+      "path": "quantum-arc-macro-integral-sandbox/",
+      "thumbnail": "quantum-arc-macro-integral-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.11",
+      "presets": [
+        "arc-sagitta-ito",
+        "quantum-three-hallmarks",
+        "curve-stitches-straight",
+        "force-from-phase-gradient",
+        "calculus-duality-zoom"
+      ],
+      "tags": [
+        "极小圆弧",
+        "矢高",
+        "伊东二次变差",
+        "驻相路径束",
+        "斯托克斯通量"
+      ],
+      "tags_en": [
+        "Minimal arcs",
+        "Sagitta",
+        "Itô quadratic variation",
+        "Stationary-phase bundles",
+        "Stokes flux"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 · 量子极小圆弧与宏观积分",
+          "label_en": "Chapter 34 · Minimal quantum arcs and the macroscopic integral",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-arc-and-macro-integral",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-arc-and-macro-integral"
+        },
+        {
+          "label": "ARGUED · 费曼 (1948)：路径积分与驻相选路",
+          "label_en": "ARGUED · Feynman (1948): the path integral and stationary-phase selection",
+          "href": "https://doi.org/10.1103/RevModPhys.20.367"
+        },
+        {
+          "label": "ARGUED · 贝里 (1984)：几何相位与曲率通量",
+          "label_en": "ARGUED · Berry (1984): geometric phase and curvature flux",
+          "href": "https://doi.org/10.1098/rspa.1984.0023"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/TrotterProduct.trotter_product"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        }
+      ]
+    },
+    {
+      "id": "triadic-arc-field-loop-sandbox",
+      "code": "TRIAD//LOOP",
+      "title": "一弧生三相：极小圆弧路径积分统合（线·面·体 ↔ 粒子·波·场）与反者道之动回环",
+      "title_en": "One arc begets three phases: minimal-arc path-integral triad (line · surface · volume ↔ particle · wave · field) and reversal loop",
+      "summary": "一条极小圆弧 A → B 在挖去八分角的单位球上生出三相：青色切线世界线与半弦 sin ε（线 Λ¹），品红矢高 1 − cos ε 与球面帽角超 Ω（面 Λ²），紫色扇锥体积 Ω/3、det G₃ 与巴格曼虚部 Im Δ₃（体 Λ³）。拖动琥珀手柄把 ε 拉向 0°，面与体先于线熄灭；回环十二格上三个特征相位在壳外闭成三角形相消，只在 H = {0, 3, 6, 9} 上同向，粒子回到壳上。五张实验卡可独立引用。",
+      "summary_en": "On the unit sphere with one octant cut away, a minimal arc A → B begets three phases: the cyan tangent worldline and half-chord sin ε (line Λ¹), the magenta sagitta 1 − cos ε and cap excess Ω (surface Λ²), and the violet sector volume Ω/3 with det G₃ and the Bargmann imaginary part Im Δ₃ (volume Λ³). Pull the amber handle towards ε = 0° and the surface and volume go out before the line; on the twelve loop sites three character phases close into triangles and cancel off shell, aligning only on H = {0, 3, 6, 9}, where particles return. Five independently citable experiments.",
+      "path": "triadic-arc-field-loop-sandbox/",
+      "thumbnail": "triadic-arc-field-loop-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.12",
+      "presets": [
+        "arc-seed-triad",
+        "line-particle-worldline",
+        "surface-wave-sagitta",
+        "volume-field-condensation",
+        "reversal-field-to-particle"
+      ],
+      "preset_titles": {
+        "arc-seed-triad": {
+          "zh": "一条极小圆弧：三相都还折在弧里",
+          "en": "One Minimal Arc: All Three Phases Still Folded Inside"
+        },
+        "line-particle-worldline": {
+          "zh": "一阶 Λ¹：切线世界线与半弦 sin ε",
+          "en": "Grade One Λ¹: the Tangent Worldline and the Half-Chord sin ε"
+        },
+        "surface-wave-sagitta": {
+          "zh": "二阶 Λ²：矢高 1 − cos ε 与球面帽角超 Ω",
+          "en": "Grade Two Λ²: the Sagitta 1 − cos ε and the Cap Excess Ω"
+        },
+        "volume-field-condensation": {
+          "zh": "三阶 Λ³：扇锥体积 Ω/3、det G₃ 与点亮的场回环",
+          "en": "Grade Three Λ³: Sector Volume Ω/3, det G₃ and the Lit Field Loop"
+        },
+        "reversal-field-to-particle": {
+          "zh": "反者道之动：三相在壳外相消，粒子回到壳上",
+          "en": "Reversal: Three Phases Cancel Off Shell, Particles Return on Shell"
+        }
+      },
+      "tags": [
+        "一弧三相",
+        "线面体",
+        "粒子波场",
+        "特征和相消",
+        "反者道之动"
+      ],
+      "tags_en": [
+        "One arc, three phases",
+        "Line, surface, volume",
+        "Particle, wave, field",
+        "Character-sum cancellation",
+        "Reversal loop"
+      ],
+      "theory": [
+        {
+          "label": "LEAN ✓ · 有限泊松求和与零化子特征和、无理平均趋于哈尔积分、正交补投影恒等式、拉格朗日—格拉姆恒等式、两轴有限字、三锚点格拉姆行列式、三点巴格曼—布洛赫恒等式、单纯二上链修补与精确性；九条冻结声明各自支持页面上对应的实例。",
+          "label_en": "LEAN ✓ · Finite Poisson summation and annihilator character sums, irrational averages tending to the Haar integral, orthogonal-complement projection identities, the Lagrange–Gram identity, finite two-axis words, the three-anchor Gram determinant, the triple Bargmann–Bloch identity, and repair and exactness of simplicial two-cochains; each of the nine frozen statements supports its own instance on the page.",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop"
+        },
+        {
+          "label": "ARGUED · 吉拉尔球面角超、扇锥体积 Ω/3、巴格曼不变量辐角与立体角之半、外代数最高次数 3、路径积分的离壳相消与驻相选路。",
+          "label_en": "ARGUED · Girard spherical excess, the sector volume Ω/3, the Bargmann-invariant argument as half the solid angle, the top degree 3 of the exterior algebra, and off-shell cancellation with stationary-phase selection in path integrals.",
+          "href": "https://doi.org/10.1098/rspa.1984.0023"
+        },
+        {
+          "label": "NUM · 独立计算投影、格拉姆行列式、球面角与角超、2 × 2 复矩阵之积的迹、离散傅里叶变换与特征和、整数上边缘。",
+          "label_en": "NUM · Direct computation of the projections, the Gram determinant, the spherical angles and excess, the trace of a product of 2 × 2 complex matrices, the discrete Fourier transform and character sums, and the integer coboundary.",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop"
+        },
+        {
+          "label": "MODEL · 一弧三相（线 ↔ 粒子、面 ↔ 波、体 ↔ 场）与反者道之动回环是本书的诠释；十二格的摆放、三相着色、缠绕 W 与相消锐度 κ 是画面模型，只有 W = 1、κ = 1 时才是定理中的特征和。",
+          "label_en": "MODEL · One arc, three phases (line ↔ particle, surface ↔ wave, volume ↔ field) and the reversal loop are the interpretation of the book; the twelve-site placement, the phase colouring, the winding W and the cancellation sharpness κ are picture models, and only W = 1 with κ = 1 gives the character sum of the theorems.",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-triadic-duality-and-field-loop"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.finite_poisson_summation"
+        },
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.sum_annihilator_character"
+        },
+        {
+          "gid": "D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        }
+      ]
+    },
+    {
+      "id": "octave-point-volume-field-sandbox",
+      "code": "OCTAVE//FIELD",
+      "title": "点体八度螺旋与粒子—场层级重整化沙盘",
+      "title_en": "Point–volume octave helix and particle–field hierarchical renormalization sandbox",
+      "summary": "一个琥珀色的点撑开三条青线、三块品红面、一块紫色体（1 3 3 1），霍奇星把每条线对到与它垂直的面；体又缩成上一层的一个点，紫色螺旋走满一圈，傅里叶读出不变，层级加一。(ℤ/9ℤ)³ 上 729 格点的精确格林函数从核心长出 21 根黄金角场丝与汤川等值壳，拖动核心整片场一起平移，G(xₚ, x₀) = G(x₀, xₚ)。缀饰云的半径停在堆积半径 1/2，自能保持有限；ℤ/12ℤ 上位置梳与动量梳的加和由泊松求和对齐。",
+      "summary_en": "An amber point opens into three cyan lines, three magenta planes and one violet volume (1 3 3 1), and the Hodge star pairs each line with the plane normal to it; the volume closes into one point a level up, and a full turn of the violet helix leaves the Fourier readout unchanged while the level rises by one. An exact Green function on the 729 sites of (ℤ/9ℤ)³ grows 21 golden-angle filaments and a Yukawa iso-shell from the core; drag the core and the whole field moves with it, with G(xₚ, x₀) = G(x₀, xₚ). The dressing cloud stops at the packing radius 1/2 and the self-energy stays finite; on ℤ/12ℤ the sums over the position comb and the momentum comb agree by Poisson summation.",
+      "path": "octave-point-volume-field-sandbox/",
+      "thumbnail": "octave-point-volume-field-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.13",
+      "presets": [
+        "pascal-hodge-1331",
+        "octave-helix-zoom",
+        "green-yukawa-reciprocity",
+        "dressed-uv-cutoff",
+        "position-momentum-duality"
+      ],
+      "preset_titles": {
+        "pascal-hodge-1331": {
+          "zh": "帕斯卡 1 3 3 1：一点、三线、三面、一体与霍奇对偶",
+          "en": "Pascal 1 3 3 1: One Point, Three Lines, Three Planes, One Volume and Hodge Duality"
+        },
+        "octave-helix-zoom": {
+          "zh": "八度螺旋：走满一圈读出不变，层级加一",
+          "en": "Octave Helix: One Full Turn Keeps the Readout and Raises the Level"
+        },
+        "green-yukawa-reciprocity": {
+          "zh": "格林—汤川场丝与互易 G(x, x₀) = G(x₀, x)",
+          "en": "Green–Yukawa Filaments and Reciprocity G(x, x₀) = G(x₀, x)"
+        },
+        "dressed-uv-cutoff": {
+          "zh": "缀饰紫外截断：半径停在堆积半径 1/2",
+          "en": "Dressed Ultraviolet Cutoff: the Radius Stops at the Packing Radius 1/2"
+        },
+        "position-momentum-duality": {
+          "zh": "位置—动量对偶：ℤ/12ℤ 上的有限泊松求和",
+          "en": "Position–Momentum Duality: Finite Poisson Summation on ℤ/12ℤ"
+        }
+      },
+      "tags": [
+        "八度螺旋",
+        "霍奇对偶",
+        "格林函数",
+        "汤川屏蔽",
+        "泊松求和"
+      ],
+      "tags_en": [
+        "Octave helix",
+        "Hodge duality",
+        "Green function",
+        "Yukawa screening",
+        "Poisson summation"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 · 点体八度与粒子—场层级",
+          "label_en": "Chapter 34 · Point–volume octave and the particle–field hierarchy",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field"
+        },
+        {
+          "label": "LEAN ✓ · 单位记录内积、三向量格拉姆展开、三点巴格曼—布洛赫恒等式、正交补投影、记录捏合幂等、黄金螺旋傅里叶读出与层级联合读出、有限泊松求和与零化子特征和、黄金模型集德洛内；十条冻结声明各自支持其陈述。",
+          "label_en": "LEAN ✓ · Unit-record overlap, the three-vector Gram expansion, the triple Bargmann–Bloch identity, orthogonal-complement projections, record pinching idempotence, the golden helix Fourier readout and the joint level readout, finite Poisson summation and annihilator character sums, and the golden model set Delone property; each of the ten frozen statements supports its own claim.",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field"
+        },
+        {
+          "label": "ARGUED · 汤川型格林函数与连续极限 e^{−mr}/(4πr)（文献结果，未在本书形式化）",
+          "label_en": "ARGUED · Yukawa-type Green function with continuum limit e^{−mr}/(4πr) (literature result, not formalized in this book)",
+          "href": "https://doi.org/10.11429/ppmsj1919.17.0_48"
+        },
+        {
+          "label": "MODEL · 八度坐标与螺旋位置 s = (z + 1)/4、层级重整化诠释、黄金角场丝、红外底 μ² = 1/81、缀饰半径以堆积半径 1/2 为底、探针到子群 H 的取法。",
+          "label_en": "MODEL · The octave coordinate on the helix s = (z + 1)/4, the hierarchical renormalization reading, golden-angle filaments, the infrared floor μ² = 1/81, the dressing radius floored at the packing radius 1/2, and the choice of the subgroup H from the probe.",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_fourier_readout_step"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.level_fourier_joint_readout_detects_step"
+        },
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.finite_poisson_summation"
+        },
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.sum_annihilator_character"
+        },
+        {
+          "gid": "D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone"
+        }
+      ]
+    },
+    {
+      "id": "lorentz-pseudoscalar-sm-octave-sandbox",
+      "code": "LORENTZ//OCTAVE",
+      "title": "洛伦兹伪标量与标准模型八度沙盘",
+      "title_en": "Lorentz Pseudoscalar and Standard-Model Octave Sandbox",
+      "summary": "立方体一角上的点、三条青线、三个品红面与紫色的体：维数 1·3·3·1 合为 8；体 I₃ 把线送进正交面再送回反向，I₃² = −1，正是洛伦兹度规的负号。预算穹顶半径 c dt，空间位移 dx 用去 β，余下的驻波高度就是固有时 c dτ，β = 1 时为零。三色楔成体 det G₃ = 1，体再封成质子新点，π 介子汤川场按 (1 + r/λ)e^{−r/λ} 屏蔽。五张实验卡可独立引用。",
+      "summary_en": "The point, three cyan lines, three magenta planes and the violet volume through one corner of a cube: dimensions 1·3·3·1, eight in all. The volume I₃ sends a line into its orthogonal plane and back reversed, I₃² = −1, the minus sign of the Lorentz metric. The budget dome has radius c dt: the drift dx spends β and the height of the standing wave that remains is the proper time c dτ, zero at β = 1. Three colours wedge into a volume with det G₃ = 1, which seals into the proton as a new point; the pion's Yukawa field is screened as (1 + r/λ)e^{−r/λ}. Five independently citable experiments.",
+      "path": "lorentz-pseudoscalar-sm-octave-sandbox/",
+      "thumbnail": "lorentz-pseudoscalar-sm-octave-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.14",
+      "presets": [
+        "pseudoscalar-minus-sign",
+        "proper-time-budget-cone",
+        "sm-123-gauge-grades",
+        "color-confinement-baryon",
+        "pion-yukawa-octave-handoff"
+      ],
+      "preset_titles": {
+        "pseudoscalar-minus-sign": {
+          "zh": "三维体闭合伪标量 I₃² = −1 与洛伦兹负号",
+          "en": "3D Volume Pseudoscalar I₃² = −1 and the Lorentz Minus Sign"
+        },
+        "proper-time-budget-cone": {
+          "zh": "空间路径预算消长 (c dτ)² = c²dt² − dx²",
+          "en": "Spatial Path Budget and Proper-Time Remainder"
+        },
+        "sm-123-gauge-grades": {
+          "zh": "标准模型 U(1)×SU(2)×SU(3) 与点·线·面·体四阶本相",
+          "en": "SM 1—2—3 Gauge Ceiling and the Grades Λ⁰…Λ³"
+        },
+        "color-confinement-baryon": {
+          "zh": "1—3—3—1 色禁闭祛魅：三色楔积成体归点",
+          "en": "1—3—3—1 Colour Confinement: a Three-Colour Wedge Singlet"
+        },
+        "pion-yukawa-octave-handoff": {
+          "zh": "跨层粒子—场接力：质子新点与 π 介子汤川核力场",
+          "en": "Cross-Level Relay: Proton Point and Pion Yukawa Field"
+        }
+      },
+      "tags": [
+        "洛伦兹负号",
+        "伪标量",
+        "固有时预算",
+        "外代数 1·3·3·1",
+        "色单态",
+        "汤川场"
+      ],
+      "tags_en": [
+        "Lorentz minus sign",
+        "Pseudoscalar",
+        "Proper-time budget",
+        "Exterior algebra 1·3·3·1",
+        "Colour singlet",
+        "Yukawa field"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.14 · 洛伦兹伪标量与标准模型八度",
+          "label_en": "Chapter 34 §34.14 · Lorentz pseudoscalar and the Standard-Model octave",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-lorentz-pseudoscalar-and-sm-octave",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-lorentz-pseudoscalar-and-sm-octave"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/FiniteDimensional.qubit_weyl_star"
+        },
+        {
+          "gid": "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core"
+        },
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR"
+        },
+        {
+          "gid": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_anticomm_of_lt"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.finite_poisson_summation"
+        }
+      ]
+    },
+    {
+      "id": "quantum-gate-cosmic-tower-sandbox",
+      "code": "GATE//TOWER",
+      "title": "量子门极小圆弧体与六层宇宙概念塔",
+      "title_en": "Quantum-Gate Minimal-Arc Trihedron & Six-Tier Cosmic Concept Tower",
+      "summary": "两扇正交的极小量子门 U_x(ε)、U_y(ε) 从北极走 U_y、U_x、U_y†、U_x† 四段弧合不拢：换位子 C 的迹 tr C/2 = 1 − 2 sin⁴(ε/2) 由 2 × 2 复矩阵当场乘出，C 绕残余转轴转 Φ，½Φ 与门弧围出的直角球面三角形 ΔT_ε 的角超 Ω = 2 arctan(tan²(ε/2)) 在小 ε 时都趋于 ε²/2。纠缠门把 |00⟩ 推离实振幅切片里的 Segre 乘积态环面，共生度 |sin η|、CHSH 最大值 2√(1 + sin²η)。六层宇宙概念塔 L0–L5 每层按 1—3—3—1 四拍走完，体收成上一层的点；双透镜把各层的物理外衣褪成同一块三面角；顶层沿莫比乌斯带 4π 回到比较原语。五张实验卡可单独引用。",
+      "summary_en": "Two orthogonal minimal gates U_x(ε), U_y(ε) walked U_y, U_x, U_y†, U_x† from the north pole do not close: the trace tr C/2 = 1 − 2 sin⁴(ε/2) of the commutator C is multiplied out from 2 × 2 complex matrices, C turns by Φ about a residual axis, and ½Φ and the excess Ω = 2 arctan(tan²(ε/2)) of the right spherical triangle ΔT_ε bounded by the gate arcs both tend to ε²/2 for small ε. An entangling gate pushes |00⟩ off the Segre torus of product states in the real-amplitude slice, with concurrence |sin η| and CHSH maximum 2√(1 + sin²η). Every tier of the six-tier cosmic concept tower L0–L5 runs the 1—3—3—1 four beats and its volume closes into the next point; the dual lens strips the physics costume of each tier down to one trihedron; the top returns along a Möbius band after 4π to the comparison primitive. Five experiment cards can be cited on their own.",
+      "path": "quantum-gate-cosmic-tower-sandbox/",
+      "thumbnail": "quantum-gate-cosmic-tower-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.15",
+      "presets": [
+        "gate-commutator-trihedron",
+        "entangling-segre-escape",
+        "octave-1331-grammar",
+        "six-tier-cosmic-tower",
+        "mobius-ouroboros-closure"
+      ],
+      "preset_titles": {
+        "gate-commutator-trihedron": {
+          "zh": "正交双门换位角盈 U_x† U_y† U_x U_y 与极小圆弧体",
+          "en": "Orthogonal Gate Commutator & Minimal-Arc Trihedron"
+        },
+        "entangling-segre-escape": {
+          "zh": "双比特纠缠门“二生三”偏离 Segre 流形",
+          "en": "2-Qubit Entangling Gate & Segre Wedge Escape"
+        },
+        "octave-1331-grammar": {
+          "zh": "通用四拍语法：点·线·面·体 ↔ 粒子·波·场",
+          "en": "Universal 1—3—3—1 Four-Beat Octave Grammar"
+        },
+        "six-tier-cosmic-tower": {
+          "zh": "自底向上六层宇宙概念塔（L0..L5）与双透镜剥衣",
+          "en": "Six-Tier Cosmic Tower (L0..L5) & Dual-Lens Unmasking"
+        },
+        "mobius-ouroboros-closure": {
+          "zh": "顶层 4π 单侧莫比乌斯闭合回环 L5 ↺ L0 CMP",
+          "en": "4π Möbius Ouroboros Return (L5 ↺ L0 CMP)"
+        }
+      },
+      "tags": [
+        "量子门",
+        "换位子",
+        "极小圆弧体",
+        "Segre 流形",
+        "1—3—3—1 四拍",
+        "莫比乌斯 4π"
+      ],
+      "tags_en": [
+        "Quantum gate",
+        "Commutator",
+        "Minimal-arc trihedron",
+        "Segre variety",
+        "1—3—3—1 four beats",
+        "Möbius 4π"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.15 · 量子门与宇宙概念塔",
+          "label_en": "Chapter 34 §34.15 · The quantum gate and the cosmic concept tower",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-gate-and-cosmic-concept-tower",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-gate-and-cosmic-concept-tower"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/FiniteDimensional.qubit_weyl_star"
+        },
+        {
+          "gid": "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.finite_poisson_summation"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        }
+      ]
+    },
+    {
+      "id": "coset-breaking-conservation-tower-sandbox",
+      "code": "COSET//TOWER",
+      "title": "COSET//TOWER · 破缺—守恒陪集概念塔：墨西哥帽真空槽、勾股拆账、希格斯 2 + 1 = 3 与五塔接力",
+      "title_en": "COSET//TOWER · Breaking–Conservation Coset Towers: Mexican-Hat Trough, Pythagorean Split, Higgs 2 + 1 = 3 and a Five-Tower Relay",
+      "summary": "墨西哥帽势 V(Φ) = λ(|Φ|² − η²)² 画成受光的实体碗，琥珀锚点 v₀ 钉在真空槽上：η_SSB → 0 时槽合拢、塔塌成一点。五个概念塔家族各在锚点上立起自己的结构——嘉当—CCWZ 三面角 ΔT_ε 的勾股拆账 cos²ε + sin²ε = 1 与角超 Ω、戈德斯通波与安德森—希格斯 2 + 1 = 3 质量核、B = 1 的 Skyrmion 刺猬、帽顶上的超导磁通涡旋 Φ₀ = h/2e 与晶格声子、dim G = dim H + dim G/H 的五塔接力与不动点 θ*。五张实验卡可独立引用。",
+      "summary_en": "The Mexican-hat potential V(Φ) = λ(|Φ|² − η²)² as a lit solid bowl with an amber anchor v₀ pinned in its vacuum trough: as η_SSB → 0 the trough closes and the tower collapses to a point. Each of five tower families raises its own structure on the anchor — the Cartan–CCWZ trihedron ΔT_ε with the Pythagorean split cos²ε + sin²ε = 1 and its excess Ω, the Goldstone wave and the Anderson–Higgs 2 + 1 = 3 massive core, the B = 1 Skyrmion hedgehog, the superconducting flux vortex Φ₀ = h/2e on the hilltop with a lattice phonon, and the relay of five towers dim G = dim H + dim G/H with the fixed point θ*. Five independently citable experiments.",
+      "path": "coset-breaking-conservation-tower-sandbox/",
+      "thumbnail": "coset-breaking-conservation-tower-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-15",
+      "chapter": 34,
+      "section": "34.16",
+      "presets": [
+        "pythagorean-coset-ledger",
+        "goldstone-vs-higgs-closure",
+        "skyrmion-baryon-winding",
+        "superconductor-crystal-meissner",
+        "five-family-cascade-relay"
+      ],
+      "preset_titles": {
+        "pythagorean-coset-ledger": {
+          "zh": "破缺—守恒勾股拆账与嘉当曲率 Fⁱ = −½ fⁱ_ab eᵃ∧eᵇ",
+          "en": "Coset Pythagorean Split & Cartan–CCWZ Curvature"
+        },
+        "goldstone-vs-higgs-closure": {
+          "zh": "无质量戈德斯通流 vs 安德森—希格斯 2 + 1 = 3 吞弧成体",
+          "en": "Massless Goldstone Flow vs Anderson–Higgs 2 + 1 = 3 Volume"
+        },
+        "skyrmion-baryon-winding": {
+          "zh": "强核手征破缺与 Skyrmion 三维同伦绕数 π₃ = ℤ",
+          "en": "Chiral WZW Arc & Skyrmion π₃ Baryon Winding"
+        },
+        "superconductor-crystal-meissner": {
+          "zh": "超导磁通涡旋 Φ₀ = h/2e 与晶体声子塔",
+          "en": "Superconducting Vortex Φ₀ & Crystal Phonon Tower"
+        },
+        "five-family-cascade-relay": {
+          "zh": "宇宙五大“破缺—守恒概念塔”跨塔接力谱系",
+          "en": "Five-Family Breaking–Conservation Tower Relay"
+        }
+      },
+      "tags": [
+        "陪集 G/H",
+        "墨西哥帽",
+        "嘉当—CCWZ 曲率",
+        "希格斯机制",
+        "Skyrmion",
+        "磁通量子"
+      ],
+      "tags_en": [
+        "Coset G/H",
+        "Mexican hat",
+        "Cartan–CCWZ curvature",
+        "Higgs mechanism",
+        "Skyrmion",
+        "Flux quantum"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.16 · 破缺—守恒陪集概念塔",
+          "label_en": "Chapter 34 §34.16 · Breaking–conservation coset towers",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-coset-breaking-conservation-towers",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-coset-breaking-conservation-towers"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
+        },
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.finite_poisson_summation"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
+        }
+      ]
+    },
+    {
       "id": "uncompleted-horizon-sandbox",
       "code": "HORIZON//UNCOMPLETED",
       "title": "未完成的地平线 · 对角逃逸与二生三自举",

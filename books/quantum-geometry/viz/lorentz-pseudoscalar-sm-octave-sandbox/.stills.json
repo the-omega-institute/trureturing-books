@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "images": {
+    "cover": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "828bfeeaeccaeb7a9ab7f2cc1baad6dbc6307a2184d1986f28ae060f9c56e3f0"
+    },
+    "fig-pseudoscalar-minus-sign.zh.jpg": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "c1d5ab59cfb0db4ee4eba6270132d44f06b146c572d6f5bdc86f52863187c5c1"
+    },
+    "fig-proper-time-budget-cone.zh.jpg": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "83e0bc0cbbd99b9d22494985c5d942cce1fe997c120fd34d49fcd95f6e23636b"
+    },
+    "fig-sm-123-gauge-grades.zh.jpg": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "6a07249a19c6754431ac62d9c695e4c1354c1b10fb770eb1d51e0d61878c9cc5"
+    },
+    "fig-color-confinement-baryon.zh.jpg": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "ed52d2f0c6c698d30bb4baa836dc6e1f18e85b66cc68867e4842ebaa5883b459"
+    },
+    "fig-pion-yukawa-octave-handoff.zh.jpg": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "593934fc93c6f7a2feef102acbc4f9a5cece6fa9b256ae45419b140773a71d38"
+    },
+    "fig-pseudoscalar-minus-sign.en.jpg": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "56aa56555812ccab3a23dd3154fdbc50dd9b7a64174905ae983b9d45b5821d45"
+    },
+    "fig-proper-time-budget-cone.en.jpg": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "593c56f191718a1252c7da8d0b2fb76ee777a41b8a1410ac5f2e83720d5f4e41"
+    },
+    "fig-sm-123-gauge-grades.en.jpg": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "13c3c2902d739f4242b937a36261349ae9b1e7abb7f0d436c211ff88a1619da5"
+    },
+    "fig-color-confinement-baryon.en.jpg": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "7ec35999d9123b073ea64fd76e936b37b675fa5fb112991469d1b23329317c8a"
+    },
+    "fig-pion-yukawa-octave-handoff.en.jpg": {
+      "input": "a9c08b801dc75956058c9f08769a4aa6b776355ac323239f34fd8ee6277bd9eb",
+      "output": "c2abaabf56a176ffe92b66812ab91e02a46c99ebf7f446ffbc060ba22b32f185"
+    }
+  }
+}

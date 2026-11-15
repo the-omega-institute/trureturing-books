@@ -1,0 +1,51 @@
+/* OCTAVE//FIELD: the shared three-column lab (../assets/theme.css) carries the page. Only what belongs to this page
+   lives here: the pointer on the solid, the core handle, the book's colour rule (amber only for the current grade and
+   the handle), violet readouts, math kept out of uppercase, and the lens buttons on narrow stages. Colours come from
+   the tokens (var(--cyan) …), never from literal colour values. */
+.stage:not(.still) #cv { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active { cursor: grabbing; }
+#stage { container-type: inline-size; }
+
+/* the book's colour rule: the tagline and the drawer's bold leads are not "now" */
+.tagline em, .sheet b { color: var(--cyan); }
+dl.ro .v dd { color: var(--violet); }
+
+/* math never goes through an uppercase transform (ℓ, Λ, χ keep their shape) */
+.stage .tag { text-transform: none; white-space: nowrap; }
+.stage .tag.backed { border-radius: 999px; padding: 2px 9px; background: var(--sheet); border: 1px solid var(--panel-edge); text-shadow: none; }
+.hud-tl .big, .hud-tl .sub, #plotTitle, #plotMeta, .tau { text-transform: none; }
+.chip .m { text-transform: none; letter-spacing: 0.02em; font-family: var(--font-data); }
+#zoomJumps { display: flex; flex-wrap: wrap; gap: 4px; margin: 2px 0 12px; }
+#zoomJumps .chip { text-transform: none; letter-spacing: 0.02em; padding: 3px 7px; font-size: 10.5px; }
+#plot { cursor: crosshair; touch-action: none; }
+
+/* legend swatches that the theme does not have */
+.sw.ink { background: var(--sigma); }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--sigma) 0 4px, transparent 4px 7px); }
+.sw.ring { width: 10px; height: 10px; border-radius: 50%; background: none; border: 2px solid var(--amber); }
+.sw.ring.drag { border-style: dashed; }
+
+/* the core handle: an amber ring that sits on the projected core x₀ (main.js moves it); it is the drag entry */
+.core-handle {
+  position: absolute; left: 0; top: 0; width: 26px; height: 26px; margin: -13px 0 0 -13px; padding: 0;
+  border: 2px dashed var(--amber); border-radius: 50%; background: none; cursor: grab; touch-action: none; z-index: 2;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--amber) 45%, transparent);
+}
+.core-handle.dragging { cursor: grabbing; border-style: solid; }
+.core-handle:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.core-handle[hidden] { display: none; }
+
+/* lens buttons: on a narrow stage they move under the title (shell.js stacks the title when they meet) */
+@container (max-width: 620px) {
+  .hud-tr { left: 12px; right: 12px; max-width: none; gap: 3px; justify-content: flex-start; }
+  .hud-tr .chip { padding: 3px 6px; font-size: 9.5px; letter-spacing: 0.03em; }
+  .hud-tl { left: 12px; max-width: calc(100% - 24px); }
+  .hud-tl .big { font-size: 12px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.35; }
+  .hud-bl { left: 12px; right: 12px; bottom: 9px; gap: 3px 10px; font-size: 10px; }
+  .stage .tag { font-size: 10px; }
+  .core-handle { width: 22px; height: 22px; margin: -11px 0 0 -11px; }
+}
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 65vh)) auto auto; }
+}

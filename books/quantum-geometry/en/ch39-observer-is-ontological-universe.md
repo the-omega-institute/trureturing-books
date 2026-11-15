@@ -917,6 +917,31 @@ $$
 
 Sums over empty index sets are $0$ and products are the identity, so there are no windows when $N<K$. The diagonal projector $C_i$ does not depend on the central bit and commutes with $X_i$. It examines only sites within distance $K-1$ of $i$: each $h_i$ is supported on at most $2K-1$ consecutive sites, truncated at the boundary, while each $B_a$ acts on $K$ sites. For $K=2$, $C_i$ is the product of vacancy projectors at the neighbors that lie within the chain.
 
+**First expand in the full word basis.** Write $\Omega_N=\{0,1\}^N$, number sites from $1$ to $N$, and let $\sigma_iw$ flip only bit $i$. The diagonal entry of the original control projector is
+
+$$
+\begin{aligned}
+c_i(w)&:=\langle w|C_i|w\rangle\\
+&=\prod_{a\in\mathcal W_i}
+\left(1-\prod_{\substack{a\le j<a+K\\j\ne i}}w_j\right)\in\{0,1\},\\
+c_i(\sigma_iw)&=c_i(w),\qquad \sigma_i^2w=w.
+\end{aligned}
+$$
+
+No factor reads $w_i$, so the last two identities hold for every full word, including illegal words. With row $v$ and column $w$, the permutation matrix of $X_i$ has entry $\langle v|X_i|w\rangle=\delta_{v,\sigma_iw}$. Insert resolutions of the identity in the full word basis to expand the operator product already defined above:
+
+$$
+\begin{aligned}
+\langle v|h_i|w\rangle
+&=\sum_{r,s\in\Omega_N}
+\langle v|C_i|r\rangle\langle r|I-X_i|s\rangle
+\langle s|C_i|w\rangle\\
+&=c_i(v)\bigl(\delta_{v,w}-\delta_{v,\sigma_iw}\bigr)c_i(w).
+\end{aligned}
+$$
+
+If $c_i(w)=1$, every full window containing $i$ has a zero away from the center, and that zero remains after the flip. All other windows are unchanged. Thus $w\in W_N$ if and only if $\sigma_iw\in W_N$, without any initial legality assumption. Enabled flips therefore preserve both the legal and illegal sectors. An enabled control does not certify global legality: take $K=2,N=4,w=1100,i=4$. The only window containing the center, $[3,4]$, passes the test because site $3$ is zero, so $c_4(1100)=1$; nevertheless, both $1100$ and $1101$ retain the forbidden window $[1,2]=11$. The local term $h_4$ still has diagonal entries $1$ and flip entries $-1$ on this illegal pair.
+
 **How does the energy recognize legal words?** Fix a configuration $\eta$ outside site $i$, and write $\eta0,\eta1$ for the two words obtained by inserting the central bit at site $i$. Then $C_i(\eta)=1$ exactly when setting that bit to $1$ creates no forbidden window containing $i$. On this two-dimensional block, $h_i$ is
 
 $$
@@ -967,6 +992,17 @@ F_i(\eta)&=\{w\in W_N:w_{-i}=\eta\},\\
 \end{aligned}
 $$
 
+Here the exterior fixes all $N-1$ bits other than bit $i$. For a legal word $w$, denote this actual completion fiber also by
+
+$$
+\begin{aligned}
+A_i(w)&:=F_i(w_{-i})\\
+&=\{u\in W_N:u_j=w_j\ \forall j\ne i\}.
+\end{aligned}
+$$
+
+A Boolean word with the same exterior can only be $w$ or $\sigma_iw$. If $c_i(w)=1$, the parent example's equivalence of legality puts both in $W_N$. Their bits at site $i$ differ, so $A_i(w)=\{w,\sigma_iw\}$ has cardinality exactly $2$. If $c_i(w)=0$, some full window containing $i$ has all its other bits equal to $1$. Legality of $w$ forces $w_i=0$, and flipping it to $1$ violates that window. Thus $A_i(w)=\{w\}$ has cardinality exactly $1$. This identifies the actual fibers using the original control condition.
+
 This is conditional expectation given $\mathrm{outside}_i$. Setting any bit of a legal word to zero preserves legality, so each nonempty fiber is either $\{\eta0,\eta1\}$ or the forced-zero singleton $\{\eta0\}$; the central bit is inserted at site $i$. On a two-word fiber $C_i=1$, while on a forced-zero singleton $C_i=0$. The corresponding matrices are therefore
 
 $$
@@ -977,6 +1013,41 @@ h_i&=\begin{pmatrix}1&-1\\-1&1\end{pmatrix}=2(I-E_i),
 $$
 
 where the last equality uses the identification of function values with legal basis amplitudes. On a singleton $E_i=I$, and both sides vanish.
+
+**Check the factor two entry by entry.** Define the refresh kernel on legal words, with row $v$ the current word and column $w$ the refreshed word. The uniform law $\pi$ gives
+
+$$
+\begin{aligned}
+T_i(v,w)&=\frac{\mathbf1_{\{w\in A_i(v)\}}}{|A_i(v)|},\\
+(E_if)(v)&=\sum_{w\in W_N}T_i(v,w)f(w),\\
+\sum_{w\in W_N}T_i(v,w)&=1.
+\end{aligned}
+$$
+
+When the control is enabled, each of the two words in the fiber has mass $1/2$, including a probability $1/2$ of drawing the current word again. When it is disabled, only $T_i(v,v)=1$ is nonzero. Words in the same fiber have the same $A_i$, so $T_i(v,w)=T_i(w,v)$. Operator rows and columns, by contrast, index output and input amplitudes. To compare that array with the refresh kernel acting on functions here, the flip involution gives $\delta_{v,\sigma_iw}=\delta_{w,\sigma_iv}$, while control invariance gives $c_i(\sigma_iv)=c_i(v)$.
+
+Now take legal $v,w$. On the diagonal, the original product has entry $c_i(v)^2=c_i(v)$: this is $2(1-1/2)=1$ when enabled and $2(1-1)=0$ when disabled. If $w=\sigma_iv$, legality of both words forces the control to be enabled, since otherwise the window just described would exclude one of them. The product entry is then $-1=2(0-1/2)$. If the words are neither equal nor related by this flip, both the product entry and refresh mass vanish. Hence, in the same legal word basis,
+
+$$
+\langle v|h_i|w\rangle
+=2\bigl(\delta_{v,w}-T_i(v,w)\bigr)
+\qquad(v,w\in W_N).
+$$
+
+Each legal word in $W_N\subseteq\Omega_N$ still labels its original full word basis vector; equality and the Kronecker symbols are unchanged. This is precisely the restricted-space meaning of $h_i=2(I-E_i)$ above. The domain of $T_i$ consists of legal words, so this stochastic kernel identity does not directly extend to the native operator on illegal words.
+
+For example, take $K=N=2$ and $i=2$. In legal basis order $(00,01,10)$, the actual fibers are $\{00,01\}$ and $\{10\}$, giving
+
+$$
+\begin{aligned}
+T_2&=\begin{pmatrix}1/2&1/2&0\\1/2&1/2&0\\0&0&1\end{pmatrix},\\
+h_2|_{\mathcal H_{\mathrm{legal}}}
+&=\begin{pmatrix}1&-1&0\\-1&1&0\\0&0&0\end{pmatrix}
+=2(I-T_2).
+\end{aligned}
+$$
+
+The three row sums are $1/2+1/2=1$, $1/2+1/2=1$, and $1=1$. Site $1$ similarly connects $00$ with $10$. Adding the two local matrices and restoring penalty $1$ on the illegal basis vector $11$ gives exactly the parent example's original full $H_{2,2}$, still with spectrum $0,1,1,3$. For $N<K$, every $c_i=1$ and every actual single-site fiber has two words. For $N=0$, there are no sites or site entries, and this calculation makes no excited-gap assertion.
 
 Give each site an independent Poisson clock of rate $1$. When its clock rings, resample that bit from the conditional law above, allowing the old value to be drawn again. The continuous-time generator of this heat-bath chain, acting on functions, is
 
@@ -1022,7 +1093,28 @@ $$
 Uf=z^{-1/2}\sum_{w\in W_N}f(w)|w\rangle.
 $$
 
-The inner-product formula shows that $U:L^2(\pi)\to\mathcal H_{\mathrm{legal}}$ preserves inner products and is onto, hence unitary. Penalties vanish on the legal space, so the fiberwise matrix identity gives
+To read this correspondence in the reverse direction for native complex amplitudes, write $Z=z=z_N$, so $\pi(w)=1/Z$. Any legally supported vector $|\psi_L\rangle=\sum_{w\in W_N}a_w|w\rangle$ has the explicit inverse image
+
+$$
+(U^{-1}\psi_L)(w)=f(w)=\sqrt Z\,a_w.
+$$
+
+For another legally supported vector $|\phi_L\rangle=\sum_{w\in W_N}b_w|w\rangle$, put $g(w)=\sqrt Z\,b_w$. The pairing, conjugate-linear in its first argument, and the norm satisfy
+
+$$
+\begin{aligned}
+\langle f,g\rangle_\pi
+&=\frac1Z\sum_{w\in W_N}
+\overline{\sqrt Z\,a_w}\sqrt Z\,b_w\\
+&=\sum_{w\in W_N}\overline{a_w}b_w
+=\langle\psi_L,\phi_L\rangle,\\
+\|f\|_\pi^2
+&=\frac1Z\sum_{w\in W_N}|\sqrt Z\,a_w|^2
+=\|\psi_L\|^2.
+\end{aligned}
+$$
+
+All sums are finite and $Z>0$, so arbitrary legal complex amplitudes have a unique inverse image without further integrability or normalization assumptions. Thus $U:L^2(\pi)\to\mathcal H_{\mathrm{legal}}$ preserves inner products and is onto, hence unitary. Penalties vanish on the legal space, so the fiberwise matrix identity gives
 
 $$
 \begin{aligned}
@@ -1036,7 +1128,26 @@ U1&=|\Psi_{K,N}\rangle,\\
 \end{aligned}
 $$
 
-Mean zero thus corresponds exactly to orthogonality to the ground state, and variance is the squared norm after removing the ground-state component.
+For these native amplitudes, set $\beta=\langle\Psi_{K,N}|\psi_L\rangle$. The finite mean and variance formulas become
+
+$$
+\begin{aligned}
+\pi f&=\frac1Z\sum_{w\in W_N}\sqrt Z\,a_w
+=\beta,\\
+\operatorname{Var}_\pi(f)
+&=\|f\|_\pi^2-|\pi f|^2\\
+&=\|\psi_L\|^2-|\beta|^2
+=\|\psi_L-\beta\Psi_{K,N}\|^2.
+\end{aligned}
+$$
+
+Mean zero therefore corresponds exactly to orthogonality to the ground state. Writing $Q(A,\phi)=\langle\phi,A\phi\rangle$ for the quadratic form of a native self-adjoint operator, we also have, site by site,
+
+$$
+Q(h_i,\psi_L)=2\|f-E_if\|_\pi^2.
+$$
+
+Summing over sites recovers the total-energy identity above, $Q(H_{K,N},\psi_L)=2\mathcal E(f,f)$; every $B_a$ has zero quadratic form on legal support. The coefficient $2$ continues to correspond to clocks of rate $1$ per site.
 
 **Why does the legal-space gap suffice?** Clearing one $1$ at a time connects every legal word to the all-zero word, so the legal flip graph is connected. Since $N\ge1$ and $K\ge2$, both the all-zero word and the word with only its first bit equal to $1$ are vertices. The edge energy therefore vanishes exactly on constant functions. The first positive eigenvalue $\lambda_{K,N}$ of $-L$ exists and satisfies
 
@@ -1458,7 +1569,44 @@ $$
 
 Combine this with the block variance bound to obtain the stated Poincaré inequality and $\lambda_{K,N}\ge C_K^{-1}$. The full-space spectral comparison in [@ex-ch39-p2e-heatbath-scale] then gives $\Delta_{K,N}\ge2/C_K$, since $2/C_K<1$ for $K\ge2$. For example, $K=2$ gives $1/36$, and $K=3$ gives $1/400$. The empty chain $N=0$ still has no excited gap; the exact gap for a short chain $1\le N<K$ remains $2$.
 
-This establishes a gap uniform in chain length for the specified local parent at fixed $K$. Physical identification with an experimental Rydberg or anyon Hamiltonian, and correspondence with Rauzy-boundary dimension, remain separate questions.
+**From the gap to an energy estimate for arbitrary amplitudes.** Fix $K\ge2,N\ge1$ and abbreviate $H=H_{K,N}$, $\Psi=\Psi_{K,N}$. Any complex vector $|\psi\rangle=\sum_{w\in\Omega_N}a_w|w\rangle$ in the full Boolean-word space splits according to the actual legal and illegal words as
+
+$$
+\begin{aligned}
+\psi&=\psi_L+\psi_I,\\
+|\psi_L\rangle&=\sum_{w\in W_N}a_w|w\rangle,\\
+|\psi_I\rangle&=\sum_{w\in\Omega_N\setminus W_N}a_w|w\rangle,\\
+\beta&=\langle\Psi|\psi\rangle
+=\langle\Psi|\psi_L\rangle.
+\end{aligned}
+$$
+
+Take the inverse image from the preceding example, $f(w)=\sqrt Z\,a_w$, with $Z=|W_N|$. The normalization and energy identities checked above, followed by this example's Poincaré bound for the actual chain, give
+
+$$
+\begin{aligned}
+\pi f&=\beta,\\
+\operatorname{Var}_\pi(f)&=\|\psi_L\|^2-|\beta|^2,\\
+Q(H,\psi_L)&=2\mathcal E(f,f)\\
+&\ge\frac2{C_K}
+\bigl(\|\psi_L\|^2-|\beta|^2\bigr).
+\end{aligned}
+$$
+
+The parent example's matrix-entry expansion gives zero entries between the legal and illegal sectors, so their cross energy vanishes. The preceding example's illegal-penalty estimate gives $Q(H,\psi_I)\ge\|\psi_I\|^2$. Since $C_K=(2K-1)^2 2^{2K-1}\ge72$, set $c_K=2/C_K\le1$ and combine these estimates:
+
+$$
+\begin{aligned}
+Q(H,\psi)&=Q(H,\psi_L)+Q(H,\psi_I)\\
+&\ge c_K\bigl(\|\psi_L\|^2-|\beta|^2\bigr)
++\|\psi_I\|^2\\
+&\ge c_K\bigl(\|\psi\|^2-|\langle\Psi|\psi\rangle|^2\bigr).
+\end{aligned}
+$$
+
+This is the native operator inequality $H\ge c_K(I-|\Psi\rangle\langle\Psi|)$ in the sense of quadratic forms. The vector need be neither normalized nor orthogonal to the ground state; for $\|\psi\|=1$, the residual on the right is $1-|\langle\Psi|\psi\rangle|^2$. When $1\le N<K$, every word is legal and $\psi_I=0$, so the same derivation applies. At $N=0$ there is only the one-dimensional vacuum: both energy and the residual after removing the ground-state component vanish, giving no excited-gap claim.
+
+This explicitly applies the derived gap, uniform in chain length at fixed $K$, to an arbitrary-state energy estimate. It remains an application of the paper derivation above and adds no Lean verification. Physical identification with an experimental Rydberg or anyon Hamiltonian, and correspondence with Rauzy-boundary dimension, remain separate questions.
 :::
 
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="Literature Result: The Fibonacci Anyon Golden Chain and Rydberg Blockade Simulators (Literature result, not formalized in this book)"}
@@ -1523,7 +1671,7 @@ $$
 
 We use $W$'s first $N-1$ letters to label bonds; sites $0$ and $N-1$ are not joined. The paper's digit tensors encode this single-particle site index. Cutting binary or Tribonacci address indices does not specify a real-space many-body bipartition. This also limits the analogy with the direct-encoder entanglement ranks in §39.5.7: it does not identify a uniform superposition of legal words with a Slater ground state of this hopping chain.
 
-**Spectral distance to zero for finite open chains.** Set
+**Spectral distance for the specified even open prefixes.** Set
 
 $$
 \begin{aligned}
@@ -1538,7 +1686,7 @@ $$
 \delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}.
 $$
 
-[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] proves that, for every fixed $\rho\in(0,1)$, $\delta_{\rho,j}\to0$, covering every sufficiently large $j$. It specifies no convergence rate and makes no claim of convergence uniform in $\rho$. Finite invertibility, membership of zero in an infinite-volume spectrum, finite-resolution density of states, or criticality in the sense of Anderson localization cannot directly replace the limit proof for these specified boundaries and prefix sequence. Krebbekx–Moustaj–Dajani–Morais Smith, *Multifractal Properties of Tribonacci Chains* ([*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204), §§II.B.1, III.A.1, and V), use periodic approximants and perturbative renormalization to study physical spectra and criticality; we do not read this as the finite open-chain statement above for all $\rho\in(0,1)$.
+The standalone statement of [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] gives the full-sequence limit for each fixed $\rho\in(0,1)$. The stronger [@ex-ch39-p2e-tribonacci-prefix-rate] retains the quantitative paper derivation: $\delta_{\rho,j}\le73728/N_j$ for every $j\ge4$ and $0<\rho<1$, yielding convergence uniform in $\rho$. The complete quantitative application remains a paper proof, without a separate Lean verification badge or a claim to resolve a new external conjecture. Finite invertibility, membership of zero in an infinite-volume spectrum, finite-resolution density of states, or criticality in the sense of Anderson localization cannot directly replace the limit proof for these specified boundaries and prefix sequence. Krebbekx–Moustaj–Dajani–Morais Smith, *Multifractal Properties of Tribonacci Chains* ([*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204), §§II.B.1, III.A.1, and V), use periodic approximants and perturbative renormalization to study physical spectra and criticality; we do not read this as the finite open-chain statement above for all $\rho\in(0,1)$.
 
 **The actual Slater state and correlation conventions.** Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. The following construction and results come from the literature and are not formalized in this book. Keep the $N$ original sites in their natural order $0,\ldots,N-1$, and label the orthonormal Boolean occupation basis $\lvert S\rangle$ by its subsets of occupied sites $S$. Choose an integer $0\le k\le N$ and a complex matrix $V\in\mathbb{C}^{N\times k}$ whose columns are the occupied orthonormal single-particle modes, so $V^\dagger V=I_k$. For a subset $S$ of size $k$, let $V_S$ retain those rows in increasing site order, with the column order unchanged. Define the actual many-body amplitudes by
 
@@ -1738,6 +1886,8 @@ contradicting the uniform bound at $s=0$, $m=m_n$. This contradiction covers eve
 
 The counterexample family shows how charge can accumulate across levels in certain actual prefixes. Controlling intervals of every length at every start also requires control of all prefixes inside each level's blocks. A reusable estimate, independent of the Tribonacci alphabet, supplies this step: at each level, at most one child block remains unfinished, while the charges of the complete children contribute a sum over levels.
 
+**Research draft and current source pin.** The source proofs for the following prefix envelope and uniform squared-logarithmic bound are in [source PR 30646](https://github.com/the-omega-institute/trureturing/pull/30646); the separate fixed-parameter open-chain convergence theorem below is in [source PR 30678](https://github.com/the-omega-institute/trureturing/pull/30678). These source PRs have not merged into the followed `dev` branch, and the corresponding Lean references are unresolved by this book’s current legal lockfile. The existing statements and explanatory proofs are retained here as a research draft; their source proofs must merge, freeze, and receive a legal tool-generated pin before the book’s Lean-reference validation can pass. This status does not alter the published quantitative paper conclusion in [@ex-ch39-p2e-tribonacci-prefix-rate] and supplies no new Lean compilation evidence from this integration.
+
 ::: {.lemma #lem-ch39-p2e-substitution-prefix-envelope title="A Level Prefix Envelope for Substitution Words" lean="D5/S1/Words/SubstitutionPrefixEnvelope.prefix_envelope"}
 Let $\mathcal A$ be any alphabet, let $w:\mathcal A\to\mathbb Z$ be an integer weight, and let $f$ send each letter to a finite word, extended to finite words by concatenation. Take $f^0(a)$ to be the one-letter word $a$, and set
 
@@ -1919,7 +2069,7 @@ For physical spectral quantities, Juhász derives an auxiliary-matrix method fro
 
 Hermisson's discussion of multi-letter substitutions with marginal renormalization eigenvalues and infinite dynamical exponent ([doi:10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304), arXiv:cond-mat/9808238, p. 11) gives no specific scaling for this word in that passage. In Hida's Fibonacci XXZ analysis ([doi:10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296), arXiv:cond-mat/0404606v2), the scale $\Delta E\sim\exp[-\kappa(\log N)^2]$ in Eq. (38) comes from perturbative renormalization of the interacting isotropic model with separated strong and weak couplings. The free XY case in Eq. (28) instead gives a finite power-law exponent, $\Delta E\sim N^{-z}$. These conclusions do not replace checks of this chain's actual finite matrices, endpoints, parity truncations, and spectral quantity.
 
-[@thm-ch39-p2e-tribonacci-prefix-log-refutation] rules out using the uniform logarithmic interval bound as a premise for an inverse-matrix estimate. [@thm-ch39-p2e-tribonacci-uniform-log-squared] supplies control of alternating charge on the actual word, uniformly over starts. Together with the finite-product identity above, it provides a combinatorial input for analyzing hopping ratios. It gives no full-inverse norm or mass estimate by itself and does not refute a polynomial spectral-gap bound. [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] instead uses explicit positive-charge prefixes and one full-inverse entry to prove $\delta_{\rho,j}\to0$; a quantitative rate through odd repetition windows and full-inverse mass still requires assembly under its own premises. For the Slater-state route described above, spatial entanglement additionally requires construction of the actual occupied projector and analysis of its spatial compression. Relating physical states, spatial cuts, and the Rauzy boundary, and establishing the entropy scaling in [@prob-ch39-p2e-fractal-horizon], remain separate tasks.
+[@thm-ch39-p2e-tribonacci-prefix-log-refutation] rules out using the uniform logarithmic interval bound as a premise for an inverse-matrix estimate. [@thm-ch39-p2e-tribonacci-uniform-log-squared] supplies control of alternating charge on the actual word, uniformly over starts. Together with the finite-product identity above, it provides a combinatorial input for analyzing hopping ratios. It gives no full-inverse norm or mass estimate by itself and does not refute a polynomial spectral-gap bound. [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] instead uses explicit positive-charge prefixes and one full-inverse entry to prove $\delta_{\rho,j}\to0$; below, [@ex-ch39-p2e-tribonacci-prefix-rate] already assembles the same actual hoppings, odd repeated windows, and full-inverse mass estimate into the stronger paper application $73728/N_j$, with convergence uniform in the parameter. This does not follow from the alternating-charge bound alone. For the Slater-state route described above, spatial entanglement additionally requires construction of the actual occupied projector and analysis of its spatial compression. Relating physical states, spatial cuts, and the Rauzy boundary, and establishing the entropy scaling in [@prob-ch39-p2e-fractal-horizon], remain separate tasks.
 :::
 
 ::: {.remark #rem-ch39-p2e-tridiagonal-localization title="Tridiagonal Localization with Boundary Residuals (Literature result, not formalized in this book)"}
@@ -2066,7 +2216,7 @@ t_j,&j+1=i,\\
 \qquad 0\le i,j<2n.
 $$
 
-Its diagonal is zero, its last physical bond is $t_{2n-2}$, and there is no closing bond. When $n=1$, it consists of two sites joined only by $t_0$. Let $B=L(t,n)$ be the lower bidiagonal block above, so
+Its diagonal is zero, its last physical bond is $t_{2n-2}$, and there is no closing bond. When $n=1$, it consists of two sites joined only by $t_0$. The same entrywise formula defines a Hermitian matrix on $\mathbb C^{2n}$. A real orthonormal eigenbasis of the symmetric matrix is also a complex orthonormal eigenbasis, with the same real eigenvalues. The spectral-distance estimates below therefore apply to the complex open chain defined earlier. Let $B=L(t,n)$ be the lower bidiagonal block above, so
 
 $$
 \begin{aligned}
@@ -2130,7 +2280,56 @@ $$
 This converts the mass estimate for the full inverse into a bound on the spectral distance to zero energy for the same finite open chain.
 :::
 
-The example completes the spectral conversion for any finite open chain with positive hoppings. For convergence to zero itself, the actual prefixes constructed in the proof of [@thm-ch39-p2e-tribonacci-prefix-log-refutation] provide another input: their charge is positive and unbounded at odd levels, making one entry of the full inverse sufficiently large.
+::: {.example #ex-ch39-p2e-tribonacci-prefix-rate title="A paper spectral bound for the specified even open prefixes"}
+Return to the actual word $W$. Fix $0<\rho<1$ and set $t(i)=t_{W_i}$, with $t_A=\rho^2$, $t_B=\rho$ and $t_C=1$. These hoppings satisfy $0<t(i)\le1$ at every position. For each $j\ge4$, use the explicit window in [@ex-ch39-p2e-aligned-tribonacci-windows] and write
+
+$$
+\begin{aligned}
+m&=2q+1,\qquad s=2a,\qquad N_j=2n,\\
+q&\ge1,\qquad a+m\le n,\qquad N_j\le128m.
+\end{aligned}
+$$
+
+Here $q,a,n$ are natural numbers. Equal letters have equal hoppings, so the word identity inside the window gives
+
+$$
+t\bigl(2a+i+(2q+1)\bigr)=t(2a+i)\qquad(0\le i<2q).
+$$
+
+The preceding two examples therefore apply to this same $N_j$-site open chain: the local matrix is the block for the shifted hoppings $t(2a+\cdot)$, while the full inverse remains $L(t,n)^{-1}$ for the entire prefix. No external sites are removed and no closing bond is added. Use their common unit vector $v$ to obtain $\delta_{\rho,j}q(q+1)\le N_j$. Since $q\ge1$,
+
+$$
+\begin{aligned}
+9q(q+1)-2(2q+1)^2&=(q-1)(q+2)\ge0,\\
+N_j\delta_{\rho,j}
+&\le\frac{N_j^2}{q(q+1)}
+\le\frac{128^2(2q+1)^2}{q(q+1)}
+\le73728.
+\end{aligned}
+$$
+
+The constant $73728=128^2\cdot9/2$ is independent of both $j$ and $\rho$; no optimality is claimed. Every substitution iterate starts with $A$. The substitution erases no letter, and this initial letter adds at least one letter, so $L_{j+1}\ge L_j+1$ and $L_j\ge j+1$. Hence $N_j\ge L_j-1\ge j$, and $\delta_{\rho,j}\le73728/N_j\to0$. This tail conclusion needs no separate estimate for $j=1,2,3$.
+
+The bound also gives uniform convergence in the hopping parameter. For any $\varepsilon>0$, take
+
+$$
+J=\max\left\{4,\left\lfloor\frac{73728}{\varepsilon}\right\rfloor+1\right\}.
+$$
+
+Since $N_j\ge j$, every $j\ge J$ and every $0<\rho<1$ satisfy
+
+$$
+0\le\delta_{\rho,j}\le\frac{73728}{N_j}\le\frac{73728}{j}<\varepsilon.
+$$
+
+Here $J$ is independent of $\rho$. The conclusion covers the entire open interval; it does not include the degenerate endpoint model at $\rho=0$.
+
+This is a paper application of the displayed window construction, full-inverse mass estimate and finite-dimensional spectral conversion, with no separate Lean verification badge; the parameter correspondence and formal sources are given in the [formalization interface](https://github.com/the-omega-institute/trureturing/issues/30166). This finite open-chain spectral bound neither constructs a many-body ground state nor determines entanglement across a spatial cut or the dimension of the Rauzy boundary.
+:::
+
+The example gives a paper $1/N_j$ bound and convergence to zero for the specified even open prefixes. Fractal entropy scaling still requires a separate argument involving physical states and spatial cuts; those parts of [@prob-ch39-p2e-fractal-horizon] remain open.
+
+The preceding quantitative paper application already gives a stronger rate. A separate argument needs only the actual prefixes constructed in the proof of [@thm-ch39-p2e-tribonacci-prefix-log-refutation]: their charge is positive and unbounded at odd levels, making one entry of the full inverse sufficiently large.
 
 ::: {.theorem #thm-ch39-p2e-tribonacci-open-chain-zero-gap title="Vanishing Spectral Distance for Actual Positive Tribonacci Open Chains" lean="D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.gap_tendsto_zero"}
 Let $W$ be the actual fixed word starting from $A$ for $\sigma(A)=AB$, $\sigma(B)=AC$, $\sigma(C)=A$, with weights $w(A)=2$, $w(B)=1$, $w(C)=0$. For each fixed real $0<\rho<1$, set $t_i=\rho^{w(W_i)}$. For integers $j\ge1$, define
@@ -2225,7 +2424,7 @@ Finally, given $\varepsilon>0$, choose a natural number $k$ with $\rho^k<\vareps
 The source declaration defines `gap` at $j=0$ to be $0$ to avoid the empty eigenvalue set of a zero-dimensional matrix. For $j\ge1$, $L_j\ge2$, and its definition is precisely the minimum absolute value of the nonempty finite real spectrum used here. This single-value convention does not affect the limit. The full proof is checked by the Lean kernel.
 :::
 
-The theorem gives the limit along all indices for each fixed $\rho$, with neither convergence uniform in $\rho$ nor a quantitative rate in $N_j$. A rate along the full sequence of actual Tribonacci prefixes still requires an exact assembly of the word hoppings $t_i=t_{W_i}$, aligned repeated windows and full-inverse mass estimate under a single parameter convention, together with treatment of the initial short prefixes. This section has not established that, for every fixed $\rho\in(0,1)$, there are $C_\rho>0$ and an integer $J_\rho\ge1$ such that $\delta_{\rho,j}\le C_\rho/N_j$ for every $j\ge J_\rho$. Such a quantitative bound is stronger than the vanishing limit in [@thm-ch39-p2e-tribonacci-open-chain-zero-gap]; fractal entropy scaling still requires a separate argument involving physical states and spatial cuts.
+This standalone convergence theorem states only the full-sequence limit for each fixed positive $\rho$; its single-inverse-entry argument supplies no $1/N_j$ rate. The preceding [@ex-ch39-p2e-tribonacci-prefix-rate] already gives the stronger paper bound $73728/N_j$ and convergence uniform in the parameter, using actual repeated windows and full-inverse mass. The evidence scopes of the two arguments remain distinct; physical states, spatial cuts, and fractal entropy scaling still require further work.
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`, shift entropy and Abramov's formula carry status `Literature`, and fractal area scaling carries status `OPEN`.

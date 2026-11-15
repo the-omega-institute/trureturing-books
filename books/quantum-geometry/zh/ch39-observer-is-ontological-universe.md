@@ -917,6 +917,31 @@ $$
 
 空指标集上的和取 $0$、积取恒等算子，故 $N<K$ 时没有窗口。$C_i$ 是对角投影，不依赖中心位，与 $X_i$ 对易。它只检查距 $i$ 至多 $K-1$ 的位置：每一项 $h_i$ 支撑于至多 $2K-1$ 个连续位置，边界处截断；$B_a$ 支撑于 $K$ 个位置。$K=2$ 时 $C_i$ 就是链内相邻位置的空位投影之积。
 
+**先在完整字基上展开。** 记 $\Omega_N=\{0,1\}^N$，位置从 $1$ 编到 $N$，$\sigma_iw$ 为只翻转第 $i$ 位的字。原控制投影的对角元就是
+
+$$
+\begin{aligned}
+c_i(w)&:=\langle w|C_i|w\rangle\\
+&=\prod_{a\in\mathcal W_i}
+\left(1-\prod_{\substack{a\le j<a+K\\j\ne i}}w_j\right)\in\{0,1\},\\
+c_i(\sigma_iw)&=c_i(w),\qquad \sigma_i^2w=w.
+\end{aligned}
+$$
+
+每个因子都不读取 $w_i$，所以最后两式对全部完整字成立，包括非法字。以 $v$ 为行、$w$ 为列，$X_i$ 的置换矩阵元为 $\langle v|X_i|w\rangle=\delta_{v,\sigma_iw}$。插入完整字基的恒等分解，直接展开已定义的算符乘积，得到
+
+$$
+\begin{aligned}
+\langle v|h_i|w\rangle
+&=\sum_{r,s\in\Omega_N}
+\langle v|C_i|r\rangle\langle r|I-X_i|s\rangle
+\langle s|C_i|w\rangle\\
+&=c_i(v)\bigl(\delta_{v,w}-\delta_{v,\sigma_iw}\bigr)c_i(w).
+\end{aligned}
+$$
+
+若 $c_i(w)=1$，每个包含 $i$ 的完整窗口都有一个位于中心之外的零；翻转前后这个零都还在。其余窗口不变，故 $w\in W_N$ 当且仅当 $\sigma_iw\in W_N$，无需先假设 $w$ 合法。因此允许的翻转同时保持合法扇区和非法扇区。控制开启并不认证全局合法性：例如 $K=2,N=4,w=1100,i=4$，唯一包含中心的窗口 $[3,4]$ 由第 $3$ 位的零通过检验，故 $c_4(1100)=1$；但 $1100$ 与 $1101$ 都保留禁窗口 $[1,2]=11$。局部项 $h_4$ 在这对非法基矢上仍有对角元 $1$ 和翻转元 $-1$。
+
 **能量怎样识别合法字？** 固定第 $i$ 位之外的配置 $\eta$，记对应的两个字为 $\eta0,\eta1$，中心数字均插在位置 $i$。$C_i(\eta)=1$ 当且仅当把中心置为 $1$ 不会形成任何包含 $i$ 的禁窗口。在这样的二维块上，$h_i$ 为
 
 $$
@@ -967,6 +992,17 @@ F_i(\eta)&=\{w\in W_N:w_{-i}=\eta\},\\
 \end{aligned}
 $$
 
+这里固定的是第 $i$ 位以外的全部 $N-1$ 位。对合法字 $w$，把这个实际完成纤维另记为
+
+$$
+\begin{aligned}
+A_i(w)&:=F_i(w_{-i})\\
+&=\{u\in W_N:u_j=w_j\ \forall j\ne i\}.
+\end{aligned}
+$$
+
+相同外部的布尔字只能是 $w$ 或 $\sigma_iw$。若 $c_i(w)=1$，父例的双向合法性说明两者都合法；它们第 $i$ 位不同，故 $A_i(w)=\{w,\sigma_iw\}$，基数恰为 $2$。若 $c_i(w)=0$，至少一个包含 $i$ 的完整窗口在所有非中心位上都是 $1$。$w$ 合法迫使 $w_i=0$，翻成 $1$ 就违反该窗口；因而 $A_i(w)=\{w\}$，基数恰为 $1$。这给出了原控制与实际纤维的对应，没有替换控制条件。
+
 这就是给定 $\mathrm{outside}_i$ 的条件期望。把合法字的一位置零总是合法，故每个非空纤维或为 $\{\eta0,\eta1\}$，或为只能取零的单点 $\{\eta0\}$；中心位均插在位置 $i$。在双点纤维上 $C_i=1$，而在强制零的单点纤维上 $C_i=0$。因此相应的矩阵为
 
 $$
@@ -977,6 +1013,41 @@ h_i&=\begin{pmatrix}1&-1\\-1&1\end{pmatrix}=2(I-E_i),
 $$
 
 其中最后的等式按函数值与合法基矢的对应来读；单点纤维上 $E_i=I$，两边均为零。
+
+**逐个矩阵元核对系数二。** 在合法字上定义刷新核，约定行 $v$ 是当前字、列 $w$ 是刷新后的字。均匀律 $\pi$ 给出
+
+$$
+\begin{aligned}
+T_i(v,w)&=\frac{\mathbf1_{\{w\in A_i(v)\}}}{|A_i(v)|},\\
+(E_if)(v)&=\sum_{w\in W_N}T_i(v,w)f(w),\\
+\sum_{w\in W_N}T_i(v,w)&=1.
+\end{aligned}
+$$
+
+开启时，同纤维两点各有质量 $1/2$，包括以 $1/2$ 概率抽回当前字；关闭时只有 $T_i(v,v)=1$，其余为零。同纤维的 $A_i$ 相同，故 $T_i(v,w)=T_i(w,v)$。算符矩阵的行列则表示输出与输入振幅；把它与这里作用于函数的刷新核比较时，翻转的对合性给出 $\delta_{v,\sigma_iw}=\delta_{w,\sigma_iv}$，控制不变性给出 $c_i(\sigma_iv)=c_i(v)$。
+
+现在取合法 $v,w$。对角情形，原乘积的矩阵元为 $c_i(v)^2=c_i(v)$，开启时等于 $2(1-1/2)=1$，关闭时等于 $2(1-1)=0$。若 $w=\sigma_iv$，两字都合法就迫使控制开启，否则上述禁窗口会排除其中一字；乘积元于是为 $-1=2(0-1/2)$。若既不相等也不互为这次翻转，则原乘积元和刷新质量都为零。因此在同一个合法字基上确有
+
+$$
+\langle v|h_i|w\rangle
+=2\bigl(\delta_{v,w}-T_i(v,w)\bigr)
+\qquad(v,w\in W_N).
+$$
+
+这里把 $W_N\subseteq\Omega_N$ 的每个合法字仍送到原来的完整字基矢；相等关系与 Kronecker 符号都不变。这正是上式 $h_i=2(I-E_i)$ 的限制空间含义。$T_i$ 的定义域是合法字，不能把这个随机核等式直接延伸到非法字上的原生算符。
+
+例如 $K=N=2$、$i=2$，按合法基次序 $(00,01,10)$，实际纤维是 $\{00,01\}$ 和 $\{10\}$，故
+
+$$
+\begin{aligned}
+T_2&=\begin{pmatrix}1/2&1/2&0\\1/2&1/2&0\\0&0&1\end{pmatrix},\\
+h_2|_{\mathcal H_{\mathrm{legal}}}
+&=\begin{pmatrix}1&-1&0\\-1&1&0\\0&0&0\end{pmatrix}
+=2(I-T_2).
+\end{aligned}
+$$
+
+三行刷新质量分别为 $1/2+1/2=1$、$1/2+1/2=1$、$1=1$。第 $1$ 站同样连接 $00$ 与 $10$；把两个局部矩阵相加，再把非法基矢 $11$ 的罚能 $1$ 加回，恰得父例原有的完整 $H_{2,2}$，谱仍为 $0,1,1,3$。当 $N<K$ 时，所有 $c_i=1$，每个实际单站纤维都含两个字；当 $N=0$ 时没有站点、没有这些矩阵元，也不由此断言存在激发谱隙。
 
 让每个位置有独立的速率 $1$ 泊松钟；钟响时，按上述条件律重新抽取该位，允许抽回原值。这条热浴链作用在函数上的连续时间生成元是
 
@@ -1022,7 +1093,28 @@ $$
 Uf=z^{-1/2}\sum_{w\in W_N}f(w)|w\rangle.
 $$
 
-由内积公式，$U:L^2(\pi)\to\mathcal H_{\mathrm{legal}}$ 保内积且满射，故为酉映射。罚项在合法空间为零，逐纤维的矩阵等式于是给出
+把这个对应反向用于原生复振幅时，记 $Z=z=z_N$，所以 $\pi(w)=1/Z$。任意合法支撑向量 $|\psi_L\rangle=\sum_{w\in W_N}a_w|w\rangle$ 的逆像显式为
+
+$$
+(U^{-1}\psi_L)(w)=f(w)=\sqrt Z\,a_w.
+$$
+
+若另一个合法支撑向量为 $|\phi_L\rangle=\sum_{w\in W_N}b_w|w\rangle$、$g(w)=\sqrt Z\,b_w$，则对第一变量取共轭的配对与范数满足
+
+$$
+\begin{aligned}
+\langle f,g\rangle_\pi
+&=\frac1Z\sum_{w\in W_N}
+\overline{\sqrt Z\,a_w}\sqrt Z\,b_w\\
+&=\sum_{w\in W_N}\overline{a_w}b_w
+=\langle\psi_L,\phi_L\rangle,\\
+\|f\|_\pi^2
+&=\frac1Z\sum_{w\in W_N}|\sqrt Z\,a_w|^2
+=\|\psi_L\|^2.
+\end{aligned}
+$$
+
+这些和都是有限和，且 $Z>0$；因此任意合法复振幅都给出唯一逆像，无需额外的可积性或归一化假设。$U:L^2(\pi)\to\mathcal H_{\mathrm{legal}}$ 保内积且满射，故为酉映射。罚项在合法空间为零，逐纤维的矩阵等式于是给出
 
 $$
 \begin{aligned}
@@ -1036,7 +1128,26 @@ U1&=|\Psi_{K,N}\rangle,\\
 \end{aligned}
 $$
 
-因此零均值恰对应于与基态正交，方差恰是去掉基态分量后的范数平方。
+对上述原生振幅，令 $\beta=\langle\Psi_{K,N}|\psi_L\rangle$。有限均值与方差公式具体成为
+
+$$
+\begin{aligned}
+\pi f&=\frac1Z\sum_{w\in W_N}\sqrt Z\,a_w
+=\beta,\\
+\operatorname{Var}_\pi(f)
+&=\|f\|_\pi^2-|\pi f|^2\\
+&=\|\psi_L\|^2-|\beta|^2
+=\|\psi_L-\beta\Psi_{K,N}\|^2.
+\end{aligned}
+$$
+
+因此零均值恰对应于与基态正交。把原生自伴算符的二次型记为 $Q(A,\phi)=\langle\phi,A\phi\rangle$，逐站还有
+
+$$
+Q(h_i,\psi_L)=2\|f-E_if\|_\pi^2.
+$$
+
+对站点求和即恢复上面的总能量恒等式 $Q(H_{K,N},\psi_L)=2\mathcal E(f,f)$；合法支撑上所有 $B_a$ 的二次型均为零。这里的系数 $2$ 始终对应每站速率 $1$ 的时钟。
 
 **为何合法空间的谱隙足够？** 合法字可逐位删除 $1$ 到全零字，故合法翻转图连通；$N\ge1$、$K\ge2$ 又保证全零字与仅首位为 $1$ 的字都是顶点。能量的边平方和因此恰在常数函数上为零，$-L$ 的第一正本征值 $\lambda_{K,N}$ 存在，且
 
@@ -1458,7 +1569,44 @@ $$
 
 与分块方差界合并就得到所述 Poincaré 界及 $\lambda_{K,N}\ge C_K^{-1}$。再用 [@ex-ch39-p2e-heatbath-scale] 的完整空间谱比较，因为 $K\ge2$ 时 $2/C_K<1$，得到 $\Delta_{K,N}\ge2/C_K$。例如 $K=2$ 给出 $1/36$，$K=3$ 给出 $1/400$。空链 $N=0$ 仍没有激发谱隙；短链 $1\le N<K$ 的精确谱隙仍为 $2$。
 
-这个结论补齐的是所设计局域母哈密顿量在固定 $K$ 下的链长一致谱隙。它没有把该模型等同于实际里德堡或任意子哈密顿量，也没有建立与 Rauzy 边界维数的物理对应。
+**从谱隙到任意振幅的能量估计。** 固定 $K\ge2,N\ge1$，简记 $H=H_{K,N}$、$\Psi=\Psi_{K,N}$。任意完整布尔字空间中的复向量 $|\psi\rangle=\sum_{w\in\Omega_N}a_w|w\rangle$ 都按实际合法字与非法字分解为
+
+$$
+\begin{aligned}
+\psi&=\psi_L+\psi_I,\\
+|\psi_L\rangle&=\sum_{w\in W_N}a_w|w\rangle,\\
+|\psi_I\rangle&=\sum_{w\in\Omega_N\setminus W_N}a_w|w\rangle,\\
+\beta&=\langle\Psi|\psi\rangle
+=\langle\Psi|\psi_L\rangle.
+\end{aligned}
+$$
+
+取上例的逆像 $f(w)=\sqrt Z\,a_w$，其中 $Z=|W_N|$。由已经逐项核对的归一化与能量恒等式，再用本例的实际 Poincaré 界，得到
+
+$$
+\begin{aligned}
+\pi f&=\beta,\\
+\operatorname{Var}_\pi(f)&=\|\psi_L\|^2-|\beta|^2,\\
+Q(H,\psi_L)&=2\mathcal E(f,f)\\
+&\ge\frac2{C_K}
+\bigl(\|\psi_L\|^2-|\beta|^2\bigr).
+\end{aligned}
+$$
+
+父例的矩阵元展开已给出合法与非法扇区之间的零矩阵元，因此两块没有交叉能量；上例的非法罚能估计给出 $Q(H,\psi_I)\ge\|\psi_I\|^2$。由于 $C_K=(2K-1)^2 2^{2K-1}\ge72$，令 $c_K=2/C_K\le1$，便可合并为
+
+$$
+\begin{aligned}
+Q(H,\psi)&=Q(H,\psi_L)+Q(H,\psi_I)\\
+&\ge c_K\bigl(\|\psi_L\|^2-|\beta|^2\bigr)
++\|\psi_I\|^2\\
+&\ge c_K\bigl(\|\psi\|^2-|\langle\Psi|\psi\rangle|^2\bigr).
+\end{aligned}
+$$
+
+这就是二次型意义下的原生算符不等式 $H\ge c_K(I-|\Psi\rangle\langle\Psi|)$。向量无需归一化，也无需与基态正交；若 $\|\psi\|=1$，右侧残量就是 $1-|\langle\Psi|\psi\rangle|^2$。当 $1\le N<K$ 时所有字合法，$\psi_I=0$，同一推导仍成立。$N=0$ 只有一维真空，能量与去掉基态后的残量都为零，不能据此声称存在激发谱隙。
+
+这把已推导的固定 $K$、链长一致谱隙明确用于任意态的能量估计，仍是上述纸面推导的应用，不新增 Lean 验证。它没有把该模型等同于实际里德堡或任意子哈密顿量，也没有建立与 Rauzy 边界维数的物理对应。
 :::
 
 ::: {.remark #rem-ch39-p2e-rydberg-anyon-literature title="文献结果：斐波那契任意子黄金链与里德堡原子阻塞实验背景（文献结果，未在本书形式化）"}
@@ -1523,7 +1671,7 @@ $$
 
 这里使用 $W$ 的前 $N-1$ 个字母标记键，端点 $0$ 与 $N-1$ 不相连。该文张量中的数位编码的是这个单粒子格点指标；沿二进制或 Tribonacci 地址数位切分张量指标，并未指定实空间多体二分。这一区别也限制了与 §39.5.7 的直接编码纠缠秩之间的类比：不能据此把合法字的等权叠加认作该跃迁链的 Slater 基态。
 
-**有限开链到零能量的谱距离。** 令
+**指定偶数开前缀的谱距离。** 令
 
 $$
 \begin{aligned}
@@ -1538,7 +1686,7 @@ $$
 \delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}.
 $$
 
-[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 证明：对每个固定的 $\rho\in(0,1)$，$\delta_{\rho,j}\to0$，且覆盖全部充分大的 $j$。该结论不指定收敛速率，也不声称关于 $\rho$ 的一致收敛。有限矩阵的可逆性、无限体积谱中零点的归属、有限分辨率态密度或 Anderson 局域化意义下的临界性，都不能直接替代这一指定边界与前缀序列的极限证明。Krebbekx–Moustaj–Dajani–Morais Smith 的 *Multifractal Properties of Tribonacci Chains*（[*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204)，§II.B.1、§III.A.1、§V）采用周期逼近与微扰重整化研究物理谱及临界性；本书不将其解释为上述对所有 $\rho\in(0,1)$ 的有限开链结论。
+[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 的单独陈述给出每个固定 $\rho\in(0,1)$ 的全序列极限。更强的 [@ex-ch39-p2e-tribonacci-prefix-rate] 保留定量纸面推导：对所有 $j\ge4$、$0<\rho<1$，有 $\delta_{\rho,j}\le73728/N_j$，并由此得到关于 $\rho$ 的一致收敛。整条定量应用仍以纸面证明呈现，不带独立 Lean 验证徽章，也不声称解决外部新猜想。有限矩阵的可逆性、无限体积谱中零点的归属、有限分辨率态密度或 Anderson 局域化意义下的临界性，都不能直接替代这一指定边界与前缀序列的极限证明。Krebbekx–Moustaj–Dajani–Morais Smith 的 *Multifractal Properties of Tribonacci Chains*（[*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204)，§II.B.1、§III.A.1、§V）采用周期逼近与微扰重整化研究物理谱及临界性；本书不将其解释为上述对所有 $\rho\in(0,1)$ 的有限开链结论。
 
 **实际 Slater 态与关联矩阵约定。** 要讨论物理空间切口的熵，还须指定多体哈密顿量、填充及态。以下是文献构造与文献结果，未在本书形式化。让这 $N$ 个原始格点保持自然顺序 $0,\ldots,N-1$，以布尔占据串的占据子集 $S$ 标记正交归一基 $\lvert S\rangle$。选取整数 $0\le k\le N$ 和复矩阵 $V\in\mathbb{C}^{N\times k}$，其列是所占据的正交归一单粒子模式，即 $V^\dagger V=I_k$。对大小为 $k$ 的 $S$，令 $V_S$ 按递增格点顺序保留这些行，列顺序保持不变，定义实际的多体振幅
 
@@ -1738,6 +1886,8 @@ $$
 
 反例族说明某些真实前缀的电荷可以逐层累积；要控制任意起点、任意长度的区段，还须同时控制每层块内部的所有前缀。这里可以复用一个与 Tribonacci 字母表无关的估计：每层至多留下一块未走完的子块，其余完整子块的电荷逐层相加。
 
+**研究稿与当前钉版的边界。** 下列前缀包络与统一对数平方界的源证明见 [源 PR 30646](https://github.com/the-omega-institute/trureturing/pull/30646)；后文单独的固定参数开链收敛定理见 [源 PR 30678](https://github.com/the-omega-institute/trureturing/pull/30678)。这些源 PR 尚未合入所跟随的 `dev`，相应 Lean 引用尚未由本书当前合法锁文件解析。这里保留已有陈述和解释证明作为研究稿；源证明须合入、冻结并经工具合法钉版后，才能通过本书的 Lean 引用校验。此状态不改变已发表的 [@ex-ch39-p2e-tribonacci-prefix-rate] 的定量纸面结论，也不提供本次整合的新 Lean 编译证据。
+
 ::: {.lemma #lem-ch39-p2e-substitution-prefix-envelope title="替代词的逐层前缀包络" lean="D5/S1/Words/SubstitutionPrefixEnvelope.prefix_envelope"}
 设 $\mathcal A$ 为任意字母表，$w:\mathcal A\to\mathbb Z$ 为整数权重，$f$ 将每个字母映为一个有限字，并按拼接延伸到有限字。约定 $f^0(a)$ 为单字母字 $a$，且
 
@@ -1919,7 +2069,7 @@ Adamczewski，*Symbolic discrepancy and self-similar dynamics*（[doi:10.5802/ai
 
 Hermisson 对多字母替代的边缘重整化特征值与无穷动力学指数的讨论（[doi:10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304)，arXiv:cond-mat/9808238，第 11 页）没有在该处给出本字的特定标度。Hida 的 Fibonacci XXZ 分析（[doi:10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296)，arXiv:cond-mat/0404606v2）中，式 (38) 的 $\Delta E\sim\exp[-\kappa(\log N)^2]$ 属于强弱耦合分离下的相互作用各向同性模型的微扰重整化；式 (28) 的自由 XY 情形给出的是有限指数幂律 $\Delta E\sim N^{-z}$。这些结论不替代对本链实际有限矩阵、端点、奇偶截断与所求谱量的核对。
 
-[@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线。[@thm-ch39-p2e-tribonacci-uniform-log-squared] 提供的是实际词上、对起点一致的交替电荷控制；结合前面的有限乘积恒等式，它可作为分析跃迁比值的组合输入。它本身没有给出完整逆矩阵的范数或质量估计，也没有反驳某个多项式谱隙界。[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 另用具体正电荷前缀和一个完整逆矩阵元素证明 $\delta_{\rho,j}\to0$；定量速率所需的奇数重复窗口与完整逆矩阵质量路线仍须按各自前提拼接。沿前述 Slater 态路线讨论空间纠缠时，还须构造实际占据投影并分析空间压缩；物理态、空间切口与劳齐边界的对应及 [@prob-ch39-p2e-fractal-horizon] 的熵标度仍需独立建立。
+[@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线。[@thm-ch39-p2e-tribonacci-uniform-log-squared] 提供的是实际词上、对起点一致的交替电荷控制；结合前面的有限乘积恒等式，它可作为分析跃迁比值的组合输入。它本身没有给出完整逆矩阵的范数或质量估计，也没有反驳某个多项式谱隙界。[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 另用具体正电荷前缀和一个完整逆矩阵元素证明 $\delta_{\rho,j}\to0$；下文 [@ex-ch39-p2e-tribonacci-prefix-rate] 已按同一组实际跃迁、奇数重复窗口与完整逆矩阵质量估计的前提，完成更强的 $73728/N_j$ 纸面应用，并给出参数一致收敛；它不由交替电荷界单独推出。沿前述 Slater 态路线讨论空间纠缠时，还须构造实际占据投影并分析空间压缩；物理态、空间切口与劳齐边界的对应及 [@prob-ch39-p2e-fractal-horizon] 的熵标度仍需独立建立。
 :::
 
 ::: {.remark #rem-ch39-p2e-tridiagonal-localization title="保留端点残差的三对角局部化（文献结果，未在本书形式化）"}
@@ -2066,7 +2216,7 @@ t_j,&j+1=i,\\
 \qquad 0\le i,j<2n.
 $$
 
-它的对角线为零，最后一条物理键为 $t_{2n-2}$，没有首尾闭合键；$n=1$ 时就是仅含键 $t_0$ 的两个站点。令 $B=L(t,n)$ 为前述下双对角块，即
+它的对角线为零，最后一条物理键为 $t_{2n-2}$，没有首尾闭合键；$n=1$ 时就是仅含键 $t_0$ 的两个站点。同一逐项公式也定义作用在 $\mathbb C^{2n}$ 上的厄米矩阵。实对称矩阵的实正交特征基同时是复空间的正交特征基，特征值保持相同的实数；因此以下谱距离估计也适用于前面定义的复数开链。令 $B=L(t,n)$ 为前述下双对角块，即
 
 $$
 \begin{aligned}
@@ -2130,7 +2280,56 @@ $$
 这把完整逆矩阵的质量估计转成同一有限开链到零能量的谱距离界。
 :::
 
-上例完成了任意正跃迁有限开链的谱转换。对于趋零本身，[@thm-ch39-p2e-tribonacci-prefix-log-refutation] 证明中的真实前缀已提供另一种输入：奇数层的电荷为正且无界，使完整逆矩阵中的一个元素足够大。
+::: {.example #ex-ch39-p2e-tribonacci-prefix-rate title="指定偶数开前缀的纸面谱界"}
+回到实际词 $W$，固定 $0<\rho<1$，令 $t(i)=t_{W_i}$，其中 $t_A=\rho^2$、$t_B=\rho$、$t_C=1$。这些跃迁在所有位置都满足 $0<t(i)\le1$。对每个 $j\ge4$，采用 [@ex-ch39-p2e-aligned-tribonacci-windows] 的显式窗口，写
+
+$$
+\begin{aligned}
+m&=2q+1,\qquad s=2a,\qquad N_j=2n,\\
+q&\ge1,\qquad a+m\le n,\qquad N_j\le128m.
+\end{aligned}
+$$
+
+这里 $q,a,n$ 都是自然数。相同字母具有相同跃迁，所以窗口中的字等式给出
+
+$$
+t\bigl(2a+i+(2q+1)\bigr)=t(2a+i)\qquad(0\le i<2q).
+$$
+
+因此前两个例子适用于这同一条 $N_j$ 站点开链：局部矩阵是移位跃迁 $t(2a+\cdot)$ 的块，完整逆矩阵仍取全前缀的 $L(t,n)^{-1}$，没有删除窗口外的站点，也没有添加闭合键。取其中同一个单位向量 $v$，得到 $\delta_{\rho,j}q(q+1)\le N_j$。由 $q\ge1$，
+
+$$
+\begin{aligned}
+9q(q+1)-2(2q+1)^2&=(q-1)(q+2)\ge0,\\
+N_j\delta_{\rho,j}
+&\le\frac{N_j^2}{q(q+1)}
+\le\frac{128^2(2q+1)^2}{q(q+1)}
+\le73728.
+\end{aligned}
+$$
+
+常数 $73728=128^2\cdot9/2$ 与 $j$ 和 $\rho$ 无关，不声称最优。每个替代迭代都以 $A$ 开头；替代不擦除字母，而这个首字母至少增加一个字母，所以 $L_{j+1}\ge L_j+1$、$L_j\ge j+1$，进而 $N_j\ge L_j-1\ge j$。故 $\delta_{\rho,j}\le73728/N_j\to0$。这一尾段结论不要求另行估计 $j=1,2,3$。
+
+这个界还给出对跃迁参数的一致收敛。对任意 $\varepsilon>0$，取
+
+$$
+J=\max\left\{4,\left\lfloor\frac{73728}{\varepsilon}\right\rfloor+1\right\}.
+$$
+
+由于 $N_j\ge j$，对每个 $j\ge J$ 和每个 $0<\rho<1$ 都有
+
+$$
+0\le\delta_{\rho,j}\le\frac{73728}{N_j}\le\frac{73728}{j}<\varepsilon.
+$$
+
+这里 $J$ 与 $\rho$ 无关；结论覆盖整个开区间，不把端点 $\rho=0$ 的退化模型纳入假设。
+
+这是所列窗口构造、完整逆矩阵质量估计与有限维谱转换的纸面应用推导，不带独立 Lean 验证徽章；其参数对应与形式化来源见[形式化接口](https://github.com/the-omega-institute/trureturing/issues/30166)。有限开链的这一谱界不构造多体基态，也不确定空间切口的纠缠熵或劳齐边界的维数。
+:::
+
+上例给出指定偶数开前缀的纸面 $1/N_j$ 界与趋零结论。分形熵标度仍需独立的物理态与空间切口论证；[@prob-ch39-p2e-fractal-horizon] 的这些部分保持开放。
+
+前面的定量纸面应用已经给出更强的速率。另一个独立论证只需 [@thm-ch39-p2e-tribonacci-prefix-log-refutation] 中构造的实际前缀：奇数层的正电荷无界，因而可使完整逆矩阵的一个条目充分大。
 
 ::: {.theorem #thm-ch39-p2e-tribonacci-open-chain-zero-gap title="实际正跃迁 Tribonacci 开链的全序列谱距离趋零" lean="D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.gap_tendsto_zero"}
 取 $\sigma(A)=AB$、$\sigma(B)=AC$、$\sigma(C)=A$ 的从 $A$ 出发的实际不动词 $W$，以及权重 $w(A)=2$、$w(B)=1$、$w(C)=0$。对每个固定实数 $0<\rho<1$，令 $t_i=\rho^{w(W_i)}$。对整数 $j\ge1$，令
@@ -2225,7 +2424,7 @@ $$
 源声明将 $j=0$ 时的 `gap` 定义为 $0$，以避开零维矩阵的空特征值集合；$j\ge1$ 时 $L_j\ge2$，其定义正是这里非空有限实谱的最小绝对值。这个单点约定不改变极限。完整证明由 Lean 内核检查。
 :::
 
-该定理给出每个固定 $\rho$ 的全序列极限，不给出关于 $\rho$ 的一致收敛或关于 $N_j$ 的定量速率。实际 Tribonacci 前缀的全序列速率仍需把字跃迁 $t_i=t_{W_i}$、对齐重复窗口与完整逆矩阵质量估计在同一参数约定下精确拼接，并处理最初的短前缀。本节尚未建立：对每个固定 $\rho\in(0,1)$，存在 $C_\rho>0$ 与整数 $J_\rho\ge1$，使所有 $j\ge J_\rho$ 都满足 $\delta_{\rho,j}\le C_\rho/N_j$。这样的定量界比 [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 的趋零结论更强；分形熵标度仍需独立的物理态与空间切口论证。
+这条单独的收敛定理只陈述每个固定正 $\rho$ 的全序列极限；它的单个逆矩阵条目论证不提供 $1/N_j$ 速率。前面的 [@ex-ch39-p2e-tribonacci-prefix-rate] 已用实际重复窗口与完整逆矩阵质量估计给出更强的 $73728/N_j$ 纸面界及参数一致收敛。两条论证的证据范围须分别保留；物理态、空间切口与分形熵标度仍需另外建立。
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`，移位熵与阿布拉莫夫公式属 `文献结果`，分形面积律属 `OPEN`。

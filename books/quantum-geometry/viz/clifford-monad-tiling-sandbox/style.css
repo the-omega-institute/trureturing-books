@@ -1,0 +1,64 @@
+/* MONAD//TILING: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this page lives here:
+   the pointer on the stage, the amber ε handle on vertex B, grade-coloured readouts, math kept out of uppercase, and the
+   lens chips on narrow stages. Colours come from the tokens (var(--cyan) …), never from literal colour values. */
+#stage { container-type: inline-size; }
+
+/* orbit the solid by dragging empty stage; a still (cover, cited figure shot) is a picture */
+.stage:not(.still) #cv,
+.stage:not(.still) canvas.solid-gl { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active,
+.stage:not(.still) canvas.solid-gl:active { cursor: grabbing; }
+.stage.still #cv { cursor: default; }
+
+/* the book's colour rule: the tagline and the drawer's bold leads are not "now" */
+.tagline em { color: var(--cyan); }
+.sheet li b { color: var(--cyan); }
+
+/* grade-coloured readouts: Λ³ violet (cyan, amber and magenta rows come from the theme) */
+dl.ro .v dd { color: var(--violet); }
+
+/* math never goes through an uppercase transform (ε, λ, Λ, ⋆ keep their shape) */
+.chip .m, .eps-handle .m { text-transform: none; letter-spacing: 0.02em; font-family: var(--font-data); }
+.hud-tl .big, .hud-tl .sub, .tau, #plotTitle, #plotMeta { text-transform: none; }
+.stage .tag.raw.small { font-size: 11px; }
+.stage .tag.c-vi { color: var(--violet); }
+.stage .tag.c-am { color: var(--amber); }
+
+/* the ε handle: an amber ring on vertex B, dragged along the great circle of the floor wall */
+.eps-handle {
+  position: absolute; z-index: 3; left: 0; top: 0; width: 30px; height: 30px; padding: 0;
+  display: grid; place-items: center; border: 2px solid var(--amber); border-radius: 50%;
+  background: color-mix(in srgb, var(--stage-bg) 55%, transparent); color: var(--amber);
+  font-size: 11px; line-height: 1; transform: translate(-50%, -50%);
+  cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--amber) 45%, transparent);
+}
+.eps-handle:active, .eps-handle.dragging { cursor: grabbing; }
+.eps-handle:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.eps-handle[hidden] { display: none; }
+
+/* the Hodge star operator is a small glyph in every face: set it larger without moving the line */
+.hs { display: inline-block; transform: scale(1.5); transform-origin: 50% 58%; margin: 0 0.16em 0 0.1em; text-transform: none; }
+
+/* N chips sit on their own row under the label */
+#cellCount { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+#cellCount .chip { min-width: 38px; justify-content: center; font-family: var(--font-data); }
+
+/* narrow stages: smaller lens chips and HUD text (the runtime stacks the title under the chips when they meet) */
+@container (max-width: 600px) {
+  .hud-tr .chip { padding: 3px 6px; font-size: 9.5px; letter-spacing: 0.04em; }
+  .hud-tl .big { font-size: 12.5px; }
+  .hud-tl .sub { font-size: 11px; line-height: 1.3; }
+  .hud-bl { left: 12px; right: 12px; bottom: 8px; gap: 2px 10px; font-size: 10.5px; }
+  .eps-handle { width: 26px; height: 26px; }
+}
+
+/* phones: a taller stage, so that the cell and its labels have room */
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 66vh)) auto auto; }
+}
+
+/* the tour bar selects the card (and with it the lens) in a narrow cited figure */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}
