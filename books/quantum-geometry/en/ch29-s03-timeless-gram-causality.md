@@ -334,6 +334,140 @@ $$
 Since $\det I_3=1$, its rank is three, so no completion of rank at most two exists. On the other hand, $I_3$ itself is PSD and is the Gram matrix of the standard orthonormal basis $e_1,e_2,e_3\in\mathbb R^3$, so the three-dimensional bound is attained. The planar criterion gives the same obstruction: a sum of three terms $\pm\pi/2$ cannot be an integer multiple of $2\pi$. Thus the uniform bound three cannot be replaced by two for all cycle data. This does not say that every completable input must attain rank three.
 :::
 
+The single-cycle criterion answers when one ring of prescribed overlaps can close in the same real three-dimensional space. With several intersecting cycles, another issue remains: a filled edge must have the same value in every local block that uses it. Finding a realization for each block separately does not ensure agreement on shared fill values. We first construct one common angle table, then apply the preceding rank-bounded chordal completion theorem.
+
+::: {.definition #def-ch29-graph-cycle-inequalities title="Simple cycles and angle inequalities on a graph"}
+Let $V$ be any finite vertex set and $G$ a simple graph on $V$. A clique is a vertex subset whose distinct vertices are pairwise adjacent. A graph is chordal when it has no induced cycle of length at least four.
+
+For every natural number $m\ge3$, put $I_m=\operatorname{Fin}m$ and
+
+$$
+\operatorname{next}_m(i)=i+1\pmod m.
+$$
+
+A simple cycle here is an injective map $c:I_m\to V$ satisfying
+
+$$
+G.\operatorname{Adj}\bigl(c(i),c(\operatorname{next}_m(i))\bigr)
+\quad(i\in I_m).
+$$
+
+The cycle need not be induced: simple cycles with chords are included.
+
+A real angle table $\theta:V\times V\to\mathbb R$ satisfies all cycle inequalities when, for every such $m,c$ and every odd-cardinality subset $F\subseteq I_m$,
+
+$$
+\begin{aligned}
+&\sum_{i\in F}\theta_{c(i),c(\operatorname{next}_m(i))}
+-\sum_{i\in I_m\setminus F}
+ \theta_{c(i),c(\operatorname{next}_m(i))}\\
+&\hspace{25mm}\le (|F|_{\mathbb R}-1)\pi .
+\end{aligned}
+$$
+
+The complement is taken within the whole of $I_m$. The notation $|F|_{\mathbb R}$ casts the natural-number cardinality to the reals, so subtraction on the right is real subtraction.
+
+:::
+
+::: {.lemma #lem-ch29-joint-angle-table title="One common angle table" lean="D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.exists_joint_angle_table"}
+Suppose $\theta$ is symmetric, has zero diagonal, and belongs to the closed interval $[0,\pi]$ on every $G$-edge. If it satisfies all cycle inequalities, there exists a table $\Gamma:V\times V\to\mathbb R$ such that
+
+$$
+\begin{gathered}
+\Gamma_{ab}=\Gamma_{ba},\qquad \Gamma_{aa}=0,\qquad
+0\le\Gamma_{ab}\le\pi,\\
+G.\operatorname{Adj}(a,b)\Longrightarrow
+\Gamma_{ab}=\theta_{ab},\\
+\Gamma_{ab}\le\Gamma_{ac}+\Gamma_{cb},\\
+\Gamma_{ab}+\Gamma_{bc}+\Gamma_{ca}\le2\pi .
+\end{gathered}
+$$
+
+The last two statements hold for every ordered triple $a,b,c\in V$, including repeated vertices. This lemma requires no chordal supergraph and takes neither a global vector realization nor chosen fill values as a premise.
+
+:::
+
+::: proof
+Attach two signs to each vertex, giving $V\times\{0,1\}$. Traversing an original edge costs $\theta_{ab}$ when its endpoint signs agree and $\pi-\theta_{ab}$ when they differ. Every edge cost is nonnegative. On a simple cycle with an odd number of sign changes, the assertion that total cost is at least $\pi$ is exactly the corresponding odd-subset inequality.
+
+The same lower bound holds for every walk whose projection is closed but whose endpoint signs differ. At a repeated projected vertex, different signs isolate a shorter walk of this kind; equal signs allow removal of a closed segment with nonnegative cost. Induction on length reduces the assertion to simple cycles and two-edge backtracks. An opposite-sign backtrack costs $\theta_{ab}+(\pi-\theta_{ab})=\pi$.
+
+Now insert a missing pair $u,v$. Write $W(p)$ for a signed walk’s total cost and choose
+
+$$
+x=\sup\left(
+\{0\}\cup
+\{\pi-W(q):q:(u,0)\leadsto(v,1)\}
+\right).
+$$
+
+The set ranges over all such walks in the current graph. Nonnegative costs give $0\le x\le\pi$. Every opposite-sign walk $q$ satisfies $\pi-x\le W(q)$. For every same-sign walk $p:(u,0)\leadsto(v,0)$, append the reverse of the sign-flipped $q$. The opposite-sign closed-walk bound gives $x\le W(p)$. Thus this single $x$ satisfies all path lower and upper bounds simultaneously.
+
+On the four signed endpoint states, define a common boundary distance: at the same vertex it is $0$ or $\pi$, and at different vertices it is $x$ or $\pi-x$, according as the signs agree or differ. These distances satisfy the triangle inequality. Split walks at their new edges and apply that triangle inequality to preserve boundary-distance lower bounds. Splitting at the first new edge and appending the sign-flipped original prefix then preserves the $\pi$ lower bound for every opposite-sign closed walk.
+
+There are only finitely many simple graphs on the finite carrier. Choose a maximal supergraph preserving these properties. If an edge were missing, the insertion above would enlarge it, so it must be complete. Its common table is $\Gamma$. Three-edge opposite-sign closed walks in the complete graph give the angle triangle inequalities and perimeter bound; diagonal and interval bounds handle repeated vertices. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch29-partial-two-tree-rank-three-completion title="Rank-at-most-three completion under the partial-two-tree hypothesis" lean="D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.partial_two_tree_rank_three_iff"}
+Let $V$ be any finite vertex set and $G$ a simple graph on $V$. Explicitly assume that there exists a simple graph $H$ **on the same vertex set $V$** such that
+
+$$
+G\le H,\qquad H\text{ is chordal},\qquad
+\forall C\subseteq V,\quad
+H.\operatorname{IsClique}(C)\Longrightarrow |C|\le3.
+$$
+
+Here $G\le H$ means that every $G$-edge is an $H$-edge; the clique quantifier includes the empty clique.
+
+Let $A$ be a real symmetric matrix on $V$ satisfying
+
+$$
+A_{ii}=1,\qquad
+G.\operatorname{Adj}(i,j)\Longrightarrow -1\le A_{ij}\le1,
+$$
+
+and put $\theta_{ij}=\arccos(A_{ij})$. The following are equivalent:
+
+1. There exists a real matrix $B$ such that
+
+   $$
+   B\succeq0,\qquad \operatorname{rank}_{\mathbb R}B\le3,\qquad
+   B_{ii}=1,\qquad
+   G.\operatorname{Adj}(i,j)\Longrightarrow B_{ij}=A_{ij}.
+   $$
+
+2. The table $\theta$ satisfies all cycle inequalities defined above.
+
+Nonedge entries of $A$ need not belong to $[-1,1]$ and need not be preserved by $B$. No fill values on $H\setminus G$ are prescribed. The vertex set may be empty and the graph disconnected. Closed endpoints $A_{ij}=\pm1$, repeated realization vectors, configurations that do not span three-dimensional space, and singular completions are included. The rank bound is at most three, not necessarily exactly three.
+
+:::
+
+::: proof
+For necessity, restrict $B$ to any simple cycle $c:I_m\to V$. The principal submatrix remains positive semidefinite, its rank cannot increase, and its diagonal and cyclic edge entries are preserved. The preceding cycle criterion supplies every odd-subset inequality for that cycle.
+
+For sufficiency, apply the common-angle-table lemma to $\theta=\arccos A$ and set
+
+$$
+T_{ij}=\cos\Gamma_{ij}.
+$$
+
+Every $H$-clique has at most three vertices. For three angles, the triangle inequalities and perimeter bound are exactly the three singleton odd-subset conditions and the full-set condition in the three-cycle criterion. The corresponding cosine block is therefore positive semidefinite. The formal proof embeds each nonempty clique into three slots and uses a left inverse to enumerate its vertices; slots may repeat for one- or two-vertex cliques, after which the matrix is restricted back to the clique. The empty clique uses the empty matrix. Each clique block has rank at most its cardinality, hence at most three.
+
+All these blocks come from **the same $T$**, so their shared entries already agree. Apply the rank-bounded chordal completion theorem with $d=3$. It supplies a global positive-semidefinite matrix $B$, of rank at most three, preserving the diagonal and all $H$-edge entries. Finally,
+
+$$
+\cos\Gamma_{ii}=1,\qquad
+\cos\Gamma_{ij}=\cos(\arccos A_{ij})=A_{ij}
+\quad(\{i,j\}\in E(G)),
+$$
+
+which gives the required completion. The full proof is checked by the Lean kernel.
+:::
+
+The common table resolves agreement of fill values. Separate local clique realizations may assign different inner products to the same unspecified vertex pair, so those witnesses cannot directly supply the input to chordal assembly. Once common entries agree, the preceding rank-bounded assembly theorem aligns equal-Gram families by ambient isometries and assembles them in the same real three-dimensional space.
+
+This is a formalization of established mathematics, with no claim of mathematical novelty. Laurent’s [CWI report BS-R9439 (1994)](https://ir.cwi.nl/pub/5067/5067D.pdf) supplies the relevant angle-polytope and correlation-matrix feasibility results: equation (2.2) on printed page 4, Theorem 4.2 and Proposition 4.3 on page 7, and Theorem 4.7 on page 10. The journal version appeared in 1997, DOI [10.1016/0024-3795(95)00741-5](https://doi.org/10.1016/0024-3795(95)00741-5). The uniform rank-three bound here is obtained separately through rank-bounded chordal assembly; see Laurent–Varvitsiotis, [arXiv:1204.0734v1](https://arxiv.org/abs/1204.0734v1), for background. This section uses the stated same-vertex chordal-supergraph hypothesis directly, without replacing it by a graph-minor criterion. The conclusion is static existence for fixed input; it supplies no uniqueness, algorithm, parameter-continuous fill or physical dynamics, and does not settle the preceding continuous Gram-factor selection question.
+
 ::: {.viz src="gram-causal-elliptope" preset="narrow" height="500"}
 **One more step remembered, one ring narrower.** The rail adds history from $M = 1$ to $M = 5$: each older anchor adds a magenta ellipse to the slice, nested inside the last, and the cyan window through the amber $\mathbf{Q}$ narrows with it, from all of $[-1, 1]$ to about a quarter of that, with $\mathbf{Q}$ inside throughout. The events live in $\mathbb{R}^6$, so every depth keeps an inside; reading the compatible space as a finite observer's room for choice is this book's interpretation (`MODEL`).
 :::

@@ -2845,6 +2845,22 @@
       "line": 581,
       "signature": "theorem cycle_rank_three_iff {n : ℕ} (hn : 3 ≤ n) (a : Fin n → ℝ) (ha : ∀ i, -1 ≤ a i ∧ a i ≤ 1) : (∃ B : Matrix (Fin n) (Fin n) ℝ, B.PosSemidef ∧ B.rank ≤ 3 ∧ (∀ i, B i i = 1) ∧ ∀ i, B i (finRotate n i) = a i) ↔ ∀ F : Finset (Fin n), Odd F.card → (∑ i ∈ F, arccos (a i)) - (∑ i ∈ Finset.univ \\ F, arccos (a i)) ≤ ((F.card : ℝ) - 1) * π"
     },
+    "D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.exists_joint_angle_table": {
+      "module": "D5/S3/QuadraticForms/PartialTwoTreePsdCompletion",
+      "name": "D5.S3.QuadraticForms.PartialTwoTreePsdCompletion.exists_joint_angle_table",
+      "kind": "theorem",
+      "statement_id": "sha256:5ee0d93b07aaf1530c26fba6ab0957041cd2928b8d754328865e821697ddb47b",
+      "line": 592,
+      "signature": "theorem exists_joint_angle_table [Finite V] (G : SimpleGraph V) (θ : V → V → ℝ) (hsym : ∀ a b, θ a b = θ b a) (hd : ∀ a, θ a a = 0) (hθ : ∀ a b, G.Adj a b → 0 ≤ θ a b ∧ θ a b ≤ Real.pi) (hcycles : ∀ (m : ℕ), 3 ≤ m → ∀ c : Fin m → V, Function.Injective c → (∀ i, G.Adj (c i) (c (finRotate m i))) → ∀ F : Finset (Fin m), Odd F.card → (∑ i ∈ F, θ (c i) (c (finRotate m i))) - (∑ i ∈ Finset.univ \\ F, θ (c i) (c (finRotate m i))) ≤ ((F.card : ℝ) - 1) * Real.pi) : ∃ Γ : V → V → ℝ, (∀ a b, Γ a b = Γ b a) ∧ (∀ a, Γ a a = 0) ∧ (∀ a b, 0 ≤ Γ a b ∧ Γ a b ≤ Real.pi) ∧ (∀ a b, G.Adj a b → Γ a b = θ a b) ∧ (∀ "
+    },
+    "D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.partial_two_tree_rank_three_iff": {
+      "module": "D5/S3/QuadraticForms/PartialTwoTreePsdCompletion",
+      "name": "D5.S3.QuadraticForms.PartialTwoTreePsdCompletion.partial_two_tree_rank_three_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:5ee0d93b07aaf1530c26fba6ab0957041cd2928b8d754328865e821697ddb47b",
+      "line": 729,
+      "signature": "theorem partial_two_tree_rank_three_iff [Finite V] (G : SimpleGraph V) (hG : ∃ H : SimpleGraph V, G ≤ H ∧ H.IsChordal ∧ ∀ C : Set V, H.IsClique C → Nat.card C ≤ 3) (A : Matrix V V ℝ) (hsym : ∀ i j, A i j = A j i) (hdiag : ∀ i, A i i = 1) (hbound : ∀ i j, G.Adj i j → -1 ≤ A i j ∧ A i j ≤ 1) : (∃ B : Matrix V V ℝ, B.PosSemidef ∧ B.rank ≤ 3 ∧ (∀ i, B i i = 1) ∧ (∀ i j, G.Adj i j → B i j = A i j)) ↔ ∀ (m : ℕ), 3 ≤ m → ∀ c : Fin m → V, Function.Injective c → (∀ i, G.Adj (c i) (c (finRotate m i))) → ∀ F : Finset (Fin m), Odd F.card → (∑ i ∈ F, Real.arccos (A (c i) (c (finRotate m i)))) - (∑ i ∈ Fins"
+    },
     "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le": {
       "module": "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion",
       "name": "D5.S3.QuadraticForms.RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le",
