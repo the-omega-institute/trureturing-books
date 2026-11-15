@@ -19,7 +19,7 @@ $$
 \cos^2\epsilon \;+\; \sin^2\epsilon \;=\; 1.
 $$
 
-假若微观演化步真的是一小段沿切线直冲出去的欧氏直线 $\mathbf{u} + \epsilon\,\mathbf{e}_\perp$，其范数平方将膨胀为 $1 + \epsilon^2 > 1$，当场破坏双向比较的概率守恒与幺正公平！为了守住单位球面，状态端点在跨出横向切向分量 $\sin\epsilon$ 的同一瞬间，**必须沿原基准轴向内回缩一段严格为正的法向矢高（Sagitta）$1 - \cos\epsilon > 0$**。第二，在离散可区分的观测与准晶切投模型中，[第三十七章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)冻结的黄金模型集 Delone 定理 [`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)（[@thm-ch37-golden-cut-delone-multilocation]，`LEAN ✓`）证明切投点集天然具备严格正的离散堆积半径 $r_{\mathrm{pack}} = \frac{1}{2} > 0$（配对有限覆盖半径 $r_{\mathrm{cov}} = 3$）；在本书的物理模型（`MODEL`）中，这意味着真实物理分辨率下存在不可坍缩为零的最小角步尺度 $\epsilon_{\min} > 0$。将极小圆弧在完备赋范代数中展开——其有限阶泰勒截断余项在任意半径球 $\lVert z\rVert \le r$ 内由[第三十六章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)冻结定理 [`exp_tail_le`](lean:D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le)（[@thm-ch36-taylor-tail-and-cayley-boundary]，`LEAN ✓`：$\bigl\lVert\exp(z) - \sum_{k=0}^{n-1}\frac{z^k}{k!}\bigr\rVert \le \frac{r^n}{n!}e^r$）严格控制——极小圆弧立刻显露出牛顿切线近似永远看不见的双重结构：
+假若微观演化步真的是一小段沿切线直冲出去的欧氏直线 $\mathbf{u} + \epsilon\,\mathbf{e}_\perp$，其范数平方将膨胀为 $1 + \epsilon^2 > 1$，当场破坏双向比较的概率守恒与幺正公平！为了守住单位球面，状态端点在跨出横向切向分量 $\sin\epsilon$ 的同一瞬间，**必须沿原基准轴向内回缩一段严格为正的法向矢高（Sagitta）$1 - \cos\epsilon > 0$**。第二，在离散可区分的观测与准晶切投类比中，[第三十七章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)冻结的黄金模型集 Delone 定理 [`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)（[@thm-ch37-golden-cut-delone-multilocation]，`LEAN ✓`）针对实直线 $\mathbb{R}$ 上特定的黄金窗切投点集 `modelSet goldenWindow` 证得严格正堆积半径 $r_{\mathrm{pack}} = \frac{1}{2}$ 与有限覆盖半径 $r_{\mathrm{cov}} = 3$；该定理本身并不导出普适最小角步或物理动力学，引入不可坍缩的最小物理角步 $\epsilon_{\min} > 0$ 属本书独立的物理模型假设（`MODEL`）。将极小圆弧在完备赋范代数中展开——其有限阶泰勒截断余项在任意半径球 $\lVert z\rVert \le r$ 内由[第三十六章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)冻结定理 [`exp_tail_le`](lean:D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le)（[@thm-ch36-taylor-tail-and-cayley-boundary]，`LEAN ✓`：$\bigl\lVert\exp(z) - \sum_{k=0}^{n-1}\frac{z^k}{k!}\bigr\rVert \le \frac{r^n}{n!}e^r$）严格控制——极小圆弧立刻显露出牛顿切线近似永远看不见的双重结构：
 
 $$
 \sin\epsilon \;=\; \epsilon - \frac{\epsilon^3}{6} + O(\epsilon^5) \quad (\text{一阶平直切向位移 } dx), \qquad 1 - \cos\epsilon \;=\; 2\sin^2\!\frac{\epsilon}{2} \;=\; \frac{\epsilon^2}{2} - \frac{\epsilon^4}{24} + O(\epsilon^6) \quad (\text{二阶圆弧矢高}),
@@ -41,14 +41,14 @@ $$
   \sum_{k=1}^{N} (1 - \cos\epsilon_k) \;\approx\; N \cdot \frac{(\Theta/N)^2}{2} \;=\; \frac{\Theta^2}{2N} \;\xrightarrow{\;N\to\infty\;}\; 0.
   $$
 
-  这正是经典微积分“以直代曲”得以成功的唯一温床：在光滑单轨假设下，$\epsilon \sim N^{-1}$ 迫使全部二阶圆弧几何在极限中蒸发殆尽！
-- **第二标度（未抵消费曼路径束的费曼—伊藤二次标度 $\epsilon_k \propto 1/\sqrt{N}$，二阶矢高严格守恒为 $O(1)$）**：然而在真实量子演化中，没有任何外部之手替粒子预先抹去旁路！考察时间区间 $[0, T]$ 等分为 $N$ 拍（$\Delta t = T/N$）的自由传播相位因子 $\exp\!\bigl(\frac{i}{\hbar}\sum_{k=1}^N \frac{m(\Delta x_k)^2}{2\Delta t}\bigr)$（`文献结果：Itô 1944, Feynman 1948, Kac 1949` + `手工推导`）：凡是步幅远超菲涅耳管宽度 $\Delta x_k \gg \sqrt{\frac{\hbar}{m}\Delta t}$ 的剧烈折线，因相位高速旋转而彼此相消；真正对路径积分作出相长贡献的主力路径束，全都是步幅满足扩散标度
+  在光滑单轨的均匀标度下，$\epsilon \sim N^{-1}$ 虽使局部步长平方和 $\sum_{k=1}^N \epsilon_k^2 \sim \Theta^2/N \to 0$（相邻态内积模长损失随之消失），却并不抹去闭合光滑回路的几何和乐：例如沿固定余纬 $\theta_0$ 绕行一周的光滑回路，在任意加密细分使局部步长平方和趋于零时，其贝里相位 $\gamma = -\pi(1 - \cos\theta_0)$ 依然恒定保留。经典微积分“以直代曲”所抹平的只是局部二次矢高与步长平方亏损，而非弯曲状态空间中闭环的面积与曲率和乐！
+- **第二标度（未抵消费曼路径束的费曼—伊藤二次标度 $\epsilon_k \propto 1/\sqrt{N}$，二阶矢高严格守恒为 $O(1)$）**：然而在真实量子演化中，没有任何外部之手替粒子预先抹去旁路！考察时间区间 $[0, T]$ 等分为 $N$ 拍（$\Delta t = T/N$）的自由传播相位因子 $\exp\!\bigl(\frac{i}{\hbar}\sum_{k=1}^N \frac{m(\Delta x_k)^2}{2\Delta t}\bigr)$（`文献结果：Itô 1944, Feynman 1948, Kac 1949` + `手工推导`）：凡是步幅远超菲涅耳管宽度 $\Delta x_k \gg \sqrt{\frac{\hbar}{m}\Delta t}$ 的剧烈折线，因相位高速旋转而彼此相消；避开高速相位相消的相长区段则对应特征尺度
 
   $$
   \Delta x_k \;\sim\; \ell_0\,\epsilon_k \;\propto\; \sqrt{\frac{\hbar}{m}\,\Delta t} \;=\; \sqrt{\frac{\hbar T}{m N}} \qquad \Longleftrightarrow \qquad \epsilon_k \;=\; \frac{\Theta_{\mathrm{Ito}}}{\sqrt{N}}
   $$
 
-  的处处不可微折线圆弧族！一旦 $\epsilon_k \propto N^{-1/2}$，单步圆弧的二阶矢高 $\frac{1}{2}\epsilon_k^2 \propto \frac{1}{N}$ 与总步数 $N$ 恰好形成 **$N \times N^{-1} = O(1)$ 的精确共振**：
+  的折线分布区段（此处必须区分：实时间振荡振幅 $e^{iS/\hbar}$ 的菲涅耳截断在数学上不同于威克转动后的正欧氏／维纳布朗扩散测度，不能由驻相直接断言实时间轨迹必为布朗路径）。在离散二次标度模型 $\epsilon_k \propto N^{-1/2}$ 下，单步圆弧的二阶矢高 $\frac{1}{2}\epsilon_k^2 \propto \frac{1}{N}$ 与总步数 $N$ 恰好形成 **$N \times N^{-1} = O(1)$ 的精确共振**：
 
   $$
   \sum_{k=1}^{N} (1 - \cos\epsilon_k) \;=\; \sum_{k=1}^{N}\left(\frac{\Theta_{\mathrm{Ito}}^2}{2N} - \frac{\Theta_{\mathrm{Ito}}^4}{24 N^2} + O(N^{-3})\right) \;\xrightarrow{\;N\to\infty\;}\; \frac{\Theta_{\mathrm{Ito}}^2}{2} \;\propto\; \frac{\hbar T}{2m} \;>\; 0!
@@ -186,7 +186,7 @@ $$
 | **3. 相位偏置与宏观力** | 相邻极小圆弧之间加载空间非均匀局部贝里联络与势相位偏置 $\delta\phi = \frac{q}{\hbar}\mathcal{A}_\mu dx^\mu - \frac{1}{\hbar}V dt$ | 巴格曼多步传播链 `bargmann_path_product`（`LEAN ✓`）使相长干涉脊线向低相位梯度侧折射，闭合小面元按斯托克斯定理积分环路相位通量 | 牛顿第二定律 $\mathbf{F} = -\nabla V = m\mathbf{a}$、洛伦兹力与麦克斯韦宏观电磁场强 $\mathcal{F} = d\mathcal{A}$（`文献结果` / `MODEL`，外部规范动力学边界见假设 `H8`） |
 | **4. 旋量拓扑双覆叠** | 半角旋子 $\cos\frac{\epsilon}{2} - \hat{\mathbf{I}}\sin\frac{\epsilon}{2}$ 绕行 $360^\circ$ 换叶翻转至 $-1$，唯绕满 $720^\circ$ 方始闭合复原（`LEAN ✓`：`circle_double_cover_history_lift`） | 双覆叠拓扑同伦扇区带权求和：奇半整数自旋交换路径保留拓扑负号 $(-1)$，偶整数自旋路径同相叠加放大 | 费米子泡利不相容简并排斥刚性（支撑原子壳层与宏观固体不可压缩性）与玻色子宏观相干经典场（`文献结果` / `MODEL`） |
 | **5. 超静定单纯形角亏** | 全连通 $K_N$ 极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的二上链缺陷与 $N \ge 5$ 超静定铰链角亏 $\delta_e = 2\pi - \sum_k \theta_k$（`LEAN ✓`：`tetra_defects_incidence_repair_and_exactness`） | 共面内壁按 $\partial^2 = 0$ 成对抵消，庞扎诺—雷吉与自旋泡沫配分函数对离散铰链角亏执行大尺度粗粒平均 | 广义相对论光滑黎曼曲率张量与爱因斯坦引力场方程 $G_{\mu\nu} = 8\pi G T_{\mu\nu}$（`文献结果`；四维洛伦兹连续统极限标 `MODEL` / `OPEN`） |
-| **6. 驻波体积与热力学熵** | 离散非零堆积半径 $r_{\mathrm{pack}} = \frac{1}{2} > 0$（`LEAN ✓`：`exists_golden_modelSet_delone`）上的单胞态兼具主对角驻波模长与异向微弧副对角相干 | 整数圈锁相回路 $\gamma_B = 2\pi n$ 相长幸存；落入同一宏观粗粒读出桶 `EscapePairs` 的微弧经对角捏合 $\Pi_{\mathrm{diag}}$ 抹除副对角相位相干 | “同相成体，漏相化热”：幸存驻波节点凝聚为宏观实体体积（[§34.7](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence)），被删微弧相干严格化为非负冯·诺依曼热力学熵增 $\Delta S_{\mathrm{vN}} = \sum_k D(\tilde{\rho}_k \Vert \Pi_{\mathrm{diag}}(\tilde{\rho}_k)) \ge 0$（`LEAN ✓`：`entropy_production_coherence_deletion_identity`） |
+| **6. 驻波体积与热力学熵** | 依特定实直线 Delone 集离散间距 $r_{\mathrm{pack}} = \frac{1}{2}$（`LEAN ✓`：`exists_golden_modelSet_delone`）作结构类比，模型单胞态兼具主对角驻波模长与异向微弧副对角相干 | 整数圈锁相回路 $\gamma_B = 2\pi n$ 相长幸存；落入同一宏观粗粒读出桶 `EscapePairs` 的微弧经对角捏合 $\Pi_{\mathrm{diag}}$ 抹除副对角相位相干 | “同相成体，漏相化热”：幸存驻波节点凝聚为宏观实体体积（[§34.7](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence)），被删微弧相干严格化为非负冯·诺依曼热力学熵增 $\Delta S_{\mathrm{vN}} = \sum_k D(\tilde{\rho}_k \Vert \Pi_{\mathrm{diag}}(\tilde{\rho}_k)) \ge 0$（`LEAN ✓`：`entropy_production_coherence_deletion_identity`） |
 
 下面我们用一组完全闭式可核验的定量基准算例，把极小圆弧矢高、光滑特罗特归零对比费曼—伊藤守恒，以及 $41$ 路圆弧束的相位折射与捏合熵税逐位算透：
 
@@ -226,6 +226,41 @@ $$
 1. **经典微积分、随机微积分、路径积分、算符半群、规范几何相位与离散引力文献**：经典切线微分学奠基于 G. W. Leibniz（*Acta Eruditorum*, 467, 1684）与 I. Newton（*Philosophiae Naturalis Principia Mathematica*, 1687）；布朗扩散路径二次变差恒等式 $(dW_t)^2 = dt$ 由 K. Itô（*Proc. Imp. Acad. Tokyo* **20**, 519, 1944）建立；量子力学时空历史求和表述、由分步时间切片导出 $[\hat{x}, \hat{p}] = i\hbar$ 与薛定谔方程以及 $\hbar \to 0$ 驻相极限回归经典最小作用量 $\delta S = 0$ 由 R. P. Feynman（*Rev. Mod. Phys.* **20**, 367, 1948；参见 R. P. Feynman & A. R. Hibbs, *Quantum Mechanics and Path Integrals*, McGraw-Hill, 1965）创立，虚时间维纳测度严格化（费曼—卡茨公式）由 M. Kac（*Trans. Amer. Math. Soc.* **65**, 1, 1949）证明；非对易生成元分步指数乘积公式由 H. F. Trotter（*Proc. Amer. Math. Soc.* **10**, 545, 1959）确立；电磁规范联络环路相位效应与绝热几何相位分别出自 Y. Aharonov & D. Bohm（*Phys. Rev.* **115**, 485, 1959）与 M. V. Berry（*Proc. R. Soc. Lond. A* **392**, 45, 1984），多顶点规范不变射线内积环路乘积出自 V. Bargmann（*J. Math. Phys.* **5**, 862, 1964）；单纯形铰链角亏引力、$\mathrm{SU}(2)$ $6j$-符号三维量子引力渐近雷吉作用量与四维自旋泡沫求和模型分别出自 T. Regge（*Nuovo Cimento* **19**, 558, 1961）、G. Ponzano & T. Regge（*Spectroscopic and Group Theoretical Methods in Physics*, North-Holland, 11, 1968）及 C. Rovelli & L. Smolin（*Phys. Rev. D* **52**, 5743, 1995）/ A. Perez（*Living Rev. Relativ.* **16**, 3, 2013）；
 2. **本书内核验证锚点（`LEAN ✓`）**：拉格朗日—格拉姆恒等式 `lagrange_gram_identity`、完备赋范代数指数截断尾界 `exp_tail_le`、李—特罗特乘积极限 `trotter_product`、罗伯逊—薛定谔方差—换位子分解 `robertson_schrodinger`、圆周双覆叠唯一路径提升与 $360^\circ$ 换叶定理 `circle_double_cover_history_lift`、黄金模型集正堆积半径 Delone 证书 `exists_golden_modelSet_delone`、多步离散巴格曼路径乘积恒等式 `bargmann_path_product`、四面体单纯二上链缺陷修复与正合判据 `tetra_defects_incidence_repair_and_exactness` 以及相干删除冯·诺依曼熵产恒等式 `entropy_production_coherence_deletion_identity` 等九项核心定理，均已由 [@thm-ch34-quantum-arc-differential-and-macro-integral] 在 Lean 4 内核中完整验证；
 3. **连续统测度、无界算符定义域、外部规范场动力学与四维引力涌现的诚实边界（`MODEL` / `OPEN`）**：（a）在无穷维连续路径空间上，洛伦兹实时间复振幅 $e^{iS/\hbar}\mathcal{D}x$ 并不构成具有有界全变差的 $\sigma$-可加复测度（R. H. Cameron, *J. Math. Phys.* **39**, 126, 1960），其严格数学定义依赖有限时间切片振荡积分极限或威克转动至欧氏卡茨—维纳测度；（b）无界位置与动量算符的正则对易子 $[\hat{x}, \hat{p}] = i\hbar$ 及谐振子零点能下界受稠密不变定义域与外尔指数形式约束（见[附录 E](appendix-e.md)假设 `H6`）；（c）将局部相位偏置提升为具有独立麦克斯韦/杨—米尔斯作用量的外部时空规范场受[附录 E](appendix-e.md)假设 `H8` 界定；（d）由离散极小圆弧体/自旋泡沫配分函数在四维洛伦兹连续统极限下严格收敛出光滑爱因斯坦场方程 $G_{\mu\nu} = 8\pi G T_{\mu\nu}$，在当代数学物理中仍属开放前沿（`MODEL` / `OPEN`）。
+:::
+
+::: {.remark #rem-ch34-wkb-transfer-bloch-chord-and-arc-limits title="标度收敛、WKB 双曲传递与布洛赫混态弦的边界"}
+**证据分级**：本注记结合标准定态量子散射求解、前文极小圆弧标度结果与本书 `MODEL` 边界说明（手工分析，未在本书作为新增 Lean 定理锁定）。
+
+将极小圆弧语言外推至势垒隧穿与离散时空时，三项结构区别须保持清晰：
+
+1. **振荡标度、光滑闭环与黄金 Delone 定理的各自边界**：实时间振荡路径积分与威克转动后的正维纳扩散测度需要不同的数学处理；同时，沿固定光滑余纬圈细分虽令局部步长平方和趋于零，闭合回路的曲率—面积和乐 $\gamma = -\pi(1 - \cos\theta_0)$ 依然保留。至于已冻结的 `exists_golden_modelSet_delone`，它刻画的是实直线上特定准晶切投集的堆积与覆盖半径（$r_{\mathrm{pack}} = \frac{1}{2}, r_{\mathrm{cov}} = 3$），既不决定普适角步长 $\epsilon_{\min}$，也不产生动力学方程。
+2. **静态矩形势垒的 WKB 虚动量与双曲空间传递**：对于内区势能取常数 $V(x) = V_0$（$x \in (0, L)$）的一维静态矩形实势垒，若两侧外区势能相等（设 $V(x) = 0$ 于 $x < 0$ 及 $x > L$）且粒子能量满足 $0 < E < V_0$，则禁戒区内的逆衰减长度（单位 $\mathrm{m}^{-1}$）为 $\kappa = \sqrt{2m(V_0 - E)}/\hbar$，对应常势能区 WKB 虚动量 $p_{\mathrm{WKB}} = i\hbar\kappa$（一般非恒定势垒需另行作变势 WKB 处理，不能直接套用这一常生成元公式）。按空间坐标写为一阶常微分方程 $\frac{d}{dx}(\psi, \psi')^{\mathsf{T}} = G_E(\psi, \psi')^{\mathsf{T}}$ 时，生成元满足 $G_E^2 = \kappa^2 I$，空间传递矩阵表现为双曲形式
+
+   $$
+   e^{LG_E} = \cosh(\kappa L)I + \frac{\sinh(\kappa L)}{\kappa}G_E.
+   $$
+
+   这是定态微分方程沿空间 $x$ 的双曲延拓，物理实时间演化依然由自伴哈密顿量生成的幺正算符 $e^{-iHt/\hbar}$ 主导，并不蕴含额外的物理空间坐标轴。
+3. **有限势垒的双指数匹配与布洛赫混态弦**：有限厚度矩形势垒内部必须同时保留递增与衰减两支实指数 $\psi(x) = Ae^{\kappa x} + Be^{-\kappa x}$ 方可匹配两侧边界并承载非零概率流 $j = \frac{\hbar}{m}\operatorname{Im}(\psi^*\psi')$（孤立的单支衰减解 $Be^{-\kappa x}$ 概率流恒为零）；在上述等外势与 $0 < E < V_0$ 条件下，精确透射率为
+
+   $$
+   T = \left[1 + \frac{V_0^2\sinh^2(\kappa L)}{4E(V_0 - E)}\right]^{-1}.
+   $$
+
+   相对地，布洛赫球内部的直弦 $\rho_s = (1 - s)P_a + sP_b$（$0 \le s \le 1$）表示归一化混合密度算符（当 $0 < s < 1$ 且 $P_a \neq P_b$ 时具有 $Q(\rho_s) > 0$），而非未归一化的空间衰减波函数分量。把隧穿与时间双缝理解为“虚平面 $90^\circ$ 内割弦”属于本书启发式的 `MODEL` 隐喻，其与可观测量之间的定量桥梁由 [§34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral) 的复作用量双历史模型与[第 37 章 §37.2](ch37-s02-dream-quantum-erasure.md) 共同承担。
+:::
+
+::: {.example #ex-ch34-negative-weak-time-and-experiments title="负条件弱时间玩具算例与时间双缝实验边界"}
+**证据分级**：含正算符负弱值玩具算例的手工计算，以及四篇已发表实验论文的文献范围核对（未在本书形式化）。
+
+1. **条件弱值为负并不意味着负概率（手工推导）**：设正驻留时间算符为 $D = \operatorname{diag}(1, 2)$，初态为 $|i\rangle = \frac{1}{\sqrt{2}}(1, 1)^{\mathsf{T}}$，后选择末态为 $|f\rangle = \frac{1}{5}(4, -3)^{\mathsf{T}}$。此时无后选择期望值严格为正（$\langle i|D|i\rangle = \frac{3}{2}$），后选择成功概率为 $P = |\langle f|i\rangle|^2 = \frac{1}{50}$，而条件弱值翻负：
+
+   $$
+   D_w = \frac{\langle f|D|i\rangle}{\langle f|i\rangle} = \frac{4\cdot 1 + (-3)\cdot 2}{4 - 3} = -2 < 0.
+   $$
+
+   等价地，对双历史信号 $A(E) = 4e^{iE\tau_1/\hbar} - 3e^{iE\tau_2/\hbar}$（$\tau_1 = 1, \tau_2 = 2$），相位对能量导数 $\hbar\partial_E\arg A(E)$ 在 $E = 0$ 处同样等于 $-2$。负条件弱时间源于振幅相消加权的条件读数，既非负概率轨迹，也与读取混合态谱分布的 $Q(\rho) \ge 0$ 分属不同运算层级。
+2. **实验文献的实际测量范围**：（a）Lindner 等（*Phys. Rev. Lett.* **95**, 040401, 2005，[doi:10.1103/PhysRevLett.95.040401](https://doi.org/10.1103/PhysRevLett.95.040401)）利用约 $500\;\mathrm{as}$ 的光致电离时间窗测得受哪一历史信息调控的角分辨电子能谱干涉条纹；（b）Tirole 等（*Nature Phys.* **19**, 999, 2023，[doi:10.1038/s41567-023-01993-w](https://doi.org/10.1038/s41567-023-01993-w)）以氧化铟锡（ITO）超快时变门控观测光束时间双缝频谱干涉，属于光束时间折射与频谱条纹演示，而非单光子源实验；（c）Rao 等（*Phys. Rev. Lett.* **135**, 066704, 2025，[doi:10.1103/jc1c-k3ll](https://doi.org/10.1103/jc1c-k3ll)）报道时变强耦合磁子模式的时间衍射，不应自动外推为逐个单磁子数据；（d）Angulo 等（*Phys. Rev. Lett.* **136**, 153601, 2026，[doi:10.1103/gjfq-k9dv](https://doi.org/10.1103/gjfq-k9dv)）结合交叉克尔（cross-Kerr）弱探针、相干信号与点击／无点击差分推断，测得光子透射条件下原子激发态的负条件弱时间——该效应超出了单纯脉冲峰值重塑，但仍属条件弱相互作用读数，并非粒子沿时间倒流或额外虚空间轴行进的直接证明（虚平面内割弦仍标为 `MODEL`）。
 :::
 
 至此，我们在第十一级阶梯上扶正了颠倒百年的微积分对偶：微观量子力学正是单位球面上不可线性化的极小圆弧微分元（$\delta$），而宏观牛顿惯性、力场折射、弯曲时空、实体体积与热力学熵增，全都是万千量子圆弧经路径积分“以曲拼直、同相成体、漏相化热”后浮现的积分包络（$\int$）。然而，顺着这道路径积分之桥再往前追问一步，整座物理学与几何学的底层本体论还将迎来一场更彻底的回环贯通：既然路径积分能把微观量子圆弧缝合成宏观物理，宇宙难道是一条“从底层砖块单向堆砌上层建筑”的单行道吗？**为什么老子说“反者道之动”，现代物理学又说“万物皆为场”？为什么在几何学里我们总是说“线、面、体”，在矢量分析里总是说“梯度、旋度、散度”，在物理学里又总是说“粒子、波、场”——为什么人类最核心的空间概念与物理概念偏偏总是“三个概念成一组”，既不止于二、也不溢于四？** 先在下方 `ARC//MACRO` 完整交互实验室中亲手推演极小圆弧矢高、费曼—伊藤二次标度、量子三大圆弧特征、“以曲拼直”驻相缝合与微积分跨尺度变焦，随后步入 [§34.12](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop)，揭开“一弧生三相、万物互为路径积分”的圆满闭环：
