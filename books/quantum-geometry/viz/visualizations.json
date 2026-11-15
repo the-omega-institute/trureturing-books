@@ -5565,6 +5565,51 @@
           "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary"
         }
       ]
+    },
+    {
+      "id": "prelude-dimensions",
+      "code": "PRELUDE//SHADOWS",
+      "title": "序曲几何导览 · 看清影子丢掉了什么",
+      "title_en": "Prelude geometry · See what a shadow leaves out",
+      "summary": "同步拖动俯视圆盘上的木桩与侧视影子，比较同位反向的两个时刻；再探索观看角度、纬圈、外围方向、等权混合与余弦反馈。",
+      "summary_en": "Move a peg around a disc and follow its edge-on shadow, then compare coincident positions with opposite motion. Explore viewing angles, latitudes, an ambient direction, equal-weight mixing, and cosine feedback.",
+      "path": "prelude-dimensions/",
+      "thumbnail": "prelude-dimensions/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "tags": [
+        "序曲",
+        "投影",
+        "圆周运动",
+        "几何直觉"
+      ],
+      "tags_en": [
+        "Prelude",
+        "Projection",
+        "Circular motion",
+        "Geometric intuition"
+      ],
+      "theory": [
+        {
+          "label": "序曲 §0.2 · 以面为线",
+          "label_en": "Prelude §0.2 · Mistaking a plane for a line",
+          "href": "../zh/index.html#sec-blindspot-2",
+          "href_en": "../en/index.html#sec-blindspot-2"
+        },
+        {
+          "label": "序曲 §0.4 · 球外之球",
+          "label_en": "Prelude §0.4 · The sphere beyond spheres",
+          "href": "../zh/index.html#sec-blindspot-4",
+          "href_en": "../en/index.html#sec-blindspot-4"
+        },
+        {
+          "label": "序曲 §0.5 · 余弦不动点",
+          "label_en": "Prelude §0.5 · The cosine fixed point",
+          "href": "../zh/index.html#sec-awakening",
+          "href_en": "../en/index.html#sec-awakening"
+        }
+      ],
+      "lean": []
     }
   ]
 }
