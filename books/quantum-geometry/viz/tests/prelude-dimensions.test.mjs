@@ -199,6 +199,41 @@ s = await seek(30);
 const target = [Math.sin(60 * DEG) * Math.cos(30 * DEG), Math.sin(60 * DEG) * Math.sin(30 * DEG), Math.cos(60 * DEG)];
 s = await dragFrom(await at3(s.lat.point), await at3(target));
 check('dragging the amber point moves it to θ ≈ 60°, φ ≈ 30°', Math.abs(s.theta - 60) <= 2 && Math.abs(s.t - 30) < 2.5, `θ ${s.theta}, φ ${s.t}`);
+// what the reader sees after using the visible controls (the θ chip, then the slider by keyboard): the cyan legend entry,
+// the signed plane height z = cos θ on the readout and the non-negative distance |cos θ| on the stage title must agree
+const latShown = () => page.evaluate(() => {
+  const vis = (el) => !!el && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+  const cy = [...document.querySelectorAll('#legend > span')].find((e) => vis(e) && e.querySelector('.sw.cy'));
+  const ro = document.getElementById('ro3'), hud = document.getElementById('hudSub');
+  return { legend: cy ? cy.textContent : '', legendAll: document.getElementById('legend').textContent, hud: vis(hud) ? hud.textContent : '',
+    roT: vis(ro) ? document.getElementById('ro3T').textContent : '', roV: vis(ro) ? document.getElementById('ro3V').textContent : '', out: document.getElementById('oTheta').textContent };
+});
+const num = (x) => Number(String(x).trim().replace('−', '-').replace(/^\+/, ''));
+const cos120 = Math.cos(120 * DEG);   // −1/2: the plane lies below the centre
+for (const lang of ['zh', 'en']) {
+  const zh = lang === 'zh';
+  await page.click(`[data-lang-set="${lang}"]`);
+  s = await click('#thetaChips [data-theta="90"]');
+  let v = await latShown();
+  const label = zh ? '平面高度 z = cos θ（带符号）' : 'Signed plane height z = cos θ';
+  check(`LATITUDE (${lang}) at θ = 90° via the chip: the cyan legend says its plane passes through the centre, the readout shows the signed height 0, the title says the plane passes through the centre`,
+    close(s.theta, 90) && v.legend.includes(zh ? '纬圈：平面经过球心' : 'latitude: its plane passes through the centre') && !/不过球心|misses the centre/.test(v.legendAll)
+    && v.roT === label && num(v.roV) === 0 && v.hud.includes(zh ? '平面过球心' : 'the plane passes through the centre') && v.out === '90°', JSON.stringify(v));
+  check(`θ slider (${lang}) is visible and starts from the chip value`, await page.isVisible('#theta') && (await page.inputValue('#theta')) === '90');
+  for (let i = 0; i < 30; i++) await page.locator('#theta').press('ArrowRight');   // the slider steps by 1°
+  s = await state(); v = await latShown();
+  const height = num(v.roV), dist = num((v.hud.match(zh ? /平面离球心 (\S+)/ : /plane (\S+) from the centre/) || [])[1]);
+  check(`LATITUDE (${lang}) at θ = 120° via the slider: the legend says the plane misses the centre, the readout shows the signed height cos 120° = −0.500 and the title the distance |cos θ| = 0.50`,
+    close(s.theta, 120) && (await page.inputValue('#theta')) === '120' && v.out === '120°'
+    && v.legend.includes(zh ? '纬圈：平面不过球心' : 'latitude: its plane misses the centre') && !/经过球心|passes through/.test(v.legendAll)
+    && v.roT === label && v.roV.startsWith('−') && Math.abs(height - cos120) < 5e-4
+    && dist > 0 && Math.abs(dist - Math.abs(cos120)) < 5e-3 && dist === Number(Math.abs(height).toFixed(2)) && s.lat.offset < 0 && !s.lat.great, JSON.stringify(v));
+  const li = (await drawerItems(lang))[3];
+  check(`LATITUDE (${lang}): the drawer gives the plane z = cos θ, cos θ as a signed height and |cos θ| as the distance to the centre`,
+    li.includes('z = cos θ') && li.includes('|cos θ|') && li.includes(zh ? '带符号的高度' : 'signed height') && li.includes(zh ? '到球心的距离' : 'distance from the plane to the centre')
+    && !/离球心 cos θ|lies cos θ from/.test(li), li);
+}
+await page.click('[data-lang-set="zh"]');
 
 /* ---------- 5 · the old circle becomes an equator ---------- */
 s = await click('#sphereMode [data-sphere="lift"]');

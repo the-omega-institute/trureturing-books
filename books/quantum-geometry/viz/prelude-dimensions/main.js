@@ -426,6 +426,8 @@
     one: [['mg', '俯视：圆盘是面', 'from the top: the disc is a face'], ['cy', '侧视：整个圆盘是线段', 'edge-on: the whole disc is a segment'], ['am', '木桩、速度与影子', 'the post, its velocity, its shadow']],
     pair: [['cy', 'θ = 90° + δ 的木桩', 'the post at θ = 90° + δ'], ['mg', 'θ = 270° + δ 的木桩', 'the post at θ = 270° + δ'], ['dm', '圆盘与它的侧影', 'the disc and its side view']],
     lat: [['cy', '纬圈：平面不过球心', 'latitude: its plane misses the centre'], ['mg', '赤道：过球心的大圆', 'equator: a great circle'], ['am', '当前的点', 'the current point']],
+    // θ = 90°: the plane z = cos θ = 0 passes through the centre and the latitude is the equator
+    latGreat: [['cy', '纬圈：平面经过球心', 'latitude: its plane passes through the centre'], ['mg', '赤道：过球心的大圆', 'equator: a great circle'], ['am', '当前的点', 'the current point']],
     lift: [['cy', '旧的单位圆', 'the old unit circle'], ['vi', '新方向 ±e₃', 'the new direction ±e₃'], ['am', '抬升的点，半径 1', 'the lifted point, radius 1']],
     mean: [['cy', '六个方向，粗细是权重', 'six directions, width = weight'], ['am', '加权平均 m', 'the weighted mean m']],
     cob: [['cy', 'y = cos θ', 'y = cos θ'], ['dm', 'y = θ', 'y = θ'], ['am', '迭代：刻度当下一个角', 'the iteration']]
@@ -472,7 +474,7 @@
       keyT = L('纬圈周长 2π sin θ', 'Length of the latitude 2π sin θ'); key = fix(G.length, 3); keySub = L(`大圆是 2π ≈ ${fix(TAU, 3)}`, `a great circle is 2π ≈ ${fix(TAU, 3)}`); pill = ['2π sin θ', fix(G.length, 2)];
       ro(1, L('相位 φ', 'Phase φ'), `${fix(t, 1)}°`, '');
       ro(2, L('纬圈半径 sin θ', 'Radius sin θ'), fix(G.radius, 3), 'c');
-      ro(3, L('平面离球心 cos θ', 'Plane from the centre cos θ'), sgn(G.offset, 3), '');
+      ro(3, L('平面高度 z = cos θ（带符号）', 'Signed plane height z = cos θ'), sgn(G.offset, 3), '');
       note = L('φ 怎么转，点都留在这一圈上；改 θ 才换到另一圈。', 'However φ turns, the point stays on this circle; only θ moves it to another.');
     } else if (m === 'lift') {
       const G = liftGeo(t);
@@ -507,7 +509,7 @@
     $('roKeyT').textContent = keyT; $('roKey').innerHTML = key; $('roKeySub').textContent = keySub; $('roNote').textContent = note;
     $('pillRail').innerHTML = `${railText(m, t)}`; $('pillKeyName').textContent = pill[0]; $('pillKey').querySelector('strong').textContent = pill[1];
     $('ctlAside').textContent = ASIDE[m];
-    const leg = LEGEND[m].map(([c, zh, en]) => `<span><i class="sw ${c}"></i>${L(zh, en)}</span>`).join('');
+    const leg = (m === 'lat' && latGeo(S.theta, t).great ? LEGEND.latGreat : LEGEND[m]).map(([c, zh, en]) => `<span><i class="sw ${c}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
     // jump chips show the value the rail is on
     document.querySelectorAll('#alphaChips [data-alpha]').forEach((b) => b.setAttribute('aria-pressed', String(m === 'ray' && Math.abs(t - +b.dataset.alpha) < 0.5)));
