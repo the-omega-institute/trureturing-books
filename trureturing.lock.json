@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "0f44c839f5dfd63fb2555576812593d951073110",
-  "pinned_at": "2026-11-15T15:22:53Z",
+  "pinned_at": "2026-11-15T16:01:19Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -2788,6 +2788,14 @@
       "statement_id": "sha256:9e836481bacd3e34dabe5fd9912111b7f5ca9c0841d80801d261f038b9430a10",
       "line": 145,
       "signature": "theorem exists_posSemidef_completion {V : Type u} [Finite V] (G : SimpleGraph V) (hG : G.IsChordal) (A : Matrix V V ℝ) (hA : ∀ C : Set V, G.IsClique C → (A.submatrix (Subtype.val : C → V) Subtype.val).PosSemidef) : ∃ B : Matrix V V ℝ, B.PosSemidef ∧ ∀ i j, i = j ∨ G.Adj i j → B i j = A i j"
+    },
+    "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le": {
+      "module": "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion",
+      "name": "D5.S3.QuadraticForms.RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le",
+      "kind": "theorem",
+      "statement_id": "sha256:6d512978b77f76b6a1b7f3691d37eaebc380626ce369ea30735588047df1c518",
+      "line": 265,
+      "signature": "theorem exists_posSemidef_completion_rank_le {V : Type u} [Finite V] (d : ℕ) (G : SimpleGraph V) (hG : G.IsChordal) (A : Matrix V V ℝ) (hA : ∀ C : Set V, G.IsClique C → (A.submatrix (Subtype.val : C → V) (Subtype.val : C → V)).PosSemidef ∧ (A.submatrix (Subtype.val : C → V) (Subtype.val : C → V)).rank ≤ d) : ∃ B : Matrix V V ℝ, B.PosSemidef ∧ B.rank ≤ d ∧ ∀ i j, i = j ∨ G.Adj i j → B i j = A i j"
     },
     "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem": {
       "module": "D5/S3/Quantum/Algebra/CommonPhasePolynomial",

@@ -55,7 +55,6 @@
       "D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm",
       "D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec",
       "D5/S1/Words/AdmissibleWords/KBonacciEmittedTail.prefix_coupling_emitted_tail",
-      "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence",
       "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_determinant",
       "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_error_formula",
       "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation",
@@ -199,6 +198,7 @@
       "D5/S3/PrimeForms/SumTwoSquaresClassification.eq_sq_add_sq_iff_even_factorization",
       "D5/S3/PrimeForms/ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq",
       "D5/S3/QuadraticForms/ChordalPsdCompletion.exists_posSemidef_completion",
+      "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le",
       "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem",
       "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula",
       "D5/S3/Quantum/Algebra/DoubleOrthogonalClosure.double_orthogonal_complement_eq_closure",
@@ -3321,18 +3321,6 @@
         }
       ]
     },
-    "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence": {
-      "kind": "theorem",
-      "name": "D5.S1.Words.AdmissibleWords.KBonacciConditionalBlockCoupling.prefix_coupling_supported_coalescence",
-      "citations": [
-        {
-          "file": "ch39-s05-s07-cut-entanglement.md",
-          "line": 830,
-          "id": "thm-ch39-p2e-native-supported-coalescence",
-          "via": "environment"
-        }
-      ]
-    },
     "D5/S1/Words/Mechanical/MechanicalBalance.lowerMechanicalWindowTrueCount_eq_floor": {
       "kind": "theorem",
       "name": "D5.S1.Words.Mechanical.lowerMechanicalWindowTrueCount_eq_floor",
@@ -4023,13 +4011,13 @@
         },
         {
           "file": "ch29-s03-timeless-gram-causality.md",
-          "line": 198,
+          "line": 214,
           "id": "thm-ch29-gram-rigidity-and-pell",
           "via": "environment"
         },
         {
           "file": "ch29-s03-timeless-gram-causality.md",
-          "line": 201,
+          "line": 217,
           "id": "",
           "via": "inline"
         },
@@ -12189,6 +12177,18 @@
         }
       ]
     },
+    "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le": {
+      "kind": "theorem",
+      "name": "D5.S3.QuadraticForms.RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le",
+      "citations": [
+        {
+          "file": "ch29-s03-timeless-gram-causality.md",
+          "line": 155,
+          "id": "thm-ch29-rank-bounded-chordal-psd-completion",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem": {
       "kind": "theorem",
       "name": "D5.S3.Quantum.Algebra.PhasePolynomial.complete_common_phase_polynomial_theorem",
@@ -17373,7 +17373,7 @@
         },
         {
           "file": "ch29-s03-timeless-gram-causality.md",
-          "line": 198,
+          "line": 214,
           "id": "thm-ch29-gram-rigidity-and-pell",
           "via": "environment"
         },
@@ -17385,7 +17385,7 @@
         },
         {
           "file": "ch29-s03-timeless-gram-causality.md",
-          "line": 207,
+          "line": 223,
           "id": "",
           "via": "inline"
         },
@@ -23502,6 +23502,7 @@
       "environment": [
         "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm",
         "D5/S3/QuadraticForms/ChordalPsdCompletion.exists_posSemidef_completion",
+        "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le",
         "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
       ],
       "inline": [
@@ -25123,7 +25124,6 @@
       "depth": 2,
       "environment": [
         "D5/S1/Words/AdmissibleWords/KBonacciEmittedTail.prefix_coupling_emitted_tail",
-        "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence",
         "D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy"
       ],
       "inline": [
