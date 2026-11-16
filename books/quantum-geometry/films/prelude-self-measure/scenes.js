@@ -273,7 +273,7 @@ function smTower(o) {
     const B = 105 * SM_DEG;
     smSphereCurve(t => [Math.sin(t) * Math.cos(B), Math.cos(t), Math.sin(t) * Math.sin(B)], el, C.white, 0.35 * sph, 1.6);
     smSphereCurve(t => [Math.cos(35 * SM_DEG) * Math.cos(t), Math.sin(35 * SM_DEG), Math.cos(35 * SM_DEG) * Math.sin(t)], el, C.white, 0.25 * sph, 1.4);
-    smTag('S²', cx + (R + 16) * Math.cos(140 * SM_DEG), cy - (R + 16) * Math.sin(140 * SM_DEG), C.white, sph, 'right', 30);
+    smTag('S²', cx + (R + 16) * Math.cos(118 * SM_DEG), cy - (R + 16) * Math.sin(118 * SM_DEG), C.white, sph, 'right', 30);
   }
   const pa = a * (o.poles || 0);
   if (pa > 0.003) {
@@ -509,10 +509,11 @@ SCENES.cross = S => {
   const col = qg > 0.5 ? C.lean : C.white;
   ring(cx, cy, 22 + 6 * Math.sin(u * 3), col, fade * (0.6 + 0.4 * qg), 3);
   smDot(cx, cy, 9, col, fade);
-  if (qg > 0) {
-    const lx = P.X(SM.star + 0.15), ly = P.Y(SM.star - 0.155);
-    line(cx + 14, cy + 14, lx - 6, ly - 30, col, 0.7 * fade * qg, 1.5);
-    smPlate('θ*', lx, ly, col, fade * qg, 'left', 32);
+  const qt = Q(S, 0, 'at exactly one positive point', 0.6, 2.3);
+  if (qt > 0) {
+    const lx = P.X(SM.star + 0.126), ly = P.Y(SM.star - 0.174);
+    line(cx + 14, cy + 14, lx - 6, ly - 28, col, 0.7 * fade * qt, 1.5);
+    smPlate('θ*', lx, ly, col, fade * qt, 'left', 32);
   }
   /* line 2: other starts reach θ* too (violet: the literature result, not formalized) */
   const qv = at(S, 2, 0.5) * fade;
@@ -568,7 +569,7 @@ SCENES.never = S => {
   txt('|cos θₖ − θₖ|', BR.x0 - 30, 302, { size: 40, fam: SM_MATH, w: 700, c: C.white, a: ba });
   line(BR.x0 - 40, BR.base, BR.x0 + 9 * BR.dx, BR.base, C.white, 0.8 * ba, 2.5);
   txt('0', BR.x0 - 52, BR.base + 8, { size: 22, fam: F.mono, w: 700, align: 'right', c: SM_LABEL, a: ba });
-  const grow = clamp((u - 0.3) / Math.max(1, L0.e - 0.3 - 0.8));
+  const grow = clamp((u - 0.3) / Math.max(1, L0.s + 0.6 * (L0.e - L0.s) - 0.3));
   const nb = 9 * grow;
   for (let k = 0; k < 9; k++) {
     const g = clamp(nb - k), x = BR.x0 + k * BR.dx, h = SM.gap[k] * BR.sc * ease(g);
@@ -718,7 +719,7 @@ SCENES.recap = S => {
     }
   });
   /* the next step: chapter 1 begins with two arrows */
-  const qn = smBump(Q(S, 3, 'chapter one', 0.6), clamp((u - lineAt(S, 3).e - 0.2) / 0.6)) * fade;
+  const qn = smBump(Q(S, 3, 'The prelude ends here', 0.6, 0.5), clamp((u - lineAt(S, 3).e + 0.2) / 0.5)) * fade;
   if (qn > 0) {
     const x0 = 860, y0 = 560, r = 190, b = 38 * SM_DEG;
     smVec(x0, y0, x0 + r, y0, C.white, qn, 4);
@@ -727,7 +728,7 @@ SCENES.recap = S => {
     txt('NEXT · CHAPTER 1 · 第一章', W / 2, 400, { size: 30, fam: F.zh, w: 700, align: 'center', c: C.cyan, a: qn, ls: 2 });
     txt('two arrows, measured against each other · 两支箭头，彼此丈量', W / 2, 660, { size: 26, fam: F.zh, w: 700, align: 'center', c: SM_LABEL, a: qn });
   }
-  smClosing(S, lineAt(S, 3).e + 0.6);
+  smClosing(S, lineAt(S, 3).e + 0.4);
 };
 
 /* ======================================================================= */

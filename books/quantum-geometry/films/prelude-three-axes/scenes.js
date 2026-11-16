@@ -26,7 +26,8 @@
               Z·X = [[0, 1], [−1, 0]] and X·Z = [[0, −1], [1, 0]] are computed here; Z·X = −(X·Z)
               ......................................................... LEAN ✓ FiniteDimensional.qubit_weyl_star
               (the tables are shown as “order shows up in the readout tables too”, not as a derivation of the turns)
-     RECAP    three takeaways, each tagged with its footing (ARGUED / NUM / LEAN ✓), the next film's question, the card
+     RECAP    three takeaways, each tagged with its footing (ARGUED; NUM; NUM for the turns and LEAN ✓ for ZX = −XZ),
+              the next film's question, the card
    Colours: cyan = lines, the latitude, what stays inside; magenta = planes, the equator, areas; violet = axes;
    amber = only the current point or step; green = only the two cited Lean results; white/dim for the rest.
    On load, FILM.init recomputes every number printed on screen and checks the geometry drawn; any disagreement is
@@ -686,9 +687,9 @@ const ptLegA2 = t => pt3.rot(PT_E[2], t * Math.PI / 2, ptLegA1(1));
 const ptLegB2 = t => pt3.rot(PT_E[0], t * Math.PI / 2, pt3.rot(PT_E[2], Math.PI / 2, PT_NP));
 const ptTrack = (f, t, n = 40) => { const out = []; for (let i = 0; i <= n; i++) out.push(f(t * i / n)); return out; };
 /* a small turning arrow round an axis near its tip: the right-hand sense of a positive turn */
-function ptTurnGlyph(V, e, col, a, spin = 0) {
+function ptTurnGlyph(V, e, col, a, spin = 0, at = 1.2) {
   if (a <= 0.003) return;
-  const c = pt3.sc(1.14, e), u0 = e[2] ? PT_E[0] : PT_E[2], v0 = pt3.cross(e, u0);
+  const c = pt3.sc(at, e), u0 = e[2] ? PT_E[0] : PT_E[2], v0 = pt3.cross(e, u0);
   const pts = ptCircle(c, u0, v0, 0.13, 40, spin, spin + 1.6 * Math.PI);
   ptPath(V, pts, col, a, 3, { flat: true });
   const q1 = ptP(V, pts[pts.length - 3]), q2 = ptP(V, pts[pts.length - 1]);
@@ -697,17 +698,16 @@ function ptTurnGlyph(V, e, col, a, spin = 0) {
 SCENES.order = S => {
   const u = S.u, fade = clamp(u / 0.4) * clamp((S.d - u) / 0.5);
   ptSeries(1);
-  const qL = Q(S, 3, 'Z times X', 0.6);
-  badge(fade * clamp(u / 0.8) * (1 - qL), 'computed');
-  badge(qL * fade, 'lean');
+  badge(fade * clamp(u / 0.8) * (1 - Q(S, 3, 'minus X times Z', 0.3)), 'computed');
+  badge(Q(S, 3, 'minus X times Z', 0.5, 0.35) * fade, 'lean');
   const V = ptView(640, 536, 260);
   const O = ptOrder(S);
   ptBall(V, fade, { wire: 0.8 });
   const qa = Q(S, 0, 'two turns', 0.6);
   ptAxes(V, [1, 1, 1], { a: fade, alpha: [lerp(0.6, 1, qa), 0.4, lerp(0.6, 1, qa)], size: 30, w: 3.4 + qa * 1.2 });
   const qg = qa * (1 - Q(S, 3, 'The readout tables', 0.5)) * fade;
-  ptTurnGlyph(V, PT_E[0], PT_VIO, qg, 0.8);
-  ptTurnGlyph(V, PT_E[2], PT_VIO, qg, 0.4);
+  ptTurnGlyph(V, PT_E[0], PT_VIO, qg, 0.8, 1.24);
+  ptTurnGlyph(V, PT_E[2], PT_VIO, qg, 0.4, 1.14);
   const qN = ptP(V, PT_NP), qX = ptP(V, [1, 0, 0]), qY = ptP(V, [0, -1, 0]), q0 = ptP(V, [0, 0, 0]);
   /* path A (amber while it is the current step, white once B starts) */
   const aCol = mix(C.now, C.white, clamp((u - O.tB1) / 0.6)), aA = fade * (1 - 0.35 * clamp((u - O.tB1) / 0.6));
@@ -743,7 +743,7 @@ SCENES.order = S => {
   /* the points: N and the two ends; amber marks only the current point */
   const curN = O.a1 === 0 || (u >= O.tB1 && O.b2 === 0);
   ptDot(qN[0], qN[1], 12, curN ? C.now : C.white, fade);
-  ptTag('N', qN[0] - 22, qN[1] - 14, C.white, fade, 'right', 26, PT_MATH);
+  ptTag('N', qN[0] - 28, qN[1] + 9, C.white, fade, 'right', 26, PT_MATH);
   if (O.a1 > 0 && O.a2 < 1) {
     const q = ptP(V, O.a2 > 0 ? ptLegA2(O.a2) : ptLegA1(O.a1));
     ptDot(q[0], q[1], 13, C.now, fade);
@@ -832,7 +832,7 @@ function ptIcon(i, cx, cy, a) {
 const PT_TAKE = [
   ['One plane holds one turn; a qubit needs three axes and a sphere.', '一张面只装得下一种转动；量子比特要三根轴、一颗球。', 'argued'],
   ['Two angles give an address; a fixed tilt walks only a latitude.', '两个角给出地址；固定倾角只走一圈纬线。', 'computed'],
-  ['On a sphere, order matters: ZX = −XZ.', '在球上，顺序有讲究：ZX = −XZ。', 'lean']
+  ['On a sphere, order matters: ZX = −XZ.', '在球上，顺序有讲究：ZX = −XZ。', ['computed', 'lean']]
 ];
 SCENES.recap = S => {
   const u = S.u;
@@ -847,7 +847,9 @@ SCENES.recap = S => {
     ptIcon(i, x0 + 100, y + 75, a);
     txt(en, x0 + 196, y + 64, { size: 33, fam: F.disp, w: 700, c: C.white, a });
     txt(zh, x0 + 196, y + 114, { size: 30, fam: F.zh, w: 700, c: C.white, a: a * 0.9 });
-    ptKind(x0 + w - 26, y + 112, kind, a, 'right');
+    /* the footing of each takeaway; the third has two: the turns were computed, ZX = −XZ is the Lean result */
+    const kinds = Array.isArray(kind) ? kind : [kind];
+    kinds.forEach((k, j) => ptKind(x0 + w - 26, y + 112 - 40 * (kinds.length - 1 - j), k, a, 'right'));
   });
   /* the next film's question */
   const from = lineAt(S, 3).e + 0.5;

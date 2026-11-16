@@ -35,11 +35,11 @@
       ["The ruler measures its own opening, and the answer is itself.", "尺子丈量自己张开的角，得到的答案就是它自己。"],
       ["The book writes this as psi equals psi of psi.", "本书把它写成 ψ = ψ(ψ)。"]
     ], "cues": [{"line": 2, "at": 1.2, "kind": "impact"}]},
-    {"id": "recap", "name": "RECAP", "lead": 0.8, "tail": 5.2, "music": [1.0, 0.5, 0.4, 0.2, 0.1], "lines": [
+    {"id": "recap", "name": "RECAP", "lead": 0.8, "tail": 6.4, "music": [1.0, 0.5, 0.4, 0.2, 0.1], "lines": [
       ["Feed each reading back in as the next angle.", "把每次读数当作下一次的角。"],
       ["Cosine theta equals theta has exactly one positive solution.", "cos θ = θ 恰有一个正解。"],
       ["Finite steps come close but never land: the sphere is always approximate.", "有限步只能逼近、不会落上：球永远只是近似。"],
       ["The prelude ends here; chapter one begins with two arrows.", "序曲到此结束；第一章从两支箭头开始。"]
-    ], "cues": [{"line": 3, "at": 3.2, "kind": "chime"}]}
+    ], "cues": [{"line": 3, "at": 4.0, "kind": "chime"}]}
   ]
 }
