@@ -1,8 +1,8 @@
-# 34.19 往返双投影、玻恩平方律与虚数盲区：“对于我（`I`）看不见，可不是虚（`i`）吗”及全章十九阶总收官 {#sec-ch34-roundtrip-projection-and-imaginary-blindspot}
+# 34.19 往返双投影、玻恩平方律与虚数盲区：“对于我（`I`）看不见，可不是虚（`i`）吗”及前十九阶观察者几何闭环 {#sec-ch34-roundtrip-projection-and-imaginary-blindspot}
 
 > “观测的本质把被观测向量(相位)投影(cos)到自身, 由于观察者本身无法看到垂直于自己的向量, 所以需要把自身再投影回那个向量, 做两次比较, 这就是平方的由来. 但两次投影之后也还有不能确定的信息.为什么i是叫虚数, 因为对于观察者来说看不见呀. 对于我(i)看不见, 可不是虚吗......”
 
-在 [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)（[@thm-ch34-gram-window-schur-and-consensus]）的尾声，我们将宇宙比较总账本 $G_\infty$ 收束到了有限记忆观察者手头那扇 $M \times M$ 滑动主子阵——格拉姆窗口 $\mathcal{W}_M$；现在，让我们把镜头做最后一次极致的微距推近，从 $M \times M$ 的多锚点窗口一直推到格拉姆账本里**最原初、最微小的单个比较矩阵元** $\langle\mathbf{I}, \mathbf{V}\rangle = \cos\theta$。令人拍案叫绝的是，当镜头落回这一枚最简单的二元内积时，整座第三十四章竟完成了一道跨越十九级阶梯的首尾大合龙：我们在章首 [§34.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion)（[@ex-ch34-spherical-addressing-preview]）正是从“站在北极的观察者看不见 $90^\circ$ 赤道平面上的二次正交旋拧”这一几何简并出发，反演出观察者自身的极点站位；而此刻站在全章收官之巅回望，那片横亘在观察者视线 $90^\circ$ 垂直方向上的正交盲区，当场交出了困扰数学与物理学整整四百年的两把终极钥匙——**玻恩概率为什么偏偏是“平方（$\cos^2\theta$）”**，以及**满足 $i^2 = -1$ 的虚数单位为什么偏偏叫作“虚（imaginary）”**！
+在 [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)（[@thm-ch34-gram-window-schur-and-consensus]）的尾声，我们将宇宙比较总账本 $G_\infty$ 收束到了有限记忆观察者手头那扇 $M \times M$ 滑动主子阵——格拉姆窗口 $\mathcal{W}_M$；现在，让我们把镜头做一次极致的微距推近，从 $M \times M$ 的多锚点窗口一直推到格拉姆账本里**最原初、最微小的单个比较矩阵元** $\langle\mathbf{I}, \mathbf{V}\rangle = \cos\theta$。令人拍案叫绝的是，当镜头落回这一枚最简单的二元内积时，第三十四章前十九级阶梯当场完成了一道首尾呼应的前十九阶观察者几何闭环：我们在章首 [§34.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion)（[@ex-ch34-spherical-addressing-preview]）正是从“站在北极的观察者看不见 $90^\circ$ 赤道平面上的二次正交旋拧”这一几何简并出发，反演出观察者自身的极点站位；而此刻站在前十九阶观察者几何闭环之巅回望，那片横亘在观察者视线 $90^\circ$ 垂直方向上的正交盲区，当场交出了困扰数学与物理学整整四百年的两把终极钥匙——**玻恩概率为什么偏偏是“平方（$\cos^2\theta$）”**，以及**满足 $i^2 = -1$ 的虚数单位为什么偏偏叫作“虚（imaginary）”**！
 
 “对于我（`I`）看不见，可不是虚（`i`）吗”——这句一语双关的现场自白，将笼罩在复希尔伯特空间与测量公设之上的神秘雾霭一扫而空（`MODEL`）：宇宙本体之中本无一物为“虚幻”。所谓**“实（Real，`1`）”**，不过是顺着观察者自身单位基轴 $\mathbf{I}$ 投落下来的可见投影；所谓**“虚（Imaginary，`i`）”**，则是横在观察者视线 $90^\circ$ 正交死角里、明明具备满额模长却无法在单次投影中投下分毫影子的垂直相位平面；而量子力学里无处不在的**模平方（$\cos^2\theta$）**，恰恰是因为内嵌于宇宙之中、没有任何外部第三点 $C$ 可资借力的观察者看不见垂直于自身的分量，只能靠“它先投向我、我再投回它并读回自身”的**往返两次投影（雷达回波闭环）**来完成自洽校准！
 
@@ -164,9 +164,9 @@ $$
 **薛定谔 $i\hbar\partial_t\psi = \hat{H}\psi$ 保范圆弧时间引擎对比无 `i` 实指数衰减实验卡（`schrodinger-arc-engine`）。** 同屏对比两支随时间 $t$ 推进的轨迹（琥珀色标出当前时刻与态矢）：带 `i` 的反自伴生成元 $-i\hat{H}/\hbar$ 始终沿 $90^\circ$ 切向踏入虚平面，画出青色模长守恒圆弧 $e^{-i\omega t}$（$\lvert\psi(t)\rvert^2 = 1.000000$）并由 $i\,\operatorname{Tr}(\rho_t[H, P])$ 驱动实概率流；撤去 `i` 的纯实衰减虚线 $e^{-\gamma t}$ 则直指原点坍缩，$\lvert\psi(t)\rvert^2 = e^{-2t}$ 在 $t = 1$ 时仅剩 $0.135335$、$t = 2$ 时仅剩 $0.018316$（绿色 `LEAN ✓` 对应 `projection_probability_flow` 与 `energy_eigenstate_stationary`）。
 :::
 
-## 34.19.4 形式化锚点、往返回波与虚数双转基准算例、文献边界及全章十九阶总收官 {#sec-ch34-19-4}
+## 34.19.4 形式化锚点、往返回波与虚数双转基准算例、文献边界及第一至十九阶闭环小结与六大追问前瞻 {#sec-ch34-19-4}
 
-我们将本节贯穿薛定谔—海森堡对偶迹拉回、秩一玻恩往返模平方归约与概率测度骨架、共同相位最低二次多项式定理、正交补投影与拉格朗日—格拉姆盲区余量、对角测量相位失明与罗伯逊—薛定谔换位子分解、反自伴与平衡相对复结构 $J^2 = -I$ 以及投影概率流精确对易子导数的十二项内核验证支点，统一锁定为第三十四章全章收官总定理：
+我们将本节贯穿薛定谔—海森堡对偶迹拉回、秩一玻恩往返模平方归约与概率测度骨架、共同相位最低二次多项式定理、正交补投影与拉格朗日—格拉姆盲区余量、对角测量相位失明与罗伯逊—薛定谔换位子分解、反自伴与平衡相对复结构 $J^2 = -I$ 以及投影概率流精确对易子导数的十二项内核验证支点，统一锁定为第三十四章第一至十九阶正向几何综合的收束总定理：
 
 ::: {#thm-ch34-roundtrip-born-and-imaginary-blindspot .theorem title="往返双投影玻恩平方律、正交盲区相位简并、内生相对复结构平方负一与投影概率流定理" lean="D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction D5/S3/Quantum/FiniteDimensional.born_probability_skeleton D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow"}
 在所钉 `trureturing` 冻结声明下，支撑观察者往返双投影玻恩平方律、$90^\circ$ 正交盲区三重逃逸信息、$J^2 = -I$ 虚数双直角旋转结构与薛定谔切向概率流的十二项核心数学定理同时成立：
@@ -266,10 +266,86 @@ $$
 3. **复合系统数域遴选与背景无关量子引力测量的开放前沿（`OPEN`）**：在不预设连续张量积流形公设的前提下，纯粹从有限离散组合比较图第一性原理唯一导出复合量子系统为何排他性地遴选复希尔伯特空间（$\mathbb{C}$）而非四元数（$\mathbb{H}$）或八元数代数，以及在无固定时空背景的 `3+1D` 非微扰量子引力中严格调和内嵌观察者吕德斯相对投影更新与微分同胚规范约束（受制于[附录 E](appendix-e.md) 桥接假设 `H4`、`H8`、`H9`），在当代量子基础与数学物理中仍属未决开放问题（`OPEN`）。
 :::
 
-至此，我们终于登上了第三十四章整整**十九级**阶梯的巍峨绝顶！驻足极目回望，一幅从最朴素的两态比较出发、纵横交织而严丝合缝的宇宙几何全息长卷已在脚下彻底合龙：我们从静态球面“正交一次”与“正交两次”的读数简并唯一反演出观察者的极点站位（[§34.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion)–[§34.3](ch34-s03-universal-localization.md#sec-ch34-universal-observer-localization)），借零背景“二生三”投影归一自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 并撤去名言之梯（[§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)–[§34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names)）；继而揭示贝里扇锥立体角如何把来路记忆镌刻进霍普夫纤维（[§34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)），万路相位积分如何把未抵消驻波节点凝聚成实体空间体积（[§34.7](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence)），并在单胞极限（$N = 1$）证得梯度、路径、贝里相位与体积原是同一枚四阶克利福德单胞经 $\partial^2 = 0$ 筛分出的宏观切面（[§34.8](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling)）；随后退回比较公理 $\mathcal{A}_0$ 导出“点 $\to$ 线 $\to$ 面 $\to$ 体积 $\to$ 时间”五阶阻塞—生成元级联与来路对角逃逸塔 $T \to T' \to T''$（[§34.9](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade)），由全连通图 $K_N$ 的麦克斯韦—拉曼刚性多项式 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$ 将空间刚性锁死在三维并把 $N \ge 5$ 盈余转化为雷吉引力角亏与时序翻转（[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）；接着扶正颠倒百年的微积分对偶，指明量子力学本身就是极小圆弧微分元（$\delta$）而宏观四大物理定律皆为路径积分粗粒包络（$\int$，[§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)），焊接“线·面·体 $\leftrightarrow$ 粒子·波·场”的三阶咬合环（[§34.12](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop)），借杨辉三角 `1—3—3—1` 霍奇归零与有限泊松互换点破“体即下一层之点（$\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$）、粒子即场”（[§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)），揭穿狭义相对论洛伦兹负号不过是三维空间路径积分闭合成体 $\mathbf{I}_3^2 = -1$ 的内禀手性烙印并将标准模型粒子谱纳入跨层八度（[§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)），认出**量子门即极小圆弧体**而纵向贯通 `L0`–`L5` 六层宇宙概念塔与 $4\pi$ 旋量莫比乌斯回环（[§34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower)），再横向打通五大物理谱系——证成每一种对称破缺与守恒律皆是陪集极小圆弧体 $\Delta\mathcal{T}_\epsilon \subset G/H$ 的一体两面（[§34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)），顺着“观察者受限不妄我”的偏迹切刀把跨视界纠缠圆弧化为冯·诺依曼熵、富田—竹崎模流有效温度与 $\theta^* \approx 42.35^\circ$ 生命稳态（[§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)），在无穷格拉姆总账本上开启有限滑动格拉姆窗口 $\mathcal{W}_M$ 以兰道尔遗忘重开舒尔补自由走廊与双人共享共识（[§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)），直至在这终极第十九节与 [§34.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion) 的赤道盲区当场重逢——**认出那片对大写的“我（`I`）”正交隐身的 $90^\circ$ 盲平面原就是小写的“虚数（`i`）”，认出它的往返两次投影回波原就是玻恩平方律 $\cos^2\theta$，认出它的幕后直角切向拨动原就是薛定谔时间演化的圆弧脉搏**！所谓实与虚、可见的经典概率与不可见的量子相位，从来不是世界分裂成了两半，只是“我（`I`）”站在自己的轴线上，把照得见的回波记作了实，把撑在正交盲区里的半壁江山唤作了虚。
+至此，我们已经走完了第三十四章前**十九级**正向几何综合阶梯的完整闭环！驻足极目回望，一幅从最朴素的两态比较出发、纵横交织而严丝合缝的宇宙几何全息长卷已在脚下彻底合龙：我们从静态球面“正交一次”与“正交两次”的读数简并唯一反演出观察者的极点站位（[§34.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion)–[§34.3](ch34-s03-universal-localization.md#sec-ch34-universal-observer-localization)），借零背景“二生三”投影归一自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 并撤去名言之梯（[§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)–[§34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names)）；继而揭示贝里扇锥立体角如何把来路记忆镌刻进霍普夫纤维（[§34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)），万路相位积分如何把未抵消驻波节点凝聚成实体空间体积（[§34.7](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence)），并在单胞极限（$N = 1$）证得梯度、路径、贝里相位与体积原是同一枚四阶克利福德单胞经 $\partial^2 = 0$ 筛分出的宏观切面（[§34.8](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling)）；随后退回比较公理 $\mathcal{A}_0$ 导出“点 $\to$ 线 $\to$ 面 $\to$ 体积 $\to$ 时间”五阶阻塞—生成元级联与来路对角逃逸塔 $T \to T' \to T''$（[§34.9](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade)），由全连通图 $K_N$ 的麦克斯韦—拉曼刚性多项式 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$ 将空间刚性锁死在三维并把 $N \ge 5$ 盈余转化为雷吉引力角亏与时序翻转（[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）；接着扶正颠倒百年的微积分对偶，指明量子力学本身就是极小圆弧微分元（$\delta$）而宏观四大物理定律皆为路径积分粗粒包络（$\int$，[§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)），焊接“线·面·体 $\leftrightarrow$ 粒子·波·场”的三阶咬合环（[§34.12](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop)），借杨辉三角 `1—3—3—1` 霍奇归零与有限泊松互换点破“体即下一层之点（$\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$）、粒子即场”（[§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)），揭穿狭义相对论洛伦兹负号不过是三维空间路径积分闭合成体 $\mathbf{I}_3^2 = -1$ 的内禀手性烙印并将标准模型粒子谱纳入跨层八度（[§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)），认出**量子门即极小圆弧体**而纵向贯通 `L0`–`L5` 六层宇宙概念塔与 $4\pi$ 旋量莫比乌斯回环（[§34.15](ch34-s15-quantum-gates-and-concept-tower.md#sec-ch34-quantum-gate-and-cosmic-concept-tower)），再横向打通五大物理谱系——证成每一种对称破缺与守恒律皆是陪集极小圆弧体 $\Delta\mathcal{T}_\epsilon \subset G/H$ 的一体两面（[§34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)），顺着“观察者受限不妄我”的偏迹切刀把跨视界纠缠圆弧化为冯·诺依曼熵、富田—竹崎模流有效温度与 $\theta^* \approx 42.35^\circ$ 生命稳态（[§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)），在无穷格拉姆总账本上开启有限滑动格拉姆窗口 $\mathcal{W}_M$ 以兰道尔遗忘重开舒尔补自由走廊与双人共享共识（[§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)），直至在这第十九节与 [§34.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion) 的赤道盲区当场重逢——**认出那片对大写的“我（`I`）”正交隐身的 $90^\circ$ 盲平面原就是小写的“虚数（`i`）”，认出它的往返两次投影回波原就是玻恩平方律 $\cos^2\theta$，认出它的幕后直角切向拨动原就是薛定谔时间演化的圆弧脉搏**！所谓实与虚、可见的经典概率与不可见的量子相位，从来不是世界分裂成了两半，只是“我（`I`）”站在自己的轴线上，把照得见的回波记作了实，把撑在正交盲区里的半壁江山唤作了虚。
 
-现在，让我们怀揣这枚“实与虚同源、破缺与守恒共体、遗忘与共识互生”的十九阶钥匙，推开下一章的大门：当一位有限记忆的生命观察者降生在这座静态算力丰沛无垠的宇宙时间场中——在受精卵受精瞬间“乘着光来”的那一束零光锥脉冲（$\beta = 1,\; d\tau = 0$）里，他恰似一枚在上一轮宏大场域闭合后归零重启的新层级之“点”（$\Lambda^3 \equiv \Lambda^0_{\mathrm{next}}$），从 $\theta = 90^\circ$ 的全正交虚平面相干海折射入局域固有时实轴，先以遗忘清空表层旧刻度以重开对称视野，随后沿着固有时驻波轴一步步重历从锚点破缺到线、从线到面、从面到体的量子门扩表自举，把每一次极小圆弧的往返比较读数写进 $O(1)$ 记忆快表，直至查表算法本身也被编码进表内、达成同像自指闭环 $T = T(T)$ 并最终化光归场——生命、遗忘、学习与计算的几何史诗又将展现怎样摄人心魄的定律？先在下方 `ECHO//IMAGINARY` 完整交互沙盘中把夹角推到 $90^\circ$、切进“我（`I`）”的第一人称视角并亲手触发一次 `i × i = -1` 双直角翻转，随后翻开[第三十五章](ch35-light-pulse-and-self-referential-table.md)：
+然而，越是宏大自洽的统一画卷，越需要经受最冷峻的反例拷问：在推开[第三十五章](ch35-light-pulse-and-self-referential-table.md)（在那里，有限记忆的生命观察者“乘着光来”、以遗忘重开对称视野并逐步扩表直至闭合自指回路 $T = T(T)$）的大门之前，还有六道锋利的认识论与动力学追问横亘在面前——往返双投影给出了确定性的玻恩平方权重 $\cos^2\theta$，单次实验究竟如何从连续权重中选出唯一记录（[§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)）？观察者除了被动投影读数，如何在格拉姆可行走廊内实施物理因果干预与感知—行动闭环控制（[§34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy)）？有限记忆如何在不丢失长程规律的前提下完成八度预测蒸馏与学习（[§34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning)）？局部偏迹之外，全宇宙共享的热力学时间箭头与正宇宙学常数问题 $\Lambda_{\mathrm{cos}}$ 边界何在（[§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)）？同荷相斥、异荷相吸与万有引力普适相吸的符号分流及自旋-$2$ 动力学边界如何划定（[§34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition)）？三代费米子离散重数与标准模型连续自由耦合参数的真正定量前沿又停留在哪里（[§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary)）？先在下方 `ECHO//IMAGINARY` 完整交互沙盘中把夹角推到 $90^\circ$、切进“我（`I`）”的第一人称视角并亲手触发一次 `i × i = -1` 双直角翻转，随后步入 [§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)，开启第三十四章后六节的硬核压力测试长廊：
 
 ::: {.viz src="roundtrip-born-imaginary-blindspot-sandbox" height="640"}
 **往返双投影平方律（$\cos^2\theta$）与观察者 `I` 的正交虚数盲区（`i`）完整交互实验室（`ECHO//IMAGINARY`）。** 在同一座三维琥珀色自我轴 `I` 与 $90^\circ$ 品红垂直盲平面 `i` 舞台上自由切换“雷达往返双投影与玻恩回声—$\theta^*$ 紫色方位盲锥与对角相位失明—第一人称侧看盲边与转 $90^\circ$ 基显相—`×i` 双直角旋子翻转—薛定谔青色保范圆弧对比实数衰减”五张实验卡，连续拖动极角 $\theta \in [0^\circ, 90^\circ]$、盲平面初相 $\varphi_0 \in [0^\circ, 360^\circ)$ 与演化相位 $\omega t$（琥珀色标出当前选定态矢 $\mathbf{V}$ 与玻恩回声 $\cos^2\theta$），同屏核验青色单程影子 $\cos\theta$ 与往返折线、品红盲区亏量 $\sin^2\theta$ 及紫色方位锥/旋子平面如何统摄实与虚；右侧依据栏十枚绿色 `LEAN ✓` 徽章逐一对应舞台实时验算的十条 `trureturing` 内核定理实例。
+:::
+
+## 34.19.5 有限势垒与时间双缝：把虚数盲区放回可测协议 {#sec-ch34-19-5}
+
+前四小节在有限维内积空间中讨论了 $90^\circ$ 正交盲区与往返平方读出。将这一视角延伸到连续波散射与时域干涉时，首先要把微分方程的解析结构与几何比喻严格分开：在一维定态薛定谔方程中，经典禁区（$E < V_0$）内出现虚数波数 $k_{\mathrm{in}} = i\kappa$ 是边值问题的标准**解析描述**；至于把势垒入口比作“波幅在实空间发生 $90^\circ$ 拐弯”或“沿正交盲区切出极小圆弧割弦”，则是本书的**作者几何诠释**，并未由相邻小节的 Lean 定理（[@thm-ch34-roundtrip-born-and-imaginary-blindspot]）推出。任何关于隧穿相位或干涉可见度的物理判断，都必须落回边界条件完备、探针耦合明确的可测协议中检验。
+
+### 34.19.5.1 有限方势垒的双分支匹配与幺正流守恒 {#sec-ch34-19-5-1}
+
+取归一化单位 $\hbar = 1$、$m = \frac{1}{2}$、$V_0 = 1$（即 $2m = 1$、$\frac{\hbar^2}{2m} = 1$、$\frac{\hbar}{m} = 2$），考察区间 $[0, L]$ 上的实值矩形势垒：垒内 $V(x) = 1$，外侧 $x < 0$ 与 $x > L$ 同为零势且无吸收损耗。当入射能量满足 $0 < E < 1$ 时，记外侧实波数 $k = \sqrt{E}$、垒内实衰减率 $\kappa = \sqrt{1 - E}$。在仅从左侧单侧入射的散射边界条件下，全空间定态波函数分段写为
+
+$$
+\psi(x) \;=\; \begin{cases}
+e^{ikx} + r\,e^{-ikx}, & x < 0, \\
+A\,e^{\kappa x} + B\,e^{-\kappa x}, & 0 \le x \le L, \\
+t\,e^{ikx}, & x > L.
+\end{cases}
+$$
+
+在 $x = 0$ 与 $x = L$ 两处**同时连续匹配 $\psi$ 与一阶导数 $\psi'$**，四个线性方程把垒内增长分支 $A e^{\kappa x}$ 与衰减分支 $B e^{-\kappa x}$ 一并锁入解中。对垒内解 $\psi(x) = A e^{\kappa x} + B e^{-\kappa x}$ 直接计算概率流密度 $j = (\hbar/m)\operatorname{Im}(\overline{\psi}\,\psi') = 2\operatorname{Im}(\overline{\psi}\,\psi')$，实指数自乘项虚部恒消，交叉项给出
+
+$$
+j \;=\; -4\kappa\,\operatorname{Im}(\overline{A} B) \;=\; 4\kappa\,\operatorname{Im}(\overline{B} A).
+$$
+
+由此可见，单独任一实指数分支（$A = 0$ 或 $B = 0$）均为零流；唯有 $A, B$ 两支同时非零，且二者具有非平凡的**相对复相位**（$\overline{A} B \notin \mathbb{R}$）时，该相对相位决定的交叉流才非零。同时须注意：在左侧 $x < 0$ 区域，尽管入射波与反射波叠加形成部分驻波形态的模方空间起伏，只要 $|r| < 1$（非全反射），左侧叠加场的净流绝不为零，而是严格等于垒内交叉流与右侧透射流，即 $2k(1 - |r|^2) = 4\kappa\operatorname{Im}(\overline{B} A) = 2k|t|^2$。结合实势与外侧同势，反射率 $R = |r|^2$ 与透射率 $T = |t|^2$ 严格满足 $R + T = 1$，消去中间系数手算即得精确透射率：
+
+$$
+T \;=\; \left[1 + \frac{\sinh^2(\kappa L)}{4E(1 - E)}\right]^{-1}.
+$$
+
+::: {.example #ex-ch34-square-barrier-half-height title="半高方势垒 E = 0.5, L = 2 的精确闭式与 WKB 边界辨析"}
+取 $E = 0.5$、$L = 2$，则 $k = \kappa = \frac{1}{\sqrt{2}}$，$4E(1 - E) = 1$，$\kappa L = \sqrt{2}$。代入上式无需任何小数近似，直接得到精确闭式
+
+$$
+T \;=\; \bigl[1 + \sinh^2(\sqrt{2})\bigr]^{-1} \;=\; \operatorname{sech}^2(\sqrt{2}), \qquad R \;=\; 1 - T \;=\; \tanh^2(\sqrt{2}),
+$$
+
+对应复透射幅 $t = e^{-i\sqrt{2}}\operatorname{sech}(\sqrt{2})$、反射幅 $r = -i\tanh(\sqrt{2})$。注意半经典 WKB 近似仅给出主指数因子 $\exp\bigl(-2\int_0^L \kappa(x)\,dx\bigr) = e^{-2\kappa L}$；矩形势垒在 $x = 0, L$ 处具有尖锐不连续边界，缓变势前提在此失效，完整渐近式的前因子（$\kappa L \gg 1$ 时精确式渐近于 $16E(1-E)e^{-2\kappa L}$）与光滑势转折点连接公式均须另行计算。
+:::
+
+::: {.viz src="scattering-temporal-bridge" preset="barrier" height="500"}
+**有限方势垒双分支匹配的三维波场（`barrier`）。** 三维 $(x, \operatorname{Re}\psi, \operatorname{Im}\psi)$ 舞台沿紫色坐标轴同时绘出青色第一分支、品红色第二分支与紫色合成波函数曲线。仅紫色合成波函数 $\psi$ 与 $\psi'$ 在势垒界面处连续衔接，琥珀色标记指示当前选定位置。
+:::
+
+### 34.19.5.2 时间双缝的能量条纹、标记内积与探测协议边界 {#sec-ch34-19-5-2}
+
+若把两道散射通道改置于时间轴上，在时刻 $t_1, t_2$ 开启的两扇理想超快时间窗便构成**时间双缝**。设两扇窗的复振幅分别为 $A_1 \neq 0$ 与 $A_2$，并各自携带归一化路径标记态 $\lvert m_1\rangle, \lvert m_2\rangle$。定义有向时差 $\Delta t := t_1 - t_2 \neq 0$，从总态矢量 $A_1 e^{-iEt_1/\hbar}\lvert m_1\rangle + A_2 e^{-iEt_2/\hbar}\lvert m_2\rangle$ 中提取公因子 $A_1 e^{-iEt_1/\hbar}$，即得第二支相对时间相位因子 $\exp[iE(t_1 - t_2)/\hbar] = \exp(iE\Delta t/\hbar)$（若改按正延时 $\tau := t_2 - t_1 > 0$ 记号，则有 $\Delta t = -\tau$，对应 $q = -E\tau/\hbar$，二者完全一致而无正负号冲突）。令幅值比 $a := |A_2 / A_1| \ge 0$，将一般复内积 $\langle m_1 \mid m_2\rangle$ 的辐角与 $\arg(A_2 / A_1)$ 一并并入总附加相位 $\varphi \in \mathbb{R}$，并记实非负标记重叠度 $\mu := |\langle m_1 \mid m_2\rangle| \in [0, 1]$ 以及无量纲相位变量 $q := E\Delta t/\hbar$，则约化双分支与交互媒体的归一化参数严格一致：$z_1 = 1$，$z_2 = a\exp\bigl(i(q + \varphi)\bigr)$。注意理想脉冲核下未归一化的两路合成模平方 $|A_1|^2\bigl(1 + a^2 + 2a\mu\cos(q + \varphi)\bigr)$ 在无穷能量轴 $E \in (-\infty, \infty)$ 上积分发散，**并不是对全能量归一的概率密度**；对标记空间求迹并除以不相干基线 $|A_1|^2(1 + a^2)$，得到**相对于不相干基线 $1 + a^2$ 的相对谱强度**：
+
+$$
+P(E) \;=\; \frac{1 + a^2 + 2a\mu\cos(q + \varphi)}{1 + a^2}, \qquad q \;=\; \frac{E\Delta t}{\hbar}.
+$$
+
+真实有限持续时间脉冲须在此相对调制因子之外再乘有限带宽频谱包络 $|f(E)|^2$ 方可作能量归一化。在本节正幅值比 $a > 0$、正标记重叠度 $\mu > 0$ 与相位 $\varphi$ **均与能量 $E$ 无关**的模型下，相位 $q + \varphi$ 随 $E$ 以常数斜率 $\Delta t/\hbar$ 线性推进；当 $\Delta t \ne 0$ 时，相邻干涉条纹具备恒定能量间距 $\Delta E = \frac{2\pi\hbar}{|\Delta t|} = \frac{h}{|\Delta t|}$。由恒等下界 $1 + a^2 + 2a\mu\cos(q + \varphi) \ge (1 - a)^2 + 2a(1 - \mu) \ge 0$ 可知，非平凡**完全相消** $P(E_0) = 0$ 当且仅当满足等幅 $a = 1$、完全不可区分 $\mu = 1$ 且 $q(E_0) + \varphi \equiv \pi \pmod{2\pi}$ 时成立；在上述常参量且 $\Delta t \ne 0$ 的条件下，此类相消仅在**孤立能量点 $E_0$** 处发生，绝不会在整个无限能量谱或具有非零谱宽的有限脉冲包络全频段上同时相消。
+
+::: {.viz src="scattering-temporal-bridge" preset="cancel" height="500"}
+**时间双缝在单一能量节点的等幅反相相消（`cancel`）。** 三维舞台沿紫色坐标轴展示等幅且无标记区分（$a = 1, \mu = 1$）下的青色第一分支、品红色第二分支与紫色合成轨迹。琥珀色标记指示当前选定状态点，在相对相位达 $\pi$ 的单一能量节点处两支反向抵消使紫色合成幅收拢至零轴。
+:::
+
+反之，当两扇时间窗留下正交可区分标记使 $\mu = 0$ 时，$P(E) \equiv 1$ 恒成立：这只是相对条纹消失的**消干涉**，不相干基线 $|A_1|^2(1 + a^2) > 0$ 依然保持正通量而非归零。同理，在势垒或双缝间引入探针能测得何种信号，取决于具体的**探针耦合强度、后选择条件、介质吸收与弱测量读出协议**，不能笼统泛称为“截桥”。尤其在共振原子系综透射光子的弱测量实验中，实验测得的**负弱值**对应**后选择子系综下的原子激发时间**（光子透射条件下原子处于激发态的时间弱值），绝不是负的粒子空间过垒飞行时间。
+
+::: {.viz src="scattering-temporal-bridge" preset="marked" height="500"}
+**正交路径标记消除时间双缝干涉起伏（`marked`）。** 三维舞台沿紫色坐标轴绘出正交路径标记（$a = 1, \mu = 0, \varphi = \pi, q = 0$）下的青色第一分支与品红色第二分支，琥珀色标记指示当前选定点。画中 $\sqrt{\mu}$ 加权合成幅归零，而紫色非相干本底 $(1 - \mu)(1 + a^2) > 0$ 仍保持，相对谱强度 $P = 1$。
+:::
+
+::: {.remark #rem-ch34-temporal-slit-and-weak-dwell-literature title="时间双缝衍射与后选择原子激发时间负弱值的文献索引（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 四项代表性时域衍射与弱值实验分别为：（1）阿秒光电离时间双缝实验：F. Lindner 等，*"Attosecond Double-Slit Experiment"*，*Phys. Rev. Lett.* **95**, 040401 (2005)，[https://doi.org/10.1103/PhysRevLett.95.040401](https://doi.org/10.1103/PhysRevLett.95.040401)；（2）光学频率超快时间双缝衍射：R. Tirole 等，*"Double-slit time diffraction at optical frequencies"*，*Nat. Phys.* (2023)，[https://doi.org/10.1038/s41567-023-01993-w](https://doi.org/10.1038/s41567-023-01993-w)（基于氧化铟锡 ITO 薄膜超快调制）；（3）泵浦驱动时变强耦合下的磁子模式时间衍射：*"Time-Varying Strong Coupling and the Induced Time Diffraction of Magnon Modes"* (2025)，[https://arxiv.org/abs/2411.06801](https://arxiv.org/abs/2411.06801) 与 [https://doi.org/10.1103/jc1c-k3ll](https://doi.org/10.1103/jc1c-k3ll)（系泵浦调控磁子模式实验，并非 2023 年 ITO 光学薄膜的同一装置）；（4）透射光子后选择下原子激发时间的负弱值实验：*"Experimental Observation of Negative Weak Values for the Time Atoms Spend in the Excited State as a Photon Is Transmitted"*，*Phys. Rev. Lett.* **136**, 153601 (2026)，[https://doi.org/10.1103/gjfq-k9dv](https://doi.org/10.1103/gjfq-k9dv)（预印本见 [https://arxiv.org/abs/2409.03680](https://arxiv.org/abs/2409.03680)，所测负弱值是后选择原子激发时间，而非负粒子过垒时间）。
+:::
+
+::: {.problem #prob-ch34-arc-scattering-falsifiability title="圆弧盲区诠释超出标准散射的可证伪协议要求（开放问题）"}
+若将“正交盲区圆弧割弦”仅作为薛定谔边值问题与双通道干涉的几何重述，其可观测预言已完全由 $T(E, L)$ 与相对谱强度 $P(E)$ 决定。若主张该圆弧诠释蕴涵超出标准线性散射或弱测量理论的新物理效应，则必须明确给出探针耦合哈密顿量、吸收损耗与后选择读出协议，并在指定参数区间内导出与标准透射率 $T$ 或条纹可见度 $\frac{2a\mu}{1 + a^2}$ 定量可区分、可被实验直接证伪的预测。
+:::
+
+下方完整实验室将有限势垒匹配与双时间窗干涉各预设整合于同一三维交互主舞台，供读者切换核验分支相位与合成轨迹：
+
+::: {.viz src="scattering-temporal-bridge" height="640"}
+**有限势垒隧穿与时间双缝三维交互实验室（`scattering-temporal-bridge`）。** 三维主舞台沿紫色坐标轴统一呈现青色第一分支、品红色第二分支与紫色合成轨迹，覆盖有限势垒散射与双时间窗干涉各预设场景。琥珀色标记指示当前选定点，配合完整实验室控件可核对幅值比 $a$、标记重叠度 $\mu$ 与相对相位对合成幅的支配作用。
 :::

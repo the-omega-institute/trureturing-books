@@ -7,7 +7,8 @@
              theorems (green) below definitions (grey), environment citations (filled) below inline-only ones (hollow).
      rail    the reading position: the cells of the chapters read so far have landed, the rest are outlines.
      look back from a chapter: cyan lines from the foot of that column to every cell it cites.
-     choose a cell: amber lines from it to every other chapter that cites it.
+     choose a cell: amber lines from it to the other chapters that cite it, never to its own column, and not to the
+             chapter looked back from when that chapter's cyan set holds it (routes; that line stays cyan).
    The data come from data.generated.json, written by gen-data.py from the lock and the chapters (never by hand, never
    committed); the page fetches it together with the publication lock before it builds anything.
    Colours: green = the lock's kind is `theorem`, grey = definition, cyan = cited by the chosen chapter,
@@ -42,6 +43,9 @@
   const unitName = (u) => L(DATA.units[u].n[0], DATA.units[u].n[1]);
   const unitShort = (u) => L(DATA.units[u].s[0], DATA.units[u].s[1]);
   const FILTERS = { all: () => true, theorem: (d) => d.kind === 0, inline: (d) => !d.env };
+  /** The name of the entries a filter keeps, the population counted by the landed readout, the strip's dashed line and
+      its description: the whole lock only for `all`. */
+  const KEPT = { all: ['锁文件里的条目', 'entries in the lock'], theorem: ['锁文件里种类为 theorem 的条目', 'lock entries of kind theorem'], inline: ['锁文件里只有行内链接的条目', 'lock entries with inline links only'] };
   const ch = (n) => DATA.units.findIndex((u) => u.file.startsWith(`ch${String(n).padStart(2, '0')}-`));
 
   /** Stack heights of the visible cells: gid → slot inside its column (theorems first, filled first, lock order). */
@@ -66,6 +70,17 @@
   const visible = () => D.filter(FILTERS[S.filter]);
   // S.src is a column; the unit it stands for skips Appendix C, which has no column
   const focus = () => new Set(citedBy(S.src == null ? null : COLS[S.src], S.mode).map((d) => d.gid));
+  /** Whether the cyan lines of the chapter looked back from are drawn at reading position t: once the rail has read it. */
+  const cyanOn = (t) => S.src != null && Math.floor(t) > S.src;
+  /** Where the lines of a chosen declaration d go, foc being focus(): `cites` are the units citing it other than Appendix C
+      (it has no column) and its home (the column the cell stands in, which takes no amber line); `cyan` is the chapter
+      looked back from when it is one of them and its cyan set holds d (that line stays cyan), else null; `amber` is the
+      rest, in the order d cites them. The stage draws exactly these amber lines and the readout counts them. */
+  const routes = (d, foc) => {
+    const cites = [...new Set(d.cites.map((c) => c[0]))].filter((u) => u !== IDX && u !== d.home);
+    const cyan = S.src != null && foc.has(d.gid) ? cites.find((u) => colOf[u] === S.src) ?? null : null;
+    return { cites, cyan, amber: cites.filter((u) => u !== cyan) };
+  };
   /** Visible declarations whose GID (module path and name) contains the search text, ignoring case. */
   const found = () => { const q = S.q.trim().toLowerCase(); return q ? visible().filter((d) => d.gid.toLowerCase().includes(q)) : null; };
   const metCount = (t) => visible().filter((d) => metIn(d, t)).length;
@@ -184,7 +199,7 @@
       ctx.strokeStyle = color; ctx.lineWidth = width; ctx.globalAlpha = alpha; ctx.beginPath(); ctx.moveTo(x1, y1);
       ctx.bezierCurveTo(x1, Math.min(y1, y2) - lift, x2, Math.min(y1, y2) - lift, x2, y2); ctx.stroke(); ctx.globalAlpha = 1;
     };
-    if (hasFocus && Math.floor(t) > S.src) {
+    if (cyanOn(t)) {
       const x0 = g.X(S.src), y0 = g.Y(0);
       ctx.fillStyle = P.cyan; ctx.fillRect(x0 - cellW / 2 - 2, y0 + 1, cellW + 4, 3);
       for (const gid of foc) if (cellBox[gid]) { const [cx, cy] = cellBox[gid]; curve(x0, y0, cx, cy, P.cyan, thumb ? 2.2 : 1.1, foc.size > 12 ? 0.45 : 0.8); arcs.cyan.push(gid); }
@@ -194,9 +209,8 @@
     const sd = S.sel && BY[S.sel];
     if (sd && cellBox[sd.gid]) {
       const [cx, cy] = cellBox[sd.gid];
-      for (const u of new Set(sd.cites.map((c) => c[0]))) {
-        // the chosen chapter's own line stays cyan: amber goes only to the other chapters that cite it
-        if (u === IDX || colOf[u] === sd.col || (hasFocus && foc.has(sd.gid) && colOf[u] === S.src)) continue;
+      // the chosen chapter's own line stays cyan: amber goes only to the other chapters that cite it (routes)
+      for (const u of routes(sd, foc).amber) {
         arcs.amber.push(colOf[u]);
         const x2 = g.X(colOf[u]), y2 = g.Y(0);
         curve(cx, cy, x2, y2, P.amber, 1.6, 0.95);
@@ -228,8 +242,13 @@
     g.hline(n, P.ink, { dash: [4, 3], alpha: 0.7 });
     g.line(pts, S.filter === 'theorem' ? P.ok : P.sigma, { width: 1.8 });
     const t = clock.t; g.vline(t, P.amber, { alpha: 0.8 }); g.dot(t, metCount(t), P.amber, 4.5);
-    g.legend([[S.filter === 'theorem' ? P.ok : P.sigma, L('已落定', 'landed')], [P.ink, L('锁文件里的条目', 'entries in the lock'), 'dash']]);
+    // the dashed line is the population of the current filter (KEPT), the whole lock only when every entry is kept
+    const [keptZh, keptEn] = KEPT[S.filter], cv = $('plot');
+    g.legend([[S.filter === 'theorem' ? P.ok : P.sigma, L('已落定', 'landed')], [P.ink, L(keptZh, keptEn), 'dash']]);
     $('plotMeta').textContent = `${metCount(t)} / ${n}`;
+    cv.dataset.ariaZh = `随阅读位置累计落定的声明条数，虚线是${keptZh}数`;
+    cv.dataset.ariaEn = `Declarations landed against the reading position; the dashed line is the number of ${keptEn}`;
+    cv.setAttribute('aria-label', L(cv.dataset.ariaZh, cv.dataset.ariaEn));
   }
 
   /* ---------- readouts ---------- */
@@ -238,17 +257,31 @@
     for (const [u, m] of d.cites) by.set(u, (by.get(u) === 'e' || m === 'e') ? 'e' : 'i');
     return [...by].filter(([u]) => u !== IDX).map(([u, m]) => `${unitShort(u)}${m === 'e' ? '' : L('（行内）', ' (inline)')}`).join(L('、', ', '));
   }
+  /** The note on a chosen declaration d at reading position t, counted from routes() as the stage draws them: its home
+      takes no amber line; of the other chapters citing it (Appendix C, the index, aside), the one looked back from keeps
+      a cyan line when its cyan set holds d (drawn once the rail has read it), and the rest take the amber lines. */
+  function routeNote(d, t) {
+    const { cites, cyan, amber } = routes(d, focus()), n = cites.length, k = amber.length, ix = DATA.units[IDX].n;
+    const head = L(`首次出场：${unitName(d.home)}，这一格就落在那一柱，琥珀线不连回那里。`, `First appears in ${unitName(d.home)}; the cell stands in that column, which takes no amber line. `);
+    if (!n) return head + L(`除${ix[0]} 的总索引外，别的章都没有引用它，所以没有琥珀色的线。`, `No other chapter cites it (not counting ${ix[1]}, the index), so there is no amber line.`);
+    const others = L(`另外引用它的有 ${n} 章（${ix[0]} 是总索引，不计）`, `It is cited by ${n} other chapter${n === 1 ? '' : 's'} (not counting ${ix[1]}, the index)`);
+    if (cyan == null) return head + others + L('，每一章连一根琥珀色的线。', n === 1 ? ', which takes an amber line.' : ', each taking an amber line.');
+    const later = cyanOn(t) ? '' : L('（时间轴读过这一章才画出）', ' (drawn once the rail has read it)');
+    return head + others + L(`，其中${unitName(cyan)}是正在回看的这一章，它连到这一格的线是青色${later}；${k ? `琥珀色的线只连到其余 ${k} 章。` : '此外没有别的章，所以没有琥珀色的线。'}`,
+      `; ${unitName(cyan)} is the one being looked back from, and its line to this cell is cyan${later}, so ${k ? `${k === 1 ? 'the amber line goes' : 'amber lines go'} only to the remaining ${k}` : 'there is no amber line'}.`);
+  }
   function drawText() {
     const t = clock.t, n = visible().length, met = metCount(t), d = S.sel && BY[S.sel];
+    // the heading names the population the filter keeps (KEPT); the line under the count gives the whole lock
+    $('roMetHead').innerHTML = `<span class="zh">已落定 / ${KEPT[S.filter][0]}</span><span class="en">landed / ${KEPT[S.filter][1]}</span>`;
     $('roMet').textContent = `${met} / ${n}`;
-    $('roMetSub').textContent = S.filter === 'all' ? L('锁文件共 ' + D.length + ' 条', `the lock has ${D.length}`) : S.filter === 'theorem' ? L('种类为 theorem 的', 'of kind theorem') : L('只有行内链接的', 'inline links only');
+    $('roMetSub').textContent = L('锁文件共 ' + D.length + ' 条', `the lock has ${D.length}`);
     $('roName').innerHTML = d ? `<code>${d.short}</code>` : '—';
     $('roKind').innerHTML = d ? `<span class="${d.kind === 0 ? 'c-ok' : ''}">${L(KIND_NAME[d.kind][0], KIND_NAME[d.kind][1])}</span> · ${d.env ? L('环境引用', 'environment') : L('只有行内链接', 'inline only')}` : '—';
     $('roModule').innerHTML = d ? `<a href="https://github.com/${PIN.repo}/blob/${PIN.commit}/${d.module}.lean#L${d.line}" target="_blank" rel="noopener"><code>${d.module}.lean:${d.line}</code></a>` : '—';
     $('roWhere').textContent = d ? where(d) : '—';
     $('roSerial').textContent = d ? (d.serial || '—') : '—';
-    $('roNote').textContent = d ? L(`首次出场：${unitName(d.home)}。琥珀色的线连到另外引用它的 ${new Set(d.cites.map((c) => c[0]).filter((u) => u !== IDX && u !== d.home)).size} 章。`,
-      `First appears in ${unitName(d.home)}. The amber lines go to the ${new Set(d.cites.map((c) => c[0]).filter((u) => u !== IDX && u !== d.home)).size} other chapter(s) that cite it.`)
+    $('roNote').textContent = d ? routeNote(d, t)
       : S.src != null ? L(`${unitName(COLS[S.src])}引用 ${focus().size} 条声明，青色的线从它的柱脚连到每一格。点一格看它的种类与位置。`, `${unitName(COLS[S.src])} cites ${focus().size} declarations; the cyan lines run from the foot of its column to each cell. Click a cell to see its kind and place.`)
         : L('点一格看它的种类、模块与在书中的位置；点某一章柱子的底部，看那一章引用了哪些。', 'Click a cell to see its kind, module and place in the book; click the foot of a column to see what that chapter cites.');
     $('pillRead').querySelector('strong').textContent = t >= NC ? L('全书', 'all') : t <= 0 ? '—' : unitShort(COLS[Math.min(NC - 1, Math.ceil(t) - 1)]);
@@ -324,12 +357,12 @@
   const NOTES = {
     all: [`时间轴从${FIRST[0]}一章一章读到${LAST[0]}（${INDEXED[0]} 是总索引，不单列一柱）：每一章第一次引用的冻结声明落进这一章的柱子（绿色是定理，灰色是定义）。读完，${D.length} 格全部落定，正好是锁文件的条目数。`,
       `The rail reads from the ${FIRST[1]} to ${LAST[1]} one chapter at a time (${INDEXED[1]}, the index, has no column): the frozen declarations a chapter cites first drop into its column (green theorems, grey definitions). At the end all ${D.length} cells have landed, exactly the number of entries in the lock file.`],
-    bedrock: [`第二十七章用定理环境逐行解剖的 ${env27.length} 条：${env27.length} 根青色的线从第二十七章的柱脚连回它们第一次出场的${homeNames(env27, 0)}，选中的那一格也是青线。琥珀色框住选中的平行四边形恒等式，琥珀色的线只连到另外引用它的几章。`,
-      `The ${env27.length} theorems Chapter 27 dissects in its own environments: ${env27.length} cyan lines run from the foot of Chapter 27 back to where they first appear, ${homeNames(env27, 1)}, the chosen cell's line among them. The amber frame marks the chosen parallelogram law, and amber lines go only to the other chapters that cite it.`],
+    bedrock: [`第二十七章用定理环境逐行解剖的 ${env27.length} 条：${env27.length} 根青色的线从第二十七章的柱脚连回它们第一次出场的${homeNames(env27, 0)}，选中的那一格也是青线。琥珀色框住选中的平行四边形恒等式，它落在首次出场的${DATA.units[PAR.home].n[0]}那一柱，琥珀线不连回那里；琥珀色的线只连到另外引用它的几章。`,
+      `The ${env27.length} theorems Chapter 27 dissects in its own environments: ${env27.length} cyan lines run from the foot of Chapter 27 back to where they first appear, ${homeNames(env27, 1)}, the chosen cell's line among them. The amber frame marks the chosen parallelogram law, which stands in the column of ${DATA.units[PAR.home].n[1]}, where it first appears; no amber line goes there, and amber lines go only to the other chapters that cite it.`],
     table27: [`第二十七章连同它的审计表一共引用 ${all27.length} 条：青色的线从它的柱脚伸回${span(all27, 0)}，其中 ${inParts(all27, 0, 2)} 条落在第一至三部。`,
       `Chapter 27, audit table included, cites ${all27.length} declarations: the cyan lines reach back from its foot to ${span(all27, 1)}, and ${inParts(all27, 0, 2)} of them land in Parts I–III.`],
-    closure: [`第二十八章解剖的 ${env28.length} 条：${env28.length} 根青色的线连回${homeNames(env28, 0)}，选中的那一格也是青线。琥珀色框住选中的未读不动点判据 unreadState_fixed_iff，它第一次出场在${DATA.units[FIX.home].n[0]}；琥珀色的线只连到另外引用它的章。`,
-      `The ${env28.length} theorems Chapter 28 dissects: ${env28.length} cyan lines back to ${homeNames(env28, 1)}, the chosen cell's line among them. The amber frame marks the chosen unread fixed-point criterion unreadState_fixed_iff, which first appears in ${DATA.units[FIX.home].n[1]}; amber lines go only to the other chapters that cite it.`],
+    closure: [`第二十八章解剖的 ${env28.length} 条：${env28.length} 根青色的线连回${homeNames(env28, 0)}，选中的那一格也是青线。琥珀色框住选中的未读不动点判据 unreadState_fixed_iff，它第一次出场在${DATA.units[FIX.home].n[0]}，就落在那一柱，琥珀线不连回那里；琥珀色的线只连到另外引用它的章。`,
+      `The ${env28.length} theorems Chapter 28 dissects: ${env28.length} cyan lines back to ${homeNames(env28, 1)}, the chosen cell's line among them. The amber frame marks the chosen unread fixed-point criterion unreadState_fixed_iff, which first appears in ${DATA.units[FIX.home].n[1]} and stands in that column; no amber line goes there, and amber lines go only to the other chapters that cite it.`],
     table28: [`第二十八章连同它的审计表一共引用 ${all28.length} 条：青色的线从它的柱脚伸回${span(all28, 0)}，其中 ${inParts(all28, 3, 5)} 条落在第四至六部。`,
       `Chapter 28, audit table included, cites ${all28.length} declarations: the cyan lines reach back from its foot to ${span(all28, 1)}, and ${inParts(all28, 3, 5)} of them land in Parts IV–VI.`],
     theorems: [`只留锁文件里种类为 theorem 的 ${nThm} 格，全是绿色；实心的被某个定理环境用 lean= 引用，空心的只出现在行内链接里。`,

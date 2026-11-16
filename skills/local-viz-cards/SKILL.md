@@ -29,7 +29,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 81 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 84 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -114,8 +114,18 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `gram-window-consensus-sandbox` | 每多记一条历史记录就多加一顶相干球冠把可行走廊越收越窄直至锁死，遗忘最旧记录重开走廊，两人同步遗忘才修复共享共识 | `schur-cap-corridor` `golden-triangle-m3` `overconstrained-lock-m9` `forgetting-reopen` `dual-window-consensus` |
 | `roundtrip-born-imaginary-blindspot-sandbox` | 单程投影只给影子 cos θ，往返回到自身轴 I 才读出玻恩回声 cos²θ；垂直于 I 的盲平面在 I 上恒读 0，转进盲区的那一下就是虚数 i | `radar-roundtrip-born` `azimuth-cone-blindspot` `observer-first-person-90` `imaginary-double-turn` `schrodinger-arc-engine` |
 | `prelude-dimensions` | 影子少一维，同一个位置可以藏着不同的运动 | `head-on` `shadow` `compare` `latitude` `normal` `average` `cosine` |
+| `scattering-temporal-bridge` | 势垒内两支指数解共同输运守恒流；时间路径完全相消需要等幅、反相与不可分辨 | `barrier` `opaque` `cancel` `marked` |
+| `zeta-spectrum-lab` | 有限相量、对称零点模型与有限零点谱各有边界，不能由一张图跨到黎曼猜想 | `domain` `partial` `quartet` `powers` |
+| `arithmetic-schur-lab` | 同一整除网络上，精确消元保住终端块，顺序改变填充；带号轨道另有支撑与相对信号范数的必要预算 | `natural` `leaf` `drop` `square` `budget` |
 
 ### 各页面的依据分层、用语与分工
+
+`scattering-temporal-bridge`（`SCATTER//TIME`）承接 §34.19.5，区别于此前的有限维盲区示意：主舞台直接绘制有限实势垒匹配解的三维复波函数曲线，以及能量—复振幅时间双缝曲线。青色、品红分别给第一支与第二支，紫色给合成轨迹和坐标轴，琥珀只给当前点与拖动手柄。`barrier` 与 `opaque` 保留垒内增长、衰减两支，显示相同的净流；`cancel` 是等幅、反相、标记重叠为一的单能量相消，`marked` 将重叠降至零，相对谱强度回到非相干基线一。相对强度不作为全能量归一的概率密度。匹配、流、谱强度标 `NUM`，实验文献与协议边界标 `ARGUED`，隐藏空间转身标 `MODEL`；无绿色依据框。
+
+`zeta-spectrum-lab`（`ZETA//SPECTRUM`）承接 §22.4.1，与 `critical-mirror` 的冻结对称事实分工：本页的 `domain`、`partial` 直接计算有限狄利克雷相量，`quartet` 是可移动根的合成四次多项式模型，`powers` 将精确素数幂阶梯与十个临界线零点共轭对组成的有限谱并置。青色给有限部分和、精确阶梯，品红给有限谱，紫色给坐标轴，琥珀只给当前采样点与手柄。绝对收敛域、解析延拓与有限求和不混同；有限零点数据不承担完整性或遗漏误差证书。数值标 `NUM`，四元组模型标 `MODEL`，经典公式的适用条件标 `ARGUED`，有限谱外推桥梁标 `OPEN`；无绿色依据框。
+
+`arithmetic-schur-lab`（`ARITH//SCHUR`）承接 §34.18.5，在顶点 2 至 N 的实际整除图上计算 G = L + I/4，区别于前页的抽象格拉姆窗口。三维坐标由 2、3 的素因子赋值与剩余因子对数决定；青色是原始边，品红是消元填充或多步耦合，紫色是坐标轴，琥珀只给当前枢轴与手柄。`natural`、`leaf` 对同一终端集比较顺序，`drop` 明示丢弃量及原系统回代残差，`square` 同时报告 P 的平方层数、次数、乘加与存储。此整除图是模型，不等同 NBB 目标向量的真实 Gram 表。`budget` 切换到独立的三维 (R, |η|, B) 舞台，采用 η = 1/2 − β、B = L/|a|、e = ε|a|，紫色面是 B_min = (1 − ε)/(min(1, R|t|) sinh(R|η|)) 的必要下界，品红区域被此界排除，琥珀点可直接拖动；未排除区域不认证插值存在。该书面推导来自上游未合入的应用，不由既有冻结声明认证；不把卷积深度、通道数、图规模与图平方层数混同。运算标 `NUM`，模型标 `MODEL`，舒尔代数与文献边界标 `ARGUED`，真实算术 Gram 压缩及极限残差桥梁标 `OPEN`；无绿色依据框。
+
 
 `pythagoras-number-escape` 的“模 p 数点”场景按勒让德符号着色：舞台格子里 y ≠ 0 的点（成对 ±y，所在列 χₚ(f(x)) = +1）是青色，y = 0 的分支点是中性色（`sigma`）；右上的自旋环把 x = 0 … p − 1 排成一圈，青色 +1、品红 −1、中性 0，环心写 Σχ 与 p + 1 + Σχ = #E；琥珀只给弗罗贝尼乌斯余弦的指针，绿色不用。下方小图的柱子按 aₚ 的正负着青/品红。y² = x³ − x + 1 的判别式是 −368 = −2⁴·23：p = 23 时页面弹出坏约化提示、圈出奇点 (13, 0)，不给余弦与哈塞界，直方图只用良约化素数（428 个，p < 3000）。“线与面素数”场景区分两种角：格点 (a, b) 的方向角 θ 是希尔伯特夹角（cos²θ + sin²θ = 1），平方后的三角形转过布洛赫极角 2θ；第三章的 `complementary_context_probability_pythagoras` 在第二十九章与终章只以行内链接出现，所以页面只在抽屉里指向第三章，不标绿。`count` 卡的图注写环上的 2 个 +1、8 个 −1、3 个 0。读数里点数与 p + 1 之差一律写 aₚ，不写 a（第二十九章正文的 a 是高斯三角形的边）。d = 5 时舞台上 m² − 5n² = ±4 的两条虚线与 (Fₖ, Lₖ) 圈都用中性灰：第二十三章只以行内链接提到 `pell_pm_four_iff_signed_lucas_fib`，所以佩尔场景只用一段说明写明它在 trureturing 中已冻结、正文未以定理环境引用，不标绿；`sato` 卡把 3000 以内良约化素数的 cos θₚ 直方图（紫）与半圆律（琥珀虚线）放到舞台右侧，𝔽₅₃ 的点阵缩到左侧，自旋环与半圆表盘不画。
 
@@ -266,6 +276,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `roundtrip-born-imaginary-blindspot-sandbox`（`ECHO//IMAGINARY`）与 `pairwise-shutter`、`repeated-projection`、`fairness-square-uncertainty-expansion` 分工：前三页分别讲快门离散抽样计数、布洛赫球未读捏合幂等与开口螺旋算术逃逸，本页讲第三十四章 §34.19 `#sec-ch34-roundtrip-projection-and-imaginary-blindspot` 的全章收官命题——“观察者站在自身轴 I 上看不见 90° 垂直盲平面 span{e₁, e₂}，单程只得青色影子 cos θ，往返双投影 I → (cos θ)V → (cos²θ)I 才给出琥珀玻恩回声 cos²θ，而转进 90° 盲区的那一下正是虚数 i（×i² = −1）与薛定谔保范圆弧时间引擎 e^(−iωt)”：舞台用 `kit.solid` 画观察者轴 I、与 I 垂直的品红盲平面圆盘、等倾角紫色方位锥、两段折返雷达脉冲与盛住画面的下半球碗，顶部切换外部三维、沿 I 轴侧看盲边与转 90° 基俯视盲平面三种视角；青色是单程投影影子 cos θ、两段折返投影线与薛定谔保范圆弧轨迹，品红是 90° 垂直盲平面、逃逸高度 sin θ 与盲区亏量 sin²θ，紫色是 360° 等倾角方位盲锥与 ×i 双直角旋子平面，琥珀只给观察者基准轴 I、可拖动的当前态矢 V 与落回 I 轴的当前玻恩回声点 cos²θ（实数衰减对照线用中性虚线，红色只给抽屉里的测量单结果问题 `OPEN` 标记）。绿色框严格只给页面引用的十条冻结定理（`rank_one_born_pairing_weight`、`born_probability_skeleton`、`lagrange_gram_identity`、`orthogonal_complement_projection_identities`、`partition_inseparable_iff_kernel`、`diagonal_prime_observables_cannot_recover_relative_phase`、`robertson_schrodinger`、`square_eq_neg_one_of_skewAdjoint_unitary`、`projection_probability_flow`、`energy_eigenstate_stationary`）；玻恩定则、马吕斯 cos²θ 偏振律与笛卡尔 1637 年“imaginaires”词源标 `ARGUED`；cos θ、cos²θ、sin²θ、锥冠立体角 2π(1 − cos θ)、盲圆周长 2π sin θ、换位子界 |sin 2θ sin φ|、e^(−2t) 与牛顿法解 θ* 实算标 `NUM`；三维单位向量画法（显式标明布洛赫极角为 2θ）与“对于我 I 看不见即为虚 i”第一人称诠释标 `MODEL`。
 
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
+
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -451,6 +462,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十二章 | 例 `ex-cayley-unit-circle-zeros` 之后 | `critical-mirror` · `thin` |
 | 第二十二章 | 例 `ex-quartic-mock-quartet` 之后 | `critical-mirror` · `quartic` |
 | 第二十二章 | “所以，证明黎曼猜想所需要的信息”一段之后、罗宾不等式一段之前 | `critical-mirror` 完整实验室 |
+| 第二十二章 | §22.4.1 绝对收敛域的有限相量说明之后 | `zeta-spectrum-lab` · `domain` |
+| 第二十二章 | §22.4.1 有限和与解析延拓的区别之后 | `zeta-spectrum-lab` · `partial` |
+| 第二十二章 | §22.4.1 素数幂阶梯与有限零点谱说明之后 | `zeta-spectrum-lab` · `powers` |
+| 第二十二章 | §22.4.1 末 | `zeta-spectrum-lab` 完整实验室 |
 | 第二十三章 | §23.1 艾森斯坦整数环引言段（“让我们先考察复平面上最对称的二维晶格”）之后、Lean 模块说明之前 | `norm-lattice` · `hex` |
 | 第二十三章 | §23.1 末段（“同一颗六角范数球在不同斜交基底下的投影”）之后、§23.2 之前 | `norm-lattice` · `skew` |
 | 第二十三章 | 引理 `lem-qform-discriminant` 的证明之后、“由于剪切变换……”一段之前 | `norm-lattice` · `shear` |
@@ -682,12 +697,22 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十四章 | §34.18.2 末（五档格拉姆窗口阶数对照表之后、§34.18.3 之前） | `gram-window-consensus-sandbox` · `forgetting-reopen` |
 | 第三十四章 | §34.18.3 末（双观察者联合接受窗 $\Omega_A \cap \Omega_B$ 与共同遗忘重开段之后、§34.18.4 之前） | `gram-window-consensus-sandbox` · `dual-window-consensus` |
 | 第三十四章 | §34.18 末（转入 §34.19 单个比较矩阵元设问段之后） | `gram-window-consensus-sandbox` 完整实验室 |
+| 第三十四章 | §34.18.5 整除图与自然序消元说明之后 | `arithmetic-schur-lab` · `natural` |
+| 第三十四章 | §34.18.5 固定终端的两种消元顺序算例之后 | `arithmetic-schur-lab` · `leaf` |
+| 第三十四章 | §34.18.5 阈值丢弃与原系统残差说明之后 | `arithmetic-schur-lab` · `drop` |
+| 第三十四章 | §34.18.5 随机游走重复平方与资源说明之后 | `arithmetic-schur-lab` · `square` |
+| 第三十四章 | §34.18.5 带号轨道支撑与信号归一化必要预算书面推导之后 | `arithmetic-schur-lab` · `budget` |
+| 第三十四章 | §34.18.5 末 | `arithmetic-schur-lab` 完整实验室 |
 | 第三十四章 | §34.19.1 末（吕德斯—马吕斯往返平方律与布洛赫倍角换算桥之后、§34.19.2 之前） | `roundtrip-born-imaginary-blindspot-sandbox` · `radar-roundtrip-born` |
 | 第三十四章 | §34.19.2 第 3 条（$360^\circ$ 等倾角盲区圆锥簇 $\mathbf{V}(\theta, \varphi)$）之后 | `roundtrip-born-imaginary-blindspot-sandbox` · `azimuth-cone-blindspot` |
 | 第三十四章 | §34.19.2 末（对角测量相位失明与罗伯逊—薛定谔换位子下界两项列表之后、§34.19.3 之前） | `roundtrip-born-imaginary-blindspot-sandbox` · `observer-first-person-90` |
 | 第三十四章 | §34.19.3 实轴 `1`、盲区 `i`、双转 `i^2 = -1` 与 $90^\circ$ 互补转身对照表之后 | `roundtrip-born-imaginary-blindspot-sandbox` · `imaginary-double-turn` |
 | 第三十四章 | §34.19.3 末（薛定谔切向时间引擎与投影概率流对易子导数段之后、§34.19.4 之前） | `roundtrip-born-imaginary-blindspot-sandbox` · `schrodinger-arc-engine` |
 | 第三十四章 | §34.19 末（全章十九阶总收官转入第三十五章一段之后） | `roundtrip-born-imaginary-blindspot-sandbox` 完整实验室 |
+| 第三十四章 | §34.19.5.1 双分支匹配与流守恒之后 | `scattering-temporal-bridge` · `barrier` |
+| 第三十四章 | §34.19.5.2 等幅反相且不可分辨的单能量相消之后 | `scattering-temporal-bridge` · `cancel` |
+| 第三十四章 | §34.19.5.2 标记正交与非相干本底说明之后 | `scattering-temporal-bridge` · `marked` |
+| 第三十四章 | §34.19.5 末 | `scattering-temporal-bridge` 完整实验室 |
 | 第三十五章 | 第一节 Lean 三定理列表第 3 条（`finite_memory_history_capacity`）之后、“这里的清表”一段之前 | `self-referential-table` · `full` |
 | 第三十五章 | 第一节“因此，乘着光来……”一段之后、定理 `thm-ch35-null-pulse-and-record-blocking` 之前 | `self-referential-table` · `reset` |
 | 第三十五章 | “成长即扩表”一节三步列表之后、“下面我们将……”一段之前 | `self-referential-table` · `expand_table` |
@@ -797,6 +822,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 附录 D | D.2.4 贝尔与 EPR 注记 `rem-appendix-d-puzzle-4` 之后 | `quantum-interpretations-duel` · `bell-epr` |
 | 附录 D | D.2.6 开放问题 `prob-appendix-d-time-horizon` 之后 | `quantum-interpretations-duel` · `time-horizon` |
 | 附录 D | D.3 五大诠释注记 `rem-appendix-d-interpretations-ledger` 之后 | `quantum-interpretations-duel` · `five-way-duel`，随后完整实验室 |
+
 
 ## 增删或修改一张卡之后
 

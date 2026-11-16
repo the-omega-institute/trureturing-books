@@ -56,6 +56,28 @@
 结论 1 对自然数 $N$ 归纳：$N = 0$ 时 $c^0 = 1$ 为恒等映射；由 $N$ 到 $N+1$ 时，对角位置 $(i = j)$ 保持不变，副对角位置 $(i \neq j)$ 再乘一次因子 $c$，得到 $c \cdot (c^N \rho_{ij}) = c^{N+1}\rho_{ij}$。结论 2 将 $\rho_+$ 代入结论 1，得第 $(0, 1)$ 元为 $\frac{1}{2}c^N$；因 $0 \le c < 1$，实数（及嵌入复数后）的模长满足 $|c| < 1$，故几何级数项 $c^N \to 0$，乘以常数 $\frac{1}{2}$ 后仍收敛于 $0$。完整证明由 Lean 内核检查。
 :::
 
+在 [@prop-phase-damping-decay] 中，南北极计算基之所以充当免受退相干侵蚀的“指针基”，是因为 `phaseDamping` 直接在计算基坐标下保留对角元。若把相位阻尼改放在傅里叶（阿达马）坐标下作用，不动点脊梁就会随之旋转到赤道正交轴上。为精确刻画这一坐标切换，对单比特复矩阵空间 `QubitMatrix := Matrix (Fin 2) (Fin 2) ℂ` 与闭区间阻尼系数 `DampingCoefficient := Set.Icc (0 : ℝ) 1`（即 $c \in [0, 1]$），记单步计算基相位阻尼为 $(\operatorname{phaseDamping}(c,\rho))_{ij} = \rho_{ij}$（$i=j$）及 $c\,\rho_{ij}$（$i\neq j$）；对任意双射等价 `coordinates : QubitMatrix ≃ QubitMatrix`，定义基底变换下的阻尼映射为 $\operatorname{phaseDampingInBasis}(\mathrm{coordinates}, c, \rho) := \mathrm{coordinates}^{-1}\bigl(\operatorname{phaseDamping}(c, \mathrm{coordinates}(\rho))\bigr)$。取自逆的阿达马坐标映射
+
+$$
+\operatorname{hadamardCoordinates}(\rho) := \begin{pmatrix} \dfrac{\rho_{00} + \rho_{01} + \rho_{10} + \rho_{11}}{2} & \dfrac{\rho_{00} - \rho_{01} + \rho_{10} - \rho_{11}}{2} \\[6pt] \dfrac{\rho_{00} + \rho_{01} - \rho_{10} - \rho_{11}}{2} & \dfrac{\rho_{00} - \rho_{01} - \rho_{10} + \rho_{11}}{2} \end{pmatrix},
+$$
+
+其正逆映射均为自身（构成对合等价 `hadamardCoordinateEquiv`），并定义傅里叶相位阻尼为 $\operatorname{fourierPhaseDamping}(c, \rho) := \operatorname{phaseDampingInBasis}(\mathrm{hadamardCoordinateEquiv}, c, \rho)$。我们可以先手算完全退相位端点 $c = 0$ 下的两枚基准纯态：取赤道态 $\rho_+ = \lvert +\rangle\langle +\rvert = \frac{1}{2}\bigl(\begin{smallmatrix} 1 & 1 \\ 1 & 1 \end{smallmatrix}\bigr)$，则 $\operatorname{hadamardCoordinates}(\rho_+) = \bigl(\begin{smallmatrix} 1 & 0 \\ 0 & 0 \end{smallmatrix}\bigr)$ 副对角元全为零，经 $\operatorname{phaseDamping}(0, \cdot)$ 保持不变，再施一次 $\operatorname{hadamardCoordinates}$ 便原封不动退回 $\rho_+$；反之取北极态 $\rho_0 = \lvert 0\rangle\langle 0\rvert = \bigl(\begin{smallmatrix} 1 & 0 \\ 0 & 0 \end{smallmatrix}\bigr)$，则 $\operatorname{hadamardCoordinates}(\rho_0) = \frac{1}{2}\bigl(\begin{smallmatrix} 1 & 1 \\ 1 & 1 \end{smallmatrix}\bigr)$，经 $c = 0$ 抹去副对角元后变为 $\frac{1}{2}I_2$，逆变回来仍是球心最大混合态 $\frac{1}{2}I_2 \neq \rho_0$。下面的定理将这一不动点判据推广到一切严格含噪系数 $c \neq 1$。
+
+::: {.theorem #thm-fourier-pointer-fixed title="傅里叶指针基的相位阻尼不动点" lean="D5/S3/Quantum/PointerBasis.fourier_phase_damping_fixed_iff"}
+设阻尼系数 $c \in [0, 1]$（`c : DampingCoefficient`）满足严格非恒等条件 $(c : \mathbb{R}) \neq 1$，且 $\rho \in M_2(\mathbb{C})$（`rho : QubitMatrix`）。则 $\rho$ 为傅里叶相位阻尼映射的不动点，当且仅当其阿达马坐标矩阵的所有副对角元均为零：
+
+$$
+\operatorname{fourierPhaseDamping}(c, \rho) = \rho \iff \forall i, j \in \mathrm{Fin}\,2,\; i \neq j \implies \operatorname{hadamardCoordinates}(\rho)_{i,j} = 0.
+$$
+:::
+
+::: proof
+由定义，$\operatorname{fourierPhaseDamping}(c, \rho) = \mathrm{hadamardCoordinateEquiv}^{-1}\bigl(\operatorname{phaseDamping}(c, \operatorname{hadamardCoordinates}(\rho))\bigr)$。因 `hadamardCoordinateEquiv` 为双射，两端同时作用正映射后，不动点等式等价于矩阵等式 $\operatorname{phaseDamping}(c, \operatorname{hadamardCoordinates}(\rho)) = \operatorname{hadamardCoordinates}(\rho)$。逐分量核对 `Fin 2` 上的指标：当 $i = j$ 时对角元恒相等；当 $i \neq j$ 时，等式化为 $c \cdot \operatorname{hadamardCoordinates}(\rho)_{i,j} = \operatorname{hadamardCoordinates}(\rho)_{i,j}$，移项即 $(c - 1)\operatorname{hadamardCoordinates}(\rho)_{i,j} = 0$。由于实数 $(c : \mathbb{R}) \neq 1$ 蕴含复数域中 $c - 1 \neq 0$，利用无零因子消去律可知该条件对所有 $i \neq j$ 成立当且仅当 $\operatorname{hadamardCoordinates}(\rho)_{i,j} = 0$。完整证明由 Lean 内核检查。
+:::
+
+这里有两条必须守住的边界：第一，前提 $(c : \mathbb{R}) \neq 1$ 缺一不可——在无噪端点 $c = 1$ 处，$\operatorname{fourierPhaseDamping}(1, \cdot)$ 退化为 $M_2(\mathbb{C})$ 上的恒等映射，任何矩阵（包括阿达马副对角元非零的 $\lvert 0\rangle\langle 0\rvert$）都是不动点；第二，尽管具体的 `hadamardCoordinates` 在 $2\times 2$ 矩阵上恰好等于阿达马幺正共轭 $H\rho H$，一般组合子 `phaseDampingInBasis` 接受的只是抽象类型双射 `QubitMatrix ≃ QubitMatrix`（未必自动代表物理幺正信道），且该定理刻画的是特定傅里叶相位阻尼模型下的不动点子空间，并不声称 $\{\lvert +\rangle, \lvert -\rangle\}$ 是任意环境噪声的普适指针基。
+
 上述单比特公式把环境作用压缩为一个实数 $c$。如果系统有许多分支、环境记录之间还带有复相位，完全正交是否仍是必要的起点？先把每个系统地址 $i$ 配上一个单位环境向量 $E_i$。受控记录映射 $V\lvert i\rangle=\lvert i\rangle\otimes\lvert E_i\rangle$ 对环境求偏迹后，第 $(i,j)$ 个矩阵元恰好乘以 $G_{ij}=\sum_a E_i(a)\overline{E_j(a)}$，即 [`environment_marginal_channel`](lean:D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel.environment_marginal_channel) 的矩阵元公式。于是，“环境记录完全正交”可以放宽为一个带数值误差的充分条件。
 
 ::: {.theorem #thm-repeated-record-decay title="重复有限记录对记录类捏合的指数误差界" lean="D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay.repeated_record_exponential_decay"}

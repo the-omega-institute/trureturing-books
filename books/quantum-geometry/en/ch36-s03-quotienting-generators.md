@@ -111,6 +111,42 @@ Bringing all four lenses of [@thm-ch36-quotient-annihilator-and-factorization] t
 **Fold by the period and the rounds leave a few points.** After five rounds of the angle ruler, the spokes (one per round) turn to a single direction, each point moving along a grey dashed arc from its old spoke (the faint hollow ring): the $25$ steps after the first hit land on just $5$ positions, each marked $\times 5$; the target “angle” is constant on every fibre of “step number mod the period”, which is exactly the factorization condition of item 1 of [@thm-ch36-quotient-annihilator-and-factorization].
 :::
 
+When an observer tracks not merely a single periodic quotient of order $m$, but an entire family of nonzero complex coordinates $z = (z_m)_{m \in \mathbb{N}_+}$ indexed across all positive integer resolutions $m \in \mathbb{N}_+$ under the power-compatibility law $(z_{mn})^n = z_m$, how do radial scale drift and pure solenoidal phase separate? Two elementary hand calculations make the mechanism concrete. First, take the positive real thread $z_m = \exp(2/m)$ ($m \in \mathbb{N}_+$): every coordinate is nonzero, $\bigl(\exp(2/(mn))\bigr)^n = \exp(2/m) = z_m$, and at $m = 1, 2$ we read $1 \cdot \ln\lvert z_1\rvert = \ln(e^2) = 2$ and $2 \cdot \ln\lvert z_2\rvert = 2\ln e = 2$, matching $m\ln\lvert z_m\rvert = 2$ across every $m \in \mathbb{N}_+$. Second, contrast the constant unit thread $z_m = 1$, where $\lvert z_m\rvert = 1$ for every $m \in \mathbb{N}_+$ and the logarithmic charge at $m = 1$ is $\ln 1 = 0$, against $z_m = \exp(1/m)$, which carries logarithmic charge $\ln e = 1 \neq 0$ and moduli $\lvert z_m\rvert = e^{1/m} > 1$ (showing why zero charge is needed for unit moduli); more generally, any unit-circle phase thread $z_m = \exp(2\pi i\theta_m)$ satisfying $n\theta_{mn} \equiv \theta_m \pmod 1$ likewise satisfies $\forall m,\, \lvert z_m\rvert = 1$ with zero logarithmic charge while its coordinates need not equal $1$.
+
+In `trureturing`'s `D5.S1.Solenoid.ComplexPowerSolenoidDecomposition` module, write $\operatorname{oneIndex} := \langle 1, 0 < 1\rangle \in \mathbb{N}_+$ and $\operatorname{productIndex}(m, n) := \langle m \cdot n,\, m \cdot n > 0\rangle \in \mathbb{N}_+$. A **complex-power compatible thread** $z : \operatorname{ComplexPowerThread}$ consists of a coordinate map $z.\operatorname{coord} : \mathbb{N}_+ \to \mathbb{C}$, a nonvanishing proof $z.\operatorname{coord\_ne\_zero} : \forall m \in \mathbb{N}_+,\, z.\operatorname{coord}(m) \neq 0$, and the compatibility law
+
+$$
+\forall m, n \in \mathbb{N}_+, \qquad \bigl(z.\operatorname{coord}(\operatorname{productIndex}(m, n))\bigr)^{n.1} \;=\; z.\operatorname{coord}(m).
+$$
+
+Its **logarithmic charge** is defined at the base index $1$ by $\operatorname{logarithmicCharge}(z) := \operatorname{Real.log}\lVert z.\operatorname{coord}(\operatorname{oneIndex})\rVert \in \mathbb{R}$. Under these exact hypotheses, conservation of the resolution-weighted log-modulus and the unit-modulus characterization of zero charge are established by two kernel-verified theorems:
+
+::: {.theorem #thm-solenoid-log-charge title="Logarithmic-Charge Conservation in Complex-Power Threads" lean="D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmic_charge_conservation"}
+Let $z : \operatorname{ComplexPowerThread}$ be a nonzero power-compatible complex thread, and let $m \in \mathbb{N}_+$ be any positive integer index. Then $m$ times the real logarithm of the $m$-th coordinate norm equals the logarithmic charge of $z$:
+
+$$
+(m.1 : \mathbb{R}) \cdot \operatorname{Real.log}\lVert z.\operatorname{coord}(m)\rVert \;=\; \operatorname{logarithmicCharge}(z).
+$$
+:::
+
+::: proof
+Specializing $z.\operatorname{pow\_compatible}$ to left index $\operatorname{oneIndex} = 1$ and right index $m \in \mathbb{N}_+$ gives $\bigl(z.\operatorname{coord}(m)\bigr)^{m.1} = z.\operatorname{coord}(\operatorname{oneIndex})$ since $\operatorname{productIndex}(1, m) = m$. Taking complex norms on both sides and using multiplicativity of the norm yields $\lVert z.\operatorname{coord}(m)\rVert^{m.1} = \lVert z.\operatorname{coord}(\operatorname{oneIndex})\rVert$. Because $z.\operatorname{coord\_ne\_zero}$ ensures that both norms are strictly positive reals, applying $\operatorname{Real.log}$ and expanding the logarithm of a natural power gives $(m.1 : \mathbb{R}) \cdot \operatorname{Real.log}\lVert z.\operatorname{coord}(m)\rVert = \operatorname{Real.log}\lVert z.\operatorname{coord}(\operatorname{oneIndex})\rVert = \operatorname{logarithmicCharge}(z)$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-solenoid-zero-charge title="Zero Logarithmic Charge and Unit-Modulus Coordinates" lean="D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmicCharge_eq_zero_iff"}
+Let $z : \operatorname{ComplexPowerThread}$ be a nonzero power-compatible complex thread. Then its logarithmic charge vanishes if and only if every coordinate has unit modulus:
+
+$$
+\operatorname{logarithmicCharge}(z) = 0 \;\Longleftrightarrow\; \forall m \in \mathbb{N}_+,\; \lVert z.\operatorname{coord}(m)\rVert = 1.
+$$
+:::
+
+::: proof
+If $\lVert z.\operatorname{coord}(m)\rVert = 1$ for every $m \in \mathbb{N}_+$, evaluating at $m = \operatorname{oneIndex}$ gives $\operatorname{logarithmicCharge}(z) = \operatorname{Real.log} 1 = 0$. Conversely, suppose $\operatorname{logarithmicCharge}(z) = 0$. For any $m \in \mathbb{N}_+$, [@thm-solenoid-log-charge] gives $(m.1 : \mathbb{R}) \cdot \operatorname{Real.log}\lVert z.\operatorname{coord}(m)\rVert = 0$. Since $m \in \mathbb{N}_+$ implies $(m.1 : \mathbb{R}) \neq 0$, cancelling the positive factor yields $\operatorname{Real.log}\lVert z.\operatorname{coord}(m)\rVert = 0$; combined with strict positivity $0 < \lVert z.\operatorname{coord}(m)\rVert$ from $z.\operatorname{coord\_ne\_zero}(m)$, injectivity of $\operatorname{Real.log}$ on $(0, \infty)$ forces $\lVert z.\operatorname{coord}(m)\rVert = 1$. The full proof is checked by the Lean kernel.
+:::
+
+Three total-function and scope boundaries govern [@thm-solenoid-log-charge] and [@thm-solenoid-zero-charge]. First, indexing over $m \in \mathbb{N}_+$ excludes zero denominators, while `coord_ne_zero` guarantees strictly positive norms at every level so Lean's total convention $\operatorname{Real.log} 0 = 0$ is never invoked. Second, [@thm-solenoid-log-charge] equates the scaled radial logarithms across all coordinates of a nonzero compatible thread; it neither identifies complex-logarithm argument branches across levels nor confines general threads to the unit circle. Third, zero logarithmic charge in [@thm-solenoid-zero-charge] is equivalent to unit modulus $\lVert z.\operatorname{coord}(m)\rVert = 1$ across all $m \in \mathbb{N}_+$—preserving full solenoidal phase freedom rather than forcing $z.\operatorname{coord}(m) = 1$—and these two algebraic theorems alone do not state a full topological direct-product homeomorphism of the complex-power solenoid; for the universal solenoid phase flow and its synthesis with finite-horizon observer memory completion, see [Appendix H](appendix-h.md).
+
 We synthesize these three existential and geometric regimes within our interpretive framework (`MODEL`) in the boxed comparison ledger below:
 
 ::: {.remark #rem-ch36-samsara-exit-table title="Three-Regime Orthogonal Synthesis Table (Literature Result, Not Formalized in This Book)"}

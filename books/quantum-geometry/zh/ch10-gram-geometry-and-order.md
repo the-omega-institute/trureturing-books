@@ -434,7 +434,51 @@ $$
    - **有限观察者的因果相容空间**：若观察者只掌握两个内积，且残余半径为正、环境维数至少为 $3$，未读出的横向夹角便留下区间 $[\cos(\theta_1+\theta_2),\,\cos(\theta_1-\theta_2)]$。$\cos\phi=\pm1$ 对应共面端点；$|\cos\phi|<1$ 对应 $\det G>0$ 与非零三维体积。若残余半径为零，区间缩成 $c_{AC}=c_{AB}c_{BC}$，横向夹角不再有定义，也没有这项选择余量。**有限性本身并不保证半径为正，也不保证所有静态相容的补全都能由观察者实际实现。** 将区间读作“选择空间”，还需具体物理系统具有相应的可达状态与控制手段；在这些条件下，本书把选取未定关系理解为观察者在因果相容空间中选点。
 
 4. **严谨认识论边界：区分代数学定理与自然哲学/宇宙学文献**
-   在将这一深刻直觉收入囊中时，我们同样保持全书一贯的严格认识论边界：本章经 Lean 4 内核形式化验证的核心结论是复格拉姆矩阵相等下的公共外围幺正重构定理（[@thm-gram-unitary-reconstruction]）、单位内积等价判据（[@lemma-unit-gram-equality]）以及静态效应与序贯测量的分离反例（[@prop-static-sequential-separation]）；而三阶实格拉姆行列式配方恒等式 $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) = \sin^2\theta_1\sin^2\theta_2 - (c_{AC} - \cos\theta_1\cos\theta_2)^2 \ge 0$ 与格拉姆椭圆体几何则是内积空间与凸几何的标准数学结论。将这种“顺序无关的格拉姆几何刚性与因果相容选择空间”同休谟因果问题、斯宾诺莎几何必然性以及无时间量子宇宙学（惠勒—德维特方程与佩奇—伍特斯条件时间机制）相融合，则属于物理学与科学哲学的跨学科诠释框架——我们将在第八部的[第二十九章](ch29-timeless-causality-and-gram-space.md)（衔接[第二十章](ch20-complexity-and-spacetime.md)的电路复杂度下界）中，从有限观察者在时间场中“半正定矩阵补全选点”的高度对这幅图景作完整的展开。
+   在将这一深刻直觉收入囊中时，我们同样保持全书一贯的严格认识论边界：本章经 Lean 4 内核形式化验证的核心结论包括复格拉姆矩阵相等下的公共外围幺正重构定理（[@thm-gram-unitary-reconstruction]）、单位内积等价判据（[@lemma-unit-gram-equality]）、静态效应与序贯测量的分离反例（[@prop-static-sequential-separation]），以及下一小节刻画多上下文交叠奇偶阻碍的线性 doily 负线奇偶定理（[@thm-doily-negative-line-parity]）；而三阶实格拉姆行列式配方恒等式 $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) = \sin^2\theta_1\sin^2\theta_2 - (c_{AC} - \cos\theta_1\cos\theta_2)^2 \ge 0$ 与格拉姆椭圆体几何则是内积空间与凸几何的标准数学结论。将这种“顺序无关的格拉姆几何刚性与因果相容选择空间”同休谟因果问题、斯宾诺莎几何必然性以及无时间量子宇宙学（惠勒—德维特方程与佩奇—伍特斯条件时间机制）相融合，则属于物理学与科学哲学的跨学科诠释框架——我们将在第八部的[第二十九章](ch29-timeless-causality-and-gram-space.md)（衔接[第二十章](ch20-complexity-and-spacetime.md)的电路复杂度下界）中，从有限观察者在时间场中“半正定矩阵补全选点”的高度对这幅图景作完整的展开。
+
+### 10.4.2 从单上下文相容到多上下文交叠阻碍：线性 doily 的负线奇偶性 {#sec-doily-negative-line-parity}
+
+前文表明，只要保留完整复相位，一族态矢的两两格拉姆内积矩阵就能在差一个公共外围幺正变换的意义下重构全局几何（[@thm-gram-unitary-reconstruction]）；而在任何**单一**两两对易的测量上下文内部，算子共享公共本征基，也能赋予相容的联合本征值。但倘若把多组彼此交叠的对易上下文拼成一张关联网络，“每一条单线内部两两相容”是否保证存在一张不依赖上下文的全局静态真值表 $\nu(O) \in \{\pm 1\}$？
+
+我们先手算著名的 9 点双比特（$N = 2$）Peres–Mermin 泡利方阵：
+
+$$
+\begin{matrix}
+X \otimes I & I \otimes X & X \otimes X \\
+I \otimes Z & Z \otimes I & Z \otimes Z \\
+X \otimes Z & Z \otimes X & Y \otimes Y
+\end{matrix}
+$$
+
+逐行逐列核对可见，三行与三列共 $6$ 个三元上下文内部算子均两两对易：三行的算子乘积全等于 $+I_4$，前两列的乘积也等于 $+I_4$，唯独第三列因 $(X \otimes X)(Z \otimes Z) = (XZ) \otimes (ZX) = (-iY) \otimes (-iY) = -Y \otimes Y$ 而给出负乘积 $(X \otimes X)(Z \otimes Z)(Y \otimes Y) = -I_4$。由于这 $9$ 个算子在 $6$ 条上下文中**恰好各出现 $2$ 次**（一行加一列），若存在与上下文无关的赋值 $\nu(O) \in \{\pm 1\}$ 使每行每列赋值乘积都等于对应算子乘积符号，则三行乘积之积为 $(+1)(+1)(+1) = +1$，三列乘积之积却为 $(+1)(+1)(-1) = -1$，但两端又都等于同一个平方积 $\prod_{O} \nu(O)^2 = +1$，当场导出奇偶矛盾！
+
+将视野从 $9$ 点子网格扩展到双比特非恒等泡利算子张成的完整 $15$ 点、$15$ 线辛几何构型——即任意 $N \ge 2$ 量子比特泡利群中嵌入的四维非退化 $\mathbb{F}_2$ 辛子空间（广义四边形 $W(3,2)$，通称线性 doily）——奇偶阻碍呈现出一条不依赖嵌入维数 $N$ 的内禀不变量。按 Lean 源码精确定义：在相位空间 $(\mathbb{Z}_2 \times \mathbb{Z}_2)^N$（`Fin N → ZMod 2 × ZMod 2`）上，典范标签 `canonicalLabel` 将 $(0,0), (0,1), (1,0), (1,1)$ 分别映为单比特泡利算符 $I_2, Z, X, Y$（其中 $Y = iXZ = \bigl(\begin{smallmatrix} 0 & -i \\ i & 0 \end{smallmatrix}\bigr)$），$\operatorname{observable}(v)$ 取相应的 $N$-比特克罗内克张量积算符；标准二元辛形式定义为
+
+$$
+B(v, w) := \sum_{j \in \mathrm{Fin}\,N} \bigl(v_{j,1} w_{j,2} + v_{j,2} w_{j,1}\bigr) \in \mathbb{Z}_2,
+$$
+
+满足 $B(v, w) = 0$ 当且仅当对应泡利词对易。称 $\mathbb{Z}_2$-子模 $U \le (\mathbb{Z}_2 \times \mathbb{Z}_2)^N$ 为**线性 doily**（`IsLinearDoily U`），若 $\operatorname{finrank}_{\mathbb{Z}_2} U = 4$ 且 $B$ 在 $U$ 上非退化（即 $\forall u \in U,\; (\forall w \in U,\, B(u, w) = 0) \implies u = 0$）。其 $15$ 个非零点记为 $\operatorname{points}(U) := \{v \in U \mid v \neq 0\}$，$15$ 条全迷向三元射影线记为
+
+$$
+\operatorname{lines}(U) := \bigl\{\ell \subseteq \operatorname{points}(U) \;\big|\; |\ell| = 3 \;\land\; \forall u, v \in \ell,\; u \neq v \implies (u + v \in \ell \;\land\; B(u, v) = 0)\bigr\}.
+$$
+
+对每条线 $\ell \in \operatorname{lines}(U)$，因线上三算符两两对易，按列表顺序相乘所得矩阵 $\operatorname{lineProduct}(\ell) := (\ell.\mathrm{toList.map}\;\operatorname{observable}).\mathrm{prod}$ 与遍历次序无关；将乘积等于负单位阵的线收集为**负线集** $\operatorname{negativeLines}(U) := \{\ell \in \operatorname{lines}(U) \mid \operatorname{lineProduct}(\ell) = -1\}$。
+
+::: {.theorem #thm-doily-negative-line-parity title="线性 doily 的负线奇偶阻碍" lean="D5/S3/Quantum/Contextuality/LinearDoilyNegativeLineParity.result"}
+对任意满足 $N \ge 2$ 的自然数 $N$ 及 $(\mathrm{Fin}\,N \to \mathbb{Z}_2 \times \mathbb{Z}_2)$ 的任意 $\mathbb{Z}_2$-子模 $U$，若 $U$ 构成四维非退化辛子空间（`IsLinearDoily U`），则其负线集合的基数恒为奇数：
+
+$$
+\forall N \ge 2,\; \forall U \le (\mathrm{Fin}\,N \to \mathbb{Z}_2 \times \mathbb{Z}_2),\qquad \operatorname{IsLinearDoily}(U) \implies \operatorname{Odd}\bigl((\operatorname{negativeLines}\,U).\mathrm{card}\bigr).
+$$
+:::
+
+::: proof
+在特征为 $2$ 的有限维向量空间上，因为 $\operatorname{IsLinearDoily}(U)$ 保证 $\dim_{\mathbb{F}_2} U = 4$ 且限制辛形式 $B|_{U \times U}$ 非退化，辛达布（Darboux）基底构造给出 $U$ 与标准双比特四维辛空间 $(\mathbb{Z}_2 \times \mathbb{Z}_2)^2$ 之间的辛线性同构，该同构保持 $15$ 个非零点与 $15$ 条全迷向三元线 $(u, v, u+v)$ 的关联几何。对任一 $N$-比特泡利嵌入，逐位核算 `observable(u) * observable(v)` 与 `observable(u + v)` 之间的符号因子可见：单比特或跨位辛基变换对各迷向线乘积符号的翻转总是成偶对出现，从而保持负线总数模 $2$ 的奇偶性不变；而在典范双比特实现中直接枚举 $15$ 条迷向线恰好得到 $3$ 条负线（奇数），故任意 $N \ge 2$ 下的任意线性 doily 均有 $\operatorname{Odd}\bigl((\operatorname{negativeLines}\,U).\mathrm{card}\bigr)$。完整证明由 Lean 内核检查。
+:::
+
+在把 [@thm-doily-negative-line-parity] 纳入本章知识版图时，必须守住两条精确边界（与稳定子语境的进一步对照见[附录 G](appendix-g.md)）：第一，切勿把 $15$ 点线性 doily 上的“负线数为奇数”直接当作“把全部 $15$ 条线方程相乘即可导出全局赋值矛盾”——在完整 $W(3,2)$ 中，每个非零点同时穿过 **$3$ 条线**（入射度为奇数 $3$ 而非 $2$），将 $15$ 条线全部相乘并不会像上文 $9$ 点 Peres–Mermin 子方阵（每点恰好穿过 $2$ 条线）那样把所有点变量平方消成 $+1$；[@thm-doily-negative-line-parity] 形式化确立的是任意嵌入线性 doily 的负线奇偶不变量，而 $9$ 点方阵的非上下文赋值矛盾则是上文独立展示的度 $2$ 子网格手算推论。第二，多对易上下文交叠产生的 Kochen–Specker 语境性阻碍，针对的是跨上下文拼接非对易算符时的全局静态真值赋值，绝不否定单族态矢复格拉姆矩阵 $G = A^* A$ 的半正定重构定理，也不能与实格拉姆椭圆体外的几何不相容（$\det G < 0$）混为一谈。
 
 ::: {.remark #rem-gram-hairy-ball-literature title="毛球与霍普障碍：文献结果，未在本书形式化"}
 **文献结果，未在本书形式化。** 本章第 3 节、第 1 节与第 4 节涉及的微分拓扑、几何相位与因果哲学经典文献，其严格前提与文献归属如下：

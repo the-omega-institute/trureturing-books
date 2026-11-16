@@ -178,6 +178,28 @@ $$
    单态 $\lvert\Psi^-\rangle$ 在任意相同测量轴 $\vv{n}$ 下呈现全向反相关 $\langle(\vv{n}\cdot\vv{\sigma})\otimes(\vv{n}\cdot\vv{\sigma})\rangle_{\Psi^-} = -1$；而 $\lvert\Phi^+\rangle$ 在 $(Z, X)$ 实平面（$n_y = 0$）内任意相同方向 $\vv{n} = (\sin\alpha, 0, \cos\alpha)$ 下呈现正相关 $\langle(\vv{n}\cdot\vv{\sigma})\otimes(\vv{n}\cdot\vv{\sigma})\rangle_{\Phi^+} = \sin^2\alpha + \cos^2\alpha = +1$，唯独在 $Y$ 轴上反号为 $-1$。两者之间通过 Bob 端的局域泡利变换 $-i\sigma_Y = \sigma_X \sigma_Z$（或 Alice 端的 $i\sigma_Y = \sigma_Z \sigma_X$）精确互译，绝不能把 $\lvert\Phi^+\rangle$ 与 $\lvert\Psi^-\rangle$ 的 $\sigma_Y \otimes \sigma_Y$ 符号混为一谈。
 2. **仅凭“局域边缘态为 $\frac{1}{2}I_2$（局域零向量）”不能反推任意双体态最大纠缠**：唯有在已知**全局态是纯态**（$\operatorname{rank}\rho = 1$，$\Tr(\rho^2) = 1$）的前提下，局部边缘态等于 $\frac{1}{2}I_2$ 才充要地标志着双比特最大纠缠。对于一般混合态，如 [@thm-local-correlation-sectors] 中的经典关联态 $\mathrm{classicalCorrelatedDensity} = \frac{1}{4}(I_4 + \sigma_Z \otimes \sigma_Z)$（$T = \operatorname{diag}(0, 0, 1)$）乃至完全无关联的最大混合态 $\frac{1}{4}I_4$（$T = 0$），它们的局部边缘态同样等于 $\frac{1}{2}I_2$，却丝毫不具量子纠缠。
 
+除了对某一个子系统求偏迹之外，在两项克罗内克张量和上对第一个因子作**部分转置**（partial transpose），也能从矩阵秩翻倍的角度直接照亮贝尔叠加的代数刚性。先手算与未归一化贝尔态 $\lvert 00\rangle + \lvert 11\rangle$ 对应的 $2\times 1$ 列矩阵算例：取 $m_1 = m_2 = 2$、$n_1 = n_2 = 1$，令 $A_1 = B_1 = \binom{1}{0}$、$A_2 = B_2 = \binom{0}{1}$，则 $(A_1, A_2)$ 与 $(B_1, B_2)$ 在 $\mathbb{C}$ 上各自线性无关。两项张量和 $\operatorname{tensorSum}(A_1, A_2, B_1, B_2) = A_1 \otimes_{\mathrm{K}} B_1 + A_2 \otimes_{\mathrm{K}} B_2$ 是秩为 $1$ 的 $4\times 1$ 列矩阵 $(1, 0, 0, 1)^T$；但将第一因子取普通矩阵转置后，$\operatorname{partialTranspose}(A_1, A_2, B_1, B_2) = A_1^T \otimes_{\mathrm{K}} B_1 + A_2^T \otimes_{\mathrm{K}} B_2 = \bigl(\begin{smallmatrix} 1 & 0 \\ 0 & 1 \end{smallmatrix}\bigr) = I_2$ 的秩翻倍为 $2 = 2 \cdot 1$。再看分块拼接秩：纵向叠放 $\operatorname{fromRows}(A_1, A_2) = (1, 0, 0, 1)^T$ 的秩为 $\operatorname{vRank}(A_1, A_2) = 1$，横向并排 $\operatorname{fromCols}(A_1, A_2) = I_2$ 的秩为 $\operatorname{hRank}(A_1, A_2) = 2 = 2\,\operatorname{vRank}(A_1, A_2)$（$B_1, B_2$ 完全相同）。
+
+更一般地，对任意自然数维数 $m_1, n_1, m_2, n_2 \in \mathbb{N}$ 及长方复矩阵 $A_1, A_2 \in M_{m_1 \times n_1}(\mathbb{C})$、$B_1, B_2 \in M_{m_2 \times n_2}(\mathbb{C})$，按源码精确定义两项张量和 $\operatorname{tensorSum}(A_1, A_2, B_1, B_2) := A_1 \otimes_{\mathrm{K}} B_1 + A_2 \otimes_{\mathrm{K}} B_2$、第一因子普通转置下的部分转置 $\operatorname{partialTranspose}(A_1, A_2, B_1, B_2) := \operatorname{tensorSum}(A_1^T, A_2^T, B_1, B_2)$，以及横向拼接秩 $\operatorname{hRank}(X_1, X_2) := \operatorname{rank}\bigl(\operatorname{fromCols}(X_1, X_2)\bigr) \in \mathbb{N}$ 与纵向拼接秩 $\operatorname{vRank}(X_1, X_2) := \operatorname{rank}\bigl(\operatorname{fromRows}(X_1, X_2)\bigr) \in \mathbb{N}$。下面的分类定理给出了部分转置秩恰好达到两倍上界（秩饱和）的充要条件。
+
+::: {.theorem #thm-partial-transpose-rank-saturation title="两项张量和的部分转置秩饱和分类" lean="D5/S3/Quantum/Entanglement/PartialTransposeSaturation/Classification.result"}
+设 $m_1, n_1, m_2, n_2 \in \mathbb{N}$，长方复矩阵 $A_1, A_2 \in M_{m_1 \times n_1}(\mathbb{C})$ 与 $B_1, B_2 \in M_{m_2 \times n_2}(\mathbb{C})$ 满足复线性无关条件 $\operatorname{LinearIndependent}_{\mathbb{C}}\,![A_1, A_2]$ 与 $\operatorname{LinearIndependent}_{\mathbb{C}}\,![B_1, B_2]$。则部分转置矩阵的秩恰好等于原两项张量和之秩的两倍，当且仅当两侧矩阵对同时满足纵向秩翻倍或同时满足横向秩翻倍：
+
+$$
+\begin{aligned}
+&\operatorname{rank}\bigl(\operatorname{partialTranspose}(A_1, A_2, B_1, B_2)\bigr) = 2\,\operatorname{rank}\bigl(\operatorname{tensorSum}(A_1, A_2, B_1, B_2)\bigr) \\
+\iff\;& \bigl(\operatorname{vRank}(A_1, A_2) = 2\,\operatorname{hRank}(A_1, A_2) \;\land\; \operatorname{vRank}(B_1, B_2) = 2\,\operatorname{hRank}(B_1, B_2)\bigr) \\
+&\lor\; \bigl(\operatorname{hRank}(A_1, A_2) = 2\,\operatorname{vRank}(A_1, A_2) \;\land\; \operatorname{hRank}(B_1, B_2) = 2\,\operatorname{vRank}(B_1, B_2)\bigr).
+\end{aligned}
+$$
+:::
+
+::: proof
+在两侧二元族各自 $\mathbb{C}$-线性无关的前提下，利用行空间与列空间的直和分解可将两项克罗内克和 $A_1 \otimes_{\mathrm{K}} B_1 + A_2 \otimes_{\mathrm{K}} B_2$ 的秩表示为两侧横向拼接秩 $\operatorname{hRank}$、纵向拼接秩 $\operatorname{vRank}$ 与单矩阵秩的组合关系，而对第一因子施加普通转置 $(\cdot)^T$ 恰好将 $(A_1, A_2)$ 的横向拼接秩与纵向拼接秩互换：$\operatorname{hRank}(A_1^T, A_2^T) = \operatorname{vRank}(A_1, A_2)$，$\operatorname{vRank}(A_1^T, A_2^T) = \operatorname{hRank}(A_1, A_2)$。由子空间维数上界，部分转置秩至多为原两项张量和之秩的 $2$ 倍；等号饱和当且仅当原张量和在列空间或行空间之一完全重合压缩、而在被转置翻转后的另一侧形成零交直和使维数精确翻倍，化简两侧秩等式即充要地分裂为“双侧 $\operatorname{vRank} = 2\,\operatorname{hRank}$”或“双侧 $\operatorname{hRank} = 2\,\operatorname{vRank}$”两个分支。完整证明由 Lean 内核检查。
+:::
+
+引用 [@thm-partial-transpose-rank-saturation] 时需注意其精确范围：定理允许任意自然数长方矩阵维数 $m_1, n_1, m_2, n_2 \in \mathbb{N}$（不限于方阵密度算符），`partialTranspose` 对第一因子采用的是**普通矩阵转置** $A_i^T$（而非共轭转置 $A_i^*$），且秩函数取值于 $\mathbb{N}$；同时，两侧矩阵对的 $\mathbb{C}$-线性无关前提与“两项张量和”的项数限制均不可省去，不能直接外推为三项以上施密特秩张量和的秩公式、一般混合态的 Peres–Horodecki 半正定可分判据，或仅凭矩阵秩直接判定 CHSH 违背。
+
 ## 13.3 CHSH 平方：正交面积的换位子项 {#sec-chsh-commutator-area}
 
 既然经典对角混合态 $\mathrm{classicalCorrelatedDensity}$ 也能把局部边缘态缩成 $\frac{1}{2}I_2$ 并在关联扇区里占有一格 $\sigma_Z \otimes \sigma_Z$，我们究竟怎样用 CHSH 实验，比对这个经典态的一维关联线与贝尔态 $\lvert\Phi^+\rangle$ 的多方向相干关联面？

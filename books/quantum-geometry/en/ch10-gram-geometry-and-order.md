@@ -417,7 +417,51 @@ Let us develop this insight across four interconnected pillars:
    - **The finite observer's causally compatible space**: If the observer knows only two overlaps, the residual radius is positive, and the ambient dimension is at least $3$, the unread transverse angle leaves the interval $[\cos(\theta_1+\theta_2),\,\cos(\theta_1-\theta_2)]$. The values $\cos\phi=\pm1$ give coplanar endpoints; $|\cos\phi|<1$ gives $\det G>0$ and nonzero 3-volume. If the residual radius vanishes, the interval collapses to $c_{AC}=c_{AB}c_{BC}$, the transverse angle is undefined, and this freedom disappears. **Finiteness alone guarantees neither a positive radius nor the observer's ability to realize every statically compatible completion.** Reading the interval as a "choice space" also requires the physical system to provide the corresponding reachable states and controls. Under these conditions, the book interprets selecting an undetermined relation as the observer picking a point in the causally compatible space.
 
 4. **Clear Epistemic Boundary: Distinguishing Formalized Algebra from Natural-Philosophical & Cosmological Literature**
-   In keeping with the strict epistemic contract of this book, we distinguish the mathematical results proved in Lean 4 — ambient unitary reconstruction from equal complex Gram matrices ([@thm-gram-unitary-reconstruction]), the unit-overlap equivalence criterion ([@lemma-unit-gram-equality]), and the separation between static effects and sequential instruments ([@prop-static-sequential-separation]) — together with standard linear-algebraic Gram determinant non-negativity $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) = \sin^2\theta_1\sin^2\theta_2 - (c_{AC} - \cos\theta_1\cos\theta_2)^2 \ge 0$ and the convex geometry of the Gram elliptope, from the broader philosophical and quantum-cosmological literature connecting order-independent Gram geometry and causally compatible choice spaces to Hume's problem of causation, Spinoza's geometric necessity, and timeless quantum mechanics (the Wheeler–DeWitt equation and the Page–Wootters conditional-time mechanism), which we develop in full in [Chapter 29](ch29-timeless-causality-and-gram-space.md) of Part VIII (building on the circuit-complexity bounds of [Chapter 20](ch20-complexity-and-spacetime.md)).
+   In keeping with the strict epistemic contract of this book, we distinguish the mathematical results proved in Lean 4 — ambient unitary reconstruction from equal complex Gram matrices ([@thm-gram-unitary-reconstruction]), the unit-overlap equivalence criterion ([@lemma-unit-gram-equality]), the separation between static effects and sequential instruments ([@prop-static-sequential-separation]), and the negative-line parity theorem for embedded linear doilies developed in the next subsection ([@thm-doily-negative-line-parity]) — together with standard linear-algebraic Gram determinant non-negativity $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) = \sin^2\theta_1\sin^2\theta_2 - (c_{AC} - \cos\theta_1\cos\theta_2)^2 \ge 0$ and the convex geometry of the Gram elliptope, from the broader philosophical and quantum-cosmological literature connecting order-independent Gram geometry and causally compatible choice spaces to Hume's problem of causation, Spinoza's geometric necessity, and timeless quantum mechanics (the Wheeler–DeWitt equation and the Page–Wootters conditional-time mechanism), which we develop in full in [Chapter 29](ch29-timeless-causality-and-gram-space.md) of Part VIII (building on the circuit-complexity bounds of [Chapter 20](ch20-complexity-and-spacetime.md)).
+
+### 10.4.2 From Single-Context Compatibility to Overlapping-Context Obstruction: Negative-Line Parity in a Linear Doily {#sec-doily-negative-line-parity}
+
+We have seen that retaining full complex phases allows the pairwise Gram matrix of a family of state vectors to reconstruct their global configuration up to a single ambient unitary ([@thm-gram-unitary-reconstruction]), and within any **single** mutually commuting measurement context the operators share a common eigenbasis and admit compatible joint outcomes. When several mutually commuting contexts overlap in a shared network of observables, however, does pairwise compatibility inside each individual context guarantee a global context-independent valuation $\nu(O) \in \{\pm 1\}$?
+
+First check the classic 9-point two-qubit ($N = 2$) Peres–Mermin Pauli square by hand:
+
+$$
+\begin{matrix}
+X \otimes I & I \otimes X & X \otimes X \\
+I \otimes Z & Z \otimes I & Z \otimes Z \\
+X \otimes Z & Z \otimes X & Y \otimes Y
+\end{matrix}
+$$
+
+Along each of the three rows and each of the three columns, the three observables commute pairwise: all three row products equal $+I_4$, the first two column products equal $+I_4$, and the third column product equals $(X \otimes X)(Z \otimes Z)(Y \otimes Y) = (-Y \otimes Y)(Y \otimes Y) = -I_4$ because $(XZ) \otimes (ZX) = (-iY) \otimes (-iY) = -Y \otimes Y$. Since every one of the $9$ observables belongs to **exactly two** of these $6$ contexts (one row and one column), any noncontextual assignment $\nu(O) \in \{\pm 1\}$ respecting the operator product sign on every row and column would make the product of the three row equations equal $(+1)(+1)(+1) = +1$ and the product of the three column equations equal $(+1)(+1)(-1) = -1$, whereas both equal $\prod_O \nu(O)^2 = +1$ — an immediate parity contradiction.
+
+Expanding from this 9-point subgrid to the full 15-point, 15-line symplectic configuration of nontrivial two-qubit Pauli observables — or more generally to any 4-dimensional nondegenerate $\mathbb{F}_2$-symplectic subspace embedded in the $N$-qubit Pauli group for $N \ge 2$ (the symplectic generalized quadrangle $W(3,2)$, known as a linear doily) — reveals an intrinsic parity invariant independent of the ambient qubit count $N$. In the Lean formalization on $(\mathbb{Z}_2 \times \mathbb{Z}_2)^N$ (`Fin N → ZMod 2 × ZMod 2`), `canonicalLabel` sends $(0,0), (0,1), (1,0), (1,1)$ to the single-qubit Pauli matrices $I_2, Z, X, Y$ (with $Y = iXZ = \bigl(\begin{smallmatrix} 0 & -i \\ i & 0 \end{smallmatrix}\bigr)$), and $\operatorname{observable}(v)$ takes the corresponding $N$-fold Kronecker Pauli word; the binary symplectic form is
+
+$$
+B(v, w) := \sum_{j \in \mathrm{Fin}\,N} \bigl(v_{j,1} w_{j,2} + v_{j,2} w_{j,1}\bigr) \in \mathbb{Z}_2,
+$$
+
+which vanishes precisely when the associated Pauli words commute. A $\mathbb{Z}_2$-submodule $U \le (\mathbb{Z}_2 \times \mathbb{Z}_2)^N$ satisfies `IsLinearDoily U` when $\operatorname{finrank}_{\mathbb{Z}_2} U = 4$ and $B$ is nondegenerate on $U$ ($\forall u \in U,\; (\forall w \in U,\, B(u, w) = 0) \implies u = 0$). Its $15$ nonzero vectors form $\operatorname{points}(U) := \{v \in U \mid v \neq 0\}$, and its $15$ totally isotropic three-point projective lines form
+
+$$
+\operatorname{lines}(U) := \bigl\{\ell \subseteq \operatorname{points}(U) \;\big|\; |\ell| = 3 \;\land\; \forall u, v \in \ell,\; u \neq v \implies (u + v \in \ell \;\land\; B(u, v) = 0)\bigr\}.
+$$
+
+Because the three observables on any line $\ell \in \operatorname{lines}(U)$ commute pairwise, their list product $\operatorname{lineProduct}(\ell) := (\ell.\mathrm{toList.map}\;\operatorname{observable}).\mathrm{prod}$ is independent of ordering, and the **negative lines** are collected in $\operatorname{negativeLines}(U) := \{\ell \in \operatorname{lines}(U) \mid \operatorname{lineProduct}(\ell) = -1\}$.
+
+::: {.theorem #thm-doily-negative-line-parity title="Negative-Line Parity Obstruction in a Linear Doily" lean="D5/S3/Quantum/Contextuality/LinearDoilyNegativeLineParity.result"}
+For every natural number $N \ge 2$ and every $\mathbb{Z}_2$-submodule $U \le (\mathrm{Fin}\,N \to \mathbb{Z}_2 \times \mathbb{Z}_2)$, if $U$ is a four-dimensional nondegenerate symplectic subspace (`IsLinearDoily U`), then the cardinality of its set of negative lines is odd:
+
+$$
+\forall N \ge 2,\; \forall U \le (\mathrm{Fin}\,N \to \mathbb{Z}_2 \times \mathbb{Z}_2),\qquad \operatorname{IsLinearDoily}(U) \implies \operatorname{Odd}\bigl((\operatorname{negativeLines}\,U).\mathrm{card}\bigr).
+$$
+:::
+
+::: proof
+Because `IsLinearDoily U` supplies $\dim_{\mathbb{F}_2} U = 4$ and nondegeneracy of the restricted symplectic form $B|_{U \times U}$, a symplectic Darboux basis identifies $U$ with the standard two-qubit symplectic space $(\mathbb{Z}_2 \times \mathbb{Z}_2)^2$, preserving all $15$ nonzero points and $15$ isotropic triples $\{u, v, u+v\}$. Tracking the phase factors relating `observable(u) * observable(v)` to `observable(u + v)` across symplectic basis changes shows that sign flips of isotropic line products always occur in even pairs, leaving $(\operatorname{negativeLines}\,U).\mathrm{card} \bmod 2$ invariant; direct enumeration on the canonical two-qubit realization yields $3$ negative lines out of $15$ (an odd number), establishing $\operatorname{Odd}\bigl((\operatorname{negativeLines}\,U).\mathrm{card}\bigr)$ for every embedded linear doily with $N \ge 2$. The full proof is checked by the Lean kernel.
+:::
+
+Two scope boundaries keep [@thm-doily-negative-line-parity] sharp (see [Appendix G](appendix-g.md) for the broader stabilizer and contextuality synthesis). First, an odd number of negative lines in the 15-point doily $W(3,2)$ does **not** yield a noncontextual-valuation contradiction simply by multiplying all $15$ line equations together: in the full doily, every point lies on **$3$ lines** (an odd incidence degree rather than $2$), so multiplying all $15$ lines leaves $\prod_v \nu(v)^3 = \prod_v \nu(v)$ uncancelled; [@thm-doily-negative-line-parity] proves the intrinsic symplectic parity invariant `Odd (negativeLines U).card`, whereas the valuation impossibility above comes from the standalone degree-$2$ Peres–Mermin 9-point subgrid calculation. Second, Kochen–Specker contextuality across overlapping commuting contexts obstructs global noncontextual truth-value assignments to noncommuting observables; it neither contradicts ambient unitary reconstruction from a single state family's positive-semidefinite Gram matrix $G = A^* A$ nor reduces to geometric Gram incompatibility ($\det G < 0$).
 
 ::: {.remark #rem-gram-hairy-ball-literature title="Hairy Ball and Hopf Obstructions: Literature Result, Not Formalized in This Book"}
 **Literature result, not formalized in this book.** Classical results from differential topology, mathematical physics, and the philosophy of causation frame the geometric discussions in Sections 1, 3, and 4:
