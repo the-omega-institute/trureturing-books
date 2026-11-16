@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
-"""从正式解析器刷新声明索引、地图与统计图；--check 只检查，不写入。"""
+"""从正式解析器刷新声明索引、统计与地图 JSON；--check 只检查，不写入。"""
 import argparse
 from collections import Counter
 import importlib.util
 import json
 from pathlib import Path
 import re
-import subprocess
 import sys
 
 BOOK = Path(__file__).resolve().parent
 ROOT = BOOK.parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
-from tbook import config, figure, model, stats
+from tbook import config, model, stats
 
 
 def planned():
@@ -63,8 +62,7 @@ def planned():
     env_locs = {(c['file'], c['line']) for g in groups['theorems'] for c in decls[g]['citations'] if c['via'] == 'environment'}
     vals['theorem_headers'] = len(env_locs)
     vals['example_headers'] = len(env_locs) - vals['formal_envs']
-    outputs = {registry_file: json.dumps(registry, ensure_ascii=False, indent=2) + '\n',
-               BOOK / 'data/statistics.json': json.dumps(data, ensure_ascii=False, indent=2) + '\n'}
+    outputs = {BOOK / 'data/statistics.json': json.dumps(data, ensure_ascii=False, indent=2) + '\n'}
 
     def loc(c, lang):
         file = roots.get(c['file'], c['file'])
@@ -104,15 +102,29 @@ def planned():
     spec = importlib.util.spec_from_file_location('map_data', BOOK / 'viz/lean-declaration-map/gen-data.py')
     generator = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(generator)
-    outputs[generator.MAIN] = generator.generated(data=data, serials=serials)
+    outputs[generator.OUTPUT] = generator.generated(data=data, serials=serials)
     return book, outputs
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true')
+    parser.add_argument('--register-serials', action='store_true', help='将新声明编号登记为发布源数据')
     args = parser.parse_args()
+    if args.check and args.register_serials:
+        parser.error('--check 与 --register-serials 不能同时使用')
     book, outputs = planned()
+    if args.register_serials:
+        # 登记是显式发布操作；日常构建只按现有登记顺序分配临时编号。
+        data = stats.collect(book)
+        registry_file = BOOK / 'data/declaration-serials.json'
+        registry = json.loads(registry_file.read_text(encoding='utf-8'))
+        for group, prefix in [('theorems', 'T'), ('definitions', 'D'), ('inline', 'R')]:
+            for gid in data['groups'][group]:
+                if not registry['serials'].get(gid, '').startswith(prefix):
+                    registry['serials'][gid] = f"{prefix}{registry['next'][prefix]:03d}"
+                    registry['next'][prefix] += 1
+        outputs[registry_file] = json.dumps(registry, ensure_ascii=False, indent=2) + '\n'
     changed = [p for p, text in outputs.items() if not p.is_file() or p.read_text(encoding='utf-8') != text]
     if args.check:
         for p in changed:
@@ -122,17 +134,7 @@ def main():
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(outputs[p], encoding='utf-8')
             print(f'updated: {p.relative_to(ROOT)}')
-    # Only these five statistics figures depend on the aggregate counts.
-    figs, errors = figure.build(book, ['prelude-three-tiers', 'ch28-declaration-parts', 'appc-ledger',
-                                      'appc-modules-by-part', 'appc-theorems-by-chapter'], check=args.check)
-    for error in errors:
-        print(error, file=sys.stderr)
-    for file in figs:
-        print(f'{"stale" if args.check else "updated"}: {file.relative_to(ROOT)}')
-    if errors or (args.check and (changed or figs)):
-        return 1
-    return subprocess.run(['node', str(ROOT / 'tools/node/viz-thumbs.mjs'), book.slug, 'lean-declaration-map',
-                           *(['--check'] if args.check else [])], cwd=ROOT).returncode
+    return 1 if args.check and changed else 0
 
 
 if __name__ == '__main__':
