@@ -447,6 +447,107 @@ From the second step on, a single environment sends the leaked amplitude back; a
 
 > Leaked amplitude does not come back, not because it has vanished, but because the environment that meets the system is always a fresh one.
 
+::: {.remark #rem-arbitrary-density-prefix title="An Exact Prefix Bound for an Arbitrary Initial Environment Density (Manual Application)"}
+**Manual application, not formalized in this book.** Recurrence over all time leaves room for finite windows. Yet if two pure states remain fixed while their mutual coherence follows an exact geometric sequence with ratio of modulus less than one, the dimension of a fixed environment also limits the window. The argument below follows [the source, §§9–10, proof of Theorem 10.1](https://github.com/the-omega-institute/trureturing/blob/3476ce98dd3c4326181683b37fc2ddad3e33a743/docs/develop/theory/RECURSIVE_RELATIONAL_OBSERVATION_MINIMAL_RECORD_DILATIONS.md#L980-L1058). That theorem concerns a balanced ten-dimensional channel: in a fixed frame, it identifies orthonormal states $h_+,h_-$, verifies that their pure projectors are fixed and their coherence multiplier is $\lambda=1-4p$ with $|\lambda|<1$, and then uses branch histories and finite Prony annihilation. Here $a,b$ take the roles of $h_+,h_-$, and the same part of the proof applies to a model satisfying those two-state conditions. The generic two-state formulation below is an application of that proof; the source theorem itself concerns its ten-dimensional channel. The research entry point is [trureturing #31041](https://github.com/the-omega-institute/trureturing/issues/31041).
+
+Fix integers $m\ge2,d\ge1$, a natural number $N$, a real number $-1<\lambda<1$, and orthonormal vectors $a,b\in\mathbb C^m$. Let $E=\mathbb C^d$ and let the initial environment density $\sigma\in M_d(\mathbb C)$ be positive semidefinite with $\Tr\sigma=1$, allowing arbitrary rank and coherences in any basis. One fixed unitary $W$ acts on $\mathbb C^m\otimes E$, with actual reduced maps
+
+$$
+\Psi_n(X)=\Tr_E\bigl(W^n(X\otimes\sigma)W^{*n}\bigr).
+$$
+
+The environment is initially independent of the system input. The data $W,E,\sigma,a,b,\lambda$ stay fixed throughout the window, with no reset, intermediate intervention, external clock control, or replacement of the environment. Write $P_a=\lvert a\rangle\langle a\rvert$, $P_b=\lvert b\rangle\langle b\rvert$, and $O=\lvert a\rangle\langle b\rvert$. If, for every $0\le n\le N$,
+
+$$
+\begin{aligned}
+\Psi_n(P_a)&=P_a,\qquad \Psi_n(P_b)=P_b,\\
+\langle a,\Psi_n(O)b\rangle&=\lambda^n,
+\end{aligned}
+$$
+
+then $N+1\le d^2$: counting the zeroth sample, at most $d^2$ such exact geometric-coherence samples can agree. Although $O$ is not a density matrix, the displayed definition of the maps acts on all system matrices. Equality of entire channels on density matrices also determines their action on $O$ by linearity.
+
+**Pure outputs reveal the actual branches.** For $N=0$ the conclusion is simply $1\le d^2$; hence take $N\ge1$. Diagonalize $\sigma$ on its positive support $S=\operatorname{supp}\sigma$:
+
+$$
+\sigma=\sum_{j=1}^r s_j\lvert e_j\rangle\langle e_j\rvert,
+\qquad s_j>0,\quad \sum_j s_j=1,
+$$
+
+where $r=\dim S$ and the $e_j$ form an orthonormal basis of $S$. The pure output $\Psi_n(P_a)=P_a$ means that the total probability of leaving the $a$ direction vanishes:
+
+$$
+\begin{aligned}
+0&=\Tr\bigl((I-P_a)\Psi_n(P_a)\bigr)\\
+&=\sum_j s_j\bigl\|((I-P_a)\otimes I_E)W^n(a\otimes e_j)\bigr\|^2.
+\end{aligned}
+$$
+
+Every term is nonnegative and $s_j>0$, so each term vanishes. By linearity, for every $e\in S$,
+
+$$
+\begin{aligned}
+W^n(a\otimes e)&=a\otimes T_{a,n}e,\\
+W^n(b\otimes e)&=b\otimes T_{b,n}e
+\qquad(0\le n\le N).
+\end{aligned}
+$$
+
+Unitarity makes each $T_{a,n},T_{b,n}:S\to E$ an isometry; $T_{a,0}$ and $T_{b,0}$ are the support inclusion. This diagonalizes the given arbitrary $\sigma$, without assuming it is diagonal in a prescribed basis or increasing the environment dimension by purification.
+
+**One actual evolution makes the histories compatible.** Set
+
+$$
+F_a=\operatorname{span}\{T_{a,n}S:0\le n<N\}.
+$$
+
+On each generating vector the actual $W$ satisfies
+
+$$
+W(a\otimes T_{a,n}e)=a\otimes T_{a,n+1}e.
+$$
+
+Thus $W$ maps $a\otimes F_a$ into $a\otimes E$, defining a single linear isometry $L_a:F_a\to E$ with $L_aT_{a,n}e=T_{a,n+1}e$. Any linear combination of history vectors that vanishes still vanishes after applying the actual linear operator $W$. The assignment therefore respects every linear relation; compatibility of histories chosen independently at different times is not an extra assumption. Since $F_a$ and $L_a(F_a)$ have equal dimensions, their orthogonal complements in $E$ also have equal dimensions. Choosing an isometric bijection between these complements extends $L_a$ to a unitary $A$ on $E$. The same construction on the $b$ branch gives a unitary $B$. Induction yields
+
+$$
+A^ne=T_{a,n}e,\qquad B^ne=T_{b,n}e
+\quad(e\in S,\ 0\le n\le N).
+$$
+
+These auxiliary operators reproduce only the occupied support histories within the window; they do not supply a global controlled decomposition of $W$.
+
+**Coherence becomes a finite sum of unit-circle frequencies.** Define the auxiliary sequence $f_n=\Tr(A^n\sigma B^{-n})$ for $n\ge0$. Within the window, the partial trace of the actual off-diagonal input gives
+
+$$
+\begin{aligned}
+\langle a,\Psi_n(O)b\rangle
+&=\sum_j s_j\langle B^ne_j,A^ne_j\rangle\\
+&=\Tr(A^n\sigma B^{-n})=f_n=\lambda^n.
+\end{aligned}
+$$
+
+Outside the window this auxiliary sequence need not equal the actual readings from $W$. Spectrally decompose $A=\sum_i u_iP_i$ and $B=\sum_j v_jQ_j$, with $|u_i|=|v_j|=1$. Then
+
+$$
+\begin{aligned}
+f_n&=\sum_{i,j}c_{ij}(u_i\overline{v_j})^n,\\
+c_{ij}&=\Tr(P_i\sigma Q_j).
+\end{aligned}
+$$
+
+These weights can be complex and cannot be treated as nonnegative probabilities. For arbitrary densities one also cannot directly reuse the positive Gram matrix and orthogonal-innovation argument for a maximally mixed state. Combine equal frequencies and discard terms whose combined weight is zero to obtain $f_n=\sum_{\ell=1}^K\alpha_\ell\omega_\ell^n$, where $|\omega_\ell|=1$. Each unitary has at most $d$ distinct eigenvalues, and $f_0=\Tr\sigma=1$ ensures at least one term remains. Hence $1\le K\le d^2$.
+
+Finite Prony annihilation needs only the polynomial
+
+$$
+q(z)=\prod_{\ell=1}^K(z-\omega_\ell)=\sum_{j=0}^K q_jz^j.
+$$
+
+Substitution gives $\sum_{j=0}^Kq_jf_j=\sum_\ell\alpha_\ell q(\omega_\ell)=0$, without positive weights. If $N\ge K$, the geometric values within the window would give $q(\lambda)=0$. This is impossible: all roots of $q$ lie on the unit circle, whereas $|\lambda|<1$. Thus $N<K\le d^2$, or $N+1\le d^2$. Zero and negative $\lambda$ are included: the zeroth power is always $1$, and at $\lambda=0$ one has $q(0)=(-1)^K\prod_\ell\omega_\ell\ne0$. The endpoints $\lambda=\pm1$ violate strict contraction, so this contradiction does not apply there.
+
+For qubit dephasing take $m=2,a=e_0,b=e_1$: the diagonal pure states stay fixed and the off-diagonal entries acquire the factor $\lambda^n$, exactly as required. Consequently, at $d=2$ one has $N\le3$: no initial environment density can support an exact common prefix through the fourth step. This is a necessary bound for the stated autonomous model. It supplies no exact minimum environment dimension for general windows, general attainability, approximate error bound, or physical realization of arbitrary spectral moment data, and it is not a universal physical law. Unperturbed marginal channel identities likewise do not determine the full joint-state histories of a retained environment or a process tensor with intermediate interventions. The formal status of this generic application remains unsettled; verification of its components does not make it a Lean-verified statement.
+:::
+
 Alongside energy-conserving $T_2$ dephasing stands energy-relaxing **amplitude damping** ($T_1$ spontaneous emission): an excited state at the south pole ($-1$) emits a quantum of energy into a cold bath and relaxes toward the ground state at the north pole ($+1$). Geometrically, the Bloch ball does not merely shrink around the origin — its center **drifts upward** along the vertical axis via the affine map [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$ ($0 \le \gamma < 1$).
 
 ::: {.viz src="bloch-noise" preset="amp" height="500"}

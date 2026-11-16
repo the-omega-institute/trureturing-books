@@ -447,6 +447,107 @@ $$
 
 > 漏出去的振幅不回来，不是因为它消失了，而是因为迎面来的环境永远是新的。
 
+::: {.remark #rem-arbitrary-density-prefix title="任意初始环境密度的精确前缀界（手工应用推导）"}
+**手工应用推导，未在本书形式化。** 全时间回返并不排除有限窗口；但若两个纯态始终不动、它们之间的相干严格按等比数列衰减，窗口长度也会受到固定环境维数的限制。以下沿用[源理论卷 §§9–10，Theorem 10.1 的证明](https://github.com/the-omega-institute/trureturing/blob/3476ce98dd3c4326181683b37fc2ddad3e33a743/docs/develop/theory/RECURSIVE_RELATIONAL_OBSERVATION_MINIMAL_RECORD_DILATIONS.md#L980-L1058)。源定理针对平衡十维信道：它在固定坐标变换中找到正交态 $h_+,h_-$，验证两个纯投影不变、相干乘子为 $\lambda=1-4p$ 且 $|\lambda|<1$，再作分支历史与有限 Prony 消去。这里以 $a,b$ 对应 $h_+,h_-$，将同一段证明用于满足相同二态条件的模型；下述通用二态表述是应用整理，源定理本身仍是该十维信道的结论。相关研究入口为 [trureturing #31041](https://github.com/the-omega-institute/trureturing/issues/31041)。
+
+固定整数 $m\ge2,d\ge1$、自然数 $N$、实数 $-1<\lambda<1$，以及 $\mathbb C^m$ 中的正交单位向量 $a,b$。令 $E=\mathbb C^d$，环境初态 $\sigma\in M_d(\mathbb C)$ 半正定且 $\Tr\sigma=1$，允许任意秩及任意基下的相干。一个固定酉算子 $W$ 作用于 $\mathbb C^m\otimes E$，实际约化映射为
+
+$$
+\Psi_n(X)=\Tr_E\bigl(W^n(X\otimes\sigma)W^{*n}\bigr).
+$$
+
+初始环境与系统输入独立；$W,E,\sigma,a,b,\lambda$ 在整个窗口内保持固定，没有重置、中间干预、外部时钟控制或环境更换。记 $P_a=\lvert a\rangle\langle a\rvert$、$P_b=\lvert b\rangle\langle b\rvert$ 及 $O=\lvert a\rangle\langle b\rvert$。若对每个 $0\le n\le N$ 都有
+
+$$
+\begin{aligned}
+\Psi_n(P_a)&=P_a,\qquad \Psi_n(P_b)=P_b,\\
+\langle a,\Psi_n(O)b\rangle&=\lambda^n,
+\end{aligned}
+$$
+
+则 $N+1\le d^2$：包括第零项在内，不能匹配超过 $d^2$ 个这样的精确等比相干样本。$O$ 本身不是密度矩阵；这里的映射由上述公式定义在所有系统矩阵上。若已知整个信道在密度矩阵上相等，线性性也确定其对 $O$ 的作用。
+
+**从纯输出读出实际分支。** $N=0$ 时，结论就是 $1\le d^2$；以下取 $N\ge1$。在 $\sigma$ 的正支集 $S=\operatorname{supp}\sigma$ 上作谱分解
+
+$$
+\sigma=\sum_{j=1}^r s_j\lvert e_j\rangle\langle e_j\rvert,
+\qquad s_j>0,\quad \sum_j s_j=1,
+$$
+
+其中 $r=\dim S$，$e_j$ 为 $S$ 的正交单位基。纯输出 $\Psi_n(P_a)=P_a$ 意味着离开 $a$ 方向的总概率为零：
+
+$$
+\begin{aligned}
+0&=\Tr\bigl((I-P_a)\Psi_n(P_a)\bigr)\\
+&=\sum_j s_j\bigl\|((I-P_a)\otimes I_E)W^n(a\otimes e_j)\bigr\|^2.
+\end{aligned}
+$$
+
+每项非负且 $s_j>0$，故每项都为零。由线性性，对所有 $e\in S$ 有
+
+$$
+\begin{aligned}
+W^n(a\otimes e)&=a\otimes T_{a,n}e,\\
+W^n(b\otimes e)&=b\otimes T_{b,n}e
+\qquad(0\le n\le N).
+\end{aligned}
+$$
+
+酉性保证每个 $T_{a,n},T_{b,n}:S\to E$ 保内积，且 $T_{a,0},T_{b,0}$ 都是支集的包含映射。这里对角化的是任意给定的 $\sigma$，没有假设它在某个指定基下对角，也没有用纯化扩大环境维数。
+
+**同一个演化保证历史相容。** 置
+
+$$
+F_a=\operatorname{span}\{T_{a,n}S:0\le n<N\}.
+$$
+
+对每个生成向量，实际的 $W$ 满足
+
+$$
+W(a\otimes T_{a,n}e)=a\otimes T_{a,n+1}e.
+$$
+
+因此 $W$ 将 $a\otimes F_a$ 映入 $a\otimes E$，定义单一线性等距映射 $L_a:F_a\to E$，使 $L_aT_{a,n}e=T_{a,n+1}e$。若若干历史向量的线性组合为零，对它施加实际的线性算子 $W$ 后仍为零，所以上述赋值尊重所有线性关系，并非另行假设各时刻独立选出的历史相容。由于 $F_a$ 与 $L_a(F_a)$ 等维，它们在 $E$ 中的正交补也等维；在两补空间之间选一个保内积双射，就将 $L_a$ 延拓为 $E$ 上的酉算子 $A$。对 $b$ 分支同样得到酉算子 $B$。归纳给出
+
+$$
+A^ne=T_{a,n}e,\qquad B^ne=T_{b,n}e
+\quad(e\in S,\ 0\le n\le N).
+$$
+
+这两个辅助算子只重现受占支集上的窗口历史，并未给出 $W$ 在整个联合空间上的受控分解。
+
+**相干成为有限个圆周频率的叠加。** 定义辅助序列 $f_n=\Tr(A^n\sigma B^{-n})$（$n\ge0$）。在窗口内，对实际非对角输入作偏迹得到
+
+$$
+\begin{aligned}
+\langle a,\Psi_n(O)b\rangle
+&=\sum_j s_j\langle B^ne_j,A^ne_j\rangle\\
+&=\Tr(A^n\sigma B^{-n})=f_n=\lambda^n.
+\end{aligned}
+$$
+
+窗口之外不要求该辅助序列与实际 $W$ 的读数相同。将 $A=\sum_i u_iP_i$、$B=\sum_j v_jQ_j$ 作谱分解，$|u_i|=|v_j|=1$，便有
+
+$$
+\begin{aligned}
+f_n&=\sum_{i,j}c_{ij}(u_i\overline{v_j})^n,\\
+c_{ij}&=\Tr(P_i\sigma Q_j).
+\end{aligned}
+$$
+
+这些权重可以是复数，不能当成非负概率；任意密度下也不能直接套用最大混合态的正 Gram 矩阵与正交增量论证。合并相同频率并删除合并后权重为零的项，得到 $f_n=\sum_{\ell=1}^K\alpha_\ell\omega_\ell^n$，其中 $|\omega_\ell|=1$。每个酉算子至多有 $d$ 个不同特征值，且 $f_0=\Tr\sigma=1$ 保证至少留下一项，故 $1\le K\le d^2$。
+
+有限 Prony 消去式只需多项式
+
+$$
+q(z)=\prod_{\ell=1}^K(z-\omega_\ell)=\sum_{j=0}^K q_jz^j.
+$$
+
+逐项代入即得 $\sum_{j=0}^Kq_jf_j=\sum_\ell\alpha_\ell q(\omega_\ell)=0$，不需要权重为正。若 $N\ge K$，窗口内的等比值便给出 $q(\lambda)=0$；但 $q$ 的根全在单位圆上，而 $|\lambda|<1$，矛盾。因此 $N<K\le d^2$，也就是 $N+1\le d^2$。零与负的 $\lambda$ 均包含在内：第零幂始终为 $1$；在 $\lambda=0$ 时，$q(0)=(-1)^K\prod_\ell\omega_\ell\ne0$。端点 $\lambda=\pm1$ 不满足严格收缩条件，这个矛盾在那里不成立。
+
+对单比特去相位取 $m=2,a=e_0,b=e_1$，对角纯态保持不动、副对角元乘以 $\lambda^n$，恰好满足以上条件。因此 $d=2$ 时 $N\le3$，任意初始环境密度都不能支持一直到第四步的精确共同前缀。这只是所述自主模型的必要界；它不提供一般窗口的精确最小环境维数、一般可达性、近似误差界或任意谱矩数据的物理实现，也不把该条件结论当作普遍物理定律。未受干预的边缘信道恒等式同样不确定保留环境的完整联合态历史或带中间干预的过程张量。上述通用应用的形式化状态仍未核定，不能因其组成结果已有验证而将它称为 Lean 已验证。
+:::
+
 除了“只收腰、不掉高”的相位阻尼外，实验室里还有另一类截然不同的能量耗散过程——**振幅阻尼信道**（amplitude damping，对应自发辐射能量弛豫时间 $T_1$）：处于激发态（南极 $-1$）的量子比特会向低温环境吐出一颗能量光子而跌回基态（北极 $+1$）。因此，在几何上，整颗布洛赫球不仅在往里收缩，而且球心还在往北极 $u = +1$ 方向**整体上漂**：轴向坐标按仿射律 [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$（阻尼率 $0 \le \gamma < 1$）向 $+1$ 聚拢！
 
 ::: {.viz src="bloch-noise" preset="amp" height="500"}
