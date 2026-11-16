@@ -81,7 +81,8 @@
         {
           "gid": "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "sphere-escape",
@@ -171,7 +172,8 @@
         {
           "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "pythagoras-number-escape",
@@ -253,7 +255,8 @@
         {
           "gid": "D5/S3/PrimeForms/ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "timeless-causal-crystal",
@@ -334,7 +337,8 @@
         {
           "gid": "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "navier-stokes-p-np",
@@ -389,7 +393,8 @@
         {
           "gid": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "eth-horizon-crossover",
@@ -447,7 +452,8 @@
         {
           "gid": "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "spatial-attractor-deja-vu",
@@ -490,7 +496,8 @@
           "href_en": "../en/coda-s02-spatial-attractors.html#sec-coda-deja-vu-fractal-dimension"
         }
       ],
-      "lean": []
+      "lean": [],
+      "capture_lock": "links"
     },
     {
       "id": "golden-cut-observer",
@@ -572,7 +579,8 @@
         {
           "gid": "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "repeated-projection",
@@ -634,7 +642,8 @@
         {
           "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "bloch-noise",
@@ -709,7 +718,8 @@
         {
           "gid": "D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "double-slit-marker",
@@ -758,7 +768,8 @@
         {
           "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "erasure-ledger",
@@ -832,7 +843,8 @@
         {
           "gid": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "speed-limit-zeno",
@@ -892,7 +904,8 @@
         {
           "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "two-angle-addressing",
@@ -959,7 +972,8 @@
         {
           "gid": "D5/S3/Quantum/Analysis/TrotterProduct.trotter_product"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "berry-loop",
@@ -1011,7 +1025,8 @@
         {
           "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "pulse-area-virtual-z",
@@ -1077,7 +1092,8 @@
         {
           "gid": "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "parameter-shift",
@@ -1123,7 +1139,8 @@
         {
           "gid": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "equator-concentration",
@@ -1163,7 +1180,8 @@
           "href": "https://doi.org/10.1038/s41467-018-07090-4"
         }
       ],
-      "lean": []
+      "lean": [],
+      "capture_lock": "links"
     },
     {
       "id": "pairwise-shutter",
@@ -1220,7 +1238,8 @@
         {
           "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "chsh-dial",
@@ -1284,7 +1303,8 @@
         {
           "gid": "D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "syndrome-decoding",
@@ -1329,7 +1349,8 @@
         {
           "gid": "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "braiding",
@@ -1382,7 +1403,8 @@
         {
           "gid": "D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "walk-spreading",
@@ -1434,7 +1456,8 @@
         {
           "gid": "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "gate-word-polytope",
@@ -1486,7 +1509,8 @@
         {
           "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "grover-reflections",
@@ -1532,7 +1556,8 @@
         {
           "gid": "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "phase-gears",
@@ -1584,7 +1609,8 @@
         {
           "gid": "D5/S3/Fourier/FinitePoisson.sum_annihilator_character"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "rapidity-lightcone",
@@ -1636,7 +1662,8 @@
         {
           "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "lattice-gauge-loop",
@@ -1691,7 +1718,8 @@
         {
           "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "layered-network-cut",
@@ -1743,7 +1771,8 @@
         {
           "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "complexity-growth",
@@ -1797,7 +1826,8 @@
         {
           "gid": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "norm-lattice",
@@ -1863,7 +1893,8 @@
         {
           "gid": "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "euler-product-sieve",
@@ -1916,7 +1947,8 @@
         {
           "gid": "D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "blade-multiplication",
@@ -1997,7 +2029,8 @@
         {
           "gid": "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "zyz-compile",
@@ -2064,7 +2097,8 @@
         {
           "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "fixed-point-convergence",
@@ -2116,7 +2150,8 @@
         {
           "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "mutual-observer-attractors",
@@ -2158,7 +2193,8 @@
         {
           "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "self-referential-table",
@@ -2213,7 +2249,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "quantum-fairness-ledger",
@@ -2269,7 +2306,8 @@
         {
           "gid": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "spherical-degeneracy-radar",
@@ -2315,7 +2353,8 @@
         {
           "gid": "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "unified-field-slice",
@@ -2391,7 +2430,8 @@
         {
           "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "forgetting-rebirth-attractor",
@@ -2443,7 +2483,8 @@
         {
           "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "pointer-ontology-deref",
@@ -2485,7 +2526,8 @@
         {
           "gid": "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "self-sustaining-spinor-flow",
@@ -2537,7 +2579,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "gram-causal-elliptope",
@@ -2589,7 +2632,8 @@
         {
           "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "dream-decoherence-unpinning",
@@ -2648,7 +2692,8 @@
         {
           "gid": "D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "meta-unification-compass",
@@ -2704,7 +2749,8 @@
         {
           "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "hairy-ball-normal-escape",
@@ -2763,7 +2809,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "dottie-fibonacci-spirals",
@@ -2835,7 +2882,8 @@
         {
           "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "critical-mirror",
@@ -2885,7 +2933,8 @@
         {
           "gid": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "vortex-polygon",
@@ -2936,7 +2985,8 @@
         {
           "gid": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "entanglement-entropy-complexity",
@@ -3004,7 +3054,8 @@
         {
           "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "fairness-square-uncertainty-expansion",
@@ -3101,7 +3152,8 @@
         {
           "gid": "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "padic-prime-table-tree",
@@ -3178,7 +3230,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "dream-pre-decoherence-deja-vu",
@@ -3273,7 +3326,8 @@
         {
           "gid": "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "pnp-lookup-degradation",
@@ -3341,7 +3395,8 @@
         {
           "gid": "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "observer-escape-ledger",
@@ -3423,7 +3478,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity.refinement_impurity_monotone"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "pisot-clifford-rauzy-sandtable",
@@ -3523,7 +3579,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "quantum-interpretations-duel",
@@ -3621,7 +3678,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "coherence-handshake-causality",
@@ -3710,7 +3768,8 @@
         {
           "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "observer-consensus-decoherence",
@@ -3786,7 +3845,8 @@
         {
           "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "comparison-oisc-engine",
@@ -3850,7 +3910,8 @@
           "href": "../zh/ch32-s02-oisc-comparison-engine.html#sec-ch32-oisc-comparison-engine",
           "href_en": "../en/ch32-s02-oisc-comparison-engine.html#sec-ch32-oisc-comparison-engine"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "spherical-trihedron-cell",
@@ -3916,7 +3977,8 @@
         {
           "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "triadic-nameless-sandbox",
@@ -3970,7 +4032,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "berry-sector-path-sandbox",
@@ -4072,7 +4135,8 @@
         {
           "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "standing-wave-volume-sandbox",
@@ -4138,7 +4202,8 @@
         {
           "gid": "D5/S3/QuantumStates/PhaseLockedOverlap.phase_locked_overlap_is_rotated_real"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "clifford-monad-tiling-sandbox",
@@ -4203,7 +4268,8 @@
         {
           "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "reversal-diagonal-cascade-sandbox",
@@ -4297,7 +4363,8 @@
         {
           "gid": "D5/S3/Quantum/Algebra/DoubleOrthogonalClosure.double_orthogonal_complement_eq_closure"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "trihedron-rigidity-truss-sandbox",
@@ -4405,7 +4472,8 @@
         {
           "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "quantum-arc-macro-integral-sandbox",
@@ -4487,7 +4555,8 @@
         {
           "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "triadic-arc-field-loop-sandbox",
@@ -4598,7 +4667,8 @@
         {
           "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "octave-point-volume-field-sandbox",
@@ -4712,7 +4782,8 @@
         {
           "gid": "D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "lorentz-pseudoscalar-sm-octave-sandbox",
@@ -4817,7 +4888,8 @@
         {
           "gid": "D5/S3/Fourier/FinitePoisson.finite_poisson_summation"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "quantum-gate-cosmic-tower-sandbox",
@@ -4925,7 +4997,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "coset-breaking-conservation-tower-sandbox",
@@ -5030,7 +5103,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "uncompleted-horizon-sandbox",
@@ -5090,7 +5164,8 @@
         {
           "gid": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "stereographic-relativization-sandbox",
@@ -5169,7 +5244,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "bounded-horizon-thermodynamics-sandbox",
@@ -5283,7 +5359,8 @@
         {
           "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "gram-window-consensus-sandbox",
@@ -5391,7 +5468,8 @@
         {
           "gid": "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "roundtrip-born-imaginary-blindspot-sandbox",
@@ -5490,7 +5568,8 @@
         {
           "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "prelude-dimensions",
@@ -5535,7 +5614,8 @@
           "href_en": "../en/index.html#sec-awakening"
         }
       ],
-      "lean": []
+      "lean": [],
+      "capture_lock": "links"
     },
     {
       "id": "scattering-temporal-bridge",
@@ -5618,7 +5698,8 @@
           "href": "https://doi.org/10.1103/gjfq-k9dv"
         }
       ],
-      "lean": []
+      "lean": [],
+      "capture_lock": "links"
     },
     {
       "id": "zeta-spectrum-lab",
@@ -5696,7 +5777,8 @@
           "href": "https://dlmf.nist.gov/25.16"
         }
       ],
-      "lean": []
+      "lean": [],
+      "capture_lock": "links"
     },
     {
       "id": "arithmetic-schur-lab",
@@ -5789,7 +5871,8 @@
           "href": "https://doi.org/10.7146/math.scand.a-10453"
         }
       ],
-      "lean": []
+      "lean": [],
+      "capture_lock": "links"
     },
     {
       "id": "trihedron-chord-pivot-tunneling-sandbox",
@@ -5873,7 +5956,8 @@
         {
           "gid": "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition"
         }
-      ]
+      ],
+      "capture_lock": "links"
     },
     {
       "id": "imaginary-chord-temporal-double-slit-sandbox",
@@ -5960,7 +6044,8 @@
         {
           "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
         }
-      ]
+      ],
+      "capture_lock": "links"
     }
   ]
 }

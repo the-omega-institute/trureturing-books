@@ -1,10 +1,37 @@
 {
   "schema": "tbook-ci-dependencies-v1",
   "suites": {
+    "arithmetic-schur-lab.test.mjs": [
+      "@citations",
+      "books/quantum-geometry/book.toml",
+      "@registry-entry",
+      "package-lock.json",
+      "package.json",
+      "site.toml",
+      "theme/generated/tokens.css",
+      "theme/tokens.json",
+      "theme/viz/favicon.svg",
+      "theme/viz/kit.js",
+      "theme/viz/shell.js",
+      "theme/viz/solid-core.js",
+      "theme/viz/theme.css",
+      "theme/viz/vendor/three.core.min.js",
+      "theme/viz/vendor/three.module.min.js",
+      "tools/tbook/__init__.py",
+      "tools/tbook/config.py",
+      "tools/tbook/lean.py",
+      "tools/tbook/mathrender.py",
+      "tools/tbook/mdscan.py",
+      "tools/tbook/model.py",
+      "tools/tbook/paths.py",
+      "tools/tbook/summary.py",
+      "tools/tbook/viz.py",
+      "@lean-links"
+    ],
     "berry-loop.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -23,7 +50,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "berry-sector-path-sandbox.test.mjs": [
       "@citations",
@@ -48,13 +75,14 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "blade-multiplication.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
       "books/quantum-geometry/en/ch25-rewriting-and-xor.md",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "books/quantum-geometry/zh/ch25-rewriting-and-xor.md",
       "package-lock.json",
       "package.json",
@@ -79,7 +107,7 @@
     "bloch-noise.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -101,7 +129,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "bounded-horizon-thermodynamics-sandbox.test.mjs": [
       "@citations",
@@ -126,12 +154,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "braiding.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -153,7 +182,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "chsh-dial.test.mjs": [
       "@citations",
@@ -174,7 +203,7 @@
       "books/quantum-geometry/viz/spherical-degeneracy-radar/**",
       "books/quantum-geometry/viz/spherical-trihedron-cell/**",
       "books/quantum-geometry/viz/timeless-causal-crystal/**",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "books/quantum-geometry/zh/ch13-entanglement-and-chsh.md",
       "package-lock.json",
       "package.json",
@@ -197,7 +226,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "clifford-monad-tiling-sandbox.test.mjs": [
       "@citations",
@@ -222,12 +251,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "trureturing.lock.json",
+      "@registry-entry"
     ],
     "coherence-handshake-causality.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -246,12 +276,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "comparison-oisc-engine.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -270,13 +300,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "complexity-growth.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
       "books/quantum-geometry/en/ch20-complexity-and-spacetime.md",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "books/quantum-geometry/zh/ch20-complexity-and-spacetime.md",
       "package-lock.json",
       "package.json",
@@ -296,7 +326,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "coset-breaking-conservation-tower-sandbox.test.mjs": [
       "@citations",
@@ -321,12 +351,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "critical-mirror.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -345,12 +376,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "dottie-fibonacci-spirals.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -369,12 +400,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "double-slit-marker.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -393,12 +424,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "dream-decoherence-unpinning.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -420,12 +451,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "dream-pre-decoherence-deja-vu.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -444,12 +475,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "entanglement-entropy-complexity.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -468,12 +499,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "equator-concentration.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -492,12 +523,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "erasure-ledger.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -516,12 +547,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "eth-horizon-crossover.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -540,12 +571,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "euler-product-sieve.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -564,12 +595,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "fairness-square-uncertainty-expansion.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -588,12 +619,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "fixed-point-convergence.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -612,12 +643,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "forgetting-rebirth-attractor.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -639,13 +670,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "gate-word-polytope.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
       "books/quantum-geometry/en/ch16-qsvt-walks-and-compilation.md",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "books/quantum-geometry/zh/ch16-qsvt-walks-and-compilation.md",
       "package-lock.json",
       "package.json",
@@ -668,12 +699,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "golden-cut-observer.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -695,12 +726,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "gram-causal-elliptope.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -722,7 +753,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "gram-window-consensus-sandbox.test.mjs": [
       "@citations",
@@ -747,12 +778,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "grover-reflections.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -771,12 +803,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "hairy-ball-normal-escape.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -798,12 +830,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "imaginary-chord-temporal-double-slit-sandbox.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -825,12 +857,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "lattice-gauge-loop.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -849,12 +881,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "layered-network-cut.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -873,7 +905,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "lorentz-pseudoscalar-sm-octave-sandbox.test.mjs": [
       "@citations",
@@ -898,12 +930,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "meta-unification-compass.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -925,12 +958,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "mutual-observer-attractors.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -949,12 +982,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "navier-stokes-p-np.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -976,12 +1009,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "norm-lattice.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1000,12 +1033,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "observer-consensus-decoherence.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1024,12 +1057,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "observer-escape-ledger.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1048,7 +1081,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "octave-point-volume-field-sandbox.test.mjs": [
       "@citations",
@@ -1074,12 +1107,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "padic-prime-table-tree.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1098,12 +1132,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "pairwise-shutter.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1122,12 +1156,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "parameter-shift.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1146,13 +1180,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "phase-gears.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
       "books/quantum-geometry/en/ch15-grover-qft-and-period-finding.md",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "books/quantum-geometry/zh/ch15-grover-qft-and-period-finding.md",
       "package-lock.json",
       "package.json",
@@ -1172,12 +1206,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "pisot-clifford-rauzy-sandtable.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1196,12 +1230,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "pnp-lookup-degradation.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1220,12 +1254,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "pointer-ontology-deref.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1247,13 +1281,37 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
+    ],
+    "prelude-dimensions.test.mjs": [
+      "@citations",
+      "books/quantum-geometry/book.toml",
+      "@registry-entry",
+      "package-lock.json",
+      "package.json",
+      "site.toml",
+      "theme/generated/tokens.css",
+      "theme/tokens.json",
+      "theme/viz/favicon.svg",
+      "theme/viz/kit.js",
+      "theme/viz/shell.js",
+      "theme/viz/theme.css",
+      "tools/tbook/__init__.py",
+      "tools/tbook/config.py",
+      "tools/tbook/lean.py",
+      "tools/tbook/mathrender.py",
+      "tools/tbook/mdscan.py",
+      "tools/tbook/model.py",
+      "tools/tbook/paths.py",
+      "tools/tbook/summary.py",
+      "tools/tbook/viz.py",
+      "@lean-links"
     ],
     "pulse-area-virtual-z.test.mjs": [
       "@citations",
       "books/*/book.toml",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "i18n/en.toml",
       "i18n/zh.toml",
       "package-lock.json",
@@ -1278,12 +1336,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "pythagoras-number-escape.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1302,7 +1360,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "quantum-arc-macro-integral-sandbox.test.mjs": [
       "@citations",
@@ -1327,12 +1385,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "quantum-fairness-ledger.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1354,7 +1413,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "quantum-gate-cosmic-tower-sandbox.test.mjs": [
       "@citations",
@@ -1379,12 +1438,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "quantum-interpretations-duel.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1408,7 +1468,7 @@
     "qubit-geometry.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1427,12 +1487,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "rapidity-lightcone.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1451,12 +1511,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "repeated-projection.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1475,7 +1535,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "reversal-diagonal-cascade-sandbox.test.mjs": [
       "@citations",
@@ -1500,7 +1560,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "roundtrip-born-imaginary-blindspot-sandbox.test.mjs": [
       "@citations",
@@ -1525,12 +1585,37 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
+    ],
+    "scattering-temporal-bridge.test.mjs": [
+      "@citations",
+      "books/quantum-geometry/book.toml",
+      "@registry-entry",
+      "package-lock.json",
+      "package.json",
+      "site.toml",
+      "theme/generated/tokens.css",
+      "theme/tokens.json",
+      "theme/viz/favicon.svg",
+      "theme/viz/kit.js",
+      "theme/viz/shell.js",
+      "theme/viz/theme.css",
+      "tools/tbook/__init__.py",
+      "tools/tbook/config.py",
+      "tools/tbook/lean.py",
+      "tools/tbook/mathrender.py",
+      "tools/tbook/mdscan.py",
+      "tools/tbook/model.py",
+      "tools/tbook/paths.py",
+      "tools/tbook/summary.py",
+      "tools/tbook/viz.py",
+      "@lean-links"
     ],
     "self-referential-table.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1552,12 +1637,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "self-sustaining-spinor-flow.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1579,12 +1664,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "spatial-attractor-deja-vu.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1606,12 +1691,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "speed-limit-zeno.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1630,12 +1715,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "sphere-escape.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1654,12 +1739,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "spherical-degeneracy-radar.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1681,12 +1766,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "spherical-trihedron-cell.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1730,7 +1815,8 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "stereographic-relativization-sandbox.test.mjs": [
       "@citations",
@@ -1755,13 +1841,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "syndrome-decoding.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
       "books/quantum-geometry/en/ch14-cloning-codes-and-braids.md",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "books/quantum-geometry/zh/ch14-cloning-codes-and-braids.md",
       "package-lock.json",
       "package.json",
@@ -1781,12 +1867,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "timeless-causal-crystal.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1805,7 +1891,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "triadic-arc-field-loop-sandbox.test.mjs": [
       "@citations",
@@ -1830,12 +1916,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "triadic-nameless-sandbox.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1857,12 +1944,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "trihedron-chord-pivot-tunneling-sandbox.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1884,7 +1971,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "trihedron-rigidity-truss-sandbox.test.mjs": [
       "@citations",
@@ -1909,12 +1996,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "two-angle-addressing.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1936,7 +2024,7 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "uncompleted-horizon-sandbox.test.mjs": [
       "@citations",
@@ -1961,12 +2049,13 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links",
+      "@registry-entry"
     ],
     "unified-field-slice.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -1988,12 +2077,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "vortex-polygon.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -2012,12 +2101,12 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
     ],
     "walk-spreading.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "package-lock.json",
       "package.json",
       "site.toml",
@@ -2036,89 +2125,38 @@
       "tools/tbook/paths.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
-      "trureturing.lock.json"
+      "@lean-links"
+    ],
+    "zeta-spectrum-lab.test.mjs": [
+      "@citations",
+      "books/quantum-geometry/book.toml",
+      "@registry-entry",
+      "package-lock.json",
+      "package.json",
+      "site.toml",
+      "theme/generated/tokens.css",
+      "theme/tokens.json",
+      "theme/viz/favicon.svg",
+      "theme/viz/kit.js",
+      "theme/viz/shell.js",
+      "theme/viz/theme.css",
+      "tools/tbook/__init__.py",
+      "tools/tbook/config.py",
+      "tools/tbook/lean.py",
+      "tools/tbook/mathrender.py",
+      "tools/tbook/mdscan.py",
+      "tools/tbook/model.py",
+      "tools/tbook/paths.py",
+      "tools/tbook/summary.py",
+      "tools/tbook/viz.py",
+      "@lean-links"
     ],
     "zyz-compile.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
       "books/quantum-geometry/en/ch26-single-qubit-rotor-compilation.md",
-      "books/quantum-geometry/viz/visualizations.json",
+      "@registry-entry",
       "books/quantum-geometry/zh/ch26-single-qubit-rotor-compilation.md",
-      "package-lock.json",
-      "package.json",
-      "site.toml",
-      "theme/generated/tokens.css",
-      "theme/tokens.json",
-      "theme/viz/favicon.svg",
-      "theme/viz/kit.js",
-      "theme/viz/shell.js",
-      "theme/viz/theme.css",
-      "tools/tbook/__init__.py",
-      "tools/tbook/config.py",
-      "tools/tbook/lean.py",
-      "tools/tbook/mathrender.py",
-      "tools/tbook/mdscan.py",
-      "tools/tbook/model.py",
-      "tools/tbook/paths.py",
-      "tools/tbook/summary.py",
-      "tools/tbook/viz.py",
-      "trureturing.lock.json"
-    ],
-    "arithmetic-schur-lab.test.mjs": [
-      "@citations",
-      "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
-      "package-lock.json",
-      "package.json",
-      "site.toml",
-      "theme/generated/tokens.css",
-      "theme/tokens.json",
-      "theme/viz/favicon.svg",
-      "theme/viz/kit.js",
-      "theme/viz/shell.js",
-      "theme/viz/solid-core.js",
-      "theme/viz/theme.css",
-      "theme/viz/vendor/three.core.min.js",
-      "theme/viz/vendor/three.module.min.js",
-      "tools/tbook/__init__.py",
-      "tools/tbook/config.py",
-      "tools/tbook/lean.py",
-      "tools/tbook/mathrender.py",
-      "tools/tbook/mdscan.py",
-      "tools/tbook/model.py",
-      "tools/tbook/paths.py",
-      "tools/tbook/summary.py",
-      "tools/tbook/viz.py",
-      "trureturing.lock.json"
-    ],
-    "scattering-temporal-bridge.test.mjs": [
-      "@citations",
-      "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
-      "package-lock.json",
-      "package.json",
-      "site.toml",
-      "theme/generated/tokens.css",
-      "theme/tokens.json",
-      "theme/viz/favicon.svg",
-      "theme/viz/kit.js",
-      "theme/viz/shell.js",
-      "theme/viz/theme.css",
-      "tools/tbook/__init__.py",
-      "tools/tbook/config.py",
-      "tools/tbook/lean.py",
-      "tools/tbook/mathrender.py",
-      "tools/tbook/mdscan.py",
-      "tools/tbook/model.py",
-      "tools/tbook/paths.py",
-      "tools/tbook/summary.py",
-      "tools/tbook/viz.py",
-      "trureturing.lock.json"
-    ],
-    "zeta-spectrum-lab.test.mjs": [
-      "@citations",
-      "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/visualizations.json",
       "package-lock.json",
       "package.json",
       "site.toml",
