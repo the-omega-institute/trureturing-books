@@ -361,7 +361,7 @@ $$
 &\sum_{i\in F}\theta_{c(i),c(\operatorname{next}_m(i))}
 -\sum_{i\in I_m\setminus F}
  \theta_{c(i),c(\operatorname{next}_m(i))}\\
-&\hspace{25mm}\le (|F|_{\mathbb R}-1)\pi .
+&\le (|F|_{\mathbb R}-1)\pi .
 \end{aligned}
 $$
 
