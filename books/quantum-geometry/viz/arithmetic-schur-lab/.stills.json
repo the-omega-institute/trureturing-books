@@ -2,40 +2,48 @@
   "schema": 1,
   "images": {
     "cover": {
-      "input": "5c8aa665afe52bbe464f7dbb5e08d055e72063d02dc5a2668d689d6d2f8ce898",
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
       "output": "f20d1416ed12b85cb66c7fbba1d31f2b5ab92b2acdba537444e0d8a5d795f119"
     },
     "fig-natural.zh.jpg": {
-      "input": "5c8aa665afe52bbe464f7dbb5e08d055e72063d02dc5a2668d689d6d2f8ce898",
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
       "output": "36095f761b428297ce5d61bc6555f3c955968537fa3931ec75ab7fe7ed2911cc"
     },
     "fig-leaf.zh.jpg": {
-      "input": "5c8aa665afe52bbe464f7dbb5e08d055e72063d02dc5a2668d689d6d2f8ce898",
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
       "output": "b6b906bacd45d1f2f1f7f46bf64981c80e30a62df17248a33c34336e31dfd0d6"
     },
     "fig-drop.zh.jpg": {
-      "input": "5c8aa665afe52bbe464f7dbb5e08d055e72063d02dc5a2668d689d6d2f8ce898",
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
       "output": "804fa76b8a146b4746408f0bbf7a61341ea5085bc6eb42f74b75b71690c21b95"
     },
     "fig-square.zh.jpg": {
-      "input": "5c8aa665afe52bbe464f7dbb5e08d055e72063d02dc5a2668d689d6d2f8ce898",
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
       "output": "11e3238177839b9e3d429738461398e277ff3c2c404b836799ae6e894d6b597f"
     },
+    "fig-budget.zh.jpg": {
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
+      "output": "24f30d91d0678c81c4b487020b2af86cf0049df4a0e1645c8c602b1cd7333b09"
+    },
     "fig-natural.en.jpg": {
-      "input": "5c8aa665afe52bbe464f7dbb5e08d055e72063d02dc5a2668d689d6d2f8ce898",
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
       "output": "e75b4fcdaad6640f4e4d0d922bf7eb3493e97896c2b49ba82b06242b45ed6c96"
     },
     "fig-leaf.en.jpg": {
-      "input": "5c8aa665afe52bbe464f7dbb5e08d055e72063d02dc5a2668d689d6d2f8ce898",
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
       "output": "4726c3c05a8cfebeba6a061fed4a247b1205ce47098a7a7ad058f6f9fa1ab1ba"
     },
     "fig-drop.en.jpg": {
-      "input": "5c8aa665afe52bbe464f7dbb5e08d055e72063d02dc5a2668d689d6d2f8ce898",
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
       "output": "8305c02dbaf12269fc3567de7e38a7c97558a46921a1f7565341e1dde174b75f"
     },
     "fig-square.en.jpg": {
-      "input": "5c8aa665afe52bbe464f7dbb5e08d055e72063d02dc5a2668d689d6d2f8ce898",
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
       "output": "909d73adb4a8098177fa3a2708ba7441405ed707f036f06bbc48cb4fb9c7f804"
+    },
+    "fig-budget.en.jpg": {
+      "input": "4349f4a80bfe26937a6f83afda5e576526d4ed7ed467bb74593fa03e5e1db27c",
+      "output": "b783d0ec27b06daa1db02b008726f73fad0e9d4e46fab2eeb7c8bb5fc592f03f"
     }
   }
 }

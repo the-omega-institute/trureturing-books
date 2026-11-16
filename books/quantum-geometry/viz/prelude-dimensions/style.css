@@ -1,0 +1,32 @@
+/* PRELUDE//SHADOWS: the shared lab layout (../assets/theme.css) carries the page; only what belongs to this page is
+   here. Colours come from the tokens (var(--cyan) …), never from literal values. */
+#cv { touch-action: none; }
+.stage:not(.still) #cv { cursor: grab; }
+.stage.drag2d #cv { cursor: crosshair; }
+#stage { container-type: inline-size; }
+/* amber belongs to the current state, the active card and the handle: text emphasis takes other tokens */
+.tagline em, .sheet li b { color: var(--cyan); }
+.hud-tl .big { color: var(--sigma); }
+/* the theory drawer opens from the top of the right column */
+.side > #infoBtn { flex: none; align-self: flex-start; }
+#ctlPanel h3 { margin: 12px 0 6px; font-size: 11px; color: var(--dim); }
+#ctlPanel .ctl > .chips + .chips { margin-top: 8px; }
+#ctlPanel .note { margin-top: 8px; }
+.hud-tl .big, .hud-tl .sub, #plotTitle, #plotMeta, .tau { text-transform: none; }
+/* the Hodge star is a tiny glyph in every face: set it larger without changing the line box */
+.hs { display: inline-block; transform: scale(1.5); transform-origin: 50% 58%; margin: 0 0.16em 0 0.1em; }
+/* stage labels: short words over the drawing, in the colour of what they name */
+.stage .tag.c-vi { color: var(--violet); }
+.stage .tag.lbl { font-size: 11px; letter-spacing: 0.1em; text-align: center; line-height: 1.35; }
+.stage .tag.lbl.backed { background: color-mix(in srgb, var(--stage-bg) 82%, transparent); padding: 2px 6px; }
+.stage .tag.say { text-transform: none; letter-spacing: 0.02em; font-family: var(--font-body); font-size: 12.5px; color: var(--ink); }
+@container (max-width: 620px) {
+  .hud-tr { gap: 3px; }
+  .hud-tr .chip { padding: 3px 6px; font-size: 9.5px; letter-spacing: 0.04em; }
+  .hud-tl .big { font-size: 12.5px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.35; }
+  .hud-bl { gap: 2px 10px; font-size: 10px; }
+  .stage .tag.lbl { font-size: 9.5px; letter-spacing: 0.06em; }
+  .stage .tag.say { font-size: 11px; }
+  .stage .tag.num { font-size: 10.5px; }
+}

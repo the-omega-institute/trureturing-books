@@ -370,7 +370,8 @@
 
   function drawRecords(ctx, R) {
     const t = clock.t, c = overlap(), gap = 8, bw = (R.w - gap) / 2, bh = R.cmp ? 32 : 40, y1 = R.cmp ? 10 : 12, y2 = R.cmp ? 23 : 28;
-    const active = clock.t > 0 && clock.t < 4 ? STEPS[Math.min(3, Math.floor(clock.t - 1e-9))].copy : null;
+    // the copy of the step under way; within 1e-9 of 0 the page is still at the start (as the HUD's step is), so no copy
+    const active = clock.t > 1e-9 && clock.t < 4 ? STEPS[Math.min(3, Math.floor(clock.t - 1e-9))].copy : null;
     for (let k = 0; k < 2; k++) {
       const x = R.x + k * (bw + gap), done = (step) => t >= step - 1e-9;
       const wrote = done(k + 1), rev = done(k + 3);

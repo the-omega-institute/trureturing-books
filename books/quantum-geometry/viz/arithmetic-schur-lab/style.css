@@ -3,7 +3,10 @@
    small frames. Colours come from the tokens (var(--cyan) …), never from literal values. */
 /* a size container (local-viz-cards): every child of the stage is absolutely placed and its height comes from the lab
    grid row and min-height, so size containment changes no layout; it lets the HUD read the stage's width and height */
-#stage { container-type: size; }
+#stage { container-type: size; isolation: isolate; }
+/* the budget scene: the lit sheet of kit.solid is drawn on #sv (and on the WebGL canvas the kit puts first in the
+   stage); both stay behind #cv, which keeps the current point, the gap to the boundary and the labels on top */
+#stage > #sv { z-index: -1; }
 .stage:not(.still) #cv { cursor: grab; touch-action: none; }
 .stage:not(.still) #cv:active { cursor: grabbing; }
 .stage.still #cv { cursor: default; touch-action: auto; }
@@ -19,6 +22,7 @@
 #orderChips .chip { text-transform: none; }
 dl.ro .v dd { color: var(--violet); }
 dl.ro .key dd b { color: var(--ink); }
+dl.ro .key.ex dd b { color: var(--magenta); }
 dl.ro .mat dd { font-size: 11.5px; line-height: 1.45; white-space: pre; overflow-x: auto; }
 
 .handle { position: absolute; left: 0; top: 0; z-index: 3; width: 28px; height: 28px; padding: 0; margin: 0; border: 2px solid var(--amber); border-radius: 50%;
@@ -35,6 +39,7 @@ dl.ro .mat dd { font-size: 11.5px; line-height: 1.45; white-space: pre; overflow
 .stage .tag.c-mg { color: var(--magenta); }
 .stage .tag.c-vi { color: var(--violet); }
 .stage .tag.c-am { color: var(--amber); }
+.stage .tag.c-dm { color: var(--dim); }
 .hud-tr .chip { text-transform: none; }
 
 @container (max-width: 620px) {

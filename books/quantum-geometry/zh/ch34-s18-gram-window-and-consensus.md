@@ -356,14 +356,116 @@ $$
 $$
 
 （其中右端带 $m_\rho^2$ 之和按**不同**的临界线非平凡零点 $\rho$ 求和，$m_\rho$ 为其重数，且若黎曼猜想不成立则左端发散至 $+\infty$）。注意该文讨论的是**连续缩放子空间 $B_\lambda$**，与离散有限整数 $a = 1, \dots, N$ 生成的有限格拉姆逼近**并非同一个有限问题**；在黎曼猜想成立且全体非平凡零点均为单重的情形下，上式右端根号内的和化为 $2 + \gamma - \log(4\pi) \approx 0.04619$，这并不直接给出任意有限截断规模下的精确等式。其二，分数 $\frac{4}{7}$ 只是特定狄利克雷多项式**磨光器（mollifier）**估计中的对数长度参数，并非普适物理隧穿墙，[arXiv:1207.6583v3](https://arxiv.org/abs/1207.6583v3) 已将特定有限比例磨光器界与任意长磨光器区分开来。
+
+此外，离散伸缩参数 $\theta = 1/n$（$1 \le n \le M$）张成的有限维子空间仅包含于连续子空间 $B_{1/M}$ 之内，二者并非同一有限逼近问题，不能将连续子空间距离 $D_{1/M}$ 与离散子空间逼近距离等同；而在黎曼猜想成立、非平凡零点全为单零点且采用双侧零点计数的约定下，成立 $\liminf_{M \to \infty} D_{1/M}^2 \log M \ge 0.046191\dots$，即 $0.046191\dots$ 是 $D_{1/M}^2 \log M$ 在 $M \to \infty$ 时的渐近 $\liminf$ 下界常数，而非有限 $M$ 处的等式。
+:::
+
+在由连续子空间迈向离散与局部化算术逼近之前，须先澄清空间侧的一件基本事实：**真实的 Nyman–Beurling 格拉姆矩阵从一开始就不是稀疏矩阵**。对任意正整数 $a, b \ge 1$，取分数部函数 $f_a(x) := \{1/(ax)\}$，其中 $\{u\} = u - \lfloor u\rfloor \in [0, 1)$。由于被积项在 $(0, \infty)$ 上逐点非负，且当 $x > 1$ 时恒有 $0 < \frac{1}{ax} < 1$ 从而 $f_a(x) = \frac{1}{ax}$，仅在半轴 $(1, \infty)$ 上积分便得逐元严格正下界
+
+$$
+G^{\mathrm{NB}}_{ab} \;=\; \int_0^\infty \left\{\frac{1}{ax}\right\}\left\{\frac{1}{bx}\right\}dx \;\ge\; \int_1^\infty \frac{dx}{ab\,x^2} \;=\; \frac{1}{ab} \;>\; 0.
+$$
+
+由于分数部核在无穷远处按双曲尾部 $1/(ax)$ 缓慢衰减，任意两列伸缩基函数都在 $(1, \infty)$ 上产生不可抵消的正重叠：不同于仅在消去公共枢纽后才生出填充边的稀疏图矩阵，$G^{\mathrm{NB}}$ 在任何消元启动前就已全矩阵稠密，不存在可供保留的结构零元。既然空间侧内积天然稠密，另一条思路便转向傅里叶—韦伊谱侧：试想在实轴有限窗口 $[-R, R]$ 内配置光滑偶波包 $g$，要求其变换在一对共轭镜像谱点 $t \pm i\eta$ 处分别读出相反符号 $+1$ 与 $-1$；一旦谱点逼近临界线对应的实轴（$\eta \to 0$）或逼近对称虚轴（$t \to 0$），偶性与有限支集便会急剧压缩核函数的差分杠杆，迫使波包支付可量化的幅值与曲率账单。
+
+::: {.remark #rem-ch34-signed-orbit-support-budget title="紧支集偶函数分辨带符号轨道的支集—幅值必要预算（应用推导，未形式化）"}
+**来源与验证状态。** 本注记给出紧支集偶测试函数分辨单条带符号谱轨道的初等必要判据，源自未合入上游拉取请求 [trureturing#31043](https://github.com/the-omega-institute/trureturing/pull/31043) 中的蓝图文件 [`UnitSupportBurnolPacket.scribe.cs`](https://github.com/the-omega-institute/trureturing/blob/202e1ea140f1fc76698854e3f6e16b2a3167cc8c/Blueprint/D5/S3/Weil/BurnolGram/UnitSupportBurnolPacket.scribe.cs)。该应用尚未形式化：此处复用的支集冻结结论提供各有限问题的支集窗口；新增必要预算仍由本注记书面推导负责。对于一般指数型函数，经典的共轭点差分界见 R. P. Boas, Jr., [DOI:10.7146/math.scand.a-10453](https://doi.org/10.7146/math.scand.a-10453) 第 29 页式 (1.3)；对测试函数施加偶性后额外出现的低频反射因子 $m = \min(1, R|t|)$、二阶导数射流约束及带符号包读出关系，均由下文初等推导直接给出。
+
+**无量纲归一化、变换约定与两条必要不等式。** 在黎曼 $\zeta$ 谱映射 $\rho = \beta + it$ 下，离线位移 $\eta = \frac{1}{2} - \beta$ 与谱高度 $t$ 均为无量纲纯数，切勿与量子力学中带量纲的物理虚动量 $i\hbar\kappa$ 混同。以下统一固定满足 $t\eta \neq 0$ 的无量纲谱坐标 $t, \eta \in \mathbb{R}$ 以及与之对偶的无量纲实轴坐标 $x \in \mathbb{R}$，从而支集半宽上限 $R > 0$ 亦无量纲。取任意光滑复值偶函数 $g : \mathbb{R} \to \mathbb{C}$，满足 $g(-x) = g(x)$ 且支集包含关系 $\operatorname{supp} g \subseteq [-R, R]$，采用实轴上指数不含 $2\pi$ 的角频率傅里叶—拉普拉斯变换
+
+$$
+F(z) \;:=\; \int_{-\infty}^{\infty} e^{-izx} g(x)\,dx, \qquad z_+ \;:=\; t + i\eta, \quad z_- \;:=\; t - i\eta,
+$$
+
+并记零阶与二阶导数 $L^1$ 半范数及分离因子为
+
+$$
+\begin{aligned}
+L_0 &\;:=\; \int_{-\infty}^{\infty} |g(x)|\,dx, \qquad & L_2 &\;:=\; \int_{-\infty}^{\infty} |g''(x)|\,dx, \\
+m &\;:=\; \min(1, R|t|), \qquad & S &\;:=\; m\sinh(R|\eta|) \;>\; 0,
+\end{aligned}
+$$
+
+当 $t\eta \neq 0$ 且 $R > 0$ 时，$m > 0$ 且 $\sinh(R|\eta|) > 0$，故分离因子 $S > 0$ 严格为正。若单位带符号目标在容许误差 $0 \le \varepsilon < 1$ 内满足 $|F(z_+) - 1| \le \varepsilon$ 与 $|F(z_-) + 1| \le \varepsilon$，则必有
+
+$$
+L_0 S \;\ge\; 1 - \varepsilon, \qquad L_2 S \;\ge\; \max\!\bigl(0,\; |t^2 - \eta^2| - (t^2 + \eta^2)\varepsilon\bigr).
+$$
+
+当精确单位读出 $\varepsilon = 0$ 时，$L_0 \ge 1/S$ 且 $L_2 \ge |t^2 - \eta^2|/S$。正是依托上述固定无量纲坐标归一化，$L_0$ 与 $L_2$ 具有一致的无量纲标度而不存在不同量纲混加，两式相加即得二阶射流必要下界
+
+$$
+L_0 + L_2 \;\ge\; \frac{1 + |t^2 - \eta^2|}{S}.
+$$
+
+须注意，$1/S$ 与有限误差下的 $(1 - \varepsilon)/S$ 来自核函数逐点绝对值放缩，仅为 $L_0$ 的必要下界，并非某个插值最小范数的精确极值。
+
+**偶性余弦差与两次分部积分推导。** 由 $\operatorname{supp} g \subseteq [-R, R]$ 知 $F(z)$ 绝对收敛。令 $x \mapsto -x$ 并用偶性 $g(-x) = g(x)$，可将积分化为 $F(z) = \int_{-R}^{R} \cos(zx)g(x)\,dx$。展开 $\cos\bigl((t \pm i\eta)x\bigr) = \cos(tx)\cosh(\eta x) \mp i\sin(tx)\sinh(\eta x)$，共轭镜像点处的余弦核差恒为
+
+$$
+\cos\bigl((t + i\eta)x\bigr) - \cos\bigl((t - i\eta)x\bigr) \;=\; -2i\sin(tx)\sinh(\eta x).
+$$
+
+在 $|x| \le R$ 上，$|\sin(tx)| \le \min(1, |tx|) \le \min(1, R|t|) = m$ 且 $|\sinh(\eta x)| \le \sinh(R|\eta|)$，由积分三角不等式得 $|F(z_+) - F(z_-)| \le 2 S L_0$。反过来记 $F(z_\pm) = \pm 1 + e_\pm$，其中 $|e_\pm| \le \varepsilon$，逆三角不等式给出
+
+$$
+|F(z_+) - F(z_-)| \;=\; |2 + e_+ - e_-| \;\ge\; 2 - |e_+| - |e_-| \;\ge\; 2(1 - \varepsilon),
+$$
+
+约去因子 $2$ 即证 $L_0 S \ge 1 - \varepsilon$，此步对支集含于 $[-R, R]$ 的任意可积偶函数均成立。继而，因 $g$ 光滑、为偶函数且 $\operatorname{supp} g \subseteq [-R, R]$，二阶导数 $g''$ 同样光滑、为偶函数且支集含于 $[-R, R]$。对 $F_{g''}(z) = \int_{-\infty}^{\infty} e^{-izx}g''(x)\,dx$ 施行两次分部积分，由于 $g$ 与 $g'$ 在 $\pm R$ 处同为零，一阶与二阶边界项悉数消失，从而 $F_{g''}(z) = -z^2 F(z)$。代入 $F(z_\pm) = \pm 1 + e_\pm$，并利用 $z_+^2 + z_-^2 = 2(t^2 - \eta^2)$ 与 $|z_\pm|^2 = t^2 + \eta^2$，有
+
+$$
+\begin{aligned}
+|F_{g''}(z_+) - F_{g''}(z_-)| &\;=\; \bigl|-z_+^2 - z_-^2 - z_+^2 e_+ + z_-^2 e_-\bigr| \\
+&\;\ge\; 2|t^2 - \eta^2| - 2(t^2 + \eta^2)\varepsilon.
+\end{aligned}
+$$
+
+将余弦核差分上界用于偶函数 $g''$ 得 $|F_{g''}(z_+) - F_{g''}(z_-)| \le 2 S L_2$，结合 $L_2 \ge 0$ 即证第二条有限误差不等式；取 $\varepsilon = 0$ 并与 $L_0 \ge 1/S$ 求和即得精确读出下的 $L_0 + L_2$ 下界。由于 $|z_+^2 - z_-^2| = |z_+ - z_-|\cdot |z_+ + z_-| = 4|t\eta|$，且 $R|t|, R|\eta|$ 均小时 $S \sim R^2|t\eta|$，直接碰撞（$\eta \to 0$）与反射碰撞（$t \to 0$）均直接源于点求值泛函，更换插值基系数无法规避；而在退化情形 $\eta = 0$ 即 $z_+ = z_-$，或 $t = 0$ 即 $z_- = -z_+$ 且偶性迫使 $F(-z) = F(z)$ 时，只要相对误差小于 $1$，非零相反符号目标便迫使同一复数值落入两个不相交误差圆盘而矛盾。
+
+**实际 Burnol 包、支集半宽上限与重复平方。** 上游蓝图对谱点 $\rho = \beta + it$ 取
+
+$$
+\gamma \;:=\; \frac{\rho - 1/2}{i} \;=\; t + i\!\left(\frac{1}{2} - \beta\right), \qquad \eta \;=\; \frac{1}{2} - \beta,
+$$
+
+从而 $(z_+, z_-) = (\gamma, \overline{\gamma})$。在同一有限轨道包 `OrbitBurnolPacket` 及模块 `UnitSupportBurnolPacket` 的单位支集构造中，记有限指标集 $\iota$ 的基数为通道数 $q = |\iota|$，并设公共局部化（卷积）深度为 $N \in \mathbb{N}$（$N$ 既非通道数 $q$，亦不默认等同于整除图的顶点规模上限或图平方深度 $d$）：对各通道 $i \in \iota$，局部化基 `burnolBasis` 将峰值核 $P.\mathrm{peak}$ 在深度 $N$ 处的 $(N + 1)$ 重卷积幂 `convolutionSuccPower` 与种子项 $P.\mathrm{killer}(i)$ 作卷积。对任意 $j \in \iota$，由 `killer_values` 规定的第 $j$ 条轨道种子项 $P.\mathrm{killer}(j)$ 与局部化合成 `burnolSynthesis` 在第 $j$ 个独热（one-hot）系数向量处的值，均给出该包对同一轨道的精确带符号读出 $F(\gamma) = 1, F(\overline{\gamma}) = -1$（$\varepsilon = 0$）。因为 $S$ 关于 $R$ 单调不减，任何满足 $\operatorname{supp} g \subseteq [-R, R]$ 的支集半宽上限 $R$ 均可合法代入上界：种子阶段仅保证 $\operatorname{supp} P.\mathrm{killer}(j) \subseteq [-1, 1]$，故 $R = 1$ 是**种子支集半宽上限**而非实际支集等式；经认证的二阶射流上界预算 $J_0 \ge L_0, J_2 \ge L_2$ 必满足 $R = 1$ 对应的必要下界，固定 $t \neq 0$ 时 $1/S$ 在 $\eta \to 0$ 下按 $\frac{1}{\min(1, |t|)\,|\eta|}$ 增长。独热 `burnolSynthesis` 阶段由单位支集卷积包含关系给出 $\operatorname{supp} \subseteq [-(N + 2), N + 2]$，因此 $R_N = N + 2$ 同样只是**支集半宽上限**而非精确支集半径。若最终范数满足 $L_0 \le L$，代入 $R_N = N + 2$ 知精确读出要求 $(N + 2)|\eta| \ge \operatorname{arsinh}(1/L)$；对同一精确读出包而言，当范数上界 $L$ 与支集半径上限 $R$ 固定时，$R|\eta| \ge \operatorname{arsinh}(1/L)$ 使 $|\eta|$ 不能任意小，增加名义乘法层数本身并不取消该必要条件。若以 $k$ 层重复平方生成 $N + 1 = 2^k$，所得 $R_N = 2^k + 1$ 亦仅为可用支集半宽上限，既非最小必需支集半径，也不否定对数层乘法或给出算术运行时间下界，只表明 $k$ 层对数乘法背后可隐含按 $2^k + 1$ 增长的支集窗口上限。
+
+**必要检验、信号归一化与结论边界。** 给定幅值预算 $L_0 \le L$ 且 $L > 0$，例如 $[-R, R]$ 上的逐点界 $|g| \le A$ 即给出 $L_0 \le 2RA$，此时单位读出要求 $R|\eta| \ge \operatorname{arsinh}\!\bigl(\frac{1-\varepsilon}{mL}\bigr) \ge \operatorname{arsinh}\!\bigl(\frac{1-\varepsilon}{L}\bigr)$。在经认证包络 $|\eta| \le \eta_{\max}$ 上，严格不等式 $L\sinh(R\eta_{\max}) < 1 - \varepsilon$ 直接排除该预算下的读出：例如对任意 $R, L > 0$ 与 $0 \le \varepsilon < 1$，取复平面一般测试谱节点 $t = 1/R$、$\eta = \operatorname{arsinh}((1-\varepsilon)/L)/(2R)$，该点仅为一般谱参数节点而非断言存在的 $\zeta$ 零点，此时 $m = 1$ 且 $L\sinh(R\eta) < 1 - \varepsilon$。满足 $L\sinh(R\eta_{\max}) \ge 1 - \varepsilon$ 仅通过单轨道必要检验，并非单节点或多节点插值存在的充分条件。若将目标换为相反符号 $\pm a$ 且容许绝对误差 $e \ge 0$，三角不等式给出 $L_0 S \ge \max(0, |a| - e)$；将整个测试函数按因子 $a$ 缩放会使二次韦伊泛函按 $|a|^2$ 缩放，压低 $|a|$ 虽缩小原始 $L^1$ 预算，却同步按同一比例缩小信号与容许绝对误差。当 $a \neq 0$ 且 $0 \le e < |a|$ 时，令相对误差 $\varepsilon := e / |a| \in [0, 1)$、信号归一化预算 $B := L / |a|$，则
+
+$$
+L_0 S \;\ge\; \max(0,\; |a| - e), \qquad B S \;\ge\; 1 - \frac{e}{|a|} \;=\; 1 - \varepsilon,
+$$
+
+从而给出信号归一化**预算必要下界**
+
+$$
+B_{\min} \;:=\; \frac{1 - \varepsilon}{\min(1, R|t|)\sinh(R|\eta|)}.
+$$
+
+该量只是 $B$ 必须跨过的预算必要下界，并非可达最小值，也不是插值最小范数的精确值。最后须明确四条边界：本推导不断言存在任何实际离线 $\zeta$ 零点，不构成黎曼猜想证明，不能将半范数 $(L_0, L_2)$ 的下界逻辑求逆为混合谱主控量的下界，亦不给出无条件算术或位复杂度下界。
+:::
+
+::: {.viz src="arithmetic-schur-lab" preset="budget" height="500"}
+**紧支集偶函数分辨带符号轨道的预算必要下界曲面与排除区域（`budget`）。** 三维坐标 $(R, |\eta|, B)$ 舞台呈现紫色预算必要下界曲面 $B_{\min} = (1 - \varepsilon) / \bigl(\min(1, R|t|)\sinh(R|\eta|)\bigr)$、曲面下方的品红色排除区域，以及标示当前参数点的琥珀色圆点。控件支持调节参数 $t$ 与相对误差 $\varepsilon$ 并实时读出预算必要下界 $B_{\min}$；落入品红色排除区域的点违反必要条件，位于未排除区域则仅满足必要条件而非插值存在的充分条件。
+:::
+
+::: {.problem #prob-ch34-signed-orbit-joint-budget title="单位支集 Burnol 包的节点认证、混合主控与位复杂度联合预算（开放问题）"}
+在所给有限谱轨道框架下，针对模块 `UnitSupportBurnolPacket` 的单位支集构造所给出的同一实际有限轨道包 `OrbitBurnolPacket` 及其局部化合成 `burnolSynthesis`，建立或在给定资源上限下证伪一套显式可计算的条件联合认证：对同一实际包一并给出经区间认证的节点包络与（直接、反射及轨道间）分离度、目标带符号读出值、二阶射流上界预算 $(J_0, J_2)$、完整首尾混合谱主控量上界，以及总位成本上界，并将上述指标共同表示为谱高度 $|t|$、离线距离 $|\eta|$、通道数 $q = |\iota|$、公共局部化深度 $N$ 与误差容限 $\varepsilon$ 的显式函数。其中混合主控量上界须由合成结构正面导出而不能倒置半范数下界，总位成本亦须正面审计而不能由稀疏系数合成推断格拉姆矩阵稀疏或多项式位成本。黎曼猜想仍未解决，本问题不提供也不断言存在任何实际离线 $\zeta$ 零点；复平面一般测试谱节点可用于对候选预算作压力测试，但不能取代面向同一实际包的条件认证消费者，单凭一般测试节点并不足以认证真实算术轨道框架。该问题具有一条直接证伪判据：对任意拟议单位目标预算 $(R, L, \varepsilon)$（$0 \le \varepsilon < 1$，$t\eta \neq 0$），若在一般测试谱节点的认证包络 $|\eta| \le \eta_{\max}$ 上成立
+
+$$
+L\sinh(R\eta_{\max}) \;<\; 1 - \varepsilon,
+$$
+
+则该单位目标预算即刻证伪；未被该不等式排除则仅通过单轨道必要检验，不提供多节点插值存在证书或黎曼猜想证书。本问题审计傅里叶—韦伊谱侧紧支集偶波包的轨道合成、混合主控与位成本，与紧接其后审计 $L^2(0, \infty)$ 空间侧稠密分数部格拉姆矩阵 $G^{\mathrm{NB}}_{ab}$ 多级枢轴压缩的开放问题分属不同数学对象。
 :::
 
 ::: {.problem #prob-ch34-arithmetic-schur-subcubic-question title="实际算术 Gram 对象与多级枢轴压缩的桥梁（开放问题）"}
 本节整除图矩阵 $G = L_D + \frac{1}{4}I$ 仅是教学模型，**并不等于 NBB 格拉姆矩阵**，且其对称严格对角占优结构本身已有已知次立方求解器，绝不可把有限整除图的已知快解算法冒称为黎曼猜想进展。通向实际算术对象的具体下一步是：在复希尔伯特空间 $L^2(0, \infty)$ 中，针对实际 NBB 目标函数 $\chi$ 与分数部向量族 $f_a(x) = \{1/(ax)\}$（$1 \le a \le N$），显式计算有限格拉姆矩阵 $G^{\mathrm{NB}}_{ab} = \langle f_a, f_b\rangle$ 与右端内积向量 $b_a = \langle f_a, \chi\rangle$，明确指定多级枢轴压缩或近似消元方案及其误差范数；进而寻找或排除这样一类可计算证书——它能够将该方案在原 $L^2(0, \infty)$ 空间中的目标逼近残差严格控制在 $\varepsilon$ 以内，并给出随规模 $N$、精度 $\varepsilon$ 与零点检测高度一致成立的条件数、存储规模及总算术成本上界。同时必须将**从任意有限 $N$ 可计算证书外推至 $N \to \infty$ 极限残差趋于 $0$（即等价于 [@conj-riemann-hypothesis] 的路线）**单列为尚未证明的独立步骤。直接可证伪的首项检验是：采用带独立积分误差界的实际 $G^{\mathrm{NB}}_{ab}$ 矩阵元，实测所拟多级压缩方案的谱误差是否随层级深度单调下降；一旦出现谱误差停滞或反升的反例，即须修正或放弃该压缩方案。
 :::
 
-下方完整实验室将自然序填充、叶优先消元、阈值裁剪与随机游走重复平方并置在同一三维交互主舞台中，供读者逐项核验：
+下方完整实验室将整除网络上的自然序填充、叶优先消元、最终舒尔块阈值裁剪、带自环随机游走重复平方，以及紧支集偶函数分辨带符号轨道的三维预算必要下界曲面并置在同一交互主舞台中，供读者切换核验：
 
 ::: {.viz src="arithmetic-schur-lab" height="640"}
-**算术整除网络舒尔消元与重复平方三维交互实验室（`arithmetic-schur-lab`）。** 三维主舞台沿紫色坐标轴统一呈现整数整除网络的青色原始整除边与品红色新增填充及多步耦合边，琥珀色标记指示当前消元枢轴或平方层数。完整实验室右侧控件与读数支持切换规模 $N$、消元顺序、裁剪阈值与平方层数，实时核对填充边数与原系统回代残差。
+**算术整除网络舒尔消元、重复平方与带符号轨道支集预算三维交互实验室（`arithmetic-schur-lab`）。** 三维主舞台在整除网络各视图下沿紫色坐标轴呈现青色原始整除边与品红色新增填充及多步耦合边；切换至带符号轨道预算视图（`budget`）时，在三维坐标 $(R, |\eta|, B)$ 中呈现紫色预算必要下界曲面 $B_{\min} = (1 - \varepsilon) / \bigl(\min(1, R|t|)\sinh(R|\eta|)\bigr)$、曲面下方的品红色排除区域与标示当前参数点的琥珀色圆点，而在网络视图下琥珀色标记指示当前枢轴或平方层数。控件与读数支持在网络视图下调节规模 $N$、消元顺序、裁剪阈值与平方层数以核对填充边数及回代残差，并在预算视图下调节参数 $t$ 与相对误差 $\varepsilon$ 以实时显示预算必要下界 $B_{\min}$；落入品红色排除区域违反必要条件，位于未排除区域则仅满足必要条件而非插值存在的充分条件。
 :::

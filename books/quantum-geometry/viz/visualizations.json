@@ -5567,6 +5567,51 @@
       ]
     },
     {
+      "id": "prelude-dimensions",
+      "code": "PRELUDE//SHADOWS",
+      "title": "序曲几何导览 · 看清影子丢掉了什么",
+      "title_en": "Prelude geometry · See what a shadow leaves out",
+      "summary": "同步拖动俯视圆盘上的木桩与侧视影子，比较同位反向的两个时刻；再探索观看角度、纬圈、外围方向、等权混合与余弦反馈。",
+      "summary_en": "Move a peg around a disc and follow its edge-on shadow, then compare coincident positions with opposite motion. Explore viewing angles, latitudes, an ambient direction, equal-weight mixing, and cosine feedback.",
+      "path": "prelude-dimensions/",
+      "thumbnail": "prelude-dimensions/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "tags": [
+        "序曲",
+        "投影",
+        "圆周运动",
+        "几何直觉"
+      ],
+      "tags_en": [
+        "Prelude",
+        "Projection",
+        "Circular motion",
+        "Geometric intuition"
+      ],
+      "theory": [
+        {
+          "label": "序曲 §0.2 · 以面为线",
+          "label_en": "Prelude §0.2 · Mistaking a plane for a line",
+          "href": "../zh/index.html#sec-blindspot-2",
+          "href_en": "../en/index.html#sec-blindspot-2"
+        },
+        {
+          "label": "序曲 §0.4 · 球外之球",
+          "label_en": "Prelude §0.4 · The sphere beyond spheres",
+          "href": "../zh/index.html#sec-blindspot-4",
+          "href_en": "../en/index.html#sec-blindspot-4"
+        },
+        {
+          "label": "序曲 §0.5 · 余弦不动点",
+          "label_en": "Prelude §0.5 · The cosine fixed point",
+          "href": "../zh/index.html#sec-awakening",
+          "href_en": "../en/index.html#sec-awakening"
+        }
+      ],
+      "lean": []
+    },
+    {
       "id": "scattering-temporal-bridge",
       "code": "SCATTER//TIME",
       "title": "SCATTER//TIME · 势垒双支与时间双缝：两条倏逝支携带守恒流，相消需要不可区分的等幅路径",
@@ -5744,7 +5789,8 @@
         "natural",
         "leaf",
         "drop",
-        "square"
+        "square",
+        "budget"
       ],
       "preset_titles": {
         "natural": {
@@ -5762,6 +5808,10 @@
         "square": {
           "zh": "反复平方：变稠，却不放大",
           "en": "Repeated squaring: denser, not amplified"
+        },
+        "budget": {
+          "zh": "带号轨道的必要预算：紫色边界之下被此界排除",
+          "en": "The necessary budget of a signed orbit: below the violet boundary, excluded by this bound"
         }
       },
       "tags": [
@@ -5796,6 +5846,21 @@
           "label": "arXiv:1207.6583v3（4/7 只在该文所述范围内）",
           "label_en": "arXiv:1207.6583v3 (the 4/7 within the scope stated there)",
           "href": "https://arxiv.org/abs/1207.6583v3"
+        },
+        {
+          "label": "UnitSupportBurnolPacket.scribe.cs @ 202e1ea · 未合入应用，未形式化",
+          "label_en": "UnitSupportBurnolPacket.scribe.cs @ 202e1ea · unmerged application, unformalized",
+          "href": "https://github.com/the-omega-institute/trureturing/blob/202e1ea140f1fc76698854e3f6e16b2a3167cc8c/Blueprint/D5/S3/Weil/BurnolGram/UnitSupportBurnolPacket.scribe.cs"
+        },
+        {
+          "label": "trureturing#31043 · 未合入",
+          "label_en": "trureturing#31043 · not merged",
+          "href": "https://github.com/the-omega-institute/trureturing/pull/31043"
+        },
+        {
+          "label": "Boas · DOI:10.7146/math.scand.a-10453 · (1.3), p.29",
+          "label_en": "Boas · DOI:10.7146/math.scand.a-10453 · (1.3), p.29",
+          "href": "https://doi.org/10.7146/math.scand.a-10453"
         }
       ],
       "lean": []
