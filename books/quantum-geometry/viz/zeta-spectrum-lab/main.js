@@ -9,7 +9,7 @@
               The rail is the number of terms n; the amber ring at 2^{−s} sets σ and t.
      quartet  the synthetic polynomial Q(s) = ∏ (s − ρ) over β ± iγ and 1 − β ± iγ (γ = 0.7): a lattice of paths over the
               complex s-plane at height √|Q(s)| (rescaled), the roots on the floor, the violet line σ = ½; the rail is β.
-     powers   ψ₀(x) = Σ_{n<x} Λ(n) + ½Λ(x) at a prime-power endpoint (cyan stair, Λ by trial division), and behind it
+     powers   ψ₀(x) = ½ Σ_{n<x} Λ(n) + ½ Σ_{n≤x} Λ(n) for real x > 1 (cyan stair, Λ by trial division), and behind it
               the finite spectral sums x − Σ_{k≤K} 2 Re(x^{ρ_k}/ρ_k) − log 2π − ½ log(1 − x^{−2}) with the first K of ten
               numerical line-zero ordinates, one layer per K (magenta); the rail is K, the amber ring is x, dragged by
               reading x where the pointer's ray meets the stair's plane (independent of the stair height there).
@@ -311,7 +311,9 @@
     st.path([[Xp(x), y0, zb], [Xp(x), y0, Zp(M.psi0)]], { color: P.amber, width: 1.2, dash: [3, 3], fade: false });
     st.dot([Xp(x), y0, Zp(M.psi0)], 5, P.amber, { glow: 12, fade: false });
     // labels
-    want('stair', [Xp(17.5), y0, Zp(psi0(17.5))], 'ψ₀(x) = Σ<sub>n&lt;x</sub> Λ(n)', 'raw c-cy backed', 9, [0.3, 1]);
+    // one formula on the whole real domain x > 1: the two sums differ only where x is an integer, by Λ(x), so a jump
+    // takes the mean of its left and right limits (the value psi0 computes) and elsewhere both give ψ(x)
+    want('stair', [Xp(17.5), y0, Zp(psi0(17.5))], `ψ₀(x) = ½ Σ<sub>n&lt;x</sub> Λ(n) + ½ Σ<sub>n≤x</sub> Λ(n)<br>${L('实数 x &gt; 1；跳点取左右极限的平均', 'real x &gt; 1; at a jump, mean of left and right limits')}`, 'raw c-cy backed', 9, [0.3, 1]);
     want('top', [Xp(19.5), Yd(K + 1), Zp(psiK(19.5, K))], `K = ${K}`, 'raw c-mg backed', 8, [0.6, -1]);
     for (const n of [4, 8, 9, 16]) want(`pp${n}`, [Xp(n), y0, Zp(psi0(n))], `${n}`, 'raw ink backed', 5, [1, 0.8]);
     want('xaxis', [ax1 + 0.1, y0, zb], 'x', 'raw c-vi', 4, [1, 0.3]);

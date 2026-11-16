@@ -613,7 +613,7 @@ $$
 \psi_0(8) \;=\; \frac{5}{2}\log 2 + \log 3 + \log 5 + \log 7 \;=\; \log\bigl(420\sqrt{2}\bigr),
 $$
 
-跨过 $x = 9 = 3^2$ 后再跳升 $\log 3$ 抵达 $\psi_0(9.5) = 3\log 2 + 2\log 3 + \log 5 + \log 7 = \log 2520$；显式公式右端在 $x = 8$ 处的光滑修正项则为 $8 - \log(2\pi) - \frac{1}{2}\log(1 - 8^{-2}) = 8 - \log(2\pi) + \frac{1}{2}\log\frac{64}{63}$。反观本页真实零点样本，它**仅展示前 $10$ 对正虚部零点共轭对**，既未附带针对 $|\operatorname{Im}\rho| > T$ 高频零点或潜在离线零点的误差证书，也不能把任何短截断采样当作全谱完备性或 [@conj-riemann-hypothesis] 的证明；合成四元组（`quartet`）则是人工构造的离线对称对照模型。
+由中点 $\psi_0(8)$ 向右先补足 $x = 8$ 处余下的半跳 $\frac{1}{2}\log 2$（至 $\psi(8^+)$），跨过 $x = 9 = 3^2$ 后再完整跳升 $\log 3$ 抵达 $\psi_0(9.5) = 3\log 2 + 2\log 3 + \log 5 + \log 7 = \log 2520$；显式公式右端在 $x = 8$ 处的光滑修正项则为 $8 - \log(2\pi) - \frac{1}{2}\log(1 - 8^{-2}) = 8 - \log(2\pi) + \frac{1}{2}\log\frac{64}{63}$。反观本页真实零点样本，它**仅展示前 $10$ 对正虚部零点共轭对**，既未附带针对 $|\operatorname{Im}\rho| > T$ 高频零点或潜在离线零点的误差证书，也不能把任何短截断采样当作全谱完备性或 [@conj-riemann-hypothesis] 的证明；合成四元组（`quartet`）则是人工构造的离线对称对照模型。
 :::
 
 ::: {.viz src="zeta-spectrum-lab" preset="powers" height="500"}

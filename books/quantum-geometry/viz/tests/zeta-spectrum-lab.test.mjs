@@ -3,9 +3,10 @@
 // claims, against independent mathematics written here: partial sums from a complex exponential of −s log n, the Euler
 // product over a sieve of Eratosthenes inverted once at the end, μ(n) by factorisation (not by the page's convolution),
 // the quartet by expanding four linear factors and Horner evaluation, ψ₀ by trial-division prime powers with explicit
-// left and right limits, and the zero harmonics as exp(ρ log x)/ρ. The stair handle is dragged across many prime-power
-// jumps, along the visible stair and after orbiting the camera; the zero ordinates are compared with the published table
-// as numbers; the evidence and the drawer must give each source its actual role.
+// left and right limits, and the zero harmonics as exp(ρ log x)/ρ. The stair's visible label is parsed and evaluated at
+// prime powers and elsewhere on its stated domain. The stair handle is dragged across many prime-power jumps, along the
+// visible stair and after orbiting the camera; the zero ordinates are compared with the published table as numbers;
+// the evidence and the drawer must give each source its actual role.
 //   node books/quantum-geometry/viz/tests/zeta-spectrum-lab.test.mjs   (VIZ_SLOW_FRAMES=1000 for slow frames)
 import fs from 'node:fs';
 import path from 'node:path';
@@ -225,6 +226,95 @@ for (const x of [1.2, 2, 3.5, 4, 8, 9, 11.3, 16, 19.99, 20]) for (const K of [0,
 for (const n of [4, 8, 9, 16]) {
   s = await setParams({ scene: 'powers', x: n, t: 0 });
   check(`ψ₀ at the prime power ${n} is the mean of its left and right limits`, near(s.powers.psi0, (psiLeft(n) + psiLeft(n + 1)) / 2, 1e-12) && s.powers.endpoint);
+}
+
+/* ---------- the visible definition of ψ₀ on the stage ---------- */
+// The stair's label is read off the stage as a reader sees it (the shown cyan tag, subscripts kept apart), its right-hand
+// side parsed term by term (a coefficient, Σ over n with the relation written in its subscript, Λ(n)) and evaluated with
+// our own Λ. At every sampled x on the domain the label states, prime powers where the stair jumps and other integers
+// and non-integers where it does not, the label must give the mean of our own left and right limits, and so must the ψ₀
+// the HUD prints. A left-limit label Σ_{n<x} Λ(n) fails at every prime power.
+const leftLimit = (x) => psiLeft(Math.ceil(x - 1e-9));             // ψ(x⁻) = Σ_{m<x} Λ(m)
+const rightLimit = (x) => psiLeft(Math.floor(x + 1e-9) + 1);       // ψ(x⁺) = Σ_{m≤x} Λ(m)
+const midLimit = (x) => (leftLimit(x) + rightLimit(x)) / 2;
+/** A ψ₀ label's first line as terms [coefficient, relation], each c·Σ_{n<x} Λ(n) or c·Σ_{n≤x} Λ(n) with c ∈ {1, ½};
+    null when the line is anything else. */
+function readDefinition(text) {
+  const m = /^ψ₀\(x\) = (.+)$/.exec(text.split('\n')[0].replace(/\s+/g, ' ').trim());
+  if (!m) return null;
+  const terms = m[1].split(' + ').map((t) => /^(½ ?)?Σ_\{n ?(<|≤) ?x\} ?Λ\(n\)$/.exec(t.trim()));
+  return terms.every(Boolean) ? terms.map((t) => [t[1] ? 0.5 : 1, t[2]]) : null;
+}
+const evalDefinition = (terms, x) => terms.reduce((sum, [k, rel]) => {
+  let a = 0; for (let n = 2; n <= Math.ceil(x); n++) if (rel === '<' ? n < x : n <= x) a += lambda(n);
+  return sum + k * a;
+}, 0);
+/** The shown stage tags that define ψ₀, flattened (`_{…}` around a subscript, a newline per <br>), each with its box in
+    the label layer, plus the box the page reports for the label 'stair' and the HUD's printed ψ₀(x). */
+async function stairLabel(p = page) {
+  await settle(p);
+  return p.evaluate(() => {
+    const layer = document.querySelector('#stage .tags'), lr = layer.getBoundingClientRect();
+    const flat = (el) => [...el.childNodes].map((c) => (c.nodeType === 3 ? c.textContent : c.nodeName === 'BR' ? '\n'
+      : c.nodeName === 'SUB' ? `_{${c.textContent}}` : c.nodeName === 'SUP' ? `^{${c.textContent}}` : c.nodeType === 1 ? flat(c) : '')).join('');
+    const shown = [...layer.querySelectorAll('.tag')].filter((t) => {
+      if (t.hidden || !t.getClientRects().length) return false;
+      const cs = getComputedStyle(t);
+      return cs.display !== 'none' && cs.visibility !== 'hidden' && Number(cs.opacity) > 0.5 && /ψ₀\s*\(x\)\s*=/.test(t.textContent);
+    }).map((t) => {
+      const r = t.getBoundingClientRect();
+      return { text: flat(t), cyan: t.classList.contains('c-cy'), box: { x: r.left - lr.left, y: r.top - lr.top, w: r.width, h: r.height },
+        inside: r.width > 1 && r.height > 1 && r.left >= lr.left - 0.5 && r.top >= lr.top - 0.5 && r.right <= lr.right + 0.5 && r.bottom <= lr.bottom + 0.5 };
+    });
+    const hud = /ψ₀\(x\) = ([\d.]+)/.exec(document.getElementById('hudSub').textContent);
+    return { shown, placed: window.ZETA_SPECTRUM_DEBUG.state.labels.find((l) => l.key === 'stair') || null, hud: hud ? Number(hud[1]) : NaN };
+  });
+}
+/** The one shown ψ₀ label, if it is the placed 'stair' label, cyan and wholly inside the stage. */
+function theLabel(r) {
+  const [t] = r.shown, P = r.placed;
+  const at = !!t && !!P && Math.abs(t.box.x + t.box.w / 2 - (P.x + P.w / 2)) < 2 && Math.abs(t.box.y + t.box.h / 2 - (P.y + P.h / 2)) < 2;
+  return r.shown.length === 1 && at && t.cyan && t.inside ? t : null;
+}
+{
+  const OLD = readDefinition('ψ₀(x) = Σ_{n<x} Λ(n)');
+  const PP = []; for (let n = 2; n <= 20; n++) if (lambda(n) > 0) PP.push(n);
+  check(`label oracle: the left-limit form Σ_{n<x} Λ(n) misses the mean at all ${PP.length} prime powers ≤ 20 and nowhere else`,
+    !!OLD && PP.every((n) => Math.abs(evalDefinition(OLD, n) - midLimit(n)) > 0.3) && [6, 10, 12, 3.5, 11.3, 19.99].every((x) => near(evalDefinition(OLD, x), midLimit(x), 1e-12)));
+  const OTHER = [1.2, 1.5, 3.5, 6, 8.99, 9.01, 10, 11.3, 12, 15, 16.5, 18, 19.99, 20];
+  const bad = [];
+  let domain = null, firstText = null;
+  for (const x of [...PP, ...OTHER]) {
+    await setParams({ scene: 'powers', x, t: 3 });
+    const r = await stairLabel(), t = theLabel(r), def = t && readDefinition(t.text);
+    if (!t || !def) { bad.push(`x = ${x}: ${t ? `unread label ${JSON.stringify(t.text)}` : `no single placed cyan label ${JSON.stringify(r)}`}`); continue; }
+    if (firstText == null) {
+      firstText = t.text;
+      const d = /实数\s*x\s*>\s*(\d+(?:\.\d+)?)/.exec(t.text);
+      domain = d ? Number(d[1]) : null;
+    }
+    const want = midLimit(x), got = evalDefinition(def, x);
+    if (t.text !== firstText || !near(got, want, 1e-12) || !near(r.hud, want, 5.1e-5) || !(domain != null && x > domain)) bad.push(`x = ${x}: label ${got}, HUD ${r.hud}, mean ${want}`);
+  }
+  check(`stair label (zh): one visible cyan formula, read and evaluated at ${PP.length} prime powers and ${OTHER.length} other x, equals the mean of the left and right limits and the HUD's ψ₀`,
+    bad.length === 0, bad.slice(0, 3).join(' | '));
+  check('stair label (zh): states the real domain x > 1 and the jump rule; the x slider stays inside that domain', domain === 1 && /跳点取左右极限的平均/.test(firstText || '')
+    && Number(await page.getAttribute('#xval', 'min')) > domain, JSON.stringify(firstText));
+  await page.click('[data-lang-set="en"]');
+  const bad2 = [];
+  let enText = null;
+  for (const x of [2, 9, 13, 16, 6, 11.3, 20]) {
+    await setParams({ scene: 'powers', x, t: 3 });
+    const r = await stairLabel(), t = theLabel(r), def = t && readDefinition(t.text);
+    if (!t || !def) { bad2.push(`x = ${x}: ${JSON.stringify(r)}`); continue; }
+    enText = t.text;
+    if (!near(evalDefinition(def, x), midLimit(x), 1e-12) || !near(r.hud, midLimit(x), 5.1e-5)) bad2.push(`x = ${x}: label ${evalDefinition(def, x)}, mean ${midLimit(x)}`);
+  }
+  check('stair label (en): the same formula equals the mean of the left and right limits at prime powers and elsewhere', bad2.length === 0 && enText != null
+    && enText.split('\n')[0] === (firstText || '').split('\n')[0], bad2.slice(0, 3).join(' | '));
+  check('stair label (en): states the real domain x > 1 and the jump rule, with no Chinese left', /real x > 1\b/.test(enText || '') && /at a jump, mean of left and right limits/.test(enText || '')
+    && !/\p{Script=Han}/u.test(enText || ''), JSON.stringify(enText));
+  await page.click('[data-lang-set="zh"]'); await settle(page);
 }
 
 /* ---------- controls ---------- */

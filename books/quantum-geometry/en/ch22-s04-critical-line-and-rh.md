@@ -613,7 +613,7 @@ $$
 \psi_0(8) \;=\; \frac{5}{2}\log 2 + \log 3 + \log 5 + \log 7 \;=\; \log\bigl(420\sqrt{2}\bigr),
 $$
 
-and crossing $x = 9 = 3^2$ adds $\log 3$ to reach $\psi_0(9.5) = 3\log 2 + 2\log 3 + \log 5 + \log 7 = \log 2520$, while the smooth non-oscillatory terms at $x = 8$ evaluate to $8 - \log(2\pi) - \frac{1}{2}\log(1 - 8^{-2}) = 8 - \log(2\pi) + \frac{1}{2}\log\frac{64}{63}$. Conversely, the real zero sample plotted on this page **includes only the first $10$ positive-ordinate zero conjugate pairs** without any error certificate covering high-ordinate zeros ($|\operatorname{Im}\rho| > T$) or hypothetical off-line zeros; no short zero sample constitutes evidence of spectral completeness or a proof of [@conj-riemann-hypothesis], while `quartet` serves as a synthetic off-line comparison model.
+and moving right from the midpoint $\psi_0(8)$ contributes the remaining half-jump $\frac{1}{2}\log 2$ at $x = 8$ (to $\psi(8^+)$) before crossing $x = 9 = 3^2$ adds the full jump $\log 3$ to reach $\psi_0(9.5) = 3\log 2 + 2\log 3 + \log 5 + \log 7 = \log 2520$, while the smooth non-oscillatory terms at $x = 8$ evaluate to $8 - \log(2\pi) - \frac{1}{2}\log(1 - 8^{-2}) = 8 - \log(2\pi) + \frac{1}{2}\log\frac{64}{63}$. Conversely, the real zero sample plotted on this page **includes only the first $10$ positive-ordinate zero conjugate pairs** without any error certificate covering high-ordinate zeros ($|\operatorname{Im}\rho| > T$) or hypothetical off-line zeros; no short zero sample constitutes evidence of spectral completeness or a proof of [@conj-riemann-hypothesis], while `quartet` serves as a synthetic off-line comparison model.
 :::
 
 ::: {.viz src="zeta-spectrum-lab" preset="powers" height="500"}
