@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "561bdaba1f6310f9ba63e3d8ff13e764fb55592a",
-  "pinned_at": "2026-11-15T23:08:56Z",
+  "commit": "ea62076a8b0bbce1458fde68b18e5c232deef801",
+  "pinned_at": "2026-11-16T02:14:41Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -3129,7 +3129,7 @@
       "module": "D5/S3/Quantum/Analysis/TrotterProduct",
       "name": "NormedSpace.trotter_product",
       "kind": "theorem",
-      "statement_id": "sha256:b78c3ef1a6145974cc609403682884919874724dbc0acea517782732b648a77f",
+      "statement_id": "sha256:76a369e1260e0750738f4c60a51b99d9537a00959ff613a3e1a6d536500aaceb",
       "line": 230,
       "signature": "theorem trotter_product (A B : 𝔸) : Filter.Tendsto (fun n : ℕ => (exp ((n : ℝ)⁻¹ • A) * exp ((n : ℝ)⁻¹ • B)) ^ n) Filter.atTop (nhds (exp (A + B)))"
     },
@@ -3993,9 +3993,17 @@
       "module": "D5/S3/Quantum/QPECircularTail",
       "name": "QuantumPhaseEstimationGeneral.qpe_circular_tail_le",
       "kind": "theorem",
-      "statement_id": "sha256:595452d2f91a1749bcf473baeffce53b7139999733b0acbe43999b4b06cea4e0",
+      "statement_id": "sha256:8aaa69adf6180ea252efe4003828671b2d2b4c902d4f92d383b71506b3fe76e7",
       "line": 385,
       "signature": "theorem qpe_circular_tail_le (t : ℕ) (φ ρ : ℝ) (hrho : 0 < ρ) : (∑ j ∈ Finset.univ.filter (fun j : Fin (2 ^ t) => ρ ≤ ‖((φ - (j.val : ℝ) / (2 : ℝ) ^ t : ℝ) : UnitAddCircle)‖), probability (2 ^ t) φ j) ≤ 1 / (2 * (2 : ℝ) ^ t * ρ) + 1 / (2 * ((2 : ℝ) ^ t * ρ) ^ 2)"
+    },
+    "D5/S3/Quantum/QPECircularTail.reciprocal_square_shifted_finite_tail_le": {
+      "module": "D5/S3/Quantum/QPECircularTail",
+      "name": "QuantumPhaseEstimationGeneral.reciprocal_square_shifted_finite_tail_le",
+      "kind": "theorem",
+      "statement_id": "sha256:8aaa69adf6180ea252efe4003828671b2d2b4c902d4f92d383b71506b3fe76e7",
+      "line": 50,
+      "signature": "lemma reciprocal_square_shifted_finite_tail_le (a : Real) (n : Nat) (ha : 0 < a) : (∑ k ∈ Finset.range n, 1 / (a + (k : Real)) ^ 2) <= 1 / a ^ 2 + 1 / a"
     },
     "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine": {
       "module": "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction",
@@ -4548,6 +4556,14 @@
       "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
       "line": 692,
       "signature": "theorem shor_mixture_peak_lower_bound (n : ℕ) (s : Fin c.period) (b : Fin (2 ^ n)) (hb : Nearest (2 ^ n) (s.val / c.period) b) : (c.period : ℝ)⁻¹ * (4 / Real.pi ^ 2) ≤ normSquared (runQPE c.modularOperator n c.input b)"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_phase_accuracy_bound": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_phase_accuracy_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 679,
+      "signature": "theorem shor_phase_accuracy_bound (n : ℕ) (s : Fin c.period) (b : Fin (2 ^ n)) (hb : Nearest (2 ^ n) (s.val / c.period) b) : 4 / Real.pi ^ 2 ≤ probability (2 ^ n) (s.val / c.period) b"
     },
     "D5/S3/Quantum/ShorCountingMarginal.shor_qpe_probability_mixture": {
       "module": "D5/S3/Quantum/ShorCountingMarginal",
