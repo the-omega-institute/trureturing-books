@@ -1,27 +1,33 @@
-# 统计与图片的自动更新
+# 全书统计只作编译产物
 
-正文与锁文件是统计输入。附录 C、声明地图、五张统计图及其幻灯片副本是输出，统一执行：
+正文与锁文件是统计输入；源码删除手工总数、排名、声明表、统计地图数据与图片副本，不再运行修改书稿的全书统计同步脚本。附录 C 保留作者维护的证据边界说明，并按本书选择嵌入编译简表、链接生成的声明索引。定理、证明和开放问题仍在所属章节维护。
 
-```bash
-./tbook sync --book quantum-geometry
-./tbook sync --book quantum-geometry --check
-./tbook stats --book quantum-geometry
+正文只保存选择与引用，例如：
+
+```markdown
+::: {.stats src="summary"}
+:::
+
+声明明细按需单独查看。
+
+::: {.stats src="declarations" display="link" format="html"}
+查看生成的声明索引
+:::
 ```
 
-构建会先同步；`./tbook check` 先从源文件准备本书派生文本与静态图，再校验结构。没有差异的输出保持原字节与修改时间，统计同步与结构校验不启动浏览器；导出所需图片按输入摘要复用缓存。首次生成图片清单需要实际采样，此后缺图、成品被改或相关输入改变才会重出。
+上下游共享的接口还提供 `evidence`、`environments`、`kinds`、`chapters`、`pages` 与 `reuse` 视图；下游自行选择，不强制每本书追加统计页面。默认嵌入表格，也可链接 HTML、Markdown、CSV、JSON 产物。声明索引与复用表可按 `all`、`theorems`、`definitions`、`inline` 分区。中英文的选择逐项对齐，说明文字自然翻译。完整接口见 `../AUTHORING.md` 的“统计与派生产物”。
 
-`stats` 默认只显示简短摘要；确需程序处理完整数据时再加 `--json`。日常修改以摘要和实际差异为准，不必全文读取生成的统计快照、声明索引或重复查看未变化的图片。
+构建自动生成并发布所引用的产物，不需要预先提交快照或生成章节。环境出现次数、唯一声明数与跨源文件复用分别计算，生成视图不回流为引用统计输入；索引登记和计数不改变数学结果的验证等级。
 
-- `data/appendix-c.zh.md.in` 是权威论述模板，英文模板同步修订；`{{T}}` 等占位项由生成器赋值，三张声明表自动插入。修改模板，不直接改生成的 `zh/appendix-c.md` 与 `en/appendix-c.md`。
-- `data/declaration-serials.json` 保留已发布的声明编号。声明仍处于原分区时编号不变；新声明追加编号，表格继续按模块排序。移除的编号保留，不重新利用。
-- `data/statistics.json` 由 `tbook.stats` 的正式解析器从权威版本目录、环境、有效行内链接与媒体引用生成。代码示例和未出版文件不参与统计；附录 C 的声明引用被排除，避免生成索引回头改变引用统计；其中人工撰写的编号环境仍计入全书环境次数。
-- 五张统计图复用 `figures/_book_stats.py` 读取的同一快照；声明地图的 JSON 由同一快照与稳定编号生成。引用次数、唯一声明数和跨章复用分别计算，子页面归入主章。
-- 只有正式定理类环境且全部引用解析为冻结定理的条目计入验证环境数；书面证明、文献注记、开放问题与定义分别处理。地图中的每个声明占一格，与环境出现次数不同。
+命令行导出示例：
 
-锁文件仍只通过 `./tbook pin` 写入。钉版与陈述复核完成后运行同步，只提交正文模板、脚本等源输入；生成的章节、数据、SVG、地图 JSON 与图片清单均由忽略规则排除。本地清单记录输入与成品的对应，不替代数学、交互行为或视觉质量验证；只复用输入及画面均未变、且原检查范围适用的证据，改变的画面按原技能补看。
+```bash
+./tbook stats --book quantum-geometry
+./tbook stats --book quantum-geometry --write
+./tbook stats --book quantum-geometry --write --view summary --view kinds --format markdown --format csv --lang zh --lang en
+./tbook stats --book quantum-geometry --write --view declarations --group theorems --format html
+```
 
-生成器只计算文本与地图 JSON；构建再按消费者生成 SVG、声明地图封面与静帧。出错会使同步或构建失败；`--check` 不写任何产物。需要主动核对另一浏览器环境时，运行 `node tools/node/viz-thumbs.mjs quantum-geometry lean-declaration-map --force`。
+默认快照为 `build/statistics/quantum-geometry.json`，选定视图写在 `build/statistics/quantum-geometry/`。这些路径被 Git 忽略，内容未变时保持字节与修改时间。自定义图、可视化或外部程序读取产物，不把数据复制到受版本管理的源码。站点与导出的验证账本继续由构建生成；锁文件仍只由 `./tbook pin` 写入。
 
-稳定编号是身份源数据，继续留在 Git；普通同步只在内存中按登记表为新增声明分配编号。正式登记时显式运行 `python3 books/quantum-geometry/sync-statistics.py --register-serials`，审阅增量后提交登记表；不重用已发布编号。统计读取论述模板中的人工环境，首次检出即使没有生成附录，也能恢复同一统计。地图通过本地 `data.generated.json` 读取生成数据，`main.js` 不再包含自动改写的数据块。
-
-旧分支合并时若生成文件出现修改/删除冲突，保留删除并重新构建，只合并源文件。`./tbook artifacts list|untrack|check` 分别列出、取消跟踪和检查已入库产物；取消跟踪保留工作区副本。完整规则见 `../SOURCE-ONLY.md`。
+共享实现已由[上游模板 PR #109](https://github.com/the-omega-institute/trureturing-books-template/pull/109) 合入，并通过 `./tbook template update --to v1.4.0` 正式同步；消费者不重置模板清单。
