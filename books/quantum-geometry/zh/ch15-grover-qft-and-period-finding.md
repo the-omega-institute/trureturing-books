@@ -772,16 +772,170 @@ $$
 
 这个下界保证一次实际测量所得的有限候选列表含有真阶的概率，不认证从列表中选出精确阶，也不说明所有候选分母都整除真阶。重复采样的独立性、最小公倍数乘积律、因子提取、完整位复杂度或门复杂度、硬件实现与实测性能仍不在这一推导内；条件后验梳子的集中也没有随实际边缘事件一并得到证明。
 
-这些结论取自所钉源码的 `ShorContinuedFractions`、`FiniteRationalConvergents` 与 `FiniteRationalConvergentsLength`；有理列表与长度证明由 aicyberg 提供，模块保留供给源 *Finite-register phase estimation and spectral Shor order finding*（[solanaqubits/leanbook，固定版本](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)）的来源与 Apache 2.0 许可。来源审计 [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) 仍为三项已验证、一项未完成：更一般的时钟结论与独立理想采样乘积律没有因本节的模数界特化而一并解决。此前实际边缘分布的独立来源审计 [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) 仍为三项已验证、五十九项未完成。这些审计状态描述覆盖范围，不是否定上述数学证明。上述单次列表成员事件的下界由条件成员资格、实际混合与互素计数组合得到；随机选择底数的成功比例、重复采样独立性、精确选择器、因子提取、经典位复杂度、完整量子门复杂度与硬件表现仍须保留 [@rem-grover-qft-shor-literature] 的边界。
+这些结论取自所钉源码的 `ShorContinuedFractions`、`FiniteRationalConvergents` 与 `FiniteRationalConvergentsLength`；有理列表与长度证明由 aicyberg 提供，模块保留供给源 *Finite-register phase estimation and spectral Shor order finding*（[solanaqubits/leanbook，固定版本](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)）的来源与 Apache 2.0 许可。来源审计 [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) 仍为三项已验证、一项未完成：更一般的时钟结论与独立理想采样乘积律没有因本节的模数界特化而一并解决。此前实际边缘分布的独立来源审计 [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) 仍为三项已验证、五十九项未完成。这些审计状态描述覆盖范围，不是否定上述数学证明。上述单次列表成员事件的下界由条件成员资格、实际混合与互素计数组合得到；下文另从有限循环群计数推导均匀单位底数的 Good 比例与同事件双侧因子证书。重复采样独立性、精确选择器、经典位复杂度、完整量子门复杂度与硬件表现仍须保留 [@rem-grover-qft-shor-literature] 的边界。
 
 ::: {.viz src="phase-gears" preset="leak" height="500"}
 **不整除时峰摊开。** $Q = 64$、周期 $6$：品红的 $sQ/r$ 落在 $10.67$、$21.33$ 等整数之间，峰摊到相邻的格，$k = 11$ 高 $0.115$、$k = 10$ 只有 $0.026$，离 $sQ/r$ 最近的六格合计 $0.80$；琥珀色框住的 $k = 11$ 用连分数读出 $\frac{1}{6}$。本卡没有指定实际模数与底数，不能据此核对 $N^2\le Q$，所以这里的集中与读数保持教学数值演示的身份；上述条件成员定理不认证本卡“取最后一个渐近分数”的读法，也不把这些条件梳子的峰高认作实际边缘概率。
 :::
 
+**从真阶到因子：哪些底数会失败？** 先看 $N=15$、$a=2$：模 $3$ 的阶为 $2$，模 $5$ 的阶为 $4$，全局真阶为 $r=\operatorname{lcm}(2,4)=4$。半阶幂 $2^2$ 在两个局部分量中分别为 $1$ 与 $-1$，所以在模 $15$ 下既非 $1$ 也非 $-1$。关键不是两个局部阶是否相等，而是它们各自含有多少个因子 $2$：这里是 $1$ 个与 $2$ 个。下面先数任意有限循环群族中的失败元组，再把同一个事件搬回实际单位群。
+
+::: {.theorem #thm-half-order-family-failure-count title="有限循环群族的半阶失败计数" lean="D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.failure_count_le"}
+对任意非空有限指标类型 $I$、任意群族 $(G_i)_{i\in I}$，若每个 $G_i$ 都是有限循环群，并给定 $\epsilon_i\in G_i$ 满足 $\operatorname{ord}(\epsilon_i)=2$，令
+
+$$
+\begin{aligned}
+P&=\prod_{i\in I}G_i,\qquad k=|I|,\qquad \epsilon=(\epsilon_i)_{i\in I},\\
+\operatorname{Good}_{\epsilon}(x)
+&\Longleftrightarrow \operatorname{Even}(\operatorname{ord}(x))
+\ \land\ x^{\operatorname{ord}(x)/2}\ne\epsilon,\\
+\operatorname{Bad}&=\{x\in P:\neg\operatorname{Good}_{\epsilon}(x)\}.
+\end{aligned}
+$$
+
+这里 $\operatorname{ord}$ 是群元素的真阶（Lean 的 `orderOf`），$/2$ 是自然数除法。则
+
+$$
+|\operatorname{Bad}|\,2^{k-1}\le |P|.
+$$
+
+各群的大小可以不同，乘积群 $P$ 无须循环；计数遍及全部元组，包括单位元与奇数阶元组，也包括 $k=1$ 的情形。
+:::
+
+::: proof
+记 $d_i=\operatorname{ord}(x_i)>0$、$r=\operatorname{ord}(x)>0$，并以 $v_2(d)$ 表示正整数 $d$ 中素因子 $2$ 的指数，即 `d.factorization 2`。乘积中的阶是局部阶的最小公倍数，所以 $v_2(r)=\max_i v_2(d_i)$。
+
+先在一个循环群内取阶为 $d$ 的元素 $z$，设 $M>0$ 为偶数且 $d\mid M$。$(z^{M/2})^2=1$；循环群只有一个阶为 $2$ 的元素 $\epsilon$，因而这个半幂只能是 $1$ 或 $\epsilon$。又有
+
+$$
+z^{M/2}=1\ \Longleftrightarrow\ d\mid M/2
+\ \Longleftrightarrow\ 2d\mid M
+\ \Longleftrightarrow\ v_2(d)<v_2(M).
+$$
+
+最后一步中，其余素因子的指数不等式已由 $d\mid M$ 保证。因此 $z^{M/2}=\epsilon$ 恰好等价于 $v_2(d)=v_2(M)$。把 $M=r$ 代入各坐标可知：偶数阶时，失败恰是所有 $v_2(d_i)$ 都达到同一个最大值；奇数阶时，它们全为 $0$，也失败。于是
+
+$$
+x\in\operatorname{Bad}\ \Longleftrightarrow\ \exists t\in\mathbb N,\ \forall i\in I,\ v_2(d_i)=t.
+$$
+
+为每个循环群选满阶生成元 $g_i$。若 $n_i=|G_i|$，则 $n_i$ 为偶数且 $g_i^{n_i/2}=\epsilon_i$。映射 $z\mapsto zg_i$ 把 $z^{n_i/2}$ 在 $1$ 与 $\epsilon_i$ 之间切换。由刚才的判据，$v_2(\operatorname{ord}(zg_i))\ne v_2(\operatorname{ord}(z))$：若切换前后赋值相同，它们是否等于 $v_2(n_i)$ 也相同，与半幂切换矛盾。
+
+固定一个锚坐标 $i_0\in I$。将失败元组 $x$ 与其余 $k-1$ 个坐标上的布尔位 $b_i$ 编码为元组 $y$：保留 $y_{i_0}=x_{i_0}$；其余坐标在 $b_i=0$ 时取 $x_i$，在 $b_i=1$ 时取 $x_i g_i$。锚坐标给出原元组的共同赋值 $t$；其余编码坐标的赋值等于 $t$ 当且仅当 $b_i=0$。因此从编码可恢复每个布尔位，再消去生成元即可恢复 $x$。这给出从 $\operatorname{Bad}\times\{0,1\}^{I\setminus\{i_0\}}$ 到 $P$ 的注入，比较基数即得结论。$k=1$ 时没有布尔位，且每个元组都失败，故计数界为等式。完整证明由 Lean 内核检查。
+:::
+
+这个共同赋值计数来自 Shor（1997）第 5 节、PDF 第 16 页的经典论证，不主张新的数学优先权。以下应用按所钉源码的 `Blueprint/D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.md`、`Blueprint/D5/S3/Quantum/ShorContinuedFractions.md` 及 `Library/QuantumChannels/shor1997gateorbits.md` 的文献归属展开；它是上述计数与阶、同余、互素消去事实的推导，不把整个分解过程归入该 GID。
+
+::: {.example #ex-shor-actual-unit-factors title="实际单位群的 CRT 计数与同事件双侧因子证书"}
+**实际素数幂，而非无平方因子的替身。** 取任意奇数 $N>1$，令 $I$ 为 $N$ 的不同素因子集，$k=|I|$，并取
+
+$$
+e_p=N.\operatorname{factorization}(p),\qquad
+G_p=(\mathbb Z/p^{e_p}\mathbb Z)^\times,\qquad
+U_N=(\mathbb Z/N\mathbb Z)^\times.
+$$
+
+$I$ 非空，每个 $e_p>0$，每个 $p$ 为奇素数。奇素数幂的完整单位群 $G_p$ 循环；其中字面的单位 $-1$ 的平方为 $1$ 且不等于 $1$，所以阶为 $2$。后一不等式可直接由模数 $p^{e_p}\ge p\ge3$ 看出：模 $n$ 的 $-1=1$ 只可能在 $n=1$ 或 $2$ 时发生。
+
+中国剩余环同构提升为单位群同构
+
+$$
+\mathcal E:U_N\ \simeq\ \prod_{p\in I}G_p.
+$$
+
+所钉构造是将 `Units.mapEquiv` 作用于 `ZMod.equivPi N hN` 的乘法同构，再复合 `MulEquiv.piUnits`（$h_N$ 为 $N\ne0$）。它保留真阶、每个自然数幂，并把字面的 $-1$ 送到逐坐标的 $-1$。因此，令
+
+$$
+\operatorname{Good}(u)\ \Longleftrightarrow\
+\operatorname{Even}(\operatorname{ord}(u))\ \land\
+u^{\operatorname{ord}(u)/2}\ne-1,
+$$
+
+就有 $\operatorname{Good}(u)\Longleftrightarrow\operatorname{Good}_{(-1)_p}(\mathcal E(u))$。限制 $\mathcal E$ 到失败子类型，得到实际失败单位与失败元组的双射；`Nat.card_congr` 将两者的基数相等连同整个载体的基数相等一起搬运。特别地，若
+
+$$
+\begin{aligned}
+T&=|U_N|=\prod_{p\in I}|G_p|,\\
+F&=|\{u\in U_N:\neg\operatorname{Good}(u)\}|,\qquad
+S=|\{u\in U_N:\operatorname{Good}(u)\}|,
+\end{aligned}
+$$
+
+则 [@thm-half-order-family-failure-count] 给出 $F\,2^{k-1}\le T$。这里 $T>0$（载体含单位元）、$2^{k-1}>0$，且 $S+F=T$。在实数或有理数中除以这些正数，得到
+
+$$
+\Pr_{u\sim\operatorname{Unif}(U_N)}[\operatorname{Good}(u)]
+=\frac ST=1-\frac FT\ge1-\frac1{2^{k-1}}.
+$$
+
+这是在**完整实际单位群上均匀抽样**的概率。单位元仍被抽到；其阶为 $1$，所以 Good 为假。若 $N$ 不是素数幂，素因子集非空且基数不为 $1$（`isPrimePow_iff_card_primeFactors_eq_one`），故 $k\ge2$，上界中的失败比例至多 $1/2$，成功比例至少 $1/2$。素数幂的 $k=1$ 情形仍在上述计数范围内，只给出成功比例至少 $0$；没有删去重复素因子，也没有要求 $N$ 无平方因子。
+
+**同一个 Good 同时给出两个真因子。** 这一确定性步骤只需自然数 $N>2$ 与 $\gcd(a,N)=1$，不要求 $N$ 为奇数。令 $u$ 为 $a$ 对应的单位，$r=\operatorname{ord}(u)$，并假设 $\operatorname{Good}(u)$。有限单位群给出 $r>0$；偶性给出 $m=r/2$ 满足 $0<m<r$。真阶的最小性排除 $u^m=1$，Good 排除 $u^m=-1$，而
+
+$$
+(u^m)^2=u^{2m}=u^r=1.
+$$
+
+这一步使用真阶；任意偶数周期不能代替它。互素性与 $N>2$ 排除 $a=0$，所以 $a\ge1$，自然数 $x=a^m\ge1$。将单位幂投到 $\mathbb Z/N\mathbb Z$，$x$ 的剩余类就是 $u^m$；有了 $1\le x$，自然数减法 $x-1$ 才能按 `Nat.cast_sub` 转成环中的差。于是
+
+$$
+\begin{aligned}
+N&\mid(x-1)(x+1),\\
+N&\nmid x-1,\qquad N\nmid x+1.
+\end{aligned}
+$$
+
+第一行来自 $(x-1)(x+1)=x^2-1$ 的剩余类为零；第二行分别来自 $u^m\ne1$ 与 $u^m\ne-1$。若 $\gcd(x-1,N)=1$，从第一行作互素消去会得 $N\mid x+1$，矛盾；对称地，若 $\gcd(x+1,N)=1$，则得 $N\mid x-1$，也矛盾。两侧 gcd 都是正的且至多为 $N$；若某侧等于 $N$，又会迫使 $N$ 整除该侧。因此同时有
+
+$$
+\begin{aligned}
+1&<\gcd(a^m-1,N)<N,\qquad \gcd(a^m-1,N)\mid N,\\
+1&<\gcd(a^m+1,N)<N,\qquad \gcd(a^m+1,N)\mid N.
+\end{aligned}
+$$
+
+**代表元变了，gcd 对不变。** 仍取 $N>2$；对实际单位 $u$，令 $m=\operatorname{ord}(u)/2$，记 $b$ 为 $u$ 的标准自然数代表元，$t$ 为 $u^m$ 的标准自然数代表元。二者均与 $N$ 互素，故 $b,t\ge1$。任意自然数代表元 $a$ 满足 $(a:\mathbb Z/N\mathbb Z)=u$ 时，也与 $N$ 互素且 $a\ge1$。单位幂与剩余类相容给出
+
+$$
+a^m\equiv t\pmod N,\qquad b^m\equiv t\pmod N.
+$$
+
+这是同余，并非自然数等式。因 $a^m,b^m,t$ 均至少为 $1$，可以用 `Nat.ModEq.sub` 同减 $1$；加 $1$ 则直接保持同余。再用 `Nat.ModEq.gcd_eq` 得到
+
+$$
+\begin{aligned}
+\bigl(\gcd(a^m-1,N),\gcd(a^m+1,N)\bigr)
+&=\bigl(\gcd(t-1,N),\gcd(t+1,N)\bigr),\\
+\bigl(\gcd(b^m-1,N),\gcd(b^m+1,N)\bigr)
+&=\bigl(\gcd(t-1,N),\gcd(t+1,N)\bigr).
+\end{aligned}
+$$
+
+所以双侧证书同时适用于原代表元的幂、标准底数的幂与标准半阶幂代表元。以 $\operatorname{Both}_N(z)$ 表示 $\gcd(z-1,N)$ 与 $\gcd(z+1,N)$ 各自整除 $N$ 且严格介于 $1$ 与 $N$。明确写出带证书的事件：
+
+$$
+\begin{aligned}
+C(u)\ \Longleftrightarrow\ &\operatorname{Good}(u)\ \land\ \operatorname{Both}_N(b^m)\ \land\ \operatorname{Both}_N(t)\\
+&\land\ \bigl(\forall a\in\mathbb N,\ (a:\mathbb Z/N\mathbb Z)=u
+\Rightarrow\operatorname{Both}_N(a^m)\bigr).
+\end{aligned}
+$$
+
+上述确定性推导证明 $\operatorname{Good}(u)\Rightarrow C(u)$，投影到首个合取项证明反向蕴含。恒等映射因而限制为成功子类型之间的双射，故
+
+$$
+|\{u\in U_N:C(u)\}|=S.
+$$
+
+回到奇数 $N>1$ 的均匀单位抽样，带双侧证书的同一事件概率恰为 $S/T$，继承 $1-1/2^{k-1}$ 的下界；若 $N$ 非素数幂，便至少为 $1/2$。证书没有另换成功事件或抽样载体。
+:::
+
+经典单位抽样与前文固定底数下的实际量子测量是两种随机选择。前者的 Good 比例不能直接与后者的候选列表概率相乘；组合需要明确的共同抽样律及相应条件概率。以上既没有给出高效均匀单位采样器，也没有补上精确选阶、独立重复／最小公倍数定理、完整递归素因子分解实现或位／门复杂度。条件后验梳子的集中仍保持前文的文献边界。
+
 下面，让我们通过一个四步完整手算算例，把 $N=4$ 与 $N=8$ 的 Grover 搜索、$3$ 比特 QFT 的二进制相位齿轮、$N=15$ 的 Shor 周期寻找以及 $\mathrm{ZMod}\,16$ 上的字符和与泊松公式逐一验算到底。
 
 ::: {.example #ex-grover-four-shor-fifteen title="Grover N=4/N=8 搜索、3 比特 QFT 相位齿轮与 Shor N=15 阶寻找手算及证据边界"}
-本例第一步与第四步具体验算本章的 [@thm-grover-uniform-rotation]、[@prop-finite-character-cancellation] 与 [@cor-finite-poisson-period]；第二步按 [@thm-qft-circuit-action] 的正指数、大端、含末端位反转规范展开三比特相位。手算的张量乘积式用于解释这一规范，不额外认证所有张量恒等式。第三步的完整 Shor 阶寻找与最大公因数分解归约 $\gcd(a^{r/2} \pm 1,N)$ 仍属文献结果，未在本书形式化（见 [@rem-grover-qft-shor-literature]）。
+本例第一步与第四步具体验算本章的 [@thm-grover-uniform-rotation]、[@prop-finite-character-cancellation] 与 [@cor-finite-poisson-period]；第二步按 [@thm-qft-circuit-action] 的正指数、大端、含末端位反转规范展开三比特相位。手算的张量乘积式用于解释这一规范，不额外认证所有张量恒等式。第三步由真阶的 Good 条件得到双侧 $\gcd(a^{r/2} \pm 1,N)$ 真因子的步骤已在 [@ex-shor-actual-unit-factors] 推导；完整 Shor 阶寻找与递归分解实现仍保留 [@rem-grover-qft-shor-literature] 的文献与算法边界。
 
 本例分四步完成本章全部核心公式的具体数值检验：
 
@@ -900,11 +1054,11 @@ $N = 8$ 时走两步仍差一点，成功概率停在 $\frac{121}{128}$。
 
 ::: {.remark #rem-grover-qft-shor-literature title="Grover 查询下界、QFT 理想计数与完整 Shor 算法的边界"}
 <!-- alias: #rem-shor-factoring-literature -->
-本章的 Lean 引用覆盖均匀振幅放大、Weyl 共轭、字符相消与有限泊松恒等式，以及实际 QFT 电路作用与原生事件计数（[@thm-qft-circuit-action]、[@thm-qft-native-event-count]）、单相位圆周尾界（[@thm-qpe-circular-tail]）、实际输入边缘分布与逐点下界、有理列表长度和条件候选成员资格。上文将实际混合、最近格点下界与候选恢复组合，推导了 $N^2\le Q$ 下单次列表成员事件的 $\frac4{\pi^2}\frac{\varphi(r)}r$ 下界；正指数规范使用反射事件。这里仍没有精确选择器。以下第 1 项和第 3 项的其余完整算法结论仍是**文献结果，未在本书形式化**；第 2 项只总结上述电路的理想计数及其成本边界。
+本章的 Lean 引用覆盖均匀振幅放大、Weyl 共轭、字符相消与有限泊松恒等式，以及实际 QFT 电路作用与原生事件计数（[@thm-qft-circuit-action]、[@thm-qft-native-event-count]）、单相位圆周尾界（[@thm-qpe-circular-tail]）、实际输入边缘分布与逐点下界、有理列表长度和条件候选成员资格。上文将实际混合、最近格点下界与候选恢复组合，推导了 $N^2\le Q$ 下单次列表成员事件的 $\frac4{\pi^2}\frac{\varphi(r)}r$ 下界；正指数规范使用反射事件。[@thm-half-order-family-failure-count] 另给出任意非空有限循环群族的失败计数，[@ex-shor-actual-unit-factors] 将其经实际单位 CRT 搬运为均匀 Good 下界，并在同一事件上证明双侧 gcd 真因子。这里仍没有精确选择器。以下第 1 项和第 3 项的其余完整算法结论仍是**文献结果，未在本书形式化**；第 2 项只总结上述电路的理想计数及其成本边界。
 
 1. **Grover 搜索与黑盒查询复杂度下界**（L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866；G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055）：在已知解数 $M$、承诺 $1 \le M \le N/4$ 的 $N$ 元无结构搜索中，从均匀叠加态出发，按已知初始成功概率 $p = M/N$ 选取迭代步数，振幅放大以 $O(\sqrt{N/M})$ 次标记黑盒查询将成功概率提升至 $\ge 1 - M/N$。这一稀疏解承诺下，任何量子黑盒算法要以常数有界误差找到解，都需要 $\Omega(\sqrt{N/M})$ 次查询（由 Bennett–Bernstein–Brassard–Vazirani (1997) 的单解黑盒下界归约得到），证实这一黑盒任务中的二次加速已达量子几何极限。
 2. **同一 QFT 电路的理想原生门数**：[@thm-qft-native-event-count] 给出 $q$ 个 Hadamard、$q(q-1)/2$ 个受控相位和 $\lfloor q/2\rfloor$ 个 SWAP，合计 $\frac{q(q+1)}2+\lfloor q/2\rfloor$ 次理想原生门出现。由此作通常的渐近计数，得到 $O(q^2)=O((\log Q)^2)$（$Q=2^q$）；电路对已制备复向量的精确正指数作用由 [@thm-qft-circuit-action] 给出。任意输入数据的装载、全部傅里叶系数的经典读出、理想相位门到有限离散门集的综合及硬件性能，都不包含在这个计数中。
-3. **Shor 大数分解与阶寻找的完整正确性条件**（P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172）：对于一般合数 $N$（非偶、非素数幂）与随机互素底数 $a$，乘法阶 $r$ 通常不整除 $Q=2^q$。完整算法选取 $N^2\le Q<2N^2$，通过可逆模幂电路在 $O((\log N)^3)$ 基本门内制备相应联合态，再经 QFT 采样。上述单次候选事件推导覆盖实际模乘模型中的列表成员概率；它没有认证可逆模幂的门实现或精确选阶步骤。欧拉函数比值的渐近估计 $\varphi(r)/r=\Omega(1/\log\log r)$ 仍按文献使用，不能把混合中的计数比例改称额外随机相位实验。若 $N$ 有 $k\ge2$ 个不同奇素因子，均匀互素底数下 $\Pr[r\text{ 为偶且 }a^{r/2}\not\equiv-1\pmod N]\ge1-2^{-(k-1)}\ge1/2$ 的一般定量结论，以及好阶条件下两侧 $\gcd(a^{r/2}\pm1,N)$ 都严格介于 $1$ 与 $N$ 的证明，仍是独立的经典数论形式化任务。连同认证选择、重复采样及其最小公倍数规律、完整位／门复杂度与分解归约，它们没有被上述列表成员事件所解决。（注：将周期提取比作“把无穷周期因式约分到 $1$”属于启发式几何直觉，绝非已形式化的数学结论。）
+3. **Shor 大数分解与阶寻找的完整正确性条件**（P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172）：对于一般合数 $N$（非偶、非素数幂）与随机互素底数 $a$，乘法阶 $r$ 通常不整除 $Q=2^q$。完整算法选取 $N^2\le Q<2N^2$，通过可逆模幂电路在 $O((\log N)^3)$ 基本门内制备相应联合态，再经 QFT 采样。上述单次候选事件推导覆盖实际模乘模型中的列表成员概率；它没有认证可逆模幂的门实现或精确选阶步骤。欧拉函数比值的渐近估计 $\varphi(r)/r=\Omega(1/\log\log r)$ 仍按文献使用，不能把混合中的计数比例改称额外随机相位实验。经典部分现由 [@thm-half-order-family-failure-count] 与 [@ex-shor-actual-unit-factors] 覆盖：对奇数 $N>1$，在完整单位群上均匀抽样的 Good 概率至少为 $1-2^{-(k-1)}$；非素数幂时 $k\ge2$，故至少为 $1/2$，且同事件中的每个自然数底数代表元都给出双侧真因子。这保留全部实际素数幂指数，单位元也留在抽样载体内。该经典概率与固定底数下的量子候选事件使用不同抽样律，尚未在此组成一个共同实验的端到端概率。高效单位采样、认证精确选择、独立重复及其最小公倍数规律、完整递归分解实现与位／门复杂度仍不由这些结果给出。（注：将周期提取比作“把无穷周期因式约分到 $1$”属于启发式几何直觉，绝非已形式化的数学结论。）
 :::
 
 ::: {.viz src="phase-gears" height="560"}

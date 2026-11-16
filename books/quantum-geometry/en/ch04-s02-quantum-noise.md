@@ -545,7 +545,192 @@ $$
 
 Substitution gives $\sum_{j=0}^Kq_jf_j=\sum_\ell\alpha_\ell q(\omega_\ell)=0$, without positive weights. If $N\ge K$, the geometric values within the window would give $q(\lambda)=0$. This is impossible: all roots of $q$ lie on the unit circle, whereas $|\lambda|<1$. Thus $N<K\le d^2$, or $N+1\le d^2$. Zero and negative $\lambda$ are included: the zeroth power is always $1$, and at $\lambda=0$ one has $q(0)=(-1)^K\prod_\ell\omega_\ell\ne0$. The endpoints $\lambda=\pm1$ violate strict contraction, so this contradiction does not apply there.
 
-For qubit dephasing take $m=2,a=e_0,b=e_1$: the diagonal pure states stay fixed and the off-diagonal entries acquire the factor $\lambda^n$, exactly as required. Consequently, at $d=2$ one has $N\le3$: no initial environment density can support an exact common prefix through the fourth step. This is a necessary bound for the stated autonomous model. It supplies no exact minimum environment dimension for general windows, general attainability, approximate error bound, or physical realization of arbitrary spectral moment data, and it is not a universal physical law. Unperturbed marginal channel identities likewise do not determine the full joint-state histories of a retained environment or a process tensor with intermediate interventions. The formal status of this generic application remains unsettled; verification of its components does not make it a Lean-verified statement.
+For qubit dephasing take $m=2,a=e_0,b=e_1$: the diagonal pure states stay fixed and the off-diagonal entries acquire the factor $\lambda^n$, exactly as required. Consequently, at $d=2$ one has $N\le3$: no initial environment density can support an exact common prefix through the fourth step. This is a necessary bound for the stated autonomous model; qutrit attainment for four steps is given separately in [@rem-four-step-qutrit]. The bound alone supplies no exact minimum environment dimension for general windows, general attainability, approximate error bound, or physical realization of arbitrary spectral moment data, and it is not a universal physical law. Unperturbed marginal channel identities likewise do not determine the full joint-state histories of a retained environment or a process tensor with intermediate interventions. The formal status of this generic application remains unsettled; verification of its components does not make it a Lean-verified statement.
+:::
+
+::: {.remark #rem-four-step-qutrit title="Four Common Steps with a Qutrit Environment (Written Derivation)"}
+
+**Ordinary written derivation, not formalized in this book.** The preceding necessary bound excludes a two-level environment for four steps but supplies no three-level realization. Split the environment into a stationary line and a rotating two-dimensional block. The line contributes a constant; the trace overlap of two conditional rotations contributes two cosines. With suitable angles and weights, the first four nontrivial powers of one six-dimensional unitary produce the required geometric coherence. The rotating block is a complex two-dimensional subspace, and the trace overlap is an algebraic mechanism; no random environment is refreshed over time.
+
+**Objects and quantifiers.** Fix any real $-1<\lambda<1$, with system $S=\mathbb C^2$ and environment $E=\mathbb C^3$. For every complex matrix $X=(x_{ij})\in M_2(\mathbb C)$, define
+
+$$
+\mathcal D_\lambda(X)=
+\begin{pmatrix}x_{00}&\lambda x_{01}\\\lambda x_{10}&x_{11}\end{pmatrix},
+\qquad \mathcal D_\lambda^0=\operatorname{id}.
+$$
+
+This map is also $\frac{1+\lambda}{2}X+\frac{1-\lambda}{2}Z_SXZ_S$, where $Z_S=\operatorname{diag}(1,-1)$, so zero and negative $\lambda$ also define channels. For each fixed $\lambda$, we choose $W,\sigma$ once, then cover every input and all $n=0,1,2,3,4$ simultaneously. The realization is not chosen anew for each input or time. The zeroth power is $1$, including at $\lambda=0$.
+
+**Explicit parameters.** All parameters below depend only on $\lambda$:
+
+$$
+\begin{aligned}
+D&=\sqrt{\lambda^2+2\lambda+5},&
+p&=\frac{1+\lambda}{5-3\lambda},\\
+k&=\frac{2\lambda}{D},&r&=\sqrt{1-k^2},\\
+x_+&=\frac{\lambda-1+D}{4},&x_-&=\frac{\lambda-1-D}{4},\\
+\theta_+&=\arccos x_+,&\theta_-&=\arccos x_-,\\
+\alpha&=\frac{\theta_++\theta_-}{2},&
+\beta&=\frac{\theta_--\theta_+}{2}.
+\end{aligned}
+$$
+
+Every denominator and square root has a specified domain. Since $D^2=(\lambda+1)^2+4>0$ and $5-3\lambda>2$,
+
+$$
+\begin{aligned}
+0<p<1,\qquad 1-p&=\frac{4(1-\lambda)}{5-3\lambda}>0,\\
+1-k^2&=\frac{(\lambda+1)(5-3\lambda)}{D^2}>0.
+\end{aligned}
+$$
+
+Thus $-1<k<1$ and $r>0$. The nodes are the roots of $q(x)=x^2-\frac{\lambda-1}{2}x-\frac{\lambda+1}{4}$. The signs $q(-1)=(\lambda+1)/4>0$, $q(0)=-(\lambda+1)/4<0$, and $q(1)=(5-3\lambda)/4>0$ give $-1<x_-<0<x_+<1$. Both inverse cosines therefore lie in $(0,\pi)$, with $\alpha-\beta=\theta_+$ and $\alpha+\beta=\theta_-$.
+
+**Fixed matrices.** On the two-dimensional environment block, write the Pauli matrices as $Z,X_P$ to distinguish them from the arbitrary system input $X$:
+
+$$
+Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\qquad
+X_P=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+H=kZ+rX_P.
+$$
+
+On $E=\mathbb C\oplus\mathbb C^2$, take
+
+$$
+\begin{aligned}
+A&=1\oplus A_2,\qquad A_2=\cos\alpha\,I_2+\mathrm i\sin\alpha\,Z,\\
+B&=1\oplus B_2,\qquad B_2=\cos\beta\,I_2+\mathrm i\sin\beta\,H,\\
+A&=\begin{pmatrix}
+1&0&0\\0&e^{\mathrm i\alpha}&0\\0&0&e^{-\mathrm i\alpha}
+\end{pmatrix},\\
+B&=\begin{pmatrix}
+1&0&0\\
+0&\cos\beta+\mathrm i k\sin\beta&\mathrm i r\sin\beta\\
+0&\mathrm i r\sin\beta&\cos\beta-\mathrm i k\sin\beta
+\end{pmatrix},\\
+\sigma&=\operatorname{diag}\left(p,\frac{1-p}{2},\frac{1-p}{2}\right).
+\end{aligned}
+$$
+
+Let $P_0=\lvert0\rangle\langle0\rvert$ and $P_1=\lvert1\rangle\langle1\rvert$ be system projections, and define the single joint unitary used throughout:
+
+$$
+W=P_0\otimes A+P_1\otimes B
+=\begin{pmatrix}A&0_3\\0_3&B\end{pmatrix}
+\quad\text{on }\mathbb C^2\otimes\mathbb C^3.
+$$
+
+Here $W$ is a $6\times6$ matrix. The identities $Z^*=Z$, $X_P^*=X_P$, $Z^2=X_P^2=I_2$, and $ZX_P+X_PZ=0$ give $H^*=H$ and $H^2=(k^2+r^2)I_2=I_2$. Every self-adjoint involution $K$ satisfies $(\cos t\,I+\mathrm i\sin t\,K)(\cos t\,I-\mathrm i\sin t\,K)=I$, so $A,B,W$ are unitary. The three diagonal entries of $\sigma$ are strictly positive and sum to $1$. Thus $\sigma$ is a full-rank density and commutes with $A,B$. Full rank is a choice for this witness, not a hypothesis on all realizations; the controlled form is likewise this construction, not a restriction on arbitrary $W$ in the preceding necessary bound.
+
+**How the common powers produce two cosines.** Multiplication and the angle addition formulas give, by induction for a self-adjoint involution,
+
+$$
+\begin{aligned}
+A_2^n&=\cos(n\alpha)I_2+\mathrm i\sin(n\alpha)Z,\\
+B_2^{-n}&=\cos(n\beta)I_2-\mathrm i\sin(n\beta)H
+\qquad(n\ge0).
+\end{aligned}
+$$
+
+Using $\Tr Z=\Tr H=0$ and $\Tr(ZH)=2k$, the actual coherence multiplier is
+
+$$
+\begin{aligned}
+f_n&=\Tr(A^n\sigma B^{-n})=p+(1-p)g_n,\\
+g_n&=\tfrac12\Tr(A_2^nB_2^{-n})\\
+&=\cos(n\alpha)\cos(n\beta)+k\sin(n\alpha)\sin(n\beta)\\
+&=w\cos(n\theta_+)+(1-w)\cos(n\theta_-),\\
+w&=\frac{1+k}{2}=\frac12+\frac{\lambda}{D}\in(0,1).
+\end{aligned}
+$$
+
+This keeps the order $A^nB^{-n}$; it does not replace that product by $(AB^{-1})^n$ or require $A,B$ to commute. Let $T_n$ be the first-kind Chebyshev polynomial, with $T_n(\cos\theta)=\cos(n\theta)$. Then $g_n=wT_n(x_+)+(1-w)T_n(x_-)$.
+
+**Exact moments for the first four steps.** Put $M_j=wx_+^j+(1-w)x_-^j$. The quadratic equation for the nodes gives
+
+$$
+\begin{aligned}
+M_0&=1,\qquad M_1=\frac{3\lambda-1}{4},\\
+M_{j+2}&=\frac{\lambda-1}{2}M_{j+1}
++\frac{\lambda+1}{4}M_j\qquad(j\ge0).
+\end{aligned}
+$$
+
+Substituting the recurrence into $T_0=1$, $T_1=x$, $T_2=2x^2-1$, $T_3=4x^3-3x$, and $T_4=8x^4-8x^2+1$ gives each value explicitly:
+
+$$
+\begin{aligned}
+g_0&=1,\\
+g_1&=\frac{3\lambda-1}{4},\\
+g_2&=\frac{3\lambda^2-2\lambda-1}{4},\\
+g_3&=\frac{3\lambda^3-2\lambda^2-2\lambda-1}{4},\\
+g_4&=\frac{3\lambda^4-2\lambda^3-2\lambda^2-2\lambda-1}{4}.
+\end{aligned}
+$$
+
+For $1\le n\le4$, these have the common expression $4g_n=3\lambda^n-2\sum_{j=1}^{n-1}\lambda^j-1$, with an empty sum equal to zero. Using $(1-\lambda)\sum_{j=1}^{n-1}\lambda^j=\lambda-\lambda^n$, without dividing by $\lambda$, yields
+
+$$
+\begin{aligned}
+f_0&=p+(1-p)=1,\\
+f_n&=\frac{1+\lambda+4(1-\lambda)g_n}{5-3\lambda}
+=\lambda^n\qquad(1\le n\le4).
+\end{aligned}
+$$
+
+For example, at $\lambda=0$ one has $p=1/5$, $k=0$, $r=1$, and $x_\pm=(-1\pm\sqrt5)/4$. The same formulas give $(f_0,f_1,f_2,f_3,f_4)=(1,0,0,0,0)$ directly. Negative $\lambda$ uses the same formulas and identities, with no separate change in the dynamics.
+
+**From the scalar to the entire channel.** Write $E_{ij}=\lvert i\rangle\langle j\rvert$. Orthogonality of the system projections gives $W^n=P_0\otimes A^n+P_1\otimes B^n$. The environmental trace on each diagonal matrix unit is $1$; the off-diagonal units acquire $f_n$ and $\overline{f_n}$. Hence for every $X\in M_2(\mathbb C)$,
+
+$$
+\begin{aligned}
+\Psi_n(X)&:=\Tr_E\bigl(W^n(X\otimes\sigma)W^{-n}\bigr)\\
+&=\begin{pmatrix}x_{00}&f_nx_{01}\\\overline{f_n}x_{10}&x_{11}\end{pmatrix}\\
+&=\mathcal D_\lambda^n(X)=\mathcal D_{\lambda^n}(X)
+\qquad(0\le n\le4).
+\end{aligned}
+$$
+
+For any positive integer $s$ and finite untouched reference $R=\mathbb C^s$, expand an arbitrary system–reference matrix as $Y=\sum_{a,b}X_{ab}\otimes F_{ab}$, where $F_{ab}$ are reference matrix units. In the $S\otimes R\otimes E$ order used by $Y\otimes\sigma$, explicitly define the canonical unitary permutation and the actual evolution:
+
+$$
+\begin{aligned}
+J&:S\otimes R\otimes E\longrightarrow S\otimes E\otimes R,\\
+J(u\otimes v\otimes z)&=u\otimes z\otimes v,\\
+\widehat{W}&=J^{-1}(W\otimes I_R)J,\\
+\widehat{W}^{\,n}&=J^{-1}(W^n\otimes I_R)J.
+\end{aligned}
+$$
+
+The permutation fixes the tensor notation; $\widehat{W}$ acts as the identity on the reference and always uses the same $W$. Applying the preceding identity to each $X_{ab}$ gives
+
+$$
+\begin{aligned}
+&\Tr_E\bigl[\widehat{W}^{\,n}(Y\otimes\sigma)
+\widehat{W}^{-n}\bigr]\\
+&\qquad=(\mathcal D_\lambda^n\otimes\operatorname{id}_R)(Y)
+\qquad(0\le n\le4).
+\end{aligned}
+$$
+
+This includes every possibly entangled system–reference density. The initial environment must be independent of the system–reference input. It is prepared once, and the same $W,E,\sigma$ serves every time, with no intermediate intervention, reset, environment replacement, or external clock control. No later refactorization of the joint state is assumed.
+
+**Known scalar method and realization limits.** The nodes $1,x_+,x_-$ and weights $p,(1-p)w,(1-p)(1-w)$ are related to the three-node Gauss–Radau endpoint rule for Poisson–Chebyshev moments: these three nodes match every polynomial moment of degree at most four. This is a known scalar moment method. The evidence here is the direct formulas and the $1+2$ block realization above, rather than an unchecked quadrature theorem. Arbitrary scalar quadrature nodes and weights need not be realizable by common unitary powers in a prescribed environment dimension. See the [account of Radau quadrature](https://mathworld.wolfram.com/RadauQuadrature.html) for the known method; no worldwide mathematical novelty is claimed for this construction.
+
+Combining this construction with the still unformalized arbitrary-density bound in [@rem-arbitrary-density-prefix], $N=4$ gives $5\le d^2$, excluding $d\le2$, while the construction attains $d=3$. Thus, for every $-1<\lambda<1$, the minimum four-step environment dimension, allowing any initial environment density, is $3$ at the level of ordinary written derivation in this precisely defined autonomous qubit dephasing model. This is not a Lean minimality result. The full channel and reference identities remain unformalized; existing Lean checks cover only some parameter, matrix, and trace identities and do not verify the full conclusion. The construction and partial formal evidence are documented in the [result note for trureturing #31054](https://github.com/the-omega-institute/trureturing/issues/31054#issuecomment-6903256672).
+
+Continuing the same recurrence to $T_5=16x^5-20x^3+5x$ gives
+
+$$
+\begin{aligned}
+g_5&=\frac{3\lambda^5-2\lambda^4-2\lambda^3-5\lambda^2+4}{4},\\
+f_5-\lambda^5&=1-\lambda^2>0.
+\end{aligned}
+$$
+
+Thus these matrices fail at the fifth step; they do not exclude another qutrit construction. Exact minimum dimensions for general windows, realization of general compatible trace moments, and approximate resource–error relations remain unresolved. This construction does not extend to the balanced ten-dimensional source channel. It supplies neither a full retained-environment joint-history identity nor a process-tensor identity with inserted interventions, and it establishes no experimental support or model universality.
+
 :::
 
 Alongside energy-conserving $T_2$ dephasing stands energy-relaxing **amplitude damping** ($T_1$ spontaneous emission): an excited state at the south pole ($-1$) emits a quantum of energy into a cold bath and relaxes toward the ground state at the north pole ($+1$). Geometrically, the Bloch ball does not merely shrink around the origin — its center **drifts upward** along the vertical axis via the affine map [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$ ($0 \le \gamma < 1$).

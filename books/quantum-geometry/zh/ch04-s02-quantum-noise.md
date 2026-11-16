@@ -545,7 +545,192 @@ $$
 
 逐项代入即得 $\sum_{j=0}^Kq_jf_j=\sum_\ell\alpha_\ell q(\omega_\ell)=0$，不需要权重为正。若 $N\ge K$，窗口内的等比值便给出 $q(\lambda)=0$；但 $q$ 的根全在单位圆上，而 $|\lambda|<1$，矛盾。因此 $N<K\le d^2$，也就是 $N+1\le d^2$。零与负的 $\lambda$ 均包含在内：第零幂始终为 $1$；在 $\lambda=0$ 时，$q(0)=(-1)^K\prod_\ell\omega_\ell\ne0$。端点 $\lambda=\pm1$ 不满足严格收缩条件，这个矛盾在那里不成立。
 
-对单比特去相位取 $m=2,a=e_0,b=e_1$，对角纯态保持不动、副对角元乘以 $\lambda^n$，恰好满足以上条件。因此 $d=2$ 时 $N\le3$，任意初始环境密度都不能支持一直到第四步的精确共同前缀。这只是所述自主模型的必要界；它不提供一般窗口的精确最小环境维数、一般可达性、近似误差界或任意谱矩数据的物理实现，也不把该条件结论当作普遍物理定律。未受干预的边缘信道恒等式同样不确定保留环境的完整联合态历史或带中间干预的过程张量。上述通用应用的形式化状态仍未核定，不能因其组成结果已有验证而将它称为 Lean 已验证。
+对单比特去相位取 $m=2,a=e_0,b=e_1$，对角纯态保持不动、副对角元乘以 $\lambda^n$，恰好满足以上条件。因此 $d=2$ 时 $N\le3$，任意初始环境密度都不能支持一直到第四步的精确共同前缀。这只是所述自主模型的必要界；四步窗口的三能级可达性另见 [@rem-four-step-qutrit]。该必要界本身不提供一般窗口的精确最小环境维数、一般可达性、近似误差界或任意谱矩数据的物理实现，也不把该条件结论当作普遍物理定律。未受干预的边缘信道恒等式同样不确定保留环境的完整联合态历史或带中间干预的过程张量。上述通用应用的形式化状态仍未核定，不能因其组成结果已有验证而将它称为 Lean 已验证。
+:::
+
+::: {.remark #rem-four-step-qutrit title="一个三能级环境的四步共同实现（书面推导）"}
+
+**普通书面推导，未在本书形式化。** 前面的必要界排除了四步窗口中的二级环境，却没有给出三级环境。这里把环境拆成一条静止的线与一个旋转的二维平面：静止线贡献常数，两套条件旋转在平面上的迹重叠贡献两个余弦。恰当选择它们的角度与权重，就能让同一个六阶酉矩阵的前四个非平凡幂产生所需的等比相干。这里的“平面”是复二维子空间，迹重叠是代数机制，不另引入一个随时间更新的随机环境。
+
+**对象与量词。** 固定任意实数 $-1<\lambda<1$，系统为 $S=\mathbb C^2$，环境为 $E=\mathbb C^3$。对任意复矩阵 $X=(x_{ij})\in M_2(\mathbb C)$，定义
+
+$$
+\mathcal D_\lambda(X)=
+\begin{pmatrix}x_{00}&\lambda x_{01}\\\lambda x_{10}&x_{11}\end{pmatrix},
+\qquad \mathcal D_\lambda^0=\operatorname{id}.
+$$
+
+该映射也可写成 $\frac{1+\lambda}{2}X+\frac{1-\lambda}{2}Z_SXZ_S$，其中 $Z_S=\operatorname{diag}(1,-1)$，故零与负的 $\lambda$ 也给出信道。目标是先为这个 $\lambda$ 选定一组 $W,\sigma$，然后同时覆盖所有输入和 $n=0,1,2,3,4$；不是为每个输入或每个时刻另选实现。第零幂约定为 $1$，包括 $\lambda=0$。
+
+**显式参数。** 以下参数只依赖 $\lambda$：
+
+$$
+\begin{aligned}
+D&=\sqrt{\lambda^2+2\lambda+5},&
+p&=\frac{1+\lambda}{5-3\lambda},\\
+k&=\frac{2\lambda}{D},&r&=\sqrt{1-k^2},\\
+x_+&=\frac{\lambda-1+D}{4},&x_-&=\frac{\lambda-1-D}{4},\\
+\theta_+&=\arccos x_+,&\theta_-&=\arccos x_-,\\
+\alpha&=\frac{\theta_++\theta_-}{2},&
+\beta&=\frac{\theta_--\theta_+}{2}.
+\end{aligned}
+$$
+
+所有分母与根号都有明确的定义域。因为 $D^2=(\lambda+1)^2+4>0$、$5-3\lambda>2$，有
+
+$$
+\begin{aligned}
+0<p<1,\qquad 1-p&=\frac{4(1-\lambda)}{5-3\lambda}>0,\\
+1-k^2&=\frac{(\lambda+1)(5-3\lambda)}{D^2}>0.
+\end{aligned}
+$$
+
+所以 $-1<k<1$、$r>0$。两个节点是 $q(x)=x^2-\frac{\lambda-1}{2}x-\frac{\lambda+1}{4}$ 的根。由 $q(-1)=(\lambda+1)/4>0$、$q(0)=-(\lambda+1)/4<0$、$q(1)=(5-3\lambda)/4>0$，得到 $-1<x_-<0<x_+<1$。于是两个反余弦都取在 $(0,\pi)$，并且 $\alpha-\beta=\theta_+$、$\alpha+\beta=\theta_-$。
+
+**固定的矩阵。** 在环境的二维块上用 $Z,X_P$ 表示 Pauli 矩阵，避免与任意系统输入 $X$ 混淆：
+
+$$
+Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\qquad
+X_P=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+H=kZ+rX_P.
+$$
+
+在 $E=\mathbb C\oplus\mathbb C^2$ 上取
+
+$$
+\begin{aligned}
+A&=1\oplus A_2,\qquad A_2=\cos\alpha\,I_2+\mathrm i\sin\alpha\,Z,\\
+B&=1\oplus B_2,\qquad B_2=\cos\beta\,I_2+\mathrm i\sin\beta\,H,\\
+A&=\begin{pmatrix}
+1&0&0\\0&e^{\mathrm i\alpha}&0\\0&0&e^{-\mathrm i\alpha}
+\end{pmatrix},\\
+B&=\begin{pmatrix}
+1&0&0\\
+0&\cos\beta+\mathrm i k\sin\beta&\mathrm i r\sin\beta\\
+0&\mathrm i r\sin\beta&\cos\beta-\mathrm i k\sin\beta
+\end{pmatrix},\\
+\sigma&=\operatorname{diag}\left(p,\frac{1-p}{2},\frac{1-p}{2}\right).
+\end{aligned}
+$$
+
+令 $P_0=\lvert0\rangle\langle0\rvert$、$P_1=\lvert1\rangle\langle1\rvert$ 为系统投影，并定义唯一使用的联合酉矩阵
+
+$$
+W=P_0\otimes A+P_1\otimes B
+=\begin{pmatrix}A&0_3\\0_3&B\end{pmatrix}
+\quad\text{on }\mathbb C^2\otimes\mathbb C^3.
+$$
+
+这里 $W$ 是 $6\times6$ 矩阵。$Z^*=Z$、$X_P^*=X_P$、$Z^2=X_P^2=I_2$、$ZX_P+X_PZ=0$ 给出 $H^*=H$、$H^2=(k^2+r^2)I_2=I_2$。任意自伴对合 $K$ 都满足 $(\cos t\,I+\mathrm i\sin t\,K)(\cos t\,I-\mathrm i\sin t\,K)=I$，故 $A,B,W$ 均酉。$\sigma$ 的三个对角元严格为正且总和为 $1$，所以它是满秩密度矩阵，并与 $A,B$ 交换。满秩是本见证的选择，不是对所有可能实现的假设；受控形式也是这里的构造，不用于限制前述必要界中的任意 $W$。
+
+**共同幂怎样产生两个余弦。** 对自伴对合的乘法用角度加法公式归纳，得
+
+$$
+\begin{aligned}
+A_2^n&=\cos(n\alpha)I_2+\mathrm i\sin(n\alpha)Z,\\
+B_2^{-n}&=\cos(n\beta)I_2-\mathrm i\sin(n\beta)H
+\qquad(n\ge0).
+\end{aligned}
+$$
+
+利用 $\Tr Z=\Tr H=0$、$\Tr(ZH)=2k$，实际相干乘子为
+
+$$
+\begin{aligned}
+f_n&=\Tr(A^n\sigma B^{-n})=p+(1-p)g_n,\\
+g_n&=\tfrac12\Tr(A_2^nB_2^{-n})\\
+&=\cos(n\alpha)\cos(n\beta)+k\sin(n\alpha)\sin(n\beta)\\
+&=w\cos(n\theta_+)+(1-w)\cos(n\theta_-),\\
+w&=\frac{1+k}{2}=\frac12+\frac{\lambda}{D}\in(0,1).
+\end{aligned}
+$$
+
+这一步保留了 $A^nB^{-n}$ 的次序，不把它偷换成 $(AB^{-1})^n$，也不要求 $A,B$ 交换。令 $T_n$ 为第一类 Chebyshev 多项式，即 $T_n(\cos\theta)=\cos(n\theta)$。于是 $g_n=wT_n(x_+)+(1-w)T_n(x_-)$。
+
+**前四步的精确矩。** 记 $M_j=wx_+^j+(1-w)x_-^j$。节点的二次方程立即给出
+
+$$
+\begin{aligned}
+M_0&=1,\qquad M_1=\frac{3\lambda-1}{4},\\
+M_{j+2}&=\frac{\lambda-1}{2}M_{j+1}
++\frac{\lambda+1}{4}M_j\qquad(j\ge0).
+\end{aligned}
+$$
+
+将递推代入 $T_0=1$、$T_1=x$、$T_2=2x^2-1$、$T_3=4x^3-3x$、$T_4=8x^4-8x^2+1$，逐项得到
+
+$$
+\begin{aligned}
+g_0&=1,\\
+g_1&=\frac{3\lambda-1}{4},\\
+g_2&=\frac{3\lambda^2-2\lambda-1}{4},\\
+g_3&=\frac{3\lambda^3-2\lambda^2-2\lambda-1}{4},\\
+g_4&=\frac{3\lambda^4-2\lambda^3-2\lambda^2-2\lambda-1}{4}.
+\end{aligned}
+$$
+
+其中对 $1\le n\le4$，统一写法为 $4g_n=3\lambda^n-2\sum_{j=1}^{n-1}\lambda^j-1$；空和为零。用 $(1-\lambda)\sum_{j=1}^{n-1}\lambda^j=\lambda-\lambda^n$，无需除以 $\lambda$，便得到
+
+$$
+\begin{aligned}
+f_0&=p+(1-p)=1,\\
+f_n&=\frac{1+\lambda+4(1-\lambda)g_n}{5-3\lambda}
+=\lambda^n\qquad(1\le n\le4).
+\end{aligned}
+$$
+
+例如 $\lambda=0$ 时，$p=1/5$、$k=0$、$r=1$、$x_\pm=(-1\pm\sqrt5)/4$，上述式子直接给出 $(f_0,f_1,f_2,f_3,f_4)=(1,0,0,0,0)$。负的 $\lambda$ 同样使用这些矩阵与恒等式，不另分支修改动力学。
+
+**从标量回到整个信道。** 设 $E_{ij}=\lvert i\rangle\langle j\rvert$。由系统投影的正交性，$W^n=P_0\otimes A^n+P_1\otimes B^n$。两个对角矩阵单位的环境迹均为 $1$，两个非对角矩阵单位分别得到 $f_n$ 与 $\overline{f_n}$。因此对每个 $X\in M_2(\mathbb C)$，
+
+$$
+\begin{aligned}
+\Psi_n(X)&:=\Tr_E\bigl(W^n(X\otimes\sigma)W^{-n}\bigr)\\
+&=\begin{pmatrix}x_{00}&f_nx_{01}\\\overline{f_n}x_{10}&x_{11}\end{pmatrix}\\
+&=\mathcal D_\lambda^n(X)=\mathcal D_{\lambda^n}(X)
+\qquad(0\le n\le4).
+\end{aligned}
+$$
+
+任取正整数 $s$ 与有限维未触碰参考 $R=\mathbb C^s$，将任意系统—参考矩阵写成 $Y=\sum_{a,b}X_{ab}\otimes F_{ab}$，其中 $F_{ab}$ 是参考矩阵单位。在 $Y\otimes\sigma$ 所用的 $S\otimes R\otimes E$ 次序上，显式定义标准酉置换与实际演化：
+
+$$
+\begin{aligned}
+J&:S\otimes R\otimes E\longrightarrow S\otimes E\otimes R,\\
+J(u\otimes v\otimes z)&=u\otimes z\otimes v,\\
+\widehat{W}&=J^{-1}(W\otimes I_R)J,\\
+\widehat{W}^{\,n}&=J^{-1}(W^n\otimes I_R)J.
+\end{aligned}
+$$
+
+置换只固定张量记号；$\widehat{W}$ 在参考上取恒等，并始终使用同一个 $W$。对每个 $X_{ab}$ 使用上一式，得到
+
+$$
+\begin{aligned}
+&\Tr_E\bigl[\widehat{W}^{\,n}(Y\otimes\sigma)
+\widehat{W}^{-n}\bigr]\\
+&\qquad=(\mathcal D_\lambda^n\otimes\operatorname{id}_R)(Y)
+\qquad(0\le n\le4).
+\end{aligned}
+$$
+
+这包括所有可能纠缠的系统—参考密度矩阵；初始环境必须与系统—参考独立。环境只制备一次，同一个 $W,E,\sigma$ 覆盖所有时刻，中间没有干预、重置、环境更换或外部时钟控制，也不假设后续联合态重新因子化。
+
+**已知标量方法与实现的边界。** 节点 $1,x_+,x_-$ 及权重 $p,(1-p)w,(1-p)(1-w)$ 与 Poisson–Chebyshev 矩的三节点 Gauss–Radau 端点求积相联系：这三个节点匹配所有次数不超过四的多项式矩。这是已知的标量矩方法；这里的证据是上面的直接公式与 $1+2$ 块实现，而不是引用一条未经核对的求积定理。任意标量求积节点和权重未必都能由固定维数的共同酉幂实现。有关已知方法可参看 [Radau 求积的说明](https://mathworld.wolfram.com/RadauQuadrature.html)；本构造不承担全球数学新颖性声明。
+
+结合 [@rem-arbitrary-density-prefix] 中仍未形式化的任意密度必要界，$N=4$ 时 $5\le d^2$ 排除 $d\le2$，本构造达到 $d=3$。因此，在这里精确定义的自主单比特去相位模型中，对每个 $-1<\lambda<1$，允许选择任意初始环境密度的四步最小环境维数在普通书面推导层面为 $3$；这不是 Lean 最小性结论。完整信道及参考恒等式尚未形式化；现有 Lean 检查只覆盖部分参数、矩阵与迹恒等式，不能替代完整结论。构造来源与部分形式证据见 [trureturing #31054 的结果说明](https://github.com/the-omega-institute/trureturing/issues/31054#issuecomment-6903256672)。
+
+继续同一递推到 $T_5=16x^5-20x^3+5x$，得到
+
+$$
+\begin{aligned}
+g_5&=\frac{3\lambda^5-2\lambda^4-2\lambda^3-5\lambda^2+4}{4},\\
+f_5-\lambda^5&=1-\lambda^2>0.
+\end{aligned}
+$$
+
+所以这组矩阵不能继续实现第五步；这并不排除另一组三能级矩阵。一般窗口的精确最小维数、一般相容迹矩的实现以及近似资源—误差关系仍未解决。本构造不延伸到源理论卷的平衡十维信道，不给出保留环境的完整联合历史或插入干预的过程张量恒等式，也不提供实验支持或模型普适性结论。
+
 :::
 
 除了“只收腰、不掉高”的相位阻尼外，实验室里还有另一类截然不同的能量耗散过程——**振幅阻尼信道**（amplitude damping，对应自发辐射能量弛豫时间 $T_1$）：处于激发态（南极 $-1$）的量子比特会向低温环境吐出一颗能量光子而跌回基态（北极 $+1$）。因此，在几何上，整颗布洛赫球不仅在往里收缩，而且球心还在往北极 $u = +1$ 方向**整体上漂**：轴向坐标按仿射律 [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$（阻尼率 $0 \le \gamma < 1$）向 $+1$ 聚拢！

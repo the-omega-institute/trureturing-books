@@ -203,11 +203,11 @@ $$
 
 因此，这个书面构造在 $n=0,1,2,3$ 对所有系统矩阵实现 $D_\lambda^n$。它还保持任意有限未触碰参考：将系统—参考矩阵按参考指标写成系统矩阵块 $M_{rs}$，实际演化使用 $W^n\otimes I_R$，初始环境仍为 $\sigma$。对每个 $(r,s)$ 的环境偏迹就是上述作用于 $M_{rs}$ 的线性映射；块相等给出整个系统—参考矩阵相等。这里初始系统—参考可有关联，但环境必须与其独立。这个论证不把系统—参考边缘相等误当成整个联合历史相等，也不假设中间时刻的系统—环境重新成为乘积态。
 
-在 $\lambda=0$ 时，$A=(I+\mathrm{i}Z)/\sqrt2$，$B=\mathrm{i}X$，于是 $f_1=f_2=f_3=0$，但 $A^4=-I$、$B^4=I$，$f_4=-1$。所以此构造的三步窗口不能直接延长为四步；这个特例本身不排除其他构造，任意初始密度下的四步排除由下节的分支历史应用另行给出。私有实验仓库中的固定参数采样另外核对了实际八维演化、环境偏迹与参考量子比特全部矩阵单位，时间 $0$ 至 $3$ 的最大数值误差为 $1.1102230246251565\times10^{-15}$，预定阈值为 $10^{-10}$。这些数值不替代上述代数推导或普遍 Lean 检查。
+在 $\lambda=0$ 时，$A=(I+\mathrm{i}Z)/\sqrt2$，$B=\mathrm{i}X$，于是 $f_1=f_2=f_3=0$，但 $A^4=-I$、$B^4=I$，$f_4=-1$。所以此构造的三步窗口不能直接延长为四步；这个特例本身不排除其他构造，二级环境在任意初始密度下的四步排除由下节的分支历史应用另行给出。私有实验仓库中的固定参数采样另外核对了实际八维演化、环境偏迹与参考量子比特全部矩阵单位，时间 $0$ 至 $3$ 的最大数值误差为 $1.1102230246251565\times10^{-15}$，预定阈值为 $10^{-10}$。这些数值不替代上述代数推导或普遍 Lean 检查。
 
 文献的适用关系也需保留。Levick–Martin 的 *Matrix N-dilations of Quantum Channels*（[arXiv:1808.04677](https://arxiv.org/abs/1808.04677)，定理 10）使用随窗口增大的张量环境，不能直接供应这里固定 $M_2$ 的资源要求。Haagerup–Musat 的因子化判据（DOI [10.1007/s00220-011-1216-y](https://doi.org/10.1007/s00220-011-1216-y)，引理 2.8）供应单次 Schur 乘子的迹酉表示，不自动给出同一个算子的共同幂。圆上 Szegő 求积的矩匹配也不自动将任意节点和权重实现为混合量子比特的两个受控分支。上述对照不宣称文献中不存在这一特殊构造或数学原创性。
 
-这一二能级去相位模型不同于源理论卷第 9.3 节的十维信道；不能拿它反驳该信道的混合量子比特排除结论。本模型任意初始密度下的四步障碍见下节的手工应用；一般窗口的最小环境维数，以及哪些有限矩数据能够由同一对环境酉算子的迹重叠共同实现，仍需独立研究。它们均不是此三步构造的推论。
+这一二能级去相位模型不同于源理论卷第 9.3 节的十维信道；不能拿它反驳该信道的混合量子比特排除结论。本模型二级环境在任意初始密度下的四步障碍见下节的手工应用；四步窗口的三级可达性见“三能级环境的四步共同构造”节。一般窗口的最小环境维数，以及哪些有限矩数据能够由同一对环境酉算子的迹重叠共同实现，仍需独立研究。它们均不是此三步构造的推论。
 
 有限维压缩膨胀的最小维数已有明确文献供应：Eliahu Levy 与 Orr Moshe Shalit，*Dilation theory in finite dimensions: the possible, the impossible and the unknown*，DOI [10.1216/rmj-2014-44-1-203](https://doi.org/10.1216/rmj-2014-44-1-203)，[arXiv:1012.4514v2](https://arxiv.org/abs/1012.4514v2)，定理 1.3 与推论 2.2。对作用于 $n$ 维空间的收缩算子 $T$，记 $d_T=\operatorname{rank}(I-T^*T)^{1/2}$，其酉 $N$ 步压缩膨胀的最小总维数为 $n+Nd_T$。这里的总空间维数与环境维数不是同一资源；用于上述混合环境信道前，仍须从实际共同演化导出符合该定义的同一个压缩表示，并核对其空间维数。后继研究应复用这一下界，而不把它重新计作新定理。
 
@@ -260,4 +260,350 @@ $$
 
 对二能级去相位取 $m=2,a=e_0,b=e_1,d=2$，任意 $\sigma$ 都有 $N\le3$。结合[前述三步显式构造](#混合量子比特环境的三步构造)，对每个固定 $-1<\lambda<1$，允许选择初始密度的二级环境在这一自主共同前缀契约下最多实现三个演化步骤（$n=1,2,3$），且由 $\sigma=I_2/2$ 的同一个 $W$ 达到。该构造要求环境与初始系统及任意有限未触碰参考独立，并实现所有系统矩阵上的信道等式；没有中间干预或重置。
 
-一般窗口的精确最小维数、其他维数下的可达性、近似资源—误差界与有限谱矩的物理实现仍未由这个必要界解决。上述压缩膨胀文献的下界不自动成为信道环境资源界，Levick–Martin 的环境随窗口增长也不提供固定维数的最优性。未受干预的边缘恒等式不确定保留环境的完整联合态历史或干预过程张量；没有物理普适律或实验结论随此界得到。
+这个必要界本身不提供可达性；下一节补上四步窗口的三能级见证。一般窗口的精确最小维数、其余维数与窗口的可达性、近似资源—误差界及一般相容迹矩的物理实现仍未解决。上述压缩膨胀文献的下界不自动成为信道环境资源界，Levick–Martin 的环境随窗口增长也不提供固定维数的最优性。未受干预的边缘恒等式不确定保留环境的完整联合态历史或干预过程张量；没有物理普适律或实验结论随此界得到。
+
+## 三能级环境的四步共同构造
+
+**普通书面推导，未在本书形式化。** 本节保存[第四章中文注记](../../books/quantum-geometry/zh/ch04-s02-quantum-noise.md#rem-four-step-qutrit)及[对应英文注记](../../books/quantum-geometry/en/ch04-s02-quantum-noise.md#rem-four-step-qutrit)的构造与完整初等代数。四步存在性是这里要解释的既有普通数学结果；本节不声明新的冻结定理、形式证明或数学原创发现。
+
+### 对象、契约与分块机制
+
+固定任意实数 $-1<\lambda<1$。在系统 $S=\mathbb C^2$ 上，对所有复矩阵 $X=(x_{ij})$ 定义
+
+$$
+\mathcal D_\lambda(X)=\begin{pmatrix}x_{00}&\lambda x_{01}\\\lambda x_{10}&x_{11}\end{pmatrix}.
+$$
+
+它是 $\frac{1+\lambda}{2}\operatorname{id}+\frac{1-\lambda}{2}\operatorname{Ad}_{Z_S}$，其中 $Z_S=\operatorname{diag}(1,-1)$，所以整个严格实区间都给出信道。自然数第零幂取 $1$，包括 $\lambda=0$。
+
+要为每个这样的 $\lambda$ 选取一个环境 $E=\mathbb C^3$、一个与输入独立的密度矩阵 $\sigma$、一个 $S\otimes E$ 上的酉矩阵 $W$，使同一组数据同时满足
+
+$$
+\Tr_E\bigl(W^n(X\otimes\sigma)W^{-n}\bigr)=\mathcal D_\lambda^n(X)
+\qquad(X\in M_2(\mathbb C),\ 0\le n\le4).
+$$
+
+量词顺序是先固定 $\lambda$、再选 $W,\sigma$、然后对所有输入和所有指定步数成立。环境只初始制备一次；没有中间干预、测量、重置、环境更换、随时间变化的耦合或外部时钟控制。三个环境维数拆成 $\mathbb C\oplus\mathbb C^2$：静止线提供常数项，二维块中两套条件旋转的迹重叠提供两个余弦。下面的矩阵才是这些标量矩确实可实现的依据。
+
+### 参数与全部定义域
+
+设
+
+$$
+\begin{aligned}
+D&=\sqrt{\lambda^2+2\lambda+5},&p&=\frac{1+\lambda}{5-3\lambda},\\
+k&=\frac{2\lambda}{D},&r&=\sqrt{1-k^2},\\
+x_+&=\frac{\lambda-1+D}{4},&x_-&=\frac{\lambda-1-D}{4},\\
+\theta_+&=\arccos x_+,&\theta_-&=\arccos x_-,\\
+\alpha&=\frac{\theta_++\theta_-}{2},&\beta&=\frac{\theta_--\theta_+}{2},\\
+w&=\frac{1+k}{2}=\frac12+\frac{\lambda}{D}.
+\end{aligned}
+$$
+
+因为 $D^2=(\lambda+1)^2+4>0$，有 $D>0$；因为 $-1<\lambda<1$，有 $5-3\lambda>2$、$1+\lambda>0$，并且
+
+$$
+\begin{aligned}
+1-p&=\frac{4(1-\lambda)}{5-3\lambda}>0,\\
+D^2-4\lambda^2&=-3\lambda^2+2\lambda+5
+=(\lambda+1)(5-3\lambda)>0,\\
+1-k^2&=\frac{(\lambda+1)(5-3\lambda)}{D^2}>0.
+\end{aligned}
+$$
+
+故 $0<p<1$、$-1<k<1$、$r>0$、$k^2+r^2=1$、$0<w<1$，所有分母均不为零。
+
+直接计算根的和、积：
+
+$$
+\begin{aligned}
+x_++x_-&=\frac{\lambda-1}{2},\\
+x_+x_-&=\frac{(\lambda-1)^2-D^2}{16}=-\frac{\lambda+1}{4}.
+\end{aligned}
+$$
+
+所以它们是二次多项式
+
+$$
+q(x)=x^2-\frac{\lambda-1}{2}x-\frac{\lambda+1}{4}
+$$
+
+的两个不同实根，且 $x_-<x_+$。又有
+
+$$
+q(-1)=\frac{\lambda+1}{4}>0,\qquad
+q(0)=-\frac{\lambda+1}{4}<0,\qquad
+q(1)=\frac{5-3\lambda}{4}>0.
+$$
+
+连续性在 $(-1,0)$、$(0,1)$ 各给出一根，二次式至多两根，故 $-1<x_-<0<x_+<1$。两角都在 $(0,\pi)$，并满足 $\alpha-\beta=\theta_+$、$\alpha+\beta=\theta_-$。这些检查没有假设 $\lambda\ne0$ 或 $\lambda>0$；端点 $\lambda=\pm1$ 不在本节范围内。
+
+### 实际矩阵、正性与共同幂
+
+将任意输入记为 $X$；Pauli 矩阵专用 $Z,X_P$：
+
+$$
+Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\qquad
+X_P=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad H=kZ+rX_P.
+$$
+
+取 $P_0=\lvert0\rangle\langle0\rvert$、$P_1=\lvert1\rangle\langle1\rvert$ 为系统投影，并定义
+
+$$
+\begin{aligned}
+A_2&=\cos\alpha\,I_2+\mathrm i\sin\alpha\,Z,\\
+B_2&=\cos\beta\,I_2+\mathrm i\sin\beta\,H,\\
+A&=1\oplus A_2
+=\begin{pmatrix}1&0&0\\0&e^{\mathrm i\alpha}&0\\0&0&e^{-\mathrm i\alpha}\end{pmatrix},\\
+B&=1\oplus B_2
+=\begin{pmatrix}
+1&0&0\\
+0&\cos\beta+\mathrm i k\sin\beta&\mathrm i r\sin\beta\\
+0&\mathrm i r\sin\beta&\cos\beta-\mathrm i k\sin\beta
+\end{pmatrix},\\
+\sigma&=\operatorname{diag}\left(p,\frac{1-p}{2},\frac{1-p}{2}\right),\\
+W&=P_0\otimes A+P_1\otimes B
+=\begin{pmatrix}A&0_3\\0_3&B\end{pmatrix}\in M_6(\mathbb C).
+\end{aligned}
+$$
+
+$\sigma$ 三个特征值均正且和为 $1$，所以它是满秩密度；满秩仅是这个见证的选择。$\sigma$ 的二维块为标量，因此与 $A,B$ 交换。由 Pauli 反交换关系，
+
+$$
+\begin{aligned}
+Z^*&=Z,\quad X_P^*=X_P,\quad Z^2=X_P^2=I_2,\quad ZX_P+X_PZ=0,\\
+H^*&=H,\qquad H^2=(k^2+r^2)I_2=I_2.
+\end{aligned}
+$$
+
+若 $K^*=K$、$K^2=I$，则
+
+$$
+\begin{aligned}
+&(\cos t\,I+\mathrm i\sin t\,K)(\cos t\,I-\mathrm i\sin t\,K)\\
+&\qquad=\cos^2t\,I+\sin^2t\,K^2=I.
+\end{aligned}
+$$
+
+反向乘积也相同，故 $A_2,B_2,A,B$ 酉。$P_0P_1=P_1P_0=0$、$P_0+P_1=I_2$ 进一步给出 $WW^*=W^*W=I_2\otimes I_3$。这是一个在所有时刻使用的受控 $6\times6$ 酉矩阵；不是对任意实现的结构假设。
+
+同一个对合的旋转满足
+
+$$
+\begin{aligned}
+&(\cos s\,I+\mathrm i\sin s\,K)(\cos t\,I+\mathrm i\sin t\,K)\\
+&\qquad=\cos(s+t)I+\mathrm i\sin(s+t)K.
+\end{aligned}
+$$
+
+从第零幂归纳，且用共轭转置处理负幂，得到对所有自然数 $n$
+
+$$
+\begin{aligned}
+A_2^n&=\cos(n\alpha)I_2+\mathrm i\sin(n\alpha)Z,\\
+B_2^{-n}&=\cos(n\beta)I_2-\mathrm i\sin(n\beta)H,\\
+W^n&=P_0\otimes A^n+P_1\otimes B^n.
+\end{aligned}
+$$
+
+### 迹重叠与四步矩的完整计算
+
+有 $\Tr Z=\Tr X_P=\Tr H=0$，而
+
+$$
+\Tr(ZH)=k\Tr I_2+r\Tr(ZX_P)=2k.
+$$
+
+将两个旋转相乘，含单个 $Z,H$ 的项迹为零，交叉项中 $\mathrm i(-\mathrm i)=1$，因此
+
+$$
+\begin{aligned}
+g_n&:=\tfrac12\Tr(A_2^nB_2^{-n})\\
+&=\cos(n\alpha)\cos(n\beta)+k\sin(n\alpha)\sin(n\beta)\\
+&=\frac{1+k}{2}\cos(n(\alpha-\beta))
++\frac{1-k}{2}\cos(n(\alpha+\beta))\\
+&=wT_n(x_+)+(1-w)T_n(x_-),\\
+f_n&:=\Tr(A^n\sigma B^{-n})=p+(1-p)g_n.
+\end{aligned}
+$$
+
+$T_n(\cos\theta)=\cos(n\theta)$ 定义第一类 Chebyshev 多项式。这里从未把 $A^nB^{-n}$ 换成 $(AB^{-1})^n$，不要求 $A,B$ 交换。
+
+置 $M_j=wx_+^j+(1-w)x_-^j$。首先
+
+$$
+\begin{aligned}
+M_0&=1,\\
+M_1&=\frac{x_++x_-}{2}+\frac{\lambda}{D}(x_+-x_-)\\
+&=\frac{\lambda-1}{4}+\frac{\lambda}{2}
+=\frac{3\lambda-1}{4}.
+\end{aligned}
+$$
+
+由根方程 $x_\pm^2=\frac{\lambda-1}{2}x_\pm+\frac{\lambda+1}{4}$，乘以 $x_\pm^j$ 再按权重相加，得到对所有 $j\ge0$
+
+$$
+M_{j+2}=\frac{\lambda-1}{2}M_{j+1}+\frac{\lambda+1}{4}M_j.
+$$
+
+逐项代入，完整列出到第五步所需的值：
+
+$$
+\begin{aligned}
+M_2&=\frac{(\lambda-1)(3\lambda-1)+2(\lambda+1)}8
+=\frac{3\lambda^2-2\lambda+3}{8},\\
+M_3&=\frac{(\lambda-1)(3\lambda^2-2\lambda+3)+(\lambda+1)(3\lambda-1)}{16}\\
+&=\frac{3\lambda^3-2\lambda^2+7\lambda-4}{16},\\
+M_4&=\frac{(\lambda-1)(3\lambda^3-2\lambda^2+7\lambda-4)
++(\lambda+1)(3\lambda^2-2\lambda+3)}{32}\\
+&=\frac{3\lambda^4-2\lambda^3+10\lambda^2-10\lambda+7}{32},\\
+M_5&=\frac{(\lambda-1)(3\lambda^4-2\lambda^3+10\lambda^2-10\lambda+7)
++(\lambda+1)(3\lambda^3-2\lambda^2+7\lambda-4)}{64}\\
+&=\frac{3\lambda^5-2\lambda^4+13\lambda^3-15\lambda^2+20\lambda-11}{64}.
+\end{aligned}
+$$
+
+利用 $T_0=1$、$T_1=x$、$T_2=2x^2-1$、$T_3=4x^3-3x$、$T_4=8x^4-8x^2+1$、$T_5=16x^5-20x^3+5x$，各项分别为
+
+$$
+\begin{aligned}
+g_0&=M_0=1,\\
+g_1&=M_1=\frac{3\lambda-1}{4},\\
+g_2&=2M_2-1=\frac{3\lambda^2-2\lambda-1}{4},\\
+g_3&=4M_3-3M_1=\frac{3\lambda^3-2\lambda^2-2\lambda-1}{4},\\
+g_4&=8M_4-8M_2+1
+=\frac{3\lambda^4-2\lambda^3-2\lambda^2-2\lambda-1}{4},\\
+g_5&=16M_5-20M_3+5M_1
+=\frac{3\lambda^5-2\lambda^4-2\lambda^3-5\lambda^2+4}{4}.
+\end{aligned}
+$$
+
+对 $1\le n\le4$，这些值满足 $4g_n=3\lambda^n-2\sum_{j=1}^{n-1}\lambda^j-1$。由于
+
+$$
+(1-\lambda)\sum_{j=1}^{n-1}\lambda^j=\lambda-\lambda^n,
+$$
+
+其中 $n=1$ 时两边均为零，得到
+
+$$
+\begin{aligned}
+1+\lambda+4(1-\lambda)g_n
+&=1+\lambda+3(1-\lambda)\lambda^n
+-2(\lambda-\lambda^n)-(1-\lambda)\\
+&=(5-3\lambda)\lambda^n,\\
+f_n&=\frac{1+\lambda+4(1-\lambda)g_n}{5-3\lambda}
+=\lambda^n\quad(1\le n\le4),\\
+f_0&=p+(1-p)=1.
+\end{aligned}
+$$
+
+整个计算没有除以 $\lambda$。例如 $\lambda=0$ 时，$p=1/5$、$k=0$、$r=1$、$x_\pm=(-1\pm\sqrt5)/4$，故 $(f_0,\ldots,f_4)=(1,0,0,0,0)$。负参数同样覆盖。
+
+第五步则为
+
+$$
+\begin{aligned}
+&(5-3\lambda)(f_5-\lambda^5)\\
+&=1+\lambda+(1-\lambda)
+(3\lambda^5-2\lambda^4-2\lambda^3-5\lambda^2+4)
+-(5-3\lambda)\lambda^5\\
+&=3\lambda^3-5\lambda^2-3\lambda+5\\
+&=(5-3\lambda)(1-\lambda^2).
+\end{aligned}
+$$
+
+因此 $f_5-\lambda^5=1-\lambda^2>0$。这只排除上述固定矩阵的第五步延续，不是一般三能级环境的不可能性结论。
+
+### 全矩阵输入与任意有限未触碰参考
+
+设 $E_{ij}=\lvert i\rangle\langle j\rvert$ 为系统矩阵单位。受控幂的展开给出
+
+$$
+\begin{aligned}
+W^n(E_{00}\otimes\sigma)W^{-n}&=E_{00}\otimes A^n\sigma A^{-n},\\
+W^n(E_{11}\otimes\sigma)W^{-n}&=E_{11}\otimes B^n\sigma B^{-n},\\
+W^n(E_{01}\otimes\sigma)W^{-n}&=E_{01}\otimes A^n\sigma B^{-n},\\
+W^n(E_{10}\otimes\sigma)W^{-n}&=E_{10}\otimes B^n\sigma A^{-n}.
+\end{aligned}
+$$
+
+前两项的环境迹均为 $\Tr\sigma=1$，后两项分别为 $f_n$ 与 $\overline{f_n}$，因为 $\sigma^*=\sigma$。所以对所有复系统矩阵，
+
+$$
+\Psi_n(X)=\begin{pmatrix}x_{00}&f_nx_{01}\\\overline{f_n}x_{10}&x_{11}\end{pmatrix}
+=\mathcal D_{\lambda^n}(X)=\mathcal D_\lambda^n(X)
+\quad(0\le n\le4).
+$$
+
+这不是只核对一个态或若干数值采样。对任意正整数 $s$ 与有限参考 $R=\mathbb C^s$，任意 $Y\in M_{2s}(\mathbb C)$ 可写成 $Y=\sum_{a,b}X_{ab}\otimes F_{ab}$。为在 $Y\otimes\sigma$ 的 $S\otimes R\otimes E$ 次序上写出实际演化，定义标准酉置换
+
+$$
+\begin{aligned}
+J&:S\otimes R\otimes E\longrightarrow S\otimes E\otimes R,\\
+J(u\otimes v\otimes z)&=u\otimes z\otimes v,\\
+\widehat{W}&=J^{-1}(W\otimes I_R)J,\\
+\widehat{W}^{\,n}&=J^{-1}(W^n\otimes I_R)J.
+\end{aligned}
+$$
+
+置换只固定张量记号，参考全过程未触碰；$\widehat{W}$ 始终由同一个 $W$ 给出。初始环境为独立的 $\sigma$，按每个参考矩阵单位应用上一式，得
+
+$$
+\begin{aligned}
+&\Tr_E\bigl[\widehat{W}^{\,n}(Y\otimes\sigma)
+\widehat{W}^{-n}\bigr]\\
+&\qquad=\sum_{a,b}\Psi_n(X_{ab})\otimes F_{ab}
+=(\mathcal D_\lambda^n\otimes\operatorname{id}_R)(Y)
+\quad(0\le n\le4).
+\end{aligned}
+$$
+
+故所有可能纠缠的系统—参考密度矩阵均包含在内。初始环境独立是前提；后续系统—环境无需重新因子化。参考全过程未触碰。这里不推断完整联合态历史相等，也不推断任何插入干预的过程张量规律。
+
+### 标量求积关系与物理实现的区别
+
+Poisson–Chebyshev 概率测度可写成
+
+$$
+\begin{aligned}
+\mathrm d\mu_\lambda(x)
+&=\frac{1-\lambda^2}{\pi(1-2\lambda x+\lambda^2)\sqrt{1-x^2}}\,\mathrm dx
+\quad(-1<x<1),\\
+\int_{-1}^1 T_n(x)\,\mathrm d\mu_\lambda(x)&=\lambda^n\quad(n\ge0).
+\end{aligned}
+$$
+
+其分母中 $1-2\lambda x+\lambda^2\ge(1-|\lambda|)^2>0$，端点的平方根奇性可积。第二式可直接由 $x=\cos\theta$、$0\le\theta\le\pi$ 与 Poisson 核展开得到：
+
+$$
+\frac{1-\lambda^2}{1-2\lambda\cos\theta+\lambda^2}
+=1+2\sum_{j=1}^\infty\lambda^j\cos(j\theta).
+$$
+
+$|\lambda|<1$ 保证一致绝对收敛，可以逐项积分；$\int_0^\pi\cos(n\theta)\,\mathrm d\theta=0$（$n\ge1$），而不同正整数频率正交，同频率平方的积分为 $\pi/2$。故第零矩为 $1$，正整数第 $n$ 矩为 $\lambda^n$，负 $\lambda$ 也包含在内。
+
+上面已直接算出的 $f_0,\ldots,f_4$ 表明
+
+$$
+\int h(x)\,\mathrm d\mu_\lambda(x)
+=p\,h(1)+(1-p)w\,h(x_+)+(1-p)(1-w)\,h(x_-)
+\quad(\deg h\le4),
+$$
+
+因为 $T_0,\ldots,T_4$ 构成次数至多四的多项式空间的一组基。这就是带指定端点 $1$ 的三节点 Gauss–Radau 标量矩规则的关系；方法本身已有经典来源，不作为数学发现。也可将余弦拆成圆周上的五个频率：$1$ 的权重为 $p$，$e^{\pm\mathrm i\theta_+}$ 的权重各为 $(1-p)w/2$，$e^{\pm\mathrm i\theta_-}$ 的权重各为 $(1-p)(1-w)/2$。这些权重均正且总和为 $1$。
+
+标量矩匹配只给数据。本节另以显式 $1+2$ 的 SU(2) 迹嵌入实现了这些特定数据：$A_2,B_2$ 的特征值分别为 $e^{\pm\mathrm i\alpha}$、$e^{\pm\mathrm i\beta}$，行列式都为 $1$。任意给定的标量节点与权重不自动满足一个固定维数物理实现的相容性。本节不依赖未读原始论文中的求积定理来证明构造。
+
+### 最小性、来源与仍未解决的问题
+
+前节及[第四章任意密度注记](../../books/quantum-geometry/zh/ch04-s02-quantum-noise.md#rem-arbitrary-density-prefix)给出的普通必要界适用于任意初始环境密度和任意实际联合酉矩阵。取 $m=2,a=e_0,b=e_1,N=4$，得到 $5\le d^2$，故正整数 $d$ 至少为 $3$；本节达到 $3$。因此，对每个严格实参数 $-1<\lambda<1$，在同一个自主单比特去相位模型、允许任意初始密度的意义下，四步精确最小环境维数在普通书面推导层面为 $3$。本节没有把该必要界或组合最小性升级为 Lean 验证。已有 Lean 检查覆盖参数范围、密度矩阵的半正定性与单位迹、两套条件旋转的酉性及乘法和幂恒等式、$n=0,\ldots,4$ 的迹矩，以及按环境—系统次序编号的六阶分块矩阵的酉性和对角分支迹。这些只是完整推导的部分环节：所有系统矩阵的偏迹组装、系统—环境与环境—系统的类型对应、任意有限参考扩展及完整存在性结论均未得到完整 Lean 验证。任意密度必要界及组合最小性也仍属普通书面推导。完整形式证明的形状尚未确定；不能由这些局部检查推断完整结论已验证。
+
+直接来源与用途如下：
+
+- [trureturing #31054 的构造与部分形式证据](https://github.com/the-omega-institute/trureturing/issues/31054#issuecomment-6903256672)及[结论边界](https://github.com/the-omega-institute/trureturing/issues/31054#issuecomment-6903257082)：本单比特四步共同实现的来源与证据范围。普通证明由本节的参数、矩阵与恒等式给出；局部 Lean 检查不承担完整信道及参考恒等式。
+- [源理论卷 §§9–10](https://github.com/the-omega-institute/trureturing/blob/fa5e97b5e2402d2360c22b2a6996d2e3838bf905/docs/develop/theory/RECURSIVE_RELATIONAL_OBSERVATION_MINIMAL_RECORD_DILATIONS.md#L810-L1058)：§9.1 固定共同前缀契约；Theorem 9.3 处理另一平衡十维信道的两步实现；Theorem 10.1 的正支集历史与复权重 Prony 论证供应既有必要界。书中的通用二态版本是该证明的手工应用，并非源定理逐字陈述。
+- [Radau Quadrature 的二级说明](https://mathworld.wolfram.com/RadauQuadrature.html)：用于说明指定端点的已知标量求积方法。此链接不承担物理实现证明；未独立阅读的 Gautschi、Golub 原始论文不作为本节的证明依据。
+- 本文件的“混合量子比特环境的三步构造”供应已有的 Pauli 迹机制及参考矩阵块扩展思路；本节将明确的三能级四步见证保存为同一研究主题的接续，不重新包装这些基础步骤为新定理。
+
+一般窗口的精确最小维数、一般相容迹矩实现与近似资源—误差关系继续开放。第五步失效只限制这里的矩阵。源理论卷的十维信道没有从本节获得新的上构造。没有实验、物理普适律、无限时间窗、完整联合历史或中间干预规律随本节得到。既有方法、普通推导、部分形式核验及全球新颖性是不同层次；本节给出完整普通推导，并严格保留上述形式证据边界，不作全球新颖性声明。

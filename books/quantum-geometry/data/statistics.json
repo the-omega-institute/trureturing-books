@@ -3,25 +3,25 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 217,
+    "theorem": 218,
     "lemma": 34,
     "proposition": 45,
     "corollary": 31,
     "definition": 49,
     "conjecture": 6,
     "problem": 3,
-    "example": 131,
-    "remark": 213,
-    "proof": 322,
-    "lean_verified": 324,
+    "example": 132,
+    "remark": 214,
+    "proof": 323,
+    "lean_verified": 325,
     "written_proof": 3,
-    "literature": 199
+    "literature": 198
   },
-  "total": 689,
+  "total": 690,
   "kinds": {
     "def": 204,
     "inductive": 11,
-    "theorem": 474
+    "theorem": 475
   },
   "groups": {
     "theorems": [
@@ -131,6 +131,7 @@
       "D5/S3/DivergenceSupport/LandauerSaturation.landauer_strict_iff",
       "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula",
       "D5/S3/Factorization/PrimeLogIndependence.prime_log_indep",
+      "D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.failure_count_le",
       "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure",
       "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.cartesian_chain",
       "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift",
@@ -7893,6 +7894,18 @@
           "file": "ch22-s03-finite-prime-sieves.md",
           "line": 17,
           "id": "thm-prime-log-independence",
+          "via": "environment"
+        }
+      ]
+    },
+    "D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.failure_count_le": {
+      "kind": "theorem",
+      "name": "HalfOrderSynchronization.failure_count_le",
+      "citations": [
+        {
+          "file": "ch15-grover-qft-and-period-finding.md",
+          "line": 783,
+          "id": "thm-half-order-family-failure-count",
           "via": "environment"
         }
       ]
@@ -16735,7 +16748,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 703,
+          "line": 888,
           "id": "def-trace-distance",
           "via": "environment"
         },
@@ -16753,7 +16766,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 713,
+          "line": 898,
           "id": "prop-trace-distance-metric-contraction",
           "via": "environment"
         },
@@ -16783,7 +16796,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 713,
+          "line": 898,
           "id": "prop-trace-distance-metric-contraction",
           "via": "environment"
         },
@@ -16801,7 +16814,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 713,
+          "line": 898,
           "id": "prop-trace-distance-metric-contraction",
           "via": "environment"
         },
@@ -16819,7 +16832,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 713,
+          "line": 898,
           "id": "prop-trace-distance-metric-contraction",
           "via": "environment"
         },
@@ -16837,7 +16850,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 713,
+          "line": 898,
           "id": "prop-trace-distance-metric-contraction",
           "via": "environment"
         },
@@ -21217,7 +21230,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 572,
+          "line": 757,
           "id": "",
           "via": "inline"
         }
@@ -21229,7 +21242,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 559,
+          "line": 744,
           "id": "prop-amplitude-damping-contraction",
           "via": "environment"
         }
@@ -21241,7 +21254,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 557,
+          "line": 742,
           "id": "",
           "via": "inline"
         }
@@ -21253,7 +21266,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 551,
+          "line": 736,
           "id": "",
           "via": "inline"
         }
@@ -21313,7 +21326,7 @@
       "citations": [
         {
           "file": "ch04-s02-quantum-noise.md",
-          "line": 604,
+          "line": 789,
           "id": "thm-north-pole-ball-criterion",
           "via": "environment"
         },
@@ -24041,6 +24054,7 @@
       "environment": [
         "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.candidates",
         "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log",
+        "D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.failure_count_le",
         "D5/S3/Fourier/FinitePoisson.finite_poisson_summation",
         "D5/S3/Fourier/FinitePoisson.sum_annihilator_character",
         "D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation",
