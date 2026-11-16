@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "7b0722558ee4d59806572a83cef3c75695780dc2",
-  "pinned_at": "2026-11-16T01:22:16Z",
+  "pinned_at": "2026-11-16T02:29:33Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1868,6 +1868,14 @@
       "statement_id": "sha256:948f581f4c54ea111495e1f0467dfd1210f011e8a9042821a5c8716e7eb1d301",
       "line": 61,
       "signature": "theorem prime_log_indep (S : Finset ℕ) (k : ℕ → ℤ) (hp : ∀ p ∈ S, p.Prime) (h : ∑ p ∈ S, (k p : ℝ) * Real.log p = 0) : ∀ p ∈ S, k p = 0"
+    },
+    "D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.failure_count_le": {
+      "module": "D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization",
+      "name": "HalfOrderSynchronization.failure_count_le",
+      "kind": "theorem",
+      "statement_id": "sha256:1ea12a9a57ee5317d74919c7bb39deb24c09e4c4fb901a919fd593a37f9b335c",
+      "line": 139,
+      "signature": "theorem failure_count_le {I : Type*} [Fintype I] [Nonempty I] {G : I → Type*} [∀ i, Group (G i)] [∀ i, Fintype (G i)] [∀ i, IsCyclic (G i)] (epsilon : ∀ i, G i) (he : ∀ i, orderOf (epsilon i) = 2) : Nat.card {x : ∀ i, G i // ¬ (Even (orderOf x) ∧ x ^ (orderOf x / 2) ≠ epsilon)} * 2 ^ (Fintype.card I - 1) ≤ Nat.card (∀ i, G i)"
     },
     "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.fluid_gap_from_mixed": {
       "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
