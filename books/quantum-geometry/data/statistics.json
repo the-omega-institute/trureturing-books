@@ -3,25 +3,25 @@
   "book": "quantum-geometry",
   "lang": "zh",
   "environments": {
-    "theorem": 216,
+    "theorem": 217,
     "lemma": 34,
     "proposition": 45,
     "corollary": 31,
     "definition": 49,
     "conjecture": 6,
     "problem": 3,
-    "example": 130,
+    "example": 131,
     "remark": 214,
-    "proof": 321,
-    "lean_verified": 323,
+    "proof": 322,
+    "lean_verified": 324,
     "written_proof": 3,
     "literature": 199
   },
-  "total": 688,
+  "total": 689,
   "kinds": {
     "def": 204,
     "inductive": 11,
-    "theorem": 473
+    "theorem": 474
   },
   "groups": {
     "theorems": [
@@ -316,6 +316,7 @@
       "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut",
       "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut",
       "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result",
+      "D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction",
       "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras",
       "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase",
       "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result",
@@ -19758,6 +19759,18 @@
         }
       ]
     },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction": {
+      "kind": "theorem",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.RestrictedFlatSpectrum.obstruction",
+      "citations": [
+        {
+          "file": "ch19-tensor-networks-and-holography.md",
+          "line": 273,
+          "id": "thm-bridge-scalar-gram-obstruction",
+          "via": "environment"
+        }
+      ]
+    },
     "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras": {
       "kind": "theorem",
       "name": "D5.S3.Quantum.Tomography.ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras",
@@ -24231,7 +24244,8 @@
         "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained",
         "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut",
         "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut",
-        "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
+        "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result",
+        "D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction"
       ],
       "inline": [
         "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"

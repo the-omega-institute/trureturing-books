@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "3119957fe9f2a389cf480368c5ca0f51a0d02f65",
-  "pinned_at": "2026-11-15T21:05:04Z",
+  "commit": "7b0722558ee4d59806572a83cef3c75695780dc2",
+  "pinned_at": "2026-11-16T01:22:16Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -3121,7 +3121,7 @@
       "module": "D5/S3/Quantum/Analysis/TrotterProduct",
       "name": "NormedSpace.trotter_product",
       "kind": "theorem",
-      "statement_id": "sha256:b78c3ef1a6145974cc609403682884919874724dbc0acea517782732b648a77f",
+      "statement_id": "sha256:76a369e1260e0750738f4c60a51b99d9537a00959ff613a3e1a6d536500aaceb",
       "line": 230,
       "signature": "theorem trotter_product (A B : 𝔸) : Filter.Tendsto (fun n : ℕ => (exp ((n : ℝ)⁻¹ • A) * exp ((n : ℝ)⁻¹ • B)) ^ n) Filter.atTop (nhds (exp (A + B)))"
     },
@@ -4612,6 +4612,14 @@
       "statement_id": "sha256:06aeda0a0a7b05ee56b3db072016c177d52684f278224603dac7e149e7c4f8ee",
       "line": 116,
       "signature": "theorem result : claim"
+    },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.RestrictedFlatSpectrum.obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:e1558dc48cab9c6ef75f05e01f53a07bcd79f9017ff09050e87645cda2c72a96",
+      "line": 136,
+      "signature": "theorem obstruction {a b c d : ℕ} (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin d) (Fin c) ℂ) (hc : 0 < c) (hab : 2 * a < b) (lam : ℝ) (hlam : 0 < lam) (hF : (QuantumMaxFlowBound.flow M N)ᴴ * QuantumMaxFlowBound.flow M N = (lam : ℂ) • 1) : 3 * c ≤ d"
     },
     "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras": {
       "module": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras",
