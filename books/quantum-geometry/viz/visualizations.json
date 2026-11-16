@@ -5864,6 +5864,177 @@
         }
       ],
       "lean": []
+    },
+    {
+      "id": "trihedron-chord-pivot-tunneling-sandbox",
+      "code": "CHORD//TUNNEL",
+      "title": "CHORD//TUNNEL · 极小圆弧体内割面隧穿与多尺度枢轴全息锥沙盘",
+      "title_en": "CHORD//TUNNEL · Minimal Arc-Trihedron Interior-Chord Tunneling & Multi-Scale Pivot Holographic Cone Sandbox",
+      "summary": "单位球上的极小圆弧体 ΔT_ε 画成受光的实体：从 A 到 C 有三条路——爬两面紫色正交侧壁 2ε（在直角顶点 B 处付全局排序的比较税）、走品红外凸顶盖的测地弧 arccos(cos²ε)、穿青色内割弦 √2 sin ε，三者的先后在 ε ∈ [10°, 90°] 上逐度不翻。弦中点沉到 r = √((1 + cos²ε)/2)，品红月牙是被削掉的鼓包；六点最小—加矩阵的热带舒尔消元取到这条弦，同一张弦图上的部分矩阵有正半定补全。N 个边界点每 k 个凝成一颗枢轴，一层层沉到与弦中点同深；厚势垒对共振中继，芝诺探针把读头压回双壁。五张实验卡可独立引用。",
+      "summary_en": "The minimal arc-trihedron ΔT_ε on the unit sphere as a lit solid: three routes from A to C — climbing the two violet orthogonal walls, 2ε (paying a global sort at the right-angle corner B), the geodesic arc of the magenta convex cap, arccos(cos²ε), and the cyan interior chord, √2 sin ε — whose order never flips over ε ∈ [10°, 90°]. The chord midpoint sinks to r = √((1 + cos²ε)/2), and the magenta crescent is the bulge cut away; a tropical Schur elimination of a six-vertex min-plus matrix lands on the chord, and a partial matrix on the same chordal graph has a PSD completion. N boundary points condense k at a time into pivots that sink level by level as deep as the chord midpoint; a thick barrier against a resonant relay, and a Zeno probe that sends the head back onto the walls. Five independently citable experiments.",
+      "path": "trihedron-chord-pivot-tunneling-sandbox/",
+      "thumbnail": "trihedron-chord-pivot-tunneling-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 34,
+      "section": "34.26",
+      "presets": [
+        "walls-dijkstra-tax",
+        "cap-wavefront-relax",
+        "flat-chord-tunnel",
+        "holographic-pivot-cone",
+        "resonant-pivot-relay"
+      ],
+      "preset_titles": {
+        "walls-dijkstra-tax": {
+          "zh": "正交双侧壁爬坡与全局排序比较税",
+          "en": "Orthogonal twin-wall climb and global sorting tax"
+        },
+        "cap-wavefront-relax": {
+          "zh": "外凸球面顶盖铺波与免排序局部松弛",
+          "en": "Convex spherical-cap wavefront and unsorted local relaxation"
+        },
+        "flat-chord-tunnel": {
+          "zh": "平直内割弦面削鼓包与热带舒尔消元",
+          "en": "Flat interior-chord cut and tropical Schur elimination"
+        },
+        "holographic-pivot-cone": {
+          "zh": "向心全息重整化锥与点波场体八度跳跃",
+          "en": "Centripetal holographic pivot cone and octave bulk jump"
+        },
+        "resonant-pivot-relay": {
+          "zh": "阿格蒙瞬子捷径、芝诺探针阻断与共振隧穿中继",
+          "en": "Agmon instanton shortcut, Zeno probe damping, and resonant pivot relay"
+        }
+      },
+      "tags": [
+        "极小圆弧体",
+        "内割弦隧穿",
+        "热带舒尔补",
+        "弦图正半定补全",
+        "枢轴全息锥",
+        "共振隧穿"
+      ],
+      "tags_en": [
+        "Arc-trihedron",
+        "Interior-chord tunneling",
+        "Tropical Schur complement",
+        "Chordal PSD completion",
+        "Pivot holographic cone",
+        "Resonant tunneling"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.26 · 极小圆弧体内割弦面、打破排序壁垒的枢轴八度重整化与瞬子隧穿",
+          "label_en": "Chapter 34 §34.26 · Minimal Arc-Trihedron Interior-Chord Cuts, Pivot Octave Renormalization Breaking the Sorting Barrier, and Instanton Tunneling",
+          "href": "../zh/ch34-s26-chord-tunneling-and-pivot-renormalization.html#sec-ch34-chord-tunneling-and-pivot-renormalization",
+          "href_en": "../en/ch34-s26-chord-tunneling-and-pivot-renormalization.html#sec-ch34-chord-tunneling-and-pivot-renormalization"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/QuadraticForms/ChordalPsdCompletion.exists_posSemidef_completion"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition"
+        }
+      ]
+    },
+    {
+      "id": "imaginary-chord-temporal-double-slit-sandbox",
+      "code": "IMAG//TUNNEL",
+      "title": "IMAG//TUNNEL · 量子隧穿正交虚空间割弦与阿秒时间双缝自干涉统一沙盘",
+      "title_en": "IMAG//TUNNEL · Orthogonal Imaginary-Chord Quantum Tunneling & Attosecond Temporal Double-Slit Self-Interference Sandbox",
+      "summary": "真实单位的电子（V₀ = 1.00 eV，E/V₀ ∈ [0.10, 1.40]，L ∈ [0.20, 1.20] nm）穿过矩形势垒：舞台画定态 ψ(x)e^(−iEt/ℏ) 本身，竖直的实平面 I 与水平的盲平面 i 沿传播轴 x 正交，后墙与地面是它们的投影屏。墙口动量转 90°（p = îℏκ），墙里是一条不绕圈、单调变细的割弦，墙尾转回实轴，振幅 √T(E)；平视时墙里几乎看不见，俯瞰时是一座桥。两道 120 as 的时间快门把同一个电子分成两支，能谱屏上条纹间距 ΔE = h/Δt，暗纹处两支 100% 相消；中途实轴探针把相干 V 降成 1 − p，条纹塌成包络，芝诺链压低相干穿透。五张实验卡可独立引用。",
+      "summary_en": "A real electron (V₀ = 1.00 eV, E/V₀ ∈ [0.10, 1.40], L ∈ [0.20, 1.20] nm) crossing a rectangular barrier: the stage draws the stationary state ψ(x)e^(−iEt/ℏ) itself, with the vertical real plane I and the horizontal blind plane i meeting at right angles along the axis x and the back wall and floor as their projection screens. At the entrance the momentum turns by 90° (p = îℏκ); inside the wall a chord narrows without winding and turns back to the real axis with amplitude √T(E) — almost invisible from the side, a bridge from above. Two 120 as time gates split one electron into two branches whose spectrum shows fringes ΔE = h/Δt with 100% cancellation at the dark nodes; a midway real-axis probe lowers the coherence to V = 1 − p, flattens the fringes and, as a Zeno chain, suppresses coherent tunneling. Five independently citable experiments.",
+      "path": "imaginary-chord-temporal-double-slit-sandbox/",
+      "thumbnail": "imaginary-chord-temporal-double-slit-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 34,
+      "section": "34.27",
+      "presets": [
+        "classical-real-wall",
+        "ninety-deg-imaginary-chord",
+        "temporal-double-slit-comb",
+        "attosecond-tunnel-self-interference",
+        "zeno-midway-probe-collapse"
+      ],
+      "preset_titles": {
+        "classical-real-wall": {
+          "zh": "经典实轴撞墙折返与负动能平方死锁",
+          "en": "Classical real-axis wall reflection and negative kinetic square"
+        },
+        "ninety-deg-imaginary-chord": {
+          "zh": "90° 正交偏转潜入虚平面 i 与内割衰减弦桥",
+          "en": "90° turn into orthogonal plane i and interior-chord bridge"
+        },
+        "temporal-double-slit-comb": {
+          "zh": "双时间快门 (t₁, t₂) 与能谱频率梳条纹 ΔE = h/Δt",
+          "en": "Dual time gates (t₁, t₂) and spectral fringe comb ΔE = h/Δt"
+        },
+        "attosecond-tunnel-self-interference": {
+          "zh": "阿秒隧穿双缝：虚盲区暗河与跨时刻自干涉",
+          "en": "Attosecond tunneling double slit and cross-time self-interference"
+        },
+        "zeno-midway-probe-collapse": {
+          "zh": "势垒/时间中途实轴探针与芝诺退相干崩解",
+          "en": "Midway real-axis probe and Zeno / which-time fringe collapse"
+        }
+      },
+      "tags": [
+        "量子隧穿",
+        "虚平面 i",
+        "割弦",
+        "阿秒时间双缝",
+        "能谱条纹",
+        "量子芝诺"
+      ],
+      "tags_en": [
+        "Quantum tunneling",
+        "Blind plane i",
+        "Interior chord",
+        "Attosecond time double slit",
+        "Spectral fringes",
+        "Quantum Zeno"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.27 · 虚平面割弦与阿秒时间双缝",
+          "label_en": "Chapter 34 §34.27 · The imaginary chord and the attosecond time double slit",
+          "href": "../zh/ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.html#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit",
+          "href_en": "../en/ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.html#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
+        }
+      ]
     }
   ]
 }

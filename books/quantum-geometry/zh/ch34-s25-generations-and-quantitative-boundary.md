@@ -78,7 +78,7 @@
    - 电磁精细结构常数本身甚至**不是**一个与标度无关的纯几何常数，而是随重整化能标 $\mu$ 连续跑动的有效耦合 $\alpha(\mu)$——从零动量汤姆孙极限的 $\alpha(0)^{-1} \approx 137.035999$，单调跑动至电弱 $Z$ 玻色子质量极点 $\mu = m_Z \approx 91.1876\;\mathrm{GeV}$ 处的五味修正最小减除（$\overline{\mathrm{MS}}$）基准值 $\widehat{\alpha}^{(5)}_{\overline{\mathrm{MS}}}(m_Z)^{-1} = 127.930 \pm 0.008$（PDG 2024）！任何忽略能标跑动而企图用单个静态代数式硬套 $137.035999$ 的做法，在重整化群意义下都是自相矛盾的。
 :::
 
-## 34.25.3 四级认识论分层账本、反数字命理学护栏与第三十四章收束移交 {#sec-ch34-25-3}
+## 34.25.3 四级认识论分层账本、反数字命理学护栏与压力测试长廊收束移交 {#sec-ch34-25-3}
 
 综合上述签名审计与三重反例，我们将第三十四章涉及粒子物理标准模型的所有命题严格安放进一张四级认识论审计账本，并立下明确的反数字命理学方法论护栏：
 
@@ -98,7 +98,7 @@
    在物理学史上，围绕 $137$、轻子质量比 $m_\mu / m_e \approx 206.768$ 或科伊德（Koide）经验关系曾出现大量用 $\pi$、黄金比 $\varphi$、Tribonacci 常数 $\beta_3$ 与小整数幂次事后拼凑十进制小数的尝试。本书严格执行以下排他准则：**凡未同时给出重整化能标 $\mu$、圈图正规化方案及整套耦合矩阵动力学方程，仅凭代数常数拼出某单一能标近似小数的做法，一律判定为事后曲线拟合（numerological curve-fitting）而非科学推导，在本书中予以零容忍剔除。**
 :::
 
-我们将标准模型离散代数与连续耦合谱的第一性原理定量推导正式列为本章收官的开放问题：
+我们将标准模型离散代数与连续耦合谱的第一性原理定量推导正式列为六节认识论压力测试长廊收官的开放问题：
 
 ::: {.problem #prob-ch34-sm-generations-and-couplings title="从离散比较几何导出三代手征费米子重数与标准模型连续耦合谱的开放问题"}
 在不依赖事后数值拼凑且遵守[附录 E](appendix-e.md#sec-appe-audit-table) 连续统桥接审计的前提下，能否构造一套紫外完备的离散比较或非交换/克利福德几何场论机制，同时严格解决以下三项定量难题：
@@ -110,6 +110,6 @@
 
 ---
 
-**第三十四章方法论收束（[§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–[§34.25](#sec-ch34-generations-and-quantitative-boundary)）与向第三十五章的移交。** 走到这里，横亘在第三十四章末尾的六节认识论压力测试长廊已全部合拢：从球面吸引盆、有界鞅抽样律与单次记录选支实现边界（[§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)），格拉姆可行走廊内的物理因果干预、受约束控制与锚定感知—行动和乐（[§34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy)），八度记忆重整化、预测充分统计蒸馏与最小兰道尔散热（[§34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning)），以及低熵过去假设双重初始条件与自指视界盲点对宇宙学常数 $\Lambda_{\mathrm{cos}}$ 的反循环边界（[§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)），再到绕向奇偶相消对照正矢高合成及自旋-$2$ 引力动力学边界（[§34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition)）与三代费米子重数及标准模型约二十个连续自由参数前沿（[§34.25](#sec-ch34-generations-and-quantitative-boundary)）的逐项反例审计，我们没有靠遮掩裂缝来粉饰“万象归宗”，而是用**一枚枚可手算核验的反例界碑**把形式化铁律（`LEAN`）、经典场论定理（`文献结果`）、统一几何架构（`MODEL`）与未决科学边疆（`OPEN`）锻造得壁垒分明。
+**认识论压力测试长廊收束（[§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–[§34.25](#sec-ch34-generations-and-quantitative-boundary)）与向 [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)–[§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 收官双阶的移交。** 走到这里，横亘在第三十四章后段的六节认识论压力测试长廊已全部合拢：从球面吸引盆、有界鞅抽样律与单次记录选支实现边界（[§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)），格拉姆可行走廊内的物理因果干预、受约束控制与锚定感知—行动和乐（[§34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy)），八度记忆重整化、预测充分统计蒸馏与最小兰道尔散热（[§34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning)），以及低熵过去假设双重初始条件与自指视界盲点对宇宙学常数 $\Lambda_{\mathrm{cos}}$ 的反循环边界（[§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor)），再到绕向奇偶相消对照正矢高合成及自旋-$2$ 引力动力学边界（[§34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition)）与三代费米子重数及标准模型约二十个连续自由参数前沿（[§34.25](#sec-ch34-generations-and-quantitative-boundary)）的逐项反例审计，我们没有靠遮掩裂缝来粉饰“万象归宗”，而是用**一枚枚可手算核验的反例界碑**把形式化铁律（`LEAN`）、经典场论定理（`文献结果`）、统一几何架构（`MODEL`）与未决科学边疆（`OPEN`）锻造得壁垒分明。
 
-当外向的物理时空、规范力场与物质谱边界已被擦拭得清清楚楚，最后一道追问便自然折回到握着这把比较标尺的**观察者自身**：如果宇宙底层没有预设全局绝对时钟，一位有限记忆带宽的观察者究竟如何在每一次“遗忘初始化”之后乘着一束光重新醒来，又如何借一张不断把自身读数写回自身的自指记忆表 $T = T(T)$，闭合出知觉与计算的同像回路？让我们翻开[第三十五章](ch35-light-pulse-and-self-referential-table.md)，迈入自指扩表的新篇章。
+当外向的物理时空、规范力场与物质谱边界已被擦拭得清清楚楚，极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的球肚内部与 $90^\circ$ 正交虚数盲区 `i` 随即迎来本章最后两级压轴综合：首先在 [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization) 中，我们将看到放弃侧壁逐点全局排队、先铺球面顶盖无序波前再切入圆弧体“平直内割弦面”的枢轴八度重整化，如何一举击穿屹立四十年的最短路径排序壁垒并同构于欧氏瞬子隧穿；紧接着在 [§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 中，我们将空间虚割弦穿墙隧穿与阿秒时间双缝跨时刻自干涉统一收束进同一片 $90^\circ$ 虚数盲区 `i`，为整座第三十四章二十七阶穹顶落下最后一块拱顶石，并把接力棒正式移交给[第三十五章](ch35-light-pulse-and-self-referential-table.md)的自指扩表观察者。让我们先步入 [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)，切开极小圆弧体的平直内割弦面。
