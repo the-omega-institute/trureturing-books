@@ -7,6 +7,10 @@
 
 Each theorem declares its evidence. Lean-verified results cite declarations verified by the Lean 4 kernel and frozen on the `dev` branch of [trureturing](https://github.com/the-omega-institute/trureturing), pinned in [trureturing.lock.json](trureturing.lock.json). Proved source results without a matching frozen declaration carry an explicit written-proof status, a complete argument, provenance, and a formalization request; authors and reviewers are responsible for those proofs. The aligned Chinese and English editions publish online HTML, screen and print PDFs, single-column research preprint PDFs, and MathML-enabled EPUB 3.
 
+提交 Issue、PR 和创建工作分支前，请阅读 [贡献与协作规范](CONTRIBUTING.md)。
+
+Read the [contribution guidelines](CONTRIBUTING.md) before opening an issue or pull request or creating a working branch.
+
 ---
 
 ## 在编专著 · Featured Monograph
