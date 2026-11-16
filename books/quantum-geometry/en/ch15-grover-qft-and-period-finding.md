@@ -1216,6 +1216,161 @@ Finite lists and executable modular exponentiation specify a computation. The lo
 **When the period does not divide, the peaks spread.** $Q = 64$ and period $6$: the magenta marks $sQ/r$ fall between integers at $10.67$, $21.33$ and so on, and each peak spreads over neighbouring cells — $k = 11$ has $0.115$, $k = 10$ only $0.026$, and the six cells nearest $sQ/r$ carry $0.80$ together; the continued fraction of the amber-framed $k = 11$ reads $\frac{1}{6}$. This card specifies no actual modulus and base with which to check $N^2\le Q$, so its concentration and reading remain a numerical teaching example. The conditional membership theorems above do not certify this card's last-convergent rule or identify its conditioned-comb peak heights with the actual marginal probabilities.
 :::
 
+**Application: halve repeatedly while preserving the same base's half-order power.** The exponent $12$ above passed the modular-power test but turned the half-order power into $1$. We can ask a smaller question: after halving the current exponent, does the same base still return to $1$? If it does, halve and ask again; otherwise stop. This step needs neither prior knowledge of the true order nor a complete prime factorization of the exponent. It removes excess factors of $2$ from a returning exponent. The odd multiple left behind can still exceed the true order.
+
+State the rule in its full generality. Let $G:\operatorname{Type}\,u$ be a monoid with decidable equality, expressed by `Monoid G` and `DecidableEq G`. For $x\in G$ and a natural number $m$, define
+
+```text
+stripTwos x m =
+  if 0 < m ∧ m % 2 = 0 ∧ x ^ (m / 2) = 1
+  then stripTwos x (m / 2)
+  else m
+```
+
+Division here is natural-number quotient. All three conditions must hold for a recursive call; otherwise the current exponent is returned. The inputs are only $x,m$, with no unknown $r=\operatorname{orderOf}(x)$ supplied. A monoid needs associativity and an identity; it need not be a group, finite, commutative, or cancellative. Actual evaluation also requires computable multiplication, identity, and equality. Every recursive call has $0<m/2<m$: a positive even number is at least $2$, and division by $2$ strictly decreases a positive natural number. Thus the natural measure $m$ proves termination. At $m=0$ the first condition fails and the output is $0$. Termination alone gives no bit or gate complexity bound.
+
+::: {.theorem #thm-shor-verified-multiple-halving title="Executable halving of a positive returning exponent" lean="D5/S3/FiniteGroups/Cyclic/VerifiedMultipleHalving.stripTwos_correct"}
+Let $G:\operatorname{Type}\,u$ be any monoid with decidable equality. For $x\in G$ and $m\in\mathbb N$, assume $m>0$ and $x^m=1$. Put $M=\operatorname{stripTwos}(x,m)$ and $r=\operatorname{orderOf}(x)$. Then all of the following hold:
+
+1. $M>0$;
+2. $M\mid m$;
+3. $x^M=1$;
+4. there is a natural number $k$ such that $m=2^kM$;
+5. $M/r$ is odd;
+6. if $r$ is even, then $M$ is even and $x^{M/2}=x^{r/2}$;
+7. if $r$ is odd, then $M$ is odd.
+:::
+
+Here $r$ is automatically positive: the positive returning exponent and `orderOf_dvd_iff_pow_eq_one` give $r\mid m$, and zero cannot divide a positive number. The third clause similarly gives $r\mid M$, so the natural quotient in the fifth clause satisfies $M=r(M/r)$. This is not a claim about the floor of a nonintegral ratio. Zero has a defined output but lies outside the correctness statement: every element satisfies $x^0=1$, including elements with no positive returning exponent, for which `orderOf` is defined to be $0$. A zeroth power therefore cannot establish positive order.
+
+::: proof
+Use strong induction on the current positive exponent $n$, retaining four properties together: the output is positive, $n$ is a power of $2$ times the output, the output still returns $x$ to $1$, and its quotient by $r$ is odd. A continuation passes the problem to the smaller $n/2$, rather than assuming the same claim again at the original fixed $m$. If recursion gives $n/2=2^kM$, the evenness test yields
+
+$$
+n=2(n/2)=2\cdot2^kM=2^{k+1}M.
+$$
+
+Each successful halving increments the witness $k$; a terminal branch uses $k=0$. This constructs the natural witness in the fourth clause and supplies the divisibility in the second. Positivity and return to the identity are retained through the recursive premises.
+
+At a terminal branch the output is the current positive $n$ and $x^n=1$. We have $r\mid n$. If the quotient were even, write $n/r=2j$; then
+
+$$
+n=2rj,\qquad n/2=rj,\qquad
+x^{n/2}=(x^r)^j=1.
+$$
+
+All three continuation conditions would hold, contradicting termination at that branch. The quotient must be odd. This uses the usual order-divisibility and parity argument; the corresponding terminal property also appears as `div_orderOf_odd_of_pow_ne_one` in `SymbolicQuantum/Shor/ReductionLemmas.lean`, with no claim that it is a new mathematical fact.
+
+Finally write $M/r=2t+1$. If $r$ is even, $M=r(2t+1)$ is even, and natural division gives
+
+$$
+\begin{aligned}
+M/2&=rt+r/2,\\
+x^{M/2}&=x^{rt}x^{r/2}
+=(x^r)^t x^{r/2}=x^{r/2}.
+\end{aligned}
+$$
+
+If $r$ is odd, $M=r(2t+1)$ is a product of odd numbers and is odd. Every power belongs to the same element; no interchange of different elements or cancellation law is needed. The full proof is checked by the Lean kernel.
+:::
+
+**Keep the base fixed when connecting the selector.** Fix the same actual parameter record $c$ as before, with $a=c.\operatorname{base}$, $N=c.\operatorname{modulus}\ge2$, and $x=(a:\operatorname{ZMod}N)$. A return `select a N L = some m` supplies $m>0$ and `Nat.powMod a m N = 1`. The earlier `Nat.powMod_def`, `Nat.cast_pow`, and residue conversion turn precisely this test into $x^m=1$, so the seven clauses apply to this $x,m$. The same guard can be evaluated using natural-number modular powers; for $a,m\in\mathbb N$ and $N\ge2$, Python's `pow(a,e,N)` computes $a^e\bmod N$:
+
+```python
+def strip_twos_mod(a, m, N):
+    while 0 < m and m % 2 == 0 and pow(a, m // 2, N) == 1:
+        m = m // 2
+    return m
+```
+
+This simply expresses the same guard through modular exponentiation. A return `none` still means that the menu has no positive passing entry; it supplies no positive exponent to halve. The process always tests powers of the original base. It does not resample the base or change the controlled modular multiplication, native positive-exponent circuit, work input $|1\rangle$, or padded target carrier. For the positive-exponent experiment, both observed labels are still reflected before the original menu is formed.
+
+If the selector returns the true order $m=r$, halving leaves it fixed. For odd $r$ the evenness test fails. For even $r$, we have $0<r/2<r$, so minimality of the true order excludes $x^{r/2}=1$ and the guard again fails. Thus `stripTwos x r = r`. The earlier exact-selection event is consequently contained in the exact-output event after halving, whose probability remains at least $8/\pi^4$. This uses the same independent-reset law as before and introduces no new joint sampling model. Halving may also recover the true order from a previously inexact return, but does not flag exactness on each output.
+
+Return to $N=21,a=2,r=6$. Starting at $12$, the test $2^6\bmod21=1$ first reduces the exponent to $6$; then $2^3\bmod21=8\ne1$, and the process stops. Starting at $132$, it first reduces to $66$, since $2^{66}\bmod21=1$; then $2^{33}\bmod21=8\ne1$, so it stops. Hence
+
+$$
+\begin{aligned}
+\operatorname{stripTwos}(2:\operatorname{ZMod}21,12)&=6,\\
+\operatorname{stripTwos}(2:\operatorname{ZMod}21,132)&=66,\\
+66/6&=11,\qquad 2^{33}\bmod21=2^3\bmod21=8.
+\end{aligned}
+$$
+
+Both paths yield the half-power residue $8$, whose representative gives $\gcd(8-1,21)=7$ and $\gcd(8+1,21)=3$. Before halving, the half-power residue of $12$ was $1$, giving $21$ and $1$. The reduction $132\mapsto66$ retains the odd quotient $11$, making clear that a correct half-power does not imply exact order. It also tests no complete set of prime factors and cannot replace the full prime-factor certificate above.
+
+**Preserving the half-power also preserves the need for Good.** The new interface is only $x^{M/2}=x^{r/2}$, under the even-order condition. Factor extraction still requires the same actual unit to satisfy
+
+$$
+\operatorname{Good}(x)\quad\Longleftrightarrow\quad
+\operatorname{Even}(r)\ \land\ x^{r/2}\ne-1.
+$$
+
+Here powers are written after projecting the unit to $\operatorname{ZMod}N$; its order agrees with the order in the unit group. Minimality of the true order separately excludes half-order power $1$. Under the conditions $N>2$ and $\gcd(a,N)=1$ in [@ex-shor-actual-unit-factors], the existing true-order Good argument supplies two proper factors; equality of half-powers connects its certificate to the same residue of the halved output.
+
+The halving theorem states equality of powers in a monoid. Connecting it to gcds of large natural-number powers additionally requires explicit congruence, positivity conditions for natural subtraction, and gcd invariance; a natural-number power must not be equated with its standard residue. The values $7$ and $3$ above are direct calculations on concrete residues. The halving module itself states no general natural-number gcd transport or factor probability.
+
+Two boundaries make the scope concrete. For $N=2,a=1,m=8$, the trace is $8\mapsto4\mapsto2\mapsto1$; the true order is $1$, and the odd output supplies no even half-order extraction route. For $N=15,a=14,m=2$, we have $14^1\equiv-1\ne1\pmod{15}$, so the output remains $2$. Its order is even but the second Good condition fails; the gcds are $\gcd(13,15)=1$ and $\gcd(15,15)=15$.
+
+This same-base halving rule also differs from Ekerå, *On completely factoring any integer efficiently in a single run of an order finding algorithm*, [arXiv:2007.10044, §3.2](https://arxiv.org/html/2007.10044), which samples new random bases and processes a squaring chain. The reference distinguishes the algorithms; its performance conclusions are not transferred here. Termination and these deterministic properties provide no efficient method for obtaining the initial $m$, complete factorization, exact-order certificate, bit or gate complexity bound, hardware success rate, guarantee for arbitrarily correlated repetitions, or Las Vegas conclusion, and no mathematical originality is claimed. The quantum product law at a fixed actual base and the Good law on uniformly sampled units remain different sampling models. Their probabilities cannot be multiplied without a common joint law and the corresponding conditional probabilities.
+
+**One step further: cover the original exponent's prime factors and strip down to the order.** Halving removes only excess factors of $2$, so $132$ can still leave $66$. If an additional finite list contains every prime divisor of the original returning exponent, we can repeatedly test division by each entry. This additional input differs from the menu computed solely from observations: the selector does not supply it.
+
+For any monoid $G:\operatorname{Type}\,u$ with decidable equality, an element $x$, and natural numbers $p,m$, define
+
+```text
+stripFactor x p m =
+  if 1 < p ∧ 0 < m ∧ p ∣ m ∧ x ^ (m / p) = 1
+  then stripFactor x p (m / p)
+  else m
+
+stripFactors x P m =
+  P.foldl (fun n p => stripFactor x p n) m
+```
+
+Each successful division strictly decreases the current positive exponent because $p>1$. Otherwise the current value is returned and the fold moves to the next entry. The inputs are only $x,P,m$, with no true order supplied. Entries are processed in their original order, without deduplication or a requirement that every entry be prime.
+
+::: {.theorem #thm-shor-verified-prime-stripping title="Executable order recovery from original prime-support coverage" lean="D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping.stripFactors_correct"}
+Let $G:\operatorname{Type}\,u$ be any monoid with decidable equality. For $x\in G$, a finite list $P$ of natural numbers, and $m\in\mathbb N$, assume
+
+$$
+m>0,\qquad x^m=1,\qquad
+\forall p\in\mathbb N,\quad
+\bigl(p\text{ is prime}\ \land\ p\mid m\bigr)\Longrightarrow p\in P.
+$$
+
+Put $M=\operatorname{stripFactors}(x,P,m)$. Then
+
+$$
+M>0,\qquad M\mid m,\qquad x^M=1,\qquad M=\operatorname{orderOf}(x).
+$$
+:::
+
+Coverage concerns the **original input $m$**: each prime divisor must itself occur in $P$. It is a correctness premise, not a proof supplied as an additional function argument. The list may repeat entries or include extra composites, $0$, and $1$. No group, finiteness, commutativity, or cancellation assumption is required. Entries $0$ and $1$ never trigger recursion; the exponent $m=0$ always returns $0$ but lies outside this correctness statement. The case $m=1,P=[]$ is included.
+
+::: proof
+Write $r=\operatorname{orderOf}(x)$. A positive returning exponent gives $r>0$ and $r\mid m$. First apply strong induction to the actual recursion for a single supplied factor. If $n>0$ and $x^n=1$, the output $M$ satisfies
+
+$$
+M>0,\qquad n=p^kM\text{ for some }k\in\mathbb N,\qquad
+x^M=1.
+$$
+
+When $p>1$, it also satisfies $p\nmid M/r$. In a recursive branch, combine the induction hypothesis at $n/p$ with $n=p(n/p)$, increasing the witness $k$ by $1$. At a terminal branch, $M/r=pj$ would give $M=p(rj)$. Hence $p\mid M$ and $x^{M/p}=(x^r)^j=1$: all four recursion conditions would hold, contradicting termination at this state.
+
+Next induct over the list. The output remains a positive returning divisor of the original input, and every processed entry greater than $1$ is excluded from dividing the current output's quotient by $r$. Later processing replaces a returning exponent $A$ by a returning divisor $B$. Since $B\mid A$ and $r$ divides both, $B/r\mid A/r$. A previously excluded factor therefore cannot reappear in the later quotient. This also handles repeated entries and extra composites.
+
+Every prime divisor of the final output divides the original $m$, so coverage places it in $P$. If division of the final exponent by this prime still returned to $1$, order divisibility would force the prime to divide $M/r$, contradicting the list invariant. Direct application of the existing `orderOf_eq_of_pow_and_pow_div_prime` gives $M=r$. The proof establishes invariants of the actual recursion and fold; the terminal order criterion retains its existing source. The complete proof is checked by the Lean kernel.
+:::
+
+**Continue from the same selector's return.** Suppose the preceding `select a N L = some m` holds. Keep the same actual parameters $c$, $N\ge2$, and $x=(a:\operatorname{ZMod}N)$. The return contract gives $m>0,x^m=1$. A list $P$ covering this original $m$ therefore makes `stripFactors x P m` equal the same base's true order, even if that order was absent from the original menu. A return `none` still means no positive entry passed; it supplies no positive exponent to this theorem. With the native positive circuit, continue to reflect both observed labels before constructing the original menu and selecting, then process the same base. This step does not replace the sampling law.
+
+For $N=21,a=2$, input $m=12,P=[2,3]$ gives $6$; input $m=132,P=[2,3,11]$ also gives $6$, removing the odd excess factor $11$ left after halving. For the identity and $m=12$, the list $[2,3]$ gives $1$, whereas $[2]$ gives $3$ and $[6]$ gives $2$. In the last case, both original prime divisors $2,3$ divide a listed entry $6$, but neither occurs as an entry. Divisibility into some list member cannot replace the theorem's coverage condition.
+
+The classical repeated-division order algorithm appears in Andrew V. Sutherland, MIT 18.783, Spring 2015, Lecture 8, §8.3, Algorithm 8.2, printed page 3 ([lecture notes](https://math.mit.edu/classes/18.783/2015/LectureNotes8.pdf)). The notes start from a returning multiple in an additive group and its prime factorization. Here multiplication and the identity replace addition and zero; the statement permits arbitrary decidable monoids and extra list entries. No algorithmic originality is claimed.
+
+This conditional algorithm supplies no method for acquiring $P$ or efficiently factoring the exponent. With verified coverage, a positive returning exponent is indeed processed into the true order; obtaining the information needed for coverage remains a separate task. Termination supplies no bit or gate bound. No new quantum success probability, uniform-unit sampler, guarantee for arbitrarily correlated repetitions, hardware implementation, or complete recursive integer-factorization result follows here. Combining the classical Good law with fixed-base quantum observations still requires an explicit common joint law.
+
 **From the true order to factors: which bases fail?** Start with $N=15$ and $a=2$. The local orders modulo $3$ and $5$ are $2$ and $4$, so the global true order is $r=\operatorname{lcm}(2,4)=4$. The half-order power $2^2$ is locally $1$ and $-1$, respectively, and therefore is neither $1$ nor $-1$ modulo $15$. What matters is how many factors of $2$ occur in each local order: here, $1$ and $2$. We first count failing tuples in an arbitrary finite family of cyclic groups, then transport the same event to the actual unit group.
 
 ::: {.theorem #thm-half-order-family-failure-count title="Half-Order Failure Count in Finite Cyclic Families" lean="D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.failure_count_le"}
