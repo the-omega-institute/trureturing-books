@@ -5961,6 +5961,182 @@
           "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
         }
       ]
+    },
+    {
+      "id": "riemann-prime-arc-path-integral-sandbox",
+      "code": "ZETA//SPIRAL",
+      "title": "ZETA//SPIRAL · 黎曼路径积分与素数极小圆弧体：欧拉绕行算子、半密度平方律与临界线相消沙盘",
+      "title_en": "ZETA//SPIRAL · The Riemann Path Integral and Prime Minimal Arc-Trihedra: Euler Winding Operators, Half-Density Square Law and Critical-Line Cancellation Sandbox",
+      "summary": "每个整数 n 是一支长 n^(−σ)、转过 t ln n 的箭头，首尾相接，第 n 个顶点抬到作用量 ln n 的高度（由分解算出）。临界带里部分和发散，但链绕着过 ζ(s) 的竖轴张开：琥珀色的轴由交错 η 级数的延拓算出，在临界线的前五个零点上穿过原点 O，|ζ| = 0.0000；地上青色正向壳 p^(−σ) 与品红对偶壳 p^(−(1−σ)) 此时两两重合。σ = 0.62 时双壳分开（2^(−0.62) = 0.6507、2^(−0.38) = 0.7684），终点离开 O（|ζ| = 0.0907）；ξ 在线上是实数（余维数 1），离线要两个方程，对称性本身排除不了离线四点组，黎曼猜想标为开放。σ = 1.5 时路径链与欧拉乘积落在同一点，莫比乌斯链落在 1/ζ(s)。韦伊显式公式把前 50 个零点的驻波叠成素数阶梯：素数幂处陡升，6、10、12 处几乎平坦。四张实验卡可独立引用。",
+      "summary_en": "Every integer n is an arrow of length n^(−σ) turned by t ln n, chained head to tail, its n-th vertex lifted to the height of its action ln n (computed from the factorization). In the critical strip the partial sums diverge, but the chain opens up round a vertical axis through ζ(s): the amber axis, computed by continuation from the alternating η series, passes through the origin O at the first five zeros on the critical line, |ζ| = 0.0000, while the cyan forward shells p^(−σ) and the magenta dual shells p^(−(1−σ)) on the floor coincide in pairs. At σ = 0.62 the shells split (2^(−0.62) = 0.6507, 2^(−0.38) = 0.7684) and the end point misses O (|ζ| = 0.0907); ξ is real on the line (codimension 1) and needs two equations off it, symmetry alone cannot exclude off-line quadruplets, and the Riemann Hypothesis is marked open. At σ = 1.5 the path chain and the Euler product land on one point and the Möbius chain on 1/ζ(s). The Weil explicit formula stacks the standing waves of the first 50 zeros into the prime staircase: steep rises at prime powers, nearly flat at 6, 10 and 12. Four independently citable experiments.",
+      "path": "riemann-prime-arc-path-integral-sandbox/",
+      "thumbnail": "riemann-prime-arc-path-integral-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 34,
+      "section": "34.28",
+      "presets": [
+        "euler-dirichlet-phasor-spiral",
+        "critical-zero-cancellation",
+        "off-line-shell-imbalance",
+        "weil-explicit-prime-staircase"
+      ],
+      "preset_titles": {
+        "euler-dirichlet-phasor-spiral": {
+          "zh": "欧拉局域绕行展开为复合路径相量螺旋，与莫比乌斯外积对偶",
+          "en": "Euler local windings unfold into the composite-path phasor spiral and its Möbius exterior dual"
+        },
+        "critical-zero-cancellation": {
+          "zh": "临界线零点：路径螺旋收回原点 O，正逆双壳等幅锁死",
+          "en": "Critical-line zero: the path spiral returns to O and the two shells lock"
+        },
+        "off-line-shell-imbalance": {
+          "zh": "偏离临界线：正逆双壳失衡分裂，螺旋终点弹离 O",
+          "en": "Off the line: the two shells split and the spiral misses O"
+        },
+        "weil-explicit-prime-staircase": {
+          "zh": "韦伊显式对偶：零点驻波叠加雕刻素数阶梯",
+          "en": "Weil explicit duality: zero standing waves carve the prime staircase"
+        }
+      },
+      "tags": [
+        "黎曼 ζ 函数",
+        "欧拉乘积",
+        "路径积分",
+        "临界线",
+        "函数方程",
+        "显式公式"
+      ],
+      "tags_en": [
+        "Riemann zeta function",
+        "Euler product",
+        "Path integral",
+        "Critical line",
+        "Functional equation",
+        "Explicit formula"
+      ],
+      "theory": [
+        {
+          "label": "§34.28 黎曼路径积分与素数极小圆弧体：欧拉绕行算子、半密度平方律与临界线相消",
+          "label_en": "§34.28 The Riemann Path Integral and Prime Minimal Arc-Trihedra: Euler Winding Operators, Half-Density Square Law, and Critical-Line Cancellation",
+          "href": "../zh/ch34-s28-riemann-path-integral-and-prime-arcs.html#sec-ch34-riemann-path-integral-and-prime-arcs",
+          "href_en": "../en/ch34-s28-riemann-path-integral-and-prime-arcs.html#sec-ch34-riemann-path-integral-and-prime-arcs"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_reflection"
+        },
+        {
+          "gid": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj"
+        },
+        {
+          "gid": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization"
+        },
+        {
+          "gid": "D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula.actual_integrated_explicit_formula"
+        },
+        {
+          "gid": "D5/S3/Weil/ZetaBridge/AlternatingZetaContinuation.tendsto_alternating_partialSums_eta_of_ne_one"
+        }
+      ]
+    },
+    {
+      "id": "arithmetic-pivot-resonant-tunneling-sandbox",
+      "code": "ARITH//PIVOT",
+      "title": "ARITH//PIVOT · 算术枢轴重整与临界带多级共振隧穿沙盘",
+      "title_en": "ARITH//PIVOT · Arithmetic Pivot Renormalization & Multi-Stage Resonant Tunneling Sandbox",
+      "summary": "复平面临界带画成受光的地形块，高度是 ln|ζ(s)|：σ > 1 的青色欧拉高原、s = 1 的品红单极点山峰、σ = 1/2 的临界脊与零点的坑。三种跨越方案：按 n ≤ M 硬截断时 ζ_M 削平山峰，M = 19 在 t ≈ 1.554×10¹⁴ 处于 Re s = 1.006988 > 1 挖出零点（放大窗与 19 个首尾闭合的向量）；单级磨光器的比例 κ(θ) 由 Levinson—Conrey 公式当场优化，只在 θ ≤ 4/7 时已证；窗口 {1, 2, 3, 6} 的分块舒尔补 G̃_PP = [[5/9, 5/18], [5/18, 8/9]]、det G = 5/16 与补全区间 [−7/12, 11/12]；t = γ₁ 剖面上的多级凯莱中继，δ = 0 时 |w| = 1，假想的 δ > 0 经反复平方在约 log₂(γ₁²/δ) 层内爆开。黎曼猜想与跨枢轴面积律问题标为开放。四张实验卡可独立引用。",
+      "summary_en": "The critical strip as a lit terrain block whose height is ln|ζ(s)|: the cyan Euler plateau σ > 1, the magenta peak of the simple pole at s = 1, the critical spine σ = 1/2 with the pits of the zeros. Three ways across: the hard cutoff n ≤ M planes the peak down, and M = 19 digs a zero at Re s = 1.006988 > 1 near t ≈ 1.554×10¹⁴ (a magnifier and 19 vectors that close head to tail); the proportion κ(θ) of one mollifier is optimized on the page from the Levinson–Conrey formula and is proved only for θ ≤ 4/7; block Schur complements on the window {1, 2, 3, 6}, G̃_PP = [[5/9, 5/18], [5/18, 8/9]], det G = 5/16 and the completion interval [−7/12, 11/12]; a multi-stage Cayley relay on the section t = γ₁, with |w| = 1 at δ = 0 and a hypothetical δ > 0 blowing up by repeated squaring within about log₂(γ₁²/δ) layers. The Riemann hypothesis and the cross-pivot area-law problem stay open. Four independently citable experiments.",
+      "path": "arithmetic-pivot-resonant-tunneling-sandbox/",
+      "thumbnail": "arithmetic-pivot-resonant-tunneling-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 34,
+      "section": "34.29",
+      "presets": [
+        "turan-zeno-hard-cutoff",
+        "mollifier-four-sevenths-wall",
+        "block-schur-pivot-mera",
+        "fabry-perot-rogue-explosion"
+      ],
+      "preset_titles": {
+        "turan-zeno-hard-cutoff": {
+          "zh": "一维全序硬截断与图兰—芝诺假零点陷阱",
+          "en": "Total-order hard cutoff and the Turán–Zeno spurious-zero trap"
+        },
+        "mollifier-four-sevenths-wall": {
+          "zh": "单级磨光器裸隧穿与 θ = 4/7 色散墙",
+          "en": "Single-stage mollifier hop and the θ = 4/7 dispersion wall"
+        },
+        "block-schur-pivot-mera": {
+          "zh": "乘性波前与分块舒尔补枢轴粗粒化锥",
+          "en": "Multiplicative wavefront and the block Schur pivot cone"
+        },
+        "fabry-perot-rogue-explosion": {
+          "zh": "多级舒尔枢轴共振中继与离线失谐爆炸",
+          "en": "Multi-stage Schur pivot relay and off-line detuning blow-up"
+        }
+      },
+      "tags": [
+        "临界带地形",
+        "图兰假零点",
+        "磨光器 4/7",
+        "分块舒尔补",
+        "弦图正半定补全",
+        "凯莱反复平方"
+      ],
+      "tags_en": [
+        "Critical-strip terrain",
+        "Turán spurious zero",
+        "Mollifier 4/7",
+        "Block Schur complement",
+        "Chordal PSD completion",
+        "Cayley repeated squaring"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.29 · 算术枢轴重整与临界带多级共振隧穿：破除图兰芝诺陷阱与击穿 4/7 磨光器墙",
+          "label_en": "Chapter 34 §34.29 · Arithmetic Pivot Renormalization and Multi-Stage Resonant Tunneling Across the Critical Strip: Breaking the Turán–Zeno Trap and the 4/7 Mollifier Wall",
+          "href": "../zh/ch34-s29-arithmetic-pivots-and-resonant-tunneling.html#sec-ch34-arithmetic-pivots-and-resonant-tunneling",
+          "href_en": "../en/ch34-s29-arithmetic-pivots-and-resonant-tunneling.html#sec-ch34-arithmetic-pivots-and-resonant-tunneling"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one"
+        },
+        {
+          "gid": "D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_ne_zero_of_one_le_re"
+        },
+        {
+          "gid": "D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion"
+        },
+        {
+          "gid": "D5/S3/QuadraticForms/ChordalPsdCompletion.exists_posSemidef_completion"
+        },
+        {
+          "gid": "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/GramRealizability.gram_realizability"
+        },
+        {
+          "gid": "D5/S3/Arith/Robin/OffLinePeak/OriginalLocalA.original_zero_robin5040_localA"
+        }
+      ]
     }
   ]
 }
