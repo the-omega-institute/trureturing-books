@@ -218,6 +218,6 @@ The interactive visualization and the film below are built from this book's repo
 The whole lab: change the pair $v_1, v_2$, switch between the four scenes (carries, map, phases, window), or go through the experiment cards one by one; the deficit $c(v_1, v_2)$ is always $-1$, $0$ or $1$ ([@thm-deficit-three-valued]).
 :::
 
-::: {.film src="001-golden-deficit"}
+::: {.film src="golden-deficit"}
 Animation: adding two Zeckendorf representations, the carries, and why the deficit takes only $-1, 0, 1$ ([@thm-deficit-three-valued]).
 :::

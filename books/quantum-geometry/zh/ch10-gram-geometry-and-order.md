@@ -140,7 +140,7 @@ $$
 $\theta = 90^\circ$ 一行就是八分球回路：$\Delta = \frac{1+i}{4}$，即结论 2。三角形越张越大，从北极出发的两条边越来越“不相融”，$\lvert\Delta\rvert$ 一路缩小；辐角却一路增大，始终是面积的一半。第五列与第四列逐行相同，是上面的手工推导；最后两列逐行相同，是 Van Oosterom–Strackee 公式在这五个三角形上的数值核对，不是证明。
 :::
 
-::: {.film src="003-two-angles-berry"}
+::: {.film src="two-angles-berry"}
 **正交一次、正交两次：两角寻址与贝里相位（1 分 58 秒）。** 只绕一根轴转，琥珀色的点只画出一个圆；先绕 $\vv{e}_2$ 倾转 $\theta = 60^\circ$、再绕 $\vv{e}_3$ 拧转 $\varphi = 45^\circ$，它落在 $\bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$；两根只差 $30^\circ$ 的轴交替转四次也能到达目标（[@thm-two-axis-finite-word]）。随后两次 $90^\circ$ 转动换个次序，分别停在 $+X$ 与 $-Y$；沿八分球回路平行搬运，箭头回来时转过所圈面积 $\Omega = \frac{\pi}{2}$；最后由 [@cor-latitude-complex-overlap] 的 $\frac{1+i}{2}$ 连乘出 $\Delta = \frac{1+i}{4}$，它的相位 $\frac{\pi}{4}$ 在每个态改乘局部相位时纹丝不动（贝里相位与面积的对应见 [@rem-berry-pancharatnam-holonomy-literature]）。
 :::
 

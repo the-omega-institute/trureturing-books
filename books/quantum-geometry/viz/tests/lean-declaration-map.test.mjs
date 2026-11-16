@@ -192,6 +192,25 @@ check('the coda group tries Coda & App. before the dot fallback',
   /roman = \[[^\n]*'·'\]\[p\]/.test(mainSource)
   && /const compact = [^\n]*'Coda & App\.'/.test(mainSource)
   && /const lab = \[name, \.\.\.compact\]\.find\(fits\) \|\| roman\b/.test(mainSource));
+// Read in the source, so that they hold in every state and not only in the states the browser checks below visit: the
+// amber lines the stage draws and the counts the chosen declaration's note gives come from one function (routes), the
+// only place that turns a declaration's citations into destinations; the cyan lines and the note's “drawn once the rail
+// has read it” from one predicate (cyanOn); the landed heading, the strip's dashed label and its description from one
+// table of filter populations (KEPT), keyed like FILTERS, carrying no number, its `all` entry still the whole lock.
+const keptSrc = /const KEPT = (\{[^\n]*\});/.exec(mainSource), KEPT_SRC = keptSrc && JSON.parse(keptSrc[1].replace(/(\w+):/g, '"$1":').replace(/'/g, '"'));
+check('source: the drawn amber lines and the chosen declaration’s note both come from routes(), the one place citations become destinations',
+  /for \(const u of routes\(sd, foc\)\.amber\) \{\s*arcs\.amber\.push\(colOf\[u\]\);/.test(mainSource)
+  && /const \{ cites, cyan, amber \} = routes\(d, focus\(\)\)/.test(mainSource) && /\$\('roNote'\)\.textContent = d \? routeNote\(d, t\)/.test(mainSource)
+  && mainSource.split('.cites.map((c) => c[0])').length === 2 && /const routes = \(d, foc\) => \{\s*const cites = \[\.\.\.new Set\(d\.cites\.map\(\(c\) => c\[0\]\)\)\]\.filter\(\(u\) => u !== IDX && u !== d\.home\);/.test(mainSource));
+check('source: the cyan lines and the note’s wait for the rail share one predicate (cyanOn)',
+  /if \(cyanOn\(t\)\) \{/.test(mainSource) && /const later = cyanOn\(t\) \?/.test(mainSource) && !/Math\.floor\(t\) > S\.src\)/.test(mainSource.replace('const cyanOn = (t) => S.src != null && Math.floor(t) > S.src;', '')));
+check('source: the landed heading, the strip’s dashed label and its description name the population from KEPT, keyed like FILTERS, with no number in it and the whole lock only under “all”',
+  !!KEPT_SRC && JSON.stringify(Object.keys(KEPT_SRC)) === JSON.stringify(['all', 'theorem', 'inline']) && /const FILTERS = \{ all: [^\n]*, theorem: [^\n]*, inline: [^\n]* \};/.test(mainSource)
+  && !/\d/.test(keptSrc[1]) && JSON.stringify(KEPT_SRC.all) === JSON.stringify(['锁文件里的条目', 'entries in the lock'])
+  && /\$\('roMetHead'\)\.innerHTML = `<span class="zh">已落定 \/ \$\{KEPT\[S\.filter\]\[0\]\}<\/span><span class="en">landed \/ \$\{KEPT\[S\.filter\]\[1\]\}<\/span>`/.test(mainSource)
+  && /const \[keptZh, keptEn\] = KEPT\[S\.filter\]/.test(mainSource) && /\[P\.ink, L\(keptZh, keptEn\), 'dash'\]/.test(mainSource)
+  && /cv\.dataset\.ariaZh = `[^`]*\$\{keptZh\}[^`]*`/.test(mainSource) && /cv\.dataset\.ariaEn = `[^`]*\$\{keptEn\}`/.test(mainSource)
+  && !mainSource.includes("L('锁文件里的条目', 'entries in the lock')"), keptSrc ? keptSrc[1] : 'no KEPT');
 
 // the page's data (data.generated.json joined to the lock) against the lock and the chapters
 const rows = await page.evaluate(() => window.LEANMAP_DEBUG.rows());
@@ -537,11 +556,61 @@ async function choose(p, how, c) {
 async function chips(p, filter, mode) { await p.click(`[data-filter="${filter}"]`); await settle(p); await p.click(`[data-mode="${mode}"]`); await settle(p); }
 // End rests the rail on the whole book; it neither waits for nor relies on playback reaching the end by itself
 async function toEnd(p) { await p.evaluate(() => document.activeElement && document.activeElement.blur && document.activeElement.blur()); await p.keyboard.press('End'); await settle(p); return (await readout(p)).st; }
+// A chosen declaration's routes, from the first reading of the chapters (truth), never from the page: its citation
+// destinations are the units citing it other than Appendix C (no column) and its home (the column it stands in); the
+// chapter looked back from keeps a cyan line exactly when it is one of them and cites it in the current mode (any
+// citation, or lean= only); the amber destinations are the rest. The chosen declaration's note must open with its home,
+// give the number of destinations, name the looked-back chapter only when it keeps cyan, give the number of amber lines,
+// which must be the ones drawn, and say the cyan line waits exactly when the rail has not read that chapter, which is
+// exactly when the cyan line is not drawn.
+const routeTruth = (g, src, mode) => {
+  const dests = [...truth[g].cites.keys()].filter((f) => f !== INDEX && f !== truth[g].home);
+  const cyan = src && dests.includes(src) && (mode === 'all' || truth[g].cites.get(src) === 'e') ? src : null;
+  return { dests, cyan, amber: dests.filter((f) => f !== cyan).sort() };
+};
+const ROUTE_SAYS = {
+  zh: { head: (home) => `首次出场：${home}，`, citedBy: '另外引用它的有', dests: (n) => `另外引用它的有 ${n} 章`, cyan: (name) => `其中${name}是正在回看的这一章`, looked: '正在回看', amber: (k) => `琥珀色的线只连到其余 ${k} 章`, each: () => '每一章连一根琥珀色的线', none: '没有琥珀色的线', wait: '时间轴读过这一章才画出' },
+  en: { head: (home) => `First appears in ${home};`, citedBy: 'It is cited by', dests: (n) => `It is cited by ${n} other chapter${n === 1 ? '' : 's'}`, cyan: (name) => `${name} is the one being looked back from`, looked: 'looked back from', amber: (k) => `${k === 1 ? 'the amber line goes' : 'amber lines go'} only to the remaining ${k}`, each: (n) => (n === 1 ? 'which takes an amber line' : 'each taking an amber line'), none: 'so there is no amber line', wait: 'drawn once the rail has read it' }
+};
+function routeNoteOk(lang, note, g, st) {
+  const R = routeTruth(g, st.src, st.mode), W = ROUTE_SAYS[lang], name = (f) => NODE[lang][f].name, n = R.dests.length, k = R.amber.length;
+  const waits = R.cyan != null && Math.floor(st.t) <= columns.indexOf(R.cyan);
+  const drawn = JSON.stringify(st.arcs.amber) === JSON.stringify(R.amber) && !st.arcs.amber.includes(truth[g].home) && (R.cyan == null || st.arcs.cyan.includes(g) === !waits);
+  const says = !n ? note.includes(W.none) && !note.includes(W.citedBy) && !note.includes(W.looked)
+    : R.cyan == null ? note.includes(W.dests(n)) && note.includes(W.each(n)) && !note.includes(W.looked)
+      : note.includes(W.dests(n)) && note.includes(W.cyan(name(R.cyan))) && note.includes(k ? W.amber(k) : W.none);
+  return drawn && note.startsWith(W.head(name(truth[g].home))) && says && note.includes(W.wait) === waits;
+}
+// The population the landed count stands for, as the readout heading, the strip's dashed label (read from the fillText
+// calls of its legend) and the strip's description name it, with the counts; independently, the population is every
+// entry of the lock, the entries the lock records as theorems, or the entries no chapter cites with lean=.
+const POP_N = { all: GIDS.length, theorem: GIDS.filter((g) => lock.declarations[g].kind === 'theorem').length, inline: GIDS.filter((g) => !truth[g].env).length };
+const POP_SAYS = { zh: { landed: '已落定 / ', all: '锁文件里的条目', theorem: 'theorem', inline: '行内', aria: (x) => `虚线是${x}数`, lock: `锁文件共 ${GIDS.length} 条` },
+  en: { landed: 'landed / ', all: 'entries in the lock', theorem: 'theorem', inline: 'inline', aria: (x) => `the dashed line is the number of ${x}`, lock: `the lock has ${GIDS.length}` } };
+const popRead = (p) => p.evaluate(() => {
+  if (!window.__popRec) {
+    const R = window.__popRec = { on: false, texts: [] }, ctx = document.getElementById('plot').getContext('2d'), orig = ctx.fillText;
+    ctx.fillText = function (text) { if (R.on && this.textAlign === 'left') R.texts.push(String(text)); return orig.apply(this, arguments); };
+  }
+  const R = window.__popRec; R.texts = []; R.on = true; window.TRV.kit.flush(); R.on = false;
+  const txt = (id) => document.getElementById(id).innerText.trim();
+  return { head: txt('roMetHead'), met: txt('roMet'), sub: txt('roMetSub'), meta: txt('plotMeta'), aria: document.getElementById('plot').getAttribute('aria-label'), legend: R.texts, filter: window.LEANMAP_DEBUG.state.filter };
+});
+function popOk(lang, r, filter) {
+  const W = POP_SAYS[lang], name = r.head.startsWith(W.landed) ? r.head.slice(W.landed.length) : null, n = POP_N[filter];
+  return name != null && r.filter === filter
+    && (filter === 'all' ? name === W.all : name !== W.all && name.includes(W[filter]))     // the whole lock only under “all”
+    && r.legend.length === 2 && r.legend[1] === name && r.aria.endsWith(W.aria(name))       // the dashed label and the description name it too
+    && r.met.endsWith(` / ${n}`) && r.meta.endsWith(` / ${n}`) && r.sub === W.lock;         // counted over it; the whole lock under the count
+}
 async function sweep(p, lang, how) {
   const bad = []; let n = 0, wrong = 0;
+  const pop = { n: 0, wrong: 0, bad: [] };
   for (const filter of ['all', 'theorem', 'inline']) {
     for (const mode of ['all', 'env']) {
       await chips(p, filter, mode);
+      const pr = await popRead(p); pop.n++;
+      if (!popOk(lang, pr, filter)) { pop.wrong++; if (pop.bad.length < 3) pop.bad.push({ filter, mode, ...pr }); }
       if (how === 'foot') await showStage(p);
       for (let c = how === 'slider' ? -1 : 0; c < NC; c++) {
         const r = await choose(p, how, c), want = wantFocus(c, mode), file = c < 0 ? null : COLS2[c];
@@ -556,7 +625,7 @@ async function sweep(p, lang, how) {
       }
     }
   }
-  return { n, wrong, bad };
+  return { n, wrong, bad, pop };
 }
 async function appendixCitations(p, lang, how, tag, file, col) {
   await chips(p, 'all', 'all'); await showStage(p);
@@ -581,12 +650,14 @@ async function lastAppendix(p, lang, how, tag) {
   await p.keyboard.press('End'); await settle(p); const after = (await readout(p)).st;
   const g = want.find((x) => amberWant(x, LAST_FILE).length > 0) || want[0];
   await showStage(p); const at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), g);
-  await press(p, at); await settle(p); const chosen = (await readout(p)).st;
+  await press(p, at); await settle(p); const chosenR = await readout(p), chosen = chosenR.st;
   await press(p, at); await settle(p); const released = (await readout(p)).st;
   check(`${tag}: ${LAST_FILE}'s cyan lines wait until the rail has read it (← then End), and a chosen cell it cites sends amber only to the other chapters`,
     before.t === CLAST && before.arcs.cyan.length === 0 && JSON.stringify(before.focus) === JSON.stringify(want) && after.t === NC && !after.playing && JSON.stringify(after.arcs.cyan) === JSON.stringify(want)
     && chosen.sel === g && JSON.stringify(chosen.arcs.amber) === JSON.stringify(amberWant(g, LAST_FILE)) && chosen.arcs.cyan.includes(g) && released.sel === null,
     JSON.stringify({ before: [before.t, before.arcs.cyan.length], after: [after.t, after.arcs.cyan.length], g, amber: chosen.arcs.amber }));
+  check(`${tag}: the chosen cell's note opens with its home, counts the chapters citing it besides its home and Appendix C, keeps Appendix E's line cyan when it holds the cell, and counts exactly the amber lines drawn`,
+    chosen.sel === g && routeNoteOk(lang, chosenR.note, g, chosen), JSON.stringify({ g, note: chosenR.note, route: routeTruth(g, chosen.src, chosen.mode), amber: chosen.arcs.amber }));
 }
 // every cell chosen by pointer: its rendered link is the lock's module file and line at the pinned commit
 async function release(p) {
@@ -612,7 +683,9 @@ async function frame(p, lang, tag, opts) {
     const sw = await sweep(p, lang, opts.sweep);
     const how = opts.sweep === 'slider' ? `the chapter slider over none and all ${NC} columns` : `a click on the foot of each of the ${NC} columns`;
     check(`${tag}: ${how} × every citation / environments only × all / theorems / inline: the source is that SUMMARY unit, its cyan lines and count are exactly its citations, and its column holds what first appears there`,
-      sw.wrong === 0 && sw.n === 3 * 2 * (NC + (opts.sweep === 'slider' ? 1 : 0)), JSON.stringify(sw));
+      sw.wrong === 0 && sw.n === 3 * 2 * (NC + (opts.sweep === 'slider' ? 1 : 0)), JSON.stringify({ n: sw.n, wrong: sw.wrong, bad: sw.bad }));
+    check(`${tag}: under each filter chip × citation mode, the landed heading, the strip's dashed label and its description name the population the filter keeps (the whole lock only under “all”), and both counts run over it`,
+      sw.pop.wrong === 0 && sw.pop.n === 3 * 2, JSON.stringify(sw.pop));
   }
   await lastAppendix(p, lang, opts.sweep || 'foot', tag);
   const lk = await links(p, DOTTED);
@@ -644,6 +717,83 @@ for (const [w, lang, sweepIt, linksIt] of [[334, 'zh', true, false], [334, 'en',
   check(`${tag}: the full lab plays by itself once in view, and End stops it on the whole book`, played && st0.t === NC && !st0.playing);
   await frame(p, lang, tag, sweepIt ? { sweep: 'foot', links: linksIt } : {});
 }
+
+/* ---------- a chosen declaration's routes and the filter's population over the control families, both languages ---------- */
+// The states a reader reaches through the cards, the rail, the citation-mode chips, the chapter slider, the foot of a
+// column, the filter chips, the search box and a pointer on a cell: the chosen declaration's note must agree with
+// routeTruth and with the lines drawn (routeNoteOk), the card notes must say the chosen cell's home takes no amber line,
+// and the landed heading, dashed label and description must name the filter's population (popOk). These are samples of
+// a domain the source checks at the top cover by construction (one routes(), one cyanOn(), one KEPT), not an enumeration.
+const FIX_HOME = truth[FIX].home, INL = [...truth[FIX].cites].find(([f, m]) => m === 'i' && f !== INDEX && f !== FIX_HOME)[0];
+const LONE = GIDS.find((g) => routeTruth(g, null, 'all').dests.length === 0);
+const HOME_SAYS = { zh: '琥珀线不连回那里', en: 'no amber line goes there' }, FIRST_SAYS = { zh: '首次出场', en: 'First appears' };
+await page.setViewportSize({ width: 1440, height: 900 }); await settle(page, 60);
+for (const lang of ['zh', 'en']) {
+  const p = page, tag = `routes and population (${lang})`, W = ROUTE_SAYS[lang], ok = (x, g) => x.st.sel === g && routeNoteOk(lang, x.note, g, x.st);
+  const cardSays = async (g) => { const t = (await p.textContent('#presetNote')).trim(); return t.includes(NODE[lang][truth[g].home].name) && t.includes(HOME_SAYS[lang]); };
+  await p.click(`[data-lang-set="${lang}"]`); await p.fill('#q', ''); await settle(p);
+  let r, pr;
+  // the two cards that choose a cell
+  for (const [id, g, src] of [['closure', FIX, CH28], ['bedrock', PAR, CH27]]) {
+    await p.click(`[data-preset="${id}"]`); await settle(p); r = await readout(p);
+    const R = routeTruth(g, src, 'env');
+    check(`${tag}, card ${id}: ${R.dests.length} chapters cite the chosen cell besides its home and Appendix C; ${src.slice(0, 4)} keeps its line cyan, amber goes to the other ${R.amber.length}, as drawn; the card note says the home takes no amber line`,
+      r.st.preset === id && R.cyan === src && R.amber.length === R.dests.length - 1 && ok(r, g) && r.st.arcs.amber.length === R.amber.length && await cardSays(g), `${r.note} | ${JSON.stringify(r.st.arcs.amber)}`);
+  }
+  // the rail: before and after it has read Chapter 28, the card still on
+  await p.click('[data-preset="closure"]'); await settle(p);
+  await p.evaluate((v) => window.LEANMAP_DEBUG.seek(v), columns.indexOf(CH28)); await settle(p); const early = await readout(p);
+  await p.evaluate((v) => window.LEANMAP_DEBUG.seek(v), columns.indexOf(CH28) + 1); await settle(p); const read = await readout(p);
+  await toEnd(p);
+  check(`${tag}, rail: until it has read Chapter 28 that line is not drawn and the note says it waits; then it is drawn and the note no longer says so; the amber lines stay`,
+    ok(early, FIX) && early.note.includes(W.wait) && !early.st.arcs.cyan.includes(FIX) && ok(read, FIX) && !read.note.includes(W.wait) && read.st.arcs.cyan.includes(FIX)
+    && JSON.stringify(early.st.arcs.amber) === JSON.stringify(read.st.arcs.amber), `${early.note} | ${read.note}`);
+  // the citation-mode chips, the chapter slider (the cell's home, then none)
+  await p.click('[data-mode="all"]'); await settle(p); r = await readout(p);
+  check(`${tag}, mode “every citation”: Chapter 28 still holds the chosen cell in cyan; same routes`, r.st.mode === 'all' && r.st.preset === null && ok(r, FIX) && r.note.includes(W.cyan(NODE[lang][CH28].name)), r.note);
+  r = await choose(p, 'slider', columns.indexOf(FIX_HOME));
+  check(`${tag}, slider on the cell's home: the home takes no amber line and every other citing chapter takes one, Chapter 28 included`,
+    r.st.src === FIX_HOME && ok(r, FIX) && r.st.arcs.amber.includes(CH28) && !r.note.includes(W.looked), r.note);
+  r = await choose(p, 'slider', -1);
+  check(`${tag}, slider on none: every chapter citing it but its home and Appendix C takes an amber line`, r.st.src === null && ok(r, FIX) && r.st.arcs.amber.length === routeTruth(FIX, null, 'all').dests.length, r.note);
+  // the foot of a chapter that cites it by an inline link only: lean= citations only, then every citation
+  await p.click('[data-mode="env"]'); await settle(p); await showStage(p);
+  r = await choose(p, 'foot', columns.indexOf(INL));
+  check(`${tag}, foot of ${INL} with lean= citations only: its cyan set does not hold the chosen cell, so it takes an amber line`, r.st.src === INL && r.st.mode === 'env' && !r.st.focus.includes(FIX) && ok(r, FIX) && r.st.arcs.amber.includes(INL), r.note);
+  await p.click('[data-mode="all"]'); await settle(p); r = await readout(p);
+  check(`${tag}, the same foot with every citation: its inline link puts the cell in its cyan set, its line is cyan and amber goes to the rest`, r.st.focus.includes(FIX) && ok(r, FIX) && !r.st.arcs.amber.includes(INL) && r.note.includes(W.cyan(NODE[lang][INL].name)), r.note);
+  // the filter chips: theorems keep the chosen theorem; inline only lets a lean=-cited cell go
+  await p.click('[data-filter="theorem"]'); await settle(p); r = await readout(p); pr = await popRead(p);
+  check(`${tag}, filter “theorems”: the chosen theorem keeps its routes; the heading, dashed label and description name the theorem entries`, r.st.filter === 'theorem' && ok(r, FIX) && popOk(lang, pr, 'theorem'), JSON.stringify([r.note, pr]));
+  await p.click('[data-filter="inline"]'); await settle(p); r = await readout(p); pr = await popRead(p);
+  check(`${tag}, filter “inline only”: the lean=-cited cell is let go with its note; the population named is the inline-only entries`, r.st.sel === null && !r.note.includes(FIRST_SAYS[lang]) && popOk(lang, pr, 'inline'), JSON.stringify([r.note, pr]));
+  await p.click('[data-filter="all"]'); await settle(p); await showStage(p);
+  // a pointer on the cell again, then the search box (matching it, then not)
+  let at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), FIX); await press(p, at); await settle(p); r = await readout(p);
+  check(`${tag}, pointer on the cell with ${INL} looked back from: the same routes`, ok(r, FIX), r.note);
+  await p.fill('#q', 'unreadState_fixed'); await settle(p); r = await readout(p); pr = await popRead(p);
+  check(`${tag}, a search that matches it keeps the chosen cell and its routes; the population is still the filter's`, ok(r, FIX) && popOk(lang, pr, 'all'), r.note);
+  await p.fill('#q', 'zz_no_such_name'); await settle(p); r = await readout(p);
+  check(`${tag}, a search that misses it lets the chosen cell go, and its note with it`, r.st.sel === null && !r.note.includes(FIRST_SAYS[lang]), r.note);
+  await p.fill('#q', ''); await settle(p);
+  // with no chapter looked back from: a cell no chapter but its home cites, then one others cite
+  await choose(p, 'slider', -1); await showStage(p);
+  at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), LONE); await press(p, at); await settle(p); r = await readout(p);
+  check(`${tag}, pointer on a cell only its home cites (${LONE.split('.').pop()}): no amber line drawn, and the note says so`, ok(r, LONE) && r.st.arcs.amber.length === 0, r.note);
+  await press(p, at); await settle(p);
+  at = await p.evaluate((x) => window.LEANMAP_DEBUG.cellAt(x), FIX); await press(p, at); await settle(p); r = await readout(p);
+  check(`${tag}, pointer on a cell other chapters cite: one amber line to each, as the note counts`, ok(r, FIX) && r.note.includes(W.each(routeTruth(FIX, null, 'all').dests.length)), r.note);
+  await press(p, at); await settle(p);
+  // the population over the filter cards and the rail
+  for (const [id, filter] of [['theorems', 'theorem'], ['inline', 'inline'], ['table28', 'all']]) {
+    await p.click(`[data-preset="${id}"]`); await settle(p); pr = await popRead(p);
+    check(`${tag}, card ${id}: the heading, dashed label and description name the ${filter === 'all' ? 'whole lock' : `${filter} population`} and count ${POP_N[filter]}`, popOk(lang, pr, filter), JSON.stringify(pr));
+  }
+  await p.evaluate((v) => window.LEANMAP_DEBUG.seek(v), 40); await settle(p); pr = await popRead(p);
+  check(`${tag}, rail at 40 columns read: the same population and denominator, fewer landed`, popOk(lang, pr, 'all') && pr.met !== `${POP_N.all} / ${POP_N.all}`, JSON.stringify(pr));
+  await toEnd(p);
+}
+await page.click('[data-lang-set="zh"]'); await settle(page);
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

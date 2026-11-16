@@ -29,7 +29,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 84 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 86 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -117,6 +117,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `scattering-temporal-bridge` | 势垒内两支指数解共同输运守恒流；时间路径完全相消需要等幅、反相与不可分辨 | `barrier` `opaque` `cancel` `marked` |
 | `zeta-spectrum-lab` | 有限相量、对称零点模型与有限零点谱各有边界，不能由一张图跨到黎曼猜想 | `domain` `partial` `quartet` `powers` |
 | `arithmetic-schur-lab` | 同一整除网络上，精确消元保住终端块，顺序改变填充；带号轨道另有支撑与相对信号范数的必要预算 | `natural` `leaf` `drop` `square` `budget` |
+| `trihedron-chord-pivot-tunneling-sandbox` | 极小圆弧体里走平直内割弦比外凸顶盖弧与两面正交侧壁都短，每 k 个边界点凝成一颗枢轴向球肚逐层下沉 | `walls-dijkstra-tax` `cap-wavefront-relax` `flat-chord-tunnel` `holographic-pivot-cone` `resonant-pivot-relay` |
+| `imaginary-chord-temporal-double-slit-sandbox` | 势垒里动量转过 90° 潜入虚平面 i 化作不绕圈的内割弦，两道阿秒时间快门让同一颗电子在能谱上与自己干涉 | `classical-real-wall` `ninety-deg-imaginary-chord` `temporal-double-slit-comb` `attosecond-tunnel-self-interference` `zeno-midway-probe-collapse` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -274,6 +276,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `gram-window-consensus-sandbox`（`GRAM//CONSENSUS`）与 `gram-causal-elliptope`、`observer-consensus-decoherence`、`dream-pre-decoherence-deja-vu` 分工：前三页分别讲三步椭圆体切片、多观察者二阶指针张量 M_cons 与梦境离线捏合快表，本页讲第三十四章 §34.18 `#sec-ch34-gram-window-and-consensus` 的“有限记忆滑动格拉姆窗口 W_M、加边舒尔补裕度 Δ = 1 − cᵀG_M⁺c、单位球面 S² 上黄金角螺旋相干帽交集走廊 Ω_M 的过约束锁死与遗忘重开 q_M = ln(|Ω_{M−1}|/|Ω_M|)、以及两位观察者联合接受窗 Ω_A ∩ Ω_B 的共同遗忘修复”：舞台用 `kit.solid` 画受光方向球面 S²、最近 M 条记录的相干球冠、曲边多边形可行走廊与 M = 9 针尖区的球心投射放大镜；青色是观察者 A 的可行走廊 Ω_M、锚点张成大圆与等相关族舒尔补曲线，品红是收紧走廊的相干帽边界弧、候选态离开锚点平面的高度弧、M = 10 空走廊警告与刚被遗忘撤除的旧帽虚线残迹（严禁用红色标负舒尔补或空走廊；红色只给抽屉里的低秩非弦图补全与非平衡遗忘热力学 `OPEN` 标记），紫色是伴生观察者 B 的相干帽与双观察者重叠共识区 Ω_A ∩ Ω_B，琥珀只给球面上可自由拖动的当前候选态 x 与当前窗口深度刻度 M。绿色框严格只给页面引用的十三条冻结定理（`unit_gram_overlap_characterization`、`two_anchor_gram_det_formula`、`two_anchor_gram_det_pos_iff`、`three_anchor_gram_det_formula`、`three_anchor_gram_det_pos_iff`、`gram_realizability`、`exists_unitary_mul_eq_of_conjTranspose_mul_eq`、`orthogonal_complement_projection_identities`、`finite_layer_projection_escape`、`finite_memory_history_capacity`、`surviving_copy_blocks_reversal`、`objective_claim_requires_invariant_common_factor`、`landauer_bound_of_balance`，其中最后一条在 §34.17 定理环境中引用，本页写明把 −ΔS 读成 q_M 仍需均匀可达体积与等温重置模型）；球面圆弧多边形高斯—博内面积公式、Albert (1969) 伪逆舒尔补判据、Grone–Johnson–Sá–Wolkowicz (1984) 弦图半正定补全定理与兰道尔原理标 `ARGUED`；高斯—博内精确走廊面积与斐波那契求积交叉核对、雅可比谱分解伪逆与秩 ≤ 3 块格拉姆谱（明确写明 2M > 3 时 λ_min(K) = 0 精确成立）实算标 `NUM`；黄金角螺旋记录、均匀可达体积等温重置假设以及“芝诺—拉普拉斯死锁 / 宽容即共同遗忘”诠释标 `MODEL`。
 
 `roundtrip-born-imaginary-blindspot-sandbox`（`ECHO//IMAGINARY`）与 `pairwise-shutter`、`repeated-projection`、`fairness-square-uncertainty-expansion` 分工：前三页分别讲快门离散抽样计数、布洛赫球未读捏合幂等与开口螺旋算术逃逸，本页讲第三十四章 §34.19 `#sec-ch34-roundtrip-projection-and-imaginary-blindspot` 的全章收官命题——“观察者站在自身轴 I 上看不见 90° 垂直盲平面 span{e₁, e₂}，单程只得青色影子 cos θ，往返双投影 I → (cos θ)V → (cos²θ)I 才给出琥珀玻恩回声 cos²θ，而转进 90° 盲区的那一下正是虚数 i（×i² = −1）与薛定谔保范圆弧时间引擎 e^(−iωt)”：舞台用 `kit.solid` 画观察者轴 I、与 I 垂直的品红盲平面圆盘、等倾角紫色方位锥、两段折返雷达脉冲与盛住画面的下半球碗，顶部切换外部三维、沿 I 轴侧看盲边与转 90° 基俯视盲平面三种视角；青色是单程投影影子 cos θ、两段折返投影线与薛定谔保范圆弧轨迹，品红是 90° 垂直盲平面、逃逸高度 sin θ 与盲区亏量 sin²θ，紫色是 360° 等倾角方位盲锥与 ×i 双直角旋子平面，琥珀只给观察者基准轴 I、可拖动的当前态矢 V 与落回 I 轴的当前玻恩回声点 cos²θ（实数衰减对照线用中性虚线，红色只给抽屉里的测量单结果问题 `OPEN` 标记）。绿色框严格只给页面引用的十条冻结定理（`rank_one_born_pairing_weight`、`born_probability_skeleton`、`lagrange_gram_identity`、`orthogonal_complement_projection_identities`、`partition_inseparable_iff_kernel`、`diagonal_prime_observables_cannot_recover_relative_phase`、`robertson_schrodinger`、`square_eq_neg_one_of_skewAdjoint_unitary`、`projection_probability_flow`、`energy_eigenstate_stationary`）；玻恩定则、马吕斯 cos²θ 偏振律与笛卡尔 1637 年“imaginaires”词源标 `ARGUED`；cos θ、cos²θ、sin²θ、锥冠立体角 2π(1 − cos θ)、盲圆周长 2π sin θ、换位子界 |sin 2θ sin φ|、e^(−2t) 与牛顿法解 θ* 实算标 `NUM`；三维单位向量画法（显式标明布洛赫极角为 2θ）与“对于我 I 看不见即为虚 i”第一人称诠释标 `MODEL`。
+
+`trihedron-chord-pivot-tunneling-sandbox`（`CHORD//TUNNEL`）承接第三十四章 §34.26 `#sec-ch34-chord-tunneling-and-pivot-renormalization`，与 `spherical-trihedron-cell`、`octave-point-volume-field-sandbox`、`arithmetic-schur-lab` 分工：前三页分别讲单枚三面角原胞的“一次/二次正交”球面投影、外代数 1—3—3—1 格点格林互逆与整除图精确高斯舒尔消元，本页讲极小圆弧体 ΔT_ε 的“正交双侧壁爬坡 2ε、外凸球面顶盖测地弧 arccos(cos²ε) 与体内平直割弦 √2 sin ε 三路严格序、六点最小—加热带舒尔消元、向心多尺度枢轴全息锥（Λ⁰_ℓ → Λ²_ℓ → Λ³_ℓ ≡ Λ⁰_{ℓ+1}）及共振枢轴中继对比芝诺排序探针”：舞台把单位球上的 ΔT_ε 画成受光实体；紫色给两面正交侧壁 OAB、OBC（2ε，在直角顶点 B 付全局排序比较税）与枢轴锥层级骨架，品红给外凸球面顶盖测地弧 arccos(cos²ε)、角超 Ω 与被平直内割削掉的新月形鼓包，青色给穿过体内的平直内割弦 √2 sin ε（弦中点半径 r_mid = √((1 + cos²ε)/2)，下沉深度 Δr = 1 − r_mid），琥珀只给可拖动的张角手柄 ε、沿路推进的当前读头与当前选定枢轴（本页无开放问题标记，不用红色）。绿色框严格只给页面引用的五条冻结定理（`fs_angle_triangle`、`lagrange_gram_identity`、`partition_inseparable_iff_kernel`、`exists_posSemidef_completion`、`concept_fiber_decomposition`，其中 `concept_fiber_decomposition` 准确写明是任意读出映射下的余纤维依值求和分解 X ≃ Σ_{b:B} ConceptFiber(q_C, b)，而非内积正交分解；`exists_posSemidef_completion` 只保证弦图团半正定矩阵存在全局半正定补全，不提供构造算法）；Dijkstra（1959）、Fredman–Tarjan（1987）、全序输出 Ω(n log n) 比较下界、Duan–Mao–Mao–Shu–Yin（STOC 2025）无需输出全序的确定性 O(m log^(2/3) n) 单源最短路算法、Agmon（1982）瞬子衰减度规、Tsu–Esaki（1973）共振隧穿、Misra–Sudarshan（1977）量子芝诺效应与弦图团—分隔集补全公式标 `ARGUED`；ε ∈ [10°, 90°] 逐度核对三路严格不等式、Δr_bulk、六点最小—加矩阵克莱尼星对比逐点热带消元、双势垒转移矩阵透射率与芝诺转移 1 − cos²ⁿ(π/2n) 实算标 `NUM`；ΔT_ε 三面寻路解剖、谢尔宾斯基顶盖对分枢轴八度与全息体锥及共振阱珠示意标 `MODEL`。
+
+`imaginary-chord-temporal-double-slit-sandbox`（`IMAG//TUNNEL`）承接第三十四章 §34.27 `#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit`，与 `roundtrip-born-imaginary-blindspot-sandbox`、`scattering-temporal-bridge`、`double-slit-marker` 分工：`roundtrip-born-imaginary-blindspot-sandbox` 讲有限维单态往返投影 cos²θ 与 90° 盲平面定义虚数 i，`scattering-temporal-bridge`（§34.19.5，无绿色框）专门检验势垒内增长/衰减两支指数解 Ae^(κx) + Be^(−κx) 共同输运守恒流以及单能量标记重叠 ⟨m₁|m₂⟩ 完全相消条件，而本页以真实物理单位电子（V₀ = 1.00 eV，E/V₀ ∈ [0.10, 1.40]，L ∈ [0.20, 1.20] nm）同台打通“空间 90° 虚平面割弦隧穿、阿秒双时间快门 (t₁, t₂) 能谱频率梳 ΔE = h/Δt 与中途实轴探针 / 芝诺退相干崩解”：舞台直接画定态 ψ(x)e^(−iEt/ℏ) 以及沿传播轴 x 正交相交的竖直实平面 I（后墙投影屏）与水平盲平面 i（地面投影屏），顶部切换实轴平视 I、90° 俯瞰虚平面 i 与三维全貌；青色给实平面 I 上的投影影子、出墙透射波与右侧能谱干涉明纹梳，品红给 90° 盲平面 i 上的投影影子、墙内单调不绕圈的内割衰减弦桥（κL ≫ 1 时贴近 e^(−κx)）与被中途捏合丢弃的副对角相干质量，紫色给墙口/墙尾 ±90° 动量偏转四分之一圆弧与条纹间距/相位读数，琥珀只给势垒右缘宽度手柄 L、能谱屏能量游标 E* 与当前时刻波前读头（红色只给抽屉里关于停留时间、Büttiker–Landauer 时间与拉莫尔时间实验对应关系的 `OPEN` 标记）。绿色框严格只给页面引用的六条冻结定理（`orthogonal_complement_projection_identities`、`square_eq_neg_one_of_skewAdjoint_unitary`、`relativeComplexStructure_square`、`diagonal_prime_observables_cannot_recover_relative_phase`、`pinching_discarded_coherence_mass`、`monitored_return_conservation`）；Gamow（1928）势垒隧穿、Misra–Sudarshan（1977）量子芝诺定理、Lindner 等（2005）阿秒光电离时间双缝、Tirole 等（2023）ITO 光学时间双缝衍射、Rao 等（2025）磁振子时间衍射、Angulo 等（2026）原子激发负驻留时间弱值与矩形势垒透射公式 T(E) 标 `ARGUED`；CODATA 电子常数下的 k、κ、κL、T(E) 与 ΔE = h/Δt 实算标 `NUM`；实轴 I 对盲平面 i 割弦桥读法、时间格拉姆窗口 W_Δt、双缝波包中心示意参数与 V = 1 − p 两态芝诺探针链标 `MODEL`。
 
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
 
@@ -713,6 +719,18 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十四章 | §34.19.5.2 等幅反相且不可分辨的单能量相消之后 | `scattering-temporal-bridge` · `cancel` |
 | 第三十四章 | §34.19.5.2 标记正交与非相干本底说明之后 | `scattering-temporal-bridge` · `marked` |
 | 第三十四章 | §34.19.5 末 | `scattering-temporal-bridge` 完整实验室 |
+| 第三十四章 | §34.26.1 第 1 条（两扇正交侧壁爬行 $L_{\mathrm{walls}}(\epsilon) = 2\epsilon$ 与 $\Omega(n\log n)$ 全局排序税）之后 | `trihedron-chord-pivot-tunneling-sandbox` · `walls-dijkstra-tax` |
+| 第三十四章 | §34.26.1 第 2 条（品红球面顶盖无序波前松弛 $L_{\mathrm{cap}}(\epsilon) = \arccos(\cos^2\epsilon)$ 与热带幂等相消）之后 | `trihedron-chord-pivot-tunneling-sandbox` · `cap-wavefront-relax` |
+| 第三十四章 | §34.26.1 末（第 3 条平直内割弦面热带舒尔补消元与三级长度严格不等式之后、§34.26.2 之前） | `trihedron-chord-pivot-tunneling-sandbox` · `flat-chord-tunnel` |
+| 第三十四章 | §34.26.2 末（向心多尺度全息重整化锥四拍列表与公式之后、§34.26.3 之前） | `trihedron-chord-pivot-tunneling-sandbox` · `holographic-pivot-cone` |
+| 第三十四章 | §34.26.4 五维对照总表之后、文献注记 `rem-ch34-sssp-sorting-barrier-and-instanton-literature` 之前 | `trihedron-chord-pivot-tunneling-sandbox` · `resonant-pivot-relay` |
+| 第三十四章 | §34.26 末（转入 §34.27 时间双缝追问段之后） | `trihedron-chord-pivot-tunneling-sandbox` 完整实验室 |
+| 第三十四章 | §34.27.1 经典实轴负动能平方 $p^2(x) < 0$ 死墙折返段之后 | `imaginary-chord-temporal-double-slit-sandbox` · `classical-real-wall` |
+| 第三十四章 | §34.27.1 末（$90^\circ$ 盲平面正交动量旋入、三段式几何全景与矩形势垒透射公式 $T(E)$ 之后、§34.27.2 之前） | `imaginary-chord-temporal-double-slit-sandbox` · `ninety-deg-imaginary-chord` |
+| 第三十四章 | §34.27.2 时间双缝能量谱干涉定律 $P(E)$ 与普朗克互易梳齿公式 $\Delta E = h/\Delta t$ 之后 | `imaginary-chord-temporal-double-slit-sandbox` · `temporal-double-slit-comb` |
+| 第三十四章 | §34.27.2 末（空间双缝、量子隧穿与时间双缝正交对偶总表之后、§34.27.3 之前） | `imaginary-chord-temporal-double-slit-sandbox` · `attosecond-tunnel-self-interference` |
+| 第三十四章 | §34.27.3 末（算例 `ex-ch34-nanobarrier-and-attosecond-fringe-calculus` 与受监测返回芝诺冻结段之后、§34.27.4 之前） | `imaginary-chord-temporal-double-slit-sandbox` · `zeno-midway-probe-collapse` |
+| 第三十四章 | §34.27 末（全章二十七阶总收官转入第三十五章一段之后） | `imaginary-chord-temporal-double-slit-sandbox` 完整实验室 |
 | 第三十五章 | 第一节 Lean 三定理列表第 3 条（`finite_memory_history_capacity`）之后、“这里的清表”一段之前 | `self-referential-table` · `full` |
 | 第三十五章 | 第一节“因此，乘着光来……”一段之后、定理 `thm-ch35-null-pulse-and-record-blocking` 之前 | `self-referential-table` · `reset` |
 | 第三十五章 | “成长即扩表”一节三步列表之后、“下面我们将……”一段之前 | `self-referential-table` · `expand_table` |

@@ -55,7 +55,7 @@ books/<slug>/
 | `book.version` | 语义化版本，进入下载文件名与 Release |
 | `book.editions` | 语言版本，第一个为权威版本，默认 `["zh", "en"]` |
 | `book.title` / `subtitle` / `description` | 每种语言一行：`zh = "…"`、`en = "…"` |
-| `book.authors`、`license`、`isbn`（按语言）、`date` | 进入版权页与 EPUB 元数据 |
+| `book.authors`、`license`、`isbn`（按语言）、`doi`、`date` | 进入版权页与 EPUB 元数据；`doi` 是出版 DOI，通常填写 Zenodo 概念 DOI。省略时会从根目录 `.zenodo.json`、`CITATION.cff` 或 README 中明确的 Zenodo DOI 链接自动读取 |
 | `book.code` | 封面与站点卡片上的代号，形如 `GOLDEN//OBSERVE` |
 | `numbering.unnumbered` | 不参与章节计数的主章路径与独立定理前缀，适用于终章等整棵章节树，见下文 |
 | `outputs.html` / `pdf` / `epub` | 输出开关；`pdf = ["screen", "print"]`；可选加 `"academic"` 导出学术预印本版，省略配置或 `true` 仍只导出原两版 |
@@ -230,7 +230,7 @@ HTML 注释 `<!-- … -->` 不出现在任何输出中：其中的图片、链�
 **一句标题。** 引用可视化的一张实验卡：图贴在讲到它的那句话旁边。
 :::
 
-::: {.film src="001-golden-deficit"}
+::: {.film src="golden-deficit"}
 :::
 
 ::: {.slides src="overview"}
@@ -246,6 +246,8 @@ HTML 注释 `<!-- … -->` 不出现在任何输出中：其中的图片、链�
 外部资源：`src="trureturing-visualize:<id>"`、`src="trureturing-film:film-001-v1"`。HTML 中为交互嵌入或播放器；PDF/EPUB 中为缩略图/海报加在线地址。媒体块在各语言版本中也必须一一对应。
 
 可视化的每张实验卡都可以单独引用：`preset="<卡>"`（页面里的 `data-preset`）。HTML 中它是一张不带内部滚动的图，开在那张卡上，“全屏打开”进入同一状态的完整实验室；PDF/EPUB 中它是那张卡的带标签静态图 `viz/<id>/fig-<卡>.<语言>.jpg`（`node tools/node/viz-thumbs.mjs <book> <id>` 生成，本地使用、不提交）。把图放在讲到它的那句话旁边，图注用与图例相同的颜色词和符号；不带 `preset` 的嵌入是完整实验室，通常每个可视化在章末放一处。各语言版本引用的卡必须相同，`./tbook check` 会核对卡存在、版本一致、静态图齐全。设计与制作见 `skills/book-viz`。
+
+视频目录直接使用具体片名的 kebab-case 写法，例如 `golden-deficit`。`film.json` 只填写双语标题等内容元数据，不另填视频 ID 或所属章节；正文引用 `::: {.film src="golden-deficit"}`，各端显示片名，不显示视频编号。
 
 本书的视频是构建产物：`./tbook build films|site|all` 渲染（输入未变时从缓存恢复），站点托管在 `<slug>/films/<id>/`。章节中的播放器播放 720p 旁白版、附 `film.json` 的 `outputs` 所列视频的下载链接（默认只构建 720p 旁白版与封面，1080p 与纯配乐版本列出才构建）；站点没有该视频时（缺少视频工具链且缓存未命中）显示海报与“视频未构建”。PDF/EPUB 显示提交的 `poster.jpg`，有 `base_url` 时加视频页地址。编写与构建见 `skills/book-film`。
 

@@ -1,12 +1,15 @@
-"""第二十七章地图：平行四边形的两条对角线、连成一片的支撑把相位锁成一个、挤压两次等于一次。
+"""第二十七章地图：平行四边形的两条对角线、连成一片的支撑把相位锁成一个（前提是幺正矩阵 A 保持各条坐标射线与每条测试射线）、挤压两次等于一次。
 Chapter 27 at a glance: the two diagonals of a parallelogram, overlapping supports that lock every
-phase into one, and a pinching that does nothing the second time.
+phase into one for a unitary A that keeps every coordinate ray and every test ray, and a pinching
+that does nothing the second time.
 
 Panel I is the parallelogram spanned by x and y with its diagonals x + y and x − y (the identity
 |x+y|² + |x−y|² = 2(|x|² + |y|²) is asserted for the drawn vectors). Panel II is a chain of four
-coordinates; three test vectors each cover two neighbouring coordinates, and every diagonal entry
-carries the same phase arrow. Panel III is a 3 × 3 block matrix whose off-diagonal blocks the pinching
-removes; pinching the result again leaves it in place.
+coordinates; three test vectors each cover two neighbouring coordinates. For a unitary A that keeps
+every coordinate ray and the ray of each test vector, the connected chain forces every diagonal entry
+to carry the same phase arrow, A = c · 1; overlapping supports alone do not lock the phase. Panel III
+is a 3 × 3 block matrix whose off-diagonal blocks the pinching removes; pinching the result again
+leaves it in place.
 """
 
 import math
@@ -17,13 +20,15 @@ SIZE = (740, 262)
 WRAP = True
 ALT = {
     "zh": "三栏。第一栏：两支墨色箭头 x、y 撑开一个平行四边形，两条青色的对角线是 x + y 与 x − y，下方写着两条对角线的平方和等于四条边的平方和。"
-          "第二栏：四个坐标排成一行，每个圆里一支紫色的相位箭头，四支方向相同；三条青色的弧各连起相邻的两个坐标，表示某个测试态在这两格上同时不为零，弧连成一条链，"
-          "下方写着 A = c · 1。第三栏：左边是 3 × 3 的块矩阵 ρ，对角块青色，非对角块品红；箭头“挤压”指向右边只剩青色对角块的矩阵，"
+          "第二栏：四个坐标排成一行，每个圆里一支紫色的相位箭头，四支方向相同；三条青色的弧各连起相邻的两个坐标，表示某个测试态在这两格上同时不为零，弧连成一条链；"
+          "在幺正矩阵 A 保持各条坐标射线与每条测试射线的前提下，这条链把四格锁成同一相位，下方写着 A = c · 1。第三栏：左边是 3 × 3 的块矩阵 ρ，对角块青色，非对角块品红；箭头“挤压”指向右边只剩青色对角块的矩阵，"
           "它下方的小圈箭头表示再挤压一次，矩阵不动。",
     "en": "Three panels. Panel I: two ink arrows x and y span a parallelogram; its two cyan diagonals are x + y and x − y, and "
           "below it the squares of the diagonals add up to the squares of the four sides. Panel II: four coordinates in a row, "
           "each circle holding a violet phase arrow, all four pointing the same way; three cyan arcs each join two neighbouring "
-          "coordinates, meaning that some test vector is non-zero on both, and the arcs form a chain; below, A = c · 1. "
+          "coordinates, meaning that some test vector is non-zero on both, and the arcs form a chain; for a unitary A "
+          "that keeps every coordinate ray and every test ray, the chain locks all four into one phase, and below it "
+          "reads A = c · 1. "
           "Panel III: on the left a 3 × 3 block matrix ρ with cyan diagonal blocks and magenta off-diagonal blocks; an arrow "
           "labelled pinch leads to the matrix with only its cyan diagonal blocks left, and a small loop under it says that "
           "pinching again leaves it in place.",
