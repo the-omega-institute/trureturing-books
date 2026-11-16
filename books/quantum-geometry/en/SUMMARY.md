@@ -182,6 +182,8 @@
     - [39.5.6 Self-Referential Scale Comparison: Dottie's Cosine Fixed Point $\theta^*$ Versus Internal Contraction Modulus $|\alpha|$](ch39-s05-s06-self-reference-scales.md)
     - [39.5.7 Cross-Cut $1^K$ Prohibition and Attainable Schmidt Ranks of Direct Encoders](ch39-s05-s07-cut-entanglement.md)
     - [39.5.8 Parry Stationary Law, Escape-Pair Counting, and the Fractal Horizon Entropy Problem](ch39-s05-s08-parry-law-and-entropy.md)
+  - [39.10 The Three-Dimensional Concept-Field Cap and the Hilbert Multi-Concept Ledger: Why "Above Three Dimensions" Is Only a Joint Projection of 3D Fields](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)
+  - [39.11 Arc-Field Grand Unified Theory (AF-GUT): Concentric Four-Field Arc Connections, Weinberg Angle 3/8 Running, and Clock-Budget Einstein Closure](ch39-s11-af-gut-arc-field-grand-unification.md)
 
 # Coda and Appendices
 
