@@ -249,6 +249,128 @@ $$
 - 等式 $\operatorname{QMaxFlow} = \operatorname{QMinCut} = \min(ad, bc)$ 严格依赖于桥宽 $\operatorname{Fin} 3$ 以及显式列出的正性、顺序与二次锥不等式（$0 < a \le b$，$0 < c \le d$，$a^2 + b^2 \le 3ab$，$c^2 + d^2 \le 3cd$）；
 - 该定理**不能**无条件推广到任意拓扑的张量网络、完整的 MERA 多尺度重整化树、连续统 AdS/CFT 对偶或 Ryu–Takayanagi 极小曲面公式。
 
+[@thm-bridge-quantum-maxflow-mincut] 确定的是可达秩，而不是奇异值的分布。设非零桥流 $F$ 的非零奇异值为 $\sigma_1,\ldots,\sigma_R$；将它作为行、列两侧的纯态振幅矩阵归一化后，施密特权重为 $p_j=\sigma_j^2/\sum_k\sigma_k^2$。秩只数有多少个 $p_j$ 非零；纠缠熵达到 $\ln R$ 还要求它们全部等于 $1/R$。[@ex-bridge-two-three] 的置换矩阵恰好兼具满秩与平坦谱，但秩定理本身没有保证每组允许维数都能如此。
+
+仍按 19.1 节的原始分组，取 $M_r\in M_{a\times b}(\mathbb C)$、$N_r\in M_{d\times c}(\mathbb C)$，并令
+
+$$
+F=\sum_{r=0}^2 M_r\otimes N_r:
+\mathbb C^b\otimes\mathbb C^c\longrightarrow
+\mathbb C^a\otimes\mathbb C^d.
+$$
+
+这里 $F^*$ 表示共轭转置。比秩可达更强的要求，是存在同一组矩阵族 $M,N$ 和同一个正实数 $\lambda$，使
+
+$$
+\begin{aligned}
+bc\le ad&\ \Longrightarrow\ F^*F=\lambda I_{bc},\\
+ad\le bc&\ \Longrightarrow\ FF^*=\lambda I_{ad}.
+\end{aligned}
+$$
+
+它们分别要求列或行构成范数为 $\sqrt{\lambda}$ 的正交族，使较小一侧的奇异值全部等于 $\sqrt{\lambda}$。在接缝 $ad=bc$ 上，两项蕴含同时生效，使用的是同一个 $F$ 与同一个 $\lambda$。下面的必要条件说明，这种加强受到秩本身看不见的限制。
+
+::: {.theorem #thm-bridge-scalar-gram-obstruction title="宽度三桥流的标量 Gram 障碍" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction"}
+设 $a,b,c,d\in\mathbb N$，$c>0$、$b>2a$。对任意三个 $a\times b$ 复矩阵 $M_r$、三个 $d\times c$ 复矩阵 $N_r$ 及正实数 $\lambda$，若
+
+$$
+F=\sum_{r=0}^2M_r\otimes N_r,\qquad
+F^*F=\lambda I_{bc},
+$$
+
+则 $d\ge3c$。不另要求 $a>0$，也不加顺序条件或二次锥条件。
+:::
+
+::: {.proof #pf-bridge-scalar-gram-obstruction}
+先把三张 $M_r$ 竖直堆叠为辅助映射
+
+$$
+V:\mathbb C^b\longrightarrow\mathbb C^3\otimes\mathbb C^a,\qquad
+Vx=\sum_{r=0}^2e_r\otimes M_rx.
+$$
+
+若 $Vx=0$，则所有 $M_rx=0$，故 $F(x\otimes y)=0$。取非零 $y\in\mathbb C^c$，由 $F^*F=\lambda I_{bc}$ 得 $\lambda\|x\|^2\|y\|^2=0$，所以 $x=0$。因此 $W=\operatorname{range}V$ 的维数为 $b$。
+
+固定任意非零系数方向 $z=(z_0,z_1,z_2)\in\mathbb C^3$。子空间 $z\otimes\mathbb C^a$ 的维数为 $a$，而环境空间的维数为 $3a$；因为 $b+a>3a$，有 $W\cap(z\otimes\mathbb C^a)\ne\{0\}$。于是存在非零 $x,u$，使 $Vx=z\otimes u$，即对每个 $r$ 都有 $M_rx=z_ru$。
+
+这使九个 $M_r^*M_s$ 线性无关。事实上，若复系数矩阵 $T=(t_{rs})$ 满足 $\sum_{r,s}t_{rs}M_r^*M_s=0$，用上面选出的 $x$ 在两侧配对便得
+
+$$
+0=\sum_{r,s}t_{rs}\langle M_rx,M_sx\rangle
+=\|u\|^2z^*Tz.
+$$
+
+因此 $z^*Tz=0$ 对所有 $z$ 成立（$z=0$ 时亦然）。分别代入 $e_r$，再对 $r\ne s$ 代入 $e_r+e_s$ 与 $e_r+i e_s$，得到
+
+$$
+t_{rr}=0,\qquad t_{rs}+t_{sr}=0,\qquad
+it_{rs}-it_{sr}=0.
+$$
+
+故所有 $t_{rs}=0$。这里同时用了实、虚两个方向，不能只检验实向量 $z$。
+
+接着展开原来的列 Gram 恒等式：
+
+$$
+\sum_{r,s}(M_r^*M_s)\otimes(N_r^*N_s)
+=\lambda I_b\otimes I_c.
+$$
+
+由 $c>0$ 固定一个坐标 $k$，定义 $H_{rs}=(N_r^*N_s)_{kk}$，并记 $\delta_{ij}$ 为 Kronecker 符号。对任意 $i,j$，取上式在第二个张量因子上的 $(i,j)$ 矩阵元，再减去 $(k,k)$ 矩阵元对应等式的 $\delta_{ij}$ 倍，得到
+
+$$
+\sum_{r,s}\bigl((N_r^*N_s)_{ij}-\delta_{ij}H_{rs}\bigr)M_r^*M_s=0.
+$$
+
+由九个 $M_r^*M_s$ 的线性无关性，每个系数均为零，因而全部交叉 Gram 都是标量矩阵：$N_r^*N_s=H_{rs}I_c$。同时，$(k,k)$ 矩阵元对应的等式可用竖直堆叠 $V$ 写为
+
+$$
+V^*(H\otimes I_a)V=\lambda I_b.
+$$
+
+因为 $\lambda>0$，右边的秩为 $b$；乘积的秩不超过中间因子的秩，所以
+
+$$
+b\le\operatorname{rank}(H\otimes I_a)
+=a\operatorname{rank}H.
+$$
+
+$H$ 是 $3\times3$ 矩阵，秩至多为 $3$；若其秩至多为 $2$，就有 $b\le2a$，与假设矛盾。因此 $\operatorname{rank}H=3$。最后横向拼接
+
+$$
+C=[\,N_0\ N_1\ N_2\,]\in M_{d\times3c}(\mathbb C).
+$$
+
+其 Gram 矩阵为 $C^*C=H\otimes I_c$，于是
+
+$$
+3c=c\operatorname{rank}H
+=\operatorname{rank}(C^*C)
+\le\operatorname{rank}C\le d.
+$$
+
+辅助堆叠与拼接只用于证明，原来的三项收缩及行列分组始终不变。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-bridge-two-five-flat-spectrum title="秩达到 10，谱却不能平坦：$(2,5,2,5)$"}
+取 $(a,b,c,d)=(2,5,2,5)$。正性、顺序条件与两条二次锥条件全部成立：
+
+$$
+\begin{aligned}
+0<a=2&\le b=5,\qquad 0<c=2\le d=5,\\
+a^2+b^2=c^2+d^2&=29\le30=3ab=3cd.
+\end{aligned}
+$$
+
+即使再加上两条比值限制 $2b\le5a$、$2d\le5c$，这一点仍被允许，因为 $2b=5a=10$ 且 $2d=5c=10$。
+
+此时 $ad=bc=10$、$3ac=12$，所以 [@thm-bridge-quantum-maxflow-mincut] 给出 $\operatorname{QMaxFlow}=\operatorname{QMinCut}=10$；由 [@lemma-bridge-flow-attained]，确有某组三对矩阵使 $F$ 的秩达到 $10$。然而 $b=5>2a=4$，列 Gram 恒等式 $F^*F=\lambda I_{10}$ 若对某个 $\lambda>0$ 成立，[@thm-bridge-scalar-gram-obstruction] 就要求 $d\ge3c=6$，与 $d=5$ 矛盾。因此，对任意这样的复矩阵三元组和任意正 $\lambda$，该恒等式都不成立。
+
+这个反例恰好位于 $ad=bc$ 的接缝，两项标量 Gram 要求同时生效；列恒等式的不可能性已经排除了它们在同一证人下的联合成立。这里存在满秩桥流，却不存在十个奇异值全部相等且为正的桥流：在这一行列二分下，秩达到 $10$ 并不使归一化纠缠熵达到 $\ln10$。
+:::
+
+上述施密特权重与熵的讨论是归一化纯态的谱解释；定理本身只给出矩阵维数的必要条件。这一障碍针对既定分组下的三项复矩阵收缩与精确平坦谱；它不给出近似平坦的误差界，也不建立一般张量网络、物理实现或连续统全息对偶的结论。
+
 ::: {.figure src="ch19-discrete-vs-rt"}
 **本章证明的只到左边为止。** 左边是宽度三桥图，绿色标签是锥域内的最大流等于最小割（[@thm-bridge-quantum-maxflow-mincut]）；右边圆盘是连续体时空的一张切片，青色的弧是边界区域 $A$，紫色的弧 $\gamma_A$ 从 $A$ 两端垂直于边界伸入内部，是 RT 公式里的极小曲面（文献结果，未在本书形式化）。中间被划掉的箭头：从左到右的连续极限，本书没有证明。
 :::
@@ -330,7 +452,7 @@ $$
 
 在解读 [@thm-mps-observable-phase-recovery] 与 [@thm-mps-generic-interior-recovery] 时，必须严守三条精确边界：第一，$\operatorname{rawPrefix}$ 与 $\operatorname{rawInterior}$ 均为**未归一化**振幅外积（定理无需预设 $\|\psi\| = 1$，其迹直接携带范数平方 $\|\psi\|^2$）；第二，非退化假设 $\operatorname{ObservableChart}(m, \psi)$ 与主多项式判据 $R \neq 0$ 绝不可省去——诸如直积态、GHZ 态或上文手算的对角可交换 MPS 真实存在于 $\operatorname{openBoundaryMPS}(3 + m)$ 的低维退化补集中，并不能仅凭单个三格点边缘唯一重构；第三，这里的“一般性”严格指子空间拓扑下的开集与稠密性（`IsOpen` 与 `Dense`），既未引入概率测度声称“测度为 $1$”，也不等同于抗噪数值层析的多项式时间复杂度上界。
 
-在宽度三桥图与一维开边界 MPS 链上，我们已经看到局部键维数如何一面通过最小割容量 $\min(ad, bc)$ 约束跨截面秩（[@thm-bridge-quantum-maxflow-mincut]），一面在非退化主轨迹上凭三格点边缘锁死全局纯态相位（[@thm-mps-observable-phase-recovery]、[@thm-mps-generic-interior-recovery]）。然而，当一个量子系统的边界纠缠熵已经达到最小割上限（热化饱和）之后，系统内部的量子电路结构是否就停止演化了？在全息图景与计算复杂性理论中，“电路深度与门计数”究竟遵循怎样的严格下界，又在哪道悬崖边上遇上了当今科学尚未攻克的三大开放猜想？让我们进入第五部的收官之章——[门复杂度即体积](ch20-complexity-and-spacetime.md)。
+在宽度三桥图与一维开边界 MPS 链上，我们已经看到局部键维数如何一面通过最小割容量 $\min(ad, bc)$ 约束跨截面秩（[@thm-bridge-quantum-maxflow-mincut]），一面在非退化主轨迹上凭三格点边缘锁死全局纯态相位（[@thm-mps-observable-phase-recovery]、[@thm-mps-generic-interior-recovery]）。秩饱和并不保证纠缠熵饱和，[@ex-bridge-two-five-flat-spectrum] 已给出精确反例。若在后续模型中额外假设纠缠熵已达到割容量对数给出的上限，这仍是独立的情景假设，并不等同于热平衡。接下来转向量子电路的深度与门计数：它们受到哪些严格限制，与全息复杂性的猜想又有怎样的边界？进入第五部的收官之章——[第二十章](ch20-complexity-and-spacetime.md)。
 
 ::: {.viz src="layered-network-cut" height="560"}
 层级网络与割的完整实验室：在底边拖动一段或两段区间，看品红的最小割怎样穿过网络、割断几条键。网络是示意模型，割的条数由页面算出；RT 公式与 MERA 的类比是文献结果，未在本书形式化，绿色只给 [@prop-bridge-flow-cut-bound]。

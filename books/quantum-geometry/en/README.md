@@ -16,7 +16,7 @@ Whenever physics has appeared haunted by paradox, the culprit has almost always 
 
 In the figure, $O$, $A$, and $B$ are unit vectors. In the plane panel, $\theta$ is the directed angle from $A$ to $B$ measured in the fixed orientation $\hat{I}$.
 
-On a first reading, hold onto one question: **what information about the object is missing from the shadow you can see?** The ray and turntable let you practise asking it; the sphere, ambient space, and self-referential iteration each add one idea later. These demonstrations explain the book's imagery; the quantum-state and measurement conventions still need to be established in subsequent chapters.
+On a first reading, hold onto one question: **what information about the object is missing from the shadow you can see?** The ray and turntable let you practise asking it; the sphere, ambient space, and self-referential iteration each add one idea later. These demonstrations explain the book's imagery; the quantum-state and measurement conventions still need to be established in subsequent chapters. Each of Sections 0.1 to 0.5 also has a video of about two minutes that answers a single question; watched in order, the five form a guided tour of the prelude.
 
 ## 0.1 First Blind Spot: Mistaking a Line for a Point {#sec-blindspot-1}
 
@@ -36,6 +36,12 @@ Change the viewing angle yourself. The cyan original ray below has a fixed lengt
 
 ::: {.viz src="prelude-dimensions" preset="head-on" height="500"}
 **The ray stays the same length; your viewing angle changes.** Head-on, its projection is a point; at $45^\circ$, the unit ray projects to a length of about $0.707$; side-on, its full length is visible. This is a geometric model of orthogonal projection.
+:::
+
+The video below walks through the whole section: step half a pace aside and watch the dot unfold, read the agreement of two unit arrows, then check by hand that “looking again still gives itself”, $P^2 = P$.
+
+::: {.film src="prelude-head-on-ray"}
+**Head-On: The Dot Is a Line.** A flashlight aimed straight at the eye shows only a bright dot; half a pace aside, it unfolds into a cyan ray. The amber gaze $\vv{o}$ and the direction $\vv{a}$ toward the source are unit arrows whose agreement $\vv{o}\cdot\vv{a} = \cos\theta$ is $1$ head-on. With $\vv{a} = (3/5, 4/5)$ the projection $P$ is computed by hand and $P^2 = P$ is checked entry by entry; comparing two lines, the squared shadow length $(3/5)^2 = 9/25$ equals the trace pairing, the film's only Lean-verified result. English narration with Chinese and English subtitles.
 :::
 
 > A "particle" is merely the bruise left on the retina when a ray meets the eye head-on; "substance" is what grammar invents when the gaze refuses to turn.
@@ -108,6 +114,12 @@ Use the next card to distinguish a latitude circle from a great circle: keep the
 
 The three effects above have distinct algebraic or geometric mechanisms; the classical observation that projections lose information does not derive them from one another.
 
+The video below covers only the spherical picture of this section: one plane holds only one kind of turn; three mutually perpendicular axes give a sphere; a fixed tilt walks only a latitude; and swapping the order of two turns changes where you land.
+
+::: {.film src="prelude-three-axes"}
+**One Plane Is Not Enough: Three Axes, One Sphere.** Three mutually perpendicular measuring axes send every arrow of length $1$ to a sphere; the correspondence between pure states and the sphere is a literature result, shown in violet as argued. Each point $(x, y, z)$ carries a readout table $B(x, y, z)$: the north pole gives $Z$, the point on the $x$ axis gives $X$. At a tilt of $50^\circ$ the amber point walks only the cyan latitude; only at $90^\circ$ is it the magenta equator through the centre. Quarter turns about $x$ and $z$, taken in swapped order, land $90^\circ$ apart, and the readout tables satisfy $ZX = -XZ$. The table formula and $ZX = -XZ$ are the film's two Lean-verified results. English narration with Chinese and English subtitles.
+:::
+
 ## 0.4 Fourth Blind Spot: The Sphere Beyond Spheres {#sec-blindspot-4}
 
 **And at the very moment we think we have beheld the whole sphere, we are already enclosed within a larger sphere.**
@@ -138,6 +150,12 @@ Unpack “averaging” as well: the next card replaces the continuous spherical 
 
 ::: {.viz src="prelude-dimensions" preset="average" height="500"}
 **Opposite directions cancel, leaving the mean at the centre.** The cyan directions form opposite pairs. Once the equal-weight mixture is complete, the amber mean vector has shrunk to the centre. This is a mixture of finitely many symmetric directions.
+:::
+
+The video below ties the section together: inside a sheet you cannot point to its own normal; one dimension down, the old circle becomes the equator of a new sphere; from one axis, the equator is a blind ring; and averaging every direction lands at the centre.
+
+::: {.film src="prelude-normal-escape"}
+**The Normal Comes From Outside: A Sphere Beyond the Sphere.** The cyan arrows in the magenta sheet never leave it; only in a three-dimensional room does the violet normal $\vv{e}_3 = \star_3(\vv{e}_1 \wedge \vv{e}_2)$ stand up. Inside three dimensions, $\star_3 I_3 = 1$ is just a number; one dimension down, the old unit circle becomes the equator of a new sphere with radius still $1$. Read by cosines from one axis, the whole equator reads $0$. Three opposite pairs, weighted equally, average to the centre $\rho_* = \frac{1}{2}I$, and no state's arrow is longer than $1$, the film's only Lean-verified result. The echo of Gödel is the book's analogy, shown in violet as argued. English narration with Chinese and English subtitles.
 :::
 
 ## 0.5 Final Awakening: From Beyond the Sphere Back to $\psi = \psi(\psi)$ {#sec-awakening}
@@ -199,6 +217,12 @@ For gate-set density, see P. O. Boykin et al., *On Universal and Fault-Tolerant 
 :::
 
 Unfolded, it ranges across quantum computing, spacetime physics, and mathematical logic; folded back, it is simply $\psi$ taking itself as ruler to measure the angle it opens, and recognizing itself across the living seam of approximation.
+
+The prelude's last video follows this section from “use the reading as the next angle” all the way to $\psi = \psi(\psi)$.
+
+::: {.film src="prelude-self-measure"}
+**The Ruler Measures Itself: $\psi = \psi(\psi)$.** Starting from $1$ radian, read the cosine and use the reading as the next angle: the amber zigzag runs between the cyan curve $y = \cos\theta$ and the grey diagonal $y = \theta$, closing in on $\theta^* \approx 0.739$. That $\cos\theta = \theta$ has exactly one positive solution, between $0$ and $1$, is the film's only Lean-verified result, the theorem [@thm-dottie-rational-inverse-endpoint] of Chapter 24; that the zigzag reaches it from any start and that no finite step lands exactly remain the literature results of [@rem-prelude-dottie-literature] and [@rem-prelude-finite-literature], shown in violet as argued. Where reading and angle coincide, the book writes $\psi = \psi(\psi)$. English narration with Chinese and English subtitles.
+:::
 
 ## 0.6 Reader's Guide and Formal Verification Contract {#sec-contract}
 
