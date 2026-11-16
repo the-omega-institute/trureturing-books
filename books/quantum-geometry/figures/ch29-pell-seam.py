@@ -9,6 +9,8 @@ Q_{k+1}/P_{k+1}. The row under the axis is Q_{k+1}² − 2P_{k+1}². Every numbe
 table of example ex-ch29-silver-pell-table.
 """
 
+INPUTS = []
+
 import math
 
 from _ch29 import S

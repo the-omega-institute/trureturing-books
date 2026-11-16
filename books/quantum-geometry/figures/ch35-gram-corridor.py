@@ -6,6 +6,8 @@ Each panel draws the unit anchor a and a unit candidate b with overlap c = cos �
 parallelogram they span; its area is sin θ and det G₂ = 1 − c² = sin² θ (asserted in _ch35).
 """
 
+INPUTS = []
+
 import math
 
 from _ch35 import gram2

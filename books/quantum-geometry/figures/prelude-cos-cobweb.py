@@ -8,6 +8,8 @@ checked; θ* ≈ 0.7390851 is found by iteration and |cos θ_k − θ_k| > 0 is 
 Banach's contraction principle is a literature result in the chapter's note.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (440, 330)

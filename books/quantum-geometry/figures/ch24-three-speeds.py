@@ -10,6 +10,8 @@ of the convergents a/b of θ* against log₁₀ b, under the dashed bound (1 + s
 checked against the tables of the chapter's example.
 """
 
+INPUTS = []
+
 import math
 from decimal import Decimal
 

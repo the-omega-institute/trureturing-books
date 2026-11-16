@@ -9,6 +9,8 @@ lines perpendicular to O, and s_once, s_twice lie on the fiber O·x = sin α/√
 _ch34). The difference s_twice − s_once runs along the fiber: it is in the kernel of the readout.
 """
 
+INPUTS = []
+
 from _ch34 import readout_fibers
 
 SIZE = (400, 345)

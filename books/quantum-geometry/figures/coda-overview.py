@@ -10,6 +10,8 @@ is the lattice (a + bφ, a + bψ) with the window [φ − 2, φ − 1] on the co
 are dropped to the line below (the chapter's theorem cites the model-set characterization with lean=).
 """
 
+INPUTS = []
+
 from _coda import PHI, WINDOW, defects, golden_points, in_window, lorenz, wireframe
 
 SIZE = (740, 270)

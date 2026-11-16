@@ -9,6 +9,8 @@ for M = 2 and M = 3, checks the composition law D(a, b) D(c, d) = ω^{bc} D(a + 
 index, and reads both angles off ZX (XZ)^{-1}.
 """
 
+INPUTS = []
+
 import cmath
 import math
 

@@ -8,6 +8,8 @@ In the third row the marker is orthogonal (α = 90°) but is read along the diag
 g(1 ± cos kx)/4 are fringes and anti-fringes, and the script asserts that together they are the bump of row two.
 """
 
+INPUTS = []
+
 import math
 
 from _ch06 import along

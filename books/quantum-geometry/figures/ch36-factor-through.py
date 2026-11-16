@@ -8,6 +8,8 @@ fibre {3, 9} is amber. This is the factorisation condition of thm-ch36-quotient-
 Conjunct 1, on one example.
 """
 
+INPUTS = []
+
 from _ch36 import DIGITS
 
 SIZE = (460, 300)

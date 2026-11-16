@@ -7,6 +7,8 @@ the state is sin((2n + 1)θ) W + cos((2n + 1)θ) B, so it sits at the angle (2n 
 the state reaches W exactly at n = 3 (asserted in _ch31). The violet arcs are the 2θ turns.
 """
 
+INPUTS = []
+
 import math
 
 from _ch31 import P_OVERLAP, THETA, rotation

@@ -8,6 +8,8 @@ piece per vertex, as long as that vertex's defect 360° − (sum of the flat cor
 computed from the triangles in _coda and their sum is asserted to be 720° (Descartes: a literature result).
 """
 
+INPUTS = []
+
 from _coda import defects, geodesic, wireframe
 
 SIZE = (440, 270)

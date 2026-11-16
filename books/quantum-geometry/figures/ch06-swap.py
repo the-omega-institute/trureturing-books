@@ -6,6 +6,8 @@ In the plane, A·B = a₁b₁ + a₂b₂ and A∧B = (a₁b₂ − a₂b₁) I; 
 these are cos θ and sin θ for unit arrows.
 """
 
+INPUTS = []
+
 import math
 
 from _ch06 import along, line_and_area

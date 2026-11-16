@@ -7,6 +7,8 @@ bands are one calendar year each, [t₀, 2t₀] and [40t₀, 41t₀]; their rise
 ln(41/40) ≈ 0.0247, about 28 times apart (asserted in _ch35).
 """
 
+INPUTS = []
+
 import math
 
 from _ch35 import EARLY, LATE, RATIO, tau

@@ -6,6 +6,8 @@ An equal mixture of two states has Bloch vector (r₁ + r₂)/2, the midpoint of
 every antipodal pair that midpoint is the centre (asserted for the three pairs drawn).
 """
 
+INPUTS = []
+
 import math
 
 from _ch04 import ball

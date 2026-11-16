@@ -9,6 +9,8 @@ E = ½P₊ₓ + ½P₊z has the spectral decomposition E = λ₊P_n + λ₋P₋n
 equator projects onto a horizontal line. Everything is computed and asserted below.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (560, 270)

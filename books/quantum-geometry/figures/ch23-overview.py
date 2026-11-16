@@ -10,6 +10,8 @@ a/q with q ≤ 6 in rows by denominator; the q = 1 row is ℤ (cyan). Below it, 
 (violet) and the open question (red).
 """
 
+INPUTS = []
+
 import math
 
 from _ch23 import PHI, R3, eis, eis_norm, golden_unit, lattice

@@ -5,6 +5,8 @@ Drawn for N = 8 (θ = arcsin(1/√8) ≈ 20.70°). The first reflection I − 2P
 (angle θ → −θ); the second, 2UU* − I, reflects in the line of U (angle −θ → 2θ − (−θ) = 3θ).
 """
 
+INPUTS = []
+
 import math
 
 from _ch15 import grover_theta, plane

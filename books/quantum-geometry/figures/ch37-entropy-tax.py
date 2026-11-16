@@ -7,6 +7,8 @@ is the discarded mass |ρ₀₁|² + |ρ₁₀|² = ½ sin² 2θ, computed from 
 entropy increase S(ρ(1)) − S(ρ(0)) = −cos² θ ln cos² θ − sin² θ ln sin² θ (both asserted in _ch37).
 """
 
+INPUTS = []
+
 import math
 
 from _ch37 import coherence_mass, entropy_tax

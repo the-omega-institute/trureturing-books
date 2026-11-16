@@ -9,6 +9,8 @@ size (10⁻¹² at the centre line, 1 at the edge): cyan above (q_N > θ*), mage
 q_2 = √3 − 1 are checked in closed form.
 """
 
+INPUTS = []
+
 import math
 
 from _ch24 import THETA

@@ -5,6 +5,8 @@ Right multiplication by I = e₁e₂ sends x e₁ + y e₂ to x e₂ − y e₁,
 script applies it twice to v and asserts the result is −v, and that the squared length never changes.
 """
 
+INPUTS = []
+
 import math
 
 from _ch05 import along, times_bivector, turn_arc

@@ -8,6 +8,8 @@ module (seed 20261111, getrandbits(1); the chapter's table of zeros is asserted 
 this map), which reaches 0 at step 55 and then stays there, so its average tends to 1.
 """
 
+INPUTS = []
+
 import random
 
 SIZE = (480, 300)

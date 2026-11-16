@@ -7,6 +7,8 @@ local cell empty (their marginals are ½I); the classical state fills only (Z, Z
 (X, X) = +1, (Y, Y) = −1, (Z, Z) = +1 (all asserted).
 """
 
+INPUTS = []
+
 from _ch13 import bell_density, board, classical_density, coefficients, sector
 
 SIZE = (430, 262)

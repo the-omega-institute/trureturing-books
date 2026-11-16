@@ -13,6 +13,8 @@ computed from the chapter files, so every arrow is a cross-chapter reference tha
 After the chapters change, ./tbook fig build --book quantum-geometry redraws the figure.
 """
 
+INPUTS = ['../zh']
+
 import math
 
 from _coda import chapter_references, parts

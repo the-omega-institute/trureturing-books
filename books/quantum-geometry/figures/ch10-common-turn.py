@@ -7,6 +7,8 @@ The script asserts that the two complex Gram matrices are equal and that U moves
 90° turn about the vertical axis, so the triangle N, +X, +Y is carried rigidly to N, +Y, −X.
 """
 
+INPUTS = []
+
 import math
 
 from tbook import figkit

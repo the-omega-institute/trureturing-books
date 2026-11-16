@@ -7,6 +7,8 @@ Only the steps the chapter's proof block names are drawn: the private lemma
 `mul_right_cancel₀`, induction on `Relation.ReflTransGen`), then `isEmpty_or_nonempty ι`.
 """
 
+INPUTS = []
+
 from _ch27 import WIDTH, box, hyp, lean_box, link
 
 SIZE = (WIDTH, 448)

@@ -7,6 +7,8 @@ spectra are asserted. The ends N = 0 (±2, from the commuting corollary and λ²
 by hand from the Landau identity) are drawn as hollow points.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (440, 340)

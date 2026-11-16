@@ -10,6 +10,8 @@ Minkowski-orthogonal to u, the two symmetric about the dashed light cone (litera
 III: the golden cut-and-project scheme of the chapter's proposition, as in ch34-overview.
 """
 
+INPUTS = []
+
 from _ch34 import golden_slice, simultaneity, single_plane
 
 SIZE = (740, 268)

@@ -8,6 +8,8 @@ conjecture or problem environment (red). The note under the green bar counts the
 theorem in trureturing.lock.json.
 """
 
+INPUTS = ['../data/statistics.json']
+
 import json
 import re
 

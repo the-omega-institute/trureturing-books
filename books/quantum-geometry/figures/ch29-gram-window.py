@@ -8,6 +8,8 @@ This is the slice c_AB = cos 60° of the Gram elliptope 1 − x² − y² − z�
 θ₂ = 45°, from cos 105° to cos 15°, the numbers of the lab card `edge`. All asserted in _ch29.
 """
 
+INPUTS = []
+
 import math
 
 from _ch29 import gram_window

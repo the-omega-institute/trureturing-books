@@ -10,6 +10,8 @@ Panel III: the exact density of x₁ for a uniform point on S^{d−1} for d = 3,
 carries no Lean chip: the chapter's verified mode bound cor-finite-trace-mode-budget is independent of it).
 """
 
+INPUTS = []
+
 import math
 
 from _ch12 import density

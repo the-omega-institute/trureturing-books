@@ -9,6 +9,8 @@ log-capacity envelope with the lattice points d = 2, 3, 4. The cut ad is solid m
 magenta in both panels II and III.
 """
 
+INPUTS = []
+
 import math
 
 from _ch19 import bridge, cut_lines, envelope, qmincut

@@ -7,6 +7,8 @@ inside the two caps that ⟨x, y⟩ > 0 within a cap and ⟨x, y⟩ < 0 across, 
 the same rule.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (460, 340)

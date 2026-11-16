@@ -9,6 +9,8 @@ search over integer quadruples; the number of quaternions on each circle is coun
 asserted against Jacobi's formula 8·Σ_{4∤d|n} d).
 """
 
+INPUTS = []
+
 import itertools
 import math
 

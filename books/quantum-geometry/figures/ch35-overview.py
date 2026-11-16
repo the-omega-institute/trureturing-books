@@ -12,6 +12,8 @@ the stored row. Panel III is schematic: Row 0 (violet) above four stored rows (c
 being written (amber), with the loop of Row 0 reading the table back into itself.
 """
 
+INPUTS = []
+
 import math
 
 from _ch35 import table_rows

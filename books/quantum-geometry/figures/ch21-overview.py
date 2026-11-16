@@ -9,6 +9,8 @@ picture (MODEL), not a theorem, and carries a tag saying so.
 Panel III marks the spheres S⁰ … S⁸; S⁰, S¹, S³, S⁷ (Adams) are violet, a literature result.
 """
 
+INPUTS = []
+
 import math
 
 from _ch21 import LATENT, check_table, helix_point

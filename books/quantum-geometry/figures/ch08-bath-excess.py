@@ -6,6 +6,8 @@ The five rows of example ex-one-qubit-reservoir-swap-erasure (asserted in _ch08)
 into the system's entropy drop −ΔS_sys (grey) and the reservoir's relative entropy D (dashed box); I = 0.
 """
 
+INPUTS = []
+
 from _ch08 import LN2, SWAP_TABLE, swap_row
 
 SIZE = (450, 300)

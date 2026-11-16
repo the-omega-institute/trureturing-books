@@ -9,6 +9,8 @@ Panel III plots D_freeze = ΔE_pass − ΔS/β against β for ΔE_pass = 1, ΔS 
 β_c = ΔS/ΔE_pass, positive (cyan) above it.
 """
 
+INPUTS = []
+
 import math
 
 from _ch07 import ZENO_TABLE, free_survival, freeze_deposit, strobe_survival

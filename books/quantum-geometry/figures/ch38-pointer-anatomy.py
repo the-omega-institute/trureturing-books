@@ -7,6 +7,8 @@ MMU bounds, the superposed pointer, the TLB, and the shared borrow &State. Schem
 field 5 rests on a cited theorem (no cloning), which the caption points to.
 """
 
+INPUTS = []
+
 SIZE = (460, 372)
 ALT = {
     "zh": "左边一枚竖放的指针寄存器，分成五段：1 Base，2 MMU 边界，3 叠加指针 Σ α_k |addr_k⟩，4 TLB，5 &State。每段右边一幅小图和一句话。"

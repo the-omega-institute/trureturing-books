@@ -8,6 +8,8 @@ Panel III is the three-polarizer cascade 0° → 45° → 90°: each step passes
 while 0° → 90° directly passes cos²90° = 0 (both asserted).
 """
 
+INPUTS = []
+
 import math
 
 from tbook import figkit

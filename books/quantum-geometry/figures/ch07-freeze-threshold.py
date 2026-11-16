@@ -6,6 +6,8 @@ deposit is positive, above it negative (checked at sample points). A horizontal 
 the line at β_c = ½.
 """
 
+INPUTS = []
+
 from _ch07 import freeze_deposit
 
 SIZE = (440, 300)

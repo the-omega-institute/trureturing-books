@@ -8,6 +8,8 @@ pathOrder are the example's map [0, 1, 2, 0, 1, 2, 0, 1, 2, 3, 3, 3], and that t
 |S| = 2 needs ⌊N/(κ+1)⌋ + 1 = 4 layers (asserted, also for N = 8).
 """
 
+INPUTS = []
+
 from itertools import combinations
 
 from _ch20 import gate_name, path_layers, path_order

@@ -11,6 +11,8 @@ of them: it encloses the two cyan vertices I, the row of magenta vertices J lies
 six faces on its inner side are shaded.
 """
 
+INPUTS = []
+
 import itertools
 import math
 

@@ -7,6 +7,8 @@ at (cos θ/2, sin θ/2), for θ = 0°, 90°, …, 720°. The script checks the f
 squaring each rotor point gives its rotation point.
 """
 
+INPUTS = []
+
 import cmath
 import math
 

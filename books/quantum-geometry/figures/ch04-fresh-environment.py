@@ -8,6 +8,8 @@ the one-step Halmos unitary J = [[c, is], [is, c]] raised to the n-th power (com
 2 × 2 matrices). At n = 39 the grey value is 0.99934 while c^39 = 0.00017.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (400, 290)

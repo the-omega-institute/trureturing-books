@@ -7,6 +7,8 @@ The angles are the chapter's example (α, β, γ) = (0.37, −0.81, 0.52); each 
 0.829592 − 0.395635 e₁₂ − 0.392911 e₁₃ + 0.029524 e₂₃ and the columns of the printed ZYZ matrix.
 """
 
+INPUTS = []
+
 from _ch26 import ANGLES, check_example, coeffs, rotor, title
 
 SIZE = (560, 280)

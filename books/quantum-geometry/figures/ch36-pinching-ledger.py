@@ -8,6 +8,8 @@ off-diagonal mass ½sin²θ (magenta); every value comes from the matrix entries
 always add to 1 (the Pythagorean identity of thm-ch36-pinching-skeleton-and-discarded-coherence).
 """
 
+INPUTS = []
+
 import math
 
 from _ch36 import pinching_ledger

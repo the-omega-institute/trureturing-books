@@ -7,6 +7,8 @@ plane spanned by e₃ and e₁ and is blind to the normal e₂; {X, Y, Z} sees e
 asserted for every row.
 """
 
+INPUTS = []
+
 from tbook import figkit
 
 SIZE = (600, 250)

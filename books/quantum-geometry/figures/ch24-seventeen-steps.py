@@ -7,6 +7,8 @@ in order (two turns: the star polygon {17/2}); the gap of 0.110° between the st
 The script asserts 17θ* = 4π − 0.0019233 and that 3256 is the first return closer than that (0.0012211).
 """
 
+INPUTS = []
+
 import math
 
 from _ch24 import THETA

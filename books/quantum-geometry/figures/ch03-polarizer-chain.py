@@ -6,6 +6,8 @@ Every dot is the chapter's finite formula. It asserts w₀ = 0 and w₁ = ¼ as 
 sequence increases. The limit 1 is the literature result the chapter quotes; it is drawn as a dashed line.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (460, 330)

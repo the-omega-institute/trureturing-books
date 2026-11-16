@@ -9,6 +9,8 @@ A = diag(c₁, c₁, c₁, c₂, c₂, c₂) with c₁ ≠ c₂ preserves the fo
 multiple of I: a hand counterexample where the theorem's connectivity premise fails.
 """
 
+INPUTS = []
+
 import cmath
 import math
 

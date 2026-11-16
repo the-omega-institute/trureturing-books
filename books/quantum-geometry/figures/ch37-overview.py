@@ -9,6 +9,8 @@ two-copy certificate of §37.2). Panel III: the golden model-set places of §37.
 the body place x₀ = y₀ is read; below, with the bodily prior unloaded, all of them are lit.
 """
 
+INPUTS = []
+
 import cmath
 import math
 

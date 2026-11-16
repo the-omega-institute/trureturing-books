@@ -11,6 +11,8 @@ fills a whole bar (trace 1). Panel III: ρ with its off-diagonal blocks is moved
 without them is not.
 """
 
+INPUTS = []
+
 import math
 
 from _ch27 import blocks, title

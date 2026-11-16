@@ -6,6 +6,8 @@ Only the steps the chapter's proof block names are drawn: `simpa … using hTrac
 `mul_mul_conjTranspose_same`, the `trace_mul_cycle` calc chain and `trace_nonneg`.
 """
 
+INPUTS = []
+
 from _ch27 import WIDTH, box, hyp, lean_box, link
 
 SIZE = (WIDTH, 346)

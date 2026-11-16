@@ -7,6 +7,8 @@ and have lengths 2 sin(α/2) and 2 cos(α/2). Right: their sum 2√(1 + sin α) 
 2√2 = 2/sin(π/4) only at α = 90°, i.e. z = i (asserted).
 """
 
+INPUTS = []
+
 import math
 
 WRAP = True

@@ -6,6 +6,8 @@ the amber z = u·r satisfies it with r = Re(u⁻¹ z), and that the grey z′ of
 another point, and the area u ∧ z′ = Im(ū z′) is not zero.
 """
 
+INPUTS = []
+
 import cmath
 import math
 

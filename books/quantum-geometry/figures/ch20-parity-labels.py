@@ -10,6 +10,8 @@ vectors of F₂⁴ (enumerated) that must all appear on a wire, and the 2n − 1
 2^{2n−1} + 2n − 2 = 10 of the chapter's proposition. The right panel says nothing about whether 10 is reached.
 """
 
+INPUTS = []
+
 import cmath
 import itertools
 import math

@@ -11,6 +11,8 @@ P(upper) = (1 + z)/2 from 1 to 9/25. Right: P(upper) against t, computed from e^
 eigenvector (2, 1)/√5 of E = +5 (violet), which lies on the axis. All asserted; nothing here is a theorem.
 """
 
+INPUTS = []
+
 import cmath
 import math
 

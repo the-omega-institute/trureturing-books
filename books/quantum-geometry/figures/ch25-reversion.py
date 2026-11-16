@@ -7,6 +7,8 @@ crossing magenta strands, as in the blade-multiplication page. The script checks
 k(k − 1)/2 and the sign against the table's reversion column (+, +, −, −).
 """
 
+INPUTS = []
+
 from _ch25 import title
 
 SIZE = (548, 300)

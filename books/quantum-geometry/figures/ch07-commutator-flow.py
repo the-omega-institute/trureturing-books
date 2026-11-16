@@ -9,6 +9,8 @@ shadow on the ruler. Right: p(t) for the tilted axis (it swings between 1 and (1
 against the commutator formula p′(t) = Re(i Tr(ρ_t (HP − PH))) of prop-projection-probability-flow.
 """
 
+INPUTS = []
+
 import cmath
 import math
 

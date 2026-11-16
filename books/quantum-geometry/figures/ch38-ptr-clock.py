@@ -7,6 +7,8 @@ Rows are clock ticks t = 0 … 5, columns are addresses 0 … 7. The cell conten
 *ptr = mem[ptr(t)]. Schematic (MODEL); the contents are arbitrary, the bookkeeping is checked.
 """
 
+INPUTS = []
+
 SIZE = (460, 312)
 ALT = {
     "zh": "一张由六行、八列小格组成的图。每一行是同一段内存在一拍时的样子，八格里依次写着 3 1 4 1 5 9 2 6，每一行都完全相同；"

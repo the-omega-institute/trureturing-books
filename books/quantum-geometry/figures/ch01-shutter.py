@@ -6,6 +6,8 @@ The wheel carries the state's direction, which may stop at any angle; the shutte
 into an upper and a lower channel. Nothing here is computed beyond the geometry of the drawing.
 """
 
+INPUTS = []
+
 import math
 
 from _ch01 import along

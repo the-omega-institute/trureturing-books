@@ -11,6 +11,8 @@ projection along E⊥. Panels I and II are the chapter's worked example; Panel I
 the chapter's proposition, read through the chapter's interpretive model (MODEL).
 """
 
+INPUTS = []
+
 from _ch34 import golden_slice, hidden_plane, shadow_sphere
 
 SIZE = (740, 262)

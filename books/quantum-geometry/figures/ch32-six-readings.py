@@ -8,6 +8,8 @@ asserted in _ch32); only the reading under it changes. The table itself is the c
 (MODEL), with literature and Lean entries as marked there; nothing here is green.
 """
 
+INPUTS = []
+
 from _ch32 import split
 
 SIZE = (740, 352)

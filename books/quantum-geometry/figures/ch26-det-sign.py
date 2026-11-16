@@ -7,6 +7,8 @@ determinant directly and checks it against (1 − |r|²)/4 (the identity `he` of
 norm_bloch_le_trace_of_posSemidef); the disc and the shell are the two cited theorems, so they are green.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (500, 330)

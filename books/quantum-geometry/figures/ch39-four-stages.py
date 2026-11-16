@@ -11,6 +11,8 @@ with a cyan arrow leaving and re-entering it, μ = 0. Nothing here is a theorem;
 picture the rows of the table.
 """
 
+INPUTS = []
+
 import math
 
 from _ch39 import cell, self_loop, title

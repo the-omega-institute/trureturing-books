@@ -7,6 +7,8 @@ the state r goes to U r, the readout direction z stays. Heisenberg: r stays, the
 (U r)·z = r·(U⁻¹ z), so the readout probability (1 + cos α)/2 agrees.
 """
 
+INPUTS = []
+
 import math
 
 from tbook import figkit

@@ -10,6 +10,8 @@ depth-first search; the script asserts h = (1, 0, 2, 1, 0) and that the longest 
 three vertices (2 → 3 → 4, cyan in both panels).
 """
 
+INPUTS = []
+
 import math
 from functools import lru_cache
 

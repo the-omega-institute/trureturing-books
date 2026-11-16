@@ -9,6 +9,8 @@ projects onto one straight chord: the sphere is shaded in exact bands. Left: f, 
 brightest 0.2 at −s (p₂). Everything below is computed from E and asserted.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (560, 310)

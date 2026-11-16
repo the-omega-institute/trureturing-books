@@ -7,6 +7,8 @@ amplitudes turned by the same global phase γ = 50°; the script checks that the
 the Bloch arrow (sin θ cos φ, sin θ sin φ, cos θ), is unchanged.
 """
 
+INPUTS = []
+
 import cmath
 import math
 

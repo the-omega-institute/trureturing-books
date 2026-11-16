@@ -6,6 +6,8 @@ The rows follow the six numbered steps of the chapter's proof block; the lemma n
 are the ones that block names for that step. Bras and kets stand for `vecMulVec` and `star`.
 """
 
+INPUTS = []
+
 from tbook import figkit
 
 from _ch27 import WIDTH, lean_box, link

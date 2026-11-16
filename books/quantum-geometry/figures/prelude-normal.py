@@ -6,6 +6,8 @@ a e₁ + b e₂ and has no component along e₃ (asserted), so none of them poin
 face set in ℝ³; the normal e₃ = ⋆₃(e₁∧e₂) = e₁ × e₂ is computed below and stands up from the centre.
 """
 
+INPUTS = []
+
 import math
 
 from tbook import figkit

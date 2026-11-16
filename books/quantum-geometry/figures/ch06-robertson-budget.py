@@ -8,6 +8,8 @@ squared covariance rx² ry² (cyan) and the mixedness 1 − |r|² (grey). The sc
 (1 − rx²)(1 − ry²) = rz² + rx² ry² + (1 − |r|²) for every row and the four-place values of the table.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (464, 330)

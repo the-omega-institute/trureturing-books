@@ -6,6 +6,8 @@ Bottom: ψ(x)/x − 1 and π(x) ln x / x − 1 for 10 ≤ x ≤ 10⁶ on a logar
 primes; the script asserts the values of the chapter's table.
 """
 
+INPUTS = []
+
 import math
 
 from _ch22 import primes

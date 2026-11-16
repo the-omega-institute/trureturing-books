@@ -7,6 +7,8 @@ the ψ₀ axis. Two reflections make a quarter turn, one way round or the other.
 identity of thm-qubit-weyl-star and that the two images are negatives of each other.
 """
 
+INPUTS = []
+
 from _ch25 import weyl_plane
 
 SIZE = (460, 330)

@@ -8,6 +8,8 @@ stops at ∅ after 1 change. Each row is iterated until two neighbours agree, an
 changes is checked against |S₀| = 3.
 """
 
+INPUTS = []
+
 import math
 
 from _ch24 import set_capsule

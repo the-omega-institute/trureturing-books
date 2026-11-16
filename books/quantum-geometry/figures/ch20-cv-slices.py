@@ -8,6 +8,8 @@ rise with t, the middle creeps towards a final slice below the singularity) and 
 that each later slice is drawn longer; no volume is computed.
 """
 
+INPUTS = []
+
 from _ch20 import penrose
 
 SIZE = (500, 330)

@@ -7,6 +7,8 @@ with its velocity. Bottom: what an eye level with the table sees, the shadow x =
 The velocity of the shadow is −sin θ: −1 at 90°, +1 at 270° (asserted).
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (420, 330)

@@ -7,6 +7,8 @@ c₂ = e^{i30°} and c_k = 0.6·e^{i25°}; rewinding copies 1 and 2 multiplies b
 point is asserted to be c_k ρ₀₁, and to differ from ρ₀₁.
 """
 
+INPUTS = []
+
 import cmath
 import math
 

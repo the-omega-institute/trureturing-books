@@ -6,6 +6,8 @@ the Bloch sphere). Each panel applies the two projectors to the same v, the righ
 asserts the chapter's two matrix products and that the end points are those products applied to v.
 """
 
+INPUTS = []
+
 import math
 
 from _ch10 import title

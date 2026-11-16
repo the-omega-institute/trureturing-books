@@ -9,6 +9,8 @@ Panel III plots cos θ and the uniform-direction toy line 1 − 2θ/π on [0°, 
 (√2 − 1)/2 ≈ 0.2071 (asserted against the chapter's table).
 """
 
+INPUTS = []
+
 import math
 
 from _ch13 import NAMES, bell_density, board, sector

@@ -8,6 +8,8 @@ contains environment-cited theorems, C.2 (D…) environment-cited definitions, a
 Media consumers do not change that partition.
 """
 
+INPUTS = ['../data/statistics.json']
+
 import json
 import re
 from pathlib import Path

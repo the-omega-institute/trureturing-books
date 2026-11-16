@@ -6,6 +6,8 @@ Only the steps the chapter's proof block names are drawn: `left_project_unread` 
 `Finset.sum_eq_single` with orthogonality and idempotence), `unreadState_idempotent`, `funext`.
 """
 
+INPUTS = []
+
 from _ch27 import WIDTH, box, hyp, lean_box, link
 
 SIZE = (WIDTH, 352)

@@ -10,6 +10,8 @@ Panel III: the system's coherence was copied into five records; four are reverse
 survives (magenta), so the rewound coherence is c_k ρ₀₁ ≠ ρ₀₁.
 """
 
+INPUTS = []
+
 import math
 
 from _ch08 import LN2, disc, h

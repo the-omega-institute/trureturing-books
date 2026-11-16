@@ -7,6 +7,8 @@ be zeros, and the curve is checked to have no other near-zero between them; the 
 and t = 15, where the text reports the sign change of ξ.
 """
 
+INPUTS = []
+
 from _ch22 import ZEROS, check_zeta, zeta
 
 SIZE = (500, 286)

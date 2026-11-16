@@ -7,6 +7,8 @@ flips bit 1 and then bit 2 and stops at 101₂ = e₁₃. The script checks the 
 the sign against the chapter's _blade_sign (here +, so the picture has nothing to say about signs).
 """
 
+INPUTS = []
+
 from _ch25 import NAMES, blade_sign
 
 SIZE = (480, 340)

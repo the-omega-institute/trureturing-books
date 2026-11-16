@@ -10,6 +10,8 @@ Panel III is the double cover of §5.2 in miniature: as θ runs from 0° to 360�
 while the rotor, whose square it is, goes only from 1 to −1 (asserted).
 """
 
+INPUTS = []
+
 import cmath
 import math
 

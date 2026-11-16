@@ -7,6 +7,8 @@ The script checks the criterion by brute force on the shell for a point inside, 
 the magenta point outside, using the escape point the proof constructs for the last one.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (450, 350)

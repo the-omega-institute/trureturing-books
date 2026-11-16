@@ -8,6 +8,8 @@ Panel III: sourceQueries = 2n + 1 against 1/√p, under the bound (π/2 + 2)/√
 the dots are the rows p = 1/4, 1/16, 1/64 of the chapter's table.
 """
 
+INPUTS = []
+
 import math
 
 from _ch16 import draw_polytope, hull_faces, queries, query_bound, reachable

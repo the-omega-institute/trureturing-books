@@ -6,6 +6,8 @@ The data are the chapter's example n = 3, w = (1, 0, 1): every value f_w(x) = ‚ä
 checked against the chapter's list, and the query x = (1, 1, 1) gives 0 both ways (asserted in _ch35).
 """
 
+INPUTS = []
+
 from _ch35 import KEYS, N_BITS, VALUES, W, parity
 
 SIZE = (460, 316)

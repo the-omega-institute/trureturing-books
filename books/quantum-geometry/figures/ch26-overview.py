@@ -8,6 +8,8 @@ Panel III: e₁ carried by R_z(γ), then R_y(β), then R_z(α) for the chapter's
 sampled with partial rotors; the end point is checked against the first column of the printed ZYZ matrix.
 """
 
+INPUTS = []
+
 import math
 
 from tbook import figkit

@@ -6,6 +6,8 @@ Lab frame: the same vector turned back about +z by the carrier angle ω₀t. The
 cycles (25 ns at 5 GHz, asserted); the picture draws 6 so that the turns can be told apart.
 """
 
+INPUTS = []
+
 import math
 
 from tbook import figkit

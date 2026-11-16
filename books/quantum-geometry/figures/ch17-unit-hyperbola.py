@@ -6,6 +6,8 @@ legs have lengths 3/4 and 5/4 (asserted), so (5/4)² − (3/4)² = 1, and the ra
 it has x/t = 3/5 = β.
 """
 
+INPUTS = []
+
 import math
 
 from _ch17 import Spacetime, q

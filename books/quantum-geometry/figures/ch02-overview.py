@@ -7,6 +7,8 @@ foot C. Panel III sets the north and south poles (180° apart) beside |0⟩ and 
 checks that the half-angle rule (1 + cos θ)/2 gives 0 at θ = 180°, as the zero overlap of orthogonal rays.
 """
 
+INPUTS = []
+
 import math
 
 from _ch02 import along, shadow, title

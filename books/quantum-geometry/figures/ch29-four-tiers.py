@@ -8,6 +8,8 @@ where y = cos θ meets y = θ (θ* ≈ 0.739, found by iterating cos and asserte
 tier is built from, magenta the constant that escaped the tier below.
 """
 
+INPUTS = []
+
 from _ch29 import stairs
 
 SIZE = (460, 300)

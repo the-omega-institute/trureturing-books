@@ -7,6 +7,8 @@ and the ray. What the eye sees is the projection of the ray onto the plane acros
 of length sin α (computed for α = 0°, 20°, 45°, 90°).
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (480, 200)

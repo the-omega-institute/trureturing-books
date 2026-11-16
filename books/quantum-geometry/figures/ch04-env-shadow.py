@@ -7,6 +7,8 @@ Right: the x–z cross-section of the Bloch ball with ρ_S = ½[[1, cos θ], [co
 length on the page.
 """
 
+INPUTS = []
+
 import math
 
 from _ch04 import ball

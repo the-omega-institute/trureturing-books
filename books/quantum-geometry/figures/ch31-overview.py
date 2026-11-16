@@ -8,6 +8,8 @@ window of 2 − φ ≈ 0.382 of the circumference; 8 of the 21 land in it, again
 (asserted in _ch31). This is a circle picture of the window share, not of the Bloch sphere.
 """
 
+INPUTS = []
+
 from _ch31 import GOLD, ergodic, lock, ruler
 
 SIZE = (740, 280)

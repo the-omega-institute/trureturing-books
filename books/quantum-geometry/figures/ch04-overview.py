@@ -9,6 +9,8 @@ from 0.707 to 0.433. Panel III: pinching removes the sideways
 part, then the remaining r_z is removed, ending at r = 0.
 """
 
+INPUTS = []
+
 import math
 
 from _ch04 import ball, image

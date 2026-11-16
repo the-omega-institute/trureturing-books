@@ -9,6 +9,8 @@ angle, the mixed state sits strictly inside the ball, pinching keeps only the co
 measurement axis, and the rotor turns the arrow about its axis by the drawn angle.
 """
 
+INPUTS = []
+
 import math
 
 from tbook import figkit

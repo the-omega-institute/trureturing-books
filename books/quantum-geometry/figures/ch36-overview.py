@@ -8,6 +8,8 @@ state at 90° casts none. Panel II: a Poincaré disc; the cyan points sit at rad
 III: the digits 1, 4, 2, 8, 5, 7 of 0.142857… on one loop, reduced to the generator 1/7.
 """
 
+INPUTS = []
+
 import math
 
 from _ch36 import DIGITS, ETA0, THETA_STAR, theta_k

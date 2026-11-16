@@ -7,6 +7,8 @@ self-loop and a chord parallel to a tree edge, which a NamedSpanningTree allows 
 checks that the cyan edges form a spanning tree and finds the path r → a by search (asserted).
 """
 
+INPUTS = []
+
 import math
 
 from _ch18 import mid_arrow

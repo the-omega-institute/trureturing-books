@@ -8,6 +8,8 @@ Panel III splits a = (0.36, 0.80, 0.48) into its vertical part (on the diagonal 
 horizontal part (off the diagonal, a₀ ∓ i a₁), per B_formula_core.
 """
 
+INPUTS = []
+
 from _ch25 import blade_sign, title, weyl_plane
 
 SIZE = (740, 290)

@@ -7,6 +7,8 @@ each, the two parity checks g₁ = Z₁Z₂ and g₂ = Z₂Z₃ (lit = −1). Th
 asserted equal for the two strings of a row and distinct across rows, and match the chapter's table.
 """
 
+INPUTS = []
+
 from _ch14 import ERRORS, NAMES, flip, syndrome
 
 SIZE = (410, 300)

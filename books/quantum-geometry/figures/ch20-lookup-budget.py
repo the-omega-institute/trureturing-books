@@ -7,6 +7,8 @@ chapter's remark on P/poly. The upper real crossing is near n = 9.94; the script
 integer threshold n = 10 marked by the dashed line.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (500, 320)

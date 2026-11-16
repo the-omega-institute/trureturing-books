@@ -6,6 +6,8 @@ Drawn in the real plane with the generator G = ω·J, J the quarter turn: Gψ is
 (asserted: ⟨ψ, Gψ⟩ = 0 because Gᵀ = −G), and the sectors swept in equal times have equal areas ½R²ωΔt.
 """
 
+INPUTS = []
+
 import math
 
 SIZE = (420, 300)

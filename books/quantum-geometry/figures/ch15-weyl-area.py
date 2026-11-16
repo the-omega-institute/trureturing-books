@@ -8,6 +8,8 @@ bc − ad = −5 ≡ 3; the parallelogram spanned by (a, b) and (c, d) has orien
 exponent as minus that area is only a geometric reading of the determinant.
 """
 
+INPUTS = []
+
 import cmath
 import math
 

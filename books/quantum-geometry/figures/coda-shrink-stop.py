@@ -8,6 +8,8 @@ without its largest when |A| > 2, and A itself otherwise; U(A) ⊆ A always. The
 3 ≤ 7 (the two bounds of the chapter's theorem, cited with lean=).
 """
 
+INPUTS = []
+
 SIZE = (480, 300)
 ALT = {
     "zh": "六行点阵，自上而下是 S(0) 到 S(5)，每行有 8 个位置 0 到 7。S(0) 有 7 个青色的点；每往下一行，"

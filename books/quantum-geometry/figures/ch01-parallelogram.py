@@ -6,6 +6,8 @@ The parallelogram is spanned by x and y at 60°; the script checks the chapter's
 |x−y|² = 1, their sum 4 = 2(1 + 1), and (3 − 1)/4 = ½ = cos 60°. No coordinate axes are drawn.
 """
 
+INPUTS = []
+
 import math
 
 from _ch01 import along, ray

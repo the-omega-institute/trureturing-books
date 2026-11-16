@@ -7,6 +7,8 @@ states are K P₀ K* = P₀ (still the north pole) and L P₀ L* = I − P₀ (t
 I − P₀ reads Tr(branch · (I − P₀)) = 0 and 1: the proposition the chapter cites with lean=.
 """
 
+INPUTS = []
+
 from _ch10 import title
 
 SIZE = (500, 340)

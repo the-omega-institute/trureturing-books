@@ -7,6 +7,8 @@ computed from ⟨s_α| CZ(|ψ⟩ ⊗ |+⟩) and agree with (1/√2) Xˢ H diag(1
 probability ½.
 """
 
+INPUTS = []
+
 import math
 
 from tbook import figkit
