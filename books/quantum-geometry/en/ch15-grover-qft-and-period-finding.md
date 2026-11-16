@@ -756,16 +756,170 @@ The equality uses $P_+(b)=P_-(\rho(b))$ and $\rho^2=\mathrm{id}$. Both nearestne
 
 This lower bound concerns the probability that the finite candidate list from one actual measurement contains the true order. It does not certify exact-order selection from the list, nor that every candidate denominator divides the true order. Repeated-sample independence, a least-common-multiple product law, factor extraction, full bit or gate complexity, hardware realization, and empirical performance remain outside this derivation. Concentration of a conditioned posterior comb has not been established by bounding the actual marginal event.
 
-These results come from `ShorContinuedFractions`, `FiniteRationalConvergents`, and `FiniteRationalConvergentsLength` at the pinned source. The rational-list and length proofs are supplied by aicyberg; the modules retain the provenance and Apache 2.0 license of *Finite-register phase estimation and spectral Shor order finding* ([solanaqubits/leanbook, fixed revision](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)). Source audit [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) still has three validated items and one unfinished item: the broader clock statement and independent ideal-sampling product law are not settled by this specialization to the modular bound. The separate earlier marginal-source audit [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) still has three validated and fifty-nine unfinished items. These statuses describe coverage, not a refutation of the mathematical proofs above. The single-run list-membership bound above combines conditional membership, the actual mixture, and finite coprime counting. The success rate for a random base, repeated-sample independence, certified selection, factor extraction, classical bit complexity, full quantum gate complexity, and hardware performance retain the boundaries in [@rem-grover-qft-shor-literature].
+These results come from `ShorContinuedFractions`, `FiniteRationalConvergents`, and `FiniteRationalConvergentsLength` at the pinned source. The rational-list and length proofs are supplied by aicyberg; the modules retain the provenance and Apache 2.0 license of *Finite-register phase estimation and spectral Shor order finding* ([solanaqubits/leanbook, fixed revision](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)). Source audit [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) still has three validated items and one unfinished item: the broader clock statement and independent ideal-sampling product law are not settled by this specialization to the modular bound. The separate earlier marginal-source audit [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) still has three validated and fifty-nine unfinished items. These statuses describe coverage, not a refutation of the mathematical proofs above. The single-run list-membership bound above combines conditional membership, the actual mixture, and finite coprime counting. Below, a separate finite cyclic-family count yields the Good proportion for uniformly sampled units and both factor certificates on the same event. Repeated-sample independence, certified selection, classical bit complexity, full quantum gate complexity, and hardware performance retain the boundaries in [@rem-grover-qft-shor-literature].
 
 ::: {.viz src="phase-gears" preset="leak" height="500"}
 **When the period does not divide, the peaks spread.** $Q = 64$ and period $6$: the magenta marks $sQ/r$ fall between integers at $10.67$, $21.33$ and so on, and each peak spreads over neighbouring cells — $k = 11$ has $0.115$, $k = 10$ only $0.026$, and the six cells nearest $sQ/r$ carry $0.80$ together; the continued fraction of the amber-framed $k = 11$ reads $\frac{1}{6}$. This card specifies no actual modulus and base with which to check $N^2\le Q$, so its concentration and reading remain a numerical teaching example. The conditional membership theorems above do not certify this card's last-convergent rule or identify its conditioned-comb peak heights with the actual marginal probabilities.
 :::
 
+**From the true order to factors: which bases fail?** Start with $N=15$ and $a=2$. The local orders modulo $3$ and $5$ are $2$ and $4$, so the global true order is $r=\operatorname{lcm}(2,4)=4$. The half-order power $2^2$ is locally $1$ and $-1$, respectively, and therefore is neither $1$ nor $-1$ modulo $15$. What matters is how many factors of $2$ occur in each local order: here, $1$ and $2$. We first count failing tuples in an arbitrary finite family of cyclic groups, then transport the same event to the actual unit group.
+
+::: {.theorem #thm-half-order-family-failure-count title="Half-Order Failure Count in Finite Cyclic Families" lean="D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.failure_count_le"}
+For every nonempty finite index type $I$ and every family of groups $(G_i)_{i\in I}$, assume each $G_i$ is finite and cyclic, and specify $\epsilon_i\in G_i$ with $\operatorname{ord}(\epsilon_i)=2$. Put
+
+$$
+\begin{aligned}
+P&=\prod_{i\in I}G_i,\qquad k=|I|,\qquad \epsilon=(\epsilon_i)_{i\in I},\\
+\operatorname{Good}_{\epsilon}(x)
+&\Longleftrightarrow \operatorname{Even}(\operatorname{ord}(x))
+\ \land\ x^{\operatorname{ord}(x)/2}\ne\epsilon,\\
+\operatorname{Bad}&=\{x\in P:\neg\operatorname{Good}_{\epsilon}(x)\}.
+\end{aligned}
+$$
+
+Here $\operatorname{ord}$ is the true group-element order (Lean's `orderOf`), and $/2$ is natural-number division. Then
+
+$$
+|\operatorname{Bad}|\,2^{k-1}\le |P|.
+$$
+
+The factor sizes may differ, and the product $P$ need not be cyclic. The count includes every tuple, including the identity and tuples of odd order, and allows $k=1$.
+:::
+
+::: proof
+Write $d_i=\operatorname{ord}(x_i)>0$ and $r=\operatorname{ord}(x)>0$. For a positive integer $d$, let $v_2(d)$ be its exponent of the prime $2$, namely `d.factorization 2`. The order in the product is the least common multiple of the local orders, so $v_2(r)=\max_i v_2(d_i)$.
+
+In one cyclic factor, take an element $z$ of order $d$ and a positive even multiple $M$ of $d$. Since $(z^{M/2})^2=1$ and the cyclic group has a unique element $\epsilon$ of order $2$, this half-power is either $1$ or $\epsilon$. Moreover,
+
+$$
+z^{M/2}=1\ \Longleftrightarrow\ d\mid M/2
+\ \Longleftrightarrow\ 2d\mid M
+\ \Longleftrightarrow\ v_2(d)<v_2(M).
+$$
+
+For the last equivalence, all other prime-exponent inequalities already follow from $d\mid M$. Thus $z^{M/2}=\epsilon$ exactly when $v_2(d)=v_2(M)$. Apply this with $M=r$ in each coordinate. If $r$ is even, failure means that every local valuation reaches the same maximum; if $r$ is odd, every local valuation is $0$ and failure also occurs. Hence
+
+$$
+x\in\operatorname{Bad}\ \Longleftrightarrow\ \exists t\in\mathbb N,\ \forall i\in I,\ v_2(d_i)=t.
+$$
+
+Choose a full-order generator $g_i$ in each factor. With $n_i=|G_i|$, the number $n_i$ is even and $g_i^{n_i/2}=\epsilon_i$. Multiplication $z\mapsto zg_i$ switches $z^{n_i/2}$ between $1$ and $\epsilon_i$. The preceding criterion implies $v_2(\operatorname{ord}(zg_i))\ne v_2(\operatorname{ord}(z))$: equal valuations would agree on whether they equal $v_2(n_i)$, contradicting the switch.
+
+Fix an anchor coordinate $i_0\in I$. Encode a failing tuple $x$ and Boolean bits $b_i$ on the other $k-1$ coordinates by retaining $y_{i_0}=x_{i_0}$ and setting $y_i=x_i$ when $b_i=0$, or $y_i=x_i g_i$ when $b_i=1$. The anchor reveals the original common valuation $t$. At every other coordinate the encoded valuation equals $t$ exactly when its bit is $0$. Thus the encoding recovers every bit, and cancellation of the generators recovers $x$. This is an injection from $\operatorname{Bad}\times\{0,1\}^{I\setminus\{i_0\}}$ into $P$; comparing cardinalities proves the bound. For $k=1$ there are no bits, every tuple fails, and the bound is equality. The full proof is checked by the Lean kernel.
+:::
+
+This common-valuation count is the classical argument in Shor (1997), Section 5, PDF page 16; no new mathematical priority is claimed. The application below follows the pinned `Blueprint/D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.md`, `Blueprint/D5/S3/Quantum/ShorContinuedFractions.md`, and the attribution in `Library/QuantumChannels/shor1997gateorbits.md`. It derives consequences from the count and the order, congruence, and coprime-cancellation facts; the GID above does not certify an entire factoring procedure.
+
+::: {.example #ex-shor-actual-unit-factors title="Actual-Unit CRT Counts and Both Factor Certificates on the Same Event"}
+**Full prime powers.** Take any odd natural $N>1$. Let $I$ be its set of distinct prime factors, $k=|I|$, and put
+
+$$
+e_p=N.\operatorname{factorization}(p),\qquad
+G_p=(\mathbb Z/p^{e_p}\mathbb Z)^\times,\qquad
+U_N=(\mathbb Z/N\mathbb Z)^\times.
+$$
+
+The index set is nonempty, every $e_p>0$, and every $p$ is an odd prime. Each full prime-power unit group $G_p$ is cyclic. Its literal unit $-1$ squares to $1$ and differs from $1$, so has order $2$. Indeed, $p^{e_p}\ge p\ge3$, whereas $-1=1$ modulo $n$ is possible only for $n=1$ or $2$.
+
+The Chinese remainder ring equivalence lifts to a multiplicative equivalence
+
+$$
+\mathcal E:U_N\ \simeq\ \prod_{p\in I}G_p.
+$$
+
+The pinned construction applies `Units.mapEquiv` to the multiplicative equivalence of `ZMod.equivPi N hN`, then composes with `MulEquiv.piUnits`, where $h_N$ proves $N\ne0$. It preserves true orders and every natural power, and sends literal $-1$ to coordinatewise literal $-1$. Consequently, for
+
+$$
+\operatorname{Good}(u)\ \Longleftrightarrow\
+\operatorname{Even}(\operatorname{ord}(u))\ \land\
+u^{\operatorname{ord}(u)/2}\ne-1,
+$$
+
+we have $\operatorname{Good}(u)\Longleftrightarrow\operatorname{Good}_{(-1)_p}(\mathcal E(u))$. Restricting $\mathcal E$ to the failure subtypes gives a bijection between actual failing units and failing tuples. `Nat.card_congr` transports their equal cardinalities together with equality of the full carrier cardinalities. In particular, if
+
+$$
+\begin{aligned}
+T&=|U_N|=\prod_{p\in I}|G_p|,\\
+F&=|\{u\in U_N:\neg\operatorname{Good}(u)\}|,\qquad
+S=|\{u\in U_N:\operatorname{Good}(u)\}|,
+\end{aligned}
+$$
+
+then [@thm-half-order-family-failure-count] yields $F\,2^{k-1}\le T$. Here $T>0$ because the carrier contains the identity, $2^{k-1}>0$, and $S+F=T$. Dividing by these positive quantities in the real or rational numbers gives
+
+$$
+\Pr_{u\sim\operatorname{Unif}(U_N)}[\operatorname{Good}(u)]
+=\frac ST=1-\frac FT\ge1-\frac1{2^{k-1}}.
+$$
+
+This probability uses **uniform sampling of the full actual unit group**. The identity remains sampled and has false Good, since its order is $1$. If $N$ is not a prime power, its prime-factor set is nonempty and does not have cardinality $1$ (`isPrimePow_iff_card_primeFactors_eq_one`), so $k\ge2$. The failure proportion is then at most $1/2$ and success at least $1/2$. Prime powers with $k=1$ remain covered by the count, which gives only the lower bound $0$ for success. Every actual exponent is retained, with no squarefree restriction.
+
+**The same Good gives both proper factors.** This deterministic step requires only natural $N>2$ and $\gcd(a,N)=1$; it also applies to even $N$. Let $u$ be the unit represented by $a$, put $r=\operatorname{ord}(u)$, and assume $\operatorname{Good}(u)$. Finiteness gives $r>0$, and evenness gives $m=r/2$ with $0<m<r$. Minimality of the true order excludes $u^m=1$, Good excludes $u^m=-1$, and
+
+$$
+(u^m)^2=u^{2m}=u^r=1.
+$$
+
+An arbitrary even period cannot replace the true order here. Coprimality and $N>2$ exclude $a=0$, so $a\ge1$ and the natural number $x=a^m\ge1$. Coercing the unit power to $\mathbb Z/N\mathbb Z$ identifies the residue of $x$ with $u^m$. The bound $1\le x$ permits `Nat.cast_sub` to identify natural subtraction $x-1$ with the ring difference. Therefore
+
+$$
+\begin{aligned}
+N&\mid(x-1)(x+1),\\
+N&\nmid x-1,\qquad N\nmid x+1.
+\end{aligned}
+$$
+
+The first line follows because $(x-1)(x+1)=x^2-1$ has zero residue; the second follows from $u^m\ne1$ and $u^m\ne-1$, respectively. If $\gcd(x-1,N)=1$, coprime cancellation in the product forces $N\mid x+1$, a contradiction. Symmetrically, $\gcd(x+1,N)=1$ forces $N\mid x-1$, also a contradiction. Each gcd is positive and at most $N$; equality to $N$ would force divisibility of the corresponding factor. Thus, simultaneously,
+
+$$
+\begin{aligned}
+1&<\gcd(a^m-1,N)<N,\qquad \gcd(a^m-1,N)\mid N,\\
+1&<\gcd(a^m+1,N)<N,\qquad \gcd(a^m+1,N)\mid N.
+\end{aligned}
+$$
+
+**Changing representatives preserves the gcd pair.** Keep $N>2$. For an actual unit $u$, put $m=\operatorname{ord}(u)/2$, let $b$ be the canonical natural representative of $u$, and let $t$ be the canonical natural representative of $u^m$. Both are coprime to $N$, hence $b,t\ge1$. Every natural representative $a$ satisfying $(a:\mathbb Z/N\mathbb Z)=u$ is also coprime to $N$ and satisfies $a\ge1$. Compatibility of powers with residues gives
+
+$$
+a^m\equiv t\pmod N,\qquad b^m\equiv t\pmod N.
+$$
+
+These are congruences, not natural-number equalities. Since $a^m,b^m,t$ are all at least $1$, `Nat.ModEq.sub` permits subtraction of $1$ on both sides; addition of $1$ preserves congruence directly. Applying `Nat.ModEq.gcd_eq` gives
+
+$$
+\begin{aligned}
+\bigl(\gcd(a^m-1,N),\gcd(a^m+1,N)\bigr)
+&=\bigl(\gcd(t-1,N),\gcd(t+1,N)\bigr),\\
+\bigl(\gcd(b^m-1,N),\gcd(b^m+1,N)\bigr)
+&=\bigl(\gcd(t-1,N),\gcd(t+1,N)\bigr).
+\end{aligned}
+$$
+
+The two certificates therefore hold for the original representative's power, the canonical base's power, and the canonical half-power representative. Write $\operatorname{Both}_N(z)$ when each of $\gcd(z-1,N)$ and $\gcd(z+1,N)$ divides $N$ and lies strictly between $1$ and $N$. The certified event is explicitly
+
+$$
+\begin{aligned}
+C(u)\ \Longleftrightarrow\ &\operatorname{Good}(u)\ \land\ \operatorname{Both}_N(b^m)\ \land\ \operatorname{Both}_N(t)\\
+&\land\ \bigl(\forall a\in\mathbb N,\ (a:\mathbb Z/N\mathbb Z)=u
+\Rightarrow\operatorname{Both}_N(a^m)\bigr).
+\end{aligned}
+$$
+
+The deterministic argument proves $\operatorname{Good}(u)\Rightarrow C(u)$; projection to the first conjunct proves the converse. The identity map thus restricts to a bijection of the success subtypes, so
+
+$$
+|\{u\in U_N:C(u)\}|=S.
+$$
+
+Returning to uniform unit sampling for odd $N>1$, the same event with both certificates has probability exactly $S/T$. It inherits the bound $1-1/2^{k-1}$, and at least $1/2$ when $N$ is not a prime power. Adjoining certificates changes neither the success event nor its sampling carrier.
+:::
+
+Classical unit sampling and the preceding actual quantum measurement at a fixed base are different random choices. Their Good and candidate-list probabilities cannot simply be multiplied: a combination needs an explicit common sampling law and the appropriate conditional probabilities. The argument supplies no efficient uniform-unit sampler, exact-order selector, independent-repeat or least-common-multiple theorem, complete recursive prime-factorization implementation, or bit and gate complexity. Concentration of the conditional posterior comb retains its earlier literature boundary.
+
 Let us now work through the four-part calculation covering Grover search at $N = 4$ and $N = 8$, the $3$-qubit QFT phase gears at $x = 5$, Shor order finding for $N = 15$, and the finite Poisson cross-check on $\mathrm{ZMod}\,16$.
 
 ::: {.example #ex-grover-four-shor-fifteen title="Grover Search for N=4 and N=8, 3-Qubit QFT Phase Gears, and Shor Order Finding for N=15: Hand Calculations and Evidence Boundaries"}
-Steps 1 and 4 instantiate [@thm-grover-uniform-rotation], [@prop-finite-character-cancellation], and [@cor-finite-poisson-period]. Step 2 expands the three-qubit phases in the positive-exponent, big-endian convention with terminal bit reversal of [@thm-qft-circuit-action]. The hand-derived tensor product explains that convention without certifying every tensor identity. The complete Shor order-finding and classical $\gcd(a^{r/2} \pm 1,N)$ factoring reduction in Step 3 remain literature results, not formalized in this book (see [@rem-grover-qft-shor-literature]).
+Steps 1 and 4 instantiate [@thm-grover-uniform-rotation], [@prop-finite-character-cancellation], and [@cor-finite-poisson-period]. Step 2 expands the three-qubit phases in the positive-exponent, big-endian convention with terminal bit reversal of [@thm-qft-circuit-action]. The hand-derived tensor product explains that convention without certifying every tensor identity. The passage from the true-order Good condition to both proper $\gcd(a^{r/2} \pm 1,N)$ factors in Step 3 follows from [@ex-shor-actual-unit-factors]. Complete Shor order finding and recursive factorization retain the literature and algorithmic boundaries of [@rem-grover-qft-shor-literature].
 
 This example provides a four-part hand-calculated verification:
 
@@ -832,11 +986,11 @@ The order is then read off a peak: $k = 4$ and $12$ give the order $4$ directly,
 
 ::: {.remark #rem-grover-qft-shor-literature title="Grover Query Lower Bounds, Ideal QFT Counts, and the Full Shor Algorithm: Boundaries"}
 <!-- alias: #rem-shor-factoring-literature -->
-The chapter cites Lean results for uniform amplitude amplification, Weyl conjugation, character cancellation, and finite Poisson summation, together with the actual QFT circuit action and native event counts ([@thm-qft-circuit-action], [@thm-qft-native-event-count]), the single-phase circular tail ([@thm-qpe-circular-tail]), the actual-input marginal and pointwise bounds, rational-list length, and conditional candidate membership. Above, combining the actual mixture, the nearest-grid bound, and candidate recovery gives the single-run list-membership bound $\frac4{\pi^2}\frac{\varphi(r)}r$ when $N^2\le Q$; the positive-exponent convention uses the reflected event. There is still no certified selector. Item 1 and the remaining full algorithmic claims in item 3 below remain **literature results, not formalized in this book**; item 2 summarizes the cited circuit counts and their cost boundaries.
+The chapter cites Lean results for uniform amplitude amplification, Weyl conjugation, character cancellation, and finite Poisson summation, together with the actual QFT circuit action and native event counts ([@thm-qft-circuit-action], [@thm-qft-native-event-count]), the single-phase circular tail ([@thm-qpe-circular-tail]), the actual-input marginal and pointwise bounds, rational-list length, and conditional candidate membership. Above, combining the actual mixture, the nearest-grid bound, and candidate recovery gives the single-run list-membership bound $\frac4{\pi^2}\frac{\varphi(r)}r$ when $N^2\le Q$; the positive-exponent convention uses the reflected event. Separately, [@thm-half-order-family-failure-count] counts failures in any nonempty finite cyclic family; [@ex-shor-actual-unit-factors] transports this through actual-unit CRT to a uniform Good bound and proves both proper gcd factors on the same event. There is still no certified selector. Item 1 and the remaining full algorithmic claims in item 3 below remain **literature results, not formalized in this book**; item 2 summarizes the cited circuit counts and their cost boundaries.
 
 1. **Grover's algorithm and query lower bounds** (L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866; G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055): For unstructured search among $N$ candidates with a known number $M$ of marked items and the promise $1 \le M \le N/4$, start from the uniform superposition and choose the iteration count using the known initial success probability $p = M/N$. Amplitude amplification then raises the success probability to $\ge 1 - M/N$ using $O(\sqrt{N/M})$ queries to the marking oracle. Under this sparse-solution promise, any quantum black-box algorithm finding a marked item with bounded error requires $\Omega(\sqrt{N/M})$ queries (by reduction from the single-solution black-box lower bound of Bennett, Bernstein, Brassard, and Vazirani, 1997): the quadratic speedup reaches the quantum geometric limit for this oracle task.
 2. **Ideal native gate count of the same QFT circuit**: [@thm-qft-native-event-count] gives $q$ Hadamards, $q(q-1)/2$ controlled phases, and $\lfloor q/2\rfloor$ SWAPs, totaling $\frac{q(q+1)}2+\lfloor q/2\rfloor$ ideal native occurrences. The usual asymptotic count is therefore $O(q^2)=O((\log Q)^2)$ for $Q=2^q$; [@thm-qft-circuit-action] gives its exact positive-exponent action on a prepared complex vector. Loading arbitrary input data, full classical Fourier-coefficient readout, synthesis of ideal phase gates over a finite discrete gate set, and hardware performance are outside this count.
-3. **Shor's factoring algorithm and the full correctness conditions for order finding** (P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172): For a general composite $N$ that is neither even nor a prime power, and a random coprime base $a$, the multiplicative order $r$ need not divide $Q=2^q$. The full algorithm chooses $N^2\le Q<2N^2$ and prepares the corresponding joint state using a reversible modular-exponentiation circuit with $O((\log N)^3)$ elementary gates, then samples after the QFT. The single-run candidate-event derivation above covers list-membership probability in the actual modular-multiplication model; it does not certify a gate implementation of modular exponentiation or exact-order selection. The asymptotic estimate $\varphi(r)/r=\Omega(1/\log\log r)$ remains a literature result. The counting ratio in the mixture cannot be recast as an additional random-phase experiment. If $N$ has $k\ge2$ distinct odd prime factors, the general quantitative bound $\Pr[r\text{ is even and }a^{r/2}\not\equiv-1\pmod N]\ge1-2^{-(k-1)}\ge1/2$ for a uniformly chosen coprime base, and the proof that both $\gcd(a^{r/2}\pm1,N)$ lie strictly between $1$ and $N$ under the good-order conditions, remain separate classical number-theoretic formalization tasks. Together with certified selection, repeated sampling and its least-common-multiple law, full bit and gate complexity, and the factoring reduction, these are not settled by the list-membership event above. (Describing period finding as “canceling an infinite period down to $1$” is a heuristic metaphor, not a formalized mathematical claim.)
+3. **Shor's factoring algorithm and the full correctness conditions for order finding** (P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172): For a general composite $N$ that is neither even nor a prime power, and a random coprime base $a$, the multiplicative order $r$ need not divide $Q=2^q$. The full algorithm chooses $N^2\le Q<2N^2$ and prepares the corresponding joint state using a reversible modular-exponentiation circuit with $O((\log N)^3)$ elementary gates, then samples after the QFT. The single-run candidate-event derivation above covers list-membership probability in the actual modular-multiplication model; it does not certify a gate implementation of modular exponentiation or exact-order selection. The asymptotic estimate $\varphi(r)/r=\Omega(1/\log\log r)$ remains a literature result. The counting ratio in the mixture cannot be recast as an additional random-phase experiment. The classical part is now covered by [@thm-half-order-family-failure-count] and [@ex-shor-actual-unit-factors]: for odd $N>1$, uniform sampling of the full unit group gives Good probability at least $1-2^{-(k-1)}$, and at least $1/2$ when $N$ is not a prime power, since then $k\ge2$. On that same event, every natural representative of the base gives both proper factors. All actual prime-power exponents and the sampled identity are retained. This classical probability and the quantum candidate event at a fixed base use different sampling laws; they have not been combined here into an end-to-end probability for one common experiment. Efficient unit sampling, certified exact selection, independent repetition and its least-common-multiple law, a complete recursive factoring implementation, and bit and gate complexity remain outside these results. (Describing period finding as “canceling an infinite period down to $1$” is a heuristic metaphor, not a formalized mathematical claim.)
 :::
 
 ::: {.viz src="phase-gears" height="560"}
