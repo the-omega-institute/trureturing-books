@@ -70,7 +70,7 @@ Now put those two moments side by side and advance them slightly to check your u
 
 For now, “mistaking a plane for a line” means just this: **reading planar motion through a one-dimensional projection loses information.** Once that is clear, you can continue without first accepting the physical and philosophical interpretations that follow. The video walks through the same turntable example again.
 
-::: {.film src="011-prelude-dimensions"}
+::: {.film src="prelude-dimensions"}
 **Understand the Shadow: From a Disc to a Line.** Follow the peg around the circle, watch its shadow move back and forth, then compare two passages through the centre in opposite directions. English narration with Chinese and English subtitles.
 :::
 

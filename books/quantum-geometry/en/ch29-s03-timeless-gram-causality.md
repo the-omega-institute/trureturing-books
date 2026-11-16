@@ -70,7 +70,7 @@ This single equation exhibits two inseparable faces:
 - **Complete order-independence (timelessness)**: the relation is completely permutation-symmetric in $(A, B, C)$, with no "earlier cause" or "later effect";
 - **A compatibility window, with rigidity under additional conditions**: fixing $c_{AB}$ and $c_{BC}$ generally restricts $c_{AC}$ to the illustrated interval. Coplanarity restricts it to the two endpoints; when they differ, a branch must still be specified for uniqueness. For example, if $c_{AB}=c_{BC}=0$, every $c_{AC}$ in $[-1,1]$ is possible in three dimensions. Positive semidefiniteness specifies neither a probability distribution nor a unique physical causal trajectory. In the author's model, deduction ($\text{Axioms} \implies \text{Theorems}$) can be pictured as relations between crystal facets; gate count $L$ in Chapters 9 and 16 retains the assumptions of each gate model.
 
-::: {.film src="008-gram-window"}
+::: {.film src="gram-window"}
 **Two cosines lock the third: the Gram window (1:39).** With $\theta_1 = 60^\circ$ and $\theta_2 = 45^\circ$ fixed, $\mathbf{C}$ goes once round $\mathbf{B}$: $c_{AC}$ swings through $[\cos 105^\circ, \cos 15^\circ]$, the violet volume collapses to zero at the edges, and a cosine outside the window would make $\det G$ negative. Then $\theta_2$ runs from $0^\circ$ to $180^\circ$ and the windows fill the slice of the Gram ellipse. Where the top edge reaches $1$, $\mathbf{C}$ lands exactly on $\mathbf{A}$, which is the second part of [@thm-ch29-gram-rigidity-and-pell]; every other number in the film is computed on screen.
 :::
 

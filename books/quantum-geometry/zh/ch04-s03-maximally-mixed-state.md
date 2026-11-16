@@ -64,6 +64,6 @@ $$
 
 至此，第一重帷幕“从点到线”已彻底落下。在接下来的**第二部《展翼·从线到面》**中，我们将把目光从静态的一维投影线 $\vv{a} \cdot \vv{b} = \cos\theta$ 抬高三寸，正面迎向那片在第一部里已经频频显露锋芒的**二维有向面积** $\vv{a} \wedge \vv{b} = \sin\theta\,\hat{I}$——看清虚数单位 $i$ 为什么其实就是平面 $90^\circ$ 正交转向算子，并用一行克利福德几何积恒等式 $AB = A\cdot B + A\wedge B$ 将全部单比特量子门与量子力学五大公理一举合拢！
 
-::: {.film src="002-pairwise-born"}
+::: {.film src="pairwise-born"}
 **两子丈量：从一对箭头到玻恩权重（1 分 26 秒）。** 两支相隔 $60^\circ$ 的箭头由平行四边形的两条对角线读出夹角（[@thm-parallelogram-norm-law]）；让 $A$ 自己当轴，垂足 $C$ 成了 $B$ 落在 $A$ 上的青色影子 $\cos\theta$；把影子从 $[-1, 1]$ 压进 $[0, 1]$，就是权重 $\cos^2(\theta/2)$（[@thm-born-modulus-square]）；只有平方能让快门与它的补分完全部权重（[@thm-born-probability-skeleton]）；最后环境记下分支，箭头缩成球内竖轴上的一截短线（[@thm-nonselective-marginal]）。
 :::
