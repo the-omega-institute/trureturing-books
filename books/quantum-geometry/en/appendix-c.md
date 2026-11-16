@@ -2,6 +2,15 @@
 
 This appendix explains how to check the book's evidence. Each Lean reference points to a frozen declaration at the pinned `trureturing@dev` commit [{commit}](trureturing:); authors and reviewers are responsible for written proofs; open problems retain their unproved status. Individual declarations, source links and written-proof sources appear in the text and in the verification ledger generated during compilation.
 
+::: {.stats src="summary"}
+:::
+
+The declaration index is generated during compilation. Inclusion in it does not change a result’s level of evidence.
+
+::: {.stats src="declarations" display="link" format="html"}
+Open the generated declaration index
+:::
+
 ## C.1 Lean-Verified Results {#sec-appendix-c-theorems}
 
 The build generates green badges for `theorem`, `lemma`, `proposition` and `corollary` environments from the lock file. To check a result, read its hypotheses and conclusion, open its Lean source link, and compare the types, assumptions and conclusion. Citing the same declaration in different chapters does not produce new theorems.

@@ -2,6 +2,15 @@
 
 本附录说明如何核对本书的证据。每条 Lean 引用指向所钉 `trureturing@dev` 提交 [{commit}](trureturing:) 的冻结声明；书面证明由作者与评审负责；开放问题保留其未证身份。逐条声明、源码链接与书面证明来源见正文及编译时生成的验证账本。
 
+::: {.stats src="summary"}
+:::
+
+完整声明索引按需在编译时生成；其中的登记不改变任何结果的证据等级。
+
+::: {.stats src="declarations" display="link" format="html"}
+查看生成的声明索引
+:::
+
 ## C.1 Lean 验证结果 {#sec-appendix-c-theorems}
 
 `theorem`、`lemma`、`proposition` 与 `corollary` 的绿色徽章由构建根据锁文件生成。核对结果时，先读书中前提与结论，再打开其 Lean 源码链接，逐项比较类型、假设与结论。引用同一声明的不同章节不因此得到新的定理。
