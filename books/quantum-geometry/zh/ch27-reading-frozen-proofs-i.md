@@ -13,10 +13,6 @@
 1. 在本章（上篇）中，我们逐行解剖支撑起第一部至第三部的四块基石证明：**实内积空间的平行四边形范数恒等式**、**正半定迹一矩阵的玻恩概率三公理骨架**、**支撑连通射线测试下的幺正全局相位刚性定理**，以及**有限完备正交记录测量的挤压算符幂等定理**；
 2. 我们将真实源码中的每一条策略（`parallelogram_law_with_norm`、`mul_mul_conjTranspose_same`、`Relation.ReflTransGen` 传递闭包归纳、`Finset.sum_eq_single` 正交块消去）摊开在阳光下，并给出一张覆盖第一至三部核心冻结声明的**源码行号、语句摘要哈希（`statement_id`）与形式化职责边界全景审计表**。
 
-::: {.viz src="lean-declaration-map" preset="bedrock" height="500"}
-**第二十七章解剖的四条，回到它们出场的地方。** 青色的线从第二十七章的柱脚连回四个绿色实心格，它们第一次出场都在第一至第三章；琥珀色框住的是平行四边形恒等式（[@thm-audit-parallelogram-law]），琥珀色的线连到另外引用它的几章。
-:::
-
 ## 27.1 定义、定理与证明：走进 Lean 4 内核审计 {#sec-lean-kernel-audit-architecture}
 
 在 `trureturing` 仓库的冻结验证体系中，一个数学命题要想成为本书可引用的绿色定理，必须跨越三道机器铁门槛：
@@ -250,10 +246,6 @@ $$
 | Ch 10 | [`D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq) | [{source}](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq) | [{statement_id}](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq) | $B^*B = A^*A \Rightarrow \exists U \in U(m),\; B = UA$ |
 | Ch 7 / Ch 11 | [`D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) | [{source}](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) | [{statement_id}](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) | 厄米哈密顿量本征纯态的幺正演化与密度算子定态性 |
 | Ch 12 | [`D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation) | [{source}](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation) | [{statement_id}](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation) | 黎曼流形负梯度流速率平方可积与势能精确耗散积分 |
-
-::: {.viz src="lean-declaration-map" preset="table27" height="500"}
-**审计表把第一至三部重新点了一遍。** 第二十七章（连同上面的审计表）引用的 32 条声明都描了青边，青色的线从第二十七章的柱脚伸回第一至第十二章，没有一条越出第三部。
-:::
 
 让我们用一个具体算例演示：当定理前提中的某一条假设被故意破坏时，Lean 4 的证明脚本会在哪一行精确拦截错误。
 

@@ -7,10 +7,10 @@
 | `figures/*.py`、辅助数据 | `figures/*.<lang>.svg`、幻灯片的相应 SVG 副本 |
 | 可视化 HTML/CSS/JS、登记表、测试 | 常规 `thumb.jpg`、`fig-*.jpg`、`.stills.json` |
 | `theme/tokens.json`、`backdrop.css` | `theme/generated/tokens.*`、`backdrop.jpg/json` |
-| 统计论述模板与生成器 | 统计 JSON、生成章节、地图 JSON（书库声明输出） |
-| `trureturing.lock.json`、声明稳定编号、`template-manifest.json` | HTML、PDF、EPUB、视频与打包文件 |
+| 必要的局部论述与源程序 | 全书统计视图、索引及数据按需生成，消费者引用编译产物 |
+| `trureturing.lock.json`、`template-manifest.json` | HTML、PDF、EPUB、视频与打包文件 |
 
-锁文件记录冻结证据，稳定编号记录已发布身份，模板清单记录同步基线，三者不能当作可丢弃输出。照片、扫描件、自定义封面等原始素材也保留。常规视频海报目前仍按视频流程维护。
+锁文件记录冻结证据，模板清单记录同步基线，两者不能当作可丢弃输出。旧书已发布且仍被引用的稳定编号也须保留；删除统计索引及其消费者后，不再维护其专用编号表。照片、扫描件、自定义封面等原始素材也保留。常规视频海报目前仍按视频流程维护。
 
 ## 日常操作
 
@@ -20,9 +20,11 @@
 
 手工验收单个可视化仍运行 `node tools/node/viz-thumbs.mjs <book> <id>`，缺图或输入变化才采样；`--check` 核对本地图片，`--force` 主动重采样。舞台、行为或标签变化仍按对应技能测试和看图。
 
-静态图使用 `figures/<书名>/<图名>/<语言>` 缓存单元；缓存保留预期 SVG，生成时比较后只写变化的文件，`fig build --check` 则保留缺失或损坏的本地输出并报告差异。默认键包含本书源文件与已声明的派生数据，排除生成图、幻灯片副本与可视化静帧。脚本可在顶层声明字面量 `INPUTS = ["../data/statistics.json"]` 收窄额外输入（相对 `figures/`）；`INPUTS = []` 表示只需脚本、静态导入的本地辅助模块与公共工具。完整申报正文、数据及动态加载的模块是作者责任，不确定时省略以保留保守依赖。绘图工具、配色与冻结锁始终参与键；`TBOOK_CACHE=0` 可绕过缓存。详见 `skills/book-figure`。
+静态图每次直接运行 Python 脚本生成；只写入发生变化的 SVG 与幻灯片副本。`fig build --check` 比较当前绘图结果与本地文件，报告缺失或过期输出，不写回文件。
 
 ## 书库自己的生成器
+
+全书统计由下游选择 `.stats` 引用块按需嵌入或链接，构建只生成被引用的视图；也可用 `./tbook stats --write` 导出 `build/statistics/` 下的快照和多格式视图，选择方法见 `AUTHORING.md` 的“统计与派生产物”。删除手工维护的统计副本。下列旧生成器配置仅用于仍需兼容的既有书籍，不作为新书的默认方案；迁移时一并删除不再有消费者的模板、数据、编号表与 `[derived]` 配置。
 
 ```toml
 [statistics]

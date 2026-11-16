@@ -259,7 +259,7 @@ TBOOK_CACHE=0 PANDOC=/Users/auricstudio/.local/bin/pandoc TRURETURING_DIR=/tmp/c
 | 当前钉版与精确源码 | 锁文件与 `origin/main` 逐字节一致：`9b6270e9795ed74542ab38e06a271f706174239c`，**486 项声明**。另在 `/tmp/cool-birch-ns-integration-trureturing` 以 `git fetch --filter=blob:none --depth=1 origin 9b6270e9795ed74542ab38e06a271f706174239c` 取得精确提交并作干净的分离式稀疏检出，含全部 **226 个被引冻结模块**。通过工具支持的 `TRURETURING_DIR` 读取；其分支检查记录 GitHub compare `5f749ade6529`（当时 dev 头）至钉版为 `behind`，确认钉版属于 dev。未改锁文件 |
 | 声明及附录 C | 旧 481 项声明的 statement digest 全部相同；五项新增声明来自上游的循环监测收缩及双锚点 Gram 模块。两语言附录 C 各覆盖全部 **486 个唯一 GID**，无缺项或多余实际声明，沿用上游 **257 + 96 + 133 = 486** 的分组。O8 的 A/B、OPEN、外部 C/D 及正文引用同时保留。声明地图现有测试 **128/128 通过**，退出 0；未重新生成地图或媒体源文件 |
 | 结构与冻结检查 | `./tbook check` 退出 **0：1 本书、0 错误、9 项既有警告**；仍是未引用的 `prelude-parts` 与八个视频的历史 subject commit。`git diff --check` 退出 0 |
-| 当前出版输出 | 禁用构建缓存，以原生 Pandoc、`TBOOK_EPUBCHECK=1` 完成中英 HTML、六份 screen/print/academic PDF、两份 EPUB 与站点，完整命令退出 **0**。站点阶段实际重建并检查中英两份 **48 页**演示文稿及其 PDF。清单钉版正确，12 项下载/封面/演示文稿文件的大小与 SHA-256 均与实际站点文件一致 |
+| 当前出版输出 | 禁用构建缓存，以原生 Pandoc、`TBOOK_EPUBCHECK=1` 完成中英 HTML、六份 screen/print/academic PDF、两份 EPUB 与站点，完整命令退出 **0**。站点阶段实际重建并检查中英两份演示文稿及其 PDF。清单钉版正确，12 项下载/封面/演示文稿文件的大小与 SHA-256 均与实际站点文件一致 |
 | PDF 当前产物 | 六份均扫描并渲染相关标度、投影、ODE 及附录 C 计数/O8 页面实看，另查看英文跨页公式续页。无原始 TeX/颜色源码泄漏；字体全部嵌入，无 Type 3/LastResort，无活动对象或附件；每份 **276 个书签**。中英 academic 分别 **41,098,449 / 42,574,231 字节**，均低于 50,000,000 |
 | EPUB 当前产物 | 两份均实际启用 EPUBCheck，构建未跳过检查，**0 错误、0 警告**；各 **60 份 XHTML** 可解析、**47 份含 MathML**，三个教学 ID 与当前钉版均存在。通过 LaunchServices 打开两份最终 EPUB 的命令各退出 0；Apple Books 阅读界面实看仍受下文限制 |
 | 当前实际浏览器验收 | 由 `./tbook serve --port 8890` 的真实 `/trureturing-books/` 路径查看第 29/30 章、终章、附录 A/C，中英 × navy/light × 1280/390 px，共 **40 组**：**0 页面异常、0 缺失本地响应、0 KaTeX 错误、0 断裂引用、0 页面横向越界、0 所查公式容器溢出**。八组桥图均恢复正尺寸，往返调整宽度后几何与数学状态完全一致。正文截图已实际查看；相关上游媒体另在探针、字体和正尺寸就绪并绘制后补截 **24 组**，无页面异常，画面已查看。首轮补充终章截图的定位器稳定等待超时属于诊断脚本中止，未计为通过；调整诊断定位后才得到上述完整终态 |
@@ -271,7 +271,6 @@ TBOOK_CACHE=0 PANDOC=/Users/auricstudio/.local/bin/pandoc TRURETURING_DIR=/tmp/c
 TRURETURING_DIR=/tmp/cool-birch-ns-integration-trureturing ./tbook check
 TBOOK_CACHE=0 TBOOK_EPUBCHECK=1 PANDOC=/Users/auricstudio/.local/bin/pandoc TRURETURING_DIR=/tmp/cool-birch-ns-integration-trureturing ./tbook build html pdf epub site --book quantum-geometry
 ./tbook serve --port 8890
-node books/quantum-geometry/viz/tests/lean-declaration-map.test.mjs
 node /tmp/cool-birch-ns-integration/browser-integration.mjs
 node /tmp/cool-birch-ns-integration/settled-media.mjs
 .venv/bin/python /tmp/cool-birch-ns-integration/inspect-pdfs.py zh
@@ -286,5 +285,5 @@ node /tmp/cool-birch-ns-integration/settled-media.mjs
 
 1. **Apple Books 图形界面实看：主代理或具备界面权限的操作者。** 本机存在 Books.app；对两份最终 EPUB 各执行 `open -a Books <最终 EPUB>` 均退出 0，直接查询 Books 名称也退出 0。界面检查仍受阻：`osascript -e 'tell application "System Events" to get UI elements enabled'` 退出 1，返回 Apple Events 未授权 `-1743`；`screencapture -x <临时图片>` 退出 1，返回 `could not create image from display`。另以 `sdef /System/Applications/Books.app` 查询原生脚本接口，返回无法取得定义（`-192`）。启动与名称查询不证明阅读视图已经实看；本轮未改系统隐私权限。当前 EPUB 结构与 EPUBCheck 已通过，仍须由有界面权限的操作者抽查两份最终 EPUB 的新公式及阅读主题。详见临时诊断 `apple-books-alternative.json`。
 2. **独立三席审查、确认阻断项修复、PR/CI/合入 main/Pages：主代理。** 本实施工人没有委派、提交、推送或创建/合并 PR，不将本地验收写成发布完成。
-3. **本地视频输出的环境限制：发布负责人按既有流水线处理。** 本地站点构建发现视频 Python 依赖与语音资源不全，十个既有视频采用工具自带的海报与“未构建”回退；演示文稿中英各 48 页构建并检查成功。视频源码与既有引用均未改，不在本次安装完整视频流水线。正式发布应按既有 CI/缓存恢复完整媒体。
+3. **本地视频输出的环境限制：发布负责人按既有流水线处理。** 本地站点构建发现视频 Python 依赖与语音资源不全，十个既有视频采用工具自带的海报与“未构建”回退；演示文稿中英文构建并检查成功。视频源码与既有引用均未改，不在本次安装完整视频流水线。正式发布应按既有 CI/缓存恢复完整媒体。
 
