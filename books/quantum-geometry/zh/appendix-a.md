@@ -10,6 +10,6 @@
 
 - [A.1 全书概念与形式化锚点总对照表](appendix-a-s01-master-dictionary.md)
 - [A.2 十部曲核心符号与算子速查指南](appendix-a-s02-symbols-and-operators.md)
-- [A.3 全书 97 条原始思想命题与主题综合总台账（A01–A97）](appendix-a-s03-verbatim-ledger.md)
+- [A.3 全书 99 条原始思想命题与主题综合总台账（A01–A99）](appendix-a-s03-verbatim-ledger.md)
 
 后续四篇独立专题附录——态锥极性重构（[附录 F](appendix-f.md)）、稳定子多面体之外的魔性与转向语境性（[附录 G](appendix-g.md)）、有限视界观察者与螺线管历史账本（[附录 H](appendix-h.md)），以及量子信息散度、逆测试可达性、子熵与近似恢复对偶（[附录 I](appendix-i.md)）——沿用同一套几何与算子词汇，其专项定义与形式化锚点在各篇内独立展开，并统一汇总于[附录 C](appendix-c.md)。

@@ -10,6 +10,6 @@ Conventional quantum mechanics textbooks are written in the language of abstract
 
 - [A.1 Master Translation Dictionary Across All Ten Parts, Coda, and Appendices D–E](appendix-a-s01-master-dictionary.md)
 - [A.2 Ten-Part Geometric Translation Guide](appendix-a-s02-symbols-and-operators.md)
-- [A.3 Complete 97-Entry Verbatim Proposition and Thematic Synthesis Table (A01–A97)](appendix-a-s03-verbatim-ledger.md)
+- [A.3 Complete 99-Entry Verbatim Proposition and Thematic Synthesis Table (A01–A99)](appendix-a-s03-verbatim-ledger.md)
 
 The four standalone thematic appendices that follow—state-cone polarity reconstruction ([Appendix F](appendix-f.md)), magic and steering contextuality beyond the stabilizer polytope ([Appendix G](appendix-g.md)), finite-horizon observers and solenoid history ledgers ([Appendix H](appendix-h.md)), and quantum information divergences, reverse-test attainment, subentropy, and approximate recovery duality ([Appendix I](appendix-i.md))—share this geometric and operator vocabulary, with their specialized definitions and formal anchors developed in situ and indexed in [Appendix C](appendix-c.md).
