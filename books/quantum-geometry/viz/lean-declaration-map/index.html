@@ -92,7 +92,7 @@
     <div class="strip">
       <section class="panel">
         <div class="head"><h2><span class="zh">读到这一章，已有多少条落定</span><span class="en">How many have landed by this chapter</span></h2><span id="plotMeta"></span></div>
-        <canvas id="plot" aria-label="随阅读位置累计落定的声明条数，虚线是锁文件的条目数" data-aria-en="Declarations landed against the reading position; the dashed line is the number of entries in the lock file"></canvas>
+        <canvas id="plot" aria-label="随阅读位置累计落定的声明条数，虚线是锁文件里的条目数" data-aria-en="Declarations landed against the reading position; the dashed line is the number of entries in the lock"></canvas>
       </section>
     </div>
   </main>
@@ -101,7 +101,7 @@
     <section class="panel sec" id="readouts" aria-live="polite">
       <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">LOCK</span></h2>
       <dl class="ro">
-        <div class="key"><dt><span class="zh">已落定 / 锁文件里的条目</span><span class="en">landed / entries in the lock</span></dt><dd><b id="roMet">—</b><span id="roMetSub"></span></dd></div>
+        <div class="key"><dt id="roMetHead"><span class="zh">已落定 / 锁文件里的条目</span><span class="en">landed / entries in the lock</span></dt><dd><b id="roMet">—</b><span id="roMetSub"></span></dd></div>
         <div class="a"><dt><span class="zh">选中的声明</span><span class="en">chosen declaration</span></dt><dd id="roName">—</dd></div>
         <div><dt><span class="zh">种类</span><span class="en">kind</span></dt><dd id="roKind">—</dd></div>
         <div><dt><span class="zh">模块与行</span><span class="en">module and line</span></dt><dd id="roModule">—</dd></div>

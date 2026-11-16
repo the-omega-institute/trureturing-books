@@ -36,7 +36,7 @@
 
    - **跨视角客观共识的公共因子判据**：抽象诠释不动点定理证明，不同语境参数可选出不同不动点（[`context_parameters_can_select_distinct_fixed_points`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points)），而任何携带跨语境客观一致性承诺 `ObjectiveInterpretationClaim` 的声明，必然穿过一个对全体语境恒定的公共因子 `commonFactor`（[`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)，`LEAN ✓`，见 [第 33 章](ch33-all-beings-observers-and-mutual-attractors.md) [@thm-ch33-contextual-attractor-and-common-factor]）。
 3. **形式化边界声明**：
-   上述三条 `LEAN ✓` 定理分别刻画本征态定态、系综非选择性捏合幂等与携带不变性义务的公共因子提取；它们本身**不推导**单次实验为何涌现唯一经典结果，也**不消解** FR 协议在附加单次结果公设下的张力——将“坍缩”重构为内生观察者沿自身基底的相对投影属于本书诠释模型（`MODEL`）。
+   上述三条 `LEAN ✓` 定理分别刻画本征态定态、系综非选择性捏合幂等与携带不变性义务的公共因子提取；它们本身**不推导**单次实验为何涌现唯一经典结果，也**不消解** FR 协议在附加单次结果公设下的张力——将“坍缩”重构为内生观察者沿自身基底的相对投影属于本书诠释模型（`MODEL`；单次选支边界与物理因果干预对照被动基轴旋转的系统审计见[第 34 章 §34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–[§34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy) 与 [@prob-ch34-single-outcome-realization]）。
 :::
 
 在实验台的第一张专题卡中，我们可以直接对比密封实验室内部的局部记录捏合与门外维格纳掌握完整联合自由度时的幺正可逆视角：
@@ -63,7 +63,7 @@
      $$
 
 3. **形式化边界声明**：
-   局部表观不可逆在形式上只是受限观察者未能访问环境记录分支所致的**访问缺陷**（注意：上述 $r^2 + \tau_{L:E} = 1$ 是针对该有效秩二纯二分模型的初等手工推导，并非由 `complementary_context_probability_pythagoras` 直接证出的一般多体混态单配等式）；至于为何第一人称经验只驻留于单根记忆分支（或以伪随机数 $\xi < p$ 抽样模拟单次读数），仍属经验公设或诠释模型（`MODEL`），绝不伪称为偏迹定理的逻辑推论。
+   局部表观不可逆在形式上只是受限观察者未能访问环境记录分支所致的**访问缺陷**（注意：上述 $r^2 + \tau_{L:E} = 1$ 是针对该有效秩二纯二分模型的初等手工推导，并非由 `complementary_context_probability_pythagoras` 直接证出的一般多体混态单配等式）；至于为何第一人称经验只驻留于单根记忆分支（或以伪随机数 $\xi < p$ 抽样模拟单次读数），仍属经验公设或诠释模型（`MODEL`；关于确定性双稳漂移违背玻恩频率的反例 [@ex-ch34-bistable-born-countermodel]、有界鞅击中律守恒 $p_0$ 的基准算例 [@ex-ch34-martingale-selection-benchmark] 及开放问题 [@prob-ch34-single-outcome-realization]，详见[第 34 章 §34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)），绝不伪称为偏迹定理的逻辑推论。
 :::
 
 以标志角 $\theta = 30^\circ$（$p = 3/4$）为例，当环境完全相干（$\gamma \to 1$）时四元读数 $(r^2, \tau_{L:E}, C, V) = (1, 0, 3/8, \sqrt{3}/2)$，而当环境规模推至 $N = 10^6$（$\gamma \to 0$）时精确过渡为 $(1/4, 3/4, 0, 0)$（`手工推导` / `NUM`）：
@@ -171,7 +171,7 @@
      S_{\mathrm{vN}}\bigl(\rho(k + 1)\bigr) - S_{\mathrm{vN}}\bigl(\rho(k)\bigr) = D\bigl(\widetilde{\rho}_k \mathrel{\Vert} \operatorname{basisPinchingState}(\widetilde{\rho}_k)\bigr) \ge 0, \qquad \lVert\operatorname{id} - P_S\rVert = 1 \quad (S^\perp \neq \perp).
      $$
 
-   - **有限竞技场观测视界与 `EscapePairs` 捕获判据**：在非退化有限竞技场上，并入新观测接口严格降低逃逸率当且仅当其有序唯一捕获对计数严格为正（[`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，`LEAN ✓`）。在十六态竞技场 $\{0, 1\}^4$ 算例（`NUM`）中，仅读前三比特 $b_0, b_1, b_2$ 会留下 $8$ 条二元简并纤维（$16$ 个有序 `EscapePairs`，模型逃逸熵 $H_2^{\mathrm{escape}} = 1\,\text{bit}$）；并入冗余读出 $b_0 \oplus b_1$ 捕获数为 $0$，而并入全局奇偶新轴 $b_0 \oplus b_1 \oplus b_2 \oplus b_3$ 则唯一捕获全部 $16$ 对（注：该有限组合算例绝不等同于贝肯斯坦—霍金黑洞熵推导）：
+   - **有限竞技场观测视界与 `EscapePairs` 捕获判据**：在非退化有限竞技场上，并入新观测接口严格降低逃逸率当且仅当其有序唯一捕获对计数严格为正（[`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，`LEAN ✓`）。在十六态竞技场 $\{0, 1\}^4$ 算例（`NUM`）中，仅读前三比特 $b_0, b_1, b_2$ 会留下 $8$ 条二元简并纤维（$16$ 个有序 `EscapePairs`，模型逃逸熵 $H_2^{\mathrm{escape}} = 1\,\text{bit}$）；并入冗余读出 $b_0 \oplus b_1$ 捕获数为 $0$，而并入全局奇偶新轴 $b_0 \oplus b_1 \oplus b_2 \oplus b_3$ 则唯一捕获全部 $16$ 对（注：该有限组合算例绝不等同于贝肯斯坦—霍金黑洞熵推导；关于有限寄存器预测蒸馏与过去假设、宇宙学常数 $\Lambda_{\mathrm{cos}}$ 反循环审计，另见[第 34 章 §34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning)–[§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor) 及 [@prob-ch34-past-hypothesis-and-cosmological-constant]）：
 
      $$
      \operatorname{EscapeRate}(b_0, b_1, b_2) = \frac{16}{16 \times 15} = \frac{1}{15}, \qquad \operatorname{EscapeRate}(b_0, b_1, b_2, b_0 \oplus b_1 \oplus b_2 \oplus b_3) = 0.
@@ -205,8 +205,8 @@
 | **多世界诠释（MWI）** *(Everett, Deutsch, Wallace)* | **无物理坍缩**；宇宙全局永远严格遵循线性薛定谔方程，退相干使平行记录分支互不干涉地并存 | **强 $\psi$-实体论**；高维希尔伯特空间态矢量即全部物理实在，局域幺正耦合下无超距坍缩 | **本体论无限分支膨胀**；在不等幅叠加（如 $\theta = 30^\circ$ 预示条件下的 $75\% / 25\%$）中推导主观玻恩概率仍需额外决策论或自定位假设 |
 | **德布罗意—玻姆导航波** *(de Broglie, Bohm, Bell)* | **无物理坍缩**；粒子始终拥有确定位置构型，测量只是粒子顺从导航场滑入某支不重叠波包通道 | **双重实在**（真实导航波 $+$ 确定粒子轨道），属于显式**非定域隐变量理论**且需假定量子平衡分布 $\lvert\psi\rvert^2$ | **洛伦兹协变性棘手**；多粒子引导方程依赖特权同时面叶状剖分，推广至相对论手性费米子量子场论面临严峻困难 |
 | **客观坍缩理论（GRW / Penrose）** *(Ghirardi, Rimini, Weber; Penrose)* | **真实随机非线性坍缩**；修改薛定谔方程，引入自发定域化速率 $\lambda$ 或引力自能阈值触发物理坍缩 | **物理场实体论**；微观单粒子极难坍缩而宏观刚体因自由度数目放大迅速定域化 | **引入唯象新常数且实验尚未证实**；在典型参数 $\lambda = 10^{-16}\,\mathrm{s}^{-1}, t = 1\,\mathrm{s}$ 下，$N = 10^6$ 时触发率仅 $q \approx 10^{-10}$（需近阿伏伽德罗尺度 $N \sim 10^{23}$ 方瞬时坍缩），且有微小能量不守恒与相对论协变难题 |
-| **量子贝叶斯 / 关系量子力学** *(Fuchs, Caves, Schack; Rovelli)* | **无客观全局坍缩**；状态更新只是特定主体（Agent）或物理子系统在交互后对关联记录的条件贝叶斯修正 | **极端 $\psi$-认知论或纯关系态**；不存在脱离特定观察者或交互子系统的绝对宇宙状态 | **客观共识机制受质疑**；若一切状态皆相对特定主体，需额外交互相容公设解释为何不同宏观观察者总能核对出同一份实验室记录 |
-| **正交自指与开放维度几何观** *(本书模型 MODEL + 局部 LEAN ✓ 锚点)* | **内生正交投影与未追踪分支访问缺陷**；撤除外部第 3 点 $C$，以有限记录幂等捏合与公共因子刻画局部读出，单次抽样显式标为经验公设 | **内生自指关系振幅**；纠缠驻留于正交关联扇区而单边边缘恒保持 $I_2/2$ 无信令，时间被诠释为突破有限克雷洛夫饱和的正交维度扩张 | **形式锚点与物理动力学严格分界**：`LEAN ✓` 仅锁定有限维代数、多项式与组合逃逸骨架；单次结果涌现机制、相对论坍缩协变、开放维度物理动力学与黑洞蒸发仍属 `MODEL` 或 `OPEN`（[@prob-appendix-d-time-horizon]） |
+| **量子贝叶斯 / 关系量子力学** *(Fuchs, Caves, Schack; Rovelli)* | **无客观全局坍缩**；状态更新只是特定观察主体或物理子系统在交互后对关联记录的条件贝叶斯修正 | **极端 $\psi$-认知论或纯关系态**；不存在脱离特定观察者或交互子系统的绝对宇宙状态 | **客观共识机制受质疑**；若一切状态皆相对特定主体，需额外交互相容公设解释为何不同宏观观察者总能核对出同一份实验室记录 |
+| **正交自指与开放维度几何观** *(本书模型 MODEL + 局部 LEAN ✓ 锚点)* | **内生正交投影与未追踪分支访问缺陷**；撤除外部第 3 点 $C$，以有限记录幂等捏合与公共因子刻画局部读出，单次抽样显式标为经验公设 | **内生自指关系振幅**；纠缠驻留于正交关联扇区而单边边缘恒保持 $I_2/2$ 无信令，时间被诠释为突破有限克雷洛夫饱和的正交维度扩张 | **形式锚点与物理动力学严格分界**：`LEAN ✓` 仅锁定有限维代数、多项式与组合逃逸骨架；单次结果涌现机制、相对论坍缩协变、开放维度物理动力学、过去假设与黑洞蒸发仍属 `MODEL` 或 `OPEN`（[@prob-appendix-d-time-horizon]、[@prob-ch34-single-outcome-realization]、[@prob-ch34-past-hypothesis-and-cosmological-constant]） |
 
 在统一交互协议 `ORTHO//DUEL` 中，五种透镜（`copenhagen`、`many-worlds`、`pilot-wave`、`grw-collapse`、`ortho-open-dim`）共享同一套受控数值账本，切换透镜绝不篡改 $\theta, N, \beta$ 的客观算术读数；其中客观坍缩累积触发率 $q(N)$ 与局部捏合比特熵增 $\Delta S_{\mathrm{pinch}}$ 精确定义为（`NUM` / `手工推导`）：
 

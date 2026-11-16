@@ -3,7 +3,8 @@ Cut the support graph and the two phases go their own ways (chapter 27, example 
 
 Both panels are the two coordinates of ι = Fin 2. On the left the single test vector x = (1, 1) is
 non-zero on both coordinates, a cyan arc joins them, and a unitary A that keeps both coordinate rays
-is forced to c₀ I₂: both diagonal phases point the same way. On the right the tests are e₀ and e₁,
+and also the ray of x = (1, 1) is forced to c₀ I₂: both diagonal phases point the same way. Keeping
+the coordinate rays alone would only make A diagonal; it is the kept ray of x that forces scalarity. On the right the tests are e₀ and e₁,
 each covering one coordinate only; no arc joins the two, and A = diag(1, i) keeps both rays while its
 two phases differ by 90°. The script checks the numbers of the example: diag(c₀, c₁) maps (1, 1) to a
 multiple of (1, 1) only when c₀ = c₁, and diag(1, i) maps e₀ and e₁ into their own rays but is not a
@@ -17,12 +18,14 @@ SIZE = (488, 262)
 WRAP = True
 ALT = {
     "zh": "两栏，每栏两个圆代表坐标 0 与 1，圆里紫色的箭头是对角元 A₀₀、A₁₁ 的相位。左栏：测试态只有 x = (1, 1)，"
-          "一条青色的弧连起两个圆；两支紫色箭头指向同一方向，下方写着 A = c₀ I₂。右栏：测试态是 e₀ 与 e₁，"
+          "一条青色的弧连起两个圆；幺正矩阵 A 保持两条坐标射线，也保持 x = (1, 1) 的射线，"
+          "所以两支紫色箭头指向同一方向，下方写着 A = c₀ I₂。右栏：测试态是 e₀ 与 e₁，"
           "每个只在一个圆上方有一小段青色的弧，两个圆之间的虚线弧被划掉，没有连起来；左圆的箭头指向 1，"
           "右圆的箭头指向 i，两者相差 90°，下方写着 diag(1, i) ≠ c I₂。",
     "en": "Two panels; in each, two circles stand for the coordinates 0 and 1, and the violet arrow in each circle is the "
           "phase of the diagonal entry A₀₀ or A₁₁. Left: the only test vector is x = (1, 1), and one cyan arc joins the two "
-          "circles; both violet arrows point the same way, and below it reads A = c₀ I₂. Right: the test vectors are e₀ and "
+          "circles; the unitary A keeps both coordinate rays and also the ray of x = (1, 1), so both violet arrows point "
+          "the same way, and below it reads A = c₀ I₂. Right: the test vectors are e₀ and "
           "e₁, each with a short cyan arc over one circle only; the dashed arc between the circles is struck out, so nothing "
           "joins them. The left arrow points to 1 and the right arrow to i, 90° apart, and below it reads "
           "diag(1, i) ≠ c I₂.",
