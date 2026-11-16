@@ -8,8 +8,6 @@ reach the ruler, the last being 5040, none between 5041 and 10⁶ (the theorem c
 dots: the cloud below cannot reach the ruler and would only add ink.
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (460, 330)

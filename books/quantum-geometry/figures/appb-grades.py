@@ -7,8 +7,6 @@ must be the binomial coefficients and the squares the column of the B.1 table (+
 Colours: cyan for lines (vectors), magenta for areas (bivectors), violet for the volume (pseudoscalar).
 """
 
-INPUTS = []
-
 from math import comb
 
 from _appb import NAME, ORDER, blade_mul, grade

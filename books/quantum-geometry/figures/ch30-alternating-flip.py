@@ -11,8 +11,6 @@ its partner) times the product of δ over the listed darts. The script asserts t
 τ(M)τ(N) = −∏δ around the cycle, and that here ∏δ = −1, so τ(M) = τ(N).
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (436, 246)

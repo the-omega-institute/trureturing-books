@@ -10,8 +10,6 @@ Panel III looks down on the equatorial plane again: the drive axis of the circui
 after Z(90°) (rem-virtual-z-scheduling-literature), the pulse costing 0 ns.
 """
 
-INPUTS = []
-
 import math
 
 from _ch11 import along, top_view, turn_arc

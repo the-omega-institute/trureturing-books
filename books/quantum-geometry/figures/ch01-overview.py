@@ -10,8 +10,6 @@ them removed by normalization and one by the global phase) and as one Bloch arro
 script checks that the outer product gives that arrow.
 """
 
-INPUTS = []
-
 import cmath
 import math
 

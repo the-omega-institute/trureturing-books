@@ -7,8 +7,6 @@ circle at height cos 50°. The magenta disc is the plane through the centre whos
 equator (θ = 90°). The latitude circle's radius sin 50° < 1 is asserted.
 """
 
-INPUTS = []
-
 import math
 
 from tbook import figkit

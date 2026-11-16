@@ -9,8 +9,6 @@ computed and asserted: the ±½ moves from (00, 10) to (00, 11), both traces of 
 U* R U = B.
 """
 
-INPUTS = []
-
 SIZE = (676, 340)
 WRAP = True
 MARKUP = 2

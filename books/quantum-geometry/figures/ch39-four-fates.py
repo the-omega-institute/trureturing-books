@@ -13,8 +13,6 @@ Colours: degenerate maps dim and faint; the non-degenerate ones ink; the two tha
 LEAN ✓ tag green, since the chapter cites self_application_four_fates with lean=.
 """
 
-INPUTS = []
-
 from itertools import product
 
 SIZE = (360, 532)

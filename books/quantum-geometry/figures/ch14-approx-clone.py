@@ -7,8 +7,6 @@ traces give the Bloch vectors of a clone and of the machine, asserted to be (2/3
 The isometry is a literature result, not formalized in this book.
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (480, 310)

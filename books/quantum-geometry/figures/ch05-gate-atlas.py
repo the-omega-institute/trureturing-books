@@ -7,8 +7,6 @@ start point about the gate's axis by the gate's angle (right-handed); the script
 and names the start and the end beside their dots.
 """
 
-INPUTS = []
-
 import math
 
 from tbook import figkit

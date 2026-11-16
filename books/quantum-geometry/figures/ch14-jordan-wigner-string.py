@@ -7,8 +7,6 @@ matrices and the script asserts that the two orders agree at every site except s
 Zσ⁻ = σ⁻ (thm-jordan-wigner-car, the case i < j).
 """
 
-INPUTS = []
-
 SIZE = (358, 280)
 MARKUP = 2
 ALT = {

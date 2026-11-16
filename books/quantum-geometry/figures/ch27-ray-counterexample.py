@@ -11,8 +11,6 @@ multiple of (1, 1) only when c₀ = c₁, and diag(1, i) maps e₀ and e₁ into
 multiple of I₂.
 """
 
-INPUTS = []
-
 import cmath
 import math
 

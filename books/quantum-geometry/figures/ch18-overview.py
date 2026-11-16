@@ -10,8 +10,6 @@ shaded magenta. Panel III is the worked example: after the gauge g = (1, i, −1
 (i, i, i, −1) and the loop phase is still i (asserted).
 """
 
-INPUTS = []
-
 import math
 
 from _ch18 import dial, gauge, hatch_circle, loop_arrow, square, mid_arrow

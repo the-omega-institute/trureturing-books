@@ -6,8 +6,6 @@ Every cell is computed by _appb.blade_mul and checked against the table printed 
 Cyan cells are the products with sign +, magenta cells those with sign −.
 """
 
-INPUTS = ['../zh/appendix-b.md', '../en/appendix-b.md']
-
 from _appb import NAME, ORDER, blade_mul, cayley_table_from_text
 
 SIZE = (456, 404)    # mask labels of 13 at most 465 wide: 10 px or more in a phone column of 358

@@ -10,8 +10,6 @@ between them and the words differ. The proof's bound, the first level with φ^l 
 actual split happens earlier. All readouts are computed in _ch39.
 """
 
-INPUTS = []
-
 from _ch39 import PHI, cell_of, readout, zeckendorf
 
 SIZE = (460, 300)

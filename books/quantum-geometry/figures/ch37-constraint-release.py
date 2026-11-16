@@ -9,8 +9,6 @@ Suspending u₂ does not make the triple at x₂ = 0 realizable, so that point s
 asserted in _ch37.
 """
 
-INPUTS = []
-
 from _ch37 import WAKE_HI, WAKE_LO, det_g2, det_g3
 
 SIZE = (460, 270)

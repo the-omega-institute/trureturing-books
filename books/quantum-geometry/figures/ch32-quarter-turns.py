@@ -7,8 +7,6 @@ R² = −I is checked here by matrix multiplication. The arrow e₁ goes to R e�
 R² e₁ = −e₁; each quarter turn is a violet arc.
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (440, 300)

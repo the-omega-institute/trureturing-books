@@ -8,8 +8,6 @@ the classical bound 2 of the finite deterministic fibre model; the curve stands 
 0° < θ < arccos((√3 − 1)/2) ≈ 68.53° (computed).
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (430, 300)

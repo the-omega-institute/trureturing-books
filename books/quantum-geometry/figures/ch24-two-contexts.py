@@ -8,8 +8,6 @@ The two columns are baselineContext ((), false, false, false, ()) and alternateC
 dashed line.
 """
 
-INPUTS = []
-
 SIZE = (404, 330)
 ALT = {
     "zh": "两列，各是一个解释语境的五个字段，自上而下：文本、读者准入、背景、评估目标、解释规则。"

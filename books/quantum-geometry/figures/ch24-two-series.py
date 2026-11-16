@@ -7,8 +7,6 @@ The curve is y = A(x) = 2x + 2 arcsin x on [0, 1] (increasing, from 0 to 2 + π)
 checked as well.
 """
 
-INPUTS = []
-
 import math
 
 from _ch24 import THETA

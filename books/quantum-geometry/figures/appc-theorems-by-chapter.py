@@ -13,8 +13,6 @@ appears in the earliest unit of the reading order whose Chinese text cites it, b
 appear in this chapter; the upper, hollow part those that appeared in an earlier unit and are cited here again.
 """
 
-INPUTS = ['../data/statistics.json']
-
 import json
 import re
 from collections import Counter

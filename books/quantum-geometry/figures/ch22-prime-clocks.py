@@ -6,8 +6,6 @@ Clock p reads p^{-it} = e^{-it ln p}, so its hand turns clockwise through t ln p
 t = 12 · 2π / ln 2 ≈ 108.78 clock 3 has turned 12 ln 3 / ln 2 ≈ 19.01955 times (checked against the text).
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (460, 262)

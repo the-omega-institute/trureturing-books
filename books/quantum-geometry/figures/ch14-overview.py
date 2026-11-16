@@ -11,8 +11,6 @@ Panel III is a sketch: in the plane a loop around a particle cannot be shrunk, t
 lifted over (a literature result, not formalized in this book).
 """
 
-INPUTS = []
-
 import math
 
 from _ch14 import ERRORS, NAMES, flip, orthogonal, syndrome

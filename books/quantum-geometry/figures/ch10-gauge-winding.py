@@ -9,8 +9,6 @@ equals φ and turns by exactly 360° once around each circle. The Hopf obstructi
 so the pole is marked violet (argued).
 """
 
-INPUTS = []
-
 import cmath
 import math
 

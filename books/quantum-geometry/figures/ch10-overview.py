@@ -9,8 +9,6 @@ marked violet), next to a schematic circle standing for S³ with a frame at ever
 matrix of the octant states, computed and asserted against the chapter's entries.
 """
 
-INPUTS = []
-
 import math
 
 from tbook import figkit

@@ -6,8 +6,6 @@ again (M² = I). P± = ½(I ± M) are computed from it, and the script checks th
 derives by hand: P±² = P±, P₊P₋ = 0, P₊ + P₋ = I, M = P₊ − P₋.
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (440, 300)

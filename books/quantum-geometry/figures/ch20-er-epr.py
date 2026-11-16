@@ -8,8 +8,6 @@ against a side view of an Einstein–Rosen bridge with a red "≟"; the bottom r
 bridge is crossed out.
 """
 
-INPUTS = []
-
 from _ch20 import throat
 
 SIZE = (500, 320)

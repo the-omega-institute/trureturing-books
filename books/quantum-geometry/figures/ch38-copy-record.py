@@ -8,8 +8,6 @@ R(ρ) = U B U† with block (i, j) = ρ_ij E_ij; the partial trace over the reco
 All three are computed below for a sample ρ and checked against the chapter's block formulas.
 """
 
-INPUTS = []
-
 SIZE = (460, 236)
 ALT = {
     "zh": "从左到右三个矩阵。左边是 4×4 的 B(ρ)，分成四个 2×2 块，每块只在左上角有一个数：p、c、c̄、1−p。中间是 U_copy 作用后的 R(ρ)："

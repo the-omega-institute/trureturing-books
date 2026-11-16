@@ -5,8 +5,6 @@ Three displacements from the origin are read with minkowski₁(t, x) = t² − x
 chapter's order (t, x): (2, 1) gives 3, (1, 2) gives −3, and (1.5, 1.5) gives 0 (asserted).
 """
 
-INPUTS = []
-
 from _ch17 import Spacetime, q
 
 SIZE = (440, 330)

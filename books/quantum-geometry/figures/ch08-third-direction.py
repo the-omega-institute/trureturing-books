@@ -5,8 +5,6 @@ The plane span{e₁, e₂} drawn as a disc in a sphere; e₁ → e₂ is the fir
 plane; the only direction orthogonal to both is ±e₃ = e₁ × e₂, out of the plane (asserted).
 """
 
-INPUTS = []
-
 from tbook import figkit
 
 SIZE = (480, 330)

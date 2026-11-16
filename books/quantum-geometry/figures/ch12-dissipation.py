@@ -6,8 +6,6 @@ step 3): θ̇ = sin θ, V = cos θ, |ṙ|² = sin² θ. The script integrates |�
 V(0) − V(T), the identity of thm-riemannian-gradient-dissipation, and that the starting rate is 3/4.
 """
 
-INPUTS = []
-
 from _ch12 import integral, potential, speed2
 
 SIZE = (440, 300)

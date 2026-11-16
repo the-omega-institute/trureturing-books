@@ -10,8 +10,6 @@ reading short = 1, long = 0 gives a word with no adjacent 11 (asserted), the wor
 the chapter's theorem accepts.
 """
 
-INPUTS = []
-
 from _ch39 import chain, golden_cut, title
 
 SIZE = (500, 286)

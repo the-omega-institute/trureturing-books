@@ -6,8 +6,6 @@ Five zones of height 0.4 each. The script integrates 2π sin θ dθ over every z
 area 2π · 0.4 (Archimedes), and that each maps to a p-interval of length ⅕.
 """
 
-INPUTS = []
-
 import math
 
 

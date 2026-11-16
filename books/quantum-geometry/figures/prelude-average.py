@@ -7,8 +7,6 @@ over the sphere; each has an opposite partner, so they add up to zero (asserted)
 maximally mixed state ρ* = ½I of the chapter's integral over S².
 """
 
-INPUTS = []
-
 from _ch21 import icosahedron
 
 SIZE = (400, 290)

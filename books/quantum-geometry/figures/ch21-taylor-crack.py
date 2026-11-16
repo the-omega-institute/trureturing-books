@@ -7,8 +7,6 @@ The polynomials are T_N(θ) = Σ_{k<N} (−1)^k θ^{2k}/(2k)!, N = 2, 3, 4. The 
 ex-taylor-remainder-three-bounds.
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (440, 300)

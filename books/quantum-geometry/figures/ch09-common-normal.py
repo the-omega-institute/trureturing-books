@@ -7,8 +7,6 @@ Left: a and b are neither unit nor perpendicular; n is a × b normalised, and th
 perpendicular to both.
 """
 
-INPUTS = []
-
 import math
 
 from tbook import figkit

@@ -7,8 +7,6 @@ checks the identity in the form of the theorem (half the double sum) and that th
 magenta leg.
 """
 
-INPUTS = []
-
 import math
 
 from _ch06 import along

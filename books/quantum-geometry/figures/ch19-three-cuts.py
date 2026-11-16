@@ -7,8 +7,6 @@ Drawn for the chapter's worked example (a, b, c, d) = (2, 3, 2, 3): the capaciti
 (asserted against QMinCut), so the two outer cuts tie and the inner one is not the bottleneck.
 """
 
-INPUTS = []
-
 from _ch19 import bridge, cut_lines, qmincut
 
 SIZE = (500, 330)

@@ -8,8 +8,6 @@ the roots of x² − x = 0 (asserted in _ch31); strictly between 0 and 1 the par
 diagonal. Over the complex numbers z = z² still has only z = 0 and z = 1.
 """
 
-INPUTS = []
-
 from _ch31 import lock
 
 SIZE = (430, 330)

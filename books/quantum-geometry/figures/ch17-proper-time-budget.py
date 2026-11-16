@@ -6,8 +6,6 @@ The curve is Δτ(Δx) = √(25 − Δx²), a quarter circle Δτ² + Δx² = 25
 segment (0, 5), the first leg of the worked example (3, 4), and the null segment (5, 0) (asserted).
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (480, 320)

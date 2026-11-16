@@ -7,8 +7,6 @@ theorem cites base_success_iff_noAdjacentOnes with lean=), magenta otherwise, wi
 pair 11 boxed. The count 8 is asserted.
 """
 
-INPUTS = []
-
 from itertools import product
 
 SIZE = (460, 236)

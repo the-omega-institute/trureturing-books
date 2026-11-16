@@ -7,8 +7,6 @@ ex-zeno-strobe-freezing (N = 1, 4, 16, 64) are marked and asserted in _ch07; the
 first-order approximation 1 − π²/4N.
 """
 
-INPUTS = []
-
 import math
 
 from _ch07 import ZENO_TABLE, zeno_final

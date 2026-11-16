@@ -7,8 +7,6 @@ encoded state of the three-qubit code with ρ = |+⟩⟨+| is computed and asser
 whatever the off-diagonal terms are.
 """
 
-INPUTS = []
-
 from _ch14 import NAMES, orthogonal, recover
 
 SIZE = (358, 392)

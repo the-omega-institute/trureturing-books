@@ -8,8 +8,6 @@ convex clipping (cyan), the parts seen by one observer only are magenta. The are
 Vol(W_AB)/Vol(W) is computed and printed.
 """
 
-INPUTS = []
-
 from _ch33 import windows
 
 SIZE = (440, 300)

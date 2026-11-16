@@ -7,8 +7,6 @@ cos θ (cyan), up the transverse share sin θ (magenta). The stages are I θ = 9
 III θ* with cos θ* = θ* ≈ 0.739 rad ≈ 42.35° (asserted in _ch35), IV back to 90° (dashed, questioned).
 """
 
-INPUTS = []
-
 import math
 
 from _ch35 import THETA_STAR

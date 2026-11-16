@@ -8,8 +8,6 @@ of B.2: φ(E_a)φ(E_b) = ±φ(E_{a⊕b}) with the same sign as E_aE_b in Cl₃,�
 Cl₃,₀: cyan vectors, magenta bivectors, violet pseudoscalar.
 """
 
-INPUTS = []
-
 from _appb import NAME, ORDER, blade_mul, grade
 
 SIZE = (440, 346)

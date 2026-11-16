@@ -12,8 +12,6 @@ is a 3 × 3 block matrix whose off-diagonal blocks the pinching removes; pinchin
 leaves it in place.
 """
 
-INPUTS = []
-
 import math
 
 from _ch27 import blocks, title

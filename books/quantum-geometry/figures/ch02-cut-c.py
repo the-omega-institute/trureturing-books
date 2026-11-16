@@ -6,8 +6,6 @@ The chapter's example: A is 60° and B is 120° from the ceiling, in one meridia
 that the long route ⟨ψ_B|ψ_A⟩² with ψ = (cos(θ/2), sin(θ/2)) and the short route cos²(60°/2) both give ¾.
 """
 
-INPUTS = []
-
 import math
 
 from _ch02 import along, title

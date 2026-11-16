@@ -9,8 +9,6 @@ example with the twist f₁ = 0↦1, 1↦2, 2↦2; the twisted diagonal (1, 2, 2
 spot is the fixed point of f₁ (green: lemma diagonal_landing_fixed, cited with lean=).
 """
 
-INPUTS = []
-
 import math
 
 from _ch24 import LAM, PHI, THETA, cobweb

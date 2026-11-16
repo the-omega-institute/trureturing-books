@@ -6,8 +6,6 @@ Panel I is the staircase of ch29-four-tiers without its pictures; panel II is th
 ch29-mod-four-dial; panel III is the slice of ch29-gram-window. All three reuse _ch29.
 """
 
-INPUTS = []
-
 from _ch29 import TIERS, dial, gram_window
 
 SIZE = (740, 272)

@@ -9,8 +9,6 @@ directory P of the worked example (N = 4): slot 0 holds P's own address 0x1000 a
 slots 1–3 lead to the leaf tables T₁–T₃. All schematic (MODEL), except the addresses, which _ch38 checks.
 """
 
-INPUTS = []
-
 from _ch38 import ADDR_P, MEM, N_SLOTS, bezier, cell, hexa, page_directory, title
 
 SIZE = (740, 272)

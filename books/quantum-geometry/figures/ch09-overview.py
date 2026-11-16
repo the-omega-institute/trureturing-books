@@ -8,8 +8,6 @@ Panel II turns N about e₂ by θ and then about e₃ by φ and asserts that the
 asserts on a grid of the sphere that every point lies in some colour (the cover the chapter cites with lean=).
 """
 
-INPUTS = []
-
 import math
 
 from tbook import figkit

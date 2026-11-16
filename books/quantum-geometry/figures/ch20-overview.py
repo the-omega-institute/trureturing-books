@@ -8,8 +8,6 @@ against the worked example). Panel II is the n = 1 circuit of ch20-parity-labels
 Panel III draws P inside NP with the question mark on the ring between them.
 """
 
-INPUTS = []
-
 SIZE = (740, 290)
 WRAP = True
 ALT = {

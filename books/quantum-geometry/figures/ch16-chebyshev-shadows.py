@@ -6,8 +6,6 @@ The arrow at angle mθ is the eigenphase e^{imθ} of W(x)^m; its shadow cos(mθ)
 top-left entry of W(x)^m. The values are checked against the chapter's recurrence t_{m+2} = t_{m+1} − t_m.
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (500, 280)

@@ -7,8 +7,6 @@ E∥; every lattice point in the strip drops straight down to a lit place. The f
 the rejected ⟨0, 1⟩ ↦ φ are those of the hand count in §37.4 (asserted in _ch37).
 """
 
-INPUTS = []
-
 from _ch37 import PHI, W_HI, W_LO, in_window, lattice
 
 SIZE = (460, 262)

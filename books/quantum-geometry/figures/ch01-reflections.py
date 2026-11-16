@@ -6,8 +6,6 @@ Z reflects the real plane in the horizontal axis, X in the 45° diagonal. The sc
 matrices to the starting arrow and checks that XZ v and ZX v are v turned by +90° and −90°.
 """
 
-INPUTS = []
-
 import math
 
 from _ch01 import along

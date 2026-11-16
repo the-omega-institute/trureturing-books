@@ -7,8 +7,6 @@ circle, 120° apart. The readout E_k = (2/3)|ψ_k⟩⟨ψ_k| sums to the identit
 Tr(E_j ρ_k) = (2/3)|⟨ψ_j|ψ_k⟩|², 2/3 on the diagonal and 1/6 off it; all of it is computed and asserted.
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (500, 270)

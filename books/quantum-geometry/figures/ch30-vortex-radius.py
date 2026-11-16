@@ -9,8 +9,6 @@ hexagon of radius ρ and splits the tangential velocity of each vortex into the 
 the sum over the other vortices, which come out as s_j·Ωρ and −s_j·b/(4ρ).
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (500, 300)

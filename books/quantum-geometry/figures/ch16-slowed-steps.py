@@ -6,8 +6,6 @@ Left: angles (2k + 1)θ with θ = arcsin √p, k = 0 … n. Right: the same with
 r = sin²(π/(4n + 2)), n = ⌈π/(4θ) − ½⌉₊ = 3, as in the chapter's corollary and table.
 """
 
-INPUTS = []
-
 import math
 
 from _ch16 import queries

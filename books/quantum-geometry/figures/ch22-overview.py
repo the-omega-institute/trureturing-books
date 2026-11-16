@@ -10,8 +10,6 @@ line is the open Riemann hypothesis; an off-line zero could only come as a mirro
 question is drawn as two question marks at one height.
 """
 
-INPUTS = []
-
 from _ch22 import ZEROS, check_zeta, smooth
 
 SIZE = (740, 272)

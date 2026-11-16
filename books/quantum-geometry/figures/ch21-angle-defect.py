@@ -6,8 +6,6 @@ The left drawing unfolds the five faces around one vertex into the plane; the ri
 icosahedron (V − E + F = 12 − 30 + 20 = 2, checked in _ch21). Literature result (Descartes, Euler).
 """
 
-INPUTS = []
-
 import math
 
 from _ch21 import icosahedron, rot

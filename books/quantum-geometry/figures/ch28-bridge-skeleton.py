@@ -8,8 +8,6 @@ rank_one_pure_state_modulus_square_reduction (green: cited with lean= in this ch
 `mul_inv_cancel₀`; `compressed_eq_zero_of_recordWeight_eq_zero`).
 """
 
-INPUTS = []
-
 from _ch27 import WIDTH, box, hyp, lean_box, link
 
 SIZE = (WIDTH, 364)

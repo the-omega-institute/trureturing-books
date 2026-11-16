@@ -11,8 +11,6 @@ circle_double_cover_history_lift): the cyan base path fullTurn(t) = exp(2πit) g
 unique lift from w = 1, the violet exp(πit), stops at −1; square ∘ lift = fullTurn is asserted.
 """
 
-INPUTS = []
-
 import math
 
 from _ch39 import chain, cell, golden_cut, title

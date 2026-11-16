@@ -7,8 +7,6 @@ Only what the chapter's proof block names is drawn: `mul_mul_conjTranspose_same`
 with `inv_nonneg`, and `PosSemidef.smul`, `trace_smul`, `inv_mul_cancel₀`.
 """
 
-INPUTS = []
-
 from _ch27 import WIDTH, box, hyp, lean_box, link
 
 SIZE = (WIDTH, 368)

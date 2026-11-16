@@ -7,8 +7,6 @@ of these lines. The script finds the eigenlines from the matrices, checks that e
 with the stated eigenvalue, and that no line of one matrix is a line of the other.
 """
 
-INPUTS = []
-
 import math
 
 from _ch25 import X, Z, apply

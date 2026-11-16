@@ -7,8 +7,6 @@ flow(M, N) = Σ_r M_r ⊗ N_r with rows (i, k) ∈ Fin 2 × Fin 3 and columns (j
 checks that it is a permutation matrix and which bridge puts each 1 (asserted against the table).
 """
 
-INPUTS = []
-
 M = [
     [[1, 0, 0], [0, 1, 0]],
     [[0, 0, 1], [0, 0, 0]],

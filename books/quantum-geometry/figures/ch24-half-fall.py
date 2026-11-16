@@ -7,8 +7,6 @@ fall from rest. At t/t_ff = ½ one has η = π/2 − θ* (asserted) and r/r₀ =
 ¼ and ¾ are found by bisection and checked against the chapter (0.960937, 0.597150).
 """
 
-INPUTS = []
-
 import math
 
 from _ch24 import LAM, THETA

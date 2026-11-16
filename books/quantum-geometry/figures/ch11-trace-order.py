@@ -8,8 +8,6 @@ computed from the series of pulse0, and the script asserts that the real deviati
 plotted t and that the small-t slopes approach 1 and 2.
 """
 
-INPUTS = []
-
 import math
 
 from _ch11 import TRACE_ABC, bound, ordered_trace

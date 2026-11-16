@@ -6,8 +6,6 @@ The five marked angles are the rows of the chapter's table; the script checks ev
 (1 + cos θ)/2 = cos²(θ/2) = 1, ¾, ½, ¼, 0. The amber pair is the 120° row.
 """
 
-INPUTS = []
-
 import math
 
 from _ch02 import along

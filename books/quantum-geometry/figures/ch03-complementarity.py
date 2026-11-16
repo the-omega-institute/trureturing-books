@@ -5,8 +5,6 @@ D = |r_z| and V = √(r_x² + r_y²). The chapter's example D = 0.8 leaves at mo
 mixed state with ‖r‖ = 0.6 sits inside, on the dashed arc of that radius.
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (440, 380)

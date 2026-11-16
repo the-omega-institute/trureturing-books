@@ -6,8 +6,6 @@ phase damping c = ½: (c x, z); bit flip p = ¼: (x, (1 − 2p) z); depolarizing
 amplitude damping γ = ½: (√(1 − γ) x, (1 − γ) z + γ). Each fixed set in the table is checked to be fixed.
 """
 
-INPUTS = []
-
 import math
 
 from _ch04 import ball, image

@@ -9,8 +9,6 @@ coda and appendices A to D form the last column. The eleven largest families get
 together. Only counts are drawn: a cell says how many entries fall in it, not that one module depends on another.
 """
 
-INPUTS = ['../data/statistics.json']
-
 import json
 import re
 from collections import Counter, defaultdict

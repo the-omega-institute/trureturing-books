@@ -8,8 +8,6 @@ diagonal y = x. The fixed points are the real roots of c x² + (d − a) x − b
 cyan, irrational ones magenta.
 """
 
-INPUTS = []
-
 import math
 
 from _ch24 import PHI

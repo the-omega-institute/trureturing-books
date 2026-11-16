@@ -8,8 +8,6 @@ a fixed sequence of kicks (0.5, −0.25, 0.7) from −0.7; on the inverted bowl 
 is amber, the earlier ones are grey rings.
 """
 
-INPUTS = []
-
 from _ch33 import iterates, profile
 
 SIZE = (460, 216)

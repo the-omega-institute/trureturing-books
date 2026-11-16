@@ -6,8 +6,6 @@ the arc length (all overlaps here are positive, asserted). m₀ and m₁ are ort
 the anchor a sits above; the triangle inequality θ(a, m₀) + θ(a, m₁) ≥ θ(m₀, m₁) = π/2 is asserted.
 """
 
-INPUTS = []
-
 import math
 
 from tbook import figkit

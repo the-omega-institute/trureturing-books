@@ -7,8 +7,6 @@ Only what the chapter's proof block names is drawn. ⇒: rewrite ρ by ← hFixe
 hypothesis), then the sum over k with `hP.complete` again.
 """
 
-INPUTS = []
-
 from _ch27 import box, hyp, lean_box, link
 
 SIZE = (440, 352)

@@ -5,8 +5,6 @@ has length sin θ (chapter 2, §2.2).
 Drawn at θ = 50°; the script checks a·(b − c) = 0 and |c|² + |b − c|² = 1.
 """
 
-INPUTS = []
-
 import math
 
 from _ch02 import along, shadow

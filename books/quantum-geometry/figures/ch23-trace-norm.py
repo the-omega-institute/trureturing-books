@@ -8,8 +8,6 @@ g + ḡ = 2 Re g. The points on each circle are found by search, and their trace
 onto a ruler below, read in units of Tr = 2 Re.
 """
 
-INPUTS = []
-
 from _ch23 import eis, eis_norm, lattice
 
 SIZE = (420, 344)

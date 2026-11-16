@@ -9,8 +9,6 @@ its own citations, so a declaration cited in two parts counts in both. The figur
 `./tbook check` reports it stale) whenever the lock or the citations change.
 """
 
-INPUTS = ['../data/statistics.json']
-
 import json
 import re
 from pathlib import Path

@@ -5,8 +5,6 @@ A concept readout q_L : X → B cuts the address space into fibers; two points o
 Four coordinates b₁ … b₄ with fibers of 3, 2, 4 and 1 addresses; the fibers partition X (checked).
 """
 
-INPUTS = []
-
 SIZE = (480, 262)
 ALT = {
     "zh": "下方一条横线上有四个青色的点 b₁、b₂、b₃、b₄，是坐标空间 B。每个点上方竖着一个圆角框，是它的纤维，里面分别有 3、2、4、1 个"

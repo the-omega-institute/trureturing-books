@@ -9,8 +9,6 @@ Panel III: the row r = (0.5, 0.5, 0.5) of the example ex-mixed-qubit-robertson-s
 1 − |r|² = 0.25 stacked (asserted).
 """
 
-INPUTS = []
-
 import math
 
 from _ch06 import along, line_and_area

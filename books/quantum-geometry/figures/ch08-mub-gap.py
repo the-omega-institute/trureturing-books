@@ -7,8 +7,6 @@ d = 2: ρ is diagonal in Z with Bloch height r, so S(ρ) = h((1 + r)/2); pinchin
 equal to ln 2 − S(ρ) at sample points; the pure state r = 1 gives ln 2.
 """
 
-INPUTS = []
-
 import math
 
 from _ch08 import LN2, h

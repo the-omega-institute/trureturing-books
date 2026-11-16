@@ -6,8 +6,6 @@ Numerical: P_K(2) = ∏_{k≤K} (1 − p_k^{-2})^{-1} for K = 1 … 25 (primes u
 chapter: P_3 = 25/16, ζ(2) − P_3 ≈ 0.0824, ζ(2) − P_11 ≈ 0.0102, ζ(2) − P_25 ≈ 0.0030.
 """
 
-INPUTS = []
-
 import math
 from fractions import Fraction
 

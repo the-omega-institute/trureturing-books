@@ -8,8 +8,6 @@ two shadows are mirror images: the shadow of φ on ψ and of ψ on φ both have 
 way, |⟨φ, ψ⟩|² = |⟨ψ, φ⟩|². The dim point C above, joined to both tips, is crossed out.
 """
 
-INPUTS = []
-
 from _ch31 import ruler
 
 SIZE = (440, 330)

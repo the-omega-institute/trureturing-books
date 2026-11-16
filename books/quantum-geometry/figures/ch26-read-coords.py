@@ -7,8 +7,6 @@ back with the chapter's definition of bloch and checks that it returns r and the
 (blochMatrix_trace, bloch_blochMatrix).
 """
 
-INPUTS = []
-
 SIZE = (520, 210)
 WRAP = True
 ALT = {

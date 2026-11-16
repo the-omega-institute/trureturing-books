@@ -10,8 +10,6 @@ quarter turn long, the closed equator at 90° as the horizon; the outside point 
 The axes and the horizon reading are the chapter's interpretive model (MODEL).
 """
 
-INPUTS = []
-
 import math
 
 from _ch32 import axes, horizon, split

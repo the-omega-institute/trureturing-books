@@ -10,8 +10,6 @@ visible part and an orthogonal residual is item 1 of the chapter's proposition. 
 shares normalized by the centered purity budget B > 0; the actual masses are B cos²θ and B sin²θ.
 """
 
-INPUTS = []
-
 import math
 
 from _ch39 import folding

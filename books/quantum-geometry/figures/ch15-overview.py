@@ -8,8 +8,6 @@ the k-th gear has 2^k teeth. Panel III: the period state |0⟩ + |4⟩ + |8⟩ +
 probability 1/4 on k ∈ {0, 4, 8, 12} and 0 elsewhere.
 """
 
-INPUTS = []
-
 import cmath
 import math
 

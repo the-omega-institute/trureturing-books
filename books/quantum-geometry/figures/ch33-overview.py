@@ -11,8 +11,6 @@ round = two beats) stay on the left. Panels I and II are schematic (MODEL); pane
 (NUM) and draws an application of existing results (ARGUED).
 """
 
-INPUTS = []
-
 import math
 
 from _ch33 import profile, spectrum

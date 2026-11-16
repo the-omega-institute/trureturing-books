@@ -8,8 +8,6 @@ m = 4 they are ±5 with eigenvectors (2, 1)/√5 and (1, −2)/√5, so the uppe
 is not read as the solid amber kept for "now".
 """
 
-INPUTS = []
-
 import math
 
 from _ch18 import hatch_rect

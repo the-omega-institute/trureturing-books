@@ -7,8 +7,6 @@ The listing is g 0 = (0, 1, 2), g 1 = (1, 2, 2), g 2 = (2, 2, 2) of the chapter'
 the escape and the counts 17576 and 19683 of escaped listings are all recomputed.
 """
 
-INPUTS = []
-
 import itertools
 
 SIZE = (560, 300)

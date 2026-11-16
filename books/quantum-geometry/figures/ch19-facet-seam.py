@@ -7,8 +7,6 @@ min(ln 12, ln 2 + z, ln 6). The three lattice points d = 2, 3, 4 carry the candi
 (12, 4, 6), (12, 6, 6), (12, 8, 6) of the worked example (asserted).
 """
 
-INPUTS = []
-
 import math
 
 from _ch19 import envelope, qmincut

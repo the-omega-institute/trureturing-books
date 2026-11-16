@@ -7,8 +7,6 @@ because R R̃ = cos² + sin² = 1. Right: the plane of B_z, where the sandwich t
 the chapter's rule and checked: the rotor is cos 60° − sin 60° e₁e₂ and R e₁ R̃ = (cos 120°, sin 120°, 0).
 """
 
-INPUTS = []
-
 import math
 
 from _ch26 import apply, coeffs, mul, reverse, rotor, title

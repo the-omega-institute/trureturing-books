@@ -8,8 +8,6 @@ literature, item 2, a literature result). Path A is schematic: θ grows linearly
 to 90° at s = 5.
 """
 
-INPUTS = []
-
 import math
 
 from _ch38 import DETA, ETA0, sech

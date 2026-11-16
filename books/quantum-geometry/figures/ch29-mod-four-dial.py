@@ -8,8 +8,6 @@ of each kind are listed beside their cells and checked: the face primes are sums
 line primes are not.
 """
 
-INPUTS = []
-
 from _ch29 import FACE, LINE, dial
 
 SIZE = (440, 280)

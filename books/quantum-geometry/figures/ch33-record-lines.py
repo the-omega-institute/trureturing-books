@@ -7,8 +7,6 @@ third unit direction v at 30° has the shadows cos 30° and sin 30° on them, bo
 orthogonal to neither. This is the case N ≤ d with d = 2 of the cited theorem.
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (420, 300)

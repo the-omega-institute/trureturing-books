@@ -9,8 +9,6 @@ the light cone like scissors. Panel III is the twin example: O → A = (5, 3) �
 4 + 4 proper-time ticks, the rest worldline O → P carries 10 (all asserted).
 """
 
-INPUTS = []
-
 import math
 
 from _ch17 import Spacetime, q, ticks

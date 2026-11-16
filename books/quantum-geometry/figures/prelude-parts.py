@@ -7,8 +7,6 @@ common axis of chapters 1–39 and stands one step above the previous part. The 
 ladder in the prelude's reader's guide.
 """
 
-INPUTS = ['../zh/SUMMARY.md']
-
 from _coda import parts
 
 SIZE = (480, 320)

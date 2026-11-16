@@ -8,8 +8,6 @@ anchored on the ends of the boundary interval A is the circle arc that meets the
 angles (checked: the two circles are orthogonal, r² + R² = D²).
 """
 
-INPUTS = []
-
 import math
 
 from _ch19 import bridge

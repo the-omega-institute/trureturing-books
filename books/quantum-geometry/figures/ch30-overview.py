@@ -11,8 +11,6 @@ schematic tube stretched by λ = 2.25 at constant volume: the cross-section A fa
 open problem.
 """
 
-INPUTS = []
-
 import math
 
 from functools import lru_cache

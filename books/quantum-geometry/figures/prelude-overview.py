@@ -8,8 +8,6 @@ parallelogram they span has area sin θ (asserted). Panel III: S^{n−1} drawn a
 the new normal direction ±e_{n+1} as the poles (the picture for n = 2).
 """
 
-INPUTS = []
-
 import math
 
 SIZE = (740, 270)

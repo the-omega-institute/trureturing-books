@@ -7,8 +7,6 @@ Both rulers are linear in their own variable over the same width. The cyan marks
 (Δη = 1, k = 0…5) on the lower ruler and θ_k = gd(η_k) on the upper one, joined by dashed lines.
 """
 
-INPUTS = []
-
 import math
 
 from _ch36 import ETA0, THETA_STAR, eta, theta_k
