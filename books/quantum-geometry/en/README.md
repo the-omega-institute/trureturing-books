@@ -218,6 +218,12 @@ For gate-set density, see P. O. Boykin et al., *On Universal and Fault-Tolerant 
 
 Unfolded, it ranges across quantum computing, spacetime physics, and mathematical logic; folded back, it is simply $\psi$ taking itself as ruler to measure the angle it opens, and recognizing itself across the living seam of approximation.
 
+The prelude's last video follows this section from “use the reading as the next angle” all the way to $\psi = \psi(\psi)$.
+
+::: {.film src="prelude-self-measure"}
+**The Ruler Measures Itself: $\psi = \psi(\psi)$.** Starting from $1$ radian, read the cosine and use the reading as the next angle: the amber zigzag runs between the cyan curve $y = \cos\theta$ and the grey diagonal $y = \theta$, closing in on $\theta^* \approx 0.739$. That $\cos\theta = \theta$ has exactly one positive solution, between $0$ and $1$, is the film's only Lean-verified result, the theorem [@thm-dottie-rational-inverse-endpoint] of Chapter 24; that the zigzag reaches it from any start and that no finite step lands exactly remain the literature results of [@rem-prelude-dottie-literature] and [@rem-prelude-finite-literature], shown in violet as argued. Where reading and angle coincide, the book writes $\psi = \psi(\psi)$. English narration with Chinese and English subtitles.
+:::
+
 ## 0.6 Reader's Guide and Formal Verification Contract {#sec-contract}
 
 The full architecture of *Geometric Intuition of Quantum Computing* comprises **ten parts**:
