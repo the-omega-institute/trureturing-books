@@ -559,7 +559,7 @@ $$
 
 冻结的数学来源是合入后的 trureturing 提交 `0ee6636c21a9d8fb2bafd11c91a8fb6247154a25` 中的 [`D5/S3/Quantum/ShorCountingMarginal.lean`](https://github.com/the-omega-institute/trureturing/blob/0ee6636c21a9d8fb2bafd11c91a8fb6247154a25/D5/S3/Quantum/ShorCountingMarginal.lean)：上面的 `Parameters.shor_qpe_probability_mixture`、`shor_distribution_normalized`、`shor_mixture_peak_lower_bound`，以及提供单相位估计的 `QuantumPhaseEstimationGeneral.qpe_arbitrary_phase_lower_bound`。源码参数 `modulus, base, width, dimension, period` 分别对应 $N,a,w,D,r$；`runQPE` 使用 $\mathcal F_-$，`normSquared` 对整个工作寄存器的坐标平方模求和。移植保留 Lean 源文件中的 Apache 2.0 许可与来源注记。周边算法讨论的文献依据是 R. Cleve、A. Ekert、C. Macchiavello 与 M. Mosca，*Quantum Algorithms Revisited*，[arXiv:quant-ph/9708016](https://arxiv.org/abs/quant-ph/9708016)，§§5–6，式 (5.2)–(5.4)、(6.1)–(6.4)。
 
-上述推导给出实际输入的边缘分布、归一化和最近格点的逐点下界。下文增加 $N^2\le Q$，先处理条件候选成员资格，再通过各相位分量上的同一事件求和，得到单次列表成员概率下界，并在显式独立重置前提下推导恰好两次观察的全配对最小公倍数列表事件下界；精确选阶、整数分解、任意相关重复与完整门复杂度仍保留 [@rem-grover-qft-shor-literature] 的边界。这里也没有给出任意非二幂 $Q$、每一条条件后验梳子或硬件实现的保证。
+上述推导给出实际输入的边缘分布、归一化和最近格点的逐点下界。下文增加 $N^2\le Q$，先处理条件候选成员资格，再通过各相位分量上的同一事件求和，得到单次列表成员概率下界，并在显式独立重置前提下推导恰好两次观察的全配对最小公倍数列表事件下界；逐次精确选阶认证、整数分解、任意相关重复与完整门复杂度仍保留 [@rem-grover-qft-shor-literature] 的边界。这里也没有给出任意非二幂 $Q$、每一条条件后验梳子或硬件实现的保证。
 :::
 
 从分布到后处理，还要跨过一道数论桥。上面的 $N=7,Q=4,r=3$ 算例只有边缘分布的意义：$N^2=49>4$，不能用于下面的恢复结论。现在增加分辨率条件 $N^2\le Q$，只问一个确定性问题：给定测到的整数，哪个有限列表保证包含所需分式？
@@ -1010,7 +1010,223 @@ $$
 
 这个组合应用保证的恰是：在同一实际模乘模型的两次独立重置采样下，从两个观察值生成的完整全配对列表包含共同真阶的概率至少为 $8/\pi^4$。它没有给出从完整候选最小公倍数列表中认证精确阶的选择器，也没有认证把整份列表的所有项一起取最小公倍数就等于真阶；其他候选仍可能混入额外因子。任意相关重复、高效均匀单位采样、递归素因子分解、位或门复杂度、硬件表现均不由此给出。下文均匀单位群中的 Good 比例与同事件双侧 gcd 提取属于另一种抽样；若没有明确的共同联合律，不能把它与这里的量子事件概率直接相乘。
 
-连分数候选与列表长度结论取自所钉源码的 `ShorContinuedFractions`、`FiniteRationalConvergents` 与 `FiniteRationalConvergentsLength`；有理列表与长度证明由 aicyberg 提供，模块保留供给源 *Finite-register phase estimation and spectral Shor order finding*（[solanaqubits/leanbook，固定版本](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)）的来源与 Apache 2.0 许可。来源审计 [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) 仍为三项已验证、一项未完成：更一般的时钟结论与独立理想采样乘积律没有因本节的模数界特化而一并解决。此前实际边缘分布的独立来源审计 [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) 仍为三项已验证、五十九项未完成。这些审计状态描述覆盖范围，不是否定上述数学证明。上述单次列表成员事件的下界由条件成员资格、实际混合与互素计数组合得到；两次全配对列表事件则在显式独立重置前提下使用联合本原相位对的充分半密度界。下文另从有限循环群计数推导均匀单位底数的 Good 比例与同事件双侧因子证书。独立性始终是采样前提；任意相关重复、精确选择器、经典位复杂度、完整量子门复杂度与硬件表现仍须保留 [@rem-grover-qft-shor-literature] 的边界。
+连分数候选与列表长度结论取自所钉源码的 `ShorContinuedFractions`、`FiniteRationalConvergents` 与 `FiniteRationalConvergentsLength`；有理列表与长度证明由 aicyberg 提供，模块保留供给源 *Finite-register phase estimation and spectral Shor order finding*（[solanaqubits/leanbook，固定版本](https://github.com/solanaqubits/leanbook/tree/9b742770a2a5dbcf30cf9abc44e711194e957a00)）的来源与 Apache 2.0 许可。来源审计 [#30614](https://github.com/the-omega-institute/trureturing/issues/30614) 仍为三项已验证、一项未完成：更一般的时钟结论与独立理想采样乘积律没有因本节的模数界特化而一并解决。此前实际边缘分布的独立来源审计 [#30521](https://github.com/the-omega-institute/trureturing/issues/30521) 仍为三项已验证、五十九项未完成。这些审计状态描述覆盖范围，不是否定上述数学证明。上述单次列表成员事件的下界由条件成员资格、实际混合与互素计数组合得到；两次全配对列表事件则在显式独立重置前提下使用联合本原相位对的充分半密度界。下文另从有限循环群计数推导均匀单位底数的 Good 比例与同事件双侧因子证书。独立性始终是采样前提；任意相关重复、逐次精确性认证、经典位复杂度、完整量子门复杂度与硬件表现仍须保留 [@rem-grover-qft-shor-literature] 的边界。
+
+**应用：只凭观察列表，选出通过检验的最小指数。** 前一应用把两份分母补成一张有限菜单，并给出了“真阶在菜单里”的概率下界。现在给这张菜单加一道确定的选择规则：先逐项做模幂检验，再在通过者中取最小值。下面沿用 `ShorContinuedFractions` 源文的选择器应用，用既有列表性质与乘法阶性质给出书面推导。
+
+对任意自然数 $a,N$ 与任意有限自然数列表 $L$，约定
+
+```text
+select a N L =
+  List.argmin id
+    (L.filter (fun d => decide (0 < d ∧ Nat.powMod a d N = 1)))
+```
+
+这是既有函数的组合：`filter` 保留正的、模幂检验通过的指数，`List.argmin id` 返回其中数值最小的 `some m`；若过滤后为空，返回 `none`。输入只有 $a,N,L$，没有未知真阶 $r$、潜在相位或“本次是否精确”的标志。列表的顺序、重复项与空列表都保留在定义域内，不先改成集合，也不假定列表里每项都整除真阶。
+
+**先把可执行检验接到实际乘法阶。** 要解释输出的阶意义，固定任意实际参数记录 $c:\operatorname{QuantumShorOrderFindingCore.Parameters}$，取
+
+$$
+\begin{aligned}
+a&=c.\operatorname{base},&N&=c.\operatorname{modulus}\ge2,\\
+r&=c.\operatorname{period}
+=\operatorname{orderOf}(a:\operatorname{ZMod}N)>0.
+\end{aligned}
+$$
+
+记录还给出 $\gcd(a,N)=1$ 与容纳模数的工作宽度；因此这里的 $r$ 是同一个底数、同一个模数的实际阶。以下列表论证与计数宽度、分辨率及 $L$ 的来历无关。由 `Nat.powMod_def`，检验计算的是自然数余数 $a^d\bmod N$。由于 $1<N$，余数 $1$ 正是标准代表元；`ZMod.natCast_eq_natCast_iff'` 与 `Nat.cast_pow` 给出
+
+$$
+\operatorname{Nat.powMod}(a,d,N)=1
+\quad\Longleftrightarrow\quad
+(a:\operatorname{ZMod}N)^d=1.
+$$
+
+记过滤后的列表为 $S$。若 $\operatorname{select}(a,N,L)=\operatorname{some}(m)$，`List.argmin_mem` 把 $m$ 放进 $S$，于是
+
+$$
+m\in L,\qquad m>0,\qquad
+\operatorname{Nat.powMod}(a,m,N)=1,\qquad r\mid m.
+$$
+
+最后一项来自 `orderOf_dvd_of_pow_eq_one`。对每个 $d\in L$，若 $d>0$ 且模幂检验通过，则 $d\in S$；`List.le_of_mem_argmin` 因而给出
+
+$$
+\forall d\in L,\quad
+\bigl(d>0\ \land\ \operatorname{Nat.powMod}(a,d,N)=1\bigr)
+\ \Longrightarrow\ m\le d.
+$$
+
+这是**给定列表内通过者的最小性**。任何正的通过指数都是 $r$ 的正倍数，所以 $r\le m$；也可直接用 `orderOf_le_of_pow_eq_one` 得到这个不等式。未通过的项不参加比较，未出现的指数不被搜索。返回值由此认证正性、通过性、列表成员资格、列表内最小性以及 $r\mid m$；它本身没有给出 $m=r$ 的识别标志，也没有搜索列表之外更小的正返回指数。
+
+**真阶在菜单里，当且仅当选择器返回真阶。** 对上述每个实际 $c$ 与每个有限 $L$，有精确对应
+
+$$
+\operatorname{select}(a,N,L)=\operatorname{some}(r)
+\quad\Longleftrightarrow\quad r\in L.
+$$
+
+先看从左到右：返回的 $r$ 属于过滤列表 $S$，自然也属于原列表 $L$。
+
+再看从右到左。若 $r\in L$，则 $r>0$ 且 $(a:\operatorname{ZMod}N)^r=1$，所以模幂检验通过，$r\in S$。`List.argmin_eq_none` 说明仅当 $S=[]$ 才会返回 `none`；这里 $S$ 非空，故返回某个 `some m`。这个 $m$ 是正的通过指数，由阶的性质有 $r\le m$；另一方面，$r$ 本身是列表中的通过项，最小值性质给出 $m\le r$。两个不等式夹住同一个数，迫使 $m=r$。这里连接的是两个最小值：$r$ 是所有正返回指数的最小值，$m$ 是菜单内正返回指数的最小值；$r\in L$ 使它们重合。
+
+失败返回也有完整的等价式：
+
+$$
+\operatorname{select}(a,N,L)=\operatorname{none}
+\quad\Longleftrightarrow\quad
+\forall d\in L,\ \neg\bigl(d>0\ \land\
+\operatorname{Nat.powMod}(a,d,N)=1\bigr).
+$$
+
+因为 `argmin` 返回 `none` 当且仅当 $S$ 为空，而过滤列表为空当且仅当原列表没有正的通过项。`none` 报告这份菜单失败；在实际参数记录下，真阶仍然存在。空列表直接返回 `none`，零指数被正性条件排除；重复的通过项仍是重复项。`argmin` 对并列最小值保留先出现者，但这里分数函数是自然数上的 `id`，并列者就是同一个指数值，所以不影响上述契约。$r=1$ 也包括在内。
+
+**把成员概率逐项改写成精确输出概率。** 回到前一应用的同一个实际 $c$ 与同一个计数宽度 $n$，保持 $Q=2^n$、$N^2\le Q$。两次仍使用同一个 $c.\operatorname{modularOperator}$、同一个 $c.\operatorname{input}=|1\rangle$ 和同样的完整工作载体，包括补齐坐标。为明确选择器读到什么，重写前面的列表定义：
+
+$$
+\begin{aligned}
+D(y)&=\operatorname{map}\bigl(\operatorname{den},
+\operatorname{candidates}(y.\operatorname{val},Q,N)\bigr),\\
+L(y,z)&=\operatorname{flatMap}\!\left(D(y),
+ d\mapsto\operatorname{map}\bigl(e\mapsto\operatorname{lcm}(d,e),D(z)\bigr)\right).
+\end{aligned}
+$$
+
+也就是 `(D y).flatMap (fun d => (D z).map (Nat.lcm d))`，保留所有配对及重复值。定义精确输出事件
+
+$$
+X_2(y,z)\ \Longleftrightarrow\
+\operatorname{select}(a,N,L(y,z))=\operatorname{some}(r).
+$$
+
+通用列表契约逐点给出 $X_2(y,z)\Longleftrightarrow E_2(y,z)$，其中 $E_2(y,z)$ 仍是 $r\in L(y,z)$。选择过程从观察整数构造菜单并执行检验，未知 $r$ 只出现在数学上的成功谓词中。
+
+令 $p_-(y)=p(y)=\operatorname{normSquared}(A_-(y))$。继续明确假设两次完整制备与测量独立重置，联合质量为 $p_-(y)p_-(z)$。这个乘积非负，总和为 $1$。对任意事件 $F$，以
+
+$$
+\Pr_-^{(2)}(F)=\sum_{y,z\in\mathrm{Fin}\,Q}
+\mathbf1_{F(y,z)}p_-(y)p_-(z)
+$$
+
+定义其概率。由于 $X_2$ 与 $E_2$ 的指示函数在每个观察对上相等，有限和中的每项都不变，故
+
+$$
+\begin{aligned}
+\Pr_-^{(2)}(X_2)&=\Pr_-^{(2)}(E_2)\\
+&\ge\frac{H_r}{r^2}\left(\frac4{\pi^2}\right)^2
+\ge\frac8{\pi^4}.
+\end{aligned}
+$$
+
+下界仍来自上面的实际相位混合、每个联合本原分量中的整个事件质量与 $2H_r\ge r^2$。没有另加独立抽取潜在相位的实验，也无需把最近标号的见证选成单射。一个观察对无论产生多少个 $r$、多少对成功分母，都只有一个精确输出指示函数。分辨率、工作补齐和实际输入均未改变，仍不要求 $r\mid Q$；一个或两个零观察标号同样适用。
+
+**原生正指数电路：先反射两个观察值，再选择。** 使用前面同一个
+
+$$
+V=\operatorname{runControlled}\,c.\operatorname{modularOperator}\,n\,c.\operatorname{input}
+$$
+
+以及 $A_+(y)(u)=\operatorname{QFT}\,Q\,(k\mapsto V(k)(u))\,y$、$p_+(y)=\operatorname{normSquared}(A_+(y))$。反射仍为通过 $\operatorname{ZMod.finEquiv}\,Q$ 实现的取负对合 $\nu$，包含 $\nu(0)=0$ 与 $\nu(\nu(y))=y$。同一受控态上的完整工作向量等式给出
+
+$$
+A_+(y)=A_-(\nu(y)),\qquad p_+(y)=p_-(\nu(y)).
+$$
+
+因此应定义
+
+$$
+X_{2,+}(y,z)\ \Longleftrightarrow\
+\operatorname{select}\bigl(a,N,L(\nu(y),\nu(z))\bigr)=\operatorname{some}(r).
+$$
+
+两个标号都先反射，零标号仍送到零。两次正指数实验也明确采用独立重置律 $p_+(y)p_+(z)$。按对合置换 $(y,z)\mapsto(\nu(y),\nu(z))$ 重排有限和，得到
+
+$$
+\begin{aligned}
+\Pr_+^{(2)}(X_{2,+})
+&=\sum_{y,z\in\mathrm{Fin}\,Q}
+\mathbf1_{X_2(\nu(y),\nu(z))}p_+(y)p_+(z)\\
+&=\sum_{y,z\in\mathrm{Fin}\,Q}
+\mathbf1_{X_2(y,z)}p_-(y)p_-(z)\\
+&=\Pr_-^{(2)}(X_2)\ge\frac8{\pi^4}.
+\end{aligned}
+$$
+
+[@thm-qft-circuit-action] 对任意 `OracleModel` 及其 `Interpretation`，把原生正指数电路的 `onBinaryLabels` 矩阵 $M_n$ 作用于同一个列向量 $k\mapsto V(k)(u)$ 的结果等同于 $\operatorname{QFT}\,Q$。因而逐个工作坐标有
+
+$$
+\sum_{k\in\mathrm{Fin}\,Q}(M_n)_{y,k}V(k)(u)
+=A_+(y)(u)=A_-(\nu(y))(u).
+$$
+
+对完整载体求平方模和便是同一个 $p_+$，所以上述反射后的选择事件适用于这同一原生电路。这个概率等式依靠双坐标对合重排；它没有给未反射的正指数菜单 $L(y,z)$ 同一下界。未重置目标、相关重复或未指定的相关态也不能借用这里的乘积律。
+
+**菜单里没有真阶，取最小值也补不出来。** 做一个有限的确定性计算。取
+
+$$
+N=21,\qquad a=2,\qquad Q=512,\qquad y=z=43.
+$$
+
+这里 $21^2=441\le512$。有理数 $43/512$ 的欧几里得展开依次用到
+
+$$
+\begin{aligned}
+512&=11\cdot43+39,\\
+43&=1\cdot39+4,\\
+39&=9\cdot4+3,\\
+4&=1\cdot3+1.
+\end{aligned}
+$$
+
+最后 $3=3\cdot1$；相应全列表为 $[0,1/11,1/12,10/119,11/131,43/512]$。按分母严格小于 $21$ 过滤，得到
+
+$$
+\begin{aligned}
+\operatorname{candidates}(43,512,21)&=[0,1/11,1/12],\\
+D(43)&=[1,11,12],\\
+L(43,43)&=[1,11,12,11,11,132,12,132,12].
+\end{aligned}
+$$
+
+最后一行逐行拼接 $[1,11,12]$、$[11,11,132]$ 与 $[12,132,12]$，没有去重。模 $21$ 的前六个正幂余数是
+
+$$
+2,\ 4,\ 8,\ 16,\ 11,\ 1,
+$$
+
+所以真阶是 $r=6$。菜单中的不同数值 $1,11,12,132$ 的模幂余数分别为 $2,11,1,1$；正的通过项最小值是 $12$，故
+
+$$
+\operatorname{select}(2,21,L(43,43))=\operatorname{some}(12),\qquad
+\operatorname{Nat.powMod}(2,12,21)=1.
+$$
+
+真阶 $6$ 根本不在这份菜单里，返回值仍是它的两倍。这个算例只说明给定整数上的候选计算与选择结果；这里没有断言观察对 $(43,43)$ 在实际量子实验中具有正概率。
+
+若把返回的 $12$ 直接冒充真阶，半指数会变成 $12/2=6$；真正的半阶却是 $6/2=3$。两者给出不同余数：
+
+$$
+2^{12/2}\bmod21=1,\qquad
+2^{6/2}\bmod21=8.
+$$
+
+前者给出的两个 gcd 是 $\gcd(63,21)=21$、$\gcd(65,21)=1$，后者则是 $\gcd(7,21)=7$、$\gcd(9,21)=3$。模幂检验通过，不能替换下文经典因子提取中的真阶前提。全配对也不保证补出菜单缺失的真阶；列表内最小化的精确性来自“真阶一旦在场就会被选中”，并非每份菜单都完整。
+
+**概率保证与逐次证书。** 在明确的实际输入、分辨率及独立重置律下，返回值等于真阶的概率至少为 $8/\pi^4$。这是有界错误的精确输出概率保证。一次 `some m` 没有附带识别本次是否精确的标志；它可能是较大的正倍数，`none` 则只表示没有正的通过菜单项。这里没有得到每次返回都认证精确、每次失败都可识别的 Las Vegas 过程。仅仅重复这种返回也没有给出精确性证书；本应用不据此宣称成功概率的放大。
+
+若另有额外资源，可以检验精确性。既有 `orderOf_eq_of_pow_and_pow_div_prime` 说：对正的通过指数 $m$，若每个素因子 $p\mid m$ 都满足
+
+$$
+(a:\operatorname{ZMod}N)^{m/p}\ne1
+\quad\Longleftrightarrow\quad
+\operatorname{Nat.powMod}(a,m/p,N)\ne1
+$$
+
+则 $\operatorname{orderOf}(a:\operatorname{ZMod}N)=m$。机制也可直接看见：已知 $r\mid m$，写 $m=rk$；若 $k>1$，取某个素因子 $p\mid k$，则 $r\mid m/p$，该素数除法检验必返回 $1$，与要求矛盾。所以只能 $k=1$。要把这些检验作为有限证书使用，必须有 $m$ 的**完整且经过核验的素因子分解**，足以穷尽全部不同素因子；只试几个素数不够。$m=1$ 时素因子检验为空，正的通过性本身已迫使真阶为 $1$。取得完整分解与核验给定分解是两项不同任务，选择器并不提供前者；这里没有声称能高效取得这些因子。
+
+取阶倍数中的最小值这一思路，可直接参见 Ekerå，*On the success probability of quantum order finding*，[arXiv:2201.07791v2，§4.1.7](https://arxiv.org/html/2201.07791v2#S4.SS1.SSS7)：当处理后的值全是正的阶倍数，且至少一个就是真阶，最小值便是真阶。这里引用的是这个最小值论证；该文的偏移搜索与基于光滑性的处理不同于本节的全配对菜单，它们的算法与性能估计不随这条引用转移。
+
+有限列表和可执行模幂检验给出了一项明确的计算。前面的对数长度界只数渐近分数项或欧几里得阶段，不自动涵盖全部递归列表操作与有理数运算的位代价；这里也没有端到端位复杂度、量子门复杂度、高效完整因子获取、递归分解或硬件表现的结论。精确输出事件针对固定实际底数的计数观察，下文的经典 Good 事件则针对另一个单位群抽样律。把二者放在同一概率计算中，仍须先指定共同的联合采样构造。
 
 ::: {.viz src="phase-gears" preset="leak" height="500"}
 **不整除时峰摊开。** $Q = 64$、周期 $6$：品红的 $sQ/r$ 落在 $10.67$、$21.33$ 等整数之间，峰摊到相邻的格，$k = 11$ 高 $0.115$、$k = 10$ 只有 $0.026$，离 $sQ/r$ 最近的六格合计 $0.80$；琥珀色框住的 $k = 11$ 用连分数读出 $\frac{1}{6}$。本卡没有指定实际模数与底数，不能据此核对 $N^2\le Q$，所以这里的集中与读数保持教学数值演示的身份；上述条件成员定理不认证本卡“取最后一个渐近分数”的读法，也不把这些条件梳子的峰高认作实际边缘概率。
@@ -1168,7 +1384,7 @@ $$
 回到奇数 $N>1$ 的均匀单位抽样，带双侧证书的同一事件概率恰为 $S/T$，继承 $1-1/2^{k-1}$ 的下界；若 $N$ 非素数幂，便至少为 $1/2$。证书没有另换成功事件或抽样载体。
 :::
 
-经典单位抽样与前文固定底数下的实际量子测量是两种随机选择。前者的 Good 比例不能直接与后者的候选列表概率相乘；组合需要明确的共同抽样律及相应条件概率。上文已在显式独立重置前提下给出恰好两次实际观察的全配对最小公倍数列表成员事件下界；以上仍没有给出高效均匀单位采样器、从完整候选最小公倍数列表认证精确阶的选择器、任意相关重复的保证、完整递归素因子分解实现或位／门复杂度。条件后验梳子的集中仍保持前文的文献边界。
+经典单位抽样与前文固定底数下的实际量子测量是两种随机选择。前者的 Good 比例不能直接与后者的候选列表概率相乘；组合需要明确的共同抽样律及相应条件概率。上文已在显式独立重置前提下给出恰好两次实际观察的全配对最小公倍数列表成员事件下界，并用最小通过项选择规则得到相同的精确输出事件下界；以上仍没有给出高效均匀单位采样器、从完整候选最小公倍数列表认证精确阶的选择器、任意相关重复的保证、完整递归素因子分解实现或位／门复杂度。条件后验梳子的集中仍保持前文的文献边界。
 
 下面，让我们通过一个四步完整手算算例，把 $N=4$ 与 $N=8$ 的 Grover 搜索、$3$ 比特 QFT 的二进制相位齿轮、$N=15$ 的 Shor 周期寻找以及 $\mathrm{ZMod}\,16$ 上的字符和与泊松公式逐一验算到底。
 
@@ -1292,11 +1508,11 @@ $N = 8$ 时走两步仍差一点，成功概率停在 $\frac{121}{128}$。
 
 ::: {.remark #rem-grover-qft-shor-literature title="Grover 查询下界、QFT 理想计数与完整 Shor 算法的边界"}
 <!-- alias: #rem-shor-factoring-literature -->
-本章的 Lean 引用覆盖均匀振幅放大、Weyl 共轭、字符相消与有限泊松恒等式，以及实际 QFT 电路作用与原生事件计数（[@thm-qft-circuit-action]、[@thm-qft-native-event-count]）、单相位圆周尾界（[@thm-qpe-circular-tail]）、实际输入边缘分布与逐点下界、有理列表长度和条件候选成员资格。上文将实际混合、最近格点下界与候选恢复组合，推导了 $N^2\le Q$ 下单次列表成员事件的 $\frac4{\pi^2}\frac{\varphi(r)}r$ 下界，并在显式独立重置前提下得到恰好两次观察的全配对最小公倍数列表事件下界 $8/\pi^4$；后者使用联合本原相位对的充分半密度界。正指数规范须反射两次观察的两个标号，原生正指数电路作用于同一受控态时也使用这个修正事件。[@thm-half-order-family-failure-count] 另给出任意非空有限循环群族的失败计数，[@ex-shor-actual-unit-factors] 将其经实际单位 CRT 搬运为均匀 Good 下界，并在同一事件上证明双侧 gcd 真因子。这里仍没有精确选择器。以下第 1 项和第 3 项的其余完整算法结论仍是**文献结果，未在本书形式化**；第 2 项只总结上述电路的理想计数及其成本边界。
+本章的 Lean 引用覆盖均匀振幅放大、Weyl 共轭、字符相消与有限泊松恒等式，以及实际 QFT 电路作用与原生事件计数（[@thm-qft-circuit-action]、[@thm-qft-native-event-count]）、单相位圆周尾界（[@thm-qpe-circular-tail]）、实际输入边缘分布与逐点下界、有理列表长度和条件候选成员资格。上文将实际混合、最近格点下界与候选恢复组合，推导了 $N^2\le Q$ 下单次列表成员事件的 $\frac4{\pi^2}\frac{\varphi(r)}r$ 下界，并在显式独立重置前提下得到恰好两次观察的全配对最小公倍数列表事件下界 $8/\pi^4$；后者使用联合本原相位对的充分半密度界。正指数规范须反射两次观察的两个标号，原生正指数电路作用于同一受控态时也使用这个修正事件。[@thm-half-order-family-failure-count] 另给出任意非空有限循环群族的失败计数，[@ex-shor-actual-unit-factors] 将其经实际单位 CRT 搬运为均匀 Good 下界，并在同一事件上证明双侧 gcd 真因子。本章的列表选择规则还给出真阶在完整菜单中时返回真阶的精确对应，并将两次独立观察的成员下界转为精确输出概率下界；每次返回是否精确仍无识别证书。以下第 1 项和第 3 项的其余完整算法结论仍是**文献结果，未在本书形式化**；第 2 项只总结上述电路的理想计数及其成本边界。
 
 1. **Grover 搜索与黑盒查询复杂度下界**（L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866；G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055）：在已知解数 $M$、承诺 $1 \le M \le N/4$ 的 $N$ 元无结构搜索中，从均匀叠加态出发，按已知初始成功概率 $p = M/N$ 选取迭代步数，振幅放大以 $O(\sqrt{N/M})$ 次标记黑盒查询将成功概率提升至 $\ge 1 - M/N$。这一稀疏解承诺下，任何量子黑盒算法要以常数有界误差找到解，都需要 $\Omega(\sqrt{N/M})$ 次查询（由 Bennett–Bernstein–Brassard–Vazirani (1997) 的单解黑盒下界归约得到），证实这一黑盒任务中的二次加速已达量子几何极限。
 2. **同一 QFT 电路的理想原生门数**：[@thm-qft-native-event-count] 给出 $q$ 个 Hadamard、$q(q-1)/2$ 个受控相位和 $\lfloor q/2\rfloor$ 个 SWAP，合计 $\frac{q(q+1)}2+\lfloor q/2\rfloor$ 次理想原生门出现。由此作通常的渐近计数，得到 $O(q^2)=O((\log Q)^2)$（$Q=2^q$）；电路对已制备复向量的精确正指数作用由 [@thm-qft-circuit-action] 给出。任意输入数据的装载、全部傅里叶系数的经典读出、理想相位门到有限离散门集的综合及硬件性能，都不包含在这个计数中。
-3. **Shor 大数分解与阶寻找的完整正确性条件**（P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172）：对于一般合数 $N$（非偶、非素数幂）与随机互素底数 $a$，乘法阶 $r$ 通常不整除 $Q=2^q$。完整算法选取 $N^2\le Q<2N^2$，通过可逆模幂电路在 $O((\log N)^3)$ 基本门内制备相应联合态，再经 QFT 采样。上述单次候选事件与两次独立重置的全配对最小公倍数事件推导覆盖实际模乘模型中的相应列表成员概率；它们没有认证可逆模幂的门实现或从完整候选列表选出精确阶的步骤。欧拉函数比值的渐近估计 $\varphi(r)/r=\Omega(1/\log\log r)$ 仍按文献使用，不能把混合中的计数比例改称额外随机相位实验。经典部分现由 [@thm-half-order-family-failure-count] 与 [@ex-shor-actual-unit-factors] 覆盖：对奇数 $N>1$，在完整单位群上均匀抽样的 Good 概率至少为 $1-2^{-(k-1)}$；非素数幂时 $k\ge2$，故至少为 $1/2$，且同事件中的每个自然数底数代表元都给出双侧真因子。这保留全部实际素数幂指数，单位元也留在抽样载体内。该经典概率与固定底数下的量子候选事件使用不同抽样律，尚未在此组成一个共同实验的端到端概率。高效单位采样、从完整候选最小公倍数列表认证精确阶、任意相关重复的保证、理想相位采样的精确欧拉乘积律、完整递归分解实现与位／门复杂度仍不由这些结果给出。两次重置的独立性是明确采用的联合采样前提，不能由两份边缘分布相同而推出。（注：将周期提取比作“把无穷周期因式约分到 $1$”属于启发式几何直觉，绝非已形式化的数学结论。）
+3. **Shor 大数分解与阶寻找的完整正确性条件**（P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172）：对于一般合数 $N$（非偶、非素数幂）与随机互素底数 $a$，乘法阶 $r$ 通常不整除 $Q=2^q$。完整算法选取 $N^2\le Q<2N^2$，通过可逆模幂电路在 $O((\log N)^3)$ 基本门内制备相应联合态，再经 QFT 采样。上述单次候选事件与两次独立重置的全配对最小公倍数事件推导覆盖实际模乘模型中的相应列表成员概率；它们没有认证可逆模幂的门实现。后续列表选择应用保证真阶在菜单中时必被选中，并给出精确输出事件的概率下界；模幂通过的任意返回值仍可能是真阶的较大倍数。欧拉函数比值的渐近估计 $\varphi(r)/r=\Omega(1/\log\log r)$ 仍按文献使用，不能把混合中的计数比例改称额外随机相位实验。经典部分现由 [@thm-half-order-family-failure-count] 与 [@ex-shor-actual-unit-factors] 覆盖：对奇数 $N>1$，在完整单位群上均匀抽样的 Good 概率至少为 $1-2^{-(k-1)}$；非素数幂时 $k\ge2$，故至少为 $1/2$，且同事件中的每个自然数底数代表元都给出双侧真因子。这保留全部实际素数幂指数，单位元也留在抽样载体内。该经典概率与固定底数下的量子候选事件使用不同抽样律，尚未在此组成一个共同实验的端到端概率。高效单位采样、从完整候选最小公倍数列表认证精确阶、任意相关重复的保证、理想相位采样的精确欧拉乘积律、完整递归分解实现与位／门复杂度仍不由这些结果给出。两次重置的独立性是明确采用的联合采样前提，不能由两份边缘分布相同而推出。（注：将周期提取比作“把无穷周期因式约分到 $1$”属于启发式几何直觉，绝非已形式化的数学结论。）
 :::
 
 ::: {.viz src="phase-gears" height="560"}
