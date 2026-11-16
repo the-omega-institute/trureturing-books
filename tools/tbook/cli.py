@@ -101,6 +101,9 @@ def cmd_stats(args) -> int:
     from . import stats
 
     rows = [stats.collect(book, exclude=tuple(args.exclude) if args.exclude else None) for book in _books(args)]
+    if args.write:
+        for data in rows:
+            stats.write_artifact(data)
     if args.json:
         print(json.dumps(rows, ensure_ascii=False, indent=2))
     else:
@@ -407,6 +410,7 @@ def parser() -> argparse.ArgumentParser:
     c.add_argument("--book", action="append")
     c.add_argument("--exclude", action="append", default=[], help="generated index chapter to exclude")
     c.add_argument("--json", action="store_true", help="include declarations and citation locations")
+    c.add_argument("--write", action="store_true", help="export build/statistics/<book>.json without changing sources")
     c.set_defaults(fn=cmd_stats)
 
     c = sub.add_parser("artifacts", help="list, untrack or reject generated publication files in Git")

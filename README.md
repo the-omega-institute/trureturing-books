@@ -24,7 +24,7 @@ Each theorem declares its evidence. Lean-verified results cite declarations veri
 
 The Zenodo concept DOI provides a stable identifier across versions; version-specific DOIs are listed in the Zenodo records. Set the publication DOI in [`books/quantum-geometry/book.toml`](books/quantum-geometry/book.toml) as `[book].doi`. When omitted, the build checks the root `.zenodo.json`, `CITATION.cff`, then explicit Zenodo DOI links in README. The DOI appears in the site catalog, PDF/EPUB copyright pages, and EPUB metadata.
 
-本书将直观的物理机制推演、概念谱系批判与机器形式化证明熔于一炉，沿着**“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 多球共振 $\to$ 时空之球 $\to$ 球外之球与机械法典 $\to$ 无时间因果、复杂性视界、量子公平与元统一 $\to$ 万物观察者、正交简并、自指扩表与超越轮回 $\to$ 梦境擦除、本体 QRAM 与观察者即宇宙本体”**的十部三十九章正交阶梯推进：
+本书将直观的物理机制推演、概念谱系批判与机器形式化证明熔于一炉，沿着**“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 多球共振 $\to$ 时空之球 $\to$ 球外之球与机械法典 $\to$ 无时间因果、复杂性视界、量子公平与元统一 $\to$ 万物观察者、正交简并、自指扩表与超越轮回 $\to$ 梦境擦除、本体 QRAM 与观察者即宇宙本体”**的十部正交阶梯推进：
 
 | 部次 / Part | 主题 / Theme | 章节范围 / Chapters |
 | :--- | :--- | :--- |

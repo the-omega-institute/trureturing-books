@@ -104,6 +104,32 @@ Open.
             self.assertEqual(code, 0, err)
             self.assertEqual(json.loads(out)[0]['total'], 0)
 
+    def test_cli_artifacts_are_opt_in_scoped_and_refreshed_without_source_changes(self):
+        with Repo() as repo:
+            one = repo.book('one')
+            repo.book('two')
+            sources = snapshot(repo.root)
+            code, _, err = repo.run_cli('stats', '--book', 'one')
+            self.assertEqual(code, 0, err)
+            self.assertEqual(snapshot(repo.root), sources)
+            code, out, err = repo.run_cli('stats', '--book', 'one', '--write', '--json')
+            self.assertEqual(code, 0, err)
+            target = repo.root / 'build/statistics/one.json'
+            self.assertEqual(json.loads(target.read_text()), json.loads(out)[0])
+            self.assertFalse((repo.root / 'build/statistics/two.json').exists())
+            exported = target.read_bytes()
+            stamp = target.stat().st_mtime_ns
+            code, _, err = repo.run_cli('stats', '--book', 'one', '--write')
+            self.assertEqual(code, 0, err)
+            self.assertEqual(target.read_bytes(), exported)
+            self.assertEqual(target.stat().st_mtime_ns, stamp)
+            write(one.primary.dir / 'ch01.md', '# One\n\n::: {.problem #open}\nOpen.\n:::\n')
+            edited = snapshot(repo.root / 'books')
+            code, _, err = repo.run_cli('stats', '--book', 'one', '--write')
+            self.assertEqual(code, 0, err)
+            self.assertEqual(json.loads(target.read_text())['environments']['problem'], 1)
+            self.assertEqual(snapshot(repo.root / 'books'), edited)
+
     def test_invalid_hook_and_empty_books(self):
         with Repo() as repo:
             book = repo.book()

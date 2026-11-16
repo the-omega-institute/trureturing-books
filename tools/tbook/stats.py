@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 from collections import Counter
+import json
+from pathlib import Path
 
-from . import config, lean, model, render
+from . import config, lean, model, paths, render
 
 
 def collect(book: config.Book, *, exclude: tuple[str, ...] | None = None, lock=None) -> dict:
@@ -77,3 +79,13 @@ def collect(book: config.Book, *, exclude: tuple[str, ...] | None = None, lock=N
             "environments": {k: counts[k] for k in (*model.ENV_KINDS, "lean_verified", "written_proof", "literature")},
             "total": len(declarations), "kinds": dict(sorted(kinds.items())),
             "groups": groups, "declarations": dict(sorted(declarations.items())), "chapters": chapters}
+
+
+def write_artifact(data: dict) -> Path:
+    """Export a snapshot under the ignored build directory, without modifying book sources."""
+    target = paths.BUILD / "statistics" / f"{data['book']}.json"
+    content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if not target.is_file() or target.read_text(encoding="utf-8") != content:
+        target.write_text(content, encoding="utf-8")
+    return target

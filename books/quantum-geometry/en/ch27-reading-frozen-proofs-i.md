@@ -13,10 +13,6 @@ In this chapter and [Chapter 28](ch28-reading-frozen-proofs-ii.md), we open the 
 1. In this chapter (Part I of our kernel audit), we dissect four foundational proofs underlying Parts I through III: **the real inner-product parallelogram norm law**, **the three-part Born probability skeleton on positive trace-one matrices**, **unitary global phase rigidity under support-connected ray tests**, and **idempotence of finite complete orthogonal record pinching**;
 2. We trace the exact Mathlib lemmas and tactic chains (`parallelogram_law_with_norm`, `mul_mul_conjTranspose_same`, `Relation.ReflTransGen` induction, `Finset.sum_eq_single`) used in the kernel proofs, and conclude with a **comprehensive audit table of frozen declarations across Parts I–III**.
 
-::: {.viz src="lean-declaration-map" preset="bedrock" height="500"}
-**The four theorems Chapter 27 dissects, back where they first appear.** Cyan lines run from the foot of Chapter 27 to four filled green cells, all of which first appear in Chapters 1–3; the amber frame is the parallelogram law ([@thm-audit-parallelogram-law]), and the amber lines go to the other chapters that cite it.
-:::
-
 ## 27.1 Define, State, Prove: Inside the Lean 4 Kernel Audit {#sec-lean-kernel-audit-architecture}
 
 In the `trureturing` verification pipeline, every green theorem in this book passes three machine-enforced stages:
@@ -248,10 +244,6 @@ The table below audits representative frozen declarations cited across Parts I t
 | Ch 10 | [`D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq) | [{source}](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq) | [{statement_id}](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq) | $B^*B = A^*A \Rightarrow \exists U \in U(m),\; B = UA$ |
 | Ch 7 / Ch 11 | [`D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) | [{source}](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) | [{statement_id}](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) | Unitarity of $\exp(-itH)$ and stationarity $U\rho U^* = \rho$ of energy eigenstates |
 | Ch 12 | [`D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation) | [{source}](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation) | [{statement_id}](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation) | Speed integrability and exact potential dissipation along negative Riesz gradient flow |
-
-::: {.viz src="lean-declaration-map" preset="table27" height="500"}
-**The audit table calls the roll of Parts I–III once more.** The 32 declarations Chapter 27 cites, the table above included, are outlined in cyan, and the cyan lines reach back from the foot of Chapter 27 to Chapters 1–12; not one of them leaves Part III.
-:::
 
 Let us trace a concrete hypothesis-mutation check on [@prop-audit-ray-phase-rigidity].
 

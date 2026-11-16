@@ -308,27 +308,21 @@ TeX 源在导言区写 `\input{tbook-deck}`；用 `\begin{bookresult}{thm-…}` 
 
 ## 统计与派生产物
 
-统计应使用正式出版解析器，避免在正文、图注、幻灯片和绘图脚本各写一份计数：
+正文、图注、幻灯片与仓库文档尽量不放全书总数、排名、声明分区表或统计地图；删除可省略的统计，避免每次增删章节或钉版都改同一批文件。逐条证据引用仍保留。站点与导出的验证账本由构建生成，不复制回书稿。
+
+确需统计时，使用正式出版解析器并导出编译产物：
 
 ```bash
-./tbook stats --book example-monograph   # 紧凑统计摘要；--json 输出声明与引用明细
-./tbook sync --book <slug>              # 刷新本书配置的派生数据与图片
-./tbook sync --book <slug> --check      # 只检查是否过期
+./tbook stats --book example-monograph          # 只显示紧凑摘要
+./tbook stats --book example-monograph --write  # build/statistics/example-monograph.json
+./tbook stats --book example-monograph --json   # 标准输出完整明细
 ```
 
-绘图或索引生成器使用 `from tbook import stats; data = stats.collect(book)`。环境次数、唯一声明数和跨章复用是不同的量；书面证明、开放问题、定义均不计入 `lean_verified`。只统计目录中的权威版本，忽略代码示例与未出版文件；声明仅限本书的正文及媒体引用，其他书的锁定声明不增加本书总数。`groups.inline` 是未被环境引用的分区，可能包含媒体消费者；查看各项 `citations[].via` 区分来源。
+`--write` 只写入被 Git 忽略的 `build/statistics/<book>.json`，内容未变时不重写。消费者读取该产物；发布时按需作为构建附件或站点资源提供，通过相对链接引用。不要把统计快照、全书索引、排名、地图数据或统计图片嵌入受版本管理的正文和程序，也不要维护会随统计重排的声明序号。
 
-生成索引中的声明链接不应回头充当引用统计输入；其中人工撰写的编号环境仍计入环境次数。可在 `book.toml` 配置：
+环境次数、唯一声明数和跨章复用是不同的量；书面证明、开放问题、定义均不计入 `lean_verified`。只统计目录中的权威版本，忽略代码示例与未出版文件；声明仅限本书的正文及媒体引用，其他书的锁定声明不增加本书总数。`groups.inline` 是未被环境引用的分区，可能包含媒体消费者；查看各项 `citations[].via` 区分来源。旧生成索引仍存在时，可用 `[statistics].exclude = ["appendix-c.md"]` 排除它的声明链接；其中人工撰写的编号环境仍计入环境次数。
 
-```toml
-[statistics]
-exclude = ["appendix-c.md"]
-
-[derived]
-command = ["python3", "books/my-book/sync-statistics.py"]
-```
-
-`command` 是作者显式配置的命令参数数组，以仓库根目录为工作目录，不经过 shell。`python3` 使用当前工具的解释器；生成器可导入 `tbook`。生成器必须支持 `--check`：只比对、退出非零表示过期，禁止在这个模式写入。`./tbook check` 调用该模式；`./tbook build` 在读取书稿和构建缓存前自动刷新，失败即停止。生成器应先计算全部目标内容，只写字节改变的文件，保留人工编辑的论述与稳定条目编号，不调用语言或图片生成服务。无配置的书不执行额外命令。
+其他确需保留的书库自有派生任务可继续使用 `./tbook sync --book <slug>` 与只读的 `--check`。在 `book.toml` 的 `[derived].command` 声明显式命令参数数组，以仓库根目录为工作目录，不经过 shell；`python3` 使用当前工具解释器。生成器支持 `--check`，只写内容实际变化的产物，不把全书统计写回源码。无配置的书不执行额外命令。
 
 `viz-thumbs.mjs` 为每页保存 `.stills.json`，保存在本地，不提交。它按页面、共享运行时、配色、字体、锁文件、工具及包版本的内容摘要核对输入，并核对每张成品图片的摘要；无变化时直接返回，不启动 Chromium。增引一张卡只补该卡，移除引用会清理无消费者的静帧；输出缺失、被修改或清单损坏会重出。正文普通措辞或源文件时间戳变化不触发图片重出。
 
