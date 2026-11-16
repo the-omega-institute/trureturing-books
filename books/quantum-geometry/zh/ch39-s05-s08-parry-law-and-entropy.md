@@ -211,7 +211,102 @@ $$
 
 两条柱集公式保留了源码各自的写法：有符号公式对整个实数乘积作一次 $\operatorname{ofReal}$，无符号公式先对每个因子作 $\operatorname{ofReal}$ 再相乘。这里 $\pi_k,P_k,q,Q$ 的各项均非负，因此用普通实数概率表示时，就是初始质量乘以逐步转移概率。$m=0$ 分别给出单点质量 $\pi_k(w_0)$ 与 $q_{v_0}$；任何含零转移的词，包括违反相应重置规则的禁用词，质量都为 $0$。公式适用于所有整数 $\ell$，也适用于负时间。
 
-证明中使用的是给定有限维分布的延拓唯一性；它没有给出所有不变概率测度之间的最大熵比较或最大熵测度唯一性。[@thm-ch39-p2e-native-bilateral-parry-law] 补上的是实际源与有符号路径的平稳联合律及精确有限窗口概率。完整柯尔莫哥洛夫—西奈熵、任意不变竞争测度的熵上界、最大性与唯一性，以及混合性、谱隙、可计算采样算法、与移位交换的固定符号截面和物理实现，都不是这一引用提供的结论。下方文献注记中的最大熵与阿布拉莫夫结论仍须按各自的前提与证据身份阅读。
+给定有限维分布的延拓唯一性，只确定这些分布对应的路径律。现在还可以追问：沿时间轴把两个观测窗口拉开，它们之间的概率关联怎样消退？下面的结果把平稳联合律、混合性与符号选择障碍放在同一组存在量词之下。完整柯尔莫哥洛夫—西奈熵、对所有不变竞争测度的熵比较、最大熵等号情形的唯一性及阿布拉莫夫公式，仍须按下方文献注记各自的前提与证据身份阅读。
+
+沿用上文的 $X_k,Y_k,S=\operatorname{State}(k)$、$\pi_k$、$F_e$ 及公平锚点测度 $u=\operatorname{fairAnchor}$。这里始终以 $P_k=\operatorname{kernel}(k,\operatorname{parryParameter}(k))$ 表示**带符号状态**的转移矩阵；$Q$ 仍专指上一条概率律中的**无符号后缀**转移核。对有限词 $w:\operatorname{Fin}(m+1)\to S$，记
+
+$$
+\begin{aligned}
+H_m(w)&=\prod_{i=0}^{m-1}P_k(w_i,w_{i+1}),\\
+L_m(w)&=\pi_k(w_0)H_m(w),\\
+C_{\ell,m}(w)&=\{x\in S^{\mathbb Z}:\ \forall i\in\operatorname{Fin}(m+1),\ x_{\ell+i.\mathrm{val}}=w_i\}.
+\end{aligned}
+$$
+
+空乘积取 $1$。给定此类词的有限集合 $A$，令 $E_{\ell,m}(A)=\bigcup_{w\in A}C_{\ell,m}(w)$；它可以表示该有限窗口上的任意事件。对下述存在结论所选取的测度，记 $\nu_{\mathbb R}(D)=(\nu(D)).\operatorname{toReal}$、$\mu_{\mathbb R}(D)=(\mu(D)).\operatorname{toReal}$，即 Lean 的 `Measure.real`。原概率律的两条柱集公式仍保留各自的 $\operatorname{ofReal}$ 写法；下面的联合公式、有限块估计和 $\nu$ 的混合极限使用实数概率。再令
+
+$$
+\begin{aligned}
+(\sigma x)_t&=x_{t+1},\qquad \tau=\operatorname{relationShift},\\
+\rho&=u\otimes\mu,\\
+T(b,r)&=(b\oplus\neg r_0,\tau r),\\
+\Delta(h)&=\mu_{\mathbb R}\{r\in X_k:\ (h(\tau r)\oplus h(r))\oplus\neg r_0=\mathrm{true}\}.
+\end{aligned}
+$$
+
+记号 $\sigma^{-n}B$ 与 $T^{-n}B$ 都表示迭代 $n$ 次后的逆像事件。
+
+::: {.theorem #thm-ch39-p2e-native-bilateral-parry-mixing title="实际双向帕里源的混合性与不可取到的零选择缺陷下确界" lean="D5/S3/TotalVariation/ParryBilateralMixing.bilateral_parry_mixing"}
+对每个自然数 $k\ge2$，存在一组可测等价 $e:\mathrm{Bool}\times X_k\simeq_{\mathrm m}Y_k$、$X_k$ 上的概率测度 $\mu$ 和整个 $S^{\mathbb Z}$ 上的概率测度 $\nu$，同时满足 [@thm-ch39-p2e-native-bilateral-parry-law] 的全部结论以及下列各项。所保留的九条性质精确为：该定理第 1 项中的四条编码性质（符号重建、最近零位后缀、逆映射、锚点斜移位），第 2 项中的两个平稳等式，第 3 项的公平独立锚点乘积推前等式，以及第 4、5 项的有符号柱集律与无符号后缀柱集律。它们保留原有的全部量词及测度取值形式。
+
+1. 对每个 $\ell\in\mathbb Z$、$a,b,g\in\mathbb N$ 及任意词 $w:\operatorname{Fin}(a+1)\to S$、$v:\operatorname{Fin}(b+1)\to S$，
+
+   $$
+   \begin{aligned}
+   &\nu_{\mathbb R}\bigl(C_{\ell,a}(w)\cap C_{\ell+a+g,b}(v)\bigr)\\
+   &\quad=L_a(w)(P_k^g)(w_a,v_0)H_b(v).
+   \end{aligned}
+   $$
+
+   这里 $w_a=w_{\operatorname{Fin.last}(a)}$；不要求词可容许，也不要求其质量为正。
+2. 对每个 $\ell\in\mathbb Z$、$a,b,g\in\mathbb N$ 及任意有限词集 $A\subseteq S^{\operatorname{Fin}(a+1)}$、$B\subseteq S^{\operatorname{Fin}(b+1)}$，
+
+   $$
+   \begin{aligned}
+   \Bigl|&\nu_{\mathbb R}\bigl(E_{\ell,a}(A)\cap E_{\ell+a+g,b}(B)\bigr)\\
+   &-\nu_{\mathbb R}\bigl(E_{\ell,a}(A)\bigr)\nu_{\mathbb R}\bigl(E_{0,b}(B)\bigr)\Bigr|\\
+   &\le\left(\frac34\right)^{\lfloor g/3\rfloor}.
+   \end{aligned}
+   $$
+
+   指数 $\lfloor g/3\rfloor$ 是自然数除法的商。
+3. 对每一对**固定的**可测集 $A,B\subseteq S^{\mathbb Z}$，有实数概率极限
+
+   $$
+   \lim_{n\to\infty}\nu_{\mathbb R}(A\cap\sigma^{-n}B)
+   =\nu_{\mathbb R}(A)\nu_{\mathbb R}(B),\qquad n\in\mathbb N.
+   $$
+
+4. 在公平锚点扩张 $(\mathrm{Bool}\times X_k,\rho,T)$ 上，对每一对固定的可测集 $A,B$，
+
+   $$
+   \lim_{n\to\infty}\rho(A\cap T^{-n}B)=\rho(A)\rho(B),\qquad n\in\mathbb N.
+   $$
+
+   此式按源码在 $[0,\infty]$ 中取极限；$T$ 关于 $\rho$ 遍历。
+5. 对**每个可测映射** $h:X_k\to\mathrm{Bool}$，等变关系
+
+   $$
+   h(\tau r)=h(r)\oplus\neg r_0
+   $$
+
+   不可能对 $\mu$ 几乎处处的 $r$ 成立，并且 $\Delta(h)>0$。
+6. 这些实数缺陷满足
+
+   $$
+   \inf\{\Delta(h):\ h:X_k\to\mathrm{Bool},\ h\text{ 可测}\}=0.
+   $$
+
+   该下确界不被任何可测 $h$ 取到。
+:::
+
+::: proof
+从原概率律同时取得 $e,\mu,\nu$ 及其九条性质。先看两个有限词：从第一个词的末态 $w_a$ 到第二个词的首态 $v_0$，把所有中间状态求和，恰好得到矩阵幂 $(P_k^g)(w_a,v_0)$。两侧各自的路径权重给出第 1 项，不需要除以柱集质量。$g=0$ 时另用恒等矩阵处理共同端点。把末态送到未来整块词的映射写成行和为 $1$ 的非负概率通道，再用总变差的数据处理不等式与已有的端点混合估计，对词集求和，得到第 2 项。
+
+有限坐标柱集能在对称差测度下逼近任意可测事件。先对逼近所得的两个固定有限窗口应用衰减估计，再用移位保测度性控制所有时刻的逼近误差，便得到第 3 项的固定事件极限。编码 $F_e$ 是到受支持路径的可测嵌入，满足 $(F_e)_*\rho=\nu$ 且 $F_e\circ T=\sigma\circ F_e$，所以混合极限传回公平锚点扩张。对不变事件应用这一极限，其概率等于自身的平方，得到遍历性。
+
+若可测 $h$ 几乎处处满足所列等变式，图集 $G_h=\{(b,r):b=h(r)\}$ 就在 $T$ 下模零不变。公平且独立的锚点使 $\rho(G_h)=1/2$，与遍历性矛盾。若 $\Delta(h)=0$，布尔恒等式又会使等变关系几乎处处成立，因此每个可测选择器都有严格正缺陷。
+
+另一方面，把依赖有限个严格过去坐标的规则视为 $X_k$ 上的可测映射，精确柱集律把它的实际缺陷识别为已有的有限平稳缺陷。已有有限窗口构造给出趋于零的缺陷上界；其中用到 $0<p<1$ 时多项式乘几何幂趋于零。所有缺陷非负，而常值规则保证取值集合非空，故下确界为零；逐个选择器的严格正性说明它不能取到。完整证明由 Lean 内核检查。
+:::
+
+这里的 $g$ 是第一个窗口末端与第二个窗口首端之间的步数。$g=1$ 时两块相邻，$g=0$ 时它们共享时刻 $\ell+a$，不是两个不交窗口。此时 $P_k^0=I$，所以只有 $w_a=v_0$ 才可能有非零联合质量；端点一致时也只把这个共同状态计入一次。含零转移的禁用词仍在公式量词中，其质量为零。$a=0$ 或 $b=0$ 以及负整数原点都不需另加假设。
+
+有限块估计中的第二个边缘写在原点 $0$，与源码一致；平稳性使它等于放在 $\ell+a+g$ 处的边缘。这个估计控制的是指定有限块上的事件。第 3、4 项则先固定任意两个可测事件，再令时间间隔趋于无穷；它们没有为任意随间隔改变的全路径事件提供同一个指数速率。由有限窗口逼近得到的等待时间可以依赖事件与精度。
+
+选择器 $h$ 在这里可以读取整条双向关系路径；严格正缺陷并不限于有限窗口规则。它说每个可测选择器都会在正概率的一步移位比较中违背符号更新关系。下确界为零又说明，可以通过改变规则把这个概率压得任意小，但没有某一个可测规则把它压到零。因而，逐步更新锚点的可测编码与不存在几乎处处等变的可测符号选择器，可以同时成立。
+
+这里的存在量词选出一组同时承载全部结论的 $e,\mu,\nu$，没有把任意预先指定的三元组作为输入，也没有宣称不变概率测度唯一。混合性与选择器障碍已经有了本条引用的依据；完整移位熵、最大熵比较与唯一性、阿布拉莫夫公式、谱隙、可计算采样算法和物理实现仍超出这条定理的结论。下方的边界碰撞概率、有限逃逸对比例与各类熵，仍须分别按各自定义阅读。
 
 在这一平稳律旁，还有两条各自独立的形式化定量定律共同约束边界碰撞与观测盲区：其一是帕里边界柱集上界定理 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)，它对给定的 $n \ge 1$ 组正游程对集合 $C$（每段 `1` 游程 $< k$ 且编码长度不超过视界 $R$）证明，左右边界选定前缀的平稳质量分别不超过 $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ 与 $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$（这是精确概率不等式，而非分形维数或熵值公式）；其二是与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5 一脉相承的有限竞技场信息逃逸率判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，它证明在基数 $q \ge 2$ 的非退化有限状态集上，观测目录 $S$ 无法区分的有序相异状态对集合 $E(S)$ 定义出归一化有理逃逸率 $e(S) = |E(S)|/[q(q-1)]$，而某项观测 $i$ 严格降低逃逸率当且仅当其唯一捕获对计数 $|U_i| > 0$（且差值恰为 $|U_i|/[q(q-1)]$）。有限有序逃逸对比例 $e(S)$、量子态冯·诺依曼熵 $S(\sigma_b)$ 与无限移位系统的遍历熵在数学定义上彼此独立，绝不可混为一谈。
 

@@ -211,7 +211,102 @@ The existential quantifier chooses $e,\mu,\nu$ together; the statement does not 
 
 The cylinder formulas retain their distinct source forms: the signed formula applies $\operatorname{ofReal}$ once to the entire real product, while the unsigned formula applies it to each factor before multiplication. All entries of $\pi_k,P_k,q,Q$ here are nonnegative, so ordinary real probabilities are the initial mass times the successive transition probabilities. At $m=0$ the formulas give the one-coordinate masses $\pi_k(w_0)$ and $q_{v_0}$. Any word containing a zero transition, including words forbidden by the corresponding reset rules, has mass $0$. Every integer $\ell$ is covered, including negative times.
 
-The proof uses uniqueness of an extension with prescribed finite-dimensional distributions. It does not compare entropy over all invariant probability measures or establish uniqueness of a measure of maximal entropy. [@thm-ch39-p2e-native-bilateral-parry-law] supplies the stationary joint law of the actual source and signed paths, together with exact finite-window probabilities. Full Kolmogorov–Sinai entropy, entropy bounds against arbitrary invariant competitors, maximality and uniqueness, mixing, a spectral gap, a computable sampling algorithm, a fixed-sign section commuting with shift, and physical realization are beyond the conclusions of this citation. The maximal-entropy and Abramov results in the literature remark below retain their own hypotheses and evidence status.
+Uniqueness of an extension with prescribed finite-dimensional distributions determines the path law for those distributions. We can now ask how probability correlations between two observation windows decay as the windows move apart along the time axis. The next result places the stationary joint law, mixing, and the obstruction to sign selection under a single set of existential quantifiers. Full Kolmogorov–Sinai entropy, entropy comparison over all invariant competitors, uniqueness in the maximal-entropy equality case, and Abramov's formula retain the hypotheses and evidence status of the literature remark below.
+
+Retain $X_k,Y_k,S=\operatorname{State}(k)$, $\pi_k$, $F_e$, and the fair anchor measure $u=\operatorname{fairAnchor}$ from above. Throughout this passage, $P_k=\operatorname{kernel}(k,\operatorname{parryParameter}(k))$ is the transition matrix on **signed states**; $Q$ continues to denote the **unsigned suffix** kernel in the preceding law. For a finite word $w:\operatorname{Fin}(m+1)\to S$, write
+
+$$
+\begin{aligned}
+H_m(w)&=\prod_{i=0}^{m-1}P_k(w_i,w_{i+1}),\\
+L_m(w)&=\pi_k(w_0)H_m(w),\\
+C_{\ell,m}(w)&=\{x\in S^{\mathbb Z}:\ \forall i\in\operatorname{Fin}(m+1),\ x_{\ell+i.\mathrm{val}}=w_i\}.
+\end{aligned}
+$$
+
+Empty products equal $1$. For a finite set $A$ of such words, put $E_{\ell,m}(A)=\bigcup_{w\in A}C_{\ell,m}(w)$; this represents any event on that finite window. For the measures chosen by the existential statement below, write $\nu_{\mathbb R}(D)=(\nu(D)).\operatorname{toReal}$ and $\mu_{\mathbb R}(D)=(\mu(D)).\operatorname{toReal}$, Lean's `Measure.real`. The two original cylinder laws retain their respective $\operatorname{ofReal}$ forms. The joint formula, finite-block estimate, and mixing limit for $\nu$ below use real probabilities. Also put
+
+$$
+\begin{aligned}
+(\sigma x)_t&=x_{t+1},\qquad \tau=\operatorname{relationShift},\\
+\rho&=u\otimes\mu,\\
+T(b,r)&=(b\oplus\neg r_0,\tau r),\\
+\Delta(h)&=\mu_{\mathbb R}\{r\in X_k:\ (h(\tau r)\oplus h(r))\oplus\neg r_0=\mathrm{true}\}.
+\end{aligned}
+$$
+
+Both $\sigma^{-n}B$ and $T^{-n}B$ denote preimages under the corresponding $n$-fold iterate.
+
+::: {.theorem #thm-ch39-p2e-native-bilateral-parry-mixing title="Mixing of the Actual Bilateral Parry Source and an Unattained Zero Selector-Defect Infimum" lean="D5/S3/TotalVariation/ParryBilateralMixing.bilateral_parry_mixing"}
+For every natural number $k\ge2$, there exist a measurable equivalence $e:\mathrm{Bool}\times X_k\simeq_{\mathrm m}Y_k$, a probability measure $\mu$ on $X_k$, and a probability measure $\nu$ on all of $S^{\mathbb Z}$, satisfying all conclusions of [@thm-ch39-p2e-native-bilateral-parry-law] and all clauses below together. Precisely, the nine retained properties are the four coding properties in that theorem's clause 1 (sign reconstruction, the nearest-zero suffix, the inverse map, and the anchored skew shift), the two stationarity identities in clause 2, the independent fair-anchor product pushforward identity in clause 3, and the signed cylinder and unsigned suffix cylinder laws in clauses 4 and 5. Their original quantifiers and measure-valued forms are retained in full.
+
+1. For every $\ell\in\mathbb Z$, $a,b,g\in\mathbb N$, and arbitrary words $w:\operatorname{Fin}(a+1)\to S$ and $v:\operatorname{Fin}(b+1)\to S$,
+
+   $$
+   \begin{aligned}
+   &\nu_{\mathbb R}\bigl(C_{\ell,a}(w)\cap C_{\ell+a+g,b}(v)\bigr)\\
+   &\quad=L_a(w)(P_k^g)(w_a,v_0)H_b(v).
+   \end{aligned}
+   $$
+
+   Here $w_a=w_{\operatorname{Fin.last}(a)}$. The words need not be admissible or have positive mass.
+2. For every $\ell\in\mathbb Z$, $a,b,g\in\mathbb N$, and arbitrary finite word sets $A\subseteq S^{\operatorname{Fin}(a+1)}$ and $B\subseteq S^{\operatorname{Fin}(b+1)}$,
+
+   $$
+   \begin{aligned}
+   \Bigl|&\nu_{\mathbb R}\bigl(E_{\ell,a}(A)\cap E_{\ell+a+g,b}(B)\bigr)\\
+   &-\nu_{\mathbb R}\bigl(E_{\ell,a}(A)\bigr)\nu_{\mathbb R}\bigl(E_{0,b}(B)\bigr)\Bigr|\\
+   &\le\left(\frac34\right)^{\lfloor g/3\rfloor}.
+   \end{aligned}
+   $$
+
+   The exponent $\lfloor g/3\rfloor$ is the quotient from natural-number division.
+3. For every pair of **fixed** measurable sets $A,B\subseteq S^{\mathbb Z}$, the real probabilities satisfy
+
+   $$
+   \lim_{n\to\infty}\nu_{\mathbb R}(A\cap\sigma^{-n}B)
+   =\nu_{\mathbb R}(A)\nu_{\mathbb R}(B),\qquad n\in\mathbb N.
+   $$
+
+4. On the fair anchored extension $(\mathrm{Bool}\times X_k,\rho,T)$, for every pair of fixed measurable sets $A,B$,
+
+   $$
+   \lim_{n\to\infty}\rho(A\cap T^{-n}B)=\rho(A)\rho(B),\qquad n\in\mathbb N.
+   $$
+
+   This limit is taken in $[0,\infty]$, as in the source statement. The transformation $T$ is ergodic with respect to $\rho$.
+5. For **every measurable map** $h:X_k\to\mathrm{Bool}$, the equivariance relation
+
+   $$
+   h(\tau r)=h(r)\oplus\neg r_0
+   $$
+
+   cannot hold for $\mu$-almost every $r$, and $\Delta(h)>0$.
+6. These real defects satisfy
+
+   $$
+   \inf\{\Delta(h):\ h:X_k\to\mathrm{Bool},\ h\text{ measurable}\}=0.
+   $$
+
+   No measurable $h$ attains this infimum.
+:::
+
+::: proof
+Obtain $e,\mu,\nu$ and their nine properties together from the preceding law. For two finite words, sum over all intermediate states between the first word's final state $w_a$ and the second word's initial state $v_0$. This gives the matrix entry $(P_k^g)(w_a,v_0)$. The path weights on either side yield clause 1 without dividing by cylinder masses. At $g=0$, handle the shared endpoint separately using the identity matrix. The map from an endpoint state to the entire future word is a nonnegative probability channel with unit row sums. Total-variation data processing, the existing endpoint mixing estimate, and summation over word sets give clause 2.
+
+Finite-coordinate cylinders approximate every measurable event in symmetric-difference measure. Apply the decay estimate to the two fixed approximating windows, then use shift preservation to control the approximation error at every time. This yields the fixed-event limit in clause 3. The coding $F_e$ is a measurable embedding into the supported paths, with $(F_e)_*\rho=\nu$ and $F_e\circ T=\sigma\circ F_e$, so the mixing limit transfers to the fair anchored extension. Applying that limit to an invariant event equates its probability with its square and gives ergodicity.
+
+If a measurable $h$ satisfied the stated equivariance relation almost everywhere, its graph $G_h=\{(b,r):b=h(r)\}$ would be invariant under $T$ modulo null sets. The fair independent anchor gives $\rho(G_h)=1/2$, contradicting ergodicity. If $\Delta(h)=0$, the Boolean identity would force equivariance almost everywhere. Thus every measurable selector has strictly positive defect.
+
+Conversely, a rule depending on finitely many strictly preceding coordinates defines a measurable map on $X_k$. The exact cylinder law identifies its actual defect with the existing finite stationary defect. The established finite-window construction supplies defect upper bounds tending to zero, using polynomial-geometric decay when $0<p<1$. Every defect is nonnegative, and constant rules make the set of values nonempty, so its infimum is zero. Strict positivity for each selector shows that the infimum is not attained. The full proof is checked by the Lean kernel.
+:::
+
+Here $g$ counts steps from the first window's endpoint to the second window's starting point. At $g=1$ the blocks are adjacent; at $g=0$ they share time $\ell+a$ rather than forming disjoint windows. Since $P_k^0=I$, nonzero joint mass then requires $w_a=v_0$, and a matching endpoint is counted only once. Forbidden words with zero transitions remain within the formula's quantifiers and have mass zero. No additional assumption is needed for $a=0$, $b=0$, or negative integer origins.
+
+The finite-block estimate writes the second marginal at origin $0$, exactly as the source does. Stationarity equates it with the marginal at $\ell+a+g$. This estimate controls events on the specified finite blocks. Clauses 3 and 4 instead fix any two measurable events before sending the time separation to infinity; they supply no common exponential rate for arbitrary full-path events that change with the separation. The waiting time obtained by finite-window approximation may depend on the events and the desired accuracy.
+
+A selector $h$ here may read the entire bilateral relation path. Strictly positive defect is not restricted to finite-window rules: each measurable selector violates the sign-update relation with positive probability in the comparison of two consecutive times. The zero infimum means that changing the rule can make this probability arbitrarily small, while no single measurable rule makes it zero. A measurable coding with an evolving anchor can therefore coexist with the absence of an almost-everywhere equivariant measurable sign selector.
+
+The existential quantifier chooses one triple $e,\mu,\nu$ carrying all conclusions together. It does not take an arbitrary preselected triple as input or assert uniqueness of an invariant probability measure. This citation now supplies mixing and the selector obstruction. Full shift entropy, maximal-entropy comparison and uniqueness, Abramov's formula, a spectral gap, a computable sampling algorithm, and physical realization remain beyond its conclusions. The boundary-collision probabilities, finite escape-pair proportions, and various entropies below retain their separate definitions.
 
 Alongside this stationary reset law stand two independent formal quantitative bounds governing boundary collisions and observational blind spots: first, the boundary cylinder inequality [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound), which proves for any finite collection $C$ of $n \ge 1$ positive run-length pairs (with each `1`-run $< k$ and encoded length at most $R$) that the left- and right-boundary selected-prefix stationary masses are bounded above by $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ and $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$ respectively (an exact probability inequality, not a Hausdorff-dimension or entropy formula); second, continuing the ledger of [Chapter 38](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5, the finite-arena information-escape criterion [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos), which proves on a nondegenerate finite arena of cardinality $q \ge 2$ that the set $E(S)$ of ordered distinct state pairs indistinguishable under catalog $S$ defines a normalized rational escape rate $e(S) = |E(S)|/[q(q-1)]$, and that observation $i$ strictly lowers escape rate if and only if its unique-capture count satisfies $|U_i| > 0$ (with exact drop $|U_i|/[q(q-1)]$). Rational ordered-pair escape rate $e(S)$, von Neumann page entropy $S(\sigma_b)$, and infinite-shift ergodic entropy are distinct mathematical quantities and are never conflated here.
 
