@@ -1,6 +1,6 @@
 {
   "next": {
-    "T": 387,
+    "T": 388,
     "D": 161,
     "R": 184
   },
@@ -728,6 +728,7 @@
     "D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSInteriorGenericity.intrinsic_interior_recovery": "T385",
     "D5/S3/Resource/SeparableConeResidualWitness.separable_cone_residual_witness": "T386",
     "D5/S3/Quantum/QPECircularTail.reciprocal_square_shifted_finite_tail_le": "R182",
-    "D5/S3/Quantum/ShorCountingMarginal.shor_phase_accuracy_bound": "R183"
+    "D5/S3/Quantum/ShorCountingMarginal.shor_phase_accuracy_bound": "R183",
+    "D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff": "T387"
   }
 }
