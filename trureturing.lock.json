@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4ecb3b88601b86a96438f6c009b5d108fb74a021",
-  "pinned_at": "2026-11-16T03:47:53Z",
+  "commit": "621c5ccc9f6a834cef241536c95ee8c4c9979228",
+  "pinned_at": "2026-11-16T17:38:38Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1916,6 +1916,22 @@
       "statement_id": "sha256:1ea12a9a57ee5317d74919c7bb39deb24c09e4c4fb901a919fd593a37f9b335c",
       "line": 139,
       "signature": "theorem failure_count_le {I : Type*} [Fintype I] [Nonempty I] {G : I → Type*} [∀ i, Group (G i)] [∀ i, Fintype (G i)] [∀ i, IsCyclic (G i)] (epsilon : ∀ i, G i) (he : ∀ i, orderOf (epsilon i) = 2) : Nat.card {x : ∀ i, G i // ¬ (Even (orderOf x) ∧ x ^ (orderOf x / 2) ≠ epsilon)} * 2 ^ (Fintype.card I - 1) ≤ Nat.card (∀ i, G i)"
+    },
+    "D5/S3/FiniteGroups/Cyclic/VerifiedMultipleHalving.stripTwos_correct": {
+      "module": "D5/S3/FiniteGroups/Cyclic/VerifiedMultipleHalving",
+      "name": "ShorHalving.stripTwos_correct",
+      "kind": "theorem",
+      "statement_id": "sha256:c6ff66ba1352a9b8978859c6b6e2013f9c19dc72b380e3534b83546266679b6c",
+      "line": 28,
+      "signature": "theorem stripTwos_correct {G : Type*} [Monoid G] [DecidableEq G] (x : G) (m : ℕ) (hm : 0 < m) (hxm : x ^ m = 1) : let M"
+    },
+    "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping.stripFactors_correct": {
+      "module": "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping",
+      "name": "PrimeFactorStripping.stripFactors_correct",
+      "kind": "theorem",
+      "statement_id": "sha256:f7057762ad30365e0185653dd26f24f5955b5c6ae000fe2ed82c658a4c75b632",
+      "line": 93,
+      "signature": "theorem stripFactors_correct {G : Type*} [Monoid G] [DecidableEq G] (x : G) (P : List ℕ) (m : ℕ) (hm : 0 < m) (hxm : x ^ m = 1) (hcover : ∀ p : ℕ, p.Prime → p ∣ m → p ∈ P) : let M"
     },
     "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.fluid_gap_from_mixed": {
       "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
