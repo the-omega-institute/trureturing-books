@@ -2,7 +2,7 @@
 
 Building directly on the analysis of finite-table lookup degradation in [the previous section](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation), a sharper quantitative question immediately confronts us: as a finite-width observer memory pointer glides across static ontological QRAM—barred by [@thm-ch38-pointer-width-and-no-deep-copy] from deep-copying the full cosmic state into private cache—how much structural resolution does a finite resident lemma table $T$ actually *capture*, and how much distinguishability *escapes* unrecorded through orthogonal blind spots? Whenever a candidate lemma is added to or pruned from $T$, what exact criterion separates genuinely **structurally novel** knowledge from **redundant rephrasing** inside the semantic closure of existing entries? And as this 1D pointer increments step by step (`ptr++`) along a closed space-filling cycle under the anti-resonant no-adjacent-ones rule, what quantitative laws govern its channel capacity, cylinder contraction rate, and waking versus dreaming erasure heat bill?
 
-Under our three-tier epistemic contract, this section anchors the combinatorial and information-geometric skeleton of the **Observer Escape Ledger** in six newly pinned kernel-verified Lean 4 theorems (paired with the bipartite local-marginal blind-spot theorem proved in [Chapter 13](ch13-entanglement-and-chsh.md)), while explicitly marking the closed Hilbert-loop traversal, Zeckendorf golden capacity budget, and waking/dreaming thermodynamic synthesis as **`MODEL` (interpretive model)**.
+Under our three-tier epistemic contract, this section anchors the combinatorial and information-geometric skeleton of the **Observer Escape Ledger** in eight newly pinned kernel-verified Lean 4 theorems (paired with the bipartite local-marginal blind-spot theorem proved in [Chapter 13](ch13-entanglement-and-chsh.md)), while explicitly marking the closed Hilbert-loop traversal, Zeckendorf golden capacity budget, and waking/dreaming thermodynamic synthesis as **`MODEL` (interpretive model)**.
 
 ## 38.5.1 Preimage Fibers, Ordered Escape Pairs, and Strict Quotient-Kernel Novelty {#preimage-fibers-ordered-escape-pairs-and-strict-quotient-kernel-novelty}
 
@@ -159,6 +159,52 @@ Joining [@rem-ch38-smb-zeckendorf-hilbert-literature] and [@thm-ch38-zeckendorf-
 ::: {.viz src="observer-escape-ledger" preset="dream" height="500"}
 **Awake Landauer erasure heat versus dream zero-heat isentropic recoherence.** Releasing $\Delta k = N_{\mathrm{erase}}$ bits via Awake Stage-5 partial-trace reset dissipates at least $\Delta Q = k_B T \ln 2 \cdot N_{\mathrm{erase}}$ of heat, whereas Dream Stage-4 retains coherent record access and applies $U_{\mathrm{copy}}^\dagger$ at $\Delta Q = 0$ (`MODEL`).
 :::
+
+## 38.5.4 Readout–Update Commutator and Modular Uniqueness of Bounded Integer Power Traces {#sec-ch38-commutator-and-trace-crt}
+
+As an observer pointer steps across discrete addresses, why do "reading an observable before updating the address" and "updating the address before reading the observable" produce algebraically distinct register states? And when an observer inspects integer transition-matrix power traces only through a finite modulus $M$, under what exact amplitude condition does a single modular image uniquely determine the true integer trace? Before opening the full interactive stage, we anchor both algebraic laws in kernel-verified form.
+
+First, compute a two-coordinate permutation–readout commutator by hand: on index set $\{0, 1\}$, take the swap permutation $\tau = (0\,1)$ (with $\tau^{-1} = \tau$), observable profile $f = (0, 1)$, and register state $\psi = (a, b) \in \mathbb{C}^2$. Reading first gives $\operatorname{readObservable}(f, \psi) = (0 \cdot a,\, 1 \cdot b) = (0, b)$, which $\tau$ updates to $(b, 0)$; updating first gives $\operatorname{observerUpdate}(\tau, \psi) = (b, a)$, which multiplying by $f$ turns into $(0, a)$. Subtracting yields $(b, 0) - (0, a) = (b, -a)$, matching coordinatewise $\bigl((f(1) - f(0))\psi(1),\, (f(0) - f(1))\psi(0)\bigr) = \bigl((1 - 0)b,\, (0 - 1)a\bigr)$!
+
+In `trureturing`'s `D5.S3.Quantum.ObserverAlgebra` and `D5.S3.Quantum.ObserverCommutator` modules, for any index type $\mathrm{index} : \mathrm{Type}^*$, define the complex function space $\operatorname{Register}(\mathrm{index}) := \mathrm{index} \to \mathbb{C}$, pointwise observable readout $\operatorname{readObservable}(f, \psi) := (i \mapsto f(i)\,\psi(i))$ for $f : \mathrm{index} \to \mathbb{C}$, and reversible permutation update $\operatorname{observerUpdate}(\tau, \psi) := (i \mapsto \psi(\tau^{-1}(i)))$ for $\tau : \operatorname{Equiv.Perm}(\mathrm{index})$:
+
+::: {.theorem #thm-observer-read-update-commutator title="Commutator of Readout and Permutation Update" lean="D5/S3/Quantum/ObserverCommutator.observer_read_update_commutator_formula"}
+Let $\mathrm{index}$ be an arbitrary type, $\tau : \operatorname{Equiv.Perm}(\mathrm{index})$ a bijective permutation of $\mathrm{index}$, $f : \mathrm{index} \to \mathbb{C}$ a complex readout function, and $\psi : \operatorname{Register}(\mathrm{index})$ a register function. Then the pointwise difference between reading before updating and updating before reading satisfies:
+
+$$
+\operatorname{observerUpdate}\bigl(\tau, \operatorname{readObservable}(f, \psi)\bigr) - \operatorname{readObservable}\bigl(f, \operatorname{observerUpdate}(\tau, \psi)\bigr) \;=\; \bigl(i \;\mapsto\; \bigl(f(\tau^{-1}(i)) - f(i)\bigr)\,\psi(\tau^{-1}(i))\bigr).
+$$
+:::
+
+::: proof
+By function extensionality, evaluate both terms at an arbitrary index $i : \mathrm{index}$: the first term unfolds to $\operatorname{readObservable}(f, \psi)(\tau^{-1}(i)) = f(\tau^{-1}(i))\,\psi(\tau^{-1}(i))$, while the second unfolds to $f(i)\,\operatorname{observerUpdate}(\tau, \psi)(i) = f(i)\,\psi(\tau^{-1}(i))$. Factoring out $\psi(\tau^{-1}(i))$ in $\mathbb{C}$ yields $\bigl(f(\tau^{-1}(i)) - f(i)\bigr)\,\psi(\tau^{-1}(i))$. The full proof is checked by the Lean kernel.
+:::
+
+Two scope boundaries govern [@thm-observer-read-update-commutator]. First, $\mathrm{index}$ need not be finite, and $\operatorname{Register}(\mathrm{index})$ is the raw function space $\mathrm{index} \to \mathbb{C}$ rather than $\ell^2$ or a bounded-operator domain; no summation or `Summable` hypothesis is present, so the identity must not be rewritten as an infinite-dimensional trace formula. Second, the formula expresses purely algebraic noncommutativity between coordinatewise multiplication and a **reversible permutation** $\tau$; it does not by itself imply heat dissipation, thermodynamic irreversibility, or a universal law for all observer dynamics.
+
+Second, check modular uniqueness of bounded integer power traces by hand: set modulus $M = 11$ and amplitude bound $B = 5$, satisfying $2B = 10 < 11 = M$, and take $A = \operatorname{diag}(1, 2)$ at exponent $j = 1$, where $\operatorname{Tr}(A^1) = 3$ with $\lvert 3\rvert < 5$. Any $2 \times 2$ integer matrix $C$ satisfying $\lvert\operatorname{Tr}(C)\rvert < 5$ and $\operatorname{Tr}(C) \equiv 3 \pmod{11}$ must have $\operatorname{Tr}(C) = 3$, because adding any nonzero multiple of $11$ leaves the open interval $(-5, 5)$!
+
+In `D5.S0.Observation.BoundedPowerTraceCRTRecovery`, let $d$ be a finite decidable index type (`[Fintype d] [DecidableEq d]`); for $A : \operatorname{Matrix}\,d\,d\,\mathbb{Z}$ and $j \in \mathbb{N}$, define $\operatorname{powerTrace}(A, j) := \operatorname{Matrix.trace}(A^j) \in \mathbb{Z}$, and for $M \in \mathbb{N}$ define the modular reduction $\operatorname{crtImage}(M, x) := (x : \operatorname{ZMod} M)$:
+
+::: {.theorem #thm-bounded-power-trace-crt title="Uniqueness of Bounded Integer Power Traces from Modular Images" lean="D5/S0/Observation/BoundedPowerTraceCRTRecovery.power_trace_unique_of_crt_image"}
+Let $d$ be a finite decidable index type, let $M, B \in \mathbb{N}$ satisfy $h_M : 2B < M$, let $A, C : \operatorname{Matrix}\,d\,d\,\mathbb{Z}$ be finite integer square matrices, and let $j \in \mathbb{N}$. If both power traces obey the strict magnitude bounds $h_A : \lvert\operatorname{powerTrace}(A, j)\rvert < B$ and $h_C : \lvert\operatorname{powerTrace}(C, j)\rvert < B$ and have equal modular images in $\operatorname{ZMod} M$,
+
+$$
+\operatorname{crtImage}\bigl(M, \operatorname{powerTrace}(A, j)\bigr) \;=\; \operatorname{crtImage}\bigl(M, \operatorname{powerTrace}(C, j)\bigr),
+$$
+
+then the integer power traces are equal:
+
+$$
+\operatorname{powerTrace}(A, j) \;=\; \operatorname{powerTrace}(C, j).
+$$
+:::
+
+::: proof
+Write $x := \operatorname{powerTrace}(A, j) \in \mathbb{Z}$ and $y := \operatorname{powerTrace}(C, j) \in \mathbb{Z}$. By the triangle inequality together with $\lvert x\rvert < B$, $\lvert y\rvert < B$, and $2B < M$, the difference satisfies $\lvert x - y\rvert \le \lvert x\rvert + \lvert y\rvert < 2B < M$. Meanwhile, equality of $\operatorname{crtImage}(M, x)$ and $\operatorname{crtImage}(M, y)$ in $\operatorname{ZMod} M$ implies $(M : \mathbb{Z}) \mid (x - y)$, so $x - y = (M : \mathbb{Z}) \cdot k$ for some $k \in \mathbb{Z}$. If $k \neq 0$, then $1 \le \lvert k\rvert$ and $0 < M$ (from $2B < M$) imply $(M : \mathbb{Z}) \le \lvert x - y\rvert$, contradicting $\lvert x - y\rvert < M$; hence $k = 0$ and $x = y$. The full proof is checked by the Lean kernel.
+:::
+
+Four scope boundaries apply to [@thm-bounded-power-trace-crt]: first, $A$ and $C$ must be finite integer square matrices $\operatorname{Matrix}\,d\,d\,\mathbb{Z}$; second, at $j = 0$, $\operatorname{powerTrace}(A, 0) = \operatorname{Tr}(I) = \lvert d\rvert$ records only the matrix dimension rather than dynamical data; third, both strict bounds $\lvert\cdot\rvert < B$ and $2B < M$ are essential (at $M = 2B$, $-B$ and $+B$ share the same residue modulo $M$); fourth, equal modular images plus the strict amplitude bound determine only the **specified scalar power trace** $\operatorname{powerTrace}(A, j)$—they neither reconstruct the full matrix $A$ from a single modular trace nor state a CRT algorithmic complexity bound. For the exact stabilization of finite-horizon readout words and completed observer memory quotients, see [Appendix H](appendix-h.md).
 
 The full interactive lab below integrates the closed $4 \times 4$ Hilbert loop, preimage fibers and escape chords across all $2^5 = 32$ lemma subsets, the two-qubit Bell marginal blind spot, Zeckendorf golden capacity, and the waking/dreaming heat ledger on a single stage:
 

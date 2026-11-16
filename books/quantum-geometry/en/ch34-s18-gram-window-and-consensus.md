@@ -290,3 +290,182 @@ Zooming in one final time—from the $M \times M$ sliding Gram window all the wa
 ::: {.viz src="gram-window-consensus-sandbox" height="640"}
 **Gram Window $\mathcal{W}_M$, Schur-complement corridors, and multi-observer consensus interactive laboratory (`GRAM//CONSENSUS`).** Switch freely among Schur & Two-Cap Lens, Golden Triangle $M=3$, Over-Constrained Lock $M=9$, Forgetting Reopening, and Dual-Window Consensus inside the unified three-column laboratory while varying window length $M \in \{1,\dots,10\}$, coherence half-angle $\alpha_{\mathrm{coh}}$, and observer-$B$ tilt $\eta$ or dragging the amber candidate $\mathbf{x}$ on $S^2$ to inspect cyan single-observer corridors $\Omega_M$ and equicorrelated Schur curves, magenta squeezing arcs and log-reopening ratios $q_M$, violet dual-observer consensus $\Omega_A \cap \Omega_B$, and the interactive Gram matrix heatmap; thirteen green `LEAN ✓` badges correspond to the twelve declarations of [@thm-ch34-gram-window-schur-and-consensus] together with `landauer_bound_of_balance` cited in [§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics).
 :::
+
+## 34.18.5 Resource Ledger of Arithmetic Elimination: Exact Circuits Are Not Sparse Algorithms {#sec-ch34-18-5}
+
+Earlier subsections used the Schur complement to characterize single-step margins on finite memory windows; testing elimination ideas on a finite integer divisibility network requires auditing graph fill-in, approximation residuals, and storage costs with the same discipline used in [§22.4.1](ch22-s04-critical-line-and-rh.md#sec-ch22-4-1) to separate series truncation from analytic continuation. Consider the explicit finite vertex set $V_N := \{2, 3, \dots, N\}$: place an undirected edge between $d, n \in V_N$ if and only if $d \neq n$ and ($d \mid n$ or $n \mid d$), write $W$ for the symmetric $0/1$ adjacency matrix and $L_D := \operatorname{diag}(\deg) - W$ for the divisibility-graph Laplacian, and fix the anchor damping $\alpha = \frac{1}{4}$ to define the real symmetric model matrix
+
+$$
+G \;:=\; L_D + \alpha I, \qquad \alpha = \frac{1}{4}.
+$$
+
+For every nonzero real vector $x = (x_2, \dots, x_N)^\top \neq \mathbf{0}$, completing the square edge by edge yields
+
+$$
+x^\top G x \;=\; \alpha\sum_{n=2}^{N} x_n^2 \;+\; \sum_{\substack{2 \le d < n \le N \\ d \mid n}} (x_d - x_n)^2 \;>\; 0.
+$$
+
+This elementary sum-of-squares identity guarantees that $G$ is strictly positive definite and invertible, yet three boundaries must be stated upfront: first, $G = L_D + \frac{1}{4}I$ is only a **toy model matrix on a finite divisibility graph and is not equal to the Nyman–Beurling–Báez-Duarte (NBB) Gram matrix** in Hilbert space; second, $G = L_D + \frac{1}{4}I$ is symmetric strictly diagonally dominant (SDD), so subcubic iterative and graph-Laplacian solvers for $G x = b$ already exist in numerical linear algebra (and such known fast solvers for a finite divisibility graph never constitute progress on the Riemann Hypothesis), whereas unpivoted direct Gaussian–Schur elimination still suffers dense fill-in; third, [@thm-ch34-gram-window-schur-and-consensus] covers only abstract inner-product realizations, two- and three-anchor determinant criteria, orthogonal-complement escape, and finite-register dimension bounds—it **cannot be extrapolated to cover the divisibility matrix $G$, Schur elimination complexity, or the Riemann Hypothesis**, and for singular positive-semidefinite Gram blocks (such as $\alpha = 0$, where isolated vertices and component-wise constant vectors lie in the nullspace) the ordinary inverse $A^{-1}$ does not exist and must be replaced by range conditions and the Moore–Penrose pseudoinverse. The interactive laboratory holds fixed the terminal set $T_N = \{n \in V_N : 4n > 3N\}$, and both the natural and leaf-first orders eliminate only its complement $V_N \setminus T_N$ without changing the terminals across orderings. On the $N = 6$ divisibility graph $V_6 = \{2, 3, 4, 5, 6\}$ (with fixed terminals $T_6 = \{5, 6\}$), there are only three original edges $2\text{--}4$, $2\text{--}6$, and $3\text{--}6$, with vertex $5$ **isolated**; eliminating the hub vertex $2$ first immediately creates a nonzero **fill-in edge $4\text{--}6$** of weight $-\frac{4}{9}$ between the previously non-adjacent vertices $4$ and $6$.
+
+::: {.viz src="arithmetic-schur-lab" preset="natural" height="500"}
+**Three-dimensional divisibility network with fill-in edges under natural increasing elimination (`natural`).** The 3D stage displays the cyan original divisibility edges and isolated vertices of the integer divisibility network along the purple coordinate axes as interior vertices are eliminated in natural order relative to a fixed terminal set. Eliminating small high-degree hubs first creates magenta fill-in edges between previously unlinked multiples (such as $4\text{--}6$ at $N = 6$), with the amber marker indicating the selected vertex.
+:::
+
+For a block matrix $\begin{pmatrix} A & B \\ B^\top & C \end{pmatrix}$, eliminating the interior set $U$ produces the exact one-shot Schur complement $S = C - B^\top A^{-1} B$. **When comparing elimination orderings, the terminal set must never shift with the ordering; only locking a single fixed terminal set $T = V_N \setminus U$ in advance provides a well-defined comparison baseline**.
+
+::: {.example #ex-ch34-divisibility-n6-schur-and-drop title="Verification of Natural vs. Leaf-First Schur Blocks for Fixed Terminals {5, 6} and Drop-Threshold Residual Criterion"}
+On $V_6 = \{2, 3, 4, 5, 6\}$ ($\alpha = \frac{1}{4}$), lock the fixed terminal set $T = \{5, 6\}$ and interior elimination set $U = \{2, 3, 4\}$.
+
+1. **Natural order $(2, 3, 4)$ vs. leaf-first order $(4, 3, 2)$**: Eliminating vertex $2$ first in natural order ($G_{22} = \frac{9}{4}$, $G_{24} = G_{26} = -1$) immediately introduces the nonzero fill-in entry $G^{(1)}_{46} = G^{(1)}_{64} = 0 - \frac{(-1)(-1)}{9/4} = -\frac{4}{9}$ across $4\text{--}6$, updating the diagonals to $G^{(1)}_{44} = \frac{29}{36}$ and $G^{(1)}_{66} = \frac{65}{36}$; eliminating $3$ ($G^{(1)}_{33} = \frac{5}{4}$, $G^{(1)}_{36} = -1$) gives $G^{(2)}_{66} = \frac{65}{36} - \frac{4}{5} = \frac{181}{180}$; finally eliminating $4$ yields $S_{66} = \frac{181}{180} - \frac{(4/9)^2}{29/36} = \frac{181}{180} - \frac{64}{261} = \frac{441}{580}$. Keeping the exact same terminal set $T = \{5, 6\}$ under **leaf-first order $(4, 3, 2)$**: eliminating degree-one leaf $4$ (connected only to $2$, $G_{44} = \frac{5}{4}$) updates only $G'_{22} = \frac{9}{4} - \frac{4}{5} = \frac{29}{20}$; eliminating degree-one leaf $3$ (connected only to $6$, $G'_{33} = \frac{5}{4}$) updates only $G''_{66} = \frac{29}{20}$; finally eliminating vertex $2$ (now linked solely to terminal $6$) yields $S_{66} = \frac{29}{20} - \frac{20}{29} = \frac{441}{580}$ with **zero fill-in throughout**, matching the one-shot Schur block $C - B^\top A^{-1} B$ identically:
+
+   $$
+   S_{\{5, 6\}} \;=\; \operatorname{diag}\!\left(\frac{1}{4},\; \frac{441}{580}\right) \;=\; \begin{pmatrix} \frac{1}{4} & 0 \\ 0 & \frac{441}{580} \end{pmatrix},
+   $$
+
+   where the isolated terminal $5$ retains diagonal entry $\frac{1}{4}$ at every step.
+2. **Final Schur-block threshold pruning and original-system residual criteria**: The page first performs exact elimination onto the fixed terminal set $T_N$ to form the final Schur block $S$, then symmetrically zeroes off-diagonal entries satisfying $|S_{ij}| < \varepsilon$ ($i \neq j$) while leaving the diagonal entries untouched to obtain $\tilde{S}$; it solves this approximate terminal system and back-substitutes for $b = e_N$ using the exact elimination record to produce $\tilde{x}$. The laboratory jointly measures the Schur-block discrepancy $\lVert S - \tilde{S}\rVert_F$ and the **original-system residual $\lVert G\tilde{x} - b\rVert_2$**; $\tilde{x}$ can deviate from $G x = b$ only when nonzero off-diagonal terminal couplings fall below $\varepsilon$ and are pruned.
+:::
+
+::: {.viz src="arithmetic-schur-lab" preset="leaf" height="500"}
+**Three-dimensional divisibility network suppressing fill-in under leaf-first elimination (`leaf`).** The 3D stage shows the cyan original divisibility edges of the integer network along the purple coordinate axes for the same fixed terminal set while degree-one leaves are eliminated ahead of interior hubs. For $N = 6$ with fixed terminals $\{5, 6\}$, the leaf-first sequence $(4, 3, 2)$ generates zero magenta fill-in edges, with the amber marker indicating the selected vertex.
+:::
+
+This example underscores a general principle: **the algebraic exactness of the Schur identity $S = C - B^\top A^{-1} B$ neither guarantees sparsity nor confers low computational cost automatically, nor does it establish an isomorphism with tropical (min-plus shortest-path) algebra**. On large-$N$ divisibility graphs, eliminating small integers of high degree links their multiples into dense cliques; whenever drop-threshold pruning is applied, one must jointly track the dropped-entry norm and the back-substituted residual $\lVert G\tilde{x} - b\rVert_2$ on the original system rather than claiming speedups from edge counts alone.
+
+::: {.viz src="arithmetic-schur-lab" preset="drop" height="500"}
+**Three-dimensional divisibility network under final Schur-block threshold pruning (`drop`).** After exact elimination onto the fixed terminals, the 3D divisibility network displays the magenta reduced couplings retained once off-diagonal entries of the final Schur block with $|S_{ij}| < \varepsilon$ are symmetrically zeroed while diagonal entries remain fixed, with the amber dot marking the currently selected vertex. This strategy prunes weak couplings only on the final terminal block and audits approximation accuracy through the Schur-block discrepancy and the original-system back-substitution residual.
+:::
+
+Conversely, one must not claim that repeated squaring on a divisibility graph inevitably triggers eigenvalue explosion. With step size $\tau = \frac{1}{1 + \max_{2 \le n \le N}\deg(n)}$ on the same divisibility graph, form the self-looped random-walk matrix
+
+$$
+P \;:=\; I - \tau L_D, \qquad \tau \;=\; \frac{1}{1 + \max\deg}.
+$$
+
+Because $L_D$ is real symmetric, $P$ is **real symmetric with a purely real spectrum**; simultaneously, this choice of $\tau$ keeps $P$ entrywise non-negative with every row summing to $1$, making $P$ a **symmetric non-negative row-stochastic matrix** whose eigenvalues lie in $(-1, 1]$ with spectral radius and spectral norm $\rho(P) = \lVert P\rVert_2 = 1 \le 1$. Applying $d$ sequential matrix-squaring layers yields $P^{2^d}$: **although there are only $d$ sequential matrix-squaring layers, the operator polynomial degree reaches $2^d$**, while $P^{2^d}$ always remains symmetric and entrywise non-negative row-stochastic with spectral radius $\rho(P^{2^d}) = 1 \le 1$ (at $d = 0$ it may still have negative eigenvalues, whereas for $d \ge 1$ its real spectrum is non-negative and bounded)—demonstrating that repeated squaring need not blow up spectrally, even though connected components rapidly fill in and their **fill density, multiply-add counts, and memory footprint** must still be accounted for.
+
+::: {.viz src="arithmetic-schur-lab" preset="square" height="500"}
+**Three-dimensional divisibility network under repeated squaring of the self-looped random walk (`square`).** Along purple coordinate axes, the 3D stage displays the integer divisibility network as the symmetric row-stochastic matrix $P = I - \tau L_D$ is squared layer by layer to $P^{2^d}$, with cyan edges marking the original divisibility adjacency. As the depth increases, magenta multistep couplings rapidly fill each non-isolated connected component while isolated vertices remain uncoupled; an amber dot on the purple scale marks the current squaring depth $d$.
+:::
+
+::: {.remark #rem-ch34-burnol-nbb-mollifier-literature title="Literature Boundaries on Burnol's Continuous-Dilation Lower Bound and the Mollifier Parameter 4/7 (Literature Results, Not Formalized Here)"}
+**Literature results, not formalized in this book.** Two literature boundaries must be respected when comparing with analytic number theory: first, in $L^2(0, \infty)$, J.-F. Burnol ([arXiv:math/0103058v2](https://arxiv.org/abs/math/0103058v2), Theorem 1.3) defines $B_\lambda$ as the subspace of finite linear combinations of continuous fractional-part dilations $x \mapsto \{\theta / x\}$ with $\lambda \le \theta \le 1$, sets $D_\lambda := \operatorname{dist}(\chi, B_\lambda)$ for the NBB $L^2$ indicator target $\chi = 1_{(0, 1)}$, and proves the asymptotic lower bound
+
+$$
+\liminf_{\lambda \to 0^+} D_\lambda\sqrt{\log(1/\lambda)} \;\ge\; \sqrt{\sum_{\operatorname{Re}(\rho)=1/2} \frac{m_\rho^2}{|\rho|^2}}
+$$
+
+(where the right-hand sum with $m_\rho^2$ runs over **distinct** critical-line nontrivial zeros $\rho$ of multiplicity $m_\rho$, and the left-hand side diverges to $+\infty$ if the Riemann Hypothesis fails). Note that Burnol's continuous-dilation subspace $B_\lambda$ **is not the same finite problem** as the discrete integer Gram system over $a = 1, \dots, N$; in the case where the Riemann Hypothesis holds and all nontrivial zeros are simple, the sum inside the square root on the right-hand side equals $2 + \gamma - \log(4\pi) \approx 0.04619$, which does not yield an exact equality at arbitrary finite truncations. Second, the fraction $\frac{4}{7}$ is the logarithmic length ratio of a specific Dirichlet-polynomial **mollifier** in critical-line zero-proportion estimates rather than a universal physical tunneling barrier, and [arXiv:1207.6583v3](https://arxiv.org/abs/1207.6583v3) explicitly distinguishes specific finite-scale mollifier bounds from arbitrarily long mollifiers.
+
+Moreover, the finite-dimensional span generated by discrete dilations $\theta = 1/n$ for $1 \le n \le M$ is only a subspace of the continuous space $B_{1/M}$, so the two are not the same finite approximation problem and the continuous-subspace distance $D_{1/M}$ must not be equated with the discrete approximation distance; under the Riemann Hypothesis, simplicity of all nontrivial zeros, and the two-sided zeros convention, $\liminf_{M \to \infty} D_{1/M}^2 \log M \ge 0.046191\dots$, so $0.046191\dots$ is an asymptotic $\liminf$ lower-bound constant for $D_{1/M}^2 \log M$ as $M \to \infty$, not an equality at finite $M$.
+:::
+
+Before passing from continuous subspaces to discrete, localized arithmetic approximations, one spatial-side fact is fundamental: **the genuine Nyman–Beurling Gram matrix is dense from the outset**. For any positive integers $a, b \ge 1$, set $f_a(x) := \{1/(ax)\}$, where $\{u\} = u - \lfloor u\rfloor \in [0, 1)$. Since the integrand is pointwise nonnegative on $(0, \infty)$ and $x > 1$ implies $0 < \frac{1}{ax} < 1$ so $f_a(x) = \frac{1}{ax}$, integrating over $(1, \infty)$ alone gives the entrywise strict lower bound
+
+$$
+G^{\mathrm{NB}}_{ab} \;=\; \int_0^\infty \left\{\frac{1}{ax}\right\}\left\{\frac{1}{bx}\right\}dx \;\ge\; \int_1^\infty \frac{dx}{ab\,x^2} \;=\; \frac{1}{ab} \;>\; 0.
+$$
+
+Because each fractional-part kernel carries a hyperbolic tail $1/(ax)$ at infinity, every pair of basis dilations has positive overlap on $(1, \infty)$: unlike sparse graph matrices whose fill-in arises only after shared hubs are eliminated, $G^{\mathrm{NB}}$ is fully dense before the first pivot, with no structural zeros to preserve. With spatial inner products intrinsically dense, an alternative moves to the Fourier–Weil spectral side: if smooth even wave packets $g$ supported in $[-R, R]$ must read out $+1$ and $-1$ at conjugate mirror nodes $t \pm i\eta$, how much differential leverage survives near the critical-line axis ($\eta \to 0$) or the imaginary symmetry axis ($t \to 0$), and what amplitude and curvature cost follows?
+
+::: {.remark #rem-ch34-signed-orbit-support-budget title="Necessary Support–Amplitude Budget for Resolving Signed Orbits with Compactly Supported Even Functions (Unformalized Application)"}
+**Provenance and verification status.** This remark gives an elementary necessary criterion for resolving a single signed spectral orbit with a compactly supported even test function, adapted from [`UnitSupportBurnolPacket.scribe.cs`](https://github.com/the-omega-institute/trureturing/blob/202e1ea140f1fc76698854e3f6e16b2a3167cc8c/Blueprint/D5/S3/Weil/BurnolGram/UnitSupportBurnolPacket.scribe.cs) in the unmerged upstream pull request [trureturing#31043](https://github.com/the-omega-institute/trureturing/pull/31043). This application is unformalized: the frozen support results reused here provide the support window for each finite problem, while the newly added necessary budget bounds remain the responsibility of the written derivation in this remark. For general functions of exponential type, the classical conjugate-point difference bound appears in R. P. Boas, Jr., [DOI:10.7146/math.scand.a-10453](https://doi.org/10.7146/math.scand.a-10453), p. 29, eq. (1.3); the low-height reflection factor $m = \min(1, R|t|)$ forced by evenness, the second-order jet bound, and the connection to signed packet readouts follow directly from the elementary derivation below.
+
+**Dimensionless normalization, transform convention, and necessary bounds.** Under the Riemann $\zeta$ spectral parametrization $\rho = \beta + it$, both the off-line displacement $\eta = \frac{1}{2} - \beta$ and the height $t$ are dimensionless pure numbers, distinct from a dimensional physical imaginary momentum $i\hbar\kappa$ in quantum mechanics. Throughout, we fix dimensionless spectral coordinates $t, \eta \in \mathbb{R}$ satisfying $t\eta \neq 0$ together with a dimensionless dual coordinate $x \in \mathbb{R}$, so the support half-width cap $R > 0$ is dimensionless as well. Let $g : \mathbb{R} \to \mathbb{C}$ be a smooth complex-valued even function satisfying $g(-x) = g(x)$ and $\operatorname{supp} g \subseteq [-R, R]$, and adopt the angular-frequency Fourier–Laplace transform over $\mathbb{R}$ without $2\pi$ in the exponent,
+
+$$
+F(z) \;:=\; \int_{-\infty}^{\infty} e^{-izx} g(x)\,dx, \qquad z_+ \;:=\; t + i\eta, \quad z_- \;:=\; t - i\eta.
+$$
+
+Define the zero- and second-order $L^1$ seminorms and the separation factor by
+
+$$
+\begin{aligned}
+L_0 &\;:=\; \int_{-\infty}^{\infty} |g(x)|\,dx, \qquad & L_2 &\;:=\; \int_{-\infty}^{\infty} |g''(x)|\,dx, \\
+m &\;:=\; \min(1, R|t|), \qquad & S &\;:=\; m\sinh(R|\eta|) \;>\; 0,
+\end{aligned}
+$$
+
+where $t\eta \neq 0$ and $R > 0$ imply $m > 0$ and $\sinh(R|\eta|) > 0$, hence $S > 0$. If a unit signed readout holds within tolerance $0 \le \varepsilon < 1$, meaning $|F(z_+) - 1| \le \varepsilon$ and $|F(z_-) + 1| \le \varepsilon$, then
+
+$$
+L_0 S \;\ge\; 1 - \varepsilon, \qquad L_2 S \;\ge\; \max\!\bigl(0,\; |t^2 - \eta^2| - (t^2 + \eta^2)\varepsilon\bigr).
+$$
+
+At exact unit readout $\varepsilon = 0$, one has $L_0 \ge 1/S$ and $L_2 \ge |t^2 - \eta^2|/S$. Under the fixed dimensionless normalization of $(t, \eta)$ and $x$ above, $L_0$ and $L_2$ share the same dimensionless scale rather than mixing incompatible dimensions, and summing them gives the second-order jet lower bound
+
+$$
+L_0 + L_2 \;\ge\; \frac{1 + |t^2 - \eta^2|}{S}.
+$$
+
+Because $1/S$ and $(1 - \varepsilon)/S$ come from bounding the kernel pointwise in modulus, they provide only a necessary lower bound on $L_0$, not the exact minimum norm of an interpolation problem.
+
+**Even cosine difference and integration-by-parts derivation.** Compact support $\operatorname{supp} g \subseteq [-R, R]$ ensures absolute convergence of $F(z)$. Substituting $x \mapsto -x$ and using $g(-x) = g(x)$ gives $F(z) = \int_{-R}^{R} \cos(zx)g(x)\,dx$. Expanding $\cos\bigl((t \pm i\eta)x\bigr) = \cos(tx)\cosh(\eta x) \mp i\sin(tx)\sinh(\eta x)$ yields the exact conjugate cosine difference
+
+$$
+\cos\bigl((t + i\eta)x\bigr) - \cos\bigl((t - i\eta)x\bigr) \;=\; -2i\sin(tx)\sinh(\eta x).
+$$
+
+For $|x| \le R$, $|\sin(tx)| \le \min(1, |tx|) \le \min(1, R|t|) = m$ and $|\sinh(\eta x)| \le \sinh(R|\eta|)$, so the integral triangle inequality gives $|F(z_+) - F(z_-)| \le 2 S L_0$. Conversely, writing $F(z_\pm) = \pm 1 + e_\pm$ with $|e_\pm| \le \varepsilon$, the reverse triangle inequality gives
+
+$$
+|F(z_+) - F(z_-)| \;=\; |2 + e_+ - e_-| \;\ge\; 2 - |e_+| - |e_-| \;\ge\; 2(1 - \varepsilon).
+$$
+
+Dividing by $2$ proves $L_0 S \ge 1 - \varepsilon$, valid for every integrable even function supported in $[-R, R]$. Next, since $g$ is smooth, even, and supported in $[-R, R]$, its second derivative $g''$ shares all three properties. Integrating $F_{g''}(z) = \int_{-\infty}^{\infty} e^{-izx}g''(x)\,dx$ by parts twice eliminates both boundary stages because $g$ and $g'$ vanish at $\pm R$, leaving $F_{g''}(z) = -z^2 F(z)$. Substituting $F(z_\pm) = \pm 1 + e_\pm$ together with $z_+^2 + z_-^2 = 2(t^2 - \eta^2)$ and $|z_\pm|^2 = t^2 + \eta^2$ yields
+
+$$
+\begin{aligned}
+|F_{g''}(z_+) - F_{g''}(z_-)| &\;=\; \bigl|-z_+^2 - z_-^2 - z_+^2 e_+ + z_-^2 e_-\bigr| \\
+&\;\ge\; 2|t^2 - \eta^2| - 2(t^2 + \eta^2)\varepsilon.
+\end{aligned}
+$$
+
+Applying the cosine-difference bound to the even function $g''$ gives $|F_{g''}(z_+) - F_{g''}(z_-)| \le 2 S L_2$; combining this with $L_2 \ge 0$ proves the finite-error bound on $L_2 S$, and setting $\varepsilon = 0$ and adding $L_0 \ge 1/S$ recovers the exact-readout bound on $L_0 + L_2$. Since $|z_+^2 - z_-^2| = |z_+ - z_-|\cdot |z_+ + z_-| = 4|t\eta|$ and $S \sim R^2|t\eta|$ when $R|t|, R|\eta|$ are small, both direct collision ($\eta \to 0$) and reflection collision ($t \to 0$) are intrinsic to the evaluation functionals and persist under any change of basis coefficients. In the degenerate cases $\eta = 0$, where $z_+ = z_-$, or $t = 0$, where $z_- = -z_+$ and evenness forces $F(-z) = F(z)$, any nonzero opposite-sign target with relative error below $1$ forces a single complex value into two disjoint error disks.
+
+**Actual Burnol packets, support caps, and repeated squaring.** Upstream maps a spectral point $\rho = \beta + it$ to
+
+$$
+\gamma \;:=\; \frac{\rho - 1/2}{i} \;=\; t + i\!\left(\frac{1}{2} - \beta\right), \qquad \eta \;=\; \frac{1}{2} - \beta,
+$$
+
+so $(z_+, z_-) = (\gamma, \overline{\gamma})$. Within a finite packet `OrbitBurnolPacket` and the unit-support construction in the module `UnitSupportBurnolPacket`, let $q = |\iota|$ be the channel count given by the cardinality of the finite index set $\iota$, and let $N \in \mathbb{N}$ be the shared localization (convolution) depth ($N$ is neither the channel count $q$ nor identified by default with the divisibility-graph vertex cap or graph squaring depth $d$): for each channel $i \in \iota$, `burnolBasis` convolves the $(N + 1)$-fold peak power `convolutionSuccPower` of $P.\mathrm{peak}$ at depth $N$ with the seed $P.\mathrm{killer}(i)$. For each $j \in \iota$, both the $j$-th seed $P.\mathrm{killer}(j)$ prescribed by `killer_values` and the localized synthesis `burnolSynthesis` evaluated on the $j$-th one-hot coefficient vector give exact signed readouts $F(\gamma) = 1, F(\overline{\gamma}) = -1$ ($\varepsilon = 0$) of the same orbit in that packet. Because $S$ is nondecreasing in $R$, any support cap $R$ satisfying $\operatorname{supp} g \subseteq [-R, R]$ applies validly: at the seed stage one only has $\operatorname{supp} P.\mathrm{killer}(j) \subseteq [-1, 1]$, so $R = 1$ is a **seed support cap** rather than an exact support equality; certified second-order jet upper budgets $J_0 \ge L_0, J_2 \ge L_2$ inherit the $R = 1$ bounds, with $1/S$ scaling as $\frac{1}{\min(1, |t|)\,|\eta|}$ as $\eta \to 0$ at fixed $t \neq 0$. At the one-hot `burnolSynthesis` stage, unit-support convolution gives $\operatorname{supp} \subseteq [-(N + 2), N + 2]$, so $R_N = N + 2$ is likewise only a **support cap** rather than an exact support radius. Under $L_0 \le L$, substituting $R_N = N + 2$ shows that exact readout requires $(N + 2)|\eta| \ge \operatorname{arsinh}(1/L)$; for the same exact-readout packet, when its norm upper bound $L$ and support-radius cap $R$ are fixed, $R|\eta| \ge \operatorname{arsinh}(1/L)$ prevents $|\eta|$ from being arbitrarily small, and increasing nominal multiplication layers alone does not cancel this necessary condition. When $N + 1 = 2^k$ is formed by $k$ repeated-squaring steps, $R_N = 2^k + 1$ is again only an available support cap—neither a minimum required support radius nor a refutation of logarithmic multiplication depth or an arithmetic runtime lower bound—showing only that $k$ squaring stages can conceal a $2^k + 1$ support cap.
+
+**Necessary check, signal normalization, and scope boundaries.** Under an amplitude budget $L_0 \le L$ with $L > 0$, such as $L_0 \le 2RA$ from $|g| \le A$ on $[-R, R]$, unit readout forces $R|\eta| \ge \operatorname{arsinh}\!\bigl(\frac{1-\varepsilon}{mL}\bigr) \ge \operatorname{arsinh}\!\bigl(\frac{1-\varepsilon}{L}\bigr)$. Over a certified enclosure $|\eta| \le \eta_{\max}$, the strict inequality $L\sinh(R\eta_{\max}) < 1 - \varepsilon$ excludes readout under that budget: for any $R, L > 0$ and $0 \le \varepsilon < 1$, the generic complex spectral node $t = 1/R$, $\eta = \operatorname{arsinh}((1-\varepsilon)/L)/(2R)$—a generic test node rather than an asserted $\zeta$-zero—gives $m = 1$ and $L\sinh(R\eta) < 1 - \varepsilon$. Satisfying $L\sinh(R\eta_{\max}) \ge 1 - \varepsilon$ passes only a single-orbit necessary check and is not sufficient for single- or multi-node interpolation to exist. For opposite targets $\pm a$ with absolute error at most $e \ge 0$, one has $L_0 S \ge \max(0, |a| - e)$; scaling $g$ by $a$ scales the quadratic Weil functional by $|a|^2$, so reducing $|a|$ shrinks the raw $L^1$ budget only by shrinking signal and tolerated error proportionally. When $a \neq 0$ and $0 \le e < |a|$, setting $\varepsilon := e / |a| \in [0, 1)$ and $B := L / |a|$ gives
+
+$$
+L_0 S \;\ge\; \max(0,\; |a| - e), \qquad B S \;\ge\; 1 - \frac{e}{|a|} \;=\; 1 - \varepsilon,
+$$
+
+producing the signal-normalized **necessary budget lower bound**
+
+$$
+B_{\min} \;:=\; \frac{1 - \varepsilon}{\min(1, R|t|)\sinh(R|\eta|)}.
+$$
+
+This quantity is a necessary lower bound on $B$, not an achievable minimum or the exact minimum norm of an interpolation problem. Four boundaries apply throughout: this derivation asserts no actual off-line $\zeta$-zeros, does not prove the Riemann Hypothesis, cannot be inverted to deduce mixed spectral majorant lower bounds from lower bounds on $(L_0, L_2)$, and establishes no unconditional arithmetic or bit-complexity lower bound.
+:::
+
+::: {.viz src="arithmetic-schur-lab" preset="budget" height="500"}
+**Necessary budget lower-bound surface and excluded region for resolving signed orbits with compactly supported even functions (`budget`).** The 3D $(R, |\eta|, B)$ stage displays the purple necessary budget lower-bound surface $B_{\min} = (1 - \varepsilon) / \bigl(\min(1, R|t|)\sinh(R|\eta|)\bigr)$, the magenta excluded region beneath it, and the amber dot marking the current parameter point. Controls adjust $t$ and relative error $\varepsilon$ while reading out the necessary budget lower bound $B_{\min}$; points in the magenta region violate the necessary condition, whereas lying outside it is necessary rather than sufficient for an interpolating function to exist.
+:::
+
+::: {.problem #prob-ch34-signed-orbit-joint-budget title="Joint Node-Certification, Mixed-Majorant, and Bit-Complexity Budget for Unit-Support Burnol Packets (Open Problem)"}
+Over a given finite spectral orbit frame, and for the same actual finite packet `OrbitBurnolPacket` produced by the unit-support construction in the module `UnitSupportBurnolPacket` together with its localized synthesis `burnolSynthesis`, establish—or falsify under prescribed resource caps—an explicit computable conditional joint certification: for that same packet, jointly provide interval-certified node enclosures and (direct, reflection, and inter-orbit) separations, target signed readout values, second-order jet upper budgets $(J_0, J_2)$, a full mixed head–tail spectral majorant upper bound, and total bit-cost upper bounds as explicit functions of spectral height $|t|$, off-line distance $|\eta|$, channel count $q = |\iota|$, shared localization depth $N$, and error tolerance $\varepsilon$. Mixed-majorant upper bounds must be derived directly from the synthesis rather than by inverting seminorm lower bounds, and bit cost must be audited directly rather than inferred to be polynomial or Gram-sparse from sparse coefficient synthesis. The Riemann Hypothesis remains open, and no actual off-line $\zeta$-zero is provided or asserted to exist; generic complex spectral nodes may be used to stress-test candidate budgets, but they cannot replace the actual-packet consumer and are insufficient to certify a genuine arithmetic orbit frame. Any proposed unit-target budget $(R, L, \varepsilon)$ with $0 \le \varepsilon < 1$ and $t\eta \neq 0$ admits a direct falsifier: over a certified enclosure $|\eta| \le \eta_{\max}$ of generic spectral test nodes,
+
+$$
+L\sinh(R\eta_{\max}) \;<\; 1 - \varepsilon
+$$
+
+refutes that budget immediately, whereas avoiding exclusion passes only a single-orbit necessary check and certifies neither multi-node existence nor the Riemann Hypothesis. This problem audits Fourier–Weil spectral-side synthesis, mixed majorants, and bit cost for compactly supported even packets, distinct from the next open problem on spatial-side multi-level pivot compression of the dense fractional-part Gram matrix $G^{\mathrm{NB}}_{ab}$ in $L^2(0, \infty)$.
+:::
+
+::: {.problem #prob-ch34-arithmetic-schur-subcubic-question title="Bridge Between Actual Arithmetic Gram Objects and Multilevel Pivot Compression (Open Problem)"}
+The divisibility-graph matrix $G = L_D + \frac{1}{4}I$ studied here is only a pedagogical model: **it is not equal to the NBB Gram matrix**, and because $G$ is symmetric strictly diagonally dominant, subcubic solvers for it are already known and must never be misrepresented as progress toward the Riemann Hypothesis. The concrete next step toward actual arithmetic objects is to work in complex $L^2(0, \infty)$ with the NBB target $\chi$ and fractional-part vectors $f_a(x) = \{1/(ax)\}$ ($1 \le a \le N$), compute the finite Gram matrix $G^{\mathrm{NB}}_{ab} = \langle f_a, f_b\rangle$ and inner-product load $b_a = \langle f_a, \chi\rangle$, and specify an explicit multilevel pivot compression or approximate elimination scheme together with its error norm; one then seeks either to construct or to rule out computable certificates guaranteeing that the resulting approximation keeps the original $L^2(0, \infty)$ target residual within $\varepsilon$, accompanied by uniform bounds on condition numbers, memory storage, and total arithmetic cost as functions of $N$, $\varepsilon$, and zero-detection height. Furthermore, **extrapolating from any finite-$N$ certificate to vanishing $L^2$ residual as $N \to \infty$ (the NBB route equivalent to [@conj-riemann-hypothesis])** must be isolated as a separate unproven step. The immediate falsifiable test is to compute actual $G^{\mathrm{NB}}_{ab}$ entries with independent quadrature error bounds and check whether the spectral error of the proposed compression genuinely decreases with level depth; if a counterexample exhibits stalling or growing spectral error, that compression scheme must be revised or abandoned.
+:::
+
+The full interactive laboratory below brings together natural-order fill-in, leaf-first elimination, thresholded Schur-complement pruning, self-looped random-walk repeated squaring on the divisibility network, and the 3D necessary budget lower-bound surface for resolving signed orbits with compactly supported even functions on a single stage:
+
+::: {.viz src="arithmetic-schur-lab" height="640"}
+**3D interactive laboratory for divisibility-network Schur elimination, repeated squaring, and signed-orbit support budgets (`arithmetic-schur-lab`).** Across the divisibility-network views, the 3D stage renders cyan original divisibility edges and magenta fill-in or multi-step coupling edges along purple axes; in the signed-orbit budget view (`budget`), it renders the purple necessary budget lower-bound surface $B_{\min} = (1 - \varepsilon) / \bigl(\min(1, R|t|)\sinh(R|\eta|)\bigr)$, the magenta excluded region beneath it, and an amber dot at the current parameter point, while in network views the amber marker highlights the active pivot or squaring depth. Controls adjust $N$, elimination order, pruning threshold, and squaring depth to inspect fill-in counts and back-substitution residuals, or adjust $t$ and relative error $\varepsilon$ in `budget` view to read out the necessary budget lower bound $B_{\min}$; entering the magenta region violates the necessary bound, whereas lying outside it is necessary rather than sufficient for an interpolating function to exist.
+:::

@@ -2,7 +2,7 @@
 
 承接[上一节](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)关于有限快表查表退化的分析，我们自然面对一个更定量的追问：当一枚位宽受限的观察者记忆指针滑过宇宙本体 QRAM 时，既然它绝无可能将全部底层状态深拷贝进私有缓存（[@thm-ch38-pointer-width-and-no-deep-copy]），那么一张有限容量的认知引理快表 $T$ 究竟“锁住”了多少结构，又让多少区分度顺着正交缝隙“逃逸”到了视线之外？每新增或删减一条引理时，怎样严格判别它是真正细化了世界分辨率的**新知识**，还是仅仅把旧概念换了个说法的**语义闭包冗余**？更进一步，当这枚一维指针沿着空间填充回路逐拍自增（`ptr++`）并受限于无邻 `1` 抗共振编码时，它的信道容量、柱集收缩率与昼夜擦除热账单遵循怎样的定量铁律？
 
-本节在三层认识论契约下，以六条新增冻结的 Lean 4 内核定理（连同[第 13 章](ch13-entanglement-and-chsh.md)已证的二体边缘盲区定理）锁定这套**观察者逃逸账本（Observer Escape Ledger）**的组合与信息几何骨架，并将闭合希尔伯特回路扫描、齐肯多夫黄金信道容量与昼夜热力学对照标定为透明可验的 **`MODEL`（模型诠释）**。
+本节在三层认识论契约下，以八条新增冻结的 Lean 4 内核定理（连同[第 13 章](ch13-entanglement-and-chsh.md)已证的二体边缘盲区定理）锁定这套**观察者逃逸账本（Observer Escape Ledger）**的组合与信息几何骨架，并将闭合希尔伯特回路扫描、齐肯多夫黄金信道容量与昼夜热力学对照标定为透明可验的 **`MODEL`（模型诠释）**。
 
 ## 38.5.1 原像纤维、有序逃逸对与商核结构新颖度 {#原像纤维有序逃逸对与商核结构新颖度}
 
@@ -159,6 +159,52 @@ $$
 ::: {.viz src="observer-escape-ledger" preset="dream" height="500"}
 **清醒兰道尔擦除热对照梦境零热等熵复相干。** 同样释放 $\Delta k = N_{\mathrm{erase}}$ 比特局部约束，清醒第 5 阶段偏迹丢弃记录至少排放 $\Delta Q = k_B T \ln 2 \cdot N_{\mathrm{erase}}$ 擦除热，而梦境第 4 阶段保留局部记录相干访问并施加伴随逆演 $U_{\mathrm{copy}}^\dagger$，实现 $\Delta Q = 0$ 复相干（`MODEL`）。
 :::
+
+## 38.5.4 读出—置换更新交换子与有界整数幂迹的模恢复唯一性 {#sec-ch38-commutator-and-trace-crt}
+
+当观察者指针沿着离散地址步进时，为什么“先读出可观测量再执行地址更新”与“先执行地址更新再读出可观测量”在代数上给出截然不同的寄存器态？同时，当观察者只能通过有限模数 $M$ 的窗口记录整数转移矩阵幂次的迹时，在怎样的幅度前提下单个模像足以无歧义地锁定真实整数幂迹？我们在进入全功能实验室之前，将这两条基础代数铁律逐项钉死。
+
+先手算一个两坐标寄存器上的置换—读出交换子：设下标集为 $\{0, 1\}$，交换置换为 $\tau = (0\,1)$（满足 $\tau^{-1} = \tau$），可观测量函数为 $f = (0, 1)$，寄存器初态为 $\psi = (a, b) \in \mathbb{C}^2$。若先读出后更新，则 $\operatorname{readObservable}(f, \psi) = (0 \cdot a,\, 1 \cdot b) = (0, b)$，再经 $\tau$ 置换坐标得到 $(b, 0)$；若先更新后读出，则 $\operatorname{observerUpdate}(\tau, \psi) = (b, a)$，再乘以 $f$ 得到 $(0, a)$。两者作差恰得 $(b, 0) - (0, a) = (b, -a)$，与逐坐标公式 $\bigl((f(1) - f(0))\psi(1),\, (f(0) - f(1))\psi(0)\bigr) = \bigl((1 - 0)b,\, (0 - 1)a\bigr)$ 完全吻合！
+
+在 `trureturing` 的 `D5.S3.Quantum.ObserverAlgebra` 与 `D5.S3.Quantum.ObserverCommutator` 模块中，对任意下标类型 $\mathrm{index} : \mathrm{Type}^*$，定义复函数寄存器空间 $\operatorname{Register}(\mathrm{index}) := \mathrm{index} \to \mathbb{C}$、逐点乘法读出算子 $\operatorname{readObservable}(f, \psi) := (i \mapsto f(i)\,\psi(i))$（其中 $f : \mathrm{index} \to \mathbb{C}$），以及沿双射置换 $\tau : \operatorname{Equiv.Perm}(\mathrm{index})$ 的逆像拉回更新算子 $\operatorname{observerUpdate}(\tau, \psi) := (i \mapsto \psi(\tau^{-1}(i)))$：
+
+::: {.theorem #thm-observer-read-update-commutator title="读出与置换更新的交换子" lean="D5/S3/Quantum/ObserverCommutator.observer_read_update_commutator_formula"}
+设 $\mathrm{index}$ 为任意类型，$\tau : \operatorname{Equiv.Perm}(\mathrm{index})$ 为 $\mathrm{index}$ 上的双射置换，$f : \mathrm{index} \to \mathbb{C}$ 为复值读出函数，$\psi : \operatorname{Register}(\mathrm{index})$ 为寄存器函数。则“先读出再置换更新”与“先置换更新再读出”的逐点函数差满足精确恒等式：
+
+$$
+\operatorname{observerUpdate}\bigl(\tau, \operatorname{readObservable}(f, \psi)\bigr) - \operatorname{readObservable}\bigl(f, \operatorname{observerUpdate}(\tau, \psi)\bigr) \;=\; \bigl(i \;\mapsto\; \bigl(f(\tau^{-1}(i)) - f(i)\bigr)\,\psi(\tau^{-1}(i))\bigr).
+$$
+:::
+
+::: proof
+在任意坐标 $i : \mathrm{index}$ 处利用函数外延性展开两端：第一项给出 $\operatorname{readObservable}(f, \psi)(\tau^{-1}(i)) = f(\tau^{-1}(i))\,\psi(\tau^{-1}(i))$，第二项给出 $f(i)\,\operatorname{observerUpdate}(\tau, \psi)(i) = f(i)\,\psi(\tau^{-1}(i))$。在复数环上合并公因子 $\psi(\tau^{-1}(i))$，即得 $\bigl(f(\tau^{-1}(i)) - f(i)\bigr)\,\psi(\tau^{-1}(i))$。完整证明由 Lean 内核检查。
+:::
+
+使用 [@thm-observer-read-update-commutator] 时须严守两项外延边界：第一，下标集 $\mathrm{index}$ 不必有限，$\operatorname{Register}(\mathrm{index})$ 是纯函数空间 $\mathrm{index} \to \mathbb{C}$，并不自动属于 $\ell^2$ 希尔伯特空间或有界算子定义域——定理中没有求和或可和性（`Summable`）前提，绝不能擅自转写为无限维迹恒等式；第二，该公式刻画的是逐坐标读出与**可逆双射置换**更新之间的代数次序差，绝不能仅凭非零交换子直接推出热耗散、热力学不可逆性或涵盖一切观察者动力学。
+
+再手算有界整数幂迹的模恢复判据：取模数 $M = 11$、严格幅度界 $B = 5$，满足 $2B = 10 < 11 = M$；设二阶对角整数矩阵 $A = \operatorname{diag}(1, 2)$，在幂指数 $j = 1$ 时其迹为 $\operatorname{Tr}(A^1) = 3$，满足 $\lvert 3\rvert < 5$。此时任何满足幅度界 $\lvert\operatorname{Tr}(C)\rvert < 5$ 且模 $11$ 同余于 $3$（即 $\operatorname{Tr}(C) \equiv 3 \pmod{11}$）的二阶整数矩阵 $C$，其整数迹都只能精确等于 $3$——因为加减 $11$ 的任何非零整数倍都会越出开区间 $(-5, 5)$！
+
+在 `D5.S0.Observation.BoundedPowerTraceCRTRecovery` 模块中，设 $d$ 为具备 `Fintype` 与 `DecidableEq` 实例的有限指标集；对整数方阵 $A : \operatorname{Matrix}\,d\,d\,\mathbb{Z}$ 与自然数幂次 $j \in \mathbb{N}$，定义整数幂迹 $\operatorname{powerTrace}(A, j) := \operatorname{Matrix.trace}(A^j) \in \mathbb{Z}$，并对任意模数 $M \in \mathbb{N}$ 定义模投影映射 $\operatorname{crtImage}(M, x) := (x : \operatorname{ZMod} M)$：
+
+::: {.theorem #thm-bounded-power-trace-crt title="有界整数幂迹的模恢复唯一性" lean="D5/S0/Observation/BoundedPowerTraceCRTRecovery.power_trace_unique_of_crt_image"}
+设 $d$ 为有限可判定相等指标类型，$M, B \in \mathbb{N}$ 满足严格模数界 $h_M : 2B < M$，$A, C : \operatorname{Matrix}\,d\,d\,\mathbb{Z}$ 为有限整数方阵，$j \in \mathbb{N}$ 为幂指数。若两端整数幂迹满足严格绝对值上界 $h_A : \lvert\operatorname{powerTrace}(A, j)\rvert < B$ 与 $h_C : \lvert\operatorname{powerTrace}(C, j)\rvert < B$，且在 $\operatorname{ZMod} M$ 中具有相同模像
+
+$$
+\operatorname{crtImage}\bigl(M, \operatorname{powerTrace}(A, j)\bigr) \;=\; \operatorname{crtImage}\bigl(M, \operatorname{powerTrace}(C, j)\bigr),
+$$
+
+则两个整数幂迹严格相等：
+
+$$
+\operatorname{powerTrace}(A, j) \;=\; \operatorname{powerTrace}(C, j).
+$$
+:::
+
+::: proof
+记 $x := \operatorname{powerTrace}(A, j) \in \mathbb{Z}$ 与 $y := \operatorname{powerTrace}(C, j) \in \mathbb{Z}$。由三角不等式及严格幅度前提 $\lvert x\rvert < B$、$\lvert y\rvert < B$ 与 $2B < M$，立得差值的严格绝对值上界 $\lvert x - y\rvert \le \lvert x\rvert + \lvert y\rvert < 2B < M$。另一方面，$\operatorname{crtImage}(M, x) = \operatorname{crtImage}(M, y)$ 在 $\operatorname{ZMod} M$ 中成立意味着 $(M : \mathbb{Z}) \mid (x - y)$，即存在整数 $k \in \mathbb{Z}$ 使 $x - y = (M : \mathbb{Z}) \cdot k$。若 $k \neq 0$，则 $1 \le \lvert k\rvert$，结合 $0 < M$（由 $2B < M$ 保证）将导出 $(M : \mathbb{Z}) \le \lvert x - y\rvert$，与 $\lvert x - y\rvert < M$ 矛盾；故必有 $k = 0$，从而 $x = y$。完整证明由 Lean 内核检查。
+:::
+
+阅读 [@thm-bounded-power-trace-crt] 时同样须守住四条严格边界：第一，输入必须是有限维整数方阵 $\operatorname{Matrix}\,d\,d\,\mathbb{Z}$；第二，$j = 0$ 时 $\operatorname{powerTrace}(A, 0) = \operatorname{Tr}(I) = \lvert d\rvert$ 只反映指标集维数而非动力学特征；第三，模数不等式 $2B < M$ 与两边绝对值严格界 $\lvert\cdot\rvert < B$ 缺一不可（例如当 $M = 2B$ 时，$-B$ 与 $+B$ 模 $M$ 同余却不相等）；第四，该定理仅断言相同模像与严格幅度界唯一确定**指定阶数的标量幂迹** $\operatorname{powerTrace}(A, j)$，绝不声称仅凭单一幂次的模像就能重构整张矩阵 $A$，也未陈述多模数中国剩余重构算法的复杂度界——关于有限步未来读出字与观察者完备化记忆商空间的精确稳定深度定理，将在[附录 H](appendix-h.md) 中系统展开。
 
 下方的完整交互实验室将 $4 \times 4$ 闭合希尔伯特回路、全部 $2^5 = 32$ 种布尔引理子集的原像纤维与逃逸弦、二量子比特贝尔边缘盲区、齐肯多夫黄金容量以及清醒/梦境热账本整合在同一张操作台上。读者可自由点选 $L_1 \dots L_5$ 亲手核验每一条唯一捕获弦与 $H_{\mathrm{total}} = 4.000\text{ bits}$ 守恒律：
 

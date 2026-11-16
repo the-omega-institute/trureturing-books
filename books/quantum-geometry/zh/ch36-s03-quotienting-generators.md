@@ -111,6 +111,42 @@ $$
 **按周期折叠，一圈圈只剩几个点。** 角度尺走完五圈后，把一圈一根的辐条转到同一个方向，每个点沿灰色虚线弧从原来的辐条（淡色空心圈）转过去：第一次撞边之后的 $25$ 步只落在 $5$ 个位置上，每处标着 $\times 5$；目标“角度”在“步号模周期”的每条纤维上取常值，正是 [@thm-ch36-quotient-annihilator-and-factorization] 第 1 款的分解条件。
 :::
 
+当观察者不仅按单一周期 $m$ 折叠离散轨道，而是同时在全体正整数倍率 $m \in \mathbb{N}_+$ 上追踪一族满足幂相容律 $(z_{mn})^n = z_m$ 的非零复坐标线程 $z = (z_m)_{m \in \mathbb{N}_+}$ 时，径向尺度伸缩与纯相位螺线管自由度是如何严格分离的？先手算两组最透明的原型：取正实线程 $z_m = \exp(2/m)$（$m \in \mathbb{N}_+$），每个坐标均非零且满足 $\bigl(\exp(2/(mn))\bigr)^n = \exp(2/m) = z_m$；在 $m = 1$ 与 $m = 2$ 处分别有 $1 \cdot \ln\lvert z_1\rvert = \ln(e^2) = 2$ 与 $2 \cdot \ln\lvert z_2\rvert = 2\ln e = 2$，对任意 $m \in \mathbb{N}_+$ 恒有 $m\ln\lvert z_m\rvert = 2$。再对比常值单位线程 $z_m = 1$ 与指数线程 $z_m = \exp(1/m)$：前者的全部坐标模长均为 $\lvert z_m\rvert = 1$、在 $m = 1$ 处的对数荷为 $\ln 1 = 0$，而后者的对数荷为 $\ln e = 1 \neq 0$、在各 $m$ 处模长 $\lvert z_m\rvert = e^{1/m} > 1$（直观展示逆方向的必要性）；更一般地，任何满足 $n\theta_{mn} \equiv \theta_m \pmod 1$ 的单位圆纯相位线程 $z_m = \exp(2\pi i\theta_m)$ 同样满足 $\forall m,\, \lvert z_m\rvert = 1$ 且对数荷为 $0$，但坐标本身并不等于 $1$。
+
+在 `trureturing` 的 `D5.S1.Solenoid.ComplexPowerSolenoidDecomposition` 模块中，记正整数单位下标为 $\operatorname{oneIndex} := \langle 1, 0 < 1\rangle \in \mathbb{N}_+$，乘积下标为 $\operatorname{productIndex}(m, n) := \langle m \cdot n,\, m \cdot n > 0\rangle \in \mathbb{N}_+$。一个**复幂相容线程** $z : \operatorname{ComplexPowerThread}$ 由三部分数据构成：坐标族 $z.\operatorname{coord} : \mathbb{N}_+ \to \mathbb{C}$、处处非零见证 $z.\operatorname{coord\_ne\_zero} : \forall m \in \mathbb{N}_+,\, z.\operatorname{coord}(m) \neq 0$，以及幂相容恒等式
+
+$$
+\forall m, n \in \mathbb{N}_+, \qquad \bigl(z.\operatorname{coord}(\operatorname{productIndex}(m, n))\bigr)^{n.1} \;=\; z.\operatorname{coord}(m).
+$$
+
+线程在基下标 $1$ 处的**对数荷**定义为 $\operatorname{logarithmicCharge}(z) := \operatorname{Real.log}\lVert z.\operatorname{coord}(\operatorname{oneIndex})\rVert \in \mathbb{R}$。在此严格前提下，各层倍率坐标的加权对数模长守恒与零荷单位模判据由如下两条内核定理锁定：
+
+::: {.theorem #thm-solenoid-log-charge title="复幂相容线程的对数荷守恒" lean="D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmic_charge_conservation"}
+设 $z : \operatorname{ComplexPowerThread}$ 为复幂相容非零线程，$m \in \mathbb{N}_+$ 为任意正整数下标。则第 $m$ 层坐标的模对数乘以倍率 $m$ 恒等于该线程的对数荷：
+
+$$
+(m.1 : \mathbb{R}) \cdot \operatorname{Real.log}\lVert z.\operatorname{coord}(m)\rVert \;=\; \operatorname{logarithmicCharge}(z).
+$$
+:::
+
+::: proof
+在幂相容条件 $z.\operatorname{pow\_compatible}$ 中取左下标为 $\operatorname{oneIndex} = 1$、右下标为 $m \in \mathbb{N}_+$，由于 $\operatorname{productIndex}(1, m) = m$，即得复数幂等式 $\bigl(z.\operatorname{coord}(m)\bigr)^{m.1} = z.\operatorname{coord}(\operatorname{oneIndex})$。两边取复模长并利用范数的乘性，化为 $\lVert z.\operatorname{coord}(m)\rVert^{m.1} = \lVert z.\operatorname{coord}(\operatorname{oneIndex})\rVert$。由非零前提 $z.\operatorname{coord\_ne\_zero}$ 知两端实范数均严格为正，对其取实对数 $\operatorname{Real.log}$ 并展开自然数幂的对数公式，即得 $(m.1 : \mathbb{R}) \cdot \operatorname{Real.log}\lVert z.\operatorname{coord}(m)\rVert = \operatorname{Real.log}\lVert z.\operatorname{coord}(\operatorname{oneIndex})\rVert = \operatorname{logarithmicCharge}(z)$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-solenoid-zero-charge title="零对数荷等价于全坐标单位模" lean="D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmicCharge_eq_zero_iff"}
+设 $z : \operatorname{ComplexPowerThread}$ 为复幂相容非零线程。则其对数荷为零当且仅当每一个正整数下标处的复坐标均具有单位模长：
+
+$$
+\operatorname{logarithmicCharge}(z) = 0 \;\Longleftrightarrow\; \forall m \in \mathbb{N}_+,\; \lVert z.\operatorname{coord}(m)\rVert = 1.
+$$
+:::
+
+::: proof
+若对一切 $m \in \mathbb{N}_+$ 均有 $\lVert z.\operatorname{coord}(m)\rVert = 1$，特别取 $m = \operatorname{oneIndex}$ 得 $\operatorname{logarithmicCharge}(z) = \operatorname{Real.log} 1 = 0$。反之，设 $\operatorname{logarithmicCharge}(z) = 0$；对任意 $m \in \mathbb{N}_+$，由 [@thm-solenoid-log-charge] 知 $(m.1 : \mathbb{R}) \cdot \operatorname{Real.log}\lVert z.\operatorname{coord}(m)\rVert = 0$。因 $m \in \mathbb{N}_+$ 保证正实因子 $(m.1 : \mathbb{R}) \neq 0$，约去得 $\operatorname{Real.log}\lVert z.\operatorname{coord}(m)\rVert = 0$；再由 $z.\operatorname{coord\_ne\_zero}(m)$ 给出严格正范数 $0 < \lVert z.\operatorname{coord}(m)\rVert$，在正实半轴上实对数取零当且仅当自变量等于 $1$，故 $\lVert z.\operatorname{coord}(m)\rVert = 1$。完整证明由 Lean 内核检查。
+:::
+
+阅读 [@thm-solenoid-log-charge] 与 [@thm-solenoid-zero-charge] 时须严守三条总函数与外延边界：第一，下标类型 $m \in \mathbb{N}_+$ 排除了零分母，且结构字段 `coord_ne_zero` 保证每层范数严格为正，从而避开了 Lean 全函数中 $\operatorname{Real.log} 0 = 0$ 的退化外延值——若缺少非零前提，对数荷为零便无法推出模长为 $1$；第二，[@thm-solenoid-log-charge] 刻画的是非零复幂相容线程各层坐标共享同一实对数荷，绝不声称不同复对数分支上的辐角彼此相等，也不意味着一般复幂线程都落在单位圆上；第三，[@thm-solenoid-zero-charge] 中零对数荷仅等价于全坐标单位模 $\lVert z.\operatorname{coord}(m)\rVert = 1$（完整保留了单位圆上的螺线管辐角自由度，而非强制所有坐标等于实数 $1$），且这两条代数判据本身尚未陈述复幂螺线管的完整拓扑直积分解——关于普适螺线管相位流与有限视界观察者记忆商完备化的进一步形式化衔接，详见[附录 H](appendix-h.md)。
+
 我们将这三种生存与认知形态在全书正交几何模型（`MODEL`）中的精确对比收束于下框总表：
 
 ::: {.remark #rem-ch36-samsara-exit-table title="三种生存与认知形态的正交几何对比总表（文献结果，未在本书形式化）"}

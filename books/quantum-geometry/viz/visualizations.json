@@ -2123,8 +2123,8 @@
       "code": "LEAN//MAP",
       "title": "Lean 声明地图",
       "title_en": "The map of Lean declarations",
-      "summary": "本书引用的 591 条冻结声明按章排开：舞台从左到右是阅读顺序（序曲、三十九章与第三十章和第三十二章各六节、终章、附录 A、B、D 与 E），每一格是 trureturing.lock.json 里的一条声明，落在中文正文第一次引用它的那一章的柱子里；绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。时间轴是阅读位置，读到哪一章，那一章的格子就落定；读完正文，格数正好等于锁文件的条目数。点一格看它的种类、模块与源码行、在书中出现的每一章与附录 C 的序号；点一章的柱脚，青色的线连到那一章引用的每一条。第二十七、二十八章逐行解剖的八条定理与两张审计表各有一张卡。数据由页面目录里的 gen-data.py 从锁文件与章节生成，不手填。七张实验卡可以在第二十七、二十八章与附录 C 里单独引用。",
-      "summary_en": "The 591 frozen declarations the book cites, laid out by chapter: from left to right the stage follows the reading order (prelude, thirty-nine chapters with six sections each in Chapters 30 and 32, coda, Appendices A, B, D and E), and each cell is one entry of trureturing.lock.json, placed in the column of the chapter whose Chinese text cites it first; green cells are theorems (kind theorem in the lock), grey ones definitions, and hollow ones are reached by inline links only. The rail is the reading position: as a chapter is read its cells land, and at the end of the main text the number of cells equals the number of entries in the lock. Click a cell for its kind, module and source line, every chapter that cites it and its Appendix C entry; click the foot of a column and cyan lines run to everything that chapter cites. The eight theorems Chapters 27 and 28 dissect line by line and their two audit tables each have a card. The data is generated from the lock and the chapters by gen-data.py in the page's folder, never typed by hand. Each of the seven experiment cards can be cited on its own from Chapters 27 and 28 and Appendix C.",
+      "summary": "本书引用的冻结声明按章排开：舞台从左到右遵循当前 SUMMARY 的阅读顺序，每一格是 trureturing.lock.json 里的一条声明，落在中文正文第一次引用它的那一章的柱子里；绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。时间轴是阅读位置，读到哪一章，那一章的格子就落定；读完正文，格数正好等于锁文件的条目数。点一格看它的种类、模块与源码行、在书中出现的每一章与附录 C 的序号；点一章的柱脚，青色的线连到那一章引用的每一条。第二十七、二十八章逐行解剖的八条定理与两张审计表各有一张卡。数据由页面目录里的 gen-data.py 从锁文件与章节生成，不手填。七张实验卡可以在第二十七、二十八章与附录 C 里单独引用。",
+      "summary_en": "The frozen declarations the book cites, laid out by chapter: from left to right the stage follows the current SUMMARY reading order, and each cell is one entry of trureturing.lock.json, placed in the column of the chapter whose Chinese text cites it first; green cells are theorems (kind theorem in the lock), grey ones definitions, and hollow ones are reached by inline links only. The rail is the reading position: as a chapter is read its cells land, and at the end of the main text the number of cells equals the number of entries in the lock. Click a cell for its kind, module and source line, every chapter that cites it and its Appendix C entry; click the foot of a column and cyan lines run to everything that chapter cites. The eight theorems Chapters 27 and 28 dissect line by line and their two audit tables each have a card. The data is generated from the lock and the chapters by gen-data.py in the page's folder, never typed by hand. Each of the seven experiment cards can be cited on its own from Chapters 27 and 28 and Appendix C.",
       "path": "lean-declaration-map/",
       "thumbnail": "lean-declaration-map/thumb.jpg",
       "status": "live",
@@ -5607,6 +5607,260 @@
           "label_en": "Prelude §0.5 · The cosine fixed point",
           "href": "../zh/index.html#sec-awakening",
           "href_en": "../en/index.html#sec-awakening"
+        }
+      ],
+      "lean": []
+    },
+    {
+      "id": "scattering-temporal-bridge",
+      "code": "SCATTER//TIME",
+      "title": "SCATTER//TIME · 势垒双支与时间双缝：两条倏逝支携带守恒流，相消需要不可区分的等幅路径",
+      "title_en": "SCATTER//TIME · Barrier Branches and the Temporal Double Slit: Two Evanescent Branches Carry a Conserved Flux, Cancellation Needs Indistinguishable Equal Paths",
+      "summary": "在 ℏ = 2m = V₀ = 1 的单位下，把有限方势垒的精确定态画成三维曲线 [x, Re ψ, Im ψ]：入射波、反射波、势垒里的衰减支与增长支、透射波在 x = 0 与 x = L 处逐段匹配；琥珀探针沿 x 走过，读到的流 j = 2 Im(ψ̄ψ′) 处处等于 2kT，T 与只取领头指数的 e^{−2κL} 并排列出。时间双缝场景把两条路径的振幅画成沿 q = EΔt/ℏ 的相量螺旋，P(q) = (1 + a² + 2aμ cos(q + φ))/(1 + a²) 画在背墙上，μ < 1 时按 μ 加权的非相干本底单独画出。数值演示与模型，不是证明；页面不给任何穿越时间。",
+      "summary_en": "In units ℏ = 2m = V₀ = 1 the exact stationary state of a finite square barrier is drawn as the 3D curve [x, Re ψ, Im ψ]: the incoming and reflected waves, the decaying and growing branches inside and the transmitted wave, matched at x = 0 and x = L; an amber probe walks along x and reads the flux j = 2 Im(ψ̄ψ′), equal to 2kT everywhere, with T listed beside the bare leading exponential e^{−2κL}. The temporal scene draws the amplitudes of two paths as phasor helices along q = EΔt/ℏ, with P(q) = (1 + a² + 2aμ cos(q + φ))/(1 + a²) on the back wall and the μ-weighted incoherent background drawn on its own when μ < 1. A numerical illustration and model, not a proof; the page gives no traversal time.",
+      "path": "scattering-temporal-bridge/",
+      "thumbnail": "scattering-temporal-bridge/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 34,
+      "section": "34.19",
+      "presets": [
+        "barrier",
+        "opaque",
+        "cancel",
+        "marked"
+      ],
+      "preset_titles": {
+        "barrier": {
+          "zh": "薄势垒：两条倏逝支一起携带流",
+          "en": "Thin barrier: two evanescent branches carry the flux"
+        },
+        "opaque": {
+          "zh": "厚势垒：T 很小，流仍处处相同",
+          "en": "Thick barrier: T is small, the flux is still the same everywhere"
+        },
+        "cancel": {
+          "zh": "等幅、无标记、反相：P = 0",
+          "en": "Equal, unmarked, opposite: P = 0"
+        },
+        "marked": {
+          "zh": "标记正交：条纹消失，P = 1",
+          "en": "Orthogonal markers: no fringe, P = 1"
+        }
+      },
+      "tags": [
+        "方势垒",
+        "倏逝支",
+        "概率流",
+        "时间双缝",
+        "标记重叠",
+        "非相干本底"
+      ],
+      "tags_en": [
+        "Square barrier",
+        "Evanescent branches",
+        "Probability flux",
+        "Temporal double slit",
+        "Marker overlap",
+        "Incoherent background"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.19 · 往返双投影、玻恩平方律与虚数盲区",
+          "label_en": "Chapter 34 §34.19 · Round-trip double projection, the Born square law and the imaginary blind spot",
+          "href": "../zh/ch34-s19-roundtrip-projection-and-imaginary-blindspot.html#sec-ch34-19-5",
+          "href_en": "../en/ch34-s19-roundtrip-projection-and-imaginary-blindspot.html#sec-ch34-19-5"
+        },
+        {
+          "label": "ITO 薄膜中的时间双缝衍射（Nature Physics, 2023）",
+          "label_en": "Double-slit time diffraction in an ITO film (Nature Physics, 2023)",
+          "href": "https://doi.org/10.1038/s41567-023-01993-w"
+        },
+        {
+          "label": "阿秒双缝实验（Lindner 等，PRL 95, 040401, 2005）",
+          "label_en": "Attosecond double-slit experiment (Lindner et al., PRL 95, 040401, 2005)",
+          "href": "https://doi.org/10.1103/PhysRevLett.95.040401"
+        },
+        {
+          "label": "磁振子平台（APS，doi:10.1103/jc1c-k3ll）",
+          "label_en": "A magnon platform (APS, doi:10.1103/jc1c-k3ll)",
+          "href": "https://doi.org/10.1103/jc1c-k3ll"
+        },
+        {
+          "label": "带后选择的原子激发（APS，doi:10.1103/gjfq-k9dv）",
+          "label_en": "Atomic excitation with postselection (APS, doi:10.1103/gjfq-k9dv)",
+          "href": "https://doi.org/10.1103/gjfq-k9dv"
+        }
+      ],
+      "lean": []
+    },
+    {
+      "id": "zeta-spectrum-lab",
+      "code": "ZETA//SPECTRUM",
+      "title": "ZETA//SPECTRUM · 有限和、合成四根与有限零点样本：有限截断不是 ζ，对称推不出零点在线上",
+      "title_en": "ZETA//SPECTRUM · Finite Sums, a Synthetic Quartet and a Finite Line-Zero Sample: A Truncation Is Not ζ, Symmetry Does Not Put Zeros on the Line",
+      "summary": "三个场景都只做有限计算。部分和场景把 n^{−σ−it} 首尾相接、沿 log n 抬起成三维相量折线，σ > 1 时与有限欧拉积并排，作为两种不同的有限近似，不称任何一个为 ζ(s)；μ(n) 由逆狄利克雷卷积算出。σ = ½ 时只有有限和，不计算解析延拓。合成四根场景在复平面上画出 ∏(s − ρ) 的高度网，根 β ± iγ 与 1 − β ± iγ 同时满足反射与共轭对称却离开直线 σ = ½（模型）。阶梯场景把含素数幂跳点与端点平均的 ψ₀(x) 与只取前十个线上零点的显式公式截断分层对照，没有余项界。数值演示，不是证明。",
+      "summary_en": "All three scenes compute finitely. The partial-sum scene puts the steps n^{−σ−it} head to tail and lifts them along log n into a 3D phasor polyline, beside the finite Euler product for σ > 1, as two different finite approximants, neither of them called ζ(s); μ(n) comes from the inverse Dirichlet convolution. At σ = ½ there is only the finite sum, and no analytic continuation is computed. The quartet scene draws the height lattice of ∏(s − ρ) over the complex plane, with roots β ± iγ and 1 − β ± iγ that satisfy both the reflection and the conjugation symmetry and still sit off the line σ = ½ (a model). The stair scene layers ψ₀(x), with its prime-power jumps and endpoint means, against truncations of the explicit formula with the first ten line zeros, without a remainder bound. A numerical illustration, not a proof.",
+      "path": "zeta-spectrum-lab/",
+      "thumbnail": "zeta-spectrum-lab/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 22,
+      "section": "22.4",
+      "presets": [
+        "domain",
+        "partial",
+        "quartet",
+        "powers"
+      ],
+      "preset_titles": {
+        "domain": {
+          "zh": "σ > 1：有限和与有限欧拉积走向同一处",
+          "en": "σ > 1: finite sum and finite Euler product head the same way"
+        },
+        "partial": {
+          "zh": "σ = ½：有限和，不是解析延拓",
+          "en": "σ = ½: a finite sum, not the analytic continuation"
+        },
+        "quartet": {
+          "zh": "合成四根：两种对称都在，根却不在线上",
+          "en": "Synthetic quartet: both symmetries hold, the roots are off the line"
+        },
+        "powers": {
+          "zh": "素数幂阶梯与十个线上零点的有限截断",
+          "en": "The prime-power stair and a ten-zero truncation"
+        }
+      },
+      "tags": [
+        "狄利克雷部分和",
+        "有限欧拉积",
+        "莫比乌斯反演",
+        "函数方程对称",
+        "显式公式",
+        "冯·曼戈尔特函数"
+      ],
+      "tags_en": [
+        "Dirichlet partial sums",
+        "Finite Euler product",
+        "Möbius inversion",
+        "Functional-equation symmetry",
+        "Explicit formula",
+        "Von Mangoldt function"
+      ],
+      "theory": [
+        {
+          "label": "第 22 章 §22.4 · 临界对称轴 σ = 1/2 与黎曼猜想的认识论边界",
+          "label_en": "Chapter 22 §22.4 · The critical axis σ = 1/2 and the epistemic boundary of the Riemann hypothesis",
+          "href": "../zh/ch22-s04-critical-line-and-rh.html#sec-ch22-4-1",
+          "href_en": "../en/ch22-s04-critical-line-and-rh.html#sec-ch22-4-1"
+        },
+        {
+          "label": "DLMF §25.2 · 定义与展开",
+          "label_en": "DLMF §25.2 · Definition and expansions",
+          "href": "https://dlmf.nist.gov/25.2"
+        },
+        {
+          "label": "DLMF §25.10 · 零点（数值表）",
+          "label_en": "DLMF §25.10 · Zeros (numerical table)",
+          "href": "https://dlmf.nist.gov/25.10"
+        },
+        {
+          "label": "DLMF §25.16 · 数学应用：素数分布",
+          "label_en": "DLMF §25.16 · Mathematical applications: distribution of primes",
+          "href": "https://dlmf.nist.gov/25.16"
+        }
+      ],
+      "lean": []
+    },
+    {
+      "id": "arithmetic-schur-lab",
+      "code": "ARITH//SCHUR",
+      "title": "ARITH//SCHUR · 整除图上的标量舒尔消元：舒尔补与次序无关，填充与运算量随次序而变",
+      "title_en": "ARITH//SCHUR · Scalar Schur Elimination on the Divisor Graph: The Schur Complement Ignores the Order, Fill and Work Do Not",
+      "summary": "顶点 2…N 按 (v₂(n), v₃(n), log 余因子) 摆在三维里，整除关系连边，G = L + αI（α = 0.25）。固定终端 4n > 3N，按自然次序或叶优先逐个标量地消去其余顶点：N = 6 时先消 2 在 4 与 6 之间长出填充，先消 4 则一条填充也没有，终端上的舒尔补却相同。页面数出实际执行的乘、除、加次数，沿消元约化 b = e_N、回代并在原方程上算残差；ε 丢弃最终舒尔补的小元只是近似，不证明半正定。P = I − τL 的反复平方让图变稠、行和保持 1，不放大。数值演示，不是证明；与黎曼猜想的联系只是有条件的类比。",
+      "summary_en": "Vertices 2…N sit in 3D at (v₂(n), v₃(n), log of the cofactor), joined by divisibility, with G = L + αI (α = 0.25). With fixed terminals 4n > 3N the other vertices are eliminated one scalar at a time, in the natural order or leaf first: for N = 6, eliminating 2 first grows a fill between 4 and 6, eliminating 4 first grows none, and the Schur complement on the terminals is the same. The page counts the multiplications, divisions and additions actually performed, reduces b = e_N along the elimination, back-substitutes and computes the residual of the original system; dropping the small entries of the final Schur complement with ε is an approximation, with no positive-semidefiniteness claimed. Repeated squaring of P = I − τL makes the graph denser while the row sums stay 1, with no amplification. A numerical illustration, not a proof; the link to the Riemann hypothesis is a conditional analogy only.",
+      "path": "arithmetic-schur-lab/",
+      "thumbnail": "arithmetic-schur-lab/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 34,
+      "section": "34.18",
+      "presets": [
+        "natural",
+        "leaf",
+        "drop",
+        "square",
+        "budget"
+      ],
+      "preset_titles": {
+        "natural": {
+          "zh": "自然次序：先消 2，4 与 6 之间长出填充",
+          "en": "Natural order: 2 first, a fill grows between 4 and 6"
+        },
+        "leaf": {
+          "zh": "叶优先：先消 4，没有填充，舒尔补相同",
+          "en": "Leaf first: 4 first, no fill, the same Schur complement"
+        },
+        "drop": {
+          "zh": "丢掉小于 ε 的元：残差离开舍入量级",
+          "en": "Drop entries below ε: the residual leaves roundoff"
+        },
+        "square": {
+          "zh": "反复平方：变稠，却不放大",
+          "en": "Repeated squaring: denser, not amplified"
+        },
+        "budget": {
+          "zh": "带号轨道的必要预算：紫色边界之下被此界排除",
+          "en": "The necessary budget of a signed orbit: below the violet boundary, excluded by this bound"
+        }
+      },
+      "tags": [
+        "整除图",
+        "舒尔补",
+        "消元次序",
+        "填充",
+        "阈值丢弃",
+        "反复平方"
+      ],
+      "tags_en": [
+        "Divisor graph",
+        "Schur complement",
+        "Elimination order",
+        "Fill-in",
+        "Threshold dropping",
+        "Repeated squaring"
+      ],
+      "theory": [
+        {
+          "label": "第 34 章 §34.18 · 格拉姆窗口、舒尔补可行走廊与多观察者共识",
+          "label_en": "Chapter 34 §34.18 · The Gram window, the Schur feasibility corridor and multi-observer consensus",
+          "href": "../zh/ch34-s18-gram-window-and-consensus.html#sec-ch34-18-5",
+          "href_en": "../en/ch34-s18-gram-window-and-consensus.html#sec-ch34-18-5"
+        },
+        {
+          "label": "Burnol，arXiv:math/0103058v2（liminf 下界，不是有限 N 的等式）",
+          "label_en": "Burnol, arXiv:math/0103058v2 (a lower bound for a liminf, not an equality at finite N)",
+          "href": "https://arxiv.org/abs/math/0103058v2"
+        },
+        {
+          "label": "arXiv:1207.6583v3（4/7 只在该文所述范围内）",
+          "label_en": "arXiv:1207.6583v3 (the 4/7 within the scope stated there)",
+          "href": "https://arxiv.org/abs/1207.6583v3"
+        },
+        {
+          "label": "UnitSupportBurnolPacket.scribe.cs @ 202e1ea · 未合入应用，未形式化",
+          "label_en": "UnitSupportBurnolPacket.scribe.cs @ 202e1ea · unmerged application, unformalized",
+          "href": "https://github.com/the-omega-institute/trureturing/blob/202e1ea140f1fc76698854e3f6e16b2a3167cc8c/Blueprint/D5/S3/Weil/BurnolGram/UnitSupportBurnolPacket.scribe.cs"
+        },
+        {
+          "label": "trureturing#31043 · 未合入",
+          "label_en": "trureturing#31043 · not merged",
+          "href": "https://github.com/the-omega-institute/trureturing/pull/31043"
+        },
+        {
+          "label": "Boas · DOI:10.7146/math.scand.a-10453 · (1.3), p.29",
+          "label_en": "Boas · DOI:10.7146/math.scand.a-10453 · (1.3), p.29",
+          "href": "https://doi.org/10.7146/math.scand.a-10453"
         }
       ],
       "lean": []

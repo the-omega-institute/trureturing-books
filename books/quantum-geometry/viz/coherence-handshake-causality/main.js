@@ -1064,7 +1064,7 @@
         [L('幂等 · HS 勾股残差', 'idempotence · HS residuals'), `${sci(m.idemRes)} · ${sci(m.hsRes)}`]]);
       const eq = Math.abs(m.a - m.b) < 1e-9, anti = Math.abs(Math.cos(m.Delta) + 1) < 1e-9;
       note = anti && !eq ? L(`两臂不等幅：反相只把 + 端口压到 (a − b)²/2 = ${nf(m.pPlus, 4)}，压不到零。`, `Unequal arms: opposite phase only brings the + port down to (a − b)²/2 = ${nf(m.pPlus, 4)}, not to zero.`)
-        : m.gamma < 1e-9 ? L('相干全被捏掉：两端口都是 ½，纯度 ½；被捏掉的相干质量记在虚线框里，本地找不回来。捏第二次什么也不变。', 'All coherence pinched: both ports read ½ and the purity is ½; the pinched coherence mass is the dashed box, out of local reach. A second pinch changes nothing.')
+        : m.gamma < 1e-9 ? L(`相干已近乎捏尽：两端口约为 ½，纯度 ${nf(m.purity, 3)}；γ = 0 时纯度恰为 a⁴ + b⁴，仅当 a² = b² 时为 ½。被捏掉的相干质量记在虚线框里，本地找不回来。捏第二次什么也不变。`, `Coherence almost fully pinched: both ports read about ½ and the purity is ${nf(m.purity, 3)}; at γ = 0 the purity is exactly a⁴ + b⁴, which is ½ only when a² = b². The pinched coherence mass is the dashed box, out of local reach. A second pinch changes nothing.`)
           : L('三个零来自三种不同的操作：同一个读数 0 分不出它的原因。', 'The three zeros come from three different operations: the readout 0 alone cannot tell its cause.');
       key = `γ ${nf(m.gamma)}`;
     } else if (sc === 'born-handshake') {

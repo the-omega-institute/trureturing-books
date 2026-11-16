@@ -175,6 +175,58 @@ $$
 | **4. 阿基米德连续进位悬崖**（无穷远极限位 $p_\infty$） | 既开又闭桶壁融化为连续实直线 $\mathbb{R}$（$\lvert\cdot\rvert_\infty$） | 局部 $+1$（如 $511 + 1 = 512$）触发跨十位全局进位，坠回 $K = 10$ | 强三角不等式失效，局部扰动经进位涟漪污染全局地址 | 与 $\theta = 90^\circ$ 纯光死循环严格同构的算术失忆轮回，被欧几里得离散阶梯永久阻断 |
 :::
 
+在把全章推演合拢到实验台之前，我们还需用两条冻结在 `trureturing` 中的内核定理补齐素数观察者纲领的两道关键定量护栏：第一，当观察者在二维模态空间 $(A, D) \in \mathbb{R}^2$ 中以黄金主模 $A$ 为归一化基准追踪**射影缺陷比值** $\theta = D / A$ 时，射影收缩倍率如何严格快于环境坐标收缩倍率；第二，素数观察语言的算术编码完备化、解析概率实现与量子算子相干完备化各自停在哪一道不可逾越的数学边界上。
+
+先手算射影缺陷比值的单步更新：记黄金比 $\varphi := \operatorname{Real.goldenRatio} = \frac{1 + \sqrt{5}}{2}$ 及其代数共轭根 $\bar{\varphi} := \operatorname{Real.goldenConj} = \frac{1 - \sqrt{5}}{2} = -\varphi^{-1} \approx -0.618$。取初值 $A = 1, D = 1$，初始射影缺陷为 $\theta = D / A = 1$；经一步黄金模态演化 $(A', D') = (\varphi A, \bar{\varphi} D) = (\varphi, -\varphi^{-1})$ 后，环境缺陷坐标 $D$ 的乘子是 $\bar{\varphi} = -\varphi^{-1} \approx -0.618$，而射影缺陷比值却变为 $\theta' = D' / A' = \bar{\varphi} / \varphi = -\varphi^{-2} \approx -0.382$！在 `D5.S3.PrimeObserver.ProjectiveMemory.GoldenProjectiveMultiplier` 模块中，定义黄金模态步 $\operatorname{goldenModalStep}(A, D) := (\varphi A, \bar{\varphi} D)$、射影缺陷 $\operatorname{projectiveDefect}(A, D) := D / A$、黄金射影倍率 $\operatorname{goldenProjectiveMultiplier} := -(\varphi^{-1})^2 = -\varphi^{-2}$，以及带外部强迫项的射影步 $\operatorname{forcedProjectiveStep}(\theta, \mathrm{forcing}) := \operatorname{goldenProjectiveMultiplier} \cdot \theta + \mathrm{forcing}$：
+
+::: {.theorem #thm-golden-projective-multiplier title="黄金模态步的射影缺陷倍率" lean="D5/S3/PrimeObserver/ProjectiveMemory/GoldenProjectiveMultiplier.projective_defect_modal_step"}
+设 $A, D \in \mathbb{R}$ 为实模态坐标，且满足显式非零条件 $h_A : A \neq 0$。则无强迫黄金模态步将射影缺陷比值 $D / A$ 精确乘以 $\operatorname{goldenProjectiveMultiplier} = -\varphi^{-2}$：
+
+$$
+\operatorname{projectiveDefect}\bigl(\operatorname{goldenModalStep}(A, D)\bigr) \;=\; \operatorname{goldenProjectiveMultiplier} \cdot \operatorname{projectiveDefect}(A, D).
+$$
+:::
+
+::: proof
+展开 $\operatorname{goldenModalStep}(A, D) = (\varphi A, \bar{\varphi} D)$ 与 $\operatorname{projectiveDefect}$ 的商定义，左端化为 $(\bar{\varphi} D) / (\varphi A)$。利用黄金共轭恒等式 $\bar{\varphi} = -\varphi^{-1}$，结合 $\varphi \neq 0$ 与显式前提 $A \neq 0$ 在实数域上重排分式，即得 $(\bar{\varphi} D) / (\varphi A) = (-\varphi^{-1} / \varphi) \cdot (D / A) = -(\varphi^{-1})^2 \cdot (D / A) = \operatorname{goldenProjectiveMultiplier} \cdot \operatorname{projectiveDefect}(A, D)$。完整证明由 Lean 内核检查。
+:::
+
+使用 [@thm-golden-projective-multiplier] 时必须严守两项边界：其一，前提 $A \neq 0$ 不可省略——在 Lean 的全函数实数除法中 $D / 0 = 0$ 只是形式退化值，不具备射影几何意义；其二，切勿把环境稳定根 $\bar{\varphi} = -\varphi^{-1}$ 与射影比值倍率 $-\varphi^{-2}$ 混为一谈，且在带强迫更新 $\theta' = -\varphi^{-2}\theta + \mathrm{forcing}$ 下，唯有 $\mathrm{forcing} = 0$ 时零缺陷不动点 $\theta = 0$ 才得以保持。
+
+再手算素数对角语言与量子算子语言之间的相位盲区：在二能级系统中，取等权叠加态 $\psi = \frac{1}{\sqrt{2}}(1, 1)$ 与正交相位态 $\phi = \frac{1}{\sqrt{2}}(1, i)$——或者直接取模块冻结的密度态见证对 $\rho_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ 与经泡利矩阵 $Z = \operatorname{diag}(1, -1)$ 共轭翻转相位后的 $\rho_- = Z\rho_+ Z = \frac{1}{2}\begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}$。两者在计算基下的对角概率分布同为 $(1/2, 1/2)$，但密度矩阵的非对角相干元符号相反（$+1/2$ 对 $-1/2$），手算即可确认仅保留对角读出的语言绝无可能逆向恢复相对量子相位。
+
+在 `D5.S3.PrimeObserver.ThreeCompletionFinalProposition` 及其上游模块中，三类完备化对象与细化方向定义如下：
+
+1. **算术素指数表双射**：记有限支撑素指数表类型为 $\operatorname{PrimeExponentTable} := \{f : \mathbb{N} \to_0 \mathbb{N} \mid \forall p \in f.\operatorname{support},\, \operatorname{Nat.Prime}(p)\}$，算术素因子分解给出等价映射 $\operatorname{primeExponentLanguageEquiv} : \mathbb{N}_+ \simeq \operatorname{PrimeExponentTable}$；
+2. **全局素指数律的离散概率实现**：对实参数 $s \in \mathbb{R}$、素数 $p \in \operatorname{Nat.Primes}$ 与指数 $k \in \mathbb{N}$，记素指数读出 $\operatorname{primeExponentCode}(n, p) := n.\operatorname{factorization}(p.1)$，几何边际质量 $\operatorname{geometricPrimeMass}(s, p, k) := \operatorname{ENNReal.ofReal}\bigl((1 - p^{-s})\,p^{-ks}\bigr)$；称离散概率质量函数 $q : \operatorname{PMF}(\mathbb{N})$ 满足 $\operatorname{RealizesPrimeExponentLaw}(s, q)$，若 $q(0) = 0$、全体素数坐标映射 $(n \mapsto \operatorname{primeExponentCode}(n, p))_{p}$ 在测度 $q.\operatorname{toMeasure}$ 下相互独立（`iIndepFun`），且对一切 $(p, k)$ 有 $q.\operatorname{toMeasure}\{n \mid \operatorname{primeExponentCode}(n, p) = k\} = \operatorname{geometricPrimeMass}(s, p, k)$；
+3. **二能级素数对角语言、算子语言与细化关系**：在二能级密度态空间 $\operatorname{DensityState}(\operatorname{Fin} 2) := \{\rho : \operatorname{CStarMatrix}(\operatorname{Fin} 2)(\operatorname{Fin} 2)\,\mathbb{C} \mid 0 \le \rho \land \operatorname{Tr}\rho = 1\}$（矩阵载体 $\operatorname{QubitMatrix} := \operatorname{Matrix}(\operatorname{Fin} 2)(\operatorname{Fin} 2)\,\mathbb{C}$）上，算子语言 $\operatorname{qubitOperatorLanguage}(\rho) := \rho.1$ 保留完整 $2 \times 2$ 密度矩阵，而素数对角语言 $\operatorname{qubitPrimeDiagonalLanguage}(\rho) := \operatorname{primeDephasing}(\{()\}, \operatorname{qubitPrimeValuation}, \rho.1)$ 通过单元素记录信道按计算基标签单射分班（使记录 Gram 矩阵满足 $\operatorname{recordGram}_{ij} = \delta_{ij}$），将非对角元清零并仅保留对角元；见证对 $\operatorname{relativePhaseDensityWitness} := (\rho_+, \rho_-)$ 由等权叠加密度矩阵 $\rho_+ = \operatorname{equalSuperpositionDensity}$ 与 $Z\rho_+ Z$（`qubitZ = !![1, 0; 0, -1]`）组成。对概念映射 $q_C : X \to C$ 与 $q_D : X \to D$，细化谓词定义为**存在后复合因子映射** $\operatorname{Refines}(q_C, q_D) :\iff \exists\,\mathrm{factor} : D \to C,\; q_C = \mathrm{factor} \circ q_D$（即粗糙读出 $q_C$ 可由更精细的读出 $q_D$ 唯一决定）。
+
+::: {.theorem #thm-prime-three-completions title="素数观察语言的三种完备化边界" lean="D5/S3/PrimeObserver/ThreeCompletionFinalProposition.prime_observer_three_completion_final_proposition"}
+对任意实参数 $s \in \mathbb{R}$，以下四项合取结论同时成立：
+
+1. **正整数素指数表双射**：映射 $\operatorname{primeExponentLanguageEquiv} : \mathbb{N}_+ \to \operatorname{PrimeExponentTable}$ 是双射（`Function.Bijective`）；
+2. **素指数独立几何律的概率实现阈值**：存在离散概率质量函数 $q : \operatorname{PMF}(\mathbb{N})$ 实现 $\operatorname{RealizesPrimeExponentLaw}(s, q)$，当且仅当 $1 < s$；
+3. **相对相位见证分离对角语言与算子语言**：见证对满足 $\operatorname{relativePhaseDensityWitness}.1 \neq \operatorname{relativePhaseDensityWitness}.2$，两者在素数对角语言下读出完全相同
+
+   $$
+   \operatorname{qubitPrimeDiagonalLanguage}(\operatorname{relativePhaseDensityWitness}.1) \;=\; \operatorname{qubitPrimeDiagonalLanguage}(\operatorname{relativePhaseDensityWitness}.2),
+   $$
+
+   而在算子语言下严格区分：
+
+   $$
+   \operatorname{qubitOperatorLanguage}(\operatorname{relativePhaseDensityWitness}.1) \;\neq\; \operatorname{qubitOperatorLanguage}(\operatorname{relativePhaseDensityWitness}.2);
+   $$
+
+4. **算子语言严格细化对角语言**：$\operatorname{Refines}(\operatorname{qubitPrimeDiagonalLanguage}, \operatorname{qubitOperatorLanguage})$ 成立，而逆向细化 $\neg\,\operatorname{Refines}(\operatorname{qubitOperatorLanguage}, \operatorname{qubitPrimeDiagonalLanguage})$ 不成立。
+:::
+
+::: proof
+第 1 款直接由算术基本定理给出的等价 `Nat.factorizationEquiv.bijective` 得证。第 2 款正向若存在实现该律的 $q : \operatorname{PMF}(\mathbb{N})$，则单点 $\{1\}$（所有素指数均为 $0$）具有正概率质量 $\prod_p (1 - p^{-s}) > 0$ 且可求和性迫使欧拉乘积对应的狄利克雷级数在 $s$ 处收敛，从而推出 $1 < s$；反向当 $1 < s$ 时，利用黎曼 $\zeta(s) > 0$ 归一化的正整数幂律构造 $q(n) \propto n^{-s}$（$n \ge 1, q(0) = 0$），在各素数幂整除事件上核验几何边际与有限族乘积独立性即得 `RealizesPrimeExponentLaw s q`。第 3 款在 $2 \times 2$ 矩阵坐标 $(0, 1)$ 处直接比较 $\rho_+$ 的 $+1/2$ 与 $\rho_- = Z\rho_+ Z$ 的 $-1/2$ 证得两态相异且算子语言不等，同时核验 `primeDephasing` 将非对角元乘零而保持对角元 $(1/2, 1/2)$ 相等。第 4 款以映射 $M \mapsto \operatorname{primeDephasing}(\{()\}, \operatorname{qubitPrimeValuation}, M)$ 作为因子函数证得 $\operatorname{qubitPrimeDiagonalLanguage} = \mathrm{factor} \circ \operatorname{qubitOperatorLanguage}$；若反向亦存在因子函数 $\mathrm{factor}'$ 使 $\operatorname{qubitOperatorLanguage} = \mathrm{factor}' \circ \operatorname{qubitPrimeDiagonalLanguage}$，代入第 3 款的见证对即会导出两态算子像相等的矛盾。完整证明由 Lean 内核检查。
+:::
+
+[@thm-prime-three-completions] 将三种完备化的适用域严格隔开，严禁把三者混同为互相等价的同一运算：算术层面的双射作用于全体正整数 $\mathbb{N}_+$；解析概率层面上，$1 < s$ 是存在 $\operatorname{PMF}(\mathbb{N})$ 实现的精确充要范围（绝不能将黎曼 $\zeta$、对数或倒数在 $s \le 1$ 处的全函数形式取值称为概率分布）；量子层面上，按 $\operatorname{Refines}$ 的定义方向，仅是对角去相干读出穿过完整算子读出分解，绝不可能反过来仅凭素数对角概率记录重建非对角量子相位。
+
 读者可以在下方的完整双栏交互实验室 `ORTHO//PADIC` 中自由切换全部十二级离散素数观察者（$p = 2 \dots 1031$）与 $p_\infty$ 连续进位悬崖、切换检验多项式与有理数账本，亲手验证“素数扩大即扩表”的每一处精确读数：
 
 ::: {.viz src="padic-prime-table-tree" height="620"}
