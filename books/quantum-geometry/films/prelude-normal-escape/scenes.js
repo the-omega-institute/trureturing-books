@@ -734,7 +734,7 @@ FILM.poster = () => {
   nePath(v, arc, C.now, 0.85, 2.6);
   neDot3(v, P, 11, C.now, 1);
   neTag3(v, [0, 0, 1], 'e₃ = ⋆₃(e₁∧e₂)', C.vio, 1, 18, 4, 'left', 28);
-  neTag3(v, [s, -s, 0], 'e₁∧e₂', C.mag, 1, 0, 40, 'right', 28);
+  neTag3(v, [-0.42, 0.15, 0], 'e₁∧e₂', C.mag, 1, 0, 10, 'center', 28);
   const tx = 1340;
   txt('法线从外面来', tx, 400, { size: 104, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('球外之球', tx, 510, { size: 76, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 3 });

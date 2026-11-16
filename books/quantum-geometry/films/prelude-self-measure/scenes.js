@@ -711,15 +711,18 @@ SCENES.recap = S => {
     txt(String(i + 1), 326, y - 1, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.cyan, a });
     txt(en, 380, y, { size: 36, fam: F.disp, w: 700, c: C.white, a });
     txt(zh, 380, y + 50, { size: 30, fam: F.zh, w: 700, c: SM_LABEL, a });
-    if (kind) {
-      const head = kind === 'lean' ? 'LEAN ✓' : 'LITERATURE · ARGUED', col = kind === 'lean' ? C.lean : C.argued;
-      const wt = tw(head, 18, F.mono, 700, 2) + 28, x = 1640 - wt;
+    /* the footing of each takeaway: the Lean theorem gives 0 < θ* < 1 and uniqueness; the decimal is computed here */
+    const tags = kind === 'lean' ? [['LEAN ✓', C.lean], [`NUM · ${smF3(SM.star)}`, C.cyan]] : kind === 'argued' ? [['LITERATURE · ARGUED', C.argued]] : [];
+    let xr = 1640;
+    tags.forEach(([head, col]) => {
+      const wt = tw(head, 18, F.mono, 700, 2) + 28, x = xr - wt;
       fillBox(x, y + 26, wt, 32, col, 0.9 * a);
       txt(head, x + 14, y + 49, { size: 18, fam: F.mono, w: 700, c: C.bg, a, ls: 2 });
-    }
+      xr = x - 14;
+    });
   });
   /* the next step: chapter 1 begins with two arrows */
-  const qn = smBump(Q(S, 3, 'The prelude ends here', 0.6, 0.5), clamp((u - lineAt(S, 3).e + 0.2) / 0.5)) * fade;
+  const qn = smBump(Q(S, 3, 'The prelude ends here', 0.6, 0.9), clamp((u - lineAt(S, 3).e + 0.2) / 0.5)) * fade;
   if (qn > 0) {
     const x0 = 860, y0 = 560, r = 190, b = 38 * SM_DEG;
     smVec(x0, y0, x0 + r, y0, C.white, qn, 4);
