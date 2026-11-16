@@ -1,6 +1,6 @@
 {
   "next": {
-    "T": 390,
+    "T": 391,
     "D": 161,
     "R": 184
   },
@@ -729,8 +729,9 @@
     "D5/S3/Resource/SeparableConeResidualWitness.separable_cone_residual_witness": "T386",
     "D5/S3/Quantum/QPECircularTail.reciprocal_square_shifted_finite_tail_le": "R182",
     "D5/S3/Quantum/ShorCountingMarginal.shor_phase_accuracy_bound": "R183",
-    "D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff": "T387",
-    "D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.exists_joint_angle_table": "T388",
-    "D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.partial_two_tree_rank_three_iff": "T389"
+    "D5/S3/TotalVariation/ParryBilateralLaw.bilateral_parry_law": "T387",
+    "D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff": "T388",
+    "D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.exists_joint_angle_table": "T389",
+    "D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.partial_two_tree_rank_three_iff": "T390"
   }
 }

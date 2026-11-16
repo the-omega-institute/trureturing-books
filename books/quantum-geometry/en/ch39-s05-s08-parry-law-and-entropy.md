@@ -87,7 +87,131 @@ Conversely, every positive-kernel edge of $x\in Y_k$ follows these rules. Tracin
 At each fixed time, the suffix reads at most $k$ preceding bits, the sign reads the anchor and finitely many relation bits, and each inverse relation coordinate reads two adjacent states. These coordinate maps are measurable for the stated product and subspace structures. Finally, moving the origin to time $1$ changes the anchor to $b\oplus\neg r_0$. The shifted sign recurrence and nearest-zero characterization are unchanged; their uniqueness gives clause 4. The full proof is checked by the Lean kernel.
 :::
 
-This supplies measurable coordinates for every supported bilateral path at every integer origin. Its time domain includes negative times, and its target is precisely $Y_k$. The skew shift updates the anchor: fixing $b=\mathrm{false}$ selects a lift of each relation path, but does not yield a fixed sign page commuting with shift. The coding theorem specifies no probability measure on paths; it supplies neither existence of an invariant probability law nor a joint law with a fair independent anchor. It also does not establish a generating-partition interface for full Kolmogorov–Sinai entropy, entropy comparison over all invariant probability measures, or uniqueness in the equality case. These entropy conclusions remain unformalized in this book. Measurable coordinates are available; the entropy interface requires a separate argument.
+This supplies measurable coordinates for every supported bilateral path at every integer origin. Its time domain includes negative times, and its target is precisely $Y_k$. The skew shift updates the anchor: fixing $b=\mathrm{false}$ selects a lift of each relation path, but does not yield a fixed sign page commuting with shift. The coding theorem alone specifies no probability measure on paths; it supplies neither existence of an invariant probability law nor a joint law with a fair independent anchor. The separate law theorem below chooses a coding and measures together, supplying these two probability conclusions. A generating-partition interface for full Kolmogorov–Sinai entropy, entropy comparison over all invariant probability measures, and uniqueness in the maximal-entropy equality case still require separate arguments.
+
+Coordinates describe how to read a path; a probability law must also assign mass to every finite window. Retain $X_k,Y_k,p,w_j,Z_k,\pi_k,P_k$ from above. In the following theorem, abbreviate $S=\operatorname{State}(k)=\mathrm{Bool}\times\operatorname{Fin}k$ and $Z=Z_k=\operatorname{normalizer}(k)$. Let $u=\operatorname{fairAnchor}$ be the fair probability measure on the two signs:
+
+$$
+u(\{\mathrm{false}\})=u(\{\mathrm{true}\})=\frac12.
+$$
+
+For $j,h\in\operatorname{Fin}k$, write $\bar j=j.\mathrm{val}$ and $\bar h=h.\mathrm{val}$. Define the unsigned suffix mass and transition kernel by
+
+$$
+\begin{aligned}
+q_j&=\operatorname{suffixLaw}(k,j)=\frac{p^{\bar j}w_j}{Z},\\
+Q_{jh}&=\operatorname{suffixKernel}(k,j,h)\\
+&=\begin{cases}
+p/w_j,&\bar h=0,\\
+pw_h/w_j,&\bar h\ne0\ \text{and}\ \bar h=\bar j+1,\\
+0,&\text{otherwise}.
+\end{cases}
+\end{aligned}
+$$
+
+These indices always belong to the actual type $\operatorname{Fin}k$. When $\bar j=k-1$, there is no available increment state. For a measurable coding satisfying the four properties above, $e:\mathrm{Bool}\times X_k\simeq_{\mathrm m}Y_k$, put $F_e(b,r)=(e(b,r)).\mathrm{val}\in S^{\mathbb Z}$ and define
+
+$$
+J_t^e(r)=j\bigl(F_e(\mathrm{false},r)_t\bigr)\in\operatorname{Fin}k.
+$$
+
+Thus $J_t^e$ reads the true-bit run immediately before time $t$. The theorem below makes this suffix a function of the entire relation path; choosing $\mathrm{false}$ is only a convention for writing the suffix event. Also write $(\operatorname{shiftPath}x)_t=x_{t+1}$. In the formulas, $\operatorname{ofReal}:\mathbb R\to[0,\infty]$ denotes Lean's `ENNReal.ofReal`: it embeds nonnegative real numbers with their original values and sends negative numbers to $0$.
+
+::: {.theorem #thm-ch39-p2e-native-bilateral-parry-law title="The Actual Bilateral Parry Source, Independent Fair Anchor, and Exact Cylinder Laws" lean="D5/S3/TotalVariation/ParryBilateralLaw.bilateral_parry_law"}
+For every natural number $k\ge2$, there exist a single measurable equivalence $e:\mathrm{Bool}\times X_k\simeq_{\mathrm m}Y_k$, a probability measure $\mu$ on $X_k$, and a probability measure $\nu$ on the full integer-indexed state path space $S^{\mathbb Z}$, satisfying all the following clauses together:
+
+1. This $e$ satisfies all four coding properties of [@thm-ch39-p2e-native-bilateral-reset-coding]. Explicitly, for every $b\in\mathrm{Bool}$, $r\in X_k$, and $t\in\mathbb Z$,
+
+   $$
+   a(F_e(b,r)_t)=\operatorname{signAt}(b,r,t).
+   $$
+
+   Put $j_t=j(F_e(b,r)_t)$. Then $j_t\in\operatorname{Fin}k$, and
+
+   $$
+   \begin{aligned}
+   r_{t-j_t.\mathrm{val}-1}&=\mathrm{false},\\
+   r_{t-i-1}&=\mathrm{true}\quad(i\in\mathbb N,\ i<j_t.\mathrm{val}).
+   \end{aligned}
+   $$
+
+   For every $x\in Y_k$,
+
+   $$
+   \begin{aligned}
+   e^{-1}(x)&=(a(x_0),\operatorname{readRelation}(x)),\\
+   \operatorname{readRelation}(x)_t
+   &=\neg\bigl(a(x_t)\oplus a(x_{t+1})\bigr)\quad(t\in\mathbb Z).
+   \end{aligned}
+   $$
+
+   For all $b,r$ and every $t\in\mathbb Z$,
+
+   $$
+   F_e\bigl(b\oplus\neg r_0,\operatorname{relationShift}r\bigr)_t
+   =F_e(b,r)_{t+1}.
+   $$
+
+2. The two measures are stationary under their respective shifts:
+
+   $$
+   \begin{aligned}
+   (\operatorname{relationShift})_*\mu&=\mu,\\
+   (\operatorname{shiftPath})_*\nu&=\nu.
+   \end{aligned}
+   $$
+
+3. The coding sends the product of the fair anchor and relation source exactly to the signed path law:
+
+   $$
+   (F_e)_*(u\otimes\mu)=\nu.
+   $$
+
+   In particular, the origin sign has law $u$ and is independent of the entire relation path.
+4. For every $\ell\in\mathbb Z$, $m\in\mathbb N$, and word $w:\operatorname{Fin}(m+1)\to S$,
+
+   $$
+   \begin{aligned}
+   &\nu\{x\in S^{\mathbb Z}:\ \forall i\in\operatorname{Fin}(m+1),\ x_{\ell+i.\mathrm{val}}=w_i\}\\
+   &\quad=\operatorname{ofReal}\!\left(
+   \pi_k(w_0)\prod_{i\in\operatorname{Fin}m}
+   P_k\bigl(w_{i.\mathrm{castSucc}},w_{i.\mathrm{succ}}\bigr)\right).
+   \end{aligned}
+   $$
+
+5. For every $\ell\in\mathbb Z$, $m\in\mathbb N$, and word $v:\operatorname{Fin}(m+1)\to\operatorname{Fin}k$,
+
+   $$
+   \begin{aligned}
+   &\mu\{r\in X_k:\ \forall i\in\operatorname{Fin}(m+1),\ J^e_{\ell+i.\mathrm{val}}(r)=v_i\}\\
+   &\quad=\operatorname{ofReal}(q_{v_0})
+   \prod_{i\in\operatorname{Fin}m}
+   \operatorname{ofReal}\!\left(Q_{v_{i.\mathrm{castSucc}},v_{i.\mathrm{succ}}}\right).
+   \end{aligned}
+   $$
+
+Here $i.\mathrm{castSucc},i.\mathrm{succ}\in\operatorname{Fin}(m+1)$ have natural values $i.\mathrm{val}$ and $i.\mathrm{val}+1$, respectively. Clauses 4 and 5 do not require positive transition masses. When $m=0$, the product is empty and equals $1$.
+:::
+
+::: proof
+First form the finite signed Markov word masses from $\pi_k$ and $P_k$. Unit row sums make the masses consistent when the last coordinate is removed; stationarity of $\pi_k$ makes them consistent when the first is removed. Apply the existing inverse-limit probability extension theorem to centered windows $[-n,n]$, then identify coherent windows with paths on the integers to obtain $\nu$. Cropping a sufficiently large centered window gives clause 4 at every integer origin. Two-point cylinders containing a zero-kernel edge have zero mass. Since there are only countably many integer edges, $\nu$ lies in $Y_k$ almost surely.
+
+Use the measurable inverse coding to pull this supported path law back to a probability measure $\rho$ on $\mathrm{Bool}\times X_k$, and let $\mu$ be its relation-path marginal. The finite signed word masses are invariant under complementing every sign. Under this transformation, the inverse coding complements only the origin sign and preserves every relation bit. Uniqueness of the extension with these prescribed finite-dimensional distributions transfers that symmetry to the path law and to $\rho$. Thus, for every measurable $A\subseteq X_k$ and every $b\in\mathrm{Bool}$,
+
+$$
+\rho(\{b\}\times A)=\frac12\mu(A).
+$$
+
+The two anchor slices give $\rho=u\otimes\mu$ and hence clause 3. This independence holds for every measurable event of the entire relation path.
+
+The nearest-zero characterization makes the suffix independent of the anchor sign. Summing finite signed word masses over the signs gives initial mass $q_j$ and transition masses $Q_{jh}$, yielding clause 5. The finite-dimensional laws at every integer origin also establish shift invariance of $\nu$. Apply the coding's skew-shift identity and project to the relation coordinate to obtain shift invariance of $\mu$. The full proof is checked by the Lean kernel.
+:::
+
+The existential quantifier chooses $e,\mu,\nu$ together; the statement does not take an arbitrary preselected coding as input. The measure $\nu$ is defined on all of $S^{\mathbb Z}$, while the product pushforward identity concentrates it on the positive-kernel paths $Y_k$. The measure $\mu$ is defined on the actual bilateral $1^k$-free relation space $X_k$, and its suffix events use the actual second coordinate of $e(\mathrm{false},r)$. Fairness and independence therefore describe a joint probability law; a fair sign marginal alone cannot replace it.
+
+The cylinder formulas retain their distinct source forms: the signed formula applies $\operatorname{ofReal}$ once to the entire real product, while the unsigned formula applies it to each factor before multiplication. All entries of $\pi_k,P_k,q,Q$ here are nonnegative, so ordinary real probabilities are the initial mass times the successive transition probabilities. At $m=0$ the formulas give the one-coordinate masses $\pi_k(w_0)$ and $q_{v_0}$. Any word containing a zero transition, including words forbidden by the corresponding reset rules, has mass $0$. Every integer $\ell$ is covered, including negative times.
+
+The proof uses uniqueness of an extension with prescribed finite-dimensional distributions. It does not compare entropy over all invariant probability measures or establish uniqueness of a measure of maximal entropy. [@thm-ch39-p2e-native-bilateral-parry-law] supplies the stationary joint law of the actual source and signed paths, together with exact finite-window probabilities. Full Kolmogorov–Sinai entropy, entropy bounds against arbitrary invariant competitors, maximality and uniqueness, mixing, a spectral gap, a computable sampling algorithm, a fixed-sign section commuting with shift, and physical realization are beyond the conclusions of this citation. The maximal-entropy and Abramov results in the literature remark below retain their own hypotheses and evidence status.
 
 Alongside this stationary reset law stand two independent formal quantitative bounds governing boundary collisions and observational blind spots: first, the boundary cylinder inequality [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound), which proves for any finite collection $C$ of $n \ge 1$ positive run-length pairs (with each `1`-run $< k$ and encoded length at most $R$) that the left- and right-boundary selected-prefix stationary masses are bounded above by $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ and $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$ respectively (an exact probability inequality, not a Hausdorff-dimension or entropy formula); second, continuing the ledger of [Chapter 38](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5, the finite-arena information-escape criterion [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos), which proves on a nondegenerate finite arena of cardinality $q \ge 2$ that the set $E(S)$ of ordered distinct state pairs indistinguishable under catalog $S$ defines a normalized rational escape rate $e(S) = |E(S)|/[q(q-1)]$, and that observation $i$ strictly lowers escape rate if and only if its unique-capture count satisfies $|U_i| > 0$ (with exact drop $|U_i|/[q(q-1)]$). Rational ordered-pair escape rate $e(S)$, von Neumann page entropy $S(\sigma_b)$, and infinite-shift ergodic entropy are distinct mathematical quantities and are never conflated here.
 

@@ -87,7 +87,131 @@ $$
 每个固定时刻的后缀只读前面至多 $k$ 位，符号只读原点锚点与有限段关系位，逆映射的每个关系坐标只读两个相邻状态。因此这些坐标映射在所述乘积及子空间可测结构上均可测。最后，把时间原点移到 $1$，新锚点必为 $b\oplus\neg r_0$；平移后的符号递推与最近零位刻画不变，由两者的唯一性得到第 4 项。完整证明由 Lean 内核检查。
 :::
 
-这给出每条受支持双向路径在每个整数原点的可测坐标重建，没有把时间截成非负半轴，也没有把 $Y_k$ 扩成任意状态路径。斜移位会更新锚点：固定选 $b=\mathrm{false}$ 虽可给每条关系路径选一条提升，却不能由此得到与移位交换的固定符号页。此编码定理没有指定路径上的概率测度，因而不提供不变概率律的存在性，也不提供锚点公平且独立的联合律。它同样没有建立完整柯尔莫哥洛夫—西奈熵的生成分割接口、对所有不变概率测度的熵比较，或等号情形的唯一性；这些熵结论在本书仍未形式化。可测坐标已经接通，熵接口仍需单独建立。
+这给出每条受支持双向路径在每个整数原点的可测坐标重建，没有把时间截成非负半轴，也没有把 $Y_k$ 扩成任意状态路径。斜移位会更新锚点：固定选 $b=\mathrm{false}$ 虽可给每条关系路径选一条提升，却不能由此得到与移位交换的固定符号页。单独的编码定理没有指定路径上的概率测度，因而不提供不变概率律的存在性，也不提供锚点公平且独立的联合律。下面另引的概率律定理同时选取编码与测度，补上这两项概率结论。完整柯尔莫哥洛夫—西奈熵的生成分割接口、对所有不变概率测度的熵比较及最大熵等号情形的唯一性，仍需单独建立。
+
+坐标告诉我们怎样读一条路径；概率律还须告诉我们每个有限窗口出现的质量。沿用上文的 $X_k,Y_k,p,w_j,Z_k,\pi_k,P_k$，在下面这一定理中简记 $S=\operatorname{State}(k)=\mathrm{Bool}\times\operatorname{Fin}k$、$Z=Z_k=\operatorname{normalizer}(k)$。令 $u=\operatorname{fairAnchor}$ 为两个符号上的公平概率测度，即
+
+$$
+u(\{\mathrm{false}\})=u(\{\mathrm{true}\})=\frac12.
+$$
+
+对 $j,h\in\operatorname{Fin}k$，记 $\bar j=j.\mathrm{val}$、$\bar h=h.\mathrm{val}$，定义无符号后缀的质量与转移核
+
+$$
+\begin{aligned}
+q_j&=\operatorname{suffixLaw}(k,j)=\frac{p^{\bar j}w_j}{Z},\\
+Q_{jh}&=\operatorname{suffixKernel}(k,j,h)\\
+&=\begin{cases}
+p/w_j,&\bar h=0,\\
+pw_h/w_j,&\bar h\ne0\ \text{且}\ \bar h=\bar j+1,\\
+0,&\text{其余情形}.
+\end{cases}
+\end{aligned}
+$$
+
+这些下标始终属于实际的 $\operatorname{Fin}k$；当 $\bar j=k-1$ 时，没有可用的递增状态。对满足上述四条编码性质的可测编码 $e:\mathrm{Bool}\times X_k\simeq_{\mathrm m}Y_k$，记 $F_e(b,r)=(e(b,r)).\mathrm{val}\in S^{\mathbb Z}$，并令
+
+$$
+J_t^e(r)=j\bigl(F_e(\mathrm{false},r)_t\bigr)\in\operatorname{Fin}k.
+$$
+
+这里 $J_t^e$ 读的是时刻 $t$ 之前的真位游程。后面的定理使这一后缀由整条关系路径确定，选用 $\mathrm{false}$ 只是写出后缀事件的约定。再记 $(\operatorname{shiftPath}x)_t=x_{t+1}$。公式中的 $\operatorname{ofReal}:\mathbb R\to[0,\infty]$ 是 Lean 的 `ENNReal.ofReal`，将非负实数按原值嵌入，并将负数送到 $0$。
+
+::: {.theorem #thm-ch39-p2e-native-bilateral-parry-law title="实际双向帕里源、独立公平锚点与精确柱集律" lean="D5/S3/TotalVariation/ParryBilateralLaw.bilateral_parry_law"}
+对每个自然数 $k\ge2$，存在同一个可测等价 $e:\mathrm{Bool}\times X_k\simeq_{\mathrm m}Y_k$、$X_k$ 上的概率测度 $\mu$ 及整个整数状态路径空间 $S^{\mathbb Z}$ 上的概率测度 $\nu$，同时满足以下各项：
+
+1. 这个 $e$ 满足 [@thm-ch39-p2e-native-bilateral-reset-coding] 的全部四条编码性质。具体地，对每个 $b\in\mathrm{Bool}$、$r\in X_k$、$t\in\mathbb Z$，
+
+   $$
+   a(F_e(b,r)_t)=\operatorname{signAt}(b,r,t).
+   $$
+
+   令 $j_t=j(F_e(b,r)_t)$，则 $j_t\in\operatorname{Fin}k$，并且
+
+   $$
+   \begin{aligned}
+   r_{t-j_t.\mathrm{val}-1}&=\mathrm{false},\\
+   r_{t-i-1}&=\mathrm{true}\quad(i\in\mathbb N,\ i<j_t.\mathrm{val}).
+   \end{aligned}
+   $$
+
+   对每条 $x\in Y_k$，
+
+   $$
+   \begin{aligned}
+   e^{-1}(x)&=(a(x_0),\operatorname{readRelation}(x)),\\
+   \operatorname{readRelation}(x)_t
+   &=\neg\bigl(a(x_t)\oplus a(x_{t+1})\bigr)\quad(t\in\mathbb Z).
+   \end{aligned}
+   $$
+
+   对所有 $b,r$ 及每个 $t\in\mathbb Z$，
+
+   $$
+   F_e\bigl(b\oplus\neg r_0,\operatorname{relationShift}r\bigr)_t
+   =F_e(b,r)_{t+1}.
+   $$
+
+2. 两个测度分别在各自移位下平稳：
+
+   $$
+   \begin{aligned}
+   (\operatorname{relationShift})_*\mu&=\mu,\\
+   (\operatorname{shiftPath})_*\nu&=\nu.
+   \end{aligned}
+   $$
+
+3. 编码把公平锚点与关系源的乘积测度精确送到有符号路径律：
+
+   $$
+   (F_e)_*(u\otimes\mu)=\nu.
+   $$
+
+   因而这里的原点符号服从 $u$，并与整条关系路径独立。
+4. 对每个 $\ell\in\mathbb Z$、$m\in\mathbb N$ 及每个词 $w:\operatorname{Fin}(m+1)\to S$，都有
+
+   $$
+   \begin{aligned}
+   &\nu\{x\in S^{\mathbb Z}:\ \forall i\in\operatorname{Fin}(m+1),\ x_{\ell+i.\mathrm{val}}=w_i\}\\
+   &\quad=\operatorname{ofReal}\!\left(
+   \pi_k(w_0)\prod_{i\in\operatorname{Fin}m}
+   P_k\bigl(w_{i.\mathrm{castSucc}},w_{i.\mathrm{succ}}\bigr)\right).
+   \end{aligned}
+   $$
+
+5. 对每个 $\ell\in\mathbb Z$、$m\in\mathbb N$ 及每个词 $v:\operatorname{Fin}(m+1)\to\operatorname{Fin}k$，都有
+
+   $$
+   \begin{aligned}
+   &\mu\{r\in X_k:\ \forall i\in\operatorname{Fin}(m+1),\ J^e_{\ell+i.\mathrm{val}}(r)=v_i\}\\
+   &\quad=\operatorname{ofReal}(q_{v_0})
+   \prod_{i\in\operatorname{Fin}m}
+   \operatorname{ofReal}\!\left(Q_{v_{i.\mathrm{castSucc}},v_{i.\mathrm{succ}}}\right).
+   \end{aligned}
+   $$
+
+这里 $i.\mathrm{castSucc},i.\mathrm{succ}\in\operatorname{Fin}(m+1)$ 的自然数值分别为 $i.\mathrm{val}$ 与 $i.\mathrm{val}+1$。第 4、5 项不要求词的转移质量为正；$m=0$ 时乘积为空，取值为 $1$。
+:::
+
+::: proof
+先用 $\pi_k$ 与 $P_k$ 写出有限有符号状态词的马尔可夫质量。核的行和为 $1$ 保证删去末端坐标后质量相容，$\pi_k$ 的平稳性保证删去首端坐标后相容。对中心窗口 $[-n,n]$ 应用已有的逆极限概率延拓定理，再把相容窗口识别为整数路径，得到 $\nu$。裁剪足够大的中心窗口，就得到任意整数原点的第 4 项。零核边的两点柱集质量为零，而整数边只有可数多条，故 $\nu$ 几乎处处落在 $Y_k$。
+
+通过编码的可测逆映射，把这一受支持的路径律拉回为 $\mathrm{Bool}\times X_k$ 上的概率测度 $\rho$，并令 $\mu$ 为其关系路径边缘。有限有符号词的质量在全体符号同时取反时不变。编码的逆映射在该变换下只翻转原点符号，保持所有关系位。指定这些有限维分布的延拓唯一性把该对称性传到路径律及 $\rho$，所以对任意可测 $A\subseteq X_k$ 与每个 $b\in\mathrm{Bool}$，
+
+$$
+\rho(\{b\}\times A)=\frac12\mu(A).
+$$
+
+两个锚点切片合起来给出 $\rho=u\otimes\mu$，从而得到第 3 项；独立性适用于整条关系路径的任意可测事件。
+
+最近零位刻画使后缀不依赖锚点符号。把有限有符号词质量对符号求和，初始质量变成 $q_j$，转移质量变成 $Q_{jh}$，得到第 5 项。所有整数原点的有限维分布还给出 $\nu$ 的移位不变性；利用编码的斜移位公式，再投影到关系坐标，得到 $\mu$ 的移位不变性。完整证明由 Lean 内核检查。
+:::
+
+这里的存在量词同时选取 $e,\mu,\nu$；陈述没有把一个任意预先选定的编码作为输入。$\nu$ 的定义域是整个 $S^{\mathbb Z}$，而乘积推前等式使它集中在正核路径 $Y_k$ 上。另一方面，$\mu$ 就定义在实际禁 $1^k$ 的双向关系空间 $X_k$ 上，后缀事件使用的正是 $e(\mathrm{false},r)$ 的实际第二坐标。于是“公平且独立”是一条联合概率律，不能仅用公平符号边缘分布来代替。
+
+两条柱集公式保留了源码各自的写法：有符号公式对整个实数乘积作一次 $\operatorname{ofReal}$，无符号公式先对每个因子作 $\operatorname{ofReal}$ 再相乘。这里 $\pi_k,P_k,q,Q$ 的各项均非负，因此用普通实数概率表示时，就是初始质量乘以逐步转移概率。$m=0$ 分别给出单点质量 $\pi_k(w_0)$ 与 $q_{v_0}$；任何含零转移的词，包括违反相应重置规则的禁用词，质量都为 $0$。公式适用于所有整数 $\ell$，也适用于负时间。
+
+证明中使用的是给定有限维分布的延拓唯一性；它没有给出所有不变概率测度之间的最大熵比较或最大熵测度唯一性。[@thm-ch39-p2e-native-bilateral-parry-law] 补上的是实际源与有符号路径的平稳联合律及精确有限窗口概率。完整柯尔莫哥洛夫—西奈熵、任意不变竞争测度的熵上界、最大性与唯一性，以及混合性、谱隙、可计算采样算法、与移位交换的固定符号截面和物理实现，都不是这一引用提供的结论。下方文献注记中的最大熵与阿布拉莫夫结论仍须按各自的前提与证据身份阅读。
 
 在这一平稳律旁，还有两条各自独立的形式化定量定律共同约束边界碰撞与观测盲区：其一是帕里边界柱集上界定理 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)，它对给定的 $n \ge 1$ 组正游程对集合 $C$（每段 `1` 游程 $< k$ 且编码长度不超过视界 $R$）证明，左右边界选定前缀的平稳质量分别不超过 $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ 与 $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$（这是精确概率不等式，而非分形维数或熵值公式）；其二是与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5 一脉相承的有限竞技场信息逃逸率判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，它证明在基数 $q \ge 2$ 的非退化有限状态集上，观测目录 $S$ 无法区分的有序相异状态对集合 $E(S)$ 定义出归一化有理逃逸率 $e(S) = |E(S)|/[q(q-1)]$，而某项观测 $i$ 严格降低逃逸率当且仅当其唯一捕获对计数 $|U_i| > 0$（且差值恰为 $|U_i|/[q(q-1)]$）。有限有序逃逸对比例 $e(S)$、量子态冯·诺依曼熵 $S(\sigma_b)$ 与无限移位系统的遍历熵在数学定义上彼此独立，绝不可混为一谈。
 
