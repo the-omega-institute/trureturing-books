@@ -83,7 +83,7 @@
    - 与同章的实验卡分工：实验卡给能亲手推的情形，静态图给印刷版与 EPUB 也要看得见的构造；两者紧邻时不画同一个画面。
    - **章节里的图一律用 `::: {.figure}`** 引用脚本生成的静态图，不放手绘或直接嵌入的图片文件。
    - **媒体块不连排**：静态图、实验卡、视频不三块连排，相邻两块之间要隔着正文，每块紧跟在讲到它的那句话之后。
-6. **统计与派生产物统一刷新**：附录 C 的计数与声明索引、声明地图数据和五张统计图由 `./tbook sync --book quantum-geometry` 生成，构建前也会自动执行；`./tbook check` 只检查是否过期。修改正文、目录或钉版后运行同步，提交实际改变的输出。统计来源是正式出版解析器与锁文件；附录 C 的声明链接从引用统计输入排除，不手填总数、排名或重复实现计数规则。附录论述修改 `books/quantum-geometry/data/appendix-c.{zh,en}.md.in`，不直接改生成的章节；中英顺序与环境仍须逐条对齐。`data/declaration-serials.json` 保存稳定编号，不因增项重编号已有条目。地图缩略图与静帧由内容摘要判断是否重出，无变化时不启动浏览器；`.stills.json` 随图提交。已有画面未变且先前检查范围适用时复用画面证据，只对实际改变的画面补看；修改舞台、布局或数学行为时仍执行对应测试与看图。详见 `docs/project/STATISTICS.md`。
+6. **源文件入库，派生产物按需生成**：附录 C 的论述修改 `books/quantum-geometry/data/appendix-c.{zh,en}.md.in`，声明地图的程序与生成数据分开维护，五张统计图保留脚本。`./tbook sync --book quantum-geometry` 只生成统计 JSON、双语附录与地图 JSON；校验与构建先同步文本并绘制静态图，PDF/EPUB/站点发布再按消费者生成所需封面与静帧。SVG、幻灯片的 SVG 副本、统计快照、生成章节、地图 JSON、可视化封面/静帧与 `.stills.json` 不提交；书内 `.gitignore` 与 `[derived].outputs` 明确列出自有输出，`./tbook artifacts check` 阻止回流。统计仍来自正式解析器与锁文件，不手填计数。`data/declaration-serials.json` 是已发布身份源数据，保留原编号；只有显式运行 `python3 books/quantum-geometry/sync-statistics.py --register-serials` 才登记新增编号，普通构建不改写它。锁文件与模板基线继续提交。旧分支的生成文件修改/删除冲突保留删除，合并源文件后重建；不能把这一规则套到正文、稳定编号与锁文件。未变的画面证据按依赖复用，实际改变的画面仍执行对应测试与看图。详见 `docs/project/STATISTICS.md` 与 `docs/SOURCE-ONLY.md`。
 
 ## 7. 多智能体协同分工与五路并行工作流
 

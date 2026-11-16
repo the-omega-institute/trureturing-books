@@ -26,7 +26,7 @@
    - **执行载体**：一律直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**严禁派生 Claude Subagent**）。
    - **舞台优先**：按对象选舞台，舞台占页面主体；使用共享的实验室版式 `.app.lab` 与运行时 `theme/viz/{theme.css,shell.js,kit.js}`，不自造私有运行时、主题切换或非标徽章。
    - **按卡引用**：每张实验卡都是正文可引用的图（`::: {.viz src=… preset=…}`），中英文版本引用相同；PDF/EPUB 使用该卡的带标签静态图。
-   - **验收**：`stageFirstChecks` 与页面自己的独立核对全部通过；看过 `viz-shots` 的全部截图；封面与静态图已重新生成并提交。
+   - **验收**：`stageFirstChecks` 与页面自己的独立核对全部通过；看过 `viz-shots` 的全部截图；封面与静态图已在本地重新生成并验收，提交只含源文件。
 2. **讲解视频（`books/<slug>/films/<NNN>-<name>/`）对齐 `books/example-monograph/films/001-golden-deficit/`**
    - 固定包含 `film.json`、`script.json`、`scenes.js`、`poster.jpg`，由 `theme/film/film.sh` 渲染并执行 `FILM.init` 自检（0 `FILM_ERRORS`）。
 3. **演示文稿（`books/<slug>/slides/<deck>/`）对齐 `books/example-monograph/slides/overview/`**
@@ -76,3 +76,7 @@
    - 凡 `template.toml` `[managed].paths` 下的托管文件（构建脚本、测试套件、主题样式、内置 skills）均不在本书库私自修改。若发现上游模板缺陷，由 `codex-cli` 在独立的 `trureturing-books-template` 仓库并行提交修复 PR、合入并升级模板版本后，通过 `./tbook template update` 零冲突同步回本书库。
 3. **署名与零模型标识边界**
    - 除本工程工作流文档（`docs/project/WORKFLOW.md`）与 `PROJECT.md` 第 7 节如实记录多智能体协同分工外，**所有正式出版物文件**（`books/<slug>/**` 正文、图注、可视化与视频源码、代码注释、`site.toml`、根级 `README.md`）以及 **Git 提交说明与 PR 描述** 均严格执行零模型标识规则，仅署作者 `Auric` 之名。
+
+## 5. 源文件与生成结果的合并
+
+并行分支只提交正文、模板、脚本与原始素材；统计附录、地图 JSON、SVG、可视化封面与静帧留给本地和 CI 按输入重建。迁移前的分支若与已取消跟踪的输出冲突，保留删除，再合并源输入并运行受影响构建；不逐个合并生成文件。锁文件、声明稳定编号与模板同步基线仍按来源逐项审阅。合入前运行 `./tbook artifacts check`，防止旧分支把产物重新带回主干。
