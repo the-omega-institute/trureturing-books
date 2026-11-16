@@ -123,8 +123,8 @@ section: "第一部 · 依据"
   <div class="g2 mt">
     <div class="card violet">
       <h4>文献结果 · 第二章</h4>
-      <h3>格里森定理与无穷维的布施定理</h3>
-      <p>本书在有限维证明了“效应上可加的概率必是迹配对”；维数不低于 3 的格里森定理与无穷维情形只作文献引用，未在本书形式化。</p>
+      <h3>实空间与无穷维的格里森—布施定理</h3>
+      <p>本书在有限维验证了效应可加性推出迹配对，并在复维数不低于 3 时验证了正交投影可加性的格里森表示；实希尔伯特空间与无穷维闭子空间、效应情形只作文献引用，未在本书形式化。</p>
     </div>
     <div class="card violet">
       <h4>文献结果 · 第四章</h4>
@@ -320,14 +320,14 @@ section: "第四部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 13.10 · Corollary 13.8</p>
+  <p class="kicker">Theorem 13.11 · Corollary 13.9</p>
   <h2 class="t">经典折线封顶于 <em>2</em>，固定的 CHSH 算子封顶于 <em>2√2</em></h2>
-<TheoremCard class="compact mt-s" label="定理13.10" title="有限确定性局域纤维模型的 CHSH 绝对值上界恰为 2" gid="D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_bound_is_exact" cite="thm-classical-chsh-bound-exact">
+<TheoremCard class="compact mt-s" label="定理13.11" title="有限确定性局域纤维模型的 CHSH 绝对值上界恰为 2" gid="D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_bound_is_exact" cite="thm-classical-chsh-bound-exact">
 
 设 $\mu$ 是有限纤维上的非负归一权重。对每个确定性纤维模型，$\lvert\operatorname{classicalCHSH}(\mu, \mathrm{model})\rvert \le 2$，且 $2$ 是这些绝对值组成的集合的最大元。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="推论13.8" title="固定双比特 CHSH 算子的最大期望值为 2√2" gid="D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest" cite="cor-fixed-chsh-tsirelson">
+<TheoremCard class="compact mt-s" label="推论13.9" title="固定双比特 CHSH 算子的最大期望值为 2√2" gid="D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest" cite="cor-fixed-chsh-tsirelson">
 
 在全体双比特量子态 $\rho$ 上，$\operatorname{Re}\operatorname{Tr}(\rho \cdot \mathrm{chshOperator})$ 的取值集合以 $2\sqrt2$ 为最大元：有态取到 $2\sqrt2$，且对一切态不超过 $2\sqrt2$。
 

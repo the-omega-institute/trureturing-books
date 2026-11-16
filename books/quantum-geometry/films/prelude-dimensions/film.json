@@ -1,0 +1,26 @@
+{
+  "title": "Understand the Shadow: From a Disc to a Line",
+  "title_zh": "先看懂影子：从圆盘到一条线",
+  "summary": "A disc turns steadily on a table with a peg at its rim. Seen from above it is a whole flat surface; seen edge-on, in a straight projection, the disc's shadow is a fixed segment and the peg's shadow a point at x = cos θ, racing through the middle and stopping at the ends. Measured in units of the peg's speed, the shadow's velocity is −sin θ, which vanishes at both ends. At 90° and 270° the two shadows coincide at x = 0 yet head opposite ways, and fifteen degrees later they split apart: the same shadow position does not mean the same state. Lifting the eye restores y = sin θ. A classical illustration of lost information for the prelude, not a derivation of quantum mechanics; no Lean result is cited.",
+  "summary_zh": "桌上的圆盘匀速转动，边缘立着一根木桩。从上往下看，它始终是一整张平面；贴着桌面看（按正交投影建模），圆盘的影子是一段固定的线段，木桩的影子是线段上 x = cos θ 处的一个点：在中间飞快穿过，在两端停住掉头。以木桩的恒定速度为单位，影子的速度是 −sin θ，在两端为零。在 90° 与 270°，两个影子都落在 x = 0，跑向却相反；再前进 15°，它们立刻分开：影子的位置相同，并不代表原来的状态相同。抬起视线，y = sin θ 就回来了。这是为序曲准备的经典的信息丢失示意，不是对量子力学的推导；片中不引用任何 Lean 结果。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-16",
+  "duration": "2:14",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · one turning disc seen from above and edge-on, the shadow of a peg, a lifted view",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_prelude-dimensions_720p_narrated.mp4",
+    "cover": "quantum-geometry_prelude-dimensions_cover.jpg"
+  }
+}

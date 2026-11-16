@@ -181,6 +181,46 @@ which equals $\frac{2}{3}$ for $j = k$ and $\frac{2}{3}\cdot\frac{1}{4} = \frac{
 
 The state space of a qubit is a whole sphere, with a continuum of points on it; yet only two of them at a time can serve as records that are read back without error. An "existence line" may point in any direction, but the number of slots in the ledger is set by the dimension.
 
+As noted at the opening of this chapter, specifying an effect family $\{E_a\}$ alone (such as the trine POVM $\sum_k E_k = I$ above) fixes outcome weights without specifying post-measurement branch operators; in general operational protocols, both the outcome probabilities under setting $x$ and the unnormalized post-measurement transformations for outcome $a$ are jointly encoded by a **finite Kraus quantum instrument** $\{K_{x,a,k}\}$. Check the relation between branch trace and effect Born pairing first on a $2 \times 2$ diagonal example: take the two-outcome single-Kraus diagonal operators and diagonal state
+
+$$
+K_0 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, \qquad K_1 = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}, \qquad \rho = \begin{pmatrix} 1/3 & 0 \\ 0 & 2/3 \end{pmatrix}.
+$$
+
+Completeness $K_0^* K_0 + K_1^* K_1 = I_2$ holds immediately; for the first outcome $a = 0$, the unnormalized branch matrix is $K_0 \rho K_0^* = \operatorname{diag}(1/3, 0)$ with trace $1/3$, matching the Born pairing $\Tr(\rho K_0^* K_0) = 1/3$ of the induced effect $E_0 = K_0^* K_0 = \operatorname{diag}(1, 0)$.
+
+In the Lean module `Quantum/Measurement/FiniteKrausInstrumentBornMarginal`, the input state is typed as `DensityState n` (the subtype of $C^*$-matrices `CStarMatrix n n ℂ` satisfying $0 \le \rho$ and $\Tr(\rho) = 1$, unwrapped to a standard complex matrix $\mathrm{state} \in M_n(\mathbb{C})$ via `CStarMatrix.ofMatrix.symm`), while the right-hand side evaluates the $\mathbb{C}$-valued trace pairing $\operatorname{bornProbability}(\mathrm{state}, \mathrm{effect}) = \Tr(\mathrm{state}\cdot\mathrm{effect}) \in \mathbb{C}$ of [Chapter 2](ch02-born-rule.md), [@def-born-probability]:
+
+::: {.theorem #thm-kraus-born-marginal title="Born Marginal of a Finite Kraus Instrument" lean="D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal.finite_kraus_instrument_born_marginal"}
+Let $n$ be a nonempty finite dimension index type with decidable equality (`[Fintype n] [Nonempty n] [DecidableEq n]`), let $\mathrm{Setting}$ be a measurement-setting type, and let $\mathrm{Outcome}$ and $\mathrm{Kraus}$ be finite index types (`[Fintype Outcome] [Fintype Kraus]`). Let
+
+$$
+\mathrm{instrumentKraus} : \left\{K : \mathrm{Setting} \to \mathrm{Outcome} \to \mathrm{Kraus} \to M_n(\mathbb{C}) \;\middle|\; \forall x,\; \sum_{a \in \mathrm{Outcome}} \sum_{k \in \mathrm{Kraus}} (K_{x,a,k})^* K_{x,a,k} = I\right\}
+$$
+
+be a normalized finite Kraus instrument, and let $\rho : \operatorname{DensityState}(n)$. Then for every setting $x : \mathrm{Setting}$ and every outcome $a : \mathrm{Outcome}$, defining
+
+$$
+\begin{aligned}
+\mathrm{state} &:= \operatorname{CStarMatrix.ofMatrix}^{-1}(\rho.1) \in M_n(\mathbb{C}), \\
+\mathrm{branch} &:= \sum_{k \in \mathrm{Kraus}} K_{x,a,k}\,\mathrm{state}\,(K_{x,a,k})^* \in M_n(\mathbb{C}), \\
+\mathrm{effect} &:= \sum_{k \in \mathrm{Kraus}} (K_{x,a,k})^* K_{x,a,k} \in M_n(\mathbb{C}),
+\end{aligned}
+$$
+
+one has the complex matrix-trace equality
+
+$$
+\Tr(\mathrm{branch}) = \operatorname{bornProbability}(\mathrm{state}, \mathrm{effect}).
+$$
+:::
+
+::: proof
+Unfold the three `let` bindings `state`, `branch`, and `effect` together with $\operatorname{bornProbability}(\mathrm{state}, \mathrm{effect}) = \Tr(\mathrm{state} \cdot \mathrm{effect})$ from [@def-born-probability]. By linearity of `Matrix.trace` across the finite sum over `Kraus`, the left-hand side expands to $\sum_{k \in \mathrm{Kraus}} \Tr\bigl(K_{x,a,k}\,\mathrm{state}\,(K_{x,a,k})^*\bigr)$. Applying matrix multiplication associativity and trace cyclicity $\Tr(AB) = \Tr(BA)$ term by term rewrites each summand as $\Tr\bigl(\mathrm{state}\cdot (K_{x,a,k})^* K_{x,a,k}\bigr)$. Recombining the finite sum via trace linearity and left distributivity of multiplication by $\mathrm{state}$ yields $\Tr\bigl(\mathrm{state}\sum_{k \in \mathrm{Kraus}} (K_{x,a,k})^* K_{x,a,k}\bigr) = \operatorname{bornProbability}(\mathrm{state}, \mathrm{effect})$. The full proof is checked by the Lean kernel.
+:::
+
+Three formal boundaries apply when reading [@thm-kraus-born-marginal]: first, both $\Tr(\mathrm{branch})$ and $\operatorname{bornProbability}(\mathrm{state}, \mathrm{effect})$ are $\mathbb{C}$-valued traces here, with no `.re` projection inserted into the statement; second, $\mathrm{branch}$ is an **unnormalized** post-measurement branch matrix rather than a normalized conditional state, and cannot be normalized at zero-probability outcomes without a nonzero-trace check; third, this theorem establishes the exact trace compatibility between finite Kraus branches and their summed POVM effects rather than a uniqueness derivation of Born's rule.
+
 ## 3.2 The Inseparable Fate of Line and Plane (Hodge Duality) {#sec-ch03-2}
 
 Yet driving a one-dimensional idempotent axis into a three-dimensional sphere carries an immediate geometric consequence: it automatically singles out an inseparable twin.

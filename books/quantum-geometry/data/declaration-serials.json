@@ -1,8 +1,8 @@
 {
   "next": {
-    "T": 355,
+    "T": 390,
     "D": 161,
-    "R": 182
+    "R": 184
   },
   "serials": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": "T001",
@@ -694,6 +694,43 @@
     "D5/S3/Quantum/Subentropy/QubitBoundary.qubit_subentropy_near_pure": "T351",
     "D5/S3/TotalVariation/ParryBilateralLaw.bilateral_reset_coding": "T352",
     "D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.failure_count_le": "T353",
-    "D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction": "T354"
+    "D5/S0/Observation/BoundedPowerTraceCRTRecovery.power_trace_unique_of_crt_image": "T354",
+    "D5/S1/Ledger/GenerationArrowOfTime.length_strictly_increases_under_generation": "T355",
+    "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmicCharge_eq_zero_iff": "T356",
+    "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmic_charge_conservation": "T357",
+    "D5/S1/Solenoid/ThroatTransitionCocycle.three_lift_difference_cocycle": "T358",
+    "D5/S3/Observer/Agency/PublicRecoveryCriterion.public_recovery_criterion": "T359",
+    "D5/S3/ObserverMemory/RefinementClosure/FiniteHorizonKernelRecurrence.finite_horizon_stabilizes_at_completionDepth": "T360",
+    "D5/S3/ObserverMemory/RefinementClosure/PredictiveMemoryMinimalQuotient.predictive_memory_minimal_quotient": "T361",
+    "D5/S3/ObserverMemory/Trajectories/CurrentReadoutRecovery.recover_current_readout": "T362",
+    "D5/S3/PrimeObserver/ProjectiveMemory/GoldenProjectiveMultiplier.projective_defect_modal_step": "T363",
+    "D5/S3/PrimeObserver/ThreeCompletionFinalProposition.prime_observer_three_completion_final_proposition": "T364",
+    "D5/S3/Quantum/Codes/MajoranaFourteenModeDistanceFour.result": "T365",
+    "D5/S3/Quantum/Contextuality/LinearDoilyNegativeLineParity.result": "T366",
+    "D5/S3/Quantum/Contextuality/SteeringEllipsoidFThreeThreshold.result": "T367",
+    "D5/S3/Quantum/Divergence/GeneralConvexReverseTestAttainment.original_reverse_test_extended_attainment": "T368",
+    "D5/S3/Quantum/Entanglement/PartialTransposeSaturation/Classification.result": "T369",
+    "D5/S3/Quantum/Foundation/ExclusionBallFaces.exclusion_ball_faces": "T370",
+    "D5/S3/Quantum/Foundation/HermitianExclusionBall.all_pure_charts": "T371",
+    "D5/S3/Quantum/Magic/CliffordThirdMomentNegativity.result": "T372",
+    "D5/S3/Quantum/Magic/QubitWignerDeficitFactorRefutation.result": "T373",
+    "D5/S3/Quantum/Magic/QubitWignerDistanceTensorRules.resultEquatorial": "T374",
+    "D5/S3/Quantum/Matrix/BuresWassersteinTransport.finite_barycenter_of_dual": "T375",
+    "D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal.finite_kraus_instrument_born_marginal": "T376",
+    "D5/S3/Quantum/ObserverCommutator.observer_read_update_commutator_formula": "T377",
+    "D5/S3/Quantum/OriginExclusionSegmentRigidity.b_constraint_recenter": "T378",
+    "D5/S3/Quantum/PointerBasis.fourier_phase_damping_fixed_iff": "T379",
+    "D5/S3/Quantum/Recovery/KrausCompletion.complete_quantum_channel": "T380",
+    "D5/S3/Quantum/SorkinThirdOrder.sorkin_third_order_cancellation": "T381",
+    "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences": "T382",
+    "D5/S3/Quantum/Subentropy/POVMGram.cq_conditional_subentropy_guessing": "T383",
+    "D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSDensityRecovery.observable_chart_phase_recovery": "T384",
+    "D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSInteriorGenericity.intrinsic_interior_recovery": "T385",
+    "D5/S3/Resource/SeparableConeResidualWitness.separable_cone_residual_witness": "T386",
+    "D5/S3/Quantum/QPECircularTail.reciprocal_square_shifted_finite_tail_le": "R182",
+    "D5/S3/Quantum/ShorCountingMarginal.shor_phase_accuracy_bound": "R183",
+    "D5/S3/TotalVariation/ParryBilateralLaw.bilateral_parry_law": "T387",
+    "D5/S3/TotalVariation/ParryBilateralMixing.bilateral_parry_mixing": "T388",
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction": "T389"
   }
 }

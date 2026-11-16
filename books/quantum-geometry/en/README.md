@@ -70,7 +70,7 @@ Now put those two moments side by side and advance them slightly to check your u
 
 For now, “mistaking a plane for a line” means just this: **reading planar motion through a one-dimensional projection loses information.** Once that is clear, you can continue without first accepting the physical and philosophical interpretations that follow. The video walks through the same turntable example again.
 
-::: {.film src="011-prelude-dimensions"}
+::: {.film src="prelude-dimensions"}
 **Understand the Shadow: From a Disc to a Line.** Follow the peg around the circle, watch its shadow move back and forth, then compare two passages through the centre in opposite directions. English narration with Chinese and English subtitles.
 :::
 
@@ -239,7 +239,7 @@ The violet bar counts only literature remarks and examples. Results explicitly m
 | Badge / Visual Cue | Semantic Color | Exact Meaning |
 | :--- | :--- | :--- |
 | `LEAN ✓` badge | Green | Reserved exclusively for formal `theorem`, `lemma`, `proposition`, and `corollary` items whose cited declarations are kernel-verified and frozen with kind `theorem` in [trureturing](https://github.com/the-omega-institute/trureturing) (`dev` branch at the pinned commit). Clicking the badge or declaration footer jumps to the exact Lean source line. |
-| Classical literature note | Neutral frame (`remark` / `example`) | Proved results from the mathematical-physics literature not formalized in this book's pinned repository (such as Gleason's theorem) are placed in `remark` or `example` blocks and explicitly labeled *Literature result, not formalized in this book*. |
+| Classical literature note | Neutral frame (`remark` / `example`) | Proved results from the mathematical-physics literature not formalized in this book's pinned repository (such as the Jordan–von Neumann parallelogram converse or Gleason's theorem on infinite-dimensional projection lattices) are placed in `remark` or `example` blocks and explicitly labeled *Literature result, not formalized in this book*. |
 | Written-proof badge | Violet | When the source supplies a proof and no matching frozen declaration exists, a theorem environment explicitly carries `status="written-proof"`, a complete proof in each edition, a DOI or source repository, a source locator, and a registered formalization request. It carries no `lean` attribute and does not count as Lean verification. |
 | `OPEN` badge | Red | Reserved for unresolved `conjecture` and `problem` environments, which never carry a Lean citation. |
 | Observer focus / active state | Amber | Used in figures and UI elements solely to mark the observer's currently selected measurement axis or active reading position. |

@@ -36,7 +36,7 @@
 
    - **跨视角客观共识的公共因子判据**：抽象诠释不动点定理证明，不同语境参数可选出不同不动点（[`context_parameters_can_select_distinct_fixed_points`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points)），而任何携带跨语境客观一致性承诺 `ObjectiveInterpretationClaim` 的声明，必然穿过一个对全体语境恒定的公共因子 `commonFactor`（[`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)，`LEAN ✓`，见 [第 33 章](ch33-all-beings-observers-and-mutual-attractors.md) [@thm-ch33-contextual-attractor-and-common-factor]）。
 3. **形式化边界声明**：
-   上述三条 `LEAN ✓` 定理分别刻画本征态定态、系综非选择性捏合幂等与携带不变性义务的公共因子提取；它们本身**不推导**单次实验为何涌现唯一经典结果，也**不消解** FR 协议在附加单次结果公设下的张力——将“坍缩”重构为内生观察者沿自身基底的相对投影属于本书诠释模型（`MODEL`）。
+   上述三条 `LEAN ✓` 定理分别刻画本征态定态、系综非选择性捏合幂等与携带不变性义务的公共因子提取；它们本身**不推导**单次实验为何涌现唯一经典结果，也**不消解** FR 协议在附加单次结果公设下的张力——将“坍缩”重构为内生观察者沿自身基底的相对投影属于本书诠释模型（`MODEL`；单次选支边界与物理因果干预对照被动基轴旋转的系统审计见[第 34 章 §34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–[§34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy) 与 [@prob-ch34-single-outcome-realization]）。
 :::
 
 在实验台的第一张专题卡中，我们可以直接对比密封实验室内部的局部记录捏合与门外维格纳掌握完整联合自由度时的幺正可逆视角：
@@ -63,7 +63,7 @@
      $$
 
 3. **形式化边界声明**：
-   局部表观不可逆在形式上只是受限观察者未能访问环境记录分支所致的**访问缺陷**（注意：上述 $r^2 + \tau_{L:E} = 1$ 是针对该有效秩二纯二分模型的初等手工推导，并非由 `complementary_context_probability_pythagoras` 直接证出的一般多体混态单配等式）；至于为何第一人称经验只驻留于单根记忆分支（或以伪随机数 $\xi < p$ 抽样模拟单次读数），仍属经验公设或诠释模型（`MODEL`），绝不伪称为偏迹定理的逻辑推论。
+   局部表观不可逆在形式上只是受限观察者未能访问环境记录分支所致的**访问缺陷**（注意：上述 $r^2 + \tau_{L:E} = 1$ 是针对该有效秩二纯二分模型的初等手工推导，并非由 `complementary_context_probability_pythagoras` 直接证出的一般多体混态单配等式）；至于为何第一人称经验只驻留于单根记忆分支（或以伪随机数 $\xi < p$ 抽样模拟单次读数），仍属经验公设或诠释模型（`MODEL`；关于确定性双稳漂移违背玻恩频率的反例 [@ex-ch34-bistable-born-countermodel]、有界鞅击中律守恒 $p_0$ 的基准算例 [@ex-ch34-martingale-selection-benchmark] 及开放问题 [@prob-ch34-single-outcome-realization]，详见[第 34 章 §34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)），绝不伪称为偏迹定理的逻辑推论。
 :::
 
 以标志角 $\theta = 30^\circ$（$p = 3/4$）为例，当环境完全相干（$\gamma \to 1$）时四元读数 $(r^2, \tau_{L:E}, C, V) = (1, 0, 3/8, \sqrt{3}/2)$，而当环境规模推至 $N = 10^6$（$\gamma \to 0$）时精确过渡为 $(1/4, 3/4, 0, 0)$（`手工推导` / `NUM`）：
@@ -75,13 +75,13 @@
 ### D.2.3 玻恩定则 $|\psi|^2$ 与复希尔伯特空间 $\mathbb{C}$ 的起源 {#sec-appendix-d-puzzle-3}
 
 ::: {.remark #rem-appendix-d-puzzle-3 title="难题三：玻恩模平方定则与复数结构的几何起源（文献结果、Lean 锚点、手工推导与模型对勘）"}
-**文献结果，未在本书形式化（针对格里森定理、约当—冯·诺依曼逆定理与实量子力学网络实验证伪；平行四边形正定理、秩一模平方、共同相位不变多项式、复结构平方与罗伯逊—薛定谔分解见下引 `LEAN ✓` 链接）。**
+**文献结果，未在本书形式化（针对二维纯投影格反例、更广实空间与无限维闭子空间上的格里森定理、约当—冯·诺依曼逆定理及实量子力学网络实验证伪；有限复维 $N \ge 3$ 星投影格里森表示、有限维布施效应表出、二次权重三阶干涉消去，以及平行四边形正定理、秩一模平方、共同相位不变多项式、复结构平方与罗伯逊—薛定谔分解见 [第 2 章](ch02-born-rule.md) 形式化定理及下引 `LEAN ✓` 链接）。**
 
-1. **主流物理困境（`文献结果`）**：
-   - **不等幅叠加与模平方公设之谜**：为何概率偏偏等于复振幅的**二阶模平方** $\lvert\psi\rvert^2$ 而非 $\lvert\psi\rvert$ 或 $\lvert\psi\rvert^4$？在多世界诠释中，若叠加态取不等幅形式（如希尔伯特基夹角 $\theta = 30^\circ$），两分支都在演化中“100% 发生”，仅凭分支计数（$1:1$）无法解释 $3/4$ 与 $1/4$ 的统计权重偏差；格里森定理（Gleason 1957）虽从维数 $d \ge 3$ 闭子空间投影格可加性推出迹规则，却无法直接覆盖单比特 $d = 2$ 面板，且同样预设了内积空间结构（范数还原内积的充要条件来自 Jordan & von Neumann 1935 平行四边形逆定理）。
+1. **主流物理困境与认识论边界（`LEAN ✓` 有限维锚点对比 `文献结果` 更广范围）**：
+   - **不等幅叠加、模平方公设与格里森—布施范围分层**：为何概率偏偏等于复振幅的**二阶模平方** $\lvert\psi\rvert^2$ 而非 $\lvert\psi\rvert$ 或 $\lvert\psi\rvert^4$？在多世界诠释中，若叠加态取不等幅形式（如希尔伯特基夹角 $\theta = 30^\circ$），两分支都在演化中“100% 发生”，仅凭分支计数（$1:1$）无法解释 $3/4$ 与 $1/4$ 的统计权重偏差。在投影与效应测度一侧，有限复维 $N \ge 3$ 的星投影赋值表示已由 [第 2 章](ch02-born-rule.md) 的有限复投影格里森定理验证（[@thm-gleason-finite-projection]，`LEAN ✓`），该定理预设同一实值赋值在全部星投影上的非负性、单位归一与正交可加性；二维纯投影格不在其范围内（$d = 2$ 纯投影标架上存在半球函数与光滑奇三次反例），二维及一般有限维效应域应引用已验证的有限维布施效应表出定理（[@thm-busch-effect-density]，`LEAN ✓`）。至于更广的可分实希尔伯特空间与无限维闭子空间投影格上的格里森定理（Gleason 1957，`文献结果`），不能由上述有限矩阵声明代替，且这些表出定理均预设了底层内积空间结构（由一般赋范空间还原内积的充要条件来自 Jordan & von Neumann 1935 平行四边形逆定理，`文献结果`）。
    - **复数域 $\mathbb{C}$ 的网络实验证伪边界**：为何量子态必须取复数而非纯实数振幅？2021 年 Renou 等人在独立纠缠源与标准局域张量积复合公设下提出三节点纠缠交换量子网络贝尔判据（M.-O. Renou et al., *Nature* **600**, 625–629, 2021），随后由超导与光子实验团队分别完成实验验证（M.-C. Chen et al., *Phys. Rev. Lett.* **128**, 040403, 2022；Z.-D. Li et al., *Phys. Rev. Lett.* **128**, 040402, 2022），证伪了满足该局域复合框架的标准实希尔伯特空间量子理论（注：这并不排除放弃局域张量复合公设的非定域实表示重构）。
 2. **正交开维几何对勘（`LEAN ✓` + `MODEL`）**：
-   - **平行四边形正定理与秩一模平方约化**：如 [第 31 章](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion) 所示，实内积空间恒满足平行四边形正定理（[`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law)，`LEAN ✓`），且秩一投影与纯态外积的 `recordWeight` 精确归约为重叠模平方 $\lVert\langle\varphi,\psi\rangle\rVert^2$（[`rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction)，`LEAN ✓`）。
+   - **平行四边形正定理、秩一模平方约化与三阶干涉消去**：如 [第 31 章](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion) 所示，实内积空间恒满足平行四边形正定理（[`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law)，`LEAN ✓`），且秩一投影与纯态外积的 `recordWeight` 精确归约为重叠模平方 $\lVert\langle\varphi,\psi\rangle\rVert^2$（[`rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction)，`LEAN ✓`）；同时，[第 2 章](ch02-born-rule.md) 的 [@thm-sorkin-quadratic-cancellation]（`LEAN ✓`）证明两两不交有限分支集合上的二次振幅权重必然令索金三阶多缝干涉余项恒等于零 $I_3 = 0$（注意这只是从二次权重到 $I_3 = 0$ 的正向代数推论，不能单凭 $I_3 = 0$ 或两两公平反推玻恩定则唯一性；而从排斥球面极对偶与自旋因子重构有限维态锥的几何路线，详见 [附录 F](appendix-f.md)）。
    - **共同相位不变多项式的二次厄米锁定**：在有限指标复共轭多项式代数上，消除外部全局相位零点的共同 $U(1)$ 相位不变性当且仅当每个非零单项式全纯与反全纯次数平衡（$p = q$），非常数不变可观测量的最低总次数满足 $\ge 2$，且二阶实值齐次不变可观测量唯一对应厄米二次型 $z^\dagger H z$（[`complete_common_phase_polynomial_theorem`](lean:D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem)，`LEAN ✓`，[@thm-ch31-phase-polynomial-quadratic]）。
    - **反自伴幺正复结构与测不准反弹**：任何兼具反自伴性 $R^{\mathrm{H}} = -R$ 与幺正性 $R R^{\mathrm{H}} = I$ 的有限维矩阵必满足 $R^2 = -I$（[`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary)，`LEAN ✓`），而单基平方折叠相位后，对称线性算符 $A, B$ 的方差乘积精确满足四重罗伯逊—薛定谔恒等式（[`robertson_schrodinger`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger)，`LEAN ✓`）：
 
@@ -171,7 +171,7 @@
      S_{\mathrm{vN}}\bigl(\rho(k + 1)\bigr) - S_{\mathrm{vN}}\bigl(\rho(k)\bigr) = D\bigl(\widetilde{\rho}_k \mathrel{\Vert} \operatorname{basisPinchingState}(\widetilde{\rho}_k)\bigr) \ge 0, \qquad \lVert\operatorname{id} - P_S\rVert = 1 \quad (S^\perp \neq \perp).
      $$
 
-   - **有限竞技场观测视界与 `EscapePairs` 捕获判据**：在非退化有限竞技场上，并入新观测接口严格降低逃逸率当且仅当其有序唯一捕获对计数严格为正（[`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，`LEAN ✓`）。在十六态竞技场 $\{0, 1\}^4$ 算例（`NUM`）中，仅读前三比特 $b_0, b_1, b_2$ 会留下 $8$ 条二元简并纤维（$16$ 个有序 `EscapePairs`，模型逃逸熵 $H_2^{\mathrm{escape}} = 1\,\text{bit}$）；并入冗余读出 $b_0 \oplus b_1$ 捕获数为 $0$，而并入全局奇偶新轴 $b_0 \oplus b_1 \oplus b_2 \oplus b_3$ 则唯一捕获全部 $16$ 对（注：该有限组合算例绝不等同于贝肯斯坦—霍金黑洞熵推导）：
+   - **有限竞技场观测视界与 `EscapePairs` 捕获判据**：在非退化有限竞技场上，并入新观测接口严格降低逃逸率当且仅当其有序唯一捕获对计数严格为正（[`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，`LEAN ✓`）。在十六态竞技场 $\{0, 1\}^4$ 算例（`NUM`）中，仅读前三比特 $b_0, b_1, b_2$ 会留下 $8$ 条二元简并纤维（$16$ 个有序 `EscapePairs`，模型逃逸熵 $H_2^{\mathrm{escape}} = 1\,\text{bit}$）；并入冗余读出 $b_0 \oplus b_1$ 捕获数为 $0$，而并入全局奇偶新轴 $b_0 \oplus b_1 \oplus b_2 \oplus b_3$ 则唯一捕获全部 $16$ 对（注：该有限组合算例绝不等同于贝肯斯坦—霍金黑洞熵推导；关于有限寄存器预测蒸馏与过去假设、宇宙学常数 $\Lambda_{\mathrm{cos}}$ 反循环审计，另见[第 34 章 §34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning)–[§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor) 及 [@prob-ch34-past-hypothesis-and-cosmological-constant]）：
 
      $$
      \operatorname{EscapeRate}(b_0, b_1, b_2) = \frac{16}{16 \times 15} = \frac{1}{15}, \qquad \operatorname{EscapeRate}(b_0, b_1, b_2, b_0 \oplus b_1 \oplus b_2 \oplus b_3) = 0.
@@ -205,8 +205,8 @@
 | **多世界诠释（MWI）** *(Everett, Deutsch, Wallace)* | **无物理坍缩**；宇宙全局永远严格遵循线性薛定谔方程，退相干使平行记录分支互不干涉地并存 | **强 $\psi$-实体论**；高维希尔伯特空间态矢量即全部物理实在，局域幺正耦合下无超距坍缩 | **本体论无限分支膨胀**；在不等幅叠加（如 $\theta = 30^\circ$ 预示条件下的 $75\% / 25\%$）中推导主观玻恩概率仍需额外决策论或自定位假设 |
 | **德布罗意—玻姆导航波** *(de Broglie, Bohm, Bell)* | **无物理坍缩**；粒子始终拥有确定位置构型，测量只是粒子顺从导航场滑入某支不重叠波包通道 | **双重实在**（真实导航波 $+$ 确定粒子轨道），属于显式**非定域隐变量理论**且需假定量子平衡分布 $\lvert\psi\rvert^2$ | **洛伦兹协变性棘手**；多粒子引导方程依赖特权同时面叶状剖分，推广至相对论手性费米子量子场论面临严峻困难 |
 | **客观坍缩理论（GRW / Penrose）** *(Ghirardi, Rimini, Weber; Penrose)* | **真实随机非线性坍缩**；修改薛定谔方程，引入自发定域化速率 $\lambda$ 或引力自能阈值触发物理坍缩 | **物理场实体论**；微观单粒子极难坍缩而宏观刚体因自由度数目放大迅速定域化 | **引入唯象新常数且实验尚未证实**；在典型参数 $\lambda = 10^{-16}\,\mathrm{s}^{-1}, t = 1\,\mathrm{s}$ 下，$N = 10^6$ 时触发率仅 $q \approx 10^{-10}$（需近阿伏伽德罗尺度 $N \sim 10^{23}$ 方瞬时坍缩），且有微小能量不守恒与相对论协变难题 |
-| **量子贝叶斯 / 关系量子力学** *(Fuchs, Caves, Schack; Rovelli)* | **无客观全局坍缩**；状态更新只是特定主体（Agent）或物理子系统在交互后对关联记录的条件贝叶斯修正 | **极端 $\psi$-认知论或纯关系态**；不存在脱离特定观察者或交互子系统的绝对宇宙状态 | **客观共识机制受质疑**；若一切状态皆相对特定主体，需额外交互相容公设解释为何不同宏观观察者总能核对出同一份实验室记录 |
-| **正交自指与开放维度几何观** *(本书模型 MODEL + 局部 LEAN ✓ 锚点)* | **内生正交投影与未追踪分支访问缺陷**；撤除外部第 3 点 $C$，以有限记录幂等捏合与公共因子刻画局部读出，单次抽样显式标为经验公设 | **内生自指关系振幅**；纠缠驻留于正交关联扇区而单边边缘恒保持 $I_2/2$ 无信令，时间被诠释为突破有限克雷洛夫饱和的正交维度扩张 | **形式锚点与物理动力学严格分界**：`LEAN ✓` 仅锁定有限维代数、多项式与组合逃逸骨架；单次结果涌现机制、相对论坍缩协变、开放维度物理动力学与黑洞蒸发仍属 `MODEL` 或 `OPEN`（[@prob-appendix-d-time-horizon]） |
+| **量子贝叶斯 / 关系量子力学** *(Fuchs, Caves, Schack; Rovelli)* | **无客观全局坍缩**；状态更新只是特定观察主体或物理子系统在交互后对关联记录的条件贝叶斯修正 | **极端 $\psi$-认知论或纯关系态**；不存在脱离特定观察者或交互子系统的绝对宇宙状态 | **客观共识机制受质疑**；若一切状态皆相对特定主体，需额外交互相容公设解释为何不同宏观观察者总能核对出同一份实验室记录 |
+| **正交自指与开放维度几何观** *(本书模型 MODEL + 局部 LEAN ✓ 锚点)* | **内生正交投影与未追踪分支访问缺陷**；撤除外部第 3 点 $C$，以有限记录幂等捏合与公共因子刻画局部读出，单次抽样显式标为经验公设 | **内生自指关系振幅**；纠缠驻留于正交关联扇区而单边边缘恒保持 $I_2/2$ 无信令，时间被诠释为突破有限克雷洛夫饱和的正交维度扩张 | **形式锚点与物理动力学严格分界**：`LEAN ✓` 仅锁定有限维代数、多项式与组合逃逸骨架；单次结果涌现机制、相对论坍缩协变、开放维度物理动力学、过去假设与黑洞蒸发仍属 `MODEL` 或 `OPEN`（[@prob-appendix-d-time-horizon]、[@prob-ch34-single-outcome-realization]、[@prob-ch34-past-hypothesis-and-cosmological-constant]） |
 
 在统一交互协议 `ORTHO//DUEL` 中，五种透镜（`copenhagen`、`many-worlds`、`pilot-wave`、`grw-collapse`、`ortho-open-dim`）共享同一套受控数值账本，切换透镜绝不篡改 $\theta, N, \beta$ 的客观算术读数；其中客观坍缩累积触发率 $q(N)$ 与局部捏合比特熵增 $\Delta S_{\mathrm{pinch}}$ 精确定义为（`NUM` / `手工推导`）：
 
@@ -218,7 +218,7 @@ $$
 
 - **测量链与自指观察者**：von Neumann（1932）《量子力学的数学基础》过程 I/II 区分；Wigner（1961）密封实验室朋友悖论；Frauchiger & Renner（*Nat. Commun.* 9, 3711, 2018）扩展主体推理相容性不可能性定理。
 - **环境诱导退相干与单一结果边界**：Zurek（*Rev. Mod. Phys.* 75, 715, 2003）环境超选择与指针基；Schlosshauer（*Rev. Mod. Phys.* 76, 1267, 2005）关于退相干本身不导出单一结果的系统评述。
-- **玻恩迹规则与复希尔伯特空间实验检验**：Jordan & von Neumann（*Ann. Math.* 36, 719, 1935）平行四边形逆定理；Gleason（*J. Math. Mech.* 6, 885, 1957）$d \ge 3$ 投影测度定理；Renou et al.（*Nature* 600, 625–629, 2021）独立局域张量源三节点网络判据与 Chen et al.（*Phys. Rev. Lett.* 128, 040403, 2022）、Li et al.（*Phys. Rev. Lett.* 128, 040402, 2022）的实验检验。
+- **玻恩迹规则与复希尔伯特空间实验检验**：Jordan & von Neumann（*Ann. Math.* 36, 719, 1935）平行四边形逆定理；Gleason（*J. Math. Mech.* 6, 885, 1957）可分实空间与无限维 $d \ge 3$ 闭子空间投影测度定理（有限复维 $N \ge 3$ 星投影情形已在 [第 2 章](ch02-born-rule.md) 验证为 [@thm-gleason-finite-projection]，有限维效应情形验证为 [@thm-busch-effect-density]，二次权重三阶干涉消去验证为 [@thm-sorkin-quadratic-cancellation]）；Renou et al.（*Nature* 600, 625–629, 2021）独立局域张量源三节点网络判据与 Chen et al.（*Phys. Rev. Lett.* 128, 040403, 2022）、Li et al.（*Phys. Rev. Lett.* 128, 040402, 2022）的实验检验。
 - **贝尔非定域性与相对论无信令**：Einstein–Podolsky–Rosen（1935）；Bell（*Physics* 1, 195, 1964）；Tsirelson（*Lett. Math. Phys.* 4, 93, 1980）量子上界 $2\sqrt{2}$；Eberhard（*Nuovo Cimento B* 46, 392, 1978）保迹局域操作无信令定理；Hensen et al.、Giustina et al.、Shalm et al.（2015）无漏洞贝尔实验。
 - **波函数本体模型与五大流派原始文献**：Harrigan & Spekkens（*Found. Phys.* 40, 125, 2010）$\psi$-ontic / $\psi$-epistemic 严格定义；Pusey–Barrett–Rudolph（*Nat. Phys.* 8, 475, 2012）制备独立性下非重叠定理；Everett（1957）、Bohm（1952）、Ghirardi–Rimini–Weber（1986）、Penrose（1996）、Rovelli（1996）与 Fuchs–Mermin–Schack（2014）。
 - **时间算符、量子引力冻结与黑洞视界**：Pauli（1933）半有界谱时间算符注记；DeWitt（*Phys. Rev.* 160, 1113, 1967）$\hat{H}\lvert\Psi\rangle = 0$ 约束；Hawking（1975）、Page（*Phys. Rev. Lett.* 71, 1291 & 3743, 1993）与 Almheiri–Marolf–Polchinski–Sully（*JHEP* 2013(2), 062）火墙单配性危机。
@@ -263,7 +263,7 @@ $$
 | D.18 | 难题六 | 幺正接计算基捏合轨迹相对熵产恒等式 | $\Delta S_{\mathrm{vN}}(k) = D(\widetilde{\rho}_k \mathrel{\Vert} \mathcal{P}(\widetilde{\rho}_k)) \ge 0$ 且有限 $N$ 拍严格裂项求和 | `LEAN ✓` ([`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity)；[第 8 章](ch08-erasure-and-time-arrows.md)、[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)) |
 | D.19 | 难题六 | 闭子空间非零正交补单位逃逸定理 | $S^\perp \neq \perp \implies \exists e \in S^\perp,\; \lVert e\rVert = 1 \land P_S e = 0 \land \lVert\operatorname{id}-P_S\rVert = 1$ | `LEAN ✓` ([`finite_layer_projection_escape`](lean:D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape)；[第 31 章](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)) |
 | D.20 | 难题六 | 有限竞技场降低逃逸率充要判据 | 非退化竞技场上 $\operatorname{LowersEscape}(\mathrm{idx}) \iff 0 < \operatorname{uniqueCaptureCount}(\mathrm{idx})$ | `LEAN ✓` ([`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)；[第 21 章](ch21-diagonalization-and-escape.md)、[第 31 章](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)) |
-| D.21 | 全部六题 | 量子基础经典文献定理与实验台显式手算 | 冯·诺依曼 / Wigner / FR、Zurek / Schlosshauer、Gleason ($d\ge 3$) / JvN / Renou et al. (2021) 与 Chen–Li (2022)、Bell / Eberhard / 2015 无漏洞实验、Harrigan–Spekkens / PBR (2012)、Pauli / Wheeler–DeWitt / Hawking–Page–AMPS；配预示条件 $75\%/25\%$、$r^2+\tau_{L:E}=1$、洛伦兹助推 $\Delta t'=-2\Gamma_\beta\beta$、GRW 放大率与 $\{0, 1\}^4$ 逃逸算例 | `文献结果` / `手工推导` / `NUM`（第 D.2–D.3 节各注记） |
+| D.21 | 全部六题 | 量子基础经典文献定理与实验台显式手算 | 冯·诺依曼 / Wigner / FR、Zurek / Schlosshauer、更广实空间与无限维 Gleason ($d\ge 3$；有限复维 $N\ge 3$ 星投影见 [@thm-gleason-finite-projection]，有限维效应见 [@thm-busch-effect-density]，二次权重 $I_3=0$ 见 [@thm-sorkin-quadratic-cancellation]) / JvN / Renou et al. (2021) 与 Chen–Li (2022)、Bell / Eberhard / 2015 无漏洞实验、Harrigan–Spekkens / PBR (2012)、Pauli / Wheeler–DeWitt / Hawking–Page–AMPS；配预示条件 $75\%/25\%$、$r^2+\tau_{L:E}=1$、洛伦兹助推 $\Delta t'=-2\Gamma_\beta\beta$、GRW 放大率与 $\{0, 1\}^4$ 逃逸算例 | `文献结果` / `手工推导` / `NUM`（第 D.2–D.3 节各注记；排斥球与自旋因子态锥重构见 [附录 F](appendix-f.md)） |
 | D.22 | 全附录综合 | 撤除外部第 3 点 $C$ 与开放维度时间诠释 | 将六大公理裂痕归因于外部裁判点 $C$ 与固定维闭合容器假设（**A74**），并将量子态诠释为内生关系振幅、时间诠释为正交维度扩张；协变坍缩与视界幺正性保留为开放前沿 | `MODEL` / `OPEN`（第 D.1–D.3 节、[@prob-appendix-d-time-horizon]） |
 
 :::

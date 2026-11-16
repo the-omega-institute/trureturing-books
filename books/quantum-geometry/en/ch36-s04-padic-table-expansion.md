@@ -175,6 +175,58 @@ We synthesize the four-stage evolution of prime table expansion alongside the ar
 | **4. Archimedean Carry Cliff** (Infinite continuum place $p_\infty$) | Clopen walls melt into the connected real line $\mathbb{R}$ ($\lvert\cdot\rvert_\infty$) | Local $+1$ ($511 + 1 = 512$) cascades across all $10$ bits, resetting to $K = 10$ | Ultrametricity fails; local increments contaminate global digits via carry ripples | Exact arithmetic twin of the $\theta = 90^\circ$ return-to-light amnesia loop, permanently blocked by Euclid's ladder |
 :::
 
+Before stepping into the full interactive laboratory, two kernel-verified theorems frozen in `trureturing` establish two further quantitative boundaries for the prime-observer program: first, how normalizing by the dominant golden mode $A$ accelerates the contraction of the **projective defect ratio** $\theta = D / A$ beyond the ambient stable root; second, where the exact domain boundaries lie among arithmetic prime-exponent encoding, analytic probability realizability, and quantum operator phase completion.
+
+Let us first check a single modal update by hand. Write $\varphi := \operatorname{Real.goldenRatio} = \frac{1 + \sqrt{5}}{2}$ and $\bar{\varphi} := \operatorname{Real.goldenConj} = \frac{1 - \sqrt{5}}{2} = -\varphi^{-1} \approx -0.618$. Starting at $(A, D) = (1, 1)$ with projective ratio $\theta = D / A = 1$, one golden modal update sends $(A, D)$ to $(A', D') = (\varphi A, \bar{\varphi} D) = (\varphi, -\varphi^{-1})$: whereas the ambient defect coordinate $D$ scales by $\bar{\varphi} = -\varphi^{-1} \approx -0.618$, the projective ratio scales by $\theta' = D' / A' = \bar{\varphi} / \varphi = -\varphi^{-2} \approx -0.382$! In `D5.S3.PrimeObserver.ProjectiveMemory.GoldenProjectiveMultiplier`, define the modal step $\operatorname{goldenModalStep}(A, D) := (\varphi A, \bar{\varphi} D)$, the projective defect $\operatorname{projectiveDefect}(A, D) := D / A$, the multiplier $\operatorname{goldenProjectiveMultiplier} := -(\varphi^{-1})^2 = -\varphi^{-2}$, and the forced step $\operatorname{forcedProjectiveStep}(\theta, \mathrm{forcing}) := \operatorname{goldenProjectiveMultiplier} \cdot \theta + \mathrm{forcing}$:
+
+::: {.theorem #thm-golden-projective-multiplier title="Golden Projective-Defect Multiplier" lean="D5/S3/PrimeObserver/ProjectiveMemory/GoldenProjectiveMultiplier.projective_defect_modal_step"}
+Let $A, D \in \mathbb{R}$ be real modal coordinates satisfying the explicit nonvanishing condition $h_A : A \neq 0$. Then an unforced golden modal step multiplies the projective defect ratio $D / A$ by $\operatorname{goldenProjectiveMultiplier} = -\varphi^{-2}$:
+
+$$
+\operatorname{projectiveDefect}\bigl(\operatorname{goldenModalStep}(A, D)\bigr) \;=\; \operatorname{goldenProjectiveMultiplier} \cdot \operatorname{projectiveDefect}(A, D).
+$$
+:::
+
+::: proof
+Unfolding $\operatorname{goldenModalStep}(A, D) = (\varphi A, \bar{\varphi} D)$ and $\operatorname{projectiveDefect}$ rewrites the left-hand side as $(\bar{\varphi} D) / (\varphi A)$. Substituting the conjugate identity $\bar{\varphi} = -\varphi^{-1}$ and rearranging the real fraction using $\varphi \neq 0$ together with the explicit hypothesis $A \neq 0$ yields $(\bar{\varphi} D) / (\varphi A) = (-\varphi^{-1} / \varphi) \cdot (D / A) = -(\varphi^{-1})^2 \cdot (D / A) = \operatorname{goldenProjectiveMultiplier} \cdot \operatorname{projectiveDefect}(A, D)$. The full proof is checked by the Lean kernel.
+:::
+
+Two scope guards apply to [@thm-golden-projective-multiplier]. First, the hypothesis $A \neq 0$ is mandatory because Lean's total division convention $D / 0 = 0$ carries no projective meaning. Second, the ambient stable root $\bar{\varphi} = -\varphi^{-1}$ must not be conflated with the projective ratio multiplier $-\varphi^{-2}$, and under the forced update $\theta' = -\varphi^{-2}\theta + \mathrm{forcing}$, zero defect $\theta = 0$ remains fixed only when $\mathrm{forcing} = 0$.
+
+Next, check by hand why diagonal probability records cannot recover relative quantum phase: in a two-level system, compare the equal superposition $\psi = \frac{1}{\sqrt{2}}(1, 1)$ with $\phi = \frac{1}{\sqrt{2}}(1, i)$—or directly take the frozen witness pair $\rho_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ and its Pauli-$Z$ phase-flipped partner $\rho_- = Z\rho_+ Z = \frac{1}{2}\begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}$ where $Z = \operatorname{diag}(1, -1)$. Both have the exact same computational-basis diagonal probabilities $(1/2, 1/2)$, yet their off-diagonal coherence entries differ ($+1/2$ versus $-1/2$), showing immediately that diagonal readouts lose relative quantum phase.
+
+In `D5.S3.PrimeObserver.ThreeCompletionFinalProposition` and its upstream modules, the three completion structures and refinement direction are defined as follows:
+
+1. **Arithmetic Prime-Exponent Bijection**: Let $\operatorname{PrimeExponentTable} := \{f : \mathbb{N} \to_0 \mathbb{N} \mid \forall p \in f.\operatorname{support},\, \operatorname{Nat.Prime}(p)\}$ be the type of finitely supported prime-exponent tables, and let $\operatorname{primeExponentLanguageEquiv} : \mathbb{N}_+ \simeq \operatorname{PrimeExponentTable}$ be the canonical prime-factorization equivalence `Nat.factorizationEquiv`;
+2. **Global Prime-Exponent Law Realizability**: For $s \in \mathbb{R}$, $p \in \operatorname{Nat.Primes}$, and $k \in \mathbb{N}$, set $\operatorname{primeExponentCode}(n, p) := n.\operatorname{factorization}(p.1)$ and $\operatorname{geometricPrimeMass}(s, p, k) := \operatorname{ENNReal.ofReal}\bigl((1 - p^{-s})\,p^{-ks}\bigr)$; a discrete probability mass function $q : \operatorname{PMF}(\mathbb{N})$ satisfies $\operatorname{RealizesPrimeExponentLaw}(s, q)$ iff $q(0) = 0$, the prime-exponent maps $(n \mapsto \operatorname{primeExponentCode}(n, p))_{p}$ are mutually independent (`iIndepFun`) under $q.\operatorname{toMeasure}$, and $q.\operatorname{toMeasure}\{n \mid \operatorname{primeExponentCode}(n, p) = k\} = \operatorname{geometricPrimeMass}(s, p, k)$ for every $(p, k)$;
+3. **Qubit Prime-Diagonal vs. Operator Languages and `Refines`**: On two-level density states $\operatorname{DensityState}(\operatorname{Fin} 2) := \{\rho : \operatorname{CStarMatrix}(\operatorname{Fin} 2)(\operatorname{Fin} 2)\,\mathbb{C} \mid 0 \le \rho \land \operatorname{Tr}\rho = 1\}$ valued in $\operatorname{QubitMatrix} := \operatorname{Matrix}(\operatorname{Fin} 2)(\operatorname{Fin} 2)\,\mathbb{C}$, the operator language $\operatorname{qubitOperatorLanguage}(\rho) := \rho.1$ retains the full $2 \times 2$ matrix, whereas $\operatorname{qubitPrimeDiagonalLanguage}(\rho) := \operatorname{primeDephasing}(\{()\}, \operatorname{qubitPrimeValuation}, \rho.1)$ applies the singleton-profile record channel separating computational-basis indices $0 \neq 1$ ($\operatorname{recordGram}_{ij} = \delta_{ij}$), zeroing off-diagonal entries while preserving diagonal entries; the witness pair $\operatorname{relativePhaseDensityWitness} := (\rho_+, \rho_-)$ pairs $\rho_+ = \operatorname{equalSuperpositionDensity}$ with $\rho_- = Z\rho_+ Z$ (`qubitZ = !![1, 0; 0, -1]`). For concept maps $q_C : X \to C$ and $q_D : X \to D$, refinement is defined by **post-composition factorization** $\operatorname{Refines}(q_C, q_D) :\iff \exists\,\mathrm{factor} : D \to C,\; q_C = \mathrm{factor} \circ q_D$ (meaning the coarser readout $q_C$ factors through the finer readout $q_D$).
+
+::: {.theorem #thm-prime-three-completions title="Three Completion Boundaries for Prime-Observer Languages" lean="D5/S3/PrimeObserver/ThreeCompletionFinalProposition.prime_observer_three_completion_final_proposition"}
+For every real parameter $s \in \mathbb{R}$, all four of the following conjuncts hold simultaneously:
+
+1. **Positive-Integer Prime-Exponent Bijection**: The map $\operatorname{primeExponentLanguageEquiv} : \mathbb{N}_+ \to \operatorname{PrimeExponentTable}$ is bijective (`Function.Bijective`);
+2. **Threshold for PMF Realizability of the Prime-Exponent Law**: There exists a discrete probability mass function $q : \operatorname{PMF}(\mathbb{N})$ satisfying $\operatorname{RealizesPrimeExponentLaw}(s, q)$ if and only if $1 < s$;
+3. **Relative-Phase Witness Separating Diagonal and Operator Languages**: The witness pair satisfies $\operatorname{relativePhaseDensityWitness}.1 \neq \operatorname{relativePhaseDensityWitness}.2$, agrees under the prime-diagonal language
+
+   $$
+   \operatorname{qubitPrimeDiagonalLanguage}(\operatorname{relativePhaseDensityWitness}.1) \;=\; \operatorname{qubitPrimeDiagonalLanguage}(\operatorname{relativePhaseDensityWitness}.2),
+   $$
+
+   and is separated by the operator language:
+
+   $$
+   \operatorname{qubitOperatorLanguage}(\operatorname{relativePhaseDensityWitness}.1) \;\neq\; \operatorname{qubitOperatorLanguage}(\operatorname{relativePhaseDensityWitness}.2);
+   $$
+
+4. **Strict Refinement of the Diagonal Language by the Operator Language**: $\operatorname{Refines}(\operatorname{qubitPrimeDiagonalLanguage}, \operatorname{qubitOperatorLanguage})$ holds, whereas the converse $\neg\,\operatorname{Refines}(\operatorname{qubitOperatorLanguage}, \operatorname{qubitPrimeDiagonalLanguage})$ fails.
+:::
+
+::: proof
+Conjunct 1 is `Nat.factorizationEquiv.bijective` from unique prime factorization on $\mathbb{N}_+$. For Conjunct 2, any $q : \operatorname{PMF}(\mathbb{N})$ realizing the independent geometric prime-exponent marginals assigns positive mass $\prod_p (1 - p^{-s}) > 0$ to $\{1\}$ and forces summability of the Dirichlet series, yielding $1 < s$; conversely, for $1 < s$, normalizing $n^{-s}$ ($n \ge 1, q(0) = 0$) by $\zeta(s) > 0$ yields a `PMF ℕ` whose prime-power divisibility events have the exact geometric marginals and mutual independence required by `RealizesPrimeExponentLaw s q`. Conjunct 3 compares entry $(0, 1)$ of $\rho_+$ ($+1/2$) against $\rho_- = Z\rho_+ Z$ ($-1/2$) to prove $\rho_+ \neq \rho_-$ and operator-language separation while verifying that `primeDephasing` zeroes off-diagonal entries and leaves both diagonals equal to $(1/2, 1/2)$. Conjunct 4 witnesses $\operatorname{Refines}(\operatorname{qubitPrimeDiagonalLanguage}, \operatorname{qubitOperatorLanguage})$ via the factor map $M \mapsto \operatorname{primeDephasing}(\{()\}, \operatorname{qubitPrimeValuation}, M)$, and refutes the converse because any $\mathrm{factor}'$ satisfying $\operatorname{qubitOperatorLanguage} = \mathrm{factor}' \circ \operatorname{qubitPrimeDiagonalLanguage}$ would equate $\rho_+$ and $\rho_-$ on Conjunct 3's witness pair. The full proof is checked by the Lean kernel.
+:::
+
+[@thm-prime-three-completions] demarcates three distinct completion regimes that must never be conflated as mutually equivalent: the exact prime-exponent bijection holds on $\mathbb{N}_+$; the normalized Zeta-Gibbs probability law on $\mathbb{N}$ exists **if and only if $1 < s$** (total-function values of $\zeta$, logarithms, or reciprocals at $s \le 1$ are never probability models); and under the explicit direction of $\operatorname{Refines}$, diagonal prime dephasing factors through the full density-operator language while never allowing off-diagonal quantum phases to be reconstructed from diagonal records alone.
+
 Readers can explore all twelve discrete prime observers ($p = 2 \dots 1031$) alongside the $p_\infty$ continuous carry cliff, switch test polynomials and nonzero rationals, and verify every exact readout in the full dual-stage interactive laboratory `ORTHO//PADIC` below:
 
 ::: {.viz src="padic-prime-table-tree" height="620"}
