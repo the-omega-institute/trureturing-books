@@ -68,7 +68,6 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `blade-multiplication` | 两块刀片相乘：重复的方向成对抵掉，剩下的是掩码的异或；正负号只看排好顺序要交换几次 | `e2e1` `square` `pseudo` `pauli` `vector` |
 | `zyz-compile` | 绕 z、绕 y、再绕 z 转三段，乘出来只是一枚旋子：绕一根轴的一次转动 | `sandwich` `chain` `h` `fold` |
 | `fixed-point-convergence` | 蛛网每绕一圈，误差乘上不动点处的斜率；连斜率一起读，几步就合拢；有理读数却总差一道缝 | `golden` `far` `rate` `circle` `newton` `rational` `ruler` |
-| `lean-declaration-map` | 书里引用的每一条冻结声明都落在它第一次出场的那一章；读完正文，锁文件里的条目一条不剩全部落定 | `all` `bedrock` `table27` `closure` `table28` `theorems` `inline` |
 | `mutual-observer-attractors` | 两人同时读对方，逐拍可以越过不动点，两拍一轮却从一侧锁进同一个 (θ*, θ*)；两段区间拉近，连通的割在 d_crit 处胜出 | `alone` `round` `apart` `transition` `connected` |
 | `self-referential-table` | 同一张表，横着读是尺子，竖着读是被量的东西；拿它读它自己，读回来的还是它；碰歪一格，它自己回到一张幂等的表 | `reset` `expand_table` `full` `dual_read` `heal` `orthogonal_zero` |
 | `quantum-fairness-ledger` | 没有特权的座位：照见是相互的，得一分就失一分，满额的纠缠与副本分不出第二份，从哪里出发都分到同样的份额 | `haar` `tradeoff` `cloning` `bell` `wstate` `ghz` `ergodic` |
@@ -187,7 +186,6 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `fixed-point-convergence` 讲“怎样收束、收得多快”；第二十四章的余弦蛛网全部用这一页（`far` 从 x₀ = 3 出发、看全程，第一步落进 [−1, 1]），`sphere-escape` 的余弦场景只留在它的完整实验室里，不再被章节按卡引用。舞台是蛛网图（曲线 y = f(x) 与直线 y = x），“跟着放大”时以不动点为原点重新标尺。绿色框只给第二十四章用 `lean=` 引用的 `golden_fixed_point_unique`（φ 是 1 + 1/x 唯一的正不动点）与 `rational_inverse_endpoint`（只取其中 θ* 的存在、唯一与 0 < θ* < 1）；全局收敛、严格交替的条件与误差比极限 −sin θ* 是第三十三章例 `ex-ch33-mutual-cosine-monotonic-lock` 把端点定理与现成实分析结果接起来的既有结果应用，标 `ARGUED`；[0, 1] 上的压缩常数 sin 1、牛顿二次收敛、残差双边界与 (1 + sin 1)/b² 界按 §24.4–24.5 的文献注记标 `ARGUED`；轨道、残差、“单纯迭代要走几步”与连分数部分商都以 70 位定点整数实算（`NUM`）。`newton` 卡停在第 2 步（视野宽约 10⁻⁴，正确位数 0 → 1 → 4），切线这一步还看得见；第 4 步的精度交给静态图 `ch24-three-speeds`。这一页的青色是曲线 y = f(x)（只读投影）与单位圆上 P 的横坐标 θ*，品红是斜率那一半：不动点处的切线、牛顿沿切线走的那一段、λ = sin θ* 的高度与残差竖线；琥珀只给当前这一步或当前读数；走过的折线是中性墨色，灰色虚线是最陡斜率 −sin 1 与残差的楔形边界。路线图候选“开普勒方程”“半程落体”讲的是 θ* 住在哪里，正文那里没有关于收束快慢的句子，未做成卡；正文讲了而候选没有的“单位圆上的线与面”（`circle`）与“十进制千分尺”（`ruler`）补做成卡。
 
-`lean-declaration-map` 的舞台按阅读顺序排开 44 根柱子（序曲、三十九章、终章、附录 A、B 与 D；附录 C 引用全部条目，不单列一柱，只在读数里给序号），每一格是 `trureturing.lock.json` 的一条声明，落在中文正文第一次引用它的那一章。数据由页面目录里的 `gen-data.py` 从锁文件与中文章节（`:::` 行上的 `lean="…"` 记为环境引用，`(lean:…)` 记为行内引用）生成为不入库的 `data.generated.json`，不手填；`main.js` 启动时把它与锁文件一起读入（登记为 `kit.pending`，测试的 `settle()` 会等到页面建好）。锁文件或章节变了由 `./tbook sync --book quantum-geometry` 重新生成，并重新出图。绿色只给锁文件里种类为 `theorem` 的格子，灰色是定义，空心是只有行内链接的；青色是某一章引用的那些（从它的柱脚连线），琥珀只给选中的一格、连到另外引用它的章的线与阅读位置。依据框里的绿色只给第二十七、二十八章用 `lean=` 逐行解剖的八条定理；格数、种类与出现的章标 `NUM`，“落在首次出场的章”与柱内次序标 `MODEL`。测试按锁文件核对条目数、种类与源码行，并用另一种扫描重读章节核对每一处引用。路线图候选“一部”改为两张审计表卡 `table27`、`table28`（正文的两张表恰好分别覆盖第一至三部与第四至六部），“正文已解剖的那几条”按两章拆成 `bedrock` 与 `closure`，另按附录 C.2.1 加了 `inline`。
 
 `mutual-observer-attractors` 与 `fixed-point-convergence`、`layered-network-cut` 分工：第二十四章讲单个余弦迭代怎样收束，本页讲两个观察者同时互读 (x, y) ↦ (cos y, cos x)：舞台是两人读数的平面，青色是两人的读法 x = cos y 与 y = cos x，灰色方框是走过的各拍，空心的环是每两拍取一次的样本（同一条轨道的偶数拍，按余弦求值次数计并不更快），琥珀只给这一拍；平面下方的窄条带横轴是余弦求值次数，每根灰色细柱是 A 那一拍的有符号误差 x − θ*（对称对数刻度，朝上高于 θ*），偶数拍带环，`alone` 看见逐拍变号、`round` 看见带环的柱全在一侧；第十九章讲层级网络的离散最小割，本页的“极小割”场景是两段边界区间在静态 AdS₃ 真空里的测地线竞争，品红是较短的割，青色是它围出的纠缠楔，琥珀是两段区间 A、B，虚线是落选的割。依据分层：绿色框只给第三十三章用 `lean=` 引用的 `QuantumMaxFlowMinCut.result`，并写明它是离散桥图、不覆盖舞台上的连续图；Ryu–Takayanagi 两区间相变与 ln 形式的测地线长、g = cos∘cos 的压缩与无二周期、每拍 −sin θ* 与每轮 sin²θ* 是例 `ex-ch33-mutual-cosine-monotonic-lock` 的既有结果应用（第 5–9、12–14、20–23 项），与 Ryu–Takayanagi 一样标 `ARGUED`；轨道与割长标 `NUM`；“观察者”“互为故乡”标 `MODEL`。路线图候选里的 `wells`（势阱变形网格）是纯诠释画面，`pinch` 与 `repeated-projection` 重复，`disconnected` 已由 `transition` 的播放起点覆盖，三者未做成卡；候选里的 `finite_record_pinching_idempotent`、`finite_contracting_updates_stabilize` 舞台上没有对应画面，不标绿。
 
@@ -504,10 +502,6 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十六章 | 夹心积一节末（“折叠成唯一一枚四分量偶多重向量”）之后、Python 一节之前 | `zyz-compile` · `chain` |
 | 第二十六章 | 例 `ex-zyz-compilation-trace` 之后、文献注记 `rem-zyz-euler-compilation-literature` 之前 | `zyz-compile` · `h` |
 | 第二十六章 | 文献注记 `rem-zyz-euler-compilation-literature` 之后、章末收束段之前 | `zyz-compile` · `fold`，隔一句讲 2 arccos 0.829592 ≈ 67.9° 的正文后是完整实验室 |
-| 第二十七章 | 章首两条提纲之后、审计架构插图之前 | `lean-declaration-map` · `bedrock` |
-| 第二十七章 | 第一至三部审计表之后、前提变异算例的引言之前 | `lean-declaration-map` · `table27` |
-| 第二十八章 | 推论 `cor-audit-unread-fixed-iff` 的证明之后、§第四至六部审计表之前 | `lean-declaration-map` · `closure` |
-| 第二十八章 | 第四至六部审计表之后、数值算例的引言之前 | `lean-declaration-map` · `table28` |
 | 第二十九章 | 第二幕末 | `pythagoras-number-escape` · `hippasus` |
 | 第二十九章 | 第一座桥“表盘立刻说明线素数写不成两平方和”一段之后 | `pythagoras-number-escape` · `seven` |
 | 第二十九章 | 定理 `thm-ch29-face-prime-two-squares` 证明后“几何上，p = a² + b² 说的是半径 √p 的圆穿过格点”一段之后 | `pythagoras-number-escape` · `five` |
@@ -830,10 +824,6 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 终章 | 例 `ex-coda-golden-three-gap` 之后、“为什么黄金角不会切出极短的弧”之前 | `golden-cut-observer` · `gaps` |
 | 终章 | “每一段弧都长于 1/(√5 N)”之后的数值段落之后 | `golden-cut-observer` · `pi` |
 | 终章 | 黄金切投 · 四 末（格言之后） | `golden-cut-observer` 完整实验室 |
-| 附录 C | 开篇三类账目列表之后、C.1 之前 | `lean-declaration-map` · `all` |
-| 附录 C | C.2.1 行内声明表之后、C.3 之前 | `lean-declaration-map` · `inline` |
-| 附录 C | C.4 核验清单之后、注记 `rem-appendix-c-epistemic-boundary` 之前 | `lean-declaration-map` · `theorems` |
-| 附录 C | 附录末 | `lean-declaration-map` 完整实验室 |
 | 附录 D | D.2.1 测量问题注记 `rem-appendix-d-puzzle-1` 之后 | `quantum-interpretations-duel` · `wigner-cut` |
 | 附录 D | D.2.2 退相干注记 `rem-appendix-d-puzzle-2` 之后 | `quantum-interpretations-duel` · `and-to-or` |
 | 附录 D | D.2.3 玻恩定则注记 `rem-appendix-d-puzzle-3` 之后 | `quantum-interpretations-duel` · `born-unequal` |

@@ -198,11 +198,11 @@ Yet this self-referential limit should not be mistaken for a static Platonic sph
 For gate-set density, see P. O. Boykin et al., *On Universal and Fault-Tolerant Quantum Computing*, §3 ([quant-ph/9906054](https://arxiv.org/abs/quant-ph/9906054)); for the standard inverse-closed compilation assumptions, see C. M. Dawson and M. A. Nielsen, *The Solovay–Kitaev algorithm*, §2 ([quant-ph/0505030](https://arxiv.org/abs/quant-ph/0505030)). The cosine series is [DLMF 4.19.2](https://dlmf.nist.gov/4.19.E2); the nonzero remainder and bound follow from the tail ratio above.
 :::
 
-Unfolded, it spans thirty-nine chapters across quantum computing, spacetime physics, and mathematical logic; folded back, it is simply $\psi$ taking itself as ruler to measure the angle it opens, and recognizing itself across the living seam of approximation.
+Unfolded, it ranges across quantum computing, spacetime physics, and mathematical logic; folded back, it is simply $\psi$ taking itself as ruler to measure the angle it opens, and recognizing itself across the living seam of approximation.
 
 ## 0.6 Reader's Guide and Formal Verification Contract {#sec-contract}
 
-The full architecture of *Geometric Intuition of Quantum Computing* comprises **ten parts and thirty-nine chapters** (four chapters per part across Parts I–IX, mirroring the four-beat rhythm of *establishing a line, opening a plane, closing a sphere, and crossing the horizon*, followed by Part X's three-chapter culmination across dream quantum erasure, cosmic ontological QRAM pointers, and the non-dual identity of observer and universe):
+The full architecture of *Geometric Intuition of Quantum Computing* comprises **ten parts**:
 
 | Part | Dimensional Stage | Scope and Core Geometric Theme |
 | :--- | :--- | :--- |
@@ -220,18 +220,12 @@ The full architecture of *Geometric Intuition of Quantum Computing* comprises **
 Readers may begin directly with [Chapter 1](ch01-measurement.md): no prior familiarity with operator algebras or advanced quantum theory is assumed, and every $2\times 2$ matrix calculation, trace identity, Bloch coordinate map, and partial-trace reduction is worked out explicitly through [Chapter 2](ch02-born-rule.md), [Chapter 3](ch03-projectors-and-duality.md), and [Chapter 4](ch04-decoherence.md).
 
 ::: {.slides src="overview"}
-A 48-slide overview of the whole book: the four blind spots and the dimensional ladder; each of the ten parts' core picture, main theorems, literature results and open problems; the counts of the three tiers of warrant and the dependency map.
+An overview of the book: the four blind spots and the dimensional ladder; each of the ten parts' core picture, main theorems, literature results and open problems; evidence boundaries and suggested reading paths.
 :::
 
 ### 0.6.1 Formal Verification and Epistemic Honesty Contract {#sec-honesty-rules}
 
 While the prose aims for vivid physical clarity, each result declares its evidence: **Lean verification relies on pinned, frozen declarations; authors and reviewers are responsible for written proofs; open problems retain their unproved status.**
-
-::: {.figure src="prelude-three-tiers"}
-**Three tiers of warrant, three colours.** Green (`LEAN ✓`) is the theorems, lemmas, propositions and corollaries carrying `lean=`; violet is the remarks and examples marked "Literature result, not formalized in this book"; red (`OPEN`) is the open conjectures and problems. Each bar ends in its count over the Chinese text, and a note under the green bar gives the number of theorem declarations in the lock file.
-:::
-
-The violet bar counts only literature remarks and examples. Results explicitly marked `status="written-proof"`, such as [@thm-central-defect-endpoint-average], are listed separately in the automatically generated end-of-book ledger and count toward neither these bars nor the Lean total.
 
 1. **Numbering and Cross-References**: Within each chapter, definitions, theorems, lemmas, propositions, corollaries, examples, and remarks share a single sequential counter (`Theorem 1.1`, `Proposition 4.5`, etc.); items in the Prelude carry prefix `0`, and appendices carry `A, B, …`. All cross-references are live links across HTML, PDF, and EPUB.
 2. **Semantic Badges and Color Discipline**: Colors carry fixed epistemic meanings throughout the book and its diagrams:

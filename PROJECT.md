@@ -73,7 +73,7 @@
 3. **演示文稿（`books/<slug>/slides/<deck>/`）严格对齐 `books/example-monograph/slides/overview/`**：
    - 采用 `slides.md` 与 `slides.en.md` 双语对齐，仅使用 `theme/slides` 标准版式与组件（`<TheoremCard>`、`<LeanBadge>`、`<Stat>`、`<Source>`、`<Tex>`）。
 4. **章节正文、前言与附录（`books/<slug>/{zh,en}/`）严格对齐 `books/example-monograph/{zh,en}/`**：
-   - 主章使用 `chNN-topic.md`，子章节使用 `chNN-sNN-topic.md`，更深一级继续追加 `-sNN`；数字至少两位，主题用英文 kebab-case，各语言同名。目录用每级两个空格表达父子关系，主章保留导言和入口，完整小节连同证明与媒体整体移动；编号与阅读顺序以 `SUMMARY.md` 为准。拆分不改环境 id、Lean 引用和主章定理计数，更新移动内容的片段链接及声明地图；详见 `docs/AUTHORING.md` 的“章节命名与长章拆分”。
+   - 主章使用 `chNN-topic.md`，子章节使用 `chNN-sNN-topic.md`，更深一级继续追加 `-sNN`；数字至少两位，主题用英文 kebab-case，各语言同名。目录用每级两个空格表达父子关系，主章保留导言和入口，完整小节连同证明与媒体整体移动；编号与阅读顺序以 `SUMMARY.md` 为准。拆分不改环境 id、Lean 引用和主章定理计数，更新移动内容的片段链接；详见 `docs/AUTHORING.md` 的“章节命名与长章拆分”。
    - 标题格式全书统一：主章用“第三十章 标题”／“Chapter 30 Title”；子页面用“30.1 标题”，其页内二级标题继续为“30.1.1 标题”，再下一级继续追加数字。序曲与终章的一级标题用“序曲 标题／Prelude Title”“终章 标题／Coda Title”；序曲页内用 `0.x`，终章由 `book.toml` 的 `[numbering.unnumbered]` 排除章号，其子页与页内标题均不加编号，定理环境共享 `Coda.n` 前缀。附录一级标题用“附录 A 标题／Appendix A Title”，页内用 `A.1`、`A.1.1`。编号与标题之间只用一个空格，不再叠加中文顿号或罗马序号。每页恰有一个一级标题，文字与本语言目录一致，中英文层级序列相同；已经发布的标题改名时保留原片段 id。
    - 定理环境、证明块、文献注记、开放问题、数值示例表格及文末可视化/视频嵌入块完全遵循 `ch01-golden-deficit.md` 的标准写法。
 5. **静态图（`books/<slug>/figures/<name>.py`）按模板技能 `skills/book-figure` 制作**，成品示例是 `books/example-monograph/figures/`：
@@ -83,7 +83,7 @@
    - 与同章的实验卡分工：实验卡给能亲手推的情形，静态图给印刷版与 EPUB 也要看得见的构造；两者紧邻时不画同一个画面。
    - **章节里的图一律用 `::: {.figure}`** 引用脚本生成的静态图，不放手绘或直接嵌入的图片文件。
    - **媒体块不连排**：静态图、实验卡、视频不三块连排，相邻两块之间要隔着正文，每块紧跟在讲到它的那句话之后。
-6. **源文件入库，派生产物按需生成**：附录 C 的论述修改 `books/quantum-geometry/data/appendix-c.{zh,en}.md.in`，声明地图的程序与生成数据分开维护，五张统计图保留脚本。`./tbook sync --book quantum-geometry` 只生成统计 JSON、双语附录与地图 JSON；校验与构建先同步文本并绘制静态图，PDF/EPUB/站点发布再按消费者生成所需封面与静帧。SVG、幻灯片的 SVG 副本、统计快照、生成章节、地图 JSON、可视化封面/静帧与 `.stills.json` 不提交；书内 `.gitignore` 与 `[derived].outputs` 明确列出自有输出，`./tbook artifacts check` 阻止回流。统计仍来自正式解析器与锁文件，不手填计数。`data/declaration-serials.json` 是已发布身份源数据，保留原编号；只有显式运行 `python3 books/quantum-geometry/sync-statistics.py --register-serials` 才登记新增编号，普通构建不改写它。锁文件与模板基线继续提交。旧分支的生成文件修改/删除冲突保留删除，合并源文件后重建；不能把这一规则套到正文、稳定编号与锁文件。未变的画面证据按依赖复用，实际改变的画面仍执行对应测试与看图。详见 `docs/project/STATISTICS.md` 与 `docs/SOURCE-ONLY.md`。
+6. **全书统计作为可选编译产物**：源码不维护全书计数、排名、声明总索引或统计地图的数据副本；正文可用 `.stats` 引用块选择生成视图，按需嵌入表格或链接 HTML、Markdown、CSV、JSON 产物。视图、显示方式与分区由本书选择，中英文逐项对齐；逐条数学证据仍在所属章节给出。确需统计时执行 `./tbook stats --book quantum-geometry --write`，只生成被忽略的 `build/statistics/quantum-geometry.json`，消费者读取编译产物，不把快照、索引、序号表或统计图片提交回源码。站点与导出验证账本继续由构建生成。其他 SVG、幻灯片的 SVG 副本、可视化封面／静帧与 `.stills.json` 仍按消费者生成，不提交；书内 `.gitignore` 明确列出自有输出，`./tbook artifacts check` 阻止回流。锁文件与模板基线继续提交。旧分支的产物修改／删除冲突保留删除，合并源文件后重建；不能把这一规则套到作者正文与锁文件。未变的画面证据按依赖复用，实际改变的画面执行对应测试与看图。详见 `docs/project/STATISTICS.md` 与 `docs/SOURCE-ONLY.md`。
 
 ## 7. 多智能体协同分工与五路并行工作流
 
@@ -91,7 +91,7 @@
 
 1. **五元角色分工**
    - **作者与总架构师（Auric）**：提出全书核心几何与哲学命题（两子丈量、球外之球、割圆多面体近似与泰勒余项、毛球定理与 $720^\circ$ 角亏、余弦自指不动点 $\psi = \psi(\psi)$），审定章节脉络与原话题记。
-   - **中英双语正文主笔（优先 Gemini，可选，严格仅限文字内容）**：优先使用现有可用的 Gemini 作者；没有可用渠道时，可由 `codex-cli` 或其他可用模型承接，不以特定调用方式或凭据配置作为写作前置。正文作者角色仅负责全书 45 个单元（序曲、第一至第十部共 39 章、终章与附录 A–D）的中英文学术专著与教材纯文字/散文内容撰写与修订，严格对齐冻结的 Lean 4 定理签名。**严禁**使用 Gemini（含主代理与 `self` 子代理）编写或修改任何非文字内容（包括但不限于 `viz/` 交互可视化、`films/` 视频、`figures/*.py` 静态图脚本、测试代码、工具脚本、构建与 Git 变基/归并/PR 工程操作）。
+   - **中英双语正文主笔（优先 Gemini，可选，严格仅限文字内容）**：优先使用现有可用的 Gemini 作者；没有可用渠道时，可由 `codex-cli` 或其他可用模型承接，不以特定调用方式或凭据配置作为写作前置。正文作者角色仅负责本书的中英文学术专著与教材纯文字/散文内容撰写与修订，严格对齐冻结的 Lean 4 定理签名。**严禁**使用 Gemini（含主代理与 `self` 子代理）编写或修改任何非文字内容（包括但不限于 `viz/` 交互可视化、`films/` 视频、`figures/*.py` 静态图脚本、测试代码、工具脚本、构建与 Git 变基/归并/PR 工程操作）。
    - **辅助工程与形式化对齐（`codex-cli`）**：负责冻结 Lean 4 定理核验与批次规格书（`spec-batch-*.md`）、静态图脚本（一律按第 6 节第 5 条由脚本生成，`figures/<name>.py`；`assets/` 只放照片一类确实不能由脚本画的图片）、第七部 Python 几何代数参考引擎、`./tbook` 工具链构建检验、Git Worktree 管理及上游模板修复 PR。
    - **交互可视化与讲解视频（`claude` CLI · Opus 5.5）**：直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**禁止使用 Claude Subagent**），严格按照 `books/example-monograph/` 示例框架完成全部交互可视化（`books/quantum-geometry/viz/<id>/`）与讲解视频（`books/quantum-geometry/films/<name>/`）的实现与测试。
    - **三席异构独立审查（`/sshx` `review_triplet_workers`）**：每批次由 `architecture`、`quality`、`tests` 三席独立审查；第一轮（Round 1）采用 `1 nyxid-oracle + 1 codex-cli + 1 isolated-token-subagent`，第二轮及后续复审（Round 2+）禁用响应较慢的 `nyxid-oracle`，采用 `2 codex-cli + 1 isolated-token-subagent` 高速完成修复验证闭环。

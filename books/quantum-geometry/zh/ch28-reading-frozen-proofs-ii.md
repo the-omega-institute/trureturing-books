@@ -177,17 +177,9 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
-::: {.viz src="lean-declaration-map" preset="closure" height="500"}
-**第二十八章解剖的四条。** 青色的线从第二十八章的柱脚连回第二、三章的四个绿色实心格；琥珀色框住的是未读不动点判据（[@cor-audit-unread-fixed-iff]），它第一次出场在第三章，琥珀色的线连到另外引用它的章。
-:::
-
 ## 28.3 第四至六部冻结声明全景审计表 {#sec-parts-iv-to-vi-frozen-audit-table}
 
 与上一章的第一至三部审计表相呼应，下表汇总了本书第四部（纠缠、贝尔边界与傅里叶对偶）、第五部（玻戈留波夫双曲变换、闵可夫斯基光锥刚性、规范完整群、张量网络流割与电路深度反例）以及第六部（对角拓扑逃逸、黎曼 $\zeta$ 欧拉乘积、艾森斯坦范数型与收缩不动点）在 `trureturing@dev`（提交 [{commit}](trureturing:)）中的精确源码坐标、语句摘要哈希前缀（`statement_id`）及形式化边界。
-
-::: {.figure src="ch28-declaration-parts"}
-**全书十部及终章与附录各引用了多少条冻结声明。** 每根柱子是一部，最后一根是终章与附录合在一起；柱高是该部各章用 `lean=` 引用的不同声明数（一条声明在两部都被引用时两部各算一次），柱上标着总数；下段绿色是锁文件里种类为定理的声明，上段灰色是定义与归纳类型。上方两道括号标出两章审计表各自覆盖的部：第二十七章是第一至第三部，本章是第四至第六部。图由脚本从 `trureturing.lock.json` 与中文章节算出。
-:::
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
@@ -235,10 +227,6 @@ $$
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | $\omega^{da}\,D(a,b)D(c,d) = \omega^{bc}\,D(c,d)D(a,b)$ |
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation`](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | $D(a,b)\,D(c,d)\,D(a,b)^{\dagger} = \omega^{bc-ad}\,D(c,d)$ |
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | $M = 2$：$D(0,1)D(1,0) = -D(1,0)D(0,1)$ |
-
-::: {.viz src="lean-declaration-map" preset="table28" height="500"}
-**审计表伸进第四至六部。** 第二十八章（连同上面的审计表）引用的 44 条声明描了青边：其中 36 条落在第四至六部，其余是第二、三章的四条审计定理与第二十五章的四条外尔位移定律。
-:::
 
 让我们通过一个具体数值算例，把本章的四条审计定理串联在同一个单量子比特态上。
 
