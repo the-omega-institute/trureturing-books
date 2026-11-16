@@ -123,8 +123,8 @@ section: "第一部 · 依据"
   <div class="g2 mt">
     <div class="card violet">
       <h4>文献结果 · 第二章</h4>
-      <h3>格里森定理与无穷维的布施定理</h3>
-      <p>本书在有限维证明了“效应上可加的概率必是迹配对”；维数不低于 3 的格里森定理与无穷维情形只作文献引用，未在本书形式化。</p>
+      <h3>实空间与无穷维的格里森—布施定理</h3>
+      <p>本书在有限维验证了效应可加性推出迹配对，并在复维数不低于 3 时验证了正交投影可加性的格里森表示；实希尔伯特空间与无穷维闭子空间、效应情形只作文献引用，未在本书形式化。</p>
     </div>
     <div class="card violet">
       <h4>文献结果 · 第四章</h4>
@@ -320,14 +320,14 @@ section: "第四部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 13.10 · Corollary 13.8</p>
+  <p class="kicker">Theorem 13.11 · Corollary 13.9</p>
   <h2 class="t">经典折线封顶于 <em>2</em>，固定的 CHSH 算子封顶于 <em>2√2</em></h2>
-<TheoremCard class="compact mt-s" label="定理13.10" title="有限确定性局域纤维模型的 CHSH 绝对值上界恰为 2" gid="D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_bound_is_exact" cite="thm-classical-chsh-bound-exact">
+<TheoremCard class="compact mt-s" label="定理13.11" title="有限确定性局域纤维模型的 CHSH 绝对值上界恰为 2" gid="D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_bound_is_exact" cite="thm-classical-chsh-bound-exact">
 
 设 $\mu$ 是有限纤维上的非负归一权重。对每个确定性纤维模型，$\lvert\operatorname{classicalCHSH}(\mu, \mathrm{model})\rvert \le 2$，且 $2$ 是这些绝对值组成的集合的最大元。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="推论13.8" title="固定双比特 CHSH 算子的最大期望值为 2√2" gid="D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest" cite="cor-fixed-chsh-tsirelson">
+<TheoremCard class="compact mt-s" label="推论13.9" title="固定双比特 CHSH 算子的最大期望值为 2√2" gid="D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest" cite="cor-fixed-chsh-tsirelson">
 
 在全体双比特量子态 $\rho$ 上，$\operatorname{Re}\operatorname{Tr}(\rho \cdot \mathrm{chshOperator})$ 的取值集合以 $2\sqrt2$ 为最大元：有态取到 $2\sqrt2$，且对一切态不超过 $2\sqrt2$。
 
@@ -381,9 +381,9 @@ section: "第五部 · 图景"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 19 · three candidate cuts</p>
-  <h2 class="t">切断宽度三桥图只有<em>三道候选割</em></h2>
-  <img src="./img/ch19-three-cuts.zh.svg" alt="宽度三桥图上三道虚线割，最小割取三者中最小的。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="kicker">Chapter 19 · three source bounds</p>
+  <h2 class="t">源码采用的<em>三项割容量上界</em></h2>
+  <img src="./img/ch19-three-cuts.zh.svg" alt="宽度三桥图上的三道虚线表示源码采用的三项割容量上界；图中算例的最小割取三者中最小的。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">取 <Tex t="(a, b, c, d) = (2, 3, 2, 3)" />：横切腿 <Tex t="a, d" /> 容量 <Tex t="ad = 6" />，横切腿 <Tex t="b, c" /> 容量 <Tex t="bc = 6" />，斜切的一道更大；最小割取三者中最小的。</p>
 </div>
 <Source>第十九章 ch19-three-cuts</Source>
@@ -789,9 +789,9 @@ section: "第十部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 38.21 · Theorem 39.7</p>
+  <p class="kicker">Theorem 38.22 · Theorem 39.7</p>
   <h2 class="t">非正交的态<em>不能深拷贝</em>；平方双覆叠<em>没有连续截面</em></h2>
-<TheoremCard class="compact mt-s" label="定理38.21" title="禁通用深拷贝的内积判据（第 2 款）" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
+<TheoremCard class="compact mt-s" label="定理38.22" title="禁通用深拷贝的内积判据（第 2 款）" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
 
 设 $U$ 是 $H \otimes H$ 上的复线性等距同构。若单位向量 $\psi, \phi$ 与同一个单位空白态满足 $U(\psi \otimes \mathrm{blank}) = \psi \otimes \psi$、$U(\phi \otimes \mathrm{blank}) = \phi \otimes \phi$，则 $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$，且 $\phi = \psi$ 或 $\langle\phi, \psi\rangle = 0$。
 

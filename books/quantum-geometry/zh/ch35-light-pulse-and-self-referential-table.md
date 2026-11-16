@@ -39,7 +39,7 @@ $$
 **写满的表。** 八条两两正交的行把 $N = 8$ 个地址全部占满：表成了单位阵，青色只剩在对角线上，右边八个地址槽全亮，琥珀色框住的对角格之和正好是 $8$；再也找不出与这八行都正交的第九个方向（[@thm-ch35-null-pulse-and-record-blocking] 第 3 款）。
 :::
 
-这里的“清表”是模型中的局域重新制备与旧约束释放，不是抹去环境幸存记录，也不是上述指定相干逆转的另一名称。想象一本只有 $d$ 页、只许追加独立记录的笔记本：若上一轮次的全部 $d$ 条正交历史锚点原封不动地塞满每一页，不仅寄存器容量 $N \le d$ 彻底饱和，历史锚点的堆积也会压缩下一步选点的相容余量（对照[第 29 章](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]；二阶双锚点格拉姆算例见下框 [@ex-ch35-two-anchor-gram-corridor]）：
+这里的“清表”是模型中的局域重新制备与旧约束释放，不是抹去环境幸存记录，也不是上述指定相干逆转的另一名称。想象一本只有 $d$ 页、只许追加独立记录的笔记本：若上一轮次的全部 $d$ 条正交历史锚点原封不动地塞满每一页，不仅寄存器容量 $N \le d$ 彻底饱和，历史锚点的堆积也会压缩下一步选点的相容余量（对照[第 29 章](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]；二阶双锚点格拉姆算例见下框 [@ex-ch35-two-anchor-gram-corridor]）：
 
 ::: {.example #ex-ch35-two-anchor-gram-corridor title="双锚点二阶格拉姆相容面积与清表重开走廊算例（已形式化）" lean="D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff"}
 **已形式化。** `trureturing@dev` 已冻结二向量格拉姆矩阵、其行列式公式以及行列式严格为正当且仅当两向量线性无关的精确声明（[`twoAnchorGram`](lean:D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram)、[`two_anchor_gram_det_formula`](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula)、[`two_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff)）。下述单位锚点算例是这些一般声明的二维特例；Lean 证明覆盖格拉姆行列式与线性无关性，不替模型诠释或整套生命模型背书。

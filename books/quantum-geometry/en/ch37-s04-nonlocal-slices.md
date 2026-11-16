@@ -1,0 +1,84 @@
+# 37.4 Beyond the Five-Sense Pinhole: Golden Hyperplane Cuts and Nonlocal Multi-Position Emergence
+
+Once even the physical body is recognized as an unloadable local prior, the last spatial superstition gives way as well: **does the observer truly "live inside a few cubic centimeters behind the brow at a single point $\mathbf{x}_0$"?**
+
+Consider why waking consciousness feels nailed to one coordinate $\mathbf{x}_0$: two retinal pinholes six centimeters apart triangulate a single optical origin, two ears compute microsecond interaural delays around a single head center, and a closed cutaneous sheet draws a sharp inside/outside boundary. In our geometric observer model (`MODEL`), **the five senses do not bestow perception upon the observer; they prune and localize it!** They act like an opaque card pierced by one tiny pinhole $\mathbf{x}_0$ held in front of a luminous screen—the pinhole sharpens one forward ray, while tricking you into believing that you *are* the pinhole.
+
+Remove that five-sense card in bodiless deep dreams or pure geometric contemplation ($\mathbf{P}_{\mathrm{body}} \to 0$), and what spatial profile emerges? Exactly what our epigraph reports: **"We discover that the observer actually emerges across multiple positions rather than being confined to direct five-sense perception..."**—in a dream you simultaneously behold the valley from the ridge and move as the wind among the pines below; you stand inside a childhood window looking out while simultaneously standing beneath the streetlamp across the lane looking back!
+
+Is such simultaneous multi-position emergence mere poetic metaphor? Not in the least! Recall the **cut-and-project model-set observer geometry** of [Chapter 32](ch32-unified-field-and-meta-unification.md) and [Chapter 34](ch34-orthogonality-degeneracy-and-observer-position.md): an observer's internal state is not an isolated point on the physical line $E_\parallel = \mathbb{R}$, but a compact **golden acceptance window `goldenWindow`** in conjugate internal space $E_\perp = \mathbb{R}$! When the higher-dimensional golden lattice $\mathbb{Z}[\varphi] \hookrightarrow \mathbb{R} \times \mathbb{R}$ is sliced by that internal window, every lattice point whose conjugate coordinate falls inside the window lights up on $E_\parallel$ **at once**.
+
+In `trureturing`'s golden model-set and Fourier Delone modules, two kernel theorems prove first that all canonical natural-number Zeckendorf golden expansions embed inside the golden cut-and-project set, and second that the complete bi-infinite golden window carrier forms a certified **Mathlib `DeloneSet ℝ`** with explicit packing radius $1/2$ (minimum node separation $\ge 1$) and explicit covering radius $3$ (every real coordinate $x \in \mathbb{R}$ lies within distance at most $3$ of an active cut-and-project node):
+
+::: {.theorem #thm-ch37-golden-cut-delone-multilocation title="Golden Cut-and-Project Inclusion and Explicit Bi-Infinite Delone Radii Certificate" lean="D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone"}
+Across the frozen golden cut-and-project and Fourier Delone-certificate modules of `trureturing`, write $\varphi = \mathrm{Real.goldenRatio} = \frac{1+\sqrt{5}}{2}$, let $\mathrm{GoldenInt}$ denote $\mathbb{Z}[\varphi]$ ($a + b\varphi$ with $a, b \in \mathbb{Z}$), let $\operatorname{embedding}(a + b\varphi) = a + b\varphi \in \mathbb{R}$, let $\operatorname{conj}(a + b\varphi) = (a + b) - b\varphi$, let $\operatorname{minkowskiEmbedding}(x) = (\operatorname{embedding}(x), \operatorname{embedding}(\operatorname{conj}(x))) \in \mathbb{R} \times \mathbb{R}$ with additive range `goldenLattice`, and define the compact conjugate acceptance window
+
+$$
+\mathrm{goldenWindow} \;:=\; \left[-\frac{1}{\varphi^2},\; \frac{1}{\varphi}\right] \;=\; [\varphi - 2,\; \varphi - 1] \;\subset\; \mathbb{R}.
+$$
+
+The following two cut-and-project selection and global Delone uniformity theorems hold simultaneously:
+
+1. **Cut-and-Project Inclusion of Canonical Natural-Number Golden Expansions** ([`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project)): Writing $\mathrm{goldenModelSet} = \operatorname{Set.range}(\mathrm{betaGolden}) \subseteq \mathrm{GoldenInt}$ for all canonical natural-number golden-expansion values and $\mathrm{goldenCutAndProjectSet} = \{y \in \mathbb{R} \mid \exists\,\mathrm{point} \in \mathrm{goldenLattice},\; \mathrm{point}.1 = y \land \mathrm{point}.2 \in \mathrm{goldenWindow}\}$, every embedded value of `goldenModelSet` belongs to `goldenCutAndProjectSet`:
+
+   $$
+   \operatorname{embedding} '' \mathrm{goldenModelSet} \;\subseteq\; \mathrm{goldenCutAndProjectSet};
+   $$
+
+2. **Certified Delone Packing and Covering Radii of the Complete Golden Model Set** ([`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)): Over the bi-infinite cut-and-project carrier $\operatorname{modelSet}(\mathrm{goldenWindow}) = \{y \in \mathbb{R} \mid \exists x \in \mathrm{GoldenInt},\; \operatorname{embedding}(x) = y \land \operatorname{embedding}(\operatorname{conj}(x)) \in \mathrm{goldenWindow}\}$, there exists a verified Mathlib Delone set $D : \operatorname{Delone.DeloneSet}\;\mathbb{R}$ with exact carrier, uniform packing radius $1/2$, and uniform covering radius $3$:
+
+   $$
+   \begin{aligned}
+   &\exists\, D : \operatorname{Delone.DeloneSet}\;\mathbb{R}, \\
+    &D.\mathrm{carrier} = \operatorname{modelSet}(\mathrm{goldenWindow}) \\
+    &\;\land\; D.\mathrm{packingRadius} = \bigl(\tfrac{1}{2} : \mathbb{R}_{\ge 0}\bigr) \\
+    &\;\land\; D.\mathrm{coveringRadius} = \bigl(3 : \mathbb{R}_{\ge 0}\bigr)
+   \end{aligned}
+   $$
+
+   (where packing radius $1/2$ encodes uniform node separation $\forall x \neq y \in \operatorname{modelSet}(\mathrm{goldenWindow}),\; \operatorname{dist}(x, y) \ge 1$, and covering radius $3$ encodes uniform relative density $\forall x \in \mathbb{R},\; \exists y \in \operatorname{modelSet}(\mathrm{goldenWindow}),\; \operatorname{dist}(x, y) \le 3$).
+:::
+
+::: proof
+For Conjunct 1, any $y \in \operatorname{embedding} '' \mathrm{goldenModelSet}$ has a witness $v \in \mathbb{N}$ with $y = \operatorname{embedding}(\operatorname{betaGolden}(v))$; taking $\operatorname{minkowskiEmbedding}(\operatorname{betaGolden}(v)) \in \mathrm{goldenLattice}$ gives physical first coordinate $y$ and internal second coordinate $\operatorname{betaContraction}(v)$, which lies in $[-\varphi^{-2}, \varphi^{-1}]$ by `betaContraction_mem_window` and `Real.inv_goldenRatio`. For Conjunct 2, `goldenWindow_eq` rewrites $[-\varphi^{-2}, \varphi^{-1}] = [\varphi - 2, \varphi - 1]$ (width $1$) via $\varphi^{-1} = \varphi - 1$ and $\varphi^2 = \varphi + 1$; for distinct $u \neq v \in \mathrm{GoldenInt}$, integral norm integrality gives $\lvert\operatorname{norm}(u - v)\rvert = \lvert\operatorname{embedding}(u - v)\rvert \cdot \lvert\operatorname{embedding}(\operatorname{conj}(u - v))\rvert \ge 1$ while window membership bounds the conjugate difference above by $1$, forcing $\operatorname{dist}(x, y) \ge 1$ and certifying packing radius $1/2$; for arbitrary $x \in \mathbb{R}$, setting $q = 2\varphi - 1 > 0$ and choosing explicit floor coordinates $b = \lfloor x / q\rfloor$ and $a = \lfloor \varphi - 1 - b(1 - \varphi)\rfloor$ produces $u = \langle a, b\rangle \in \mathrm{GoldenInt}$ with $\operatorname{embedding}(\operatorname{conj}(u)) \in [\varphi - 2, \varphi - 1]$ and $\lvert x - \operatorname{embedding}(u)\rvert \le 3$ (using $\varphi < 2$), packaged via `goldenModelSetCertificate.toDeloneSet`. The full proof is checked by the Lean kernel.
+:::
+
+Contemplate what [@thm-ch37-golden-cut-delone-multilocation] reveals for our observer ontology (`MODEL` (interpretive model)). We can verify right by hand how a single internal window $\mathrm{goldenWindow} = [\varphi - 2, \varphi - 1] \approx [-0.3820, +0.6180]$ activates multiple separated positions along $\mathbb{R}$ simultaneously (for $u = \langle a, b\rangle \in \mathrm{GoldenInt}$, the physical embedding is $a + b\varphi$ and the conjugate coordinate is $a + b(1 - \varphi)$):
+
+- For $u_{-2} = \langle -1, -1\rangle$ and $u_{-1} = \langle 0, -1\rangle$: the conjugate coordinates are $-1 - (1 - \varphi) = \varphi - 2$ (the exact left window endpoint) and $-(1 - \varphi) = \varphi - 1$ (the exact right window endpoint), lighting up negative-axis positions $y_{-2} = -1 - \varphi \approx -2.6180$ and $y_{-1} = -\varphi \approx -1.6180$ and realizing the sharp unit spacing $y_{-1} - y_{-2} = 1 \ge 1$;
+- For $u_0 = \langle 0, 0\rangle$: the conjugate coordinate is $0 \in [\varphi - 2, \varphi - 1]$, lighting up physical position $y_0 = 0$ (spacing $y_0 - y_{-1} = \varphi \approx 1.6180 \ge 1$);
+- For $u_1 = \langle 1, 1\rangle$ and $u_2 = \langle 1, 2\rangle$: the conjugate coordinates are $2 - \varphi \approx +0.3820 \in [\varphi - 2, \varphi - 1]$ and $3 - 2\varphi \approx -0.2361 \in [\varphi - 2, \varphi - 1]$, lighting up $y_1 = 1 + \varphi = \varphi^2 \approx 2.6180$ and $y_2 = 1 + 2\varphi \approx 4.2361$ (whereas the intermediate candidate $\langle 0, 1\rangle \mapsto \varphi \approx 1.6180$ has conjugate $1 - \varphi \approx -0.6180 < \varphi - 2$ outside the window and is filtered out, leaving adjacent gaps $y_1 - y_0 = \varphi^2 \approx 2.6180 \le 6$ and $y_2 - y_1 = \varphi \approx 1.6180 \ge 1$ strictly within the packing radius $1/2$ and covering radius $3$ bounds).
+
+::: {.figure src="ch37-golden-cut"}
+**One window of width $1$ lights a whole row of separated places on the real line at once.** Above are the golden lattice points $\langle a, b\rangle$, with the physical coordinate $a + b\varphi$ across and the conjugate coordinate $a + b(1 - \varphi)$ up; the cyan horizontal strip is $\mathrm{goldenWindow} = [\varphi - 2, \varphi - 1]$. The five cyan lattice points in the strip drop along dashed lines onto the real line $E_\parallel$ below and light $y_{-2}, y_{-1}, y_0, y_1, y_2$, neighbours at least $1$ apart; $\langle 0, 1\rangle$ lies below the strip, and its place $\varphi$ on the real line is crossed out. These are the five points counted by hand above; the whole real line is the content of [@thm-ch37-golden-cut-delone-multilocation], item 2.
+:::
+
+Thus the physical slice $\operatorname{modelSet}(\mathrm{goldenWindow})$ cut out by a single internal window **is never an isolated point—it is a Delone cut-and-project constellation spanning the entire real line $\mathbb{R}$ with minimum spacing $1$ (packing radius $1/2$) and maximum covering radius $3$!** (For additional external literature context, see [@rem-ch37-dream-eraser-synthesis-table] below.) Daytime five-sense gating restricts readout to the single node nearest $\mathbf{x}_0$; when deep sleep unloads $\mathbf{P}_{\mathrm{body}}$ and local chronological guards, multiple compatible cut-points $\{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_K\}$ across the same internal window illuminate awareness simultaneously.
+
+::: {.viz src="dream-decoherence-unpinning" preset="wake_snap" height="500"}
+**Waking: the readout keeps only the body cell.** The dream state (λ = 0.1) has weight on all four places, bound together by coherence; the readout projection P₀ = |x₀⟩⟨x₀| (amber frame) keeps only the body cell x₀, the weight of the other three places fades out with all the coherence, and the forgotten weight is 1 − Tr(P₀ρ) = 0.60. This is a model (`MODEL`), not the cut-and-project star net itself.
+:::
+
+We consolidate waking five-sense lock, shallow nocturnal erasure, and bodiless deep-dream awareness under our **`MODEL` (interpretive model)** in the boxed three-regime ledger below:
+
+::: {.remark #rem-ch37-dream-eraser-synthesis-table title="Three-Regime Synthesis Table of Waking Lock, Dream Erasure, and Nonlocal Emergence (Literature Results Set Against This Book's Model)"}
+**Synthesis table: literature results are not formalized in this book, interpretations are `MODEL`, formal theorems are marked `LEAN ✓`.** The table below synthesizes Gram-elliptope ([Chapter 29](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]), cut-and-project quasicrystal aperiodicity (M. Baake & U. Grimm, *Aperiodic Order, Vol. 1*, Cambridge Univ. Press, 2013), quantum-eraser, and predictive-processing literature alongside our `MODEL` and formal decoherence-reversal and golden Delone theorems (`LEAN ✓`):
+
+| Regime of Awareness (`MODEL`) | Known-Data Anchors & Bodily Prior | Gram Volume & Off-Diagonal Coherence Fate | Spatial Addressing & Observer Localization | Phenomenological Vista & Ontological Verdict |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. Waking Five-Sense State (Strong Decoherence Lock)** | Full known-data family $D_{\mathrm{known}}$ active; bodily prior $\mathbf{P}_{\mathrm{body}}$ has loading weight near $1$ | Narrow compatibility volume (e.g., $3\times 3$ example $\det G_3 = 0.104$); off-diagonal $\sin\theta$ branches continually pinched to zero with nonnegative relative-entropy tax | Five-sense pinhole locks readout onto a single local coordinate $\mathbf{x}_0$ | Rigid, continuous, publicly checkable physical rail, while counterfactual branches hide in the $90^\circ$ blind zone |
+| **2. Shallow Dream Erasure (Partial Memory Forgetting)** | Suspends $\Delta M$ spatiotemporal and chronological constraints and applies coherent conjugation to local record copies | The retained principal minor in this example does not decrease ($\det G_2 \ge \det G_3$; strictly under the stated coupling conditions, e.g., to $0.360$); suppressed off-diagonal coherence restores under joint reversal | Oblique cross-layer addressing across eras and places sharing internal phase | Redeems counterfactual branches missed by daytime choice, while any unreversed copy leaves residual phase twist |
+| **3. Bodiless Deep Dream & Pure Awareness (Bodily Prior Zeroed)** | Bodily prior zeroed ($\mathbf{P}_{\mathrm{body}} \to 0$) and five-sense local throttle removed, retaining self-referential core $\psi = \psi(\psi)$ | Frees the observer from single-step avatar pinching overhead, aligning the internal acceptance window directly with the global lattice | Nonlocal simultaneous emergence across multiple positions $\{\mathbf{x}_1, \dots, \mathbf{x}_K\}$ along the golden cut-and-project Delone quasicrystal carrier (packing radius $1/2$, covering radius $3$) | Falsifies vessel materialism: waking and dreaming appearances alike are projection-mask inner-product renderings, while self-referential measurement alone shines undiminished |
+
+Panel I of Figure 37 depicts unread pinching, with a single-line experience requiring outcome conditioning; Panel III uses $P_{\mathrm{body}} \to 0$ as shorthand for zero loading weight. The strict positive sign in the Gram-window figure after [@ex-ch37-gram-constraint-release] belongs to the coupled numerical example $0.104 \to 0.360$; the general difference is nonnegative.
+:::
+
+Stepping down the three rows of [@rem-ch37-dream-eraser-synthesis-table], the three scenes of Figure 37, panels I, II and III, dissolves the ancient opposition between noon and midnight: waking perception is not the sole reality, only a high-magnification narrow-aperture visor worn to place crisp moves among slow-clock material attractors; dreaming is not neural noise, but a nightly quantum erasure that lifts the visor and unbuckles the bodily armor—letting finite awareness revisit unwalked orthogonal paths and verify firsthand that even without a body, across every Delone cut-and-project node, the seeing, feeling, self-referential observer shines undiminished.
+
+::: {.viz src="dream-decoherence-unpinning" height="620"}
+**The dream-erasure lab.** Three scenes on one density-matrix grid and one screen: Anchors (the decoherence interpolation ρ(λ)), Records (writing and jointly reversing multi-copy phase records) and Waking (the readout projection and the forgotten weight). Green is reserved for the theorems this chapter cites with `lean=`; the screen, the places and the readings “dream” and “waking” are a model chosen for the picture.
+:::
+
+Before carrying this picture of address-mask switching on a single static lattice into the hardware architecture of the next chapter, the record-pinching and sleep-gating algebra assembled across §§37.1–37.4 unlocks one more haunting riddle of everyday conscious experience right on the spot: why does a waking observer occasionally step into an unfamiliar crossroads and feel an unmistakable jolt of déjà vu—"I have seen this exact scene before in a dream"?
+
+---

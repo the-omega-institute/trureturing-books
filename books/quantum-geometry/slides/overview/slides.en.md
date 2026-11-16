@@ -123,8 +123,8 @@ section: "Part I · warrant"
   <div class="g2 mt">
     <div class="card violet">
       <h4>Literature · Chapter 2</h4>
-      <h3>Gleason's theorem and Busch's theorem in infinite dimension</h3>
-      <p>The book proves, in finite dimension, that a probability additive on effects is a trace pairing; Gleason's theorem (dimension at least 3) and the infinite-dimensional case are cited, not formalized here.</p>
+      <h3>Real-space and infinite-dimensional Gleason–Busch theorems</h3>
+      <p>In finite dimension the book verifies both effect additivity and complex projection additivity (dimension at least 3); the real Hilbert-space and infinite-dimensional closed-subspace or effect theorems are cited, not formalized here.</p>
     </div>
     <div class="card violet">
       <h4>Literature · Chapter 4</h4>
@@ -320,14 +320,14 @@ section: "Part IV · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 13.10 · Corollary 13.8</p>
+  <p class="kicker">Theorem 13.11 · Corollary 13.9</p>
   <h2 class="t">Classical models cap at <em>2</em>, the CHSH operator at <em>2√2</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem 13.10" title="The CHSH bound of finite deterministic fiber models is exactly 2" gid="D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_bound_is_exact" cite="thm-classical-chsh-bound-exact">
+<TheoremCard class="compact mt-s" label="Theorem 13.11" title="The CHSH bound of finite deterministic fiber models is exactly 2" gid="D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_bound_is_exact" cite="thm-classical-chsh-bound-exact">
 
 For a nonnegative normalized weight $\mu$ on a finite fiber, every deterministic fiber model has $\lvert\operatorname{classicalCHSH}(\mu, \mathrm{model})\rvert \le 2$, and $2$ is the greatest of these values.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Corollary 13.8" title="The fixed two-qubit CHSH operator has maximum expectation 2√2" gid="D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest" cite="cor-fixed-chsh-tsirelson">
+<TheoremCard class="compact mt-s" label="Corollary 13.9" title="The fixed two-qubit CHSH operator has maximum expectation 2√2" gid="D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest" cite="cor-fixed-chsh-tsirelson">
 
 Over all two-qubit states $\rho$, the values of $\operatorname{Re}\operatorname{Tr}(\rho \cdot \mathrm{chshOperator})$ have greatest element $2\sqrt2$: some state attains it, none exceeds it.
 
@@ -381,9 +381,9 @@ section: "Part V · picture"
 ---
 
 <div class="body">
-  <p class="kicker">Chapter 19 · three candidate cuts</p>
-  <h2 class="t">The width-three bridge graph has <em>three candidate cuts</em></h2>
-  <img src="./img/ch19-three-cuts.en.svg" alt="Three dashed cuts across the width-three bridge graph; the minimum cut is the smallest of the three." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="kicker">Chapter 19 · three source bounds</p>
+  <h2 class="t">The source uses <em>three cut-capacity bounds</em></h2>
+  <img src="./img/ch19-three-cuts.en.svg" alt="Three dashed cuts across the width-three bridge graph show the three cut-capacity bounds used by the source; in this worked example, the minimum cut is the smallest of the three." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
   <p class="lead mt-s">Take <Tex t="(a, b, c, d) = (2, 3, 2, 3)" />: cutting legs <Tex t="a, d" /> costs <Tex t="ad = 6" />, cutting legs <Tex t="b, c" /> costs <Tex t="bc = 6" />, the slanted cut costs more; the minimum cut is the smallest of the three.</p>
 </div>
 <Source>Chapter 19, ch19-three-cuts</Source>
@@ -789,9 +789,9 @@ section: "Part X · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 38.21 · Theorem 39.7</p>
+  <p class="kicker">Theorem 38.22 · Theorem 39.7</p>
   <h2 class="t">Non-orthogonal states <em>cannot be deep-copied</em>; the double cover <em>has no section</em></h2>
-<TheoremCard class="compact mt-s" label="Theorem 38.21" title="No universal deep copy: the inner-product criterion (item 2)" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
+<TheoremCard class="compact mt-s" label="Theorem 38.22" title="No universal deep copy: the inner-product criterion (item 2)" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
 
 Let $U$ be a complex linear isometric equivalence of $H \otimes H$. If unit vectors $\psi, \phi$ and one unit blank state satisfy $U(\psi \otimes \mathrm{blank}) = \psi \otimes \psi$ and $U(\phi \otimes \mathrm{blank}) = \phi \otimes \phi$, then $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$, and $\phi = \psi$ or $\langle\phi, \psi\rangle = 0$.
 

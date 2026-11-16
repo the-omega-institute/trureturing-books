@@ -19,11 +19,12 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from tbook import config, doctor, paths, viz
 from tbook.model import load_book_models
 
-from test_viz import fake_book
+from test_viz import fake_book, fake_lock
 
 NODE = viz.node_executable()
 GID = "D5/S1/Deficit/DeficitThreeValued.deficit_three_valued"
@@ -277,7 +278,7 @@ class KitInTheBrowser(unittest.TestCase):
 @unittest.skipUnless(browser_ready(), "node, node_modules/playwright-chromium and a Chromium are required")
 class FrozenAndCapitalsGate(unittest.TestCase):
     """evidenceChecks on .lean.frozen boxes, and the capitals warning of stageFirstChecks, run in Chromium on private
-    copies of the starter page (a private root with the repository's lock)."""
+    copies of the starter page (a private root with its own lock fixture)."""
 
     SLUG = "frozen-gate-fixture"
     EVIDENCE = '<section class="panel sec" id="evidence">\n'
@@ -311,9 +312,7 @@ process.exit(0);
                 (root / "node_modules").symlink_to(paths.ROOT / "node_modules", target_is_directory=True)
         except OSError as exc:
             raise unittest.SkipTest(f"cannot link the theme into a private root: {exc}")
-        if not paths.LOCK_FILE.is_file() or GID not in json.loads(paths.LOCK_FILE.read_text(encoding="utf-8")).get("declarations", {}):
-            raise unittest.SkipTest(f"the repository's lock does not hold {GID}")
-        shutil.copy(paths.LOCK_FILE, root / "trureturing.lock.json")
+        fake_lock().save(root / "trureturing.lock.json")
         book = fake_book(root / "books", cls.SLUG)
 
         def swap(text: str, old: str, new: str) -> str:
@@ -378,6 +377,42 @@ process.exit(0);
 
     def test_no_errors(self):
         self.assertEqual(self.errors, [])
+
+
+class FrozenGateLockPreparation(unittest.TestCase):
+    def test_setup_uses_a_private_lock_without_the_source_theorem(self):
+        for source_exists in (False, True):
+            with self.subTest(source_exists=source_exists), tempfile.TemporaryDirectory() as tmp:
+                source = Path(tmp) / "trureturing.lock.json"
+                if source_exists:
+                    lock = fake_lock()
+                    del lock.declarations[GID]
+                    lock.save(source)
+                before = source.read_bytes() if source_exists else None
+                gate = type("PrivateFrozenGate", (FrozenAndCapitalsGate,), {})
+
+                def run(args, **kwargs):
+                    private_lock = Path(kwargs["env"]["TBOOK_ROOT"]) / "trureturing.lock.json"
+                    self.assertNotEqual(private_lock, source)
+                    declarations = json.loads(private_lock.read_text(encoding="utf-8"))["declarations"]
+                    self.assertEqual(declarations[GID]["kind"], "theorem")
+                    Path(args[3]).write_text(json.dumps({"res": {}, "errors": []}), encoding="utf-8")
+                    return subprocess.CompletedProcess(args, 0, stdout="", stderr="")
+
+                try:
+                    with (
+                        mock.patch.object(paths, "LOCK_FILE", source),
+                        mock.patch.object(doctor, "chromium_path", return_value="unused"),
+                        mock.patch.object(subprocess, "run", side_effect=run) as runner,
+                    ):
+                        try:
+                            gate.setUpClass()
+                        except unittest.SkipTest as exc:
+                            self.fail(f"lock preparation skipped: {exc}")
+                        runner.assert_called_once()
+                    self.assertEqual(source.read_bytes() if source.exists() else None, before)
+                finally:
+                    gate.doClassCleanups()
 
 
 if __name__ == "__main__":

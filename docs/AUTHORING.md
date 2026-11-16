@@ -57,6 +57,7 @@ books/<slug>/
 | `book.title` / `subtitle` / `description` | 每种语言一行：`zh = "…"`、`en = "…"` |
 | `book.authors`、`license`、`isbn`（按语言）、`date` | 进入版权页与 EPUB 元数据 |
 | `book.code` | 封面与站点卡片上的代号，形如 `GOLDEN//OBSERVE` |
+| `numbering.unnumbered` | 不参与章节计数的主章路径与独立定理前缀，适用于终章等整棵章节树，见下文 |
 | `outputs.html` / `pdf` / `epub` | 输出开关；`pdf = ["screen", "print"]`；可选加 `"academic"` 导出学术预印本版，省略配置或 `true` 仍只导出原两版 |
 | `pdf.academic_paper` | 学术预印本开本，默认 `a4`；仅影响 `academic`，排印规范见 [PDF-TYPOGRAPHY.md](PDF-TYPOGRAPHY.md) |
 | `pdf.academic_tags` | 预印本的可选 PDF 结构标签，默认 `false` 以控制文件体积；`true` 时保留结构标签 |
@@ -84,6 +85,19 @@ books/<slug>/
 ```
 
 书末的“形式化验证账本”由构建自动追加，不要写进 SUMMARY。章节标题按行内 Markdown 读，转义与数学的显示规则见 §2（`[C\*-代数](ch03.md)` 显示为 C*-代数）。
+
+### 终章不参与编号
+
+需要保留终章的目录层级、同时让它和全部子页面退出章节计数时，在 `book.toml` 中配置：
+
+```toml
+[numbering.unnumbered]
+"coda.md" = "Coda"
+```
+
+键是相对每个语言版本目录的主章路径，必须在各版 `SUMMARY.md` 的列表中恰好出现一次，且位于顶层；子页面自动继承。目录仍使用 `- [终章 …](coda.md)` 和缩进子列表。终章不占章号，之后的普通主章继续连续编号；原有前言的 `0.n` 与书末独立附录的 `A.n` 规则不变。值是独立的定理环境前缀，须以 ASCII 字母开头，只含字母、数字、下划线或连字符，且不与其他主章前缀重复；上例中终章及其子页共享 `Coda.1`、`Coda.2` 等计数。
+
+HTML（包括启用 `[html] section-labels = true` 时的目录）、PDF 与 EPUB 使用同一模型。此配置不改写作者手写的标题编号：请同步移除各版 `SUMMARY.md`、正文标题与入口链接文字中的 `40.x` 等旧章号，并保留已发布的片段 id。不配置时沿用现有编号。
 
 ## 2. 环境
 
@@ -231,7 +245,7 @@ HTML 注释 `<!-- … -->` 不出现在任何输出中：其中的图片、链�
 
 外部资源：`src="trureturing-visualize:<id>"`、`src="trureturing-film:film-001-v1"`。HTML 中为交互嵌入或播放器；PDF/EPUB 中为缩略图/海报加在线地址。媒体块在各语言版本中也必须一一对应。
 
-可视化的每张实验卡都可以单独引用：`preset="<卡>"`（页面里的 `data-preset`）。HTML 中它是一张不带内部滚动的图，开在那张卡上，“全屏打开”进入同一状态的完整实验室；PDF/EPUB 中它是那张卡的带标签静态图 `viz/<id>/fig-<卡>.<语言>.jpg`（`node tools/node/viz-thumbs.mjs <book> <id>` 生成，提交入库）。把图放在讲到它的那句话旁边，图注用与图例相同的颜色词和符号；不带 `preset` 的嵌入是完整实验室，通常每个可视化在章末放一处。各语言版本引用的卡必须相同，`./tbook check` 会核对卡存在、版本一致、静态图齐全。设计与制作见 `skills/book-viz`。
+可视化的每张实验卡都可以单独引用：`preset="<卡>"`（页面里的 `data-preset`）。HTML 中它是一张不带内部滚动的图，开在那张卡上，“全屏打开”进入同一状态的完整实验室；PDF/EPUB 中它是那张卡的带标签静态图 `viz/<id>/fig-<卡>.<语言>.jpg`（`node tools/node/viz-thumbs.mjs <book> <id>` 生成，本地使用、不提交）。把图放在讲到它的那句话旁边，图注用与图例相同的颜色词和符号；不带 `preset` 的嵌入是完整实验室，通常每个可视化在章末放一处。各语言版本引用的卡必须相同，`./tbook check` 会核对卡存在、版本一致、静态图齐全。设计与制作见 `skills/book-viz`。
 
 本书的视频是构建产物：`./tbook build films|site|all` 渲染（输入未变时从缓存恢复），站点托管在 `<slug>/films/<id>/`。章节中的播放器播放 720p 旁白版、附 `film.json` 的 `outputs` 所列视频的下载链接（默认只构建 720p 旁白版与封面，1080p 与纯配乐版本列出才构建）；站点没有该视频时（缺少视频工具链且缓存未命中）显示海报与“视频未构建”。PDF/EPUB 显示提交的 `poster.jpg`，有 `base_url` 时加视频页地址。编写与构建见 `skills/book-film`。
 
@@ -274,7 +288,7 @@ HTML 注释 `<!-- … -->` 不出现在任何输出中：其中的图片、链�
 | `could not verify that pinned commit …` | 设置 `TRURETURING_DIR` 指向含该提交的 checkout（必要时先 `git fetch`），或联网让 GitHub API 回答（设置 `GITHUB_TOKEN` 可免匿名限额）；GitHub Actions 中这是错误 |
 | `not listed in SUMMARY.md` | 加入 SUMMARY 或删除文件 |
 | `figure … has no caption` / `has a placeholder caption` | 给 `.figure` 块或图片写一句说明这张图的图注；“图 13”这样的编号不算图注 |
-| `… is stale: its script draws something else` / `has not been generated` | `./tbook fig build --book <slug>`，提交生成的 `figures/*.svg` |
+| `… is stale: its script draws something else` / `has not been generated` | `./tbook fig build --book <slug>`，生成本地 `figures/*.svg`，只提交脚本 |
 | `figure …: its smallest label (…) is … px on a phone, below 10 px`（警告，`site.toml` 可升为错误） | 做窄、分栏（`WRAP = True`）或加大最小字号，提示里给了具体数值（见 `skills/book-figure`） |
 | `… is a hand-drawn SVG with its colours written in`（警告） | 改写成图脚本 `figures/<name>.py`，用 `::: {.figure}` 引用；图片语法只留给照片一类 |
 | `… has text and is shown by the zh, en editions alike`（警告） | 每种语言一版标签：改成图脚本，或各语言各用一个文件 |
@@ -314,7 +328,7 @@ command = ["python3", "books/my-book/sync-statistics.py"]
 
 `command` 是作者显式配置的命令参数数组，以仓库根目录为工作目录，不经过 shell。`python3` 使用当前工具的解释器；生成器可导入 `tbook`。生成器必须支持 `--check`：只比对、退出非零表示过期，禁止在这个模式写入。`./tbook check` 调用该模式；`./tbook build` 在读取书稿和构建缓存前自动刷新，失败即停止。生成器应先计算全部目标内容，只写字节改变的文件，保留人工编辑的论述与稳定条目编号，不调用语言或图片生成服务。无配置的书不执行额外命令。
 
-`viz-thumbs.mjs` 为每页保存 `.stills.json`，与图片一起提交。它按页面、共享运行时、配色、字体、锁文件、工具及包版本的内容摘要核对输入，并核对每张成品图片的摘要；无变化时直接返回，不启动 Chromium。增引一张卡只补该卡，移除引用会清理无消费者的静帧；输出缺失、被修改或清单损坏会重出。正文普通措辞或源文件时间戳变化不触发图片重出。
+`viz-thumbs.mjs` 为每页保存 `.stills.json`，保存在本地，不提交。它按页面、共享运行时、配色、字体、锁文件、工具及包版本的内容摘要核对输入，并核对每张成品图片的摘要；无变化时直接返回，不启动 Chromium。增引一张卡只补该卡，移除引用会清理无消费者的静帧；输出缺失、被修改或清单损坏会重出。正文普通措辞或源文件时间戳变化不触发图片重出。
 
 ```bash
 node tools/node/viz-thumbs.mjs <book> <id> --check  # 不写入，不启动浏览器

@@ -30,7 +30,7 @@ const GIDS = [
   'D5/S3/Fourier/FinitePoisson.sum_annihilator_character',
   'D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone'
 ];
-const THEORY = ['zh', 'en'].map(lang => `../../${lang}/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-point-volume-octave-and-particle-field`);
+const THEORY = ['zh', 'en'].map(lang => `../../${lang}/ch34-s13-point-volume-octave.html#sec-ch34-point-volume-octave-and-particle-field`);
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const near = (a, b, tol = 1e-12) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) < tol;
 const number = text => Number(text.replace(/−/g, '-'));

@@ -31,7 +31,7 @@ const GIDS = [
   'D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity',
   'D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor'
 ];
-const THEORY = ['zh', 'en'].map(lang => `../../${lang}/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-coset-breaking-conservation-towers`);
+const THEORY = ['zh', 'en'].map(lang => `../../${lang}/ch34-s16-coset-breaking-and-conservation.html#sec-ch34-coset-breaking-conservation-towers`);
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const near = (a, b, tol = 1e-11) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= tol;
 const T = await session();

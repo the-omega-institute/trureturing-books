@@ -213,7 +213,7 @@ for (const lang of ['zh', 'en']) {
   check(`drawer ${lang}: dialog opens`, await page.locator('#drawer [role="dialog"][aria-modal="true"]').isVisible());
   if (lang === 'en') check('drawer en: no Chinese leftovers', (await cjkLeftovers(page)).length === 0);
   check(`drawer ${lang}: exact relative chapter links`, same(await page.$$eval('#drawer .refs a', els => els.map(e => e.getAttribute('href')).sort()),
-    ['en', 'zh'].map(l => `../../${l}/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-quantum-gate-and-cosmic-concept-tower`)));
+    ['en', 'zh'].map(l => `../../${l}/ch34-s15-quantum-gates-and-concept-tower.html#sec-ch34-quantum-gate-and-cosmic-concept-tower`)));
   await page.keyboard.press('Escape'); await settle(page);
   check(`drawer ${lang}: Escape closes`, await page.locator('#drawer').evaluate(el => el.hidden));
   await page.click('#infoBtn'); await page.click('#drawerClose'); await settle(page);

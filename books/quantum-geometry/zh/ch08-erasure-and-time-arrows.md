@@ -10,12 +10,13 @@
 
 然而，只要把这两种时间放到一起，物理学里著名的“洛施密特时间反演佯谬（Loschmidt paradox）”便迎面扑来：**既然底层的幺正旋转 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$ 是百分之百双向可逆的——把旋子倒转一个负角 $R(-\theta) = R(\theta)^\dagger$ 就能原路退回——为什么宏观世界与观察者的记忆却拥有一支铁板钉钉、有去无回的“热力学时间箭头”？为什么我们能记住昨天、却记不住明天？**
 
-作为第二部《展翼·从线到面》的收官之章，本章将用七条经 Lean 4 内核验证的形式化结论，彻底算清这笔“从二维面积压扁成一维线”的信息与热力学总账：
+作为第二部《展翼·从线到面》的收官之章，本章将用八条经 Lean 4 内核验证的形式化结论，彻底算清这笔“从二维面积压扁成一维线”的信息与热力学总账：
 
 1. **幺正旋转不产熵，唯有基捏合抹除面积才产熵**：每一步“幺正旋转 $U$ $+$ 计算基对角捏合 $\Pi$”所产生的系统冯·诺依曼熵增 $\Delta S_{\mathrm{pinch}} = S(\Pi(U\rho U^*)) - S(\rho)$，一分不差地等于被抹除的横向相干面积的量子相对熵 $D(U\rho U^* \,\|\, \Pi(U\rho U^*)) \ge 0$；
 2. **任何物理过程都不会让两个态更可区分**：对一切完全正保迹的有限维量子信道 $\Phi$，$D(\Phi\rho \,\|\, \Phi\sigma) \le D(\rho \,\|\, \sigma)$（数据处理不等式）；幺正过程取等号，所以可逆；
 3. **抹平 $1$ 比特正交面积产生 $\ln 2$ 奈特系统熵增，并与非保单位兰道尔热浴重置严格区分**：在相互无偏基（MUB）下将 $d$ 维记录态保单位捏合抹平到最大混合态 $I_d/d$，系统的相对熵代价与冯·诺依曼熵增恒为 $\ln d - S(\rho)$（对单比特纯态恰为 $\ln 2 \approx 0.6931\text{ nats} = 1\text{ bit}$）；至于随后的非保单位逻辑重置如何将系统混合熵排入外部热浴，则见热力学文献注记 [@rem-landauer-stage-b-statement-literature] 与 [@rem-landauer-thermodynamic-bridge-literature]；
-4. **连观察者结构都没有任何例外**：在指定的共轭重叠逆转协议、记录不可访问的受限操作，以及其余副本幺模、幸存副本重叠不为 $1$、所选 $\rho_{ij} \neq 0$ 的条件下，漏掉唯一一份幸存副本会阻断该选定相干元的复原。
+4. **连观察者结构都没有任何例外**：在指定的共轭重叠逆转协议、记录不可访问的受限操作，以及其余副本幺模、幸存副本重叠不为 $1$、所选 $\rho_{ij} \neq 0$ 的条件下，漏掉唯一一份幸存副本会阻断该选定相干元的复原；
+5. **非负素指数账本上的生成单调性**：在有限支撑自然数素指数账本上，任何非零加法生成步都会使对数账本长度严格增大，从纯代数层面排除了仅靠后续非负生成步返回原账本状态的可能。
 
 ::: {.figure src="ch08-overview"}
 **图 8。** 本章地图：第 I 栏，琥珀色的箭头 $\lvert +\rangle$ 被捏合，品红的横向一份被抹掉，箭头缩成圆心的青色点，熵柱从 $0$ 升到 $\ln 2$；第 II 栏，两组灰色的柱，每组左边是系统的熵 $S$、右边是付出的热 $\beta Q$：阶段 A 捏合之后 $S$ 到 $\ln 2$、热为 $0$，阶段 B 复位之后 $S$ 回到 $0$、热升到 $\ln 2$，正好碰到“下界”那条横线；热这一步是文献结果，取等是理想极限（[@rem-landauer-stage-b-statement-literature]）；第 III 栏，在本节指定的共轭重叠逆转协议中，系统连着五份环境副本，四份倒了带（青色），漏下的一份 $k$ 是品红的；其余副本满足 $|c_l| = 1$（$l \neq k$），且 $c_k \neq 1$、$\rho_{01} \neq 0$，倒带后只得到 $c_k\rho_{01} \neq \rho_{01}$。
@@ -374,6 +375,28 @@ $$
 
 在上述共轭重叠协议及记录不可访问的受限操作下，[@prop-surviving-copy-blocks-reversal] 给出局部不可恢复性：若有一份未逆转的记录副本满足命题条件，所选非零矩阵元不能复原。对于本章所讨论的先未读捏合、再丢弃旧信息并重置的记忆复用协议，阶段 A 产生的熵增与阶段 B 的热代价分别受 [@thm-entropy-production-coherence-deletion] 和 [@rem-landauer-thermodynamic-bridge-literature] 约束；可逆复制或反计算并不属于这个两阶段模型。
 
+除了连续密度矩阵上的相对熵收缩与环境副本阻断之外，如果把每一次新记录的写入抽象为离散素数指数账本上的非负累加，同样会出现一条简洁的单向增长律。记有限支撑素指数账本类型为 `PrimeExponent := Nat.Primes →₀ ℕ`（即将素数类型 `Nat.Primes` 映到自然数幂次 $\mathbb{N}$ 且仅在有限个素数处非零的函数），其对应的正整数乘积为 $\operatorname{generatedNumber}(a) := \prod_{p} p^{a(p)} \in \mathbb{N}$（恒大于等于 $1$），实值对数账本长度定义为
+
+$$
+\operatorname{length}(a) := \sum_{p \in \operatorname{supp}(a)} a(p)\,\ln p \in \mathbb{R}.
+$$
+
+不妨先手算最小素数 $p = 2$ 上的两步累加：从空账本 $a = 0$（对应 $\operatorname{generatedNumber}(0) = 1$、$\operatorname{length}(0) = 0$）出发，写入一单位 $2$-指数增量 $u = \delta_2$ 后，账本长度升为 $\operatorname{length}(a + u) = \ln 2 > 0$（对应正整数 $2$）；再累加一次 $u$，长度升为 $2\ln 2 > \ln 2$（对应正整数 $4$）。下面的定理表明，只要增量 $u \neq 0$，账本长度必定严格增大。
+
+::: {.theorem #thm-ledger-generation-arrow title="非零生成使账本长度严格增长" lean="D5/S1/Ledger/GenerationArrowOfTime.length_strictly_increases_under_generation"}
+设 $a, u : \mathrm{PrimeExponent}$ 为两个有限支撑的自然数素指数账本（`Nat.Primes →₀ ℕ`）。若生成增量非零（$u \neq 0$），则累加后的账本长度严格大于原账本长度：
+
+$$
+u \neq 0 \implies \operatorname{length}(a + u) > \operatorname{length}(a).
+$$
+:::
+
+::: proof
+由 `Finsupp.sum` 对逐点自然数加法的线性性，$\operatorname{length}(a + u) = \operatorname{length}(a) + \operatorname{length}(u)$，故待证不等式等价于 $\operatorname{length}(u) > 0$。对有限支撑中的任意素数 $p \in \mathrm{Nat.Primes}$，因 $p \ge 2 > 1$，实对数严格为正（$\ln p > 0$），且自然数指数 $u(p) \ge 0$，故求和中的每一项 $u(p)\ln p \ge 0$。又因 $u \neq 0$，其有限支撑非空，至少存在一个素数 $p_0$ 使得自然数指数满足 $u(p_0) \ge 1$，该项贡献 $u(p_0)\ln p_0 > 0$，从而有限和 $\operatorname{length}(u) > 0$，即 $\operatorname{length}(a + u) > \operatorname{length}(a)$。完整证明由 Lean 内核检查。
+:::
+
+在引用 [@thm-ledger-generation-arrow] 时应当认清其精确的代数前提与认识论边界：`PrimeExponent` 的取值域是自然数 $\mathbb{N}$，不允许负指数（否则负增量便可抵消既有记录），且所有素数均满足 $p \ge 2 > 1$，因而实对数 $\ln p$ 恒落在严格正值区间，不会触发总函数在零点或非正实数处的退化取值。在这一非负加法生成模型内，任何有限串非零增量 $u_1, \dots, u_m \neq 0$ 都迫使 $\operatorname{length}(a) < \operatorname{length}(a + u_1) < \cdots < \operatorname{length}(a + u_1 + \cdots + u_m)$，故系统不可能仅凭后续非负生成步回到早先的账本状态；但这是一条关于算术加法半群上对数泛函严格单调性的代数定理，本身并不等同于物理热力学第二定律、兰道尔热下界 $k_B T \ln 2$ 或一切物理时间箭头（后者仍需下文的热浴模型前提）。
+
 ::: {.remark #rem-landauer-thermodynamic-bridge-literature title="Landauer、可逆计算与有限吉布斯热浴应用"}
 下面的有限吉布斯热浴恒等式与下界，经前面的应用接到既有矩阵声明。Landauer 与 Bennett 的物理解释和实现主张仍以文献为依据。阶段 A 保留其捏合定理；把浴能量增量解释为热量，并选择正温单位，则是阶段 B 的模型前提。
 
@@ -393,12 +416,12 @@ Reeb–Wolf 的定理 3（arXiv:1306.4352v3，DOI：10.1088/1367-2630/16/10/1030
 
 ## 8.4 第二部总结与过渡：当一个平面装不下三次正交分叉，向三维球面跃迁 {#sec-part2-summary-bridge}
 
-至此，第二部《展翼·从线到面》的四章画卷已经全部展开。通过二十六条经 Lean 4 内核逐一验证的形式化定理、引理、命题与推论（第五至第八章依次为五、五、九、七条），我们彻底打通了二维有向面积的几何脉络：
+至此，第二部《展翼·从线到面》的四章画卷已经全部展开。通过二十七条经 Lean 4 内核逐一验证的形式化定理、引理、命题与推论（第五至第八章依次为五、五、九、八条），我们彻底打通了二维有向面积的几何脉络：
 
 - **第五章**拆穿了虚数单位 $i$ 的神秘伪装，从平衡幺正和 $S = A + B$ 出发严格导出反自伴相对复结构 $J := 2AB^*$ 的平方律 $J^2 = -I$（[@thm-balanced-sum-skew-adjoint]、[@lemma-skew-adjoint-unitary-square]、[@thm-relative-complex-structure-square]）与相位锁定实分解（[@prop-phase-locked-overlap]），并以圆的二重覆盖定理（[@thm-circle-double-cover-history-lift]）说明“转一整圈旋子变号”是拓扑事实，将全部单比特量子门还原为三维布洛赫球上的克利福德旋子 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$；
 - **第六章**用几何积 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$ 终结了波粒二象性的百年割裂，以拉格朗日—格拉姆恒等式（[@thm-lagrange-gram-identity]）、罗伯逊—薛定谔四项守恒律（[@thm-robertson-schrodinger]）及其混合态不等式（[@thm-mixed-state-robertson]）、纯态记录互补圆 $D^2 + V^2 = 1$（[@thm-record-coherence-complementarity]）与捏合勾股分解（[@cor-pinching-pythagorean]）将教科书五大公设熔铸为一炉，并配以实时交互实验室 `ORTHO//QUBIT`；
 - **第七章**揭示了“线是经典时间，面积是量子时间”的时间二象性，证明单参数幺正群满足哈密顿量自伴性、指数生成律与无穷小导数方程（[@thm-calibrated-unitary-group]），投影概率流由对易子面积驱动（[@prop-projection-probability-flow]），翻越 $90^\circ$ 正交墙受富比尼—施图迪速度极限约束（[@thm-fubini-study-record-time]），频闪监测下首次返回概率与留存概率逐步守恒（[@prop-monitored-return-conservation]），并给出高频投影抽检的芝诺效应以及作为标量自由能记账判据的临界逆温阈值（[@thm-decoherence-freeze-critical]）；
-- **第八章**算清了将二维面积压扁成一维线的信息与热力学账单，证明相互无偏捏合的相对熵与熵增恒为 $\ln d - S(\rho)$（[@thm-dual-account-full]），计算基捏合的单步与累积熵产生恒等于相干擦除相对熵（[@thm-entropy-production-coherence-deletion]），由热浴平衡与幺正平衡推出热量—熵—信息恒等式及兰道尔下界的取等判据（[@prop-landauer-identity-from-balances]、[@cor-landauer-bound-saturation]），局部不可逆源于环境记录访问缺陷（[@thm-reduced-irreversibility-access-defect]），且哪怕漏掉唯一一份未逆转的环境副本也会阻断相干时间反演（[@prop-surviving-copy-blocks-reversal]）。
+- **第八章**算清了将二维面积压扁成一维线的信息与热力学账单，证明相互无偏捏合的相对熵与熵增恒为 $\ln d - S(\rho)$（[@thm-dual-account-full]），量子信道下相对熵单调不增（[@thm-channel-data-processing]），计算基捏合的单步与累积熵产生恒等于相干擦除相对熵（[@thm-entropy-production-coherence-deletion]），由热浴平衡与幺正平衡推出热量—熵—信息恒等式及兰道尔下界的取等判据（[@prop-landauer-identity-from-balances]、[@cor-landauer-bound-saturation]），局部不可逆源于环境记录访问缺陷（[@thm-reduced-irreversibility-access-defect]），漏掉唯一一份未逆转的环境副本即阻断相干时间反演（[@prop-surviving-copy-blocks-reversal]），并在非负素指数账本上确立了非零生成步的对数长度严格增长律（[@thm-ledger-generation-arrow]）。
 
 现在，站在第二部与第三部的交界处，请思考下一个必将到来的维度跃迁：**如果宇宙里真的只有一张二维平面 $\operatorname{span}\{\vv{e}_1, \vv{e}_2\}$，那么从基准轴 $\vv{e}_1$ 出发转过一次 $90^\circ$ 到达正交轴 $\vv{e}_2$ 之后，你还能找到同时与 $\vv{e}_1$ 和 $\vv{e}_2$ 都成 $90^\circ$ 正交的第三根方向吗？**
 

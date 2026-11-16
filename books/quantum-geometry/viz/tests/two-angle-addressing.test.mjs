@@ -262,6 +262,67 @@ const hud = await shot.textContent('#hudSub'), tt = trotterTest(4);
 check('TROTTER still: the zigzag has played to its end, and the stage reads 126.87°, 0.2496 and 0.9984 as the caption and the table say', close(s.t, s.max) && s.max === 8 && hud.includes('126.87°') && hud.includes('0.2496') && hud.includes(`${(4 * tt.err).toFixed(4)}`) && (4 * tt.err).toFixed(4) === '0.9984', hud);
 await shot.close();
 
+// the colour readout's visible label, read as a reader sees it: the criterion printed in the <dt> of #roColors must
+// classify points exactly as the open 45° caps do, for both sets of axes and both languages. The caps are judged
+// here by the angle itself (tan < 1, i.e. (y·a)² > ‖y × a‖², in integers), not by any form of the label.
+/** The criterion shown in the visible label, as a test on an integer direction y and an integer axis a (x = y/‖y‖). */
+function readCriterion(text) {
+  const all = [...text.matchAll(/(\d*)\s*\(x·([aâ])ᵢ\)²\s*([>≥])\s*(‖aᵢ‖²|½|1\/2|\d+)/g)];
+  if (all.length !== 1) return null;
+  const [, k, hat, op, rhs] = all[0], c = k ? Number(k) : 1;
+  // c (x·a)² ⋛ r  becomes, for x = y/‖y‖ and a = â‖a‖ where the label writes â, c (y·a)² ⋛ r ‖y‖² (‖a‖² on the right for â)
+  const r = (a) => (rhs === '‖aᵢ‖²' ? dot(a, a) : rhs === '½' || rhs === '1/2' ? 0.5 : Number(rhs)) * (hat === 'â' ? dot(a, a) : 1);
+  return (y, a) => { const l = c * dot(y, a) ** 2, m = r(a) * dot(y, y); return op === '>' ? l > m : l >= m; };
+}
+const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+const inCap = (y, a) => dot(y, a) ** 2 > dot(cross(y, a), cross(y, a));   // angle(y, ±a) < 45°, open
+const SETS = { six: { raw: RAW6, names: ['0', '1', '2', '3', '4', '5'] }, three: { raw: RAW3, names: ['e₁', 'e₂', 'e₃'] } };
+// integer directions on and next to the rims: (1, 1, 0) and (3, 1, 0) sit exactly 45° from e₁ and from a₀ (excluded,
+// the caps are open); (10, 9, 0) / (28, 11, 0) lie just inside, (9, 10, 0) / (29, 8, 0) just outside
+const RIMS = { three: [[1, 1, 0], [10, 9, 0], [9, 10, 0], [1, 0, 0]], six: [[3, 1, 0], [28, 11, 0], [29, 8, 0], [1, 0, 0]] };
+// targets set with the sliders (θ, φ in degrees): e₁, e₃, near the diagonal, either side of 45° from e₃, near a₀
+const TARGETS = [[90, 0], [0, 0], [55, 45], [44, 0], [46, 0], [90, 63], [120, 200]];
+const lp = await T.goto(BOOK, ID, '?lang=zh', await T.newPage());
+const lpRange = async (id, v) => { await lp.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(lp); };
+const visibleLabel = () => lp.evaluate(() => document.getElementById('roColors').parentElement.querySelector('dt').innerText.trim());
+/** Compare the shown criterion with the caps at the exact rim directions and at the page's own points; with readout. */
+async function judgeLabel(set, label) {
+  const crit = readCriterion(label), { raw, names } = SETS[set], bad = [];
+  if (!crit) return [`no single criterion in "${label}"`];
+  for (const y of RIMS[set]) raw.forEach((a, i) => { if (crit(y, a) !== inCap(y, a)) bad.push(`rim ${y} axis ${i}: label ${crit(y, a)}, cap ${inCap(y, a)}`); });
+  for (const [th, ph] of TARGETS) {
+    await lpRange('theta', th); await lpRange('phi', ph);
+    await lp.evaluate(() => window.ANGLES_DEBUG.seek(1e9)); await settle(lp);
+    const x = (await lp.evaluate(() => window.ANGLES_DEBUG.state)).p, shown = (await lp.textContent('#roColors')).trim();
+    const geo = raw.map((a, i) => i).filter((i) => inCap(x, raw[i])), lab = raw.map((a, i) => i).filter((i) => crit(x, raw[i]));
+    const clear = raw.every((a) => Math.abs(Math.atan2(Math.hypot(...cross(x, a)), Math.abs(dot(x, a))) / DEG - 45) > 0.5);
+    const read = shown === '无' || shown === 'none' ? [] : shown.split(' · ').map((n) => names.indexOf(n));
+    if (!vclose(x, sph(th, ph), 1e-9) || !clear) bad.push(`θ ${th} φ ${ph}: point ${x} not at the target or too close to a rim`);
+    else if (JSON.stringify(lab) !== JSON.stringify(geo) || JSON.stringify(read) !== JSON.stringify(geo)) bad.push(`θ ${th} φ ${ph}: label ${lab}, caps ${geo}, readout ${read}`);
+  }
+  return bad;
+}
+for (const lang of ['zh', 'en']) {
+  await lp.click(`[data-lang-set="${lang}"]`); await settle(lp);
+  for (const set of ['six', 'three']) {
+    await lp.click(`#setChips [data-set="${set}"]`); await settle(lp);
+    const label = await visibleLabel(), s0 = await lp.evaluate(() => window.ANGLES_DEBUG.state);
+    const own = lang === 'zh' ? /颜色/.test(label) && !/colours/.test(label) : /colours/.test(label) && !/颜色/.test(label);
+    const bad = await judgeLabel(set, label);
+    check(`colour label (${lang}, ${set} axes): the visible "${label}" picks exactly the open 45° caps, rims excluded, and agrees with the readout`, own && s0.set === set && bad.length === 0, bad.slice(0, 3).join(' | '));
+  }
+}
+// negative control, in this page only: with the old wording "2(x·aᵢ)² > 5" put into the visible label, the same
+// judgement holds for the six rational axes (‖aᵢ‖² = 5) and fails for the coordinate axes (at x = e₁: 2 > 1, not 2 > 5)
+await lp.click('[data-lang-set="en"]'); await settle(lp);
+const swap = (text) => lp.evaluate((t) => { const e = document.getElementById('roColors').parentElement.querySelector('dt .en'); const was = e.textContent; e.textContent = t; return was; }, text);
+const kept = await swap('colours holding x (2(x·aᵢ)² > 5)');
+const oldBad = {};
+for (const set of ['six', 'three']) { await lp.click(`#setChips [data-set="${set}"]`); await settle(lp); oldBad[set] = await judgeLabel(set, await visibleLabel()); }
+await swap(kept);
+check('colour label: the judgement rejects the old "> 5" wording on the coordinate axes (x = e₁ is held: 2 > 1) and accepts it only for the six rational axes', oldBad.six.length === 0 && oldBad.three.some((b) => b.startsWith('θ 90 φ 0:') && b.includes('readout 0')) && oldBad.three.some((b) => b.startsWith('rim 1,0,0 axis 0')), JSON.stringify(oldBad));
+await lp.close();
+
 // language
 await page.click('[data-lang-set="en"]'); await settle(page);
 check('the stage title follows the language', (await page.textContent('#hudBig')).startsWith('Address'));

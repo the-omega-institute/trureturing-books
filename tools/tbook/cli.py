@@ -46,6 +46,13 @@ def cmd_check(args) -> int:
     return 1 if errors else 0
 
 
+def cmd_test(args) -> int:
+    from . import theme
+    theme.write()
+    from ci import testing
+    return testing.local(args)
+
+
 def cmd_pin(args) -> int:
     from pathlib import Path
 
@@ -138,13 +145,17 @@ def cmd_requests(args) -> int:
 def cmd_cache(args) -> int:
     """./tbook cache status|key|prune|export: the build cache (tools/tbook/buildcache.py,
     docs/ARCHITECTURE.md)."""
-    from . import buildcache
+    from . import buildcache, derived, theme
+    theme.write()
 
     if args.cache_cmd == "key":
         print(buildcache.actions_key())
         return 0
     site = config.load_site()
-    current = buildcache.units(site, _books(args))
+    books = _books(args)
+    for book in books:
+        derived.refresh(book)
+    current = buildcache.units(site, books)
     if args.cache_cmd == "status":
         for unit in current:
             key = unit.key
@@ -177,6 +188,8 @@ def _slides_backdrop(check: bool) -> int:
     there is nothing to do."""
     script = paths.ROOT / "tools" / "node" / "slides-backdrop.mjs"
     if not script.exists() or not (paths.THEME / "slides" / "styles" / "backdrop.css").exists():
+        return 0
+    if check and not (paths.THEME / "slides/styles/backdrop.jpg").is_file():
         return 0
     node = shutil.which("node")
     if not node:
@@ -288,6 +301,13 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--version", action="version", version=f"tbook {__version__}")
     sub = p.add_subparsers(dest="cmd", required=True)
 
+    c = sub.add_parser("test", help="run only tests affected by branch and working-tree changes")
+    c.add_argument("--base", default="origin/main", help="comparison branch/ref (default: origin/main)")
+    c.add_argument("--list", action="store_true", help="show the selection without running tests")
+    c.add_argument("--full", action="store_true", help="explicitly select all tests")
+    c.add_argument("--slow", action="store_true", help="run selected visualization suites with slow frames")
+    c.set_defaults(fn=cmd_test)
+
     c = sub.add_parser("check", help="verify structure, bilingual parity and Lean citations")
     c.add_argument("--book", action="append", help="limit to a book slug (repeatable)")
     c.add_argument("--offline", action="store_true", help="do not fetch trureturing state over the network")
@@ -385,6 +405,12 @@ def parser() -> argparse.ArgumentParser:
     c.add_argument("--exclude", action="append", default=[], help="generated index chapter to exclude")
     c.add_argument("--json", action="store_true", help="include declarations and citation locations")
     c.set_defaults(fn=cmd_stats)
+
+    c = sub.add_parser("artifacts", help="list, untrack or reject generated publication files in Git")
+    c.add_argument("action", choices=["list", "untrack", "check"])
+    c.add_argument("--book", action="append")
+    from . import artifacts
+    c.set_defaults(fn=artifacts.cli)
 
     c = sub.add_parser("sync", help="refresh configured book-owned derived data and images")
     c.add_argument("--book", action="append")

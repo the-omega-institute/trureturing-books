@@ -173,7 +173,7 @@ check('SHRINK: the staircase is drawn on the flat overlay #flat, shown over the 
       return { st, label: [...document.querySelectorAll('#stage .tags .tag')].some((e) => !e.hidden && e.textContent.trim() === lab) };
     });
     check(`SHRINK still (${lang}): the staircase is on the flat overlay #flat, shown`, r.st.flat && !(await shot.evaluate(() => document.getElementById('flat').hidden)) && (await inkShare(shot, '#flat')) > 0.01);
-    const st = r.st, md = fs.readFileSync(new URL(`../../${lang}/ch16-qsvt-walks-and-compilation.md`, import.meta.url), 'utf8');
+    const st = r.st, md = fs.readFileSync(new URL(`../../${lang}/ch16-s09-compilation-error-and-count.md`, import.meta.url), 'utf8');
     const cap = (/::: \{\.viz src="gate-word-polytope" preset="shrink"[^}]*\}\n([\s\S]*?)\n:::/.exec(md) || [, ''])[1];
     const flat = st.epsAll.some((e, l) => l > 0 && close(e, st.epsAll[l - 1], 1e-9));
     check(`SHRINK still (${lang}): the staircase is on the stage, its bars are the test's own ε₀ … ε₂₀, and the current one is labelled`, st.chart && st.L === 20 && r.label && st.epsAll.length === 21 && st.epsAll.every((e, l) => close(e, exact[l], l <= 9 ? 1e-7 : 2e-4)));

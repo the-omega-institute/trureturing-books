@@ -37,6 +37,8 @@ description: '为书做交互可视化时使用：先定这张图要让读者看
 
 如果一个主题需要两个以上互不相同的对象，分成场景（同一页的几个舞台，共用一条时间轴），每个场景仍然回答同一个问题。
 
+章节内容较长、需要 5–8 张实验卡时，用**同核递进卡组**：所有卡围绕同一枚几何主角展开不同切面——第 1 张立起最小原胞与核心恒等式，第 2–3 张展示对偶纤维、正反相消或拓扑阻塞，第 4–5 张拼出多胞涌现或跨层重整化，最后一张收束闭环或撤去辅助标尺——不要把几张互不相干的小示意图硬塞进同一页。若同一几何对象同时承载“具体领域的物理表象”与“底层共用的几何原语”两套读法，可在控制栏放一组两段式透镜切换（`.lens-toggle` 里的 `button[aria-pressed]`，仅当前激活项着 `--amber`），在**完全同一组状态参数**下原地切换标签、叠层与读数口径，让读者亲眼看见“两套语言本是同一件事”。
+
 ### 1. 选舞台，不选版式
 
 版式服从内容：先问“这个结论的对象长什么样”，再决定画什么。常见的几种：
@@ -76,7 +78,9 @@ description: '为书做交互可视化时使用：先定这张图要让读者看
 - 投影屏、切片面、切平面与商空间读出板都要在各自局部 `(u, v)` 坐标里画出落上去的二维图形（投影点、线段、转向弧、多边形、抬升圆盘），随平面一起透视倾斜；用虚线投射束连向主体时，也不能只留空线框。
 - 倾角、纵深或 $n$ 重旋转对称需要参照时，在底部或赤道面铺低对比度的极坐标或等值基准面，如 `sc.circle(…, { fade: false })` 同心环配对称轴向辐射线。切到“去坐标”“内禀无标尺”等卡时，基准面与外围幕布、辅助射线、舞台标签同步淡出撤净。
 - 稠密特征的标签要让出主体：几个 `.tag.backed` 即使互不重叠，挤在中心也会遮住几何。候选位沿屏幕径向推向轮廓外的空白处；偏移较远时在 `sc.overlay()` 上用清淡细引线指回锚点。外围投影屏的标题固定在各屏外缘。
-- 一两个有意义的参数让实体连续变形（粘合、转角、隔墙）；实验卡是这条变形路上的几站，每站一个看得出差别的画面。只为过渡画面而设、正文没有定义的参数照实标 `MODEL`，变形的终态必须是正文里那个可核算的对象。
+- 一两个有意义的参数让实体连续变形（粘合、转角、隔墙）；实验卡是这条变形路上的几站，每站一个看得出差别的画面。只为过渡画面而设、正文没有定义的参数照实标 `MODEL`，变形的终态必须是正文里那个可核算的对象。演示内部共享壁相消（$\partial^2 = 0$）、粗粒化或撤去坐标幕布时，用底部时间轴驱动单一连续混合参数 $\lambda \in [0, 1]$，让内壁随 $\lambda$ 平滑淡出而外表面通量保持不变。
+- 三维画布本身的指针拖动留给轨道相机旋转；需要让读者在实体上直接推拉某个内禀参数（张角、视界半径、窗口宽度）时，每帧把该锚点的三维投影 `sc.p(v)`（或 `st.p(v)`）同步到舞台内的绝对定位 `<button class="handle">` 琥珀圆环手柄（`z-index: 3`，配 `setPointerCapture` 与方向键微调），让相机旋转与参数拖动互不抢手势。`.stage.still` 下关闭手柄指针事件，`[data-thumb-mode]` 与 `[data-shot]` 下隐藏 `.handle`，保证封面与印刷静帧干净。
+- 页面内的微算引擎真算且轻快：用 `Float64Array`、显式小矩阵特征分解／舒尔补、小格点三维离散傅里叶或紧化辛普森数值积分实时求解；开销较大的参数扫描按量化键缓存在 `Map` 中，既保证 60 帧拖动顺滑，又能在 `VIZ_SLOW_FRAMES=1000` 下由独立算法逐点复核，绝不预烘假曲线。
 - 读数少而大：只读正文定义过的量。参照别处的漂亮读数而本书没有定义的，不搬。
 - 不变的东西照旧：页面契约、颜色语义、依据标注（`LEAN ✓` 只给锁文件里的定理），每个数都由页面算出、测试用独立算法核对。
 
@@ -116,7 +120,9 @@ const h = sc.hit(ev);                            // { id, u, v, point, normal, f
 
 `<div class="app lab">`（`theme.css`）给出：左栏实验卡与控制、中间舞台（下面可有一条 `.strip` 小图）、右栏读数与依据、底部时间轴。它在窄屏和书内 iframe 里自动把舞台放到最前。在这个版式里：
 
-- **舞台**占视口的三成以上（质量门会量）。舞台上只留图形、短标签（`st.tag`）、左上角一行标题一行说明（`.hud-tl`）和底边图例（`.hud-bl`）。标题写“场景 · 关键量”，解释放进下一行说明。标题块与右上角的场景按钮（`.hud-tr`）一旦会相碰（手机、书内窄框、按钮多），`shell.js` 给舞台加 `.hud-stack`，标题块自动排到按钮下面（`--hud-tr-bottom` 是按钮的下沿）；不相碰时位置不变，宽屏画面照旧。不要再给 `.hud-tl` 手写 `top`。
+- **舞台**占视口的三成以上（质量门会量）。舞台上只留图形、短标签（`st.tag`）、左上角一行标题一行说明（`.hud-tl`）和底边图例（`.hud-bl`）。标题写“场景 · 关键量”，解释放进下一行说明。标题块与右上角的场景按钮（`.hud-tr`）一旦会相碰（手机、书内窄框、按钮多），`shell.js` 给舞台加 `.hud-stack`，标题块自动排到按钮下面（`--hud-tr-bottom` 是按钮的下沿）；不相碰时位置不变，宽屏画面照旧。不要再给 `.hud-tl` 手写 `top`；给 `#stage` 设 `container-type: inline-size`，窄容器（如 `@container (max-width: 560px)`）下自动收紧 `.hud-tl` 与 `.hud-bl` 的字号和内边距。
+- **三栏暗色控制台契约不可破。** 保持 `.app.lab` 的标准三栏骨架（左栏卡片与控制、中栏 `#stage` 与其下方的 `.strip`、右栏读数与 `#evidence`、底栏 `footer.rail`）：不要在页面 `style.css` 里覆写 `.app.lab` 的 `grid-template-columns` 改成两栏等私有布局；不要把辅助折线图或公式面板塞进 `#stage` 内部（辅助小图一律放在 `#stage` 下方的 `.strip`，确保章节按卡引用 `?embed=1&preset=…` 时自动隐去 `.strip`、只留纯净舞台）；不要监听 `prefers-color-scheme` 篡改 `document.documentElement.dataset.trPalette` 制造白底分叉。理论抽屉入口 `#infoBtn` 只在 `#evidence` 内放一枚（不在顶栏 `.status` 重复放置），启动时可把 `#evidence` 里的依据框同步克隆进 `#drawer`，使窄屏与书内读者打开抽屉也能看到完整分层依据。
+- **琥珀色令牌排他。** `--amber` 只留给当前选中的态、激活卡与可拖手柄；顶栏 `.tagline em` 与抽屉 `.sheet li b` 的文字强调用 `var(--cyan)`，`.hud-tl .big` 标题主字用 `var(--sigma)`，体积与旋子读数（`dl.ro .v dd`）用 `var(--violet)`，避免文字强调抢走“当前选择”的视觉焦点。
 - **实验卡**（`.presets.cards` 里的 `button.preset[data-preset]`）：`.code` 是英文代号，`.cn` 是一句人话。点一张卡，舞台应当动起来（`kit.tween` 过渡），而不是硬切。
 - **条带小图**回答“沿时间轴，什么在变、什么不变”。一到两张，每张一个问题，标题就是那个问题。
 - **大写只给词。** 舞台标签（`.tag`）、面板与小图标题、卡片代号、按钮按大写排版，但希腊字母与单个字母的变量照原样显示：`shell.js` 的 `TRV.keepCase` 把它们包进 `<span class="keepcase">`（页面加载时整页处理一次，之后页面写入的文字自动处理，`st.tag` / `sc.tag` 写标签时也会调用），δ 不会变成 Δ，u、m、φ 不会变成 U、M、Φ。两个以上拉丁字母的词照样大写；`it's` 这样带撇号的词算一个词，夹在两个词之间的 a 当冠词照样大写（“IN A STRAIGHT LINE”）。不必再逐个加 `raw`；已经写成大写希腊字母的（Δ、Φ）不受影响。质量门对仍被排成大写的小写希腊字母给警告。
@@ -160,7 +166,7 @@ const h = sc.hit(ev);                            // { id, u, v, point, normal, f
 
 ### 5. 看图
 
-测试分不清清楚的图和杂乱的图，必须亲眼看。每做完一轮：
+测试分不清清楚的图和杂乱的图，画面改动必须亲眼看。每轮只查看本次受影响的可视化与画面；输入未变且范围适用的既有截图可以复用，不重看其他实验室：
 
 ```bash
 node tools/node/viz-shots.mjs <book> <id>                 # 桌面、书内、手机、封面，中英各一，写到 build/viz-shots/
@@ -187,6 +193,8 @@ node tools/node/viz-shots.mjs <book> <id> --views phone,desk --width 360 --heigh
 
 ### 6. 测试
 
+本地先用 `./tbook test --list` 确认范围，再用 `./tbook test` 与 CI 一样只跑改动影响的测试。只跑可视化时，`node tools/node/viz-test.mjs [book ...]` 同样默认按改动选择，书名仅缩小范围；`--list` 预览、`--base <ref>` 更换比较基准，只有显式 `--full` 才跑范围内全量。`--slow` 仅在修改时钟、异步等待或排查慢帧故障时显式运行所选套件；不因单个页面改动而遍历整本书。额外读取用精确路径声明；正文的实验卡引用依赖用 `@citations`，它按正式块解析器选中引用该页面的章节。直接读取章中文字的测试仍须单独声明对应文件。
+
 `books/<book>/viz/tests/<id>.test.mjs`：
 
 ```js
@@ -203,8 +211,9 @@ await stageFirstChecks(T, '<book>', '<id>');     // 所有舞台优先页面都�
 - **“这张卡会自己播”用 `playsAfter`，不用“点卡、`settle`、再 `until`”。** 一段只扫过一小段时间轴的播放（零点几秒）可能在测试开始看之前就播完了，`until(playing && t > 0)` 白等 30 秒超时。`playsAfter` 先把观察器装进页面，再做动作：`check('FILL plays', await playsAfter(page, () => page.click('[data-preset="fill"]'), () => window.<NAME>_DEBUG.state))`。第三个参数在页面里运行，返回 `{ playing, t }`（省略时读时间轴的 ▶ 按钮与滑块）；页面在每一帧和每次 DOM 变化时取样，记下“开始播放、随后越过起点”。短于一两秒的自动播放一律这样写。
 - **停帧读数要核对。** 被引用的卡，测试用 `openStill(T, '<book>', '<id>', '<卡>', '<语言>')` 按 `viz-thumbs.mjs` 出图的方式（800 × 450、`?shot=1`、减少动效）打开那张卡的静止帧，核对此时的读数就是图注里写的数：`const p = await openStill(T, BOOK, ID, 'cancel', 'zh'); check('…', (await p.evaluate(() => window.<NAME>_DEBUG.state)).pass === 3); await p.context().close();`。
 - 不写 `page.waitForTimeout(…)`：`viz-validate`（与 `./tbook check`）对测试里的每一处固定等待报警告，并给出行号与改法。
-- 交付前加上 `VIZ_SLOW_FRAMES=1000` 再跑一遍测试（`VIZ_SLOW_FRAMES=1000 node books/<book>/viz/tests/<id>.test.mjs`，或整本书 `node tools/node/viz-test.mjs <book> --slow`）：它把动画帧拉开到一秒一帧，比 CI 最忙时还慢，耗时与平时几乎相同。为过渡或播放等固定时间而碰巧通过的检查在这里必然失败；间隔取得比测试里最长的固定等待短，就可能照不出来。CI 每周（与手动触发时）用 `--slow` 把全部测试跑一遍（`ci.yml` 的 `viz-slow`，`docs/PUBLISHING.md` §4），PR 不等它。
+- 交付前加上 `VIZ_SLOW_FRAMES=1000` 再跑一遍测试（`VIZ_SLOW_FRAMES=1000 node books/<book>/viz/tests/<id>.test.mjs`，或整本书 `./tbook test --slow`）：它把动画帧拉开到一秒一帧，比 CI 最忙时还慢，耗时与平时几乎相同。为过渡或播放等固定时间而碰巧通过的检查在这里必然失败；间隔取得比测试里最长的固定等待短，就可能照不出来。CI 每周（与手动触发时）用 `--slow` 把全部测试跑一遍（`ci.yml` 的 `viz-slow`，`docs/PUBLISHING.md` §4），PR 不等它。
 - 键盘：用指针点了实验卡、场景按钮或导览条之后，`kit` 把焦点交给舞台，空格直接播放或暂停；用 Tab 走到按钮上的读者，空格与回车仍按下那个按钮。测试里点完卡就按空格，读到的是时钟的翻转；要测按钮本身对空格的响应，先 `page.focus(…)` 或用 Tab 走到它。
+- 在中等高度视口（如 `740×620`）中暂停自动播放时，注意 `kit.autoplay(clock, stageEl)` 挂有 `IntersectionObserver`：直接调用 `page.click('#play')` 会把底栏滚进视口、把 `#stage` 顶出视口，从而触发视口外自动暂停并干扰后续断言。测试里仅需静默停表或切换 `#play` 且不希望改动滚动位置时，在页面上下文内触发：`await page.locator('#play').evaluate((b) => { if (b.getAttribute('aria-pressed') === 'true') b.click(); }); await settle(page);`。
 - 用随机抽样做独立核对时，容差要对得上抽样的精度。落在尖点上的极值（多面体的面、绝对值之和）靠均匀抽样收敛很慢：先抽样，再在最好的点附近逐步收窄搜索。
 - 每提交一次输入（`fill` 加回车、点一次步进键或一张卡）也先 `settle(page)`，再去动下一个控件：页面在下一帧按状态重写全部输入框，上一次提交排定的那一帧若落在“第二个框已填、回车未按”之间，刚填的值被覆盖，第二次提交不会发生。本地机器快，几乎不触发；CI 上表现为同一条断言偶发失败、重跑又通过。
 
@@ -213,13 +222,13 @@ await stageFirstChecks(T, '<book>', '<id>');     // 所有舞台优先页面都�
 ```bash
 ./tbook viz new <book> <id> "<CODE//NAME>" "<中文标题>" "<English title>"   # 从起始模板生成，登记为 draft
 node tools/node/viz-server.mjs                       # http://127.0.0.1:8766/site/<book>/viz/<id>/（?lang=en、?embed=1、?preset=…）
-node tools/node/viz-test.mjs <book>
+./tbook test                                         # 仅测试受影响套件
 node tools/node/viz-thumbs.mjs <book> <id>           # 封面 thumb.jpg，以及章节引用到的每张卡的 fig-<卡>.<语言>.jpg；提交入库
 node tools/node/viz-validate.mjs <book> && ./tbook check
 ./tbook build html site --book <book> && ./tbook serve
 ```
 
-完善 `books/<book>/viz/visualizations.json`（`title_en`、`summary`/`summary_en`、`tags`/`tags_en`、`theory`、`lean`），把 `status` 改为 `live`；新引用了 GID 时先 `./tbook pin --refresh`。改了卡片或引用之后运行 `viz-thumbs.mjs`；它核对输入和成品摘要，只补过期或缺失的图片，无变化时不启动浏览器。`.stills.json` 随图片提交，`--check` 只读检查，`--force` 用于有意重采样。首次建立清单必须实际出图。正文措辞变动不要求重画全部卡；数据驱动页面复用正式统计和本书生成器，不手填总数。`./tbook check` 会核对被引用的卡存在、各语言版本引用一致、静态图齐全。只在相关输入和画面不变且原检查范围适用时复用看图证据；舞台、行为与标签变化仍按前文测试和看图。
+完善 `books/<book>/viz/visualizations.json`（`title_en`、`summary`/`summary_en`、`tags`/`tags_en`、`theory`、`lean`），把 `status` 改为 `live`；新引用了 GID 时先 `./tbook pin --refresh`。改了卡片或引用之后运行 `viz-thumbs.mjs`；它核对输入和成品摘要，只补过期或缺失的图片，无变化时不启动浏览器。`.stills.json` 与图片均为本地构建输出，不提交，`--check` 只读检查，`--force` 用于有意重采样。首次建立清单必须实际出图。正文措辞变动不要求重画全部卡；数据驱动页面复用正式统计和本书生成器，不手填总数。`./tbook check` 会核对被引用的卡存在、各语言版本引用一致；导出构建负责生成所需静态图。只在相关输入和画面不变且原检查范围适用时复用看图证据；舞台、行为与标签变化仍按前文测试和看图。
 
 ## kit 速查（`theme/viz/kit.js`，在 `<head>` 里排在 `shell.js` 之后）
 
@@ -245,6 +254,8 @@ node tools/node/viz-validate.mjs <book> && ./tbook check
 | 现象 | 为什么不行 | 改法 |
 | --- | --- | --- |
 | 所有页面同一副骨架，舞台只有一小块 | 版式先于内容，读者看到的是数字墙 | 回到第 1 步，按对象选舞台 |
+| 私自把 `.app.lab` 改成两栏、把折线小图塞进 `#stage`，或按系统主题改 `data-tr-palette` | 破坏全书统一控制台视觉，且 `?embed=1&preset=…` 无法自动隐去小图 | 保持共享三栏暗色版式，小图放 `#stage` 下方的 `.strip`，不改 `data-tr-palette` |
+| 在三维画布上既拖相机又直接拖无句柄参数 | 读者一拖参数镜头就乱转，或一转镜头参数就跑偏 | 相机归画布，参数锚点投影到绝对定位 `<button class="handle">` 琥珀圆环（`setPointerCapture`） |
 | 读数十几行，全是符号 | 读者不知道看哪一行 | 留一行关键读数，其余进抽屉 |
 | 画布里手绘表格或大段文字 | 不能缩放、不能翻译、会重叠 | 画布只画图形；文字用 `st.tag` 或 DOM |
 | 局部补片靠一两格内的半径阶跃硬拔起来 | 有限网格把陡壁切成锯齿褶皱，像贴歪的烟囱 | 承载曲面按 $C^1$ 相切平滑过渡，补片微抬 `0.004–0.01` 无缝内嵌，画内禀细分线 |
@@ -267,7 +278,7 @@ node tools/node/viz-validate.mjs <book> && ./tbook check
 | --- | --- |
 | `check` 报 draft 不能嵌入 | 完成登记表与测试，把状态改为 `live` |
 | `no experiment card data-preset="…"` | 章节引用的卡在页面里不存在；核对卡名，各语言版本一致 |
-| `the still of card "…" for <lang> is missing` | 运行 `node tools/node/viz-thumbs.mjs <book> <id>` 并提交生成的 `fig-*.jpg` |
+| `the still of card "…" for <lang> is missing` | 运行 `node tools/node/viz-thumbs.mjs <book> <id>` 生成本地 `fig-*.jpg`，只提交源文件 |
 | 静态图没有停在想要的画面 | 给那张卡写 `still`，把卡片表交给 `kit.cards({ presets })`，并在 `TRV.still` 时跳到它 |
 | 测试警告 `still: card … plays by itself but declares no still frame` | 同上；声明之后用 `openStill` 核对那一帧的读数与图注一致，再重新出图 |
 | `until(… playing && t > 0)` 在 CI 上偶尔 30 秒超时 | 那张卡的播放很短，测试开始看时已经播完：改用 `playsAfter(page, () => 点卡, () => 读 { playing, t })` |
@@ -281,13 +292,14 @@ node tools/node/viz-validate.mjs <book> && ./tbook check
 | 警告 `… is in a .lean.frozen box but a theorem environment of the text cites it` | 正文已引用这条定理：换成绿色 `.lean` 框，并列进登记表的 `lean` |
 | `Cannot access '…' before initialization`，页面一片空白 | `kit.clock` 的 `format` 在构造时被调用，里面引用了尚未赋值的时钟变量 |
 | 书里的图内部出现滚动条 | 被引用的图（带 `preset`）不应滚动；检查是否有固定高度的元素撑破了舞台 |
-| 测试本地通过，CI 上偶尔有几条失败 | 多半是为过渡或播放等了固定时间；用 `node tools/node/viz-test.mjs <book> --slow`（即 `VIZ_SLOW_FRAMES=1000`）在本地复现，过渡改成 `settle(page)`，播放改成 `until(page, …)` 等状态本身 |
+| 测试本地通过，CI 上偶尔有几条失败 | 多半是为过渡或播放等了固定时间；用 `./tbook test --slow`（即 `VIZ_SLOW_FRAMES=1000`）在本地复现，过渡改成 `settle(page)`，播放改成 `until(page, …)` 等状态本身 |
 | `viz-validate` 警告 `waitForTimeout(…) at line N waits a fixed time` | 测试第 N 行等了固定时间：点卡或过渡之后改成 `await settle(page)`，等播放改成 `check(…, await until(page, () => …))`；改完用 `--slow` 跑一遍 |
 | 点过一张卡后按空格，卡又重放了一遍，没有暂停 | 页面没有用 `kit.cards` / `kit.chips` 处理点击（自己写了 `click` 监听）：改用它们，或在自己的指针点击处理里把焦点交给 `.stage`；`stageFirstChecks` 的 `keyboard: after a card is clicked, Space plays and pauses the clock` 会抓到 |
 | 页面的空格不控制时钟（`kit.clock({ keys: false })`），这条键盘检查失败 | 页面另有空格的用法时，传 `stageFirstChecks(T, book, id, { keys: false })` 跳过它，并在页面自己的测试里检查那个用法 |
+| 测试里 `page.click('#play')` 后播放状态异常翻转，或舞台因滚出视口被暂停 | `page.click` 自动滚动底栏会把 `#stage` 推出视口，触发 `kit.autoplay` 的 `IntersectionObserver` 暂停 | 用 `page.locator('#play').evaluate(b => b.click())` 在不滚动视口的前提下切换，随后 `await settle(page)` |
 
 ## 完成标准
 
-一句话与每张卡都能在正文里找到对应的句子；看过全部截图并与参照页面比过；会自己播放的卡都声明了停帧（`stageFirstChecks` 没有 `still:` 警告）；被引用卡的静态图与图注逐张对过，测试里用 `openStill` 核对停帧读数；`stageFirstChecks` 与页面自己的检查全部通过；`viz-validate`、`./tbook check` 通过；登记表为 `live`，封面与被引用卡的静态图已提交；各语言章节的引用一致；受影响的站点与 PDF 构建通过，导出页面的额外视觉排查按 [book-export](../book-export/SKILL.md) 的触发条件执行。
+一句话与每张卡都能在正文里找到对应的句子；看过全部截图并与参照页面比过；会自己播放的卡都声明了停帧（`stageFirstChecks` 没有 `still:` 警告）；被引用卡的静态图与图注逐张对过，测试里用 `openStill` 核对停帧读数；`stageFirstChecks` 与页面自己的检查全部通过；`viz-validate`、`./tbook check` 通过；登记表为 `live`，封面与被引用卡的静态图已在本地验收，提交只含源文件；各语言章节的引用一致；受影响的站点与 PDF 构建通过，导出页面的额外视觉排查按 [book-export](../book-export/SKILL.md) 的触发条件执行。
 
 当前版本来自 `trureturing.lock.json`，不复制 SHA 到源码。正文与审计表用 `docs/AUTHORING.md` 的保留链接标签；幻灯片用 `<PinnedCommit />`（复用主题的 `pinned`）；可视化锚点用 `data-lean-gid` / `data-trureturing-path` 和 `href="#"`，由构建与本地预览解析。动态声明数据可从 `../assets/trureturing.json` 取得（构建生成、本地预览从锁读取；不提交该文件）。真实历史版本仍按历史事实保留。钉版后复核摘要变化与媒体陈述，再重建；纯提交或行号变化不要求改正文或媒体源码。

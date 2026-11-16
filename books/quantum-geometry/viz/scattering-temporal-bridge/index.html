@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="SCATTER//TIME · Barrier branches and the temporal double slit">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SCATTER//TIME · 势垒双支与时间双缝</title>
+<meta name="description" content="有限方势垒里两条匹配的倏逝支一起携带守恒的流；时间上的相消要求两条不可区分、等幅的路径。Two matched evanescent branches inside a finite barrier carry a conserved flux; temporal cancellation needs two indistinguishable paths of equal amplitude.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="scattering-temporal-bridge">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="SCATTER//TIME">SCATTER<b>//</b>TIME</h1>
+      <div class="tagline">
+        <span class="zh">势垒双支与时间双缝 · <em>两条匹配的倏逝支一起携带守恒的流；时间上的相消要求两条不可区分、等幅的路径。</em>数值演示，不是证明。</span>
+        <span class="en">Barrier branches and the temporal double slit · <em>two matched evanescent branches carry a conserved flux; temporal cancellation needs indistinguishable, equal paths.</em> A numerical illustration, not a proof.</span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillParam">E <strong>—</strong></span>
+      <span class="pill hot" id="pillKey">T <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验卡" data-aria-en="Experiment cards">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§34.19</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="barrier" aria-pressed="false"><span class="code">BARRIER</span><span class="cn zh">薄势垒：两条倏逝支一起携带流</span><span class="cn en">Thin barrier: two evanescent branches carry the flux</span></button>
+        <button class="preset" data-preset="opaque" aria-pressed="false"><span class="code">OPAQUE</span><span class="cn zh">厚势垒：T 很小，流仍处处相同</span><span class="cn en">Thick barrier: T is small, the flux is still the same everywhere</span></button>
+        <button class="preset" data-preset="cancel" aria-pressed="false"><span class="code">CANCEL</span><span class="cn zh">等幅、无标记、反相：P = 0</span><span class="cn en">Equal, unmarked, opposite: P = 0</span></button>
+        <button class="preset" data-preset="marked" aria-pressed="false"><span class="code">MARKED</span><span class="cn zh">标记正交：条纹消失，P = 1</span><span class="cn en">Orthogonal markers: no fringe, P = 1</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="三维曲线：势垒内外的复波函数，或两条时间路径的相量螺旋" data-aria-en="3D curves: the complex wave function inside and outside the barrier, or the phasor helices of two temporal paths">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="stat" aria-pressed="true"><span class="zh">定态势垒</span><span class="en">Barrier</span></button><button class="chip" data-scene="temp" aria-pressed="false"><span class="zh">时间双缝</span><span class="en">Time slits</span></button>
+      </div>
+      <button type="button" class="handle" id="handle" aria-label="拖动手柄" data-aria-en="Drag the handle" hidden></button>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel"><div class="head"><h2 id="plotATitle"></h2><span id="plotAMeta"></span></div><canvas id="plotA" aria-label="条带小图一" data-aria-en="Strip plot one"></canvas></section>
+      <section class="panel"><div class="head"><h2 id="plotBTitle"></h2><span id="plotBMeta"></span></div><canvas id="plotB" aria-label="条带小图二" data-aria-en="Strip plot two"></canvas></section>
+    </div>
+  </main>
+
+  <aside class="col side" id="evidence" aria-label="控制、读数与依据" data-aria-en="Controls, readouts and evidence">
+    <button class="chip" id="infoBtn"><span class="zh">理论接口 · 这不是证明</span><span class="en">Theory interface · not a proof</span></button>
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">参数</span><span class="en">Parameters</span><span class="aside">ℏ = 2m = V₀ = 1</span></h2>
+      <div class="grp" data-scene="stat">
+        <div class="field"><label for="energy"><span class="zh">能量 E</span><span class="en">Energy E</span><small class="zh">势垒高 V₀ = 1</small><small class="en">barrier height V₀ = 1</small></label><output id="oEnergy" for="energy">0.500</output><input type="range" id="energy" min="0.1" max="0.9" step="0.005" value="0.5"></div>
+        <div class="field"><label for="width"><span class="zh">宽度 L</span><span class="en">Width L</span><small class="zh">也可拖势垒右面的琥珀环</small><small class="en">or drag the amber ring on the right face</small></label><output id="oWidth" for="width">1.20</output><input type="range" id="width" min="0.4" max="5" step="0.01" value="1.2"></div>
+      </div>
+      <div class="grp" data-scene="temp" hidden>
+        <div class="field"><label for="ratio"><span class="zh">振幅比 a</span><span class="en">Amplitude ratio a</span><small class="zh">也可拖琥珀环</small><small class="en">or drag the amber ring</small></label><output id="oRatio" for="ratio">1.00</output><input type="range" id="ratio" min="0" max="1.5" step="0.01" value="1"></div>
+        <div class="field"><label for="overlap"><span class="zh">标记重叠 μ</span><span class="en">Marker overlap μ</span><small class="zh">实、非负</small><small class="en">real, non-negative</small></label><output id="oOverlap" for="overlap">1.00</output><input type="range" id="overlap" min="0" max="1" step="0.01" value="1"></div>
+        <div class="field"><label for="phase"><span class="zh">相位 φ</span><span class="en">Phase φ</span></label><output id="oPhase" for="phase">1.000π</output><input type="range" id="phase" min="0" max="6.283185307179586" step="any" value="3.141592653589793"></div>
+        <div class="field"><label for="delay"><span class="zh">两路时差 Δt</span><span class="en">Path delay Δt</span><small class="zh">E = ℏq/Δt</small><small class="en">E = ℏq/Δt</small></label><output id="oDelay" for="delay">2.00</output><input type="range" id="delay" min="0.5" max="4" step="0.05" value="2"></div>
+      </div>
+    </section>
+    <section class="panel sec" id="readouts">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">NUM</span></h2>
+      <dl class="ro" id="roList"></dl>
+      <p class="note" id="roNote"></p>
+    </section>
+    <section class="panel sec" id="leanPanel">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">NUM · MODEL · ARGUED · OPEN</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都按双精度当场算出：D、t、r、T、R、两条倏逝支的系数、ψ 与 ψ′ 在 x = 0 与 x = L 两侧的值、流 j = 2 Im(ψ̄ψ′)、e<sup>−2κL</sup>、两条时间路径的振幅与相干合成振幅、标记求迹后的相干强度与非相干本底强度、相对谱强度 P(q) 与它的下限。P(q) 是计数除以非相干基线 1 + a² 的相对量，取值在 0 与 2 之间，不是概率。数值演示，不是证明。</span><span class="en">Every number on the page is computed live in double precision: D, t, r, T, R, the coefficients of the two evanescent branches, ψ and ψ′ on both sides of x = 0 and x = L, the flux j = 2 Im(ψ̄ψ′), e<sup>−2κL</sup>, the amplitudes of the two temporal paths and their coherent resultant, the coherent and incoherent background intensities after the markers are traced out, and the relative spectral intensity P(q) with its floor. P(q) is the count divided by the incoherent baseline 1 + a², a relative quantity between 0 and 2, not a probability. A numerical illustration, not a proof.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">单位 ℏ = 2m = V₀ = 1；横轴按一个比例缩放，两侧各画 4 个长度单位的自由空间。势垒里 k → iκ 是 e<sup>ikx</sup> 的解析延拓；把它读成“藏起来的 90° 空间转身”是本书的诠释，不是测量。时间双缝取两条路径的最小模型，μ 的相位并入 φ。</span><span class="en">Units ℏ = 2m = V₀ = 1; the x axis is scaled by one factor, with 4 length units of free space drawn on each side. Inside the barrier k → iκ is the analytic continuation of e<sup>ikx</sup>; reading it as a hidden 90° spatial turn is this book's interpretation, not a measurement. The temporal double slit is the minimal two-path model, with the phase of μ absorbed into φ.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：方势垒透射闭式 T = 1/(1 + sinh²κL/(4E(1 − E)))（标准量子力学结果，页面另由边界匹配算出并核对）；时间双缝干涉实验见理论接口所列来源，页面不复现它们的数据。</span><span class="en">Literature results, not formalized in this book: the closed form T = 1/(1 + sinh²κL/(4E(1 − E))) for a square barrier (a standard result of quantum mechanics; the page also obtains T by boundary matching and compares); temporal double-slit experiments are listed in the theory interface, and the page does not reproduce their data.</span></span></div>
+      <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">开放问题：粒子在势垒下“停留多久”没有公认的单一操作定义。页面不给出任何穿越时间，也不把任何读数解释为负时间穿越。</span><span class="en">Open question: how long a particle “spends” under a barrier has no agreed single operational definition. The page gives no traversal time and reads no number as a negative-time traversal.</span></span></div>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0.5" aria-label="时间轴" data-aria-en="Rail">
+    </div>
+    <div class="keys"><kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一步</span><span class="en">one step</span> · <span class="zh">拖空白处转视角</span><span class="en">drag empty space to orbit</span></div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 势垒双支与时间双缝</span><span class="en">Theory interface · barrier branches and the temporal double slit</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">这是数值演示，不是证明。页面上的每个数都由页面当场算出（NUM）；文献只作为来源列出，页面不复现其中的数据，也不替其中的诠释背书。</p>
+      <ol>
+        <li><b>定态势垒。</b>单位 ℏ = 2m = V₀ = 1，势垒占 [0, L]，E ∈ [0.1, 0.9]，k = √E，κ = √(1 − E)。左侧 ψ = e<sup>ikx</sup> + r e<sup>−ikx</sup>，右侧 ψ = t e<sup>ikx</sup>，势垒里 ψ = t e<sup>ikL</sup>(cosh κ(L − x) − i(k/κ) sinh κ(L − x))。D = cosh κL + i(κ² − k²)/(2kκ) sinh κL，t = e<sup>−ikL</sup>/D，r = −i(k/κ + κ/k) sinh κL/(2D)。在 x = 0 与 x = L 两处 ψ 与 ψ′ 都连续；页面列出两侧的值。</li>
+        <li><b>两条倏逝支。</b>势垒里 ψ = a₊e<sup>κx</sup> + a₋e<sup>−κx</sup>。单独一支的 Im(ψ̄ψ′) 为 0；流 j = 2 Im(ψ̄ψ′) = 4κ Im(ā₋a₊) 只来自两支的交叉项，沿 x 不变，等于右侧的 2kT。T = |t|²，R = |r|²，T + R = 1。e<sup>−2κL</sup> 只是领头指数，不含前因子：κL 大时 T/e<sup>−2κL</sup> 趋于 16E(1 − E)，页面把两者并排列出。</li>
+        <li><b>虚的 k。</b>势垒里 e<sup>ikx</sup> 的 k 换成 iκ，这是解析延拓。把它读成“藏起来的 90° 空间转身”是本书的诠释模型，不是任何测量的结果。</li>
+        <li><b>时间双缝。</b>两条时间路径的振幅 z₁ = 1、z₂ = a e<sup>i(q+φ)</sup>，q = EΔt/ℏ，a ∈ [0, 1.5]；标记重叠 μ = |⟨m₁|m₂⟩| ∈ [0, 1]，其相位并入 φ。对标记求迹后得到的是混合态，探测计数是强度而不是某一个振幅的平方：1 + a² + 2aμ cos(q + φ) = |√μ(z₁ + z₂)|² + (1 − μ)(1 + a²)。前一项是相干合成振幅 √μ(z₁ + z₂)（舞台上紫色的螺旋与箭头）的强度；后一项是按 1 − μ 加权的非相干本底强度，舞台上画成半径平方等于它的紫色环，它不是振幅。页面画的 P(q) = (1 + a² + 2aμ cos(q + φ))/(1 + a²) 是计数除以非相干基线 1 + a² 的相对谱强度：不是概率，也不是对全部能量归一的密度，取值在 0 与 2 之间，只有 a = 1、μ = 1 且 cos(q + φ) = 1 时达到 2。μ = 0 时相干合成振幅为 0，本底强度 (1 − μ)(1 + a²) = 1 + a² 仍为正，P ≡ 1。下限是 (1 + a² − 2aμ)/(1 + a²)；P = 0 当且仅当 a = 1、μ = 1 且 cos(q + φ) = −1。</li>
+        <li><b>相消要求什么。</b>干涉同时取决于相位、两路振幅之比与标记重叠；它不是“探测器把粒子消灭”。没有任何测量表明粒子以负时间穿越；带后选择的原子激发时间的读数依赖测量协议。</li>
+        <li><b>来源。</b>ITO 薄膜中的时间双缝衍射：<a href="https://doi.org/10.1038/s41567-023-01993-w" target="_blank" rel="noopener">doi:10.1038/s41567-023-01993-w</a>；阿秒双缝（Lindner 等，2005）：<a href="https://doi.org/10.1103/PhysRevLett.95.040401" target="_blank" rel="noopener">doi:10.1103/PhysRevLett.95.040401</a>；磁振子平台：<a href="https://doi.org/10.1103/jc1c-k3ll" target="_blank" rel="noopener">doi:10.1103/jc1c-k3ll</a>；带后选择的原子激发：<a href="https://doi.org/10.1103/gjfq-k9dv" target="_blank" rel="noopener">doi:10.1103/gjfq-k9dv</a>。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch34-s19-roundtrip-projection-and-imaginary-blindspot.html#sec-ch34-19-5" target="_top">§34.19 往返双投影、玻恩平方律与虚数盲区</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">This is a numerical illustration, not a proof. Every number is computed on the page (NUM); the literature is listed as sources only, and the page neither reproduces their data nor endorses their interpretations.</p>
+      <ol>
+        <li><b>The stationary barrier.</b> Units ℏ = 2m = V₀ = 1, the barrier fills [0, L], E ∈ [0.1, 0.9], k = √E, κ = √(1 − E). On the left ψ = e<sup>ikx</sup> + r e<sup>−ikx</sup>, on the right ψ = t e<sup>ikx</sup>, inside ψ = t e<sup>ikL</sup>(cosh κ(L − x) − i(k/κ) sinh κ(L − x)). D = cosh κL + i(κ² − k²)/(2kκ) sinh κL, t = e<sup>−ikL</sup>/D, r = −i(k/κ + κ/k) sinh κL/(2D). Both ψ and ψ′ are continuous at x = 0 and at x = L; the page lists the values on both sides.</li>
+        <li><b>Two evanescent branches.</b> Inside, ψ = a₊e<sup>κx</sup> + a₋e<sup>−κx</sup>. Each branch alone has Im(ψ̄ψ′) = 0; the flux j = 2 Im(ψ̄ψ′) = 4κ Im(ā₋a₊) comes only from the cross term of the two, does not change along x, and equals 2kT on the right. T = |t|², R = |r|², T + R = 1. e<sup>−2κL</sup> is the leading exponential only, without its prefactor: for large κL the ratio T/e<sup>−2κL</sup> tends to 16E(1 − E), and the page lists both side by side.</li>
+        <li><b>Imaginary k.</b> Inside the barrier the k of e<sup>ikx</sup> becomes iκ: an analytic continuation. Reading it as a hidden 90° spatial turn is this book's interpretive model, not the result of any measurement.</li>
+        <li><b>The temporal double slit.</b> Two temporal path amplitudes z₁ = 1 and z₂ = a e<sup>i(q+φ)</sup>, q = EΔt/ℏ, a ∈ [0, 1.5]; the marker overlap μ = |⟨m₁|m₂⟩| ∈ [0, 1], its phase absorbed into φ. Tracing out the markers leaves a mixed state, and the count is an intensity, not the square of one amplitude: 1 + a² + 2aμ cos(q + φ) = |√μ(z₁ + z₂)|² + (1 − μ)(1 + a²). The first term is the intensity of the coherent resultant amplitude √μ(z₁ + z₂) (the violet helix and arrow on the stage); the second is the incoherent background intensity weighted by 1 − μ, drawn as a violet ring whose squared radius equals it, and it is not an amplitude. The P(q) = (1 + a² + 2aμ cos(q + φ))/(1 + a²) on the page is the count divided by the incoherent baseline 1 + a², a relative spectral intensity: not a probability and not a density normalised over all energies; it lies between 0 and 2 and reaches 2 only at a = 1, μ = 1 and cos(q + φ) = 1. At μ = 0 the coherent amplitude is 0, the background intensity (1 − μ)(1 + a²) = 1 + a² stays positive and P ≡ 1. The floor is (1 + a² − 2aμ)/(1 + a²); P = 0 exactly when a = 1, μ = 1 and cos(q + φ) = −1.</li>
+        <li><b>What cancellation needs.</b> Interference depends on the phase, on the ratio of the two amplitudes and on the marker overlap together; it is not a detector annihilating the particle. No measurement shows a particle traversing in negative time; the reading of an atomic excitation time under postselection depends on the measurement protocol.</li>
+        <li><b>Sources.</b> Double-slit time diffraction in an ITO film: <a href="https://doi.org/10.1038/s41567-023-01993-w" target="_blank" rel="noopener">doi:10.1038/s41567-023-01993-w</a>; the attosecond double slit (Lindner et al., 2005): <a href="https://doi.org/10.1103/PhysRevLett.95.040401" target="_blank" rel="noopener">doi:10.1103/PhysRevLett.95.040401</a>; a magnon platform: <a href="https://doi.org/10.1103/jc1c-k3ll" target="_blank" rel="noopener">doi:10.1103/jc1c-k3ll</a>; atomic excitation with postselection: <a href="https://doi.org/10.1103/gjfq-k9dv" target="_blank" rel="noopener">doi:10.1103/gjfq-k9dv</a>.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch34-s19-roundtrip-projection-and-imaginary-blindspot.html#sec-ch34-19-5" target="_top">§34.19 The round-trip projection and the imaginary blind spot</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

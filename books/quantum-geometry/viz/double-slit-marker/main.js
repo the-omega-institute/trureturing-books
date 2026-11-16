@@ -2,7 +2,7 @@
    The stage has two parts that move together:
      screen  hits arriving one by one on the screen of a double slit, the expected law env(x)·(1 + c·cos kx) drawn
              over them, and the cyan band between env·(1 − V) and env·(1 + V) whose thickness is the fringe contrast;
-             once the marker is read, the same hits are copied into two rows, one for each reading
+             once the marker is read, the same hits are sorted into two rows, one for each outcome of that readout
      circle  the two unit marker states as arrows: r_L lies along the horizontal axis, r_R is turned by α; the cyan
              shadow of r_R on r_L is V = cos α, its magenta height is D = sin α, and the point (V, D) stays on the
              quarter circle; a mixed marker with pure-state weight λ puts the point at (cos α, λ·sin α), so that
@@ -11,6 +11,9 @@
    through the same two turns, i.e. e₀ with weight (1 + λ)/2 and e₁ with weight (1 − λ)/2. λ is the weight of the pure
    part, not the purity: Tr ρ² = (1 + λ²)/2. (The control keeps the id "purity" for compatibility.) Reading the marker in the
    orthonormal pair (m₁, m₂) gives P(x, m) = Σ w·½·env(x)·(a² + b² + 2ab·cos kx) with a = ⟨m, r_L⟩, b = ⟨m, r_R⟩.
+   Reading for the path and reading to erase are alternative readouts of one preparation: only one can be taken. The
+   ERASER card sorts the same stored hits once under each choice, for comparison; it is not a path reading followed by a
+   second, erasing one (after a projective path readout at α = 90° no later reading sorts the hits into fringes).
    The rail is the number of hits. Read-only probe for the browser suite: window.SLIT_DEBUG. */
 (() => {
   'use strict';
@@ -18,7 +21,7 @@
   const $ = (id) => document.getElementById(id);
   const DEG = Math.PI / 180, NMAX = 1600, K = 8 * Math.PI, SIG = 0.45, GRID = 1201;
   const env = (x) => Math.exp(-x * x / (2 * SIG * SIG));
-  const S = { alpha: 60, lambda: 1, reader: 'none', hold: false, split: 0, then: null };
+  const S = { alpha: 60, lambda: 1, reader: 'none', hold: false, split: 0, then: null, compare: false };
 
   /* ---------- the law on the screen ---------- */
   const XS = Array.from({ length: GRID }, (_, i) => -1 + 2 * i / (GRID - 1));
@@ -206,12 +209,15 @@
   const LEG = {
     none: [['cy box', '条纹对比度 V（影子与带宽）', 'fringe contrast V (shadow, band)'], ['mg', '路径可辨度 D（高）', 'path distinguishability D (height)'], ['am', '<bdi>当前的标记 r<sub>R</sub></bdi>', '<bdi>the current marker r<sub>R</sub></bdi>']],
     path: [['cy box', '条纹对比度 V', 'fringe contrast V'], ['mg', '按路径读出的两行与 D', 'rows read for the path, and D'], ['am', '<bdi>当前的标记 r<sub>R</sub></bdi>', '<bdi>the current marker r<sub>R</sub></bdi>']],
-    erase: [['cy', '擦除后分拣的两行与 V', 'rows read to erase, and V'], ['mg', '路径可辨度 D', 'path distinguishability D'], ['am', '<bdi>当前的标记 r<sub>R</sub></bdi>', '<bdi>the current marker r<sub>R</sub></bdi>']]
+    erase: [['cy', '擦除读出的两行：条件条纹', 'rows of the erasing readout: conditional fringes'], ['cy box', '整屏的条纹对比度 V', 'fringe contrast V of the whole screen'], ['mg', '路径可辨度 D', 'path distinguishability D'], ['am', '<bdi>当前的标记 r<sub>R</sub></bdi>', '<bdi>the current marker r<sub>R</sub></bdi>']]
   };
   function drawText() {
     const V = contrast(), D = disting(), sum = V * V + D * D, n = shown(), pure = S.lambda >= 1;
     $('hudBig').textContent = `α = ${fix(S.alpha, 0)}° · V = ${fix(V, 2)} · D = ${fix(D, 2)}`;
-    const how = S.reader === 'none' ? L('标记没读', 'marker not read') : S.hold ? L('落点先到，标记稍后再读', 'hits first; the marker is read afterwards') : S.reader === 'path' ? L('按路径读了标记', 'marker read for the path') : L('按擦除方向读了标记', 'marker read to erase');
+    const how = S.reader === 'none' ? L('标记没读', 'marker not read')
+      : S.hold ? (S.compare ? L('落点先到，读法最后再选', 'hits first; the readout is chosen last') : L('落点先到，标记稍后再读', 'hits first; the marker is read afterwards'))
+        : S.compare ? (S.reader === 'path' ? L('对照：若选按路径读', 'comparison: if the path readout is chosen') : L('对照：若改选擦除方向读（与按路径读二选一）', 'comparison: if the erasing readout is chosen instead (one or the other)'))
+          : S.reader === 'path' ? L('按路径读了标记', 'marker read for the path') : L('按擦除方向读了标记', 'marker read to erase');
     $('hudSub').textContent = L(`屏上 ${n} 个落点 · ${how}`, `${n} hits on the screen · ${how}`);
     $('roSum').innerHTML = `<span class="c-mg">${fix(D * D, 3)}</span> + <span class="c-cy">${fix(V * V, 3)}</span> = ${fix(sum, 3)}`;
     $('roSumSub').textContent = pure ? L('纯态标记：无论 α 是多少都等于 1', 'pure marker: 1 whatever α is')
@@ -220,7 +226,7 @@
     $('roV').textContent = fix(V, 3); $('roD').textContent = fix(D, 3); $('roA').textContent = `${fix(S.alpha, 0)}°`; $('roL').textContent = `${fix(S.lambda, 2)} · ${fix((1 + S.lambda * S.lambda) / 2, 3)}`;
     $('roM').textContent = `${fix(V * V / 2, 3)} = V²/2`;
     $('roNote').textContent = V > 0.995 ? L('两支箭头重合：标记什么也没记下，条纹满对比度。', 'The arrows coincide: the marker has recorded nothing, and the fringes have full contrast.')
-      : V < 0.005 && pure ? L('两支箭头垂直：路径完全写进了标记，条纹消失。', 'The arrows are square: the path is fully written into the marker, and the fringes are gone.')
+      : V < 0.005 && pure ? L('两支箭头垂直：路径完全写进了标记，屏上没有条纹。路径与标记各自的约化态都没有副对角元：相干没有搬进标记，而在两者的联合关联里。', 'The arrows are square: the path is fully written into the marker, and the screen shows no fringes. Neither the path nor the marker alone keeps an off-diagonal entry: the coherence has not moved into the marker; it is in their joint correlations.')
         : pure ? L(`影子 ${fix(V, 2)}，高 ${fix(D, 2)}：一个变长，另一个就变短。`, `Shadow ${fix(V, 2)}, height ${fix(D, 2)}: as one grows, the other shrinks.`)
           : L(`标记带噪声：对比度仍是 ${fix(V, 2)}，能读出的可辨度只有 ${fix(D, 2)}。`, `A noisy marker: the contrast is still ${fix(V, 2)}, but only ${fix(D, 2)} of distinguishability can be read.`);
     $('pillAngle').querySelector('strong').textContent = `${fix(S.alpha, 0)}°`;
@@ -239,22 +245,25 @@
     if (from === target) { paint(); if (done) done(); return; }
     splitTween = kit.tween(TRV.still ? 0 : ms == null ? 700 : ms, (e) => { S.split = from + (target - from) * e; paint(); }, () => { splitTween = null; if (done) done(); });
   }
-  // a card that reads the same hits twice: once sorted by the first reading, pause, gather them back, sort by the second
+  // a card that compares two alternative readouts on the same stored hits: sorted as the first readout would sort them,
+  // pause, gather them back, sorted as the alternative readout would. A comparison on the page, not two successive
+  // measurements of one marker: a preparation is read in only one of the two ways
   let seqTween = null;
   function stopSequence() { S.then = null; if (seqTween) { seqTween.cancel(); seqTween = null; } }
-  function rereadLater() {
+  function compareLater() {
     if (!S.then) return;
     seqTween = kit.tween(1400, () => {}, () => {
       seqTween = null; const to = S.then; if (!to) return; S.then = null;
+      if (!TRV.still) TRV.toast($('toast'), L('同一批存下的落点收回来，改按另一种读法分开来对照：两种读法只能选一种，这不是对标记的第二次读出。', 'The same stored hits are gathered back and sorted under the other readout for comparison: only one of the two can be chosen; this is not a second reading of the marker.'));
       splitTo(0, 450, () => { S.reader = to; readerChips.set(to, true); splitTo(1, 700); });
     });
   }
   const clock = kit.clock({
     range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: NMAX, t: NMAX, rate: 400, step: 100, rangeStep: '1',
     format: (t, max) => `${L('落点 ', 'HITS ')}${Math.floor(t + 1e-9)} <small>/ ${max}</small>`,
-    onChange: (t) => { if (S.hold && t >= NMAX - 1e-9) { S.hold = false; splitTo(1, null, rereadLater); } paint(); }
+    onChange: (t) => { if (S.hold && t >= NMAX - 1e-9) { S.hold = false; splitTo(1, null, compareLater); } paint(); }
   });
-  const leave = () => { cards.mark(null); stopSequence(); };
+  const leave = () => { cards.mark(null); stopSequence(); S.compare = false; };
   let angTween = null;
   function setAlpha(v, quiet) { if (angTween) { angTween.cancel(); angTween = null; } S.alpha = clamp(v, 0, 90); fA.set(Math.round(S.alpha)); if (!quiet) leave(); paint(); }
   const fA = kit.field($('alpha'), { fmt: (v) => `${v}°`, onInput: (v) => setAlpha(v) });
@@ -288,13 +297,14 @@
     wave: ['α = 0°：两支箭头重合，影子是整条半径，高为零。落点一个个堆出满对比度的条纹：暗纹处几乎没有落点。', 'α = 0°: the two arrows coincide, the shadow is the whole radius and the height is zero. The hits pile up into fringes of full contrast: almost none land in the dark fringes.'],
     partial: ['α = 60°：青色的影子 V = 0.5，品红的高 D = 0.87，点仍在圆上。条纹还在，只是暗纹不再全黑，青色的带子变窄了一半。', 'α = 60°: the cyan shadow is V = 0.5, the magenta height D = 0.87, and the point is still on the circle. The fringes remain, but the dark ones are no longer black and the cyan band is half as thick.'],
     which: ['α = 90°：两支箭头垂直，影子缩成零，点停在圆顶。落点堆成一个平滑的鼓包，没有条纹。', 'α = 90°: the arrows are square, the shadow shrinks to nothing and the point sits at the top of the circle. The hits pile up into a smooth hump without fringes.'],
-    delayed: ['α = 90°。落点先到齐，然后才按路径读标记：同一批落点按读数分成两行，“左缝”一行与“右缝”一行加起来正好是全部落点，都是没有条纹的品红鼓包。', 'α = 90°. All hits arrive first, and only then is the marker read for the path: the same hits are split into two rows that add up to all of them, and both the “left” row and the “right” row are magenta humps without fringes.'],
-    erase: ['α = 90°，落点先到齐，再读标记。先按路径读：同一批落点分成“左缝”“右缝”两行，都是没有条纹的品红鼓包；停一下，收回来改按擦除方向重读，两行都变成青色：“读作 +”一行是条纹，“读作 −”一行是错开半格的反条纹。最上面“全部落点”那一行始终不变：后来的读法没有移动任何一个落点，只决定怎样把它们分开。', 'α = 90°: all hits arrive first, and the marker is read afterwards. Read for the path, the same hits split into a “left” and a “right” row, both magenta humps without fringes; after a pause they are gathered back and read again to erase, and both rows turn cyan: the “read as +” row shows fringes, the “read as −” row anti-fringes shifted by half a period. The top row, “all hits”, never changes: the later reading moves no hit; it only decides how they are sorted.'],
+    delayed: ['α = 90°。落点先到齐，然后才按路径读标记：后来的读出没有移动任何一个落点，同一批落点按读数分成两行，“左缝”一行与“右缝”一行加起来正好是全部落点，都是没有条纹的品红鼓包。', 'α = 90°. All hits arrive first, and only then is the marker read for the path: the later readout moves no hit; the same hits are split into two rows that add up to all of them, and both the “left” row and the “right” row are magenta humps without fringes.'],
+    erase: ['α = 90°，落点先到齐，读法最后才选。两种读法对同一次准备只能选一种，这张卡把同一批存下的落点按两种选择各分一次来对照：若选按路径读，“左缝”“右缝”两行都是没有条纹的品红鼓包；收回来，看若改选擦除方向读，两行变成青色，“读作 +”是条纹，“读作 −”是错开半格的反条纹。这不是读完路径再擦除重读：路径一旦读出，再怎么读也分不出条纹。最上面“全部落点”始终是同一个没有条纹的鼓包，后来的选择没有移动任何一个落点：擦除的条纹只在按读数挑出的两行里，与 α = 0 时不加标记、整屏就有的条纹不是一回事。', 'α = 90°: all hits arrive first, and the readout is chosen last. A preparation can be read in only one of the two ways, so this card sorts the same stored hits once under each choice, for comparison: under the path readout the “left” and “right” rows are both magenta humps without fringes; gathered back and sorted under the erasing readout instead, both rows turn cyan, “read as +” with fringes, “read as −” with anti-fringes shifted by half a period. This is not a path reading followed by an erasing re-read: once the path has been read out, no later reading sorts the hits into fringes. The top row, “all hits”, stays the same hump without fringes, and the later choice moves no hit: the eraser’s fringes exist only in the rows picked out by the reading, which is not the same thing as the fringes of an unmarked screen at α = 0.'],
     mixed: ['标记本身带噪声（纯态权重 λ = 0.5，纯度 Tr ρ² = 0.625）：对比度仍是 V = 0.5，能读出的可辨度只剩 D = 0.43，点落进圆内，沿品红的虚弧走：D² + V² = 0.44 < 1。', 'A noisy marker (pure-state weight λ = 0.5, purity Tr ρ² = 0.625): the contrast is still V = 0.5, but only D = 0.43 of distinguishability can be read; the point falls inside the circle and moves along the dashed magenta arc: D² + V² = 0.44 < 1.']
   };
   let booting = true;
   function applyPreset(id) {
     const p = PRESETS[id];
+    S.compare = !!p.then;
     clock.pause();
     if (angTween) angTween.cancel();
     const a0 = S.alpha, l0 = S.lambda;
@@ -319,7 +329,7 @@
   window.SLIT_DEBUG = {
     get state() {
       const V = contrast(), D = disting(), n = shown();
-      return { alpha: S.alpha, lambda: S.lambda, reader: S.reader, then: S.then, hold: S.hold, split: S.split, t: clock.t, n, max: clock.max, playing: clock.playing, preset: cards.current,
+      return { alpha: S.alpha, lambda: S.lambda, reader: S.reader, then: S.then, hold: S.hold, split: S.split, compare: S.compare, t: clock.t, n, max: clock.max, playing: clock.playing, preset: cards.current,
         V, D, sum: V * V + D * D, mass: V * V / 2, counted: counted(n), basis: basis() };
     },
     /** The hits on the screen now: positions, and the row each one is sorted into (null while the marker is unread). */

@@ -210,6 +210,37 @@ $$
 
 换句话说，**玻恩概率法则在几何上体现为欧几里得—希尔伯特空间勾股定理与典范无坐标基迹配对的自然结合。** 在重叠模长的幂次候选族 $|\langle\phi\mid\psi\rangle|^p$ 之中，正交完备通道总权重恒为 $1$ 的要求唯一挑出了二次幂 $p = 2$；在一般算子层面上，[@thm-born-probability-skeleton] 严格证明了典范迹配对 $\Tr(\rho P)$ 构成合法概率赋值的**充分性**，而若要在任意一般标架函数或广义测量效应中彻底排除非玻恩赋值以获得严格的**唯一性**，则还需补充跨基正交可加或正效应可加前提（有限维效应上的唯一性见下文 [@thm-busch-effect-density]，有限复维投影格上的唯一性见 [@thm-gleason-finite-projection]，更广范围见 [@rem-gleason-literature]）。
 
+二次幂权重还留下一道可直接在多路径干涉中核验的代数印记：拉斐尔·索金（Rafael Sorkin, 1994）提出的多缝干涉层级。当三条两两互斥的分支集合 $A, B, C$ 在同一探测点汇聚时，二次权重不仅在双缝之间产生二阶交叉项，而且使**三阶干涉余项** $I_3$ 恒等于零。不妨先用最简单的三单元狭缝算例亲手验算：取两两不交的三个单元素集合 $A = \{a\}$、$B = \{b\}$、$C = \{c\}$，令每条狭缝振幅均为单位元 $v \equiv 1$。在二次权重下，三缝全开权重为 $(1 + 1 + 1)^2 = 9$，任意两条狭缝同开权重为 $(1 + 1)^2 = 4$，单条狭缝权重为 $1^2 = 1$，七项容斥交错和当场归零：
+
+$$
+I_3 = 9 - 4 - 4 - 4 + 1 + 1 + 1 = 0.
+$$
+
+（作为对照，若把候选权重换成四次幂 $\bigl\lvert\sum_{x \in S} v(x)\bigr\rvert^4$，同一组单位振幅则会给出 $3^4 - 3 \times 2^4 + 3 \times 1^4 = 81 - 48 + 3 = 36 \neq 0$，立即冒出非零三阶干涉项。）在 Lean 模块 `Quantum/SorkinThirdOrder` 中，这一消去机制在无需预设实数序或复分析的纯环论层面上建立：设 $\alpha$ 为具可判等性（`DecidableEq α`）的分支指标类型，$R$ 为带星环对合的交换环（`CommRing R`、`StarRing R`，将星环自同态 `starRingEnd R` 记作 $r \mapsto r^*$），对振幅映射 $v : \alpha \to R$ 与有限子集 $A : \operatorname{Finset}\alpha$，定义二次振幅权重为
+
+$$
+\operatorname{amplitudeWeight}(v, A) := \left(\sum_{x \in A} v(x)\right)\left(\sum_{x \in A} v(x)\right)^*.
+$$
+
+当 $R = \mathbb{C}$ 且星运算取标准复共轭时，$\operatorname{amplitudeWeight}(v, A)$ 恰为复振幅有限和的模平方 $\bigl\lvert\sum_{x \in A} v(x)\bigr\rvert^2$。
+
+::: {.theorem #thm-sorkin-quadratic-cancellation title="二次振幅权重的三阶干涉消去" lean="D5/S3/Quantum/SorkinThirdOrder.sorkin_third_order_cancellation"}
+设 $\alpha$ 为具可判等性的类型，$R$ 为带星环结构的交换环。对任意振幅映射 $v : \alpha \to R$ 以及两两不交的有限子集 $A, B, C : \operatorname{Finset}\alpha$（满足 $\operatorname{Disjoint} A\,B$、$\operatorname{Disjoint} A\,C$ 与 $\operatorname{Disjoint} B\,C$），恒有
+
+$$
+\begin{aligned}
+&\operatorname{amplitudeWeight}(v, A \cup B \cup C) - \operatorname{amplitudeWeight}(v, A \cup B) - \operatorname{amplitudeWeight}(v, A \cup C) - \operatorname{amplitudeWeight}(v, B \cup C) \\
+&\qquad + \operatorname{amplitudeWeight}(v, A) + \operatorname{amplitudeWeight}(v, B) + \operatorname{amplitudeWeight}(v, C) = 0.
+\end{aligned}
+$$
+:::
+
+::: proof
+由两两不交假设 $\operatorname{Disjoint} A\,B$、$\operatorname{Disjoint} A\,C$ 与 $\operatorname{Disjoint} B\,C$（从而 $A \cup B$ 与 $C$ 亦不交），有限集合上的加法和在不交并上拆分为子集和之和：记 $S_A = \sum_{x \in A} v(x)$、$S_B = \sum_{x \in B} v(x)$、$S_C = \sum_{x \in C} v(x)$，则并集上的振幅和依次写为 $S_A + S_B + S_C$ 以及 $S_A + S_B$、$S_A + S_C$、$S_B + S_C$。因 `starRingEnd R` 是保加法的环自同态，共轭因子同步拆为 $S_A^* + S_B^* + S_C^*$ 及相应二项和。在交换环 $R$ 中按分配律展开七个二次乘积后，每个单集对角项 $S_X S_X^*$（$X \in \{A, B, C\}$）的系数为 $1 - 1 - 1 + 1 = 0$，每对跨集交叉项 $S_X S_Y^*$ 与 $S_Y S_X^*$（$X \neq Y$）的系数为 $1 - 1 = 0$，全部项逐一抵消为环零元 $0$。完整证明由 Lean 内核检查。
+:::
+
+研读 [@thm-sorkin-quadratic-cancellation] 时须守住两条精确边界：第一，这是一条值域在任意交换星环 $R$ 中的纯代数恒等式，签名本身并未假定权重取非负实值、总概率归一化或真实物理狭缝之间不存在边值串扰；第二，它确立的是正向蕴涵“两两不交分支上的二次权重必令 $I_3 = 0$”，**不能**倒过来单凭 $I_3 = 0$ 独自推出玻恩概率规则的唯一性。
+
 现在，让我们用 [@prop-qubit-bloch-core] 与 [@thm-rank-one-born-pairing] 联手，兑现第一章末尾留下的承诺，亲手揭开布洛赫球面夹角 $\theta$ 与希尔伯特空间半角 $\theta/2$ 的换算关系。
 
 ::: {.figure src="ch02-half-angle"}
@@ -461,6 +492,8 @@ $$
 
 > 投影只问“是或否”，效应还能问“多少”；一旦能问“多少”，概率就只剩迹配对这一种写法。
 
+当空间维数从二维跨入有限复维 $N \ge 3$ 时，不同标准正交标架开始共享公共的秩一投影轴，从而无需借道非投影效应也能把不同测量轴锁在一起。例如取 $N = 3$ 与对角密度矩阵 $\rho = \operatorname{diag}(1/2, 1/3, 1/6)$，三条标准基秩一星投影上的读数 $\operatorname{Re}\operatorname{Tr}(\rho P_{e_k})$ 依次为 $1/2, 1/3, 1/6$（总和为 $1$）；若在前两维子平面内改取单位向量 $v = (1, 1, 0)/\sqrt{2}$，其秩一星投影 $P_v = v v^*$ 与第三轴投影 $P_{e_3}$ 依然正交，读数则为 $\operatorname{Re}\operatorname{Tr}(\rho P_v) = \frac{1}{2}(1/2 + 1/3) = 5/12$。下面的定理证明，只要同一实值赋值在有限复维 $N \ge 3$ 的全体星投影上满足非负性、单位归一与正交可加性，它就唯一由一个密度矩阵表示：
+
 ::: {.theorem #thm-gleason-finite-projection title="有限复维投影赋值的格里森表示" lean="D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation"}
 设 $N$ 为有限自然数且 $3 \le N$。令 $p : M_N(\mathbb{C}) \to \mathbb{R}$ 为定义在全部复矩阵上的实值函数，满足：对每个星投影 $P$（$P^* = P$ 且 $P^2 = P$）有 $p(P) \ge 0$；$p(I) = 1$；若星投影 $P,Q$ 满足 $PQ = 0$，则 $p(P + Q) = p(P) + p(Q)$。则存在唯一 $\rho \in M_N(\mathbb{C})$，使 $\rho$ 半正定、$\operatorname{Tr}(\rho) = 1$，并且对每个星投影 $P$ 都有
 
@@ -471,13 +504,17 @@ $$
 这里的假设只约束 $p$ 在星投影上的取值；它不把 $p$ 在一般效应或其他矩阵上的取值延拓为可加函数。二维纯投影格、实系数空间、无限维空间和全体效应上的可加性分别属于不同的边界，不能由此声明合并得到。
 :::
 
+::: proof
+证明从数据包 `ProjectionPackage N` 的四个字段（定义在全部复矩阵上的实值函数 `p`、星投影非负性 `nonneg`、全空间单位归一 `total_one` 与正交星投影二元可加性 `additive`）出发推进。首先，将每个单位向量 $u \in \mathbb{C}^N$ 关联到其秩一星投影上的读数 $u \mapsto p(u u^*)$；由 `nonneg`、`total_one` 与 `additive`，这组单位向量读数在任意标准正交标架上非负且求和恒等于 $1$，因而构成跨正交标架一致的单位向量赋值。其次，调用源码中已在 $3 \le N$ 条件下证毕的实三维核心步骤 `coreLemma`（目标公开定理已消去该三维核心参数，不留任何外部待证假设），经复实子空间归约把标架一致的单位向量赋值提升为 $\mathbb{C}^N$ 上的厄米二次型，再由极化构造 `polarMatrix` 从该二次型恢复出厄米矩阵 $\rho \in M_N(\mathbb{C})$，使一切秩一星投影 $P_u = u u^*$ 满足 $p(P_u) = \operatorname{Re}\operatorname{Tr}(\rho P_u)$（即 Lean 中的 `((ρ * P).trace).re`，保持矩阵乘积顺序 `ρ * P` 并取复迹实部，无需假定乘积 $\rho P$ 自伴或 $\rho$ 与 $P$ 对易）。接着，秩一读数的非负性 `nonneg` 给出 $\rho$ 半正定（`ρ.PosSemidef`），在任一标准正交标架上对秩一星投影求和并结合 `additive` 与 `total_one` 给出 $\operatorname{Tr}(\rho) = 1$；对任意星投影 $P$（`IsStarProjection P`）取其值域的一组标准正交基作秩一正交分解并逐项施用 `additive`，即可把表示式 $p(P) = \operatorname{Re}\operatorname{Tr}(\rho P)$ 从秩一投影扩展到所有星投影。最后，存在唯一量词 `∃!` 刻画的是代表全体星投影的密度矩阵 $\rho$ 的唯一性：若另一半正定迹一矩阵 $\rho'$ 在所有星投影上给出相同的实部迹读数，则它在全部秩一星投影上与 $\rho$ 一致，从而诱导同一个厄米二次型，由极化唯一性迫使 $\rho' = \rho$；至于总函数 $p$ 在星投影之外的非投影矩阵上如何任意取值，不受公理约束，也不改变 $\rho$ 的唯一性。完整证明由 Lean 内核检查。
+:::
+
 ::: {.remark #rem-gleason-literature title="格里森定理与布施定理的更广文献边界"}
-本章的 [@thm-gleason-finite-projection] 已在 Lean 内核冻结有限复矩阵 $N\ge3$、星投影域上的格里森表示；[@thm-born-probability-skeleton] 则严格证明了从密度矩阵出发的“充分性方向”。下列更广的定义域、标量域和维数范围仍属于文献边界；其中有限维效应上的情形已冻结为 [@thm-busch-effect-density]：
+本章的 [@thm-gleason-finite-projection] 已在 Lean 内核冻结有限复矩阵 $N\ge3$、星投影域上的格里森表示；[@thm-born-probability-skeleton] 与 [@thm-sorkin-quadratic-cancellation] 则分别证明了从密度矩阵出发的“充分性方向”与二次振幅权重的三阶干涉消去 $I_3 = 0$（后者不可单独倒推唯一性）。下列更广的定义域、标量域和维数范围仍属于文献边界；其中有限维效应上的情形已冻结为 [@thm-busch-effect-density]：
 
 - **格里森的更广闭子空间定理**（A. M. Gleason, *Measures on the closed subspaces of a Hilbert space*, J. Math. Mech. **6**, 885–893, 1957）：在可分实或复希尔伯特空间中，维数至少为 $3$ 时，闭子空间（正交投影）格上的相应可数可加结论覆盖比本书定声明更广的空间范围；**当维数为 $2$ 时，纯正交投影格上的格里森结论不成立**，因为二维空间中的每组正交基仅含两个对跖秩一投影 $\{P_{\vv{n}}, P_{-\vv{n}}\}$，不同测量轴之间不存在公共投影元来传递跨基连锁约束，故在 $S^2$ 上可以构造出满足逐对对跖之和为 $1$ 的非玻恩标架函数（frame functions）。
 - **布施定理**（P. Busch, *Quantum states and generalized observables: A simple proof of Gleason's theorem*, Phys. Rev. Lett. **91**, 120403, 2003）：若将可加性定义域从尖锐正交投影扩展到全体正半定广义测量效应（POVM 效应元 $0 \le E_i \le I$，要求每当 $\sum_i E_i \le I$ 时满足可加性 $\mu(\sum_i E_i) = \sum_i \mu(E_i)$），则对**一切维数 $\dim\mathcal{H} \ge 2$**（包含单量子比特 $\dim\mathcal{H} = 2$）唯一性全面恢复：任何广义概率测度必唯一表示为 $E \mapsto \Tr(\rho E)$。有限维情形已冻结，就是 [@thm-busch-effect-density]，它只要求有限可加；仍属文献结果的是无穷维希尔伯特空间上的形式，那里要求可数可加。
 
-本书所钉仓库聚焦于显式有限维矩阵构造与建设性归约（[@thm-born-probability-skeleton]、[@thm-born-modulus-square] 与 [@thm-rank-one-born-pairing]），并冻结了由最小确认出发的结构分解 [@thm-positive-dual-generation]、有限复维投影格里森定理 [@thm-gleason-finite-projection] 与有限维布施定理 [@thm-busch-effect-density]（在[第 32 章 §32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-6-2) [@cor-ch32-quantum-postulates-core] 与[附录 E §E.5](appendix-e.md#sec-appe-quantum)中，[@thm-busch-effect-density] 将作为桥接假设 `H5`，把两子比较读数在一切有限维 $d \ge 2$ 上精确提升为玻恩规则推论）；格里森定理的更广实空间与无限维形式、以及无限维的布施定理，仍由经典文献给出，不列入本书的 Lean 验证声明账本。
+本书所钉仓库聚焦于显式有限维矩阵构造与建设性归约（[@thm-born-probability-skeleton]、[@thm-born-modulus-square]、[@thm-rank-one-born-pairing] 与 [@thm-sorkin-quadratic-cancellation]），并冻结了由最小确认出发的结构分解 [@thm-positive-dual-generation]、有限复维投影格里森定理 [@thm-gleason-finite-projection] 与有限维布施定理 [@thm-busch-effect-density]（在[第 32 章 §32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-6-2) [@cor-ch32-quantum-postulates-core] 与[附录 E §E.5](appendix-e.md#sec-appe-quantum)中，[@thm-busch-effect-density] 与 [@thm-gleason-finite-projection] 将作为桥接假设 `H5`，把两子比较读数在有限维上精确提升为玻恩规则推论）；格里森定理的更广实空间与无限维形式、以及无限维的布施定理，仍由经典文献给出，不列入本书的 Lean 验证声明账本。
 :::
 
 ::: {.viz src="pairwise-shutter" height="560"}
