@@ -158,12 +158,15 @@
       st.path(road, { color: P.ink, width: 1.6 * thick, alpha: 0.85, back: 0.35 });
     }
     st.dot(S.v0, 7.5, P.ink, { ring: true, width: 1.8, alpha: 0.95 });
-    // the tripod
+    // the tripod. The sandwich is one-to-one, so v = Reᵢ exactly when v starts at eᵢ itself (a chip, a card, or a drag
+    // that lands on it); a start merely near eᵢ stays equally near, and distinct from, Reᵢ at every t. In both cases
+    // the leg shares the arrow's label, but only the first is written with "=".
+    const at = BASIS.findIndex((e) => e.every((x, j) => x === S.v0[j]));
     let same = -1;
     BASIS.forEach((e, i) => {
       const p = apply(R, e);
       st.arrow([0, 0, 0], p, { color: P.ink, width: 1.3 * thick, headSize: 7, alpha: 0.75 });
-      if (v3.len(v3.sub(p, v)) < 0.2) { same = i; return; }
+      if (i === at || v3.len(v3.sub(p, v)) < 0.2) { same = i; return; }
       // a leg seen nearly end-on ends at the centre, where the axes cross: set its label off to the side
       const pq = st.p(p);
       if (Math.hypot(pq[0] - st.cx, pq[1] - st.cy) < 0.3 * st.unit) st.tag('e' + i, clearSpot(st, R, 0.32 * st.unit), `Re${sub[i]}`, 'num', { screen: true });
@@ -172,7 +175,8 @@
     // the arrow
     st.arrow([0, 0, 0], v, { color: P.amber, width: 2.6 * thick, glow: 10, headSize: 11, fade: false });
     st.dot(v, 5.5, P.amber, { glow: 14, fade: false });
-    if (!TRV.thumbMode) st.tag('v', v3.scale(v, 1.13), same >= 0 ? `v = Re${sub[same]}` : 'v', 'num c-am big', { dx: same >= 0 ? -30 : -14, dy: -14 });
+    const vTag = same < 0 ? 'v' : same === at ? `v = Re${sub[same]}` : `v, Re${sub[same]}`;
+    if (!TRV.thumbMode) st.tag('v', v3.scale(v, 1.13), vTag, 'num c-am big', { dx: same >= 0 ? -30 : -14, dy: -14 });
     st.end();
 
     // the head-up title: which turn, and the rotor so far
