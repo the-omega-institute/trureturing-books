@@ -284,8 +284,8 @@ SCENES.dark = S => {
     ring(cx, cy, 40 + 30 * pulse, C.cyan, (1 - pulse) * q1, 2.5);
     hrTag('one dot · 一个点', cx + 66, cy + 9, C.cyan, q1, 'left', 26);
   }
-  const qn = Q(S, 1, 'nothing more', 0.6) * da * (1 - Q(S, 2, 'Here is the question', 0.6));
-  hrTag('nothing else in view · 别无他物', cx, cy + R - 40, HR_LABEL, qn, 'center', 22);
+  const qn = Q(S, 1, 'nothing more', 0.6) * da * (1 - Q(S, 2, 'is that dot', 0.6));
+  hrTag('nothing else in view · 别无他物', cx, cy + R - 44, mix(HR_LABEL, C.white, 0.4), qn, 'center', 24);
   /* the question */
   const q2 = Q(S, 2, 'is that dot', 0.6) * da;
   chip(cx, 800, 780, 66, 'Is that dot the whole thing? · 这个点就是全部吗？', C.white, q2, 30, F.zh);
@@ -532,7 +532,8 @@ SCENES.again = S => {
   const qp = Q(S, 0, 'a way of looking', 0.6) * fade;
   if (qp <= 0) return;
   const x = AP.px, y = AP.py;
-  panel(x, y, AP.pw, AP.ph, qp, C.cyan, 'BY HAND · 手算');
+  /* the panel holds only the line's direction until the hand computation starts, then opens to full height */
+  panel(x, y, AP.pw, lerp(122, AP.ph, ease(Q(S, 3, 'Work it by hand', 0.7))), qp, C.cyan, 'BY HAND · 手算');
   hrRuns([['the line through  a = ', 0], [HR_STR.a, 0, C.cyan]], x + 32, y + 82, 32, C.white, qp);
   /* P written out when the hand computation starts */
   const qP = Q(S, 3, 'Work it by hand', 0.6) * fade;
@@ -592,7 +593,7 @@ SCENES.weight = S => {
   line(WT.ox - 300, WT.oy, WT.ox + 420, WT.oy, C.now, 0.55 * fade * stage, 2.5);
   line(B0[0], B0[1], B1[0], B1[1], C.cyan, fade * stage, 5);
   hrTag('gaze line · 视线', WT.ox + 420, WT.oy + 44, C.now, fade * stage, 'right', 22);
-  hrTag(`beam line · 光束线 · a = ${HR_STR.a}`, B1[0] + 18, B1[1] + 14, C.cyan, fade * stage, 'left', 22);
+  hrTag(`beam line · 光束线 · a = ${HR_STR.a}`, B1[0] - 18, B1[1] + 6, C.cyan, fade * stage, 'right', 22);
   hrArc(WT.ox, WT.oy, 64, 0, Math.atan2(a[1], a[0]), C.now, 0.6 * fade * stage, 2.5);
   txt('θ', WT.ox + 92 * Math.cos(0.46), WT.oy - 92 * Math.sin(0.46) + 10, { size: 26, fam: HR_MATH, w: 700, align: 'center', c: C.now, a: 0.8 * fade * stage });
   hrVec(O[0], O[1], Ot[0], Ot[1], C.now, fade * stage, 5);
@@ -620,7 +621,8 @@ SCENES.weight = S => {
       hrPair(x, WT.my, WT.mr, z.d, p);
       txt(HR_STR.share[i], x, WT.my + WT.mr + 44, { size: 30, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: p });
     });
-    txt('(shadow)² · 影子长的平方', WT.mx[2] + 96, WT.my + 10, { size: 20, fam: F.zh, w: 700, c: HR_LABEL, a: q1 * stage });
+    txt('(shadow)²', WT.mx[2] + 84, WT.my - 4, { size: 22, fam: F.zh, w: 700, c: HR_LABEL, a: q1 * stage });
+    txt('影子长的平方', WT.mx[2] + 84, WT.my + 28, { size: 22, fam: F.zh, w: 700, c: HR_LABEL, a: q1 * stage });
   }
   /* by hand */
   if (qs <= 0) return;
@@ -638,7 +640,7 @@ SCENES.weight = S => {
     txt('trace · 迹', x + 30, y + 240, { size: 22, fam: F.zh, w: 700, c: HR_LABEL, a: qt });
     const e = hrRuns([['Tr(P', 0], ['o', 1], [' P', 0], ['a', 1], [') = ', 0], [HR_STR.tr, 0, C.cyan]], X2, y + 242, 34, C.white, qt);
     const hot = Q(S, 3, 'trace pairing', 0.5) * fade;
-    if (hot > 0) ring((X2 + e) / 2, y + 230, (e - X2) / 2 + 26, C.now, hot, 2.5);
+    if (hot > 0) line(X2 - 6, y + 256, e + 6, y + 256, C.now, hot, 4);
     /* P_o P_a written out: its trace adds the diagonal */
     const xm = hrRuns([['P', 0], ['o', 1], [' P', 0], ['a', 1], [` = 1/${HR_DEN} ·`, 0]], X2, y + 302, 24, C.white, qt);
     const mw = hrMat(xm + 14, y + 290, HR_POPA25.map(r => r.map(String)), { size: 24, gap: 30, a: qt });

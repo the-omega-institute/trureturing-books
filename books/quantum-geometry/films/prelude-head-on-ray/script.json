@@ -34,7 +34,7 @@
       ["Chapter two calls this squared share the Born pairing weight.", "第二章把这个平方份额叫作玻恩配对权重。"],
       ["The Lean kernel checks that it equals the trace pairing.", "它等于迹配对，这一点由 Lean 内核检验。"]
     ], "cues": [{"line": 3, "at": 0.6, "kind": "chime"}]},
-    {"id": "recap", "name": "RECAP", "lead": 1.2, "tail": 5.4, "music": [1.0, 0.5, 0.4, 0.2, 0.1], "lines": [
+    {"id": "recap", "name": "RECAP", "lead": 1.2, "tail": 6.6, "music": [1.0, 0.5, 0.4, 0.2, 0.1], "lines": [
       ["A dot can be a line seen head-on.", "点可能是迎面看去的线。"],
       ["Two directions agree by the cosine of their angle; head-on, that is one.", "两个方向的相融度是夹角的余弦；迎面时为 1。"],
       ["A line is a look that changes nothing when repeated.", "线是一种再看一次也不变的看法。"],

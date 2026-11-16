@@ -424,7 +424,7 @@ const smTbX = v => TB.ax0 + (v - 0.5) / 0.5 * (TB.ax1 - TB.ax0);
 function smCobS(S) {
   const u = S.u, L1 = lineAt(S, 1), L2 = lineAt(S, 2);
   let s = 0.5 + 0.5 * ease(Q(S, 0, 'then across to the diagonal', 1.2));
-  s += 5 * clamp((u - L1.s - 0.1) / Math.max(1, L1.e - L1.s - 0.3));
+  s += 5 * clamp((u - L1.s - 0.1) / Math.max(1, L1.e - L1.s + 0.4));
   s += 6 * ease(clamp((u - L2.s) / 2.8));
   return s;
 }

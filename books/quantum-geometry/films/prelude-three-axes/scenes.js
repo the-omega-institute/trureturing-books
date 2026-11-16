@@ -42,7 +42,8 @@ const PT = {
   lat: 50,                    // ADDRESS: the fixed tilt, in degrees (figure prelude-latitude, lab card latitude)
   phi0: 0,                    // ADDRESS: the first tilt is along the meridian of the x axis; φ is counted from x
   spiral: 260,                // AXES: unit arrows sampled along the sweep
-  turns: 8                    // AXES: turns of the sweep from north to south
+  turns: 8,                   // AXES: turns of the sweep from north to south
+  sweep: 3.4                  // ADDRESS: seconds for one turn along the 50° latitude
 };
 const PT_LABEL = mix(C.dim, C.white, 0.45);
 const PT_VIO = mix(C.vio, C.white, 0.35);      // violet text, readable on the dark ground
@@ -554,11 +555,11 @@ function ptAddress(S) {
   const tTilt = phraseAt(S, 0, 'tilt down from the north');
   const tTurn = Math.max(phraseAt(S, 0, 'then turn around'), tTilt + 1.7);
   const tSweep = Math.max(phraseAt(S, 1, 'only turn'), tTurn + 1.5);
-  const tRaise = phraseAt(S, 2, 'Only at ninety degrees');
+  const tRaise = Math.max(phraseAt(S, 2, 'Only at ninety degrees'), tSweep + PT.sweep + 0.2);
   const tOnce = Math.max(phraseAt(S, 3, 'Going around once'), tRaise + 2.2);
   const raise = ease(clamp((u - tRaise) / 2.0));
   const th = PT.lat * ease(clamp((u - tTilt) / 1.6)) + (90 - PT.lat) * raise;
-  const sweep = ease(clamp((u - tSweep) / 4.6));
+  const sweep = ease(clamp((u - tSweep) / PT.sweep));
   const once = ease(clamp((u - tOnce) / 4.0));
   const ph = PT.phi0 + 40 * ease(clamp((u - tTurn) / 1.4)) + 360 * sweep + 360 * once;
   return { th, ph, sweep, raise, once, tSweep, tRaise };
@@ -675,7 +676,7 @@ function ptOrder(S) {
   const tB1 = phraseAt(S, 2, 'Swap the order'), tB2 = tB1 + 1.3;
   return {
     a1: ease(clamp((u - tA1) / 1.4)), a2: ease(clamp((u - tA2) / 1.4)),
-    b1: ease(clamp((u - tB1) / 1.2)), b2: ease(clamp((u - tB2) / 1.4)), tB1
+    b1: ease(clamp((u - tB1) / 1.2)), b2: ease(clamp((u - tB2) / 1.4)), tA2, tB1
   };
 }
 const PT_NP = [0, 0, 1];
@@ -747,7 +748,7 @@ SCENES.order = S => {
     const q = ptP(V, O.a2 > 0 ? ptLegA2(O.a2) : ptLegA1(O.a1));
     ptDot(q[0], q[1], 13, C.now, fade);
   }
-  const endA = Q(S, 1, 'lands on the x axis', 0.5) * fade, ca = u >= O.tB1 ? C.white : C.now;
+  const endA = clamp((u - Math.max(phraseAt(S, 1, 'lands on the x axis'), O.tA2 + 1.4)) / 0.5) * fade, ca = u >= O.tB1 ? C.white : C.now;
   if (O.a2 >= 1) ptDot(qX[0], qX[1], 13, ca, fade);
   if (endA > 0) {
     ring(qX[0], qX[1], 24, ca, endA * 0.9, 2.5);
