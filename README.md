@@ -18,6 +18,11 @@ Each theorem declares its evidence. Lean-verified results cite declarations veri
 - **代号 / Code**：`ORTHO//QUANTUM`
 - **路径 / Path**：[books/quantum-geometry/](books/quantum-geometry/book.toml)（中文权威版 `zh/` · 英文版 `en/`）
 - **文本许可 / Text License**：`CC-BY-4.0`
+- **出版 DOI / Publication DOI**：[10.5281/zenodo.24156135](https://doi.org/10.5281/zenodo.24156135)（Zenodo 概念 DOI，跨版本保持不变 / Zenodo concept DOI, shared across versions）
+
+本书使用 Zenodo 概念 DOI 作为跨版本的稳定出版标识，具体版本的 DOI 以 Zenodo 记录为准。出版 DOI 填在 [`books/quantum-geometry/book.toml`](books/quantum-geometry/book.toml) 的 `[book].doi`；省略时，构建会依次从根目录 `.zenodo.json`、`CITATION.cff` 与 README 中明确的 Zenodo DOI 链接读取。站点书目、PDF/EPUB 版权页与 EPUB 元数据会显示该 DOI。
+
+The Zenodo concept DOI provides a stable identifier across versions; version-specific DOIs are listed in the Zenodo records. Set the publication DOI in [`books/quantum-geometry/book.toml`](books/quantum-geometry/book.toml) as `[book].doi`. When omitted, the build checks the root `.zenodo.json`, `CITATION.cff`, then explicit Zenodo DOI links in README. The DOI appears in the site catalog, PDF/EPUB copyright pages, and EPUB metadata.
 
 本书将直观的物理机制推演、概念谱系批判与机器形式化证明熔于一炉，沿着**“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 多球共振 $\to$ 时空之球 $\to$ 球外之球与机械法典 $\to$ 无时间因果、复杂性视界、量子公平与元统一 $\to$ 万物观察者、正交简并、自指扩表与超越轮回 $\to$ 梦境擦除、本体 QRAM 与观察者即宇宙本体”**的十部三十九章正交阶梯推进：
 
