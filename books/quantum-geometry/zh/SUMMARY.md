@@ -193,7 +193,7 @@
 - [附录 A 传统量子力学与几何语言对照词典](appendix-a.md)
   - [A.1 全书概念与形式化锚点总对照表](appendix-a-s01-master-dictionary.md)
   - [A.2 十部曲核心符号与算子速查指南](appendix-a-s02-symbols-and-operators.md)
-  - [A.3 全书 99 条原始思想命题与主题综合总台账（A01–A99）](appendix-a-s03-verbatim-ledger.md)
+  - [A.3 原始思想命题与主题综合对照表](appendix-a-s03-verbatim-ledger.md)
 - [附录 B 克利福德代数速查手册](appendix-b.md)
 - [附录 C 验证依据与开放问题边界](appendix-c.md)
 - [附录 D 量子力学六大经典未解问题与五大诠释几何对决](appendix-d.md)

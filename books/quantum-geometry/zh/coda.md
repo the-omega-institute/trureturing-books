@@ -15,4 +15,4 @@
 - [trureturing 的“黄金切投”形式原语与灵魂—遗迹吸引子的几何诠释](coda-s03-golden-cut-observers.md)
 - [收缩不动点与形式认识论锚点](coda-s04-fixed-point-anchors.md)
 - [核心几何与形式概念双语术语表](coda-s05-bilingual-glossary.md)
-- [全书十部曲三十九章阅读与依赖导图](coda-s06-reading-map.md)
+- [全书十部曲阅读与依赖导图](coda-s06-reading-map.md)

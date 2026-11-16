@@ -193,7 +193,7 @@
 - [Appendix A Dictionary of Conventional vs. Geometric Quantum Terms](appendix-a.md)
   - [A.1 Master Translation Dictionary Across All Ten Parts, Coda, and Appendices D–E](appendix-a-s01-master-dictionary.md)
   - [A.2 Ten-Part Geometric Translation Guide](appendix-a-s02-symbols-and-operators.md)
-  - [A.3 Complete 99-Entry Verbatim Proposition and Thematic Synthesis Table (A01–A99)](appendix-a-s03-verbatim-ledger.md)
+  - [A.3 Verbatim Propositions and Thematic Synthesis](appendix-a-s03-verbatim-ledger.md)
 - [Appendix B Clifford Algebra Cheat Sheet](appendix-b.md)
 - [Appendix C Verification Sources and Open-Problem Boundaries](appendix-c.md)
 - [Appendix D Six Classical Open Quantum Puzzles and the Five-Interpretation Geometric Duel](appendix-d.md)
