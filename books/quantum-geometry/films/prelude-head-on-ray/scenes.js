@@ -285,7 +285,7 @@ SCENES.dark = S => {
     hrTag('one dot · 一个点', cx + 66, cy + 9, C.cyan, q1, 'left', 26);
   }
   const qn = Q(S, 1, 'nothing more', 0.6) * da * (1 - Q(S, 2, 'is that dot', 0.6));
-  hrTag('nothing else in view · 别无他物', cx, cy + R - 44, mix(HR_LABEL, C.white, 0.4), qn, 'center', 24);
+  hrTag('nothing else in view · 别无他物', cx, cy + 150, mix(HR_LABEL, C.white, 0.4), qn, 'center', 24);
   /* the question */
   const q2 = Q(S, 2, 'is that dot', 0.6) * da;
   chip(cx, 800, 780, 66, 'Is that dot the whole thing? · 这个点就是全部吗？', C.white, q2, 30, F.zh);
@@ -420,7 +420,7 @@ SCENES.agree = S => {
     ctx.save(); ctx.globalAlpha = 0.6 * qa * dimA; ctx.strokeStyle = C.cyan; ctx.lineWidth = 2.5; ctx.beginPath();
     ctx.moveTo(x + 6, AG.oy - 8); ctx.lineTo(x - 3, AG.oy); ctx.lineTo(x + 6, AG.oy + 8); ctx.stroke(); ctx.restore();
   }
-  hrTag('light travels along −a · 光沿 −a 传来', AG.ox + AG.U + 110, AG.oy + 96, HR_LABEL, qa * dimA, 'center', 20);
+  hrTag('light travels along −a · 光沿 −a 传来', AG.ox + AG.U + 40, AG.oy + 98, HR_LABEL, qa * dimA, 'center', 20);
   /* the unit circle: both arrows have length 1 */
   ctx.save(); ctx.setLineDash([6, 9]); hrArc(AG.ox, AG.oy, AG.U, -6 * HR_DEG, 96 * HR_DEG, C.dim, 0.6 * qg * grow * dimA, 1.5); ctx.restore();
   /* the angle θ */
@@ -621,8 +621,9 @@ SCENES.weight = S => {
       hrPair(x, WT.my, WT.mr, z.d, p);
       txt(HR_STR.share[i], x, WT.my + WT.mr + 44, { size: 30, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: p });
     });
-    txt('(shadow)²', WT.mx[2] + 84, WT.my - 4, { size: 22, fam: F.zh, w: 700, c: HR_LABEL, a: q1 * stage });
-    txt('影子长的平方', WT.mx[2] + 84, WT.my + 28, { size: 22, fam: F.zh, w: 700, c: HR_LABEL, a: q1 * stage });
+    const qc = Q(S, 1, 'at a right angle', 0.5) * q1 * stage;
+    txt('(shadow)²', WT.mx[2] + 84, WT.my - 4, { size: 22, fam: F.zh, w: 700, c: HR_LABEL, a: qc });
+    txt('影子长的平方', WT.mx[2] + 84, WT.my + 28, { size: 22, fam: F.zh, w: 700, c: HR_LABEL, a: qc });
   }
   /* by hand */
   if (qs <= 0) return;
@@ -652,14 +653,14 @@ SCENES.weight = S => {
     const yl = WT.ly;
     panel(x, yl, WT.pw, WT.lh, ql, C.lean, 'CHECKED BY THE LEAN KERNEL · 由 Lean 内核检验');
     hrRuns([['recordWeight(P, ρ, k) = |φ*ψ|² = Tr(ρ P', 0], ['k', 1], [')', 0]], x + 30, yl + 92, 30, C.white, ql);
-    hrRuns([['for a record measurement P with P', 0], ['k', 1], [' = φφ*', 0]], x + 30, yl + 138, 22, C.white, 0.85 * ql);
-    txt('and a pure state ρ = ψψ* (trace 1)', x + 30, yl + 170, { size: 22, fam: HR_MATH, w: 700, c: C.white, a: 0.85 * ql });
+    hrRuns([['for a record measurement P with P', 0], ['k', 1], [' = φφ*', 0]], x + 30, yl + 136, 24, C.white, 0.85 * ql);
+    txt('and a pure state ρ = ψψ* (trace 1)', x + 30, yl + 168, { size: 24, fam: HR_MATH, w: 700, c: C.white, a: 0.85 * ql });
     const r = leanCite(HR_GID);
     const head = 'LEAN ✓', hw = tw(head, 15, F.mono, 700, 1) + 16;
     fillBox(x + 30, yl + 196, hw, 26, C.lean, 0.95 * ql);
     txt(head, x + 38, yl + 215, { size: 15, fam: F.mono, w: 700, c: C.bg, a: ql, ls: 1 });
-    txt(r ? r.name.split('.').slice(-2).join('.') : '?', x + 40 + hw, yl + 216, { size: 18, fam: F.mono, w: 700, c: C.lean, a: ql });
-    hrRuns([['here φ = a, ψ = o: both sides are ', 0], [HR_STR.oa2, 0, C.cyan], [' (computed above)', 0]], x + 30, yl + 252, 19, HR_LABEL, ql);
+    txt(r ? r.name.split('.').slice(-2).join('.') : '?', x + 40 + hw, yl + 216, { size: 19, fam: F.mono, w: 700, c: C.lean, a: ql });
+    hrRuns([['here φ = a, ψ = o: both sides are ', 0], [HR_STR.oa2, 0, C.cyan], [' (computed above)', 0]], x + 30, yl + 250, 21, mix(HR_LABEL, C.white, 0.3), ql);
   }
 };
 

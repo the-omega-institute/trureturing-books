@@ -199,10 +199,10 @@ function smCob(P, s, a, o = {}) {
 const DL = { cx: 1250, cy: 690, R: 290 };
 function smDial(o) {
   const { cx, cy, R } = DL, th = o.th, a = o.a;
-  if (a <= 0.003) return;
+  const tx = cx + R * Math.cos(th), ty = cy - R * Math.sin(th);   // returned even when nothing is drawn
+  if (a <= 0.003) return { tx, ty };
   smArc(cx, cy, R, -0.04, Math.PI / 2 + 0.06, C.dim, 0.55 * a, 1.6, [6, 7]);
   smVec(cx, cy, cx + R + 40, cy, C.white, 0.85 * a, 3.5);
-  const tx = cx + R * Math.cos(th), ty = cy - R * Math.sin(th);
   const arcA = a * (o.arc == null ? 1 : o.arc);
   if (!(o.unroll > 0)) smArc(cx, cy, R, 0, th, C.now, arcA, 7);
   smVec(cx, cy, tx, ty, C.now, a, 4);
