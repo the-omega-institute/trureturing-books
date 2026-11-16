@@ -308,17 +308,51 @@ TeX 源在导言区写 `\input{tbook-deck}`；用 `\begin{bookresult}{thm-…}` 
 
 ## 统计与派生产物
 
-正文、图注、幻灯片与仓库文档尽量不放全书总数、排名、声明分区表或统计地图；删除可省略的统计，避免每次增删章节或钉版都改同一批文件。逐条证据引用仍保留。站点与导出的验证账本由构建生成，不复制回书稿。
+全书统计作为编译产物按需生成，源码只保存选择与引用。删除手工维护的总数、排名、声明表、地图数据与图片副本，避免增删章节或钉版时修改同一批统计文件；逐条数学证据仍在正文维护。下游自由选择需要的视图与展示方式，不默认向每本书追加统计页面。
 
-确需统计时，使用正式出版解析器并导出编译产物：
+### 在正文直接引用
+
+```markdown
+::: {.stats src="summary"}
+:::
+
+下面的索引在构建时生成，逐条核对仍应回到正文的假设与结论。
+
+::: {.stats src="declarations" display="link" group="theorems" format="html"}
+查看定理声明索引
+:::
+```
+
+`display="embed"`（默认）把生成的 Markdown 表格嵌入 HTML、PDF 与 EPUB；`display="link"` 链接独立产物，`format` 可选 `html`（默认）、`markdown`、`csv` 或 `json`。Markdown 下载保留为纯文本资源，避免被 mdBook 当作章节链接。PDF/EPUB 中的产物链接指向站点所发布的副本。没有统计块的书不会生成这些视图。
+
+| `src` | 内容与口径 |
+| --- | --- |
+| `summary` | 唯一声明数与各类证据环境的简表 |
+| `evidence` | Lean 已验证、书面证明、开放条目与定义环境分别计数 |
+| `environments` | 各类环境的出现次数 |
+| `kinds` | 按 Lean 声明种类统计唯一声明 |
+| `chapters` | 子页面归入主章后的引用统计 |
+| `pages` | 每个出版源页面的引用统计 |
+| `declarations` | 带冻结源码链接的声明索引 |
+| `reuse` | 按引用源文件数与引用位置数排序的声明复用表 |
+
+引用按源位置去重，同一行重复链接不额外增加位置数。
+
+`declarations` 与 `reuse` 可用 `group="all|theorems|definitions|inline"` 选择分区。`theorems`、`definitions` 是环境引用的声明分区；`inline` 是没有环境引用的其余声明，不是证明等级。大索引可选择独立链接，正文只嵌入需要的简表。中英文统计块的视图、显示方式、格式与分区须逐项对齐，说明文字自然翻译。统计块不计为定理，不接受 `lean` 或其他证据属性；生成结果不回流为计数输入。
+
+### 导出或供其他消费者使用
 
 ```bash
 ./tbook stats --book example-monograph          # 只显示紧凑摘要
 ./tbook stats --book example-monograph --write  # build/statistics/example-monograph.json
 ./tbook stats --book example-monograph --json   # 标准输出完整明细
+./tbook stats --book example-monograph --write --view summary --view kinds --format markdown --format csv --lang zh --lang en
+./tbook stats --book example-monograph --write --view declarations --group theorems --format html
 ```
 
-`--write` 只写入被 Git 忽略的 `build/statistics/<book>.json`，内容未变时不重写。消费者读取该产物；发布时按需作为构建附件或站点资源提供，通过相对链接引用。不要把统计快照、全书索引、排名、地图数据或统计图片嵌入受版本管理的正文和程序，也不要维护会随统计重排的声明序号。
+`--view`、`--format` 与 `--lang` 都可重复选择；指定视图而未指定格式时默认 Markdown。完整原始快照保存在 `build/statistics/<book>.json`，选定视图保存在 `build/statistics/<book>/<view>[.<group>].<lang>.<ext>`。这些文件均被 Git 忽略，内容未变时不重写。正文引用的产物由构建自动暂存和发布，不需要先手工运行统计命令。
+
+自定义静态图、交互页面、幻灯片或外部分析程序可以读取 JSON/CSV 编译产物；发布时按需作为附件或站点资源提供，不复制总数或整份数据到受版本管理的程序。不要维护会随统计重排的声明序号。
 
 环境次数、唯一声明数和跨章复用是不同的量；书面证明、开放问题、定义均不计入 `lean_verified`。只统计目录中的权威版本，忽略代码示例与未出版文件；声明仅限本书的正文及媒体引用，其他书的锁定声明不增加本书总数。`groups.inline` 是未被环境引用的分区，可能包含媒体消费者；查看各项 `citations[].via` 区分来源。旧生成索引仍存在时，可用 `[statistics].exclude = ["appendix-c.md"]` 排除它的声明链接；其中人工撰写的编号环境仍计入环境次数。
 

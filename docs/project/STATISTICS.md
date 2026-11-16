@@ -30,4 +30,4 @@
 
 默认快照为 `build/statistics/quantum-geometry.json`，选定视图写在 `build/statistics/quantum-geometry/`。这些路径被 Git 忽略，内容未变时保持字节与修改时间。自定义图、可视化或外部程序读取产物，不把数据复制到受版本管理的源码。站点与导出的验证账本继续由构建生成；锁文件仍只由 `./tbook pin` 写入。
 
-共享实现通过[上游模板 PR #109](https://github.com/the-omega-institute/trureturing-books-template/pull/109) 发布，并按正式模板升级流程同步，不在消费者重置清单。
+共享实现已由[上游模板 PR #109](https://github.com/the-omega-institute/trureturing-books-template/pull/109) 合入，并通过 `./tbook template update --to v1.4.0` 正式同步；消费者不重置模板清单。

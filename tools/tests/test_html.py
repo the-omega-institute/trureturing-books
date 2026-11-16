@@ -704,37 +704,14 @@ class BuildExampleTest(unittest.TestCase):
             others = [l["code"] for l in data["langs"] if l["code"] != lang]
             self.assertEqual(others, [o for o in ("zh", "en") if o != lang])
             for page in self.pages(lang):
-<<<<<<< ours
-||||||| base
-                # Standalone resources have language-specific names and no book language menu.
-                if not re.search(r'<script\b[^>]*src="[^"]*tr-editions[^\"]*\.js"',
-                                 page.read_text(encoding="utf-8")):
-                    continue
-=======
                 # Standalone resources have language-specific names and no book language menu.
                 if not re.search(r'<script\b[^>]*src="[^"]*tr-editions[^"]*\.js"',
                                  page.read_text(encoding="utf-8")):
                     continue
->>>>>>> theirs
                 rel = page.relative_to(self.out / lang)
                 for other in others:
                     self.assertTrue((self.out / other / rel).is_file(), f"{other}/{rel}")
 
-<<<<<<< ours
-||||||| base
-    def test_statistics_downloads_are_localized_standalone_resources(self):
-        for lang, title in (("zh", "声明索引"), ("en", "Declaration index")):
-            rel = f"_book/statistics/declarations.{lang}.html"
-            artifact = self.out / lang / rel
-            text = artifact.read_text(encoding="utf-8")
-            self.assertIn(f'<html lang="{lang}">', text)
-            self.assertIn(f'<title>{title}</title>', text)
-            self.assertIn('<table>', text)
-            self.assertNotIn('tr-editions', text)
-            chapter = (self.out / lang / 'appendix-a-zeckendorf.html').read_text(encoding="utf-8")
-            self.assertIn(f'href="{rel}"', chapter)
-
-=======
     def test_statistics_downloads_are_localized_standalone_resources(self):
         from tbook import render, stats
 
@@ -757,7 +734,6 @@ class BuildExampleTest(unittest.TestCase):
                 href = os.path.relpath(artifact, chapter.parent)
                 self.assertIn(f'href="{href}"', chapter.read_text(encoding="utf-8"))
 
->>>>>>> theirs
     def test_cjk_search_tokens(self):
         js = next((self.out / "zh").glob("searchindex*.js")).read_text(encoding="utf-8")
         self.assertIn('"亏":{', js)
