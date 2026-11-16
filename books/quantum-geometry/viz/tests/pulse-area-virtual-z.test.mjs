@@ -317,9 +317,15 @@ const endsOf = (st, kind) => { const end = st.T * (st.two ? 2 : 1), m = run(st, 
 const swapSame = [prog({ two: true, phi2: 180 }), prog({ two: true, peak: PI / 25 })].map((st) => endsOf(st, 'two'));
 const keepRead = endsOf(prog({ lam: 90, sign: -1 }), 'lam'), flip = endsOf(prog({ lam: 90, sign: -1, r0: [1, 0, 0] }), 'lam');
 const coin = prog({ lam: 180, sign: -1, r0: [1, 0, 0] }), coinGap = vdist(rotZ(run(coin, 'main', 25), PI), run(coin, 'lam', 25));
-const hub = await T.newPage(); await hub.goto(T.url(BOOK, ''), { waitUntil: 'load' });
-const sum = await hub.$eval(`article[data-viz="${ID}"] .sum`, (el) => ({ zh: el.querySelector('.zh').textContent, en: el.querySelector('.en').textContent }));
-await hub.close();
+// The hub's cards are static HTML (theme/viz/hub.js does not touch them): parse the served page instead of rendering
+// it, so its covers (ignored build outputs) are never requested.
+const sum = await page.evaluate(async ([u, id]) => {
+  const res = await fetch(u);
+  if (!res.ok) throw new Error(`hub fetch failed: HTTP ${res.status} ${res.statusText} for ${u}`);
+  const el = new DOMParser().parseFromString(await res.text(), 'text/html').querySelector(`article[data-viz="${id}"] .sum`);
+  if (!el) throw new Error(`hub card summary not found: article[data-viz="${id}"] .sum in ${u}`);
+  return { zh: el.querySelector('.zh').textContent, en: el.querySelector('.en').textContent };
+}, [T.url(BOOK, ''), ID]);
 const drw = await page.evaluate(() => ({ zh: document.querySelector('#drawer .sheet > .zh').textContent, en: document.querySelector('#drawer .sheet > .en').textContent }));
 const clauses = (txt, lng) => txt.split(lng === 'zh' ? /[。；]/ : /;\s|\.\s+(?=[A-Z])/);
 const claimBad = [];

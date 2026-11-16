@@ -15,6 +15,13 @@ const ROOT = path.resolve(HERE, '../../../..'), BOOK = path.join(ROOT, 'books/qu
 const lock = JSON.parse(fs.readFileSync(path.join(ROOT, 'trureturing.lock.json'), 'utf8'));
 const GIDS = Object.keys(lock.declarations);
 
+/* ---------- generated inputs ---------- */
+// Appendix C (both languages), the statistics and the page's data.generated.json are ignored build outputs; a clean
+// checkout has none of them. The book's own generator writes exactly these four text/JSON files from the chapters,
+// data/appendix-c.*.md.in, data/declaration-serials.json and gen-data.py (no browser, serials left as registered).
+const VENV_PY = path.join(ROOT, '.venv/bin/python');
+execFileSync(fs.existsSync(VENV_PY) ? VENV_PY : 'python3', [path.join(BOOK, 'sync-statistics.py')], { cwd: ROOT, stdio: ['ignore', 'inherit', 'inherit'] });
+
 /* ---------- the independent reading of the book ---------- */
 const summary = fs.readFileSync(path.join(BOOK, 'zh/SUMMARY.md'), 'utf8');
 const files = [];
@@ -186,7 +193,7 @@ check('the coda group tries Coda & App. before the dot fallback',
   && /const compact = [^\n]*'Coda & App\.'/.test(mainSource)
   && /const lab = \[name, \.\.\.compact\]\.find\(fits\) \|\| roman\b/.test(mainSource));
 
-// the data block against the lock and the chapters
+// the page's data (data.generated.json joined to the lock) against the lock and the chapters
 const rows = await page.evaluate(() => window.LEANMAP_DEBUG.rows());
 check('one cell per entry of trureturing.lock.json', rows.length === GIDS.length && new Set(rows.map((r) => r[0])).size === GIDS.length && rows.every((r) => r[0] in lock.declarations), `${rows.length} cells, ${GIDS.length} entries`);
 const badKind = rows.find((r) => lock.declarations[r[0]].kind !== r[1] || (lock.declarations[r[0]].line || 0) !== r[2]);
@@ -613,7 +620,10 @@ const LOCALE = { zh: 'zh-CN', en: 'en-US' };
 let st0 = await toEnd(page);
 check('desktop 1440 px (zh): End rests the rail on the whole book, not playing', st0.t === NC && !st0.playing);
 await frame(page, 'zh', 'desktop 1440 px (zh)', { sweep: 'slider', links: true });
+// a fresh page builds its clock, keys, autoplay and probe only after its two JSON files arrive (kit.pending): settle()
+// waits for that, so no key is pressed and no probe read before the page exists (an early End would scroll the document)
 const desktopEn = await T.open('quantum-geometry', 'lean-declaration-map', '?lang=en', { viewport: { width: 1440, height: 900 }, locale: LOCALE.en });
+await settle(desktopEn);
 st0 = (await readout(desktopEn)).st;
 check('desktop 1440 px (en): the full page opens on the whole book read, not playing', st0.t === NC && !st0.playing && st0.preset === 'all');
 await frame(desktopEn, 'en', 'desktop 1440 px (en)', { sweep: 'foot' });
@@ -622,6 +632,7 @@ await frame(desktopEn, 'en', 'desktop 1440 px (en)', { sweep: 'foot' });
 for (const [w, lang, sweepIt, linksIt] of [[334, 'zh', true, false], [334, 'en', true, true], [740, 'zh', false, false], [740, 'en', false, false]]) {
   const p = await T.open('quantum-geometry', 'lean-declaration-map', `?embed=1&lang=${lang}`, { viewport: { width: w, height: 620 }, locale: LOCALE[lang] });
   const tag = `in the book ${w} px (${lang})`;
+  await settle(p);
   const played = await until(p, () => { const d = window.LEANMAP_DEBUG.state; return d.playing && d.t > 0; });
   st0 = await toEnd(p);
   check(`${tag}: the full lab plays by itself once in view, and End stops it on the whole book`, played && st0.t === NC && !st0.playing);

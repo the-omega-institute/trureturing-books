@@ -851,6 +851,8 @@
     "lean-declaration-map.test.mjs": [
       "@citations",
       "books/quantum-geometry/book.toml",
+      "books/quantum-geometry/data/appendix-c.*.md.in",
+      "books/quantum-geometry/data/declaration-serials.json",
       "books/quantum-geometry/en/**/*.md",
       "books/quantum-geometry/en/*.md",
       "books/quantum-geometry/en/appendix-c.md",
@@ -865,6 +867,8 @@
       "books/quantum-geometry/en/ch28-reading-frozen-proofs-ii.md",
       "books/quantum-geometry/en/ch30-s04-navier-stokes.md",
       "books/quantum-geometry/en/coda.md",
+      "books/quantum-geometry/sync-statistics.py",
+      "books/quantum-geometry/viz/lean-declaration-map/gen-data.py",
       "books/quantum-geometry/viz/visualizations.json",
       "books/quantum-geometry/zh/**/*.md",
       "books/quantum-geometry/zh/*.md",
@@ -896,6 +900,7 @@
       "tools/tbook/mdscan.py",
       "tools/tbook/model.py",
       "tools/tbook/paths.py",
+      "tools/tbook/stats.py",
       "tools/tbook/summary.py",
       "tools/tbook/viz.py",
       "trureturing.lock.json"
@@ -1278,7 +1283,6 @@
       "@citations",
       "books/*/book.toml",
       "books/quantum-geometry/book.toml",
-      "books/quantum-geometry/viz/*/thumb.jpg",
       "books/quantum-geometry/viz/visualizations.json",
       "i18n/en.toml",
       "i18n/zh.toml",
