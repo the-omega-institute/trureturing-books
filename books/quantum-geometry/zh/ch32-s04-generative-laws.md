@@ -1,11 +1,11 @@
-# 32.4 零背景下的三条创生铁律（模型）与四个机器验证锚点 {#sec-ch32-generative-laws}
+# 32.4 零背景下的三条创生铁律与机器验证双重闭环 {#sec-ch32-generative-laws}
 
-在[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)至[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)中，我们已经从零背景比较公理 $\mathcal{A}_0$ 与单指令比较机 $\mathrm{CMP}(\mathbf{A}, \mathbf{B}) = \mathbf{A}\cdot\mathbf{B} + \mathbf{A}\wedge\mathbf{B}$ 出发，将逻辑集合、算术素数、内积几何、量子五公设与相对论规范热力学的核心骨架逐条读作显式桥接假设下的条件推论（经内核验证的是链上各端点处的条件引理）。现在，当这枚比较算子不再外在于被比较的对象、而是彻底折回自身（$\psi = \psi(\psi)$）时，一座力求不向自然界赊借闵可夫斯基背景流形、外加复希尔伯特空间或经验拟合常数表的**正交自指统一场模型（`MODEL`）**便立了起来——按 32.3 的台账，洛伦兹号差（`H8`）、完备复希尔伯特空间（`H3`、`H4`）与哈密顿量（`H6`）仍是外部输入，耦合常数仍是 `OPEN`。在这一模型中，几何与动力学原语沿着三条递进的创生铁律展开：
+在[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)至[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)中，我们已经从零背景比较公理 $\mathcal{A}_0$ 与单指令比较机 $\mathrm{CMP}(\mathbf{A}, \mathbf{B}) = \mathbf{A}\cdot\mathbf{B} + \mathbf{A}\wedge\mathbf{B}$ 出发，将逻辑集合、算术素数、内积几何、量子五公设与相对论规范热力学的核心骨架逐条锻造为显式桥接假设下的形式化推论。现在，当这枚比较算子不再外在于被比较的对象、而是彻底折回自身（$\psi = \psi(\psi)$）时，一座力求不向自然界赊借闵可夫斯基背景流形、外加复希尔伯特空间或经验拟合常数表的**正交自指统一场模型（`MODEL`）**便水到渠成地立起。全部几何与动力学原语沿着三条递进的创生铁律内生涌现：
 
 1. **零号元公理（无背景自指闭环，$\psi = \psi(\psi)$）**：
    彻底砍掉一切置身事外的特权参考点 $C$ 与外部立法者。宇宙底层不存在悬浮在状态之外的“外部定律”——**去丈量与计数的比较算子（动词：量 `liáng` / 数 `shǔ`）与被丈量与记录的状态（名词：量 `liàng` / 数 `shù`）在最底层是同一个本体**。
 2. **第一创生律（两子正交分解与自指压缩稳定化）**：
-   任意两子相遇，唯一发生的基础操作是把相互关系正交拆解为**一维共线相融内积**（线 / 粒子刻度 / 固有时流逝）与**二维正交分叉外积**（面 / 量子门旋子 / 规范曲率）（外部几何代数与分析公式见下方 [@rem-ch32-generative-laws-dottie-literature]）。连续两次正交四分之一转必然反向（在有限维复矩阵层面对齐下方 [@thm-ch32-generative-self-reference-and-zeckendorf] 第 1 款的反自伴幺正复结构平方律 $R^2 = -I_n$）；结合全局无时间场的顺序无关去序模型（[第 29 章](ch29-timeless-causality-and-gram-space.md)）、有限类型上的子集单调收缩有限步稳定化定理（这是 $U(A) \subseteq A$ 型的集合收缩，与余弦迭代的度量压缩只是同名）与黄金代数唯一不动点定理（[@thm-ch32-generative-self-reference-and-zeckendorf] 第 2–3 款，`LEAN ✓`），并在诠释桥梁（`MODEL`；连续文献背景见 [@rem-ch32-generative-laws-dottie-literature]）中将离散收缩稳定化对接至唯一自指平衡点，无约束自指的罗素式死循环遂被正交分叉阻尼驯服。
+   任意两子相遇，唯一发生的基础操作是把相互关系正交拆解为**一维共线相融内积**（线 / 粒子刻度 / 固有时流逝）与**二维正交分叉外积**（面 / 量子门旋子 / 规范曲率）（外部几何代数与分析公式见下方 [@rem-ch32-generative-laws-dottie-literature]）。连续两次正交四分之一转必然反向（在有限维复矩阵层面对齐下方 [@thm-ch32-generative-self-reference-and-zeckendorf] 第 1 款的反自伴幺正复结构平方律 $R^2 = -I_n$）；结合全局无时间场的顺序无关去序模型（[第 29 章](ch29-timeless-causality-and-gram-space.md)）、有限类型上的子集单调收缩有限步稳定化定理与黄金代数唯一不动点定理（[@thm-ch32-generative-self-reference-and-zeckendorf] 第 2–3 款，`LEAN ✓`），并在诠释桥梁（`MODEL`；连续文献背景见 [@rem-ch32-generative-laws-dottie-literature]）中将离散收缩稳定化对接至唯一自指平衡点，无约束自指的罗素式死循环遂被正交分叉阻尼驯服。
 
 ::: {.figure src="ch32-quarter-turns"}
 **连续两次正交四分之一转，箭头反向。** 墨色的 $e$ 指向右；转一个紫色的 $90^\circ$ 得到指向上的 $Re$，再转一个 $90^\circ$ 得到 $R^2 e = -e$，正好与 $e$ 反向。图中是实平面上的一例 $R$：$Re_1 = e_2$，$Re_2 = -e_1$，它满足 $R^{\mathsf T} = -R$、$RR^{\mathsf T} = I$；绿色的 $R^2 = -I$ 是 [@thm-ch32-generative-self-reference-and-zeckendorf] 第 1 款对一切反自伴幺正复矩阵给出的结论。
@@ -18,7 +18,7 @@
 **有限分辨率下，球面是一个多面体。** 内接于球面的正二十面体：每个顶点挤着 5 个等边三角形，角加起来只有 300°，品红的小扇形是摊平后缺的 60°；12 个顶点一共缺 720° = 4π（文献结果，见下方 [@rem-ch32-generative-laws-dottie-literature] 第 3 条）。
 :::
 
-下面把与这三条创生律相配的四条已验证引理——复结构平方反号、离散单调收缩有限步稳定、黄金倒数自指唯一不动点与齐肯多夫无相邻 `11` 语言——列在同一个定理盒里；它们彼此独立，各自只担保自己的陈述，三条创生律本身仍是 `MODEL`。
+让我们先把支撑这三条创生律的四块 Lean 4 形式化基石——复结构平方反号、离散单调收缩有限步稳定、黄金倒数自指唯一不动点与齐肯多夫无相邻 `11` 语言——严密锁定在同一座定理盒内。
 
 ::: {.theorem #thm-ch32-generative-self-reference-and-zeckendorf title="统一场创生律的四项形式化锚点：复结构平方、离散收缩、黄金自指与齐肯多夫无相邻编码" lean="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes"}
 在 `trureturing` 冻结的幺正复结构、不动点稳定性、代数自指与自动机编码模块中，以下四项定理同时成立：
@@ -89,4 +89,4 @@
 **黄金有理渐近分数铺底盘，余弦回旋方格收自指。** 共用步指标 $k = 7$：左栏从同一初值 $x_0 = 1$ 同时走出两条蛛网，品红曲线 $y = 1/(1+x)$ 依次踏过斐波那契渐近分数 $1/1, 1/2, 2/3, 3/5, 5/8, 8/13, 13/21, 21/34$ 收向 $\varphi^{-1} \approx 0.6180$，青色曲线 $y = \cos\theta$ 旋向 $\theta^* \approx 0.7391$（已完成 $Q_0 \dots Q_6$ 七次历史递推，琥珀色标出当前递推 $Q_7$）；右栏停在极坐标步指标 $k = 7$（$\phi_7 = 7\pi/2$），对比品红 $\varphi^{-1}$ 螺旋（$0.6180$）与青色 $\theta^*$ 正交螺旋（$0.6736$）的径向收束速度（统一场横纵分工属本书 `MODEL`）。
 :::
 
-三条创生铁律与双螺旋不动点底盘既已摆出，下一节（[32.5](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields)）我们将沿着多向量阶数与网络拓扑维度向外展开，看物质旋量、规范场曲率、全息热力学引力与紫外截断如何在同一张六大疆域类比对照表上并列对照。
+三条创生铁律与双螺旋不动点底盘既已锁定，下一节（[32.5](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields)）我们将沿着多向量阶数与网络拓扑维度向外展开，看物质旋量、规范场曲率、全息热力学引力与紫外截断如何在同一张六大疆域全息同构总表上同源汇合。

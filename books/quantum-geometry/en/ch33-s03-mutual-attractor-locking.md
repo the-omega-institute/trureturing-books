@@ -2,7 +2,7 @@
 
 If each observer already possesses an individual restoring basin $\psi_i = \psi_i(\psi_i)$, why does the universe not leave every being sealed inside solitary contemplation? Why do spins pair into bonds, stars gather into galaxies, and minds seek out resonant companions?
 
-The book's reading (`MODEL`) lies in the cobweb trajectories of solitary and mutual reference under their two samplings ([@rem-ch33-mutual-attractor-figure]; this is a one-dimensional cosine toy model, not an explanation of chemical bonding or quantum entanglement; from a common start the two are the step-by-step and every-other-step samplings of one orbit)! Projecting self-reference onto our canonical one-dimensional cosine slice (`MODEL`) contrasts the qualitative character of solitary introspection against reciprocal dialogue (with all derivative bounds, Mean Value Theorem proofs, and step-by-step numerical ledgers enclosed in [@ex-ch33-mutual-cosine-monotonic-lock] below):
+Look at the two contrasting cobweb trajectories of solitary and mutual reference ([@rem-ch33-mutual-attractor-figure])! Projecting self-reference onto our canonical one-dimensional cosine slice (`MODEL`) contrasts the qualitative character of solitary introspection against reciprocal dialogue (with all derivative bounds, Mean Value Theorem proofs, and step-by-step numerical ledgers enclosed in [@ex-ch33-mutual-cosine-monotonic-lock] below):
 
 - **The Anxiety of Solitary Self-Reference (Pendulum Whipsawing, `MODEL`)**: When an isolated observer calibrates itself alone in single steps, perspective behaves like an under-damped pendulum whipsawing between self-doubt and overcompensation (analytical mechanism in [@ex-ch33-mutual-cosine-monotonic-lock], under its strict-alternation hypotheses).
 
@@ -49,20 +49,20 @@ The book's reading (`MODEL`) lies in the cobweb trajectories of solitary and mut
 | Step $k$ | Solitary $x_k$ ($x_{k+1}=\cos x_k$) | Error $x_k - \theta^*$ | Mutual $y_k$ ($y_{k+1}=\cos(\cos y_k)$) | Error $y_k - \theta^*$ | Dynamical Regime Comparison |
 | :---: | :---: | :---: | :---: | :---: | :--- |
 | $0$ | $0.100000$ | $-0.639085$ | $0.100000$ | $-0.639085$ | Identical low-phase initial offset |
-| $1$ | $0.995004$ | $+0.255919$ | $0.544499$ | $-0.194586$ | Solitary overshoots high; mutual column is $x_2$, inside $[\cos 1, 1]$ |
-| $2$ | $0.544499$ | $-0.194586$ | $0.655927$ | $-0.083158$ | Solitary swings back low; mutual column is $x_4$, sign unchanged |
-| $3$ | $0.855387$ | $+0.116302$ | $0.702079$ | $-0.037006$ | Solitary flips sign again; mutual column is $x_6$, smaller only because it used three more cosine evaluations |
-| $4$ | $0.655927$ | $-0.083158$ | $0.722420$ | $-0.016665$ | Solitary 4th sign flip; mutual column is $x_8$, absolute error $0.017$ ($\approx 2.25\%$ relative) |
-| $5$ | $0.792483$ | $+0.053398$ | $0.731547$ | $-0.007538$ | Mutual column is $x_{10}$; the even ticks all lie left of $\theta^*$, zero sign flips |
+| $1$ | $0.995004$ | $+0.255919$ | $0.544499$ | $-0.194586$ | Solitary overshoots high; mutual enters $[\cos 1, 1]$ |
+| $2$ | $0.544499$ | $-0.194586$ | $0.655927$ | $-0.083158$ | Solitary swings back low; mutual climbs smoothly |
+| $3$ | $0.855387$ | $+0.116302$ | $0.702079$ | $-0.037006$ | Solitary flips sign again; mutual error is $\approx 3\times$ smaller than the same row's solitary error (the mutual column is $x_6$, using three more cosine evaluations) |
+| $4$ | $0.655927$ | $-0.083158$ | $0.722420$ | $-0.016665$ | Solitary 4th sign flip; mutual absolute error drops to $0.017$ ($\approx 2.25\%$ relative) |
+| $5$ | $0.792483$ | $+0.053398$ | $0.731547$ | $-0.007538$ | Step-5 mutual residual is $\approx 7\times$ smaller than the same row's solitary value (the mutual column is $x_{10}$), zero sign flips |
 
-   Distilled into a single geometric aphorism (`MODEL`; mathematically the two views are the step-by-step and every-other-step samplings of one orbit, see Items 10 and 24): **solitary introspection is a mirror of negative slope—the harder you stare into yourself alone, the more violently you whipsaw between self-doubt and overreach; only when two observers measure each other at eye level do two negatives multiply into a serene positive, locking two restless trajectories monotonically into one shared fixed point.**
+   Distilled into a single geometric aphorism (`MODEL`): **solitary introspection is a mirror of negative slope—the harder you stare into yourself alone, the more violently you whipsaw between self-doubt and overreach; only when two observers measure each other at eye level do two negatives multiply into a serene positive, locking two restless trajectories monotonically into one shared fixed point.**
 :::
 
 ::: {.viz src="mutual-observer-attractors" preset="round" height="500"}
 **Two beats a round, from one side only.** The same orbit sampled every two beats (the hollow rings): $0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ closes in monotonically on one side of $\theta^*$, with a local asymptotic error factor of about $0.454 = 0.674^2$ per round. A round costs two cosine evaluations, and the rings are just the even beats of the same orbit as in the previous card: the same number of cosine evaluations lands in the same place, so what the round buys is no more crossing from side to side, not speed ([@ex-ch33-mutual-cosine-monotonic-lock], clauses 14, 21, 23 and 24, and the numerical ledger). In the band below, the ringed bars sit on the even counts of cosine evaluations, all below the zero line.
 :::
 
-Stepping back from the trajectory ledger of [@ex-ch33-mutual-cosine-monotonic-lock], within our relational observer `MODEL`, stepping out of isolation into eye-level mutual reflection is never a sentimental concession—it is the endogenous geometry that frees bounded beings from solitary oscillation (mathematically, from a common start the mutual orbit is just the even ticks of the solitary orbit, with no difference in speed; for different starting points, see below).
+Stepping back from the trajectory ledger of [@ex-ch33-mutual-cosine-monotonic-lock], within our relational observer `MODEL`, stepping out of isolation into eye-level mutual reflection is never a sentimental concession—it is the endogenous geometry that frees bounded beings from solitary oscillation.
 
 The same holds when the two start apart. The curve $x = \cos y$ along which A reads B and the curve $y = \cos x$ along which B reads A meet only at $(\theta^*, \theta^*)$ on the diagonal ([@ex-ch33-mutual-cosine-monotonic-lock], clause 9); sampled round by round, each reading is an orbit of $g$ and closes in on that point from any real start (clause 8), and from a start in $(0, \theta^*)$ it increases strictly from below (clauses 12–14).
 
