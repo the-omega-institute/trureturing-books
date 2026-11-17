@@ -7,7 +7,6 @@ pages spatial-attractor-deja-vu and golden-cut-observer: round k is cyan, round 
 is amber, the points it keeps are cyan.
 """
 
-import collections
 import math
 import re
 from pathlib import Path
@@ -134,48 +133,7 @@ def in_window(y):
     return WINDOW[0] - 1e-12 <= y <= WINDOW[1] + 1e-12
 
 
-# ---------------------------------------------------------------- cross-chapter references
-
-_CN = "零一二三四五六七八九"
-_REF = re.compile(r"ch(\d\d)-[a-z0-9-]+\.md|第\s*([0-9]+|[一二三四五六七八九十]+)\s*章")
-
-
-def _cn(s):
-    if s.isdigit():
-        return int(s)
-    if s == "十":
-        return 10
-    if s.startswith("十"):
-        return 10 + _CN.index(s[1])
-    if s.endswith("十"):
-        return _CN.index(s[0]) * 10
-    if "十" in s:
-        a, b = s.split("十")
-        return _CN.index(a) * 10 + _CN.index(b)
-    return _CN.index(s)
-
-
-def chapter_references(n=39):
-    """Counter {(cited, citing): mentions} over the Chinese chapters 1–n: a link to chNN-….md or the
-    words “第 N 章” (Arabic or Chinese numerals) inside chapter M ≠ N. Captions of figures, lab cards,
-    films and slide decks are skipped: they describe a picture, not what the chapter builds on."""
-    refs = collections.Counter()
-    for f in sorted(ZH.glob("ch[0-9][0-9]-*.md")):
-        me = int(f.name[2:4])
-        media = False
-        for line in f.read_text(encoding="utf-8").splitlines():
-            if re.match(r":::\s*\{\.(figure|viz|film|slides)\b", line):
-                media = True
-                continue
-            if media:
-                media = line.strip() != ":::"
-                continue
-            for m in _REF.finditer(line):
-                k = int(m.group(1)) if m.group(1) else _cn(m.group(2))
-                if k != me and 1 <= k <= n and me <= n:
-                    refs[(k, me)] += 1
-    return refs
-
+# ---------------------------------------------------------------- reading order
 
 def parts():
     """The chapters of each part, read from zh/SUMMARY.md: [[1, 2, 3, 4], [5, …], …]."""

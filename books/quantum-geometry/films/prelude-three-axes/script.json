@@ -1,0 +1,51 @@
+{
+  "voice": "af_heart",
+  "speed": 0.92,
+  "say": {
+    "qubit": "cue-bit",
+    "Lean": "Leen",
+    "called Z": "called zee",
+    "gives X": "gives ex",
+    "x axis": "ex axis",
+    "about x": "about ex",
+    "about z": "about zee",
+    "Z times X is minus X times Z": "zee times ex is minus ex times zee"
+  },
+  "music": {"bpm": 72, "progression": "a-minor"},
+  "scenes": [
+    {"id": "plane", "name": "ONE PLANE", "lead": 3.4, "tail": 1.4, "music": [1.0, 0.3, 0.2, 0.0, 0.0], "lines": [
+      ["Last time, lifting our eyes turned a line back into a turning disc.", "上一部里，我们抬起视线，一条线重新展开成一张转动的圆盘。"],
+      ["Today's question: is one flat plane enough for a qubit?", "今天的问题：一张平面，装得下一个量子比特吗？"]
+    ], "cues": [{"line": 1, "at": 2.2, "kind": "chime"}]},
+    {"id": "axes", "name": "THREE AXES", "lead": 1.4, "tail": 2.0, "music": [0.9, 0.5, 0.4, 0.0, 0.1], "lines": [
+      ["In the lab, a spin can be measured along three directions, all at right angles.", "在实验室里，自旋可以沿三个方向丈量，三个方向两两垂直。"],
+      ["Three axes give three planes, all crossing at right angles.", "三根轴给出三张平面，两两成直角相交。"],
+      ["Every arrow of length one now ends on a sphere.", "现在，每一支长度为 1 的箭头，箭尖都落在一颗球面上。"],
+      ["Standard theory puts every pure qubit state on this sphere; that is a literature result.", "标准量子理论把单量子比特的每个纯态都放在这颗球面上；这是文献结果。"]
+    ], "cues": [{"line": 2, "at": 2.4, "kind": "chime"}]},
+    {"id": "table", "name": "ONE TABLE PER POINT", "lead": 1.0, "tail": 2.2, "music": [0.9, 0.6, 0.5, 0.2, 0.2], "lines": [
+      ["Each point of the sphere comes with its own two-by-two table of numbers.", "球面上的每一个点，都配着一张属于自己的二乘二数表。"],
+      ["The north pole gives the table called Z; the point on the x axis gives X.", "北极给出名叫 Z 的数表；x 轴上的那个点给出 X。"],
+      ["Multiply any such table by itself, and you get the identity: ones on the diagonal.", "任何一张这样的数表与自己相乘，都得到单位表：对角线上是 1，其余是 0。"]
+    ]},
+    {"id": "address", "name": "TWO ANGLES", "lead": 1.0, "tail": 2.0, "music": [0.9, 0.6, 0.6, 0.2, 0.2], "lines": [
+      ["To find a point, use two angles: first tilt down from the north, then turn around.", "要找到球面上的一个点，用两个角：先从北极往下倾，再绕竖轴转。"],
+      ["Keep the tilt fixed and only turn: the point walks a small circle, a latitude.", "倾角固定、只转动：点走的是一个小圆，也就是纬圈。"],
+      ["Only at ninety degrees does its plane pass through the centre: that is the equator.", "只有倾角到 90°，它所在的平面才经过球心：那就是赤道。"],
+      ["Going around once is not the same as covering the sphere.", "绕一圈，还不等于走遍球面。"]
+    ], "cues": [{"line": 2, "at": 3.0, "kind": "chime"}]},
+    {"id": "order", "name": "ORDER MATTERS", "lead": 1.0, "tail": 2.4, "music": [1.0, 0.8, 0.7, 0.4, 0.3], "lines": [
+      ["On a sphere, the order of two turns matters.", "在球面上，两次转动的先后顺序有讲究。"],
+      ["A quarter turn about x, then about z, lands on the x axis.", "先绕 x 轴转四分之一圈，再绕 z 轴转四分之一圈：落在 x 轴上。"],
+      ["Swap the order, and we land somewhere else, a right angle away.", "调换顺序，就落到别处，与刚才相隔一个直角。"],
+      ["The readout tables feel the order too: Z times X is minus X times Z.", "读数表也感觉得到顺序：Z 乘 X 等于负的 X 乘 Z。"],
+      ["The green results in this film are checked by the Lean kernel.", "片中绿色的结论，都由 Lean 内核检验。"]
+    ], "cues": [{"line": 2, "at": 2.6, "kind": "impact"}, {"line": 4, "at": 0.4, "kind": "stamp"}]},
+    {"id": "recap", "name": "RECAP", "lead": 1.0, "tail": 5.0, "music": [1.0, 0.5, 0.4, 0.2, 0.1], "lines": [
+      ["One plane holds one turn; a qubit needs three axes and a sphere.", "一张面只装得下一种转动；量子比特要三根轴、一颗球。"],
+      ["Two angles give an address; a fixed tilt walks only a latitude.", "两个角给出地址；固定倾角只走一圈纬线。"],
+      ["On a sphere, order matters: Z times X is minus X times Z.", "在球上，顺序有讲究：ZX = −XZ。"],
+      ["Next: who can point outside the sphere?", "下一部：谁能指向球的外面？"]
+    ], "cues": [{"line": 3, "at": 0.3, "kind": "chime"}]}
+  ]
+}

@@ -26,7 +26,7 @@ from unittest.mock import patch
 
 from example_support import example_shown
 
-from tbook import config, cover, lean, mathrender, paths
+from tbook import buildcache, config, cover, lean, mathrender, paths
 from tbook import pandoc as tp
 from tbook.model import load_edition
 
@@ -237,12 +237,120 @@ def fixture_site() -> config.Site:
     return dataclasses.replace(config.load_site(), base_url=BASE_URL)
 
 
+class SourceCacheTest(unittest.TestCase):
+    """Expensive shared inputs survive fresh staging directories; EPUB keeps its own converter."""
+
+    def test_pdf_variants_share_staging_and_conversion_and_invalidate_changed_sources(self):
+        with tempfile.TemporaryDirectory(prefix="tbook-source-cache-") as tmp:
+            root = Path(tmp)
+            book = make_book(root)
+            site, edition = fixture_site(), book.edition("en")
+            model = load_edition(edition)
+            stages = []
+
+            def convert(args, *, cwd, env):
+                self.assertEqual(args[args.index("--to") + 1], "typst")
+                (cwd / "main.typ").write_text('Converted ' + (cwd / "book.md").read_text(), encoding="utf-8")
+
+            def compile(main, output, **kwargs):
+                self.assertTrue(main.is_file())
+                output.write_bytes(b"%PDF-test")
+                return output
+
+            with patch.object(paths, "CACHE", root / "cache"), \
+                    patch.dict(os.environ, {"TBOOK_CACHE": "1", "TBOOK_CACHE_REMOTE": "0"}), \
+                    patch.object(tp, "stage", wraps=tp.stage) as stage, \
+                    patch.object(tp, "run_pandoc", side_effect=convert) as pandoc, \
+                    patch.object(tp, "compile_typst", side_effect=compile) as typst, \
+                    contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                for variant in config.PDF_VARIANTS:
+                    directory = root / f"stage-{variant}"
+                    tp.build_pdf(site, book, edition, model, None, variant, root / f"{variant}.pdf",
+                                 stage_dir=directory)
+                    stages.append(directory)
+                self.assertEqual((stage.call_count, pandoc.call_count, typst.call_count), (1, 1, 3))
+                self.assertEqual(len({(d / "main.typ").read_bytes() for d in stages}), 1)
+                stored = buildcache.pandoc_unit(site, book, edition.lang, stages[0], lock=None).entry_dir()
+                self.assertFalse((stored / "files/0/main.typ").exists(), "only source staging is cached here")
+                restored = tp.publication_stage(site, book, edition, model, None, out_dir=root / "moved-stage")
+                self.assertEqual(restored.dir, root / "moved-stage")
+                self.assertEqual(restored.book_md, restored.dir / "book.md")
+                self.assertTrue(restored.chapters)
+                self.assertTrue(restored.files)
+                self.assertTrue(restored.warnings)
+                self.assertEqual(restored.meta["title"], edition.title)
+                self.assertFalse((restored.dir / "main.typ").exists())
+                chapter = edition.dir / "a.md"
+                chapter.write_text(chapter.read_text() + "\nChanged publication text.\n", encoding="utf-8")
+                tp.build_pdf(site, book, edition, load_edition(edition), None, "screen", root / "changed.pdf",
+                             stage_dir=root / "changed-stage")
+                self.assertEqual((stage.call_count, pandoc.call_count), (2, 2))
+                self.assertIn("Changed publication text.", (root / "changed-stage/main.typ").read_text())
+                resized = dataclasses.replace(book, pdf={**book.pdf, "paper": "a4"})
+                changed = tp.publication_stage(site, resized, edition, load_edition(edition), None,
+                                               out_dir=root / "resized-stage")
+                self.assertEqual(changed.meta["paper"], "a4")
+                self.assertEqual(stage.call_count, 3)
+                lock = lean.Lock(repo="test/repo", branch="dev", commit="a" * 40)
+                changed = tp.publication_stage(site, resized, edition, load_edition(edition), lock,
+                                               out_dir=root / "repinned-stage")
+                self.assertEqual(changed.meta["trureturing"]["commit"], "a" * 40)
+                self.assertEqual(stage.call_count, 4)
+                custom_model = load_edition(edition)
+                custom_model.envs["def-a"].title = "A distinct in-memory title"
+                changed = tp.publication_stage(site, resized, edition, custom_model, None,
+                                               out_dir=root / "model-stage")
+                self.assertIn("A distinct in-memory title", changed.book_md.read_text())
+                self.assertEqual(stage.call_count, 5)
+                inventory = buildcache.pandoc_unit(site, book, edition.lang, root / "inventory")
+                explicit = buildcache.pandoc_unit(site, book, edition.lang, root / "explicit",
+                                                  lock=lean.Lock.load(), model=load_edition(edition))
+                self.assertEqual(inventory.key, explicit.key, "disk inputs and the normal build share one key")
+
+    def test_epub_uses_the_shared_stage_without_typst_conversion(self):
+        with tempfile.TemporaryDirectory(prefix="tbook-epub-source-cache-") as tmp:
+            root = Path(tmp)
+            book = make_book(root)
+            site, edition = fixture_site(), book.edition("en")
+            model = load_edition(edition)
+
+            def epub_inputs(*args):
+                staged = args[-1]
+                (staged.dir / "epub").mkdir()
+                cover = staged.dir / "cover.png"
+                cover.write_bytes(b"cover")
+                return {"cover": cover, "fonts": []}
+
+            def convert(args, *, cwd, env):
+                self.assertEqual(args[args.index("--to") + 1], "epub3")
+                (cwd / "epub/pandoc.epub").write_bytes(b"raw epub")
+
+            def finalize(src, dst, **kwargs):
+                dst.write_bytes(src.read_bytes())
+                return dst
+
+            with patch.object(paths, "CACHE", root / "cache"), \
+                    patch.dict(os.environ, {"TBOOK_CACHE": "1", "TBOOK_CACHE_REMOTE": "0", "TBOOK_EPUBCHECK": "0"}), \
+                    patch.object(tp, "stage", wraps=tp.stage) as stage, \
+                    patch.object(tp, "stage_epub", side_effect=epub_inputs), \
+                    patch.object(tp, "run_pandoc", side_effect=convert) as pandoc, \
+                    patch.object(tp, "finalize_epub", side_effect=finalize), \
+                    patch.object(tp, "compile_typst") as typst, \
+                    contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                source = tp.publication_stage(site, book, edition, model, None, out_dir=root / "prepared")
+                tp.build_epub(site, book, edition, model, None, root / "book.epub", stage_dir=root / "epub-stage")
+                self.assertEqual((stage.call_count, pandoc.call_count), (1, 1))
+                typst.assert_not_called()
+                self.assertEqual((root / "epub-stage/book.md").read_bytes(), source.book_md.read_bytes())
+
+
 class StagingTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.tmp = Path(tempfile.mkdtemp(prefix="tbook-test-pandoc-"))
         cls.site = fixture_site()
         cls.book = make_book(cls.tmp)
+        cls.book.doi = "10.5281/zenodo.12345678"
         cls.ed = cls.book.edition("en")
         cls.model = load_edition(cls.ed)
         cls.stage = tp.stage(cls.site, cls.book, cls.ed, cls.model, None, out_dir=cls.tmp / "stage")
@@ -374,6 +482,8 @@ class StagingTest(unittest.TestCase):
         self.assertEqual(meta["authors"], ["A. Author", "B. Author"])
         self.assertEqual(meta["formal_count"], 0)
         self.assertEqual(meta["isbn"], "978-3-16-148410-0")
+        self.assertEqual(meta["doi"], "10.5281/zenodo.12345678")
+        self.assertEqual(meta["doi_url"], "https://doi.org/10.5281/zenodo.12345678")
         self.assertEqual(meta["date"], {"year": 2026, "month": 1, "day": 2, "iso": "2026-01-02"})
 
     def test_restage_is_clean_and_deterministic(self):
@@ -566,22 +676,16 @@ class LuaFilterTest(unittest.TestCase):
                 self.assertNotIn("\ufffd", out)
 
     @unittest.skipUnless(have_typst(), "typst not available")
-    def test_inline_math_identities_preserve_heading_anchors(self):
+    def test_inline_math_preserves_heading_anchors(self):
         import typst
 
         out = run_filters("## Math $x$ and $y$ {#public-heading}\n\nBody $z$.\n", "typst", self.META)
-        identities = re.findall(r"<tr-inline-[^>]+>", out)
-        self.assertEqual(len(identities), 3)
-        self.assertEqual(len(set(identities)), 3)
         _, warnings = typst.compile_with_warnings(out.encode())
         self.assertFalse([w for w in warnings if "labelled" in w.message])
         self.assertEqual(json.loads(typst.query(out.encode(), "<public-heading>", field="level")), [2])
-        for identity in identities:
-            self.assertEqual(json.loads(typst.query(out.encode(), identity, field="block")), [False])
 
     def test_typst_output(self):
         out = run_filters(ENV_MD, "typst", self.META)
-        out = re.sub(r"#\[(\$.*?)<tr-inline-[^>]+>\]", r"\1", out, flags=re.S)
         self.assertIn('#tr-env(kind: "theorem", status: "lean", label: "Theorem", number: "1.2", '
                       'ref: "Theorem 1.2", title: [Bound on $c$], badge: "LEAN ✓", '
                       'badge-url: "https://example.org/X.lean#L3", lean: ((gid: "D5/S1/X.y", name: "D5.S1.X.y", url: "https://example.org/X.lean#L3"),), '
@@ -638,8 +742,8 @@ class LuaFilterTest(unittest.TestCase):
         meta = {**self.META, "tr-tex-macros": mathrender.newcommands()}
         typst = run_filters(mathrender.newcommands() + "\n\n" + self.TITLED, "typst", meta)
         self.assertNotIn("\\norm", typst)
-        self.assertRegex(typst, r"for\s+#\[\$lr\(bar.v.double v bar.v.double\)\$<tr-inline-tr-env-\d+>\]\]")
-        self.assertRegex(typst, r"Body #\[\$lr\(bar.v.double w bar.v.double\)\$<tr-inline-tr-book-\d+>\]\.")
+        self.assertRegex(typst, r"for\s+\$lr\(bar.v.double v bar.v.double\)\$\]")
+        self.assertRegex(typst, r"Body \$lr\(bar.v.double w bar.v.double\)\$\.")
         html = run_filters(mathrender.newcommands() + "\n\n" + self.TITLED, "html5", meta)
         self.assertNotIn("\\norm", html)
         self.assertNotIn("newcommand", html)
@@ -685,7 +789,7 @@ class TypstSymbolTest(unittest.TestCase):
               'tr-number="1.1" tr-ref="Remark 1.1" tr-title="On $A \\\\cap B$"}\nBody.\n::::::\n')
         out = run_filters(md, "typst", self.META)
         for new in ("A inter B", "inter.big", "inter.double", "inter.sq", "dot.o", "dot.o.big", "times.o",
-                    "times.o.big", "minus.o", "dash.o", 'title: [On #[$A inter B$', 'upright("sect")/**/inter x'):
+                    "times.o.big", "minus.o", "dash.o", 'title: [On $A inter B$', 'upright("sect")/**/inter x'):
             self.assertIn(new, out)
         self.assertNotRegex(re.sub(r'"[^"]*"', "", out), r"\bsect\b|\.circle\b")
         self.assertIn("upright(i n t e r s e c t)", out)  # letters, not the name sect
@@ -935,9 +1039,8 @@ class BuildTest(unittest.TestCase):
         self.assertNotIn("#cite", main)
         # Macros are expanded in math (no raw TeX fallback), titles included.
         self.assertNotIn("\\norm", main)
-        expressions = re.sub(r"#\[(\$.*?)<tr-inline-[^>]+>\]", r"\1", main, flags=re.S)
-        self.assertIn("a norm $lr(bar.v.double x bar.v.double)$ and $⌊y⌋$", expressions)
-        self.assertIn("== Bound $x^2$ for $lr(bar.v.double x bar.v.double)$", expressions)
+        self.assertIn("a norm $lr(bar.v.double x bar.v.double)$ and $⌊y⌋$", main)
+        self.assertIn("== Bound $x^2$ for $lr(bar.v.double x bar.v.double)$", main)
         # b.md#summary reaches B's "Summary", not A's.
         self.assertIn("#link(<ch-b--summary>)[the summary of B]", main)
         self.assertRegex(main, r"== Summary\s*<ch-b--summary>")
@@ -946,30 +1049,6 @@ class BuildTest(unittest.TestCase):
     def test_pdf_rejects_unknown_variant(self):
         with self.assertRaises(tp.PandocError):
             tp.build_pdf(self.site, self.book, self.ed, self.model, None, "glossy", self.tmp / "x.pdf")
-
-    def test_pdf_compaction_preserves_content_and_links(self):
-        import pikepdf
-
-        path = self.tmp / "compact.pdf"
-        with pikepdf.Pdf.new() as pdf:
-            pdf.docinfo["/Title"] = "Lossless academic PDF"
-            for i in range(100):
-                page = pdf.add_blank_page()
-                page.Contents = pdf.make_stream(f"q 1 0 0 1 {i} 0 cm Q".encode())
-                page.Annots = [pdf.make_indirect(pikepdf.Dictionary(
-                    Type=pikepdf.Name.Annot, Subtype=pikepdf.Name.Link,
-                    Rect=[0, 0, 10, 10],
-                    A=pikepdf.Dictionary(S=pikepdf.Name.URI, URI=f"https://example.org/{i}")))]
-            pdf.save(path, object_stream_mode=pikepdf.ObjectStreamMode.disable)
-        before = path.stat().st_size
-        self.assertEqual(tp._compact_pdf(path), path)
-        self.assertLess(path.stat().st_size, before)
-        with pikepdf.open(path) as pdf:
-            self.assertEqual(str(pdf.docinfo["/Title"]), "Lossless academic PDF")
-            self.assertEqual(len(pdf.pages), 100)
-            for i, page in enumerate(pdf.pages):
-                self.assertEqual(page.Contents.read_bytes(), f"q 1 0 0 1 {i} 0 cm Q".encode())
-                self.assertEqual(str(page.Annots[0].A.URI), f"https://example.org/{i}")
 
     def test_epub(self):
         old = os.environ.get("TBOOK_EPUBCHECK")

@@ -16,7 +16,7 @@ Whenever physics has appeared haunted by paradox, the culprit has almost always 
 
 In the figure, $O$, $A$, and $B$ are unit vectors. In the plane panel, $\theta$ is the directed angle from $A$ to $B$ measured in the fixed orientation $\hat{I}$.
 
-On a first reading, hold onto one question: **what information about the object is missing from the shadow you can see?** The ray and turntable let you practise asking it; the sphere, ambient space, and self-referential iteration each add one idea later. These demonstrations explain the book's imagery; the quantum-state and measurement conventions still need to be established in subsequent chapters.
+On a first reading, hold onto one question: **what information about the object is missing from the shadow you can see?** The ray and turntable let you practise asking it; the sphere, ambient space, and self-referential iteration each add one idea later. These demonstrations explain the book's imagery; the quantum-state and measurement conventions still need to be established in subsequent chapters. Each of Sections 0.1 to 0.5 also has a video of about two minutes that answers a single question; watched in order, the five form a guided tour of the prelude.
 
 ## 0.1 First Blind Spot: Mistaking a Line for a Point {#sec-blindspot-1}
 
@@ -36,6 +36,12 @@ Change the viewing angle yourself. The cyan original ray below has a fixed lengt
 
 ::: {.viz src="prelude-dimensions" preset="head-on" height="500"}
 **The ray stays the same length; your viewing angle changes.** Head-on, its projection is a point; at $45^\circ$, the unit ray projects to a length of about $0.707$; side-on, its full length is visible. This is a geometric model of orthogonal projection.
+:::
+
+The video below walks through the whole section: step half a pace aside and watch the dot unfold, read the agreement of two unit arrows, then check by hand that “looking again still gives itself”, $P^2 = P$.
+
+::: {.film src="prelude-head-on-ray"}
+**Head-On: The Dot Is a Line.** A flashlight aimed straight at the eye shows only a bright dot; half a pace aside, it unfolds into a cyan ray. The amber gaze $\vv{o}$ and the direction $\vv{a}$ toward the source are unit arrows whose agreement $\vv{o}\cdot\vv{a} = \cos\theta$ is $1$ head-on. With $\vv{a} = (3/5, 4/5)$ the projection $P$ is computed by hand and $P^2 = P$ is checked entry by entry; comparing two lines, the squared shadow length $(3/5)^2 = 9/25$ equals the trace pairing, the film's only Lean-verified result. English narration with Chinese and English subtitles.
 :::
 
 > A "particle" is merely the bruise left on the retina when a ray meets the eye head-on; "substance" is what grammar invents when the gaze refuses to turn.
@@ -70,7 +76,7 @@ Now put those two moments side by side and advance them slightly to check your u
 
 For now, “mistaking a plane for a line” means just this: **reading planar motion through a one-dimensional projection loses information.** Once that is clear, you can continue without first accepting the physical and philosophical interpretations that follow. The video walks through the same turntable example again.
 
-::: {.film src="011-prelude-dimensions"}
+::: {.film src="prelude-dimensions"}
 **Understand the Shadow: From a Disc to a Line.** Follow the peg around the circle, watch its shadow move back and forth, then compare two passages through the centre in opposite directions. English narration with Chinese and English subtitles.
 :::
 
@@ -108,6 +114,12 @@ Use the next card to distinguish a latitude circle from a great circle: keep the
 
 The three effects above have distinct algebraic or geometric mechanisms; the classical observation that projections lose information does not derive them from one another.
 
+The video below covers only the spherical picture of this section: one plane holds only one kind of turn; three mutually perpendicular axes give a sphere; a fixed tilt walks only a latitude; and swapping the order of two turns changes where you land.
+
+::: {.film src="prelude-three-axes"}
+**One Plane Is Not Enough: Three Axes, One Sphere.** Three mutually perpendicular measuring axes send every arrow of length $1$ to a sphere; the correspondence between pure states and the sphere is a literature result, shown in violet as argued. Each point $(x, y, z)$ carries a readout table $B(x, y, z)$: the north pole gives $Z$, the point on the $x$ axis gives $X$. At a tilt of $50^\circ$ the amber point walks only the cyan latitude; only at $90^\circ$ is it the magenta equator through the centre. Quarter turns about $x$ and $z$, taken in swapped order, land $90^\circ$ apart, and the readout tables satisfy $ZX = -XZ$. The table formula and $ZX = -XZ$ are the film's two Lean-verified results. English narration with Chinese and English subtitles.
+:::
+
 ## 0.4 Fourth Blind Spot: The Sphere Beyond Spheres {#sec-blindspot-4}
 
 **And at the very moment we think we have beheld the whole sphere, we are already enclosed within a larger sphere.**
@@ -138,6 +150,12 @@ Unpack “averaging” as well: the next card replaces the continuous spherical 
 
 ::: {.viz src="prelude-dimensions" preset="average" height="500"}
 **Opposite directions cancel, leaving the mean at the centre.** The cyan directions form opposite pairs. Once the equal-weight mixture is complete, the amber mean vector has shrunk to the centre. This is a mixture of finitely many symmetric directions.
+:::
+
+The video below ties the section together: inside a sheet you cannot point to its own normal; one dimension down, the old circle becomes the equator of a new sphere; from one axis, the equator is a blind ring; and averaging every direction lands at the centre.
+
+::: {.film src="prelude-normal-escape"}
+**The Normal Comes From Outside: A Sphere Beyond the Sphere.** The cyan arrows in the magenta sheet never leave it; only in a three-dimensional room does the violet normal $\vv{e}_3 = \star_3(\vv{e}_1 \wedge \vv{e}_2)$ stand up. Inside three dimensions, $\star_3 I_3 = 1$ is just a number; one dimension down, the old unit circle becomes the equator of a new sphere with radius still $1$. Read by cosines from one axis, the whole equator reads $0$. Three opposite pairs, weighted equally, average to the centre $\rho_* = \frac{1}{2}I$, and no state's arrow is longer than $1$, the film's only Lean-verified result. The echo of Gödel is the book's analogy, shown in violet as argued. English narration with Chinese and English subtitles.
 :::
 
 ## 0.5 Final Awakening: From Beyond the Sphere Back to $\psi = \psi(\psi)$ {#sec-awakening}
@@ -198,11 +216,17 @@ Yet this self-referential limit should not be mistaken for a static Platonic sph
 For gate-set density, see P. O. Boykin et al., *On Universal and Fault-Tolerant Quantum Computing*, §3 ([quant-ph/9906054](https://arxiv.org/abs/quant-ph/9906054)); for the standard inverse-closed compilation assumptions, see C. M. Dawson and M. A. Nielsen, *The Solovay–Kitaev algorithm*, §2 ([quant-ph/0505030](https://arxiv.org/abs/quant-ph/0505030)). The cosine series is [DLMF 4.19.2](https://dlmf.nist.gov/4.19.E2); the nonzero remainder and bound follow from the tail ratio above.
 :::
 
-Unfolded, it spans thirty-nine chapters across quantum computing, spacetime physics, and mathematical logic; folded back, it is simply $\psi$ taking itself as ruler to measure the angle it opens, and recognizing itself across the living seam of approximation.
+Unfolded, it ranges across quantum computing, spacetime physics, and mathematical logic; folded back, it is simply $\psi$ taking itself as ruler to measure the angle it opens, and recognizing itself across the living seam of approximation.
+
+The prelude's last video follows this section from “use the reading as the next angle” all the way to $\psi = \psi(\psi)$.
+
+::: {.film src="prelude-self-measure"}
+**The Ruler Measures Itself: $\psi = \psi(\psi)$.** Starting from $1$ radian, read the cosine and use the reading as the next angle: the amber zigzag runs between the cyan curve $y = \cos\theta$ and the grey diagonal $y = \theta$, closing in on $\theta^* \approx 0.739$. That $\cos\theta = \theta$ has exactly one positive solution, between $0$ and $1$, is the film's only Lean-verified result, the theorem [@thm-dottie-rational-inverse-endpoint] of Chapter 24; that the zigzag reaches it from any start and that no finite step lands exactly remain the literature results of [@rem-prelude-dottie-literature] and [@rem-prelude-finite-literature], shown in violet as argued. Where reading and angle coincide, the book writes $\psi = \psi(\psi)$. English narration with Chinese and English subtitles.
+:::
 
 ## 0.6 Reader's Guide and Formal Verification Contract {#sec-contract}
 
-The full architecture of *Geometric Intuition of Quantum Computing* comprises **ten parts and thirty-nine chapters** (four chapters per part across Parts I–IX, mirroring the four-beat rhythm of *establishing a line, opening a plane, closing a sphere, and crossing the horizon*, followed by Part X's three-chapter culmination across dream quantum erasure, cosmic ontological QRAM pointers, and the non-dual identity of observer and universe):
+The full architecture of *Geometric Intuition of Quantum Computing* comprises **ten parts**:
 
 | Part | Dimensional Stage | Scope and Core Geometric Theme |
 | :--- | :--- | :--- |
@@ -220,18 +244,12 @@ The full architecture of *Geometric Intuition of Quantum Computing* comprises **
 Readers may begin directly with [Chapter 1](ch01-measurement.md): no prior familiarity with operator algebras or advanced quantum theory is assumed, and every $2\times 2$ matrix calculation, trace identity, Bloch coordinate map, and partial-trace reduction is worked out explicitly through [Chapter 2](ch02-born-rule.md), [Chapter 3](ch03-projectors-and-duality.md), and [Chapter 4](ch04-decoherence.md).
 
 ::: {.slides src="overview"}
-A 48-slide overview of the whole book: the four blind spots and the dimensional ladder; each of the ten parts' core picture, main theorems, literature results and open problems; the counts of the three tiers of warrant and the dependency map.
+An overview of the book: the four blind spots and the dimensional ladder; each of the ten parts' core picture, main theorems, literature results and open problems; evidence boundaries and suggested reading paths.
 :::
 
 ### 0.6.1 Formal Verification and Epistemic Honesty Contract {#sec-honesty-rules}
 
 While the prose aims for vivid physical clarity, each result declares its evidence: **Lean verification relies on pinned, frozen declarations; authors and reviewers are responsible for written proofs; open problems retain their unproved status.**
-
-::: {.figure src="prelude-three-tiers"}
-**Three tiers of warrant, three colours.** Green (`LEAN ✓`) is the theorems, lemmas, propositions and corollaries carrying `lean=`; violet is the remarks and examples marked "Literature result, not formalized in this book"; red (`OPEN`) is the open conjectures and problems. Each bar ends in its count over the Chinese text, and a note under the green bar gives the number of theorem declarations in the lock file.
-:::
-
-The violet bar counts only literature remarks and examples. Results explicitly marked `status="written-proof"`, such as [@thm-central-defect-endpoint-average], are listed separately in the automatically generated end-of-book ledger and count toward neither these bars nor the Lean total.
 
 1. **Numbering and Cross-References**: Within each chapter, definitions, theorems, lemmas, propositions, corollaries, examples, and remarks share a single sequential counter (`Theorem 1.1`, `Proposition 4.5`, etc.); items in the Prelude carry prefix `0`, and appendices carry `A, B, …`. All cross-references are live links across HTML, PDF, and EPUB.
 2. **Semantic Badges and Color Discipline**: Colors carry fixed epistemic meanings throughout the book and its diagrams:

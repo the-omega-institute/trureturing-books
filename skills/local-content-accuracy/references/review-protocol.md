@@ -1,6 +1,6 @@
 # Review protocol
 
-Use the sections relevant to the claims, dependencies and outputs being reviewed. Record concrete evidence in the [accuracy ledger](../../../docs/project/CONTENT-ACCURACY.md), within the assigned ownership and scope.
+Use the sections relevant to the claims, dependencies and outputs being reviewed. Report concrete evidence in the assigned handoff, CI checks, or PR discussion. Do not create a committed accuracy ledger or other historical review log.
 
 ## Findings and coverage
 
@@ -48,4 +48,4 @@ Classify CI failures by failing stage and checked input before reusing local or 
 
 Use the project's independent architecture, quality and tests seats and current composition from the [workflow](../../../docs/project/WORKFLOW.md). Each reports candidate identity, scope, verdict, blocking findings, actual checks and limits, including reused evidence. Resolve blockers and ensure approval covers the final relevant inputs. Reviews inform the designated owner's adjudication; a repair worker does not start another panel when orchestration belongs to the caller.
 
-Hand off changed paths/digests, input/candidate identity, `git diff --check`, actual validation, limits and remaining review/output/lifecycle obligations. The assigned owner records durable scope, coverage, evidence and limits in the ledger, verifies committed correspondence and completes publication through the workflow. Link the PR for changing CI, merge and deployment status; avoid source commits solely to restate that live status and restart publication checks. Merge alone does not discharge accuracy, review or output obligations; carry unresolved work within the authorized scope and existing execution limits. Publication descriptions state concrete changes, pin, validation and coverage without model or agent identifiers.
+Hand off changed paths/digests, input/candidate identity, `git diff --check`, actual validation, limits and remaining review/output/lifecycle obligations in the PR or assigned handoff. The assigned owner verifies committed correspondence and completes publication through the workflow. Link the PR for changing CI, merge and deployment status; avoid source commits solely to restate that live status and restart publication checks. Merge alone does not discharge accuracy, review or output obligations; carry unresolved work within the authorized scope and existing execution limits. Publication descriptions state concrete changes, pin, validation and coverage without model or agent identifiers.

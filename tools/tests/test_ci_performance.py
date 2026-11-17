@@ -27,12 +27,17 @@ class TrustedCacheTest(unittest.TestCase):
         self.run = dict(id=17, workflow_id=3, head_repository={"full_name": "owner/books"},
                         head_branch="main", event="push", status="completed", conclusion="success")
         self.artifact = dict(id=42, name="tbook-build-store", expired=False)
+        self.ci_runs = []
         self.calls = []
 
     def api(self, endpoint):
         self.calls.append(endpoint)
         if endpoint.endswith("/pages.yml"):
             return dict(id=3, path=".github/workflows/pages.yml")
+        if endpoint.endswith("/ci.yml"):
+            return dict(id=4, path=".github/workflows/ci.yml")
+        if "/ci.yml/runs?" in endpoint:
+            return {"workflow_runs": self.ci_runs}
         if "/runs?" in endpoint:
             return {"workflow_runs": [self.run]}
         if "/runs/17/artifacts?" in endpoint:
@@ -47,7 +52,7 @@ class TrustedCacheTest(unittest.TestCase):
 
     def test_pr_fork_other_workflow_branch_and_failed_runs_cannot_supply_cache(self):
         for changes in ({"event": "pull_request"}, {"event": "pull_request_target"},
-                        {"event": "workflow_run"}, {"head_branch": "feature"},
+                        {"head_branch": "feature"},
                         {"head_repository": {"full_name": "fork/books"}},
                         {"workflow_id": 4}, {"conclusion": "failure"}, {"status": "in_progress"}):
             original = copy.deepcopy(self.run)
@@ -55,7 +60,8 @@ class TrustedCacheTest(unittest.TestCase):
             self.calls.clear()
             with self.subTest(changes=changes):
                 self.assertIsNone(trusted_cache.find("owner/books", "main", self.api))
-                self.assertEqual(len(self.calls), 2, "untrusted run's artifacts must never be read")
+                self.assertFalse(any("/artifacts?" in endpoint for endpoint in self.calls),
+                                 "untrusted run's artifacts must never be read")
             self.run = original
 
     def test_expired_or_differently_named_artifact_is_a_miss(self):
@@ -70,6 +76,48 @@ class TrustedCacheTest(unittest.TestCase):
                 return {"workflow_runs": [dict(self.run, id=18), self.run]}
             if "/runs/18/artifacts?" in endpoint:
                 return {"artifacts": []}
+            return self.api(endpoint)
+        self.assertEqual(trusted_cache.find("owner/books", "main", api), (17, 42))
+
+    def test_newest_successful_ci_or_pages_store_is_selected(self):
+        self.ci_runs = [dict(self.run, id=20, workflow_id=4, created_at="2026-11-16T02:00:00Z")]
+        self.run["created_at"] = "2026-11-16T01:00:00Z"
+        def api(endpoint):
+            if "/runs/20/artifacts?" in endpoint:
+                return {"artifacts": [dict(self.artifact, id=43)]}
+            return self.api(endpoint)
+        self.assertEqual(trusted_cache.find("owner/books", "main", api), (20, 43))
+        self.run["created_at"] = "2026-11-16T03:00:00Z"
+        self.assertEqual(trusted_cache.find("owner/books", "main", api), (17, 42))
+
+    def test_late_finishing_pages_and_reruns_supply_the_freshest_store(self):
+        self.run.update(created_at='2026-11-16T01:00:00Z', updated_at='2026-11-16T03:00:00Z')
+        self.ci_runs = [dict(self.run, id=20, workflow_id=4,
+                             created_at='2026-11-16T02:00:00Z', updated_at='2026-11-16T02:30:00Z')]
+        def api(endpoint):
+            if '/runs/20/artifacts?' in endpoint:
+                return {'artifacts': [dict(self.artifact, id=43)]}
+            return self.api(endpoint)
+        self.assertEqual(trusted_cache.find('owner/books', 'main', api), (17, 42))
+        self.ci_runs[0].update(run_attempt=2, updated_at='2026-11-16T04:00:00Z')
+        self.assertEqual(trusted_cache.find('owner/books', 'main', api), (20, 43))
+
+    def test_ci_store_has_the_same_source_and_success_requirements(self):
+        original = dict(self.run, id=20, workflow_id=4)
+        self.run["conclusion"] = "failure"
+        for changes in ({"event": "pull_request"}, {"event": "pull_request_target"},
+                        {"head_repository": {"full_name": "fork/books"}}, {"head_branch": "feature"},
+                        {"workflow_id": 99}, {"conclusion": "failure"}, {"status": "in_progress"}):
+            self.ci_runs = [dict(original, **changes)]
+            self.calls.clear()
+            with self.subTest(changes=changes):
+                self.assertIsNone(trusted_cache.find("owner/books", "main", self.api))
+                self.assertFalse(any("/artifacts?" in endpoint for endpoint in self.calls))
+
+    def test_missing_ci_workflow_does_not_hide_a_pages_store(self):
+        def api(endpoint):
+            if endpoint.endswith("/ci.yml"):
+                raise OSError("not present")
             return self.api(endpoint)
         self.assertEqual(trusted_cache.find("owner/books", "main", api), (17, 42))
 
@@ -261,6 +309,53 @@ class AffectedPlanTest(unittest.TestCase):
                 self.assertEqual(result["slides"], [])
                 self.assertEqual(result["books"], ["one", "two"])
 
+    def test_collaboration_ownership_additions_do_not_select_publication_outputs(self):
+        head, old = self.template_release()
+        metadata = head.read("template.toml").replace(
+            'paths=["tools/"]',
+            'paths=["tools/", "CONTRIBUTING.md", ".github/ISSUE_TEMPLATE/", '
+            '".github/pull_request_template.md"]\nexclude=[".github/ISSUE_TEMPLATE/local-"]')
+        self.write("template.toml", metadata)
+        new = planner.Tree(self.root, self.commit())
+        for current, previous in ((new, old), (old, new), (new, head), (head, new)):
+            with self.subTest(current=current.sha, previous=previous.sha):
+                result = planner.impact(current, previous, ["template.toml"], template=True)
+                for key in ("suites", "films", "slides", "exports", "books", "browser_tests"):
+                    self.assertEqual(result[key], [], key)
+                self.assertTrue(result["checks"]["manifest"])
+
+        # Unknown metadata and ownership of publication resources still widen.
+        self.write("template.toml", metadata.replace('"CONTRIBUTING.md"', '"assets/"'))
+        other = planner.Tree(self.root, self.commit())
+        self.assertTrue(planner.impact(other, old, ["template.toml"])["exports"])
+
+    def test_pages_workflow_reuses_book_evidence_but_keeps_assembly_and_explicit_readers(self):
+        import json
+        path = ".github/workflows/pages.yml"
+        self.write(path, "name: Pages\n")
+        self.write("tools/tests/test_ci_performance.py", "import unittest\n"
+                   "class PipelineTest(unittest.TestCase):\n    def test_ok(self): pass\n")
+        old = planner.Tree(self.root, self.commit())
+        self.write(path, "name: Updated Pages\n")
+        head = planner.Tree(self.root, self.commit())
+        for current, previous in ((head, old), (old, head)):
+            result = planner.impact(current, previous, [path])
+            self.assertTrue(result["site"])
+            self.assertIn("test_ci_performance.PipelineTest", result["unit_tests"])
+            for key in ("books", "suites", "films", "slides", "exports", "browser_tests"):
+                self.assertEqual(result[key], [], key)
+        deps = "books/one/viz/tests/dependencies.json"
+        data = json.loads((self.root / deps).read_text())
+        data["suites"]["a.test.mjs"].append(path)
+        self.write(deps, json.dumps(data))
+        self.write("books/one/viz/tests/a.test.mjs",
+                   f'import fs from "node:fs"; fs.readFileSync("{path}", "utf8");\n')
+        reader = planner.Tree(self.root, self.commit())
+        for current, previous in ((reader, old), (old, reader)):
+            result = planner.impact(current, previous, [path])
+            self.assertEqual(result["suites"], ["books/one/viz/tests/a.test.mjs"])
+            self.assertEqual(result["books"], ["one"])
+
     def test_template_metadata_nonversion_invalid_and_absent_inputs_keep_full_fallback(self):
         head, old = self.template_release()
         valid = head.read("template.toml")
@@ -328,8 +423,79 @@ class AffectedPlanTest(unittest.TestCase):
                 self.assertIn(expected, result["suites"])
                 self.assertTrue(result["checks"]["structure"])
                 if path == "trureturing.lock.json":
-                    self.assertEqual(len(result["suites"]), 4)
+                    self.assertEqual(len(result["suites"]), 2)
                     self.assertEqual(result["films"], ["one/001-film", "two/001-film"])
+
+    def test_link_only_reader_keeps_static_evidence_check_without_unrelated_browser_work(self):
+        import json
+        name = 'books/one/viz/tests/dependencies.json'
+        self.write(name, json.dumps({'schema': planner.DEPENDENCIES, 'suites': {
+            'a.test.mjs': ['@lean-links'], 'b.test.mjs': ['trureturing.lock.json']}}))
+        tree = planner.Tree(self.root, self.commit())
+        result = planner.impact(tree, tree, ['trureturing.lock.json'])
+        self.assertNotIn('books/one/viz/tests/a.test.mjs', result['suites'])
+        self.assertIn('books/one/viz/tests/b.test.mjs', result['suites'])
+        self.assertTrue(result['checks']['structure'])
+        self.assertTrue(result['checks']['viz_static'])
+        self.assertFalse(result['checks']['browser'])
+
+    def test_image_shards_cover_each_live_page_once_across_all_export_variants(self):
+        import json
+        for slug in ('one', 'two'):
+            self.write(f'books/{slug}/viz/visualizations.json', json.dumps({'visualizations': [
+                {'id': 'a', 'status': 'live'}, {'id': 'b', 'status': 'draft'}]}))
+        tree = planner.Tree(self.root, self.commit())
+        exports = [dict(book=slug, target=target) for slug in ('one', 'two')
+                   for target in ('html', 'pdf', 'pdf', 'epub')]
+        rows = planner.image_shards(tree, exports)
+        self.assertEqual(sorted(i for row in rows for i in row['items']), ['one/a', 'two/a'])
+        self.assertEqual(planner.image_shards(tree, [dict(book='one', target='html')]), [])
+
+    def test_selected_tool_browser_classes_run_exactly_once_and_failure_blocks_coverage(self):
+        modules = {}
+        for name in planner.testing.BROWSER:
+            module, cls = name.split('.')
+            modules.setdefault(module, []).append(cls)
+        for module, classes in modules.items():
+            self.write(f'tools/tests/{module}.py', 'import unittest\n' + '\n'.join(
+                f'class {cls}(unittest.TestCase):\n    def test_ok(self): pass\n' for cls in classes))
+        self.commit()
+        result = self.make_plan(mode='full')
+        selected = result['selections']['normal']['browser_tests']
+        self.assertGreater(len(selected), 8)
+        self.assertEqual(len(result['browser']), 8)
+        self.assertEqual(sorted(x for row in result['browser'] for x in row['items']), selected)
+        self.assertTrue(result['tasks']['browser'])
+        needs = {'plan': {'result': 'success'}, **{job: {'result': 'success'} for job in result['tasks']}}
+        planner.verify_results(result, needs)
+        needs['browser']['result'] = 'failure'
+        with self.assertRaisesRegex(ValueError, 'browser: expected success'):
+            planner.verify_results(result, needs)
+
+    def test_registry_entry_reader_skips_other_entries_but_whole_registry_reader_still_runs(self):
+        import json
+        registry = 'books/one/viz/visualizations.json'
+        self.write(registry, json.dumps({'visualizations': [{'id': 'a'}, {'id': 'b'}]}))
+        self.write('books/one/viz/tests/dependencies.json', json.dumps({'schema': planner.DEPENDENCIES,
+                    'suites': {'a.test.mjs': ['@registry-entry'], 'b.test.mjs': [registry]}}))
+        old = planner.Tree(self.root, self.commit())
+        self.write(registry, json.dumps({'visualizations': [{'id': 'a'}, {'id': 'b', 'title': 'updated'}]}))
+        new = planner.Tree(self.root, self.commit())
+        selected = planner.impact(new, old, [registry])
+        self.assertNotIn('books/one/viz/tests/a.test.mjs', selected['suites'])
+        self.assertIn('books/one/viz/tests/b.test.mjs', selected['suites'])
+        self.write(registry, json.dumps({'visualizations': [{'id': 'a', 'title': 'updated'}, {'id': 'b'}]}))
+        new = planner.Tree(self.root, self.commit())
+        self.assertIn('books/one/viz/tests/a.test.mjs', planner.impact(new, old, [registry])['suites'])
+
+    def test_batch_object_reader_preserves_newlines_in_paths_and_large_contents(self):
+        name = 'docs/line\nbreak.md'
+        content = 'large\n' * 50000
+        self.write(name, content)
+        tree = planner.Tree(self.root, self.commit())
+        self.assertEqual(tree.read(name), content)
+        self.assertEqual(tree.read('docs/PUBLISHING.md'), '说明\n')
+        self.assertEqual(tree.read(name), content)
 
     def test_undeclared_suite_widens_book_not_other_books(self):
         (self.root / "books/one/viz/tests/dependencies.json").unlink()
@@ -819,6 +985,7 @@ class FilmResponsibilityCoverageTest(unittest.TestCase):
                 job: {"result": "success" if selected else "skipped"} for job, selected in result["tasks"].items()}}
         else:
             results = {"plan": {"result": "success"}, "probe": {"result": "success"},
+                       "films": {"result": "success" if result.get('films') else "skipped"},
                        "build": {"result": outcome if result["site"] else "skipped"},
                        "deploy": {"result": "success" if result["site"] and enabled else "skipped"}}
         results["plan"]["outputs"] = {"plan": json.dumps(result)}
@@ -1057,6 +1224,41 @@ class ExactRunnerTest(unittest.TestCase):
 
 
 class DeploymentCoverageTest(unittest.TestCase):
+    def test_only_superseded_pull_requests_cancel_running_ci(self):
+        import re
+        from test_verification import gha_if
+        workflow = Path(__file__).resolve().parents[2] / ".github/workflows/ci.yml"
+        condition = re.search(r"^  cancel-in-progress: (.+)$", workflow.read_text(), re.M).group(1)
+        for event, ref, ref_type in (("pull_request", "refs/pull/1/merge", "branch"),
+                                     ("push", "refs/heads/main", "branch"),
+                                     ("push", "refs/tags/v1.5.3", "tag"),
+                                     ("workflow_dispatch", "refs/heads/main", "branch"),
+                                     ("schedule", "refs/heads/main", "branch")):
+            with self.subTest(event=event, ref=ref):
+                self.assertEqual(gha_if(condition, event=event, ref=ref,
+                                        context={"github.ref_type": ref_type}), event == "pull_request")
+
+    def test_deploy_after_optional_films_skip_requires_successful_assembly(self):
+        import re
+        from test_verification import gha_if
+        workflow = Path(__file__).resolve().parents[2] / ".github/workflows/pages.yml"
+        block = workflow.read_text().split("\n  deploy:\n", 1)[1].split("\n  coverage:\n", 1)[0]
+        condition = re.search(r"^    if: (.+)$", block, re.M).group(1).strip('"')
+        for films in ("success", "skipped"):
+            for build in ("success", "failure", "cancelled", "skipped"):
+                for enabled, site, cancelled in (("true", "true", False), ("false", "true", False),
+                                                  ("true", "false", False), ("true", "true", True)):
+                    # GitHub implicitly requires successful ancestors unless the condition
+                    # contains a status function, even if the direct build need succeeded.
+                    implicit_success = (films == "success" and build == "success")
+                    explicit_status = bool(re.search(r"\b(?:always|success|failure|cancelled)\(", condition))
+                    allowed = (explicit_status or implicit_success) and gha_if(
+                        condition, event="workflow_run", ref="refs/heads/main", cancelled=cancelled,
+                        context={"needs.build.result": build, "needs.plan.outputs.site": site,
+                                 "needs.probe.outputs.enabled": enabled})
+                    with self.subTest(films=films, build=build, enabled=enabled, site=site, cancelled=cancelled):
+                        self.assertEqual(allowed, build == "success" and enabled == site == "true" and not cancelled)
+
     def test_only_active_success_is_valid_and_missing_deployment_forces_fallback(self):
         def get(endpoint):
             if "/statuses?" in endpoint:

@@ -172,17 +172,9 @@ In `D5/S3/Observer/Conditioning.lean:108`:
 The full proof is checked by the Lean kernel.
 :::
 
-::: {.viz src="lean-declaration-map" preset="closure" height="500"}
-**The four theorems Chapter 28 dissects.** Cyan lines run from the foot of Chapter 28 to four filled green cells in Chapters 2 and 3; the amber frame is the unread fixed-point criterion ([@cor-audit-unread-fixed-iff]), which first appears in Chapter 3, and the amber lines go to the other chapters that cite it.
-:::
-
 ## 28.3 Comprehensive Audit Table of Frozen Declarations Across Parts IV–VI {#sec-parts-iv-to-vi-frozen-audit-table}
 
 Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md), the table below records the exact source files, line numbers, `statement_id` prefixes, and formal contracts for the declarations audited in this chapter together with representative frozen declarations across Parts IV, V, and VI at commit [{commit}](trureturing:).
-
-::: {.figure src="ch28-declaration-parts"}
-**How many frozen declarations each of the ten parts and the coda-and-appendices group cites.** Each bar is one part, the last one the coda and appendices together; its height is the number of distinct declarations the chapters of that part cite with `lean=` (a declaration cited in two parts counts once in each), with the total on top; green below is the declarations of kind theorem in the lock, grey above the definitions and inductive types. The two braces mark the parts each audit table covers: Parts I–III for Chapter 27, Parts IV–VI for this chapter. The script computes the figure from `trureturing.lock.json` and the Chinese chapters.
-:::
 
 | Chapter | Frozen GID | Source File & Line | `statement_id` Prefix | Exact Formal Scope & Contract |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
@@ -230,10 +222,6 @@ Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | $\omega^{da}\,D(a,b)D(c,d) = \omega^{bc}\,D(c,d)D(a,b)$ |
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation`](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | $D(a,b)\,D(c,d)\,D(a,b)^{\dagger} = \omega^{bc-ad}\,D(c,d)$ |
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | [{source}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | [{statement_id}](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | $M = 2$: $D(0,1)D(1,0) = -D(1,0)D(0,1)$ |
-
-::: {.viz src="lean-declaration-map" preset="table28" height="500"}
-**The audit table reaches into Parts IV–VI.** The 44 declarations Chapter 28 cites, the table above included, are outlined in cyan: 36 of them land in Parts IV–VI, and the rest are the four audited theorems of Chapters 2 and 3 and the four Weyl displacement laws of Chapter 25.
-:::
 
 Let us trace all four theorems of this chapter on a single concrete qubit state.
 

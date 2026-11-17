@@ -7104,7 +7104,6 @@ print("34 条公开冻结定理；33 条新增，1 条仅补证；重复主配 0
 ```bash
 TRURETURING_DIR=/Users/auricstudio/trureturing ./tbook pin 2733dd6bcf63b9a68e9b0dad2fc783460d2f854f
 TRURETURING_DIR=/Users/auricstudio/trureturing ./tbook check --book quantum-geometry
-node books/quantum-geometry/viz/tests/lean-declaration-map.test.mjs
 ```
 
 正式钉版成功；结构检查 0 错误、9 条既有警告；地图测试 583/583 通过。末栏检查使用 `COLS2.at(-1)` 和 `COLS2.length - 1`，并检查末文件为附录；`ArrowLeft`、`End` 与琥珀连线检查作用于真正末栏。附录 E 不是末栏时，仍单独核对它的全部引用与环境筛选。

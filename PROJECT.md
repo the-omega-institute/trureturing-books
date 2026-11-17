@@ -68,12 +68,12 @@
    - **硬约束**：页面只加载 `../assets/theme.css`、`style.css`、`../assets/shell.js`、`../assets/kit.js` 与底部的 `main.js`，使用共享的实验室版式 `.app.lab`；全书交互页面统一遵循与 `triadic-nameless-sandbox` 一致的三栏暗色实验室壳层（左栏 `#rail` 放双透镜切换与递进实验卡，中栏为主舞台 `#stage`、舞台外下方的对照小图条 `.strip` 与底部播放条 `.bar`，右栏 `#evidence` 放顶部原理抽屉按钮 `#infoBtn`、参数控件/实时读数与依据框），严禁另起双栏或顶栏覆盖层布局，严禁把 `.strip` 辅助小图塞进 `#stage` 内部抢占三维视口，严禁在实验室页面内混入 `data-tr-palette` 浅色切换；依据框只用 `theme/viz/theme.css` 定义的 `.lean`、`.lean.num`、`.lean.model`、`.lean.argued`、`.lean.open`；不自造主题切换、私有运行时或非标徽章；颜色语义全书一致（绿色只给 Lean 已验证，琥珀色只给当前选择）。
    - **按卡引用**：正文讲到哪个情形，就在那句话旁用 `::: {.viz src="<id>" preset="<卡>" height="500"}` 引用那张卡，中英文版本的位置与卡名相同；每个可视化在所属章节末尾保留一处不带 `preset` 的完整实验室。卡片说明与图注只说图里看得见的东西，并使用与图例相同的颜色词和符号。
    - **质量门**：每个页面的浏览器测试先过 `stageFirstChecks`，再用测试里另写的独立算法核对页面声称的每条性质；改动后运行 `node tools/node/viz-shots.mjs quantum-geometry <id>` 亲眼看桌面、书内、手机与封面四种画面，并用 `node tools/node/viz-thumbs.mjs quantum-geometry <id>` 重新生成封面与被引用卡的静态图。
-2. **讲解视频（`books/<slug>/films/<NNN>-<name>/`）严格对齐 `books/example-monograph/films/001-golden-deficit/`**：
-   - 目录固定由 `film.json`、`script.json`、`scenes.js` 与 `poster.jpg` 组成，统一通过 `theme/film/film.sh` 构建与校验。
+2. **讲解视频（`books/<slug>/films/<name>/`）严格对齐 `books/example-monograph/films/golden-deficit/`**：
+   - 目录固定由 `film.json`、`script.json`、`scenes.js` 与 `poster.jpg` 组成，统一通过 `theme/film/film.sh` 构建与校验。视频只用具体片名，目录用片名的 kebab-case 写法；`film.json` 不另填视频 ID 或所属章节，各端不显示视频编号。
 3. **演示文稿（`books/<slug>/slides/<deck>/`）严格对齐 `books/example-monograph/slides/overview/`**：
    - 采用 `slides.md` 与 `slides.en.md` 双语对齐，仅使用 `theme/slides` 标准版式与组件（`<TheoremCard>`、`<LeanBadge>`、`<Stat>`、`<Source>`、`<Tex>`）。
 4. **章节正文、前言与附录（`books/<slug>/{zh,en}/`）严格对齐 `books/example-monograph/{zh,en}/`**：
-   - 主章使用 `chNN-topic.md`，子章节使用 `chNN-sNN-topic.md`，更深一级继续追加 `-sNN`；数字至少两位，主题用英文 kebab-case，各语言同名。目录用每级两个空格表达父子关系，主章保留导言和入口，完整小节连同证明与媒体整体移动；编号与阅读顺序以 `SUMMARY.md` 为准。拆分不改环境 id、Lean 引用和主章定理计数，更新移动内容的片段链接及声明地图；详见 `docs/AUTHORING.md` 的“章节命名与长章拆分”。
+   - 主章使用 `chNN-topic.md`，子章节使用 `chNN-sNN-topic.md`，更深一级继续追加 `-sNN`；数字至少两位，主题用英文 kebab-case，各语言同名。目录用每级两个空格表达父子关系，主章保留导言和入口，完整小节连同证明与媒体整体移动；编号与阅读顺序以 `SUMMARY.md` 为准。拆分不改环境 id、Lean 引用和主章定理计数，更新移动内容的片段链接；详见 `docs/AUTHORING.md` 的“章节命名与长章拆分”。
    - 标题格式全书统一：主章用“第三十章 标题”／“Chapter 30 Title”；子页面用“30.1 标题”，其页内二级标题继续为“30.1.1 标题”，再下一级继续追加数字。序曲与终章的一级标题用“序曲 标题／Prelude Title”“终章 标题／Coda Title”；序曲页内用 `0.x`，终章由 `book.toml` 的 `[numbering.unnumbered]` 排除章号，其子页与页内标题均不加编号，定理环境共享 `Coda.n` 前缀。附录一级标题用“附录 A 标题／Appendix A Title”，页内用 `A.1`、`A.1.1`。编号与标题之间只用一个空格，不再叠加中文顿号或罗马序号。每页恰有一个一级标题，文字与本语言目录一致，中英文层级序列相同；已经发布的标题改名时保留原片段 id。
    - 定理环境、证明块、文献注记、开放问题、数值示例表格及文末可视化/视频嵌入块完全遵循 `ch01-golden-deficit.md` 的标准写法。
 5. **静态图（`books/<slug>/figures/<name>.py`）按模板技能 `skills/book-figure` 制作**，成品示例是 `books/example-monograph/figures/`：
@@ -83,7 +83,7 @@
    - 与同章的实验卡分工：实验卡给能亲手推的情形，静态图给印刷版与 EPUB 也要看得见的构造；两者紧邻时不画同一个画面。
    - **章节里的图一律用 `::: {.figure}`** 引用脚本生成的静态图，不放手绘或直接嵌入的图片文件。
    - **媒体块不连排**：静态图、实验卡、视频不三块连排，相邻两块之间要隔着正文，每块紧跟在讲到它的那句话之后。
-6. **源文件入库，派生产物按需生成**：附录 C 的论述修改 `books/quantum-geometry/data/appendix-c.{zh,en}.md.in`，声明地图的程序与生成数据分开维护，五张统计图保留脚本。`./tbook sync --book quantum-geometry` 只生成统计 JSON、双语附录与地图 JSON；校验与构建先同步文本并绘制静态图，PDF/EPUB/站点发布再按消费者生成所需封面与静帧。SVG、幻灯片的 SVG 副本、统计快照、生成章节、地图 JSON、可视化封面/静帧与 `.stills.json` 不提交；书内 `.gitignore` 与 `[derived].outputs` 明确列出自有输出，`./tbook artifacts check` 阻止回流。统计仍来自正式解析器与锁文件，不手填计数。`data/declaration-serials.json` 是已发布身份源数据，保留原编号；只有显式运行 `python3 books/quantum-geometry/sync-statistics.py --register-serials` 才登记新增编号，普通构建不改写它。锁文件与模板基线继续提交。旧分支的生成文件修改/删除冲突保留删除，合并源文件后重建；不能把这一规则套到正文、稳定编号与锁文件。未变的画面证据按依赖复用，实际改变的画面仍执行对应测试与看图。详见 `docs/project/STATISTICS.md` 与 `docs/SOURCE-ONLY.md`。
+6. **全书统计作为可选编译产物**：源码不维护全书计数、排名、声明总索引或统计地图的数据副本；正文可用 `.stats` 引用块选择生成视图，按需嵌入表格或链接 HTML、Markdown、CSV、JSON 产物。视图、显示方式与分区由本书选择，中英文逐项对齐；逐条数学证据仍在所属章节给出。确需统计时执行 `./tbook stats --book quantum-geometry --write`，只生成被忽略的 `build/statistics/quantum-geometry.json`，消费者读取编译产物，不把快照、索引、序号表或统计图片提交回源码。站点与导出验证账本继续由构建生成。其他 SVG、幻灯片的 SVG 副本、可视化封面／静帧与 `.stills.json` 仍按消费者生成，不提交；书内 `.gitignore` 明确列出自有输出，`./tbook artifacts check` 阻止回流。锁文件与模板基线继续提交。旧分支的产物修改／删除冲突保留删除，合并源文件后重建；不能把这一规则套到作者正文与锁文件。未变的画面证据按依赖复用，实际改变的画面执行对应测试与看图。详见 `docs/project/STATISTICS.md` 与 `docs/SOURCE-ONLY.md`。
 
 ## 7. 多智能体协同分工与五路并行工作流
 
@@ -91,9 +91,9 @@
 
 1. **五元角色分工**
    - **作者与总架构师（Auric）**：提出全书核心几何与哲学命题（两子丈量、球外之球、割圆多面体近似与泰勒余项、毛球定理与 $720^\circ$ 角亏、余弦自指不动点 $\psi = \psi(\psi)$），审定章节脉络与原话题记。
-   - **中英双语正文主笔（优先 Gemini，可选，严格仅限文字内容）**：优先使用现有可用的 Gemini 作者；没有可用渠道时，可由 `codex-cli` 或其他可用模型承接，不以特定调用方式或凭据配置作为写作前置。正文作者角色仅负责全书 45 个单元（序曲、第一至第十部共 39 章、终章与附录 A–D）的中英文学术专著与教材纯文字/散文内容撰写与修订，严格对齐冻结的 Lean 4 定理签名。**严禁**使用 Gemini（含主代理与 `self` 子代理）编写或修改任何非文字内容（包括但不限于 `viz/` 交互可视化、`films/` 视频、`figures/*.py` 静态图脚本、测试代码、工具脚本、构建与 Git 变基/归并/PR 工程操作）。
+   - **中英双语正文主笔（优先 Gemini，可选，严格仅限文字内容）**：优先使用现有可用的 Gemini 作者；没有可用渠道时，可由 `codex-cli` 或其他可用模型承接，不以特定调用方式或凭据配置作为写作前置。正文作者角色仅负责本书的中英文学术专著与教材纯文字/散文内容撰写与修订，严格对齐冻结的 Lean 4 定理签名。**严禁**使用 Gemini（含主代理与 `self` 子代理）编写或修改任何非文字内容（包括但不限于 `viz/` 交互可视化、`films/` 视频、`figures/*.py` 静态图脚本、测试代码、工具脚本、构建与 Git 变基/归并/PR 工程操作）。
    - **辅助工程与形式化对齐（`codex-cli`）**：负责冻结 Lean 4 定理核验与批次规格书（`spec-batch-*.md`）、静态图脚本（一律按第 6 节第 5 条由脚本生成，`figures/<name>.py`；`assets/` 只放照片一类确实不能由脚本画的图片）、第七部 Python 几何代数参考引擎、`./tbook` 工具链构建检验、Git Worktree 管理及上游模板修复 PR。
-   - **交互可视化与讲解视频（`claude` CLI · Opus 5.5）**：直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**禁止使用 Claude Subagent**），严格按照 `books/example-monograph/` 示例框架完成全部交互可视化（`books/quantum-geometry/viz/<id>/`）与讲解视频（`books/quantum-geometry/films/<NNN>-<name>/`）的实现与测试。
+   - **交互可视化与讲解视频（`claude` CLI · Opus 5.5）**：直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**禁止使用 Claude Subagent**），严格按照 `books/example-monograph/` 示例框架完成全部交互可视化（`books/quantum-geometry/viz/<id>/`）与讲解视频（`books/quantum-geometry/films/<name>/`）的实现与测试。
    - **三席异构独立审查（`/sshx` `review_triplet_workers`）**：每批次由 `architecture`、`quality`、`tests` 三席独立审查；第一轮（Round 1）采用 `1 nyxid-oracle + 1 codex-cli + 1 isolated-token-subagent`，第二轮及后续复审（Round 2+）禁用响应较慢的 `nyxid-oracle`，采用 `2 codex-cli + 1 isolated-token-subagent` 高速完成修复验证闭环。
 2. **五路 Git Worktree 流水线**：最多并行开启 5 个 `git worktree`（主仓库 `wt1` 及 `wt3`–`wt6`），使当前批次的审查/修复与后续批次的辅助规格、正文写作和可视化/视频制作并行推进、互不阻塞。
 
@@ -109,10 +109,20 @@
 
 ## 10. 本地与 CI 按改动范围测试
 
-常规验证只测本次改动影响的部分，本地与 CI 使用相同的影响选择规则。先运行 `./tbook test --list` 核对改动、测试与浏览器套件清单，再运行 `./tbook test`；基准默认是 `origin/main` 的分支点，`--base <ref>` 可指定。正文改动只触发相关章节实际引用的实验室及显式读取正文的测试；单个媒体改动只测对应媒体，共享运行时改动覆盖其实际依赖者。
+常规验证只测本次改动影响的部分，本地与 CI 使用相同的影响选择规则。先运行 `./tbook test --list` 核对改动、测试与浏览器套件清单，再运行 `./tbook test`；基准默认是 `origin/main` 的分支点，`--base <ref>` 可指定。正文改动只触发相关章节实际引用的实验室及显式读取正文的测试；单个媒体改动只测对应媒体，共享运行时改动覆盖其实际依赖者。若清单因模板、工具或共享运行时改动扩展到大部分或全部浏览器套件，立即停止本地执行，交给 CI 的并行矩阵验证，禁止在开发机上串行跑完。
 
 只运行可视化时，`node tools/node/viz-test.mjs [book ...]` 同样默认只测受影响套件；书名仅过滤范围，`--list` 先列清单，`--base <ref>` 更换基准。没有受影响套件时不启动服务器或浏览器；缺少比较历史时补充基准，不自动转全量。`--full` 仅用于明确要求的全量验收，`--slow` 仍只作用于所选套件。新增或扩展套件时须在 `books/<slug>/viz/tests/dependencies.json` 登记完整的额外读取；漏登记会使无关改动也保守选中该套件。
 
 浏览器测试、截图、静帧和人工看图都限受影响对象，输入未变且范围仍适用时复用既有证据，不默认遍历全部实验室、章节、语言、主题或屏宽。只有时钟、异步等待或已知慢帧问题需要 `./tbook test --slow`；全量测试仅在明确要求时用 `--full`。工具修改不再要求全目录单元测试；结构检查限受影响书籍，构建限受影响格式。第 6 节与第 9 节的看图要求均在本范围内执行。
 
 审查人员同样只运行改动及依赖相关的数值、构建、浏览器和视觉检查；历史检查中未变部分可以按依赖关系复用，不以固定测试数量或全套重跑作为接受条件。
+
+## 11. 禁止修订流水账
+
+本书库不新增、恢复或维护按日期、章节、PR 或会话逐次记录工作的流水账文档。禁止提交修订准确性台账、修订实施记录、PR 整合记录、阶段性校对报告、排版复核报告以及同类“当前状态”历史文档；`docs/project/` 和其他目录都适用这条规则。
+
+长期有效的信息写入规范、工作流、统计规则或研究文档；一次性检查保留在命令输出、CI 检查和 PR 讨论中，不另生成提交到仓库的过程记录。`docs/CHANGELOG.md` 属于模板托管文件，只随模板版本更新，不作为本书库的修订流水账。
+
+## 11. Issue、PR 与分支规范
+
+本书库与上游模板共用 [CONTRIBUTING.md](CONTRIBUTING.md)、Issue 表单和 PR 模板。Issue 与 PR 标题使用 `type(scope): 摘要`，例如 `docs(ch19): 补充证明的非空条件`；普通工作分支使用 `<type>/<lowercase-topic>`，例如 `fix/ch19-proof-scope`。模板升级和冻结声明钉版保留贡献规范列出的自动化分支。所有修改通过 PR 合入 `main`，等待适用的 CI 与命名检查通过；规则同样约束管理员。跨仓库事项附完整上下游链接，并分别确认完成。

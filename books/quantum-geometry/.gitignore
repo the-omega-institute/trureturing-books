@@ -1,8 +1,4 @@
-# 构建输出；修改 data/appendix-c.*.md.in、figures/*.py 与地图生成器。
-/zh/appendix-c.md
-/en/appendix-c.md
-/data/statistics.json
-/viz/lean-declaration-map/data.generated.json
+# 构建输出；修改 figures/*.py 等源文件。
 /slides/overview/img/ch02-cut-c.en.svg
 /slides/overview/img/ch02-cut-c.zh.svg
 /slides/overview/img/ch06-gram-deficit.en.svg
@@ -23,11 +19,7 @@
 /slides/overview/img/ch36-two-rulers.zh.svg
 /slides/overview/img/ch37-entropy-tax.en.svg
 /slides/overview/img/ch37-entropy-tax.zh.svg
-/slides/overview/img/coda-dependency-tree.en.svg
-/slides/overview/img/coda-dependency-tree.zh.svg
 /slides/overview/img/prelude-overview.en.svg
 /slides/overview/img/prelude-overview.zh.svg
 /slides/overview/img/prelude-parts.en.svg
 /slides/overview/img/prelude-parts.zh.svg
-/slides/overview/img/prelude-three-tiers.en.svg
-/slides/overview/img/prelude-three-tiers.zh.svg

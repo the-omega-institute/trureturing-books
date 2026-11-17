@@ -14,6 +14,7 @@ import re
 import time
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from test_newbook import Repo, write
 
@@ -144,6 +145,21 @@ class KitTests(unittest.TestCase):
 
 
 class GenerationTests(unittest.TestCase):
+    def test_palette_changes_refresh_generated_bytes_in_the_same_process(self):
+        with Repo() as repo:
+            book = demo(repo)
+            token_file = write(repo.root / "theme/tokens.json", paths.TOKENS.read_text(encoding="utf-8"))
+            with mock.patch.object(paths, "THEME", token_file.parent), mock.patch.object(paths, "TOKENS", token_file):
+                figure.build(book)
+                previous = figure.out_path(book, "line", "zh").read_text(encoding="utf-8")
+                palette = json.loads(token_file.read_text(encoding="utf-8"))
+                palette["screen"]["cyan"] = "#010203"
+                token_file.write_text(json.dumps(palette), encoding="utf-8")
+                self.assertEqual(len(figure.build(book)[0]), 2)
+                current = figure.out_path(book, "line", "zh").read_text(encoding="utf-8")
+                self.assertNotEqual(previous, current)
+                self.assertIn("#010203", current)
+
     def test_build_writes_one_file_per_edition_and_check_finds_stale_ones(self):
         with Repo() as repo:
             book = demo(repo, {"line": SCRIPT, "_helper": "X = 1\n"})

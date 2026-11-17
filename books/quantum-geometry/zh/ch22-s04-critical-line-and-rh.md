@@ -564,6 +564,8 @@ $$
 3. **开放猜想（第三层 `OPEN`）**：[@conj-riemann-hypothesis]（黎曼猜想）断言所有非平凡零点均满足 $\operatorname{Re}(\rho) = 1/2$（等价于素数计数误差项满足平方根界 $\pi(x) = \operatorname{Li}(x) + O(x^{1/2}\ln x)$）。本章的冻结定理证明了 $\operatorname{Re}(s) > 1$ 内的级数—乘积分解、$s = 1$ 留数以及 $\xi$ 的反射对称，**并不证明黎曼猜想**：反射对称只说明零点关于 $s = \frac{1}{2}$ 成对出现，不说明它们落在临界线上；[@thm-cayley-critical-line-criterion] 只是把猜想等价地改写到单位圆上；[@thm-right-half-strip-rh-forms] 只是把猜想归约到右半带，并说明 Mathlib 的表述与临界带表述等价；[@thm-full-symmetry-not-localization] 则表明仅凭反射与共轭两种对称性不可能推出它；[@thm-off-line-zero-robin-violation] 只把一个离线零点变成罗宾不等式的反例，并不排除离线零点。
 :::
 
+在全书第九部收官处，我们将在观察者往返双投影与极小圆弧体内割弦隧穿的几何底座上重返这片临界带（`MODEL` + `LEAN ✓` + `OPEN`）：[第三十四章 §34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs) 将欧拉—狄利克雷恒等式置于素数极小圆弧体 $\Delta\mathcal{T}_p$ 路径积分模型下，结合往返半密度双壳平衡与韦伊显式对偶重构素数幂阶梯；[§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 则进一步引入自卷积乘性波前、分块舒尔补算术枢轴 $\widetilde{G}_{PP}^{(\ell)}$ 与跨 $s = 1$ 极点势垒的多级凯莱共振中继，并将跨枢轴子树移位卷积纠缠的面积律衰减定格为“最后一公里”开放问题（[@prob-ch34-arithmetic-pivot-area-law]）。
+
 从[第二十一章](ch21-diagonalization-and-escape.md)的概念余纤维到本章的素数正交基，我们看到了整数 $\mathbb{Z}$ 与素数在离散乘法世界里的精密刚性。可是，如果把整数 $\mathbb{Z}$ 放进看似稠密平滑、任意两点间都能无限平分的有理数大海 $\mathbb{Q}$ 里，我们还能单凭有理数的加法和乘法方程，把离散的整数骨架 $\mathbb{Z} \subset \mathbb{Q}$ 重新打捞并锁定出来吗？为什么这项困扰数学界数十年的可定义性难题，偏偏要靠我们在第 21 章末尾刚刚遇见的**四元数球面范数**与二次型迹投影来上锁？让我们翻开[第二十三章](ch23-diophantine-definability.md)。
 
 ## 22.4.1 从相量到素数幂阶梯：截断与延拓不能互换 {#sec-ch22-4-1}

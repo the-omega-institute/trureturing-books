@@ -140,7 +140,7 @@ The last column of the table computes the spherical excess $\Omega$ independentl
 The row $\theta = 90^\circ$ is the octant loop: $\Delta = \frac{1+i}{4}$, which is Claim 2. As the triangle grows, its two sides from the north pole become less and less compatible and $\lvert\Delta\rvert$ keeps shrinking, while the argument keeps growing and is always half the area. The fifth column equals the fourth row by row, which is the manual derivation above; the last two columns agree row by row, which is a numerical check of the Van Oosterom–Strackee formula on these five triangles, not a proof.
 :::
 
-::: {.film src="003-two-angles-berry"}
+::: {.film src="two-angles-berry"}
 **One orthogonal step, then another: two-angle addressing and the Berry phase (1 min 58 s).** Turning about a single axis, the amber point only draws a circle; a tilt of $\theta = 60^\circ$ about $\vv{e}_2$ followed by a twist of $\varphi = 45^\circ$ about $\vv{e}_3$ lands it on $\bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$, and two axes only $30^\circ$ apart still reach a target in four alternating turns ([@thm-two-axis-finite-word]). Then two $90^\circ$ turns taken in either order stop at $+X$ and at $-Y$; carried around the octant loop, the arrow comes back turned by the enclosed area $\Omega = \frac{\pi}{2}$; finally the overlap $\frac{1+i}{2}$ of [@cor-latitude-complex-overlap] multiplies out to $\Delta = \frac{1+i}{4}$, whose phase $\frac{\pi}{4}$ stays put when every state is re-phased (for the Berry phase and the area, see [@rem-berry-pancharatnam-holonomy-literature]).
 :::
 

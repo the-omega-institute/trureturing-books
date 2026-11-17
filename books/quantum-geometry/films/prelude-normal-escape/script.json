@@ -1,0 +1,42 @@
+{
+  "voice": "af_heart",
+  "speed": 0.92,
+  "say": {"Lean": "Leen", "centre": "center"},
+  "music": {"bpm": 72, "progression": "a-minor"},
+  "scenes": [
+    {"id": "sheet", "name": "INSIDE THE SHEET", "lead": 3.4, "tail": 1.6, "music": [1.0, 0.3, 0.2, 0.0, 0.0], "lines": [
+      ["Imagine living inside a flat sheet: every arrow you can draw lies in it.", "想象你住在一张平平的薄片里：你能画出的每一支箭头，都躺在薄片之内。"],
+      ["So here is the question: from inside, can you point to the sheet's own up?", "于是问题来了：从里面，你能指出薄片自己的“上”吗？"]
+    ]},
+    {"id": "normal", "name": "STEP OUTSIDE", "lead": 0.8, "tail": 2.2, "music": [0.9, 0.5, 0.4, 0.0, 0.1], "lines": [
+      ["Now place the sheet in a three-dimensional room.", "现在把薄片放进一间三维的房间。"],
+      ["One new arrow stands straight up, at right angles to both cyan arrows.", "一支新箭头笔直立起，与两支青色箭头都成直角。"],
+      ["That arrow, the normal, names the whole sheet at once, and it comes from outside.", "这支箭头就是法线：它一下子指认出整张薄片，而它来自薄片之外。"]
+    ], "cues": [{"line": 1, "at": 1.2, "kind": "chime"}]},
+    {"id": "beyond", "name": "ONE MORE DIRECTION", "lead": 1.0, "tail": 2.4, "music": [0.9, 0.6, 0.6, 0.2, 0.2], "lines": [
+      ["Try the same move on the whole room: inside it, there is no fourth arrow.", "对整间房间做同样的事：在房间里面，已经没有第四根箭头。"],
+      ["We cannot draw four dimensions, so step down one: a circle in a plane.", "四维画不出来，那就退一维：平面里的一个圆。"],
+      ["Add one new direction, and the circle becomes the sphere's middle belt, its equator.", "添上一个新方向，这个圆就成了一颗球腰间的那一圈，也就是赤道。"],
+      ["The radius stays one: bigger means one more direction, not a longer radius.", "半径仍是 1：“更大”是多了一个方向，不是半径变长。"]
+    ], "cues": [{"line": 2, "at": 1.4, "kind": "chime"}]},
+    {"id": "blind", "name": "ONE AXIS", "lead": 0.8, "tail": 2.0, "music": [0.9, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Stand on one axis, and read how far each direction points along it: its cosine.", "站在一根轴上，读出每个方向沿这根轴指出去多少：也就是夹角的余弦。"],
+      ["The north pole reads one; the south pole reads the opposite.", "北极读出 1；南极读出相反的 −1。"],
+      ["The whole equator reads zero: from this axis, it is a blind ring.", "整条赤道读出的都是 0：从这根轴看，它是一圈盲区。"]
+    ], "cues": [{"line": 2, "at": 1.0, "kind": "impact"}]},
+    {"id": "average", "name": "AVERAGE EVERYTHING", "lead": 0.8, "tail": 2.4, "music": [1.0, 0.7, 0.7, 0.4, 0.3], "lines": [
+      ["Now give up every special direction, and mix them all equally.", "现在放弃一切特殊方向，把所有方向等量混合。"],
+      ["Opposite arrows cancel in pairs, and the average falls to the centre.", "相反的箭头两两抵消，平均落回球心。"],
+      ["There sits the state that leans nowhere; its matrix is half the identity.", "那里是不偏向任何方向的态；它的矩阵是单位矩阵的一半。"],
+      ["Mixing only pulls inward: a state's arrow is never longer than one.", "混合只会往里收：一个态的箭头，长度永远不超过 1。"],
+      ["That bound is checked by the Lean kernel.", "这个上界由 Lean 内核检验。"]
+    ], "cues": [{"line": 4, "at": 0.5, "kind": "stamp"}]},
+    {"id": "recap", "name": "RECAP", "lead": 0.8, "tail": 5.2, "music": [1.0, 0.5, 0.4, 0.2, 0.1], "lines": [
+      ["From inside, no: to name a whole, you need one more direction.", "从里面指不出：要把整体指认出来，需要多一个方向。"],
+      ["The old sphere becomes the equator of a new one, and the radius stays one.", "旧球成为新球的赤道，半径仍是 1。"],
+      ["Average every direction, and you land at the centre, the state that leans nowhere.", "把所有方向平均，就落回球心：不偏向任何方向的态。"],
+      ["The book hears an echo of Gödel here: an analogy; the exact theorems come in chapter twenty-one.", "本书在这里听见哥德尔的回声：这是类比；严格的定理在第 21 章。"],
+      ["Next in the prelude: a ruler that measures itself.", "序曲下一部：量自己的尺子。"]
+    ], "cues": [{"line": 4, "at": 2.2, "kind": "chime"}]}
+  ]
+}
