@@ -67,7 +67,7 @@ $$
 \Tr(\rho P) = \Tr(\rho P^2) = \Tr(\rho P P^*) = \Tr(P^* \rho P) = \Tr(P \rho P^*).
 $$
 
-Because $\rho$ is positive semidefinite, $\langle v, P \rho P^* v\rangle = \langle P^* v, \rho(P^* v)\rangle \ge 0$ for every $v \in \mathbb{C}^n$, so the sandwich compression $P \rho P^*$ is positive semidefinite (`PosSemidef.mul_mul_conjTranspose_same` in Lean). Every diagonal entry of a positive semidefinite matrix is real and nonnegative, hence so is its trace. Combined with properties 1 and 2 applied to the complementary projector $I - P$, this also bounds $\Tr(\rho P) = 1 - \Tr(\rho(I - P)) \le 1$ (this upper bound is not among the theorem's three conclusions; it is a hand-derived consequence of them). The full proof is checked by the Lean kernel.
+Because $\rho$ is positive semidefinite, $\langle v, P \rho P^* v\rangle = \langle P^* v, \rho(P^* v)\rangle \ge 0$ for every $v \in \mathbb{C}^n$, so the sandwich compression $P \rho P^*$ is positive semidefinite (`PosSemidef.mul_mul_conjTranspose_same` in Lean). Every diagonal entry of a positive semidefinite matrix is real and nonnegative, hence so is its trace. Combined with properties 1 and 2 applied to the complementary projector $I - P$, this also bounds $\Tr(\rho P) = 1 - \Tr(\rho(I - P)) \le 1$. The full proof is checked by the Lean kernel.
 :::
 
 Watch how property 3 works under the hood: simply because a sharp shutter obeys the idempotent law $P = P^2 = P P^*$ ("asking the same question twice gives the same answer"), the seemingly asymmetric one-sided product $\rho P$ cycles inside the trace into the symmetric positive compression $P \rho P^*$! Sharp projective measurements yield real, nonnegative probabilities directly from this self-adjoint idempotent sandwich structure.
@@ -210,7 +210,7 @@ Glance back at the parallelogram and Pythagorean law of [Chapter 1](ch01-measure
 
 **Born's rule unites Pythagoras's theorem with the canonical basis-free trace pairing.** Among power-law candidates $|\langle\phi\mid\psi\rangle|^p$ of the projection overlap, conservation of total weight $1$ across orthogonal channels singles out the exponent $p = 2$; at the general operator level, [@thm-born-probability-skeleton] establishes **sufficiency** (that $\Tr(\rho P)$ satisfies normalization, additivity, and nonnegativity), whereas ruling out arbitrary non-Born assignments across all frames or effects (**uniqueness**) requires the cross-basis frame- or effect-additivity hypotheses (uniqueness on effects in finite dimension is [@thm-busch-effect-density] below; uniqueness on the finite-complex projection lattice is [@thm-gleason-finite-projection], with broader scopes in [@rem-gleason-literature]).
 
-Quadratic weighting also leaves a direct algebraic fingerprint in multi-path interference: Rafael Sorkin's hierarchy (*Quantum mechanics as quantum measure theory*, Mod. Phys. Lett. A **9**, 3119, 1994) of multi-slit interference terms. Whenever three pairwise disjoint branch sets $A, B, C$ recombine at a detector, quadratic weights generate pairwise interference cross-terms while forcing the **third-order interference remainder** $I_3$ to vanish identically. Check this first by hand on the simplest three-slit example: take pairwise disjoint singletons $A = \{a\}$, $B = \{b\}$, $C = \{c\}$ with unit amplitude $v \equiv 1$ on each slit. Under quadratic weighting, all three slits open give $(1 + 1 + 1)^2 = 9$, each two-slit pair gives $(1 + 1)^2 = 4$, and each single slit gives $1^2 = 1$, so the alternating inclusion–exclusion sum cancels to zero:
+Quadratic weighting also leaves a direct algebraic fingerprint in multi-path interference: Rafael Sorkin's (1994) hierarchy of multi-slit interference terms. Whenever three pairwise disjoint branch sets $A, B, C$ recombine at a detector, quadratic weights generate pairwise interference cross-terms while forcing the **third-order interference remainder** $I_3$ to vanish identically. Check this first by hand on the simplest three-slit example: take pairwise disjoint singletons $A = \{a\}$, $B = \{b\}$, $C = \{c\}$ with unit amplitude $v \equiv 1$ on each slit. Under quadratic weighting, all three slits open give $(1 + 1 + 1)^2 = 9$, each two-slit pair gives $(1 + 1)^2 = 4$, and each single slit gives $1^2 = 1$, so the alternating inclusion–exclusion sum cancels to zero:
 
 $$
 I_3 = 9 - 4 - 4 - 4 + 1 + 1 + 1 = 0.
@@ -288,7 +288,7 @@ For ready reference in later chapters, the benchmark angles across both pictures
 | Bloch Angle $\theta$ | Hilbert Half-Angle $\theta/2$ | Compatibility $\vv{a}\cdot\vv{b} = \cos\theta$ | Born Weight $\Tr(\rho_{\vv{a}} P_{\vv{b}}) = \cos^2(\theta/2)$ | Geometric Reading |
 | :---: | :---: | :---: | :---: | :--- |
 | $0^\circ$ | $0^\circ$ | $+1$ | $1$ | Collinear alignment; deterministic passage |
-| $60^\circ$ | $30^\circ$ | $+1/2$ | $3/4$ | Acute alignment (common angle in three-direction Bell arguments) |
+| $60^\circ$ | $30^\circ$ | $+1/2$ | $3/4$ | Acute alignment (classic Bell-test angle) |
 | $90^\circ$ | $45^\circ$ | $0$ | $1/2$ | Orthogonal equator; unbiased $50:50$ split |
 | $120^\circ$ | $60^\circ$ | $-1/2$ | $1/4$ | Obtuse opposition (symmetric trine angle) |
 | $180^\circ$ | $90^\circ$ | $-1$ | $0$ | Antipodal on $S^2$ $\leftrightarrow$ orthogonal in $\mathbb{C}^2$ |

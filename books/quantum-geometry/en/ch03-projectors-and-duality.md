@@ -233,7 +233,7 @@ $$
 \star\vv{e}_1 = \vv{e}_2 \wedge \vv{e}_3, \qquad \star\vv{e}_2 = \vv{e}_3 \wedge \vv{e}_1, \qquad \star\vv{e}_3 = \vv{e}_1 \wedge \vv{e}_2.
 $$
 
-Stripped of century-old mystification, **wave–particle duality** can be read, in this book's geometric interpretation, as Hodge duality on the sphere:
+Stripped of century-old mystification, **wave–particle duality** is simply Hodge duality on the sphere:
 
 - When your apparatus locks onto a one-dimensional normal axis $\vv{e}_3$ to extract idempotent clicks, what registers along the line is discrete **particle** bias ($r_z$);
 - What lies hidden in the orthogonal complement of that slit is the entire two-dimensional equatorial plane $\vv{e}_1 \wedge \vv{e}_2 = \star\vv{e}_3$, where continuous phase rotation $\phi$ and the squared transverse coherence length $r_x^2 + r_y^2$ (the squared fringe visibility below) — **wave** behavior — reside!
@@ -263,7 +263,7 @@ $$
 Substituting hypothesis 1 on the left and hypothesis 2 together with $\operatorname{residualMass}(V, s) = \norm{P_{V^\perp}(s)}^2$ on the right yields the identity immediately. The full proof is checked by the Lean kernel.
 :::
 
-The theorem itself is only a Pythagorean decomposition; the quantum content lies entirely in its two premises, and that they hold for a single qubit is the hand calculation below, not part of the Lean declaration. Instantiate [@thm-complementary-pythagoras] on a single qubit ($|d| = 2$) with Bloch vector $\vv{r} = (r_x, r_y, r_z) \in \mathbb{R}^3$ and watch this decomposition give wave–particle complementarity a quantitative ledger!
+Instantiate [@thm-complementary-pythagoras] on a single qubit ($|d| = 2$) with Bloch vector $\vv{r} = (r_x, r_y, r_z) \in \mathbb{R}^3$ and watch wave–particle complementarity become elementary geometry!
 
 For $\rho_{\vv{r}} = \frac{1}{2}(I + B(\vv{r}))$, the trace computation of [Chapter 2](ch02-born-rule.md) ([@ex-bloch-half-angle] with $\vv{a} = \vv{b} = \vv{r}$) gives $\Tr(\rho_{\vv{r}}^2) = \frac{1 + \norm{\vv{r}}^2}{2}$, so the **purity excess** on the left-hand side is
 
@@ -289,13 +289,13 @@ On the pure shell $\norm{\vv{r}}^2 = 1$, $r_z^2 + (r_x^2 + r_y^2) = 1$: the shar
 **Lying in the dual plane, no shadow on the line.** The grey dashed arrow, before the press, lies entirely in the magenta equatorial dual plane and casts no shadow on the cyan measurement line Z; one press shrinks the amber arrow to a point at the centre, with line and plane both $0$.
 :::
 
-**In this geometric reading, wave and particle never contradict one another; they are the two orthogonal legs cut from a single unit hypotenuse by an axis $V$ and its Hodge dual $\star V$.**
+**Wave and particle never contradict one another; they are the two orthogonal legs cut from a single unit hypotenuse by an axis $V$ and its Hodge dual $\star V$.**
 
 ::: {.viz src="repeated-projection" preset="sum" height="500"}
 **One part on the line, one in the plane.** The cyan shadow lies on the measurement line Z and the magenta part lies in the equatorial dual plane; they are perpendicular and together rebuild the amber arrow, and at the top left line² + plane² equals the arrow's length squared. Halve both sides and you have the single-qubit ledger of [@thm-complementary-pythagoras].
 :::
 
-Translate this single-qubit Pythagorean split into the language of a Mach–Zehnder interferometer, and you obtain the celebrated **quantitative path-predictability / fringe-visibility law** of quantum optics (D. M. Greenberger and A. Yasin, Phys. Lett. A **128**, 391, 1988; B.-G. Englert, Phys. Rev. Lett. **77**, 2154, 1996):
+Translate this single-qubit Pythagorean split into the language of a Mach–Zehnder interferometer, and you obtain at one stroke the celebrated **quantitative path-predictability / fringe-visibility law** of quantum optics:
 
 - Define the *a priori* which-way path predictability between the two arms as $D_{\mathrm{pred}} = |p_0 - p_1| = |r_z|$;
 - Recombine the two arms while sweeping a relative phase $\varphi \in [0, 2\pi)$ (probing along the equatorial axis $\vv{n}_\varphi = (\cos\varphi, \sin\varphi, 0)$ with output intensity $I(\varphi) = \frac{1 + r_x\cos\varphi + r_y\sin\varphi}{2}$), and read off the interference fringe visibility $V_{\mathrm{vis}} = \frac{I_{\max} - I_{\min}}{I_{\max} + I_{\min}} = \sqrt{r_x^2 + r_y^2}$.
@@ -312,7 +312,7 @@ Equality $D_{\mathrm{pred}}^2 + V_{\mathrm{vis}}^2 = 1$ holds if and only if the
 **A definite path and a sharp fringe share one unit hypotenuse.** Predictability $D_{\mathrm{pred}}$ runs across and visibility $V_{\mathrm{vis}}$ up. Pure states lie on the quarter circle: the amber point $(0.8, 0.6)$ is made of the cyan $D$ and the magenta $V$. The grey point is a mixed state with $\norm{\vv{r}} = 0.6$, on the dashed arc of radius $0.6$ inside.
 :::
 
-Even better, the context index set $L$ in [@thm-complementary-pythagoras] lets the same decomposition read off the dimensional ladder of **quantum state tomography** (the single-qubit entries in each row are hand calculations):
+Even better, the context index set $L$ in [@thm-complementary-pythagoras] maps out the entire dimensional ladder of **quantum state tomography** at a glance:
 
 | Measured Pauli Contexts $L$ | Visible Subspace $V \subseteq \mathbb{R}^3$ | Visible Deviation $\norm{P_V(s)}^2$ | Blind Complement $V^\perp$ | Residual Mass $\operatorname{residualMass}(V, s)$ |
 | :--- | :---: | :---: | :---: | :---: |
@@ -320,10 +320,10 @@ Even better, the context index set $L$ in [@thm-complementary-pythagoras] lets t
 | Two axes $\{Z, X\}$ ($|L|=2$) | 2D meridian plane $\operatorname{span}\{\vv{e}_3, \vv{e}_1\}$ | $\frac{1}{2}(r_z^2 + r_x^2)$ | 1D normal $\star(\vv{e}_3 \wedge \vv{e}_1) = \vv{e}_2$ | $\frac{1}{2}r_y^2$ |
 | Full triad $\{X, Y, Z\}$ ($|L|=3$) | Full 3D ball space $\mathbb{R}^3$ | $\frac{1}{2}(r_x^2 + r_y^2 + r_z^2)$ | Zero subspace $\{\vv{0}\}$ | $0$ (blind spot eliminated) |
 
-Notice why measuring only two complementary bases $\{Z, X\}$ still leaves $r_y$ undetermined (for a general mixed state $r_y$ is entirely unknown; even for a known pure state, $\norm{\vv{r}} = 1$ fixes only $|r_y|$ and its sign remains ambiguous): the Hodge dual of a two-dimensional plane inside $\mathbb{R}^3$ is a one-dimensional normal line $\star(\vv{e}_3 \wedge \vv{e}_1) = \vv{e}_2$ carrying residual mass $\frac{1}{2}r_y^2$. Only when all three mutually orthogonal axes $\{X, Y, Z\}$ are probed (foreshadowing Part III, Chapter 9) does the residual blind spot vanish identically!
+Notice why measuring only two complementary bases $\{Z, X\}$ still leaves, even for a pure state, a chirality ambiguity $\pm r_y$: the Hodge dual of a two-dimensional plane inside $\mathbb{R}^3$ is a one-dimensional normal line $\star(\vv{e}_3 \wedge \vv{e}_1) = \vv{e}_2$ carrying residual mass $\frac{1}{2}r_y^2$. Only when all three mutually orthogonal axes $\{X, Y, Z\}$ are probed (foreshadowing Part III, Chapter 9) does the residual blind spot vanish identically!
 
 ::: {.figure src="ch03-tomography-ladder"}
-**Each added complementary context lowers the blind spot by one dimension.** The three spheres are the three rows of the tomography table. Measuring $Z$ alone, the cyan vertical axis is seen and the magenta equatorial plane is blind; measuring $Z$ and $X$, the cyan meridian plane is seen and only the magenta $y$ axis is left; measuring $X$, $Y$ and $Z$, the whole ball is cyan and nothing is blind (the decomposition comes from [@thm-complementary-pythagoras]; the single-qubit entries in each row are hand calculations).
+**Each added complementary context lowers the blind spot by one dimension.** The three spheres are the three rows of the tomography table. Measuring $Z$ alone, the cyan vertical axis is seen and the magenta equatorial plane is blind; measuring $Z$ and $X$, the cyan meridian plane is seen and only the magenta $y$ axis is left; measuring $X$, $Y$ and $Z$, the whole ball is cyan and nothing is blind ([@thm-complementary-pythagoras]).
 :::
 
 The last row of the tomography table still hides a constraint that has not been said aloud. Can the readings of the three complementary contexts be definite **at the same time**? Rewrite the Pythagorean sum of the last row: for $|d| = 2$, each context satisfies $\sum_j \bigl(p_{l,j} - \frac{1}{2}\bigr)^2 = \sum_j p_{l,j}^2 - \frac{1}{2}$, hence
@@ -461,14 +461,14 @@ $$
 
 All four terms on the right are nonnegative. If $H=2L$, then $L>0$ forces $s=1$ and all three coordinate gaps vanish. Hence each of $x^2,y^2,z^2$ is $0$ or $1$, and their sum being $1$ forces exactly one to be $1$. Conversely, the six coordinate-axis unit states $(\pm1,0,0)$, $(0,\pm1,0)$, and $(0,0,\pm1)$ have entropy triples that are permutations of $(0,L,L)$ and attain equality. Thus, on the **entire closed Bloch ball**, $H\ge2\ln2$ with equality if and only if the state is one of these six. Every interior point $s<1$ satisfies a strict inequality because $(1-s)L>0$.
 
-This classification follows the derivation in the contraction module's [explanatory narrative](https://github.com/the-omega-institute/trureturing/blob/285d9db079252fb0940f7a7700bc2addf7605828/Blueprint/D5/S3/Quantum/Information/QubitEntropyContraction.md). It is a manual application of the existing scalar concavity, contraction result, and spectral entropy formula, with no additional standalone Lean declaration or claim of novelty. The finite grid above still reports only sampled values; the global lower bound and equality classification rest on this analytic derivation.
+This classification follows the derivation in the contraction module's [explanatory narrative](https://github.com/the-omega-institute/trureturing/blob/a2cb467f6c498757ce2975a8878a017a2b59d1b1/Blueprint/D5/S3/Quantum/Information/QubitEntropyContraction.md). It is a manual application of the existing scalar concavity, contraction result, and spectral entropy formula, with no additional standalone Lean declaration or claim of novelty. The finite grid above still reports only sampled values; the global lower bound and equality classification rest on this analytic derivation.
 
 Where does the collision-entropy derivation lose this precision? The first step replaces the Shannon entropy by the collision entropy, and for a two-outcome distribution this loses nothing only in the uniform and the deterministic cases; an axis state has exactly one deterministic and two uniform contexts, so the first step is lossless. The loss occurs in the second application of Jensen's inequality, because the three collision probabilities $1, \frac{1}{2}, \frac{1}{2}$ are not equal.
 :::
 
 The Pythagorean theorem governs sums of squares; it says that the "degrees of definiteness" of the three contexts have a capped total. Entropy restates the same fact in units of information: for one qubit, at most one of three complementary questions can receive a definite answer.
 
-## 3.3 An Operational Reading of Classical Linear Time {#sec-ch03-3}
+## 3.3 The True Face of Classical Linear Time {#sec-ch03-3}
 
 If a single idempotent projection $P^2 = P$ defines a repeatable operational event, how does a sequential **operational record ordering** ($\tau_1 \to \tau_2 \to \tau_3$) work along a laboratory logbook?
 
@@ -490,7 +490,7 @@ is positive semidefinite and satisfies $\Tr\bigl(\operatorname{conditionalState}
 Write $w_k = \operatorname{recordWeight}(P, \rho, k) = \Tr(\rho P_k)$. Since $P_k^* = P_k$ and $P_k^2 = P_k$ by [@def-record-measurement], the compressed matrix $P_k \rho P_k = P_k \rho P_k^*$ is positive semidefinite, and trace cyclicity with idempotence gives $\Tr(P_k \rho P_k) = \Tr(P_k^2 \rho) = \Tr(\rho P_k) = w_k$. By [@thm-born-probability-skeleton] in [Chapter 2](ch02-born-rule.md), $0 \le w_k$ in the complex partial order (so $w_k$ is a nonnegative real number); combined with $w_k \neq 0$, its inverse $w_k^{-1}$ is strictly positive real. Scaling by a positive real preserves positive semidefiniteness, and linearity of the trace gives $\Tr(w_k^{-1} P_k \rho P_k) = w_k^{-1} w_k = 1$. The full proof is checked by the Lean kernel.
 :::
 
-When an observer chains [@thm-conditional-state-valid] across non-collinear axes $\tau_1 \to \tau_2 \to \tau_3$, something extraordinary happens: a transition that was $100\%$ forbidden becomes open simply because an intermediate projection reset the reference line! Physics classrooms often demonstrate this with three cheap polarizing sheets, right before the students' eyes.
+When an observer chains [@thm-conditional-state-valid] across non-collinear axes $\tau_1 \to \tau_2 \to \tau_3$, something extraordinary happens: a transition that was $100\%$ forbidden becomes open simply because an intermediate projection reset the reference line! Physics teachers love pulling three cheap Polaroid sheets from their pockets to demonstrate this right before their students' eyes.
 
 To extend the three-sheet calculation to any finite number of sheets, first examine what survives when ordered outer products are multiplied.
 
@@ -526,7 +526,7 @@ $$
 \Tr\bigl(P(0^\circ) P(90^\circ)\bigr) = \cos^2(90^\circ - 0^\circ) = 0.
 $$
 
-Total darkness: zero photons emerge. Were polarizers passive classical sieves merely filtering out photons that lacked a pre-existing "vertical ticket," slipping a *third* absorbing sheet between two crossed sheets could only keep the output pitch black. (Treating light as a classical electromagnetic wave and applying Malus's law sheet by sheet gives the same $\frac{1}{4}$ in Setup B; the experiment distinguishes a passive sieve from a projective update, not classical from quantum.)
+Total darkness: zero photons emerge. Were polarizers passive classical sieves merely filtering out photons that lacked a pre-existing "vertical ticket," slipping a *third* absorbing sheet between two crossed sheets could only keep the output pitch black.
 
 **Setup B (Inserting a $45^\circ$ polarizer in between, $\tau_1 \to \tau_2 \to \tau_3$)**: Leave the $0^\circ$ and $90^\circ$ sheets untouched, and slide a diagonal sheet at $\alpha_2 = 45^\circ$ — $P(45^\circ) = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ (Bloch East $+\vv{e}_1$, $\theta = 90^\circ$) — midway between them! Follow the two sequential updates via [@thm-conditional-state-valid]:
 
@@ -566,10 +566,10 @@ $N=0$ gives $0$, while $N=1$ gives the $1/4$ above. All these ratios refer to th
 :::
 
 ::: {.figure src="ch03-polarizer-chain"}
-**The ideal chain's transmission weight tends to $1$.** The cyan dots are $w_N = \bigl[\cos^2\frac{\pi}{2(N+1)}\bigr]^{N+1}$: $0$ with only the first and last polarizers ($N = 0$), $\frac{1}{4}$ for the ringed three-polarizer case ($N = 1$), and about $0.83$ at $N = 12$; the finite values come from the finite chain of [@thm-rank-one-chain-trace]. The dashed violet line at the top marks the limit $1$ as $N \to \infty$; this scalar limit is a literature result, accompanied by a hand derivation from existing Mathlib lemmas and not formalized in this book ([@rem-polarizer-ideal-limit]).
+**The ideal chain's transmission weight tends to $1$.** The cyan dots are $w_N = \bigl[\cos^2\frac{\pi}{2(N+1)}\bigr]^{N+1}$: $0$ with only the first and last polarizers ($N = 0$), $\frac{1}{4}$ for the ringed three-polarizer case ($N = 1$), and about $0.83$ at $N = 12$; the finite values come from the finite chain of [@thm-rank-one-chain-trace]. The dashed violet line at the top marks the limit $1$ as $N \to \infty$; this scalar limit is an application of existing Mathlib analysis results ([@rem-polarizer-ideal-limit]).
 :::
 
-::: {.remark #rem-polarizer-ideal-limit title="The Ideal Polarizer-Chain Limit (Literature Result and Hand Derivation, Not Formalized in This Book)"}
+::: {.remark #rem-polarizer-ideal-limit title="The Ideal Polarizer-Chain Limit (An Application of Existing Mathlib)"}
 Kidambi, Widom, Lerner, and Srivastava give the finite formula and scalar limit for the ideal projection model in [*Photon Polarization Measurements without the Quantum Zeno Effect*](https://arxiv.org/pdf/quant-ph/9902080v1), p. 2, Eqs. (7)–(8). Their $N$ corresponds to $m=N+1$ in this example:
 
 $$
