@@ -18,7 +18,7 @@
 6. **五阶自指不动点谱系与量子门蒸馏重整（[§39.6](ch39-s06-fivefold-self-reference-spectrum.md)）**：横跨离散指针路径压缩（`Lookup(x) = x`）、道蒂实虚等长蛛网螺旋（$\cos\theta^* = \theta^*$）、本征态定态与开放信道吸引子、$[[15, 1, 3]]$ 量子门三次方蒸馏不动点以及洛维尔无不动点对角逃逸，统一刻画 $\mathcal{F}(x) = x$ 的雅可比稳定性谱系；
 7. **自指主动停机精度、时间长河正交折叠与测量基特征谱排序（[§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md)）**：将受限观察者的因果裁量建立在自定停机阈值 $\varepsilon_{\mathrm{self}} > 0$ 之上，展示阈值以下的无穷余项如何旋转 $90^\circ$ 正交折入时间长河，并由幂迭代特征谱排序、测量基瑞利商赋权与频闪量子芝诺留存重塑主次结构；
 8. **普适比较主频、光速推理精度下界与引力信息密度钟慢（[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md)）**：以全宇宙共享的恒定比较主频 $\nu_0$ 统一雷达往返光锥精度下界 $\varepsilon_{\mathrm{self}} \ge \ell_P/(c\Delta\tau)$、狭义相对论空间寻址分账与全息信息负载 $\eta_{\mathrm{info}}(r) = r_s/r$ 驱动的引力钟慢；
-9. **万力归弧：胞内规范三力、胞间主频引力与普朗克能标合流（[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md)）**：将微观规范三力 $\mathrm{U}(1)_{\mathrm{em}}$、$\mathrm{SU}(2)_L$、$\mathrm{SU}(3)_c$ 还原为极小圆弧体单个体胞内部的盲面相位、$720^\circ$ 手征双覆叠与三棱保体积色通量禁闭，将引力还原为胞间比较主频的雷吉铰链角亏折射，并在普朗克能标 $E_P$ 处实现单原胞合流；
+9. **万力归弧：胞内规范三力、胞间主频引力与普朗克能标对账（[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md)）**：将微观规范三力 $\mathrm{U}(1)_{\mathrm{em}}$、$\mathrm{SU}(2)_L$、$\mathrm{SU}(3)_c$ 还原为极小圆弧体单个体胞内部的盲面相位、$720^\circ$ 手征双覆叠与三棱保体积色通量禁闭，将引力还原为胞间比较主频的雷吉铰链角亏折射，并在普朗克能标 $E_P$ 处实现单原胞合流；
 10. **三维概念场封顶原理与希尔伯特多概念混编账本（[§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)）**：借有限阶正交壳层展开、双体局域—关联张量扇区正交分解、正停机阈值有限模态基数上界、自旋因子三维叉乘唯一分类与三锚格拉姆正定判据（[@thm-ch39-hilbert-concept-ledger-and-3d-cap]，`LEAN ✓`），刺破高维 $\mathbb{R}^{3k}$（含 $9\binom{k}{2}$ 个跨概念伪旋转）与可分无限维 $\mathcal{H}_\infty$ 的语法幻觉，阐明（`MODEL`）空间、颜色及三大运动（平移、旋转、缩放）皆因旋度自闭合方程 $\binom{d}{2} = d \iff d = 3$ 与四元数纯虚李球 $\operatorname{Im}\mathbb{H} \cong \mathbb{R}^3$ 而各自封顶于三维并同席并置；
 11. **极小圆弧场大统一理论 AF-GUT（[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md)）**：在不借用 $\mathrm{SU}(5)/\mathrm{SO}(10)$ 巨型单群矩阵与十维/十一维紧致额外空间的前提下，由协变换位子、反自伴复结构、锚定阿贝尔圆弧分类、圆周双覆叠换叶提升、四面体曲率缺陷正合与拉格朗日—格拉姆勾股恒等式（[@thm-ch39-af-gut-arc-field-unification]，`LEAN ✓`）联立共享手性外尔账本上的普适圆弧迹刚度公设（`MODEL`），证成色数 $N_c = 3$ 唯一双曲线锁死裸温伯格角 $\sin^2\theta_W(\mu_{\mathrm{arc}}) = \frac{3}{8}$，并由 $M_Z$ 处实验值 $0.23129$ 反解其跑动交汇能标（拟合而非预言），以跨概念希格斯颤动桥与主频 $\nu_0$ 爱因斯坦收口自然实现零 $(X, Y)$ 规范质子衰变与 $\pi_2(S^3) = 0$ 零大统一磁单极子，同时立下四道定量开放界碑（[@prob-ch39-af-gut-threshold-and-proton-stability]，`OPEN`）。
 
@@ -29,13 +29,13 @@
 ---
 
 - [39.1 拆掉最后一道二元隔墙：全域 p ≡ *p 与无底物的自指域](ch39-s01-substrate-free-self-reference.md)
-- [39.2 “物自体”的关系读法：无刀则无晶，关系即实体](ch39-s02-relations-as-entities.md)
-- [39.3 旋量织空与 720° 单侧双覆叠：把时空读作观察者自乘的副产物](ch39-s03-spinors-and-spacetime.md)
-- [39.4 唯我论错觉的一种消解读法：正交自折叠与砍掉第 3 点 C 的四阶终局](ch39-s04-orthogonal-self-folding.md)
+- [39.2 终结“物自体”：无刀则无晶，关系即实体](ch39-s02-relations-as-entities.md)
+- [39.3 旋量织空与 720° 单侧双覆叠：时空是观察者自乘的副产物](ch39-s03-spinors-and-spacetime.md)
+- [39.4 破除唯我论错觉：正交自折叠与砍掉第 3 点 C 的四阶终局](ch39-s04-orthogonal-self-folding.md)
 - [39.5 齐肯多夫、皮索与劳齐：八概念自指综合沙盘](ch39-s05-pisot-clifford-rauzy.md)
 - [39.6 五阶自指不动点谱系：从“地址 = 内容”到量子门蒸馏重整](ch39-s06-fivefold-self-reference-spectrum.md)
 - [39.7 自指主动停机精度、时间长河正交折叠与测量基特征谱排序](ch39-s07-self-halting-precision-and-spectral-sorting.md)
 - [39.8 普适比较主频、光速推理精度下界与引力信息密度钟慢](ch39-s08-universal-clock-and-gravitational-dilation.md)
-- [39.9 万力归弧：极小圆弧体胞内规范三力、胞间主频引力与普朗克能标的耦合比较](ch39-s09-unified-arc-forces-and-planck-convergence.md)
-- [39.10 三维概念场封顶原理与希尔伯特多概念混编账本：把“三维以上”读作独立三维场的并置投影](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)
+- [39.9 万力归弧：极小圆弧体胞内规范三力、胞间主频引力与普朗克能标对账](ch39-s09-unified-arc-forces-and-planck-convergence.md)
+- [39.10 三维概念场封顶原理与希尔伯特多概念混编账本：为什么“三维以上”只是独立三维场的并置投影](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)
 - [39.11 极小圆弧场大统一理论（AF-GUT）：同心四场圆弧联络、温伯格角 3/8 跑动与主频爱因斯坦收口](ch39-s11-af-gut-arc-field-grand-unification.md)
