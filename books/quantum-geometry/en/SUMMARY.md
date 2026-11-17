@@ -189,6 +189,8 @@
   - [39.9 All Forces in One Arc: Intra-Cell Gauge Triad, Inter-Cell Clock-Load Gravity, and Planck-Scale Convergence](ch39-s09-unified-arc-forces-and-planck-convergence.md)
   - [39.10 The Three-Dimensional Concept-Field Cap and the Hilbert Multi-Concept Ledger: Why "Above Three Dimensions" Is Only a Joint Projection of 3D Fields](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)
   - [39.11 Arc-Field Grand Unified Theory (AF-GUT): Concentric Four-Field Arc Connections, Weinberg Angle 3/8 Running, and Clock-Budget Einstein Closure](ch39-s11-af-gut-arc-field-grand-unification.md)
+  - [39.12 Uniform Isotropic Three-Dimensional Field Ontology and Observer Slice Manifestation: Haar Singlets, Moiré Beats, and Four Cosmological Puzzles Revisited](ch39-s12-uniform-field-and-observer-slice.md)
+  - [39.13 The Single Cosmic Field, One-Particle Self-Folding, and Indra's Net: From Wheeler's One-Electron Insight to the Holographic Jewel Closure](ch39-s13-single-cosmic-field-and-indra-net.md)
 
 # Coda and Appendices
 
