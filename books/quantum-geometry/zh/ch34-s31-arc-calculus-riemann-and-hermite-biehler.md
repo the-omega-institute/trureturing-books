@@ -299,6 +299,55 @@ $$
    * 反之，若在 $\delta = 0.20,\; \gamma_0 = \gamma_1$ 处反事实注入上述离轴四元组因子，其右半带零点 $\rho_+ = 0.70 + \hat{\mathbf{i}}\gamma_1$ 恰好落入 $\mathcal{R}(+0.10)$ 腹地，立刻激发出 $2\pi \approx \mathbf{6.2831853072}$ 的非零涡旋（$N = \mathbf{1}$）。上表的 $\Delta_{\epsilon,\mathrm{rogue},4}^{\mathrm{HB}}(0.10, \gamma_1) = -4.78267581\times 10^{-7} < 0$ 是单独的四元组因子在左墙 $u_0 = 0.10$ 处的双壳差；乘上 $\xi$ 之后，由于 $\xi$ 自己的零点 $\frac{1}{2} + \hat{\mathbf{i}}\gamma_1$ 也在这一高度，同一点的径向斜率反而为正，负坡只出现在约 $0.1155 < u < 0.20$ 一段（`NUM`）。正如第 34.31.3 节的反证所说，负坡必然出现在 $(0, \delta)$ 的某处，但不必出现在每一处。
 :::
 
+第 34.31.3 节的等价说：径向单调在一切高度上成立，当且仅当黎曼猜想成立。在有限高度内，单调性不必假设黎曼猜想就能证明（依赖已发表的数值验证）；关键是把每个离线零点 $\rho$ 与它的镜像 $1-\overline\rho$ 配对。
+
+::: {.remark #rem-ch34-radial-lock-pair-disks title="径向单调的无条件窗口：一对离线零点只在一个圆盘内产生负坡（手工推导，依赖文献结果）"}
+**手工推导**，依赖三项文献结果（未在本书形式化）：$\xi$ 的阿达马乘积，即 $\frac{\xi'}{\xi}(s)=\sum_\rho\frac{m_\rho}{s-\rho}$ 按 $\{\rho,1-\rho\}$ 成对求和（第 34.31.2 节所引 Davenport 第 12 章）；D. Platt, T. Trudgian, *The Riemann hypothesis is true up to $3\cdot10^{12}$*, *Bull. London Math. Soc.* **53**, 792–797, 2021（DOI `10.1112/blms.12460`）：满足 $0<\gamma\le3\cdot10^{12}$ 的零点 $\beta+i\gamma$ 都有 $\beta=\tfrac12$（严格区间算术）；M. J. Mossinghoff, T. S. Trudgian, A. Yang, *Explicit zero-free regions for the Riemann zeta-function*, *Res. Number Theory* **10**, 论文号 11, 2024（DOI `10.1007/s40993-023-00498-y`）：$\lvert t\rvert\ge2$ 时，$\zeta(\sigma+it)$ 在 $\sigma\ge1-\dfrac{1}{5.558691\log\lvert t\rvert}$ 上不为零。
+
+记 $s=\tfrac12+u+it$。对 $\beta>\tfrac12$ 的零点 $\rho=\tfrac12+\delta_\rho+i\gamma_\rho$，令 $D_\rho$ 为以 $\tfrac12+i\gamma_\rho$ 为心、$\delta_\rho$ 为半径的开圆盘；$\rho$ 与 $1-\overline\rho$ 是它一条水平直径的两端。
+
+1. **圆盘引理。** 若 $u>0$，$s$ 不是零点，且 $s$ 不在任何 $D_\rho$ 内，则 $\operatorname{Re}\dfrac{\xi'}{\xi}(s)>0$。于是 $\dfrac{\partial}{\partial u}\lvert\xi(s)\rvert^2>0$，对每个 $\epsilon>0$ 有 $\Delta_\epsilon^{\mathrm{HB}}(u,t)>0$，并且 $K_\epsilon(s,s)>0$。特别地，这些结论在整个半平面 $\sigma\ge1$ 上成立。
+2. **显式窗口。** 取 $H=3\cdot10^{12}$。若 $\lvert t\rvert\le H-\tfrac12$，第 1 款的结论对一切 $u>0$ 成立；若 $\lvert t\rvert>H-\tfrac12$，它对一切 $u\ge\tfrac12-\dfrac{1}{5.558691\log(\lvert t\rvert+\frac12)}$ 成立。
+
+**证明。** 由阿达马乘积，$\operatorname{Re}\dfrac{\xi'}{\xi}(s)=\sum_\rho m_\rho\dfrac{\sigma-\beta}{\lvert s-\rho\rvert^2}$（按互异零点求和，$m_\rho$ 为重数）；$\lvert\sigma-\beta\rvert$ 有界而 $\sum_\rho m_\rho\lvert s-\rho\rvert^{-2}<\infty$，所以这个实部级数绝对收敛，可以任意分组。线上零点贡献 $m_\rho\dfrac{u}{u^2+(t-\gamma_\rho)^2}$，$u>0$ 时为正。离线零点 $\rho$ 与 $1-\overline\rho$ 有相同的纵坐标与重数（由冻结的 `xi_reading_one_sub_conj`，见 [@rem-ch34-li-toeplitz-negative-index] 的证明），把两者放在一组，记 $y=t-\gamma_\rho$，$\delta=\delta_\rho$：
+
+$$
+\frac{u-\delta}{(u-\delta)^2+y^2}+\frac{u+\delta}{(u+\delta)^2+y^2}=\frac{2u\,\bigl(u^2+y^2-\delta^2\bigr)}{\bigl((u-\delta)^2+y^2\bigr)\bigl((u+\delta)^2+y^2\bigr)} .
+$$
+
+$u>0$ 时，这一组为负当且仅当 $u^2+y^2<\delta^2$，即 $s\in D_\rho$，在 $D_\rho$ 的边界上为零。所以在第 1 款的假设下每一组都非负，线上的组严格为正（线上零点存在，例如 $\tfrac12\pm14.1347\ldots i$；文献结果），得 $\operatorname{Re}\frac{\xi'}{\xi}(s)>0$。其余结论由 $\partial_u\lvert\xi\rvert^2=2\lvert\xi\rvert^2\operatorname{Re}\frac{\xi'}{\xi}$、第 34.31.2 节的 $\Delta_\epsilon^{\mathrm{HB}}=\epsilon\,\partial_u\lvert\xi\rvert^2$ 与第 34.31.3 节的 $\Delta_\epsilon^{\mathrm{HB}}=4u\epsilon K_\epsilon(s,s)$ 得到。一切零点满足 $\beta<1$（[@thm-ch34-arc-riemann-sagitta-hb-stokes-bridge] 第 2 款），故 $\sigma\ge1$ 时 $u\ge\tfrac12>\delta_\rho$，$s$ 不在任何 $D_\rho$ 内，也不是零点。第 2 款：$s\in D_\rho$ 要求 $\lvert t-\gamma_\rho\rvert<\delta_\rho<\tfrac12$ 且 $u<\delta_\rho$。若 $\lvert t\rvert\le H-\tfrac12$，由 Platt–Trudgian（连同共轭对称）离线零点都有 $\lvert\gamma_\rho\rvert>H$，于是 $\lvert t-\gamma_\rho\rvert>\tfrac12$，$s$ 不在任何 $D_\rho$ 内，也不是零点。若 $\lvert t\rvert>H-\tfrac12$ 而 $s\in D_\rho$，则 $H<\lvert\gamma_\rho\rvert<\lvert t\rvert+\tfrac12$，由无零点区域 $\delta_\rho<\tfrac12-\frac{1}{5.558691\log\lvert\gamma_\rho\rvert}<\tfrac12-\frac{1}{5.558691\log(\lvert t\rvert+1/2)}\le u$，矛盾；$s$ 本身若是零点，则 $\beta=\tfrac12+u>1-\frac{1}{5.558691\log\lvert t\rvert}$，也被无零点区域排除。$\square$
+
+**它说了什么，没说什么。** 第 2 款的前半只是把 Platt–Trudgian 的数值验证换一种说法写出来：对 $\lvert t\rvert\le3\cdot10^{12}-\tfrac12$，$u\mapsto\lvert\xi(\tfrac12+u+it)\rvert$ 在 $[0,\infty)$ 上严格递增。这不是新的验证，对高度 $3\cdot10^{12}$ 以上的零点它什么也不说：每个圆盘 $D_\rho$ 在 $u>0$ 一侧的部分都落在窄带 $\bigl\{\lvert t\rvert>H-\tfrac12,\ 0<u<\tfrac12-\frac1{5.558691\log(\lvert t\rvert+1/2)}\bigr\}$ 内，第 2 款排除不了这里。第 1 款不需要零点计数：配对之后，离 $s$ 远的离线零点对 $\operatorname{Re}\frac{\xi'}{\xi}(s)$ 只有正贡献。第 34.31.2 节四元组因子在 $t=\gamma_0$、$0<u<\delta$ 上的负坡，正是 $D_\rho$ 的水平半径；[@ex-ch34-sagitta-hb-stokes-benchmark] 第 3 部分中 $\xi$ 乘以四元组之后负坡只剩约 $0.1155<u<0.20$，是 $(0,\delta)$ 的子区间，因为其余线上零点贡献了正项。所钉仓库的 `OffLinePairCurvatureKernel` 模块定义了上式左端这一对斜率，并冻结了它在 $u=0$ 处对 $u$ 的导数 $\dfrac{2\bigl((t-\gamma)^2-\delta^2\bigr)}{\bigl((t-\gamma)^2+\delta^2\bigr)^2}$（$\delta>0$；[`off_line_pair_slope_hasDerivAt_axis`](lean:D5/S3/Analytic/ZetaCriticalCurvature/OffLinePairCurvatureKernel.off_line_pair_slope_hasDerivAt_axis)）：$u$ 从 $0$ 增大时，这一对斜率恰在 $\lvert t-\gamma\rvert<\delta$ 处先变负，与圆盘一致。上面的符号判定本身没有冻结。
+
+**文献。** J. Sondow, C. Dumitrescu（*Period. Math. Hungar.* **60**, 37–40, 2010）与 Yu. Matiyasevich, F. Saidak, P. Zvengrowski（*Acta Arith.* **166**, 189–200, 2014）给出无零点右半平面内的单调性；E. Goldštein, A. Grigutis（*J. Math. Inequal.* **18**, 829–845, 2024，DOI `10.7153/jmi-2024-18-45`）与 A. Grigutis, L. Turčinskas（*Lith. Math. J.* **66**, 199–211, 2026，DOI `10.1007/s10986-026-09708-3`）对大 $t$ 给出线上零点部分 $\operatorname{Re}\sum1/(s-\rho)$ 的显式界，并讨论假想离线零点下的正性。在这些文献中没有找到上面的成对圆盘形式；它是两行计算，本书不主张新颖性。
+:::
+
+对角线以外，核的正性不能只在一个窗口里成立：任何开集上的正性都会传播到全平面。
+
+::: {.remark #rem-ch34-kernel-positivity-not-localizable title="核半正定不能局部化；窗口内只有显式的近似正性（手工推导，依赖文献结果）"}
+**手工推导。** 这里“$K$ 在集合 $U$ 上是正核”指：对 $U$ 中任意有限点组 $s_1,\dots,s_n$，矩阵 $\bigl[K(s_a,s_b)\bigr]$ 半正定。
+
+1. **传播引理。** 设 $K(w,s)=k(s,\overline w)$，$k$ 是 $\mathbb{C}^2$ 上的整函数。若 $K$ 在某个非空开集 $U\subset\mathbb{C}$ 上是正核，则它在 $\mathbb{C}$ 上是正核。
+2. **用于 $K_\epsilon$。** $K_\epsilon(w,s)=k(s,\overline w)$，其中 $k(s,z)=\dfrac{\xi'(s)\xi(z)+\xi(s)\xi'(z)}{2(s+z-1)}$ 是 $\mathbb{C}^2$ 上的整函数。所以对任意非空开集 $U\subset\mathbb{C}$：“$K_\epsilon$ 在 $U$ 上是正核”$\iff$“$K_\epsilon$ 在 $\mathbb{C}$ 上是正核”$\iff$ 黎曼猜想。$U$ 取 $s=1$ 的邻域时，这已包含在 [@rem-ch34-li-toeplitz-negative-index] 的末段中；第 1 款说任何开集都一样。因此 [@rem-ch34-radial-lock-pair-disks] 的窗口只能停在对角线上：在任何开窗口内证明完整的核半正定，就等于证明黎曼猜想。
+3. **窗口内的近似正性。** 记 $\hat K(w,s)=\dfrac{K_\epsilon(w,s)}{\xi(s)\overline{\xi(w)}}=\dfrac{L(s)+\overline{L(w)}}{2(s+\overline w-1)}$，$L=\xi'/\xi$。设 $H=3\cdot10^{12}$，$0\le T<H$，点 $s_1,\dots,s_n$ 满足 $u_a>0$、$\lvert t_a\rvert\le T$。则
+
+   $$
+   \lambda_{\min}\bigl[\hat K(s_a,s_b)\bigr]\ge-\frac n4\,S_4(H,T),\qquad S_4(H,T)=\sum_{\gamma>H}(\gamma-T)^{-4},
+   $$
+
+   其中求和取遍纵坐标大于 $H$ 的零点（计重数），并且 $S_4(H,T)\le5.41\times10^{-38}$（$T\le10^9$）。
+
+**证明。** 第 1 款：取圆盘 $D(p,r)\subset U$，把 $k(s,z)=\sum_{j,k}a_{jk}(s-p)^j(z-\overline p)^k$ 展开；$k$ 是整函数，所以对任意 $R>0$ 有 $\lvert a_{jk}\rvert\le C_RR^{-j-k}$，级数在 $\mathbb{C}^2$ 上绝对收敛。对 $0<\varrho<r$ 与 $y\in\mathbb{C}^M$，柯西公式给出
+
+$$
+\sum_{j,k<M}\overline{y_j}\,a_{jk}\,y_k=\frac1{4\pi^2}\int_0^{2\pi}\int_0^{2\pi}K\bigl(p+\varrho e^{i\varphi},p+\varrho e^{i\theta}\bigr)h(\theta)\,\overline{h(\varphi)}\,d\theta\,d\varphi,\qquad h(\theta)=\sum_{j<M}\overline{y_j}\,\varrho^{-j}e^{-ij\theta};
+$$
+
+右端是 $U$ 中等距节点上二次型 $c^{*}\bigl[K(s_a,s_b)\bigr]c$（$c_b=\frac{2\pi}mh(\theta_b)$）的黎曼和的极限，所以非负，系数矩阵 $(a_{jk})$ 的每个有限截断都半正定。对任意点组与系数，$\sum_{a,b}\overline{c_a}c_bK(s_a,s_b)=\sum_{j,k}a_{jk}x_j\overline{x_k}$，$x_j=\sum_bc_b(s_b-p)^j$，绝对收敛，它的每个有限截断都非负。第 2 款：$\overline{\xi(\overline z)}=\xi(z)$ 给出 $k$ 的形式；由 $\xi(1-s)=\xi(s)$、$\xi'(1-s)=-\xi'(s)$，分子在 $s+z=1$ 上为零，所以 $k$ 是整函数。“$\mathbb{C}$ 上的正核 $\Rightarrow$ 黎曼猜想”是第 34.31.3 节的逆向论证（只用对角线）；“黎曼猜想 $\Rightarrow$ $\mathbb{C}$ 上的正核”是那里的正向论证，其中的秩一展开在整个 $\mathbb{C}\times\mathbb{C}$ 上成立。第 3 款：由阿达马乘积，$\hat K(w,s)=\frac12\sum_\rho\frac{m_\rho}{(s-\rho)(\overline w-1+\rho)}$，绝对收敛（[@rem-ch34-li-toeplitz-negative-index] 末段）。线上零点贡献半正定的秩一项。一对离线零点 $\rho$、$\rho^{*}=1-\overline\rho$ 贡献 $\frac{m_\rho}2\bigl(fg^{*}+gf^{*}\bigr)$（或其转置），$f=\bigl(\frac1{s_a-\rho}\bigr)_a$，$g=\bigl(\frac1{s_a-\rho^{*}}\bigr)_a$；令 $c=\frac{f+g}2$、$d=\frac{f-g}2$，它等于 $m_\rho\bigl(cc^{*}-dd^{*}\bigr)$，而 $d_a=\dfrac{\delta_\rho}{(s_a-\rho)(s_a-\rho^{*})}$。所以 $\lambda_{\min}\ge-\sum_{\text{对}}m_\rho\lvert d\rvert^2$。由 Platt–Trudgian，离线零点都有 $\lvert\gamma_\rho\rvert>H$，于是 $\lvert d_a\rvert^2\le\frac{1}{4(\lvert\gamma_\rho\rvert-T)^4}$；纵坐标为 $\gamma$ 与 $-\gamma$ 的对各含两个零点，求和不超过 $\frac n4S_4(H,T)$。数值上界：由 E. Hasanalizade, Q. Shen, P.-J. Wong 的显式零点计数 $\bigl\lvert N(x)-\frac{x}{2\pi}\log\frac{x}{2\pi e}\bigr\rvert\le R(x)=0.1038\log x+0.2573\log\log x+9.3675$（$x\ge e$；*J. Number Theory* **235**, 219–241, 2022，DOI `10.1016/j.jnt.2021.06.032`，`arXiv:2107.06506` 推论 1.2；文献结果），对递减到零的 $g$ 有 $\sum_{\gamma>H}g(\gamma)=\int_H^\infty\bigl(N(x)-N(H)\bigr)\bigl(-g'(x)\bigr)\,dx$，而 $N(x)-N(H)\le\frac{x-H}{2\pi}\log\frac{x}{2\pi}+2R(x)$；这个显式积分由数值积分算出（`NUM`）。$\square$
+
+第 3 款的界随点数 $n$ 线性增长；而两点相互靠近时矩阵 $\bigl[\hat K(s_a,s_b)\bigr]$ 趋于奇异，它自身的最小特征值可以小于任何给定的正数。所以第 3 款证明不了正性，它只量出高处零点最多能造成多大的负方向。
+:::
+
 第 34.31.3 节的再生核 $K_\epsilon$ 与 §34.30 的 Li 曲率托普利茨矩阵（[@prop-ch34-li-curvature-toeplitz]）看起来是两套工具，其实读的是同一张表。下面先在有限族上把这件事说精确，再回到 $\zeta$。
 
 ::: {.remark #rem-ch34-one-zero-form-three-readings title="一张零点比较表的三种读法：德布朗热核、旋子幂和托普利茨矩阵与牛顿—汉克尔矩阵（手工推导）"}
@@ -402,6 +451,32 @@ $$
 **文献结果，未在本书形式化**，外加一步手工推导。N. Palojärvi（*Explicit zero-free regions and a $\tau$-Li-type criterion*，`arXiv:1807.01506`，定理 3.1，取 $\tau=1$）对满足若干显式条件的函数（$\zeta$ 满足这些条件）证明：对每个 $R>1$，可以显式算出 $N(R)$，使得只要 $\lambda_n\ge0$ 对区间 $[N(R),\ 5N(R)^2(A\log N(R)+M)]$ 中所有 $N(R)$ 的倍数 $n$ 成立（$A$、$M$ 是与零点计数有关的显式常数），$\zeta$ 的一切非平凡零点就满足 $\bigl\lvert\frac{\rho}{\rho-1}\bigr\rvert<R$。F. C. Brown（*J. Number Theory* **111**, 1–32, 2005，定理 3）给出过同类结果。
 
 由此得到托普利茨检验的一个显式阈值（手工推导）。由 [@prop-ch34-li-curvature-toeplitz] 后的读数式 $\lambda_n=\lambda_1\sum_{j,k<n}c^{\mathrm{Li}}_{j-k}$，$T_n(c^{\mathrm{Li}})$ 半正定蕴含 $\lambda_n\ge0$。若零点 $\rho=\beta+i\gamma$ 满足 $\beta\ge\tfrac12+\delta$、$\lvert\gamma\rvert\le T$，则 $\bigl\lvert\frac{\rho}{\rho-1}\bigr\rvert^2=1+\frac{2\beta-1}{\lvert\rho-1\rvert^2}\ge1+\frac{2\delta}{T^2+\frac14}$。取 $R^2=1+\frac{2\delta}{T^2+\frac14}$ 与 $N_0(T,\delta)=\bigl\lfloor5N(R)^2(A\log N(R)+M)\bigr\rfloor$：只要 $T_1(c^{\mathrm{Li}}),\dots,T_{N_0}(c^{\mathrm{Li}})$ 全部半正定，矩形 $\{\beta\ge\tfrac12+\delta,\ \lvert\gamma\rvert\le T\}$ 内就没有零点。这个阈值只用到托普利茨矩阵在全一向量上的读数；能否利用一切检验向量把它显著改小，本书没有找到结果。即使有了阈值，所需特征值的量级（[@ex-ch34-toeplitz-versus-li-numbers] 中 $N=20$ 时约为 $10^{-74}$）也要求 $\lambda_n$ 有相应的精度。这样的检验只给出有限高度内的无零点证书，不判定 [@conj-riemann-hypothesis]。
+:::
+
+在有限尺寸上，托普利茨矩阵本身可以直接、严格地检验；零点数据给出的只是一个扰动界。
+
+::: {.remark #rem-ch34-li-toeplitz-finite-certificate title="有限尺寸的 Li 曲率托普利茨正性：N ≤ 100 的计算机辅助证书与高处零点的扰动界（文献结果、计算机辅助验证与手工推导）"}
+**文献结果，未在本书形式化。** F. Johansson（*Numer. Algorithms* **69**, 253–270, 2015，DOI `10.1007/s11075-014-9893-1`）用带严格误差界的球算术算出 Keiper–Li 系数直到 $n=100000$，确定了它们的符号，结果与黎曼猜想相容；他采用 J. B. Keiper（*Math. Comp.* **58**, 765–773, 1992）的归一化，与这里的 $\lambda_n$ 相差因子 $n$。把有限多个 $\lambda_n\ge0$ 与显式无零点区域联系起来的结果见 [@rem-ch34-effective-li-toeplitz-detection]。对一切检验向量的托普利茨正性，本书没有找到有限尺寸的已发表结果。
+
+**计算机辅助验证（严格球算术，未形式化）。** 由 [@prop-ch34-li-sagitta-frozen] 第 2 款的定义与 [@rem-ch34-li-toeplitz-de-branges-bridge] 所引的冻结展开 $\sum_{n\ge0}\lambda_{n+1}z^n=(1-z)^{-2}\frac{\xi'}{\xi}\bigl(\frac1{1-z}\bigr)$，$\lambda_n$ 是 $\log\xi$ 的泰勒系数的有限整系数组合。在 Arb 球算术（F. Johansson, *IEEE Trans. Comput.* **66**, 1281–1292, 2017）中用两种独立展开计算 $\lambda_1,\dots,\lambda_{101}$：一种在 $s=0$ 处展开（30000 位精度），另一种在 $s=1$ 处由斯蒂尔切斯常数展开（8000 位精度）；两者都给出 $\lambda_1=0.0230957089661\ldots$，与 [@prop-ch34-li-sagitta-frozen] 第 2 款的闭式一致。再作 $c^{\mathrm{Li}}$。两种计算中，$T_N(c^{\mathrm{Li}})$ 的顺序主子式（$1\le N\le100$）都是包含于 $(0,\infty)$ 的球（$\det T_{20}\approx3.19\times10^{-599}$，$\det T_{100}\approx1.96\times10^{-18869}$；第 $100$ 个主元约为 $10^{-401}$）。由西尔维斯特判据，$T_1(c^{\mathrm{Li}}),\dots,T_{100}(c^{\mathrm{Li}})$ 全部正定。每一步舍入误差都由区间包住，所以只要所用软件正确，这是一个数学事实；它不是浮点数值证据，也没有经过 Lean 内核检查。它推出 $\lambda_n\ge0$（$n\le100$），远在 Johansson 的范围之内；新的只是“一切检验向量”这一形式。
+
+**手工推导**，依赖 [@rem-ch34-li-toeplitz-negative-index] 的零点和表示（文献结果）、Platt–Trudgian 与 Hasanalizade–Shen–Wong（见 [@rem-ch34-radial-lock-pair-disks] 与 [@rem-ch34-kernel-positivity-not-localizable]）。设 $H=3\cdot10^{12}$，$1\le N\le H^2$。则
+
+$$
+\lambda_{\min}\bigl(T_N(c^{\mathrm{Li}})\bigr)\ge-\varepsilon_N,\qquad \varepsilon_N\le4.45\times10^{-63}\,N(N^2-1).
+$$
+
+**证明。** 由表示式，$T_N=\frac1{\lambda_1}\sum_\rho m_\rho v_\rho a_\rho a_{\rho^{*}}^{*}$。线上零点的项半正定。一对离线零点贡献 $\frac{m_\rho}{\lambda_1}X$，$X=v\,ab^{*}+\overline v\,ba^{*}$，$a=a_\rho$，$b=a_{\rho^{*}}$，$v=v_\rho$。对向量 $x,y$，$xy^{*}+yx^{*}$ 的最小特征值为 $\operatorname{Re}(y^{*}x)-\sqrt{\lvert x\rvert^2\lvert y\rvert^2-(\operatorname{Im}y^{*}x)^2}$（在 $x,y$ 张成的平面上计算）。这里 $b^{*}a=N$（因 $\overline{u_{\rho^{*}}}=1/u_\rho$），$\lvert a\rvert^2\lvert b\rvert^2-N^2=2\sum_{j,k<N}\sinh^2\bigl((j-k)\eta\bigr)$，$\eta=-\log\lvert u_\rho\rvert$。记 $\theta=\arg v$（$\operatorname{Re}\rho(1-\rho)=\frac14-\delta^2+\gamma^2>0$，故 $\cos\theta>0$），取 $x=va$、$y=b$，并用 $\sqrt{A^2+B}-A\le\frac{B}{2A}$，得
+
+$$
+\lambda_{\min}(X)\ge-\frac{\lvert v\rvert}{N\cos\theta}\sum_{j,k<N}\sinh^2\bigl((j-k)\eta\bigr).
+$$
+
+对 $\lvert\gamma\rvert>H$：$\lvert v\rvert\le\frac1{2\gamma^2}$，$\tan\theta\le\frac{2\delta}{\lvert\gamma\rvert}<\frac1{\lvert\gamma\rvert}$，$\eta\le\frac1{2(\gamma^2-1)}$；$(N-1)\eta\le1$ 时 $\sinh x\le x\sinh1$（$0\le x\le1$）；$\sum_{j,k<N}(j-k)^2=\frac{N^2(N^2-1)}6$。于是每对的最小特征值不小于 $-\frac{\sinh^21}{48}\bigl(1+10^{-20}\bigr)\frac{N(N^2-1)}{\gamma^6}$。按 [@rem-ch34-kernel-positivity-not-localizable] 第 3 款的方式对零点求和，$\sum_{\gamma>H}\gamma^{-6}\le3.5705\times10^{-63}$（显式积分的数值积分，`NUM`），再除以 $\lambda_1$。$\square$
+
+例如 $\varepsilon_2\le2.7\times10^{-62}$，$\varepsilon_{20}\le3.6\times10^{-59}$，$\varepsilon_{100}\le4.5\times10^{-57}$。在所试的单对例子中，上式右端与精确的最小特征值前六位一致（`NUM`）。
+
+**这个证书说明什么，不说明什么。** 尺寸 $N$ 的正定性是一个具体矩阵的性质，直接计算就能判定，不需要零点。零点数据也代替不了这个计算：上面的界只说明“验证到高度 $H$ 再加零点计数”给出 $T_N\succeq-\varepsilon_N$；要得到 $T_N\succeq0$，还得知道 $\lambda_{\min}\bigl(T_N(c^{\mathrm{Li}})\bigr)$ 本身，而它在 $N=20$ 时约为 $5.24\times10^{-74}$（[@ex-ch34-toeplitz-versus-li-numbers]），远小于 $\varepsilon_{20}$。反过来，证书也不提供零点位置的信息：由 [@rem-ch34-li-toeplitz-negative-index]，一个离线零点只表现为某个 $T_N$ 的负特征值，而这个 $N$ 可以远大于 $100$。[@conj-riemann-hypothesis] 仍然开放。
 :::
 
 以上各条都没有说明 $\zeta$ 的零点在哪里：它们只是把同一个未知数 $\kappa$（临界线右侧零点的个数）用核、托普利茨矩阵与牛顿—汉克尔矩阵三种方式表示出来，[@conj-riemann-hypothesis] 说的就是 $\kappa=0$，它仍然开放。

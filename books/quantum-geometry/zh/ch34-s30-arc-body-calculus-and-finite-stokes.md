@@ -394,6 +394,41 @@ $$
 数值核对：$20000$ 组随机 $(\eta,\phi)$ 都满足第 1 款；$\eta=0.1,0.03,0.01,0.003,0.001$ 时第 2 款给出 $n_*=25,82,245,815,2443$，与逐项计算一致。对假想四点 $\tfrac7{10}\pm5i$、$\tfrac3{10}\pm5i$，$\eta=0.0079084$，第 1 款的上界是 $889$，实际 $n_*=31$；对 $\tfrac12\pm0.1\pm14i$，上界是 $13741$，实际 $n_*=88$。第 1 款只对单独一个四元组成立；有限族里其余旋子的非负贡献可以把符号变化推迟得多（[@ex-ch34-zero-rotor-sagitta-numbers] 中的 $8446$），对一般有限族，同样的抽屉原理论证给出的上界随互异相位的个数指数增长。离线四元组离临界线越近、位置越高，$\eta$ 越小，第 1 款的上界越大；这是关于单独四元组的陈述，不是关于 $\lambda_n$ 的陈述。
 :::
 
+上面的有限域段落说，曲线的托普利茨矩阵半正定来自韦伊定理。所钉仓库对一族具体曲线冻结了韦伊不等式本身，陈述如下。
+
+::: {.proposition #prop-ch34-fermat-weil-bound-frozen title="费马曲线的韦伊界（雅可比和证明）" lean="D5/S3/CharacterSums/Fermat/CharacterPointCount.projective_weil_bound"}
+设 $F$ 是有限域，$q=\lvert F\rvert$，整数 $d\ge2$ 整除 $q-1$。记 $N$ 为射影平面 $\mathbb{P}^2(F)$ 中满足 $x^d+y^d=z^d$ 的点 $[x:y:z]$ 的个数。则
+
+$$
+\lvert N-(q+1)\rvert\le(d-1)(d-2)\sqrt q .
+$$
+:::
+
+::: proof
+取 $F$ 上阶恰为 $d$ 的复值乘法特征 $\chi$（$d\mid q-1$ 保证存在）。点数恰等于 $q+1$ 加上 $(d-1)(d-2)$ 个雅可比和 $J(\chi^i,\chi^j)$ 之和，其中 $1\le i,j<d$ 且 $i+j\ne d$。对其中每一项，$\chi^i$、$\chi^j$、$\chi^{i+j}$ 都不是平凡特征，所以 $\lvert J(\chi^i,\chi^j)\rvert=\sqrt q$（[`norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum)），三角不等式给出上式。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-ch34-weil-toeplitz-hodge-index title="有限域上托普利茨正性的来源：曲面 C×C 上相交形式的压缩（文献结果与手工推导）"}
+**文献结果，未在本书形式化**，外加手工推导。设 $C$ 是 $\mathbb{F}_q$ 上亏格 $g$ 的光滑射影几何不可约曲线，$S=\overline C\times\overline C$（$\overline C$ 是 $C$ 在代数闭包上的基变换），$F$ 为 $q$ 次弗罗贝尼乌斯，$\Gamma_n\subset S$ 是 $F^n$ 的图像，$\Gamma_0=\Delta$ 为对角线，$f_1=\{x_0\}\times\overline C$，$f_2=\overline C\times\{y_0\}$。所用文献事实：（甲）曲面的霍奇指标定理在任意特征下成立：$H$ 丰沛且 $D\cdot H=0$ 时 $D^2\le0$，等号当且仅当 $D$ 数值等价于零（A. Grothendieck, *J. reine angew. Math.* **200**, 208–215, 1958，DOI `10.1515/crll.1958.200.208`；R. Hartshorne, *Algebraic Geometry*, 第五章定理 1.9）；（乙）$\Gamma_n\cdot\Delta=N_n$（$n\ge1$），$\Delta^2=2-2g$，$\Gamma_n\cdot f_1=1$，$\Gamma_n\cdot f_2=q^n$，$f_1^2=f_2^2=0$，$f_1\cdot f_2=1$（参见 Hartshorne 第五章习题 1.9–1.10）；（丙）韦伊的证明用的是卡斯泰尔诺沃—塞韦里不等式（A. Weil, *Sur les courbes algébriques et les variétés qui s'en déduisent*, Hermann, 1948；A. Mattuck, J. Tate, *Abh. Math. Sem. Univ. Hamburg* **22**, 295–299, 1958，DOI `10.1007/BF02941959`）。
+
+**手工推导。** 记 $p_0=2g$，$p_m=\dfrac{q^m+1-N_m}{q^{m/2}}$（$m\ge1$，即 [@rem-ch34-finite-toeplitz-inertia] 末段的幂和）。
+
+1. $\Gamma_j\cdot\Gamma_k=q^{\min(j,k)}N_{\lvert j-k\rvert}$，其中约定 $N_0=2-2g$。
+2. 令 $\gamma_n=\Gamma_n-q^nf_1-f_2$。则 $\gamma_n\cdot f_1=\gamma_n\cdot f_2=0$，并且 $\gamma_j\cdot\gamma_k=-q^{(j+k)/2}p_{\lvert j-k\rvert}$。
+3. 于是 $e_j=q^{-j/2}\gamma_j$ 满足 $e_j\cdot e_k=-p_{\lvert j-k\rvert}$：对每个 $N$，托普利茨矩阵 $\bigl(p_{\lvert j-k\rvert}\bigr)_{0\le j,k<N}$ 恰是相交形式在 $e_0,\dots,e_{N-1}$ 上的格拉姆矩阵的相反数。
+4. 因此对每个 $N$，$\bigl(p_{\lvert j-k\rvert}\bigr)_{0\le j,k<N}$ 半正定。
+
+**证明。** 第 1 款：设 $j\ge k$，$\varphi=F^k\times1$ 是 $q^k$ 次有限态射。在局部坐标中 $\Gamma_m$ 由 $y=x^{q^m}$ 给出，它的拉回 $y=x^{q^{m+k}}$ 是约化的，所以 $\varphi^{*}\Gamma_{j-k}=\Gamma_j$，$\varphi^{*}\Delta=\Gamma_k$；投影公式给出 $\Gamma_j\cdot\Gamma_k=q^k\,(\Gamma_{j-k}\cdot\Delta)$，再用（乙）。第 2 款：由（乙）直接得 $\gamma_n\cdot f_1=1-1=0$，$\gamma_n\cdot f_2=q^n-q^n=0$；于是 $\gamma_j\cdot\gamma_k=\Gamma_j\cdot\gamma_k=\Gamma_j\cdot\Gamma_k-q^k-q^j$，代入第 1 款并用 $q^{m/2}p_m=q^m+1-N_m$（$m=0$ 时 $N_0-2=-2g$）。第 3 款由第 2 款除以 $q^{(j+k)/2}$ 得到。第 4 款：$f_1+f_2$ 丰沛，每个 $e_j$ 与它正交，由（甲），相交形式在 $e_j$ 张成的实空间上半负定。$\square$
+
+所以链条是：相交形式在 $f_1+f_2$ 的正交补上半负定（霍奇指标定理）$\Rightarrow$ 一切 $\bigl(p_{\lvert j-k\rvert}\bigr)_{j,k<N}$ 半正定 $\Rightarrow$ 一切 $\lvert\alpha_i\rvert=\sqrt q$ $\Rightarrow$ $\lvert N_n-q^n-1\rvert\le2gq^{n/2}$。第二步取 $N=2g$，用上面有限域段落中 $u_i=\alpha_i/\sqrt q$ 在 $u\mapsto1/\overline u$ 下的封闭（文献结果）与 [@prop-ch34-finite-toeplitz-circle-criterion] 第 1 款。下标 $\{0,n\}$ 上的 $2\times2$ 主子阵是 $\begin{pmatrix}2g&p_n\\p_n&2g\end{pmatrix}$，它半正定恰好是 $\lvert N_n-q^n-1\rvert\le2gq^{n/2}$；所涉及的除子类（对角线、$\Gamma_n$ 与两条纤维）正是韦伊、马图克—泰特与格罗滕迪克的证明中所用的那几类。这与 [@prop-ch34-li-curvature-toeplitz] 第 5 款的证明同形：那里也只取下标 $0$ 与 $n$ 的 $2\times2$ 主子阵。由（甲）的等号情形，格拉姆矩阵的零向量给出 $e_j$ 之间的数值关系，例如椭圆曲线上 $e_2-p_1e_1+e_0$ 数值等价于零，这是 $F^2-aF+q=0$ 的影子。我们没有在文献中找到这一托普利茨形式的逐字出处，不主张新颖性。
+
+**例（逐点计数与精确计算，手工推导）。** 椭圆曲线 $y^2=x^3+x+1$ 在 $\mathbb{F}_5$ 上：$N_1,N_2,N_3=9,27,108$，$a=q+1-N_1=-3$，$p_1=-3/\sqrt5$，$p_2=-\tfrac15$。下标 $\{0,1\}$ 上的主子阵 $\begin{pmatrix}2&-3/\sqrt5\\-3/\sqrt5&2\end{pmatrix}$ 的行列式是 $4-\tfrac95=\tfrac{11}5>0$，这就是哈塞界 $\lvert a\rvert\le2\sqrt5$ 的 $2\times2$ 形式；$e_0,e_1,e_2$ 的格拉姆矩阵的特征值恰为 $-\tfrac{19}5$、$-\tfrac{11}5$、$0$，零特征向量是 $(1,-p_1,1)$。
+
+**与 [@prop-ch34-fermat-weil-bound-frozen] 的关系（手工推导，用到文献结果）。** 设 $d\ge3$，$d\mid q-1$；这时 $\mathbb{F}_q$ 的特征不整除 $d$，平面曲线 $x^d+y^d=z^d$ 光滑，亏格 $g=\tfrac{(d-1)(d-2)}2$（文献结果）。由 $d\mid q^n-1$，该命题对每个 $\mathbb{F}_{q^n}$ 成立，给出 $\lvert p_n\rvert\le2g$（$n\ge1$）。由 $\zeta$ 函数的有理性（F. K. Schmidt, *Math. Z.* **33**, 1–32, 1931；文献结果），$\sum_{n\ge1}p_nz^n=\sum_i\dfrac{u_iz}{1-u_iz}$；左端系数有界，所以右端在 $\lvert z\rvert<1$ 内没有极点，$\lvert u_i\rvert\le1$；再由 $u\mapsto1/\overline u$ 下的封闭得 $\lvert u_i\rvert=1$，于是由 [@prop-ch34-finite-toeplitz-circle-criterion] 第 2 款，每个 $\bigl(p_{\lvert j-k\rvert}\bigr)_{j,k<N}$ 半正定。这条路走雅可比和，不经过霍奇指标定理，也只覆盖这一族曲线。
+
+**$\zeta$ 缺什么（文献结果与评注）。** 对 $\zeta$，没有已知的曲面扮演 $\overline C\times\overline C$ 的角色：没有已知的带相交形式的格，使 $-T_N(c^{\mathrm{Li}})$ 成为其中某组类的格拉姆矩阵，也没有相应的霍奇指标定理。韦伊证明了黎曼猜想等价于由显式公式作出的一个二次泛函的正性（A. Weil, *Sur les « formules explicites » de la théorie des nombres premiers*, Comm. Sém. Math. Univ. Lund, 1952；文献结果）；这又是一个等价改写，[@conj-riemann-hypothesis] 仍然开放。上面的有限域论证只说明正性在那里从何而来，不提供 $\zeta$ 的证明途径。
+:::
+
 以上各条要么只涉及有限族，要么是对 $\zeta$ 的等价改写；它们都不判定 $\zeta$ 的零点是否全在临界线上，[@conj-riemann-hypothesis] 仍然开放。
 
 单步导数与一维路径乘积积分各就各位之后，我们迎来了微积分大厦最壮丽的穹顶：高维流形上的外微分与广义斯托克斯定理。

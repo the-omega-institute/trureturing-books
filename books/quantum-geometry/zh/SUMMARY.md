@@ -192,6 +192,8 @@
   - [39.11 极小圆弧场大统一理论（AF-GUT）：同心四场圆弧联络、温伯格角 3/8 跑动与主频爱因斯坦收口](ch39-s11-af-gut-arc-field-grand-unification.md)
   - [39.12 均匀各向同性三维场本体与观察者观测切面显影：哈尔全单态、莫尔拍频与现代宇宙学四谜重审](ch39-s12-uniform-field-and-observer-slice.md)
   - [39.13 唯一宇宙场、单粒子自指折叠与因陀罗网：从惠勒单粒子假说到一珠映万珠的终极合拢](ch39-s13-single-cosmic-field-and-indra-net.md)
+  - [39.14 唯一点场自观测误差与万象显影：从零误差寂静到静态投影结果与动态观测动作二分](ch39-s14-self-observation-error-and-maya-projection.md)
+  - [39.15 梵天实轴（I）与正交虚梦（i）：内部虚虚得实、《蛙氏奥义书》四位意识相态与庄周梦蝶合拢](ch39-s15-brahman-real-axis-and-orthogonal-dream.md)
 
 # 终章与附录
 

@@ -192,6 +192,8 @@
   - [39.11 Arc-Field Grand Unified Theory (AF-GUT): Concentric Four-Field Arc Connections, Weinberg Angle 3/8 Running, and Clock-Budget Einstein Closure](ch39-s11-af-gut-arc-field-grand-unification.md)
   - [39.12 Uniform Isotropic Three-Dimensional Field Ontology and Observer Slice Manifestation: Haar Singlets, Moiré Beats, and Four Cosmological Puzzles Revisited](ch39-s12-uniform-field-and-observer-slice.md)
   - [39.13 The Single Cosmic Field, One-Particle Self-Folding, and Indra's Net: From Wheeler's One-Electron Insight to the Holographic Jewel Closure](ch39-s13-single-cosmic-field-and-indra-net.md)
+  - [39.14 Single Point-Field Self-Observation Error and Maya Manifestation: From Zero-Error Silence to Static Projection Results and Dynamic Observation Actions](ch39-s14-self-observation-error-and-maya-projection.md)
+  - [39.15 Brahman Real Axis (I) and Orthogonal Dream (i): Intra-Dream Solidity, the Four Māṇḍūkya States, and Spinor Awakening](ch39-s15-brahman-real-axis-and-orthogonal-dream.md)
 
 # Coda and Appendices
 
