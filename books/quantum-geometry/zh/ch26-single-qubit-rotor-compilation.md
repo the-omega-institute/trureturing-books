@@ -104,7 +104,7 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
-如果把幂等纯态条件 $M^2 = M$ 放宽为一般的**正半定条件** `hM : M.PosSemidef`（涵盖所有混态密度矩阵与正半定测量效应元，对应[第四章](ch04-decoherence.md)缩入球内的截短弦），布洛赫向量的模长会发生什么？下面的冻结推论利用行列式恒等式证明：任何正半定 $2\times 2$ 矩阵的布洛赫范数都严格受其实迹控制！
+如果把幂等纯态条件 $M^2 = M$ 放宽为一般的**正半定条件** `hM : M.PosSemidef`（涵盖所有混态密度矩阵与正半定测量效应元，对应[第四章](ch04-decoherence.md)缩入球内的截短弦），布洛赫向量的模长会发生什么？下面的冻结推论利用行列式恒等式证明：任何正半定 $2\times 2$ 矩阵的布洛赫范数都受其实迹控制！
 
 ::: {.corollary #cor-psd-bloch-ball-bound title="正半定 2×2 矩阵的布洛赫向量模长受实迹控制定理" lean="D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef"}
 设 $M \in M_2(\mathbb{C})$ 为 $2\times 2$ 复矩阵。若 $M$ 正半定（`hM : M.PosSemidef`），则其布洛赫向量的欧氏范数不超过其迹的实部：
@@ -184,7 +184,7 @@ $$
 
 这里沿用前章引擎的实系数范围：编译得到实偶旋转器，单位条件使 `reverse()` 可作逆元，`norm_squared()` 也在这一范围内核验归一化。
 
-下面是紧接在 `GeometricState` 之后的完整 Python 3 `RotorCompiler` 实现与自检函数（取自 `part7_engine.py` 的后半部分）：
+下面是可独立运行的完整 Python 3 程序：开头重复第二十五章的 `GeometricState`，随后是 `RotorCompiler` 实现与自检函数（即 `part7_engine.py` 的后半部分）：
 
 ```python
 from __future__ import annotations
@@ -423,4 +423,4 @@ self_test()
 **把一个旋转编译成三段：ZYZ 与夹心作用（2 分 5 秒）。** 绕紫色 $z$ 轴转动时，青色的影子 $\tfrac{1}{2}e_3$ 不动，品红的那一份扫过整角，而旋转器在小圆盘上只走半角；接着琥珀色的箭头依次绕 $z$、$y$、$z$ 转过 $\gamma$、$\beta$、$\alpha$，三枚旋转器乘成一枚四系数的旋转器 $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$，夹住三根基向量即得 ZYZ 矩阵的三列；绕它自己的轴转一次 $67.9^\circ$ 落在同一点（单一转轴属于 [@rem-zyz-euler-compilation-literature] 的文献结果，旋转器编译是数值演示）；随后演示 $T$ 门与阿达玛门，最后在纯态 $\rho = \operatorname{blochMatrix}(1, v)$ 上引用本章四条冻结定理（[@thm-bloch-matrix-trace]、[@lemma-bloch-coordinate-recovery]、[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）。
 :::
 
-从下一章开始，我们将进入第七部最庄严的收官双章——**直接打开 `trureturing@dev` 的冻结 Lean 4 源码卷宗，逐行精读并审计支撑起整部专著的公理圣殿**！让我们迈入[第二十七章](ch27-reading-frozen-proofs-i.md)。
+从下一章开始，我们将进入第七部最庄严的收官双章——**直接打开 `trureturing@dev` 的冻结 Lean 4 源码卷宗，逐行精读本书所引的若干代表性冻结证明，并抽样审计其契约边界**！让我们迈入[第二十七章](ch27-reading-frozen-proofs-i.md)。
