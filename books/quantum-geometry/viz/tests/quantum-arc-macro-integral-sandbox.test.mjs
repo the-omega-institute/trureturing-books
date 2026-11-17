@@ -500,6 +500,12 @@ for (const scheme of ['dark', 'light']) for (const lang of ['zh', 'en']) for (co
     const tag = `${scheme}/${lang}/${width}x${height}/${figure ? 'figure' : embed ? 'embed' : 'lab'}`;
     check(`${tag}: requested system color scheme is active`, await p.evaluate(s => matchMedia(`(prefers-color-scheme: ${s})`).matches, scheme));
     await checkLinks(p, tag);
+    // 在任何选卡操作前见证初次可见启动；后续播放不再能冒充这个一次性回调。
+    if (embed) {
+      await p.locator('#stage').scrollIntoViewIfNeeded();
+      if (!await until(p, () => window.ARC_MACRO_DEBUG.state.playing)) throw new Error(`${tag}: initial autoplay did not start`);
+      await pause(p);
+    }
     // 导览条只在书内显示；在真正可见的入口测试前进和返回。
     if (embed) {
       await p.click('[data-tour="next"]'); await settle(p); await pause(p);
@@ -511,6 +517,7 @@ for (const scheme of ['dark', 'light']) for (const lang of ['zh', 'en']) for (co
       if (embed) { if (i) { await p.click('[data-tour="next"]'); await settle(p); } await pause(p); }
       else await pick(card, p);
       await p.locator('#stage').scrollIntoViewIfNeeded(); await settle(p);
+      await pause(p);
       const s = await state(p), view = await stageView(p, '#stage', figure), overlaps = await labelOverlaps(p), strict = await strictLabels(p);
       checkPreset(s, card, `${tag}/${card}`);
       check(`${tag}/${card}: zero clipped labels or label/HUD overlaps`, view.layout.length === 0 && view.hud.length === 0 && overlaps.length === 0 && strict.bad.length === 0,

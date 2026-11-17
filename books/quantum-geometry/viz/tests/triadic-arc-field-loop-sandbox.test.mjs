@@ -505,12 +505,14 @@ for (const scheme of ['dark', 'light']) {
     if (embed) {
       await p.locator('#stage').scrollIntoViewIfNeeded(); await settle(p);
       check(`${tag}: first visibility starts playback`, await until(p, () => window.TRIAD_LOOP_DEBUG.state.playing));
+      if (!(await state(p)).playing) throw new Error(`${tag}: initial autoplay did not start`);
       await pause(p);
     }
     for (const [i, card] of Object.keys(CARDS).entries()) {
       if (embed) { if (i) { await p.click('[data-tour="next"]'); await settle(p); } await pause(p); }
       else await pick(card, p);
       await p.locator('#stage').scrollIntoViewIfNeeded(); await settle(p);
+      await pause(p);
       await waitPreset(p, card);
       checkPreset(await state(p), card, `${tag}/${card}`);
       const view = await stageView(p, '#stage', figure), overlaps = await labelOverlaps(p, '.stage .tag', 0);
