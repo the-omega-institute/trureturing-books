@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3",
-  "pinned_at": "2026-11-17T16:56:11Z",
+  "commit": "8b6f6b4d974a7e495d2bc1346093d416d794b6cc",
+  "pinned_at": "2026-11-17T18:15:08Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -757,6 +757,14 @@
       "line": 41,
       "signature": "noncomputable def silverSlope : Real"
     },
+    "D5/S1/Words/SubstitutionPrefixEnvelope.prefix_envelope": {
+      "module": "D5/S1/Words/SubstitutionPrefixEnvelope",
+      "name": "D5.S1.Words.SubstitutionPrefixEnvelope.prefix_envelope",
+      "kind": "theorem",
+      "statement_id": "sha256:924c2c0cc2beb5e6b3b55a92d3d1026a600ae3f99fe9814e5f943991e1f18643",
+      "line": 72,
+      "signature": "theorem prefix_envelope {α : Type*} (w : α → ℤ) (f : α → List α) (M : ℤ) (B : ℕ) (H : ℕ → ℤ) (hM : 0 ≤ M) (hw : ∀ a, |w a| ≤ M) (hf : ∀ a, (f a).length ≤ B) (hH : ∀ j, 0 ≤ H j) (hb : ∀ j a, |charge w (image f j a)| ≤ H j) : ∀ j a t, |charge w ((image f j a).take t)| ≤ M + (B : ℤ) * ∑ i ∈ Finset.range j, H i"
+    },
     "D5/S1/Words/TribonacciAlignedWindows.aligned_windows": {
       "module": "D5/S1/Words/TribonacciAlignedWindows",
       "name": "D5.S1.Words.TribonacciAlignedWindows.aligned_windows",
@@ -769,9 +777,17 @@
       "module": "D5/S1/Words/TribonacciPrefixRefutation",
       "name": "D5.S1.Words.TribonacciPrefixRefutation.result",
       "kind": "theorem",
-      "statement_id": "sha256:6c31f23e5cf0428d465913af0499bddbca7257a9b97e9f6b2b77fca5586949e5",
+      "statement_id": "sha256:fc522e5464c70a047b2f8ffda8f800f4882168a6fb3ab7b062a269ce9ee8c051",
       "line": 255,
       "signature": "theorem result : ¬ claim"
+    },
+    "D5/S1/Words/TribonacciUniformLogSquared.uniform_log_squared": {
+      "module": "D5/S1/Words/TribonacciUniformLogSquared",
+      "name": "D5.S1.Words.TribonacciUniformLogSquared.uniform_log_squared",
+      "kind": "theorem",
+      "statement_id": "sha256:f11c048d09045d9921a1dedb612046edd93de287e291bd20862b73855d983861",
+      "line": 147,
+      "signature": "theorem uniform_log_squared : ∃ C : ℝ, 0 < C ∧ ∀ s m : ℕ, |(signedWordSum (factor W s m) : ℝ)| ≤ C * (Real.log (m+2))^2"
     },
     "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds": {
       "module": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases",
@@ -3828,6 +3844,14 @@
       "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
       "line": 217,
       "signature": "theorem projection_probability_flow (H P : Matrix n n ℂ) (rho : DensityState n) (hH : H.IsHermitian) (hP : IsStarProjection P) : (∀ t : ℝ, (projectionProbability H rho P t : ℂ) = bornProbability (evolvedDensity H rho t) P) ∧ (∀ t : ℝ, HasDerivAt (projectionProbability H rho P) (Complex.re (Complex.I * Matrix.trace (evolvedDensity H rho t * (H * P - P * H)))) t ∧ ((Complex.I * Matrix.trace (evolvedDensity H rho t * (H * P - P * H))).re : ℂ) = Complex.I * Matrix.trace (evolvedDensity H rho t * (H * P - P * H))) ∧ (H * P - P * H = 0 → ∀ t : ℝ, projectionProbability H rho P t = projectionProbabili"
+    },
+    "D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.gap_tendsto_zero": {
+      "module": "D5/S3/Quantum/Dynamics/TribonacciOpenPathGap",
+      "name": "D5.S3.Quantum.Dynamics.TribonacciOpenPathGap.gap_tendsto_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:47423ebdd8156af8a02f379a4bb88701de4e21cba48fcc9edd4c1506485f477b",
+      "line": 380,
+      "signature": "theorem gap_tendsto_zero (rho : ℝ) (hr : 0 < rho) (hr1 : rho < 1) : Filter.Tendsto (gap rho) Filter.atTop (nhds 0)"
     },
     "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal": {
       "module": "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal",
