@@ -4,7 +4,7 @@
 
 在 [§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md#sec-ch39-self-halting-and-spectral-sorting) 中，我们看到受限观察者之所以既未陷入无限倒退的死锁（$\varepsilon_{\mathrm{self}} = 0$），也未沦为盲目翻转的热噪（$\varepsilon_{\mathrm{self}} = 1$），关键在于自指回环允许观察者在有限停机精度 $\varepsilon_{\mathrm{self}} > 0$ 处主动拍板，并将低于阈值的无穷细微模态正交折叠进 $90^\circ$ 盲区的时间长河。顺着这一结论继续向下追问，两道直抵相对论与量子引力核心的物理问题便迎面而来：**第一，是什么底层物理极限兜住了自指推理精度 $\varepsilon_{\mathrm{self}}$ 的非零下界，不让任何局部观察者在有限时间内滑向全知零误差？第二，为什么高速穿行于空间的飞船与驻留在致密大质量天体身旁的时钟，其固有时流速都会无可抗拒地变慢？**
 
-本节题记用一句高度凝练的硬件直觉，将这两道追问收束为同一个正交勾股账本（以下跨领域的统一算力诠释标定为本书的 **`MODEL`（模型诠释）**，底层零锥度规刚性、正交记录计数界、拉格朗日—格拉姆勾股恒等式与双曲保范律由下文 [@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 的五条 Lean 内核定理锚定，量子速度极限、全息熵界与广义相对论度规归入 [@rem-ch39-margolus-bekenstein-schwarzschild-literature] 的 `文献结果`，离散网络通往四维自旋-$2$ 引力张量动力学的未决桥梁显式链接 [@prob-ch34-gravity-dynamics-and-coupling] 的 `OPEN` 边界）：**全宇宙所有观察者共享完全一致的底层比较主频 $\nu_0 \equiv \mathrm{const}$（即恒定的单位基准节拍信息比较总速率）；相对论中的“光速极限 $c$”与“运动/引力时间膨胀”，本质上是同一份恒定主频预算在“跨节点空间寻址”、“高密度背景纠缠校验”与“内部自指停机推理”三项正交任务之间分账的必然结果。**
+本节题记用一句高度凝练的硬件直觉，将这两道追问收束为同一个正交勾股账本（以下跨领域的统一算力诠释标定为本书的 **`MODEL`（模型诠释）**，底层零锥度规刚性、正交记录计数界、拉格朗日—格拉姆勾股恒等式与双曲保范律由下文 [@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 的五条 Lean 内核定理锚定，量子速度极限、全息熵界与广义相对论度规归入 [@rem-ch39-margolus-bekenstein-schwarzschild-literature] 的 `文献结果`，离散网络通往四维自旋-$2$ 引力张量动力学的未决桥梁显式链接 [@prob-ch34-gravity-dynamics-and-coupling] 的 `OPEN` 边界）：**全宇宙所有观察者共享完全一致的底层比较主频 $\nu_0 \equiv \mathrm{const}$（即恒定的单位基准节拍信息比较总速率）；相对论中的“光速极限 $c$”与“运动/引力时间膨胀”，在本模型中读作同一份恒定主频预算在“跨节点空间寻址”、“高密度背景纠缠校验”与“内部自指停机推理”三项正交任务之间的分账。**
 
 传统通俗叙述常把强引力场中的钟慢想象成“时钟的物理齿轮在引力井里变黏滞了”；一旦切换到**等主频信息速率视角**（`MODEL`），因果脉络顿时清澈见底：**宇宙底层的比较主频 $\nu_0$ 在任何角落从未改变分毫；真正放缓的是观察者完成一轮自指精度校验的“固有时画面帧率 $d\tau/dt$”——在信息密度更高的区域，每一帧被迫顺带比对消解的背景极小圆弧纠缠更多，在总比较速率恒定的铁律下，留给推进自身固有时钟的结余带宽自然按勾股余弦比例回落。**
 
@@ -12,14 +12,14 @@
 
 在本节比较网络模型（`MODEL`）中，设宇宙底层是一座按统一基准节拍同步推进的局域比较晶格：任意观察者或局域元胞在单拍基准周期 $t_P = 1/\nu_0$ 内最多执行固定次数的初等两子比较（普适比较主频 $\nu_0$），每次跨元胞传递在空间格网上最多迈过一枚极小圆弧体的本征步幅 $\ell_P$。由此立即锁死两条相互咬合的因果边界：
 
-1. **光速 $c$ 即底层比较主频的“单拍空间步幅”（`MODEL` + `LEAN ✓`）**：
+1. **光速 $c$ 即底层比较主频的“单拍空间步幅”（`MODEL`）**：
    光速并不是某种特定电磁波碰巧跑出来的经验极速，而在模型定义上直接等于**底层比较总线的时钟主频 $\nu_0$ 与最小空间步幅 $\ell_P$ 的乘积**：
 
    $$
    c \;\equiv\; \ell_P \nu_0 \;=\; \frac{\ell_P}{t_P}.
    $$
 
-   任何因果信号要在空间中跨越距离 $L$，至少需要串行接力 $N_{\mathrm{hop}} = L / \ell_P$ 枚极小圆弧元胞，耗时至少 $N_{\mathrm{hop}} / \nu_0 = L / c$。超越光速意味着在单拍比较尚未走完时强行读取下游结果，直接违背因果偏序。更深刻的是，在形式数学地基上，下文 [@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 第 1 款（[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)，参见[第十七章 §17.3](ch17-lorentz-geometry.md#sec-lorentz-normalization) [@prop-null-cone-rigidity]）已在 Lean 内核中严格证明：在 $1 + d$ 维实时空 $\operatorname{Space}(d) = \mathbb{R} \times \operatorname{EuclideanSpace}\;\mathbb{R}\;(\operatorname{Fin}\,d)$ 上，只要这圈以极限步幅传播的光锥零线集 $\{\operatorname{minkowski}_d(t, w) = t^2 - \norm{w}^2 = 0\}$（物理单位制下 $c^2\Delta t^2 - \norm{\Delta\mathbf{x}}^2 = 0$）被给定，任何在该零锥上恒取零值的实二次型 $S$ 便没有任何独立变形余地，唯一被刚性锁定为 $S = S(1, 0)\cdot\operatorname{minkowski}_d$！
+   任何因果信号要在空间中跨越距离 $L$，至少需要串行接力 $N_{\mathrm{hop}} = L / \ell_P$ 枚极小圆弧元胞，耗时至少 $N_{\mathrm{hop}} / \nu_0 = L / c$。超越光速意味着在单拍比较尚未走完时强行读取下游结果，直接违背因果偏序。另一方面，在形式数学上，下文 [@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 第 1 款（[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)，参见[第十七章 §17.3](ch17-lorentz-geometry.md#sec-lorentz-normalization) [@prop-null-cone-rigidity]）在 Lean 内核中证明的是：在 $1 + d$ 维实时空 $\operatorname{Space}(d) = \mathbb{R} \times \operatorname{EuclideanSpace}\;\mathbb{R}\;(\operatorname{Fin}\,d)$ 上，若给定闵氏零锥 $\{\operatorname{minkowski}_d(t, w) = t^2 - \norm{w}^2 = 0\}$（物理单位制下 $c^2\Delta t^2 - \norm{\Delta\mathbf{x}}^2 = 0$），任何在该零锥上恒取零值的实二次型 $S$ 必为 $S = S(1, 0)\cdot\operatorname{minkowski}_d$。这条定理以零锥为前提，并不从晶格中产生零锥，也与 $c = \ell_P\nu_0$ 的晶格诠释无关；而且规则晶格上逐跳传播给出的是菱形（$L^1$）而非圆形的“光锥”，离散晶格如何恢复各向同性零锥（即避免洛伦兹破缺）仍是未解决的问题。
 
 2. **雷达往返视界 $R_{\max} = \frac{1}{2}c\Delta\tau$ 与有限节拍锁死的精度下界 $\varepsilon_{\mathrm{self}} \ge \frac{1}{N_{\mathrm{ticks}}}$（`MODEL` + `LEAN ✓` + `文献结果`）**：
    回想 [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 确立的吕德斯—玻恩往返双投影铁律：在砍掉外部第 3 点 $C$ 的自包含宇宙里，任何一次消除规范相位漂移的自洽观测或自指推理，都必须完成“去程投向目标、回程投回自身”的**雷达回波闭环** $P_{\mathrm{I}} P_\psi P_{\mathrm{I}} = \cos^2\theta\,P_{\mathrm{I}}$。设观察者必须在一段有限的固有时响应窗口 $\Delta\tau > 0$ 内拍板停机：
@@ -32,13 +32,13 @@
 
      因果球体以内的关联节点；球外广袤空间中的相位自由度根本来不及在停机时刻前传回第二趟投影回波！
 
-   - **有限节拍计数上界与停机容差下界（`LEAN ✓` + `文献结果` + `MODEL`）**：在同一窗口 $\Delta\tau$ 内，在能量尺度参数 $\mathrm{energy} > 0$ 的约束下，系统究竟最多能串行翻越多少道正交可区分的经典记录刻度？下文 [@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 第 2 款（[`record_time_lower_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound) 与 [`record_count_upper_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound)，参见[第七章 §7.2](ch07-geometric-time-and-speed-limits.md) [@thm-fubini-study-record-time]）在 Lean 内核中证明：每跨过一对正交目标记录 $\langle m_0(i), m_1(i)\rangle_{\mathbb{C}} = 0$ 所需的单步时长必满足 $\tau(i) \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$，故总时长 $\Delta\tau$ 内的串行正交记录步数严格受限于 $N \le \frac{4\cdot\mathrm{energy}\cdot\Delta\tau}{\pi\hbar}$（物理学文献中对应的曼德尔施塔姆—塔姆界 $\tau_\perp \ge \frac{\pi\hbar}{2\Delta H}$ 与马戈勒斯—莱维汀界 $\tau_\perp \ge \frac{\pi\hbar}{2\langle H\rangle}$ 见 [@rem-ch39-margolus-bekenstein-schwarzschild-literature] 第 1 条）。将这一有限正交翻墙计数放入我们的普适主频模型（`MODEL`）：在响应窗口 $\Delta\tau$ 内，底层主频至多供给
+   - **有限节拍计数上界与停机容差下界（`LEAN ✓` + `文献结果` + `MODEL`）**：在同一窗口 $\Delta\tau$ 内，在能量尺度参数 $\mathrm{energy} > 0$ 的约束下，系统究竟最多能串行翻越多少道正交可区分的经典记录刻度？下文 [@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 第 2 款（[`record_time_lower_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound) 与 [`record_count_upper_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound)，参见[第七章 §7.2](ch07-geometric-time-and-speed-limits.md) [@thm-fubini-study-record-time]）在 Lean 内核中证明：若初态到两条正交目标记录 $\langle m_0(i), m_1(i)\rangle_{\mathbb{C}} = 0$ 的富比尼—施图迪位移都不超过速率界 $\mathrm{energy}\cdot\tau(i)/\hbar$（这一速率界是物理输入，Lean 并未证明动力学速度极限，定理本身是球面三角不等式的推论），则单步时长必满足 $\tau(i) \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$，故总时长 $\Delta\tau$ 内的串行正交记录步数严格受限于 $N \le \frac{4\cdot\mathrm{energy}\cdot\Delta\tau}{\pi\hbar}$（物理学文献中对应的曼德尔施塔姆—塔姆界 $\tau_\perp \ge \frac{\pi\hbar}{2\Delta H}$ 与马戈勒斯—莱维汀界 $\tau_\perp \ge \frac{\pi\hbar}{2\langle H\rangle}$ 见 [@rem-ch39-margolus-bekenstein-schwarzschild-literature] 第 1 条）。下面的停机容差下界只属普适主频模型（`MODEL`），与上述记录时间界没有逻辑推导关系（$N_{\mathrm{ticks}}$ 中不含能量），只借用“有限窗口内可区分步数有限”这一图像：在响应窗口 $\Delta\tau$ 内，底层主频至多供给
 
      $$
      N_{\mathrm{ticks}} \;=\; \nu_0\,\Delta\tau \;=\; \frac{c\,\Delta\tau}{\ell_P}
      $$
 
-     次基础圆弧比较节拍，有限次离散节拍所能分辨的最细自指停机容差因而存在不可逾越的物理下界：
+     次基础圆弧比较节拍，本模型把有限次离散节拍所能分辨的最细自指停机容差取为下界：
 
      $$
      \varepsilon_{\mathrm{self}} \;\ge\; \varepsilon_{\mathrm{self,min}}(\Delta\tau) \;:=\; \frac{1}{N_{\mathrm{ticks}}} \;=\; \frac{\ell_P}{c\,\Delta\tau}.
@@ -59,10 +59,10 @@
 - **底层比较主频 $\nu_0$（硬件时钟主频）**：全宇宙处处恒定一致（$\nu_0 \equiv \mathrm{const}$），度量单位底层节拍内可执行的极小圆弧比较总次数；
 - **局域固有时流速 $d\tau/dt$（自指停机画面帧率）**：观察者每把自身内部状态收敛到给定停机精度 $\varepsilon_{\mathrm{self}}$ 一次，其固有时钟才算“走完一帧”。
 
-这恰似两台硬件主频完全相同（同为 $5.0\;\mathrm{GHz}$）的处理器：一台在空旷荒漠里渲染单颗光滑球体，每帧只需少量几何比对，每秒轻松输出数千帧；另一台在暴风雪中心渲染亿万颗相互碰撞的冰晶，为了达到**完全相同的画面收敛精度 $\varepsilon_{\mathrm{self}}$**，每帧不得不先消化海量环境交叉校验，画面输出帧率自然大幅下降——尽管两块芯片底层的晶振主频从头到尾一模一样！将这台恒定主频比较器放回勾股预算方程，两类相对论钟慢公式可按同一套正交分账次序导出：
+这恰似两台硬件主频完全相同（同为 $5.0\;\mathrm{GHz}$）的处理器：一台在空旷荒漠里渲染单颗光滑球体，每帧只需少量几何比对，每秒轻松输出数千帧；另一台在暴风雪中心渲染亿万颗相互碰撞的冰晶，为了达到**完全相同的画面收敛精度 $\varepsilon_{\mathrm{self}}$**，每帧不得不先消化海量环境交叉校验，画面输出帧率自然大幅下降——尽管两块芯片底层的晶振主频从头到尾一模一样！将这台恒定主频比较器放回勾股预算方程，两类相对论钟慢公式可按同一套正交分账次序改写。要注意，“预算按平方相加”是输入而非由排队图像导出：若像两块芯片那样按比较槽位线性分账，得到的是 $1 - \eta$ 一类的线性因子；平方律正是闵氏线元与史瓦西 lapse 本身的形状：
 
-1. **狭义相对论运动钟慢：跨节点空间寻址挤占自指停机带宽（`MODEL` + `手工推导` + `LEAN ✓`）**。
-   当观察者 $B$ 相对于远场静止参考系 $A$ 以速度 $v$（无量纲速度比 $\beta := v/c \in [0, 1]$）在空间格网中穿行时，每一单位坐标时间内都必须抽调一部分比较速率去执行跨元胞的**空间地址指针搬运** $\nu_{\mathrm{move}} = \nu_0(v/c) = \nu_0\beta$（记辅助运动偏折角满足 $\sin\theta_{\mathrm{kin}} := \beta = v/c$）。在正交分量平方守恒律（代数骨架由 [@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 第 3 款拉格朗日—格拉姆恒等式 [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity) 给出；而在快度 $r = \operatorname{artanh}\beta$ 的洛伦兹双曲助推下，时空线元 $c^2 dt^2 - d\mathbf{x}^2 = c^2 d\tau^2$ 的不变性由第 4 款 [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation) 的 $|\cosh r|^2 - |\sinh r|^2 = 1$ 严格锁定，注意如[第十七章 §17.1](ch17-lorentz-geometry.md) [@ex-rapidity-three-fifths] 所指明，$\sin\theta_{\mathrm{kin}} = \beta$ 是对有界速度 $|\beta| \le 1$ 的预算重参数化而非将双曲助推混同于欧氏旋转）约束下，总主频平方预算恒定：
+1. **狭义相对论运动钟慢：跨节点空间寻址挤占自指停机带宽（`MODEL` + `手工推导`）**。
+   当观察者 $B$ 相对于远场静止参考系 $A$ 以速度 $v$（无量纲速度比 $\beta := v/c \in [0, 1]$）在空间格网中穿行时，每一单位坐标时间内都必须抽调一部分比较速率去执行跨元胞的**空间地址指针搬运** $\nu_{\mathrm{move}} = \nu_0(v/c) = \nu_0\beta$（记辅助运动偏折角满足 $\sin\theta_{\mathrm{kin}} := \beta = v/c$）。在正交分量平方守恒律（这条平方预算 $\nu_{\mathrm{move}}^2 + \nu_{\mathrm{self}}^2 = \nu_0^2$ 就是线元 $c^2 dt^2 - d\mathbf{x}^2 = c^2 d\tau^2$ 除以 $dt^2$ 后的改写，即“时空中总速率恒为 $c$”的通俗图像，是输入而非导出；在快度 $r = \operatorname{artanh}\beta$ 的洛伦兹助推下，助推矩阵行列式为 $1$ 用到实恒等式 $|\cosh r|^2 - |\sinh r|^2 = 1$，即第 4 款 [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)，注意如[第十七章 §17.1](ch17-lorentz-geometry.md) [@ex-rapidity-three-fifths] 所指明，$\sin\theta_{\mathrm{kin}} = \beta$ 是对有界速度 $|\beta| \le 1$ 的预算重参数化而非将双曲助推混同于欧氏旋转）约束下，总主频平方预算恒定：
 
    $$
    \begin{aligned}
@@ -71,7 +71,7 @@
    \end{aligned}
    $$
 
-   取亚光速飞船基准 $\beta = 0.80$：空间寻址移位占去平方预算 $\beta^2 = 0.6400$（$64.0\%$），留给飞船内部自指停机回路的净余帧率恰好回落至 $d\tau/dt = \sqrt{1 - 0.6400} = 0.6000$，而外圈底层主频依然保持 $\nu_0 = 1.000$ 不变。在光速极限 $v = c$（$\beta = 1$，如光子沿非零类光零线 $c^2 dt^2 - d\mathbf{x}^2 = 0$ 传播）处，$100\%$ 的主频预算悉数投入前向空间寻址（$\nu_{\mathrm{move}} = \nu_0$），留给内部自指停机的结余速率严格归零（$\nu_{\mathrm{self}} = 0 \implies d\tau = 0$，且不存在属于光子的静止惯性系）——**光子之所以固有时恒为零、在自由传播中永不自发衰变，在比较主频图景下是因为它的主频队列被空间移位彻底占满，攒不出哪怕一帧内部自指停机的结余带宽！**
+   取亚光速飞船基准 $\beta = 0.80$：空间寻址移位占去平方预算 $\beta^2 = 0.6400$（$64.0\%$），留给飞船内部自指停机回路的净余帧率恰好回落至 $d\tau/dt = \sqrt{1 - 0.6400} = 0.6000$，而外圈底层主频依然保持 $\nu_0 = 1.000$ 不变。在光速极限 $v = c$（$\beta = 1$，如光子沿非零类光零线 $c^2 dt^2 - d\mathbf{x}^2 = 0$ 传播）处，$100\%$ 的主频预算悉数投入前向空间寻址（$\nu_{\mathrm{move}} = \nu_0$），留给内部自指停机的结余速率严格归零（$\nu_{\mathrm{self}} = 0 \implies d\tau = 0$，且不存在属于光子的静止惯性系）——**光子之所以固有时恒为零、在自由传播中永不自发衰变，在比较主频图景下读作它的主频队列被空间移位彻底占满，攒不出哪怕一帧内部自指停机的结余带宽！**（`MODEL`；标准物理中光子稳定的理由是不存在更轻的末态，并受规范对称约束。）
 
 ::: {.viz src="universal-clock-gravity-dilation-sandbox" preset="kinematic-address-split" height="500"}
 **狭义相对论空间寻址分账实验卡（`kinematic-address-split`）。** 并置远场静止观察者 $A$（$\beta = 0,\; d\tau/dt = 1.0000$）与倾轴端琥珀色速度手柄设在 $\beta = 0.80$ 的亚光速飞船 $B$：两枚观察者外圈的紫色底层主频飞轮始终以完全相同的 $\nu_0 = 1.000$ 同步旋转，但飞船 $B$ 有品红色的空间寻址负载 $\beta^2 = 64.0\%$ 分流预算，使其青色自指停机固有时帧率精确放缓至 $d\tau/dt = 0.6000$（经 $10$ 拍主频分别叠起 $10$ 枚与 $6$ 枚青色固有时帧圆币）。
@@ -86,25 +86,25 @@
    M_{\max}(r) \;=\; \frac{r c^2}{2G}.
    $$
 
-   据此，在本节的全息主频负载模型（`MODEL`）中，当球面内实际包含质量为 $M \le M_{\max}(r)$ 时，半径 $r$ 处局部观察者被迫承担的**引力信息密度负载率 $\eta_{\mathrm{info}}(r)$**（对应比较预算在背景纠缠方向上的玻恩平方占用份额 $\sin^2\theta_{\mathrm{grav}}(r)$），直接等于局部实际信息量 $\mathcal{I}_{\mathrm{local}}(r) \propto M$ 与球面信道饱和上限 $\mathcal{I}_{\max}(r) \propto M_{\max}(r)$ 的比值（`手工推导`）：
+   据此，在本节的全息主频负载模型（`MODEL`）中，当球面内实际包含质量为 $M \le M_{\max}(r)$ 时，半径 $r$ 处局部观察者被迫承担的**引力信息密度负载率 $\eta_{\mathrm{info}}(r)$**（对应比较预算在背景纠缠方向上的玻恩平方占用份额 $\sin^2\theta_{\mathrm{grav}}(r)$），在本模型中定义为局部质量 $M$ 与饱和质量 $M_{\max}(r)$ 之比（`MODEL` 标定，并非推导：$M_{\max}(r) = rc^2/2G$ 本身就是把 $r_s = r$ 反解，故这一比值按定义恒等于 $r_s/r$；这里的“信息量”只是质量的改名，实际物质的熵远低于贝肯斯坦界）：
 
    $$
    \eta_{\mathrm{info}}(r) \;\equiv\; \sin^2\theta_{\mathrm{grav}}(r) \;=\; \frac{\mathcal{I}_{\mathrm{local}}(r)}{\mathcal{I}_{\max}(r)} \;=\; \frac{M}{M_{\max}(r)} \;=\; \frac{2GM}{r c^2} \;=\; \frac{r_s}{r},
    $$
 
-   其中 $r_s := \frac{2GM}{c^2}$ 为史瓦西半径。由于总主频归一化预算恒等于 $1$（$\cos^2\theta_{\mathrm{grav}}(r) + \sin^2\theta_{\mathrm{grav}}(r) = 1$），扣除背景信息负载 $\eta_{\mathrm{info}}(r)$ 后，剩余可供局部观察者推进自身自指停机的平方带宽比例为 $\cos^2\theta_{\mathrm{grav}}(r) = 1 - \eta_{\mathrm{info}}(r)$；取算术平方根还原一阶时间流幅值。在上述标定下（负载率取 $M/M_{\max}(r)$，预算按平方分配；两者合起来就是输入面积半径坐标下的 $g_{00} = 1 - r_s/r$，`MODEL`），它在代数上重写为球外静态史瓦西度规的钟慢因子：
+   其中 $r_s := \frac{2GM}{c^2}$ 为史瓦西半径。由于总主频归一化预算恒等于 $1$（$\cos^2\theta_{\mathrm{grav}}(r) + \sin^2\theta_{\mathrm{grav}}(r) = 1$），扣除背景信息负载 $\eta_{\mathrm{info}}(r)$ 后，剩余可供局部观察者推进自身自指停机的平方带宽比例为 $\cos^2\theta_{\mathrm{grav}}(r) = 1 - \eta_{\mathrm{info}}(r)$；再取算术平方根作为时间流幅值。在上述标定下（负载率取 $M/M_{\max}(r)$，预算按平方分配；两者合起来就是输入面积半径坐标下的 $g_{00} = 1 - r_s/r$，`MODEL`），它在代数上重写为球外静态史瓦西度规的钟慢因子：
 
    $$
    \frac{d\tau}{dt} \;=\; \cos\theta_{\mathrm{grav}}(r) \;=\; \sqrt{1 - \eta_{\mathrm{info}}(r)} \;=\; \sqrt{1 - \frac{2GM}{r c^2}} \;=\; \sqrt{1 - \frac{r_s}{r}}.
    $$
 
-   例如在中子星表面典型强场半径 $r = 2.50\,r_s$ 处（静止悬停 $\beta = 0$），引力信息负载占去 $\eta_{\mathrm{info}} = 1/2.50 = 0.400$（$40.0\%$），结余平方带宽为 $0.600$，固有时帧率精确降为 $d\tau/dt = \sqrt{0.600} \approx 0.7746$。若该观察者在半径 $r$ 的局域静态正交标架下同时具有物理运动速度 $v_{\mathrm{loc}}$（$\beta_{\mathrm{loc}} := v_{\mathrm{loc}}/c$），引力背景分流与局域空间寻址作两级正交级联相乘，当场给出相对于远场史瓦西坐标时 $t$ 的完整双重复合钟慢因子（`手工推导`，且与史瓦西外部线元 $c^2 d\tau^2 = c^2(1-r_s/r)dt^2(1 - v_{\mathrm{loc}}^2/c^2)$ 严格恒等）：
+   例如在中子星表面典型强场半径 $r = 2.50\,r_s$ 处（静止悬停 $\beta = 0$），引力信息负载占去 $\eta_{\mathrm{info}} = 1/2.50 = 0.400$（$40.0\%$），结余平方带宽为 $0.600$，固有时帧率精确降为 $d\tau/dt = \sqrt{0.600} \approx 0.7746$。若该观察者在半径 $r$ 的局域静态正交标架下同时具有物理运动速度 $v_{\mathrm{loc}}$（$\beta_{\mathrm{loc}} := v_{\mathrm{loc}}/c$），引力背景分流与局域空间寻址作两级正交级联相乘，当场给出相对于远场史瓦西坐标时 $t$ 的完整双重复合钟慢因子（代数改写，与史瓦西外部线元 $c^2 d\tau^2 = c^2(1-r_s/r)dt^2(1 - v_{\mathrm{loc}}^2/c^2)$ 恒等）：
 
    $$
    \frac{d\tau}{dt} \;=\; \sqrt{\bigl(1 - \eta_{\mathrm{info}}(r)\bigr)\!\left(1 - \frac{v_{\mathrm{loc}}^2}{c^2}\right)} \;=\; \sqrt{\left(1 - \frac{2GM}{r c^2}\right)\!\left(1 - \frac{v_{\mathrm{loc}}^2}{c^2}\right)}.
    $$
 
-   **认识论与动力学诚实边界（衔接 [§34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition) 与 [@prob-ch34-gravity-dynamics-and-coupling]）**：必须坦诚指明，上述全息主频分账（`MODEL` + `手工推导`）在借用贝肯斯坦—史瓦西饱和标度 $M_{\max}(r) = rc^2/(2G)$ 后，精确复现了静态球对称外部度规的**时间流逝函数（lapse）** $\sqrt{\lvert g_{00}(r)\rvert} = \sqrt{1 - r_s/r}$；然而它本身并不自动导出径向空间曲率分量 $g_{rr}(r) = -(1 - r_s/r)^{-1}$（决定广义相对论光线偏折的二倍因子与夏皮罗雷达延迟），也不替代包含压强与剪切应力的完整相对论能动张量耦合及真空爱因斯坦场方程 $R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$（后者仍属 [@rem-ch39-margolus-bekenstein-schwarzschild-literature] 第 2 条的广义相对论 `文献结果`）。从离散比较复形出发不预设连续流形而严格导出 $3+1$ 维洛伦兹无质量自旋-$2$ 引力动力学与牛顿常数 $G$ 归一化，依然是全书正式立案的开放问题 [@prob-ch34-gravity-dynamics-and-coupling]（`OPEN`）。其他预算律如 $1 - \tfrac{\eta}{2}$、$e^{-\eta/2}$ 有相同的牛顿极限，二阶系数不同。
+   **认识论与动力学诚实边界（衔接 [§34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition) 与 [@prob-ch34-gravity-dynamics-and-coupling]）**：必须坦诚指明，上述全息主频分账（`MODEL` + `手工推导`）在借用贝肯斯坦—史瓦西饱和标度 $M_{\max}(r) = rc^2/(2G)$ 后，精确复现了静态球对称外部度规的**时间流逝函数（lapse）** $\sqrt{\lvert g_{00}(r)\rvert} = \sqrt{1 - r_s/r}$；然而它本身并不自动导出径向空间曲率分量 $g_{rr}(r) = -(1 - r_s/r)^{-1}$（决定广义相对论光线偏折的二倍因子与夏皮罗雷达延迟），也不替代包含压强与剪切应力的完整相对论能动张量耦合及爱因斯坦场方程 $R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$（后者仍属 [@rem-ch39-margolus-bekenstein-schwarzschild-literature] 第 2 条的广义相对论 `文献结果`）。从离散比较复形出发不预设连续流形而严格导出 $3+1$ 维洛伦兹无质量自旋-$2$ 引力动力学与牛顿常数 $G$ 归一化，依然是全书正式立案的开放问题 [@prob-ch34-gravity-dynamics-and-coupling]（`OPEN`）。其他预算律如 $1 - \tfrac{\eta}{2}$、$e^{-\eta/2}$ 有相同的牛顿极限，二阶系数不同；按槽位线性分账给出的 $1 - \eta$（如实验卡 $20$ 槽占 $8$ 槽读作 $0.60$）则连牛顿极限都差一倍，所以平方律是输入。还须指出：负载率 $\eta_{\mathrm{info}} = r_s/r \propto M/r$ 是引力势型的量而非密度（密度 $\propto M/r^3$），上式只对球外静态真空成立；在均匀星体内部按包围质量计算，中心处 $2GM(r)/(rc^2) \to 0$，本模型给出无钟慢，而广义相对论中星体中心的钟走得最慢，空心球壳内部同样有钟慢——题记所说的“信息密度”应按这一限定理解（`MODEL`）。
 
 ::: {.viz src="universal-clock-gravity-dilation-sandbox" preset="holographic-mass-load" height="500"}
 **全息质量信息负载与静态引力钟慢实验卡（`holographic-mass-load`）。** 对照深空零负载观察者 $A$（$\eta_{\mathrm{info}} = 0,\; d\tau/dt = 1.0000$）与琥珀色负载手柄设在致密中子星表面 $r = 2.50\,r_s$（$\eta_{\mathrm{info}} = r_s/r = 0.400,\; \beta = 0$）的观察者 $B$：紫色全息球壳与两枚同速紫色底层主频飞轮 $\nu_0 = 1.000$ 下，$8$ 道穿入 $B$ 比较窗（共 $20$ 槽）的品红背景纠缠弧占去 $40.0\%$ 预算，令 $B$ 的青色固有时帧率降至 $d\tau/dt = \sqrt{0.60} = 0.7746$（经 $10$ 拍主频叠起 $10$ 对 $7.75$ 枚青色帧圆币）。
@@ -114,14 +114,14 @@
 
 借助“普适恒定主频 $\nu_0$ $+$ 局域负载正交分流”的透镜重新审视引力物理的两大标志性现象，传统语言里看似费解的悖论立刻化作直白的带宽比例关系：
 
-1. **爱因斯坦局域等效原理的带宽根源：为什么身处引力井中的观察者察觉不到自身变慢？（`MODEL` + `手工推导` + `文献结果`）**
+1. **爱因斯坦局域等效原理的带宽读法：为什么身处引力井中的观察者察觉不到自身变慢？（`MODEL` + `手工推导` + `文献结果`）**
    设观察者 $B$ 位于引力负载 $\eta_{\mathrm{info}}(r)$ 且携带局域运动速度比 $\beta = v_{\mathrm{loc}}/c$ 的微小局域实验室内（空间尺度远小于潮汐黎曼曲率半径）。在 $B$ 体内与手头运行的一切物理及生理子时钟——大脑神经元突触放电的电位比量、手腕上铯-$133$ 原子钟的超精细跃迁振荡、细胞新陈代谢周期以及局域光尺往返校准——全部调用**同一份被背景与运动负载双重分流后的剩余帧率带宽**
 
    $$
    \nu_{\mathrm{eff}}(r, \beta) \;=\; \nu_0\sqrt{\bigl(1 - \eta_{\mathrm{info}}(r)\bigr)\bigl(1 - \beta^2\bigr)},
    $$
 
-   且遵循同一道自指停机精度标准 $\varepsilon_{\mathrm{self}}$！因此，对局域实验室内任意两台基准比较次数分别为 $N_1, N_2$ 的子时钟 $P_1, P_2$，公共慢化因子在两者的内部比值中严格对消（`手工推导`）：
+   且遵循同一道自指停机精度标准 $\varepsilon_{\mathrm{self}}$（这一前提本身就是局域位置不变性的模型化表述，下面的比值对消是它的直接改写，而非独立的解释）。因此，对局域实验室内任意两台基准比较次数分别为 $N_1, N_2$ 的子时钟 $P_1, P_2$，公共慢化因子在两者的内部比值中严格对消（`手工推导`）：
 
    $$
    \frac{\nu_{P_1}^{(B)}}{\nu_{P_2}^{(B)}} \;=\; \frac{\nu_{\mathrm{eff}}(r,\beta) / N_1}{\nu_{\mathrm{eff}}(r,\beta) / N_2} \;=\; \frac{N_2}{N_1} \;=\; \frac{\nu_{P_1}^{(A)}}{\nu_{P_2}^{(A)}}, \qquad \frac{\nu_{\mathrm{neural}}^{(B)} / \nu_{\mathrm{atomic}}^{(B)}}{\nu_{\mathrm{neural}}^{(A)} / \nu_{\mathrm{atomic}}^{(A)}} \;=\; 1.0000.
@@ -146,9 +146,9 @@
 **史瓦西视界静态极限 $r \to r_s$ 满载锁定实验卡（`horizon-saturation-lock`）。** 在静态观察者渐近极限 $r \to r_s$（视界本身不存在静态参考系）处将琥珀色全息负载手柄推至饱和端 $\eta_{\mathrm{info}} = 1.000$（$\beta = 0$）：外圈紫色底层主频飞轮 $\nu_0 = 1.000$ 全速运转不息，$20$ 道品红视界纠缠弧占满全部 $20$ 个比较窗槽（$100\%$ 负载），使相对于远场坐标时的青色固有时帧率归零为 $d\tau/dt = 0.0000$（经 $10$ 拍主频叠起 $10$ 对 $0$ 枚青色帧圆币）。
 :::
 
-现在，我们将支撑本节光锥度规刚性、正交记录计数速度界、欧氏正交勾股分账与洛伦兹双曲保范律的五条冻结 Lean 4 内核声明汇编为本节的形式化锚点定理：
+下面把本节用到的五条冻结 Lean 4 内核声明列在一起：零锥二次型刚性、条件式正交记录时长与计数界、拉格朗日—格拉姆恒等式与实恒等式 $\cosh^2 - \sinh^2 = 1$；它们彼此独立，各自只担保自己的陈述，不构成对本节主频模型的验证：
 
-::: {.theorem #thm-ch39-null-cone-speed-limit-and-pythagorean-budget title="零光锥度规刚性、富比尼—施图迪正交记录速度界与勾股—双曲预算守恒定理" lean="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null,D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound,D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound,D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity,D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"}
+::: {.theorem #thm-ch39-null-cone-speed-limit-and-pythagorean-budget title="零光锥二次型刚性、富比尼—施图迪正交记录时长界、拉格朗日—格拉姆恒等式与双曲余弦—正弦恒等式" lean="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null,D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound,D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound,D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity,D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"}
 在 `trureturing` 冻结的零锥刚性、量子速度界、拉格朗日—格拉姆恒等式与双曲保范模块中，以下四项结论同时成立：
 
 1. **闵可夫斯基零光锥二次型刚性**（[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)）：设 $d \in \mathbb{N}$ 为任意自然数，记 $\operatorname{Space}(d) = \mathbb{R} \times \operatorname{EuclideanSpace}\;\mathbb{R}\;(\operatorname{Fin}\,d)$ 及其标准闵可夫斯基二次型 $\operatorname{minkowski}_d(t, w) = t^2 - \norm{w}^2$。若实二次型 $S : \operatorname{QuadraticForm}\;\mathbb{R}\;(\operatorname{Space}(d))$ 对所有 $v \in \operatorname{Space}(d)$ 满足 $\operatorname{minkowski}_d(v) = 0 \implies S(v) = 0$，则作为 $\operatorname{Space}(d)$ 上的二次型恒有
@@ -209,7 +209,7 @@
 逐行复核上表读数：（1）亚光速飞船行 $\sqrt{1 - 0.80^2} = \sqrt{0.36} = 0.6000$，$\varepsilon_{\mathrm{eff}} = 1/(20 \times 0.6000) = 1/12 \approx 0.0833$；（2）中子星表面行 $\eta_{\mathrm{info}} = 1/2.50 = 0.400$，$\sqrt{1 - 0.400} = \sqrt{0.60} \approx 0.7746$，$\varepsilon_{\mathrm{eff}} = 1/(20\sqrt{0.60}) \approx 0.0645$；（3）双负载行总消耗平方份额 $1 - 0.64 \times 0.64 = 0.5904$（$59.04\%$），结余帧率 $\sqrt{0.64 \times 0.64} = 0.6400$，$\varepsilon_{\mathrm{eff}} = 1/12.80 \approx 0.0781$，且因神经、原子与光尺子钟同乘 $0.6400$，局域子钟内比恒等于 $1.0000$；（4）事件视界行 $\eta_{\mathrm{info}} = 1.000$，相对于远场坐标时的结余停机帧率精确归零为 $0.0000$。
 :::
 
-凝视下方完整实验室里左右两枚分毫不差、永远以 $\nu_0 = 1.000$ 同步飞驰的紫色底层主频飞轮，再对比它们旁侧一高一低叠起的青色固有时帧圆币柱，笼罩在相对论时间膨胀之上的那层玄学迷雾便悄然散尽（`MODEL`）：宇宙从未偏待过任何一片星域——无论在空旷清冷的星际荒原，还是在致密星体与黑洞视界沸腾的边缘，每一枚底层比较元胞都在每一拍诚实地吞吐着等量的比较操作；只因大质量凝聚之处汇聚了千丝万缕的极小圆弧纠缠，局域观察者为了守住自身那道清明的自指推理精度底线 $\varepsilon_{\mathrm{self}}$，不得不把宝贵的主频节拍分给身旁厚重的背景关系网。既然单枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 内部的 `1D / 2D / 3D` 自指旋转与多胞之间的主频负载分流已经同台显影，我们便水到渠成地步入下一节 [§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-unified-arc-forces-and-planck-convergence) 的万力合流高台——亲眼见证电磁、弱、强规范三力与胞间主频引力如何在同一枚极小圆弧体上各归其位，并沿着能标滑轨一路奔向普朗克单胞合流。
+凝视下方完整实验室里左右两枚分毫不差、永远以 $\nu_0 = 1.000$ 同步飞驰的紫色底层主频飞轮，再对比它们旁侧一高一低叠起的青色固有时帧圆币柱，笼罩在相对论时间膨胀之上的那层玄学迷雾便悄然散尽（`MODEL`）：宇宙从未偏待过任何一片星域——无论在空旷清冷的星际荒原，还是在致密星体与黑洞视界沸腾的边缘，每一枚底层比较元胞都在每一拍诚实地吞吐着等量的比较操作；只因大质量凝聚之处汇聚了千丝万缕的极小圆弧纠缠，局域观察者为了守住自身那道清明的自指推理精度底线 $\varepsilon_{\mathrm{self}}$，不得不把宝贵的主频节拍分给身旁厚重的背景关系网。既然单枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 内部的 `1D / 2D / 3D` 自指旋转与多胞之间的主频负载分流已经同台显影，我们便水到渠成地步入下一节 [§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-unified-arc-forces-and-planck-convergence) 的万力合流高台——亲眼见证电磁、弱、强规范三力与胞间主频引力如何在同一枚极小圆弧体上各归其位，并沿着能标滑轨一路比到普朗克能标。
 
 ::: {.viz src="universal-clock-gravity-dilation-sandbox" height="640"}
 **普适比较主频、推理精度光锥与引力信息密度钟慢完整实验室（`CLOCK//DILATION`）。** 集成 `light-cone-precision-floor`、`kinematic-address-split`、`holographic-mass-load`、`equivalence-dual-flywheel` 与 `horizon-saturation-lock` 五张递进实验卡并支持“比较主频读法／物理时空读法”双透镜切换：紫色标示全宇宙同速旋转的底层主频飞轮 $\nu_0 = 1.000$、零光锥与全息球壳，青色标示往返确认晶格点及剩余自指停机固有时帧率 $d\tau/dt$ 与帧圆币柱，品红标示锥外未达格点及空间寻址／背景纠缠负载，琥珀色标示当前交互手柄；右栏依据框严格区分绿色 `LEAN ✓`（[@thm-ch39-null-cone-speed-limit-and-pythagorean-budget]）、文献结果 `ARGUED`（[@rem-ch39-margolus-bekenstein-schwarzschild-literature]）、数值实算 `NUM`（[@ex-ch39-four-regime-clock-budget-calculus]）、比较主频诠释 `MODEL` 与红色开放问题 `OPEN`（[@prob-ch34-gravity-dynamics-and-coupling]）。
