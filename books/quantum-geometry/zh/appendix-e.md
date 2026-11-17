@@ -634,6 +634,24 @@ $$
 
 与 [@rem-appe-half-comparison-holonomy] 对照：$R_{a\to b}$ 是 $r_{ba}=r_{ab}^*$ 的像，所以定理第 2 条是注记中乘积的对合 $(r_{ab}\,r_{bc}\,r_{ca})^*=r_{ac}\,r_{cb}\,r_{ba}$，$D$ 前的符号随之由正变负；第 1 条就是注记末尾的恒等式。第 3 条给出第 2 条的操作读法：从 $a$ 的本征旋量出发，沿 $a\to b\to c\to a$ 做三次归一化投影，回到原旋量并乘上模为 $1$ 的因子 $(S-iD)/\sqrt{S^2+D^2}$。Lean 没有陈述的部分照旧分层：把辐角 $\operatorname{atan2}(D,S)$ 等同于半个吉拉尔角盈是文献结果；旋子的指数形式没有形式化；“最短”意义下的最小性与唯一性也没有形式化，Lean 模块里 `rotor` 与 `shortestGate` 只是名字。Lean 中 $N_r(\phi)$ 对一切 $\phi$ 有定义（分母为零时按 Lean 的约定取零向量）；定理只在各步分母 $\sqrt{(1+u\cdot v)/2}>0$ 处用到它。
 
+返回相位的虚部只在 $D\neq0$ 时出现。两两比较读得出 $D$ 是否为零，读不出它的符号：$D^2=1+2xyz-x^2-y^2-z^2$（$x=a\cdot b$，$y=b\cdot c$，$z=c\cdot a$，即 [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)）只给出它的平方。$D$ 是否为零恰好回答一个与 `H7` 相邻的问题：一族对象是否需要复数振幅。
+
+::: {.remark #rem-appe-real-realizability-return-phase title="一族对象何时可以只用实数描述：三点巴格曼乘积是否为实（手工推导与文献结果）"}
+**手工推导。** 设 $\psi_1,\dots,\psi_N\in\mathbb{C}^d$ 是单位向量，$G_{ij}=\langle\psi_i,\psi_j\rangle$。把 $G_{ij}\neq0$ 的点对连成图 $\Gamma$，称为**非正交图**。称这族对象**可实化**，若有实数 $\theta_1,\dots,\theta_N$ 使一切 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 都是实数。这时该实矩阵是 $e^{-i\theta_i}\psi_i$ 的格拉姆阵，实对称半正定，秩 $r=\operatorname{rank}G\le d$，可写成 $V^{\mathsf T}V$，$V$ 的列是 $\mathbb{R}^r\subseteq\mathbb{C}^d$ 中的实向量 $v_i$；两组向量的格拉姆阵相同，由冻结定理 [`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq)，有 $d\times d$ 酉矩阵 $U$ 使 $e^{-i\theta_i}\psi_i=Uv_i$。所以可实化就是：乘过相位之后，这族向量落在一个实子空间的酉像里，并且格拉姆阵到相位为止不变。对 $\Gamma$ 中的闭走道 $i_0,i_1,\dots,i_k=i_0$，称 $G_{i_0i_1}G_{i_1i_2}\cdots G_{i_{k-1}i_0}$ 为它的**巴格曼乘积**；它在 $\psi_i\mapsto e^{-i\theta_i}\psi_i$ 下不变。
+
+1. 可实化时，每个巴格曼乘积都是实数，特别是每个三点乘积 $G_{ij}G_{jk}G_{ki}$。
+2. 反之，若 $\Gamma$ 被三角形填满（[@rem-appe-triangle-simple-connectivity]；例如任意两个对象都不正交，或 $\Gamma$ 是弦图），并且 $\Gamma$ 的每个三角形上三点乘积都是实数，则这族对象可实化。
+3. 填满的条件不能去掉：$\mathbb{C}^3$ 中取 $\psi_1=e_1$，$\psi_2=\frac{1}{\sqrt3}(e_1+e_2+e_3)$，$\psi_3=e_2$，$\psi_4=\frac12\bigl(e_1+ie_2-(1+i)e_3\bigr)$。$\psi_1\perp\psi_3$，$\psi_2\perp\psi_4$，其余内积非零，$\Gamma$ 是没有三角形的四圈：第 2 款中“三角形上为实”的要求空真，而“被三角形填满”不成立。四圈的巴格曼乘积 $G_{12}G_{23}G_{34}G_{41}=\frac{1}{\sqrt3}\cdot\frac{1}{\sqrt3}\cdot\frac i2\cdot\frac12=\frac{i}{12}$ 不是实数，由第 1 款这族对象不可实化。
+4. 单比特：设 $\psi_a$ 的布洛赫向量为 $a$。可实化当且仅当全部布洛赫向量落在一个过球心的平面上，当且仅当每三个的有向体积 $D=a\cdot(b\times c)$ 都为零；这里不需要填满的条件，例如 $a,b,-a,-b$ 的非正交图是四圈，它们仍可实化。对两两不对径的 $a,b,c$，[@thm-appe-bloch-triangle-return-phase] 的返回相位 $(S-iD)/\sqrt{S^2+D^2}$ 不是实数当且仅当 $D\neq0$。
+5. 两两求同读数 $a\cdot b$、$b\cdot c$、$c\cdot a$ 只给出 $D^2$。复共轭 $\psi\mapsto\bar\psi$ 把布洛赫向量 $(r_x,r_y,r_z)$ 变为 $(r_x,-r_y,r_z)$：两两读数不变，$D$ 变号，返回相位取共轭。
+
+推导：第 1 款，巴格曼乘积不变，而在实矩阵 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 中算出的它是实数。第 2 款，在 $\Gamma$ 的边上令 $g(i,j)=\left(G_{ij}/\lvert G_{ij}\rvert\right)^2$，它只在 $G_{ij}\neq0$ 的边上定义，取值在单位圆群中。$G_{ji}=\overline{G_{ij}}$ 给出 $g(j,i)=g(i,j)^{-1}$。在三角形 $ijk$ 上，记 $B_{ijk}=G_{ij}G_{jk}G_{ki}\neq0$，则 $g(i,j)\,g(j,k)\,g(i,k)^{-1}=g(i,j)\,g(j,k)\,g(k,i)=\left(B_{ijk}/\lvert B_{ijk}\rvert\right)^2$，它等于 $1$ 当且仅当 $B_{ijk}$ 是实数（正负都可以）。所以三点乘积为实，正是 $g$ 在三角形上的链式律 $g(i,j)\,g(j,k)=g(i,k)$。由 [@rem-appe-triangle-simple-connectivity] 第 1 款（$\Gamma$ 是弦图时即 [@thm-appe-chordal-gain-potential]，群取单位圆群），有单位圆群中的 $\varphi_i$ 使 $g(i,j)=\varphi_i^{-1}\varphi_j$。取 $\theta_i$ 使 $e^{2i\theta_i}=\varphi_i$，则 $\left(e^{i\theta_i}G_{ij}e^{-i\theta_j}/\lvert G_{ij}\rvert\right)^2=\varphi_i\,g(i,j)\,\varphi_j^{-1}=1$，所以 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 是实数；不相邻的点对上 $G_{ij}=0$ 本来就是实数。第 3 款是直接计算。第 4 款：对秩一投影 $P_a=\lvert\psi_a\rangle\langle\psi_a\rvert=\frac12(\mathbf{1}+a\cdot\sigma)$ 有 $G_{ab}G_{bc}G_{ca}=\operatorname{Tr}(P_aP_bP_c)$，而冻结定理 [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch) 给出 $\operatorname{Tr}(P_aP_bP_c)=\frac14(S+iD)$，所以三点乘积为实当且仅当 $D=0$。若布洛赫向量都在一个过球心的平面上，用一个转动把这个平面转到 $xz$ 平面，转动由某个酉矩阵实现（$\mathrm{SU}(2)$ 到 $\mathrm{SO}(3)$ 是满射，`文献结果`）；$xz$ 平面上的单位向量 $(\sin\alpha,0,\cos\alpha)$ 的本征旋量是 $\left(\cos\frac\alpha2,\sin\frac\alpha2\right)$，是实向量，所以这族对象可实化。反之，可实化给出 $\mathbb{R}^r\subseteq\mathbb{C}^2$（$r\le2$）中的实向量 $v_i$ 与酉矩阵 $U$，实向量的布洛赫向量在 $xz$ 平面上，$U$ 把这个平面转成另一个过球心的平面。布洛赫向量共一个过球心的平面，当且仅当它们张成的空间至多二维，当且仅当任取三个的有向体积都为零。最后一句是 [@thm-appe-bloch-triangle-return-phase] 第 1、2 条：两两不对径时 $S^2+D^2>0$。第 5 款的 $D^2$ 公式见上文；复共轭的作用是直接计算（$\bar\sigma_y=-\sigma_y$）。
+
+**文献结果。** 第 1 款的方向（非实的巴格曼乘积说明这族对象不能都写成实向量）是 Fernandes、Wagner、Novo 与 Galvão (2024) 的虚性见证；他们还指出，两两重叠的测量足以为四个态的集合见证虚性，对三个态的集合则不能。这与第 4、5 款不矛盾：三个单位向量的两两重叠模长总能由 $\mathbb{R}^3$ 中的实向量实现（把格拉姆阵的三个非对角元都换成它们的模长，行列式不会变小），而第 4 款用到了单比特的维数，并且这里的可实化要求格拉姆阵到相位为止不变。第 2 款的论证与增益图的平衡判据同型：增益图平衡当且仅当增益可以切换为恒等（Zaslavsky 1989）。
+:::
+
+`H7` 在台账里列的“中心复结构”是复合系统层析的输入，这条注记回答的是一个相邻而更窄的问题：一族给定的对象，在保留格拉姆阵到相位为止的意义下，是否需要复数振幅。只要可比三角形填满每个圈，答案可以由三点巴格曼乘积判定，也就是比较值乘积的读数；两两重叠的模长一般不够。在单比特上，两两求同读数通过 $D^2$ 就够了：可实化当且仅当没有三个对象围出非零的有向体积；两两读数看不到的只是 $D$ 的符号，即复共轭交换的那一对手性。这并没有推出复结构。实向量构成的模型满足全部条款（E.8.7 的计数），所以“需要复数”仍是输入；改变的是这条输入的形状。第 3 款的四圈与 [@rem-appe-triangle-simple-connectivity] 中的四圈是同一个图：在一般维数中，这个图既让三角相容不足以推出势表示，也让三点读数不足以判定可实化；单比特上的 $a,b,-a,-b$ 说明，在维数受限时同一个图并不妨碍判定。
+
 ### E.8.5 玻恩权重：单比特上的缺口可以换成层析秩最小 {#sec-appe-born-minimal-rank}
 
 `H5` 的缺口在单比特上最宽。$d\ge3$ 时，对只依赖两两比较的有界规则，在每组正交归一基上归一加上 $f(1)=1$ 已经定出玻恩律；$d=2$ 时它只剩对径归一，[@ex-appe-qubit-cubic-and-tomography] 的三次函数满足它而不是玻恩律。下面把单比特上缺的那条输入换一种说法，它与 `H7` 用的是同一种计数。
@@ -826,6 +844,37 @@ $$
 
 与 [@rem-appe-gram-from-flatness] 第 3 款对照：那里由条款 IV 加正性条件推出 (b)。这里说，要推出 (b)，正性条件也可以换成两句只谈比较对象与读数的话：**每个对象都有一个对立者；从同一个系综独立抽两个对象，它们的平均求同读数不为负。** 这两句并不等价于正性条件。它们仍然容许 $s=\pm1$ 而 $A\neq0$ 的抛物点对：在 [@ex-appe-layer0-countermodels] 反例 (b) 的对偶数中取对象 $\pm1$、$\pm(1+\varepsilon)$，读数只取 $\pm1$，读数表半正定，(a) 成立，正性条件失败。但由第 2 款，这样的两个对象对一切求同读数不可分辨，它们的差别只在求异通道里。被排除的是双曲分支；在洛伦兹读法下（`MODEL`），把一个指向未来的单位类时向量与一个指向过去的混在一起，平均成了类空的，这就是上面的负读数。
 
+上面留下一个问题：能不能找一个也看得见求异通道的读数条件，把抛物点对也排除掉，从而由读数推出正性条件？在“读数由态给出”的前提下，答案是否定的。
+
+::: {.remark #rem-appe-positivity-invisible-part title="正性条件中态的读数都看不见的部分（手工推导与文献结果）"}
+**手工推导。** 设 $\mathcal{A}$ 是实或复的含幺 $*$-代数。称线性泛函 $\varphi$（复代数上为复线性）为**态**，若 $\varphi(\mathbf{1})=1$，对一切 $a$ 有 $\varphi(a^*a)\ge0$，并且 $\varphi(a^*)=\overline{\varphi(a)}$。复代数上最后一条由前两条推出，所以态就是 E.8.3 所用的归一正泛函。实代数上最后一条是额外的限制：它使态在一切满足 $a^*=-a$ 的元素上为零，所以实代数上的态读不到求异部分；E.8.3 只要求在自伴元上取实值，在实代数上这不构成限制。比较值及其对合的任意有限乘积在态下的值，称为一个**读数**；E.8.3 的求同读数与 E.8.9 的轨道记录都是读数（后者在复代数上，含求异读数 $i\operatorname{Im}f$），E.8.8 的系综读数是读数的平均。设 $\mathcal{A}$ 上至少有一个态，令
+
+$$
+\mathcal{R}=\left\{a\in\mathcal{A}:\ \varphi(a^*a)=0\ \text{对一切态}\ \varphi\right\}.
+$$
+
+1. 对 $r\in\mathcal{R}$、$y,z\in\mathcal{A}$ 与一切态 $\varphi$，$\varphi(yrz)=0$；$\mathcal{R}$ 是对 $*$ 封闭的双边理想。
+2. 若 $a^*a=-t\mathbf{1}$，$t\ge0$，则 $t=0$ 且 $a\in\mathcal{R}$。所以正性条件成立当且仅当 $\mathcal{A}$ 中没有非零的 $a$ 满足 $a^*a=0$，而这样的 $a$ 都在 $\mathcal{R}$ 中；在商代数 $\mathcal{A}/\mathcal{R}$ 上正性条件总成立。
+3. 若两个取值于 $\mathcal{A}$ 的比较映射逐点只差 $\mathcal{R}$ 中的元素，即 $\mathrm{CMP}'(x,y)-\mathrm{CMP}(x,y)\in\mathcal{R}$，则两者的一切读数相同。
+4. 存在取值于一个复 $*$-代数、满足条款 I–IV 的比较映射，正性条件在该代数（也在它的比较值生成的子代数）中失败，而它的一切读数与同一代数中一个克利福德比较映射的读数相同，后者的比较值生成的子代数满足正性条件。
+
+推导：态满足柯西—施瓦茨不等式 $\lvert\varphi(y^*x)\rvert^2\le\varphi(y^*y)\,\varphi(x^*x)$，这由 $\varphi\bigl((x+\lambda y)^*(x+\lambda y)\bigr)\ge0$ 对一切标量 $\lambda$ 成立并用 $\varphi(x^*y)=\overline{\varphi(y^*x)}$ 得到；推导不用任何范数或有界性。第 1 款：给定 $z$，$\chi(x)=\varphi(z^*xz)$ 满足 $\chi(x^*x)\ge0$ 与对合相容；$\chi(\mathbf{1})>0$ 时 $\chi/\chi(\mathbf{1})$ 是态，故 $\chi(r^*r)=0$；$\chi(\mathbf{1})=0$ 时柯西—施瓦茨给出 $\lvert\chi(x)\rvert^2\le\chi(\mathbf{1})\chi(x^*x)=0$。两种情形都有 $\varphi\bigl((rz)^*(rz)\bigr)=0$，即 $rz\in\mathcal{R}$。再由柯西—施瓦茨，$\lvert\varphi(y\,rz)\rvert^2\le\varphi(yy^*)\,\varphi\bigl((rz)^*(rz)\bigr)=0$。于是 $\varphi\bigl((r+r')^*(r+r')\bigr)=2\operatorname{Re}\varphi(r^*r')=0$，$\varphi\bigl((yr)^*(yr)\bigr)=\varphi\bigl((r^*y^*y)\,r\,\mathbf{1}\bigr)=0$，$\varphi(rr^*)=\varphi(\mathbf{1}\,r\,r^*)=0$：$\mathcal{R}$ 是子空间，对左右乘封闭，对 $*$ 封闭。第 2 款：取一个态，$-t=\varphi(a^*a)\ge0$，所以 $t=0$，$a^*a=0$，从而 $a\in\mathcal{R}$；在商代数中，若 $a^*a+t\mathbf{1}\in\mathcal{R}$，$t\ge0$，由第 1 款 $\varphi(a^*a)+t=0$，同样得 $t=0$ 与 $a\in\mathcal{R}$。第 3 款：把乘积中每个因子写成原因子加上 $\mathcal{R}$ 中的元素再展开（$\mathcal{R}$ 对 $*$ 封闭，对合的因子也一样），除原乘积外每一项都夹着一个 $\mathcal{R}$ 中的因子，由第 1 款读数为零。第 4 款：在 $\mathcal{Cl}_{3,0}$ 中取两两不平行的单位向量 $x_1,\dots,x_N$（$N\ge2$），$c_{ij}=x_ix_j$；对合取反转，以中心元 $\mathbf{I}=e_1e_2e_3$ 为虚数单位，$\mathcal{Cl}_{3,0}$ 就是泡利矩阵模型 $M_2(\mathbb{C})$，反转就是厄米共轭，正性条件成立。令 $\mathcal{A}'=\mathcal{Cl}_{3,0}[\delta]$，$\delta$ 与一切元素对易，$\delta^2=0$，$\delta^*=-\delta$，它仍是以 $\mathbf{I}$ 为虚数单位的复 $*$-代数，有态（例如 $x+y\delta\mapsto\frac12\operatorname{Tr}x$）。取互不相同的实数 $n_i$，令
+
+$$
+c'_{ij}=x_ix_j\bigl(\mathbf{1}+(n_j-n_i)\delta\bigr).
+$$
+
+由 $(\mathbf{1}+k\delta)(\mathbf{1}+k\delta)^*=\mathbf{1}-k^2\delta^2=\mathbf{1}$ 与 $\bigl(\mathbf{1}+(n_j-n_i)\delta\bigr)\bigl(\mathbf{1}+(n_k-n_j)\delta\bigr)=\mathbf{1}+(n_k-n_i)\delta$，条款 II–IV 成立；$c$ 的行互不相同，$c'$ 的行也互不相同，条款 I 的商不识别任何两点。$\delta^*\delta=0$，由第 2 款 $\delta\in\mathcal{R}$，所以 $c'-c$ 逐点在 $\mathcal{R}$ 中，由第 3 款两者在 $\mathcal{A}'$ 的一切态下的一切读数相同。但 $c'_{ij}+c'_{ji}-2(x_i\cdot x_j)\,c'_{ii}=2(n_j-n_i)\,\delta\,A(x_i,x_j)$ 属于 $c'$ 生成的代数；$i\neq j$ 时它不为零，它的 $a^*a$ 却为零，所以正性条件在这个代数中失败。
+
+态的前提不能省。把 $\mathcal{A}'$ 只当作实 $*$-代数时，$\varphi(x+y\delta)=\langle x\rangle_0+\kappa\langle y\rangle_0$（$\langle\cdot\rangle_0$ 为标量部分，$\kappa$ 为任意实数）在自伴元上取实值、归一且正（$\varphi\bigl((a+b\delta)^*(a+b\delta)\bigr)=\langle a^*a\rangle_0$），但不满足对合相容；它的读数区分两个比较映射：$\varphi(c'_{ij})-\varphi(c_{ij})=\kappa(n_j-n_i)\,(x_i\cdot x_j)$，虽然两者的求同读数仍然相同。
+
+$\mathcal{R}$ 正是一切态的 GNS 表示的核之交：$\pi_\varphi(a)=0$ 当且仅当 $\varphi(b^*a^*ab)=0$ 对一切 $b$ 成立，由第 1 款这对 $a\in\mathcal{R}$ 成立，反过来取 $b=\mathbf{1}$。
+
+**文献结果。** 一个 $*$-代数的约化理想定义为它的一切 $*$-表示的核之交，曾被称为 $*$-根（Palmer 1972）。那里的表示是希尔伯特空间上的有界算子表示，与这里由态得到的 GNS 表示不必相同，所以 $\mathcal{R}$ 只是与它同类的对象。
+:::
+
+所以，在读数由态给出、并且至少有一个态的前提下，正性条件等价于“没有非零的零平方元素”。前提本身已经排除了双曲分支，因为双曲比较的求异部分满足 $A^*A=(1-s^2)\mathbf{1}$，而 $s^2>1$ 时没有态能让它的读数非负。剩下的“没有非零的零平方元素”排除抛物分支，例如 [@ex-appe-layer0-countermodels] 反例 (b) 的对偶数 $1+\varepsilon$，其求异部分 $\varepsilon$ 满足 $\varepsilon^*\varepsilon=0$，落在 $\mathcal{R}$ 中。由第 3、4 款，这一部分不能由态的任何读数条件推出：无论读求同通道还是求异通道，读系综还是轨道记录，读多少个比较值的乘积，都一样。上面系综自洽留下的抛物点对，在态的读数下不只是对求同读数不可分辨，而是对一切读数不可分辨。反过来，若把条款 I 用在读数上（`MODEL`），即把一切读数都相同的元素视为同一个，也就是转到 $\mathcal{A}/\mathcal{R}$，正性条件就自动成立。所以在这个前提下，这部分输入不是读数能补上的缺口，它是关于读数之外的代数结构的约定。
+
 同一个“把比较用到系综上”的办法，也给单比特上的 `H5` 换一种说法。
 
 ::: {.remark #rem-appe-ensemble-extensionality-born title="系综外延性推出单比特玻恩律，不需要连续性（手工推导与文献结果）"}
@@ -906,7 +955,7 @@ E.8.6 的台账把哈密顿量 $H$ 记为仍需输入。这一条注记把这句
 | 条目 | 原处理 | E.8 中的处理 | 依据 |
 | :--- | :--- | :--- | :--- |
 | `H2` 正自配对 | 显式的第 1 层标定 | 由条款 IV 推出 | [@rem-appe-anchoring-consequences] 第 1 款 |
-| `H2` 椭圆负平方 | `T3` 分岔 | 求同读数为实标量时由正性条件推出；此时正性条件对每个比较的求异部分等价于它的整数次幂有界；非标量时不成立 | [@rem-appe-involution-positivity]、[@rem-appe-bounded-recurrence] |
+| `H2` 椭圆负平方 | `T3` 分岔 | 求同读数为实标量时由正性条件推出；此时正性条件对每个比较的求异部分等价于它的整数次幂有界；非标量时不成立；读数由态给出（实代数上要求态与对合相容）且至少有一个态时，正性条件等价于没有非零的零平方元素，这一部分（排除抛物分支）不能由态的任何读数条件推出 | [@rem-appe-involution-positivity]、[@rem-appe-bounded-recurrence]、[@rem-appe-positivity-invisible-part] |
 | `H2` 多点格拉姆半正定 | 显式的第 1 层条件 | 由条款 IV 加正泛函推出，逆向成立；标量相似时由条款 IV 加正性条件推出；标量相似且每个对象有对立者时，等价于每个系综与自身的平均求同读数不为负，没有对立者则不够；偏离平坦时有定量下界 | [@thm-appe-chordal-gain-potential]、[@rem-appe-gram-from-flatness]、[@rem-appe-ensemble-positivity]、[@rem-appe-near-flat-gram-bound] |
 | `H3` 平行四边形极化 | `T2` 条件 | 弦距来自正泛函的 GNS 内积，输入由“内积”换成“正读数”；完备化仍为 `T1` | [@rem-appe-gram-from-flatness] 第 2 款 |
 | `H4` 正交余项不竭 | `T2/T4` 输入 | 对一个时间齐次对象：采样读数表的秩等于采样所见的能级数，余项永不枯竭当且仅当所见能级无穷；有限个能级的轨道必定回来，有限时长内射线矢高始终高于阈值给出维数下界，此后始终离开零推出轨道空间无穷维；仍是输入 | [@thm-appe-prony-hankel-rank]、[@rem-appe-orbit-rank-and-recurrence] |
@@ -917,9 +966,9 @@ E.8.6 的台账把哈密顿量 $H$ 记为仍需输入。这一条注记把这句
 | `H6` 强连续 | `T2` 条件 | 时间齐次族上等价于矢高读数在零点连续；只要求可测不够；有限维中由此接上 [@thm-calibrated-unitary-group] | [@rem-appe-sagitta-continuity] |
 | `H6` 生成元 | `T4` 输入 $H$ | 弦率趋于 $-iH$，矢高率趋于 $H^2/2$，均有显式误差；有限步速度界；在轨道张成的空间上，两个通道的轨道记录决定 $H$ 到酉等价为止，只用求同读数或只用玻恩权重都不够（二能级与三能级反例）；轨道的选取与 $H$ 在轨道外的作用仍是输入 | [@rem-appe-generator-chord-sagitta]、[@rem-appe-orbit-record-channels] |
 | `H6` 吕德斯条件化 | `T2` 条件 | 吕德斯态是确定通过检验者中保真度最大者，且唯一；迹范数与迹为 $1$ 的希尔伯特—施密特距离不给出吕德斯态；所用读数仍是输入 | [@rem-appe-luders-nearest] |
-| `H7` 局域层析与交换统计 | `T2` + `T3` | 参数计数 $K_d(ab)-K_d(a)K_d(b)=\frac{d(2-d)}4a(a-1)b(b-1)$；交换是矢高取 $0$ 与 $2$ 的公平对合，条款 I 去掉标签而不选扇区；中心复结构与扇区选择仍是输入 | [@rem-appe-tomography-count]、[@rem-appe-swap-sagitta] |
+| `H7` 局域层析与交换统计 | `T2` + `T3` | 参数计数 $K_d(ab)-K_d(a)K_d(b)=\frac{d(2-d)}4a(a-1)b(b-1)$；交换是矢高取 $0$ 与 $2$ 的公平对合，条款 I 去掉标签而不选扇区；一族给定对象在保留格拉姆阵到相位为止的意义下是否需要复数振幅：可比三角形填满每个圈时，当且仅当某个三点巴格曼乘积不是实数，单比特上当且仅当布洛赫向量不共一个过球心的平面；中心复结构与扇区选择仍是输入 | [@rem-appe-tomography-count]、[@rem-appe-swap-sagitta]、[@rem-appe-real-realizability-return-phase] |
 
-新增的两条输入是条款 IV（[@def-appe-third-point-redundancy]）与正性条件（[@rem-appe-involution-positivity]）；求同读数不是实标量时，读数表的半正定另需一个正泛函。条款 IV 不必对一切三点成立：可比三角形填满每个圈就够了，而且对一切群而言这是恰好够的条件（[@rem-appe-triangle-simple-connectivity]）。条款 IV 排除一切全比较的和乐，它刻画的是第 1 层的平坦骨架；带真实曲率的第 2 层联络必须放弃它，那时 [@thm-appe-chordal-gain-potential-stability] 与 [@rem-appe-near-flat-gram-bound] 给出偏离的代价。
+新增的两条输入是条款 IV（[@def-appe-third-point-redundancy]）与正性条件（[@rem-appe-involution-positivity]）；读数由态给出且至少有一个态时，后者等价于没有非零的零平方元素，而这一部分对态的一切读数不可见（[@rem-appe-positivity-invisible-part]）；求同读数不是实标量时，读数表的半正定另需一个正泛函。条款 IV 不必对一切三点成立：可比三角形填满每个圈就够了，而且对一切群而言这是恰好够的条件（[@rem-appe-triangle-simple-connectivity]）。条款 IV 排除一切全比较的和乐，它刻画的是第 1 层的平坦骨架；带真实曲率的第 2 层联络必须放弃它，那时 [@thm-appe-chordal-gain-potential-stability] 与 [@rem-appe-near-flat-gram-bound] 给出偏离的代价。
 
 E.8.6 与 E.8.7 不增加新的条款：`H6` 的可逆与连续两项各有一个只谈对象与读数的充分条件（过去完备、矢高读数在零点连续），条件化换成一条最优化原理，`H7` 有了一行计数公式；这些条件仍是输入。
 
