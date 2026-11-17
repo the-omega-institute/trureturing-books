@@ -813,6 +813,30 @@
       "line": 23,
       "signature": "theorem golden_inverse_branch_positive_fixed_point_iff : ∀ x : ℝ, 0 < x → ((fun y : ℝ => 1 / (y + 1)) x = x ↔ x = Real.goldenRatio⁻¹)"
     },
+    "D5/S3/Analytic/Fourier/PositiveDefinite/Closure.cos": {
+      "module": "D5/S3/Analytic/Fourier/PositiveDefinite/Closure",
+      "name": "D5.S3.Analytic.Fourier.PositiveDefinite.Closure.cos",
+      "kind": "theorem",
+      "statement_id": "sha256:025fb59352444e3a6f3da2fa86b4371e27f0667d1ec5ac8a5623b3e79e9fd143",
+      "line": 76,
+      "signature": "theorem cos (s : ℝ) : PositiveDefinite (fun t => (Real.cos (s * t) : ℂ))"
+    },
+    "D5/S3/Analytic/Fourier/PositiveDefinite/Closure.exp": {
+      "module": "D5/S3/Analytic/Fourier/PositiveDefinite/Closure",
+      "name": "D5.S3.Analytic.Fourier.PositiveDefinite.Closure.exp",
+      "kind": "theorem",
+      "statement_id": "sha256:025fb59352444e3a6f3da2fa86b4371e27f0667d1ec5ac8a5623b3e79e9fd143",
+      "line": 102,
+      "signature": "theorem exp {f : ℝ → ℂ} (hf : PositiveDefinite f) : PositiveDefinite (fun t => Complex.exp (f t))"
+    },
+    "D5/S3/Analytic/Fourier/PositiveDefinite/Closure.smul": {
+      "module": "D5/S3/Analytic/Fourier/PositiveDefinite/Closure",
+      "name": "D5.S3.Analytic.Fourier.PositiveDefinite.Closure.smul",
+      "kind": "theorem",
+      "statement_id": "sha256:025fb59352444e3a6f3da2fa86b4371e27f0667d1ec5ac8a5623b3e79e9fd143",
+      "line": 24,
+      "signature": "theorem smul {f : ℝ → ℂ} (hf : PositiveDefinite f) {a : ℝ} (ha : 0 ≤ a) : PositiveDefinite (fun t => (a : ℂ) * f t)"
+    },
     "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_hankel_rank": {
       "module": "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction",
       "name": "D5.S3.Analytic.GoldenTomography.FinitePronyHankelReconstruction.prony_hankel_rank",
