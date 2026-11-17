@@ -1,6 +1,6 @@
 # 4.2 不用背 Kraus 算符看懂三种量子噪声 {#sec-ch04-2}
 
-看清了环境偏迹如何在上例中缩短局部布洛赫向量之后，传统量子信息教科书里常见噪声信道的算符和公式瞬间退去了神秘面纱。不用死记硬背任何抽象矩阵，本节剖析的几类典型单比特噪声（捏合投影、相位阻尼、振幅阻尼与去极化），在几何上都不过是**把单位布洛赫球往不同方向挤压或平移**！
+看清了环境偏迹如何在上例中缩短局部布洛赫向量之后，传统量子信息教科书里常见噪声信道的算符和公式瞬间退去了神秘面纱。不用死记硬背任何抽象矩阵，本节剖析的三类典型单比特噪声（相位阻尼及其极限捏合投影、振幅阻尼与去极化；速查表另列比特翻转作对照），在几何上都不过是**把单位布洛赫球往不同方向挤压或平移**！
 
 首先看最纯粹的横向去相干极限——**标准基捏合投影** $\mathcal{P}(\rho)$（Lean 模块 `QuantumChannels/Pinching` 中定义为 [`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)，保留对角元 $\rho_{00}, \rho_{11}$、抹零副对角元 $\rho_{01}, \rho_{10}$）。在矩阵希尔伯特—施密特内积（[`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner) $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$）下，捏合不是粗暴的涂改，而是一次精确的正交勾股投影：整颗布洛赫球被垂直压扁到南北极直径线段 $[-\vv{e}_3, +\vv{e}_3]$ 上，而被压掉的水平赤道质量恰好等于两个副对角相干元的模平方之和！
 
@@ -1147,7 +1147,7 @@ $$
 **缩小并往北漂。** 振幅阻尼每一步取 $\gamma = 0.3$：青色的球一边缩小一边往北极上漂，横向缩得比纵向慢；紫色的北极 $\lvert 0\rangle$ 不动，从南极出发的琥珀色 $\rho$ 一路爬向北极。
 :::
 
-有趣的是，在量子信息几何（Petz 单调黎曼度规族）中，当我们用对称对数导数度规（SLD，径向权重函数 $\varphi_{\mathrm{SLD}}(u) = 1$）与右对数导数度规（RLD，径向权重函数 $\varphi_{\mathrm{RLD}}(u) = \frac{1}{1 - u^2}$）分别衡量振幅阻尼下的横向相干收缩比 [`coherenceRatio`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.coherenceRatio) $\mathcal{R}_\varphi(\gamma, u) = (1 - \gamma)\frac{\varphi(u')}{\varphi(u)}$ 时，两把几何标尺在纯态北极边界 $u \to 1^-$ 处呈现出截然不同的端点极限行为！
+有趣的是，在量子信息几何（Petz 单调黎曼度规族）中，当我们用对称对数导数度规（SLD，径向权重函数 $\varphi_{\mathrm{SLD}}(u) = 1$）与右对数导数度规（RLD，径向权重函数 $\varphi_{\mathrm{RLD}}(u) = \frac{1}{1 - u^2}$）分别衡量振幅阻尼下的横向相干收缩比 [`coherenceRatio`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.coherenceRatio) $\mathcal{R}_\varphi(\gamma, u) = (1 - \gamma)\frac{\varphi(u')}{\varphi(u)}$ 时，两把几何标尺在纯态北极边界 $u \to 1^-$ 处呈现出截然不同的端点极限行为！（单调度规族见 D. Petz, *Monotone metrics on matrix spaces*, Linear Algebra Appl. **244**, 81–96, 1996；这两条权重函数与 SLD、RLD 度规的对应是文献结果，未在本书形式化，下面的 Lean 声明只涉及这两个实函数的比值。）
 
 ::: {.proposition #prop-amplitude-damping-contraction title="振幅阻尼轴向漂移下 SLD 与 RLD 相干收缩比的端点定理" lean="D5/S3/QuantumChannels/AmplitudeDampingContraction.amplitude_damping_sld_rld_endpoints"}
 设阻尼参数满足 $0 \le \gamma < 1$，记轴向阻尼映射为 $u'(\gamma, u) = (1 - \gamma)u + \gamma$，对径向轮廓函数 $\varphi : \mathbb{R} \to \mathbb{R}$ 记相干收缩比为 $\mathcal{R}_\varphi(\gamma, u) = (1 - \gamma)\varphi(u'(\gamma, u)) / \varphi(u)$。取 $\varphi_{\mathrm{SLD}}(u) = 1$ 与 $\varphi_{\mathrm{RLD}}(u) = \frac{1}{1 - u^2}$，则同时成立：
@@ -1336,7 +1336,7 @@ $$
 每一格都不超过第一行，与 [@prop-trace-distance-metric-contraction] 的结论 5 一致。振幅阻尼一行的第一个数另用 Kraus 算子直接作用于密度矩阵再求迹范数复算，同为 $0.4330$。注意振幅阻尼把整个球推向北极，球心并不固定，但任意两点之间的距离照样不增。
 :::
 
-所以“混合态是球肚子里截短的线”可以说成一条不依赖具体噪声模型的定理：信道可以平移、压扁、旋转这只球，唯独不能把其中任何两点拉开。可分辨性只会丢，不会凭空长出来。
+所以“混合态是球肚子里截短的线”这幅图景里，有一条不依赖具体噪声模型的定理：信道可以平移、压扁、旋转这只球，唯独不能把其中任何两点拉开。可分辨性只会丢，不会凭空长出来。
 
 ::: {.viz src="bloch-noise" preset="distance" height="500"}
 **两个态只会靠近。** 例中第一对态：北极的 $\rho$ 与 $+x$ 的 $\sigma$，振幅阻尼走一步（$\gamma = \frac{1}{2}$）。$\rho$ 不动，$\sigma$ 被拉向北方；白线标出的距离从虚线的 $0.707$ 缩到 $0.433$（[@prop-trace-distance-metric-contraction]）。
