@@ -287,6 +287,8 @@ $$
 
 E.7 的总表把 `H2` 记成并列的三项第 1 层条件：正自配对、秩 $2$ 双向量的椭圆负平方、多点格拉姆半正定；`H3` 再要求平行四边形极化。本节用[第 34 章 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 的弦—矢高分解重新过一遍这笔账，结论是这四项并不各自独立。在求同读数为实标量的情形，`H2` 的三项可以由两条更原始的条件推出：一条是**第三点冗余**（比较 $x$ 与 $z$ 不因取道第三点 $y$ 而改变），一条是**对合的正性**（非零差异的往返不为零也不为负）。`H3` 的极化一项由第三点冗余加一个正的读数给出。E.8.5 另外给单比特上的 `H5` 换了一种说法：只看两两比较的概率规则里，玻恩律是层析秩最小的那一个。E.8.6 与 E.8.7 用同一套记号检查 `H6` 与 `H7`：演化的可逆、时间连续、生成元与条件化，以及复合系统的参数计数与交换统计。这两小节不加新的条款，只把输入换成只谈比较对象与读数的形状，并用满足全部条款的模型标出边界。E.8.8 把比较用到系综上：每个对象都有对立者时，多点格拉姆半正定等价于“每个系综与自身的平均求同读数不为负”；单比特上的 `H5` 可以换成系综外延性，在 `MODEL` 读法下它是条款 I 用于系综。E.8.9 读一个对象沿时间的比较记录：读数表的秩数出能级，射线矢高始终离开零的对象说明态空间无穷维，这给 `H4` 一个读数判据但不推出它；两个通道合起来才定出轨道上的哈密顿量（`H6`）。
 
+E.8.10–E.8.12 处理台账上剩下的三项输入。E.8.10 把 E.8.1 的矢高表用到 $1+1$ 维观察者之间的比较上：舍去正性条件还选不出洛伦兹签名，还要“重复同一个比较不翻转时间次序”与“求异部分不是零平方”两条，而对同一个比较，正性条件与前一条不能同时成立。E.8.11 给保单位捏合的熵增写出精确恒等式与两侧界。E.8.12 说明二次作用量的有限步路径乘积精确等于驻相公式的主项；一般作用量只剩一维的显式抵消界，连续时间极限是文献结果或输入。
+
 先说清边界。这两条条件是加在 $\mathcal{A}_0$ 之外的，本节证明的是“若加入则推出”，不主张它们能从条款 I–III 推出；[@ex-appe-layer0-countermodels] 的反例恰好说明不能。本节的定理盒都对应冻结定理，其余推导标为 `手工推导`，引用的经典结论标为 `文献结果`。
 
 ### E.8.1 单对比较：弦与矢高在第 0 层已经锁死 {#sec-appe-chord-sagitta-layer0}
@@ -343,6 +345,8 @@ $$
 这两个分支本身并不是病态模型。把 $2\times2$ 复矩阵看成实代数，对合取经典伴随 $a^\sharp=\operatorname{tr}(a)\mathbf{1}-a$，则 $aa^\sharp=\det(a)\mathbf{1}$，满足 $uu^\sharp=\mathbf{1}$ 的元素恰是 $\mathrm{SL}(2,\mathbb{C})$；每个这样的 $u$ 的求同部分 $S=\frac12\operatorname{tr}(u)\mathbf{1}$ 自动是中心标量，矢高 $v=1-\frac12\operatorname{tr}u$ 是复数（`手工推导`）。按迹对莫比乌斯变换分类的经典结果（`文献结果`）翻译成矢高的语言是：$u\neq\pm\mathbf{1}$ 时，$v\in(0,2)$ 为椭圆类，$v\in\{0,2\}$ 为抛物类，$v$ 为其余实数时为双曲类，$v\notin\mathbb{R}$ 为斜驶类。反例 (b) 的生成元都住在这里：$\varepsilon\mapsto\begin{pmatrix}0&1\\0&0\end{pmatrix}$，$j\mapsto\operatorname{diag}(1,-1)$，椭圆生成元 $\mapsto\operatorname{diag}(i,-i)$，三者都满足 $g^\sharp=-g$，平方分别是 $0$、$+\mathbf{1}$、$-\mathbf{1}$。冻结定理 [`elliptic_hyperbolic_reflection_trichotomy`](lean:D5/S3/Analytic/ReflectedSpectrum/EllipticHyperbolicReflectionTrichotomy.elliptic_hyperbolic_reflection_trichotomy) 给出实 $2\times2$ 无迹生成元中双曲形 $\operatorname{diag}(\delta,-\delta)$ 与椭圆形 $\begin{pmatrix}0&-\gamma\\\gamma&0\end{pmatrix}$ 的迹、行列式与平方；它的中间情形是零矩阵，非零幂零的抛物生成元不在该定理之内。这个代数上没有满足 $\varphi(a^\sharp a)\ge0$ 的归一正泛函（$a=\operatorname{diag}(1,-1)$ 给出 $a^\sharp a=-\mathbf{1}$），所以 E.8.3 的读数论证不适用于它。
 
 $\mathrm{SL}(2,\mathbb{C})$ 经 $X\mapsto uXu^\dagger$ 作用在厄米矩阵 $X=t\mathbf{1}+\mathbf{x}\cdot\boldsymbol\sigma$ 上并保持 $\det X=t^2-\lvert\mathbf{x}\rvert^2$，这是洛伦兹群的旋量覆盖（`文献结果`）；E.6 已引用的 [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null) 说明零锥把二次型定到只差一个标量。若再要求对厄米共轭也公平（$uu^\dagger=\mathbf{1}$），剩下的就是 $\mathrm{SU}(2)$，只含椭圆类。由此得到 `H2` 与 `H8` 的一个统一读法（`MODEL`）：**第 0 层留出的抛物与双曲分支，就是洛伦兹变换里的零转动与推进；选椭圆签名与选洛伦兹签名，是同一个代数里对合正性的取与舍。**
+
+E.8.10 把这个读法算到底（[@rem-appe-rotor-boost-coexistence]）：取正性条件选出椭圆一行；仅仅舍去它并不选出洛伦兹签名，还要加上时间次序条件与“求异部分不是零平方”；对同一个比较 $u\neq\mathbf{1}$，正性条件与时间次序条件不能同时成立。所以“取与舍”指的是同一张三分表上为不同的比较选不同的行。
 
 正性条件用在单个比较的求异部分上，有一个只谈重复比较的等价说法。
 
@@ -947,10 +951,291 @@ $$
 
 E.8.6 的台账把哈密顿量 $H$ 记为仍需输入。这一条注记把这句话说得更准：**在轨道张成的空间上，$H$ 不是读数之外的另一个输入，两个通道的完整轨道记录决定它到酉等价为止。** 只读求同通道，丢掉的不止时间取向，连每个能级的符号都丢了；只读射线的玻恩权重，三能级就出现真正的歧义；求同读数与玻恩权重合起来，剩下的恰是求异通道的整体符号，也就是时间反演。条款 II 把比较拆成求同与求异两个通道，在动力学上两个通道都不可省。仍然是输入的，是选哪条轨道，以及 $H$ 在 $\mathcal{K}$ 之外怎样作用。
 
-### E.8.10 台账改了什么 {#sec-appe-reduced-ledger}
+### E.8.10 观察者之间的比较：时间次序选出双曲一行 {#sec-appe-observer-comparison}
+
+把比较的对象换成 $1+1$ 维中的惯性观察者，每个观察者有自己的坐标 $(t,x)$。对观察者 $o,o'$，令 $\Lambda_{o\leftarrow o'}$ 把一个事件在 $o'$ 中的坐标换成它在 $o$ 中的坐标，取 $\mathrm{CMP}(o,o')=\Lambda_{o\leftarrow o'}$，值域是 E.8.1 用过的实 $*$-代数 $(M_2(\mathbb{R}),{}^\sharp)$，$a^\sharp=\operatorname{tr}(a)\mathbf{1}-a$，$aa^\sharp=\det(a)\mathbf{1}$。坐标变换是线性的，这是这里的输入（`MODEL`）；[@rem-appe-causal-order-linearity] 说明在 $1+1$ 维中它不能由因果次序推出。
+
+条款 III 在这里就是 $\det\Lambda_{o\leftarrow o'}=1$，此时条款 II 只是说反向的变换是逆变换；求同部分 $S=\frac12\operatorname{tr}(\Lambda)\mathbf{1}$ 总是实标量，所以 E.8.1 的矢高表直接适用。记 $\Lambda_{o\leftarrow o'}=\begin{pmatrix}a&b\\c&d\end{pmatrix}$。$o'$ 的原点 $(\tau,0)$ 在 $o$ 中是 $(a\tau,c\tau)$，所以 $a\neq0$ 时 $o'$ 相对 $o$ 的速度读数是 $v(o,o')=c/a$；由逆矩阵，$d\neq0$ 时 $v(o',o)=-c/d$。
+
+::: {.remark #rem-appe-frame-change-family title="观察者比较的单参数族：K 的三种符号就是矢高表的三行（手工推导与文献结果）"}
+**手工推导。** 令 $V$ 为一切观察者对的速度读数所成的集合。设：
+
+1. 条款 III：对一切观察者对，$\det\Lambda_{o\leftarrow o'}=1$；
+2. 速度读数反对称：对一切观察者对，$a\neq0$ 且 $v(o',o)=-v(o,o')$；
+3. 同一条律：有映射 $L:V\to M_2(\mathbb{R})$，使对一切观察者对 $\Lambda_{o\leftarrow o'}=L(v(o,o'))$，并且 $v,v'\in V$ 时 $L(v)L(v')\in L(V)$；
+4. $V$ 含非零元。
+
+则 $0=v(o,o)\in V$，$L(0)=\mathbf{1}$，并且有常数 $K\in\mathbb{R}$，使对一切 $v\in V$
+
+$$
+L(v)=\gamma(v)\begin{pmatrix}1&Kv\\v&1\end{pmatrix},\qquad \gamma(v)^2\left(1-Kv^2\right)=1,
+$$
+
+$\gamma(v)$ 的符号不由这些假设确定。若 $L(v)L(v')=L(w)$，则 $1+Kvv'\neq0$，$w=\dfrac{v+v'}{1+Kvv'}$，$\gamma(w)=\gamma(v)\gamma(v')(1+Kvv')$。此外
+
+$$
+S=\gamma\,\mathbf{1},\qquad A=\gamma\begin{pmatrix}0&Kv\\v&0\end{pmatrix},\qquad A^2=\gamma^2Kv^2\,\mathbf{1}=(\gamma^2-1)\,\mathbf{1},
+$$
+
+矢高为 $1-\gamma$。所以 $v\neq0$ 时，$K<0$、$K=0$、$K>0$ 分别落在 E.8.1 表的椭圆、抛物、双曲三行。
+
+推导：取 $v\in V$，$v\neq0$，$L(v)=\begin{pmatrix}a&b\\c&d\end{pmatrix}$，$c=av\neq0$。$v$ 是某一对观察者的速度读数，第 2 条用于这一对给出 $c/a=c/d$，即 $a=d$；第 1 条给出 $a^2-bc=1$，即 $b=K(v)\,va$，其中 $K(v)=\dfrac{a^2-1}{a^2v^2}$，并且 $a^2(1-K(v)v^2)=1$。对 $v,v'\in V\setminus\{0\}$，由第 3 条 $L(v)L(v')=L(w)$，$w\in V$，它的两个对角元相等（$w\neq0$ 时由上一步，$w=0$ 时它是 $\mathbf{1}$）；而这两个对角元是 $\gamma(v)\gamma(v')(1+K(v)vv')$ 与 $\gamma(v)\gamma(v')(1+K(v')vv')$，所以 $K(v)=K(v')$。$L(w)$ 的对角元不为零，即 $1+Kvv'\neq0$；合成律是乘积第二行首元与第一行首元之比。
+
+各条假设与经典推导的对应：线性（齐性）是值域 $M_2(\mathbb{R})$；相对性原理是第 3 条，其中条款 IV 只给出 $\Lambda_{o\leftarrow o'}\Lambda_{o'\leftarrow o''}=\Lambda_{o\leftarrow o''}$，封闭性还要求从每个观察者出发都能取到 $V$ 中的每个速度；互易原理是第 2 条，它说速度是一个求异读数；“不伸缩”在经典推导中由互易与各向同性得到，这里由条款 III 直接给出，所以各向同性不再出现。
+
+**文献结果。** 不用光速、由相对性原理得到含一个常数 $K$ 的变换族：P. Frank 与 H. Rothe, *Ann. Phys.* **339**, 825–855 (1911)；J.-M. Lévy-Leblond, *Am. J. Phys.* **44**, 271–277 (1976)（时空均匀、各向同性、群结构与因果性四条假设只留下洛伦兹变换及其伽利略极限）；N. D. Mermin, *Am. J. Phys.* **52**, 119–124 (1984)。由相对性原理、时空均匀与空间各向同性推出互易：V. Berzi 与 V. Gorini, *J. Math. Phys.* **10**, 1518–1524 (1969)。
+:::
+
+$K$ 的符号还没有定。下一条注记回答：什么排除 $K<0$，什么区分 $K=0$ 与 $K>0$。
+
+::: {.remark #rem-appe-time-order-repetition title="重复同一个比较不翻转时间次序，当且仅当求同读数不小于 1（手工推导）"}
+**手工推导。** 设 $\mathcal{A}$ 是实 $*$-代数，$uu^*=u^*u=\mathbf{1}$，求同读数 $S=s\mathbf{1}$。
+
+1. 对一切 $n\ge0$，$S(u^n)=T_n(s)\,\mathbf{1}$。
+2. $T_n(s)>0$ 对一切 $n\ge1$ 成立，当且仅当 $s\ge1$。$-1<s<1$ 时令 $s=\cos\alpha$，$0<\alpha<\pi$，则使 $T_n(s)<0$ 的最小的 $n$ 是 $\lfloor\frac{\pi}{2\alpha}\rfloor+1$。
+3. 在 [@rem-appe-frame-change-family] 的族中，$v\neq0$ 时：$K>0$ 当且仅当 $L(v)$ 有两条不同的实不变直线，它们是 $x=\pm t/\sqrt{K}$，对一切 $v$ 相同；直线 $t=0$ 不变当且仅当 $K=0$；$A^2=0$ 当且仅当 $K=0$。
+
+推导：第 1 款，由 [@rem-appe-bounded-recurrence]，$u^n=T_n(s)\mathbf{1}+U_{n-1}(s)A$，$(u^n)^*=u^{-n}=T_n(s)\mathbf{1}-U_{n-1}(s)A$，取平均。第 2 款：$s=\cosh\eta\ge1$ 时 $T_n(s)=\cosh n\eta\ge1$；$s\le-1$ 时 $T_1(s)=s<0$；$-1<s<1$ 时 $T_n(s)=\cos n\alpha$，$n\le\frac{\pi}{2\alpha}$ 时它不为负，而 $n_0=\lfloor\frac{\pi}{2\alpha}\rfloor+1$ 满足 $\frac\pi2<n_0\alpha\le\frac\pi2+\alpha<\frac{3\pi}2$。第 3 款：$L(v)$ 的特征值是 $\gamma(1\pm\sqrt{K}\,v)$；$K>0$ 时特征向量为 $(1,\pm1/\sqrt{K})^{\mathsf T}$；$K<0$ 时特征值不是实数；$K=0$ 时 $L(v)=\gamma(\mathbf{1}+vN)$，$N=\begin{pmatrix}0&0\\1&0\end{pmatrix}$，$N^2=0$，唯一的实不变直线由 $(0,1)^{\mathsf T}$ 张成；一般地 $L(v)(0,1)^{\mathsf T}=\gamma(Kv,1)^{\mathsf T}$。
+
+在观察者模型中（读法为 `MODEL`），$S(\Lambda_{o\leftarrow o'})=a$ 是事件“$o'$ 的原点处 $o'$ 的时间走过一个单位”在 $o$ 中的时间坐标。称**时间次序条件**成立，若对每个比较 $u$ 与每个 $n\ge1$ 都有 $S(u^n)>0$：把同一个参考系变换连做 $n$ 次，原点处较晚的事件仍然较晚。由第 2 款，它等价于每个 $\gamma(v)\ge1$，即 $K\ge0$ 且一切 $\gamma(v)>0$。$K<0$、$\gamma(v)>0$ 时令 $\tan\alpha=\sqrt{-K}\,\lvert v\rvert$，$0<\alpha<\frac\pi2$：在坐标 $(t,\sqrt{-K}\,x)$ 中 $L(v)$ 是转角 $\alpha$ 的转动，$S(L(v)^n)=\cos n\alpha$，第一个负值出现在 $n=\lfloor\frac{\pi}{2\alpha}\rfloor+1$；若某个 $n$ 恰有 $n\alpha=\frac\pi2$，则 $S(L(v)^n)=0$，这一步的速度读数 $c/a$ 无定义，这就是合成律中 $1+Kvv'=0$ 的情形。
+
+由第 3 款，在时间次序条件下以下三者等价：$K>0$；有一个对一切观察者都相同的有限不变速度 $1/\sqrt{K}$；$v\neq0$ 时求异部分不是零平方。$K=0$ 是伽利略情形：同时性在比较下不变，求异部分 $\gamma vN$ 是零平方元素。
+:::
+
+所以时间次序条件排除椭圆一行（以及 $s\le-1$ 的比较），“求异部分不是零平方”再排除抛物一行，两条合起来选出 $s>1$ 的双曲一行。求异部分满足 $A^*=-A$，$A^2=0$ 即 $A^*A=0$，所以后一条是 [@rem-appe-positivity-invisible-part] 中“没有非零的 $a$ 满足 $a^*a=0$”在求异部分上的特例；$(M_2(\mathbb{R}),{}^\sharp)$ 上没有态（$a=\operatorname{diag}(1,-1)$ 给出 $a^\sharp a=-\mathbf{1}$），那里关于读数的结论在这里不适用。
+
+::: {.remark #rem-appe-rotor-boost-coexistence title="有界与保序两种选择互补：转动与推进住在同一个代数里（手工推导与文献结果）"}
+**手工推导。** 设 $u\neq\mathbf{1}$，$uu^*=u^*u=\mathbf{1}$，$S=s\mathbf{1}$。在 $\mathbb{R}[A]=\operatorname{span}\{\mathbf{1},A\}$ 上 $(x+yA)^*(x+yA)=\left(x^2-y^2(s^2-1)\right)\mathbf{1}$，由此并由 [@rem-appe-bounded-recurrence] 与 [@rem-appe-time-order-repetition]：
+
+| 行 | $s$ | 正性条件在 $\mathbb{R}[A]$ 上（等价于整数次幂有界） | 时间次序条件 | $A^2\neq0$ |
+| :--- | :--- | :---: | :---: | :---: |
+| 椭圆 | $-1<s<1$ | 成立 | 不成立 | 成立 |
+| 抛物 | $s=1$，$A\neq0$ | 不成立 | 成立 | 不成立 |
+| 抛物 | $s=-1$，$A\neq0$ | 不成立 | 不成立 | 不成立 |
+| $u=-\mathbf{1}$ | $s=-1$，$A=0$ | 成立 | 不成立 | — |
+| 双曲 | $s>1$ | 不成立 | 成立 | 成立 |
+| 双曲 | $s<-1$ | 不成立 | 不成立 | 成立 |
+
+所以 $u\neq\mathbf{1}$ 不能同时满足这两个条件；正性条件单独选出椭圆一行（外加 $-\mathbf{1}$）；时间次序条件加上 $A^2\neq0$ 选出 $s>1$ 的双曲一行。`H2` 与 `H8` 用的是同一张三分表，但为不同的比较选不同的行：方向与态之间的比较取有界的一行，观察者之间的比较取保序的一行。
+
+两者可以住在同一个代数里。
+
+1. 在 $\mathrm{Cl}(p,q)$ 中取正交归一的 $e_i$，$i\neq j$ 时 $(e_ie_j)^2=-e_i^2e_j^2$：$e_i^2$ 与 $e_j^2$ 同号时为 $-1$，异号时为 $+1$。以反转为对合，$B=e_ie_j$ 满足 $B^*B=-B^2$。所以正性条件在定号块内的坐标平面上成立，在混号平面上失败。签名 $(1,d)$ 中有 $\frac{d(d-1)}2$ 个空间坐标平面（转动，椭圆）与 $d$ 个时空坐标平面（推进，双曲）。
+2. 把 $M_2(\mathbb{C})$ 看作实 $*$-代数，对合取 E.8.1 的 $\sharp$，满足 $uu^\sharp=\mathbf{1}$ 的元素是 $\mathrm{SL}(2,\mathbb{C})$。在四元数子代数 $\operatorname{span}_{\mathbb{R}}\{\mathbf{1},i\sigma_1,i\sigma_2,i\sigma_3\}$ 上 $a^\sharp a=\lvert a\rvert^2\mathbf{1}$，正性条件成立；$\sigma_3^\sharp\sigma_3=-\mathbf{1}$，加入一个推进生成元它就失败。每个 $u\in\mathrm{SL}(2,\mathbb{C})$ 唯一地写成 $u=kb$，$k\in\mathrm{SU}(2)$，$\frac12\operatorname{tr}k\in[-1,1]$；$b$ 是行列式为 $1$ 的正定厄米矩阵，$\frac12\operatorname{tr}b\ge1$。转动因子重复不放大，推进因子重复不翻转时间次序。
+3. 只有一个时间方向。在 $\mathbb{R}^p\times\mathbb{R}^q$ 上取 $Q(a,b)=\lvert a\rvert^2-\lvert b\rvert^2$。开锥 $\{Q>0\}$ 经 $(a,(1-\lambda)b)$，$0\le\lambda\le1$，形变收缩到 $\mathbb{R}^p\setminus\{0\}$，所以 $p\ge2$ 时它连通，$p=1$ 时恰有两个分支，由 $w\mapsto-w$ 互换。时间次序条件要用的“未来与过去”只在 $p=1$ 时存在。$p\ge2$ 时，两个时间方向张成的平面是定号的，其中的转动是第 1 款的椭圆比较，重复它会把时间轴转到反向。
+
+零锥与二次型之间的一步由冻结命题 [@prop-null-cone-rigidity] 承担：如第 17 章在该命题之后所说，线性映射 $B$ 把零锥映入零锥时 $\operatorname{minkowski}_d(Bw)=\lambda\operatorname{minkowski}_d(w)$，$\lambda=\operatorname{minkowski}_d(Be_0)$，对任意 $d\in\mathbb{N}$ 成立。比较格拉姆矩阵的行列式得 $\det(B)^2=\lambda^{d+1}$。若 $\det B=\pm1$：$d\ge2$ 时 $\lambda<0$ 会改变签名，所以 $\lambda=1$；$d=1$ 时 $\lambda=-1$ 可以出现（转角 $90^\circ$ 的转动，$\det B=1$），它的求同读数为 $0$，被时间次序条件排除。这个命题不回答零锥为什么存在（那是 $K>0$），也不给出线性与时间取向。
+
+**文献结果。** 矩阵的极分解，以及 $\mathrm{SL}(2,\mathbb{C})$ 作为洛伦兹群的旋量覆盖。
+:::
+
+剩下的问题是线性。
+
+::: {.remark #rem-appe-causal-order-linearity title="1+1 维中因果次序推不出线性（手工推导与文献结果）"}
+**手工推导。** 在 $1+1$ 维中取零坐标 $p=t+x$，$q=t-x$。事件 $Y$ 在 $X$ 的闭未来锥中（$t_Y-t_X\ge\lvert x_Y-x_X\rvert$），当且仅当 $p_Y\ge p_X$ 且 $q_Y\ge q_X$。所以对任意两个严格递增的双射 $f,g:\mathbb{R}\to\mathbb{R}$，映射 $(p,q)\mapsto(f(p),g(q))$ 双向保持因果次序；它是仿射映射当且仅当 $f$ 与 $g$ 都是仿射的，例如 $f(s)=s+\frac12\sin s$ 与 $g(s)=s^3+s$ 都不是。所以在 $1+1$ 维中，[@rem-appe-frame-change-family] 的线性是输入。
+
+**文献结果。** E. C. Zeeman, *J. Math. Phys.* **5**, 490–493 (1964)：闵可夫斯基时空中保持因果偏序的自同构所成的群由非齐次洛伦兹群与伸缩生成。上面的例子说明这一结论在 $1+1$ 维中不成立；它在哪些维数成立，本书没有核对。
+:::
+
+### E.8.11 捏合的熵增：精确恒等式与两侧界 {#sec-appe-pinching-entropy}
+
+E.6 第 4 款用 [`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity) 说明，保单位的基底捏合使熵增等于一个相对熵，因而不为负。这里问它有多大。取 $\mathbb{C}^d$ 上两两正交、和为 $\mathbf{1}$ 的投影 $P_1,\dots,P_m$，令 $\mathcal{P}(\rho)=\sum_kP_k\rho P_k$，$X=\rho-\mathcal{P}(\rho)$，丢弃的相干质量 $c=\lVert X\rVert_2^2=\sum_{k\neq l}\lVert P_k\rho P_l\rVert_2^2$（$\lVert\cdot\rVert_2$ 为希尔伯特—施密特范数），熵增 $\Delta S=S(\mathcal{P}(\rho))-S(\rho)$，熵以自然对数计。单比特标准基上，对任意 $2\times2$ 复矩阵，希尔伯特—施密特勾股分解与 $c=\lvert\rho_{01}\rvert^2+\lvert\rho_{10}\rvert^2$ 已经冻结（[@thm-pinching-pythagorean]）。
+
+::: {.remark #rem-appe-pinching-exact-identities title="分块捏合的三条精确恒等式（手工推导与文献结果）"}
+**手工推导。** 对一切态 $\rho$ 与一切分块捏合：
+
+1. 纯度恰好降低丢弃的质量：$\operatorname{tr}\rho^2-\operatorname{tr}\mathcal{P}(\rho)^2=c$，并且 $\operatorname{tr}(\rho\,\mathcal{P}(\rho))=\operatorname{tr}\mathcal{P}(\rho)^2$。
+2. $\Delta S=D(\rho\Vert\mathcal{P}(\rho))$。
+3. 二阶雷尼熵 $S_2(\sigma)=-\log\operatorname{tr}\sigma^2$ 的增量是 $S_2(\mathcal{P}(\rho))-S_2(\rho)=-\log\left(1-\dfrac{c}{\operatorname{tr}\rho^2}\right)$。
+
+推导：第 1 款，$\mathcal{P}$ 幂等，并且对 $\langle A,B\rangle=\operatorname{tr}(A^*B)$ 自伴，所以 $\langle\mathcal{P}(\rho),X\rangle=\langle\mathcal{P}(\rho),\rho\rangle-\langle\mathcal{P}(\rho),\mathcal{P}(\rho)\rangle=0$，展开 $\langle\mathcal{P}(\rho)+X,\mathcal{P}(\rho)+X\rangle$ 即得；这是 [@thm-pinching-pythagorean] 在一般维数与一般分块下的形式。第 2 款：令 $U_j=\sum_ke^{2\pi ijk/m}P_k$，由单位根的正交性 $\mathcal{P}(\rho)=\frac1m\sum_{j=0}^{m-1}U_j\rho U_j^*\ge\frac1m\rho$，所以 $\rho$ 的支撑含于 $\mathcal{P}(\rho)$ 的支撑。$\log\mathcal{P}(\rho)$（在支撑上取）与 $\mathcal{P}(\rho)$ 一样是分块对角的，而对分块对角的 $B$ 有 $\operatorname{tr}(\rho B)=\operatorname{tr}(\mathcal{P}(\rho)B)$，于是 $-\operatorname{tr}\rho\log\mathcal{P}(\rho)=S(\mathcal{P}(\rho))$，代入 $D(\rho\Vert\sigma)=-S(\rho)-\operatorname{tr}\rho\log\sigma$。第 3 款由第 1 款直接得到。
+
+第 2 款对秩一基底捏合已经冻结：在 [`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity) 中取 $U=\mathbf{1}$，第 $0$ 步即是。该处的熵与相对熵用 Mathlib 的约定 $\log0=0$ 定义；由上面的支撑包含，这个约定在这里与通常的定义一致。
+
+**文献结果。** 基底捏合下 $\Delta S$ 是相干的相对熵度量：T. Baumgratz、M. Cramer 与 M. B. Plenio, *Phys. Rev. Lett.* **113**, 140401 (2014)。不等式 $\mathcal{P}(\rho)\ge\rho/m$ 称为捏合不等式：M. Hayashi, *J. Phys. A* **35**, 10759–10773 (2002)。
+:::
+
+纯度一侧是精确的：丢掉多少相干质量，纯度就降多少。熵一侧不是 $c$ 的函数，但被它从下面控制。
+
+::: {.remark #rem-appe-pinching-entropy-lower title="熵增不小于丢弃的相干质量；单比特上的精确范围（手工推导与文献结果）"}
+**手工推导。**
+
+1. 对一切态与一切分块捏合，
+
+$$
+\Delta S\ \ge\ \tfrac12\lVert\rho-\mathcal{P}(\rho)\rVert_1^2\ \ge\ c .
+$$
+
+$\Delta S\ge c$ 中的常数 $1$ 不能改大：单比特取 $z=0$ 的态，$r\to0$ 时 $\Delta S/c\to1$。
+2. 纯态：$\Delta S=H(p)\ge-\log(1-c)$，其中 $p_k=\operatorname{tr}(P_k\rho)$。这一条对混态不成立：单比特 $z=0$ 时 $\Delta S=\frac{r^2}2+\frac{r^4}{12}+O(r^6)$，而 $-\log(1-c)=\frac{r^2}2+\frac{r^4}8+O(r^6)$。
+3. 单比特，$\rho=\frac12(\mathbf{1}+\mathbf{r}\cdot\boldsymbol\sigma)$，$\mathbf{r}=(x,y,z)$，$r=\lvert\mathbf{r}\rvert\le1$，在 $\sigma_3$ 的本征基上捏合（$r=1$ 时积分是收敛的反常积分）：
+
+$$
+\Delta S=\int_{\lvert z\rvert}^{r}\operatorname{artanh}t\,dt,\qquad c=\frac{r^2-z^2}{2}=\int_{\lvert z\rvert}^{r}t\,dt,
+$$
+
+并且对每个 $c\in(0,\frac12]$，
+
+$$
+\ln2-h\left(\frac{1+\sqrt{2c}}{2}\right)\ \le\ \Delta S\ \le\ h\left(\frac{1+\sqrt{1-2c}}{2}\right),
+$$
+
+其中 $h(q)=-q\ln q-(1-q)\ln(1-q)$；下端由 $z=0$ 的态取到，上端由纯态取到。
+
+推导：第 1 款的第一个不等号是量子平斯克不等式（`文献结果`）加上 [@rem-appe-pinching-exact-identities] 第 2 款。第二个不等号：$X$ 厄米且迹为零，设其特征值为 $\lambda_i$，则正特征值之和与负特征值绝对值之和都等于 $\frac12\lVert X\rVert_1$，于是 $\sum\lambda_i^2\le\left(\sum_{\lambda_i>0}\lambda_i\right)^2+\left(\sum_{\lambda_i<0}\lvert\lambda_i\rvert\right)^2=\frac12\lVert X\rVert_1^2$，等号当且仅当 $X$ 至多有一个正特征值与一个负特征值。第 2 款：$\mathcal{P}(\lvert\psi\rangle\langle\psi\rvert)=\sum_kp_k\lvert\psi_k\rangle\langle\psi_k\rvert$，$\psi_k$ 两两正交，所以 $\Delta S=H(p)$，$c=1-\sum p_k^2$；再用 $H(p)\ge-\log\sum p_k^2$（詹森不等式）。第 3 款：令 $g(t)=h(\frac{1+t}2)$，则 $S(\rho)=g(r)$，$S(\mathcal{P}(\rho))=g(\lvert z\rvert)$，$g'(t)=-\operatorname{artanh}t$。固定 $c$，令 $F(z)=g(z)-g(\sqrt{z^2+2c})$，$0\le z\le\sqrt{1-2c}$，则 $F'(z)=z\left(\frac{\operatorname{artanh}r}{r}-\frac{\operatorname{artanh}z}{z}\right)\ge0$，因为 $t\mapsto\operatorname{artanh}t/t$ 递增；两端的值即上下界。
+
+**数值核验（`NUM`）。** $d=2,3,4,5$、随机分块、各种秩的 $6000$ 个随机态上（固定随机种子），第 1 款两个不等号都没有被违反，第二个不等号在部分情形下于舍入误差内取等；第 3 款闭式与数值积分的最大偏差为 $3\times10^{-14}$，两端在 $c=0.05,0.2,0.45$ 处取到。[第 37 章 §37.5.2](ch37-s05-future-selection-and-deja-vu.md#sec-ch37-p2g-dream-precompile) 的纯态例子（$\theta=\frac\pi6$，$c=\frac38$）落在上端：$\Delta S=h(\frac34)\approx0.5623$（即 $0.8113$ 比特）。
+
+**文献结果。** 量子平斯克不等式 $D(\rho\Vert\sigma)\ge\frac12\lVert\rho-\sigma\rVert_1^2$：F. Hiai、M. Ohya 与 M. Tsukada, *Pacific J. Math.* **96**, 99–109 (1981)。经典情形已冻结为 [`pinsker_inequality`](lean:D5/S3/TotalVariation/Pinsker.pinsker_inequality)。
+:::
+
+上界一侧，对秩一基底捏合有一条冻结命题。
+
+::: {.proposition #prop-appe-l1-coherence-bound title="相对熵相干不超过 ℓ1 相干" lean="D5/S3/Divergence/CoherenceL1RelativeEntropyBound.result"}
+设 $n\in\mathbb{N}$，$\rho$ 为半正定、迹为 $1$ 的 $n\times n$ 复矩阵。令 $S_{\mathrm{bit}}(\sigma)=-\operatorname{Re}\operatorname{tr}f(\sigma)$，其中 $f(x)=x\log_2x$，$f(0)=0$，$f(\sigma)$ 由连续函数演算给出。则
+
+$$
+S_{\mathrm{bit}}\left(\operatorname{diag}(\rho_{11},\dots,\rho_{nn})\right)-S_{\mathrm{bit}}(\rho)\ \le\ \sum_{i\neq j}\lvert\rho_{ij}\rvert .
+$$
+:::
+
+::: proof
+把基底捏合拆成 $n$ 步，第 $k$ 步对第 $k$ 个坐标投影 $P$ 与 $\mathbf{1}-P$ 作二元捏合。一次二元捏合是 $\sigma$ 与它的反射像 $R\sigma R$（$R=2P-\mathbf{1}$）的平均，所以这一步的熵增等于两者的量子詹森—香农散度；由冻结的二元霍列沃界，它不超过 $\frac12\lVert\sigma-R\sigma R\rVert_1=2\lVert P\sigma(\mathbf{1}-P)\rVert_1$。$P\sigma(\mathbf{1}-P)$ 的秩为一，它的迹范数是这一步删去的那段行向量的欧氏长度，不超过其中各元素的模之和；乘以 $2$ 即行与列合计。各步熵增伸缩求和成左端，右端合计不超过 $\sum_{i\neq j}\lvert\rho_{ij}\rvert$。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-appe-pinching-entropy-upper title="熵增的上界，以及它为什么不能线性于相干质量（手工推导与文献结果）"}
+**手工推导。**
+
+1. $\Delta S\le\log m$。
+2. $\Delta S\le T\log(d-1)+h(T)$，$T=\frac12\lVert X\rVert_1\le T':=\frac12\sqrt{\operatorname{rank}(X)\,c}$；$T'\le1-\frac1d$ 时可把 $T$ 换成 $T'$，因为 $T\mapsto T\log(d-1)+h(T)$ 在 $[0,1-\frac1d]$ 上递增。
+3. 秩一基底捏合（$m=d$）：由 [@prop-appe-l1-coherence-bound] 与柯西—施瓦茨不等式，$\dfrac{\Delta S}{\ln2}\le\sum_{i\neq j}\lvert\rho_{ij}\rvert\le\sqrt{d(d-1)\,c}$。
+4. 没有形如 $\Delta S\le Kc$ 的上界。纯态 $\psi=\sqrt{1-\epsilon}\,\lvert0\rangle+\sqrt\epsilon\,\lvert1\rangle$ 给出 $c=2\epsilon(1-\epsilon)$，$\Delta S=h(\epsilon)$；$\epsilon\to0$ 时 $\Delta S/c=\frac12\ln\frac2c+\frac12+o(1)\to\infty$。
+
+推导：第 1 款由 [@rem-appe-pinching-exact-identities] 第 2 款推导中的 $\mathcal{P}(\rho)=\frac1m\sum_jU_j\rho U_j^*$ 与 $S(\sum_jq_j\rho_j)\le\sum_jq_jS(\rho_j)+H(q)$（`文献结果`）得到。第 2 款是奥德纳特的连续性界（`文献结果`），加上 $\lVert X\rVert_1\le\sqrt{\operatorname{rank}X}\,\lVert X\rVert_2$。第 3 款把 $d(d-1)$ 个非对角元的模用柯西—施瓦茨不等式与其平方和 $c$ 比较。
+
+所以下界与 $c$ 同阶，已知的一般上界只有 $\sqrt{c}$ 的阶。单比特上 [@rem-appe-pinching-entropy-lower] 第 3 款给出精确的上端，它在 $c\to0$ 时是 $\frac c2\ln\frac2c+O(c)$；$d\ge3$ 时上界能否改成 $c\log\frac1c$ 的阶，本书没有处理。
+
+**文献结果。** K. M. R. Audenaert, *J. Phys. A* **40**, 8127–8136 (2007)；熵的凹性的上述反向不等式见 M. A. Nielsen 与 I. L. Chuang, *Quantum Computation and Quantum Information*（Cambridge, 2000）第 11 章。[@prop-appe-l1-coherence-bound] 的不等式由 S. Rana、P. Parashar 与 M. Lewenstein 作为猜想提出：*Phys. Rev. A* **93**, 012110 (2016)，猜想 7。
+:::
+
+所以 `H8` 中“保单位捏合使熵不减”一项，在有限维中有了定量形式：熵增不小于丢弃的相干质量 $c$，已知的一般上界是 $\sqrt{c}$ 的阶，纯度的降低恰好等于 $c$。仍是输入的，是“粗粒化是保单位的捏合”这一选择本身；E.6 第 4 款的主动重置反例说明它不能省。
+
+### E.8.12 有限步路径乘积：二次作用量的驻相是精确的 {#sec-appe-finite-step-path-product}
+
+E.6 第 3 款把 $\delta S=0$ 记成要经过连续泛函测度与 $\hbar\to0$ 才得到的条件结论。这一小节看在有限步数上能保住多少。取 $\hbar=m=1$，$H=\frac12p^2+\frac12\omega^2x^2$，$V=\frac12\omega^2x^2$，$\varepsilon=t/N$，单步取
+
+$$
+U_\varepsilon=e^{-i\varepsilon V/2}\,e^{-i\varepsilon p^2/2}\,e^{-i\varepsilon V/2},
+$$
+
+它的核是梯形规则的短时核 $(2\pi i\varepsilon)^{-1/2}\exp i\left[\frac{(x-y)^2}{2\varepsilon}-\frac{\varepsilon\omega^2}{4}(x^2+y^2)\right]$，$U_\varepsilon^N$ 就是 $N$ 步路径乘积。
+
+::: {.remark #rem-appe-oscillator-time-slicing title="谐振子的 N 步切片乘积，就是一个频率改过的谐振子（手工推导与文献结果）"}
+**手工推导。** 设 $0<\varepsilon\omega<2$。令
+
+$$
+\cos\theta=1-\frac{\varepsilon^2\omega^2}{2},\quad 0<\theta<\pi,\qquad \tilde\Omega=\omega\sqrt{1-\frac{\varepsilon^2\omega^2}{4}},\qquad \tilde H=\frac12p^2+\frac12\tilde\Omega^2x^2,
+$$
+
+于是 $\sin\theta=\varepsilon\tilde\Omega$。记 $\tilde\varphi_n$ 为频率 $\tilde\Omega$ 的厄米函数，$\tilde a=(\sqrt{\tilde\Omega}\,x+ip/\sqrt{\tilde\Omega})/\sqrt2$，$\tilde n=\tilde a^\dagger\tilde a$。
+
+1. 对一切 $n$，$U_\varepsilon\tilde\varphi_n=e^{-i\theta(n+\frac12)}\tilde\varphi_n$。所以在 $L^2(\mathbb{R})$ 上精确地有 $U_\varepsilon=\exp\left(-i\theta(\tilde n+\tfrac12)\right)=\exp\left(-i\frac{\theta}{\tilde\Omega}\tilde H\right)$。
+2. $\sin N\theta\neq0$ 时，$U_\varepsilon^N$ 的核是频率 $\tilde\Omega$、角度 $\Theta=N\theta$ 的梅勒核
+
+$$
+K_N(x,y)=\left(\frac{\tilde\Omega}{2\pi\lvert\sin\Theta\rvert}\right)^{1/2}e^{-i\pi/4-i\pi\nu/2}\exp\left(\frac{i\tilde\Omega}{2\sin\Theta}\left[(x^2+y^2)\cos\Theta-2xy\right]\right),\qquad \nu=\left\lfloor\frac{\Theta}{\pi}\right\rfloor .
+$$
+
+3. 离散作用量
+
+$$
+S_N=\sum_{k=0}^{N-1}\frac{(x_{k+1}-x_k)^2}{2\varepsilon}-\frac{\varepsilon\omega^2}{2}\sum_{k=1}^{N-1}x_k^2-\frac{\varepsilon\omega^2}{4}\left(x_0^2+x_N^2\right)
+$$
+
+在 $x_0=y$、$x_N=x$ 时有唯一驻点 $\bar x$：
+
+$$
+\delta S_N=0\iff \bar x_k-\frac{\bar x_{k+1}+\bar x_{k-1}}{2}=(1-\cos\theta)\,\bar x_k,\qquad \bar x_k=\frac{y\sin((N-k)\theta)+x\sin(k\theta)}{\sin N\theta}.
+$$
+
+$S_N$ 对 $x_1,\dots,x_{N-1}$ 的黑塞矩阵 $Q$ 满足 $\det Q=\varepsilon^{-(N-1)}\dfrac{\sin N\theta}{\sin\theta}$，负特征值个数为 $\nu$，并且
+
+$$
+K_N(x,y)=(2\pi\varepsilon)^{-N/2}e^{-i\pi N/4}\,(2\pi)^{(N-1)/2}\lvert\det Q\rvert^{-1/2}e^{i\pi\operatorname{sgn}Q/4}\,e^{iS_N(\bar x)} .
+$$
+
+右端正是驻相公式在驻点 $\bar x$ 处的主项，含前因子 $\lvert\det Q\rvert^{-1/2}$ 与马斯洛夫相位 $e^{-i\pi\nu/2}$。所以**在每个有限步数上，路径乘积精确等于驻相路径的贡献**，余项为零，不需要 $\hbar\to0$。离散的欧拉—拉格朗日方程说的是：每一步的矢高（中点偏离）等于 $1-\cos\theta=\frac{\varepsilon^2\omega^2}2$ 乘以位置。
+4. 与连续时间的差：
+
+$$
+\frac{(\omega t)^3}{24N^2}\le\Theta-\omega t\le\frac{(\omega t)^3}{24N^2\left(1-(\omega t/2N)^2\right)},\qquad \frac{(\omega t)^2}{8N^2}\le1-\frac{\tilde\Omega}{\omega}\le\frac{(\omega t)^2}{4N^2},
+$$
+
+并且对施瓦茨函数 $\varphi$，记 $\varphi_s=e^{-isH}\varphi$，
+
+$$
+\lVert U_\varepsilon^N\varphi-e^{-itH}\varphi\rVert\le(\Theta-\omega t)\,\lVert(\tilde n+\tfrac12)\varphi\rVert+t\left[\left(\frac{\omega}{\tilde\Omega}-1\right)\sup_{0\le s\le t}\tfrac12\lVert p^2\varphi_s\rVert+\omega(\omega-\tilde\Omega)\sup_{0\le s\le t}\tfrac12\lVert x^2\varphi_s\rVert\right],
+$$
+
+右端是 $O(N^{-2})$。
+
+推导：第 1 款。三个因子的海森伯作用分别是 $p\mapsto p-\frac{\varepsilon\omega^2}2x$、$x\mapsto x+\varepsilon p$、$p\mapsto p-\frac{\varepsilon\omega^2}2x$，合起来 $U_\varepsilon^*(x,p)^{\mathsf T}U_\varepsilon=M_\varepsilon(x,p)^{\mathsf T}$，
+
+$$
+M_\varepsilon=\begin{pmatrix}\cos\theta&\varepsilon\\-\varepsilon\tilde\Omega^2&\cos\theta\end{pmatrix}=\begin{pmatrix}\cos\theta&\sin\theta/\tilde\Omega\\-\tilde\Omega\sin\theta&\cos\theta\end{pmatrix},
+$$
+
+恰是 $\tilde H$ 在时间 $\theta/\tilde\Omega$ 上的流。于是 $U_\varepsilon^*\tilde aU_\varepsilon=e^{-i\theta}\tilde a$，$U_\varepsilon$ 把 $\ker\tilde a=\mathbb{C}\tilde\varphi_0$ 映到自身，并且 $U_\varepsilon\tilde\varphi_n$ 比 $U_\varepsilon\tilde\varphi_0$ 多一个因子 $e^{-in\theta}$。基态的相位：把 $e^{-zx^2/2}$（$\operatorname{Re}z>0$）记作 $z$，踢一下把 $z$ 变为 $z+\frac{i\varepsilon\omega^2}2$；自由一步把 $e^{-zx^2/2}$ 变为 $(1+i\varepsilon z)^{-1/2}e^{-\frac{z}{1+i\varepsilon z}x^2/2}$（主分支；高斯函数的傅里叶变换）。从 $z_0=\tilde\Omega$ 出发，$z_1=\tilde\Omega+\frac{i\varepsilon\omega^2}2$，$1+i\varepsilon z_1=\cos\theta+i\sin\theta=e^{i\theta}$；用 $\tilde\Omega^2=\omega^2-\frac{\varepsilon^2\omega^4}4$ 展开可得 $z_1=(\tilde\Omega-\frac{i\varepsilon\omega^2}2)e^{i\theta}$，所以自由一步后为 $\tilde\Omega-\frac{i\varepsilon\omega^2}2$，再踢一下回到 $\tilde\Omega$，总相位为 $e^{-i\theta/2}$。厄米函数完备，即得算子等式。第 2 款是梅勒公式（`文献结果`）用于 $\exp(-i\Theta(\tilde n+\frac12))$。第 3 款：驻点方程由 $\partial S_N/\partial x_k=0$ 直接得到；$Q=\frac1\varepsilon(2\cos\theta\,\mathbf{1}-J)$，$J$ 是路径图的邻接矩阵，特征值为 $2\cos\frac{j\pi}N$（$1\le j\le N-1$），由此得行列式与负特征值个数 $\#\{j:j\pi/N<\theta\}=\nu$。对 $x_1,\dots,x_{N-1}$ 作高斯—菲涅耳积分（按高斯正则化理解；`文献结果`：非退化实二次型的这个积分等于驻点处的值乘 $(2\pi)^{n/2}\lvert\det Q\rvert^{-1/2}e^{i\pi\operatorname{sgn}Q/4}$），并用 $(2\pi i\varepsilon)^{-1/2}=(2\pi\varepsilon)^{-1/2}e^{-i\pi/4}$。前因子的模是 $(2\pi)^{-1/2}\lvert\sin\theta/(\varepsilon\sin\Theta)\rvert^{1/2}=(\tilde\Omega/(2\pi\lvert\sin\Theta\rvert))^{1/2}$，相位是 $e^{-i\pi N/4}e^{i\pi(N-1-2\nu)/4}=e^{-i\pi/4-i\pi\nu/2}$；指数与第 2 款相同，因为两者都是同一个算子的核。第 4 款：$f(u)=\arcsin u-u$ 满足 $\frac{u^2}2\le f'(u)\le\frac{u^2}{2(1-u^2)}$，$\Theta-\omega t=2Nf(\frac{\omega t}{2N})$；$1-\sqrt{1-y}\in[\frac y2,y]$。态的估计：插入 $e^{-i\omega t(\tilde n+\frac12)}=e^{-i(\omega t/\tilde\Omega)\tilde H}$，第一段用谱定理与 $\lvert e^{-ia}-e^{-ib}\rvert\le\lvert a-b\rvert$，第二段用杜阿梅尔公式与 $\frac{\omega}{\tilde\Omega}\tilde H-H=\left(\frac{\omega}{\tilde\Omega}-1\right)\frac{p^2}2-\omega(\omega-\tilde\Omega)\frac{x^2}2$。
+
+**数值核验（`NUM`）。** 在 $4096$ 点网格上用快速傅里叶变换实现 $U_\varepsilon$：$\varepsilon\omega=0.3,1,1.9$ 时 $\lVert U_\varepsilon\tilde\varphi_n-e^{-i\theta(n+\frac12)}\tilde\varphi_n\rVert\le4\times10^{-15}$（$n<6$），而频率 $\omega$ 的基态不是本征向量（去掉最佳倍数后残差 $2.4\times10^{-3}$、$8.8\times10^{-2}$、$0.49$）；$U_\varepsilon^N$ 作用于高斯波包与第 2 款的核积分之差不超过 $6\times10^{-15}$，所测情形的 $\nu$ 从 $0$ 到 $19$；第 3 款的组装在随机点上与第 2 款一致到 $2\times10^{-13}$，负特征值计数全部吻合。$t=3$、中心在 $x=1$ 的相干态上 $N^2\lVert U_\varepsilon^N\varphi-e^{-itH}\varphi\rVert$ 在 $N=8$ 到 $128$ 之间稳定在 $1.51$，并且始终低于第 4 款的界（例如 $N=128$ 时 $9.2\times10^{-5}\le5.3\times10^{-4}$）。
+
+**文献结果。** 斯特默—韦尔莱积分子对线性振子的修正哈密顿量与稳定条件 $\varepsilon\omega<2$：E. Hairer、C. Lubich 与 G. Wanner, *Geometric Numerical Integration*, 2nd ed.（Springer, 2006）。时间切片谐振子与角度 $\theta$（$2\sin\frac\theta2=\varepsilon\omega$）：H. Kleinert, *Path Integrals in Quantum Mechanics, Statistics, Polymer Physics, and Financial Markets*, 5th ed.（World Scientific, 2009）；该书的切片约定未与这里的梯形约定逐项核对。元辛表示的背景：G. B. Folland, *Harmonic Analysis in Phase Space*（Princeton, 1989）。
+:::
+
+第 3 款里的 $1-\cos\theta$ 正是 E.8.1 的矢高，它也决定时间步能取多大。
+
+::: {.example #ex-appe-time-step-trichotomy title="时间步的矢高：椭圆、抛物、双曲三种切片（手工推导与数值核验）"}
+**手工推导。** 单步矩阵 $M_\varepsilon=\begin{pmatrix}1-\frac{\varepsilon^2\omega^2}2&\varepsilon\\-\varepsilon\omega^2\left(1-\frac{\varepsilon^2\omega^2}4\right)&1-\frac{\varepsilon^2\omega^2}2\end{pmatrix}$（对一切 $\varepsilon\omega>0$ 均有 $\det M_\varepsilon=1$）的求同读数是 $\frac12\operatorname{tr}M_\varepsilon=1-v$，矢高 $v=\frac{\varepsilon^2\omega^2}2$。按 E.8.1 的表：$0<\varepsilon\omega<2$ 时 $0<v<2$，椭圆，$M_\varepsilon^n$ 有界；$\varepsilon\omega=2$ 时 $v=2$，$M_\varepsilon=\begin{pmatrix}-1&\varepsilon\\0&-1\end{pmatrix}$，抛物，$M_\varepsilon^n=(-1)^n\begin{pmatrix}1&-n\varepsilon\\0&1\end{pmatrix}$ 线性增长；$\varepsilon\omega>2$ 时 $v>2$，双曲，指数增长。$U_\varepsilon$ 始终是幺正的；增长的是位置与动量的弥散，所以时间步须满足 $\varepsilon\omega<2$，切片乘积才保持它们有界。
+
+**数值核验（`NUM`）。** 取 $\omega=1$：$\varepsilon=1.9$ 时 $\lVert M_\varepsilon^n\rVert$ 在 $n=10,100,1000$ 处为 $1.10$、$2.26$、$1.95$；$\varepsilon=2$ 时为 $20.05$、$200$、$2000$；$\varepsilon=2.1$ 时为 $9.4\times10^2$、$3.9\times10^{27}$、$6.0\times10^{273}$。
+:::
+
+二次作用量之外，有限步上不再有这样的精确等式。剩下的是一维的抵消界：没有驻点的一段，无论多长，贡献都有界。
+
+::: {.remark #rem-appe-oscillatory-cancellation-bounds title="没有驻点的一段相互抵消：一维振荡积分与振荡和的显式界（手工推导与文献结果）"}
+**手工推导。** 设 $\lambda>0$。
+
+1. $\varphi\in C^2[a,b]$，$\varphi'$ 单调，$\lvert\varphi'\rvert\ge\mu>0$：$\left\lvert\int_a^be^{i\lambda\varphi(s)}ds\right\rvert\le\dfrac{3}{\lambda\mu}$。
+2. $\varphi\in C^2[a,b]$，$\lvert\varphi''\rvert\ge\mu>0$：$\left\lvert\int_a^be^{i\lambda\varphi(s)}ds\right\rvert\le\dfrac{4\sqrt3}{\sqrt{\lambda\mu}}$。
+3. $A<B$ 为整数，$f\in C^1[A,B]$，$f'$ 单调，且有整数 $m$ 与 $0<\delta\le\frac12$ 使 $m+\delta\le f'\le m+1-\delta$：$\left\lvert\sum_{n=A}^{B-1}e^{2\pi if(n)}\right\rvert\le\cot\dfrac{\pi\delta}{2}$，与项数无关。
+
+推导：第 1 款，分部积分 $\int e^{i\lambda\varphi}=\left[\frac{e^{i\lambda\varphi}}{i\lambda\varphi'}\right]_a^b-\int e^{i\lambda\varphi}\left(\frac{1}{i\lambda\varphi'}\right)'$，边界项不超过 $\frac2{\lambda\mu}$；由单调性，积分项不超过 $\frac1\lambda\left\lvert\frac1{\varphi'(b)}-\frac1{\varphi'(a)}\right\rvert\le\frac1{\lambda\mu}$。第 2 款：$\varphi'$ 严格单调，$\{\lvert\varphi'\rvert<\eta\}$ 是长度不超过 $\frac{2\eta}{\mu}$ 的区间，其余至多两个区间上 $\lvert\varphi'\rvert\ge\eta$，由第 1 款各不超过 $\frac3{\lambda\eta}$；总和 $\frac6{\lambda\eta}+\frac{2\eta}\mu$ 在 $\eta=\sqrt{3\mu/\lambda}$ 处最小。第 3 款：$g_n=f(n+1)-f(n)\in[m+\delta,m+1-\delta]$ 关于 $n$ 单调。令 $c_n=\left(e^{2\pi ig_n}-1\right)^{-1}=-\frac12-\frac i2\cot\pi g_n$，则 $e^{2\pi if(n)}=c_n\left(e^{2\pi if(n+1)}-e^{2\pi if(n)}\right)$。阿贝尔求和给出上界 $\lvert c_A\rvert+\lvert c_{B-1}\rvert+\sum_{n=A+1}^{B-1}\lvert c_n-c_{n-1}\rvert$；$\lvert c_n\rvert\le\frac1{2\sin\pi\delta}$，后一和由单调性伸缩为 $\frac12\lvert\cot\pi g_{B-1}-\cot\pi g_A\rvert\le\cot\pi\delta$；合计 $\frac{1+\cos\pi\delta}{\sin\pi\delta}=\cot\frac{\pi\delta}2$。
+
+这些都是一维的；$N$ 步乘积是 $N-1$ 维的积分，常数随维数的行为要另作估计。
+
+**数值核验（`NUM`）。** 随机相位与随机二次振荡和上，积分与第 1、2 款上界之比的最大值为 $0.57$ 与 $0.45$，和与第 3 款上界之比的最大值为 $0.97$。
+
+**文献结果。** 第 1、2 款是范德科尔普特引理，常数见 E. M. Stein, *Harmonic Analysis*（Princeton, 1993）第 8 章（那里第 $k$ 阶的常数为 $5\cdot2^{k-1}-2$；这里第 2 款的 $4\sqrt3<8$）。第 3 款是库斯明—朗道不等式：L. J. Mordell, *Acta Arith.* **4**, 3–9 (1958)；S. W. Graham 与 G. Kolesnik, *Van der Corput's Method of Exponential Sums*（Cambridge, 1991）。
+:::
+
+剩下的是连续时间极限。
+
+::: {.remark #rem-appe-path-integral-remaining-inputs title="连续时间极限还缺什么（文献结果，未在本书形式化；OPEN）"}
+**文献结果，未在本书形式化。**
+
+1. 固定 $\hbar$ 时，在算子层面不需要路径测度：若 $H_0=\frac12p^2$ 与 $V$ 使 $H_0+V$ 在 $D(H_0)\cap D(V)$ 上本质自伴，则 $\left(e^{-itV/N}e^{-itH_0/N}\right)^N\to e^{-itH}$（强收敛）。H. F. Trotter, *Proc. Amer. Math. Soc.* **10**, 545–551 (1959)；E. Nelson, *J. Math. Phys.* **5**, 332–343 (1964)。冻结的 [`trotter_product`](lean:D5/S3/Quantum/Analysis/TrotterProduct.trotter_product) 是巴拿赫代数中有界元的版本，不覆盖 $p^2$。
+2. 在路径空间上，不存在具有有界全变差的可数可加复测度来表示 $e^{iS}\mathcal{D}x$：R. H. Cameron, *J. Math. and Phys.* **39**, 126–140 (1960)。所以 E.6 与 E.7 中的“连续泛函测度”应读作“时间切片振荡积分的极限”，而不是这样一个测度。
+3. 对非二次的势：时间切片积分的收敛与基本解的构造，D. Fujiwara, *J. Analyse Math.* **35**, 41–96 (1979) 与 *Duke Math. J.* **47**, 559–600 (1980)；大维数空间上带余项估计的驻相法，D. Fujiwara, *Nagoya Math. J.* **124**, 61–97 (1991)；专著 *Rigorous Time Slicing Approach to Feynman Path Integrals*（Springer, 2017）。这些结果对势所加的条件本书没有逐项核对。
+
+所以 $\delta S=0$ 选路在有限步上只对二次作用量是精确的（[@rem-appe-oscillator-time-slicing]）；一般作用量只有关于 $\hbar$ 的渐近陈述，一维有 [@rem-appe-oscillatory-cancellation-bounds] 的显式界，多维依赖第 3 款的文献。
+
+**OPEN。** $3+1$ 维相互作用场论没有上述任何一条的对应定理；这一项仍按 E.7 的 `H9` 标为开放。
+:::
+
+### E.8.13 台账改了什么 {#sec-appe-reduced-ledger}
 
 ::: {.remark #rem-appe-reduced-ledger title="E.8 之后的台账（对 [@rem-appe-master-audit-table] 的补充）"}
-**补充审计（`MODEL` + `手工推导`，定理盒部分对应冻结定理）。** 下表只列发生变化的条目；`H1`、`H9` 的处理机制与 [@rem-appe-master-audit-table] 相同。
+**补充审计（`MODEL` + `手工推导`，定理盒部分对应冻结定理）。** 下表只列发生变化的条目；`H1` 的处理机制与 [@rem-appe-master-audit-table] 相同。
 
 | 条目 | 原处理 | E.8 中的处理 | 依据 |
 | :--- | :--- | :--- | :--- |
@@ -960,19 +1245,23 @@ E.8.6 的台账把哈密顿量 $H$ 记为仍需输入。这一条注记把这句
 | `H3` 平行四边形极化 | `T2` 条件 | 弦距来自正泛函的 GNS 内积，输入由“内积”换成“正读数”；完备化仍为 `T1` | [@rem-appe-gram-from-flatness] 第 2 款 |
 | `H4` 正交余项不竭 | `T2/T4` 输入 | 对一个时间齐次对象：采样读数表的秩等于采样所见的能级数，余项永不枯竭当且仅当所见能级无穷；有限个能级的轨道必定回来，有限时长内射线矢高始终高于阈值给出维数下界，此后始终离开零推出轨道空间无穷维；仍是输入 | [@thm-appe-prony-hankel-rank]、[@rem-appe-orbit-rank-and-recurrence] |
 | `H5` 玻恩权重 | `T2` 可加性条件 | 只对只依赖两两比较的规则：$d\ge3$ 时有界、在每组正交归一基上归一且 $f(1)=1$ 就定出玻恩律；$d=2$ 时对连续规则，全效应可加性可以换成“对径归一、$f(1)=1$、层析秩最小”，也可以不要连续性而换成系综外延性（`MODEL` 下读作条款 I 用于系综）；仍是 `T2` 输入 | [@rem-appe-born-zonal-minimal-rank]、[@rem-appe-ensemble-extensionality-born] |
-| `H8` 洛伦兹签名 | `T3` 分岔 | 可与 `H2` 的签名分岔读作同一处取舍（`MODEL`） | E.8.1 末段 |
+| `H8` 洛伦兹签名 | `T3` 分岔 | 与 `H2` 用同一张三分表，但为观察者之间的比较选另一行：在 $1+1$ 维观察者模型中（坐标变换的线性是输入），条款 III、速度读数反对称与同一条律给出含一个常数 $K$ 的族，$K$ 的符号就是矢高表的行；时间次序条件（重复同一个比较不翻转时间次序）排除椭圆行，“求异部分不是零平方”再排除抛物行；对同一个比较，正性条件与时间次序条件不能同时成立；零锥到二次型的一步由冻结命题承担 | [@rem-appe-frame-change-family]、[@rem-appe-time-order-repetition]、[@rem-appe-rotor-boost-coexistence]、[@rem-appe-causal-order-linearity]、[@prop-null-cone-rigidity] |
 | `H8` 第 1 层射影和乐 | 第 1 层内生 | 在 $\mathcal{Cl}_{3,0}$ 中由半比较的三点和乐给出闭式；其泡利矩阵模型中的乘积公式与返回相位已冻结 | [@rem-appe-half-comparison-holonomy]、[@thm-appe-bloch-triangle-return-phase] |
+| `H8` 保单位捏合熵增 | `T2` 条件 | 纯度恰好降低丢弃的相干质量 $c$；熵增等于相对熵，且 $\Delta S\ge\frac12\lVert\rho-\mathcal{P}(\rho)\rVert_1^2\ge c$；单比特上固定 $c$ 时 $\Delta S$ 的精确范围；已知的一般上界是 $\sqrt{c}$ 的阶（秩一基底捏合的 $\ell_1$ 界已冻结），不存在线性于 $c$ 的上界；“粗粒化是保单位的捏合”仍是输入 | [@rem-appe-pinching-exact-identities]、[@rem-appe-pinching-entropy-lower]、[@prop-appe-l1-coherence-bound]、[@rem-appe-pinching-entropy-upper] |
 | `H6` 双侧可逆 | `T2` 条件 | 单侧公平的亏损是投影，单侧移位作为比较值违反条款 III；但它可作为满足条款 I–IV 与正性条件的模型中的诱导演化出现，代数带忠实迹也不排除；过去完备或态空间有限维各自充分 | [@rem-appe-one-sided-fairness]、[@ex-appe-bilateral-shift-model] |
 | `H6` 强连续 | `T2` 条件 | 时间齐次族上等价于矢高读数在零点连续；只要求可测不够；有限维中由此接上 [@thm-calibrated-unitary-group] | [@rem-appe-sagitta-continuity] |
 | `H6` 生成元 | `T4` 输入 $H$ | 弦率趋于 $-iH$，矢高率趋于 $H^2/2$，均有显式误差；有限步速度界；在轨道张成的空间上，两个通道的轨道记录决定 $H$ 到酉等价为止，只用求同读数或只用玻恩权重都不够（二能级与三能级反例）；轨道的选取与 $H$ 在轨道外的作用仍是输入 | [@rem-appe-generator-chord-sagitta]、[@rem-appe-orbit-record-channels] |
 | `H6` 吕德斯条件化 | `T2` 条件 | 吕德斯态是确定通过检验者中保真度最大者，且唯一；迹范数与迹为 $1$ 的希尔伯特—施密特距离不给出吕德斯态；所用读数仍是输入 | [@rem-appe-luders-nearest] |
 | `H7` 局域层析与交换统计 | `T2` + `T3` | 参数计数 $K_d(ab)-K_d(a)K_d(b)=\frac{d(2-d)}4a(a-1)b(b-1)$；交换是矢高取 $0$ 与 $2$ 的公平对合，条款 I 去掉标签而不选扇区；一族给定对象在保留格拉姆阵到相位为止的意义下是否需要复数振幅：可比三角形填满每个圈时，当且仅当某个三点巴格曼乘积不是实数，单比特上当且仅当布洛赫向量不共一个过球心的平面；中心复结构与扇区选择仍是输入 | [@rem-appe-tomography-count]、[@rem-appe-swap-sagitta]、[@rem-appe-real-realizability-return-phase] |
+| `H9` 连续路径积分与平稳作用量 | `T4` 输入 | 二次作用量下 $N$ 步切片乘积在每个有限 $N$ 上精确等于驻相路径的贡献（含前因子与马斯洛夫相位），谐振子的误差是显式的 $O(N^{-2})$，时间步须落在矢高表的椭圆行；一般作用量只剩一维的显式抵消界；固定 $\hbar$ 时，连续极限在算子层面由特罗特—纳尔逊定理给出，不需要路径测度（有界变差的这种复测度不存在）；非二次势的时间切片收敛与大维数驻相是文献结果；相互作用场论仍为 `OPEN` | [@rem-appe-oscillator-time-slicing]、[@ex-appe-time-step-trichotomy]、[@rem-appe-oscillatory-cancellation-bounds]、[@rem-appe-path-integral-remaining-inputs] |
 
 新增的两条输入是条款 IV（[@def-appe-third-point-redundancy]）与正性条件（[@rem-appe-involution-positivity]）；读数由态给出且至少有一个态时，后者等价于没有非零的零平方元素，而这一部分对态的一切读数不可见（[@rem-appe-positivity-invisible-part]）；求同读数不是实标量时，读数表的半正定另需一个正泛函。条款 IV 不必对一切三点成立：可比三角形填满每个圈就够了，而且对一切群而言这是恰好够的条件（[@rem-appe-triangle-simple-connectivity]）。条款 IV 排除一切全比较的和乐，它刻画的是第 1 层的平坦骨架；带真实曲率的第 2 层联络必须放弃它，那时 [@thm-appe-chordal-gain-potential-stability] 与 [@rem-appe-near-flat-gram-bound] 给出偏离的代价。
 
 E.8.6 与 E.8.7 不增加新的条款：`H6` 的可逆与连续两项各有一个只谈对象与读数的充分条件（过去完备、矢高读数在零点连续），条件化换成一条最优化原理，`H7` 有了一行计数公式；这些条件仍是输入。
 
 E.8.8 与 E.8.9 同样不增加新的条款。E.8.8 把比较用到系综上：要推出读数表半正定，正性条件可以换成“每个对象有对立者，系综与自身的平均求同读数不为负”，后者仍容许的只有对一切求同读数不可见的抛物点对；单比特上的玻恩律可以由系综外延性推出。E.8.9 读一个对象的轨道：`H4` 有了可在有限步上检验的读数形式，`H6` 的 $H$ 在轨道空间上可以从两个通道的记录中读出。
+
+E.8.10–E.8.12 为观察者之间的比较增加两条输入：时间次序条件，以及“求异部分不是零平方”（它是 [@rem-appe-positivity-invisible-part] 中那一条件在求异部分上的特例）；在 $1+1$ 维中，坐标变换的线性也仍是输入。对同一个比较，正性条件与时间次序条件不能同时成立，`H2` 与 `H8` 由此分开：两者为不同的比较选同一张表上的不同行。E.8.11 不改变“粗粒化是保单位的捏合”这一输入，只给它的后果定量。E.8.12 把 `H9` 的路径积分一项缩小为：二次作用量在有限步上精确，一般作用量只有渐近陈述，连续极限在算子层面的存在是文献结果。
 :::
 
 这一节没有减少输入的总数到零，它改变的是输入的形状：在求同读数为实标量的情形，`H2` 的三项原先是关于自配对、双向量与格拉姆矩阵的三条几何陈述，现在换成两条只用比较本身就能说出口的条件。一条说第三者不改变两者之比，一条说差异的往返留下正的痕迹。
