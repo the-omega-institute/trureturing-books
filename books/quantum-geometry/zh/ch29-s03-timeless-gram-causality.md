@@ -221,8 +221,252 @@ $$
 
 两个方向可如下看出。把实平面等距认作 $\mathbb C$，用单位圆上的 $z_i$ 表示单位向量。商 $q_i=z_{i+1}/z_i$ 的实部为 $a_i$，故其辐角可写成某个符号下的 $\varepsilon_i\arccos(a_i)$，实轴端点也包括在内。商的乘积望远镜相消为一，圆周指数的周期为 $2\pi$，于是得到整数绕行条件。反过来，以 $\exp(i\varepsilon_i\theta_i)$ 的前缀积作为顶点。总乘积为一，保证最后一条边回到起点；余弦的偶性给出每个指定重叠。
 
-这是现有圆周、内积与有限乘积接口的书面应用，不为环图变体另立保留的 Lean 声明或新增验证徽章。完整判据与推导见源仓补全结果的 [Blueprint 应用说明](https://github.com/the-omega-institute/trureturing/pull/30905)。经典来源为 Eisenberg-Nagy–Laurent–Varvitsiotis 的 [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2)，定义 1.1、引理 2.1，以及 Laurent–Varvitsiotis 的 [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1)，引理 7；后者定位专指 v1。这里不主张唯一性、动力学、概率律、物理实现或更高维补全判据。
+这是现有圆周、内积与有限乘积接口的书面应用，不为环图变体另立保留的 Lean 声明或新增验证徽章。完整判据与推导见源仓补全结果的 [Blueprint 应用说明](https://github.com/the-omega-institute/trureturing/pull/30905)。经典来源为 Eisenberg-Nagy–Laurent–Varvitsiotis 的 [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2)，定义 1.1、引理 2.1，以及 Laurent–Varvitsiotis 的 [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1)，引理 7；后者定位专指 v1。这里不主张唯一性、动力学、概率律或物理实现；三维补全的另一判据见 [@thm-ch29-cycle-rank-three-completion]。
 :::
+
+平面判据把每条边的转角分成正负两个方向，再要求同一套符号绕环闭合。若允许单位向量离开同一平面，约束会怎样改变？单条边的 $a_i\in[-1,1]$ 仍只说明这一对向量可以存在；真正的问题是，所有边能否在**同一个实三维空间**里同时闭合。答案不再要求平面的带符号角度和为整周，而由全部奇数子集的角度不等式给出。
+
+::: {.theorem #thm-ch29-cycle-rank-three-completion title="环图的秩至多三实半正定补全判据" lean="D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff"}
+任取自然数 $n\ge3$，令 $I=\operatorname{Fin}n=\{0,\ldots,n-1\}$，$\operatorname{next}(i)=i+1\pmod n$。给定任意函数 $a:I\to\mathbb R$，满足对每个 $i\in I$ 都有 $-1\le a_i\le1$，并记 $\theta_i=\arccos(a_i)\in[0,\pi]$。以下两项等价：
+
+1. 存在以 $I$ 为行列指标的实矩阵 $B$，满足
+
+   $$
+   \begin{aligned}
+   B&\succeq0,&\operatorname{rank}_{\mathbb R}(B)&\le3,\\
+   B_{ii}&=1,&B_{i,\operatorname{next}(i)}&=a_i\quad(i\in I).
+   \end{aligned}
+   $$
+
+2. 对每个基数为奇数的子集 $F\subseteq I$，都有
+
+   $$
+   \sum_{i\in F}\theta_i-\sum_{i\in I\setminus F}\theta_i
+   \le\bigl(|F|_{\mathbb R}-1\bigr)\pi.
+   $$
+
+这里 $I\setminus F$ 是在整个 $\operatorname{Fin}n$ 内取的补集，$|F|_{\mathbb R}$ 表示将有限基数 $|F|\in\mathbb N$ 转为实数；右侧的减法是实数减法。条件中没有预先给定补全矩阵或整体向量实现。所有端点 $a_i=\pm1$、重复向量、不张满三维空间的实现与奇异补全均包括在内；秩界是至多三，不要求恰好为三。
+:::
+
+::: proof
+以下按角度条件、同一三维空间中的闭合单位向量链、Gram 矩阵三步解释证明。设有限角度列表 $\vartheta$ 的每个分量都在 $[0,\pi]$。对其指标子集 $F$ 定义
+
+$$
+C_{\vartheta}(F)
+=\sum_{i\in F}(\pi-\vartheta_i)
+ +\sum_{i\notin F}\vartheta_i,
+$$
+
+其中第二个和遍历该列表的其余全部指标。展开后，奇数子集不等式恰好是 $C_{\vartheta}(F)\ge\pi$。每一项非负；而两个不同子集 $F,G$ 至少在一个指标上选择不同，该指标对两个代价之和贡献 $(\pi-\vartheta_i)+\vartheta_i=\pi$，因此
+
+$$
+C_{\vartheta}(F)+C_{\vartheta}(G)\ge\pi\qquad(F\ne G).
+$$
+
+**同时消去两条相邻边。** 把角度列表写成 $(\alpha,\beta,\vartheta)$，$\vartheta$ 的指标集记为 $R$。希望用一条角度为 $\gamma$ 的边代替前两条边。局部三角形要求
+
+$$
+0\le\gamma\le\pi,\qquad
+|\alpha-\beta|\le\gamma
+\le\min(\alpha+\beta,\,2\pi-\alpha-\beta).
+$$
+
+但仅满足这个区间还不够：同一个 $\gamma$ 必须使较短列表 $(\gamma,\vartheta)$ 的全部奇数子集不等式成立。若奇数子集不含新边，其余指标组成奇数基数的 $S\subseteq R$，条件为 $\gamma\ge\pi-C_{\vartheta}(S)$；若包含新边，其余指标组成偶数基数的 $S$，条件为 $\gamma\le C_{\vartheta}(S)$。
+
+取有限最大值
+
+$$
+\begin{aligned}
+M&=\max\Bigl(\{0\}\cup
+ \{\pi-C_{\vartheta}(S):S\subseteq R,\ |S|\text{ 为奇数}\}\Bigr),\\
+\gamma&=\max(|\alpha-\beta|,M).
+\end{aligned}
+$$
+
+这里加入 $0$，所以即使没有奇数子集，最大值仍有定义。原列表的奇数条件，对奇数 $S$ 分别选入前两条边的零条或两条，给出
+
+$$
+\pi-C_{\vartheta}(S)
+\le\min(\alpha+\beta,\,2\pi-\alpha-\beta).
+$$
+
+对偶数 $S$ 分别只选入前两条边中的一条，则给出 $|\alpha-\beta|\le C_{\vartheta}(S)$。再对奇数 $T$ 与偶数 $S$ 使用不同子集的代价和下界，得到 $\pi-C_{\vartheta}(T)\le C_{\vartheta}(S)$。所以这个**同一个** $\gamma$ 同时满足全部上下界；由角度范围与代价非负，还得到 $0\le\gamma\le\pi$。这一步把全环约束传给较短的环，而不是逐条边各自选择一个互不相容的中间角。
+
+**在三维中插回一个单位向量。** 上面的三角区间等价于三条角度 $\alpha,\beta,\gamma\in[0,\pi]$ 各不超过其余两条之和，且总和不超过 $2\pi$。先取
+
+$$
+\begin{aligned}
+x&=(1,0,0),\\
+y&=(\cos\gamma,\sin\gamma,0),\\
+z(t)&=(\cos\alpha,\sin\alpha\cos t,\sin\alpha\sin t).
+\end{aligned}
+$$
+
+三者都是单位向量，且
+
+$$
+\langle y,z(t)\rangle
+=\cos\alpha\cos\gamma+\sin\alpha\sin\gamma\cos t.
+$$
+
+三角条件保证 $\cos\beta$ 位于 $t=\pi$ 与 $t=0$ 时的值 $\cos(\alpha+\gamma)$ 和 $\cos(\alpha-\gamma)$ 之间；当 $\alpha+\gamma>\pi$ 时，用 $\cos(\alpha+\gamma)=\cos(2\pi-\alpha-\gamma)$ 和周长上界处理。连续性与介值定理便给出所需的 $t$。这不除以 $\sin\alpha\sin\gamma$，故系数为零、端点重合或对径时仍适用。
+
+若较短链中的实际端点是 $x',y'$，它们的单位范数与内积 $\cos\gamma$ 使二元 Gram 表与 $x,y$ 相同。把 $x,y$ 送到 $x',y'$ 的映射先在其张成空间上保持内积，再通过正交补上的正交基扩张为 $\mathbb R^3$ 的环境等距。即使端点线性相关，这一步仍成立。将该等距作用于新向量 $z(t)$，即可在原端点之间插入新点；旧链的其他向量全部保持不动。
+
+**闭链归纳与两个方向。** 用首尾相同的 $m+1$ 个单位向量表示 $m$ 条边的闭链，所有向量始终在同一个 $\mathbb R^3$ 内。归纳使用零边与一边作基例：零边取一个单位向量；一边时唯一奇数子集迫使该角为零，重复同一向量即可。对更长列表，同时消元给出较短列表，归纳构造其闭链，再按上面的三角形插回被删去的中间向量。末端与起点的相等关系保留，所以最后一条循环边也满足指定内积。对所得向量族取 Gram 矩阵 $B=X^TX$，其中 $X$ 只有三行，就得到半正定性、对角元一、全部指定循环边及 $\operatorname{rank}_{\mathbb R}(B)\le3$。
+
+反过来，给定第一项中的 $B$，实半正定 Gram 分解与秩界将其分解为同一 $\mathbb R^3$ 内的向量；对角元一保证单位范数。每条边的角度正是 $\arccos(a_i)$。在三个连续向量中删去中间向量，令 $\gamma$ 为两个外端点的夹角。角度三角不等式给出差角下界与 $\gamma\le\alpha+\beta$；将中间向量取负后再用三角不等式，得到 $\gamma\le2\pi-\alpha-\beta$。归纳得较短闭链的奇数代价均至少为 $\pi$。恢复两条边时，按一个奇数子集包含被删两边的零条、一条或两条分类，所需代价分别是 $\alpha+\beta+C_{\vartheta}(S)$、$\pi-\alpha+\beta+C_{\vartheta}(S)$ 或 $\pi+\alpha-\beta+C_{\vartheta}(S)$、$2\pi-\alpha-\beta+C_{\vartheta}(S)$；较短链的上下界与三角区间保证它们均至少为 $\pi$。这恢复了原列表的**全部**奇数子集条件。完整证明由 Lean 内核检查。
+:::
+
+经典来源是 E.-Nagy–Laurent–Varvitsiotis 的 [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2)，推论 2.1 的式 (5) 及其后关于三维秩界的讨论：将文中的归一化角度乘以 $\pi$，即得这里的角度不等式；另见 Laurent–Varvitsiotis 的 [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1)，引理 3。这里陈述的是既有数学结果。
+
+与 [@rem-ch29-planar-cycle-compatibility] 相比，二维要求存在一套使带符号角度和属于 $2\pi\mathbb Z$ 的符号；三维允许折出平面，精确条件改由全部奇数子集不等式表达。定理给出固定三维空间中的存在性，没有预设整体实现，也不指定唯一补全、概率律、物理动力学或算法复杂度。它不解决 [@rem-ch29-continuous-gram-selection] 中随参数连续选取因子的另一个问题。
+
+::: {.example #ex-ch29-cycle-rank-three-sharpness title="三个零重叠：三维上界的书面锐度算例"}
+**书面说明性计算，不是另一个带 Lean 引用的定理。** 取 $n=3$，三条循环边均指定 $a_0=a_1=a_2=0$。此时 $\theta_0=\theta_1=\theta_2=\pi/2$。奇数子集只有单点集与全集：前者的不等式为 $-\pi/2\le0$，后者为 $3\pi/2\le2\pi$，所以三维条件成立。
+
+任意实半正定补全都是对称矩阵；三个循环边已经给出三对不同指标之间的全部条目，连同对角元一，强制
+
+$$
+B=I_3=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}.
+$$
+
+$\det I_3=1$，故其秩为三，不能有秩至多二的补全。另一方面，$I_3$ 本身半正定，标准正交基 $e_1,e_2,e_3\in\mathbb R^3$ 的 Gram 矩阵就是它，因此三维界确实达到。这也能从平面判据看出：三个 $\pm\pi/2$ 的和不可能是 $2\pi$ 的整数倍。这个例子说明统一上界三不能对所有循环数据改成二，并不说每个可补全输入都必须达到秩三。
+:::
+
+单个环的判据回答了：一圈指定重叠何时能在同一个实三维空间中闭合。图中有多个相交的环时，还须解决另一个问题：补入的同一条边，必须在所有使用它的局部块中取同一个值。分别为每个局部块找到一个实现，并不保证这些实现对公共填充值作出相同选择。下面先构造一张共同角度表，再调用前面的秩受控弦图补全定理。
+
+::: {.definition #def-ch29-graph-cycle-inequalities title="图上的简单环与角度不等式"}
+设 $V$ 为任意有限顶点集，$G$ 为 $V$ 上的简单图。团是顶点子集，其中任意两个不同顶点相邻；弦图是没有长度至少四的诱导环的图。
+
+对每个自然数 $m\ge3$，令 $I_m=\operatorname{Fin}m$，并记
+
+$$
+\operatorname{next}_m(i)=i+1\pmod m.
+$$
+
+这里的简单环由单射 $c:I_m\to V$ 表示，并要求
+
+$$
+G.\operatorname{Adj}\bigl(c(i),c(\operatorname{next}_m(i))\bigr)
+\quad(i\in I_m).
+$$
+
+此处不要求环为诱导环；有弦的简单环也在量词范围内。
+
+称实角度表 $\theta:V\times V\to\mathbb R$ 满足全部环不等式，是指对上述每个 $m,c$，以及每个奇数基数子集 $F\subseteq I_m$，都有
+
+$$
+\begin{aligned}
+&\sum_{i\in F}\theta_{c(i),c(\operatorname{next}_m(i))}
+-\sum_{i\in I_m\setminus F}
+ \theta_{c(i),c(\operatorname{next}_m(i))}\\
+&\le (|F|_{\mathbb R}-1)\pi .
+\end{aligned}
+$$
+
+补集在整个 $I_m$ 内取；$|F|_{\mathbb R}$ 是将自然数基数转为实数，因此右侧使用实数减法。
+
+:::
+
+::: {.lemma #lem-ch29-joint-angle-table title="一张共同角度表" lean="D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.exists_joint_angle_table"}
+设 $\theta$ 对称、对角元为零，并在每条 $G$-边上属于闭区间 $[0,\pi]$。若它满足全部环不等式，则存在一张表 $\Gamma:V\times V\to\mathbb R$，满足
+
+$$
+\begin{gathered}
+\Gamma_{ab}=\Gamma_{ba},\qquad \Gamma_{aa}=0,\qquad
+0\le\Gamma_{ab}\le\pi,\\
+G.\operatorname{Adj}(a,b)\Longrightarrow
+\Gamma_{ab}=\theta_{ab},\\
+\Gamma_{ab}\le\Gamma_{ac}+\Gamma_{cb},\\
+\Gamma_{ab}+\Gamma_{bc}+\Gamma_{ca}\le2\pi .
+\end{gathered}
+$$
+
+最后两条对所有有序三元组 $a,b,c\in V$ 成立，包括顶点重复的情形。本引理不要求 $G$ 有弦图超图，也不以整体向量实现或预先选好的填充值为前提。
+
+:::
+
+::: proof
+给每个顶点附上两个符号，得到 $V\times\{0,1\}$。沿原图的一条边行走时，端点符号相同的代价为 $\theta_{ab}$，符号不同的代价为 $\pi-\theta_{ab}$。所有边代价非负。简单环上改变符号的边数为奇数时，总代价至少为 $\pi$，恰好就是对应的奇数子集不等式。
+
+这个下界也适用于投影后闭合、但起终点符号相反的任意游走。若投影顶点重复，重复处符号不同便截出一个较短的异号闭游走；符号相同则可删去一段非负代价的闭游走。按长度归纳，最终只剩简单环或两步折返。两步折返的异号代价为 $\theta_{ab}+(\pi-\theta_{ab})=\pi$。
+
+现在补入尚不存在的顶点对 $u,v$。记 $W(p)$ 为带符号游走的总代价，取
+
+$$
+x=\sup\left(
+\{0\}\cup
+\{\pi-W(q):q:(u,0)\leadsto(v,1)\}
+\right).
+$$
+
+此处集合遍历当前图中的所有这类游走。非负代价保证 $0\le x\le\pi$。对每条异号游走 $q$，有 $\pi-x\le W(q)$。对每条同号游走 $p:(u,0)\leadsto(v,0)$，将它与符号翻转后的反向 $q$ 拼接，异号闭游走下界给出 $x\le W(p)$。因此这一个 $x$ 同时满足所有路径给出的上下界。
+
+四个带符号端点上的共同边界距离取为：同一顶点处为 $0$ 或 $\pi$，不同顶点处为 $x$ 或 $\pi-x$，分别按符号相同或不同区分。它满足三角不等式。把使用新边的游走在新边处拆开，并应用共同边界距离的三角不等式，可保持边界距离下界；再在第一个新边处拆分、接上符号翻转的原前缀，便保持所有异号闭游走的 $\pi$ 下界。
+
+有限顶点集上只有有限多个简单图。取一个保留这些性质的极大超图；若仍缺一条边，上述插入就能严格扩大它，因此它必为完全图。所得共同表即为 $\Gamma$。完全图上的三步异号闭游走分别给出角度三角不等式与周长上界；重复顶点的情形由对角元和区间界处理。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch29-partial-two-tree-rank-three-completion title="部分二树假设下的秩至多三补全判据" lean="D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.partial_two_tree_rank_three_iff"}
+设 $V$ 为任意有限顶点集，$G$ 为其上的简单图，并明确假设存在**同一顶点集 $V$ 上**的简单图 $H$，使得
+
+$$
+G\le H,\qquad H\text{ 为弦图},\qquad
+\forall C\subseteq V,\quad
+H.\operatorname{IsClique}(C)\Longrightarrow |C|\le3.
+$$
+
+这里 $G\le H$ 表示每条 $G$-边也是 $H$-边；团的量词包含空团。
+
+设 $A$ 为 $V$ 上的实对称矩阵，满足
+
+$$
+A_{ii}=1,\qquad
+G.\operatorname{Adj}(i,j)\Longrightarrow -1\le A_{ij}\le1,
+$$
+
+并令 $\theta_{ij}=\arccos(A_{ij})$。则以下两项等价：
+
+1. 存在实矩阵 $B$，满足
+
+   $$
+   B\succeq0,\qquad \operatorname{rank}_{\mathbb R}B\le3,\qquad
+   B_{ii}=1,\qquad
+   G.\operatorname{Adj}(i,j)\Longrightarrow B_{ij}=A_{ij}.
+   $$
+
+2. $\theta$ 满足上述全部环不等式。
+
+$A$ 的非边条目不要求属于 $[-1,1]$，也不要求由 $B$ 保留。假设没有预先指定 $H\setminus G$ 上的填充值。顶点集可以为空，图可以不连通；闭端点 $A_{ij}=\pm1$、重复实现向量、不张满三维空间的配置及奇异补全均包括在内。秩界为至多三，不要求恰好为三。
+
+:::
+
+::: proof
+先证必要性。将 $B$ 限制到任意简单环 $c:I_m\to V$。主子矩阵仍半正定，秩不会增加，对角元与循环边条目也保持不变。前面的环图判据遂给出该环的每一个奇数子集不等式。
+
+再证充分性。将共同角度表引理用于 $\theta=\arccos A$，并置
+
+$$
+T_{ij}=\cos\Gamma_{ij}.
+$$
+
+每个 $H$-团至多含三个顶点。三个角度的三角不等式与周长上界，正是三环判据中的三个单点奇数子集条件与全集条件，因而相应的余弦块半正定。形式证明把每个非空团嵌入三个槽位，再用左逆列举其顶点；一个或两个顶点的团允许槽位重复，最后限制回原团。空团使用空矩阵。每个团块的秩均不超过其大小，故不超过三。
+
+所有这些团块都来自**同一张 $T$**，所以公共条目已经一致。调用秩受控弦图补全定理，取 $d=3$，得到全局半正定矩阵 $B$，秩至多三，并保留 $H$ 的对角元和边条目。最后，
+
+$$
+\cos\Gamma_{ii}=1,\qquad
+\cos\Gamma_{ij}=\cos(\arccos A_{ij})=A_{ij}
+\quad(\{i,j\}\in E(G)),
+$$
+
+得到所需补全。完整证明由 Lean 内核检查。
+:::
+
+共同表解决的是填充值的一致性。分别实现局部团时，同一个未指定顶点对可能得到不同内积；这些见证不能直接作为弦图拼接的输入。一旦共同条目一致，前面的秩受控拼接定理才负责把局部向量通过等 Gram 等距对齐，组装到同一个实三维空间。
+
+这是既有数学的形式化，不主张数学新颖性。Laurent 的 [CWI 报告 BS-R9439（1994）](https://ir.cwi.nl/pub/5067/5067D.pdf)给出相关角度多面体与相关矩阵可行性结果：印刷页 4 式 (2.2)、页 7 定理 4.2 与命题 4.3、页 10 定理 4.7；期刊版发表于 1997 年，DOI 为 [10.1016/0024-3795(95)00741-5](https://doi.org/10.1016/0024-3795(95)00741-5)。这里的统一秩三上界另由秩受控弦图拼接取得，背景见 Laurent–Varvitsiotis，[arXiv:1204.0734v1](https://arxiv.org/abs/1204.0734v1)。本节直接使用所列同顶点集弦图超图假设，不将其改写为图 minor 判据。结论是固定输入的静态存在性，不给出唯一性、算法、随参数连续的填充或物理动力学，也不解决前述连续 Gram 因子选取问题。
 
 ::: {.viz src="gram-causal-elliptope" preset="narrow" height="500"}
 **多记一层，窗口窄一圈。** 时间轴把记住的历史从 $M = 1$ 加到 $M = 5$：每多一个更早的锚点，截面里就多一圈品红的椭圆，套在上一圈里面；穿过琥珀色 $\mathbf{Q}$ 的青色窗口随之收窄，从整个 $[-1, 1]$ 缩到约原来的四分之一，$\mathbf{Q}$ 始终在里面。事件取在 $\mathbb{R}^6$ 中，每一层都还留有内部；把相容空间读作有限观察者的选择余地是本书的诠释（`MODEL`）。

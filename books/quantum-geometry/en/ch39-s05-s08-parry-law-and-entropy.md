@@ -328,8 +328,8 @@ Whether the transverse Rauzy boundary Hausdorff dimension $D_F = \dim_H(\partial
 Consider an order-$K \ge 3$ Pisot cut-and-project point set or locally constrained many-body Hamiltonian whose internal acceptance window $\mathcal{R}_K$ has a fractal boundary of Hausdorff dimension strictly exceeding its integer codimension (for instance, at $K = 3$ where literature gives $D_F = \dim_H(\partial\mathcal{R}_3) \approx 1.09336 > 1$). Does there exist a rigorously constructed family of gapped local ground states or cut-and-project encoded states whose bipartite entanglement entropy $S_{\mathrm{ent}}(R)$ across a region of linear scale $R \to \infty$ obeys an anomalous scaling law governed by $D_F$ (such as a leading term $S_{\mathrm{ent}}(R) \asymp R^{D_F}$ or a subleading fractal correction with certified coefficient), together with necessary and sufficient spectral-gap and locality criteria separating standard codimension-one area laws from fractal-boundary enhancement? Throughout this book, any "fractal horizon area law" of the form $S_{\mathrm{ent}} \propto R^{D_F}$ is posed strictly as an open problem (`OPEN`) and heuristic model (`MODEL`), never as a proved theorem or gravitational area law.
 :::
 
-::: {.remark #rem-ch39-p2e-physical-tribonacci-interface title="Physical Tribonacci Hopping Chain and a Finite Open-Chain Interface (Literature model, not formalized in this book)"}
-**Literature model, not formalized in this book.** A concrete physical object to investigate is a nearest-neighbor hopping chain with zero on-site potential. Following Kolehmainen–Lado–Moustaj, *One-dimensional quasicrystals with tensor-network finite-state automata* ([arXiv:2609.06040v1](https://arxiv.org/pdf/2609.06040v1), §III, Eqs. (2)–(3), and Appendix B.2), take the substitution $\sigma(A)=AB$, $\sigma(B)=AC$, $\sigma(C)=A$ and its infinite fixed word starting from $A$, $W=\lim_{j\to\infty}\sigma^j(A)$, indexed from $W_0$. Fix $0<\rho<1$ and use $t_C=1$ as the energy unit, setting $t_A=\rho^2$, $t_B=\rho$, so $t_A/t_B=t_B/t_C=\rho$. For every integer $N\ge2$, define on the single-particle site space $\mathbb{C}^N$, with basis $\{\lvert i\rangle:0\le i<N\}$,
+::: {.remark #rem-ch39-p2e-physical-tribonacci-interface title="Physical Tribonacci Hopping Chain and a Finite Open-Chain Interface"}
+**Literature model and boundary conventions.** A concrete physical object to investigate is a nearest-neighbor hopping chain with zero on-site potential. Following Kolehmainen–Lado–Moustaj, *One-dimensional quasicrystals with tensor-network finite-state automata* ([arXiv:2609.06040v1](https://arxiv.org/pdf/2609.06040v1), §III, Eqs. (2)–(3), and Appendix B.2), take the substitution $\sigma(A)=AB$, $\sigma(B)=AC$, $\sigma(C)=A$ and its infinite fixed word starting from $A$, $W=\lim_{j\to\infty}\sigma^j(A)$, indexed from $W_0$. Fix $0<\rho<1$ and use $t_C=1$ as the energy unit, setting $t_A=\rho^2$, $t_B=\rho$, so $t_A/t_B=t_B/t_C=\rho$. For every integer $N\ge2$, define on the single-particle site space $\mathbb{C}^N$, with basis $\{\lvert i\rangle:0\le i<N\}$,
 
 $$
 h_N=\sum_{i=0}^{N-2}t_{W_i}\bigl(\lvert i\rangle\langle i+1\rvert+\lvert i+1\rangle\langle i\rvert\bigr).
@@ -346,15 +346,73 @@ h_{\rho,j}&=h_{N_j}\quad(j\ge1).
 \end{aligned}
 $$
 
-For every fixed $\rho\in(0,1)$, the paper argument below proves that these deterministic open prefixes with an even number of sites satisfy
+On these deterministic open prefixes with an even number of sites, define
 
 $$
-\delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}\longrightarrow0\qquad(j\to\infty).
+\delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}.
 $$
 
-Below, [@ex-ch39-p2e-tribonacci-prefix-rate] gives a quantitative paper derivation of this limit and shows that convergence is uniform over $0<\rho<1$. The complete application remains a paper proof in this book, without a separate Lean verification badge or a claim to resolve a new external conjecture. Finite invertibility, membership of zero in an infinite-volume spectrum, finite-resolution density of states, or criticality in the sense of Anderson localization cannot directly replace this limit question with its specified boundaries and prefix sequence. Krebbekx–Moustaj–Dajani–Morais Smith, *Multifractal Properties of Tribonacci Chains* ([*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204), §§II.B.1, III.A.1, and V), use periodic approximants and perturbative renormalization to study physical spectra and criticality; we do not read this as the finite open-chain statement above for all $\rho\in(0,1)$.
+The standalone statement of [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] gives the full-sequence limit for each fixed $\rho\in(0,1)$. The stronger [@ex-ch39-p2e-tribonacci-prefix-rate] retains the quantitative paper derivation: $\delta_{\rho,j}\le73728/N_j$ for every $j\ge4$ and $0<\rho<1$, yielding convergence uniform in $\rho$. The complete quantitative application remains a paper proof, without a separate Lean verification badge or a claim to resolve a new external conjecture. Finite invertibility, membership of zero in an infinite-volume spectrum, finite-resolution density of states, or criticality in the sense of Anderson localization cannot directly replace the limit proof for these specified boundaries and prefix sequence. Krebbekx–Moustaj–Dajani–Morais Smith, *Multifractal Properties of Tribonacci Chains* ([*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204), §§II.B.1, III.A.1, and V), use periodic approximants and perturbative renormalization to study physical spectra and criticality; we do not read this as the finite open-chain statement above for all $\rho\in(0,1)$.
 
-Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. If a particle-number-conserving Slater ground state is chosen, its actual occupied projector $P_{\mathrm{occ}}$ must be constructed and its correlation matrix compressed to a chosen set of sites $I$ as $\chi_I P_{\mathrm{occ}}\chi_I$, where $\chi_I$ projects onto those sites. Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. This limit addresses only the specified single-particle spectral distance. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
+**The actual Slater state and correlation conventions.** Entanglement across a physical spatial cut additionally requires a many-body Hamiltonian, filling, and state. The following construction and results come from the literature and are not formalized in this book. Keep the $N$ original sites in their natural order $0,\ldots,N-1$, and label the orthonormal Boolean occupation basis $\lvert S\rangle$ by its subsets of occupied sites $S$. Choose an integer $0\le k\le N$ and a complex matrix $V\in\mathbb{C}^{N\times k}$ whose columns are the occupied orthonormal single-particle modes, so $V^\dagger V=I_k$. For a subset $S$ of size $k$, let $V_S$ retain those rows in increasing site order, with the column order unchanged. Define the actual many-body amplitudes by
+
+$$
+\langle S\mid\Psi_V\rangle=
+\begin{cases}
+\det(V_S),&\lvert S\rvert=k,\\
+0,&\lvert S\rvert\ne k.
+\end{cases}
+$$
+
+This is the Slater determinant expanded in the ordered occupation basis. The empty determinant is $1$, so $k=0$ gives the vacuum. Since the occupation basis is already normalized, no additional factor $1/\sqrt{k!}$ multiplies these amplitudes. Dereziński, [*Clifford algebras and fermions*](https://www.fuw.edu.pl/~derezins/clifford.pdf), §§7.1–7.2, Eqs. (7.51)–(7.54), supplies the CAR, ordered occupation basis, and normalized Slater determinant. This choice specifies the amplitudes and fermionic signs; merely finding a density matrix with the desired correlations cannot replace it. To use this state as a ground state of the hopping chain above, the occupied modes, filling, and many-body Hamiltonian still need to be specified and energy minimization verified.
+
+Set $P=VV^\dagger$ and $\rho_V=\lvert\Psi_V\rangle\langle\Psi_V\rvert$, and let $c_i$ be the fermionic annihilator defined using the original site order. The correlation conventions are
+
+$$
+\begin{aligned}
+K_{ij}&=\Tr(\rho_V c_j^\dagger c_i)=P_{ij},\\
+C_{ij}&=\Tr(\rho_V c_i^\dagger c_j)=P_{ji},\qquad C=P^{\mathsf T}.
+\end{aligned}
+$$
+
+Dereziński's Theorem 8.1, particularly $\omega_\pi(d\Gamma(h))=\Tr(\pi h)$ in Eq. (8.103), supports this two-point convention. Peschel, [*Calculation of reduced density matrices from correlation functions*](https://arxiv.org/pdf/cond-mat/0212631v1), Eqs. (7), (9)–(10), uses the convention $C$ above; the transpose in his Eq. (12) must be retained. For real projection matrices the two conventions can coincide, but complex modes require the distinction. Peschel also explicitly notes that, for a non-Slater state, the free-fermion density matrix reconstructed from the same two-point function generally fails to reproduce other expectation values. Correlation agreement alone therefore does not determine a general density matrix.
+
+**The complete spectrum of a spatial compression.** For this Slater state, specify a spatial region $I$ consisting of $\ell$ original sites. Let $V_I$ retain those site rows and regard $P_I=V_I V_I^\dagger$ as the $\ell\times\ell$ compression acting on the region, rather than an $N\times N$ matrix with an additional zero space on its complement. Under the literature's fermionic subsystem convention, if $\nu_1,\ldots,\nu_\ell\in[0,1]$ are all its eigenvalues, including $0$, $1$, and repetitions, the eigenvalue multiset of the reduced density matrix $\rho_I$ has exactly $2^\ell$ entries, indexed by every occupation string as
+
+$$
+\begin{aligned}
+b_a(0)&=1-\nu_a,\qquad b_a(1)=\nu_a,\\
+\lambda_{\boldsymbol n}&=\prod_{a=1}^{\ell}b_a(n_a),\qquad
+\boldsymbol n\in\{0,1\}^{\ell}.
+\end{aligned}
+$$
+
+Equal values retain their multiplicities, and zero eigenvalues remain in the list. Selecting the two factors explicitly avoids $0^0$ at the endpoints. A completely empty or completely filled mode, for example, still contributes the eigenvalue pair $1,0$ and cannot be dropped from the complete density spectrum. For $\ell=0$ the empty product is $1$, the sole density eigenvalue. With natural logarithms, the entropy is
+
+$$
+\begin{aligned}
+S(\rho_I)&=\sum_{a=1}^{\ell}h(\nu_a),\\
+h(x)&=-x\log x-(1-x)\log(1-x).
+\end{aligned}
+$$
+
+Here $x\log x$ is extended continuously to $0$ at $x=0$, so $h(0)=h(1)=0$; entropy in bits requires division by $\log 2$. Peschel's Eqs. (8)–(11) give the mode description of the reduced free-fermion density matrix. Klich, [*Lower entropy bounds and particle number fluctuations in a Fermi sea*](https://arxiv.org/pdf/quant-ph/0406068v2), supplies the projected-mode decomposition in Eq. (4), Eq. (7) and its subsequent reduced factors $\operatorname{diag}(1-d_i,d_i)$, and the entropy in Eq. (11), supporting this product spectrum and entropy formula. The same recipe holds more generally for gauge-invariant Gaussian density matrices, using the compressed one-particle correlation operator, which need not be a projection on the full space. Gaussianity is a hypothesis here and cannot be inferred from the desired spectrum formula. When $0$ or $1$ occurs, the matrix logarithm in Peschel's Eq. (12) cannot be used directly; the factors and continuous extension above retain these endpoints.
+
+The $k\times k$ occupied-mode Gram matrix $V_I^\dagger V_I$ has the same nonzero spectrum as $P_I$, but the two dimensions may differ. Its spectrum alone does not list all $2^\ell$ spatial density eigenvalues: retain the nonzero compressed eigenvalues with their multiplicities, then pad with zeros to obtain $\ell$ entries. Zero modes contribute nothing to the entropy sum, which can conceal this dimension difference in the complete spectrum. These spectral relations are established literature results; their correspondence with the specific occupation carrier still needs to be formalized here.
+
+**The remaining spatial formalization.** The immediate target is the contiguous prefix $I=\{0,\ldots,\ell-1\}$ for $0\le\ell\le N$. Let $a,a'\in\{0,1\}^{\ell}$ be prefix occupation strings and $b\in\{0,1\}^{N-\ell}$ a tail occupation string; $ab$ concatenates $a$ followed by $b$ in the original site order. Using the same determinant amplitudes defined above, write the ordinary tensor partial trace as
+
+$$
+\begin{aligned}
+\psi_V(a,b)&:=\langle ab\mid\Psi_V\rangle,\\
+R_I(a,a')&:=\sum_{b\in\{0,1\}^{N-\ell}}
+\psi_V(a,b)\,\overline{\psi_V(a',b)}.
+\end{aligned}
+$$
+
+Here $R_I$ is a matrix on all $2^\ell$ prefix occupation strings, and the sum runs over the occupation strings of the tail sites being traced out. The obligation is to prove that this concrete matrix has the complete spectral multiset and endpoint-safe entropy above, including $\ell=0,N$, using all $\ell$ compressed eigenvalues with their multiplicities. Klich's Eq. (7) uses an appropriate fermionic tensor product; it does not by itself prove this literal ordered-site tensor partial-trace correspondence in our formalization. Arbitrary noncontiguous site subsets also involve Jordan–Wigner strings and a choice of fermionic subsystem, requiring a separate correspondence. A conditional statement assuming the desired spatial spectrum neither constructs this state nor completes the target. This literature exposition supplies no new Lean compilation evidence for normalization, two-point functions, ground-state status, Gaussianity, or the spatial spectrum, and an address-digit cut still cannot serve as the physical spatial cut.
+
+Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. The limit addresses only this single-particle spectral premise. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
 :::
 
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
@@ -502,8 +560,188 @@ $$
 contradicting the uniform bound at $s=0$, $m=m_n$. This contradiction covers every positive real $K$. The explicit family starting at zero is a construction within the proof, with no extra hypothesis and no extrapolation from finite samples. The full proof is checked by the Lean kernel.
 :::
 
+The counterexample family shows how charge can accumulate across levels in certain actual prefixes. Controlling intervals of every length at every start also requires control of all prefixes inside each level's blocks. A reusable estimate, independent of the Tribonacci alphabet, supplies this step: at each level, at most one child block remains unfinished, while the charges of the complete children contribute a sum over levels.
+
+The following prefix envelope, uniform squared-logarithmic bound, and later fixed-parameter open-chain convergence theorem are presented as written proofs. Their sources are the [prefix and interval-bound work](https://github.com/the-omega-institute/trureturing/pull/30646) and the [open-chain convergence work](https://github.com/the-omega-institute/trureturing/pull/30678); each proof also cites an immutable source location. No matching frozen declaration is available at the pinned `dev` commit, so these results do not count as Lean verification in this book; authors and reviewers are responsible for the arguments. The quantitative written conclusion in [@ex-ch39-p2e-tribonacci-prefix-rate] retains its existing evidential scope.
+
+::: {.lemma #lem-ch39-p2e-substitution-prefix-envelope title="A Level Prefix Envelope for Substitution Words" status="written-proof" proof="pf-ch39-p2e-substitution-prefix-envelope" repository="https://github.com/the-omega-institute/trureturing" source="SubstitutionPrefixEnvelope, Theorem 1.2" request="https://github.com/the-omega-institute/trureturing-requests/issues/271"}
+Let $\mathcal A$ be any alphabet, let $w:\mathcal A\to\mathbb Z$ be an integer weight, and let $f$ send each letter to a finite word, extended to finite words by concatenation. Take $f^0(a)$ to be the one-letter word $a$, and set
+
+$$
+Q(v)=\sum_{r=0}^{|v|-1}(-1)^r w(v_r).
+$$
+
+Suppose $M\in\mathbb Z$, $B\in\mathbb N$, and $H:\mathbb N\to\mathbb Z$ satisfy
+
+$$
+\begin{aligned}
+&0\le M,\qquad 0\le H(i)
+&&\text{for every }i\in\mathbb N,\\
+&|w(a)|\le M,\qquad |f(a)|\le B
+&&\text{for every }a\in\mathcal A,\\
+&|Q(f^i(a))|\le H(i)
+&&\text{for every }i\in\mathbb N,\ a\in\mathcal A.
+\end{aligned}
+$$
+
+Then, for every $j,t\in\mathbb N$ and $a\in\mathcal A$,
+
+$$
+\left|Q\bigl(\operatorname{take}_t(f^j(a))\bigr)\right|
+\le P(j):=M+B\sum_{i=0}^{j-1}H(i).
+$$
+
+Here $\operatorname{take}_t$ takes the first $\min(t,|f^j(a)|)$ letters, and the sum is empty at $j=0$. The conclusion includes empty prefixes, whole images, and indices beyond the word's end. It requires neither a finite alphabet, nonempty images, nor any prescribed parity of image lengths.
+:::
+
+::: {.proof #pf-ch39-p2e-substitution-prefix-envelope}
+This proof follows the statement and argument in [the source, SubstitutionPrefixEnvelope, Theorem 1.2](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S1/Words/SubstitutionPrefixEnvelope.md).
+
+The alternating charge with a local positive first sign satisfies $Q(uv)=Q(u)+(-1)^{|u|}Q(v)$, hence $|Q(uv)|\le|Q(u)|+|Q(v)|$. A level-zero image is a single letter, so every prefix has absolute charge at most $M$. Write $f^{j+1}(a)$ as the concatenation of at most $B$ level-$j$ children specified by $f(a)$. Each prefix consists of complete children followed by at most one child's prefix. The complete part contributes at most $BH(j)$, and induction bounds the unfinished part by $P(j)$, giving $P(j)+BH(j)=P(j+1)$. An index beyond the total length leaves only complete blocks; empty images add no charge. This induction uses absolute values while retaining the exact concatenation phase.
+:::
+
+For the literal Tribonacci word, the complete-block charge formulas give a linear $H(j)$, so this estimate yields a quadratic $P(j)$. To obtain a bound independent of the start, we must also place each actual interval inside blocks at a suitable level.
+
+::: {.theorem #thm-ch39-p2e-tribonacci-uniform-log-squared title="A Uniform Squared-Logarithmic Interval Bound for the Actual Tribonacci Word" status="written-proof" proof="pf-ch39-p2e-tribonacci-uniform-log-squared" repository="https://github.com/the-omega-institute/trureturing" source="TribonacciUniformLogSquared, Theorem 1.1" request="https://github.com/the-omega-institute/trureturing-requests/issues/272"}
+Take $\sigma(A)=AB$, $\sigma(B)=AC$, and $\sigma(C)=A$, and let $W=\lim_{n\to\infty}\sigma^n(A)$ be the infinite word starting from $A$, indexed from zero. Assign integer weights $w(A)=2$, $w(B)=1$, and $w(C)=0$, and define the charge with a positive first sign within each interval:
+
+$$
+F(W_{[s,s+m)})=\sum_{r=0}^{m-1}(-1)^r w(W_{s+r}).
+$$
+
+There exists a real constant $C>0$, independent of both start and length, such that
+
+$$
+\forall s,m\in\mathbb N,\qquad
+\left|F(W_{[s,s+m)})\right|
+\le C\bigl(\log(m+2)\bigr)^2.
+$$
+
+The integer charge and natural-number length are viewed as real numbers in this inequality, and $\log$ is the natural logarithm. The quantifiers include $m=0$, when the charge is zero. The first sign remains positive even when $s$ is odd.
+:::
+
+::: {.proof #pf-ch39-p2e-tribonacci-uniform-log-squared}
+This proof follows the statement and argument in [the source, TribonacciUniformLogSquared, Theorem 1.1](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S1/Words/TribonacciUniformLogSquared.md).
+
+**From complete blocks to prefixes.** Retain $\tau=\sigma^4$, whose three image lengths are $13,11,7$. The complete-block charges computed above are $2$, $2-(-1)^j$, and $2-(2j+2)(-1)^j$. Thus, for every letter $X$ and level $j$,
+
+$$
+|F(\tau^j(X))|\le H(j):=2j+4.
+$$
+
+Apply [@lem-ch39-p2e-substitution-prefix-envelope] with $M=2$, $B=13$, and this $H$. Every prefix of every level-$j$ image has the common envelope
+
+$$
+\begin{aligned}
+P(j)&=2+13\sum_{i=0}^{j-1}(2i+4)\\
+&=2+13j^2+39j.
+\end{aligned}
+$$
+
+This controls every truncation position; the constant charge $2$ of a complete $A$ block cannot replace it.
+
+**From prefixes to local intervals.** Let $v$ be a contiguous subword of $T=\tau^j(X)\tau^j(Y)$. Each prefix of $T$ is the concatenation of at most one prefix from each block, so its absolute charge is at most $2P(j)$. If $R$ is the prefix preceding $v$, then both $R$ and $Rv$ are prefixes of $T$, and
+
+$$
+F(Rv)-F(R)=(-1)^{|R|}F(v).
+$$
+
+Taking absolute values gives
+
+$$
+|F(v)|\le4P(j)\le156(j+1)^2\qquad(j\in\mathbb N).
+$$
+
+This two-block estimate requires no odd-length hypothesis and assumes no occurrence of these blocks in the infinite word. An interval contained in a single block also qualifies, since it is a contiguous subword of $\tau^j(X)\tau^j(X)$.
+
+**Containment in the actual word.** Each $\tau$ image has length at least $7$. Starting with length one at level zero, simultaneous induction over all letters concatenates at least seven preceding-level images at every step, giving
+
+$$
+|\tau^j(X)|\ge7^j\qquad\text{for every }j\in\mathbb N,\ X\in\{A,B,C\}.
+$$
+
+Now fix any $s$ and $m>0$. Take $k=\lfloor\log_7 m\rfloor$ and $j=k+1$, so $7^k\le m<7^j$. Choose $N\ge j$ large enough that $s+m\le|\tau^N(A)|$. These $A$ images are actual prefixes of $W$, so $W_{[s,s+m)}$ is exactly the word obtained by dropping the first $s$ letters of $\tau^N(A)$ and taking the next $m$. The concatenation identity for substitution iterates gives
+
+$$
+\tau^N(A)=\tau^j\bigl(\tau^{N-j}(A)\bigr).
+$$
+
+The right side is a concatenation of level-$j$ blocks in their actual order, each strictly longer than $m$. Starting in the block containing its first letter, an interval of length $m$ either stays there or enters the immediately following block. In the latter case its remaining length is less than $m$, so it cannot cross the entire second block. If the starting block is already the last one, the total-length condition ensures that the interval ends inside it. Thus the whole actual interval lies in one block or two adjacent blocks, and the bound $156(j+1)^2$ applies. The higher level $N$ merely accommodates the start $s$; the level $j$ determining the bound depends only on $m$.
+
+**From level to length.** Since $2^k\le7^k\le m$, monotonicity of the logarithm gives
+
+$$
+\begin{aligned}
+k\log2&\le\log(m+2),\\
+\log2&\le\log(m+2),\\
+(j+1)\log2=(k+2)\log2&\le3\log(m+2).
+\end{aligned}
+$$
+
+Both sides are nonnegative and $\log2>0$. Squaring and inserting the interval estimate yields
+
+$$
+\begin{aligned}
+|F(W_{[s,s+m)})|
+&\le156(j+1)^2\\
+&\le\frac{1404}{(\log2)^2}\bigl(\log(m+2)\bigr)^2.
+\end{aligned}
+$$
+
+An empty interval has zero charge and satisfies the same inequality directly. Hence $C=1404/(\log2)^2>0$ is one sufficient witness for the existential statement; no optimization of this constant is asserted.
+:::
+
 ::: {.remark #rem-ch39-p2e-tribonacci-refutation-boundaries title="Alternating Discrepancy, Spectral Literature, and Physical Scope"}
-**Literature background and scope, not a formalized physical conclusion of this book.** The square above is a square of the substitution level $n$. The refutation gives no optimal upper bound for all lengths, and neither refutes nor proves a uniform $O((\log(m+2))^2)$ upper bound. The bond-word prefix length $m_n$ cannot be identified directly with the specified even site count $N_j$.
+**Literature background and scope, not a formalized physical conclusion of this book.** The square in the prefix estimate $|q_n|\ge n^2$ is a square of the substitution level $n$, but the existing length estimates also determine the worst-case order. In this remark, write $Q(s,m)=F(W_{[s,s+m)})$, with charges and lengths viewed as real numbers in the following inequalities. For $n\ge1$, we already have $0<\log(m_n+2)\le n\log39$. Both sides are nonnegative and $\log39>0$, so squaring and applying [@thm-ch39-p2e-tribonacci-uniform-log-squared] gives, with one $C>0$,
+
+$$
+\begin{aligned}
+\frac{(\log(m_n+2))^2}{(\log39)^2}
+&\le n^2\le|q_n|=|Q(0,m_n)|\\
+&\le C(\log(m_n+2))^2.
+\end{aligned}
+$$
+
+The recursion gives $m_{n+1}=|\sigma^{4(n+1)}(C)|+m_n>m_n$, since every letter image is nonempty. These actual prefix lengths therefore increase strictly and are unbounded, giving matching squared-logarithmic bounds along this sequence. At $n=0$, we have $m_0=q_0=0$, outside the scope of this positive lower bound.
+
+To distinguish a length cutoff from an exact length, define in this remark
+
+$$
+\begin{aligned}
+P(M)&=\max_{\substack{m\in\mathbb N\\0\le m\le M}}|Q(0,m)|,\\
+R(M)&=\sup_{\substack{s\in\mathbb N\\m\in\mathbb N,\ m\le M}}|Q(s,m)|.
+\end{aligned}
+$$
+
+Here $M\in\mathbb N$; in $R(M)$, the start $s$ ranges over all natural numbers, without a restriction by $M$. The maximum defining $P(M)$ is over a nonempty finite set, and the uniform upper bound makes the nonempty set defining $R(M)$ bounded above. For every positive natural $M$, the same constant $C>0$ satisfies
+
+$$
+\begin{aligned}
+\frac{(\log(M+2))^2}{4(\log39)^2}
+&\le P(M)\le R(M)\\
+&\le C(\log(M+2))^2.
+\end{aligned}
+$$
+
+The lower bound follows directly from the existing prefix estimates. For $M\ge13$, take $n=\lfloor\log_{13}M\rfloor\ge1$. Then $13^n\le M<13^{n+1}$ and $m_n\le13^n\le M$, so $P(M)\ge|Q(0,m_n)|\ge n^2$. Also, $M+2\le3M$ gives
+
+$$
+\begin{aligned}
+\log(M+2)&\le\log3+\log M\\
+&\le\log3+(n+1)\log13\\
+&\le(n+1)\log39\le2n\log39.
+\end{aligned}
+$$
+
+Squaring and dividing by the positive number $4(\log39)^2$ proves the required lower bound. For $1\le M\le12$, use the actual one-letter prefix $W_{[0,1)}=A$, whose charge is $Q(0,1)=2$, so $P(M)\ge2$. Meanwhile, $\log(M+2)\le\log14<\log39$, so the required lower bound's left side is less than $1/4$. For the upper bound, for every $m\le M$ and arbitrary $s\in\mathbb N$, apply the uniform estimate and $0<\log(m+2)\le\log(M+2)$, then take the maximum or supremum. Taking $s=0$ gives $P(M)\le R(M)$. Thus the prefix running maximum and the running supremum over all starts both have squared-logarithmic order: the uniform upper bound has sharp worst-case order. No constant is optimized here. At $M=0$, we have $P(0)=R(0)=0$, so the displayed positive lower bound fails.
+
+Statements at every exact length require a separate distinction. Complete $A$ images supply another family of actual prefixes: put $\ell_n=|\sigma^{4n}(A)|$. The preceding identity $a_n=2$ and actual prefix containment give
+
+$$
+Q(0,\ell_n)=2,\qquad \ell_n\ge4n+1\qquad(n\in\mathbb N).
+$$
+
+The length bound follows from $\sigma^{k+1}(A)=\sigma^k(A)\sigma^k(B)$ for $k\ge0$: every $B$ image is nonempty, so the length starts at one and increases by at least one per step. Hence $\ell_n\to\infty$, while $|Q(0,\ell_n)|/(\log(\ell_n+2))^2\to0$. There are no $c>0$ and $m_0\in\mathbb N$ such that every $m\ge m_0$ satisfies $|Q(0,m)|\ge c(\log(m+2))^2$. Requiring this lower bound simultaneously at all starts also fails, since it includes start zero. If instead the exact length is fixed before taking the supremum over starts, write $E(m)=\sup_{s\in\mathbb N}|Q(s,m)|$. Whether there exist $c>0$ and $m_0\in\mathbb N$ such that every $m\ge m_0$ satisfies $E(m)\ge c(\log(m+2))^2$ is not determined by this argument: constant charge at one start does not control other starts, and a running maximum may select a shorter length. Optimal constants are likewise undetermined here. The bond-word prefix length $m_n$ cannot be identified directly with the specified even site count $N_j$.
 
 Adamczewski, *Symbolic discrepancy and self-similar dynamics* ([doi:10.5802/aif.2079](https://doi.org/10.5802/aif.2079), Theorem 1 and Propositions 10–11), provides a general framework for substitution discrepancy and cancellation in the critical spectrum. The existence of a suitable zero-mean letter weight in its weighted lower bounds does not automatically select the position-alternating weight here. Encoding position parity in an enlarged alphabet would require separate checks of primitivity, frequencies, weights, and cancellation conditions. The proof above computes directly on the original word; it neither uses that existence statement to select its weights nor claims literature novelty for the mechanism or explicit formula.
 
@@ -511,7 +749,7 @@ For physical spectral quantities, Juhász derives an auxiliary-matrix method fro
 
 Hermisson's discussion of multi-letter substitutions with marginal renormalization eigenvalues and infinite dynamical exponent ([doi:10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304), arXiv:cond-mat/9808238, p. 11) gives no specific scaling for this word in that passage. In Hida's Fibonacci XXZ analysis ([doi:10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296), arXiv:cond-mat/0404606v2), the scale $\Delta E\sim\exp[-\kappa(\log N)^2]$ in Eq. (38) comes from perturbative renormalization of the interacting isotropic model with separated strong and weak couplings. The free XY case in Eq. (28) instead gives a finite power-law exponent, $\Delta E\sim N^{-z}$. These conclusions do not replace checks of this chain's actual finite matrices, endpoints, parity truncations, and spectral quantity.
 
-[@thm-ch39-p2e-tribonacci-prefix-log-refutation] rules out using this uniform logarithmic interval bound as a premise for an inverse-matrix estimate. It does not refute a polynomial spectral-gap bound, determine $\delta_{\rho,j}$ or its rate along the specified even open prefixes, construct a many-body state, or prove a spatial-entanglement law. The subsequent route through odd repetition windows and full-inverse mass still requires assembly under its own premises. Relating physical states, spatial cuts, and the Rauzy boundary in [@prob-ch39-p2e-fractal-horizon] remains a separate task.
+[@thm-ch39-p2e-tribonacci-prefix-log-refutation] rules out using the uniform logarithmic interval bound as a premise for an inverse-matrix estimate. [@thm-ch39-p2e-tribonacci-uniform-log-squared] supplies control of alternating charge on the actual word, uniformly over starts. Together with the finite-product identity above, it provides a combinatorial input for analyzing hopping ratios. It gives no full-inverse norm or mass estimate by itself and does not refute a polynomial spectral-gap bound. [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] instead uses explicit positive-charge prefixes and one full-inverse entry to prove $\delta_{\rho,j}\to0$; below, [@ex-ch39-p2e-tribonacci-prefix-rate] already assembles the same actual hoppings, odd repeated windows, and full-inverse mass estimate into the stronger paper application $73728/N_j$, with convergence uniform in the parameter. This does not follow from the alternating-charge bound alone. For the Slater-state route described above, spatial entanglement additionally requires construction of the actual occupied projector and analysis of its spatial compression. Relating physical states, spatial cuts, and the Rauzy boundary, and establishing the entropy scaling in [@prob-ch39-p2e-fractal-horizon], remain separate tasks.
 :::
 
 ::: {.remark #rem-ch39-p2e-tridiagonal-localization title="Tridiagonal Localization with Boundary Residuals (Literature result, not formalized in this book)"}
@@ -525,7 +763,7 @@ $$
 \end{aligned}
 $$
 
-Only the input support is restricted; the output remains on the whole line. The corresponding $(n+2)\times n$ matrix retains both outgoing residual rows and cannot be replaced by the $n\times n$ compression that discards them. The bound takes an infimum over positions; an actual interval and unit vector can be chosen with arbitrary positive slack. This supplies an $\ell^2$ localization tool of order $1/n$, while the preceding Tribonacci open-chain question still requires zero-spectrum membership for the corresponding whole-line model, transplantation of an actual word interval with its neighboring sites into the specified finite open prefixes, and checks of length ratios and small scales. Those interfaces remain unverified in this book.
+Only the input support is restricted; the output remains on the whole line. The corresponding $(n+2)\times n$ matrix retains both outgoing residual rows and cannot be replaced by the $n\times n$ compression that discards them. The bound takes an infimum over positions; an actual interval and unit vector can be chosen with arbitrary positive slack. This supplies an $\ell^2$ localization tool of order $1/n$. Studying the finite Tribonacci open chains by this whole-line route would still require zero-spectrum membership for the corresponding whole-line model, transplantation of an actual word interval with its neighboring sites into the specified finite open prefixes, and checks of length ratios and small scales. Those interfaces remain unverified in this book; the finite-matrix proof of [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] does not depend on them.
 :::
 
 A second finite-matrix route uses an odd repeated block. An odd shift exchanges even and odd bonds, allowing two strings of hopping ratios from forward substitution to be paired. The following bound expresses that cancellation in entries of the actual inverse matrix.
@@ -770,6 +1008,105 @@ This is a paper application of the displayed window construction, full-inverse m
 :::
 
 The example gives a paper $1/N_j$ bound and convergence to zero for the specified even open prefixes. Fractal entropy scaling still requires a separate argument involving physical states and spatial cuts; those parts of [@prob-ch39-p2e-fractal-horizon] remain open.
+
+The preceding quantitative paper application already gives a stronger rate. A separate argument needs only the actual prefixes constructed in the proof of [@thm-ch39-p2e-tribonacci-prefix-log-refutation]: their charge is positive and unbounded at odd levels, making one entry of the full inverse sufficiently large.
+
+::: {.theorem #thm-ch39-p2e-tribonacci-open-chain-zero-gap title="Vanishing Spectral Distance for Actual Positive Tribonacci Open Chains" status="written-proof" proof="pf-ch39-p2e-tribonacci-open-chain-zero-gap" repository="https://github.com/the-omega-institute/trureturing" source="TribonacciOpenPathGap, Theorem 1.7" request="https://github.com/the-omega-institute/trureturing-requests/issues/273"}
+Let $W$ be the actual fixed word starting from $A$ for $\sigma(A)=AB$, $\sigma(B)=AC$, $\sigma(C)=A$, with weights $w(A)=2$, $w(B)=1$, $w(C)=0$. For each fixed real $0<\rho<1$, set $t_i=\rho^{w(W_i)}$. For integers $j\ge1$, define
+
+$$
+\begin{aligned}
+L_j&=|\sigma^j(A)|,\qquad N_j=2\lfloor L_j/2\rfloor,\\
+(h_{\rho,j})_{ab}&=\begin{cases}
+t_a,&a+1=b,\\
+t_b,&b+1=a,\\
+0,&\text{otherwise},
+\end{cases}\quad 0\le a,b<N_j,\\
+\delta_{\rho,j}&=\min\{|\lambda|:\lambda\in\operatorname{Spec}(h_{\rho,j})\}.
+\end{aligned}
+$$
+
+The matrix acts on $\mathbb C^{N_j}$, has zero diagonal and only the nearest-neighbor physical bonds $t_0,\ldots,t_{N_j-2}$, and has no closing bond between the endpoints. All its eigenvalues are real. Then
+
+$$
+\lim_{j\to\infty}\delta_{\rho,j}=0.
+$$
+
+Equivalently, for every $\varepsilon>0$ there is an integer $J\ge1$ such that every integer $j\ge J$ satisfies $0\le\delta_{\rho,j}<\varepsilon$.
+:::
+
+::: {.proof #pf-ch39-p2e-tribonacci-open-chain-zero-gap}
+This proof follows the statement and argument in [the source, TribonacciOpenPathGap, Theorem 1.7](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.md).
+
+First fix an actual prefix of odd length, then use that same prefix in every sufficiently long open chain. Recall $\tau=\sigma^4$, $F$, and the words from the proof of [@thm-ch39-p2e-tribonacci-prefix-log-refutation]:
+
+$$
+U_0=\varepsilon,\qquad U_{n+1}=\sigma^{4(n+1)}(C)U_n,\qquad m_n=|U_n|.
+$$
+
+That proof established the literal prefix identity $U_n=W_{[0,m_n)}$ and $F(U_n)=1-(-1)^n(n^2+3n+1)$. Each prepended block $\sigma^{4(n+1)}(C)$ has odd length, so $m_{n+1}\equiv1+m_n\pmod2$. Starting from $m_0=0$, induction gives $m_n\equiv n\pmod2$. Thus for every odd $n$ we can write
+
+$$
+m_n=2q+1,\qquad F(U_n)=(n+1)(n+2)>0.
+$$
+
+Suppose $N_j\ge m_n+1$ and put $M=\lfloor L_j/2\rfloor$, so $N_j=2M$ and $q<M$. Take the entire physical open chain $H=h_{\rho,j}$. Use the bidiagonal block $B=L(t,M)$, positive block $C$, and $D=\operatorname{diag}((-1)^r)_{r=0}^{M-1}$ from [@ex-ch39-p2e-open-chain-residual]. They satisfy
+
+$$
+\begin{aligned}
+B_{r,r}&=t_{2r},\qquad B_{r,r-1}=-t_{2r-1},\\
+D^2&=I,\qquad DCD=B.
+\end{aligned}
+$$
+
+The second entry formula applies for $1\le r<M$. Every $t_i>0$, so $B$ has nonzero diagonal, its ordinary inverse $G=B^{-1}$ exists, and $C^{-1}=DGD$. Ordering the sites as evens $2r$ followed by odds $2r+1$ gives the full chain and its inverse as
+
+$$
+\begin{aligned}
+H&=\begin{pmatrix}0&C\\C^{\mathsf T}&0\end{pmatrix},\\
+H^{-1}&=\begin{pmatrix}0&(C^{-1})^{\mathsf T}\\C^{-1}&0\end{pmatrix}.
+\end{aligned}
+$$
+
+Both displays use the permuted coordinates; they also establish invertibility of $H$. Forward substitution starts the first column at $G_{0,0}=1/t_0$ and gives $t_{2r}G_{r,0}=t_{2r-1}G_{r-1,0}$ for $1\le r<M$. Hence
+
+$$
+G_{q,0}=\frac{\prod_{r=0}^{q-1}t_{2r+1}}{\prod_{r=0}^{q}t_{2r}}>0.
+$$
+
+This is the preceding Green-entry formula at start zero, with empty numerator product $1$ when $q=0$. Returning to physical sites, the signs in $D$ give $(H^{-1})_{2q+1,0}=(-1)^qG_{q,0}$. Substituting the actual hoppings $t_i=\rho^{w(W_i)}$, and retaining the final even bond $t_{2q}$ in the denominator, yields
+
+$$
+\begin{aligned}
+|(H^{-1})_{2q+1,0}|&=G_{q,0}\\
+&=\rho^{-\sum_{i=0}^{2q}(-1)^iw(W_i)}\\
+&=\rho^{-F(U_n)}=\rho^{-(n+1)(n+2)}.
+\end{aligned}
+$$
+
+The physical bonds used are exactly those with indices $0,\ldots,2q$, and site $2q+1<N_j$ is present. The condition $N_j\ge|U_n|+1$ retains this last bond and its right endpoint. This is an entry of the inverse of the full $N_j$-site matrix: all outside sites remain, no inverse of a local compression replaces it, and no boundary bond is added.
+
+The spectral step uses the induced operator norm on complex Euclidean space, $\|T\|_{2\to2}=\sup_{\|v\|_2=1}\|Tv\|_2$. Testing on the unit coordinate vector $e_0$ gives
+
+$$
+|(H^{-1})_{2q+1,0}|\le\|H^{-1}e_0\|_2\le\|H^{-1}\|_{2\to2}.
+$$
+
+This is not the maximum-entry norm. The invertible Hermitian matrix $H$ has a Hermitian inverse whose eigenvalues are the reciprocals of its own. By the finite-dimensional spectral theorem, the Euclidean operator norm of $H^{-1}$ is its largest absolute eigenvalue. Therefore some real eigenvalue $\lambda$ of the original matrix satisfies
+
+$$
+\begin{aligned}
+|\lambda|&=\|H^{-1}\|_{2\to2}^{-1},\\
+0\le\delta_{\rho,j}&\le|\lambda|\le\rho^{(n+1)(n+2)}.
+\end{aligned}
+$$
+
+Finally, given $\varepsilon>0$, choose a natural number $k$ with $\rho^k<\varepsilon$, which is possible since $0<\rho<1$, and fix the odd integer $n=2k+1$. Since $(n+1)(n+2)\ge k$, the bound above is below $\varepsilon$. The actual iterate lengths satisfy $L_j\ge j+1$, hence $N_j\ge L_j-1\ge j$. Thus there is $J\ge1$ such that every $j\ge J$ satisfies $N_j\ge m_n+1$ and admits the estimate from this same prefix. The level $n$ is chosen once from $\rho,\varepsilon$; every subsequent $j\ge J$ then satisfies $0\le\delta_{\rho,j}<\varepsilon$. This proves convergence along all indices, rather than just a selected subsequence.
+
+The source declaration defines `gap` at $j=0$ to be $0$ to avoid the empty eigenvalue set of a zero-dimensional matrix. For $j\ge1$, $L_j\ge2$, and its definition is precisely the minimum absolute value of the nonempty finite real spectrum used here. This single-value convention does not affect the limit.
+:::
+
+This standalone convergence theorem states only the full-sequence limit for each fixed positive $\rho$; its single-inverse-entry argument supplies no $1/N_j$ rate. The preceding [@ex-ch39-p2e-tribonacci-prefix-rate] already gives the stronger paper bound $73728/N_j$ and convergence uniform in the parameter, using actual repeated windows and full-inverse mass. The evidence scopes of the two arguments remain distinct; physical states, spatial cuts, and fractal entropy scaling still require further work.
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`, shift entropy and Abramov's formula carry status `Literature`, and fractal area scaling carries status `OPEN`.
