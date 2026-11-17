@@ -2,7 +2,7 @@
 
 研究日期：2026-11-17。书库基线为 203f34bc8e2281f0f50d42f5328336b9fcbbd65c，trureturing 钉版为 4e2a0d3fcca69885dfcf5b56184838554ebb5239。
 
-研究对象是[附录 E](../../books/quantum-geometry/zh/appendix-e.md) 审计出的九项中间假设 `H1`–`H9`，即零背景比较公理 $\mathcal{A}_0$（[§32.1](../../books/quantum-geometry/zh/ch32-s01-axiom-of-comparison.md)）与各学科公理之间的缺口；工具是 [§34.30](../../books/quantum-geometry/zh/ch34-s30-arc-body-calculus-and-finite-stokes.md) 的弦—矢高分解、有序乘积积分与有限网格上边缘。下文逐条给出陈述与证明，并标明每条属于手工推导、文献结果还是冻结依据。没有新增 Lean 验证结果，没有修改书稿或锁文件。
+研究对象是[附录 E](../../books/quantum-geometry/zh/appendix-e.md) 审计出的九项中间假设 `H1`–`H9`，即零背景比较公理 $\mathcal{A}_0$（[§32.1](../../books/quantum-geometry/zh/ch32-s01-axiom-of-comparison.md)）与各学科公理之间的缺口；工具是 [§34.30](../../books/quantum-geometry/zh/ch34-s30-arc-body-calculus-and-finite-stokes.md) 的弦—矢高分解、有序乘积积分与有限网格上边缘。下文逐条给出陈述与证明，并标明每条属于手工推导、文献结果还是冻结依据。没有新增 Lean 验证结果。可以直接回写的部分已进入附录 E 的 E.8 节。
 
 **主要结论。** 在求同读数为实标量（$S(x,y)=s_{xy}\mathbf{1}$）的情形，`H2` 的三项几何条件（正自配对、椭圆负平方、多点 Gram 半正定）可以由两条更原始的条件推出：第三点冗余 $\mathrm{CMP}(x,y)\,\mathrm{CMP}(y,z)=\mathrm{CMP}(x,z)$ 与对合的正性条件 $(\mathrm{Pos})$。求同读数不是标量时，正自配对仍由第三点冗余推出，Gram 半正定对每个正泛函的读数成立，椭圆负平方不再成立。弦—矢高锁死、三点和乐的比安基恒等式与扇形斯托克斯恒等式只用条款 III 就成立，属于第 0 层。附录 E 反例 (b) 的两个分支在同一个代数 $(M_2(\mathbb{C}),\operatorname{adj})$ 中落在 $\mathrm{SL}(2,\mathbb{C})$ 的幂幺类与双曲类里；据此可以把 `H2` 的签名分岔与 `H8` 的洛伦兹签名读成同一处取舍，这是模型层面的读法，不是推出的定理。在 $\mathcal{Cl}_{3,0}$ 的单位向量实现中，全比较平坦，半比较的三点和乐给出吉拉尔角盈，所以这一层的曲率不必作为额外输入。§34.30 中“伊藤项即矢高”“对偶数是模去矢高的商影”两处模型表述各有精确的代数陈述。
 
@@ -189,6 +189,18 @@ $$
 
 势表示本身的稳定性已有冻结定理 `IsChordal.exists_approximate_gain_potential`：在带双不变度量的群里，若有限弦图上每个三角形的链式律偏差不超过 $\varepsilon$，则存在势 $\varphi$ 使每条边上 $\operatorname{dist}(c_{xy},\varphi_x^{-1}\varphi_y)\le(\lvert V\rvert-2)\varepsilon$。两处都出现因子 $m-2$，来源不同：冻结定理中它是沿消去次序累积的三点偏差的个数，R8 中它是扰动矩阵每行非零元的个数。R8 把锚定偏差传到读数表的特征值上。
 
+### R18 三角相容何时足够：团复形单连通（手工推导；棱道群为文献结果）
+
+设 $G$ 为有限简单图，$H$ 为群，$g$ 定义在相邻的有序点对上，$g(j,i)=g(i,j)^{-1}$，且在 $G$ 的每个三角形上 $g(i,j)g(j,k)=g(i,k)$。走道 $w=(x_0,\dots,x_n)$ 的 $\operatorname{hol}(w)=g(x_0,x_1)\cdots g(x_{n-1},x_n)$ 在两种改写下不变：折返 $x,y,x\leftrightarrow x$（由取逆），三角形 $x,y,z\leftrightarrow x,z$（由三角相容）。称 $G$ 被三角形填满，若每条闭走道都能用这两种改写化成单点。
+
+1. 若 $G$ 被三角形填满，则任何群上的这种 $g$ 都是势之比：$\varphi(x):=\operatorname{hol}(o\to x)$ 与走道无关，$g(x,y)=\varphi(x)^{-1}\varphi(y)$。
+2. 若某个连通分支没有被填满，取 $H$ 为该分支上以 $o$ 为基点的闭走道模两种改写的群，取生成树与树走道 $\gamma_x$，令 $g(x,y)=[\gamma_x(x,y)\gamma_y^{-1}]$。取逆由折返给出；三角相容由 $[\gamma_x(x,y)\gamma_y^{-1}][\gamma_y(y,z)\gamma_z^{-1}]=[\gamma_x(x,y,z)\gamma_z^{-1}]=[\gamma_x(x,z)\gamma_z^{-1}]$ 给出；闭走道 $w$ 的 $\operatorname{hol}(w)=[\gamma_ow\gamma_o^{-1}]=[w]$。势之比使一切闭走道的 $\operatorname{hol}$ 为 $1$，与 $H$ 非平凡矛盾。
+3. 设 $H$ 带双侧不变伪度量，取逆精确成立，三角相容的偏差不超过 $\varepsilon$。用 $A$ 次三角形改写化成单点的闭走道满足 $d(\operatorname{hol}(w),1)\le A\varepsilon$：一次三角形改写把 $a\,g(x,y)g(y,z)\,b$ 换成 $a\,g(x,z)\,b$，双侧不变性给出这一步的距离不超过 $\varepsilon$，再用三角不等式。双侧不变性还推出 $d(x^{-1},y^{-1})=d(x,y)$，所以三角形三个顶点的各种排序给出同一条偏差条件。
+
+所以“对一切群，三角相容推出势表示”当且仅当 $G$ 被三角形填满。第 2 款的群是团复形的棱道群，同构于它的基本群（Spanier, *Algebraic Topology*, 1966, 第 3 章），被三角形填满即团复形各分支单连通；连通弦图的团复形可缩，冻结定理 `IsChordal.exists_gain_potential` 是第 1 款的特例。四圈的棱道群是 $\mathbb{Z}$；四轮图与八面体图都不是弦图而团复形单连通。第 3 款是 R5 的组合形式：偏差按填充面积累积，弦图上冻结定理给出的 $(\lvert V\rvert-2)\varepsilon$ 是沿消去次序的一种填充。
+
+复算：对 $S_3$ 值增益，把生成树上的值规范固定为单位元后穷举，四轮图与八面体图各只有 $1$ 个平坦类，四圈与三角剖分圆环各有 $6=\lvert\operatorname{Hom}(\mathbb{Z},S_3)\rvert$ 个。
+
 ## 4. 曲率来自半比较
 
 条款 IV 让一切三点和乐为 $1$，球面角盈、贝里相位这些曲率量却确实存在。两者并不冲突：平坦的是全比较，弯曲的是它的平方根。
@@ -338,9 +350,22 @@ $$
 
 有限孔径下 $H$ 的可识别性有明确边界：$D=e^{-i\epsilon H}$ 只在谱落在 $(-\pi/\epsilon,\pi/\epsilon]$ 时唯一决定 $H$；与 $H$ 对易、谱为 $\tfrac{2\pi}{\epsilon}\mathbb{Z}$ 的修正给出同一组采样比较。
 
-### 关于 `H5`
+### R19 `H5`：只依赖两两比较的概率规则里，玻恩律的层析秩最小（单比特为手工推导；一般维数为文献结果）
 
-本轮没有缩小 `H5`。能说的只是重述：单比特上玻恩权重是矢高的仿射函数 $p=1-\tfrac v2$；对 POVM $E_k=w_k(\mathbf{1}+n_k\cdot\boldsymbol\sigma)$（$\sum_kw_k=1$，$\sum_kw_kn_k=0$），$\sum_kw_kv(r,n_k)=1$ 与 $r$ 无关，这正是归一化所需的一阶矩条件。附录 E 的三次反例对矢高不是仿射的。从两两公平推不出这条仿射性，全效应可加性或投影正交可加性仍是必需输入。
+单比特上玻恩权重是矢高的仿射函数 $p=1-\tfrac v2$；对 POVM $E_k=w_k(\mathbf{1}+n_k\cdot\boldsymbol\sigma)$（$\sum_kw_k=1$，$\sum_kw_kn_k=0$），$\sum_kw_kv(r,n_k)=1$ 与 $r$ 无关，这正是归一化所需的一阶矩条件。附录 E 的三次反例对矢高不是仿射的，从两两公平推不出这条仿射性。下面把它换成一条计数条件。
+
+设 $p(\mathbf{r}\mid\mathbf{s})=f(\mathbf{s}\cdot\mathbf{r})$，$f$ 在 $[-1,1]$ 上连续，$f(t)+f(-t)=1$，$f(1)=1$。记 $f=\sum_lc_lP_l$ 为勒让德展开，$K(f)$ 为 $\{\mathbf{r}\mapsto f(\mathbf{s}\cdot\mathbf{r})\}_{\mathbf{s}}$ 的线性张成的维数。
+
+1. $K(f)=\sum_{c_l\neq0}(2l+1)$，$f$ 不是多项式时为 $\infty$。证明：$V_f=\operatorname{span}\{f(\mathbf{s}\cdot\,\cdot)\}$ 在旋转下不变。$f$ 为多项式时，由加法定理 $f(\mathbf{s}\cdot\mathbf{r})=\sum_lc_l\frac{4\pi}{2l+1}\sum_mY_{lm}(\mathbf{s})Y_{lm}(\mathbf{r})$；球谐函数作为 $\mathbf{s}$ 的函数线性无关，所以系数向量张满，$V_f=\bigoplus_{c_l\neq0}\mathcal{H}_l$。$f$ 不是多项式时有无穷多个 $c_l\neq0$，$V_f$ 在每个这样的 $\mathcal{H}_l$ 上的投影非零，维数无穷。
+2. $f(t)+f(-t)=1$ 与 $P_l(-t)=(-1)^lP_l(t)$ 给出 $c_0=\tfrac12$，偶数阶 $l\ge2$ 的系数为零。$f(1)=1$ 排除 $f\equiv\tfrac12$，所以有奇数阶出现，$K(f)\ge1+3$。
+3. $K(f)=4$ 当且仅当只出现 $l=0,1$，即 $f=\tfrac12+c_1t$；$f(1)=1$ 给出 $c_1=\tfrac12$，$f(t)=\tfrac{1+t}2=1-\tfrac v2$。
+4. 三次规则 $\tfrac12(1+t^3)$：$t^3=\tfrac35P_1+\tfrac25P_3$，$K=1+3+7=11$。只含 $l=0,3$ 的归一规则 $\tfrac12+\tfrac12P_3$ 取值在 $[0,1]$ 内，$K=8$。
+
+一般维数（文献结果，本轮未证明）：在 $\mathbb{CP}^{d-1}$ 上，$p=f(\lvert\langle x\mid y\rangle\rvert^2)$ 在每组正交归一基上归一且 $f(1)=1$ 时 $K(f)\ge d^2$，等号只在 $f(t)=t$。骨架是：带状函数按 $\mathrm{U}(d)$ 的不可约分量 $\mathcal{H}_k$ 无重数分解，$\dim\mathcal{H}_k=\binom{d+k-1}{k}^2-\binom{d+k-2}{k-1}^2$ 随 $k$ 递增，$\dim\mathcal{H}_1=d^2-1$；归一使 $k=0$ 分量为 $\tfrac1d\neq0$，$f(1)=1$ 使 $f$ 非常数；仿射规则 $a+bt$ 的归一条件 $da+b=1$ 与 $a+b=1$ 给出 $a=0$。出处：Hardy（arXiv:quant-ph/0101012）以 $K=N^2$ 为公理；Galley–Masanes（*Quantum* **1**, 15, 2017）把备选概率规则对应到酉群表示。按记忆中的书目信息列出，未调阅原文核对。
+
+复算：随机采样的概率表的数值秩，$S^2$ 上玻恩律为 $4$、三次规则为 $11$、$\tfrac12+\tfrac12P_3$ 为 $8$；$\mathbb{CP}^{d-1}$（$d=2,3,4$）上仿射规则为 $d^2$，$t^2$ 为 $\bigl(\tfrac{d(d+1)}2\bigr)^2$。
+
+读法：$d^2=\dim_{\mathbb{R}}\operatorname{Herm}(d)$ 与 R15 的局域层析计数是同一个数；对单比特，$4=1+3$ 是 R7 的 Gram 嵌入加归一所占的维数，概率对矢高仿射等价于概率是嵌入坐标的仿射函数。`H5` 的输入由“效应可加性”换成“概率只依赖两两比较，且层析秩最小”。后者仍是操作假设，两两公平推不出它。
 
 ## 7. 缺口台账
 
@@ -352,13 +377,13 @@ $$
 | `H2` 多点 Gram 半正定 | 由条款 IV 加正泛函推出，逆向成立；标量相似时由条款 IV 加 $(\mathrm{Pos})$ 推出；偏离平坦时有稳定界（R7、R8） | 条款 IV，以及正泛函或 $(\mathrm{Pos})$ |
 | `H3` | 内积由正泛函的 GNS 形式给出，弦距自动满足极化（R7）；输入由“内积”换成“正读数” | 条款 IV、正泛函、柯西完备化 |
 | `H4` | $R^2=-I$ 是锁死恒等式在 $v=1$ 处的切片（R1） | 正交余项不枯竭、估值选择 |
-| `H5` | 未缩小；改述为“概率对矢高仿射” | 效应可加性 |
+| `H5` | 概率只依赖两两比较时，可加性可换成层析秩最小；单比特有完整证明，一般维数为文献结果（R19） | 效应可加性，或“带状 + 层析秩最小” |
 | `H6` | 时间平移编码为齐次比较族时，群律来自条款 IV；给出 $H$ 的混叠等价类（R17） | 演化的双侧可逆性、可重复最小扰动条件化、强连续性、$H$ |
 | `H7` | 缺口维数 $\dim O_1\dim O_2$；共用中心直角比较是缺口消失的充分条件（R15） | 中心复结构的存在、交换统计 |
 | `H8` | 洛伦兹签名与 `H2` 签名可读作同一处取舍（R3，模型读法）；$\mathcal{Cl}_{3,0}$ 中射影和乐来自半比较（R9）；比安基与斯托克斯来自条款 III（R4、R5）；捏合为偶部（R16） | 签名取舍、随基点变化的联络及其动力学 |
 | `H9` | 未变。本笔记的有限孔径结论不构造连续统测度 | 同附录 E |
 
-净效果：在求同读数为实标量的情形，`H2` 的三项换成“条款 IV + $(\mathrm{Pos})$”两项；`H3` 的极化一项换成“条款 IV + 正泛函”；`H6`、`H7`、`H8` 各有一部分转为推论。条款 IV 排除一切全比较的和乐，因此它刻画的是第 1 层的平坦骨架；带真实曲率的第 2 层联络必须放弃它，那时 R4、R5、R8 是仍然可用的工具。
+净效果：在求同读数为实标量的情形，`H2` 的三项换成“条款 IV + $(\mathrm{Pos})$”两项；`H3` 的极化一项换成“条款 IV + 正泛函”；`H5` 的输入换了形状而没有消失；`H6`、`H7`、`H8` 各有一部分转为推论。条款 IV 只需在可比三角形上成立，前提是这些三角形填满每个圈（R18）。条款 IV 排除一切全比较的和乐，因此它刻画的是第 1 层的平坦骨架；带真实曲率的第 2 层联络必须放弃它，那时 R4、R5、R8 是仍然可用的工具。
 
 ## 8. 冻结依据与计算证据
 
@@ -394,16 +419,16 @@ $$
 | D5/S3/Quantum/Entanglement/BipartiteSectorDecomposition.bipartite_sector_decomposition | R15 复情形的扇区分解与维数 |
 | D5/S3/Quantum/Entanglement/BipartiteSectorDecomposition.hermitian_space_finrank | R15 中 $\dim_{\mathbb{R}}\operatorname{Herm}(d)=d^2$ |
 
-检索范围是所钉提交的 `D5/` 全树，按定理名与陈述形状检索。以下各条没有找到公开的冻结声明：一般星环中公平元的奇偶分解（R1）、按矢高的分类（R2、R3）、非阿贝尔的比安基与扇形斯托克斯（R4、R5）、半旋子和乐与 $\tan(\Omega/2)$（R9）、移位旋子的余项界（R10）、圆坐标环的射流商（R11）、累计矢高的界与极限（R12）、复步导数的界（R14）、实理论的奇偶计数（R15）。未找到不等于不存在；钉版 Mathlib 本轮没有检索。
+检索范围是所钉提交的 `D5/` 全树，按定理名与陈述形状检索。以下各条没有找到公开的冻结声明：一般星环中公平元的奇偶分解（R1）、按矢高的分类（R2、R3）、非阿贝尔的比安基与扇形斯托克斯（R4、R5）、半旋子和乐与 $\tan(\Omega/2)$（R9）、移位旋子的余项界（R10）、圆坐标环的射流商（R11）、累计矢高的界与极限（R12）、复步导数的界（R14）、实理论的奇偶计数（R15）、一般图上的三角形填满判据（R18）、带状概率规则的层析秩（R19）。未找到不等于不存在；钉版 Mathlib 本轮没有检索。
 
 文献结果及出处：莫比乌斯变换的迹分类（A. F. Beardon, *The Geometry of Discrete Groups*, Springer, 1983）；距离与正定核（I. J. Schoenberg, *Trans. Amer. Math. Soc.* **44**, 522–536, 1938）；立体角公式（A. van Oosterom & J. Strackee, *IEEE Trans. Biomed. Eng.* **30**, 125–126, 1983；F. Eriksson, *Math. Mag.* **63**, 184–187, 1990）；二阶随机微分几何（P.-A. Meyer, *Séminaire de Probabilités XV*, 1981；M. Émery, *Stochastic Calculus in Manifolds*, Springer, 1989）；复步导数（J. R. R. A. Martins, P. Sturdza & J. J. Alonso, *ACM Trans. Math. Softw.* **29**, 245–262, 2003）；实量子论与局域层析（E. C. G. Stueckelberg, *Helv. Phys. Acta* **33**, 727–752, 1960；H. Araki, *Commun. Math. Phys.* **75**, 1–24, 1980；W. K. Wootters, 收于 *Complexity, Entropy and the Physics of Information*, 1990；L. Hardy, arXiv:quant-ph/0101012）。本轮按记忆中的书目信息列出这些出处，没有逐篇调阅原文核对页码。
 
-复算脚本：[arc_comparison_gap_check.py](arc_comparison_gap_check.py)，在安装 `numpy`、`sympy`、`mpmath` 的环境运行 `python3 docs/project/arc_comparison_gap_check.py`。它用种子 `20261117` 的随机酉矩阵与 $\mathrm{SL}(2,\mathbb{C})$ 元素核对 R1、R3–R9、R13、R15 的恒等式与不等式（代数浮点差不超过 $6\times10^{-14}$），用 Gröbner 基核对 R11 的理想等式与商代数维数，用 40–50 位精度核对 R10、R12、R14 的界与 §34.30.4 算例表的角点，并穷举 $2^{12}$ 条符号路径核对 R12 的精确均值。有限采样与有限精度提供复算证据，普遍结论依赖上文的证明。
+复算脚本：[arc_comparison_gap_check.py](arc_comparison_gap_check.py)，在安装 `numpy`、`sympy`、`mpmath` 的环境运行 `python3 docs/project/arc_comparison_gap_check.py`。它用种子 `20261117` 的随机酉矩阵与 $\mathrm{SL}(2,\mathbb{C})$ 元素核对 R1、R3–R9、R13、R15 的恒等式与不等式（代数浮点差不超过 $6\times10^{-14}$），用 Gröbner 基核对 R11 的理想等式与商代数维数，用 40–50 位精度核对 R10、R12、R14 的界与 §34.30.4 算例表的角点，穷举 $2^{12}$ 条符号路径核对 R12 的精确均值，穷举 $S_3$ 值增益核对 R18 的平坦类个数，并用随机采样概率表的数值秩核对 R19。有限采样与有限精度提供复算证据，普遍结论依赖上文的证明。
 
 ## 9. 后续落点
 
-**可以直接回写书稿的部分。** R6 第 2 款与势表示的稳定性已经冻结，不需要新的形式化。附录 E 可以在 E.7 之后增设一节，以 `IsChordal.exists_gain_potential` 与 `IsChordal.exists_approximate_gain_potential` 为定理盒，给出“条款 IV 推出正自配对与锚定表示”、四个反例的归属表，以及“条款 IV + 正性”对 `H2`、`H3` 的归约；`gramPsd`、`gram_distance_conditionally_negative` 与 `elliptic_hyperbolic_reflection_trichotomy` 分别支撑 Gram 半正定、弦距以及双曲、椭圆两种生成元的正规形。其余推导（R1–R5、R8、R9）以注记或算例进入正文并标明手工推导。同一批可顺带修订：§32.1 条款 III 之后说明对易是推论；§34.30.1 的 $D_1$ 一段换成 R11 的等式；§34.30.2 的四相区配上 R12 的双侧界；§34.30.3 补入 R4、R5。
+**已回写书稿的部分。** R6 第 2 款与势表示的稳定性已经冻结，不需要新的形式化。附录 E 在 E.7 之后增设了 E.8 节，以 `IsChordal.exists_gain_potential` 与 `IsChordal.exists_approximate_gain_potential` 为定理盒，给出“条款 IV 推出正自配对与锚定表示”、四个反例的归属表，以及“条款 IV + 正性”对 `H2`、`H3` 的归约；`gramPsd`、`gram_distance_conditionally_negative` 与 `elliptic_hyperbolic_reflection_trichotomy` 分别支撑 Gram 半正定、弦距以及双曲、椭圆两种生成元的正规形。其余推导（R1–R5、R8、R9）以注记或算例进入正文并标明手工推导。同一批可顺带修订：§32.1 条款 III 之后说明对易是推论；§34.30.1 的 $D_1$ 一段换成 R11 的等式；§34.30.2 的四相区配上 R12 的双侧界；§34.30.3 补入 R4、R5。
 
-**上游形式化。** 冻结库中尚无对应声明、且证明有实际内容的候选，按价值排序：R12（累计矢高的有限 $N$ 双侧界、四相极限与均值旋子夹逼；其中 $(\cos(t/\sqrt n))^n$ 的极限在上游已有私有引理，按上游规则应公开原声明后复用）、R9（半旋子和乐的闭式与 $\tan(\Omega/2)$）、R15 的实情形计数、R10 第 5 款、R14、R11。R1、R4、R5 是由假设代入加环运算得到的恒等式，适合作为上述定理证明中被消费的引理，不宜单独立项。形式化之前还须检索钉版 Mathlib。
+**上游形式化。** 冻结库中尚无对应声明、且证明有实际内容的候选，按价值排序：R12（累计矢高的有限 $N$ 双侧界与三个极限区间；均值旋子夹逼的两侧分别是钉版 Mathlib 中 `Real.one_sub_inv_le_log_of_pos` 与 `Real.one_sub_le_exp_neg` 的直接推论，按上游规则不单独立项；$(\cos(t/\sqrt n))^n$ 的极限在上游已有私有引理，需要时应公开原声明后复用）、R9（半旋子和乐的闭式与 $\tan(\Omega/2)$）、R15 的实情形计数、R10 第 5 款、R14、R11。R1、R4、R5 是由假设代入加环运算得到的恒等式，适合作为上述定理证明中被消费的引理，不宜单独立项。形式化之前还须检索钉版 Mathlib。
 
-**未解决。** $(\mathrm{Pos})$ 能否由更弱的比较条件推出，本轮没有结果。条款 IV 一侧，冻结定理已把“一切三点”减弱为“弦图上的可比三角形”。弦性是充分条件，不是必要条件：四圈上没有三角形，任意和乐都允许，势表示可以不存在；带轮毂的四轮图不是弦图，三角形平坦却仍然推出势表示（取 $\varphi_i=g_{\text{毂},i}$，即 R6 的锚定论证）。决定性的条件是每个圈都能由可比三角形拼出，即三角形二维复形单连通；这个一般陈述本轮没有证明。`H5` 没有进展。[@prob-ch34-rough-nonabelian-surface-calculus] 的两项目标未触及：R5 与 R8 只处理有限孔径，不涉及 $\alpha<\tfrac12$ 的细分极限。
+**未解决。** $(\mathrm{Pos})$ 能否由更弱的比较条件推出，本轮没有结果。条款 IV 一侧，R18 给出了恰好足够的条件（可比三角形填满每个圈）；它只有手工推导，冻结定理覆盖的是弦图这一特例。`H5` 一侧，R19 对一般维数只引用文献，层析秩最小能否由更弱的比较条件推出没有结果。[@prob-ch34-rough-nonabelian-surface-calculus] 的两项目标未触及：R5 与 R8 只处理有限孔径，不涉及 $\alpha<\tfrac12$ 的细分极限。

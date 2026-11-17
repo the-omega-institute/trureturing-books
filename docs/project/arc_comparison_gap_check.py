@@ -642,6 +642,127 @@ def check_e4_e5():
     record("E4 阿贝尔化的四面体上边缘条件", worst)
 
 
+# ---------------------------------------------------------------------------
+# R18  三角相容何时足够：模规范后的平坦增益个数等于 |Hom(pi_1, H)|
+# ---------------------------------------------------------------------------
+def s3_table():
+    perms = [(0, 1, 2), (1, 0, 2), (0, 2, 1), (2, 1, 0), (1, 2, 0), (2, 0, 1)]
+    index = {q: i for i, q in enumerate(perms)}
+    mul = [[index[tuple(a[b[k]] for k in range(3))] for b in perms] for a in perms]
+    inv = [next(j for j in range(6) if mul[i][j] == 0) for i in range(6)]
+    return mul, inv
+
+
+def count_flat_gains_mod_gauge(nv, edges):
+    """树边规范固定为单位元后，满足三角相容的 S3 值增益的个数。"""
+    mul, inv = s3_table()
+    adj = {frozenset(e) for e in edges}
+    tris = [
+        (a, b, c)
+        for a in range(nv)
+        for b in range(a + 1, nv)
+        for c in range(b + 1, nv)
+        if {frozenset((a, b)), frozenset((b, c)), frozenset((a, c))} <= adj
+    ]
+    seen, tree, stack = {0}, set(), [0]
+    while stack:
+        x = stack.pop()
+        for e in edges:
+            if x in e:
+                y = e[0] if e[1] == x else e[1]
+                if y not in seen:
+                    seen.add(y)
+                    tree.add(frozenset(e))
+                    stack.append(y)
+    assert len(seen) == nv
+    free = [tuple(sorted(e)) for e in edges if frozenset(e) not in tree]
+    val = {tuple(sorted(e)): 0 for e in tree}
+
+    def g(a, b):
+        return val[(a, b)] if a < b else inv[val[(b, a)]]
+
+    def ok():
+        for a, b, c in tris:
+            if (a, b) in val and (b, c) in val and (a, c) in val:
+                if mul[g(a, b)][g(b, c)] != g(a, c):
+                    return False
+        return True
+
+    def dfs(k):
+        if k == len(free):
+            return 1
+        total = 0
+        for h in range(6):
+            val[free[k]] = h
+            if ok():
+                total += dfs(k + 1)
+        del val[free[k]]
+        return total
+
+    return dfs(0)
+
+
+def check_r18():
+    c4 = [(0, 1), (1, 2), (2, 3), (3, 0)]
+    wheel = [(0, i) for i in range(1, 5)] + [(1, 2), (2, 3), (3, 4), (4, 1)]
+    octa = [(a, b) for a in range(6) for b in range(a + 1, 6) if b - a != 3]
+    annulus = (
+        [(i, (i + 1) % 4) for i in range(4)]
+        + [(4 + i, 4 + (i + 1) % 4) for i in range(4)]
+        + [(i, 4 + i) for i in range(4)]
+        + [(i, 4 + (i + 1) % 4) for i in range(4)]
+    )
+    # 单连通（四轮、八面体，均非弦图）：只有平凡类；pi_1 = Z（四圈、三角剖分圆环）：|Hom(Z, S3)| = 6
+    assert count_flat_gains_mod_gauge(5, wheel) == 1
+    assert count_flat_gains_mod_gauge(6, octa) == 1
+    assert count_flat_gains_mod_gauge(4, c4) == 6
+    assert count_flat_gains_mod_gauge(8, annulus) == 6
+    # 第 3 款：四轮图上轮辋和乐的偏差不超过 4 个三角形偏差之和
+    worst = 0.0
+    for scale in (0.01, 0.1, 0.5):
+        for _ in range(40):
+            n = 3
+            hub = [random_unitary(n) for _ in range(4)]
+            defect = [expm_skew(random_skew(n, scale)) for _ in range(4)]
+            rim = [dagger(hub[i]) @ defect[i] @ hub[(i + 1) % 4] for i in range(4)]
+            eps = max(np.linalg.norm(hub[i] @ rim[i] - hub[(i + 1) % 4], 2) for i in range(4))
+            hol = rim[0] @ rim[1] @ rim[2] @ rim[3]
+            dev = np.linalg.norm(hol - np.eye(n), 2)
+            assert dev <= 4 * eps + 1e-12
+            worst = max(worst, dev / (4 * eps))
+    record("R18 平坦增益计数与面积界（比值应 <= 1）", worst, "四轮/八面体: 1 类; 四圈/圆环: 6 类")
+
+
+# ---------------------------------------------------------------------------
+# R19  带状概率规则的层析秩：仿射 <=> 秩 d^2
+# ---------------------------------------------------------------------------
+def numeric_rank(m, tol=1e-9):
+    sv = np.linalg.svd(m, compute_uv=False)
+    return int((sv > tol * sv[0]).sum())
+
+
+def check_r19():
+    x = RNG.normal(size=(80, 3))
+    x /= np.linalg.norm(x, axis=1)[:, None]
+    t = x @ x.T
+    p3 = (5 * t**3 - 3 * t) / 2
+    assert numeric_rank((1 + t) / 2) == 4  # 玻恩律
+    assert numeric_rank((1 + t**3) / 2) == 11  # 附录 E 的三次规则：l = 0, 1, 3
+    assert numeric_rank(0.5 + p3 / 2) == 8  # 只含 l = 0, 3 的归一规则
+    tt = sp.symbols("t")
+    assert sp.expand(sp.Rational(3, 5) * tt + sp.Rational(2, 5) * (5 * tt**3 - 3 * tt) / 2 - tt**3) == 0
+    for d in (2, 3, 4):
+        z = RNG.normal(size=(130, d)) + 1j * RNG.normal(size=(130, d))
+        z /= np.linalg.norm(z, axis=1)[:, None]
+        w = np.abs(z @ dagger(z)) ** 2
+        assert numeric_rank(w) == d * d
+        assert numeric_rank(0.3 + 0.7 * w) == d * d
+        assert numeric_rank(w**2) == (d * (d + 1) // 2) ** 2
+        assert numeric_rank(3 * w**2 - 2 * w**3) > d * d
+    record("R19 层析秩：仿射规则为 d^2，非仿射规则更大", 0.0, "S^2 与 CP^{d-1}, d = 2, 3, 4")
+
+
+
 def main():
     check_e4_e5()
     check_d1()
@@ -657,6 +778,8 @@ def main():
     check_p9()
     check_p10()
     check_h7()
+    check_r18()
+    check_r19()
     width = max(len(tag) for tag, _, _ in REPORT)
     for tag, value, note in REPORT:
         print(f"{tag:<{width}}  {value:.3e}  {note}")

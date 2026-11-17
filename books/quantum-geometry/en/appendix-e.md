@@ -285,7 +285,7 @@ Stepping back across the entire audit table ([@rem-appe-master-audit-table]), th
 
 ## E.8 Third-Point Redundancy and Positivity of the Involution: Reducing `H2` and `H3` with the Arc-Body Calculus {#sec-appe-third-point-redundancy}
 
-The table in E.7 records `H2` as three parallel Layer-1 conditions: positive self-pairing, the elliptic negative square of a rank-$2$ bivector, and Gram positive semidefiniteness for any number of points. `H3` then adds parallelogram polarization. This section goes through the same accounts with the chord–sagitta decomposition of [Chapter 34 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes). The outcome is that the four items are not independent. When the similarity readings are real scalars, the three items of `H2` follow from two more primitive conditions: **third-point redundancy** (comparing $x$ with $z$ is not changed by routing through a third point $y$) and **positivity of the involution** (the round trip of a nonzero difference is neither zero nor negative). The polarization item of `H3` follows from third-point redundancy together with one positive reading.
+The table in E.7 records `H2` as three parallel Layer-1 conditions: positive self-pairing, the elliptic negative square of a rank-$2$ bivector, and Gram positive semidefiniteness for any number of points. `H3` then adds parallelogram polarization. This section goes through the same accounts with the chord–sagitta decomposition of [Chapter 34 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes). The outcome is that the four items are not independent. When the similarity readings are real scalars, the three items of `H2` follow from two more primitive conditions: **third-point redundancy** (comparing $x$ with $z$ is not changed by routing through a third point $y$) and **positivity of the involution** (the round trip of a nonzero difference is neither zero nor negative). The polarization item of `H3` follows from third-point redundancy together with one positive reading. E.8.5 adds a restatement of `H5`: among probability rules that see only pairwise comparison, the Born rule is the one of minimal tomographic rank.
 
 The boundary first. Both conditions are added on top of $\mathcal{A}_0$. What is proved here is "if they are added, then the rest follows"; nothing here claims they can be derived from Clauses I–III, and the countermodels of [@ex-appe-layer0-countermodels] show they cannot. The two theorem boxes of this section are frozen theorems. Every other derivation is marked `manual derivation`, and classical results that are quoted are marked `Literature`.
 
@@ -420,6 +420,20 @@ For finite $X$, item 2 is the complete-graph case of [@thm-appe-chordal-gain-pot
 
 Item 1 excludes countermodel (a) of [@ex-appe-layer0-countermodels]: on a single point, $\mathrm{CMP}=-1$ has round trip $+1$ but violates $c\cdot c=c$. Under Clause IV, the "positive self-pairing" of `H2` is therefore no longer an independent calibration. Item 4 says that once an anchor is chosen, an object is the rotor that carries the anchor to it; objects and the operators acting on them are no longer two kinds of thing. Item 5 is the Newton–Leibniz formula for the path-ordered rotor product integral of §34.30.2: a flat comparison multiplied along any sampled path depends only on the two endpoints. This holds exactly at every finite aperture, with no refinement limit.
 
+Chordality is one sufficient condition under which triangle compatibility is enough. The condition that is exactly enough can be stated directly.
+
+::: {.remark #rem-appe-triangle-simple-connectivity title="When Triangle Compatibility Suffices: Comparable Triangles Fill Every Cycle (Manual Derivation and Literature)"}
+**Manual derivation.** Let $G$ be a finite simple graph on a vertex set $V$, let $H$ be a group, and let $g$ be defined on ordered pairs of adjacent vertices, with $g(j,i)=g(i,j)^{-1}$ and with $g(i,j)\,g(j,k)=g(i,k)$ on every triangle of $G$. For a walk $w=(x_0,\dots,x_n)$ whose consecutive vertices are adjacent, put $\operatorname{hol}(w)=g(x_0,x_1)\cdots g(x_{n-1},x_n)$. Two rewritings are allowed: deleting or inserting a backtrack, $x,y,x\leftrightarrow x$; and replacing two edges of a triangle by the third, $x,y,z\leftrightarrow x,z$. Neither changes $\operatorname{hol}$. Say that $G$ is **filled by triangles** if every closed walk in $G$ can be rewritten to a single vertex by these two moves.
+
+1. **Sufficiency.** If $G$ is filled by triangles, then every $g$ with the two properties above, over any group $H$, is a ratio of potentials. Choose a base point $o$ in each connected component and put $\varphi(x)=\operatorname{hol}(w)$ for any walk $w$ from $o$ to $x$. Two such walks, one followed by the reverse of the other, form a closed walk whose $\operatorname{hol}$ is $1$, so $\varphi$ does not depend on the walk. For adjacent $x,y$ this gives $\varphi(y)=\varphi(x)\,g(x,y)$, that is, $g(x,y)=\varphi(x)^{-1}\varphi(y)$.
+2. **Necessity.** If some connected component of $G$ is not filled by triangles, there are a group $H$ and a $g$ with the two properties above that is not a ratio of potentials. Take $H$ to be the closed walks based at $o$ in that component modulo the two rewritings, with concatenation as product. Fix a spanning tree, let $\gamma_x$ be the tree walk from $o$ to $x$, and put $g(x,y)=[\gamma_x\,(x,y)\,\gamma_y^{-1}]$. This $g$ satisfies the inverse rule and triangle compatibility, and every closed walk $w$ based at $o$ has $\operatorname{hol}(w)=[w]$. A ratio of potentials would force $\operatorname{hol}$ to be $1$ on all closed walks, which contradicts the nontriviality of $H$.
+3. **The deviation accumulates with filling area.** Let $H$ carry a pseudometric $d$ invariant under left and right translations, and let $g$ satisfy the inverse rule exactly and triangle compatibility only up to $\varepsilon$: $d\bigl(g(i,j)\,g(j,k),\,g(i,k)\bigr)\le\varepsilon$. A closed walk that is rewritten to a single vertex with $A$ triangle moves satisfies $d(\operatorname{hol}(w),1)\le A\varepsilon$. Backtracks do not change $\operatorname{hol}$; each triangle move replaces one factor in the middle of the product, and two-sided invariance bounds the deviation of that step by $\varepsilon$.
+
+**Literature.** The group in item 2 is the edge-path group of the clique complex of $G$ (the simplices are the cliques of $G$), which is isomorphic to the fundamental group of the clique complex (Spanier, *Algebraic Topology*, 1966, Chapter 3). "Filled by triangles" therefore means that every connected component of the clique complex is simply connected. The clique complex of a connected chordal graph is contractible, so [@thm-appe-chordal-gain-potential] is a special case of item 1.
+:::
+
+Two examples mark the boundary. The 4-cycle has no triangles; its group of closed walks is $\mathbb{Z}$, the $g$ of item 2 records one turn around the cycle as the generator, and every holonomy is allowed. Add a hub adjacent to all four vertices. The resulting wheel is not chordal, because the rim is still a chordless 4-cycle, yet it is filled by its four triangles, and triangle compatibility again gives a potential. For Clause IV, then, what matters is whether comparable triangles fill every cycle. Item 3 is the combinatorial form of the finite-precision Stokes theorem of §34.30.3: the deviation of a holonomy is at most the number of enclosed triangles times the deviation of a single triangle.
+
 ### E.8.3 From the Potential Representation to Gram Positivity and Chord Distance {#sec-appe-gram-from-potential}
 
 With $c_{xy}=g_x^*g_y$ in hand, Gram positive semidefiniteness for any number of points needs only a positive reading.
@@ -503,7 +517,7 @@ Because the diagonal is $1$ and $\lvert G_{ij}\rvert\le1$, the trivial lower bou
 
 The factor $m-2$ here and the factor $\lvert V\rvert-2$ of [@thm-appe-chordal-gain-potential-stability] have different origins: in the theorem it counts the three-point defects accumulated along the elimination order, and here it counts the nonzero entries in each row of the perturbation matrix.
 
-### E.8.4 Where Curvature Comes From, and What Changes in the Ledger {#sec-appe-curvature-and-ledger}
+### E.8.4 Where Curvature Comes From {#sec-appe-curvature-from-half-comparison}
 
 Clause IV makes every three-point holonomy equal to $\mathbf{1}$, yet spherical excess and the Berry phase do exist. There is no conflict: what is flat is the full comparison, and what is curved is its square root.
 
@@ -541,8 +555,41 @@ where the expansion of $\det G$ is [`three_anchor_gram_det_formula`](lean:D5/S3/
 
 On the Bloch sphere $S(r)^2=1-\frac v2$ is $\cos^2\frac\theta2$: the squared similarity of the half comparison equals $1$ minus half the sagitta. This is the Born weight written in chord–sagitta terms; it does not replace the additivity premise of `H5`. The determinant formula says that the three-point Gram volume equals the product of the three complementary sagittas times the sagitta of the excess; the value $\det G=\sin^4\epsilon$ of the "two begets three" cell in [§32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison) is a special case. For `H8` this means that the projective holonomy native to Layer 1 needs no new input: it is what one gets under Clause IV by taking the square root of the full comparison. What still needs new Layer-2 input is a fibre connection that varies with the spacetime base point, together with its dynamics.
 
+### E.8.5 The Born Weight: Among Rules That See Only Pairwise Comparison, Minimal Tomographic Rank Is Unique {#sec-appe-born-minimal-rank}
+
+The gap in `H5` is that pairwise fairness does not make probability affine in the sagitta; the cubic function of [@ex-appe-qubit-cubic-and-tomography] is a counterexample. The gap can be restated, and the restatement uses the same kind of counting as `H7`.
+
+::: {.remark #rem-appe-born-zonal-minimal-rank title="On a Qubit the Born Rule Is the Zonal Probability Rule of Minimal Tomographic Rank (Manual Derivation and Literature)"}
+**Manual derivation.** On the Bloch sphere $S^2$ consider outcome probabilities that depend only on pairwise comparison: for a preparation $\mathbf{s}$ and an outcome $\mathbf{r}$ the probability is $p(\mathbf{r}\mid\mathbf{s})=f(\mathbf{s}\cdot\mathbf{r})$, with $f$ continuous on $[-1,1]$. Assume
+
+- **antipodal normalization**: $f(t)+f(-t)=1$;
+- **certainty**: $f(1)=1$.
+
+Expand $f$ in Legendre polynomials, $f=\sum_l c_lP_l$. Define the **tomographic rank** $K(f)$ as the dimension of the real linear span of the functions $\{\mathbf{r}\mapsto f(\mathbf{s}\cdot\mathbf{r})\}_{\mathbf{s}\in S^2}$, that is, the number of real parameters needed to predict all outcome probabilities of one preparation. Then
+
+$$
+K(f)=\sum_{l:\,c_l\neq0}(2l+1),
+$$
+
+and $K(f)=\infty$ when $f$ is not a polynomial. The reason is the addition theorem for spherical harmonics, $P_l(\mathbf{s}\cdot\mathbf{r})=\frac{4\pi}{2l+1}\sum_{m}Y_{lm}(\mathbf{s})\,Y_{lm}(\mathbf{r})$: each degree with $c_l\neq0$ contributes the $2l+1$ linearly independent functions $Y_{lm}(\mathbf{r})$, and the coefficient vectors $\bigl(Y_{lm}(\mathbf{s})\bigr)$ span the whole coefficient space as $\mathbf{s}$ varies.
+
+Antipodal normalization forces $c_0=\frac12$ and makes the coefficients of all even degrees $l\ge2$ vanish. Certainty excludes $f\equiv\frac12$, so at least one odd degree occurs. Hence
+
+$$
+K(f)\ \ge\ 1+3=4,\qquad K(f)=4\iff f(t)=\frac{1+t}{2}=1-\frac v2 .
+$$
+
+The cubic rule $f(t)=\frac12(1+t^3)$ contains the degrees $l=0,1,3$ (since $t^3=\frac35P_1+\frac25P_3$), and its tomographic rank is $1+3+7=11$.
+
+**Literature.** On $\mathbb{CP}^{d-1}$, for a rule $p=f\bigl(\lvert\langle x\mid y\rangle\rvert^2\bigr)$ that is normalized on every orthonormal basis and has $f(1)=1$, the minimal tomographic rank is $d^2$, attained only at $f(t)=t$: zonal functions decompose into irreducible components of the unitary group, the first-order component has dimension $d^2-1$, and the higher ones are larger. For the state-space dimension $K=N^2$ taken as an axiom see Hardy (2001); for the correspondence between alternatives to the Born rule and representations of the unitary group see Galley–Masanes (2017). This book checked $d=2,3,4$ numerically on randomly sampled probability tables and does not give a proof for general $d$.
+:::
+
+Under the premise that probability depends only on pairwise comparison, the additivity input of `H5` can therefore be replaced by a count: all predictions for one preparation are fixed by $d^2$ real numbers, and no fewer will do. The number $d^2$ is the $\dim_{\mathbb{R}}\operatorname{Herm}(d)$ used by the local-tomography count of `H7`. For a qubit, $4=1+3$ is also the dimension occupied by the Gram embedding of [@rem-appe-gram-from-flatness] (the three coordinates of the Bloch vector) together with normalization: probability is affine in the sagitta exactly when it is an affine function of the embedding coordinates. This only changes the shape of the input. Minimal tomographic rank is still a `T2` operational assumption, and pairwise fairness does not imply it. Rules outside the continuity premise are also outside this remark, for example the discontinuous hemisphere function mentioned in [@rem-appe-quantum-chain].
+
+### E.8.6 What Changes in the Ledger {#sec-appe-reduced-ledger}
+
 ::: {.remark #rem-appe-reduced-ledger title="The Ledger after Adding Clause IV and the Positivity Condition (Supplement to [@rem-appe-master-audit-table])"}
-**Supplementary audit (`MODEL` + `manual derivation`; the theorem boxes correspond to frozen theorems).** The table lists only the entries that change. For `H1`, `H4`–`H7` and `H9` the processing mechanism is that of [@rem-appe-master-audit-table].
+**Supplementary audit (`MODEL` + `manual derivation`; the theorem boxes correspond to frozen theorems).** The table lists only the entries that change. For `H1`, `H4`, `H6`, `H7` and `H9` the processing mechanism is that of [@rem-appe-master-audit-table].
 
 | Entry | Original treatment | After adding the two conditions | Basis |
 | :--- | :--- | :--- | :--- |
@@ -550,10 +597,11 @@ On the Bloch sphere $S(r)^2=1-\frac v2$ is $\cos^2\frac\theta2$: the squared sim
 | `H2` elliptic negative square | `T3` bifurcation | follows from the positivity condition when the similarity readings are real scalars; fails otherwise | [@rem-appe-involution-positivity] |
 | `H2` Gram positivity for any number of points | explicit Layer-1 condition | follows from Clause IV plus a positive functional, with the converse; for scalar similarity it follows from Clause IV plus the positivity condition; an explicit lower bound away from flatness | [@thm-appe-chordal-gain-potential], [@rem-appe-gram-from-flatness], [@rem-appe-near-flat-gram-bound] |
 | `H3` parallelogram polarization | `T2` condition | the chord distance comes from the GNS inner product of a positive functional, so the input "inner product" becomes "positive reading"; completion remains `T1` | [@rem-appe-gram-from-flatness], item 2 |
+| `H5` Born weight | `T2` additivity condition | when probability depends only on pairwise comparison, additivity can be replaced by "minimal tomographic rank"; manual derivation for a qubit, literature for general dimension; still a `T2` input | [@rem-appe-born-zonal-minimal-rank] |
 | `H8` Lorentz signature | `T3` bifurcation | can be read as the same choice as the signature bifurcation of `H2` (`MODEL`) | end of E.8.1 |
 | `H8` projective holonomy of Layer 1 | native to Layer 1 | closed form in $\mathcal{Cl}_{3,0}$ as the three-point holonomy of the half comparison | [@rem-appe-half-comparison-holonomy] |
 
-The two new inputs are Clause IV ([@def-appe-third-point-redundancy]) and the positivity condition ([@rem-appe-involution-positivity]); when the similarity readings are not real scalars, positive semidefiniteness of the table needs a positive functional in addition. Clause IV excludes every holonomy of full comparisons, so it describes the flat skeleton of Layer 1. A Layer-2 connection with genuine curvature has to give it up, and then [@thm-appe-chordal-gain-potential-stability] and [@rem-appe-near-flat-gram-bound] state the price of the deviation.
+The two new inputs are Clause IV ([@def-appe-third-point-redundancy]) and the positivity condition ([@rem-appe-involution-positivity]); when the similarity readings are not real scalars, positive semidefiniteness of the table needs a positive functional in addition. Clause IV need not hold for all triples: it is enough that comparable triangles fill every cycle, and over all groups this is exactly the condition that is enough ([@rem-appe-triangle-simple-connectivity]). Clause IV excludes every holonomy of full comparisons, so it describes the flat skeleton of Layer 1. A Layer-2 connection with genuine curvature has to give it up, and then [@thm-appe-chordal-gain-potential-stability] and [@rem-appe-near-flat-gram-bound] state the price of the deviation.
 :::
 
 This section does not bring the number of inputs down to zero. It changes their shape: when the similarity readings are real scalars, the three items of `H2` were three geometric statements about self-pairing, bivectors and Gram matrices, and they are now replaced by two conditions that can be stated with comparison alone. One says that a third party does not change the ratio of two. The other says that the round trip of a difference leaves a positive trace.
