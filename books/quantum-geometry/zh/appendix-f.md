@@ -9,7 +9,7 @@
 3. **三阶复厄米态锥中的具体球图表实现**（F.3 节，[@thm-appf-hermitian-exclusion-chart]）：在三能级量子系统（qutrit，$3 \times 3$ 复厄米半正定锥）中具体实现上述公理，证明每个纯态的排除面都携带实仿射维数为 $3$ 的球图表——即嵌入在正交补二维子空间上的单比特布洛赫球；
 4. **四维自旋因子关系的定向分类与泡利矩阵接口**（F.4 节，[@thm-appf-spin-factor-classification]）：聚焦于与单比特态锥同构的四维载体 $E = \mathbb{R} \times \mathbb{R}^3$，证明任何满足二点格拉姆半正定公理 `P2` 与正交相位平衡公理 `PB` 的二元关系 $D$，必全局唯一锁定为右手或左手空间叉积 `crossD`，并同步导出任意有限阶格拉姆正性、约当—李结合子恒等式以及完整的 $2 \times 2$ 复泡利矩阵接口。
 
-上述四节之间的箭头代表由浅入深的几何构造脉络，绝不冒充后一模块的前提可由前一模块无条件自动免除：抽象凸锥必须逐条检验各自公理，两个具体量子实现（三阶厄米锥与四维自旋因子）之间的维度对应与边界则在 F.5 节（[@rem-appf-epistemic-boundary]）中逐项立账。F.2 是在所列公理下对面的分类，F.4 是在给定的四维载体与正锥上对关系的分类，二者都不是由公理出发重构出量子态锥。背景上，面与暴露面的结构属于凸态空间几何（E. M. Alfsen 与 F. W. Shultz 的态空间理论），自旋因子则是 P. Jordan、J. von Neumann 与 E. Wigner（1934）所分类的形式实约当代数之一（文献结果，未在本书形式化）。
+上述四节之间的箭头代表由浅入深的几何构造脉络，绝不冒充后一模块的前提可由前一模块无条件自动免除：抽象凸锥必须逐条检验各自公理，两个具体量子实现（三阶厄米锥与四维自旋因子）之间的维度对应与边界则在 F.5 节（[@rem-appf-epistemic-boundary]）中逐项立账。
 
 ---
 
@@ -179,7 +179,7 @@ $$
 三阶厄米态底 $\operatorname{base}(\mathrm{cone}, \mathrm{unit})$ 的每个极点 $p$ 对应 $\mathbb{C}^3$ 中某单位向量所张成的一维正交投影，其确认零核切片精确由支撑在二维复正交补子空间上的迹一半正定算子组成（源码 `HermitianExclusionKernel`）。在正交补子空间上选取一组标准正交基，利用等距截面标架（`SectionROGFrame`）将该二维压缩块等同于 $2 \times 2$ 复厄米矩阵空间。再将欧氏三维向量 $r \in \operatorname{EuclideanSpace}\;\mathbb{R}\;(\operatorname{Fin} 3)$ 通过单比特布洛赫实仿射参数化 $r \mapsto \frac{1}{2}\operatorname{scalarB}(1, r) = \frac{1}{2}(I_2 + r_0\sigma_X + r_1\sigma_Y + r_2\sigma_Z)$ 嵌入 $3 \times 3$ 厄米矩阵空间：泡利矩阵的正交迹关系保证该实仿射映射单射，而 $2 \times 2$ 迹一厄米矩阵半正定的充要条件恰好是 $\norm{r}_2 \le 1$，从而闭单位球的像精确等于 $\operatorname{exclusion}(\mathrm{cone}, \mathrm{unit}, p)$，给出 $a.\mathrm{dim} = 3$ 的 `ExclusionChart`。完整证明由 Lean 内核检查。
 :::
 
-研读 [@thm-appf-hermitian-exclusion-chart] 时务必警惕一处常见的维数混淆：结论中的 $a.\mathrm{dim} = 3$ 是单比特 $2 \times 2$ 布洛赫球的**实仿射维数**（$2^2 - 1 = 3$），**绝不是**外围三能级希尔伯特空间 $\mathbb{C}^3$ 的复维数 $3$！事实上，整个三能级 qutrit 态底的实仿射维数是 $3^2 - 1 = 8$，它本身并不是一颗八维欧氏球（其极点流形是四维实流形 $\mathbb{C}\mathrm{P}^2$，边界充斥着三维排除球面片）；而且该声明固定指标类型为 `Fin 3`，并不声称四阶以上 $N \times N$（$N \ge 4$）厄米态锥的纯态排除面（即 $(N-1)\times(N-1)$ 态空间）仍是欧氏球——当 $N = 4$ 时，排除一个纯态剩下的是整个八维 qutrit 态底，它已不再仿射等价于欧氏球（作为内部非空的紧凸体，它仍同胚于闭球）！
+研读 [@thm-appf-hermitian-exclusion-chart] 时务必警惕一处常见的维数混淆：结论中的 $a.\mathrm{dim} = 3$ 是单比特 $2 \times 2$ 布洛赫球的**实仿射维数**（$2^2 - 1 = 3$），**绝不是**外围三能级希尔伯特空间 $\mathbb{C}^3$ 的复维数 $3$！事实上，整个三能级 qutrit 态底的实仿射维数是 $3^2 - 1 = 8$，它本身并不是一颗八维欧氏球（其极点流形是四维实流形 $\mathbb{C}\mathrm{P}^2$，边界充斥着三维排除球面片）；而且该声明固定指标类型为 `Fin 3`，并不声称四阶以上 $N \times N$（$N \ge 4$）厄米态锥的纯态排除面（即 $(N-1)\times(N-1)$ 态空间）仍是欧氏球——当 $N = 4$ 时，排除一个纯态剩下的是整个八维 qutrit 态底，已不再仿射等价于欧氏球！
 
 ---
 
@@ -287,5 +287,5 @@ $$
 | **F.3** [@thm-appf-hermitian-exclusion-chart] | [`all_pure_charts`](lean:D5/S3/Quantum/Foundation/HermitianExclusionBall.all_pure_charts) | 固定 `Fin 3` 上的复厄米半正定锥 `cone` 与实值厄米迹泛函 `unit` | 每个纯态的排除面均存在实仿射维数 $a.\mathrm{dim} = 3$ 的 `ExclusionChart`（嵌入的 $2 \times 2$ 布洛赫球） | 图表实仿射维数 $3$ 绝非希尔伯特复维数 $3$；全 qutrit 态底实维数为 $8$ 且不仿射等价于欧氏球；结论不外推至 $N \ge 4$ 阶厄米锥 |
 | **F.4** [@thm-appf-spin-factor-classification] | [`complete_consequences`](lean:D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences) | 固定四维载体 $E = \mathbb{R} \times (\operatorname{Fin} 3 \to \mathbb{R})$ 上的二元关系 $D$，显式满足二点正性 `P2 D` 与相位平衡 `PB D` | $D$ 必全局等于右手或左手空间叉积 `crossD ε`（$\varepsilon \in \{\mathrm{.plus}, \mathrm{.minus}\}$），并满足 `Consequences D` 与 `MatrixInterfaces (orientationBool ε) D` | `P2` 与 `PB` 是显式输入公理，不能从一张叉积示意图倒推；正锥 `cone` 不含迹一归一化；一般维数自旋因子 $\mathbb{R} \oplus \mathbb{R}^k$（$k \neq 3$）不等同于复量子态空间 |
 
-综合上表可见，在本附录的公理下，“局部相干圆盘/布洛赫球截面”与“复矩阵非交换乘法”分别对应两道显式门槛（定理给出的是充分条件方向的结论，并未证明这两道门槛是必要的，也未由此刻画出量子态空间）：第一，排除集必须摆脱多面体棱角而呈现严格凸的正维欧氏球结构（`exclusionBalls`），在三能级复厄米锥中体现为二维正交补子空间上的三维布洛赫球（[@thm-appf-exclusion-face-polarity]、[@thm-appf-hermitian-exclusion-chart]）；第二，在单个四维自旋因子锥上，若要从实对称约当积跨入复希尔伯特矩阵代数 $M_2(\mathbb{C})$，本附录由二点格拉姆正性 `P2` 与相位平衡 `PB` 共同锁定空间三维叉积的模长与全局手征定向（[@thm-appf-spin-factor-classification]）。把每一道门槛如实标出，正是本书认识论诚实契约的题中之义。
+综合上表可见，量子态空间之所以兼具“局部相干圆盘/布洛赫球截面”与“复矩阵非交换乘法”，在本附录的凸锥与关系公理下精确落定于两道显式门槛（充分条件方向）：第一，排除集必须摆脱多面体棱角而呈现严格凸的正维欧氏球结构（`exclusionBalls`），在三能级复厄米锥中体现为二维正交补子空间上的三维布洛赫球（[@thm-appf-exclusion-face-polarity]、[@thm-appf-hermitian-exclusion-chart]）；第二，在单个四维自旋因子锥上，若要从实对称约当积跨入复希尔伯特矩阵代数 $M_2(\mathbb{C})$，由二点格拉姆正性 `P2` 与相位平衡 `PB` 共同锁定空间三维叉积的模长与全局手征定向（[@thm-appf-spin-factor-classification]）。把每一道门槛如实标出，正是本书认识论诚实契约的题中之义。
 :::

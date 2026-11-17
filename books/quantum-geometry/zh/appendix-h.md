@@ -123,7 +123,7 @@ $$
 
 ## H.3 预测完备商的泛因子化与最小记忆商 {#sec-appendix-h-3}
 
-回到一般（不必有限的）状态空间 $X$：当两个底层状态 $x, x' \in X$ 给出完全相同的无穷未来读出序列 $\operatorname{completeItinerary}(F, q)(x) = \operatorname{completeItinerary}(F, q)(x')$ 时，对于一切只关心未来读出预测的任务而言，区分 $x$ 与 $x'$ 纯属冗余。（背景上，按未来读出粘合状态正是自动机理论中的观测等价与极小化——E. F. Moore 1956 的区分实验与 Myhill–Nerode 定理同一思路，H.2 的完备深度对应于这种等价划分逐步细化必在有限步内稳定的经典事实；计算力学中 J. P. Crutchfield 与 K. Young 1989 的因果态（ε-machine）是其统计版本的类比。文献结果，未在本书形式化；本附录引用的是这些经典构造在所列假设下的 Lean 形式化。）将这类“预测等价”的状态粘合在一起，便得到**预测完备商状态空间** `CompletedState` 及其典范商投影 `completionProjection`：
+回到一般（不必有限的）状态空间 $X$：当两个底层状态 $x, x' \in X$ 给出完全相同的无穷未来读出序列 $\operatorname{completeItinerary}(F, q)(x) = \operatorname{completeItinerary}(F, q)(x')$ 时，对于一切只关心未来读出预测的任务而言，区分 $x$ 与 $x'$ 纯属冗余。将这类“预测等价”的状态粘合在一起，便得到**预测完备商状态空间** `CompletedState` 及其典范商投影 `completionProjection`：
 
 $$
 \operatorname{CompletedState}(F, q) \;:=\; \operatorname{Quotient}\bigl(\operatorname{Setoid.ker}(\operatorname{completeItinerary}(F, q))\bigr),
@@ -352,7 +352,7 @@ H.1 至 H.5 的五条定理分别来自轨迹首项、有限状态视界细化�
      (2k)_3 = \Bigl[\frac{2}{3}\Bigr] = \frac{2}{3} \neq 0 \in \operatorname{AddCircle}(1) \;\Longrightarrow\; K(2k) = 2k \neq 0!
      $$
 
-     因此 $0 \neq 2k \in (H.\mathrm{ker} \sqcap L.\mathrm{ker}).\operatorname{map}(K)$，联合盲区仍非平凡子群 $\bot$！更一般地，对任意单个固定层级 $m \in \mathbb{N}_+$ 的坐标账本 $L_m(x) = x_m$，元素 $\operatorname{realFlow}(m)$ 在第 $1$ 层与第 $m$ 层均归零（$[m/1] = [m/m] = 0$），却在第 $m + 1$ 层留下非零残差 $\bigl[\frac{m}{m+1}\bigr] \neq 0$。在本例（泛螺线管与单个固定层级的坐标账本）中，这在纯群论层面给出了全书一个反复出现之图景的手算例证：**账本可以压缩不可区分核（[@thm-apph-ledger-recovery-kernel] 的最后一款只保证联合盲区不增，是否严格缩小取决于具体账本），而单层坐标账本总在更高阶互素或倍分纤维里留下一道有待下一轮扩表去照亮的余项。**
+     因此 $0 \neq 2k \in (H.\mathrm{ker} \sqcap L.\mathrm{ker}).\operatorname{map}(K)$，联合盲区仍非平凡子群 $\bot$！更一般地，对任意单个固定层级 $m \in \mathbb{N}_+$ 的坐标账本 $L_m(x) = x_m$，元素 $\operatorname{realFlow}(m)$ 在第 $1$ 层与第 $m$ 层均归零（$[m/1] = [m/m] = 0$），却在第 $m + 1$ 层留下非零残差 $\bigl[\frac{m}{m+1}\bigr] \neq 0$。这在纯群论层面生动印证了全书的一贯洞见：**有限阶账本能实打实地压缩不可区分核，而单层坐标账本却总在更高阶互素或倍分纤维里留下一道有待下一轮扩表去照亮的余项。**
 :::
 
 我们将本附录五条内核验证定理的精确签名假设、有效结论边界与严禁越界外推红线汇总于下框审计总表：
@@ -369,4 +369,4 @@ H.1 至 H.5 的五条定理分别来自轨迹首项、有限状态视界细化�
 | [@thm-apph-ledger-recovery-kernel]（[`public_recovery_criterion`](lean:D5/S3/Observer/Agency/PublicRecoveryCriterion.public_recovery_criterion)，`LEAN ✓`） | 四个 `AddGroup` 及三个加法群同态 $H, K, L$（不假定交换性、范数或测度） | 值域同态恢复 $\Longleftrightarrow H.\mathrm{ker} \le K.\mathrm{ker} \Longleftrightarrow H.\mathrm{ker}.\operatorname{map}(K) = \bot$，且 $(H.\mathrm{ker} \sqcap L.\mathrm{ker}).\operatorname{map}(K) \le H.\mathrm{ker}.\operatorname{map}(K)$ | 严禁宣称任意历史账本必能实现完全恢复（如 [@ex-apph-unified-solenoid] 中 $2k \neq 0$ 仍逃逸），或宣称纯群同态核包含已导出热力学不可逆定律 |
 :::
 
-纵览从首坐标提取（[@thm-apph-current-readout]）、有限状态视界稳定化（[@thm-apph-finite-horizon-stability]）、极小预测商泛分解（[@thm-apph-predictive-minimal-quotient]）到螺线管隐藏纤维余循环（[@thm-apph-hidden-fiber-cocycle]）与历史账本核判据（[@thm-apph-ledger-recovery-kernel]）的五级代数阶梯，本附录给出了“有限观察者认识世界”这一图景中的几条代数事实：在可见预测一侧，商化把一切同未来轨迹的状态无损压缩到极小记忆核上；在隐藏纤维一侧，每一本新增的历史账本都通过子群核交集把盲区向内挤压，而未被账本覆盖的高阶纤维相位则以余循环差的形式诚实地标记着已知与未知的边界。
+纵览从首坐标提取（[@thm-apph-current-readout]）、有限状态视界稳定化（[@thm-apph-finite-horizon-stability]）、极小预测商泛分解（[@thm-apph-predictive-minimal-quotient]）到螺线管隐藏纤维余循环（[@thm-apph-hidden-fiber-cocycle]）与历史账本核判据（[@thm-apph-ledger-recovery-kernel]）的五级代数阶梯，“有限观察者认识世界”的精确数学骨架已清晰呈现：在可见预测一侧，商化把一切同未来轨迹的状态无损压缩到极小记忆核上；在隐藏纤维一侧，每一本新增的历史账本都通过子群核交集把盲区向内挤压，而未被账本覆盖的高阶纤维相位则以余循环差的形式诚实地标记着已知与未知的边界。

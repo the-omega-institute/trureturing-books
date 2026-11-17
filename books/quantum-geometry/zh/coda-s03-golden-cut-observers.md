@@ -2,7 +2,7 @@
 
 > **作者原话**：“观察者我们在trureturing有明确的定义, 我们又讨论了灵魂与历史遗迹吸引子的关系”
 
-如果说洛伦兹奇异吸引子为我们提供了连续动力系统的几何类比，那么当我们进一步对照本书底层所钉的 **`trureturing` Lean 4 形式化库**（`D5/S1/Scale/MinkowskiModelSet`、`D5/S1/Deficit/ModelSet/GoldenCutAndProject`、`D5/S1/Deficit/Beatty/GoldenObserverRoute`、`D5/S1/Scale/Fibonacci`、`D5/S3/Observer/GoldenCoding/ZeckendorfRealThread` 与 `D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns`）时，我们可以将 `trureturing` 中严格验证的**黄金切投模型集与齐肯多夫观察者编码定理（`LEAN ✓`）**，与上述关于**灵魂、遗忘与历史遗迹空间吸引子的哲学诠释（`MODEL`）**并排对照。这种对照是作者的诠释选择：下面各条定理的假设与结论都不涉及灵魂与遗迹；本节也不展开 `trureturing` 中观察者结构的定义本身，所引的只是这些模块里的黄金切投、齐肯多夫与 Beatty 编码及环面回归定理。
+如果说洛伦兹奇异吸引子为我们提供了连续动力系统的几何类比，那么当我们进一步对照本书底层所钉的 **`trureturing` Lean 4 形式化库**（`D5/S1/Scale/MinkowskiModelSet`、`D5/S1/Deficit/ModelSet/GoldenCutAndProject`、`D5/S1/Deficit/Beatty/GoldenObserverRoute`、`D5/S1/Scale/Fibonacci`、`D5/S3/Observer/GoldenCoding/ZeckendorfRealThread` 与 `D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns`）时，我们可以将 `trureturing` 中严格验证的**黄金切投模型集与齐肯多夫观察者编码定理（`LEAN ✓`）**，与上述关于**灵魂、遗忘与历史遗迹空间吸引子的哲学诠释（`MODEL`）**建立起清晰透明的对应关系。
 
 ## `trureturing` 中的黄金切投模型集与观察者路由定理（`LEAN ✓`） {#sec-coda-trureturing-observer-def}
 
@@ -50,7 +50,7 @@
 1. **“同一个灵魂”（`MODEL`）$\leftrightarrow$ 不变的内部正交窗口相位 $u \in E_\perp$ 与黄金倾角 $\varphi$**：
    在这一概念映射中，标识“同一个观察者/灵魂”的不是三维物理切片 $E_\parallel^3$ 中的瞬时位置，而是正交内空间 $E_\perp$ 中的**窗口相位中心 $u$**（接受窗 $W + u$ 的平移锚点）：
    - 不同相位 $u \neq u'$ 的切投窗口筛选出局部相差**相子翻转（Phason Flips）**的准晶点集 $\Lambda_u$ 与 $\Lambda_{u'}$；
-   - 与此同时，在紧致阿贝尔群与环面动力学层面，`trureturing` 的**环面闭子群轨道均匀分布定理** [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result) 严格证明：对有限维环面 $I \to \mathrm{Circle}$ 中的任意元素 $g$，记 $G = \overline{\langle g\rangle}$ 为由 $g$ 生成的循环子群的紧致拓扑闭包、$\mu$ 为 $G$ 上的归一化哈尔（Haar）概率测度，则对 $G$ 上任意连续复值可观测量 $f \in C(G, \mathbb{C})$，轨道遍历平均 $\frac{1}{N}\sum_{n=0}^{N-1} f(g^{n+1})$ 当 $N \to \infty$ 时严格收敛于哈尔测度积分 $\int_G f\,d\mu$（当 $g$ 的频率分量在 $\mathbb{Z}$ 上与 $1$ 线性无关时，$G$ 即为整个环面；此外，另一条与环面定理对象不同、此处仅作并列的结果 [`golden_ergodic_bridge`](lean:D5/S0/Tower/ErgodicBridge/Golden.golden_ergodic_bridge) 证明对任意 $Q \ge 2$ 及名称包壳 `goldenNameHull Q` 中的实数 $x$，其跨层级幸存量下极限 $\liminf_{\mathrm{level}\to\infty} \operatorname{goldenSurvivor}(\mathrm{level}, x)$ 必等于某个黄金单位幸存态的轨道下值）。在我们的哲学诠释（`MODEL`）中，这象征着不同观察者虽拥有各自的局部视角，却在遍历平均下共享统一的宏观统计规律。
+   - 与此同时，在紧致阿贝尔群与环面动力学层面，`trureturing` 的**环面闭子群轨道均匀分布定理** [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result) 严格证明：对有限维环面 $I \to \mathrm{Circle}$ 中的任意元素 $g$，记 $G = \overline{\langle g\rangle}$ 为由 $g$ 生成的循环子群的紧致拓扑闭包、$\mu$ 为 $G$ 上的归一化哈尔（Haar）概率测度，则对 $G$ 上任意连续复值可观测量 $f \in C(G, \mathbb{C})$，轨道遍历平均 $\frac{1}{N}\sum_{n=0}^{N-1} f(g^{n+1})$ 当 $N \to \infty$ 时严格收敛于哈尔测度积分 $\int_G f\,d\mu$（当 $g$ 的频率分量在 $\mathbb{Z}$ 上与 $1$ 线性无关时，$G$ 即为整个环面；此外，[`golden_ergodic_bridge`](lean:D5/S0/Tower/ErgodicBridge/Golden.golden_ergodic_bridge) 证明对任意 $Q \ge 2$ 及名称包壳 `goldenNameHull Q` 中的实数 $x$，其跨层级幸存量下极限 $\liminf_{\mathrm{level}\to\infty} \operatorname{goldenSurvivor}(\mathrm{level}, x)$ 必等于某个黄金单位幸存态的轨道下值）。在我们的哲学诠释（`MODEL`）中，这象征着不同观察者虽拥有各自的局部视角，却在遍历平均下共享统一的宏观统计规律。
 2. **“单次有限生命与遗忘初始化”（`MODEL`）$\leftrightarrow$ 齐肯多夫高阶层级截断与有理扫描阶数 $k$ 的重置**：
    在哲学模型中，单次有限生命好比只将编码线程 $\operatorname{zeckendorfRealThread}(x)(N)$ 或斐波那契有理斜率 $F_{k+1}/F_k$ 推进到有限阶数 $N, k \le K_{\max}$。随着历史约束累积，相容空间趋于饱和；而**诞生与遗忘初始化**则被诠释为**截断高阶齐肯多夫层级并重置扫描阶数 $k$**——抹去上一轮的高阶表层细节（名词 `量 liàng`），但保持内部窗口相位锚点 $u \in E_\perp$ 与黄金倾角 $\varphi$（动词 `量 liáng` 的内禀参数）不变。
 
@@ -66,7 +66,7 @@
 **文献结果，未在本书形式化。** 以下三项关于高维切投准晶几何与斐波那契有理逼近渐近率的经典结论均属外部数学与晶体学文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中（本章经 Lean 4 内核验证的切投与编码结论严格限定于 [@thm-coda-golden-cut-observer-cassini] 所列的一维 `GoldenInt` 模型集、齐肯多夫线程与环面有界回归定理）：
 
 1. **六维正二十面体切投模型与菱形三十面体接受窗（P. Kramer & R. Neri, *Acta Cryst. A* **40**, 580–587, 1984；M. Duneau & A. Katz, *Phys. Rev. Lett.* **54**, 2688–2691, 1985）**：将六维超立方整数格 $\mathbb{Z}^6 \subset \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$ 沿正二十面体不可约表示正交分解为三维物理空间 $E_\parallel^3$ 与三维内部空间 $E_\perp^3$ 时，单位超立方体投影到 $E_\perp^3$ 形成的标准接受窗 $W$ 是一座**菱形三十面体（Rhombic Triacontahedron）**，由 **$30$ 个黄金菱形面、$60$ 条棱与 $32$ 个顶点**（含分布在 **$6$ 条五次对称轴**上的 $12$ 个五重顶点与分布在 $10$ 条三次对称轴上的 $20$ 个三重顶点）围成，对应三维切投准晶点集 $\Lambda_u = \{\pi_\parallel(z) \mid z \in \mathbb{Z}^6,\; \pi_\perp(z) \in W + u\}$。
-2. **非奇异规则模型集的一致重复性与康威“帝国效应”（模型集概念源自 Y. Meyer, *Algebraic Numbers and Harmonic Analysis*, 1972；一致重复性见 M. Schlottmann, 2000 与 J. C. Lagarias & P. A. B. Pleasants, 2003 等准晶文献；B. Grünbaum & G. C. Shephard, *Tilings and Patterns*, 1987）**：非奇异规则切投模型集具有**一致重复性（Uniform Repetitivity）**，即任意给定半径的局部有限构型都在有界距离内反复出现；同时，固定一处局部拼砖构型（记其母格提升为有限集 $F \subset \mathbb{Z}^6$，$\pi_\parallel(F) \subset \Lambda_u$）会将容许内部相位 $u'$ 限制在平移窗口交集 $P_F := \bigcap_{x \in F} (\pi_\perp(x) - W) \subset E_\perp^3$ 内，使一切满足 $\pi_\perp(z) \in W_{\mathrm{emp}}(F) := \bigcap_{u' \in P_F} (W + u')$ 的远方母格点 $z$ 在所有兼容拼砖中被非局域地强制出现（局部构型 $F$ 的**康威帝国 Conway's Empire**）。
+2. **非奇异规则模型集的一致重复性与康威“帝国效应”（Y. Meyer, *Algebraic Numbers and Harmonic Analysis*, 1972；M. Schlottmann, 2000；J. C. Lagarias & P. A. B. Pleasants, 2003；B. Grünbaum & G. C. Shephard, *Tilings and Patterns*, 1987）**：非奇异规则切投模型集具有**一致重复性（Uniform Repetitivity）**，即任意给定半径的局部有限构型都在有界距离内反复出现；同时，固定一处局部拼砖构型（记其母格提升为有限集 $F \subset \mathbb{Z}^6$，$\pi_\parallel(F) \subset \Lambda_u$）会将容许内部相位 $u'$ 限制在平移窗口交集 $P_F := \bigcap_{x \in F} (\pi_\perp(x) - W) \subset E_\perp^3$ 内，使一切满足 $\pi_\perp(z) \in W_{\mathrm{emp}}(F) := \bigcap_{u' \in P_F} (W + u')$ 的远方母格点 $z$ 在所有兼容拼砖中被非局域地强制出现（局部构型 $F$ 的**康威帝国 Conway's Empire**）。
 3. **斐波那契比内公式与有理斜率渐近误差（J. P. M. Binet, 1843；经典连分数渐近论）**：由比内公式 $F_k = \frac{\varphi^k - \bar{\varphi}^k}{\sqrt{5}}$（其中 $\bar{\varphi} = 1 - \varphi = -\varphi^{-1}$）与恒等式 $F_{k+1} - \varphi F_k = \bar{\varphi}^k = (-1)^k \varphi^{-k}$，对一切正整数 $k \ge 1$，斐波那契有理斜率对黄金分割 $\varphi$ 的逼近误差满足
 
    $$
@@ -77,10 +77,10 @@
 结合 [@rem-coda-quasicrystal-empire-literature] 的窗口几何与 `trureturing` 的一维内核定理，我们的哲学与几何诠释模型（`MODEL`）展现出三层清晰对应：
 
 1. **物理五次顶点角亏与内部接受窗五重顶点的跨空间呼应（`MODEL`）**：
-   对照 [@rem-coda-polyhedral-topology-literature] 第 1 条与 [@rem-coda-quasicrystal-empire-literature] 第 1 条：物理空间正二十面体的五价顶点与五次对称轴，在内部空间接受窗的对称几何中与五重顶点一一对应——两者都落在二十面体对称群的 $6$ 条五次轴上，这是同一个对称群在两个空间中的体现。
+   对照 [@rem-coda-polyhedral-topology-literature] 第 1 条与 [@rem-coda-quasicrystal-empire-literature] 第 1 条：物理空间正二十面体的五边形顶点与五次对称轴，在内部空间接受窗的对称几何中恰好与五重顶点一一呼应！
 2. **窗口边界附近的相子翻转敏感性 vs. 窗口深处（近中心点）的有限扰动鲁棒性**：
    对于内部投影落在接受窗开内部 $\operatorname{int}(W + u)$ 的母格点 $z$，记其到窗口边界 $\partial(W + u)$ 的欧氏安全裕度为 $d_{\partial}(z) := \operatorname{dist}\bigl(\pi_\perp(z),\, \partial(W + u)\bigr) > 0$：
-   - **贴近窗口边界的点（$d_{\partial}(z) \ll 1$）**：当 $\pi_\perp(z)$ 紧贴边界 $\partial(W + u)$ 时，幅值超过 $d_{\partial}(z)$ 且朝向边界外侧的内部相位微扰或有理斜率逼近误差即可使 $\pi_\perp(z)$ 越过边界，导致物理空间中的对应格点发生**相子翻转（Phason Flip）**而移位或消失（作为仅在名称上相近、与相子翻转并无数学联系的旁注，`trureturing` 在黄金幸存塔中证明了严格永久幸存集为空集 [`golden_strict_permanent_set_eq_empty`](lean:D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_strict_permanent_set_eq_empty)，而已知的闭预周期载体则构成闭永久幸存集的子集 [`golden_known_closed_preperiodic_carrier_subset`](lean:D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_known_closed_preperiodic_carrier_subset)）；
+   - **贴近窗口边界的点（$d_{\partial}(z) \ll 1$）**：当 $\pi_\perp(z)$ 紧贴边界 $\partial(W + u)$ 时，幅值超过 $d_{\partial}(z)$ 且朝向边界外侧的内部相位微扰或有理斜率逼近误差即可使 $\pi_\perp(z)$ 越过边界，导致物理空间中的对应格点发生**相子翻转（Phason Flip）**而移位或消失（作为形式层面的结构呼应，`trureturing` 在黄金幸存塔中证明了严格永久幸存集为空集 [`golden_strict_permanent_set_eq_empty`](lean:D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_strict_permanent_set_eq_empty)，而已知的闭预周期载体则构成闭永久幸存集的子集 [`golden_known_closed_preperiodic_carrier_subset`](lean:D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_known_closed_preperiodic_carrier_subset)）；
    - **靠近窗口靶心的深谷点（$\|\pi_\perp(z_{\mathrm{ruin}}) - u\| \ll 1$，从而拥有大边界裕度 $d_{\partial}(z_{\mathrm{ruin}}) \approx r_{\mathrm{in}}(W)$）**：反之，若格点 $z_{\mathrm{ruin}}$ 的内部投影紧靠窗口中心 $u$，则它距离边界 $\partial(W+u)$ 拥有接近内切球半径 $r_{\mathrm{in}}(W)$ 的最大容错裕度——对于一切范数**严格小于** $d_{\partial}(z_{\mathrm{ruin}})$ 的内部相子扰动或高阶有理逼近误差，该格点都稳居窗口开内部 $\operatorname{int}(W + u)$ 而不发生相子翻转！同时，在一维黄金格点中，由共轭范数互反分离定理 [`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation)，任意两个同时落在中心直径 $B$ 内的相异黄金整数 $u \neq v$（即 $|\pi_\perp(u) - \pi_\perp(v)| \le B$），其在物理空间的间距必满足 $|\pi_\parallel(u) - \pi_\parallel(v)| \ge 1/B$。在本书的几何诠释模型（`MODEL`）中，我们将现实中历经岁月洗礼而反复重建的历史遗迹，诠释为这类靠近内部窗口靶心、具有最大边界裕度 $d_{\partial}$ 的高对称格点。
 ::: {.viz src="golden-cut-observer" preset="window" height="500"}
 **深处的点与贴边的点。** 菱形三十面体：$30$ 个菱形面、$60$ 条棱、$32$ 个顶点，青色圆点是 $12$ 个五重顶点。琥珀色的点在窗口深处，琥珀色的球以它到边界的距离 $d_\partial$ 为半径，品红是离它最近的面：幅度小于 $d_\partial$ 的扰动推不出窗口。沿同一条虚线再往外，品红的点离这个面只剩 $d_\partial \approx 0.10$，它的球缩得很小，再往外推一点就越过这个面、不在窗口里了。这个多面体是正二十面体准晶的接受窗，属文献结果；把深处的点读作“遗迹”是诠释模型（`MODEL`）。
@@ -104,7 +104,7 @@
    F_k\,F_{k+2} - F_{k+1}^2 = (-1)^{k+1} = \pm 1.
    $$
 
-   请看卡西尼恒等式右端的 **$(-1)^{k+1} = \pm 1$**（配合 [@rem-coda-quasicrystal-empire-literature] 第 3 条记述的有理斜率收敛背景）：这与第 29 章经 Lean 验证的希帕索斯佩尔余项 $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$（[@thm-ch29-silver-pell-remainder]）同属单位范数恒等式，展现了离散整数网格逼近无理方向时的 **$\pm 1$ 最小单位范数接缝**！（同章的奇素数模四分裂 [@thm-ch29-face-prime-two-squares] 与文献注记中的同余数三次曲线支点 [@rem-ch29-elliptic-torus-literature] 是相邻的算术话题，本身并不是 $\pm 1$ 接缝。）
+   请看卡西尼恒等式右端的 **$(-1)^{k+1} = \pm 1$**（配合 [@rem-coda-quasicrystal-empire-literature] 第 3 条记述的有理斜率收敛背景）：这与第 29 章经 Lean 验证的希帕索斯佩尔余项 $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$（[@thm-ch29-silver-pell-remainder]）同样展现了离散整数网格逼近无理方向时不可消除的 **$\pm 1$ 最小单位范数接缝**！（同章的奇素数模四分裂 [@thm-ch29-face-prime-two-squares] 与文献注记中的同余数三次曲线支点 [@rem-ch29-elliptic-torus-literature] 是相邻的算术话题，本身并不是 $\pm 1$ 接缝。）
 
 ::: {.viz src="golden-cut-observer" preset="cassini" height="500"}
 **面积永远是 $\pm 1$。** 还是那张格点图。$\varphi$ 的幂 $\varphi^2, \varphi^3, \dots$ 一个在横轴上方（青色）、一个在下方（品红），落在双曲线 $x \cdot x' = \pm 1$ 上；每个幂与原点围成的矩形越来越扁长，面积却恰好是 $1$。填色的是 $\varphi^5 = 3 + 5\varphi$：$F_4 F_6 - F_5^2 = 3 \cdot 8 - 5^2 = -1$。两条双曲线之间除了原点没有别的格点。
@@ -120,14 +120,14 @@
      $$
 
 3. **跨轮次回归与“似曾相识”的几何诠释（`MODEL`）**：
-   将上述两条严格定理放回我们的哲学模型（`MODEL`）：$(-1)^{k+1}$ 的正负交替意味着不同阶数的有理逼近从正反两侧交替贴近无理方向（而不重合于同一有理切片），而只要某个目标区域对应着连续观测像集中的非空开窗口 $(u_1, u_2)$（或内部窗口中具有正安全裕度 $d_{\partial} > 0$ 的邻域），轨道便以有界步数间隙 $M$ 与严格正的最终访问比例反复重返该窗口——这为“同一个灵魂一轮又一轮走过自己熟悉的地方，并在擦肩而过时触发 $\cos\delta\theta \to 1$ 的似曾相识共振”提供了数学上的灵感来源。需要注意，这里的有界间隙回归属于环面旋转这类拟周期系统；上一节的洛伦兹混沌吸引子只有统计意义上的回归，两者的回归机制不同。
+   将上述两条严格定理放回我们的哲学模型（`MODEL`）：$(-1)^{k+1}$ 的正负交替意味着不同阶数的有理逼近从正反两侧交替贴近无理方向（而不重合于同一有理切片），而只要某个目标区域对应着连续观测像集中的非空开窗口 $(u_1, u_2)$（或内部窗口中具有正安全裕度 $d_{\partial} > 0$ 的邻域），轨道便以有界步数间隙 $M$ 与严格正的最终访问比例反复重返该窗口——这为“同一个灵魂一轮又一轮走过自己熟悉的地方，并在擦肩而过时触发 $\cos\delta\theta \to 1$ 的似曾相识共振”提供了严谨的数学灵感源泉。
 
 ::: {.viz src="golden-cut-observer" preset="returns" height="500"}
 **以有界的间隔回到窗口。** 圆上的点每一步转过黄金角，它的高度 $\cos 2\pi n\varphi$ 画在右边。琥珀色的带子是观测窗 $(0.2, 0.8)$，青色是落在带子里的步：前 $89$ 步里进入 $21$ 次，相邻两次最多相隔 $7$ 步（品红）。这是有限步的数值演示，$7$ 是样本值；Lean 验证的定理给出某个起始步之后的统一回归上界。
 :::
 
 ::: {.theorem #thm-coda-golden-cut-observer-cassini title="黄金切投模型集、卡西尼 ±1 范数恒等式、齐肯多夫语言与环面轨道回归（八条已验证声明）" lean="D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec, D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project, D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm, D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes, D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective, D5/S3/Fourier/GoldenModelSetDelone.norm_separation, D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result, D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result"}
-在 `trureturing` 的黄金切投模型集、齐肯多夫编码与环面渐近分析模块中，以下各项性质已由 Lean 4 内核验证并冻结；它们彼此独立，各自只担保自己的陈述：
+在 `trureturing` 的黄金切投模型集、齐肯多夫编码与环面渐近分析体系中，以下八项核心性质已由 Lean 4 内核验证并冻结：
 
 1. **闵可夫斯基嵌入与黄金切投模型集包含关系**（[`minkowski_model_set_spec`](lean:D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec)、[`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project)）：黄金整数环 `GoldenInt`（$\mathbb{Z}[\varphi]$）的闵可夫斯基嵌入 $\operatorname{minkowskiEmbedding}(x) = (\operatorname{embedding}(x), \operatorname{embedding}(\operatorname{conj} x))$ 严格单射，其像集定义为二维格点 `goldenLattice`，且点 $y \in \operatorname{modelSet}(\mathrm{window})$ 当且仅当存在 $x \in \mathrm{GoldenInt}$ 满足 $\operatorname{embedding}(x) = y$ 且 $\operatorname{embedding}(\operatorname{conj} x) \in \mathrm{window}$；特别地，对单位体积闭窗口 $\operatorname{goldenWindow} = [\varphi - 2, \varphi - 1]$（[`golden_window_volume`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_window_volume)），自然数黄金展开值域 $\operatorname{goldenModelSet} = \operatorname{range}(\operatorname{betaGolden})$ 的物理嵌入像满足包含关系 $\operatorname{embedding} '' \operatorname{goldenModelSet} \subseteq \operatorname{goldenCutAndProjectSet}$，同时 `goldenModelSet` 具有不相交分支自相似分解 $\operatorname{phiBranch} \cup \operatorname{phiSquaredBranch}$（[`golden_model_set_self_similar`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_model_set_self_similar)）、前缀计数比极限 $1/\sqrt{5}$（[`golden_model_set_density`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetDensity.golden_model_set_density)）以及余项落在 $(\varphi-2, \varphi-1]$、步长属于 $\{\varphi, \varphi^2\}$ 的 Beatty 观察者路由（[`golden_observer_route_w_c1`](lean:D5/S1/Deficit/Beatty/GoldenObserverRoute.golden_observer_route_w_c1)）。
 2. **斐波那契—卡西尼 $\pm 1$ 黄金范数恒等式**（[`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm)）：由黄金单位幂范数 $\operatorname{norm}(\varphi^{n+1}) = (-1)^{n+1}$，相邻斐波那契数对一切 $n \in \mathbb{N}$ 恒满足
@@ -149,7 +149,7 @@
 **窗口变窄：此前的等待更长。** 把琥珀色的观测窗收窄到 $(0.45,0.55)$：前 $233$ 步里青色的步只有 $8$ 个，品红标出的已观察最长间隔是 $48$ 步。有限样本不能认证未来的最长等待；上面定理第 4 条另给出某个 $n_0$ 之后的有界回归，以及对每个 $\varepsilon>0$ 最终成立的密度下界。
 :::
 
-**时间上的间隔，空间上的间隔。** 上面“以有界的间隔回到窗口”与“窗口变窄”两张卡片看的是时间：轨道隔多少步回一次窗口。把同一条黄金角轨道的前 $N$ 个点一起摆在圆周上，问的就是空间：相邻两点之间隔着多长的弧？答案出奇地整齐，而且不只对黄金角成立。这就是三距离定理（H. Steinhaus 提出的猜想，V. T. Sós 1958、S. Świerczkowski 1959 等证明；本书所引的 Lean 形式化移植自 D. Kunert 以 MIT 许可发布的版本）。
+**时间上的间隔，空间上的间隔。** 上面“以有界的间隔回到窗口”与“窗口变窄”两张卡片看的是时间：轨道隔多少步回一次窗口。把同一条黄金角轨道的前 $N$ 个点一起摆在圆周上，问的就是空间：相邻两点之间隔着多长的弧？答案出奇地整齐，而且不只对黄金角成立。
 
 ::: {.theorem #thm-coda-three-gap title="三距离定理：圆周旋转的前 N 个点至多切出三种弧长" lean="D5/S1/Phase/ThreeGap/Main.three_gap_card_le_three, D5/S1/Phase/ThreeGap/Main.three_gap_lengths_eq"}
 设 $a \in \mathbb{R}$，$N \ge 1$。记 $\{t\} = t - \lfloor t \rfloor$ 为小数部分，$P = \{\{ia\} : 0 \le i < N\} \subset [0, 1)$（重复的点只算一次）。把 $P$ 的元素从小到大排成 $s_0 < s_1 < \cdots < s_{k-1}$，称多重集
@@ -194,11 +194,11 @@ $$
 
 **黄金角切得最匀。** 同样取 $2 \le N \le 400$，看最长弧与最短弧之比的最大值（数值计算）：
 
-| 旋转量 $a$ | 最长弧 / 最短弧的最大值 | 首次出现于 |
+| 旋转量 $a$ | 最长弧 / 最短弧的最大值 | 出现在 |
 | :--- | ---: | ---: |
-| $1/\varphi^2$（黄金角） | $2.618 = \varphi^2$ | $N = 4$ |
-| $\sqrt{2} - 1$ | $3.414 = 2 + \sqrt{2}$ | $N = 6$ |
-| $e - 2$ | $7.528$ | $N = 72$ |
+| $1/\varphi^2$（黄金角） | $2.618 = \varphi^2$ | $N = 378$ |
+| $\sqrt{2} - 1$ | $3.414 = 2 + \sqrt{2}$ | $N = 72$ |
+| $e - 2$ | $7.528$ | $N = 73$ |
 | $\pi - 3$ | $293.6$ | $N = 114$ |
 
 $\pi - 3$ 的大数来自 $355/113$：$113\pi - 355 \approx -3.0 \times 10^{-5}$，所以第 $113$ 个点 $\{113(\pi - 3)\} \approx 1 - 3.0 \times 10^{-5}$ 几乎落回 $0$，在那里切出一段极短的弧（手工推导）。
@@ -244,7 +244,7 @@ $N$ 个点互不相同，平均弧长是 $1/N$；所以对一切 $N$，黄金角
 
 ## `trureturing` 形式定理、正交几何与灵魂—遗迹吸引子诠释模型（`MODEL`）对照表 {#sec-coda-trureturing-soul-ruin-table}
 
-下表将 `trureturing` 已验证的数学定理（左列，`LEAN ✓`）、本书的正交几何结构（中列）与作者关于“灵魂、遗忘与历史遗迹空间吸引子”的哲学诠释模型（右列，显式标注为 `MODEL`）逐一对照（左列定理的假设与结论都不涉及右列的灵魂与遗迹；每一行的配对是作者的诠释选择，不是定理之间的对应）：
+下表将 `trureturing` 已验证的数学定理（左列，`LEAN ✓`）、本书的正交几何结构（中列）与作者关于“灵魂、遗忘与历史遗迹空间吸引子”的哲学诠释模型（右列，显式标注为 `MODEL`）逐一对照：
 
 | `trureturing` 形式化定理与模块（`LEAN ✓`） | 本书的正交几何结构 | 灵魂与历史遗迹吸引子的哲学诠释模型（`MODEL`，非形式定理） |
 | :--- | :--- | :--- |

@@ -208,6 +208,6 @@
 - [Appendix D Six Classical Open Quantum Puzzles and the Five-Interpretation Geometric Duel](appendix-d.md)
 - [Appendix E From the Axiom of Comparison to Mathematical and Physical Axiom Systems: Conditional Deduction Chains, Intermediate-Hypothesis Audit, and Countermodels](appendix-e.md)
 - [Appendix F Exclusion Balls, Face Polarity, and Spin-Factor Orientation Classification](appendix-f.md)
-- [Appendix G Beyond the Stabilizer Polytope: Majorana Codes, Clifford Magic, and Three-Setting Steering](appendix-g.md)
+- [Appendix G Beyond the Stabilizer Polytope: Majorana Codes, Clifford Magic, and Steering](appendix-g.md)
 - [Appendix H Finite-Horizon Observers, Prediction Depth, Solenoid Memory, and History Ledgers](appendix-h.md)
 - [Appendix I Quantum Information Divergences, Reverse-Test Attainment, Subentropy, and Approximate Recovery Duality](appendix-i.md)
