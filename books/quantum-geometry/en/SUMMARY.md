@@ -183,6 +183,10 @@
     - [39.5.6 Self-Referential Scale Comparison: Dottie's Cosine Fixed Point $\theta^*$ Versus Internal Contraction Modulus $|\alpha|$](ch39-s05-s06-self-reference-scales.md)
     - [39.5.7 Cross-Cut $1^K$ Prohibition and Attainable Schmidt Ranks of Direct Encoders](ch39-s05-s07-cut-entanglement.md)
     - [39.5.8 Parry Stationary Law, Escape-Pair Counting, and the Fractal Horizon Entropy Problem](ch39-s05-s08-parry-law-and-entropy.md)
+  - [39.6 The Fivefold Self-Referential Fixed-Point Spectrum: From "Address = Content" to Quantum Gate Distillation](ch39-s06-fivefold-self-reference-spectrum.md)
+  - [39.7 Self-Referential Halting Precision, Orthogonal Time-River Folding, and Measurement-Basis Spectral Sorting](ch39-s07-self-halting-precision-and-spectral-sorting.md)
+  - [39.8 Universal Comparison Clock Frequency, Light-Speed Precision Floor, and Gravitational Information-Density Dilation](ch39-s08-universal-clock-and-gravitational-dilation.md)
+  - [39.9 All Forces in One Arc: Intra-Cell Gauge Triad, Inter-Cell Clock-Load Gravity, and Planck-Scale Convergence](ch39-s09-unified-arc-forces-and-planck-convergence.md)
   - [39.10 The Three-Dimensional Concept-Field Cap and the Hilbert Multi-Concept Ledger: Why "Above Three Dimensions" Is Only a Joint Projection of 3D Fields](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)
   - [39.11 Arc-Field Grand Unified Theory (AF-GUT): Concentric Four-Field Arc Connections, Weinberg Angle 3/8 Running, and Clock-Budget Einstein Closure](ch39-s11-af-gut-arc-field-grand-unification.md)
 

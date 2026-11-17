@@ -1,0 +1,85 @@
+/* FORCE//UNIFY：共享实验室版式（../assets/theme.css）承载整页，这里只放本页自己的东西：舞台指针、双透镜开关、
+   琥珀手柄、本书的颜色规则与图例色块。颜色只取令牌（var(--cyan) …），不写色值。 */
+#stage { container-type: inline-size; }
+/* 只在活的舞台上转动视角；静帧（封面、被引用的图）让触摸照常滚动页面 */
+.stage:not(.still) #cv, .stage:not(.still) canvas.solid-gl { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active, .stage:not(.still) canvas.solid-gl:active { cursor: grabbing; }
+.stage.still #cv { cursor: default; touch-action: auto; }
+
+/* 本书的颜色规则：琥珀只给“当前”，标语、抽屉粗体与舞台标题不是“当前” */
+.logo span { color: var(--cyan); font-weight: 700; }
+.tagline em { color: var(--cyan); }
+.sheet li b { color: var(--cyan); }
+.hud-tl .big { color: var(--sigma); }
+.field output, dl.ro .a dd { color: var(--ink); }
+.hud-tl .big, .hud-tl .sub, #plotTitle, #plotMeta, .tau { text-transform: none; }
+.hud-tl .sub { line-height: 1.4; }
+.hud-tr .chip { text-transform: none; }
+
+/* 双透镜开关：左段是四种力的物理外衣，右段是同一块弧；当前选中的一段用琥珀 */
+.lens-toggle { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); width: 100%; margin: 0 0 12px; padding: 0; border: 1px solid var(--line-hot);
+  background: transparent; cursor: pointer; font: inherit; color: var(--ink); }
+.lens-toggle .seg { padding: 8px 7px; font-size: 12px; line-height: 1.3; text-align: center; color: var(--dim); }
+.lens-toggle .seg.on { border-left: 1px solid var(--line-hot); }
+.lens-toggle[aria-pressed="false"] .seg.off, .lens-toggle[aria-pressed="true"] .seg.on { background: var(--amber); color: var(--on-accent); font-weight: 600; }
+.lens-toggle:hover { border-color: var(--cyan); }
+.lens-toggle:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+#ctlPanel .field { margin-bottom: 8px; }
+
+/* 舞台上的手柄：投到这一幕的量（相位珠、探针环、夸克、波包、能标珠）上的一枚琥珀环；它是按钮，拖它不会转动视角 */
+.handle { position: absolute; z-index: 3; width: 30px; height: 30px; padding: 0; margin: 0; border: 2px solid var(--amber); border-radius: 50%;
+  background: color-mix(in srgb, var(--amber) 16%, transparent); transform: translate(-50%, -50%); cursor: grab; touch-action: none;
+  user-select: none; -webkit-user-select: none; box-shadow: 0 0 10px color-mix(in srgb, var(--amber) 55%, transparent); }
+.handle:active, .handle.dragging { cursor: grabbing; background: color-mix(in srgb, var(--amber) 32%, transparent); }
+.handle[hidden] { display: none; }
+.stage.still .handle { pointer-events: none; }
+:root[data-thumb-mode] .handle, :root[data-shot] .handle { display: none; }
+
+/* 读数按角色上色：青 = 线、内积与规范相位，品红 = 面积、角亏与逃出去的，紫 = 转轴、体积与骨架 */
+dl.ro .c dd { color: var(--cyan); }
+dl.ro .m dd { color: var(--magenta); }
+dl.ro .v dd { color: var(--violet); }
+dl.ro dd { overflow-wrap: anywhere; }
+dl.ro dd output { font: inherit; color: inherit; }
+
+/* 依据栏里开放问题的链接：编号是标识符，保持原样 */
+#evidence .lean.open a code { text-transform: none; overflow-wrap: anywhere; }
+
+/* 时间轴右栏：操作提示与当前公式 */
+.rail .keys #hint, .rail .keys #formula { display: block; }
+.rail .keys #formula { font-family: var(--font-data); color: var(--ink); margin-top: 2px; }
+
+/* 图例色块与舞台标签（保持 ε、θ、φ、δ 原样，不排成大写） */
+.sw.ink { background: var(--sigma); }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--cyan) 0 4px, transparent 4px 7px); }
+.stage .tag.raw { text-transform: none; }
+.stage .tag.c-vi { color: var(--violet); }
+.stage .tag.c-am { color: var(--amber); }
+.stage .tag.c-cy { color: var(--cyan); }
+.stage .tag.c-mg { color: var(--magenta); }
+
+@container (max-width: 620px) {
+  .hud-tl { left: 14px; max-width: calc(100% - 28px); }
+  .hud-tl .big { font-size: 12px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.3; }
+  .hud-tr { gap: 3px; }
+  .hud-tr .chip { padding: 3px 6px; font-size: 9.5px; letter-spacing: 0.04em; }
+  .hud-bl { left: 12px; right: 12px; bottom: 9px; gap: 2px 10px; font-size: 10px; }
+  .stage .tag.raw { font-size: 10.5px; }
+  .handle { width: 26px; height: 26px; }
+}
+
+/* 窄的引用图（手机上的正文）：舞台只留胞体，不放场景按钮 */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}
+
+/* 单栏版式（整页滚动）：舞台行更高，给胞体、桁架与能标梯留出空间；书内的框不受影响 */
+@media (max-width: 1080px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(420px, 70vh)) auto auto; }
+}
+/* 手机：舞台更高 */
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 66vh)) auto auto; }
+  .logo { font-size: clamp(17px, 5vw, 24px); }
+}

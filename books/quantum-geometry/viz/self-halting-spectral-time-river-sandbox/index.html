@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="HALT//SORT · Self-halting precision, the time-river fold and measurement-basis spectral sorting">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HALT//SORT 自指停机精度、时间长河正交折叠与测量基谱排序</title>
+<meta name="description" content="第三十九章 §39.7 的五张实验卡。余弦迭代 xₖ = cos xₖ₋₁（x₀ = 0）在自定精度 ε 处停机：ε = 0.150 时第 5 步 |x₅ − x₄| = 0.1392 ≤ ε；六模态按玻恩权重在 ε = 0.100 处分成立在 I 墙上的三模与折进 î 河的三模，0.9155 + 0.0845 = 1；幂迭代 (σₘ/σ₁)⁴ 只让前两模过 ε = 0.120，迭代份额 99.33%，原始秩 2 能量 77.27%；测量基转到 α = 65° 时瑞利权重 0.6273、0.2525、0.1202，和为 1；N = 16 次频闪检查后存活 [cos²(π/64)]¹⁶ = 0.9622，不看则 0.5000。Five experiment cards for §39.7 of Chapter 39. The cosine iteration xₖ = cos xₖ₋₁ (x₀ = 0) halts at a precision of its own: for ε = 0.150 at step 5, |x₅ − x₄| = 0.1392 ≤ ε; six modes split by Born weight at ε = 0.100 into three standing on the wall I and three folded into the river î, 0.9155 + 0.0845 = 1; power iteration (σₘ/σ₁)⁴ lets only the top two modes clear ε = 0.120, iterated share 99.33%, raw rank-2 energy 77.27%; a measurement basis turned to α = 65° gives Rayleigh weights 0.6273, 0.2525, 0.1202 summing to 1; after N = 16 strobe checks the survival is [cos²(π/64)]¹⁶ = 0.9622, against 0.5000 unwatched.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="self-halting-spectral-time-river-sandbox">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引 · 第 39 章 · §39.7</span><span class="en">◂ Visualizations · Ch. 39 · §39.7</span></a>
+      <h1 class="logo" data-text="HALT//SORT">HALT<b>//</b>SORT</h1>
+      <div class="tagline"><span class="zh">自指停机精度与谱排序沙盘 · <em>自己定的精度让迭代停下；精度以下的信息没有丢，折进时间之河，按轻重依次浮出。</em></span><span class="en">Self-halting precision and spectral sorting · <em>a self-chosen precision stops the iteration; what lies below it is not lost but folded into the river of time, surfacing heaviest first.</em></span></div>
+    </div>
+    <div class="status">
+      <span class="pill hot">ε<sub>self</sub> <strong id="pillEps">0.100</strong></span>
+      <span class="pill" id="pillKey">Σ <strong>1.0000</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" id="rail" aria-label="透镜与实验卡" data-aria-en="Lens and experiment cards">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§39.7</span></h2>
+      <button class="lens-toggle" id="lensBtn" type="button" aria-pressed="false" aria-label="切换读法：观察者读法或算子读法" data-aria-en="Switch the reading: observer reading or operator reading"><span class="seg off"><span class="zh">观察者读法</span><span class="en">Observer reading</span></span><span class="seg on"><span class="zh">算子读法</span><span class="en">Operator reading</span></span></button>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="precision-agency-window" data-still="0.8239087409443188" aria-pressed="false"><span class="code">PRECISION · ε</span><span class="cn zh">ε = 0.150：第 5 步停机</span><span class="cn en">ε = 0.150: halting at step 5</span></button>
+        <button class="preset" data-preset="time-river-orthogonal-fold" data-still="2" aria-pressed="false"><span class="code">FOLD · î</span><span class="cn zh">ε 以下的模折进时间之河</span><span class="cn en">Below ε, modes fold into the river</span></button>
+        <button class="preset" data-preset="power-iteration-spectral-sort" data-still="4" aria-pressed="false"><span class="code">POWER · Gⁿ</span><span class="cn zh">n = 4：只剩前 2 模过线</span><span class="cn en">n = 4: only two modes clear ε</span></button>
+        <button class="preset" data-preset="basis-rayleigh-attention" data-still="65" aria-pressed="false"><span class="code">BASIS · α</span><span class="cn zh">α = 65°：换基即换序</span><span class="cn en">α = 65°: new basis, new order</span></button>
+        <button class="preset" data-preset="zeno-basis-sculpting" data-still="16" aria-pressed="false"><span class="code">ZENO · N</span><span class="cn zh">N = 16：频闪留下 0.9622</span><span class="cn en">N = 16 checks keep 0.9622</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="三维舞台：单位球与停机帽、竖立的 I 墙与横躺的 î 河、幂迭代椭球、转动的测量基三脚架、频闪检查的走廊" data-aria-en="3D stage: the unit sphere with its halting cap, the upright wall I and the flat river î, the power-iteration ellipsoid, the turning measurement triad and the corridor of strobe checks">
+      <canvas class="fill" id="cv"></canvas><div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="viewChips" role="group" aria-label="视角" data-aria-en="View">
+        <button class="chip" data-view="card" aria-pressed="true"><span class="zh">斜视</span><span class="en">Oblique</span></button><button class="chip" data-view="front" aria-pressed="false"><span class="zh">正视</span><span class="en">Front</span></button><button class="chip" data-view="top" aria-pressed="false"><span class="zh">俯视</span><span class="en">Top</span></button>
+      </div>
+      <button type="button" class="handle" id="handle" aria-label="拖动琥珀手柄" data-aria-en="Drag the amber handle" hidden></button>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip"><section class="panel"><div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div><canvas id="plot" aria-label="条带小图" data-aria-en="Strip plot"></canvas></section></div>
+  </main>
+
+  <aside class="col side" id="evidence" aria-label="控制、读数与依据" data-aria-en="Controls, readouts and evidence">
+    <button class="chip" id="infoBtn"><span class="zh">理论接口 · 这不是证明</span><span class="en">Theory interface · not a proof</span></button>
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">参数</span><span class="en">Parameters</span><span class="aside" id="ctlAside"></span></h2>
+      <div class="grp" data-scene="halt fold power basis">
+        <div class="field"><label for="eps"><span class="zh">自定精度 ε<sub>self</sub></span><span class="en">Own precision ε<sub>self</sub></span></label><output id="oEps" for="eps">0.100</output><input type="range" id="eps" min="0.001" max="1" step="0.001" value="0.1"></div>
+      </div>
+      <div class="grp" data-scene="zeno" hidden>
+        <div class="field"><label for="checks"><span class="zh">检查次数 N（跨 ΩT = π/2）</span><span class="en">Checks N (across ΩT = π/2)</span></label><output id="oChecks" for="checks">16</output><input type="range" id="checks" min="1" max="64" step="1" value="16"></div>
+      </div>
+      <p class="note" id="ctlNote"></p>
+    </section>
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">NUM</span></h2>
+      <dl class="ro" id="roList"></dl>
+      <p class="note" id="roNote"></p>
+    </section>
+    <section class="panel sec" id="leanPanel">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对每个 2 × 2 复矩阵 ρ，⟨ρ, ρ⟩ = ⟨𝒫ρ, 𝒫ρ⟩ + ⟨ρ − 𝒫ρ, ρ − 𝒫ρ⟩（希尔伯特–施密特内积，𝒫 只留对角元）。页面实例：ρ = |u*⟩⟨u*|，u* = (cos θ*, sin θ*)，1 = 0.5043 + 0.4957：</span><span class="en">For every 2 × 2 complex matrix ρ, ⟨ρ, ρ⟩ = ⟨𝒫ρ, 𝒫ρ⟩ + ⟨ρ − 𝒫ρ, ρ − 𝒫ρ⟩ (Hilbert–Schmidt inner product, 𝒫 keeps the diagonal). Instance on this page: ρ = |u*⟩⟨u*| with u* = (cos θ*, sin θ*), 1 = 0.5043 + 0.4957: </span><a data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean" href="#" target="_blank" rel="noopener"><code>pinching_hilbert_schmidt_pythagorean</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">被 𝒫 丢掉的一份恰是两个非对角元的模方和：⟨ρ − 𝒫ρ, ρ − 𝒫ρ⟩ = |ρ<sub>01</sub>|² + |ρ<sub>10</sub>|²。页面实例：2(cos θ* sin θ*)² = 0.4957：</span><span class="en">What 𝒫 discards is exactly the squared size of the two off-diagonal entries: ⟨ρ − 𝒫ρ, ρ − 𝒫ρ⟩ = |ρ<sub>01</sub>|² + |ρ<sub>10</sub>|². Instance on this page: 2(cos θ* sin θ*)² = 0.4957: </span><a data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass" href="#" target="_blank" rel="noopener"><code>pinching_discarded_coherence_mass</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">若方阵 R 满足 Rᴴ = −R 且 RRᴴ = 1，则 R² = −1。页面实例：折页铰链 î = [[0, −1], [1, 0]]，I 与 î 平面里的 90° 转动，转两次是 −1：</span><span class="en">If a square matrix R satisfies Rᴴ = −R and RRᴴ = 1, then R² = −1. Instance on this page: the hinge î = [[0, −1], [1, 0]], the 90° turn in the plane of I and î; two turns give −1: </span><a data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="#" target="_blank" rel="noopener"><code>square_eq_neg_one_of_skewAdjoint_unitary</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限维空间 V 上，𝒦<sub>m</sub> = span{(T*)ᵏC*y : k ≤ m} 是读出 C 看得见的克雷洛夫塔；严格增长 𝒦<sub>m</sub> ⊊ 𝒦<sub>m+1</sub> 的次数至多 dim V − rank C。页面实例：T = G = diag(σ)，C 读 b = (1, …, 1)/√6：dim 𝒦 = 1, 2, 3, 4, 5, 6，严格增长 5 次 = 6 − 1：</span><span class="en">On a finite-dimensional V, 𝒦<sub>m</sub> = span{(T*)ᵏC*y : k ≤ m} is the Krylov tower a readout C can see; it grows strictly, 𝒦<sub>m</sub> ⊊ 𝒦<sub>m+1</sub>, at most dim V − rank C times. Instance on this page: T = G = diag(σ), C reads b = (1, …, 1)/√6: dim 𝒦 = 1, 2, 3, 4, 5, 6, five strict steps = 6 − 1: </span><a data-lean-gid="D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound" href="#" target="_blank" rel="noopener"><code>observable_krylov_strict_growth_bound</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">若某一步 𝒦<sub>m</sub> = 𝒦<sub>m+1</sub>，则对一切 r 都有 𝒦<sub>m+r</sub> = 𝒦<sub>m</sub>：停一次，就永远停。页面实例：从 m = 5 起 dim 𝒦 = 6 不再变：</span><span class="en">If 𝒦<sub>m</sub> = 𝒦<sub>m+1</sub> at some step, then 𝒦<sub>m+r</sub> = 𝒦<sub>m</sub> for every r: once it stops, it stops for good. Instance on this page: from m = 5 on, dim 𝒦 = 6 stays: </span><a data-lean-gid="D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently" href="#" target="_blank" rel="noopener"><code>observable_krylov_once_stable_permanently</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">P 是记录测量（自伴、幂等、两两正交、完备），ρ 半正定、迹为 1，P<sub>k</sub> = φφ*，ρ = ψψ*：记录权重 = |⟨φ, ψ⟩|² = Tr(ρP<sub>k</sub>)，且未读态 = Σ<sub>j</sub> 权重<sub>j</sub> · 条件态<sub>j</sub>。页面实例：P<sub>k</sub> = |b<sub>k</sub>⟩⟨b<sub>k</sub>|，w(k) = ⟨b<sub>k</sub>|ρ|b<sub>k</sub>⟩ = cos²θ<sub>k</sub>：</span><span class="en">P is a record measurement (self-adjoint, idempotent, pairwise orthogonal, complete), ρ is positive semidefinite of trace 1, P<sub>k</sub> = φφ* and ρ = ψψ*: the record weight equals |⟨φ, ψ⟩|² = Tr(ρP<sub>k</sub>), and the unread state is Σ<sub>j</sub> weight<sub>j</sub> · conditional state<sub>j</sub>. Instance on this page: P<sub>k</sub> = |b<sub>k</sub>⟩⟨b<sub>k</sub>|, w(k) = ⟨b<sub>k</sub>|ρ|b<sub>k</sub>⟩ = cos²θ<sub>k</sub>: </span><a data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="#" target="_blank" rel="noopener"><code>rank_one_born_pairing_weight</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">酉算子 U、单位向量 v，每步先作用 U 再投影 Q = I − |v⟩⟨v|（尚未返回）：存活 s<sub>0</sub> = 1，首次返回 p<sub>n+1</sub> = s<sub>n</sub> − s<sub>n+1</sub>，且 p<sub>1</sub> + … + p<sub>N</sub> + s<sub>N</sub> = 1。频闪卡保留的是另一支（投影回 |0⟩，留下即存活）；它的“已漏 + 存活 = 1”按同样的方式逐项相消，由页面数值核对，不是这条定理的实例：</span><span class="en">For a unitary U and a unit vector v, each step applies U and then projects with Q = I − |v⟩⟨v| (not yet returned): the survival s<sub>0</sub> = 1, the first return p<sub>n+1</sub> = s<sub>n</sub> − s<sub>n+1</sub>, and p<sub>1</sub> + … + p<sub>N</sub> + s<sub>N</sub> = 1. The strobe card keeps the other branch (projection back onto |0⟩, staying is surviving); its ledger “leaked + surviving = 1” telescopes the same way and is checked numerically by the page; it is not an instance of this theorem: </span><a data-lean-gid="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation" href="#" target="_blank" rel="noopener"><code>monitored_return_conservation</code></a></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面当场算出：余弦迭代 x<sub>k</sub> = cos x<sub>k−1</sub>（x<sub>0</sub> = 0）与停机步 k(ε)、残差帽 |cos x − x| ≤ ε 的两端；六模玻恩权重与六维的同一勾股分账（0.9155 + 0.0845 = 1）；(σ<sub>m</sub>/σ<sub>1</sub>)ⁿ、迭代份额、原始份额与截断误差、克雷洛夫维数；基底 B(α) 下的瑞利权重与排序；频闪存活 [cos²(π/(4N))]ᴺ 与逐次漏失。这是数值演示，不是证明。</span><span class="en">Computed on the page: the cosine iteration x<sub>k</sub> = cos x<sub>k−1</sub> (x<sub>0</sub> = 0) and the halting step k(ε), the ends of the residual cap |cos x − x| ≤ ε; the Born weights of six modes and the same Pythagorean split in six dimensions (0.9155 + 0.0845 = 1); (σ<sub>m</sub>/σ<sub>1</sub>)ⁿ, the iterated share, the raw share and the truncation error, the Krylov dimensions; the Rayleigh weights and their order in the basis B(α); the strobe survival [cos²(π/(4N))]ᴺ and the leak at each check. A numerical illustration, not a proof.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“自由意志的源泉”“时间之河”是作者的诠释。下游每步浮出一份折入的模（从重到轻）、θ* 的尾数每步浮出一位，是画面的读法；螺旋在两个迭代点之间的半圈是示意，只有子午线上的迭代点是算出来的；B(α) 取从位置基到 DCT-II 频率基的最短转动；把瑞利权重比作序列查询—键值软最大注意力算子 softmax(QKᵀ/√d)V 的权重只是类比。这些都不是定理。</span><span class="en">“The wellspring of free will” and “the river of time” are interpretations by the author. That one folded mode surfaces downstream per step (heaviest first) and one digit of the tail of θ* surfaces per step is a reading of the picture; the half-turns of the spiral between two iterates are schematic, only the iterates on the meridian are computed; B(α) is the shortest turn from the position basis to the DCT-II frequency basis; likening the Rayleigh weights to the weights of the sequence query–key softmax attention operator softmax(QKᵀ/√d)V is an analogy only. None of these is a theorem.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：巴拿赫不动点定理（cos 把 [0, 1] 压进自身，θ* = 0.7390851332 唯一）；Eckart–Young 定理（Psychometrika 1936，doi:10.1007/BF02288367）：秩 r 截断的弗罗贝尼乌斯误差平方 = Σ<sub>m&gt;r</sub> σ<sub>m</sub>²；量子芝诺效应（Misra 与 Sudarshan，J. Math. Phys. 1977，doi:10.1063/1.523304）；序列查询—键值软最大注意力算子（Vaswani 等，2017，arXiv:1706.03762）。</span><span class="en">Literature results, not formalized in this book: the Banach fixed-point theorem (cos maps [0, 1] into itself as a contraction, θ* = 0.7390851332 is unique); the Eckart–Young theorem (Psychometrika 1936, doi:10.1007/BF02288367): the squared Frobenius error of the rank-r truncation is Σ<sub>m&gt;r</sub> σ<sub>m</sub>²; the quantum Zeno effect (Misra and Sudarshan, J. Math. Phys. 1977, doi:10.1063/1.523304); the sequence query–key softmax attention operator (Vaswani et al., 2017, arXiv:1706.03762).</span></span></div>
+    </section>
+  </aside>
+
+  <footer class="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="4" step="any" value="2" aria-label="时间轴" data-aria-en="Rail">
+    </div>
+    <div class="keys"><kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一步</span><span class="en">one step</span> · <kbd>L</kbd> <span class="zh">换读法</span><span class="en">reading</span> · <span class="zh">拖空白处转视角</span><span class="en">drag empty space to orbit</span></div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 自指停机、正交折叠与谱排序</span><span class="en">Theory interface · self-halting, the orthogonal fold and spectral sorting</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">这是数值演示，不是证明。页面上的每个数都当场算出（NUM）；七条 Lean 定理各自只在下面写明的那个实例上演示，作者关于自由意志与时间之河的读法是诠释，不是定理。</p>
+      <ol>
+        <li><b>自定精度停机。</b>x<sub>0</sub> = 0，x<sub>k</sub> = cos x<sub>k−1</sub>。观察者在第一次出现 |x<sub>k</sub> − x<sub>k−1</sub>| = |cos x<sub>k−1</sub> − x<sub>k−1</sub>| ≤ ε 的那一步停下，等价于 x<sub>k−1</sub> 进入残差帽 {x : |cos x − x| ≤ ε}。ε = 0.150 时帽是 [0.6475, 0.8271]，x<sub>4</sub> = 0.6543 是第一个落进帽里的点，第 5 步 |x<sub>5</sub> − x<sub>4</sub>| = 0.1392 停机，留下 x<sub>5</sub> = 0.7935，余差 |x<sub>5</sub> − θ*| = 0.0544 折进不再走的螺旋。ε → 0 时帽缩成 θ*，停机步数无界增长；ε = 1 时 x<sub>0</sub> 已在帽里，第一次检查就停，没有任何细化，输出只是噪声。</li>
+        <li><b>正交折叠。</b>六个模的振幅取 σ = (1.00, 0.76, 0.54, 0.35, 0.20, 0.10) 归一化，玻恩权重 w = (0.4898, 0.2829, 0.1428, 0.0600, 0.0196, 0.0049)。ε = 0.100 时前三个立在 I 墙上，后三个绕铰链 î 转 90° 躺进河里：0.9155 + 0.0845 = 1。下游每走一步浮出一份折入的模（从重到轻），θ* = 0.7390851332… 的尾数 0.0000851332… 也每步浮出一位；任何时刻两份之和都是 1。铰链 î = [[0, −1], [1, 0]] 满足 î² = −1。</li>
+        <li><b>幂迭代排序。</b>G = diag(σ)，迭代 Gⁿ 后第 m 模相对第一模是 (σ<sub>m</sub>/σ<sub>1</sub>)ⁿ。n = 4、ε = 0.120 时只有前两模过线（1 与 0.3336），G⁴ 的前两模平方份额 (1⁸ + 0.76⁸)/Σσ<sub>m</sub>⁸ = 99.33%，而 G 本身的秩 2 能量 (1² + 0.76²)/Σσ<sub>m</sub>² = 77.27%；按 Eckart–Young，相对截断误差平方分别是 0.67% 与 22.73%。读 b = (1, …, 1)/√6 的克雷洛夫塔维数 1, 2, 3, 4, 5, 6 之后不再增长。</li>
+        <li><b>换基即换序。</b>ψ = (1, 2, 5)/√30。B(α) 是从位置基（α = 0°）到 DCT-II 频率基（α = 90°）的最短转动，w<sub>B</sub>(k) = ⟨b<sub>k</sub>|ρ|b<sub>k</sub>⟩ = cos²θ<sub>k</sub>，三者之和恒为 1。位置基里排序是 0.8333、0.1333、0.0333，频率基里倒过来是 0.7111、0.2667、0.0222；α = 65° 时是 0.6273、0.2525、0.1202，ε = 0.150 时前两个过线。</li>
+        <li><b>频闪雕基。</b>不看时态在 ΩT = π/2 内从 |0⟩ 转到赤道，留在 |0⟩ 的概率 cos²(π/4) = 0.5000。均匀检查 N 次，每次只转 π/(4N)，留下的概率每次乘 cos²(π/(4N))；N = 16 时 [cos²(π/64)]¹⁶ = 0.9622，每次的横向漏失 sin²(π/64) = 0.0024，是步长的平方阶。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch39-s07-self-halting-precision-and-spectral-sorting.html#sec-ch39-self-halting-and-spectral-sorting" target="_top">§39.7 自指主动停机精度、时间长河正交折叠与测量基特征谱排序</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">This is a numerical illustration, not a proof. Every number on the page is computed on the spot (NUM); each of the seven Lean theorems is shown only on the instance written below, and the reading of free will and of the river of time by the author is an interpretation, not a theorem.</p>
+      <ol>
+        <li><b>Halting at a self-chosen precision.</b> x<sub>0</sub> = 0, x<sub>k</sub> = cos x<sub>k−1</sub>. The observer stops at the first step with |x<sub>k</sub> − x<sub>k−1</sub>| = |cos x<sub>k−1</sub> − x<sub>k−1</sub>| ≤ ε, that is, once x<sub>k−1</sub> enters the residual cap {x : |cos x − x| ≤ ε}. For ε = 0.150 the cap is [0.6475, 0.8271]; x<sub>4</sub> = 0.6543 is the first point inside it, step 5 halts with |x<sub>5</sub> − x<sub>4</sub>| = 0.1392 and keeps x<sub>5</sub> = 0.7935, and the residual |x<sub>5</sub> − θ*| = 0.0544 is folded into the spiral that is no longer walked. As ε → 0 the cap shrinks to θ* and the halting step grows without bound; at ε = 1 the start x<sub>0</sub> is already inside the cap, the first check stops the iteration, nothing is refined and the output is noise.</li>
+        <li><b>The orthogonal fold.</b> The six mode amplitudes are σ = (1.00, 0.76, 0.54, 0.35, 0.20, 0.10) normalized, with Born weights w = (0.4898, 0.2829, 0.1428, 0.0600, 0.0196, 0.0049). At ε = 0.100 the first three stand on the wall I and the last three turn 90° about the hinge î and lie in the river: 0.9155 + 0.0845 = 1. Each step downstream one folded mode surfaces (heaviest first), and so does one digit of the tail 0.0000851332… of θ* = 0.7390851332…; at every moment the two parts add up to 1. The hinge î = [[0, −1], [1, 0]] satisfies î² = −1.</li>
+        <li><b>Power iteration sorts.</b> G = diag(σ); after Gⁿ the m-th mode stands to the first as (σ<sub>m</sub>/σ<sub>1</sub>)ⁿ. At n = 4 and ε = 0.120 only the first two modes clear the line (1 and 0.3336); the squared share of the first two modes of G⁴, (1⁸ + 0.76⁸)/Σσ<sub>m</sub>⁸, is 99.33%, against the rank-2 energy of G itself, (1² + 0.76²)/Σσ<sub>m</sub>² = 77.27%; by Eckart–Young the relative squared truncation errors are 0.67% and 22.73%. The Krylov tower read through b = (1, …, 1)/√6 has dimensions 1, 2, 3, 4, 5, 6 and then grows no more.</li>
+        <li><b>A new basis, a new order.</b> ψ = (1, 2, 5)/√30. B(α) is the shortest turn from the position basis (α = 0°) to the DCT-II frequency basis (α = 90°); w<sub>B</sub>(k) = ⟨b<sub>k</sub>|ρ|b<sub>k</sub>⟩ = cos²θ<sub>k</sub>, and the three always add up to 1. In the position basis the order is 0.8333, 0.1333, 0.0333; in the frequency basis it is reversed, 0.7111, 0.2667, 0.0222; at α = 65° it is 0.6273, 0.2525, 0.1202, and at ε = 0.150 the first two clear the line.</li>
+        <li><b>Strobe sculpting.</b> Unwatched, the state turns from |0⟩ to the equator within ΩT = π/2 and stays in |0⟩ with probability cos²(π/4) = 0.5000. With N evenly spaced checks it turns only π/(4N) between them, and each check multiplies the staying probability by cos²(π/(4N)); for N = 16, [cos²(π/64)]¹⁶ = 0.9622, and the sideways leak at each check, sin²(π/64) = 0.0024, is of the order of the square of the step.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch39-s07-self-halting-precision-and-spectral-sorting.html#sec-ch39-self-halting-and-spectral-sorting" target="_top">§39.7 Self-Referential Halting Precision, Orthogonal Time-River Folding, and Measurement-Basis Spectral Sorting</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

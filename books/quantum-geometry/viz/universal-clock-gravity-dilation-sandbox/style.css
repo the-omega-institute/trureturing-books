@@ -1,0 +1,85 @@
+/* CLOCK//DILATION: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this page is
+   here: the stage pointer, the two-part lens switch, the amber handle, text cases for mathematics, readout colour
+   roles and the compact HUD of small frames. Colours come from the tokens (var(--cyan) …), never from literal values. */
+/* a size container: every child of the stage is absolutely placed and its height comes from the lab grid row and
+   min-height, so size containment changes no layout; it lets the HUD read the stage's width and height */
+#stage { container-type: size; isolation: isolate; }
+/* only the live stage turns the camera; stills (cover, cited figure) let a touch scroll the page as usual */
+.stage:not(.still) #cv, .stage:not(.still) canvas.solid-gl { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active, .stage:not(.still) canvas.solid-gl:active { cursor: grabbing; }
+.stage.still #cv { cursor: default; touch-action: auto; }
+
+/* the book's colour rule: amber only for "now"; the tagline, drawer bold and stage title are not "now" */
+.logo b { color: var(--cyan); }
+.tagline em, .sheet li b { color: var(--cyan); }
+.hud-tl .big { color: var(--sigma); }
+.field output, dl.ro .a dd { color: var(--ink); }
+.hud-tl .big, .hud-tl .sub, .strip .head h2, .strip .head span, .tau { text-transform: none; }
+.hud-tl .sub { line-height: 1.4; }
+
+/* the two-part lens switch: the same state read in two languages; only the pressed half is amber */
+.lens-toggle { display: flex; border: 1px solid var(--line-hot); }
+.lens-toggle button { flex: 1 1 0; padding: 7px 6px; margin: 0; border: 0; background: transparent; color: var(--dim); font: inherit; font-size: 12px; line-height: 1.3;
+  text-align: center; cursor: pointer; min-width: 0; }
+.lens-toggle button + button { border-left: 1px solid var(--line-hot); }
+.lens-toggle button[aria-pressed="true"] { background: var(--amber); color: var(--on-accent); font-weight: 600; }
+.lens-toggle button:hover { color: var(--cyan); }
+.lens-toggle button[aria-pressed="true"]:hover { color: var(--on-accent); }
+.lens-toggle button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+.side > #infoBtn { flex: none; align-self: stretch; text-align: center; padding: 7px 9px; }
+#ctlPanel .grp { display: flex; flex-direction: column; gap: 6px; }
+#ctlPanel h3 { margin: 4px 0 0; font-size: 11.5px; font-weight: 600; color: var(--dim); }
+#ctlPanel .chip, #ctlPanel h3 { text-transform: none; }
+dl.ro .v dd { color: var(--violet); }
+dl.ro dd small { color: var(--dim); }
+.rail .keys #hint, .rail .keys #formula { display: block; }
+.rail .keys #formula { font-family: var(--font-data); color: var(--ink); margin-top: 2px; }
+
+/* the handle: an amber ring on the tip of the axis of B, or on the reception event of the light cone; it is a button,
+   so dragging it never turns the camera */
+.handle { position: absolute; left: 0; top: 0; z-index: 3; width: 28px; height: 28px; padding: 0; margin: 0; border: 2px solid var(--amber); border-radius: 50%;
+  background: color-mix(in srgb, var(--amber) 12%, transparent); transform: translate(-50%, -50%); cursor: grab; touch-action: none;
+  user-select: none; -webkit-user-select: none; box-shadow: 0 0 10px color-mix(in srgb, var(--amber) 55%, transparent); }
+.handle:active, .handle.dragging { cursor: grabbing; background: color-mix(in srgb, var(--amber) 28%, transparent); }
+.handle[hidden] { display: none; }
+.stage.still .handle { pointer-events: none; }
+:root[data-thumb-mode] .handle, :root[data-shot] .handle { display: none; }
+
+/* stage labels keep β, η, ε, ν and τ as written */
+.stage .tag.raw { text-transform: none; }
+.stage .tag.c-cy { color: var(--cyan); }
+.stage .tag.c-mg { color: var(--magenta); }
+.stage .tag.c-vi { color: var(--violet); }
+.stage .tag.c-am { color: var(--amber); }
+.stage .tag.c-ik { color: var(--ink); }
+.hud-tr .chip { text-transform: none; }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--magenta) 0 4px, transparent 4px 7px); }
+
+@container (max-width: 620px) {
+  .hud-tr { gap: 3px; }
+  .hud-tr .chip { padding: 3px 5px; font-size: 9.5px; letter-spacing: 0.03em; }
+  .hud-tl { left: 12px; max-width: calc(100% - 24px); }
+  .hud-tl .big { font-size: 12px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.35; }
+  .hud-bl { left: 12px; right: 12px; bottom: 9px; gap: 2px 10px; font-size: 10px; }
+  .stage .tag.raw { font-size: 10px; }
+  .handle { width: 24px; height: 24px; }
+}
+/* short stages (a low frame in the book, a phone held sideways): the same compact HUD, read from the height */
+@container (max-height: 320px) {
+  .hud-tr { gap: 3px; }
+  .hud-tr .chip { padding: 3px 5px; font-size: 9.5px; letter-spacing: 0.03em; }
+  .hud-tl { top: 10px; }
+  .hud-tl .big { font-size: 12px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.35; }
+  .hud-bl { bottom: 8px; gap: 2px 10px; font-size: 10px; }
+  .stage .tag.raw { font-size: 10px; }
+}
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .stage .hud-tr { display: none; }
+}
+/* the one-column page scrolls: give the stage row more height for the two towers and the sphere */
+@media (max-width: 1080px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(460px, 64vh)) auto auto; }
+}

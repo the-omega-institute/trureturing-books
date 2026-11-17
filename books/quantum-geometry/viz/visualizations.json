@@ -6494,6 +6494,366 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "self-reference-pentad-sandbox",
+      "code": "SELFREF//PENTAD",
+      "title": "SELFREF//PENTAD · 五阶自指不动点谱系：查表一跳到根、余弦 cos θ* = θ*、本征态与收缩信道、15 → 1 门蒸馏与对角线逃逸",
+      "title_en": "SELFREF//PENTAD · The Fivefold Self-Referential Fixed-Point Spectrum: One-Hop Lookup, the Cosine cos θ* = θ*, Eigenstate and Contracting Channel, 15 → 1 Gate Distillation and the Escaping Diagonal",
+      "summary": "同一个方程 x* = F(x*) 的五个实例画在一个受光的三维舞台上。查表：12 槽指针环上 9 → 6 → 3 → 1 → 0 的 4 跳链经路径压缩成为直连根的指针，Lookup(0) = 0、p ≡ *p，压缩后的表 P² = P。余弦：水平盲平面 i 上的单位圆与竖直实平面 I，青色影子 cos θ* 与品红弧长 θ* 同为 0.7391（42.35°），从 θ₀ = 0.10 出发的蛛网以 λ = −sin θ* = −0.6736 换边收缩，cos²θ* = 54.62%。本征态与信道：布洛赫球里 |0⟩ 只转相位（|λ| = 1），信道 ℰ(ρ) = 0.65 UρU† + 0.35 ρ* 把任意态螺旋拉进 ρ*。门蒸馏：[[15, 1, 3]] 码的 15 个噪声 T 门（ε = 0.0500）画在四面体上，4 个检验胞接受 46.61%，输出 ε_out = 0.00514（领头项 35ε³ = 0.00438），阈值 ε_th = 0.1415。对角线：4 × 4 自应用表的对角线经 ¬ 翻转并升到 ℓ + 1，0011 与每一行在 (a, a) 处不同。左栏透镜在同一组参数下把五件事改写成 x* = F(x*) 与乘子 λ。五张实验卡可在第三十九章 §39.6 正文里单独引用。",
+      "summary_en": "Five instances of one equation x* = F(x*) on one lit 3D stage. Lookup: on a ring of 12 pointer slots the 4-hop chain 9 → 6 → 3 → 1 → 0 is compressed into direct links to the root, Lookup(0) = 0, p ≡ *p, and the compressed table has P² = P. Cosine: the unit circle in the horizontal blind plane i and the vertical real plane I; the cyan shadow cos θ* and the magenta arc θ* are both 0.7391 (42.35°), and the cobweb from θ₀ = 0.10 changes side and shrinks by λ = −sin θ* = −0.6736, cos²θ* = 54.62%. Eigenstate and channel: in the Bloch ball |0⟩ only turns its phase (|λ| = 1) while the channel ℰ(ρ) = 0.65 UρU† + 0.35 ρ* spirals every state into ρ*. Gate distillation: the 15 noisy T gates (ε = 0.0500) of the [[15, 1, 3]] code sit on a tetrahedron; its 4 check cells accept 46.61% and output ε_out = 0.00514 (leading term 35ε³ = 0.00438), threshold ε_th = 0.1415. Diagonal: the diagonal of a 4 × 4 self-application table is negated by ¬ and lifted to ℓ + 1; 0011 differs from every row at (a, a). The lens in the left column rewrites all five as x* = F(x*) with a multiplier λ under the same parameters. Each of the five experiment cards can be cited on its own from §39.6 of Chapter 39.",
+      "path": "self-reference-pentad-sandbox/",
+      "thumbnail": "self-reference-pentad-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 39,
+      "section": "39.6",
+      "presets": [
+        "pointer-path-compression",
+        "dottie-real-imag-spiral",
+        "eigenstate-channel-anchor",
+        "fifteen-to-one-gate-distill",
+        "lawvere-diagonal-escape"
+      ],
+      "preset_titles": {
+        "pointer-path-compression": {
+          "zh": "查表自指：路径压缩到根，Lookup(0) = 0",
+          "en": "Lookup: path compression to the root, Lookup(0) = 0"
+        },
+        "dottie-real-imag-spiral": {
+          "zh": "余弦自指：I 投影 cos θ* 等于 i 弧长 θ*",
+          "en": "Cosine: the I-projection cos θ* equals the i-arc θ*"
+        },
+        "eigenstate-channel-anchor": {
+          "zh": "本征态只转相位，收缩信道落到 ρ*",
+          "en": "An eigenstate only turns its phase; a channel lands on ρ*"
+        },
+        "fifteen-to-one-gate-distill": {
+          "zh": "门序列 = 门本身：15 个噪声 T 门蒸出 1 个",
+          "en": "Gate sequence = the gate: 15 noisy T gates distil one"
+        },
+        "lawvere-diagonal-escape": {
+          "zh": "翻转的对角线逃出每一行，升到 ℓ + 1",
+          "en": "The twisted diagonal escapes every row, up to ℓ + 1"
+        }
+      },
+      "tags": [
+        "自指不动点",
+        "路径压缩",
+        "余弦不动点",
+        "能量本征态",
+        "魔术态蒸馏",
+        "对角线论证"
+      ],
+      "tags_en": [
+        "Self-referential fixed point",
+        "Path compression",
+        "Dottie number",
+        "Energy eigenstate",
+        "Magic-state distillation",
+        "Diagonal argument"
+      ],
+      "theory": [
+        {
+          "label": "第 39 章 §39.6 · 五阶自指不动点谱系",
+          "label_en": "Chapter 39 §39.6 · The fivefold self-referential fixed-point spectrum",
+          "href": "../zh/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum",
+          "href_en": "../en/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package"
+        },
+        {
+          "gid": "D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "self-halting-spectral-time-river-sandbox",
+      "code": "HALT//SORT",
+      "title": "自指停机精度、时间长河正交折叠与测量基谱排序",
+      "title_en": "Self-halting precision, the time-river fold and measurement-basis spectral sorting",
+      "summary": "余弦迭代 xₖ = cos xₖ₋₁（x₀ = 0）在自定精度处停机：第一次 |xₖ − xₖ₋₁| ≤ ε 即停，等价于 xₖ₋₁ 落进残差帽 |cos x − x| ≤ ε；ε = 0.150 时第 5 步停，|x₅ − x₄| = 0.1392，锁定 x₅ = 0.7935，余差 0.0544 折入。六个模（σ = 1.00, 0.76, 0.54, 0.35, 0.20, 0.10 归一化）按玻恩权重在 ε = 0.100 处分成立在 I 墙上的三模与绕铰链 î 转 90° 躺进河里的三模，0.9155 + 0.0845 = 1，下游每步浮出一份，θ* 的尾数 0.0000851332… 也逐位浮出；铰链 î² = −1。幂迭代 Gⁿ 让 (σₘ/σ₁)ⁿ 排序：n = 4、ε = 0.120 时只剩前两模，迭代份额 99.33%，原始秩 2 能量 77.27%；读 b = (1, …, 1)/√6 的克雷洛夫塔增长 5 次后永远停住。测量基从位置基转向 DCT-II 频率基，α = 65° 时 ψ = (1, 2, 5)/√30 的瑞利权重 0.6273、0.2525、0.1202，和为 1，位置基与频率基里的排序整个倒过来。N = 16 次频闪检查跨 ΩT = π/2，存活 [cos²(π/64)]¹⁶ = 0.9622，不看则 0.5000。“自由意志”“时间之河”与注意力的类比是诠释模型。",
+      "summary_en": "The cosine iteration xₖ = cos xₖ₋₁ (x₀ = 0) halts at a self-chosen precision: it stops at the first |xₖ − xₖ₋₁| ≤ ε, which is the same as xₖ₋₁ entering the residual cap |cos x − x| ≤ ε; for ε = 0.150 it halts at step 5 with |x₅ − x₄| = 0.1392, keeps x₅ = 0.7935 and folds away the residual 0.0544. Six modes (σ = 1.00, 0.76, 0.54, 0.35, 0.20, 0.10 normalized) split by Born weight at ε = 0.100 into three standing on the wall I and three that turn 90° about the hinge î into the river, 0.9155 + 0.0845 = 1; downstream one surfaces per step, and the tail 0.0000851332… of θ* surfaces digit by digit; the hinge has î² = −1. Power iteration Gⁿ sorts by (σₘ/σ₁)ⁿ: at n = 4 and ε = 0.120 only the top two modes remain, with an iterated share of 99.33% against a raw rank-2 energy of 77.27%; the Krylov tower read through b = (1, …, 1)/√6 grows five times and then stops for good. The measurement basis turns from the position basis to the DCT-II frequency basis; at α = 65° the Rayleigh weights of ψ = (1, 2, 5)/√30 are 0.6273, 0.2525, 0.1202, adding up to 1, and the order in the position basis is reversed in the frequency basis. N = 16 strobe checks across ΩT = π/2 keep [cos²(π/64)]¹⁶ = 0.9622, against 0.5000 unwatched. Free will, the river of time and the attention analogy are interpretive.",
+      "path": "self-halting-spectral-time-river-sandbox/",
+      "thumbnail": "self-halting-spectral-time-river-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 39,
+      "section": "39.7",
+      "presets": [
+        "precision-agency-window",
+        "time-river-orthogonal-fold",
+        "power-iteration-spectral-sort",
+        "basis-rayleigh-attention",
+        "zeno-basis-sculpting"
+      ],
+      "preset_titles": {
+        "precision-agency-window": {
+          "zh": "自定精度：ε = 0.150 时第 5 步停机",
+          "en": "A Self-Chosen Precision: Halting at Step 5 for ε = 0.150"
+        },
+        "time-river-orthogonal-fold": {
+          "zh": "时间长河：ε 以下的模折 90° 入河，依次浮出",
+          "en": "The River of Time: Modes below ε Fold 90° and Surface in Turn"
+        },
+        "power-iteration-spectral-sort": {
+          "zh": "幂迭代排序：n = 4 只剩前 2 模过线",
+          "en": "Power Iteration Sorts: Two Modes Clear ε at n = 4"
+        },
+        "basis-rayleigh-attention": {
+          "zh": "换基即换序：α = 65° 时的瑞利权重",
+          "en": "A New Basis, a New Order: Rayleigh Weights at α = 65°"
+        },
+        "zeno-basis-sculpting": {
+          "zh": "频闪雕基：N = 16 次检查留下 0.9622",
+          "en": "Strobe Sculpting: N = 16 Checks Keep 0.9622"
+        }
+      },
+      "tags": [
+        "自指停机",
+        "余弦不动点",
+        "正交折叠",
+        "幂迭代",
+        "瑞利权重",
+        "量子芝诺"
+      ],
+      "tags_en": [
+        "Self-halting",
+        "Cosine fixed point",
+        "Orthogonal fold",
+        "Power iteration",
+        "Rayleigh weights",
+        "Quantum Zeno"
+      ],
+      "theory": [
+        {
+          "label": "第 39 章 §39.7 · 自指主动停机精度、时间长河正交折叠与测量基特征谱排序",
+          "label_en": "Chapter 39 §39.7 · Self-referential halting precision, orthogonal time-river folding and measurement-basis spectral sorting",
+          "href": "../zh/ch39-s07-self-halting-precision-and-spectral-sorting.html#sec-ch39-self-halting-and-spectral-sorting",
+          "href_en": "../en/ch39-s07-self-halting-precision-and-spectral-sorting.html#sec-ch39-self-halting-and-spectral-sorting"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "universal-clock-gravity-dilation-sandbox",
+      "code": "CLOCK//DILATION",
+      "title": "CLOCK//DILATION · 普适比较主频、光速精度下限与引力信息密度钟慢",
+      "title_en": "CLOCK//DILATION · Universal Comparison Clock, Light-Speed Precision Floor and Gravitational Information-Density Dilation",
+      "summary": "两位观察者的紫色主飞轮按同一个主频 ν₀ 转动；运动与背景信息负载按勾股预算分走一部分节拍，转轴落在固有时轴上的青色投影就是钟率 dτ/dt = √((1 − η)(1 − β²))，帧币柱把十拍里的固有时帧并排叠出来。另一个场景把雷达往返窗口画成普朗克格点上的光锥：只有 R_max = ½cΔτ 以内的格点能被核验，精度下限 1/N。五张实验卡依次是光锥窗口、运动分账、全息质量负载、等效原理下的子时钟与视界饱和。",
+      "summary_en": "The violet master flywheels of two observers turn at one master frequency ν₀; motion and background information load take a share of the beats by a Pythagorean budget, and the cyan projection of the axis onto the proper-time axis is the rate dτ/dt = √((1 − η)(1 − β²)), with stacks of frame coins showing the proper-time frames of ten beats side by side. A second scene draws the radar round-trip window as a light cone on the Planck lattice: only nodes within R_max = ½cΔτ can be verified, a precision floor of 1/N. The five experiments are the light-cone window, the kinematic split, the holographic mass load, sub-clocks under the equivalence principle and horizon saturation.",
+      "path": "universal-clock-gravity-dilation-sandbox/",
+      "thumbnail": "universal-clock-gravity-dilation-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 39,
+      "section": "39.8",
+      "presets": [
+        "light-cone-precision-floor",
+        "kinematic-address-split",
+        "holographic-mass-load",
+        "equivalence-dual-flywheel",
+        "horizon-saturation-lock"
+      ],
+      "preset_titles": {
+        "light-cone-precision-floor": {
+          "zh": "光锥精度下限：20 拍窗口只核验 ½cΔτ 以内的格点",
+          "en": "Light-cone precision floor: a 20-tick window verifies only the nodes within ½cΔτ"
+        },
+        "kinematic-address-split": {
+          "zh": "运动分账：同一主频，β² = 64% 拿去跳地址",
+          "en": "Kinematic split: one master clock, β² = 64% spent on address hops"
+        },
+        "holographic-mass-load": {
+          "zh": "全息质量负载：r = 2.5 r_s 处背景纠缠占去 40%",
+          "en": "Holographic mass load: at r = 2.5 r_s background entanglement takes 40%"
+        },
+        "equivalence-dual-flywheel": {
+          "zh": "等效双飞轮：三只子时钟同乘 0.64，内部比值不变",
+          "en": "Equivalence: three sub-clocks all scale by 0.64, their ratios stay"
+        },
+        "horizon-saturation-lock": {
+          "zh": "视界饱和：主飞轮照转，固有时帧冻结",
+          "en": "Horizon saturation: the master wheel turns, proper-time frames freeze"
+        }
+      },
+      "tags": [
+        "普适主频",
+        "勾股预算",
+        "运动钟慢",
+        "引力钟慢",
+        "光锥精度下限",
+        "等效原理"
+      ],
+      "tags_en": [
+        "Universal master clock",
+        "Pythagorean budget",
+        "Kinematic dilation",
+        "Gravitational dilation",
+        "Light-cone precision floor",
+        "Equivalence principle"
+      ],
+      "theory": [
+        {
+          "label": "第 39 章 §39.8 · 普适比较主频、光速推理精度下界与引力信息密度钟慢",
+          "label_en": "Chapter 39 §39.8 · Universal comparison clock frequency, light-speed precision floor and gravitational information-density dilation",
+          "href": "../zh/ch39-s08-universal-clock-and-gravitational-dilation.html#sec-ch39-universal-clock-and-gravitational-dilation",
+          "href_en": "../en/ch39-s08-universal-clock-and-gravitational-dilation.html#sec-ch39-universal-clock-and-gravitational-dilation"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "unified-arc-forces-planck-sandbox",
+      "code": "FORCE//UNIFY",
+      "title": "FORCE//UNIFY · 万力归弧：极小圆弧体内的规范三力、胞间主频引力与普朗克能标合流",
+      "title_en": "FORCE//UNIFY · All Forces in One Arc: Intra-Cell Gauge Triad, Inter-Cell Clock-Load Gravity and Planck Convergence",
+      "summary": "同一块 ε = 45° 的极小圆弧体承载四种力：1 维弧上盲面 î 里的 U(1) 相位，±q 相位之积为 1、高斯面通量为 0；2 维面 A∧B 上的 SU(2) 双覆盖，360° 得 −1、720° 回 +1，探针 r = ħc/E 处汤川因子 e^{−m_W r}；3 维体里 det U = 1 锁住色三轴体积，单个夸克沿通量管拉到 1.20 fm，V = σr = 1.09 GeV；胞间 N = 6 的 K₆ 冗余 ΔE(6) = 3，四个正四面体绕铰链留下 δ_h = 77.88°，钟载折射 a = −c²∇ln(dτ/dt) 把波包弯向内，±q 的玻恩载荷 cos²θ 只相加。能标推到 E_P = 1.22 × 10¹⁹ GeV，α_G = (E/E_P)² 从电子质量处的 1.75 × 10⁻⁴⁵ 爬到 1，屏蔽云退成一个胞；单圈标准模型三条规范耦合两两相交于 10¹³–10¹⁷ GeV，只近交、不汇于一点。五张实验卡可单独引用。",
+      "summary_en": "One minimal arc-trihedron with ε = 45° carries four forces: on its 1D arc the U(1) phase in the blind plane î, whose ±q phases multiply to 1 and whose Gauss flux is 0; on its 2D wall A∧B the SU(2) double cover, −1 at 360° and +1 at 720°, with the Yukawa factor e^{−m_W r} at the probe distance r = ħc/E; in its 3D body det U = 1 locks the volume of the colour triad, and one quark pulled along a flux tube to 1.20 fm costs V = σr = 1.09 GeV; between cells K₆ with N = 6 has ΔE(6) = 3 redundant bars, four regular tetrahedra round a hinge leave δ_h = 77.88°, clock-load refraction a = −c²∇ln(dτ/dt) bends a packet inwards, and the Born loads cos²θ of ±q only add. Push the energy to E_P = 1.22 × 10¹⁹ GeV and α_G = (E/E_P)² climbs from 1.75 × 10⁻⁴⁵ at the electron mass to 1 while the screening cloud peels back to one cell; the three one-loop Standard Model gauge couplings cross pairwise between 10¹³ and 10¹⁷ GeV and come close without meeting at one point. Five experiment cards can be cited on their own.",
+      "path": "unified-arc-forces-planck-sandbox/",
+      "thumbnail": "unified-arc-forces-planck-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-16",
+      "chapter": 39,
+      "section": "39.9",
+      "presets": [
+        "u1-blind-phase-fiber",
+        "su2-chiral-double-cover",
+        "su3-color-flux-confinement",
+        "regge-gravity-clock-refraction",
+        "planck-scale-convergence"
+      ],
+      "preset_titles": {
+        "u1-blind-phase-fiber": {
+          "zh": "U(1) 盲面相位纤维 e^{îqφ}：±q 相消成中性",
+          "en": "U(1) Blind-Plane Phase Fiber e^{îqφ}: ±q Cancel to Neutral"
+        },
+        "su2-chiral-double-cover": {
+          "zh": "SU(2)_L 左手双矢 A∧B：360° 得 −1、720° 回 +1 与汤川屏蔽",
+          "en": "SU(2)_L Left-Handed Bivector A∧B: −1 at 360°, +1 at 720°, Yukawa Screening"
+        },
+        "su3-color-flux-confinement": {
+          "zh": "SU(3)_c 色三轴体积锁定与 1.20 fm 线性通量管",
+          "en": "SU(3)_c Volume-Locked Colour Triad and a 1.20 fm Linear Flux Tube"
+        },
+        "regge-gravity-clock-refraction": {
+          "zh": "N = 6 雷杰铰链角亏 δ_h 与钟载折射",
+          "en": "N = 6 Regge Hinge Deficit δ_h and Clock-Load Refraction"
+        },
+        "planck-scale-convergence": {
+          "zh": "普朗克能标 19.09：屏蔽云退成一个胞，α_G = 1",
+          "en": "Planck Scale 19.09: the Cloud Peels Back to One Cell, α_G = 1"
+        }
+      },
+      "tags": [
+        "极小圆弧体",
+        "规范三力",
+        "双覆盖",
+        "色禁闭",
+        "雷杰角亏",
+        "普朗克能标",
+        "跑动耦合"
+      ],
+      "tags_en": [
+        "Minimal arc-trihedron",
+        "Gauge triad",
+        "Double cover",
+        "Colour confinement",
+        "Regge deficit",
+        "Planck scale",
+        "Running couplings"
+      ],
+      "theory": [
+        {
+          "label": "第 39 章 §39.9 · 万力归弧：极小圆弧体内的规范三力、胞间主频引力与普朗克能标合流",
+          "label_en": "Chapter 39 §39.9 · All forces in one arc: intra-cell gauge triad, inter-cell clock-load gravity and Planck-scale convergence",
+          "href": "../zh/ch39-s09-unified-arc-forces-and-planck-convergence.html#sec-ch39-unified-arc-forces-and-planck-convergence",
+          "href_en": "../en/ch39-s09-unified-arc-forces-and-planck-convergence.html#sec-ch39-unified-arc-forces-and-planck-convergence"
+        },
+        {
+          "label": "ARGUED · 雷杰角亏、渐近自由、电弱理论与安德森—希格斯机制、汤川势、标准模型单圈跑动；文献结果，未在本书形式化。OPEN · 宇宙学常数标度、引力动力学与耦合、三代与标准模型耦合谱。",
+          "label_en": "ARGUED · Regge deficits, asymptotic freedom, electroweak theory and the Anderson–Higgs mechanism, the Yukawa potential, Standard Model one-loop running; literature results, not formalized in this book. OPEN · the cosmological-constant scale, gravitational dynamics and coupling, three generations and the Standard Model coupling spectrum.",
+          "href": "../zh/ch34-s23-cosmological-arrow-and-horizon-floor.html#prob-ch34-past-hypothesis-and-cosmological-constant",
+          "href_en": "../en/ch34-s23-cosmological-arrow-and-horizon-floor.html#prob-ch34-past-hypothesis-and-cosmological-constant"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

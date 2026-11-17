@@ -183,6 +183,10 @@
     - [39.5.6 自指尺度对照：Dottie 余弦不动点 $\theta^*$ 与内禀收缩模 $|\alpha|$](ch39-s05-s06-self-reference-scales.md)
     - [39.5.7 跨切口 $1^K$ 禁戒与直接编码器的可达施密特秩](ch39-s05-s07-cut-entanglement.md)
     - [39.5.8 帕里平稳律、逃逸对计数与分形视界熵问题](ch39-s05-s08-parry-law-and-entropy.md)
+  - [39.6 五阶自指不动点谱系：从“地址 = 内容”到量子门蒸馏重整](ch39-s06-fivefold-self-reference-spectrum.md)
+  - [39.7 自指主动停机精度、时间长河正交折叠与测量基特征谱排序](ch39-s07-self-halting-precision-and-spectral-sorting.md)
+  - [39.8 普适比较主频、光速推理精度下界与引力信息密度钟慢](ch39-s08-universal-clock-and-gravitational-dilation.md)
+  - [39.9 万力归弧：极小圆弧体胞内规范三力、胞间主频引力与普朗克能标合流](ch39-s09-unified-arc-forces-and-planck-convergence.md)
   - [39.10 三维概念场封顶原理与希尔伯特多概念混编账本：为什么“三维以上”只是独立三维场的并置投影](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)
   - [39.11 极小圆弧场大统一理论（AF-GUT）：同心四场圆弧联络、温伯格角 3/8 跑动与主频爱因斯坦收口](ch39-s11-af-gut-arc-field-grand-unification.md)
 

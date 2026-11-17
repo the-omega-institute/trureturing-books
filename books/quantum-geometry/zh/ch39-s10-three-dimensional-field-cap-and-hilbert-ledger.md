@@ -2,11 +2,11 @@
 
 > *“人们总是喜欢推广, 数不完就用∞, 三维以上也继续推广, 希尔伯特空间, 无限希尔伯特空间. 但是, 三维以上真的存在么? 如果三维以上仅仅是一些运动的信息在另外一些独立的概念上呢? 空间只是一个概念, 有三维. 颜色有三原色.所以希尔伯特空间应该只是不同概念投影到了一起, 空间与颜色当然可以一起放在希尔伯特空间里面, 连运动(旋转缩放平移)也可以. 为什么都是三维的?因为都是场.”*
 
-在 §39.9 中，我们看到单枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 内部的幺正纤维和乐沿 `1D — 2D — 3D` 逐级展开并精确止步于三维色规范群 $\mathrm{SU}(3)_C$，而多枚原胞（$N \ge 5$）共棱拼装的超静定桁架同样没有撑开任何四维以上的平直欧氏容器，而是将多余比较弦转化为共享铰链上的雷吉曲率角亏（[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）。然而，只要翻开十九世纪以来的高等几何、分析力学与量子场论教材，一座根深蒂固的符号偶像便会迎面扑来：每当一个物理系统涉及 $3k$ 个实参数或一串尚未截断的振荡模态时，人们便毫不犹豫地写下高维欧氏空间 $\mathbb{R}^n$（$n > 3$）、$6N$ 维相空间、十维/十一维紧致化额外维乃至可分无限维希尔伯特空间 $\mathcal{H}_\infty$，继而真以为在日常三维空间背后还藏着某间看不见的“第四维、第十维或无穷维大房间”。
+在 [§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md) 中，我们看到单枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 内部的幺正纤维和乐沿 `1D — 2D — 3D` 逐级展开并精确止步于三维色规范群 $\mathrm{SU}(3)_C$，而多枚原胞（$N \ge 5$）共棱拼装的超静定桁架同样没有撑开任何四维以上的平直欧氏容器，而是将多余比较弦转化为共享铰链上的雷吉曲率角亏（[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）。然而，只要翻开十九世纪以来的高等几何、分析力学与量子场论教材，一座根深蒂固的符号偶像便会迎面扑来：每当一个物理系统涉及 $3k$ 个实参数或一串尚未截断的振荡模态时，人们便毫不犹豫地写下高维欧氏空间 $\mathbb{R}^n$（$n > 3$）、$6N$ 维相空间、十维/十一维紧致化额外维乃至可分无限维希尔伯特空间 $\mathcal{H}_\infty$，继而真以为在日常三维空间背后还藏着某间看不见的“第四维、第十维或无穷维大房间”。
 
 章首这句力透纸背的追问，用尼采式的谱系学手术刀一举剖开了“高维与无穷维崇拜”的心理与语法起源（跨领域的本体论综合标定为 **`MODEL`（模型诠释）**，底层正交壳层展开、双体关联盲区分解、有限秩集中模态上界、自旋因子三维叉乘唯一分类、单比特布洛赫球面重构与三锚格拉姆体积判据由 [@thm-ch39-hilbert-concept-ledger-and-3d-cap] 的六条冻结 Lean 4 内核声明严格锚定，冯·诺依曼算子空间、格拉斯曼三原色定律、霍奇星对偶、胡尔维茨可除代数与共形标度代数等外部经典结果归属见 [@rem-ch39-von-neumann-grassmann-hodge-hurwitz-literature]）：**人类心智有一种“算不完就写 $\infty$、排不下就加下标”的惯性推广癖——把尚未停机的分辨率队列命名为一个静态名词“无穷”，又把原本分属不同物理范畴的若干独立三维概念强行塞进同一列长向量，再把总行数误认作“高维空间”本身！** 一旦拆穿这层簿记幻觉，三道澄澈的几何真相便次第浮现：
 
-1. **所谓“三维以上”的希尔伯特空间，本质上是一本将多个相互独立的概念投影并置在一起的“多概念混编总账本”**：在经典与参数读出层，它是若干三维概念块的**正交直和** $\bigoplus_{\alpha=1}^k V_\alpha^{(3)}$；在量子复合态层，它是局部概念纤维的**张量积** $\bigotimes_{\alpha=1}^k \mathcal{H}_\alpha$（局部生成元经克罗内克和同构回直和李代数，无迹可观测量拆分为局域单概念账本与跨概念关联查表）；而所谓“无限维希尔伯特空间 $\mathcal{H}_\infty$”，不过是停机阈值 $\varepsilon_{\mathrm{self}} \to 0$ 时未落锤的分辨率队列，在任意真实观察者的有限停机精度 $\varepsilon_{\mathrm{self}} > 0$（§39.7）下活跃模态数严格有限；
+1. **所谓“三维以上”的希尔伯特空间，本质上是一本将多个相互独立的概念投影并置在一起的“多概念混编总账本”**：在经典与参数读出层，它是若干三维概念块的**正交直和** $\bigoplus_{\alpha=1}^k V_\alpha^{(3)}$；在量子复合态层，它是局部概念纤维的**张量积** $\bigotimes_{\alpha=1}^k \mathcal{H}_\alpha$（局部生成元经克罗内克和同构回直和李代数，无迹可观测量拆分为局域单概念账本与跨概念关联查表）；而所谓“无限维希尔伯特空间 $\mathcal{H}_\infty$”，不过是停机阈值 $\varepsilon_{\mathrm{self}} \to 0$ 时未落锤的分辨率队列，在任意真实观察者的有限停机精度 $\varepsilon_{\mathrm{self}} > 0$（[§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md)）下活跃模态数严格有限；
 2. **空间位置只是账本上的第 1 号概念栏，绝非凌驾于其他概念之上的母容器**：颜色（严格区分观察者视网膜三原色商投影与微观普适的 $\mathrm{SU}(3)_C$ 三色纤维）以及运动本身的三大原语——**平移、旋转、缩放**——全都可以作为平起平坐的三维概念块同席写入同一本希尔伯特账本；
 3. **为什么每一个独立自洽的连续概念块都恰好封顶于三维？因为它们全都是“场”！** 唯有在维数 $d = 3$ 处，二阶有向旋转面积元个数 $\binom{d}{2}$ 与一阶方向矢量个数 $d$ 精确相等（$\frac{d(d-1)}{2} = d \iff d = 3$），使场的旋度 $\nabla \times \mathbf{A}$ 无需借道外部维度就能自洽折返为同一空间内的矢量场，同时锁死外代数 `1 — 3 — 3 — 1` 八度回文、四元数纯虚李球 $\operatorname{Im}\mathbb{H} \cong \mathbb{R}^3$ 与最小量子纯态布洛赫球面 $S^2 \subset \mathbb{R}^3$。
 
@@ -48,13 +48,13 @@
 
 3. **剥去“无限希尔伯特空间 $\mathcal{H}_\infty$”的神秘外衣：未停机分辨率队列与有限模态封顶（`LEAN ✓` + `MODEL`）**。
    再看题记前半句对“数不完就用 $\infty$……无限希尔伯特空间”的犀利诊断。教科书写下波函数 $\psi(\mathbf{x}) \in L^2(\mathbb{R}^3) \cong \mathcal{H}_\infty$ 时，请注意底流形自变量 $\mathbf{x} \in \mathbb{R}^3$ **依然只有三维**！那“无穷维”是从哪儿冒出来的？是因为分析学家假想了一把分辨率无限精细（动量截断 $W \to \infty$）、探测视界无限辽阔（空间半径 $R \to \infty$）且永不停机（$\varepsilon_{\mathrm{self}} \to 0$）的神谕标尺，把同一个三维空间场按无穷多档波长刻度 $\{e^{i\mathbf{k}\cdot\mathbf{x}}\}$ 拆成了无穷多行频谱细目！正如[第三十一章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-truncation-shadows) 锁定的两条互补内核定理所示：一方面，递增正交投影序列在单个固定态矢上具有逐点强极限收敛 [`increasing_projection_strong_limit`](lean:D5/S3/Quantum/Completion/IncreasingProjectionStrongLimit.increasing_projection_strong_limit)（`LEAN ✓`）；另一方面，一致完备化阻断定理 [`uniform_completion_obstruction`](lean:D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction)（[@thm-ch31-truncation-strong-vs-uniform]，`LEAN ✓`）证明在任何真子空间截断阶段 $S_i \neq \top$ 上，余投影算子范数恒等于 $\lVert\operatorname{id}_H - P_{S_i}\rVert = 1 \not\to 0$——“$\infty$”从来不是某台有限寄存器已经数完并装进口袋的静态实体，而是“正交细化尚未封口”的过程记号（`MODEL`）。
-   一旦放回拥有有限空间视界半径 $R$、有限频率带宽测度 $W$ 以及主动自指停机阈值 $\varepsilon_{\mathrm{self}} > 0$（§39.7）的真实观察者手中，[@thm-ch39-hilbert-concept-ledger-and-3d-cap] 第 3 款（[`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound)，`LEAN ✓`，连续时频集中迹背景见 [@rem-ch39-von-neumann-grassmann-hodge-hurwitz-literature] 第 5 款）当场给出铁律：对任意满足 $\lambda_j \ge 0$、可和且总迹 $\sum_{j=0}^\infty \lambda_j = \frac{RW}{\pi}$ 的集中度本征谱，越过停机门槛 $\varepsilon_{\mathrm{self}} > 0$ 的活跃模态集严格为有限集，且其基数受控于显式上界
+   一旦放回拥有有限空间视界半径 $R$、有限频率带宽测度 $W$ 以及主动自指停机阈值 $\varepsilon_{\mathrm{self}} > 0$（[§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md)）的真实观察者手中，[@thm-ch39-hilbert-concept-ledger-and-3d-cap] 第 3 款（[`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound)，`LEAN ✓`，连续时频集中迹背景见 [@rem-ch39-von-neumann-grassmann-hodge-hurwitz-literature] 第 5 款）当场给出铁律：对任意满足 $\lambda_j \ge 0$、可和且总迹 $\sum_{j=0}^\infty \lambda_j = \frac{RW}{\pi}$ 的集中度本征谱，越过停机门槛 $\varepsilon_{\mathrm{self}} > 0$ 的活跃模态集严格为有限集，且其基数受控于显式上界
 
    $$
    \operatorname{ncard}\bigl\{\, j \in \mathbb{N} \;\big|\; \lambda_j \ge \varepsilon_{\mathrm{self}} \,\bigr\} \;\le\; \frac{R W}{\pi\,\varepsilon_{\mathrm{self}}} \;<\; \infty!
    $$
 
-   其余无穷多枚低于 $\varepsilon_{\mathrm{self}}$ 的微弱尾模并不挤占当下的三维可见舞台，而是如 §39.7 所证旋转 $90^\circ$ 折入正交盲区 $\hat{\mathbf{i}}$，化作待未来逐拍显影的时间长河。
+   其余无穷多枚低于 $\varepsilon_{\mathrm{self}}$ 的微弱尾模并不挤占当下的三维可见舞台，而是如 [§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md) 所证旋转 $90^\circ$ 折入正交盲区 $\hat{\mathbf{i}}$，化作待未来逐拍显影的时间长河。
 
 我们将这套把“表观高维/无穷维希尔伯特空间”还原为“独立三维概念场并置与有限停机截断”的账本架构，正式提炼为如下模型定义：
 
