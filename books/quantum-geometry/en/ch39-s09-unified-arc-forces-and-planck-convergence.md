@@ -251,6 +251,109 @@ The following example puts numbers on these three remarks:
 4. **Commutator holonomy.** For rotors turning by $60^\circ$ about two orthogonal axes, item 3 of [@rem-ch39-plaquette-sagitta-and-wilson-action] gives $[u_1, u_2] = -2i\sin 30^\circ\sin 30^\circ\,(n_1\times n_2)\cdot\boldsymbol{\sigma}$, hence $v(h) = 2\sin^2 30^\circ\sin^2 30^\circ = \frac{1}{8}$, and the residual rotation is $2\arccos\frac{7}{8} = 57.91^\circ$, in agreement with the reading on the experiment card of [§32.5](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields).
 :::
 
+The sagitta of the commutator holonomy in item 4 above can be bounded from above by the sagittas of the two links themselves. The matrix inequality this needs is frozen:
+
+::: {.theorem #thm-ch39-weighted-bottcher-wenzel title="The weighted Böttcher–Wenzel commutator inequality" lean="D5/S3/Quantum/Matrix/WeightedBotcherWenzel.result,D5/S3/Quantum/Matrix/WeightedBotcherWenzel.weighted_one"}
+For $A, W \in M_n(\mathbb{C})$ write $\operatorname{weightedSq}(A, W) = \operatorname{Re}\operatorname{Tr}(A^\dagger A W)$, $\operatorname{frobSq}(A) = \operatorname{Re}\operatorname{Tr}(A^\dagger A)$ and $[A, B] = AB - BA$.
+
+1. Let $n > 0$, let $W$ be positive definite, let $\mathrm{lo} > 0$ be real, and let $W$ be Hermitian with all eigenvalues in $[\mathrm{lo}, \mathrm{hi}]$, both $\mathrm{lo}$ and $\mathrm{hi}$ being eigenvalues of $W$. Then for all $A, B \in M_n(\mathbb{C})$,
+
+   $$
+   \operatorname{weightedSq}([A, B], W) \le \left(1 + \frac{\mathrm{hi}}{\mathrm{lo}}\right)\operatorname{weightedSq}(A, W)\,\operatorname{frobSq}(B).
+   $$
+
+2. For every $A \in M_n(\mathbb{C})$, $\operatorname{weightedSq}(A, \mathbf{1}) = \operatorname{frobSq}(A)$.
+:::
+
+::: proof
+A general weight is first written as $W = \mathrm{lo}\sum_iw_i\bigl(\mathbf{1} + \bigl(\frac{\mathrm{hi}}{\mathrm{lo}} - 1\bigr)P_i\bigr)$ with $w_i \ge 0$, $\sum_iw_i = 1$ and each $P_i$ an orthogonal projection; both sides are linear in the weight, so only two-level weights $\mathbf{1} + sP$ remain, and that case is settled by a column estimate after projection and a completion of the square. Taking $n > 0$, $W = \mathbf{1}$ and $\mathrm{lo} = \mathrm{hi} = 1$, items 1 and 2 together give the unweighted Böttcher–Wenzel inequality $\lVert[A, B]\rVert_F^2 \le 2\lVert A\rVert_F^2\lVert B\rVert_F^2$ (with $\lVert X\rVert_F^2 = \operatorname{Tr}(X^\dagger X)$); equivalently, the commutator map $Y \mapsto [A, Y]$ has squared operator norm at most $2\lVert A\rVert_F^2$ with respect to the Frobenius norm. The full proof is checked by the Lean kernel.
+:::
+
+Applied to chords, it gives a product bound for the commutator sagitta:
+
+::: {.remark #rem-ch39-commutator-sagitta-product title="The sagitta of a commutator holonomy is at most four times the product of the link sagittas (manual derivation and literature result)"}
+**Manual derivation; the commutator estimate behind the Zassenhaus neighbourhood is a literature result, not formalized in this book.** Item 1 uses only the case $W = \mathbf{1}$ of [@thm-ch39-weighted-bottcher-wenzel] (the unweighted inequality was first proved by A. Böttcher and D. Wenzel). For $U \in \mathrm{U}(N)$ let $\bar{v}(U) = N - \operatorname{Re}\operatorname{Tr}U = \frac{1}{2}\lVert U - \mathbf{1}\rVert_F^2$ be the unnormalized sagitta, $N$ times the $\varphi(v)$ of [@rem-ch39-plaquette-sagitta-and-wilson-action]. Let $u_1, u_2 \in \mathrm{U}(N)$, $\Delta_k = u_k - \mathbf{1}$ and $h = u_1u_2u_1^{-1}u_2^{-1}$.
+
+1. $\bar{v}(h) = \frac{1}{2}\lVert[\Delta_1, \Delta_2]\rVert_F^2 \le 4\,\bar{v}(u_1)\,\bar{v}(u_2)$; normalized, $\varphi(v(h)) \le 4N\,\varphi(v(u_1))\,\varphi(v(u_2))$. Proof: by item 3 of [@rem-ch39-plaquette-sagitta-and-wilson-action], $h - \mathbf{1} = [u_1, u_2]\,(u_2u_1)^\dagger$, and right multiplication by a unitary leaves $\lVert\cdot\rVert_F$ unchanged; moreover $[u_1, u_2] = [\Delta_1, \Delta_2]$. Hence by [@thm-ch39-weighted-bottcher-wenzel] with $W = \mathbf{1}$, $2\bar{v}(h) \le 2\lVert\Delta_1\rVert_F^2\lVert\Delta_2\rVert_F^2 = 8\,\bar{v}(u_1)\bar{v}(u_2)$. Only the normality of $\Delta_1$ is used, so there is also an elementary proof: in an eigenbasis of $u_1$, $\Delta_1 = \operatorname{diag}(x_i)$ with $x_i = e^{i\theta_i} - 1$, $[\Delta_1, Y]_{ij} = (x_i - x_j)Y_{ij}$, and for $i \ne j$, $\lvert x_i - x_j\rvert^2 \le 2(\lvert x_i\rvert^2 + \lvert x_j\rvert^2) \le 2\lVert\Delta_1\rVert_F^2$, so $\lVert[\Delta_1, Y]\rVert_F^2 \le 2\lVert\Delta_1\rVert_F^2\lVert Y\rVert_F^2$.
+2. The constant $4$ cannot be lowered. For $u_k = \cos\frac{\theta_k}{2} - i\sin\frac{\theta_k}{2}\,n_k\cdot\boldsymbol{\sigma}$ in $\mathrm{SU}(2)$ one has exactly
+
+   $$
+   \bar{v}(h) = 4\,\bar{v}(u_1)\,\bar{v}(u_2)\cos^2\frac{\theta_1}{4}\cos^2\frac{\theta_2}{4}\,\lvert n_1\times n_2\rvert^2,
+   $$
+
+   since $[u_1, u_2] = -2i\sin\frac{\theta_1}{2}\sin\frac{\theta_2}{2}\,(n_1\times n_2)\cdot\boldsymbol{\sigma}$, $\bar{v}(u_k) = 4\sin^2\frac{\theta_k}{4}$ and $\sin\frac{\theta}{2} = 2\sin\frac{\theta}{4}\cos\frac{\theta}{4}$. With orthogonal axes and angles tending to $0$ the ratio $\bar{v}(h)/(4\bar{v}(u_1)\bar{v}(u_2))$ tends to $1$; in $\mathrm{SU}(2)$ it is strictly below $1$ for nonzero angles, so $4$ is a supremum approached in the small-angle limit. Embedding this pair in a $2 \times 2$ block of $\mathrm{U}(N)$ makes the ratio in the normalized form tend to $4N$, so the factor $N$ cannot be dropped either.
+3. For comparison: $\lVert u_1u_2 - u_2u_1\rVert_F^2 = \lVert h - \mathbf{1}\rVert_F^2 = 2\bar{v}(h)$, so by item 1 the two orderings of the product differ by at most $8\,\bar{v}(u_1)\bar{v}(u_2)$ in squared chord, which is fourth order in the angles; the sagitta of the product itself only obeys chord addition, $\sqrt{\bar{v}(u_1u_2)} \le \sqrt{\bar{v}(u_1)} + \sqrt{\bar{v}(u_2)}$, which is first order in the angles.
+4. Iterated commutators contract: for any $h_0$ and $h_k = u_1h_{k-1}u_1^{-1}h_{k-1}^{-1}$, $\bar{v}(h_k) \le (4\bar{v}(u_1))^k\,\bar{v}(h_0)$, which tends to zero geometrically when $\bar{v}(u_1) < \frac{1}{4}$. The analogous operator-norm inequality $\lVert aba^{-1}b^{-1} - \mathbf{1}\rVert \le 2\lVert a - \mathbf{1}\rVert\,\lVert b - \mathbf{1}\rVert$ for unitary $a, b$ is the starting point of the Zassenhaus-neighbourhood argument (literature result).
+5. A finite-aperture “$F = dA + [A, A]$”. The plaquette holonomy $P = h\,w\,h'^{-1}w'^{-1}$ ($h, h'$ one pair of opposite links, $w, w'$ the other) satisfies
+
+   $$
+   \lVert P - \mathbf{1}\rVert_F \le \sqrt{2}\,\lVert h - \mathbf{1}\rVert_F\,\lVert w - \mathbf{1}\rVert_F + \lVert h' - h\rVert_F + \lVert w' - w\rVert_F .
+   $$
+
+   Proof: let $C = hwh^{-1}w^{-1}$. Left multiplication by $(hw)^{-1}$ preserves distances, so $\lVert P - C\rVert_F = \lVert h'^{-1}w'^{-1} - h^{-1}w^{-1}\rVert_F \le \lVert h'^{-1} - h^{-1}\rVert_F + \lVert w'^{-1} - w^{-1}\rVert_F$, and $\lVert a^{-1} - b^{-1}\rVert_F = \lVert a^{-1}(b - a)b^{-1}\rVert_F = \lVert b - a\rVert_F$; by item 1, $\lVert C - \mathbf{1}\rVert_F = \sqrt{2\bar{v}(C)} \le \sqrt{2}\,\lVert h - \mathbf{1}\rVert_F\lVert w - \mathbf{1}\rVert_F$. When opposite links agree only the first term remains, and by item 2 its constant $\sqrt{2}$ cannot be lowered; in $\mathrm{U}(1)$, $C = \mathbf{1}$ and the first term can be dropped altogether. Reading the first term as $[A, A]$ and the differences of opposite links as $dA$ is an analogy with the continuum notation, not a derivation.
+
+For the unweighted Böttcher–Wenzel inequality see A. Böttcher and D. Wenzel (*Linear Algebra Appl.* **429**, 1864–1885, 2008, DOI `10.1016/j.laa.2008.05.020`); for the Zassenhaus neighbourhood see H. Zassenhaus (*Abh. Math. Sem. Univ. Hamburg* **12**, 289–312, 1938).
+:::
+
+The Bianchi identity also has an exact finite form on the lattice. The smallest closed surface is the six faces of a cube:
+
+::: {.remark #rem-ch39-cube-bianchi-sagitta title="The Bianchi identity on a cube and the redistribution of sagitta (manual derivation and literature result)"}
+**Manual derivation; the lattice Bianchi identity, the cube monopole number (DeGrand and Toussaint 1980) and the admissibility condition (Lüscher 1999) are literature results, not formalized in this book.** The unit cube has vertices $(x, y, z) \in \{0, 1\}^3$. Link variables take values in an arbitrary group: $X_{yz}$ runs from $(0, y, z)$ to $(1, y, z)$, $Y_{xz}$ from $(x, 0, z)$ to $(x, 1, z)$, $Z_{xy}$ from $(x, y, 0)$ to $(x, y, 1)$. Each face is traversed from its vertex nearest the origin, in the right-handed sense about the outward normal; the three faces that miss the origin are joined to it by one edge:
+
+$$
+\begin{aligned}
+\ell_1 &= Z_{00}Y_{01}Z_{01}^{-1}Y_{00}^{-1} && (x = 0),\\
+\ell_2 &= Y_{00}\,(Z_{01}X_{11}Z_{11}^{-1}X_{10}^{-1})\,Y_{00}^{-1} && (y = 1),\\
+\ell_3 &= Y_{00}X_{10}Y_{10}^{-1}X_{00}^{-1} && (z = 0),\\
+\ell_4 &= X_{00}\,(Y_{10}Z_{11}Y_{11}^{-1}Z_{10}^{-1})\,X_{00}^{-1} && (x = 1),\\
+\ell_5 &= X_{00}Z_{10}X_{01}^{-1}Z_{00}^{-1} && (y = 0),\\
+\ell_6 &= Z_{00}\,(X_{01}Y_{11}X_{11}^{-1}Y_{01}^{-1})\,Z_{00}^{-1} && (z = 1).
+\end{aligned}
+$$
+
+1. $\ell_1\ell_2\ell_3\ell_4\ell_5\ell_6 = \mathbf{1}$. Multiplying on the right one lasso at a time, each step cancels only one block of adjacent mutually inverse letters at the seam:
+
+   $$
+   \begin{aligned}
+   \ell_1\ell_2 &= Z_{00}Y_{01}X_{11}Z_{11}^{-1}X_{10}^{-1}Y_{00}^{-1},\\
+   \ell_1\ell_2\ell_3 &= Z_{00}Y_{01}X_{11}Z_{11}^{-1}Y_{10}^{-1}X_{00}^{-1},\\
+   \ell_1\cdots\ell_4 &= Z_{00}Y_{01}X_{11}Y_{11}^{-1}Z_{10}^{-1}X_{00}^{-1},\\
+   \ell_1\cdots\ell_5 &= Z_{00}Y_{01}X_{11}Y_{11}^{-1}X_{01}^{-1}Z_{00}^{-1} = \ell_6^{-1}.
+   \end{aligned}
+   $$
+
+   Each partial product runs once, from the origin, around the boundary of the disc formed by the faces attached so far; the disc made of five faces has as its boundary the sixth face traversed backwards. This is an identity in the free group, so it holds for link variables in any group; a cyclic rotation of the product is a conjugate of it and also equals $\mathbf{1}$. The order is part of the statement.
+2. Let $P_f$ be the holonomy of face $f$ from its starting vertex ($\ell_f$ is a conjugate of it). In $\mathrm{U}(N)$, item 1 and the two-sided unitary invariance of $\lVert\cdot\rVert_F$ give, for every face $f$,
+
+   $$
+   \lVert P_f - \mathbf{1}\rVert_F \le \sum_{g \ne f}\lVert P_g - \mathbf{1}\rVert_F, \qquad \bar{v}(P_f) \le \left(\sum_{g \ne f}\sqrt{\bar{v}(P_g)}\right)^2 \le 5\sum_{g \ne f}\bar{v}(P_g),
+   $$
+
+   with $\bar{v}$ the unnormalized sagitta of [@rem-ch39-commutator-sagitta-product]. Neither constant can be lowered: in $\mathrm{U}(1)$, give one face the outward flux $\vartheta$ and each of the other five $-\frac{\vartheta}{5}$; as $\vartheta \to 0$ both ratios tend to $1$. Sagitta on one face cannot appear alone; the other five faces must pay for it.
+3. In $\mathrm{U}(1)$ conjugation does nothing and item 1 becomes $\sum_f\vartheta_f \equiv 0 \pmod{2\pi}$ for the outward fluxes $\vartheta_f$. With principal values $\vartheta_f \in (-\pi, \pi]$ the integer $n = \frac{1}{2\pi}\sum_f\vartheta_f$ is the magnetic monopole number of the cube (it agrees with the DeGrand–Toussaint definition up to a sign convention). If $n \ne 0$ then $\sum_f\lvert\vartheta_f\rvert \ge 2\pi$, hence $\max_f\lvert\vartheta_f\rvert \ge \frac{\pi}{3}$, that is $\max_f(1 - \cos\vartheta_f) \ge \frac{1}{2}$: if all six face sagittas are below $\frac{1}{2}$ (all chords below $1$) there is no monopole. The threshold is attained: six fluxes equal to $\frac{\pi}{3}$ give $n = 1$ with every face sagitta exactly $\frac{1}{2}$. Using also $1 - \cos x \ge \frac{2x^2}{\pi^2}$ for $\lvert x\rvert \le \pi$ and $\sum_f\vartheta_f^2 \ge \frac{1}{6}\bigl(\sum_f\lvert\vartheta_f\rvert\bigr)^2$, one gets $\sum_f(1 - \cos\vartheta_f) \ge \frac{4}{3}$ whenever $n \ne 0$; this bound is not sharp.
+4. In the non-abelian case the face holonomies do not commute, the principal-value sum of item 3 has no direct counterpart, and the inequalities of item 2 still hold. In the continuum limit the leading order of item 1 gives $D_{[\lambda}F_{\mu\nu]} = 0$ (literature result).
+
+For the cube monopole number see T. A. DeGrand and D. Toussaint (*Phys. Rev. D* **22**, 2478–2489, 1980). M. Lüscher (*Nucl. Phys. B* **549**, 295–334, 1999, arXiv:`hep-lat/9811032`) restricts abelian chiral lattice gauge theory to admissible fields: the principal value of the plaquette field strength satisfies $\lvert F_{\mu\nu}\rvert < \epsilon$ everywhere, with a constant $\epsilon$ chosen in $(0, \frac{\pi}{3})$. By the arithmetic of item 3, such fields have $n = 0$ in every unit cube.
+:::
+
+On the gravitational side, in three dimensions the deficit is also the derivative of the Regge action with respect to edge length. The proof uses only pairwise comparisons of face normals:
+
+::: {.remark #rem-ch39-schlafli-regge-deficit-gradient title="Schläfli's formula: in three dimensions the gradient of the Regge action in the edge lengths is the deficit (manual derivation and literature result)"}
+**Manual derivation; Schläfli's formula (Schläfli 1858) and its general-dimensional form, and the Regge equations (Regge 1961), are literature results, not formalized in this book.**
+
+1. Let a convex polyhedron $P \subset \mathbb{R}^3$ deform smoothly without changing its combinatorial type, with edge lengths $\ell_e$ and interior dihedral angles $\theta_e \in (0, \pi)$. Then $\sum_e\ell_e\,d\theta_e = 0$. Proof: let $n_F$ be the outward unit normal of face $F$, and for an edge $e$ of $F$ let $m_{F,e}$ be the unit vector in the plane of $F$, perpendicular to $e$ and pointing out of $F$. The exterior angle $\alpha_e = \pi - \theta_e$ between the faces $F, G$ on either side of $e$ is given by comparing their normals: $\cos\alpha_e = n_F\cdot n_G$, and $n_G = \cos\alpha_e\,n_F + \sin\alpha_e\,m_{F,e}$ (likewise for $G$). Since $n_F\cdot dn_F = 0$,
+
+   $$
+   -\sin\alpha_e\,d\alpha_e = dn_F\cdot n_G + n_F\cdot dn_G = \sin\alpha_e\,\bigl(m_{F,e}\cdot dn_F + m_{G,e}\cdot dn_G\bigr).
+   $$
+
+   Cancelling $\sin\alpha_e \ne 0$, weighting by $\ell_e$, summing over edges and regrouping by faces gives $\sum_e\ell_e\,d\alpha_e = -\sum_F dn_F\cdot\left(\sum_{e \subset F}\ell_e\,m_{F,e}\right)$. Each $\ell_e\,m_{F,e}$ is an oriented edge vector of the boundary polygon of $F$ turned through $90^\circ$ within the face, and the edge vectors of a closed polygon sum to zero, so the right-hand side vanishes; and $d\theta_e = -d\alpha_e$.
+2. Let every tetrahedron of a closed three-dimensional simplicial complex be a nondegenerate Euclidean tetrahedron, let $\delta_e = 2\pi - \sum_{t \ni e}\theta_e^{(t)}$ be the deficit at edge $e$, and let $S = \sum_e\ell_e\delta_e$ be the Regge action. Then $\frac{\partial S}{\partial\ell_k} = \delta_k$. Proof: $\frac{\partial S}{\partial\ell_k} = \delta_k - \sum_t\sum_{e \subset t}\ell_e\,\frac{\partial\theta_e^{(t)}}{\partial\ell_k}$, and the second term vanishes by item 1 applied to each tetrahedron. So the vacuum Regge equations in three dimensions say exactly that every edge has zero deficit, that is, flatness edge by edge.
+3. Numerical check: on the boundary of a 4-simplex (five tetrahedra, ten edges, each edge in three tetrahedra), with edge lengths drawn at random in $1 \pm 0.15$, the central-difference $\frac{\partial S}{\partial\ell_k}$ differs from $\delta_k$ by at most $10^{-8}$; with all lengths $1$, $\delta_k = 2\pi - 3\arccos\frac{1}{3} \approx 2.5903$.
+
+The proof of item 1 uses only two things: the comparison $n_F\cdot n_G$ of two face normals, and the closure of each face boundary; reading the former as the similarity channel of Clause II of [@def-ch32-axiom-of-comparison] is a reading of this book (`MODEL`). Item 2 says that in three dimensions the quantity conjugate to a hinge length is precisely the arc of its deficit. In four dimensions, $\frac{\partial S}{\partial\ell_k} = \sum_h\delta_h\,\frac{\partial A_h}{\partial\ell_k}$ rests on the general-dimensional Schläfli formula (literature result; see J. Milnor, “The Schläfli differential equality”, in *Collected Papers of John Milnor*, vol. 1, 1994). Lorentzian signature, the coupling constant and quantization do not follow from this ([@prob-ch34-gravity-dynamics-and-coupling]).
+:::
+
 Zero action does not always mean pure gauge. On a lattice with non-contractible loops, such as a torus, the following frozen theorem gives an instance with $\mathbb{Z}/2$ coefficients:
 
 ::: {.theorem #thm-ch39-periodic-grid-flat-not-exact title="Flat Z/2 edge labels on a periodic grid: the gradient criterion and a one-seam counterexample" lean="D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.flat_exact_iff,D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.horizontal_seam_counterexample"}
