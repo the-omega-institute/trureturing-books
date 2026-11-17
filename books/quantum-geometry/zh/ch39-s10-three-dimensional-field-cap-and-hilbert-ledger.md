@@ -25,6 +25,10 @@
 
    当 $k = 1$（单一三维场）时，$N_{\mathrm{spurious}}(1) = 0$，全部 $3$ 张坐标平面都是真实可转的物理旋转面；一旦并入第 $2$ 个三维概念（$k = 2,\; 6\mathrm{D}$），$15$ 个平面里立刻混入 $9$ 个跨概念伪平面；到了萤火虫的三概念账本（$k = 3,\; 9\mathrm{D}$），$\binom{9}{2} = 36$ 个平面中竟有 **$36 - 9 = 27$ 个（占比 $75\%$）**是纯粹由矩阵排版催生的语法幽灵！在实完备内积空间 $H$ 中，[@thm-ch39-hilbert-concept-ledger-and-3d-cap] 第 1 款（[`finite_stage_expansion`](lean:D5/S3/Observer/Tomography/FiniteStageExpansion.finite_stage_expansion)，`LEAN ✓`）严格刻画了这种逐块并账的正交壳层几何：只要每一阶新增概念闭壳层满足 $E_{k+1} \le S_k^\perp$ 且累积空间按 $S_{k+1} = S_k \sqcup E_{k+1}$ 递推，第 $n$ 阶可见账本便精确展开为初始核与前 $n$ 层独立概念壳层的并跨度 $S_n = S_0 \sqcup \operatorname{finiteShellSpan}(E, n)$，全空间拆分为 $S_0 \sqcup \operatorname{finiteShellSpan}(E, n) \sqcup S_n^\perp$，不同概念壳层之间严守 $90^\circ$ 正交零内积边界。
 
+::: {.viz src="hilbert-concept-ledger-3d-cap-sandbox" preset="hypercube-illusion-unfold" height="500"}
+拖动琥珀色展开手柄 $\lambda \in [0, 1]$，将看似同质的 $15$ 维超立方体混合投影逐块拆回五颗彼此正交的青色三维概念球（空间、颜色、平移、旋转、缩放）：紫色标示各球内部合法的 $5 \times 3 = 15$ 根局域旋转轴，品红细弦标出同质 $\mathfrak{so}(15)$ 假想中 $\binom{15}{2} - 15 = 90$ 个跨概念伪旋转平面；绿色依据框锚定 `finite_stage_expansion`，分块维数审计标 `ARGUED` 与 `NUM`，五球混编读法标 `MODEL`。
+:::
+
 2. **量子复合态层的张量积纤维 $\bigotimes_{\alpha=1}^k \mathcal{H}_\alpha$、李代数克罗内克和与 `6 + 9 = 15` 关联查表（`手工推导` + `LEAN ✓`）**。
    进入量子力学后，我们必须严守一条关键代数护栏：**切勿把经典参数直和 $\oplus$ 与量子复合纯态张量积 $\otimes$ 混为一谈**！当一颗微观粒子同时携带自旋与色荷、或两套量子概念 $A, B$ 发生跨通道纠缠时，复合纯态居住在张量积空间 $\mathcal{H}_A \otimes \mathcal{H}_B$ 而非简单直和 $\mathcal{H}_A \oplus \mathcal{H}_B$ 中。那么，为什么题记依然洞察到“希尔伯特空间只是不同概念投影到了一起”？因为两座严密的数学桥梁将张量积 $\otimes$ 重新锚定回了独立三维概念账本：
 
@@ -89,6 +93,10 @@
    - **（b）微观物理本体侧的强相互作用三原色：$\mathrm{SU}(3)_C$ 幺模三色纤维 $\mathbb{C}^3_{\mathrm{col}}$（`文献结果` + `LEAN ✓`）**。
      越过生物视网膜的演化偶然性，下潜到 $10^{-15}\;\mathrm{m}$ 的亚原子深处，大自然在夸克与胶子层面上果真铸造了一座不随生物物种改变的**普适微观三原色场** $\mathbb{C}^3_{\mathrm{col}} = \operatorname{span}_{\mathbb{C}}\{\lvert R\rangle, \lvert G\rangle, \lvert B\rangle\}$（Fritzsch, Gell-Mann & Leutwyler 1973，`文献结果`；见 [§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave)）！在这座微观色场中，唯有三根实线性无关的色锚棱同时到齐（[`three_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff) $\det G_3 > 0$，`LEAN ✓`），反对称全同体积伪标量 $\varepsilon_{rgb} q^r q^g q^b$ 才能闭合成对外色中性的重子单态；而在下一节 [§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) 中我们还将严格证出，色维数 $N_c = 3$ 更是令量子手征反常相消与温伯格角几何初值精确咬合的唯一正整数根！
 
+::: {.viz src="hilbert-concept-ledger-3d-cap-sandbox" preset="space-color-joint-ledger" height="500"}
+并排检视空间与颜色两颗青色三维概念球及其复合量子账本：单看局域直和账本的 $3 + 3 = 6$ 个边缘读数无法区分纯纠缠态与等边缘经典混态，唯有点亮连接两球的品红 $3 \times 3 = 9$ 格跨概念相关表才能补齐 $15$ 维无迹空间，右侧同时以紫色三锚体积核验视锥 $(L, M, S)$ 商投影与微观三色格拉姆判据 $\det G_3 > 0$（绿色框锚定 `local_marginal_correlation_blind_spot` 与 `three_anchor_gram_det_pos_iff`，密度矩阵与行列式实算标 `NUM`，颜色框架标 `MODEL`）。
+:::
+
 3. **第 3、4、5 号概念栏——运动三元组（平移·旋转·缩放）：把“动词”装进同一本三维概念账本（`手工推导` + `文献结果` + `LEAN ✓`）**。
    更富洞察力的一步紧随其后：在古典语法里，“空间与颜色”是静态属性，而“运动（平移、旋转、缩放）”似乎是施加在物体上的外部动作；但在希尔伯特空间与李代数算子几何中，状态即算子（`p ≡ *p`，[§39.1](ch39-s01-substrate-free-self-reference.md)），**平移、旋转与缩放这三大基本运动形态本身，恰好也是三块各自封顶于三维的独立概念块**！我们逐一清点它们的精确维数：
 
@@ -110,6 +118,10 @@
      $$
 
 把这几栏并排摊开，物理学史上两团著名的“高维迷雾”当场云开雾散（`MODEL`）：经典统计力学里的 **$6N$ 维刘维尔相空间** $\mathbb{R}^{6N}$，根本不是一间长着 $6N$ 条互相垂直走廊的怪诞大厦，而只是一张写着 $N$ 行粒子记录的表格，每一行并排填着**第 1 栏“三维位置 $\mathbf{q}_a \in \mathbb{R}^3_{\mathrm{pos}}$”与第 3 栏“三维平移速度/动量 $\mathbf{p}_a \in \mathbb{R}^3_{\mathrm{trans}}$”**；同理，卡鲁扎—克莱因（Kaluza–Klein）与超弦理论之所以被迫假设“蜷缩在 $10^{-35}\;\mathrm{m}$ 卡拉比—丘流形里的十维/十一维额外空间”，病根正在于把电磁相位、弱旋量与强三色这些**并列的内禀概念纤维**硬生生当成了与 $\mathbb{R}^3_{\mathrm{pos}}$ 同类的“额外空间坐标”，然后再费尽周折解释为什么人类的脚迈不进第五维——殊不知你迈不进色荷维度，与你无法“往深红色里步行三米”一样天经地义，因为它们本来就是希尔伯特总账本上与空间并肩而坐的**另一栏独立概念**！
+
+::: {.viz src="hilbert-concept-ledger-3d-cap-sandbox" preset="motion-rot-scale-trans-triad" height="500"}
+拨动琥珀色当前读头，在同一舞台核对平移、旋转与缩放三颗青色三维运动概念球：青色梯度轴标示一阶平移流 $\Lambda^1(\mathbb{R}^3)$，紫色转轴标示二阶角动量双矢量 $\mathfrak{so}(3) \cong \Lambda^2(\mathbb{R}^3)$，极分解 $F = R U$ 主伸长经亨基对数应变 $\mathbf{s} = (\ln\lambda_1, \ln\lambda_2, \ln\lambda_3)$ 与共形三元组 $\mathfrak{sl}(2, \mathbb{R})$ 双双锁死三维（极分解与基灵型文献标 `ARGUED`，主应变实算标 `NUM`，运动入账读法标 `MODEL`）。
+:::
 
 ## 39.10.3 “为什么都是三维的？因为都是场”：旋度自闭合方程 $\binom{d}{2} = d$、四元数李球与布洛赫封顶 {#sec-ch39-10-3}
 
@@ -144,6 +156,10 @@
 
 3. **第三重锁死——最小非平凡量子比较载体的三维布洛赫球面 $S^2 \subset \mathbb{R}^3$（`LEAN ✓` + `文献结果`）**。
    在量子信息最底层，一切复杂概念分辨都由最基本的二元正交是非追问（单量子比特，$\mathbb{C}^2$）编织而成。[@thm-ch39-hilbert-concept-ledger-and-3d-cap] 第 5 款（[`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian)，`LEAN ✓`，详参[第二十六章](ch26-single-qubit-rotor-compilation.md) [@prop-hermitian-bloch-geometry]）证明：任何 $2 \times 2$ 复厄米算符都由其实迹与一枚**三维实欧氏布洛赫向量** $\operatorname{bloch}(M) \in \mathbb{R}^3$ 零损耗唯一重构，且迹为 $1$ 的幂等纯态投影（$M^2 = M,\; \Tr M = 1$）精确落满三维空间中的二维单位球面 $\norm{\operatorname{bloch}(M)} = 1$（甚至在三能级 $\mathbb{C}^3$ 厄米态锥中，[@thm-appf-hermitian-exclusion-chart] `all_pure_charts` 亦证明每个纯态的正交排除面图表实仿射维数恒为 $a.\mathrm{dim} = 3$！）。现代量子操作公理化重构（Hardy 2001；Dakić & Brukner 2011；Chiribella, D'Ariano & Perinotti 2011，`文献结果`，见 [@rem-ch39-von-neumann-grassmann-hodge-hurwitz-literature] 第 7 款）进一步证实：在所有假想的广义 $m$ 维球态理论 $\overline{B}^m \subset \mathbb{R}^m$ 中，唯有 **$m = 3$** 能同时满足连续可逆演化与局域层析完备性！
+
+::: {.viz src="hilbert-concept-ledger-3d-cap-sandbox" preset="hodge-curl-field-cap-3d" height="500"}
+切换琥珀色维数滑块 $d \in \{1, 2, 3, 4\}$，观察霍奇星号何时把二阶旋度面送回同一空间的一阶轴：$d = 1, 2$ 因旋转面不足而锁死，$d = 4$ 的 $\binom{4}{2} = 6$ 张平面溢出并沿自对偶分裂回 $3 + 3$ 两栏，唯有 $d = 3$ 令青色梯度轴与紫色霍奇对应轴按 $\binom{3}{1} = \binom{3}{2} = 3$ 严丝合缝闭合为三维场与单比特布洛赫球（绿色框锚定 `complete_consequences` 与 `bloch_geometry_of_isHermitian`，霍奇星号与四元数标 `ARGUED`，$d$ 维紧框架投影标 `MODEL`）。
+:::
 
 ## 39.10.4 形式化锚定定理、经典文献边界、十五维五概念账本算例与大统一前奏 {#sec-ch39-10-4}
 
@@ -251,6 +267,10 @@
    且仅靠这 $4$ 枚活跃模态便捕获了总迹权重的 $\sum_{j=0}^3 2^{-(j+1)} = \frac{15}{16} = 0.937500$（$93.7500\%$），余下整条无穷尾列 $\{j \ge 4\}$ 的总权重精确收敛为 $\frac{1}{16} = 0.062500$（$6.2500\%$）并正交折入时间余空间（若将窗口展宽十倍至 $RW = 10\pi$，活跃模态数上界亦不过 $\frac{10}{0.05} = 200$ 枚，彻底终结“实无穷维同步驻留”幻象）。
 :::
 
+::: {.viz src="hilbert-concept-ledger-3d-cap-sandbox" preset="unhalted-infinity-truncation" height="500"}
+拖动琥珀色停机精度滑块 $\varepsilon_{\mathrm{self}} > 0$，检验“无限维希尔伯特模塔”如何在有限观测预算下当场截断：高于琥珀色阈值刻线的有限层活跃模态保留为青色可见模层（部分和捕获主干迹权重），低于阈值的无穷尾列化作品红折叠尾巴转入正交时间余空间，绿色依据框严格锚定 `finite_rank_concentration_mode_bound` 的活跃模数上界 $\frac{RW}{\pi\varepsilon_{\mathrm{self}}}$（部分和与停机层数标 `NUM`，尾部折叠读法标 `MODEL`）。
+:::
+
 我们将传统教材中五类最具迷惑性的“高维/无穷维对象”与其在三维概念场混编账本下的真实几何身份、三维封顶机制及认识论证据分层，收束为下方单行对照总表：
 
 | 表观高维 / 无穷维对象 | 传统“惯性推广”语法幻觉 | 希尔伯特多概念账本真实结构 | 单元概念封顶于三维的场论根源 | 内核 `LEAN ✓` 支点与证据分层 |
@@ -262,3 +282,7 @@
 | **可分无限维 $\mathcal{H}_\infty$ 与 $10/11\mathrm{D}$ 额外维** | 将未停机频谱队列当作实无穷维空间，为内禀荷虚构紧致化额外空间轴 | 底空间仍是 $\mathbb{R}^3$，活跃模态受 $\frac{RW}{\pi\varepsilon_{\mathrm{self}}}$ 有限截断；规范荷本就是并列内禀概念栏 | 旋度自闭合 $\binom{d}{2}=d\iff d=3$ 与 $\operatorname{Im}\mathbb{H}\cong\mathbb{R}^3$ 封死三维以上结合单场（$\mathfrak{so}(4)\cong 3+3$） | [`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound)、[`uniform_completion_obstruction`](lean:D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction)（`LEAN ✓`）+ Frobenius–Hurwitz `文献结果` |
 
 当“高维超空间”与“实无穷维容器”这两座维持了一百多年的脚手架轰然卸除之后，整座基础物理学的地基突然变得前所未有地清朗：**宇宙间既没有蜷缩在普朗克角落里的十维迷宫，也没有超越三维的孤立单场；万事万物不过是若干座同样遵循 `1 — 3 — 3 — 1` 旋度闭合律的三维场，以极小圆弧 $\Delta\mathcal{T}_\epsilon$ 为共同微分原语，并排投影在同一本希尔伯特关系账本之上！** 而这一发现立刻把我们推向了第三十九章真正激动人心的收官大统一之巅：既然电磁盲圆、弱手征双覆叠、强三色体积锁、跨概念希格斯桥与胞间时钟引力全都是由极小圆弧织成的概念场，我们能否不再仅仅作定性并置，而是直接从**三维概念场封顶原理（$N_c = 3$）与极小圆弧协变换位几何**出发，定量推导出大统一标度下的裸温伯格角 $\sin^2\theta_W(\mu_{\mathrm{arc}}) = \frac{3}{8}$、证明为何极小圆弧统一无需引入媒介质子衰变的 $X, Y$ 轻夸克玻色子从而自然守护单质子稳定性（$p \nrightarrow e^+\pi^0$），并为下一代基础物理划定清清楚楚的可证伪锋线？让我们翻开全书正文的压轴一节——[§39.11 极小圆弧场大统一理论（AF-GUT）](ch39-s11-af-gut-arc-field-grand-unification.md)。
+
+::: {.viz src="hilbert-concept-ledger-3d-cap-sandbox" height="640"}
+完整交互实验室（`HILBERT//LEDGER`）：自由切换五张递进实验卡并拖动琥珀色展开参数 $\lambda$、维数 $d$ 与停机精度 $\varepsilon_{\mathrm{self}}$ 手柄，从 $15$ 维五球正交拆账、空间—颜色 $6 + 9 = 15$ 关联盲区、平移—旋转—缩放运动三元组、$d = 3$ 霍奇旋度唯一自闭合直至无穷模塔有限停机，全流程核验 `LEAN ✓` 六条冻结定理、`ARGUED` 经典代数文献、`NUM` 实时矩阵读数与 `MODEL` 多概念账本诠释。
+:::

@@ -6224,6 +6224,182 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "hilbert-concept-ledger-3d-cap-sandbox",
+      "code": "HILBERT//LEDGER",
+      "title": "HILBERT//LEDGER · 混编希尔伯特假象与三维概念场账本沙盘",
+      "title_en": "HILBERT//LEDGER · Pooled Hilbert Illusion & 3D Concept-Field Ledger Sandbox",
+      "summary": "五个概念（空间、颜色、旋转、平移、缩放）各取一颗受光的三维球，权重 w = (0.30, 0.25, 0.20, 0.15, 0.10)。混编成一颗 15 维的球时，so(15) 有 105 个转动，其中 90 = 9·C(5, 2) 个把一个概念转进另一个；分箱成五颗三维球，账本只记 5 × 3 = 15 个。空间 ⊗ 颜色的两体态从 Bell 密度走到经典相关，两个局域布洛赫向量始终为 0，9 个相关却在变（15 = 6 + 9）；颜色球里 RGB 正交基与 LMS 斜交框的格拉姆行列式都大于零。一个弧面体的运动拆成平移、转动与对数主应变三颗三维球；d 维里梯度 C(d, 1) 与旋度 C(d, 2) 只在 d = 3 一样多，霍奇星号只在那里把旋度送到一根轴上；无穷模塔 w_k = (1 − q)q^{k−1} 在自停机精度 ε_self 处折叠成有限层。五张实验卡可独立引用。",
+      "summary_en": "Five concepts (space, color, rotation, translation, scale) take one lit 3D ball each, with weights w = (0.30, 0.25, 0.20, 0.15, 0.10). Pooled into one 15-dimensional ball, so(15) has 105 rotations, 90 = 9·C(5, 2) of which turn one concept into another; binned into five 3D balls, the ledger keeps 5 × 3 = 15. A two-party state of space ⊗ color runs from the Bell density to a classical correlation while both local Bloch vectors stay 0 and the 9 correlations move (15 = 6 + 9); in the color ball the orthonormal RGB frame and the skewed LMS frame both have a positive Gram determinant. The motion of an arc body splits into three 3D balls of translation, rotation and log principal strain; in d dimensions the gradients C(d, 1) and the curls C(d, 2) are as many only at d = 3, the one dimension where the Hodge star sends a curl to an axis; the infinite mode tower w_k = (1 − q)q^{k−1} folds into finitely many shells at the self-halting precision ε_self. Five independently citable experiments.",
+      "path": "hilbert-concept-ledger-3d-cap-sandbox/",
+      "thumbnail": "hilbert-concept-ledger-3d-cap-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-17",
+      "chapter": 39,
+      "section": "39.10",
+      "presets": [
+        "hypercube-illusion-unfold",
+        "space-color-joint-ledger",
+        "motion-rot-scale-trans-triad",
+        "hodge-curl-field-cap-3d",
+        "unhalted-infinity-truncation"
+      ],
+      "preset_titles": {
+        "hypercube-illusion-unfold": {
+          "zh": "混编的 15 维假象展开成五颗三维概念球",
+          "en": "The pooled 15D illusion unfolds into five 3D concept balls"
+        },
+        "space-color-joint-ledger": {
+          "zh": "空间与颜色：局域账本 6 个数，相关表 9 个数",
+          "en": "Space and color: 6 local numbers, a 9-entry correlation table"
+        },
+        "motion-rot-scale-trans-triad": {
+          "zh": "平移、旋转、缩放：一个物体的三颗三维运动球",
+          "en": "Translation, rotation, scale: three 3D motion balls of one body"
+        },
+        "hodge-curl-field-cap-3d": {
+          "zh": "梯度与旋度一样多，只在 d = 3",
+          "en": "As many curls as gradients, only at d = 3"
+        },
+        "unhalted-infinity-truncation": {
+          "zh": "无穷模塔在 ε_self 处停机：7 层活跃，尾巴折叠",
+          "en": "The infinite mode tower halts at ε_self: 7 active shells, the tail folded"
+        }
+      },
+      "tags": [
+        "三维概念场",
+        "希尔伯特账本",
+        "跨概念伪转轴",
+        "局域相关盲区",
+        "霍奇对偶",
+        "自停机截断"
+      ],
+      "tags_en": [
+        "3D concept fields",
+        "Hilbert ledger",
+        "Cross-concept rotations",
+        "Local–correlation blind spot",
+        "Hodge duality",
+        "Self-halting truncation"
+      ],
+      "theory": [
+        {
+          "label": "39.10 三维概念场封顶原理与希尔伯特多概念混编账本：为什么“三维以上”只是独立三维场的并置投影",
+          "label_en": "39.10 The Three-Dimensional Concept-Field Cap and the Hilbert Multi-Concept Ledger: Why \"Above Three Dimensions\" Is Only a Joint Projection of 3D Fields",
+          "href": "../zh/ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.html",
+          "href_en": "../en/ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/Tomography/FiniteStageExpansion.finite_stage_expansion"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot"
+        },
+        {
+          "gid": "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound"
+        },
+        {
+          "gid": "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "af-gut-arc-field-unification-sandbox",
+      "code": "AFGUT//UNIFY",
+      "title": "AFGUT//UNIFY · AF-GUT 极小圆弧多概念三维场大统一沙盘",
+      "title_en": "AFGUT//UNIFY · AF-GUT Minimal-Arc Multi-Concept 3D Field Grand Unification Sandbox",
+      "summary": "四种力画成同一个 ΔT_ε 原胞外的四片同心圆弧壳：青色 F_pos（引力）、紫色 F_rot（SU(2)，720° 旋量）、蓝色 F_col（SU(3)，N_c = 3 体积锁）、银白 F_scl（U(1) 相位与标度），壳半径随 1/g 增长。能标从 M_Z = 91.1876 GeV 拉到 E_P = 1.220890 × 10¹⁹ GeV：单圈跑动（b = 41/10、−19/6、−7）让 SU(2) 与 U(1) 两壳在 log₁₀(μ₁₂/GeV) = 13.0060 处重合（α₁⁻¹ = α₂⁻¹ = 42.408，sin²θ_W = 3/8），引力壳在 E_P 处长到 α_G = 1。一般 N_c 的两条 sin²θ_W 曲线只在 N_c = 3 交于 3/8；希格斯桥 Φ̃_H 把正交的左右手片缝成静止质量，(m_W, m_Z) = (80.38, 91.19)Φ̃_H GeV；勾股天平 (dτ/dt)² + Σ η² = 1；透镜在分立的四概念账本与单原胞之间连续变形。五张实验卡可独立引用。",
+      "summary_en": "The four forces drawn as four concentric arc shells around one ΔT_ε cell: cyan F_pos (gravity), violet F_rot (SU(2), the 720° spinor), blue F_col (SU(3), the N_c = 3 volume lock) and silver F_scl (U(1) phase and scale), each radius growing with 1/g. The scale runs from M_Z = 91.1876 GeV to E_P = 1.220890 × 10¹⁹ GeV: one-loop running (b = 41/10, −19/6, −7) brings the SU(2) and U(1) shells together at log₁₀(μ₁₂/GeV) = 13.0060 (α₁⁻¹ = α₂⁻¹ = 42.408, sin²θ_W = 3/8) and grows the gravity shell to α_G = 1 at E_P. The two general-N_c curves for sin²θ_W meet only at N_c = 3, at 3/8; the Higgs bridge Φ̃_H stitches the orthogonal chiral sheets into rest mass, (m_W, m_Z) = (80.38, 91.19)Φ̃_H GeV; the Pythagorean balance (dτ/dt)² + Σ η² = 1; the lens morphs between the split four-concept ledger and the single cell. Five independently citable experiments.",
+      "path": "af-gut-arc-field-unification-sandbox/",
+      "thumbnail": "af-gut-arc-field-unification-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-17",
+      "chapter": 39,
+      "section": "39.11",
+      "presets": [
+        "concentric-four-field-monad",
+        "weinberg-angle-rg-running",
+        "higgs-cross-concept-zitterbewegung",
+        "einstein-pythagorean-clock-balance",
+        "afgut-ledger-split-vs-unify"
+      ],
+      "preset_titles": {
+        "concentric-four-field-monad": {
+          "zh": "单原胞上的四片同心圆弧壳",
+          "en": "Four concentric arc shells on one cell"
+        },
+        "weinberg-angle-rg-running": {
+          "zh": "两条 N_c 曲线交于 3/8，再跑回 M_Z",
+          "en": "Two N_c curves meet at 3/8, then run back to M_Z"
+        },
+        "higgs-cross-concept-zitterbewegung": {
+          "zh": "正交手征片之间的希格斯桥",
+          "en": "The Higgs bridge between orthogonal chiral sheets"
+        },
+        "einstein-pythagorean-clock-balance": {
+          "zh": "主频 ν₀ 的勾股天平",
+          "en": "The Pythagorean balance of the clock ν₀"
+        },
+        "afgut-ledger-split-vs-unify": {
+          "zh": "普朗克能标上账本收成一个原胞",
+          "en": "At the Planck scale the ledger closes into one cell"
+        }
+      },
+      "tags": [
+        "极小圆弧场大统一",
+        "四场同心壳",
+        "单圈跑动",
+        "温伯格角 3/8",
+        "希格斯桥",
+        "勾股天平"
+      ],
+      "tags_en": [
+        "Minimal-arc field unification",
+        "Four concentric field shells",
+        "One-loop running",
+        "Weinberg angle 3/8",
+        "Higgs bridge",
+        "Pythagorean balance"
+      ],
+      "theory": [
+        {
+          "label": "39.11 极小圆弧场大统一理论（AF-GUT）：同心四场圆弧联络、温伯格角 3/8 跑动与主频爱因斯坦收口",
+          "label_en": "39.11 Arc-Field Grand Unified Theory (AF-GUT): Concentric Four-Field Arc Connections, Weinberg Angle 3/8 Running, and Clock-Budget Einstein Closure",
+          "href": "../zh/ch39-s11-af-gut-arc-field-grand-unification.html",
+          "href_en": "../en/ch39-s11-af-gut-arc-field-grand-unification.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

@@ -29,7 +29,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 87 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -120,6 +120,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `imaginary-chord-temporal-double-slit-sandbox` | 势垒里动量转过 90° 潜入虚平面 i 化作不绕圈的内割弦，两道阿秒时间快门让同一颗电子在能谱上与自己干涉 | `classical-real-wall` `ninety-deg-imaginary-chord` `temporal-double-slit-comb` `attosecond-tunnel-self-interference` `zeno-midway-probe-collapse` |
 | `riemann-prime-arc-path-integral-sandbox` | 每个整数 n 是一支抬到作用量 ln n 高度的复合路径箭头，临界线零点处延拓竖轴穿过原点 O 且地上正逆双壳两两重合，韦伊显式对偶把前 50 对零点驻波叠成素数阶梯 | `euler-dirichlet-phasor-spiral` `critical-zero-cancellation` `off-line-shell-imbalance` `weil-explicit-prime-staircase` |
 | `arithmetic-pivot-resonant-tunneling-sandbox` | 复平面临界带地形对比一维硬截断 M = 19 图兰越界零点、单级磨光器 θ = 4/7 色散墙与分块舒尔补枢轴及多级凯莱反复平方中继 | `turan-zeno-hard-cutoff` `mollifier-four-sevenths-wall` `block-schur-pivot-mera` `fabry-perot-rogue-explosion` |
+| `hilbert-concept-ledger-3d-cap-sandbox` | 混编 15 维空间展开五颗三维概念球；局域账本的 6 个数看不见 9 个相关；霍奇星号只在 d = 3 把旋度送到一根轴；无穷模塔在 ε<sub>self</sub> 处停机 | `hypercube-illusion-unfold` `space-color-joint-ledger` `motion-rot-scale-trans-triad` `hodge-curl-field-cap-3d` `unhalted-infinity-truncation` |
+| `af-gut-arc-field-unification-sandbox` | 四种力是同一枚 ΔT<sub>ε</sub> 原胞外的四片圆弧壳；单圈跑动在 log<sub>10</sub>(μ<sub>12</sub>/GeV) = 13.0060 处给 sin²θ<sub>W</sub> = 3/8，N<sub>c</sub> = 3 是两条曲线唯一的交点，账本连续收成单胞 | `concentric-four-field-monad` `weinberg-angle-rg-running` `higgs-cross-concept-zitterbewegung` `einstein-pythagorean-clock-balance` `afgut-ledger-split-vs-unify` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -284,6 +286,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `riemann-prime-arc-path-integral-sandbox`（`ZETA//SPIRAL`）承接第三十四章 §34.28 `#sec-ch34-riemann-path-integral-and-prime-arcs`，与 `euler-product-sieve`、`critical-mirror`、`zeta-spectrum-lab` 分工：`euler-product-sieve` 讲 σ > 1 有限素数筛余项，`critical-mirror` 讲函数方程四元组对称镜像，`zeta-spectrum-lab`（§22.4.1，无绿色框）专门对勘二维平面部分和、四次多项式模型与 10 对零点有限谱的外推边界，而本页把复平面 ℂ 铺在地面、将每个整数箭头 n^(−s) = n^(−σ)e^(−it ln n) 按素因子分解抬升至竖直作用量高度 ln n = Σ m_p ln p，同台贯通“欧拉局域绕行与莫比乌斯外积对偶、临界线 σ = 1/2 正逆双壳等幅锁相与前五颗真实零点 γ₁–γ₅ 延拓竖轴穿过原点 O、偏轴 σ ≠ 1/2 双壳失衡分裂对比离线四元组反例、以及前 50 对零点三维驻波曲面雕刻切比雪夫素数阶梯 ψ₀(x)”：紫色给复合路径链 Σ n^(−s)、欧拉部分乘积、零点驻波部分和曲面与 `ARGUED` 文献依据，青色给地面正向壳环 p^(−σ)（p = 2, 3, 5, 7）、精确中点阶梯 ψ₀(x) 与 Λ(n) 阶跃，品红给逆向对偶壳环 p^(−(1−σ))、莫比乌斯外积链 Σ μ(n)n^(−s) 与地面零点驻波残差，琥珀只给交错 η 延拓竖轴与落点珠 ζ(s)、当前选定零点胶囊 γ_k、最前排重构剖面 K(t) 及 2^(−σ) / x* 拖动手柄（红色严格只给黎曼猜想 `conj-riemann-hypothesis` 的 `OPEN` 标记）。绿色框严格只给页面引用的七条冻结定理（`prime_log_rational_independence`、`riemann_zeta_dirichlet_sum_eq_euler_product`、`tendsto_alternating_partialSums_eta_of_ne_one`、`xi_reading_reflection`、`xi_reading_one_sub_conj`、`full_symmetry_not_fixed_line_localization`、`actual_integrated_explicit_formula`）；欧拉（1737）乘积、黎曼（1859）函数方程、von Mangoldt（1895）与 Weil（1952）点态显式公式、1/ζ(s) = Σ μ(n)n^(−s)、欧拉—麦克劳林余项、Borwein（2000）η 加速与 Littlewood（1912）等价定理标 `ARGUED`；Borwein 加速 ζ(s)、斯特林 ln Γ 求 ξ(s)、双壳半径与截断/积分显式公式两侧实算标 `NUM`；素数极小圆弧体作用量高度、μ(p²) = 0 外积读法与往返半密度双壳示意标 `MODEL`。
 
 `arithmetic-pivot-resonant-tunneling-sandbox`（`ARITH//PIVOT`）承接第三十四章 §34.29 `#sec-ch34-arithmetic-pivots-and-resonant-tunneling`，与 `arithmetic-schur-lab`、`trihedron-chord-pivot-tunneling-sandbox`、`critical-mirror` 分工：`arithmetic-schur-lab`（§34.18.5，无绿色框）在整除图 G = L + I/4 上清算高斯消元填充与阈值丢弃残差，`trihedron-chord-pivot-tunneling-sandbox` 讲有向图最短路热带舒尔枢轴与平直内割弦，而本页在复平面临界带受光地形块 ln|f(s)| 上正面对比跨越 σ ∈ (1/2, 1] 势垒的三大方案——“一维自然数硬截断 ζ_M 在 M = 19 挖出 Re s ≈ 1.006988 越界图兰零点、单级磨光器 Levinson–Conrey 比例 κ(θ) 止步于 θ = 4/7 色散墙、以及乘性窗口 {1, 2, 3, 6} 分块舒尔补枢轴锥配 t = γ₁ 剖面多级凯莱反复平方中继 |w|^(2^ℓ)”：青色给 σ > 1 欧拉无零点高原、19 支首尾闭合相量链、θ ≤ 4/7 已证单跳隧道与 κ(θ) 实线、内部叶 {1, 2} 与平直内割弦 G̃₃₆ = 5/18、弦图正半定补全区间 [−7/12, 11/12] 及 δ = 0 处的 |w| = 1 幺正锁相环，品红给 s = 1 极点山峰、M = 19 图兰越界零点旗标与含越界零点的截断阶、θ = 4/7 色散墙及墙外未证虚线、以及假想 δ > 0 下的反复平方爆炸柱，紫色给临界带地形、Levinson 基准点、乘性底板与稀疏舒尔枢轴锥、多级中继阱 G̃^(1)–G̃^(4) 及 `ARGUED` 文献依据，琥珀只给当前激活闸门框 M、单跳/中继读头、当前激活枢轴与可拖动参数圆环手柄（红色严格只给 `conj-riemann-hypothesis` 与跨枢轴横向移位面积律问题 `prob-ch34-arithmetic-pivot-area-law` 两枚 `OPEN` 标记）。绿色框严格只给页面引用的九条冻结定理（`classical_zeta_unique_simple_pole_residue_one`、`completedRiemannZeta_ne_zero_of_one_le_re`、`golden_right_half_strip_implies_rh`、`cayley_ratio_norm_one_iff_critical_line`、`cayley_critical_line_zeta_criterion`、`gram_realizability`、`exists_posSemidef_completion`、`exists_posSemidef_completion_rank_le`、`original_zero_robin5040_localA`）；Turán（1948）、Montgomery（1983）、Platt–Trudgian（2016）、Levinson（1974）、Deshouillers–Iwaniec（1982）、Conrey（1989）、Pratt 等（2020）及 Báez-Duarte 等（2000）/ Burnol（2002）对数下界标 `ARGUED`；ζ₁₉ 越界零点复核、三次多项式单纯形优化 κ(θ)（θ = 4/7 得 0.4086）、{1, 2, 3, 6} 精确有理舒尔补/LDL/补全区间与对数反复平方 |w|^(2^ℓ) 实算标 `NUM`；“图兰—芝诺陷阱 / 单跳裸隧穿 / 算术 MERA 多级法布里—珀罗中继”读法及软封顶地形与四阱布局标 `MODEL`。
+
+`hilbert-concept-ledger-3d-cap-sandbox`（`HILBERT//LEDGER`）与 `observer-escape-ledger`、`gram-window-consensus-sandbox` 分工：本页承接第三十九章 §39.10 `#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger` 的混编希尔伯特账本与三维概念场封顶，青色给五颗概念球、梯度轴与保留下来的模层，品红给跨概念弦、相关表与折叠的尾巴，紫色给旋转轴、霍奇对应与体积读法，琥珀只给展开参数 λ、维数 d、停机精度 ε<sub>self</sub> 与当前读头（本页无开放问题标记，不用红色）。绿色框严格只给页面引用的六条冻结定理（`finite_stage_expansion`、`local_marginal_correlation_blind_spot`、`finite_rank_concentration_mode_bound`、`complete_consequences`、`bloch_geometry_of_isHermitian`、`three_anchor_gram_det_pos_iff`）；so(n) 维数、Bell 对角态偏迹判据、Hencky 对数应变与极分解、sl(2, ℝ) 基灵型、四元数与霍奇星号标 `ARGUED`；15 维分块计数、局域与相关密度矩阵、LMS 格拉姆行列式、极分解主应变、模塔部分和与停机层数实算标 `NUM`；五个三维球的混编读法、颜色框架、d 维紧框架投影与自停机尾部折叠标 `MODEL`。
+
+`af-gut-arc-field-unification-sandbox`（`AFGUT//UNIFY`）与 `unified-field-slice`、`quantum-gate-cosmic-tower-sandbox` 分工：本页承接第三十九章 §39.11 `#sec-ch39-af-gut-arc-field-grand-unification` 的极小圆弧场大统一，青色是引力场壳 F<sub>pos</sub> 与勾股天平的时间分量，紫色是 SU(2) 旋量壳，蓝色是 SU(3) 三锚点体积锁，银白是 U(1) 相位与标度，琥珀只给能标 μ、希格斯桥 Φ̃<sub>H</sub> 与账本收拢读头，红色只给抽屉中的开放问题（`prob-ch39-af-gut-threshold-and-proton-stability`）。绿色框严格只给页面引用的六条冻结定理（`covariant_commutator_formula`、`square_eq_neg_one_of_skewAdjoint_unitary`、`anchored_phase_classification`、`circle_double_cover_history_lift`、`tetra_defects_incidence_repair_and_exactness`、`lagrange_gram_identity`）；Georgi–Glashow 统一能标、单圈跑动、希格斯对称破缺与规范场文献标 `ARGUED`；三条耦合的交点、sin²θ<sub>W</sub> = 3/8、N<sub>c</sub> 曲线、手征桥、四面体缺陷计数与勾股天平实算标 `NUM`；四场壳、四概念账本、ΔT<sub>ε</sub> 原胞及连续收拢的读法标 `MODEL`。
 
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
 
@@ -824,6 +830,18 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十九章 | §39.5.7 文献注记 `rem-ch39-p2e-rydberg-anyon-literature` 之后 | `pisot-clifford-rauzy-sandtable` · `entanglement` |
 | 第三十九章 | §39.5.8 开放问题 `prob-ch39-p2e-fractal-horizon` 之后、八概念总表之前 | `pisot-clifford-rauzy-sandtable` · `entropy` |
 | 第三十九章 | §39.5 末（全章末尾） | `pisot-clifford-rauzy-sandtable` 完整实验室 |
+| 第三十九章 | §39.10.1 第 1 条（分块直和对比 so(3k) 跨概念伪旋转与 `finite_stage_expansion`）之后、第 2 条之前 | `hilbert-concept-ledger-3d-cap-sandbox` · `hypercube-illusion-unfold` |
+| 第三十九章 | §39.10.2 第 2 条（视网膜 (L, M, S) 商投影与微观 SU(3)<sub>C</sub> 三锚体积）之后、第 3 条之前 | `hilbert-concept-ledger-3d-cap-sandbox` · `space-color-joint-ledger` |
+| 第三十九章 | §39.10.2 末（平移、旋转与亨基应变／sl(2, ℝ) 运动三元组收束段之后、§39.10.3 之前） | `hilbert-concept-ledger-3d-cap-sandbox` · `motion-rot-scale-trans-triad` |
+| 第三十九章 | §39.10.3 末（霍奇旋度 C(d, 2) = d 自闭合、四元数纯虚球与布洛赫球封顶之后、§39.10.4 之前） | `hilbert-concept-ledger-3d-cap-sandbox` · `hodge-curl-field-cap-3d` |
+| 第三十九章 | §39.10.4 例 `ex-ch39-fifteen-dim-five-concept-ledger-audit`（含 ε<sub>self</sub> = 0.05 模态截断）之后、五类对象对照表之前 | `hilbert-concept-ledger-3d-cap-sandbox` · `unhalted-infinity-truncation` |
+| 第三十九章 | §39.10 末（收束交接段之后） | `hilbert-concept-ledger-3d-cap-sandbox` 完整实验室 |
+| 第三十九章 | §39.11.1 末（定义 `def-ch39-af-gut-master-connection` 后的范式反转段之后、§39.11.2 之前） | `af-gut-arc-field-unification-sandbox` · `concentric-four-field-monad` |
+| 第三十九章 | §39.11.2 末（N<sub>c</sub> = 3 ⇒ sin²θ<sub>W</sub> = 3/8 双曲线交点与单圈跑动段之后、§39.11.3 之前） | `af-gut-arc-field-unification-sandbox` · `weinberg-angle-rg-running` |
+| 第三十九章 | §39.11.3 第 1 条（跨概念希格斯手征颤动桥 D<sub>int</sub>(Φ<sub>H</sub>)）之后、第 2 条之前 | `af-gut-arc-field-unification-sandbox` · `higgs-cross-concept-zitterbewegung` |
+| 第三十九章 | §39.11.3 第 2 条（普适主频 ν<sub>0</sub> 四场勾股负载与爱因斯坦场方程收口）之后、第 3 条之前 | `af-gut-arc-field-unification-sandbox` · `einstein-pythagorean-clock-balance` |
+| 第三十九章 | §39.11.4 三种大统一范式六维可证伪对照表之后、末段分隔线 `---` 之前 | `af-gut-arc-field-unification-sandbox` · `afgut-ledger-split-vs-unify` |
+| 第三十九章 | §39.11 末（全章收官段之后） | `af-gut-arc-field-unification-sandbox` 完整实验室 |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget` |
 | 终章 | 空间吸引子 · 二 “回到洛伦兹”一段中“吸引子的体积为零”一句之后 | `spatial-attractor-deja-vu` · `shrink` |
