@@ -638,6 +638,27 @@ $$
 
 与 [@rem-appe-half-comparison-holonomy] 对照：$R_{a\to b}$ 是 $r_{ba}=r_{ab}^*$ 的像，所以定理第 2 条是注记中乘积的对合 $(r_{ab}\,r_{bc}\,r_{ca})^*=r_{ac}\,r_{cb}\,r_{ba}$，$D$ 前的符号随之由正变负；第 1 条就是注记末尾的恒等式。第 3 条给出第 2 条的操作读法：从 $a$ 的本征旋量出发，沿 $a\to b\to c\to a$ 做三次归一化投影，回到原旋量并乘上模为 $1$ 的因子 $(S-iD)/\sqrt{S^2+D^2}$。Lean 没有陈述的部分照旧分层：把辐角 $\operatorname{atan2}(D,S)$ 等同于半个吉拉尔角盈是文献结果；旋子的指数形式没有形式化；“最短”意义下的最小性与唯一性也没有形式化，Lean 模块里 `rotor` 与 `shortestGate` 只是名字。Lean 中 $N_r(\phi)$ 对一切 $\phi$ 有定义（分母为零时按 Lean 的约定取零向量）；定理只在各步分母 $\sqrt{(1+u\cdot v)/2}>0$ 处用到它。
 
+[@rem-appe-real-realizability-return-phase] 第 1、2 款在“有一个对象与其余每个对象都不正交”的情形已在所钉仓库冻结，陈述如下；这时不需要填满的条件。一般的填满情形与单比特的第 4 款仍是手工推导。
+
+::: {.proposition #prop-appe-real-rephasing-star title="有一行不含零的厄米矩阵：可重定相为实矩阵，当且仅当三点乘积全为实" lean="D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_rephasing_iff_triple_products_real D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_gram_rephasing_iff_triple_products_real"}
+设 $G$ 是 $N\times N$ 复矩阵，$i_0$ 是一个指标，并且 $G_{i_0j}\neq0$ 对每个 $j$ 成立。
+
+1. 若 $G$ 是厄米矩阵，则存在实数 $\theta_1,\dots,\theta_N$ 使一切 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 为实数，当且仅当对一切指标 $i,j,k$（允许重复），$G_{ij}G_{jk}G_{ki}$ 为实数。
+2. 若 $G$ 半正定，则存在实数 $\theta_1,\dots,\theta_N$ 与 $N\times N$ 实矩阵 $B$，使 $e^{i\theta_i}G_{ij}e^{-i\theta_j}=\left(B^{\mathsf T}B\right)_{ij}$ 对一切 $i,j$ 成立，当且仅当对一切指标 $i,j,k$，$G_{ij}G_{jk}G_{ki}$ 为实数。
+:::
+
+::: proof
+“仅当”：相位沿 $i\to j\to k\to i$ 相消，重定相不改变 $G_{ij}G_{jk}G_{ki}$，而它在实矩阵中算出来是实数。“当”：取 $\theta_j=\arg G_{i_0j}$。由厄米性 $G_{ji_0}=\overline{G_{i_0j}}$，于是
+
+$$
+e^{i\theta_i}G_{ij}e^{-i\theta_j}=\frac{G_{i_0i}\,G_{ij}\,G_{ji_0}}{\lvert G_{i_0i}\rvert\,\lvert G_{i_0j}\rvert},
+$$
+
+是三点乘积 $G_{i_0i}G_{ij}G_{ji_0}$ 的正实数倍，所以是实数；$G_{ij}=0$ 的元素重定相后仍为零。第 2 款：重定相是 $G\mapsto DGD^{*}$，$D$ 为对角酉矩阵，保持半正定；重定相后的矩阵元素全为实数，所以它是实对称半正定矩阵，可写成 $B^{\mathsf T}B$。
+
+对厄米矩阵，含重复指标的三点乘积（如 $G_{ij}G_{ji}G_{ii}=\lvert G_{ij}\rvert^2G_{ii}$）与含零元的三点乘积自动是实数，所以条件只在非正交图的三角形上有内容，与 [@rem-appe-real-realizability-return-phase] 第 2 款的写法一致。完整证明由 Lean 内核检查。
+:::
+
 返回相位的虚部只在 $D\neq0$ 时出现。两两比较读得出 $D$ 是否为零，读不出它的符号：$D^2=1+2xyz-x^2-y^2-z^2$（$x=a\cdot b$，$y=b\cdot c$，$z=c\cdot a$，即 [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)）只给出它的平方。$D$ 是否为零恰好回答一个与 `H7` 相邻的问题：一族对象是否需要复数振幅。
 
 ::: {.remark #rem-appe-real-realizability-return-phase title="一族对象何时可以只用实数描述：三点巴格曼乘积是否为实（手工推导与文献结果）"}

@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "8b6f6b4d974a7e495d2bc1346093d416d794b6cc",
-  "pinned_at": "2026-11-17T18:15:08Z",
+  "commit": "8afb0feee71a6b3473e8f5abb91f225f536e97b2",
+  "pinned_at": "2026-11-17T20:04:55Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4525,6 +4525,22 @@
       "line": 57,
       "signature": "theorem fourier_phase_damping_fixed_iff (c : DampingCoefficient) (hCoefficient : (c : Real) ≠ 1) (rho : QubitMatrix) : fourierPhaseDamping c rho = rho ↔ ∀ i j, i ≠ j -> hadamardCoordinates rho i j = 0"
     },
+    "D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_gram_rephasing_iff_triple_products_real": {
+      "module": "D5/S3/Quantum/PureState/BargmannRealRephasing",
+      "name": "D5.S3.Quantum.PureState.BargmannRealRephasing.exists_real_gram_rephasing_iff_triple_products_real",
+      "kind": "theorem",
+      "statement_id": "sha256:7d9b5d2da3264553d2abfeacadcdd5fcfae6898abe391bb4f991c279b5f8babb",
+      "line": 112,
+      "signature": "theorem exists_real_gram_rephasing_iff_triple_products_real {N : ℕ} (G : Matrix (Fin N) (Fin N) ℂ) (hG : G.PosSemidef) (i₀ : Fin N) (hne : ∀ j, G i₀ j ≠ 0) : (∃ θ : Fin N → ℝ, ∃ B : Matrix (Fin N) (Fin N) ℝ, ∀ i j, Complex.exp (θ i * I) * G i j * Complex.exp (-(θ j) * I) = ((Bᵀ * B) i j : ℂ)) ↔ ∀ i j k, (G i j * G j k * G k i).im = 0"
+    },
+    "D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_rephasing_iff_triple_products_real": {
+      "module": "D5/S3/Quantum/PureState/BargmannRealRephasing",
+      "name": "D5.S3.Quantum.PureState.BargmannRealRephasing.exists_real_rephasing_iff_triple_products_real",
+      "kind": "theorem",
+      "statement_id": "sha256:7d9b5d2da3264553d2abfeacadcdd5fcfae6898abe391bb4f991c279b5f8babb",
+      "line": 86,
+      "signature": "theorem exists_real_rephasing_iff_triple_products_real {N : ℕ} (G : Matrix (Fin N) (Fin N) ℂ) (hG : G.IsHermitian) (i₀ : Fin N) (hne : ∀ j, G i₀ j ≠ 0) : (∃ θ : Fin N → ℝ, ∀ i j, (Complex.exp (θ i * I) * G i j * Complex.exp (-(θ j) * I)).im = 0) ↔ ∀ i j k, (G i j * G j k * G k i).im = 0"
+    },
     "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion": {
       "module": "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion",
       "name": "D5.S3.Quantum.PureState.NoCloningInnerProductCriterion.no_cloning_inner_product_criterion",
@@ -5209,7 +5225,7 @@
       "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeSaturation",
       "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.NativeSaturation.native_saturation_iff",
       "kind": "theorem",
-      "statement_id": "sha256:fdf6e542c260f73892fa96cc1f74110b8bb303982eff57c69a6de9e51cadae30",
+      "statement_id": "sha256:6f196515839162b59a28a64e76f54be9cf1fd0b93026167e0fddbb0a56c67da5",
       "line": 89,
       "signature": "theorem native_saturation_iff (a b q : ℕ) (hq : 0 < q) : (∃ (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin (3 * q)) (Fin (2 * q)) ℂ), (∑ r, kronecker (M r) (N r))ᴴ * (∑ r, kronecker (M r) (N r)) = (1 : Matrix (Fin b × Fin (2 * q)) (Fin b × Fin (2 * q)) ℂ)) ↔ 2 * b ≤ 3 * a"
     },
