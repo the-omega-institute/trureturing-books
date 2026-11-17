@@ -1025,6 +1025,21 @@ By item 3, under the time-order condition the following are equivalent: $K>0$; t
 
 So the time-order condition excludes the elliptic row (and comparisons with $s\le-1$), "the difference part is not square-zero" then excludes the parabolic row, and together they select the hyperbolic row with $s>1$. The difference part satisfies $A^*=-A$, so $A^2=0$ means $A^*A=0$; the second statement is therefore the special case, for difference parts, of "no nonzero $a$ satisfies $a^*a=0$" in [@rem-appe-positivity-invisible-part]. The algebra $(M_2(\mathbb{R}),{}^\sharp)$ has no states ($a=\operatorname{diag}(1,-1)$ gives $a^\sharp a=-\mathbf{1}$), so the conclusions about readings there do not apply here.
 
+Item 2 of [@rem-appe-time-order-repetition] is frozen in the pinned repository, in the following form; items 1 and 3 and the reading in the observer model are not formalized.
+
+::: {.proposition #prop-appe-chebyshev-positivity-threshold title="The Positivity Threshold of Chebyshev Values and the Index of the First Sign Change" lean="D5/S3/Analytic/Chebyshev/PositivityThreshold.forall_pos_eval_T_iff_one_le D5/S3/Analytic/Chebyshev/PositivityThreshold.eval_T_cos_floor_succ_neg_and_nonneg_before"}
+Let $T_n$ be the Chebyshev polynomials of the first kind: $T_0=1$, $T_1(x)=x$, $T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)$.
+
+1. For a real number $s$: $T_n(s)>0$ for every natural number $n\ge1$ if and only if $s\ge1$.
+2. Let $0<\alpha<\pi$ and $n_0=\lfloor\frac{\pi}{2\alpha}\rfloor+1$. Then $T_{n_0}(\cos\alpha)<0$, and $T_n(\cos\alpha)\ge0$ for every natural number $n<n_0$.
+:::
+
+::: proof
+Item 2: $T_n(\cos\alpha)=\cos n\alpha$. By the definition of the floor, $n_0-1\le\frac{\pi}{2\alpha}<n_0$, so $\frac\pi2<n_0\alpha\le\frac\pi2+\alpha<\frac{3\pi}2$ and $\cos n_0\alpha<0$; for $n<n_0$ we have $n\le\frac{\pi}{2\alpha}$, hence $0\le n\alpha\le\frac\pi2$ and $\cos n\alpha\ge0$.
+
+Item 1: for $s\ge1$, $T_n(s)\ge1$ (writing $s=\cosh\eta$, $T_n(s)=\cosh n\eta$); for $s\le-1$, $T_1(s)=s<0$; for $-1<s<1$ take $\alpha=\arccos s$, so that $0<\alpha<\pi$, and item 2 gives $T_{n_0}(s)<0$ with $n_0\ge1$. The full proof is checked by the Lean kernel.
+:::
+
 ::: {.remark #rem-appe-rotor-boost-coexistence title="Bounded and Order-Preserving Are Complementary Selections: Rotations and Boosts Live in One Algebra (Manual Derivation and Literature)"}
 **Manual derivation.** Let $u\neq\mathbf{1}$, $uu^*=u^*u=\mathbf{1}$, $S=s\mathbf{1}$. On $\mathbb{R}[A]=\operatorname{span}\{\mathbf{1},A\}$ one has $(x+yA)^*(x+yA)=\left(x^2-y^2(s^2-1)\right)\mathbf{1}$; together with [@rem-appe-bounded-recurrence] and [@rem-appe-time-order-repetition] this gives:
 
