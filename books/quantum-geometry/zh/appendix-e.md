@@ -1025,6 +1025,21 @@ $K$ 的符号还没有定。下一条注记回答：什么排除 $K<0$，什么�
 
 所以时间次序条件排除椭圆一行（以及 $s\le-1$ 的比较），“求异部分不是零平方”再排除抛物一行，两条合起来选出 $s>1$ 的双曲一行。求异部分满足 $A^*=-A$，$A^2=0$ 即 $A^*A=0$，所以后一条是 [@rem-appe-positivity-invisible-part] 中“没有非零的 $a$ 满足 $a^*a=0$”在求异部分上的特例；$(M_2(\mathbb{R}),{}^\sharp)$ 上没有态（$a=\operatorname{diag}(1,-1)$ 给出 $a^\sharp a=-\mathbf{1}$），那里关于读数的结论在这里不适用。
 
+[@rem-appe-time-order-repetition] 第 2 款已在所钉仓库冻结，陈述如下；第 1、3 款与观察者模型中的读法没有形式化。
+
+::: {.proposition #prop-appe-chebyshev-positivity-threshold title="切比雪夫值恒正的阈值与首次变号的指标" lean="D5/S3/Analytic/Chebyshev/PositivityThreshold.forall_pos_eval_T_iff_one_le D5/S3/Analytic/Chebyshev/PositivityThreshold.eval_T_cos_floor_succ_neg_and_nonneg_before"}
+设 $T_n$ 是第一类切比雪夫多项式：$T_0=1$，$T_1(x)=x$，$T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)$。
+
+1. 对实数 $s$：$T_n(s)>0$ 对一切自然数 $n\ge1$ 成立，当且仅当 $s\ge1$。
+2. 设 $0<\alpha<\pi$，$n_0=\lfloor\frac{\pi}{2\alpha}\rfloor+1$。则 $T_{n_0}(\cos\alpha)<0$，并且对一切自然数 $n<n_0$ 有 $T_n(\cos\alpha)\ge0$。
+:::
+
+::: proof
+第 2 款：$T_n(\cos\alpha)=\cos n\alpha$。由取整的定义，$n_0-1\le\frac{\pi}{2\alpha}<n_0$，所以 $\frac\pi2<n_0\alpha\le\frac\pi2+\alpha<\frac{3\pi}2$，$\cos n_0\alpha<0$；$n<n_0$ 时 $n\le\frac{\pi}{2\alpha}$，于是 $0\le n\alpha\le\frac\pi2$，$\cos n\alpha\ge0$。
+
+第 1 款：$s\ge1$ 时 $T_n(s)\ge1$（写 $s=\cosh\eta$，则 $T_n(s)=\cosh n\eta$）；$s\le-1$ 时 $T_1(s)=s<0$；$-1<s<1$ 时取 $\alpha=\arccos s$，$0<\alpha<\pi$，第 2 款给出 $T_{n_0}(s)<0$，而 $n_0\ge1$。完整证明由 Lean 内核检查。
+:::
+
 ::: {.remark #rem-appe-rotor-boost-coexistence title="有界与保序两种选择互补：转动与推进住在同一个代数里（手工推导与文献结果）"}
 **手工推导。** 设 $u\neq\mathbf{1}$，$uu^*=u^*u=\mathbf{1}$，$S=s\mathbf{1}$。在 $\mathbb{R}[A]=\operatorname{span}\{\mathbf{1},A\}$ 上 $(x+yA)^*(x+yA)=\left(x^2-y^2(s^2-1)\right)\mathbf{1}$，由此并由 [@rem-appe-bounded-recurrence] 与 [@rem-appe-time-order-repetition]：
 
