@@ -204,7 +204,7 @@ $$
 就绝无可能无限开辟新维度，而必然在有限步内触顶锁死：
 
 ::: {.theorem #thm-ch31-krylov-growth-stability title="有限维可观测克雷洛夫子空间链的严格增长步数上界定理" lean="D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"}
-设 $V$ 与 $Y$ 为标量域 $\mathbb{K}$（`[RCLike 𝕜]`）上的有限维内积空间，$T : V \to_{\mathbb{K}} V$ 与 $C : V \to_{\mathbb{K}} Y$ 为 $\mathbb{K}$-线性映射。记递增可观测克雷洛夫子空间链为 $O_m = \operatorname{observableKrylov}(T, C, m)$（$m \in \mathbb{N}$）。则发生严格子空间扩张的时刻集合之广义基数满足精确上界：
+设 $V$ 与 $Y$ 为标量域 $\mathbb{K}$（`[RCLike 𝕜]`）上的有限维内积空间，$T : V \to_{\mathbb{K}} V$ 与 $C : V \to_{\mathbb{K}} Y$ 为 $\mathbb{K}$-线性映射。记递增可观测克雷洛夫子空间链为 $O_m = \operatorname{observableKrylov}(T, C, m)$（$m \in \mathbb{N}$）。则发生严格子空间扩张的时刻集合之广义基数满足上界：
 
 $$
 \operatorname{encard}\bigl\{m \in \mathbb{N} \;\big|\; O_m < O_{m+1}\bigr\} \le \operatorname{finrank}_{\mathbb{K}} V - \operatorname{finrank}_{\mathbb{K}}(\operatorname{range} C).
@@ -242,7 +242,7 @@ $$
 **文献结果，未在本书形式化。** 本小节的形式化定理与两部经典数学文献遥相呼应，各自边界如下：
 
 1. **欧几里得《几何原本》第 IX 卷命题 20**（Euclid, *Elements*, Book IX, Prop. 20）：证明素数多于任何给定的有限素数清单。本书 [@thm-ch31-prime-axis-escape] 已在 Lean 内核中锁定其任意有限素数集 $S$ 上的乘积加一同余与外部素因子存在性核心；由该有限突围步经反证法导出全体素数集合无穷，以及与算术级数素数分布相关的解析数论结论，作为经典文献背景引用。
-2. **兰佐斯三对角化与阿诺德—克雷洛夫子空间迭代理论**（C. Lanczos, *J. Res. Nat. Bur. Stand.* **45**, 1950, 255–282）：在数值线性代数与算子谱理论中，Lanczos 与 Arnoldi 算法通过对 $v, Tv, T^2 v, \dots$ 逐次施密特正交化提取正交新轴，并在残差归零（命中不变子空间，即良性中断 breakdown）或耗尽有限环境空间维数时精确终止。本书 [@thm-ch31-krylov-growth-stability] 与 [`observable_krylov_once_stable_permanently`](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently) 锁定了有限维可观测块克雷洛夫链的严格增长步数上界与一旦稳定永久不变定律；具体矩阵分解算法与浮点舍入稳定性分析属经典文献。
+2. **兰佐斯三对角化与阿诺尔迪—克雷洛夫子空间迭代理论**（C. Lanczos, *J. Res. Nat. Bur. Stand.* **45**, 1950, 255–282）：在数值线性代数与算子谱理论中，Lanczos 与 Arnoldi 算法通过对 $v, Tv, T^2 v, \dots$ 逐次施密特正交化提取正交新轴，并在残差归零（命中不变子空间，即良性中断 breakdown）或耗尽有限环境空间维数时精确终止。本书 [@thm-ch31-krylov-growth-stability] 与 [`observable_krylov_once_stable_permanently`](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently) 锁定了有限维可观测块克雷洛夫链的严格增长步数上界与一旦稳定永久不变定律；具体矩阵分解算法与浮点舍入稳定性分析属经典文献。
 :::
 
 现在，我们可以把算术突围、正交余项与时间概念放入显式的几何—物理模型（`MODEL`）中完成收束。为了将算术中的素数独立性转化为几何中的正交坐标轴，我们在模型层显式定义可数无穷维希尔伯特空间 $\mathcal{H} = \ell^2(\mathbb{P})$，以全体素数集合 $\mathbb{P}$ 索引一组标准正交基 $\{e_p\}_{p \in \mathbb{P}}$：这样，每当 [@thm-ch31-prime-axis-escape] 在任意有限素数集 $S$ 之外见证一个新素因子 $q_{\mathrm{new}} \notin S$，几何空间中就精确对应一条与旧有有限盒 $V_S = \operatorname{span}\{e_p \mid p \in S\}$ 完全正交的单位新轴 $e_{q_{\mathrm{new}}} \in V_S^\perp$（注意这一人为规定的标准正交基 $\ell^2(\mathbb{P})$ 必须与[第 22 章](ch22-primes-euler-products-and-zeros.md)已锁定的素数对数 $\log p$ 在 $\mathbb{Z}$ 或 $\mathbb{Q}$ 上的线性无关性严格区分——实数族 $\{\log p\} \subset \mathbb{R}$ 在实数域 $\mathbb{R}$ 上并不线性无关，本身不是欧氏正交向量）。

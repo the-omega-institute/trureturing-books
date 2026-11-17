@@ -32,7 +32,7 @@ In our geometric interpretation (`MODEL`), geometric or algebraic structure used
 :::
 
 ::: {.viz src="timeless-causal-crystal" preset="field" height="500"}
-**A field: a slope everywhere.** The cyan flow lines start from all over the sphere; each looks only at the slope underfoot, and each flows to the target. The amber line is the chosen one, and the field vanishes at the opposite point (the grey ring). Reading it as a "field" is this book's interpretation (`MODEL`).
+**A field: a slope everywhere except the target and the opposite point.** The cyan flow lines start from all over the sphere; each looks only at the slope underfoot, and each flows to the target. The amber line is the chosen one, and the field vanishes at the opposite point (the grey ring). Reading it as a "field" is this book's interpretation (`MODEL`).
 :::
 
 ### 30.2.2.1 From Actual Vertex Rotations to Face-Odd Orientations: A Finite Combinatorial Prerequisite {#sec-ch30-rotation-parity}
@@ -360,7 +360,7 @@ Why is it so difficult to construct such a polynomial-time guiding field for $\m
 This distills the book's philosophy of computation and formal proof into a single couplet: ***"Constructing the field is hard as scaling heaven; following the thread sees through in a single step."*** (**“求场难如登天，顺线一步看穿。”**)
 
 ::: {.viz src="timeless-causal-crystal" height="640"}
-**Interactive laboratory `ORTHO//CAUSAL`**: four scenes on one sphere. The window: two cosines fix the range of the third, and $\det G$ is the squared volume the three vectors span; the pages: on a finite clock all pages exist at once, and conditioning picks one; the field: a gradient flow has a slope everywhere, and the potential it loses equals the dissipation it pays; the thread: amplitude amplification turns only $2\theta$ per step and arrives after about $(\pi/4)\sqrt{N}$ steps. Reading these as “choice”, “pages”, “field” and “thread” is this book's interpretation (`MODEL`); whether $\mathrm{P} \neq \mathrm{NP}$ remains an open problem, and nothing drawn on the page settles it.
+**Interactive laboratory `ORTHO//CAUSAL`**: four scenes on one sphere. The window: two cosines fix the range of the third, and $\det G$ is the squared volume the three vectors span; the pages: on a finite clock all pages exist at once, and conditioning picks one; the field: a gradient flow has a slope everywhere except at the target and the opposite point, and the potential it loses equals the dissipation it pays; the thread: amplitude amplification turns only $2\theta$ per step and arrives after about $(\pi/4)\sqrt{N}$ steps. Reading these as “choice”, “pages”, “field” and “thread” is this book's interpretation (`MODEL`); whether $\mathrm{P} \neq \mathrm{NP}$ remains an open problem, and nothing drawn on the page settles it.
 :::
 
 ---

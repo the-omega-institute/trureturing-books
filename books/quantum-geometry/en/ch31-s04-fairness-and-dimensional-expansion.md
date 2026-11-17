@@ -203,7 +203,7 @@ $$
 
 cannot generate new rank indefinitely; its strict growth steps are capped by the ambient dimension minus the initial readout rank:
 
-::: {.theorem #thm-ch31-krylov-growth-stability title="Sharp Upper Bound on Strict Growth Steps of Finite-Dimensional Observable Krylov Chains" lean="D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"}
+::: {.theorem #thm-ch31-krylov-growth-stability title="Upper Bound on Strict Growth Steps of Finite-Dimensional Observable Krylov Chains" lean="D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"}
 Let $V$ and $Y$ be finite-dimensional inner-product spaces over $\mathbb{K}$ (`[RCLike 𝕜]`), and let $T : V \to_{\mathbb{K}} V$ and $C : V \to_{\mathbb{K}} Y$ be $\mathbb{K}$-linear maps. For the ascending observable Krylov subspace chain $O_m = \operatorname{observableKrylov}(T, C, m)$ ($m \in \mathbb{N}$), the extended cardinality of strict growth stages satisfies
 
 $$

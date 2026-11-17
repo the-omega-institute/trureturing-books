@@ -49,7 +49,7 @@ $$
 
 ## 34.9.2 追问“点的来路”：单点深处的康托尔—哥德尔对角逃逸与不完备塔 {#sec-ch34-9-2}
 
-顺着“同点异相撑开时间”再往深处掘进一层，章首第二组惊人论断立刻水落石出：**“本质上就是对同样一个点，问点来的路径，无限的路径代表着无限的对角化问题代表着哥德尔不完备。”** 为什么仅仅对着宇宙间最卑微的一个“点”追问一句“你是沿哪条路径来的”，就会当场引爆康托尔对角线与哥德尔不完备定理？
+顺着“同点异相撑开时间”再往深处掘进一层，章首第二组惊人论断立刻水落石出：**“本质上就是对同样一个点，问点来的路径，无限的路径代表着无限的对角化问题代表着哥德尔不完备。”** 为什么仅仅对着宇宙间最卑微的一个“点”追问一句“你是沿哪条路径来的”，就会当场引爆康托尔对角线，并撞上与哥德尔不完备论证同形的对角结构？
 
 症结在于“静态的点”与“带历史的来路纤维”之间横亘着一道不可逾越的同伦阶差（文献结果 + `MODEL`）。在同伦类型论（HoTT）与代数拓扑的视角下，把空间 $X$ 视作一堆孤立无记忆的“点集”，等价于强行施加零阶截断 $\lVert X\rVert_0$，把通向点 $x$ 的千差万别的演化轨迹统统捏合成单枚平凡标签。可一旦撤去这层人为截断，对着同一个基点 $x \in X$ 追问“点来的路径”，基点 $x$ 脚下便豁然洞开它的**一阶来路环路空间（纤维）** $\Omega(X, x) := (x =_X x)$（或自锚定起点 $x_0$ 汇入 $x$ 的路径空间 $\mathcal{P}(X; x_0, x)$）。在离散时间切片或步进寻址下，每一条汇入点 $x$ 的路径 $\Gamma$ 都是一串按步号（地址）$k \in A$ 索引的局部比较相位序列 $\Gamma = \{\phi^{(k)}\}_{k \in A}$。
 
@@ -61,7 +61,7 @@ $$
 
 这条对角路径 $\Gamma_{\mathrm{diag}}$ 能躺回原表 $T$ 的某一行 $a_0 \in A$ 里吗？绝无可能！若 $\Gamma_{\mathrm{diag}} = \Gamma_{a_0}$，在它自己的对角地址 $k = a_0$ 处就会推出 $\phi_{a_0}^{(a_0)} \equiv \phi_{a_0}^{(a_0)} + \pi \pmod{2\pi}$，即 $\pi \equiv 0 \pmod{2\pi}$ 的荒谬矛盾！这正是 `trureturing` 冻结定理 [`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 在内核中锁定的普遍逃逸律：只要翻转算子无不动点，相对语义对角线就与目录中列出的**每一条**解码路径逐行相异（$\forall a \in A,\; d_{\mathrm{rel}} \neq \mathrm{decoderCatalog}(a) \circ \mathrm{latent}$）！
 
-更妙的是，倘若观察者不甘心，立刻把这条逃逸在外的对角路径 $\Gamma_{\mathrm{diag}}$ 补录进旧潜概念 $\mathrm{latent}$ 中以扩充成新表 $T' := \operatorname{conceptJoin}(\mathrm{latent}, \Gamma_{\mathrm{diag}})$，会发生什么？冻结定理 [`complete_diagonal_strict_topology_refinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement) 给出双重铁律：一方面，当解码目录覆盖全部局部解码映射时，并入 $\Gamma_{\mathrm{diag}}$ 必然诱导出观测划分拓扑的**严格真细化**——新表 $T'$ 切实劈开了旧表 $T$ 原本黏连不分的地址等价类，看见了前所未见的精细相位结构；另一方面，扩容后的新表 $T'$ 一旦再次列定，针对 $T'$ 的下一条对角翻转路径 $\Gamma_{\mathrm{diag}}'$ 又会从 $T'$ 的新对角线上破壳逃逸，推动 $T \to T' \to T'' \to \cdots$ 乃至高阶同伦环路塔 $\Omega(X, x) \to \Omega^2(X, x) \to \Omega^n(X, x)$（“路径之间的变形路径”）永无止境地向上生长！一个看似静止的零维小点，只要被追问一句“来路”，其内部就藏着一座永远无法用单一闭合有限表封顶的哥德尔不完备高塔。
+更妙的是，倘若观察者不甘心，立刻把这条逃逸在外的对角路径 $\Gamma_{\mathrm{diag}}$ 补录进旧潜概念 $\mathrm{latent}$ 中以扩充成新表 $T' := \operatorname{conceptJoin}(\mathrm{latent}, \Gamma_{\mathrm{diag}})$，会发生什么？冻结定理 [`complete_diagonal_strict_topology_refinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement) 给出双重铁律：一方面，当解码目录覆盖全部局部解码映射时，并入 $\Gamma_{\mathrm{diag}}$ 必然诱导出观测划分拓扑的**严格真细化**——新表 $T'$ 切实劈开了旧表 $T$ 原本黏连不分的地址等价类，看见了前所未见的精细相位结构；另一方面，扩容后的新表 $T'$ 一旦再次列定，针对 $T'$ 的下一条对角翻转路径 $\Gamma_{\mathrm{diag}}'$ 又会从 $T'$ 的新对角线上破壳逃逸，推动 $T \to T' \to T'' \to \cdots$ 乃至高阶同伦环路塔 $\Omega(X, x) \to \Omega^2(X, x) \to \Omega^n(X, x)$（“路径之间的变形路径”）永无止境地向上生长！一个看似静止的零维小点，只要被追问一句“来路”，其内部就藏着一座永远无法用单一闭合有限表封顶、与哥德尔不完备同形的对角高塔（这是类比：所引对角引理不涉及可证性，推不出哥德尔定理）。
 
 ::: {.viz src="reversal-diagonal-cascade-sandbox" preset="arrival-diagonal-escape" height="520"}
 **单点深处的来路对角逃逸与拓扑细化塔（$T \to T' \to T''$）。** 左侧青色路径束汇聚于同一点 $x$，右侧矩阵展示已列来路表 $T = \{\Gamma_1, \dots, \Gamma_4\}$；点击或拨动琥珀色对角翻转开关，沿主对角线逐拍施加 $+\pi$ 相移生成品红逃逸来路 $\Gamma_{\mathrm{diag}}$——它在第 $k$ 拍必与第 $k$ 行反相相撞（绿色 `LEAN ✓` `relative_semantic_diagonal_ne_listed_decode`），并入表后严格细化观测划分拓扑（绿色 `LEAN ✓` `complete_diagonal_strict_topology_refinement`）且立即触发下一轮扩表逃逸。
@@ -178,7 +178,7 @@ $$
    - **第 $3$ 步（`3D` 体积，$\Lambda^3$）**：相对于闭子空间 $S_3 = \operatorname{span}\{u_0, u_1, u_2\} = \mathbb{R}^3 \times \{0\}$，`finite_layer_projection_escape` 给出单位正交逃逸轴 $e_4 = (0, 0, 0, 1) \in S_3^\perp$（$\lVert \operatorname{id} - P_{S_3}\rVert = 1$）；并入 $u_3$ 后四锚矩阵 $G_4 = \frac{1}{2}I_4 + \frac{1}{2}\mathbf{1}\mathbf{1}^{\mathsf{T}}$ 满足 $\det G_4 = \frac{5}{2} \times (\frac{1}{2})^3 = \frac{5}{16} = 0.3125 > 0$（法向逃逸高 $\sqrt{5/8} \approx 0.7906$），张成非退化三维单形体块；
    - **第 $4$ 步（`3+1D` 时间，$\Lambda^{3+1}$）**：在四状态场 $\mathcal{A}$ 上，公平平方空间驻波读出 $q_{\mathrm{space}}(s_{r,\pm}) = x_r$（$r \in \{0, 1\}$）抹去内部符号 $\pm$，留下 $4$ 对同点异相逃逸碰撞对 $(s_{0,+}, s_{0,-}), (s_{0,-}, s_{0,+}), (s_{1,+}, s_{1,-}), (s_{1,-}, s_{1,+})$，逃逸率 $\mathrm{escapeRate}(\{q_{\mathrm{space}}\}) = \frac{4}{12} = \frac{1}{3} \approx 33.33\%$；引入第四维时序读出 $q_{\mathrm{time}}(s_{r,\pm}) = \pm$ 后，逃逸碰撞对骤降为 $0$（$\mathrm{escapeRate} = 0 < \frac{1}{3}$），依 `lowersEscape_iff_strict_kernel_novelty` 将联合核从二块粗划分 $\{\{s_{0,+}, s_{0,-}\}, \{s_{1,+}, s_{1,-}\}\}$ 严格细化为四单点离散核！
 
-2. **单点 $4 \times 4$ 来路相位快表 $T$ 与对角翻转逃逸路径 $\Gamma_{\mathrm{diag}}$（锚定 `relative_semantic_diagonal_ne_listed_decode` 与 `complete_diagonal_strict_topology_refinement`）**：设汇入基点 $x$ 的四条已列路径 $\Gamma_1, \Gamma_2, \Gamma_3, \Gamma_4$ 在四拍步进地址 $k \in \{1, 2, 3, 4\}$ 上的局部相位矩阵 $T = [\phi_j^{(k)}]$ 如下（粗框标出主对角元 $\phi_k^{(k)}$）：
+2. **单点 $4 \times 4$ 来路相位快表 $T$ 与对角翻转逃逸路径 $\Gamma_{\mathrm{diag}}$（锚定 `relative_semantic_diagonal_ne_listed_decode`；`complete_diagonal_strict_topology_refinement` 要求解码目录满射，$4$ 行表不是它的实例）**：设汇入基点 $x$ 的四条已列路径 $\Gamma_1, \Gamma_2, \Gamma_3, \Gamma_4$ 在四拍步进地址 $k \in \{1, 2, 3, 4\}$ 上的局部相位矩阵 $T = [\phi_j^{(k)}]$ 如下（粗框标出主对角元 $\phi_k^{(k)}$）：
 
    $$
    T \;=\;

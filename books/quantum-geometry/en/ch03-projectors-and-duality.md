@@ -320,7 +320,7 @@ Even better, the context index set $L$ in [@thm-complementary-pythagoras] maps o
 | Two axes $\{Z, X\}$ ($|L|=2$) | 2D meridian plane $\operatorname{span}\{\vv{e}_3, \vv{e}_1\}$ | $\frac{1}{2}(r_z^2 + r_x^2)$ | 1D normal $\star(\vv{e}_3 \wedge \vv{e}_1) = \vv{e}_2$ | $\frac{1}{2}r_y^2$ |
 | Full triad $\{X, Y, Z\}$ ($|L|=3$) | Full 3D ball space $\mathbb{R}^3$ | $\frac{1}{2}(r_x^2 + r_y^2 + r_z^2)$ | Zero subspace $\{\vv{0}\}$ | $0$ (blind spot eliminated) |
 
-Notice why measuring only two complementary bases $\{Z, X\}$ still leaves a chirality ambiguity $\pm r_y$: the Hodge dual of a two-dimensional plane inside $\mathbb{R}^3$ is a one-dimensional normal line $\star(\vv{e}_3 \wedge \vv{e}_1) = \vv{e}_2$ carrying residual mass $\frac{1}{2}r_y^2$. Only when all three mutually orthogonal axes $\{X, Y, Z\}$ are probed (foreshadowing Part III, Chapter 9) does the residual blind spot vanish identically!
+Notice why measuring only two complementary bases $\{Z, X\}$ still leaves, even for a pure state, a chirality ambiguity $\pm r_y$: the Hodge dual of a two-dimensional plane inside $\mathbb{R}^3$ is a one-dimensional normal line $\star(\vv{e}_3 \wedge \vv{e}_1) = \vv{e}_2$ carrying residual mass $\frac{1}{2}r_y^2$. Only when all three mutually orthogonal axes $\{X, Y, Z\}$ are probed (foreshadowing Part III, Chapter 9) does the residual blind spot vanish identically!
 
 ::: {.figure src="ch03-tomography-ladder"}
 **Each added complementary context lowers the blind spot by one dimension.** The three spheres are the three rows of the tomography table. Measuring $Z$ alone, the cyan vertical axis is seen and the magenta equatorial plane is blind; measuring $Z$ and $X$, the cyan meridian plane is seen and only the magenta $y$ axis is left; measuring $X$, $Y$ and $Z$, the whole ball is cyan and nothing is blind ([@thm-complementary-pythagoras]).
@@ -490,7 +490,7 @@ is positive semidefinite and satisfies $\Tr\bigl(\operatorname{conditionalState}
 Write $w_k = \operatorname{recordWeight}(P, \rho, k) = \Tr(\rho P_k)$. Since $P_k^* = P_k$ and $P_k^2 = P_k$ by [@def-record-measurement], the compressed matrix $P_k \rho P_k = P_k \rho P_k^*$ is positive semidefinite, and trace cyclicity with idempotence gives $\Tr(P_k \rho P_k) = \Tr(P_k^2 \rho) = \Tr(\rho P_k) = w_k$. By [@thm-born-probability-skeleton] in [Chapter 2](ch02-born-rule.md), $0 \le w_k$ in the complex partial order (so $w_k$ is a nonnegative real number); combined with $w_k \neq 0$, its inverse $w_k^{-1}$ is strictly positive real. Scaling by a positive real preserves positive semidefiniteness, and linearity of the trace gives $\Tr(w_k^{-1} P_k \rho P_k) = w_k^{-1} w_k = 1$. The full proof is checked by the Lean kernel.
 :::
 
-When an observer chains [@thm-conditional-state-valid] across non-collinear axes $\tau_1 \to \tau_2 \to \tau_3$, something extraordinary happens: a transition that was $100\%$ forbidden becomes open simply because an intermediate projection reset the reference line! Feynman loved pulling three cheap Polaroid sheets from his pocket to demonstrate this right before his students' eyes.
+When an observer chains [@thm-conditional-state-valid] across non-collinear axes $\tau_1 \to \tau_2 \to \tau_3$, something extraordinary happens: a transition that was $100\%$ forbidden becomes open simply because an intermediate projection reset the reference line! Physics teachers love pulling three cheap Polaroid sheets from their pockets to demonstrate this right before their students' eyes.
 
 To extend the three-sheet calculation to any finite number of sheets, first examine what survives when ordered outer products are multiplied.
 
@@ -511,7 +511,7 @@ Direct multiplication gives $(uu^\dagger)(ww^\dagger)=\langle u,w\rangle uw^\dag
 
 The trace of a general ordered chain is complex and is not itself a probability. The transmission weight below comes from a particular palindrome of unit vectors.
 
-::: {.example #ex-malus-three-polarizers title="Feynman's Three-Polarizer Cascade: How Sequential Idempotent Projections Rewrite History"}
+::: {.example #ex-malus-three-polarizers title="The Three-Polarizer Cascade: How Sequential Idempotent Projections Rewrite History"}
 Send a beam of horizontally polarized photons onto an optical bench. (Note a helpful factor of two in optics: when an electric-field polarization axis rotates in physical space by angle $\alpha$, horizontal $\alpha = 0^\circ$ and vertical $\alpha = 90^\circ$ are already mutually orthogonal states; thus the spatial optical angle $\alpha$ equals the Hilbert-space half-angle $\theta/2$, corresponding to Bloch angle $\theta = 2\alpha$.) The rank-one projector onto linear polarization at spatial angle $\alpha$ is
 
 $$

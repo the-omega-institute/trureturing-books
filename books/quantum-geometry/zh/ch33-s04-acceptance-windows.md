@@ -31,7 +31,7 @@ $$
 :::
 
 ::: proof
-一方面，对任意复矩阵组 $(M, N)$，将流算子沿内部三路桥分解为 $\operatorname{flow}(M, N) = \operatorname{cutLeft}(N)\cdot\operatorname{cutRight}(M)$ 给出了内部割上界 $\operatorname{rank}(\operatorname{flow}(M,N)) \le 3ac$，结合矩阵高宽秩上界 $\min(ad, bc)$ 即得普适弱对偶 `QMaxFlow_le_QMinCut`；由二次锥不等式 $a^2 + b^2 \le 3ab$ 与 $0 < a$ 经反证法（`cone_bounds`）推得 $b < 3a$（同理 $d < 3c$），故内部桥容量 $3ac$ 严格大于或等于外割 $\min(ad, bc)$，确立 `cone_QMinCut`：$\operatorname{QMinCut}(a,b,c,d) = \min(ad, bc)$。另一方面，为证明存在达到外割秩 $\min(ad, bc)$ 的张量流（`claim_of_hypotheses`），对和数 $n = b + d$ 施行强归纳：在退化方阵或混合二倍宽情形下由显式有理分块单位子矩阵 `widthTwo_proved` 构造满秩见证；在核心区域 $a < b < 2a,\; c < d < 2c$ 由 `base_witness` 给出基础见证；而在双侧宽扇区 $2a \le b,\; 2c \le d$，利用二次锥不变量保形下降 $(a, b) \mapsto (3a - b, a)$ 与 $(c, d) \mapsto (3c - d, c)$（`cone_descent`）调用归纳假设，再由王车易位赤字守恒律 `castling_proved` 推出原尺度满秩，结合偏序反对称性完成等号证明。完整证明由 Lean 内核检查。
+一方面，对任意复矩阵组 $(M, N)$，将流算子沿内部三路桥分解为 $\operatorname{flow}(M, N) = \operatorname{cutLeft}(N)\cdot\operatorname{cutRight}(M)$ 给出了内部割上界 $\operatorname{rank}(\operatorname{flow}(M,N)) \le 3ac$，结合矩阵高宽秩上界 $\min(ad, bc)$ 即得普适弱对偶 `QMaxFlow_le_QMinCut`；由二次锥不等式 $a^2 + b^2 \le 3ab$ 与 $0 < a$ 经反证法（`cone_bounds`）推得 $b < 3a$（同理 $d < 3c$），故内部桥容量 $3ac$ 严格大于外割 $\min(ad, bc)$，确立 `cone_QMinCut`：$\operatorname{QMinCut}(a,b,c,d) = \min(ad, bc)$。另一方面，为证明存在达到外割秩 $\min(ad, bc)$ 的张量流（`claim_of_hypotheses`），对和数 $n = b + d$ 施行强归纳：在退化方阵或混合二倍宽情形下由显式有理分块单位子矩阵 `widthTwo_proved` 构造满秩见证；在核心区域 $a < b < 2a,\; c < d < 2c$ 由 `base_witness` 给出基础见证；而在双侧宽扇区 $2a \le b,\; 2c \le d$，利用二次锥不变量保形下降 $(a, b) \mapsto (3a - b, a)$ 与 $(c, d) \mapsto (3c - d, c)$（`cone_descent`）调用归纳假设，再由王车易位赤字守恒律 `castling_proved` 推出原尺度满秩，结合偏序反对称性完成等号证明。完整证明由 Lean 内核检查。
 :::
 
 将离散桥图的极小割切换推进到连续全息时空中的极小曲面重联相变、微观纠缠虫洞诠释与多体纠缠配额上限时，所涉及的三项经典物理与量子信息文献归档于下框：
@@ -47,7 +47,7 @@ $$
 
    这里比较的是 $G_N^{-1}$ 领先阶的 $I_{\mathrm{RT}}$；不连通相中它为零，精确量子互信息仍可有 $G_N^0$ 阶贡献，不能据此断言全部量子关联消失。
 
-2. **微观纠缠桥假说 $ER = EPR$（J. Maldacena & L. Susskind, *Fortschr. Phys.* **61**, 781–811, 2013）**：提出任意两子系统之间的量子纠缠对（EPR 关联）在微观量子引力层面等价于连接两者的不可穿越空间虫洞桥（Einstein–Rosen 桥），即共享纠缠直接缩短并缝合体空间几何连通度；
+2. **微观纠缠桥假说 $ER = EPR$（J. Maldacena & L. Susskind, *Fortschr. Phys.* **61**, 781–811, 2013）**：猜想任意两子系统之间的量子纠缠对（EPR 关联）在微观量子引力层面等价于连接两者的不可穿越空间虫洞桥（Einstein–Rosen 桥），即共享纠缠直接缩短并缝合体空间几何连通度；
 3. **CKW 多体纠缠单配性稀缺预算（V. Coffman, J. Kundu & W. K. Wootters, *Phys. Rev. A* **61**, 052306, 2000；T. J. Osborne & F. Verstraete, *Phys. Rev. Lett.* **96**, 220503, 2006）**：任意观察者量子比特 $i$（局部布洛赫极化向量为 $\mathbf{r}_i$）分配给周围所有伙伴 $j \neq i$ 的二体平方并发度（2-tangle）$\tau_{ij}$ 之和受单位纯度硬上限约束：
 
    $$

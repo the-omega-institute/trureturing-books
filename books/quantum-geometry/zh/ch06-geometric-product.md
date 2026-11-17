@@ -218,13 +218,13 @@ $$
 请盯住这两根环境记录箭头 $r_L$ 与 $r_R$ 之间的复内积重叠幅 $c := \langle r_L, r_R\rangle_{\mathbb{C}}$：
 
 - 在**等权纯双路、理想平衡合束并扫描参考相位**的模型中，令 $\alpha := \arccos |c| \in [0, \pi/2]$。记录重叠可见度为 $V := \|c\| = |\langle r_L, r_R\rangle_{\mathbb{C}}| = \cos\alpha \in [0, 1]$；
-- **路径记录的可区分度（record distinguishability）** $D := \sqrt{1 - V^2} = \sin\alpha \in [0, 1]$，正是两根记录向量垂直张开的**外积正弦面积模长**！
+- **路径记录的可区分度（record distinguishability）** $D := \sqrt{1 - V^2} = \sin\alpha \in [0, 1]$，正是两根记录向量垂直张开的**外积正弦面积模长**！注意这里比的是两支**记录**矢量：面积 $D$ 量的是路径信息（粒子），线 $V$ 量的是条纹（波），与 6.1 节比系统比特时的对应恰好互换。
 
 ::: {.viz src="double-slit-marker" preset="partial" height="500"}
 **标记转开 $60^\circ$。** 右边的圆里，琥珀色的箭头 $r_R$ 与横放的 $r_L$ 夹角 $\alpha = 60^\circ$：青色的影子是可见度 $V = \cos\alpha = 0.5$，品红的高是可区分度 $D = \sin\alpha \approx 0.87$，点在圆上。左边屏上的落点仍堆出条纹，只是暗纹不再全黑，青色的带子窄了一半。
 :::
 
-在 Lean 模块 `Quantum/PureState/RecordCoherenceComplementarity` 中，下面这条核心定理严格证明了 $D$ 与 $V$ 满足丝毫不差的勾股守恒律 $D^2 + V^2 = 1$，并锁定了“纯粒子记录”与“纯波干涉”两个极端端点的充要条件。
+在 Lean 模块 `Quantum/PureState/RecordCoherenceComplementarity` 中，下面这条核心定理严格证明了 $D$ 与 $V$ 满足丝毫不差的勾股守恒律 $D^2 + V^2 = 1$，并锁定了“纯粒子记录”与“纯波干涉”两个极端端点的几条单向蕴含。注意这里 $D$ 是按 $\sqrt{1 - V^2}$ **定义**的，这条守恒律是该定义加柯西—施瓦茨（保证 $V \le 1$）的直接结果；$D$ 等于两条记录的迹距离这一操作含义是文献结果（见 [@rem-englert-greenberger-literature] 第 3 条）。
 
 ::: {.theorem #thm-record-coherence-complementarity title="纯态路径记录可区分度与相干可见度的勾股互补定理" lean="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity"}
 设 $E$ 为复内积空间，$r_L, r_R \in E$ 为左、右两条路径对应的单位环境记录态（满足 $\|r_L\| = 1$ 且 $\|r_R\| = 1$）。定义记录重叠幅、相干可见度与路径可区分度分别为
@@ -254,7 +254,7 @@ $$
 **全是面积的一端。** $\vv{B}$ 与 $\vv{A}$ 垂直时，青色的线缩成一个点，品红的面积撑到最大：线 $\cos\theta = 0$，面积 $\sin\theta = 1$。用图下方的 ◀ 切到“全是线”的另一端，对照 [@thm-record-coherence-complementarity] 的两个极限。
 :::
 
-再看性质 2 那一端：从单比特约化密度矩阵 $\rho \in M_2(\mathbb{C})$ 的视角来看（回忆[第四章](ch04-decoherence.md)的 [@thm-pinching-pythagorean]），当环境记录彻底正交（$c = 0$）并执行标准基捏合投影 $\Pi(\rho)$（[`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)）时，对角粒子布居 $\Pi(\rho)$ 与副对角波动相干残差 $\rho - \Pi(\rho)$ 在希尔伯特—施密特内积（[`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner)）下严格正交（[`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)）。我们将其作为本章几何积正交分解在算子空间上的直接推论重申如下：
+再看性质 2 那一端：从单比特约化密度矩阵 $\rho \in M_2(\mathbb{C})$ 的视角来看（回忆[第四章](ch04-decoherence.md)的 [@thm-pinching-pythagorean]），当环境记录彻底正交（$c = 0$）并执行标准基捏合投影 $\Pi(\rho)$（[`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)）时，对角粒子布居 $\Pi(\rho)$ 与副对角波动相干残差 $\rho - \Pi(\rho)$ 在希尔伯特—施密特内积（[`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner)）下严格正交（[`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)）。我们将其作为本章几何积正交分解在算子空间上的对应图景重申如下：
 
 ::: {.corollary #cor-pinching-pythagorean title="单比特捏合投影的正交勾股分解与副对角波动相干质量" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"}
 对任意单比特矩阵 $\rho \in M_2(\mathbb{C})$ 及标准基对角捏合算子 $\Pi(\rho)_{ij} = \delta_{ij}\rho_{ij}$（[`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)），对角粒子部分 $\Pi(\rho)$ 与副对角相干残差 $\rho - \Pi(\rho)$ 在希尔伯特—施密特内积 $\langle X, Y\rangle_{\mathrm{HS}} = \Tr(X^* Y)$ 下正交（$\langle \Pi(\rho),\, \rho - \Pi(\rho)\rangle_{\mathrm{HS}} = 0$，[`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)），故总希尔伯特—施密特范数平方满足正交勾股分解
@@ -301,8 +301,8 @@ $$
 ::: {.remark #rem-englert-greenberger-literature title="Wootters–Zurek、Greenberger–Yasin 与 Englert 波粒二象性不等式（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本章的 [@thm-record-coherence-complementarity] 针对纯环境记录态 $\|r_L\| = \|r_R\| = 1$ 给出了以记录重叠度 $V = |\langle r_L, r_R\rangle|$ 定义的可见度与 $D = \sqrt{1 - V^2}$ 之间的精确勾股等式 $D^2 + V^2 = 1$。在量子光学与干涉学文献中，关于定量波粒二象性的历史演进与混合态推广包括：
 
-1. **Wootters–Zurek 双缝信息分析（W. K. Wootters & W. H. Zurek, 1979）**：在 *Complementarity in the double-slit experiment: Quantum nonseparability and a quantitative statement of Bohr's principle*（Phys. Rev. D **19**, 473–484, 1979）中，首次证明了即便只获取极微弱的部分路径信息，干涉条纹可见度也能保持相当高的数值（如 [@ex-wheeler-delayed-choice-tradeoff] 中 $D = \frac{\sqrt{3}}{2} \approx 86.6\%$ 时仍有 $V = 50\%$ 的清晰条纹）。
-2. **Greenberger–Yasin 可预测性对偶（D. M. Greenberger & A. Yasin, 1988）与 Jaeger–Shimony–Vaidman（1995）**：对于双通道先验布居不对称 $p_0 \neq p_1$ 的纯态，先验路径可预测度 $P := |p_0 - p_1|$ 与干涉可见度 $V = 2|\rho_{01}|$ 满足 $P^2 + V^2 \le 1$（纯态取等号，即本书[第三章](ch03-projectors-and-duality.md) [@thm-complementary-pythagoras] 导出的布洛赫球关系 $r_z^2 + (r_x^2 + r_y^2) = \|\vv{r}\|^2 \le 1$）。
+1. **Wootters–Zurek 双缝信息分析（W. K. Wootters & W. H. Zurek, 1979）**：在 *Complementarity in the double-slit experiment: Quantum nonseparability and a quantitative statement of Bohr's principle*（Phys. Rev. D **19**, 473–484, 1979）中，首次证明了即便已获取相当可观的部分路径信息，干涉条纹可见度也能保持相当高的数值（如 [@ex-wheeler-delayed-choice-tradeoff] 中 $D = \frac{\sqrt{3}}{2} \approx 86.6\%$ 时仍有 $V = 50\%$ 的清晰条纹）。
+2. **Greenberger–Yasin 可预测性对偶（D. M. Greenberger & A. Yasin, 1988）与 Jaeger–Shimony–Vaidman（1995）**：对于双通道先验布居不对称 $p_0 \neq p_1$ 的一般态，先验路径可预测度 $P := |p_0 - p_1|$ 与干涉可见度 $V = 2|\rho_{01}|$ 满足 $P^2 + V^2 \le 1$（纯态取等号，即本书[第三章](ch03-projectors-and-duality.md) [@thm-complementary-pythagoras] 导出的布洛赫球关系 $r_z^2 + (r_x^2 + r_y^2) = \|\vv{r}\|^2 \le 1$）。
 3. **Englert 混合环境一般对偶不等式（B.-G. Englert, 1996）**：在 *Fringe visibility and which-way information: An inequality*（Phys. Rev. Lett. **77**, 2154–2157, 1996）中，Englert 用两个一般混合环境态 $\rho_L, \rho_R$ 之间的迹距离（trace distance）独立定义无偏路径可区分度 $D_{\mathrm{tr}} := \frac{1}{2}\Tr|\rho_L - \rho_R|$，并证明了对任意混合环境初态恒有（Englert 1996 原文利用极分解与柯西—施瓦茨不等式直接导出；现代量子信息论文献亦常由 Fuchs–van de Graaf 迹距离—保真度不等式给出等价证明）
    $$
    D_{\mathrm{tr}}^2 + V^2 \le 1,
@@ -334,7 +334,7 @@ $$
 6.3 节的双缝标记也有一台完整的实验室 `SLIT//MARKER`：在互补圆上拖动标记夹角 $\alpha$，屏上条纹的对比度 $V = \cos\alpha$ 与圆上品红的高 $D = \sin\alpha$ 此消彼长，读标记的方式也可以等落点到齐之后再换。
 
 ::: {.viz src="double-slit-marker" height="560"}
-交互实验室 `SLIT//MARKER`：屏上一个个到达的落点与条纹，互补圆上的两支标记箭头 $r_L$、$r_R$；拖动夹角，切换读标记的方式，或调低标记的纯态权重 $\lambda$。页面上的数是数值演示；纯态记录标记（$\lambda = 1$）的 $D^2 + V^2 = 1$ 由 [@thm-record-coherence-complementarity] 保证，由 Lean 内核检查；混合标记在 $\alpha > 0$ 时落进圆内、$\alpha = 0$ 时仍在圆上，是 Englert 不等式（文献结果，未在本书形式化）的情形。
+交互实验室 `SLIT//MARKER`：屏上一个个到达的落点与条纹，互补圆上的两支标记箭头 $r_L$、$r_R$；拖动夹角，切换读标记的方式，或调低标记的纯态权重 $\lambda$。页面上的数是数值演示；纯态记录标记（$\lambda = 1$）时，以 $D := \sqrt{1 - V^2}$ 写出的 $D^2 + V^2 = 1$ 由 [@thm-record-coherence-complementarity] 保证，由 Lean 内核检查，页面上的 $D$ 取迹距离，纯态时二者相等是文献结果；混合标记在 $\alpha > 0$ 时落进圆内、$\alpha = 0$ 时仍在圆上，是 Englert 不等式（文献结果，未在本书形式化）的情形。
 :::
 
 既然“粒子是线，面积是波，两者合起来是同一个几何积场”，那么当这片有向面积随着物理参数连续扫掠时，这个被我们称作“时间”的维度，在几何上又是什么？为什么作者会脱口而出*“我的直觉是,线是经典时间,面积是量子时间”*？让我们进入[第七章](ch07-geometric-time-and-speed-limits.md)。

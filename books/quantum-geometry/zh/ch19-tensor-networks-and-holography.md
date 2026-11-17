@@ -20,7 +20,7 @@
 
 想象你手里有两块相互纠缠的多体量子区域：左边界输入端与右边界输出端。如果它们之间只靠一根一维标量线相连，那么无论两端各自的希尔伯特空间有多大，跨过这道接口的线性映射至多只有秩 $1$，相当于所有信息都被挤进了一根单模光纤。反之，如果接口处由多条内部张量腿（bond indices）并排桥接，跨越接口的算子秩（即施密特分解中非零奇异值的个数）就能够随内部腿维数的乘积而增长。
 
-如上图左栏（Panel I）所示，在物理文献中，研究者常借助多尺度纠缠重整化拟设（MERA）等层级张量网络来示意边界区域与深层“体空间（bulk）”截面之间的瓶颈关系。然而，在一般张量网络中，量子最大流（跨网络收缩所能达到的最大矩阵秩）甚至**不一定**等于量子最小割（切开网络所需截断的最小腿维数乘积）！因此，要想得到经得起形式化内核检验的精确结论，我们必须先锚定一个结构完全显式、参数边界清清楚楚的有限维桥图模型。
+如上图左栏（Panel I）所示，在物理文献中，研究者常借助多尺度纠缠重整化拟设（MERA）等层级张量网络来示意边界区域与深层“体空间（bulk）”截面之间的瓶颈关系。然而，在一般张量网络中，量子最大流（跨网络收缩所能达到的最大矩阵秩）甚至**不一定**等于量子最小割（切开网络所需截断的最小腿维数乘积）！（文献结果：S. X. Cui、M. H. Freedman、O. Sattath、R. Stong 与 G. Minton，*Quantum max-flow/min-cut*，J. Math. Phys. 57, 062206 (2016)，arXiv:1508.04644。）因此，要想得到经得起形式化内核检验的精确结论，我们必须先锚定一个结构完全显式、参数边界清清楚楚的有限维桥图模型。
 
 ::: {.viz src="layered-network-cut" preset="one" height="500"}
 **一格的区间，割就是它自己那条腿。** 层级网络底边的第 16 格单独成为琥珀色区间，品红标出的最小割只割断它自己那一条腿。只有这一条键穿过割，跨过它的秩至多是这一条键的维数；割断的键越多，秩的上界才是它们维数的乘积。
@@ -32,7 +32,7 @@
 **四格的区间，割从网络里面穿过。** 底边连续 4 格是琥珀色区间。直接剪断它们的 4 条腿不是最省的：品红的最小割钻进网络，只割断 3 条键，青色是割内侧的张量。页面数的是割断的腿，给出的只是秩的上界；正如上文所说，一般网络里最大流可以小于最小割，网络是示意模型。
 :::
 
-在 Lean 的 `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound` 模块中，这一模型由四个自然数维数参数 $a, b, c, d \in \mathbb{N}$ 与宽度为 $3$（指标 $r \in \operatorname{Fin} 3$）的桥接张量收缩给出：
+桥图模型、`QMaxFlow` 与 `QMinCut` 的定义以及下文锥域上“流等于割”的命题（原文猜想 3.15）出自 F. Gesmundo、V. Lysikov 与 V. Steffan，*Quantum max-flow in the bridge graph*，Transformation Groups 30 (2025) 1751–1784（DOI: `10.1007/s00031-024-09863-2`，arXiv:2212.09794），原文记号 $(a, b, a', b')$ 对应这里的 $(a, b, c, d)$。在 Lean 的 `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound` 模块中，这一模型由四个自然数维数参数 $a, b, c, d \in \mathbb{N}$ 与宽度为 $3$（指标 $r \in \operatorname{Fin} 3$）的桥接张量收缩给出：
 
 - 设 $M : \operatorname{Fin} 3 \to M_{a\times b}(\mathbb{C})$ 为三个 $a\times b$ 复矩阵，$N : \operatorname{Fin} 3 \to M_{d\times c}(\mathbb{C})$ 为三个 $d\times c$ 复矩阵；
 - 定义**宽度三桥图流矩阵** `flow` 为三项克罗内克积（Kronecker product）之和：
@@ -68,7 +68,7 @@ $$
 
 ## 19.2 宽度三桥图的秩与割容量 {#sec-bridge-flow-cut}
 
-现在我们来数一数：源码用哪三项割容量上界，来约束 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从左输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到右输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道的秩？
+现在我们来数一数：源码用哪三项割容量上界，来约束 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道的秩？
 
 1. **左外边界割（行空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} a \times \operatorname{Fin} d| = ad$ 行，因此其秩绝不可能超过 $ad$；
 2. **右外边界割（列空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} b \times \operatorname{Fin} c| = bc$ 列，因此其秩绝不可能超过 $bc$；
@@ -146,7 +146,7 @@ $$
 
 ## 19.3 锥域与离散容量分片的拼接 {#sec-discrete-facet-stitching}
 
-在 [@ex-bridge-two-three] 中，中间桥割容量 $3ac = 12$ 远大于两侧外边界割 $ad = bc = 6$，因此中间桥不会成为卡死流量的瓶颈。为什么二次锥条件 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$ 恰好是保证中间三桥不构成瓶颈的自然区域？
+在 [@ex-bridge-two-three] 中，中间桥割容量 $3ac = 12$ 远大于两侧外边界割 $ad = bc = 6$，因此中间桥不会成为卡死流量的瓶颈。为什么二次锥条件 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$ 恰好落在保证中间三桥不构成瓶颈的自然区域之内？
 
 不妨做一步初等代数检验：当 $a > 0$ 时，不等式 $a^2 + b^2 \le 3ab$ 意味着 $b^2 < a^2 + b^2 \le 3ab$，消去正因子 $b$（若 $b > 0$）即得 $b < 3a$，同理 $c > 0$ 与 $c^2 + d^2 \le 3cd$ 意味着 $d < 3c$。换言之，两个外边界比值 $b/a$ 与 $d/c$ 都被严格关在宽度因子 $3$ 以内：一旦乘上桥宽 $3$，就有 $3ac > bc$ 且 $3ac > ad$！因此，只要参数 $(a, b)$ 与 $(c, d)$ 落在二次锥域 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$（且 $a > 0, c > 0$）之内，中间割 $3ac$ 就永远大于或等于外边界割 $\min(ad, bc)$，从而最小割公式自动脱去外层的 $3ac$！
 

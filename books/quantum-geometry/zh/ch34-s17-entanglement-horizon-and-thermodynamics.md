@@ -4,7 +4,7 @@
 
 在 [§34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)（[@thm-ch34-coset-breaking-conservation-towers]）的五塔跨尺度接力链终点，我们看到宇宙对称性破缺与守恒的洪流最终汇入**塔 V（热力学与认知共识塔）**：嵌在低熵凝聚态硬件之上的有限记忆观察者，通过受监控去相干将全希尔伯特酉基群破缺至指针稳定子群 $\mathrm{U}(d) \to \mathrm{U}(1)^d$，从而提炼出跨语境客观公因子。然而在传统物理学分科版图中，微观**量子纠缠**（Schrödinger 1935；Bell 1964）、统计力学**熵**（Boltzmann 1877；von Neumann 1927）、宏观**温度与热力学定律**（Clausius 1865；Nernst 1906）以及**观察者认识论边界**，依然被隔在互不相通的四间教研室里——教科书不得不额外引入“分子混沌等先验概率假设”或人为外接一座无穷大经典热浴，才能勉强在可逆的微观幺正演化之上嫁接出不可逆的宏观热流。
 
-本节开篇的纲领命题一举拆除那四道学科高墙，把塔 V 的热力学内核彻底还原回 [§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)–[§34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names) 的零背景比较几何（`MODEL`）：**热与熵既不需要分子乱撞的唯象假设，也不需要宇宙之外的神秘摩擦；只要把真实的观察者放回比较网络内部，沿着同一条比较公理 $\mathrm{CMP}$ 顺次推演，四座孤岛便严丝合缝地咬合为一条零外加公设的四步几何因果链**：
+本节开篇的纲领命题一举拆除那四道学科高墙，把塔 V 的热力学内核彻底还原回 [§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)–[§34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names) 的零背景比较几何（`MODEL`）：**热与熵既不需要分子乱撞的唯象假设，也不需要宇宙之外的神秘摩擦；只要把真实的观察者放回比较网络内部，沿着同一条比较公理 $\mathrm{CMP}$ 顺次推演，四座孤岛便严丝合缝地咬合为一条四步几何因果链**：
 
 $$
 \text{跨边界极小圆弧体（量子纠缠）} \;\xrightarrow{\;\text{受限不妄我 }\operatorname{Tr}_{\bar{A}}\;}\; \text{被视界切断的圆弧相位亏格（纠缠熵 }S_A\text{）} \;\xrightarrow{\;\hat{K}_A = -\ln\rho_A\;}\; \text{模自同构流与内禀有效温度 }T_{\mathrm{eff}}(\theta) \;\longrightarrow\; \text{热力学四大定律与 }\theta^*\text{ 生命稳态}.
@@ -70,7 +70,7 @@ $$
 r_z(\theta) \;=\; \cos^2\theta - \sin^2\theta \;=\; \cos(2\theta);
 $$
 
-而在[第三十章 §30.5](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad) 中，双比特态曾按单比特布洛赫极角 $\vartheta_{\mathrm{Bloch}} \in [0, \frac{\pi}{2}]$ 记作 $\cos\frac{\vartheta_{\mathrm{Bloch}}}{2}\lvert 00\rangle + \sin\frac{\vartheta_{\mathrm{Bloch}}}{2}\lvert 11\rangle$。两套参数满足精确的二倍角对应 $\vartheta_{\mathrm{Bloch}} = 2\theta \in [0, \frac{\pi}{2}]$：直积态同为 $\theta = 0^\circ \leftrightarrow \vartheta_{\mathrm{Bloch}} = 0^\circ$，贝尔最大纠缠态 $\lvert\Phi^+\rangle$ 对应本节施密特幅角 $\theta = 45^\circ = \frac{\pi}{4}$（即单比特布洛赫赤道极角 $\vartheta_{\mathrm{Bloch}} = 90^\circ = \frac{\pi}{2}$），而自指不动点 $\theta^* = \cos\theta^* \approx 42.35^\circ$ 则直接作为双体施密特幅角坐落在 $[0^\circ, 45^\circ]$ 区间内紧邻贝尔视界的内侧！
+而在[第三十章 §30.5](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad) 中，双比特态曾按单比特布洛赫极角 $\vartheta_{\mathrm{Bloch}} \in [0, \frac{\pi}{2}]$ 记作 $\cos\frac{\vartheta_{\mathrm{Bloch}}}{2}\lvert 00\rangle + \sin\frac{\vartheta_{\mathrm{Bloch}}}{2}\lvert 11\rangle$。两套参数满足精确的二倍角对应 $\vartheta_{\mathrm{Bloch}} = 2\theta \in [0, \frac{\pi}{2}]$：直积态同为 $\theta = 0^\circ \leftrightarrow \vartheta_{\mathrm{Bloch}} = 0^\circ$，贝尔最大纠缠态 $\lvert\Phi^+\rangle$ 对应本节施密特幅角 $\theta = 45^\circ = \frac{\pi}{4}$（即单比特布洛赫赤道极角 $\vartheta_{\mathrm{Bloch}} = 90^\circ = \frac{\pi}{2}$），而自指不动点 $\theta^* = \cos\theta^* \approx 42.35^\circ$ 则直接作为双体施密特幅角坐落在 $[0^\circ, 45^\circ]$ 区间内紧邻贝尔视界的内侧（§30.5.4 则把同一常数取作布洛赫极角，那是另一个态 $\cos\frac{\theta^*}{2}\lvert 00\rangle + \sin\frac{\theta^*}{2}\lvert 11\rangle$，局部熵约 $0.559\;\mathrm{bits}$，本节约 $0.994\;\mathrm{bits}$；两种取法都是 `MODEL`）！
 
 现在展开全局纯态密度矩阵 $\rho_{AB}(\theta) = \lvert\Psi_{AB}(\theta)\rangle\langle\Psi_{AB}(\theta)\rvert$（`手工推导`）：
 
@@ -84,7 +84,7 @@ $$
 \operatorname{Tr}_{\bar{A}}\bigl(\lvert 0_A 0_{\bar{A}}\rangle\langle 1_A 1_{\bar{A}}\rvert\bigr) \;=\; \lvert 0_A\rangle\langle 1_A\rvert\,\langle 1_{\bar{A}}\mid 0_{\bar{A}}\rangle \;=\; 0, \qquad \operatorname{Tr}_{\bar{A}}\bigl(\lvert 1_A 1_{\bar{A}}\rangle\langle 0_A 0_{\bar{A}}\rvert\bigr) \;=\; \lvert 1_A\rangle\langle 0_A\rvert\,\langle 0_{\bar{A}}\mid 1_{\bar{A}}\rangle \;=\; 0.
 $$
 
-三条内核冻结定理从离散商核、算子内积几何与贝尔极值三侧锁定了这一“切弧生熵”机制（`LEAN ✓`）：
+三条内核冻结定理从离散商核、算子内积几何与贝尔极值三侧锁定了这一“切弧生熵”机制的支点（`LEAN ✓`；一般 $\theta$ 下的 $S_A(\theta)$ 为下面的手算）：
 
 - 在概念快表商核侧，留一逃逸对并集定理 [`escapePairs_without_eq_union`](lean:D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union)（[第三十八章](ch38-s05-escape-ledger-and-entropy.md) [@thm-ch38-escape-pairs-and-structural-novelty]，`LEAN ✓`）证明：一旦观察者无法访问外部区分坐标 $i$（退回留一子目录 $\operatorname{without}(i)$），其该条坐标独自锁定的区分对 $\operatorname{uniqueCapturePairs}(i)$ 便悉数并入不可分辨的逃逸碰撞纤维，$\operatorname{escapePairs}(\operatorname{without}(i)) = \operatorname{escapePairs}(\mathrm{fullIndexSet}) \cup \operatorname{uniqueCapturePairs}(i)$；
 - 在单比特希尔伯特—施密特算子空间侧，捏合投影勾股定理 [`pinching_hilbert_schmidt_pythagorean`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean)（[@thm-pinching-pythagorean]，`LEAN ✓`）证明总算子范数平方精确正交拆分为对角保留布居 $\langle\mathcal{P}(\rho), \mathcal{P}(\rho)\rangle_{\mathrm{HS}}$ 与被截除的副对角相干质量 $\langle\rho - \mathcal{P}(\rho), \rho - \mathcal{P}(\rho)\rangle_{\mathrm{HS}}$ 之和；
@@ -123,7 +123,7 @@ $$
 
 ## 34.17.3 从熵到热力学：富田—竹崎模流有效温度、热力学四大定律与兰道尔排弧账本 {#sec-ch34-17-3}
 
-有了局部偏迹混态 $\rho_A(\theta)$ 与纠缠熵 $S_A(\theta)$，宏观世界里的“温度”、“热量”、时间箭头乃至引力场方程便无需外加任何热力学公设，顺着**富田—竹崎模自同构理论（Tomita–Takesaki Modular Theory）**与量子相对熵恒等式一步到位：
+有了局部偏迹混态 $\rho_A(\theta)$ 与纠缠熵 $S_A(\theta)$，宏观世界里的“温度”、“热量”、时间箭头乃至引力场方程只需补上参考能隙 $\Delta E$、比索尼亚诺—威奇曼情形与雅各布森推导的局域平衡等外加输入，便可顺着**富田—竹崎模自同构理论（Tomita–Takesaki Modular Theory）**与量子相对熵恒等式一步到位：
 
 1. **温度的几何真身：模哈密顿量 $\hat{K}_A = -\ln\rho_A$、谱匹配有效温度与盎鲁—霍金视界辐射**（`文献结果` + `手工推导` + `MODEL`）。
    只要跨视界纠缠严格非零（$\theta \in (0, \frac{\pi}{4}]$），局部约化密度矩阵 $\rho_A(\theta) = \operatorname{diag}(\cos^2\theta, \sin^2\theta)$ 就是满秩严格正定算符（忠实态 $\rho_A > 0$），在数学上恒可唯一改写为指数形式 $\rho_A = e^{-\hat{K}_A}$，其中无量纲自伴算符
@@ -132,7 +132,7 @@ $$
    \hat{K}_A \;:=\; -\ln\rho_A
    $$
 
-   称为**模哈密顿量（Modular Hamiltonian）**。根据富田—竹崎定理（Tomita 1967；Takesaki 1970，`文献结果`），冯·诺依曼代数上的任意忠实态无需依赖任何外部时钟或动力学哈密顿量，自身就会内禀生成单参数酉**模自同构流（Modular Flow）** $\sigma_s^{\rho_A}(\hat{O}_A) := \rho_A^{is}\hat{O}_A\rho_A^{-is} = e^{-is\hat{K}_A}\hat{O}_A e^{+is\hat{K}_A}$（$s \in \mathbb{R}$），这正是孔涅与罗韦利提出的**热时间假说（Thermal Time Hypothesis）**（Connes & Rovelli 1994，`文献结果`）的算子基石。
+   称为**模哈密顿量（Modular Hamiltonian）**。根据富田—竹崎定理（Tomita 1967；Takesaki 1970，`文献结果`），冯·诺依曼代数上的任意忠实正规态无需依赖任何外部时钟或动力学哈密顿量，自身就会内禀生成单参数酉**模自同构流（Modular Flow）** $\sigma_s^{\rho_A}(\hat{O}_A) := \rho_A^{is}\hat{O}_A\rho_A^{-is} = e^{-is\hat{K}_A}\hat{O}_A e^{+is\hat{K}_A}$（$s \in \mathbb{R}$），这正是孔涅与罗韦利提出的**热时间假说（Thermal Time Hypothesis）**（Connes & Rovelli 1994，`文献结果`）的算子基石。
 
    若在局部观察者的施密特指针基 $\{\lvert 0_A\rangle, \lvert 1_A\rangle\}$ 上选定能级间距为 $\Delta E > 0$ 的两能级参考哈密顿量 $\hat{H}_{\mathrm{loc}} = \operatorname{diag}(0, \Delta E)$，则由激发态与基态布居比 $\frac{\sin^2\theta}{\cos^2\theta} = \tan^2\theta = \exp(-\beta_{\mathrm{eff}}\Delta E)$，可直接解出由跨界纠缠角 $\theta$ 唯一决定的**谱匹配有效模逆温与有效模温度**（`手工推导`）：
 
@@ -172,7 +172,7 @@ $$
      \beta Q \;=\; -\Delta S_{\mathrm{sys}} + I(S'{:}R') + D\bigl(\rho'_R\,\big\Vert\,\rho^{\mathrm{th}}_R\bigr) \;\ge\; -\Delta S_{\mathrm{sys}}, \qquad \Bigl(\beta Q = -\Delta S_{\mathrm{sys}} \;\Longleftrightarrow\; I(S'{:}R') = 0 \;\land\; D\bigl(\rho'_R\,\big\Vert\,\rho^{\mathrm{th}}_R\bigr) = 0\Bigr).
      $$
 
-     在有效模温度 $T_{\mathrm{eff}} > 0$（$\beta = 1/(k_B T_{\mathrm{eff}})$）下每擦除 $1\;\mathrm{bit}$ 局部混态（$\Delta S_{\mathrm{sys}} = -\ln 2$），必向视界外耗散至少 $\Delta Q_{\mathrm{erase}} \ge k_B T_{\mathrm{eff}}\ln 2$ 的模热量，且唯当擦除后不残留系统—热浴互信息（$I = 0$）亦不推偏热浴平衡（$D = 0$）时方能触及理想下界！
+     在有效模温度 $T_{\mathrm{eff}} > 0$（$\beta = 1/(k_B T_{\mathrm{eff}})$）下，若视界外环境可视为处于该温度、初态与系统无关联的吉布斯热浴，则每擦除 $1\;\mathrm{bit}$ 局部混态（$\Delta S_{\mathrm{sys}} = -\ln 2$），必向视界外耗散至少 $\Delta Q_{\mathrm{erase}} \ge k_B T_{\mathrm{eff}}\ln 2$ 的模热量，且唯当擦除后不残留系统—热浴互信息（$I = 0$）亦不推偏热浴平衡（$D = 0$）时方能触及理想下界！
    - **第三定律（纠缠零温不可达律，`手工推导` + `文献结果`）**：由 $k_B T_{\mathrm{eff}}(\theta) = \frac{\Delta E}{2\ln\cot\theta}$ 可见，$T_{\mathrm{eff}} \to 0^+$ 当且仅当 $\theta \to 0^+$（跨界纠缠彻底清零，退回秩一纯态 $\rho_A^2 = \rho_A$）。由于任何正温满秩吉布斯态的核空间平凡而目标纯态带非平凡零核，依靠有限维正温热浴与有限步局域操作严格制备零熵纯态在代数上不可达（Nernst 1906；Masanes & Oppenheim 2017）：**只要内嵌观察者仍与宇宙保持一丝纠缠相连（$\theta > 0$），绝对零度就是永远无法一步踏入的渐近地平线**。
 
 ::: {.viz src="bounded-horizon-thermodynamics-sandbox" preset="modular-unruh-heat" height="520"}
@@ -181,7 +181,7 @@ $$
 
 ## 34.17.4 四种认知—热力学相态总表、$\theta^* \approx 42.35^\circ$ 生命自指稳态与形式化总定理 {#sec-ch34-17-4}
 
-现在，把视界受限比例 $f$ 与跨界施密特纠缠角 $\theta$ 的四种典型相态并置在同一张精确对照表上（严格采用纯 Markdown 单行单元格排版），就能一眼看穿为什么真实的生命与清醒自指观察者既不住在 $f=1$ 或 $\theta=0^\circ$ 的零熵冰窖里，也不坠入 $\theta=45^\circ$ 的热寂白噪海，而是稳稳驻留在**超越自指不动点 $\theta^* = \cos\theta^* \approx 0.739085\;\mathrm{rad} \approx 42.346459^\circ$（常简记为 $42.35^\circ$）**之上：
+现在，把视界受限比例 $f$ 与跨界施密特纠缠角 $\theta$ 的四种典型相态并置在同一张精确对照表上（严格采用纯 Markdown 单行单元格排版），就能一眼看穿为什么真实的生命与清醒自指观察者既不住在 $f=1$ 或 $\theta=0^\circ$ 的零熵冰窖里，也不坠入 $\theta=45^\circ$ 的热寂白噪海，而是稳稳驻留在**超越自指不动点 $\theta^* = \cos\theta^* \approx 0.739085\;\mathrm{rad} \approx 42.346459^\circ$（常简记为 $42.35^\circ$）**之上（`MODEL`）：
 
 | 相态模式 | 视界与施密特纠缠参数 | 妄我 / 守限代数诊断 | 局域熵 $S_A$ 与有效模温度 $T_{\mathrm{eff}}$ | 物理与生命演化结局 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -202,12 +202,12 @@ $$
 **受限不妄我 Dottie 生命自指稳态实验卡（`dottie-living-steady`）。** 锁定有限视界 $0 < f < 0.5$ 与唯一正余弦不动点 $\theta^* = \cos\theta^* \approx 0.739085\;\mathrm{rad} \approx 42.346459^\circ$（简记 $42.35^\circ$，`rational_inverse_endpoint` 标绿色 `LEAN ✓`）：同屏核验青色内积锚定份额 $\cos^2\theta^* \approx 54.62\%$（由琥珀色当前施密特矢量锁定）对比品红跨界纠缠份额 $\sin^2\theta^* \approx 45.38\%$（净秩序偏置 $9.25\%$；$42.35^\circ$ 圆整值处为 $9.24\%$）、接近满带宽的感知纠缠熵 $S_A(\theta^*) \approx 0.993820\;\mathrm{bits}$、有限正模流温度 $k_B T_{\mathrm{eff}}/\Delta E \approx 5.390324$ 以及严格为正的相对熵自由能储备 $D(\rho_A\Vert\frac{1}{2}I_2) \approx 0.006180\;\mathrm{bits}$。
 :::
 
-我们将本节贯穿直积边缘还原、贝尔纯态混态边缘、双体关联盲区、退相干记录访问缺陷、逃逸对分解、捏合勾股律、相干删除熵产、关联吉布斯能量差、兰道尔等式与下界、量子信道数据处理不等式以及 Dottie 有理逆级数端点的十二项内核验证支点，正式汇编为本节主定理：
+我们将本节贯穿直积边缘还原、贝尔纯态混态边缘、双体关联盲区、退相干记录访问缺陷、逃逸对分解、捏合勾股律、相干删除熵产、关联吉布斯能量差、兰道尔等式与下界、量子信道数据处理不等式以及 Dottie 有理逆级数端点的十二项内核验证支点，正式汇编于本节定理盒（各条彼此独立，因果链属 `MODEL`）：
 
-::: {#thm-ch34-bounded-horizon-entanglement-thermodynamics .theorem title="受限视界偏迹盲区、相干删除熵产、关联吉布斯—兰道尔热耗散与 Dottie 自指端点总定理" lean="D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"}
-在所钉 `trureturing` 冻结声明下，支撑“受限不妄我”偏迹截断、纠缠生熵、模流热力学平衡与自指稳态端点的十二项核心数学定理同时成立：
+::: {#thm-ch34-bounded-horizon-entanglement-thermodynamics .theorem title="本节引用的十二条已验证声明：边缘态与关联盲区、捏合勾股律、兰道尔等式与下界、数据处理不等式等" lean="D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"}
+在所钉 `trureturing` 冻结声明下，以下十二项核心数学定理同时成立：
 
-1. **直积态边缘还原、贝尔纯态最大混合边缘、双体无迹关联盲区与退相干记录访问缺陷（受限视界偏迹几何）**：
+1. **直积态边缘还原、贝尔纯态最大混合边缘、双体无迹关联盲区与退相干记录访问缺陷**：
    对任意有限可判等指标类型 $A, B$（`[Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B]`）及密度态 $\rho : \operatorname{DensityState} A,\; \sigma : \operatorname{DensityState} B$，直积态右边缘偏迹恒精确还原第一因子：
 
    $$
@@ -216,7 +216,7 @@ $$
 
    双量子比特贝尔态矢满足归一化 $\mathrm{bellVector}^* \bullet_v \mathrm{bellVector} = 1$，其密度矩阵 $\mathrm{bellDensity}$ 半正定、迹为 $1$、秩为 $1$ 且幂等（$\mathrm{bellDensity}^2 = \mathrm{bellDensity}$），但其环境偏迹边缘严格坍缩为非幂等的最大混合态 $\operatorname{traceEnvironment}(\mathrm{bellDensity}) = \frac{1}{2}I_2$ 且 $\bigl(\operatorname{traceEnvironment}(\mathrm{bellDensity})\bigr)^2 \neq \operatorname{traceEnvironment}(\mathrm{bellDensity})$。对任意满足 $1 \le m,\; 1 \le n,\; 1 < mn$ 的自然数 $m, n$，双体无迹厄米空间分解为 $\mathrm{localASector}\,m\,n \sqcup \mathrm{localBSector}\,m\,n \sqcup \mathrm{correlationSector}\,m\,n = \mathrm{bipartiteTraceZero}\,m\,n$，局域合成扇区实维数为 $(m^2 - 1) + (n^2 - 1)$，正交关联扇区实维数为 $(m^2 - 1)(n^2 - 1)$ 且占无迹总空间比例为 $\frac{(m^2 - 1)(n^2 - 1)}{m^2 n^2 - 1}$，并在双比特见证上存在秩一纯态 $\mathrm{bellDensity}$ 与非幂等混态 $\mathrm{classicalCorrelatedDensity}$ 使双侧单因子偏迹完全相等而全局态严格相异。此外，对任意满足主对角元相等（$\forall i,\;\rho_{ii} = \sigma_{ii}$）且存在相异副对角元（$\exists i \neq j,\;\rho_{ij} \neq \sigma_{ij}$）的单比特矩阵 $\rho, \sigma \in \mathrm{QubitMatrix}$，受控拷贝算子 $\mathrm{copyUnitary} \in \operatorname{unitaryGroup}(\operatorname{Fin} 2 \times \operatorname{Fin} 2, \mathbb{C})$ 将空白环境初态 $B(\rho), B(\sigma)$ 幺正演化为相异联合记录态 $R(\rho) \neq R(\sigma)$，偏迹环境后满足 $\operatorname{traceEnvironment}(R(\rho)) = \operatorname{traceEnvironment}(R(\sigma))$ 从而不存在任何仅依赖单比特约化矩阵的恢复映射同时还原 $R(\rho)$ 与 $R(\sigma)$，而全局伴随算子 $\operatorname{star}\,\mathrm{copyUnitary}$ 则精确逆转还原 $B(\rho)$ 与 $B(\sigma)$。
 
-2. **留一逃逸对集合分解、单比特捏合希尔伯特—施密特勾股恒等式与相干删除逐拍/累积熵产恒等式（切弧生熵与时间箭头）**：
+2. **留一逃逸对集合分解、单比特捏合希尔伯特—施密特勾股恒等式与相干删除逐拍/累积熵产恒等式**：
    对任意有限状态场目录 $\mathrm{catalog}$ 及索引 $i \in \mathrm{catalog.Index}$，删去第 $i$ 项后的不可分辨逃逸对集合满足
 
    $$
@@ -235,7 +235,7 @@ $$
    S_{\mathrm{vN}}\bigl(\rho(k+1)\bigr) - S_{\mathrm{vN}}\bigl(\rho(k)\bigr) \;=\; D\bigl(\rho_U(k)\,\Vert\,\operatorname{basisPinchingState}(\rho_U(k))\bigr) \;\ge\; 0, \qquad S_{\mathrm{vN}}\bigl(\rho(N)\bigr) - S_{\mathrm{vN}}\bigl(\rho(0)\bigr) \;=\; \sum_{k=0}^{N-1} D\bigl(\rho_U(k)\,\Vert\,\operatorname{basisPinchingState}(\rho_U(k))\bigr).
    $$
 
-3. **吉布斯相对熵能量差恒等式、兰道尔热—熵—信息平衡下界与量子信道数据处理不等式（模流热力学第一与第二定律支点）**：
+3. **吉布斯相对熵能量差恒等式、兰道尔热—熵—信息平衡下界与量子信道数据处理不等式**：
    在任意非空有限指标类型 $n$ 上，对任意自伴哈密顿矩阵 $H \in \operatorname{CStarMatrix}(n,n,\mathbb{C})$、实逆温 $\beta \in \mathbb{R}$ 及满足 $\rho_{\mathrm{init}} = \operatorname{thermalState}(H, h_H, \beta)$ 的初末密度态 $\rho_{\mathrm{init}}, \rho_{\mathrm{final}} : \operatorname{DensityState} n$，严格成立
 
    $$
@@ -248,7 +248,7 @@ $$
    D_{\mathrm{ext}}\bigl(\Phi(\rho)\,\Vert\,\Phi(\sigma)\bigr) \;\le\; D_{\mathrm{ext}}(\rho\,\Vert\,\sigma).
    $$
 
-4. **唯一正实余弦不动点与 $\pi$ 处有理逆幂级数绝对收敛（Dottie 自指生命稳态端点）**：
+4. **唯一正实余弦不动点与 $\pi$ 处有理逆幂级数绝对收敛**：
    存在实数 $\theta^* \in (0, 1)$ 满足 $\cos\theta^* = \theta^*$，且在全体正实数 $t > 0$ 中唯一（$\cos t = t \implies t = \theta^*$）；同时有理系数形式逆幂级数 $\operatorname{inverse}$ 在 $\pi$ 处绝对可和并精确收敛于 $\theta^*$：
 
    $$
@@ -293,7 +293,7 @@ $$
    在半视界峰值 $N_A = 6$（$f = 0.500000$）处，$\theta^*$ 生命稳态的跨视界纠缠总熵达到 $4.133181\;\mathrm{nats} = 5.962920\;\mathrm{bits}$（占贝尔理论极限 $6.000000\;\mathrm{bits}$ 的 $99.3820\%$），并在 $N_A = 12$ 全域闭合时精确归零。
 
 3. **Dottie 稳态 $\theta^*$ 下的兰道尔排弧热耗下界与非平衡模自由能拆账**：
-   在精确自指不动点 $\theta^*$ 的有效模逆温 $\beta_{\mathrm{eff}}(\theta^*)\Delta E = 2\ln\cot\theta^* \approx 0.185518$（$k_B T_{\mathrm{eff}}(\theta^*)/\Delta E \approx 5.390324$）下，由 [@thm-ch34-bounded-horizon-entanglement-thermodynamics] 第 3 款兰道尔不等式 $\beta Q \ge -\Delta S_{\mathrm{sys}}$：
+   在精确自指不动点 $\theta^*$ 的有效模逆温 $\beta_{\mathrm{eff}}(\theta^*)\Delta E = 2\ln\cot\theta^* \approx 0.185518$（$k_B T_{\mathrm{eff}}(\theta^*)/\Delta E \approx 5.390324$）下（按 §34.17.3 的热浴假定），由 [@thm-ch34-bounded-horizon-entanglement-thermodynamics] 第 3 款兰道尔不等式 $\beta Q \ge -\Delta S_{\mathrm{sys}}$：
    - 擦除整整 $1\;\mathrm{bit}$ 最大混合不确定度（$\Delta S_{\mathrm{sys}} = -\ln 2 \approx -0.693147\;\mathrm{nats}$）所需的无量纲最小模热量为
 
      $$

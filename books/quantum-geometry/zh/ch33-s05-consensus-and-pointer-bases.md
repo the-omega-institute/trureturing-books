@@ -311,7 +311,7 @@ $$
    F_{\mathrm{LF}} \;=\; \|A_1 + 2A_2\| + \|2A_1 - 2A_2 + A_3\| + \|A_2 + A_3\| \;=\; \sqrt{5} + 3 + \sqrt{2 + \sqrt{2}} \;\approx\; 7.083827 \;>\; 6;
    $$
 
-   掺入白噪声 $\rho_v = v|\psi'\rangle\langle\psi'| + (1 - v)\frac{1}{4}I_4$（$0 \le v \le 1$）时，$F_{\mathrm{LF}}(v) = v F_{\mathrm{LF}}(1)$，严格违背始于临界可见度 $v > v_{\mathrm{crit}} = 6 / (\sqrt{5} + 3 + \sqrt{2 + \sqrt{2}}) \approx 0.8470$。该实验在光子双比特逻辑实验室上获证，其外推至宏观人脑观察者仍依赖理想相干隔离与逆演化可控性假设。
+   掺入白噪声 $\rho_v = v|\psi'\rangle\langle\psi'| + (1 - v)\frac{1}{4}I_4$（$0 \le v \le 1$）时，$F_{\mathrm{LF}}(v) = v F_{\mathrm{LF}}(1)$，严格违背始于临界可见度 $v > v_{\mathrm{crit}} = 6 / (\sqrt{5} + 3 + \sqrt{2 + \sqrt{2}}) \approx 0.8470$。该实验在光子双比特逻辑实验室上获证（推出的是析取结论：AOE、局域性与无超决定论三者至少弃其一），其外推至宏观人脑观察者仍依赖理想相干隔离与逆演化可控性假设。
 :::
 
 最后，如果现有观察者群体的共识全部局限在一张低秩平面 $S = \operatorname{span}(\mathbf{e}_1, \mathbf{e}_2) \subset \mathbb{R}^3$ 内——例如 $\mathbf{M}_0 = \operatorname{diag}(a, b, 0)$（$a, b > 0,\; a + b = 1$，注意 $\operatorname{Tr}(\mathbf{M}_0) = 1$，切勿将其与迹为 $2$ 的几何子空间投影 $P_S = \operatorname{diag}(1, 1, 0)$ 混同）——共识会不会把世界永远锁死在二维平面里？由 [@thm-ch33-consensus-quadratic-and-gram] 第 3 款与 [@thm-ch33-consensus-revision-and-escape] 第 2 款，只要存在尚未被当前共识张开的非零正交补 $S^\perp = \operatorname{span}(\mathbf{e}_3) \neq \bot$，一位倾角为 $\beta \in [0, \frac{\pi}{2}]$ 的**新维度拓荒观察者** $\mathbf{n}(\beta) = \cos\beta\,\mathbf{e}_1 + \sin\beta\,\mathbf{e}_3$ 便携带着精确的正交逃逸残差 $\|(I_3 - P_S)\mathbf{n}(\beta)\| = |\sin\beta|$！赋予拓荒者耦合权重 $\eta \in (0, 1)$ 并把既有群体权重按 $1 - \eta$ 归一，更新后的共识张量

@@ -1,7 +1,7 @@
 # A.1 Master Translation Dictionary Across All Ten Parts, Coda, and Appendices D–E {#sec-appendix-a-master-table}
 
 ::: {.remark #rem-appendix-a-master-dictionary title="Master Dictionary of Conventional, Geometric, and Formal Terms (Including literature result, not formalized in this book)"}
-**Literature result, not formalized in this book (for sub-clauses tagged `Literature`; entries tagged `LEAN ✓` with clickable GID links are kernel-verified in this book, `OPEN` marks unresolved open conjectures, and `MODEL` marks interpretive geometric models).**
+**Literature result, not formalized in this book (for sub-clauses tagged `Literature`; for entries tagged `LEAN ✓` with clickable GID links, the linked declarations are kernel-verified in this book, `OPEN` marks unresolved open conjectures, and `MODEL` marks interpretive geometric models).**
 
 **Measurement / Physical Quantity**<br/>(测量 / 物理量)
 
@@ -12,7 +12,7 @@
 [`born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton)
 
 **One-Line Invariant / Identity:**
-$\operatorname{prob}_0(\psi) + \operatorname{prob}_1(\psi) = \|\psi_0\|^2 + \|\psi_1\|^2$
+$\rho \succeq 0,\ \operatorname{Tr}\rho = 1 \implies \operatorname{bornProbability}(\rho, I) = 1$, additive and nonnegative on projections
 
 **Epistemic Status:**
 `LEAN ✓` (Ch 1–2)
@@ -26,7 +26,7 @@ $\operatorname{prob}_0(\psi) + \operatorname{prob}_1(\psi) = \|\psi_0\|^2 + \|\p
 [`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian)
 
 **One-Line Invariant / Identity:**
-$x^2 + y^2 + z^2 = 1 \iff \operatorname{Tr}(\rho^2) = 1$
+$\operatorname{Tr}M = 1,\ M^2 = M \implies x^2 + y^2 + z^2 = 1$ ($M$ a $2\times 2$ Hermitian matrix)
 
 **Epistemic Status:**
 `LEAN ✓` (Ch 1–3, 26)
@@ -54,7 +54,7 @@ $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad P_\psi^2 = P_\psi$
 [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)
 
 **One-Line Invariant / Identity:**
-$P_\psi P_\phi P_\psi = |\langle\psi, \phi\rangle|^2 P_\psi$
+$\rho = \lvert\psi\rangle\langle\psi\rvert,\ P_k = \lvert\phi\rangle\langle\phi\rvert \implies \operatorname{recordWeight}_k = \operatorname{Tr}(\rho P_k) = \lvert\langle\phi\mid\psi\rangle\rvert^2$
 
 **Epistemic Status:**
 `LEAN ✓` (Ch 2, 28)
@@ -68,10 +68,10 @@ $P_\psi P_\phi P_\psi = |\langle\psi, \phi\rangle|^2 P_\psi$
 [`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law)
 
 **One-Line Invariant / Identity:**
-$\langle u, v\rangle = 0 \implies \|u + v\|^2 = \|u\|^2 + \|v\|^2$
+$\|u + v\|^2 + \|u - v\|^2 = 2(\|u\|^2 + \|v\|^2)$
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 1, 27, Coda)
+`LEAN ✓` (parallelogram identity only) (Ch 1, 27, Coda)
 
 **Global Phase $e^{i\alpha}|\psi\rangle$**<br/>(全局相位与射线等价)
 
@@ -82,7 +82,7 @@ $\langle u, v\rangle = 0 \implies \|u + v\|^2 = \|u\|^2 + \|v\|^2$
 [`unitary_phase_of_connected_ray_tests`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests)
 
 **One-Line Invariant / Identity:**
-$|c| = 1 \implies P_{c\psi} = P_\psi$
+$A$ unitary, preserving coordinate rays and a connected ray family $\implies A = c\,I,\ |c| = 1$
 
 **Epistemic Status:**
 `LEAN ✓` (Ch 1, 27)
@@ -166,7 +166,7 @@ $\hat{\mathbf{I}}^2 = -1,\quad ZX = -XZ$
 [`calibrated_group`](lean:D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group)
 
 **One-Line Invariant / Identity:**
-$U(s+t) = U(s)U(t),\quad v \mapsto R v \widetilde{R}$
+$U(0) = 1,\ U(s+t) = U(s)U(t),\ U^*U = 1,\ U$ differentiable at $0 \implies U(t) = \exp(-itH/\hbar)$ with $H$ self-adjoint ($v \mapsto R v \widetilde{R}$ is not part of this declaration)
 
 **Epistemic Status:**
 `LEAN ✓` (Ch 7, 27)
@@ -180,10 +180,10 @@ $U(s+t) = U(s)U(t),\quad v \mapsto R v \widetilde{R}$
 [`bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal)
 
 **One-Line Invariant / Identity:**
-$\rho_A = \frac{1}{2}I_2,\quad \psi_{00}\psi_{11} - \psi_{01}\psi_{10} \neq 0$
+Bell state: $\rho_A = \frac{1}{2}I_2,\ \rho_A^2 \neq \rho_A$; the concurrence criterion $\psi_{00}\psi_{11} - \psi_{01}\psi_{10} \neq 0$ for general pure states is a `Literature` result
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 8, 13)
+`LEAN ✓` (Bell-state marginal) / `Literature` (concurrence criterion) (Ch 8, 13)
 
 **Quantum State Tomography**<br/>(量子态层析)
 
@@ -194,10 +194,10 @@ $\rho_A = \frac{1}{2}I_2,\quad \psi_{00}\psi_{11} - \psi_{01}\psi_{10} \neq 0$
 [`rational_six_axis_open_cover`](lean:D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover)
 
 **One-Line Invariant / Identity:**
-$\forall v \in S^2,\; \exists i \in \operatorname{Fin} 6,\; \langle v, a_i\rangle \neq 0$
+six open sets $C_1, \dots, C_6$ cover $S^2$, and no $C_i$ contains an orthogonal pair
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 9)
+`LEAN ✓` (rational six-axis open cover) (Ch 9)
 
 **Order Dependence vs. Pancharatnam–Berry Phase**<br/>(顺序依赖与贝里相位)
 
@@ -233,13 +233,13 @@ $\begin{aligned}&R_z(\phi)R_{\text{xy}}(\theta,0)\\&\quad\cdot R_z(-\phi)\\&=R_{
 **$S^3 \to \mathrm{SO}(3)$ double cover & Hairy Ball $\chi(S^2) = 2$**: 2-sphere vortices require lifting to parallelizable $S^3$ ($\chi(S^3)=0$)
 
 **Lean-Facing Object / Locked GID:**
-[`projection_probability_flow`](lean:D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow)
+[`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift)
 
 **One-Line Invariant / Identity:**
-$R(2\pi) = -1 \in S^3,\quad R(4\pi) = +1$
+$R(2\pi) = -1 \in S^3,\quad R(4\pi) = +1$ (what is formalized is the squaring cover $z \mapsto z^2$ of the circle)
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` (Ch 12)
+`LEAN ✓` (circle double cover) / `Literature` ($S^3 \to \mathrm{SO}(3)$ double cover, Hairy Ball theorem and gimbal lock) (Ch 5, 10)
 
 **Bell–CHSH Inequality & Tsirelson Bound**<br/>(贝尔不等式与齐雷尔森界)
 
@@ -281,7 +281,7 @@ $P_1 P_2 = P_2 P_1 \iff x_1 z_2 \oplus z_1 x_2 = 0$
 $R_{\psi}\,R_{\perp} = \operatorname{Rot}(2\theta),\quad T_n(\cos\theta) = \cos(n\theta)$
 
 **Epistemic Status:**
-`LEAN ✓` (Ch 15)
+`LEAN ✓` (uniform operator rotation in a 2D subspace, finite Poisson summation) / `Literature` (Chebyshev identity, QSVT and Szegedy walks) (Ch 15–16)
 
 **Solovay–Kitaev Compilation Theorem**<br/>(Solovay–Kitaev 门编译)
 
@@ -303,7 +303,7 @@ $\operatorname{Tr}(U^{n+1}) = \operatorname{Tr}(U)\operatorname{Tr}(U^n) - \oper
 **Minkowski hyperbolic rotor ($\cosh\eta - \gamma_0\gamma_1\sinh\eta$) & null lightcone rigidity**
 
 **Lean-Facing Object / Locked GID:**
-[`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)
+[`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation), [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)
 
 **One-Line Invariant / Identity:**
 $\cosh^2\eta-\sinh^2\eta=1$； for a real quadratic form $Q$ on $\mathbb{R}\times\mathbb{R}^d$: $\begin{aligned}&(\forall v,\\&\eta(v,v)=0\\&\implies Q(v)=0)\\&\implies\exists c\in\mathbb{R},\\&Q=c\,\eta\end{aligned}$
@@ -393,7 +393,7 @@ $\sum_{n=1}^\infty n^{-s} = \prod_p (1 - p^{-s})^{-1}\quad (\operatorname{Re}(s)
 $(2a+b)^2 - 5b^2 = 4(a^2 + ab - b^2)$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` (Ch 23)
+`LEAN ✓` / `Literature` / `OPEN` ($H_{10}(\mathbb{Q})$) (Ch 23)
 
 **Fixed-Point Theorems & Self-Reference $\psi = \psi(\psi)$**<br/>(不动点定理与自指映射)
 
@@ -460,7 +460,7 @@ $\sum_i p_i \rho_i = \Phi(\rho),\quad p_i\ne0\implies\operatorname{Tr}(\rho_i) =
 [`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law), [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)
 
 **One-Line Invariant / Identity:**
-$\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2,\quad m^2 - 2n^2 = \pm 1,\quad \cos\theta^* = \theta^*$
+$\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2,\quad m^2 - 2n^2 = \pm 1,\quad \cos\theta^* = \theta^*$ (representative equations of the tiers, not conclusions of the listed declarations)
 
 **Epistemic Status:**
 `LEAN ✓` / `Literature` (Ch 29, Coda)
@@ -477,12 +477,12 @@ $\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2,\quad m^2 - 2n^2 = \pm 1,\quad \cos\
 $\cos\theta_p = \frac{a_p}{2\sqrt{p}} \in [-1, +1],\quad d\mu_{\mathrm{ST},\text{non-CM}} = \frac{2}{\pi}\sin^2\theta\,d\theta$
 
 **Epistemic Status:**
-`LEAN ✓` / `Literature` (Ch 29)
+`Literature` (Ch 29; the two listed declarations vouch only for their algebraic statements and do not concern prime splitting or Sato–Tate)
 
 **Wheeler–DeWitt Timeless State, Page–Wootters Slicing & Geometric Causality**<br/>(惠勒—德维特无时间态、佩奇—伍特斯切片与几何因果律)
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Order-independence abolishes sequential time: $(2k)!$ de-ordering model (`MODEL`), conditional slicing under ideal clock assumptions (`Literature`), Gram rigidity $\det G \ge 0$ (`LEAN ✓`), and stationary phase $\delta S=0$ (bivector model $+\mathbf{\Omega}-\mathbf{\Omega}=0$)**
+**Order-independence abolishes sequential time: $(2k)!$ de-ordering model (`MODEL`), conditional slicing under ideal clock assumptions (`Literature`), Gram rigidity $\det G \ge 0$ (`Literature`), and stationary phase $\delta S=0$ (bivector model $+\mathbf{\Omega}-\mathbf{\Omega}=0$)**
 
 **Lean-Facing Object / Locked GID:**
 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization), [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState)
@@ -566,13 +566,13 @@ $s_k = \inf\{\delta\ge0 \mid k\text{-SAT}\in 2^{\delta n}(n+m)^{O(1)}\},\quad r_
 **Orthogonal Triad of Entanglement, $P=NP$ & Entropy**（量子纠缠、$P=NP$ 与熵的正交三位一体）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Maximally mixed Bell marginals, orthogonal local-vs-correlation blind-spot decomposition, von Neumann entropy-production coherence-deletion identity, and unique positive cosine fixed point (`LEAN ✓`), coupled with exact two-qubit pure-state Pythagorean conservation $\|\mathbf{r}_A\|^2 + \tau(A:\bar{A}) = \cos^2\theta + \sin^2\theta \equiv 1$ ($S_L(\rho_A) \equiv \tau$, $S_{\mathrm{vN}}(\rho_A) = H_{\mathrm{bin}}\bigl(\frac{1+\cos\theta}{2}\bigr)$, giving $S_{\mathrm{vN}} \approx 0.559\text{ bits}$ at $\theta^* \approx 42.35^\circ$), Hastings's (2007) 1D gapped area law vs. Page's (1993) volume law, CKW monogamy & the Harlow–Hayden (2013) / Susskind (2016) radiation-decoding circuit-complexity barrier, and postselected $\mathrm{PostBQP}=\mathrm{PP}$ alongside shared-entanglement verification $\mathrm{MIP}^*=\mathrm{RE}$ (Ji et al. 2020, `Literature`; standard Turing-machine $\mathrm{P}\neq\mathrm{NP}$ remains `OPEN`), grounding the partial-trace horizon triad model and 3D lab `entanglement-entropy-complexity` (`MODEL`)**
+**Maximally mixed Bell marginals, orthogonal local-vs-correlation blind-spot decomposition, von Neumann entropy-production coherence-deletion identity, and unique positive cosine fixed point (`LEAN ✓`), coupled with exact two-qubit pure-state Pythagorean conservation $\|\mathbf{r}_A\|^2 + \tau(A:\bar{A}) = \cos^2\theta + \sin^2\theta \equiv 1$ ($S_L(\rho_A) \equiv \tau$, $S_{\mathrm{vN}}(\rho_A) = H_{\mathrm{bin}}\bigl(\frac{1+\cos\theta}{2}\bigr)$, giving $S_{\mathrm{vN}} \approx 0.559\text{ bits}$ at $\theta^* \approx 42.35^\circ$ ($\theta$ the Bloch polar angle)), Hastings's (2007) 1D gapped area law vs. Page's (1993) volume law, CKW monogamy & the Harlow–Hayden (2013) / Susskind (2016) radiation-decoding circuit-complexity barrier, and postselected $\mathrm{PostBQP}=\mathrm{PP}$ alongside shared-entanglement verification $\mathrm{MIP}^*=\mathrm{RE}$ (Ji et al. 2020, `Literature`; standard Turing-machine $\mathrm{P}\neq\mathrm{NP}$ remains `OPEN`), grounding the partial-trace horizon triad model and 3D lab `entanglement-entropy-complexity` (`MODEL`)**
 
 **Lean-Facing Object / Locked GID:**
 [`bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal), [`local_marginal_correlation_blind_spot`](lean:D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot), [`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity), [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)
 
 **One-Line Invariant / Identity:**
-$\|\mathbf{r}_A\|^2 + \tau(A:\bar{A}) = \cos^2\theta + \sin^2\theta = 1,\quad S_L(\rho_A) = \sin^2\theta,\quad \chi_{\mathrm{bond}} = 2^{S_{\mathrm{cut}}}$
+$\|\mathbf{r}_A\|^2 + \tau(A:\bar{A}) = \cos^2\theta + \sin^2\theta = 1,\quad S_L(\rho_A) = \sin^2\theta,\quad \chi_{\mathrm{bond}} \ge 2^{S_{\mathrm{cut}}}$
 
 **Epistemic Status:**
 `LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 8, 13, 24, [Ch 30](ch30-s05-entanglement-and-entropy.md#sec-ch30-entanglement-entropy-complexity-triad))
@@ -1056,7 +1056,7 @@ $\cos^2\epsilon + \sin^2\epsilon = 1,\quad F^i(\omega) = -\frac{1}{2}f^i_{ab}\,e
 **Cross-Horizon Entanglement Arc-Bodies, Bounded Non-Presumption Partial Trace, Modular Temperature & Laws of Thermodynamics**（跨边界极小圆弧体纠缠、“受限不妄我”偏迹视界、模流有效温度与热力学四律）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Product-state right and left marginal recovery identities, rank-one Bell pure-state idempotence with maximally mixed local marginal $\frac{1}{2}I_2$, bipartite traceless Hermitian orthogonal decomposition into local marginal and correlation blind-spot sectors, reduced-state irreversibility as environmental record access defect, leave-one-out `escapePairs` disjoint union decomposition, single-qubit computational-basis pinching Hilbert–Schmidt Pythagoras, stepwise unitary-plus-pinching coherence-deletion relative-entropy production, Gibbs thermal free-energy relative-entropy difference identity, Landauer balance identity with nonnegative heat bound and exact saturation criterion, extended quantum relative-entropy channel data-processing inequality, and positive cosine fixed-point rational inverse endpoint (`LEAN ✓`); paired with pure-state Schmidt decomposition $\lvert\Psi_{AB}(\theta)\rangle = \cos\theta\lvert 0_A 0_B\rangle + \sin\theta\lvert 1_A 1_B\rangle$ local-versus-entanglement Pythagorean budget $P_{\mathrm{loc}}(\theta) + C_{\mathrm{ent}}(\theta) = \cos^2(2\theta) + \sin^2(2\theta) = 1$, two-level spectrum-matching modular Hamiltonian $K_A = -\ln\rho_A$ and effective modular temperature parametrization $\frac{k_B T_{\mathrm{eff}}(\theta)}{\Delta E} = \frac{1}{2\ln\cot\theta}$ (strictly distinguished from physical bath thermometers and the Rindler Bisognano–Wichmann Unruh temperature $k_B T_U = \frac{\hbar a}{2\pi c}$), the deterministic $12$-qubit nested-pair cut tent curve $S(A;\theta) = \min(N_A, 12-N_A)S_A(\theta)$ (contrasted with Haar-random typical Page entropy), and six-decimal benchmarks at the Dottie homeostatic root $\theta^* = \cos\theta^* \approx 0.739085\;\mathrm{rad}$ ($42.346459^\circ$, $S_A(\theta^*) \approx 0.993820\;\mathrm{bits}$, net order bias $9.25\%$, `manual derivation` / `NUM`), together with von Neumann (1927/1932) partial-trace entropy, Tomita (1967)–Takesaki (1970) modular automorphism flow and KMS thermal periodicity, Connes–Rovelli (1994) thermal time, Bisognano–Wichmann (1975/1976) and Unruh (1976) horizon thermality, Landauer's (1961) erasure principle, Bekenstein–Hawking (1973/1975) and Ryu–Takayanagi (2006) holographic minimal-surface entropy, Page's (1993) radiation curve, Jacobson's (1995) thermodynamic horizon equation of state, and Schrödinger (1944) / Prigogine (1977) dissipative living homeostasis (`Literature`; microscopic black-hole evaporation unitarity and continuum `3+1D` quantum gravity governed by Appendices D/E and marked `OPEN`), establishing the four-step causal chain from entanglement and bounded non-presumption partial trace to entropy, modular flow temperature, and the laws of thermodynamics (`MODEL`)**
+**Product-state right and left marginal recovery identities, rank-one Bell pure-state idempotence with maximally mixed local marginal $\frac{1}{2}I_2$, bipartite traceless Hermitian orthogonal decomposition into local marginal and correlation blind-spot sectors, reduced-state irreversibility as environmental record access defect, leave-one-out `escapePairs` disjoint union decomposition, single-qubit computational-basis pinching Hilbert–Schmidt Pythagoras, stepwise unitary-plus-pinching coherence-deletion relative-entropy production, Gibbs thermal free-energy relative-entropy difference identity, Landauer balance identity with nonnegative heat bound and exact saturation criterion, extended quantum relative-entropy channel data-processing inequality, and positive cosine fixed-point rational inverse endpoint (`LEAN ✓`); paired with pure-state Schmidt decomposition $\lvert\Psi_{AB}(\theta)\rangle = \cos\theta\lvert 0_A 0_B\rangle + \sin\theta\lvert 1_A 1_B\rangle$ local-versus-entanglement Pythagorean budget $P_{\mathrm{loc}}(\theta) + C_{\mathrm{ent}}(\theta) = \cos^2(2\theta) + \sin^2(2\theta) = 1$, two-level spectrum-matching modular Hamiltonian $K_A = -\ln\rho_A$ and effective modular temperature parametrization $\frac{k_B T_{\mathrm{eff}}(\theta)}{\Delta E} = \frac{1}{2\ln\cot\theta}$ (strictly distinguished from physical bath thermometers and the Rindler Bisognano–Wichmann Unruh temperature $k_B T_U = \frac{\hbar a}{2\pi c}$), the deterministic $12$-qubit nested-pair cut tent curve $S(A;\theta) = \min(N_A, 12-N_A)S_A(\theta)$ (contrasted with Haar-random typical Page entropy), and six-decimal benchmarks at the Dottie homeostatic root $\theta^* = \cos\theta^* \approx 0.739085\;\mathrm{rad}$ ($42.346459^\circ$, $\theta$ the Schmidt angle, $S_A(\theta^*) \approx 0.993820\;\mathrm{bits}$, net order bias $9.25\%$, `manual derivation` / `NUM`), together with von Neumann (1927/1932) partial-trace entropy, Tomita (1967)–Takesaki (1970) modular automorphism flow and KMS thermal periodicity, Connes–Rovelli (1994) thermal time, Bisognano–Wichmann (1975/1976) and Unruh (1976) horizon thermality, Landauer's (1961) erasure principle, Bekenstein–Hawking (1973/1975) and Ryu–Takayanagi (2006) holographic minimal-surface entropy, Page's (1993) radiation curve, Jacobson's (1995) thermodynamic horizon equation of state, and Schrödinger (1944) / Prigogine (1977) dissipative living homeostasis (`Literature`; microscopic black-hole evaporation unitarity and continuum `3+1D` quantum gravity governed by Appendices D/E and marked `OPEN`), establishing the four-step causal chain from entanglement and bounded non-presumption partial trace to entropy, modular flow temperature, and the laws of thermodynamics (`MODEL`)**
 
 **Lean-Facing Object / Locked GID:**
 [`marginalRight_productState`](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState), [`marginalLeft_productState`](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState), [`bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal), [`local_marginal_correlation_blind_spot`](lean:D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot), [`reduced_irreversibility_is_access_defect`](lean:D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect), [`escapePairs_without_eq_union`](lean:D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union), [`pinching_hilbert_schmidt_pythagorean`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean), [`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity), [`gibbs_relative_entropy_energy_difference`](lean:D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference), [`marginal_entropy_change_eq_mutual_information_change`](lean:D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change), [`landauer_identity_from_balances`](lean:D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances), [`landauer_bound_of_balance`](lean:D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance), [`landauer_saturation_iff`](lean:D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff), [`extended_quantum_relative_entropy_channel_dpi`](lean:D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi), [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)
@@ -1098,7 +1098,7 @@ $P_{\mathbf{I}} P_{\mathbf{V}} P_{\mathbf{I}} = (\cos^2\theta)\,P_{\mathbf{I}},\
 **Spherical Attractor Basins, Bounded-Martingale Sampling Laws & Single-Outcome Selection Boundary**（球面吸引盆、有界鞅抽样律与单次记录选支实现边界）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Rank-one Born trace pairing weight, complete record-weight normalization, positive-weight Lüders conditional-state positivity, unread-pinching fixed-point characterization and idempotence, and finite contracting fixed-point stabilization (`LEAN ✓`); paired with explicit bistable-drift and non-uniform-threshold countermodels violating Born frequencies (at $p_0 = \cos^2 30^\circ = 3/4$, i.e. $z_0 = +1/2$, the fixed deterministic equatorial separatrix $\lambda \equiv 0$ yields $p_+^{\mathrm{det}}(+1/2) = 1$, while the $p_0$-independent hemispherical area share is $1/2$ and symmetric quadratic noise $f_{\mathrm{quad}}(\lambda) = \frac{3}{2}\lambda^2$ yields $9/16 \neq 3/4$) versus a bounded-martingale state-space symmetric random walk with absorbing endpoints whose hitting probability conserves $\mathbb{P}(Z_\tau = 1 \mid Z_0 = p_0) = p_0$ (`manual derivation` / `Literature`), separating ensemble Born weights and non-selective Lüders dephasing from single-run outcome selection `prob-ch34-single-outcome-realization` (`MODEL` / `OPEN`)**
+**Rank-one Born trace pairing weight, complete record-weight normalization, positive-weight Lüders conditional-state positivity, unread-pinching fixed-point characterization and idempotence, and finite-step stabilization of state-deleting finite set updates (`LEAN ✓`); paired with explicit bistable-drift and non-uniform-threshold countermodels violating Born frequencies (at $p_0 = \cos^2 30^\circ = 3/4$, i.e. $z_0 = +1/2$, the fixed deterministic equatorial separatrix $\lambda \equiv 0$ yields $p_+^{\mathrm{det}}(+1/2) = 1$, while the $p_0$-independent hemispherical area share is $1/2$ and symmetric quadratic noise $f_{\mathrm{quad}}(\lambda) = \frac{3}{2}\lambda^2$ yields $9/16 \neq 3/4$) versus a bounded-martingale state-space symmetric random walk with absorbing endpoints whose hitting probability conserves $\mathbb{P}(Z_\tau = 1 \mid Z_0 = p_0) = p_0$ (`manual derivation` / `Literature`), separating ensemble Born weights and non-selective Lüders dephasing from single-run outcome selection `prob-ch34-single-outcome-realization` (`MODEL` / `OPEN`)**
 
 **Lean-Facing Object / Locked GID:**
 [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight), [`recordWeight_sum`](lean:D5/S3/Observer/Conditioning.recordWeight_sum), [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState), [`unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff), [`finite_record_pinching_idempotent`](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent), [`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize)
@@ -1140,7 +1140,7 @@ $D(\mathcal{N}(\rho)\,\|\,\mathcal{N}(\sigma)) \le D(\rho\,\|\,\sigma),\quad I(Q
 **Shared Thermodynamic Arrow, Twin Past-Hypothesis Initial Conditions & Horizon Anti-Circularity Boundary for $\Lambda_{\mathrm{cos}}$**（共享热力学时间箭头、过去假设双重初值与宇宙学常数视界反循环边界）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Vanishing product-state quantum mutual information, exact bipartite unitary marginal-entropy vs. mutual-information balance $\Delta S_A + \Delta S_B = \Delta I(A{:}B)$, Cayley unit-circle critical-line criterion, finite-layer projection escape, and uniform completion obstruction (`LEAN ✓`); paired with the two-qubit countermodels of $U = (I_4 - i X\otimes X)/\sqrt{2}$ Bell disentanglement ($\Delta S_A = \Delta S_B = -1\;\mathrm{bit} = -\ln 2\;\mathrm{nats}$ arrow reversal), globally maximally mixed product bath $(I_2/2)\otimes(I_2/2)$ stall ($\Delta S_A = \Delta S_B = 0$), and `SWAP` on $(I_2/2)\otimes\lvert 0\rangle\langle 0\rvert$ (opposing local arrows $(\Delta S_A, \Delta S_B) = (-1, +1)\;\mathrm{bit}$)—clarifying that $I_0(A{:}B) = 0$ suffices for a nonnegative **sum** $\Delta S_A + \Delta S_B = I_1 \ge 0$, while unsaturated local marginals ($S_{\alpha,0} < \ln d_\alpha$) supply positive **headroom** permitting strict local entropy growth without alone forcing every individual $\Delta S_\alpha \ge 0$ under arbitrary `SWAP`-like unitaries—alongside the Minkowski ($\Lambda_{\mathrm{cos}}=0$ Rindler horizon) and anti-de Sitter ($\Lambda_{\mathrm{cos}}<0$) vs. de Sitter $R_H^2 = 3/\Lambda_{\mathrm{cos}}$ ($S_{\mathrm{dS}} = 3\pi/(\Lambda_{\mathrm{cos}}\ell_P^2)$) anti-circularity audit anchoring `prob-ch34-past-hypothesis-and-cosmological-constant` (`manual derivation` / `Literature` / `MODEL` / `OPEN`)**
+**Vanishing product-state quantum mutual information, exact bipartite unitary marginal-entropy vs. mutual-information balance $\Delta S_A + \Delta S_B = \Delta I(A{:}B)$, Cayley unit-circle critical-line criterion, finite-layer projection escape, and uniform completion obstruction (`LEAN ✓`); paired with the two-qubit countermodels of $U = (I_4 - i X\otimes X)/\sqrt{2}$ disentangling the Bell-type state $(\lvert 00\rangle + i\lvert 11\rangle)/\sqrt{2}$ ($\Delta S_A = \Delta S_B = -1\;\mathrm{bit} = -\ln 2\;\mathrm{nats}$ arrow reversal), globally maximally mixed product bath $(I_2/2)\otimes(I_2/2)$ stall ($\Delta S_A = \Delta S_B = 0$), and `SWAP` on $(I_2/2)\otimes\lvert 0\rangle\langle 0\rvert$ (opposing local arrows $(\Delta S_A, \Delta S_B) = (-1, +1)\;\mathrm{bit}$)—clarifying that $I_0(A{:}B) = 0$ suffices for a nonnegative **sum** $\Delta S_A + \Delta S_B = I_1 \ge 0$, while unsaturated local marginals ($S_{\alpha,0} < \ln d_\alpha$) supply positive **headroom** permitting strict local entropy growth without alone forcing every individual $\Delta S_\alpha \ge 0$ under arbitrary `SWAP`-like unitaries—alongside the Minkowski ($\Lambda_{\mathrm{cos}}=0$ Rindler horizon) and anti-de Sitter ($\Lambda_{\mathrm{cos}}<0$) vs. de Sitter $R_H^2 = 3/\Lambda_{\mathrm{cos}}$ ($S_{\mathrm{dS}} = 3\pi/(\Lambda_{\mathrm{cos}}\ell_P^2)$) anti-circularity audit anchoring `prob-ch34-past-hypothesis-and-cosmological-constant` (`manual derivation` / `Literature` / `MODEL` / `OPEN`)**
 
 **Lean-Facing Object / Locked GID:**
 [`quantumMutualInformation_productState`](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState), [`marginal_entropy_change_eq_mutual_information_change`](lean:D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change), [`cayley_ratio_norm_one_iff_critical_line`](lean:D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line), [`finite_layer_projection_escape`](lean:D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape), [`uniform_completion_obstruction`](lean:D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction)
@@ -1221,7 +1221,7 @@ $\zeta(\sigma + \hat{\mathbf{i}}t) = \prod_{p\in\mathbb{P}}(1 - p^{-s})^{-1} = \
 **Epistemic Status:**
 `LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `OPEN` / `MODEL` ([Ch 34 §34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs), [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot), [§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit), [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling), [Ch 22 §22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4), [App C](appendix-c.md))
 
-**Arithmetic Pivot Renormalization & Multi-Stage Critical-Strip Resonant Tunneling: Breaking the Turán–Zeno Trap & Piercing the 4/7 Mollifier Wall**（算术枢轴重整与临界带多级共振隧穿：破除图兰芝诺陷阱与击穿 4/7 磨光器墙）
+**Arithmetic Pivot Renormalization & Multi-Stage Critical-Strip Resonant Tunneling: Confronting the Turán–Zeno Trap & Probing the 4/7 Mollifier Wall**（算术枢轴重整与临界带多级共振隧穿：直面图兰芝诺陷阱与叩问 4/7 磨光器墙）
 
 **Geometric Intuition Term (本书几何直觉语言):**
 **Unique simple pole of residue $1$ at $s = 1$, nonvanishing completed $\zeta$ on $\operatorname{Re}(s) \ge 1$, sufficiency of excluding zeros from the open right half-strip $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ for `RiemannHypothesis`, the Cayley unit-circle criterion $\lVert w(s)\rVert = \lvert(s-1)/s\rvert = 1 \iff \operatorname{Re}(s) = \frac{1}{2}$ and vanishing radial-defect equivalence, Hilbert-space operator Gram square-root realizability, chordal and rank-bounded positive-semidefinite clique completion, explicit finite-window Robin violation triggered by hypothetical right-half-strip zeros, and the variational `IsLeast` minimum of Hermitian block Schur-complement quadratic forms for strictly positive-definite interior blocks (`LEAN ✓`); paired with the 100-digit interval Rouché certificate for the first Turán spurious zero of $\zeta_{19}(s)$ at $\sigma_0 \approx 1.0069878449,\; t_0 \approx 1.554178\times 10^{14}$ (contrasted with interval-certified positivity $L_M(\sigma) > 0$ for $1 \le M \le 10^6$), exact rational block Schur reduction $\widetilde{G}_{PP} = \bigl(\begin{smallmatrix} 5/9 & 5/18 \\ 5/18 & 8/9 \end{smallmatrix}\bigr) \succ 0$ ($\det G = \frac{3}{4}\cdot\frac{5}{12} = \frac{5}{16}$) and Moore–Penrose pseudoinverse inheritance on `[1, 2 | 3, 6]`, and conditional dyadic Cayley repeated-squaring amplification $\lvert w\rvert^{2^\ell}$ exploding in $O(\log(\gamma_0/\delta))$ layers at height $\gamma_1$ (`manual derivation` / `NUM`), together with Turán (1948), Haselgrove (1958), Montgomery (1983), and Platt–Trudgian (2016) partial-sum zero classification, the Nyman–Beurling–Báez-Duarte–Burnol sequential logarithmic lower bound $C_{\mathrm{NBB}}/\ln M \approx 0.046191/\ln M$, Selberg–Levinson–Conrey ($\vartheta = \frac{4}{7}$) and Pratt–Robles–Zaharescu–Zeindler ($> 41.72\%$) mollifier dispersion bounds, and Duan–Mao–Mao–Shu–Yin (2025) total-order-free local-wavefront sparse shortest-path pivots (`Literature`; area-law decay of transverse shift-convolution entanglement `prob-ch34-arithmetic-pivot-area-law` and the global Riemann Hypothesis marked `OPEN`), establishing the Arithmetic MERA Schur-pivot and multi-stage resonant-tunneling synthesis alongside interactive laboratory `arithmetic-pivot-resonant-tunneling-sandbox` (`ARITH//PIVOT`, `MODEL`)**
@@ -1308,7 +1308,7 @@ $\lVert\mathcal{F}_{\mathbf{I}}(x_{k-1}) - x_{k-1}\rVert \le \varepsilon_{\mathr
 **Universal Comparison Clock Frequency $\nu_0$, Light-Speed Halting-Precision Floor & Gravitational Holographic Information-Density Clock Dilation**（普适比较主频 $\nu_0$、光速推理精度下界与引力全息信息密度钟慢）
 
 **Geometric Intuition Term (本书几何直觉语言):**
-**Minkowski null-cone quadratic-form scalar rigidity, Fubini–Study orthogonal-record minimum step duration $\tau \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$ and sequential record-count ceiling $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar}$, the Lagrange–Gram two-vector Pythagorean identity, and real hyperbolic boost norm conservation $\lvert\cosh r\rvert^2 - \lvert\sinh r\rvert^2 = 1$ (`LEAN ✓`); paired with light speed as the single-tick spatial stride of the universal comparison bus $c \equiv \ell_P\nu_0$, the radar round-trip causal horizon $R_{\max} = \frac{1}{2}c\Delta\tau$ and finite-tick halting-precision floor $\varepsilon_{\mathrm{self}} \ge \frac{1}{N_{\mathrm{ticks}}} = \frac{\ell_P}{c\Delta\tau}$ ($N_{\mathrm{ticks}} = 20 \implies \varepsilon_{\mathrm{self,min}} = 0.0500$), and orthogonal budget splitting under constant master frequency $\nu_0 \equiv \mathrm{const}$ across kinematic spatial-addressing load $\beta^2 = (v/c)^2$ ($\beta = 0.80 \implies d\tau/dt = 0.6000$; photon limit $\beta = 1 \implies d\tau = 0$) and Bekenstein–Schwarzschild holographic entanglement load $\eta_{\mathrm{info}}(r) = \frac{M}{M_{\max}(r)} = \frac{2GM}{rc^2} = \frac{r_s}{r}$ (neutron-star surface $r = 2.50\,r_s \implies \eta_{\mathrm{info}} = 0.400,\; d\tau/dt \approx 0.7746$; static horizon limit $r \to r_s \implies \eta_{\mathrm{info}} = 100\%,\; d\tau/dt = 0.0000$), yielding cascade proper-time rate $d\tau/dt = \sqrt{(1 - \eta_{\mathrm{info}}(r))(1 - \beta_{\mathrm{loc}}^2)}$ with identical $1.0000$ internal co-scaling across co-located neural, atomic, and photon-ruler sub-clocks (`manual derivation` / `NUM`), together with Mandelstam–Tamm (1945) and Margolus–Levitin (1998) quantum speed limits, Einstein's (1907/1915) equivalence principle and Schwarzschild's (1916) exterior metric, Bekenstein's (1973/1981) entropy bounds, and 't Hooft (1993) / Susskind (1995) holography (`Literature`; spatial curvature $g_{rr}$ and full $3+1\mathrm{D}$ spin-$2$ gravitational field emergence from discrete complexes strictly marked `OPEN` `prob-ch34-gravity-dynamics-and-coupling`), establishing the universal comparison-budget model and interactive laboratory `universal-clock-gravity-dilation-sandbox` (`CLOCK//DILATION`, `MODEL`)**
+**Minkowski null-cone quadratic-form scalar rigidity, Fubini–Study orthogonal-record minimum step duration $\tau \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$ (given two angular-displacement bounds as premises) and sequential record-count ceiling $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar}$, the Lagrange–Gram two-vector Pythagorean identity, and real hyperbolic boost norm conservation $\lvert\cosh r\rvert^2 - \lvert\sinh r\rvert^2 = 1$ (`LEAN ✓`); paired with light speed as the single-tick spatial stride of the universal comparison bus $c \equiv \ell_P\nu_0$, the radar round-trip causal horizon $R_{\max} = \frac{1}{2}c\Delta\tau$ and finite-tick halting-precision floor $\varepsilon_{\mathrm{self}} \ge \frac{1}{N_{\mathrm{ticks}}} = \frac{\ell_P}{c\Delta\tau}$ ($N_{\mathrm{ticks}} = 20 \implies \varepsilon_{\mathrm{self,min}} = 0.0500$), and orthogonal budget splitting under constant master frequency $\nu_0 \equiv \mathrm{const}$ across kinematic spatial-addressing load $\beta^2 = (v/c)^2$ ($\beta = 0.80 \implies d\tau/dt = 0.6000$; photon limit $\beta = 1 \implies d\tau = 0$) and Bekenstein–Schwarzschild holographic entanglement load $\eta_{\mathrm{info}}(r) = \frac{M}{M_{\max}(r)} = \frac{2GM}{rc^2} = \frac{r_s}{r}$ (neutron-star surface $r = 2.50\,r_s \implies \eta_{\mathrm{info}} = 0.400,\; d\tau/dt \approx 0.7746$; static horizon limit $r \to r_s \implies \eta_{\mathrm{info}} = 100\%,\; d\tau/dt = 0.0000$), yielding cascade proper-time rate $d\tau/dt = \sqrt{(1 - \eta_{\mathrm{info}}(r))(1 - \beta_{\mathrm{loc}}^2)}$ with identical $1.0000$ internal co-scaling across co-located neural, atomic, and photon-ruler sub-clocks (`manual derivation` / `NUM`), together with Mandelstam–Tamm (1945) and Margolus–Levitin (1998) quantum speed limits, Einstein's (1907/1915) equivalence principle and Schwarzschild's (1916) exterior metric, Bekenstein's (1973/1981) entropy bounds, and 't Hooft (1993) / Susskind (1995) holography (`Literature`; spatial curvature $g_{rr}$ and full $3+1\mathrm{D}$ spin-$2$ gravitational field emergence from discrete complexes strictly marked `OPEN` `prob-ch34-gravity-dynamics-and-coupling`), establishing the universal comparison-budget model and interactive laboratory `universal-clock-gravity-dilation-sandbox` (`CLOCK//DILATION`, `MODEL`)**
 
 **Lean-Facing Object / Locked GID:**
 [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null), [`record_time_lower_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound), [`record_count_upper_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound), [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity), [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)
@@ -1347,7 +1347,7 @@ $\binom{d}{2} = d \iff d = 3,\quad N_{\mathrm{spurious}}(k) = \binom{3k}{2} - 3k
 **Epistemic Status:**
 `LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` ([Ch 39 §39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md#sec-ch39-three-dimensional-field-cap-and-hilbert-ledger), [Ch 13](ch13-entanglement-and-chsh.md), [Ch 26](ch26-single-qubit-rotor-compilation.md), [Ch 31 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-truncation-shadows), [Ch 34 §34.10–§34.14](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability), [App F](appendix-f.md))
 
-**Arc-Field Grand Unified Theory (AF-GUT), Unique $N_c=3$ Weinberg $3/8$ Lock & $\nu_0$ Einstein Closure**（极小圆弧场大统一理论（AF-GUT）、温伯格角 $3/8$ 唯一三色锁死与主频爱因斯坦收口）
+**Arc-Field Grand Unified Theory (AF-GUT), $N_c=3$ Weinberg $3/8$ Lock & $\nu_0$ Einstein Closure**（极小圆弧场大统一理论（AF-GUT）、温伯格角 $3/8$ 三色锁死与主频爱因斯坦收口）
 
 **Geometric Intuition Term (本书几何直觉语言):**
 **Universal unital-ring covariant commutator factorization $Uf - fU = (\mathit{translated}-f)U$, skew-adjoint right-unitary minus-identity square $R^2 = -I_n$, finite-graph named spanning-tree anchored Abelian holonomy torus classification, unique circle double-cover path lifting and $360^\circ$ antipodal sheet exchange, tetrahedral simplicial two-cochain defect identity and edge-potential exactness, and Lagrange–Gram Pythagorean identity (alongside null-cone rigidity, rank-one Born nonnegativity, spherical Euler cycle exactness, and golden Delone separation, `LEAN ✓`); paired on the concentric bounded concept bundle $\mathcal{E}_{\mathrm{space}}^{(3)}\oplus\mathcal{E}_Y^{(1)}\oplus\mathcal{E}_{\mathrm{weak}}^{(2)}\oplus\mathcal{E}_{\mathrm{color}}^{(3)}$ (clean $12\mathrm{D}$ gauge direct sum $\mathfrak{u}(1)_Y\oplus\mathfrak{su}(2)_L\oplus\mathfrak{su}(3)_C$ with zero $(X,Y)$ leptoquarks and zero KK towers) with Universal Arc-Trace Stiffness $g_A^{-2}(\mu_{\mathrm{arc}})=\kappa_{\mathrm{arc}}\operatorname{Tr}_{\mathrm{Weyl}}(X_A^2)$—where single-chirality $\operatorname{Tr}_{\mathrm{Weyl}}(T_3^2)=\frac{N_c+1}{2}$ versus dual-chirality vector $\operatorname{Tr}_{\mathrm{Weyl}}(Q^2)=2[1+N_c(Q_u^2+Q_d^2)]$ drives $\sin^2\theta_W^{\mathrm{(anom)}}(N_c)-\sin^2\theta_W^{\mathrm{(fixed)}}(N_c)=\frac{(N_c-3)(N_c+3)}{4(N_c+1)(9+5N_c)}$ to vanish uniquely at $N_c=3$, locking $g_3^2=g_2^2=\frac{5}{3}g_Y^2$ and $\sin^2\theta_W(\mu_{\mathrm{arc}})=\frac{2}{2\times(8/3)}=\frac{3}{8}=0.375000$ with one-loop RG running from $\mu_{12}\approx 1.014\times 10^{13}\;\mathrm{GeV}$ to $0.23129$ at $M_Z$ (while candidly auditing the minimal-SM triangle spread $\Delta\alpha^{-1}\approx 3.664$), the cross-concept Higgs Zitterbewegung operator $D_{\mathrm{int}}(\Phi_H)$, $\nu_0$ clock-budget Einstein closure, identically zero gauge proton decay $\Gamma_{\mathrm{gauge}}(p\to e^+\pi^0)\equiv 0$, $\pi_2(S^3)=0$ zero GUT monopoles, and chiral electroweak instanton $\Delta B=\Delta L=3\Delta N_{\mathrm{CS}}\in 3\mathbb{Z}$ separating WKB amplitude $e^{-S_{\mathrm{inst}}}\sim 10^{-81}$ from Born-squared rate $e^{-2S_{\mathrm{inst}}}\sim 10^{-162\text{–}165}$ (`manual derivation` / `NUM`), together with Kaluza–Klein, Georgi–Glashow (1974) $\mathrm{SU}(5)$, Georgi–Quinn–Weinberg (1974) RG running, Fritzsch–Minkowski (1975) $\mathrm{SO}(10)$, 't Hooft–Polyakov–Preskill monopoles, BPST (1975) instantons & 't Hooft (1976) / Klinkhamer–Manton (1984) electroweak anomalies, Super-Kamiokande Takenaka et al. (2020) $\tau/B(p\to e^+\pi^0)>2.4\times 10^{34}\;\mathrm{yr}$, Connes / Chamseddine–Connes spectral Standard Model, and Sakharov (1967) / Jacobson (1995) induced & horizon-thermodynamic gravity (`Literature`), establishing the capstone AF-GUT synthesis and open frontier `prob-ch39-af-gut-threshold-and-proton-stability` (`MODEL` / `OPEN`)**

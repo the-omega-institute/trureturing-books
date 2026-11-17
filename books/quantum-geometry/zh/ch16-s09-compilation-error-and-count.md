@@ -165,8 +165,8 @@ $$
 :::
 
 <!-- alias: #rem-qsvt-solovay-kitaev-literature -->
-::: {.remark #rem-solovay-kitaev-literature title="Solovay–Kitaev 门编译定理与对数多面体逼近复杂度（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 当我们将目标从连续两轴旋转（[@prop-two-axis-finite-word]）转向离散有限门集编译时，其渐近字长由量子编译理论中的 **Solovay–Kitaev 定理**（参见 C. M. Dawson and M. A. Nielsen, *The Solovay–Kitaev algorithm*, Quantum Inf. Comput. **6**, 81–95, 2006, arXiv:quant-ph/0505030）给出：
+::: {.remark #rem-solovay-kitaev-literature title="Solovay–Kitaev 门编译定理与多对数多面体逼近复杂度（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 当我们将目标从连续两轴旋转（[@prop-two-axis-finite-word]）转向离散有限门集编译时，其渐近字长的上界由量子编译理论中的 **Solovay–Kitaev 定理**（参见 C. M. Dawson and M. A. Nielsen, *The Solovay–Kitaev algorithm*, Quantum Inf. Comput. **6**, 81–95, 2006, arXiv:quant-ph/0505030）给出：
 
 1. **多对数渐近字长 $L = O(\log^c(1/\varepsilon))$**：设 $\mathcal{G} \subset \mathrm{SU}(2)$ 为有限、含逆元（$\mathcal{G} = \mathcal{G}^{-1}$）且生成稠密子群 $\langle\mathcal{G}\rangle$ 的离散门集。则对任意目标幺正门 $U \in \mathrm{SU}(2)$ 及任意足够小的精度 $\varepsilon > 0$，存在长度 $L = O\bigl(\log^c(1/\varepsilon)\bigr)$ 的门字 $w \in \mathcal{G}^*$ 使得算子范数误差满足 $\norm{U - w}_{\mathrm{op}} \le \varepsilon$。在 Dawson–Nielsen 的经典五因子群换位子递归构造中，每一层递归用 $5$ 个前一层近似字拼出精度从 $\varepsilon_{k-1}$ 提升至 $\varepsilon_k = O(\varepsilon_{k-1}^{3/2})$ 的修正字，从而给出幂指数
 
@@ -174,7 +174,7 @@ $$
    c = \frac{\ln 5}{\ln(3/2)} \approx 3.97
    $$
 
-   （其中的隐含常数依赖于具体门集与所选误差度量）。
+   （其中的隐含常数依赖于具体门集与所选误差度量）。这个 $c$ 只是 Dawson–Nielsen 构造的指数，并不是 $\{H, T\}$ 的最优阶：对 Clifford+T 门集，数论合成直接给出 $O(\log(1/\varepsilon))$ 的字长（P. Selinger, *Efficient Clifford+T approximation of single-qubit operators*, arXiv:1212.6253；N. J. Ross and P. Selinger, *Optimal ancilla-free Clifford+T approximation of z-rotations*, Quantum Inf. Comput. **16**, 901–953, 2016）；而长度不超过 $L$ 的门字只有指数多个，盖满三维的 $\mathrm{SU}(2)$ 却需要约 $\varepsilon^{-3}$ 个半径为 $\varepsilon$ 的球，故任何有限门集的最坏字长都至少是 $\Omega(\log(1/\varepsilon))$，Clifford+T 的字长阶因此是 $\Theta(\log(1/\varepsilon))$。
 2. **门集 $\{H, T\}$ 的逆门封闭与射影规范**：对于标准容错门集 $\{H, T\}$，由于 $H$ 自身是二阶对合门（$H^{-1} = H$），而 $T$ 是八阶相位门（在射影群 $\mathrm{PU}(2)$ 中 $T^{-1} = T^7$；若在 $\mathrm{SU}(2)$ 中使用幺模提升 $\tilde{H} = iH, \tilde{T} = e^{-i\pi/8}T$，则 $\tilde{H}^{-1} = -\tilde{H} = \tilde{H}^3$、$\tilde{T}^{-1} = -\tilde{T}^7 = \tilde{T}^{15}$，中心符号 $\pm I_2$ 需在提升中一致追踪），逆门均可用常数个正向门拼出，因此在射影距离 $\delta(U, V) = \min_{\varphi}\norm{U - e^{i\varphi}V}_{\mathrm{op}}$ 下同样继承 $L = O(\log^c(1/\varepsilon))$ 的渐近长度结论，仅有限前因子发生相应缩放。
 3. **李代数换位子步长的精确尺度（切勿线性化误写）**：Solovay–Kitaev 递归步的核心局部恒等式是群换位子的 Baker–Campbell–Hausdorff 展开
 

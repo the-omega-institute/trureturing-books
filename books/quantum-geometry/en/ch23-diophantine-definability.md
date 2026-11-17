@@ -2,7 +2,7 @@
 
 > *"The integers are Diophantine in the rationals; look up the latest research and analyse it together."*
 
-In [Chapter 1](ch01-measurement.md) we asked how a continuously rotating arrow on a sphere produces discrete clicks (*liàng*) when passed through a one-dimensional shutter. Now let us pose the exact same geometric question inside the heart of number theory and mathematical logic:
+The epigraph's "$\mathbb{Z}$ is Diophantine in $\mathbb{Q}$" (definable with existential quantifiers alone) remains, in the strict sense, an open problem; what is known is that $\mathbb{Z}$ is definable in $\mathbb{Q}$ by a purely universal formula, equivalently that $\mathbb{Q} \setminus \mathbb{Z}$ is Diophantine in $\mathbb{Q}$ (Koenigsmann 2016; see [@rem-diophantine-z-in-q-literature]). In [Chapter 1](ch01-measurement.md) we asked how a continuously rotating arrow on a sphere produces discrete clicks (*liàng*) when passed through a one-dimensional shutter. Now let us pose the exact same geometric question inside the heart of number theory and mathematical logic:
 
 Consider the field of rational numbers $\mathbb{Q}$. Between any two rationals $r_1 < r_2$, the midpoint $\frac{r_1 + r_2}{2}$ is another rational, and repeated bisection supplies infinitely many more; addition and multiplication are smoothly invertible everywhere away from zero, leaving no visible "steps" or "grid lines" at first glance. Yet submerged right inside this dense rational continuum sits an unyielding **discrete skeleton of integers** $\mathbb{Z} = \{\dots, -2, -1, 0, 1, 2, \dots\} \subset \mathbb{Q}$!
 
@@ -18,7 +18,7 @@ Following this geometric thread, this chapter first establishes four Lean-verifi
 
 ## 23.1 How Discrete Lattices Hide Inside a Continuum: Quadratic Norms and Trace Projections {#sec-ch23-1}
 
-Why can linear equations $ax + b = 0$ never isolate $\mathbb{Z}$ inside $\mathbb{Q}$? Because linear equations are scale-fragile over a field: any nonzero denominator can be divided out. To obstruct arbitrary rational denominators using only field arithmetic, one must turn to **quadratic norm forms** — just as on the $S^3$ sphere of real Hamilton unit quaternions (or normalized pairs of complex amplitudes), linear coordinates alone do not fix the state surface until the quadratic norm constraint $x_0^2 + x_1^2 + x_2^2 + x_3^2 = 1$ locks vectors onto the unit sphere!
+Why can linear equations $ax + b = 0$ never isolate $\mathbb{Z}$ inside $\mathbb{Q}$? Because linear equations are scale-fragile over a field: any nonzero denominator can be divided out. To obstruct arbitrary rational denominators using only field arithmetic, the classical route turns to **quadratic norm forms** — just as on the $S^3$ sphere of real Hamilton unit quaternions (or normalized pairs of complex amplitudes), linear coordinates alone do not fix the state surface until the quadratic norm constraint $x_0^2 + x_1^2 + x_2^2 + x_3^2 = 1$ locks vectors onto the unit sphere!
 
 In quadratic integer rings and quaternion orders, every algebraic element $g$ carries two canonical coordinate-free geometric invariants (matching the trace and determinant of $2\times 2$ matrices studied in [Chapter 1](ch01-measurement.md) and Part VII):
 

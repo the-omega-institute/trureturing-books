@@ -2,7 +2,7 @@
 
 > **作者原话**：“全局静态时间场P=NP, 但有限观察者P!=NP”
 
-作者将无时间几何晶体与有限观察者选点并置，为千禧年大奖难题 **$\mathrm{P}$ vs. $\mathrm{NP}$** 提供一种双重视角（`MODEL`）。这里须分清三层：静态解集描述哪些赋值满足条件；后选择与 CTC 复杂度定理需要明确增加计算资源（[@rem-ch30-postselection-ctc-literature]）；黑盒查询与有界阶半正定松弛下界只约束各自的受限模型（[@rem-ch30-query-sos-literature]）。标准统一图灵机模型下 $\mathrm{P}\neq\mathrm{NP}$ 仍是开放猜想（第 20 章 [@conj-p-neq-np]，`OPEN`）。只删去叙述中的时间，或只规定观察者资源有限，都不判定这个渐近问题。
+作者将无时间几何晶体与有限观察者选点并置，为千禧年大奖难题 **$\mathrm{P}$ vs. $\mathrm{NP}$** 提供一种双重视角（`MODEL`）。标题与节末格言里的“$P = NP$”“$P \neq NP$”是作者给这两种视角起的名字，不是复杂性类的等式。这里须分清三层：静态解集描述哪些赋值满足条件；后选择与 CTC 复杂度定理需要明确增加计算资源（[@rem-ch30-postselection-ctc-literature]）；黑盒查询与有界阶半正定松弛下界只约束各自的受限模型（[@rem-ch30-query-sos-literature]）。标准统一图灵机模型下 $\mathrm{P}\neq\mathrm{NP}$ 仍是开放猜想（第 20 章 [@conj-p-neq-np]，`OPEN`）。只删去叙述中的时间，或只规定观察者资源有限，都不判定这个渐近问题。
 
 ## 30.1.1 “全局静态时间场”的解集与额外计算资源 {#1-全局静态时间场的解集与额外计算资源}
 
@@ -55,7 +55,7 @@ $$
 **文献结果，未在本书形式化。** 本节与几何模型并置对照的三组受限模型复杂性定理均引自外部经典文献，未在本书形式化：
 
 1. **无结构黑盒量子查询下界（C. H. Bennett, E. Bernstein, G. Brassard & U. Vazirani, *SIAM J. Comput.* **26**, 1510–1523, 1997）**：在黑盒神谕（Oracle）查询模型下，从 $N = 2^n$ 个候选中以有界误差定位未知目标至少需要 $L = \Omega(2^{n/2})$ 次量子查询（与 Grover 算法的 $O(2^{n/2})$ 上界共同锁定 $\Theta(2^{n/2})$）；
-2. **2-SAT 与 3-SAT 的经典复杂度分水岭（S. A. Cook, 1971；L. A. Levin, 1973；B. Aspvall, M. F. Plass & R. E. Tarjan, 1979）**：2-SAT 可通过强连通分量传递闭包在 $O(n+m)$ 线性时间内判定（故 $\text{2-SAT} \in \mathrm{P}$），而 3-SAT 为 $\mathrm{NP}$-完全问题；
+2. **2-SAT 与 3-SAT 的经典复杂度分水岭（S. A. Cook, 1971；L. A. Levin, 1973；B. Aspvall, M. F. Plass & R. E. Tarjan, 1979）**：2-SAT 可通过强连通分量在 $O(n+m)$ 线性时间内判定（故 $\text{2-SAT} \in \mathrm{P}$），而 3-SAT 为 $\mathrm{NP}$-完全问题；
 3. **有界阶平方和（SoS）半正定松弛下界（D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001；G. Schoenebeck, *FOCS*, 593–602, 2008）**：例如，在固定且充分大的常数子句密度 $m/n = \Delta$ 下，独立均匀抽取三个互异变量与随机文字符号（3-XOR 等价地抽取随机奇偶右端），采用标准布尔多项式编码（3-XOR 的奇偶等式、3-SAT 的子句满足约束），随机实例以高概率不可满足，而其阶数 $M = o(n)$ 的局部 Lasserre / Gram 半正定松弛仍有满足局部约束的可行矩矩阵 $G_M \succeq 0$，无法在该阶数（对应亚指数规模半正定规划）内证伪不可满足性（见 [Schoenebeck 完整版定理 12](https://schoeneb.people.si.umich.edu/papers/LasserreNew.pdf)）。
 :::
 

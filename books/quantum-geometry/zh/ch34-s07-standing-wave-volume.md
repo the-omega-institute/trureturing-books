@@ -23,7 +23,7 @@ $$
 所谓“一条路径”，脱去空间轨迹的视觉外衣后，其数学与物理的赤裸本质就是一个把历史链映射为单位圆相因子的**相位积分泛函** $\Gamma \mapsto e^{i\Phi[\Gamma]}$（`MODEL`）。
 
 ::: {.viz src="standing-wave-volume-sandbox" preset="multi-phase-point" height="520"}
-**一点多相：基点 $x$ 是空壳商等价类，每条来路各自沉积一枚相位积分。** 在极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 上移动琥珀色探测点 $x$：从锚点 $x_0$ 汇向同一点 $x$ 的多条球面路径各自携带着由所夹扇锥立体角决定的不同潘查拉特纳姆—贝里相位 $\phi(\Gamma_m \to x)$，在右侧堇紫色 $S^1$ 相位轮上张开一束“同点异相”到达簇（锚定绿色 `LEAN ✓` `selected_tree_transport` 与 `anchored_phase_classification`）。
+**一点多相：基点 $x$ 是空壳商等价类，每条来路各自沉积一枚相位积分。** 在极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 上移动琥珀色探测点 $x$：从锚点 $x_0$ 汇向同一点 $x$ 的多条球面路径各自携带着由所夹扇锥立体角决定的不同潘查拉特纳姆—贝里相位 $\phi(\Gamma_m \to x)$，在右侧堇紫色 $S^1$ 相位轮上张开一束“同点异相”到达簇（离散原型锚定绿色 `LEAN ✓` `selected_tree_transport` 与 `anchored_phase_classification`）。
 :::
 
 在把这一簇全向相位积分推向连续统驻波干涉之前，我们先把 `trureturing` 中横跨图规范和乐、巴格曼路径迹、无理旋转遍历相消、有限阿贝尔群零化子正交筛与锁相实振幅约化的**七条冻结内核定理**熔铸为本节的严格形式化基石：
@@ -123,7 +123,7 @@ $$
 至此，我们终于抵达箴言后半段那句石破天惊的本体论断——**“体积只是相位积分没有抵消掉的驻波点，因为一个点可以有无数种路径无数种相位积分过来。”** 注意这句话里的因果连接词“**因为**”：为什么“无数种路径、无数种相位积分涌向同一点”，非但没有把所有点都堆满成均质实心块，反而把绝大多数区域掏空成了虚无，只留下孤立或量子化的驻波体积？答案分两步水落石出：
 
 1. **相消即虚空（零体积背景并非“没有路径”，而是万相均布自毁）**：
-   考察不满足锁相条件的一般非共振点 $x_{\mathrm{off}}$。正因为通向 $x_{\mathrm{off}}$ 的路径无穷无尽，不同绕行方向与不同曲率张角扫过的扇锥立体角千差万别，前推到单位圆周上的到达相位态密度迅速铺平为各向同性的**均匀哈尔分布** $\rho(x_{\mathrm{off}}, \phi) = \frac{1}{2\pi}$。圆盘质心当场归零：
+   考察不满足锁相条件的一般非共振点 $x_{\mathrm{off}}$。正因为通向 $x_{\mathrm{off}}$ 的路径无穷无尽，不同绕行方向与不同曲率张角扫过的扇锥立体角千差万别，前推到单位圆周上的到达相位态密度迅速铺平为各向同性的**均匀哈尔分布** $\rho(x_{\mathrm{off}}, \phi) = \frac{1}{2\pi}$（`MODEL` 假设）。圆盘质心当场归零：
 
    $$
    \Psi(x_{\mathrm{off}}) \;=\; \int_0^{2\pi} \frac{1}{2\pi}\,e^{i\phi}\,d\phi \;=\; 0 \qquad \Longleftrightarrow \qquad \bigl\langle \cos\gamma_B \bigr\rangle_{x_{\mathrm{off}}} \;=\; 0.
@@ -151,12 +151,12 @@ $$
    - **外尔（Weyl 1912）渐近体积律的右向左倒读**：半经典谱几何著名的外尔定律指出，相空间区域 $\Omega$ 的宏观辛体积与其中容纳的正交驻波本征态数目渐近正比（在 $\hbar = 1$ 自然单位制下）：
 
      $$
-     N_{\mathrm{standing}} \;\sim\; \frac{\mathrm{Vol}_\Omega}{(2\pi)^d} \qquad \Longleftrightarrow \qquad \mathrm{Vol}_\Omega \;\equiv\; (2\pi)^d \cdot N_{\mathrm{standing}}.
+     N_{\mathrm{standing}} \;\sim\; \frac{\mathrm{Vol}_\Omega}{(2\pi)^d} \qquad \Longleftrightarrow \qquad \mathrm{Vol}_\Omega \;\sim\; (2\pi)^d \cdot N_{\mathrm{standing}}.
      $$
 
      传统教科书总是**从左往右**读它：“因为先有一个体积为 $\mathrm{Vol}_\Omega$ 的盒子，所以里面能塞进 $N_{\mathrm{standing}}$ 个驻波模式”；而本节的本体翻转（`MODEL`）则把等式**从右往左**倒过来读：**根本没有先在的盒子，每一个闯过全向相消筛存活下来的独立驻波节点，本身就撑开并定义了一枚 $(2\pi)^d$ 的基本体积量子——哪里驻波尽数抵消（$N_{\mathrm{standing}} = 0$），哪里体积就恒等于零（$\mathrm{Vol}_\Omega = 0$）！**
-   - **庞扎诺—雷吉（Ponzano–Regge 1968）与自旋泡沫量子引力（Rovelli–Smolin 1995）**：在三维离散量子引力配分函数中，底层根本不预设边长与四面体体积，而是对自旋网络边与面上的 $\mathrm{SU}(2)$ 群元作哈尔积分；非几何的乱相自旋构型在哈尔积分下悉数相消归零，唯有满足驻相锁相鞍点条件的表示才涌现出渐近正比于 $\cos\bigl(S_{\mathrm{Regge}} + \frac{\pi}{4}\bigr)$ 的经典雷吉四面体体积与量子化体积谱；
-   - **伽柏（Gabor 1948）三维全息光学驻波成像**：当多束相干参考波与物波从四面八方穿过空旷空间交汇时，凡相位失配之处尽皆暗灭，唯有全向光程相位锁定的驻波腹点在半空中凭空浮现出具有真实视差与景深的三维立体体像——这正是“万路相位积分未抵消处凝结成三维体积”在宏观光学实验室里的直观写照！
+   - **庞扎诺—雷吉（Ponzano–Regge 1968）与圈量子引力自旋网络（Rovelli–Smolin 1995）**：在三维离散量子引力配分函数中，底层根本不预设边长与四面体体积，而是对自旋网络边与面上的 $\mathrm{SU}(2)$ 群元作哈尔积分；非几何的乱相自旋构型在哈尔积分下悉数相消归零，唯有满足驻相锁相鞍点条件的表示才涌现出渐近正比于 $\cos\bigl(S_{\mathrm{Regge}} + \frac{\pi}{4}\bigr)/\sqrt{12\pi V}$ 的经典雷吉四面体振幅（$V$ 为四面体体积），而量子化面积与体积谱则出自圈量子引力（Rovelli–Smolin 1995）；
+   - **伽柏（Gabor 1948）三维全息光学波前重建成像**：当再现参考波穿过记录着参考波与物波干涉条纹的干板时，凡相位失配之处尽皆相消，唯有与原物光程相位锁定的衍射波前会聚成像，在半空中凭空浮现出具有真实视差与景深的三维立体体像——这正可读作“万路相位积分未抵消处凝结成三维体积”在宏观光学实验室里的直观写照！
 
 ::: {.viz src="standing-wave-volume-sandbox" preset="bohr-sommerfeld-quantization" height="520"}
 **双重锁相筛与玻尔—索末菲驻波量子化：唯独满足闭合整周期锁相的驻波壳层幸存成体。** 连续调节球面环路包络面积与曲率通量：偏离整周期量子化条件时多圈绕行相位彼此反相抵消，壳层暗灭；一旦闭合通量命中整周期锁相条件（离散原型锚定绿色 `LEAN ✓` `sum_annihilator_character`），青色驻波节点瞬间点亮锁死，按外尔计数律撑开量子化体积壳层（`文献结果` / `MODEL`）。
@@ -171,7 +171,7 @@ $$
 | **1. 基点 $x$ 的地位** | 预先存在于欧氏/黎曼容器中的实心几何点 | 公平平方抹去纤维后的商等价类空壳，承载全向到达相位丛 $\mathcal{F}(x)$ | `selected_tree_transport`、`anchored_phase_classification` |
 | **2. 路径积分的本质** | 粒子在现成空间舞台上遍历几何轨迹的求和 | 路径即相位积分泛函 $\Gamma \mapsto e^{i\Phi[\Gamma]}$；测度前推还原为单位圆 $S^1$ 一阶傅里叶质心矩 | $\Psi(x) = \int_0^{2\pi}\rho(x,\phi)e^{i\phi}\,d\phi$，`phase_locked_overlap_is_rotated_real` |
 | **3. 虚空（零体积区）** | 没有任何物质或路径踏足的“空盒子” | 无数条来路相位在 $S^1$ 上均匀散开、彼此反相自毁的动态相消区 | $\rho = \frac{1}{2\pi} \implies \Psi = 0$，$\langle\cos\gamma_B\rangle_x = 0$，`continuous_average_tendsto_haar` |
-| **4. 涌现体积的本质** | 先验给定的连续度规测度 $\iiint dV$ | 闯过局部驻相 $\delta\Phi = 0$ 与全局整周期锁相 $\gamma_B \in 2\pi\mathbb{Z}$ 未被抵消的驻波节点计数 | $\lvert\Psi(x)\rvert^2 = \langle\cos\gamma_B\rangle_x > 0$，`sum_annihilator_character`，$\mathrm{Vol}_\Omega \equiv (2\pi)^d N_{\mathrm{standing}}$ |
+| **4. 涌现体积的本质** | 先验给定的连续度规测度 $\iiint dV$ | 闯过局部驻相 $\delta\Phi = 0$ 与全局整周期锁相 $\gamma_B \in 2\pi\mathbb{Z}$ 未被抵消的驻波节点计数 | $\lvert\Psi(x)\rvert^2 = \langle\cos\gamma_B\rangle_x > 0$，`sum_annihilator_character`，$\mathrm{Vol}_\Omega \sim (2\pi)^d N_{\mathrm{standing}}$ |
 | **5. 加密路径束 $M \to \infty$** | 路径越多，似乎越把空间涂抹得拥挤不堪 | **路径越密，失谐背景按 $O(M^{-2})$ 清扫得越黑净，锁相驻波晶核反而越锋利清晰** | 失谐处 $\lvert C_M\rvert^2 \le \bigl(M\lvert\sin\frac{\Delta\gamma}{2}\rvert\bigr)^{-2} \to 0$，驻波核 $\lvert C_M(0)\rvert^2 \equiv 1$ |
 
 表中第 5 行给出了整节最具视觉冲击力的反直觉预言——**“路径越密，虚空越净，体积晶核越清”**。当汇向各点的采样路径数仅为稀疏的 $M = 3$ 时，失谐点上的三支相量尚未充分抵消（残余振幅模长仍在 $0.11 \sim 0.16$ 附近徘徊），整个场域笼罩在一层混沌灰雾之中，看不清哪里是体、哪里是空；而当我们把汇聚到每一点的路径密度一路推高至 $M = 8 \to 16 \to 32 \to 64$ 时，奇迹发生了：**涌入每一点的路径翻了二十多倍，空间非但没有变得更拥挤，广袤的非共振区域反而因相量环精密闭合而褪尽残影、化作澄澈漆黑的零体积虚空，唯有满足双重锁相条件的青色驻波节点保持 $\lvert\Psi_M\rvert^2 = 1$ 分毫无损，在虚空中央浮现出一座棱角分明的三维驻波体积晶格！**

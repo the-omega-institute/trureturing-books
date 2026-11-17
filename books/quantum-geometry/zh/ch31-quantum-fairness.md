@@ -11,7 +11,7 @@
 1. **席位公平（Seat Fairness）**：砍掉“第 3 点 $C$”，单比特纯态布洛赫向量模长恒为 $1$，两子丈量严格服从秩一玻恩内积模方互易律；
 2. **得失公平（Gain–Loss Fairness）**：互补语境中心化纯度勾股守恒立下零免费午餐账本，任何一维确定度的所得必以正交维度残余潜能的所失或热熵耗散兑付；
 3. **关系公平（Relational Fairness）**：不可克隆内积判据与贝尔纯态混态边缘（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3–4 款；外部多体延伸见 [@rem-ch31-ckw-monogamy-literature]）锁死关联预算，深切的交融无法批发量产；
-4. **博弈公平（Horizon Fairness）**：相干一致旋转的固定步幅定律（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款）与有限观察者复杂性防火墙（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@conj-p-neq-np]；外部背景见 [@rem-ch30-query-sos-literature]）阻止算力垄断者提前剧透生命终局；
+4. **博弈公平（Horizon Fairness）**：相干一致旋转的固定步幅定律（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款）与有限观察者复杂性防火墙（以[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)的开放猜想 [@conj-p-neq-np] 成立为前提；外部背景见 [@rem-ch30-query-sos-literature]）阻止算力垄断者提前剧透生命终局；
 5. **遍历公平（Ergodic Fairness）**：诞生遗忘重置相容自由度（`MODEL`），而紧致环面闭子群轨道均匀分布与有界间隙回归定理（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款；窗口应用与边界见 [@rem-ch31-weyl-window-equidistribution-literature]）支撑“长程旅程共享统计全息星光”的本体诠释。
 
 ::: {.figure src="ch31-overview"}

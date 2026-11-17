@@ -2,7 +2,7 @@
 
 在经典数字世界里，强权者可以把同一份比特串零成本复制一万份，同时向无数对象许下看似“百分之百排他”的绑定承诺。然而，一旦进入多量子比特交织的张量积几何，**关系公平（Relational Fairness，`MODEL`）**便展现出最温柔也最决绝的铁腕：**深切的交融不可批发，鲜活的灵魂切片不可盗版。**
 
-在 Lean 4 内核验证层面，这道防线由两条零自由参数的严格定理锁定（合并陈述于下方 [@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3–4 款）：
+在 Lean 4 内核验证层面，这道防线由两条零自由参数的严格定理锁定（合并陈述于下方 [@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3–4 款；一般的纠缠单配性见文献注记 [@rem-ch31-ckw-monogamy-literature]）：
 
 1. **不可克隆内积判据**（[`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion)）：若同一个复线性等距算子 $U$ 能把两个归一化纯态 $\psi, \phi$ 同时从空白辅助态 $\mathrm{blank}$ 克隆为 $\psi\otimes\psi$ 与 $\phi\otimes\phi$，则它们的内积被迫满足幂等方程 $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$——从而要么 $\phi = \psi$（根本是同一个态），要么 $\langle\phi, \psi\rangle = 0$（彼此严格正交的经典可区分刻度）！任何处于非正交叠加张力中的未知状态，都绝无可能被通用机器盲目复印。
 
@@ -16,12 +16,12 @@
 **满额相融。** 贝尔态 $\lvert\Phi^+\rangle_{AB}\otimes\lvert 0\rangle_C$：$\mathbf{A}$ 与 $\mathbf{B}$ 之间的品红纽带满额，$\mathbf{A}$ 的琥珀色箭头缩回球心，即 $\tfrac{1}{2}I_2$（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 4 款），与 $\mathbf{C}$ 之间一点也不剩。
 :::
 
-下面的形式化定理将席位互易、互补中心化纯度勾股、不可克隆与贝尔边缘混态四块公平基石统一锁定在同一座 Lean 4 证明基座上。
+下面的形式化定理将席位模方、互补中心化纯度勾股、不可克隆与贝尔边缘混态四块公平基石统一锁定在同一座 Lean 4 证明基座上。
 
-::: {.theorem #thm-ch31-seat-pythagorean-monogamy-fairness title="量子公平的前三重形式化基石：玻恩互易、互补勾股、不可克隆与贝尔混态边缘" lean="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"}
+::: {.theorem #thm-ch31-seat-pythagorean-monogamy-fairness title="量子公平的前三重形式化基石：玻恩模方、互补勾股、不可克隆与贝尔混态边缘" lean="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"}
 在 `trureturing` 冻结的有限维量子测量、层析、纯态与纠缠模块中，以下四项公平性结构定理同时成立：
 
-1. **秩一纯态玻恩配对的模方互易律**（[`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)）：设 $n, \kappa$ 为有限类型（`[Fintype n] [DecidableEq n] [Fintype kappa]`），$P : \kappa \to M_n(\mathbb{C})$ 满足记录测量公理 `IsRecordMeasurement P`，$\rho \in M_n(\mathbb{C})$ 为合法量子态（`rho.PosSemidef ∧ Matrix.trace rho = 1`）。若第 $k$ 个测量投影为秩一外积 $P_k = \phi\phi^*$（`Matrix.vecMulVec phi (star phi)`）且状态为纯态 $\rho = \psi\psi^*$（`Matrix.vecMulVec psi (star psi)`），则记录权重满足
+1. **秩一纯态玻恩配对的模方律**（[`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)）：设 $n, \kappa$ 为有限类型（`[Fintype n] [DecidableEq n] [Fintype kappa]`），$P : \kappa \to M_n(\mathbb{C})$ 满足记录测量公理 `IsRecordMeasurement P`，$\rho \in M_n(\mathbb{C})$ 为合法量子态（`rho.PosSemidef ∧ Matrix.trace rho = 1`）。若第 $k$ 个测量投影为秩一外积 $P_k = \phi\phi^*$（`Matrix.vecMulVec phi (star phi)`）且状态为纯态 $\rho = \psi\psi^*$（`Matrix.vecMulVec psi (star psi)`），则记录权重满足
 
    $$
    \begin{aligned}
@@ -54,7 +54,7 @@
 :::
 
 ::: proof
-第 1 款由秩一外积迹归约 `rank_one_pure_state_modulus_square_reduction` 与加权后验系综分解 `unread_eq_weighted_ensemble` 合取而成（并由复点积共轭反演给出对易模方 $\|\phi^* \bullet_v \psi\|^2 = \|\psi^* \bullet_v \phi\|^2$）；第 2 款由完备内积空间闭子空间正交分解 `Submodule.norm_sq_eq_add_norm_sq_starProjection` 代入假设即得；第 3 款利用线性等距算子保持张量积内积 $\langle\phi, \psi\rangle\langle\mathrm{blank}, \mathrm{blank}\rangle = \langle\phi, \psi\rangle^2$，由复数域整环幂等解 `eq_zero_or_one_of_sq_eq_self` 与单位向量内积取一判据 `inner_eq_one_iff_of_norm_eq_one` 归约为 $\phi = \psi$ 或正交；第 4 款直接对 $4\times 4$ 贝尔密度矩阵执行偏迹分块求和并验证 $(\frac{1}{2}I_2)^2 = \frac{1}{4}I_2 \neq \frac{1}{2}I_2$。完整证明由 Lean 内核检查。
+第 1 款由秩一外积迹归约 `rank_one_pure_state_modulus_square_reduction` 与加权后验系综分解 `unread_eq_weighted_ensemble` 合取而成（对易模方 $\|\phi^* \bullet_v \psi\|^2 = \|\psi^* \bullet_v \phi\|^2$ 不在第 1 款陈述之内，由复点积共轭反演在盒外手算给出）；第 2 款由完备内积空间闭子空间正交分解 `Submodule.norm_sq_eq_add_norm_sq_starProjection` 代入假设即得；第 3 款利用线性等距算子保持张量积内积 $\langle\phi, \psi\rangle\langle\mathrm{blank}, \mathrm{blank}\rangle = \langle\phi, \psi\rangle^2$，由复数域整环幂等解 `eq_zero_or_one_of_sq_eq_self` 与单位向量内积取一判据 `inner_eq_one_iff_of_norm_eq_one` 归约为 $\phi = \psi$ 或正交；第 4 款直接对 $4\times 4$ 贝尔密度矩阵执行偏迹分块求和并验证 $(\frac{1}{2}I_2)^2 = \frac{1}{4}I_2 \neq \frac{1}{2}I_2$。完整证明由 Lean 内核检查。
 :::
 
 ::: {.figure src="ch31-cloning-lock"}
