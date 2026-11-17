@@ -282,6 +282,179 @@ completing the six output basis vectors. Thus [@thm-bridge-native-saturation-iff
 
 In the range $a<b$ with $2b\le3a$, this family satisfies $3c=6q=2d$. This equality follows directly from choosing $c=2q$ and $d=3q$. The theorem classifies existence of the original matrix triples within this fixed family of right dimensions; the identity column Gram follows directly from the coordinate routing of the displayed factors. This construction alone does not prove that, for arbitrary $c,d$, $a<b$ and the positive scalar column Gram identity $F^*F=\lambda I_{bc}$ ($\lambda>0$) necessarily imply $3c\le2d$. The bound $2c\le d$ in [@thm-bridge-native-rectangular-bound] below uses the strict threshold $3a<2b$, on the opposite side of the threshold from $2b\le3a$ here.
 
+The two right input blocks need not have equal lengths. Split the $c$ input coordinates into blocks of lengths $\lfloor c/2\rfloor$ and $\lceil c/2\rceil$, and give them the even and odd left slots, respectively. The same routing then works. Thus neither even $c$ nor the exact choice $d=3c/2$ is essential to this existence construction: the right output only needs room for the original $c$ rows and an additional strip of $\lceil c/2\rceil$ rows.
+
+::: {.theorem #thm-bridge-native-scalar-gram-exists title="Positive scalar column Gram existence for native three-term tensor sums in the first region" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeScalarGram.native_scalar_gram_exists"}
+For any natural numbers $a,b,c,d\in\mathbb N$ satisfying
+
+$$
+2b\le3a,\qquad3c\le2d,
+$$
+
+and every real number $\lambda$ with $\lambda>0$, there exist complex matrix families
+
+$$
+\begin{aligned}
+M&:\operatorname{Fin}3\longrightarrow M_{a\times b}(\mathbb C),\\
+N&:\operatorname{Fin}3\longrightarrow M_{d\times c}(\mathbb C),
+\end{aligned}
+$$
+
+whose original tensor sum satisfies
+
+$$
+\begin{aligned}
+F&=\sum_{r=0}^2M_r\otimes N_r,\\
+F^*F&=\lambda I_{bc}.
+\end{aligned}
+$$
+
+Here $F^*$ is the conjugate transpose, the rows of $F$ are indexed by $\operatorname{Fin}a\times\operatorname{Fin}d$, and its columns by $\operatorname{Fin}b\times\operatorname{Fin}c$. The matrix $I_{bc}$ is the identity on this column index set, and the real number $\lambda$ is viewed as a complex scalar through the natural embedding. There is no assumption that $a<b$, that $c$ has either parity, that $d$ has a particular exact value, that the factors are linearly independent, or that any dimension is strictly positive.
+:::
+
+::: {.proof #pf-bridge-native-scalar-gram-exists}
+First construct a tensor sum with identity column Gram, then scale by a real scalar. Put
+
+$$
+q=\lfloor c/2\rfloor,\qquad c-q=\lceil c/2\rceil.
+$$
+
+Use indices starting at $0$ throughout, with ranges
+
+$$
+\begin{aligned}
+0\le i<a,&\qquad0\le j<b,\\
+0\le s<d,&\qquad0\le k<c.
+\end{aligned}
+$$
+
+As before, let $\mathbf1_{\{P\}}$ be the indicator of $P$. Take the same three unscaled left slices as in the preceding construction, now denoted by $L_r$:
+
+$$
+\begin{aligned}
+(L_0)_{ij}&=\mathbf1_{\{i=j\}},\\
+(L_1)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)\}},\\
+(L_2)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)+1\}}.
+\end{aligned}
+$$
+
+Choose the $d\times c$ right slices
+
+$$
+\begin{aligned}
+(N_0)_{sk}&=\mathbf1_{\{s=k\}},\\
+(N_1)_{sk}&=\mathbf1_{\{k<q,\ s=c+k\}},\\
+(N_2)_{sk}&=\mathbf1_{\{q\le k,\ s=c+(k-q)\}}.
+\end{aligned}
+$$
+
+The differences $j-a$ and $k-q$ matter only when $j\ge a$ and $k\ge q$, respectively, so both are ordinary nonnegative integer differences. For $G=\sum_{r=0}^2L_r\otimes N_r$, these factors give the route
+
+$$
+\rho(j,k)=
+\begin{cases}
+(j,k),&j<a,\\
+\bigl(2(j-a),\,c+k\bigr),&j\ge a,\ k<q,\\
+\bigl(2(j-a)+1,\,c+(k-q)\bigr),&j\ge a,\ q\le k.
+\end{cases}
+$$
+
+Check the coordinate ranges explicitly. If $j\ge a$, put $t=j-a$. Since $j+1\le b$ and $2b\le3a$,
+
+$$
+2(t+1)\le2(b-a)\le a.
+$$
+
+Thus $2t<a$ and $2t+1<a$. If $b\le a$, there are no inputs in these residual branches: every column takes the first branch.
+
+The required integer bound on the right is
+
+$$
+\begin{aligned}
+d&\ge\lceil3c/2\rceil\\
+&=c+\lceil c/2\rceil=c+(c-q)\ge c.
+\end{aligned}
+$$
+
+This follows exactly from $3c\le2d$. Explicitly, write $c=2q+\varepsilon$, where $\varepsilon\in\{0,1\}$. Then $2d\ge6q+3\varepsilon$, and integrality of $d$ gives $d\ge3q+2\varepsilon=c+(c-q)$. The first branch has $k<c\le d$; the second has
+
+$$
+c\le c+k<c+q\le c+(c-q)\le d;
+$$
+
+and the third has
+
+$$
+c\le c+(k-q)<c+(c-q)\le d.
+$$
+
+Thus $\rho(j,k)$ is always a valid output coordinate. The two right input blocks may differ in length; the additional output strip needs only as many rows as the longer block, namely $c-q$.
+
+Let $E_{j,k}=e_j\otimes e_k$ be the input standard basis and $U_{i,s}=e_i\otimes e_s$ the output standard basis. When $j<a$, the corresponding columns of $L_1,L_2$ vanish, leaving only term $0$. When $j\ge a$, we have $(L_0)_{ij}=0$ because $i<a$, and the other two terms divide the inputs according to $k<q$ and $q\le k$. Every column therefore has exactly one nonzero entry, equal to $1$, and
+
+$$
+G E_{j,k}=U_{\rho(j,k)}.
+$$
+
+Distinct inputs cannot collide. The first branch has second output coordinate below $c$, whereas the other two branches have second coordinate at least $c$. Although the latter share the additional right strip, their first output coordinates are even and odd, respectively, so their images are disjoint. Within each branch the output $(i,s)$ uniquely recovers the input: in the first, $(j,k)=(i,s)$; in the second, $j=a+i/2$ and $k=s-c$; in the third, $j=a+(i-1)/2$ and $k=q+s-c$. The divisions are exact in their respective parity branches. Hence $\rho$ is injective. For any input indices $x,y$, the usual complex inner product now gives
+
+$$
+\begin{aligned}
+(G^*G)_{x,y}
+&=\langle G E_x,G E_y\rangle\\
+&=\langle U_{\rho(x)},U_{\rho(y)}\rangle
+=\delta_{x,y}.
+\end{aligned}
+$$
+
+This determines every Gram entry directly. Finally, the actual original factors are
+
+$$
+\begin{aligned}
+M_r&=\sqrt{\lambda}\,L_r,\qquad N_r\ \text{as specified above},\\
+F&=\sqrt{\lambda}\,G,\\
+F^*F&=\overline{\sqrt{\lambda}}\sqrt{\lambda}\,G^*G
+=\lambda I_{bc},
+\end{aligned}
+$$
+
+because $\lambda>0$ makes $\sqrt{\lambda}$ real with square $\lambda$. Throughout, the argument uses the displayed original $a\times b$ and $d\times c$ factors.
+
+The zero-dimensional cases remain subject to both dimension hypotheses. If $b=0$ or $c=0$, the input index set is empty, and $F^*F$ and $\lambda I_0$ are the unique empty square matrix. If $a=0$, $2b\le3a$ forces $b=0$; if $d=0$, $3c\le2d$ forces $c=0$. Nor is $q>0$ needed: when $c=1$, $q=0$, the second branch is empty, and the third works as written. Zero or linearly dependent factors need not be excluded. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-bridge-native-scalar-gram-odd title="Nine-column routing with an odd right input dimension"}
+Take
+
+$$
+(a,b,c,d,\lambda)=(2,3,3,5,2).
+$$
+
+Then $2b=6=3a$, $3c=9\le10=2d$, and $q=1$; the two right input blocks have lengths $1$ and $2$. The original left factors are three $2\times3$ matrices:
+
+$$
+\begin{aligned}
+M_0&=\sqrt2\begin{pmatrix}1&0&0\\0&1&0\end{pmatrix},\\
+M_1&=\sqrt2\begin{pmatrix}0&0&1\\0&0&0\end{pmatrix},\\
+M_2&=\sqrt2\begin{pmatrix}0&0&0\\0&0&1\end{pmatrix}.
+\end{aligned}
+$$
+
+The original right factors are all $5\times3$ matrices. The nonzero entries of $N_0$ are $(N_0)_{00}=(N_0)_{11}=(N_0)_{22}=1$; $N_1$ has only $(N_1)_{30}=1$; and $N_2$ has only $(N_2)_{31}=(N_2)_{42}=1$. All other entries vanish. Thus $F=\sum_{r=0}^2M_r\otimes N_r$ has $10$ rows and $9$ columns. Its first six columns $(j,k)$, with $j=0,1$ and $k=0,1,2$, are $\sqrt2\,U_{j,k}$; the remaining three are
+
+$$
+\begin{aligned}
+F E_{2,0}&=\sqrt2\,U_{0,3},\\
+F E_{2,1}&=\sqrt2\,U_{1,3},\\
+F E_{2,2}&=\sqrt2\,U_{1,4}.
+\end{aligned}
+$$
+
+The nine output coordinates are distinct, and only $(0,4)$ is unused. Every column therefore has squared norm $2$, and any two distinct columns have inner product zero, giving $F^*F=2I_9$ directly. Unequal right input blocks still allow the original three-term factors to produce an exact scalar column Gram.
+:::
+
+[@thm-bridge-native-scalar-gram-exists] extends the existence construction to arbitrary natural right dimensions satisfying $3c\le2d$, while retaining the left hypothesis $2b\le3a$. It is a sufficient condition: it does not assert that $3c\le2d$ is universally necessary for arbitrary original factors, and it does not give an existence classification in all dimensions. Under $3a<2b$, the later necessary bound gives $2c\le d$ ([@thm-bridge-native-rectangular-bound]); under the stronger threshold $2a<b$, it gives $3c\le d$ ([@thm-bridge-scalar-gram-obstruction]). The result here is an exact Gram identity in the finite native matrix model; it supplies no quantitative gap for approximate spectral flatness, physical realization, or derivation of the RT formula.
+
 ## 19.3 Cone domains and discrete capacity facets {#sec-discrete-facet-stitching}
 
 In [@ex-bridge-two-three], the internal bridge cut $3ac = 12$ sits well above the outer boundary cuts $ad = bc = 6$. Why do the quadratic cone inequalities $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ lie inside the natural domain where the three-bridge interior never bottlenecks the outer cuts?

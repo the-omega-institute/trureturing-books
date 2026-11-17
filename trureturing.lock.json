@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "8b6f6b4d974a7e495d2bc1346093d416d794b6cc",
-  "pinned_at": "2026-11-17T18:15:08Z",
+  "commit": "d7a4895532a9e7c6cd83826c3dcd2b83511159bd",
+  "pinned_at": "2026-11-17T19:16:30Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5209,9 +5209,17 @@
       "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeSaturation",
       "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.NativeSaturation.native_saturation_iff",
       "kind": "theorem",
-      "statement_id": "sha256:fdf6e542c260f73892fa96cc1f74110b8bb303982eff57c69a6de9e51cadae30",
+      "statement_id": "sha256:6f196515839162b59a28a64e76f54be9cf1fd0b93026167e0fddbb0a56c67da5",
       "line": 89,
       "signature": "theorem native_saturation_iff (a b q : ℕ) (hq : 0 < q) : (∃ (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin (3 * q)) (Fin (2 * q)) ℂ), (∑ r, kronecker (M r) (N r))ᴴ * (∑ r, kronecker (M r) (N r)) = (1 : Matrix (Fin b × Fin (2 * q)) (Fin b × Fin (2 * q)) ℂ)) ↔ 2 * b ≤ 3 * a"
+    },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeScalarGram.native_scalar_gram_exists": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeScalarGram",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.NativeScalarGram.native_scalar_gram_exists",
+      "kind": "theorem",
+      "statement_id": "sha256:7c63797727a308c8bd16320a1d99bcdb64124a3f2943b59e4f31472dfb48d8ba",
+      "line": 82,
+      "signature": "theorem native_scalar_gram_exists (a b c d : ℕ) (hleft : 2 * b ≤ 3 * a) (hright : 3 * c ≤ 2 * d) (lam : ℝ) (hlam : 0 < lam) : ∃ (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin d) (Fin c) ℂ), (∑ r, kronecker (M r) (N r))ᴴ * (∑ r, kronecker (M r) (N r)) = (lam : ℂ) • (1 : Matrix (Fin b × Fin c) (Fin b × Fin c) ℂ)"
     },
     "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained": {
       "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",
