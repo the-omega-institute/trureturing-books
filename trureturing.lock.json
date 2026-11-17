@@ -917,6 +917,14 @@
       "line": 40,
       "signature": "lemma xiReading_eq_zero_iff_nontrivial (rho : ℂ) : xiReading rho = 0 ↔ Zeta23.IsNontrivialZero rho"
     },
+    "D5/S3/Analytic/ZetaCriticalCurvature/OffLinePairCurvatureKernel.off_line_pair_slope_hasDerivAt_axis": {
+      "module": "D5/S3/Analytic/ZetaCriticalCurvature/OffLinePairCurvatureKernel",
+      "name": "D5.S3.Analytic.ZetaCriticalCurvature.OffLinePairCurvatureKernel.off_line_pair_slope_hasDerivAt_axis",
+      "kind": "theorem",
+      "statement_id": "sha256:836402e8793b6c55df0a879c19cbe749daff2039d47ec601c5234b3c616d24a8",
+      "line": 124,
+      "signature": "theorem off_line_pair_slope_hasDerivAt_axis {delta gamma t : ℝ} (hDelta : 0 < delta) : HasDerivAt (fun u : ℝ => offLinePairSlope delta gamma u t) (offLinePairCurvatureKernel delta gamma t) 0"
+    },
     "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification": {
       "module": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification",
       "name": "D5.S3.Arith.AbsoluteValues.OstrowskiClassification.rational_absolute_value_classification",
@@ -1100,6 +1108,14 @@
       "statement_id": "sha256:06adbb3f4d3939fb35410fe6889c079d1e4cccc07d7e50ba905727637b633ea3",
       "line": 197,
       "signature": "theorem power_fiber_card_eq_one_add_character_sum (χ : MulChar F ℂ) {d : ℕ} (hd : 0 < d) (hχ : orderOf χ = d) (a : F) : (Nat.card {x : F // x ^ d = a} : ℂ) = 1 + ∑ i ∈ Ico 1 d, (χ ^ i) a"
+    },
+    "D5/S3/CharacterSums/Fermat/CharacterPointCount.projective_weil_bound": {
+      "module": "D5/S3/CharacterSums/Fermat/CharacterPointCount",
+      "name": "D5.S3.CharacterSums.Fermat.CharacterPointCount.projective_weil_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:06adbb3f4d3939fb35410fe6889c079d1e4cccc07d7e50ba905727637b633ea3",
+      "line": 698,
+      "signature": "theorem projective_weil_bound {d : ℕ} (hd2 : 2 ≤ d) (hdiv : d ∣ Fintype.card F - 1) : |(Nat.card (projectivePoints F d) : ℝ) - ((Fintype.card F : ℝ) + 1)| ≤ (((d - 1) * (d - 2) : ℕ) : ℝ) * Real.sqrt (Fintype.card F)"
     },
     "D5/S3/Combinatorics/Graph/Chordal/GainPotential.SimpleGraph.IsChordal.exists_gain_potential": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/GainPotential",
