@@ -6,14 +6,14 @@
 >
 > *“把观察者内生放进来思考,何时粒子、何时波,似乎是观察者的注意力问题”*
 
-在[第六章](ch06-geometric-product.md)中，我们用一条克利福德几何积恒等式 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$ 给出了空间层面的波粒统一读法：**粒子是共线的内积投影线（$\cos\theta$），波是正交的外积楔积面（$\sin\theta\,\vv{I}$）**。现在，只要顺着这条正交线索往前多走半步，物理学中最深邃的那个谜团——**时间究竟是什么？**——便当场露出了它的双面几何真容！
+在[第六章](ch06-geometric-product.md)中，我们用一条克利福德几何积恒等式 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$ 完成了空间层面的波粒缝合：**粒子是共线的内积投影线（$\cos\theta$），波是正交的外积楔积面（$\sin\theta\,\vv{I}$）**。现在，只要顺着这条正交线索往前多走半步，物理学中最深邃的那个谜团——**时间究竟是什么？**——便当场露出了它的双面几何真容！
 
 在牛顿与日常经验的世界里，时间被想象成一条均匀流淌的一维标量直线 $t \in \mathbb{R}$：钟摆“滴答、滴答”地敲击出一串排成一列的历史刻度，就像纸带上被打孔机打出的一排离散圆孔。然而，在薛定谔方程 $i\hbar\frac{d}{dt}\lvert\psi(t)\rangle = H\lvert\psi(t)\rangle$ 主宰的微观世界里，只要你不去打孔测量，状态矢量却在复希尔伯特空间里沿着二维相位平面连续旋转，甚至同时横跨多条历史路径发生相干叠加！
 
-为什么同一个宇宙里会有两副截然不同的“时间面孔”？本章给作者的那句直觉洞见——**“线是经典时间，面积是量子时间”**——一个可以逐条检查的读法：
+为什么同一个宇宙里会有两副截然不同的“时间面孔”？本章将用严格证明的定理来展开作者的那句直觉洞见——**“线是经典时间，面积是量子时间”**：
 
-1. **量子时间读作二向量有向面积**：连续幺正演化 $U(t) = \exp\bigl((-it/\hbar)H_{\mathrm{op}}\bigr)$ 的无穷小生成元 $G = -(i/\hbar)H_{\mathrm{op}}$ 必为**反自伴算子**（$G^* = -G$）——这一半由 [@thm-calibrated-unitary-group] 证明；哈密顿量 $H_{\mathrm{op}} = i\hbar G$ 所度量的，可以读作量子态在单位时间内扫过的**二向量旋转面积率**；
-2. **经典时间读作一维幂等投影线**：只有当观察者用幂等投影尺 $P^2 = P$ 去拦截这片旋转面积、每一次翻越 $90^\circ$ 正交墙（$\langle m_0, m_1\rangle = 0$）落下一枚不可混淆的离散记录时，连续扫掠的二维量子面积才被切分成了“滴答、滴答”的一维经典时间刻度！（这两条是命名与读法：本章的 Lean 定理各自证明的是反自伴生成元与指数律、对易子概率流、以两条位移界为前提的记录时间下界等具体陈述，没有一条以“时间是线／面积”为结论。）
+1. **量子时间是二向量有向面积**：连续幺正演化 $U(t) = \exp\bigl((-it/\hbar)H_{\mathrm{op}}\bigr)$ 的无穷小生成元 $G = -(i/\hbar)H_{\mathrm{op}}$ 必为**反自伴算子**（$G^* = -G$），哈密顿量 $H_{\mathrm{op}} = i\hbar G$ 所度量的，恰恰是量子态在单位时间内扫过的**二向量旋转面积率**；
+2. **经典时间是一维幂等投影线**：只有当观察者用幂等投影尺 $P^2 = P$ 去拦截这片旋转面积、每一次翻越 $90^\circ$ 正交墙（$\langle m_0, m_1\rangle = 0$）落下一枚不可混淆的离散记录时，连续扫掠的二维量子面积才被切分成了“滴答、滴答”的一维经典时间刻度！（这两句是本书的读法，不是某条 Lean 定理的结论；下文的记录时间下界也以两条位移界为前提。）
 
 ::: {.figure src="ch07-overview"}
 **图 7。** 本章地图：第 I 栏，琥珀色的箭头从 $m_0$ 转到与它垂直的 $m_1$，扫过一块品红的四分之一圆，两个端点是两声滴答；第 II 栏，横轴是转角 $\omega t$，灰色虚线是不看时留在 $\lvert 0\rangle$ 的概率，青色的线是测 $4$ 次时的概率，到 $180^\circ$ 还剩 $0.531$；第 III 栏，记账余量 $D_{\mathrm{freeze}} = \Delta E_{\mathrm{pass}} - \Delta S/\beta$ 随逆温度 $\beta$ 变化，在 $\beta_c$ 左边是品红的负余量，右边是青色的正余量。
@@ -31,7 +31,7 @@ $$
 \left.\frac{d}{dt}\bigl(U(t)^* U(t)\bigr)\right|_{t=0} = G^* U(0) + U(0)^* G = G^* + G = 0 \quad\Longrightarrow\quad G^* = -G!
 $$
 
-看清楚了吗？**任何保模长连续演化的真实几何生成元 $G$，必然是一个反自伴算子（$G^* = -G$）！** 在单比特上，它字面上就是第五章的二维有向面积旋转生成元（bivector generator）；一般 $n$ 维时，$G$ 不必满足 $G^2 \propto -I$，而是按本征平面分解为若干张互相对易的旋转面之和，“面积”是这种分解下的类比。
+看清楚了吗？**任何保模长连续演化的真实几何生成元 $G$，天生必然是一个反自伴算子（$G^* = -G$）——也就是第五章证明的二维有向面积旋转生成元（bivector generator；一般维数时是若干张互相对易的旋转面之和）！**
 
 物理学家之所以在薛定谔方程里写出自伴的哈密顿量 $H_{\mathrm{op}}$（满足 $H_{\mathrm{op}}^* = H_{\mathrm{op}}$），仅仅是因为人类习惯用实数能量刻度来给仪表盘标定读数：人为地给反自伴的几何旋转生成元 $G$ 乘上一个旋转 $90^\circ$ 的因子 $i\hbar$（其中 $\hbar \neq 0$ 是把几何弧度换算为物理作用量焦耳·秒的校准常数），定义
 
@@ -39,13 +39,13 @@ $$
 H_{\mathrm{op}} := (i\hbar) G \quad\Longleftrightarrow\quad G = -\frac{i}{\hbar} H_{\mathrm{op}}!
 $$
 
-因为 $i$ 和 $G$ 在取共轭伴随时双双变号（$(-i)(-G) = +iG$），两个负号相乘抵消，这才把反自伴的**二向量面积旋转率 $G$** 包装成了自伴的**厄米哈密顿量 $H_{\mathrm{op}}$**！在这种读法下，薛定谔方程不是一条需要死记硬背的神秘波动方程，它可以看作再朴素不过的刚体角速度公式“**瞬时转向率 $=$ 单位时间扫过的二向量面积 $G$**”。
+因为 $i$ 和 $G$ 在取共轭伴随时双双变号（$(-i)(-G) = +iG$），两个负号相乘抵消，这才把反自伴的**二向量面积旋转率 $G$** 包装成了自伴的**厄米哈密顿量 $H_{\mathrm{op}}$**！薛定谔方程根本不是一条需要死记硬背的神秘波动方程，它不过是再朴素不过的刚体角速度公式“**瞬时转向率 $=$ 单位时间扫过的二向量面积 $G$**”。
 
 ::: {.figure src="ch07-area-rate"}
 **保模长的生成元只把箭头往垂直方向推。** 在琥珀色箭头 $\psi(t)$ 的尖端，紫色的箭头 $G\psi$ 沿切线，与 $\psi$ 成直角，所以箭头只转不伸缩；淡灰的箭头是之前相隔 $\Delta t$ 的位置，每个 $\Delta t$ 扫过一块同样大的品红扇形。示意：把复相位的转动画成实平面上的转动；自伴性与指数律见 [@thm-calibrated-unitary-group]。
 :::
 
-在 Lean 4 形式化模块 `Quantum/Dynamics/CalibratedUnitaryGroup` 中，下面这条定理在完备复内积空间（希尔伯特空间）$H$ 上一次性严格证明了：从单参数保模长群出发，校准后的哈密顿量 $H_{\mathrm{op}} = (i\hbar)G$ 必自伴、有限时间演化必为指数旋子 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$，且处处满足算子薛定谔微分方程！定理的前提是 $U$ 在 $0$ 处按算子范数可导，这相当于有界生成元，特别涵盖有限维情形；位置、动量、氢原子等无界哈密顿量只有强连续性，需要 Stone 定理（文献结果，未在本书形式化）。
+在 Lean 4 形式化模块 `Quantum/Dynamics/CalibratedUnitaryGroup` 中，下面这条定理在完备复内积空间（希尔伯特空间）$H$ 上一次性严格证明了：从单参数保模长群出发，校准后的哈密顿量 $H_{\mathrm{op}} = (i\hbar)G$ 必自伴、有限时间演化必为指数旋子 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$，且处处满足算子薛定谔微分方程！（定理的前提是 $U$ 在 $0$ 处按算子范数可导，即有界生成元，涵盖有限维；无界哈密顿量需要 Stone 定理，属文献结果，未在本书形式化。）
 
 ::: {.theorem #thm-calibrated-unitary-group title="单参数幺正演化群的校准自伴哈密顿量与指数薛定谔方程定理" lean="D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group"}
 设 $H$ 为完备复内积空间，$U : \mathbb{R} \to (H \to_L[\mathbb{C}] H)$ 为连续线性算子构成的单参数族，$G : H \to_L[\mathbb{C}] H$ 为 $U$ 在 $t = 0$ 处的导数（`HasDerivAt U G 0`）。若 $U$ 满足单参数幺正群条件：
@@ -94,7 +94,7 @@ $$
 又因 $\rho_t^* = \rho_t, H^* = H, P^* = P$，取复共轭验证知 $i\Tr(\rho_t(HP - PH))$ 等于其自身共轭，故为纯实数，实部算子 $\operatorname{Re}$ 保持其值不变。最后，若 $HP - PH = 0$，则导数 $p'(t)$ 在 $\mathbb{R}$ 上恒等于 $0$，故 $p(t) = p(0)$ 处处守恒（结论 3）。完整证明由 Lean 内核检查。
 :::
 
-特别地，如果初态 $\psi$ 本身就是哈密顿量 $H$ 的能量本征态（$H\psi = E\psi$），那么在 Lean 模块 `Quantum/Dynamics/EnergyEigenstateStationarity` 中，定理 [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) 与 [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) 严格证明了：它的能量涨落方差恒为零，演化态 $\psi(t) = e^{-itE/\hbar}\psi$ 仅仅在原方向线上乘了一个不可见的全局相位，其秩一密度矩阵与一切可观测量的期望值在所有时刻 $t$ 纹丝不动（这两条定理取 $\hbar = 1$、有限维矩阵）！它与前面 [@prop-projection-probability-flow] 给出的“$[H, P] = 0$ 时投影概率不动”是两条不同的充分条件；把二者合读为**没有非零的对易子外积面积 $[H, P] \neq 0$，就没有一维投影线上可见的经典时间流逝**，是本书的读法。
+特别地，如果初态 $\psi$ 本身就是哈密顿量 $H$ 的能量本征态（$H\psi = E\psi$），那么在 Lean 模块 `Quantum/Dynamics/EnergyEigenstateStationarity` 中，定理 [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) 与 [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) 严格证明了：它的能量涨落方差恒为零，演化态 $\psi(t) = e^{-itE/\hbar}\psi$ 仅仅在原方向线上乘了一个不可见的全局相位，其秩一密度矩阵与一切可观测量的期望值在所有时刻 $t$ 纹丝不动！**没有非零的对易子外积面积 $[H, P] \neq 0$，就没有一维投影线上可见的经典时间流逝！**
 
 ::: {.figure src="ch07-commutator-flow"}
 **转轴与尺子不平行，影子才会动。** 单比特特例：尺子 $P = \lvert 0\rangle\langle 0\rvert$ 是青色的竖轴，紫色的转轴 $H$ 从竖直斜开 $40^\circ$。琥珀色的态从北极出发，绕紫色的轴走一圈虚线小圆，它在青色竖轴上的影子随之上下移动；右边青色的曲线是留在 $\lvert 0\rangle$ 的概率 $p(t)$，在 $1$ 与 $0.59$ 之间起伏。转轴与尺子重合时 $[H, P] = 0$，灰色的 $p(t)$ 一直是 $1$（[@prop-projection-probability-flow]；单比特的曲线是手工推导与数值）。
@@ -112,7 +112,7 @@ $$
 
 换句话说：**在经典时间轴上每往前迈出一步真正可区分的“滴答”，量子态在射影球面上就必须实打实地翻越一堵 $90^\circ$（$\pi/2$ 弧度）的正交墙！**
 
-在 Lean 模块 `QuantumBounds/FubiniStudyRecordTime` 中，我们先证明了任意三根单位态向量 $a, b, c$ 之间的富比尼—施图迪球面三角不等式 $\theta_{\mathrm{FS}}(a, c) \le \theta_{\mathrm{FS}}(a, b) + \theta_{\mathrm{FS}}(b, c)$（[`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle)）。由此出发，如果从一个锚定中间态 $a$ 到两个正交目标记录态 $m_0, m_1$（$\langle m_0, m_1\rangle_{\mathbb{C}} = 0$）的角位移分别受限于速度上界 $\theta_{\mathrm{FS}}(a, m_k) \le \mathrm{energy}\cdot\tau / \hbar$（$k = 0, 1$），那么两段路程加起来至少要跨过 $\theta_{\mathrm{FS}}(m_0, m_1) = \pi/2$ 的正交鸿沟，从而在这两条位移界成立的前提下，给出单步记录时间 $\tau$ 的条件下界与有限时长 $T$ 内的最大经典记录步数 $N$！
+在 Lean 模块 `QuantumBounds/FubiniStudyRecordTime` 中，我们先证明了任意三根单位态向量 $a, b, c$ 之间的富比尼—施图迪球面三角不等式 $\theta_{\mathrm{FS}}(a, c) \le \theta_{\mathrm{FS}}(a, b) + \theta_{\mathrm{FS}}(b, c)$（[`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle)）。由此出发，如果从一个锚定中间态 $a$ 到两个正交目标记录态 $m_0, m_1$（$\langle m_0, m_1\rangle_{\mathbb{C}} = 0$）的角位移分别受限于速度上界 $\theta_{\mathrm{FS}}(a, m_k) \le \mathrm{energy}\cdot\tau / \hbar$（$k = 0, 1$），那么两段路程加起来至少要跨过 $\theta_{\mathrm{FS}}(m_0, m_1) = \pi/2$ 的正交鸿沟，从而直接锁死了单步记录时间 $\tau$ 的下界与有限时长 $T$ 内的最大经典记录步数 $N$！
 
 ::: {.figure src="ch07-wall"}
 **两段各不超过 $E\tau/\hbar$ 的路，加起来至少要跨过 $90^\circ$。** 赤道上的 $m_0$ 与 $m_1$ 正交，它们之间是品红的 $90^\circ$ 弧；从琥珀色的锚点 $a$ 到两者各有一段青色的弧，每段受速度界 $\le E\tau/\hbar$ 限制（$E$ 即定理中的 $\mathrm{energy}$）。两段青色弧之和不小于品红的弧，于是 $2E\tau/\hbar \ge \frac{\pi}{2}$（[@thm-fubini-study-record-time]）。示意：图中是实单位向量的球面，重叠为正时富比尼—施图迪夹角就是弧长。
@@ -740,7 +740,7 @@ $$
    $$
    \tau_\perp \ge \frac{\pi\hbar}{2\,\langle H\rangle}.
    $$
-3. **Misra–Sudarshan 量子芝诺定理（B. Misra & E. C. G. Sudarshan, 1977, J. Math. Phys. **18**, 756）**：在有限维（或有界自伴 $H$）与正交投影 $P$ 的有界特例中，等间隔投影测量次数 $N \to \infty$ 时可得到强收敛公式 $\lim_{N\to\infty} (P e^{-iHT/\hbar N} P)^N = P e^{-i(PHP)T/\hbar} P$，从而在该特例中阻断向正交补空间 $I-P$ 的跃迁。无界情形需要额外的定义域、半有界性和强极限存在条件；仅有有限能量期望并不足以推出这个一般结论。
+3. **Misra–Sudarshan 量子芝诺定理（B. Misra & E. C. G. Sudarshan, 1977）**：在有限维（或有界自伴 $H$）与正交投影 $P$ 的有界特例中，等间隔投影测量次数 $N \to \infty$ 时可得到强收敛公式 $\lim_{N\to\infty} (P e^{-iHT/\hbar N} P)^N = P e^{-i(PHP)T/\hbar} P$，从而在该特例中阻断向正交补空间 $I-P$ 的跃迁。无界情形需要额外的定义域、半有界性和强极限存在条件；仅有有限能量期望并不足以推出这个一般结论。
 
 上述连续时间积分界与强算子拓扑极限作为物理文献背景列出，不计入本书的 Lean 形式化验证账本。
 :::
