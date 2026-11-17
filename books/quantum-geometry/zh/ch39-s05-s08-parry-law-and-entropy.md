@@ -308,7 +308,7 @@ $$
 
 这里的存在量词选出一组同时承载全部结论的 $e,\mu,\nu$，没有把任意预先指定的三元组作为输入，也没有宣称不变概率测度唯一。混合性与选择器障碍已经有了本条引用的依据；完整移位熵、最大熵比较与唯一性、阿布拉莫夫公式、谱隙、可计算采样算法和物理实现仍超出这条定理的结论。下方的边界碰撞概率、有限逃逸对比例与各类熵，仍须分别按各自定义阅读。
 
-在这一平稳律旁，还有两条各自独立的形式化定量定律共同约束边界碰撞与观测盲区：其一是帕里边界柱集上界定理 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)，它对给定的 $n \ge 1$ 组正游程对集合 $C$（每段 `1` 游程 $< k$ 且编码长度不超过视界 $R$）证明，左右边界选定前缀的平稳质量分别不超过 $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ 与 $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$，其中 $p$ 为帕里参数，$S=\sum_{c\in C}p^{\lvert c\rvert}$（$\lvert c\rvert$ 为 $c$ 中全部游程长度之和），$M$ 是同一求和只取首个游程对第一分量不小于其余各对第一分量的那些 $c$（此处的 $S$ 与下文的观测目录 $S$ 无关）（这是精确概率不等式，而非分形维数或熵值公式）；其二是与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5 一脉相承的有限竞技场信息逃逸率判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，它证明在基数 $q \ge 2$ 的非退化有限状态集上，观测目录 $S$ 无法区分的有序相异状态对集合 $E(S)$ 定义出归一化有理逃逸率 $e(S) = |E(S)|/[q(q-1)]$，而某项观测 $i$ 严格降低逃逸率当且仅当其唯一捕获对计数 $|U_i| > 0$（且差值恰为 $|U_i|/[q(q-1)]$）。有限有序逃逸对比例 $e(S)$、量子态冯·诺依曼熵 $S(\sigma_b)$ 与无限移位系统的遍历熵在数学定义上彼此独立，绝不可混为一谈。
+在这一平稳律旁，还有两条各自独立的形式化定量定律共同约束边界碰撞与观测盲区：其一是帕里边界柱集上界定理 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)，它对给定的 $n \ge 1$ 组正游程对集合 $C$（每段 `1` 游程 $< k$ 且编码长度不超过视界 $R$）证明，左右边界选定前缀的平稳质量分别不超过 $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ 与 $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$（这是精确概率不等式，而非分形维数或熵值公式）；其二是与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5 一脉相承的有限竞技场信息逃逸率判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，它证明在基数 $q \ge 2$ 的非退化有限状态集上，观测目录 $S$ 无法区分的有序相异状态对集合 $E(S)$ 定义出归一化有理逃逸率 $e(S) = |E(S)|/[q(q-1)]$，而某项观测 $i$ 严格降低逃逸率当且仅当其唯一捕获对计数 $|U_i| > 0$（且差值恰为 $|U_i|/[q(q-1)]$）。有限有序逃逸对比例 $e(S)$、量子态冯·诺依曼熵 $S(\sigma_b)$ 与无限移位系统的遍历熵在数学定义上彼此独立，绝不可混为一谈。
 
 ::: {.remark #rem-ch39-p2e-abramov-literature title="文献结果：帕里最大熵马尔可夫测度与阿布拉莫夫诱导回归熵公式（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 据 M. Pollicott 等人的综述 *The mathematical research of William Parry FRS*（[机构存档 PDF](https://wrap.warwick.ac.uk/id/eprint/682/1/WRAP_pollicott_Parry_research.pdf)，§2.3，pp. 323–324；DOI：[10.1017/S0143385708000102](https://doi.org/10.1017/S0143385708000102)），W. Parry（*Trans. Amer. Math. Soc.* **112**, 1964, 55–66）证明非周期有限型双向子移位存在唯一最大熵测度，且该测度为内禀马尔可夫测度。对这里的禁 $1^K$ 子移位，最大熵是在其上所有移位不变 Borel 概率测度中比较的，竞争测度无需满足马尔可夫性或遍历性；唯一性指只有帕里测度达到最大值，其余不变概率测度的熵均严格更小。采用自然对数时，单步拓扑熵（亦即最大柯尔莫哥洛夫—西奈度量熵）为 $\ln\beta_K = -\ln p$，其中 $p = \beta_K^{-1}$；换成比特单位须除以 $\ln 2$，即 $h_{\mathrm{top}}(\Sigma_K) = \log_2 \beta_K\;\text{bits/step}$（数值计算 `NUM` 给出 $K = 2, 3, 4$ 时依次约为 $0.69424$、$0.87915$、$0.94678\;\text{bits/step}$，随 $\beta_K \nearrow 2$ 单调趋向 $1\;\text{bit/step}$）。
@@ -432,7 +432,7 @@ $$
 =\rho^{F(W_{[s,s+m)})}.
 $$
 
-这说明交替电荷为什么会进入跃迁比值的估计，却尚未给出谱界。下面的精确陈述与构造来自 [Tribonacci 前缀反例的源证明](https://github.com/the-omega-institute/trureturing/pull/30577)（`trureturing` 仓库中的形式化合入记录，不是已发表文献）。
+这说明交替电荷为什么会进入跃迁比值的估计，却尚未给出谱界。下面的精确陈述与构造来自 [Tribonacci 前缀反例的源证明](https://github.com/the-omega-institute/trureturing/pull/30577)。
 
 ::: {.theorem #thm-ch39-p2e-tribonacci-prefix-log-refutation title="实际 Tribonacci 词的统一对数区段界不成立" lean="D5/S1/Words/TribonacciPrefixRefutation.result"}
 对上述固定的实际词 $W$ 与整数权重 $w$，有
@@ -1004,7 +1004,7 @@ $$
 
 这里 $J$ 与 $\rho$ 无关；结论覆盖整个开区间，不把端点 $\rho=0$ 的退化模型纳入假设。
 
-这是所列窗口构造、完整逆矩阵质量估计与有限维谱转换的纸面应用推导，不带独立 Lean 验证徽章；其参数对应与形式化来源见[形式化接口](https://github.com/the-omega-institute/trureturing/issues/30166)（`trureturing` 仓库的工作议题，不是已发表或经评审的出处）。有限开链的这一谱界不构造多体基态，也不确定空间切口的纠缠熵或劳齐边界的维数。
+这是所列窗口构造、完整逆矩阵质量估计与有限维谱转换的纸面应用推导，不带独立 Lean 验证徽章；其参数对应与形式化来源见[形式化接口](https://github.com/the-omega-institute/trureturing/issues/30166)。有限开链的这一谱界不构造多体基态，也不确定空间切口的纠缠熵或劳齐边界的维数。
 :::
 
 上例给出指定偶数开前缀的纸面 $1/N_j$ 界与趋零结论。分形熵标度仍需独立的物理态与空间切口论证；[@prob-ch39-p2e-fractal-horizon] 的这些部分保持开放。
@@ -1125,7 +1125,7 @@ $$
 | **7. 跨切口编码纠缠秩** | 跨切口条件 $\tau(x)+\iota(y)<K$ 下的可达页秩充要矩形 $1 \le r_b \le R_b$ 与最大页熵 $\ln R_b$ [`complete_original_direct_rank_entropy`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy)（[@thm-ch39-p2e-direct-encoder-ranks]）及谱阻塞 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) | `LEAN ✓`（秩等于 $K$ 仅在 $K \le R_b$ 时条件可达，非普适恒等）+ `NUM`（如 $R_0=6, R_1=5$）+ `文献结果`（黄金链与里德堡实验，[@rem-ch39-p2e-rydberg-anyon-literature]） |
 | **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓`（有限与马尔可夫定律）+ `文献结果`（$\log_2\beta_K$ 与阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `OPEN`（分形视界纠缠标度，[@prob-ch39-p2e-fractal-horizon]） |
 
-当我们在下面的综合实验室中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，本节的多切面几何结构便逐层显现（把它们读作整章自指本体论 $\psi \equiv \psi(\psi)$ 的切面属 `MODEL`）：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核验证的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核各自只担保自己的陈述；周围的经典文献、数值实验与跨学科几何诠释按各自标签另行标界，并不由这些定理推出，上表也把八项之间的关系逐项标为各自独立或 `MODEL`。穿越这座离散自指沙盘之后，本章后六节将沿 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md) 贯通五阶自指不动点谱系、主动停机精度与时间长河谱排序、普适比较主频钟慢以及极小圆弧体万力合流，再在 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) 确立三维概念场封顶原理、希尔伯特多概念混编账本与极小圆弧场大统一理论（AF-GUT），并在峰顶推开正文的最后一道门扉，步入[终章](coda.md)《在所有的球之外》。
+当我们在下面的综合实验室中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，整章自指本体论 $\psi \equiv \psi(\psi)$ 的多切面几何结构便清清楚楚地浮现出来：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核锁定的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核构成了坚硬的绿色骨架，支撑起周围明确标界的经典文献、数值实验与跨学科几何诠释。穿越这座离散自指沙盘之后，本章后六节将沿 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md) 贯通五阶自指不动点谱系、主动停机精度与时间长河谱排序、普适比较主频钟慢以及极小圆弧体万力合流，再在 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) 确立三维概念场封顶原理、希尔伯特多概念混编账本与极小圆弧场大统一理论（AF-GUT），并在峰顶推开正文的最后一道门扉，步入[终章](coda.md)《在所有的球之外》。
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" height="640"}
 **交互实验室 `ORTHO//RAUZY`**：齐肯多夫、皮索与劳齐八概念综合沙盘。自由切换上表对应的八个预设场景、调节阶数 $K$、素数基数 $p$、字长视界与三维观察视角，并直接拖拽物理轴与内部平面上的分解点：实时核对禁 $1^K$ 合法字计数、皮索共轭根单位圆盘收缩、模 $p^k$ 余数树首次区分层级、$K = 3$ 劳齐内窗三支仿射覆盖（及 $K = 4$ 内部坐标采样云）、$\theta^*$ 与 $|\alpha|_{K=3}$ 的数值比对、跨切口可达秩矩形 $[1, R_0] \times [1, R_1]$，以及帕里平稳分布与有限逃逸对账本。绿色依据框严格对应 Lean 已验证定理，文献结论、数值计算、诠释模型与开放问题分别按各自标签独立标示。
