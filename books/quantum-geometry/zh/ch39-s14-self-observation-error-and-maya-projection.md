@@ -34,6 +34,10 @@
    - **静态广延全部归零**：正交残差向量 $\mathbf{r} = \mathbf{\Omega} - \langle \mathbf{I}, \mathbf{\Omega} \rangle \mathbf{I} = \mathbf{0}$，范数 $\|\mathbf{r}\| = \sin 0 = 0$；既切不出与 $\mathbf{I}$ 垂直的新维度，也张不开二维虚平面、面积二形式与三维体积三形式。
    - **动态演化与涨落全部止息**：在动力学端，若纯态密度算符 $\rho_0 = |\mathbf{I}\rangle\langle\mathbf{I}|$ 恰与自伴生成元 $H$ 的本征轴完全对齐（$H|\mathbf{I}\rangle = E|\mathbf{I}\rangle$，零倾角），则由下文 [@thm-ch39-self-observation-error-and-maya-projection] 第 13–14 款（[`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) 与 [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero)，`LEAN ✓`）及第 12 款（[`projection_probability_flow`](lean:D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow)，`LEAN ✓`），不仅能量方差严格归零 $\operatorname{Var}_{\rho_0}(H) = 0$，而且对一切参数 $t \in \mathbb{R}$ 恒有 $e^{-itH}\rho_0 e^{itH} = \rho_0$，任意与 $H$ 对易的投影测量概率导数恒等于零。既无残差有待下一拍追赶，也无可分辨的先后拍序可供计时——整座宇宙坍缩回不可言说、无广延亦无流逝的纯恒等寂静 `1 = 1`。
 
+::: {.viz src="self-observation-error-maya-sandbox" preset="zero-error-turiya-silence" height="500"}
+**零误差，只剩点场。** 误差角归零时，投影残差、品红面积与紫色体积一同淡出，中央只留下银白点场；单位预算仍为 1。
+:::
+
 3. **闭环自指为何必有非零误差（$\varepsilon > 0$）：洛维尔对角线逃逸与道蒂稳态吸引子 $\theta^*$（`LEAN ✓` + `文献结果` + `MODEL`）**。
    既然 $\varepsilon = 0$ 如此简洁完美，为什么唯一本体场在“自照”时不能一步到位停在 $\varepsilon = 0$？症结在于 [§34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names) 与 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md) 揭示的**无外部第三点自指铁律**：唯一本体 $\mathbf{\Omega}$ 之外不存在凌驾其上的外部第三点裁判 $C$ 来替它免费校准零点；只要系统试图在自身有限可寻址目录内部同时扮演“能观标尺 $\mathbf{I}$”与“所观对象 $\mathbf{\Omega}$”，任何非平凡区分操作（无不动点翻转或半拍相位旋移 $f(y) \neq y$）都会立即触发下文 [@thm-ch39-self-observation-error-and-maya-projection] 第 4–5 款的洛维尔—哥德尔对角线逃逸定理（[`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package) 与 [`complete_diagonal_separationDeficit_nonempty`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty)，`LEAN ✓`；历史源流见 [@rem-ch39-gram-schmidt-lawvere-maya-zeno-literature] 第 2 款 Gödel 1931 与 Lawvere 1969，`文献结果`），迫使自应用对角线严格逸出当前解码目录的值域（分离赤字集非空），并在有限自停机孔径下留下正精度下界 $\varepsilon_{\mathrm{self}} > 0$（[§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md)）。
 
@@ -44,6 +48,10 @@
    $$
 
    且 $\theta^*$ 可展为以 $\pi$ 的幂次计权、系数严格属于有理数域 $\mathbb{Q}$ 的绝对收敛级数（由林德曼—魏尔斯特拉斯定理可进一步证得 $\theta^*$ 为超越数，见 [@rem-ch39-gram-schmidt-lawvere-maya-zeno-literature] 第 2 款，`文献结果`；将该数学不动点诠释为无外部裁判闭环自观测的稳态特征失准角，属本书的 **`MODEL`** 层命题）。换言之，**非零误差 $\varepsilon > 0$ 绝非实验仪器的偶然粗糙，而是唯一“一”能够在内部切出“能观与所观”、从而显影为森罗“多”的唯一几何许可证。**
+
+::: {.viz src="self-observation-error-maya-sandbox" preset="dottie-self-focus-steady-state" height="500"}
+**对焦收向非零角。** 青色自指螺线从 0 出发，围绕道蒂角交替过冲；紫色进动锥保留非零张角。迭代的物理读法属于 `MODEL`。
+:::
 
 ## 39.14.2 一笔正交残差的双向分岔：静态投影结果阶梯与动态追赶观测动作 {#sec-ch39-14-2}
 
@@ -99,6 +107,10 @@ $$
 
    （等倾角 $\varepsilon_1 = \varepsilon_2 = \varepsilon_3 = \varepsilon$ 时为 $\det G_3 = \sin^6\varepsilon$，欧氏有向体积幅值为 $\sqrt{\det G_3} = \sin^3\varepsilon$；注意将其与 [§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron) 中一脊固定为单位长、仅两翼微倾时的三面体体积平方标度 $\propto \sin^2\varepsilon$ 区分开来——此处三支腿本身全是一阶正交残差 $\mathbf{r}_a = (\sin\varepsilon)\mathbf{e}_a$，故体积严格按三阶 $\sin^3\varepsilon = \varepsilon^3 + \mathcal{O}(\varepsilon^5)$ 标度）。由 `three_anchor_gram_det_pos_iff`，三维体积严格非退化（$\det G_3 > 0$）**当且仅当**三支误差腿实线性无关，即 $\varepsilon_1, \varepsilon_2, \varepsilon_3 \in (0, \pi)$ 全部非零；而在三维空间概念块 $V_{\mathrm{pos}}^{(3)}$ 内，第四次楔积恒等归零（$\Lambda^4(\mathbb{R}^3) = \{0\}$），单概念空间广延至此彻底饱和封顶。
 
+::: {.viz src="self-observation-error-maya-sandbox" preset="static-projection-results-hierarchy" height="500"}
+**一笔误差长出线、面、体。** 青色投影与往返回声旁，品红残差、平行四边形与球面三角形分别显示线残差、欧氏面积与球面角盈，紫色盒体显示三阶体积；球面角盈与欧氏面积保持各自的量度。
+:::
+
 **第二类：动态“观测动作概念”——将追赶残差的迭代动作动力学化为运动、动量与时间。**
 
 静态投影只账算了某一拍定格切面上的几何余数；但对于守恒总预算 $\|\mathbf{\Omega}\|^2 = 1$ 的幺正系统而言，当拍往返读数仅收回 $\cos^2\varepsilon < 1$，遗漏在盲区里的 $\sin^2\varepsilon > 0$ 迫使观测切面启动下一拍**校准旋移（calibration rotor）**去追赶残差——而这串校准动作本身，正是物理学中“运动”与“时间”的真实面目：
@@ -137,6 +149,10 @@ $$
 
      因而轨道切向速率 $\|\dot{\mathbf{I}}(t)\|=\lvert\omega\rvert\sin\varepsilon=2\Delta E/\hbar$，富比尼—施图迪量子演化速率则为 $v_{\mathrm{FS}}=\Delta E/\hbar$（[第七章](ch07-geometric-time-and-speed-limits.md)）。这些手算量与 [`projection_probability_flow`](lean:D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow) 的非对易概率流相容；$\varepsilon=0$ 的本征态极限对应 [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) 与 [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero)（`LEAN ✓`）。**固定非零 $\omega$ 时，有非零误差 $\varepsilon>0$，才有这条轨道上的非零量子钟速；一旦 $\varepsilon\to0^+$，速率与能量涨落同步归零。** 在另一端 $\varepsilon=90^\circ$，能量涨落反而达到最大值 $\hbar\lvert\omega\rvert/2$；它不是希尔伯特叠加角的 $\sin(2\theta)$ 因子。
 
+::: {.viz src="self-observation-error-maya-sandbox" preset="dynamic-observation-action-chase" height="500"}
+**点场不移，观测尺绕锥追赶。** 银白核心不动，青色弧连起紫色锥上的校准步，品红尖刺保留各步的生存尾项；此处能量涨落沿用正文布洛赫极角约定，随 $\sin\varepsilon/2$ 变化。
+:::
+
 3. **可逆幺正相位时间与不可逆热力学熵箭头的严格分界（`手工推导` + `MODEL`）**。
    此处还须守住一条热力学底线：纯幺正校准流 $\exp(-itH/\hbar)$（或平面旋子流 $\exp(-\omega t J)$）本身是双射保内积演化，其全局冯·诺依曼熵恒保持不变（$\Delta S_{\mathrm{vN}} = 0$），只能给出**可逆的几何相位钟拍序**，本身并不产生单向熵增。物理学中不可逆的**热力学时间箭头与熵流**（$\Delta S_{\mathrm{window}} \ge 0$），唯有在内部观察者受限于有限格拉姆记忆窗口 $W$（[§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)–[§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus)），不得不对溢出窗口外的历史正交残差通道 $\bar{W}$ 执行偏迹粗粒化 $\rho_W = \operatorname{Tr}_{\bar{W}}(\rho_{\mathrm{tot}})$ 时，才由被抹除的跨拍相位关联严格涌现。
 
@@ -153,6 +169,10 @@ $$
 | **空间运动、动量与时间演化** | 动态无穷序列：$\|\dot{\mathbf{I}}\| = \lvert\omega\rvert\sin\varepsilon$，$s_N = \sin^2\varepsilon\cos^{2(N-1)}\varepsilon$ | 追赶未尽残差的切面角旋移、圆锥进动与窗口偏迹 $\operatorname{Tr}_{\bar{W}}$ | 演化速率与能量涨落 $\Delta E \to 0$，动静先后止息 |
 
 这张总表彻底廓清了“一切皆为幻象”的科学内涵（`MODEL`）：物理世界之所以被称为 *Māyā*（丈量显影之相），**绝非因为它虚无缥缈或不守定律，恰恰相反，是因为它像一束单色白光穿过倾角为 $\varepsilon$ 的光学棱镜时折射出的精密光谱一样，每一寸面积、每一分体积、每一拍量子进动都严格服从由失准角 $\varepsilon$ 支配的系统性几何相差定律**。同时，遵照本书严守的认识论红线（[§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary)、[@prob-ch34-sm-generations-and-couplings]、[@prob-ch34-gravity-dynamics-and-coupling] 及 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector]，`OPEN`），必须坦诚申明：将物理常数与动力学律解读为“自观测棱镜在各阶上的误差传递函数”属于定性结构性的 **`MODEL`（模型诠释）**；电磁精细结构常数 $\alpha_{\mathrm{EM}} \approx 1/137.035999$、标准模型三代汤川质量谱与规范耦合常数、以及连续统爱因斯坦场方程与牛顿引力常数 $G_N$ 的定量第一性原理导出，**并未**在本节仅凭单一角度 $\varepsilon$ 或道蒂不动点 $\theta^*$ 算得，仍作为公开的定量前沿问题坦诚保留于 `OPEN` 边界。
+
+::: {.viz src="self-observation-error-maya-sandbox" preset="maya-scaling-collapse-audit" height="500"}
+**收拢同一误差，逐阶撤去广延。** 时间轴把误差角从 60° 收向 0°；品红面积与紫色体积比线残差更快消退，单位预算始终保留。
+:::
 
 下面将自观测误差分解、静态外积阶梯与动态校准守恒律正式封装为数学定义与十六锚点主定理：
 
@@ -273,3 +293,7 @@ $$
 :::
 
 至此，我们已经看清：只要唯一点场 $\mathbf{\Omega}$ 对自身的观测投影携带着非零失准角 $\varepsilon > 0$，那一笔未除尽的正交残差便一面在静处凝成正交维、虚数算符、面积与三维体积，一面在动处流成角度重寻址的运动与永不除尽的时间。顺着上表第二行那根最关键的枢轴——实恒等主轴 $\mathbf{I}$ 与严格垂直于它的 $90^\circ$ 虚数盲区维 $\hat{\mathbf{i}}$——继续向纵深叩问：如果把常住不动的实轴 $\mathbf{I}$ 直接认作唯一主格“能观本体”，把整个物理时空与众生悲欢所栖居的正交虚子空间认作发生在 $90^\circ$ 盲区里的幺正演化剧场，为什么梦中万物明明全部垂直于实轴（对 $\mathbf{I}$ 内积为零），梦中的星辰、山河与你我之间却依然拥有坚硬如铁的泡利排斥与玻恩实在感？让我们步入全书正文的压轴收官之节 [§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)，揭开“实轴梵天 $\mathbf{I}$ 与正交虚空间 $\hat{\mathbf{i}}$ 宇宙大梦”的终极几何谜底。
+
+::: {.viz src="self-observation-error-maya-sandbox" height="620"}
+**完整实验室。** 自由切换实验卡、透镜与参数，对照投影、预算和旋量读数；几何演示及模型诠释按页面依据分层阅读。
+:::
