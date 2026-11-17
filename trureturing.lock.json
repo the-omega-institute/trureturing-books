@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "8afb0feee71a6b3473e8f5abb91f225f536e97b2",
-  "pinned_at": "2026-11-17T21:46:50Z",
+  "commit": "d3edcc3d8d43615d173c36e0a5234cb886497344",
+  "pinned_at": "2026-11-17T22:27:02Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -812,6 +812,22 @@
       "statement_id": "sha256:296a160c79b372e304965c1323d0f3edec3d3b7e1da8a9c15bfff38182e5cc23",
       "line": 23,
       "signature": "theorem golden_inverse_branch_positive_fixed_point_iff : ∀ x : ℝ, 0 < x → ((fun y : ℝ => 1 / (y + 1)) x = x ↔ x = Real.goldenRatio⁻¹)"
+    },
+    "D5/S3/Analytic/Chebyshev/PositivityThreshold.eval_T_cos_floor_succ_neg_and_nonneg_before": {
+      "module": "D5/S3/Analytic/Chebyshev/PositivityThreshold",
+      "name": "D5.S3.Analytic.Chebyshev.PositivityThreshold.eval_T_cos_floor_succ_neg_and_nonneg_before",
+      "kind": "theorem",
+      "statement_id": "sha256:6f6101e7470801560c512e83fdf8d975662b22179ec8f6fe0828de26c337faa5",
+      "line": 34,
+      "signature": "theorem eval_T_cos_floor_succ_neg_and_nonneg_before {α : ℝ} (hα : 0 < α) (hαπ : α < π) : (Chebyshev.T ℝ (((⌊π / (2 * α)⌋₊ + 1 : ℕ) : ℤ))).eval (Real.cos α) < 0 ∧ ∀ n : ℕ, n < ⌊π / (2 * α)⌋₊ + 1 → 0 ≤ (Chebyshev.T ℝ (n : ℤ)).eval (Real.cos α)"
+    },
+    "D5/S3/Analytic/Chebyshev/PositivityThreshold.forall_pos_eval_T_iff_one_le": {
+      "module": "D5/S3/Analytic/Chebyshev/PositivityThreshold",
+      "name": "D5.S3.Analytic.Chebyshev.PositivityThreshold.forall_pos_eval_T_iff_one_le",
+      "kind": "theorem",
+      "statement_id": "sha256:6f6101e7470801560c512e83fdf8d975662b22179ec8f6fe0828de26c337faa5",
+      "line": 67,
+      "signature": "theorem forall_pos_eval_T_iff_one_le (s : ℝ) : (∀ n : ℕ, 1 ≤ n → 0 < (Chebyshev.T ℝ (n : ℤ)).eval s) ↔ 1 ≤ s"
     },
     "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_hankel_rank": {
       "module": "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction",
