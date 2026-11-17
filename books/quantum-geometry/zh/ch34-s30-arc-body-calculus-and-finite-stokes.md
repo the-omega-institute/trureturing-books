@@ -121,6 +121,90 @@ $$
 **路径序旋子管与矢高相变：$\alpha = \frac{1}{2}$ 时矢高总和锁到 $0.5$ 实验卡（`roughness-ito-phase-transition`）。** 在单位球面上追踪 $N = 1/\epsilon$ 步、单步转角 $\sigma_0\epsilon^\alpha$ 的紫色路径序旋子管（每一步模长严格保持为 $1$，琥珀色手柄调节粗糙度指数 $\alpha$）：当 $\alpha$ 从光滑相 $\alpha = 1$ 降至临界布朗/费曼指数 $\alpha = \frac{1}{2}$ 时，品红色累计矢高柱 $\Sigma_{\mathrm{sag}}$ 从 $0.0005$ 稳稳锁死到非零宏观常数 $0.5$（即伊藤二阶修正项 $\frac{1}{2}\sigma_0^2 T$），并同步压低品红色伊藤期望纬圈 $\mathbb{E}[z] = (1 - v_\epsilon)^N$（绿色 `LEAN ✓` 锚定 `exp_tail_le` 与 `trotter_product`）。
 :::
 
+上面的展开式只给出首项。冻结库里有它的非渐近版本：对每个有限的 $N$ 都成立的双侧界，以及由它推出的三个极限区间。
+
+::: {.lemma #lem-ch34-accumulated-sagitta-bounds title="累计矢高在每个有限步数上的双侧界" lean="D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds"}
+设 $\sigma,T,\alpha$ 为实数，$N$ 为自然数。记单步转角 $\theta_N=\sigma\,(T/N)^{\alpha}$，累计矢高 $\Sigma_N=N\,(1-\cos\theta_N)$。则
+
+$$
+N\left(\frac{\theta_N^2}{2}-\frac{\theta_N^4}{24}\right)\ \le\ \Sigma_N\ \le\ N\,\frac{\theta_N^2}{2}.
+$$
+
+这里的除法与实数幂按 Lean 的全函数约定取值：$N=0$ 时 $T/N=0$，负底数的实数幂按 Mathlib 的定义。不等式对 $\sigma,T,\alpha$ 没有符号或大小的限制。
+:::
+
+::: proof
+两侧都来自对任意实数 $x$ 成立的逐点余弦界 $\frac{x^2}{2}-\frac{x^4}{24}\le1-\cos x\le\frac{x^2}{2}$，取 $x=\theta_N$ 再乘以 $N\ge0$。上界就是 $\cos x\ge1-\frac{x^2}{2}$。下界先写 $1-\cos x=2\sin^2\frac x2$，再用 $\lvert y-\sin y\rvert\le\frac{\lvert y\rvert^3}{6}$（取 $y=\frac x2$）：把 $\sin^2y=\bigl(y-(y-\sin y)\bigr)^2$ 展开并舍去差的平方，得 $\sin^2y\ge y^2-\frac{y^4}{3}$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch34-accumulated-sagitta-phases title="累计矢高的三个极限区间：$\alpha$ 大于、等于、小于 $\frac{1}{2}$" lean="D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"}
+设 $\sigma,T,\alpha$ 为实数，$T>0$，$\theta_N$ 与 $\Sigma_N$ 同 [@lem-ch34-accumulated-sagitta-bounds]。当 $N\to\infty$ 时：
+
+1. 若 $\alpha>\frac12$，则 $\Sigma_N\to0$；
+2. 若 $\alpha=\frac12$，则 $\Sigma_N\to\frac{\sigma^2T}{2}$；
+3. 若 $\sigma\neq0$ 且 $0<\alpha<\frac12$，则 $\Sigma_N\to+\infty$。
+:::
+
+::: proof
+对正的 $N$ 有 $N\theta_N^2=c\,N^{1-2\alpha}$ 与 $\theta_N^2=c\,N^{-2\alpha}$，其中 $c=\sigma^2T^{2\alpha}$。$\alpha>\frac12$ 时 [@lem-ch34-accumulated-sagitta-bounds] 的上界趋于 $0$，而 $\Sigma_N\ge0$。$\alpha=\frac12$ 时上界恒为 $\frac{\sigma^2T}{2}$，下界为 $\frac{\sigma^2T}{2}-\frac{(\sigma^2T)^2}{24N}$，两者夹出极限。$0<\alpha<\frac12$ 时 $\theta_N^2\to0$，从某一步起不超过 $6$，此后下界至少是 $\frac c4N^{1-2\alpha}$；$\sigma\neq0$ 使 $c>0$，于是发散。完整证明由 Lean 内核检查。
+:::
+
+取 $\epsilon=T/N$、$\sigma=\sigma_0$，$\Sigma_N$ 就是上文的 $\Sigma_{\mathrm{sag}}(\epsilon,\alpha)$：相区 I、II 对应第 1 款，相区 III 对应第 2 款，相区 IV 对应第 3 款。定理没有覆盖 $\alpha\le0$：$\alpha=0$、$\sigma=2\pi$ 时每一步都转满一圈，$\Sigma_N\equiv0$，所以第 3 款中的 $\alpha>0$ 不能去掉（手工推导）。定理也不涉及步长不等或符号随机的路径；上文关于伊藤修正项与粗糙路径理论的陈述，仍按各自的标注读作文献结果。
+
+把 [§22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4) 的凯莱比 $w=(s-1)/s$ 用本节的话重说一遍：它是一个旋子。对临界线上的点 $\rho=\tfrac12+i\gamma$（$\gamma>0$），$u_\rho:=1-\tfrac1\rho$ 落在单位圆上，割弦 $\Delta_\rho=u_\rho-1=-\tfrac1\rho$ 的长度是 $1/\lvert\rho\rvert$，矢高是 $v_\rho=\operatorname{Re}\tfrac1\rho=\tfrac{2}{1+4\gamma^2}$，两者满足 §34.30.1 的弦—矢高恒等式 $\lvert\Delta_\rho\rvert^2=2v_\rho$（手工推导）。对 $\zeta$ 的全体非平凡零点（按重数，不论是否在临界线上）把 $1-u_\rho^{\,n}$ 加起来，得到的数在解析数论里有名字：Li 系数（文献结果，见下文 [@rem-ch34-li-criterion-sagitta-literature]）。零点在临界线上时，这一项的实部 $1-\operatorname{Re}u_\rho^{\,n}$ 正是旋子 $u_\rho$ 的 $n$ 次幂的矢高；零点是否都在临界线上，是开放的 [@conj-riemann-hypothesis]。所钉仓库冻结的是按导数定义的 Li 系数，与它有关的事实如下。
+
+::: {.proposition #prop-ch34-li-sagitta-frozen title="凯莱结点的弦—矢高恒等式、导数定义的 Li 系数及其与 `RiemannHypothesis` 的两条关系" lean="D5/S3/Weil/FiniteSpectralCayleyIdentity.cayleyNode_normSq D5/S3/Weil/FiniteSpectralCayleyIdentity.cayleyNode_one_sub_normSq D5/S3/Weil/FiniteSpectralCayleyIdentity.finiteLiCoefficient_eq_diagonalHilbertSchmidtDefect D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_one D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum D5/S3/Weil/Probability/CanonicalLiNonnegativeConverse.canonical_li_nonnegative_implies_rh D5/S3/Weil/Probability/CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable D5/S3/Weil/ZeroData/UnconditionalCanonicalZeroData.zetaZeroData_representation_iff"}
+记 $\xi$ 为 [@def-xi-reading] 的 $\operatorname{xiReading}$，`RiemannHypothesis` 为 Mathlib 的命题（内容见 [@thm-cayley-critical-line-criterion] 结论 2），$\gamma_{\mathrm{EM}}$ 为欧拉—马斯刻若尼常数。
+
+1. **凯莱结点。** 对实数 $\gamma$ 令 $x(\gamma)=\dfrac{1}{4\gamma^2+1}$，$c(\gamma)=\bigl(1-2x(\gamma)\bigr)+2\sqrt{x(\gamma)\bigl(1-x(\gamma)\bigr)}\;i$。则 $\lvert c(\gamma)\rvert^2=1$，$\lvert1-c(\gamma)\rvert^2=4x(\gamma)$；并且对任意有限指标集 $J$、任意 $\gamma:J\to\mathbb{R}$ 与任意自然数 $n$，
+
+   $$
+   \sum_{j\in J}2\bigl(1-\operatorname{Re}c(\gamma_j)^n\bigr)=\sum_{j\in J}\bigl\lvert1-c(\gamma_j)^n\bigr\rvert^2 .
+   $$
+
+2. **Li 系数。** 令 $\lambda_0=0$，对自然数 $n$ 令 $\lambda_{n+1}=\operatorname{Re}\left[\dfrac{1}{n!}\,\left.\dfrac{d^{\,n+1}}{ds^{\,n+1}}\bigl(s^n\operatorname{Log}\xi(s)\bigr)\right|_{s=1}\right]$，其中 $\operatorname{Log}$ 是复对数主支。则 $\lambda_1=1+\dfrac{\gamma_{\mathrm{EM}}}{2}-\ln\bigl(2\sqrt\pi\bigr)$。
+3. **零点一侧的同一个数。** 设 $\rho_0,\rho_1,\dots$ 是所钉仓库无条件给出的非平凡零点枚举（次序由选择公理选定；两两不同，每个临界带内的 $\zeta$ 零点恰出现一次），$m_k$ 是 $\rho_k$ 的解析重数。则级数 $\sum_k\dfrac{m_k}{\rho_k(1-\rho_k)}$ 按任意求和次序都收敛到同一个和（Lean 的 `HasSum`），和为 $2+\gamma_{\mathrm{EM}}-2\ln\bigl(2\sqrt\pi\bigr)$。
+4. **非负性蕴含 `RiemannHypothesis`。** 若对一切自然数 $n\ge1$ 有 $\lambda_n\ge0$，则 `RiemannHypothesis` 成立。
+5. **圆盘可和判据。** `RiemannHypothesis` 成立，当且仅当对每个实数 $0\le r<1$，级数 $\sum_{n\ge0}\lvert\lambda_{n+1}\rvert\,r^n$ 收敛。
+:::
+
+::: proof
+第 1 款把 $c(\gamma)$ 的实部与虚部平方相加，用 $\bigl(\sqrt{x(1-x)}\bigr)^2=x(1-x)$（$0<x\le1$）；求和恒等式逐项展开 $\lvert1-w\rvert^2=1-2\operatorname{Re}w+\lvert w\rvert^2$ 并代入 $\lvert c^n\rvert=1$。第 2 款：$n=0$ 时定义化为 $\xi'(1)/\xi(1)$ 的实部，其闭式是同一仓库的冻结结论，用到 Mathlib 中 ζ 在 $s=1$ 附近的渐近式。第 3 款把 $\xi'/\xi$ 关于零点的部分分式展开在 $s=1$ 处取值，再用反射 $\xi'/\xi(0)=-\xi'/\xi(1)$ 与第 2 款的闭式。第 4 款：$\lambda_{n+1}$ 是 $(1-z)^{-2}\,(\xi'/\xi)\bigl(\tfrac{1}{1-z}\bigr)$ 在 $z=0$ 处的泰勒系数；系数非负的幂级数在正实轴上的收敛半径处必有奇点，而这个函数在实线段 $0\le z<1$ 上处处解析，因为 $\xi$ 的零点都在临界带内，$\tfrac{1}{1-z}\ge1$ 不是零点；于是收敛半径不小于 $1$，幂级数的和 $L(z)$ 在单位圆盘内解析；$\varphi(z)=\xi\bigl(\tfrac1{1-z}\bigr)$ 在原点附近满足 $\varphi'=L\varphi$，这一等式由解析延拓在整个圆盘内成立；若 $\varphi$ 在圆盘内某点为零，它在该点的各阶导数都为零，$\varphi$ 恒为零，与 $\varphi(0)=\tfrac12$ 矛盾；所以 $\xi\bigl(\tfrac1{1-z}\bigr)$ 在单位圆盘内无零点，即 $\xi$ 在 $\operatorname{Re}s>\tfrac12$ 内无零点，再由右半带归约得到 `RiemannHypothesis`。第 5 款的正向由 `RiemannHypothesis` 推出该函数在单位圆盘内解析，反向与第 4 款的最后一步相同。完整证明由 Lean 内核检查。
+:::
+
+第 1 款中的 $c(\gamma)$ 就是零点旋子：$\gamma\ge0$ 时 $c(\gamma)=u_\rho=1-\tfrac{1}{1/2+i\gamma}$；$\gamma<0$ 时 $c(\gamma)=c(-\gamma)=\overline{u_\rho}$（定义中的平方根取非负值）；两种情形都有 $x(\gamma)=\tfrac12v_\rho$（手工推导）。所以第 1 款的求和恒等式读作“$n$ 次幂的矢高之和的两倍，等于 $n$ 次幂的割弦平方之和”，它是弦—矢高恒等式对 $u^n$ 的应用，对任意一组**实的** $\gamma_j$ 成立，与 $\zeta$ 的零点在哪里无关。第 3 款的和恰是第 2 款闭式的两倍，所以 $\lambda_1=\sum_k m_k\cdot\tfrac{1}{2\rho_k(1-\rho_k)}$（手工推导）。第 4 款给出 `RiemannHypothesis` 的一个充分条件，第 5 款给出它的一个等价写法；两处的前提（一切 $\lambda_n\ge0$；对每个 $r<1$ 可和）都没有被证明，黎曼猜想（[@conj-riemann-hypothesis]）仍然开放。
+
+::: {.remark #rem-ch34-li-criterion-sagitta-literature title="Li 判据的矢高读法（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 按阿达马乘积，[@prop-ch34-li-sagitta-frozen] 第 2 款的 $\lambda_n$ 等于对全体非平凡零点按重数求和的 $\sum_\rho\bigl[1-(1-\tfrac1\rho)^n\bigr]$，求和按 $\lvert\operatorname{Im}\rho\rvert\le H$ 对称截断后令 $H\to\infty$（X.-J. Li, *J. Number Theory* **65**, 325–333, 1997）。函数方程把 $\rho$ 与 $1-\rho$ 配成一对，它们的旋子互为倒数：$u_{1-\rho}=u_\rho^{-1}$。记 $v_\rho:=1-\tfrac12\bigl(u_\rho+u_\rho^{-1}\bigr)=\dfrac{1}{2\rho(1-\rho)}$；在临界线上它就是前文的 $\operatorname{Re}\tfrac1\rho$，离线时是复数。这一对的贡献是 $2\bigl[1-T_n(1-v_\rho)\bigr]$，$T_n$ 为第一类切比雪夫多项式，于是
+
+$$
+\lambda_n=\sum_\rho\bigl[1-T_n(1-v_\rho)\bigr]
+$$
+
+（手工推导，用到上面的文献结果）。右端绝对收敛，截断的极限可以去掉：$1-T_n(1-v)$ 是 $v$ 的无常数项多项式，而 [@prop-ch34-li-sagitta-frozen] 第 3 款的可和性给出 $\sum_k m_k\lvert v_{\rho_k}\rvert<\infty$（手工推导）。在临界线上的零点 $\rho=\tfrac12+i\gamma$ 处，$v_\rho=\tfrac{2}{1+4\gamma^2}$ 是 $(0,2)$ 内的实数，写 $1-v_\rho=\cos\theta_\rho$，方括号等于 $1-\cos n\theta_\rho\ge0$；离线的零点 $\rho=\beta+i\gamma$ 处 $v_\rho$ 不是实数，因为 $\operatorname{Im}\rho(1-\rho)=\gamma(1-2\beta)$，而 $\zeta$ 在 $(0,1)$ 上没有实零点（[@prop-zeta-real-axis-sign]），故 $\gamma\ne0$。
+
+**Li 判据**（Li 1997；E. Bombieri & J. C. Lagarias, *J. Number Theory* **77**, 274–287, 1999）：[@conj-riemann-hypothesis] 成立，当且仅当 $\lambda_n\ge0$ 对一切 $n\ge1$ 成立。“猜想蕴含非负”是上式逐项非负；它依赖零点和表示，在所钉仓库中没有冻结。“非负蕴含猜想”是 [@prop-ch34-li-sagitta-frozen] 第 4 款。Li 判据是黎曼猜想的等价改写，不是证明：它把“零点在一条直线上”换成“无穷多个不等式”；判据需要全部不等式，检验其中有限多个不构成对猜想的证明，也不构成进展。
+:::
+
+::: {.example #ex-ch34-zero-rotor-sagitta-numbers title="第一个零点的弦与矢高、前四个 Li 系数，以及一组假想的离线四点"}
+本例的零点纵坐标是数值结果（文献结果，未在本书形式化），其余各数由 30 位精度计算得出，四舍五入到所示位数。
+
+**第一个零点。** $\gamma_1=14.134725$：转角 $\theta_1=2\arctan\tfrac{1}{2\gamma_1}=0.0707183$，矢高 $v_1=\tfrac{2}{1+4\gamma_1^2}=0.00249949$，割弦 $\tfrac{1}{\lvert\rho_1\rvert}=0.0707035$；$1/\lvert\rho_1\rvert^2=0.00499899=2v_1$。
+
+**前四个 Li 系数。** 按 [@prop-ch34-li-sagitta-frozen] 第 2 款的定义直接计算：
+
+| $n$ | $\lambda_n$ | $\lambda_n/(n^2\lambda_1)$ |
+| :---: | :---: | :---: |
+| $1$ | $0.0230957$ | $1$ |
+| $2$ | $0.0923457$ | $0.999598$ |
+| $3$ | $0.2076389$ | $0.998930$ |
+| $4$ | $0.3687905$ | $0.997995$ |
+
+$\lambda_1$ 与第 2 款的闭式 $1+\tfrac{\gamma_{\mathrm{EM}}}{2}-\ln(2\sqrt\pi)$ 一致。第三列略小于 $1$。对单位圆上的旋子有 $1-\cos n\theta\le n^2(1-\cos\theta)$（手工推导：$\lvert\sin nx\rvert\le n\lvert\sin x\rvert$）；因此在“全部零点都在临界线上”的前提下，[@rem-ch34-li-criterion-sagitta-literature] 的公式给出 $\lambda_n\le n^2\lambda_1$（带前提的推导，前提就是开放的猜想）。表中四个比值与这一不等式相容；这四个数都是正的，是数值事实，不是对一切 $n$ 的结论。
+
+**一组假想的离线四点。** 取 $\tfrac{7}{10}\pm5i$、$\tfrac{3}{10}\pm5i$（它们不是 ζ 的零点）。这四个点在 $s\mapsto1-s$ 与共轭下封闭，但 $\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ 在 $n=31$ 处第一次变负，值为 $-0.0943$；$n=31$ 处为负已冻结为 [`li_positivity_distinguishes_the_off_line_toy_spectrum`](lean:D5/S3/Zeros/ToySpectrum/OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum)。换一组点，变负可以晚得多：把假四点放到 $\tfrac12\pm0.1\pm14i$，单独这四点的和在 $n=88$ 第一次为负；再配上前 $80$ 对真实零点组成一个有限族，在线零点的非负贡献把第一次为负推迟到 $n=8446$（值为 $-0.858$）。这是这一个有限族的数值结果，不是关于 $\zeta$ 的 $\lambda_n$ 的陈述，也不是一般规律。
+:::
+
 单步导数与一维路径乘积积分各就各位之后，我们迎来了微积分大厦最壮丽的穹顶：高维流形上的外微分与广义斯托克斯定理。
 
 ## 34.30.3 `1—3—3—1` 有限网格零误差斯托克斯定理、三行高斯—博内证明与非阿贝尔面和乐锚定 {#sec-ch34-30-3}
