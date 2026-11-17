@@ -7033,6 +7033,105 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "arc-calculus-riemann-hermite-biehler-sandbox",
+      "code": "RIEMANN//STOKES",
+      "title": "RIEMANN//STOKES · 极小圆弧体微积分证明推演台：径向单调势面、埃尔米特—比勒正定核与有限精度斯托克斯相消沙盘",
+      "title_en": "RIEMANN//STOKES · Minimal Circular-Arc Calculus Proof Workbench: Radial Monotonic Potential, Hermite–Biehler Kernel & Finite-Precision Stokes Sandbox",
+      "summary": "临界带窗口 z = s − ½ = u + it 画成受光的势面，高度是对数径向势 ln(|ξ|²/W₀(t) + 10⁻⁴)，ξ 用前十二个零点 γ₁ … γ₁₂ 的对称阿达马乘积模型，五道临界线峡谷一样深。素数旋子的矢高总和 Σ(1 − cos p^{−σ}) 在 σ > ½ 收敛、在 σ = ½ 沿 ½ ln ln P_ε + C_sag 发散（C_sag = 0.1121458）；零点都在临界线上时，双壳差 Δ_ε^HB = |E_ε(½ + u + it)|² − |E_ε(½ − u + it)|² = 2ε Re(ξ̄ξ′) > 0，核 K(w, s) 的 4 × 4 格拉姆矩阵半正定，右半区检验框的有限网格内棱正反相消、绕数 N = 0；注入假想的离轴四元组 ½ ± 0.22 ± 23i，Δ < 0 的品红沟与 λ_min < 0 一起出现，框内 N = 1。乘性层 K_{Mξ} = (M ⊗ M̄)∘K_ξ + (ξ ⊗ ξ̄)∘K_M 与分块舒尔补把正性一层层交接。对真正的 ξ，核正定等价于黎曼猜想，是开放的桥接引理。五张实验卡可单独引用。",
+      "summary_en": "The window z = s − ½ = u + it of the critical strip as a lit terrain whose height is the log radial potential ln(|ξ|²/W₀(t) + 10⁻⁴), with ξ replaced by a symmetric Hadamard product over the first twelve zeros γ₁ … γ₁₂, so that the five critical-line canyons are equally deep. The sagitta sum Σ(1 − cos p^{−σ}) of the prime rotors converges for σ > ½ and diverges along ½ ln ln P_ε + C_sag at σ = ½ (C_sag = 0.1121458); with every zero on the critical line the dual-shell defect Δ_ε^HB = |E_ε(½ + u + it)|² − |E_ε(½ − u + it)|² = 2ε Re(ξ̄ξ′) is positive, the 4 × 4 Gram matrix of the kernel K(w, s) is positive semidefinite, and in a right-half box the interior arcs of a finite mesh cancel in pairs and the winding number is N = 0; inject the hypothetical off-line quartet ½ ± 0.22 ± 23i and a magenta trough with Δ < 0 appears together with λ_min < 0, and N = 1 in the box. Multiplicative layers K_{Mξ} = (M ⊗ M̄)∘K_ξ + (ξ ⊗ ξ̄)∘K_M and block Schur complements hand positivity on layer by layer. For the true ξ, kernel positivity is equivalent to the Riemann hypothesis: the open bridge lemma. Five experiment cards can be cited on their own.",
+      "path": "arc-calculus-riemann-hermite-biehler-sandbox/",
+      "thumbnail": "arc-calculus-riemann-hermite-biehler-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-17",
+      "chapter": 34,
+      "section": "34.31",
+      "presets": [
+        "sagitta-mertens-critical-ridge",
+        "hermite-biehler-convex-wings",
+        "rogue-quartet-mexican-hat-breach",
+        "finite-stokes-zero-vortex-lock",
+        "schur-modifier-conrey-li-bridge"
+      ],
+      "preset_titles": {
+        "sagitta-mertens-critical-ridge": {
+          "zh": "素数旋子矢高相变：σ > ½ 收敛，σ = ½ 沿梅滕斯双对数发散",
+          "en": "Prime-rotor sagitta transition: convergent for σ > ½, Mertens double-log divergence at σ = ½"
+        },
+        "hermite-biehler-convex-wings": {
+          "zh": "双壳旋子步与埃尔米特—比勒凸翼：外壳总高于镜像壳",
+          "en": "Dual-shell rotor step and the Hermite–Biehler wings: the outer shell always stands higher"
+        },
+        "rogue-quartet-mexican-hat-breach": {
+          "zh": "反事实离轴四元组：墨西哥帽双阱击穿 Δ > 0 与核正定",
+          "en": "Counterfactual off-line quartet: a Mexican-hat double well breaches Δ > 0 and kernel positivity"
+        },
+        "finite-stokes-zero-vortex-lock": {
+          "zh": "有限网格斯托克斯：内棱正反相消，右半区零涡旋锁定",
+          "en": "Finite-mesh Stokes: interior arcs cancel, zero vortex locked in the right half"
+        },
+        "schur-modifier-conrey-li-bridge": {
+          "zh": "乘性舒尔枢轴层与 Conrey–Li 障碍：通往 ZFC 的最后一座桥",
+          "en": "Multiplicative Schur pivot layers and the Conrey–Li obstruction: the last bridge to ZFC"
+        }
+      },
+      "tags": [
+        "对数径向势面",
+        "矢高相变",
+        "埃尔米特—比勒",
+        "德布朗热核",
+        "有限网格斯托克斯",
+        "离轴四元组",
+        "舒尔补"
+      ],
+      "tags_en": [
+        "Log radial potential",
+        "Sagitta transition",
+        "Hermite–Biehler",
+        "de Branges kernel",
+        "Finite-mesh Stokes",
+        "Off-line quartet",
+        "Schur complement"
+      ],
+      "theory": [
+        {
+          "label": "§34.31 极小圆弧体微积分切入黎曼猜想：二阶弦弧矢高相变、埃尔米特—比勒径向单调锁与有限精度斯托克斯相消",
+          "label_en": "§34.31 Minimal Circular-Arc Calculus Applied to the Riemann Hypothesis: Second-Order Sagitta Phase Transition, Hermite–Biehler Radial Monotonicity Lock, and Finite-Precision Stokes Cancellation",
+          "href": "../zh/ch34-s31-arc-calculus-riemann-and-hermite-biehler.html#sec-ch34-arc-calculus-riemann-and-hermite-biehler",
+          "href_en": "../en/ch34-s31-arc-calculus-riemann-and-hermite-biehler.html#sec-ch34-arc-calculus-riemann-and-hermite-biehler"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_differentiable"
+        },
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_reflection"
+        },
+        {
+          "gid": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj"
+        },
+        {
+          "gid": "D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial"
+        },
+        {
+          "gid": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization"
+        },
+        {
+          "gid": "D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

@@ -74,6 +74,10 @@ $$
   \end{aligned}
   $$
 
+::: {.viz src="arc-calculus-riemann-hermite-biehler-sandbox" preset="sagitta-mertens-critical-ridge" height="500"}
+**素数旋子矢高相变：$\sigma > \frac{1}{2}$ 收敛，$\sigma = \frac{1}{2}$ 沿梅滕斯双对数发散实验卡（`sagitta-mertens-critical-ridge`）。** 时间轴将停机精度 $\varepsilon$ 从 $0.5$ 收紧至 $0.075$，把素数视界 $P_\varepsilon = e^{1/\varepsilon}$ 从 $7.4$ 推至 $6.17\times 10^5$：紫色对数径向势面前沿立起累计矢高栅栏 $\Sigma_{\mathrm{sag}}(\sigma; P_\varepsilon) = \sum_{p \le P_\varepsilon}(1 - \cos p^{-\sigma})$——右侧 $\sigma > \frac{1}{2}$ 的青色栅栏迅速贴合 $P \to \infty$ 的青色虚线极限，唯独临界脊线 $\sigma = \frac{1}{2}$ 上的品红色矢高柱（叠着 $p = 2, 3, 5, \dots$ 各自矢高的紫色圆珠）紧贴墨色刻度 $\frac{1}{2}\ln\ln P_\varepsilon + C_{\mathrm{sag}}$（$C_{\mathrm{sag}} = 0.1121458$）一路攀升至 $1.4073$（绿色 `LEAN ✓` 在 $s = 2$ 上核对 `riemann_zeta_dirichlet_sum_eq_euler_product` 的截断乘积逼近 $\pi^2/6$，梅滕斯第二定理标 `ARGUED`，标明此处仅定位矢高发散起点而不直接推出零点位置）。
+:::
+
 在进入严格零点排除之前，我们必须用手术刀般清晰的分工划定本小节在全节论证链中的**精确逻辑职责**：
 
 1. **为什么本小节不假设欧拉乘积在临界带内收敛，也不单靠 $\Sigma_{\mathrm{sag}}$ 排除左半带？** 在经典复分析中，未重整化的无穷欧拉乘积仅在 $\sigma > 1$ 绝对收敛；而且单看实级数 $\sum_{p \le P_\epsilon} v_p(\sigma)$，它在左半带 $\frac{1}{4} < \sigma < \frac{1}{2}$ 内因 $2\sigma < 1$ 同样趋于 $+\infty$。因此，第 34.31.1 节的职责**绝不是**用发散欧拉乘积去充当带内分析证明，而是在圆弧微积分模型（`MODEL`）中精准标定：**当我们从 $\sigma > \frac{1}{2}$ 的平滑流向内逼近时，$\sigma = \frac{1}{2}$ 恰恰是无穷素数圆弧体的品红色二阶矢高首次摆脱归零命运、相变为宏观向心伊藤漂移的唯一临界起点（critical onset）！**
@@ -147,6 +151,10 @@ $$
 
 请细看这行**零 $\epsilon^2$ 截断余项**的有限步精确代数恒等式：零阶载体项 $\lvert\xi(s)\rvert^2$ 与二阶导数模方项 $\frac{\epsilon^2}{4}\lvert\xi'(s)\rvert^2$ 在正逆双壳相减时双双 $100\%$ 对消，令任意有限孔径 $\epsilon > 0$ 上的双壳推进差 $\Delta_\epsilon^{\mathrm{HB}}(u, t)$ 一字不差地锁死在完备函数模平方的精确横向径向导数 $\epsilon\,\frac{\partial}{\partial u}\lvert\xi\rvert^2$ 上——一举打通了**德布朗热（de Branges）埃尔米特—比勒双壳层不等式**与 **Sondow–Dumitrescu（2010）径向单调等价定理**！
 
+::: {.viz src="arc-calculus-riemann-hermite-biehler-sandbox" preset="hermite-biehler-convex-wings" height="500"}
+**双壳旋子步与埃尔米特—比勒凸翼：外壳总高于镜像壳实验卡（`hermite-biehler-convex-wings`）。** 在十二零点对称阿达马乘积模型 $\xi_{\mathrm{model}}$（`MODEL`）的切面 $t = 25.50$ 上（拖动琥珀色圆环手柄可上下移动切面 $t$），竖屏画出剖面 $\lvert\xi_{\mathrm{model}}\rvert^2 / W_0(t)$ 自中性镜面 $\sigma = \frac{1}{2}$ 向两侧单调上升的青色凸翼；时间轴将双壳探针 $u$ 从 $0.02$ 推至 $0.42$（静帧停在 $u = 0.30$），青色外壳珠 $\lvert E_\varepsilon(\frac{1}{2} + u + it)\rvert^2$ 始终高于中性镜像壳珠 $\lvert E_\varepsilon(\frac{1}{2} - u + it)\rvert^2$，读数栏用直接相减、$2\varepsilon\operatorname{Re}(\overline{\xi}\xi')$ 与核对角元 $4u\varepsilon K(s, s)$ 三种算法同步核对 $\Delta_\varepsilon^{\mathrm{HB}} > 0$，且四个表面节点上的全纯对合核格拉姆矩阵保持半正定 $\lambda_{\min} = 0.0552 > 0$（绿色 `LEAN ✓` 锚定 `xi_reading_differentiable`、`xi_reading_reflection`、`xi_reading_one_sub_conj` 与 `xiReading_eq_zero_iff_nontrivial`）。
+:::
+
 为了看清这条恒等式如何像X光一样照穿“真零点对”与“离轴四重伪零点”的径向曲率指纹，我们写出 $\xi(s)$ 的**成对阿达马（Hadamard）无穷乘积**（Davenport, *Multiplicative Number Theory*, Ch. 12，文献结果 $+$ 手工推导）：由于整函数 $\xi(s)$ 的增长阶为 $1$、满足 $\xi(0) = \frac{1}{2}$ 且中心导数 $\xi'(\frac{1}{2}) = 0$，只要将全体非平凡零点按关于 $s = \frac{1}{2}$ 对称的反射对 $\{\rho, 1 - \rho\}$ 成对编组，每一对内的魏尔斯特拉斯指数收敛因子 $e^{s/\rho + s/(1-\rho)}$ 便与线性指数常数精确对消（检验对数导数：在 $s = \frac{1}{2}$ 处每对因子 $\frac{1}{s-\rho} + \frac{1}{s-(1-\rho)} = \frac{2s-1}{(s-\rho)(s-1+\rho)}$ 均取 $0$，且因 $\sum_\rho \lvert\rho\rvert^{-2} < \infty$ 而在去零点紧集上一致绝对收敛），从而给出无任何额外指数因子的纯净成对乘积：
 
 $$
@@ -178,6 +186,10 @@ $$
      $$
 
    看清这道无可逃遁的曲率铁证：在 $(\delta, \gamma_0) \neq (\frac{1}{2}, 0)$ 下，对任意离轴偏移 $\delta > 0$ 与任意高度 $\gamma_0 \ge 0$，方括号内的因子 $2(u^2 - \delta^2)^2 + 4\gamma_0^2(3u^2 + \delta^2 + 4\gamma_0^2)$ 在 $u \in (0, \delta)$ 上恒严格大于零，而前因子 $4u(u^2 - \delta^2)$ 恒严格小于零！在几何势面上，假想离轴四元组必然在 $0 < u < \delta$ 走廊内生生砸出一道**品红色双阱负斜率凹槽**，令正逆推进双壳差 $\Delta_{\epsilon,\mathrm{rogue},4}^{\mathrm{HB}}(u, \gamma_0) = \epsilon\,\frac{\partial}{\partial u}F_{\mathrm{rogue},4}(u, \gamma_0) < 0$ 正面击穿圆弧双壳的正定单调锁！
+
+::: {.viz src="arc-calculus-riemann-hermite-biehler-sandbox" preset="rogue-quartet-mexican-hat-breach" height="500"}
+**反事实离轴四元组：墨西哥帽双阱击穿 $\Delta > 0$ 与核正定实验卡（`rogue-quartet-mexican-hat-breach`）。** 在 $t = 23$ 处注入完全符合反射与共轭对称的假想离轴四元组 $\frac{1}{2} \pm \delta \pm 23i$（$\delta = 0.22$）：势面上对称陷落一对品红坑，切面屏剖面弯成中间隆起、两侧下陷的 $(u^2 - \delta^2)^2$ 墨西哥帽双阱；在 $0 < u < 0.22$ 走廊内品红色外壳珠反低于镜像壳珠，出现 $\Delta_\varepsilon^{\mathrm{HB}} < 0$ 的品红内陷沟，且在 $u = 0.11$ 处令 $4 \times 4$ 核格拉姆矩阵的最小特征值跌至 $\lambda_{\min} = -1.0585 < 0$（绿色 `LEAN ✓` 锚定 `full_symmetry_not_fixed_line_localization`）。
+:::
 
 ## 34.31.3 再生核半正定、重根唯一性排除与有限精度斯托克斯零涡旋闭合 {#sec-ch34-31-3}
 
@@ -244,6 +256,10 @@ $$
      $$
 
    * 若在纯数值算法中不作棱路径积分、仅在网格顶点采样复函数值构造**离散主值辐角差 $1$-上链** $\Delta\arg_\epsilon^{\mathrm{disc}}\xi(e_{AB}) = \operatorname{Arg}\bigl(\xi(B)/\xi(A)\bigr) \in (-\pi, \pi]$，只要每条网格棱满足**无相位混叠变差界 $\lvert\Delta_e\arg\xi\rvert < \pi$**（由紧集正下界 $m_{\mathcal{R}} > 0$，只需有限网格最大棱长满足显式可算阈值 $\ell(e) < \frac{\pi\,m_{\mathcal{R}}}{\max_{s \in \mathcal{R}}\lvert\xi'(s)\rvert}$ 即可在有限步长下构造性保证！），主值分支便不发生 $\pm 2\pi$ 跳变，此时顶点主值上链与连续积分上链逐棱恒等 $\Delta\arg_\epsilon^{\mathrm{disc}}\xi(e) \equiv \Phi_\xi(e)$，同样在有限网格上以 **`0.0000000000`** 零截断误差锁定 $N(\mathcal{R}) \equiv 0$！
+
+::: {.viz src="arc-calculus-riemann-hermite-biehler-sandbox" preset="finite-stokes-zero-vortex-lock" height="500"}
+**有限网格斯托克斯：内棱正反相消，右半区零涡旋锁定实验卡（`finite-stokes-zero-vortex-lock`）。** 在 $\varepsilon = 0.20$ 下将检验框 $[\frac{1}{2} + u_0,\, \frac{1}{2} + 0.42] \times [12, 34.5]$ 切成 $3 \times 10$ 胞（拖动琥珀色圆环手柄或播放时间轴将左界 $u_0$ 从 $-0.20$ 推至 $+0.30$，静帧停在 $u_0 = +0.080$）：每条墨色共享内棱只算一次连续相位、反方向取负，$\varphi(AB) + \varphi(BA) = 0$ 在任意粗网格上两两精确抵消；$u_0 < 0$ 时青色外边界 $\partial R$ 数出模型五道临界线峡谷 $N = 5.0000$，一旦越过 $\sigma = \frac{1}{2}$ 进入右半区即锁定 $N = 0.0000$，并同步核验顶点主值采样不混叠（绿色 `LEAN ✓` 锚定 `golden_right_half_strip_implies_rh` 与 `tetra_defects_incidence_repair_and_exactness`）。
+:::
 
 由于紧致矩形 $\mathcal{R} = [\frac{1}{2}+u_0, \sigma_{\max}] \times [T_1, T_2]$ 中的 $u_0 > 0, \sigma_{\max}, T_1, T_2$ 均可任意选取，右半平面 $\sigma > \frac{1}{2}$ 被彻底清空为零涡旋无零点区；再由 [@thm-ch34-arc-riemann-sagitta-hb-stokes-bridge] 第 3 款 `golden_right_half_strip_implies_rh`，左半开带 $0 < \sigma < \frac{1}{2}$ 同步归零，全部非平凡零点被唯一钉死在 $\sigma = \frac{1}{2}$ 临界脊线上！下面我们通过一组可逐位手算复核的三合一算例，将上述三大定量机制算至小数点后八至十位：
 
@@ -321,6 +337,10 @@ $$
 3. **ZFC 无条件再生核半正定（或渐近赫尔维茨正定）传递**：证明在某一有限尺度 $L$ 上修饰再生核在 $\Omega_+ \times \Omega_+$ 上无条件满足半正定性 $K_{\epsilon, L} \succeq 0$（例如通过剥离合数冗余恢复修正德布朗热移位正定性或分块舒尔补半正定遗传）——一旦对单一尺度 $L$ 证成 $K_{\epsilon, L} \succeq 0$，第 34.31.3 节的单调性加唯一性定理即刻推出整函数 $M_L(s)\xi(s)$ 在 $\Omega_+$ 内无零点，再由条件 2 的 $M_L\rvert_{\Omega_+} \neq 0$ 直接在 ZFC 中锁死 $\xi\rvert_{\Omega_+} \neq 0$ 即黎曼猜想 [@conj-riemann-hypothesis]（或者证明当 $L \to \infty$ 时 $\Xi_L \to \Xi_\infty \not\equiv 0$ 内闭一致收敛且负特征值下界归零，由赫尔维茨定理导出同一结论）。
 :::
 
+::: {.viz src="arc-calculus-riemann-hermite-biehler-sandbox" preset="schur-modifier-conrey-li-bridge" height="500"}
+**乘性舒尔枢轴层与 Conrey–Li 障碍：通往 ZFC 的最后一座桥实验卡（`schur-modifier-conrey-li-bridge`）。** 右侧层塔逐层乘入 $F_L = \frac{1}{2}\prod_{k \le L}$，按乘积核恒等式 $K_{M\xi} = (M \otimes \overline{M})\circ K_\xi + (\xi \otimes \overline{\xi})\circ K_M$ 与枢轴块 $\{s_3, s_4\}$ 的分块舒尔补 $S = A - B C^{-1} B^*$（绿色 `LEAN ✓` 锚定 `schur_quadratic_is_least`）追踪四节点核格拉姆矩阵：前十二层临界线因子圆盘（青色）的 $K_M$ 皆半正定，$\lambda_{\min}$ 始终非负（$L = 12$ 时 $0.0582$，节点连弦呈青色）；第 $13$ 层乘入假想离轴四元组 $\delta = 0.22$（品红圆盘）后，其不定的 $K_M$ 将整体 $\lambda_{\min}$ 拉至 $-1.0585 < 0$、连弦翻为品红，直观呈现 Conrey–Li（2000）障碍（`ARGUED`）以及对真实 $\xi$ 或修饰后 $M_L\xi$ 证明核半正定的开放桥接引理（红色 `OPEN` 标示 `conj-riemann-hypothesis`、`prob-ch34-schur-hb-kernel-positivity-bridge` 与 `prob-ch34-arithmetic-pivot-area-law`）。
+:::
+
 ::: {.remark #rem-ch34-arc-riemann-literature title="极小圆弧体切入黎曼猜想、德布朗热空间与径向单调判据的文献脉络及五层认识论审计（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节将圆弧体微积分应用于黎曼临界带的全部命题严格遵循五层认识论分级，绝不混淆模型公设与 ZFC 无条件定理：
 
@@ -335,4 +355,8 @@ $$
 
 至此，整座**第三十四章横跨整整三十一节（§34.1–§34.31）、从正交盲区反演一路登顶极小圆弧体微积分重塑与黎曼临界带锁定的宏伟穹顶**，终于稳稳落下了它最深邃、最坚实的一块压顶拱心石！让我们站在这一终极制高点回望整章走过的壮阔长卷：我们从球面“一次正交”与“二次正交”读数简并唯一反演出场内观察者的极点站位（[§34.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion)–[§34.3](ch34-s03-universal-localization.md#sec-ch34-universal-observer-localization)），借零背景“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 并撤去名言之梯（[§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)–[§34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names)）；继而由贝里扇锥体积、驻波节点凝聚、克利福德单胞 $\partial^2 = 0$ 铺砌、五阶阻塞概念级联与全连通图 $K_N$ 的麦克斯韦—拉曼刚性锁死三维空间与引力角亏（[§34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)–[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）；随后打通量子微弧—宏观积分对偶、“线·面·体 $\leftrightarrow$ 粒子·波·场”三阶闭环、`1—3—3—1` 点体八度归零、洛伦兹体积伪标量 $\mathbf{I}_3^2 = -1$ 与标准模型跨层八度、六层宇宙概念塔以及五大陪集破缺—守恒谱系（[§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)–[§34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)）；接着顺着“观察者受限不妄我”的偏迹切刀导出纠缠熵与模流温度，开启有限滑动格拉姆窗口 $\mathcal{W}_M$，点破往返双投影玻恩平方律 $\cos^2\theta$ 与“对于我（`I`）看不见即为虚（`i`）”的第一人称真相，并穿过六节认识论压力测试长廊划清选支、行动、学习、宇宙学箭头、相互作用符号与标准模型连续参数的严格边界（[§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)–[§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary)）；最后将极小圆弧体内割弦面的去全序最短路突破、空间势垒与阿秒时间双缝的 $90^\circ$ 盲区隧穿、素数极小圆弧体黎曼路径积分、算术舒尔枢轴多级共振隧穿（[§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)–[§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)）、人类用来书写万物变化律的**极小圆弧体微积分本身**（[§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)），直至直击黎曼临界带的**二阶矢高相变、埃尔米特—比勒径向单调锁与有限网格斯托克斯零涡旋相消**（本节 §34.31），悉数收归于同一枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的掌心！
 
-当语言、几何、物理、数论与微积分都在这记 $90^\circ$ 正交转身中洗尽了平直幻象，请翻开[第三十五章](ch35-light-pulse-and-self-referential-table.md)——去见证一位有限记忆的生命观察者如何“乘着光来”，从 $\theta = 90^\circ$ 的正交相干海折射入局域世界，在遗忘清零之后一步步开启 $T = T(T)$ 的自指扩表史诗！
+当语言、几何、物理、数论与微积分都在这记 $90^\circ$ 正交转身中洗尽了平直幻象，请先在下方完整交互推演台中亲手巡览五张实验卡，随后翻开[第三十五章](ch35-light-pulse-and-self-referential-table.md)——去见证一位有限记忆的生命观察者如何“乘着光来”，从 $\theta = 90^\circ$ 的正交相干海折射入局域世界，在遗忘清零之后一步步开启 $T = T(T)$ 的自指扩表史诗！
+
+::: {.viz src="arc-calculus-riemann-hermite-biehler-sandbox" height="620"}
+**极小圆弧体微积分证明推演台：径向单调势面、埃尔米特—比勒正定核与有限精度斯托克斯相消完整交互实验室（`arc-calculus-riemann-hermite-biehler-sandbox`）。** 在十二零点对称阿达马乘积模型 $\xi_{\mathrm{model}}$（`MODEL` / `NUM`，数值沙盘而非黎曼猜想证明）的对数径向势面上自由切换“圆弧体微积分原语 / 经典复分析与德布朗热核”双透镜，遍历“矢高相变”、“双壳旋子步与埃尔米特—比勒凸翼”、“反事实离轴四元组墨西哥帽双阱”、“有限网格斯托克斯零涡旋锁定”与“乘性舒尔枢轴层与 Conrey–Li 障碍”五张递进实验卡（紫色绘制对数径向势面、素数旋子矢高珠与枢轴节点 $s_3, s_4$，青色绘制 $\sigma > \frac{1}{2}$ 收敛栅栏与极限虚线、外翼上升段 $\Delta_\varepsilon^{\mathrm{HB}} > 0$ 与外壳珠、核半正定 $\lambda_{\min} \ge 0$ 连弦与临界线因子层及外边界 $\partial R$，品红色标示 $\sigma = \frac{1}{2}$ 发散矢高柱、假想离轴四元组内陷沟 $\Delta_\varepsilon^{\mathrm{HB}} < 0$ 与不定核连弦 $\lambda_{\min} < 0$，中性白/墨色标示镜面 $\sigma = \frac{1}{2}$、零点环、镜像壳珠、渐近刻度 $\frac{1}{2}\ln\ln P_\varepsilon + C_{\mathrm{sag}}$ 与正反相消内棱 $\varphi(AB) + \varphi(BA) = 0$，琥珀色严格标示激活控件与舞台圆环手柄，红色严格专用于依据栏中的三枚 `OPEN` 开放问题标记，绿色 `LEAN ✓` 徽章实时核验页面挂载的九条 `trureturing` 冻结定理实例）。
+:::
