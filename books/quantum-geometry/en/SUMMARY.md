@@ -147,17 +147,17 @@
   - [34.29 Arithmetic Pivot Renormalization and Multi-Stage Resonant Tunneling Across the Critical Strip: Breaking the Turán–Zeno Trap and Piercing the 4/7 Mollifier Wall](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md)
   - [34.30 Rebuilding Calculus from Minimal Circular-Arc Bodies: Rotor Differentials, the Sagitta Phase Transition, and Finite-Precision Stokes Exactness](ch34-s30-arc-body-calculus-and-finite-stokes.md)
 - [Chapter 35 Arriving on a Pulse of Light and Self-Referential Table Expansion: From Initialization by Forgetting to the Homoiconic Loop $T = T(T)$](ch35-light-pulse-and-self-referential-table.md)
-- [Chapter 36 Infinite Discrete Steps and Quotienting Out Reincarnation: How the Hyperbolic Horizon Staircase Ends the Return-to-Light Loop](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)
+- [Chapter 36 Infinite Discrete Steps and Quotienting Out Reincarnation: A Model in Which the Hyperbolic Horizon Staircase Holds Off the Return-to-Light Loop](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)
   - [36.1 Why "Returning to Pure Light" Is Reincarnation: The $\cos 90^\circ = 0$ Amnesia Cliff](ch36-s01-light-and-memory.md)
-  - [36.2 Blocking Return to Light by Infinite Discrete Steps: Intrinsic Hyperbolic Rapidity and the Asymptotic Staircase](ch36-s02-hyperbolic-horizon.md)
-  - [36.3 Understanding as Liberation: Quotienting Out Reincarnation in Generator Space](ch36-s03-quotienting-generators.md)
+  - [36.2 Infinite Discrete Steps That Never Reach Light: Intrinsic Hyperbolic Rapidity and the Asymptotic Staircase](ch36-s02-hyperbolic-horizon.md)
+  - [36.3 Understanding as Liberation: An Analogy of Quotienting Out Cycles in Generator Space](ch36-s03-quotienting-generators.md)
   - [36.4 p-adic Zero-Carry Lookup Trees, Prime Observer Expansion, and Blocking Reincarnation](ch36-s04-padic-table-expansion.md)
 
 # Part X Non-Duality — Dream Erasure, Memory Pointers, and Non-Dual Ontology
 
-- [Chapter 37 Dream Quantum Erasure, Known-Data Decoherence, and the Nonlocal Observer](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)
+- [Chapter 37 Dream "Quantum Erasure", Known-Data Decoherence, and the Nonlocal Observer](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)
   - [37.1 Observation as Decoherence via Known Data: Why Waking Reality Feels Rigid and Narrow](ch37-s01-known-data-decoherence.md)
-  - [37.2 Dreams as Nocturnal Quantum Erasure: How Partial Forgetting Redeems Unchosen Orthogonal Branches](ch37-s02-dream-quantum-erasure.md)
+  - [37.2 Dreams as "Nocturnal Quantum Erasure"—an Analogy: Joint Reversal Undoes Phase Records](ch37-s02-dream-quantum-erasure.md)
   - [37.3 Unloading the Bodily Prior: Controlled Rendering, Bodiless Awareness, and the Common Origin of Appearances](ch37-s03-body-priors.md)
   - [37.4 Beyond the Five-Sense Pinhole: Golden Hyperplane Cuts and Nonlocal Multi-Position Emergence](ch37-s04-nonlocal-slices.md)
   - [37.5 Choosing Rather Than Seeing the Future: Dream Pre-Decoherence and the Déjà Vu Cache Hit](ch37-s05-future-selection-and-deja-vu.md)

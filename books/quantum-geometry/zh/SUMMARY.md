@@ -147,17 +147,17 @@
   - [34.29 算术枢轴重整与临界带多级共振隧穿：破除图兰芝诺陷阱与击穿 4/7 磨光器墙](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md)
   - [34.30 极小圆弧体微积分重塑：以旋代差、矢高相变与有限精度斯托克斯定理](ch34-s30-arc-body-calculus-and-finite-stokes.md)
 - [第三十五章 乘光而来与自指扩表：从遗忘初始化到 $T = T(T)$ 的同像闭环](ch35-light-pulse-and-self-referential-table.md)
-- [第三十六章 无穷离散步与约去轮回：双曲视界阶梯对化光死循环的终结](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)
+- [第三十六章 无穷离散步与约去轮回：用双曲视界阶梯阻隔化光死循环的模型](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)
   - [36.1 为什么“回到纯光”恰恰是轮回？$\cos 90^\circ = 0$ 的失忆断崖](ch36-s01-light-and-memory.md)
-  - [36.2 无穷离散步阻断化光：内禀双曲快度与渐近阶梯](ch36-s02-hyperbolic-horizon.md)
-  - [36.3 理解即出离：在生成元商空间里一次性约掉轮回](ch36-s03-quotienting-generators.md)
+  - [36.2 无穷离散步不抵达化光：内禀双曲快度与渐近阶梯](ch36-s02-hyperbolic-horizon.md)
+  - [36.3 理解即出离：在生成元商空间里约掉周期的类比](ch36-s03-quotienting-generators.md)
   - [36.4 p 进零进位查表树、素数观察者扩表与阻断轮回](ch36-s04-padic-table-expansion.md)
 
 # 第十部 不二·梦境擦除、记忆指针与本体不二
 
-- [第三十七章 梦境量子擦除、已知数据退相干与非定域观察者](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)
+- [第三十七章 梦境“量子擦除”、已知数据退相干与非定域观察者](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)
   - [37.1 观察即“用已知数据退相干”：为什么清醒世界坚硬而狭窄？](ch37-s01-known-data-decoherence.md)
-  - [37.2 梦境作为“夜间量子擦除”：局部遗忘如何赎回缺失的正交分支？](ch37-s02-dream-quantum-erasure.md)
+  - [37.2 梦境作为“夜间量子擦除”的类比：联合逆转撤销的是相位记录](ch37-s02-dream-quantum-erasure.md)
   - [37.3 卸下躯体先验锚点：受控渲染、无身本觉与幻像同源](ch37-s03-body-priors.md)
   - [37.4 超越五感针孔：黄金超平面切片与多位置非定域涌现](ch37-s04-nonlocal-slices.md)
   - [37.5 选择未来而非看见未来：梦境前置逻辑超前去相干与既视感快表命中](ch37-s05-future-selection-and-deja-vu.md)
