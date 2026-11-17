@@ -583,7 +583,7 @@ theorem grid_holonomy_dist_le [PseudoMetricSpace G] [IsIsometricSMul G G] [IsIso
 all 46 checks passed in 3.2 s
 ```
 
-## 15. 已写入书稿的修订（D1–D10）
+## 15. 已写入书稿的修订（D1–D14）
 
 下列各项涉及模型的表述或作者的行文，均已按所给建议写入书稿；提供了选择的两处，书稿把 §39.11.1 的“范式反转”换成了 D5 所给的写法，并按 D6 修改了 §39.11.2 的中文小节标题。每项保留位置、问题与所写入的措辞，作为改动内容与理由的记录；中文为权威版本，英文说同一件事。行号是基线上的行号，“旧”指改动前的文字。
 
@@ -800,3 +800,30 @@ en 新：(the three-dimensional cap principle, `MODEL`; see §39.10)
 位置：§39.9.4，`rem-ch39-yang-mills-regge-rg-literature` 之后、`ex-ch39-hierarchy-and-one-loop-rg-calculus` 的引导句之前。
 
 内容：两条注记、一个算例与一个定理盒（中英）。第一条注记 `rem-ch39-plaquette-sagitta-and-wilson-action` 把威尔逊小方格项写成小方格和乐的矢高（F1、F2、F4、F6），第二条 `rem-ch39-regge-deficit-signed-angle` 说明雷吉角亏读的是带符号的转角而不是矢高之和（F8、F9），算例给出五种正多面体、示例铰链与一个换位和乐的数值，定理盒引用 `PeriodicGridHolonomy.flat_exact_iff` 与 `horizontal_seam_counterexample`（需要 `./tbook pin --refresh`）。这段正文把 §39.9.1 的“两项同源”限定为“都由回路和乐偏离单位元描述，读法不同”；D1 的交叉引用指向其中第一条注记。
+
+### D11 新增 §39.11.2 注记：反常相消的解集（F17、F18）
+
+位置：§39.11.2，`weinberg-angle-rg-running` 实验卡块之后、§39.11.3 标题之前；中英同处，引导句一句加注记 `rem-ch39-anomaly-free-hypercharge-lines`。
+
+内容：四个微扰反常条件与前提（$N_c\ge2$、无右手中微子或其超荷为 $0$）；解集为三条直线及前提的必要性；曲线 I 对一切 $N_c\ge2$ 成立的结论与按二重态总数表述的威滕条件；只固定夸克电荷时由三次反常定出 $N_c=3$；只在 $N_c=3$ 成立的各项。注记不是定理盒：所钉提交上没有对应的冻结声明，也没有登记形式化请求。文献按第 6 节的核对程度引用，没有写“另一组赋值即第三条直线”。
+
+### D12 §39.11.2 第 127 行与新注记对齐（A9 的延续）
+
+问题：新注记第 3 条表明只固定夸克电荷时四个反常条件也定出 $N_c=3$。原句“不依赖电荷输入而单独选出 $N_c=3$ 的只有 (b)”仍然成立，因为这一选法同样以电荷为输入；但 (a) 的括注只提“固定的实测电荷”，需要补上这种情形，并说明它也以电荷为输入，否则读者会以为两处矛盾。
+
+```text
+zh 旧：……不是独立于电荷输入的第二重约束。四项结论中，(a) 在曲线 I 的电荷下对一切奇数 $N_c$ 成立（在固定的实测电荷下只在 $N_c = 3$ 成立）；
+zh 新：……不是独立于电荷输入的第二重约束。若只固定夸克电荷、让轻子超荷自由，四个微扰反常条件同样只容许 $N_c = 3$，起作用的是 $[\mathrm{U}(1)_Y]^3$，轻子超荷随之定出（[@rem-ch39-anomaly-free-hypercharge-lines] 第 3 条）；这一选法同样以电荷为输入。四项结论中，(a) 在曲线 I 的电荷下对一切奇数 $N_c$ 成立（在固定的实测电荷下，或只固定实测的夸克电荷时，只在 $N_c = 3$ 成立）；
+en 旧：…is not a second constraint independent of the charge input. Of the four statements, (a) holds for every odd $N_c$ with the curve-I charges (and only at $N_c = 3$ with the measured charges held fixed);
+en 新：…is not a second constraint independent of the charge input. If only the quark charges are held fixed and the lepton hypercharges are left free, the four perturbative anomaly conditions again allow only $N_c = 3$; the condition doing the work is $[\mathrm{U}(1)_Y]^3$, and the lepton hypercharges follow (item 3 of [@rem-ch39-anomaly-free-hypercharge-lines]). This selection, too, takes charges as input. Of the four statements, (a) holds for every odd $N_c$ with the curve-I charges (and only at $N_c = 3$ when the measured charges, or only the measured quark charges, are held fixed);
+```
+
+### D13 `rem-ch39-plaquette-sagitta-and-wilson-action` 第 4 条：矩形网格与一般圆盘分开（F20、F21）
+
+问题：原第 4 条把一切圆盘上的面和乐分解都记为文献结果；矩形网格上的分解在书中可以给出完整证明，次序也需要写明。改写后第 4 条先给出矩形网格的列引理与逐列叠缩（列从右到左、列内从下到上，在任意群中成立，次序是陈述的一部分），再把一般圆盘保留为 §34.30.3 的文献结果，最后给出两个不等式，并说明每格通量相同的 $\mathrm U(1)$ 构型使因子 $M$ 不能去掉。注记首句的标签说明相应改为“一般圆盘上的面和乐分解为文献结果”（英文 “the factorization of the holonomy of a general disc into face holonomies”）。
+
+### D14 新增 §39.9.4 注记：铰链平面、弦与符号（F22、F23），并给示例铰链补闭式
+
+位置：`rem-ch39-regge-deficit-signed-angle` 之后、算例 `ex-ch39-sagitta-versus-deficit-audit` 之前；引导句一句加注记 `rem-ch39-hinge-plane-chord-and-sign`。算例的引导句由“两条注记”改为“三条注记”（英文 “these two remarks” 改为 “these three remarks”）。算例第 3 条句末补闭式 $\cos\tfrac{\delta_h}2=\tfrac79$、$1-\cos\delta_h=\tfrac{64}{81}$、$\sin\delta_h=\tfrac{56\sqrt2}{81}$、弦长 $\tfrac{8\sqrt2}9$、旋子矢高 $\tfrac29$。
+
+注记内容：铰链平面为割弦的像，偶通道给出无定向平面与 $\cos\delta$，奇通道给出定向与符号；弦与角的精确关系及矢高表示的平方根型；嵌入 $\mathbb R^3$ 的多面体曲面上由法向量的半比较和乐给出铰链平面；$D\ge4$ 时简单性是额外条件（`MODEL`）；符号不能省，环面上角亏不全为零时正负两种符号都出现。
