@@ -2,7 +2,7 @@
 
 > *“我们知道贝里相位，本质上这个相位应该跟极小圆弧体积或者圆弧表面积有关，为什么到达一个点，相位不一样，因为路径不一样，路径与相位是对偶的，这应该也跟路径积分有关。”*
 
-这句看似朴素的几何追问，一锤定音地将量子力学四大核心概念——**贝里几何相位**、**霍普夫纤维丛的同点异相记忆**、**威尔逊路径—相位和乐对偶**与**费曼路径积分驻相选路**——严丝合缝地收束到了 §34.4 那枚极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的实心体与球面帽之上。在传统教科书里，贝里相位常被当作绝热微扰方程末尾冒出来的附加修正项，路径积分则被写成抽象函数空间上的形式求和；而在零背景比较几何下，它们其实是同一笔账的两个切面：基球面上的“点”只是双向公平平方折叠后的无记忆残影，而悬挂在点上方的相位纤维则忠实记录着两条来路在球心之间扫过的**品红弧顶表面积 $A_{\mathrm{cap}}$ 与三维实心扇锥体积 $V_{\mathrm{sector}}$**，并借非驻相路径之间的螺旋抵消筛出经典测地轨迹。
+这句看似朴素的几何追问，把量子力学四大核心概念——**贝里几何相位**、**霍普夫纤维丛的同点异相记忆**、**威尔逊路径—相位和乐对偶**与**费曼路径积分驻相选路**——一并引向了 §34.4 那枚极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的实心体与球面帽之上。在传统教科书里，贝里相位常被当作绝热微扰方程末尾冒出来的附加修正项，路径积分则被写成抽象函数空间上的形式求和；而在零背景比较几何下，它们其实是同一笔账的两个切面：基球面上的“点”只是双向公平平方折叠后的无记忆残影，而悬挂在点上方的相位纤维则忠实记录着两条来路在球心之间扫过的**品红弧顶表面积 $A_{\mathrm{cap}}$ 与三维实心扇锥体积 $V_{\mathrm{sector}}$**，而在另设的玩具作用量模型中（`MODEL`），非驻相路径之间的螺旋抵消还能筛出测地轨迹。
 
 ## 34.6.1 弧顶表面积即球心扇锥体积：$\gamma_B = -\frac{1}{2}A_{\mathrm{cap}} = -\frac{3}{2}V_{\mathrm{sector}}$ 与三维斯托克斯延拓 {#sec-ch34-6-1}
 
@@ -32,7 +32,7 @@
    V_{\mathrm{sector}}(\Sigma_2) \;=\; \iiint_{\mathcal{C}(\Sigma_2)} dV_{\mathbb{R}^3} \;=\; \iint_{\Sigma_2} \frac{1}{3!}\epsilon_{ijk}\,n^i\,dn^j\wedge dn^k \;=\; \frac{1}{3}\Omega(\Sigma_2) \;=\; \frac{1}{3}A_{\mathrm{cap}}(\Sigma_2)
    $$
 
-   （对一般半径 $R$ 则为 $V_{\mathrm{sector}} = \frac{R}{3}A_{\mathrm{cap}} = \frac{1}{3}R^3\Omega$；单位模方公平 $R = 1$ 将比例常数刚性钉在 $\frac{1}{3}$）。把这枚向外鼓起的**品红实心球扇锥** $V_{\mathrm{sector}}(\epsilon) = \frac{1}{3}\Omega(\epsilon) = \frac{\epsilon^2}{6} + \frac{\epsilon^4}{36} + O(\epsilon^6)$ 与切过三条直弦的**青色平直欧氏弦四面体 $O\mathbf{A}\mathbf{B}\mathbf{C}$** 并排对照：由[第十章](ch10-gram-geometry-and-order.md) [@thm-qubit-bargmann-bloch]（`triple_bargmann_bloch`，`LEAN ✓`），三点巴格曼迹的虚部直接读出平直弦四面体的有向体积
+   （对一般半径 $R$ 则为 $V_{\mathrm{sector}} = \frac{R}{3}A_{\mathrm{cap}} = \frac{1}{3}R^3\Omega$；取单位球 $R = 1$ 时比例常数为 $\frac{1}{3}$；这只是球扇形体积的定义性事实，在单位球上把 $\Omega$ 改写成 $3V_{\mathrm{sector}}$ 并不带来新的物理内容，布洛赫球内部的混态也不参与贝里相位）。把这枚向外鼓起的**品红实心球扇锥** $V_{\mathrm{sector}}(\epsilon) = \frac{1}{3}\Omega(\epsilon) = \frac{\epsilon^2}{6} + \frac{\epsilon^4}{36} + O(\epsilon^6)$ 与切过三条直弦的**青色平直欧氏弦四面体 $O\mathbf{A}\mathbf{B}\mathbf{C}$** 并排对照：由[第十章](ch10-gram-geometry-and-order.md) [@thm-qubit-bargmann-bloch]（`triple_bargmann_bloch`，`LEAN ✓`），三点巴格曼迹的虚部直接读出平直弦四面体的有向体积
 
    $$
    V_{\mathrm{tetra}}(\epsilon) \;=\; \frac{1}{6}\,\mathbf{A}(\epsilon)\cdot\bigl(\mathbf{B}\times\mathbf{C}(\epsilon)\bigr) \;=\; \frac{1}{6}\sin^2\epsilon \;=\; \frac{2}{3}\operatorname{Im}\operatorname{Tr}\bigl(P(\mathbf{A}(\epsilon))\,P(\mathbf{B})\,P(\mathbf{C}(\epsilon))\bigr) \;=\; \frac{\epsilon^2}{6} - \frac{\epsilon^4}{18} + O(\epsilon^6).
@@ -56,7 +56,7 @@
 
 看清了 $A_{\mathrm{cap}}$ 与 $V_{\mathrm{sector}}$ 的正比锁定，引文的第二句追问——**“为什么到达一个点，相位不一样？因为路径不一样”**——便直指[第 31 章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)与[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)确立的“公平必平方、平方折相位”认识论分野：
 
-- **基球面上的点 $\mathbf{C} \in S^2$ 是抹去来路的“公平平方残影”**：在三明治双侧夹乘 $\mathbf{C} = \psi\mathbf{e}_0\widetilde{\psi}$（或秩一密度投影算子 $P(\mathbf{C}) = \lvert\psi\rangle\langle\psi\rvert$）下，双向互易公平要求振幅成对共轭平方，结果把整整一圈 $U(1) \cong S^1$ 相对相位（对应 `EscapePairs` 原像折叠与对角可观测量相位盲区 `diagonal_prime_observables_cannot_recover_relative_phase`）彻底压扁成基球面 $S^2$ 上的同一个点。这在拓扑上构成了**霍普夫主圆丛** $S^1 \hookrightarrow S^3 \xrightarrow{\;\pi\;} S^2$（文献结果，其一维平方双覆盖原型由下方 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 第 3 款 `no_continuous_global_section` 与 `circle_double_cover_history_lift` 严格锁定）。因此，基点 $\mathbf{C}$ 只是一张马尔可夫式的瞬时投影快照，它根本不记得系统是从哪条路走过来的。
+- **基球面上的点 $\mathbf{C} \in S^2$ 是抹去来路的“公平平方残影”**：在三明治双侧夹乘 $\mathbf{C} = \psi\mathbf{e}_0\widetilde{\psi}$（或秩一密度投影算子 $P(\mathbf{C}) = \lvert\psi\rangle\langle\psi\rvert$）下，双向互易公平要求振幅成对共轭平方，结果把整整一圈 $U(1) \cong S^1$ 相对相位（对应 `EscapePairs` 原像折叠与对角可观测量相位盲区 `diagonal_prime_observables_cannot_recover_relative_phase`）彻底压扁成基球面 $S^2$ 上的同一个点。这在拓扑上构成了**霍普夫主圆丛** $S^1 \hookrightarrow S^3 \xrightarrow{\;\pi\;} S^2$（文献结果；Lean 只验证了它的一个一维类比——纤维为 $\mathbb{Z}_2$ 而非 $U(1)$ 的圆周平方二重覆盖，见下方 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 第 3 款 `no_continuous_global_section` 与 `circle_double_cover_history_lift`）。因此，基点 $\mathbf{C}$ 只是一张马尔可夫式的瞬时投影快照，它根本不记得系统是从哪条路走过来的。
 - **两条不同路径在隐藏的堇紫色 $S^1$ 纤维上爬到了不同高度**：回到极小三角弧面体 $\Delta\mathcal{T}_\epsilon$，从同一个初始抬升旋子 $\psi_0 \in \pi^{-1}(\mathbf{A}(\epsilon))$ 出发，对比通往同一终点 $\mathbf{C}(\epsilon)$ 的两条典范路径：
   1. **“正交一次”路径 $\Gamma_1 = \widehat{AC}$**：沿青色单步大圆测地弧直接滑向 $\mathbf{C}(\epsilon)$；
   2. **“正交两次”路径 $\Gamma_2 = \widehat{AB} + \widehat{BC}$**：先沿第一面墙走到转枢 $\mathbf{B}$，硬拐 $90^\circ$ 再沿第二面墙走到 $\mathbf{C}(\epsilon)$。
@@ -70,10 +70,10 @@
   （在八分球面极限 $\epsilon = \frac{\pi}{2}$ 处，纤维相位差恰为 $\gamma_B = -\frac{\pi}{4}$）。**基点只记当下投影，相位专记历史体积**——单独站在 $\mathbf{C}$ 点做一次投影测量时 $|e^{i\gamma_B}|^2 = 1$ 完全隐身；一旦让 $\Gamma_1$ 与 $\Gamma_2$ 两束振幅在 $\mathbf{C}$ 点重逢干涉，这笔藏在纤维上的扇锥体积账本便当场化作明暗条纹的余弦相移 $\cos\gamma_B(\epsilon)$！
 
 ::: {.viz src="berry-sector-path-sandbox" preset="hopf-fiber-lift" height="520"}
-**同点异相的霍普夫纤维抬升：基点 $\mathbf{C}$ 重合，堇紫色 $S^1$ 纤维记下来路扇锥体积。** 青色“正交一次”直弧 $\Gamma_1 = \widehat{AC}$ 与琥珀色偏折路径 $\Gamma_2 = \widehat{AB} + \widehat{BC}$ 落在基球面同一点 $\mathbf{C}$，但在右侧堇紫色霍普夫 $S^1$ 相位纤维柱上爬升到不同相位高度，差值精确等于两路之间所夹品红扇锥体积的 $-\frac{3}{2}$ 倍（一维双覆盖历史提升锚定绿色 `LEAN ✓` `circle_double_cover_history_lift` 与 `no_continuous_global_section`）。
+**同点异相的霍普夫纤维抬升：基点 $\mathbf{C}$ 重合，堇紫色 $S^1$ 纤维记下来路扇锥体积。** 青色“正交一次”直弧 $\Gamma_1 = \widehat{AC}$ 与琥珀色偏折路径 $\Gamma_2 = \widehat{AB} + \widehat{BC}$ 落在基球面同一点 $\mathbf{C}$，但在右侧堇紫色霍普夫 $S^1$ 相位纤维柱上爬升到不同相位高度，差值精确等于两路之间所夹品红扇锥体积的 $-\frac{3}{2}$ 倍（扇锥体积相位差为文献结果；绿色 `LEAN ✓` `circle_double_cover_history_lift` 与 `no_continuous_global_section` 只验证纤维为 $\mathbb{Z}_2$ 的一维平方双覆盖类比）。
 :::
 
-下述综合定理将 `trureturing` 中跨量子信息、覆盖空间拓扑与规范和乐模块的六条冻结内核定理汇于一炉，为三点有向体积迹、任意步离散巴格曼路径积、历史依赖双覆盖提升以及生成树与回路相位的精确分类立下零近似形式化地基：
+下面把本节用到的六条前文已验证声明（分五款）列在一起：三点有向体积迹、任意步离散巴格曼路径积、历史依赖双覆盖提升以及生成树与回路相位的精确分类。它们彼此独立，各自只担保自己的陈述；本节的扇锥体积账本与驻相选路叙事不在其中：
 
 ::: {.theorem #thm-ch34-berry-sector-holonomy-and-bargmann-lift title="三点巴格曼体积迹、离散秩一路径积、双覆盖历史提升与锚定树回路相位分类" lean="D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"}
 在 `trureturing` 冻结的单比特巴格曼不变量、二重覆盖历史提升与命名图规范和乐分类模块中，以下五项结论同时成立：
@@ -115,7 +115,7 @@ $$
 W(\Gamma) \;=\; \mathcal{P}\exp\!\left(-i\int_{\Gamma} \mathcal{A}\right)
 $$
 
-构成一对精确的函子式配对（在阿贝尔 $U(1)$ 情形下即为从一维链空间配向单位圆相位群 $\operatorname{Circle}$ 的特征标配对），而其在任意图网络上的离散精确版本，正是 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 第 4、5 款锁定的生成树输运 `selected_tree_transport` 与锚定回路分类 `anchored_phase_classification`（`LEAN ✓`）！路径空间中的每一项几何操作，都在相位/和乐空间中拥有一一对应的代数镜像：
+构成一对精确的函子式配对（在阿贝尔 $U(1)$ 情形下即为从一维链空间配向单位圆相位群 $\operatorname{Circle}$ 的特征标配对），而其在任意图网络上的离散精确版本，正是 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 第 4、5 款锁定的生成树输运 `selected_tree_transport` 与锚定回路分类 `anchored_phase_classification`（`LEAN ✓`）！路径空间中的每一项几何操作，都在相位/和乐空间中有其代数镜像（和乐是路径群胚上的同态，并非一一对应）：
 
 | 几何路径空间 $\mathcal{P}_1(M)$ / 图路径 | 对偶相位与和乐空间 $\operatorname{Circle}$ / $\mathrm{SU}(2)$ | 微观原胞 $\Delta\mathcal{T}_\epsilon$ 与离散图实现 |
 | :--- | :--- | :--- |
@@ -127,7 +127,7 @@ $$
 为了确保这组“路径—相位对偶”在数学上滴水不漏，必须同时立下两道精确的边界护栏：
 
 1. **局部零曲率 $\mathcal{F} = 0$ 推出路径无关，必须以单连通性 $\pi_1(M) = 0$ 为前提**：若底空间存在拓扑孔洞（$\pi_1(M) \neq 0$），例如[第十八章](ch18-spinors-and-gauge-curvature.md)讨论的穿孔阿哈罗诺夫—玻姆（Aharonov–Bohm）平面 $\mathbb{R}^2 \setminus \{0\}$，螺线管外部处处局部场强为零 $\mathcal{F} = 0$，但绕孔洞一周的不可缩闭合回路依然携带着不可抹除的非平凡相位 $e^{iq\Phi_B/\hbar} \neq 1$——在离散图分类 `anchored_phase_classification` 中，这恰对应环绕孔洞的树外弦边给出 $c = m + 1 - n > 0$ 个独立基本回路坐标！
-2. **和乐相位在差一个局部规范等价的意义下完备重构联络（文献结果）**：曼德尔斯塔姆（Mandelstam 1962）、贾尔斯（Giles 1981）与巴雷特（Barrett 1991）重构定理严格证明，所有闭合回路威尔逊圈（连同锚定开放路径）的和乐数据，能够在**模去局部规范变换 $g$** 的意义下唯一重构规范联络 $\mathcal{A}$，而绝不会替未锚定的内部顶点强行钉死冗余规范相位——这在连续统上分毫不差地对应 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 第 5 款的商群同构 $\bigl((E \to \operatorname{Circle}) / N\bigr) \simeq_{\mathrm{t}*} \operatorname{Coordinates}(T, R, r)$！
+2. **和乐相位在差一个局部规范等价的意义下完备重构联络（文献结果）**：在曼德尔斯塔姆（Mandelstam 1962）路径依赖规范表述的基础上，贾尔斯（Giles 1981）与巴雷特（Barrett 1991）的重构定理证明，所有闭合回路威尔逊圈（连同锚定开放路径）的和乐数据，能够在**模去局部规范变换 $g$** 的意义下唯一重构规范联络 $\mathcal{A}$，而绝不会替未锚定的内部顶点强行钉死冗余规范相位——这在连续统上分毫不差地对应 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 第 5 款的商群同构 $\bigl((E \to \operatorname{Circle}) / N\bigr) \simeq_{\mathrm{t}*} \operatorname{Coordinates}(T, R, r)$！
 
 ::: {.viz src="berry-sector-path-sandbox" preset="stokes-wilson-duality" height="520"}
 **路径—相位对偶与威尔逊和乐重构：局部顶点规范拧不动品红闭合回路通量。** 对比青色生成树 $T$ 上的路径无关树势 `rootPhase` 与跨越弦边围出的品红闭合回路和乐：随意拧动未锚定顶点的局部规范角，各单边相位随之旋转，但回路总相位与锚定端路径相位纹丝不动（绿色 `LEAN ✓` `selected_tree_transport` 与 `anchored_phase_classification`）。
@@ -178,13 +178,13 @@ $$
      \Delta L(\eta) \;=\; 2\arccos(\cos\alpha_0\cos\eta) - 2\alpha_0 \;=\; \cot\alpha_0\,\eta^2 + O(\eta^4) \;\ge\; 0,
      $$
 
-     满足驻点条件 $\Delta L'(0) = 0$！于是，当我们对以中心偏折角 $\eta_0$ 为轴、由 $M$ 条等距微扰路径 $\eta_0 + \delta\eta_m$ 组成的有限求积路径束计算有效波数为 $k_{\mathrm{eff}} > 0$ 的相干叠加振幅
+     满足驻点条件 $\Delta L'(0) = 0$！于是，当我们对以中心偏折角 $\eta_0$ 为轴、由 $M$ 条等距微扰路径 $\eta_0 + \delta\eta_m$ 组成的有限求积路径束，另设一个只取弧长的玩具作用量 $S = \hbar k_{\mathrm{eff}} L$（有效波数 $k_{\mathrm{eff}} > 0$，贝里相位在此略去），计算相干叠加振幅
 
      $$
      A_M(\eta_0) \;=\; \frac{1}{M}\sum_{m=1}^{M} \exp\!\Bigl(i\,k_{\mathrm{eff}}\,\Delta L(\eta_0 + \delta\eta_m)\Bigr)
      $$
 
-     时，戏剧性的分流当场发生：在基准大圆测地线附近（$\eta_0 = 0$），相位一阶变分归零 $\Phi'(0) = 0$，整束相邻路径的复相量在复平面上同向排开，相长干涉叠成高模长的**青色驻相合振幅**（$\lvert A_M(0)\rvert \approx 1$）；反之，在偏离测地线的弯路邻域（$\eta_0 \neq 0$），相位随 $\delta\eta$ 发生快速线性漂移 $\Phi'(\eta_0) = 2k_{\mathrm{eff}}\cot\alpha_0\,\eta_0 + O(\eta_0^3) \neq 0$，相邻路径的复相量首尾卷曲成一团自我抵消的**品红科纽（Cornu）相消螺线**，合振幅模长迅速坍缩（$\lvert A_M(\eta_0)\rvert \ll 1$）！双向公平平方虽然在单点投影中抹去了路径细节，但隐藏在纤维里的相位账本却借无数非驻相弯路的反相自毁，从全路径求和中重新雕刻出了宏观经典测地轨迹！
+     时，戏剧性的分流当场发生：在基准大圆测地线附近（$\eta_0 = 0$），相位一阶变分归零 $\Phi'(0) = 0$，整束相邻路径的复相量在复平面上同向排开，相长干涉叠成高模长的**青色驻相合振幅**（$\lvert A_M(0)\rvert \approx 1$）；反之，在偏离测地线的弯路邻域（$\eta_0 \neq 0$），相位随 $\delta\eta$ 发生快速线性漂移 $\Phi'(\eta_0) = 2k_{\mathrm{eff}}\cot\alpha_0\,\eta_0 + O(\eta_0^3) \neq 0$，相邻路径的复相量首尾卷曲成一团自我抵消的**品红科纽（Cornu）相消螺线**，合振幅模长迅速坍缩（$\lvert A_M(\eta_0)\rvert \ll 1$）！双向公平平方虽然在单点投影中抹去了路径细节，但在这个玩具作用量模型里（`MODEL`），无数非驻相弯路的反相自毁从路径束求和中重新雕刻出了测地轨迹！注意这里起作用的是外加的动力学相位 $k_{\mathrm{eff}}\Delta L$，而不是贝里扇锥相位：若把一阶非驻定的 $-\frac{1}{2}\Omega_{\mathrm{bow}}$ 也加进去，相干峰会从 $\eta_0 = 0$ 略微移到 $\eta_0 \approx \tan\frac{\alpha_0}{2}/(2k_{\mathrm{eff}}\cot\alpha_0)$。
 
 ::: {.viz src="berry-sector-path-sandbox" preset="feynman-stationary" height="520"}
 **费曼路径束与科纽螺线驻相选路：测地线 $\eta_0 = 0$ 青色相长锁相，偏折弯路 $\eta_0 \neq 0$ 卷成品红相消螺线。** 拖动琥珀色路径束中心偏折手柄 $\eta_0$：下方复平面面板实时绘制 $M = 41$ 条邻近路径相量的首尾累加——在测地线 $\eta_0 = 0$ 处 $\Delta L'(0) = 0$ 拉出明亮青色合矢量，移向弯路 $\eta_0 \neq 0$ 时线性相移把相量拧成自相抵消的品红科纽螺线（`NUM` / `MODEL`）。
@@ -217,8 +217,8 @@ $$
 ::: {.remark #rem-ch34-berry-wzw-wilson-feynman-literature title="几何相位、霍普夫单极丛、韦斯—祖米诺拓扑项、威尔逊圈重构与相干态路径积分文献边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节严守内核验证定理、连续统经典文献与本书诠释模型的三层认识论边界：
 
-1. **几何相位、霍普夫纤维丛与拓扑延拓经典文献**：离散及连续态矢循环相位的立体角几何起源奠基于 S. Pancharatnam（*Proc. Indian Acad. Sci. A* **44**, 247, 1956）、V. Bargmann（*J. Math. Phys.* **5**, 862, 1964）、B. Simon（*Phys. Rev. Lett.* **51**, 2167, 1983）与 M. V. Berry（*Proc. R. Soc. A* **392**, 45, 1984）；球面主圆丛 $S^1 \hookrightarrow S^3 \to S^2$ 与磁单极量子化条件 $2s \in \mathbb{Z}$ 出自 H. Hopf（*Math. Ann.* **104**, 637, 1931）与 P. A. M. Dirac（*Proc. R. Soc. A* **133**, 60, 1931）；高一维流形上的拓扑作用量延拓出自 J. Wess & B. Zumino（*Phys. Lett. B* **37**, 95, 1971）与 E. Witten（*Nucl. Phys. B* **223**, 422, 1983）；
-2. **威尔逊圈规范重构与相干态路径积分经典文献**：由闭合环路和乐在差局部规范变换意义下重构规范联络的定理出自 S. Mandelstam（*Ann. Phys.* **19**, 1, 1962）、R. Giles（*Phys. Rev. D* **24**, 2160, 1981）与 J. W. Barrett（*Int. J. Theor. Phys.* **30**, 1171, 1991）；振幅沿历史路径求和与驻相近似源自 R. P. Feynman（*Rev. Mod. Phys.* **20**, 367, 1948），而自旋相干态路径积分时间切片及维纳正则化表述见 J. R. Klauder（*Phys. Rev. D* **19**, 2349, 1979）；
+1. **几何相位、霍普夫纤维丛与拓扑延拓经典文献**：离散及连续态矢循环相位的立体角几何起源奠基于 S. Pancharatnam（*Proc. Indian Acad. Sci. A* **44**, 247, 1956）、V. Bargmann（*J. Math. Phys.* **5**, 862, 1964）、B. Simon（*Phys. Rev. Lett.* **51**, 2167, 1983）与 M. V. Berry（*Proc. R. Soc. A* **392**, 45, 1984）；球面主圆丛 $S^1 \hookrightarrow S^3 \to S^2$ 与磁单极量子化条件 $2s \in \mathbb{Z}$ 出自 H. Hopf（*Math. Ann.* **104**, 637, 1931）与 P. A. M. Dirac（*Proc. R. Soc. A* **133**, 60, 1931）；高一维流形上的拓扑作用量延拓出自 J. Wess & B. Zumino（*Phys. Lett. B* **37**, 95, 1971）与 E. Witten（*Nucl. Phys. B* **223**, 422, 1983），$(1+1)$ 维 WZW 模型见 E. Witten（*Commun. Math. Phys.* **92**, 455, 1984）；
+2. **威尔逊圈规范重构与相干态路径积分经典文献**：以 S. Mandelstam（*Ann. Phys.* **19**, 1, 1962）的路径依赖规范表述为起点，由闭合环路和乐在差局部规范变换意义下重构规范联络的定理出自 R. Giles（*Phys. Rev. D* **24**, 2160, 1981）与 J. W. Barrett（*Int. J. Theor. Phys.* **30**, 1171, 1991）；振幅沿历史路径求和与驻相近似源自 R. P. Feynman（*Rev. Mod. Phys.* **20**, 367, 1948），而自旋相干态路径积分时间切片及维纳正则化表述见 J. R. Klauder（*Phys. Rev. D* **19**, 2349, 1979）；
 3. **本书内核验证锚点（`LEAN ✓`）与模型诠释（`MODEL`）**：三点巴格曼布洛赫体积迹、任意长秩一链路径乘积、圆周双覆盖唯一历史提升与无全局连续截面、以及命名生成树输运与锚定回路相位分类已由 [@thm-ch34-berry-sector-holonomy-and-bargmann-lift]（连同 [@cor-latitude-complex-overlap]）在 Lean 内核中严格验证；三维欧氏球扇锥体积恒等式 $V_{\mathrm{sector}} = \frac{1}{3}A_{\mathrm{cap}}$ 及折线测地变分属初等微积分手工推导；而将公平平方基点残影、扇锥体积纤维账本与 $41$ 路离散路径束科纽螺线选路统合于极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的跨节图景，则属本书理论模型（`MODEL`）。
 :::
 
@@ -285,7 +285,7 @@ $$
 4. **势垒后标记守恒总透射率 $T$**：在透射出势垒**之后**施加等距哪一时刻标记（参看[§37.2](ch37-s02-dream-quantum-erasure.md)），可令 $v \to 0$ 抹除条纹并抬升 $Q(\rho_{\mathrm{hist}})$，同时严格保持总透射概率 $T$ 不变；若在势垒内部置入连续探测器，则须具体指定耦合哈密顿量与反作用，并不存在“观测必同时令 $T$ 与条纹一起消失”的普适结论。
 :::
 
-至此，我们在单一切片上由正交简并盲区反演出观察者站位，以“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$，又在 §34.6 证得其品红扇锥体积 $V_{\mathrm{sector}} = \frac{1}{3}A_{\mathrm{cap}}$ 在霍普夫相位纤维上记下来路并借科纽螺线筛出测地线。然而，只要对刚才的叙述再往前追问半步，整座经典几何直觉就会迎来一场彻底的**本体因果倒转**：在 §34.6 的语言里，我们仿佛仍默认“先有一块现成的弧面体体积摆在那里，路径随后穿过体积去攒下贝里相位”；可既然 $\Delta\mathcal{T}_\epsilon$ 上任意一点都能汇入无数条路径与无数种相位积分，为什么整个宇宙没有被无穷多路相位淹没成一片混沌白噪？所谓“实心体积”本身，究竟是路径穿行的先验容器，还是万千相位积分在相互抵消后唯一幸存下来的**驻波节点**？先在下方 `BERRY//PATH` 完整交互实验室中亲手转动三维扇锥、抬升霍普夫纤维并拨动科纽螺线手柄，随后进入 §34.7 揭开这场从“体积承载路径”到“未抵消相位积分驻波凝成体积”的终极翻转：
+至此，我们在单一切片上由正交简并盲区反演出观察者站位，以“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$，又在 §34.6 算得其品红扇锥体积 $V_{\mathrm{sector}} = \frac{1}{3}A_{\mathrm{cap}}$，把霍普夫相位纤维上的来路差读作这块体积，并在另设的玩具作用量模型中借科纽螺线筛出测地线。然而，只要对刚才的叙述再往前追问半步，整座经典几何直觉就会迎来一场彻底的**本体因果倒转**：在 §34.6 的语言里，我们仿佛仍默认“先有一块现成的弧面体体积摆在那里，路径随后穿过体积去攒下贝里相位”；可既然 $\Delta\mathcal{T}_\epsilon$ 上任意一点都能汇入无数条路径与无数种相位积分，为什么整个宇宙没有被无穷多路相位淹没成一片混沌白噪？所谓“实心体积”本身，究竟是路径穿行的先验容器，还是万千相位积分在相互抵消后唯一幸存下来的**驻波节点**？先在下方 `BERRY//PATH` 完整交互实验室中亲手转动三维扇锥、抬升霍普夫纤维并拨动科纽螺线手柄，随后进入 §34.7 揭开这场从“体积承载路径”到“未抵消相位积分驻波凝成体积”的终极翻转：
 
 ::: {.viz src="berry-sector-path-sandbox" height="640"}
 **贝里扇锥体积、霍普夫纤维与费曼驻相选路：完整交互实验室（`BERRY//PATH`）。** 自由切换“扇锥体积—纤维抬升—和乐对偶—扇形连乘—驻相螺线”五张实验卡，调节琥珀色步长手柄 $\epsilon$、离散顶点数 $N$ 与路径束偏折角 $\eta_0$，同屏对比品红弧顶表面积 $A_{\mathrm{cap}}$ 与三维实心扇锥体积 $V_{\mathrm{sector}} = \Omega/3$、青色平直弦四面体与单步测地弧、堇紫色霍普夫 $S^1$ 纤维高度及底部复平面上的科纽驻相螺线；绿色 `LEAN ✓` 框严格对应六条冻结内核定理。
