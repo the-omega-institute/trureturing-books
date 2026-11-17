@@ -797,6 +797,14 @@
       "line": 23,
       "signature": "theorem golden_inverse_branch_positive_fixed_point_iff : ∀ x : ℝ, 0 < x → ((fun y : ℝ => 1 / (y + 1)) x = x ↔ x = Real.goldenRatio⁻¹)"
     },
+    "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_hankel_rank": {
+      "module": "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction",
+      "name": "D5.S3.Analytic.GoldenTomography.FinitePronyHankelReconstruction.prony_hankel_rank",
+      "kind": "theorem",
+      "statement_id": "sha256:71132bd1fe992addf603f5bcdd286880f8dd3e2b485bfd9c8662c56077e2f8ff",
+      "line": 172,
+      "signature": "theorem prony_hankel_rank {m n : ℕ} (hmn : m ≤ n) {nodes weights : Fin m → K} (hNodes : Function.Injective nodes) (hWeights : ∀ mode, weights mode ≠ 0) : Matrix.rank (pronyHankel (n"
+    },
     "D5/S3/Analytic/Isolation/RiemannZetaPositiveRealSign.riemannZeta_ofReal_sign": {
       "module": "D5/S3/Analytic/Isolation/RiemannZetaPositiveRealSign",
       "name": "D5.S3.Analytic.Isolation.RiemannZetaPositiveRealSign.riemannZeta_ofReal_sign",
