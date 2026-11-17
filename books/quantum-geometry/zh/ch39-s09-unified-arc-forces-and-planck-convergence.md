@@ -251,6 +251,109 @@ $$
 4. **换位和乐。** 绕两根正交轴各转 $60^\circ$ 的旋子，由 [@rem-ch39-plaquette-sagitta-and-wilson-action] 第 3 条，$[u_1, u_2] = -2i\sin 30^\circ\sin 30^\circ\,(n_1\times n_2)\cdot\boldsymbol{\sigma}$，故 $v(h) = 2\sin^2 30^\circ\sin^2 30^\circ = \frac{1}{8}$，余下的转角为 $2\arccos\frac{7}{8} = 57.91^\circ$，与 [§32.5](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields) 实验卡的读数一致。
 :::
 
+上例第 4 条中的换位和乐，其矢高可以用两条链自身的矢高从上方控制。所需的矩阵不等式已经冻结：
+
+::: {.theorem #thm-ch39-weighted-bottcher-wenzel title="加权 Böttcher–Wenzel 换位子不等式" lean="D5/S3/Quantum/Matrix/WeightedBotcherWenzel.result,D5/S3/Quantum/Matrix/WeightedBotcherWenzel.weighted_one"}
+对 $A, W \in M_n(\mathbb{C})$ 记 $\operatorname{weightedSq}(A, W) = \operatorname{Re}\operatorname{Tr}(A^\dagger A W)$，$\operatorname{frobSq}(A) = \operatorname{Re}\operatorname{Tr}(A^\dagger A)$，$[A, B] = AB - BA$。
+
+1. 设 $n > 0$，$W$ 正定，实数 $\mathrm{lo} > 0$，并且 $W$ 厄米、全部本征值落在 $[\mathrm{lo}, \mathrm{hi}]$ 中、$\mathrm{lo}$ 与 $\mathrm{hi}$ 都是 $W$ 的本征值。则对任意 $A, B \in M_n(\mathbb{C})$，
+
+   $$
+   \operatorname{weightedSq}([A, B], W) \le \left(1 + \frac{\mathrm{hi}}{\mathrm{lo}}\right)\operatorname{weightedSq}(A, W)\,\operatorname{frobSq}(B).
+   $$
+
+2. 对任意 $A \in M_n(\mathbb{C})$，$\operatorname{weightedSq}(A, \mathbf{1}) = \operatorname{frobSq}(A)$。
+:::
+
+::: proof
+一般权重先写成 $W = \mathrm{lo}\sum_iw_i\bigl(\mathbf{1} + \bigl(\frac{\mathrm{hi}}{\mathrm{lo}} - 1\bigr)P_i\bigr)$，其中 $w_i \ge 0$、$\sum_iw_i = 1$、$P_i$ 为正交投影；两边对权重都是线性的，于是只需处理两级权重 $\mathbf{1} + sP$，这一情形用投影后各列的估计与配方完成。取 $n > 0$、$W = \mathbf{1}$、$\mathrm{lo} = \mathrm{hi} = 1$，第 1 款与第 2 款合起来就是无权的 Böttcher–Wenzel 不等式 $\lVert[A, B]\rVert_F^2 \le 2\lVert A\rVert_F^2\lVert B\rVert_F^2$（$\lVert X\rVert_F^2 = \operatorname{Tr}(X^\dagger X)$），等价地，换位算子 $Y \mapsto [A, Y]$ 在弗罗贝尼乌斯范数下的算子范数平方不超过 $2\lVert A\rVert_F^2$。完整证明由 Lean 内核检查。
+:::
+
+把它用在割弦上，得到换位矢高的乘积界：
+
+::: {.remark #rem-ch39-commutator-sagitta-product title="换位和乐的矢高不超过两条链矢高乘积的四倍（手工推导与文献结果）"}
+**手工推导；Zassenhaus 邻域所依据的换位估计为文献结果，未在本书形式化。** 第 1 条只用到 [@thm-ch39-weighted-bottcher-wenzel] 在 $W = \mathbf{1}$ 时的情形（无权不等式最早由 A. Böttcher 与 D. Wenzel 证明）。对 $U \in \mathrm{U}(N)$ 记未归一矢高 $\bar{v}(U) = N - \operatorname{Re}\operatorname{Tr}U = \frac{1}{2}\lVert U - \mathbf{1}\rVert_F^2$，它是 [@rem-ch39-plaquette-sagitta-and-wilson-action] 中 $\varphi(v)$ 的 $N$ 倍。设 $u_1, u_2 \in \mathrm{U}(N)$，$\Delta_k = u_k - \mathbf{1}$，$h = u_1u_2u_1^{-1}u_2^{-1}$。
+
+1. $\bar{v}(h) = \frac{1}{2}\lVert[\Delta_1, \Delta_2]\rVert_F^2 \le 4\,\bar{v}(u_1)\,\bar{v}(u_2)$；归一后 $\varphi(v(h)) \le 4N\,\varphi(v(u_1))\,\varphi(v(u_2))$。证明：由 [@rem-ch39-plaquette-sagitta-and-wilson-action] 第 3 条，$h - \mathbf{1} = [u_1, u_2]\,(u_2u_1)^\dagger$，右乘酉阵不改变 $\lVert\cdot\rVert_F$；又 $[u_1, u_2] = [\Delta_1, \Delta_2]$。于是由 [@thm-ch39-weighted-bottcher-wenzel]（$W = \mathbf{1}$），$2\bar{v}(h) \le 2\lVert\Delta_1\rVert_F^2\lVert\Delta_2\rVert_F^2 = 8\,\bar{v}(u_1)\bar{v}(u_2)$。这里只用到 $\Delta_1$ 是正规阵，所以也有一个初等证明：在 $u_1$ 的本征基中 $\Delta_1 = \operatorname{diag}(x_i)$，$x_i = e^{i\theta_i} - 1$，$[\Delta_1, Y]_{ij} = (x_i - x_j)Y_{ij}$，而 $i \ne j$ 时 $\lvert x_i - x_j\rvert^2 \le 2(\lvert x_i\rvert^2 + \lvert x_j\rvert^2) \le 2\lVert\Delta_1\rVert_F^2$，故 $\lVert[\Delta_1, Y]\rVert_F^2 \le 2\lVert\Delta_1\rVert_F^2\lVert Y\rVert_F^2$。
+2. 常数 $4$ 不能改小。对 $\mathrm{SU}(2)$ 中的 $u_k = \cos\frac{\theta_k}{2} - i\sin\frac{\theta_k}{2}\,n_k\cdot\boldsymbol{\sigma}$ 有精确式
+
+   $$
+   \bar{v}(h) = 4\,\bar{v}(u_1)\,\bar{v}(u_2)\cos^2\frac{\theta_1}{4}\cos^2\frac{\theta_2}{4}\,\lvert n_1\times n_2\rvert^2,
+   $$
+
+   因为 $[u_1, u_2] = -2i\sin\frac{\theta_1}{2}\sin\frac{\theta_2}{2}\,(n_1\times n_2)\cdot\boldsymbol{\sigma}$，$\bar{v}(u_k) = 4\sin^2\frac{\theta_k}{4}$，$\sin\frac{\theta}{2} = 2\sin\frac{\theta}{4}\cos\frac{\theta}{4}$。两轴正交、转角趋于 $0$ 时比值 $\bar{v}(h)/(4\bar{v}(u_1)\bar{v}(u_2))$ 趋于 $1$；在 $\mathrm{SU}(2)$ 中转角不为零时它严格小于 $1$，所以 $4$ 是上确界，靠小角极限逼近。把这一对元嵌入 $\mathrm{U}(N)$ 的一个 $2 \times 2$ 块，归一形式中的比值趋于 $4N$，所以因子 $N$ 也不能去掉。
+3. 对照：$\lVert u_1u_2 - u_2u_1\rVert_F^2 = \lVert h - \mathbf{1}\rVert_F^2 = 2\bar{v}(h)$，所以两种次序的乘积之差由第 1 条控制在 $8\,\bar{v}(u_1)\bar{v}(u_2)$ 以内，对转角是四阶的；而乘积本身的矢高只满足弦的叠加 $\sqrt{\bar{v}(u_1u_2)} \le \sqrt{\bar{v}(u_1)} + \sqrt{\bar{v}(u_2)}$，对转角是一阶的。
+4. 迭代换位收缩：$h_0$ 任意，$h_k = u_1h_{k-1}u_1^{-1}h_{k-1}^{-1}$，则 $\bar{v}(h_k) \le (4\bar{v}(u_1))^k\,\bar{v}(h_0)$；$\bar{v}(u_1) < \frac{1}{4}$ 时按几何级数趋于零。用算子范数写的同类不等式 $\lVert aba^{-1}b^{-1} - \mathbf{1}\rVert \le 2\lVert a - \mathbf{1}\rVert\,\lVert b - \mathbf{1}\rVert$（$a, b$ 为酉阵）是 Zassenhaus 邻域论证的出发点（文献结果）。
+5. 有限孔径的“$F = dA + [A, A]$”。小方格和乐 $P = h\,w\,h'^{-1}w'^{-1}$（$h, h'$ 为一组对边，$w, w'$ 为另一组）满足
+
+   $$
+   \lVert P - \mathbf{1}\rVert_F \le \sqrt{2}\,\lVert h - \mathbf{1}\rVert_F\,\lVert w - \mathbf{1}\rVert_F + \lVert h' - h\rVert_F + \lVert w' - w\rVert_F .
+   $$
+
+   证明：记 $C = hwh^{-1}w^{-1}$。左乘 $(hw)^{-1}$ 不改变距离，$\lVert P - C\rVert_F = \lVert h'^{-1}w'^{-1} - h^{-1}w^{-1}\rVert_F \le \lVert h'^{-1} - h^{-1}\rVert_F + \lVert w'^{-1} - w^{-1}\rVert_F$，且 $\lVert a^{-1} - b^{-1}\rVert_F = \lVert a^{-1}(b - a)b^{-1}\rVert_F = \lVert b - a\rVert_F$；再由第 1 条，$\lVert C - \mathbf{1}\rVert_F = \sqrt{2\bar{v}(C)} \le \sqrt{2}\,\lVert h - \mathbf{1}\rVert_F\lVert w - \mathbf{1}\rVert_F$。对边相同的链场只剩第一项，由第 2 条，其中的常数 $\sqrt{2}$ 不能改小；在 $\mathrm{U}(1)$ 中 $C = \mathbf{1}$，第一项可以整项去掉。把第一项读作 $[A, A]$、把对边之差读作 $dA$，是与连续记号的类比，不是推导。
+
+无权情形的 Böttcher–Wenzel 不等式见 A. Böttcher 与 D. Wenzel（*Linear Algebra Appl.* **429**, 1864–1885, 2008，DOI `10.1016/j.laa.2008.05.020`）；Zassenhaus 邻域见 H. Zassenhaus（*Abh. Math. Sem. Univ. Hamburg* **12**, 289–312, 1938）。
+:::
+
+比安基恒等式在格点上也有精确的有限形式。最小的闭曲面是一个立方体的六个面：
+
+::: {.remark #rem-ch39-cube-bianchi-sagitta title="立方体上的比安基恒等式与矢高的再分配（手工推导与文献结果）"}
+**手工推导；格点比安基恒等式、立方体磁单极数（DeGrand 与 Toussaint 1980）与可容许条件（Lüscher 1999）为文献结果，未在本书形式化。** 单位立方体的顶点为 $(x, y, z) \in \{0, 1\}^3$。链变量取值于任意群：$X_{yz}$ 从 $(0, y, z)$ 到 $(1, y, z)$，$Y_{xz}$ 从 $(x, 0, z)$ 到 $(x, 1, z)$，$Z_{xy}$ 从 $(x, y, 0)$ 到 $(x, y, 1)$。每个面从离原点最近的顶点出发、按外法向的右手方向绕行；不经过原点的三个面用一条棱接回原点：
+
+$$
+\begin{aligned}
+\ell_1 &= Z_{00}Y_{01}Z_{01}^{-1}Y_{00}^{-1} && (x = 0),\\
+\ell_2 &= Y_{00}\,(Z_{01}X_{11}Z_{11}^{-1}X_{10}^{-1})\,Y_{00}^{-1} && (y = 1),\\
+\ell_3 &= Y_{00}X_{10}Y_{10}^{-1}X_{00}^{-1} && (z = 0),\\
+\ell_4 &= X_{00}\,(Y_{10}Z_{11}Y_{11}^{-1}Z_{10}^{-1})\,X_{00}^{-1} && (x = 1),\\
+\ell_5 &= X_{00}Z_{10}X_{01}^{-1}Z_{00}^{-1} && (y = 0),\\
+\ell_6 &= Z_{00}\,(X_{01}Y_{11}X_{11}^{-1}Y_{01}^{-1})\,Z_{00}^{-1} && (z = 1).
+\end{aligned}
+$$
+
+1. $\ell_1\ell_2\ell_3\ell_4\ell_5\ell_6 = \mathbf{1}$。逐个右乘，每步只在接缝处消去一段相邻的互逆字母：
+
+   $$
+   \begin{aligned}
+   \ell_1\ell_2 &= Z_{00}Y_{01}X_{11}Z_{11}^{-1}X_{10}^{-1}Y_{00}^{-1},\\
+   \ell_1\ell_2\ell_3 &= Z_{00}Y_{01}X_{11}Z_{11}^{-1}Y_{10}^{-1}X_{00}^{-1},\\
+   \ell_1\cdots\ell_4 &= Z_{00}Y_{01}X_{11}Y_{11}^{-1}Z_{10}^{-1}X_{00}^{-1},\\
+   \ell_1\cdots\ell_5 &= Z_{00}Y_{01}X_{11}Y_{11}^{-1}X_{01}^{-1}Z_{00}^{-1} = \ell_6^{-1}.
+   \end{aligned}
+   $$
+
+   每个部分积是从原点出发、沿已贴上的面所成圆盘的边界走一圈：五个面拼成的圆盘，边界正是第六个面反向绕行。这是自由群中的恒等式，所以对任意群值链变量成立；循环轮换后的乘积是它的共轭，也等于 $\mathbf{1}$。次序是陈述的一部分。
+2. 记 $P_f$ 为面 $f$ 从其起点出发的和乐（$\ell_f$ 是它的共轭）。在 $\mathrm{U}(N)$ 中，由第 1 条与 $\lVert\cdot\rVert_F$ 的双侧酉不变性，对每个面 $f$
+
+   $$
+   \lVert P_f - \mathbf{1}\rVert_F \le \sum_{g \ne f}\lVert P_g - \mathbf{1}\rVert_F, \qquad \bar{v}(P_f) \le \left(\sum_{g \ne f}\sqrt{\bar{v}(P_g)}\right)^2 \le 5\sum_{g \ne f}\bar{v}(P_g),
+   $$
+
+   $\bar{v}$ 为 [@rem-ch39-commutator-sagitta-product] 中的未归一矢高。两个常数都不能改小：在 $\mathrm{U}(1)$ 中令一个面的外向通量为 $\vartheta$、其余五面各为 $-\frac{\vartheta}{5}$，$\vartheta \to 0$ 时两边之比都趋于 $1$。一个面上的矢高不能单独出现，必须由其余五面的矢高抵付。
+3. 在 $\mathrm{U}(1)$ 中共轭不起作用，第 1 条化为 $\sum_f\vartheta_f \equiv 0 \pmod{2\pi}$，$\vartheta_f$ 为外向通量。取主值 $\vartheta_f \in (-\pi, \pi]$，整数 $n = \frac{1}{2\pi}\sum_f\vartheta_f$ 就是这个立方体里的磁单极数（与 DeGrand–Toussaint 的定义至多差一个符号约定）。若 $n \ne 0$，则 $\sum_f\lvert\vartheta_f\rvert \ge 2\pi$，所以 $\max_f\lvert\vartheta_f\rvert \ge \frac{\pi}{3}$，即 $\max_f(1 - \cos\vartheta_f) \ge \frac{1}{2}$：六个面的矢高都小于 $\frac{1}{2}$（弦都小于 $1$）时没有单极。门槛可以达到：六个面的通量都是 $\frac{\pi}{3}$ 时 $n = 1$，每个面的矢高恰为 $\frac{1}{2}$。再由 $\lvert x\rvert \le \pi$ 时 $1 - \cos x \ge \frac{2x^2}{\pi^2}$ 与 $\sum_f\vartheta_f^2 \ge \frac{1}{6}\bigl(\sum_f\lvert\vartheta_f\rvert\bigr)^2$，$n \ne 0$ 时 $\sum_f(1 - \cos\vartheta_f) \ge \frac{4}{3}$；这个界不是锐的。
+4. 非阿贝尔情形中各面和乐不对易，第 3 条的主值求和没有直接的对应，第 2 条的不等式仍然成立。连续极限下第 1 条的首阶给出 $D_{[\lambda}F_{\mu\nu]} = 0$（文献结果）。
+
+立方体磁单极数见 T. A. DeGrand 与 D. Toussaint（*Phys. Rev. D* **22**, 2478–2489, 1980）。M. Lüscher（*Nucl. Phys. B* **549**, 295–334, 1999，arXiv:`hep-lat/9811032`）在阿贝尔格点手征规范理论中把规范场限制为可容许场：小方格场强的主值处处满足 $\lvert F_{\mu\nu}\rvert < \epsilon$，常数 $\epsilon$ 取在 $(0, \frac{\pi}{3})$ 中。由第 3 条的算术，这样的场在每个单位立方体里都有 $n = 0$。
+:::
+
+引力一侧，三维时角亏还是雷吉作用量对棱长的导数。证明只用到面法向的两两比较：
+
+::: {.remark #rem-ch39-schlafli-regge-deficit-gradient title="施莱夫利公式：三维雷吉作用量对棱长的梯度是角亏（手工推导与文献结果）"}
+**手工推导；施莱夫利公式（Schläfli 1858）及其一般维数形式、雷吉方程（Regge 1961）为文献结果，未在本书形式化。**
+
+1. 设凸多面体 $P \subset \mathbb{R}^3$ 在组合类型不变的前提下光滑形变，棱 $e$ 的长度为 $\ell_e$、内二面角为 $\theta_e \in (0, \pi)$。则 $\sum_e\ell_e\,d\theta_e = 0$。证明：记面 $F$ 的单位外法向为 $n_F$；对 $F$ 的棱 $e$，记 $m_{F,e}$ 为 $F$ 所在平面内垂直于 $e$、指向 $F$ 外侧的单位向量。棱 $e$ 两侧面 $F, G$ 的外角 $\alpha_e = \pi - \theta_e$ 由两法向的比较给出：$\cos\alpha_e = n_F\cdot n_G$，并且 $n_G = \cos\alpha_e\,n_F + \sin\alpha_e\,m_{F,e}$（对 $G$ 同理）。因为 $n_F\cdot dn_F = 0$，
+
+   $$
+   -\sin\alpha_e\,d\alpha_e = dn_F\cdot n_G + n_F\cdot dn_G = \sin\alpha_e\,\bigl(m_{F,e}\cdot dn_F + m_{G,e}\cdot dn_G\bigr).
+   $$
+
+   约去 $\sin\alpha_e \ne 0$，对 $e$ 加权求和并按面重新归组，$\sum_e\ell_e\,d\alpha_e = -\sum_F dn_F\cdot\left(\sum_{e \subset F}\ell_e\,m_{F,e}\right)$。$\ell_e\,m_{F,e}$ 是 $F$ 的边界多边形的有向棱向量在面内转过 $90^\circ$ 的结果，闭合多边形的棱向量之和为零，所以右端为零；而 $d\theta_e = -d\alpha_e$。
+2. 设三维闭单纯复形的每个四面体都是非退化的欧氏四面体，棱 $e$ 的角亏为 $\delta_e = 2\pi - \sum_{t \ni e}\theta_e^{(t)}$，雷吉作用量为 $S = \sum_e\ell_e\delta_e$。则 $\frac{\partial S}{\partial\ell_k} = \delta_k$。证明：$\frac{\partial S}{\partial\ell_k} = \delta_k - \sum_t\sum_{e \subset t}\ell_e\,\frac{\partial\theta_e^{(t)}}{\partial\ell_k}$，对每个四面体用第 1 条，后一项为零。所以三维真空雷吉方程就是每条棱的角亏为零，即逐棱平直。
+3. 数值核对：以 4-单形的边界（五个四面体、十条棱、每条棱属于三个四面体）为例，棱长在 $1 \pm 0.15$ 内随机取值时，中心差分得到的 $\frac{\partial S}{\partial\ell_k}$ 与 $\delta_k$ 之差不超过 $10^{-8}$；棱长全为 $1$ 时 $\delta_k = 2\pi - 3\arccos\frac{1}{3} \approx 2.5903$。
+
+第 1 条的证明只用到两件事：两个面法向的比较 $n_F\cdot n_G$，以及每个面的边界闭合；把前者读作 [@def-ch32-axiom-of-comparison] 条款 II 的求同通道，是本书的读法（`MODEL`）。第 2 条说，三维时与铰链长度共轭的量正是角亏这段弧。四维时 $\frac{\partial S}{\partial\ell_k} = \sum_h\delta_h\,\frac{\partial A_h}{\partial\ell_k}$ 依赖一般维数的施莱夫利公式（文献结果；见 J. Milnor, “The Schläfli differential equality”, 收于 *Collected Papers of John Milnor* 第 1 卷, 1994）。洛伦兹签名、耦合常数与量子化不由此给出（[@prob-ch34-gravity-dynamics-and-coupling]）。
+:::
+
 零作用量并不总是纯规范。在环面这样有不可缩回路的格点上，下面的冻结定理给出一个 $\mathbb{Z}/2$ 系数的实例：
 
 ::: {.theorem #thm-ch39-periodic-grid-flat-not-exact title="周期网格上的平坦 Z/2 边标号：梯度判据与一条缝的反例" lean="D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.flat_exact_iff,D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.horizontal_seam_counterexample"}
