@@ -71,7 +71,7 @@
   const solveCache = new Map();
   /** Exact stationary scattering state at E = ratio·V₀ through a barrier of width Lw (nm). */
   function solve(ratio, Lw) {
-    const key = `${ratio.toFixed(6)}|${Lw.toFixed(6)}`;
+    const key = `${ratio}|${Lw}`;                             // exact: a finite number prints in its shortest round-trip form
     const hit = solveCache.get(key);
     if (hit) return hit;
     const E = ratio * V0, k = Math.sqrt(C2 * E);

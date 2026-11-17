@@ -2581,6 +2581,14 @@
       "line": 533,
       "signature": "theorem exists_unitary_power_dilation (T : E →L[ℂ] E) (hT : ‖T‖ ≤ 1) : ∃ (H : Type u) (_ : NormedAddCommGroup H) (_ : InnerProductSpace ℂ H) (_ : CompleteSpace H) (V : E →L[ℂ] H) (U : H →L[ℂ] H), (∀ x y : E, ⟪V x, V y⟫_ℂ = ⟪x, y⟫_ℂ) ∧ U ∈ unitary (H →L[ℂ] H) ∧ (∀ (n : ℕ) (x : E), ContinuousLinearMap.adjoint V ((U ^ n) (V x)) = (T ^ n) x)"
     },
+    "D5/S3/HilbertOperators/WoldDecomposition.exists_wold_decomposition": {
+      "module": "D5/S3/HilbertOperators/WoldDecomposition",
+      "name": "D5.S3.HilbertOperators.WoldDecomposition.exists_wold_decomposition",
+      "kind": "theorem",
+      "statement_id": "sha256:59d23d4220551bee8f22f4dcba2f5c963e4ffeccc38913cad18ffe68b8389e06",
+      "line": 156,
+      "signature": "theorem exists_wold_decomposition (V : H →ₗᵢ[𝕜] H) (x : H) (n : ℕ) : ∃ w : ℕ → H, ∃ y : H, (∀ k, w k ∈ wanderingSub V) ∧ (∀ k ≥ n, w k = 0) ∧ x = (∑ k ∈ Finset.range n, (V ^ k) (w k)) + (V ^ n) y ∧ ‖x‖ ^ 2 = (∑ k ∈ Finset.range n, ‖w k‖ ^ 2) + ‖y‖ ^ 2"
+    },
     "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion": {
       "module": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion",
       "name": "D5.S3.Midline.Cayley.CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",
@@ -3812,6 +3820,14 @@
       "statement_id": "sha256:9ef86e623a3b8a4bfc44f4e69b1ec7aa2509d172ceba176d20ab2ba40581a844",
       "line": 83,
       "signature": "theorem bell_pure_state_has_maximally_mixed_marginal : star bellVector ⬝ᵥ bellVector = 1 /\\ bellDensity.PosSemidef /\\ Matrix.trace bellDensity = 1 /\\ Matrix.rank bellDensity = 1 /\\ bellDensity * bellDensity = bellDensity /\\ traceEnvironment bellDensity = (1 / 2 : Complex) • (1 : QubitMatrix) /\\ Not (traceEnvironment bellDensity * traceEnvironment bellDensity = traceEnvironment bellDensity)"
+    },
+    "D5/S3/Quantum/Entanglement/BipartiteSectorDecomposition.hermitian_space_finrank": {
+      "module": "D5/S3/Quantum/Entanglement/BipartiteSectorDecomposition",
+      "name": "D5.S3.Quantum.Entanglement.BipartiteSectorDecomposition.hermitian_space_finrank",
+      "kind": "theorem",
+      "statement_id": "sha256:d91fddbb5c9b9831b63bbf0112e5066e47b05a0c3016f153d5a44bbeeec3109e",
+      "line": 133,
+      "signature": "theorem hermitian_space_finrank (d : Nat) : Module.finrank ℝ (HermitianSpace d) = d ^ 2"
     },
     "D5/S3/Quantum/Entanglement/FiniteSectorPhysicalConstruction.channel_kraus_stinespring": {
       "module": "D5/S3/Quantum/Entanglement/FiniteSectorPhysicalConstruction",

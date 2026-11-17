@@ -192,7 +192,7 @@ $$
 把上面两类文献接回 [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 的弦—矢高语言，可以把“规范项”与“引力项”各自读取和乐的方式写得更确切：
 
 ::: {.remark #rem-ch39-plaquette-sagitta-and-wilson-action title="威尔逊小方格项是小方格和乐的矢高（手工推导与文献结果）"}
-**手工推导；与威尔逊作用量及其连续极限的对应、圆盘上的面和乐分解为文献结果，未在本书形式化。** 设 $U \in \mathrm{U}(N)$ 是一个小方格的和乐，$S = \frac{1}{2}(U + U^\dagger)$ 为求同部分，$v = \mathbf{1} - S$ 为矢高，$\Delta = U - \mathbf{1}$ 为割弦，读数取归一迹 $\varphi = \frac{1}{N}\operatorname{Tr}$。
+**手工推导；与威尔逊作用量及其连续极限的对应、一般圆盘上的面和乐分解为文献结果，未在本书形式化。** 设 $U \in \mathrm{U}(N)$ 是一个小方格的和乐，$S = \frac{1}{2}(U + U^\dagger)$ 为求同部分，$v = \mathbf{1} - S$ 为矢高，$\Delta = U - \mathbf{1}$ 为割弦，读数取归一迹 $\varphi = \frac{1}{N}\operatorname{Tr}$。
 
 1. 由 $\Delta^\dagger\Delta = 2v$（[@rem-appe-chord-sagitta-layer0]）得 $\varphi(v) = 1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U = \frac{1}{2N}\operatorname{Tr}(\Delta^\dagger\Delta)$。威尔逊小方格作用量按通行归一化写作 $S_W = \beta\sum_p\bigl(1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p\bigr)$（Wilson 1974），它逐项等于 $\beta\,\varphi(v(U_p))$。$U \in \mathrm{SU}(2)$ 时 $S = \frac{1}{2}(\operatorname{Tr}U)\mathbf{1}$ 已是实标量，不需要读数；一般的 $U \in \mathrm{U}(2)$ 与 $N \ge 3$ 时需要。
 2. 设 $U$ 的本征角为 $\theta_j \in (-\pi, \pi]$。由 $\frac{x^2}{2} - \frac{x^4}{24} \le 1 - \cos x \le \frac{x^2}{2}$ 与 $\lvert x\rvert \le \pi$ 时 $1 - \cos x \ge \frac{2x^2}{\pi^2}$，
@@ -202,7 +202,7 @@ $$
    $$
 
 3. 两个公平元 $u_1, u_2$ 的换位和乐 $h = u_1u_2u_1^\dagger u_2^\dagger$ 满足 $h - \mathbf{1} = [u_1, u_2]\,(u_2u_1)^\dagger$（在 [`covariant_commutator_formula`](lean:D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula) 中取 $U = u_1$、$f = u_2$、$\mathit{translated} = u_1u_2u_1^\dagger$，再两边右乘 $(u_2u_1)^\dagger$），所以 $\varphi(v(h)) = \frac{1}{2}\varphi\bigl([u_1, u_2]^\dagger[u_1, u_2]\bigr)$：有限孔径上的曲率矢高是对易子范数平方的一半。
-4. 若回路 $C$ 是由 $M$ 个小方格拼成的圆盘的边界，$W_C$ 等于 $M$ 个面和乐各自经一串链变量共轭后按剥壳次序的乘积（[§34.30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-3) 的非阿贝尔面斯托克斯恒等式，`文献结果`）。$\lVert X\rVert_\varphi := \sqrt{\varphi(X^\dagger X)}$ 在酉元左右乘下不变，且 $ab - \mathbf{1} = (a - \mathbf{1})b + (b - \mathbf{1})$，故 $\lVert W_C - \mathbf{1}\rVert_\varphi \le \sum_p\lVert U_p - \mathbf{1}\rVert_\varphi$，即 $\sqrt{\varphi(v(W_C))} \le \sum_p\sqrt{\varphi(v(U_p))}$；再由柯西—施瓦茨不等式，$1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}W_C \le M\sum_p\bigl(1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p\bigr)$。
+4. 若回路 $C$ 是 $R \times T$ 矩形网格的边界，从原点出发逆时针绕行，路径上的链变量按经过次序从左到右相乘。记 $h_{i,j}$、$w_{i,j}$ 为从 $(i, j)$ 到 $(i + 1, j)$、到 $(i, j + 1)$ 的链变量，$P_{i,j} = h_{i,j}w_{i+1,j}h_{i,j+1}^{-1}w_{i,j}^{-1}$ 为以左下角为基点、逆时针的小方格和乐，$b_i = h_{0,0}\cdots h_{i-1,0}$，$V_{i,J} = w_{i,0}\cdots w_{i,J-1}$，$\ell_{i,j} = (b_iV_{i,j})P_{i,j}(b_iV_{i,j})^{-1}$。对 $J$ 归纳得 $\ell_{i,0}\ell_{i,1}\cdots\ell_{i,J-1} = b_i\,h_{i,0}V_{i+1,J}h_{i,J}^{-1}V_{i,J}^{-1}\,b_i^{-1}$（每一步只有 $V_{i,J}^{-1}V_{i,J}$ 与 $h_{i,J}^{-1}h_{i,J}$ 相消）；记 $C_i$ 为 $J = T$ 时的这一乘积，由 $b_ih_{i,0} = b_{i+1}$，相邻两列之积 $C_iC_{i-1}$ 中间的 $V_{i,T}^{-1}b_i^{-1}b_iV_{i,T}$ 相消，逐列叠缩得 $W_C = C_{R-1}C_{R-2}\cdots C_0$：列从右到左，列内从下到上。这一分解在任意群中成立；次序是陈述的一部分，按列从左到右相乘一般得到别的元素。一般圆盘上 $W_C$ 同样是 $M$ 个面和乐经锚线共轭后按剥壳次序的乘积（[§34.30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-3) 的非阿贝尔面斯托克斯恒等式，`文献结果`）。在两种情形下（矩形网格时 $M = RT$），$\lVert X\rVert_\varphi := \sqrt{\varphi(X^\dagger X)}$ 在酉元左右乘下不变，且 $ab - \mathbf{1} = (a - \mathbf{1})b + (b - \mathbf{1})$，故 $\lVert W_C - \mathbf{1}\rVert_\varphi \le \sum_p\lVert U_p - \mathbf{1}\rVert_\varphi$，即 $\sqrt{\varphi(v(W_C))} \le \sum_p\sqrt{\varphi(v(U_p))}$；再由柯西—施瓦茨不等式，$1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}W_C \le M\sum_p\bigl(1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p\bigr)$。每格通量相同的 $\mathrm{U}(1)$ 构型在小通量时使这两个不等式两端之比都趋于 $1$，所以因子 $M$ 不能去掉。
 5. 对光滑经典场，链变量取沿棱的路径有序指数或棱中点处的 $e^{iaA_\mu}$，取小方格中心展开，$1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p = \frac{a^4}{2N}\operatorname{Tr}F_{\mu\nu}^2 + O(a^6)$，$F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu + i[A_\mu, A_\nu]$（$\mu\nu$ 为该小方格所在平面，不求和）。
 
 对三角形面，第三点冗余（[@def-appe-third-point-redundancy]）成立当且仅当该面和乐为 $\mathbf{1}$，即矢高读数为零；把同一条件搬到小方格上（面和乐为 $\mathbf{1}$），$S_W/\beta$ 就是这一条件的偏差的矢高总和。这只是运动学上的改写：统计权重、测度、耦合常数的取值与量子连续极限都不由它给出（后者见 [@prob-ch34-rough-nonabelian-surface-calculus]）。
@@ -221,7 +221,19 @@ $$
 因此“万力归弧”的确切内容是：两类力都由回路和乐偏离单位元来描述，并共用同一组比安基与斯托克斯恒等式；规范项读偶通道，引力项读带符号的转角（符号由奇通道确定）并以铰链度量加权。把这一区别当作规范力与引力的结构差异属于本书的读法（`MODEL`）；它不确定规范群、耦合常数或动力学。
 :::
 
-下面的算例给这两条注记配上数值：
+铰链平面本身也可以从和乐读出来：
+
+::: {.remark #rem-ch39-hinge-plane-chord-and-sign title="铰链平面、弦与角亏的符号（手工推导与文献结果）"}
+**手工推导；分片平直流形中绕铰链的和乐逐点固定铰链（Regge 1961）与闭多面体曲面上的总角亏公式 $\sum_v\delta_v = 2\pi\chi$ 为文献结果，未在本书形式化。** 设 $R \in \mathrm{SO}(D)$，$R \ne \mathbf{1}$，且 $R$ 逐点固定一个 $D - 2$ 维子空间（等价地 $\operatorname{rank}(R - \mathbf{1}) = 2$），割弦 $\Delta = R - \mathbf{1}$。
+
+1. $\Pi = \operatorname{im}\Delta$ 是一个二维平面，$R$ 在 $\Pi^\perp$ 上为恒等。取 $\Pi$ 的一个定向与单位生成元 $K$（$K^2 = -P_\Pi$），则有唯一的 $\delta \in (-\pi, \pi]$ 使 $R = \mathbf{1} + \sin\delta\,K + (1 - \cos\delta)K^2$。偶通道 $S = \frac{1}{2}(R + R^{\mathsf{T}}) = \mathbf{1} - (1 - \cos\delta)P_\Pi$ 给出不带定向的平面 $P_\Pi$ 与 $\cos\delta$；奇通道 $A = \frac{1}{2}(R - R^{\mathsf{T}}) = \sin\delta\,K$ 给出平面的定向与 $\delta$ 的符号，即 [@rem-ch39-regge-deficit-signed-angle] 中的 $-\frac{1}{2}\operatorname{Tr}(KR) = \sin\delta$。同一平面上角亏为 $+90^\circ$ 与 $-90^\circ$ 的两个转动，偶通道与弦长都相同。
+2. $\lVert\Delta\rVert_{\mathrm{op}} = 2\lvert\sin\frac{\delta}{2}\rvert$，所以 $\lvert\delta\rvert = 2\arcsin\frac{\lVert\Delta\rVert_{\mathrm{op}}}{2} = \lVert\Delta\rVert_{\mathrm{op}} + \frac{1}{24}\lVert\Delta\rVert_{\mathrm{op}}^3 + \cdots$：雷吉项中角的大小是弦长的函数，小角时与弦长同阶；[@rem-ch39-plaquette-sagitta-and-wilson-action] 中的威尔逊项 $1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U = \frac{1}{2}\lVert U - \mathbf{1}\rVert_\varphi^2$ 在任意孔径上都恰是弦的二次式。用矢高 $v_\Pi = 1 - \cos\delta$ 表示时 $\lvert\delta\rvert = \arccos(1 - v_\Pi) = \sqrt{2v_\Pi}\,\bigl(1 + \frac{v_\Pi}{12} + \cdots\bigr)$，在 $v_\Pi = 0$ 处是平方根型。
+3. 在嵌入 $\mathbb{R}^3$ 的多面体曲面上，铰链是顶点。取三面角的三个面外法向 $n_1, n_2, n_3$ 为 [@rem-appe-half-comparison-holonomy] 中的 $a, b, c$，半比较和乐 $\cos\frac{\Omega}{2} + \sin\frac{\Omega}{2}\,\mathbf{I}a$ 的转角 $\Omega$ 就是顶点角亏（[@rem-ch39-regge-deficit-signed-angle] 第 4 条），它的双矢量部分 $\mathbf{I}a$ 对应以 $n_1$ 为法向的平面，即第一个面所在的平面：这里的铰链平面由法向量的比较数据给出。
+4. $D = 3$ 时每个转动都逐点固定一条直线。$D \ge 4$ 时一般的转动是双转动，$\operatorname{rank}\Delta = 4$，旋子双矢量不是简单的，没有铰链平面；矢高读数 $1 - \frac{1}{D}\operatorname{Tr}R$ 仍有定义。所以 $D \ge 4$ 时“铰链上的角亏”读法需要一条额外条件：绕铰链的和乐双矢量是简单的。在分片平直几何中它自动成立；在一般的比较结构中它属于本书的读法（`MODEL`）。
+5. 符号不能省：三个正方形围成的顶点（角亏 $+90^\circ$）与五个正方形围成的鞍点（角亏 $-90^\circ$）矢高都是 $1$、弦长都是 $\sqrt{2}$。闭多面体曲面上 $\sum_v\delta_v = 2\pi\chi$；环面上为 $0$，角亏不全为零时正负两种符号都出现。矢高之和与弦长之和都是正数，看不出这一恒等式。
+:::
+
+下面的算例给这三条注记配上数值：
 
 ::: {.example #ex-ch39-sagitta-versus-deficit-audit title="角亏与矢高的对账：五种正多面体、示例铰链与一个换位和乐（手工推导）"}
 1. **正多面体。** 顶点数乘角亏恒为 $720^\circ$；矢高之和各不相同：
@@ -235,7 +247,7 @@ $$
    | 正二十面体 | $12$ | $60^\circ$ | $720^\circ$ | $6.0000$ |
 
 2. **法向公式。** 立方体顶点的三个法向两两正交，$[n_1, n_2, n_3] = 1$，分母为 $1$，$\delta_v = 2\arctan 1 = 90^\circ$。正四面体顶点处 $n_i\cdot n_j = -\frac{1}{3}$，分母为 $0$，$\delta_v = 180^\circ$。
-3. **示例铰链。** 四个正四面体共棱时 $\delta_h = 360^\circ - 4\arccos\frac{1}{3} = 77.885^\circ = 1.3593\;\mathrm{rad}$，$\sin\delta_h = 0.9777$，$1 - \cos\delta_h = 0.7901$，$\frac{1}{2}\delta_h^2 = 0.9239$。
+3. **示例铰链。** 四个正四面体共棱时 $\delta_h = 360^\circ - 4\arccos\frac{1}{3} = 77.885^\circ = 1.3593\;\mathrm{rad}$，$\sin\delta_h = 0.9777$，$1 - \cos\delta_h = 0.7901$，$\frac{1}{2}\delta_h^2 = 0.9239$。这些数有闭式：$\cos\frac{\delta_h}{2} = -\cos\bigl(2\arccos\frac{1}{3}\bigr) = \frac{7}{9}$，故 $1 - \cos\delta_h = \frac{64}{81}$，$\sin\delta_h = \frac{56\sqrt{2}}{81}$，弦长 $2\sin\frac{\delta_h}{2} = \frac{8\sqrt{2}}{9}$，旋子的矢高 $1 - \cos\frac{\delta_h}{2} = \frac{2}{9}$。
 4. **换位和乐。** 绕两根正交轴各转 $60^\circ$ 的旋子，由 [@rem-ch39-plaquette-sagitta-and-wilson-action] 第 3 条，$[u_1, u_2] = -2i\sin 30^\circ\sin 30^\circ\,(n_1\times n_2)\cdot\boldsymbol{\sigma}$，故 $v(h) = 2\sin^2 30^\circ\sin^2 30^\circ = \frac{1}{8}$，余下的转角为 $2\arccos\frac{7}{8} = 57.91^\circ$，与 [§32.5](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields) 实验卡的读数一致。
 :::
 
