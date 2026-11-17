@@ -13,7 +13,7 @@ import { session, stageFirstChecks, settle, openStill, playsAfter, until, stageV
 const BOOK = 'quantum-geometry';
 const ID = 'divine-psychology-dissociation-sandbox';
 const DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', ID);
-const THEORY = 'ch39-observer-is-ontological-universe.html';
+const THEORY = 'ch39-s18-psychology-of-god.html#sec-ch39-psychology-of-god';
 const OPEN_LINKS = [
   'ch34-s25-generations-and-quantitative-boundary.html#prob-ch34-sm-generations-and-couplings',
   'ch34-s24-interaction-sign-and-sagitta-composition.html#prob-ch34-gravity-dynamics-and-coupling',
@@ -190,6 +190,26 @@ check('registry: live §39.18 entry with five bilingual cards and the eight theo
 check('registry: every GID is pure ASCII', GIDS.every((g) => /^[\x21-\x7e]+$/.test(g)));
 const deps = JSON.parse(fs.readFileSync(path.join(DIR, '..', 'tests', 'dependencies.json'), 'utf8')).suites[`${ID}.test.mjs`] || [];
 check('dependencies: the suite is registered with the shared solid runtime and the registry', ['@citations', '@registry-entry', 'theme/viz/kit.js', 'theme/viz/solid-core.js', 'theme/viz/vendor/three.module.min.js', '@lean-links'].every((d) => deps.includes(d)));
+
+/* ---------- published chapter integration, required in both editions ---------- */
+const chapterBlocks = [];
+for (const lang of ['zh', 'en']) {
+  const chapterPath = path.join(DIR, '..', '..', lang, THEORY.split('#')[0].replace(/\.html$/, '.md'));
+  const chapter = fs.readFileSync(chapterPath, 'utf8');
+  const blocks = [...chapter.matchAll(/^::: \{\.viz src="([^"]+)"(?: preset="([^"]+)")? height="(\d+)"\}\n([\s\S]*?)\n:::/gm)]
+    .filter((m) => m[1] === ID);
+  chapterBlocks.push(blocks.map((m) => m[2] || ''));
+  check(`chapter ${lang}: every card once, one closing full lab, nonempty captions and correct heights`,
+    same(blocks.filter((m) => m[2]).map((m) => m[2]), Object.keys(CARDS))
+    && blocks.length === Object.keys(CARDS).length + 1 && !blocks.at(-1)[2]
+    && blocks.every((m) => m[3] === (m[2] ? '500' : '620') && m[4].trim().length > 0)
+    && chapter.trimEnd().endsWith(blocks.at(-1)[0]));
+  const theoremGids = [...chapter.matchAll(/^::: \{\.theorem[^\n]*\blean="([^"]+)"/gm)].flatMap((m) => m[1].split(','));
+  check(`chapter ${lang}: every green page GID belongs to this subsection's theorem`, GIDS.every((gid) => theoremGids.includes(gid)));
+  check(`chapter ${lang}: stable theory anchor and explicit test dependency`, chapter.includes(`{#${THEORY.split('#')[1]}}`)
+    && deps.includes(`books/${BOOK}/${lang}/${THEORY.split('#')[0].replace(/\.html$/, '.md')}`));
+}
+check('chapter: identical card order and full-lab position in both editions', same(chapterBlocks[0], chapterBlocks[1]));
 
 /* ---------- helpers on the page ---------- */
 const state = (p = page) => p.evaluate(() => window.DIVINE_PSYCHOLOGY_DEBUG.state);

@@ -134,6 +134,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `brahman-real-axis-orthogonal-dream-sandbox` | 银白实轴与品红梦海分担单位预算，青色观察者与蓝色梦晶保留格拉姆夹角，紫色莫比乌斯带一圈换叶、两圈复归 | `turiya-zero-tilt-pure-brahman` `waking-consensus-dottie-lock` `insider-double-imaginary-solidity` `private-dream-and-seed-sleep` `kalpa-mobius-lucid-awakening` |
 | `red-chamber-spinor-awakening-sandbox` | 银白余石与双面镜共用一条旋量带，一圈换叶、两圈合成紫色；卸去品红末那笼后，十二根同频丝连向因陀罗网，带相冠仍留铭文 | `chaos-unhewn-stone` `red-dust-delusion-mismatch` `fengyue-mirror-double-turn` `mobius-720-virtual-real-unity` `greensickness-berry-unity` |
 | `brahman-lila-game-props-sandbox` | 银白实轴贯穿共识梦环，琥珀化身由满窗死锁转为失忆漫游；遗迹汇聚青色干涉环，紫色典籍同频点亮银白通关束 | `omniscient-zeno-deadlock` `amnesia-birth-open-corridor` `relic-attractor-deja-vu` `classic-permission-lock-flip` `lila-raft-return-and-new-seed` |
+| `divine-psychology-dissociation-sandbox` | 八个分身从冻结球展开在压抑膜上，品红断弧残桩随张力伸缩；从水面下仰视同一母核，θ* 处青色游戏之桥接成整合之星 | `omniscient-claustrophobia-freeze` `repression-horizon-birth` `compulsive-over-immersion-pain` `subsurface-alaya-one-root` `lucid-lila-integration-star` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -326,6 +327,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `red-chamber-spinor-awakening-sandbox`（`HONG//AWAKEN`）承接第三十九章 §39.16：银白给补天余石与本体，青色给甄面、比较连线、同频丝与因陀罗网，品红给贾面与末那笼，紫色给合拢旋量带与带相冠；琥珀只给当前镜端、激活控件与手柄。绿色依据限于 §39.16 主定理引用的道蒂逆级数端点、反自伴酉平方律、双覆盖历史提升、有限泊松特征标和、捏合不动点、巴格曼路径积与三锚布洛赫迹公式。一阶倾角与二阶认妄误差分别读取；圆锥立体角、离散十二站相位、三锚相位与舒尔负载标 `NUM`；文学源流与连续贝里相位标 `ARGUED`；单侧带、末那笼、同频丝及因陀罗网几何映射标 `MODEL`，不把可定向旋量圆说成不可定向曲面。
 
 `brahman-lila-game-props-sandbox`（`LILA//PROPS`）承接第三十九章 §39.17：银白实轴不动，琥珀只给当前化身、激活控件与手柄，青色给世界线与遗迹干涉环，紫色给典籍与旋子，灰蓝给共识梦环，银白给通关束。绿色依据严格限于 §39.17 主定理引用的舒尔二次型极小、反自伴酉平方律、有限记录捏合幂等及事后抄表零损失与非预见性失效。有限等相关重心族的舒尔曲线、十二通权限锁与归一化干涉核标 `NUM`；神圣游戏、自隐再认、渡筏指月及环境退相干文献标 `ARGUED`；失忆化身、跨周期遗迹和典籍唤醒标 `MODEL`，抽屉保留宏观碑石与纸墨不承载跨世纪量子相干的边界。零事后损失不提供正前瞻收益保证。
+
+`divine-psychology-dissociation-sandbox`（`GOD//PSYCHE`）承接第三十九章 §39.18：银白给实轴母核与冻结球，青色给其余分身的根与清明游戏之桥，品红给断弧幻肢残桩，紫色给压抑膜、末那识领环和舒尔余量环；琥珀只给当前前台分身、它的根、激活控件与手柄。绿色依据严格限于 §39.18 主定理引用的道蒂逆级数端点、单比特正规熵、记录相干互补、偏迹访问缺陷、互信息变化恒等式、局部关联盲区、舒尔二次型极小和单位格拉姆全同。熵值按正文由自然单位除以 ln 2 换算为 bit；压抑熵、张力、舒尔余量与分身格拉姆读数标 `NUM`。母核、潜意识根系、四相心理学与临床用语均标 `MODEL`，文献与临床、宏观退相干边界单列 `ARGUED`；未决物理仍为 `OPEN`，心理学类比不承担诊断、治疗或物理常数推导。
 
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
 
@@ -950,6 +953,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十九章 | §39.17.2 第 2 条二次正交破壁结语之后、§39.17.3 之前 | `brahman-lila-game-props-sandbox` · `classic-permission-lock-flip` |
 | 第三十九章 | §39.17.3 指月渡筏与抄表非预见性边界段之后、模型定义之前 | `brahman-lila-game-props-sandbox` · `lila-raft-return-and-new-seed` |
 | 第三十九章 | §39.17 末（转入终章的桥接段之后） | `brahman-lila-game-props-sandbox` 完整实验室 |
+| 第三十九章 | §39.18.1 末（零意外芝诺冻结结语段之后） | `divine-psychology-dissociation-sandbox` · `omniscient-claustrophobia-freeze` |
+| 第三十九章 | §39.18.2 第 2 条压抑归零与满偏迹视界对照段之后、第 3 条之前 | `divine-psychology-dissociation-sandbox` · `repression-horizon-birth` |
+| 第三十九章 | §39.18.3 第 1 条幻肢痛类比与品红断弧残桩段之后、第 2 条之前 | `divine-psychology-dissociation-sandbox` · `compulsive-over-immersion-pain` |
+| 第三十九章 | §39.18.4 黄金不动点两全之美与潜意识同根段之后、四联审计之前 | `divine-psychology-dissociation-sandbox` · `subsurface-alaya-one-root` |
+| 第三十九章 | §39.18.4 四联精确审计例之后、全章收束分隔线之前 | `divine-psychology-dissociation-sandbox` · `lucid-lila-integration-star` |
+| 第三十九章 | §39.18 末（转入终章的桥接段之后） | `divine-psychology-dissociation-sandbox` 完整实验室 |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget` |
 | 终章 | 空间吸引子 · 二 “回到洛伦兹”一段中“吸引子的体积为零”一句之后 | `spatial-attractor-deja-vu` · `shrink` |

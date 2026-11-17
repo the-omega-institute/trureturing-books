@@ -521,6 +521,8 @@
     ],
     "divine-psychology-dissociation-sandbox.test.mjs": [
       "@citations",
+      "books/quantum-geometry/en/ch39-s18-psychology-of-god.md",
+      "books/quantum-geometry/zh/ch39-s18-psychology-of-god.md",
       "books/quantum-geometry/book.toml",
       "@registry-entry",
       "package-lock.json",
