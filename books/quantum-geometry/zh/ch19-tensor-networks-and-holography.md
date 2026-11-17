@@ -371,6 +371,115 @@ $$
 
 上述施密特权重与熵的讨论是归一化纯态的谱解释；定理本身只给出矩阵维数的必要条件。这一障碍针对既定分组下的三项复矩阵收缩与精确平坦谱；它不给出近似平坦的误差界，也不建立一般张量网络、物理实现或连续统全息对偶的结论。
 
+那么，把比值收紧为 $b\le2a$、$d\le2c$，能否保证精确平坦谱？这时上面的 $b>2a$ 障碍不再适用，但仍有另一种限制。下面固定 $3\times5$ 与 $5\times3$ 的因子尺寸，保留原来的行、列分组。
+
+::: {.theorem #thm-bridge-three-five-flat-spectrum-obstruction title="$(3,5,3,5)$ 的正标量 Gram 障碍" lean="D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.positive_scalar_obstruction"}
+对任意复矩阵三元组 $M_r\in M_{3\times5}(\mathbb C)$、$N_r\in M_{5\times3}(\mathbb C)$（$r=0,1,2$）以及任意实数 $\lambda>0$，令
+
+$$
+F=\sum_{r=0}^2M_r\otimes N_r:
+\mathbb C^5\otimes\mathbb C^3\longrightarrow
+\mathbb C^3\otimes\mathbb C^5.
+$$
+
+则 $F^*F\ne\lambda I_{15}$，其中 $I_{15}$ 的指标集为 $\operatorname{Fin}5\times\operatorname{Fin}3$。
+:::
+
+::: {.proof #pf-bridge-three-five-flat-spectrum-obstruction}
+反设 $F^*F=\lambda I_{15}$。先把同一个 $F$ 写成项数最少的克罗内克积之和，记项数为 $k\le3$、因子为 $A_r,D_r$。若一侧因子线性相关，就可从一条非零系数关系中解出一个因子，将对应项吸收到其余项，减少项数而不改变 $F$。所以最小分解的两族因子各自复线性无关。再把 $A_r$ 同乘 $1/\sqrt\lambda$，得到收缩 $G=F/\sqrt\lambda$，满足 $G^*G=I_{15}$；非零缩放保留独立性。最小宽度、独立性和归一化都是反设的推论，不是定理另加的前提。
+
+$k=0$ 时 $G=0$，Gram 矩阵不可能是单位阵。$k=1$ 时，$3\times5$ 因子 $A_0$ 有非零核向量 $x$；对任意非零 $y\in\mathbb C^3$，有 $(A_0\otimes D_0)(x\otimes y)=0$，也与 $G^*G=I_{15}$ 要求的单射性矛盾。
+
+对 $k=2,3$，还需整理系数方向上的度量。令
+
+$$
+H_{rs}=\frac13\Tr(D_r^*D_s).
+$$
+
+这是矩阵族 $D_r$ 的 Hilbert–Schmidt Gram 矩阵；独立性使它正定，故可写成 $H=B^*B$，其中 $B$ 可逆。作配对的系数变换
+
+$$
+\begin{aligned}
+X_r&=\sum_s B_{rs}A_s,\qquad
+Y_r=\sum_s(B^{-T})_{rs}D_s,\\
+G&=\sum_rX_r\otimes Y_r,\qquad
+\sum_rX_r^*X_r=I_5.
+\end{aligned}
+$$
+
+这里 $B^{-T}=(B^T)^{-1}$，所以 $B^TB^{-T}=I_k$ 保持三项或两项收缩不变；最后一个等式来自对 $G^*G=I_{15}$ 的第二个张量因子取偏迹，再除以 $3$。变换也保留各族独立性。将 $X_r$ 按系数指标在前竖直堆叠，得到 $S:\mathbb C^5\to\mathbb C^k\otimes\mathbb C^3$，且 $S^*S=I_5$，因此 $S$ 单射。
+
+展开 $G^*G=I_{15}$，对任意 $\ell,m\in\{0,1,2\}$ 定义复系数块
+
+$$
+\begin{aligned}
+(T_{\ell m})_{rs}&=(Y_r^*Y_s)_{\ell m}-\delta_{rs}\delta_{\ell m},\\
+\Phi_X(T)&=S^*(T\otimes I_3)S
+=\sum_{r,s}T_{rs}X_r^*X_s.
+\end{aligned}
+$$
+
+于是每个块都满足 $\Phi_X(T_{\ell m})=0$。当 $k=3$ 时，这正是源码的 [`compression`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression) 与 [`compression_eq_sum`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression_eq_sum)；此处 $\delta$ 仍为 Kronecker 符号。
+
+$k=2$ 时，$S$ 是秩为 $5$ 的 $6\times5$ 矩阵。对 $S^*(T\otimes I_3)S$ 连用两次矩阵乘积秩下界，得到
+
+$$
+\operatorname{rank}\Phi_X(T)\ge3\operatorname{rank}T-2.
+$$
+
+因此 $\Phi_X(T)=0$ 迫使整数 $\operatorname{rank}T=0$，即 $T=0$。所有 $T_{\ell m}$ 都为零，故 $Y_r^*Y_s=\delta_{rs}I_3$。横向拼接 $[\,Y_0\ Y_1\,]$ 就得到一张 $5\times6$ 矩阵，其六根列正交归一，不可能存在。
+
+$k=3$ 时，压缩核未必为零。此时使用 [`common_plane`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.common_plane)：它的确切前提是三个 $3\times5$ 复矩阵 $X_r$ 复线性无关，且系数在前的堆叠 $S$ 单射；这些条件已在上面导出。结论是存在一个复二维子空间 $L\subset\mathbb C^3$，对整个 Hermitian 压缩核同时满足
+
+$$
+T=T^*,\quad\Phi_X(T)=0
+\quad\Longrightarrow\quad
+u^*Tv=0\quad(u,v\in L).
+$$
+
+这里是同一个 $L$ 对所有 $T$ 都中性，且要求完整的复配对为零。它也包含 Hermitian 压缩核只有零矩阵的情形，此时任意系数二维平面都满足要求。不能对每个块另选一个平面，也不能把这个固定尺寸的结论直接套给 $k=2$。
+
+复块 $T_{\ell m}$ 本身未必 Hermitian，尤其 $\ell\ne m$ 时不能只检查对角块。因为 $\Phi_X(T^*)=\Phi_X(T)^*$，它的两个 Hermitian 部分
+
+$$
+T_{\mathrm R}=\frac{T+T^*}{2},\qquad
+T_{\mathrm I}=\frac{T-T^*}{2i},\qquad
+T=T_{\mathrm R}+iT_{\mathrm I}
+$$
+
+都在压缩核中。同一个 $L$ 消去两部分的配对，因而对所有 $\ell,m$ 都有 $u^*T_{\ell m}v=0$；这两个部分不是逐元素取实部、虚部。
+
+选 $L$ 的一组正交归一基，组成 $3\times2$ 矩阵 $V$，满足 $V^*V=I_2$。横向拼接 $W=[\,Y_0\ Y_1\ Y_2\,]\in M_{5\times9}(\mathbb C)$，并令 $C=V\otimes I_3\in M_{9\times6}(\mathbb C)$。上面的全部块配对给出
+
+$$
+(WC)^*(WC)=C^*W^*WC=I_6.
+$$
+
+于是 $WC$ 的六根压缩列必须正交归一，却只有五行，即 $6\le\operatorname{rank}(WC)\le5$，矛盾。这些系数变换、堆叠与压缩都是证明中的辅助操作，原始 $F$ 的行、列二分没有改变。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-bridge-three-five-flat-spectrum title="八个前提成立，秩达到 15，谱仍不能平坦：$(3,5,3,5)$"}
+取 $(a,b,c,d)=(3,5,3,5)$。逐项核对原始全称主张 [`claim`](lean:D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.claim) 的八个前提：
+
+$$
+\begin{aligned}
+0<a&:\quad0<3,& a\le b&:\quad3\le5,\\
+0<c&:\quad0<3,& c\le d&:\quad3\le5,\\
+a^2+b^2\le3ab&:\quad34\le45,\\
+c^2+d^2\le3cd&:\quad34\le45,\\
+b\le2a&:\quad5\le6,& d\le2c&:\quad5\le6.
+\end{aligned}
+$$
+
+前六个正是 [@thm-bridge-quantum-maxflow-mincut] 的全部前提；该秩定理没有额外的平坦谱承诺。由于 $ad=bc=15$、$3ac=27$，它给出 $\operatorname{QMaxFlow}=\operatorname{QMinCut}=15$；再由 [@lemma-bridge-flow-attained]，存在某组矩阵使 $\operatorname{rank}F=15$。这里是在相同 `flow` 定义与行列指标下组合已有声明的结论。
+
+然而 [@thm-bridge-three-five-flat-spectrum-obstruction] 排除了任意矩阵三元组在任意 $\lambda>0$ 下满足 $F^*F=\lambda I_{15}$，因此不可能有长度为 $15$ 的精确正平坦奇异值谱。旧的 [@thm-bridge-scalar-gram-obstruction] 不能用于这一点，因为 $b=5\le2a=6$。
+
+原始全称主张要求同一组 $M,N$ 和同一个正 $\lambda$ 同时见证本节开头的两条条件 Gram 等式。此处 $ad=bc$ 使两条条件都生效，而列等式单独就与新定理矛盾。因此，即便补上 $b\le2a$、$d\le2c$，也不能把锥域中的秩可达性加强为精确平坦谱可达性。
+:::
+
+这一算例没有确定最小反例、最优比值阈值或完整的维数分类，也没有给出近似平坦谱的定量间隙。它仍只讨论既定行列二分下的有限维收缩，不建立物理实现或 RT 公式饱和。
+
 ::: {.figure src="ch19-discrete-vs-rt"}
 **本章证明的只到左边为止。** 左边是宽度三桥图，绿色标签是锥域内的最大流等于最小割（[@thm-bridge-quantum-maxflow-mincut]）；右边圆盘是连续体时空的一张切片，青色的弧是边界区域 $A$，紫色的弧 $\gamma_A$ 从 $A$ 两端垂直于边界伸入内部，是 RT 公式里的极小曲面（文献结果，未在本书形式化）。中间被划掉的箭头：从左到右的连续极限，本书没有证明。
 :::

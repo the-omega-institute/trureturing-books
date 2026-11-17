@@ -371,6 +371,115 @@ This counterexample lies exactly on the seam $ad=bc$, where both scalar-Gram req
 
 The Schmidt-weight and entropy discussion above is a spectral interpretation for a normalized pure state; the theorem itself states only a necessary dimension condition. This obstruction concerns the specified grouping of three complex Kronecker summands and exact spectral flatness. It supplies no error bound for approximate flatness and establishes no claim about general tensor networks, physical realization, or continuum holography.
 
+Does tightening the ratios to $b\le2a$ and $d\le2c$ guarantee an exactly flat spectrum? The preceding $b>2a$ obstruction no longer applies, but another restriction remains. Fix the factor sizes at $3\times5$ and $5\times3$, retaining the original row and column grouping.
+
+::: {.theorem #thm-bridge-three-five-flat-spectrum-obstruction title="A positive scalar-Gram obstruction at $(3,5,3,5)$" lean="D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.positive_scalar_obstruction"}
+For arbitrary triples of complex matrices $M_r\in M_{3\times5}(\mathbb C)$ and $N_r\in M_{5\times3}(\mathbb C)$ ($r=0,1,2$), and every real $\lambda>0$, let
+
+$$
+F=\sum_{r=0}^2M_r\otimes N_r:
+\mathbb C^5\otimes\mathbb C^3\longrightarrow
+\mathbb C^3\otimes\mathbb C^5.
+$$
+
+Then $F^*F\ne\lambda I_{15}$, where $I_{15}$ is indexed by $\operatorname{Fin}5\times\operatorname{Fin}3$.
+:::
+
+::: {.proof #pf-bridge-three-five-flat-spectrum-obstruction}
+Suppose instead that $F^*F=\lambda I_{15}$. Express the same $F$ as a Kronecker sum with the fewest possible terms, say $k\le3$, with factors $A_r,D_r$. If either factor family is linearly dependent, a relation with a nonzero coefficient lets us solve for one factor and absorb its term into the others, reducing the number of terms without changing $F$. Thus both families in a minimal decomposition are complex-linearly independent. Multiplying every $A_r$ by $1/\sqrt\lambda$ then gives a contraction $G=F/\sqrt\lambda$ with $G^*G=I_{15}$; nonzero scaling preserves independence. Minimal width, independence, and normalization are consequences of the assumed Gram equation, not additional hypotheses of the theorem.
+
+For $k=0$, we have $G=0$, whose Gram matrix cannot be the identity. For $k=1$, the $3\times5$ factor $A_0$ has a nonzero kernel vector $x$. For any nonzero $y\in\mathbb C^3$, the equation $(A_0\otimes D_0)(x\otimes y)=0$ contradicts the injectivity required by $G^*G=I_{15}$.
+
+For $k=2,3$, we also adjust the metric on the coefficient directions. Set
+
+$$
+H_{rs}=\frac13\Tr(D_r^*D_s).
+$$
+
+This is the Hilbert–Schmidt Gram matrix of the family $D_r$. Independence makes it positive definite, so $H=B^*B$ for an invertible $B$. Apply paired coefficient changes
+
+$$
+\begin{aligned}
+X_r&=\sum_s B_{rs}A_s,\qquad
+Y_r=\sum_s(B^{-T})_{rs}D_s,\\
+G&=\sum_rX_r\otimes Y_r,\qquad
+\sum_rX_r^*X_r=I_5.
+\end{aligned}
+$$
+
+Here $B^{-T}=(B^T)^{-1}$, so $B^TB^{-T}=I_k$ preserves the two-term or three-term contraction. The last identity follows by taking the partial trace of $G^*G=I_{15}$ over the second tensor factor and dividing by $3$. The changes preserve independence of both families. Stack the $X_r$ vertically, with the coefficient index first, to obtain $S:\mathbb C^5\to\mathbb C^k\otimes\mathbb C^3$. Then $S^*S=I_5$, so $S$ is injective.
+
+Expanding $G^*G=I_{15}$, define a complex coefficient block for each $\ell,m\in\{0,1,2\}$ by
+
+$$
+\begin{aligned}
+(T_{\ell m})_{rs}&=(Y_r^*Y_s)_{\ell m}-\delta_{rs}\delta_{\ell m},\\
+\Phi_X(T)&=S^*(T\otimes I_3)S
+=\sum_{r,s}T_{rs}X_r^*X_s.
+\end{aligned}
+$$
+
+Every block satisfies $\Phi_X(T_{\ell m})=0$. For $k=3$, this is precisely the source definition [`compression`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression) and identity [`compression_eq_sum`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression_eq_sum). As before, $\delta$ is the Kronecker symbol.
+
+For $k=2$, the stack $S$ is a $6\times5$ matrix of rank $5$. Applying the lower bound for the rank of a matrix product twice to $S^*(T\otimes I_3)S$ gives
+
+$$
+\operatorname{rank}\Phi_X(T)\ge3\operatorname{rank}T-2.
+$$
+
+Consequently, $\Phi_X(T)=0$ forces $\operatorname{rank}T=0$, since rank is an integer, hence $T=0$. All $T_{\ell m}$ vanish, giving $Y_r^*Y_s=\delta_{rs}I_3$. The horizontal concatenation $[\,Y_0\ Y_1\,]$ would therefore be a $5\times6$ matrix with six orthonormal columns, which is impossible.
+
+For $k=3$, the compression kernel need not vanish. We use [`common_plane`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.common_plane), whose precise hypotheses are complex linear independence of the three $3\times5$ matrices $X_r$ and injectivity of their coefficient-first stack $S$, both derived above. It supplies a complex two-dimensional subspace $L\subset\mathbb C^3$ that is simultaneously neutral for the entire Hermitian compression kernel:
+
+$$
+T=T^*,\quad\Phi_X(T)=0
+\quad\Longrightarrow\quad
+u^*Tv=0\quad(u,v\in L).
+$$
+
+The same $L$ works for every $T$, and the full complex pairing vanishes. This includes a zero Hermitian compression kernel, for which any coefficient two-plane meets the requirement. Choosing a different plane for each block would not suffice, and this fixed-dimension result cannot be applied directly to $k=2$.
+
+A complex block $T_{\ell m}$ need not itself be Hermitian; in particular, checking only diagonal blocks would miss $\ell\ne m$. Since $\Phi_X(T^*)=\Phi_X(T)^*$, both Hermitian parts
+
+$$
+T_{\mathrm R}=\frac{T+T^*}{2},\qquad
+T_{\mathrm I}=\frac{T-T^*}{2i},\qquad
+T=T_{\mathrm R}+iT_{\mathrm I}
+$$
+
+belong to the compression kernel. The same $L$ annihilates the pairings of both parts, hence $u^*T_{\ell m}v=0$ for all $\ell,m$. These parts are not the entrywise real and imaginary parts.
+
+Choose an orthonormal basis of $L$ and place its vectors in a $3\times2$ matrix $V$, so $V^*V=I_2$. Concatenate $W=[\,Y_0\ Y_1\ Y_2\,]\in M_{5\times9}(\mathbb C)$ and set $C=V\otimes I_3\in M_{9\times6}(\mathbb C)$. All the block pairings above give
+
+$$
+(WC)^*(WC)=C^*W^*WC=I_6.
+$$
+
+Thus $WC$ would have six orthonormal compressed columns but only five rows: $6\le\operatorname{rank}(WC)\le5$, a contradiction. The coefficient changes, stacks, and compressions are auxiliary steps in the proof; the original row/column bipartition of $F$ remains fixed. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-bridge-three-five-flat-spectrum title="All eight premises hold: rank fifteen without a flat spectrum at $(3,5,3,5)$"}
+Take $(a,b,c,d)=(3,5,3,5)$. Check each of the eight premises of the original universal [`claim`](lean:D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.claim):
+
+$$
+\begin{aligned}
+0<a&:\quad0<3,& a\le b&:\quad3\le5,\\
+0<c&:\quad0<3,& c\le d&:\quad3\le5,\\
+a^2+b^2\le3ab&:\quad34\le45,\\
+c^2+d^2\le3cd&:\quad34\le45,\\
+b\le2a&:\quad5\le6,& d\le2c&:\quad5\le6.
+\end{aligned}
+$$
+
+The first six are exactly the hypotheses of [@thm-bridge-quantum-maxflow-mincut]; that rank theorem makes no additional promise of a flat spectrum. Since $ad=bc=15$ and $3ac=27$, it gives $\operatorname{QMaxFlow}=\operatorname{QMinCut}=15$. Then [@lemma-bridge-flow-attained] supplies matrices with $\operatorname{rank}F=15$. This combines the existing declarations using the same `flow` definition and row and column indices.
+
+Yet [@thm-bridge-three-five-flat-spectrum-obstruction] excludes $F^*F=\lambda I_{15}$ for every pair of matrix triples and every $\lambda>0$. Hence no exactly flat positive singular spectrum of length $15$ is attainable. The earlier [@thm-bridge-scalar-gram-obstruction] does not apply here because $b=5\le2a=6$.
+
+The original universal claim requires the same $M,N$ and the same positive $\lambda$ to witness both conditional Gram equations at the start of this section. Here $ad=bc$ activates both conditions, and the column equation alone contradicts the new theorem. Even after imposing $b\le2a$ and $d\le2c$, rank attainability on the cone therefore cannot be strengthened to attainability of an exactly flat spectrum.
+:::
+
+This example establishes neither a smallest counterexample, an optimal ratio threshold, nor a complete dimension classification. It supplies no quantitative gap for approximately flat spectra. Its scope remains a finite-dimensional contraction in the fixed row/column bipartition, without a claim of physical realization or saturation of the RT formula.
+
 ::: {.figure src="ch19-discrete-vs-rt"}
 **What this chapter proves stops on the left.** On the left, the width-three bridge graph, with the green tag for max-flow equal to min-cut in the cone ([@thm-bridge-quantum-maxflow-mincut]); on the right, a disc standing for a slice of continuum spacetime, the cyan arc the boundary region $A$ and the violet arc $\gamma_A$ leaving the ends of $A$ at right angles to the rim, the minimal surface of the RT formula (literature result, not formalized in this book). The crossed-out arrow between them: the continuum limit from left to right is not proved in this book.
 :::

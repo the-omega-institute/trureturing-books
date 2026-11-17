@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "29e991dc166e9c19e8a26733ced125bde0007a7c",
-  "pinned_at": "2026-11-17T05:00:38Z",
+  "commit": "4e2a0d3fcca69885dfcf5b56184838554ebb5239",
+  "pinned_at": "2026-11-17T05:43:16Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -2981,6 +2981,30 @@
       "line": 265,
       "signature": "theorem exists_posSemidef_completion_rank_le {V : Type u} [Finite V] (d : ℕ) (G : SimpleGraph V) (hG : G.IsChordal) (A : Matrix V V ℝ) (hA : ∀ C : Set V, G.IsClique C → (A.submatrix (Subtype.val : C → V) (Subtype.val : C → V)).PosSemidef ∧ (A.submatrix (Subtype.val : C → V) (Subtype.val : C → V)).rank ≤ d) : ∃ B : Matrix V V ℝ, B.PosSemidef ∧ B.rank ≤ d ∧ ∀ i j, i = j ∨ G.Adj i j → B i j = A i j"
     },
+    "D5/S3/Quantum/Algebra/CommonCoefficientPlane.common_plane": {
+      "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
+      "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.common_plane",
+      "kind": "theorem",
+      "statement_id": "sha256:31f0a9c9487ecabe45030acc92e7154d2b86e4eb15a01c148efffd2fb9896cbe",
+      "line": 951,
+      "signature": "theorem common_plane (X : Fin 3 → Matrix (Fin 3) (Fin 5) ℂ) (hX : LinearIndependent ℂ X) (hinj : Function.Injective (stack X).mulVecLin) : ∃ L : Submodule ℂ (Fin 3 → ℂ), finrank ℂ L = 2 ∧ ∀ T : Matrix (Fin 3) (Fin 3) ℂ, T.IsHermitian → (stack X)ᴴ * Matrix.kronecker T (1 : Matrix (Fin 3) (Fin 3) ℂ) * stack X = 0 → ∀ u ∈ L, ∀ v ∈ L, star u ⬝ᵥ (T *ᵥ v) = 0"
+    },
+    "D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression": {
+      "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
+      "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.compression",
+      "kind": "def",
+      "statement_id": "sha256:31f0a9c9487ecabe45030acc92e7154d2b86e4eb15a01c148efffd2fb9896cbe",
+      "line": 42,
+      "signature": "def compression {a b : ℕ} (X : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (T : Matrix (Fin 3) (Fin 3) ℂ)"
+    },
+    "D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression_eq_sum": {
+      "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
+      "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.compression_eq_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:31f0a9c9487ecabe45030acc92e7154d2b86e4eb15a01c148efffd2fb9896cbe",
+      "line": 50,
+      "signature": "theorem compression_eq_sum {a b : ℕ} (X : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (T : Matrix (Fin 3) (Fin 3) ℂ) : compression X T = ∑ r, ∑ s, T r s • ((X r)ᴴ * X s)"
+    },
     "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem": {
       "module": "D5/S3/Quantum/Algebra/CommonPhasePolynomial",
       "name": "D5.S3.Quantum.Algebra.PhasePolynomial.complete_common_phase_polynomial_theorem",
@@ -3084,6 +3108,22 @@
       "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
       "line": 224,
       "signature": "def strandInclusion (n : ℕ) : Artin n →* Artin (n + 1)"
+    },
+    "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.claim": {
+      "module": "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation",
+      "name": "D5.S3.Quantum.Algebra.NativeWidthAtMostThreeRefutation.claim",
+      "kind": "def",
+      "statement_id": "sha256:e58e16196aaf6869df45e2efc6ae1aadd88236c678940b66fe8fef4a7f5f2e3d",
+      "line": 212,
+      "signature": "def claim : Prop"
+    },
+    "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.positive_scalar_obstruction": {
+      "module": "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation",
+      "name": "D5.S3.Quantum.Algebra.NativeWidthAtMostThreeRefutation.positive_scalar_obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:e58e16196aaf6869df45e2efc6ae1aadd88236c678940b66fe8fef4a7f5f2e3d",
+      "line": 977,
+      "signature": "theorem positive_scalar_obstruction (M : MatM 3) (N : MatN 3) (lambda : ℝ) (hlambda : 0 < lambda) : ¬ ((∑ r, Matrix.kronecker (M r) (N r))ᴴ * (∑ r, Matrix.kronecker (M r) (N r)) = (lambda : ℂ) • (1 : Matrix (Fin 5 × Fin 3) (Fin 5 × Fin 3) ℂ))"
     },
     "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities": {
       "module": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement",
