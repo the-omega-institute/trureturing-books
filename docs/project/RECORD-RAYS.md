@@ -610,15 +610,15 @@ $$
 
 ## 实际加权历史的小泄漏接口与完整资源边界
 
-本节接续三能级四步构造之后的近似问题，详见对应[第四章中文注记](../../books/quantum-geometry/zh/ch04-s02-quantum-noise.md#rem-weighted-history-stability)与[英文注记](../../books/quantum-geometry/en/ch04-s02-quantum-noise.md#rem-weighted-history-stability)。保存的是已完成的普通 C4 论证；四步三能级构造与其部分形式检查保持原有范围，不作为 C4 的证据。
+本节接续三能级四步构造之后的近似问题，详见对应[第四章中文注记](../../books/quantum-geometry/zh/ch04-s02-quantum-noise.md#rem-weighted-history-stability)与[英文注记](../../books/quantum-geometry/en/ch04-s02-quantum-noise.md#rem-weighted-history-stability)。保存的是普通 C4 论证；四步三能级构造与其部分形式检查保持原有范围，不作为 C4 的证据。
 
 ### 来源、证据与既有供应
 
-直接输入是 [trureturing #31078 的结果与边界](https://github.com/the-omega-institute/trureturing/issues/31078#issuecomment-6904102516)，以及本次写作之前完成的普通论证与独立评阅结论。它们是可出错的普通数学证据。本节忠实展开其代数，不新增独立验证结论；未读取诊断正文。
+直接来源是 [trureturing #31078 的结果与边界](https://github.com/the-omega-institute/trureturing/issues/31078#issuecomment-6904102516)及其普通论证。本节忠实展开其代数，不新增独立验证结论；这些来源属于可出错的书面数学证据。
 
 按所提供的来源核对，`D5/S3/Quantum/Matrix/AbedNikolaevaNovikovTwoContrastYoung.lean` 中私有的 `exists_polar_abs` 已经供应任意复方阵的原维数极补全，底层使用 `D5/S3/Quantum/Algebra/GramUnitaryExtension.lean` 的等 Gram 酉延拓。私有可见性不构成缺失数学。`D5/S3/Weil/ZetaLinear/RankTrace.lean` 中的 `RHLinalg.trace_mul_nonneg_of_posSemidef`，连同半正定合同变换与迹正性，供应不要求交换的正迹配对。这里复用这些来源，不重证、改名或建立包装声明；也不由组成供应推出完整事件已形式化。
 
-Higham，*Computing the Polar Decomposition—with Applications*，DOI [10.1137/0907079](https://doi.org/10.1137/0907079)，[全文](https://eprints.maths.manchester.ac.uk/694/1/high86p.pdf)，Theorem 1.1 与 Lemma 2.1，只承担静态方阵极补全及正平方根识别。所提供的评阅记录已核对这两个段落；本次作者未重新验证原始论文。加权实际历史估计、带权最优性与全幂稳定性均不归于该文。没有全球新颖性或常数最优性结论。
+Higham，*Computing the Polar Decomposition—with Applications*，DOI [10.1137/0907079](https://doi.org/10.1137/0907079)，[全文](https://eprints.maths.manchester.ac.uk/694/1/high86p.pdf)，Theorem 1.1 与 Lemma 2.1，只承担静态方阵极补全及正平方根识别。加权实际历史估计、带权最优性与全幂稳定性均不归于该文。没有全球新颖性或常数最优性结论。
 
 ### 完整普通推导
 
