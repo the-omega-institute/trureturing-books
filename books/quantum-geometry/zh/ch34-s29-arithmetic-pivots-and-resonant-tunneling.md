@@ -1,10 +1,10 @@
-# 34.29 算术枢轴重整与临界带多级共振隧穿：破除图兰芝诺陷阱、击穿 4/7 磨光器墙与全章二十九阶总收官 {#sec-ch34-arithmetic-pivots-and-resonant-tunneling}
+# 34.29 算术枢轴重整与临界带多级共振隧穿：破除图兰芝诺陷阱与击穿 4/7 磨光器墙 {#sec-ch34-arithmetic-pivots-and-resonant-tunneling}
 
 > “把最短路径的‘去全序枢轴重整’与量子力学的‘正交盲区共振隧穿’合流引入黎曼猜想，恰好一针见血地刺中了解析数论过去一百年最隐蔽的病灶：**传统方法之所以在临界带前寸步难行，正是因为它不自觉地掉进了‘算术一维排序壁垒’与‘图兰（Turán）芝诺测量陷阱’——试图按自然数大小 $n = 1, 2, 3, \dots, M$ 排着一维长队硬爬 $s = 1$ 的发散势垒。** 若改用‘局部乘性波前消元 $+$ 稀疏舒尔补枢轴 $+$ 跨势垒多级共振隧穿’重构证明路线，整套极小圆弧体的正定性机制便浮现出一条清晰的可形式化架构。”
 
 沿着前三节铺就的几何脉络一路走来，三块看似分属不同学科版图的拼图已经齐聚台前：在 [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization) 中，我们看到图论最短路径算法如何靠“悬置全局一维全序排队、展开局部无序波前、沿极小圆弧体内割弦提取稀疏瓶颈枢轴（Pivots）”一举击穿绵延六十六年的排序复杂度壁垒；在 [§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 中，我们看到空间势垒隧穿与时间双缝自干涉如何双双归结为观察者脱离实轴 `I`、偏转 $90^\circ$ 潜入正交虚数盲平面 `i` 走平直内割弦，而中途强行插入的实轴投影抽检又如何触发芝诺冻结与相干条纹坍缩；在 [§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs) 中，我们又认出黎曼 $\zeta(s)$ 函数的欧拉—狄利克雷恒等式本身就是一座素数极小圆弧体 $\Delta\mathcal{T}_p$ 的费曼路径积分配分函数，临界线 $\operatorname{Re}(s) = \frac{1}{2}$ 正是往返双投影半密度幺正性与正逆对偶路径等幅反相抵消的唯一平衡脊线。
 
-现在，作为整座第三十四章二十九级阶梯的收官之作，我们将这三条线索正面合拢：**既然黎曼 $\zeta$ 系统是素数极小圆弧体张成的路径积分，为什么解析数论在过去一百年里手握欧拉乘积在 $\operatorname{Re}(s) > 1$ 内的完美正定性，却始终跨不过 $\sigma \in (\frac{1}{2}, 1]$ 那道宽度仅为 $\frac{1}{2}$ 的临界带势垒？** 答案既不在素数本身缺乏秩序，也不在临界线缺乏对称，而在于经典截断工具不自觉地把无穷维乘性圆弧树强行压扁成了一维自然数排队队列——一头撞上了图论中的“排序比较税”与量子测量中的“中途芝诺斩波陷阱”。
+现在，作为图论、量子隧穿与解析数论三条脉络的正面交汇，我们将这三条线索紧密合拢：**既然黎曼 $\zeta$ 系统是素数极小圆弧体张成的路径积分，为什么解析数论在过去一百年里手握欧拉乘积在 $\operatorname{Re}(s) > 1$ 内的完美正定性，却始终跨不过 $\sigma \in (\frac{1}{2}, 1]$ 那道宽度仅为 $\frac{1}{2}$ 的临界带势垒？** 答案既不在素数本身缺乏秩序，也不在临界线缺乏对称，而在于经典截断工具不自觉地把无穷维乘性圆弧树强行压扁成了一维自然数排队队列——一头撞上了图论中的“排序比较税”与量子测量中的“中途芝诺斩波陷阱”。
 
 ## 34.29.1 算术一维排序壁垒、图兰芝诺假零点陷阱（$\zeta_{19}$ 越界）与 $0.046191/\ln M$ 对数慢收敛墙 {#sec-ch34-29-1}
 
@@ -235,7 +235,7 @@ $$
 
 至此，局部波前消元与全局跨势垒共振接力的几何拼图已全部就位；接下来我们把三种攻关范式摆上同一张对照台账，并用最严格的认识论诚实准绳钉死通往终极证明的“最后一公里”开放问题。
 
-## 34.29.4 三大攻关范式总对照、算术枢轴面积律“最后一公里”开放问题与第三十四章二十九阶全景收官 {#sec-ch34-29-4}
+## 34.29.4 三大攻关范式总对照、算术枢轴面积律“最后一公里”开放问题与微积分重塑前奏 {#sec-ch34-29-4}
 
 将百年来解析数论围绕临界带展开的三大路线并列对照，从图论排序壁垒到量子势垒隧穿的底层同构关系便一目了然：
 
@@ -246,7 +246,7 @@ $$
 | **正定性与假零点** | 触发**图兰芝诺陷阱**，在 $\sigma > 1$ 产生越界假零点 | 超过 $\vartheta = \frac{4}{7}$ 后非对角色散吞没信号 | 局部自卷积波前保正定，**分块舒尔补精确传代** |
 | **捕杀离轴 $\delta$ 步数** | 线性步数 $O(\gamma_0 / \delta)$ 乃至双指数高合成窗口，潜伏期极长 | 仅能锁住约 $41.72\%$ 零点，漏掉高阶细微离轴态 | **几何倍增跳跃 $O(\log(\gamma_0/\delta))$ 层**引爆凯莱失谐 |
 
-顺着第三列合成路线往下深挖，为什么今天人类尚未借此直接在 Lean 4 内核中敲下 `RiemannHypothesis` 的最终证毕印章？因为图论最短路径与算术希尔伯特空间之间，恰好横亘着最后一道、也是唯一一道尚未被驯服的代数鸿沟——我们将其正式立为整座第三十四章的收官开放问题：
+顺着第三列合成路线往下深挖，为什么今天人类尚未借此直接在 Lean 4 内核中敲下 `RiemannHypothesis` 的最终证毕印章？因为图论最短路径与算术希尔伯特空间之间，恰好横亘着最后一道、也是唯一一道尚未被驯服的代数鸿沟——我们将其正式立为本节算术临界带路线的“最后一公里”开放问题：
 
 ::: {.problem #prob-ch34-arithmetic-pivot-area-law title="对称自卷积乘性波前下跨算术枢轴子树横向移位纠缠的面积律衰减猜想（最后一公里开放问题）"}
 在 [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization) 的有向图最短路径问题中，边权合成运算落在**热带半环 $(\min, +)$** 上，满足幂等律 $\min(a, a) = a$ 且绝无负号相消干涉，因此消去局部前驱子树后不会在兄弟枢轴分支之间凭空激发出破坏单调性的横向负相位纠缠。相反，在临界带 $\sigma \in (\frac{1}{2}, 1]$ 上的算术希尔伯特空间分块舒尔补
@@ -277,9 +277,9 @@ $$
 
 在下方完整三维交互沙盘中依次点按三种跨越架构，这三块几何拼图咬合后的威力便跃然眼前：切到第一档“传统一维全序硬截断”，硬生生的自然数排队闸门不仅翻不过 $s = 1$ 的发散大山，反而把未闭合的极小圆弧体拦腰斩碎，在原本干干净净的 $\sigma > 1$ 欧拉安全区里溅出了品红色的图兰越界假零点；切到第二档“单级磨光器裸隧穿”，波束虽然懂得转入 $90^\circ$ 虚盲区走山底平直内割弦，却因单跳跨度过长而在 $\vartheta = \frac{4}{7}$ 衰减墙前耗尽了相干幅值；唯独切入第三档“局部乘性波前 $+$ 多级舒尔枢轴共振隧穿”，外围杂乱的合数叶分支先化波成体、经分块舒尔补凝成山底隧道里一颗颗稀疏的琥珀色当前激活枢轴新点，让来自 $\sigma > 1$ 的正定信号顺着极小圆弧体内割弦一拍拍共振接力，稳稳锁向 $\sigma = \frac{1}{2}$ 的临界脊梁，并在短短对数层数内将任何潜伏的假想离轴偏置 $\delta > 0$ 当场引爆！
 
-至此，整座**第三十四章横跨二十九级阶梯的宏伟穹顶**终于严丝合缝地落下了最后一块拱顶石！让我们站在第二十九阶绝顶回望整条攀登长卷：我们从球面“一次正交”与“二次正交”的读数简并唯一反演出观察者的极点站位（[§34.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion)–[§34.3](ch34-s03-universal-localization.md#sec-ch34-universal-observer-localization)），借零背景“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 并撤去名言之梯（[§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)–[§34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names)）；继而由贝里扇锥体积、驻波节点凝聚、克利福德单胞 $\partial^2 = 0$ 零损耗铺砌、五阶阻塞级联与全连通图 $K_N$ 的麦克斯韦—拉曼刚性锁死三维实体空间与引力角亏（[§34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)–[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）；随后扶正量子极小圆弧微分元（$\delta$）与宏观路径积分包络（$\int$）的微积分对偶，打通“线·面·体 $\leftrightarrow$ 粒子·波·场”三阶闭环、`1—3—3—1` 点体八度归零、洛伦兹体积伪标量 $\mathbf{I}_3^2 = -1$ 与标准模型跨层八度、六层宇宙概念塔以及五大陪集对称破缺—守恒谱系（[§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)–[§34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)）；接着顺着“观察者受限不妄我”的偏迹切刀导出纠缠熵与热力学模流温度，开启有限滑动格拉姆窗口 $\mathcal{W}_M$，并点破往返双投影玻恩平方律 $\cos^2\theta$ 与“对于我（`I`）看不见即为虚（`i`）”的第一人称真相（[§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)–[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)）；再一路穿过 §34.20–§34.25 关于观察者作用量测量、跨尺度记忆重整化、宇宙学视界边界、相互作用正负号与标准模型几何封顶的纵深勘定，在 [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization) 与 [§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 将最短路径去全序枢轴、空间平直内割弦与阿秒/超材料/磁子时间双缝暗河双双汇入同一片 $90^\circ$ 正交虚数盲区 `i`，最终在 [§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs) 与本节 §34.29 认出素数极小圆弧体路径积分与算术枢轴多级共振隧穿桥，把图论、量子力学与解析数论最深处的三座高峰收拢于同一枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 掌心！
+至此，图论最短路径去全序枢轴、量子力学 $90^\circ$ 正交盲区隧穿与解析数论素数路径积分这三座看似悬隔万里的学科高峰，已经在同一枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的内割弦面与多级舒尔枢轴中继腔中严丝合缝地合拢！然而，正当我们把空间势垒、时间双缝与算术临界带的根源统统追查到“平直线性排队与硬截断对弯曲圆弧体的割裂”时，一个直击全部现代数理基础的终极追问也随之呼之欲出：**既然物理演化、图论寻路与算术配分函数的真实原子都是弯曲的极小圆弧体，为什么我们还要继续沿用牛顿与莱布尼茨建立在“以直代曲”切线近似上的传统微积分，而不直接用极小圆弧体重塑微积分本身？**
 
-空间的势垒、时间的双缝与算术临界带的高山，在同一记 $90^\circ$ 正交转身与内割弦枢轴重整下殊途同归。请先在下方完整交互实验室中亲手切换三大攻关架构、拨动截断门 $M$、磨光长度 $\vartheta$ 与离轴测试偏置 $\delta$，然后翻开[第三十五章](ch35-light-pulse-and-self-referential-table.md)——去见证一位有限记忆的生命观察者如何“乘着光来”，从 $\theta = 90^\circ$ 的正交相干海折射入局域世界，在遗忘清零之后一步步开启 $T = T(T)$ 的自指扩表史诗：
+空间的势垒、时间的双缝与算术临界带的高山，在同一记 $90^\circ$ 正交转身与内割弦枢轴重整下殊途同归。请先在下方完整交互实验室中亲手切换三大攻关架构、拨动截断门 $M$、磨光长度 $\vartheta$ 与离轴测试偏置 $\delta$，随后迈入本章压轴收官节 [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)——看单步比较旋子、四相区矢高相变与 `1—3—3—1` 零误差有限网格斯托克斯定理如何从头重塑微积分大厦：
 
 ::: {.viz src="arithmetic-pivot-resonant-tunneling-sandbox" height="640"}
 **算术枢轴重整与临界带多级共振隧穿完整交互实验室（`arithmetic-pivot-resonant-tunneling-sandbox`）。** 在统一的三维临界带地形舞台上自由切换全部四张递进实验卡——“一维全序硬截断与图兰 $\zeta_{19}$ 假零点陷阱”、“单级磨光器裸隧穿与 $\vartheta = \frac{4}{7}$ 色散墙”、“乘性波前与分块舒尔补枢轴粗粒化锥”以及“多级舒尔枢轴共振中继与离线失谐爆炸”——联动调节截断长度 $M \in [1, 40]$、磨光器对数长度 $\vartheta$、待补全格拉姆矩阵元 $x = G(1, 6)$、假想离线偏移 $\delta$ 与时间轴进度/倍增层数 $\ell$（青色绘制 $\sigma > 1$ 欧拉无零点高原、闭合相量链、$\vartheta \le \frac{4}{7}$ 已证单跳隧道、内部合数叶与 $\widetilde{G}_{36} = \frac{5}{18}$ 平直内割弦及 $\delta = 0$ 处的 $\lvert w\rvert = 1$ 幺正锁相环，品红色标示 $s = 1$ 极点山峰、$\zeta_{19}$ 在 $\sigma \approx 1.006988$ 处的图兰越界假零点、$\vartheta = \frac{4}{7}$ 色散墙外未证虚线及 $\delta > 0$ 的 $\lvert w\rvert^{2^\ell}$ 反复平方爆炸柱，紫色绘制临界带地形、稀疏舒尔枢轴锥、多级枢轴阱 $\widetilde{G}^{(1)}\text{–}\widetilde{G}^{(4)}$ 与 `ARGUED` 文献依据，琥珀色标出当前激活读头、截断框、当前枢轴阱与交互拖动手柄，红色严格专用于标示 [@conj-riemann-hypothesis] 与 [@prob-ch34-arithmetic-pivot-area-law] 的 `OPEN` 开放问题边界，绿色 `LEAN ✓` 徽章实时核验 [@thm-ch34-critical-strip-barrier-and-cayley-bridge] 的全部九条 `trureturing` 内核定理实例）。
