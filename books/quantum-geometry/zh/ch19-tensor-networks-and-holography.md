@@ -282,6 +282,179 @@ $$
 
 在 $a<b$ 且 $2b\le3a$ 的区间，这族构造有 $3c=6q=2d$。这一等号直接来自所取的 $c=2q$、$d=3q$。定理确定的是这一固定右侧维数族中原始矩阵三元组的存在性，恒等列 Gram 由上述因子的坐标路由直接给出。这一构造本身没有证明：对于任意 $c,d$，$a<b$ 与正标量列 Gram 条件 $F^*F=\lambda I_{bc}$（$\lambda>0$）必然推出 $3c\le2d$。后文 [@thm-bridge-native-rectangular-bound] 的必要界 $2c\le d$ 使用严格阈值 $3a<2b$，其假设与这里的 $2b\le3a$ 分处阈值两侧。
 
+右侧的两段其实不必等长。把 $c$ 个输入坐标分成长度为 $\lfloor c/2\rfloor$ 与 $\lceil c/2\rceil$ 的两段，让它们分别使用左侧的偶数槽与奇数槽，就能沿用同一套路由。因此，$c$ 为偶数、$d$ 恰好等于 $3c/2$ 都不是这一存在性构造所必需的限制；右侧只需容纳原来的 $c$ 行和长度为 $\lceil c/2\rceil$ 的余带。
+
+::: {.theorem #thm-bridge-native-scalar-gram-exists title="第一区域内原生三项张量和的正标量列 Gram 存在性" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeScalarGram.native_scalar_gram_exists"}
+对任意自然数 $a,b,c,d\in\mathbb N$，若
+
+$$
+2b\le3a,\qquad3c\le2d,
+$$
+
+则对每个满足 $\lambda>0$ 的实数 $\lambda$，存在复矩阵族
+
+$$
+\begin{aligned}
+M&:\operatorname{Fin}3\longrightarrow M_{a\times b}(\mathbb C),\\
+N&:\operatorname{Fin}3\longrightarrow M_{d\times c}(\mathbb C),
+\end{aligned}
+$$
+
+使原始张量和满足
+
+$$
+\begin{aligned}
+F&=\sum_{r=0}^2M_r\otimes N_r,\\
+F^*F&=\lambda I_{bc}.
+\end{aligned}
+$$
+
+这里 $F^*$ 是共轭转置，$F$ 的行指标为 $\operatorname{Fin}a\times\operatorname{Fin}d$，列指标为 $\operatorname{Fin}b\times\operatorname{Fin}c$；$I_{bc}$ 是该列指标集上的单位矩阵，实数 $\lambda$ 经自然嵌入视为复标量。不要求 $a<b$、$c$ 的奇偶性、$d$ 取某个精确值、因子线性无关或任何维数严格为正。
+:::
+
+::: {.proof #pf-bridge-native-scalar-gram-exists}
+先构造列 Gram 为单位矩阵的张量和，再作实标量缩放。令
+
+$$
+q=\lfloor c/2\rfloor,\qquad c-q=\lceil c/2\rceil.
+$$
+
+全部指标从 $0$ 开始，范围为
+
+$$
+\begin{aligned}
+0\le i<a,&\qquad0\le j<b,\\
+0\le s<d,&\qquad0\le k<c.
+\end{aligned}
+$$
+
+仍用 $\mathbf1_{\{P\}}$ 表示条件 $P$ 的指示数。左侧取上一构造的同三张未缩放切片，记为 $L_r$：
+
+$$
+\begin{aligned}
+(L_0)_{ij}&=\mathbf1_{\{i=j\}},\\
+(L_1)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)\}},\\
+(L_2)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)+1\}}.
+\end{aligned}
+$$
+
+右侧取 $d\times c$ 切片
+
+$$
+\begin{aligned}
+(N_0)_{sk}&=\mathbf1_{\{s=k\}},\\
+(N_1)_{sk}&=\mathbf1_{\{k<q,\ s=c+k\}},\\
+(N_2)_{sk}&=\mathbf1_{\{q\le k,\ s=c+(k-q)\}}.
+\end{aligned}
+$$
+
+差 $j-a$、$k-q$ 分别只在 $j\ge a$、$k\ge q$ 时起作用，均为非负整数差。对 $G=\sum_{r=0}^2L_r\otimes N_r$，这些因子给出的路由是
+
+$$
+\rho(j,k)=
+\begin{cases}
+(j,k),&j<a,\\
+\bigl(2(j-a),\,c+k\bigr),&j\ge a,\ k<q,\\
+\bigl(2(j-a)+1,\,c+(k-q)\bigr),&j\ge a,\ q\le k.
+\end{cases}
+$$
+
+逐一检查坐标范围。若 $j\ge a$，令 $t=j-a$；由 $j+1\le b$ 和 $2b\le3a$ 得
+
+$$
+2(t+1)\le2(b-a)\le a.
+$$
+
+因此 $2t<a$ 且 $2t+1<a$。若 $b\le a$，这一余支根本没有输入，所有列都走第一分支。
+
+右侧所需的整数界是
+
+$$
+\begin{aligned}
+d&\ge\lceil3c/2\rceil\\
+&=c+\lceil c/2\rceil=c+(c-q)\ge c.
+\end{aligned}
+$$
+
+这恰由 $3c\le2d$ 得到。具体地，写 $c=2q+\varepsilon$，其中 $\varepsilon\in\{0,1\}$，则 $2d\ge6q+3\varepsilon$，而 $d$ 是整数，故 $d\ge3q+2\varepsilon=c+(c-q)$。第一分支有 $k<c\le d$；第二分支有
+
+$$
+c\le c+k<c+q\le c+(c-q)\le d;
+$$
+
+第三分支有
+
+$$
+c\le c+(k-q)<c+(c-q)\le d.
+$$
+
+故 $\rho(j,k)$ 总是合法的输出坐标。两段右侧输入的长度可以不同，所需余带只取其中较长的 $c-q$ 行。
+
+令 $E_{j,k}=e_j\otimes e_k$ 为输入标准基，$U_{i,s}=e_i\otimes e_s$ 为输出标准基。当 $j<a$ 时，$L_1,L_2$ 的该列为零，只剩第 $0$ 项；当 $j\ge a$ 时，因 $i<a$ 而有 $(L_0)_{ij}=0$，另外两项又由 $k<q$ 与 $q\le k$ 分开。因此每列恰有一个非零元，等于 $1$，且
+
+$$
+G E_{j,k}=U_{\rho(j,k)}.
+$$
+
+不同输入也不会相撞。第一分支的输出第二坐标小于 $c$，其余两支的第二坐标至少为 $c$。后两支虽共用右侧余带，输出第一坐标却分别为偶数与奇数，故彼此不交。在每支内部，输出 $(i,s)$ 唯一恢复输入：第一支有 $(j,k)=(i,s)$；第二支有 $j=a+i/2$、$k=s-c$；第三支有 $j=a+(i-1)/2$、$k=q+s-c$，其中除法在相应奇偶分支上都是整除。故 $\rho$ 为单射。于是对任意输入指标 $x,y$，通常的复内积给出
+
+$$
+\begin{aligned}
+(G^*G)_{x,y}
+&=\langle G E_x,G E_y\rangle\\
+&=\langle U_{\rho(x)},U_{\rho(y)}\rangle
+=\delta_{x,y}.
+\end{aligned}
+$$
+
+这直接确定全部 Gram 元素。最后实际选取的原始因子为
+
+$$
+\begin{aligned}
+M_r&=\sqrt{\lambda}\,L_r,\qquad N_r\ \text{保持上述取值},\\
+F&=\sqrt{\lambda}\,G,\\
+F^*F&=\overline{\sqrt{\lambda}}\sqrt{\lambda}\,G^*G
+=\lambda I_{bc},
+\end{aligned}
+$$
+
+因为 $\lambda>0$，$\sqrt{\lambda}$ 为实数且平方等于 $\lambda$。整个论证始终使用所列的 $a\times b$ 与 $d\times c$ 原始因子。
+
+零维情形仍在两条维数前提下讨论：若 $b=0$ 或 $c=0$，输入指标集为空，$F^*F$ 与 $\lambda I_0$ 都是唯一的空方阵。若 $a=0$，$2b\le3a$ 迫使 $b=0$；若 $d=0$，$3c\le2d$ 迫使 $c=0$。也不需要 $q>0$：$c=1$ 时 $q=0$，第二分支为空，第三分支按原式工作。零矩阵或线性相关的因子无需排除。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-bridge-native-scalar-gram-odd title="奇数右输入维数的九列路由"}
+取
+
+$$
+(a,b,c,d,\lambda)=(2,3,3,5,2).
+$$
+
+此时 $2b=6=3a$、$3c=9\le10=2d$，$q=1$，两段右侧输入的长度分别为 $1$ 和 $2$。原始左因子是三张 $2\times3$ 矩阵：
+
+$$
+\begin{aligned}
+M_0&=\sqrt2\begin{pmatrix}1&0&0\\0&1&0\end{pmatrix},\\
+M_1&=\sqrt2\begin{pmatrix}0&0&1\\0&0&0\end{pmatrix},\\
+M_2&=\sqrt2\begin{pmatrix}0&0&0\\0&0&1\end{pmatrix}.
+\end{aligned}
+$$
+
+原始右因子都是 $5\times3$ 矩阵。$N_0$ 的非零元为 $(N_0)_{00}=(N_0)_{11}=(N_0)_{22}=1$；$N_1$ 只有 $(N_1)_{30}=1$；$N_2$ 只有 $(N_2)_{31}=(N_2)_{42}=1$，其余元素均为零。由此 $F=\sum_{r=0}^2M_r\otimes N_r$ 有 $10$ 行、$9$ 列。前六列 $(j,k)$（$j=0,1$，$k=0,1,2$）分别等于 $\sqrt2\,U_{j,k}$；其余三列为
+
+$$
+\begin{aligned}
+F E_{2,0}&=\sqrt2\,U_{0,3},\\
+F E_{2,1}&=\sqrt2\,U_{1,3},\\
+F E_{2,2}&=\sqrt2\,U_{1,4}.
+\end{aligned}
+$$
+
+九个输出坐标互异，只有输出坐标 $(0,4)$ 未被占据。因此每列范数平方为 $2$，任意两列内积为零，直接得到 $F^*F=2I_9$。这说明右侧两段不等长时，原始三项因子仍能给出精确的标量列 Gram。
+:::
+
+[@thm-bridge-native-scalar-gram-exists] 把存在性构造延伸到满足 $3c\le2d$ 的任意自然数右侧维数，但仍保留左侧前提 $2b\le3a$。它是充分条件，不把 $3c\le2d$ 宣称为任意原始因子的普遍必要条件，也没有给出全维数的充要分类。后文的必要界分别在 $3a<2b$ 下给出 $2c\le d$（[@thm-bridge-native-rectangular-bound]），在更强的 $2a<b$ 下给出 $3c\le d$（[@thm-bridge-scalar-gram-obstruction]）。这里得到的只是精确有限维原生矩阵模型中的 Gram 恒等式；它不提供近似平坦谱的误差间隙、物理实现或 RT 公式的推导。
+
 ## 19.3 锥域与离散容量分片的拼接 {#sec-discrete-facet-stitching}
 
 在 [@ex-bridge-two-three] 中，中间桥割容量 $3ac = 12$ 远大于两侧外边界割 $ad = bc = 6$，因此中间桥不会成为卡死流量的瓶颈。为什么二次锥条件 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$ 恰好落在保证中间三桥不构成瓶颈的自然区域之内？

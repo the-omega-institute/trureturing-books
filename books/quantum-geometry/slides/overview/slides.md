@@ -401,7 +401,7 @@ section: "第五部 · 定理"
 设 $S$ 是 $\operatorname{Space}(d)$ 上的实二次型。若 $\operatorname{minkowski}_d(v) = 0$ 总推出 $S(v) = 0$，则 $S = S(1, 0) \cdot \operatorname{minkowski}_d$。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="定理19.7" title="离散桥图量子最大流最小割" gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result" cite="thm-bridge-quantum-maxflow-mincut">
+<TheoremCard class="compact mt-s" label="定理19.9" title="离散桥图量子最大流最小割" gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result" cite="thm-bridge-quantum-maxflow-mincut">
 
 对自然数 $0 < a \le b$、$0 < c \le d$，若 $a^2 + b^2 \le 3ab$ 且 $c^2 + d^2 \le 3cd$，则宽度三桥图上 $\operatorname{QMaxFlow} = \operatorname{QMinCut} = \min(ad, bc)$。
 
