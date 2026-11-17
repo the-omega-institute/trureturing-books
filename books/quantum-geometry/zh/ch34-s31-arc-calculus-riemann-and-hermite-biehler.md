@@ -481,6 +481,103 @@ $$
 
 以上各条都没有说明 $\zeta$ 的零点在哪里：它们只是把同一个未知数 $\kappa$（临界线右侧零点的个数）用核、托普利茨矩阵与牛顿—汉克尔矩阵三种方式表示出来，[@conj-riemann-hypothesis] 说的就是 $\kappa=0$，它仍然开放。
 
+另有三种经典表述，同样可以在有限尺寸上无条件地检查：Nyman–Beurling 距离、Jensen 多项式与 de Bruijn–Newman 热流。它们也只是等价改写或有限情形的事实，不说明零点在哪里。第一种的几个有限尺寸事实在所钉仓库中已经冻结。
+
+::: {.proposition #prop-ch34-nyman-beurling-frozen-facts title="Nyman–Beurling 距离：小数部分的梅林恒等式、格拉姆距离公式与离线零点给出的下界" lean="D5/S3/Weil/ZetaPntBounds/NymanFractionalMellin.fractionalMellin_eq_zeta D5/S3/Constants/InnerProducts/FractionalReciprocalInnerProduct.fractional_reciprocal_inner_product D5/S3/Observer/Hilbert/NymanBeurlingFiniteGramDistance.nyman_beurling_finite_gram_distance D5/S3/Observer/Hilbert/NymanHalflineZeroSeparation.nyman_halfline_distance_bound"}
+在 $L^2(0,\infty)$ 中记 $\chi=\mathbf 1_{(0,1)}$，$\rho_k(x)=\{1/(kx)\}$（$k\ge1$，$\{\cdot\}$ 为小数部分），$V_N=\operatorname{span}_{\mathbb C}\{\rho_1,\dots,\rho_N\}$（$V_0=\{0\}$），$d_N=\operatorname{dist}(\chi,V_N)$，$G_N=[\langle\rho_j,\rho_k\rangle]_{j,k\le N}$，$c=(\langle\rho_k,\chi\rangle)_{k\le N}$。
+
+1. 对 $0<\theta\le1$ 与 $0<\operatorname{Re}s<1$，$\displaystyle\int_0^1\{\theta/x\}\,x^{s-1}dx=\frac{\theta}{s-1}-\frac{\theta^s\zeta(s)}{s}$。
+2. 对整数 $k\ge1$，在实空间 $L^2(0,\infty)$ 中 $\langle\chi,\rho_k\rangle=\dfrac{\log k+1-\gamma}{k}$。
+3. 对每个 $N\ge0$，记 $G_N^{+}$ 为 $G_N$ 的摩尔—彭罗斯广义逆，则 $d_N^2=1-c^{*}G_N^{+}c$；若 $G_N$ 可逆，则 $d_N^2=1-c^{*}G_N^{-1}c$。
+4. 若 $\zeta(\rho)=0$，$0<\operatorname{Re}\rho<1$ 且 $\operatorname{Re}\rho>\tfrac12$，则对每个 $N\ge0$，
+   $$
+   d_N^2\ \ge\ \frac{1}{\lvert\rho\rvert^2\left(\frac1{2\operatorname{Re}\rho-1}+\frac1{\lvert\rho-1\rvert^2}\right)} .
+   $$
+:::
+
+::: proof
+第 1 款：$\theta=1$ 时，两边在 $\operatorname{Re}s>0$、$s\ne1$ 上都解析，在 $\operatorname{Re}s>1$ 上逐段计算相等，再由解析延拓的唯一性得到整个区域上的等式；一般的 $\theta$ 由伸缩代换化归到 $\theta=1$。第 2 款是同一类积分的闭式计算。第 3 款是有限维子空间上的正交投影公式：投影等于综合映射、格拉姆矩阵的广义逆与其伴随的复合，不需要假设 $G_N$ 可逆。第 4 款构造一个有界线性泛函 $J(f)=\int_0^1f(x)x^{\rho-1}dx+\frac1{1-\rho}\int_1^\infty f(x)x^{-1}dx$（取共轭约定后由内积给出）。$x>1$ 时 $\rho_k(x)=1/(kx)$，再用第 1 款（$\theta=1/k$）与 $\zeta(\rho)=0$，得 $J(\rho_k)=0$，所以 $J$ 在每个 $V_N$ 上为零；$J(\chi)=1/\rho$；$\lVert J\rVert^2=\int_0^1x^{2\operatorname{Re}\rho-2}dx+\lvert1-\rho\rvert^{-2}\int_1^\infty x^{-2}dx=\frac1{2\operatorname{Re}\rho-1}+\frac1{\lvert\rho-1\rvert^2}$。于是 $d_N\ge\lvert J(\chi)\rvert/\lVert J\rVert$。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-ch34-nyman-beurling-remainder title="Nyman–Beurling 距离的有限尺寸事实：余项永不为零，离线零点的下界看不见（手工推导，依赖文献结果与冻结结论）"}
+**手工推导**，依赖文献结果（未在本书形式化）：梅林—普朗歇尔公式 $\int_0^\infty\lvert f\rvert^2dx=\frac1{2\pi}\int_{\mathbb R}\lvert\mathcal Mf(\tfrac12+it)\rvert^2dt$。记号同 [@prop-ch34-nyman-beurling-frozen-facts]。Báez-Duarte 的判据（见 [@rem-ch34-arithmetic-pivot-literature]）说：[@conj-riemann-hypothesis] 等价于 $d_N\to0$；第 34.29 节记 $d_N^2=1-c^{\top}G_N^{-1}c$，即上面第 3 款。
+
+1. **梅林一侧。** 对狄利克雷多项式 $A(s)=\sum_{k\le N}a_kk^{-s}$，
+   $$
+   d_N^2=\inf_A\frac1{2\pi}\int_{-\infty}^{\infty}\bigl\lvert1-\zeta(\tfrac12+it)A(\tfrac12+it)\bigr\rvert^2\frac{dt}{\frac14+t^2},
+   $$
+   并且 $\langle\rho_j,\rho_k\rangle=(jk)^{-1/2}\frac1{2\pi}\int_{\mathbb R}w(t)(k/j)^{it}dt$，$w(t)=\lvert\zeta(\frac12+it)\rvert^2/(\frac14+t^2)$：除去两侧的对角因子 $\operatorname{diag}(k^{-1/2})$，$G_N$ 是以 $w\ge0$ 为符号、在点 $\log k$ 处取样的托普利茨形式。
+2. **余项永不为零。** $\rho_1,\dots,\rho_N$ 线性无关，$G_N$ 正定；对每个 $N$ 都有 $d_N>0$。
+3. **每一步的减量。** 作楚列斯基分解 $G_N=LL^{\top}$，令 $y=L^{-1}c$，则 $d_N^2=1-\sum_{k\le N}y_k^2$，$d_{N-1}^2-d_N^2=y_N^2=\langle\chi,e_N\rangle^2$，其中 $e_N$ 是 $\rho_N$ 在 $V_{N-1}$ 的正交补中的分量的单位方向，主元 $L_{NN}^2=\det G_N/\det G_{N-1}>0$ 是 $\rho_N$ 到 $V_{N-1}$ 的距离的平方。所以 $d_N$ 不增；它在第 $N$ 步严格下降当且仅当 $\langle\chi,e_N\rangle\ne0$，本书没有这一点的一般证明。
+
+**证明。** 第 1 款：由 [@prop-ch34-nyman-beurling-frozen-facts] 第 1 款（$\theta=1/k$）加上 $\int_1^\infty\frac{1}{kx}x^{s-1}dx=-\frac{1}{k(s-1)}$，得 $\int_0^\infty\rho_k(x)x^{s-1}dx=-k^{-s}\zeta(s)/s$（$0<\operatorname{Re}s<1$），又 $\int_0^1x^{s-1}dx=1/s$；对 $f=\chi-\sum_kc'_k\rho_k$ 在 $\operatorname{Re}s=\frac12$ 上用梅林—普朗歇尔公式，$\mathcal Mf=(1-\zeta A)/s$，$a_k=-c'_k$，$\lvert s\rvert^2=\frac14+t^2$。格拉姆矩阵元的公式是同一计算。第 2 款：若 $\sum_kc_k\rho_k=0$，则 $\zeta(s)\sum_kc_kk^{-s}=0$ 在临界线上几乎处处成立；$\zeta$ 在线上的零点孤立，所以这个狄利克雷多项式在线上恒为零，它是整函数，于是恒为零，令 $\operatorname{Re}s\to+\infty$ 逐个得 $c_k=0$。$V_N$ 有限维，故是闭的；$d_N=0$ 将给出 $\chi\in V_N$，即 $\zeta A=1$ 在临界线上几乎处处成立，由唯一性在 $\mathbb C\setminus\{1\}$ 上成立，但 $\zeta(-2)=0$ 而 $A(-2)$ 有限，矛盾。第 3 款是格拉姆—施密特正交化：$\chi$ 在 $V_N$ 上的投影等于它在 $V_{N-1}$ 上的投影加上 $\langle\chi,e_N\rangle e_N$。$\square$
+
+**它说了什么，没说什么。** [@prop-ch34-nyman-beurling-frozen-facts] 第 4 款是 Nyman–Beurling 判据中“容易的方向”写出了常数。写 $\rho=\beta+i\gamma$，由 $\lvert\rho-1\rvert^2+2\beta-1=\lvert\rho\rvert^2$，下界等于 $(2\beta-1)\lvert1-\rho\rvert^2/\lvert\rho\rvert^4$，小于 $1/\lvert\rho\rvert^2<1/\gamma^2$。由 Platt–Trudgian（见 [@rem-ch34-radial-lock-pair-disks]），离线零点都有 $\lvert\gamma\rvert>3\cdot10^{12}$，所以任何这样的下界都小于 $(3\cdot10^{12})^{-2}<1.12\times10^{-25}$，而 [@ex-ch34-nyman-beurling-numbers] 中的 $d_{300}^2\approx8.0\times10^{-3}$ 比它大 $10^{22}$ 倍以上：有限个 $d_N$ 看不见假想的离线零点。与 [@prop-ch34-li-curvature-toeplitz] 相比：Li 曲率托普利茨矩阵由零点构成，离线零点表现为负特征值（[@rem-ch34-li-toeplitz-negative-index]）；$G_N$ 无条件正定，离线零点不改变它的符号，只表现为余项 $d_N$ 的下界。两者检验的是不同的东西，本书不知道两者之间有有限尺寸上的恒等式。J.-F. Burnol（*Adv. Math.* **170**, 56–70, 2002，定理 2.1 与注 2.2）在单位圆上给出了对应的多项式模型：根全在圆上时距离平方按 $\sum m^2/N$ 趋于零，有根在开圆盘内时距离有正的下界；上面的第 4 款是后者在半平面上的对应。
+
+**文献结果，未在本书形式化。** 无条件的下界 $\liminf_N d_N^2\log N\ge\sum_{\operatorname{Re}\rho=1/2}m_\rho^2/\lvert\rho\rvert^2$ 与常数 $2+\gamma-\log4\pi$ 的条件见 [@rem-ch34-arithmetic-pivot-literature] 与 [@rem-ch34-burnol-nbb-mollifier-literature]。S. Bettin, J. B. Conrey, D. W. Farmer（*Proc. Steklov Inst. Math.* **280**, 30–36, 2013，DOI `10.1134/S0081543813030036`，定理 1）在两个假设下——黎曼猜想，以及对某个 $\delta>0$ 有 $\sum_{\lvert\operatorname{Im}\rho\rvert\le T}\lvert\zeta'(\rho)\rvert^{-2}\ll T^{3/2-\delta}$（这一条预设零点全为单零点）——证明 $V_N(s)=\sum_{n\le N}\bigl(1-\frac{\log n}{\log N}\bigr)\mu(n)n^{-s}$ 使上面的积分渐近于 $(2+\gamma-\log4\pi)/\log N$；与上述下界合起来，在这两个假设下 $d_N^2\sim(2+\gamma-\log4\pi)/\log N$。无条件地，连 $d_N\to0$ 也不知道：它就是开放的 [@conj-riemann-hypothesis]。
+:::
+
+格拉姆矩阵元有闭式，一次楚列斯基分解就同时给出全部 $d_N$，并且可以在球算术中严格包住。
+
+::: {.example #ex-ch34-nyman-beurling-numbers title="N ≤ 300 的 Nyman–Beurling 距离（文献结果、计算机辅助验证与数值）"}
+**文献结果，未在本书形式化。** 对互素的 $h,k$（V. I. Vasyunin，*Algebra i Analiz* **7**(3), 118–135, 1995；这里依据 L. Báez-Duarte, M. Balazard, B. Landreau, E. Saias，*Ramanujan J.* **9**, 215–240, 2005，DOI `10.1007/s11139-005-0834-4`，其工作稿 `arXiv:math/0306251` 命题 89，经 $\langle\rho_h,\rho_k\rangle=A(h/k)/h$ 换写）：
+
+$$
+hk\langle\rho_h,\rho_k\rangle=\frac{\log2\pi-\gamma}{2}(h+k)+\frac{k-h}{2}\log\frac hk-\frac\pi2\sum_{a=1}^{h-1}\left\{\frac{ka}h\right\}\cot\frac{\pi a}h-\frac\pi2\sum_{b=1}^{k-1}\left\{\frac{hb}k\right\}\cot\frac{\pi b}k ,
+$$
+
+一般情形用 $\langle\rho_{gh},\rho_{gk}\rangle=g^{-1}\langle\rho_h,\rho_k\rangle$（代换即得）。对十二组 $(h,k)$（含不互素的）与分段精确积分加尾项展开的结果比较，差在 $10^{-13}$ 以内（`NUM`）。特别地 $\lVert\rho_1\rVert^2=\log2\pi-\gamma$，$d_1^2=1-\dfrac{(1-\gamma)^2}{\log2\pi-\gamma}$。
+
+**计算机辅助验证（严格球算术，未形式化）。** 在 Arb 中由上式作 $G_{300}$ 与 $c$，作一次楚列斯基分解（两次独立计算，精度 3000 位与 4000 位）。全部主元、全部 $d_N^2$（$1\le N\le300$）与全部减量 $y_N^2$（$2\le N\le300$）都是包含于 $(0,\infty)$ 的球，所以在这个范围内 $d_N$ 严格递减；最小的减量约为 $6.3\times10^{-10}$（$N=264$）。这依赖上面的文献闭式与软件的正确性，没有经过 Lean 内核检查。
+
+| $N$ | $1$ | $2$ | $10$ | $50$ | $100$ | $200$ | $300$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $d_N^2$ | $0.858212$ | $0.289965$ | $0.0237719$ | $0.0118690$ | $0.0101888$ | $0.00892073$ | $0.00799490$ |
+| $\dfrac{d_N^2\log N}{2+\gamma-\log4\pi}$ | — | $4.351$ | $1.185$ | $1.005$ | $1.016$ | $1.023$ | $0.987$ |
+
+**`NUM`。** 对 $20\le N\le300$，比值 $d_N^2\log N/(2+\gamma-\log4\pi)$ 落在 $[0.976,1.098]$ 内（最小在 $N=231$，最大在 $N=28$）。这与上面在附加假设下的渐近式相容，但不检验它：下界只是 $\liminf$，有限 $N$ 处低于常数是允许的，三百项也不能确定一个 $1/\log N$ 量级的规律。
+:::
+
+Jensen 多项式把同一个问题放到实轴上，用的是 [@prop-ch34-li-curvature-toeplitz] 第 6 款的汉克尔矩阵。
+
+::: {.remark #rem-ch34-jensen-hankel-finite-degree title="Jensen 多项式：每个有限次数的双曲性是一个汉克尔矩阵的半正定性（文献结果、手工推导与计算机辅助验证）"}
+**记号。** 按 M. Griffin, K. Ono, L. Rolen, D. Zagier（*Proc. Natl. Acad. Sci. USA* **116**, 11103–11110, 2019，DOI `10.1073/pnas.1902572116`，式 (1)–(2)）的归一化，$(4z^2-1)\Lambda(\frac12+z)=\sum_{n\ge0}\gamma(n)z^{2n}/n!$，$\Lambda(s)=\pi^{-s/2}\Gamma(\frac s2)\zeta(s)$，即 $\gamma(n)=8\,n!\,[z^{2n}]\,\xi(\frac12+z)$；$J^{d,n}(X)=\sum_{j=0}^{d}\binom dj\gamma(n+j)X^j$。“双曲”指全部根为实数。把 $\gamma(n)$ 换成 $c\,q^n\gamma(n)$（$c,q>0$）只把 $J^{d,n}$ 乘以 $c\,q^n$ 并把 $X$ 换成 $qX$，不改变双曲性，所以文献中的不同归一化给出同样的命题（手工推导）。
+
+**文献结果，未在本书形式化。**
+
+1. 按 Griffin–Ono–Rolen–Zagier 与下面第 4 项论文的转述，G. Pólya（1927）证明 [@conj-riemann-hypothesis] 等价于一切 $J^{d,n}$（$d,n\ge0$）都双曲；并且 $\gamma(n)>0$ 对一切 $n$ 成立。
+2. G. Csordas, T. S. Norfolk, R. S. Varga（*Trans. Amer. Math. Soc.* **296**, 521–541, 1986，DOI `10.1090/S0002-9947-1986-0846596-4`）：图兰不等式 $\gamma(n+1)^2>\gamma(n)\gamma(n+2)$ 对一切 $n\ge0$ 成立，所以 $J^{2,n}$ 全部双曲。用矩 $b_m=\int_0^\infty u^{2m}\Phi(u)du$（$\Phi$ 见 [@rem-ch34-heat-flow-strip]）写，由 $\gamma(n)=64\cdot4^n\,n!\,b_n/(2n)!$，它等价于 $b_m^2>\frac{2m-1}{2m+1}b_{m-1}b_{m+1}$（$m=n+1\ge1$；手工推导）。D. K. Dimitrov, F. R. Lucas（*Proc. Amer. Math. Soc.* **139**, 1013–1022, 2011，DOI `10.1090/S0002-9939-2010-10515-4`）：$J^{3,n}$ 全部双曲。
+3. Griffin–Ono–Rolen–Zagier（定理 1–3）：对每个 $d\ge1$，$n$ 充分大时 $J^{d,n}$ 双曲，并且适当伸缩后 $J^{d,n}$ 趋于埃尔米特多项式；$1\le d\le8$ 时对一切 $n\ge0$ 双曲。
+4. M. J. Griffin, K. Ono, L. Rolen, J. Thorner, Z. Tripp, I. Wagner（*Adv. Math.* **397**, 108186, 2022，DOI `10.1016/j.aim.2022.108186`）：存在常数 $c>0$（没有给出数值），使 $n\ge c\,e^{d/2}$ 时 $J^{d,n}$ 双曲（定理 1.1）；若 $\xi$ 的满足 $\lvert\operatorname{Im}\rho\rvert\le T$ 的零点都在临界线上，则 $d\le\lfloor T\rfloor^2$ 时一切 $J^{d,n}$（$n\ge0$）双曲（定理 1.2 取 $m=0$，他们称之为 M. Chasse 2013 年定理 1.8 的推广）。由 Platt–Trudgian 的 $T=3\cdot10^{12}$（[@rem-ch34-radial-lock-pair-disks]）得：$d\le9\cdot10^{24}$ 时一切 $J^{d,n}$ 双曲。这是零点数值验证的另一种说法，对更高的次数什么也不说。
+
+**手工推导。** $J^{d,n}$ 是实系数多项式，按重数列出它的 $d$ 个根 $r_1,\dots,r_d$，取值集合在共轭下封闭。由 [@prop-ch34-li-curvature-toeplitz] 第 6 款（已冻结），$J^{d,n}$ 双曲当且仅当 $H=\bigl[\frac1d\operatorname{Re}\sum_kr_k^{\,i+j}\bigr]_{0\le i,j<d}$ 半正定；由牛顿恒等式，幂和是系数比值的多项式，所以这是关于 $\gamma(n),\dots,\gamma(n+d)$ 的一个 $d\times d$ 正性条件。$d=2$ 时 $\det(2H)=2p_2-p_1^2=(r_1-r_2)^2$，即判别式除以首项系数的平方，半正定恰是非严格的 $\gamma(n+1)^2\ge\gamma(n)\gamma(n+2)$；第 2 项文献结果给出的是严格不等式。凯莱映射 $u=(z-ia)/(z+ia)$（$a>0$，使 $\pm ia$ 都不是根）把实轴映到单位圆、把 $\overline z$ 映到 $1/\overline u$，于是“全为实数”也可以用幂和的托普利茨矩阵检验（[@prop-ch34-finite-toeplitz-circle-criterion]）；两种矩阵检验的是同一性质，本书不主张两者合同。还要分清对象：[@rem-ch34-one-zero-form-three-readings] 把这两种矩阵用在 $\xi$ 的零点上；这里用在由 $s=\frac12$ 处泰勒系数构成的 $d$ 次多项式的根上，那些根不是 $\xi$ 的零点。
+
+**计算机辅助验证（严格球算术，未形式化）。** 在 Arb 中由 $\xi(\frac12+z)$ 的幂级数算出 $\gamma(0)=3.97696622551$，$\gamma(1)=0.0918877772606$，$\gamma(2)=1.97523228913\times10^{-3}$，$\gamma(10)=1.63233804903\times10^{-17}$（四舍五入）；对每个 $0\le n\le30$，$\gamma(n+1)^2-\gamma(n)\gamma(n+2)$ 与 $J^{3,n}$ 的判别式都是包含于 $(0,\infty)$ 的球。这些是第 2 项文献结果的特例，这里只用来核对归一化；由 $b_n$ 的数值积分得到的 $\gamma(n)$（$n\le20$）与之相对差小于 $10^{-40}$（`NUM`）。
+:::
+
+最后一种表述把 $\xi$ 放进一条热流：黎曼猜想等价于这条热流的临界时刻 $\Lambda$ 不大于零。
+
+::: {.remark #rem-ch34-heat-flow-strip title="de Bruijn–Newman 热流：带宽按 √(Δ² − 2t) 收缩，共轭零点对在有限时间内落到实轴（文献结果、手工推导与数值）"}
+**约定。** $H_t(z)=\int_0^\infty e^{tu^2}\Phi(u)\cos(zu)\,du$，$\Phi(u)=\sum_{n\ge1}(2\pi^2n^4e^{9u}-3\pi n^2e^{5u})e^{-\pi n^2e^{4u}}$，$H_0(z)=\frac18\xi\bigl(\frac12+\frac{iz}2\bigr)$。对 $t$ 求导与对 $z$ 求两次导数比较得 $\partial_tH_t=-\partial_z^2H_t$，即 $H_t=e^{-t\partial_z^2}H_0$（在变量 $s=\frac12+\frac{iz}2$ 中是 $e^{(t/4)\partial_s^2}$）。零点 $\frac12+\delta+i\gamma$ 对应 $z=2\gamma-2i\delta$，所以离线距离 $\delta$ 对应虚部 $2\delta$，临界带 $0<\operatorname{Re}s<1$ 对应 $\lvert\operatorname{Im}z\rvert<1$。
+
+**文献结果，未在本书形式化**（陈述按 B. Rodgers, T. Tao，*Forum Math. Pi* **8**, e6, 2020，DOI `10.1017/fmp.2020.6`，第 1 节，与 D.H.J. Polymath，*Res. Math. Sci.* **6**, 31, 2019，DOI `10.1007/s40687-019-0193-1`，定理 3.2）。N. G. de Bruijn（*Duke Math. J.* **17**, 197–226, 1950，定理 13）：若 $H_{t_0}$ 没有 $\operatorname{Im}z>y_0$ 的零点，则 $t>t_0$ 时 $H_t$ 没有 $\operatorname{Im}z>\sqrt{\max(y_0^2-2(t-t_0),0)}$ 的零点；取 $t_0=0$、$y_0=1$ 得 $H_t$ 在 $t\ge\frac12$ 时零点全实。C. M. Newman（*Proc. Amer. Math. Soc.* **61**, 245–251, 1976）：存在常数 $-\infty<\Lambda\le\frac12$，使 $H_t$ 的零点全为实数当且仅当 $t\ge\Lambda$；[@conj-riemann-hypothesis] 等价于 $\Lambda\le0$；他猜想 $\Lambda\ge0$，并指出这意味着黎曼猜想即使成立也只是“勉强”成立。Rodgers–Tao 证明了 $\Lambda\ge0$。Polymath 证明 $\Lambda\le0.22$；D. Platt, T. Trudgian（2021，见 [@rem-ch34-radial-lock-pair-disks]，推论 2）：$\Lambda\le0.2$。所以 $0\le\Lambda\le0.2$，[@conj-riemann-hypothesis] 等价于 $\Lambda=0$（等价改写），仍然开放。由 de Bruijn 定理，若一切零点满足 $\lvert\beta-\tfrac12\rvert\le\delta_0$，则 $\Lambda\le2\delta_0^2$。
+
+**手工推导。** 设 $p$ 是 $n\ge1$ 次实多项式，$D=d/dz$，$p_t=e^{-tD^2}p=\sum_m(-t)^mD^{2m}p/m!$（有限和），$\Delta=\max_j\lvert\operatorname{Im}z_j(0)\rvert$。
+
+1. 在单根处，$\dot z_k=\dfrac{p_t''}{p_t'}(z_k)=2\sum_{j\ne k}\dfrac1{z_k-z_j}$。孤立的一对 $x\pm iy$ 满足 $\frac{d}{dt}y^2=-2$：共轭对相互吸引，两个实根相互排斥。
+2. $p_t$ 的全部零点都在 $\lvert\operatorname{Im}z\rvert\le\sqrt{\max(\Delta^2-2t,0)}$ 内。所以 $t\ge\Delta^2/2$ 时全部零点为实数；$t\ge0$ 保持实根性；常数 $2$ 不能改进（$p=z^2+\Delta^2$ 给出 $p_t=z^2+\Delta^2-2t$）；反向不保持实根性（$z^2-\varepsilon^2$ 在 $t<-\varepsilon^2/2$ 时有非实根）。
+
+**证明。** 第 1 款：对 $p_t(z_k(t))=0$ 求导并用 $\partial_tp_t=-p_t''$；写 $p=(z-z_k)q$，则在 $z_k$ 处 $p'=q$、$p''=2q'$。第 2 款先证一步：若实多项式 $f\ne0$ 的零点都在 $\lvert\operatorname{Im}z\rvert\le\Delta$ 内，则 $\cos(aD)f=\frac12\bigl(f(z+ia)+f(z-ia)\bigr)$（$a>0$）的零点都在 $\lvert\operatorname{Im}z\rvert\le\sqrt{\max(\Delta^2-a^2,0)}$ 内。取 $w=\sigma+i\eta$，$\eta>0$，$\eta^2>\Delta^2-a^2$。实根 $x$ 给出 $\lvert w+ia-x\rvert^2-\lvert w-ia-x\rvert^2=4a\eta>0$；一对根 $x\pm iy$（$0<y\le\Delta$）给出
+
+$$
+\prod_\pm\lvert w+ia-x\mp iy\rvert^2-\prod_\pm\lvert w-ia-x\mp iy\rvert^2=8a\eta\bigl((\sigma-x)^2+\eta^2+a^2-y^2\bigr)>0 .
+$$
+
+所以 $\lvert f(w+ia)\rvert>\lvert f(w-ia)\rvert$，$w$ 不是零点；$\eta<0$ 由共轭对称。取 $a_m^2=2t/m$：在次数不超过 $n$ 的多项式空间上 $D$ 幂零，$\cos(a_mD)^m=\bigl(1-\frac tmD^2+O(m^{-2})\bigr)^m\to e^{-tD^2}$；每作用一次，带宽的平方从 $b$ 变为 $\max(b-a_m^2,0)$，$m$ 次后为 $\max(\Delta^2-2t,0)$；首项系数不变，根随系数连续变化，闭带保留极限。这是 de Bruijn 方法的多项式情形，本书不主张新颖性。$\square$
+
+**`NUM`**（60 位精度）。[@ex-ch34-zero-rotor-sagitta-numbers] 的假想四点 $\tfrac7{10}\pm5i$、$\tfrac3{10}\pm5i$ 即 $z=\pm10\pm0.4i$；以它们为根的四次多项式在 $t=0.0799362$ 时全部零点第一次为实数（界 $\Delta^2/2=0.08$）。另一组 $\frac12\pm0.1\pm14i$ 即 $z=\pm28\pm0.2i$，时刻为 $0.0199995$（界 $0.02$）；再加实根 $z=\pm26,\pm30$，时刻为 $0.0196179$。在 $[0,\Delta^2/2]$ 上的 41 个时刻，$\max\lvert\operatorname{Im}z(t)\rvert$ 都不超过第 2 款的界（舍入误差以内）。这些是这几个多项式的数值，不是关于 $\zeta$ 的陈述；关于 $H_t$ 的结论是上面 de Bruijn 的定理，不由第 2 款推出。
+:::
+
 ## 34.31.4 形式化审视：圆弧微积分公理内闭环与通往经典 ZFC 的最后一架舒尔枢轴桥 {#sec-ch34-31-4}
 
 站在 Lean 4 机器形式化验证与经典 ZFC 公理系统的严格标尺下审视整条推导链，我们可以用一张四行对照表，把“哪些环节已是无条件定理、哪一个环节是公理内闭环与经典 ZFC 之间的唯一桥接靶点”刻画得一清二楚（这个桥接靶点本身就是黎曼猜想的一个等价形式）：

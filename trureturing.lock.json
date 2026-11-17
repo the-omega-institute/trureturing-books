@@ -1725,6 +1725,14 @@
       "line": 28,
       "signature": "theorem no_continuous_global_section : ¬ ∃ s : Circle → Circle, Continuous s ∧ ∀ z : Circle, s z ^ 2 = z"
     },
+    "D5/S3/Constants/InnerProducts/FractionalReciprocalInnerProduct.fractional_reciprocal_inner_product": {
+      "module": "D5/S3/Constants/InnerProducts/FractionalReciprocalInnerProduct",
+      "name": "D5.S3.Constants.InnerProducts.FractionalReciprocalInnerProduct.fractional_reciprocal_inner_product",
+      "kind": "theorem",
+      "statement_id": "sha256:836f94f48f6f12385dd9d441540fc152c1a805d053e730ecf3c71eff65490252",
+      "line": 299,
+      "signature": "theorem fractional_reciprocal_inner_product (a : ℤ) (ha : 1 ≤ a) : @inner ℝ (Lp ℝ 2 positiveMeasure) _ unitIntervalIndicator (integerFractionalReciprocal a ha) = (Real.log (a : ℝ) + 1 - Real.eulerMascheroniConstant) / (a : ℝ)"
+    },
     "D5/S3/Constants/Irrationality/LogNaturalIrrationality.irrational_log_natCast": {
       "module": "D5/S3/Constants/Irrationality/LogNaturalIrrationality",
       "name": "D5.S3.Constants.Irrationality.LogNaturalIrrationality.irrational_log_natCast",
@@ -2828,6 +2836,22 @@
       "statement_id": "sha256:87b5091d203eefbccc2aa6cb991527f1196fa514d04fe5915e105009a6f7ed85",
       "line": 42,
       "signature": "theorem zeckendorf_real_thread_injective : Function.Injective zeckendorfRealThread"
+    },
+    "D5/S3/Observer/Hilbert/NymanBeurlingFiniteGramDistance.nyman_beurling_finite_gram_distance": {
+      "module": "D5/S3/Observer/Hilbert/NymanBeurlingFiniteGramDistance",
+      "name": "D5.S3.Observer.Hilbert.NymanBeurlingFiniteGramDistance.nyman_beurling_finite_gram_distance",
+      "kind": "theorem",
+      "statement_id": "sha256:d482a2fc0f3f22eaf7bb8908e49ce75c11fe75eb2d0060168a44dd94d565d390",
+      "line": 121,
+      "signature": "theorem nyman_beurling_finite_gram_distance (N : ℕ) : (shell N).starProjection = (synthesis N).comp ((moorePenroseInverse (gramOperator N)).toContinuousLinearMap.comp (synthesis N).adjoint) ∧ (distance N ^ 2 : ℂ) = 1 - inner ℂ (correlations N) (moorePenroseInverse (gramOperator N) (correlations N)) ∧ ∀ G : EuclideanSpace ℂ (Fin N) ≃ₗ[ℂ] EuclideanSpace ℂ (Fin N), G.toLinearMap = gramOperator N → (distance N ^ 2 : ℂ) = 1 - inner ℂ (correlations N) (G.symm (correlations N))"
+    },
+    "D5/S3/Observer/Hilbert/NymanHalflineZeroSeparation.nyman_halfline_distance_bound": {
+      "module": "D5/S3/Observer/Hilbert/NymanHalflineZeroSeparation",
+      "name": "D5.S3.Observer.Hilbert.NymanHalflineZeroSeparation.nyman_halfline_distance_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:5e4d22a2c754769586fe72b57486e68ac9d67bf4ddcd08f19c782352851207e7",
+      "line": 151,
+      "signature": "theorem nyman_halfline_distance_bound (rho : ℂ) (hz : Zeta23.IsNontrivialZero rho) (hb : 1 / 2 < rho.re) (N : ℕ) : 1 / (‖rho‖ ^ 2 * (1 / (2 * rho.re - 1) + 1 / ‖rho - 1‖ ^ 2)) ≤ distance N ^ 2"
     },
     "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le": {
       "module": "D5/S3/Observer/Linear/ExactTaylorObservationRemainder",
@@ -6164,6 +6188,14 @@
       "statement_id": "sha256:0c230a6759a124696a2512db419424da8cec03eefde3f5514acdc29e7f51bce3",
       "line": 143,
       "signature": "theorem golden_right_half_strip_implies_rh (hRight : forall rho : Complex, riemannZeta rho = 0 -> (1 : Real) / 2 < rho.re -> rho.re < 1 -> False) : RiemannHypothesis"
+    },
+    "D5/S3/Weil/ZetaPntBounds/NymanFractionalMellin.fractionalMellin_eq_zeta": {
+      "module": "D5/S3/Weil/ZetaPntBounds/NymanFractionalMellin",
+      "name": "D5.S3.Weil.ZetaPntBounds.NymanFractionalMellin.fractionalMellin_eq_zeta",
+      "kind": "theorem",
+      "statement_id": "sha256:440d9d61cb34665094fc15a3f03a87c29586ab881b81e88845fb2215d802b5d1",
+      "line": 356,
+      "signature": "theorem fractionalMellin_eq_zeta (theta : ℝ) (htheta : 0 < theta) (htheta1 : theta ≤ 1) (s : ℂ) (hs : 0 < s.re) (hs_lt : s.re < 1) : (∫ x in Ioo (0 : ℝ) 1, ((Int.fract (theta / x) : ℝ) : ℂ) * (x : ℂ) ^ (s - 1)) = (theta : ℂ) / (s - 1) - (theta : ℂ) ^ s * riemannZeta s / s"
     },
     "D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower.norm_zeta_product_ge_one": {
       "module": "D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower",
