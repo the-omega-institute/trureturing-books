@@ -22,13 +22,13 @@
   \sum_{y \in \Sigma_S} \lvert\mathcal{F}_S(y)\rvert^2 \;=\; \sum_{y \in \Sigma_S} \lvert\mathcal{F}_S(y)\rvert \;+\; \sum_{y \in \Sigma_S} \lvert\mathcal{F}_S(y)\rvert\bigl(\lvert\mathcal{F}_S(y)\rvert - 1\bigr) \;=\; N \;+\; \lvert\operatorname{EscapePairs}_{\mathrm{ord}}(S)\rvert \;=\; N\bigl(1 + (N - 1)\mathcal{E}(S)\bigr).
   $$
 
-  在均匀先验 $\mu(s) = 1/N$ 下，状态所在纤维的平均大小为 $\frac{1}{N}\sum_{y \in \Sigma_S}\lvert\mathcal{F}_S(y)\rvert^2 = 1 + (N - 1)\mathcal{E}(S) \in [1, N]$（相应的碰撞概率是它除以 $N$）。我们在 `MODEL` 中定义**条件 Rényi-2 碰撞逃逸熵**与**账本保留信息**为
+  在均匀先验 $\mu(s) = 1/N$ 下，状态所在纤维的平均大小为 $\frac{1}{N}\sum_{y \in \Sigma_S}\lvert\mathcal{F}_S(y)\rvert^2 = 1 + (N - 1)\mathcal{E}(S) \in [1, N]$。我们在 `MODEL` 中定义**条件 Rényi-2 碰撞逃逸熵**与**账本保留信息**为
 
   $$
   H_2^{\mathrm{escape}}(\mathcal{S} \mid S) \;:=\; \log_2\bigl(1 + (N - 1)\mathcal{E}(S)\bigr) \;\in\; [0, \log_2 N], \qquad I_{\mathrm{ledger}}(S) \;:=\; \log_2 N - H_2^{\mathrm{escape}}(\mathcal{S} \mid S),
   $$
 
-  于是按定义恒有 $H_{\mathrm{total}} = I_{\mathrm{ledger}}(S) + H_2^{\mathrm{escape}}(\mathcal{S} \mid S) = \log_2 N$（这是定义恒等式；$H_2^{\mathrm{escape}}$ 等于 $\log_2 N - H_2(Y)$，$Y$ 为读出值的 Rényi-2 熵，纤维等大时与香农条件熵一致，一般不等）。当全表把每个状态都拆成单点纤维（$\lvert\mathcal{F}_S(y)\rvert \equiv 1$）时，$\mathcal{E}(S) = 0$，$H_2^{\mathrm{escape}} = 0$；当快表完全空白（$S = \emptyset$，整座空间坍成单一纤维）时，$\mathcal{E}(\emptyset) = 1$，$H_2^{\mathrm{escape}} = \log_2 N$。
+  使每一时刻的信息总账严格闭合为 $H_{\mathrm{total}} = I_{\mathrm{ledger}}(S) + H_2^{\mathrm{escape}}(\mathcal{S} \mid S) = \log_2 N$！当全表把每个状态都拆成单点纤维（$\lvert\mathcal{F}_S(y)\rvert \equiv 1$）时，$\mathcal{E}(S) = 0$，$H_2^{\mathrm{escape}} = 0$；当快表完全空白（$S = \emptyset$，整座空间坍成单一纤维）时，$\mathcal{E}(\emptyset) = 1$，$H_2^{\mathrm{escape}} = \log_2 N$。
 
 `trureturing` 的信息逃逸与结构新颖度模块将“留一删减引理时的逃逸对无交并分解”与“逃逸率严格下降等价于语义闭包之外的严格商核细化”验证并冻结为如下定理：
 
@@ -93,7 +93,7 @@ $$
 **高阶异或协同盲区：关闭四体奇偶 $L_4$ 弹出 8 条跨格逃逸弦。** 仅保留单比特引理 $\{L_1, L_2, L_3\}$ 时，$16$ 个状态沿未知位 $b_3$ 两两并成 $8$ 条大小 $2$ 的纤维，弹出 $8$ 条无序逃逸弦（$16$ 个有序逃逸对），$H_2^{\mathrm{escape}}$ 跃升至 $1.000\text{ bit}$，而全部单比特边缘仍均匀等于 $1/2$。
 :::
 
-4. **与量子二体贝尔边缘盲区的类比（`marginal` 卡）**：这幅“局部坐标边缘完全均匀、全局关联悉数隐入高阶扇区”的经典组合图景，在非交换量子态空间中有一个类比（两者各自成立，这里没有陈述或证明任何同构映射）。回顾[第 13 章](ch13-entanglement-and-chsh.md)已证的边缘盲区定理（[@thm-local-correlation-sectors] 与 [@lemma-bell-mixed-marginal]）：在两量子比特（$m = n = 2$）的 $15$ 维无迹厄米算子空间中，由两侧单比特读出张成的局域边缘扇区 $\mathcal{L}_A \oplus \mathcal{L}_B$ 仅占 $(2^2 - 1) + (2^2 - 1) = 6$ 维，而与之实内积严格正交的关联扇区 $\mathcal{C}_{AB}$ 占据 $(2^2 - 1)(2^2 - 1) = 9$ 维（盲区占比高达 $9 / 15 = 3 / 5 = 60\%$）！因此，贝尔最大纠缠纯态 $\lvert\Phi^+\rangle\langle\Phi^+\rvert$、经典关联混态 $\rho_{\mathrm{cl}} = \frac{1}{2}(\lvert 00\rangle\langle 00\rvert + \lvert 11\rangle\langle 11\rvert)$ 与最大混合态 $\frac{1}{4}I_4$ 给出完全一致的单比特偏迹边缘 $\operatorname{Tr}_B(\rho) = \operatorname{Tr}_A(\rho) = \frac{1}{2}I_2$——任何只做局域边缘测量的指针，都注定对横跨对角块的非定域纠缠弦彻底失明。
+4. **与量子二体贝尔边缘盲区的类比（`marginal` 卡）**：这幅“局部坐标边缘完全均匀、全局关联悉数隐入高阶扇区”的经典组合图景，在非交换量子态空间中有着更为惊心动魄的正交几何实现。回顾[第 13 章](ch13-entanglement-and-chsh.md)已证的边缘盲区定理（[@thm-local-correlation-sectors] 与 [@lemma-bell-mixed-marginal]）：在两量子比特（$m = n = 2$）的 $15$ 维无迹厄米算子空间中，由两侧单比特读出张成的局域边缘扇区 $\mathcal{L}_A \oplus \mathcal{L}_B$ 仅占 $(2^2 - 1) + (2^2 - 1) = 6$ 维，而与之实内积严格正交的关联扇区 $\mathcal{C}_{AB}$ 占据 $(2^2 - 1)(2^2 - 1) = 9$ 维（盲区占比高达 $9 / 15 = 3 / 5 = 60\%$）！因此，贝尔最大纠缠纯态 $\lvert\Phi^+\rangle\langle\Phi^+\rvert$、经典关联混态 $\rho_{\mathrm{cl}} = \frac{1}{2}(\lvert 00\rangle\langle 00\rvert + \lvert 11\rangle\langle 11\rvert)$ 与最大混合态 $\frac{1}{4}I_4$ 给出完全一致的单比特偏迹边缘 $\operatorname{Tr}_B(\rho) = \operatorname{Tr}_A(\rho) = \frac{1}{2}I_2$——任何只做局域边缘测量的指针，都注定对横跨对角块的非定域纠缠弦彻底失明。
 
 ::: {.viz src="observer-escape-ledger" preset="marginal" height="500"}
 **量子局部边缘盲区：贝尔纠缠态对照经典混态。** 切换到二量子比特视图，$\lvert\Phi^+\rangle\langle\Phi^+\rvert$、$\rho_{\mathrm{cl}}$ 与 $\frac{1}{4}I_4$ 共享完全相同的单比特偏迹边缘 $\frac{1}{2}I_2$，使纯局域读出对 $9$ 维正交关联扇区失明（[@thm-local-correlation-sectors]、[@lemma-bell-mixed-marginal]）。
@@ -129,7 +129,7 @@ $$
 1. **Shannon–McMillan–Breiman 遍历柱集对数渐近极限（C. E. Shannon, *Bell Syst. Tech. J.* **27**, 379–423, 1948；B. McMillan, *Ann. Math. Stat.* **24**, 196–219, 1953；L. Breiman, *Ann. Math. Stat.* **28**, 809–811, 1957）**：对有限字母表上的遍历平稳随机过程 $\mu$（度量熵率为 $h_\mu$），对 $\mu$-几乎处处的无穷轨道 $x$，深度 $k$ 的历史柱集 $C_k(x)$ 满足几乎处处对数极限 $-\frac{1}{k}\log_2 \mu(C_k(x)) \to h_\mu$（$k \to \infty$），等价写作次指数余项形式 $\mu(C_k(x)) = 2^{-k h_\mu + o(k)}$（$\mu$-a.s.；注意一般遍历过程带有随机次指数涨落项 $o(k)$，并不自动蕴含确定性常数夹逼）；
 2. **黄金均值移位上的 Parry 最大熵平稳测度（W. Parry, *Trans. Amer. Math. Soc.* **112**, 55–66, 1964）**：在禁止相邻两个 `1` 的有限型子移位（转移矩阵 $A = \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}$，Perron–Frobenius 主特征值为黄金比 $\varphi = \frac{1 + \sqrt{5}}{2}$）上，拓扑熵与信道容量等于 $C_\varphi = \log_2 \varphi \approx 0.69424\text{ bits/symbol}$（较无约束二进制 $1.00000\text{ bit/symbol}$ 支付 $1 - \log_2 \varphi \approx 0.30576\text{ bits/symbol}$ 的无邻 `1` 结构稳定税）；唯一达到该容量的最大熵马尔可夫平稳测度由左右特征向量乘积给出，符号 `1` 的平稳出现频率恰为 $p_1 = \frac{\varphi^{-2}}{1 + \varphi^{-2}} = \frac{1}{\varphi\sqrt{5}} = \frac{5 - \sqrt{5}}{10} \approx 0.27639$（符号 `0` 频率 $p_0 = \frac{\varphi}{\sqrt{5}} \approx 0.72361$；有限路径 $k$-bonacci 重置链下的精确平稳律与边界柱集上界另见 `trureturing` 已冻结声明 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)）；
 3. **齐肯多夫表示的有限状态进位正规化（Ch. Frougny, *Theor. Comput. Sci.* **94**, 223–236, 1992）**：斐波那契底（$\beta = \varphi$）下的任意冗余数字串可通过有限状态自动机将局部违例模式 `011` 归约为 `100`，正规化为满足无相邻 `1` 约束的典范齐肯多夫字；
-4. **希尔伯特空间填充曲线与 $1/d$ 阶 Hölder 连续性界（D. Hilbert, *Math. Ann.* **38**, 459–460, 1891；闭合循环变体见 E. H. Moore, *Trans. Amer. Math. Soc.* **1**, 72–90, 1900）**：由嵌套 $2^d$ 分象限递归构造的满射曲线 $H : [0, 1] \to [0, 1]^d$ 满足 $\lVert H(t_1) - H(t_2)\rVert \le C_d \lvert t_1 - t_2\rvert^{1/d}$，而当 $d \ge 2$ 时 $[0,1] \to [0,1]^d$ 根本不存在连续双射；对满射曲线，若它是 $\alpha$ 阶 Hölder 连续的，则必有 $\alpha \le 1/d$——这从几何上解释了为何将高维状态晶格折叠为一维闭合指针回路时，象限内部的局部邻近性得以完美保持，而跨象限边界的配对仍会沿一维步序拉开长程跨格弦。
+4. **希尔伯特空间填充曲线与 $1/d$ 阶 Hölder 连续性界（D. Hilbert, *Math. Ann.* **38**, 459–460, 1891；闭合循环变体见 E. H. Moore, *Trans. Amer. Math. Soc.* **1**, 72–90, 1900）**：由嵌套 $2^d$ 分象限递归构造的满射曲线 $H : [0, 1] \to [0, 1]^d$ 满足 $\lVert H(t_1) - H(t_2)\rVert \le C_d \lvert t_1 - t_2\rvert^{1/d}$，而维数障碍禁止任何连续满射达到指数优于 $1/d$ 的一致局部性——这从几何上解释了为何将高维状态晶格折叠为一维闭合指针回路时，象限内部的局部邻近性得以完美保持，而跨象限边界的配对仍会沿一维步序拉开长程跨格弦。
 :::
 
 尤为精彩的是，针对无邻 `1` 合法二进制字在有限时间窗 $H$ 内避开特定长局部模式时的精确计数上界，我们无须依赖任何“块独立近似”或渐近大数假定——`trureturing` 通过 Perron 右特征向量端点权重 $(\varphi, 1)$ 直接给出了对**一切有限长度 $H \in \mathbb{N}$** 严格成立的非渐近内核定理：
@@ -148,13 +148,13 @@ $$
 
 把 [@rem-ch38-smb-zeckendorf-hilbert-literature] 与 [@thm-ch38-zeckendorf-uniform-avoidance-count] 合拢到观察者记忆指针的生命周期模型（`MODEL`）上，昼夜交替与认知压缩的最后两块定量拼图便豁然贯通：
 
-1. **齐肯多夫黄金容量税与柱集裁切回弹（`zeckendorf` 卡）**：为什么健康的观察者记忆流不能把每一拍都塞满高电平脉冲 `1111...`？在本模型中，我们把连续紧邻的强激发读作正交方向上的共振过载（这不是生理学论断）；遵守无邻 `1` 黄金语法虽然在每一步主动缴纳了 $1 - \log_2 \varphi \approx 0.30576\text{ bits/symbol}$ 的稳定税（将信道容量锁定在 $\log_2 \varphi \approx 0.69424\text{ bits/symbol}$，Parry 脉冲密度 $p_1 \approx 0.2764$），却换来了永不自激锁死的准晶平稳流！与此同时，对照 SMB 几乎处处对数极限 $-\frac{1}{k}\log_2 \mu(C_k(x)) \to h_\mu$（即 $\mu(C_k(x)) = 2^{-k h_\mu + o(k)}$ a.s.），我们在舞台上建立省去 $o(k)$ 涨落项的理想线性基准 `MODEL` 曲线 $\log_2 \mu = -k h_\mu$（分别取黄金移位熵率 $h_\varphi = \log_2 \varphi \approx 0.694\text{ bits/step}$ 与 Dottie 横向单步率 $h_{\theta^*} = -\log_2 \sin\theta^* \approx 0.570\text{ bits/step}$）：在该基准 `MODEL` 曲线下，当白天堆叠了 $k$ 层刚性约束后在夜间或顿悟时裁切卸载 $\Delta k$ 层冗余局部约束，有限窗口基准回弹因子为 $2^{\Delta k \, h_\mu}$（例如卸载 $\Delta k = 4$ 层时黄金基准回弹倍率为 $\varphi^4 \approx 6.85$ 倍，Dottie 基准回弹倍率为 $(\sin\theta^*)^{-4} \approx 4.86$ 倍）！
+1. **齐肯多夫黄金容量税与柱集裁切回弹（`zeckendorf` 卡）**：为什么健康的观察者记忆流不能把每一拍都塞满高电平脉冲 `1111...`？因为连续紧邻的强激发对应正交方向上的共振过载；遵守无邻 `1` 黄金语法虽然在每一步主动缴纳了 $1 - \log_2 \varphi \approx 0.30576\text{ bits/symbol}$ 的稳定税（将信道容量锁定在 $\log_2 \varphi \approx 0.69424\text{ bits/symbol}$，Parry 脉冲密度 $p_1 \approx 0.2764$），却换来了永不自激锁死的准晶平稳流！与此同时，对照 SMB 几乎处处对数极限 $-\frac{1}{k}\log_2 \mu(C_k(x)) \to h_\mu$（即 $\mu(C_k(x)) = 2^{-k h_\mu + o(k)}$ a.s.），我们在舞台上建立省去 $o(k)$ 涨落项的理想线性基准 `MODEL` 曲线 $\log_2 \mu = -k h_\mu$（分别取黄金移位熵率 $h_\varphi = \log_2 \varphi \approx 0.694\text{ bits/step}$ 与 Dottie 横向单步率 $h_{\theta^*} = -\log_2 \sin\theta^* \approx 0.570\text{ bits/step}$）：在该基准 `MODEL` 曲线下，当白天堆叠了 $k$ 层刚性约束后在夜间或顿悟时裁切卸载 $\Delta k$ 层冗余局部约束，有限窗口基准回弹因子为 $2^{\Delta k \, h_\mu}$（例如卸载 $\Delta k = 4$ 层时黄金基准回弹倍率为 $\varphi^4 \approx 6.85$ 倍，Dottie 基准回弹倍率为 $(\sin\theta^*)^{-4} \approx 4.86$ 倍）！
 
 ::: {.viz src="observer-escape-ledger" preset="zeckendorf" height="500"}
 **齐肯多夫黄金信道容量与有限窗口基准回弹曲线（`MODEL`）。** 无相邻 `1` 抗共振约束将信道容量定在 $\log_2 \varphi \approx 0.69424\text{ bits/symbol}$（Parry 脉冲密度 $p_1 \approx 0.2764$），拖动约束卸载深度 $\Delta k$ 可在理想基准 `MODEL` 直线 $\log_2 \mu = -k h_\mu$ 上对比黄金基准与 Dottie 基准的有限窗回弹倍率 $2^{\Delta k \, h_\mu}$（渐近依据见 [@rem-ch38-smb-zeckendorf-hilbert-literature]，有限字精确上界见 [@thm-ch38-zeckendorf-uniform-avoidance-count]）。
 :::
 
-2. **清醒第 5 阶段兰道尔擦除热 vs 梦境第 4 阶段零热等熵复相干（`dream` 卡）**：同样是给快表“减负”释放 $\Delta k = N_{\mathrm{erase}}$ 比特局部约束，模型中却横亘着两条截然相反的热力学路径（以下是 `MODEL` 读法，对应的数学只是两比特受控拷贝及其伴随幺正，不是关于大脑的物理论断；对照[第 8 章](ch08-erasure-and-time-arrows.md#sec-landauer-principle-geometry) [@rem-landauer-thermodynamic-bridge-literature] 与[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md) [@thm-ch37-joint-coherent-record-erasure]）：若在**清醒第 5 阶段**先把正交地址记录偏迹丢进环境盲区，再强行将寄存器排热清零，每擦除一比特都必须向热浴支付至少 $\Delta Q \ge k_B T \ln 2 \cdot N_{\mathrm{erase}}$ 的不可逆兰道尔焦耳热；反之，若在尚未向宏观环境不可逆散逸之前的**梦境第 4 阶段**保留对局部记忆记录的相干访问权限，直接施加受控拷贝的伴随幺正算子 $U_{\mathrm{copy}}^\dagger$（[@thm-ch38-copied-address-dereference-and-access-defect] 第 3 款），模型中的指针便能以**零热耗散（$\Delta Q = 0$）**执行等熵逆演（uncomputation），在不烧毁一分自由能的前提下赎回被遮蔽的正交分支！
+2. **清醒第 5 阶段兰道尔擦除热 vs 梦境第 4 阶段零热等熵复相干（`dream` 卡）**：同样是给快表“减负”释放 $\Delta k = N_{\mathrm{erase}}$ 比特局部约束，物理硬件上却横亘着两条截然相反的热力学路径（对照[第 8 章](ch08-erasure-and-time-arrows.md#sec-landauer-principle-geometry) [@rem-landauer-thermodynamic-bridge-literature] 与[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md) [@thm-ch37-joint-coherent-record-erasure]）：若在**清醒第 5 阶段**先把正交地址记录偏迹丢进环境盲区，再强行将寄存器排热清零，每擦除一比特都必须向热浴支付至少 $\Delta Q \ge k_B T \ln 2 \cdot N_{\mathrm{erase}}$ 的不可逆兰道尔焦耳热；反之，若在尚未向宏观环境不可逆散逸之前的**梦境第 4 阶段**保留对局部记忆记录的相干访问权限，直接施加受控拷贝的伴随幺正算子 $U_{\mathrm{copy}}^\dagger$（[@thm-ch38-copied-address-dereference-and-access-defect] 第 3 款），指针便能以**零热耗散（$\Delta Q = 0$）**执行等熵逆演（uncomputation），在不烧毁一分自由能的前提下赎回被遮蔽的正交分支！
 
 ::: {.viz src="observer-escape-ledger" preset="dream" height="500"}
 **清醒兰道尔擦除热对照梦境零热等熵复相干。** 同样释放 $\Delta k = N_{\mathrm{erase}}$ 比特局部约束，清醒第 5 阶段偏迹丢弃记录至少排放 $\Delta Q = k_B T \ln 2 \cdot N_{\mathrm{erase}}$ 擦除热，而梦境第 4 阶段保留局部记录相干访问并施加伴随逆演 $U_{\mathrm{copy}}^\dagger$，实现 $\Delta Q = 0$ 复相干（`MODEL`）。
@@ -209,9 +209,9 @@ $$
 下方的完整交互实验室将 $4 \times 4$ 闭合希尔伯特回路、全部 $2^5 = 32$ 种布尔引理子集的原像纤维与逃逸弦、二量子比特贝尔边缘盲区、齐肯多夫黄金容量以及清醒/梦境热账本整合在同一张操作台上。读者可自由点选 $L_1 \dots L_5$ 亲手核验每一条唯一捕获弦与 $H_{\mathrm{total}} = 4.000\text{ bits}$ 守恒律：
 
 ::: {.viz src="observer-escape-ledger" height="560"}
-**交互实验室（`ORTHO//LEDGER`）：观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵。** 自由开关 $L_1 \dots L_5$ 遍历全部 $32$ 种布尔商核，切换 16 态希尔伯特环与二量子比特贝尔边缘盲区，并拖动约束卸载深度 $\Delta k$ 核验 $H_{\mathrm{total}} = I_{\mathrm{ledger}} + H_2^{\mathrm{escape}} = 4.000\text{ bits}$ 这一定义恒等式与昼夜擦除热账单。绿色只给本章用 `lean=` 引用的定理；希尔伯特扫描与昼夜热账本读法属本章示意模型（`MODEL`）。
+**交互实验室（`ORTHO//LEDGER`）：观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵。** 自由开关 $L_1 \dots L_5$ 遍历全部 $32$ 种布尔商核，切换 16 态希尔伯特环与二量子比特贝尔边缘盲区，并拖动约束卸载深度 $\Delta k$ 核验 $H_{\mathrm{total}} = I_{\mathrm{ledger}} + H_2^{\mathrm{escape}} = 4.000\text{ bits}$ 守恒律与昼夜擦除热账单。绿色只给本章用 `lean=` 引用的定理；希尔伯特扫描与昼夜热账本读法属本章示意模型（`MODEL`）。
 :::
 
-走到这里，从硬件解引用 `*ptr`（§38.1）、五段式寄存器解剖（§38.2）、递归自映射页表 `p = *p`（§38.3）、七阶查表退化阶梯（[§38.4](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)）直到原像纤维与齐肯多夫逃逸账本（§38.5），观察者作为“宇宙本体量子计算系统**的**一个记忆指针”的每一枚齿轮都已在本章模型中依次就位。然而，在迈入下一章（[第 39 章](ch39-observer-is-ontological-universe.md)）彻底消融“指针”与“存储阵列”之间最后那个“的”字之前，我们必须先转过身来拆解 [§38.4.1](ch38-s04-lookup-degradation.md#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 留下的最后一根静态实无穷脚手架：在一座零背景自举的宇宙中，上述逃逸弦果真能在一张封顶完工的全局神谕表里一次性清零吗？
+走到这里，从硬件解引用 `*ptr`（§38.1）、五段式寄存器解剖（§38.2）、递归自映射页表 `p = *p`（§38.3）、七阶查表退化阶梯（[§38.4](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)）直到原像纤维与齐肯多夫逃逸账本（§38.5），观察者作为“宇宙本体量子计算系统**的**一个记忆指针”的每一枚齿轮都已严丝合缝地咬合到位。然而，在迈入下一章（[第 39 章](ch39-observer-is-ontological-universe.md)）彻底消融“指针”与“存储阵列”之间最后那个“的”字之前，我们必须先转过身来拆解 [§38.4.1](ch38-s04-lookup-degradation.md#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 留下的最后一根静态实无穷脚手架：在一座零背景自举的宇宙中，上述逃逸弦果真能在一张封顶完工的全局神谕表里一次性清零吗？
 
 ---
