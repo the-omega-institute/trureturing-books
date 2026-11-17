@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/FiniteSpectralCayleyIdentity",
+  "declarations": {
+    "D5/S3/Weil/FiniteSpectralCayleyIdentity.cayleyNode_normSq": {
+      "module": "D5/S3/Weil/FiniteSpectralCayleyIdentity",
+      "name": "D5.S3.Weil.FiniteSpectralCayleyIdentity.cayleyNode_normSq",
+      "kind": "theorem",
+      "statement_id": "sha256:4e9a4a6495e3c3ba1a2f68978d503718cc5f26fb1ec19d44e9f9afea1b6a4747",
+      "line": 52,
+      "signature": "theorem cayleyNode_normSq (gamma : Real) : Complex.normSq (cayleyNode gamma) = 1",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    },
+    "D5/S3/Weil/FiniteSpectralCayleyIdentity.cayleyNode_one_sub_normSq": {
+      "module": "D5/S3/Weil/FiniteSpectralCayleyIdentity",
+      "name": "D5.S3.Weil.FiniteSpectralCayleyIdentity.cayleyNode_one_sub_normSq",
+      "kind": "theorem",
+      "statement_id": "sha256:4e9a4a6495e3c3ba1a2f68978d503718cc5f26fb1ec19d44e9f9afea1b6a4747",
+      "line": 61,
+      "signature": "theorem cayleyNode_one_sub_normSq (gamma : Real) : Complex.normSq (1 - cayleyNode gamma) = 4 * spectralWeight gamma",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    },
+    "D5/S3/Weil/FiniteSpectralCayleyIdentity.finiteLiCoefficient_eq_diagonalHilbertSchmidtDefect": {
+      "module": "D5/S3/Weil/FiniteSpectralCayleyIdentity",
+      "name": "D5.S3.Weil.FiniteSpectralCayleyIdentity.finiteLiCoefficient_eq_diagonalHilbertSchmidtDefect",
+      "kind": "theorem",
+      "statement_id": "sha256:4e9a4a6495e3c3ba1a2f68978d503718cc5f26fb1ec19d44e9f9afea1b6a4747",
+      "line": 81,
+      "signature": "theorem finiteLiCoefficient_eq_diagonalHilbertSchmidtDefect {J : Type*} [Fintype J] (gamma : J -> Real) (n : Nat) : finiteLiCoefficient gamma n = diagonalHilbertSchmidtDefect gamma n",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

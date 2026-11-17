@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Constants/NewtonHankelRealRootCriterion",
+  "declarations": {
+    "D5/S3/Constants/NewtonHankelRealRootCriterion.newtonHankel_posSemidef_iff_roots_real": {
+      "module": "D5/S3/Constants/NewtonHankelRealRootCriterion",
+      "name": "D5.S3.Constants.NewtonHankelRealRootCriterion.newtonHankel_posSemidef_iff_roots_real",
+      "kind": "theorem",
+      "statement_id": "sha256:c156199d58ec6d11710648af15bcebb6d3bb49de25d879a9e725d8b809b2f8f2",
+      "line": 320,
+      "signature": "theorem newtonHankel_posSemidef_iff_roots_real {d : Nat} (roots : Fin d → Complex) (hconj : ∀ w, w ∈ Finset.univ.image roots ↔ conj w ∈ Finset.univ.image roots) : Matrix.PosSemidef (newtonHankel roots) ↔ ∀ j, ∃ r : Real, roots j = (r : Complex)",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

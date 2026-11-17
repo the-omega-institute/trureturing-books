@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Entanglement/FiniteSectorPhysicalConstruction",
+  "declarations": {
+    "D5/S3/Quantum/Entanglement/FiniteSectorPhysicalConstruction.channel_kraus_stinespring": {
+      "module": "D5/S3/Quantum/Entanglement/FiniteSectorPhysicalConstruction",
+      "name": "D5.S3.Quantum.Entanglement.FiniteSectorChannelOptimality.channel_kraus_stinespring",
+      "kind": "theorem",
+      "statement_id": "sha256:f578477301c179c8221514cd0d92dbce5aeea609c94c118ce4435497400cbe1b",
+      "line": 53,
+      "signature": "theorem channel_kraus_stinespring : (∀ {a b : Type u} [Fintype a] [DecidableEq a] [Fintype b] [DecidableEq b] (channel : QuantumChannel a b), ∃ K : (b × a) → Matrix b a ℂ, (∑ k, (K k).conjTranspose * K k) = 1 ∧ ∀ rho : Matrix a a ℂ, CStarMatrix.ofMatrix.symm (channel.toCompletelyPositiveMap (CStarMatrix.ofMatrix rho)) = ∑ k, K k * rho * (K k).conjTranspose) ∧ (∀ {a b : Type u} [Fintype a] [DecidableEq a] [Fintype b] [DecidableEq b] (channel : QuantumChannel a b), ∃ V : Matrix ((b × a) × b) a ℂ, V.conjTranspose * V = 1 ∧ ∀ rho : Matrix a a ℂ, partialTraceLeft (V * rho * V.conjTranspose) = CStar",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ContinuousObservables/LaurentLoopFactorization",
+  "declarations": {
+    "D5/S3/ContinuousObservables/LaurentLoopFactorization.haah_factorization": {
+      "module": "D5/S3/ContinuousObservables/LaurentLoopFactorization",
+      "name": "D5.S3.ContinuousObservables.LaurentLoopFactorization.haah_factorization",
+      "kind": "theorem",
+      "statement_id": "sha256:a07b93bd0139be9f4210b274bd361d788d26ccbba926022aa674919874f96daa",
+      "line": 720,
+      "signature": "theorem haah_factorization : (∀ Ps : List M₂, (∀ P ∈ Ps, RankOneProjector P) → InClass Ps.length (Ps.map primitive).prod) ∧ ∀ (n : ℕ) (C : ℤ →₀ M₂), (∀ j : ℤ, (n : ℤ) < |j| ∨ j % 2 ≠ (n : ℤ) % 2 → C j = 0) → (C n ≠ 0 ∨ C (-(n : ℤ)) ≠ 0) → CircleSU (ofCoefficients C) → ∃! r : M₂ × List M₂, Factorization n (ofCoefficients C) r",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

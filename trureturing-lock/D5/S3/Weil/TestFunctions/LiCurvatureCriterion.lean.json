@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/TestFunctions/LiCurvatureCriterion",
+  "declarations": {
+    "D5/S3/Weil/TestFunctions/LiCurvatureCriterion.circle_moment_toeplitz_posSemidef": {
+      "module": "D5/S3/Weil/TestFunctions/LiCurvatureCriterion",
+      "name": "D5.S3.Weil.TestFunctions.LiCurvatureCriterion.circle_moment_toeplitz_posSemidef",
+      "kind": "theorem",
+      "statement_id": "sha256:447b8b89cd708b241111cbd769c3d9548dc21dcafc3b76334a1147fa59044da4",
+      "line": 154,
+      "signature": "theorem circle_moment_toeplitz_posSemidef (mu : Measure Circle) [IsFiniteMeasure mu] (N : Nat) : Matrix.PosSemidef (toeplitzMatrix (circleMoment mu) N)",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    },
+    "D5/S3/Weil/TestFunctions/LiCurvatureCriterion.geometric_energy_second_difference": {
+      "module": "D5/S3/Weil/TestFunctions/LiCurvatureCriterion",
+      "name": "D5.S3.Weil.TestFunctions.LiCurvatureCriterion.geometric_energy_second_difference",
+      "kind": "theorem",
+      "statement_id": "sha256:447b8b89cd708b241111cbd769c3d9548dc21dcafc3b76334a1147fa59044da4",
+      "line": 243,
+      "signature": "theorem geometric_energy_second_difference (z : Circle) (n : Nat) (hn : 1 <= n) : Complex.normSq (geometricPolynomial (n + 1) z) - 2 * Complex.normSq (geometricPolynomial n z) + Complex.normSq (geometricPolynomial (n - 1) z) = 2 * (((z : Complex) ^ n).re)",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

@@ -2,6 +2,15 @@
   "schema": "trureturing-books.lock-module.v1",
   "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",
   "declarations": {
+    "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum": {
+      "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",
+      "name": "D5.S3.Weil.ZeroData.ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum",
+      "kind": "theorem",
+      "statement_id": "sha256:563604f18b7b6b0b20061f480be12cd4392440ddd8f89215134196eb17f9f3e3",
+      "line": 146,
+      "signature": "theorem actual_complex_pairWeight_hasSum : HasSum (fun n : ℕ => (actualData.multiplicity n : ℂ) * (1 / (actualData.zero n * (1 - actualData.zero n)))) (firstLiMass : ℂ)",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    },
     "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_height_gt_ten": {
       "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",
       "name": "D5.S3.Weil.ZeroData.ActualReciprocalSquareBounds.actual_height_gt_ten",

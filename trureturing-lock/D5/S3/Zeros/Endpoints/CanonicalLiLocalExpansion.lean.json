@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion",
+  "declarations": {
+    "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_one": {
+      "module": "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion",
+      "name": "D5.S3.Zeros.Endpoints.CanonicalLiLocalExpansion.canonical_li_one",
+      "kind": "theorem",
+      "statement_id": "sha256:2d6fe9ba77e00d61b8e227b143eb5e25be29f3df02e1e3a5094b9c7a1498406e",
+      "line": 233,
+      "signature": "theorem canonical_li_one : canonicalLiCoefficient 1 = 1 + Real.eulerMascheroniConstant / 2 - Real.log (2 * Real.sqrt Real.pi)",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    },
+    "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_one_pos": {
+      "module": "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion",
+      "name": "D5.S3.Zeros.Endpoints.CanonicalLiLocalExpansion.canonical_li_one_pos",
+      "kind": "theorem",
+      "statement_id": "sha256:2d6fe9ba77e00d61b8e227b143eb5e25be29f3df02e1e3a5094b9c7a1498406e",
+      "line": 243,
+      "signature": "theorem canonical_li_one_pos : 0 < canonicalLiCoefficient 1",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

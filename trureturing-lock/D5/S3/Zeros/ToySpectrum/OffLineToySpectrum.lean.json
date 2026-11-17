@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Zeros/ToySpectrum/OffLineToySpectrum",
+  "declarations": {
+    "D5/S3/Zeros/ToySpectrum/OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum": {
+      "module": "D5/S3/Zeros/ToySpectrum/OffLineToySpectrum",
+      "name": "D5.S3.Zeros.ToySpectrum.OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum",
+      "kind": "theorem",
+      "statement_id": "sha256:edbb06e2e6e6057328ec57dfb532a281167f868cd506c510312dbb22ff281c4c",
+      "line": 149,
+      "signature": "theorem li_positivity_distinguishes_the_off_line_toy_spectrum : Complex.re (∑ rho ∈ toySpectrum, (1 - (1 - 1 / rho) ^ 31)) < 0",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

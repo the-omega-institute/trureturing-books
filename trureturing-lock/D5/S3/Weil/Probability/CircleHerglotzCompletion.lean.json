@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/Probability/CircleHerglotzCompletion",
+  "declarations": {
+    "D5/S3/Weil/Probability/CircleHerglotzCompletion.circle_herglotz_iff": {
+      "module": "D5/S3/Weil/Probability/CircleHerglotzCompletion",
+      "name": "D5.S3.Weil.Probability.CircleHerglotzCompletion.circle_herglotz_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:6d5865bfbd8f27be4c5c626be761a9c868e8813325723afc469a62bf16752186",
+      "line": 133,
+      "signature": "theorem circle_herglotz_iff (c : ℤ → ℂ) (normalized : c 0 = 1) : (∀ N : ℕ, (toeplitzMatrix c N).PosSemidef) ↔ ∃! μ : ProbabilityMeasure Circle, ∀ n : ℤ, circleMoment (μ : Measure Circle) n = c n",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

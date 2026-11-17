@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/Probability/CanonicalLiDiskEquivalence",
+  "declarations": {
+    "D5/S3/Weil/Probability/CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable": {
+      "module": "D5/S3/Weil/Probability/CanonicalLiDiskEquivalence",
+      "name": "D5.S3.Weil.Probability.CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable",
+      "kind": "theorem",
+      "statement_id": "sha256:dfd1a6f914d1e06448f2f288d995000423b715fb129ff23abb6b692c481dc66c",
+      "line": 161,
+      "signature": "theorem rh_iff_canonical_li_disk_summable : RiemannHypothesis ↔ ∀ r : ℝ≥0, r < 1 → Summable (fun n : ℕ => |canonicalLiCoefficient (n + 1)| * (r : ℝ) ^ n)",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

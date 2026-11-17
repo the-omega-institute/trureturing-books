@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree",
+  "declarations": {
+    "D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.canonical_curvature_posSemidef_implies_rh": {
+      "module": "D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree",
+      "name": "D5.S3.Weil.Probability.CanonicalLiCurvatureZeroFree.canonical_curvature_posSemidef_implies_rh",
+      "kind": "theorem",
+      "statement_id": "sha256:f7b0d4dea01e0aba00e8b39361ae38699b4ae5385058ceb5d7690bde72602ecb",
+      "line": 126,
+      "signature": "theorem canonical_curvature_posSemidef_implies_rh (positive : ∀ N : ℕ, (toeplitzMatrix canonicalLiCurvature N).PosSemidef) : RiemannHypothesis",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

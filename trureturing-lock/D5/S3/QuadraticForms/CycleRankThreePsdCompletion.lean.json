@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuadraticForms/CycleRankThreePsdCompletion",
+  "declarations": {
+    "D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff": {
+      "module": "D5/S3/QuadraticForms/CycleRankThreePsdCompletion",
+      "name": "D5.S3.QuadraticForms.CycleRankThreePsdCompletion.cycle_rank_three_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:3d82d7f6ca94a92ff9fe7e8ef4634892d1dfc30bb020babc4e162226697beb34",
+      "line": 581,
+      "signature": "theorem cycle_rank_three_iff {n : ℕ} (hn : 3 ≤ n) (a : Fin n → ℝ) (ha : ∀ i, -1 ≤ a i ∧ a i ≤ 1) : (∃ B : Matrix (Fin n) (Fin n) ℝ, B.PosSemidef ∧ B.rank ≤ 3 ∧ (∀ i, B i i = 1) ∧ ∀ i, B i (finRotate n i) = a i) ↔ ∀ F : Finset (Fin n), Odd F.card → (∑ i ∈ F, arccos (a i)) - (∑ i ∈ Finset.univ \\ F, arccos (a i)) ≤ ((F.card : ℝ) - 1) * π",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

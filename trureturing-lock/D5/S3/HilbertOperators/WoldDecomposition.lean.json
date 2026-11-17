@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/HilbertOperators/WoldDecomposition",
+  "declarations": {
+    "D5/S3/HilbertOperators/WoldDecomposition.exists_wold_decomposition": {
+      "module": "D5/S3/HilbertOperators/WoldDecomposition",
+      "name": "D5.S3.HilbertOperators.WoldDecomposition.exists_wold_decomposition",
+      "kind": "theorem",
+      "statement_id": "sha256:59d23d4220551bee8f22f4dcba2f5c963e4ffeccc38913cad18ffe68b8389e06",
+      "line": 156,
+      "signature": "theorem exists_wold_decomposition (V : H →ₗᵢ[𝕜] H) (x : H) (n : ℕ) : ∃ w : ℕ → H, ∃ y : H, (∀ k, w k ∈ wanderingSub V) ∧ (∀ k ≥ n, w k = 0) ∧ x = (∑ k ∈ Finset.range n, (V ^ k) (w k)) + (V ^ n) y ∧ ‖x‖ ^ 2 = (∑ k ∈ Finset.range n, ‖w k‖ ^ 2) + ‖y‖ ^ 2",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

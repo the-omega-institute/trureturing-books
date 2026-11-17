@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/ZeroData/UnconditionalCanonicalZeroData",
+  "declarations": {
+    "D5/S3/Weil/ZeroData/UnconditionalCanonicalZeroData.zetaZeroData_representation_iff": {
+      "module": "D5/S3/Weil/ZeroData/UnconditionalCanonicalZeroData",
+      "name": "D5.S3.Weil.ZeroData.UnconditionalCanonicalZeroData.zetaZeroData_representation_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:a71a76215cfec9f535c767e38d463bf0078d1f38958dd72b84626f05ee376176",
+      "line": 111,
+      "signature": "theorem zetaZeroData_representation_iff (rho : ℂ) : IsNontrivialZero rho ↔ ∃! n : ℕ, zetaZeroData.zero n = rho",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

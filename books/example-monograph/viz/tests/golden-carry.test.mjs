@@ -232,9 +232,9 @@ await D(() => window.GC_DEBUG.set(20, 35)); await page.keyboard.press('s'); st =
 check('S swaps the pair from the keyboard', st.v1 === 35 && st.v2 === 20);
 await scene('map'); check('the scene chips switch scenes and show the evidence of that scene', (await state()).scene === 'map' && (await D(() => !document.querySelector('.lean[data-scenes="map"]').hidden && document.querySelector('.lean[data-scenes="carry"]').hidden)));
 
-/* ---------- evidence: Lean links at the pinned commit; honest labels ---------- */
+/* ---------- evidence: Lean links at each declaration's evidence commit; honest labels ---------- */
 const links = await D(() => [...document.querySelectorAll('a[data-lean-gid]')].map((a) => [a.dataset.leanGid, a.href]));
-check('every Lean link points at the pinned commit, file and line of trureturing.lock.json', links.length >= 7 && links.every(([gid, href]) => {
+check('every Lean link points at the declaration evidence commit, file and line in the lock', links.length >= 7 && links.every(([gid, href]) => {
   const d = lock.declarations[gid]; return d && d.kind === 'theorem' && href === `https://github.com/${lock.repo}/blob/${d.commit || lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${d.line}`;
 }), JSON.stringify(links.find(([gid, href]) => { const d = lock.declarations[gid]; return !d || href !== `https://github.com/${lock.repo}/blob/${d.commit || lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${d.line}`; }) || ''));
 const cites = new Set(links.map(([g]) => g));

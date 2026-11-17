@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Entanglement/BipartiteSectorDecomposition",
+  "declarations": {
+    "D5/S3/Quantum/Entanglement/BipartiteSectorDecomposition.hermitian_space_finrank": {
+      "module": "D5/S3/Quantum/Entanglement/BipartiteSectorDecomposition",
+      "name": "D5.S3.Quantum.Entanglement.BipartiteSectorDecomposition.hermitian_space_finrank",
+      "kind": "theorem",
+      "statement_id": "sha256:d91fddbb5c9b9831b63bbf0112e5066e47b05a0c3016f153d5a44bbeeec3109e",
+      "line": 133,
+      "signature": "theorem hermitian_space_finrank (d : Nat) : Module.finrank ℝ (HermitianSpace d) = d ^ 2",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

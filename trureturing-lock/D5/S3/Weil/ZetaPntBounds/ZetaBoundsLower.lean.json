@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower",
+  "declarations": {
+    "D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower.norm_zeta_product_ge_one": {
+      "module": "D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower",
+      "name": "norm_zeta_product_ge_one",
+      "kind": "theorem",
+      "statement_id": "sha256:86f1566bd7adbda77779dd9500ccb3eabba9eb8462e5e7d77ee7c3227d8197ad",
+      "line": 132,
+      "signature": "lemma norm_zeta_product_ge_one {x : ℝ} (hx : 0 < x) (y : ℝ) : ‖ζ (1 + x) ^ 3 * ζ (1 + x + I * y) ^ 4 * ζ (1 + x + 2 * I * y)‖ ≥ 1",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

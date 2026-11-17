@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy",
+  "declarations": {
+    "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.flat_exact_iff": {
+      "module": "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy",
+      "name": "D5.S3.Fourier.CharacterSelection.PeriodicGridHolonomy.flat_exact_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f5c02a5aeed735181dccbe971a63911f541b0007b8c21203d1377fa715097bb6",
+      "line": 384,
+      "signature": "theorem flat_exact_iff {M N : ℕ} [NeZero M] [NeZero N] (y : EdgeLabel M N) (hy : Flat y) : (∃ x : Fin M → Fin N → ZMod 2, gradient x = y) ↔ rowHolonomy y 0 = 0 ∧ columnHolonomy y 0 = 0",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    },
+    "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.horizontal_seam_counterexample": {
+      "module": "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy",
+      "name": "D5.S3.Fourier.CharacterSelection.PeriodicGridHolonomy.horizontal_seam_counterexample",
+      "kind": "theorem",
+      "statement_id": "sha256:f5c02a5aeed735181dccbe971a63911f541b0007b8c21203d1377fa715097bb6",
+      "line": 413,
+      "signature": "theorem horizontal_seam_counterexample (M N : ℕ) [NeZero M] [NeZero N] (_hM : 3 ≤ M) (_hN : 3 ≤ N) : Flat (seam (M",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

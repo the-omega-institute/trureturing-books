@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction",
+  "declarations": {
+    "D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction.negative_recurrence_bounds_smallest_eigenvalue": {
+      "module": "D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction",
+      "name": "D5.S3.Weil.TestFunctions.LiCurvatureFiniteReconstruction.negative_recurrence_bounds_smallest_eigenvalue",
+      "kind": "theorem",
+      "statement_id": "sha256:5058f928ee1a991463e61d7a74de40683397cb07940047d296a3709a9beb90c5",
+      "line": 213,
+      "signature": "theorem negative_recurrence_bounds_smallest_eigenvalue (u : Nat → Real) (L : Real) (c : Int → Complex) (h0 : u 0 = 0) (h1 : u 1 = L) (hL : 0 ≤ L) (hc0 : c 0 = 1) (hHerm : ∀ k : Int, c (-k) = star (c k)) (hRec : ∀ n : Nat, 1 ≤ n → u (n + 1) - 2 * u n + u (n - 1) = 2 * L * (c (n : Int)).re) (n : Nat) (hn : 1 ≤ n) (hLpos : 0 < L) (hu : u n < 0) : ∃ hT : Matrix.IsHermitian (fun j k : Fin n => c ((j : Int) - (k : Int))), hT.eigenvalues₀ ⟨n - 1, by simpa using (Nat.sub_lt hn (by decide : 0 < 1))⟩ ≤ u n / ((n : Real) * L) ∧ u n / ((n : Real) * L) < 0",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    },
+    "D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction.recurrence_eq_toeplitz_ones_quadratic": {
+      "module": "D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction",
+      "name": "D5.S3.Weil.TestFunctions.LiCurvatureFiniteReconstruction.recurrence_eq_toeplitz_ones_quadratic",
+      "kind": "theorem",
+      "statement_id": "sha256:5058f928ee1a991463e61d7a74de40683397cb07940047d296a3709a9beb90c5",
+      "line": 160,
+      "signature": "theorem recurrence_eq_toeplitz_ones_quadratic (u : Nat → Real) (L : Real) (c : Int → Complex) (h0 : u 0 = 0) (h1 : u 1 = L) (hL : 0 ≤ L) (hc0 : c 0 = 1) (hHerm : ∀ k : Int, c (-k) = star (c k)) (hRec : ∀ n : Nat, 1 ≤ n → u (n + 1) - 2 * u n + u (n - 1) = 2 * L * (c (n : Int)).re) (n : Nat) (hn : 1 ≤ n) : u n = L * (star (fun _ : Fin n => (1 : Complex)) ⬝ᵥ ((fun j k : Fin n => c ((j : Int) - (k : Int))) *ᵥ (fun _ : Fin n => (1 : Complex)))).re",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/Probability/LiCurvatureProbabilityCompletion",
+  "declarations": {
+    "D5/S3/Weil/Probability/LiCurvatureProbabilityCompletion.li_curvature_criterion_without_herglotz": {
+      "module": "D5/S3/Weil/Probability/LiCurvatureProbabilityCompletion",
+      "name": "D5.S3.Weil.Probability.LiCurvatureProbabilityCompletion.li_curvature_criterion_without_herglotz",
+      "kind": "theorem",
+      "statement_id": "sha256:b5a0e2ca17cef2a62fe390baf6b73c5ae2b90f74dee44d60c6e8a4e837bb20d9",
+      "line": 82,
+      "signature": "theorem li_curvature_criterion_without_herglotz (c : ℤ → ℂ) (L : ℕ → ℝ) (normalized : c 0 = 1) (liCriterion : RiemannHypothesis ↔ ∀ n, 0 ≤ L n) (zeroValue : L 0 = 0) (firstNonnegative : 0 ≤ L 1) (recurrence : ∀ n, 1 ≤ n → L (n + 1) - 2 * L n + L (n - 1) = 2 * L 1 * (c n).re) (rhFourierRepresentation : RiemannHypothesis → ∃ μ : Measure Circle, IsProbabilityMeasure μ ∧ ∀ n, c n = circleMoment μ n) : RiemannHypothesis ↔ ∀ N : ℕ, (toeplitzMatrix c N).PosSemidef",
+      "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3"
+    }
+  }
+}
