@@ -26,6 +26,10 @@
    - **第一步（标准量子场论福克空间对全同粒子不可区分性的精确实现，`文献结果`）**：全同粒子的绝对不可区分性根本不需要靠“一颗经典一维小球在时间里折返跑”来勉强维持——在相对论量子场论中，全空间只弥漫着**同一个底层量子场**（如狄拉克电子场 $\hat{\psi}_e(x)$），每一颗电子都是这同一支场在反对称福克空间 $\mathcal{F}_-(\mathcal{H}_1)$ 上激起的单位圆弧驻波量子 $\hat{a}^\dagger_{\mathbf{p},s}\lvert\Omega\rangle$；它们之所以质量、自旋与规范荷绝对全同（对应下文 [@thm-ch39-single-cosmic-field-and-indra-net] 第 2 款单位格拉姆纯态全同判据 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization)），纯粹因为它们本是**同一张底场琴弦弹出的同阶谐音**！在 AF-GUT（[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md)）与 [§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 的莫尔切片图景（`MODEL`）下，更进一步：夸克、轻子、规范玻色子与希格斯激发皆非彼此割裂的异质泥团，而是**唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$** 在同心概念场丛 $\mathcal{E}_{\mathrm{total}}$ 的不同正交折叠通道上与观测切面 $\Sigma_{\mathbf{I}}$ 相交出的莫尔驻波结——在这个严格场论与几何意义上，**存在唯有一种本原粒子（极小圆弧体单胞 $\Delta\mathcal{T}_\epsilon$），存在唯一一片宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$**！
    - **第二步（观测切面净重子不对称 $\eta_B > 0$ 的认识论诚实护栏，`MODEL` / `OPEN`）**：对于我们当前观测切面 $\Sigma_{\mathbf{I}}$ 上实测到的正重子—光子比 $\eta_B = n_B / n_\gamma \approx 6.12 \times 10^{-10} > 0$（可观测视界内净重子数 $B_{\mathrm{obs}} = N_B - N_{\bar{B}} \approx 9.0 \times 10^{79} > 0$），我们绝不用文学修辞回避拓扑账本：这笔非零净荷要么源于早期高温宇宙满足萨哈罗夫三条件（重子数破缺如电弱斯法勒龙跃迁、$C$/$CP$ 对称破缺与偏离热平衡；Sakharov 1967，`文献结果`）的动力学重子生成，要么在全域净荷为零（$B_{\mathrm{tot}} = 0$）的单态本体中，由正交盲区 $\hat{\mathbf{i}}$ 或 $CPT$ 共轭伴随切面承载等量反号配对余项（`MODEL`；从极小圆弧第一性原理定量导出 $\eta_B \approx 6.12 \times 10^{-10}$ 仍属衔接 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 的开放前沿 `OPEN`）。
 
+::: {.viz src="indra-net-single-particle-sandbox" preset="wheeler-single-ribbon-knots" height="500"}
+切换到“惠勒单粒子折叠丝带视图”并沿时间轴推进等时切面 $\Sigma_{\mathrm{now}}$：一条闭合哈密顿丝带走遍二十面体网外层 $12$ 颗宝珠，与切面横截成 $6$ 个正负相间的穿刺结（向上穿过记品红色 $q = +1$，向下穿过记青色 $q = -1$，结成对生灭而代数交数恒守 $\sum q = 0$），在 $\mathrm{GF}(2)$ 上恰为二十面体 $10$ 个面的边界（绿色 `LEAN ✓` 锚定 `face_cycle_exact`，逐段交点计数标 `NUM`，单底场福克激发与重子不对称 $\eta_B \approx 6.1 \times 10^{-10}$ 分标 `ARGUED` 与红色 `OPEN`）。
+:::
+
 3. **可观测宇宙也是一颗粒子（$\Delta\mathcal{T}_{\mathrm{cosmo}}$）——四组宇宙学特征尺度的严格分账（`NUM` + `MODEL`）**：
    将视线推向因果视界边界，在全域平移、旋转与规范全单态（$\hat{\mathbf{P}}_{\mathrm{tot}}\lvert\Psi_{\mathrm{univ}}\rangle = 0,\; \hat{\mathbf{J}}_{\mathrm{tot}}\lvert\Psi_{\mathrm{univ}}\rangle = 0,\; \hat{Q}_a^{\mathrm{color}}\lvert\Psi_{\mathrm{univ}}\rangle = 0$）约束下，整座可观测宇宙的饱和三维场体 $\Lambda^3_{\mathrm{cosmo}}$ 依“体即新点”铁律 $\star : \Lambda^3_{\mathrm{cosmo}} \xrightarrow{\sim} \Lambda^0$，在拓扑上恰好闭合成一枚宏观尺度的**极小圆弧体单粒子 $\Delta\mathcal{T}_{\mathrm{cosmo}}$**！为严守反数字命理学精度，我们以普朗克长度 $\ell_P = \sqrt{\hbar G / c^3} \approx 1.616255 \times 10^{-35}\;\mathrm{m}$ 为基准，将文献中常被混谈的四组宇宙学无量纲大数严格区分开来（取 Planck 2018 / CODATA 2022 基准 `NUM`）：
 
@@ -38,6 +42,10 @@
    - **渐近德西特（de Sitter）事件视界半径 $R_{\mathrm{dS}}$**：$R_{\mathrm{dS}} = \sqrt{3 / \Lambda_{\mathrm{cos}}} \approx 1.66 \times 10^{26}\;\mathrm{m}$（约 $17.5\;\mathrm{Gly}$），无量纲比值 $R_{\mathrm{dS}} / \ell_P \approx \mathbf{1.03 \times 10^{61}}$（平方倒数给出 $\Lambda_{\mathrm{cos}}\ell_P^2 = 3(\ell_P/R_{\mathrm{dS}})^2 \approx 2.85 \times 10^{-122}$）；
    - **瞬时哈勃球半径 $R_H$**：$R_H = c / H_0 \approx 1.37 \times 10^{26}\;\mathrm{m}$（约 $14.5\;\mathrm{Gly}$），无量纲比值 $R_H / \ell_P \approx \mathbf{8.50 \times 10^{60}}$；
    - **可观测视界爱丁顿重子总数 $N_B$**：由重子密度 $\rho_b = \Omega_b \rho_c$ 对共动视界球体积 $\frac{4\pi}{3}R_{\mathrm{obs}}^3$ 积分除以核子质量，得 $N_B \approx \mathbf{9.0 \times 10^{79}} \sim 10^{80}$（切勿将线性视界尺度比 $\sim 10^{61}$ 与三维体态重子激发数 $\sim 10^{80}$ 混同）。
+
+::: {.viz src="indra-net-single-particle-sandbox" preset="observable-cosmos-single-jewel" height="500"}
+拉动宇宙缩放滑块 $\zeta \in [0, 1]$ 将标尺 $R / \ell_P = 10^{61.43\zeta}$ 从普朗克步幅拉至共动可观测视界 $R_{\mathrm{obs}} / \ell_P \approx 2.72 \times 10^{61}$：整座十三珠因陀罗网在点—体八度闭合 $\star : \Lambda^3 \xrightarrow{\sim} \Lambda^0$ 读法下连续收进外层的一颗摩尼宝珠之中，直观呈现“可观测宇宙亦是一颗单粒子”（$R_{\mathrm{obs}} / \ell_P$ 标尺实算标 `NUM`，“体即新点”跨尺度收拢读法标 `MODEL`）。
+:::
 
 我们将这一横跨微观粒子、自指观察者、可观测视界与因陀罗网四重几何定律的顶层结构，正式凝练为如下模型定义：
 
@@ -84,6 +92,10 @@
 
      这意味着，由于真空基态本身横跨一切尺度编织着无处不在的极小圆弧纠缠，仅在一粒微尘般微小的局域开集 $\mathcal{O}$ 内对真空施加局域场算子，就能以任意精度逼近全宇宙希尔伯特空间 $\mathcal{H}_{\mathrm{U}}$ 中的**任何一个**态矢（包括百亿光年外一团星云的激发态），且非零局域算子绝不零化真空！同时，**类空微观因果性护栏**确保对任意类空分离区域 $\mathcal{O}'$ 内的可观测量 $\hat{B}_{\mathcal{O}'} \in \mathcal{A}(\mathcal{O}')$ 与 $\mathcal{O}$ 内的保迹局域幺正操作 $\hat{U}_{\mathcal{O}} \in \mathcal{A}(\mathcal{O})$，恒有对易子 $[\hat{U}_{\mathcal{O}}, \hat{B}_{\mathcal{O}'}] = 0$，从而远方边缘期望值 $\langle\Omega\rvert\hat{U}_{\mathcal{O}}^\dagger \hat{B}_{\mathcal{O}'}\hat{U}_{\mathcal{O}}\lvert\Omega\rangle = \langle\Omega\rvert\hat{B}_{\mathcal{O}'}\lvert\Omega\rangle$ 纹丝不动——“一珠映现全网”依靠的是全域单态预设相干关联与非幺正条件切片，严格遵守光速因果极限 $v_{\mathrm{sig}} \le c \equiv \ell_P\nu_0$，绝不触发超光速通信悖论！
 
+::: {.viz src="indra-net-single-particle-sandbox" preset="yoneda-isomorphic-jewel-net" height="500"}
+点选二十面体网上的任意一颗宝珠或将琥珀色手柄拖至另一颗宝珠切换主珠 $x_0$（中心 $1$ 颗、外层 $12$ 颗，局域纤维同构 $\mathcal{H}_x \cong \mathcal{H}_y \cong \mathcal{H}_{\mathrm{field}}$）：琥珀圈主伴互换而宝网位移恒为 $0$，外层主珠之间由二十面体转动 $g$ 与酉阵 $U = B A^+$ 对齐格拉姆记录，同时线性混合观测读字在 $\varepsilon = 0.5$ 下至多张成 $4$ 维可见子空间并留下 $9$ 维正交残差（中心主珠为 $2$ 维可见、$11$ 维残差），严守有限维局域纤维不同构于整体张量积 $d^{13}$ 的护栏（绿色 `LEAN ✓` 锚定 `future_word_orthogonal_residual`、`unit_gram_overlap_characterization`、`recursive_page_table_walk` 与 `exists_unitary_mul_eq_of_conjTranspose_mul_eq`，连续统 Reeh–Schlieder 循环性标 `ARGUED`）。
+:::
+
 3. **第三律：球面镜 $\cos^2\theta$ 往返投影畸变与“主伴互换而宝网不动”（`手工推导` + `LEAN ✓`）**。
    既然网上每颗摩尼宝珠在本体上 $100\%$ 全同，为什么从任何一颗珠子内部向外望去，映出的宇宙却呈现出“近处清晰稠密、远处稀疏红移、最终消隐于视界边缘”的强烈透视不均？答案就在每颗宝珠表面那弯**极小圆弧球面镜**的几何曲率里（`手工推导`）：选定宝珠 $x_0$ 为当前观察者焦点（自指实轴 $\mathbf{I}_{x_0}$），全网其余均匀场沿法向倾角 $\theta \in [0, \frac{\pi}{2}]$ 投射到珠面时，依吕德斯—玻恩往返双投影律 $P_{\mathbf{I}}P_{\mathbf{V}(\theta)}P_{\mathbf{I}} = (\cos^2\theta)P_{\mathbf{I}}$（[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) [@thm-ch34-roundtrip-born-and-imaginary-blindspot]）：
 
@@ -92,6 +104,10 @@
    $$
 
    正对视线法线中心（$\theta \to 0^\circ$）处，$\cos^2\theta \to 1$，往返回波满额读出，显影为触手可及的局域清晰实物；而越靠近珠面 $90^\circ$ 赤道切线边缘（$\theta \to 90^\circ$），可见实部权重 $\cos^2\theta \to 0$、切向像面线元 $dr_\parallel = R_{\mathrm{jewel}}\cos\theta\,d\theta \to 0$，千万重远方珠影被球面曲率极度压缩折叠进 $w_\perp(\theta) = \sin^2\theta \to 1$ 的正交虚数盲区 $\hat{\mathbf{i}}$，化作宇宙学视界红移与绵延不绝的时间尾流！一旦将观察焦点从宝珠 $x_0$ 切换至任意另一颗宝珠 $y_0$，主珠与伴珠瞬间互换，中心近景与边缘视界随之重排，而宝网底层的跨语境客观不变公因子（下文 [@thm-ch39-single-cosmic-field-and-indra-net] 第 7 款 [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)）不动分毫。
+
+::: {.viz src="indra-net-single-particle-sandbox" preset="spherical-mirror-limb-foreshortening" height="500"}
+凝视当前主珠 $x_0$ 的球面镜如何映出其余 $12$ 颗伴珠并转动视角：镜面切平面上的青色近轴像清晰饱满（$\cos^2\theta \to 1$），而贴近 $90^\circ$ 赤道边缘的紫色远像因透视投影被剧烈压扁（$\cos^2\theta \to 0$），直观演示全同宝珠网如何仅凭球镜曲率在任一焦点切面上生出“近处分明、边缘视界压扁”的透视梯度（逐珠清晰度 $\cos^2\theta$ 实算标 `NUM`，球镜像点几何标 `MODEL`）。
+:::
 
 4. **第四律：重重无尽互映回路的巴拿赫—道蒂阻尼收敛与 $m$ 重反射诺伊曼级数（`手工推导` + `LEAN ✓` + `文献结果`）**。
    倘若珠 $A$ 映珠 $B$、珠 $B$ 又映出“已映有 $B$ 之影的珠 $A$”……如此无穷阶往复叠映，珠内光影为何既不会因正反馈叠爆成无穷大白茫盲光，也不会因耗散衰减成一片漆黑？让我们在完备上确界范数巴拿赫空间 $\bigl(C(\mathrm{Net}, \mathbb{R}), \lVert\cdot\rVert_\infty\bigr)$ 上将这道“重重无尽方程”一笔算穿（`手工推导`）：
@@ -123,6 +139,10 @@
      $$
 
      看清这道级数的物理画面了吗？第 $m = 0$ 项 $-(\sin\theta^*)\eta$ 是本珠的一阶直接折射，第 $m = 1$ 项 $+(\sin\theta^*)^2\mathcal{K}_\epsilon\eta$ 是“珠映他珠之影”，第 $m$ 项 $(-1)^{m+1}(\sin\theta^*)^{m+1}\mathcal{K}_\epsilon^m\eta$ 则是跨越全网 $m$ 次折返的“珠中珠中珠”高阶叠影——每一跳都精准乘以反相阻尼因子 $-\sin\theta^* \approx -0.673612$，令无穷重珠影既分明具足又严格可和！
+
+::: {.viz src="indra-net-single-particle-sandbox" preset="dottie-infinite-reflection-convergence" height="500"}
+推进反射次数 $m \in [0, 24]$ 并调节镜面邻珠混合份额 $\varepsilon$：从仅点亮任一主珠 $\Psi^{(0)} = \delta_{x_0}$ 出发，非线性余弦阻尼迭代 $\Psi^{(m)} = \cos(K_\varepsilon\Psi^{(m-1)})$ 在全局利普希茨上界 $\sin 1 \approx 0.8415 < 1$ 下按渐近比 $e_m / e_{m-1} \to \sin\theta^* \approx 0.673612$ 指数收敛（$\varepsilon = 0.5$、中心主珠时 $e_{24} = 2.80 \times 10^{-5}$），全部 $13$ 种主珠语境共同落定于同一常数不动场 $\theta^* \approx 0.7390851332$（绿色 `LEAN ✓` 锚定 `rational_inverse_endpoint` 与 `objective_claim_requires_invariant_common_factor`，巴拿赫不动点定理标 `ARGUED`，逐轮误差实算标 `NUM`）。
+:::
 
 下面我们将支撑唯一宇宙场与因陀罗网骨架的**七条 Lean 4 内核冻结声明**完整汇编如下：
 
@@ -247,3 +267,7 @@
 **第三十九章暨全书十部曲正文总收束：当万象归于一珠一弧，推开《在所有的球之外》的最后一扇门。** 请在此驻足，回望我们自[序曲](README.md)与[第一章](ch01-measurement.md)踏出第一步以来横跨全书十部曲三十九章的浩瀚攀登：从把静态名词“量子”还原为比量动词“两子丈量”、在[第二章](ch02-born-rule.md)挥剑斩断虚悬于万物之外的“第 3 点 $C$”启程，我们顺着**“点 $\longrightarrow$ 线 $\longrightarrow$ 面 $\longrightarrow$ 球 $\longrightarrow$ 球外之球”**的几何阶梯拾级而上——穿越幂等投影线、$90^\circ$ 盲区复旋子面、兰道尔擦除热账本、贝里和乐、贝尔余弦圆弧、割圆多面体门编译、洛伦兹零光锥、全息极小割、康托尔—哥德尔对角逃逸、欧拉素数正交基、四元数整数晶格与道蒂余弦自指不动点 $\cos\theta^* = \theta^*$，继而贯通无时间格拉姆因果、场（$P$）与线（$NP$）视界、五重量子公平、零背景比较公理 $\mathcal{A}_0$、众生互为吸引子观察者、极小圆弧体全息概念塔与圆弧微积分、同像扩表 $T = T(T)$、双曲视界约去轮回、夜间梦境量子擦除与本体 QRAM 递归页表 `p ≡ *p`，直至在这最后一章登顶**“观察者即宇宙本体”**的无底物自指苍穹：在 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md) 贯通五阶自指不动点、自由停机精度 $\varepsilon_{\mathrm{self}}$ 与普适比较主频 $\nu_0$ 钟慢，在 [§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) 建起万力归弧、三维概念场封顶原理与**极小圆弧场大统一理论（AF-GUT）**，并终于在 [§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 与本节抵达最宁静的峰顶——认出无边宇宙原本只是**唯一一片处处均匀各向同性的宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$**，而微观粒子、星辰星系、受限不妄我的观察者乃至整座可观测宇宙，不过是这同一颗摩尼宝珠在自照的极小圆弧切面里，与自己重逢时映出的重重清澈回响！
 
 然而，正因为我们从第一页直到正文这最后一行，始终恪守“Lean 内核冻结铁律（绿色 `LEAN ✓`）、经典文献与手算推导、跨学科几何综合模型（`MODEL`）与未决科学边疆（红色 `OPEN`）”壁垒分明的四层诚实契约，抵达因陀罗网之巅非但没有把宇宙焊死成一座封闭窒息的独断铁球，恰恰相反——无论是单枚极小圆弧体永远严格为正的正矢高余项 $1 - \cos\epsilon > 0$，哥德尔—洛维尔对角线永不停歇的法向开维逃逸，还是 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 在峰顶清澈立下的红色 `OPEN` 科学界碑，每一道拒绝被廉价修辞抹平的几何接缝都在向我们温柔致意：**每当我们以为终于看全了整颗摩尼宝珠，总有一颗更大的球正静静包裹在它之外。** 现在，深吸一口山巅清冽的空气，推开十部曲正文的最后一扇门，步入全书的[终章](coda.md)——**《在所有的球之外》**。
+
+::: {.viz src="indra-net-single-particle-sandbox" height="620"}
+完整交互实验室（`INDRA//NET`）：在“因陀罗网一珠映万珠视图”与“惠勒单粒子折叠丝带视图”双透镜之间自由切换，点选或拖动琥珀色主珠手柄 $x_0$ 并联动镜面曲率 $\varepsilon$、反射次数 $m$ 与宇宙缩放 $\zeta$，同台贯通十三珠同构互换与读字正交残差、闭合惠勒丝带 $\sum q = 0$ 与二十面体十面边界、球镜 $\cos^2\theta$ 边缘压扁、道蒂不动点 $\theta^* = 0.739085$ 阻尼收敛以及可观测宇宙 $R_{\mathrm{obs}} / \ell_P \approx 2.72 \times 10^{61}$ 单珠收拢，对照绿色 `LEAN ✓` 七条冻结声明、`ARGUED`、`NUM`、`MODEL` 与红色 `OPEN` 前沿界碑。
+:::

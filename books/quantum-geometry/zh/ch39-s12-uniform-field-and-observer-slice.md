@@ -39,6 +39,10 @@
    这一反直觉的实相，在实验室的**离轴光学全息干板**（Gabor 1948；Leith & Upatnieks 1962，见 [@rem-ch39-haar-hologram-page-wootters-moire-literature] 第 2 款，`文献结果`）上有着极佳的入门阶梯，同时又比经典全息更深一层：一张记录了整座山川星辰的光学全息底片，山川每一点发出的球面波都铺满了底片上的每一块宏观区域——即便把底片敲碎成十块小碎片，每一小块依然能独立重现整座山川的全景，底片上根本不存在“左边堆着一座山的银盐团块、右边聚着一颗星的物质疙瘩”；唯有当你打入一束特定倾角与波长的参考激光（对应观察者的自指实轴 $\mathbf{I}$）去照射底片时，凹凸起伏的三维山川才瞬间在观测切面上显影出来！
    但这里必须补上一刀**比经典光学更纯粹的量子精化**：经典卤化银全息干板在曝光时毕竟预先引入了一束外部参考光，因此在亚波长显微镜下仍冻结着明暗交替的微观干涉条纹 $\lvert E_{\mathrm{obj}}(\mathbf{r}) + E_{\mathrm{ref}}(\mathbf{r})\rvert^2$，只是宏观光度计平滑后看似均匀；而量子哈尔全单态 $\lvert\Psi_{\mathrm{univ}}\rangle$ 则彻底砍掉了任何“曝光前预设的外部第 3 点参考光”——哪怕把显微镜推到单个极小圆弧格点 $x$ 的极限分辨率，其单点约化密度矩阵依然**字面恒等于毫无明暗条纹的 $\frac{1}{D}\mathbf{1}_{\mathcal{H}_x}$**！全部山川星辰的相位浮雕纯粹收纳在跨点纠缠张量中，唯有嵌在网内的观察者举起自己的条件锚点 $\lvert\mathbf{I}_{\mathrm{obs}}\rangle$ 时，第一道干涉条纹才在切面上诞生。
 
+::: {.viz src="uniform-field-observer-slice-sandbox" preset="isotropic-singlet-ontology" height="500"}
+检视 $5 \times 5 \times 5 = 125$ 枚银白色晶格节点构成的均匀本体海：每枚格点各与观察者寄存器中的一个比特配成贝尔纯态对 $(\lvert 00\rangle + \lvert 11\rangle)/\sqrt{2}$，整体纯态冯·诺依曼熵严格为零（$S(\Psi) = 0$，区别于同边缘热积态 $\bigotimes \frac{1}{2}\mathbf{1}$ 的高熵 $125\ln 2$），而对另一半求偏迹后每枚格点都落回同一个 $\frac{1}{2}\mathbf{1}$（$\Tr\rho = 1,\; \lVert\nabla\rho\rVert = 0$），在“本体全向均匀实相”透镜下任意切面均只读出平坦无纹的 $\frac{1}{2}$（绿色 `LEAN ✓` 锚定 `bell_pure_state_has_maximally_mixed_marginal`、`local_marginal_correlation_blind_spot` 与 `context_parameters_can_select_distinct_fixed_points`，双透镜本体读法标 `MODEL`，逐点偏迹与熵读数标 `NUM`）。
+:::
+
 我们将上述“均匀各向同性三维场本体、佩奇—伍特斯条件观测切面与多场莫尔超晶格拍频”三层核心结构正式确立为本节模型定义：
 
 ::: {.definition #def-ch39-uniform-field-and-moire-slice title="均匀各向同性三维场本体、佩奇—伍特斯条件观测切面与莫尔半相位拍频（MODEL）"}
@@ -182,6 +186,10 @@
    - **莫尔相长峰（$\cos^2\Delta\Phi_{\mathbf{I}} \to 1$，即 $\Delta\Phi_{\mathbf{I}} \in \pi\mathbb{Z}$）**：多支三维概念场的合成相位恰好与观察者自指实轴 $\mathbf{I}$ 同相锁死，往返双投影读出满额实部权重，在微观切面上显影为定域化的“实粒子”与“原子核”，在宏观切面上结网为“星系团与宇宙丝状长城”；
    - **莫尔相消谷（$\cos^2\Delta\Phi_{\mathbf{I}} \to 0$，即 $\Delta\Phi_{\mathbf{I}} \in \frac{\pi}{2} + \pi\mathbb{Z}$）**：该空间节点处的本体总场强**依然分毫不减地等于 $\frac{1}{D}\mathbf{1}$**，只是多场合成相位恰好转入了垂直于观察者切面的 **$90^\circ$ 正交虚盲区 $\hat{\mathbf{i}}$**（[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)），对当前观察者的实轴往返投影严格归零，于是在切面上显影为看似空旷死寂的“星际真空”与“巨洞（cosmic voids）”！
 
+::: {.viz src="uniform-field-observer-slice-sandbox" preset="tilted-slice-moire-emergence" height="500"}
+沿圆弧拖动切面法向顶端的琥珀色手柄调节观察者晶格相对本体晶格的转角 $\theta_{\mathrm{tilt}}$（角平分切面倾斜 $\theta/2$，$\lvert\Delta\mathbf{k}\rvert = \frac{4\pi}{a}\sin(\theta/2)$）：在“观察者切面透视显影”透镜下，两套均匀半角旋量的玻恩配对 $I_{\mathrm{slice}} = \cos^2\Delta\Phi = \frac{1 + \cos(\Delta\mathbf{k}\cdot\mathbf{x} - \varphi)}{2}$（$I_{\mathrm{slice}} + I_\perp = 1$）显影出青色相长亮峰（$\to 1$）与紫色正交盲谷（$\to 0$），莫尔周期 $L_{\mathrm{M}} = \frac{a}{2\sin(\theta/2)}$ 在 $\theta = 36^\circ$ 处给出 $1.618\,a$、在第一魔角 $\theta = 1.05^\circ$ 处放大至 $54.568\,a$（绿色 `LEAN ✓` 锚定 `rank_one_born_pairing_weight`、`local_marginal_correlation_blind_spot` 与 `context_parameters_can_select_distinct_fixed_points`，双层莫尔文献标 `ARGUED`，逐网格点旋量内积标 `NUM`，角平分切面读法标 `MODEL`）。
+:::
+
 3. **“运动”并非底物搬家，而是观测切面的相位扫掠——兼立相对论群速度因果护栏（`手工推导` + `MODEL`）**。
    在古典实体观里，一颗电子从 $A$ 点飞往 $B$ 点，意味着一团名叫“物质”的砖块穿过空无一物的走廊搬家到了另一处。而在“点点叠满全同三维场”的本体图景（`MODEL`）下，$A$ 点与 $B$ 点本就具足完全相同的三维概念场总和——**底层格点根本不需要发生半毫位移（$\Delta\mathbf{x}_{\mathrm{site}} \equiv \mathbf{0}$），没有任何实体底物需要在空间里搬运**！当观察者的观测切面沿着正交时间盲轴 $\hat{\mathbf{i}}$ 以角速率 $\omega_{\mathrm{sweep}}$ 做连续极小圆弧旋转（对应 [§38.1](ch38-s01-static-qram.md) 的静态本体 QRAM 指针步进 `ptr++`）时，等相面 $\Delta\mathbf{k}\cdot\mathbf{x} - \omega_{\mathrm{sweep}}t = 2\pi m$ 在切面上以莫尔扫掠速度平滑滑移（`手工推导`）：
 
@@ -197,6 +205,10 @@
    $$
 
    更妙的是，这恰恰一语道破了 1924 年德布罗意（de Broglie）物质波相速度 $v_{\mathrm{ph}} = c^2/v > c$ 的真实几何起源（[第十七章 §17.1](ch17-lorentz-geometry.md)）：在粒子静止系中全空间均匀同步振荡的内部时钟 $e^{-i\omega_0 t'}$，一旦被以速度 $v < c$ 运动的观察者用倾斜的同时性超平面 $t' = \gamma(t - vx/c^2)$ 斜切一刀，切口上立刻浮现出相速度为 $v_{\mathrm{ph}} = c^2/v$ 的空间行波，而受因果律约束的粒子包络群速度恰为 $v_g = v < c$！
+
+::: {.viz src="uniform-field-observer-slice-sandbox" preset="phase-sweep-motionless-flow" height="500"}
+拨动扫相滑块 $\varphi_{\mathrm{sweep}} \in [0^\circ, 360^\circ]$ 或播放时间轴：切面上的青紫莫尔条纹沿 $\Delta\mathbf{k}$ 平滑滑移整整一个超晶格周期 $L_{\mathrm{M}}$（图案扫掠速度 $v_{\mathrm{M}} = \omega / \lvert\Delta\mathbf{k}\rvert$），而 $125$ 枚银白色本体格点的空间位移读数恒为 $\lVert\Delta\mathbf{x}\rVert = 0$，直观呈现“无底物搬运的相位显影流动”且不违背波包群速度上限 $v_g \le c$（绿色 `LEAN ✓` 锚定 `rank_one_born_pairing_weight`，条纹移动与零格点位移实算标 `NUM`，扫相无信令读法标 `MODEL`）。
+:::
 
 我们将本节在紧群积分、全息光学、关系量子时间、凝聚态莫尔超晶格与现代观测宇宙学中对照援引的五组外部经典文献边界集中归档如下：
 
@@ -233,6 +245,10 @@
 
    自动按幂律衰减（例如三维短程独立晶胞下按 $(R/\xi)^{-3}$ 衰减，标度不变哈里森—泽尔多维奇谱 $P(k) \propto k$ 下按 $R^{-4}$ 衰减），自然显露出宇宙绝对均匀的本底底色；而有限自指停机精度 $\varepsilon_{\mathrm{self}} > 0$（[§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md)）则为视界窗口无法压至绝对零涨落的微弱孔径残差提供了定性几何机制。与此同时，我们严守科学诚实边界：定性的“背景本自均匀 + 大孔径均化”尚不足以单独替代暴胀在定量微扰谱上的具体预言——如何不借外加暴胀子势而从 $\mathcal{W}_M$ 与 $\varepsilon_{\mathrm{self}}$ 定量算出普朗克卫星实测标量幅值 $A_s \approx 2.10 \times 10^{-9}$（$\Delta T/T \approx 1.1 \times 10^{-5}$）、微红谱指数 $n_s = 0.9649 \pm 0.0042$ 以及超视界同步声学相位锁定的第一峰位置 $\ell_1 \approx 220$，明确列为下文 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 第 1 款（`OPEN`）。
 
+::: {.viz src="uniform-field-observer-slice-sandbox" preset="horizon-aperture-homogenization" height="500"}
+将孔径滑块 $W_{\mathrm{aperture}}$ 沿 $\Delta\mathbf{k}$ 从 $1$ 格放大至 $20$ 格：在 $\theta = 36^\circ$ 的无理相位步幅 $\alpha = 2\sin(\theta/2) = \frac{\sqrt{5}-1}{2}$ 下，孔径内连续格点的算术平均依外尔—哈尔遍历律趋向均匀本底 $\frac{1}{2}$，切面衬度 $\lvert D_W\rvert = \bigl\lvert\frac{\sin(W\pi\alpha)}{W\sin(\pi\alpha)}\bigr\rvert$ 在衰减包络 $\frac{1}{W\sin(\pi\alpha)}$ 之下于 $W = 20$ 时压低至 $0.0486$（绿色 `LEAN ✓` 锚定 `continuous_average_tendsto_haar`，狄利克雷核衬度包络实算标 `NUM`，普朗克微扰谱与声学峰定量导出在右栏标红色 `OPEN`）。
+:::
+
 2. **$10^{120}$ 倍真空零点能灾变的协变消解：为什么仅有空间 $\nabla_i\rho_{\mathrm{ont}} = 0$ 还不够，而必须采用协变无迹／单模爱因斯坦耦合？（`手工推导` + `文献结果` + `MODEL`）**
    量子场论算出“真空每一点都叠满了普朗克能标密度的零点振荡”，在本书图景下非但不是算错了，反而道出了“点点 $100\%$ 饱和叠满三维场”的本体实情！但这里有一道**极易滑脚的广义相对论协变性陷阱**，必须当场点破（`手工推导`）：在标准爱因斯坦场方程 $R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$ 中，**仅仅空间梯度为零（$\nabla_i\rho_{\mathrm{ont}} = 0$）并不能阻止均匀背景产生引力**——因为洛伦兹不变的本体饱和能动张量具有纯度规比例形式 $T_{\mu\nu}^{\mathrm{ont}} = -\rho_{\mathrm{ont}}\,g_{\mu\nu}$，一旦原封不动代入标准弗里德曼方程 $H^2 = \frac{8\pi G}{3c^2}\rho_{\mathrm{ont}}$，普朗克密度 $u_P = c^7/(\hbar G^2) \approx 4.633 \times 10^{113}\;\mathrm{J/m^3}$ 依然会在普朗克时间 $t_P \sim 10^{-43}\;\mathrm{s}$ 内把时空撕裂或压塌！
    那么，比较公理 $\mathcal{A}_0$（“唯有两子之间的相对差异具有物理可观测效应，全域一致的单位阵平移恒等归零”）在 $3+1$ 维洛伦兹张量几何中究竟如何严格表达？答案正是爱因斯坦（1919）、温伯格（Weinberg 1989）与昂鲁（Unruh 1989）所研究的**协变无迹／单模爱因斯坦场方程（Trace-Free / Unimodular Einstein Equations）**（见 [@rem-ch39-haar-hologram-page-wootters-moire-literature] 第 5 款，`文献结果` + `MODEL`）：时空曲率只耦合于能动张量扣除四维迹均值后的**协变比较差分部**：
@@ -263,6 +279,10 @@
    $$
 
    从而实打实地压低周围空间节点的固有时帧率 $d\tau/dt = \sqrt{1 - \eta_{\mathrm{info}}(r)}$，在我们的可见空间切面上投下无需任何电磁媒介的引力钟慢折射与弱引力透镜势阱！这为“遍布星系晕却始终抓不到电磁真身的暗物质”提供了一幅极度简洁的零新规范群几何候选身份（`MODEL`）。同时，要使这一几何候选真正晋升为完备天体物理理论，还必须正面通过三道定量大考——证明正交切面凝聚态在宇宙膨胀中表现为冷、无压、无碰撞流体（状态方程 $w_{\mathrm{DM}} \approx 0$，自相互作用截面 $\sigma_{\mathrm{DM}}/m \lesssim 1\;\mathrm{cm^2/g}$），定量导出暗物质与重子丰度比 $\Omega_c / \Omega_b \approx 5.364$ 及微波背景第三声学峰高度比，并重现**子弹星系团（`1E 0657-558`，Clowe et al. 2006）**对撞后热重子气体 X 射线峰与弱引力透镜质量中心高达 $8\sigma$ 的无碰撞空间分离（见 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 第 3 款，`OPEN`）。
+
+::: {.viz src="uniform-field-observer-slice-sandbox" preset="orthogonal-dark-sector-clock-load" height="500"}
+观察垂直立于观测切面的品红色正交暗环与共享时钟预算读数：在切面记录基下其布洛赫矢量与记录轴成 $90^\circ$（$\lvert +\rangle\langle +\rvert$），标准基捏合留下的对角质量 $\frac{1}{2}$ 与剥离的副对角相干质量 $\frac{1}{2}$ 勾股相加为 $1$，令切面电磁衬度恒为 $I_{\mathrm{EM}}(90^\circ) = \cos^2 90^\circ = 0$；但调高暗区负载 $\eta_{\mathrm{dark}}$ 仍通过共享主频压低固有时流逝率 $d\tau/dt = \sqrt{1 - \eta_{\mathrm{slice}}^2 - \eta_{\mathrm{dark}}^2}$（$\eta_{\mathrm{dark}} = 0.40,\; \eta_{\mathrm{slice}} = 0.30$ 时 $d\tau/dt = 0.8660$；绿色 `LEAN ✓` 锚定 `pinching_hilbert_schmidt_pythagorean`，子弹星系团文献标 `ARGUED`，钟预算示意标 `MODEL`，冷无碰撞流体与丰度比标红色 `OPEN`）。
+:::
 
 下面我们在四联定量算例中，将自旋单态条件投影与捏合相干表、跨扭角莫尔超晶格放大表、单模无迹真空能抵消与残余暗能量标度、以及孔径均化与正交切面时钟分流逐位复核至小数点后六位：
 
@@ -319,3 +339,7 @@
 ---
 
 至此，宇宙从未在某处偏心地堆满黄金而在另一处留下荒芜——每一粒微尘所在之处都平权、饱满、毫无厚薄偏私地叠放着整座宇宙的全部三维概念场；所谓的星辰聚散、粒子奔流与虚空明暗，不过是受限而不妄我的观察者举着自己那把倾斜的尺子，在绝对均匀的无垠相干海里一帧帧划过的清澈刀痕。然而，顺着这一刀继续追问到底，最后一道看似残留在“均匀本体场”与“不均匀观测切面”之间的主客缝隙已然呼之欲出：**既然本章的总命题早已指明“观察者本身就是宇宙本体”，那把切开相干海的观测切面又怎么可能是从宇宙外面伸进来的一把异质钢刀？** 如果观察者自身就是宇宙本体场的一次局部自指闭合，那么切面不过是单一宇宙场向内折叠自照时翘起的一弯极小圆弧！让我们紧接着步入第三十九章暨全书十部曲正文的终极峰顶 [§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)，见证基本粒子、自指观察者与九百三十亿光年可观测宇宙如何在唯一宇宙场（$\mathbf{\Phi}_{\mathrm{U}}$）中坍缩为同一颗闭合单粒子，织就一珠映万珠、重重无尽的**帝释天因陀罗网**。
+
+::: {.viz src="uniform-field-observer-slice-sandbox" height="620"}
+完整交互实验室（`UNIFORM//SLICE`）：在“观察者切面透视显影”与“本体全向均匀实相”双透镜之间自由切换，遍历五张递进实验卡并联动琥珀色切面法向手柄 $\theta_{\mathrm{tilt}}$、扫相 $\varphi_{\mathrm{sweep}}$、孔径 $W_{\mathrm{aperture}}$ 与正交暗区钟负载 $\eta_{\mathrm{dark}}$，同台核验 $125$ 格点贝尔边缘 $\frac{1}{2}\mathbf{1}$、半角莫尔周期 $L_{\mathrm{M}} = a / (2\sin(\theta/2))$、零位移条纹扫掠、品红正交暗环 $I_{\mathrm{EM}}(90^\circ) = 0$ 与大孔径外尔—哈尔均化，对照绿色 `LEAN ✓` 六条冻结声明、`ARGUED`、`NUM`、`MODEL` 与红色 `OPEN` 宇宙学界碑。
+:::
