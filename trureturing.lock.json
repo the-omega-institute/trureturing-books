@@ -2621,6 +2621,14 @@
       "line": 59,
       "signature": "noncomputable def cayleyCoefficient (rho : Complex) : Complex"
     },
+    "D5/S3/Midline/Cayley/FiniteMirrorKreinGramInertia.canonical_zeta_finite_mirror_gram_inertia": {
+      "module": "D5/S3/Midline/Cayley/FiniteMirrorKreinGramInertia",
+      "name": "D5.S3.Midline.Cayley.FiniteMirrorKreinGramInertia.canonical_zeta_finite_mirror_gram_inertia",
+      "kind": "theorem",
+      "statement_id": "sha256:2b8edc058151a54df77e5d169b888fa0e00e412b0e5bc790c4841aba6949e249",
+      "line": 260,
+      "signature": "theorem canonical_zeta_finite_mirror_gram_inertia (T : ℝ) : finiteMirrorOddKreinGram zetaZeroData T = (-2 : Complex) • (1 : Matrix (MirrorOddCoordinate zetaZeroData T) (MirrorOddCoordinate zetaZeroData T) Complex) ∧ negIndex (finiteMirrorOddKreinGram_isHermitian zetaZeroData T) = zetaFiniteMirrorKreinIndex T ∧ (0 < negIndex (finiteMirrorOddKreinGram_isHermitian zetaZeroData T) ↔ ∃ n ∈ zetaZeroData.symmetricIndices T, (zetaZeroData.zero n).re ≠ criticalAbscissa)"
+    },
     "D5/S3/Midline/Cayley/LogarithmicRadialDefect.logarithmicRadialDefect": {
       "module": "D5/S3/Midline/Cayley/LogarithmicRadialDefect",
       "name": "D5.S3.Midline.Cayley.LogarithmicRadialDefect.logarithmicRadialDefect",
@@ -5869,6 +5877,14 @@
       "line": 126,
       "signature": "theorem canonical_curvature_posSemidef_implies_rh (positive : ∀ N : ℕ, (toeplitzMatrix canonicalLiCurvature N).PosSemidef) : RiemannHypothesis"
     },
+    "D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure": {
+      "module": "D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree",
+      "name": "D5.S3.Weil.Probability.CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure",
+      "kind": "theorem",
+      "statement_id": "sha256:f7b0d4dea01e0aba00e8b39361ae38699b4ae5385058ceb5d7690bde72602ecb",
+      "line": 134,
+      "signature": "theorem not_rh_forces_canonical_curvature_failure (failure : ¬ RiemannHypothesis) : ∃ N : ℕ, ¬ (toeplitzMatrix canonicalLiCurvature N).PosSemidef"
+    },
     "D5/S3/Weil/Probability/CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable": {
       "module": "D5/S3/Weil/Probability/CanonicalLiDiskEquivalence",
       "name": "D5.S3.Weil.Probability.CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable",
@@ -5908,6 +5924,14 @@
       "statement_id": "sha256:b5a0e2ca17cef2a62fe390baf6b73c5ae2b90f74dee44d60c6e8a4e837bb20d9",
       "line": 82,
       "signature": "theorem li_curvature_criterion_without_herglotz (c : ℤ → ℂ) (L : ℕ → ℝ) (normalized : c 0 = 1) (liCriterion : RiemannHypothesis ↔ ∀ n, 0 ≤ L n) (zeroValue : L 0 = 0) (firstNonnegative : 0 ≤ L 1) (recurrence : ∀ n, 1 ≤ n → L (n + 1) - 2 * L n + L (n - 1) = 2 * L 1 * (c n).re) (rhFourierRepresentation : RiemannHypothesis → ∃ μ : Measure Circle, IsProbabilityMeasure μ ∧ ∀ n, c n = circleMoment μ n) : RiemannHypothesis ↔ ∀ N : ℕ, (toeplitzMatrix c N).PosSemidef"
+    },
+    "D5/S3/Weil/TestFunctions/LiCaratheodoryIdentity.li_caratheodory_identity": {
+      "module": "D5/S3/Weil/TestFunctions/LiCaratheodoryIdentity",
+      "name": "D5.S3.Weil.TestFunctions.LiCaratheodoryIdentity.li_caratheodory_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:4781e93b59eb95e0dc35afb62a5b2c2e9128ae6172c35997ac46ef87f69760e7",
+      "line": 40,
+      "signature": "theorem li_caratheodory_identity (liCoefficient : Nat -> Real) (liZero : liCoefficient 0 = 0) (liOnePositive : 0 < liCoefficient 1) (keiperLiExpansion : ∀ᶠ z in nhds (0 : Complex), HasSum (fun n : Nat => (liCoefficient (n + 1) : Complex) * z ^ n) ((1 - z) ^ (-2 : Int) * logDeriv xiReading (1 / (1 - z)))) : let liCaratheodory : Complex -> Complex"
     },
     "D5/S3/Weil/TestFunctions/LiCurvatureCriterion.circle_moment_toeplitz_posSemidef": {
       "module": "D5/S3/Weil/TestFunctions/LiCurvatureCriterion",
@@ -6108,6 +6132,14 @@
       "statement_id": "sha256:caf959099b98eea6648d3c0d1aa2f8865db155c7bcbd4ca8877fa944772952af",
       "line": 30,
       "signature": "abbrev FixedPointFreeInvolution (α : Type*)"
+    },
+    "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_local_expansion": {
+      "module": "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion",
+      "name": "D5.S3.Zeros.Endpoints.CanonicalLiLocalExpansion.canonical_li_local_expansion",
+      "kind": "theorem",
+      "statement_id": "sha256:2d6fe9ba77e00d61b8e227b143eb5e25be29f3df02e1e3a5094b9c7a1498406e",
+      "line": 213,
+      "signature": "theorem canonical_li_local_expansion : ∀ᶠ z : ℂ in 𝓝 0, HasSum (fun n => (canonicalLiCoefficient (n + 1) : ℂ) * z ^ n) ((1 - z) ^ (-2 : ℤ) * logDeriv xiReading (1 / (1 - z)))"
     },
     "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_one": {
       "module": "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion",

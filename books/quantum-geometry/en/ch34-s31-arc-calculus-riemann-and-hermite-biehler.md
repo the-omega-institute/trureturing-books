@@ -283,6 +283,148 @@ We audit the quantitative claims of §34.31.1–§34.31.3 across three independe
    * Counterfactually injecting the rogue quartet at $\delta = 0.20,\; \gamma_0 = \gamma_1$ places $\rho_+ = 0.70 + \hat{\mathbf{i}}\gamma_1$ inside $\mathcal{R}(+0.10)$, immediately triggering a $2\pi \approx \mathbf{6.2831853072}$ boundary vortex ($N = \mathbf{1}$). The table value $\Delta_{\epsilon,\mathrm{rogue},4}^{\mathrm{HB}}(0.10, \gamma_1) = -4.78267581\times 10^{-7} < 0$ is the two-shell defect of the quartet factor alone at the left wall $u_0 = 0.10$; after multiplying by $\xi$, whose own zero $\frac{1}{2} + \hat{\mathbf{i}}\gamma_1$ sits at the same height, the radial slope at that point is positive, and the negative slope occurs only on about $0.1155 < u < 0.20$ (`NUM`). As the converse argument of Subsection 34.31.3 says, a negative slope must occur somewhere in $(0, \delta)$, but not necessarily everywhere.
 :::
 
+The reproducing kernel $K_\epsilon$ of Subsection 34.31.3 and the Li-curvature Toeplitz matrices of §34.30 ([@prop-ch34-li-curvature-toeplitz]) look like two different tools, but they read the same table. We first make this precise for finite families and then return to $\zeta$.
+
+::: {.remark #rem-ch34-one-zero-form-three-readings title="One Zero Comparison Table, Three Readings: The de Branges Kernel, the Rotor Power-Sum Toeplitz Matrix and the Newton–Hankel Matrix (Manual derivation)"}
+**Manual derivation.** Let $\rho_1,\dots,\rho_d$ be distinct complex numbers, none equal to $0$ or $1$, with multiplicities $\mu_i\ge1$, forming a multiset closed under $\rho\mapsto1-\overline\rho$ (with equal multiplicities). This gives an involution $\tau$ on the values, $\rho_{\tau(i)}=1-\overline{\rho_i}$ and $\mu_{\tau(i)}=\mu_i$, and $\tau(i)=i$ exactly when $\operatorname{Re}\rho_i=\tfrac12$. Let $e$ be the number of values on the line and $\kappa$ the number of values with $\operatorname{Re}\rho_i>\tfrac12$, so that $d=e+2\kappa$. Define on $\mathbb{C}^d$ the Hermitian form (the **zero comparison table**)
+
+$$
+\mathcal{Q}(y,y')=\sum_{i=1}^{d}\mu_i\,y_i\,\overline{y'_{\tau(i)}} .
+$$
+
+Its matrix has a diagonal entry $\mu_i>0$ at each value on the line, and on each pair $\{i,\tau(i)\}$ a block whose two off-diagonal entries are $\mu_i$. Its inertia is therefore exactly $(e+\kappa,\ \kappa,\ 0)$. Each of the following three matrices is a pull-back of $\mathcal{Q}$ along a "feature map".
+
+1. **The de Branges kernel.** Put $P(s)=\prod_i(s-\rho_i)^{\mu_i}$ and form $K_P(w,s)=\dfrac{P'(s)\overline{P(w)}+P(s)\overline{P'(w)}}{2\bigl[(s-\frac12)+(\overline w-\frac12)\bigr]}$ as in the closed form of Subsection 34.31.3, with $P$ in place of $\xi$. Then for $s+\overline w\ne1$,
+
+   $$
+   K_P(w,s)=\frac12\,P(s)\,\overline{P(w)}\sum_{i=1}^{d}\frac{\mu_i}{(s-\rho_i)\,\bigl(\overline w-1+\rho_i\bigr)} .
+   $$
+
+2. **The rotor power-sum Toeplitz matrix.** Put $u_i=1-\frac1{\rho_i}$ and $p_k=\sum_i\mu_iu_i^{\,k}$. Then $T_N=[p_{j-k}]_{0\le j,k<N}$ of [@rem-ch34-finite-toeplitz-inertia] satisfies $T_N=\sum_i\mu_i\,a_ia_{\tau(i)}^{*}$ with $a_i=(u_i^{\,j})_{0\le j<N}$.
+3. **The Newton–Hankel matrix.** If the multiset is also closed under complex conjugation, put $r_i=i(2\rho_i-1)$. Then the matrix $H$ of Clause 6 of [@prop-ch34-li-curvature-toeplitz] (with $m=\sum_i\mu_i$ roots) satisfies $mH_{jk}=\sum_i\mu_i\,r_i^{\,j}\,\overline{r_{\tau(i)}^{\,k}}$.
+
+Consequently, for any $n\ge d$ distinct points $s_1,\dots,s_n$ that are not roots (for instance, all in $\operatorname{Re}s>\tfrac12$), the matrix $[K_P(s_a,s_b)]$ has inertia $(e+\kappa,\ \kappa,\ n-d)$. For $N\ge d$, $T_N$ has inertia $(e+\kappa,\ \kappa,\ N-d)$; under conjugation closure, $H$, of size $m\ge d$, has inertia $(e+\kappa,\ \kappa,\ m-d)$. With fewer than $d$ points, or size below $d$, there are at most $\kappa$ negative eigenvalues.
+
+**Proof.** Clause 1: $\dfrac{1}{(s-\rho)(\overline w-1+\rho)}=\dfrac1{s+\overline w-1}\left[\dfrac1{s-\rho}+\dfrac1{\overline w-1+\rho}\right]$. Summing over $i$, the first term gives $\frac{P'}{P}(s)$. For the second, reindex using $1-\rho_i=\overline{\rho_{\tau(i)}}$; it gives $\overline{\frac{P'}{P}(w)}$. So the right-hand side equals $\frac12P(s)\overline{P(w)}\bigl[\frac{P'}{P}(s)+\overline{\frac{P'}{P}(w)}\bigr]/(s+\overline w-1)$, which is $K_P$; both sides are continuous across $s+\overline w=1$, so the identity holds for all $s,w$ that are not roots. Hence the matrix whose $(a,b)$ entry is $K_P(s_b,s_a)$ equals $D\,C\,M_{\mathcal{Q}}\,C^{*}D^{*}$ (it is the transpose of $[K_P(s_a,s_b)]$ and has the same inertia), where $M_{\mathcal{Q}}$ is the matrix of $\mathcal{Q}$ (entry $\mu_i$ at $(i,\tau(i))$), $C_{ai}=\frac1{s_a-\rho_i}$ and $D=\operatorname{diag}\bigl(P(s_a)/\sqrt2\bigr)$. For $n\ge d$, any $d$ rows of $C$ form a Cauchy matrix with distinct, non-colliding nodes, whose determinant is nonzero, so $C$ has full column rank; $D$ is invertible. Clause 2 is the factorization in the proof of [@rem-ch34-finite-toeplitz-inertia]. Clause 3: $\overline{r_{\tau(i)}}=-i\bigl(2(1-\rho_i)-1\bigr)=r_i$, so $\sum_i\mu_ir_i^{\,j}\overline{r_{\tau(i)}^{\,k}}=\sum_i\mu_ir_i^{\,j+k}$, which is real under conjugation closure. In all three cases the feature matrix has full column rank (a Cauchy matrix, or a Vandermonde matrix with distinct nodes, since $u=1-\frac1\rho$ and $r=i(2\rho-1)$ are injective). Surjective congruence preserves inertia, as in [@rem-ch34-finite-toeplitz-inertia]. $\square$
+
+So "kernel positivity", "Toeplitz positivity" and "Hermite's real-root criterion" are three readings of the same fact ($\kappa=0$), and their numbers of negative eigenvalues agree: all equal $\kappa$, the number of zero values in the right half-plane. The pinned repository freezes the part "positive semidefinite if and only if all roots are real" of Clause 3 (Clause 6 of [@prop-ch34-li-curvature-toeplitz]). The finite proof above is self-contained, and we claim no novelty. A related frozen result builds a Gram matrix on mirror pairs of zeros whose negative index equals the multiplicity-weighted number of off-line mirror pairs up to height $T$ ([`canonical_zeta_finite_mirror_gram_inertia`](lean:D5/S3/Midline/Cayley/FiniteMirrorKreinGramInertia.canonical_zeta_finite_mirror_gram_inertia)); it is constructed directly on the space of zeros and involves neither the Li coefficients nor $K_\xi$.
+:::
+
+For $\zeta$ itself there is an exact bridge between the two readings, and it does not require knowing where the zeros are.
+
+::: {.remark #rem-ch34-li-toeplitz-de-branges-bridge title="Near s = 1 the de Branges Kernel of ζ Is the Generating Function of the Li-Curvature Toeplitz Matrices (Manual derivation, assembled from frozen results)"}
+**Manual derivation.** Let $\lambda_n$ and $c^{\mathrm{Li}}_k$ be as in [@prop-ch34-li-curvature-toeplitz], and $C(u)=1+2\sum_{k\ge1}c^{\mathrm{Li}}_ku^k$. The frozen [`canonical_li_local_expansion`](lean:D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_local_expansion) states that near $z=0$, $\sum_{n\ge0}\lambda_{n+1}z^n=(1-z)^{-2}\,\frac{\xi'}{\xi}\!\left(\frac1{1-z}\right)$. Together with $\lambda_0=0$ and $\lambda_1>0$, these are exactly the hypotheses of the frozen [`li_caratheodory_identity`](lean:D5/S3/Weil/TestFunctions/LiCaratheodoryIdentity.li_caratheodory_identity), whose conclusion gives, near $u=0$,
+
+$$
+C(u)=\frac1{\lambda_1}\,\frac{\xi'}{\xi}\!\left(\frac1{1-u}\right).
+$$
+
+Now put $u_s=1-\frac1s$; this is the zero-rotor coordinate of §34.30 ($u_\rho$ at $s=\rho$). We have the identity $s+\overline w-1=s\,\overline w\,(1-u_s\overline{u_w})$. Since $c^{\mathrm{Li}}$ is real and even with $c^{\mathrm{Li}}_0=1$, we also have $\sum_{j,k\ge0}c^{\mathrm{Li}}_{j-k}u^j\overline v^k=\dfrac{C(u)+\overline{C(v)}}{2(1-u\overline v)}$ whenever the Taylor series of $C$ converges absolutely at $u$ and $v$. Substituting these three relations into the closed form $K_\xi(w,s)=\frac12\xi(s)\overline{\xi(w)}\bigl[\frac{\xi'}{\xi}(s)+\overline{\frac{\xi'}{\xi}(w)}\bigr]/(s+\overline w-1)$ of Subsection 34.31.3 gives
+
+$$
+K_\xi(w,s)=\lambda_1\,\frac{\xi(s)}{s}\,\overline{\left(\frac{\xi(w)}{w}\right)}\sum_{j,k\ge0}c^{\mathrm{Li}}_{j-k}\,u_s^{\,j}\,\overline{u_w}^{\,k}
+$$
+
+whenever $\lvert u_s\rvert$ and $\lvert u_w\rvert$ are below the radius of convergence of the Taylor series of $C$. That radius is positive: it is the smaller of $1$ and the modulus of the singularity of $\frac{\xi'}{\xi}(\frac1{1-u})$ nearest the origin. Without knowing where the zeros are, we do not know whether it equals $1$. In the language of §34.30, the Taylor coefficient matrix of $K_\xi$ in the rotor coordinate is the Li-curvature Toeplitz matrix multiplied on each side by a triangular matrix. Precisely, at $u_s=u_w=0$ (that is, $s=w=1$), the matrix of Taylor coefficients of $K_\xi$ in $u_s^{\,j}\,\overline{u_w}^{\,k}$ ($0\le j,k<N$) equals $\lambda_1LT_N(c^{\mathrm{Li}})L^{*}$, where $L$ is the lower-triangular Toeplitz matrix of the Taylor coefficients of $h(u)=\xi\bigl(\frac1{1-u}\bigr)(1-u)$, with diagonal $h(0)=\xi(1)=\tfrac12\ne0$, hence invertible. So the two have the same inertia.
+
+Numerical check (60 digits; $\lambda_1,\dots,\lambda_{71}$ computed from the definition in item 2 of [@prop-ch34-li-sagitta-frozen]):
+
+- at $s=1.1+0.2i$, $w=0.9-0.1i$, the directly computed $K_\xi$ and the right-hand side truncated to $j,k<69$ differ by $5\times10^{-52}$;
+- at $s=1.3$, $w=1.05+0.25i$, they differ by $4\times10^{-47}$;
+- the Taylor coefficient matrix of order $N=5$ and $\lambda_1LT_5L^{*}$ differ by $8\times10^{-19}$, a limit set by the discretization of the Cauchy integrals.
+
+The identity does not depend on where the zeros lie and says nothing about it.
+:::
+
+The next remark refines "all positive semidefinite ⇒ RH" from item 5 of [@prop-ch34-li-curvature-toeplitz] into a count: the number of negative eigenvalues the matrices can have is fixed exactly by the number of zeros to the right of the critical line.
+
+::: {.remark #rem-ch34-li-toeplitz-negative-index title="The Negative Index of the Li-Curvature Toeplitz Matrices Equals the Number of Zeros Right of the Critical Line (Manual derivation, resting on the zero-sum representation from the literature)"}
+**Manual derivation**, resting on the zero-sum representation $\lambda_n=\sum_\rho m_\rho\bigl[1-u_\rho^{\,n}\bigr]$ of [@rem-ch34-li-criterion-sagitta-literature] (literature result, not formalized in this book; truncated symmetrically at $\lvert\operatorname{Im}\rho\rvert\le H$, then $H\to\infty$). Let $\kappa\in\{0,1,2,\dots\}\cup\{\infty\}$ be the number of **distinct** nontrivial zeros with $\operatorname{Re}\rho>\tfrac12$, and let $n_-(T_N)$ be the number of negative eigenvalues of $T_N(c^{\mathrm{Li}})$, counted with multiplicity. Then:
+
+1. $n_-(T_N)\le\kappa$ for every $N$;
+2. $n_-(T_N)$ is nondecreasing in $N$, and $\sup_Nn_-(T_N)=\kappa$.
+
+In particular, the Riemann Hypothesis is equivalent to "every $T_N(c^{\mathrm{Li}})$ is positive semidefinite". The direction "⇐" is item 5 of [@prop-ch34-li-curvature-toeplitz] (frozen); "⇒" is statement 1 with $\kappa=0$. The value of $\kappa$ is unknown, and [@conj-riemann-hypothesis] remains open. The frozen [`not_rh_forces_canonical_curvature_failure`](lean:D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure) gives only "$\kappa\ge1$ ⇒ some $n_-(T_N)\ge1$", without the count.
+
+**Proof.** Write $v_\rho=\frac1{2\rho(1-\rho)}$ and $\rho^{*}=1-\overline\rho$.
+
+*(a) Representation.* Taking second differences term by term on the symmetric truncations gives, for $k\ge1$, $\lambda_{k+1}-2\lambda_k+\lambda_{k-1}=-\sum_\rho m_\rho u_\rho^{\,k-1}(u_\rho-1)^2=\sum_\rho m_\rho\,2v_\rho u_\rho^{\,k}$, since $(u-1)^2=\rho^{-2}$ and $u=\frac{\rho-1}\rho$.
+
+- By the frozen `actual_complex_pairWeight_hasSum` (item 3 of [@prop-ch34-li-sagitta-frozen]), $\sum_\rho m_\rho v_\rho=\lambda_1$, and $\sum_\rho m_\rho\lvert v_\rho\rvert<\infty$ (in $\mathbb{C}$, summability in every order is absolute summability).
+- Also $\lvert u_\rho\rvert^2=1+\frac{1-2\beta}{\lvert\rho\rvert^2}$ is bounded above and below uniformly over the zeros ($\lvert\rho\rvert>14$). So for every integer $k$ the series $\frac1{\lambda_1}\sum_\rho m_\rho v_\rho u_\rho^{\,k}$ converges absolutely; it equals $c^{\mathrm{Li}}_k$ for $k\ge1$ and $1$ for $k=0$.
+- The zero set and its multiplicities are invariant under $\rho\mapsto\rho^{*}$ (from the frozen `xi_reading_one_sub_conj`, Clause 2 of [@thm-ch34-arc-riemann-sagitta-hb-stokes-bridge]: an antiholomorphic reflection preserves the order of a zero), and $u_{\rho^{*}}=1/\overline{u_\rho}$, $v_{\rho^{*}}=\overline{v_\rho}$. So for $k<0$ the series equals $\overline{c^{\mathrm{Li}}_{-k}}=c^{\mathrm{Li}}_{\lvert k\rvert}$.
+
+Hence
+
+$$
+T_N(c^{\mathrm{Li}})=\frac1{\lambda_1}\sum_\rho m_\rho\,v_\rho\,a_\rho\,a_{\rho^{*}}^{*},\qquad a_\rho=(u_\rho^{\,j})_{0\le j<N},
+$$
+
+with absolute convergence entry by entry. For a coefficient vector $x$, with $h(z)=\sum_j\overline{x_j}z^j$,
+
+$$
+x^{*}T_Nx=\frac1{\lambda_1}\sum_\rho m_\rho\,v_\rho\,h(u_\rho)\,\overline{h(u_{\rho^{*}})} .
+$$
+
+*(b) Upper bound.*
+
+- A zero on the line has $\rho^{*}=\rho$ and $v_\rho=\frac2{1+4\gamma^2}>0$. It contributes the positive semidefinite matrix $m_\rho v_\rho a_\rho a_\rho^{*}$, and the sum of these is positive semidefinite.
+- A pair of off-line zeros $\{\rho,\rho^{*}\}$ contributes $m_\rho\bigl(v_\rho a_\rho a_{\rho^{*}}^{*}+\overline{v_\rho}a_{\rho^{*}}a_\rho^{*}\bigr)$. This is a Hermitian matrix of the form $xy^{*}+yx^{*}$, with at most one negative eigenvalue whatever the multiplicity $m_\rho$.
+- There are exactly $\kappa$ off-line pairs, since each pair has exactly one member with $\operatorname{Re}\rho>\tfrac12$.
+
+For $\kappa<\infty$, subadditivity of the negative index ($n_-(A+B)\le n_-(A)+n_-(B)$) gives statement 1; for $\kappa=\infty$ statement 1 is empty. Since $T_N$ is a principal submatrix of $T_{N+1}$, Cauchy interlacing makes $n_-$ nondecreasing.
+
+*(c) Lower bound.*
+
+- *Choosing the zeros.* Take $K$ zeros $\rho_1,\dots,\rho_K$ to the right of the line, and write $\iota_i=u_{\rho_i}$ ($\lvert\iota_i\rvert<1$) and $o_i=u_{\rho_i^{*}}=1/\overline{\iota_i}$ ($R_i:=\lvert o_i\rvert>1$). If $\kappa=\infty$: only finitely many zeros have $R$ above any given $R_0>1$, so choosing in decreasing order of $R$, and taking zeros with equal $R$ (such as a conjugate pair) together, makes $K$ arbitrarily large while every other right-hand zero has $R\le R'$ for some $R'<\min_iR_i$. If $\kappa<\infty$: take all of them and put $R'=1$.
+- *The test polynomials.* Take interpolating polynomials of degree $<2K$: $p_i$ takes $\delta_{il}$ at $o_l$ and $0$ at $\iota_l$; $q_i$ takes $0$ at $o_l$ and $\theta_i\delta_{il}$ at $\iota_l$, where $\theta_i=-\overline{v_{\rho_i}}\,o_i^{\,n}/(\lvert v_{\rho_i}\rvert R_i^{\,n})$. For $\alpha\in\mathbb{C}^K$ let $h_\alpha(z)=\sum_i\alpha_i\bigl(z^np_i(z)+q_i(z)\bigr)$, of degree $<N=n+2K$. Then $h_\alpha(\iota_i)=\alpha_i\theta_i$ and $h_\alpha(o_i)=\alpha_io_i^{\,n}$.
+- *The chosen pairs.* Their contribution is exactly $-\frac2{\lambda_1}\sum_im_{\rho_i}\lvert v_{\rho_i}\rvert R_i^{\,n}\lvert\alpha_i\rvert^2$.
+- *The other terms.* The on-line terms are at most $\frac1{\lambda_1}\bigl(\sum_\rho m_\rho v_\rho\bigr)\sup_{\lvert z\rvert=1}\lvert h_\alpha\rvert^2\le C_1\lvert\alpha\rvert^2$, because $z^n$ has modulus $1$ on the circle. The remaining off-line pairs contribute at most $C_2\bigl(R'^{\,n}+1\bigr)\lvert\alpha\rvert^2$. The constants $C_1,C_2$ depend only on bounds for $p_i$ and $\hat q_i$ on $\lvert z\rvert\le\sup_\rho\lvert u_\rho\rvert$ and on $\sum m_\rho\lvert v_\rho\rvert$, not on $n$; here $q_i=\theta_i\hat q_i$, where $\hat q_i$ is the fixed interpolating polynomial taking $1$ at $\iota_i$, and $\lvert\theta_i\rvert=1$.
+- *Conclusion.* Since $\min_iR_i>R'$, for large $n$ the form is negative definite on the $K$-dimensional space spanned by the coefficient vectors of the $h_\alpha$ ($h_\alpha\ne0$ because $h_\alpha(o_i)=\alpha_io_i^{\,n}$). Hence $n_-(T_N)\ge K$. $K$ can be taken equal to $\kappa$ (arbitrarily large if $\kappa=\infty$), which gives statement 2. $\square$
+
+**The same count holds for the de Branges kernel (manual derivation; also resting on the Hadamard product, a literature result).** By the Hadamard product, $\frac{\xi'}{\xi}(s)=\sum_\rho\frac{m_\rho}{s-\rho}$, summed over pairs of zeros. The computation of Clause 1 of [@rem-ch34-one-zero-form-three-readings] gives $K_\xi(w,s)=\frac12\xi(s)\overline{\xi(w)}\sum_\rho\frac{m_\rho}{(s-\rho)(\overline w-1+\rho)}$ with absolutely summable terms. So on any finite set of points in $\operatorname{Re}s>\tfrac12$ the kernel matrix has at most $\kappa$ negative eigenvalues. Conversely, by [@rem-ch34-li-toeplitz-de-branges-bridge], the Taylor coefficient matrix of $K_\xi$ at $s=1$ is congruent to $T_N(c^{\mathrm{Li}})$. That coefficient matrix is a limit, through difference quotients (multiplying on both sides by a fixed finite-difference matrix), of kernel matrices at points near $s=1$, and strictly negative eigenvalues persist under small perturbations. So point sets near $s=1$ also realize $n_-(T_N)$ negative eigenvalues. The number of negative squares of $K_\xi$ on $\operatorname{Re}s>\tfrac12$ is therefore also exactly $\kappa$.
+:::
+
+Since the number of negative directions is the number of zeros to the right, the natural next question is how large the negative eigenvalue produced by one concrete off-line quartet is. For a single quartet there are bounds on both sides.
+
+::: {.remark #rem-ch34-off-circle-quartet-eigenvalue title="The Negative Toeplitz Eigenvalue Produced by One Off-Circle Quartet: Explicit Two-Sided Bounds (Manual derivation)"}
+**Manual derivation.** Take the four rotors $e^{\pm\eta\pm i\phi}$ of [@rem-ch34-off-circle-pair-detection] ($\eta>0$, $0<\phi<\pi$), and let $T_N$ be their power-sum Toeplitz matrix ($T_N(p)$ of [@rem-ch34-finite-toeplitz-inertia], $d=4$, $\kappa=2$; not the curvature-normalized $T_N(c)$, whose value $-1.68372\times10^{-6}$ for the same four points appears in [@ex-ch34-toeplitz-versus-li-numbers]).
+
+1. **Lower bound (every $N$).** $\lambda_{\min}(T_N)\ge-4\sum_{k=1}^{N-1}\sinh^2(k\eta)$.
+2. **Quadratic test vector ($N\ge3$).** If $\cosh\eta\cos2\phi<1$, then
+   $$
+   \lambda_{\min}(T_N)\le-\frac{16\sinh^2(\eta/2)\,\bigl(1-\cosh\eta\cos2\phi\bigr)}{1+2\cos^2\phi}<0 .
+   $$
+3. **Cubic interpolating test vector ($N\ge4$).** If $a_0+a_1z+a_2z^2+a_3z^3$ is the interpolating polynomial taking $1$ at $e^{\eta\pm i\phi}$ and $-1$ at $e^{-\eta\pm i\phi}$ (its coefficients are real), then $\lambda_{\min}(T_N)\le-4/(a_0^2+a_1^2+a_2^2+a_3^2)$.
+
+For fixed $\phi$ and $N\ge3$, as $\eta\to0$ item 1 behaves like $-\frac23(N-1)N(2N-1)\eta^2$ and item 2 like $-\frac{8\sin^2\phi}{1+2\cos^2\phi}\eta^2$, so $\lvert\lambda_{\min}(T_N)\rvert$ is of order $\eta^2$. For a zero quartet $\phi$ is not fixed: by item 3 of [@rem-ch34-off-circle-pair-detection], $\eta\approx\frac{\lvert1-2\beta\rvert}{2\lvert\rho\rvert^2}$, while $\phi\approx\frac1{\lvert\rho\rvert}$ is small too, so item 2 is about $-\frac83\phi^2\eta^2\approx-\frac83(\beta-\tfrac12)^2/\lvert\rho\rvert^6$. Numerically (four zero quartets with $\gamma=20,100,1000$), for fixed $N=3,4,8$ one finds $\lambda_{\min}(T_N)$ close to $-2.67$, $-16$ and $-672$ times $(\beta-\tfrac12)^2/\lvert\rho\rvert^6$ (manual derivation and `NUM`). Compare [@rem-ch34-off-circle-pair-detection]: the Li sum turns negative only at $n\approx1/\eta$, whereas the power-sum Toeplitz test turns negative already at size $3$ (a zero quartet has $\phi\gg\eta$, so the condition of item 2 holds), at the price of an eigenvalue of order $\phi^2\eta^2$.
+
+**Proof.**
+
+- *Item 1.* By the factorization of [@rem-ch34-finite-toeplitz-inertia], $T_N=\sum_{\text{pairs}}\bigl(a_ia_{\tau(i)}^{*}+a_{\tau(i)}a_i^{*}\bigr)$, and $xy^{*}+yx^{*}=\tfrac12(x+y)(x+y)^{*}-\tfrac12(x-y)(x-y)^{*}$. So $T_N\succeq-\tfrac12\sum_{\text{pairs}}(a_i-a_{\tau(i)})(a_i-a_{\tau(i)})^{*}$, whose norm is at most its trace $\tfrac12\sum_{\text{pairs}}\lvert a_i-a_{\tau(i)}\rvert^2$. For $u=e^{\eta+i\phi}$ and $1/\overline u=e^{-\eta+i\phi}$, $\lvert a_u-a_{1/\overline u}\rvert^2=\sum_{k<N}\bigl(e^{k\eta}-e^{-k\eta}\bigr)^2=4\sum_{k<N}\sinh^2(k\eta)$. The two pairs contribute equally, which gives item 1.
+- *Item 2.* For a real coefficient vector $x$ and $g(z)=\sum_kx_kz^k$, with $u'=1/\overline u$, one has $x^{\mathsf T}T_Nx=4\operatorname{Re}\bigl[g(u)\overline{g(u')}\bigr]$. Take $g(z)=(z-e^{i\phi})(z-e^{-i\phi})$, that is $x=(1,-2\cos\phi,1,0,\dots)$ with $\lvert x\rvert^2=2+4\cos^2\phi$. Expanding, $\overline{g(u)}\,g(u')=(e^\eta-1)(e^{-\eta}-1)\bigl(2-e^{\eta-2i\phi}-e^{-\eta+2i\phi}\bigr)$, whose real part is $-4\sinh^2(\eta/2)\cdot2(1-\cosh\eta\cos2\phi)$. The Rayleigh quotient gives item 2.
+- *Item 3.* The quadratic form there equals $4\operatorname{Re}[1\cdot(-1)]=-4$. $\square$
+
+Numerical check (50 digits):
+
+- For the hypothetical quartet of [@ex-ch34-zero-rotor-sagitta-numbers] ($\eta=0.0079084$, $\phi=0.19902$):
+  - $\lambda_{\min}(T_3)=-6.69389\times10^{-6}$, while item 2 gives $-6.69158\times10^{-6}$;
+  - $\lambda_{\min}(T_4)=-4.02898\times10^{-5}$, while the lower bound of item 1 is $-3.50293\times10^{-3}$.
+- For $\eta=0.01$, $\phi=1$: $\lambda_{\min}(T_4)=-1.73392\times10^{-3}$, while item 3 gives $-1.59968\times10^{-3}$.
+
+These are statements about a finite quartet. For $\zeta$ all the other zeros enter the same matrix, and the method of item 1 no longer gives explicit numbers.
+:::
+
+[@rem-ch34-li-toeplitz-negative-index] settles whether negative directions exist, but not how large $N$ must be to see them. For the latter, explicit zero-free-region results for Li coefficients in the literature already give a bound.
+
+::: {.remark #rem-ch34-effective-li-toeplitz-detection title="An Explicit Detection Threshold for the Li-Curvature Toeplitz Test (Literature result and manual derivation)"}
+**Literature result, not formalized in this book**, plus one manual step. N. Palojärvi (*Explicit zero-free regions and a $\tau$-Li-type criterion*, `arXiv:1807.01506`, Theorem 3.1 with $\tau=1$) proves, for functions satisfying some explicit conditions that $\zeta$ satisfies: for every $R>1$ one can compute an explicit $N(R)$ such that, if $\lambda_n\ge0$ for all multiples $n$ of $N(R)$ in the interval $[N(R),\ 5N(R)^2(A\log N(R)+M)]$ (with explicit constants $A$, $M$ coming from the zero count), then every nontrivial zero of $\zeta$ satisfies $\bigl\lvert\frac{\rho}{\rho-1}\bigr\rvert<R$. F. C. Brown (*J. Number Theory* **111**, 1–32, 2005, Theorem 3) gave a result of the same kind.
+
+This yields an explicit threshold for the Toeplitz test (manual derivation). By the readout $\lambda_n=\lambda_1\sum_{j,k<n}c^{\mathrm{Li}}_{j-k}$ following [@prop-ch34-li-curvature-toeplitz], positive semidefiniteness of $T_n(c^{\mathrm{Li}})$ implies $\lambda_n\ge0$. A zero $\rho=\beta+i\gamma$ with $\beta\ge\tfrac12+\delta$ and $\lvert\gamma\rvert\le T$ has $\bigl\lvert\frac{\rho}{\rho-1}\bigr\rvert^2=1+\frac{2\beta-1}{\lvert\rho-1\rvert^2}\ge1+\frac{2\delta}{T^2+\frac14}$. Take $R^2=1+\frac{2\delta}{T^2+\frac14}$ and $N_0(T,\delta)=\bigl\lfloor5N(R)^2(A\log N(R)+M)\bigr\rfloor$: if $T_1(c^{\mathrm{Li}}),\dots,T_{N_0}(c^{\mathrm{Li}})$ are all positive semidefinite, the rectangle $\{\beta\ge\tfrac12+\delta,\ \lvert\gamma\rvert\le T\}$ contains no zero. This threshold uses only the all-ones readout of the Toeplitz matrices; we did not find a result that uses all test vectors to lower it substantially. Even with a threshold, the size of the eigenvalues involved (about $10^{-74}$ at $N=20$ in [@ex-ch34-toeplitz-versus-li-numbers]) demands matching precision in the $\lambda_n$. Such a test only certifies zero-free regions up to finite height and does not decide [@conj-riemann-hypothesis].
+:::
+
+None of the statements above says where the zeros of $\zeta$ lie. They express one and the same unknown number $\kappa$, the count of zeros to the right of the critical line, in three ways: through a kernel, a Toeplitz matrix and a Newton–Hankel matrix. [@conj-riemann-hypothesis] states that $\kappa=0$, and it remains open.
+
 ## 34.31.4 Formal Epistemic Audit: Internal Closure in Circular-Arc Calculus and the Last-Mile Schur-Pivot Bridge to Classical ZFC {#sec-ch34-31-4}
 
 Audited against Lean 4 formal verification and classical ZFC set theory, the four-row ledger below separates what is already unconditionally proved from the single bridge separating internal circular-arc closure from an unconditional ZFC proof of the Riemann Hypothesis (that bridge is itself an equivalent form of the Riemann Hypothesis):

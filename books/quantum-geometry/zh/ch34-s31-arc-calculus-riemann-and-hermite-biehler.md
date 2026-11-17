@@ -283,6 +283,113 @@ $$
    * 反之，若在 $\delta = 0.20,\; \gamma_0 = \gamma_1$ 处反事实注入上述离轴四元组因子，其右半带零点 $\rho_+ = 0.70 + \hat{\mathbf{i}}\gamma_1$ 恰好落入 $\mathcal{R}(+0.10)$ 腹地，立刻激发出 $2\pi \approx \mathbf{6.2831853072}$ 的非零涡旋（$N = \mathbf{1}$）。上表的 $\Delta_{\epsilon,\mathrm{rogue},4}^{\mathrm{HB}}(0.10, \gamma_1) = -4.78267581\times 10^{-7} < 0$ 是单独的四元组因子在左墙 $u_0 = 0.10$ 处的双壳差；乘上 $\xi$ 之后，由于 $\xi$ 自己的零点 $\frac{1}{2} + \hat{\mathbf{i}}\gamma_1$ 也在这一高度，同一点的径向斜率反而为正，负坡只出现在约 $0.1155 < u < 0.20$ 一段（`NUM`）。正如第 34.31.3 节的反证所说，负坡必然出现在 $(0, \delta)$ 的某处，但不必出现在每一处。
 :::
 
+第 34.31.3 节的再生核 $K_\epsilon$ 与 §34.30 的 Li 曲率托普利茨矩阵（[@prop-ch34-li-curvature-toeplitz]）看起来是两套工具，其实读的是同一张表。下面先在有限族上把这件事说精确，再回到 $\zeta$。
+
+::: {.remark #rem-ch34-one-zero-form-three-readings title="一张零点比较表的三种读法：德布朗热核、旋子幂和托普利茨矩阵与牛顿—汉克尔矩阵（手工推导）"}
+**手工推导。** 设 $\rho_1,\dots,\rho_d$ 是互不相同的复数，都不等于 $0$ 与 $1$，重数为 $\mu_i\ge1$，这个多重集在 $\rho\mapsto1-\overline\rho$ 下封闭（重数相同）。由此得到取值上的一个对合 $\tau$：$\rho_{\tau(i)}=1-\overline{\rho_i}$，$\mu_{\tau(i)}=\mu_i$；$\tau(i)=i$ 当且仅当 $\operatorname{Re}\rho_i=\tfrac12$。记 $e$ 为线上取值的个数，$\kappa$ 为 $\operatorname{Re}\rho_i>\tfrac12$ 的取值个数，于是 $d=e+2\kappa$。定义 $\mathbb{C}^d$ 上的厄尔米特形式（**零点比较表**）
+
+$$
+\mathcal{Q}(y,y')=\sum_{i=1}^{d}\mu_i\,y_i\,\overline{y'_{\tau(i)}} .
+$$
+
+它的矩阵在线上取值处是对角元 $\mu_i>0$，在每一对 $\{i,\tau(i)\}$ 上是一个两个非对角元都为 $\mu_i$ 的块，所以惯性恰为 $(e+\kappa,\ \kappa,\ 0)$。下面三个矩阵都是 $\mathcal{Q}$ 经某个“特征映射”拉回的结果。
+
+1. **德布朗热核。** 令 $P(s)=\prod_i(s-\rho_i)^{\mu_i}$，按第 34.31.3 节的闭式以 $P$ 代替 $\xi$ 作 $K_P(w,s)=\dfrac{P'(s)\overline{P(w)}+P(s)\overline{P'(w)}}{2\bigl[(s-\frac12)+(\overline w-\frac12)\bigr]}$。则当 $s+\overline w\ne1$ 时
+
+   $$
+   K_P(w,s)=\frac12\,P(s)\,\overline{P(w)}\sum_{i=1}^{d}\frac{\mu_i}{(s-\rho_i)\,\bigl(\overline w-1+\rho_i\bigr)} .
+   $$
+
+2. **旋子幂和的托普利茨矩阵。** 令 $u_i=1-\frac1{\rho_i}$，$p_k=\sum_i\mu_iu_i^{\,k}$。则 [@rem-ch34-finite-toeplitz-inertia] 的 $T_N=[p_{j-k}]_{0\le j,k<N}$ 满足 $T_N=\sum_i\mu_i\,a_ia_{\tau(i)}^{*}$，$a_i=(u_i^{\,j})_{0\le j<N}$。
+3. **牛顿—汉克尔矩阵。** 若多重集还在复共轭下封闭，令 $r_i=i(2\rho_i-1)$，则 [@prop-ch34-li-curvature-toeplitz] 第 6 款的矩阵 $H$（$m=\sum_i\mu_i$ 个根）满足 $mH_{jk}=\sum_i\mu_i\,r_i^{\,j}\,\overline{r_{\tau(i)}^{\,k}}$。
+
+因此，对任意 $n\ge d$ 个互不相同、都不是根的点 $s_1,\dots,s_n$（例如全部取在 $\operatorname{Re}s>\tfrac12$ 内），矩阵 $[K_P(s_a,s_b)]$ 的惯性是 $(e+\kappa,\ \kappa,\ n-d)$；对 $N\ge d$，$T_N$ 的惯性是 $(e+\kappa,\ \kappa,\ N-d)$；在共轭封闭时，尺寸为 $m\ge d$ 的 $H$ 的惯性是 $(e+\kappa,\ \kappa,\ m-d)$。点数或尺寸小于 $d$ 时，负特征值不多于 $\kappa$。
+
+**证明。** 第 1 款：$\dfrac{1}{(s-\rho)(\overline w-1+\rho)}=\dfrac1{s+\overline w-1}\left[\dfrac1{s-\rho}+\dfrac1{\overline w-1+\rho}\right]$。对 $i$ 求和，第一项给出 $\frac{P'}{P}(s)$；第二项用 $1-\rho_i=\overline{\rho_{\tau(i)}}$ 换指标，给出 $\overline{\frac{P'}{P}(w)}$。于是右端等于 $\frac12P(s)\overline{P(w)}\bigl[\frac{P'}{P}(s)+\overline{\frac{P'}{P}(w)}\bigr]/(s+\overline w-1)$，正是 $K_P$；两端在 $s+\overline w=1$ 处都连续，所以等式对一切非根的 $s,w$ 成立。由此，$(a,b)$ 元为 $K_P(s_b,s_a)$ 的矩阵等于 $D\,C\,M_{\mathcal{Q}}\,C^{*}D^{*}$（它与 $[K_P(s_a,s_b)]$ 互为转置，惯性相同），其中 $M_{\mathcal{Q}}$ 是 $\mathcal{Q}$ 的矩阵（$(i,\tau(i))$ 元为 $\mu_i$）， $C_{ai}=\frac1{s_a-\rho_i}$，$D=\operatorname{diag}\bigl(P(s_a)/\sqrt2\bigr)$。$n\ge d$ 时 $C$ 的任意 $d$ 行构成一个柯西矩阵，节点互异且不相碰，行列式非零，所以 $C$ 列满秩；$D$ 可逆。第 2 款是 [@rem-ch34-finite-toeplitz-inertia] 证明中的分解。第 3 款：$\overline{r_{\tau(i)}}=-i\bigl(2(1-\rho_i)-1\bigr)=r_i$，所以 $\sum_i\mu_ir_i^{\,j}\overline{r_{\tau(i)}^{\,k}}=\sum_i\mu_ir_i^{\,j+k}$，在共轭封闭时它是实数。三种情形的特征映射都列满秩（柯西矩阵；取值互异的范德蒙矩阵，$u=1-\frac1\rho$ 与 $r=i(2\rho-1)$ 都是单射），满射合同保持惯性，推理与 [@rem-ch34-finite-toeplitz-inertia] 相同。$\square$
+
+所以“核半正定”“托普利茨正性”“厄尔米特实根判据”是同一个事实（$\kappa=0$）的三种读法，负特征值的个数也一样，都是右半平面内的零点取值个数 $\kappa$。所钉仓库冻结了第 3 款中“半正定当且仅当全为实数”的部分（[@prop-ch34-li-curvature-toeplitz] 第 6 款）。上面的有限证明是自足的，本书不主张新颖性。另一个相关的冻结结果按零点镜像对构造了一个格拉姆矩阵，其负指数等于高度 $T$ 以内按重数计的离线镜像对数（[`canonical_zeta_finite_mirror_gram_inertia`](lean:D5/S3/Midline/Cayley/FiniteMirrorKreinGramInertia.canonical_zeta_finite_mirror_gram_inertia)）；那是在零点空间上直接构造的，不涉及 Li 系数或 $K_\xi$。
+:::
+
+对 $\zeta$ 本身，两种读法之间有一条精确的桥，不需要知道零点在哪里。
+
+::: {.remark #rem-ch34-li-toeplitz-de-branges-bridge title="ζ 的德布朗热核在 s = 1 附近就是 Li 曲率托普利茨矩阵的生成函数（手工推导，由冻结结论组合而成）"}
+**手工推导。** 记 $\lambda_n$、$c^{\mathrm{Li}}_k$ 如 [@prop-ch34-li-curvature-toeplitz]，$C(u)=1+2\sum_{k\ge1}c^{\mathrm{Li}}_ku^k$。冻结的 [`canonical_li_local_expansion`](lean:D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_local_expansion) 说：在 $z=0$ 附近，$\sum_{n\ge0}\lambda_{n+1}z^n=(1-z)^{-2}\,\frac{\xi'}{\xi}\!\left(\frac1{1-z}\right)$。连同 $\lambda_0=0$、$\lambda_1>0$，这恰是冻结的 [`li_caratheodory_identity`](lean:D5/S3/Weil/TestFunctions/LiCaratheodoryIdentity.li_caratheodory_identity) 的全部前提。该定理的结论给出：在 $u=0$ 附近，
+
+$$
+C(u)=\frac1{\lambda_1}\,\frac{\xi'}{\xi}\!\left(\frac1{1-u}\right).
+$$
+
+现在令 $u_s=1-\frac1s$，这就是 §34.30 的零点旋子坐标（$s=\rho$ 时为 $u_\rho$）。有恒等式 $s+\overline w-1=s\,\overline w\,(1-u_s\overline{u_w})$；又因 $c^{\mathrm{Li}}$ 是实的偶数列且 $c^{\mathrm{Li}}_0=1$，有 $\sum_{j,k\ge0}c^{\mathrm{Li}}_{j-k}u^j\overline v^k=\dfrac{C(u)+\overline{C(v)}}{2(1-u\overline v)}$（只要 $C$ 的泰勒级数在 $u,v$ 处绝对收敛）。把三式代入 $K_\xi(w,s)=\frac12\xi(s)\overline{\xi(w)}\bigl[\frac{\xi'}{\xi}(s)+\overline{\frac{\xi'}{\xi}(w)}\bigr]/(s+\overline w-1)$（第 34.31.3 节的闭式），得
+
+$$
+K_\xi(w,s)=\lambda_1\,\frac{\xi(s)}{s}\,\overline{\left(\frac{\xi(w)}{w}\right)}\sum_{j,k\ge0}c^{\mathrm{Li}}_{j-k}\,u_s^{\,j}\,\overline{u_w}^{\,k},
+$$
+
+只要 $\lvert u_s\rvert,\lvert u_w\rvert$ 小于 $C$ 的泰勒级数的收敛半径。这个半径是正数，等于 $1$ 与 $\frac{\xi'}{\xi}(\frac1{1-u})$ 离原点最近的奇点模长中的较小者；不知道零点位置，就不知道它是否等于 $1$。用 §34.30 的话说：$K_\xi$ 在旋子坐标里的泰勒系数矩阵，就是 Li 曲率托普利茨矩阵左右各乘一个三角矩阵。准确地说，在 $u_s=u_w=0$（即 $s=w=1$）处，$K_\xi$ 关于 $u_s^{\,j}\,\overline{u_w}^{\,k}$（$0\le j,k<N$）的泰勒系数矩阵等于 $\lambda_1LT_N(c^{\mathrm{Li}})L^{*}$，$L$ 是 $h(u)=\xi\bigl(\frac1{1-u}\bigr)(1-u)$ 的泰勒系数构成的下三角托普利茨矩阵，对角元 $h(0)=\xi(1)=\tfrac12\ne0$，可逆。所以两者的惯性相同。
+
+数值核对（60 位精度，$\lambda_1,\dots,\lambda_{71}$ 按 [@prop-ch34-li-sagitta-frozen] 第 2 款的定义计算）：在 $s=1.1+0.2i$、$w=0.9-0.1i$ 处，直接计算的 $K_\xi$ 与截断到 $j,k<69$ 的右端相差 $5\times10^{-52}$；在 $s=1.3$、$w=1.05+0.25i$ 处相差 $4\times10^{-47}$；$N=5$ 的泰勒系数矩阵与 $\lambda_1LT_5L^{*}$ 相差 $8\times10^{-19}$（受柯西积分离散误差限制）。这条等式不依赖零点位置，也不说明零点在哪里。
+:::
+
+下面这条把 [@prop-ch34-li-curvature-toeplitz] 第 5 款的“全部半正定 ⇒ RH”细化为计数：负特征值最多有几个，恰好由右半平面里的零点个数决定。
+
+::: {.remark #rem-ch34-li-toeplitz-negative-index title="Li 曲率托普利茨矩阵的负惯性指数等于临界线右侧零点的个数（手工推导，依赖文献中的零点和表示）"}
+**手工推导**，依赖 [@rem-ch34-li-criterion-sagitta-literature] 的零点和表示 $\lambda_n=\sum_\rho m_\rho\bigl[1-u_\rho^{\,n}\bigr]$（文献结果，未在本书形式化；按 $\lvert\operatorname{Im}\rho\rvert\le H$ 对称截断后令 $H\to\infty$）。记 $\kappa\in\{0,1,2,\dots\}\cup\{\infty\}$ 为满足 $\operatorname{Re}\rho>\tfrac12$ 的**不同**非平凡零点的个数，$n_-(T_N)$ 为 $T_N(c^{\mathrm{Li}})$ 的负特征值个数（按重数）。则
+
+1. 对每个 $N$，$n_-(T_N)\le\kappa$；
+2. $n_-(T_N)$ 随 $N$ 单调不减，且 $\sup_Nn_-(T_N)=\kappa$。
+
+特别地，黎曼猜想等价于“一切 $T_N(c^{\mathrm{Li}})$ 半正定”：“⇐”是 [@prop-ch34-li-curvature-toeplitz] 第 5 款（冻结），“⇒”是第 1 条在 $\kappa=0$ 的情形。$\kappa$ 是多少不知道，[@conj-riemann-hypothesis] 仍然开放；冻结的 [`not_rh_forces_canonical_curvature_failure`](lean:D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure) 只给出“$\kappa\ge1$ ⇒ 某个 $n_-(T_N)\ge1$”，不含计数。
+
+**证明。** 记 $v_\rho=\frac1{2\rho(1-\rho)}$，$\rho^{*}=1-\overline\rho$。
+
+*(a) 表示。* 二阶差分逐项作用在对称截断上，得 $\lambda_{k+1}-2\lambda_k+\lambda_{k-1}=-\sum_\rho m_\rho u_\rho^{\,k-1}(u_\rho-1)^2=\sum_\rho m_\rho\,2v_\rho u_\rho^{\,k}$（$k\ge1$；因 $(u-1)^2=\rho^{-2}$，$u=\frac{\rho-1}\rho$）。由冻结的 `actual_complex_pairWeight_hasSum`（[@prop-ch34-li-sagitta-frozen] 第 3 款），$\sum_\rho m_\rho v_\rho=\lambda_1$，并且 $\sum_\rho m_\rho\lvert v_\rho\rvert<\infty$（在 $\mathbb{C}$ 中，按任意次序可和即绝对可和）。又 $\lvert u_\rho\rvert^2=1+\frac{1-2\beta}{\lvert\rho\rvert^2}$ 对一切零点有一致的上下界（$\lvert\rho\rvert>14$），所以对每个整数 $k$，级数 $\frac1{\lambda_1}\sum_\rho m_\rho v_\rho u_\rho^{\,k}$ 绝对收敛：$k\ge1$ 时它等于 $c^{\mathrm{Li}}_k$，$k=0$ 时等于 $1$。零点集与重数在 $\rho\mapsto\rho^{*}$ 下不变（由冻结的 `xi_reading_one_sub_conj`，即 [@thm-ch34-arc-riemann-sagitta-hb-stokes-bridge] 第 2 款：反全纯的反射保持零点的阶），并且 $u_{\rho^{*}}=1/\overline{u_\rho}$、$v_{\rho^{*}}=\overline{v_\rho}$，所以 $k<0$ 时该级数等于 $\overline{c^{\mathrm{Li}}_{-k}}=c^{\mathrm{Li}}_{\lvert k\rvert}$。于是
+
+$$
+T_N(c^{\mathrm{Li}})=\frac1{\lambda_1}\sum_\rho m_\rho\,v_\rho\,a_\rho\,a_{\rho^{*}}^{*},\qquad a_\rho=(u_\rho^{\,j})_{0\le j<N},
+$$
+
+逐元绝对收敛。对系数向量 $x$，记 $h(z)=\sum_j\overline{x_j}z^j$，则
+
+$$
+x^{*}T_Nx=\frac1{\lambda_1}\sum_\rho m_\rho\,v_\rho\,h(u_\rho)\,\overline{h(u_{\rho^{*}})} .
+$$
+
+*(b) 上界。* 线上零点 $\rho^{*}=\rho$、$v_\rho=\frac2{1+4\gamma^2}>0$，贡献半正定矩阵 $m_\rho v_\rho a_\rho a_\rho^{*}$，其和仍半正定。一对离线零点 $\{\rho,\rho^{*}\}$ 贡献 $m_\rho\bigl(v_\rho a_\rho a_{\rho^{*}}^{*}+\overline{v_\rho}a_{\rho^{*}}a_\rho^{*}\bigr)$，这是形如 $xy^{*}+yx^{*}$ 的厄尔米特矩阵，至多一个负特征值，与重数 $m_\rho$ 无关。离线的对恰有 $\kappa$ 对（每对中恰有一个零点在 $\operatorname{Re}\rho>\tfrac12$）。$\kappa<\infty$ 时，负特征值个数的次可加性（$n_-(A+B)\le n_-(A)+n_-(B)$）给出第 1 条；$\kappa=\infty$ 时第 1 条是空话。$T_N$ 是 $T_{N+1}$ 的主子阵，所以由柯西交错定理，$n_-$ 单调不减。
+
+*(c) 下界。* 取 $K$ 个右侧零点 $\rho_1,\dots,\rho_K$，记 $\iota_i=u_{\rho_i}$（$\lvert\iota_i\rvert<1$）与 $o_i=u_{\rho_i^{*}}=1/\overline{\iota_i}$（$R_i:=\lvert o_i\rvert>1$）。若 $\kappa=\infty$：$R$ 值大于任一给定 $R_0>1$ 的零点只有有限个，所以按 $R$ 值从大到小选取、并把 $R$ 值相同的零点（例如互为共轭的一对）一并选入，可以使所选个数 $K$ 任意大，而其余右侧零点的 $R$ 都不超过某个 $R'<\min_iR_i$；若 $\kappa<\infty$，取全部，令 $R'=1$。取次数 $<2K$ 的插值多项式：$p_i$ 在 $o_l$ 处取 $\delta_{il}$、在 $\iota_l$ 处取 $0$；$q_i$ 在 $o_l$ 处取 $0$、在 $\iota_l$ 处取 $\theta_i\delta_{il}$，其中 $\theta_i=-\overline{v_{\rho_i}}\,o_i^{\,n}/(\lvert v_{\rho_i}\rvert R_i^{\,n})$。对 $\alpha\in\mathbb{C}^K$ 令 $h_\alpha(z)=\sum_i\alpha_i\bigl(z^np_i(z)+q_i(z)\bigr)$，它的次数小于 $N=n+2K$。于是 $h_\alpha(\iota_i)=\alpha_i\theta_i$，$h_\alpha(o_i)=\alpha_io_i^{\,n}$，所选这 $K$ 对的贡献恰为 $-\frac2{\lambda_1}\sum_im_{\rho_i}\lvert v_{\rho_i}\rvert R_i^{\,n}\lvert\alpha_i\rvert^2$。其余各项的界如下：线上项不超过 $\frac1{\lambda_1}\bigl(\sum_\rho m_\rho v_\rho\bigr)\sup_{\lvert z\rvert=1}\lvert h_\alpha\rvert^2\le C_1\lvert\alpha\rvert^2$（$z^n$ 在圆上模为 $1$）；其余离线对的项不超过 $C_2\bigl(R'^{\,n}+1\bigr)\lvert\alpha\rvert^2$。$C_1,C_2$ 只依赖于 $p_i$ 与 $\hat q_i$ 在 $\lvert z\rvert\le\sup_\rho\lvert u_\rho\rvert$ 上的界以及 $\sum m_\rho\lvert v_\rho\rvert$，与 $n$ 无关；这里 $q_i=\theta_i\hat q_i$，$\hat q_i$ 是在 $\iota_i$ 处取 $1$ 的固定插值多项式，$\lvert\theta_i\rvert=1$。因为 $\min_iR_i>R'$，当 $n$ 充分大时，二次型在 $\{h_\alpha\}$ 的系数向量张成的 $K$ 维子空间上负定（$h_\alpha\ne0$，因 $h_\alpha(o_i)=\alpha_io_i^{\,n}$），所以 $n_-(T_N)\ge K$。$K$ 可以取到 $\kappa$（$\kappa=\infty$ 时可任意大），得第 2 条。$\square$
+
+**同一计数对德布朗热核成立（手工推导，另依赖阿达马乘积，文献结果）。** 由阿达马乘积，$\frac{\xi'}{\xi}(s)=\sum_\rho\frac{m_\rho}{s-\rho}$（按零点对求和），与 [@rem-ch34-one-zero-form-three-readings] 第 1 款同样的计算给出 $K_\xi(w,s)=\frac12\xi(s)\overline{\xi(w)}\sum_\rho\frac{m_\rho}{(s-\rho)(\overline w-1+\rho)}$，各项绝对可和，所以 $K_\xi$ 在 $\operatorname{Re}s>\tfrac12$ 内任意有限点组上的负特征值不多于 $\kappa$。反过来，由 [@rem-ch34-li-toeplitz-de-branges-bridge]，$K_\xi$ 在 $s=1$ 处的泰勒系数矩阵与 $T_N(c^{\mathrm{Li}})$ 合同；泰勒系数矩阵是 $s=1$ 附近点上核矩阵经差商（左右各乘一个固定的有限差分矩阵）得到的极限，而严格负的特征值在小扰动下保持，所以 $K_\xi$ 在 $s=1$ 附近的点组上也能取到 $n_-(T_N)$ 个负特征值。于是 $K_\xi$ 在 $\operatorname{Re}s>\tfrac12$ 上的负平方数也恰为 $\kappa$。
+:::
+
+既然负方向的个数就是右侧零点的个数，下一个问题自然是：一个具体的离线四元组产生的负特征值有多大。对单独一个四元组可以算出两侧的界。
+
+::: {.remark #rem-ch34-off-circle-quartet-eigenvalue title="单个离圆四元组产生的负托普利茨特征值：两侧显式界（手工推导）"}
+**手工推导。** 取 [@rem-ch34-off-circle-pair-detection] 的四个旋子 $e^{\pm\eta\pm i\phi}$（$\eta>0$，$0<\phi<\pi$），$T_N$ 为它们的幂和托普利茨矩阵（[@rem-ch34-finite-toeplitz-inertia] 中的 $T_N(p)$，$d=4$，$\kappa=2$；不是曲率归一化的 $T_N(c)$，[@ex-ch34-toeplitz-versus-li-numbers] 中同一组四点的 $-1.68372\times10^{-6}$ 是曲率版本）。
+
+1. **下界（一切 $N$）。** $\lambda_{\min}(T_N)\ge-4\sum_{k=1}^{N-1}\sinh^2(k\eta)$。
+2. **二次多项式检验向量（$N\ge3$）。** 若 $\cosh\eta\cos2\phi<1$，则
+   $$
+   \lambda_{\min}(T_N)\le-\frac{16\sinh^2(\eta/2)\,\bigl(1-\cosh\eta\cos2\phi\bigr)}{1+2\cos^2\phi}<0 .
+   $$
+3. **三次插值检验向量（$N\ge4$）。** 设 $a_0+a_1z+a_2z^2+a_3z^3$ 是在 $e^{\eta\pm i\phi}$ 处取 $1$、在 $e^{-\eta\pm i\phi}$ 处取 $-1$ 的插值多项式（系数为实数），则 $\lambda_{\min}(T_N)\le-4/(a_0^2+a_1^2+a_2^2+a_3^2)$。
+
+固定 $\phi$ 与 $N\ge3$，当 $\eta\to0$ 时第 1 款约为 $-\frac23(N-1)N(2N-1)\eta^2$，第 2 款约为 $-\frac{8\sin^2\phi}{1+2\cos^2\phi}\eta^2$，所以 $\lvert\lambda_{\min}(T_N)\rvert$ 与 $\eta^2$ 同阶。零点四元组的 $\phi$ 并不固定：按 [@rem-ch34-off-circle-pair-detection] 第 3 款，$\eta\approx\frac{\lvert1-2\beta\rvert}{2\lvert\rho\rvert^2}$，同时 $\phi\approx\frac1{\lvert\rho\rvert}$ 也很小，于是第 2 款约为 $-\frac83\phi^2\eta^2\approx-\frac83(\beta-\tfrac12)^2/\lvert\rho\rvert^6$。数值上（$\gamma=20,100,1000$ 的四组零点四元组），固定 $N=3,4,8$ 时 $\lambda_{\min}(T_N)$ 分别约为 $-2.67$、$-16$、$-672$ 乘以 $(\beta-\tfrac12)^2/\lvert\rho\rvert^6$（手工推导与 `NUM`）。对照 [@rem-ch34-off-circle-pair-detection]：Li 和要到 $n\approx1/\eta$ 才变负，幂和托普利茨检验在尺寸 $3$ 就变负（因为零点四元组满足 $\phi\gg\eta$，第 2 款的条件成立），代价是特征值只有 $\phi^2\eta^2$ 量级。
+
+**证明。** 由 [@rem-ch34-finite-toeplitz-inertia] 的分解，$T_N=\sum_{\text{对}}\bigl(a_ia_{\tau(i)}^{*}+a_{\tau(i)}a_i^{*}\bigr)$，并且 $xy^{*}+yx^{*}=\tfrac12(x+y)(x+y)^{*}-\tfrac12(x-y)(x-y)^{*}$，所以 $T_N\succeq-\tfrac12\sum_{\text{对}}(a_i-a_{\tau(i)})(a_i-a_{\tau(i)})^{*}$。右端的范数不超过其迹 $\tfrac12\sum_{\text{对}}\lvert a_i-a_{\tau(i)}\rvert^2$。对 $u=e^{\eta+i\phi}$ 与 $1/\overline u=e^{-\eta+i\phi}$，有 $\lvert a_u-a_{1/\overline u}\rvert^2=\sum_{k<N}\bigl(e^{k\eta}-e^{-k\eta}\bigr)^2=4\sum_{k<N}\sinh^2(k\eta)$；两对相同，这给出第 1 款。对实系数向量 $x$ 与多项式 $g(z)=\sum_kx_kz^k$，记 $u'=1/\overline u$，有 $x^{\mathsf T}T_Nx=4\operatorname{Re}\bigl[g(u)\overline{g(u')}\bigr]$。取 $g(z)=(z-e^{i\phi})(z-e^{-i\phi})$，即 $x=(1,-2\cos\phi,1,0,\dots)$，$\lvert x\rvert^2=2+4\cos^2\phi$。直接展开，$\overline{g(u)}\,g(u')=(e^\eta-1)(e^{-\eta}-1)\bigl(2-e^{\eta-2i\phi}-e^{-\eta+2i\phi}\bigr)$，其实部为 $-4\sinh^2(\eta/2)\cdot2(1-\cosh\eta\cos2\phi)$；瑞利商即给出第 2 款。第 3 款的二次型值为 $4\operatorname{Re}[1\cdot(-1)]=-4$。$\square$
+
+数值核对（50 位精度）：对 [@ex-ch34-zero-rotor-sagitta-numbers] 的假想四点（$\eta=0.0079084$，$\phi=0.19902$），$\lambda_{\min}(T_3)=-6.69389\times10^{-6}$，第 2 款的界为 $-6.69158\times10^{-6}$；$\lambda_{\min}(T_4)=-4.02898\times10^{-5}$，第 1 款的下界为 $-3.50293\times10^{-3}$。对 $\eta=0.01,\ \phi=1$，$\lambda_{\min}(T_4)=-1.73392\times10^{-3}$，第 3 款的界为 $-1.59968\times10^{-3}$。这些是关于有限四元组的陈述；对 $\zeta$ 而言，其余零点也进入同一个矩阵，第 1 款的下界方法不再给出显式数值。
+:::
+
+[@rem-ch34-li-toeplitz-negative-index] 说明了“有没有负方向”，但没有说“要看到多大的 $N$”。对后一件事，文献中关于 Li 系数的显式无零点区域结果已经给出一个界。
+
+::: {.remark #rem-ch34-effective-li-toeplitz-detection title="Li 曲率托普利茨检验的显式检测阈值（文献结果与手工推导）"}
+**文献结果，未在本书形式化**，外加一步手工推导。N. Palojärvi（*Explicit zero-free regions and a $\tau$-Li-type criterion*，`arXiv:1807.01506`，定理 3.1，取 $\tau=1$）对满足若干显式条件的函数（$\zeta$ 满足这些条件）证明：对每个 $R>1$，可以显式算出 $N(R)$，使得只要 $\lambda_n\ge0$ 对区间 $[N(R),\ 5N(R)^2(A\log N(R)+M)]$ 中所有 $N(R)$ 的倍数 $n$ 成立（$A$、$M$ 是与零点计数有关的显式常数），$\zeta$ 的一切非平凡零点就满足 $\bigl\lvert\frac{\rho}{\rho-1}\bigr\rvert<R$。F. C. Brown（*J. Number Theory* **111**, 1–32, 2005，定理 3）给出过同类结果。
+
+由此得到托普利茨检验的一个显式阈值（手工推导）。由 [@prop-ch34-li-curvature-toeplitz] 后的读数式 $\lambda_n=\lambda_1\sum_{j,k<n}c^{\mathrm{Li}}_{j-k}$，$T_n(c^{\mathrm{Li}})$ 半正定蕴含 $\lambda_n\ge0$。若零点 $\rho=\beta+i\gamma$ 满足 $\beta\ge\tfrac12+\delta$、$\lvert\gamma\rvert\le T$，则 $\bigl\lvert\frac{\rho}{\rho-1}\bigr\rvert^2=1+\frac{2\beta-1}{\lvert\rho-1\rvert^2}\ge1+\frac{2\delta}{T^2+\frac14}$。取 $R^2=1+\frac{2\delta}{T^2+\frac14}$ 与 $N_0(T,\delta)=\bigl\lfloor5N(R)^2(A\log N(R)+M)\bigr\rfloor$：只要 $T_1(c^{\mathrm{Li}}),\dots,T_{N_0}(c^{\mathrm{Li}})$ 全部半正定，矩形 $\{\beta\ge\tfrac12+\delta,\ \lvert\gamma\rvert\le T\}$ 内就没有零点。这个阈值只用到托普利茨矩阵在全一向量上的读数；能否利用一切检验向量把它显著改小，本书没有找到结果。即使有了阈值，所需特征值的量级（[@ex-ch34-toeplitz-versus-li-numbers] 中 $N=20$ 时约为 $10^{-74}$）也要求 $\lambda_n$ 有相应的精度。这样的检验只给出有限高度内的无零点证书，不判定 [@conj-riemann-hypothesis]。
+:::
+
+以上各条都没有说明 $\zeta$ 的零点在哪里：它们只是把同一个未知数 $\kappa$（临界线右侧零点的个数）用核、托普利茨矩阵与牛顿—汉克尔矩阵三种方式表示出来，[@conj-riemann-hypothesis] 说的就是 $\kappa=0$，它仍然开放。
+
 ## 34.31.4 形式化审视：圆弧微积分公理内闭环与通往经典 ZFC 的最后一架舒尔枢轴桥 {#sec-ch34-31-4}
 
 站在 Lean 4 机器形式化验证与经典 ZFC 公理系统的严格标尺下审视整条推导链，我们可以用一张四行对照表，把“哪些环节已是无条件定理、哪一个环节是公理内闭环与经典 ZFC 之间的唯一桥接靶点”刻画得一清二楚（这个桥接靶点本身就是黎曼猜想的一个等价形式）：
