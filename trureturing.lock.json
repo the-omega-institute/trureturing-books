@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "29e991dc166e9c19e8a26733ced125bde0007a7c",
-  "pinned_at": "2026-11-17T05:00:38Z",
+  "commit": "b948587fa6b17151a4097a12834a8b608a26234d",
+  "pinned_at": "2026-11-17T06:47:06Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5609,7 +5609,7 @@
       "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",
       "name": "D5.S3.Weil.ZeroData.ActualReciprocalSquareBounds.actual_height_gt_ten",
       "kind": "theorem",
-      "statement_id": "sha256:91cc4473f454135e23da562c3028d1d2bbb147f3a7c1f0ba03aa208c141ac4b5",
+      "statement_id": "sha256:563604f18b7b6b0b20061f480be12cd4392440ddd8f89215134196eb17f9f3e3",
       "line": 789,
       "signature": "theorem actual_height_gt_ten (rho : ℂ) (hrho : IsNontrivialZero rho) : 10 < |rho.im|"
     },
