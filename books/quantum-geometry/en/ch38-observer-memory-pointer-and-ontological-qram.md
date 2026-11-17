@@ -28,4 +28,4 @@ In this architectural pivot chapter leading into [Chapter 39](ch39-observer-is-o
 - [38.4 Suppose an Omniscient Answer Table Exists: The Seven-Stage Degradation Ladder and Spacetime–Gravity Trade-Off](ch38-s04-lookup-degradation.md)
 - [38.5 Observer Escape Ledger, Preimage Fibers, and Hilbert–Zeckendorf Entropy](ch38-s05-escape-ledger-and-entropy.md)
 - [38.6 The Uncompleted Horizon: Why Gödelian Diagonal Escape and “Two Begets Three” Render the Omniscient Table an Asymptotically Unreachable Completion](ch38-s06-uncompleted-horizon.md)
-- [38.7 Self-Referential Blind-Spot Stereographic Projection, Relativization Barriers, and Tetralemma Suspension: Why Pursuing $P = NP$ Never Licenses Asserting $P \neq NP$](ch38-s07-blindspot-and-relativization.md)
+- [38.7 Self-Referential Blind-Spot Stereographic Projection, Relativization Barriers, and Tetralemma Suspension: Why Pursuing $P = NP$ Does Not Suffice to Assert $P \neq NP$](ch38-s07-blindspot-and-relativization.md)

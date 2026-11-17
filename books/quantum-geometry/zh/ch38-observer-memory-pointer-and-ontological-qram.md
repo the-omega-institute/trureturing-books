@@ -28,4 +28,4 @@
 - [38.4 假设存在一张全知答案表：七阶退化阶梯与时空引力权衡](ch38-s04-lookup-degradation.md)
 - [38.5 观察者逃逸账本、原像纤维与希尔伯特—齐肯多夫熵](ch38-s05-escape-ledger-and-entropy.md)
 - [38.6 未完成的地平线：为什么哥德尔对角逃逸与“二生三”让全知总表成为永不可达的完成化状态](ch38-s06-uncompleted-horizon.md)
-- [38.7 自指盲点球极投影、相对化屏障与四句离相：为什么追逐 $P = NP$ 绝不许断言 $P \neq NP$](ch38-s07-blindspot-and-relativization.md)
+- [38.7 自指盲点球极投影、相对化屏障与四句离相：为什么追逐 $P = NP$ 不足以断言 $P \neq NP$](ch38-s07-blindspot-and-relativization.md)

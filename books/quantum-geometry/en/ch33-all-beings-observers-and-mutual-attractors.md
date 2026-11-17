@@ -21,4 +21,4 @@ So long as that subject–object chasm remains unchallenged, the external third 
 - [33.2 Every Observer Is an Attractor: Self-Sustaining Contraction Basins](ch33-s02-self-sustaining-attractors.md)
 - [33.3 Mutual-Reference Monotonic Locking: How Two Mirrors Turn Two Negatives Positive in a Two-Step Round](ch33-s03-mutual-attractor-locking.md)
 - [33.4 Window Intersection, Min-Cut Reconnection, and All Beings as Walking Homelands](ch33-s04-acceptance-windows.md)
-- [33.5 Multi-Observer Consensus Tensor, Emergent Pointer Basis, and No Observer-Independent Facts](ch33-s05-consensus-and-pointer-bases.md)
+- [33.5 Multi-Observer Consensus Tensor, Emergent Pointer Basis, and Arguments Against Observer-Independent Facts](ch33-s05-consensus-and-pointer-bases.md)
