@@ -125,7 +125,25 @@ $$
 :::
 
 ::: proof
-第 1 款对复内积 $\langle a, b\rangle_{\mathbb{C}}$ 与 $\langle b, c\rangle_{\mathbb{C}}$ 分别选取模长为 $1$ 的相位对齐因子 $u, v \in \mathbb{C}$，转入底层实内积空间考察三单位向量 $(\overline{u}\cdot a,\, b,\, v\cdot c)$：此时前两段实内积分别等于 $\lVert\langle a, b\rangle_{\mathbb{C}}\rVert$ 与 $\lVert\langle b, c\rangle_{\mathbb{C}}\rVert$，而首尾实内积不超过模长 $\lVert\langle a, c\rangle_{\mathbb{C}}\rVert$，结合实内积空间无向夹角三角不等式与 $\arccos$ 在 $[-1, 1]$ 上的递减性即得结论（取实子空间嵌入 $\mathbb{R}^3 \hookrightarrow \mathbb{C}^3$ 及正交侧壁顶点 $a = \mathbf{A}(\epsilon),\, b = \mathbf{B},\, c = \mathbf{C}(\epsilon)$，左边即为顶盖大圆弧 $L_{\mathrm{cap}}(\epsilon)$，右边即为两扇侧壁弧长之和 $L_{\mathrm{walls}}(\epsilon) = 2\epsilon$）。第 2 款将右端反对称双和展开并交换求和指标 $i \leftrightarrow j$，直接化归为平方和乘积减去内积平方，锁定单位球面上两态弦向分离与内积亏损的精确代数关系。第 3 款与第 5 款刻画粗粒化重整化映射的商—纤维精确对偶：拉回离散拓扑中的单点纤维天然既开又闭，使同一读出核内的微观状态拓扑不可分，同时 `Equiv.sigmaFiberEquiv` 与 `Equiv.psigmaEquivSubtype` 将原空间 $X$ 无损重构为基空间坐标（对应下一层粗粒枢轴指标 $b \in B$）与各坐标上方内部纤维 $\operatorname{ConceptFiber}(q_C, b)$ 的依赖和。第 4 款对有限顶点集基数作强归纳：非空弦图由狄拉克（Dirac）极小团分隔子定理保证必含单纯顶点 $v$（其邻域构成完全团），归纳消去 $v$ 补全 $V \setminus \{v\}$ 上的诱导弦图后，利用等格拉姆压缩算子对齐邻域向量并补入一维正交残差坐标 $r = \sqrt{\lVert y_{\mathrm{root}}\rVert^2 - \lVert Z(y_{\mathrm{root}})\rVert^2}$ 完成全局格拉姆拼合。此处须恪守认识论边界：第 4 款在欧氏实内积空间中证明了沿单纯消元序的半正定矩阵存在性补全，而有向图在热带 $(\min, +)$ 半环上的舒尔补消元公式及 $O(m\log^{2/3} n)$ 算法时间复杂度上界分属热带代数手算与计算机科学文献结论，不冒充内核已证复杂度定理。完整证明由 Lean 内核检查。
+第 1 款对复内积 $\langle a, b\rangle_{\mathbb{C}}$ 与 $\langle b, c\rangle_{\mathbb{C}}$ 分别选取模长为 $1$ 的相位对齐因子 $u, v \in \mathbb{C}$，转入底层实内积空间考察三单位向量 $(\overline{u}\cdot a,\, b,\, v\cdot c)$：此时前两段实内积分别等于 $\lVert\langle a, b\rangle_{\mathbb{C}}\rVert$ 与 $\lVert\langle b, c\rangle_{\mathbb{C}}\rVert$，而首尾实内积不超过模长 $\lVert\langle a, c\rangle_{\mathbb{C}}\rVert$，结合实内积空间无向夹角三角不等式与 $\arccos$ 在 $[-1, 1]$ 上的递减性即得结论（取实子空间嵌入 $\mathbb{R}^3 \hookrightarrow \mathbb{C}^3$ 及正交侧壁顶点 $a = \mathbf{A}(\epsilon),\, b = \mathbf{B},\, c = \mathbf{C}(\epsilon)$，左边即为顶盖大圆弧 $L_{\mathrm{cap}}(\epsilon)$，右边即为两扇侧壁弧长之和 $L_{\mathrm{walls}}(\epsilon) = 2\epsilon$）。第 2 款将右端反对称双和展开并交换求和指标 $i \leftrightarrow j$，直接化归为平方和乘积减去内积平方，锁定单位球面上两态弦向分离与内积亏损的精确代数关系。第 3 款与第 5 款刻画粗粒化重整化映射的商—纤维精确对偶：拉回离散拓扑中的单点纤维天然既开又闭，使同一读出核内的微观状态拓扑不可分，同时 `Equiv.sigmaFiberEquiv` 与 `Equiv.psigmaEquivSubtype` 将原空间 $X$ 无损重构为基空间坐标（对应下一层粗粒枢轴指标 $b \in B$）与各坐标上方内部纤维 $\operatorname{ConceptFiber}(q_C, b)$ 的依赖和。第 4 款对有限顶点集基数作强归纳：非空弦图由狄拉克（Dirac）极小团分隔子定理保证必含单纯顶点 $v$（其邻域构成完全团），归纳消去 $v$ 补全 $V \setminus \{v\}$ 上的诱导弦图后，利用等格拉姆压缩算子对齐邻域向量并补入一维正交残差坐标 $r = \sqrt{\lVert y_{\mathrm{root}}\rVert^2 - \lVert Z(y_{\mathrm{root}})\rVert^2}$ 完成全局格拉姆拼合。此处须恪守认识论边界：第 4 款在欧氏实内积空间中证明了沿单纯消元序的半正定矩阵存在性补全；有向图在热带 $(\min, +)$ 半环上的单顶点舒尔补行走压缩与下确界距离守恒紧接着由下方 [@prop-ch34-tropical-pivot-walk-distance] 给出机器验证，而比较—加法模型下的 $O(m\log^{2/3} n)$ 渐近算法时间复杂度上界仍属段然等人（2025）的计算机科学文献结论，不冒充内核已证复杂度定理。完整证明由 Lean 内核检查。
+:::
+
+::: {.proposition #prop-ch34-tropical-pivot-walk-distance lean="D5/S3/Combinatorics/Graph/Walks/TropicalSchurElimination.pivot_walks_and_distance" title="任意顶点类型有向箭图上单顶点热带舒尔补消元的行走压缩与下确界距离守恒"}
+设 $V : \operatorname{Type}\;u$ 为任意宇宙层级的顶点类型（命题陈述无需假设 $V$ 有限，亦无需在 $V$ 上预设可判定相等实例），赋予完全有向箭图结构 $\operatorname{completeQuiver} V$（任意顶点对间态射类型为单点集 $\operatorname{PUnit}$，缺失有向边由扩展非负实数半环 $\mathbb{R}_{\ge 0}^\infty$ 中的无穷权值 $+\infty$ 表示）。给定边权函数 $W : V \to V \to \mathbb{R}_{\ge 0}^\infty$，记有向有限行走类型为 $\operatorname{Walk}(u, v) := \operatorname{Quiver.Path}(u, v)$，行走总权 $\operatorname{weight}(W, p) \in \mathbb{R}_{\ge 0}^\infty$ 对空行走取 $0$ 并沿有向边逐段累加，两点间的行走下确界距离定义为 $\operatorname{distance}(W, u, v) := \inf_{p : \operatorname{Walk}(u, v)} \operatorname{weight}(W, p)$（无需假设极小权行走可达）。选定待消去的内部顶点 $b : V$，在余下枢轴子类型 $V_{\neq b} := \{x : V \mid x \neq b\}$ 上定义单顶点热带 $(\min, +)$ 舒尔补边权算子
+
+$$
+\operatorname{schur}(W, b)(a, z) \;:=\; \min\bigl(W(a.\mathrm{val}, z.\mathrm{val}),\; W(a.\mathrm{val}, b) + W(b, z.\mathrm{val})\bigr).
+$$
+
+则对任意存活边界顶点 $a, z : V_{\neq b}$，下列三项结论同时成立（[`pivot_walks_and_distance`](lean:D5/S3/Combinatorics/Graph/Walks/TropicalSchurElimination.pivot_walks_and_distance)）：
+
+1. **正向行走捷径压缩**：对原图中的任意有限行走 $p : \operatorname{Walk}(a.\mathrm{val}, z.\mathrm{val})$，在消元子图 $V_{\neq b}$ 上必存在有限行走 $q : \operatorname{Walk}(a, z)$，使得 $\operatorname{weight}\bigl(\operatorname{schur}(W, b),\, q\bigr) \le \operatorname{weight}(W, p)$；
+2. **逆向行走精确展开**：对消元子图上的任意有限行走 $q : \operatorname{Walk}(a, z)$，在原图 $V$ 上必存在有限行走 $p : \operatorname{Walk}(a.\mathrm{val}, z.\mathrm{val})$，使得 $\operatorname{weight}(W, p) = \operatorname{weight}\bigl(\operatorname{schur}(W, b),\, q\bigr)$；
+3. **行走下确界距离精确守恒**：$\operatorname{distance}\bigl(\operatorname{schur}(W, b),\, a,\, z\bigr) = \operatorname{distance}(W,\, a.\mathrm{val},\, z.\mathrm{val})$。
+:::
+
+::: proof
+正向压缩沿原行走 $p$ 作结构归纳，并在中间步对顶点是否命中消元点 $b$ 作经典排中分案（`by_cases`）：凡接连穿过 $u \to b \to w$ 的两步内跳均被舒尔边权 $\operatorname{schur}(W, b)(u, w) \le W(u.\mathrm{val}, b) + W(b, w.\mathrm{val})$ 单步吸收，而任何在 $b$ 处原地盘旋的非负权短环 $b \to \dots \to b$ 因 $\mathbb{R}_{\ge 0}^\infty$ 加法单调非负而在删去后绝不增大总权。逆向展开对约化行走 $q$ 逐边归纳：由全序性，$\operatorname{schur}(W, b)(u, w)$ 必等于外表面直连边权 $W(u.\mathrm{val}, w.\mathrm{val})$（取原图单边行走）或两步穿底边权和 $W(u.\mathrm{val}, b) + W(b, w.\mathrm{val})$（取原图经由 $b$ 的双边行走 $u.\mathrm{val} \to b \to w.\mathrm{val}$），逐段拼接即得等权原图行走 $p$。最后在完备格 $\mathbb{R}_{\ge 0}^\infty$ 上对两侧行走下确界 `⨅` 应用反对称律（`le_antisymm`），无需有限性或最短路存在性假设即锁定 $\operatorname{distance}$ 恒等；对有限内部顶点集顺次复合该单步算子即可消去整团局部内部节点（认识论边界：本命题锁定单顶点热带舒尔消元的精确距离不变性，而多层分治调度的 $O(m\log^{2/3} n)$ 时间界属外部算法文献结论）。完整证明由 Lean 内核检查。
 :::
 
 ::: {.example #ex-ch34-trihedron-chord-and-tropical-schur title="圆弧体三级路径严格不等式、五档角度六位小数基准表与六顶点有向图热带舒尔补消元（手工推导与数值核验）"}
@@ -174,7 +192,7 @@ $$
      W_{\mathrm{eff}}(p_1, p_2) \;=\; \min\!\Bigl(11,\; \min\bigl(2 + \infty,\; 3 + 6,\; 5 + 4,\; 6 + 1\bigr)\Bigr) \;=\; \min\bigl(11,\; \min(+\infty, 9, 9, 7)\bigr) \;=\; 7.
      $$
 
-     $4$ 枚内部点连同内部短环被一次性折叠为单条有效割弦 $p_1 \xrightarrow{7} p_2$，将外表面直跳代价 $11$（以及单步浅层内跳代价 $9$）一步削减至全局精确最短路 $7$（对应微观折线 $p_1 \to b_1 \to b_2 \to b_3 \to b_4 \to p_2$：$2 + 1 + 2 + 1 + 1 = 7$）！
+     $4$ 枚内部点连同内部短环被一次性折叠为单条有效割弦 $p_1 \xrightarrow{7} p_2$，将外表面直跳代价 $11$（以及单步浅层内跳代价 $9$）一步削减至全局精确最短路 $7$（对应微观折线 $p_1 \to b_1 \to b_2 \to b_3 \to b_4 \to p_2$：$2 + 1 + 2 + 1 + 1 = 7$）！代数上，对内部点集 $\{b_1, b_2, b_3, b_4\}$ 顺次迭代四次 [@prop-ch34-tropical-pivot-walk-distance] 的单顶点热带舒尔消元算子 $\operatorname{schur}(\cdot, b_i)$，即机器验证地保证枢轴对 $(p_1, p_2)$ 间的行走下确界距离精确守恒为 $W_{\mathrm{eff}}(p_1, p_2) = 7$（而全局多层调度的确定性 $O(m\log^{2/3} n)$ 渐近复杂度上界仍属段然等人 2025 年的算法文献结论）。
 :::
 
 ## 34.26.4 与量子隧穿的三重同源：阿格蒙瞬子测地线、悬置排序抗芝诺阻尼与共振枢轴中继 {#sec-ch34-26-4}
@@ -213,7 +231,7 @@ $$
 
 1. **单源最短路径（SSSP）与排序壁垒文献**：戴克斯特拉（Dijkstra, *Numer. Math.* **1**, 269–271, 1959）创立非负权贪心波前算法；弗雷德曼与塔扬（Fredman & Tarjan, *J. ACM* **34**, 596–615, 1987）以斐波那契堆实现比较—加法模型下的 $O(m + n\log n)$ 上界；海乌普勒等（Haeupler, Hladík, Rozhoň, Tarjan & Tětek, *FOCS 2024*）证明在要求按距离顺序输出全体顶点的前提下，配工作集堆的 Dijkstra 具有普遍最优性；段然、毛嘉怡、毛啸、束欣凯与尹龙晖（Duan, Mao, Mao, Shu & Yin, *STOC 2025* Best Paper, DOI `10.1145/3717823.3718179`, `arXiv:2504.17033`）给出有向非负实权图在比较—加法模型下的确定性 $O(m\log^{2/3} n)$ 单源最短路径算法。此处有一条至关重要的信息论边界必须交代清楚：**计算单源最短路径距离值（及最短路树）之所以能突破 $O(m + n\log n)$（在 $m = O(n)$ 的稀疏图上达到 $o(n\log n)$），恰恰因为它不需要按距离从小到大的排好序列表输出全部 $n$ 个顶点**——若强制要求输出全体顶点的距离全序排列，比较排序的信息论下界 $\Omega(n\log n)$ 依然严格有效；
 2. **欧氏瞬子、阿格蒙度规、芝诺冻结、共振隧穿与 MERA 全息文献**：阿格蒙（Agmon, *Lectures on Exponential Decay of Solutions of Second-Order Elliptic Equations*, Princeton Univ. Press, 1982）建立势垒禁戒区 $V(x) > E$ 上的黎曼度规 $ds_{\mathrm{Agmon}}^2 = 2m(V(x)-E)_+\,dx^2$ 与指数衰减测地界；科尔曼（Coleman, *Phys. Rev. D* **15**, 2929, 1977）奠定虚时间欧氏瞬子半经典隧穿理论；米斯拉与苏达山（Misra & Sudarshan, *J. Math. Phys.* **18**, 756, 1977）严格表述高频投影观测下的量子芝诺效应；辻与江崎（Tsu & Esaki, *Appl. Phys. Lett.* **22**, 562, 1973）提出超晶格有限多势垒准束缚态共振隧穿；维达尔（Vidal, *Phys. Rev. Lett.* **99**, 220405, 2007）与斯温格尔（Swingle, *Phys. Rev. D* **86**, 065007, 2012）建立多尺度纠缠重整化拟设（MERA）及其离散双曲全息几何对应；
-3. **本书内核锚点（`LEAN ✓`）与原创几何模型（`MODEL`）**：[@thm-ch34-chord-tunneling-and-pivot-renormalization] 锁定富比尼—施图迪测地三角律、拉格朗日—格拉姆恒等式、划分不可分核、弦图单纯消元半正定补全与概念纤维分解五项有限维/拓扑骨架；而将 SSSP 的“爬墙—顶盖波前—内割弦消元—稀疏枢轴递归”映射至极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的三张几何面、`1—3—3—1` 点体八度重整化以及阿格蒙瞬子/共振隧穿中继，则属本书原创跨学科几何诠释模型（`MODEL`）。
+3. **本书内核锚点（`LEAN ✓`）与原创几何模型（`MODEL`）**：[@thm-ch34-chord-tunneling-and-pivot-renormalization] 锁定富比尼—施图迪测地三角律、拉格朗日—格拉姆恒等式、划分不可分核、弦图单纯消元半正定补全与概念纤维分解五项有限维/拓扑骨架，[@prop-ch34-tropical-pivot-walk-distance]（`pivot_walks_and_distance`）进一步在宇宙多态任意顶点类型上锁定单顶点热带 $(\min, +)$ 舒尔补消元的行走压缩与下确界距离精确守恒；而将 SSSP 的“爬墙—顶盖波前—内割弦消元—稀疏枢轴递归”映射至极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的三张几何面、`1—3—3—1` 点体八度重整化以及阿格蒙瞬子/共振隧穿中继，则属本书原创跨学科几何诠释模型（`MODEL`）。
 :::
 
 在离开本节之前，不妨走进下方的完整交互实验室，亲手做两个令整幅图景豁然贯通的动作：第一，在三维极小圆弧体视图中把步长角 $\epsilon$ 推大，凝视向外鼓起的**品红球面顶盖**与切在球肚里的**青色平直内割弦面**之间那弯清晰可见的新月形空隙——那弯被削掉的曲率鼓包，就是省去逐点排队所免缴的几何税；第二，在全息重整化锥视图中把局部窗口步数从 $k = 1$ 拨向 $k = 3$，目睹外圈密密麻麻的青色边界节点如何跨过品红波前面片、逐层凝成稀疏的紫色枢轴新点，并顺着紫色树管沉入与青色内割弦中点 $\mathbf{M}$ 同深的体内，引导琥珀色读头跨尺度一跃而过。而在下一节[§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit)中，我们将顺着这根潜入球肚盲区的内割弦继续追问：**当穿过虚数盲区 $\hat{\mathbf{i}}$ 的瞬子捷径在时间轴上张开双缝时，“虚弦隧穿”与“时间双缝干涉”将如何揭示同一枚圆弧体在观测前后的波粒真容？**

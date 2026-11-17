@@ -98,7 +98,23 @@ $$
 G = \begin{pmatrix} G_{II} & G_{IP} \\ G_{PI} & G_{PP} \end{pmatrix} \succeq 0 \quad \Longleftrightarrow \quad \widetilde{G}_{PP} \equiv G_{PP} - G_{PI} G_{II}^{-1} G_{IP} \succeq 0 \qquad (G_{II} \succ 0),
 $$
 
-且两侧行列式精确满足乘积分解 $\det G = \det G_{II} \cdot \det\widetilde{G}_{PP}$！若局部波前中混入了线性相关或重复生成的合数分支，使得内部块仅半正定退化（$G_{II} \succeq 0$ 但奇异），则由阿尔伯特（Albert）广义舒尔补定理（手工推导），只需将逆矩阵 $G_{II}^{-1}$ 替换为摩尔—彭罗斯（Moore–Penrose）广义逆 $G_{II}^+$，并附加列空间包含条件 $\operatorname{im}(G_{IP}) \subseteq \operatorname{im}(G_{II})$（等价于零核正交条件 $(I - G_{II} G_{II}^+) G_{IP} = 0$），合同等价律依然分毫不差：
+且两侧行列式精确满足乘积分解 $\det G = \det G_{II} \cdot \det\widetilde{G}_{PP}$！不仅如此，当固定边界枢轴向量而令内部振幅任意变动时，严格正定内部块下的舒尔补二次型已在 Lean 4 内核中直接锁定为全矩阵二次型的精确变分最小元：
+
+::: {.proposition #prop-ch34-hermitian-schur-variational-minimum lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least" title="严格正定内部块下埃尔米特分块舒尔补二次型的变分极小定理"}
+设 $m, n$ 为有限指标类型（具备 `[Fintype m] [Fintype n] [DecidableEq n]`），$A \in M_{m\times m}(\mathbb{C})$ 为埃尔米特矩阵（`A.IsHermitian`），$B \in M_{m\times n}(\mathbb{C})$ 为跨块耦合矩阵，$C \in M_{n\times n}(\mathbb{C})$ 为严格正定复矩阵（`C.PosDef`）。记由分块矩阵 `Matrix.fromBlocks A B Bᴴ C` 诱导的全空间二次型（将保留的边界枢轴块 $A$ 置于左上块、待消去的严格正定内部块 $C$ 置于右下块，与上文 $I \oplus P$ 排布仅差一次分块坐标置换 $(x \oplus y) \leftrightarrow (y \oplus x)$，对应 $(A, B, B^{\mathrm{H}}, C) = (G_{PP}, G_{PI}, G_{IP}, G_{II})$）在固定边界向量 $x : m \to \mathbb{C}$、遍历全体内部向量 $y : n \to \mathbb{C}$ 时的取值集合，并记舒尔补算子为 $S := A - B C^{-1} B^{\mathrm{H}}$。则在复数偏序 `ComplexOrder`（即实部偏序且虚部相等，埃尔米特二次型落于实轴）下，约化舒尔补二次型精确给出该变分集合的最小元（[`schur_quadratic_is_least`](lean:D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least)）：
+
+$$
+\operatorname{IsLeast}\!\left(\left\{\, (x \oplus y)^\dagger \begin{pmatrix} A & B \\ B^{\mathrm{H}} & C \end{pmatrix} (x \oplus y) \;\middle|\; y : n \to \mathbb{C} \,\right\},\; x^\dagger \bigl(A - B C^{-1} B^{\mathrm{H}}\bigr) x\right),
+$$
+
+即同时满足：（1）**精确可达性**：存在最优内部弛豫向量 $y^* = -(C^{-1} B^{\mathrm{H}}) x : n \to \mathbb{C}$，使全矩阵二次型恰取 $x^\dagger (A - B C^{-1} B^{\mathrm{H}}) x$；（2）**全局变分下界**：对一切 $y : n \to \mathbb{C}$，在 `ComplexOrder` 中恒有 $x^\dagger (A - B C^{-1} B^{\mathrm{H}}) x \le (x \oplus y)^\dagger \bigl(\begin{smallmatrix} A & B \\ B^{\mathrm{H}} & C \end{smallmatrix}\bigr) (x \oplus y)$。
+:::
+
+::: proof
+由严格正定性假设 `hC : C.PosDef` 知内部块行列式可逆（`isUnit_det_of_posDef`），故可调用 Mathlib 的分块合同配方恒等式 `Matrix.schur_complement_eq₂₂` 将全矩阵在分块向量 $x \oplus y$ 上的二次型精确分解为边界舒尔补项 $x^\dagger (A - B C^{-1} B^{\mathrm{H}}) x$ 与内部残差项 $\bigl(y + C^{-1} B^{\mathrm{H}} x\bigr)^\dagger C \bigl(y + C^{-1} B^{\mathrm{H}} x\bigr)$ 之和。取唯一驻点响应 $y^* = -(C^{-1} B^{\mathrm{H}}) x$ 时内部残差归零，证出值域可达性（`∈ Set.range`）；对任意 $y : n \to \mathbb{C}$，由半正定性 `hC.posSemidef` 在 `ComplexOrder` 中给出 $0 \le \bigl(y + C^{-1} B^{\mathrm{H}} x\bigr)^\dagger C \bigl(y + C^{-1} B^{\mathrm{H}} x\bigr)$，证出全局下界（`mem_lowerBounds`）。认识论边界：本内核声明覆盖严格正定内部块 $C \succ 0$，而下方内部块退化为半正定奇异矩阵时的摩尔—彭罗斯广义逆推广属阿尔伯特（1969）定理的手工推导。完整证明由 Lean 内核检查。
+:::
+
+若局部波前中混入了线性相关或重复生成的合数分支，使得内部块仅半正定退化（$G_{II} \succeq 0$ 但奇异），则由阿尔伯特（Albert）广义舒尔补定理（手工推导），只需将逆矩阵 $G_{II}^{-1}$ 替换为摩尔—彭罗斯（Moore–Penrose）广义逆 $G_{II}^+$，并附加列空间包含条件 $\operatorname{im}(G_{IP}) \subseteq \operatorname{im}(G_{II})$（等价于零核正交条件 $(I - G_{II} G_{II}^+) G_{IP} = 0$），合同等价律依然分毫不差：
 
 $$
 G \succeq 0 \quad \Longleftrightarrow \quad G_{II} \succeq 0, \quad \operatorname{im}(G_{IP}) \subseteq \operatorname{im}(G_{II}), \quad \text{且} \quad \widetilde{G}_{PP} := G_{PP} - G_{PI} G_{II}^+ G_{IP} \succeq 0.
@@ -134,7 +150,7 @@ $$
 M(s) = \sum_{n \le T^\vartheta} \frac{\mu(n)\,P\!\left(\frac{\ln(T^\vartheta / n)}{\ln T^\vartheta}\right)}{n^s},
 $$
 
-试图在 $\sigma > 1$ 的欧拉区先锻造一把 $\zeta(s)^{-1}$ 的有限截断近似逆算子，然后**一口气单跳投射**到高度 $T$ 处的临界线 $\sigma = \frac{1}{2} + it$ 上，令阻尼乘积满足 $\zeta(s) M(s) \approx 1$（其最优多项式包络 $P$ 的欧拉—拉格朗日变分方程，在代数上恰恰就是求解一块**单级格拉姆舒尔补二次型**的极值！）。
+试图在 $\sigma > 1$ 的欧拉区先锻造一把 $\zeta(s)^{-1}$ 的有限截断近似逆算子，然后**一口气单跳投射**到高度 $T$ 处的临界线 $\sigma = \frac{1}{2} + it$ 上，令阻尼乘积满足 $\zeta(s) M(s) \approx 1$（其最优多项式包络 $P$ 的欧拉—拉格朗日变分方程，在代数上恰恰就是按 [@prop-ch34-hermitian-schur-variational-minimum] 求解一块**单级格拉姆舒尔补二次型**的极小值！）。
 
 为什么单级有理包络磨光器一旦逼近对数长度上限 **$\vartheta = \frac{4}{7}$** 就撞上铁壁、无法一路推向 $\vartheta \to \infty$（$100\%$ 零点）？对照 [§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 的纳米势垒公式立见分晓：在波动力学中，不布设势垒内共振中继阱、仅凭单一尺度的入射波包一次性硬穿宽阔高势垒，透射相干幅必然遭受阿格蒙（Agmon / WKB）指数衰减 $e^{-2\kappa L}$；在数论均值积分 $\int_T^{2T} \lvert 1 - \zeta(\frac{1}{2}+it)M(\frac{1}{2}+it)\rvert^2 dt$ 中，一旦单跳截断尺度越过 $\vartheta = \frac{4}{7}$，势垒内部非对角素数对移位关联（$m n_1 - m' n_2 = h \neq 0$ 激发的 Kloosterman 和色散相移）累积的散粒噪声就会反超主对角透射信号，将单跳裸隧穿彻底淹没！
 
@@ -268,9 +284,9 @@ $$
 ::: {.remark #rem-ch34-arithmetic-pivot-literature title="图兰部分和零点、Nyman–Beurling 对数下界、4/7 磨光器定理与最短路径枢轴移植的文献脉络及认识论边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节汇聚的数论定理、高精度证书与跨学科几何架构严格区分以下五个认识论层级：
 
-1. **机器验证的 Lean 4 内核定理锚点（`LEAN ✓`）**：[@thm-ch34-critical-strip-barrier-and-cayley-bridge] 所列的全部九条 `trureturing` 冻结声明——`classical_zeta_unique_simple_pole_residue_one`、`completedRiemannZeta_ne_zero_of_one_le_re`、`golden_right_half_strip_implies_rh`、`cayley_ratio_norm_one_iff_critical_line`、`cayley_critical_line_zeta_criterion`、`gram_realizability`、`exists_posSemidef_completion`、`exists_posSemidef_completion_rank_le` 与 `original_zero_robin5040_localA`——均已在所钉提交上经 Lean 4 内核零公理缺口验证通过（`LEAN ✓`）。
+1. **机器验证的 Lean 4 内核定理锚点（`LEAN ✓`）**：[@thm-ch34-critical-strip-barrier-and-cayley-bridge] 所列的全部九条 `trureturing` 冻结声明——`classical_zeta_unique_simple_pole_residue_one`、`completedRiemannZeta_ne_zero_of_one_le_re`、`golden_right_half_strip_implies_rh`、`cayley_ratio_norm_one_iff_critical_line`、`cayley_critical_line_zeta_criterion`、`gram_realizability`、`exists_posSemidef_completion`、`exists_posSemidef_completion_rank_le` 与 `original_zero_robin5040_localA`——连同 [@prop-ch34-hermitian-schur-variational-minimum] 的埃尔米特分块舒尔补二次型变分极小定理 `schur_quadratic_is_least`，均已在所钉提交上经 Lean 4 内核零公理缺口验证通过（`LEAN ✓`）。
 2. **解析数论与图论算法经典文献（未在本书形式化）**：部分和 $\zeta_M(s)$ 无越界零点蕴含 RH 的判据由 P. Turán（*Danske Vid. Selsk. Mat.-Fys. Medd.* **24**(17), 1–36, 1948）提出；刘维尔和符号猜想的渐近反例由 C. B. Haselgrove（*Mathematika* **5**, 141–145, 1958）给出；大 $M$ 越界零点最大实部渐近公式 $\psi_M = 1 + (\frac{4}{\pi} - 1 - o(1))\frac{\ln\ln M}{\ln M}$ 由 H. L. Montgomery（*Studies in Pure Mathematics: To the Memory of Paul Turán*, Birkhäuser, 497–506, 1983）证出；结合 R. Spira（*Math. Comp.* **20**, 542–550, 1966；*Duke Math. J.* **35**, 79–82, 1968；*Math. Comp.* **22**, 168–173, 1968）与 W. R. Monach（密歇根大学博士论文, 1980），$\zeta_M(s)$ 在 $\operatorname{Re}(s) > 1$ 无零点当且仅当 $M \in \{1,\dots,18, 20, 21, 28\}$ 的完整分类定理最终由 D. J. Platt & T. S. Trudgian（*Bull. Lond. Math. Soc.* **48**, 532–538, 2016，`arXiv:1507.01340`）确立。希尔伯特空间逼近准则与自然数顺序无条件对数下界 $\liminf_{M \to \infty}(\ln M)\,d_M^2 \ge \sum_{\operatorname{Re}(\rho)=1/2} m_\rho^2 / \lvert\rho\rvert^2 > 0$（黎曼猜想成立时该和等于或不小于 $C_{\mathrm{NBB}} = 2 + \gamma - \ln(4\pi) \approx 0.0461914179$）源自 B. Nyman（1950）、A. Beurling（1955）、L. Báez-Duarte, M. Balazard, B. Landreau & E. Saias（*Adv. Math.* **149**, 130–144, 2000）、J.-F. Burnol（*Adv. Math.* **170**(1), 56–70, 2002，`arXiv:math/0103058`，将无条件对数下界分子强化至重数平方 $m_\rho^2$）与 L. Báez-Duarte（*Adv. Math.* **178**, 313–328, 2003）。临界线零点正比例与磨光器极限源自 A. Selberg（1942）、N. Levinson（*Adv. Math.* **13**, 383–436, 1974，$\vartheta = \frac{1}{2}$ 下 $> 34.74\%$）、J.-M. Deshouillers & H. Iwaniec（*Invent. Math.* **70**, 219–288, 1982）、J. B. Conrey（*J. Reine Angew. Math.* **399**, 1–26, 1989，$\vartheta = \frac{4}{7}$ 原始下界 $> 40.77\%$，后在同一 $\vartheta < \frac{4}{7}$ 多项式框架内精化至 $\ge 40.88\%$）及 K. Pratt, N. Robles, A. Zaharescu & D. Zeindler（*Res. Math. Sci.* **7**, 2, 2020，引入附加代数长度达 $> 41.72\%$）。有向图单源最短路径破除排序壁垒的局部波前与稀疏枢轴算法源自 R. Duan, J. Mao, X. Mao, X. Shu & L. Yin（*STOC 2025* / `arXiv:2504.17033`, 2025；参见 [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)）。
-3. **高精度区间认证与精确有理算例（`手工推导` / `NUM`）**：分块 $LDU$ 合同与阿尔伯特广义舒尔补恒等式，以及 [@ex-ch34-turan-schur-and-cayley-calculus] 中的 $\zeta_{19}$ 百位鲁歇区间证书、$1 \le M \le 10^6$ 刘维尔正性证书、`[1, 2 | 3, 6]` 精确有理舒尔补消元和凯莱反复平方条件数值表，均为精确代数恒等式或独立复核的区间算术结果（`NUM`）。
+3. **高精度区间认证与精确有理算例（`手工推导` / `NUM`）**：分块 $LDU$ 行列式分解与奇异情形下的阿尔伯特摩尔—彭罗斯广义舒尔补恒等式，以及 [@ex-ch34-turan-schur-and-cayley-calculus] 中的 $\zeta_{19}$ 百位鲁歇区间证书、$1 \le M \le 10^6$ 刘维尔正性证书、`[1, 2 | 3, 6]` 精确有理舒尔补消元和凯莱反复平方条件数值表，均为精确代数恒等式或独立复核的区间算术结果（`NUM`）。
 4. **跨学科统一几何架构（`MODEL`）**：将一维截断解释为中途芝诺斩波、将单级磨光器解释为受限于 $\vartheta = \frac{4}{7}$ 的单跳裸隧穿、以及用算术 MERA 舒尔枢轴重整与法布里—珀罗多级共振腔统一重构临界带穿越路线，属于本书建立的几何综合模型（`MODEL`）。
 5. **未解核心数学猜想（`OPEN`）**：跨算术枢轴子树横向移位关联的面积律衰减（[@prob-ch34-arithmetic-pivot-area-law]）、高阶 Chowla 移位莫比乌斯自相关猜想以及黎曼猜想 [@conj-riemann-hypothesis] 本身（参见[附录 C](appendix-c.md#sec-appendix-c-open-register) 开放问题边界），均属当代数学尚未解决的开放命题（`OPEN`）。
 :::

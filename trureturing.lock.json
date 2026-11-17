@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "eea23ac5dbd7fdffd0c8aa2c043f9d4da308936c",
-  "pinned_at": "2026-11-16T22:56:44Z",
+  "commit": "064f028cd737ae0241e2042aa34e5d99c8669707",
+  "pinned_at": "2026-11-17T03:42:02Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1180,6 +1180,14 @@
       "statement_id": "sha256:d5957773c60b04f8925a028571b2bf1a1f66eed878d42be4d7ae2aa327854751",
       "line": 156,
       "signature": "theorem colorable_iff_exists_orientation [Finite V] (G : SimpleGraph V) (k : ℕ) : G.Colorable k ↔ ∃ o : V → V → Prop, IsOrientation G o ∧ ∀ (m : ℕ) (f : Fin m → V), IsDirectedPath o f → m ≤ k"
+    },
+    "D5/S3/Combinatorics/Graph/Walks/TropicalSchurElimination.pivot_walks_and_distance": {
+      "module": "D5/S3/Combinatorics/Graph/Walks/TropicalSchurElimination",
+      "name": "D5.S3.Combinatorics.Graph.Walks.TropicalSchurElimination.pivot_walks_and_distance",
+      "kind": "theorem",
+      "statement_id": "sha256:5cbe76da3ee67a182300133cc3508ca0a374f25118945148c3372f9d143cf7da",
+      "line": 96,
+      "signature": "theorem pivot_walks_and_distance (W : V → V → ℝ≥0∞) (b : V) (a z : {x : V // x ≠ b}) : (∀ p : Walk a.val z.val, ∃ q : Walk a z, weight (schur W b) q ≤ weight W p) ∧ (∀ q : Walk a z, ∃ p : Walk a.val z.val, weight W p = weight (schur W b) q) ∧ distance (schur W b) a z = distance W a.val z.val"
     },
     "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk.circuit_length": {
       "module": "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk",
@@ -4092,6 +4100,14 @@
       "statement_id": "sha256:db4e46e74ee00801b8429452173160860d3d486955c18142ca6d4ae7401fd518",
       "line": 141,
       "signature": "theorem recurrence_endpoint_observability (n : ℕ) (hn : 1 ≤ n) (t b : ℝ) (y : ℕ → ℝ) (hzero : y 0 = 0) (hrec : ∀ j, j + 2 ≤ n + 1 → y (j + 2) = t * y (j + 1) - y j) (hboundary : y (n + 1) = b * y n) : (∑ j ∈ Finset.range n, y (j + 1) ^ 2) ≤ (1 + |b|) ^ 2 * (n : ℝ) ^ 3 * y n ^ 2"
+    },
+    "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least": {
+      "module": "D5/S3/Quantum/Matrix/SchurMinimum",
+      "name": "D5.S3.Quantum.Matrix.SchurMinimum.schur_quadratic_is_least",
+      "kind": "theorem",
+      "statement_id": "sha256:728cc51ddc52c8e210b60c965fd55c7bfbe7f437163200a456cf80bf10e376c7",
+      "line": 44,
+      "signature": "theorem schur_quadratic_is_least {m n : Type*} [Fintype m] [Fintype n] [DecidableEq n] (A : Matrix m m ℂ) (B : Matrix m n ℂ) (C : Matrix n n ℂ) (_hA : A.IsHermitian) (hC : C.PosDef) (x : m → ℂ) : let S"
     },
     "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator": {
       "module": "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator",
