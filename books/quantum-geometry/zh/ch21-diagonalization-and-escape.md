@@ -10,7 +10,7 @@
 
 请回想[序曲](README.md)与[第三章](ch03-projectors-and-duality.md)揭示的那条基本几何铁律：当你在二维赤道平面 $\operatorname{span}\{\vv{e}_1, \vv{e}_2\}$ 内旋转了一块有向面积 $\vv{e}_1 \wedge \vv{e}_2$，并试图把这块“面积”指认为一根确凿无疑的一维“存在轴”（粒子态或已定命题）时，你的目光绝不可能停留在那张二维平面内部——因为平面内的任何向量都与该平面共面，无法充当它的法线。你之所以能把二维面积压缩为一根一维法向箭头 $\vv{e}_3 = \star_3(\vv{e}_1 \wedge \vv{e}_2)$，唯一的原因是你已经站在了**三维外围空间** $\mathbb{R}^3$ 的内部！同样地，在定向三维空间 $\mathbb{R}^3$ 内部，最高阶体积元 $I_3 = \vv{e}_1 \wedge \vv{e}_2 \wedge \vv{e}_3$ 的三维霍奇对偶只是一个零阶标量 $\star_3 I_3 = 1$；要想把整座三维系统本身指认为一根新的正交法向存在线 $\vv{e}_4 = \star_4 I_3$，数学迫使你必须先踏入包含它的**四维外围空间** $\mathbb{R}^4 = \mathbb{R}^3 \oplus \mathbb{R}\vv{e}_4$，从而把原有的二维球面 $S^2$ 变成三维超球面 $S^3$ 的赤道切片！
 
-在本章中，我们将看到：这种“要表达当前系统的整体存在，就必须跳进更大外围空间”的法向逃逸现象，在集合论与观测拓扑的底层有一个本书读作同一图景的对应物：本书经 Lean 4 内核形式化验证的**相对语义对角线与观测拓扑加细四重奏**（`DiagonalTopologicalEscape`）。二者之间没有形式联系，把它们读作同一骨架是作者的诠释；这组定理还与经典元数学中的对角线不完备文献遥相呼应（严格前提对比见 [@rem-godel-tarski-comparison-literature]）。只要一台完备解码器试图在非空地址集与固定潜坐标（latent coordinate）的纤维划分下穷尽所有输出映射，任何无不动点的翻转算子（twist）都会沿着相对语义对角线当场刺穿旧观测拓扑，强迫概念读出向“球外之球”严格加细！
+在本章中，我们将看到：这种“要表达当前系统的整体存在，就必须跳进更大外围空间”的法向逃逸现象，绝不仅是一则优美的微分几何比喻；照本书的读法，在集合论与观测拓扑的底层，它的抽象骨架直接具象化为本书经 Lean 4 内核形式化验证的**相对语义对角线与观测拓扑加细四重奏**（`DiagonalTopologicalEscape`），并与经典元数学中的对角线不完备文献遥相呼应（严格前提对比见 [@rem-godel-tarski-comparison-literature]）。只要一台完备解码器试图在非空地址集与固定潜坐标（latent coordinate）的纤维划分下穷尽所有输出映射，任何无不动点的翻转算子（twist）都会沿着相对语义对角线当场刺穿旧观测拓扑，强迫概念读出向“球外之球”严格加细！
 
 ::: {.figure src="ch21-overview"}
 **图 21。** 本章地图：第 I 栏，潜坐标的两根纤维，品红虚线把左边那根劈成 $g = 1$ 的 $a_0, a_1$ 与 $g = 0$ 的 $a_2$（[@ex-cantor-godel-diagonal-table]）；第 II 栏，品红的开口螺旋绕紫色的轴 $\vv{e}_{n+1}$ 上升，青色的影子绕一圈就闭合，螺旋却已高出 $2\pi c$（这一栏是本章的诠释意象，不是定理）；第 III 栏，$S^0$ 到 $S^8$ 中只有紫色的 $S^0, S^1, S^3, S^7$ 可平行化，$S^2$ 上的切向量场必有零点（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
@@ -186,7 +186,7 @@ $$
 **换一种潜坐标，纤维照样被劈开。** 四个地址的解码器是常零、恒等、取反、常一；潜坐标取 $(0, 0, 0, 1)$ 时，左边那根纤维里 $a_0$、$a_1$ 的 $g$ 是 $1$，$a_2$ 的是 $0$，品红线连起 $g$ 不同的两对 $(a_0, a_2)$、$(a_1, a_2)$；把 $g$ 立成紫色的第二根轴，两块变成三块。点任一地址换它的潜坐标，$16$ 种排法里品红线总在（[@cor-complete-diagonal-topological-settlement]；这四个解码器恰是 $\{0, 1\}$ 上的全部映射，目录满射）。
 :::
 
-这正是抽象对角线不动点模式在观测拓扑中的纯粹骨架（与元数学文献的精确边界对照见 [@rem-godel-tarski-comparison-literature]）。在我们的抽象拓扑框架中，每当一个系统把某类候选解码映射装进一部关于当前潜坐标满射的目录 `decoderCatalog`，并用无不动点算子 `twist` 构造自指对角线 $g$ 时，$g$ 必然劈开原系统的某根等价类余纤维。若要同时保留旧读出并让 $g$ 连续，联合读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)$ 给出所需的最小共同加细，任何同时完成这两项任务的读出都能恢复它；而若想在新坐标空间 $\mathrm{Coordinate}_{k+1} = \mathrm{Coordinate}_k \times \mathrm{Output}$ 上继续触发下一轮对角线逃逸 $g'$，则**要再次套用本定理，须先在新一轮（通常需要扩容的）地址空间 $\mathrm{Address}_{k+1}$ 上重新建立新的满射解码目录 $\operatorname{decoderCatalog}_{k+1} : \mathrm{Address}_{k+1} \twoheadrightarrow (\mathrm{Coordinate}_{k+1} \to \mathrm{Output})$**（定理只给出这一充分条件）——例如在 [@ex-cantor-godel-diagonal-table] 的四地址布尔模型中，合并后的坐标空间有 $4$ 个坐标对（对应 $2^4 = 16$ 个布尔函数，即便只看实际命中的 $3$ 根非空联合纤维也有 $2^3 = 8 > 4$ 个布尔函数），原来的 $4$ 个地址已不足以构成新阶段的满射目录，唯有连同地址空间一起向外扩容，才能开启下一层“球外之球”的攀升！
+这正是抽象对角线不动点模式在观测拓扑中的纯粹骨架（与元数学文献的精确边界对照见 [@rem-godel-tarski-comparison-literature]）。在我们的抽象拓扑框架中，每当一个系统把某类候选解码映射装进一部关于当前潜坐标满射的目录 `decoderCatalog`，并用无不动点算子 `twist` 构造自指对角线 $g$ 时，$g$ 必然劈开原系统的某根等价类余纤维。若要同时保留旧读出并让 $g$ 连续，联合读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)$ 给出所需的最小共同加细，任何同时完成这两项任务的读出都能恢复它；而若想借本定理在新坐标空间 $\mathrm{Coordinate}_{k+1} = \mathrm{Coordinate}_k \times \mathrm{Output}$ 上继续触发下一轮对角线逃逸 $g'$，则**必须以在新一轮（通常需要扩容的）地址空间 $\mathrm{Address}_{k+1}$ 上重新建立新的满射解码目录 $\operatorname{decoderCatalog}_{k+1} : \mathrm{Address}_{k+1} \twoheadrightarrow (\mathrm{Coordinate}_{k+1} \to \mathrm{Output})$ 为前提**——例如在 [@ex-cantor-godel-diagonal-table] 的四地址布尔模型中，合并后的坐标空间有 $4$ 个坐标对（对应 $2^4 = 16$ 个布尔函数，即便只看实际命中的 $3$ 根非空联合纤维也有 $2^3 = 8 > 4$ 个布尔函数），原来的 $4$ 个地址已不足以构成新阶段的满射目录，唯有连同地址空间一起向外扩容，才能开启下一层“球外之球”的攀升！
 
 ::: {.viz src="sphere-escape" preset="absorb" height="500"}
 **收编了，它再逃一次。** 把翻出的品红色串 $d$ 收进清单当第 $7$ 行，再补一列让表保持方形；沿新的对角线读一遍、翻一遍，立刻又拼出一个不在清单里的品红色串。收编多少次都一样（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)）。
@@ -408,7 +408,7 @@ $$
 
 ## 21.4 毛球定理、笛卡尔 $720^\circ$ 角亏与 Adams 除法代数球面 {#sec-ch21-4}
 
-甚至哪怕我们退一步，不去跨维度构造对角线，而是老老实实待在三维空间里那颗光滑的二维单比特布洛赫球面 $S^2$ 上，拓扑学本身也在球皮表面埋下了一颗无法抚平的奇点——这就是大名鼎鼎的**毛球定理（Hairy Ball Theorem）**，以及它在离散多面体上的孪生兄弟**笛卡尔总角亏定理**与高维球面上的 **Adams 可平行化定理**。
+甚至哪怕我们退一步，不去跨维度构造哥德尔对角线，而是老老实实待在三维空间里那颗光滑的二维单比特布洛赫球面 $S^2$ 上，拓扑学本身也在球皮表面埋下了一颗无法抚平的奇点——这就是大名鼎鼎的**毛球定理（Hairy Ball Theorem）**，以及它在离散多面体上的孪生兄弟**笛卡尔总角亏定理**与高维球面上的 **Adams 可平行化定理**。
 
 在单比特布洛赫球面 $S^2$ 上，能否设计出一套全局连续、无奇点的切向基准标架（给每一个纯态 $\vv{a} \in S^2$ 都连续指定一根垂直起跑方向 $\vv{v}(\vv{a}) \perp \vv{a}$）？在仅由度 $5$ 与度 $6$ 顶点拼成的封闭分片欧氏等边三角剖分球面（或其对偶的封闭三价富勒烯球笼）上，五重缺陷的个数受到怎样的拓扑约束？进而，若要求整座 $m$ 维切丛 $TS^m$ 拥有一套由 **$m$ 根处处线性无关切向量场组成的全局平行化标架（parallelization）**，究竟哪些维数的球面能够满足条件？
 
@@ -465,7 +465,7 @@ $$
 交互实验室 `ORTHO//HAIRY`：球面上的纬向场与它的两个 $+1$ 零点、把它们推成一个 $+2$ 的那一族场、环面上处处长为 $1$ 的切场、逐级细分的测地穹顶与它们的顶点角亏、沿外法向的抬升 $\widetilde{\vv{w}}_\lambda$。每个指标、每个角亏与最短箭头的长度都由页面实算（`NUM`）；庞加莱—霍普夫定理与笛卡尔定理是文献结果（[@rem-hairy-ball-adams-literature]），抬升的读法是诠释模型（`MODEL`）。依据面板里的绿色框是 [@thm-complete-diagonal-not-continuous]，它讲的是对角线在划分拓扑下不连续，与毛球定理不是同一条陈述。
 :::
 
-把上述微分拓扑文献注记（[@rem-hairy-ball-adams-literature]）与本章经内核验证的相对语义对角线拓扑安顿推论（[@cor-complete-diagonal-topological-settlement]）对照阅读，可以读出作者看到的同一条结构脉络（诠释；两者之间没有共同的定理）：**球内的奇点与不完备，可以借球外之球来安顿。**
+把上述微分拓扑文献注记（[@rem-hairy-ball-adams-literature]）与本章经内核验证的相对语义对角线拓扑安顿推论（[@cor-complete-diagonal-topological-settlement]）对照阅读，可以看到同一条结构脉络：**球内的奇点与不完备，唯有借球外之球方能安顿。**
 
 ::: {.viz src="sphere-escape" height="640"}
 交互实验室 `ORTHO//ESCAPE`：六个场景画同一件事——有限步之后总有东西留在外面。对角线翻出的串不在清单里（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)）；完备目录的对角线总劈开一根旧纤维；内接多边形与圆之间的缝永不为零；有限格的记录指针平移后与自己的重叠到不了 $1$；余弦迭代永远差一点；有限个素数乘起来加一，素因子都在清单之外。舞台下方的两张图画出“留在外面的量”随步数的变化。把六个场景并排是本书的读法（`MODEL`），它们在数学上是六个不同的事实；依据面板同时列出 [@thm-complete-diagonal-not-continuous]、[@cor-complete-diagonal-topological-settlement] 与第二十四章的两条不动点定理。

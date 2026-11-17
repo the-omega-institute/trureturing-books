@@ -8,10 +8,10 @@
 **图 27。** 本章地图：左栏，墨色箭头 $x$、$y$ 撑开的平行四边形，两条青色对角线 $x + y$ 与 $x - y$ 的平方和等于四条边的平方和（[@thm-audit-parallelogram-law]）；中栏，四个坐标连成一条链，每条青色的弧是一个在相邻两格上同时不为零的测试态；在幺正矩阵 $A$ 保持坐标射线与这些测试射线的前提下，四个对角元里紫色的相位箭头指向同一方向，$A = c \cdot 1$（[@prop-audit-ray-phase-rigidity]）；右栏，挤压去掉 $3 \times 3$ 块矩阵 $\rho$ 品红的非对角块、只留青色的对角块，再挤压一次矩阵不动（[@cor-audit-pinching-idempotent]）。
 :::
 
-本章与[第二十八章](ch28-reading-frozen-proofs-ii.md)将带领读者直接走进 Lean 4 冻结源码的深处。这是一次抽样审计：两章逐行精读 8 条代表性证明，两张审计表共列 76 条声明（本章 32 条，第二十八章 44 条），远少于全书引用的全部冻结声明，也不覆盖第八部起的各章；其余引用以各章正文的分层为准。具体安排是：
+本章与[第二十八章](ch28-reading-frozen-proofs-ii.md)将带领读者直接走进这座 Lean 4 形式化公理圣殿的源码深处（这是一次抽样审计：两章逐行精读 8 条代表性证明，两张审计表共列 76 条声明，远少于全书引用的全部冻结声明，也不覆盖第八部起的各章）：
 
-1. 在本章（上篇）中，我们逐行解剖第一部至第三部所引的四条代表性证明：**实内积空间的平行四边形范数恒等式**、**正半定迹一矩阵的玻恩概率三公理骨架**、**支撑连通射线测试下的幺正全局相位刚性定理**，以及**有限完备正交记录测量的挤压算符幂等定理**；
-2. 我们将真实源码中的每一条策略（`parallelogram_law_with_norm`、`mul_mul_conjTranspose_same`、`Relation.ReflTransGen` 传递闭包归纳、`Finset.sum_eq_single` 正交块消去）摊开在阳光下，并给出一张第一至三部代表性冻结声明的**源码行号、语句摘要哈希（`statement_id`）与形式化职责边界抽样审计表**。
+1. 在本章（上篇）中，我们逐行解剖支撑起第一部至第三部的四块基石证明：**实内积空间的平行四边形范数恒等式**、**正半定迹一矩阵的玻恩概率三公理骨架**、**支撑连通射线测试下的幺正全局相位刚性定理**，以及**有限完备正交记录测量的挤压算符幂等定理**；
+2. 我们将真实源码中的每一条策略（`parallelogram_law_with_norm`、`mul_mul_conjTranspose_same`、`Relation.ReflTransGen` 传递闭包归纳、`Finset.sum_eq_single` 正交块消去）摊开在阳光下，并给出一张覆盖第一至三部核心冻结声明的**源码行号、语句摘要哈希（`statement_id`）与形式化职责边界全景审计表**。
 
 ## 27.1 定义、定理与证明：走进 Lean 4 内核审计 {#sec-lean-kernel-audit-architecture}
 
@@ -44,7 +44,7 @@ theorem inner_product_norm_parallelogram_law {E : Type*} [NormedAddCommGroup E]
 在所钉 Mathlib 的 `Mathlib.Analysis.InnerProductSpace.Basic` 中，`parallelogram_law_with_norm` 先用 `sq` 将平方改写为乘法，再调用 `parallelogram_law_with_norm_mul`；后者将范数乘积改写为自内积的实部，调用内积恒等式 `parallelogram_law`。手算时也可将和差范数平方分别按 `norm_add_sq_real` 与 `norm_sub_sq_real` 展开为 $\norm{x}^2 + 2\langle x, y\rangle_{\mathbb{R}} + \norm{y}^2$ 与 $\norm{x}^2 - 2\langle x, y\rangle_{\mathbb{R}} + \norm{y}^2$，再将正负交叉内积项 $\pm 2\langle x, y\rangle_{\mathbb{R}}$ 成对抵消。源码末尾紧接着执行 `#print axioms inner_product_norm_parallelogram_law`，确认无任何外部未证假设。完整证明由 Lean 内核检查。
 :::
 
-下面是作者在本书构思笔记中对这一恒等式给出的一种几何读法（作者诠释，与 Lean／Mathlib 的证明无关）：
+为什么 `parallelogram_law_with_norm` 与 `norm_add_sq_real` 必须先将一维向量“平方”升维到二次型，才能消去正交方向的交叉项？这里恰恰凝聚着作者在本书构思笔记中提出的深层几何综合：
 
 > **作者原话**：“毕达哥拉斯 万物皆数 勾股定理”
 
@@ -54,7 +54,7 @@ $$
 \vv{c}^2 = (\vv{a} + \vv{b})(\vv{a} + \vv{b}) = \vv{a}^2 + \vv{b}^2 + (\vv{a}\vv{b} + \vv{b}\vv{a}) = a^2 + b^2 + 2(\vv{a}\cdot\vv{b}) + (\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}).
 $$
 
-这里，$\vv{a}^2 = a^2$、$\vv{b}^2 = b^2$ 与 $\vv{c}^2 = c^2$ 是带有平方长度（面积）量纲的 **0 阶标量**，而 $\vv{a}\wedge\vv{b}$ 与 $\vv{b}\wedge\vv{a}$ 是 **2 阶有向面积双向量**。由于正交向量内积 $\vv{a}\cdot\vv{b} = 0$，且一正一反的 2 阶有向面积元满足反对称律 $\vv{b}\wedge\vv{a} = -\vv{a}\wedge\vv{b}$，两个相反旋向的双向量面积 $(\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}) = 0$ 自动相消（这一步对任意 $\vv{a}, \vv{b}$ 都成立，与正交无关），遂归约为 0 阶标量勾股定理 $c^2 = a^2 + b^2$！在 Mathlib 的证明里起作用的只是 0 阶交叉内积项：`norm_add_sq_real` 在正交条件下的 $2\langle x, y\rangle_{\mathbb{R}} = 0$，或 [@thm-audit-parallelogram-law] 中 $\norm{x+y}^2$ 与 $\norm{x-y}^2$ 的 $\pm 2\langle x, y\rangle_{\mathbb{R}}$ 相消（平行四边形恒等式无需正交）；Mathlib 的内积空间里没有楔积，把双向量相消读作这些引理的“几何本质”是作者的诠释。至于该二次恒等式在单位整数格点上引发的数论与概念演进，见如下文献说明：
+这里，$\vv{a}^2 = a^2$、$\vv{b}^2 = b^2$ 与 $\vv{c}^2 = c^2$ 是带有平方长度（面积）量纲的 **0 阶标量**，而 $\vv{a}\wedge\vv{b}$ 与 $\vv{b}\wedge\vv{a}$ 是 **2 阶有向面积双向量**。由于正交向量内积 $\vv{a}\cdot\vv{b} = 0$，且一正一反的 2 阶有向面积元满足反对称律 $\vv{b}\wedge\vv{a} = -\vv{a}\wedge\vv{b}$，两个相反旋向的双向量面积 $(\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}) = 0$ 自动相消，遂归约为 0 阶标量勾股定理 $c^2 = a^2 + b^2$！照作者的读法，这正是 Mathlib 中 `norm_add_sq_real` 在正交条件 $2\langle x, y\rangle_{\mathbb{R}} = 0$（或 [@thm-audit-parallelogram-law] 中 $\norm{x+y}^2$ 与 $\norm{x-y}^2$ 两支相反交叉项相消）背后的几何本质（Mathlib 的证明里并无楔积，起作用的只是 0 阶交叉内积项）。至于该二次恒等式在单位整数格点上引发的数论与概念演进，见如下文献说明：
 
 ::: {.remark #rem-ch27-pell-transcendence-literature title="希帕索斯 √2 奇偶矛盾、佩尔最佳连分数渐近与四阶段数系演进（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 下述 $\sqrt{2}$ 的 $2$-进赋值奇偶无理性证明、佩尔（Pell）连分数最佳有理渐近序列以及 $\pi$ 与余弦不动点 $\theta^*$ 的超越性（另参 [@rem-lean-kernel-trust-boundary-literature]、[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature] 与[第二十九章](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-pell-convergents-literature]）均属经典数论文献与本书概念综合（`MODEL`），未包含在本章逐行审计的冻结定理中。不过佩尔渐近分数的单位余项已不只是文献结果：记 $m_k = Q_k$、$n_k = P_k$（第二十九章 [@def-ch29-pell-silver-slope] 中的伴随佩尔数与佩尔数），下文的 $m_k^2 - 2n_k^2 = (-1)^k$ 与 $m_k + n_k\sqrt{2} = (1 + \sqrt{2})^k$ 可由该章经 Lean 验证的 [@thm-ch29-silver-pell-remainder] 经手工推导得到，[@thm-ch29-silver-best-approximation] 还给出最佳逼近下界；仍属文献的是这些分数与 $\sqrt{2}$ 连分数渐近分数的识别，以及一般的最佳逼近理论。
@@ -129,7 +129,7 @@ $$
 
 第一道来自 `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97`。在量子基础中，如果一个幺正算符 $A \in U(\iota, \mathbb{C})$ 把所有坐标基向量 $\vv{e}_i = \operatorname{Pi.single}\,i\,1$ 都留在各自的复射线上（`PreservesRay A x` 定义为 $A *_{v} x \in \operatorname{Submodule.span}\,\mathbb{C}\,\{x\}$），那么 $A$ 必然是对角矩阵；但怎样保证所有对角元 $A_{ii}$ 都等于**同一个**单位模长全局相位 $c \in \mathbb{C}$（$\norm{c} = 1$，$A = c \bullet I$）？
 
-一种常见的简化做法是要求“提供一根所有分量全不为零的满支撑测试态”，但真实物理耦合图往往是稀疏的！`RayPhaseRigidity.lean` 给出了一个远为精炼的图论充分条件——**支撑连通性（`RaySupportConnected tests`）**：在 $A$ 保持所有坐标射线与每条测试射线的前提下，只要测试态集合 `tests` 中两两同时非零的坐标对 $(i, j)$（即 $\exists x \in \mathrm{tests},\; x_i \neq 0 \land x_j \neq 0$）生成的自反传递闭包 `Relation.ReflTransGen` 连通了所有坐标，哪怕没有任何一根测试态具有满支撑，幺正矩阵 $A$ 也必然刚性坍缩为单一全局相位倍乘算子 $c \bullet I$（甚至在零维空指标类型 $\iota = \varnothing$ 下也无懈可击）！
+很多非形式化文献粗糙地要求“提供一根所有分量全不为零的满支撑测试态”，但真实物理耦合图往往是稀疏的！`RayPhaseRigidity.lean` 给出了一个远为精炼的图论充分条件——**支撑连通性（`RaySupportConnected tests`）**：在 $A$ 保持所有坐标射线与每条测试射线的前提下，只要测试态集合 `tests` 中两两同时非零的坐标对 $(i, j)$（即 $\exists x \in \mathrm{tests},\; x_i \neq 0 \land x_j \neq 0$）生成的自反传递闭包 `Relation.ReflTransGen` 连通了所有坐标，哪怕没有任何一根测试态具有满支撑，幺正矩阵 $A$ 也必然刚性坍缩为单一全局相位倍乘算子 $c \bullet I$（甚至在零维空指标类型 $\iota = \varnothing$ 下也无懈可击）！
 
 ::: {.proposition #prop-audit-ray-phase-rigidity title="坐标射线与支撑连通测试族下的幺正全局相位刚性定理" lean="D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests"}
 设 $\iota$ 为具有可判等性的有限指标类型（`[Fintype ι] [DecidableEq ι]`），$A \in M_\iota(\mathbb{C})$ 为幺正矩阵（`hA : A ∈ Matrix.unitaryGroup ι ℂ`），$\mathrm{tests} \subseteq (\iota \to \mathbb{C})$ 为一组测试向量族。若同时满足：
@@ -270,4 +270,4 @@ $$
    - **本书概念与哲学综合**：正文中关于汉字“数”从计数动词算子（`shǔ`）到连续几何名词坐标（`shù`）的诠释，以及 $\mathbb{Q} \to \overline{\mathbb{Q}} \to \pi \to \theta^*$ 的四阶段概念演进图景，属于作者围绕 [@thm-audit-parallelogram-law] 提出的几何哲学综合，不声称为数域包含链或本章冻结 GID 的形式化内容。
 :::
 
-完成了第一至三部的内核证明审计后，现在让我们迈入审计的下篇——[第二十八章](ch28-reading-frozen-proofs-ii.md)，审计从秩一纯态玻恩模方归约、三合取配对桥、吕德斯条件态完备性，直到“未读态不动点当且仅当非对角干涉块归零”的不动点判据（作者把它归入 $\psi = \psi(\psi)$ 母题之下，属诠释）！
+完成了第一至三部的内核证明审计后，现在让我们迈入全书形式化主线的收官篇章——[第二十八章](ch28-reading-frozen-proofs-ii.md)，审计从秩一纯态玻恩模方归约、三合取配对桥、吕德斯条件态完备性，直到“未读态不动点当且仅当非对角干涉块归零”的终极自指闭环 $\psi = \psi(\psi)$！
