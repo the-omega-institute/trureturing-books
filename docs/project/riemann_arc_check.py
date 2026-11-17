@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Independent numerical / symbolic checks for ARC-CALCULUS-RIEMANN-NOTE.md.
+"""Independent numerical / symbolic checks for ARC-CALCULUS-RIEMANN-2026-11-17.md.
 
 Only mpmath, numpy and sympy are used.  Every section checks identities or
-numerical claims of the note (results Z1 ... Z12) and uses asserts.
+numerical claims of the note (results Z1 ... Z17) and uses asserts;
+sections Z13-Z17 print one line per check.
 
 What this script can and cannot show
 ------------------------------------
@@ -14,7 +15,7 @@ What this script can and cannot show
 * Sums over all zeros are evaluated as "first K zeros + smooth-density tail";
   the tail model is the Riemann-von Mangoldt density (1/2pi) log(t/2pi).
 
-Run:  python3 check_riemann_arc.py
+Run:  python3 riemann_arc_check.py
 """
 import math
 import time
@@ -633,6 +634,203 @@ for g in gq + [mp.mpc(GK[0], 0)]:
 print("toy Weil form: off-line quartet, Gaussian of spectral width delta: %s = -4 exp(1 - pi^2/4) < 0;"
       % mp.nstr(val_off.real, 10))
 print("  same quartet, spectral width 1: %s > 0; on-line values >= 0" % mp.nstr(wide.real, 10))
+
+# --------------------------------------------------------------------------
+# Z13-Z17 use plain Python floats, exact fractions and sympy; every check prints one line.
+import cmath
+import random
+from fractions import Fraction
+
+PYRNG = random.Random(20261117)
+
+
+def ok(cond, label):
+    assert cond, label
+    print("  [ok] " + label)
+
+
+def lam(us, n):
+    """Finite Li sum Lambda_n = Re sum_j (1 - u_j^n) of a finite family (complex floats)."""
+    return sum(1.0 - (u ** n).real for u in us)
+
+
+def random_family(inside):
+    """Adversarial family: zeros, repeats, roots of unity, irrational angles, mixed moduli."""
+    us = []
+    for _ in range(PYRNG.randint(1, 6)):
+        kind = PYRNG.random()
+        if kind < 0.15:
+            us.append(0j)
+        elif kind < 0.35:
+            us.append(cmath.exp(2j * math.pi * PYRNG.randint(0, 11) / 12))      # rational angle
+        elif kind < 0.5:
+            us.append(cmath.exp(2j * math.pi * PYRNG.random()))                # generic angle
+        else:
+            us.append(PYRNG.uniform(0, 1 if inside else 1.6) * cmath.exp(2j * math.pi * PYRNG.random()))
+    if PYRNG.random() < 0.3:
+        us.append(us[0])                                                         # repetition
+    return us
+
+
+section("Z13. finite Li criterion: |u_j| <= 1 for all j  <=>  Lambda_n >= 0 for all n >= 1")
+# (*) Re(1 - w) = |1 - w|^2/2 + (1 - |w|^2)/2
+ws = [complex(PYRNG.uniform(-3, 3), PYRNG.uniform(-3, 3)) for _ in range(2000)]
+ok(max(abs((1 - w).real - abs(1 - w) ** 2 / 2 - (1 - abs(w) ** 2) / 2) for w in ws) < 1e-12,
+   "split Re(1-w) = |1-w|^2/2 + (1-|w|^2)/2 at 2000 random w")
+# (1) => (2): 300 adversarial families inside the closed disk
+worst = min(lam(random_family(True), n) for _ in range(300) for n in range(1, 300))
+ok(worst > -1e-9, "300 families in the closed disk (zeros, repeats, roots of unity): min Lambda_n = %.2e >= 0" % worst)
+# not (1) => not (2): every family with an entry outside the disk has a negative Lambda_n
+found = 0
+missed = 0
+for _ in range(300):
+    us = random_family(False)
+    if max(abs(u) for u in us) > 1.02:
+        missed += not any(lam(us, n) < 0 for n in range(1, 30000))
+        found += 1
+ok(found > 50 and missed == 0, "%d families with max |u| > 1.02: a negative Lambda_n found in each (n < 3e4)" % found)
+# barely outside, hidden among roots of unity of the same order
+hid = [1.001 * cmath.exp(2j * math.pi / 5)] + [cmath.exp(2j * math.pi * k / 5) for k in range(1, 5)]
+first_hid = next(n for n in range(1, 100) if lam(hid, n) < 0)
+ok(first_hid == 5, "1.001 e^(2pi i/5) among the fifth roots of unity: first negative Lambda_n at n = 5")
+# key step with eps = 1/2: for every L some n in {L, ..., 6^m' L} has cos(n phi_j) >= 1/2 for all j
+kmax, cases, good = 0, 0, 0
+for _ in range(200):
+    us = [u for u in random_family(False) if u != 0] or [1j]
+    mprime = len(us)
+    for L0 in (1, 7, 50, 97):
+        cases += 1
+        k = next((k for k in range(1, 6 ** mprime + 1)
+                  if all(math.cos(k * L0 * cmath.phase(u)) >= 0.5 - 1e-12 for u in us)), None)
+        if k is None:
+            continue
+        n = k * L0
+        musum = sum(mp.re(mp.mpc(u.real, u.imag) ** n) for u in us)
+        rhs = sum(mp.mpf(abs(u)) ** n for u in us) / 2
+        good += musum >= rhs * (1 - mp.mpf(10) ** -9)          # float phases, n up to ~4e5
+        kmax = max(kmax, k)
+ok(good == cases, "pigeonhole: some n = kL, 1 <= k <= 6^m', has Re p_n >= (1/2) sum |u_j|^n (%d cases, largest k = %d)"
+   % (cases, kmax))
+# liminf Lambda_n / r^n = -|J| for r > 1 (irrational and rational angles in J)
+for r, phases, extra in [(1.3, [math.sqrt(2) - 1, math.sqrt(3) - 1], [0.9, -0.5j]),
+                         (2.0, [(math.sqrt(5) - 1) / 2, 1 / 3, 2 / 3], [1j]),
+                         (1.05, [0.5], [0.2])]:
+    us = [r * cmath.exp(2j * math.pi * x) for x in phases] + extra
+    n0 = 300 if r > 1.2 else 3000
+    lo = min(len(us) * r ** -n - sum(((u / r) ** n).real for u in us) for n in range(n0, n0 + 20000))
+    J = len(phases)
+    ok(-J - 1e-9 <= lo <= -J + 0.02 * J,
+       "r = %.2f, |J| = %d: min of Lambda_n/r^n over n in [%d, %d) = %.5f (liminf = -|J|)" % (r, J, n0, n0 + 20000, lo, ))
+# liminf Lambda_n = #{|u_j| < 1} for r <= 1 (rational angle on the circle, a zero, a small entry)
+us = [cmath.exp(2j * math.pi / 3), cmath.exp(2j * math.pi * (math.sqrt(2) - 1)), 0.5, 0j]
+vals = [lam(us, n) for n in range(200, 20000)]
+ok(2 - 1e-9 <= min(vals) <= 2.01,
+   "r = 1 with entries at angles 2pi/3 and 2pi(sqrt2-1), plus 1/2 and 0: min Lambda_n on [200, 2e4) = %.4f (liminf = 2)" % min(vals))
+# reciprocal moduli: {1/2} and {0.9 e^{+-i}} are inside the disk but not on the circle
+ok(all(lam([0.5], n) > 0 and lam([0.9 * cmath.exp(1j), 0.9 * cmath.exp(-1j)], n) > 0 for n in range(1, 500)),
+   "{1/2} and {0.9 e^(+-i)}: Lambda_n > 0 for n < 500 although |u| != 1 (reciprocal moduli needed for |u| = 1)")
+# inversion-closed pair without conjugation symmetry
+eta, phi = 0.01, 2 * math.pi * (math.sqrt(2) - 1)
+pair = [cmath.exp(eta + 1j * phi), cmath.exp(-eta - 1j * phi)]
+assert all(abs(lam(pair, n) - (2 - 2 * math.cosh(n * eta) * math.cos(n * phi))) < 1e-8 * math.cosh(n * eta)
+           for n in range(1, 300))
+ok(next(n for n in range(1, 10 ** 5) if lam(pair, n) < 0) == 29,
+   "pair e^(+-(0.01 + i phi)), phi = 2pi(sqrt2-1): Lambda_n = 2 - 2 cosh(n eta) cos(n phi), first negative at n = 29")
+# the frozen toy spectrum: its four rotors are e^(+-q +- i theta), Lambda_n = 4(1 - cosh(nq) cos(n theta))
+us = [1 - 1 / complex(0.7, 5), 1 - 1 / complex(0.7, -5), 1 - 1 / complex(0.3, 5), 1 - 1 / complex(0.3, -5)]
+qq, th = abs(math.log(abs(us[0]))), abs(cmath.phase(us[0]))
+assert all(abs(abs(math.log(abs(u))) - qq) < 1e-14 and abs(abs(cmath.phase(u)) - th) < 1e-14 for u in us)
+assert all(abs(lam(us, n) - 4 * (1 - math.cosh(n * qq) * math.cos(n * th))) < 1e-10 for n in range(1, 60))
+ok(next(n for n in range(1, 1000) if lam(us, n) < 0) == 31,
+   "toy spectrum 7/10 +- 5i, 3/10 +- 5i: rotors e^(+-q +- i theta), q = %.10f, theta = %.10f; first negative n = 31" % (qq, th))
+# Bombieri-Lagarias change of variable u = rho/(rho - 1): |u| <= 1 iff Re rho <= 1/2
+bad = 0
+for _ in range(5000):
+    rho = complex(PYRNG.uniform(-3, 4), PYRNG.uniform(-10, 10))
+    if abs(rho.real - 0.5) < 1e-9 or abs(rho - 1) < 1e-6:
+        continue
+    bad += (rho.real <= 0.5) != (abs(rho / (rho - 1)) <= 1)
+    bad += abs(abs(1 - 1 / rho) ** -2 - (1 + (2 * rho.real - 1) / abs(1 - rho) ** 2)) > 1e-9 * abs(1 - 1 / rho) ** -2
+    mirror = 1 - rho.conjugate()                       # book variable u = 1 - 1/rho: mirror has reciprocal modulus
+    bad += abs(abs(1 - 1 / mirror) * abs(1 - 1 / rho) - 1) > 1e-12
+ok(bad == 0, "5000 random rho: Re rho <= 1/2 <=> |rho/(rho-1)| <= 1; |1-1/rho|^-2 = 1 + (2 Re rho - 1)/|1-rho|^2; "
+             "|u_{1-conj rho}| |u_rho| = 1")
+
+section("Z14. doubling is not enough: the quartet 2 e^(+-2 pi i/3), (1/2) e^(+-2 pi i/3)")
+om = sp.exp(2 * sp.pi * sp.I / 3)
+cyc = {}
+for res in range(3):                                   # omega^n + omega^-n depends only on n mod 3
+    cyc[res] = sp.nsimplify(sp.expand_complex(om ** res + om ** (-res)))
+ok(cyc == {0: 2, 1: -1, 2: -1}, "omega^n + omega^(-n) = 2 if 3 | n, else -1 (exact)")
+
+
+def quartet_lambda(n):
+    """Exact Lambda_n = 4 - (2^n + 2^-n)(omega^n + omega^-n) of the quartet."""
+    return 4 - (Fraction(2) ** n + Fraction(1, 2 ** n)) * int(cyc[n % 3])
+
+
+ok(all(pow(2, k, 3) != 0 and quartet_lambda(2 ** k) == 4 + Fraction(2) ** (2 ** k) + Fraction(1, 2 ** (2 ** k))
+       for k in range(0, 12)), "Lambda_(2^k) = 4 + 2^(2^k) + 2^(-2^k) > 0 for k = 0..11 (exact; 2^k mod 3 is never 0)")
+ok(quartet_lambda(3) == Fraction(-49, 4) and all(quartet_lambda(3 * j) < 0 for j in range(1, 60)),
+   "Lambda_3 = -49/4 = -12.25 and Lambda_(3j) < 0 for j = 1..59: the progression 3, 6, 9, ... detects it")
+qf = [2 * cmath.exp(2j * math.pi / 3), 2 * cmath.exp(-2j * math.pi / 3),
+      0.5 * cmath.exp(2j * math.pi / 3), 0.5 * cmath.exp(-2j * math.pi / 3)]
+ok(all(abs(lam(qf, n) - float(quartet_lambda(n))) < 1e-9 * max(1, abs(float(quartet_lambda(n)))) for n in range(1, 40))
+   and all(min(abs(v - 1 / u) for v in qf) < 1e-12 and min(abs(v - u.conjugate()) for v in qf) < 1e-12 for u in qf),
+   "float evaluation agrees for n < 40; the quartet is closed under u -> 1/u and under conjugation")
+
+section("Z16. finite-field Li sums of elliptic curves: N_n = (q^(n/2) - 1)^2 + q^(n/2) Lambda_n")
+for p, A, B, nmax in [(7, 1, 1, 3), (3, 2, 1, 3), (13, -1, 0, 2)]:
+    a = p + 1 - count_points(p, 1, A, B)
+    alpha = complex(a / 2, math.sqrt(4 * p - a * a) / 2)
+    row, fine = [], True
+    for n in range(1, nmax + 1):
+        Nn = count_points(p, n, A, B)
+        Ln = 2 - 2 * (alpha ** n).real / p ** (n / 2)
+        fine &= abs(Nn - ((p ** (n / 2) - 1) ** 2 + p ** (n / 2) * Ln)) < 1e-6 and -1e-12 <= Ln <= 4 + 1e-12
+        row.append(Nn)
+    ok(fine, "y^2 = x^3 %+d x %+d over F_%d: a = %d, N_n = %s, every Lambda_n in [0, 4]" % (A, B, p, a, row))
+cnt = 0
+for p in (3, 5, 7, 11, 13, 17, 19, 23):
+    for A in range(p):
+        for B in range(p):
+            if (4 * A ** 3 + 27 * B ** 2) % p == 0:
+                continue
+            N = 1 + sum(1 if f == 0 else (2 if pow(f, (p - 1) // 2, p) == 1 else 0)
+                        for f in ((x ** 3 + A * x + B) % p for x in range(p)))
+            assert (p + 1 - N) ** 2 <= 4 * p
+            cnt += 1
+ok(cnt == 1454, "Hasse bound |a_p| <= 2 sqrt p for all %d nonsingular y^2 = x^3 + Ax + B, 3 <= p <= 23 "
+                "(numerical check of a proved theorem)" % cnt)
+# one-sided bounds in the algebra of x^2 - a x + q with |a| > 2 sqrt q (no curve is claimed)
+for a, q in [(7, 9), (-7, 9)]:
+    d = math.sqrt(a * a - 4 * q)
+    rep = [((a + d) / 2) ** n / q ** (n / 2) + ((a - d) / 2) ** n / q ** (n / 2) for n in range(1, 60)]
+    if a > 0:
+        ok(min(rep) > 0 and max(rep) > 1e6, "a = 7, q = 9: Re p_n > 0 (upper bound N_n <= q^n + 1 holds) but unbounded "
+                                            "above (no lower bound N_n >= q^n - C q^(n/2))")
+    else:
+        ok(min(rep) < -1e6 and max(rep) > 1e6, "a = -7, q = 9: Re p_n unbounded on both sides")
+
+section("Z17. the 3-4-1 inequality is twice a squared co-sagitta")
+ph = sp.symbols("phi", real=True)
+ok(sp.simplify(sp.expand_trig(3 + 4 * sp.cos(ph) + sp.cos(2 * ph) - 2 * (2 - (1 - sp.cos(ph))) ** 2)) == 0,
+   "3 + 4 cos phi + cos 2 phi = 2 (2 - v)^2 with v = 1 - cos phi (symbolic)")
+err = 0.0
+for _ in range(2000):
+    a = PYRNG.uniform(0, 0.999)
+    z = cmath.exp(1j * PYRNG.uniform(-math.pi, math.pi))
+    n = PYRNG.randint(1, 30)
+    lhs = 3 * a ** n + 4 * (a ** n * z ** n).real + (a ** n * z ** (2 * n)).real
+    err = max(err, abs(lhs - 2 * a ** n * ((z ** n).real + 1) ** 2))
+ok(err < 1e-12, "n-th Taylor numerator: 3a^n + 4 Re(a z)^n + Re(a z^2)^n = 2 a^n (Re z^n + 1)^2 (2000 samples)")
+mins = []
+for x in (0.01, 0.1, 0.5, 1.0):
+    for y in (0.0, 0.3, 1.0, 5.0, 14.134725, 30.0, 100.0):
+        val = abs(mp.zeta(1 + x) ** 3 * mp.zeta(mp.mpc(1 + x, y)) ** 4 * mp.zeta(mp.mpc(1 + x, 2 * y)))
+        mins.append(val)
+ok(min(mins) >= 1, "|zeta(1+x)^3 zeta(1+x+iy)^4 zeta(1+x+2iy)| >= 1 on a 4 x 7 grid (x > 0), min = %s"
+   % mp.nstr(min(mins), 8))
 
 print("\nALL CHECKS PASSED in %.1f s (mpmath %s, numpy %s, sympy %s, dps=%d, K=%d)"
       % (time.time() - T_START, mp.__version__, np.__version__, sp.__version__, mp.mp.dps, K))
