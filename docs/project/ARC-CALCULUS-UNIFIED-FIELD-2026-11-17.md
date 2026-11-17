@@ -34,7 +34,7 @@
 | A14 | §39.10.3 第 126–158 行，第 94 行 | 四条路径“锁死 $d=3$”；$d\ge4$ “自动劈裂回双三维场”；三锚定理锁定 $N_c=3$ | `手工推导`＋`文献结果`＋`LEAN ✓` | 各处的“3”是同一个不变量 | $\mathfrak{so}(5)$、$\mathfrak{so}(6)$ 是单李代数，只有 $d=4$ 分裂；书中第 152 行关于四维的那句话本身成立，偏强的是小标题把劈裂写到 $d\ge4$。空间的 3 是实维数，色的 3 是复维数（$\dim\mathfrak{su}(3)=8$），布洛赫的 3 是 $\dim\mathfrak{su}(2)$。正交 4-标架满足条款 II–IV 与正性而秩为 4（F14）；§39.10 没有从比较公理推出封顶，这个反例属于附录 E 的台账，不针对该节 |
 | A15 | §39.9.2 第 46–74 行 | `1D—2D—3D` 对应 $\mathrm U(1)$、$\mathrm{SU}(2)$、$\mathrm{SU}(3)$ | `MODEL`＋`LEAN ✓` | 阶梯在 3 处停止 | 停止来自 A14 的封顶假设；$\mathrm{SU}(4)$ 不被任何所引定理排除 |
 
-以下各条所指的措辞已在书稿相应位置改正：A2 中收敛定理的前提，A6 中的“导出”，A7，A9 中的定理链接，A10，A12，A13，A14 中的小标题与 $d\ge5$ 的括注。表中“书中论断”一栏记录的是改正前的说法；其余各条留给作者，见第 11 节。
+以下各条所指的措辞已在书稿相应位置改正：A2 中收敛定理的前提，A6 中的“导出”，A7，A9 中的定理链接，A10，A12，A13，A14 中的小标题与 $d\ge5$ 的括注。表中“书中论断”一栏记录的是改正前的说法。其余各条已按第 11 节 D1–D10 的建议写入书稿；A15 依赖 A14 的封顶假设，没有单独的修订项，§39.10 现已把封顶写明为本书的原理（D9）。
 
 §32.5 的统一场论断都已标为 `MODEL` 并把连续场论归入文献注记，没有发现措辞强于证据之处；该节实验卡的数值 $57.9^\circ$ 复算无误（F4）。§32.6 只通读了三根诊断轴与两个文献注记框，同样已标 `MODEL` 与 `文献结果`；八大纲领总表没有逐格审计（见第 8 节）。
 
@@ -47,7 +47,7 @@
 | `U3` | 结构群有界（正性条件） | F10 | 推进的迹读数 $\tfrac12(1-\cosh\eta)<0$ | 分岔选择（同 `H2`/`H8`，R20） | 把“内部群紧致、洛伦兹群非紧致”写成同一处取舍 |
 | `U4` | 统计权重 $e^{-S}$ 或 $e^{iS}$ 与哈尔测度 | §39.9.1、§39.11 配分函数 | 权重恒为 1 时矢高均值为 1（F16），没有连续理论 | 外部输入；连续极限为 `OPEN`（同 `H9`） | 保持 `OPEN` |
 | `U5` | 每个理想各有一个耦合常数 | F10 | $\mathfrak u(1)\oplus\mathfrak{su}(2)\oplus\mathfrak{su}(3)$ 上的不变二次型有三个独立尺度 | 外部输入（三个测量值） | 明说未推出 |
-| `U6` | 普适圆弧迹刚度 | A8；F12 | $G_{\mathrm{SM}}$ 不变的分块加权读数给出任意 $g_3^2/g_2^2$ | 分岔选择；所取的迹读数在跨概念转动下不变，它与 §39.10 的分块独立是否相容留给作者判断 | 写成“读数取整本账本上的迹”，并注明与谱作用量归一化相同 |
+| `U6` | 普适圆弧迹刚度 | A8；F12 | $G_{\mathrm{SM}}$ 不变的分块加权读数给出任意 $g_3^2/g_2^2$ | 分岔选择；所取的迹读数在跨概念转动下不变，书稿现已写明公设取整本账本上的迹（D5），它与 §39.10 的分块独立是否相容仍是模型层面的问题 | 写成“读数取整本账本上的迹”，并注明与谱作用量归一化相同 |
 | `U7` | 账本由完整的费米子代组成（代数不影响比值），$N_c=3$ | A8、A9；F12 | 计入希格斯二重态后比值为 $\tfrac{25}{66}$；单独希格斯为 $\tfrac12$ | 外部输入（经验） | 把 $\tfrac38$ 的来源写成“一代费米子是 $\bar{\mathbf 5}\oplus\mathbf{10}$” |
 | `U8` | 标度 $\mu_{\mathrm{arc}}$ 与无阈值单圈跑动 | A10；F13 | $\mu_{\mathrm{arc}}=E_P$ 给 $0.1522$；三线交汇给 $0.2076$ | 外部输入＋`OPEN` | 把 $\mu_{12}$ 称为拟合标度 |
 | `U9` | 引力项取角亏的一次式并以铰链度量加权 | A2、A3；F8、F9 | 矢高加权和在加细下按 $a^2$ 趋零 | `文献结果`＋分岔（`H8`）＋`OPEN`（`H9`） | 修正铰链维数；写明读的是带符号的转角 |
@@ -226,7 +226,7 @@ $$
 
 证明。第 1–3 款是有理函数恒等式（脚本用符号计算核对）。第 4 款：迹读数的拉回即 $\operatorname{Tr}(d\rho(X)d\rho(Y))$；分块加权时 $\tfrac1{g_3^2}\propto w_Q+\tfrac12(w_u+w_d)$，$\tfrac1{g_2^2}\propto\tfrac12(N_cw_Q+w_L)$。第 5 款：权重求平方和。$\square$
 
-三点说明。其一，第 4 款表明刚度公设所取的迹读数在跨概念的酉变换下不变，而 §39.10 把跨概念转动称为“语法幽灵”；公设的三条耦合关系本身并不要求这种不变性（上面的加权读数是例子）。这里只提出一个留给作者的问题：公设应表述为“取整本账本上的迹”，还是只表述为三条迹关系。其二，“不借 $\mathrm{SU}(5)$ 而得 $\tfrac38$”在“不引入 $(X,Y)$ 规范玻色子”的意义上成立，数值内容则来自一代费米子的 $\mathrm{SU}(5)$ 完备性（经验输入加反常相消）。其三，同一归一化 $g_3^2=g_2^2=\tfrac53g_1^2$ 在谱作用量框架里由对费米子空间取迹得到（Chamseddine–Connes 1997，`文献结果`；其摘要写明规范耦合常数之间的关系与 $\mathrm{SU}(5)$ 相同）；书中第 4 款的归一化与之相同，是否保留“范式反转”的说法由作者决定。附带的算术事实：书中所用的 $(b_1,b_2,b_3)$ 的物质部分 $(\tfrac{41}{10},\tfrac{25}6,4)$ 正是带上述权重的这些迹。
+三点说明。其一，第 4 款表明刚度公设所取的迹读数在跨概念的酉变换下不变，而 §39.10 把跨概念转动称为“语法幽灵”；公设的三条耦合关系本身并不要求这种不变性（上面的加权读数是例子）。公设可以表述为“取整本账本上的迹”，也可以只表述为三条迹关系；书稿按 D5 取前一种表述，并写明只要求三条迹关系时比值不定。其二，“不借 $\mathrm{SU}(5)$ 而得 $\tfrac38$”在“不引入 $(X,Y)$ 规范玻色子”的意义上成立，数值内容则来自一代费米子的 $\mathrm{SU}(5)$ 完备性（经验输入加反常相消）。其三，同一归一化 $g_3^2=g_2^2=\tfrac53g_1^2$ 在谱作用量框架里由对费米子空间取迹得到（Chamseddine–Connes 1997，`文献结果`；其摘要写明规范耦合常数之间的关系与 $\mathrm{SU}(5)$ 相同）；书中第 4 款的归一化与之相同，书稿已按 D5 把“范式反转”改为“与单群嵌入的区别”并注明这一点。附带的算术事实：书中所用的 $(b_1,b_2,b_3)$ 的物质部分 $(\tfrac{41}{10},\tfrac{25}6,4)$ 正是带上述权重的这些迹。
 
 ### F13 跑动与“普朗克合流”的数值（输入给定下的算术；`NUM`，不是预言）
 
@@ -383,15 +383,15 @@ $$
 all 41 checks passed in 3.5 s
 ```
 
-## 11. 留给作者决定的事项
+## 11. 已写入书稿的修订（D1–D10）
 
-下列各项涉及模型的表述或作者的行文，没有随本笔记改动书稿。每项给出位置、问题与建议措辞；中文为权威版本，英文说同一件事。行号是基线上的行号，“旧”指书稿现有文字。各项可以分别取舍，相互依赖之处已注明。
+下列各项涉及模型的表述或作者的行文，均已按所给建议写入书稿；提供了选择的两处，书稿把 §39.11.1 的“范式反转”换成了 D5 所给的写法，并按 D6 修改了 §39.11.2 的中文小节标题。每项保留位置、问题与所写入的措辞，作为改动内容与理由的记录；中文为权威版本，英文说同一件事。行号是基线上的行号，“旧”指改动前的文字。
 
 ### D1 规范项的公式（A1）
 
 位置：[§39.9.1](../../books/quantum-geometry/zh/ch39-s09-unified-arc-forces-and-planck-convergence.md#sec-ch39-09-1) 第 18 行的公式与第 23 行的条目标题；英文版同处。
 
-问题：公式写的是 $\kappa_{\mathrm{gauge}}\operatorname{Tr}(\Omega_{\mathrm{intra}})$，第 24 行的文字说的是威尔逊小方格项 $\operatorname{Re}\operatorname{Tr}(I-U_\square)$。$\mathfrak{su}(n)$ 的元素无迹，前者对 $\mathrm{SU}(2)$、$\mathrm{SU}(3)$ 恒为零；对 $\mathrm U(1)$ 是线性通量，求和后只剩边界项。把公式改成矢高会让左项不再是“角的一次式”，触及“两项同为弧度角”的对称写法，所以留给作者。
+问题：公式写的是 $\kappa_{\mathrm{gauge}}\operatorname{Tr}(\Omega_{\mathrm{intra}})$，第 24 行的文字说的是威尔逊小方格项 $\operatorname{Re}\operatorname{Tr}(I-U_\square)$。$\mathfrak{su}(n)$ 的元素无迹，前者对 $\mathrm{SU}(2)$、$\mathrm{SU}(3)$ 恒为零；对 $\mathrm U(1)$ 是线性通量，求和后只剩边界项。把公式改成矢高会让左项不再是“角的一次式”，触及“两项同为弧度角”的对称写法，所以单列为一项。
 
 建议：公式片段改为下式，两种语言相同；第 23 行标题里的 `$\operatorname{Tr}\bigl(\Omega_{\mathrm{intra}}(\Delta\mathcal{T}_\epsilon)\bigr)$` 同改为 `$\operatorname{Re}\operatorname{Tr}\bigl(I - U_{\partial\Delta\mathcal{T}_\epsilon}\bigr)$`。不用 $\tfrac1N$ 归一，因为同一公式里 $N$ 已经表示顶点数。
 
@@ -399,7 +399,7 @@ all 41 checks passed in 3.5 s
 \underbrace{\sum_{\Delta\mathcal{T}_\epsilon \in \mathcal{K}} \kappa_{\mathrm{gauge}}\,\operatorname{Re}\operatorname{Tr}\!\bigl(I - U_{\partial\Delta\mathcal{T}_\epsilon}\bigr)}
 ```
 
-并在第 24 行“……$U_{\partial\Delta\mathcal{T}_\epsilon} = \exp\bigl(i\Omega_{\mathrm{intra}}(\Delta\mathcal{T}_\epsilon)\bigr)$。”之后加一句（句末的交叉引用只在采用 D10 的新增注记时保留）：
+并在第 24 行“……$U_{\partial\Delta\mathcal{T}_\epsilon} = \exp\bigl(i\Omega_{\mathrm{intra}}(\Delta\mathcal{T}_\epsilon)\bigr)$。”之后加一句（句末的交叉引用指向 D10 的新增注记）：
 
 ```text
 zh：这一项取的是和乐的矢高 $\operatorname{Re}\operatorname{Tr}(I - U)$，对 $\Omega_{\mathrm{intra}}$ 是二次的；$\mathfrak{su}(n)$ 的元素无迹，$\operatorname{Tr}\Omega_{\mathrm{intra}}$ 本身对 $\mathrm{SU}(2)$ 与 $\mathrm{SU}(3)$ 恒为零（见 [@rem-ch39-plaquette-sagitta-and-wilson-action]）。
@@ -412,7 +412,7 @@ en：This term is the sagitta of the holonomy, $\operatorname{Re}\operatorname{T
 
 问题：求和下标 $h\in\mathcal K^{(1)}$（棱）与“相邻四面体原胞”属于三维复形，权重 $A_h/\ell_P^2$ 与极限 $\int R\sqrt{-g}\,d^4x$ 属于四维复形。书中的示例铰链（四个正四面体共棱，$77.88^\circ$）与交互页面画的是三维的棱。需要作者选定复形的维数：取三维时权重是 $L_h/\ell_P$，连续极限是三维标量曲率的积分，不再是四维爱因斯坦—希尔伯特作用量；取四维时铰链是三角形，需要在 §39.9.1 开头引入四维单纯复形，并把“相邻四面体原胞”改为“相邻原胞”。
 
-建议：在选定之前，先在第 27 行“**雷吉角亏（Regge deficit angle）**”之后加一个括注，把两种情形说清：
+建议：在选定之前，先在第 27 行“**雷吉角亏（Regge deficit angle）**”之后加一个括注，把两种情形说清（书稿加了这个括注，与 D3 的改写合在同一句中；复形的维数本身仍未选定）：
 
 ```text
 zh：（三维空间复形中铰链是棱，以长度 $L_h$ 加权；下面与四维爱因斯坦—希尔伯特作用量对照时，铰链是四维单纯复形里的三角形，以面积 $A_h$ 加权）
@@ -447,7 +447,7 @@ en 新：have their surplus comparison chords read in this book (`MODEL`) as Reg
 
 位置：§39.9.3 第 113 行（正文）、第 98 行（条目标题）、第 233 行（总表）；英文版同处。
 
-问题：$\alpha_G(E_P)=1$ 由 $E_P$ 的定义给出。书中算例与总表已给出 $E_P$ 处规范耦合为 $\mathcal O(10^{-2})$，没有把它称为预言；“精准合流为 $1$”“正面会师”容易被读成数值相等。是否保留这些修辞由作者定；建议保留原句，在句后注明含义。第 222 行的算例与第 130 行的图注已如实给出数值，不必改。
+问题：$\alpha_G(E_P)=1$ 由 $E_P$ 的定义给出。书中算例与总表已给出 $E_P$ 处规范耦合为 $\mathcal O(10^{-2})$，没有把它称为预言；“精准合流为 $1$”“正面会师”容易被读成数值相等。书稿保留原句，在句后注明含义。第 222 行的算例与第 130 行的图注已如实给出数值，不必改。
 
 建议（第 113 行，原句保留，在“……正面会师！”之后加括注；英文在“…circular-arc cell!”之后）：
 
@@ -471,7 +471,7 @@ en 新（第 233 行）：as $\alpha_G(E)=(E/E_P)^2 \to 1$ while the gauge band 
 
 位置：§39.11.1 第 51 行；`rem-ch39-georgi-glashow-connes-jacobson-literature` 第 4 条（第 283 行）；英文版同处。
 
-问题：公设所取的读数是整本账本上的迹，它在跨概念的酉变换下不变，而 §39.10 把跨概念转动称为“语法幽灵”；公设的三条耦合关系本身并不要求这种不变性（F12 第 4 款的加权读数）。需要作者决定公设表述为“取整本账本上的迹”还是只表述为三条迹关系。另外，$g_3^2 = g_2^2 = \frac{5}{3}g_Y^2$ 在谱作用量框架里同样出现，“范式反转”是否保留由作者定。
+问题：公设所取的读数是整本账本上的迹，它在跨概念的酉变换下不变，而 §39.10 把跨概念转动称为“语法幽灵”；公设的三条耦合关系本身并不要求这种不变性（F12 第 4 款的加权读数）。公设可以表述为“取整本账本上的迹”，也可以只表述为三条迹关系；下面的两句采用前者并写明后者的结果。另外，$g_3^2 = g_2^2 = \frac{5}{3}g_Y^2$ 在谱作用量框架里同样出现，所以“范式反转”一说也一并改写。
 
 建议（在第 51 行段末加两句）：
 
@@ -489,7 +489,7 @@ en 旧：`10.1007/JHEP09(2012)104`);
 en 新：`10.1007/JHEP09(2012)104`); at the cutoff scale this framework yields relations between the gauge couplings identical to those of $\mathrm{SU}(5)$;
 ```
 
-若作者决定不保留“范式反转”，第 51 行句首可改为：
+第 51 行句首（书稿采用了这一改写，不再说“范式反转”）：
 
 ```text
 zh 旧：请注意 [@def-ch39-af-gut-master-connection] 第 4 款带来的范式反转：
@@ -502,7 +502,7 @@ en 新：Notice how Clause 4 of [@def-ch39-af-gut-master-connection] differs fro
 
 位置：§39.11.2 第 127 行（正文）、第 57 行（小节标题）；§39.10 第 94 行；英文版同处。
 
-问题：两条曲线之差的唯一正根是 $N_c=3$，这一步代数成立。曲线 II 所固定的电荷正是曲线 I 在 $N_c=3$ 处的取值，交点与线性条件 $N_cY_Q=\frac12$ 同解；“一石四鸟”中不依赖电荷输入而单独选出 $N_c=3$ 的只有 (b)。是否按这一读法改写由作者定。
+问题：两条曲线之差的唯一正根是 $N_c=3$，这一步代数成立。曲线 II 所固定的电荷正是曲线 I 在 $N_c=3$ 处的取值，交点与线性条件 $N_cY_Q=\frac12$ 同解；“一石四鸟”中不依赖电荷输入而单独选出 $N_c=3$ 的只有 (b)。书稿按这一读法改写。
 
 建议（第 127 行）：
 
@@ -513,14 +513,14 @@ en 旧：On $N_c > 0$, this rational difference vanishes **if and only if $N_c =
 en 新：On $N_c > 0$, this rational difference vanishes only at $N_c = 3$. The crossing has the same solution as one linear condition: the measured charges give $Y_Q = Q_u - \frac{1}{2} = \frac{1}{6}$, and anomaly cancellation requires $N_c Y_Q = \frac{1}{2}$, hence $N_c = 3$; the charges $(+\frac{2}{3}, -\frac{1}{3})$ held fixed on curve II are exactly the values of curve I at $N_c = 3$, so the crossing ties the measured charges to the number of colours and is not a second constraint independent of the charge input. Of the four statements, (a) holds for every odd $N_c$ with the curve-I charges (and only at $N_c = 3$ with the measured charges held fixed); (c) and (d) are the curve-I values at $N_c = 3$; the only one that singles out $N_c = 3$ without the charge input is (b): under the stiffness postulate $g_3^2 = g_2^2$ if and only if $N_c = 3$. At the measured $N_c = 3$ the following hold together:
 ```
 
-建议（第 57 行标题；片段 id `sec-ch39-11-2` 不变；英文标题 “Unique $N_c = 3$ Curve Intersection” 已是这个意思，不必改）：
+建议（第 57 行标题；片段 id `sec-ch39-11-2` 不变；英文标题 “Unique $N_c = 3$ Curve Intersection” 已是这个意思，不必改；书稿采用了这个中文标题）：
 
 ```text
 zh 旧：色数 $N_c = 3$ 唯一双曲线锁死
 zh 新：色数 $N_c = 3$ 处的唯一双曲线交点
 ```
 
-建议（§39.10 第 94 行，可选；原句在代数上成立）：
+建议（§39.10 第 94 行；原句在代数上成立，书稿仍改为下面的写法，与 §39.11.2 的读法一致）：
 
 ```text
 zh 旧：我们还将严格证出，色维数 $N_c = 3$ 更是令量子手征反常相消与温伯格角几何初值精确咬合的唯一正整数根！
@@ -533,7 +533,7 @@ en 新：will show, under the universal arc-trace stiffness postulate, $N_c = 3$
 
 位置：§39.11 第 7 行；英文版同处。
 
-问题：四条选择定则与标准模型相同，模型在规范扇区没有区别于标准模型的低能判据；它与单群大统一可以区分，所以“可证伪”本身不错。建议保留原句；若作者愿意加限定，可用下面的写法。
+问题：四条选择定则与标准模型相同，模型在规范扇区没有区别于标准模型的低能判据；它与单群大统一可以区分，所以“可证伪”本身不错。书稿保留原句，加了下面的限定。
 
 ```text
 zh 旧：合拢为一整座可算、可验、可证伪的物理统一体系
@@ -546,7 +546,7 @@ en 新：into a quantitative, falsifiable synthesis (its low-energy gauge-sector
 
 位置：§39.11.3 第 152 行；§39.9.3 第 125 行；§39.9.4 总表第 233 行；英文版同处。
 
-问题：冻结的协变换位子恒等式不决定势的次数与 $-\mu_H^2$ 的符号，“自动生成”“凝结为”偏强。“单胞极限下消融紫外行为”“消去胞间角亏奇点”没有紫外有限性的推导支持；§39.11.3 第 180 行的同类说法已加限定，这两处是否照改由作者定。
+问题：冻结的协变换位子恒等式不决定势的次数与 $-\mu_H^2$ 的符号，“自动生成”“凝结为”偏强。“单胞极限下消融紫外行为”“消去胞间角亏奇点”没有紫外有限性的推导支持；§39.11.3 第 180 行的同类说法已加限定，这两处照同样方式改写。
 
 建议（§39.11.3 第 152 行）：
 
@@ -577,7 +577,7 @@ en 新：$\Delta E(3)=\Delta E(4)=0$ leaves no independent inter-cell deficit mo
 
 位置：§39.10.3（第 132–158 行）；§39.11.4 总表“宏观物理空间维数”一栏（第 348 行）；英文版同处。
 
-问题：各处的“3”不是同一个不变量，封顶依赖“旋度要回到向量”这一对“场”的规定，属于模型原理。总表把封顶归于“三锚格拉姆与麦克斯韦—拉曼双根锁死”，而格拉姆定理不含维数上界，刚性盈余的根 $\{d,d+1\}$ 对每个 $d$ 都出现（F14）。另外，第 132 行说“四条完全独立的数学路径”，编号列出的是三重锁死，第四条（单纯形刚性）没有单列。
+问题：各处的“3”不是同一个不变量，封顶依赖“旋度要回到向量”这一对“场”的规定，属于模型原理。总表把封顶归于“三锚格拉姆与麦克斯韦—拉曼双根锁死”，而格拉姆定理不含维数上界，刚性盈余的根 $\{d,d+1\}$ 对每个 $d$ 都出现（F14）。另外，第 132 行说“四条完全独立的数学路径”，编号列出的是三重锁死，第四条（单纯形刚性）没有单列；书稿把这句改为“外微分拓扑、可除代数与量子态重构三条”路径，英文同改。
 
 建议（放在第三重锁死之后、`hodge-curl-field-cap-3d` 实验卡之前，单独成段）：
 
@@ -599,4 +599,4 @@ en 新：(the three-dimensional cap principle, `MODEL`; see §39.10)
 
 位置：§39.9.4，`rem-ch39-yang-mills-regge-rg-literature` 之后、`ex-ch39-hierarchy-and-one-loop-rg-calculus` 的引导句之前。
 
-内容：两条注记、一个算例与一个定理盒，全文（中英）另行提交审阅。第一条注记 `rem-ch39-plaquette-sagitta-and-wilson-action` 把威尔逊小方格项写成小方格和乐的矢高（F1、F2、F4、F6），第二条 `rem-ch39-regge-deficit-odd-channel` 说明雷吉角亏读的是带符号的转角而不是矢高之和（F8、F9），算例给出五种正多面体、示例铰链与一个换位和乐的数值，定理盒引用 `PeriodicGridHolonomy.flat_exact_iff` 与 `horizontal_seam_counterexample`（需要 `./tbook pin --refresh`）。这段正文会把 §39.9.1 的“两项同源”限定为“都由回路和乐偏离单位元描述，读法不同”，是否采用由作者决定；D1 的交叉引用依赖它。
+内容：两条注记、一个算例与一个定理盒（中英）。第一条注记 `rem-ch39-plaquette-sagitta-and-wilson-action` 把威尔逊小方格项写成小方格和乐的矢高（F1、F2、F4、F6），第二条 `rem-ch39-regge-deficit-signed-angle` 说明雷吉角亏读的是带符号的转角而不是矢高之和（F8、F9），算例给出五种正多面体、示例铰链与一个换位和乐的数值，定理盒引用 `PeriodicGridHolonomy.flat_exact_iff` 与 `horizontal_seam_counterexample`（需要 `./tbook pin --refresh`）。这段正文把 §39.9.1 的“两项同源”限定为“都由回路和乐偏离单位元描述，读法不同”；D1 的交叉引用指向其中第一条注记。

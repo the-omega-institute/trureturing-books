@@ -15,16 +15,16 @@
 在零背景比较几何模型（`MODEL`）中，宇宙既没有脱离比较关系而悬空的连续流形舞台，也没有脱离圆弧路径而孤立的点状演员——场内唯一存在的是由极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 粘合而成的自指比较复形 $\mathcal{K}$。无论是单枚原胞内部沿着盲平面与色标架旋转的相位扭转，还是多枚原胞围绕同一条公共棱（余维 $2$ 铰链 $h$）咬合留下的二面角缺口，它们的本原读数全都是**纯无量纲的弧度角（radian phase）**！因此，规范场与引力场无需强行通分不同量纲，天然收束进同一个无量纲总相位配分泛函（`MODEL` 架构，连续极限分别对齐杨—米尔斯—威尔逊格点规范作用量与雷吉—爱因斯坦—希尔伯特单纯形引力作用量 `文献结果`）：
 
 $$
-\mathcal{Z}_{\mathrm{Unified}} \;=\; \sum_{\{\Delta\mathcal{T}_\epsilon\}} \exp\!\Biggl[\,i\,\Phi_{\mathrm{total}}\bigl[\{\Delta\mathcal{T}_\epsilon\}\bigr]\Biggr], \qquad \Phi_{\mathrm{total}} \;=\; \underbrace{\sum_{\Delta\mathcal{T}_\epsilon \in \mathcal{K}} \kappa_{\mathrm{gauge}}\,\operatorname{Tr}\!\bigl(\Omega_{\mathrm{intra}}(\Delta\mathcal{T}_\epsilon)\bigr)}_{\text{胞内纤维球面角超 }(N \le 3\text{：微观规范三力})} \;+\; \underbrace{\sum_{h \in \mathcal{K}^{(1)}} \kappa_{\mathrm{grav}}\,N_h\,\delta_h(\Delta\mathcal{T}_\epsilon)}_{\text{胞间公共铰链角亏 }(N \ge 5\text{：宏观主频引力})}.
+\mathcal{Z}_{\mathrm{Unified}} \;=\; \sum_{\{\Delta\mathcal{T}_\epsilon\}} \exp\!\Biggl[\,i\,\Phi_{\mathrm{total}}\bigl[\{\Delta\mathcal{T}_\epsilon\}\bigr]\Biggr], \qquad \Phi_{\mathrm{total}} \;=\; \underbrace{\sum_{\Delta\mathcal{T}_\epsilon \in \mathcal{K}} \kappa_{\mathrm{gauge}}\,\operatorname{Re}\operatorname{Tr}\!\bigl(I - U_{\partial\Delta\mathcal{T}_\epsilon}\bigr)}_{\text{胞内纤维球面角超 }(N \le 3\text{：微观规范三力})} \;+\; \underbrace{\sum_{h \in \mathcal{K}^{(1)}} \kappa_{\mathrm{grav}}\,N_h\,\delta_h(\Delta\mathcal{T}_\epsilon)}_{\text{胞间公共铰链角亏 }(N \ge 5\text{：宏观主频引力})}.
 $$
 
 请仔细对照 $\Phi_{\mathrm{total}}$ 左右两项的几何分工与同源身份：
 
-1. **左项——胞内纤维球面角超 $\operatorname{Tr}\bigl(\Omega_{\mathrm{intra}}(\Delta\mathcal{T}_\epsilon)\bigr)$（$N \le 3$ 内部自由度 $\longrightarrow$ 规范三力）**：
-   固定单枚刚性极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的空间骨架（顶点规模 $N \le 3$，处于麦克斯韦—拉曼静定锁死根 $\Delta E(3) = 0$ 之内），比较态沿该原胞边界走满一圈时，其内部复纤维与三元锚架上积累起无量纲和乐算子 $U_{\partial\Delta\mathcal{T}_\epsilon} = \exp\bigl(i\Omega_{\mathrm{intra}}(\Delta\mathcal{T}_\epsilon)\bigr)$。在小步长连续粗粒化极限下，威尔逊（Wilson, 1974）格点小方格实迹亏损 $\operatorname{Re}\operatorname{Tr}(I - U_\square) \propto a^4 \operatorname{Tr}(F_{\mu\nu}F^{\mu\nu})$ 直接恢复标准杨—米尔斯规范场作用量 $-\frac{1}{4g^2}\int \operatorname{Tr}(F_{\mu\nu}F^{\mu\nu})\,d^4x$（`文献结果`）。
+1. **左项——胞内纤维球面角超 $\operatorname{Re}\operatorname{Tr}\bigl(I - U_{\partial\Delta\mathcal{T}_\epsilon}\bigr)$（$N \le 3$ 内部自由度 $\longrightarrow$ 规范三力）**：
+   固定单枚刚性极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的空间骨架（顶点规模 $N \le 3$，处于麦克斯韦—拉曼静定锁死根 $\Delta E(3) = 0$ 之内），比较态沿该原胞边界走满一圈时，其内部复纤维与三元锚架上积累起无量纲和乐算子 $U_{\partial\Delta\mathcal{T}_\epsilon} = \exp\bigl(i\Omega_{\mathrm{intra}}(\Delta\mathcal{T}_\epsilon)\bigr)$。这一项取的是和乐的矢高 $\operatorname{Re}\operatorname{Tr}(I - U)$，对 $\Omega_{\mathrm{intra}}$ 是二次的；$\mathfrak{su}(n)$ 的元素无迹，$\operatorname{Tr}\Omega_{\mathrm{intra}}$ 本身对 $\mathrm{SU}(2)$ 与 $\mathrm{SU}(3)$ 恒为零（见 [@rem-ch39-plaquette-sagitta-and-wilson-action]）。在小步长连续粗粒化极限下，威尔逊（Wilson, 1974）格点小方格实迹亏损 $\operatorname{Re}\operatorname{Tr}(I - U_\square) \propto a^4 \operatorname{Tr}(F_{\mu\nu}F^{\mu\nu})$ 直接恢复标准杨—米尔斯规范场作用量 $-\frac{1}{4g^2}\int \operatorname{Tr}(F_{\mu\nu}F^{\mu\nu})\,d^4x$（`文献结果`）。
 
 2. **右项——胞间共享铰链雷吉角亏 $\sum_h N_h\,\delta_h(\Delta\mathcal{T}_\epsilon)$（$N \ge 5$ 超静定桁架 $\longrightarrow$ 时空引力）**：
-   当新旧概念持续并入全连通比较网、局部节点数跨过静定双根 $N = 3, 4$ 进入 $N \ge 5$ 时（[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)），多出的 $\Delta E(N) = \frac{(N-3)(N-4)}{2} \ge +1$ 条超静定比较弦无需撑开四维以上平直空间容器，而是在相邻四面体原胞共享的余维 $2$ 铰链 $h$ 上激发出无量纲**雷吉角亏（Regge deficit angle）**
+   当新旧概念持续并入全连通比较网、局部节点数跨过静定双根 $N = 3, 4$ 进入 $N \ge 5$ 时（[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)），多出的 $\Delta E(N) = \frac{(N-3)(N-4)}{2} \ge +1$ 条超静定比较弦有两种读法：放进更高维的平直空间（五个两两等距的点在 $\mathbb{R}^4$ 中是平直的正五胞体），或者留在三维而让铰链带角亏（同一个五胞体的边界，每条棱角亏 $148.41^\circ$）。本书取后一种读法（`MODEL`）：多出的比较弦记在相邻四面体原胞共享的余维 $2$ 铰链 $h$ 上，成为无量纲**雷吉角亏（Regge deficit angle）**（三维空间复形中铰链是棱，以长度 $L_h$ 加权；下面与四维爱因斯坦—希尔伯特作用量对照时，铰链是四维单纯复形里的三角形，以面积 $A_h$ 加权）
 
    $$
    \delta_h \;:=\; 2\pi - \sum_{k \ni h} \theta_k(\Delta\mathcal{T}_\epsilon), \qquad N_h \;:=\; \frac{A_h}{\ell_P^2}, \qquad \ell_P^2 \;:=\; \frac{\hbar G}{c^3}.
@@ -95,7 +95,7 @@ $$
 **胞间 $N = 6$ 超静定雷吉桁架与主频时钟折射引力（`regge-gravity-clock-refraction`）。** 在 $N = 6$ 超静定团（$K_6$ 刚性盈余 $\Delta E(6) = 15 - 12 = +3 > 0$，对照 $N = 3, 4$ 静定根 $\Delta E = 0$；绿色 `LEAN ✓` 对应 `face_cycle_exact` 与 `rank_one_born_pairing_weight`）中，四枚正四面体围绕中心紫色公共铰链拼合，二面角总和 $4\arccos(1/3) = 282.12^\circ$ 留出品红雷吉角亏楔 $\delta_h = 77.88^\circ$ 与同心品红时钟负载环 $\eta_{\mathrm{info}}(r)$；因 $\pm q$ 玻恩平方负载 $\cos^2\theta \ge 0$ 只加不消，琥珀色当前波包沿青色驻相折射脊线按 $\mathbf{a} = -c^2\nabla\ln(d\tau/dt)$ 向内侧弯曲（完整四维自旋-$2$ 动力学标红色 `OPEN` [@prob-ch34-gravity-dynamics-and-coupling]）。
 :::
 
-2. **（2）等级鸿沟脱魅：为何微观引力比电磁力弱 $10^{36}\text{–}10^{42}$ 倍，却在普朗克能标精准合流为 $1$？**
+2. **（2）等级鸿沟脱魅：为何微观引力比电磁力弱 $10^{36}\text{–}10^{42}$ 倍，而引力耦合在普朗克能标升到 $1$？**
    在日常低能世界里，两颗电子之间的万有引力比库仑静电力微弱逾 $42$ 个数量级——无数物理学家曾困惑于大自然为何塞入如此悬殊的“神秘小常数”。一旦放回“胞内专属通道 vs. 胞间全视界稀释”的几何账本（`MODEL` + `手工推导` + CODATA `NUM`），这 $42$ 个数量级的等级差当场脱去神秘面纱：
    电磁力 $\mathrm{U}(1)_{\mathrm{em}}$ 是在两颗带电探针之间沿着**单一专属的一维盲平面纤维通道**直接传递相位扭转，其低能无量纲耦合保持在 $\alpha_{\mathrm{em}}(0) \approx 1/137.036 \approx 7.2974 \times 10^{-3}$ 的 $\mathcal{O}(10^{-2})$ 量级；而质量为 $m$、约化康普顿驻波半径为 $\lambda_C = \hbar/(m c)$ 的低能粒子，是一团横跨海量普朗克原胞的弥散驻波云——它施加的胞间时钟负载必须均匀摊薄在半径 $R \sim \lambda_C$ 的**整张二维全息球壳所含的 $(R/\ell_P)^2 \sim (\lambda_C/\ell_P)^2$ 枚普朗克面积元**之上（[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation)）！由于 $\ell_P / \lambda_C = m / M_P$（其中普朗克质量 $M_P = \sqrt{\hbar c / G} \approx 1.2209 \times 10^{19}\;\mathrm{GeV}/c^2$），单粒子在自身康普顿尺度上的无量纲引力精细结构常数精确等于全息像素稀释比：
 
@@ -110,7 +110,7 @@ $$
    \alpha_G(E_P) \;=\; \left(\frac{E_P}{E_P}\right)^2 \;=\; 1.0000,
    $$
 
-   与胞内规范和乐在单原胞尺度上正面会师！（至于从纯离散几何第一性原理无参数推算汤川耦合 $y_e$ 与 $\Lambda_{\mathrm{QCD}}/M_P$ 比值，本书严守 [§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary) [@rem-ch34-measured-inputs-versus-predictions] 的反数字命理学铁律，绝不作事后小数拼凑，悉数留归 [@prob-ch34-gravity-dynamics-and-coupling] 与 [@prob-ch34-sm-generations-and-couplings]。）
+   与胞内规范和乐在单原胞尺度上正面会师！（$\alpha_G(E_P) = 1$ 由 $E_P$ 的定义给出；同一能标上单圈外推的规范耦合为 $\alpha_i \approx 0.019\text{–}0.030$（见 [@ex-ch39-hierarchy-and-one-loop-rg-calculus]），所以“会师”说的是引力耦合不再比规范耦合小几十个数量级，两者在 $E_P$ 仍相差 $33\text{–}52$ 倍，`NUM`。）（至于从纯离散几何第一性原理无参数推算汤川耦合 $y_e$ 与 $\Lambda_{\mathrm{QCD}}/M_P$ 比值，本书严守 [§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary) [@rem-ch34-measured-inputs-versus-predictions] 的反数字命理学铁律，绝不作事后小数拼凑，悉数留归 [@prob-ch34-gravity-dynamics-and-coupling] 与 [@prob-ch34-sm-generations-and-couplings]。）
 
 3. **（3）单原胞紫外截断、视界饱和、惯性同源与真空最小矢高边界**。
    当能量抵近 $E_P$、距离抵近 $\ell_P$ 时，为什么极小圆弧体几何不会像连续点粒子场论那样跌入 $GM/r \to \infty$ 的紫外发散奇点？两道内生几何闸门提前锁住了底线（`MODEL` + `LEAN ✓` 组合计数支点）：
@@ -122,7 +122,7 @@ $$
      \Delta E(N) \;=\; \binom{N}{2} - (3N - 6) \;=\; \frac{(N - 3)(N - 4)}{2}
      $$
 
-     在单枚封闭四面体壳（$N = 4$）与单枚极小圆弧体（$N = 3$）处精确命中双零根 $\Delta E(4) = \Delta E(3) = 0$！这意味着一旦放大镜缩进单个普朗克原胞内部（$N \le 4$），“胞间超静定铰链角亏 $\delta_h$”这一独立自由度本身就已彻底消失——所谓“量子引力紫外行为”，在单胞极限下自然消融回有界（$\le 2\pi$）的胞内球面角超和乐 $\Omega_{\mathrm{intra}}(\Delta\mathcal{T}_\epsilon)$！
+     在单枚封闭四面体壳（$N = 4$）与单枚极小圆弧体（$N = 3$）处精确命中双零根 $\Delta E(4) = \Delta E(3) = 0$！这意味着一旦放大镜缩进单个普朗克原胞内部（$N \le 4$），“胞间超静定铰链角亏 $\delta_h$”这一独立自由度本身就已彻底消失——所谓“量子引力紫外行为”，在单胞极限下自然消融回有界（$\le 2\pi$）的胞内球面角超和乐 $\Omega_{\mathrm{intra}}(\Delta\mathcal{T}_\epsilon)$（`MODEL`；这不是紫外有限性的证明）！
 
    - *惯性与暗能量最小矢高的几何呼应及诚实留白*：在同一主频预算图景下（`MODEL`），宏观物体的**惯性**（$\mathbf{F} = m\mathbf{a}$）不再是牛顿绝对空间赋予质点的神秘懒惰属性，而是迫使一团包含海量内部驻波圆弧的复合态整体改写跨格寻址倾角 $\beta$ 所需的协变相位重排代价——因为惯性阻抗与引力折射清点的是**同一笔内部驻波主频负载**，惯性质量与引力质量的精确相等（等效原理）遂成同义必然。至于宇宙学尺度上的真空暗能量，非零紫外最小比较步长 $\epsilon_{\min} > 0$ 固然伴随严格为正的最小径向矢高底板 $d(\epsilon_{\min}) = 1 - \cos\epsilon_{\min} = 2\sin^2(\epsilon_{\min}/2) > 0$，为“真空不绝对平直”提供了耐人寻味的几何意象（`MODEL`）；但我们必须一字不差地恪守 [§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor) [@ex-ch34-horizon-blindspot-anticircularity] 的反循环审计结论：局部正矢高 $1 - \cos\epsilon_{\min} > 0$ 本身既不能排除负宇宙学常数反德西特时空（$\mathrm{AdS}_4,\; \Lambda_{\mathrm{cos}} < 0$）与零曲率闵可夫斯基林德勒视界（$\Lambda_{\mathrm{cos}} = 0$），也不能在不预先偷渡哈勃视界半径 $R_H$ 的前提下非循环地推算出 $\Lambda_{\mathrm{cos}}\ell_P^2 \sim 10^{-122}$ 的 $122$ 个数量级鸿沟——宇宙学常数定号与能标问题（[@prob-ch34-past-hypothesis-and-cosmological-constant]）、四维自旋-$2$ 引力连续统导出（[@prob-ch34-gravity-dynamics-and-coupling]）与标准模型手征代数及连续参数谱（[@prob-ch34-sm-generations-and-couplings]）三座定量高峰，在本书收官之际依然以鲜明的红色 `OPEN` 界碑诚实伫立。
 
@@ -210,7 +210,7 @@ $$
 
 引力一侧读取和乐的方式不同：
 
-::: {.remark #rem-ch39-regge-deficit-odd-channel title="雷吉角亏读的是带符号的转角，不是矢高之和（手工推导与文献结果）"}
+::: {.remark #rem-ch39-regge-deficit-signed-angle title="雷吉角亏读的是带符号的转角，不是矢高之和（手工推导与文献结果）"}
 **手工推导；雷吉作用量及其收敛定理、笛卡尔总角亏定理与极三角形定理为文献结果，未在本书形式化。** 绕铰链 $h$ 一周的和乐是转角为 $\delta_h$ 的转动 $R_h$（Regge 1961，`文献结果`）。在三维中（$R_h \in \mathrm{SO}(3)$；$D$ 维时把 $\operatorname{Tr}R_h - 1$ 换成 $\operatorname{Tr}R_h - (D - 2)$），记 $K_h$ 为该转动平面的单位生成元，则 $\frac{1}{2}(\operatorname{Tr}R_h - 1) = \cos\delta_h$，$-\frac{1}{2}\operatorname{Tr}(K_hR_h) = \sin\delta_h$。回路反向时前者不变，后者变号。
 
 1. 若规范群在 $\mathbb{C}^N$ 上不可约（如定义表示上的 $\mathrm{SU}(N)$），则对和乐矩阵实线性、规范不变且与回路定向无关的单回路读数只有矢高（差一个仿射变换）；规范项属于这一类。
@@ -293,7 +293,7 @@ $$
 | **弱相互作用 $\mathrm{SU}(2)_L$** | 胞内 `2D` 有向双矢量面 $\mathbf{A}\wedge\mathbf{B}$ 旋量双覆叠 $\mathrm{Spin}(3)\cong\mathrm{SU}(2)$（$720^\circ$ 光带） | 非交换二重态翻转（$360^\circ\mapsto -1$）配希格斯 `2+1=3` 纵向吸收生成有质量 $W^\pm, Z^0$ | 普罗卡驻波体给出汤川短程指数屏蔽 $e^{-m_W r}/r$（$\lambda_W \approx 2.46\times 10^{-3}\;\mathrm{fm}$） | [`no_continuous_global_section`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section)、[`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift)、[`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word)（`LEAN ✓`）；四维格点手征实现标 `OPEN` [@prob-ch34-sm-generations-and-couplings] |
 | **强相互作用 $\mathrm{SU}(3)_c$** | 胞内 `3D` 三色锚棱 $(\mathbf{e}_R,\mathbf{e}_G,\mathbf{e}_B)$ 保单态体积 $\mathbf{I}_3$ 旋转（$\det U = 1$，$8$ 胶子） | 顶点 $\epsilon\to 0$ 角超归零呼应单圈 $b_3 = -7 < 0$ 渐近自由；未闭合色棱拉成胶子通量管 | 三色满秩闭合为色单态强子，长距线性弦禁闭 $V(r) = \sigma r$，跨核子溢出 $\pi$ 介子汤川核力 | [`three_anchor_gram_det_pos_iff`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff)（`LEAN ✓`）；Gross–Politzer–Wilczek 与 Wilson 格点禁闭属 `文献结果` |
 | **万有引力与惯性** | 胞间 $N \ge 5$ 超静定四面体桁架共享铰链雷吉角亏 $\delta_h = 2\pi - \sum\theta_k$ 与 $\nu_0$ 时钟负载 | 玻恩模方负载 $\cos^2\theta \ge 0$ 永不反号，驱动波包沿 $\mathbf{a} = -c^2\nabla\ln(d\tau/dt)$ 向内驻相折射 | 正质能跨天文尺度不可屏蔽累加；低能受 $(R/\ell_P)^2$ 全息稀释（电子比约 $4.17\times 10^{42}$） | [`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact)、[`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)（`LEAN ✓`）；四维自旋-$2$ 完整场方程标 `OPEN` [@prob-ch34-gravity-dynamics-and-coupling] |
-| **普朗克单胞合流与真空底板** | 探测能量推至 $E_P \approx 1.22\times 10^{19}\;\mathrm{GeV}$ 剥去多胞云，缩回 $N \in \{3,4\}$ 单枚极小圆弧体 | $\Delta E(3)=\Delta E(4)=0$ 消去胞间角亏奇点，$\alpha_G(E)=(E/E_P)^2 \to 1$ 与 $\mathcal{O}(10^{-2})$ 规范曲线会师 | 视界 $\eta_{\mathrm{info}}=100\%$ 阻断紫外崩溃；最小步长正矢高 $1-\cos\epsilon_{\min}>0$ 给出真空曲率意象 | 单圈近交汇三角属 `文献结果`；$\Lambda_{\mathrm{cos}}\ell_P^2\sim 10^{-122}$、$G_N$ 标定与三代耦合谱诚实标 `OPEN`（[@prob-ch34-past-hypothesis-and-cosmological-constant] 等） |
+| **普朗克单胞合流与真空底板** | 探测能量推至 $E_P \approx 1.22\times 10^{19}\;\mathrm{GeV}$ 剥去多胞云，缩回 $N \in \{3,4\}$ 单枚极小圆弧体 | $\Delta E(3)=\Delta E(4)=0$ 时没有独立的胞间角亏自由度，$\alpha_G(E)=(E/E_P)^2 \to 1$，规范曲线为 $\mathcal{O}(10^{-2})$（相差 $33\text{–}52$ 倍） | 视界 $\eta_{\mathrm{info}}=100\%$ 阻断紫外崩溃；最小步长正矢高 $1-\cos\epsilon_{\min}>0$ 给出真空曲率意象 | 单圈近交汇三角属 `文献结果`；$\Lambda_{\mathrm{cos}}\ell_P^2\sim 10^{-122}$、$G_N$ 标定与三代耦合谱诚实标 `OPEN`（[@prob-ch34-past-hypothesis-and-cosmological-constant] 等） |
 
 ---
 
