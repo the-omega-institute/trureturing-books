@@ -5653,6 +5653,30 @@
       "line": 42,
       "signature": "noncomputable def criticalAbscissa : ℝ"
     },
+    "D5/S3/Weil/FiniteSpectralCayleyIdentity.cayleyNode_normSq": {
+      "module": "D5/S3/Weil/FiniteSpectralCayleyIdentity",
+      "name": "D5.S3.Weil.FiniteSpectralCayleyIdentity.cayleyNode_normSq",
+      "kind": "theorem",
+      "statement_id": "sha256:4e9a4a6495e3c3ba1a2f68978d503718cc5f26fb1ec19d44e9f9afea1b6a4747",
+      "line": 52,
+      "signature": "theorem cayleyNode_normSq (gamma : Real) : Complex.normSq (cayleyNode gamma) = 1"
+    },
+    "D5/S3/Weil/FiniteSpectralCayleyIdentity.cayleyNode_one_sub_normSq": {
+      "module": "D5/S3/Weil/FiniteSpectralCayleyIdentity",
+      "name": "D5.S3.Weil.FiniteSpectralCayleyIdentity.cayleyNode_one_sub_normSq",
+      "kind": "theorem",
+      "statement_id": "sha256:4e9a4a6495e3c3ba1a2f68978d503718cc5f26fb1ec19d44e9f9afea1b6a4747",
+      "line": 61,
+      "signature": "theorem cayleyNode_one_sub_normSq (gamma : Real) : Complex.normSq (1 - cayleyNode gamma) = 4 * spectralWeight gamma"
+    },
+    "D5/S3/Weil/FiniteSpectralCayleyIdentity.finiteLiCoefficient_eq_diagonalHilbertSchmidtDefect": {
+      "module": "D5/S3/Weil/FiniteSpectralCayleyIdentity",
+      "name": "D5.S3.Weil.FiniteSpectralCayleyIdentity.finiteLiCoefficient_eq_diagonalHilbertSchmidtDefect",
+      "kind": "theorem",
+      "statement_id": "sha256:4e9a4a6495e3c3ba1a2f68978d503718cc5f26fb1ec19d44e9f9afea1b6a4747",
+      "line": 81,
+      "signature": "theorem finiteLiCoefficient_eq_diagonalHilbertSchmidtDefect {J : Type*} [Fintype J] (gamma : J -> Real) (n : Nat) : finiteLiCoefficient gamma n = diagonalHilbertSchmidtDefect gamma n"
+    },
     "D5/S3/Weil/GronwallLowerEnvelope.gronwall_envelopes": {
       "module": "D5/S3/Weil/GronwallLowerEnvelope",
       "name": "D5.S3.Weil.GronwallLowerEnvelope.gronwall_envelopes",
@@ -5709,6 +5733,22 @@
       "line": 32,
       "signature": "theorem MediumPNT : ∃ c > 0, (ψ - id) =O[atTop] fun (x : ℝ) ↦ x * Real.exp (-c * (Real.log x) ^ ((1 : ℝ) / 10))"
     },
+    "D5/S3/Weil/Probability/CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable": {
+      "module": "D5/S3/Weil/Probability/CanonicalLiDiskEquivalence",
+      "name": "D5.S3.Weil.Probability.CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable",
+      "kind": "theorem",
+      "statement_id": "sha256:dfd1a6f914d1e06448f2f288d995000423b715fb129ff23abb6b692c481dc66c",
+      "line": 161,
+      "signature": "theorem rh_iff_canonical_li_disk_summable : RiemannHypothesis ↔ ∀ r : ℝ≥0, r < 1 → Summable (fun n : ℕ => |canonicalLiCoefficient (n + 1)| * (r : ℝ) ^ n)"
+    },
+    "D5/S3/Weil/Probability/CanonicalLiNonnegativeConverse.canonical_li_nonnegative_implies_rh": {
+      "module": "D5/S3/Weil/Probability/CanonicalLiNonnegativeConverse",
+      "name": "D5.S3.Weil.Probability.CanonicalLiNonnegativeConverse.canonical_li_nonnegative_implies_rh",
+      "kind": "theorem",
+      "statement_id": "sha256:368c103cc6c3252afe05ab1884e8e6d045014aa05e4d6bd32f12b8c931e20c05",
+      "line": 295,
+      "signature": "theorem canonical_li_nonnegative_implies_rh (nonnegative : ∀ n : ℕ, 1 ≤ n → 0 ≤ canonicalLiCoefficient n) : RiemannHypothesis"
+    },
     "D5/S3/Weil/Probability/FiniteGaussianSchoenberg.gram_distance_conditionally_negative": {
       "module": "D5/S3/Weil/Probability/FiniteGaussianSchoenberg",
       "name": "D5.S3.Weil.Probability.FiniteGaussianSchoenberg.gram_distance_conditionally_negative",
@@ -5717,6 +5757,14 @@
       "line": 103,
       "signature": "theorem gram_distance_conditionally_negative (A : Matrix I I ℝ) (hA : A.PosSemidef) (x : I → ℝ) (hx : ∑ i, x i = 0) : (∑ i, ∑ j, x i * x j * (A i i + A j j - 2 * A i j)) ≤ 0"
     },
+    "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum": {
+      "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",
+      "name": "D5.S3.Weil.ZeroData.ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum",
+      "kind": "theorem",
+      "statement_id": "sha256:563604f18b7b6b0b20061f480be12cd4392440ddd8f89215134196eb17f9f3e3",
+      "line": 146,
+      "signature": "theorem actual_complex_pairWeight_hasSum : HasSum (fun n : ℕ => (actualData.multiplicity n : ℂ) * (1 / (actualData.zero n * (1 - actualData.zero n)))) (firstLiMass : ℂ)"
+    },
     "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_height_gt_ten": {
       "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",
       "name": "D5.S3.Weil.ZeroData.ActualReciprocalSquareBounds.actual_height_gt_ten",
@@ -5724,6 +5772,14 @@
       "statement_id": "sha256:563604f18b7b6b0b20061f480be12cd4392440ddd8f89215134196eb17f9f3e3",
       "line": 789,
       "signature": "theorem actual_height_gt_ten (rho : ℂ) (hrho : IsNontrivialZero rho) : 10 < |rho.im|"
+    },
+    "D5/S3/Weil/ZeroData/UnconditionalCanonicalZeroData.zetaZeroData_representation_iff": {
+      "module": "D5/S3/Weil/ZeroData/UnconditionalCanonicalZeroData",
+      "name": "D5.S3.Weil.ZeroData.UnconditionalCanonicalZeroData.zetaZeroData_representation_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:a71a76215cfec9f535c767e38d463bf0078d1f38958dd72b84626f05ee376176",
+      "line": 111,
+      "signature": "theorem zetaZeroData_representation_iff (rho : ℂ) : IsNontrivialZero rho ↔ ∃! n : ℕ, zetaZeroData.zero n = rho"
     },
     "D5/S3/Weil/ZeroSum.IsNontrivialZero": {
       "module": "D5/S3/Weil/ZeroSum",
@@ -5861,6 +5917,14 @@
       "line": 30,
       "signature": "abbrev FixedPointFreeInvolution (α : Type*)"
     },
+    "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_one": {
+      "module": "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion",
+      "name": "D5.S3.Zeros.Endpoints.CanonicalLiLocalExpansion.canonical_li_one",
+      "kind": "theorem",
+      "statement_id": "sha256:2d6fe9ba77e00d61b8e227b143eb5e25be29f3df02e1e3a5094b9c7a1498406e",
+      "line": 233,
+      "signature": "theorem canonical_li_one : canonicalLiCoefficient 1 = 1 + Real.eulerMascheroniConstant / 2 - Real.log (2 * Real.sqrt Real.pi)"
+    },
     "D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values": {
       "module": "D5/S3/Zeros/Endpoints/XiEndpointValues",
       "name": "D5.S3.Zeros.Endpoints.XiEndpointValues.xi_reading_endpoint_values",
@@ -5932,6 +5996,14 @@
       "statement_id": "sha256:c71d7be1478c3fcf9ba5b711de18b38f2f07ec3798adbc033d07e7307a8064ee",
       "line": 105,
       "signature": "theorem xi_reading_one_sub_conj (s : ℂ) : xiReading (1 - conj s) = conj (xiReading s)"
+    },
+    "D5/S3/Zeros/ToySpectrum/OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum": {
+      "module": "D5/S3/Zeros/ToySpectrum/OffLineToySpectrum",
+      "name": "D5.S3.Zeros.ToySpectrum.OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum",
+      "kind": "theorem",
+      "statement_id": "sha256:edbb06e2e6e6057328ec57dfb532a281167f868cd506c510312dbb22ff281c4c",
+      "line": 149,
+      "signature": "theorem li_positivity_distinguishes_the_off_line_toy_spectrum : Complex.re (∑ rho ∈ toySpectrum, (1 - (1 - 1 / rho) ^ 31)) < 0"
     },
     "D5/S3/Zeros/ZetaIdentities.riemann_zeta_dirichlet_sum": {
       "module": "D5/S3/Zeros/ZetaIdentities",
