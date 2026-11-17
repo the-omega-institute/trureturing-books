@@ -1,0 +1,87 @@
+/* INDRA//NET：版式与颜色由共享主题提供；这里只放本页自己的东西：舞台指针、琥珀手柄、双透镜开关、
+   巡览条里的时钟按钮、读数的颜色角色与图例色块。颜色只来自令牌（var(--cyan) …），不写色值。 */
+#stage { container-type: inline-size; }
+/* 只有活舞台接管指针；静态图（封面、引用图）让触摸直接滚过 */
+.stage:not(.still) #cv { cursor: grab; touch-action: none; }
+.stage:not(.still) #cv:active { cursor: grabbing; }
+.stage.still #cv { cursor: default; touch-action: auto; }
+
+.logo span { color: var(--cyan); font-weight: 700; }
+.tagline em, .sheet li b { color: var(--cyan); }
+.hud-tl .big { color: var(--sigma); }
+.hud-tl .big, .hud-tl .sub, #plotTitle, #plotMeta, .tau { text-transform: none; }
+.hud-tl .sub { line-height: 1.4; }
+
+/* 双透镜开关：左段是因陀罗网的互映读法，右段是惠勒丝带读法；当前选中的一段用琥珀 */
+.lens-toggle { display: flex; width: 100%; margin: 0; padding: 0; border: 1px solid var(--line-hot);
+  background: transparent; cursor: pointer; font: inherit; color: var(--ink); }
+.lens-toggle .seg { flex: 1 1 0; min-width: 0; padding: 8px 7px; font-size: 12px; line-height: 1.3; text-align: center; color: var(--dim); overflow-wrap: anywhere; }
+.lens-toggle .seg.on { border-left: 1px solid var(--line-hot); }
+.lens-toggle[aria-pressed="false"] .seg.off, .lens-toggle[aria-pressed="true"] .seg.on { background: var(--amber); color: var(--on-accent); font-weight: 600; }
+.lens-toggle:hover { border-color: var(--cyan); }
+.lens-toggle:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+#ctlPanel .field { margin-bottom: 8px; }
+
+/* 舞台上的手柄：主珠琥珀圈的右上方；它是按钮，所以拖它不会转动相机 */
+.handle { position: absolute; z-index: 3; width: 30px; height: 30px; padding: 0; margin: 0; border: 2px solid var(--amber); border-radius: 50%;
+  background: color-mix(in srgb, var(--amber) 12%, transparent); transform: translate(-50%, -50%); cursor: grab; touch-action: none;
+  user-select: none; -webkit-user-select: none; box-shadow: 0 0 10px color-mix(in srgb, var(--amber) 55%, transparent); }
+.handle:active, .handle.dragging { cursor: grabbing; background: color-mix(in srgb, var(--amber) 28%, transparent); }
+.handle[hidden] { display: none; }
+.stage.still .handle { pointer-events: none; }
+:root[data-thumb-mode] .handle, :root[data-shot] .handle { display: none; }
+
+/* 巡览条：◀ 与（引用图里）⏮ ▷ 在左，卡名居中，▶ 在右。时钟按钮只在被引用的图里出现，那里时间轴不再重复它们 */
+.tour .tour-l { grid-column: 1; grid-row: 1; display: flex; gap: 4px; }
+.tour .tour-clock { display: none; }
+:root[data-embed][data-figure] .tour .tour-clock { display: inline-grid; }
+:root[data-embed][data-figure] footer.rail #rew, :root[data-embed][data-figure] footer.rail #play { display: none; }
+/* 窄的引用图（手机上的正文）：卡名需要整行宽度，时钟按钮回到时间轴 */
+@media (max-width: 480px) {
+  :root[data-embed][data-figure] .tour .tour-clock { display: none; }
+  :root[data-embed][data-figure] footer.rail #rew, :root[data-embed][data-figure] footer.rail #play { display: inline-grid; }
+}
+
+/* 时间轴右侧：一行提示、一行公式 */
+.keys #hint, .keys #formula { display: block; }
+.keys #formula { font-family: var(--font-data); color: var(--ink); font-size: 10.5px; margin-top: 2px; }
+
+/* 读数按角色着色：青 = 镜面清晰度，品红 = 丝带，紫 = 收缩与转动；主读数与舞台标题同用 sigma。
+   琥珀只给当前选择与可拖手柄，普通数值读数不用它 */
+dl.ro .v dd { color: var(--violet); }
+dl.ro .c dd { color: var(--cyan); }
+dl.ro .m dd { color: var(--magenta); }
+dl.ro .key dd output { color: var(--sigma); }
+dl.ro dd output { font: inherit; color: inherit; }
+
+/* 图例色块：银白宝珠。琥珀只给选中的卡片、透镜开关的选中段、舞台上主珠的圆环与手柄；图例、读数、滑块数值与标题 pill 都不用它 */
+.sw.sg { background: var(--sigma); }
+.field output { color: var(--ink); }
+
+/* 舞台标签保留大小写（θ、ε、ψ） */
+.stage .tag.raw { text-transform: none; }
+.stage .tag.c-vi { color: var(--violet); }
+.stage .tag.c-cy { color: var(--cyan); }
+.stage .tag.c-mg { color: var(--magenta); }
+.stage .tag.c-sg { color: var(--sigma); }
+.stage .tag.c-ik { color: var(--ink); }
+
+@container (max-width: 620px) {
+  .hud-tl { left: 12px; max-width: calc(100% - 24px); }
+  .hud-tl .big { font-size: 12px; }
+  .hud-tl .sub { font-size: 10.5px; line-height: 1.35; }
+  .hud-bl { left: 12px; right: 12px; bottom: 9px; gap: 2px 10px; font-size: 10px; }
+  .stage .tag.raw { font-size: 10.5px; }
+  .handle { width: 26px; height: 26px; }
+}
+
+/* 单栏的整页（窄窗口、短屏）：给舞台一个更高的高度，页面照常向下滚动 */
+@media (max-width: 1080px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(460px, 66vh)) auto auto; }
+}
+@media (max-width: 520px) {
+  :root:not([data-embed]):not([data-thumb-mode]):not([data-shot]) .lab .center { grid-template-rows: minmax(min-content, max(480px, 66vh)) auto auto; }
+}
+
+/* 霍奇星号 ⋆ 在正文字号下太小，放大一些（transform 不改变行高） */
+.hs { display: inline-block; transform: scale(1.5); transform-origin: 50% 58%; margin: 0 .16em 0 .1em; }
