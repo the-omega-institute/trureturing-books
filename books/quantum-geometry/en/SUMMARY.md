@@ -146,6 +146,7 @@
   - [34.28 The Riemann Path Integral and Prime Minimal Arc-Trihedra: Euler Winding Operators, Half-Density Square Law, and Critical-Line Cancellation](ch34-s28-riemann-path-integral-and-prime-arcs.md)
   - [34.29 Arithmetic Pivot Renormalization and Multi-Stage Resonant Tunneling Across the Critical Strip: Breaking the Turán–Zeno Trap and Piercing the 4/7 Mollifier Wall](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md)
   - [34.30 Rebuilding Calculus from Minimal Circular-Arc Bodies: Rotor Differentials, the Sagitta Phase Transition, and Finite-Precision Stokes Exactness](ch34-s30-arc-body-calculus-and-finite-stokes.md)
+  - [34.31 Minimal Circular-Arc Calculus Applied to the Riemann Hypothesis: Second-Order Sagitta Phase Transition, Hermite–Biehler Radial Monotonicity Lock, and Finite-Precision Stokes Cancellation](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)
 - [Chapter 35 Arriving on a Pulse of Light and Self-Referential Table Expansion: From Initialization by Forgetting to the Homoiconic Loop $T = T(T)$](ch35-light-pulse-and-self-referential-table.md)
 - [Chapter 36 Infinite Discrete Steps and Quotienting Out Reincarnation: How the Hyperbolic Horizon Staircase Ends the Return-to-Light Loop](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)
   - [36.1 Why "Returning to Pure Light" Is Reincarnation: The $\cos 90^\circ = 0$ Amnesia Cliff](ch36-s01-light-and-memory.md)

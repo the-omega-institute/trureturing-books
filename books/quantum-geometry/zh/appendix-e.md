@@ -285,9 +285,9 @@ $$
 
 ## E.8 第三点冗余与对合正性：用极小圆弧体微积分归约 `H2` 与 `H3`，并改写 `H5`–`H7` 的输入 {#sec-appe-third-point-redundancy}
 
-E.7 的总表把 `H2` 记成并列的三项第 1 层条件：正自配对、秩 $2$ 双向量的椭圆负平方、多点格拉姆半正定；`H3` 再要求平行四边形极化。本节用[第 34 章 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 的弦—矢高分解重新过一遍这笔账，结论是这四项并不各自独立。在求同读数为实标量的情形，`H2` 的三项可以由两条更原始的条件推出：一条是**第三点冗余**（比较 $x$ 与 $z$ 不因取道第三点 $y$ 而改变），一条是**对合的正性**（非零差异的往返不为零也不为负）。`H3` 的极化一项由第三点冗余加一个正的读数给出。E.8.5 另外给单比特上的 `H5` 换了一种说法：只看两两比较的概率规则里，玻恩律是层析秩最小的那一个。E.8.6 与 E.8.7 用同一套记号检查 `H6` 与 `H7`：演化的可逆、时间连续、生成元与条件化，以及复合系统的参数计数与交换统计。这两小节不加新的条款，只把输入换成只谈比较对象与读数的形状，并用满足全部条款的模型标出边界。
+E.7 的总表把 `H2` 记成并列的三项第 1 层条件：正自配对、秩 $2$ 双向量的椭圆负平方、多点格拉姆半正定；`H3` 再要求平行四边形极化。本节用[第 34 章 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 的弦—矢高分解重新过一遍这笔账，结论是这四项并不各自独立。在求同读数为实标量的情形，`H2` 的三项可以由两条更原始的条件推出：一条是**第三点冗余**（比较 $x$ 与 $z$ 不因取道第三点 $y$ 而改变），一条是**对合的正性**（非零差异的往返不为零也不为负）。`H3` 的极化一项由第三点冗余加一个正的读数给出。E.8.5 另外给单比特上的 `H5` 换了一种说法：只看两两比较的概率规则里，玻恩律是层析秩最小的那一个。E.8.6 与 E.8.7 用同一套记号检查 `H6` 与 `H7`：演化的可逆、时间连续、生成元与条件化，以及复合系统的参数计数与交换统计。这两小节不加新的条款，只把输入换成只谈比较对象与读数的形状，并用满足全部条款的模型标出边界。E.8.8 把比较用到系综上：每个对象都有对立者时，多点格拉姆半正定等价于“每个系综与自身的平均求同读数不为负”；单比特上的 `H5` 可以换成系综外延性，在 `MODEL` 读法下它是条款 I 用于系综。E.8.9 读一个对象沿时间的比较记录：读数表的秩数出能级，射线矢高始终离开零的对象说明态空间无穷维，这给 `H4` 一个读数判据但不推出它；两个通道合起来才定出轨道上的哈密顿量（`H6`）。
 
-先说清边界。这两条条件是加在 $\mathcal{A}_0$ 之外的，本节证明的是“若加入则推出”，不主张它们能从条款 I–III 推出；[@ex-appe-layer0-countermodels] 的反例恰好说明不能。本节的两个定理盒对应冻结定理，其余推导标为 `手工推导`，引用的经典结论标为 `文献结果`。
+先说清边界。这两条条件是加在 $\mathcal{A}_0$ 之外的，本节证明的是“若加入则推出”，不主张它们能从条款 I–III 推出；[@ex-appe-layer0-countermodels] 的反例恰好说明不能。本节的定理盒都对应冻结定理，其余推导标为 `手工推导`，引用的经典结论标为 `文献结果`。
 
 ### E.8.1 单对比较：弦与矢高在第 0 层已经锁死 {#sec-appe-chord-sagitta-layer0}
 
@@ -751,29 +751,126 @@ $$
 
 在这个读法下（`MODEL`），交换统计的选择是“交换矢高为 $2$ 的扇区是否被占据”，它是一个超选择标签，和 `H2` 的签名、`H8` 的光锥一样属于 `T3` 型分岔。
 
-### E.8.8 台账改了什么 {#sec-appe-reduced-ledger}
+### E.8.8 系综：多点正性与单比特玻恩权重的读数形式 {#sec-appe-ensembles}
+
+到此为止比较只在两个对象之间进行。实验里常做的是另一件事：按概率随机抽一个对象，再拿它去比较。把 $X$ 上有限支撑的概率分布 $E=\sum_kp_k\delta_{x_k}$ 叫作**系综**，两个系综的平均求同读数定义为 $S(E,F)=\sum_{k,l}p_kq_l\,S(x_k,y_l)$（`MODEL`）。再称 $\bar x$ 是 $x$ 的**对立者**，若 $\mathrm{CMP}(x,\bar x)=-\mathbf{1}$，即两者的矢高为 $2$。在条款 II 与条款 IV 下，$\mathrm{CMP}(\bar x,z)=\mathrm{CMP}(\bar x,x)\,\mathrm{CMP}(x,z)=-\mathrm{CMP}(x,z)$，对立者的一切比较都与 $x$ 反号。
+
+::: {.remark #rem-appe-ensemble-positivity title="有对立者时，系综自洽等价于多点格拉姆半正定；没有对立者则不够（手工推导）"}
+**手工推导。** 设条款 II–IV 成立，求同读数是实标量，$S(x,y)=s_{xy}\mathbf{1}$。对系综 $E=\sum_kp_k\delta_{x_k}$ 有 $S(E,E)=p^{\mathsf T}[s_{x_kx_l}]\,p$，即从同一个系综独立抽两个对象时求同读数的平均。
+
+1. 若每个对象都有对立者，则下面两条等价：(a) 每个系综与自身的平均求同读数不为负，$S(E,E)\ge0$；(b) 对每个有限点组，读数表 $[s_{x_ix_j}]$ 半正定。
+2. 在 (b) 之下 $\lvert s_{xy}\rvert\le1$；$s_{xy}=1$ 时 $x$ 与 $y$ 对一切 $z$ 的求同读数相同，$s_{xy}=-1$ 时处处反号。
+3. 没有对立者时，(a) 推不出 (b)。
+
+推导：(b) 推出 (a) 只需取 $\alpha=p$。反过来，任给实向量 $\alpha\neq0$，在 $\alpha_i\ge0$ 处取 $y_i=x_i$，在 $\alpha_i<0$ 处取 $y_i=\bar x_i$，令 $E=\sum_i\frac{\lvert\alpha_i\rvert}{\lVert\alpha\rVert_1}\delta_{y_i}$。由 $s_{\bar xz}=-s_{xz}$，$S(E,E)=\alpha^{\mathsf T}[s_{x_ix_j}]\,\alpha/\lVert\alpha\rVert_1^2$，于是 (a) 给出 (b)。第 2 款：$2\times2$ 子阵 $\begin{pmatrix}1&s\\s&1\end{pmatrix}$ 半正定即 $\lvert s\rvert\le1$；对任意 $z$，把 $\{x,y,z\}$ 上的半正定读数表写成实内积空间中单位向量 $e_x,e_y,e_z$ 的格拉姆阵，$s_{xy}=1$ 时 $\lVert e_x-e_y\rVert^2=2-2s_{xy}=0$，所以 $e_x=e_y$，$s_{xz}=s_{yz}$；$s_{xy}=-1$ 时 $e_x=-e_y$。
+
+第 3 款的例子就是 E.8.1 末段 $(M_2(\mathbb{R}),{}^\sharp)$ 中的三点：$s_{01}=s_{02}=\frac{\sqrt2}{2}$，$s_{12}=-\frac18$，读数表的行列式为 $-\frac{9}{64}$。对非负权重，
+$$
+p^{\mathsf T}Gp=p_0^2+p_1^2+p_2^2+\sqrt2\,p_0(p_1+p_2)-\frac14p_1p_2\ \ge\ p_0^2+\frac78\left(p_1^2+p_2^2\right)>0,
+$$
+所以 (a) 在这三个对象上成立。把对立者 $-x_0,-x_1,-x_2$（仍在 $\mathrm{SL}(2,\mathbb{R})$ 中，$\mathrm{CMP}(x,-x)=-\mathbf{1}$，条款 II–IV 照旧成立）加进对象集，系综 $E=\frac{1}{2+\sqrt2}\left(\sqrt2\,\delta_{\bar x_0}+\delta_{x_1}+\delta_{x_2}\right)$ 给出 $S(E,E)=-\frac{3-2\sqrt2}{8}<0$。双曲点对是同一种情形：$s_{01}=\cosh\eta>1$ 时非负权重给出 $p_0^2+p_1^2+2p_0p_1\cosh\eta>0$；有了对立者，$E=\frac12\left(\delta_{x_0}+\delta_{\bar x_1}\right)$ 给出 $\frac12(1-\cosh\eta)<0$。
+:::
+
+与 [@rem-appe-gram-from-flatness] 第 3 款对照：那里由条款 IV 加正性条件推出 (b)。这里说，要推出 (b)，正性条件也可以换成两句只谈比较对象与读数的话：**每个对象都有一个对立者；从同一个系综独立抽两个对象，它们的平均求同读数不为负。** 这两句并不等价于正性条件。它们仍然容许 $s=\pm1$ 而 $A\neq0$ 的抛物点对：在 [@ex-appe-layer0-countermodels] 反例 (b) 的对偶数中取对象 $\pm1$、$\pm(1+\varepsilon)$，读数只取 $\pm1$，读数表半正定，(a) 成立，正性条件失败。但由第 2 款，这样的两个对象对一切求同读数不可分辨，它们的差别只在求异通道里。被排除的是双曲分支；在洛伦兹读法下（`MODEL`），把一个指向未来的单位类时向量与一个指向过去的混在一起，平均成了类空的，这就是上面的负读数。
+
+同一个“把比较用到系综上”的办法，也给单比特上的 `H5` 换一种说法。
+
+::: {.remark #rem-appe-ensemble-extensionality-born title="系综外延性推出单比特玻恩律，不需要连续性（手工推导与文献结果）"}
+**手工推导。** 沿用 [@rem-appe-born-zonal-minimal-rank] 的设定：制备 $\mathbf{s}$、出口 $\mathbf{r}$ 的概率为 $f(\mathbf{s}\cdot\mathbf{r})$，但 $f:[-1,1]\to\mathbb{R}$ 不要求连续。系综的出口概率按定义取平均，$p(\mathbf{r}\mid E)=\sum_kp_kf(\mathbf{s}_k\cdot\mathbf{r})$；它对探针 $\mathbf{z}$ 的平均求同读数是 $\sum_kp_k\,\mathbf{s}_k\cdot\mathbf{z}=\mathbf{m}_E\cdot\mathbf{z}$，$\mathbf{m}_E$ 是重心。称规则满足**系综外延性**，若对一切探针平均求同读数相同的两个系综，对一切出口的概率也相同；由于 $\mathbf{m}\cdot\mathbf{z}$ 对一切单位向量 $\mathbf{z}$ 决定 $\mathbf{m}$，这就是“出口概率只依赖重心”。则：
+
+$$
+\text{系综外延性}\iff f(t)=a+bt ;
+$$
+
+再加 $f(1)=1$ 与对径归一 $f(t)+f(-t)=1$，即得 $f(t)=\frac{1+t}{2}$。
+
+推导：仿射规则显然满足。反之固定 $\mathbf{r}$。闭单位球中每一点都是某个系综的重心（过该点任作一条弦，两端点按比例加权），由系综外延性 $G(\mathbf{m}):=p(\mathbf{r}\mid E)$（$\mathbf{m}_E=\mathbf{m}$）良定；两个系综按 $\lambda:1-\lambda$ 混合，重心与出口概率都按同一比例组合，所以 $G$ 在球上保持凸组合。令 $h=G-G(0)$，与重心 $0$ 混合得 $h(\lambda\mathbf{m})=\lambda h(\mathbf{m})$（$0\le\lambda\le1$），取中点得 $h\left(\frac{\mathbf{m}+\mathbf{m}'}{2}\right)=\frac12\left(h(\mathbf{m})+h(\mathbf{m}')\right)$；于是 $L(\mathbf{y}):=h(\varepsilon\mathbf{y})/\varepsilon$（$\varepsilon>0$，$\varepsilon\lVert\mathbf{y}\rVert\le1$）与 $\varepsilon$ 无关，可加、正齐次，且由 $h(\varepsilon\mathbf{y})+h(-\varepsilon\mathbf{y})=2h(0)=0$ 是奇的，因而是线性的。这里 $\lambda$ 取遍 $[0,1]$ 中的实数，所以不需要任何连续性。于是 $G(\mathbf{m})=a+\mathbf{b}\cdot\mathbf{m}$，$f(\mathbf{s}\cdot\mathbf{r})=a+\mathbf{b}\cdot\mathbf{s}$ 对一切单位向量 $\mathbf{s}$ 成立。在与 $\mathbf{r}$ 正交的大圆上左端恒为 $f(0)$，$\mathbf{s}$ 与 $-\mathbf{s}$ 同在其上，故 $\mathbf{b}\cdot\mathbf{s}=0$，$\mathbf{b}$ 与 $\mathbf{r}$ 平行，$f(t)=a+\beta t$。
+
+三次规则 $f(t)=\frac12(1+t^3)$ 违反系综外延性：三叉戟 $\{(0,0,1),\,(\mp\frac{\sqrt3}{2},0,-\frac12)\}$ 等权与对径对 $\{\pm\mathbf{e}_z\}$ 等权的重心都是 $0$，向 $\mathbf{e}_z$ 出口的概率分别是 $\frac58$ 与 $\frac12$。同一论证在 $\mathbb{CP}^{d-1}$ 上也成立：读数取 $\lvert\langle x\mid z\rangle\rvert^2=\operatorname{Tr}(P_xP_z)$，平均读数决定密度矩阵，系综外延性给出 $f\bigl(\operatorname{Tr}(PQ)\bigr)=a+\operatorname{Tr}(BP)$；对保持 $Q$ 不动的酉群取平均，$B$ 换成 $\beta Q+\gamma(\mathbf{1}-Q)$，所以 $f$ 仿射，再加 $f(0)=0$、$f(1)=1$ 得 $f(t)=t$。
+
+**文献结果。** 广义概率论把态取为制备的等价类，并把出口概率当作态的仿射函数（Hardy 2001；Barrett 2007）。上面的推导就是这一点在带状规则上的具体化；带状写法与三叉戟反例只是把它接到比较的读数上。
+:::
+
+在这个读法下（`MODEL`），系综外延性是条款 I 用在系综上：把系综当作对象，把平均比较读数当作它的比较行，条款 I 说比较行相同的系综是同一个对象，出口概率作为这个对象的函数便只依赖比较行。与 [@rem-appe-born-zonal-minimal-rank] 相比，它不要连续性，也不要勒让德展开；在连续、对径归一、$f(1)=1$ 之下两者等价，都等价于玻恩律。它仍是输入：条款 I–IV 本身只管单个对象之间的比较，对概率规则没有约束，三次规则与它们都相容。不同的只是，这条输入现在也可以说成条款 I 的一个延伸。
+
+### E.8.9 轨道：一个对象沿时间的比较记录 {#sec-appe-orbit-records}
+
+[@rem-appe-sagitta-continuity] 处理的是一族时间齐次的对象 $x_t$，$\mathrm{CMP}(x_s,x_t)=w(t-s)$。沿用那里的记号：$f(t)=\varphi\bigl(w(t)\bigr)$，$\xi_s=\pi\bigl(w(s)\bigr)\Omega$，$\mathcal{K}=\overline{\operatorname{span}}\{\xi_s\}$，$\langle\xi_r,\xi_s\rangle=f(s-r)$，并设矢高读数在零点连续，从而 $U_t$ 在 $\mathcal{K}$ 上强连续。由 Stone 定理与谱定理（`文献结果`），有自伴的 $H$ 与概率测度 $\mu$（$\Omega$ 在 $H$ 下的能量分布），使 $f(t)=\int e^{-i\lambda t}\,d\mu(\lambda)$，并且 $\mathcal{K}$ 与 $L^2(\mu)$ 酉等价，$\dim\mathcal{K}$ 等于 $\mu$ 的支撑点数。三种读数分别是：求同读数 $\varphi\bigl(S(x_0,x_t)\bigr)=\operatorname{Re}f(t)$，求异读数 $\varphi\bigl(A(x_0,x_t)\bigr)=i\operatorname{Im}f(t)$，以及射线回到原处的玻恩权重 $\lvert f(t)\rvert^2$。对整体相位取最小的矢高读数 $\min_\alpha\bigl(1-\operatorname{Re}(e^{i\alpha}f(t))\bigr)=1-\lvert f(t)\rvert$ 称为**射线矢高**。
+
+按固定步长 $\tau>0$ 采样，样本 $\xi_0,\xi_\tau,\dots,\xi_{(n-1)\tau}$ 的读数表是 $G_{jk}=f\bigl((k-j)\tau\bigr)$，$j,k=0,\dots,n-1$。它的秩由下面的冻结定理计算。
+
+::: {.theorem #thm-appe-prony-hankel-rank title="有限指数和的汉克尔截面，秩等于模式数" lean="D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_hankel_rank"}
+设 $K$ 为域，$m\le n$ 为自然数，节点 $z_1,\dots,z_m\in K$ 两两不同，权重 $w_1,\dots,w_m\in K$ 都不为零。则 $K$ 上的 $n\times n$ 矩阵
+
+$$
+H_{ij}=\sum_{l=1}^{m}w_l\,z_l^{\,i+j},\qquad i,j=0,1,\dots,n-1,
+$$
+
+的秩等于 $m$。
+:::
+
+::: proof
+$H$ 分解为 $V\operatorname{diag}(w)V^{\mathsf T}$，其中 $V_{il}=z_l^{\,i}$ 是 $n\times m$ 的范德蒙德矩阵。这个分解给出秩至多为 $m$；左上角 $m\times m$ 块是两个方阵范德蒙德矩阵与一个对角阵之积，节点两两不同、权重非零使它的行列式不为零，所以秩至少为 $m$。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-appe-orbit-rank-and-recurrence title="轨道读数表的秩数出能级；有限个能级的轨道必定回来（手工推导与文献结果）"}
+**手工推导。** 设 $\mu=\sum_{l=1}^{m}p_l\delta_{\lambda_l}$，$\lambda_l$ 两两不同，$p_l>0$，并设节点 $z_l=e^{-i\lambda_l\tau}$ 两两不同。
+
+1. **秩。** $\operatorname{rank}G=\min(n,m)$。把 $G$ 的行倒排，$G_{n-1-j,\,k}=\sum_l\bigl(p_lz_l^{-(n-1)}\bigr)z_l^{\,j+k}$，正是 [@thm-appe-prony-hankel-rank] 中 $K=\mathbb{C}$、权重为 $p_lz_l^{-(n-1)}\neq0$ 的截面；行倒排不改变秩，所以 $n\ge m$ 时秩为 $m$。$n<m$ 时 $G=V\operatorname{diag}(p)V^*$，$V_{jl}=z_l^{-j}$ 是秩为 $n$ 的 $n\times m$ 范德蒙德矩阵，$\operatorname{diag}(p)$ 正定，所以秩为 $n$。一般的能量分布也可以这样读：对 $\alpha\in\mathbb{C}^n$，$\alpha^*G\alpha=\int\bigl\lvert\sum_j\alpha_je^{-ij\lambda\tau}\bigr\rvert^2d\mu(\lambda)$，括号里是 $e^{-i\lambda\tau}$ 的次数小于 $n$ 的多项式，所以 $G$ 的秩等于 $n$ 与推前测度 $(e^{-i\lambda\tau})_*\mu$ 的支撑点数中较小的一个。
+2. **余项。** 样本 $\xi_{k\tau}$ 在 $\xi_0,\dots,\xi_{(k-1)\tau}$ 张成的空间外有非零正交余项，当且仅当前 $k+1$ 个样本的读数表的秩比前 $k$ 个的大，当且仅当 $k<m$。所以在 $\mathcal{K}$ 中，前 $k$ 个样本张成的 $S_k$ 有 $S_k^\perp\neq\bot$（[`finite_layer_projection_escape`](lean:D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape) 的前提）恰在 $k<m$ 时成立；采样的余项永不枯竭，当且仅当推前测度有无穷多个支撑点。
+3. **回归。** 对每个 $T>0$ 与整数 $Q\ge2$，存在 $t\in[T,\,Q^{m-1}T]$，使射线矢高 $1-\lvert f(t)\rvert\le2\sin^2\frac{\pi}{Q}$；$Q\ge4$ 时这等价于回到原处的玻恩权重 $\lvert f(t)\rvert^2\ge\cos^2\frac{2\pi}{Q}$。推导：对 $m-1$ 个实数 $\alpha_l=(\lambda_l-\lambda_1)T/2\pi$ 用 Dirichlet 同时逼近定理，得整数 $1\le q\le Q^{m-1}$ 使每个 $q\alpha_l$ 到最近整数的距离不超过 $\frac1Q$（鸽笼原理：$Q^{m-1}+1$ 个点 $k\alpha$（$k=0,\dots,Q^{m-1}$）模 $1$ 落入 $Q^{m-1}$ 个边长 $\frac1Q$ 的小方格，取同格两点之差）。取 $t=qT$，则每个 $(\lambda_l-\lambda_1)t$ 与 $2\pi\mathbb{Z}$ 相差不超过 $\frac{2\pi}{Q}\le\pi$，于是
+$$
+\lvert f(t)\rvert\ \ge\ \operatorname{Re}\left(e^{i\lambda_1t}f(t)\right)=\sum_lp_l\cos\bigl((\lambda_l-\lambda_1)t\bigr)\ \ge\ \cos\frac{2\pi}{Q}=1-2\sin^2\frac{\pi}{Q}.
+$$
+对 $m$ 个实数 $\lambda_lT/2\pi$ 同样处理，得 $t\in[T,Q^mT]$ 使矢高读数 $1-\operatorname{Re}f(t)\le2\sin^2\frac{\pi}{Q}$。
+4. **维数证据。** 若对一切 $t\in[T,Q^{m-1}T]$ 都有 $1-\lvert f(t)\rvert>2\sin^2\frac{\pi}{Q}$，则 $\dim\mathcal{K}>m$：否则 $\mu$ 恰有 $m'\le m$ 个原子，第 3 款在 $[T,Q^{m'-1}T]\subseteq[T,Q^{m-1}T]$ 中给出反例。若有 $T$ 与 $\delta>0$ 使 $t\ge T$ 时 $1-\lvert f(t)\rvert\ge\delta$，取 $Q$ 使 $2\sin^2\frac\pi Q<\delta$，上一句对每个 $m$ 都适用，所以 $\dim\mathcal{K}=\infty$。例如能量分布为高斯分布 $N(0,\sigma^2)$ 时 $f(t)=e^{-\sigma^2t^2/2}$，射线矢高趋于 $1$。
+
+**文献结果。** Dirichlet 同时逼近定理（Dirichlet 1842）；离散谱的量子轨道回归（Bocchieri–Loinger 1957）。后者说明第 4 款的条件只是充分的：能量分布有无穷多个原子时轨道照样回来，而 $\dim\mathcal{K}=\infty$。混叠时（例如 $\lambda_2=\lambda_1+2\pi/\tau$）两个能级的节点重合，采样的秩只看到一个。
+:::
+
+所以 `H4` 的“正交余项不竭”有一个只用一个对象沿时间的比较读数说出口的形式：**读数表的秩每多一，就多证明一个能级；射线矢高在某时刻之后始终离开零的对象，所在的态空间不可能是有限维的。** 前一句是等价刻画，后一句是充分条件。它们都没有推出 `H4`：哈密顿量只有有限个能级的模型满足全部条款。
+
+同一份轨道记录还回答了 E.8.6 留下的问题：哈密顿量在多大程度上是读数之外的输入。
+
+::: {.remark #rem-appe-orbit-record-channels title="轨道记录的三种读数各自决定什么：两个通道缺一不可（手工推导与文献结果）"}
+**手工推导。** 记 $\mu^{\mathrm r}(B)=\mu(-B)$ 为能量分布的反射。
+
+1. **全比较读数。** $f$ 决定 $\mu$，进而决定 $(\mathcal{K},H\vert_{\mathcal{K}},\Omega)$ 到酉等价为止。有限维时这一点直接可见：不同 $\lambda$ 的指数函数 $e^{-i\lambda t}$ 线性无关，$f=\sum_lp_le^{-i\lambda_lt}$ 的写法唯一。
+2. **只有求同读数。** $\operatorname{Re}f(t)=\int\cos(\lambda t)\,d\mu$ 只决定对称化 $\frac12(\mu+\mu^{\mathrm r})$，也就是 $\lvert\lambda\rvert$ 的分布。二能级就有反例：$H=\operatorname{diag}(1,2)$ 与 $H'=\operatorname{diag}(1,-2)$，初态 $\frac{1}{\sqrt2}(1,1)$，两者的求同读数都是 $\frac12(\cos t+\cos2t)$，回到原处的玻恩权重却分别是 $\frac12(1+\cos t)$ 与 $\frac12(1+\cos3t)$。
+3. **只有玻恩权重。** $\lvert f(t)\rvert^2=\int\!\!\int e^{-i(\lambda-\lambda')t}\,d\mu(\lambda)\,d\mu(\lambda')$ 只决定 $\mu$ 的自相关。二能级时这已足够定出 $\mu$ 到平移与反射为止：$\mu=p\delta_a+q\delta_b$ 的自相关给出 $pq$、$p^2+q^2$ 与 $\lvert b-a\rvert$。三能级就有真正的歧义：能级 $0,1,2$，布居 $\frac1{12}(1,5,6)$ 与 $\frac1{12}(2,7,3)$，生成多项式 $1+5z+6z^2=(1+2z)(1+3z)$ 与 $2+7z+3z^2=(2+z)(1+3z)$ 只差把根 $-\frac12$ 换成它的倒数 $-2$；两者的玻恩权重都是 $\frac{1}{144}(62+70\cos t+12\cos2t)$，而两个分布既不差一个平移，也不互为反射，求同读数也不同。
+4. **求同读数加玻恩权重。** 对两个都只有有限个能级的分布，两者合起来决定 $\mu$ 到反射为止。推导：$(\operatorname{Im}f)^2=\lvert f\rvert^2-(\operatorname{Re}f)^2$ 已知；若 $f$ 与 $f'$ 给出相同的两种读数，$g=\operatorname{Im}f$、$g'=\operatorname{Im}f'$ 是有限个三角函数之和，实解析，$(g-g')(g+g')\equiv0$，其中一个因子在不可数多个点上为零，因而恒为零。所以 $f'=f$ 或 $f'=\bar f$，后者就是 $\mu'=\mu^{\mathrm r}$，即 $H\mapsto-H$ 的时间反演。
+
+**文献结果。** Stone 定理、谱定理与 Bochner 定理；一维相位恢复的翻根歧义（Walther 1963；Hofstetter 1964）与同度量集（Patterson 1944；Rosenblatt–Seymour 1982）。
+:::
+
+E.8.6 的台账把哈密顿量 $H$ 记为仍需输入。这一条注记把这句话说得更准：**在轨道张成的空间上，$H$ 不是读数之外的另一个输入，两个通道的完整轨道记录决定它到酉等价为止。** 只读求同通道，丢掉的不止时间取向，连每个能级的符号都丢了；只读射线的玻恩权重，三能级就出现真正的歧义；求同读数与玻恩权重合起来，剩下的恰是求异通道的整体符号，也就是时间反演。条款 II 把比较拆成求同与求异两个通道，在动力学上两个通道都不可省。仍然是输入的，是选哪条轨道，以及 $H$ 在 $\mathcal{K}$ 之外怎样作用。
+
+### E.8.10 台账改了什么 {#sec-appe-reduced-ledger}
 
 ::: {.remark #rem-appe-reduced-ledger title="E.8 之后的台账（对 [@rem-appe-master-audit-table] 的补充）"}
-**补充审计（`MODEL` + `手工推导`，定理盒部分对应冻结定理）。** 下表只列发生变化的条目；`H1`、`H4`、`H9` 的处理机制与 [@rem-appe-master-audit-table] 相同。
+**补充审计（`MODEL` + `手工推导`，定理盒部分对应冻结定理）。** 下表只列发生变化的条目；`H1`、`H9` 的处理机制与 [@rem-appe-master-audit-table] 相同。
 
 | 条目 | 原处理 | E.8 中的处理 | 依据 |
 | :--- | :--- | :--- | :--- |
 | `H2` 正自配对 | 显式的第 1 层标定 | 由条款 IV 推出 | [@rem-appe-anchoring-consequences] 第 1 款 |
 | `H2` 椭圆负平方 | `T3` 分岔 | 求同读数为实标量时由正性条件推出；此时正性条件对每个比较的求异部分等价于它的整数次幂有界；非标量时不成立 | [@rem-appe-involution-positivity]、[@rem-appe-bounded-recurrence] |
-| `H2` 多点格拉姆半正定 | 显式的第 1 层条件 | 由条款 IV 加正泛函推出，逆向成立；标量相似时由条款 IV 加正性条件推出；偏离平坦时有定量下界 | [@thm-appe-chordal-gain-potential]、[@rem-appe-gram-from-flatness]、[@rem-appe-near-flat-gram-bound] |
+| `H2` 多点格拉姆半正定 | 显式的第 1 层条件 | 由条款 IV 加正泛函推出，逆向成立；标量相似时由条款 IV 加正性条件推出；标量相似且每个对象有对立者时，等价于每个系综与自身的平均求同读数不为负，没有对立者则不够；偏离平坦时有定量下界 | [@thm-appe-chordal-gain-potential]、[@rem-appe-gram-from-flatness]、[@rem-appe-ensemble-positivity]、[@rem-appe-near-flat-gram-bound] |
 | `H3` 平行四边形极化 | `T2` 条件 | 弦距来自正泛函的 GNS 内积，输入由“内积”换成“正读数”；完备化仍为 `T1` | [@rem-appe-gram-from-flatness] 第 2 款 |
-| `H5` 玻恩权重 | `T2` 可加性条件 | 只对只依赖两两比较的规则：$d\ge3$ 时有界、在每组正交归一基上归一且 $f(1)=1$ 就定出玻恩律；$d=2$ 时对连续规则，全效应可加性可以换成“对径归一、$f(1)=1$、层析秩最小”；仍是 `T2` 输入 | [@rem-appe-born-zonal-minimal-rank] |
+| `H4` 正交余项不竭 | `T2/T4` 输入 | 对一个时间齐次对象：采样读数表的秩等于采样所见的能级数，余项永不枯竭当且仅当所见能级无穷；有限个能级的轨道必定回来，有限时长内射线矢高始终高于阈值给出维数下界，此后始终离开零推出轨道空间无穷维；仍是输入 | [@thm-appe-prony-hankel-rank]、[@rem-appe-orbit-rank-and-recurrence] |
+| `H5` 玻恩权重 | `T2` 可加性条件 | 只对只依赖两两比较的规则：$d\ge3$ 时有界、在每组正交归一基上归一且 $f(1)=1$ 就定出玻恩律；$d=2$ 时对连续规则，全效应可加性可以换成“对径归一、$f(1)=1$、层析秩最小”，也可以不要连续性而换成系综外延性（`MODEL` 下读作条款 I 用于系综）；仍是 `T2` 输入 | [@rem-appe-born-zonal-minimal-rank]、[@rem-appe-ensemble-extensionality-born] |
 | `H8` 洛伦兹签名 | `T3` 分岔 | 可与 `H2` 的签名分岔读作同一处取舍（`MODEL`） | E.8.1 末段 |
 | `H8` 第 1 层射影和乐 | 第 1 层内生 | 在 $\mathcal{Cl}_{3,0}$ 中由半比较的三点和乐给出闭式 | [@rem-appe-half-comparison-holonomy] |
 | `H6` 双侧可逆 | `T2` 条件 | 单侧公平的亏损是投影，单侧移位作为比较值违反条款 III；但它可作为满足条款 I–IV 与正性条件的模型中的诱导演化出现，代数带忠实迹也不排除；过去完备或态空间有限维各自充分 | [@rem-appe-one-sided-fairness]、[@ex-appe-bilateral-shift-model] |
 | `H6` 强连续 | `T2` 条件 | 时间齐次族上等价于矢高读数在零点连续；只要求可测不够；有限维中由此接上 [@thm-calibrated-unitary-group] | [@rem-appe-sagitta-continuity] |
-| `H6` 生成元 | `T4` 输入 $H$ | 弦率趋于 $-iH$，矢高率趋于 $H^2/2$，均有显式误差；有限步速度界；$H$ 本身仍是输入 | [@rem-appe-generator-chord-sagitta] |
+| `H6` 生成元 | `T4` 输入 $H$ | 弦率趋于 $-iH$，矢高率趋于 $H^2/2$，均有显式误差；有限步速度界；在轨道张成的空间上，两个通道的轨道记录决定 $H$ 到酉等价为止，只用求同读数或只用玻恩权重都不够（二能级与三能级反例）；轨道的选取与 $H$ 在轨道外的作用仍是输入 | [@rem-appe-generator-chord-sagitta]、[@rem-appe-orbit-record-channels] |
 | `H6` 吕德斯条件化 | `T2` 条件 | 吕德斯态是确定通过检验者中保真度最大者，且唯一；迹范数与迹为 $1$ 的希尔伯特—施密特距离不给出吕德斯态；所用读数仍是输入 | [@rem-appe-luders-nearest] |
 | `H7` 局域层析与交换统计 | `T2` + `T3` | 参数计数 $K_d(ab)-K_d(a)K_d(b)=\frac{d(2-d)}4a(a-1)b(b-1)$；交换是矢高取 $0$ 与 $2$ 的公平对合，条款 I 去掉标签而不选扇区；中心复结构与扇区选择仍是输入 | [@rem-appe-tomography-count]、[@rem-appe-swap-sagitta] |
 
 新增的两条输入是条款 IV（[@def-appe-third-point-redundancy]）与正性条件（[@rem-appe-involution-positivity]）；求同读数不是实标量时，读数表的半正定另需一个正泛函。条款 IV 不必对一切三点成立：可比三角形填满每个圈就够了，而且对一切群而言这是恰好够的条件（[@rem-appe-triangle-simple-connectivity]）。条款 IV 排除一切全比较的和乐，它刻画的是第 1 层的平坦骨架；带真实曲率的第 2 层联络必须放弃它，那时 [@thm-appe-chordal-gain-potential-stability] 与 [@rem-appe-near-flat-gram-bound] 给出偏离的代价。
 
 E.8.6 与 E.8.7 不增加新的条款：`H6` 的可逆与连续两项各有一个只谈对象与读数的充分条件（过去完备、矢高读数在零点连续），条件化换成一条最优化原理，`H7` 有了一行计数公式；这些条件仍是输入。
+
+E.8.8 与 E.8.9 同样不增加新的条款。E.8.8 把比较用到系综上：要推出读数表半正定，正性条件可以换成“每个对象有对立者，系综与自身的平均求同读数不为负”，后者仍容许的只有对一切求同读数不可见的抛物点对；单比特上的玻恩律可以由系综外延性推出。E.8.9 读一个对象的轨道：`H4` 有了可在有限步上检验的读数形式，`H6` 的 $H$ 在轨道空间上可以从两个通道的记录中读出。
 :::
 
 这一节没有减少输入的总数到零，它改变的是输入的形状：在求同读数为实标量的情形，`H2` 的三项原先是关于自配对、双向量与格拉姆矩阵的三条几何陈述，现在换成两条只用比较本身就能说出口的条件。一条说第三者不改变两者之比，一条说差异的往返留下正的痕迹。
