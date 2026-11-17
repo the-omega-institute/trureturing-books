@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "285d9db079252fb0940f7a7700bc2addf7605828",
-  "pinned_at": "2026-11-17T12:23:14Z",
+  "commit": "c61f1fe33cd305cef70ee7ba651d7a9da283ac45",
+  "pinned_at": "2026-11-17T15:22:13Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -4164,6 +4164,30 @@
       "statement_id": "sha256:9d24508d35d99b17cb22cc6d691a82d92563c7ffe6fb259bff0b1d3714941555",
       "line": 52,
       "signature": "theorem triple_bargmann_bloch (r₁ r₂ r₃ : Fin 3 → ℝ) : tripleBargmann r₁ r₂ r₃ = (((1 + r₁ ⬝ᵥ r₂ + r₂ ⬝ᵥ r₃ + r₃ ⬝ᵥ r₁ : ℝ) : ℂ) / 4) + (((r₁ ⬝ᵥ (r₂ ⨯₃ r₃) : ℝ) : ℂ) * Complex.I / 4)"
+    },
+    "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.rotor_shortest_gate": {
+      "module": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy",
+      "name": "D5.S3.Quantum.Information.GroupInvariantPsi.ShortestGateHolonomy.rotor_shortest_gate",
+      "kind": "theorem",
+      "statement_id": "sha256:e2b84236ea655caef332f654cdbd2dbb372567de0c3962dd7a6e172b187b9156",
+      "line": 239,
+      "signature": "theorem rotor_shortest_gate (a b : Fin 3 → ℝ) (ha : a ⬝ᵥ a = 1) (hb : b ⬝ᵥ b = 1) (hab : b ≠ -a) : rotor a b * (rotor a b)ᴴ = 1 ∧ rotor a b * pauliCombination a * (rotor a b)ᴴ = pauliCombination b ∧ ∀ ψ : QubitState, star ψ ⬝ᵥ ψ = 1 → qubitProjector a *ᵥ ψ = ψ → rotor a b *ᵥ ψ = shortestGate b ψ"
+    },
+    "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy": {
+      "module": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy",
+      "name": "D5.S3.Quantum.Information.GroupInvariantPsi.ShortestGateHolonomy.shortest_gate_triangle_holonomy",
+      "kind": "theorem",
+      "statement_id": "sha256:e2b84236ea655caef332f654cdbd2dbb372567de0c3962dd7a6e172b187b9156",
+      "line": 298,
+      "signature": "theorem shortest_gate_triangle_holonomy (a b c : Fin 3 → ℝ) (ha : a ⬝ᵥ a = 1) (hb : b ⬝ᵥ b = 1) (hc : c ⬝ᵥ c = 1) (hab : b ≠ -a) (hbc : c ≠ -b) (hca : a ≠ -c) : triangleS a b c ^ 2 + triangleD a b c ^ 2 = 2 * (1 + a ⬝ᵥ b) * (1 + b ⬝ᵥ c) * (1 + c ⬝ᵥ a) ∧ 0 < triangleS a b c ^ 2 + triangleD a b c ^ 2 ∧ rotor c a * rotor b c * rotor a b = (((Real.sqrt (triangleS a b c ^ 2 + triangleD a b c ^ 2) : ℝ) : ℂ))⁻¹ • (((triangleS a b c : ℝ) : ℂ) • (1 : Matrix (Fin 2) (Fin 2) ℂ) - (((triangleD a b c : ℝ) : ℂ) * Complex.I) • pauliCombination a) ∧ ∀ ψ : QubitState, star ψ ⬝ᵥ ψ = 1 → qubitProjector a *ᵥ ψ = "
+    },
+    "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram": {
+      "module": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy",
+      "name": "D5.S3.Quantum.Information.GroupInvariantPsi.ShortestGateHolonomy.triangle_gram",
+      "kind": "theorem",
+      "statement_id": "sha256:e2b84236ea655caef332f654cdbd2dbb372567de0c3962dd7a6e172b187b9156",
+      "line": 276,
+      "signature": "theorem triangle_gram (a b c : Fin 3 → ℝ) (ha : a ⬝ᵥ a = 1) (hb : b ⬝ᵥ b = 1) (hc : c ⬝ᵥ c = 1) : triangleD a b c ^ 2 = 1 + 2 * (a ⬝ᵥ b) * (b ⬝ᵥ c) * (c ⬝ᵥ a) - (a ⬝ᵥ b) ^ 2 - (b ⬝ᵥ c) ^ 2 - (c ⬝ᵥ a) ^ 2"
     },
     "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState": {
       "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
