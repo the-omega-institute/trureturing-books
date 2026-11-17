@@ -54,8 +54,8 @@
     return [[c + x * x * h, x * y * h - z * s, x * z * h + y * s], [y * x * h + z * s, c + y * y * h, y * z * h - x * s], [z * x * h - y * s, z * y * h + x * s, c + z * z * h]];
   }
   function pow3(M, n) { let R = [[1, 0, 0], [0, 1, 0], [0, 0, 1]], B = M; while (n > 0) { if (n & 1) R = mat3(R, B); B = mat3(B, B); n = Math.floor(n / 2); } return R; }
-  /** The largest singular value of a real 2 × 2 matrix. */
-  function norm2(M) { const f = M[0][0] ** 2 + M[0][1] ** 2 + M[1][0] ** 2 + M[1][1] ** 2, d = M[0][0] * M[1][1] - M[0][1] * M[1][0]; return Math.sqrt((f + Math.sqrt(Math.max(0, f * f - 4 * d * d))) / 2); }
+  /** The largest singular value of a real 2 × 2 matrix, σ = ½(hypot(a + d, b − c) + hypot(a − d, b + c)): no subtraction of nearly equal squares, so it stays accurate when the two singular values coincide. */
+  function norm2(M) { const a = M[0][0], b = M[0][1], c = M[1][0], d = M[1][1]; return (Math.hypot(a + d, b - c) + Math.hypot(a - d, b + c)) / 2; }
 
   /* ---------- scene 1: the skate ramp and the osculating rotor ---------- */
   const RA = 0.62, RB = 0.08, TH_END = 2.2, LEAD = 0.75, W = 0.42, YF = -W - 0.02, XR = 0.75, ZT = 0.95;
