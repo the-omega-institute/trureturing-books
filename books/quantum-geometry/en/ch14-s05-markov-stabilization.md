@@ -157,7 +157,7 @@ The full braiding lab: add crossings $\sigma_k^{\pm 1}$ on top, change the numbe
 Let us now work through the four-part numerical and matrix calculation connecting no-cloning, the three-qubit bit-flip code, local Bloch expectations, and $8\times 2$ orthogonal syndrome recovery.
 
 ::: {.example #ex-repetition-code-syndrome title="Numerical No-Cloning Gap, Three-Qubit Repetition Syndromes, and 8×2 Orthogonal Recovery (With Literature Context, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Steps 1, 2, and 4 below instantiate this chapter's kernel-verified [@thm-no-cloning-overlap], [@lemma-pauli-word-phase], and [@prop-orthogonal-syndrome-recovery], whereas the general criterion in Step 3 for single-qubit marginals of stabilizer codes satisfying the conditions stated there and the single-error-correcting five-qubit, seven-qubit Steane, and nine-qubit Shor codes contrasted at the end of Step 4 belong to the quantum error-correction literature (see [@rem-error-correction-anyons-literature] below) and are not formalized in this book.
+**With literature context.** Steps 1, 2, and 4 below instantiate this chapter's kernel-verified [@thm-no-cloning-overlap], [@lemma-pauli-word-phase], and [@prop-orthogonal-syndrome-recovery], whereas the general criterion in Step 3 for single-qubit marginals of stabilizer codes satisfying the conditions stated there and the single-error-correcting five-qubit, seven-qubit Steane, and nine-qubit Shor codes contrasted at the end of Step 4 belong to the quantum error-correction literature (see [@rem-error-correction-anyons-literature] below) and are not formalized in this book.
 
 This example verifies the four concrete calculations of Chapter 14:
 

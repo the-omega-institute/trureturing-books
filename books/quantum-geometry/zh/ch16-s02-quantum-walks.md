@@ -36,7 +36,7 @@ $$
 \end{aligned}
 $$
 
-下面的引理（在源码中声明头写为 `theorem result : claim`）证明：对一切圈长 $p \ge 1$、一切演化步数 $n \in \mathbb{N}$ 以及一切单位硬币初态 $c$，对称硬币 $\mathrm{cStar} = (1, i)/\sqrt{2}$ 恒使游走态的多模单激发几何纠缠达到最大值！
+下面的引理（在源码中声明头写为 `theorem result : claim`）证明：对一切圈长 $p \ge 1$、一切演化步数 $n \in \mathbb{N}$ 以及一切单位硬币初态 $c$，对称硬币 $\mathrm{cStar} = (1, i)/\sqrt{2}$ 恒使游走态的多模单激发几何纠缠达到最大值！这一陈述出自 E. K. F. Donkersloot、R. Sondenheimer 与 J. Sperling 的预印本 *Multipartite entanglement dynamics in quantum walks*（arXiv:2603.24679v1，2026，第 III C 2 节）：作者在所测试的全部圈长与步数上数值观察到这一现象，并预期它总成立；Lean 定理把这一预期对一切 $p\ge1$ 与 $n$ 证明了出来。
 
 ::: {.viz src="walk-spreading" preset="ring" height="500"}
 **绕回来，镜像还在。** 圈上只有 $p = 9$ 个点，硬币取 $c_*$，走 $20$ 步：游走早已绕回来，青色的柱和灰色的柱一样摊满整圈，不再有往外跑的前沿；但青色的柱仍然左右成镜像，没有品红。[@lemma-symmetric-coin-walk] 对一切圈长 $p \ge 1$ 与一切步数 $n$ 成立。
@@ -356,7 +356,7 @@ $$
 
 五个点排成一个无向整圈，顺时针与逆时针是两个不同的后继置换，却给出完全相同的边。忘掉方向时，必须识别的是这两个实际表示，而不只是把一个计数除以二。下面在原来的标号顶点上完成这个对应；已知边甚至可以已经组成整圈。
 
-本节的完整应用见 trureturing 的 [RotationFaces 书面推导](https://github.com/the-omega-institute/trureturing/blob/2731c2994260e6ac22ed3385bbc04b37a63ac7a3/Blueprint/D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.md)。其中调用的冻结结果是 [`cycle_boundary_walk`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_boundary_walk)：它从实际旋转系统、简单闭游走及一个精确的二元面边界，辨认游走的两个方向。下面的较广陈述还要从原始图与置换构造这些输入，因此保留完整书面证明，不将整条应用标为 Lean 验证。
+本节的完整应用见 trureturing 的 [RotationFaces 书面推导](https://github.com/the-omega-institute/trureturing/blob/2731c2994260e6ac22ed3385bbc04b37a63ac7a3/Blueprint/D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.md)。其中调用的冻结结果是 [`cycle_boundary_walk`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_boundary_walk)：它从实际旋转系统、简单闭游走及一个精确的二元面边界，辨认游走的两个方向。下面的较广陈述还要从原始图与置换构造这些输入，因此保留完整书面证明，不将整条应用标为 Lean 验证。这段书面推导是本项目自己的展开，`repository` 指向的是本项目仓库，而不是独立的外部论文；外部先例只有下文 Greenhill 等人关于整圈两个置换表示的计数。
 
 ::: {.theorem #thm-undirected-cycle-orientation-fibers title="同一无向整圈的定向纤维与加边对应" status="written-proof" proof="pf-undirected-cycle-orientation-fibers" repository="https://github.com/the-omega-institute/trureturing" source="RotationFaces, orientation-fiber application" request="https://github.com/the-omega-institute/trureturing-requests/issues/12"}
 设 $V$ 为有限标号集，$|V|\ge3$，$F$ 为 $V$ 上任意简单图。令

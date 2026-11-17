@@ -4,10 +4,10 @@
 
 在[第十三章](ch13-entanglement-and-chsh.md)与[第十四章](ch14-cloning-codes-and-braids.md)中，我们见证了高维球体如何接纳并保护量子信息。现在，我们要回答量子计算最激动人心的问题：**在这座指数级膨胀的高维球面上，量子算法究竟凭什么比经典枚举快得多？**
 
-如果把近三十年来最重要的两大量子算法家族——以 Grover 为代表的**振幅放大（Amplitude Amplification）**与以 Shor 为代表的**量子傅里叶周期寻找（QFT Period Finding）**——剥去繁复的电路外衣，它们的几何内核正好对应题记中那句洗练的洞察：
+如果把近三十年来最重要的两大量子算法家族——以 Grover 为代表的**振幅放大（Amplitude Amplification）**与以 Shor 为代表的**量子傅里叶周期寻找（QFT Period Finding）**——剥去繁复的电路外衣，它们的几何内核可以类比为题记中那句洗练的洞察：
 
-- **Grover 搜索是“两次正交反射合成一次不变平面旋转”**：在各向同性的高维草堆里，初始叠加态与目标态之间张开一个二维公共平面；先对目标正交子空间作一次镜像反射（正交一次），再对初始子空间作第二次镜像反射（正交两次），两次反射自动把状态向量沿着这个二维平面向目标稳步拨转 $2\theta$ 角！
-- **QFT 与周期寻找是“赤道相位齿轮上的正交字符干涉”**：通过有限 Weyl 位移算子的共轭相位反冲，把算术周期性刻进一套按二进制分母咬合的赤道相位齿轮；在有限循环群 $\mathrm{ZMod}\,m$（$m>0$）中，对位置子群 $H$ 上的归一化均匀叠加做 QFT，就是在 $H$ 上求字符和：非共振频率的相位箭头首尾相接、闭合归零，唯独对偶零化子 $H^\perp$ 上的共振频率同相累加，一举锁定隐藏周期！下文的对偶求和命题从相反方向在 $H^\perp$ 上求和，结果只在 $H$ 上非零。
+- **Grover 搜索是“两次正交反射合成一次不变平面旋转”**：在各向同性的高维草堆里，初始叠加态与目标态之间张开一个二维公共平面；先对目标正交子空间作一次镜像反射，再对初始子空间作第二次镜像反射，两次反射自动把状态向量沿着这个二维平面向目标稳步拨转 $2\theta$ 角！
+- **QFT 与周期寻找是“赤道相位齿轮上的正交字符干涉”**：通过有限 Weyl 位移算子的共轭相位反冲，把算术周期性刻进一套按二进制分母咬合的赤道相位齿轮；在有限循环群 $\mathrm{ZMod}\,m$（$m>0$）中，对位置子群 $H$ 上的归一化均匀叠加做 QFT，就是在 $H$ 上求字符和：非共振频率的相位箭头首尾相接、闭合归零，唯独对偶零化子 $H^\perp$ 上的共振频率同相累加，把隐藏周期的信息显露出来！下文的对偶求和命题从相反方向在 $H^\perp$ 上求和，结果只在 $H$ 上非零。
 
 ::: {.figure src="ch15-overview"}
 **图 15。** 本章地图：面板 I，$N = 4$ 时一步 Grover 迭代把箭头 $U$ 转过紫色的 $2\theta = 60^\circ$，琥珀色的 $QU$ 正好落在成功方向 $W$ 上；面板 II，$x = 5 = (101)_2$ 的三只相位齿轮，齿数 $2$、$4$、$8$，琥珀色的指针依次指向 $\pi$、$\pi/2$、$5\pi/4$；面板 III，$Q = 16$、$r = 4$ 的周期态做完 QFT 后，只有 $k = 0, 4, 8, 12$ 四处留下高 $1/4$ 的青色柱。
@@ -238,7 +238,7 @@ $$
 2. **非共振情形（$x \notin H$）**：映射 $k \mapsto \mathrm{character}(k.1)(x)$ 构成有限加法群 $\mathrm{annihilator}(H)$ 到复数乘法群 $\mathbb{C}^\times$ 的群同态。由有限循环群 $\mathrm{ZMod}\,m$ 上的对偶性（若 $x \notin H$，则存在 $k_0 \in \mathrm{annihilator}(H)$ 使得 $\mathrm{character}(k_0.1)(x) \neq 1$），在有限群 $\mathrm{annihilator}(H)$ 上对求和指标作平移双射 $k \mapsto k + k_0$，和式 $S = \sum_{k} \mathrm{character}(k.1)(x)$ 满足 $\mathrm{character}(k_0.1)(x) \cdot S = S$。移项得 $(\mathrm{character}(k_0.1)(x) - 1)S = 0$；因 $\mathrm{character}(k_0.1)(x) \neq 1$，必有 $S = 0$。完整证明由 Lean 内核检查。
 :::
 
-[@prop-finite-character-cancellation] 把波粒二象性在有限群上的运作机理展示得淋漓尽致：
+[@prop-finite-character-cancellation] 把相长与相消干涉在有限群上的算术机理展示得淋漓尽致：
 
 - 当 $x \notin H$ 时，各频率分量 $\chi_k(x)$ 在复平面单位圆上均匀散开，相位箭头首尾相接形成闭合链，合振幅精确归零（**相消干涉**）；
 - 当 $x \in H$ 时，所有频率分量全部指向正实轴 $+1$，合振幅同相叠加为 $|\mathrm{annihilator}(H)|$（**相长干涉**）。
@@ -684,7 +684,7 @@ $r,s$ 是刻画测量结果的潜在假设参数，读者运行候选计算时�
 
 零有理数的分母为 $1$，所以 $s=0$ 仍在第一条定理范围内；$r=1$ 时唯一相位是 $s=0$，且 $\gcd(0,1)=1$，第二条同样适用。恢复条件 $N\ge2$、$N^2\le2^n$ 已排除了 $n=0,1$，而前面的边缘分布允许这些宽度。两条候选定理均不要求 $r\mid Q$，也不把工作宽度 $w$ 与计数宽度 $n$ 等同。若实验末端使用本章的正指数 $\mathcal F_+$，对观察标号 $k_+$ 应先取 $y=\rho(k_+)=(-k_+)\bmod Q$，再检查针对同一相位 $s/r$ 的最近条件并计算这里的候选；直接保留原标号会改变所逼近的相位。
 
-**一次实际测量，候选列表包含真阶的概率。** 现在把条件恢复与实际边缘分布接起来。固定上述任意实际参数记录 $c$，仍取 $N=c.\operatorname{modulus}\ge2$、$r=c.\operatorname{period}$、$0<r<N$，并令 $Q=2^n$、$N^2\le Q$。使用的恰是 $c.\operatorname{modularOperator}$ 与 $c.\operatorname{input}$：模乘在补齐坐标上不动，工作输入为 $|1\rangle$，工作宽度与计数宽度独立。定义有限测量事件
+**一次实际测量，候选列表包含真阶的概率。** 现在把条件恢复与实际边缘分布接起来。从这里到 [@thm-shor-verified-multiple-halving] 之前，各段“应用”都是书面推导：由上面的 Lean 定理、有限计数与初等数论在纸面上推出，未在本书形式化，由作者与评审负责。固定上述任意实际参数记录 $c$，仍取 $N=c.\operatorname{modulus}\ge2$、$r=c.\operatorname{period}$、$0<r<N$，并令 $Q=2^n$、$N^2\le Q$。使用的恰是 $c.\operatorname{modularOperator}$ 与 $c.\operatorname{input}$：模乘在补齐坐标上不动，工作输入为 $|1\rangle$，工作宽度与计数宽度独立。定义有限测量事件
 
 $$
 \begin{aligned}
@@ -1290,7 +1290,7 @@ $$
 若 $r$ 为奇数，$M=r(2t+1)$ 就是两个奇数的乘积，也为奇数。所用幂全部属于同一个元素，无须交换不同元素，更无须消去律。完整证明由 Lean 内核检查。
 :::
 
-**接回选择器时，底数不能换。** 固定前面同一个实际参数记录 $c$，保持 $a=c.\operatorname{base}$、$N=c.\operatorname{modulus}\ge2$ 与 $x=(a:\operatorname{ZMod}N)$。一次 `select a N L = some m` 已给出 $m>0$ 和 `Nat.powMod a m N = 1`。先前的 `Nat.powMod_def`、`Nat.cast_pow` 与剩余类转换恰把它接成 $x^m=1$，于是七项性质适用于这个 $x,m$。实际模运算可直接按下面的自然数版本执行；输入约定为 $a,m\in\mathbb N$、$N\ge2$，Python 的 `pow(a,e,N)` 计算 $a^e\bmod N$：
+**接回选择器时，底数不能换。** 本段至 [@thm-shor-verified-prime-stripping] 之前为书面推导，未在本书形式化。固定前面同一个实际参数记录 $c$，保持 $a=c.\operatorname{base}$、$N=c.\operatorname{modulus}\ge2$ 与 $x=(a:\operatorname{ZMod}N)$。一次 `select a N L = some m` 已给出 $m>0$ 和 `Nat.powMod a m N = 1`。先前的 `Nat.powMod_def`、`Nat.cast_pow` 与剩余类转换恰把它接成 $x^m=1$，于是七项性质适用于这个 $x,m$。实际模运算可直接按下面的自然数版本执行；输入约定为 $a,m\in\mathbb N$、$N\ge2$，Python 的 `pow(a,e,N)` 计算 $a^e\bmod N$：
 
 ```python
 def strip_twos_mod(a, m, N):
@@ -1379,7 +1379,7 @@ $$
 最后，每个最终输出的素因子也整除原始 $m$，故必在 $P$ 中。若对最终输出除以这个素数后仍返回 $1$，阶整除性质便使该素数整除 $M/r$，与列表不变量矛盾。直接应用前述 `orderOf_eq_of_pow_and_pow_div_prime`，得到 $M=r$。这里证明的是实际递归与折叠的不变量；终端的阶判据沿用已有结果。完整证明由 Lean 内核检查。
 :::
 
-**同一选择器的返回，现在可以继续处理。** 若前面的 `select a N L = some m`，保持同一实际参数 $c$、$N\ge2$ 与 $x=(a:\operatorname{ZMod}N)$，返回契约给出 $m>0,x^m=1$。只要给出覆盖这个原始 $m$ 的列表 $P$，本定理就使 `stripFactors x P m` 等于同一底数的真阶；无需原菜单先含真阶。`none` 仍只说明没有正的通过项，没有可供本定理处理的正指数。对正指数原生电路，仍先反射两个观察标号，构造原菜单并选择，再处理同一个底数；本步骤不更换抽样律。
+**同一选择器的返回，现在可以继续处理。** 本段为书面推导，未在本书形式化。若前面的 `select a N L = some m`，保持同一实际参数 $c$、$N\ge2$ 与 $x=(a:\operatorname{ZMod}N)$，返回契约给出 $m>0,x^m=1$。只要给出覆盖这个原始 $m$ 的列表 $P$，本定理就使 `stripFactors x P m` 等于同一底数的真阶；无需原菜单先含真阶。`none` 仍只说明没有正的通过项，没有可供本定理处理的正指数。对正指数原生电路，仍先反射两个观察标号，构造原菜单并选择，再处理同一个底数；本步骤不更换抽样律。
 
 例如 $N=21,a=2$ 时，$m=12,P=[2,3]$ 得到 $6$；$m=132,P=[2,3,11]$ 也得到 $6$，消除了减半后剩下的奇数倍数 $11$。对单位元、$m=12$，列表 $[2,3]$ 得到 $1$，而 $[2]$ 得到 $3$，$[6]$ 得到 $2$。最后一个例子中，原指数的素因子 $2,3$ 虽都整除某个列表项 $6$，却没有作为项出现；这种“整除某个列表项”不足以替代定理的覆盖条件。
 
@@ -1494,7 +1494,7 @@ $$
 这个共同赋值计数来自 Shor（1997）第 5 节、PDF 第 16 页的经典论证，不主张新的数学优先权。以下应用按所钉源码的 `Blueprint/D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.md`、`Blueprint/D5/S3/Quantum/ShorContinuedFractions.md` 及 `Library/QuantumChannels/shor1997gateorbits.md` 的文献归属展开；它是上述计数与阶、同余、互素消去事实的推导，不把整个分解过程归入该 GID。
 
 ::: {.example #ex-shor-actual-unit-factors title="实际单位群的 CRT 计数与同事件双侧因子证书"}
-**实际素数幂，而非无平方因子的替身。** 取任意奇数 $N>1$，令 $I$ 为 $N$ 的不同素因子集，$k=|I|$，并取
+**实际素数幂，而非无平方因子的替身。** 本例是书面推导，未在本书形式化。取任意奇数 $N>1$，令 $I$ 为 $N$ 的不同素因子集，$k=|I|$，并取
 
 $$
 e_p=N.\operatorname{factorization}(p),\qquad
@@ -1721,11 +1721,11 @@ $N = 8$ 时走两步仍差一点，成功概率停在 $\frac{121}{128}$。
 
 ::: {.remark #rem-grover-qft-shor-literature title="Grover 查询下界、QFT 理想计数与完整 Shor 算法的边界"}
 <!-- alias: #rem-shor-factoring-literature -->
-本章的 Lean 引用覆盖均匀振幅放大、Weyl 共轭、字符相消与有限泊松恒等式，以及实际 QFT 电路作用与原生事件计数（[@thm-qft-circuit-action]、[@thm-qft-native-event-count]）、单相位圆周尾界（[@thm-qpe-circular-tail]）、实际输入边缘分布与逐点下界、有理列表长度和条件候选成员资格。上文将实际混合、最近格点下界与候选恢复组合，推导了 $N^2\le Q$ 下单次列表成员事件的 $\frac4{\pi^2}\frac{\varphi(r)}r$ 下界，并在显式独立重置前提下得到恰好两次观察的全配对最小公倍数列表事件下界 $8/\pi^4$；后者使用联合本原相位对的充分半密度界。正指数规范须反射两次观察的两个标号，原生正指数电路作用于同一受控态时也使用这个修正事件。[@thm-half-order-family-failure-count] 另给出任意非空有限循环群族的失败计数，[@ex-shor-actual-unit-factors] 将其经实际单位 CRT 搬运为均匀 Good 下界，并在同一事件上证明双侧 gcd 真因子。本章的列表选择规则还给出真阶在完整菜单中时返回真阶的精确对应，并将两次独立观察的成员下界转为精确输出概率下界；每次返回是否精确仍无识别证书。以下第 1 项和第 3 项的其余完整算法结论仍是**文献结果，未在本书形式化**；第 2 项只总结上述电路的理想计数及其成本边界。
+本章的 Lean 引用覆盖均匀振幅放大、Weyl 共轭、字符相消与有限泊松恒等式，以及实际 QFT 电路作用与原生事件计数（[@thm-qft-circuit-action]、[@thm-qft-native-event-count]）、单相位圆周尾界（[@thm-qpe-circular-tail]）、实际输入边缘分布与逐点下界、有理列表长度和条件候选成员资格。上文以书面推导（未在本书形式化）将实际混合、最近格点下界与候选恢复组合，得到了 $N^2\le Q$ 下单次列表成员事件的 $\frac4{\pi^2}\frac{\varphi(r)}r$ 下界，并在显式独立重置前提下得到恰好两次观察的全配对最小公倍数列表事件下界 $8/\pi^4$；后者使用联合本原相位对的充分半密度界。正指数规范须反射两次观察的两个标号，原生正指数电路作用于同一受控态时也使用这个修正事件。[@thm-half-order-family-failure-count] 另给出任意非空有限循环群族的失败计数，[@ex-shor-actual-unit-factors] 将其经实际单位 CRT 搬运为均匀 Good 下界，并在同一事件上证明双侧 gcd 真因子。本章的列表选择规则还给出真阶在完整菜单中时返回真阶的精确对应，并将两次独立观察的成员下界转为精确输出概率下界；每次返回是否精确仍无识别证书。以下第 1 项和第 3 项的其余完整算法结论仍是**文献结果，未在本书形式化**；第 2 项只总结上述电路的理想计数及其成本边界。
 
-1. **Grover 搜索与黑盒查询复杂度下界**（L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866；G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055）：在已知解数 $M$、承诺 $1 \le M \le N/4$ 的 $N$ 元无结构搜索中，从均匀叠加态出发，按已知初始成功概率 $p = M/N$ 选取迭代步数，振幅放大以 $O(\sqrt{N/M})$ 次标记黑盒查询将成功概率提升至 $\ge 1 - M/N$。这一稀疏解承诺下，任何量子黑盒算法要以常数有界误差找到解，都需要 $\Omega(\sqrt{N/M})$ 次查询（由 Bennett–Bernstein–Brassard–Vazirani (1997) 的单解黑盒下界归约得到），证实这一黑盒任务中的二次加速已达量子几何极限。
+1. **Grover 搜索与黑盒查询复杂度下界**（L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866；G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055）：在已知解数 $M$、承诺 $1 \le M \le N/4$ 的 $N$ 元无结构搜索中，从均匀叠加态出发，按已知初始成功概率 $p = M/N$ 选取迭代步数，振幅放大以 $O(\sqrt{N/M})$ 次标记黑盒查询将成功概率提升至 $\ge 1 - M/N$。这一稀疏解承诺下，任何量子黑盒算法要以常数有界误差找到解，都需要 $\Omega(\sqrt{N/M})$ 次查询（由 C. H. Bennett, E. Bernstein, G. Brassard, and U. Vazirani, *Strengths and weaknesses of quantum computing*, SIAM J. Comput. **26**, 1510–1523, 1997, doi:10.1137/S0097539796300933 的单解黑盒下界归约得到；多解情形另见 M. Boyer, G. Brassard, P. Høyer, and A. Tapp, *Tight bounds on quantum searching*, arXiv:quant-ph/9605034），表明在这一黑盒任务中二次加速已是最优。
 2. **同一 QFT 电路的理想原生门数**：[@thm-qft-native-event-count] 给出 $q$ 个 Hadamard、$q(q-1)/2$ 个受控相位和 $\lfloor q/2\rfloor$ 个 SWAP，合计 $\frac{q(q+1)}2+\lfloor q/2\rfloor$ 次理想原生门出现。由此作通常的渐近计数，得到 $O(q^2)=O((\log Q)^2)$（$Q=2^q$）；电路对已制备复向量的精确正指数作用由 [@thm-qft-circuit-action] 给出。任意输入数据的装载、全部傅里叶系数的经典读出、理想相位门到有限离散门集的综合及硬件性能，都不包含在这个计数中。
-3. **Shor 大数分解与阶寻找的完整正确性条件**（P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172）：对于一般合数 $N$（非偶、非素数幂）与随机互素底数 $a$，乘法阶 $r$ 通常不整除 $Q=2^q$。完整算法选取 $N^2\le Q<2N^2$，通过可逆模幂电路在 $O((\log N)^3)$ 基本门内制备相应联合态，再经 QFT 采样。上述单次候选事件与两次独立重置的全配对最小公倍数事件推导覆盖实际模乘模型中的相应列表成员概率；它们没有认证可逆模幂的门实现。后续列表选择应用保证真阶在菜单中时必被选中，并给出精确输出事件的概率下界；模幂通过的任意返回值仍可能是真阶的较大倍数。欧拉函数比值的渐近估计 $\varphi(r)/r=\Omega(1/\log\log r)$ 仍按文献使用，不能把混合中的计数比例改称额外随机相位实验。经典部分现由 [@thm-half-order-family-failure-count] 与 [@ex-shor-actual-unit-factors] 覆盖：对奇数 $N>1$，在完整单位群上均匀抽样的 Good 概率至少为 $1-2^{-(k-1)}$；非素数幂时 $k\ge2$，故至少为 $1/2$，且同事件中的每个自然数底数代表元都给出双侧真因子。这保留全部实际素数幂指数，单位元也留在抽样载体内。该经典概率与固定底数下的量子候选事件使用不同抽样律，尚未在此组成一个共同实验的端到端概率。高效单位采样、从完整候选最小公倍数列表认证精确阶、任意相关重复的保证、理想相位采样的精确欧拉乘积律、完整递归分解实现与位／门复杂度仍不由这些结果给出。两次重置的独立性是明确采用的联合采样前提，不能由两份边缘分布相同而推出。（注：将周期提取比作“把无穷周期因式约分到 $1$”属于启发式几何直觉，绝非已形式化的数学结论。）
+3. **Shor 大数分解与阶寻找的完整正确性条件**（P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172）：对于一般合数 $N$（非偶、非素数幂）与随机互素底数 $a$，乘法阶 $r$ 通常不整除 $Q=2^q$。完整算法选取 $N^2\le Q<2N^2$，通过可逆模幂电路在 $O((\log N)^3)$ 基本门内制备相应联合态，再经 QFT 采样。上述单次候选事件与两次独立重置的全配对最小公倍数事件推导覆盖实际模乘模型中的相应列表成员概率；它们没有认证可逆模幂的门实现。后续列表选择应用保证真阶在菜单中时必被选中，并给出精确输出事件的概率下界；模幂通过的任意返回值仍可能是真阶的较大倍数。欧拉函数比值的渐近估计 $\varphi(r)/r=\Omega(1/\log\log r)$ 仍按文献使用，不能把混合中的计数比例改称额外随机相位实验。经典部分中，[@thm-half-order-family-failure-count] 是 Lean 定理，[@ex-shor-actual-unit-factors] 在其上作书面推导（未在本书形式化）：对奇数 $N>1$，在完整单位群上均匀抽样的 Good 概率至少为 $1-2^{-(k-1)}$；非素数幂时 $k\ge2$，故至少为 $1/2$，且同事件中的每个自然数底数代表元都给出双侧真因子。这保留全部实际素数幂指数，单位元也留在抽样载体内。该经典概率与固定底数下的量子候选事件使用不同抽样律，尚未在此组成一个共同实验的端到端概率。高效单位采样、从完整候选最小公倍数列表认证精确阶、任意相关重复的保证、理想相位采样的精确欧拉乘积律、完整递归分解实现与位／门复杂度仍不由这些结果给出。两次重置的独立性是明确采用的联合采样前提，不能由两份边缘分布相同而推出。（注：将周期提取比作“把无穷周期因式约分到 $1$”属于启发式几何直觉，绝非已形式化的数学结论。）
 :::
 
 ::: {.viz src="phase-gears" height="560"}

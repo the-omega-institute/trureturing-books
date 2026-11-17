@@ -22,7 +22,7 @@
 # Part III Closing the Sphere — From Plane to Sphere: Orthogonal Triads, Global Compatibility, and Measurement Computation
 
 - [Chapter 9 Mutually Orthogonal Triads: Why One and Two Orthogonal Steps Reach the Whole Sphere](ch09-axes-and-state-addressing.md)
-- [Chapter 10 Pairwise Comparison, Always Consistent, Order-Independent: Dissolving the Non-Commutativity Illusion and Berry Phase](ch10-gram-geometry-and-order.md)
+- [Chapter 10 Pairwise Comparison, Always Consistent, Order-Independent: Noncommutativity, the Gram Ledger, and Berry Phase](ch10-gram-geometry-and-order.md)
 - [Chapter 11 Quantum Gates in Hardware: Microwave Pulse Area and Zero-Duration Virtual Z Gates](ch11-pulses-and-virtual-z.md)
 - [Chapter 12 Attention as Computation: Measurement-Based Quantum Computing and Spherical Natural Gradients](ch12-measurement-computation-and-gradients.md)
 
@@ -36,7 +36,7 @@
   - [14.4 Planar Braids and the Third Orthogonal Direction](ch14-s04-braids-and-third-axis.md)
   - [14.5 Closing the Braid: Markov Stabilization and Coloring Counts](ch14-s05-markov-stabilization.md)
 - [Chapter 15 Invariant-Plane Rotations and Equatorial Area Gears: Grover Search, QFT, and Shor Factoring](ch15-grover-qft-and-period-finding.md)
-- [Chapter 16 Grand Unification of Quantum Algorithms (QSVT), Quantum Walks, and Gate-Compilation Polytopes](ch16-qsvt-walks-and-compilation.md)
+- [Chapter 16 The Polynomial Skeleton of QSVT, Quantum Walks, and Gate Compilation](ch16-qsvt-walks-and-compilation.md)
   - [16.1 QSVT: Two-Dimensional Blocks and Chebyshev Recurrences](ch16-s01-qsvt-chebyshev-blocks.md)
   - [16.2 Quantum Walks: Coherent Superposition and Its Limits](ch16-s02-quantum-walks.md)
   - [16.3 The central-defect path: how an endpoint controls the spectrum](ch16-s03-central-defect-spectrum.md)

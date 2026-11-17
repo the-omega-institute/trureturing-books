@@ -22,7 +22,7 @@
 # 第三部 合拢·从面到球：三元正交、全局相容与注意力计算
 
 - [第九章 三元两两正交：为什么只要“正交一次、正交两次”就能走遍全球？](ch09-axes-and-state-addressing.md)
-- [第十章 “两两比较，永远一致，顺序无关”：消解非对易假象与贝里相位](ch10-gram-geometry-and-order.md)
+- [第十章 “两两比较，永远一致，顺序无关”：非对易、格拉姆账本与贝里相位](ch10-gram-geometry-and-order.md)
 - [第十一章 硬件里的量子门：微波脉冲面积与零耗时的“虚拟 Z 门”](ch11-pulses-and-virtual-z.md)
 - [第十二章 注意力即计算：基于测量的量子计算（MBQC）与球面自然梯度](ch12-measurement-computation-and-gradients.md)
 
@@ -36,7 +36,7 @@
   - [14.4 二维编织与第三正交方向](ch14-s04-braids-and-third-axis.md)
   - [14.5 把编织首尾相接：Markov 稳定化与着色计数](ch14-s05-markov-stabilization.md)
 - [第十五章 夹角平面旋转与赤道面积齿轮：Grover 搜索、QFT 与 Shor 大数分解](ch15-grover-qft-and-period-finding.md)
-- [第十六章 算法大一统（QSVT）、图上游走与门编译的因式约分](ch16-qsvt-walks-and-compilation.md)
+- [第十六章 QSVT 的多项式骨架、图上游走与门编译](ch16-qsvt-walks-and-compilation.md)
   - [16.1 QSVT：二维块与切比雪夫递推](ch16-s01-qsvt-chebyshev-blocks.md)
   - [16.2 图上游走：相干叠加与适用边界](ch16-s02-quantum-walks.md)
   - [16.3 中央缺陷路径：端点如何约束整个谱](ch16-s03-central-defect-spectrum.md)

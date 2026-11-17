@@ -1,4 +1,4 @@
-# Chapter 16 Grand Unification of Quantum Algorithms (QSVT), Quantum Walks, and Gate-Compilation Polytopes {#grand-unification-of-quantum-algorithms-qsvt-quantum-walks-and-gate-compilation-polytopes}
+# Chapter 16 The Polynomial Skeleton of QSVT, Quantum Walks, and Gate Compilation {#grand-unification-of-quantum-algorithms-qsvt-quantum-walks-and-gate-compilation-polytopes}
 
 > *"P/NP depends on the initial structure; some initial structures can yield P=NP. Handling infinity is essentially a matter of factorization: finding how to “cancel” infinity, continually building on known results about infinity to cancel it away. P/NP is related to lookup algorithms, order, and the order of memory. Count everything in quantum gates. The central question is really a general way to prove a proposition."*
 
