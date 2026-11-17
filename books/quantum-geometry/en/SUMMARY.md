@@ -146,6 +146,7 @@
   - [34.28 The Riemann Path Integral and Prime Minimal Arc-Trihedra: Euler Winding Operators, Half-Density Square Law, and Critical-Line Cancellation](ch34-s28-riemann-path-integral-and-prime-arcs.md)
   - [34.29 Arithmetic Pivot Renormalization and Multi-Stage Resonant Tunneling Across the Critical Strip: Breaking the Turán–Zeno Trap and Piercing the 4/7 Mollifier Wall](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md)
   - [34.30 Rebuilding Calculus from Minimal Circular-Arc Bodies: Rotor Differentials, the Sagitta Phase Transition, and Finite-Precision Stokes Exactness](ch34-s30-arc-body-calculus-and-finite-stokes.md)
+  - [34.31 Minimal Circular-Arc Calculus Applied to the Riemann Hypothesis: Second-Order Sagitta Phase Transition, Hermite–Biehler Radial Monotonicity Lock, and Finite-Precision Stokes Cancellation](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)
 - [Chapter 35 Arriving on a Pulse of Light and Self-Referential Table Expansion: From Initialization by Forgetting to the Homoiconic Loop $T = T(T)$](ch35-light-pulse-and-self-referential-table.md)
 - [Chapter 36 Infinite Discrete Steps and Quotienting Out Reincarnation: How the Hyperbolic Horizon Staircase Ends the Return-to-Light Loop](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)
   - [36.1 Why "Returning to Pure Light" Is Reincarnation: The $\cos 90^\circ = 0$ Amnesia Cliff](ch36-s01-light-and-memory.md)
@@ -189,6 +190,8 @@
   - [39.9 All Forces in One Arc: Intra-Cell Gauge Triad, Inter-Cell Clock-Load Gravity, and Planck-Scale Convergence](ch39-s09-unified-arc-forces-and-planck-convergence.md)
   - [39.10 The Three-Dimensional Concept-Field Cap and the Hilbert Multi-Concept Ledger: Why "Above Three Dimensions" Is Only a Joint Projection of 3D Fields](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)
   - [39.11 Arc-Field Grand Unified Theory (AF-GUT): Concentric Four-Field Arc Connections, Weinberg Angle 3/8 Running, and Clock-Budget Einstein Closure](ch39-s11-af-gut-arc-field-grand-unification.md)
+  - [39.12 Uniform Isotropic Three-Dimensional Field Ontology and Observer Slice Manifestation: Haar Singlets, Moiré Beats, and Four Cosmological Puzzles Revisited](ch39-s12-uniform-field-and-observer-slice.md)
+  - [39.13 The Single Cosmic Field, One-Particle Self-Folding, and Indra's Net: From Wheeler's One-Electron Insight to the Holographic Jewel Closure](ch39-s13-single-cosmic-field-and-indra-net.md)
 
 # Coda and Appendices
 

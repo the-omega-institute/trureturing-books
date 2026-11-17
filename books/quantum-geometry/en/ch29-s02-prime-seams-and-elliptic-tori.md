@@ -191,6 +191,8 @@ which is governed by two foundational theorems:
    \cos\theta_p := \frac{a_p}{2\sqrt{p}} \in [-1, +1].
    $$
 
+   In the chord–sagitta language of [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-1): the normalized Frobenius eigenvalue $\alpha_p/\sqrt p=e^{i\theta_p}$ is a rotor and $v_p:=1-\dfrac{a_p}{2\sqrt p}=1-\cos\theta_p$ is its sagitta; the Hasse bound $\lvert a_p\rvert\le2\sqrt p$ is $0\le v_p\le2$, and the point-count formula $\#E(\mathbb{F}_{p^n})=p^n+1-\alpha_p^n-\bar\alpha_p^{\,n}$ (literature result) reads $\#E(\mathbb{F}_{p^n})=(p^{n/2}-1)^2+2p^{n/2}\bigl[1-T_n(1-v_p)\bigr]$, with $T_n$ the Chebyshev polynomial of the first kind.
+
 2. **Gauss's CM Point-Count Formula and the Line/Plane Prime Dichotomy**: On the Pythagorean congruent curve $y^2 = x^3 - x$ (which has complex multiplication by $\mathbb{Z}[i]$), the two odd-prime families of Pillar 1 ([@thm-ch29-face-prime-two-squares], [@lem-ch29-line-prime-descent]) separate cleanly under $\cos\theta_p$:
    - **At inert "Line Primes" $p \equiv 3 \pmod 4$**: because $(-x)^3 - (-x) = -(x^3 - x)$ and $\left(\frac{-1}{p}\right) = -1$, the spins at $+x$ and $-x$ cancel pairwise, forcing
 

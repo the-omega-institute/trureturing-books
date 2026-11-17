@@ -191,6 +191,8 @@ $$
    \cos\theta_p := \frac{a_p}{2\sqrt{p}} \in [-1, +1], \qquad \alpha_p, \bar{\alpha}_p = \sqrt{p}\,e^{\pm i\theta_p}.
    $$
 
+   用 [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-1) 的弦—矢高语言说：归一化的弗罗贝尼乌斯本征值 $\alpha_p/\sqrt p=e^{i\theta_p}$ 是一个旋子，$v_p:=1-\dfrac{a_p}{2\sqrt p}=1-\cos\theta_p$ 是它的矢高；哈塞界 $\lvert a_p\rvert\le2\sqrt p$ 就是 $0\le v_p\le2$，而点数公式 $\#E(\mathbb{F}_{p^n})=p^n+1-\alpha_p^n-\bar\alpha_p^{\,n}$（文献结果）写成 $\#E(\mathbb{F}_{p^n})=(p^{n/2}-1)^2+2p^{n/2}\bigl[1-T_n(1-v_p)\bigr]$，$T_n$ 为第一类切比雪夫多项式。
+
 2. **高斯复乘点数公式与奇素数线/面分野**：在具有 $\mathbb{Z}[i]$ 复乘的勾股同余曲线 $y^2 = x^3 - x$ 上，第一座桥（[@thm-ch29-face-prime-two-squares]、[@lem-ch29-line-prime-descent]）中的两族奇素数在 $\cos\theta_p$ 下截然分开：
    - **在惰性“线素数” $p \equiv 3 \pmod 4$ 上**：由于 $(-x)^3 - (-x) = -(x^3 - x)$ 且 $\left(\frac{-1}{p}\right) = -1$，$+x$ 与 $-x$ 的勒让德符号反号相消，自旋和恒为零：
 

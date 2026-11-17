@@ -6,7 +6,7 @@
 
 在 [§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral) 中，我们已经扶正了微观与宏观的本末次序——认出量子演化本身就是不可再被直线摊平的极小圆弧微分核（$\delta$），而经典直线轨道、实体体积与热力学包络则是万路相干叠加后的路径积分输出（$\int$）。章首这句凝练的追问则把手术刀直插微积分自身的底层公理：**既然真实物理与观测比较的原子根本不是平直切线，而是有限自指分辨率之上的极小圆弧体 $\Delta\mathcal{T}_\epsilon$，我们完全不必再修补“以直代曲”的旧微积分，而可以直接以极小圆弧体为原子原语，从头重塑导数、积分与斯托克斯外微分三大基石！**
 
-本节作为整座第三十四章的终极收官之作，将这一构想铸造为严格的代数—几何—形式化闭环：用保模长的**比较旋子 $\hat{\mathcal{D}}_\epsilon$** 取代减法割线差商，把切向正弦半弦 $c_\epsilon = \sin(\kappa\epsilon)$ 与法向正矢矢高 $v_\epsilon = 1 - \cos(\kappa\epsilon) = 2\sin^2(\kappa\epsilon/2)$ 锁死在同一条勾股圆恒等式里；用**路径有序旋子乘积积分**与赫尔德（Hölder）粗糙度指数 $\alpha \in (0, 1]$ 的**累计矢高四相区相变**一式统摄牛顿—莱布尼茨积分、杨氏（Young）积分、伊藤—斯特拉托诺维奇—费曼临界共振与莱昂斯（Lyons）粗糙路径签名；并在 `1—3—3—1` 离散外微分复形上证成任意有限停机孔径 $\epsilon \ge \varepsilon_{\mathrm{self}} > 0$ 下**零离散化截断误差**的广义斯托克斯定理与有限网格高斯—博内定理。
+本节将这一构想铸造为严格的代数—几何—形式化闭环，并为下一节切入黎曼临界带备齐全部微积分原语：用保模长的**比较旋子 $\hat{\mathcal{D}}_\epsilon$** 取代减法割线差商，把切向正弦半弦 $c_\epsilon = \sin(\kappa\epsilon)$ 与法向正矢矢高 $v_\epsilon = 1 - \cos(\kappa\epsilon) = 2\sin^2(\kappa\epsilon/2)$ 锁死在同一条勾股圆恒等式里；用**路径有序旋子乘积积分**与赫尔德（Hölder）粗糙度指数 $\alpha \in (0, 1]$ 的**累计矢高四相区相变**一式统摄牛顿—莱布尼茨积分、杨氏（Young）积分、伊藤—斯特拉托诺维奇—费曼临界共振与莱昂斯（Lyons）粗糙路径签名；并在 `1—3—3—1` 离散外微分复形上证成任意有限停机孔径 $\epsilon \ge \varepsilon_{\mathrm{self}} > 0$ 下**零离散化截断误差**的广义斯托克斯定理与有限网格高斯—博内定理。
 
 ## 34.30.1 告别“以直代曲”：比较旋子微分元、弦—矢高正交锁死与 $90^\circ$ 盲区复步无相减求导 {#sec-ch34-30-1}
 
@@ -121,6 +121,258 @@ $$
 **路径序旋子管与矢高相变：$\alpha = \frac{1}{2}$ 时矢高总和锁到 $0.5$ 实验卡（`roughness-ito-phase-transition`）。** 在单位球面上追踪 $N = 1/\epsilon$ 步、单步转角 $\sigma_0\epsilon^\alpha$ 的紫色路径序旋子管（每一步模长严格保持为 $1$，琥珀色手柄调节粗糙度指数 $\alpha$）：当 $\alpha$ 从光滑相 $\alpha = 1$ 降至临界布朗/费曼指数 $\alpha = \frac{1}{2}$ 时，品红色累计矢高柱 $\Sigma_{\mathrm{sag}}$ 从 $0.0005$ 稳稳锁死到非零宏观常数 $0.5$（即伊藤二阶修正项 $\frac{1}{2}\sigma_0^2 T$），并同步压低品红色伊藤期望纬圈 $\mathbb{E}[z] = (1 - v_\epsilon)^N$（绿色 `LEAN ✓` 锚定 `exp_tail_le` 与 `trotter_product`）。
 :::
 
+上面的展开式只给出首项。冻结库里有它的非渐近版本：对每个有限的 $N$ 都成立的双侧界，以及由它推出的三个极限区间。
+
+::: {.lemma #lem-ch34-accumulated-sagitta-bounds title="累计矢高在每个有限步数上的双侧界" lean="D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds"}
+设 $\sigma,T,\alpha$ 为实数，$N$ 为自然数。记单步转角 $\theta_N=\sigma\,(T/N)^{\alpha}$，累计矢高 $\Sigma_N=N\,(1-\cos\theta_N)$。则
+
+$$
+N\left(\frac{\theta_N^2}{2}-\frac{\theta_N^4}{24}\right)\ \le\ \Sigma_N\ \le\ N\,\frac{\theta_N^2}{2}.
+$$
+
+这里的除法与实数幂按 Lean 的全函数约定取值：$N=0$ 时 $T/N=0$，负底数的实数幂按 Mathlib 的定义。不等式对 $\sigma,T,\alpha$ 没有符号或大小的限制。
+:::
+
+::: proof
+两侧都来自对任意实数 $x$ 成立的逐点余弦界 $\frac{x^2}{2}-\frac{x^4}{24}\le1-\cos x\le\frac{x^2}{2}$，取 $x=\theta_N$ 再乘以 $N\ge0$。上界就是 $\cos x\ge1-\frac{x^2}{2}$。下界先写 $1-\cos x=2\sin^2\frac x2$，再用 $\lvert y-\sin y\rvert\le\frac{\lvert y\rvert^3}{6}$（取 $y=\frac x2$）：把 $\sin^2y=\bigl(y-(y-\sin y)\bigr)^2$ 展开并舍去差的平方，得 $\sin^2y\ge y^2-\frac{y^4}{3}$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch34-accumulated-sagitta-phases title="累计矢高的三个极限区间：$\alpha$ 大于、等于、小于 $\frac{1}{2}$" lean="D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"}
+设 $\sigma,T,\alpha$ 为实数，$T>0$，$\theta_N$ 与 $\Sigma_N$ 同 [@lem-ch34-accumulated-sagitta-bounds]。当 $N\to\infty$ 时：
+
+1. 若 $\alpha>\frac12$，则 $\Sigma_N\to0$；
+2. 若 $\alpha=\frac12$，则 $\Sigma_N\to\frac{\sigma^2T}{2}$；
+3. 若 $\sigma\neq0$ 且 $0<\alpha<\frac12$，则 $\Sigma_N\to+\infty$。
+:::
+
+::: proof
+对正的 $N$ 有 $N\theta_N^2=c\,N^{1-2\alpha}$ 与 $\theta_N^2=c\,N^{-2\alpha}$，其中 $c=\sigma^2T^{2\alpha}$。$\alpha>\frac12$ 时 [@lem-ch34-accumulated-sagitta-bounds] 的上界趋于 $0$，而 $\Sigma_N\ge0$。$\alpha=\frac12$ 时上界恒为 $\frac{\sigma^2T}{2}$，下界为 $\frac{\sigma^2T}{2}-\frac{(\sigma^2T)^2}{24N}$，两者夹出极限。$0<\alpha<\frac12$ 时 $\theta_N^2\to0$，从某一步起不超过 $6$，此后下界至少是 $\frac c4N^{1-2\alpha}$；$\sigma\neq0$ 使 $c>0$，于是发散。完整证明由 Lean 内核检查。
+:::
+
+取 $\epsilon=T/N$、$\sigma=\sigma_0$，$\Sigma_N$ 就是上文的 $\Sigma_{\mathrm{sag}}(\epsilon,\alpha)$：相区 I、II 对应第 1 款，相区 III 对应第 2 款，相区 IV 对应第 3 款。定理没有覆盖 $\alpha\le0$：$\alpha=0$、$\sigma=2\pi$ 时每一步都转满一圈，$\Sigma_N\equiv0$，所以第 3 款中的 $\alpha>0$ 不能去掉（手工推导）。定理也不涉及步长不等或符号随机的路径；上文关于伊藤修正项与粗糙路径理论的陈述，仍按各自的标注读作文献结果。
+
+把 [§22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4) 的凯莱比 $w=(s-1)/s$ 用本节的话重说一遍：它是一个旋子。对临界线上的点 $\rho=\tfrac12+i\gamma$（$\gamma>0$），$u_\rho:=1-\tfrac1\rho$ 落在单位圆上，割弦 $\Delta_\rho=u_\rho-1=-\tfrac1\rho$ 的长度是 $1/\lvert\rho\rvert$，矢高是 $v_\rho=\operatorname{Re}\tfrac1\rho=\tfrac{2}{1+4\gamma^2}$，两者满足 §34.30.1 的弦—矢高恒等式 $\lvert\Delta_\rho\rvert^2=2v_\rho$（手工推导）。对 $\zeta$ 的全体非平凡零点（按重数，不论是否在临界线上）把 $1-u_\rho^{\,n}$ 加起来，得到的数在解析数论里有名字：Li 系数（文献结果，见下文 [@rem-ch34-li-criterion-sagitta-literature]）。零点在临界线上时，这一项的实部 $1-\operatorname{Re}u_\rho^{\,n}$ 正是旋子 $u_\rho$ 的 $n$ 次幂的矢高；零点是否都在临界线上，是开放的 [@conj-riemann-hypothesis]。所钉仓库冻结的是按导数定义的 Li 系数，与它有关的事实如下。
+
+::: {.proposition #prop-ch34-li-sagitta-frozen title="凯莱结点的弦—矢高恒等式、导数定义的 Li 系数及其与 `RiemannHypothesis` 的两条关系" lean="D5/S3/Weil/FiniteSpectralCayleyIdentity.cayleyNode_normSq D5/S3/Weil/FiniteSpectralCayleyIdentity.cayleyNode_one_sub_normSq D5/S3/Weil/FiniteSpectralCayleyIdentity.finiteLiCoefficient_eq_diagonalHilbertSchmidtDefect D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_one D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum D5/S3/Weil/Probability/CanonicalLiNonnegativeConverse.canonical_li_nonnegative_implies_rh D5/S3/Weil/Probability/CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable D5/S3/Weil/ZeroData/UnconditionalCanonicalZeroData.zetaZeroData_representation_iff"}
+记 $\xi$ 为 [@def-xi-reading] 的 $\operatorname{xiReading}$，`RiemannHypothesis` 为 Mathlib 的命题（内容见 [@thm-cayley-critical-line-criterion] 结论 2），$\gamma_{\mathrm{EM}}$ 为欧拉—马斯刻若尼常数。
+
+1. **凯莱结点。** 对实数 $\gamma$ 令 $x(\gamma)=\dfrac{1}{4\gamma^2+1}$，$c(\gamma)=\bigl(1-2x(\gamma)\bigr)+2\sqrt{x(\gamma)\bigl(1-x(\gamma)\bigr)}\;i$。则 $\lvert c(\gamma)\rvert^2=1$，$\lvert1-c(\gamma)\rvert^2=4x(\gamma)$；并且对任意有限指标集 $J$、任意 $\gamma:J\to\mathbb{R}$ 与任意自然数 $n$，
+
+   $$
+   \sum_{j\in J}2\bigl(1-\operatorname{Re}c(\gamma_j)^n\bigr)=\sum_{j\in J}\bigl\lvert1-c(\gamma_j)^n\bigr\rvert^2 .
+   $$
+
+2. **Li 系数。** 令 $\lambda_0=0$，对自然数 $n$ 令 $\lambda_{n+1}=\operatorname{Re}\left[\dfrac{1}{n!}\,\left.\dfrac{d^{\,n+1}}{ds^{\,n+1}}\bigl(s^n\operatorname{Log}\xi(s)\bigr)\right|_{s=1}\right]$，其中 $\operatorname{Log}$ 是复对数主支。则 $\lambda_1=1+\dfrac{\gamma_{\mathrm{EM}}}{2}-\ln\bigl(2\sqrt\pi\bigr)$。
+3. **零点一侧的同一个数。** 设 $\rho_0,\rho_1,\dots$ 是所钉仓库无条件给出的非平凡零点枚举（次序由选择公理选定；两两不同，每个临界带内的 $\zeta$ 零点恰出现一次），$m_k$ 是 $\rho_k$ 的解析重数。则级数 $\sum_k\dfrac{m_k}{\rho_k(1-\rho_k)}$ 按任意求和次序都收敛到同一个和（Lean 的 `HasSum`），和为 $2+\gamma_{\mathrm{EM}}-2\ln\bigl(2\sqrt\pi\bigr)$。
+4. **非负性蕴含 `RiemannHypothesis`。** 若对一切自然数 $n\ge1$ 有 $\lambda_n\ge0$，则 `RiemannHypothesis` 成立。
+5. **圆盘可和判据。** `RiemannHypothesis` 成立，当且仅当对每个实数 $0\le r<1$，级数 $\sum_{n\ge0}\lvert\lambda_{n+1}\rvert\,r^n$ 收敛。
+:::
+
+::: proof
+第 1 款把 $c(\gamma)$ 的实部与虚部平方相加，用 $\bigl(\sqrt{x(1-x)}\bigr)^2=x(1-x)$（$0<x\le1$）；求和恒等式逐项展开 $\lvert1-w\rvert^2=1-2\operatorname{Re}w+\lvert w\rvert^2$ 并代入 $\lvert c^n\rvert=1$。第 2 款：$n=0$ 时定义化为 $\xi'(1)/\xi(1)$ 的实部，其闭式是同一仓库的冻结结论，用到 Mathlib 中 ζ 在 $s=1$ 附近的渐近式。第 3 款把 $\xi'/\xi$ 关于零点的部分分式展开在 $s=1$ 处取值，再用反射 $\xi'/\xi(0)=-\xi'/\xi(1)$ 与第 2 款的闭式。第 4 款：$\lambda_{n+1}$ 是 $(1-z)^{-2}\,(\xi'/\xi)\bigl(\tfrac{1}{1-z}\bigr)$ 在 $z=0$ 处的泰勒系数；系数非负的幂级数在正实轴上的收敛半径处必有奇点，而这个函数在实线段 $0\le z<1$ 上处处解析，因为 $\xi$ 的零点都在临界带内，$\tfrac{1}{1-z}\ge1$ 不是零点；于是收敛半径不小于 $1$，幂级数的和 $L(z)$ 在单位圆盘内解析；$\varphi(z)=\xi\bigl(\tfrac1{1-z}\bigr)$ 在原点附近满足 $\varphi'=L\varphi$，这一等式由解析延拓在整个圆盘内成立；若 $\varphi$ 在圆盘内某点为零，它在该点的各阶导数都为零，$\varphi$ 恒为零，与 $\varphi(0)=\tfrac12$ 矛盾；所以 $\xi\bigl(\tfrac1{1-z}\bigr)$ 在单位圆盘内无零点，即 $\xi$ 在 $\operatorname{Re}s>\tfrac12$ 内无零点，再由右半带归约得到 `RiemannHypothesis`。第 5 款的正向由 `RiemannHypothesis` 推出该函数在单位圆盘内解析，反向与第 4 款的最后一步相同。完整证明由 Lean 内核检查。
+:::
+
+第 1 款中的 $c(\gamma)$ 就是零点旋子：$\gamma\ge0$ 时 $c(\gamma)=u_\rho=1-\tfrac{1}{1/2+i\gamma}$；$\gamma<0$ 时 $c(\gamma)=c(-\gamma)=\overline{u_\rho}$（定义中的平方根取非负值）；两种情形都有 $x(\gamma)=\tfrac12v_\rho$（手工推导）。所以第 1 款的求和恒等式读作“$n$ 次幂的矢高之和的两倍，等于 $n$ 次幂的割弦平方之和”，它是弦—矢高恒等式对 $u^n$ 的应用，对任意一组**实的** $\gamma_j$ 成立，与 $\zeta$ 的零点在哪里无关。第 3 款的和恰是第 2 款闭式的两倍，所以 $\lambda_1=\sum_k m_k\cdot\tfrac{1}{2\rho_k(1-\rho_k)}$（手工推导）。第 4 款给出 `RiemannHypothesis` 的一个充分条件，第 5 款给出它的一个等价写法；两处的前提（一切 $\lambda_n\ge0$；对每个 $r<1$ 可和）都没有被证明，黎曼猜想（[@conj-riemann-hypothesis]）仍然开放。
+
+::: {.remark #rem-ch34-li-criterion-sagitta-literature title="Li 判据的矢高读法（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 按阿达马乘积，[@prop-ch34-li-sagitta-frozen] 第 2 款的 $\lambda_n$ 等于对全体非平凡零点按重数求和的 $\sum_\rho\bigl[1-(1-\tfrac1\rho)^n\bigr]$，求和按 $\lvert\operatorname{Im}\rho\rvert\le H$ 对称截断后令 $H\to\infty$（X.-J. Li, *J. Number Theory* **65**, 325–333, 1997）。函数方程把 $\rho$ 与 $1-\rho$ 配成一对，它们的旋子互为倒数：$u_{1-\rho}=u_\rho^{-1}$。记 $v_\rho:=1-\tfrac12\bigl(u_\rho+u_\rho^{-1}\bigr)=\dfrac{1}{2\rho(1-\rho)}$；在临界线上它就是前文的 $\operatorname{Re}\tfrac1\rho$，离线时是复数。这一对的贡献是 $2\bigl[1-T_n(1-v_\rho)\bigr]$，$T_n$ 为第一类切比雪夫多项式，于是
+
+$$
+\lambda_n=\sum_\rho\bigl[1-T_n(1-v_\rho)\bigr]
+$$
+
+（手工推导，用到上面的文献结果）。右端绝对收敛，截断的极限可以去掉：$1-T_n(1-v)$ 是 $v$ 的无常数项多项式，而 [@prop-ch34-li-sagitta-frozen] 第 3 款的可和性给出 $\sum_k m_k\lvert v_{\rho_k}\rvert<\infty$（手工推导）。在临界线上的零点 $\rho=\tfrac12+i\gamma$ 处，$v_\rho=\tfrac{2}{1+4\gamma^2}$ 是 $(0,2)$ 内的实数，写 $1-v_\rho=\cos\theta_\rho$，方括号等于 $1-\cos n\theta_\rho\ge0$；离线的零点 $\rho=\beta+i\gamma$ 处 $v_\rho$ 不是实数，因为 $\operatorname{Im}\rho(1-\rho)=\gamma(1-2\beta)$，而 $\zeta$ 在 $(0,1)$ 上没有实零点（[@prop-zeta-real-axis-sign]），故 $\gamma\ne0$。
+
+**Li 判据**（Li 1997；E. Bombieri & J. C. Lagarias, *J. Number Theory* **77**, 274–287, 1999）：[@conj-riemann-hypothesis] 成立，当且仅当 $\lambda_n\ge0$ 对一切 $n\ge1$ 成立。“猜想蕴含非负”是上式逐项非负；它依赖零点和表示，在所钉仓库中没有冻结。“非负蕴含猜想”是 [@prop-ch34-li-sagitta-frozen] 第 4 款。Li 判据是黎曼猜想的等价改写，不是证明：它把“零点在一条直线上”换成“无穷多个不等式”；判据需要全部不等式，检验其中有限多个不构成对猜想的证明，也不构成进展。
+:::
+
+::: {.example #ex-ch34-zero-rotor-sagitta-numbers title="第一个零点的弦与矢高、前四个 Li 系数，以及一组假想的离线四点"}
+本例的零点纵坐标是数值结果（文献结果，未在本书形式化），其余各数由 30 位精度计算得出，四舍五入到所示位数。
+
+**第一个零点。** $\gamma_1=14.134725$：转角 $\theta_1=2\arctan\tfrac{1}{2\gamma_1}=0.0707183$，矢高 $v_1=\tfrac{2}{1+4\gamma_1^2}=0.00249949$，割弦 $\tfrac{1}{\lvert\rho_1\rvert}=0.0707035$；$1/\lvert\rho_1\rvert^2=0.00499899=2v_1$。
+
+**前四个 Li 系数。** 按 [@prop-ch34-li-sagitta-frozen] 第 2 款的定义直接计算：
+
+| $n$ | $\lambda_n$ | $\lambda_n/(n^2\lambda_1)$ |
+| :---: | :---: | :---: |
+| $1$ | $0.0230957$ | $1$ |
+| $2$ | $0.0923457$ | $0.999598$ |
+| $3$ | $0.2076389$ | $0.998930$ |
+| $4$ | $0.3687905$ | $0.997995$ |
+
+$\lambda_1$ 与第 2 款的闭式 $1+\tfrac{\gamma_{\mathrm{EM}}}{2}-\ln(2\sqrt\pi)$ 一致。第三列略小于 $1$。对单位圆上的旋子有 $1-\cos n\theta\le n^2(1-\cos\theta)$（手工推导：$\lvert\sin nx\rvert\le n\lvert\sin x\rvert$）；因此在“全部零点都在临界线上”的前提下，[@rem-ch34-li-criterion-sagitta-literature] 的公式给出 $\lambda_n\le n^2\lambda_1$（带前提的推导，前提就是开放的猜想）。表中四个比值与这一不等式相容；这四个数都是正的，是数值事实，不是对一切 $n$ 的结论。
+
+**一组假想的离线四点。** 取 $\tfrac{7}{10}\pm5i$、$\tfrac{3}{10}\pm5i$（它们不是 ζ 的零点）。这四个点在 $s\mapsto1-s$ 与共轭下封闭，但 $\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ 在 $n=31$ 处第一次变负，值为 $-0.0943$；$n=31$ 处为负已冻结为 [`li_positivity_distinguishes_the_off_line_toy_spectrum`](lean:D5/S3/Zeros/ToySpectrum/OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum)。换一组点，变负可以晚得多：把假四点放到 $\tfrac12\pm0.1\pm14i$，单独这四点的和在 $n=88$ 第一次为负；再配上前 $80$ 对真实零点组成一个有限族，在线零点的非负贡献把第一次为负推迟到 $n=8446$（值为 $-0.858$）。这是这一个有限族的数值结果，不是关于 $\zeta$ 的 $\lambda_n$ 的陈述，也不是一般规律。不过，有限族中只要有旋子离开闭单位圆盘，变负迟早会发生（[@rem-ch34-finite-rotor-li-criterion]）。
+:::
+
+上例的两组假想四点都在 $s\mapsto1-s$ 与共轭下封闭，又都有旋子离开单位圆；无论单独看还是配上有限多对在线零点，$\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ 迟早变负。对有限多个旋子，这件事有一个精确的说法。它对 $\zeta$ 的零点什么也不说：零点有无穷多个，判据的难点正在那里，把零点截成有限族得到的结论也不能传回 $\lambda_n$。
+
+::: {.remark #rem-ch34-finite-rotor-li-criterion title="有限旋子族的 Li 判据（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 设 $u_1,\dots,u_m$ 是复数（允许为零、允许重复），对 $n\ge1$ 令 $\Lambda_n=\operatorname{Re}\sum_j\bigl(1-u_j^{\,n}\bigr)$。下列三条等价：
+
+1. 一切 $\lvert u_j\rvert\le1$；
+2. 一切 $n\ge1$ 有 $\Lambda_n\ge0$；
+3. 对每个 $\varepsilon>0$ 有常数 $C$，使一切 $n\ge1$ 有 $\Lambda_n\ge-C\,e^{\varepsilon n}$。
+
+这是 E. Bombieri 与 J. C. Lagarias（*J. Number Theory* **77**, 274–287, 1999）定理 1 的有限情形。那里的和是 $\sum_\rho\operatorname{Re}\bigl[1-(1-\tfrac1\rho)^{-n}\bigr]$，取 $u=\rho/(\rho-1)$，则 $\lvert u\rvert\le1$ 恰是 $\operatorname{Re}\rho\le\tfrac12$；这个 $u$ 是本节零点旋子 $u_\rho=1-\tfrac1\rho$ 的倒数，所以半平面的方向与上文相反（手工推导）。等于 $1$ 的 $u_j$ 对 $\Lambda_n$ 没有贡献，可以先去掉。这里不需要任何对称性。若模长两两互为倒数（对每个 $j$ 有 $j'$ 使 $\lvert u_{j'}\rvert\,\lvert u_j\rvert=1$，例如这组数在 $u\mapsto u^{-1}$ 下封闭），第 1 条用在 $u_j$ 与 $u_{j'}$ 上就给出 $\lvert u_j\rvert=1$：第 2 条成立当且仅当全部旋子都在单位圆上（手工推导）。
+
+1⇒2 逐项成立：$1-\operatorname{Re}u_j^{\,n}\ge1-\lvert u_j\rvert^n\ge0$；2⇒3 显然。反方向的要点是一个回归现象（手工推导）。把每个非零的 $u_j$ 写成 $\lvert u_j\rvert e^{i\phi_j}$，令 $g=(e^{i\phi_j})_j$，对给定的正整数 $L$ 令 $h=g^L$。按 [@thm-torus-power-orbit-closure] 第 1 款，一个点属于 $\{h^k:k\ge0\}$ 的闭包，当且仅当 $h$ 满足的每个整关系 $\prod_jh_j^{k_j}=1$ 它也满足；$h^{-1}$ 显然如此，因为 $\prod_jh_j^{-k_j}=\bigl(\prod_jh_j^{k_j}\bigr)^{-1}$。所以 $h^{-1}$ 在这个闭包里：对 $1$ 的任一邻域 $U$，有 $k\ge0$ 使 $h^k\in h^{-1}U$，即 $g^n\in U$，其中 $n=L(k+1)\ge L$。$L$ 任意，所以对每个 $\varepsilon>0$ 有无穷多个 $n$ 使一切 $\cos n\phi_j>1-\varepsilon$。对这样的 $n$，
+
+$$
+\operatorname{Re}\sum_ju_j^{\,n}=\sum_j\lvert u_j\rvert^n\cos n\phi_j\ \ge\ (1-\varepsilon)\sum_j\lvert u_j\rvert^n .
+$$
+
+若某个 $\lvert u_j\rvert=r>1$，取 $\varepsilon=\tfrac12$，便有无穷多个 $n$ 使 $\Lambda_n=m-\operatorname{Re}\sum_ju_j^{\,n}\le m-\tfrac12r^n$；取 $\varepsilon'>0$ 使 $e^{\varepsilon'}<r$，这与第 3 条矛盾（手工推导）。用矢高的话说：有限个旋子各次幂的累计矢高都非负，当且仅当没有一个旋子离开闭单位圆盘。
+
+两个提醒（手工推导）。其一，只看一部分幂次可能看不出来。四个点 $2e^{\pm2\pi i/3}$、$\tfrac12e^{\pm2\pi i/3}$ 在 $u\mapsto u^{-1}$ 与共轭下都封闭，其中两个在圆外。记 $\omega=e^{2\pi i/3}$，则 $\Lambda_n=4-\bigl(2^n+2^{-n}\bigr)\bigl(\omega^n+\omega^{-n}\bigr)$，而 $\omega^n+\omega^{-n}$ 在 $3\mid n$ 时为 $2$，否则为 $-1$。$3$ 不整除 $2^k$，所以对一切 $k\ge0$ 有 $\Lambda_{2^k}=4+2^{2^k}+2^{-2^k}>0$，而 $\Lambda_3=-\tfrac{49}{4}$。只看反复平方的幂次 $n=2^k$，累计矢高全为正，并不排除圆外的旋子；这个例子用到的是与倍增共振的相位 $\tfrac{2\pi}{3}$。沿一个等差数列 $n=d,2d,3d,\dots$ 检查则已足够：对 $u_j^{\,d}$ 用上面的等价。其二，对无穷多个旋子，上面的论证要配合 Bombieri–Lagarias 的收敛条件；对 $\zeta$ 的零点，“全部 $\lambda_n\ge0$ 蕴含 [@conj-riemann-hypothesis]”是另一条定理（[@prop-ch34-li-sagitta-frozen] 第 4 款），而 $\lambda_n$ 是否全部非负是开放的。
+:::
+
+有一个情形里，“全部累计矢高非负”不是开放问题而是定理：有限域上的椭圆曲线。
+
+::: {.remark #rem-ch34-finite-field-li-sums title="有限域上椭圆曲线的 Li 和（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 设 $E$ 是有限域 $\mathbb{F}_q$ 上的椭圆曲线，$N_n$ 是它在 $\mathbb{F}_{q^n}$ 上的点数（含无穷远点），$a=q+1-N_1$，$\alpha,\beta$ 是 $x^2-ax+q$ 的两根；则 $N_n=q^n+1-\alpha^n-\beta^n$（见 [@rem-ch29-hasse-gauss-literature] 及其中的文献）。令 $u=\alpha/\sqrt q$；由 $\alpha\beta=q$ 得 $\beta/\sqrt q=u^{-1}$，两个旋子 $u,u^{-1}$ 的累计矢高是
+
+$$
+\Lambda_n=2-\frac{\alpha^n+\beta^n}{q^{n/2}},\qquad N_n=\bigl(q^{n/2}-1\bigr)^2+q^{n/2}\,\Lambda_n
+$$
+
+（手工推导）。这两个旋子的模长互为倒数，按 [@rem-ch34-finite-rotor-li-criterion]，“一切 $n$ 有 $N_n\ge\bigl(q^{n/2}-1\bigr)^2$”等价于 $\lvert u\rvert=1$，即 $\lvert a\rvert\le2\sqrt q$（手工推导）。后者就是哈塞定理（H. Hasse, 1936），所以这里的 Li 和全部非负，并且 $0\le\Lambda_n\le4$。例如 $y^2=x^3+x+1$ 在 $\mathbb{F}_7$ 上 $a=3$，$N_1,N_2,N_3=5,55,380$，与上式一致（数值核对）。这里的正性有独立的来源：同源的次数是正定二次型；它不是从累计矢高推出来的。数域情形没有已知的这样的来源。
+:::
+
+回到 $\zeta$ 本身。经典的无零点论证也依赖一个累计余矢高的正性，只是只用到三个幂次；这条不等式已被冻结。
+
+::: {.proposition #prop-ch34-three-four-one-cosagitta title="3-4-1 不等式：$\zeta(1+x)^3\,\zeta(1+x+iy)^4\,\zeta(1+x+2iy)$ 的模不小于 1" lean="D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower.norm_zeta_product_ge_one"}
+记 $\zeta$ 为 Mathlib 的 `riemannZeta`。对一切实数 $x>0$ 与一切实数 $y$，
+
+$$
+\left\lvert\zeta(1+x)^3\,\zeta(1+x+iy)^4\,\zeta(1+x+2iy)\right\rvert\ \ge\ 1 .
+$$
+:::
+
+::: proof
+三个自变量的实部都是 $1+x>1$，欧拉乘积绝对收敛。左端之模的对数等于对素数 $p$ 与 $k\ge1$ 求和的 $\tfrac1k\,p^{-k(1+x)}\bigl(3+4\cos\phi+\cos2\phi\bigr)$，其中 $\phi=ky\ln p$。记 $v=1-\cos\phi$ 为素数幂旋子 $p^{-iky}$ 的矢高，则
+
+$$
+3+4\cos\phi+\cos2\phi=2(1+\cos\phi)^2=2(2-v)^2\ \ge\ 0 ,
+$$
+
+所以对数非负，模不小于 $1$。Lean 中这条结论把 `riemannZeta` 写成模 $1$ 平凡狄利克雷特征的 $L$ 级数，直接调用 Mathlib 对狄利克雷 $L$ 级数的同型不等式；Mathlib 的证明把三个欧拉因子的 $-\log(1-w)$ 展成泰勒级数，第 $n$ 项是 $2a^n\bigl(\operatorname{Re}z^n+1\bigr)^2/n$（$a=p^{-(1+x)}$，$z=p^{-iy}$），正是上式余矢高平方的逐项形式。完整证明由 Lean 内核检查。
+:::
+
+由此可得 $\zeta(1+iy)\neq0$（$y\ne0$）：若 $\zeta$ 在 $1+iy$ 处为零，$x\to0^+$ 时 $\zeta(1+x)^3$ 按 $x^{-3}$ 增长，$\zeta(1+x+iy)^4$ 至少按 $x^4$ 趋于零，$\zeta(1+x+2iy)$ 保持有界（$1+2iy\ne1$），乘积趋于 $0$，与命题矛盾（手工推导）。这个结论也可以从 [@prop-xi-zeros-strip-zeros] 直接读出；上面的论证是 Hadamard 与 de la Vallée Poussin（1896）的经典论证（文献结果）。它只用到三个幂次；由它及其改进得到的无零点区域在高处都收缩到直线 $\operatorname{Re}s=1$，目前不知道任何形如 $\operatorname{Re}s>1-\varepsilon$（$\varepsilon>0$ 固定）的无零点带（文献结果）。另一端，一切幂次的累计矢高非负（[@rem-ch34-li-criterion-sagitta-literature]）等价于开放的 [@conj-riemann-hypothesis]。
+
+Li 判据在每个幂次上只看一个数。把各幂次的割弦放进同一张比较表，就得到一族托普利茨矩阵；所钉仓库已冻结的相关事实如下。
+
+::: {.proposition #prop-ch34-li-curvature-toeplitz title="Li 曲率的托普利茨矩阵：几何多项式能量、圆周矩的正性、全一向量读出、负 Li 系数的特征值界与厄尔米特实根判据" lean="D5/S3/Weil/TestFunctions/LiCurvatureCriterion.geometric_energy_second_difference D5/S3/Weil/TestFunctions/LiCurvatureCriterion.circle_moment_toeplitz_posSemidef D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction.recurrence_eq_toeplitz_ones_quadratic D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction.negative_recurrence_bounds_smallest_eigenvalue D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_one_pos D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.canonical_curvature_posSemidef_implies_rh D5/S3/Constants/NewtonHankelRealRootCriterion.newtonHankel_posSemidef_iff_roots_real"}
+记 $\lambda_n$ 为 [@prop-ch34-li-sagitta-frozen] 第 2 款的 Li 系数。对复数列 $c:\mathbb{Z}\to\mathbb{C}$ 与正整数 $N$，记 $T_N(c)$ 为 $N\times N$ 复矩阵，其 $(j,k)$ 元为 $c_{j-k}$（$0\le j,k<N$）。
+
+1. **几何多项式的能量。** 对单位圆上的 $z$ 令 $G_n(z)=\sum_{j=0}^{n-1}z^j$（$G_0=0$）。则对一切 $n\ge1$，
+   $$
+   \lvert G_{n+1}(z)\rvert^2-2\lvert G_n(z)\rvert^2+\lvert G_{n-1}(z)\rvert^2=2\operatorname{Re}z^n .
+   $$
+2. **圆周矩的托普利茨正性。** 设 $\mu$ 是单位圆上的有限博雷尔测度，$c_k=\int z^{-k}\,d\mu(z)$（$k\in\mathbb{Z}$）。则对每个 $N\ge1$，$T_N(c)$ 半正定。
+3. **全一向量读出。** 设实数列 $(x_n)_{n\ge0}$、实数 $L\ge0$ 与复数列 $c$ 满足 $x_0=0$，$x_1=L$，$c_0=1$，对一切 $k$ 有 $c_{-k}=\overline{c_k}$，并且对一切 $n\ge1$ 有 $x_{n+1}-2x_n+x_{n-1}=2L\operatorname{Re}c_n$。则对一切 $n\ge1$，
+   $$
+   x_n=L\cdot\operatorname{Re}\sum_{j=0}^{n-1}\sum_{k=0}^{n-1}c_{j-k},
+   $$
+   即 $x_n$ 是 $L$ 乘以 $T_n(c)$ 在全一向量上的二次型的实部。
+4. **负读出给出负特征值。** 在第 3 款的假设下，再设 $L>0$、$n\ge1$ 且 $x_n<0$。则 $T_n(c)$ 是厄尔米特矩阵，其最小特征值不超过 $\dfrac{x_n}{nL}$，而 $\dfrac{x_n}{nL}<0$。
+5. **Li 曲率的托普利茨正性蕴含 `RiemannHypothesis`。** $\lambda_1>0$。令 $c^{\mathrm{Li}}_0=1$，对 $k\ne0$ 令
+   $$
+   c^{\mathrm{Li}}_k=\frac{\lambda_{\lvert k\rvert+1}-2\lambda_{\lvert k\rvert}+\lambda_{\lvert k\rvert-1}}{2\lambda_1}.
+   $$
+   若对每个 $N\ge1$，$T_N(c^{\mathrm{Li}})$ 半正定，则 `RiemannHypothesis` 成立。
+6. **厄尔米特实根判据。** 设 $r_1,\dots,r_d$ 是复数（允许重复），其取值集合在复共轭下封闭。令 $H$ 为 $d\times d$ 实矩阵，其 $(i,j)$ 元为 $\tfrac1d\operatorname{Re}\sum_{k=1}^{d}r_k^{\,i+j}$（$0\le i,j<d$）。则 $H$ 半正定，当且仅当每个 $r_k$ 都是实数。
+:::
+
+::: proof
+第 1 款：$G_{n+1}=G_n+z^n$，于是 $\lvert G_{n+1}\rvert^2-\lvert G_n\rvert^2=1+2\operatorname{Re}\bigl(z^n\overline{G_n}\bigr)$；在 $\lvert z\rvert=1$ 时 $z^n\overline{G_n}=z+z^2+\dots+z^n$，相邻两次之差恰为 $z^n$。第 2 款：$T_N(c)$ 在系数向量 $a$ 上的二次型等于 $\int\bigl\lvert\sum_ja_jz^j\bigr\rvert^2d\mu$，非负。第 3 款：二阶差分递推由 $x_0,x_1$ 唯一确定整个数列；数列 $L\bigl(n+2\sum_{k=1}^{n-1}(n-k)\operatorname{Re}c_k\bigr)$ 有同样的初值与二阶差分，而它正是全一向量上二次型的 $L$ 倍。第 4 款：全一向量的模平方是 $n$，它的瑞利商等于 $x_n/(nL)$，最小特征值是瑞利商的下确界。第 5 款：$\lambda_1>0$ 来自 [@prop-ch34-li-sagitta-frozen] 第 2 款闭式的数值上下界；取 $T_{n+1}(c^{\mathrm{Li}})$ 中下标 $0$ 与 $n$ 的 $2\times2$ 主子阵，半正定给出 $\lvert c^{\mathrm{Li}}_n\rvert\le1$，即二阶差分的绝对值不超过 $2\lambda_1$；两次求和得 $\lvert\lambda_n\rvert\le\lambda_1n^2$；于是对每个 $0\le r<1$，$\sum_n\lvert\lambda_{n+1}\rvert r^n$ 收敛，[@prop-ch34-li-sagitta-frozen] 第 5 款的圆盘可和判据给出 `RiemannHypothesis`。第 6 款：$H$ 在实系数向量 $a$ 上的二次型等于 $\tfrac1d\sum_k\operatorname{Re}P(r_k)^2$，$P(z)=\sum_ia_iz^i$；全部 $r_k$ 为实数时每项是平方；若某个 $r$ 不是实数，取实系数插值多项式使 $P(r)=i$、$P(\overline r)=-i$、在其余取值上为 $0$，二次型为负。完整证明由 Lean 内核检查。
+:::
+
+第 1 款可以用 §34.30.1 的弦—矢高恒等式读出。对单位圆上的旋子 $u$，$1-u^n=(1-u)\,G_n(u)$，弦—矢高恒等式 $\lvert1-w\rvert^2=2\bigl(1-\operatorname{Re}w\bigr)$ 于是给出 $1-\operatorname{Re}u^n=\bigl(1-\operatorname{Re}u\bigr)\lvert G_n(u)\rvert^2$：$\lvert G_n(u)\rvert^2$ 是 $n$ 次幂相对一次幂的矢高放大倍数，不超过 $n^2$；第 1 款说它的二阶差分是 $2\cos n\theta$（手工推导，$u=e^{i\theta}$）。第 3 款对任何满足其假设的数列成立。取 $x_n=\lambda_n$、$L=\lambda_1$、$c=c^{\mathrm{Li}}$：$c^{\mathrm{Li}}$ 是实的偶数列，$c^{\mathrm{Li}}_0=1$，递推就是 $c^{\mathrm{Li}}$ 的定义，$\lambda_1>0$ 由第 5 款给出，于是无条件地有
+
+$$
+\lambda_n=\lambda_1\sum_{j=0}^{n-1}\sum_{k=0}^{n-1}c^{\mathrm{Li}}_{j-k}\qquad(n\ge1)
+$$
+
+（手工推导）。Li 判据只检验 $T_n(c^{\mathrm{Li}})$ 在全一向量上的值；托普利茨正性要求它在一切向量上非负，所以第 5 款的前提蕴含 [@prop-ch34-li-sagitta-frozen] 第 4 款的前提（一切 $\lambda_n\ge0$）。第 4 款说的是反过来的一件事：只要有一个 $\lambda_n<0$，$T_n(c^{\mathrm{Li}})$ 就有一个不超过 $\lambda_n/(n\lambda_1)$ 的负特征值（手工推导，第 4 款的特例）。
+
+反方向要用到零点。按 [@rem-ch34-li-criterion-sagitta-literature] 的零点和表示（文献结果），若全部零点都在临界线上，则 $1-\cos n\theta$ 的二阶差分是 $2(1-\cos\theta)\cos n\theta$，于是 $\lambda_{n+1}-2\lambda_n+\lambda_{n-1}=\sum_\rho2v_\rho\cos n\theta_\rho$，$\lambda_1=\sum_\rho v_\rho$，
+
+$$
+c^{\mathrm{Li}}_k=\sum_\rho\frac{v_\rho}{\lambda_1}\cos k\theta_\rho ,
+$$
+
+它是单位圆上概率测度 $\sum_\rho\frac{v_\rho}{\lambda_1}\delta_{u_\rho}$ 的圆周矩：每个零点旋子按自己的矢高加权。由第 2 款，一切 $T_N(c^{\mathrm{Li}})$ 半正定（带前提的推导，前提就是开放的猜想，并用到上述文献结果）。两个方向合起来，黎曼猜想等价于“一切 $T_N(c^{\mathrm{Li}})$ 半正定”：“半正定蕴含猜想”是第 5 款；“猜想蕴含半正定”依赖零点和表示，在所钉仓库中没有冻结。所钉仓库另有一条对任意数列的条件等价式 [`li_curvature_criterion_without_herglotz`](lean:D5/S3/Weil/Probability/LiCurvatureProbabilityCompletion.li_curvature_criterion_without_herglotz)，它把完整的 Li 判据（含没有冻结的“猜想蕴含非负”方向）、二阶差分递推，以及“猜想成立时 $c$ 是单位圆上某个概率测度的矩”都列为显式前提；圆周上的表示定理（一切 $T_N$ 半正定且 $c_0=1$ 的数列恰是单位圆上唯一一个概率测度的矩）已冻结为 [`circle_herglotz_iff`](lean:D5/S3/Weil/Probability/CircleHerglotzCompletion.circle_herglotz_iff)，不再是前提。那些显式前提对 $\lambda_n$ 没有在仓库中被证明。这又是一个等价改写，[@conj-riemann-hypothesis] 仍然开放。另一种不同的等价改写见 M. Suzuki, *Li coefficients as norms of functions in a model space*, arXiv:2301.05779（2023）：黎曼猜想等价于每个 $\lambda_n$ 都是某个具体函数的范数（文献结果）。
+
+第 6 款也可以读成旋子的话。旋子 $u$ 的凯莱坐标 $w=i\,\dfrac{1+u}{1-u}$ 把单位圆（去掉 $u=1$）送到实轴，把 $u\mapsto1/\overline u$ 送到复共轭；对零点旋子 $u_\rho=1-\tfrac1\rho$，$w_\rho=i(2\rho-1)$，它是实数当且仅当 $\operatorname{Re}\rho=\tfrac12$，并且 $\overline{w_\rho}=w_{1-\overline\rho}$。所以对任意在 $\rho\mapsto1-\overline\rho$ 下封闭的有限点列，第 6 款给出：以 $r_k=i(2\rho_k-1)$ 作的矩阵 $H$ 半正定，当且仅当这些点全在临界线上（手工推导，由第 6 款代换得到）。
+
+::: {.remark #rem-ch34-finite-toeplitz-inertia title="有限旋子族的托普利茨惯性：负特征值的个数等于离开单位圆的旋子对数（手工推导）"}
+**手工推导。** 设 $u_1,\dots,u_m$ 是非零复数（允许重复），作为多重集在 $u\mapsto1/\overline u$ 下封闭。对 $k\in\mathbb{Z}$ 令 $p_k=\sum_ju_j^{\,k}$，记 $T_N=T_N(p)$。把不同的取值记作 $z_1,\dots,z_d$；其中 $e$ 个在单位圆上，其余的按 $\{z,1/\overline z\}$ 配成 $\kappa$ 对，$d=e+2\kappa$。则
+
+1. $T_N$ 是厄尔米特矩阵；
+2. 当 $N\ge d$ 时，$T_N$ 恰有 $e+\kappa$ 个正特征值、$\kappa$ 个负特征值，零特征值的重数为 $N-d$；当 $N<d$ 时，负特征值不多于 $\kappa$ 个；
+3. 因而全部旋子都在单位圆上，当且仅当 $T_d$ 半正定，当且仅当一切 $T_N$ 半正定。
+
+若这组数还在复共轭下封闭，令 $\Lambda_n=\sum_j\bigl(1-u_j^{\,n}\bigr)$（$n\ge0$，此时为实数），并设 $\Lambda_1>0$；按 [@prop-ch34-li-curvature-toeplitz] 第 5 款的式子由 $\Lambda$ 作曲率 $c_k$，则 $T_N(c)$ 有同样的惯性，只是 $d$ 与 $e$ 不计等于 $1$ 的取值。
+
+**证明。** 设 $z_i$ 的重数为 $\mu_i$。$u\mapsto1/\overline u$ 在取值上诱导一个对合 $\tau$：$z_{\tau(i)}=1/\overline{z_i}$，$\mu_{\tau(i)}=\mu_i$；$\tau(i)=i$ 当且仅当 $\lvert z_i\rvert=1$。由 $z^{-k}=\overline{\bigl(1/\overline z\bigr)^k}$，
+
+$$
+p_{j-k}=\sum_i\mu_i\,z_i^{\,j}\,\overline{z_{\tau(i)}^{\,k}} ,
+$$
+
+所以 $T_N=AMA^{*}$，其中 $A$ 是 $N\times d$ 矩阵，第 $i$ 列为 $\bigl(z_i^{\,j}\bigr)_{0\le j<N}$；$M$ 是 $d\times d$ 矩阵，$M_{i,\tau(i)}=\mu_i$，其余元为零；$A^{*}$ 为共轭转置。$M$ 是厄尔米特的，这给出第 1 款。$M$ 的不动点给出对角元 $\mu_i>0$；每个 $2$ 循环给出一个块，两个非对角元都是 $\mu_i$，特征值为 $\pm\mu_i$。所以 $M$ 恰有 $e+\kappa$ 个正特征值、$\kappa$ 个负特征值、没有零特征值。当 $N\ge d$ 时，$A$ 的前 $d$ 行是取值互异的范德蒙矩阵，可逆，于是 $A^{*}:\mathbb{C}^N\to\mathbb{C}^d$ 是满射，$\ker T_N=\ker A^{*}$ 的维数为 $N-d$。若 $M$ 在子空间 $V$ 上负定，取 $W\subset\mathbb{C}^N$ 使 $A^{*}$ 把 $W$ 一一映到 $V$，则 $T_N$ 在 $W$ 上负定；反之若 $T_N$ 在 $W'$ 上负定，$A^{*}$ 在 $W'$ 上单射（否则某个非零 $x$ 使 $x^{*}T_Nx=0$），$M$ 在 $A^{*}W'$ 上负定。正的方向同理。这给出第 2 款中 $N\ge d$ 的情形；$N<d$ 时只剩后一半论证，给出不等式。第 3 款是第 2 款的推论。
+
+曲率版本：$\Lambda_{k+1}-2\Lambda_k+\Lambda_{k-1}=\sum_j2v_ju_j^{\,k}$，其中 $v(u)=1-\tfrac12\bigl(u+u^{-1}\bigr)=-\dfrac{(u-1)^2}{2u}$；共轭封闭使 $p_1$ 为实数，故 $\sum_jv_j=m-p_1=\Lambda_1$。于是 $c_k=\sum_jw_ju_j^{\,k}$（一切 $k\in\mathbb{Z}$），$w_j=v_j/\Lambda_1$，并且 $v\bigl(1/\overline u\bigr)=\overline{v(u)}$。同样的分解给出 $T_N(c)=AM_wA^{*}$，$\bigl(M_w\bigr)_{i,\tau(i)}=\mu_iw(z_i)$。$w$ 只在 $z=1$ 处为零，这些列可以删去；单位圆上 $z\ne1$ 处 $v=1-\operatorname{Re}z>0$，$\Lambda_1>0$ 使 $w>0$；一对离开单位圆的取值给出两个非对角元 $\mu w(z)$ 与 $\mu\overline{w(z)}$，特征值为 $\pm\mu\lvert w(z)\rvert\ne0$。其余同上。$\square$
+
+**几点说明（手工推导）。** 其一，$u\mapsto1/\overline u$ 的封闭必须连重数一起成立，只有取值集合封闭不够：多重集 $\{2,\tfrac12,\tfrac12\}$ 的 $T_2$ 有 $p_{-1}=\tfrac92\ne p_1=3$，它不是厄尔米特的。其二，$\Lambda_1>0$ 不能去掉：$\Lambda_1<0$ 时单位圆上不等于 $1$ 的取值给出负特征值。其三，这里的 $d$ 是有限的；对 $\zeta$ 的零点 $d$ 是无穷，上面没有任何一步可以照搬。其四，这与厄尔米特的经典定理同一机制：多项式根的牛顿幂和作成的汉克尔二次型，正、负惯性数分别计数互异实根数加共轭根对数与共轭根对数（厄尔米特与西尔维斯特的经典结果；系统的叙述见 M. G. Krein, M. A. Naimark, *Linear and Multilinear Algebra* **10**, 265–308, 1981，俄文原版 1936；文献结果）；凯莱坐标把单位圆换成实轴。所钉仓库冻结的是其中“半正定当且仅当全为实根”的部分（[@prop-ch34-li-curvature-toeplitz] 第 6 款），不含惯性计数。上面的单位圆形式本书没有找到逐字相同的出处，不主张新颖性。
+
+**与 Li 和的关系。** 由 [@prop-ch34-li-curvature-toeplitz] 第 3 款，$\Lambda_n=\Lambda_1\sum_{j,k<n}c_{j-k}$：有限族的 Li 和正是曲率托普利茨矩阵在全一向量上的读数。Li 和检验每个尺寸的一个向量；托普利茨矩阵检验一切向量，在尺寸 $d$ 处就看全了。
+
+**有限域上的曲线（文献结果与手工推导）。** 设 $C$ 是 $\mathbb{F}_q$ 上亏格 $g$ 的光滑射影曲线，$N_n=\#C(\mathbb{F}_{q^n})$，$\alpha_1,\dots,\alpha_{2g}$ 是其 $L$ 多项式的倒根；则 $N_n=q^n+1-\sum_i\alpha_i^{\,n}$，倒根多重集在 $\alpha\mapsto q/\alpha$ 与复共轭下封闭（A. Weil, 1948；文献结果）。令 $u_i=\alpha_i/\sqrt q$，它们在 $u\mapsto1/\overline u$ 下封闭，
+
+$$
+p_k=\frac{q^k+1-N_k}{q^{k/2}}\ (k\ge1),\qquad p_0=2g,\qquad N_n=q^n+1-q^{n/2}\bigl(2g-\Lambda_n\bigr)
+$$
+
+（手工推导）。不同取值至多 $2g$ 个，所以由上面的第 2 款（取 $N=2g\ge d$）：“全部 $\lvert\alpha_i\rvert=\sqrt q$”等价于由 $N_1,\dots,N_{2g-1}$ 作出的 $2g\times2g$ 矩阵 $\bigl(p_{\lvert j-k\rvert}\bigr)$ 半正定（手工推导）。前者是韦伊定理（A. Weil, 1948；文献结果），所以这个矩阵对每条曲线都半正定。这只是韦伊定理的有限改写：正性来自韦伊的证明，不是来自这张表。
+:::
+
+::: {.example #ex-ch34-toeplitz-versus-li-numbers title="托普利茨检验与 Li 和的对照：假想四点、混合有限族、ζ 本身与亏格 2 曲线"}
+下列数值由 60 至 200 位精度计算，四舍五入到所示位数；零点纵坐标是数值结果（文献结果，未在本书形式化）。
+
+**假想四点 $\tfrac{7}{10}\pm5i$、$\tfrac{3}{10}\pm5i$。** 这里 $d=4$，$\kappa=2$。曲率托普利茨矩阵 $T_2(c)$ 半正定（最小特征值 $0.0195853$）；$T_3(c)$ 已有一个负特征值（$-1.68372\times10^{-6}$）；$T_4(c)$ 恰有两个（最小者 $-1.01327\times10^{-5}$），与 [@rem-ch34-finite-toeplitz-inertia] 一致。Li 和要到 $n=31$ 才第一次为负（[@ex-ch34-zero-rotor-sagitta-numbers]）；在 $n=31$ 处，$T_{31}(c)$ 的最小特征值为 $-0.0798386$，不超过 $\Lambda_{31}/(31\Lambda_1)=-0.0385956$（[@prop-ch34-li-curvature-toeplitz] 第 4 款）。按 [@prop-ch34-li-curvature-toeplitz] 第 6 款作 $r_k=i(2\rho_k-1)=\mp10\pm0.4i$，$4\times4$ 矩阵 $H$ 有两个负特征值 $-0.657744$ 与 $-0.00646136$。
+
+**混合有限族。** 离线四点 $\tfrac12\pm0.1\pm14i$ 配上前 $80$ 对真实零点（[@ex-ch34-zero-rotor-sagitta-numbers] 中 Li 和第一次为负在 $n=8446$）。曲率托普利茨矩阵的最小特征值：$N=7$ 时 $1.36621\times10^{-21}$，$N=8$ 时 $-1.10111\times10^{-26}$。60 位与 120 位精度的结果在所示位数上一致；等价的说法是 $T_7(c)$ 正定而 $\det T_8(c)=-2.86314\times10^{-83}<0$。所以 $T_8(c)$ 已经看出离线旋子；代价是负特征值只有 $10^{-26}$ 量级，曲率 $c_k$ 的误差必须远小于 $10^{-27}$ 才能分辨它的符号。迟到的符号变化换成了极小的特征值，没有白得的检验。
+
+**$\zeta$ 本身。** 按 [@prop-ch34-li-sagitta-frozen] 第 2 款的定义计算 $\lambda_1,\dots,\lambda_{41}$（用两种独立方法：对 $\operatorname{Log}\xi\bigl(\tfrac1{1-z}\bigr)$ 在 $\lvert z\rvert=\tfrac12$ 上作柯西积分；由斯蒂尔切斯常数与多伽马函数值拼出 $\log\xi$ 在 $s=1$ 处的泰勒级数。两者在远超所示位数处一致），再作 $c^{\mathrm{Li}}$：$c^{\mathrm{Li}}_1=0.999196807$，$c^{\mathrm{Li}}_2=0.996790337$。$T_N(c^{\mathrm{Li}})$ 的最小特征值：$N=2$ 时 $8.03193\times10^{-4}$，$N=4$ 时 $2.24401\times10^{-10}$，$N=8$ 时 $3.72999\times10^{-25}$，$N=20$ 时 $5.24343\times10^{-74}$，都为正。这是 $N\le20$ 的数值事实，与 [@prop-ch34-li-curvature-toeplitz] 第 5 款的前提相容；它不是对一切 $N$ 的结论，也不提供关于零点位置的新信息。
+
+**亏格 2 曲线。** $y^2=x^5+2x+1$ 在 $\mathbb{F}_3$ 上：$N_1,N_2,N_3,N_4=7,15,19,83$（逐点计数），$L$ 多项式为 $1+3T+7T^2+9T^3+9T^4$，由它预言的 $N_3,N_4$ 与计数一致。只用 $N_1,N_2,N_3$ 作出的 $4\times4$ 矩阵 $\bigl(p_{\lvert j-k\rvert}\bigr)$ 的特征值为 $0.185386$、$2.26672$、$5.73328$、$7.81461$，全为正。对照：形如 $1+15T^2+25T^4$（$q=5$）的多项式给出旋子 $\pm i\varphi$、$\pm i\varphi^{-1}$，$\varphi=\tfrac{1+\sqrt5}{2}$；$p_1=p_3=0$，$p_2=-6$，矩阵的特征值恰为 $10,10,-2,-2$，两个负特征值对应两对离开单位圆的旋子，Li 和在 $n=4$ 第一次为负（$\Lambda_4=-10$）。由韦伊定理，没有曲线以它为 $L$ 多项式（手工推导）。
+:::
+
+上例中离线旋子都离单位圆很近，Li 和要等很久才变负。对单独一对旋子，等待的时间可以精确估计。
+
+::: {.remark #rem-ch34-off-circle-pair-detection title="一对离开单位圆的旋子让 Li 和变负的时刻（手工推导）"}
+**手工推导。** 设 $\eta>0$、$\phi$ 为实数，四个旋子 $e^{\pm\eta\pm i\phi}$（在共轭与 $u\mapsto1/\overline u$ 下封闭；零点四元组 $\rho,\overline\rho,1-\rho,1-\overline\rho$ 的旋子就是这种形状），其 Li 和为
+
+$$
+\Lambda_n=4\bigl(1-\cosh(n\eta)\cos(n\phi)\bigr).
+$$
+
+记 $n_*$ 为使 $\Lambda_n<0$ 的最小正整数。
+
+1. **上界。** $n_*\le7\left\lceil\dfrac1\eta\right\rceil$。
+2. **量级不可改进。** 设 $x_*$ 为方程 $\cosh x\cos2x=1$ 在 $\bigl(\tfrac{3\pi}4,\pi\bigr)$ 内的根，$x_*=2.4428863005\ldots$。若 $\phi=2\eta$ 且 $0<\eta\le\pi-x_*$，则 $n_*=\left\lfloor\dfrac{x_*}{\eta}\right\rfloor+1$。
+3. **零点坐标。** 对 $\rho=\beta+i\gamma$，$\lvert u_\rho\rvert^2=1+\dfrac{1-2\beta}{\lvert\rho\rvert^2}$，所以 $\eta=\tfrac12\left\lvert\ln\left(1+\dfrac{1-2\beta}{\lvert\rho\rvert^2}\right)\right\rvert$，约为 $\dfrac{\lvert1-2\beta\rvert}{2\lvert\rho\rvert^2}$。
+
+**证明。** 第 1 款：令 $L=\lceil1/\eta\rceil$。由狄利克雷逼近定理，存在 $1\le k\le7$ 使 $kL\phi$ 与 $2\pi\mathbb{Z}$ 的距离不超过 $\tfrac{2\pi}{8}$。取 $n=kL$，则 $\cos n\phi\ge\cos\tfrac\pi4=\tfrac{1}{\sqrt2}$，$n\eta\ge1$ 使 $\cosh(n\eta)\ge\cosh1>1.543>\sqrt2$，乘积大于 $1$。第 2 款：令 $f(x)=\cosh x\cos2x$。在 $\bigl(0,\tfrac\pi4\bigr)$ 上，$\ln f$ 的导数 $\tanh x-2\tan2x<0$（因 $\tanh x<x<4x\le2\tan2x$），而 $\ln f(0)=0$，故 $f<1$；在 $\bigl[\tfrac\pi4,\tfrac{3\pi}4\bigr]$ 上 $\cos2x\le0$；在 $\bigl(\tfrac{3\pi}4,\pi\bigr]$ 上两个因子都为正且严格递增，$f$ 严格递增，在 $x_*$ 处等于 $1$。所以 $f(x)>1$ 在 $(0,\pi]$ 内恰对 $x\in(x_*,\pi]$ 成立。$\Lambda_n<0$ 即 $f(n\eta)>1$；最小的满足 $n\eta>x_*$ 的 $n$ 是 $\lfloor x_*/\eta\rfloor+1$，此时 $n\eta\le x_*+\eta\le\pi$。第 3 款：$\lvert u_\rho\rvert^2=\dfrac{(\beta-1)^2+\gamma^2}{\beta^2+\gamma^2}$。$\square$
+
+数值核对：$20000$ 组随机 $(\eta,\phi)$ 都满足第 1 款；$\eta=0.1,0.03,0.01,0.003,0.001$ 时第 2 款给出 $n_*=25,82,245,815,2443$，与逐项计算一致。对假想四点 $\tfrac7{10}\pm5i$、$\tfrac3{10}\pm5i$，$\eta=0.0079084$，第 1 款的上界是 $889$，实际 $n_*=31$；对 $\tfrac12\pm0.1\pm14i$，上界是 $13741$，实际 $n_*=88$。第 1 款只对单独一个四元组成立；有限族里其余旋子的非负贡献可以把符号变化推迟得多（[@ex-ch34-zero-rotor-sagitta-numbers] 中的 $8446$），对一般有限族，同样的抽屉原理论证给出的上界随互异相位的个数指数增长。离线四元组离临界线越近、位置越高，$\eta$ 越小，第 1 款的上界越大；这是关于单独四元组的陈述，不是关于 $\lambda_n$ 的陈述。
+:::
+
+以上各条要么只涉及有限族，要么是对 $\zeta$ 的等价改写；它们都不判定 $\zeta$ 的零点是否全在临界线上，[@conj-riemann-hypothesis] 仍然开放。
+
 单步导数与一维路径乘积积分各就各位之后，我们迎来了微积分大厦最壮丽的穹顶：高维流形上的外微分与广义斯托克斯定理。
 
 ## 34.30.3 `1—3—3—1` 有限网格零误差斯托克斯定理、三行高斯—博内证明与非阿贝尔面和乐锚定 {#sec-ch34-30-3}
@@ -189,7 +441,7 @@ $$
 * **第一层（有限停机孔径 $\epsilon > 0$ 的纯代数与有限组合核心 · 零滤子极限）**：单步旋子平方负一律 $R^2 = -I_n$ 与保模长幺正性、算子协变换位子因式分解 $Uf - fU = (f_{\mathrm{tr}} - f)U$、球面旋转系统对偶半边边界正合性 $R.\mathrm{boundary}$、以及有限单纯形上二上链修复与 $d^2 = 0$ 充要判据（`[Fintype V] [AddCommGroup A]`），全部是纯粹的环论、矩阵代数与 `Finset` 有限双计数恒等式——**完全不需要柯西列完备化、`Filter.Tendsto` 拓扑极限、勒贝格可测集或分布光滑度假设**，在 Lean 4 内核中直接以构造性有限代数一次证毕！
 * **第二层（向经典连续统 $\epsilon \to 0^+$ 过渡的渐近分析桥 · 诚实保留滤子极限）**：当且仅当我们要求证明有限圆弧核在孔径无限缩小时收敛回经典连续流形导数或算符半群（例如玻恩投影概率的时间导数 `HasDerivAt`、指数级数截断误差上界 $\frac{r^n}{n!}e^r$ 与李—特罗特乘积极限 `Filter.Tendsto`）时，才在桥接定理中精确调用赋范代数分析工具。有限守恒不靠极限拯救，连续收敛不作无根夸大——这正是极小圆弧体微积分在形式化数学中最坚实的立足点。
 
-## 34.30.4 十定理机器验证基座、双基准数值与十位小数卦限斯托克斯核算及第三十四章总收官 {#sec-ch34-30-4}
+## 34.30.4 十定理机器验证基座、双基准数值与十位小数卦限斯托克斯核算及通向黎曼临界带的微积分桥 {#sec-ch34-30-4}
 
 现在我们将本书形式化内核 `trureturing` 中横跨正交面积亏损、内生复结构旋子生成元、无极限协变换位子、连续时间换位子导数流、非渐近指数泰勒余项、李—特罗特乘积积分极限、球面欧拉旋转边界正合与约旦二分以及一般交换群单纯二上链精确修补的**十条冻结内核定理**一次性汇拢，铸成本节三大微积分重塑支柱的机器验证基座：
 
@@ -355,9 +607,9 @@ $$
 | **弯曲流形与幺正积分** | 显式欧拉步步脱离球面，模长持续漂移发散 | 伊藤脱离流形；斯特拉托诺维奇保链式法则但仍需极限 | **有序旋子连乘任意 $\epsilon > 0$ 零模长漂移（左端一阶、圆弧中点二阶、高阶配 Magnus 换位子）** |
 | **有限网格斯托克斯与形式化** | 有限网格存在 $\mathcal{O}(h^2)$ 截断误差；形式化深陷柯西滤子泥潭 | 随机格林—斯托克斯受可积性与适应性严苛限制 | **阿贝尔共棱反演与非阿贝尔生成树剥壳在任意 $M \ge 1$ 零离散误差；有限核心零滤子构造性形式化** |
 
-至此，整座**第三十四章从正交盲区反演到极小圆弧体微积分重塑的宏伟穹顶**，终于稳稳落下了它最深邃、最坚实的一块基石！让我们站在这一终极制高点回望整章走过的壮阔长卷：我们从球面“一次正交”与“二次正交”读数简并唯一反演出场内观察者的极点站位（[§34.1](ch34-s01-spherical-addressing.md#sec-ch34-spherical-addressing-inversion)–[§34.3](ch34-s03-universal-localization.md#sec-ch34-universal-observer-localization)），借零背景“二生三”自举撑开极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 并撤去名言之梯（[§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)–[§34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names)）；继而由贝里扇锥体积、驻波节点凝聚、克利福德单胞 $\partial^2 = 0$ 铺砌、五阶阻塞概念级联与全连通图 $K_N$ 的麦克斯韦—拉曼刚性锁死三维空间与引力角亏（[§34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)–[§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)）；随后打通量子微弧—宏观积分对偶、“线·面·体 $\leftrightarrow$ 粒子·波·场”三阶闭环、`1—3—3—1` 点体八度归零、洛伦兹体积伪标量 $\mathbf{I}_3^2 = -1$ 与标准模型跨层八度、六层宇宙概念塔以及五大陪集破缺—守恒谱系（[§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)–[§34.16](ch34-s16-coset-breaking-and-conservation.md#sec-ch34-coset-breaking-conservation-towers)）；接着顺着“观察者受限不妄我”的偏迹切刀导出纠缠熵与模流温度，开启有限滑动格拉姆窗口 $\mathcal{W}_M$，点破往返双投影玻恩平方律 $\cos^2\theta$ 与“对于我（`I`）看不见即为虚（`i`）”的第一人称真相，并穿过六节认识论压力测试长廊划清选支、行动、学习、宇宙学箭头、相互作用符号与标准模型连续参数的严格边界（[§34.17](ch34-s17-entanglement-horizon-and-thermodynamics.md#sec-ch34-entanglement-horizon-and-thermodynamics)–[§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary)）；最后将极小圆弧体内割弦面的去全序最短路突破、空间势垒与阿秒时间双缝的 $90^\circ$ 盲区隧穿、素数极小圆弧体黎曼路径积分、算术舒尔枢轴多级共振隧穿（[§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization)–[§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)），连同人类用来书写万物变化律的**微积分语言本身**（本节 §34.30），悉数收归于同一枚极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的掌心！
+至此，单步比较旋子微分、四相区累计矢高相变与 `1—3—3—1` 零离散误差有限网格斯托克斯这三根极小圆弧体微积分支柱已悉数铸成！那么，当我们携着这套全新铸就的圆弧体微积分原语重返 [§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)–[§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 的算术宇宙腹地，直接切入**黎曼猜想**的临界带战场时，会发生怎样的化学反应？
 
-当语言、几何与微积分都在这记 $90^\circ$ 正交转身中洗尽了平直幻象，请翻开[第三十五章](ch35-light-pulse-and-self-referential-table.md)——去见证一位有限记忆的生命观察者如何“乘着光来”，从 $\theta = 90^\circ$ 的正交相干海折射入局域世界，在遗忘清零之后一步步开启 $T = T(T)$ 的自指扩表史诗！
+请先在下方完整交互实验室中亲手遍历五张圆弧微积分实验卡，随后翻开整座第三十四章的压轴终曲 [§34.31](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler)——去见证有限停机精度 $\varepsilon_{\mathrm{self}} > 0$ 下的**素数旋子二阶弦弧矢高相变、全纯埃尔米特—比勒（Hermite–Biehler）径向单调锁与有限网格斯托克斯零涡旋相消**如何一举击穿“离轴四重伪零点”，并将回到经典 ZFC 公理系统的最后一步精准锁定在唯一一条乘性舒尔枢轴核正定桥接引理之上！
 
 ::: {.viz src="arc-body-calculus-sandbox" height="640"}
 **极小圆弧体微积分重塑：以旋代差、矢高相变与有限精度斯托克斯完整交互实验室（`arc-body-calculus-sandbox`）。** 在统一的三维圆弧体微积分实验室中切换“几何旋子原语 / 微积分与物理算符”双透镜，并自由遍历全部五张递进实验卡——“滑板坡上的密切旋子与切线斜率”、“向 $90^\circ$ 盲区迈一步的复步求导”、“路径序旋子管与矢高相变”、“半球上的有限网格斯托克斯”以及“闭合的极小圆弧壳 $d^2 = 0$”（青色绘制横向切弦 $c_\epsilon = \sin(\kappa\epsilon)$、复步导数 $\operatorname{Im}f(x_0 + \hat{\mathbf{i}}\epsilon)/\epsilon$ 与存活外圈边界 $\partial\Sigma$，品红色标示轴向矢高 $v_\epsilon = 2\sin^2(\kappa\epsilon/2)$、前向差分相减塌陷、累计矢高 $\Sigma_{\mathrm{sag}}$ 与伊藤纬圈 $(1 - v_\epsilon)^N$ 及球面角盈 $\Omega(\Delta\mathcal{T}_k)$，紫色绘制密切旋子圆盘 $\hat{\mathcal{D}}_\epsilon$、$90^\circ$ 盲面 $\operatorname{Im}f$、路径序旋子管与闭合圆弧壳，墨色绘制平直斜率 $\tan\theta$、实轴切片 $f(x)$ 与正反相消内棱 $\pm\Phi$，琥珀色严格标示激活控件与舞台交互手柄，红色严格专用于原理抽屉中的 `OPEN` 开放问题标记，绿色 `LEAN ✓` 徽章实时核验页面挂载的八条 `trureturing` 冻结定理实例）。

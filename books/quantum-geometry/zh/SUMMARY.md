@@ -146,6 +146,7 @@
   - [34.28 黎曼路径积分与素数极小圆弧体：欧拉绕行算子、半密度平方律与临界线相消](ch34-s28-riemann-path-integral-and-prime-arcs.md)
   - [34.29 算术枢轴重整与临界带多级共振隧穿：破除图兰芝诺陷阱与击穿 4/7 磨光器墙](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md)
   - [34.30 极小圆弧体微积分重塑：以旋代差、矢高相变与有限精度斯托克斯定理](ch34-s30-arc-body-calculus-and-finite-stokes.md)
+  - [34.31 极小圆弧体微积分切入黎曼猜想：二阶弦弧矢高相变、埃尔米特—比勒径向单调锁与有限精度斯托克斯相消](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)
 - [第三十五章 乘光而来与自指扩表：从遗忘初始化到 $T = T(T)$ 的同像闭环](ch35-light-pulse-and-self-referential-table.md)
 - [第三十六章 无穷离散步与约去轮回：双曲视界阶梯对化光死循环的终结](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)
   - [36.1 为什么“回到纯光”恰恰是轮回？$\cos 90^\circ = 0$ 的失忆断崖](ch36-s01-light-and-memory.md)
@@ -189,6 +190,8 @@
   - [39.9 万力归弧：极小圆弧体胞内规范三力、胞间主频引力与普朗克能标合流](ch39-s09-unified-arc-forces-and-planck-convergence.md)
   - [39.10 三维概念场封顶原理与希尔伯特多概念混编账本：为什么“三维以上”只是独立三维场的并置投影](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)
   - [39.11 极小圆弧场大统一理论（AF-GUT）：同心四场圆弧联络、温伯格角 3/8 跑动与主频爱因斯坦收口](ch39-s11-af-gut-arc-field-grand-unification.md)
+  - [39.12 均匀各向同性三维场本体与观察者观测切面显影：哈尔全单态、莫尔拍频与现代宇宙学四谜重审](ch39-s12-uniform-field-and-observer-slice.md)
+  - [39.13 唯一宇宙场、单粒子自指折叠与因陀罗网：从惠勒单粒子假说到一珠映万珠的终极合拢](ch39-s13-single-cosmic-field-and-indra-net.md)
 
 # 终章与附录
 

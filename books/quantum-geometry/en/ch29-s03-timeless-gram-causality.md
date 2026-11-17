@@ -221,8 +221,252 @@ One common signing must close the entire cycle. Individually admissible edge ove
 
 To see both directions, identify the real plane isometrically with $\mathbb C$ and represent each unit vector by $z_i$ on the unit circle. The quotient $q_i=z_{i+1}/z_i$ has real part $a_i$, so its argument is $\varepsilon_i\arccos(a_i)$ for one of the two signs, including the real-axis endpoints. The quotient product telescopes to one, and the circle exponential has period $2\pi$, giving the integer winding condition. Conversely, use the prefix products of $\exp(i\varepsilon_i\theta_i)$ as vertex points. The total product is one, so the final edge wraps back to the initial point; cosine evenness gives each prescribed overlap.
 
-This is a written application of the existing circle, inner-product and finite-product APIs, without a separate retained Lean statement or new verification badge for the cycle variant. The full criterion and derivation are in the [source completion Blueprint application](https://github.com/the-omega-institute/trureturing/pull/30905). Classical sources are Eisenberg-Nagy–Laurent–Varvitsiotis, [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2), Definition 1.1 and Lemma 2.1, and Laurent–Varvitsiotis, [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1), Lemma 7; the latter locator refers specifically to v1. No uniqueness, dynamics, probability law, physical realization or larger-dimensional completion criterion is asserted here.
+This is a written application of the existing circle, inner-product and finite-product APIs, without a separate retained Lean statement or new verification badge for the cycle variant. The full criterion and derivation are in the [source completion Blueprint application](https://github.com/the-omega-institute/trureturing/pull/30905). Classical sources are Eisenberg-Nagy–Laurent–Varvitsiotis, [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2), Definition 1.1 and Lemma 2.1, and Laurent–Varvitsiotis, [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1), Lemma 7; the latter locator refers specifically to v1. No uniqueness, dynamics, probability law or physical realization is asserted here; a separate three-dimensional completion criterion is given in [@thm-ch29-cycle-rank-three-completion].
 :::
+
+The planar criterion assigns one of two directions to each edge angle and asks for one common signing that closes the cycle. What changes when the unit vectors may leave a common plane? An individual bound $a_i\in[-1,1]$ still says only that this pair of vectors can exist. The question is whether **all** the edges can close in the **same real three-dimensional space**. The answer replaces the planar signed-angle equation by inequalities for every odd subset of edges.
+
+::: {.theorem #thm-ch29-cycle-rank-three-completion title="Real cycle completion with rank at most three" lean="D5/S3/QuadraticForms/CycleRankThreePsdCompletion.cycle_rank_three_iff"}
+Let $n\ge3$ be any natural number, set $I=\operatorname{Fin}n=\{0,\ldots,n-1\}$, and let $\operatorname{next}(i)=i+1\pmod n$. Let $a:I\to\mathbb R$ be any function satisfying $-1\le a_i\le1$ for every $i\in I$, and put $\theta_i=\arccos(a_i)\in[0,\pi]$. The following are equivalent:
+
+1. There is a real matrix $B$ with rows and columns indexed by $I$ such that
+
+   $$
+   \begin{aligned}
+   B&\succeq0,&\operatorname{rank}_{\mathbb R}(B)&\le3,\\
+   B_{ii}&=1,&B_{i,\operatorname{next}(i)}&=a_i\quad(i\in I).
+   \end{aligned}
+   $$
+
+2. Every subset $F\subseteq I$ of odd cardinality satisfies
+
+   $$
+   \sum_{i\in F}\theta_i-\sum_{i\in I\setminus F}\theta_i
+   \le\bigl(|F|_{\mathbb R}-1\bigr)\pi.
+   $$
+
+Here $I\setminus F$ is the complement within the whole of $\operatorname{Fin}n$, and $|F|_{\mathbb R}$ is the finite cardinality $|F|\in\mathbb N$ cast to the real numbers; subtraction on the right is real subtraction. No completion matrix or global vector realization is supplied as a premise. All endpoints $a_i=\pm1$, repeated vectors, realizations that do not span three-dimensional space, and singular completions are included. The rank bound is at most three, not necessarily exactly three.
+:::
+
+::: proof
+We explain the proof through angle constraints, closed chains of unit vectors in one three-dimensional space, and Gram matrices. Let $\vartheta$ be a finite list of angles in $[0,\pi]$. For a subset $F$ of its indices define
+
+$$
+C_{\vartheta}(F)
+=\sum_{i\in F}(\pi-\vartheta_i)
+ +\sum_{i\notin F}\vartheta_i,
+$$
+
+where the second sum runs over all remaining indices of that list. Expanding the expression shows that the odd-subset inequality is exactly $C_{\vartheta}(F)\ge\pi$. Every summand is nonnegative. Two different subsets $F,G$ differ at some index, which contributes $(\pi-\vartheta_i)+\vartheta_i=\pi$ to their combined cost. Thus
+
+$$
+C_{\vartheta}(F)+C_{\vartheta}(G)\ge\pi\qquad(F\ne G).
+$$
+
+**Eliminate two consecutive edges simultaneously.** Write the angle list as $(\alpha,\beta,\vartheta)$, with $R$ the index set of $\vartheta$. We want to replace the first two edges by one edge of angle $\gamma$. The local triangle requires
+
+$$
+0\le\gamma\le\pi,\qquad
+|\alpha-\beta|\le\gamma
+\le\min(\alpha+\beta,\,2\pi-\alpha-\beta).
+$$
+
+This interval alone is insufficient: the same $\gamma$ must satisfy every odd-subset inequality for the shorter list $(\gamma,\vartheta)$. An odd subset that omits the new edge leaves an odd-cardinality $S\subseteq R$ and requires $\gamma\ge\pi-C_{\vartheta}(S)$. A subset that contains the new edge leaves an even-cardinality $S$ and requires $\gamma\le C_{\vartheta}(S)$.
+
+Take the finite maximum
+
+$$
+\begin{aligned}
+M&=\max\Bigl(\{0\}\cup
+ \{\pi-C_{\vartheta}(S):S\subseteq R,\ |S|\text{ is odd}\}\Bigr),\\
+\gamma&=\max(|\alpha-\beta|,M).
+\end{aligned}
+$$
+
+Including $0$ makes the maximum defined even when there is no odd subset. For odd $S$, the original constraints obtained by including neither or both of the first two edges give
+
+$$
+\pi-C_{\vartheta}(S)
+\le\min(\alpha+\beta,\,2\pi-\alpha-\beta).
+$$
+
+For even $S$, including just one of those edges in turn gives $|\alpha-\beta|\le C_{\vartheta}(S)$. For odd $T$ and even $S$, the bound on the combined costs of different subsets gives $\pi-C_{\vartheta}(T)\le C_{\vartheta}(S)$. Consequently this **one** $\gamma$ satisfies all the lower and upper bounds simultaneously. The angle ranges and nonnegative costs also give $0\le\gamma\le\pi$. This transfers the global constraints to a shorter cycle; it does not choose separate, potentially incompatible intermediate angles for individual edges.
+
+**Insert a unit vector in three dimensions.** The triangle interval above is equivalent to requiring that each of $\alpha,\beta,\gamma\in[0,\pi]$ be at most the sum of the other two, with total at most $2\pi$. First take
+
+$$
+\begin{aligned}
+x&=(1,0,0),\\
+y&=(\cos\gamma,\sin\gamma,0),\\
+z(t)&=(\cos\alpha,\sin\alpha\cos t,\sin\alpha\sin t).
+\end{aligned}
+$$
+
+All three vectors have unit norm, and
+
+$$
+\langle y,z(t)\rangle
+=\cos\alpha\cos\gamma+\sin\alpha\sin\gamma\cos t.
+$$
+
+The triangle conditions place $\cos\beta$ between the values at $t=\pi$ and $t=0$, namely $\cos(\alpha+\gamma)$ and $\cos(\alpha-\gamma)$. When $\alpha+\gamma>\pi$, use $\cos(\alpha+\gamma)=\cos(2\pi-\alpha-\gamma)$ and the perimeter bound. Continuity and the intermediate value theorem supply the required $t$. There is no division by $\sin\alpha\sin\gamma$, so vanishing coefficients, coincident endpoints and antipodal endpoints remain covered.
+
+If the shorter chain already has endpoints $x',y'$, their unit norms and inner product $\cos\gamma$ give the same two-vector Gram table as $x,y$. The map sending $x,y$ to $x',y'$ first preserves inner products on their spans, then extends to an ambient isometry of $\mathbb R^3$ by choosing orthonormal bases in the orthogonal complements. This remains valid for linearly dependent endpoints. Apply the isometry to the new vector $z(t)$ and insert it between the old endpoints; every other vector in the old chain stays fixed.
+
+**Closed-chain induction and both directions.** Represent $m$ edges by $m+1$ unit vectors with equal first and last vectors, always in the same $\mathbb R^3$. The induction uses zero and one edge as base cases. For zero edges choose one unit vector. For one edge the only odd subset forces its angle to be zero, so repeat the same vector. For a longer list, simultaneous elimination supplies a shorter list. Construct its closed chain by induction, then insert the removed middle vector using the triangle construction. Equality of the endpoints survives, so the last cyclic edge also has its prescribed inner product. The resulting Gram matrix is $B=X^TX$, where $X$ has three rows. It is positive semidefinite, has diagonal one and all prescribed cyclic entries, and has real rank at most three.
+
+Conversely, factor a matrix $B$ from the first condition into real Gram vectors in the same $\mathbb R^3$, using its PSD property and rank bound. Diagonal one gives unit norms; each edge angle is precisely $\arccos(a_i)$. Remove the middle vector of three consecutive vectors and let $\gamma$ be the angle between the two outer ones. The angle triangle inequality gives the difference lower bound and $\gamma\le\alpha+\beta$. Applying it again after negating the middle vector gives $\gamma\le2\pi-\alpha-\beta$. Induction gives cost at least $\pi$ for every odd subset of the shorter chain. To restore the two edges, classify an original odd subset by whether it contains neither, one, or both of them. The corresponding costs are $\alpha+\beta+C_{\vartheta}(S)$, either $\pi-\alpha+\beta+C_{\vartheta}(S)$ or $\pi+\alpha-\beta+C_{\vartheta}(S)$, and $2\pi-\alpha-\beta+C_{\vartheta}(S)$. The shorter-chain bounds and triangle interval make each at least $\pi$. This recovers **every** original odd-subset condition. The full proof is checked by the Lean kernel.
+:::
+
+The classical source is E.-Nagy–Laurent–Varvitsiotis, [arXiv:1203.6602v2](https://arxiv.org/abs/1203.6602v2), Corollary 2.1, equation (5), and the subsequent discussion of the rank-three bound. Multiplying that paper's normalized angles by $\pi$ gives the inequalities here. See also Laurent–Varvitsiotis, [arXiv:1112.5960v1](https://arxiv.org/abs/1112.5960v1), Lemma 3. This is established mathematics.
+
+Compare [@rem-ch29-planar-cycle-compatibility]: in two dimensions, one signing must make the signed-angle sum belong to $2\pi\mathbb Z$. Three dimensions allow the chain to bend out of a plane, and the complete odd-subset inequalities give the exact criterion. The theorem asserts existence in a fixed three-dimensional space, without a supplied global realization. It specifies no unique completion, probability law, physical dynamics or computational complexity bound. It does not settle the separate question of choosing factors continuously over parameters in [@rem-ch29-continuous-gram-selection].
+
+::: {.example #ex-ch29-cycle-rank-three-sharpness title="Three zero overlaps: a written calculation showing sharpness"}
+**Written illustrative calculation, not a separate theorem carrying a Lean citation.** Take $n=3$ and prescribe $a_0=a_1=a_2=0$ on the three cyclic edges. Then $\theta_0=\theta_1=\theta_2=\pi/2$. The odd subsets are singletons and the full set. Their inequalities read $-\pi/2\le0$ and $3\pi/2\le2\pi$, respectively, so the three-dimensional criterion holds.
+
+Any real PSD completion is symmetric. The three cyclic edges already specify every pair of distinct indices; together with diagonal one they force
+
+$$
+B=I_3=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}.
+$$
+
+Since $\det I_3=1$, its rank is three, so no completion of rank at most two exists. On the other hand, $I_3$ itself is PSD and is the Gram matrix of the standard orthonormal basis $e_1,e_2,e_3\in\mathbb R^3$, so the three-dimensional bound is attained. The planar criterion gives the same obstruction: a sum of three terms $\pm\pi/2$ cannot be an integer multiple of $2\pi$. Thus the uniform bound three cannot be replaced by two for all cycle data. This does not say that every completable input must attain rank three.
+:::
+
+The single-cycle criterion answers when one ring of prescribed overlaps can close in the same real three-dimensional space. With several intersecting cycles, another issue remains: a filled edge must have the same value in every local block that uses it. Finding a realization for each block separately does not ensure agreement on shared fill values. We first construct one common angle table, then apply the preceding rank-bounded chordal completion theorem.
+
+::: {.definition #def-ch29-graph-cycle-inequalities title="Simple cycles and angle inequalities on a graph"}
+Let $V$ be any finite vertex set and $G$ a simple graph on $V$. A clique is a vertex subset whose distinct vertices are pairwise adjacent. A graph is chordal when it has no induced cycle of length at least four.
+
+For every natural number $m\ge3$, put $I_m=\operatorname{Fin}m$ and
+
+$$
+\operatorname{next}_m(i)=i+1\pmod m.
+$$
+
+A simple cycle here is an injective map $c:I_m\to V$ satisfying
+
+$$
+G.\operatorname{Adj}\bigl(c(i),c(\operatorname{next}_m(i))\bigr)
+\quad(i\in I_m).
+$$
+
+The cycle need not be induced: simple cycles with chords are included.
+
+A real angle table $\theta:V\times V\to\mathbb R$ satisfies all cycle inequalities when, for every such $m,c$ and every odd-cardinality subset $F\subseteq I_m$,
+
+$$
+\begin{aligned}
+&\sum_{i\in F}\theta_{c(i),c(\operatorname{next}_m(i))}
+-\sum_{i\in I_m\setminus F}
+ \theta_{c(i),c(\operatorname{next}_m(i))}\\
+&\le (|F|_{\mathbb R}-1)\pi .
+\end{aligned}
+$$
+
+The complement is taken within the whole of $I_m$. The notation $|F|_{\mathbb R}$ casts the natural-number cardinality to the reals, so subtraction on the right is real subtraction.
+
+:::
+
+::: {.lemma #lem-ch29-joint-angle-table title="One common angle table" lean="D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.exists_joint_angle_table"}
+Suppose $\theta$ is symmetric, has zero diagonal, and belongs to the closed interval $[0,\pi]$ on every $G$-edge. If it satisfies all cycle inequalities, there exists a table $\Gamma:V\times V\to\mathbb R$ such that
+
+$$
+\begin{gathered}
+\Gamma_{ab}=\Gamma_{ba},\qquad \Gamma_{aa}=0,\qquad
+0\le\Gamma_{ab}\le\pi,\\
+G.\operatorname{Adj}(a,b)\Longrightarrow
+\Gamma_{ab}=\theta_{ab},\\
+\Gamma_{ab}\le\Gamma_{ac}+\Gamma_{cb},\\
+\Gamma_{ab}+\Gamma_{bc}+\Gamma_{ca}\le2\pi .
+\end{gathered}
+$$
+
+The last two statements hold for every ordered triple $a,b,c\in V$, including repeated vertices. This lemma requires no chordal supergraph and takes neither a global vector realization nor chosen fill values as a premise.
+
+:::
+
+::: proof
+Attach two signs to each vertex, giving $V\times\{0,1\}$. Traversing an original edge costs $\theta_{ab}$ when its endpoint signs agree and $\pi-\theta_{ab}$ when they differ. Every edge cost is nonnegative. On a simple cycle with an odd number of sign changes, the assertion that total cost is at least $\pi$ is exactly the corresponding odd-subset inequality.
+
+The same lower bound holds for every walk whose projection is closed but whose endpoint signs differ. At a repeated projected vertex, different signs isolate a shorter walk of this kind; equal signs allow removal of a closed segment with nonnegative cost. Induction on length reduces the assertion to simple cycles and two-edge backtracks. An opposite-sign backtrack costs $\theta_{ab}+(\pi-\theta_{ab})=\pi$.
+
+Now insert a missing pair $u,v$. Write $W(p)$ for a signed walk’s total cost and choose
+
+$$
+x=\sup\left(
+\{0\}\cup
+\{\pi-W(q):q:(u,0)\leadsto(v,1)\}
+\right).
+$$
+
+The set ranges over all such walks in the current graph. Nonnegative costs give $0\le x\le\pi$. Every opposite-sign walk $q$ satisfies $\pi-x\le W(q)$. For every same-sign walk $p:(u,0)\leadsto(v,0)$, append the reverse of the sign-flipped $q$. The opposite-sign closed-walk bound gives $x\le W(p)$. Thus this single $x$ satisfies all path lower and upper bounds simultaneously.
+
+On the four signed endpoint states, define a common boundary distance: at the same vertex it is $0$ or $\pi$, and at different vertices it is $x$ or $\pi-x$, according as the signs agree or differ. These distances satisfy the triangle inequality. Split walks at their new edges and apply that triangle inequality to preserve boundary-distance lower bounds. Splitting at the first new edge and appending the sign-flipped original prefix then preserves the $\pi$ lower bound for every opposite-sign closed walk.
+
+There are only finitely many simple graphs on the finite carrier. Choose a maximal supergraph preserving these properties. If an edge were missing, the insertion above would enlarge it, so it must be complete. Its common table is $\Gamma$. Three-edge opposite-sign closed walks in the complete graph give the angle triangle inequalities and perimeter bound; diagonal and interval bounds handle repeated vertices. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch29-partial-two-tree-rank-three-completion title="Rank-at-most-three completion under the partial-two-tree hypothesis" lean="D5/S3/QuadraticForms/PartialTwoTreePsdCompletion.partial_two_tree_rank_three_iff"}
+Let $V$ be any finite vertex set and $G$ a simple graph on $V$. Explicitly assume that there exists a simple graph $H$ **on the same vertex set $V$** such that
+
+$$
+G\le H,\qquad H\text{ is chordal},\qquad
+\forall C\subseteq V,\quad
+H.\operatorname{IsClique}(C)\Longrightarrow |C|\le3.
+$$
+
+Here $G\le H$ means that every $G$-edge is an $H$-edge; the clique quantifier includes the empty clique.
+
+Let $A$ be a real symmetric matrix on $V$ satisfying
+
+$$
+A_{ii}=1,\qquad
+G.\operatorname{Adj}(i,j)\Longrightarrow -1\le A_{ij}\le1,
+$$
+
+and put $\theta_{ij}=\arccos(A_{ij})$. The following are equivalent:
+
+1. There exists a real matrix $B$ such that
+
+   $$
+   B\succeq0,\qquad \operatorname{rank}_{\mathbb R}B\le3,\qquad
+   B_{ii}=1,\qquad
+   G.\operatorname{Adj}(i,j)\Longrightarrow B_{ij}=A_{ij}.
+   $$
+
+2. The table $\theta$ satisfies all cycle inequalities defined above.
+
+Nonedge entries of $A$ need not belong to $[-1,1]$ and need not be preserved by $B$. No fill values on $H\setminus G$ are prescribed. The vertex set may be empty and the graph disconnected. Closed endpoints $A_{ij}=\pm1$, repeated realization vectors, configurations that do not span three-dimensional space, and singular completions are included. The rank bound is at most three, not necessarily exactly three.
+
+:::
+
+::: proof
+For necessity, restrict $B$ to any simple cycle $c:I_m\to V$. The principal submatrix remains positive semidefinite, its rank cannot increase, and its diagonal and cyclic edge entries are preserved. The preceding cycle criterion supplies every odd-subset inequality for that cycle.
+
+For sufficiency, apply the common-angle-table lemma to $\theta=\arccos A$ and set
+
+$$
+T_{ij}=\cos\Gamma_{ij}.
+$$
+
+Every $H$-clique has at most three vertices. For three angles, the triangle inequalities and perimeter bound are exactly the three singleton odd-subset conditions and the full-set condition in the three-cycle criterion. The corresponding cosine block is therefore positive semidefinite. The formal proof embeds each nonempty clique into three slots and uses a left inverse to enumerate its vertices; slots may repeat for one- or two-vertex cliques, after which the matrix is restricted back to the clique. The empty clique uses the empty matrix. Each clique block has rank at most its cardinality, hence at most three.
+
+All these blocks come from **the same $T$**, so their shared entries already agree. Apply the rank-bounded chordal completion theorem with $d=3$. It supplies a global positive-semidefinite matrix $B$, of rank at most three, preserving the diagonal and all $H$-edge entries. Finally,
+
+$$
+\cos\Gamma_{ii}=1,\qquad
+\cos\Gamma_{ij}=\cos(\arccos A_{ij})=A_{ij}
+\quad(\{i,j\}\in E(G)),
+$$
+
+which gives the required completion. The full proof is checked by the Lean kernel.
+:::
+
+The common table resolves agreement of fill values. Separate local clique realizations may assign different inner products to the same unspecified vertex pair, so those witnesses cannot directly supply the input to chordal assembly. Once common entries agree, the preceding rank-bounded assembly theorem aligns equal-Gram families by ambient isometries and assembles them in the same real three-dimensional space.
+
+This is a formalization of established mathematics, with no claim of mathematical novelty. Laurent’s [CWI report BS-R9439 (1994)](https://ir.cwi.nl/pub/5067/5067D.pdf) supplies the relevant angle-polytope and correlation-matrix feasibility results: equation (2.2) on printed page 4, Theorem 4.2 and Proposition 4.3 on page 7, and Theorem 4.7 on page 10. The journal version appeared in 1997, DOI [10.1016/0024-3795(95)00741-5](https://doi.org/10.1016/0024-3795(95)00741-5). The uniform rank-three bound here is obtained separately through rank-bounded chordal assembly; see Laurent–Varvitsiotis, [arXiv:1204.0734v1](https://arxiv.org/abs/1204.0734v1), for background. This section uses the stated same-vertex chordal-supergraph hypothesis directly, without replacing it by a graph-minor criterion. The conclusion is static existence for fixed input; it supplies no uniqueness, algorithm, parameter-continuous fill or physical dynamics, and does not settle the preceding continuous Gram-factor selection question.
 
 ::: {.viz src="gram-causal-elliptope" preset="narrow" height="500"}
 **One more step remembered, one ring narrower.** The rail adds history from $M = 1$ to $M = 5$: each older anchor adds a magenta ellipse to the slice, nested inside the last, and the cyan window through the amber $\mathbf{Q}$ narrows with it, from all of $[-1, 1]$ to about a quarter of that, with $\mathbf{Q}$ inside throughout. The events live in $\mathbb{R}^6$, so every depth keeps an inside; reading the compatible space as a finite observer's room for choice is this book's interpretation (`MODEL`).

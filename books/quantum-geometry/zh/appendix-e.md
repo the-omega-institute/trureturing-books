@@ -173,7 +173,7 @@ $$
      $$
 
      跳回结果 $1$！故必须补入**可重复性（$\mathcal{I}_k$ 幂等）与对相容可观测量的最小扰动条件（`T2`）**，方能唯一挑出吕德斯投影更新（关于系综玻恩权重、非选言吕德斯捏合与单次实验选支实现边界及物理因果干预对照被动基轴旋转，另见[第 34 章 §34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–[§34.21](ch34-s21-perception-action-holonomy.md#sec-ch34-perception-action-holonomy) 与 [@prob-ch34-single-outcome-realization]）。
-4. **公设四（时间演化的幺正性、射线相位刚性与斯通哈密顿生成元）**：在有限维空间 $\mathbb{C}^d$ 上，保内积线性等距算子 $V^\dagger V = I_d$ 自动满射从而幺正，且冻结定理 [`unitary_phase_of_connected_ray_tests`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests)（`LEAN ✓`）证明：在**已给定有限维幺正阵 $A \in U(\iota, \mathbb{C})$**（`[Fintype ι] [DecidableEq ι]`）的前提下，保持全部坐标基射线与支集连通测试射线必将 $A$ 锁死为全局单位相位倍乘 $cI$（注：若仅从无线性预设的纯跃迁概率 $|\langle\psi\mid\phi\rangle|^2$ 出发恢复幺正或反幺正算子，仍需援引维格纳定理 Wigner 1931，`文献结果`）。而在**可数无穷维**序列空间 $\ell^2(\mathbb{N})$ 上，单侧右移算子 $S|n\rangle = |n + 1\rangle$ 严格保一切成对比较内积 $\langle S\psi, S\phi\rangle = \langle\psi, \phi\rangle$（$S^\dagger S = I$），却丢失真空基态 $|0\rangle$，满足 $S S^\dagger = I - |0\rangle\langle 0| \neq I$（非幺正！）。故无穷维演化须显式要求**双侧可逆性（满射等距，`T2`）**，再结合强连续单参数群斯通定理（Stone 1932，`文献结果`，排除选择公理哈默尔基构造的时间不连续自同构）以及**选定具体自伴哈密顿量 $H$**（`T4` 动力学输入）导出薛定谔演化 $U(t) = e^{-itH/\hbar}$。
+4. **公设四（时间演化的幺正性、射线相位刚性与斯通哈密顿生成元）**：在有限维空间 $\mathbb{C}^d$ 上，保内积线性等距算子 $V^\dagger V = I_d$ 自动满射从而幺正，且冻结定理 [`unitary_phase_of_connected_ray_tests`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests)（`LEAN ✓`）证明：在**已给定有限维幺正阵 $A \in U(\iota, \mathbb{C})$**（`[Fintype ι] [DecidableEq ι]`）的前提下，保持全部坐标基射线与支集连通测试射线必将 $A$ 锁死为全局单位相位倍乘 $cI$（注：若仅从无线性预设的纯跃迁概率 $|\langle\psi\mid\phi\rangle|^2$ 出发恢复幺正或反幺正算子，仍需援引维格纳定理 Wigner 1931，`文献结果`）。而在**可数无穷维**序列空间 $\ell^2(\mathbb{N})$ 上，单侧右移算子 $S|n\rangle = |n + 1\rangle$ 严格保一切成对比较内积 $\langle S\psi, S\phi\rangle = \langle\psi, \phi\rangle$（$S^\dagger S = I$），却丢失真空基态 $|0\rangle$，满足 $S S^\dagger = I - |0\rangle\langle 0| \neq I$（非幺正！）。故无穷维演化须显式要求**双侧可逆性（满射等距，`T2`）**（它不能由比较公理的条款 I–IV 与正性条件推出，过去完备是它的一个充分条件，见 [@ex-appe-bilateral-shift-model]），再结合强连续单参数群斯通定理（Stone 1932，`文献结果`，排除选择公理哈默尔基构造的时间不连续自同构）以及**选定具体自伴哈密顿量 $H$**（`T4` 动力学输入）导出薛定谔演化 $U(t) = e^{-itH/\hbar}$。
 5. **公设五（复合系统复张量积 $\mathcal{H}_1 \otimes_{\mathbb{C}} \mathcal{H}_2$ 与费米子泡利外幂扇区 $\bigwedge^N\mathcal{H}$）**：两体规则包含两道完全不同的桥接条件——第一，为什么复合空间是无暗扇区的复张量积？必须补入**复局域层析极小性（Local Tomographic Minimality，`T2`）**（Hardy 2001；Chiribella–D'Ariano–Perinotti 2011，`文献结果`；实双比特与直和暗扇区反例见下框 [@ex-appe-qubit-cubic-and-tomography]）；第二，为什么全同费米子服从泡利不相容 $|\psi\rangle \wedge |\psi\rangle = 0$？在双粒子空间中，对称玻色态 $|\psi\rangle \otimes |\psi\rangle \in \mathrm{Sym}^2(\mathcal{H})$ 非零且同样合法——外幂反对易关系精确对应对称群 $S_N$ 的**奇符号表示分支（`T3` 交换统计分岔）**，其在 $3+1$ 维相对论局域量子场论中与半整数自旋的绑定由泡利自旋统计定理（Pauli 1940，`文献结果`）完成。
 :::
 
@@ -283,11 +283,11 @@ $$
 
 ---
 
-## E.8 第三点冗余与对合正性：用极小圆弧体微积分归约 `H2` 与 `H3` {#sec-appe-third-point-redundancy}
+## E.8 第三点冗余与对合正性：用极小圆弧体微积分归约 `H2` 与 `H3`，并改写 `H5`–`H7` 的输入 {#sec-appe-third-point-redundancy}
 
-E.7 的总表把 `H2` 记成并列的三项第 1 层条件：正自配对、秩 $2$ 双向量的椭圆负平方、多点格拉姆半正定；`H3` 再要求平行四边形极化。本节用[第 34 章 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 的弦—矢高分解重新过一遍这笔账，结论是这四项并不各自独立。在求同读数为实标量的情形，`H2` 的三项可以由两条更原始的条件推出：一条是**第三点冗余**（比较 $x$ 与 $z$ 不因取道第三点 $y$ 而改变），一条是**对合的正性**（非零差异的往返不为零也不为负）。`H3` 的极化一项由第三点冗余加一个正的读数给出。E.8.5 另外给单比特上的 `H5` 换了一种说法：只看两两比较的概率规则里，玻恩律是层析秩最小的那一个。
+E.7 的总表把 `H2` 记成并列的三项第 1 层条件：正自配对、秩 $2$ 双向量的椭圆负平方、多点格拉姆半正定；`H3` 再要求平行四边形极化。本节用[第 34 章 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 的弦—矢高分解重新过一遍这笔账，结论是这四项并不各自独立。在求同读数为实标量的情形，`H2` 的三项可以由两条更原始的条件推出：一条是**第三点冗余**（比较 $x$ 与 $z$ 不因取道第三点 $y$ 而改变），一条是**对合的正性**（非零差异的往返不为零也不为负）。`H3` 的极化一项由第三点冗余加一个正的读数给出。E.8.5 另外给单比特上的 `H5` 换了一种说法：只看两两比较的概率规则里，玻恩律是层析秩最小的那一个。E.8.6 与 E.8.7 用同一套记号检查 `H6` 与 `H7`：演化的可逆、时间连续、生成元与条件化，以及复合系统的参数计数与交换统计。这两小节不加新的条款，只把输入换成只谈比较对象与读数的形状，并用满足全部条款的模型标出边界。E.8.8 把比较用到系综上：每个对象都有对立者时，多点格拉姆半正定等价于“每个系综与自身的平均求同读数不为负”；单比特上的 `H5` 可以换成系综外延性，在 `MODEL` 读法下它是条款 I 用于系综。E.8.9 读一个对象沿时间的比较记录：读数表的秩数出能级，射线矢高始终离开零的对象说明态空间无穷维，这给 `H4` 一个读数判据但不推出它；两个通道合起来才定出轨道上的哈密顿量（`H6`）。
 
-先说清边界。这两条条件是加在 $\mathcal{A}_0$ 之外的，本节证明的是“若加入则推出”，不主张它们能从条款 I–III 推出；[@ex-appe-layer0-countermodels] 的反例恰好说明不能。本节的两个定理盒对应冻结定理，其余推导标为 `手工推导`，引用的经典结论标为 `文献结果`。
+先说清边界。这两条条件是加在 $\mathcal{A}_0$ 之外的，本节证明的是“若加入则推出”，不主张它们能从条款 I–III 推出；[@ex-appe-layer0-countermodels] 的反例恰好说明不能。本节的定理盒都对应冻结定理，其余推导标为 `手工推导`，引用的经典结论标为 `文献结果`。
 
 ### E.8.1 单对比较：弦与矢高在第 0 层已经锁死 {#sec-appe-chord-sagitta-layer0}
 
@@ -570,7 +570,7 @@ $$
 
 **文献结果。** 上式右端形如 $\cos\frac\Omega2+\sin\frac\Omega2\,\mathbf{I}a$，是保持 $a$ 不动的旋子，其中 $\frac\Omega2=\operatorname{atan2}\bigl([a,b,c],\,1+a\cdot b+b\cdot c+c\cdot a\bigr)$；分母为正时即 $\tan\frac\Omega2=\dfrac{[a,b,c]}{1+a\cdot b+b\cdot c+c\cdot a}$。$\lvert\Omega\rvert$ 是球面三角形 $abc$ 的面积，即吉拉尔角盈，$\Omega$ 的符号由 $[a,b,c]$ 的符号给出（van Oosterom–Strackee 1983；Eriksson 1990）。
 
-**与冻结定理的对应。** 分子的两个量 $1+a\cdot b+b\cdot c+c\cdot a$ 与 $[a,b,c]$ 正是 [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch) 中 $4\operatorname{Tr}(P_aP_bP_c)$ 的实部与虚部。把上面的恒等式与 $\det G(a,b,c)=[a,b,c]^2$ 联立，得到
+**与冻结定理的对应。** 乘积公式与分母恒等式在泡利矩阵模型里已冻结，见 [@thm-appe-bloch-triangle-return-phase]。分子的两个量 $1+a\cdot b+b\cdot c+c\cdot a$ 与 $[a,b,c]$ 正是 [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch) 中 $4\operatorname{Tr}(P_aP_bP_c)$ 的实部与虚部。把上面的恒等式与 $\det G(a,b,c)=[a,b,c]^2$ 联立（$[a,b,c]^2$ 的展开式冻结为 [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)），得到
 
 $$
 \det G(a,b,c)=(2-v_{ab})(2-v_{bc})(2-v_{ca})\,(1-\cos\Omega),\qquad v_{xy}=1-x\cdot y ,
@@ -580,6 +580,59 @@ $$
 :::
 
 $S(r)^2=1-\frac v2$ 在布洛赫球上就是 $\cos^2\frac\theta2$：半比较求同读数的平方等于 $1$ 减去半个矢高，这是玻恩权重的弦—矢高写法，它本身不替代 `H5` 的可加性前提。行列式公式说的是：三点格拉姆体积等于三个互补矢高之积乘以角盈的矢高，[§32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)“二生三”原胞的 $\det G=\sin^4\epsilon$ 是它的特例。对 `H8` 而言，第 1 层内生的射影和乐不需要新的输入，它是条款 IV 之下把全比较开平方的结果；仍然需要第 2 层新输入的，是随时空基点变化的纤维联络及其动力学。
+
+乘积公式不只停在手工推导上。把 $\mathcal{Cl}_{3,0}$ 换成它的泡利矩阵模型（$e_k\mapsto\sigma_k$，$\mathbf{I}\mapsto i\mathbf{1}$，对合 ${}^*$ 对应共轭转置），半比较成为一个具体的 $2\times2$ 酉矩阵，下面两条结论已在 Lean 中验证。对 $r\in\mathbb{R}^3$ 记 $r\cdot\sigma=r_1\sigma_x+r_2\sigma_y+r_3\sigma_z$，$P_r=\frac12(\mathbf{1}+r\cdot\sigma)$；对 $\phi\in\mathbb{C}^2$ 记向 $r$ 的归一化投影
+
+$$
+N_r(\phi):=\frac{P_r\phi}{\sqrt{\operatorname{Re}\,\phi^\dagger P_r\phi}} .
+$$
+
+::: {.lemma #lem-appe-rotor-gate-normalized-projection title="旋子门把 $a\cdot\sigma$ 转到 $b\cdot\sigma$，在本征旋量上等于归一化投影" lean="D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.rotor_shortest_gate"}
+设 $a,b\in\mathbb{R}^3$ 是单位向量且 $b\neq-a$，令
+
+$$
+R_{a\to b}:=\frac{\mathbf{1}+(b\cdot\sigma)(a\cdot\sigma)}{\sqrt{2(1+a\cdot b)}} .
+$$
+
+则
+
+1. $R_{a\to b}\,R_{a\to b}^\dagger=\mathbf{1}$；
+2. $R_{a\to b}\,(a\cdot\sigma)\,R_{a\to b}^\dagger=b\cdot\sigma$；
+3. 对满足 $\psi^\dagger\psi=1$ 与 $P_a\psi=\psi$ 的 $\psi\in\mathbb{C}^2$，有 $R_{a\to b}\,\psi=N_b(\psi)$。
+:::
+
+::: proof
+记 $A=a\cdot\sigma$，$B=b\cdot\sigma$，则 $A^2=B^2=\mathbf{1}$，$AB+BA=2(a\cdot b)\mathbf{1}$。分子 $\mathbf{1}+BA$ 满足 $(\mathbf{1}+BA)(\mathbf{1}+AB)=2(1+a\cdot b)\mathbf{1}$ 与 $(\mathbf{1}+BA)A(\mathbf{1}+AB)=2(1+a\cdot b)B$，这是前两条。第三条：$A\psi=\psi$ 给出 $(\mathbf{1}+BA)\psi=2P_b\psi$，而 $\psi^\dagger P_b\psi=\frac{1+a\cdot b}{2}>0$，两边的归一化因子相同。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-appe-bloch-triangle-return-phase title="布洛赫三角上三次旋子门的返回相位" lean="D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"}
+设 $a,b,c\in\mathbb{R}^3$ 是单位向量，$b\neq-a$，$c\neq-b$，$a\neq-c$。记
+
+$$
+S:=1+a\cdot b+b\cdot c+c\cdot a,\qquad D:=a\cdot(b\times c).
+$$
+
+则
+
+1. $S^2+D^2=2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a)$，且 $S^2+D^2>0$；
+2. 三个旋子门的乘积为
+
+   $$
+   R_{c\to a}\,R_{b\to c}\,R_{a\to b}=\frac{S\,\mathbf{1}-iD\,(a\cdot\sigma)}{\sqrt{S^2+D^2}} ;
+   $$
+
+3. 对满足 $\psi^\dagger\psi=1$ 与 $P_a\psi=\psi$ 的 $\psi\in\mathbb{C}^2$，依次向 $b$、$c$、$a$ 做归一化投影，得
+
+   $$
+   N_a\bigl(N_c(N_b(\psi))\bigr)=\frac{S-iD}{\sqrt{S^2+D^2}}\,\psi .
+   $$
+:::
+
+::: proof
+第 1 条：记 $x=a\cdot b$，$y=b\cdot c$，$z=c\cdot a$。格拉姆恒等式 $D^2=1+2xyz-x^2-y^2-z^2$（[`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)）代入后，$S^2+D^2$ 展开为 $2(1+x)(1+y)(1+z)$；三个因子在两两不对径时都为正。第 2 条：三个分子相乘得 $(\mathbf{1}+AC)(\mathbf{1}+CB)(\mathbf{1}+BA)=2S\,\mathbf{1}-2iD\,A$，三个归一化因子之积由第 1 条等于 $2\sqrt{S^2+D^2}$。第 3 条：[@lem-appe-rotor-gate-normalized-projection] 的第 3 条把每一次归一化投影换成相应的旋子门，前两条保证每一步之后的旋量仍是单位旋量并落在下一步所需的本征空间里；最后用 $A\psi=\psi$。完整证明由 Lean 内核检查。
+:::
+
+与 [@rem-appe-half-comparison-holonomy] 对照：$R_{a\to b}$ 是 $r_{ba}=r_{ab}^*$ 的像，所以定理第 2 条是注记中乘积的对合 $(r_{ab}\,r_{bc}\,r_{ca})^*=r_{ac}\,r_{cb}\,r_{ba}$，$D$ 前的符号随之由正变负；第 1 条就是注记末尾的恒等式。第 3 条给出第 2 条的操作读法：从 $a$ 的本征旋量出发，沿 $a\to b\to c\to a$ 做三次归一化投影，回到原旋量并乘上模为 $1$ 的因子 $(S-iD)/\sqrt{S^2+D^2}$。Lean 没有陈述的部分照旧分层：把辐角 $\operatorname{atan2}(D,S)$ 等同于半个吉拉尔角盈是文献结果；旋子的指数形式没有形式化；“最短”意义下的最小性与唯一性也没有形式化，Lean 模块里 `rotor` 与 `shortestGate` 只是名字。Lean 中 $N_r(\phi)$ 对一切 $\phi$ 有定义（分母为零时按 Lean 的约定取零向量）；定理只在各步分母 $\sqrt{(1+u\cdot v)/2}>0$ 处用到它。
 
 ### E.8.5 玻恩权重：单比特上的缺口可以换成层析秩最小 {#sec-appe-born-minimal-rank}
 
@@ -614,22 +667,263 @@ $$
 
 所以在“概率只依赖两两比较”的前提下，`H5` 的输入可以这样分。$d\ge3$ 时，有界、$f(1)=1$ 加投影可加性已经足够。$d=2$ 时还缺一条：它可以是 E.7 所列的全效应可加性，也可以是一句计数，即一个制备的全部预言由 $4$ 个实数决定，不能更少。$4$ 正是 `H7` 的局域层析计数用到的 $\dim_{\mathbb{R}}\operatorname{Herm}(2)$，也是 [@rem-appe-gram-from-flatness] 的格拉姆嵌入（布洛赫向量的三个坐标）加上归一所占的维数：概率对矢高仿射，等价于概率是嵌入坐标的仿射函数。这只是换了输入的形状。层析秩最小本身仍是一条 `T2` 操作假设，两两公平推不出它；不连续的规则，以及不只依赖两两比较的规则，都不在这条注记的范围内。
 
-### E.8.6 台账改了什么 {#sec-appe-reduced-ledger}
+### E.8.6 动力学：演化可逆、时间连续、生成元与条件化 {#sec-appe-dynamics-from-comparison}
 
-::: {.remark #rem-appe-reduced-ledger title="加入条款 IV 与正性条件之后的台账（对 [@rem-appe-master-audit-table] 的补充）"}
-**补充审计（`MODEL` + `手工推导`，定理盒部分对应冻结定理）。** 下表只列发生变化的条目；`H1`、`H4`、`H6`、`H7`、`H9` 的处理机制与 [@rem-appe-master-audit-table] 相同。
+`H6` 列了四项输入：演化的双侧可逆、时间强连续、可重复最小扰动的条件化，以及哈密顿量 $H$ 本身。本小节逐项看比较公理与弦—矢高分解能说到哪里。前两项各有一个只用比较对象与读数说出口的充分条件，并有满足全部条款的模型标出它们的边界；第三项可以写成一条最优化原理，但“用哪种读数”仍是输入；$H$ 不变。下面沿用 E.8 的记号，并取 $\hbar=1$。
 
-| 条目 | 原处理 | 加入两条条件之后 | 依据 |
+先看可逆。[@rem-appe-chord-sagitta-layer0] 用到了条款 III 的两个次序。只保留一个次序时，亏损可以精确算出。
+
+::: {.remark #rem-appe-one-sided-fairness title="单侧公平：亏损是一个投影（手工推导）"}
+**手工推导。** 设 $\mathcal{A}$ 是 $2$ 可逆的含幺结合 $*$-代数，$u\in\mathcal{A}$ 只满足 $u^*u=\mathbf{1}$。记 $p=\mathbf{1}-uu^*$，$S,A,v,\Delta$ 的定义同 [@rem-appe-chord-sagitta-layer0]（不要求 $u$ 与 $u^*$ 对易）。则
+
+1. $p^*=p$，$p^2=p$；
+2. $\Delta^*\Delta=2v$；
+3. $\Delta\Delta^*=2v-p$；
+4. $2(AS-SA)=-p$。
+
+推导：$p^2=\mathbf{1}-2uu^*+u(u^*u)u^*=p$；$\Delta^*\Delta=u^*u-u^*-u+\mathbf{1}=2\cdot\mathbf{1}-2S$；$\Delta\Delta^*=uu^*-u-u^*+\mathbf{1}=2v-p$；[@rem-appe-chord-sagitta-layer0] 推导中的两条展开相减得 $uu^*-u^*u=2(AS-SA)$，左端为 $-p$。
+
+所以在 $u^*u=\mathbf{1}$ 之下，$uu^*=\mathbf{1}$、$SA=AS$、$\Delta\Delta^*=\Delta^*\Delta$ 三者等价：条款 III 只对一个次序成立时，求同与求异两条通道不再对易，弦—矢高锁死在另一侧亏掉一个投影。$\ell^2(\mathbb{N})$ 上的单侧移位 $Se_k=e_{k+1}$ 正是这样：$S^*S=\mathbf{1}$，$p=\mathbf{1}-SS^*=\lvert e_0\rangle\langle e_0\rvert$。把它当作比较值 $\mathrm{CMP}(x,y)=S$，则 $\mathrm{CMP}(x,y)\,\mathrm{CMP}(y,x)=SS^*\neq\mathbf{1}$，违反条款 III。
+
+若 $\mathcal{A}$ 上有忠实的迹读数 $\tau$（正，$\tau(ab)=\tau(ba)$，$\tau(a^*a)=0$ 仅当 $a=0$），$\mathcal{A}$ 中的单侧公平元自动是双侧的：$\tau(p)=\tau(\mathbf{1})-\tau(u^*u)=0$，而 $p=p^*p$，故 $p=0$。有限维矩阵代数有这样的迹，$\ell^2$ 上的全体有界算子没有（`文献结果`）。这一段只关于 $\mathcal{A}$ 的元素，下例说明它管不到诱导的演化。
+:::
+
+这还没有回答 `H6` 的问题。`H6` 问的是状态的演化，而状态演化可以是比较结构的一个对称，不必本身是一个比较值。下面把“演化”读作保持一切比较值的对象映射在态空间上诱导的映射（`MODEL`），这个模型说明任何条款都不排除单侧移位以这种方式出现。
+
+::: {.example #ex-appe-bilateral-shift-model title="只有前向半轨道时，双侧公平的比较诱导出单侧移位（手工推导）"}
+**手工推导。** 取 $\mathcal{A}$ 为 $\ell^2(\mathbb{Z})$ 上的全体有界算子，$\lambda$ 为双侧移位 $\delta_n\mapsto\delta_{n+1}$，对象集 $X=\mathbb{N}$，$\mathrm{CMP}(m,n)=\lambda^{n-m}$。
+
+- 条款 II、III：$\mathrm{CMP}(n,m)=\lambda^{m-n}=\mathrm{CMP}(m,n)^*$，$\lambda$ 是酉的。条款 IV：$\lambda^{n-m}\lambda^{k-n}=\lambda^{k-m}$。条款 I：$m\mapsto\lambda^m$ 是单射，外延商不识别任何两点。正性条件：$C^*$-代数中成立。
+- 时间步 $T(m)=m+1$ 严格保持一切比较：$\mathrm{CMP}(m+1,n+1)=\mathrm{CMP}(m,n)$。
+- 取 $\delta_0$ 的向量态。对象张成的态空间 $\mathcal{K}=\overline{\operatorname{span}}\{\lambda^m\delta_0:m\in\mathbb{N}\}=\ell^2(\mathbb{N})$，$T$ 诱导的演化 $\lambda^m\delta_0\mapsto\lambda^{m+1}\delta_0$ 是 $\lambda$ 在 $\mathcal{K}$ 上的限制，恰为单侧移位；$\lambda^{-1}\delta_0$ 不在 $\mathcal{K}$ 中。
+- 把 $\mathcal{A}$ 换成 $\lambda$ 生成的交换 $C^*$-代数，$\delta_0$ 的向量态在其上是忠实迹，条款 I–IV 与正性条件照样成立，$\mathcal{K}$ 与诱导的演化都不变。所以代数带忠实迹也不排除单侧移位：诱导演化是 $\lambda$ 到 $\mathcal{K}$ 的压缩，不是 $\mathcal{A}$ 的元素。
+
+一般地，设条款 II–IV 成立，$T:X\to X$ 满足 $\mathrm{CMP}(Tx,Ty)=\mathrm{CMP}(x,y)$。取锚点 $o$，令 $w=\mathrm{CMP}(o,To)$，则由条款 IV，$\mathrm{CMP}(o,Tx)=\mathrm{CMP}(o,To)\,\mathrm{CMP}(To,Tx)=w\,\mathrm{CMP}(o,x)$：保比较的映射在 [@rem-appe-anchoring-consequences] 的锚定表示上就是左乘公平元 $w$，由条款 I 它在外延商上是单射。它在态空间上诱导的是一个等距；是否可逆，取决于对象集是否对时间反演封闭。以下两条各自充分：
+
+1. **过去完备**：$T$ 满射，每个对象都有前驱。此时 $w$ 把态空间映满自身，诱导的演化是酉的。
+2. 态空间有限维：等距自动满射。
+
+过去完备不是必要的：$\mathcal{A}=\mathbb{C}$、$\mathrm{CMP}(m,n)=e^{i(n-m)\theta}$ 时 $T$ 不满射，态空间是 $\mathbb{C}$，演化是酉的。恰好的判据在算子层面：诱导等距 $U$ 的游荡子空间 $\mathcal{K}\ominus U\mathcal{K}$ 为零，这只是“等距满射”的改写。Wold 分解把任意等距写成酉部分与单侧移位的直和（`文献结果`），其有限层形式与范数恒等式是冻结定理 [`exists_wold_decomposition`](lean:D5/S3/HilbertOperators/WoldDecomposition.exists_wold_decomposition)。
+:::
+
+所以 `H6` 中“双侧可逆”一项可以由一句关于对象的话保证：**每个对象都有过去。** 它是充分条件，不是必要条件；它也是输入，不是推论，上例满足全部条款而没有它。
+
+再看时间连续。设一族对象 $x_t$（$t\in\mathbb{R}$）满足条款 II–IV，且 $\mathrm{CMP}(x_s,x_t)=w(t-s)$ 只依赖时间差，$\varphi$ 是一个态。
+
+::: {.remark #rem-appe-sagitta-continuity title="矢高读数在零点连续，演化就强连续（手工推导与文献结果）"}
+**手工推导。** 记 $f(t)=\varphi\bigl(w(t)\bigr)$，矢高读数 $\nu(t)=\varphi\bigl(v(x_0,x_t)\bigr)=1-\operatorname{Re}f(t)$，它等于 [@rem-appe-gram-from-flatness] 弦距平方的一半。在 $\varphi$ 的 GNS 表示 $(\pi,\Omega)$ 中令 $\xi_s=\pi(w(s))\Omega$，$\mathcal{K}=\overline{\operatorname{span}}\{\xi_s\}$，$U_t=\pi(w(t))$ 限制在 $\mathcal{K}$ 上。则：
+
+1. $U_t$ 是 $\mathcal{K}$ 上的酉单参数群，且对一切 $s,t$，$\lVert(U_t-\mathbf{1})\xi_s\rVert^2=2\nu(t)$；
+2. $f$ 正定，并且 $\lvert f(t)-f(s)\rvert^2\le2\nu(t-s)$；
+3. 以下三条等价：$\nu$ 在 $0$ 处连续；$U$ 在 $\mathcal{K}$ 上强连续；$f$ 处处连续。
+
+推导：$\lVert(U_t-\mathbf{1})\xi_s\rVert^2=\varphi\bigl((w(t+s)-w(s))^*(w(t+s)-w(s))\bigr)=2-2\operatorname{Re}\varphi(w(t))$，用到 $w(s)^*w(t+s)=w(t)$。这里时间取遍 $\mathbb{R}$，$U_tU_{-t}=\mathbf{1}$ 在 $\mathcal{K}$ 上成立，所以 $U_t$ 是酉的。正定性是 [@rem-appe-gram-from-flatness] 中同一个计算。不等式：$f(t)-f(s)=\langle\Omega,U_s(U_{t-s}-\mathbf{1})\Omega\rangle$，再用柯西—施瓦茨。等价性：在生成向量上 $\lVert(U_h-\mathbf{1})\xi_s\rVert\to0$，由 $\lVert U_h-\mathbf{1}\rVert\le2$ 与稠密性推到全体 $\mathcal{K}$，再由 $\lVert U_{t+h}\xi-U_t\xi\rVert=\lVert(U_h-\mathbf{1})\xi\rVert$ 推到每个时刻。
+
+**只要求读数可测不够（手工推导）。** 取 $\mathcal{A}$ 为 $\ell^2(\mathbb{R}_{\mathrm{d}})$（$\mathbb{R}$ 取离散拓扑）上的全体有界算子，$w(t)$ 为平移 $\delta_r\mapsto\delta_{r+t}$，$\varphi$ 为 $\delta_0$ 的向量态。条款 II–IV 与正性条件成立，$f$ 在 $0$ 处为 $1$、在其余点为 $0$，几乎处处为零，因而可测；而 $t\neq0$ 时 $\nu(t)=1$：每个时间平移都与原对象正交。
+
+**文献结果。** 可分希尔伯特空间上弱可测的酉单参数群强连续（von Neumann 1932）。在上面的设定中矩阵元为 $\langle\xi_r,U_t\xi_s\rangle=f(t+s-r)$，所以 $f$ 可测且 $\mathcal{K}$ 可分时即满足该定理的前提；上面的反例中 $\mathcal{K}$ 不可分。强连续的酉单参数群有自伴生成元（Stone 1932）。
+:::
+
+第 2 款的意思是：**以 $x_0$ 为参照的比较读数，在一段时间里的改变量不超过这段时间两端对象之间的弦距。** 所以 `H6` 中“强连续”一项可以换成一个标量读数条件：对象与它的微小时间平移在弦距上靠近。在有限维中这一条还直接接到冻结定理 [@thm-calibrated-unitary-group] 上：设 $U$ 连续，取 $\delta>0$ 使 $0\le s\le\delta$ 时 $\lVert U_s-\mathbf{1}\rVert\le\frac12$，则 $V=\frac1\delta\int_0^\delta U_s\,ds$ 可逆，$U_tV=\frac1\delta\int_t^{t+\delta}U_s\,ds$ 对 $t$ 可微，于是 $U_t=(U_tV)V^{-1}$ 在 $0$ 处可微（`手工推导`）。这正是 [`calibrated_group`](lean:D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group) 所要的可微性前提，它给出 $U_t=e^{-itH}$ 与自伴的 $H$。
+
+生成元本身也可以用弦与矢高读出来。
+
+::: {.remark #rem-appe-generator-chord-sagitta title="生成元是弦率，矢高率趋于它平方的一半；有限步速度界（手工推导与文献结果）"}
+**手工推导。** 设 $H$ 为有限维厄米算子，$u_t=e^{-itH}$，$\psi$ 为单位向量，$\langle X\rangle=\langle\psi,X\psi\rangle$。
+
+1. $S_t=\cos(tH)$，$A_t=-i\sin(tH)$，$v_t=2\sin^2(tH/2)$，$\lVert\Delta_t\psi\rVert^2=2\langle v_t\rangle$。
+2. $\dfrac{t^2}{2}\langle H^2\rangle-\dfrac{t^4}{24}\langle H^4\rangle\le\langle v_t\rangle\le\dfrac{t^2}{2}\langle H^2\rangle$。
+3. 对 $t\neq0$：$\bigl\lVert(\Delta_t/t+iH)\psi\bigr\rVert\le\frac{\lvert t\rvert}{2}\lVert H^2\psi\rVert$，$\bigl\lVert(A_t/t+iH)\psi\bigr\rVert\le\frac{t^2}{6}\lVert H^3\psi\rVert$，$\bigl\lVert(v_t/t^2-H^2/2)\psi\bigr\rVert\le\frac{t^2}{24}\lVert H^4\psi\rVert$。
+4. 记 $\sigma^2=\langle H^2\rangle-\langle H\rangle^2$。对每个正整数 $N$，若 $\sigma\lvert t\rvert\le2N$，则
+
+$$
+\arccos\lvert\langle\psi,u_t\psi\rangle\rvert\le2N\arcsin\frac{\sigma\lvert t\rvert}{2N}.
+$$
+
+右端随 $N$ 单调下降，$N\to\infty$ 时趋于 $\sigma\lvert t\rvert$，于是对一切 $t$ 有 $\arccos\lvert\langle\psi,u_t\psi\rangle\rvert\le\sigma\lvert t\rvert$；二能级等权叠加取等。
+
+推导：第 1–3 款由谱分解归结为标量不等式 $\frac{x^2}2-\frac{x^4}{24}\le1-\cos x\le\frac{x^2}2$、$\lvert e^{-ix}-1+ix\rvert\le\frac{x^2}2$、$\lvert\sin x-x\rvert\le\frac{\lvert x\rvert^3}6$、$\lvert1-\cos x-\frac{x^2}2\rvert\le\frac{x^4}{24}$。第 4 款：把第 2 款用于 $H-\langle H\rangle$，得单步界 $\lvert\langle\psi,u_h\psi\rangle\rvert\ge1-\frac{\sigma^2h^2}2$，于是 $\sigma\lvert h\rvert\le2$ 时夹角 $\arccos\lvert\langle\psi,u_h\psi\rangle\rvert\le2\arcsin\frac{\sigma\lvert h\rvert}2$（右端不小于 $\frac\pi2$ 时这一步不需证明）；$u_t$ 与 $H$ 对易，沿轨道 $\sigma$ 不变，相邻两点的夹角都等于这一步的夹角；取 $h=t/N$，沿 $N$ 步用冻结的富比尼—施图迪三角不等式 [`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) 相加。单调性来自 $y\mapsto\arcsin y/y$ 在 $(0,1]$ 上递增。
+
+**文献结果。** 第 4 款的极限形式就是自治纯态的 Mandelstam–Tamm 夹角界（Mandelstam–Tamm 1945；余弦形式见 Fleming 1973）。第 7 章 [@rem-qsl-zeno-literature] 用导数论证给出了同一个界。
+:::
+
+第 3 款说的是：**生成元是弦率，矢高率的极限是生成元平方的一半。** 锁死恒等式 $\Delta_t^*\Delta_t=2v_t$ 在极限中成为 $(-iH)^*(-iH)=2\cdot\frac{H^2}2$。第 4 款说的是：**单步的矢高界加上角度的三角不等式，就是速度极限**，而且在每个有限步数上都有一个精确的界。[@thm-fubini-study-record-time] 把两个正交记录各自的角位移上界 $\mathrm{energy}\cdot\tau/\hbar$ 作为假设；若两个记录态都由同一初态经各自的有限维哈密顿演化在时间 $\tau$ 内得到，且初态在两个哈密顿量下的能量标准差都不超过 $\mathrm{energy}>0$，第 4 款的极限形式就供给了这两条假设。
+
+最后是条件化。E.5 的重置仪器反例说明，单凭玻恩权重定不出测后态，需要可重复与最小扰动。这两条可以合成一句只谈比较的话。
+
+::: {.remark #rem-appe-luders-nearest title="吕德斯态是确定通过检验的对象中比较读数最大者（手工推导与文献结果）"}
+**手工推导。** 设 $P$ 为投影，$\rho$ 为态，$p=\operatorname{tr}(P\rho)>0$。称态 $\eta$ **确定通过检验**，若 $\operatorname{tr}(P\eta)=1$，即 $\eta=P\eta P$；这样的 $\eta$ 再测一次 $P$ 必得同一结果，可重复性自动成立。
+
+1. 纯态 $\rho=\lvert\psi\rangle\langle\psi\rvert$：对 $P$ 的像中的单位向量 $\phi$，$\lvert\langle\psi,\phi\rangle\rvert=\lvert\langle P\psi,\phi\rangle\rvert\le\lVert P\psi\rVert$，等号当且仅当 $\phi$ 与 $P\psi$ 共线。所以在弦距 $\min_\alpha\lVert\psi-e^{i\alpha}\phi\rVert^2=2-2\lvert\langle\psi,\phi\rangle\rvert$ 下，确定通过检验的最近对象是吕德斯向量 $P\psi/\lVert P\psi\rVert$，差一个相位唯一。
+2. 若 $\lVert P\psi\rVert^2=1-\varepsilon$，这一步条件化的矢高 $1-\sqrt{1-\varepsilon}$ 夹在 $\frac\varepsilon2$ 与 $\varepsilon$ 之间。
+3. 混态：在确定通过检验的态中，保真度 $\operatorname{Fid}(\rho,\eta)=\bigl(\operatorname{tr}\lvert\sqrt\rho\sqrt\eta\rvert\bigr)^2$ 的最大值为 $p$，唯一取到者是 $P\rho P/p$。推导：由 Uhlmann 定理（Uhlmann 1976，`文献结果`），$\operatorname{Fid}(\rho,\eta)$ 是 $\rho$ 的一个固定纯化 $\Psi$ 与 $\eta$ 的纯化 $\Phi$ 的重叠模方的最大值，且最大值取到；$\eta=P\eta P$ 使 $\Phi$ 落在 $P\otimes\mathbf{1}$ 的像中，第 1 款给出 $\lvert\langle\Psi,\Phi\rangle\rvert\le\sqrt p$，等号迫使 $\Phi$ 与 $(P\otimes\mathbf{1})\Psi$ 共线，其约化态就是吕德斯态。
+4. 换成迹范数，或在迹为 $1$ 的候选中用希尔伯特—施密特距离，最近者不是吕德斯态。迹范数：$\rho=\frac14\begin{pmatrix}1&0&1\\0&1&1\\1&1&2\end{pmatrix}$，$P=\operatorname{diag}(1,1,0)$，吕德斯态 $\operatorname{diag}(\frac12,\frac12,0)$ 给出 $\lVert\rho-\rho_{\mathrm L}\rVert_1=\frac{1+\sqrt{17}}4$，而确定通过检验的 $\eta=\begin{pmatrix}\frac12&\frac14&0\\\frac14&\frac12&0\\0&0&0\end{pmatrix}$ 给出更小的 $\frac{\sqrt6}2$。希尔伯特—施密特距离：$\rho=\operatorname{diag}(\frac12,\frac14,\frac14)$，吕德斯态 $\operatorname{diag}(\frac23,\frac13,0)$ 的平方距离为 $\frac{14}{144}$，$\operatorname{diag}(\frac58,\frac38,0)$ 为更小的 $\frac{27}{288}$。
+:::
+
+所以 `H6` 中“可重复最小扰动”一项可以说成（`MODEL`）：**条件化后的对象，是确定通过这次检验的对象中，与原对象比较读数最大的那一个。** 读数取保真度时结果恰是吕德斯态，而且唯一。输入并没有消失，只是换了形状：第 4 款说明，换一种读数就换一种更新。条件态的定义与它是态这一事实见冻结定理 [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState)；最优性本身没有冻结声明。
+
+### E.8.7 复合与交换 {#sec-appe-composites-and-exchange}
+
+`H7` 有两项输入：复局域层析，以及交换统计的选择。前者在 [@ex-appe-qubit-cubic-and-tomography] 中以实双比特的计数出现。三种标量的计数可以合成一行。
+
+::: {.remark #rem-appe-tomography-count title="实、复、四元数三种标量的参数计数（手工推导与文献结果）"}
+**手工推导。** 对 $F\in\{\mathbb{R},\mathbb{C},\mathbb{H}\}$，记 $d=\dim_{\mathbb{R}}F\in\{1,2,4\}$。$n$ 阶 $F$-厄米矩阵有 $n$ 个实对角元，每对 $(i,j)$ 有一个 $F$ 中的非对角元，所以实维数为
+
+$$
+K_d(n)=n+d\cdot\frac{n(n-1)}{2}.
+$$
+
+经典情形记 $d=0$，$K_0(n)=n$。直接展开得
+
+$$
+K_d(ab)-K_d(a)\,K_d(b)=\frac{d(2-d)}{4}\,a(a-1)\,b(b-1).
+$$
+
+因此对 $a,b\ge2$，“维数为 $ab$ 的系统的参数个数等于两个局域参数个数之积”当且仅当 $d=0$ 或 $d=2$。$d=1$ 多出 $\frac14a(a-1)b(b-1)$ 个只有全局读数才看得见的参数，$a=b=2$ 时就是 [@ex-appe-qubit-cubic-and-tomography] 的 $J\otimes J$；$d=4$ 比局域参数之积少 $2a(a-1)b(b-1)$ 个。
+
+用比较的语言：每对 $(i,j)$ 上的 $d$ 个实方向中，$1$ 个是求同方向，其余 $d-1$ 个是平方为 $-\mathbf{1}$ 的直角比较方向（`MODEL`）。计数相乘要求非对角处恰有一个直角方向，或者根本没有非对角元。三类矩阵代数的中心分别是 $\mathbb{R}$、$\mathbb{C}$、$\mathbb{R}$（`文献结果`），只有复情形的中心含直角比较；所以在这三类代数内，“计数相乘”与“中心含直角比较”是同一件事。这不是对一般代数的刻画。
+
+积比较 $u_1\otimes u_2$ 的矢高是 $\mathbf{1}-S_1\otimes S_2-A_1\otimes A_2$。实双比特态 $\rho_\pm=\frac14(\mathbf{1}\pm J\otimes J)$ 在一切局域实对称乘积上的读数相同，而对 $u_1=u_2=\cos\theta\,\mathbf{1}+J\sin\theta$，积比较矢高的读数分别为 $0$ 与 $2\sin^2\theta$。说“积比较的矢高读数由局域读数决定”与局域层析等价，但这只是给 $A_1\otimes A_2$ 一项换了名字，并没有推出它。
+
+**文献结果。** 局域层析与复数的关系见 Wootters (1990)、Hardy (2001)、Chiribella–D'Ariano–Perinotti (2011)；四元数情形没有使维数相乘的张量积，上面只比较参数个数，不构造四元数复合系统。复情形 $\dim_{\mathbb{R}}\operatorname{Herm}(n)=n^2$ 是冻结定理 [`hermitian_space_finrank`](lean:D5/S3/Quantum/Entanglement/BipartiteSectorDecomposition.hermitian_space_finrank)。
+:::
+
+交换统计在比较的语言里也有一个干净的位置。
+
+::: {.remark #rem-appe-swap-sagitta title="交换是矢高取 0 与 2 的公平对合；条款 I 去掉标签而不选扇区（手工推导与文献结果）"}
+**手工推导。** 在 $\mathcal{H}\otimes\mathcal{H}$ 上取交换 $\mathrm{SW}(\psi\otimes\phi)=\phi\otimes\psi$。
+
+1. $\mathrm{SW}^*=\mathrm{SW}$，$\mathrm{SW}^2=\mathbf{1}$，所以 $\mathrm{SW}$ 公平且自伴，$S=\mathrm{SW}$，$A=0$，矢高 $v=\mathbf{1}-\mathrm{SW}$ 只取 $0$ 与 $2$，反对称投影是半个矢高：$P_\wedge=\frac12v$。对称扇区上交换是恒等，反对称扇区上是对径。
+2. $\langle\psi\otimes\phi,\mathrm{SW}\,\psi\otimes\phi\rangle=\lvert\langle\psi,\phi\rangle\rvert^2$，故落入反对称扇区的权重为 $\frac12\bigl(1-\lvert\langle\psi,\phi\rangle\rvert^2\bigr)$：交换比较的矢高读数，由两个单体态之间的玻恩权重决定。
+3. 设可观测量都与 $\mathrm{SW}$ 对易。则对一切这样的 $O$ 与一切 $x$，$\langle x,Ox\rangle=\langle P_{\mathrm{Sym}}x,OP_{\mathrm{Sym}}x\rangle+\langle P_\wedge x,OP_\wedge x\rangle$，两扇区之间没有可读的相干。$\psi\otimes\phi$ 与 $\phi\otimes\psi$ 在这些读数下相同；若对象之间只经这些读数比较，条款 I 把它们识别，粒子标签被商掉。但识别之后的对象仍是两扇区的混合，权重 $\frac12\bigl(1\pm\lvert\langle\psi,\phi\rangle\rvert^2\bigr)$。
+
+所以条款 I 去掉标签，不选扇区。$N\ge3$ 时每个对换都是同样的公平对合；以置换为对象、$\mathrm{CMP}(\sigma,\tau)=U(\sigma)^*U(\tau)$ 时，条款 II–IV 对对称群的任何酉表示 $U$ 都成立。例如三个二能级粒子的 $8$ 维空间中，对称扇区 $4$ 维、反对称扇区 $0$ 维、混合对称扇区 $4$ 维。
+
+**文献结果。** 第 2 款即交换测试（Buhrman–Cleve–Watrous–de Wolf 2001）。只取对称群的一维表示是对称化公设（Messiah–Greenberg 1964），自旋与统计的联系来自相对论量子场论（Pauli 1940）；两者都是比较公理之外的输入。
+:::
+
+在这个读法下（`MODEL`），交换统计的选择是“交换矢高为 $2$ 的扇区是否被占据”，它是一个超选择标签，和 `H2` 的签名、`H8` 的光锥一样属于 `T3` 型分岔。
+
+### E.8.8 系综：多点正性与单比特玻恩权重的读数形式 {#sec-appe-ensembles}
+
+到此为止比较只在两个对象之间进行。实验里常做的是另一件事：按概率随机抽一个对象，再拿它去比较。把 $X$ 上有限支撑的概率分布 $E=\sum_kp_k\delta_{x_k}$ 叫作**系综**，两个系综的平均求同读数定义为 $S(E,F)=\sum_{k,l}p_kq_l\,S(x_k,y_l)$（`MODEL`）。再称 $\bar x$ 是 $x$ 的**对立者**，若 $\mathrm{CMP}(x,\bar x)=-\mathbf{1}$，即两者的矢高为 $2$。在条款 II 与条款 IV 下，$\mathrm{CMP}(\bar x,z)=\mathrm{CMP}(\bar x,x)\,\mathrm{CMP}(x,z)=-\mathrm{CMP}(x,z)$，对立者的一切比较都与 $x$ 反号。
+
+::: {.remark #rem-appe-ensemble-positivity title="有对立者时，系综自洽等价于多点格拉姆半正定；没有对立者则不够（手工推导）"}
+**手工推导。** 设条款 II–IV 成立，求同读数是实标量，$S(x,y)=s_{xy}\mathbf{1}$。对系综 $E=\sum_kp_k\delta_{x_k}$ 有 $S(E,E)=p^{\mathsf T}[s_{x_kx_l}]\,p$，即从同一个系综独立抽两个对象时求同读数的平均。
+
+1. 若每个对象都有对立者，则下面两条等价：(a) 每个系综与自身的平均求同读数不为负，$S(E,E)\ge0$；(b) 对每个有限点组，读数表 $[s_{x_ix_j}]$ 半正定。
+2. 在 (b) 之下 $\lvert s_{xy}\rvert\le1$；$s_{xy}=1$ 时 $x$ 与 $y$ 对一切 $z$ 的求同读数相同，$s_{xy}=-1$ 时处处反号。
+3. 没有对立者时，(a) 推不出 (b)。
+
+推导：(b) 推出 (a) 只需取 $\alpha=p$。反过来，任给实向量 $\alpha\neq0$，在 $\alpha_i\ge0$ 处取 $y_i=x_i$，在 $\alpha_i<0$ 处取 $y_i=\bar x_i$，令 $E=\sum_i\frac{\lvert\alpha_i\rvert}{\lVert\alpha\rVert_1}\delta_{y_i}$。由 $s_{\bar xz}=-s_{xz}$，$S(E,E)=\alpha^{\mathsf T}[s_{x_ix_j}]\,\alpha/\lVert\alpha\rVert_1^2$，于是 (a) 给出 (b)。第 2 款：$2\times2$ 子阵 $\begin{pmatrix}1&s\\s&1\end{pmatrix}$ 半正定即 $\lvert s\rvert\le1$；对任意 $z$，把 $\{x,y,z\}$ 上的半正定读数表写成实内积空间中单位向量 $e_x,e_y,e_z$ 的格拉姆阵，$s_{xy}=1$ 时 $\lVert e_x-e_y\rVert^2=2-2s_{xy}=0$，所以 $e_x=e_y$，$s_{xz}=s_{yz}$；$s_{xy}=-1$ 时 $e_x=-e_y$。
+
+第 3 款的例子就是 E.8.1 末段 $(M_2(\mathbb{R}),{}^\sharp)$ 中的三点：$s_{01}=s_{02}=\frac{\sqrt2}{2}$，$s_{12}=-\frac18$，读数表的行列式为 $-\frac{9}{64}$。对非负权重，
+$$
+p^{\mathsf T}Gp=p_0^2+p_1^2+p_2^2+\sqrt2\,p_0(p_1+p_2)-\frac14p_1p_2\ \ge\ p_0^2+\frac78\left(p_1^2+p_2^2\right)>0,
+$$
+所以 (a) 在这三个对象上成立。把对立者 $-x_0,-x_1,-x_2$（仍在 $\mathrm{SL}(2,\mathbb{R})$ 中，$\mathrm{CMP}(x,-x)=-\mathbf{1}$，条款 II–IV 照旧成立）加进对象集，系综 $E=\frac{1}{2+\sqrt2}\left(\sqrt2\,\delta_{\bar x_0}+\delta_{x_1}+\delta_{x_2}\right)$ 给出 $S(E,E)=-\frac{3-2\sqrt2}{8}<0$。双曲点对是同一种情形：$s_{01}=\cosh\eta>1$ 时非负权重给出 $p_0^2+p_1^2+2p_0p_1\cosh\eta>0$；有了对立者，$E=\frac12\left(\delta_{x_0}+\delta_{\bar x_1}\right)$ 给出 $\frac12(1-\cosh\eta)<0$。
+:::
+
+与 [@rem-appe-gram-from-flatness] 第 3 款对照：那里由条款 IV 加正性条件推出 (b)。这里说，要推出 (b)，正性条件也可以换成两句只谈比较对象与读数的话：**每个对象都有一个对立者；从同一个系综独立抽两个对象，它们的平均求同读数不为负。** 这两句并不等价于正性条件。它们仍然容许 $s=\pm1$ 而 $A\neq0$ 的抛物点对：在 [@ex-appe-layer0-countermodels] 反例 (b) 的对偶数中取对象 $\pm1$、$\pm(1+\varepsilon)$，读数只取 $\pm1$，读数表半正定，(a) 成立，正性条件失败。但由第 2 款，这样的两个对象对一切求同读数不可分辨，它们的差别只在求异通道里。被排除的是双曲分支；在洛伦兹读法下（`MODEL`），把一个指向未来的单位类时向量与一个指向过去的混在一起，平均成了类空的，这就是上面的负读数。
+
+同一个“把比较用到系综上”的办法，也给单比特上的 `H5` 换一种说法。
+
+::: {.remark #rem-appe-ensemble-extensionality-born title="系综外延性推出单比特玻恩律，不需要连续性（手工推导与文献结果）"}
+**手工推导。** 沿用 [@rem-appe-born-zonal-minimal-rank] 的设定：制备 $\mathbf{s}$、出口 $\mathbf{r}$ 的概率为 $f(\mathbf{s}\cdot\mathbf{r})$，但 $f:[-1,1]\to\mathbb{R}$ 不要求连续。系综的出口概率按定义取平均，$p(\mathbf{r}\mid E)=\sum_kp_kf(\mathbf{s}_k\cdot\mathbf{r})$；它对探针 $\mathbf{z}$ 的平均求同读数是 $\sum_kp_k\,\mathbf{s}_k\cdot\mathbf{z}=\mathbf{m}_E\cdot\mathbf{z}$，$\mathbf{m}_E$ 是重心。称规则满足**系综外延性**，若对一切探针平均求同读数相同的两个系综，对一切出口的概率也相同；由于 $\mathbf{m}\cdot\mathbf{z}$ 对一切单位向量 $\mathbf{z}$ 决定 $\mathbf{m}$，这就是“出口概率只依赖重心”。则：
+
+$$
+\text{系综外延性}\iff f(t)=a+bt ;
+$$
+
+再加 $f(1)=1$ 与对径归一 $f(t)+f(-t)=1$，即得 $f(t)=\frac{1+t}{2}$。
+
+推导：仿射规则显然满足。反之固定 $\mathbf{r}$。闭单位球中每一点都是某个系综的重心（过该点任作一条弦，两端点按比例加权），由系综外延性 $G(\mathbf{m}):=p(\mathbf{r}\mid E)$（$\mathbf{m}_E=\mathbf{m}$）良定；两个系综按 $\lambda:1-\lambda$ 混合，重心与出口概率都按同一比例组合，所以 $G$ 在球上保持凸组合。令 $h=G-G(0)$，与重心 $0$ 混合得 $h(\lambda\mathbf{m})=\lambda h(\mathbf{m})$（$0\le\lambda\le1$），取中点得 $h\left(\frac{\mathbf{m}+\mathbf{m}'}{2}\right)=\frac12\left(h(\mathbf{m})+h(\mathbf{m}')\right)$；于是 $L(\mathbf{y}):=h(\varepsilon\mathbf{y})/\varepsilon$（$\varepsilon>0$，$\varepsilon\lVert\mathbf{y}\rVert\le1$）与 $\varepsilon$ 无关，可加、正齐次，且由 $h(\varepsilon\mathbf{y})+h(-\varepsilon\mathbf{y})=2h(0)=0$ 是奇的，因而是线性的。这里 $\lambda$ 取遍 $[0,1]$ 中的实数，所以不需要任何连续性。于是 $G(\mathbf{m})=a+\mathbf{b}\cdot\mathbf{m}$，$f(\mathbf{s}\cdot\mathbf{r})=a+\mathbf{b}\cdot\mathbf{s}$ 对一切单位向量 $\mathbf{s}$ 成立。在与 $\mathbf{r}$ 正交的大圆上左端恒为 $f(0)$，$\mathbf{s}$ 与 $-\mathbf{s}$ 同在其上，故 $\mathbf{b}\cdot\mathbf{s}=0$，$\mathbf{b}$ 与 $\mathbf{r}$ 平行，$f(t)=a+\beta t$。
+
+三次规则 $f(t)=\frac12(1+t^3)$ 违反系综外延性：三叉戟 $\{(0,0,1),\,(\mp\frac{\sqrt3}{2},0,-\frac12)\}$ 等权与对径对 $\{\pm\mathbf{e}_z\}$ 等权的重心都是 $0$，向 $\mathbf{e}_z$ 出口的概率分别是 $\frac58$ 与 $\frac12$。同一论证在 $\mathbb{CP}^{d-1}$ 上也成立：读数取 $\lvert\langle x\mid z\rangle\rvert^2=\operatorname{Tr}(P_xP_z)$，平均读数决定密度矩阵，系综外延性给出 $f\bigl(\operatorname{Tr}(PQ)\bigr)=a+\operatorname{Tr}(BP)$；对保持 $Q$ 不动的酉群取平均，$B$ 换成 $\beta Q+\gamma(\mathbf{1}-Q)$，所以 $f$ 仿射，再加 $f(0)=0$、$f(1)=1$ 得 $f(t)=t$。
+
+**文献结果。** 广义概率论把态取为制备的等价类，并把出口概率当作态的仿射函数（Hardy 2001；Barrett 2007）。上面的推导就是这一点在带状规则上的具体化；带状写法与三叉戟反例只是把它接到比较的读数上。
+:::
+
+在这个读法下（`MODEL`），系综外延性是条款 I 用在系综上：把系综当作对象，把平均比较读数当作它的比较行，条款 I 说比较行相同的系综是同一个对象，出口概率作为这个对象的函数便只依赖比较行。与 [@rem-appe-born-zonal-minimal-rank] 相比，它不要连续性，也不要勒让德展开；在连续、对径归一、$f(1)=1$ 之下两者等价，都等价于玻恩律。它仍是输入：条款 I–IV 本身只管单个对象之间的比较，对概率规则没有约束，三次规则与它们都相容。不同的只是，这条输入现在也可以说成条款 I 的一个延伸。
+
+### E.8.9 轨道：一个对象沿时间的比较记录 {#sec-appe-orbit-records}
+
+[@rem-appe-sagitta-continuity] 处理的是一族时间齐次的对象 $x_t$，$\mathrm{CMP}(x_s,x_t)=w(t-s)$。沿用那里的记号：$f(t)=\varphi\bigl(w(t)\bigr)$，$\xi_s=\pi\bigl(w(s)\bigr)\Omega$，$\mathcal{K}=\overline{\operatorname{span}}\{\xi_s\}$，$\langle\xi_r,\xi_s\rangle=f(s-r)$，并设矢高读数在零点连续，从而 $U_t$ 在 $\mathcal{K}$ 上强连续。由 Stone 定理与谱定理（`文献结果`），有自伴的 $H$ 与概率测度 $\mu$（$\Omega$ 在 $H$ 下的能量分布），使 $f(t)=\int e^{-i\lambda t}\,d\mu(\lambda)$，并且 $\mathcal{K}$ 与 $L^2(\mu)$ 酉等价，$\dim\mathcal{K}$ 等于 $\mu$ 的支撑点数。三种读数分别是：求同读数 $\varphi\bigl(S(x_0,x_t)\bigr)=\operatorname{Re}f(t)$，求异读数 $\varphi\bigl(A(x_0,x_t)\bigr)=i\operatorname{Im}f(t)$，以及射线回到原处的玻恩权重 $\lvert f(t)\rvert^2$。对整体相位取最小的矢高读数 $\min_\alpha\bigl(1-\operatorname{Re}(e^{i\alpha}f(t))\bigr)=1-\lvert f(t)\rvert$ 称为**射线矢高**。
+
+按固定步长 $\tau>0$ 采样，样本 $\xi_0,\xi_\tau,\dots,\xi_{(n-1)\tau}$ 的读数表是 $G_{jk}=f\bigl((k-j)\tau\bigr)$，$j,k=0,\dots,n-1$。它的秩由下面的冻结定理计算。
+
+::: {.theorem #thm-appe-prony-hankel-rank title="有限指数和的汉克尔截面，秩等于模式数" lean="D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_hankel_rank"}
+设 $K$ 为域，$m\le n$ 为自然数，节点 $z_1,\dots,z_m\in K$ 两两不同，权重 $w_1,\dots,w_m\in K$ 都不为零。则 $K$ 上的 $n\times n$ 矩阵
+
+$$
+H_{ij}=\sum_{l=1}^{m}w_l\,z_l^{\,i+j},\qquad i,j=0,1,\dots,n-1,
+$$
+
+的秩等于 $m$。
+:::
+
+::: proof
+$H$ 分解为 $V\operatorname{diag}(w)V^{\mathsf T}$，其中 $V_{il}=z_l^{\,i}$ 是 $n\times m$ 的范德蒙德矩阵。这个分解给出秩至多为 $m$；左上角 $m\times m$ 块是两个方阵范德蒙德矩阵与一个对角阵之积，节点两两不同、权重非零使它的行列式不为零，所以秩至少为 $m$。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-appe-orbit-rank-and-recurrence title="轨道读数表的秩数出能级；有限个能级的轨道必定回来（手工推导与文献结果）"}
+**手工推导。** 设 $\mu=\sum_{l=1}^{m}p_l\delta_{\lambda_l}$，$\lambda_l$ 两两不同，$p_l>0$，并设节点 $z_l=e^{-i\lambda_l\tau}$ 两两不同。
+
+1. **秩。** $\operatorname{rank}G=\min(n,m)$。把 $G$ 的行倒排，$G_{n-1-j,\,k}=\sum_l\bigl(p_lz_l^{-(n-1)}\bigr)z_l^{\,j+k}$，正是 [@thm-appe-prony-hankel-rank] 中 $K=\mathbb{C}$、权重为 $p_lz_l^{-(n-1)}\neq0$ 的截面；行倒排不改变秩，所以 $n\ge m$ 时秩为 $m$。$n<m$ 时 $G=V\operatorname{diag}(p)V^*$，$V_{jl}=z_l^{-j}$ 是秩为 $n$ 的 $n\times m$ 范德蒙德矩阵，$\operatorname{diag}(p)$ 正定，所以秩为 $n$。一般的能量分布也可以这样读：对 $\alpha\in\mathbb{C}^n$，$\alpha^*G\alpha=\int\bigl\lvert\sum_j\alpha_je^{-ij\lambda\tau}\bigr\rvert^2d\mu(\lambda)$，括号里是 $e^{-i\lambda\tau}$ 的次数小于 $n$ 的多项式，所以 $G$ 的秩等于 $n$ 与推前测度 $(e^{-i\lambda\tau})_*\mu$ 的支撑点数中较小的一个。
+2. **余项。** 样本 $\xi_{k\tau}$ 在 $\xi_0,\dots,\xi_{(k-1)\tau}$ 张成的空间外有非零正交余项，当且仅当前 $k+1$ 个样本的读数表的秩比前 $k$ 个的大，当且仅当 $k<m$。所以在 $\mathcal{K}$ 中，前 $k$ 个样本张成的 $S_k$ 有 $S_k^\perp\neq\bot$（[`finite_layer_projection_escape`](lean:D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape) 的前提）恰在 $k<m$ 时成立；采样的余项永不枯竭，当且仅当推前测度有无穷多个支撑点。
+3. **回归。** 对每个 $T>0$ 与整数 $Q\ge2$，存在 $t\in[T,\,Q^{m-1}T]$，使射线矢高 $1-\lvert f(t)\rvert\le2\sin^2\frac{\pi}{Q}$；$Q\ge4$ 时这等价于回到原处的玻恩权重 $\lvert f(t)\rvert^2\ge\cos^2\frac{2\pi}{Q}$。推导：对 $m-1$ 个实数 $\alpha_l=(\lambda_l-\lambda_1)T/2\pi$ 用 Dirichlet 同时逼近定理，得整数 $1\le q\le Q^{m-1}$ 使每个 $q\alpha_l$ 到最近整数的距离不超过 $\frac1Q$（鸽笼原理：$Q^{m-1}+1$ 个点 $k\alpha$（$k=0,\dots,Q^{m-1}$）模 $1$ 落入 $Q^{m-1}$ 个边长 $\frac1Q$ 的小方格，取同格两点之差）。取 $t=qT$，则每个 $(\lambda_l-\lambda_1)t$ 与 $2\pi\mathbb{Z}$ 相差不超过 $\frac{2\pi}{Q}\le\pi$，于是
+$$
+\lvert f(t)\rvert\ \ge\ \operatorname{Re}\left(e^{i\lambda_1t}f(t)\right)=\sum_lp_l\cos\bigl((\lambda_l-\lambda_1)t\bigr)\ \ge\ \cos\frac{2\pi}{Q}=1-2\sin^2\frac{\pi}{Q}.
+$$
+对 $m$ 个实数 $\lambda_lT/2\pi$ 同样处理，得 $t\in[T,Q^mT]$ 使矢高读数 $1-\operatorname{Re}f(t)\le2\sin^2\frac{\pi}{Q}$。
+4. **维数证据。** 若对一切 $t\in[T,Q^{m-1}T]$ 都有 $1-\lvert f(t)\rvert>2\sin^2\frac{\pi}{Q}$，则 $\dim\mathcal{K}>m$：否则 $\mu$ 恰有 $m'\le m$ 个原子，第 3 款在 $[T,Q^{m'-1}T]\subseteq[T,Q^{m-1}T]$ 中给出反例。若有 $T$ 与 $\delta>0$ 使 $t\ge T$ 时 $1-\lvert f(t)\rvert\ge\delta$，取 $Q$ 使 $2\sin^2\frac\pi Q<\delta$，上一句对每个 $m$ 都适用，所以 $\dim\mathcal{K}=\infty$。例如能量分布为高斯分布 $N(0,\sigma^2)$ 时 $f(t)=e^{-\sigma^2t^2/2}$，射线矢高趋于 $1$。
+
+**文献结果。** Dirichlet 同时逼近定理（Dirichlet 1842）；离散谱的量子轨道回归（Bocchieri–Loinger 1957）。后者说明第 4 款的条件只是充分的：能量分布有无穷多个原子时轨道照样回来，而 $\dim\mathcal{K}=\infty$。混叠时（例如 $\lambda_2=\lambda_1+2\pi/\tau$）两个能级的节点重合，采样的秩只看到一个。
+:::
+
+所以 `H4` 的“正交余项不竭”有一个只用一个对象沿时间的比较读数说出口的形式：**读数表的秩每多一，就多证明一个能级；射线矢高在某时刻之后始终离开零的对象，所在的态空间不可能是有限维的。** 前一句是等价刻画，后一句是充分条件。它们都没有推出 `H4`：哈密顿量只有有限个能级的模型满足全部条款。
+
+同一份轨道记录还回答了 E.8.6 留下的问题：哈密顿量在多大程度上是读数之外的输入。
+
+::: {.remark #rem-appe-orbit-record-channels title="轨道记录的三种读数各自决定什么：两个通道缺一不可（手工推导与文献结果）"}
+**手工推导。** 记 $\mu^{\mathrm r}(B)=\mu(-B)$ 为能量分布的反射。
+
+1. **全比较读数。** $f$ 决定 $\mu$，进而决定 $(\mathcal{K},H\vert_{\mathcal{K}},\Omega)$ 到酉等价为止。有限维时这一点直接可见：不同 $\lambda$ 的指数函数 $e^{-i\lambda t}$ 线性无关，$f=\sum_lp_le^{-i\lambda_lt}$ 的写法唯一。
+2. **只有求同读数。** $\operatorname{Re}f(t)=\int\cos(\lambda t)\,d\mu$ 只决定对称化 $\frac12(\mu+\mu^{\mathrm r})$，也就是 $\lvert\lambda\rvert$ 的分布。二能级就有反例：$H=\operatorname{diag}(1,2)$ 与 $H'=\operatorname{diag}(1,-2)$，初态 $\frac{1}{\sqrt2}(1,1)$，两者的求同读数都是 $\frac12(\cos t+\cos2t)$，回到原处的玻恩权重却分别是 $\frac12(1+\cos t)$ 与 $\frac12(1+\cos3t)$。
+3. **只有玻恩权重。** $\lvert f(t)\rvert^2=\int\!\!\int e^{-i(\lambda-\lambda')t}\,d\mu(\lambda)\,d\mu(\lambda')$ 只决定 $\mu$ 的自相关。二能级时这已足够定出 $\mu$ 到平移与反射为止：$\mu=p\delta_a+q\delta_b$ 的自相关给出 $pq$、$p^2+q^2$ 与 $\lvert b-a\rvert$。三能级就有真正的歧义：能级 $0,1,2$，布居 $\frac1{12}(1,5,6)$ 与 $\frac1{12}(2,7,3)$，生成多项式 $1+5z+6z^2=(1+2z)(1+3z)$ 与 $2+7z+3z^2=(2+z)(1+3z)$ 只差把根 $-\frac12$ 换成它的倒数 $-2$；两者的玻恩权重都是 $\frac{1}{144}(62+70\cos t+12\cos2t)$，而两个分布既不差一个平移，也不互为反射，求同读数也不同。
+4. **求同读数加玻恩权重。** 对两个都只有有限个能级的分布，两者合起来决定 $\mu$ 到反射为止。推导：$(\operatorname{Im}f)^2=\lvert f\rvert^2-(\operatorname{Re}f)^2$ 已知；若 $f$ 与 $f'$ 给出相同的两种读数，$g=\operatorname{Im}f$、$g'=\operatorname{Im}f'$ 是有限个三角函数之和，实解析，$(g-g')(g+g')\equiv0$，其中一个因子在不可数多个点上为零，因而恒为零。所以 $f'=f$ 或 $f'=\bar f$，后者就是 $\mu'=\mu^{\mathrm r}$，即 $H\mapsto-H$ 的时间反演。
+
+**文献结果。** Stone 定理、谱定理与 Bochner 定理；一维相位恢复的翻根歧义（Walther 1963；Hofstetter 1964）与同度量集（Patterson 1944；Rosenblatt–Seymour 1982）。
+:::
+
+E.8.6 的台账把哈密顿量 $H$ 记为仍需输入。这一条注记把这句话说得更准：**在轨道张成的空间上，$H$ 不是读数之外的另一个输入，两个通道的完整轨道记录决定它到酉等价为止。** 只读求同通道，丢掉的不止时间取向，连每个能级的符号都丢了；只读射线的玻恩权重，三能级就出现真正的歧义；求同读数与玻恩权重合起来，剩下的恰是求异通道的整体符号，也就是时间反演。条款 II 把比较拆成求同与求异两个通道，在动力学上两个通道都不可省。仍然是输入的，是选哪条轨道，以及 $H$ 在 $\mathcal{K}$ 之外怎样作用。
+
+### E.8.10 台账改了什么 {#sec-appe-reduced-ledger}
+
+::: {.remark #rem-appe-reduced-ledger title="E.8 之后的台账（对 [@rem-appe-master-audit-table] 的补充）"}
+**补充审计（`MODEL` + `手工推导`，定理盒部分对应冻结定理）。** 下表只列发生变化的条目；`H1`、`H9` 的处理机制与 [@rem-appe-master-audit-table] 相同。
+
+| 条目 | 原处理 | E.8 中的处理 | 依据 |
 | :--- | :--- | :--- | :--- |
 | `H2` 正自配对 | 显式的第 1 层标定 | 由条款 IV 推出 | [@rem-appe-anchoring-consequences] 第 1 款 |
 | `H2` 椭圆负平方 | `T3` 分岔 | 求同读数为实标量时由正性条件推出；此时正性条件对每个比较的求异部分等价于它的整数次幂有界；非标量时不成立 | [@rem-appe-involution-positivity]、[@rem-appe-bounded-recurrence] |
-| `H2` 多点格拉姆半正定 | 显式的第 1 层条件 | 由条款 IV 加正泛函推出，逆向成立；标量相似时由条款 IV 加正性条件推出；偏离平坦时有定量下界 | [@thm-appe-chordal-gain-potential]、[@rem-appe-gram-from-flatness]、[@rem-appe-near-flat-gram-bound] |
+| `H2` 多点格拉姆半正定 | 显式的第 1 层条件 | 由条款 IV 加正泛函推出，逆向成立；标量相似时由条款 IV 加正性条件推出；标量相似且每个对象有对立者时，等价于每个系综与自身的平均求同读数不为负，没有对立者则不够；偏离平坦时有定量下界 | [@thm-appe-chordal-gain-potential]、[@rem-appe-gram-from-flatness]、[@rem-appe-ensemble-positivity]、[@rem-appe-near-flat-gram-bound] |
 | `H3` 平行四边形极化 | `T2` 条件 | 弦距来自正泛函的 GNS 内积，输入由“内积”换成“正读数”；完备化仍为 `T1` | [@rem-appe-gram-from-flatness] 第 2 款 |
-| `H5` 玻恩权重 | `T2` 可加性条件 | 只对只依赖两两比较的规则：$d\ge3$ 时有界、在每组正交归一基上归一且 $f(1)=1$ 就定出玻恩律；$d=2$ 时对连续规则，全效应可加性可以换成“对径归一、$f(1)=1$、层析秩最小”；仍是 `T2` 输入 | [@rem-appe-born-zonal-minimal-rank] |
+| `H4` 正交余项不竭 | `T2/T4` 输入 | 对一个时间齐次对象：采样读数表的秩等于采样所见的能级数，余项永不枯竭当且仅当所见能级无穷；有限个能级的轨道必定回来，有限时长内射线矢高始终高于阈值给出维数下界，此后始终离开零推出轨道空间无穷维；仍是输入 | [@thm-appe-prony-hankel-rank]、[@rem-appe-orbit-rank-and-recurrence] |
+| `H5` 玻恩权重 | `T2` 可加性条件 | 只对只依赖两两比较的规则：$d\ge3$ 时有界、在每组正交归一基上归一且 $f(1)=1$ 就定出玻恩律；$d=2$ 时对连续规则，全效应可加性可以换成“对径归一、$f(1)=1$、层析秩最小”，也可以不要连续性而换成系综外延性（`MODEL` 下读作条款 I 用于系综）；仍是 `T2` 输入 | [@rem-appe-born-zonal-minimal-rank]、[@rem-appe-ensemble-extensionality-born] |
 | `H8` 洛伦兹签名 | `T3` 分岔 | 可与 `H2` 的签名分岔读作同一处取舍（`MODEL`） | E.8.1 末段 |
-| `H8` 第 1 层射影和乐 | 第 1 层内生 | 在 $\mathcal{Cl}_{3,0}$ 中由半比较的三点和乐给出闭式 | [@rem-appe-half-comparison-holonomy] |
+| `H8` 第 1 层射影和乐 | 第 1 层内生 | 在 $\mathcal{Cl}_{3,0}$ 中由半比较的三点和乐给出闭式；其泡利矩阵模型中的乘积公式与返回相位已冻结 | [@rem-appe-half-comparison-holonomy]、[@thm-appe-bloch-triangle-return-phase] |
+| `H6` 双侧可逆 | `T2` 条件 | 单侧公平的亏损是投影，单侧移位作为比较值违反条款 III；但它可作为满足条款 I–IV 与正性条件的模型中的诱导演化出现，代数带忠实迹也不排除；过去完备或态空间有限维各自充分 | [@rem-appe-one-sided-fairness]、[@ex-appe-bilateral-shift-model] |
+| `H6` 强连续 | `T2` 条件 | 时间齐次族上等价于矢高读数在零点连续；只要求可测不够；有限维中由此接上 [@thm-calibrated-unitary-group] | [@rem-appe-sagitta-continuity] |
+| `H6` 生成元 | `T4` 输入 $H$ | 弦率趋于 $-iH$，矢高率趋于 $H^2/2$，均有显式误差；有限步速度界；在轨道张成的空间上，两个通道的轨道记录决定 $H$ 到酉等价为止，只用求同读数或只用玻恩权重都不够（二能级与三能级反例）；轨道的选取与 $H$ 在轨道外的作用仍是输入 | [@rem-appe-generator-chord-sagitta]、[@rem-appe-orbit-record-channels] |
+| `H6` 吕德斯条件化 | `T2` 条件 | 吕德斯态是确定通过检验者中保真度最大者，且唯一；迹范数与迹为 $1$ 的希尔伯特—施密特距离不给出吕德斯态；所用读数仍是输入 | [@rem-appe-luders-nearest] |
+| `H7` 局域层析与交换统计 | `T2` + `T3` | 参数计数 $K_d(ab)-K_d(a)K_d(b)=\frac{d(2-d)}4a(a-1)b(b-1)$；交换是矢高取 $0$ 与 $2$ 的公平对合，条款 I 去掉标签而不选扇区；中心复结构与扇区选择仍是输入 | [@rem-appe-tomography-count]、[@rem-appe-swap-sagitta] |
 
 新增的两条输入是条款 IV（[@def-appe-third-point-redundancy]）与正性条件（[@rem-appe-involution-positivity]）；求同读数不是实标量时，读数表的半正定另需一个正泛函。条款 IV 不必对一切三点成立：可比三角形填满每个圈就够了，而且对一切群而言这是恰好够的条件（[@rem-appe-triangle-simple-connectivity]）。条款 IV 排除一切全比较的和乐，它刻画的是第 1 层的平坦骨架；带真实曲率的第 2 层联络必须放弃它，那时 [@thm-appe-chordal-gain-potential-stability] 与 [@rem-appe-near-flat-gram-bound] 给出偏离的代价。
+
+E.8.6 与 E.8.7 不增加新的条款：`H6` 的可逆与连续两项各有一个只谈对象与读数的充分条件（过去完备、矢高读数在零点连续），条件化换成一条最优化原理，`H7` 有了一行计数公式；这些条件仍是输入。
+
+E.8.8 与 E.8.9 同样不增加新的条款。E.8.8 把比较用到系综上：要推出读数表半正定，正性条件可以换成“每个对象有对立者，系综与自身的平均求同读数不为负”，后者仍容许的只有对一切求同读数不可见的抛物点对；单比特上的玻恩律可以由系综外延性推出。E.8.9 读一个对象的轨道：`H4` 有了可在有限步上检验的读数形式，`H6` 的 $H$ 在轨道空间上可以从两个通道的记录中读出。
 :::
 
 这一节没有减少输入的总数到零，它改变的是输入的形状：在求同读数为实标量的情形，`H2` 的三项原先是关于自配对、双向量与格拉姆矩阵的三条几何陈述，现在换成两条只用比较本身就能说出口的条件。一条说第三者不改变两者之比，一条说差异的往返留下正的痕迹。

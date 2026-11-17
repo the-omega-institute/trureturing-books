@@ -6854,6 +6854,185 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "uniform-field-observer-slice-sandbox",
+      "code": "UNIFORM//SLICE",
+      "title": "UNIFORM//SLICE · 均匀各向同性三维场本体与观察者观测切面显影沙盘",
+      "title_en": "UNIFORM//SLICE · Uniform Isotropic 3D-Field Ontology & Observer Slice Manifestation",
+      "summary": "5 × 5 × 5 = 125 个银白格点各与观察者寄存器里的一个比特配成贝尔对：整体是纯态（S = 0），每个格点的边缘却处处是同一个 ½·1（Tr ρ = 1、‖∇ρ‖ = 0）。本体透镜里任何切面都只读到 Tr(½·1·P) = ½；切面透镜经观察者寄存器条件化，观察者的格相对本体格转过 θ，取两者的角平分面作切面：I = cos²ΔΦ = (1 + cos(Δk·x − φ))/2，莫尔周期 L_M = a/(2 sin(θ/2))（θ = 36° 时 1.618a，θ = 1.05° 时 54.568a）。扫相让条纹滑过而格点位移为 0；与切面正交的品红暗环在切面上的衬度 I_EM(90°) = 0，却分走钟预算 dτ/dt = √(1 − η_slice² − η_dark²)；孔径放大到 W = 20 格，衬度降到 0.0486。五张实验卡可独立引用。",
+      "summary_en": "125 silver nodes on a 5 × 5 × 5 lattice, each paired into a Bell pair with a qubit of the observer register: pure as a whole (S = 0), yet every node has the same marginal ½·1 (Tr ρ = 1, ‖∇ρ‖ = 0). In the ontology lens every slice reads Tr(½·1·P) = ½; the slice lens conditions on the observer register, whose lattice is the field lattice turned by θ, and cuts along the bisector plane of the two: I = cos²ΔΦ = (1 + cos(Δk·x − φ))/2 with moiré period L_M = a/(2 sin(θ/2)) (1.618a at θ = 36°, 54.568a at θ = 1.05°). The phase sweep glides the fringes while the nodes move by 0; the magenta dark ring orthogonal to the slice shows contrast I_EM(90°) = 0 on it yet draws on the clock budget dτ/dt = √(1 − η_slice² − η_dark²); an aperture of W = 20 cells brings the contrast down to 0.0486. Five independently citable experiments.",
+      "path": "uniform-field-observer-slice-sandbox/",
+      "thumbnail": "uniform-field-observer-slice-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-17",
+      "chapter": 39,
+      "section": "39.12",
+      "presets": [
+        "isotropic-singlet-ontology",
+        "tilted-slice-moire-emergence",
+        "phase-sweep-motionless-flow",
+        "orthogonal-dark-sector-clock-load",
+        "horizon-aperture-homogenization"
+      ],
+      "preset_titles": {
+        "isotropic-singlet-ontology": {
+          "zh": "125 个格点全是同一个 ½·1",
+          "en": "All 125 nodes carry the same ½·1"
+        },
+        "tilted-slice-moire-emergence": {
+          "zh": "切面转过 θ，莫尔条纹显影",
+          "en": "Turn the slice by θ: moiré fringes appear"
+        },
+        "phase-sweep-motionless-flow": {
+          "zh": "条纹滑过，格点不动",
+          "en": "The fringes glide, the nodes stay put"
+        },
+        "orthogonal-dark-sector-clock-load": {
+          "zh": "正交暗环：切面上看不见，却分走钟预算",
+          "en": "The orthogonal dark ring: unseen, yet it loads the clock"
+        },
+        "horizon-aperture-homogenization": {
+          "zh": "孔径放大，条纹抹平回 ½",
+          "en": "Widen the aperture: the fringes average back to ½"
+        }
+      },
+      "tags": [
+        "均匀场本体",
+        "贝尔边缘 ½·1",
+        "观察者切面",
+        "莫尔条纹",
+        "正交暗区",
+        "孔径平均"
+      ],
+      "tags_en": [
+        "Uniform field ontology",
+        "Bell marginal ½·1",
+        "Observer slice",
+        "Moiré fringes",
+        "Orthogonal dark sector",
+        "Aperture averaging"
+      ],
+      "theory": [
+        {
+          "label": "39.12 均匀场本体与观察者切面：贝尔边缘 ½·1、半角莫尔条纹、正交暗区与孔径平均",
+          "label_en": "39.12 The Uniform Field Ontology and the Observer Slice: the Bell Marginal ½·1, Half-Angle Moiré Fringes, the Orthogonal Dark Sector and Aperture Averaging",
+          "href": "../zh/ch39-s12-uniform-field-and-observer-slice.html#sec-ch39-uniform-field-and-observer-slice",
+          "href_en": "../en/ch39-s12-uniform-field-and-observer-slice.html#sec-ch39-uniform-field-and-observer-slice"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"
+        },
+        {
+          "gid": "D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "indra-net-single-particle-sandbox",
+      "code": "INDRA//NET",
+      "title": "INDRA//NET · 因陀罗网：唯一宇宙场、单粒子折叠与全息互映沙盘",
+      "title_en": "INDRA//NET · Indra's Net: Single Cosmic Field, One-Particle Folding & Holographic Reflection",
+      "summary": "13 颗同样的受光宝珠排成二十面体网（中心 1 颗、外层 12 颗），每颗的纤维都是同一个有限维空间 H_x ≅ H_y ≅ H_field。点一颗宝珠让它当主珠：琥珀圈换了位置，宝网不动，二十面体转动 g 与酉阵 U = BA⁺ 把两种标号对上；主珠的球镜映出其余 12 颗，近轴的像清晰（cos²θ → 1），边缘的像被压扁（cos²θ → 0）。一根闭合的惠勒丝带走遍 12 颗外层宝珠，与此刻的切面 Σ_now 相交成 6 个正负相间的结，Σq = 0，它在 GF(2) 上恰是 10 个面的边界。反射迭代 Ψ⁽ᵐ⁾ = cos(K_εΨ⁽ᵐ⁻¹⁾) 以 sin θ* = 0.673612 的比收敛到处处等于 θ* = 0.739085 的场，13 种主珠的极限相同；主珠的读字只张成 4 维（中心 2 维），其余是残差。宇宙缩放把可观测宇宙（R_obs/ℓ_P ≈ 2.72 × 10⁶¹）收成外面的一颗宝珠。五张实验卡可独立引用。",
+      "summary_en": "Thirteen identical lit jewels on an icosahedral net (one at the centre, twelve outside), each fibre the same finite-dimensional space, H_x ≅ H_y ≅ H_field. Click a jewel to make it the chief: the amber ring moves while the net stays, and an icosahedral rotation g with the unitary U = BA⁺ matches the two labellings; the spherical mirror of the chief shows the other twelve, clear near the axis (cos²θ → 1) and squashed at the limb (cos²θ → 0). One closed Wheeler ribbon visits the twelve outer jewels and meets the slice of now, Σ_now, in six knots of alternating sign, Σq = 0; over GF(2) it is exactly the boundary of ten faces. The reflection iteration Ψ⁽ᵐ⁾ = cos(K_εΨ⁽ᵐ⁻¹⁾) converges at ratio sin θ* = 0.673612 to the field equal to θ* = 0.739085 everywhere, the same limit for all thirteen chiefs; the word of the chief spans only 4 dimensions (2 for the centre), the rest is residual. The cosmic zoom closes the observable universe (R_obs/ℓ_P ≈ 2.72 × 10⁶¹) into one outer jewel. Five independently citable experiments.",
+      "path": "indra-net-single-particle-sandbox/",
+      "thumbnail": "indra-net-single-particle-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-17",
+      "chapter": 39,
+      "section": "39.13",
+      "presets": [
+        "yoneda-isomorphic-jewel-net",
+        "wheeler-single-ribbon-knots",
+        "spherical-mirror-limb-foreshortening",
+        "dottie-infinite-reflection-convergence",
+        "observable-cosmos-single-jewel"
+      ],
+      "preset_titles": {
+        "yoneda-isomorphic-jewel-net": {
+          "zh": "13 颗同样的宝珠：主伴互换，宝网不动",
+          "en": "Thirteen identical jewels: chief and retinue swap, the net stays"
+        },
+        "wheeler-single-ribbon-knots": {
+          "zh": "一根闭合丝带穿过切面，打出 6 个正负相间的结",
+          "en": "One closed ribbon pierces the slice in six alternating knots"
+        },
+        "spherical-mirror-limb-foreshortening": {
+          "zh": "球镜：近轴清晰，边缘压扁",
+          "en": "A spherical mirror: clear near the axis, squashed at the limb"
+        },
+        "dottie-infinite-reflection-convergence": {
+          "zh": "反射再反射，收敛到 θ* = 0.739085",
+          "en": "Reflections of reflections converge to θ* = 0.739085"
+        },
+        "observable-cosmos-single-jewel": {
+          "zh": "可观测宇宙收成外面的一颗宝珠",
+          "en": "The observable cosmos closes into one outer jewel"
+        }
+      },
+      "tags": [
+        "因陀罗网",
+        "唯一宇宙场",
+        "主伴互换",
+        "惠勒丝带",
+        "余弦不动点",
+        "球镜清晰度"
+      ],
+      "tags_en": [
+        "Indra's net",
+        "One cosmic field",
+        "Chief and retinue",
+        "Wheeler ribbon",
+        "Cosine fixed point",
+        "Mirror clarity"
+      ],
+      "theory": [
+        {
+          "label": "39.13 唯一宇宙场与因陀罗网：宝珠互映、惠勒单粒子丝带、余弦不动点与可观测宇宙的一颗宝珠",
+          "label_en": "39.13 One Cosmic Field and Indra's Net: Mutually Mirroring Jewels, the Wheeler One-Particle Ribbon, the Cosine Fixed Point and the Observable Universe as One Jewel",
+          "href": "../zh/ch39-s13-single-cosmic-field-and-indra-net.html#sec-ch39-single-cosmic-field-and-indra-net",
+          "href_en": "../en/ch39-s13-single-cosmic-field-and-indra-net.html#sec-ch39-single-cosmic-field-and-indra-net"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual"
+        },
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        },
+        {
+          "gid": "D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
