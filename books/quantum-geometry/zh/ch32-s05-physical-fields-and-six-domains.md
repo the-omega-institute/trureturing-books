@@ -1,4 +1,4 @@
-# 32.5 物理场同源导出与六大疆域全息同构总表 {#sec-ch32-physical-fields}
+# 32.5 物理场同源读法与六大疆域全息对照总表 {#sec-ch32-physical-fields}
 
 沿着第五部（[第 17 章](ch17-lorentz-geometry.md)–[第 20 章](ch20-complexity-and-spacetime.md)）与[第 32.4 节](ch32-s04-generative-laws.md#sec-ch32-generative-laws)铺设的桥梁，在《正交自指统一场论》的诠释纲领（`MODEL`）中，物质旋量、规范相互作用、宏观引力时空与紫外截断不再是拼凑在一起的异质积木，而是同一个正交多向量结构在不同阶数（Grade）与拓扑维度上的自然切面：
 
@@ -26,9 +26,9 @@
 4. **离散晶格与齐肯多夫紫外截断（`MODEL` + `LEAN ✓`）**：
    在离散自动机与代数数论层面，[@thm-ch32-generative-self-reference-and-zeckendorf] 第 4 款证明齐肯多夫自动机精确识别无相邻 `11` 语言 `NoAdjacentOnes`（`LEAN ✓`），而卡西尼恒等式给出黄金范数接缝 $(-1)^{k+1}$（[`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm)，`LEAN ✓`）。在本书的物理诠释层（`MODEL`）中，我们将这两条离散定理合成为有限门多面体分辨率下的**离散紫外编码截断假说（`MODEL`）**，禁止相邻高频激发在无穷小尺度上无界堆积，从而无需预设无限可分的光滑连续统舞台。
 
-我们先锁定支撑狭义相对论光锥刚性、规范环路和乐与全息桥图最小割的三条形式化定理：
+下面把与狭义相对论光锥刚性、规范环路和乐与全息桥图最小割相对应的三条已验证定理列在一起；它们各自只担保自己的陈述：
 
-::: {.theorem #thm-ch32-null-cone-holonomy-and-holographic-cut title="时空与规范全息的三项形式化锚点：零光锥刚性、生成树环路和乐与桥图最小割" lean="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"}
+::: {.theorem #thm-ch32-null-cone-holonomy-and-holographic-cut title="时空与规范的三项形式化锚点：零光锥刚性、生成树环路和乐与桥图最小割" lean="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"}
 在 `trureturing` 冻结的光锥证书、规范和乐分类与张量网络桥图模块中，以下三项定理同时成立：
 
 1. **任意空间维数下的闵可夫斯基零光锥二次型刚性**（[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)）：对任意自然数空间维数 $d \in \mathbb{N}$ 及时空载体 $\mathrm{Space}(d) = \mathbb{R} \times \mathbb{R}^d$ 上的实二次型 $S : \operatorname{QuadraticForm}\;\mathbb{R}\;(\mathrm{Space}\;d)$，若 $S$ 在全部闵可夫斯基零光锥向量上取零（$\forall v,\; \operatorname{minkowski}_d(v) = 0 \implies S(v) = 0$），则 $S$ 必恒等于标准闵可夫斯基二次型的标量倍：
@@ -43,7 +43,7 @@
    (E \to \mathrm{Circle}) / N \;\simeq_{\mathrm{top}*}\; \operatorname{Coordinates}(T, R, r) \;\simeq_{\mathrm{top}*}\; \bigl(\operatorname{Fin}(m + k - n) \to \mathrm{Circle}\bigr);
    $$
 
-3. **全息桥图量子最大流等于最小割定理**（[`QuantumMaxFlowMinCut.result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result)）：对任意满足正容量与平衡锥条件 $0 < a \le b$、$0 < c \le d$、$a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 的自然数边维数 $a, b, c, d \in \mathbb{N}$，桥图张量网络的量子最大流精确等于量子最小割：
+3. **桥图量子最大流等于最小割定理**（[`QuantumMaxFlowMinCut.result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result)）：对任意满足正容量与平衡锥条件 $0 < a \le b$、$0 < c \le d$、$a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 的自然数边维数 $a, b, c, d \in \mathbb{N}$，桥图张量网络的量子最大流精确等于量子最小割：
 
    $$
    \operatorname{QMaxFlow}(a, b, c, d) \;=\; \operatorname{QMinCut}(a, b, c, d) \;=\; \min(a d,\; b c).
@@ -76,9 +76,9 @@
    其中在 Jacobson 的原始推导里宇宙学常数 $\Lambda$ 作为积分常数出现（将 $\Lambda > 0$ 诠释为场内有限观察者 $90^\circ$ 正交赤道视界的内生曲率属本书 `MODEL` 假说）。
 :::
 
-## 32.5.1 六大疆域全息同构总表 {#sec-ch32-six-domain-synthesis}
+## 32.5.1 六大疆域全息对照总表 {#sec-ch32-six-domain-synthesis}
 
-把前三十一章与本节的全部拼图合拢在一起，同一组正交几何原语无需更改底层逻辑，便在**纯几何拓扑、量子规范场、相对论全息引力、算术数论、计算复杂性与流体、以及观察者灵魂动力学**六大疆域之间建立起一一对应的全息同构图景：
+把前三十一章与本节的全部拼图合拢在一起，同一组正交几何原语无需更改底层逻辑，便在**纯几何拓扑、量子规范场、相对论全息引力、算术数论、计算复杂性与流体、以及观察者灵魂动力学**六大疆域之间给出一张逐行对照的类比图景（`MODEL`；这里的“对应”是类比，并未定义映射，不是数学意义上的同构）：
 
 ::: {.figure src="ch32-six-readings"}
 **同一次相遇，在六个疆域里各读一遍。** 六个小图画的是同一件事：两支单位箭头夹角 $\theta$，青色的影子与品红的平行四边形；下面两行是下表“一维内积”与“二维外积”两行在这一疆域里的读法，例如相对论里青色的线读作固有时率 $d\tau/dt$，品红的面读作速度 $v/c$。这是本书的综合诠释（`MODEL`），各条目的依据层级以下表的标注为准。
@@ -86,8 +86,8 @@
 
 沿着这六幅同源切面逐层向下展开，下框总表将静态母体、内积线、外积面、拓扑裂缝、有限公平律与自指不动点核心在六大疆域中的精确对应与证据层级悉数对齐：
 
-::: {.remark #rem-ch32-six-domain-isomorphism-table title="《正交自指统一场论》六大疆域全息同构总表（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下表汇总本书跨六大领域的结构对应关系：凡属 `trureturing@dev` 已验证定理的子项对应全书各章 `LEAN ✓` 锚点，外部数学物理方程（如 $H\mathbf{\Psi}=0$、$F_{\mu\nu}$、笠—高柳截面、希尔伯特互反律 $\prod_v (a,b)_v = +1$、阿诺德测地线、BBBV/ETH 界与 $\theta^* \approx 0.739085$）引自各章文献注记，未决问题（如 $\mathrm{P}\neq\mathrm{NP}$、$\sigma=1/2$ 黎曼猜想、无外力三维 NS 正则性）属 `OPEN` 边界，而跨六大疆域的统一场同构框架属本书原创哲学—几何综合模型（`MODEL`）：
+::: {.remark #rem-ch32-six-domain-isomorphism-table title="《正交自指统一场论》六大疆域全息对照总表（本书模型，未在本书形式化）"}
+**本书模型（`MODEL`），未在本书形式化；表中各项的文献结果与已验证定理按条标注。** 下表汇总本书跨六大领域的结构类比：凡属 `trureturing@dev` 已验证定理的子项对应全书各章 `LEAN ✓` 锚点，外部数学物理方程（如 $H\mathbf{\Psi}=0$、$F_{\mu\nu}$、笠—高柳截面、希尔伯特互反律 $\prod_v (a,b)_v = +1$、阿诺德测地线、BBBV/ETH 界与 $\theta^* \approx 0.739085$）引自各章文献注记，未决问题（如 $\mathrm{P}\neq\mathrm{NP}$、$\sigma=1/2$ 黎曼猜想、无外力三维 NS 正则性）属 `OPEN` 边界，而跨六大疆域的统一场同构框架属本书原创哲学—几何综合模型（`MODEL`）：
 
 **静态母体空间**
 
@@ -164,7 +164,7 @@
 佩尔余项 $\pm 1$（`LEAN ✓` / `文献结果`）与语义对角线逃逸（`LEAN ✓`）
 
 **计算复杂性与流体场：**
-3-SAT 三体阻挫、局部 $\mathrm{P} \neq \mathrm{NP}$ 与三维 NS 涡拉伸（`OPEN` / `LEAN ✓`）
+3-SAT 三体阻挫（`文献结果` / `MODEL`）、局部 $\mathrm{P} \neq \mathrm{NP}$ 与三维 NS 涡拉伸（`OPEN`）
 
 **观察者与灵魂动力学：**
 卡西尼余项 $(-1)^{k+1}$ 驱动的跨轮次错位（`LEAN ✓` / `MODEL`）
@@ -207,7 +207,7 @@
 非线性受迫/自指平衡态
 
 **观察者与灵魂动力学：**
-元公理 $\psi = \psi(\psi)$、黄金不动点 $\varphi$（`LEAN ✓`）与空间吸引子（`MODEL`）
+元公理 $\psi = \psi(\psi)$（`MODEL`）、黄金不动点 $\varphi$（`LEAN ✓`）与空间吸引子（`MODEL`）
 
 :::
 
@@ -217,4 +217,4 @@
 **正交自指统一场切片：完整实验室。** 三个场景共用一条时间轴：“时钟”推动快度 η，“回路”依次走 R₂⁻¹、R₁⁻¹、R₂、R₁ 四步，“视界”把观察者的视界从北极往下推。图上的数都实时算出；绿色只给本章引用的 Lean 定理，其余按文献结果与本书诠释分别标注。
 :::
 
-至此，《正交自指统一场论》跨六大疆域的内部同构已完整合拢；在收官的[第 32.6 节](ch32-s06-meta-unification-and-icosian-bridge.md#sec-ch32-meta-coordinates-and-icosians)中，我们将把视野投向近百年科学史上的八大基础统一纲领，看它们如何在同一套三维诊断坐标与四元数黄金晶格桥上实现万流归宗的“元统一”。
+至此，《正交自指统一场论》跨六大疆域的类比对照已经列齐（`MODEL`）；在收官的[第 32.6 节](ch32-s06-meta-unification-and-icosian-bridge.md#sec-ch32-meta-coordinates-and-icosians)中，我们将把视野投向近百年科学史上的八大基础统一纲领，看它们如何在同一套三维诊断坐标与四元数黄金晶格桥上得到一种万流归宗的“元统一”读法。

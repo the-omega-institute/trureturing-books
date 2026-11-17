@@ -31,10 +31,10 @@ $$
 **公平平方：青色的同² 加上品红的楔²，楔积垫出测不准下界。** 拖动琥珀色的向量 $v$ 与 $u$ 比量，右图把比较 $\bar{u}v$ 画成横轴为同、纵轴为楔的一点：$|u|^2|v|^2$ 恒拆成青色的同² 加品红的楔²，非零楔积像交换子一样垫在 $|u||v|$ 下方（绿色 `LEAN ✓` 锚定 `lagrange_gram_identity` 与 `robertson_schrodinger`）。
 :::
 
-- **（二）三维空间与几何距离：比较相似度矩阵的半正定嵌入**。宇宙起初并无预设的 $(x, y, z)$ 铁盒子，只有一族对象两两比较留下的内积相似度表 $G_{ij} = \mathbf{A}_i\cdot\mathbf{A}_j$。根据勋伯格半正定嵌入定理（Schoenberg 1935，文献结果，见 [@rem-ch32-comparison-axiom-literature]），只要相似度矩阵满足第 1 层半正定条件 $G \succeq 0$，它就自动在欧氏空间中凝结出弦距度规 $d_{ij} = \sqrt{2(1 - G_{ij})}$——“离得近”不过是两两比较经常一致，“离得远”不过是两两比较正交分叉。需特别注意一处算术几何事实：若取 $\{\pm 1\}^8/\sqrt{8}$ 中的 $8$ 个单位二元字并将 $8$ 个坐标槽位分组投影至秩 $3$ 子空间，因 $3 \nmid 8$，三组槽位数不可能均等，故槽位分组二元字绝不可能张成等边正方体；下方交互舞台选取最均衡的 **`3-3-2` 槽位分桶**（`BOX = [0,1,2,0,1,2,0,1]`），在三维空间中张成半轴长平方为 $(\frac{3}{8}, \frac{3}{8}, \frac{2}{8})$ 的**三维直角八角长方盒（三维八角盒）**。
+- **（二）三维空间与几何距离：比较相似度矩阵的半正定嵌入**。宇宙起初并无预设的 $(x, y, z)$ 铁盒子，只有一族对象两两比较留下的内积相似度表 $G_{ij} = \mathbf{A}_i\cdot\mathbf{A}_j$。根据勋伯格半正定嵌入定理（Schoenberg 1935，文献结果，见 [@rem-ch32-comparison-axiom-literature]），只要相似度矩阵满足第 1 层半正定条件 $G \succeq 0$，它就自动在欧氏空间中凝结出弦距度规 $d_{ij} = \sqrt{2(1 - G_{ij})}$——“离得近”不过是两两比较经常一致，“离得远”不过是两两比较正交分叉。需特别注意一处算术几何事实：若取 $\{\pm 1\}^8/\sqrt{8}$ 中的 $8$ 个单位二元字并将 $8$ 个坐标槽位分组投影至秩 $3$ 子空间，因 $3 \nmid 8$，三组槽位数不可能均等，故槽位分组二元字绝不可能张成等边正方体；下方交互舞台选取最均衡的 **`3-3-2` 槽位分桶**（`BOX = [0,1,2,0,1,2,0,1]`），在三维空间中张成半轴长平方为 $(\frac{3}{8}, \frac{3}{8}, \frac{2}{8})$ 的**三维直角八角长方盒（三维八角盒）**。这里的“三维”来自人为选定的三组分桶，不是由比较本身推出的；勋伯格定理给出的嵌入维数是 $\operatorname{rank} G$。
 
 ::: {.viz src="comparison-oisc-engine" preset="emergence" height="520"}
-**二十八次两两比较显影出三维八角盒。** 八个八槽单位字按均衡 `3-3-2` 槽位分桶逐对揭开半正定格拉姆表 $G = WW^{\mathsf{T}}$，经谱分解自动显影出半轴长平方为 $(3/8, 3/8, 2/8)$ 的三维八角长方盒（因 $3\nmid 8$ 无等分三轴故不可能为正方体），弦距满足 $d_{ij}^2 = 2(1-G_{ij})$（正算子格拉姆分解标 `LEAN ✓`，勋伯格嵌入定理标 `ARGUED`）。
+**二十八次两两比较在 `3-3-2` 分桶下显影出三维八角盒。** 八个八槽单位字按均衡 `3-3-2` 槽位分桶逐对揭开半正定格拉姆表 $G = WW^{\mathsf{T}}$，经谱分解自动显影出半轴长平方为 $(3/8, 3/8, 2/8)$ 的三维八角长方盒（因 $3\nmid 8$ 无等分三轴故不可能为正方体），弦距满足 $d_{ij}^2 = 2(1-G_{ij})$（正算子格拉姆分解标 `LEAN ✓`，勋伯格嵌入定理标 `ARGUED`）。
 :::
 
 - **（三）时间流逝与正交开维：半正定比较表秩超限时的正交残差立轴**。只要有限个状态的全部两两比较都能塞进当前 $D$ 维空间（$G \succeq 0$ 且 $\operatorname{rank}(G) \le D$），系统就处于无时间的静态相容平衡（[第 29 章](ch29-timeless-causality-and-gram-space.md)）。若假想重叠表出现 $\det G < 0$，那意味着内积数据本身自相矛盾，除非修正重叠值否则在**任何**欧氏维数中均无法嵌入；真正的**正交维度扩张**则源于**半正定**比较表（$G_{D+1} \succeq 0$）的秩超出旧维数 $D$——对张成旧表子空间 $\mathcal{V}_D$ 的 $D$ 个线性无关旧态（$\det G_D > 0$），当新单位态 $w(\beta)$ 带有跳出 $\mathcal{V}_D$ 的非零正交残差 $r = (I - P_{\mathcal{V}_D})w = \sin\beta\,\mathbf{e}_{D+1} \neq 0$ 时，舒尔补恒等式给出 $\det G_{D+1} = (\det G_D)\,\lVert r\rVert^2 = (\det G_D)\sin^2\beta > 0$（标准正交旧基 $\det G_D = 1$ 下特化为 $\sin^2\beta > 0$），将欧氏嵌入秩严格从 $D$ 推升至 $D + 1$（$S^\perp \neq \{0\}$ 内存在单位正交向量由 `finite_layer_projection_escape` `LEAN ✓` 锁定，将秩增长 $D \to D + 1$ 诠释为时间轴扩张标 `MODEL`，见[第 31 章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)）。
@@ -43,29 +43,29 @@ $$
 **旧表平面装不下的残差，垂直立起成新轴。** 拖动琥珀色端点把新态 $w(\beta)$ 抬离旧平面 $\mathcal{V}_2 = \operatorname{span}(e_1, e_2)$：青色是留在表内的投影 $\cos\beta$，品红是与表内方向比较皆为零的正交残差 $\sin\beta\,e_3$，三态格拉姆行列式 $\sin^2\beta > 0$ 把秩从 $2$ 升到 $3$（`finite_layer_projection_escape` 标 `LEAN ✓`，时间开维诠释标 `MODEL`）。
 :::
 
-- **（四）同余分桶碰撞计数、粗粒化熵与局部搜索屏障：有限带宽比较的原像纤维**。有限观察者每次只能比对有限个投影特征位，微观态遂按读出核归入不可区分的原像纤维（[@thm-ch32-comparison-extensionality-and-lagrange] 第 2 款 `partition_inseparable_iff_kernel` 与[第 38 章 §38.4–§38.5](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)的 `escapePairs_without_eq_union`，`LEAN ✓`）。在含 $M$ 个微观态的单个读出桶内，`EscapePairs` 精确统计 $M(M-1)$ 个有序相异碰撞对；而粗粒化香农/玻尔兹曼熵则依赖显式微观态概率分布（仅在单桶均匀系综下等于 $\log_2 M$ 比特，对应物理热力学熵须在指明系综假设下归入 `MODEL`），缺乏全局导向场时被迫逐桶盲比则构成有限带宽下的指数级局部搜索屏障。
+- **（四）同余分桶碰撞计数、粗粒化熵与局部搜索屏障：有限带宽比较的原像纤维**。有限观察者每次只能比对有限个投影特征位，微观态遂按读出核归入不可区分的原像纤维（[@thm-ch32-comparison-extensionality-and-lagrange] 第 2 款 `partition_inseparable_iff_kernel` 与[第 38 章 §38.4–§38.5](ch38-s04-lookup-degradation.md#sec-ch38-pnp-lookup-degradation)的 `escapePairs_without_eq_union`，`LEAN ✓`）。在含 $M$ 个微观态的单个读出桶内，按定义直接计数共有 $M(M-1)$ 个有序相异碰撞对（`escapePairs_without_eq_union` 本身是逃逸对集合的并集恒等式，不含这一计数）；而粗粒化香农/玻尔兹曼熵则依赖显式微观态概率分布（仅在单桶均匀系综下等于 $\log_2 M$ 比特，对应物理热力学熵须在指明系综假设下归入 `MODEL`），缺乏全局导向场时被迫逐桶盲比，本书把它读作有限带宽下的局部搜索屏障（`MODEL`）。
 - **（五）生命演化与科学定律：历史比较结果的快表记忆化（$T \mapsto T(T)$）**。如果在每一拍面对环境变化时都从零做 $O(2^n)$ 次原始逐位硬比，任何有限系统都会瞬间耗尽步数预算。DNA 遗传密码、大脑突触权重与人类数学定理库，在计算本质上都是把亿万次存活下来的高频比较预先编译成前缀路由快表 $T$（[第 35 章](ch35-light-pulse-and-self-referential-table.md)与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)），把指数级硬扫描压缩为深度 $b$ 的低步数前缀命中，同时本文给出的逐位名字比对与字典扫描构造都在显式有限步数上界内完成（下方 [@thm-ch32-paid-name-comparison-and-dictionary]，`LEAN ✓`）。
 
 ::: {.viz src="comparison-oisc-engine" preset="lookup" height="520"}
-**读前 $b$ 位的前缀快表与自比较蛛网：省下的比较位数留下同桶逃逸对。** 十六个四位态只读前 $b$ 位时，深度为 $b$ 的前缀树只需 $b$ 次比较即可命中叶子，但同桶内留下 $16(2^{4-b}-1)$ 个分不开的逃逸对（`escapePairs_without_eq_union` `LEAN ✓`）；右侧时间轴运行自比较 $x_{n+1} = \cos x_n$，蛛网步步收向唯一正不动点 $\theta^* \approx 0.7391$（`rational_inverse_endpoint` `LEAN ✓`）。
+**读前 $b$ 位的前缀快表与自比较蛛网：省下的比较位数留下同桶逃逸对。** 十六个四位态只读前 $b$ 位时，深度为 $b$ 的前缀树只需 $b$ 次比较即可命中叶子，但同桶内留下 $16(2^{4-b}-1)$ 个分不开的逃逸对（按定义直接计数；`escapePairs_without_eq_union` `LEAN ✓` 担保的是留一逃逸对等于全目录逃逸对与唯一捕获对之并）；右侧时间轴运行自比较 $x_{n+1} = \cos x_n$，蛛网步步收向唯一正不动点 $\theta^* \approx 0.7391$（`rational_inverse_endpoint` `LEAN ✓`）。
 :::
 
-- **（六）自我意识与观察者涌现：比较算子折回自身的自指不动点**。当一台局部比较子网络不仅比对外界，还把比较指令折回自身——执行 $\mathrm{CMP}(\psi, \psi)$——求同标尺与被量倾角在实轴余弦投影下迎头相撞，收敛于唯一自指平衡角 $\cos\theta^* = \theta^* \approx 0.739085$（[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)与[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md)）。
+- **（六）自我意识与观察者涌现：比较算子折回自身的自指不动点**。当一台局部比较子网络不仅比对外界，还把自身的求同读数反馈为下一拍的倾角——把余弦值与弧度角等同，迭代 $x_{n+1} = \cos x_n$——它收敛于唯一不动点 $\cos\theta^* = \theta^* \approx 0.739085$（[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)与[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md)）。这一反馈方式是本书的模型选择：按第 1 层，自比较 $\mathrm{CMP}(\psi, \psi) = +\mathbf{1}$ 本身只给出 $\theta = 0$；把该不动点读作自我意识与观察者的涌现，标为 `MODEL`。
 
 下表将这六重涌现现象统一收束为宇宙单指令集比较机的总账单：
 
 | 宏观物理 / 数学表象 | 底层比较机动作 | 几何与代数读数 | 证据分层 |
 | :--- | :--- | :--- | :--- |
 | **物质粒子 vs. 相互作用力** | 求同通道 vs. 求异通道 | $\mathbf{A}\cdot\mathbf{B} = \cos\theta$（标量线） vs. $\mathbf{A}\wedge\mathbf{B} = \sin\theta\,\hat{\mathbf{I}}$（双向量面） | `文献结果`（克利福德分解）+ `MODEL` |
-| **玻恩概率与海森堡测不准** | 双向互易比较折叠手性符号 | $\mathrm{CMP}(\mathbf{A},\mathbf{B})\,\mathrm{CMP}(\mathbf{B},\mathbf{A}) = \cos^2\theta + \sin^2\theta = 1$ | `LEAN ✓`（`lagrange_gram_identity`）+ `MODEL` |
+| **玻恩概率与海森堡测不准** | 双向互易比较折叠手性符号 | $\mathrm{CMP}(\mathbf{A},\mathbf{B})\,\mathrm{CMP}(\mathbf{B},\mathbf{A}) = \cos^2\theta + \sin^2\theta = 1$ | `LEAN ✓`（`lagrange_gram_identity`：实元组的拉格朗日恒等式，不是玻恩规则或测不准关系本身）+ `MODEL` |
 | **三维空间与弦距度规** | 两两相似度矩阵半正定嵌入 | $G_{ij} = \mathbf{A}_i\cdot\mathbf{A}_j \succeq 0,\; d_{ij} = \sqrt{2(1 - G_{ij})}$（均衡 `3-3-2` 分桶张成八角长方盒） | `文献结果`（Schoenberg 1935）+ `NUM` + `MODEL` |
 | **时间之箭与维度扩张** | 半正定比较表超秩的正交残差立轴 | $G_{D+1} \succeq 0$ 且正交残差 $r = (I - P_{\mathcal{V}_D})w \neq 0$（$\det G_{D+1} = (\det G_D)\sin^2\beta > 0$，秩 $D \to D+1$） | `LEAN ✓`（`finite_layer_projection_escape`）+ `MODEL` |
 | **粗粒化碰撞与搜索屏障** | 有限位比较的同余分桶盲区 | $\mathrm{readout}(x)=\mathrm{readout}(y)$ 碰撞对统计 `EscapePairs`（$M(M-1)$）与系综粗粒化熵 | `LEAN ✓`（`partition_inseparable_iff_kernel`、`escapePairs_without_eq_union`）+ `MODEL` |
-| **生命、知识与自我意识** | 比较结果快表化与自指比较 | 字典扫描步数守恒、$T \mapsto T(T)$ 与自指平衡 $\cos\theta^* = \theta^*$ | `LEAN ✓`（`name_compare_run`、`dictionary_lookup_run`）+ `MODEL` |
+| **生命、知识与自我意识** | 比较结果快表化与自指比较 | 字典扫描步数上界、$T \mapsto T(T)$ 与自指平衡 $\cos\theta^* = \theta^*$ | `LEAN ✓`（`name_compare_run`、`dictionary_lookup_run`：仅为两台机器的步数上界）+ `MODEL`（生命、知识与自我意识的读法） |
 
-为了彻底杜绝把“比较”与“查表”浪漫化为零成本神谕的幻觉，`trureturing` 的可计算性模块用多栈有限控制自动机（`FinTM2`）严格构造并验证了**逐位二元名字比较机**与**流式字典查表机**的精确步数守恒与无损纸带复原定理：
+为了彻底杜绝把“比较”与“查表”浪漫化为零成本神谕的幻觉，`trureturing` 的可计算性模块用多栈有限控制自动机（`FinTM2`）严格构造并验证了**逐位二元名字比较机**与**流式字典查表机**的步数上界与无损纸带复原定理：
 
-::: {.theorem #thm-ch32-paid-name-comparison-and-dictionary title="二元名字逐位比较机与查表字典扫描的精确步数守恒" lean="D5/S0/Computability/BinaryNameComparison.name_compare_run D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run"}
+::: {.theorem #thm-ch32-paid-name-comparison-and-dictionary title="二元名字逐位比较机与查表字典扫描的步数上界" lean="D5/S0/Computability/BinaryNameComparison.name_compare_run D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run"}
 在 `trureturing` 冻结的二元名字比较与字典查找可计算性模块中，以下两项有偿运行上界与纸带复原定理同时成立：
 
 1. **逐位二元名字比较机的步数上界与无损复原**（[`name_compare_run`](lean:D5/S0/Computability/BinaryNameComparison.name_compare_run)）：对任意两个二元比特字 $a, b \in \operatorname{List}\;\mathrm{Bool}$（长度不必相等）、已有输出栈 $\mathrm{output}$ 与帧栈 $\mathrm{frame}$，六栈有限控制自动机 `compareMachine` 从初始构型 $(\operatorname{some}\;\mathrm{compare},\, \langle\operatorname{none},\operatorname{none},\mathrm{true}\rangle,\, a,\, b,\, [],\, [],\, \mathrm{output},\, \mathrm{frame})$ 出发，必在至多
@@ -76,7 +76,7 @@ $$
 
    步内停机，将相等判别比特 $\operatorname{decide}(a = b)$ 压入输出栈顶得到 $\operatorname{decide}(a = b) :: \mathrm{output}$，清空两条暂存工作栈，并将左右输入字 $a, b$ 与上下文帧 $\mathrm{frame}$ 原样复原；
 
-2. **二元名字字典扫描机的精确步数界与一元下标定位**（[`dictionary_lookup_run`](lean:D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run)）：对任意二元名字列表 $\mathrm{names} \in \operatorname{List}(\operatorname{List}\;\mathrm{Bool})$、待查字 $\mathrm{query} \in \operatorname{List}\;\mathrm{Bool}$ 与上下文帧 $\mathrm{frame}$，记分隔符编码字典流为 $\operatorname{dictionaryStream}(\mathrm{names})$，则自动机 `dictionaryMachine` 从初始查找构型出发，必在至多
+2. **二元名字字典扫描机的步数上界与一元下标定位**（[`dictionary_lookup_run`](lean:D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run)）：对任意二元名字列表 $\mathrm{names} \in \operatorname{List}(\operatorname{List}\;\mathrm{Bool})$、待查字 $\mathrm{query} \in \operatorname{List}\;\mathrm{Bool}$ 与上下文帧 $\mathrm{frame}$，记分隔符编码字典流为 $\operatorname{dictionaryStream}(\mathrm{names})$，则自动机 `dictionaryMachine` 从初始查找构型出发，必在至多
 
    $$
    T_{\mathrm{dict}}(\mathrm{names}, \mathrm{query}) \;\le\; \bigl(2\lvert\mathrm{query}\rvert + 12\bigr)\lvert\mathrm{names}\rvert \;+\; 4\bigl\lvert\operatorname{dictionaryStream}(\mathrm{names})\bigr\rvert \;+\; 3
@@ -89,4 +89,4 @@ $$
 第 1 款将 `compareMachine` 的执行拆为扫描比对阶段与回卷复原阶段：在 `compare` 状态逐拍弹出 $a, b$ 首比特压入暂存栈 `savedLeft, savedRight` 并累计匹配标志位（若一侧提前耗尽则置匹配位为 `false` 并转入耗尽清栈分支），随后在 `restore` 阶段将两条暂存栈逐位倒回左、右主栈，总步数精确受限于往返两趟字长之和加常数状态切换开销 $2(\lvert a\rvert + \lvert b\rvert) + 4$。第 2 款在 `dictionaryStream` 上对字典条目数 $\lvert\mathrm{names}\rvert$ 归纳：每读出一个词条，机器调用内嵌逐位比对子例程，由它复原查询字；未命中则追加一元计数符 `true` 后继续，首次命中或字典耗尽时便回卷，将已读历史逐位接回未读后缀之前，复原字典流，累计步数满足线性界 $(2\lvert\mathrm{query}\rvert + 12)\lvert\mathrm{names}\rvert + 4\bigl\lvert\operatorname{dictionaryStream}(\mathrm{names})\bigr\rvert + 3$。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch32-paid-name-comparison-and-dictionary] 为宇宙单指令集比较机提供了一本可核对的步数账（`MODEL`）：**上述两台机器逐位比较、逐项查找，并在给定步数上界内无损复原输入与字典纸带**。该运行保证针对这两项构造；比较算法的普适线性下界还需另行指定成本模型并证明。带着 $\mathcal{A}_0$ 与这台有偿单指令比较机，我们现在进入[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)，将数学与物理的五大公理群正式铸造成经内核验证的推论链。
+[@thm-ch32-paid-name-comparison-and-dictionary] 为宇宙单指令集比较机提供了一本可核对的步数账（`MODEL`）：**上述两台机器逐位比较、逐项查找，并在给定步数上界内无损复原输入与字典纸带**。该运行保证针对这两项构造；比较算法的普适线性下界还需另行指定成本模型并证明。带着 $\mathcal{A}_0$ 与这台有偿单指令比较机，我们现在进入[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)，把数学与物理的六组公理骨架读作比较公理的条件推论：内核验证的是链上各端点处的条件引理，链本身的衔接是带桥梁假设的作者模型（`MODEL`）。

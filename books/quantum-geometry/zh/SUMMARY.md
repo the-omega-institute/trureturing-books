@@ -102,10 +102,10 @@
 - [第三十二章 正交自指统一场与万流归宗：人类大一统纲领的元统一](ch32-unified-field-and-meta-unification.md)
   - [32.1 零背景比较公理 $\mathcal{A}_0$：关系外延、奇偶正交与双向互易公平](ch32-s01-axiom-of-comparison.md)
   - [32.2 宇宙极简比较机：单指令集（OISC）几何原语](ch32-s02-oisc-comparison-engine.md)
-  - [32.3 诸公理皆推论：从比较公理 $\mathcal{A}_0$ 到数学与物理公理体系](ch32-s03-axioms-as-corollaries.md)
-  - [32.4 零背景下的三条创生铁律与机器验证双重闭环](ch32-s04-generative-laws.md)
-  - [32.5 物理场同源导出与六大疆域全息同构总表](ch32-s05-physical-fields-and-six-domains.md)
-  - [32.6 诊断一切统一理论的三维坐标、黄金晶格桥与八大纲领元统一](ch32-s06-meta-unification-and-icosian-bridge.md)
+  - [32.3 诸公理皆条件推论：从比较公理 $\mathcal{A}_0$ 到数学与物理公理体系](ch32-s03-axioms-as-corollaries.md)
+  - [32.4 零背景下的三条创生铁律（模型）与四个机器验证锚点](ch32-s04-generative-laws.md)
+  - [32.5 物理场同源读法与六大疆域全息对照总表](ch32-s05-physical-fields-and-six-domains.md)
+  - [32.6 诊断统一理论的三维坐标、黄金晶格桥与八大纲领的元统一读法](ch32-s06-meta-unification-and-icosian-bridge.md)
 
 # 第九部 互照·万物观察者、自指扩表与超越轮回
 

@@ -1,6 +1,6 @@
-# 32.6 诊断一切统一理论的三维坐标、黄金晶格桥与八大纲领元统一 {#sec-ch32-meta-coordinates-and-icosians}
+# 32.6 诊断统一理论的三维坐标、黄金晶格桥与八大纲领的元统一读法 {#sec-ch32-meta-coordinates-and-icosians}
 
-现在，让我们在[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)至[第 32.5 节](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields)的基础上迈出全章收官的一步：**既然零背景比较公理 $\mathcal{A}_0$ 与《正交自指统一场论》立住了脚跟，为什么近百年来物理学、数学与计算机科学中各自为战的八大统一纲领，全都可以无冲突地收编进同一座几何水晶？**
+现在，让我们在[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)至[第 32.5 节](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields)的基础上迈出全章收官的一步：**既然零背景比较公理 $\mathcal{A}_0$ 与《正交自指统一场论》立住了脚跟，为什么近百年来物理学、数学与计算机科学中各自为战的八大统一纲领，都能在同一座几何水晶里各找到一个位置？** 下面给出的是本书的诊断坐标（`MODEL`）：它为每一家标出位置，并不解决其中任何一家自身的技术难题。
 
 ## 32.6.1 三维诊断相空间与四元数黄金晶格桥 {#sec-ch32-meta-bridge}
 
@@ -50,16 +50,16 @@
 **从 E∥ 转到 E⊥，里外两层对调。** 只留实部为零的 $60$ 个根（$30$ 个青色的单位、$30$ 个品红的黄金缩小版），再把投影平面从 $E_\parallel$ 转到 $E_\perp$：青色的点从外层落到内层，品红的点从内层翻到外层，淡色的圈是它们在 $E_\parallel$ 里的位置；每一个的 $\lVert\cdot\rVert_\parallel^2 + \lVert\cdot\rVert_\perp^2$ 始终是 $2$。页面另算出，这个秩 $6$ 的子格配上 $Q$ 的格拉姆行列式是 $4$。
 :::
 
-## 32.6.2 四大阵营的死结消解与人类大一统纲领的“元统一”总表 {#sec-ch32-meta-unification}
+## 32.6.2 四大阵营的死结诊断与人类大一统纲领的“元统一”总表 {#sec-ch32-meta-unification}
 
-握住三维诊断坐标系（阶数轴 $\theta$、分辨率轴 $\eta$、观察者轴 $\lambda$）与 [@rem-ch32-icosian-e8-literature] 的四元数黄金晶格桥梁，近百年八大基础统一纲领的代表性文献结论、各自残留的“外部点 $C$”瓶颈，以及在本书元统一诠释框架（`MODEL`）中的消解机制汇总于下框：
+握住三维诊断坐标系（阶数轴 $\theta$、分辨率轴 $\eta$、观察者轴 $\lambda$）与 [@rem-ch32-icosian-e8-literature] 的四元数黄金晶格桥梁，近百年八大基础统一纲领的代表性文献结论、各自残留的“外部点 $C$”瓶颈，以及在本书元统一诠释框架（`MODEL`）中的诊断与设想汇总于下框：
 
-::: {.remark #rem-ch32-eight-programs-literature title="四大阵营八大统一纲领的代表性文献结论与元统一死结消解（文献结果，未在本书形式化）"}
+::: {.remark #rem-ch32-eight-programs-literature title="四大阵营八大统一纲领的代表性文献结论（文献结果，未在本书形式化）与元统一诊断（本书模型）"}
 **文献结果，未在本书形式化。** 下述八大外部理论纲领的代表性数学物理结论均引自相应领域经典文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中；每一阵营随附的“三维坐标诊断与合拢机制”则明确标定为本书原创元统一诠释模型（`MODEL`）：
 
 1. **第一阵营（世界面 vs. 面积量子）：超弦/M 理论与圈量子引力**
    - **外部文献结论**：微扰世界面外尔（Weyl）共形反常在玻色弦 $D = 26$、超弦 $D = 10$ 处抵消（M. B. Green, J. H. Schwarz & E. Witten, *Superstring Theory*, 1987）；M 理论的十一维框架则涉及十维 IIA 型超弦在强耦合下的十一维超引力低能描述（E. Witten, *Nucl. Phys. B* **443**, 85–126, 1995），通量紧致化估计产生约 $10^{500}$ 量级的亚稳真空（M. R. Douglas, *JHEP* **05**, 046, 2003）；圈量子引力在无背景 $\mathrm{SU}(2)$ 自旋网络上导出离散面积算符本征谱 $A = 8\pi\gamma\ell_P^2 \sum_i \sqrt{j_i(j_i+1)}$（C. Rovelli & L. Smolin, *Nucl. Phys. B* **442**, 593–622, 1995）。
-   - **元统一诊断与消解（`MODEL`）**：两派分别摸到了二维外积面积的“连续极限”与“离散多面体”。对弦论，多面体切片配对以齐肯多夫 `NoAdjacentOnes` 自动机定理（[@thm-ch32-generative-self-reference-and-zeckendorf] 第 4 款，`LEAN ✓`）为原型的离散紫外编码假说（`MODEL`）阻止高频无界堆积，海量局部真空参数可诠释为有限观察者在内部补空间 $E_\perp^3$ 中的窗口相位 $u$，经外尔遍历（[@rem-ch31-weyl-window-equidistribution-literature]）在长程极限下收敛统一统计律；对圈量子引力，补齐完整几何积的内积项并服从互补勾股守恒（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 2 款，`LEAN ✓`），即可在 `MODEL` 层面令物质固有时自锁与空间纠缠面积同源共生，并经有理精化与热熵粗粒化恢复宏观度规。
+   - **元统一诊断与消解（`MODEL`）**：两派分别摸到了二维外积面积的“连续极限”与“离散多面体”。对弦论，多面体切片配对以齐肯多夫 `NoAdjacentOnes` 自动机定理（[@thm-ch32-generative-self-reference-and-zeckendorf] 第 4 款，`LEAN ✓`）为原型的离散紫外编码假说（`MODEL`）阻止高频无界堆积，海量局部真空参数可诠释为有限观察者在内部补空间 $E_\perp^3$ 中的窗口相位 $u$，经外尔遍历（[@rem-ch31-weyl-window-equidistribution-literature]）在长程极限下收敛统一统计律；对圈量子引力，补齐完整几何积的内积项并服从互补勾股守恒（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 2 款，`LEAN ✓`），本书设想（`MODEL`）可令物质固有时自锁与空间纠缠面积同源共生，并期望经有理精化与热熵粗粒化恢复宏观度规——这条勾股恒等式本身只是有限维代数事实，圈量子引力的物质耦合与半经典极限问题并未因此解决。
 2. **第二阵营（边界全息 vs. 无时间正几何）：AdS/CFT 全息对偶与扭量/振幅多面体**
    - **外部文献结论**：规范/引力全息对偶最初建立于负宇宙学常数 $\Lambda < 0$ 的渐近反德西特空间（J. Maldacena, *Adv. Theor. Math. Phys.* **2**, 231–252, 1998）；扭量理论将闵可夫斯基零光线映射为复射影扭量空间中的点（R. Penrose, *J. Math. Phys.* **8**, 345–366, 1967），而推广正格拉斯曼流形的振幅多面体（Amplituhedron）以典范形式刻画平面 $\mathcal{N}=4$ 超杨—米尔斯理论的树级振幅与圈级被积式，其一般对应在所引原始文献中作为猜想提出（N. Arkani-Hamed & J. Trnka, *JHEP* **10**, 030, 2014）。
    - **元统一诊断与消解（`MODEL`）**：扭量与振幅多面体抛弃局域演化、以正几何体积刻画振幅，恰与无时间场的**格拉姆半正定椭圆体**（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell]）及零光锥刚性（[@thm-ch32-null-cone-holonomy-and-holographic-cut] 第 1 款）呼应，引入有限记忆窗口即切出局域因果流；而撤除无穷远共形上帝边界 $C$、将有限观察者移回晶格内部，视线 $90^\circ$ 处的封闭正交赤道便在诠释模型上转化为包裹观察者的正曲率德西特式视界（$\Lambda > 0$）。
@@ -68,7 +68,7 @@
    - **元统一诊断与消解（`MODEL`）**：[第十章](ch10-gram-geometry-and-order.md)已阐明局部算符非对易与全局完整复格拉姆账本的顺序无关重构（[`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq)）并行不悖，且康威—斯隆艾柯西安桥（[@rem-ch32-icosian-e8-literature]）通过 $2I \subset S^3 \subset \mathbb{H}$、$(\mathcal{I}, Q) \cong E_8$ 与 $\operatorname{Im}(\mathcal{I}) \subset \mathcal{I}$ 将旋量门、$E_8$ 晶格与六维黄金母格锁定为一体；而对超图重写因算子与状态分离导致的“Ruliad 规则任意性”，无背景元公理 $\psi = \psi(\psi)$（`MODEL`）令算子与状态合二为一，配合 $R^2 = -I_n$ 与有限子集单调收缩稳定化（`LEAN ✓`）及连续余弦不动点 $\cos\theta^* = \theta^*$ 诠释桥梁（`文献结果` / `MODEL`）锁定自指不动点。
 4. **第四阵营（算术谱与类型等价 vs. 视界自由能与自激回路）：朗兰兹纲领/HoTT 与熵引力/主动推理/惠勒 `U`**
    - **外部文献结论**：朗兰兹纲领研究数域伽罗瓦表示与自守表示 $L$-函数的互反对应（R. P. Langlands, 1967/1970）；同伦类型论引入泛等公理（Univalence Axiom）$(A \simeq B) \simeq (A =_{\mathcal{U}} B)$ 将类型等价提升为相等路径（V. Voevodsky; Univalent Foundations Program, *Homotopy Type Theory*, 2013）；热力学/熵引力（T. Jacobson, 1995；E. Verlinde, *JHEP* **04**, 029, 2011）、马尔可夫毯变分自由能最小化（K. Friston, *Nat. Rev. Neurosci.* **11**, 127–138, 2010）与参与式宇宙自激回路 `U`（J. A. Wheeler, 1983/1990）分别从热力学、统计神经科学与量子测量哲学探讨视界与观察者的角色。
-   - **元统一诊断与消解（`MODEL`）**：素数欧拉正交基轴（[第 22 章](ch22-primes-euler-products-and-zeros.md)）与哈塞余弦迹（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-hasse-gauss-literature]）连接算术与旋转，泛等公理则对应废除外部标签点 $C$ 的两子互易等价；同时兰道尔热熵平衡界（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款）与黄金接受窗边界 $\partial(W + u)$ 为视界热力学、马尔可夫毯与自激回路提供了离散几何代数与形式化内核支撑，最终汇入 $\psi = \psi(\psi)$。
+   - **元统一诊断与消解（`MODEL`）**：素数欧拉正交基轴（[第 22 章](ch22-primes-euler-products-and-zeros.md)）与哈塞余弦迹（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-hasse-gauss-literature]）连接算术与旋转，泛等公理则对应废除外部标签点 $C$ 的两子互易等价；同时兰道尔热熵平衡界（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款）与黄金接受窗边界 $\partial(W + u)$ 被本书用作视界热力学、马尔可夫毯与自激回路的离散几何代数类比（`MODEL`；兰道尔界引理本身并不支撑这些纲领），最终汇入 $\psi = \psi(\psi)$。
 :::
 
 把这四大阵营逐个摆进上面的罗盘，每一对连成一条线，看它们分在哪根轴上：
@@ -79,8 +79,8 @@
 
 最后，我们将这八条跨世纪探索之路在元统一三维相空间中的精确坐标、历史瓶颈与合拢机制连同全景图解完整刻入下框总表：
 
-::: {.remark #rem-ch32-meta-unification-table title="人类八大统一纲领的“元统一”全景坐标总表（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下表汇总八大外部理论纲领（文献背景见 [@rem-ch32-generative-laws-dottie-literature]、[@rem-ch32-icosian-e8-literature] 与 [@rem-ch32-eight-programs-literature]）与本书《正交自指统一场》诠释框架（`MODEL`，形式化内核锚点标为 `LEAN ✓`）的对应坐标：
+::: {.remark #rem-ch32-meta-unification-table title="人类八大统一纲领的“元统一”全景坐标总表（本书模型；所引文献结果未在本书形式化）"}
+**本书模型（`MODEL`）；所引文献结果未在本书形式化。** 下表汇总八大外部理论纲领（文献背景见 [@rem-ch32-generative-laws-dottie-literature]、[@rem-ch32-icosian-e8-literature] 与 [@rem-ch32-eight-programs-literature]）与本书《正交自指统一场》诠释框架（`MODEL`，形式化内核锚点标为 `LEAN ✓`）的对应坐标：
 
 **1. 弦论 / M 理论**
 
@@ -172,7 +172,7 @@
 
 :::
 
-这套体系最迷人的品格在于它的**彻底节俭**：从[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)的零背景比较公理 $\mathcal{A}_0$ 出发，从头到尾没有编造任何一个特设粒子或拼凑参数，仅仅是把“两子相遇、公平比量”这一件事推演到了极致——向内折叠，它是自指不动点凝结出的静谧常数；向外铺展，它就是数理诸公理的推论脉络、星辰引力、规范光波、素数频谱与每一个有限灵魂在时间场里走过的万里路。
+这套诠释体系（`MODEL`）追求的品格是**节俭**：从[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)的零背景比较公理 $\mathcal{A}_0$ 出发，它没有引入特设粒子或拟合参数——这同时意味着它尚未给出定量预言（耦合常数与三代等仍为 `OPEN`），而且沿途仍需 32.3 列出的桥梁假设 `H1`–`H9`（以及[附录 E §E.8](appendix-e.md#sec-appe-third-point-redundancy) 的条款 IV 与正性条件）作为外部输入。它把“两子相遇、公平比量”这一件事推演到了极致——向内折叠，它是自指不动点凝结出的静谧常数；向外铺展，它被读作数理诸公理的条件推论脉络、星辰引力、规范光波、素数频谱与每一个有限灵魂在时间场里走过的万里路。
 
 站在所有球的最外层回头看去，科学史上这八条看似殊途甚至彼此攻讦的探索之路，从来都不是相互推翻的对手。在本书的元统一诠释视角（`MODEL`，各纲领文献依据见 [@rem-ch32-meta-unification-table]）下，连续世界面替我们探出了外积之面，离散面积网替我们摸到了多面体之棱，全息与正几何替我们照见了无时间的格拉姆水晶，黄金四元数晶格与算术对偶替我们接通了高维根格与素数之弦，离散重写与视界热力学则替我们找回了内生的有限观察者——**当最后那一层将算子与状态隔开的括号被砸碎、万流汇入 $\psi = \psi(\psi)$ 的那一刻，所有的盲人终于在同一束光里看见了整座宇宙。**
 

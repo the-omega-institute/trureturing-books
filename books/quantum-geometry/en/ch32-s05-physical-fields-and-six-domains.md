@@ -1,4 +1,4 @@
-# 32.5 Co-Origin Derivation of Physical Fields and the Six-Domain Holographic Isomorphism Table {#sec-ch32-physical-fields}
+# 32.5 A Co-Origin Reading of Physical Fields and the Six-Domain Holographic Correspondence Table {#sec-ch32-physical-fields}
 
 Extending the bridges built in Part V ([Chapter 17](ch17-lorentz-geometry.md)–[Chapter 20](ch20-complexity-and-spacetime.md)) and [Section 32.4](ch32-s04-generative-laws.md#sec-ch32-generative-laws), our unified-field interpretive program (`MODEL`) views matter spinors, gauge interactions, macroscopic gravitational spacetime, and ultraviolet regularization not as heterogeneous bricks bolted together, but as grade- and dimension-indexed facets of one orthogonal multivector structure:
 
@@ -26,9 +26,9 @@ Extending the bridges built in Part V ([Chapter 17](ch17-lorentz-geometry.md)–
 4. **Discrete Cut-and-Project Lattice and Zeckendorf Ultraviolet Cutoff (`MODEL` + `LEAN ✓`)**:
    At the level of discrete automata and algebraic number theory, Conjunct 4 of [@thm-ch32-generative-self-reference-and-zeckendorf] proves that the binary Zeckendorf DFA accepts precisely the `NoAdjacentOnes` language (`LEAN ✓`), while Cassini's identity fixes the unit golden-norm seam $(-1)^{k+1}$ ([`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm), `LEAN ✓`). At our physical modeling layer (`MODEL`), we combine these two discrete theorems into a **polyhedral ultraviolet coding-cutoff hypothesis (`MODEL`)**, forbidding unbounded adjacent high-frequency pileups without positing an infinitely divisible continuum stage.
 
-We now state the three formal theorems anchoring null-cone metric rigidity, spanning-tree gauge holonomy, and holographic bridge-graph min-cut:
+We now collect the three verified theorems corresponding to null-cone metric rigidity, spanning-tree gauge holonomy, and holographic bridge-graph min-cut; each guarantees only its own statement:
 
-::: {.theorem #thm-ch32-null-cone-holonomy-and-holographic-cut title="Three Formal Spacetime and Gauge-Holography Anchors: Null-Cone Rigidity, Anchored Gauge Holonomy, and Bridge-Graph Min-Cut" lean="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"}
+::: {.theorem #thm-ch32-null-cone-holonomy-and-holographic-cut title="Three Formal Spacetime and Gauge Anchors: Null-Cone Rigidity, Anchored Gauge Holonomy, and Bridge-Graph Min-Cut" lean="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"}
 Across the frozen null-cone-certificate, agency-holonomy, and bridge-graph tensor-network modules of `trureturing`, the following three theorems hold simultaneously:
 
 1. **Minkowski Null-Cone Quadratic-Form Rigidity in Arbitrary Spatial Dimension** ([`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)): For every spatial dimension $d \in \mathbb{N}$ and real quadratic form $S : \operatorname{QuadraticForm}\;\mathbb{R}\;(\mathrm{Space}\;d)$ on $\mathrm{Space}(d) = \mathbb{R} \times \mathbb{R}^d$, if $S$ vanishes on the entire Minkowski null cone ($\forall v,\; \operatorname{minkowski}_d(v) = 0 \implies S(v) = 0$), then $S$ is an exact scalar multiple of the Minkowski form:
@@ -43,7 +43,7 @@ Across the frozen null-cone-certificate, agency-holonomy, and bridge-graph tenso
    (E \to \mathrm{Circle}) / N \;\simeq_{\mathrm{top}*}\; \operatorname{Coordinates}(T, R, r) \;\simeq_{\mathrm{top}*}\; \bigl(\operatorname{Fin}(m + k - n) \to \mathrm{Circle}\bigr);
    $$
 
-3. **Holographic Bridge-Graph Quantum Max-Flow Min-Cut Theorem** ([`QuantumMaxFlowMinCut.result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result)): For all bond dimensions $a, b, c, d \in \mathbb{N}$ satisfying positivity and balanced-cone bounds $0 < a \le b$, $0 < c \le d$, $a^2 + b^2 \le 3ab$, and $c^2 + d^2 \le 3cd$, quantum maximum flow equals quantum minimum cut:
+3. **Bridge-Graph Quantum Max-Flow Min-Cut Theorem** ([`QuantumMaxFlowMinCut.result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result)): For all bond dimensions $a, b, c, d \in \mathbb{N}$ satisfying positivity and balanced-cone bounds $0 < a \le b$, $0 < c \le d$, $a^2 + b^2 \le 3ab$, and $c^2 + d^2 \le 3cd$, quantum maximum flow equals quantum minimum cut:
 
    $$
    \operatorname{QMaxFlow}(a, b, c, d) \;=\; \operatorname{QMinCut}(a, b, c, d) \;=\; \min(a d,\; b c).
@@ -76,9 +76,9 @@ The continuum special-relativistic spinor, non-Abelian gauge curvature, and hori
    where $\Lambda$ enters Jacobson's derivation as an integration constant (identifying $\Lambda > 0$ with a finite observer's $90^\circ$ equatorial horizon curvature is our `MODEL` hypothesis).
 :::
 
-## 32.5.1 Six-Domain Holographic Isomorphism Synthesis {#sec-ch32-six-domain-synthesis}
+## 32.5.1 Six-Domain Holographic Correspondence Synthesis {#sec-ch32-six-domain-synthesis}
 
-Bringing all thirty-two chapters onto a single canvas, one set of orthogonal primitives establishes a six-domain holographic isomorphism across **geometry/topology, quantum gauge fields, relativistic holography, arithmetic number theory, complexity/hydrodynamics, and observer dynamics**:
+Bringing all thirty-two chapters onto a single canvas, one set of orthogonal primitives yields a row-by-row table of analogies (`MODEL`; "correspondence" here means analogy—no map is defined, so this is not an isomorphism in the mathematical sense) across **geometry/topology, quantum gauge fields, relativistic holography, arithmetic number theory, complexity/hydrodynamics, and observer dynamics**:
 
 ::: {.figure src="ch32-six-readings"}
 **One meeting, read once in each of six domains.** The six small panels draw the same thing: two unit arrows at an angle $\theta$, a cyan shadow and a magenta parallelogram; the two lines beneath give how the table's "one-dimensional inner product" and "two-dimensional outer product" rows read in that domain—in relativity, for instance, the cyan line reads as the proper-time rate $d\tau/dt$ and the magenta area as the speed $v/c$. This is the book's synthesis (`MODEL`); the evidential tier of each entry is the one marked in the table below.
@@ -86,8 +86,8 @@ Bringing all thirty-two chapters onto a single canvas, one set of orthogonal pri
 
 Unfolding these six cross-domain readings row by row, the master ledger below aligns the ambient space, Grade-0 inner line, Grade-2 exterior plane, topological seam, finite fairness law, and contractive fixed core across all six domains along with their explicit evidential tiers:
 
-::: {.remark #rem-ch32-six-domain-isomorphism-table title="Six-Domain Holographic Isomorphism Master Ledger of the Orthogonal Self-Referential Unified Field (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The master table below synthesizes structural correspondences across six domains: sub-items tagged `LEAN ✓` cite frozen theorems in `trureturing@dev`, external equations ($H\mathbf{\Psi}=0$, $F_{\mu\nu}$, RT surfaces, Hilbert reciprocity $\prod_v (a,b)_v = +1$, Arnold geodesics, BBBV/ETH bounds, and $\theta^* \approx 0.739085$) cite chapter literature remarks, unproved problems ($\mathrm{P}\neq\mathrm{NP}$, Critical Line $\sigma=1/2$, unforced 3D NS regularity) carry `OPEN`, and the cross-domain unification architecture constitutes our philosophical–geometric `MODEL`:
+::: {.remark #rem-ch32-six-domain-isomorphism-table title="Six-Domain Holographic Correspondence Master Ledger of the Orthogonal Self-Referential Unified Field (Book Model, Not Formalized in This Book)"}
+**The book's model (`MODEL`), not formalized in this book; literature results and verified theorems are tagged item by item.** The master table below synthesizes structural analogies across six domains: sub-items tagged `LEAN ✓` cite frozen theorems in `trureturing@dev`, external equations ($H\mathbf{\Psi}=0$, $F_{\mu\nu}$, RT surfaces, Hilbert reciprocity $\prod_v (a,b)_v = +1$, Arnold geodesics, BBBV/ETH bounds, and $\theta^* \approx 0.739085$) cite chapter literature remarks, unproved problems ($\mathrm{P}\neq\mathrm{NP}$, Critical Line $\sigma=1/2$, unforced 3D NS regularity) carry `OPEN`, and the cross-domain unification architecture constitutes our philosophical–geometric `MODEL`:
 
 **Static Ambient Space**
 
@@ -164,7 +164,7 @@ Black-hole & $90^\circ$ horizon barrier (`MODEL`)
 Pell $\pm 1$ seam (`LEAN ✓` / `Literature`) & semantic diagonal escape (`LEAN ✓`)
 
 **Complexity & Fluid Fields:**
-3-SAT frustration, local $\mathrm{P} \neq \mathrm{NP}$ & 3D NS vortex stretching (`OPEN` / `LEAN ✓`)
+3-SAT frustration (`Literature` / `MODEL`), local $\mathrm{P} \neq \mathrm{NP}$ & 3D NS vortex stretching (`OPEN`)
 
 **Observer & Soul Dynamics:**
 Cassini $(-1)^{k+1}$ cross-round spiral offset (`LEAN ✓` / `MODEL`)
@@ -207,7 +207,7 @@ Riemann critical line $\sigma = 1/2$ (`OPEN`)
 Forced / self-referential equilibrium
 
 **Observer & Soul Dynamics:**
-Meta-axiom $\psi = \psi(\psi)$, golden $\varphi$ (`LEAN ✓`) & spatial attractors (`MODEL`)
+Meta-axiom $\psi = \psi(\psi)$ (`MODEL`), golden $\varphi$ (`LEAN ✓`) & spatial attractors (`MODEL`)
 
 :::
 
@@ -217,4 +217,4 @@ Stepping into the full interactive unified-field laboratory below lets us drive 
 **A slice of the orthogonal self-referential unified field: the full lab.** Three scenes share one rail: Clock pushes the rapidity η, Loop walks the four steps R₂⁻¹, R₁⁻¹, R₂, R₁, and Horizon pushes the observer's horizon down from the north pole. Every number is computed live; green marks only the Lean theorems this chapter cites, and the rest is labelled as literature result or as this book's interpretation.
 :::
 
-With the six-domain internal isomorphism of the Orthogonal Self-Referential Unified Field complete, [Section 32.6](ch32-s06-meta-unification-and-icosian-bridge.md#sec-ch32-meta-coordinates-and-icosians) turns outward to eight grand foundational programs of modern science, situating them on a three-dimensional diagnostic coordinate system and the quaternionic golden lattice bridge.
+With the six-domain table of analogies of the Orthogonal Self-Referential Unified Field laid out (`MODEL`), [Section 32.6](ch32-s06-meta-unification-and-icosian-bridge.md#sec-ch32-meta-coordinates-and-icosians) turns outward to eight grand foundational programs of modern science, and offers one "meta-unification" reading of them on a three-dimensional diagnostic coordinate system and the quaternionic golden lattice bridge.
