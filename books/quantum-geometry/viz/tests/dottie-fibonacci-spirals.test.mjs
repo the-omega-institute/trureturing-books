@@ -661,6 +661,13 @@ for (const lang of ['zh', 'en']) {
   for (const [vname, w, h, q] of INK_VIEWS) {
     const p = await T.open(BOOK, ID, `?lang=${lang}${q}`, { viewport: { width: w, height: h }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
     await settle(p, 200);
+    // Before any card can play directly, witness the boot observer's one-time start.
+    // Full pages have no deferred starter; every later seek/rewind pauses in place.
+    if (q) {
+      await p.locator('#stage').scrollIntoViewIfNeeded();
+      if (!await until(p, () => { const s = window.SPIRALS_DEBUG.state; return s.playing || s.t > 0; })) throw new Error(`${lang}/${vname}: initial autoplay did not start`);
+      await p.evaluate(() => window.TRV.kit.pause());
+    }
     await instrumentInk(p);
     const st = async () => { await settle(p); return p.evaluate(() => window.SPIRALS_DEBUG.state); };
     const where = `${lang} ${vname} ${w}×${h}`;

@@ -101,16 +101,9 @@ check('console filter: known driver warnings only, real warnings and every error
   && !harmless('warning', 'Application warning') && !harmless('error', 'Application error'));
 
 const state = (p = page) => p.evaluate(() => window.LORENTZ_OCTAVE_DEBUG.state);
-const autoplayReady = new WeakSet();
 async function pause(p = page) {
-  // 让初次 IntersectionObserver 自动播放先交付，再用可见按钮暂停。
-  if (!autoplayReady.has(p)) {
-    await p.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-    autoplayReady.add(p);
-  }
-  await settle(p);
-  // 书内点击远处的 footer 会先把舞台滚出视野并自动暂停；用舞台旁可见的镜像按钮。
-  if ((await state(p)).playing) await p.click(await p.locator('#playBtn').isVisible() ? '#playBtn' : '#play');
+  // 原地、同任务暂停，避免播放键的滚动与离屏自动暂停交错。
+  await p.evaluate(() => { if (window.LORENTZ_OCTAVE_DEBUG.state.playing) document.getElementById('play').click(); });
   await settle(p);
 }
 async function pick(card, p = page) {
@@ -414,7 +407,13 @@ for (const scheme of ['dark', 'light']) for (const lang of ['zh', 'en']) for (co
   const p = await T.open(BOOK, ID, `?lang=${lang}${embed ? '&embed=1' : ''}${figure ? '&preset=pseudoscalar-minus-sign' : ''}`, {
     viewport: { width, height }, locale: lang === 'zh' ? 'zh-CN' : 'en-US', reducedMotion: 'reduce'
   });
-  await settle(p); await pause(p);
+  await settle(p);
+  // 在任何选卡或暂停前见证 boot 安装的一次性启动。
+  if (embed) {
+    await p.locator('#stage').scrollIntoViewIfNeeded();
+    if (!await until(p, () => window.LORENTZ_OCTAVE_DEBUG.state.playing)) throw new Error(`${scheme}/${lang}/${width}x${height}: initial autoplay did not start`);
+  }
+  await pause(p);
   const tag = `${scheme}/${lang}/${width}x${height}/${figure ? 'figure' : embed ? 'embed' : 'lab'}`;
   check(`${tag}: requested system preference and no page palette`, await p.evaluate(s =>
     matchMedia(`(prefers-color-scheme: ${s})`).matches && document.documentElement.dataset.trPalette === undefined, scheme));
@@ -426,8 +425,9 @@ for (const scheme of ['dark', 'light']) for (const lang of ['zh', 'en']) for (co
   for (const [i, card] of Object.keys(CARDS).entries()) {
     if (embed) { if (i) { await p.click('#nextBtn'); await settle(p); await pause(p); } }
     else await pick(card, p);
-    checkPreset(await state(p), card, `${tag}/${card}`);
     await p.locator('#stage').scrollIntoViewIfNeeded(); await settle(p);
+    await pause(p);
+    checkPreset(await state(p), card, `${tag}/${card}`);
     const view = await stageView(p, '#stage', figure), overlaps = await labelOverlaps(p);
     check(`${tag}/${card}: no overlaps, HUD collisions or horizontal overflow`, view.layout.length === 0
       && view.hud.length === 0 && overlaps.length === 0 && await overflowX(p) === 0,
