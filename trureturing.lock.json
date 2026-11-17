@@ -4293,6 +4293,22 @@
       "line": 44,
       "signature": "theorem schur_quadratic_is_least {m n : Type*} [Fintype m] [Fintype n] [DecidableEq n] (A : Matrix m m ℂ) (B : Matrix m n ℂ) (C : Matrix n n ℂ) (_hA : A.IsHermitian) (hC : C.PosDef) (x : m → ℂ) : let S"
     },
+    "D5/S3/Quantum/Matrix/WeightedBotcherWenzel.result": {
+      "module": "D5/S3/Quantum/Matrix/WeightedBotcherWenzel",
+      "name": "D5.S3.Quantum.Matrix.WeightedBotcherWenzel.result",
+      "kind": "theorem",
+      "statement_id": "sha256:23abf233028f57bd2ab429275434d078b408c2312706849326d059de7ef681a5",
+      "line": 831,
+      "signature": "theorem result : claim"
+    },
+    "D5/S3/Quantum/Matrix/WeightedBotcherWenzel.weighted_one": {
+      "module": "D5/S3/Quantum/Matrix/WeightedBotcherWenzel",
+      "name": "D5.S3.Quantum.Matrix.WeightedBotcherWenzel.weighted_one",
+      "kind": "theorem",
+      "statement_id": "sha256:23abf233028f57bd2ab429275434d078b408c2312706849326d059de7ef681a5",
+      "line": 104,
+      "signature": "theorem weighted_one {n : ℕ} (A : (Matrix (Fin n) (Fin n) ℂ)) : weightedSq A 1 = RHLinalg.frobSq A"
+    },
     "D5/S3/Quantum/Measurement/AntidistinguishabilityGram.gramPsd": {
       "module": "D5/S3/Quantum/Measurement/AntidistinguishabilityGram",
       "name": "D5.S3.Quantum.Measurement.AntidistinguishabilityGram.gramPsd",

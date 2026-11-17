@@ -167,6 +167,29 @@ $[\mathrm{SU}(N_c)]^3$ cancels between the two copies of $\mathbf{N}_c$ and the 
 That at $N_c = 3$, without reference to Higgs particles, anomaly cancellation (including the mixed gravitational anomaly) yields two hypercharge assignments, one of them the standard one, is in C. Q. Geng and R. E. Marshak (*Phys. Rev. D* **39**, 693, 1989, DOI `10.1103/PhysRevD.39.693`) and J. A. Minahan, P. Ramond and R. C. Warner (*Phys. Rev. D* **41**, 715, 1990, DOI `10.1103/PhysRevD.41.715`); that Witten's global anomaly requires odd $N_c$ and that triangle-anomaly cancellation fixes $N_c$-dependent quark charges is in O. Bär and U.-J. Wiese (*Nucl. Phys. B* **609**, 225, 2001, arXiv:`hep-ph/0105258`); the extension with right-handed neutrinos is in R. Shrock (*Phys. Rev. D* **53**, 6465, 1996, arXiv:`hep-ph/9512430`); Witten's global anomaly is E. Witten (*Phys. Lett. B* **117**, 324, 1982).
 :::
 
+The previous remark leaves out a right-handed neutrino with nonzero hypercharge. Including it turns the three lines into three planes and changes charge quantization:
+
+::: {.remark #rem-ch39-anomaly-right-handed-neutrino-planes title="The anomaly-free solution set with a right-handed neutrino, and charge quantization (manual derivation and literature result)"}
+**Manual derivation; the relation between right-handed neutrinos, the $B - L$ direction and charge quantization is a literature result, not formalized in this book.** Add $\nu_R^c : (\mathbf{1}, \mathbf{1}, y_n)$ to the five left-handed Weyl fields of [@rem-ch39-anomaly-free-hypercharge-lines], with $N_c \ge 2$, and read charges as $Q = T_3 + Y$ as before. The first two anomaly conditions are unchanged; the mixed gravitational one gains a term $y_n$ and the cubic one a term $y_n^3$; since $\nu_R^c$ is an $\mathrm{SU}(2)_L$ singlet, the condition from Witten's global anomaly is unchanged.
+
+1. The linear conditions give $y_d = -2y_Q - y_u$, $y_L = -N_c y_Q$ and $y_e + y_n = 2N_c y_Q$. Write $t = y_u + y_Q$, $y_e = N_c y_Q + w$, $y_n = N_c y_Q - w$. From $y_u^3 + y_d^3 = -2y_Q^3 - 6y_Qt^2$ and $y_e^3 + y_n^3 = (y_e + y_n)^3 - 3(y_e + y_n)y_ey_n$ the cubic condition becomes $6N_c\,y_Q\,(w - t)(w + t) = 0$. Over the reals the solution set is therefore three planes through the origin:
+
+   $$
+   \begin{aligned}
+   \Pi_+ &: \ (y_Q, y_u, y_d, y_L, y_e, y_n) = a\,(1, -1, -1, -N_c, N_c, N_c) + t\,(0, 1, -1, 0, -1, 1), \\
+   \Pi_- &: \ \Pi_+ \text{ with the labels of } u_R^c, d_R^c \text{ exchanged (equivalently, of } e_R^c, \nu_R^c\text{)}, \\
+   \Pi_0 &: \ (0, b, -b, 0, c, -c).
+   \end{aligned}
+   $$
+
+   The first direction of $\Pi_+$ with $a = \frac{1}{N_c}$ is exactly the assignment of $B - L$ (quarks carry baryon number $\frac{1}{N_c}$; for $N_c = 3$ it is $(\frac{1}{3}, -\frac{1}{3}, -\frac{1}{3}, -1, 1, 1)$), so with $\nu_R^c$ present $B - L$ is anomaly free for every $N_c$; the second direction acts on the singlets only. The three lines of the previous remark are, in order, the intersections of $\Pi_+$, $\Pi_-$ and $\Pi_0$ with $\{y_n = 0\}$; the first is $t = -N_c a$.
+2. On $\Pi_+$, $Q_\nu = \frac{1}{2} - N_c a$ and $Q_e = -\frac{1}{2} - N_c a$. Fixing $Q_e = -1$ means $a = \frac{1}{2N_c}$, so $Q_\nu = 0$ and the charges $\frac{N_c + 1}{2N_c}$, $-\frac{N_c - 1}{2N_c}$ of the quarks in the doublet are fixed as well; the singlet hypercharges, however, still move freely along $t$, and the anomaly conditions alone do not determine the charges of $u_R^c, d_R^c, e_R^c, \nu_R^c$.
+3. Let the Higgs field be $H : (\mathbf{1}, \mathbf{2}, y_H)$. Gauge invariance of the four Yukawa terms $Q_LHu_R^c$, $Q_LH^*d_R^c$, $L_LH^*e_R^c$, $L_LH\nu_R^c$ reduces on $\Pi_+$ to the single condition $t = -y_H$: Dirac masses only tie $t$ to $y_H$, and $a$ remains free. Take $y_H = \frac{1}{2}$, so that the neutral component of $H$ has $T_3 + Y = 0$; then $\Pi_+ \cap \{t = -\frac{1}{2}\}$ is the line $Y_0 + \varepsilon(B - L)$ ($\varepsilon$ arbitrary), where $Y_0$ is the assignment with $a = \frac{1}{2N_c}$ (the standard hypercharge when $N_c = 3$). The charges become $Q + \varepsilon(B - L)$, for instance $Q_\nu = -\varepsilon$ and $Q_e = -1 - \varepsilon$: charge is no longer quantized.
+4. If $\nu_R^c$ has a Majorana mass term (which requires $2y_n = 0$), or there is no $\nu_R^c$ at all, the solution set returns to the three lines of the previous remark; on the first line with $Q_e = -1$ the charges are integer multiples of $\frac{1}{2N_c}$ (item 2 of the previous remark).
+
+The hypotheses cannot be dropped: for $N_c = 1$, $(1, 1, -1, -1, 0, 0)$ satisfies the last three conditions, and with generation-dependent hypercharges the solution set is larger. Only the four perturbative anomaly conditions are used above, for one generation (or generation-independent hypercharges). That anomaly cancellation together with Dirac fermion masses leaves a one-parameter family along $B - L$, while a Majorana neutrino quantizes charge, is shown by K. S. Babu and R. N. Mohapatra (*Phys. Rev. Lett.* **63**, 938, 1989, DOI `10.1103/PhysRevLett.63.938`; *Phys. Rev. D* **41**, 271, 1990) and reviewed by R. Foot, H. Lew and R. R. Volkas (*J. Phys. G* **19**, 361, 1993, arXiv:`hep-ph/9209259`).
+:::
+
 ## 39.11.3 Cross-Concept Higgs Zitterbewegung Bridge, $\nu_0$ Einstein Closure, and the Four-Point Proton & Monopole Audit {#sec-ch39-11-3}
 
 Three decisive tests complete the AF-GUT architecture: **how rest masses arise without inventing an ad hoc fifth force, how all four internal concept fields source Einstein's gravitational equations under the universal clock $\nu_0$, and how AF-GUT avoids both proton decay and cosmological magnetic monopoles.**
