@@ -562,9 +562,9 @@ contradicting the uniform bound at $s=0$, $m=m_n$. This contradiction covers eve
 
 The counterexample family shows how charge can accumulate across levels in certain actual prefixes. Controlling intervals of every length at every start also requires control of all prefixes inside each level's blocks. A reusable estimate, independent of the Tribonacci alphabet, supplies this step: at each level, at most one child block remains unfinished, while the charges of the complete children contribute a sum over levels.
 
-The following prefix envelope, uniform squared-logarithmic bound, and later fixed-parameter open-chain convergence theorem are presented as written proofs. Their sources are the [prefix and interval-bound work](https://github.com/the-omega-institute/trureturing/pull/30646) and the [open-chain convergence work](https://github.com/the-omega-institute/trureturing/pull/30678); each proof also cites an immutable source location. No matching frozen declaration is available at the pinned `dev` commit, so these results do not count as Lean verification in this book; authors and reviewers are responsible for the arguments. The quantitative written conclusion in [@ex-ch39-p2e-tribonacci-prefix-rate] retains its existing evidential scope.
+The prefix envelope controls every truncated prefix of a general substitution word, and the uniform squared-logarithmic bound controls every interval of the actual Tribonacci word. The later open-chain convergence theorem gives convergence to zero of the minimum absolute eigenvalue along the full sequence of specified even open prefixes for each fixed $0<\rho<1$. The quantitative bound and parameter-uniform convergence in [@ex-ch39-p2e-tribonacci-prefix-rate] remain a paper application and are not supplied by this convergence theorem.
 
-::: {.lemma #lem-ch39-p2e-substitution-prefix-envelope title="A Level Prefix Envelope for Substitution Words" status="written-proof" proof="pf-ch39-p2e-substitution-prefix-envelope" repository="https://github.com/the-omega-institute/trureturing" source="SubstitutionPrefixEnvelope, Theorem 1.2" request="https://github.com/the-omega-institute/trureturing-requests/issues/271"}
+::: {.lemma #lem-ch39-p2e-substitution-prefix-envelope title="A Level Prefix Envelope for Substitution Words" lean="D5/S1/Words/SubstitutionPrefixEnvelope.prefix_envelope"}
 Let $\mathcal A$ be any alphabet, let $w:\mathcal A\to\mathbb Z$ be an integer weight, and let $f$ send each letter to a finite word, extended to finite words by concatenation. Take $f^0(a)$ to be the one-letter word $a$, and set
 
 $$
@@ -595,14 +595,16 @@ Here $\operatorname{take}_t$ takes the first $\min(t,|f^j(a)|)$ letters, and the
 :::
 
 ::: {.proof #pf-ch39-p2e-substitution-prefix-envelope}
-This proof follows the statement and argument in [the source, SubstitutionPrefixEnvelope, Theorem 1.2](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S1/Words/SubstitutionPrefixEnvelope.md).
+This proof follows the statement and argument of [the source declaration `prefix_envelope`](lean:D5/S1/Words/SubstitutionPrefixEnvelope.prefix_envelope).
 
 The alternating charge with a local positive first sign satisfies $Q(uv)=Q(u)+(-1)^{|u|}Q(v)$, hence $|Q(uv)|\le|Q(u)|+|Q(v)|$. A level-zero image is a single letter, so every prefix has absolute charge at most $M$. Write $f^{j+1}(a)$ as the concatenation of at most $B$ level-$j$ children specified by $f(a)$. Each prefix consists of complete children followed by at most one child's prefix. The complete part contributes at most $BH(j)$, and induction bounds the unfinished part by $P(j)$, giving $P(j)+BH(j)=P(j+1)$. An index beyond the total length leaves only complete blocks; empty images add no charge. This induction uses absolute values while retaining the exact concatenation phase.
+
+The full proof is checked by the Lean kernel.
 :::
 
 For the literal Tribonacci word, the complete-block charge formulas give a linear $H(j)$, so this estimate yields a quadratic $P(j)$. To obtain a bound independent of the start, we must also place each actual interval inside blocks at a suitable level.
 
-::: {.theorem #thm-ch39-p2e-tribonacci-uniform-log-squared title="A Uniform Squared-Logarithmic Interval Bound for the Actual Tribonacci Word" status="written-proof" proof="pf-ch39-p2e-tribonacci-uniform-log-squared" repository="https://github.com/the-omega-institute/trureturing" source="TribonacciUniformLogSquared, Theorem 1.1" request="https://github.com/the-omega-institute/trureturing-requests/issues/272"}
+::: {.theorem #thm-ch39-p2e-tribonacci-uniform-log-squared title="A Uniform Squared-Logarithmic Interval Bound for the Actual Tribonacci Word" lean="D5/S1/Words/TribonacciUniformLogSquared.uniform_log_squared"}
 Take $\sigma(A)=AB$, $\sigma(B)=AC$, and $\sigma(C)=A$, and let $W=\lim_{n\to\infty}\sigma^n(A)$ be the infinite word starting from $A$, indexed from zero. Assign integer weights $w(A)=2$, $w(B)=1$, and $w(C)=0$, and define the charge with a positive first sign within each interval:
 
 $$
@@ -621,7 +623,7 @@ The integer charge and natural-number length are viewed as real numbers in this 
 :::
 
 ::: {.proof #pf-ch39-p2e-tribonacci-uniform-log-squared}
-This proof follows the statement and argument in [the source, TribonacciUniformLogSquared, Theorem 1.1](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S1/Words/TribonacciUniformLogSquared.md).
+This proof follows the statement and argument of [the source declaration `uniform_log_squared`](lean:D5/S1/Words/TribonacciUniformLogSquared.uniform_log_squared).
 
 **From complete blocks to prefixes.** Retain $\tau=\sigma^4$, whose three image lengths are $13,11,7$. The complete-block charges computed above are $2$, $2-(-1)^j$, and $2-(2j+2)(-1)^j$. Thus, for every letter $X$ and level $j$,
 
@@ -689,6 +691,8 @@ $$
 $$
 
 An empty interval has zero charge and satisfies the same inequality directly. Hence $C=1404/(\log2)^2>0$ is one sufficient witness for the existential statement; no optimization of this constant is asserted.
+
+The full proof is checked by the Lean kernel.
 :::
 
 ::: {.remark #rem-ch39-p2e-tribonacci-refutation-boundaries title="Alternating Discrepancy, Spectral Literature, and Physical Scope"}
@@ -1011,7 +1015,7 @@ The example gives a paper $1/N_j$ bound and convergence to zero for the specifie
 
 The preceding quantitative paper application already gives a stronger rate. A separate argument needs only the actual prefixes constructed in the proof of [@thm-ch39-p2e-tribonacci-prefix-log-refutation]: their charge is positive and unbounded at odd levels, making one entry of the full inverse sufficiently large.
 
-::: {.theorem #thm-ch39-p2e-tribonacci-open-chain-zero-gap title="Vanishing Spectral Distance for Actual Positive Tribonacci Open Chains" status="written-proof" proof="pf-ch39-p2e-tribonacci-open-chain-zero-gap" repository="https://github.com/the-omega-institute/trureturing" source="TribonacciOpenPathGap, Theorem 1.7" request="https://github.com/the-omega-institute/trureturing-requests/issues/273"}
+::: {.theorem #thm-ch39-p2e-tribonacci-open-chain-zero-gap title="Vanishing Spectral Distance for Actual Positive Tribonacci Open Chains" lean="D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.gap_tendsto_zero"}
 Let $W$ be the actual fixed word starting from $A$ for $\sigma(A)=AB$, $\sigma(B)=AC$, $\sigma(C)=A$, with weights $w(A)=2$, $w(B)=1$, $w(C)=0$. For each fixed real $0<\rho<1$, set $t_i=\rho^{w(W_i)}$. For integers $j\ge1$, define
 
 $$
@@ -1036,7 +1040,7 @@ Equivalently, for every $\varepsilon>0$ there is an integer $J\ge1$ such that ev
 :::
 
 ::: {.proof #pf-ch39-p2e-tribonacci-open-chain-zero-gap}
-This proof follows the statement and argument in [the source, TribonacciOpenPathGap, Theorem 1.7](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.md).
+This proof follows the statement and argument of [the source declaration `gap_tendsto_zero`](lean:D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.gap_tendsto_zero).
 
 First fix an actual prefix of odd length, then use that same prefix in every sufficiently long open chain. Recall $\tau=\sigma^4$, $F$, and the words from the proof of [@thm-ch39-p2e-tribonacci-prefix-log-refutation]:
 
@@ -1104,6 +1108,8 @@ $$
 Finally, given $\varepsilon>0$, choose a natural number $k$ with $\rho^k<\varepsilon$, which is possible since $0<\rho<1$, and fix the odd integer $n=2k+1$. Since $(n+1)(n+2)\ge k$, the bound above is below $\varepsilon$. The actual iterate lengths satisfy $L_j\ge j+1$, hence $N_j\ge L_j-1\ge j$. Thus there is $J\ge1$ such that every $j\ge J$ satisfies $N_j\ge m_n+1$ and admits the estimate from this same prefix. The level $n$ is chosen once from $\rho,\varepsilon$; every subsequent $j\ge J$ then satisfies $0\le\delta_{\rho,j}<\varepsilon$. This proves convergence along all indices, rather than just a selected subsequence.
 
 The source declaration defines `gap` at $j=0$ to be $0$ to avoid the empty eigenvalue set of a zero-dimensional matrix. For $j\ge1$, $L_j\ge2$, and its definition is precisely the minimum absolute value of the nonempty finite real spectrum used here. This single-value convention does not affect the limit.
+
+The full proof is checked by the Lean kernel.
 :::
 
 This standalone convergence theorem states only the full-sequence limit for each fixed positive $\rho$; its single-inverse-entry argument supplies no $1/N_j$ rate. The preceding [@ex-ch39-p2e-tribonacci-prefix-rate] already gives the stronger paper bound $73728/N_j$ and convergence uniform in the parameter, using actual repeated windows and full-inverse mass. The evidence scopes of the two arguments remain distinct; physical states, spatial cuts, and fractal entropy scaling still require further work.

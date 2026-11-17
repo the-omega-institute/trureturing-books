@@ -562,9 +562,9 @@ $$
 
 反例族说明某些真实前缀的电荷可以逐层累积；要控制任意起点、任意长度的区段，还须同时控制每层块内部的所有前缀。这里可以复用一个与 Tribonacci 字母表无关的估计：每层至多留下一块未走完的子块，其余完整子块的电荷逐层相加。
 
-下列前缀包络、统一对数平方界及后文的固定参数开链收敛定理按书面证明收录。源文见 [前缀包络与区段界](https://github.com/the-omega-institute/trureturing/pull/30646)及 [开链收敛](https://github.com/the-omega-institute/trureturing/pull/30678)；各证明另给出固定版本的原文定位。这些结果尚无所钉 `dev` 提交中的匹配冻结声明，因此不计入本书的 Lean 验证，论证由作者与评审负责。前述 [@ex-ch39-p2e-tribonacci-prefix-rate] 的定量纸面结论保持其原有证据范围。
+下列前缀包络控制一般替代词的所有截取前缀，统一对数平方界控制实际 Tribonacci 词的任意区段；后文的开链收敛定理给出每个固定 $0<\rho<1$ 下，指定偶数开前缀的最小绝对特征值沿全序列趋零。[@ex-ch39-p2e-tribonacci-prefix-rate] 中的定量界及参数一致收敛仍属纸面应用，不由这条收敛定理提供。
 
-::: {.lemma #lem-ch39-p2e-substitution-prefix-envelope title="替代词的逐层前缀包络" status="written-proof" proof="pf-ch39-p2e-substitution-prefix-envelope" repository="https://github.com/the-omega-institute/trureturing" source="SubstitutionPrefixEnvelope, Theorem 1.2" request="https://github.com/the-omega-institute/trureturing-requests/issues/271"}
+::: {.lemma #lem-ch39-p2e-substitution-prefix-envelope title="替代词的逐层前缀包络" lean="D5/S1/Words/SubstitutionPrefixEnvelope.prefix_envelope"}
 设 $\mathcal A$ 为任意字母表，$w:\mathcal A\to\mathbb Z$ 为整数权重，$f$ 将每个字母映为一个有限字，并按拼接延伸到有限字。约定 $f^0(a)$ 为单字母字 $a$，且
 
 $$
@@ -595,14 +595,16 @@ $$
 :::
 
 ::: {.proof #pf-ch39-p2e-substitution-prefix-envelope}
-本证明依照 [源文 SubstitutionPrefixEnvelope, Theorem 1.2](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S1/Words/SubstitutionPrefixEnvelope.md) 的陈述与论证展开。
+本证明依照 [源声明 `prefix_envelope`](lean:D5/S1/Words/SubstitutionPrefixEnvelope.prefix_envelope) 的陈述与论证展开。
 
 局部从正号开始的交替和满足 $Q(uv)=Q(u)+(-1)^{|u|}Q(v)$，所以 $|Q(uv)|\le|Q(u)|+|Q(v)|$。零层像只是一个字母，所有前缀的绝对电荷至多为 $M$。将 $f^{j+1}(a)$ 写成由 $f(a)$ 指定的至多 $B$ 个 $j$ 层子块，任意前缀由若干完整子块与至多一个子块的前缀组成。完整部分贡献至多 $BH(j)$，未完成的部分由归纳假设控制在 $P(j)$ 内，故总量至多 $P(j)+BH(j)=P(j+1)$。若截取指标超过总长，则只有完整块；空像同样不增加电荷。整个归纳只用绝对值估计，不丢掉拼接时的相位。
+
+完整证明由 Lean 内核检查。
 :::
 
 对于实际 Tribonacci 词，完整块的电荷公式给出线性的 $H(j)$，上式便给出二次的 $P(j)$。还需把任意实际区段放进合适层数的块中，才能得到与起点无关的界。
 
-::: {.theorem #thm-ch39-p2e-tribonacci-uniform-log-squared title="实际 Tribonacci 词的统一对数平方区段界" status="written-proof" proof="pf-ch39-p2e-tribonacci-uniform-log-squared" repository="https://github.com/the-omega-institute/trureturing" source="TribonacciUniformLogSquared, Theorem 1.1" request="https://github.com/the-omega-institute/trureturing-requests/issues/272"}
+::: {.theorem #thm-ch39-p2e-tribonacci-uniform-log-squared title="实际 Tribonacci 词的统一对数平方区段界" lean="D5/S1/Words/TribonacciUniformLogSquared.uniform_log_squared"}
 取 $\sigma(A)=AB$、$\sigma(B)=AC$、$\sigma(C)=A$，令 $W=\lim_{n\to\infty}\sigma^n(A)$ 为从 $A$ 出发、从零编号的无限词。赋予整数权重 $w(A)=2$、$w(B)=1$、$w(C)=0$，并在每个区段内部从正号开始定义
 
 $$
@@ -621,7 +623,7 @@ $$
 :::
 
 ::: {.proof #pf-ch39-p2e-tribonacci-uniform-log-squared}
-本证明依照 [源文 TribonacciUniformLogSquared, Theorem 1.1](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S1/Words/TribonacciUniformLogSquared.md) 的陈述与论证展开。
+本证明依照 [源声明 `uniform_log_squared`](lean:D5/S1/Words/TribonacciUniformLogSquared.uniform_log_squared) 的陈述与论证展开。
 
 **完整块到前缀。** 沿用 $\tau=\sigma^4$。它的三个像长分别为 $13,11,7$。前面求出的完整块电荷为 $2$、$2-(-1)^j$ 与 $2-(2j+2)(-1)^j$，因此对所有字母 $X$ 与层数 $j$，
 
@@ -689,6 +691,8 @@ $$
 $$
 
 空区段的电荷为零，另行直接满足同一不等式。于是 $C=1404/(\log2)^2>0$ 是存在量词的一个充分见证；这里没有优化这个常数。
+
+完整证明由 Lean 内核检查。
 :::
 
 ::: {.remark #rem-ch39-p2e-tribonacci-refutation-boundaries title="交替偏差、谱文献与物理适用边界"}
@@ -1011,7 +1015,7 @@ $$
 
 前面的定量纸面应用已经给出更强的速率。另一个独立论证只需 [@thm-ch39-p2e-tribonacci-prefix-log-refutation] 中构造的实际前缀：奇数层的正电荷无界，因而可使完整逆矩阵的一个条目充分大。
 
-::: {.theorem #thm-ch39-p2e-tribonacci-open-chain-zero-gap title="实际正跃迁 Tribonacci 开链的全序列谱距离趋零" status="written-proof" proof="pf-ch39-p2e-tribonacci-open-chain-zero-gap" repository="https://github.com/the-omega-institute/trureturing" source="TribonacciOpenPathGap, Theorem 1.7" request="https://github.com/the-omega-institute/trureturing-requests/issues/273"}
+::: {.theorem #thm-ch39-p2e-tribonacci-open-chain-zero-gap title="实际正跃迁 Tribonacci 开链的全序列谱距离趋零" lean="D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.gap_tendsto_zero"}
 取 $\sigma(A)=AB$、$\sigma(B)=AC$、$\sigma(C)=A$ 的从 $A$ 出发的实际不动词 $W$，以及权重 $w(A)=2$、$w(B)=1$、$w(C)=0$。对每个固定实数 $0<\rho<1$，令 $t_i=\rho^{w(W_i)}$。对整数 $j\ge1$，令
 
 $$
@@ -1036,7 +1040,7 @@ $$
 :::
 
 ::: {.proof #pf-ch39-p2e-tribonacci-open-chain-zero-gap}
-本证明依照 [源文 TribonacciOpenPathGap, Theorem 1.7](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.md) 的陈述与论证展开。
+本证明依照 [源声明 `gap_tendsto_zero`](lean:D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.gap_tendsto_zero) 的陈述与论证展开。
 
 先固定一个真实的奇长前缀，再把同一个前缀放进所有足够长的开链。沿用 [@thm-ch39-p2e-tribonacci-prefix-log-refutation] 证明中的 $\tau=\sigma^4$、$F$ 与
 
@@ -1104,6 +1108,8 @@ $$
 最后给定 $\varepsilon>0$。因 $0<\rho<1$，可选自然数 $k$ 使 $\rho^k<\varepsilon$，再固定奇数 $n=2k+1$。有 $(n+1)(n+2)\ge k$，故上述界小于 $\varepsilon$。实际替代长度满足 $L_j\ge j+1$，从而 $N_j\ge L_j-1\ge j$；因此存在 $J\ge1$，使所有 $j\ge J$ 都有 $N_j\ge m_n+1$，并适用同一个前缀的估计。$n$ 只按 $\rho,\varepsilon$ 选择一次，此后每个 $j\ge J$ 都得到 $0\le\delta_{\rho,j}<\varepsilon$，并非只挑出一条子序列。
 
 源声明将 $j=0$ 时的 `gap` 定义为 $0$，以避开零维矩阵的空特征值集合；$j\ge1$ 时 $L_j\ge2$，其定义正是这里非空有限实谱的最小绝对值。这个单点约定不改变极限。
+
+完整证明由 Lean 内核检查。
 :::
 
 这条单独的收敛定理只陈述每个固定正 $\rho$ 的全序列极限；它的单个逆矩阵条目论证不提供 $1/N_j$ 速率。前面的 [@ex-ch39-p2e-tribonacci-prefix-rate] 已用实际重复窗口与完整逆矩阵质量估计给出更强的 $73728/N_j$ 纸面界及参数一致收敛。两条论证的证据范围须分别保留；物理态、空间切口与分形熵标度仍需另外建立。
