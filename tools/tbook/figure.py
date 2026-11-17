@@ -69,8 +69,12 @@ def esc(text: str) -> str:
 
 
 @functools.lru_cache(maxsize=1)
+def _tokens(text: str) -> dict:
+    return json.loads(text)
+
+
 def tokens() -> dict:
-    return json.loads((paths.THEME / "tokens.json").read_text(encoding="utf-8"))
+    return _tokens((paths.THEME / "tokens.json").read_text(encoding="utf-8"))
 
 
 def palette_rules(name: str) -> str:

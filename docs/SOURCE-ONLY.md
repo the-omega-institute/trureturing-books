@@ -7,10 +7,10 @@
 | `figures/*.py`、辅助数据 | `figures/*.<lang>.svg`、幻灯片的相应 SVG 副本 |
 | 可视化 HTML/CSS/JS、登记表、测试 | 常规 `thumb.jpg`、`fig-*.jpg`、`.stills.json` |
 | `theme/tokens.json`、`backdrop.css` | `theme/generated/tokens.*`、`backdrop.jpg/json` |
-| 统计论述模板与生成器 | 统计 JSON、生成章节、地图 JSON（书库声明输出） |
-| `trureturing.lock.json`、声明稳定编号、`template-manifest.json` | HTML、PDF、EPUB、视频与打包文件 |
+| 必要的局部论述与源程序 | 全书统计视图、索引及数据按需生成，消费者引用编译产物 |
+| `trureturing.lock.json`、`template-manifest.json` | HTML、PDF、EPUB、视频与打包文件 |
 
-锁文件记录冻结证据，稳定编号记录已发布身份，模板清单记录同步基线，三者不能当作可丢弃输出。照片、扫描件、自定义封面等原始素材也保留。常规视频海报目前仍按视频流程维护。
+锁文件记录冻结证据，模板清单记录同步基线，两者不能当作可丢弃输出。旧书已发布且仍被引用的稳定编号也须保留；删除统计索引及其消费者后，不再维护其专用编号表。照片、扫描件、自定义封面等原始素材也保留。常规视频海报目前仍按视频流程维护。
 
 ## 日常操作
 
@@ -18,9 +18,17 @@
 
 `./tbook build html|pdf|epub|slides|site|viz` 准备其消费者需要的输出。PDF/EPUB、可视化与站点发布需要 Node、Playwright Chromium；HTML 正文构建只需文本与静态图生成。可视化图片按页面输入、所引用卡及语言计算独立缓存单元 `viz-stills`，沿用现有内容摘要、成品校验和可信缓存恢复，不把图片放回 Git。构建失败立即停止对应书籍的后续输出。
 
+CI 将可视化静帧拆成最多 12 个互不重复的分片，每个分片复用专用图片缓存，再把校验完整的缓存单元交给所有 PDF 变体和 EPUB。导出任务要求已有图片，缺失或损坏直接失败，避免暗中重新截完整本书。每个分片只启动一次引用解析器与浏览器。
+
+自动 Pages 发布接在当前主干提交的成功 CI 后，复用该次 CI 已聚合的出版缓存；需要更新的视频在 Pages 中分片准备，站点组装复用结果。失败、其他仓库、PR 事件和过时提交的 CI 不启动自动发布。手动 Pages 仍自行检查并构建。
+
 手工验收单个可视化仍运行 `node tools/node/viz-thumbs.mjs <book> <id>`，缺图或输入变化才采样；`--check` 核对本地图片，`--force` 主动重采样。舞台、行为或标签变化仍按对应技能测试和看图。
 
+静态图每次直接运行 Python 脚本生成；只写入发生变化的 SVG 与幻灯片副本。`fig build --check` 比较当前绘图结果与本地文件，报告缺失或过期输出，不写回文件。
+
 ## 书库自己的生成器
+
+全书统计由下游选择 `.stats` 引用块按需嵌入或链接，构建只生成被引用的视图；也可用 `./tbook stats --write` 导出 `build/statistics/` 下的快照和多格式视图，选择方法见 `AUTHORING.md` 的“统计与派生产物”。删除手工维护的统计副本。下列旧生成器配置仅用于仍需兼容的既有书籍，不作为新书的默认方案；迁移时一并删除不再有消费者的模板、数据、编号表与 `[derived]` 配置。
 
 ```toml
 [statistics]

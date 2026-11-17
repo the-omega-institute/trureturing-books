@@ -7,6 +7,7 @@ Both outputs share one staging directory, ``build/stage/<slug>/<lang>/pandoc/``:
                      path relative to the book directory
     _theme/…         copies of theme/typst/*, theme/generated/tokens.typ and derived code themes
     meta.json        book/edition metadata read by theme/typst/book.typ
+    stage.json       relative staging metadata used when restoring the shared staging cache
     main.typ         Pandoc's Typst output (PDF)
     cover.png        the EPUB cover (1600×2560, tbook.cover.render_cover)
     epub/…           EPUB-only inputs: stylesheet, metadata, colophon; pandoc.epub before post-processing
@@ -62,6 +63,7 @@ from ``book.date``).
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import posixpath
@@ -75,7 +77,7 @@ import unicodedata
 import uuid
 import zipfile
 import zlib
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote, unquote
@@ -284,6 +286,29 @@ def _families(dirs: list[Path]) -> set[str]:
     return _FAMILIES[key]
 
 
+def _fontsource_ttf(src: Path, dst: Path) -> None:
+    """Reuse a conversion only while both its WOFF source and TTF bytes still match."""
+    data = src.read_bytes()
+    provenance = dst.with_suffix(".ttf.json")
+    source_hash = hashlib.sha256(data).hexdigest()
+    try:
+        record = json.loads(provenance.read_text(encoding="utf-8"))
+        if record == {"schema": 1, "woff_sha256": source_hash,
+                      "ttf_sha256": hashlib.sha256(dst.read_bytes()).hexdigest()}:
+            return
+    except (OSError, ValueError):
+        pass
+    font = _woff_to_sfnt(data)
+    record = {"schema": 1, "woff_sha256": source_hash, "ttf_sha256": hashlib.sha256(font).hexdigest()}
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=".fontsource-", dir=dst.parent) as tmp:
+        converted, stamp = Path(tmp) / "font", Path(tmp) / "provenance"
+        converted.write_bytes(font)
+        stamp.write_text(json.dumps(record), encoding="utf-8")
+        converted.replace(dst)
+        stamp.replace(provenance)
+
+
 def font_dirs() -> list[Path]:
     """Font directories handed to Typst: .cache/fonts, theme/typst/fonts, fontsource fallbacks."""
     dirs = [d for d in (FONT_CACHE, THEME_FONTS) if d.is_dir()]
@@ -296,16 +321,16 @@ def font_dirs() -> list[Path]:
         for w in weights:
             src = fs_root / pkg / "files" / f"{pkg}-latin-{w}-normal.woff"
             dst = FONTSOURCE_CACHE / f"{stem}-{w}.ttf"
-            if dst.exists():
-                use_fallback = True
-                continue
             if not src.exists():
+                use_fallback = use_fallback or dst.is_file()  # retain fonts for offline use without npm
                 continue
             try:
-                dst.parent.mkdir(parents=True, exist_ok=True)
-                dst.write_bytes(_woff_to_sfnt(src.read_bytes()))
+                _fontsource_ttf(src, dst)
                 use_fallback = True
-            except (OSError, ValueError, zlib.error) as exc:
+            except (OSError, ValueError, struct.error, zlib.error) as exc:
+                # A failed current source must not leave an older font for Typst or EPUB to pick up.
+                dst.unlink(missing_ok=True)
+                dst.with_suffix(".ttf.json").unlink(missing_ok=True)
                 print(f"  fonts: cannot convert {src.name}: {exc}", file=sys.stderr)
     return dirs + ([FONTSOURCE_CACHE] if use_fallback else [])
 
@@ -1281,6 +1306,41 @@ def stage_dir_for(book: config.Book, edition: config.Edition) -> Path:
     return paths.BUILD / "stage" / book.slug / edition.lang / "pandoc"
 
 
+def publication_stage(site: config.Site, book: config.Book, edition: config.Edition,
+                      model: EditionModel | None, lock: lean.Lock | None, *, out_dir: Path | None = None) -> Stage:
+    """Restore or prepare the variant-independent Markdown, media and metadata of an edition.
+
+    Only the source stage is stored: compiler outputs, the cover and EPUB work files are added by
+    their own build steps afterwards. Restoring it gives every consumer the same clean input tree.
+    """
+    from . import buildcache
+
+    out_dir = Path(out_dir) if out_dir else stage_dir_for(book, edition)
+    built: list[Stage] = []
+
+    def prepare() -> None:
+        if out_dir.exists():
+            shutil.rmtree(out_dir)
+        result = stage(site, book, edition, model, lock, out_dir=out_dir)
+        metadata = {"chapters": [asdict(c) for c in result.chapters], "files": result.files,
+                    "warnings": result.warnings, "formal_count": result.formal_count,
+                    "open_count": result.open_count, "meta": result.meta}
+        (out_dir / "stage.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
+                                            encoding="utf-8")
+        built.append(result)
+
+    unit = buildcache.pandoc_unit(site, book, edition.lang, out_dir, lock=lock, model=model)
+    buildcache.run(unit, prepare, repo=site.repo or None)
+    if built:
+        return built[0]
+    metadata = json.loads((out_dir / "stage.json").read_text(encoding="utf-8"))
+    result = Stage(dir=out_dir, book_md=out_dir / "book.md",
+                   chapters=[StagedChapter(**c) for c in metadata.pop("chapters")], **metadata)
+    for warning in result.warnings:
+        print(f"  warning: {warning}", file=sys.stderr)
+    return result
+
+
 def stage(site: config.Site, book: config.Book, edition: config.Edition, model: EditionModel | None,
           lock: lean.Lock | None, out_dir: Path | None = None) -> Stage:
     """Write book.md, _book/, _theme/ and meta.json into the staging directory."""
@@ -1521,6 +1581,8 @@ def book_meta(site: config.Site, book: config.Book, edition: config.Edition, mod
         "code": book.code,
         "version": book.version,
         "date": date,
+        "doi": book.doi,
+        "doi_url": f"https://doi.org/{book.doi}" if book.doi else "",
         "license": book.license,
         "isbn": edition_isbn(book, edition),
         "identifier": edition_identifier(book, edition),
@@ -1555,6 +1617,7 @@ def book_meta(site: config.Site, book: config.Book, edition: config.Edition, mod
             "authors": t(lang, "pdf.authors"),
             "license": t(lang, "pdf.license"),
             "isbn": t(lang, "pdf.isbn"),
+            "doi": t(lang, "pdf.doi"),
             "publisher": t(lang, "pdf.publisher"),
             "edition": t(lang, "pdf.edition"),
             "variant_screen": t(lang, "pdf.variant_screen"),
@@ -1611,14 +1674,25 @@ def _filters() -> list[str]:
 def typst_source(site, book, edition, model, lock, staged: Stage | None = None,
                  stage_dir: Path | None = None) -> Stage:
     """Stage the edition and convert book.md to main.typ (variant-independent)."""
-    staged = staged or stage(site, book, edition, model, lock, out_dir=stage_dir)
-    run_pandoc([
-        "book.md", "--from", READER, "--to", "typst",
-        "--template", str((staged.dir / "_theme" / "typst" / "pandoc-template.typst")),
-        "--output", "main.typ", "--wrap", "preserve",
-        "--metadata", f"lang={edition.bcp47}",
-        *_filter_meta(edition.lang), *_filters(),
-    ], cwd=staged.dir, env={"SOURCE_DATE_EPOCH": str(source_date_epoch(book))})
+    from . import buildcache
+
+    shared = staged is None
+    staged = staged or publication_stage(site, book, edition, model, lock, out_dir=stage_dir)
+
+    def convert() -> None:
+        run_pandoc([
+            "book.md", "--from", READER, "--to", "typst",
+            "--template", str((staged.dir / "_theme" / "typst" / "pandoc-template.typst")),
+            "--output", "main.typ", "--wrap", "preserve",
+            "--metadata", f"lang={edition.bcp47}",
+            *_filter_meta(edition.lang), *_filters(),
+        ], cwd=staged.dir, env={"SOURCE_DATE_EPOCH": str(source_date_epoch(book))})
+
+    if shared:
+        unit = buildcache.typst_unit(site, book, edition.lang, staged.dir / "main.typ", lock=lock, model=model)
+        buildcache.run(unit, convert, repo=site.repo or None)
+    else:
+        convert()
     return staged
 
 
@@ -1665,44 +1739,6 @@ def compile_typst(main: Path, out_path: Path, *, root: Path, fmt: str = "pdf", p
     return out_path
 
 
-def _compact_pdf(path: Path) -> Path:
-    """Pack PDF objects and Flate streams without resampling or re-encoding images."""
-    import pikepdf
-    import zopfli.zlib
-
-    with tempfile.TemporaryDirectory(prefix=".tbook-pdf-", dir=path.parent) as tmp:
-        compact = Path(tmp) / path.name
-        with pikepdf.open(path) as pdf:
-            # Typst's numeric drawing/text operators compress better with FILTERED.
-            # Restrict this to plain page streams: image and font bytes stay untouched.
-            seen = set()
-            for page in pdf.pages:
-                contents = page.obj.get("/Contents")
-                if contents is None:
-                    continue
-                streams = contents if isinstance(contents, pikepdf.Array) else [contents]
-                for stream in streams:
-                    if (stream.objgen in seen or stream.get("/Filter") != pikepdf.Name.FlateDecode
-                            or stream.get("/DecodeParms") is not None):
-                        continue
-                    seen.add(stream.objgen)
-                    decoded = stream.read_bytes()
-                    encoder = zlib.compressobj(9, zlib.DEFLATED, 15, 9, zlib.Z_FILTERED)
-                    filtered = encoder.compress(decoded) + encoder.flush()
-                    # One Zopfli iteration, without block-split searches, bounds export
-                    # cost while improving Deflate's match selection. Keep FILTERED
-                    # when it wins; both encode exactly the same page commands.
-                    stronger = zopfli.zlib.compress(decoded, numiterations=1, blocksplitting=False)
-                    encoded = min((filtered, stronger), key=len)
-                    if len(encoded) < len(stream.read_raw_bytes()):
-                        stream.write(encoded, filter=pikepdf.Name.FlateDecode)
-            pdf.save(compact, object_stream_mode=pikepdf.ObjectStreamMode.generate,
-                     compress_streams=True, recompress_flate=False, deterministic_id=True)
-        if compact.stat().st_size < path.stat().st_size:
-            compact.replace(path)
-    return path
-
-
 def build_pdf(site, book, edition, model, lock, variant: str, out_path: Path, *,
               stage_dir: Path | None = None) -> Path:
     """Build ``out_path`` (PDF: ``screen`` (dark), ``print`` (light), or ``academic`` (scholarly layout)).
@@ -1715,7 +1751,7 @@ def build_pdf(site, book, edition, model, lock, variant: str, out_path: Path, *,
     result = compile_typst(staged.dir / "main.typ", Path(out_path), root=staged.dir,
                          sys_inputs={"tr-variant": variant}, timestamp=source_date_epoch(book) or None,
                          pdf_tags=bool(book.pdf.get("academic_tags", False)) if variant == "academic" else True)
-    return _compact_pdf(result) if variant == "academic" else result
+    return result
 
 
 # --------------------------------------------------------------------------- EPUB
@@ -1812,6 +1848,8 @@ def stage_epub(site, book, edition, model, lock, staged: Stage) -> dict:
 
     isbn = meta["isbn"]
     identifier = [{"scheme": "ISBN-13", "text": re.sub(r"[^0-9Xx]", "", isbn)}] if isbn else [{"text": meta["identifier"]}]
+    if meta["doi"]:
+        identifier.append({"scheme": "DOI", "text": meta["doi"]})
     title = [{"type": "main", "text": meta["title"]}]
     if meta["subtitle"]:
         title.append({"type": "subtitle", "text": meta["subtitle"]})
@@ -1849,6 +1887,8 @@ def epub_colophon(meta: dict) -> str:
         rows.append((s["license"], meta["license"]))
     if meta["isbn"]:
         rows.append((s["isbn"], meta["isbn"]))
+    if meta["doi"]:
+        rows.append((s["doi"], f"[{meta['doi']}]({meta['doi_url']})"))
     if meta["publisher"]:
         rows.append((s["publisher"], meta["publisher"]))
     tru = meta["trureturing"]
@@ -2020,7 +2060,7 @@ def build_epub(site, book, edition, model, lock, out_path: Path, *, stage_dir: P
     ``stage_dir`` overrides build/stage/<slug>/<lang>/pandoc/ (tests).
     """
     out_path = Path(out_path)
-    staged = stage(site, book, edition, model, lock, out_dir=stage_dir)
+    staged = publication_stage(site, book, edition, model, lock, out_dir=stage_dir)
     extra = stage_epub(site, book, edition, model, lock, staged)
     epoch = source_date_epoch(book)
     raw = staged.dir / "epub" / "pandoc.epub"

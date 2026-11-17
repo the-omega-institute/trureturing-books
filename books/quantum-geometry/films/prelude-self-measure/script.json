@@ -1,0 +1,45 @@
+{
+  "voice": "af_heart",
+  "speed": 0.92,
+  "say": {"Lean": "Leen", "psi": "sigh", "theta": "thayta"},
+  "music": {"bpm": 70, "progression": "d-minor"},
+  "scenes": [
+    {"id": "tower", "name": "THE TOWER", "lead": 3.4, "tail": 1.8, "music": [1.0, 0.3, 0.2, 0.0, 0.0], "lines": [
+      ["Each time we stepped outside, a larger sphere, one dimension up, closed around the old one.", "每一次我们走到外面，就有一颗高一维的更大的球，把旧球包了进去。"],
+      ["A climber trapped in that tower could never see its rule; yet we just did.", "困在这座塔里的攀爬者，永远看不见它的规律；可我们刚刚看见了。"],
+      ["The book's reading: whoever measures is never wholly inside.", "本书的诠释：凡在丈量者，从不完全身在其中。"],
+      ["So here is the question: what happens when the ruler measures itself?", "于是问题来了：当尺子丈量它自己时，会发生什么？"]
+    ], "cues": [{"line": 3, "at": 1.2, "kind": "chime"}]},
+    {"id": "rule", "name": "THE RULE", "lead": 1.2, "tail": 1.8, "music": [0.9, 0.5, 0.3, 0.0, 0.1], "lines": [
+      ["The rule: read the cosine of an angle, then use that reading as the next angle.", "规则是：读出一个角的余弦，再把这个读数当作下一个角。"],
+      ["Angles are in radians, and we start at one.", "角按弧度计，我们从 1 开始。"],
+      ["The first reading is about zero point five four.", "第一次读数约为 0.540。"]
+    ]},
+    {"id": "cobweb", "name": "THE ZIGZAG", "lead": 0.6, "tail": 2.0, "music": [0.9, 0.6, 0.6, 0.2, 0.2], "lines": [
+      ["Go up to the curve to read, then across to the diagonal to reuse.", "竖着走到曲线上读数，再横着走到对角线上，把读数拿来再用。"],
+      ["The readings swing above and below, each time a little closer.", "读数忽高忽低地来回摆动，每一次都更近一点。"],
+      ["They close in on one number, near zero point seven three nine.", "它们向同一个数收拢，约为 0.739。"]
+    ]},
+    {"id": "cross", "name": "ONE CROSSING", "lead": 1.0, "tail": 2.0, "music": [0.9, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["The curve and the diagonal cross between zero and one, at exactly one positive point.", "曲线与对角线在 0 与 1 之间相交，而且在正数一侧只交于这一点。"],
+      ["Its existence and uniqueness are checked by the Lean kernel.", "这一点的存在与唯一，由 Lean 内核检查。"],
+      ["That the zigzag gets there from any start is a classical result, cited but not formalized.", "折线从任何起点出发都会走到那里：这是经典结果，本书引用，但未形式化。"]
+    ], "cues": [{"line": 1, "at": 0.6, "kind": "chime"}]},
+    {"id": "never", "name": "NEVER QUITE", "lead": 1.0, "tail": 2.0, "music": [0.9, 0.6, 0.5, 0.2, 0.2], "lines": [
+      ["No step lands exactly: the gap shrinks, but it never reaches zero.", "没有哪一步正好落上：差距在缩小，却始终不为零。"],
+      ["Like polygons inside a circle: closer with every side, never the circle itself.", "就像圆内的多边形：边越多越接近，却永远不是圆本身。"],
+      ["The book reads this as: every sphere we hold is an approximation.", "本书把它读作：我们手里的每一颗球，都只是近似。"]
+    ]},
+    {"id": "psi", "name": "ψ = ψ(ψ)", "lead": 0.8, "tail": 3.0, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["At the crossing, the reading and the angle are the same number.", "在交点处，读数与角是同一个数。"],
+      ["The ruler measures its own opening, and the answer is itself.", "尺子丈量自己张开的角，得到的答案就是它自己。"],
+      ["The book writes this as psi equals psi of psi.", "本书把它写成 ψ = ψ(ψ)。"]
+    ], "cues": [{"line": 2, "at": 1.2, "kind": "impact"}]},
+    {"id": "recap", "name": "RECAP", "lead": 0.8, "tail": 6.4, "music": [1.0, 0.5, 0.4, 0.2, 0.1], "lines": [
+      ["Feed each reading back in as the next angle.", "把每次读数当作下一次的角。"],
+      ["Cosine theta equals theta has exactly one positive solution.", "cos θ = θ 恰有一个正解。"],
+      ["Finite steps come close but never land: the sphere is always approximate.", "有限步只能逼近、不会落上：球永远只是近似。"],
+      ["The prelude ends here; chapter one begins with two arrows.", "序曲到此结束；第一章从两支箭头开始。"]
+    ], "cues": [{"line": 3, "at": 4.0, "kind": "chime"}]}
+  ]
+}

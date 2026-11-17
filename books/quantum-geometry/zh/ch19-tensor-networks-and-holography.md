@@ -57,6 +57,7 @@ $$
 $$
 \operatorname{rank}\bigl(\operatorname{flow}(M, N)\bigr) = \operatorname{QMaxFlow}(a, b, c, d).
 $$
+
 :::
 
 ::: proof
@@ -93,6 +94,7 @@ $$
 $$
 \operatorname{QMaxFlow}(a, b, c, d) \le \operatorname{QMinCut}(a, b, c, d) = \min\bigl(3ac,\, \min(ad, bc)\bigr).
 $$
+
 :::
 
 ::: proof
@@ -164,6 +166,7 @@ $$
 $$
 \operatorname{QMinCut}(a, b, c, d) = \min(ad, bc).
 $$
+
 :::
 
 ::: proof
@@ -231,6 +234,7 @@ $$
 $$
 \operatorname{QMaxFlow}(a, b, c, d) = \operatorname{QMinCut}(a, b, c, d) \qquad\text{且}\qquad \operatorname{QMinCut}(a, b, c, d) = \min(ad, bc).
 $$
+
 :::
 
 ::: proof
@@ -248,6 +252,355 @@ $$
 - 定理中的“桥图”并非附加的抽象几何类型，而是特指由三路克罗内克积求和定义的显式矩阵收缩 $\operatorname{flow}(M, N) = \sum_{r \in \operatorname{Fin} 3} M_r \otimes N_r$；
 - 等式 $\operatorname{QMaxFlow} = \operatorname{QMinCut} = \min(ad, bc)$ 严格依赖于桥宽 $\operatorname{Fin} 3$ 以及显式列出的正性、顺序与二次锥不等式（$0 < a \le b$，$0 < c \le d$，$a^2 + b^2 \le 3ab$，$c^2 + d^2 \le 3cd$）；
 - 该定理**不能**无条件推广到任意拓扑的张量网络、完整的 MERA 多尺度重整化树、连续统 AdS/CFT 对偶或 Ryu–Takayanagi 极小曲面公式。
+
+[@thm-bridge-quantum-maxflow-mincut] 确定的是可达秩，而不是奇异值的分布。设非零桥流 $F$ 的非零奇异值为 $\sigma_1,\ldots,\sigma_R$；将它作为行、列两侧的纯态振幅矩阵归一化后，施密特权重为 $p_j=\sigma_j^2/\sum_k\sigma_k^2$。秩只数有多少个 $p_j$ 非零；纠缠熵达到 $\ln R$ 还要求它们全部等于 $1/R$。[@ex-bridge-two-three] 的置换矩阵恰好兼具满秩与平坦谱，但秩定理本身没有保证每组允许维数都能如此。
+
+仍按 19.1 节的原始分组，取 $M_r\in M_{a\times b}(\mathbb C)$、$N_r\in M_{d\times c}(\mathbb C)$，并令
+
+$$
+F=\sum_{r=0}^2 M_r\otimes N_r:
+\mathbb C^b\otimes\mathbb C^c\longrightarrow
+\mathbb C^a\otimes\mathbb C^d.
+$$
+
+这里 $F^*$ 表示共轭转置。比秩可达更强的要求，是存在同一组矩阵族 $M,N$ 和同一个正实数 $\lambda$，使
+
+$$
+\begin{aligned}
+bc\le ad&\ \Longrightarrow\ F^*F=\lambda I_{bc},\\
+ad\le bc&\ \Longrightarrow\ FF^*=\lambda I_{ad}.
+\end{aligned}
+$$
+
+它们分别要求列或行构成范数为 $\sqrt{\lambda}$ 的正交族，使较小一侧的奇异值全部等于 $\sqrt{\lambda}$。在接缝 $ad=bc$ 上，两项蕴含同时生效，使用的是同一个 $F$ 与同一个 $\lambda$。下面的必要条件说明，这种加强受到秩本身看不见的限制。
+
+先看结论中 $2c$ 的几何含义。当 $c=1$，若能从右侧因子中组合出 $y_0,y_1\in\mathbb C^d$，满足 $y_0^*y_0=y_1^*y_1=1$、$y_0^*y_1=0$，就必须有 $d\ge2$。推广到一般 $c$，所需的是两个等距映射 $J_0,J_1:\mathbb C^c\to\mathbb C^d$，满足 $J_\alpha^*J_\beta=\delta_{\alpha\beta}I_c$：两个 $c$ 维像彼此正交，因而 $d\ge2c$。下面先找出共同的两个系数方向，再从原始 Gram 恒等式导出这样的映射。
+
+::: {.theorem #thm-bridge-common-coefficient-plane title="所有 Hermitian 系数核的共同复二维中性平面" lean="D5/S3/Quantum/Algebra/GenericCommonCoefficientPlane.common_plane"}
+设 $a,b\in\mathbb N$ 满足严格阈值 $3a<2b$。令
+
+$$
+X:\operatorname{Fin}3\longrightarrow M_{a\times b}(\mathbb C)
+$$
+
+是复线性无关的三元组，并令系数指标在前的堆叠 $S=\operatorname{stack}(X)$（行指标为 $(r,i)\in\operatorname{Fin}3\times\operatorname{Fin}a$）满足 $S$ 的线性映射是单射。则存在复二维子空间 $L\subset\mathbb C^3$，使得对每个 Hermitian 系数矩阵 $T\in M_3(\mathbb C)$，只要
+
+$$
+S^*(T\otimes I_a)S=0,
+$$
+
+就有完整的复半双线性配对
+
+$$
+u^*Tv=0\qquad(u,v\in L).
+$$
+
+这里的量词包含 Hermitian 系数核只有零矩阵的情形；定理没有另加非零核、签名或正性假设。
+:::
+
+::: proof
+记
+
+$$
+\Phi_X(T)=S^*(T\otimes I_a)S=\sum_{r,s}T_{rs}X_r^*X_s,
+$$
+
+即源码的 [compression](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression) 与 [compression_eq_sum](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression_eq_sum)。两次乘积秩下界给出 $\operatorname{rank}\Phi_X(T)\ge a\operatorname{rank}T-2(3a-b)$。若 $\Phi_X(T)=0$ 且 $\operatorname{rank}T=3$，便有 $2b\le3a$，矛盾，所以每个系数核矩阵的秩至多为 $2$。若 $T$ 半正定，将它写成 $C^*C$，对 $\Phi_X(T)=0$ 取迹得到若干矩阵范数平方之和为零，迫使 $C$ 的每行给出 $\sum_r C_{jr}X_r=0$；独立性使 $C=0$。对 $-T$ 同理。因此每个非零 Hermitian 核形式都有一正、一负和一个零特征值。
+
+若 Hermitian 核只有零矩阵，任意复二维平面都满足结论。否则，对一个非零核形式作可逆伴随合同，将其化为 $\operatorname{diag}(1,-1,0)$，并配对变换 $X$；独立性和堆叠单射性均保留。以下暂在这组坐标中工作。等列 Gram $X_0^*X_0=X_1^*X_1$ 给出 $X_1=UX_0$，其中 $U$ 是余域 $\mathbb C^a$ 上的酉矩阵。令
+
+$$
+\begin{aligned}
+D&=\operatorname{range}X_0,& E&=X_2(\ker X_0),\\
+r&=\dim D,&s&=\dim E.
+\end{aligned}
+$$
+
+堆叠单射性使 $X_2$ 在 $\ker X_0$ 上单射，故 $r+s=b$；由 $r,s\le a$ 与 $3a<2b$ 得 $2r>a$。对任意 Hermitian 核形式 $Q$，在 $\ker X_0$ 上配对先得到 $Q_{22}=0$，再在任意输入向量间配对得到
+
+$$
+(Q_{20}I_a+Q_{21}U)D\perp E.
+$$
+
+若某个 $Q$ 的交叉系数不全为零，记 $K=Q_{20}I_a+Q_{21}U$。上式给出 $\dim\ker(K|_D)\ge r+s-a=b-a$，所以
+
+$$
+\dim\bigl(\ker(K|_D)\cap E\bigr)\ge b+s-2a\ge2b-3a>0.
+$$
+
+取其中非零 $v$，则 $Q_{21}\ne0$，且 $Uv=wv$，其中 $w=-Q_{20}/Q_{21}$、$|w|=1$。把同一个 $v\in D\cap E$ 代入每个核形式的交叉关系，得到所有形式共有的 $Q_{20}+wQ_{21}=0$；取 $v$ 在 $X_0$ 下的原像再配对，得到 $(1,w,0)^*Q(1,w,0)=0$。
+
+若所有交叉系数都为零，令
+
+$$
+A(Q)=(Q_{00}+Q_{11})I_a+Q_{01}U+Q_{10}U^*.
+$$
+
+由 $X_0^*A(Q)X_0=0$ 与 $2r>a$，每个 $A(Q)$ 都奇异。一次对角化同一个 $U$ 后，这些对角元是 Hermitian 核这个实向量空间上的有限个实线性泛函。它们的零空间覆盖整个核；实向量空间不可能被有限个真线性子空间覆盖，故至少一个固定对角元对整个核恒为零。它的酉特征值给出同一个单位相位 $w$，也使 $(1,w,0)^*Q(1,w,0)=0$ 对所有 $Q$ 成立。
+
+两种分支都使 $L=\operatorname{span}_{\mathbb C}\{(0,0,1),(1,w,0)\}$ 上的四个基向量配对全部为零：用到 $Q_{22}=0$、交叉关系、其共轭与最后的二次关系。由共轭线性与线性延拓，完整的 $u^*Qv$ 对任意 $u,v\in L$ 为零。可逆系数合同把这一共同平面运回原坐标，保持复维数与完整配对。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-bridge-native-rectangular-bound title="原生三项矩形张量和的列 Gram 维数界" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeRectangularBound.bound"}
+对任意自然数 $a,b,c,d$，任取复矩阵族
+
+$$
+M_r\in M_{a\times b}(\mathbb C),\qquad N_r\in M_{d\times c}(\mathbb C)\qquad(r=0,1,2),
+$$
+
+令原始收缩（行指标为 $\operatorname{Fin}a\times\operatorname{Fin}d$，列指标为 $\operatorname{Fin}b\times\operatorname{Fin}c$）
+
+$$
+F=\sum_{r=0}^2M_r\otimes N_r:
+\mathbb C^b\otimes\mathbb C^c\longrightarrow\mathbb C^a\otimes\mathbb C^d.
+$$
+
+若 $\lambda\in\mathbb R$ 满足 $\lambda>0$，且
+
+$$
+F^*F=\lambda I_{bc},\qquad 3a<2b,
+$$
+
+则
+
+$$
+2c\le d.
+$$
+
+不要求原始三元组独立、白化或归一化，也不加维数正性、顺序或二次锥条件；所有自然维数都在量词内，包括零维情形。
+:::
+
+::: proof
+若 $c=0$，结论为 $0\le d$。以下设 $c>0$；严格阈值给出 $b>0$。若 $a=0$ 或 $d=0$，$F$ 的所有列为零，与 $F^*F=\lambda I_{bc}$ 矛盾；$b=0$ 则不满足阈值。因此没有暗中删去任何零维情形。另在更强的 $2a<b$ 区间，下面的 [@thm-bridge-scalar-gram-obstruction] 已给出更强结论 $3c\le d$；以下解释一般的 $2c\le d$ 机制。
+
+把同一个 $F$ 写成项数最少的精确张量和，记为 $\sum_{r<k}A_r^{(0)}\otimes D_r$，其中 $0\le k\le3$。若任一侧因子线性相关，从非零系数关系解出一个因子并把该项吸收到其余项，就可减少宽度。因此最小分解两侧各自复线性无关。令 $A_r=A_r^{(0)}/\sqrt\lambda$，得到
+
+$$
+\widehat F=\frac{F}{\sqrt\lambda}=\sum_{r<k}A_r\otimes D_r,\qquad
+\widehat F^*\widehat F=I_{bc}.
+$$
+
+这是对原始假设的推导，不是附加的独立性或归一化前提。
+
+对 $c>0$，右侧独立性使归一 Hilbert–Schmidt Gram
+
+$$
+H_{rs}=\frac1c\Tr(D_r^*D_s)
+$$
+
+正定：$z^*Hz=c^{-1}\|\sum_r z_rD_r\|_{\mathrm{HS}}^2$，非零 $z$ 时严格为正。故 $H=B^*B$，其中 $B$ 可逆。作配对的系数白化
+
+$$
+\begin{aligned}
+X_r&=\sum_sB_{rs}A_s,\\
+Y_r&=\sum_s(B^{-T})_{rs}D_s,\\
+B^{-T}&=(B^T)^{-1}.
+\end{aligned}
+$$
+
+这里用逆转置，因为张量和的系数配对是双线性的：$B^TB^{-T}=I_k$ 保证 $\sum_rX_r\otimes Y_r=\widehat F$。这一步不改变已归一的收缩，也保留因子独立性。对 $\widehat F^*\widehat F=I_b\otimes I_c$ 的第二因子取偏迹并除以 $c$，有
+
+$$
+\begin{aligned}
+\sum_{r,s}H_{rs}A_r^*A_s&=I_b,\\
+\sum_rX_r^*X_r&=I_b.
+\end{aligned}
+$$
+
+因此系数在前的堆叠 $S:\mathbb C^b\to\mathbb C^k\otimes\mathbb C^a$ 满足 $S^*S=I_b$，给出单射及 $b\le ka$。宽度 $k=0,1$ 都与 $b>a$ 矛盾。
+
+对余下的 $k=2,3$，定义压缩与每个右侧指标对的 Gram 缺陷
+
+$$
+\begin{aligned}
+\Phi_X(T)&=S^*(T\otimes I_a)S
+=\sum_{r,s}T_{rs}X_r^*X_s,\\
+(G_{\ell m})_{rs}&=(Y_r^*Y_s)_{\ell m},\\
+R_{\ell m}&=G_{\ell m}-\delta_{\ell m}I_k
+\qquad(0\le\ell,m<c).
+\end{aligned}
+$$
+
+这里 $\delta$ 为 Kronecker 符号，所有复右 Gram 缺陷统一为 $R=G-\delta I$。展开 $\widehat F^*\widehat F=I_{bc}$，取第二因子的 $(\ell,m)$ 矩阵元，再减去 $\delta_{\ell m}\sum_rX_r^*X_r$，就得 $\Phi_X(R_{\ell m})=0$。
+
+$k=2$ 时，$\operatorname{rank}S=b$。两次乘积秩下界给出
+
+$$
+\operatorname{rank}\Phi_X(T)\ge a\operatorname{rank}T-2(2a-b).
+$$
+
+若非零 $T$ 的压缩为零，则 $\operatorname{rank}T\ge1$ 迫使 $2b\le3a$，矛盾。因此压缩核为零，所有 $R_{\ell m}=0$，即 $Y_r^*Y_s=\delta_{rs}I_c$。当 $c=1$，$Y_0,Y_1$ 就是 $\mathbb C^d$ 中两根正交单位向量。一般 $c$ 时，$Y_0,Y_1:\mathbb C^c\to\mathbb C^d$ 是等距映射，且其两个 $c$ 维像彼此正交；拼接 $[\,Y_0\ Y_1\,]$ 有 $2c$ 根正交归一列，故 $2c\le d$。
+
+$k=3$ 时，[@thm-bridge-common-coefficient-plane] 的独立性与堆叠单射前提已经导出。其共同平面 $L$ 对整个 Hermitian 压缩核有效，包括该核为零的情形。每个复缺陷 $R=G-\delta I_3$ 未必 Hermitian，尤其不能略过 $\ell\ne m$。由于 $\Phi_X(R^*)=\Phi_X(R)^*$，两个 Hermitian 部分
+
+$$
+\begin{aligned}
+R_{\mathrm R}&=\frac{R+R^*}{2},\\
+R_{\mathrm I}&=\frac{R-R^*}{2i},\\
+R&=R_{\mathrm R}+iR_{\mathrm I}.
+\end{aligned}
+$$
+
+都在核中。同一个 $L$ 同时消去每个块的两部分的完整配对，故 $u^*R_{\ell m}v=0$ 对全部 $\ell,m$ 与 $u,v\in L$ 成立；这些是伴随意义的 Hermitian 部分，不是逐元素的实部与虚部。
+
+取 $L$ 的正交归一基组成 $V\in M_{3\times2}(\mathbb C)$，令
+
+$$
+W=[\,Y_0\ Y_1\ Y_2\,],\qquad C=V\otimes I_c.
+$$
+
+全部块关系与 $V^*V=I_2$ 给出
+
+$$
+\begin{aligned}
+(WC)^*(WC)&=I_{2c},\\
+2c&=\operatorname{rank}(WC)\le d.
+\end{aligned}
+$$
+
+当 $c=1$，$WC$ 的两列是正交单位向量；一般 $c$ 时，两组列张成两个彼此正交的 $c$ 维像。这个结论来自张量 Gram 的全部块，而非仅靠环境维数不等式 $bc\le ad$。最小分解、白化、堆叠与压缩都是证明辅助操作，原始 $F$ 的行指标 $(a,d)$ 与列指标 $(b,c)$ 始终不变。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-bridge-scalar-gram-obstruction title="宽度三桥流的标量 Gram 障碍" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction"}
+设 $a,b,c,d\in\mathbb N$，$c>0$、$b>2a$。对任意三个 $a\times b$ 复矩阵 $M_r$、三个 $d\times c$ 复矩阵 $N_r$ 及正实数 $\lambda$，若
+
+$$
+F=\sum_{r=0}^2M_r\otimes N_r,\qquad
+F^*F=\lambda I_{bc},
+$$
+
+则 $d\ge3c$。不另要求 $a>0$，也不加顺序条件或二次锥条件。
+:::
+
+::: {.proof #pf-bridge-scalar-gram-obstruction}
+先把三张 $M_r$ 竖直堆叠为辅助映射
+
+$$
+V:\mathbb C^b\longrightarrow\mathbb C^3\otimes\mathbb C^a,\qquad
+Vx=\sum_{r=0}^2e_r\otimes M_rx.
+$$
+
+若 $Vx=0$，则所有 $M_rx=0$，故 $F(x\otimes y)=0$。取非零 $y\in\mathbb C^c$，由 $F^*F=\lambda I_{bc}$ 得 $\lambda\|x\|^2\|y\|^2=0$，所以 $x=0$。因此 $W=\operatorname{range}V$ 的维数为 $b$。
+
+固定任意非零系数方向 $z=(z_0,z_1,z_2)\in\mathbb C^3$。子空间 $z\otimes\mathbb C^a$ 的维数为 $a$，而环境空间的维数为 $3a$；因为 $b+a>3a$，有 $W\cap(z\otimes\mathbb C^a)\ne\{0\}$。于是存在非零 $x,u$，使 $Vx=z\otimes u$，即对每个 $r$ 都有 $M_rx=z_ru$。
+
+这使九个 $M_r^*M_s$ 线性无关。事实上，若复系数矩阵 $T=(t_{rs})$ 满足 $\sum_{r,s}t_{rs}M_r^*M_s=0$，用上面选出的 $x$ 在两侧配对便得
+
+$$
+0=\sum_{r,s}t_{rs}\langle M_rx,M_sx\rangle
+=\|u\|^2z^*Tz.
+$$
+
+因此 $z^*Tz=0$ 对所有 $z$ 成立（$z=0$ 时亦然）。分别代入 $e_r$，再对 $r\ne s$ 代入 $e_r+e_s$ 与 $e_r+i e_s$，得到
+
+$$
+t_{rr}=0,\qquad t_{rs}+t_{sr}=0,\qquad
+it_{rs}-it_{sr}=0.
+$$
+
+故所有 $t_{rs}=0$。这里同时用了实、虚两个方向，不能只检验实向量 $z$。
+
+接着展开原来的列 Gram 恒等式：
+
+$$
+\sum_{r,s}(M_r^*M_s)\otimes(N_r^*N_s)
+=\lambda I_b\otimes I_c.
+$$
+
+由 $c>0$ 固定一个坐标 $k$，定义 $H_{rs}=(N_r^*N_s)_{kk}$，并记 $\delta_{ij}$ 为 Kronecker 符号。对任意 $i,j$，取上式在第二个张量因子上的 $(i,j)$ 矩阵元，再减去 $(k,k)$ 矩阵元对应等式的 $\delta_{ij}$ 倍，得到
+
+$$
+\sum_{r,s}\bigl((N_r^*N_s)_{ij}-\delta_{ij}H_{rs}\bigr)M_r^*M_s=0.
+$$
+
+由九个 $M_r^*M_s$ 的线性无关性，每个系数均为零，因而全部交叉 Gram 都是标量矩阵：$N_r^*N_s=H_{rs}I_c$。同时，$(k,k)$ 矩阵元对应的等式可用竖直堆叠 $V$ 写为
+
+$$
+V^*(H\otimes I_a)V=\lambda I_b.
+$$
+
+因为 $\lambda>0$，右边的秩为 $b$；乘积的秩不超过中间因子的秩，所以
+
+$$
+b\le\operatorname{rank}(H\otimes I_a)
+=a\operatorname{rank}H.
+$$
+
+$H$ 是 $3\times3$ 矩阵，秩至多为 $3$；若其秩至多为 $2$，就有 $b\le2a$，与假设矛盾。因此 $\operatorname{rank}H=3$。最后横向拼接
+
+$$
+C=[\,N_0\ N_1\ N_2\,]\in M_{d\times3c}(\mathbb C).
+$$
+
+其 Gram 矩阵为 $C^*C=H\otimes I_c$，于是
+
+$$
+3c=c\operatorname{rank}H
+=\operatorname{rank}(C^*C)
+\le\operatorname{rank}C\le d.
+$$
+
+辅助堆叠与拼接只用于证明，原来的三项收缩及行列分组始终不变。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-bridge-two-five-flat-spectrum title="秩达到 10，谱却不能平坦：$(2,5,2,5)$"}
+取 $(a,b,c,d)=(2,5,2,5)$。正性、顺序条件与两条二次锥条件全部成立：
+
+$$
+\begin{aligned}
+0<a=2&\le b=5,\qquad 0<c=2\le d=5,\\
+a^2+b^2=c^2+d^2&=29\le30=3ab=3cd.
+\end{aligned}
+$$
+
+即使再加上两条比值限制 $2b\le5a$、$2d\le5c$，这一点仍被允许，因为 $2b=5a=10$ 且 $2d=5c=10$。
+
+此时 $ad=bc=10$、$3ac=12$，所以 [@thm-bridge-quantum-maxflow-mincut] 给出 $\operatorname{QMaxFlow}=\operatorname{QMinCut}=10$；由 [@lemma-bridge-flow-attained]，确有某组三对矩阵使 $F$ 的秩达到 $10$。然而 $b=5>2a=4$，列 Gram 恒等式 $F^*F=\lambda I_{10}$ 若对某个 $\lambda>0$ 成立，[@thm-bridge-scalar-gram-obstruction] 就要求 $d\ge3c=6$，与 $d=5$ 矛盾。因此，对任意这样的复矩阵三元组和任意正 $\lambda$，该恒等式都不成立。
+
+这个反例恰好位于 $ad=bc$ 的接缝，两项标量 Gram 要求同时生效；列恒等式的不可能性已经排除了它们在同一证人下的联合成立。这里存在满秩桥流，却不存在十个奇异值全部相等且为正的桥流：在这一行列二分下，秩达到 $10$ 并不使归一化纠缠熵达到 $\ln10$。
+:::
+
+上述施密特权重与熵的讨论是归一化纯态的谱解释；定理本身只给出矩阵维数的必要条件。这一障碍针对既定分组下的三项复矩阵收缩与精确平坦谱；它不给出近似平坦的误差界，也不建立一般张量网络、物理实现或连续统全息对偶的结论。
+
+那么，把比值收紧为 $b\le2a$、$d\le2c$，能否保证精确平坦谱？$b>2a$ 的旧障碍不再适用，但 [@thm-bridge-native-rectangular-bound] 仍可能排除它。下面保留已经给出的固定尺寸结果及其来源；它也是一般界在 $(3,5,3,5)$ 处的特例。
+
+::: {.theorem #thm-bridge-three-five-flat-spectrum-obstruction title="$(3,5,3,5)$ 的正标量 Gram 障碍" lean="D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.positive_scalar_obstruction"}
+对任意复矩阵三元组 $M_r\in M_{3\times5}(\mathbb C)$、$N_r\in M_{5\times3}(\mathbb C)$（$r=0,1,2$）以及任意实数 $\lambda>0$，令
+
+$$
+F=\sum_{r=0}^2M_r\otimes N_r:
+\mathbb C^5\otimes\mathbb C^3\longrightarrow
+\mathbb C^3\otimes\mathbb C^5.
+$$
+
+则 $F^*F\ne\lambda I_{15}$，其中 $I_{15}$ 的指标集为 $\operatorname{Fin}5\times\operatorname{Fin}3$。
+:::
+
+::: {.proof #pf-bridge-three-five-flat-spectrum-obstruction}
+反设 $F^*F=\lambda I_{15}$。由于 $3a=9<10=2b$，[@thm-bridge-native-rectangular-bound] 要求 $2c=6\le d=5$，矛盾。一般证明在此正是把两个正交的三维像放入五维空间的不可能性；原固定尺寸 [common_plane](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.common_plane) 也给出这里所用的共同系数平面。本条保留其独立来源 [positive_scalar_obstruction](lean:D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.positive_scalar_obstruction)。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-bridge-three-five-flat-spectrum title="八个前提成立，秩达到 15，谱仍不能平坦：$(3,5,3,5)$"}
+取 $(a,b,c,d)=(3,5,3,5)$。逐项核对原始全称主张 [`claim`](lean:D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.claim) 的八个前提：
+
+$$
+\begin{aligned}
+0<a&:\quad0<3,& a\le b&:\quad3\le5,\\
+0<c&:\quad0<3,& c\le d&:\quad3\le5,\\
+a^2+b^2\le3ab&:\quad34\le45,\\
+c^2+d^2\le3cd&:\quad34\le45,\\
+b\le2a&:\quad5\le6,& d\le2c&:\quad5\le6.
+\end{aligned}
+$$
+
+前六个正是 [@thm-bridge-quantum-maxflow-mincut] 的全部前提；该秩定理没有额外的平坦谱承诺。由于 $ad=bc=15$、$3ac=27$，它给出 $\operatorname{QMaxFlow}=\operatorname{QMinCut}=15$；再由 [@lemma-bridge-flow-attained]，存在某组矩阵使 $\operatorname{rank}F=15$。这里是在相同 `flow` 定义与行列指标下组合已有声明的结论。
+
+然而 [@thm-bridge-three-five-flat-spectrum-obstruction] 排除了任意矩阵三元组在任意 $\lambda>0$ 下满足 $F^*F=\lambda I_{15}$，因此不可能有长度为 $15$ 的精确正平坦奇异值谱。旧的 [@thm-bridge-scalar-gram-obstruction] 不能用于这一点，因为 $b=5\le2a=6$。
+
+原始全称主张要求同一组 $M,N$ 和同一个正 $\lambda$ 同时见证本节开头的两条条件 Gram 等式。此处 $ad=bc$ 使两条条件都生效，而列等式单独就与新定理矛盾。因此，即便补上 $b\le2a$、$d\le2c$，也不能把锥域中的秩可达性加强为精确平坦谱可达性。
+:::
+
+这一算例没有确定最小反例、最优比值阈值或完整的维数分类，也没有给出近似平坦谱的定量间隙。它仍只讨论既定行列二分下的有限维收缩，不建立物理实现或 RT 公式饱和。
 
 ::: {.figure src="ch19-discrete-vs-rt"}
 **本章证明的只到左边为止。** 左边是宽度三桥图，绿色标签是锥域内的最大流等于最小割（[@thm-bridge-quantum-maxflow-mincut]）；右边圆盘是连续体时空的一张切片，青色的弧是边界区域 $A$，紫色的弧 $\gamma_A$ 从 $A$ 两端垂直于边界伸入内部，是 RT 公式里的极小曲面（文献结果，未在本书形式化）。中间被划掉的箭头：从左到右的连续极限，本书没有证明。
@@ -308,6 +661,7 @@ $$
 $$
 \operatorname{rawPrefix}(3, m, \varphi) = \operatorname{rawPrefix}(3, m, \psi) \iff \exists z \in \mathbb{C},\; \|z\| = 1 \;\land\; \varphi = z \cdot \psi.
 $$
+
 :::
 
 ::: proof
@@ -330,7 +684,7 @@ $$
 
 在解读 [@thm-mps-observable-phase-recovery] 与 [@thm-mps-generic-interior-recovery] 时，必须严守三条精确边界：第一，$\operatorname{rawPrefix}$ 与 $\operatorname{rawInterior}$ 均为**未归一化**振幅外积（定理无需预设 $\|\psi\| = 1$，其迹直接携带范数平方 $\|\psi\|^2$）；第二，非退化假设 $\operatorname{ObservableChart}(m, \psi)$ 与主多项式判据 $R \neq 0$ 绝不可省去——诸如直积态、GHZ 态或上文手算的对角可交换 MPS 真实存在于 $\operatorname{openBoundaryMPS}(3 + m)$ 的低维退化补集中，并不能仅凭单个三格点边缘唯一重构；第三，这里的“一般性”严格指子空间拓扑下的开集与稠密性（`IsOpen` 与 `Dense`），既未引入概率测度声称“测度为 $1$”，也不等同于抗噪数值层析的多项式时间复杂度上界。
 
-在宽度三桥图与一维开边界 MPS 链上，我们已经看到局部键维数如何一面通过最小割容量 $\min(ad, bc)$ 约束跨截面秩（[@thm-bridge-quantum-maxflow-mincut]），一面在非退化主轨迹上凭三格点边缘锁死全局纯态相位（[@thm-mps-observable-phase-recovery]、[@thm-mps-generic-interior-recovery]）。然而，当一个量子系统的边界纠缠熵已经达到最小割上限（热化饱和）之后，系统内部的量子电路结构是否就停止演化了？在全息图景与计算复杂性理论中，“电路深度与门计数”究竟遵循怎样的严格下界，又在哪道悬崖边上遇上了当今科学尚未攻克的三大开放猜想？让我们进入第五部的收官之章——[门复杂度即体积](ch20-complexity-and-spacetime.md)。
+在宽度三桥图与一维开边界 MPS 链上，我们已经看到局部键维数如何一面通过最小割容量 $\min(ad, bc)$ 约束跨截面秩（[@thm-bridge-quantum-maxflow-mincut]），一面在非退化主轨迹上凭三格点边缘锁死全局纯态相位（[@thm-mps-observable-phase-recovery]、[@thm-mps-generic-interior-recovery]）。秩饱和并不保证纠缠熵饱和，[@ex-bridge-two-five-flat-spectrum] 已给出精确反例。若在后续模型中额外假设纠缠熵已达到割容量对数给出的上限，这仍是独立的情景假设，并不等同于热平衡。接下来转向量子电路的深度与门计数：它们受到哪些严格限制，与全息复杂性的猜想又有怎样的边界？进入第五部的收官之章——[第二十章](ch20-complexity-and-spacetime.md)。
 
 ::: {.viz src="layered-network-cut" height="560"}
 层级网络与割的完整实验室：在底边拖动一段或两段区间，看品红的最小割怎样穿过网络、割断几条键。网络是示意模型，割的条数由页面算出；RT 公式与 MERA 的类比是文献结果，未在本书形式化，绿色只给 [@prop-bridge-flow-cut-bound]。

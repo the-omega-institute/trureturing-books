@@ -55,7 +55,7 @@ books/<slug>/
 | `book.version` | 语义化版本，进入下载文件名与 Release |
 | `book.editions` | 语言版本，第一个为权威版本，默认 `["zh", "en"]` |
 | `book.title` / `subtitle` / `description` | 每种语言一行：`zh = "…"`、`en = "…"` |
-| `book.authors`、`license`、`isbn`（按语言）、`date` | 进入版权页与 EPUB 元数据 |
+| `book.authors`、`license`、`isbn`（按语言）、`doi`、`date` | 进入版权页与 EPUB 元数据；`doi` 是出版 DOI，通常填写 Zenodo 概念 DOI。省略时会从根目录 `.zenodo.json`、`CITATION.cff` 或 README 中明确的 Zenodo DOI 链接自动读取 |
 | `book.code` | 封面与站点卡片上的代号，形如 `GOLDEN//OBSERVE` |
 | `numbering.unnumbered` | 不参与章节计数的主章路径与独立定理前缀，适用于终章等整棵章节树，见下文 |
 | `outputs.html` / `pdf` / `epub` | 输出开关；`pdf = ["screen", "print"]`；可选加 `"academic"` 导出学术预印本版，省略配置或 `true` 仍只导出原两版 |
@@ -230,7 +230,7 @@ HTML 注释 `<!-- … -->` 不出现在任何输出中：其中的图片、链�
 **一句标题。** 引用可视化的一张实验卡：图贴在讲到它的那句话旁边。
 :::
 
-::: {.film src="001-golden-deficit"}
+::: {.film src="golden-deficit"}
 :::
 
 ::: {.slides src="overview"}
@@ -247,7 +247,9 @@ HTML 注释 `<!-- … -->` 不出现在任何输出中：其中的图片、链�
 
 可视化的每张实验卡都可以单独引用：`preset="<卡>"`（页面里的 `data-preset`）。HTML 中它是一张不带内部滚动的图，开在那张卡上，“全屏打开”进入同一状态的完整实验室；PDF/EPUB 中它是那张卡的带标签静态图 `viz/<id>/fig-<卡>.<语言>.jpg`（`node tools/node/viz-thumbs.mjs <book> <id>` 生成，本地使用、不提交）。把图放在讲到它的那句话旁边，图注用与图例相同的颜色词和符号；不带 `preset` 的嵌入是完整实验室，通常每个可视化在章末放一处。各语言版本引用的卡必须相同，`./tbook check` 会核对卡存在、版本一致、静态图齐全。设计与制作见 `skills/book-viz`。
 
-本书的视频是构建产物：`./tbook build films|site|all` 渲染（输入未变时从缓存恢复），站点托管在 `<slug>/films/<id>/`。章节中的播放器播放 720p 旁白版、附 `film.json` 的 `outputs` 所列视频的下载链接（默认只构建 720p 旁白版与封面，1080p 与纯配乐版本列出才构建）；站点没有该视频时（缺少视频工具链且缓存未命中）显示海报与“视频未构建”。PDF/EPUB 显示提交的 `poster.jpg`，有 `base_url` 时加视频页地址。编写与构建见 `skills/book-film`。
+视频目录直接使用具体片名的 kebab-case 写法，例如 `golden-deficit`。`film.json` 只填写双语标题等内容元数据，不另填视频 ID 或所属章节；正文引用 `::: {.film src="golden-deficit"}`，各端显示片名，不显示视频编号。
+
+本书的视频是构建产物：`./tbook build films|site|all` 渲染（输入未变时从缓存恢复），站点托管在 `<slug>/films/<name>/`。章节中的播放器播放 720p 旁白版、附 `film.json` 的 `outputs` 所列视频的下载链接（默认只构建 720p 旁白版与封面，1080p 与纯配乐版本列出才构建）；站点没有该视频时（缺少视频工具链且缓存未命中）显示海报与“视频未构建”。PDF/EPUB 显示提交的 `poster.jpg`，有 `base_url` 时加视频页地址。编写与构建见 `skills/book-film`。
 
 ## 6. 多语言流程
 
@@ -306,29 +308,63 @@ TeX 源在导言区写 `\input{tbook-deck}`；用 `\begin{bookresult}{thm-…}` 
 
 ## 统计与派生产物
 
-统计应使用正式出版解析器，避免在正文、图注、幻灯片和绘图脚本各写一份计数：
+全书统计作为编译产物按需生成，源码只保存选择与引用。删除手工维护的总数、排名、声明表、地图数据与图片副本，避免增删章节或钉版时修改同一批统计文件；逐条数学证据仍在正文维护。下游自由选择需要的视图与展示方式，不默认向每本书追加统计页面。
+
+### 在正文直接引用
+
+```markdown
+::: {.stats src="summary"}
+:::
+
+下面的索引在构建时生成，逐条核对仍应回到正文的假设与结论。
+
+::: {.stats src="declarations" display="link" group="theorems" format="html"}
+查看定理声明索引
+:::
+```
+
+`display="embed"`（默认）把生成的 Markdown 表格嵌入 HTML、PDF 与 EPUB；`display="link"` 链接独立产物，`format` 可选 `html`（默认）、`markdown`、`csv` 或 `json`。Markdown 下载保留为纯文本资源，避免被 mdBook 当作章节链接。PDF/EPUB 中的产物链接指向站点所发布的副本。没有统计块的书不会生成这些视图。
+
+| `src` | 内容与口径 |
+| --- | --- |
+| `summary` | 唯一声明数与各类证据环境的简表 |
+| `evidence` | Lean 已验证、书面证明、开放条目与定义环境分别计数 |
+| `environments` | 各类环境的出现次数 |
+| `kinds` | 按 Lean 声明种类统计唯一声明 |
+| `chapters` | 子页面归入主章后的引用统计 |
+| `pages` | 每个出版源页面的引用统计 |
+| `declarations` | 带冻结源码链接的声明索引 |
+| `reuse` | 按引用源文件数与引用位置数排序的声明复用表 |
+
+引用按源位置去重，同一行重复链接不额外增加位置数。
+
+`declarations` 与 `reuse` 可用 `group="all|theorems|definitions|inline"` 选择分区。`theorems`、`definitions` 是环境引用的声明分区；`inline` 是没有环境引用的其余声明，不是证明等级。大索引可选择独立链接，正文只嵌入需要的简表。中英文统计块的视图、显示方式、格式与分区须逐项对齐，说明文字自然翻译。统计块不计为定理，不接受 `lean` 或其他证据属性；生成结果不回流为计数输入。
+
+### 导出或供其他消费者使用
 
 ```bash
-./tbook stats --book example-monograph   # 紧凑统计摘要；--json 输出声明与引用明细
-./tbook sync --book <slug>              # 刷新本书配置的派生数据与图片
-./tbook sync --book <slug> --check      # 只检查是否过期
+./tbook stats --book example-monograph          # 只显示紧凑摘要
+./tbook stats --book example-monograph --write  # build/statistics/example-monograph.json
+./tbook stats --book example-monograph --json   # 标准输出完整明细
+./tbook stats --book example-monograph --write --view summary --view kinds --format markdown --format csv --lang zh --lang en
+./tbook stats --book example-monograph --write --view declarations --group theorems --format html
 ```
 
-绘图或索引生成器使用 `from tbook import stats; data = stats.collect(book)`。环境次数、唯一声明数和跨章复用是不同的量；书面证明、开放问题、定义均不计入 `lean_verified`。只统计目录中的权威版本，忽略代码示例与未出版文件；声明仅限本书的正文及媒体引用，其他书的锁定声明不增加本书总数。`groups.inline` 是未被环境引用的分区，可能包含媒体消费者；查看各项 `citations[].via` 区分来源。
+`--view`、`--format` 与 `--lang` 都可重复选择；指定视图而未指定格式时默认 Markdown。完整原始快照保存在 `build/statistics/<book>.json`，选定视图保存在 `build/statistics/<book>/<view>[.<group>].<lang>.<ext>`。这些文件均被 Git 忽略，内容未变时不重写。正文引用的产物由构建自动暂存和发布，不需要先手工运行统计命令。
 
-生成索引中的声明链接不应回头充当引用统计输入；其中人工撰写的编号环境仍计入环境次数。可在 `book.toml` 配置：
+自定义静态图、交互页面、幻灯片或外部分析程序可以读取 JSON/CSV 编译产物；发布时按需作为附件或站点资源提供，不复制总数或整份数据到受版本管理的程序。不要维护会随统计重排的声明序号。
 
-```toml
-[statistics]
-exclude = ["appendix-c.md"]
+环境次数、唯一声明数和跨章复用是不同的量；书面证明、开放问题、定义均不计入 `lean_verified`。只统计目录中的权威版本，忽略代码示例与未出版文件；声明仅限本书的正文及媒体引用，其他书的锁定声明不增加本书总数。`groups.inline` 是未被环境引用的分区，可能包含媒体消费者；查看各项 `citations[].via` 区分来源。旧生成索引仍存在时，可用 `[statistics].exclude = ["appendix-c.md"]` 排除它的声明链接；其中人工撰写的编号环境仍计入环境次数。
 
-[derived]
-command = ["python3", "books/my-book/sync-statistics.py"]
-```
-
-`command` 是作者显式配置的命令参数数组，以仓库根目录为工作目录，不经过 shell。`python3` 使用当前工具的解释器；生成器可导入 `tbook`。生成器必须支持 `--check`：只比对、退出非零表示过期，禁止在这个模式写入。`./tbook check` 调用该模式；`./tbook build` 在读取书稿和构建缓存前自动刷新，失败即停止。生成器应先计算全部目标内容，只写字节改变的文件，保留人工编辑的论述与稳定条目编号，不调用语言或图片生成服务。无配置的书不执行额外命令。
+其他确需保留的书库自有派生任务可继续使用 `./tbook sync --book <slug>` 与只读的 `--check`。在 `book.toml` 的 `[derived].command` 声明显式命令参数数组，以仓库根目录为工作目录，不经过 shell；`python3` 使用当前工具解释器。生成器支持 `--check`，只写内容实际变化的产物，不把全书统计写回源码。无配置的书不执行额外命令。
 
 `viz-thumbs.mjs` 为每页保存 `.stills.json`，保存在本地，不提交。它按页面、共享运行时、配色、字体、锁文件、工具及包版本的内容摘要核对输入，并核对每张成品图片的摘要；无变化时直接返回，不启动 Chromium。增引一张卡只补该卡，移除引用会清理无消费者的静帧；输出缺失、被修改或清单损坏会重出。正文普通措辞或源文件时间戳变化不触发图片重出。
+
+页面若只通过共享服务器把锁文件用于 `<a>` 的证据链接地址，既不读取锁数据，也不在画面中显示提交号、声明摘要等锁字段，可在登记项声明 `"capture_lock": "links"`。这时锁变化仍触发结构与证据检查、刷新发布链接，但不使静帧像素失效；默认 `"all"` 保持完整锁依赖。只有确认上述前提成立才能采用此声明，任意脚本读取或显示锁字段时保留默认值。
+
+浏览器套件的 `dependencies.json` 可用 `@lean-links` 声明仅供共享证据链接检查读取锁文件，替代整个锁文件的普通依赖。该声明把这部分责任交给每次钉版都运行的结构／静态证据校验；直接读取锁数据进行其他断言的套件仍登记 `trureturing.lock.json`。页面和测试源码变化仍照常执行回归。
+
+只读取登记表中本页面条目的套件可用 `@registry-entry` 替代登记表文件路径；新增或修改其他条目不重跑该套件。会检查其他页面、全表计数或登记顺序的套件仍保留整个 `visualizations.json` 的依赖。
 
 ```bash
 node tools/node/viz-thumbs.mjs <book> <id> --check  # 不写入，不启动浏览器

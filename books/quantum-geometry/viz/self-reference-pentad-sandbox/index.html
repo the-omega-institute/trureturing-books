@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="SELFREF//PENTAD · The Fivefold Self-Referential Fixed-Point Spectrum">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SELFREF//PENTAD · 五阶自指不动点谱系</title>
+<meta name="description" content="五种自指，一个不动点方程 x* = F(x*)：路径压缩后的指针表一跳到根 Lookup(0) = 0，余弦的 I 投影 cos θ* 等于 i 弧长 θ* = 0.7391，本征态只转相位而收缩信道落到 ρ*，十五个噪声 T 门经 [[15, 1, 3]] 检验蒸出一个 ε_out = 0.00514 的门，翻转的对角线逃出 4 × 4 自应用表的每一行。Five self-references and one fixed-point equation x* = F(x*): the compressed pointer table reaches the root in one hop, Lookup(0) = 0; the I-projection cos θ* of the cosine equals the i-arc θ* = 0.7391; an eigenstate only turns its phase while a contracting channel lands on ρ*; fifteen noisy T gates pass the [[15, 1, 3]] checks and distil one gate with ε_out = 0.00514; the twisted diagonal escapes every row of a 4 × 4 self-application table.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="self-reference-pentad-sandbox">
+<div class="app lab" id="app">
+<header class="top">
+  <div class="brand">
+    <a class="crumb" href="../"><span class="zh">◂ 第 39 章 · §39.6</span><span class="en">◂ Ch. 39 · §39.6</span></a>
+    <h1 class="logo" data-text="SELFREF//PENTAD">SELFREF<span>//</span>PENTAD</h1>
+    <div class="tagline"><span class="zh">五阶自指不动点谱系 · <em>把自己代回自己：一跳到根，余弦转回自己，本征态只转相位，十五个噪声门蒸出一个，翻转的对角线逃出每一行。</em></span><span class="en">The fivefold self-referential fixed-point spectrum · <em>feed a thing back into itself: one hop to the root, the cosine turns back into itself, an eigenstate only turns its phase, fifteen noisy gates distil one, and the twisted diagonal escapes every row.</em></span></div>
+  </div>
+  <div class="status"><span class="pill hot" id="scenePill">F₂ <strong>—</strong></span><span class="pill" id="lambdaPill">|λ| <strong>—</strong></span><div class="langs" role="group" aria-label="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div></div>
+</header>
+<aside class="col deck" id="rail" aria-label="透镜与实验卡" data-aria-en="Lens and experiment cards">
+  <section class="panel sec">
+    <h2><span class="zh">两种读法</span><span class="en">Two readings</span><span class="aside">LENS</span></h2>
+    <div class="lens-toggle" id="lensToggle" role="group" aria-label="读法透镜" data-aria-en="Reading lens">
+      <button type="button" data-lens="phys" aria-pressed="true"><span class="zh">算法与物理读法</span><span class="en">Algorithmic &amp; physical</span></button>
+      <button type="button" data-lens="fixed" aria-pressed="false"><span class="zh">不动点 x* = F(x*) 读法</span><span class="en">Fixed point x* = F(x*)</span></button>
+    </div>
+    <p class="note lens-note"><span class="zh">同一组参数，两套标签：左边按查表、余弦、薛定谔演化、门蒸馏与对角线读；右边把五件事都写成 x* = F(x*) 与乘子 λ。</span><span class="en">One set of parameters, two sets of labels: on the left read lookup, cosine, Schrödinger evolution, gate distillation and the diagonal; on the right write all five as x* = F(x*) with a multiplier λ.</span></p>
+  </section>
+  <section class="panel sec">
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§39.6</span></h2>
+    <div class="presets cards" id="presets">
+      <button class="preset" data-preset="pointer-path-compression" data-still="end" aria-pressed="false"><span class="code">F₁ · LOOKUP</span><span class="cn zh">查表自指：路径压缩到根，Lookup(0) = 0</span><span class="cn en">Lookup: path compression to the root, Lookup(0) = 0</span></button>
+      <button class="preset" data-preset="dottie-real-imag-spiral" data-still="end" aria-pressed="false"><span class="code">F₂ · COS θ = θ</span><span class="cn zh">余弦自指：I 投影 cos θ* 等于 i 弧长 θ*</span><span class="cn en">Cosine: the I-projection cos θ* equals the i-arc θ*</span></button>
+      <button class="preset" data-preset="eigenstate-channel-anchor" data-still="end" aria-pressed="false"><span class="code">F₃ · UρU† = ρ</span><span class="cn zh">本征态只转相位，收缩信道落到 ρ*</span><span class="cn en">An eigenstate only turns its phase; a channel lands on ρ*</span></button>
+      <button class="preset" data-preset="fifteen-to-one-gate-distill" data-still="1" aria-pressed="false"><span class="code">F₄ · 15 → 1</span><span class="cn zh">门序列 = 门本身：15 个噪声 T 门蒸出 1 个</span><span class="cn en">Gate sequence = the gate: 15 noisy T gates distil one</span></button>
+      <button class="preset" data-preset="lawvere-diagonal-escape" data-still="end" aria-pressed="false"><span class="code">F₅ · DIAGONAL</span><span class="cn zh">翻转的对角线逃出每一行，升到 ℓ + 1</span><span class="cn en">The twisted diagonal escapes every row, up to ℓ + 1</span></button>
+    </div>
+    <p class="note" id="presetNote"></p>
+  </section>
+</aside>
+<main class="center">
+  <div class="stage" id="stage" data-thumb aria-label="五种自指的三维舞台：指针环、余弦的实平面与盲平面、布洛赫球、十五门四面体与自应用表" data-aria-en="3D stage of five self-references: the pointer ring, the real and blind planes of the cosine, the Bloch ball, the fifteen-gate tetrahedron and the self-application table">
+    <canvas class="fill" id="cv"></canvas><div class="scan"></div><div class="vig"></div>
+    <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+    <button type="button" class="handle" id="handle" aria-label="拖动琥珀手柄" data-aria-en="Drag the amber handle" hidden></button>
+    <div class="hud-bl" id="legend"></div>
+  </div>
+  <div class="tour" id="tour"><button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button><div class="what" id="tourBody"></div><button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button></div>
+  <div class="strip"><section class="panel"><div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div><canvas id="plot" aria-label="条带小图" data-aria-en="Strip plot"></canvas></section></div>
+</main>
+<aside class="col side" id="evidence" aria-label="控制、读数与依据" data-aria-en="Controls, readouts and evidence">
+  <button class="chip" id="infoBtn"><span class="zh">理论接口 · 这不是证明</span><span class="en">Theory interface · not a proof</span></button>
+  <section class="panel sec" id="ctlPanel">
+    <h2><span class="zh">参数</span><span class="en">Parameters</span><span class="aside" id="ctlScene">F₂</span></h2>
+    <div class="field" data-scene="0"><label for="slotIn"><span class="zh">查找起点槽 x</span><span class="en">Lookup start slot x</span></label><output for="slotIn">9</output><input id="slotIn" type="range" min="0" max="11" step="1" value="9"></div>
+    <div class="field" data-scene="1"><label for="theta0In"><span class="zh">起点角 θ₀（rad）</span><span class="en">Start angle θ₀ (rad)</span></label><output for="theta0In">0.10</output><input id="theta0In" type="range" min="0" max="1.5" step="0.01" value="0.1"></div>
+    <div class="field" data-scene="2"><label for="lambdaIn"><span class="zh">信道收缩率 |λ|</span><span class="en">Channel contraction |λ|</span></label><output for="lambdaIn">0.65</output><input id="lambdaIn" type="range" min="0" max="1" step="0.01" value="0.65"></div>
+    <div class="field" data-scene="3"><label for="epsIn"><span class="zh">输入噪声 ε</span><span class="en">Input noise ε</span></label><output for="epsIn">0.0500</output><input id="epsIn" type="range" min="0" max="0.5" step="0.0005" value="0.05"></div>
+    <div class="field twist-field" data-scene="4"><span class="flabel"><span class="zh">扭转 f</span><span class="en">Twist f</span></span><span class="chips" id="twistChips" role="group" aria-label="对角线扭转" data-aria-en="Diagonal twist"><button class="chip" data-twist="not" aria-pressed="true">f = ¬</button><button class="chip" data-twist="id" aria-pressed="false">f = id</button></span></div>
+    <p class="note" id="ctlNote"></p>
+  </section>
+  <section class="panel sec" id="readouts" aria-live="polite">
+    <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">NUM</span></h2>
+    <dl class="ro">
+      <div class="key"><dt id="roKeyL"></dt><dd><output id="roKey">—</output></dd></div>
+      <div class="c wide"><dt id="ro1L"></dt><dd><output id="ro1">—</output></dd></div>
+      <div class="m wide"><dt id="ro2L"></dt><dd><output id="ro2">—</output></dd></div>
+      <div class="v wide"><dt id="ro3L"></dt><dd><output id="ro3">—</output></dd></div>
+      <div class="wide"><dt id="ro4L"></dt><dd><output id="ro4">—</output></dd></div>
+      <div class="wide"><dt id="ro5L"></dt><dd><output id="ro5">—</output></dd></div>
+    </dl>
+    <p class="note" id="roNote"></p>
+  </section>
+  <section class="panel sec" id="leanPanel">
+    <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">递归页表：若 lookup(root, selfSlot) = root、lookup(root, i) = leaf、lookup(leaf, j) = data，则 walk(root, [i, j]) = data、walk(root, [selfSlot, i]) = leaf，且沿 selfSlot 连走任意 depth 步都回到 root。页面取根目录 0（lookup(0, i) = 槽 i，第 0 项指回根自己）与 lookup(a, j) = 槽 a 的指针，在 i = 9 上核对三条，depth 取 0 到 64：</span><span class="en">Recursive page table: if lookup(root, selfSlot) = root, lookup(root, i) = leaf and lookup(leaf, j) = data, then walk(root, [i, j]) = data, walk(root, [selfSlot, i]) = leaf, and walking selfSlot any number of times returns root. The page takes the root directory 0 (lookup(0, i) = slot i, entry 0 pointing back at the root itself) and lookup(a, j) = the pointer of slot a, and checks the three parts at i = 9 for depth 0 to 64: </span><a data-lean-gid="D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk" href="#" target="_blank" rel="noopener"><code>recursive_page_table_walk</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限记录测量（自伴、幂等、两两正交、和为单位的 P<sub>k</sub>）的未读态 𝒫(ρ) = Σ P<sub>k</sub> ρ P<sub>k</sub> 满足 𝒫 ∘ 𝒫 = 𝒫。页面取能量本征基的 P₀ = |0⟩⟨0|、P₁ = |1⟩⟨1|，对第三张卡的当前态 ρ 核对 𝒫(𝒫(ρ)) = 𝒫(ρ)。第一张卡里压缩后的指针表 P² = P 是页面另算的，不由这条定理推出：</span><span class="en">For a finite record measurement (self-adjoint, idempotent, pairwise orthogonal P<sub>k</sub> summing to the identity) the unread state 𝒫(ρ) = Σ P<sub>k</sub> ρ P<sub>k</sub> satisfies 𝒫 ∘ 𝒫 = 𝒫. The page takes P₀ = |0⟩⟨0| and P₁ = |1⟩⟨1| of the energy basis and checks 𝒫(𝒫(ρ)) = 𝒫(ρ) on the current state ρ of the third card. P² = P for the compressed pointer table of the first card is computed separately and does not follow from this theorem: </span><a data-lean-gid="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent" href="#" target="_blank" rel="noopener"><code>finite_record_pinching_idempotent</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">存在唯一的正数 θ（0 &lt; θ &lt; 1）使 cos θ = θ；把 2X + 2 arcsin X 的有理系数幂级数作复合逆，它的系数在 π 处绝对可和，和恰为 θ。页面用牛顿法得 θ* = 0.7390851332，另按同样的有理系数算前 48 项 Σ c<sub>n</sub> π<sup>n</sup>，与 θ* 之差小于 10⁻¹⁴：</span><span class="en">There is exactly one positive θ (0 &lt; θ &lt; 1) with cos θ = θ; the compositional inverse of the power series 2X + 2 arcsin X has rational coefficients that are absolutely summable at π, with sum exactly θ. The page finds θ* = 0.7390851332 by Newton's method and, from the same rational coefficients, sums the first 48 terms Σ c<sub>n</sub> π<sup>n</sup>, within 10⁻¹⁴ of θ*: </span><a data-lean-gid="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint" href="#" target="_blank" rel="noopener"><code>rational_inverse_endpoint</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">取 ħ = 1：埃尔米特 H 的实时间演化 U = exp(−itH) 是幺正的；若 Hv = Ev 且 v 归一，纯态 ρ = vv* 满足 UρU* = ρ。页面取 H = diag(E₀, E₁)、v = |0⟩，在当前时刻用 2 × 2 矩阵指数（泰勒级数加平方）核对 U*U = I 与 UρU* = ρ：</span><span class="en">With ħ = 1: the real-time evolution U = exp(−itH) of a Hermitian H is unitary, and for Hv = Ev with v normalized the pure state ρ = vv* satisfies UρU* = ρ. The page takes H = diag(E₀, E₁) and v = |0⟩ and checks U*U = I and UρU* = ρ at the current time with a 2 × 2 matrix exponential (Taylor series with squaring): </span><a data-lean-gid="D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary" href="#" target="_blank" rel="noopener"><code>energy_eigenstate_stationary</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">两轴有限字：三维里取两根不平行的轴 a、b，每个行列式为 1 的正交变换都是有限个各自保持 a 或 b 的字母之积。页面取 a = x 轴、b = y 轴，把 T 门的布洛赫转动 R<sub>z</sub>(π/4) 写成三字母字 R<sub>x</sub>(π/2) R<sub>y</sub>(π/4) R<sub>x</sub>(−π/2) 并核对；定理只说字存在，不给长度或算法：</span><span class="en">Finite two-axis words: for two non-parallel axes a, b of three-space, every orthogonal map with determinant 1 is a finite product of letters each fixing a or b. The page takes a = the x axis and b = the y axis, writes the Bloch rotation R<sub>z</sub>(π/4) of the T gate as the three-letter word R<sub>x</sub>(π/2) R<sub>y</sub>(π/4) R<sub>x</sub>(−π/2) and checks it; the theorem says a word exists, with no length or algorithm: </span><a data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="#" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">自应用片段：对扭转 f : Y → Y 与目录 g : A → A → Y，diagonal(f, g)(a) = f(g(a, a))；逃逸恰是 diagonal(f, g) 不在 g 的值域里；f 没有不动点时它逃出每一个目录；这个前提去不掉（有 f₀ : Bool → Bool 与 g₀ 不逃逸）。页面取 A = {0, 1, 2, 3}、Y = Bool、f = ¬，核对 diagonal(¬, g) = 0011 与四行各在 (a, a) 处不同；f = id 时对角线 1100 恰是第 2 行：</span><span class="en">Self-application fragment: for a twist f : Y → Y and a listing g : A → A → Y, diagonal(f, g)(a) = f(g(a, a)); escape is exactly diagonal(f, g) lying outside the range of g; a twist without a fixed point escapes every listing; and the hypothesis cannot be dropped (some f₀ : Bool → Bool and g₀ do not escape). The page takes A = {0, 1, 2, 3}, Y = Bool and f = ¬, and checks that diagonal(¬, g) = 0011 differs from each of the four rows at (a, a); with f = id the diagonal 1100 is exactly row 2: </span><a data-lean-gid="D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package" href="#" target="_blank" rel="noopener"><code>self_application_fragment_package</code></a></span></div>
+    <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：Bravyi 与 Kitaev（Phys. Rev. A 71, 022316, 2005）的 15 → 1 魔术态蒸馏——输出误差 ε<sub>out</sub> = (1 + 15(1 − 2ε)⁸ − 15(1 − 2ε)⁷ − (1 − 2ε)¹⁵) / (2(1 + 15(1 − 2ε)⁸))、领头项 35ε³ 与阈值约 0.141；[[15, 1, 3]] 码画成四面体上 15 个点、4 个 8 比特检验胞，是三维色码的标准画法（Bombin 与 Martin-Delgado, Phys. Rev. Lett. 98, 160502, 2007）。页面另把 2¹⁵ 种 Z 错误逐一列出，数值核对这条公式。</span><span class="en">Literature results, not formalized in this book: the 15 → 1 magic-state distillation of Bravyi and Kitaev (Phys. Rev. A 71, 022316, 2005), with output error ε<sub>out</sub> = (1 + 15(1 − 2ε)⁸ − 15(1 − 2ε)⁷ − (1 − 2ε)¹⁵) / (2(1 + 15(1 − 2ε)⁸)), leading term 35ε³ and threshold about 0.141; drawing the [[15, 1, 3]] code as 15 points on a tetrahedron with four 8-qubit check cells is the standard picture of the 3D colour code (Bombin and Martin-Delgado, Phys. Rev. Lett. 98, 160502, 2007). The page also lists all 2¹⁵ Z-error patterns and checks the formula numerically.</span></span></div>
+    <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">把五种自指排成一个“谱系”、透镜里的 x* = F(x*) 与乘子 λ 的读法，是本书的诠释模型；12 槽指针环的初始森林、信道 ℰ(ρ) = |λ| UρU† + (1 − |λ|) ρ*（ω = 45°、ρ* 在 z = 0.5）、四面体与分支的画法、对角线升层时的 90° 扭转与 î² = −1 的类比，都是示意。</span><span class="en">Ranking five self-references as one spectrum, and reading them in the lens as x* = F(x*) with a multiplier λ, is the book's interpretive model; the initial forest of the 12-slot pointer ring, the channel ℰ(ρ) = |λ| UρU† + (1 − |λ|) ρ* (ω = 45°, ρ* at z = 0.5), the drawing of the tetrahedron and its branches, and the 90° twist of the lifted diagonal with its analogy to î² = −1 are schematic.</span></span></div>
+    <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面当场计算：查找跳数与压缩后 P² = P；θ* 的牛顿迭代、从 θ₀ = 0.10 出发的 30 步蛛网与 cos²θ* = 54.62%；信道到 ρ* 的距离按 |λ|ⁿ 缩短；2¹⁵ 种错误模式穷举给出 ε<sub>out</sub>(0.05) = 0.00514、接受概率 46.61% 与阈值 0.1415；4 × 4 表的对角线。数值演示，不是证明。</span><span class="en">Computed on the page: lookup hop counts and P² = P after compression; Newton's method for θ*, the 30-step cobweb from θ₀ = 0.10 and cos²θ* = 54.62%; the distance of the channel to ρ* shrinking as |λ|ⁿ; the enumeration of all 2¹⁵ error patterns giving ε<sub>out</sub>(0.05) = 0.00514, acceptance 46.61% and the threshold 0.1415; the diagonal of the 4 × 4 table. A numerical illustration, not a proof.</span></span></div>
+  </section>
+</aside>
+<footer class="rail"><div class="transport"><button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button><button class="tbtn" id="play" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▶</button><span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span></div><div class="clock"><span class="tau" id="tau"></span><input type="range" id="now" min="0" max="30" step="any" value="30" aria-label="迭代步数" data-aria-en="Iteration step"></div><div class="keys"><span id="hint"></span><span id="formula"></span></div></footer>
+</div>
+<div class="drawer" id="drawer" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 五阶自指不动点谱系</span><span class="en">Theory interface · the fivefold self-referential spectrum</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+  <div class="zh">
+    <p class="lede">这是数值沙盘，不是证明。每个数都由页面当场算出（NUM）；每条 Lean 定理只在依据栏写明的那一个实例上演示。五张卡是同一个方程 x* = F(x*) 的五个实例，按乘子 λ = F′(x*) 从“一步到位”排到“根本没有不动点”。</p>
+    <ol>
+      <li><b>F₁ 查表。</b>12 个槽排成一圈，每槽存一个指针 p(x)。初始森林里 9 → 6 → 3 → 1 → 0 是一条 4 跳的链，槽 0 的指针指向自己：Lookup(0) = 0，p ≡ *p。时间轴 0–4 让琥珀读头沿链走 4 跳；4–5 对每个槽查一次并做路径压缩，所有指针改指根；5–6 再查一次只要 1 跳。压缩后的表 P 满足 P² = P：再查一次什么也不改，乘子 |λ| = 0。</li>
+      <li><b>F₂ 余弦。</b>单位圆躺在水平的盲平面 i 上，竖直的实平面 I 与它交于实轴。圆上一点转过 θ：它在实轴上的影子长 cos θ（青色），它走过的圆弧长 θ（品红；旁边把这段弧拉直成同样长的品红尺）。两者相等的唯一一处是 θ* = 0.7390851332 = 42.35°。实平面 I 上画 y = cos θ 与 y = θ 和从 θ₀ = 0.10 出发的蛛网：乘子 λ = −sin θ* = −0.6736 为负，所以每一步换边、按 0.6736 收缩。cos²θ* = 54.62%，sin²θ* = 45.38%。</li>
+      <li><b>F₃ 本征态与信道。</b>H|0⟩ = E₀|0⟩：U(t)|0⟩ = e<sup>−iE₀t</sup>|0⟩，布洛赫矢量不动，只有紫色相位纤维上的珠子转圈，|λ| = 1。信道 ℰ(ρ) = |λ| UρU† + (1 − |λ|) ρ* 把任意态按 |λ| = 0.65 拉向 ρ*，并绕青色轴转 ω = 45°：品红的横向相干 |ρ₀₁| 按 0.65ⁿ 衰减，ℰ(ρ*) = ρ*。|λ| = 1 时它只转不缩，|λ| = 0 时一步到 ρ*。捏合 𝒫 把相干一步删光，再捏一次不变。</li>
+      <li><b>F₄ 15 → 1 蒸馏。</b>[[15, 1, 3]] 码的 15 个比特放在四面体的 4 个顶点、6 条棱中点、4 个面心与体心；4 个检验胞各含 8 个比特，它们的关联矩阵正是 [15, 11, 3] 汉明码的校验矩阵。每个输入 T 门以概率 ε 带一个 Z 错误；校验子为 0 时接受（青色分支），否则丢弃（15 条品红分支，各指向那个单比特错误所在的点）。ε<sub>out</sub>(ε) = (1 + 15(1 − 2ε)⁸ − 15(1 − 2ε)⁷ − (1 − 2ε)¹⁵) / (2(1 + 15(1 − 2ε)⁸))，ε = 0.0500 时 ε<sub>out</sub> = 0.00514（领头项 35ε³ = 0.00438），压低 9.73 倍；斜率 dε<sub>out</sub>/dε 在 0 处为 0，阈值 ε<sub>th</sub> = 0.1415 以下逐轮立方收缩，以上被推向 0.5。“门序列 = 门本身”在这里是：15 个门组成的电路输出的，仍是一个 T 门。</li>
+      <li><b>F₅ 对角线。</b>4 × 4 表 g(a, b) 的每一行是一条目录。读头沿对角线 (a, a) 走，把 g(a, a) 翻转后升到上一层 ℓ + 1：diagonal(¬, g) = 0011 在第 a 个位置与第 a 行不同，所以不是任何一行。¬ 没有不动点（¬b ≠ b），这正是逃逸的原因；换成有不动点的 f = id，对角线 1100 恰好就是第 2 行，被目录收住。</li>
+      <li><b>透镜。</b>“不动点”读法不改任何参数，只把标签换成 x* = F(x*)：F₁ 是 find ∘ find = find（|λ| = 0），F₂ 是 cos（λ = −0.6736），F₃ 是 U 的相位（|λ| = 1）与信道（|λ| = 0.65），F₄ 是 ε ↦ ε<sub>out</sub>（λ = 0，立方），F₅ 是 ¬，没有不动点。</li>
+    </ol>
+    <p class="lede refs">书中：<a href="../../zh/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum" target="_top">§39.6 五阶自指不动点谱系</a></p>
+  </div>
+  <div class="en">
+    <p class="lede">This is a numerical sandbox, not a proof. Every number is computed on the page (NUM); each Lean theorem is shown only on the one instance named in the evidence panel. The five cards are five instances of one equation x* = F(x*), ordered by the multiplier λ = F′(x*) from “there in one step” to “no fixed point at all”.</p>
+    <ol>
+      <li><b>F₁ Lookup.</b> Twelve slots stand in a ring, each holding a pointer p(x). In the initial forest 9 → 6 → 3 → 1 → 0 is a chain of 4 hops, and slot 0 points at itself: Lookup(0) = 0, p ≡ *p. On the rail, 0–4 walks the amber read head 4 hops along the chain; 4–5 looks up every slot once with path compression, so every pointer turns to the root; 5–6 looks up again in 1 hop. The compressed table P satisfies P² = P: another lookup changes nothing, multiplier |λ| = 0.</li>
+      <li><b>F₂ Cosine.</b> The unit circle lies in the horizontal blind plane i, and the vertical real plane I meets it along the real axis. Turn a point of the circle by θ: its shadow on the real axis has length cos θ (cyan), and the arc it travelled has length θ (magenta; beside it the same arc straightened into a magenta ruler). The only place where they agree is θ* = 0.7390851332 = 42.35°. The real plane I carries y = cos θ, y = θ and the cobweb from θ₀ = 0.10: the multiplier λ = −sin θ* = −0.6736 is negative, so each step changes side and shrinks by 0.6736. cos²θ* = 54.62%, sin²θ* = 45.38%.</li>
+      <li><b>F₃ Eigenstate and channel.</b> H|0⟩ = E₀|0⟩: U(t)|0⟩ = e<sup>−iE₀t</sup>|0⟩, so the Bloch vector stays put and only the bead on the violet phase fibre turns, |λ| = 1. The channel ℰ(ρ) = |λ| UρU† + (1 − |λ|) ρ* pulls any state towards ρ* by |λ| = 0.65 while turning it by ω = 45° about the cyan axis: the magenta transverse coherence |ρ₀₁| decays as 0.65ⁿ, and ℰ(ρ*) = ρ*. At |λ| = 1 it turns without shrinking; at |λ| = 0 it reaches ρ* in one step. Pinching 𝒫 deletes the coherence in one step, and pinching again changes nothing.</li>
+      <li><b>F₄ 15 → 1 distillation.</b> The 15 qubits of the [[15, 1, 3]] code sit at the 4 corners, 6 edge midpoints, 4 face centres and the centre of a tetrahedron; each of the 4 check cells holds 8 qubits, and their incidence matrix is exactly the parity-check matrix of the [15, 11, 3] Hamming code. Each input T gate carries a Z error with probability ε; a zero syndrome is accepted (the cyan branch), anything else is discarded (15 magenta branches, each pointing at the qubit whose single error it reports). ε<sub>out</sub>(ε) = (1 + 15(1 − 2ε)⁸ − 15(1 − 2ε)⁷ − (1 − 2ε)¹⁵) / (2(1 + 15(1 − 2ε)⁸)); at ε = 0.0500, ε<sub>out</sub> = 0.00514 (leading term 35ε³ = 0.00438), a suppression by 9.73; the slope dε<sub>out</sub>/dε is 0 at 0, and below the threshold ε<sub>th</sub> = 0.1415 each round shrinks the error cubically while above it the error is pushed to 0.5. “A gate sequence equals the gate itself” here means: the circuit of 15 gates outputs again one T gate.</li>
+      <li><b>F₅ Diagonal.</b> Each row of the 4 × 4 table g(a, b) is one entry of a listing. The read head walks the diagonal (a, a), negates g(a, a) and lifts it to the level ℓ + 1 above: diagonal(¬, g) = 0011 differs from row a in place a, so it is no row at all. ¬ has no fixed point (¬b ≠ b), and that is why it escapes; with f = id, which has fixed points, the diagonal 1100 is exactly row 2 and the listing catches it.</li>
+      <li><b>Lens.</b> The fixed-point reading changes no parameter, only the labels, to x* = F(x*): F₁ is find ∘ find = find (|λ| = 0), F₂ is cos (λ = −0.6736), F₃ is the phase of U (|λ| = 1) and the channel (|λ| = 0.65), F₄ is ε ↦ ε<sub>out</sub> (λ = 0, cubic), and F₅ is ¬, with no fixed point.</li>
+    </ol>
+    <p class="lede refs">In the book: <a href="../../en/ch39-s06-fivefold-self-reference-spectrum.html#sec-ch39-fivefold-self-reference-spectrum" target="_top">§39.6 The fivefold self-referential fixed-point spectrum</a></p>
+  </div>
+</div></div>
+<script src="main.js"></script>
+</body>
+</html>

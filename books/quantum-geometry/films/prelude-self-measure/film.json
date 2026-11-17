@@ -1,0 +1,28 @@
+{
+  "title": "The Ruler Measures Itself: ψ = ψ(ψ)",
+  "title_zh": "尺子量自己：ψ = ψ(ψ)",
+  "summary": "If every view hides something, what happens when the ruler measures itself? Each step outside wrapped a larger sphere, one dimension up, around the old one, and the book reads this as: whoever measures is never wholly inside. The film then follows one rule: read the cosine of an angle in radians and use the reading as the next angle. From θ₀ = 1 the readings 0.540, 0.858, 0.654, 0.793, 0.701, 0.764 swing above and below a single crossing θ* ≈ 0.739 of y = cos θ and y = θ; these numbers, the shrinking gaps |cos θₖ − θₖ| and the inscribed polygons (perimeter ÷ diameter 3, 3.106, 3.133) are computed on screen. That there is θ* with 0 < θ* < 1 and cos θ* = θ*, and that it is the only positive solution, is checked by the Lean kernel. That the iteration reaches θ* from every start and that no finite step lands exactly are literature results the book cites but does not formalize; reading the fixed point as ψ = ψ(ψ), and every sphere as an approximation, is the book's interpretation.",
+  "summary_zh": "如果每一种看法都会藏起一些东西，那么当尺子丈量它自己时，会发生什么？每走到外面一步，就有一颗高一维的更大的球把旧球包进去；本书的诠释是：凡在丈量者，从不完全身在其中。接着，片子只跟着一条规则走：读出一个角（按弧度）的余弦，再把读数当作下一个角。从 θ₀ = 1 出发，读数 0.540、0.858、0.654、0.793、0.701、0.764 在 y = cos θ 与 y = θ 的唯一交点 θ* ≈ 0.739 上下摆动；这些数、逐步缩小的差 |cos θₖ − θₖ| 以及圆内接多边形（周长 ÷ 直径为 3、3.106、3.133）都是屏幕上的计算。存在 θ* 满足 0 < θ* < 1 且 cos θ* = θ*，并且它是唯一的正解，这一点由 Lean 内核检查。迭代从任意初值都会走到 θ*、有限步永远不会正好落上，是本书引用而未形式化的文献结果；把不动点读作 ψ = ψ(ψ)、把每一颗球读作近似，是本书的诠释。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-16",
+  "duration": "2:10",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a tower of spheres, a dial and the cosine cobweb winding into its one crossing, the gaps that never vanish, ψ = ψ(ψ)",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_prelude-self-measure_720p_narrated.mp4",
+    "cover": "quantum-geometry_prelude-self-measure_cover.jpg"
+  }
+}

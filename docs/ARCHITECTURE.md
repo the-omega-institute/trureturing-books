@@ -28,7 +28,7 @@ books/<slug>/
   viz/<id>/               交互可视化（trureturing-visualize 方案）
   viz/visualizations.json 本书可视化注册表
   slides/<deck>/          演示文稿（Slidev，chrono-company-slides 方案）：slides.md（书的第一语言，即 editions 第一项）、slides.<lang>.md（其他语言）
-  films/<NNN>-<name>/     视频（trureturing-film 方案）：film.json、script.json、scenes.js
+  films/<name>/     视频（trureturing-film 方案）：film.json、script.json、scenes.js
 theme/
   tokens.json             设计令牌（唯一来源）
   generated/              由 tokens.json 派生：tokens.css、tokens.typ、tokens.mjs
@@ -129,7 +129,7 @@ skills/                   内置 agent skills（.claude/skills → ../skills）
 ::: {.viz src="trureturing-visualize:robin-lattice"}
 :::
 
-::: {.film src="001-golden-deficit"}
+::: {.film src="golden-deficit"}
 :::
 
 ::: {.film src="trureturing-film:film-001-v1"}
@@ -147,11 +147,11 @@ skills/                   内置 agent skills（.claude/skills → ../skills）
   - mdBook：`figure.inline_html()` 去掉样式表与固定尺寸，把图内联进 `<figure class="tr-media tr-figure">`；`tr/tr-figure.css`（`figure.mdbook_css()`，构建时生成）让角色类取页面的 `--tr-*` 令牌，所以图随主题切换、随浏览器打印变成浅色。内联的 SVG 中没有空行（空行会结束 Markdown 的 HTML 块）。脚本写 `WRAP = True` 时各栏（`fig.row()` / `fig.panel()`，规范文件里是嵌套的 `<svg class="tr-fig-panel">`）各成一个 `<svg>`，放在弹性盒里：宽度不小于 700 像素时同一行的各栏并排（一起缩放），否则叠放；各栏排成几行时每行各成一个弹性盒（外层 `tr-fig-rows`），宽屏上行还是行，手机上逐栏叠放。图注是块后的 Markdown，写在 `<figcaption class="tr-media-caption">` 中。
   - Pandoc（PDF/EPUB）：`figure.materialize()` 把一套配色写进样式表，经 `RenderContext.book_texts`（书目录下的相对路径 → 内容）由 `pandoc.stage()` 写到 `_book/figures/`：`<name>.<lang>.svg`（浅色，加不透明底，EPUB 用）、`.print.svg`（浅色）、`.screen.svg`（深色）。块输出为 `::: {.tr-media .tr-figure}`，其中的图片带 `tr-fig=1` 与按自然宽度算出的 `width`（760 单位对应版心宽度）；`tr-book.lua` 在 Typst 输出中把它换成 `image("<…不带扩展名>" + tr-fig-ext, …)`，`theme/typst/book.typ` 的 `tr-fig-ext` 按变体取 `.screen.svg` 或 `.print.svg`，`tr-media(kind: "figure")` 不画面板，只排图与图注。
   - 画图库强制的标准（`figkit.FigureError`）：字号 ≥ 12、线宽 ≥ 1、文字不出画布（按估计的字宽）、角色名已知、宽度 ≤ 760；坐标保留两位小数，输出可复现。
-- HTML：可视化以 iframe 嵌入（`height` 160–2400，默认 560），附“全屏打开”；视频以 `<video controls preload="metadata" playsinline>` 播放站内的 `films/<id>/<outputs.narrated_720p>`（海报为提交的 `poster.jpg`），附 `film.json` 的 `outputs` 所列视频的下载（默认只有 720p 旁白版；列出时另有 1080p、纯配乐）；站点没有该视频时，`site.mark_films` 给 `<figure>` 加 `tr-film-unbuilt`，样式改为显示海报与“视频未构建”，并把隐藏的播放器改为 `preload="none"`，浏览器就不去请求不存在的文件（视频构建后复原为 `metadata`）；幻灯片为链接卡片（在线演示、PDF）。
+- HTML：可视化以 iframe 嵌入（`height` 160–2400，默认 560），附“全屏打开”；视频以 `<video controls preload="metadata" playsinline>` 播放站内的 `films/<name>/<outputs.narrated_720p>`（海报为提交的 `poster.jpg`），附 `film.json` 的 `outputs` 所列视频的下载（默认只有 720p 旁白版；列出时另有 1080p、纯配乐）；站点没有该视频时，`site.mark_films` 给 `<figure>` 加 `tr-film-unbuilt`，样式改为显示海报与“视频未构建”，并把隐藏的播放器改为 `preload="none"`，浏览器就不去请求不存在的文件（视频构建后复原为 `metadata`）；幻灯片为链接卡片（在线演示、PDF）。
 - PDF / EPUB：静态缩略图或海报 + 图注 + 在线地址（由 `site.toml` 的 `base_url` 拼出；没有 `base_url` 时视频只有海报）。
 - 书内媒体的源文件：
   - 可视化：`books/<slug>/viz/visualizations.json`（登记表）+ `viz/<id>/`（`index.html`、`style.css`、`main.js`、`thumb.jpg`）与 `viz/tests/<id>.test.mjs`；页面契约见 `templates/viz/README.md`。
-  - 视频：`books/<slug>/films/<NNN>-<name>/`（`film.json`、`script.json`、`scenes.js`、`poster.jpg`）；规范见 `templates/film/README.md`。成片是构建产物（见下文“视频构建”），没有单独的 Release；`film.json` 中旧的 `release_tag`、`published_tag` 不再使用，`./tbook check` 给出警告。
+  - 视频：`books/<slug>/films/<name>/`（`film.json`、`script.json`、`scenes.js`、`poster.jpg`）；规范见 `templates/film/README.md`。成片是构建产物（见下文“视频构建”），没有单独的 Release；`film.json` 中旧的 `release_tag`、`published_tag` 不再使用，`./tbook check` 给出警告。
   - 幻灯片：`books/<slug>/slides/<deck>/slides.md`（第一语言）与 `slides.<lang>.md`，逐页对应；不得有 `slides.<第一语言>.md`（会被 `slides.md` 遮蔽），也不得用 `src:` 导入别的文件的幻灯片（检查无法读取导入的内容），二者都报错；写法见 `theme/slides/README.md`。
 - 媒体中引用的 Lean GID 与章节引用一样必须在锁文件中，由 `./tbook pin --refresh` 解析、`./tbook check` 复核：登记表的 `lean`、页面的 `data-lean-gid`、`film.json` 的 `lean`、幻灯片的 `<LeanBadge>` / `<TheoremCard>`（`<lean-badge>`、`<theorem-card>` 等 Vue 认可的写法同样受检查；代码块之外的每个标签都受检查。代码块指围栏代码块、缩进代码块与 `<<<` 导入，按 Slidev 53 配置下 markdown-exit 的块规则识别：表格、组件 HTML 块、脚注、`$$` 公式块与各容器的规则都在内。Python 的 `slides.code_lines` 与 Node 的 `codeLines` 是同一份移植，测试用 Slidev 构建出的解析器比对二者）。它们显示为绿色 `LEAN ✓`，因此必须是种类为 `theorem` 的声明：页面中的定义用 `data-trureturing-path="<module>.lean"` 链接；幻灯片写 `kind="definition"` 时可以引用 Lean 定义，显示中性的 `LEAN DEF` 而不是绿色 `LEAN ✓`。
 - 可视化页面的绿色对勾 `.okmark` 只在 `.lean` 依据框里；页面里没有 `.lean` 祖先的 `.okmark`，以及脚本里写入 `.okmark`、却没有点名某个位于 `.lean` 框中的元素的那一行，`./tbook check`（`viz.okmarks_outside_lean`）与 `viz-validate`（`okmarksOutsideLean`）给警告；页面自己核对的数用中性的 `.nummark`。
@@ -202,9 +202,9 @@ build/slides/<slug>/<deck>/<lang>/  Slidev 输出；PDF 在 build/slides/<slug>/
                                     decks.<deck>.langs.<lang>.{title,info,blurb,slides,dir,site_path,base,pdf,pdf_name}）；
                                     发布时 base、各语言的 site_path（随书的第一语言而变）或语言集合
                                     与当前不符即为过期，slides.publish 先重新构建
-books/<slug>/films/<NNN>-<name>/out/  视频流水线的工作文件（git 忽略）；入口 theme/film/film.sh <film dir> <step>
-build/films/<slug>/<id>/            一部视频的成片：film.json outputs 所列的文件，必有 narrated_720p 与 cover，
-                                    列出时另有 narrated、music_only、music_only_720p（构建单元 films <slug>/<id>，
+books/<slug>/films/<name>/out/  视频流水线的工作文件（git 忽略）；入口 theme/film/film.sh <film dir> <step>
+build/films/<slug>/<name>/            一部视频的成片：film.json outputs 所列的文件，必有 narrated_720p 与 cover，
+                                    列出时另有 narrated、music_only、music_only_720p（构建单元 films <slug>/<name>，
                                     渲染或从缓存恢复）
 .cache/film/                        视频工具链：venv/（theme/film/requirements.txt）、models/（Kokoro）、fonts/
 build/lean-verify/                  ./tbook lean-project 生成的深度验证 Lake 工程
@@ -216,7 +216,7 @@ HTML 专有选项：`book.toml` 的 `[html] section-labels = true` 恢复 mdBook
 
 环境变量：`MDBOOK`（mdBook 路径）、`PANDOC`、`PW_CHROMIUM_PATH`（已有的 Chromium）、`TBOOK_EPUBCHECK=1|warn|0`、`TBOOK_SLIDES_NO_PDF=1`（不导出、不发布幻灯片 PDF；`slides.publish` 会去掉章节卡片中指向未发布 PDF 的链接）、`TBOOK_SLIDES_NO_CHECK=1`、`SOURCE_DATE_EPOCH`（可复现的时间戳）、`TBOOK_REPO` / `TBOOK_BASE_URL`（覆盖仓库与站点地址）、`TRURETURING_DIR`（本地 trureturing 检出）、`TRURETURING_TOKEN`（读取私有 trureturing；GitHub API 也依次用 `GITHUB_TOKEN`、`GH_TOKEN`）、`TBOOK_LANG=zh|en`（模板升级摘要语言）。
 
-视频构建：每部视频是一个构建单元（目标 `films`，单元 `<slug>/<id>`，`tbook.film.units`），由 `./tbook build films|site|all` 经 `film.build_videos` 运行。键覆盖视频依赖的全部输入，而不含无关输入：视频目录中 git 会提交的文件（不含 `out/`、`poster.jpg`、`README.md`）、`theme/film/`（不含视频页资源 `site/`，含 `requirements.txt`）、`theme/generated/tokens.mjs`、`tools/tbook/film.py`、引擎绘制的数据（`film.engine_data`：书的代号、版本与标题，所钉提交与引用声明的名称、陈述摘要，片内文字）、`package-lock.json` 中字体与 Playwright（它决定 Chromium）的版本、Kokoro 模型版本（`film.KOKORO_RELEASE`）与 Node 主版本，`film.json` 的 `scripts` 所列脚本，有实体镜头（`"solid": true`）时还有造型核心 `theme/viz/solid-core.js` 与 `theme/viz/vendor/` 的 three.js（没有实体镜头的视频不依赖它们）；不含站点地址，所以 CI、Pages 与 Release 的构建共用同一份视频。也不含探测到的 ffmpeg、Chromium 与视频 Python：没有视频工具链的构建（`TBOOK_FILMS=auto|skip`）须算出同一个键才能恢复视频，运行器上 ffmpeg 包的新修订也不改变视频的内容。缓存未命中时按 `TBOOK_FILMS` 处理：`auto`（默认）在工具链齐全（`film.toolchain_missing`：ffmpeg、Node 与 Playwright、Chromium、视频 Python 的包、Kokoro 模型、字体）时渲染，否则警告并删去该视频的旧构建目录；`require` 失败；`skip` 从不渲染。渲染即 `FILM_STRICT=1 theme/film/film.sh <dir> all <outputs 的键…>`（`film.render_videos` 明确传入 `film.json` 所列的输出），在 `out/` 中工作，只把这些文件复制到 `build/films/<slug>/<id>/`，缺少任何一个即失败（`buildcache.MissingOutput`，不存入缓存），不写入库文件（提交的 `poster.jpg` 只由手工的 `poster` 步骤生成）。`film.json` 在键中，改动 `outputs` 会重新渲染。流水线只编码所需（`film.render_plan`，`theme/film/plan.py` 给各步骤）：Chromium 按 1920×1080 截取每帧一次，各渲染进程在同一遍中编码——720p 视频（`narrated_720p`、`music_only_720p`）由帧直接缩放（hqdn3d、lanczos，x264 CRF 19、preset slow），只有列出 1080p 视频（`narrated`、`music_only`）时才另编码 1080p 母版（CRF 17）；`mux` 只做拼接与混入音频（AAC 48 kHz，`+faststart`），不再重新编码；纯配乐混音只在列出纯配乐视频时生成。同一台机器、同样的进程数，产物逐字节相同；720p 旁白版无论是否列出 1080p 都相同。默认（720p 旁白版与封面）渲染 50 秒的示例约 80 秒；另列出 1080p 视频时约 140 秒（帧截取不变，多编码 1080p 母版）。视频工具链由 `theme/film/setup.sh` 安装：钉死的包进 `$FILM_CACHE/venv`（默认 `.cache/film/venv`，`PYTHON` 可指定别的解释器），模型进 `$KOKORO_MODEL_DIR`（默认 `.cache/film/models`）；ffmpeg 来自系统（`FFMPEG` 可覆盖）。
+视频构建：每部视频是一个构建单元（目标 `films`，单元 `<slug>/<name>`，`tbook.film.units`），由 `./tbook build films|site|all` 经 `film.build_videos` 运行。键覆盖视频依赖的全部输入，而不含无关输入：视频目录中 git 会提交的文件（不含 `out/`、`poster.jpg`、`README.md`）、`theme/film/`（不含视频页资源 `site/`，含 `requirements.txt`）、`theme/generated/tokens.mjs`、`tools/tbook/film.py`、引擎绘制的数据（`film.engine_data`：书的代号、版本与标题，所钉提交与引用声明的名称、陈述摘要，片内文字）、`package-lock.json` 中字体与 Playwright（它决定 Chromium）的版本、Kokoro 模型版本（`film.KOKORO_RELEASE`）与 Node 主版本，`film.json` 的 `scripts` 所列脚本，有实体镜头（`"solid": true`）时还有造型核心 `theme/viz/solid-core.js` 与 `theme/viz/vendor/` 的 three.js（没有实体镜头的视频不依赖它们）；不含站点地址，所以 CI、Pages 与 Release 的构建共用同一份视频。也不含探测到的 ffmpeg、Chromium 与视频 Python：没有视频工具链的构建（`TBOOK_FILMS=auto|skip`）须算出同一个键才能恢复视频，运行器上 ffmpeg 包的新修订也不改变视频的内容。缓存未命中时按 `TBOOK_FILMS` 处理：`auto`（默认）在工具链齐全（`film.toolchain_missing`：ffmpeg、Node 与 Playwright、Chromium、视频 Python 的包、Kokoro 模型、字体）时渲染，否则警告并删去该视频的旧构建目录；`require` 失败；`skip` 从不渲染。渲染即 `FILM_STRICT=1 theme/film/film.sh <dir> all <outputs 的键…>`（`film.render_videos` 明确传入 `film.json` 所列的输出），在 `out/` 中工作，只把这些文件复制到 `build/films/<slug>/<name>/`，缺少任何一个即失败（`buildcache.MissingOutput`，不存入缓存），不写入库文件（提交的 `poster.jpg` 只由手工的 `poster` 步骤生成）。`film.json` 在键中，改动 `outputs` 会重新渲染。流水线只编码所需（`film.render_plan`，`theme/film/plan.py` 给各步骤）：Chromium 按 1920×1080 截取每帧一次，各渲染进程在同一遍中编码——720p 视频（`narrated_720p`、`music_only_720p`）由帧直接缩放（hqdn3d、lanczos，x264 CRF 19、preset slow），只有列出 1080p 视频（`narrated`、`music_only`）时才另编码 1080p 母版（CRF 17）；`mux` 只做拼接与混入音频（AAC 48 kHz，`+faststart`），不再重新编码；纯配乐混音只在列出纯配乐视频时生成。同一台机器、同样的进程数，产物逐字节相同；720p 旁白版无论是否列出 1080p 都相同。默认（720p 旁白版与封面）渲染 50 秒的示例约 80 秒；另列出 1080p 视频时约 140 秒（帧截取不变，多编码 1080p 母版）。视频工具链由 `theme/film/setup.sh` 安装：钉死的包进 `$FILM_CACHE/venv`（默认 `.cache/film/venv`，`PYTHON` 可指定别的解释器），模型进 `$KOKORO_MODEL_DIR`（默认 `.cache/film/models`）；ffmpeg 来自系统（`FFMPEG` 可覆盖）。
 
 ### 5.1 构建缓存
 
@@ -225,17 +225,25 @@ HTML 专有选项：`book.toml` 的 `[html] section-labels = true` 恢复 mdBook
 | target | 单元名 | 产物 |
 | --- | --- | --- |
 | `html` | `<slug>/<lang>` | `build/html/<slug>/<lang>/` |
+| `pandoc` | `<slug>/<lang>` | 共享正文、媒体、主题与元数据的暂存目录 |
+| `typst` | `<slug>/<lang>` | Pandoc 转换后的 `main.typ` |
 | `pdf` | `<slug>/<lang>/<variant>` | `build/dist/<slug>/` 下该语言版本、该变体的 PDF |
 | `epub` | `<slug>/<lang>` | `build/dist/<slug>/` 下该语言版本的 EPUB |
+| `covers` | `<slug>/<lang>/<variant>/<width>/<format>` | 站点与 EPUB 共用机制生成的书封 |
 | `viz-stills` | `<slug>/<viz id>` | 本地封面、引用卡静帧与清单 |
 | `slides` | `<slug>` | `build/slides/<slug>/`（全部 deck、语言与 PDF） |
-| `films` | `<slug>/<film id>` | `build/films/<slug>/<film id>/`（单元由 `film.units(site, book)` 给出） |
+| `films` | `<slug>/<name>` | `build/films/<slug>/<name>/`（单元由 `film.units(site, book)` 给出） |
+
+PDF 按完整文档编译，页码、目录、交叉引用和分页共同决定结果。三个变体共用 `pandoc` 暂存和 `typst` 转换缓存，再分别缓存最终 PDF；EPUB 只共用暂存，不需要 Typst 正文转换。暂存缓存保存相对链接和完整阶段元数据，恢复时绑定当前目录，不混入封面、最终 PDF 或 EPUB 工作文件。
 
 **键**是单元全部输入（`Inputs`）的 SHA-256，再并入 target 与单元名。输入按“标签 + 摘要”逐项计入：
 
 - 文件：仓库是 git 工作树时，取所列目录下 git 会提交的文件（已跟踪的，以及未跟踪且未被忽略的），构建产物与被忽略的文件不计入；git 整体忽略的目录（如 `.cache/fonts/`）与仓库外的目录逐个文件计入。仓库外的文件记为 `<outside>/<目录名>/<相对路径>`，键与目录所在位置无关。不是 git 工作树时遍历目录，跳过 `build/`、`_site/`、`.cache/`、`node_modules/`、`out/`、`frames/`、`tts/` 等。
 - HTML、PDF、EPUB：`tools/tbook/`、`tools/filters/`、`tools/node/`、`tools/figkit/`、`theme/`（不含只供视频用的 `theme/film/`）、`i18n/`、`site.toml`、锁文件、`requirements.txt`、`package-lock.json`，整个书目录 `books/<slug>/`（各语言版本互相引用，改动任一语言都会重建这本书的全部单元），站点地址与仓库、Python 主次版本、Node 主版本。HTML 另计 mdBook 的精确版本；PDF 与 EPUB 另计 Pandoc 与 `typst` 模块的版本系列、`.cache/fonts/` 的字体文件、Typst 找到的字体族（含系统字体，所以构建 PDF/EPUB 的工作流都装同一套字体：`.github/actions/setup` 的 `fonts: 'true'` 包含 Playwright `--with-deps` 会装的字体）与 `$SOURCE_DATE_EPOCH`；EPUB 还计 epubcheck 是否真能运行（`$TBOOK_EPUBCHECK`，以及缺 Java 或 epubcheck 包时记为跳过），未经检查存下的 EPUB 不会恢复到要求检查的构建中。`.cache/fonts-fontsource/` 由构建从 `@fontsource` 包派生，不计入。
 - 幻灯片：整个书目录（包括绘图脚本及其数据源），`tools/figkit/`、`theme/tokens.json`、`theme/slides/`、`theme/generated/`、`theme/i18n/`、`i18n/`、`tools/node/`、`tools/tbook/slides.py`、锁文件、`site.toml`、`package-lock.json`，站点基路径与地址，`TBOOK_SLIDES_NO_PDF`、`TBOOK_SLIDES_NO_CHECK`，Node 主版本（Chromium 由 `package-lock.json` 中的 Playwright 决定）。
+- 书封：按实际绘制元数据、模板、配色、字体、导出尺寸与时间戳计算键；正文变化而这些输入相同时可复用。静态 SVG 直接运行脚本生成，不建立单独缓存单元。
+
+`@fontsource` 的拉丁回退字体转换为 `.cache/fonts-fontsource/` 下的 TTF，每个映射字重在相邻的 `.ttf.json` 中记录 WOFF 与 TTF 的 SHA-256。源文件可用时，只有两者摘要都匹配才复用；源字节变化、旧缓存没有记录或 TTF 损坏都会重新转换。当前源转换失败时移除旧 TTF，避免 PDF、EPUB 或封面继续使用旧字体；未安装 npm 源包时仍保留已有 TTF 供离线使用。
 
 工具只按**版本系列**计入（`buildcache.series`：Node 取主版本，Pandoc 与 Typst 取“主.次”，如 Pandoc `3.1`；Chromium 由 `package-lock.json` 中的 Playwright 决定，不单独计入）。决定产物的版本已钉在键覆盖的文件中（`requirements.txt` 钉 Pandoc 与 Typst，`package-lock.json` 钉 Playwright、Slidev 与字体，`theme/film/requirements.txt`）；若这些工具计入精确版本，键就随运行器镜像而变，Node 的一个补丁版本或 Ubuntu 的 ffmpeg 修订就会让全部条目与已发布的 Release 失效。mdBook 例外：各处都装同一个精确版本（`.github/actions/setup` 钉 0.5.4），按精确版本计入，升级它即重建 HTML。
 
@@ -245,7 +253,7 @@ HTML 专有选项：`book.toml` 的 `[html] section-labels = true` 恢复 mdBook
 
 **查找顺序**（`buildcache.run(unit, build)`）：
 
-1. 本地存储：逐个文件核对 `entry.json` 记下的摘要、目录与产物形状（没有多余文件，没有符号链接），记下的产物路径须与当前一致；不符即删除该条目并构建。
+1. 本地存储：逐个文件核对 `entry.json` 记下的摘要、目录与产物形状（没有多余文件，没有符号链接），记下的产物路径须与当前一致；只有显式声明可迁移的暂存与 Typst 中间产物允许恢复到新的阶段目录。不符即删除该条目并构建。
 2. `TBOOK_CACHE_REMOTE=1` 时，查仓库（`site.toml` 的 `repo`、`TBOOK_REPO` 或 `GITHUB_REPOSITORY`）最新 5 个附有 `build-cache.json` 的已发布 Release（草稿与没有该文件的 Release，例如手工发的，不算在内；只看最新的 100 个 Release）中的 `build-cache.json`，从新到旧取第一个有该键的条目：设置了 `GITHUB_TOKEN` 或 `GH_TOKEN` 时经 API 的资产地址下载（私有仓库也可用；跳转到存储地址时不带令牌），否则用公开下载地址；核对大小不超过声明值、SHA-256 与 `build-cache.json` 和 GitHub 报告的 `digest` 一致；只解出 `entry.json` 与 `files/` 下的普通文件和目录，链接、设备文件、`..`、绝对路径、重复成员一律拒绝（逐个写出，不依赖 Python 3.11.4 才有的解包过滤器）；再按第 1 步校验后放入本地存储并恢复。API 地址取 `$GITHUB_API_URL`（默认 `https://api.github.com`）。
 3. 都没有：构建，成功后存入；构建失败则什么也不存，构建声明的产物缺失是错误。
 
@@ -262,7 +270,7 @@ HTML 专有选项：`book.toml` 的 `[html] section-labels = true` 恢复 mdBook
 ./tbook cache prune                        只留各单元当前键的条目；删除损坏条目、中断留下的临时目录与空目录
 ./tbook cache export DIR [--book <slug>]   把各单元当前键的条目写成 DIR/cache-<target>-<unit>-<键前 16 位>.tar
                                            与 DIR/build-cache.json（unit、key、asset、sha256、size）；
-                                           有单元不在本地存储中时列出它们，退出码为 1
+                                           缺少最终出版单元时退出码为 1；可重建辅助单元只导出已有条目
 ```
 
 导出的 tar 可复现：成员排序，不含属主与时间，权限只有 0644/0755。工作流如何保存、恢复本地存储，整站 Release 如何附带这些文件，见 `docs/PUBLISHING.md`。
@@ -271,10 +279,11 @@ HTML 专有选项：`book.toml` 的 `[html] section-labels = true` 恢复 mdBook
 
 ```python
 Inputs().files(*paths, exclude=()).text(label, value).add(other)   # .key()；text 的值按 JSON 计入
-Unit(target, name, inputs, outputs: list[Path])                     # .key、.label、.entry_dir()
-run(unit, build_fn, *, repo=None) -> "cached" | "release" | "built"
+Unit(target, name, inputs, outputs: list[Path], relocatable=False, required=True)
+                                     # .key、.label、.entry_dir()；辅助单元 required=False
+run(unit, build_fn, *, repo=None, announce=True) -> "cached" | "release" | "built"
 run(unit, None) -> "cached" | "release" | "missing"                 # 只恢复，不构建
-units(site, books) -> list[Unit]       # html/pdf/epub/slides 单元，加上 film.units(site, book)
+units(site, books) -> list[Unit]       # 最终输出、图片与共享中间产物，加上 film.units(site, book)
 tool_version(*cmd), package_version(name), series(version, parts=2), node_version()
 store(unit), restore_local(unit), restore_remote(unit, repo), stored(), prune(units), actions_key(), export(dir, units)
 ```
@@ -292,8 +301,8 @@ manifest.json              机器可读清单（schema trureturing-books.site.v1
 <slug>/<lang>/             mdBook HTML
 <slug>/downloads/          PDF、EPUB
 <slug>/viz/                index.html（可视化索引）、visualizations.json、assets/（共享运行时）、<id>/
-<slug>/films/              index.html、films.json、assets/{tokens.css,films.css,films.js}、<NNN>-<name>/poster.jpg
-                           与 <NNN>-<name>/<outputs 所列的文件>（构建有该视频时；同源托管，iOS Safari 需要正确的
+<slug>/films/              index.html、films.json、assets/{tokens.css,films.css,films.js}、<name>/poster.jpg
+                           与 <name>/<outputs 所列的文件>（构建有该视频时；同源托管，iOS Safari 需要正确的
                            Content-Type 与按字节范围请求；没有时视频页、落地页与章节只显示海报与“视频未构建”）
 <slug>/slides/             index.html；<deck>/（第一语言）、<deck>/<lang>/（其他语言）、
                            <deck>/<slug>-<deck>-<lang>.pdf
@@ -320,6 +329,7 @@ mdBook 的 `<lang>/print.html` 不改写 iframe 的 `src` 与 video 的 `poster`
 | `lean` | 名称键解码、GID、冻结状态来源、`resolve()`、`Lock` 与永久链接 |
 | `render` | `RenderContext`、`env_view()`、`chapter_markdown()`（mdbook / pandoc 两种 target）；环境标题中的 `[@id]`（`env_title()`）；`rewrite_links()`（图片与文件链接，`check` 也用它找缺失文件）；Lean 声明未被锁文件解析时显示 `UNVERIFIED`、不给链接；`verified_envs()` 是所有 `LEAN ✓ n` 计数的唯一口径 |
 | `ledger` | 生成“形式化验证账本”章节 |
+| `stats` | 从正式解析结果生成可选统计视图、数据产物与 `.stats` 嵌入／链接；不写回书稿 |
 | `figkit` | 静态图的画图库：`Figure`（`Canvas` 的方法：线、箭头、面、文字、标记，`axes()` 坐标系，`sphere()` 球面正交投影，`row()`/`panel()` 分栏），角色与语义名（`ROLES`、`ALIASES`），标准的下限（`MIN_FONT`、`MIN_STROKE`、`MAX_WIDTH`） |
 | `figure` | 静态图：`names()`、`render()`、`build(book, only, check=)`、`style_sheet()`、`materialize()`、`inline_html()`、`mdbook_css()`、`caption_problem()`、`shots()`，以及媒体接口 |
 | `check` / `pin` / `theme` / `newbook` / `build` / `cli` | 命令 |
@@ -389,8 +399,7 @@ def generate(out_dir) -> Path
 | Python | ≥ 3.11 | 系统 / `actions/setup-python` |
 | Pandoc | 3.9（`pypandoc_binary==1.17`） | `requirements.txt` |
 | Typst | `typst==0.15.2`（Python 模块） | `requirements.txt` |
-| pikepdf / QPDF | `pikepdf==10.0.2` | `requirements.txt`；无损 PDF 对象流打包 |
-| Zopfli | `zopfli==0.4.3` | `requirements.txt`；无损 PDF 页面 Deflate 编码 |
+| pikepdf / QPDF | `pikepdf==10.0.2` | `requirements.txt`；PDF 导出测试的结构与内容独立校验 |
 | epubcheck | 5.3.0（Python 包内含 jar，需 Java） | `requirements.txt` |
 | mdBook | 0.5.4 | CI 用 `taiki-e/install-action`；本地 `cargo install mdbook --version 0.5.4 --locked` |
 | Node | ≥ 22.12 | `package.json` |

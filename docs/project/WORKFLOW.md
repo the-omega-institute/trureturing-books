@@ -13,7 +13,7 @@
 | **作者与总架构师**<br>*(Author & Principal Architect)* | **Auric** | 提出全书核心几何直觉、物理图像与哲学命题（两子丈量、有向夹角面积、正交两次寻址、球外之球、割圆多面体近似与泰勒余项逃逸、毛球定理与 $720^\circ$ 角亏、余弦自指不动点 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$）；审定目录脉络、章节题记与学术标准。 |
 | **中英双语正文主笔**；*(Chapter Prose Authoring — Text Only)* | **优先 Gemini，可选**；不可用时由 `codex-cli` 或其他可用模型承接 | **严格仅限文字内容**：仅负责全书 45 个单元（序曲、第一至第十部共 39 章、终章与附录 A–D）的中英文双语正文与附录文字撰写/修订；不以特定调用方式或凭据配置作为写作前置；**严禁**以正文作者角色承担 `viz/`、`films/`、`figures/*.py`、测试套件、构建工具或 Git/PR 工程任务。 |
 | **辅助工程与形式化对齐**<br>*(Auxiliary Engineering & Tooling)* | **Codex CLI**<br>*(`codex-cli`)* | 负责全部工程性辅助工作：从 `trureturing@dev` 提取并核验冻结的 Lean 4 定理签名与状态切片（生成各批次 `spec-batch-*.md` 规格书）、编写静态图脚本（静态图一律按 `PROJECT.md` 第 6 节第 5 条由脚本 `figures/<name>.py` 生成，`assets/` 只放照片一类确实不能由脚本画的图片）、编写第七部零依赖 Python 几何代数与转子编译参考引擎及测试、执行 `./tbook pin / check / build / epubcheck` 工具链验证，以及管理 Git 分支、Worktree 与上游模板修复 PR；优先正文作者不可用时，可另以正文作者角色承接写作。 |
-| **交互可视化与讲解视频**<br>*(Interactive Viz & Explainer Films)* | **Claude CLI (Opus 5.5)**<br>*(`claude -p --model opus`，严禁使用 Claude Subagent)* | 直接通过命令行调用 `claude` CLI（不派生 Claude Subagent），严格遵循 `books/example-monograph/` 示例框架完成全部交互式可视化（`books/<slug>/viz/<id>/`，百分之百对齐 `golden-carry` 的三栏 `.app` 结构、`theme/viz/{theme.css,shell.js}` 与 `main.js` 契约，严禁自创主题按钮或非标类名）与讲解视频（`books/<slug>/films/<NNN>-<name>/`，百分之百对齐 `001-golden-deficit` 的 `film.json`、`script.json`、`scenes.js` 与 `poster.jpg` 规范）。 |
+| **交互可视化与讲解视频**<br>*(Interactive Viz & Explainer Films)* | **Claude CLI (Opus 5.5)**<br>*(`claude -p --model opus`，严禁使用 Claude Subagent)* | 直接通过命令行调用 `claude` CLI（不派生 Claude Subagent），严格遵循 `books/example-monograph/` 示例框架完成全部交互式可视化（`books/<slug>/viz/<id>/`，百分之百对齐 `golden-carry` 的三栏 `.app` 结构、`theme/viz/{theme.css,shell.js}` 与 `main.js` 契约，严禁自创主题按钮或非标类名）与讲解视频（`books/<slug>/films/<name>/`，百分之百对齐 `golden-deficit` 的 `film.json`、`script.json`、`scenes.js` 与 `poster.jpg` 规范）。 |
 | **三席异构独立审查**<br>*(3-Seat Independent Verification)* | **GPT / Oracle + Codex CLI + Subagent**<br>*(`/sshx` `review_triplet_workers`)* | 对每个出版批次执行互不可见的独立三席审查（`architecture` 架构与契约席、`quality` 数学与教学质量席、`tests` 独立数值与构建验证席），所有阻塞性缺陷清零后方能合入主干。 |
 
 ---
@@ -27,7 +27,7 @@
    - **舞台优先**：按对象选舞台，舞台占页面主体；使用共享的实验室版式 `.app.lab` 与运行时 `theme/viz/{theme.css,shell.js,kit.js}`，不自造私有运行时、主题切换或非标徽章。
    - **按卡引用**：每张实验卡都是正文可引用的图（`::: {.viz src=… preset=…}`），中英文版本引用相同；PDF/EPUB 使用该卡的带标签静态图。
    - **验收**：`stageFirstChecks` 与页面自己的独立核对全部通过；看过 `viz-shots` 的全部截图；封面与静态图已在本地重新生成并验收，提交只含源文件。
-2. **讲解视频（`books/<slug>/films/<NNN>-<name>/`）对齐 `books/example-monograph/films/001-golden-deficit/`**
+2. **讲解视频（`books/<slug>/films/<name>/`）对齐 `books/example-monograph/films/golden-deficit/`**
    - 固定包含 `film.json`、`script.json`、`scenes.js`、`poster.jpg`，由 `theme/film/film.sh` 渲染并执行 `FILM.init` 自检（0 `FILM_ERRORS`）。
 3. **演示文稿（`books/<slug>/slides/<deck>/`）对齐 `books/example-monograph/slides/overview/`**
    - 固定包含 `slides.md` 与 `slides.en.md`，使用 `theme/slides` 标准版式与 `<TheoremCard>`、`<LeanBadge>`、`<Stat>`、`<Source>`、`<Tex>` 组件。

@@ -218,6 +218,6 @@ $P$ 是图中左下三角形 $\{p_1 + p_2 < 1/\varphi\}$ 的面积，按竖直�
 完整的实验室：换一对数 $v_1, v_2$，在进位、亏量图、相位、窗口四个场景之间切换，或沿实验卡逐张看；亏量 $c(v_1, v_2)$ 总是 $-1$、$0$、$1$ 之一（[@thm-deficit-three-valued]）。
 :::
 
-::: {.film src="001-golden-deficit"}
+::: {.film src="golden-deficit"}
 动画：两个 Zeckendorf 表示相加、进位，以及亏量为什么只取 $-1, 0, 1$（[@thm-deficit-three-valued]）。
 :::

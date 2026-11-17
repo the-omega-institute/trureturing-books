@@ -101,6 +101,19 @@ def cmd_stats(args) -> int:
     from . import stats
 
     rows = [stats.collect(book, exclude=tuple(args.exclude) if args.exclude else None) for book in _books(args)]
+    if (args.format or args.view or args.lang or args.group != "all") and not args.write:
+        raise config.ConfigError("stats: --format, --view, --lang and --group require --write")
+    if args.write:
+        selected = bool(args.format or args.view or args.lang or args.group != "all")
+        formats = args.format or (["markdown"] if selected else [])
+        views = args.view or (["declarations"] if args.group != "all" else ["summary"])
+        for data in rows:
+            exports = [(view, lang, fmt) for view in views for lang in args.lang or [data["lang"]] for fmt in formats]
+            for view, lang, fmt in exports:
+                stats.artifact_name(view, lang, fmt, args.group)
+            stats.write_artifact(data)
+            for view, lang, fmt in exports:
+                stats.export(data, view, lang, fmt, args.group)
     if args.json:
         print(json.dumps(rows, ensure_ascii=False, indent=2))
     else:
@@ -176,9 +189,12 @@ def cmd_cache(args) -> int:
         return 0
     if args.cache_cmd == "export":
         manifest = buildcache.export(Path(args.dir), current, repo=site.repo or "")
-        n = len(json.loads(manifest.read_text(encoding="utf-8"))["entries"])
+        entries = json.loads(manifest.read_text(encoding="utf-8"))["entries"]
+        n = len(entries)
+        have = {(e["target"], e["unit"], e["key"]) for e in entries}
+        complete = all((u.target, u.name, u.key) in have for u in current if u.required)
         print(f"wrote {n} of {len(current)} unit(s) and {paths.rel(manifest)}")
-        return 0 if n == len(current) else 1
+        return 0 if complete else 1
     return 2
 
 
@@ -334,7 +350,7 @@ def parser() -> argparse.ArgumentParser:
     c.add_argument("--book", action="append")
     c.add_argument("--lang", action="append", help="limit to an edition language (repeatable)")
     c.add_argument("--variant", action="append", choices=list(config.PDF_VARIANTS), help="limit PDF variants")
-    c.add_argument("--film", action="append", metavar="NNN-NAME",
+    c.add_argument("--film", action="append", metavar="NAME",
                    help="with `build films`: render or restore only this film (repeatable); the others are only "
                         "restored from the build cache")
     c.set_defaults(fn=cmd_build)
@@ -404,6 +420,12 @@ def parser() -> argparse.ArgumentParser:
     c.add_argument("--book", action="append")
     c.add_argument("--exclude", action="append", default=[], help="generated index chapter to exclude")
     c.add_argument("--json", action="store_true", help="include declarations and citation locations")
+    c.add_argument("--write", action="store_true", help="export build/statistics/<book>.json without changing sources")
+    from . import stats
+    c.add_argument("--view", action="append", choices=stats.VIEWS, help="view to export; repeat to select several")
+    c.add_argument("--format", action="append", choices=stats.FORMATS, help="view format; repeat to select several")
+    c.add_argument("--lang", action="append", help="artifact label language (counts use the authoritative edition)")
+    c.add_argument("--group", choices=stats.GROUPS, default="all", help="declaration group for declarations/reuse")
     c.set_defaults(fn=cmd_stats)
 
     c = sub.add_parser("artifacts", help="list, untrack or reject generated publication files in Git")
