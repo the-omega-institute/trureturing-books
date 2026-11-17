@@ -33,23 +33,23 @@
 **格拉姆秩溢出开维阶梯：从 `0D` 点（$\langle u, v\rangle = 1$）经 `1D` 线（$\det G_2 = \sin^2\theta > 0$）与 `2D` 面（$\det G_3 > 0$）撑开 `3D` 体积（$\det G_4 > 0$ / $S^\perp \neq \{0\}$）。** 逐步推高琥珀色维度溢出滑块：每当新增比较关系使青色低维投影装不下品红正交残差时，格拉姆行列式严格转正并解锁下一级几何自由度；绿色 `LEAN ✓` 徽章对应 `unit_gram_overlap_characterization`、`two_anchor_gram_det_pos_iff`、`three_anchor_gram_det_pos_iff` 与 `finite_layer_projection_escape`。
 :::
 
-既然三维空间体积已经张开，**“时间”又是怎样被同一条比较公理逼出来的？** 章首箴言一语中的：“当信息不能在一个维度上表达的时候，就撑到第二个维度了。时间也是这样产生的。”回忆[第三十一章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)与本章 §34.6–§34.7 揭示的双向互易公平代价：为了消除顺序特权，比较读数必须取模平方 $\lvert\langle\phi\mid\psi\rangle\rvert^2$（或空间驻波强度 $\lvert\Psi(\mathbf{x})\rvert^2$）。然而，“公平就要平方，平方必然折叠相位”——在固定的三维空间驻波截面上，携带截然不同内部相位历史 $\phi_1 \neq \phi_2$（例如复振幅 $+e^{i\alpha}$ 与 $-e^{i\alpha}$）的两束来路，会投射到**同一个三维空间节点 $\mathbf{x}$** 并给出完全相同的空间驻波模方读数！
+既然三维空间体积已经张开，**“时间”又是怎样被同一条比较公理逼出来的？** 章首箴言一语中的：“当信息不能在一个维度上表达的时候，就撑到第二个维度了。时间也是这样产生的。”回忆[第三十一章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)与本章 §34.6–§34.7 揭示的双向互易公平代价：为了消除顺序特权，比较读数必须取模平方 $\lvert\langle\phi\mid\psi\rangle\rvert^2$（或空间驻波强度 $\lvert\Psi(\mathbf{x})\rvert^2$）。然而，“公平就要平方，平方必然折叠相位”——在固定的三维空间驻波截面上，携带截然不同内部相位历史 $\phi_1 \neq \phi_2$（例如复振幅 $+e^{i\alpha}$ 与 $-e^{i\alpha}$）的两束来路，会投射到**同一个三维空间节点 $\mathbf{x}$** 并给出完全相同的空间驻波模方读数！（若这两束是整体态，$+e^{i\alpha}$ 与 $-e^{i\alpha}$ 只差一个全局相位，按 §31.4 属同一物理态；这里把它们当作可区分的两条“来路”历史标签，是本书模型的设定，属 `MODEL`。）
 
-在 `trureturing` 冻结的信息逃逸与结构新颖度模块中，这类在现有静态观测目录 $Q_{\mathrm{space}}$ 下读数完全重合、本异而表同的状态偶对 $(s_1, s_2)$（$s_1 \neq s_2$），被精确定义为目录的**逃逸碰撞对**（`escapePairs`）。当越来越多同点异相的来路汇聚到同一块三维驻波体积上时，纯三维空间坐标的区分容量宣告饱和，$\mathrm{escapeRate}(Q_{\mathrm{space}}) > 0$ 居高不下——单张静态三维切片再也塞不下这些相互冲突的相位账本！此时，冻结定理 [`lowersEscape_iff_strict_kernel_novelty`](lean:D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty) 给出了消解碰撞的唯一代数出路：要想严格压低逃逸碰撞率，系统当且仅当引入一枚相对于纯空间读出具有**严格商核新颖度**的新观测坐标 $q_{\mathrm{time}}$，使联合等价核严格收缩（`LEAN ✓`）：
+在 `trureturing` 冻结的信息逃逸与结构新颖度模块中，这类在现有静态观测目录 $Q_{\mathrm{space}}$ 下读数完全重合、本异而表同的状态偶对 $(s_1, s_2)$（$s_1 \neq s_2$），被精确定义为目录的**逃逸碰撞对**（`escapePairs`）。当越来越多同点异相的来路汇聚到同一块三维驻波体积上时，纯三维空间坐标的区分容量宣告饱和，$\mathrm{escapeRate}(Q_{\mathrm{space}}) > 0$ 居高不下——单张静态三维切片再也塞不下这些相互冲突的相位账本！此时，冻结定理 [`lowersEscape_iff_strict_kernel_novelty`](lean:D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty) 给出了消解碰撞的代数判据：要想严格压低逃逸碰撞率，当且仅当引入的新观测坐标（下式记为 $q_{\mathrm{time}}$）相对于纯空间读出具有**严格商核新颖度**，使联合等价核严格收缩（`LEAN ✓`）：
 
 $$
 \mathcal{C}.\mathrm{LowersEscape}(\mathrm{time}) \quad \Longleftrightarrow \quad \operatorname{jointKernel}\bigl(\{q_{\mathrm{time}}\} \cup Q_{\mathrm{space}}\bigr) \;\subsetneq\; \operatorname{jointKernel}(Q_{\mathrm{space}}).
 $$
 
-在本书的时空几何模型（`MODEL`）中，这根被迫在三维驻波空间之外正交撑开、专门用来把“同一点 $\mathbf{x}$ 上互不相容的相位态排成先后序列以拆解碰撞对”的第四维展开轴（$\Lambda^{3+1}$），正是**时间**！换言之，并不是“先有一条流淌的时间河，万物再顺流运动”；恰恰相反，是因为单张三维空间截面装不下双向公平平方折叠进去的异相来路信息，溢出的相位碰撞才顺着格拉姆开维律撑开了第四维时间轴！
+在本书的时空几何模型（`MODEL`）中，这根在三维驻波空间之外正交撑开、专门用来把“同一点 $\mathbf{x}$ 上互不相容的相位态排成先后序列以拆解碰撞对”的第四维展开轴（$\Lambda^{3+1}$），被读作**时间**。换言之，这一读法不把时间看作先在的河流，而设想：单张三维空间截面装不下双向公平平方折叠进去的异相来路信息，溢出的相位碰撞才撑开了第四维时间轴。需要划清界限：上面这条 Lean 声明只说明“加入一个读出能降低有限目录的碰撞率，当且仅当它严格细化联合核”；任何能区分碰撞对的新读出都满足它，它本身与时间、与第四维无关。
 
 ::: {.viz src="reversal-diagonal-cascade-sandbox" preset="time-from-phase-collision" height="520"}
-**相位碰撞撑开时间轴（`3D → 3+1D`）：公平平方 $\lvert\psi\rvert^2$ 在同一三维驻波节点叠压异相来路，迫使沿堇紫色第四轴展开严格商核细化。** 在静态 `3D` 切片上，同点反相状态对构成品红逃逸碰撞对（`escapePairs > 0`）；拉起琥珀色时间展开手柄引入时序坐标 $q_{\mathrm{time}}$ 后，碰撞对沿堇紫色时间纤维逐拍拆开，联合核严格收缩（绿色 `LEAN ✓` `lowersEscape_iff_strict_kernel_novelty`；第四维诠释标 `MODEL`）。
+**相位碰撞撑开时间轴（`3D → 3+1D`）：公平平方 $\lvert\psi\rvert^2$ 在同一三维驻波节点叠压异相来路，迫使沿堇紫色第四轴展开严格商核细化。** 在静态 `3D` 切片上，同点反相状态对构成品红逃逸碰撞对（`escapePairs > 0`）；拉起琥珀色时间展开手柄引入时序坐标 $q_{\mathrm{time}}$ 后，碰撞对沿堇紫色时间纤维逐拍拆开，联合核严格收缩（绿色 `LEAN ✓` `lowersEscape_iff_strict_kernel_novelty` 只担保“降低碰撞率⇔严格细化联合核”；把新坐标读作时间、第四维诠释均标 `MODEL`）。
 :::
 
-## 34.9.2 追问“点的来路”：单点深处的康托尔—哥德尔对角逃逸与不完备塔 {#sec-ch34-9-2}
+## 34.9.2 追问“点的来路”：单点深处的康托尔对角逃逸与哥德尔式不完备塔类比 {#sec-ch34-9-2}
 
-顺着“同点异相撑开时间”再往深处掘进一层，章首第二组惊人论断立刻水落石出：**“本质上就是对同样一个点，问点来的路径，无限的路径代表着无限的对角化问题代表着哥德尔不完备。”** 为什么仅仅对着宇宙间最卑微的一个“点”追问一句“你是沿哪条路径来的”，就会当场引爆康托尔对角线与哥德尔不完备定理？
+顺着“同点异相撑开时间”再往深处掘进一层，章首第二组论断有了一种读法：**“本质上就是对同样一个点，问点来的路径，无限的路径代表着无限的对角化问题代表着哥德尔不完备。”** 为什么仅仅对着宇宙间最卑微的一个“点”追问一句“你是沿哪条路径来的”，就会碰上康托尔式的对角线，并与哥德尔不完备论证呈现同一种对角形状？
 
 症结在于“静态的点”与“带历史的来路纤维”之间横亘着一道不可逾越的同伦阶差（文献结果 + `MODEL`）。在同伦类型论（HoTT）与代数拓扑的视角下，把空间 $X$ 视作一堆孤立无记忆的“点集”，等价于强行施加零阶截断 $\lVert X\rVert_0$，把通向点 $x$ 的千差万别的演化轨迹统统捏合成单枚平凡标签。可一旦撤去这层人为截断，对着同一个基点 $x \in X$ 追问“点来的路径”，基点 $x$ 脚下便豁然洞开它的**一阶来路环路空间（纤维）** $\Omega(X, x) := (x =_X x)$（或自锚定起点 $x_0$ 汇入 $x$ 的路径空间 $\mathcal{P}(X; x_0, x)$）。在离散时间切片或步进寻址下，每一条汇入点 $x$ 的路径 $\Gamma$ 都是一串按步号（地址）$k \in A$ 索引的局部比较相位序列 $\Gamma = \{\phi^{(k)}\}_{k \in A}$。
 
@@ -61,7 +61,7 @@ $$
 
 这条对角路径 $\Gamma_{\mathrm{diag}}$ 能躺回原表 $T$ 的某一行 $a_0 \in A$ 里吗？绝无可能！若 $\Gamma_{\mathrm{diag}} = \Gamma_{a_0}$，在它自己的对角地址 $k = a_0$ 处就会推出 $\phi_{a_0}^{(a_0)} \equiv \phi_{a_0}^{(a_0)} + \pi \pmod{2\pi}$，即 $\pi \equiv 0 \pmod{2\pi}$ 的荒谬矛盾！这正是 `trureturing` 冻结定理 [`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 在内核中锁定的普遍逃逸律：只要翻转算子无不动点，相对语义对角线就与目录中列出的**每一条**解码路径逐行相异（$\forall a \in A,\; d_{\mathrm{rel}} \neq \mathrm{decoderCatalog}(a) \circ \mathrm{latent}$）！
 
-更妙的是，倘若观察者不甘心，立刻把这条逃逸在外的对角路径 $\Gamma_{\mathrm{diag}}$ 补录进旧潜概念 $\mathrm{latent}$ 中以扩充成新表 $T' := \operatorname{conceptJoin}(\mathrm{latent}, \Gamma_{\mathrm{diag}})$，会发生什么？冻结定理 [`complete_diagonal_strict_topology_refinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement) 给出双重铁律：一方面，当解码目录覆盖全部局部解码映射时，并入 $\Gamma_{\mathrm{diag}}$ 必然诱导出观测划分拓扑的**严格真细化**——新表 $T'$ 切实劈开了旧表 $T$ 原本黏连不分的地址等价类，看见了前所未见的精细相位结构；另一方面，扩容后的新表 $T'$ 一旦再次列定，针对 $T'$ 的下一条对角翻转路径 $\Gamma_{\mathrm{diag}}'$ 又会从 $T'$ 的新对角线上破壳逃逸，推动 $T \to T' \to T'' \to \cdots$ 乃至高阶同伦环路塔 $\Omega(X, x) \to \Omega^2(X, x) \to \Omega^n(X, x)$（“路径之间的变形路径”）永无止境地向上生长！一个看似静止的零维小点，只要被追问一句“来路”，其内部就藏着一座永远无法用单一闭合有限表封顶的哥德尔不完备高塔。
+更妙的是，倘若观察者不甘心，立刻把这条逃逸在外的对角路径 $\Gamma_{\mathrm{diag}}$ 补录进旧潜概念 $\mathrm{latent}$ 中以扩充成新表 $T' := \operatorname{conceptJoin}(\mathrm{latent}, \Gamma_{\mathrm{diag}})$，会发生什么？冻结定理 [`complete_diagonal_strict_topology_refinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement) 给出双重铁律：一方面，当解码目录覆盖全部局部解码映射时，并入 $\Gamma_{\mathrm{diag}}$ 必然诱导出观测划分拓扑的**严格真细化**——新表 $T'$ 切实劈开了旧表 $T$ 原本黏连不分的地址等价类，看见了前所未见的精细相位结构；另一方面，扩容后的新表 $T'$ 一旦再次列定，针对 $T'$ 的下一条对角翻转路径 $\Gamma_{\mathrm{diag}}'$ 又会从 $T'$ 的新对角线上破壳逃逸，推动 $T \to T' \to T'' \to \cdots$ 乃至高阶同伦环路塔 $\Omega(X, x) \to \Omega^2(X, x) \to \Omega^n(X, x)$（“路径之间的变形路径”）永无止境地向上生长！一个看似静止的零维小点，只要被追问一句“来路”，其内部就藏着一座永远无法用单一闭合目录封顶的对角逃逸塔。它与哥德尔不完备论证共享同一对角形状，这是类比：所引对角引理不涉及算术、可证性或形式系统，推不出哥德尔定理。
 
 ::: {.viz src="reversal-diagonal-cascade-sandbox" preset="arrival-diagonal-escape" height="520"}
 **单点深处的来路对角逃逸与拓扑细化塔（$T \to T' \to T''$）。** 左侧青色路径束汇聚于同一点 $x$，右侧矩阵展示已列来路表 $T = \{\Gamma_1, \dots, \Gamma_4\}$；点击或拨动琥珀色对角翻转开关，沿主对角线逐拍施加 $+\pi$ 相移生成品红逃逸来路 $\Gamma_{\mathrm{diag}}$——它在第 $k$ 拍必与第 $k$ 行反相相撞（绿色 `LEAN ✓` `relative_semantic_diagonal_ne_listed_decode`），并入表后严格细化观测划分拓扑（绿色 `LEAN ✓` `complete_diagonal_strict_topology_refinement`）且立即触发下一轮扩表逃逸。
@@ -76,7 +76,7 @@ $$
 1. **极端一：假若宇宙间一切路径都能无差别抵达点 $x$（不可达集为空，$M^\perp = \{0\}$）**。此时对应于点 $x$ 的可达子空间扩张为整个希尔伯特空间 $M = \mathcal{H}$，其正交投影算子退化为恒等算子 $P_M = \operatorname{id}_{\mathcal{H}}$，正交补投影彻底归零 $P_{M^\perp} = 0$。对任意输入态 $\lvert\psi\rangle \in \mathcal{H}$，检验“是否抵达 $x$”的玻恩概率恒等于 $\langle\psi\mid P_M\mid\psi\rangle = \lVert\psi\rVert^2 \equiv 1$，香农区分信息量坍缩为 $-\log_2 1 = 0\;\mathrm{bits}$！当处处皆是 $x$、没有任何一条路径“不能到 $x$”时，点 $x$ 瞬间丧失一切边界与轮廓，蒸发成一片毫无结构的全同白雾；
 2. **极端二：假若没有任何路径能抵达点 $x$（可达集为空，$M = \{0\}$）**。此时 $P_M = 0$ 而 $P_{M^\perp} = \operatorname{id}_{\mathcal{H}}$，一切来路悉数反相自毁或偏折擦肩，驻波振幅处处为零，“点 $x$”根本无从凝结成形。
 
-两相夹击之下，存在的充要几何结构豁然显现：**“有”绝不能孤立自存，“有”恰恰是被它的反面——那个与之严格正交的“不可达之无”——反向雕刻出来的！** 在完备内积空间 $\mathcal{H}$ 中，将汇聚成某概念或某驻波点 $x$ 的非平凡非满闭可达路径子空间记为 $M \subsetneq \mathcal{H}$（$M \neq \{0\}$），将其正交补——一切在 $x$ 处精确正交脱靶或因科纽螺线反相干涉而归零的不可达路径子空间——记为 $M^\perp$。由于在无穷维路径空间中 $M$ 与 $M^\perp$ 各自包含无穷多条连续或可列路径，二者共同构成一对**双无限正交切口**，并受两条冻结内核定理严格统治（`LEAN ✓`）：
+两相夹击之下，本书提出一种关于存在的几何读法（`MODEL`）：**“有”绝不能孤立自存，“有”恰恰是被它的反面——那个与之严格正交的“不可达之无”——反向雕刻出来的！** 在完备内积空间 $\mathcal{H}$ 中，将汇聚成某概念或某驻波点 $x$ 的非平凡非满闭可达路径子空间记为 $M \subsetneq \mathcal{H}$（$M \neq \{0\}$），将其正交补——一切在 $x$ 处精确正交脱靶或因科纽螺线反相干涉而归零的不可达路径子空间——记为 $M^\perp$。由于在无穷维路径空间中 $M$ 与 $M^\perp$ 各自包含无穷多条连续或可列路径，二者共同构成一对**双无限正交切口**，并满足两条通用的冻结投影恒等式（`LEAN ✓`；它们对任意闭子空间成立，把 $M$ 指认为“可达路径子空间”属 `MODEL`）：
 
 - **正交补投影六恒等式**（[`orthogonal_complement_projection_identities`](lean:D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities)）：闭子空间 $M$ 的可达投影 $P_M$ 与不可达补投影 $P_{M^\perp}$ 精确满足
 
@@ -91,7 +91,7 @@ $$
   M^{\perp\perp} \;=\; \overline{M} \qquad \bigl(\text{尤其当 } M \text{ 闭合时，} (M^\perp)^\perp = M\bigr).
   $$
 
-请细品 $M^{\perp\perp} = \overline{M}$ 这行短小却重若千钧的等式：即便你手头没有直接给出可达核 $\overline{M}$ 的半个内部基矢，只要把“一切不能抵达它的正交反面 $M^\perp$”完整划定，再对这片不可达之海做一次正交否定 $(\cdot)^\perp$，正面存在 $\overline{M}$ 便分毫不差地自动浮现！这正是老子“反者道之动，天下万物生于有，有生于无”、斯宾诺莎（Spinoza）“一切规定皆是否定”（*Omnis determinatio est negatio*）、戴德金与康威（Dedekind / Conway）用左右双无限切口 $\{L \mid R\}$ 定义每一个实数与超实数，以及 §34.6–§34.7 中费曼路径积分靠无穷多条偏折弯路的反相自毁雕刻出唯一经典测地线与驻波节点的共同代数母体！
+请细品 $M^{\perp\perp} = \overline{M}$ 这行短小却重若千钧的等式：即便你手头没有直接给出可达核 $\overline{M}$ 的半个内部基矢，只要把“一切不能抵达它的正交反面 $M^\perp$”完整划定，再对这片不可达之海做一次正交否定 $(\cdot)^\perp$，正面存在 $\overline{M}$ 便分毫不差地自动浮现！这正是老子“反者道之动，天下万物生于有，有生于无”、斯宾诺莎（Spinoza）“一切规定皆是否定”（*Omnis determinatio est negatio*）、戴德金与康威（Dedekind / Conway）用左右双无限切口 $\{L \mid R\}$ 定义每一个实数与超实数，以及 §34.6–§34.7 中费曼路径积分靠无穷多条偏折弯路的反相自毁雕刻出经典测地线与驻波节点，在“由反面确定正面”这一形状上的类比（`MODEL`；戴德金切口是序结构上的划分，并非正交补）。
 
 ::: {.viz src="reversal-diagonal-cascade-sandbox" preset="reversal-dual-cut" height="520"}
 **“反者道之动”双无限正交切口：青色可达核 $M$ 与品红不可达补 $M^\perp$ 互锁共生（$\mathcal{H} = M \oplus M^\perp,\; M^{\perp\perp} = \overline{M}$）。** 拨动琥珀色反相雕刻强度滑块 $\kappa_- \in [0, 1]$：当 $\kappa_- = 1$ 时，品红不可达路径束完全正交相消，在切口处刻出最锐利的青色驻波存在核（绿色 `LEAN ✓` `orthogonal_complement_projection_identities` 与 `double_orthogonal_complement_eq_closure`）；一旦将 $\kappa_- \to 0$ 放任全部路径无差别抵达，切口对比度 $\Delta_{\mathrm{cut}}(\kappa_-) = \kappa_-$ 线性归零，点与边界当场消融于零比特全同背景。
@@ -103,7 +103,7 @@ $$
 
 为什么宇宙间不仅有“点”，而且必然依次涌现出“点 $\to$ 线 $\to$ 面 $\to$ 体积 $\to$ 时间”这一整串概念家族？因为**任何一个概念 $C_k$ 一旦凭双无限切口 $(M_k, M_k^\perp)$ 得以确立，它那片无穷广袤的“不可达补集 / 溢出余项 $M_k^\perp$”本身就成了一道新的正交差异源；一旦观察者去比较并归类那些“到不了 $C_k$”的逃逸路径，上一级概念 $C_k$ 的不可达余项便立刻翻转（“反者道之动”），凝聚为下一级更高维概念 $C_{k+1}$ 的正面可达生成核 $M_{k+1}$！** 具体而言，“不能重合为同一点（$\langle u, v\rangle < 1$）”的差异路径化生出**线**；“不能压扁在同一条线上（$\det G_3 > 0$）”的闭合回路曲率化生出**面**；“不能困死在同一张曲面上（$S_2^\perp \neq \{0\}$）”的法向残差化生出**体积**；而“不能共存于同一帧静态三维体积内（公平平方同点异相碰撞 `EscapePairs` 与来路对角逃逸 $\Gamma_{\mathrm{diag}}$）”的历史序列，则化生出**时间**！
 
-下述核心定理将贯穿本节格拉姆开维、信息逃逸商核细化、相对语义对角线逃逸、观测划分拓扑真细化与希尔伯特双正交切口的九项底层数学命题，统一锚定在 `trureturing` 的九条冻结内核声明之上：
+下述核心定理将贯穿本节格拉姆开维、信息逃逸商核细化、相对语义对角线逃逸、观测划分拓扑真细化与希尔伯特双正交切口的九项底层数学命题，对应到 `trureturing` 的九条冻结声明；它们彼此独立，各自只担保自己的陈述，“概念级联”本身属 `MODEL`：
 
 ::: {.theorem #thm-ch34-reversal-diagonal-and-gram-cascade title="格拉姆秩溢出开维、信息逃逸严格商核新颖度、相对语义对角拓扑细化与正交双补闭合定理" lean="D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities D5/S3/Quantum/Algebra/DoubleOrthogonalClosure.double_orthogonal_complement_eq_closure"}
 在 `trureturing` 冻结的单位态内积判据、二锚与三锚格拉姆矩阵、有限层正交投影逃逸、信息逃逸结构新颖度、相对语义对角线及正交补投影模块中，以下九项数学定律同时成立：
@@ -176,9 +176,9 @@ $$
    - **第 $1$ 步（`1D` 线，$\Lambda^1$）**：并入 $u_1$ 后 $\langle u_0, u_1\rangle = \frac{1}{2} < 1$，二锚行列式 $\det G_2(u_0, u_1) = 1 - (\frac{1}{2})^2 = \frac{3}{4} = \sin^2 60^\circ = 0.7500 > 0$（`two_anchor_gram_det_pos_iff`），撑开一维测地弧；
    - **第 $2$ 步（`2D` 面，$\Lambda^2$）**：并入 $u_2$ 后三锚矩阵 $G_3 = \frac{1}{2}I_3 + \frac{1}{2}\mathbf{1}\mathbf{1}^{\mathsf{T}}$ 的行列式为 $\det G_3(u_0, u_1, u_2) = 2 \times (\frac{1}{2})^2 = \frac{1}{2} = 0.5000 > 0$（`three_anchor_gram_det_pos_iff`），撑开二维球面相位片；
    - **第 $3$ 步（`3D` 体积，$\Lambda^3$）**：相对于闭子空间 $S_3 = \operatorname{span}\{u_0, u_1, u_2\} = \mathbb{R}^3 \times \{0\}$，`finite_layer_projection_escape` 给出单位正交逃逸轴 $e_4 = (0, 0, 0, 1) \in S_3^\perp$（$\lVert \operatorname{id} - P_{S_3}\rVert = 1$）；并入 $u_3$ 后四锚矩阵 $G_4 = \frac{1}{2}I_4 + \frac{1}{2}\mathbf{1}\mathbf{1}^{\mathsf{T}}$ 满足 $\det G_4 = \frac{5}{2} \times (\frac{1}{2})^3 = \frac{5}{16} = 0.3125 > 0$（法向逃逸高 $\sqrt{5/8} \approx 0.7906$），张成非退化三维单形体块；
-   - **第 $4$ 步（`3+1D` 时间，$\Lambda^{3+1}$）**：在四状态场 $\mathcal{A}$ 上，公平平方空间驻波读出 $q_{\mathrm{space}}(s_{r,\pm}) = x_r$（$r \in \{0, 1\}$）抹去内部符号 $\pm$，留下 $4$ 对同点异相逃逸碰撞对 $(s_{0,+}, s_{0,-}), (s_{0,-}, s_{0,+}), (s_{1,+}, s_{1,-}), (s_{1,-}, s_{1,+})$，逃逸率 $\mathrm{escapeRate}(\{q_{\mathrm{space}}\}) = \frac{4}{12} = \frac{1}{3} \approx 33.33\%$；引入第四维时序读出 $q_{\mathrm{time}}(s_{r,\pm}) = \pm$ 后，逃逸碰撞对骤降为 $0$（$\mathrm{escapeRate} = 0 < \frac{1}{3}$），依 `lowersEscape_iff_strict_kernel_novelty` 将联合核从二块粗划分 $\{\{s_{0,+}, s_{0,-}\}, \{s_{1,+}, s_{1,-}\}\}$ 严格细化为四单点离散核！
+   - **第 $4$ 步（`3+1D` 时间，$\Lambda^{3+1}$）**：在四状态场 $\mathcal{A}$ 上，公平平方空间驻波读出 $q_{\mathrm{space}}(s_{r,\pm}) = x_r$（$r \in \{0, 1\}$）抹去内部符号 $\pm$，留下 $4$ 对同点异相逃逸碰撞对 $(s_{0,+}, s_{0,-}), (s_{0,-}, s_{0,+}), (s_{1,+}, s_{1,-}), (s_{1,-}, s_{1,+})$，逃逸率 $\mathrm{escapeRate}(\{q_{\mathrm{space}}\}) = \frac{4}{12} = \frac{1}{3} \approx 33.33\%$；引入新读出 $q_{\mathrm{time}}(s_{r,\pm}) = \pm$（读作时序属 `MODEL`）后，逃逸碰撞对骤降为 $0$（$\mathrm{escapeRate} = 0 < \frac{1}{3}$），依 `lowersEscape_iff_strict_kernel_novelty` 将联合核从二块粗划分 $\{\{s_{0,+}, s_{0,-}\}, \{s_{1,+}, s_{1,-}\}\}$ 严格细化为四单点离散核！
 
-2. **单点 $4 \times 4$ 来路相位快表 $T$ 与对角翻转逃逸路径 $\Gamma_{\mathrm{diag}}$（锚定 `relative_semantic_diagonal_ne_listed_decode` 与 `complete_diagonal_strict_topology_refinement`）**：设汇入基点 $x$ 的四条已列路径 $\Gamma_1, \Gamma_2, \Gamma_3, \Gamma_4$ 在四拍步进地址 $k \in \{1, 2, 3, 4\}$ 上的局部相位矩阵 $T = [\phi_j^{(k)}]$ 如下（粗框标出主对角元 $\phi_k^{(k)}$）：
+2. **单点 $4 \times 4$ 来路相位快表 $T$ 与对角翻转逃逸路径 $\Gamma_{\mathrm{diag}}$（示意 `relative_semantic_diagonal_ne_listed_decode` 的对角构造；不是 `complete_diagonal_strict_topology_refinement` 的实例——该定理要求解码目录满射到全部函数，$4$ 行表做不到；且本表直接按地址 $k$ 列出相位，未经潜坐标解码）**：设汇入基点 $x$ 的四条已列路径 $\Gamma_1, \Gamma_2, \Gamma_3, \Gamma_4$ 在四拍步进地址 $k \in \{1, 2, 3, 4\}$ 上的局部相位矩阵 $T = [\phi_j^{(k)}]$ 如下（粗框标出主对角元 $\phi_k^{(k)}$）：
 
    $$
    T \;=\;
@@ -198,7 +198,7 @@ $$
    \Gamma_{\mathrm{diag}} \;=\; \left(\pi,\; \frac{5\pi}{4},\; \frac{7\pi}{4},\; \frac{\pi}{4}\right),
    $$
 
-   它在 $k = 1$ 处以 $\pi \neq 0$ 逃离 $\Gamma_1$，在 $k = 2$ 处以 $\frac{5\pi}{4} \neq \frac{\pi}{4}$ 逃离 $\Gamma_2$，在 $k = 3$ 处以 $\frac{7\pi}{4} \neq \frac{3\pi}{4}$ 逃离 $\Gamma_3$，在 $k = 4$ 处以 $\frac{\pi}{4} \neq \frac{5\pi}{4}$ 逃离 $\Gamma_4$！若原潜概念 $\mathrm{latent}$ 仅按前后半程粗分为 $\{1, 2\} \mapsto c_0,\; \{3, 4\} \mapsto c_1$（诱导划分拓扑仅含 $2^2 = 4$ 个开集），则并入 $\Gamma_{\mathrm{diag}}$ 后四拍取值两两相异，将观测划分拓扑严格细化至全部 $2^4 = 16$ 个开集。
+   它在 $k = 1$ 处以 $\pi \neq 0$ 逃离 $\Gamma_1$，在 $k = 2$ 处以 $\frac{5\pi}{4} \neq \frac{\pi}{4}$ 逃离 $\Gamma_2$，在 $k = 3$ 处以 $\frac{7\pi}{4} \neq \frac{3\pi}{4}$ 逃离 $\Gamma_3$，在 $k = 4$ 处以 $\frac{\pi}{4} \neq \frac{5\pi}{4}$ 逃离 $\Gamma_4$！若原潜概念 $\mathrm{latent}$ 仅按前后半程粗分为 $\{1, 2\} \mapsto c_0,\; \{3, 4\} \mapsto c_1$（诱导划分拓扑仅含 $2^2 = 4$ 个开集），则并入 $\Gamma_{\mathrm{diag}}$ 后四拍取值两两相异，将观测划分拓扑严格细化至全部 $2^4 = 16$ 个开集（手工推导）。
 
 3. **有效切口算子 $P_{\mathrm{eff}}(\kappa_-)$ 与边界对比度线性坍缩（锚定 `orthogonal_complement_projection_identities` 与 `double_orthogonal_complement_eq_closure`）**：设非平凡非满闭子空间 $M \subsetneq \mathcal{H}$ 与正交补 $M^\perp$ 的投影为 $P_M, P_{M^\perp}$，定义受不可达补集反相抑制率 $\kappa_- \in [0, 1]$ 控制的有效传输算子
 
