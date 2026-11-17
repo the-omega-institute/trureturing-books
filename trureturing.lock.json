@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "c61f1fe33cd305cef70ee7ba651d7a9da283ac45",
-  "pinned_at": "2026-11-17T15:04:07Z",
+  "pinned_at": "2026-11-17T15:22:13Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
