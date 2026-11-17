@@ -172,12 +172,59 @@ $$
 
 让我们做一笔最诚实的自由度审计。表面上看，$\alpha$ 和 $\beta$ 含有 $4$ 个实参数 $(a, b, c, d) \in \mathbb{R}^4$，比三维空间还多出一维。但在这 $4$ 个实数里，混进了两层纯粹的冗余记账：
 
-::: {.remark #rem-pure-ray-literature title="纯态射线与霍普夫纤维（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 以下采用标准纯态射线描述；球面的商映射参见 [Hopf map](https://mathworld.wolfram.com/HopfMap.html)。
+::: {.remark #rem-pure-ray-literature title="纯态射线与霍普夫相位商"}
+**文献来源与已有结果的应用。** 经典背景参见 [Hopf map](https://mathworld.wolfram.com/HopfMap.html)。下面把“归一化，再除去共同相位”的几何图像写成实际的球面映射，并说明已有结果如何给出商空间的同胚。
 
-1. **总模长归一化削去一维（$\mathbb{R}^4 \to S^3$）**：方向比较只关心箭头指向哪里，不关心把箭头画成一寸长还是一尺长。约束 $|\alpha|^2 + |\beta|^2 = a^2 + b^2 + c^2 + d^2 = 1$ 把四维欧氏空间削成了三维单位球面 $S^3$，剩下 $3$ 个实自由度。
-2. **全局相位无关性再削去一维（$S^3 / U(1) \cong S^2$）**：将整个列向量同时乘以一个模长为 $1$ 的复相位因子 $e^{i\gamma}$（$\gamma \in \mathbb{R}$），相当于把 $\alpha$ 与 $\beta$ 在各自的复平面里同步拧转同一个角度 $\gamma$。在标准量子力学中，同一纯态射线的两个归一化代表 $\lvert\psi\rangle$ 与 $e^{i\gamma}\lvert\psi\rangle$ 给出相同的测量概率；这里的相位乘在整个态上，而非仅乘在某个分支上。沿着这根 $U(1)$ 相位纤维做商（著名的霍普夫纤维化 Hopf fibration），$3 - 1 = 2$ 个独立实角度脱颖而出——剩下的正好是一颗干干净净的二维球面 $S^2 \subset \mathbb{R}^3$！
+方向比较不关心箭头画得多长。把上面的复坐标重新记作 $(a,b)=(\alpha,\beta)$，并记 $\operatorname{normSq}(z)=\operatorname{Re}(z)^2+\operatorname{Im}(z)^2=|z|^2$。归一化后，舞台是四维欧氏空间中的三维单位球面；目标是三维欧氏空间中的二维单位球面：
 
+$$
+\begin{aligned}
+S^3&=\{(a,b)\in\mathbb{C}^2:\operatorname{normSq}(a)+\operatorname{normSq}(b)=1\},\\
+S^2&=\{q=(q_0,q_1,q_2)\in\mathbb{R}^3:q_0^2+q_1^2+q_2^2=1\}.
+\end{aligned}
+$$
+
+两者均带通常欧氏拓扑的子空间拓扑。这里 $S^3$ 的方程是两个复分量的模平方之和为 $1$，不是分别要求每个分量模长为 $1$。取霍普夫映射
+
+$$
+H(a,b)=\bigl(2\operatorname{Re}(\bar a b),\;2\operatorname{Im}(\bar a b),\;
+\operatorname{normSq}(a)-\operatorname{normSq}(b)\bigr).
+$$
+
+它确实落在 $S^2$ 上：前两个坐标的平方和为 $4|a|^2|b|^2$，加上第三个坐标的平方便得到 $(|a|^2+|b|^2)^2=1$。这正是 `NumericalRange` 中原有 `blochPure_norm` 所处理的单位旋子布洛赫像。其具体矩阵为 $P_v=vv^*$，$v=(a,b)$；非对角元是 $a\bar b$，而 `bloch` 的虚部坐标带负号，因而恰好得到这里的正号 $2\operatorname{Im}(\bar a b)$。
+
+每个球面点也都有原像。对 $q\in S^2$，若 $q_2\ne-1$，令
+
+$$
+\begin{aligned}
+p&=\sqrt{\frac{1+q_2}{2}}>0,\\
+a&=p,\qquad b=\frac{q_0+iq_1}{2p}.
+\end{aligned}
+$$
+
+由 $q_0^2+q_1^2=1-q_2^2$ 得 $|b|^2=(1-q_2)/2$，所以 $(a,b)\in S^3$ 且 $H(a,b)=q$。南极 $q=(0,0,-1)$ 取 $(a,b)=(0,1)$；北极则由上式给出 $(1,0)$。这复用的是 `blochPure_surjective` 原有的平方根与极点分支论证，覆盖整个球面。
+
+现在明确要除去什么。设 $U(1)=\{c\in\mathbb{C}:\norm{c}=1\}$，在 $S^3$ 上定义
+
+$$
+\begin{aligned}
+(a,b)\sim(a',b')\quad\Longleftrightarrow\quad
+&\exists c\in\mathbb{C},\quad\norm{c}=1,\\
+&a=ca',\qquad b=cb'.
+\end{aligned}
+$$
+
+必须是**同一个**复数 $c$ 乘两个分量：它把两支箭头同步拧转，保留相对相位。代入公式立即得到 $H(cv)=H(v)$。反过来，$H(v)=H(w)$ 也强制 $v\sim w$：$P_v$ 与 $P_w$ 都是迹为 $1$ 的厄米矩阵，`bloch_geometry_of_isHermitian` 的重构式把它们各自写成 `blochMatrix` 作用于同一组迹与布洛赫坐标，故 $P_v=P_w$。把归一化坐标视为 `Ket (Fin 2)` 后，已有的 `MState.PhaseEquiv_iff_pure_eq`（等价地，`MState.pure_eq_pure_iff`）正好把纯态矩阵相等识别为上述共同单位复相位关系。因此 $H$ 的纤维恰好是这些相位圆，而不只是包含它们。
+
+最后给 $S^3/U(1)$ **商拓扑**：令 $\pi:S^3\to S^3/U(1)$，集合 $O$ 开当且仅当 $\pi^{-1}(O)$ 在 $S^3$ 中开。$H$ 的实坐标是四个实变量的二次多项式，故连续；$H$ 的相位不变性使它诱导连续映射 $\bar H([v])=H(v)$。精确纤维保证单射，上面的全极点构造保证满射。这里还必须证明逆映射连续，不能仅凭双射就宣布同胚：$S^3$ 紧，连续商像 $S^3/U(1)$ 也紧，$S^2$ 作为欧氏子空间是 Hausdorff 空间。于是商空间的闭集是紧集，经过 $\bar H$ 的像仍紧，并在 $S^2$ 中闭；这正给出 $\bar H^{-1}$ 的连续性。因此，同一个代表元公式给出
+
+$$
+\bar H:S^3/U(1)\simeq_{\mathrm{top}}S^2,\qquad\bar H([(a,b)])=H(a,b).
+$$
+
+这一步是现有紧空间到 Hausdorff 空间结论的应用，见 Mathlib 的 [`Continuous.homeoOfEquivCompactToT2`](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Topology/Homeomorph/Lemmas.lean#L474)。直觉上，归一化留下三个实参数，共同相位圆再去掉一个，球面上便留下两个独立角度；真正支撑这一图像的是上述具体映射、精确纤维与双向连续性。
+
+标准量子力学把同一射线的归一化代表解释为同一纯态，并赋予它们相同的测量概率；这一物理约定不是由商空间的数学识别推导出来的。这里的同胚只给每个相位类一个球面点，不选择该类中的一个规范代表，也不独自证明不存在连续全局截面。整个非零向量空间按非零复数缩放的商、相位不变多项式的分类，以及态制备或压缩方案，都需要另外的论证。
 :::
 
 纯态的射线描述采用标准量子力学约定；下面的代数定理刻画保持射线的幺正变换，而不从代数导出这一物理约定。我们考察任意有限指标集 $\iota$ 上的复矩阵如何保持向量张成的复子空间不变。
