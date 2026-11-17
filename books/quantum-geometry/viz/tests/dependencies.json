@@ -2561,6 +2561,8 @@
     ],
     "brahman-lila-game-props-sandbox.test.mjs": [
       "@citations",
+      "books/quantum-geometry/en/ch39-s17-divine-lila-and-awakening-props.md",
+      "books/quantum-geometry/zh/ch39-s17-divine-lila-and-awakening-props.md",
       "books/quantum-geometry/book.toml",
       "@registry-entry",
       "package-lock.json",
@@ -2588,6 +2590,8 @@
     ],
     "red-chamber-spinor-awakening-sandbox.test.mjs": [
       "@citations",
+      "books/quantum-geometry/en/ch39-s16-red-chamber-awakening-and-heaven-human-unity.md",
+      "books/quantum-geometry/zh/ch39-s16-red-chamber-awakening-and-heaven-human-unity.md",
       "books/quantum-geometry/book.toml",
       "@registry-entry",
       "package-lock.json",

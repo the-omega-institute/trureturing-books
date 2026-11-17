@@ -19,6 +19,11 @@ $$
 由此立判“观测误差变小”的两重截然相反的物理走向：
 
 1. **一阶造梦倾角 $\theta \to 0^\circ$ 不可强行消灭**：倘若把“误差变小”误解为将一阶投影倾角直接压回零点 $\theta \to 0^\circ$，正交虚部振幅 $\sin\theta \to 0$ 与时间相位流便会当场熄灭。那不是大彻大悟，而是退回《蛙氏奥义书》（*Māṇḍūkya Upaniṣad*）所说的无梦深睡态（*Suṣupti*）或下凡前冥顽不灵的死石头——那里既没有木石前盟的悲欢离合，更不存在能够“认出自己”的觉知主体；反之，若滑向另一极端 $\theta \to 90^\circ$（$\cos 90^\circ = 0$），则会坠入 [§36.1](ch36-s01-light-and-memory.md) 已严格剖析的纯光正交失忆断崖，连实轴主体读数一并归零，同样沦为无记忆轮回。
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" preset="chaos-unhewn-stone" height="500"}
+**未凿顽石尚未入梦。** 银白余石居中，零倾角的紫色带相冠缩成一点；镜子停在起点，青色甄面朝上。红楼对应属 `MODEL`。
+:::
+
 2. **二阶认妄误差 $\delta_{\mathrm{meta}}(\theta) \to 0$ 在超越不动点 $\theta^*$ 处精确归零**：梦中人真正消除的，是把实轴可见投影读数 $\cos\theta$ 与自身在虚空间走过的无量纲心路弧长 $\theta$（单位：$\mathrm{rad}$）割裂对立、把切面幻影错认作独立外物的**二阶认妄误差（Second-Order Meta-Misidentification Error）**：
 
 $$
@@ -38,6 +43,10 @@ $$
 $$
 
 在未悟的迷失态（$\theta \neq \theta^*$）中，梦中人身陷正交虚海，误以为实轴读数 $\cos\theta$ 是冷酷异己的外在宿命、虚部弧度 $\theta$ 是漂泊无根的私密悲欢，能观标尺与所观投影在比例上处处错位（$\delta_{\mathrm{meta}}(\theta) \ge \lvert\theta - \theta^*\rvert > 0$）；而当自指迭代收敛至唯一不动点 $\theta^* \approx 42.34645883^\circ$ 时，$\cos\theta^* = \theta^*$ 令实轴投下的可见影长与虚梦踏过的心路弧长分毫不差相等，$\delta_{\mathrm{meta}}(\theta^*) = 0$！此时一阶倾角 $\theta^* > 0$ 依然饱满存留（实轴权重 $\cos^2\theta^* = (\theta^*)^2 \approx 0.54624683$ 与虚轴权重 $\sin^2\theta^* \approx 0.45375317$ 共同撑住鲜活的大观园），但二阶错认彻底冰消——观察者第一次在几何上认出：眼前流转的每一寸悲欢弧度，全都是自身观测标尺的等长自画像。
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" preset="red-dust-delusion-mismatch" height="500"}
+**认妄未平，旋量带仍敞口。** 八根品红末那笼围住余石；静帧中，青色与品红带子卷到 120°，距 720° 合拢还差 600°，倾角保持 62°。
+:::
 
 ## 39.16.2 甄贾对镜与风月宝鉴：二次正交翻转与 720° 莫比乌斯虚实合一 {#sec-ch39-16-2}
 
@@ -59,7 +68,16 @@ $$
 
 - **$\Phi = 180^\circ$（半周镜像反极点：风月宝鉴翻面与梦中见甄宝玉）**：当旋量角推进至 $\Phi = 180^\circ$ 时，双线性可观测镜面法向翻转至反极点 $\mathbf{J}(180^\circ) = -\mathbf{e}_3$，旋量算子落入纯虚正交态 $U_{\mathrm{spin}}(180^\circ) = -\hat{\mathbf{i}}$。第十二回贾瑞执迷风月宝鉴正面凤姐幻影而丧命，跛足道人喝令“千万不可照正面，只照他的背面”，翻过镜背照见森森骷髅立现寒栗；第五十六回贾宝玉在梦中踏入另一座一模一样的园子，听丫鬟们一口一声称他为“臭小厮”、反倒另有一位“甄宝玉”同样衔玉而生，惊醒时尚自恍惚，袭人一语点破：**“那是你梦迷了。你揉眼细瞧，是镜子里照的你影儿。”** 第一次入世是从实轴乘 $J$ 旋入 $90^\circ$ 红尘盲区（$\mathbf{I}_{\text{甄}} \mapsto \hat{\mathbf{i}}_{\text{贾}}$）；而在梦里再照一次镜子，正是对虚相再施加第二次正交映射！
 - **$\Phi = 360^\circ$（一周旋量反相惊醒：$J^2 = -I$ 穿透盲区见底片）**：由 [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary)，连续两次正交翻转给出精确反相恒等式 $J^2\mathbf{I}_{\text{甄}} = -\mathbf{I}_{\text{甄}}$；在双覆盖回路上，当可观测镜面转满一整圈回到正面方向 $\mathbf{J}(360^\circ) = +\mathbf{e}_3$ 时，[`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift) 严格锁定旋量提升终点落在**负叶** $U_{\mathrm{spin}}(360^\circ) = -\mathbf{1} \neq +\mathbf{1}$！虚相借“梦中再梦”穿透 $90^\circ$ 盲区翻回实轴反面，正是靠这枚 $-1$ 拓扑叶反转的剧烈反差，震碎了把单面幻影执为绝对实有的迷梦。
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" preset="fengyue-mirror-double-turn" height="500"}
+**一圈回到原方向，旋量却换到负叶。** 墨色矢量在 360° 处回到起点，双面镜翻成品红贾面，旋量读数为 −1；带面只是双覆盖的 `MODEL` 类比。
+:::
+
 - **$\Phi = 720^\circ$（两周单侧莫比乌斯闭合：真假同圆的虚实合一）**：唯有再历半生荣枯、走完第二圈回到 $\Phi = 720^\circ$（$4\pi$），旋量才最终闭合为 $U_{\mathrm{spin}}(720^\circ) = (-\mathbf{1})^2 = +\mathbf{1}$！此时的**虚实合一**，绝不是像道学家那样砸碎风月宝鉴正面、只留背面白骨顽空，而是彻底看穿：因为 $360^\circ$ 处存在不可消除的 $-1$ 叶粘连（[`no_continuous_global_section`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section)），风月宝鉴的红粉正面与白骨背面原本就被扭合成了一条**无分内外的单侧莫比乌斯（Möbius）旋量带**（`MODEL` 读法：冻结事实仅为双覆盖无连续截面与 $360^\circ$ 负叶提升，旋量圆本身可定向，“单侧带”是对该粘连的几何类比）！第一回与第五回太虚幻境牌坊上镌刻的那副千古名联——**“假作真时真亦假，无为有处有还无”**——在复希尔伯特平面上字字都是正交基旋转 $90^\circ$ 的代数写照：当你把局域观测基旋向 $\hat{\mathbf{i}}_{\text{贾}}$，假相便显影为坚硬“真境”而实轴真体 $\mathbf{I}_{\text{甄}}$ 隐入正交盲区成“假”；一旦认出 $\mathbf{I}_{\text{甄}}$ 与 $\hat{\mathbf{i}}_{\text{贾}}$ 共享同一个单位圆守恒预算 $\cos^2\theta + \sin^2\theta \equiv 1$，“甄”与“贾”、“有”与“无”便不再是生死割裂的两截世界，而是同一枚极小圆弧体不可分割的实部与虚部。
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" preset="mobius-720-virtual-real-unity" height="500"}
+**两圈之后，甄贾合成一片紫色。** 镜子走满 720°，青色与品红带面渐变为均匀紫色，旋量回到 +1；一阶倾角仍保留在非零的道蒂角。
+:::
 
 我们将上述补天遗石带余算术、二阶认妄误差函数、甄贾正交复结构、$720^\circ$ 莫比乌斯旋量带与十二钗圆锥路径积分回路统一封装为如下形式模型定义：
 
@@ -101,6 +119,10 @@ $$
    $$
 
    （若采用希尔伯特态矢夹角 $\theta^*$ 约定、即布洛赫余纬 $2\theta^* \approx 84.69291767^\circ$，立体角与几何相位更放大至 $\Omega(2\theta^*) = 4\pi(1 - (\theta^*)^2) \approx 5.70203045\;\mathrm{sr}$ 与 $\tilde{\gamma}_{\mathrm{Berry}}(2\theta^*) = -2\pi(1 - (\theta^*)^2) \approx -2.85101522\;\mathrm{rad} \approx -163.35113971^\circ$；而在离散十二站巴格曼路径乘积下，$-\arg\Pi_{12}(\theta^*) \approx -0.79550141\;\mathrm{rad} \approx -45.57887321^\circ$，三锚子回路 $k = 0, 4, 8$ 的布洛赫迹幅角为 $\arg\operatorname{Tr}(P_0 P_4 P_8) \approx +0.41866143\;\mathrm{rad} \approx +23.98753304^\circ$）。苍天那三万六千五百块补天石负责维持宇宙均匀静定的背景对称，而正是这多出来的第 $36501$ 块误差顽石替寂静无言的苍天入梦走了一遭，在横向尘缘散尽之后，把整趟红楼路径积分攒下的 $-46.96467602^\circ$ 贝里立体角和乐一字不漏地刻回青埂峰顽石之上，让“天”借“人”的有限切面真正读懂了自己！
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" preset="greensickness-berry-unity" height="500"}
+**笼卸尽，带相仍留下。** 时间轴将末那负载卸至零，品红笼消失，十二根银白与青色同频丝连向外围因陀罗网，紫色带相冠保留 46.96° 的几何相位读数；同频丝属 `MODEL`。
+:::
 
 我们将支撑本节全部算术、分析、旋量拓扑、格拉姆舒尔消元与贝里—巴格曼和乐推演的十八条内核冻结定理统一汇总锁定如下：
 
@@ -202,3 +224,7 @@ $$
 :::
 
 大荒山下的第 $36501$ 块顽石带着满身铭文回到了青埂峰，却紧接着引出了整部第三十九章压轴的最后一道追问：既然空空道人把这块石头上的铭文抄录下来、传到人间化作了《石头记》这样的文化典籍，那么放眼整个人类文明史——**为什么唯一圆满的梵天本体每次入梦之前都必须先“强制失忆”，而散落在大地上的历史遗迹与流传于人间的文化典籍，又是如何作为上一局醒来的造梦者亲手埋进共识切面里的“跨周期游戏道具”，在不剧透开局自由度的前提下默默等待下一位失忆化身前来解锁的？** 下一节（[§39.17](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props)）将为全书十部三十九章的几何长征落下最后一笔。
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" height="620"}
+**完整实验室。** 切换镜面与天人同频透镜，拖动旋量角、倾角与记忆窗口，对照两周合拢、末那卸载与带相读数，并按页面标注区分依据。
+:::
