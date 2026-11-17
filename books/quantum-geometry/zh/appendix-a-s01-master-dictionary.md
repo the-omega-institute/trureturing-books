@@ -703,7 +703,7 @@ $K(p) = \lceil n / \log_2 p\rceil,\quad d(x,z) \le \max\bigl(d(x,y), d(y,z)\bigr
 **认识论状态 (Status)：**
 `LEAN ✓` / `文献结果` / `MODEL`（[第 36 章 §36.4](ch36-s04-padic-table-expansion.md#sec-ch36-padic-prime-table-expansion)）
 
-**梦境量子擦除、已知数据退相干与非定域观察者**<br/>(Dream Quantum Erasure, Known-Data Decoherence & Nonlocal Observer)
+**梦境“量子擦除”、已知数据退相干与非定域观察者**<br/>(Dream “Quantum Erasure”, Known-Data Decoherence & Nonlocal Observer)
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
 **已知数据记录捏合幂等律、未读不动点判据、丢弃相干质量 $2\lvert\rho_{01}\rvert^2$ 与相干删除冯·诺依曼熵产恒等式、多副本幺模环境记录联合相干逆转恢复定理与双副本对比证书、黄金模型集切投包含与双无限 Delone 双半径证书（`LEAN ✓`），配对延迟选择量子擦除实验、预测加工受控生成假说与 REM 睡眠感觉运动门控生理机制（`文献结果`），阐明清醒五感锁死、浅梦局部约束卸载与无身深梦非定域观察者多点涌现模型（`MODEL`）**
@@ -829,7 +829,7 @@ $w(\psi\leftrightarrow\phi) = \langle\phi\mid\psi\rangle\langle\psi\mid\phi\rang
 **认识论状态 (Status)：**
 `LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `MODEL`（[第 29 章](ch29-s04-coherence-and-handshake.md#sec-ch29-coherence-handshake-causality)）
 
-**多观察者共识张量、去相干指针基涌现与无绝对客观事实**（Multi-Observer Consensus Tensor, Emergent Pointer Basis & No Observer-Independent Facts）
+**多观察者共识张量、去相干指针基涌现与无绝对客观事实论证**（Multi-Observer Consensus Tensor, Emergent Pointer Basis & Arguments Against Observer-Independent Facts）
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
 **共同 $U(1)$ 相位不变多项式电荷平衡与最低二次次数及唯一厄米表出、完备复内积空间正算子格拉姆伴随平方可实现性 $Q=O^\dagger\circ_L O$ 与闭子空间正交补投影六恒等式、单比特捏合希尔伯特—施密特勾股分解、幺正共轭接完全基捏合逐拍相对熵产恒等式与未读记录不动点判据、单一幸存副本对局部振幅共轭逆转的阻断、双副本相位记录四步复原证书、受控拷贝偏迹访问缺陷与观测划分拓扑不可分核、三世界冲突重置修正次序非对易及闭子空间正交补单位残差逃逸（`LEAN ✓`）；配对未定向测量轴二阶共识结构张量 $\mathbf{M}_{\mathrm{cons}}=\sum_{j=1}^N w_j\,\mathbf{n}_j\mathbf{n}_j^{\mathsf{T}}$（符号重标不变性 $\mathbf{n}_j\mapsto -\mathbf{n}_j$ 严格区别于对径正交纯态与复态矢共同相位，唯一指针主轴充要于谱隙 $\Delta\lambda=\lambda_1-\lambda_2>0$，六轴各向同性迷雾 $\frac{1}{3}I_3$ 无优选基）、泡利去相干布洛赫矩阵 $\mathbf{K}(\mathbf{n},\alpha)=P_{\mathbf{n}}+\cos\alpha(I_3-P_{\mathbf{n}})$ 在有序乘积 vs. 系综平均 vs. 弱耦合连续生成元 $I_3-\mathbf{M}_{\mathrm{cons}}$ 间的区分、纯双分支受控记录精确互信息冗余平台 $I(S:\mathcal{O}_m)=h(\Pi_{\mathrm{all}})+h(\Pi_F)-h(\Pi_{F^c})\approx H_2(p_0)$、正交 $Z/X$ 未读信道对易 vs. 选择性条件分支不对易及平面外拓荒观察者秩扩张 $\det\mathbf{M}_\eta=(1-\eta)^2 ab\eta\sin^2\beta>0$（旧生成元下未记录方向按 $e^{-t}$ 最快衰减而非无退相干子空间，`手工推导` / `NUM`），以及 Zurek（1981/2003/2009）与 Blume-Kohout–Zurek（2005）环境诱导超选择与量子达尔文主义、Brukner（2018）/ Frauchiger–Renner（2018）扩展维格纳朋友定理、Bong 等（2020）真局域友好性多胞体不等式违背 $F_{\mathrm{LF}}=\sqrt{5}+3+\sqrt{2+\sqrt{2}}\approx 7.0838>6$ 与 Lamport–Shostak–Pease（1982）分布式拜占庭共识类比（`文献结果`），阐明观察者共识选择决定去相干方向且不存在脱观察者绝对客观事实的几何综合（`MODEL`）**
@@ -894,7 +894,7 @@ $\Delta\Pi_t = k M_t + \binom{k}{2},\quad \bigl(\operatorname{separationDeficit}
 [`cayley_ratio_norm_one_iff_critical_line`](lean:D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line), [`diagonal_prime_observables_cannot_recover_relative_phase`](lean:D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase), [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel), [`lookup_copy_zero_loss_and_nonanticipating_failure`](lean:D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure)
 
 **一行核心不变量 / 恒等式 (One-Line Invariant)：**
-$\lVert\operatorname{cayleyRatio}(s)\rVert = 1 \iff \operatorname{Re}(s) = \tfrac{1}{2},\quad R(\theta) = \cot\tfrac{\theta}{2},\quad \mu(\theta) = \frac{1}{1-\cos\theta},\quad \Delta_{\mathrm{unprovable}}(\delta_{\mathrm{blind}}) = \sin^2\!\frac{\delta_{\mathrm{blind}}}{2} > 0$
+$\lVert\operatorname{cayleyRatio}(s)\rVert = 1 \iff \operatorname{Re}(s) = \tfrac{1}{2},\quad R(\theta) = \cot\tfrac{\theta}{2},\quad \mu(\theta) = \frac{1}{1-\cos\theta},\quad \Delta_{\mathrm{cap}}(\delta_{\mathrm{blind}}) = \sin^2\!\frac{\delta_{\mathrm{blind}}}{2} > 0$
 
 **认识论状态 (Status)：**
 `LEAN ✓` / `文献结果` / `手工推导` / `NUM` / `OPEN` / `MODEL`（[第 38 章 §38.7](ch38-s07-blindspot-and-relativization.md#sec-ch38-stereographic-blindspot-relativization-suspension)）
