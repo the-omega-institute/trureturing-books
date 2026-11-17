@@ -427,6 +427,153 @@ $$
 第 1 款的必要性来自梯度沿每一行、每一列求和时逐项相消；充分性用平坦标号的分解：平坦的 $y$ 等于某个顶点标号的梯度加上 $\operatorname{seam}(\operatorname{rowHolonomy}(y, 0), \operatorname{columnHolonomy}(y, 0))$，两个和乐为零时缝项消失。第 2 款先验证缝标号平坦并算出它的两个和乐，再用第 1 款：行和乐为 $1 \ne 0$，所以它不是梯度。完整证明由 Lean 内核检查。
 :::
 
+上面的零作用量反例说明，环面上的平坦场不一定是纯规范。平面区域上情形相反：规范自由度可以沿一棵生成树全部吸收，剩下的小方格和乐相互独立，二维威尔逊圈因此有精确的面积律：
+
+::: {.remark #rem-ch39-tree-gauge-plaquette-independence title="生成树规范：平面区域上的小方格和乐相互独立，二维面积律精确成立（手工推导与文献结果）"}
+**手工推导；二维格点规范理论的精确可解性、面积律及其连续统对应为文献结果，未在本书形式化。** 设 $G$ 为紧群，$\mathrm{d}U$ 为归一哈尔测度，$F$ 为 $G$ 的不可约酉表示（$\mathrm{U}(N)$、$\mathrm{SU}(N)$ 取定义表示），特征标 $\chi_F$，维数 $d_F$。小方格权重 $\phi : G \to (0, \infty)$ 是连续类函数，且 $\phi(U^{-1}) = \phi(U)$；威尔逊作用量对应 $\phi(U) = \exp\left(\frac{\beta}{d_F}\operatorname{Re}\chi_F(U)\right)$，$\beta \ge 0$，与 [@rem-ch39-plaquette-sagitta-and-wilson-action] 第 1 条的 $e^{-S_W}$ 只差每个小方格一个常数因子 $e^{-\beta}$。记单个小方格的分布 $\nu(\mathrm{d}U) = \phi(U)\,\mathrm{d}U / \int_G\phi\,\mathrm{d}U$，以及
+
+$$
+w = \frac{\int_G \phi(U)\,\chi_F(U)\,\mathrm{d}U}{d_F\int_G \phi(U)\,\mathrm{d}U}.
+$$
+
+由 $\phi(U^{-1}) = \phi(U)$ 与 $\chi_F(U^{-1}) = \overline{\chi_F(U)}$，$w$ 是实数。$\mathrm{U}(1)$ 时 $w = I_1(\beta)/I_0(\beta)$，$\mathrm{SU}(2)$（$\phi = e^{\frac{\beta}{2}\operatorname{Tr}U}$）时 $w = I_2(\beta)/I_1(\beta)$，$\mathbb{Z}_2$ 时 $w = \tanh\beta$，$I_k$ 为第一类修正贝塞尔函数。
+
+1. **树规范的存在是冻结增益势定理在树上的特例。** 设 $T$ 是有限格点图 $\Gamma$ 的生成树（不连通时取生成森林），链变量满足 $U_{yx} = U_{xy}^{-1}$。$T$ 没有圈，是弦图，也没有三角形；把 [`exists_gain_potential`](lean:D5/S3/Combinatorics/Graph/Chordal/GainPotential.SimpleGraph.IsChordal.exists_gain_potential)（[@thm-appe-chordal-gain-potential]）用在 $T$ 上，取 $H = G$、$g(i, j) = U_{ij}$，第 1 款即 $U_{ji} = U_{ij}^{-1}$，第 2 款自动成立，得到 $\varphi : V \to G$ 使树边上 $U_{xy} = \varphi(x)^{-1}\varphi(y)$；规范变换 $g_x = \varphi(x)$ 把每条树边变为 $\mathbf{1}$。冻结定理只给出存在性。取显式的势（每个分支选根 $r$，$\varphi(r) = \mathbf{1}$，沿树边 $\varphi(y) = \varphi(x)U_{xy}$），从 $s$ 到 $t$ 的弦 $c$ 变为 $\varphi(s)U_c\varphi(t)^{-1}$，树边固定时这是两侧平移；所以在乘积哈尔测度下，规范固定后的弦变量相互独立且服从哈尔测度（$\mathrm{U}(1)$ 情形见 [@thm-tree-phase-transport]）。整张正方格点图不是弦图（每个小方格都是无弦的四圈），势表示一般不存在（[@thm-appe-chordal-gain-potential] 后的四圈说明）；树规范之后剩下的恰是各小方格的和乐。
+2. **中心卷积引理。** 设 $X_1, \dots, X_m$ 是相互独立的 $G$ 值随机元，各自的分布在共轭下不变。则对每个 $g \in G$，$\mathbb{E}[\chi_F(gX_1\cdots X_m)] = \chi_F(g)\prod_k\frac{\mathbb{E}[\chi_F(X_k)]}{d_F}$。证明：$M_k = \mathbb{E}[F(X_k)]$ 与一切 $F(h)$ 交换，由舒尔引理 $M_k = \frac{\mathbb{E}[\chi_F(X_k)]}{d_F}\mathbf{1}$；先对 $X_m$ 积分，再归纳。因子的次序不影响结果；若某个 $X_k$ 服从哈尔测度且 $F$ 非平凡，则期望为零。
+3. **平面区域与简单闭路。** 设 $P$ 是 $\mathbb{Z}^2$ 中有限个闭单位正方形，$\Gamma$ 为它们的顶点与棱组成的平面图（设为连通；否则逐个分支处理），测度为 $Z^{-1}\prod_{p \in P}\phi(U_p)\prod_\ell\mathrm{d}U_\ell$，自由边界（对边界链不加约束）。设 $C$ 是由 $\Gamma$ 的棱组成的简单闭曲线，$D$ 是 $C$ 内部的单位正方形，$A = \lvert D\rvert$。则 $D \subseteq P$ 时 $\frac{1}{d_F}\mathbb{E}[\chi_F(W_C)] = w^A$；$D$ 含有不属于 $P$ 的正方形时，对一切非平凡不可约 $\rho$ 有 $\mathbb{E}[\chi_\rho(W_C)] = 0$；并且 $Z = \left(\int_G\phi\,\mathrm{d}U\right)^{\lvert P\rvert}$。证明分四步。(a) 生成树 $T$ 之外的弦的对偶边构成对偶图（顶点为 $\Gamma$ 的全部面，含无界面）的生成树 $T^*$：弦两侧是不同的面（否则它是桥，而桥属于每棵生成树）；弦数 $E - V + 1$ 等于有界面数（欧拉公式）；对偶弦边若成圈，这条闭曲线把某条被交的弦的两端分在两侧，而 $T$ 不穿过它就连起这两端，矛盾。(b) 以无界面为根，记 $c(f)$ 为有界面 $f$ 通往父面的对偶边所对的弦；$f$ 边界上的弦恰是 $c(f)$ 与各子面的 $c(f')$，各出现一次，所以树规范下 $f$ 的套索为 $y_f = a_fh_{c(f)}^{\pm 1}b_f$，$h_c$ 为弦 $c$ 上的变量，$a_f, b_f$ 只含子面的弦变量。(c) 按 $T^*$ 中的深度自上而下对 $h_{c(f)}$ 积分，每一步 $h_{c(f)}$ 只出现在 $y_f$ 中，换元保持哈尔测度；所以各有界面的套索独立且服从哈尔测度。$p \in P$ 的权重 $\phi(U_p) = \phi(y_p)$（$y_p$ 与 $U_p$ 或 $U_p^{-1}$ 共轭），故 $y_p$ 服从 $\nu$；不属于 $P$ 的有界面（洞）的套索服从哈尔测度。(d) 取 $T \supseteq C \setminus \{e_0\}$、基点在 $C$ 上，则 $\mathrm{hol}(C) = h_{e_0}^{\pm 1}$。$C$ 内外的面只隔着 $C$ 上的棱，所以 $C$ 内的面构成 $T^*$ 中以 $e_0$ 内侧的面为根的子树；从叶向上反解 (b)，$h_{e_0}^{\pm 1}$ 是 $C$ 内全部有界面套索之积，每个恰出现一次（可能取逆）。由第 2 条与 $w$ 是实数即得结论。这是树规范下的非阿贝尔斯托克斯恒等式，不需要 [§34.30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-3) 的剥壳次序；矩形取梳状生成树（底行横向链与全部竖向链）时，[@rem-ch39-plaquette-sagitta-and-wilson-action] 第 4 条的 $b_i$、$V_{i,J}$ 都是 $\mathbf{1}$，套索就是 $P_{i,j}$，那里的分解是这里的特例。区域不必是凸的，$C$ 可以贴着区域边界走，要紧的只是 $D \subseteq P$。
+4. **弦张力。** 记 $\sigma = -\log w$，则 $D \subseteq P$ 时 $\frac{1}{d_F}\mathbb{E}[\chi_F(W_C)] = e^{-\sigma A}$。设 $F$ 非平凡，取威尔逊权重。$z(\beta) = \int_G\phi\,\mathrm{d}U$ 是 $\beta$ 的整函数且在实轴上为正，$w = \frac{\mathrm{d}}{\mathrm{d}\beta}\log z$，$w(0) = 0$，$w'(\beta) = \operatorname{Var}_\nu(\operatorname{Re}\chi_F)/d_F^2 > 0$：若 $\operatorname{Re}\chi_F$ $\nu$-几乎处处为常数，由连续性与 $\nu$ 的支撑为整个 $G$，它处处等于在 $\mathbf{1}$ 处的值 $d_F$，迫使 $F(U) = \mathbf{1}$ 对一切 $U$ 成立。再由 $\operatorname{Re}\chi_F \le d_F$，$\beta > 0$ 时 $0 < w(\beta) < 1$，$\sigma(\beta)$ 为正、严格递减且实解析；由 $Z = z^{\lvert P\rvert}$，每个小方格的自由能 $-\log z$ 也是实解析的。所以对固定的紧群 $G$ 与非平凡的 $F$（例如固定 $N$），二维自由边界理论在每个 $\beta > 0$ 都有 $\sigma > 0$ 的精确面积律，自由能没有奇点。小 $\beta$ 时 $w = \frac{\beta}{2d_F^2}\left(1 + \int_G\chi_F^2\,\mathrm{d}U\right) + O(\beta^2)$，其中 $\int_G\chi_F^2\,\mathrm{d}U$ 在 $F$ 与其共轭表示等价时为 $1$，否则为 $0$：$\mathrm{U}(1)$ 为 $\frac{\beta}{2}$，$\mathrm{SU}(2)$ 为 $\frac{\beta}{4}$，$N \ge 3$ 的 $\mathrm{SU}(N)$ 为 $\frac{\beta}{2N^2}$，$\mathbb{Z}_2$ 为 $\beta$。精确展开：
+
+   $$
+   \begin{aligned}
+   \mathrm{U}(1):&\quad \sigma = -\log\frac{\beta}{2} + \frac{\beta^2}{8} - \frac{5\beta^4}{384} + O(\beta^6), &\quad \sigma &= \frac{1}{2\beta} + \frac{1}{4\beta^2} + O(\beta^{-3})\ (\beta \to \infty),\\
+   \mathrm{SU}(2):&\quad \sigma = -\log\frac{\beta}{4} + \frac{\beta^2}{24} - \frac{\beta^4}{576} + O(\beta^6), &\quad \sigma &= \frac{3}{2\beta} + \frac{3}{4\beta^2} + O(\beta^{-3})\ (\beta \to \infty).
+   \end{aligned}
+   $$
+
+   取 $\mathrm{U}(1)$ 的 $\beta = 1/(g^2a^2)$、$\mathrm{SU}(2)$ 的 $\beta = 4/(g^2a^2)$，大 $\beta$ 的首项给出 $\sigma/a^2 \to \frac{1}{2}g^2C_2(F)$，$C_2(F)$ 分别为 $1$ 与 $\frac{3}{4}$，与连续统二维杨—米尔斯理论中简单闭路的 $\exp\left(-\frac{1}{2}g^2C_2(F)\cdot\text{面积}\right)$ 一致（文献结果）。
+
+二维格点理论的精确解与面积律见 A. A. Migdal（*Zh. Eksp. Teor. Fiz.* **69**, 810, 1975；英译 *Sov. Phys. JETP* **42**, 413, 1976）；二维中把配分函数化为单个小方格积分并用于大 $N$ 分析，见 D. J. Gross 与 E. Witten（*Phys. Rev. D* **21**, 446–453, 1980, DOI `10.1103/PhysRevD.21.446`）与 S. R. Wadia（*Phys. Lett. B* **93**, 403–410, 1980, DOI `10.1016/0370-2693(80)90353-6`；1979 年未发表预印本的编辑版为 arXiv:`1212.2906`）；平面上套索变量的独立性与连续统极限见 B. K. Driver（*Commun. Math. Phys.* **123**, 575–616, 1989, DOI `10.1007/BF01218586`）与 T. Lévy（*Mem. Amer. Math. Soc.* **166**, no. 790, 2003, DOI `10.1090/memo/0790`）；连续统二维杨—米尔斯理论中圈平均的精确计算见 N. E. Bralić（*Phys. Rev. D* **22**, 3090–3103, 1980, DOI `10.1103/PhysRevD.22.3090`）。
+:::
+
+下面的算例给出 $w$、$\sigma$ 的数值与穷举核对：
+
+::: {.example #ex-ch39-two-dimensional-area-law-numbers title="二维面积律的数值：四种规范群的 $w$ 与 $\sigma$ 及穷举核对（手工推导与数值核验）"}
+**手工推导（闭式）与 `NUM`（数值求积与穷举）。**
+
+1. **单个小方格的平均与弦张力。** $\mathbb{Z}_3$ 取 $\phi = e^{\beta\operatorname{Re}\chi}$，闭式为 $w = \frac{e^{\beta} - e^{-\beta/2}}{e^{\beta} + 2e^{-\beta/2}}$。
+
+   | $\beta$ | $\mathrm{U}(1)$：$w$ | $\sigma$ | $\mathrm{SU}(2)$：$w$ | $\sigma$ | $\mathbb{Z}_2$：$w$ | $\sigma$ | $\mathbb{Z}_3$：$w$ | $\sigma$ |
+   | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+   | $0.5$ | $0.242500$ | $1.416755$ | $0.123718$ | $2.089751$ | $0.462117$ | $0.771937$ | $0.271314$ | $1.304478$ |
+   | $1$ | $0.446390$ | $0.806562$ | $0.240194$ | $1.426309$ | $0.761594$ | $0.272341$ | $0.537158$ | $0.621464$ |
+   | $2$ | $0.697775$ | $0.359859$ | $0.433127$ | $0.836723$ | $0.964028$ | $0.036635$ | $0.864164$ | $0.145992$ |
+   | $4$ | $0.863523$ | $0.146735$ | $0.658047$ | $0.418479$ | $0.999329$ | $0.000671$ | $0.992600$ | $0.007427$ |
+
+   $\mathrm{U}(1)$ 与 $\mathrm{SU}(2)$ 的 $w$ 也用共轭类上的哈尔积分直接数值求积，与贝塞尔函数之比在 $\beta = 0.5, 1, 2, 3, 6$ 处的差小于 $10^{-13}$。
+2. **穷举核对。** 对全部构型求和（不固定规范）：$\mathbb{Z}_2$ 在 $3 \times 3$ 正方形（$A = 1, 2, 3, 4, 5, 9$，含 L 形、非凸的 U 形与整个边界）与挖去中心的 $3 \times 3$ 环上，$\mathbb{Z}_3$ 在 $2 \times 2$ 正方形上，对称群 $S_3$ 的二维不可约表示（$\chi$ 为不动点数减 $1$）在 $1 \times 2$ 条带上；在生成树规范下只对弦求和：$S_3$ 在 $2 \times 2$ 正方形与上述环上。环上围住洞的闭路期望为 $0$（$S_3$ 的二维表示与符号表示都是），其余都是 $w^A$；$\beta$ 取自 $0.4$、$0.7$、$1.3$，与 [@rem-ch39-tree-gauge-plaquette-independence] 第 3 条之差都不超过 $10^{-15}$。
+3. **大 $N$。** $\mathrm{U}(N)$ 的单方格平均为 $w_N = \frac{1}{N}\frac{\mathrm{d}}{\mathrm{d}x}\log\det\left[I_{j-k}(x)\right]_{j,k=1}^{N}$，$x = \beta/N$（托普利茨行列式，文献结果）。取 $x = 2N/\lambda$：$\lambda = 1$ 时 $N = 4, 8, 16, 32$ 给出 $0.74576$、$0.74900$、$0.74975$、$0.74994$，趋于 $1 - \frac{\lambda}{4} = 0.75$；$\lambda = 3$ 时给出 $0.33270$、$0.33330$、$0.333333$、$0.333333$，趋于 $\frac{1}{\lambda}$。两种极限形式在 $\lambda = 2$ 处衔接，这是 Gross 与 Witten（1980）发现的 $N \to \infty$ 三阶相变（文献结果）；对每个有限 $N$，[@rem-ch39-tree-gauge-plaquette-independence] 第 4 条说 $\sigma$ 是实解析的。
+:::
+
+在周期边界上，小方格变量不再独立。对 $\mathbb{Z}/2$ 系数，它们之间恰好只有一条线性关系，这一点已经冻结：
+
+::: {.theorem #thm-ch39-periodic-grid-plaquette-relation title="周期网格上 Z/2 小方格值之间唯一的线性关系与平坦标号的计数" lean="D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.plaquette_relation_rank_one,D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.periodic_grid_linear_statistics"}
+沿用 [@thm-ch39-periodic-grid-flat-not-exact] 的记号，$M, N$ 为非零自然数。对系数 $\mathit{coeff} : \operatorname{Fin} M \to \operatorname{Fin} N \to \mathbb{Z}/2$，记 $\operatorname{PlaquetteRelation}(\mathit{coeff})$ 为：对一切边标号 $y$，$\sum_i\sum_j\mathit{coeff}(i, j)\cdot\operatorname{plaquette}(y, i, j) = 0$。把边标号看成 $\mathbb{Z}/2$-向量空间 $\operatorname{EdgeSpace}(M, N) = (\operatorname{Fin} M \to \operatorname{Fin} N \to \mathbb{Z}/2)^2$ 中的元素，$\operatorname{plaquetteLinear}$ 为 $y \mapsto \operatorname{plaquette}(y, \cdot, \cdot)$ 的线性映射，$\operatorname{flatSubspace}$ 为它的核；记 $\mathrm{Exact} = \{y \mid \exists x,\ \operatorname{gradient}(x) = y\}$，$\mathrm{Flat} = \{y \mid \operatorname{Flat}(y)\}$，$\mathrm{All}$ 为全部边标号。则：
+
+1. $\operatorname{PlaquetteRelation}(\mathit{coeff}) \Longleftrightarrow \forall i\, j,\ \mathit{coeff}(i, j) = \mathit{coeff}(0, 0)$；
+2. $\dim_{\mathbb{Z}/2}\operatorname{range}(\operatorname{plaquetteLinear}) = MN - 1$，$\dim_{\mathbb{Z}/2}\operatorname{flatSubspace} = MN + 1$，$\lvert\mathrm{Flat}\rvert > 0$，$\lvert\mathrm{All}\rvert > 0$，并且作为有理数
+
+   $$
+   \frac{\lvert\mathrm{Exact}\rvert}{\lvert\mathrm{Flat}\rvert} = \frac{1}{4}, \qquad \frac{\lvert\mathrm{Flat}\rvert}{\lvert\mathrm{All}\rvert} = \frac{1}{2^{MN - 1}}, \qquad \frac{\lvert\mathrm{Exact}\rvert}{\lvert\mathrm{All}\rvert} = \frac{1}{2^{MN + 1}}.
+   $$
+:::
+
+::: proof
+第 1 款的“$\Leftarrow$”：每条边恰在两个小方格中出现，全部小方格值之和为零。“$\Rightarrow$”：把关系用在只在一条边上取 $1$ 的标号上，得到这条边两侧的两个系数相等；沿行、列走一圈，全部系数都等于 $\mathit{coeff}(0, 0)$。第 2 款由平坦标号的个数 $2^{MN + 1}$（梯度部分 $2^{MN - 1}$ 种，两条缝的和乐各 $2$ 种）、全部边标号的个数 $2^{2MN}$ 与秩—零化度定理得到，三个比值是这些个数之比。完整证明由 Lean 内核检查。
+:::
+
+由第 2 款，小方格映射的像的维数是 $MN - 1$；由第 1 款，像落在超平面 $\sum_{i,j}\operatorname{plaquette}(y, i, j) = 0$ 中，而这个超平面的维数也是 $MN - 1$，所以像恰是这个超平面。由此得到环面上面积律的精确修正：
+
+::: {.remark #rem-ch39-torus-area-law-correction title="环面上的面积律：闭路两侧的面积都出现（手工推导与文献结果）"}
+**手工推导；非阿贝尔群的环面公式为文献结果，未在本书形式化。** 设 $G$ 是紧阿贝尔群（有限阿贝尔群或 $\mathrm{U}(1)$），$\hat{G}$ 为其特征标群，$\psi_0$ 为平凡特征标；格点为 $M \times N$ 周期网格（$M, N \ge 2$），共 $n = MN$ 个小方格，权重与 [@rem-ch39-tree-gauge-plaquette-independence] 相同。设 $C$ 是 $R \times T$ 矩形（$1 \le R \le M - 1$，$1 \le T \le N - 1$）逆时针的边界，$A = RT$，$\chi \in \hat{G}$。记 $f_\psi = \int_G\phi\,\bar{\psi}\,\mathrm{d}U$。则
+
+$$
+\mathbb{E}\left[\chi(W_C)\right] = \frac{\sum_{\psi \in \hat{G}} f_{\chi\psi}^{\,A}\, f_\psi^{\,n - A}}{\sum_{\psi \in \hat{G}} f_\psi^{\,n}}.
+$$
+
+1. **证明。** 用加法记号，$h_{i,j}$、$v_{i,j}$ 为从 $(i, j)$ 到 $(i + 1, j)$、到 $(i, j + 1)$ 的链，指标分别模 $M$、$N$，小方格值 $\theta_{i,j} = h_{i,j} + v_{i+1,j} - h_{i,j+1} - v_{i,j}$。(a) 矩形是平面圆盘（$R < M$，$T < N$），阿贝尔斯托克斯给出 $\theta_C = \sum_{p \in D}\theta_p$，$D$ 为矩形内的小方格。(b) 小方格映射 $G^E \to G^n$ 的像恰是 $H = \{\sum_p\theta_p = 0\}$：每条链在两个小方格中以相反符号出现，故像含于 $H$；反之给定 $\eta \in H$，令 $r_j = \sum_i\eta_{i,j}$，先取 $h_{0,j}$ 使 $h_{0,j} - h_{0,j+1} = r_j$（因 $\sum_jr_j = 0$ 可解）、其余 $h$ 为 $0$，此时对每个 $j$ 剩下的方程关于 $i$ 的和为零，再沿 $i$ 解出 $v_{i,j}$。$G = \mathbb{Z}/2$ 时这就是上面冻结定理的推论。(c) 紧群之间的连续满同态把哈尔测度推前为像上的哈尔测度。(d) 有限 $G$ 时 $\mathbf{1}_H(\theta) = \lvert G\rvert^{-1}\sum_\psi\psi\left(\sum_p\theta_p\right)$；$\mathrm{U}(1)$ 时对傅里叶系数绝对可和的函数有同样的展开，而 $e^{\beta\cos\theta}$ 的傅里叶系数是 $I_k(\beta)$。代入后按小方格分解，并用 $f_\psi = f_{\bar{\psi}}$ 即得公式。
+2. **两个特例。** $\mathrm{U}(1)$：$\mathbb{E}[e^{i\theta_C}] = \left(\sum_{k \in \mathbb{Z}}I_{k+1}(\beta)^AI_k(\beta)^{n-A}\right)/\left(\sum_kI_k(\beta)^n\right)$。$\mathbb{Z}_2$，$t = \tanh\beta$：
+
+   $$
+   \mathbb{E}[W_C] = \frac{t^A + t^{\,n - A}}{1 + t^{\,n}}.
+   $$
+
+   在环面上，这条闭路同时是 $A$ 个小方格与另外 $n - A$ 个小方格的边界，两侧都进入答案；自由边界的平面区域没有第二侧，答案是 $w^A$。$M, N \to \infty$ 而 $A$ 固定时，环面的值趋于 $w^A$：$\psi \ne \psi_0$ 时 $\lvert f_\psi\rvert < f_{\psi_0}$，且 $\sum_\psi\lvert f_\psi/f_{\psi_0}\rvert^m \to 0$。
+3. **数值核对（`NUM`）。** $\mathbb{Z}_2$ 在 $3 \times 3$ 环面上（$A = 1, 2, 4$）、$\mathbb{Z}_3$ 在 $2 \times 3$ 与 $3 \times 3$ 环面上的穷举与公式之差都不超过 $10^{-15}$；例如 $\mathbb{Z}_2$、$\beta = 1.3$、$A = 4$ 时环面上为 $0.813439$，平面上为 $0.551405$。
+4. **非阿贝尔群（文献结果）。** 对一般紧群，把边界和乐分布为 $\sum_rd_rf_r^A\chi_r$ 的圆盘与带一个洞的环面粘合，得到
+
+   $$
+   \frac{1}{d_F}\,\mathbb{E}\left[\chi_F(W)\right] = \frac{\sum_{r,s}N_{rF}^{\,s}\,\frac{d_r}{d_Fd_s}\,f_r^{\,A}f_s^{\,n-A}}{\sum_rf_r^{\,n}},
+   $$
+
+   其中 $r, s$ 取遍不可约表示，$f_r = \frac{1}{d_r}\int_G\phi\,\bar{\chi}_r\,\mathrm{d}U$，$N_{rF}^{\,s}$ 是 $s$ 在 $r \otimes F$ 中的重数；$s$ 取平凡表示的一项就是平面值 $w^A$。本书没有为一般紧群写出格点证明；对称群 $S_3$ 的二维表示在 $2 \times 2$ 环面上（不固定规范，$6^8$ 个构型，$A = 1$）与 $2 \times 3$ 环面上（生成树规范，$A = 1, 2$）的穷举与公式之差不超过 $10^{-15}$（`NUM`）。
+
+非阿贝尔环面公式见 Migdal（1975）、B. Rusakov（*Mod. Phys. Lett. A* **5**, 693–703, 1990, DOI `10.1142/S0217732390000780`）与 E. Witten（*Commun. Math. Phys.* **141**, 153–209, 1991, DOI `10.1007/BF02100009`）。
+:::
+
+精确面积律说的是闭路。开放的比较读不出任何东西：
+
+::: {.remark #rem-ch39-elitzur-closed-comparisons title="只有闭合的比较可读：埃利策定理的有限形式与威尔逊圈的完备性（手工推导与文献结果）"}
+**手工推导；无限体积下局域规范对称性不能自发破缺（Elitzur 1975）以及非阿贝尔规范不变量由威尔逊圈决定为文献结果，未在本书形式化。** 设 $\Gamma$ 为有限图，$G$ 为紧群，$\mu = Z^{-1}e^{-S(U)}\prod_\ell\mathrm{d}U_\ell$，$S$ 规范不变：$S(U^g) = S(U)$，$(U^g)_{xy} = g_xU_{xy}g_y^{-1}$。对顶点 $x$ 与 $h \in G$，记 $\tau_h^x$ 为在 $x$ 处取 $h$、其余顶点取 $\mathbf{1}$ 的规范变换，$P_xF(U) = \int_GF(\tau_h^xU)\,\mathrm{d}h$。
+
+1. **有限形式。** 对任意有界可测的 $F$ 与任意非平凡不可约酉表示 $\rho$ 的矩阵元 $\rho_{ij}$，
+
+   $$
+   \mathbb{E}_\mu\left[\int_GF(\tau_h^xU)\,\overline{\rho_{ij}(h)}\,\mathrm{d}h\right] = 0, \qquad \mathbb{E}_\mu[F] = \mathbb{E}_\mu[P_xF].
+   $$
+
+   证明：乘积哈尔测度在 $U_\ell \mapsto hU_\ell$ 与 $U_\ell \mapsto U_\ell h^{-1}$ 下不变，$S$ 也不变，所以 $\mathbb{E}_\mu[F \circ \tau_h^x] = \mathbb{E}_\mu[F]$ 对一切 $h$ 成立；再用舒尔正交关系 $\int_G\overline{\rho_{ij}}\,\mathrm{d}h = 0$。特别地，对每条链 $\ell$ 与非平凡不可约 $\rho$，$\mathbb{E}_\mu[\rho(U_\ell)] = 0$（矩阵）；对端点不同的开放路径 $\gamma$，$\mathbb{E}_\mu[\rho(\mathrm{hol}\,\gamma)] = 0$；$\mathbb{E}_\mu[F]$ 等于 $F$ 对整个规范群平均后的期望。
+2. **与体积无关的界。** 加入破坏规范对称的有界项：$\mu_J \propto e^{-S(U) + J\Psi(U)}\prod_\ell\mathrm{d}U_\ell$，$J \in \mathbb{R}$，$\Psi = \sum_\ell\psi(U_\ell)$，$\psi$ 为实函数，$\lvert\psi\rvert \le K$（例如 $G \subseteq \mathrm{U}(N)$ 时 $\psi = \operatorname{Re}\operatorname{Tr}$，$K = N$）。记 $\deg(x)$ 为 $x$ 处的链数。若 $P_xF = 0$，则
+
+   $$
+   \left\lvert\mathbb{E}_{\mu_J}[F]\right\rvert \le \left(e^{2K\lvert J\rvert\deg(x)} - 1\right)\lVert F\rVert_\infty ,
+   $$
+
+   右端与格点大小无关。证明：$\tau_h^x$ 只改变 $x$ 处 $\deg(x)$ 条链上的项，$\lvert\Psi(\tau_h^xU) - \Psi(U)\rvert \le 2K\deg(x)$，换元得 $\lvert\mathbb{E}_{\mu_J}[F \circ \tau_h^x] - \mathbb{E}_{\mu_J}[F]\rvert \le (e^{2K\lvert J\rvert\deg(x)} - 1)\lVert F\rVert_\infty$，再对 $h$ 平均。若 $F$ 只依赖于端点为 $x_1, \dots, x_k$ 的有限多条链，$P$ 为整个规范群上的平均，则 $F - PF = \sum_j(1 - P_{x_j})P_{x_{j+1}}\cdots P_{x_k}F$，每一项满足上面的条件且上确界范数不超过 $2\lVert F\rVert_\infty$，所以 $PF = 0$ 时 $\lvert\mathbb{E}_{\mu_J}[F]\rvert \le 2\sum_j(e^{2K\lvert J\rvert\deg(x_j)} - 1)\lVert F\rVert_\infty$。对连续的这类 $F$，这个界对有限体积测度的任何弱极限点仍成立，所以在任何这样的无限体积极限中，$J \to 0$ 时规范不变部分为零的局域观测量的期望趋于零。这是 Elitzur 论证的有限写法；全局对称性的变换作用于全部格点，对应的界随体积增长。
+3. **$\mathrm{U}(1)$：规范不变量由简单圈上的威尔逊圈张成。** 链带定向，$\theta \in \mathbb{T}^E$，规范变换 $\theta_{xy} \mapsto \theta_{xy} + \alpha_x - \alpha_y$。三角多项式 $F = \sum_{n \in \mathbb{Z}^E}c_ne^{in\cdot\theta}$ 规范不变，当且仅当 $\partial n \ne 0$ 时 $c_n = 0$，$(\partial n)_x$ 为 $x$ 处流出与流入的整数流之差。若 $\partial n = 0$ 且 $n \ne 0$，沿 $n_e \ne 0$ 的方向走，因每个顶点流入等于流出而不会停下，必闭合出一个简单有向圈 $\gamma$；减去它的示性流，$\partial n$ 仍为零而 $\lvert n\rvert_1$ 严格下降。归纳得 $n = \sum_kz_{\gamma_k}$，$\gamma_k$ 为顺着 $n$ 的方向的简单闭路，于是 $e^{in\cdot\theta} = \prod_kW_{\gamma_k}$：每个规范不变的三角多项式都是简单圈上威尔逊圈之积的线性组合，连续的规范不变函数是它们的一致极限（费耶尔平均与规范平均可交换）。$\mathbb{Z}/2$ 的情形已经冻结：[`finite_graph_cycle_space`](lean:D5/S3/Fourier/CharacterSelection/SimpleGraphCycleSpace.finite_graph_cycle_space) 的第一个合取项说，有限简单图上简单圈示性向量张成的 $\mathbb{Z}/2$-子空间，等于满足 $\sum_ec_e(x_a + x_b) = 0$（对一切顶点标号 $x$，$a, b$ 为 $e$ 的两个端点）的系数 $c$ 构成的空间。$\mathbb{Z}_2$ 规范理论中单项式 $\prod_e\sigma_e^{n_e}$ 在规范变换 $(-1)^{x}$ 下乘以 $(-1)^{\sum_en_e(x_a + x_b)}$，所以它规范不变当且仅当 $n$ 是简单圈之和，即它是简单圈上威尔逊圈之积（这一对应在此写出，冻结的陈述本身是 $\mathbb{Z}/2$ 上的线性代数）。
+4. **非阿贝尔群。** B. Durhuus（*Lett. Math. Phys.* **4**, 515–522, 1980, DOI `10.1007/BF00943439`）、R. Giles（*Phys. Rev. D* **24**, 2160–2168, 1981, DOI `10.1103/PhysRevD.24.2160`）与 A. Sengupta（*Proc. Amer. Math. Soc.* **121**, 897–905, 1994, DOI `10.1090/S0002-9939-1994-1215205-7`）在各自所述的条件下证明，规范不变的观测量由闭路和乐的迹（威尔逊圈）决定或生成；本书不复述这些条件。
+
+对照 [@def-appe-third-point-redundancy]：链变量 $U_{xy}$ 对应比较 $c_{xy}$，规范变换是在每个顶点各自更换锚定代表元；由 [@thm-appe-chordal-gain-potential]，条款 IV 在有限弦图的每个三角形上成立时，构型规范等价于全为 $\mathbf{1}$ 的构型，规范不变的读数都取值 $F(\mathbf{1}, \dots, \mathbf{1})$。正方格点上没有三角形；由第 1 条，任何读数的期望等于其规范平均的期望，而规范平均由闭路和乐决定（第 3、4 条），即由条款 IV 沿闭路的偏差决定，在平面上这些偏差在各小方格上相互独立（[@rem-ch39-tree-gauge-plaquette-independence]）。把“第三点不改变比较”读作平坦、把埃利策定理读作“只有闭合的比较可读”，是本书的读法（`MODEL`）。埃利策定理只涉及规范不变部分为零的观测量，本书不主张它蕴含禁闭。
+
+埃利策定理见 S. Elitzur（*Phys. Rev. D* **12**, 3978–3982, 1975, DOI `10.1103/PhysRevD.12.3978`）；格点阿贝尔希格斯—基布尔模型中的严格证明见 G. F. De Angelis、D. de Falco 与 F. Guerra（*Phys. Rev. D* **17**, 1624–1628, 1978, DOI `10.1103/PhysRevD.17.1624`）。
+:::
+
+二维的面积律对一切 $\beta$ 精确成立；在三维与四维，能证明的是强耦合端：
+
+::: {.remark #rem-ch39-strong-coupling-higher-dimensions title="三维及更高维：强耦合首项与已知的相图（手工推导与文献结果）"}
+**手工推导（三维 $\mathbb{Z}_2$ 有限盒子）；其余为文献结果，未在本书形式化。**
+
+1. **三维 $\mathbb{Z}_2$，有限盒子。** 设盒子由 $L_x \times L_y \times L_z$ 个单位立方体组成，自由边界，$\mathbb{Z}_2$ 威尔逊作用量，$t = \tanh\beta$。设 $C$ 是坐标平面中 $A$ 个小方格组成的平面集合 $S_0$ 的边界。则 $t \to 0$ 时
+
+   $$
+   \mathbb{E}[W_C] = t^A\left(1 + c_1t^4 + O(t^6)\right),
+   $$
+
+   $c_1$ 是恰有一个面属于 $S_0$ 的单位立方体的个数（$S_0$ 所在平面不是盒子表面时 $c_1 = 2A$，在盒子表面上时 $c_1 = A$）。证明：由 $e^{\beta\sigma} = \cosh\beta\,(1 + t\sigma)$ 展开并对链求和，$\mathbb{E}[W_C] = \left(\sum_{\partial S = C}t^{\lvert S\rvert}\right)/\left(\sum_{\partial S = 0}t^{\lvert S\rvert}\right)$，$S$ 取遍小方格集合（$\mathbb{Z}/2$ 系数）。盒子可缩，闭的 $S$ 恰为唯一的立方体集合 $Q$ 的边界 $\partial Q$，以 $C$ 为边界的 $S$ 恰为 $S_0 \triangle \partial Q$，且 $\lvert S_0 \triangle \partial Q\rvert = A + \lvert\partial Q\rvert - 2\lvert S_0 \cap \partial Q\rvert$。设 $S_0$ 水平。沿每一竖列立方体，$\partial Q$ 含偶数个水平面，其中至多一个属于 $S_0$，所以每列对 $\lvert\partial Q \setminus S_0\rvert - \lvert\partial Q \cap S_0\rvert$ 的水平贡献非负；竖直面都不属于 $S_0$，而 $Q \ne \varnothing$ 时某一层的横截面非空，其周长至少为 $4$，等号当且仅当 $Q$ 是一个立方体。所以 $Q \ne \varnothing$ 时 $\lvert\partial Q\rvert - 2\lvert S_0 \cap \partial Q\rvert \ge 4$，等号当且仅当 $Q$ 是恰有一个面属于 $S_0$ 的单个立方体；这个量总是偶数，其余情形至少为 $6$，分母中 $Q \ne \varnothing$ 的项为 $O(t^6)$。特别地，$S_0$ 是以 $C$ 为边界的唯一最小曲面，首项是最小面积铺砌项 $t^A = w^A$，修正的相对量级为 $t^4$。
+2. **数值核对（`NUM`）。** 精确多项式：单个立方体上 $\mathbb{E}[W] = \frac{t + t^5}{1 + t^6}$；$2 \times 2 \times 1$ 盒子表面上 $A = 4$ 为 $t^4 + 4t^8 + 7t^{12} + \cdots$；$2 \times 2 \times 2$ 盒子中间平面上 $A = 1, 2, 4$ 分别为 $t + 2t^5 - 2t^7 + \cdots$、$t^2 + 4t^6 - 2t^8 + \cdots$、$t^4 + 8t^8 + 26t^{12} + \cdots$；$3 \times 3 \times 2$ 与 $2 \times 3 \times 3$ 盒子内部平面上 $A = 1, 2, 3$ 的 $c_1$ 也与第 1 条一致。
+3. **一般维数与一般群（文献结果）。** K. Osterwalder 与 E. Seiler（*Ann. Phys.* **110**, 440–471, 1978, DOI `10.1016/0003-4916(78)90039-8`）对紧规范群的格点规范理论证明了强耦合（小 $\beta$）展开的收敛，并在小 $\beta$ 时于任意维数给出威尔逊圈的面积律上界；其精确条件（表示、界的形式）见原文，本书不复述。强耦合展开的系统论述见 J.-M. Drouffe 与 J.-B. Zuber（*Phys. Rep.* **102**, 1–119, 1983, DOI `10.1016/0370-1573(83)90034-0`）。
+4. **小 $\beta$ 的面积律不一定延续到一切 $\beta$（文献结果）。** 四维 $\mathrm{U}(1)$ 在大 $\beta$ 处存在不禁闭的相：A. H. Guth（*Phys. Rev. D* **21**, 2291–2307, 1980, DOI `10.1103/PhysRevD.21.2291`）；J. Fröhlich 与 T. Spencer（*Commun. Math. Phys.* **83**, 411–454, 1982, DOI `10.1007/BF01213610`）。三维 $\mathrm{U}(1)$ 对一切 $\beta$ 禁闭：M. Göpfert 与 G. Mack（*Commun. Math. Phys.* **82**, 545–606, 1982, DOI `10.1007/BF01961240`）。三维 $\mathbb{Z}_2$ 规范理论经对偶与三维伊辛模型对应，有相变：F. J. Wegner（*J. Math. Phys.* **12**, 2259–2272, 1971, DOI `10.1063/1.1665530`）。
+5. **边界。** 二维的精确性（[@rem-ch39-tree-gauge-plaquette-independence]）来自平面上小方格变量的独立；三维及以上，每个立方体上的小方格满足比安基关系（[@rem-ch39-cube-bianchi-sagitta]），独立性不成立，第 1 条只给出强耦合端的首项。四维非阿贝尔理论在一切 $\beta$ 的面积律与质量间隙，见下面的开放问题（`OPEN`）。
+:::
+
+::: {.problem #prob-ch39-four-dimensional-area-law-and-mass-gap title="四维非阿贝尔格点规范理论在一切耦合下的面积律与连续统质量间隙（开放问题）"}
+**`OPEN`。** 设 $G = \mathrm{SU}(N)$，$N \ge 2$，取四维超立方格点上的威尔逊作用量。
+
+1. 证明或否定：对每个 $\beta > 0$，存在 $\sigma(\beta) > 0$ 与常数 $c$，使得在任一无限体积极限（有限体积测度的弱极限点）中，定义表示的 $R \times T$ 矩形威尔逊圈对一切 $R, T$ 满足 $\frac{1}{N}\lvert\mathbb{E}[\operatorname{Tr}W_{R \times T}]\rvert \le ce^{-\sigma(\beta)RT}$。
+2. 构造非平凡的四维连续统量子杨—米尔斯理论并证明其质量间隙为正；对一般紧单群，这是克雷数学研究所的千禧年问题之一（问题陈述由 A. Jaffe 与 E. Witten 撰写）。
+
+已知的部分：二维在一切 $\beta$ 精确成立（[@rem-ch39-tree-gauge-plaquette-independence]）；小 $\beta$ 时在任意维数成立（Osterwalder 与 Seiler 1978，在其所述条件下）；四维 $\mathrm{U}(1)$ 在大 $\beta$ 处不成立（Guth 1980；Fröhlich 与 Spencer 1982）。本书的任何结果都不蕴含第 1、2 款。
+:::
+
 我们在下框中对电子与质子引力—电磁等级比、引力耦合向普朗克单胞的二次攀升以及最小标准模型单圈重整化群三条两两交点作完整显式手算对账：
 
 ::: {.example #ex-ch39-hierarchy-and-one-loop-rg-calculus title="引力—电磁等级稀释比、普朗克二次攀升与最小标准模型单圈重整化群近交汇三角基准算例（手工推导与 CODATA/PDG 数值核验）"}
