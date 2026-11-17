@@ -57,6 +57,7 @@ $$
 $$
 \operatorname{rank}\bigl(\operatorname{flow}(M, N)\bigr) = \operatorname{QMaxFlow}(a, b, c, d).
 $$
+
 :::
 
 ::: proof
@@ -93,6 +94,7 @@ $$
 $$
 \operatorname{QMaxFlow}(a, b, c, d) \le \operatorname{QMinCut}(a, b, c, d) = \min\bigl(3ac,\, \min(ad, bc)\bigr).
 $$
+
 :::
 
 ::: proof
@@ -164,6 +166,7 @@ $$
 $$
 \operatorname{QMinCut}(a, b, c, d) = \min(ad, bc).
 $$
+
 :::
 
 ::: proof
@@ -231,6 +234,7 @@ $$
 $$
 \operatorname{QMaxFlow}(a, b, c, d) = \operatorname{QMinCut}(a, b, c, d) \qquad\text{且}\qquad \operatorname{QMinCut}(a, b, c, d) = \min(ad, bc).
 $$
+
 :::
 
 ::: proof
@@ -269,6 +273,193 @@ ad\le bc&\ \Longrightarrow\ FF^*=\lambda I_{ad}.
 $$
 
 它们分别要求列或行构成范数为 $\sqrt{\lambda}$ 的正交族，使较小一侧的奇异值全部等于 $\sqrt{\lambda}$。在接缝 $ad=bc$ 上，两项蕴含同时生效，使用的是同一个 $F$ 与同一个 $\lambda$。下面的必要条件说明，这种加强受到秩本身看不见的限制。
+
+先看结论中 $2c$ 的几何含义。当 $c=1$，若能从右侧因子中组合出 $y_0,y_1\in\mathbb C^d$，满足 $y_0^*y_0=y_1^*y_1=1$、$y_0^*y_1=0$，就必须有 $d\ge2$。推广到一般 $c$，所需的是两个等距映射 $J_0,J_1:\mathbb C^c\to\mathbb C^d$，满足 $J_\alpha^*J_\beta=\delta_{\alpha\beta}I_c$：两个 $c$ 维像彼此正交，因而 $d\ge2c$。下面先找出共同的两个系数方向，再从原始 Gram 恒等式导出这样的映射。
+
+::: {.theorem #thm-bridge-common-coefficient-plane title="所有 Hermitian 系数核的共同复二维中性平面" lean="D5/S3/Quantum/Algebra/GenericCommonCoefficientPlane.common_plane"}
+设 $a,b\in\mathbb N$ 满足严格阈值 $3a<2b$。令
+
+$$
+X:\operatorname{Fin}3\longrightarrow M_{a\times b}(\mathbb C)
+$$
+
+是复线性无关的三元组，并令系数指标在前的堆叠 $S=\operatorname{stack}(X)$（行指标为 $(r,i)\in\operatorname{Fin}3\times\operatorname{Fin}a$）满足 $S$ 的线性映射是单射。则存在复二维子空间 $L\subset\mathbb C^3$，使得对每个 Hermitian 系数矩阵 $T\in M_3(\mathbb C)$，只要
+
+$$
+S^*(T\otimes I_a)S=0,
+$$
+
+就有完整的复半双线性配对
+
+$$
+u^*Tv=0\qquad(u,v\in L).
+$$
+
+这里的量词包含 Hermitian 系数核只有零矩阵的情形；定理没有另加非零核、签名或正性假设。
+:::
+
+::: proof
+记
+
+$$
+\Phi_X(T)=S^*(T\otimes I_a)S=\sum_{r,s}T_{rs}X_r^*X_s,
+$$
+
+即源码的 [compression](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression) 与 [compression_eq_sum](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression_eq_sum)。两次乘积秩下界给出 $\operatorname{rank}\Phi_X(T)\ge a\operatorname{rank}T-2(3a-b)$。若 $\Phi_X(T)=0$ 且 $\operatorname{rank}T=3$，便有 $2b\le3a$，矛盾，所以每个系数核矩阵的秩至多为 $2$。若 $T$ 半正定，将它写成 $C^*C$，对 $\Phi_X(T)=0$ 取迹得到若干矩阵范数平方之和为零，迫使 $C$ 的每行给出 $\sum_r C_{jr}X_r=0$；独立性使 $C=0$。对 $-T$ 同理。因此每个非零 Hermitian 核形式都有一正、一负和一个零特征值。
+
+若 Hermitian 核只有零矩阵，任意复二维平面都满足结论。否则，对一个非零核形式作可逆伴随合同，将其化为 $\operatorname{diag}(1,-1,0)$，并配对变换 $X$；独立性和堆叠单射性均保留。以下暂在这组坐标中工作。等列 Gram $X_0^*X_0=X_1^*X_1$ 给出 $X_1=UX_0$，其中 $U$ 是余域 $\mathbb C^a$ 上的酉矩阵。令
+
+$$
+\begin{aligned}
+D&=\operatorname{range}X_0,& E&=X_2(\ker X_0),\\
+r&=\dim D,&s&=\dim E.
+\end{aligned}
+$$
+
+堆叠单射性使 $X_2$ 在 $\ker X_0$ 上单射，故 $r+s=b$；由 $r,s\le a$ 与 $3a<2b$ 得 $2r>a$。对任意 Hermitian 核形式 $Q$，在 $\ker X_0$ 上配对先得到 $Q_{22}=0$，再在任意输入向量间配对得到
+
+$$
+(Q_{20}I_a+Q_{21}U)D\perp E.
+$$
+
+若某个 $Q$ 的交叉系数不全为零，记 $K=Q_{20}I_a+Q_{21}U$。上式给出 $\dim\ker(K|_D)\ge r+s-a=b-a$，所以
+
+$$
+\dim\bigl(\ker(K|_D)\cap E\bigr)\ge b+s-2a\ge2b-3a>0.
+$$
+
+取其中非零 $v$，则 $Q_{21}\ne0$，且 $Uv=wv$，其中 $w=-Q_{20}/Q_{21}$、$|w|=1$。把同一个 $v\in D\cap E$ 代入每个核形式的交叉关系，得到所有形式共有的 $Q_{20}+wQ_{21}=0$；取 $v$ 在 $X_0$ 下的原像再配对，得到 $(1,w,0)^*Q(1,w,0)=0$。
+
+若所有交叉系数都为零，令
+
+$$
+A(Q)=(Q_{00}+Q_{11})I_a+Q_{01}U+Q_{10}U^*.
+$$
+
+由 $X_0^*A(Q)X_0=0$ 与 $2r>a$，每个 $A(Q)$ 都奇异。一次对角化同一个 $U$ 后，这些对角元是 Hermitian 核这个实向量空间上的有限个实线性泛函。它们的零空间覆盖整个核；实向量空间不可能被有限个真线性子空间覆盖，故至少一个固定对角元对整个核恒为零。它的酉特征值给出同一个单位相位 $w$，也使 $(1,w,0)^*Q(1,w,0)=0$ 对所有 $Q$ 成立。
+
+两种分支都使 $L=\operatorname{span}_{\mathbb C}\{(0,0,1),(1,w,0)\}$ 上的四个基向量配对全部为零：用到 $Q_{22}=0$、交叉关系、其共轭与最后的二次关系。由共轭线性与线性延拓，完整的 $u^*Qv$ 对任意 $u,v\in L$ 为零。可逆系数合同把这一共同平面运回原坐标，保持复维数与完整配对。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-bridge-native-rectangular-bound title="原生三项矩形张量和的列 Gram 维数界" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeRectangularBound.bound"}
+对任意自然数 $a,b,c,d$，任取复矩阵族
+
+$$
+M_r\in M_{a\times b}(\mathbb C),\qquad N_r\in M_{d\times c}(\mathbb C)\qquad(r=0,1,2),
+$$
+
+令原始收缩（行指标为 $\operatorname{Fin}a\times\operatorname{Fin}d$，列指标为 $\operatorname{Fin}b\times\operatorname{Fin}c$）
+
+$$
+F=\sum_{r=0}^2M_r\otimes N_r:
+\mathbb C^b\otimes\mathbb C^c\longrightarrow\mathbb C^a\otimes\mathbb C^d.
+$$
+
+若 $\lambda\in\mathbb R$ 满足 $\lambda>0$，且
+
+$$
+F^*F=\lambda I_{bc},\qquad 3a<2b,
+$$
+
+则
+
+$$
+2c\le d.
+$$
+
+不要求原始三元组独立、白化或归一化，也不加维数正性、顺序或二次锥条件；所有自然维数都在量词内，包括零维情形。
+:::
+
+::: proof
+若 $c=0$，结论为 $0\le d$。以下设 $c>0$；严格阈值给出 $b>0$。若 $a=0$ 或 $d=0$，$F$ 的所有列为零，与 $F^*F=\lambda I_{bc}$ 矛盾；$b=0$ 则不满足阈值。因此没有暗中删去任何零维情形。另在更强的 $2a<b$ 区间，下面的 [@thm-bridge-scalar-gram-obstruction] 已给出更强结论 $3c\le d$；以下解释一般的 $2c\le d$ 机制。
+
+把同一个 $F$ 写成项数最少的精确张量和，记为 $\sum_{r<k}A_r^{(0)}\otimes D_r$，其中 $0\le k\le3$。若任一侧因子线性相关，从非零系数关系解出一个因子并把该项吸收到其余项，就可减少宽度。因此最小分解两侧各自复线性无关。令 $A_r=A_r^{(0)}/\sqrt\lambda$，得到
+
+$$
+\widehat F=\frac{F}{\sqrt\lambda}=\sum_{r<k}A_r\otimes D_r,\qquad
+\widehat F^*\widehat F=I_{bc}.
+$$
+
+这是对原始假设的推导，不是附加的独立性或归一化前提。
+
+对 $c>0$，右侧独立性使归一 Hilbert–Schmidt Gram
+
+$$
+H_{rs}=\frac1c\Tr(D_r^*D_s)
+$$
+
+正定：$z^*Hz=c^{-1}\|\sum_r z_rD_r\|_{\mathrm{HS}}^2$，非零 $z$ 时严格为正。故 $H=B^*B$，其中 $B$ 可逆。作配对的系数白化
+
+$$
+\begin{aligned}
+X_r&=\sum_sB_{rs}A_s,\\
+Y_r&=\sum_s(B^{-T})_{rs}D_s,\\
+B^{-T}&=(B^T)^{-1}.
+\end{aligned}
+$$
+
+这里用逆转置，因为张量和的系数配对是双线性的：$B^TB^{-T}=I_k$ 保证 $\sum_rX_r\otimes Y_r=\widehat F$。这一步不改变已归一的收缩，也保留因子独立性。对 $\widehat F^*\widehat F=I_b\otimes I_c$ 的第二因子取偏迹并除以 $c$，有
+
+$$
+\begin{aligned}
+\sum_{r,s}H_{rs}A_r^*A_s&=I_b,\\
+\sum_rX_r^*X_r&=I_b.
+\end{aligned}
+$$
+
+因此系数在前的堆叠 $S:\mathbb C^b\to\mathbb C^k\otimes\mathbb C^a$ 满足 $S^*S=I_b$，给出单射及 $b\le ka$。宽度 $k=0,1$ 都与 $b>a$ 矛盾。
+
+对余下的 $k=2,3$，定义压缩与每个右侧指标对的 Gram 缺陷
+
+$$
+\begin{aligned}
+\Phi_X(T)&=S^*(T\otimes I_a)S
+=\sum_{r,s}T_{rs}X_r^*X_s,\\
+(G_{\ell m})_{rs}&=(Y_r^*Y_s)_{\ell m},\\
+R_{\ell m}&=G_{\ell m}-\delta_{\ell m}I_k
+\qquad(0\le\ell,m<c).
+\end{aligned}
+$$
+
+这里 $\delta$ 为 Kronecker 符号，所有复右 Gram 缺陷统一为 $R=G-\delta I$。展开 $\widehat F^*\widehat F=I_{bc}$，取第二因子的 $(\ell,m)$ 矩阵元，再减去 $\delta_{\ell m}\sum_rX_r^*X_r$，就得 $\Phi_X(R_{\ell m})=0$。
+
+$k=2$ 时，$\operatorname{rank}S=b$。两次乘积秩下界给出
+
+$$
+\operatorname{rank}\Phi_X(T)\ge a\operatorname{rank}T-2(2a-b).
+$$
+
+若非零 $T$ 的压缩为零，则 $\operatorname{rank}T\ge1$ 迫使 $2b\le3a$，矛盾。因此压缩核为零，所有 $R_{\ell m}=0$，即 $Y_r^*Y_s=\delta_{rs}I_c$。当 $c=1$，$Y_0,Y_1$ 就是 $\mathbb C^d$ 中两根正交单位向量。一般 $c$ 时，$Y_0,Y_1:\mathbb C^c\to\mathbb C^d$ 是等距映射，且其两个 $c$ 维像彼此正交；拼接 $[\,Y_0\ Y_1\,]$ 有 $2c$ 根正交归一列，故 $2c\le d$。
+
+$k=3$ 时，[@thm-bridge-common-coefficient-plane] 的独立性与堆叠单射前提已经导出。其共同平面 $L$ 对整个 Hermitian 压缩核有效，包括该核为零的情形。每个复缺陷 $R=G-\delta I_3$ 未必 Hermitian，尤其不能略过 $\ell\ne m$。由于 $\Phi_X(R^*)=\Phi_X(R)^*$，两个 Hermitian 部分
+
+$$
+\begin{aligned}
+R_{\mathrm R}&=\frac{R+R^*}{2},\\
+R_{\mathrm I}&=\frac{R-R^*}{2i},\\
+R&=R_{\mathrm R}+iR_{\mathrm I}.
+\end{aligned}
+$$
+
+都在核中。同一个 $L$ 同时消去每个块的两部分的完整配对，故 $u^*R_{\ell m}v=0$ 对全部 $\ell,m$ 与 $u,v\in L$ 成立；这些是伴随意义的 Hermitian 部分，不是逐元素的实部与虚部。
+
+取 $L$ 的正交归一基组成 $V\in M_{3\times2}(\mathbb C)$，令
+
+$$
+W=[\,Y_0\ Y_1\ Y_2\,],\qquad C=V\otimes I_c.
+$$
+
+全部块关系与 $V^*V=I_2$ 给出
+
+$$
+\begin{aligned}
+(WC)^*(WC)&=I_{2c},\\
+2c&=\operatorname{rank}(WC)\le d.
+\end{aligned}
+$$
+
+当 $c=1$，$WC$ 的两列是正交单位向量；一般 $c$ 时，两组列张成两个彼此正交的 $c$ 维像。这个结论来自张量 Gram 的全部块，而非仅靠环境维数不等式 $bc\le ad$。最小分解、白化、堆叠与压缩都是证明辅助操作，原始 $F$ 的行指标 $(a,d)$ 与列指标 $(b,c)$ 始终不变。完整证明由 Lean 内核检查。
+:::
 
 ::: {.theorem #thm-bridge-scalar-gram-obstruction title="宽度三桥流的标量 Gram 障碍" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction"}
 设 $a,b,c,d\in\mathbb N$，$c>0$、$b>2a$。对任意三个 $a\times b$ 复矩阵 $M_r$、三个 $d\times c$ 复矩阵 $N_r$ 及正实数 $\lambda$，若
@@ -371,7 +562,7 @@ $$
 
 上述施密特权重与熵的讨论是归一化纯态的谱解释；定理本身只给出矩阵维数的必要条件。这一障碍针对既定分组下的三项复矩阵收缩与精确平坦谱；它不给出近似平坦的误差界，也不建立一般张量网络、物理实现或连续统全息对偶的结论。
 
-那么，把比值收紧为 $b\le2a$、$d\le2c$，能否保证精确平坦谱？这时上面的 $b>2a$ 障碍不再适用，但仍有另一种限制。下面固定 $3\times5$ 与 $5\times3$ 的因子尺寸，保留原来的行、列分组。
+那么，把比值收紧为 $b\le2a$、$d\le2c$，能否保证精确平坦谱？$b>2a$ 的旧障碍不再适用，但 [@thm-bridge-native-rectangular-bound] 仍可能排除它。下面保留已经给出的固定尺寸结果及其来源；它也是一般界在 $(3,5,3,5)$ 处的特例。
 
 ::: {.theorem #thm-bridge-three-five-flat-spectrum-obstruction title="$(3,5,3,5)$ 的正标量 Gram 障碍" lean="D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.positive_scalar_obstruction"}
 对任意复矩阵三元组 $M_r\in M_{3\times5}(\mathbb C)$、$N_r\in M_{5\times3}(\mathbb C)$（$r=0,1,2$）以及任意实数 $\lambda>0$，令
@@ -386,76 +577,7 @@ $$
 :::
 
 ::: {.proof #pf-bridge-three-five-flat-spectrum-obstruction}
-反设 $F^*F=\lambda I_{15}$。先把同一个 $F$ 写成项数最少的克罗内克积之和，记项数为 $k\le3$、因子为 $A_r,D_r$。若一侧因子线性相关，就可从一条非零系数关系中解出一个因子，将对应项吸收到其余项，减少项数而不改变 $F$。所以最小分解的两族因子各自复线性无关。再把 $A_r$ 同乘 $1/\sqrt\lambda$，得到收缩 $G=F/\sqrt\lambda$，满足 $G^*G=I_{15}$；非零缩放保留独立性。最小宽度、独立性和归一化都是反设的推论，不是定理另加的前提。
-
-$k=0$ 时 $G=0$，Gram 矩阵不可能是单位阵。$k=1$ 时，$3\times5$ 因子 $A_0$ 有非零核向量 $x$；对任意非零 $y\in\mathbb C^3$，有 $(A_0\otimes D_0)(x\otimes y)=0$，也与 $G^*G=I_{15}$ 要求的单射性矛盾。
-
-对 $k=2,3$，还需整理系数方向上的度量。令
-
-$$
-H_{rs}=\frac13\Tr(D_r^*D_s).
-$$
-
-这是矩阵族 $D_r$ 的 Hilbert–Schmidt Gram 矩阵；独立性使它正定，故可写成 $H=B^*B$，其中 $B$ 可逆。作配对的系数变换
-
-$$
-\begin{aligned}
-X_r&=\sum_s B_{rs}A_s,\qquad
-Y_r=\sum_s(B^{-T})_{rs}D_s,\\
-G&=\sum_rX_r\otimes Y_r,\qquad
-\sum_rX_r^*X_r=I_5.
-\end{aligned}
-$$
-
-这里 $B^{-T}=(B^T)^{-1}$，所以 $B^TB^{-T}=I_k$ 保持三项或两项收缩不变；最后一个等式来自对 $G^*G=I_{15}$ 的第二个张量因子取偏迹，再除以 $3$。变换也保留各族独立性。将 $X_r$ 按系数指标在前竖直堆叠，得到 $S:\mathbb C^5\to\mathbb C^k\otimes\mathbb C^3$，且 $S^*S=I_5$，因此 $S$ 单射。
-
-展开 $G^*G=I_{15}$，对任意 $\ell,m\in\{0,1,2\}$ 定义复系数块
-
-$$
-\begin{aligned}
-(T_{\ell m})_{rs}&=(Y_r^*Y_s)_{\ell m}-\delta_{rs}\delta_{\ell m},\\
-\Phi_X(T)&=S^*(T\otimes I_3)S
-=\sum_{r,s}T_{rs}X_r^*X_s.
-\end{aligned}
-$$
-
-于是每个块都满足 $\Phi_X(T_{\ell m})=0$。当 $k=3$ 时，这正是源码的 [`compression`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression) 与 [`compression_eq_sum`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression_eq_sum)；此处 $\delta$ 仍为 Kronecker 符号。
-
-$k=2$ 时，$S$ 是秩为 $5$ 的 $6\times5$ 矩阵。对 $S^*(T\otimes I_3)S$ 连用两次矩阵乘积秩下界，得到
-
-$$
-\operatorname{rank}\Phi_X(T)\ge3\operatorname{rank}T-2.
-$$
-
-因此 $\Phi_X(T)=0$ 迫使整数 $\operatorname{rank}T=0$，即 $T=0$。所有 $T_{\ell m}$ 都为零，故 $Y_r^*Y_s=\delta_{rs}I_3$。横向拼接 $[\,Y_0\ Y_1\,]$ 就得到一张 $5\times6$ 矩阵，其六根列正交归一，不可能存在。
-
-$k=3$ 时，压缩核未必为零。此时使用 [`common_plane`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.common_plane)：它的确切前提是三个 $3\times5$ 复矩阵 $X_r$ 复线性无关，且系数在前的堆叠 $S$ 单射；这些条件已在上面导出。结论是存在一个复二维子空间 $L\subset\mathbb C^3$，对整个 Hermitian 压缩核同时满足
-
-$$
-T=T^*,\quad\Phi_X(T)=0
-\quad\Longrightarrow\quad
-u^*Tv=0\quad(u,v\in L).
-$$
-
-这里是同一个 $L$ 对所有 $T$ 都中性，且要求完整的复配对为零。它也包含 Hermitian 压缩核只有零矩阵的情形，此时任意系数二维平面都满足要求。不能对每个块另选一个平面，也不能把这个固定尺寸的结论直接套给 $k=2$。
-
-复块 $T_{\ell m}$ 本身未必 Hermitian，尤其 $\ell\ne m$ 时不能只检查对角块。因为 $\Phi_X(T^*)=\Phi_X(T)^*$，它的两个 Hermitian 部分
-
-$$
-T_{\mathrm R}=\frac{T+T^*}{2},\qquad
-T_{\mathrm I}=\frac{T-T^*}{2i},\qquad
-T=T_{\mathrm R}+iT_{\mathrm I}
-$$
-
-都在压缩核中。同一个 $L$ 消去两部分的配对，因而对所有 $\ell,m$ 都有 $u^*T_{\ell m}v=0$；这两个部分不是逐元素取实部、虚部。
-
-选 $L$ 的一组正交归一基，组成 $3\times2$ 矩阵 $V$，满足 $V^*V=I_2$。横向拼接 $W=[\,Y_0\ Y_1\ Y_2\,]\in M_{5\times9}(\mathbb C)$，并令 $C=V\otimes I_3\in M_{9\times6}(\mathbb C)$。上面的全部块配对给出
-
-$$
-(WC)^*(WC)=C^*W^*WC=I_6.
-$$
-
-于是 $WC$ 的六根压缩列必须正交归一，却只有五行，即 $6\le\operatorname{rank}(WC)\le5$，矛盾。这些系数变换、堆叠与压缩都是证明中的辅助操作，原始 $F$ 的行、列二分没有改变。完整证明由 Lean 内核检查。
+反设 $F^*F=\lambda I_{15}$。由于 $3a=9<10=2b$，[@thm-bridge-native-rectangular-bound] 要求 $2c=6\le d=5$，矛盾。一般证明在此正是把两个正交的三维像放入五维空间的不可能性；原固定尺寸 [common_plane](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.common_plane) 也给出这里所用的共同系数平面。本条保留其独立来源 [positive_scalar_obstruction](lean:D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.positive_scalar_obstruction)。完整证明由 Lean 内核检查。
 :::
 
 ::: {.example #ex-bridge-three-five-flat-spectrum title="八个前提成立，秩达到 15，谱仍不能平坦：$(3,5,3,5)$"}
@@ -539,6 +661,7 @@ $$
 $$
 \operatorname{rawPrefix}(3, m, \varphi) = \operatorname{rawPrefix}(3, m, \psi) \iff \exists z \in \mathbb{C},\; \|z\| = 1 \;\land\; \varphi = z \cdot \psi.
 $$
+
 :::
 
 ::: proof

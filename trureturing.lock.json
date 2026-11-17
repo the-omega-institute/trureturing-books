@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "776129eb1e0e88033b2f3d3cc5854e97dd4cdbae",
-  "pinned_at": "2026-11-17T10:43:44Z",
+  "pinned_at": "2026-11-17T11:17:03Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -3085,6 +3085,14 @@
       "line": 44,
       "signature": "theorem future_word_orthogonal_residual [FiniteDimensional 𝕜 E] {m : ℕ} (effect : Fin (m + 1) → E) (X : State → E) (rho sigma : State) : (futureExpectationWord (𝕜"
     },
+    "D5/S3/Quantum/Algebra/GenericCommonCoefficientPlane.common_plane": {
+      "module": "D5/S3/Quantum/Algebra/GenericCommonCoefficientPlane",
+      "name": "D5.S3.Quantum.Algebra.GenericCommonCoefficientPlane.common_plane",
+      "kind": "theorem",
+      "statement_id": "sha256:a8cdb57842acd22cc096a9e766abc2245cd7aa4b60d58cce4769f6a5d7735d3d",
+      "line": 511,
+      "signature": "theorem common_plane {a b : ℕ} (hab : 3 * a < 2 * b) (X : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (hX : LinearIndependent ℂ X) (hinj : Function.Injective (stack X).mulVecLin) : ∃ L : Submodule ℂ (Fin 3 → ℂ), finrank ℂ L = 2 ∧ ∀ T : Matrix (Fin 3) (Fin 3) ℂ, T.IsHermitian → (stack X)ᴴ * Matrix.kronecker T (1 : Matrix (Fin a) (Fin a) ℂ) * stack X = 0 → ∀ u ∈ L, ∀ v ∈ L, star u ⬝ᵥ (T *ᵥ v) = 0"
+    },
     "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq": {
       "module": "D5/S3/Quantum/Algebra/GramUnitaryExtension",
       "name": "D5.S3.Quantum.Algebra.GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq",
@@ -4980,6 +4988,14 @@
       "statement_id": "sha256:b64cbfc7f241d6eca52067fa57f532696ef90458007cfb3acfeffe3c8a0d991a",
       "line": 74,
       "signature": "theorem qubit_subentropy_near_pure (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A.PosSemidef) (htr : A.trace = 1) : let δ"
+    },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeRectangularBound.bound": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeRectangularBound",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.NativeRectangularBound.bound",
+      "kind": "theorem",
+      "statement_id": "sha256:f905171e6d60ef935199ac6d507d1081c2b56f0e18415b7c853307c3c5655de5",
+      "line": 698,
+      "signature": "theorem bound {a b c d : ℕ} (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin d) (Fin c) ℂ) (lambda : ℝ) (hlambda : 0 < lambda) (hab : 3 * a < 2 * b) (hF : (∑ r, Matrix.kronecker (M r) (N r))ᴴ * (∑ r, Matrix.kronecker (M r) (N r)) = (lambda : ℂ) • (1 : Matrix (Fin b × Fin c) (Fin b × Fin c) ℂ)) : 2 * c ≤ d"
     },
     "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained": {
       "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",

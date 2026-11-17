@@ -57,6 +57,7 @@ For all natural numbers $a, b, c, d \in \mathbb{N}$ (including $0$), there exist
 $$
 \operatorname{rank}\bigl(\operatorname{flow}(M, N)\bigr) = \operatorname{QMaxFlow}(a, b, c, d).
 $$
+
 :::
 
 ::: proof
@@ -93,6 +94,7 @@ For all natural numbers $a, b, c, d \in \mathbb{N}$,
 $$
 \operatorname{QMaxFlow}(a, b, c, d) \le \operatorname{QMinCut}(a, b, c, d) = \min\bigl(3ac,\, \min(ad, bc)\bigr).
 $$
+
 :::
 
 ::: proof
@@ -164,6 +166,7 @@ Then the minimum cut capacity simplifies to
 $$
 \operatorname{QMinCut}(a, b, c, d) = \min(ad, bc).
 $$
+
 :::
 
 ::: proof
@@ -231,6 +234,7 @@ both equalities hold simultaneously:
 $$
 \operatorname{QMaxFlow}(a, b, c, d) = \operatorname{QMinCut}(a, b, c, d) \qquad\text{and}\qquad \operatorname{QMinCut}(a, b, c, d) = \min(ad, bc).
 $$
+
 :::
 
 ::: proof
@@ -269,6 +273,193 @@ ad\le bc&\ \Longrightarrow\ FF^*=\lambda I_{ad}.
 $$
 
 These identities require the columns or rows, respectively, to form an orthogonal family of norm $\sqrt{\lambda}$, making all singular values on the smaller side equal to $\sqrt{\lambda}$. On the seam $ad=bc$, both implications apply to the same $F$ and the same $\lambda$. The following necessary condition reveals a restriction that rank alone cannot detect.
+
+Start with the geometry behind $2c$. When $c=1$, two combinations $y_0,y_1\in\mathbb C^d$ of the right factors with $y_0^*y_0=y_1^*y_1=1$ and $y_0^*y_1=0$ would be two orthogonal unit vectors, requiring $d\ge2$. For general $c$, the corresponding objects are isometries $J_0,J_1:\mathbb C^c\to\mathbb C^d$ with $J_\alpha^*J_\beta=\delta_{\alpha\beta}I_c$. Their two $c$-dimensional ranges are orthogonal, requiring $d\ge2c$. We first find two common coefficient directions, then derive these maps from the original Gram identity.
+
+::: {.theorem #thm-bridge-common-coefficient-plane title="A common complex two-plane for every Hermitian coefficient kernel" lean="D5/S3/Quantum/Algebra/GenericCommonCoefficientPlane.common_plane"}
+Let $a,b\in\mathbb N$ satisfy the strict threshold $3a<2b$. Let
+
+$$
+X:\operatorname{Fin}3\longrightarrow M_{a\times b}(\mathbb C)
+$$
+
+be a complex-linearly independent triple, and let the coefficient-first stack $S=\operatorname{stack}(X)$ (with row index $(r,i)\in\operatorname{Fin}3\times\operatorname{Fin}a$) be injective as a linear map. Then there is a complex two-dimensional subspace $L\subset\mathbb C^3$ such that for every Hermitian coefficient matrix $T\in M_3(\mathbb C)$, whenever
+
+$$
+S^*(T\otimes I_a)S=0,
+$$
+
+we have the full complex sesquilinear pairing
+
+$$
+u^*Tv=0\qquad(u,v\in L).
+$$
+
+The quantifiers include the case where the Hermitian coefficient kernel is zero; no nonzero-kernel, signature, or positivity premise is added.
+:::
+
+::: proof
+Write
+
+$$
+\Phi_X(T)=S^*(T\otimes I_a)S=\sum_{r,s}T_{rs}X_r^*X_s,
+$$
+
+as in [compression](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression) and [compression_eq_sum](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression_eq_sum). Two product-rank lower bounds give $\operatorname{rank}\Phi_X(T)\ge a\operatorname{rank}T-2(3a-b)$. If $\Phi_X(T)=0$ and $\operatorname{rank}T=3$, then $2b\le3a$, a contradiction. Thus every coefficient-kernel matrix has rank at most $2$. If $T$ is positive semidefinite, write $T=C^*C$. Taking the trace of $\Phi_X(T)=0$ gives a zero sum of squared matrix norms, so each row of $C$ gives $\sum_r C_{jr}X_r=0$; independence forces $C=0$. Apply the same argument to $-T$. Every nonzero Hermitian kernel form therefore has one positive, one negative, and one zero eigenvalue.
+
+If the Hermitian kernel is zero, any complex two-plane works. Otherwise, put one nonzero kernel form into $\operatorname{diag}(1,-1,0)$ by an invertible adjoint congruence and change the coefficients of $X$ accordingly; independence and stack injectivity are preserved. Work temporarily in these coordinates. Equal column Grams $X_0^*X_0=X_1^*X_1$ give $X_1=UX_0$ for a unitary $U$ on the codomain $\mathbb C^a$. Set
+
+$$
+\begin{aligned}
+D&=\operatorname{range}X_0,& E&=X_2(\ker X_0),\\
+r&=\dim D,&s&=\dim E.
+\end{aligned}
+$$
+
+Stack injectivity makes $X_2$ injective on $\ker X_0$, so $r+s=b$. Since $r,s\le a$ and $3a<2b$, we have $2r>a$. For every Hermitian kernel form $Q$, pairing on $\ker X_0$ first gives $Q_{22}=0$, and pairing between arbitrary input vectors gives
+
+$$
+(Q_{20}I_a+Q_{21}U)D\perp E.
+$$
+
+If some $Q$ has a nonzero cross pair, put $K=Q_{20}I_a+Q_{21}U$. The preceding relation yields $\dim\ker(K|_D)\ge r+s-a=b-a$, hence
+
+$$
+\dim\bigl(\ker(K|_D)\cap E\bigr)\ge b+s-2a\ge2b-3a>0.
+$$
+
+Choose a nonzero $v$ in that intersection. Then $Q_{21}\ne0$ and $Uv=wv$, where $w=-Q_{20}/Q_{21}$ and $|w|=1$. Pairing this same $v\in D\cap E$ in the cross relation for every kernel form gives the common relation $Q_{20}+wQ_{21}=0$. A preimage of $v$ under $X_0$ gives the remaining equality $(1,w,0)^*Q(1,w,0)=0$.
+
+If all cross pairs vanish, set
+
+$$
+A(Q)=(Q_{00}+Q_{11})I_a+Q_{01}U+Q_{10}U^*.
+$$
+
+The identities $X_0^*A(Q)X_0=0$ and $2r>a$ make every $A(Q)$ singular. Diagonalize the same $U$ once. The diagonal entries are finitely many real-linear functionals on the real vector space of Hermitian kernel forms. Their kernels cover that space; a real vector space cannot be covered by finitely many proper linear subspaces, so one fixed diagonal entry vanishes on the entire kernel. Its unitary eigenvalue supplies one common unit phase $w$, again with $(1,w,0)^*Q(1,w,0)=0$ for every $Q$.
+
+In either branch, all four basis pairings on $L=\operatorname{span}_{\mathbb C}\{(0,0,1),(1,w,0)\}$ vanish, using $Q_{22}=0$, the cross relation, its conjugate, and the final quadratic relation. Sesquilinearity then gives the full $u^*Qv=0$ for all $u,v\in L$. Invertible coefficient congruence transports this common plane back to the original coordinates, preserving complex dimension and the full pairing. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-bridge-native-rectangular-bound title="A native rectangular dimension bound for three tensor summands" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeRectangularBound.bound"}
+For arbitrary natural numbers $a,b,c,d$, take complex matrix families
+
+$$
+M_r\in M_{a\times b}(\mathbb C),\qquad N_r\in M_{d\times c}(\mathbb C)\qquad(r=0,1,2),
+$$
+
+Define the original contraction (rows indexed by $\operatorname{Fin}a\times\operatorname{Fin}d$ and columns by $\operatorname{Fin}b\times\operatorname{Fin}c$)
+
+$$
+F=\sum_{r=0}^2M_r\otimes N_r:
+\mathbb C^b\otimes\mathbb C^c\longrightarrow\mathbb C^a\otimes\mathbb C^d.
+$$
+
+If $\lambda\in\mathbb R$ satisfies $\lambda>0$ and
+
+$$
+F^*F=\lambda I_{bc},\qquad 3a<2b,
+$$
+
+then
+
+$$
+2c\le d.
+$$
+
+The original triples need not be independent, whitened, or normalized. There are no additional dimension-positivity, ordering, or quadratic cone hypotheses; all natural dimensions are quantified, including zero-dimensional cases.
+:::
+
+::: proof
+If $c=0$, the conclusion is $0\le d$. Assume $c>0$ below; the strict threshold gives $b>0$. If $a=0$ or $d=0$, every column of $F$ is zero, contradicting $F^*F=\lambda I_{bc}$; $b=0$ violates the threshold. Thus no zero-dimensional case has been silently removed. In the stronger range $2a<b$, [@thm-bridge-scalar-gram-obstruction] below already gives the stronger conclusion $3c\le d$. We explain the general mechanism for $2c\le d$.
+
+Express the same $F$ as an exact tensor sum with the fewest terms, $\sum_{r<k}A_r^{(0)}\otimes D_r$, where $0\le k\le3$. A dependence on either factor side lets us solve for one factor and absorb its term into the others, reducing the width. Both factor families in a minimal decomposition are therefore complex-linearly independent. Set $A_r=A_r^{(0)}/\sqrt\lambda$, obtaining
+
+$$
+\widehat F=\frac{F}{\sqrt\lambda}=\sum_{r<k}A_r\otimes D_r,\qquad
+\widehat F^*\widehat F=I_{bc}.
+$$
+
+Independence and normalization have been derived from the original premise.
+
+For $c>0$, independence of the right factors makes the normalized Hilbert–Schmidt Gram
+
+$$
+H_{rs}=\frac1c\Tr(D_r^*D_s)
+$$
+
+positive definite: $z^*Hz=c^{-1}\|\sum_r z_rD_r\|_{\mathrm{HS}}^2>0$ for nonzero $z$. Hence $H=B^*B$ for an invertible $B$. Apply paired coefficient whitening:
+
+$$
+\begin{aligned}
+X_r&=\sum_sB_{rs}A_s,\\
+Y_r&=\sum_s(B^{-T})_{rs}D_s,\\
+B^{-T}&=(B^T)^{-1}.
+\end{aligned}
+$$
+
+The inverse transpose is required by the bilinear coefficient pairing of the tensor sum: $B^TB^{-T}=I_k$ ensures $\sum_rX_r\otimes Y_r=\widehat F$. This preserves the normalized contraction and factor independence. Taking the partial trace of $\widehat F^*\widehat F=I_b\otimes I_c$ over the second factor and dividing by $c$ gives
+
+$$
+\begin{aligned}
+\sum_{r,s}H_{rs}A_r^*A_s&=I_b,\\
+\sum_rX_r^*X_r&=I_b.
+\end{aligned}
+$$
+
+The coefficient-first stack $S:\mathbb C^b\to\mathbb C^k\otimes\mathbb C^a$ therefore satisfies $S^*S=I_b$, so it is injective and $b\le ka$. Widths $k=0,1$ both contradict $b>a$.
+
+For the remaining widths $k=2,3$, define the compression and the Gram defect for each pair of right indices:
+
+$$
+\begin{aligned}
+\Phi_X(T)&=S^*(T\otimes I_a)S
+=\sum_{r,s}T_{rs}X_r^*X_s,\\
+(G_{\ell m})_{rs}&=(Y_r^*Y_s)_{\ell m},\\
+R_{\ell m}&=G_{\ell m}-\delta_{\ell m}I_k
+\qquad(0\le\ell,m<c).
+\end{aligned}
+$$
+
+Here $\delta$ is the Kronecker symbol: every complex right-Gram defect has the form $R=G-\delta I$. Expand $\widehat F^*\widehat F=I_{bc}$, take the $(\ell,m)$ entry in the second factor, and subtract $\delta_{\ell m}\sum_rX_r^*X_r$. This gives $\Phi_X(R_{\ell m})=0$.
+
+For $k=2$, $\operatorname{rank}S=b$. Two product-rank lower bounds give
+
+$$
+\operatorname{rank}\Phi_X(T)\ge a\operatorname{rank}T-2(2a-b).
+$$
+
+A nonzero $T$ with zero compression would have $\operatorname{rank}T\ge1$, forcing $2b\le3a$, a contradiction. Thus the compression kernel is zero, every $R_{\ell m}=0$, and $Y_r^*Y_s=\delta_{rs}I_c$. For $c=1$, $Y_0,Y_1$ are two orthogonal unit vectors in $\mathbb C^d$. For general $c$, the maps $Y_0,Y_1:\mathbb C^c\to\mathbb C^d$ are isometries with mutually orthogonal $c$-dimensional ranges. Their concatenation $[\,Y_0\ Y_1\,]$ has $2c$ orthonormal columns, hence $2c\le d$.
+
+For $k=3$, we have derived the independence and stack injectivity required by [@thm-bridge-common-coefficient-plane]. Its common plane $L$ works for the entire Hermitian compression kernel, including a zero kernel. A complex defect $R=G-\delta I_3$ need not be Hermitian, and blocks with $\ell\ne m$ cannot be omitted. Since $\Phi_X(R^*)=\Phi_X(R)^*$, both Hermitian parts
+
+$$
+\begin{aligned}
+R_{\mathrm R}&=\frac{R+R^*}{2},\\
+R_{\mathrm I}&=\frac{R-R^*}{2i},\\
+R&=R_{\mathrm R}+iR_{\mathrm I}.
+\end{aligned}
+$$
+
+lie in the kernel. The same $L$ annihilates the full pairings of both parts of every block, so $u^*R_{\ell m}v=0$ for all $\ell,m$ and $u,v\in L$. These are Hermitian parts formed using the adjoint, not entrywise real and imaginary parts.
+
+Choose an orthonormal basis matrix $V\in M_{3\times2}(\mathbb C)$ for $L$ and set
+
+$$
+W=[\,Y_0\ Y_1\ Y_2\,],\qquad C=V\otimes I_c.
+$$
+
+All the block relations, together with $V^*V=I_2$, give
+
+$$
+\begin{aligned}
+(WC)^*(WC)&=I_{2c},\\
+2c&=\operatorname{rank}(WC)\le d.
+\end{aligned}
+$$
+
+For $c=1$, the two columns of $WC$ are orthogonal unit vectors; for general $c$, its two groups of columns span mutually orthogonal $c$-dimensional ranges. This conclusion uses every block of the tensor Gram, rather than following from the ambient inequality $bc\le ad$ alone. Minimal decomposition, whitening, stacking, and compression are proof auxiliaries; the original rows $(a,d)$ and columns $(b,c)$ of $F$ remain fixed. The full proof is checked by the Lean kernel.
+:::
 
 ::: {.theorem #thm-bridge-scalar-gram-obstruction title="A scalar-Gram obstruction for width-three bridge flows" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction"}
 Let $a,b,c,d\in\mathbb N$ with $c>0$ and $b>2a$. For any three $a\times b$ complex matrices $M_r$, three $d\times c$ complex matrices $N_r$, and positive real scalar $\lambda$, if
@@ -371,7 +562,7 @@ This counterexample lies exactly on the seam $ad=bc$, where both scalar-Gram req
 
 The Schmidt-weight and entropy discussion above is a spectral interpretation for a normalized pure state; the theorem itself states only a necessary dimension condition. This obstruction concerns the specified grouping of three complex Kronecker summands and exact spectral flatness. It supplies no error bound for approximate flatness and establishes no claim about general tensor networks, physical realization, or continuum holography.
 
-Does tightening the ratios to $b\le2a$ and $d\le2c$ guarantee an exactly flat spectrum? The preceding $b>2a$ obstruction no longer applies, but another restriction remains. Fix the factor sizes at $3\times5$ and $5\times3$, retaining the original row and column grouping.
+Does tightening the ratios to $b\le2a$ and $d\le2c$ guarantee an exactly flat spectrum? The older $b>2a$ obstruction no longer applies, but [@thm-bridge-native-rectangular-bound] can still exclude it. We retain the existing fixed-size result and its source below; it is also a specialization of the general bound at $(3,5,3,5)$.
 
 ::: {.theorem #thm-bridge-three-five-flat-spectrum-obstruction title="A positive scalar-Gram obstruction at $(3,5,3,5)$" lean="D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.positive_scalar_obstruction"}
 For arbitrary triples of complex matrices $M_r\in M_{3\times5}(\mathbb C)$ and $N_r\in M_{5\times3}(\mathbb C)$ ($r=0,1,2$), and every real $\lambda>0$, let
@@ -386,76 +577,7 @@ Then $F^*F\ne\lambda I_{15}$, where $I_{15}$ is indexed by $\operatorname{Fin}5\
 :::
 
 ::: {.proof #pf-bridge-three-five-flat-spectrum-obstruction}
-Suppose instead that $F^*F=\lambda I_{15}$. Express the same $F$ as a Kronecker sum with the fewest possible terms, say $k\le3$, with factors $A_r,D_r$. If either factor family is linearly dependent, a relation with a nonzero coefficient lets us solve for one factor and absorb its term into the others, reducing the number of terms without changing $F$. Thus both families in a minimal decomposition are complex-linearly independent. Multiplying every $A_r$ by $1/\sqrt\lambda$ then gives a contraction $G=F/\sqrt\lambda$ with $G^*G=I_{15}$; nonzero scaling preserves independence. Minimal width, independence, and normalization are consequences of the assumed Gram equation, not additional hypotheses of the theorem.
-
-For $k=0$, we have $G=0$, whose Gram matrix cannot be the identity. For $k=1$, the $3\times5$ factor $A_0$ has a nonzero kernel vector $x$. For any nonzero $y\in\mathbb C^3$, the equation $(A_0\otimes D_0)(x\otimes y)=0$ contradicts the injectivity required by $G^*G=I_{15}$.
-
-For $k=2,3$, we also adjust the metric on the coefficient directions. Set
-
-$$
-H_{rs}=\frac13\Tr(D_r^*D_s).
-$$
-
-This is the Hilbert–Schmidt Gram matrix of the family $D_r$. Independence makes it positive definite, so $H=B^*B$ for an invertible $B$. Apply paired coefficient changes
-
-$$
-\begin{aligned}
-X_r&=\sum_s B_{rs}A_s,\qquad
-Y_r=\sum_s(B^{-T})_{rs}D_s,\\
-G&=\sum_rX_r\otimes Y_r,\qquad
-\sum_rX_r^*X_r=I_5.
-\end{aligned}
-$$
-
-Here $B^{-T}=(B^T)^{-1}$, so $B^TB^{-T}=I_k$ preserves the two-term or three-term contraction. The last identity follows by taking the partial trace of $G^*G=I_{15}$ over the second tensor factor and dividing by $3$. The changes preserve independence of both families. Stack the $X_r$ vertically, with the coefficient index first, to obtain $S:\mathbb C^5\to\mathbb C^k\otimes\mathbb C^3$. Then $S^*S=I_5$, so $S$ is injective.
-
-Expanding $G^*G=I_{15}$, define a complex coefficient block for each $\ell,m\in\{0,1,2\}$ by
-
-$$
-\begin{aligned}
-(T_{\ell m})_{rs}&=(Y_r^*Y_s)_{\ell m}-\delta_{rs}\delta_{\ell m},\\
-\Phi_X(T)&=S^*(T\otimes I_3)S
-=\sum_{r,s}T_{rs}X_r^*X_s.
-\end{aligned}
-$$
-
-Every block satisfies $\Phi_X(T_{\ell m})=0$. For $k=3$, this is precisely the source definition [`compression`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression) and identity [`compression_eq_sum`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression_eq_sum). As before, $\delta$ is the Kronecker symbol.
-
-For $k=2$, the stack $S$ is a $6\times5$ matrix of rank $5$. Applying the lower bound for the rank of a matrix product twice to $S^*(T\otimes I_3)S$ gives
-
-$$
-\operatorname{rank}\Phi_X(T)\ge3\operatorname{rank}T-2.
-$$
-
-Consequently, $\Phi_X(T)=0$ forces $\operatorname{rank}T=0$, since rank is an integer, hence $T=0$. All $T_{\ell m}$ vanish, giving $Y_r^*Y_s=\delta_{rs}I_3$. The horizontal concatenation $[\,Y_0\ Y_1\,]$ would therefore be a $5\times6$ matrix with six orthonormal columns, which is impossible.
-
-For $k=3$, the compression kernel need not vanish. We use [`common_plane`](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.common_plane), whose precise hypotheses are complex linear independence of the three $3\times5$ matrices $X_r$ and injectivity of their coefficient-first stack $S$, both derived above. It supplies a complex two-dimensional subspace $L\subset\mathbb C^3$ that is simultaneously neutral for the entire Hermitian compression kernel:
-
-$$
-T=T^*,\quad\Phi_X(T)=0
-\quad\Longrightarrow\quad
-u^*Tv=0\quad(u,v\in L).
-$$
-
-The same $L$ works for every $T$, and the full complex pairing vanishes. This includes a zero Hermitian compression kernel, for which any coefficient two-plane meets the requirement. Choosing a different plane for each block would not suffice, and this fixed-dimension result cannot be applied directly to $k=2$.
-
-A complex block $T_{\ell m}$ need not itself be Hermitian; in particular, checking only diagonal blocks would miss $\ell\ne m$. Since $\Phi_X(T^*)=\Phi_X(T)^*$, both Hermitian parts
-
-$$
-T_{\mathrm R}=\frac{T+T^*}{2},\qquad
-T_{\mathrm I}=\frac{T-T^*}{2i},\qquad
-T=T_{\mathrm R}+iT_{\mathrm I}
-$$
-
-belong to the compression kernel. The same $L$ annihilates the pairings of both parts, hence $u^*T_{\ell m}v=0$ for all $\ell,m$. These parts are not the entrywise real and imaginary parts.
-
-Choose an orthonormal basis of $L$ and place its vectors in a $3\times2$ matrix $V$, so $V^*V=I_2$. Concatenate $W=[\,Y_0\ Y_1\ Y_2\,]\in M_{5\times9}(\mathbb C)$ and set $C=V\otimes I_3\in M_{9\times6}(\mathbb C)$. All the block pairings above give
-
-$$
-(WC)^*(WC)=C^*W^*WC=I_6.
-$$
-
-Thus $WC$ would have six orthonormal compressed columns but only five rows: $6\le\operatorname{rank}(WC)\le5$, a contradiction. The coefficient changes, stacks, and compressions are auxiliary steps in the proof; the original row/column bipartition of $F$ remains fixed. The full proof is checked by the Lean kernel.
+Suppose $F^*F=\lambda I_{15}$. Since $3a=9<10=2b$, [@thm-bridge-native-rectangular-bound] requires $2c=6\le d=5$, a contradiction. Here the general proof is the impossibility of fitting two orthogonal three-dimensional ranges into a five-dimensional space; the original fixed-size [common_plane](lean:D5/S3/Quantum/Algebra/CommonCoefficientPlane.common_plane) also supplies the common coefficient plane used here. This result retains its separate source [positive_scalar_obstruction](lean:D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.positive_scalar_obstruction). The full proof is checked by the Lean kernel.
 :::
 
 ::: {.example #ex-bridge-three-five-flat-spectrum title="All eight premises hold: rank fifteen without a flat spectrum at $(3,5,3,5)$"}
@@ -539,6 +661,7 @@ Let $m \in \mathbb{N}$, and let $\psi, \varphi : \mathrm{Word}\,(3 + m) \to \mat
 $$
 \operatorname{rawPrefix}(3, m, \varphi) = \operatorname{rawPrefix}(3, m, \psi) \iff \exists z \in \mathbb{C},\; \|z\| = 1 \;\land\; \varphi = z \cdot \psi.
 $$
+
 :::
 
 ::: proof
