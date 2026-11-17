@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "8a9135753f8e966382379c101b3934b577c07b4c",
-  "pinned_at": "2026-11-17T09:29:42Z",
+  "commit": "2e46b890e7befe502497de7e253e062ab7b9b392",
+  "pinned_at": "2026-11-17T11:21:04Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1732,6 +1732,14 @@
       "statement_id": "sha256:804deaf76d19d115e9674a9ff4fb54d294112b6294fd125432c2fb4823a4d433",
       "line": 845,
       "signature": "theorem exists_sumsq_decomposition (k : ℕ) (A : ℝ[X]) (hAe : IsEven (A.map (algebraMap ℝ ℂ))) (hAd : A.natDegree ≤ 2 * k) (hA : ∀ x ∈ Set.Icc (-1 : ℝ) 1, 0 ≤ A.eval x) : ∃ B C : ℝ[X], A = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1)"
+    },
+    "D5/S3/ContinuousObservables/LaurentLoopFactorization.haah_factorization": {
+      "module": "D5/S3/ContinuousObservables/LaurentLoopFactorization",
+      "name": "D5.S3.ContinuousObservables.LaurentLoopFactorization.haah_factorization",
+      "kind": "theorem",
+      "statement_id": "sha256:a07b93bd0139be9f4210b274bd361d788d26ccbba926022aa674919874f96daa",
+      "line": 720,
+      "signature": "theorem haah_factorization : (∀ Ps : List M₂, (∀ P ∈ Ps, RankOneProjector P) → InClass Ps.length (Ps.map primitive).prod) ∧ ∀ (n : ℕ) (C : ℤ →₀ M₂), (∀ j : ℤ, (n : ℤ) < |j| ∨ j % 2 ≠ (n : ℤ) % 2 → C j = 0) → (C n ≠ 0 ∨ C (-(n : ℤ)) ≠ 0) → CircleSU (ofCoefficients C) → ∃! r : M₂ × List M₂, Factorization n (ofCoefficients C) r"
     },
     "D5/S3/ContinuousObservables/PhaseSynthesis.exists_phase_factorization": {
       "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
