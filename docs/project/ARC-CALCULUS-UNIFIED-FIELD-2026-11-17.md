@@ -8,7 +8,7 @@
 
 每条结论带一个标签：`手工推导`（本文给出完整证明）、`文献结果`（已发表定理，给出作者、年份与前提）、`MODEL`（建模选择或读法）、`OPEN`（未证明）。标签不升级；数值复算不是证明。
 
-本文不从零推出物理，也不以“尚未证明宇宙如此”代替分析。每条结论都写明所用前提。本文没有新增 Lean 验证结果；多数单条结论在格点规范理论、雷吉演算或李群表示论中是经典结果，本文的工作是把它们接到比较公理的条款与弦—矢高语言上，并指出书稿中哪些说法超出了证据。**文献原文除 Chamseddine–Connes 1997 的摘要外均未核对**，引用按通行表述给出，见第 8 节。
+本文不从零推出物理，也不以“尚未证明宇宙如此”代替分析。每条结论都写明所用前提。本文没有新增 Lean 验证结果；多数单条结论在格点规范理论、雷吉演算或李群表示论中是经典结果，本文的工作是把它们接到比较公理的条款与弦—矢高语言上，并指出书稿中哪些说法超出了证据。**文献原文除 Chamseddine–Connes 1997 的摘要外均未核对**，引用按通行表述给出，见第 12 节。
 
 记号沿用 R1：公平元 $u$（$uu^*=u^*u=\mathbf 1$），$S=\tfrac12(u+u^*)$，$A=\tfrac12(u-u^*)$，矢高 $v=\mathbf 1-S$，割弦 $\Delta=u-\mathbf 1$，$\Delta^*\Delta=2v$。读数 $\varphi$ 指 $M_N(\mathbb C)$ 上的归一迹 $\varphi(X)=\tfrac1N\operatorname{tr}X$，$\lVert X\rVert_\varphi^2=\varphi(X^*X)$。
 
@@ -34,9 +34,9 @@
 | A14 | §39.10.3 第 126–158 行，第 94 行 | 四条路径“锁死 $d=3$”；$d\ge4$ “自动劈裂回双三维场”；三锚定理锁定 $N_c=3$ | `手工推导`＋`文献结果`＋`LEAN ✓` | 各处的“3”是同一个不变量 | $\mathfrak{so}(5)$、$\mathfrak{so}(6)$ 是单李代数，只有 $d=4$ 分裂；书中第 152 行关于四维的那句话本身成立，偏强的是小标题把劈裂写到 $d\ge4$。空间的 3 是实维数，色的 3 是复维数（$\dim\mathfrak{su}(3)=8$），布洛赫的 3 是 $\dim\mathfrak{su}(2)$。正交 4-标架满足条款 II–IV 与正性而秩为 4（F14）；§39.10 没有从比较公理推出封顶，这个反例属于附录 E 的台账，不针对该节 |
 | A15 | §39.9.2 第 46–74 行 | `1D—2D—3D` 对应 $\mathrm U(1)$、$\mathrm{SU}(2)$、$\mathrm{SU}(3)$ | `MODEL`＋`LEAN ✓` | 阶梯在 3 处停止 | 停止来自 A14 的封顶假设；$\mathrm{SU}(4)$ 不被任何所引定理排除 |
 
-以下各条所指的措辞已在书稿相应位置改正：A2 中收敛定理的前提，A6 中的“导出”，A7，A9 中的定理链接，A10，A12，A13，A14 中的小标题与 $d\ge5$ 的括注。表中“书中论断”一栏记录的是改正前的说法。其余各条已按第 11 节 D1–D10 的建议写入书稿；A15 依赖 A14 的封顶假设，没有单独的修订项，§39.10 现已把封顶写明为本书的原理（D9）。
+以下各条所指的措辞已在书稿相应位置改正：A2 中收敛定理的前提，A6 中的“导出”，A7，A9 中的定理链接，A10，A12，A13，A14 中的小标题与 $d\ge5$ 的括注。表中“书中论断”一栏记录的是改正前的说法。其余各条已按第 15 节 D1–D10 的建议写入书稿；A15 依赖 A14 的封顶假设，没有单独的修订项，§39.10 现已把封顶写明为本书的原理（D9）。
 
-§32.5 的统一场论断都已标为 `MODEL` 并把连续场论归入文献注记，没有发现措辞强于证据之处；该节实验卡的数值 $57.9^\circ$ 复算无误（F4）。§32.6 只通读了三根诊断轴与两个文献注记框，同样已标 `MODEL` 与 `文献结果`；八大纲领总表没有逐格审计（见第 8 节）。
+§32.5 的统一场论断都已标为 `MODEL` 并把连续场论归入文献注记，没有发现措辞强于证据之处；该节实验卡的数值 $57.9^\circ$ 复算无误（F4）。§32.6 只通读了三根诊断轴与两个文献注记框，同样已标 `MODEL` 与 `文献结果`；八大纲领总表没有逐格审计（见第 12 节）。
 
 ### 1.2 中间假设表（仿附录 E）
 
@@ -152,7 +152,7 @@ $J=1$ 时两端都是 $P_{i,0}$；右乘 $V_{i,J}P_{i,J}V_{i,J}^{-1}$ 时，$V_{
 
 条款 IV 在附录 E 的定义里只对两两可比的三点提出。在三角形面上，上表第三行是字面意义；在没有对角比较的小方格上，它指的是把同一条件（面和乐为 $\mathbf 1$）搬到四点闭环。
 
-$\varphi$ 忠实，所以 $S_W=0$ 当且仅当每个面和乐为 $\mathbf 1$。此时是否为纯规范取决于面是否填满每个圈（R18）：圆盘上是（脚本由树势重建链变量）；环面上不是，一条缝上的链变量取 $-1$ 时作用量为零而绕行和乐为 $-1$。这两点在所钉提交上有冻结定理：弦图上 `IsChordal.exists_gain_potential`（附录 E 已引用），$\mathbb Z/2$ 系数的周期网格上 `PeriodicGridHolonomy.flat_exact_iff` 与 `horizontal_seam_counterexample`（书稿尚未引用，见第 6 节）。
+$\varphi$ 忠实，所以 $S_W=0$ 当且仅当每个面和乐为 $\mathbf 1$。此时是否为纯规范取决于面是否填满每个圈（R18）：圆盘上是（脚本由树势重建链变量）；环面上不是，一条缝上的链变量取 $-1$ 时作用量为零而绕行和乐为 $-1$。这两点在所钉提交上有冻结定理：弦图上 `IsChordal.exists_gain_potential`（附录 E 已引用），$\mathbb Z/2$ 系数的周期网格上 `PeriodicGridHolonomy.flat_exact_iff` 与 `horizontal_seam_counterexample`（书稿尚未引用，见第 9 节）。
 
 读法（`MODEL`）：规范场的运动学是“相邻可比、条款 IV 不强制”的比较结构，威尔逊作用量是条款 IV 偏差的矢高总和。权重 $e^{-S_W}$、测度与连续极限都不在这条读法之内（`U4`）。
 
@@ -271,7 +271,127 @@ $$
 
 其中 $v(U^2)=2v(2-v)$ 是 R20 第 1 款的倍角公式。转角 $2\pi$ 时旋量矢高取最大值 $2$ 而向量矢高为 $0$：这是 $720^\circ$ 双覆叠在矢高读数上的形式。
 
-## 6. 所钉提交上的冻结声明
+## 6. 反常相消与色数
+
+### 约定
+
+一代左手外尔场，规范群 $\mathrm{SU}(N_c)\times\mathrm{SU}(2)_L\times\mathrm U(1)_Y$，$Q=T_3+Y$：
+
+$$
+Q_L:(\mathbf N_c,\mathbf 2,y_Q),\quad u^c:(\overline{\mathbf N}_c,\mathbf 1,y_u),\quad d^c:(\overline{\mathbf N}_c,\mathbf 1,y_d),\quad L:(\mathbf 1,\mathbf 2,y_L),\quad e^c:(\mathbf 1,\mathbf 1,y_e).
+$$
+
+书中 §39.11.2 的赋值是 $y_u=-Q_u$，$y_d=-Q_d$，$y_L=-\tfrac12$，$y_e=1$。不含右手中微子，或只含超荷为 $0$ 的全规范单态 $\nu^c$（与书中第 59 行的约定一致；它不进入任何反常）。基础与反基础表示的邓肯指标取 $\tfrac12$，四个微扰反常系数（各差一个正的归一常数）为
+
+$$
+\begin{aligned}
+\mathcal A_{c}&=2y_Q+y_u+y_d &&[\mathrm{SU}(N_c)]^2\mathrm U(1)_Y\ (N_c\ge2),\\
+\mathcal A_{w}&=N_cy_Q+y_L &&[\mathrm{SU}(2)_L]^2\mathrm U(1)_Y,\\
+\mathcal A_{g}&=2N_cy_Q+N_cy_u+N_cy_d+2y_L+y_e &&\mathrm{grav}^2\,\mathrm U(1)_Y,\\
+\mathcal A_{3}&=2N_cy_Q^3+N_cy_u^3+N_cy_d^3+2y_L^3+y_e^3 &&[\mathrm U(1)_Y]^3 .
+\end{aligned}
+$$
+
+$[\mathrm{SU}(N_c)]^3$ 由两份 $\mathbf N_c$ 与两份 $\overline{\mathbf N}_c$ 相消（$N_c=2$ 时本来就没有三次卡西米尔），$[\mathrm{SU}(2)_L]^3$ 恒为零，含单个非阿贝尔生成元的混合项因生成元无迹为零，故上面四式是全部微扰条件。符号与归一同 §39.11.2 和通行文献：$N_c=3$、$(y_Q,y_u,y_d,y_L,y_e)=(\tfrac16,-\tfrac23,\tfrac13,-\tfrac12,1)$ 使四式全为零。
+
+### F17 解集是三条直线（`手工推导`；$N_c=3$ 时为 `文献结果`）
+
+设 $\mathbb K$ 是特征 $0$ 的域，$N_c\in\mathbb K$，$N_c\ne0$。则 $\mathcal A_c=\mathcal A_w=\mathcal A_g=\mathcal A_3=0$ 当且仅当 $(y_Q,y_u,y_d,y_L,y_e)$ 落在下列三条过原点的直线之一上：
+
+$$
+\text{(A)}\ a\bigl(1,-(N_c+1),N_c-1,-N_c,2N_c\bigr),\qquad
+\text{(B)}\ a\bigl(1,N_c-1,-(N_c+1),-N_c,2N_c\bigr),\qquad
+\text{(C)}\ (0,b,-b,0,0).
+$$
+
+(A) 与 (B) 只差 $u^c\leftrightarrow d^c$ 的标签（两者规范量子数相同）；(C) 中夸克二重态与轻子都不带超荷。
+
+证明。$\mathcal A_c,\mathcal A_w$ 给出 $y_d=-2y_Q-y_u$，$y_L=-N_cy_Q$；代入 $\mathcal A_g$ 得 $y_e=2N_cy_Q$（这一步不需要除以 $N_c$）。记 $t=y_u+y_Q$，则 $y_u=t-y_Q$，$y_d=-t-y_Q$，
+
+$$
+\mathcal A_3=2N_cy_Q^3+N_c\bigl(-2y_Q^3-6y_Qt^2\bigr)-2N_c^3y_Q^3+8N_c^3y_Q^3=6N_c\,y_Q\,(N_cy_Q-t)(N_cy_Q+t).
+$$
+
+$6N_c\ne0$（这里用到特征不为 $2,3$），故 $y_Q=0$（得 (C)），或 $t=-N_cy_Q$（得 (A)），或 $t=N_cy_Q$（得 (B)）。反之三条直线逐项代入为零。$\square$
+
+脚本另在 $\mathbb Q(n)$ 上算字典序格罗布纳基，最后一个元素是 $y_Q(y_u+y_Q-ny_Q)(y_u+y_Q+ny_Q)$，其余元素对 $(y_L,y_e,y_d)$ 是一次的，与上面的消元一致。
+
+边界情形。
+
+1. 四个条件彼此独立：$N_c=3$ 时 $(\tfrac16,-\tfrac16,-\tfrac16,-\tfrac12,1)$ 使三个线性条件为零而 $\mathcal A_3=\tfrac34$；$(1,-1,-1,-3,54^{1/3})$ 使 $\mathcal A_c=\mathcal A_w=\mathcal A_3=0$ 而 $\mathcal A_g=54^{1/3}-6$。后者是实数例；$N_c=3$ 时满足 $\mathcal A_c=\mathcal A_w=\mathcal A_3=0$ 的有理点构成射影三次曲线 $y_e^3=72y_Q^3+36y_Q^2y_u+18y_Qy_u^2$，已知的有理点（直线 (A)、(B)、(C) 上的点）处的切线都只回到自身，是否有 $\mathcal A_g\ne0$ 的有理点没有查明。
+2. $N_c=1$ 时没有 $\mathcal A_c$，解集更大：$(1,1,-1,-1,0)$ 满足其余三条而不在三条直线上。所以物理陈述的前提是 $N_c\ge2$；形式陈述对一切 $N_c\ne0$ 成立，只是 $N_c=1$ 时多加了一个物理上不存在的条件。
+3. 若右手中微子的超荷 $y_\nu$ 可以不为零，$\mathcal A_g,\mathcal A_3$ 各多出 $y_\nu$、$y_\nu^3$，解集不再是三条直线：标准超荷加 $B-L$ 给出 $(\tfrac12,-1,0,-\tfrac32,2)$、$y_\nu=1$，四个条件都成立而不在三条直线上。所以“无右手中微子或其超荷为 $0$”是定理的前提，不是可省的约定。
+4. $N_c=2$ 时色群是 $\mathrm{SU}(2)$，$\mathcal A_c$ 的写法不变；色 $\mathrm{SU}(2)$ 的威滕条件计色二重态：每代 $Q_L$ 两份、$u^c,d^c$ 各一份，共 $4$ 个，为偶数，不额外约束。
+
+文献。Minahan–Ramond–Warner, *Phys. Rev. D* **41**, 715 (1990), DOI `10.1103/PhysRevD.41.715` 的摘要写明：不提希格斯粒子，标准模型费米子的反常相消（含混合引力反常）给出两种可能的超荷赋值，其一为标准赋值；Geng–Marshak 的回复（*Phys. Rev. D* **41**, 717）解释原文为何排除了 15 个态上的那组 “bizarre” 赋值。原文是 Geng–Marshak, *Phys. Rev. D* **39**, 693 (1989), DOI `10.1103/PhysRevD.39.693`，摘要写明最小外尔表示及其荷由四维三个已知的手征规范反常条件唯一确定。以上只核对了书目记录与摘要；“另一组就是 (C)”是按“两种赋值、其一为标准”与 F17 所作的对应，没有对原文逐式核对。一般 $N_c$：Bär–Wiese, *Nucl. Phys. B* **609**, 225 (2001), arXiv:`hep-ph/0105258` 的摘要写明威滕全局反常要求 $N_c$ 为奇数、三角反常相消决定随 $N_c$ 变化的夸克电荷、$\pi^0\to\gamma\gamma$ 的宽度不正比于 $N_c^2$；Shrock, *Phys. Rev. D* **53**, 6465 (1996), arXiv:`hep-ph/9512430` 讨论含右手中微子的 $N_c$ 推广（只读了摘要与引言）；Chow–Yan, *Phys. Rev. D* **53**, 5105 (1996), arXiv:`hep-ph/9512243` 用反常相消固定的电荷比讨论大 $N_c$ 计数（只读了摘要）。威滕全局反常：Witten, *Phys. Lett. B* **117**, 324 (1982)，只经二手文献核对其“二重态个数为偶数”的表述。
+
+所钉提交与 `dev` 上，以 anomaly、hypercharge、Weyl、colour/color、Witten 检索 `D5`，没有反常相消或超荷的冻结声明（含 anomaly 的 `BcGhostAnomaly` 等是 bc 鬼场与顶点算子代数的 Virasoro 反常，与此无关）。
+
+### F18 色数何时被定出（`手工推导`；物理读法为 `文献结果`）
+
+在 (A) 上取 $y_L=-\tfrac12$，即 $a=\tfrac1{2N_c}$：$Q_u=\tfrac{N_c+1}{2N_c}$，$Q_d=-\tfrac{N_c-1}{2N_c}$，$Q_\nu=0$，$Q_e=-1$，即书中的曲线 I。
+
+1. **只固定夸克超荷。** 设 $N_c\ge2$ 为整数，$(y_Q,y_u,y_d)=(\tfrac16,-\tfrac23,\tfrac13)$，$y_L,y_e$ 任意。则 $\mathcal A_c=0$ 自动成立；$\mathcal A_w,\mathcal A_g$ 给出 $y_L=-\tfrac{N_c}6$、$y_e=\tfrac{N_c}3$；此时 $\mathcal A_3=\tfrac{N_c(N_c-3)(N_c+3)}{36}$。所以四个条件成立当且仅当 $N_c=3$，且 $y_L=-\tfrac12$、$y_e=1$。起作用的是 $\mathcal A_w,\mathcal A_g,\mathcal A_3$，决定 $N_c$ 的是三次条件。由 F17 也可见：$y_Q\ne0$ 排除 (C)，(A) 给 $N_c=3$，(B) 给 $N_c=-3$。
+2. **固定轻子归一与 $y_Q$。** $y_L=-\tfrac12$、$y_Q=\tfrac16$ 时单是 $\mathcal A_w=0$ 就给出 $N_c=3$（F12 第 2 款的线性条件）。只固定 $y_Q=\tfrac16$ 而让右手夸克与轻子都自由时，(A) 对每个 $N_c$ 都有解，色数不被定出。
+3. **对每个 $N_c\ge2$ 成立**（(A) 上，$y_L=-\tfrac12$）：四个反常为零；一代总电荷 $N_c(Q_u+Q_d)+Q_\nu+Q_e=0$；$Q_u-Q_d=1$；电荷是 $\tfrac1{2N_c}$ 的整数倍；$N_c(Q_u^2-Q_d^2)=1$，即 $\pi^0\to\gamma\gamma$ 振幅中通常写作 $N_c(Q_u^2-Q_d^2)$ 的因子与 $N_c$ 无关（物理读法见 Bär–Wiese 2001 的摘要，`文献结果`；本文只核对代数恒等式）。
+4. **威滕条件。** 全局 $\mathrm{SU}(2)_L$ 反常要求二重态总数为偶数（`文献结果`）。每代有 $N_c+1$ 个；$N_{\mathrm{gen}}$ 代时条件是 $(N_c+1)N_{\mathrm{gen}}$ 为偶数。代数为奇数（如三代）时即 $N_c$ 为奇数；代数为偶数时这一条不约束 $N_c$。“每代二重态个数为偶数”是更强的逐代要求，单代账本时两者相同。对 $N_c=2s+1$，$s+1$ 个上型与 $s$ 个下型夸克组成的重子电荷为 $1$，同位旋镜像为 $0$。
+5. **只在 $N_c=3$ 成立：** $Q_u=\tfrac23$；在刚度公设下的 $g_3^2=g_2^2$、$k_Y=\tfrac{N_c+2}{N_c}=\tfrac53$ 与 $\sin^2\theta_W=\tfrac{N_c}{2(N_c+1)}=\tfrac38$。
+6. **(C) 被带电轻子排除。** (C) 上 $y_L=y_e=0$，电子电荷不能是 $-1$。所以在 $N_c\ge2$ 时，实测轻子电荷加四个反常条件选出 (A) 或 (B)，按 $Q_u>0$ 的标签约定即 (A)，此时 $N_c$ 仍不定；再加实测夸克电荷才定出 $N_c=3$。
+
+与 §39.11.2 的关系。书中曲线 I 用的是 (A) 在 $y_L=-\tfrac12$ 处的电荷，“其余三个反常对一切 $N_c$ 恒等全消”对 (A) 成立。第 1 款比 F12 第 2 款多一句：只固定夸克电荷、不固定轻子电荷，四个反常条件同样迫使 $N_c=3$，轻子电荷随之定出，靠的是三次反常而不是曲线交点。这一款仍以电荷为输入，所以 F12 第 3 款“不依赖电荷输入而单独选出 $N_c=3$ 的只有刚度公设下的 $g_3^2=g_2^2$”不变；书稿 D6 段落的相应补句见 D12。
+
+## 7. 矩形网格的和乐分解
+
+### F20 网格分解与列引理（`手工推导`；一般圆盘为 `文献结果`）
+
+记号与 F6 的“矩形网格的归纳”相同（$h_{i,j}$、$w_{i,j}$、$P_{i,j}$、$b_i$、$V_{i,J}$、$\ell_{i,j}$；路径上的链变量按经过次序从左到右相乘，边界从原点出发逆时针绕行）。在任意群中：
+
+1. **列引理：** 对每个 $0\le J\le T$，$\ell_{i,0}\ell_{i,1}\cdots\ell_{i,J-1}=b_i\,h_{i,0}\,V_{i+1,J}\,h_{i,J}^{-1}\,V_{i,J}^{-1}\,b_i^{-1}$；$J=0$ 时两边都是 $\mathbf 1$。
+2. **网格分解：** $W_C=C_{R-1}C_{R-2}\cdots C_0$，$C_i=\ell_{i,0}\cdots\ell_{i,T-1}$：列从右到左，列内从下到上。
+
+证明见 F6；把那里的归纳起点从 $J=1$ 改到 $J=0$，再对列数 $k$ 归纳证 $C_{k-1}\cdots C_0=b_kV_{k,T}(h_{0,T}\cdots h_{k-1,T})^{-1}V_{0,T}^{-1}$（$k=0$ 时两边为 $\mathbf 1$，左乘 $C_k$ 时用 $b_kh_{k,0}=b_{k+1}$），即得可以逐字交给定理证明器的形式（第 10 节）。
+
+次序是陈述的一部分：$3\times2$ 网格上按“列从左到右”相乘得到长度 22 的约化字，边界字长度 10。脚本在自由群中对 $R,T\le7$ 的全部网格核对第 2 款、对 $R\le4$、$T\le5$ 与一切 $J$ 核对第 1 款；随机 $\mathrm{SU}(2)$、$\mathrm{SU}(3)$ 链变量上，直接用矩阵相乘（不经自由群约化）的两端偏差为 $10^{-14}$ 量级。
+
+一般圆盘上的同一分解是非阿贝尔面斯托克斯恒等式；格点形式在格点规范理论中是熟知的组合事实，原始出处没有找到并核对，书中 §34.30.3 把一般情形列为文献结果，这里维持原状。
+
+### F21 由分解得到的界：哪些是现成引理（`手工推导`）
+
+设群 $G$ 带双侧不变伪度量 $d$（Mathlib 的写法是 `[PseudoMetricSpace G] [IsIsometricSMul G G] [IsIsometricSMul Gᵐᵒᵖ G]`，与冻结定理 `IsChordal.exists_approximate_gain_potential` 的前提相同）。
+
+1. $d(ab,\mathbf 1)\le d(a,\mathbf 1)+d(b,\mathbf 1)$：三角不等式加 `dist_mul_right`。
+2. $d(gxg^{-1},\mathbf 1)=d(x,\mathbf 1)$：`dist_mul_left` 与 `dist_mul_right`。
+3. 与 F20 合起来：$d(W_C,\mathbf 1)\le\sum_{i<R}\sum_{j<T}d(P_{i,j},\mathbf 1)$。
+4. $C^*$-代数的酉元取 $d(u,v)=\lVert u-v\rVert$ 时左右乘是等距（`CStarRing.norm_coe_unitary_mul`、`CStarRing.norm_mul_coe_unitary`）。$M_N(\mathbb C)$ 带 $\ell^2$ 算子范数是 $C^*$-环，但 `Matrix.instCStarRing` 在所钉 Mathlib 中是 `lemma`，范数实例 `Matrix.instL2OpNormedRing` 只在 `Matrix.Norms.L2Operator` 作用域内是实例；`IsIsometricSMul (unitary A) (unitary A)` 的实例没有找到。弗罗贝尼乌斯范数的酉不变性也没有找到现成引理（`Matrix.frobenius_norm_mul` 只是次乘性）。
+5. 矢高形式 $1-\tfrac1N\operatorname{Re}\operatorname{tr}W_C\le M\sum_p\bigl(1-\tfrac1N\operatorname{Re}\operatorname{tr}P_p\bigr)$，$M=RT$：第 3 款取 $\lVert\cdot\rVert_\varphi$，加 $\lVert U-\mathbf 1\rVert_\varphi^2=2\bigl(1-\tfrac1N\operatorname{Re}\operatorname{tr}U\bigr)$ 与 `sq_sum_le_card_mul_sum_sq`。
+
+第 1、2、4、5 款是现成引理的组合，只有第 3 款经过 F20 才有内容。两处常数是锐的：每格通量都是 $f=10^{-3}$ 的 $\mathrm U(1)$ 构型在 $12$ 格上使第 3 款的比值为 $0.999994$，使 $v_C/(M\sum_pv_p)$ 为 $0.999988$，所以第 5 款的因子 $M$ 不能去掉。$M=1$ 时第 3 款取等号。冻结库中相关的只有 F6、F7 已列的 `PeriodicGridHolonomy`（$\mathbb Z/2$ 系数、交换）、`CovariantCommutator` 与 `GainPotentialStability`；后者在弦图上用消去次序填充，而 $R,T\ge2$ 的网格有无弦四圈，不是弦图，不能由它推出 F20。
+
+## 8. 铰链平面、弦与符号
+
+### F22 铰链平面来自和乐本身（`手工推导`；与雷吉几何的对应为 `文献结果` 与 `MODEL`）
+
+设 $R\in\mathrm{SO}(D)$，$R\ne\mathbf 1$，$\operatorname{rank}(R-\mathbf 1)=2$，即 $R$ 逐点固定一个 $D-2$ 维子空间（分片平直流形中绕铰链的和乐正是这样的转动，Regge 1961，`文献结果`，未核原文）。
+
+1. $\Pi:=\operatorname{im}(R-\mathbf 1)$ 是二维平面，$R$ 在 $\Pi^\perp$ 上为恒等。取 $\Pi$ 的定向与单位生成元 $K$（$K^2=-P_\Pi$），存在唯一 $\delta\in(-\pi,\pi]$ 使 $R=\mathbf 1+\sin\delta\,K+(1-\cos\delta)K^2$；$\operatorname{tr}R-(D-2)=2\cos\delta$。
+2. **偶通道给出无定向平面与 $\cos\delta$：** $S=\tfrac12(R+R^{\mathsf T})=\mathbf 1-(1-\cos\delta)P_\Pi$，矢高 $v=(1-\cos\delta)P_\Pi$。
+3. **奇通道给出定向与符号：** $A=\tfrac12(R-R^{\mathsf T})=\sin\delta\,K$，$\sin\delta=-\tfrac12\operatorname{tr}(KR)$。同一平面上 $\pm90^\circ$ 的两个转动有相同的 $S$ 与弦范数，$-\tfrac12\operatorname{tr}(KR)$ 相反。
+4. **弦与角：** $\lVert R-\mathbf 1\rVert_{\mathrm{op}}=2\lvert\sin\tfrac\delta2\rvert$，$\lVert R-\mathbf 1\rVert_{\mathrm{HS}}=2\sqrt2\,\lvert\sin\tfrac\delta2\rvert$，$\lvert\delta\rvert=2\arcsin\tfrac{\lVert R-\mathbf 1\rVert_{\mathrm{op}}}2=\arccos\bigl(1-\tfrac12\lVert R-\mathbf 1\rVert_{\mathrm{op}}^2\bigr)$，$\lVert R-\mathbf 1\rVert_{\mathrm{op}}^2=2\lVert v\rVert_{\mathrm{op}}$。这些由 $R$ 的本征值 $e^{\pm i\delta}$ 与 $1$ 直接得到。Mathlib 的 `Unitary.norm_argSelfAdjoint`（$\lVert u-1\rVert<2$ 时 $\lVert\operatorname{arg}u\rVert=\arccos(1-\lVert u-1\rVert^2/2)$）与之一致，但不是直接的实例：它要求 $\lvert\delta\rvert<\pi$，还要把 `argSelfAdjoint R` 的范数算成 $\lvert\delta\rvert$。无论哪条路线，这一款都不应作为新定理提出。
+5. **三维的旋子形式与半比较：** 在 $\mathcal{Cl}_{3,0}$ 中 $R$ 的旋子为 $\cos\tfrac\delta2+\sin\tfrac\delta2\,B$，$B$ 是单位简单双矢量，对应的平面就是 $\Pi$。$D=3$ 时每个转动都满足 $\operatorname{rank}(R-\mathbf 1)\le2$。R9 的半比较和乐 $r_{ab}r_{bc}r_{ca}=\cos\tfrac\Omega2+\sin\tfrac\Omega2\,\mathbf Ia$ 的双矢量部分是 $\mathbf Ia$，即以 $a$ 为法向的平面。在嵌入 $\mathbb R^3$ 的多面体曲面上，取凸三面角的三个面外法向为 $a,b,c$，转角等于顶点角亏（F8 第 2 款），转轴是 $\pm n_1$，即第一个面所在的平面（脚本 500 个随机三面角，偏差 $10^{-14}$ 量级）。所以对嵌入的多面体曲面，铰链平面由法向量的比较数据给出；这用到了外在的法向，不是内在数据。
+6. **需要额外条件的地方：** $D\ge4$ 时一般的 $R\in\mathrm{SO}(D)$ 是双转动，$\operatorname{rank}(R-\mathbf 1)=4$，没有铰链平面，旋子双矢量 $\tfrac\alpha2e_{12}+\tfrac\beta2e_{34}$ 不是简单的（$B\wedge B\ne0$），这是附录 E 反例 (c) 的类型（R3）。转角 $(0.7,0.4)$ 时 $R-\mathbf 1$ 的奇异值为 $(0.686,0.686,0.397,0.397)$。矢高读数 $1-\tfrac1D\operatorname{tr}R$ 对双转动照样有定义；雷吉的“铰链上的角亏”读法要求和乐是简单转动。分片平直几何中这由“和乐逐点固定铰链”自动保证；在一般的 $\mathrm{SO}(D)$ 值比较结构中，**绕铰链回路的和乐双矢量是简单的**（等价地 $\operatorname{rank}(h-\mathbf 1)\le2$）是一条额外条件，$D=3$ 时自动成立，$D\ge4$ 时不自动成立。把比较和乐认作度量的列维—奇维塔和乐并要求这条简单性，是 `MODEL` 输入（与附录 E `H8` 同类）。
+
+### F23 弦读法与矢高读法（`手工推导`；连续极限为 `文献结果`；结构区分为 `MODEL`）
+
+1. **精确：** 对简单转动，$\lvert\delta\rvert=2\arcsin(\lVert\Delta\rVert_{\mathrm{op}}/2)=\lVert\Delta\rVert_{\mathrm{op}}+\tfrac1{24}\lVert\Delta\rVert_{\mathrm{op}}^3+\tfrac3{640}\lVert\Delta\rVert_{\mathrm{op}}^5+\cdots$：角的大小是弦长的函数，小弦时与弦长同阶；威尔逊项 $1-\tfrac1N\operatorname{Re}\operatorname{tr}U=\tfrac12\lVert\Delta\rVert_\varphi^2$ 在一切孔径上恰是弦的二次式。用矢高表示时 $\lvert\delta\rvert=\arccos(1-v_\Pi)=\sqrt{2v_\Pi}\,(1+\tfrac{v_\Pi}{12}+\cdots)$，在 $v_\Pi=0$ 处是平方根型；带符号的 $\delta$ 才对生成元光滑。
+2. **精确：符号不可省。** 三个正方形围成的顶点角亏 $+90^\circ$，五个正方形围成的鞍点角亏 $-90^\circ$，两者矢高都是 $1$、弦都是 $\sqrt2$；五个与七个正三角形同理（$\pm60^\circ$，矢高 $\tfrac12$，弦 $1$）。闭多面体曲面上 $\sum_v\delta_v=2\pi\chi$（笛卡尔—欧拉，`文献结果`）。环面上 $\sum_v\delta_v=0$：角亏不全为零时正负两种符号都出现（全为零的平坦多面体环面也存在，`文献结果`，未核）。脚本中 $12\times8$ 的旋转环面三角剖分上 $\sum_v\delta_v$ 为 $10^{-14}$ 量级，正负角亏顶点各 $36$ 个。弦和与矢高和都是正数，看不出这一恒等式。
+3. **加细：** 测地细分二十面体（$V=12,42,162,642,2562$）上角亏和恒为 $4\pi$；弦和为 $12.000,12.519,12.563,12.566,12.566$，趋于 $4\pi$（与角亏和只差三次项）；矢高和为 $6.000,1.871,0.489,0.124,0.031$，按 $1/V$ 趋零。
+4. **标度计数（给定光滑场展开时为 `手工推导`，展开本身见 F3 与 Cheeger–Müller–Schrader 1984，`文献结果`）：** 雷吉项每个铰链 $A_h\delta_h\sim a^{D-2}\cdot a^2=a^D$，铰链数 $\sim a^{-D}$，总和有限。威尔逊项每个小方格 $\beta\cdot O(a^4)$，小方格数 $\sim a^{-D}$，总和 $\sim\beta a^{4-D}\int\operatorname{tr}F^2$；要得到 $\tfrac1{2g^2}\int\operatorname{tr}F^2$，需 $\beta\propto a^{D-4}/g^2$，所以 $\beta$ 与 $a$ 无关当且仅当 $D=4$（此时 $g$ 无量纲）。
+5. **书中示例铰链的闭式：** 四个正四面体共棱，$\delta_h=2\pi-4\arccos\tfrac13$，$\cos\tfrac{\delta_h}2=-\cos\bigl(2\arccos\tfrac13\bigr)=\tfrac79$。于是旋子矢高 $1-\cos\tfrac{\delta_h}2=\tfrac29$，向量矢高 $1-\cos\delta_h=\tfrac{64}{81}$（F8 的 $0.7901$），弦 $2\sin\tfrac{\delta_h}2=\tfrac{8\sqrt2}{9}$，$\sin\delta_h=\tfrac{56\sqrt2}{81}$。
+6. **`MODEL` 部分：** 把“规范项读偶通道、引力项读带符号的转角并以铰链度量加权”当作两类力的结构差异；把比较和乐认作列维—奇维塔和乐；铰链度量权重。上面的代数不推出这些。
+
+小结：铰链平面在比较数据中是割弦 $R-\mathbf 1$ 的像（偶通道给出无定向平面，奇通道给出定向）；嵌入 $\mathbb R^3$ 的多面体曲面由半比较和乐的双矢量部分直接给出；$D\ge4$ 的复形需要“和乐为简单转动”这一条额外条件。“雷吉对弦是一阶、威尔逊对弦是二次”在一切孔径上可以精确表述为上面第 1 款；“雷吉项约等于弦和”只在小角时成立，误差为三次项。
+
+## 9. 所钉提交上的冻结声明
 
 检索方式：在钉版的祖先提交 `4e2a0d3fcca69885dfcf5b56184838554ebb5239` 上对 `D5` 的 `digest` 行按 holonomy、plaquette、gauge、curvature、Regge、deficit、Bianchi、Stokes、Lorentz、Clifford、anomaly、hypercharge、Weinberg、Gauss–Bonnet 等词检索，读取候选文件；表中各声明随后在钉版上逐个复核：`Golden/Frozen/state/<路径>.lean.json` 存在，声明种类为 `theorem`，源文件与检索时相同。
 
@@ -291,9 +411,75 @@ $$
 | `D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences` | 载体固定为 $\mathbb R\times\mathbb R^3$，满足 `P2`、`PB` 的二元运算是正负叉乘 | 维数 3 在假设里（A14） | 已解析 |
 | `D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity` | 实数组的拉格朗日恒等式 | 不含时钟预算（A12） | 已解析 |
 
-在所查范围内没有找到以下内容的冻结声明：小方格矢高与曲率范数的界（F2）、非阿贝尔比安基或斯托克斯界（F5、F6）、雷吉角亏或笛卡尔定理（F8）、反常迹与温伯格角（F12）、单圈跑动（F13）。
+在所查范围内没有找到以下内容的冻结声明：小方格矢高与曲率范数的界（F2）、非阿贝尔比安基或斯托克斯界（F5、F6）、雷吉角亏或笛卡尔定理（F8）、反常迹与温伯格角（F12）、单圈跑动（F13）。在 trureturing `dev` 的 `0def2240fe` 与 `e66cf2eaff` 上以 anomaly、hypercharge、Weyl、colour/color、Witten、grid、plaquette、lasso、Stokes、holonomy 再次检索 `D5`：没有反常相消或超荷的冻结声明（F17–F19），也没有非交换网格的边界分解（F20、F21）；相关的仍只有上表的 `PeriodicGridHolonomy`、`CovariantCommutator` 与 `GainPotentialStability`。
 
-## 7. 新内容与经典内容
+## 10. 形式化候选
+
+下面的陈述与证明计划**没有编译**，没有经过任何内核检查，不对应任何冻结 GID。Mathlib 名称只在 trureturing 工具链所钉的 Mathlib 修订 `56a005855ea17e0b0958f73ec801ae140b0a1679` 上用文本检索核对过：`linear_combination`、`mul_eq_zero`、`Nat.even_add_one`、`Nat.not_even_iff_odd`、`group`、`IsIsometricSMul`、`dist_mul_left`、`dist_mul_right`、`Finset.sum_range_succ`、`CStarRing.norm_coe_unitary_mul`、`CStarRing.norm_mul_coe_unitary`、`sq_sum_le_card_mul_sum_sq`、`Unitary.norm_argSelfAdjoint`、`selfAdjoint.norm_sq_expUnitary_sub_one` 存在；`Matrix.instCStarRing` 是 `lemma` 而不是全局实例；`IsIsometricSMul (unitary A) (unitary A)` 的实例与弗罗贝尼乌斯范数的酉不变性引理没有找到。
+
+### F19 反常相消（对应 F17、F18）
+
+```text
+structure Hyper (K) where (Q u d L e : K)
+colour y        := 2*y.Q + y.u + y.d
+weak   n y      := n*y.Q + y.L
+grav   n y      := 2*n*y.Q + n*y.u + n*y.d + 2*y.L + y.e
+cubic  n y      := 2*n*y.Q^3 + n*y.u^3 + n*y.d^3 + 2*y.L^3 + y.e^3
+AnomalyFree n y := colour y = 0 ∧ weak n y = 0 ∧ grav n y = 0 ∧ cubic n y = 0
+smBranch n a     := ⟨a, -(n+1)*a, (n-1)*a, -n*a, 2*n*a⟩
+smBranchSwap n a := ⟨a, (n-1)*a, -(n+1)*a, -n*a, 2*n*a⟩
+exoticBranch b   := ⟨0, b, -b, 0, 0⟩
+
+theorem anomalyFree_iff {K} [Field K] [CharZero K] (n : K) (hn : n ≠ 0) (y : Hyper K) :
+    AnomalyFree n y ↔ (∃ a, y = smBranch n a) ∨ (∃ a, y = smBranchSwap n a) ∨ (∃ b, y = exoticBranch b)
+-- 计划：由 colour、weak、grav 解出 y.d、y.L、y.e；linear_combination 给出
+--   cubic n y = 6*n*y.Q*(n*y.Q - t)*(n*y.Q + t)，t := y.u + y.Q；
+--   (6:K) ≠ 0 与 hn，mul_eq_zero 分三支，各支 Hyper.ext 加 linear_combination。
+--   反方向：逐支展开定义后 ring。
+
+theorem colours_of_quark_hypercharges (N : ℕ) (hN : 2 ≤ N) (y : Hyper ℚ)
+    (h : AnomalyFree (N : ℚ) y) (hQ : y.Q = 1/6) (hu : y.u = -2/3) (hd : y.d = 1/3) :
+    N = 3 ∧ y.L = -1/2 ∧ y.e = 1
+-- 计划：anomalyFree_iff；exoticBranch 与 hQ 矛盾；smBranch 给 (N:ℚ) = 3；smBranchSwap 给 (N:ℚ) = -3，与 Nat.cast_nonneg 矛盾。
+```
+
+骨架的陈述层面没有发现错误：`smBranch` 等三条与 F17 一致；`colours_of_quark_hypercharges` 的前提 `2 ≤ N` 只用于 `N ≠ 0`；`smBranch_charges`、`smBranch_baryon_charges` 的各等式逐项代入成立（需 `(2:K) ≠ 0`，由 `CharZero` 给出）。需要在文档字符串里写明两点：`anomalyFree_iff` 不含右手中微子（或其超荷为 $0$），对 `n = 1` 它是带着物理上不存在的色条件的代数陈述。威滕奇偶性 `Even (n+1) ↔ Odd n` 是 `Nat.even_add_one` 与 `Nat.not_even_iff_odd` 的直接改写，不应提为定理，而且它只是单代的逐代条件，总条件是 $(N_c+1)N_{\mathrm{gen}}$ 为偶数。
+
+### F20–F21 网格和乐（对应 F20、F21）
+
+```text
+variable {G} [Group G] (h w : ℕ → ℕ → G)
+rowProd h j k   := h 0 j * h 1 j * ⋯ * h (k-1) j          -- 递归定义，rowProd h j 0 = 1
+colProd w i J   := w i 0 * ⋯ * w i (J-1)
+plaq h w i j    := h i j * w (i+1) j * (h i (j+1))⁻¹ * (w i j)⁻¹
+anchor h w i j  := rowProd h 0 i * colProd w i j
+lasso h w i j   := anchor h w i j * plaq h w i j * (anchor h w i j)⁻¹
+column h w i J  := lasso h w i 0 * ⋯ * lasso h w i (J-1)
+sweep h w T R   := column h w (R-1) T * ⋯ * column h w 0 T   -- 递归：sweep (k+1) = column k T * sweep k
+boundary h w R T := rowProd h 0 R * colProd w R T * (rowProd h T R)⁻¹ * (colProd w 0 T)⁻¹
+
+theorem column_eq (i J : ℕ) : column h w i J =
+    rowProd h 0 i * (h i 0 * colProd w (i+1) J * (h i J)⁻¹ * (colProd w i J)⁻¹) * (rowProd h 0 i)⁻¹
+-- 计划：对 J 归纳；展开定义、代入归纳假设后 group。
+theorem grid_holonomy_factorization (R T : ℕ) : sweep h w T R = boundary h w R T
+-- 计划：对 R 归纳；column_eq 与归纳假设代入后 group。
+
+theorem grid_holonomy_dist_le [PseudoMetricSpace G] [IsIsometricSMul G G] [IsIsometricSMul Gᵐᵒᵖ G] (R T : ℕ) :
+    dist (boundary h w R T) 1 ≤ ∑ i ∈ Finset.range R, ∑ j ∈ Finset.range T, dist (plaq h w i j) 1
+-- 计划：改写为 sweep；对 R、T 归纳，每步用 d(ab,1) ≤ d(a,1)+d(b,1) 与 d(gxg⁻¹,1) = d(x,1)。
+```
+
+陈述层面的检查：`column_eq` 的右端与 F20 第 1 款一致，`J = 0` 时两端为 `1`；`sweep` 的递归 `sweep (k+1) = column k T * sweep k` 给出“列从右到左”，与 F20 第 2 款一致；`boundary` 是逆时针边界。`dist_conj_one` 与 `dist_mul_one_le` 只能作为 `grid_holonomy_dist_le` 有消费的辅助声明。“$C^*$-代数酉元 $\lVert UV-1\rVert\le\lVert U-1\rVert+\lVert V-1\rVert$”与矢高形式是现成引理的组合，不应单列。
+
+### 排序与判断
+
+1. `grid_holonomy_factorization`（含 `column_eq`）：任意群中的恒等式，证明需要两次归纳，不是既有 Mathlib 或冻结声明的实例化、投影或规范化，按 trureturing 的判形属于 content；文献状态为“格点规范理论中熟知”，原始出处未定，写入时需按文献表态规则检索后标注。难度低：两次归纳加 `group`，主要风险是 `simp only` 展开递归定义后的项形。
+2. `grid_holonomy_dist_le`：以 1 为消费者的不等式，二重求和上的两次归纳，难度低到中；它让 F21 第 3 款有冻结依据。若同时要矩阵形式，还需补 `IsIsometricSMul (unitary A) (unitary A)` 的实例（两行），并在 `Matrix.Norms.L2Operator` 作用域内使用 `Matrix.instCStarRing`。
+3. `anomalyFree_iff`：难度低（消元、一次多项式因式分解、`mul_eq_zero`）。判形有风险：证明只由线性消元、`linear_combination` 的规范化与 `mul_eq_zero` 的分支组成，没有归纳或新的中间命题，评审可能把它判为 bind-only。它也是已发表结果（$N_c=3$ 时 Geng–Marshak 1989），不是外部开放问题，不能走开放问题结算依据。若要确保有内容，可把陈述推广到 $N_{\mathrm{gen}}$ 代、任意多份同型表示，或加入超荷可变的右手中微子后给出完整解集（此时解集是二维的，需要另做分类），再判一次形。
+4. `colours_of_quark_hypercharges`、`smBranch_charges`、`smBranch_baryon_charges`：由 3 出发的代入计算，只能作为有消费的辅助声明或并入同一消费者，不能单独首次冻结。
+5. 弦—角关系（F22 第 4 款）、威滕奇偶性、酉元的三角不等式：现成引理的改写，不提。
+
+## 11. 新内容与经典内容
 
 | 结果 | 经典来源 | 本文所做 |
 | --- | --- | --- |
@@ -311,10 +497,14 @@ $$
 | F13 | 单圈重整化群 | 复算；补四个读数 |
 | F14 | 李代数维数、叉乘分类 | 分列三种“3”，给出不封顶的反例 |
 | F15、F16 | 静态时空；$\mathrm{SU}(2)$ 的哈尔测度 | 补充说明 |
+| F17、F18 | Geng–Marshak 1989；Minahan–Ramond–Warner 1990；Bär–Wiese 2001；Witten 1982 | 对色数与电荷都参数化的完整解集与边界情形；指出只固定夸克电荷时由三次反常定出 $N_c=3$ |
+| F19 | — | 未编译的形式化陈述与判形评估 |
+| F20、F21 | 格点非阿贝尔斯托克斯（出处未定）；双侧不变度量的三角不等式 | 列引理含 $J=0$、次序的必要性；区分有内容的部分与现成引理 |
+| F22、F23 | 雷吉演算；转动群的初等事实；笛卡尔—欧拉公式 | 铰链平面为 $\operatorname{im}(R-\mathbf 1)$；弦与矢高两种读法的精确关系；示例铰链的闭式；$D\ge4$ 的简单性条件 |
 
-除 F12 第 2 款（交点恒等式）、F6 的显式常数与 F8 第 3 款的接法之外，本文不主张数学新颖性；这三处也未做文献查新。
+除 F12 第 2 款（交点恒等式）、F6 的显式常数与 F8 第 3 款的接法之外，本文不主张数学新颖性；这三处也未做文献查新。F17–F23 也不主张新颖性：F17 的解集在 $N_c=3$ 时是已发表结果，F20 是格点规范理论中熟知的组合事实，F22、F23 是转动群的初等事实。
 
-## 8. 没有核实的事项
+## 12. 没有核实的事项
 
 - 文献（Wilson 1974；Regge 1961；Cheeger–Müller–Schrader 1984；Manton 1980；Batrouni 1982；DeGrand–Toussaint 1980；Caselle–D'Adda–Magnea 1989；Yang 1970；Georgi–Quinn–Weinberg 1974；Chamseddine–Connes 1997；Eckmann 1943；Brown–Gray 1967）除下一条外均未核对原文，陈述、年份与归属按通行表述；其中“Caselle–D'Adda–Magnea 的铰链项为 $A_h\sin\delta_h$”最需要回查。
 - Chamseddine–Connes 1997 只核对了 arXiv 摘要（hep-th/9606001）：摘要写明规范耦合常数之间的关系与 $\mathrm{SU}(5)$ 相同；$g_3^2=g_2^2=\tfrac53g_1^2$ 的具体写法与正文没有核对。
@@ -324,16 +514,21 @@ $$
 - §32.6 的八大纲领总表没有逐格审计。
 - F3 只在二维切片上对一个 $\mathrm{SU}(2)$ 场做了数值复核；F5 只覆盖四面体与立方体。
 - 没有计算两圈跑动或任何阈值修正。
+- Geng–Marshak 1989、Minahan–Ramond–Warner 1990 及其回复只核对了书目记录与摘要；“另一组赋值即 F17 的 (C)”没有对原文逐式核对。Bär–Wiese 2001、Chow–Yan 1996 只读了摘要，Shrock 1996 只读了摘要与引言；威滕 1982 只经二手文献核对。
+- F17 第 1 条边界情形：$N_c=3$ 时是否存在使 $\mathcal A_c=\mathcal A_w=\mathcal A_3=0$ 而 $\mathcal A_g\ne0$ 的有理点，没有查明。
+- 格点非阿贝尔斯托克斯恒等式的原始出处没有找到；F23 第 2 款“平坦多面体环面存在”按通行表述，未核。
+- Mathlib 名称只经文本检索；第 10 节的骨架没有编译。
 
-## 9. 未解决
+## 13. 未解决
 
 - 条款 IV 的偏差为什么以 $e^{-\beta\sum\varphi(v)}$ 加权，以及由此出发的四维连续极限与质量间隙（`OPEN`，附录 E `H9`）。
-- 引力读奇通道所需的铰链平面在比较结构中如何给出；洛伦兹签名下的雷吉路径积分与无质量自旋 2 传播子（`OPEN`，[@prob-ch34-gravity-dynamics-and-coupling]）。
+- 铰链平面：和乐为简单转动时它是 $\operatorname{im}(h-\mathbf 1)$（F22）；$D\ge4$ 时这条简单性能否由比较结构的某条条款推出，而不是作为 `MODEL` 输入。洛伦兹签名下的雷吉路径积分与无质量自旋 2 传播子（`OPEN`，[@prob-ch34-gravity-dynamics-and-coupling]）。
+- F19 的 `anomalyFree_iff` 能否以有内容的形式进入 trureturing（第 10 节第 3 条）；F20 的网格分解与距离界的形式化。
 - 刚度公设能否由更弱的比较条件得到；阈值闭合（`OPEN`，[@prob-ch39-af-gut-threshold-and-proton-stability] 第 1 款）。
 - 秩不超过 3 的封顶能否由某条操作条件推出（F14 表明现有条款不够）。
 - 宇宙学常数的符号与大小（`OPEN`）。
 
-## 10. 数值复算输出
+## 14. 数值复算输出
 
 复算脚本：[unified_arc_check.py](unified_arc_check.py)，在安装 `numpy`、`sympy`、`mpmath` 的环境运行 `python3 docs/project/unified_arc_check.py`，种子 `20261117`。输出如下（末行的耗时随机器变化）。
 
@@ -379,11 +574,16 @@ $$
 [OK] F14b: an orthonormal 4-frame satisfies clauses II-IV with scalar similarity and has Gram rank 4; five equidistant points need R^4 (Cayley-Menger determinant -5.0 != 0)
 [OK] F15: static observers: |a| = GM/(r^2 sqrt(1-r_s/r)); the coordinate gradient of ln(lapse) is larger by 1/sqrt(1-r_s/r) (= 1.291 at r = 2.5 r_s); four budget laws share the Newtonian limit, second-order coefficients [-1/8, 0, 1/8, 3/8]
 [OK] F16: Haar SU(2): sagitta has the semicircle law on [0,2], mean 1, variance 1/4 (sample 0.994, 0.250); vector sagitta = (2/3) v(u^2) = (4/3) v (2-v)
+[OK] F17: three lines A, B, C are anomaly-free for all n; lex Groebner basis over Q(n) ends with -y_Q*(n*y_Q - y_Q - y_u)*(n*y_Q + y_Q + y_u), the other elements linear in (y_L, y_e, y_d); on the linear locus the cubic is 6 n y_Q (n y_Q - t)(n y_Q + t); each condition independent at N_c = 3; N_c = 1 point (1,1,-1,-1,0) and an N_c = 3 point with a hypercharge-1 nu^c lie off the three lines
+[OK] F18: quark hypercharges (1/6, -2/3, 1/3) fixed: colour condition automatic, weak and grav give (y_L, y_e) = (-n/6, n/3), cubic = n*(n - 3)*(n + 3)/36, so N_c = 3 (y_L = -1/2, y_e = 1); on line A with y_L = -1/2 for all n: neutrality, Q_u - Q_d = 1, N(Q_u^2 - Q_d^2) = 1, odd-n baryons 1 and 0; total doublets (N+1) N_gen even forces odd N for N_gen = 3 but not for N_gen = 2; Q_u = 2/3, sin^2 = 3/8, g3^2 = g2^2, k_Y = 5/3 each only at N = 3
+[OK] F20: column lemma for every J (incl. J = 0), R <= 4, T <= 5; grid factorization for all R, T <= 7; left-to-right column order gives a different word on 3x2; SU(2)/SU(3) links: identity dev 1.6e-14, bound ratios (M >= 2) op 0.763, phi 0.763; coherent U(1) flux on 12 plaquettes: chord ratio 0.999994, sagitta ratio v_C/(M sum v_p) 0.999988
+[OK] F22: simple rotations D = 2..6: im(R-1) = hinge plane, S, A, ||R-1||_op = 2|sin(d/2)|, HS = 2 sqrt2 |sin(d/2)|, |d| = 2 asin(||R-1||/2), Tr R - (D-2) = 2 cos d (max dev 1.5e-14); +-90 deg share S and chord, odd channel flips; every SO(3) element has rank(R-1) <= 2; double rotation (0.7, 0.4): singular values [0.6858, 0.6858, 0.3973, 0.3973]; series 2 asin(x/2) = x + x^3/24 + 3x^5/640, acos(1-v) = sqrt(2v)(1 + v/12 + ...); half-comparison holonomy of three face normals: angle = deficit, axis = +-n1 (500 corners, dev 6.0e-15)
+[OK] F23: sample hinge: cos(d/2) = 7/9, 1-cos d = 64/81, 2 sin(d/2) = 8 sqrt2/9, sin d = 56 sqrt2/81; cone/saddle (deg, sagitta, chord): {'3 squares': (90.0, 1.0, 1.414213562373), '5 squares': (-90.0, 1.0, 1.414213562373), '5 triangles': (60.0, 0.5, 1.0), '7 triangles': (-60.0, 0.5, 1.0)}; polyhedral 12x8 torus: sum deficit -3.0e-14, 36 negative and 36 positive vertices; geodesic spheres (V, chord sum, sagitta sum): (12, 12.0000, 6.0000), (42, 12.5192, 1.8711), (162, 12.5632, 0.4886), (642, 12.5662, 0.1235), (2562, 12.5664, 0.0310)
 
-all 41 checks passed in 3.5 s
+all 46 checks passed in 3.2 s
 ```
 
-## 11. 已写入书稿的修订（D1–D10）
+## 15. 已写入书稿的修订（D1–D10）
 
 下列各项涉及模型的表述或作者的行文，均已按所给建议写入书稿；提供了选择的两处，书稿把 §39.11.1 的“范式反转”换成了 D5 所给的写法，并按 D6 修改了 §39.11.2 的中文小节标题。每项保留位置、问题与所写入的措辞，作为改动内容与理由的记录；中文为权威版本，英文说同一件事。行号是基线上的行号，“旧”指改动前的文字。
 
@@ -480,7 +680,7 @@ zh：这条公设取的读数是整本账本 $\mathcal{H}_{\mathrm{Weyl}}$ 上�
 en：The postulate takes as its reading the trace over the whole ledger $\mathcal{H}_{\mathrm{Weyl}}$, the only reading invariant under all unitary transformations of the ledger; if the reading is required to be invariant only under $\mathrm{U}(1)_Y \times \mathrm{SU}(2)_L \times \mathrm{SU}(3)_C$, each irreducible multiplet may carry its own weight $w_Q, w_u, w_d, w_L, w_e > 0$, and $g_3^2/g_2^2 = \frac{3w_Q + w_L}{2w_Q + w_u + w_d}$ can take any positive value. The value $\frac{3}{8}$ also depends on the ledger consisting of complete fermion generations: one generation of Weyl fermions is, as a representation of the gauge group, the restriction of $\bar{\mathbf{5}} \oplus \mathbf{10}$ of $\mathrm{SU}(5)$; a single Higgs doublet alone would give $\frac{1}{2}$.
 ```
 
-建议（文献注记第 4 条，把耦合关系记在出处上；只核对了摘要，见第 8 节）：
+建议（文献注记第 4 条，把耦合关系记在出处上；只核对了摘要，见第 12 节）：
 
 ```text
 zh 旧：`10.1007/JHEP09(2012)104`）发展；

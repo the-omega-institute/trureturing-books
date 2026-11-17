@@ -1,7 +1,7 @@
 """复算“极小圆弧体微积分与统一场相关论断”研究笔记（ARC-CALCULUS-UNIFIED-FIELD-2026-11-17.md）中的恒等式、界、反例与数值；依赖 numpy、sympy、mpmath，不代替普遍证明。
 
 运行：python3 docs/project/unified_arc_check.py
-每一节以断言结束，打印的各行是笔记第 10 节引用的读数；随机种子固定，任何断言失败即非零退出。
+每一节以断言结束，打印的各行是笔记第 14 节引用的读数；随机种子固定，任何断言失败即非零退出。
 """
 import itertools
 import math
@@ -892,5 +892,302 @@ for _ in range(100):
 assert worst < 1e-12
 ok("F16", f"Haar SU(2): sagitta has the semicircle law on [0,2], mean 1, variance 1/4 "
           f"(sample {vals.mean():.3f}, {vals.var():.3f}); vector sagitta = (2/3) v(u^2) = (4/3) v (2-v)")
+
+# ----------------------------------------------------------------------------
+# F17  一代费米子的反常相消解集：三条直线
+# ----------------------------------------------------------------------------
+nn = sp.symbols("n")
+yQ, yu, yd, yL, ye, ynu = sp.symbols("y_Q y_u y_d y_L y_e y_nu")
+
+
+def anomaly_coeffs(n_, y):
+    q_, u_, d_, l_, e_ = y
+    return [2 * q_ + u_ + d_,                                                   # [SU(N)]^2 U(1)
+            n_ * q_ + l_,                                                       # [SU(2)]^2 U(1)
+            2 * n_ * q_ + n_ * u_ + n_ * d_ + 2 * l_ + e_,                      # grav^2 U(1)
+            2 * n_ * q_ ** 3 + n_ * u_ ** 3 + n_ * d_ ** 3 + 2 * l_ ** 3 + e_ ** 3]  # U(1)^3
+
+
+a_, b_ = sp.symbols("a b")
+lineA = (a_, -(nn + 1) * a_, (nn - 1) * a_, -nn * a_, 2 * nn * a_)
+lineB = (a_, (nn - 1) * a_, -(nn + 1) * a_, -nn * a_, 2 * nn * a_)
+lineC = (0, b_, -b_, 0, 0)
+assert all(sp.expand(c_) == 0 for line in (lineA, lineB, lineC) for c_ in anomaly_coeffs(nn, line))
+# 完备性：在 Q(n) 上的字典序格罗布纳基，最后一个元素只含 y_u、y_Q
+gb = sp.groebner(anomaly_coeffs(nn, (yQ, yu, yd, yL, ye)), yL, ye, yd, yu, yQ,
+                 domain=sp.QQ.frac_field(nn), order="lex")
+last = sp.factor(gb.exprs[-1])
+assert sp.expand(last - yQ * (yu + yQ - nn * yQ) * (yu + yQ + nn * yQ)) == 0
+assert all(sp.Poly(g_, yL, ye, yd).total_degree() == 1 for g_ in gb.exprs[:-1])
+tq = sp.symbols("t")
+lin = {yd: -2 * yQ - yu, yL: -nn * yQ, ye: 2 * nn * yQ}
+cub = anomaly_coeffs(nn, (yQ, yu, yd, yL, ye))[3].subs(lin).subs(yu, tq - yQ)
+assert sp.expand(cub - 6 * nn * yQ * (nn * yQ - tq) * (nn * yQ + tq)) == 0
+# 各条件独立；N_c = 1 与带超荷的右手中微子扩大解集
+r6 = sp.Rational
+v_cub = anomaly_coeffs(3, (r6(1, 6), r6(-1, 6), r6(-1, 6), r6(-1, 2), 1))
+assert v_cub[:3] == [0, 0, 0] and v_cub[3] != 0
+v_grav = anomaly_coeffs(3, (1, -1, -1, -3, sp.cbrt(54)))
+assert [sp.simplify(x) for x in (v_grav[0], v_grav[1], v_grav[3])] == [0, 0, 0] and sp.simplify(v_grav[2]) != 0
+p1 = (1, 1, -1, -1, 0)
+assert anomaly_coeffs(1, p1)[1:] == [0, 0, 0] and anomaly_coeffs(1, p1)[0] != 0
+pnu = (r6(1, 2), -1, 0, r6(-3, 2), 2)       # N_c = 3：标准超荷加 B-L，再加一个超荷为 1 的右手中微子单态
+ext = anomaly_coeffs(3, pnu)
+assert ext[0] == 0 and ext[1] == 0 and ext[2] + 1 == 0 and ext[3] + 1 == 0
+assert not any(all(sp.simplify(pnu[k] - sp.sympify(line[k]).subs({nn: 3, a_: pnu[0], b_: pnu[1]})) == 0 for k in range(5))
+               for line in (lineA, lineB, lineC))
+ok("F17", f"three lines A, B, C are anomaly-free for all n; lex Groebner basis over Q(n) ends with {last}, the other "
+          "elements linear in (y_L, y_e, y_d); on the linear locus the cubic is 6 n y_Q (n y_Q - t)(n y_Q + t); "
+          "each condition independent at N_c = 3; N_c = 1 point (1,1,-1,-1,0) and an N_c = 3 point with a "
+          "hypercharge-1 nu^c lie off the three lines")
+
+# ----------------------------------------------------------------------------
+# F18  色数何时被定出
+# ----------------------------------------------------------------------------
+quark = {yQ: r6(1, 6), yu: r6(-2, 3), yd: r6(1, 3)}
+A_ = anomaly_coeffs(nn, (yQ, yu, yd, yL, ye))
+assert A_[0].subs(quark) == 0
+lep = sp.solve([A_[1].subs(quark), A_[2].subs(quark)], [yL, ye], dict=True)[0]
+assert lep == {yL: -nn / 6, ye: nn / 3}
+cubq = sp.factor(A_[3].subs(quark).subs(lep))
+assert sp.expand(cubq - nn * (nn - 3) * (nn + 3) / 36) == 0
+assert [N for N in range(2, 200) if cubq.subs(nn, N) == 0] == [3]
+assert sp.solve(nn * r6(1, 6) - r6(1, 2), nn) == [3]
+aa = 1 / (2 * nn)
+Qu_, Qd_ = r6(1, 2) + aa, -r6(1, 2) + aa
+yA = [x.subs(a_, aa) for x in lineA]
+assert sp.simplify(yA[1] + Qu_) == 0 and sp.simplify(yA[2] + Qd_) == 0 and sp.simplify(yA[3] + r6(1, 2)) == 0 \
+    and sp.simplify(yA[4] - 1) == 0
+assert sp.simplify(nn * (Qu_ + Qd_) + 0 + (-1)) == 0 and sp.simplify(Qu_ - Qd_ - 1) == 0
+assert sp.simplify(nn * (Qu_ ** 2 - Qd_ ** 2) - 1) == 0
+ss = sp.symbols("s", nonnegative=True, integer=True)
+sub_odd = {nn: 2 * ss + 1}
+assert sp.simplify(((ss + 1) * Qu_ + ss * Qd_).subs(sub_odd) - 1) == 0
+assert sp.simplify((ss * Qu_ + (ss + 1) * Qd_).subs(sub_odd)) == 0
+doublets = lambda N, gens: (N + 1) * gens          # 每代 N 个夸克二重态加一个轻子二重态
+assert [N for N in range(1, 12) if doublets(N, 3) % 2 == 0] == [1, 3, 5, 7, 9, 11]
+assert [N for N in range(1, 12) if doublets(N, 2) % 2 == 0] == list(range(1, 12))
+only3 = [sp.solve(sp.Eq(expr, val), nn) for expr, val in
+         ((Qu_, r6(2, 3)), (nn / (2 * (nn + 1)), r6(3, 8)), ((nn + 1) / 4, 1), ((nn + 2) / nn, r6(5, 3)))]
+assert all(s_ == [3] for s_ in only3)
+ok("F18", f"quark hypercharges (1/6, -2/3, 1/3) fixed: colour condition automatic, weak and grav give "
+          f"(y_L, y_e) = (-n/6, n/3), cubic = {cubq}, so N_c = 3 (y_L = -1/2, y_e = 1); on line A with y_L = -1/2 "
+          "for all n: neutrality, Q_u - Q_d = 1, N(Q_u^2 - Q_d^2) = 1, odd-n baryons 1 and 0; total doublets "
+          "(N+1) N_gen even forces odd N for N_gen = 3 but not for N_gen = 2; Q_u = 2/3, sin^2 = 3/8, "
+          "g3^2 = g2^2, k_Y = 5/3 each only at N = 3")
+
+# ----------------------------------------------------------------------------
+# F20  矩形网格的和乐分解：列引理、次序、矩阵复核
+# ----------------------------------------------------------------------------
+def grid_ids(nr, nt):
+    h_ = lambda i, j: 1 + i + j * nr
+    w_ = lambda i, j: 1 + nr * (nt + 1) + i + j * (nr + 1)
+    return h_, w_
+
+
+def grid_lasso(nr, nt, i, j):
+    h_, w_ = grid_ids(nr, nt)
+    b = tuple(h_(k, 0) for k in range(i))
+    v = tuple(w_(i, k) for k in range(j))
+    return wmul(b, v, (h_(i, j), w_(i + 1, j), -h_(i, j + 1), -w_(i, j)), winv(v), winv(b))
+
+
+def grid_boundary(nr, nt):
+    h_, w_ = grid_ids(nr, nt)
+    return wmul(tuple(h_(i, 0) for i in range(nr)), tuple(w_(nr, j) for j in range(nt)),
+                tuple(-h_(i, nt) for i in reversed(range(nr))), tuple(-w_(0, j) for j in reversed(range(nt))))
+
+
+col_ok = True
+for nr in range(1, 5):
+    for nt in range(1, 6):
+        h_, w_ = grid_ids(nr, nt)
+        for i in range(nr):
+            for J in range(nt + 1):
+                lhs = wmul(*[grid_lasso(nr, nt, i, j) for j in range(J)]) if J else ()
+                b = tuple(h_(k, 0) for k in range(i))
+                rhs = wmul(b, (h_(i, 0),), tuple(w_(i + 1, k) for k in range(J)), (-h_(i, J),),
+                           winv(tuple(w_(i, k) for k in range(J))), winv(b))
+                col_ok &= lhs == rhs
+assert col_ok
+assert all(wmul(*[grid_lasso(nr, nt, i, j) for i in reversed(range(nr)) for j in range(nt)])
+           == grid_boundary(nr, nt) for nr in range(1, 8) for nt in range(1, 8))
+wrong = wmul(*[grid_lasso(3, 2, i, j) for i in range(3) for j in range(2)])
+assert wrong != grid_boundary(3, 2)
+dev, worst_op, worst_phi = 0.0, 0.0, 0.0
+for N_, maker in ((2, lambda: near_identity_su(2, 0.4)), (3, lambda: near_identity_su(3, 0.4)), (3, lambda: haar_su(3))):
+    for _ in range(30):
+        nr, nt = (int(x) for x in RNG.integers(1, 5, size=2))
+        nl = nr * (nt + 1) + (nr + 1) * nt
+        links = {k: maker() for k in range(1, nl + 1)}
+        h_, w_ = grid_ids(nr, nt)
+        Wb = weval(grid_boundary(nr, nt), links)
+        eye = np.eye(N_)
+        Wp = eye.astype(complex)
+        for i in reversed(range(nr)):                 # 直接用矩阵相乘，不经自由群约化
+            for j in range(nt):
+                anc = eye.astype(complex)
+                for k in range(i):
+                    anc = anc @ links[h_(k, 0)]
+                for k in range(j):
+                    anc = anc @ links[w_(i, k)]
+                pij = links[h_(i, j)] @ links[w_(i + 1, j)] @ dag(links[h_(i, j + 1)]) @ dag(links[w_(i, j)])
+                Wp = Wp @ anc @ pij @ dag(anc)
+        dev = max(dev, float(np.abs(Wb - Wp).max()))
+        ps = [weval((h_(i, j), w_(i + 1, j), -h_(i, j + 1), -w_(i, j)), links) for i in range(nr) for j in range(nt)]
+        r_op = np.linalg.norm(Wb - eye, 2) / max(sum(np.linalg.norm(p - eye, 2) for p in ps), 1e-300)
+        r_phi = chord_norm(Wb) / max(sum(chord_norm(p) for p in ps), 1e-300)
+        assert r_op <= 1 + 1e-10 and r_phi <= 1 + 1e-10
+        assert sagitta(Wb) <= len(ps) * sum(sagitta(p) for p in ps) + 1e-10
+        assert dev < 1e-10
+        if nr * nt >= 2:
+            worst_op, worst_phi = max(worst_op, r_op), max(worst_phi, r_phi)
+M_, fl = 12, 1e-3
+r_chord = abs(np.exp(1j * M_ * fl) - 1) / (M_ * abs(np.exp(1j * fl) - 1))
+r_sag = (1 - math.cos(M_ * fl)) / (M_ * M_ * (1 - math.cos(fl)))
+assert 0.9999 < r_chord <= 1 and 0.9999 < r_sag <= 1
+ok("F20", f"column lemma for every J (incl. J = 0), R <= 4, T <= 5; grid factorization for all R, T <= 7; "
+          f"left-to-right column order gives a different word on 3x2; SU(2)/SU(3) links: identity dev {dev:.1e}, "
+          f"bound ratios (M >= 2) op {worst_op:.3f}, phi {worst_phi:.3f}; coherent U(1) flux on 12 plaquettes: "
+          f"chord ratio {r_chord:.6f}, sagitta ratio v_C/(M sum v_p) {r_sag:.6f}")
+
+# ----------------------------------------------------------------------------
+# F22  铰链平面：像、偶通道、奇通道、弦与角
+# ----------------------------------------------------------------------------
+dev = 0.0
+for D in range(2, 7):
+    for _ in range(20):
+        dl = float(RNG.uniform(-math.pi, math.pi))
+        Qm, _r = np.linalg.qr(RNG.normal(size=(D, D)))
+        e1, e2 = Qm[:, 0], Qm[:, 1]
+        K = np.outer(e2, e1) - np.outer(e1, e2)
+        P = np.outer(e1, e1) + np.outer(e2, e2)
+        Rm = np.eye(D) + math.sin(dl) * K + (1 - math.cos(dl)) * K @ K
+        Dm = Rm - np.eye(D)
+        U_, sv, _v = np.linalg.svd(Dm)
+        dev = max(dev, abs(sv[0] - 2 * abs(math.sin(dl / 2))), abs(sv[1] - sv[0]), float(sv[2:].max(initial=0)),
+                  abs(np.linalg.norm(Dm, "fro") - 2 * math.sqrt(2) * abs(math.sin(dl / 2))),
+                  float(np.abs(U_[:, :2] @ U_[:, :2].T - P).max()),
+                  float(np.abs((Rm + Rm.T) / 2 - (np.eye(D) - (1 - math.cos(dl)) * P)).max()),
+                  float(np.abs((Rm - Rm.T) / 2 - math.sin(dl) * K).max()),
+                  abs(-0.5 * np.trace(K @ Rm) - math.sin(dl)), abs(np.trace(Rm) - (D - 2) - 2 * math.cos(dl)),
+                  abs(2 * math.asin(min(sv[0] / 2, 1)) - abs(dl)), abs(sv[0] ** 2 - 2 * (1 - math.cos(dl))))
+assert dev < 1e-9
+Kp = np.array([[0., -1, 0], [1, 0, 0], [0, 0, 0]])
+Rp = np.eye(3) + Kp + Kp @ Kp
+Rn = np.eye(3) - Kp + Kp @ Kp
+assert np.allclose(Rp + Rp.T, Rn + Rn.T) and abs(np.linalg.norm(Rp - np.eye(3), 2) - np.linalg.norm(Rn - np.eye(3), 2)) < 1e-12
+assert abs(-0.5 * np.trace(Kp @ Rp) - 1) < 1e-12 and abs(-0.5 * np.trace(Kp @ Rn) + 1) < 1e-12
+rank3 = 0
+for _ in range(200):
+    A3 = RNG.normal(size=(3, 3))
+    A3 = A3 - A3.T
+    w3, v3 = np.linalg.eigh(1j * A3)
+    R3 = (v3 @ np.diag(np.exp(-1j * w3)) @ v3.conj().T).real
+    rank3 = max(rank3, int(np.linalg.matrix_rank(R3 - np.eye(3), tol=1e-9)))
+assert rank3 == 2
+al, be = 0.7, 0.4
+R4 = np.zeros((4, 4))
+R4[:2, :2] = [[math.cos(al), -math.sin(al)], [math.sin(al), math.cos(al)]]
+R4[2:, 2:] = [[math.cos(be), -math.sin(be)], [math.sin(be), math.cos(be)]]
+sv4 = np.linalg.svd(R4 - np.eye(4))[1]
+assert min(sv4) > 0.1          # rank 4：没有铰链平面；B ^ B = (al be / 2) e1234 != 0
+xs_ = sp.symbols("x", positive=True)
+assert sp.simplify(sp.series(2 * sp.asin(xs_ / 2), xs_, 0, 7).removeO() - (xs_ + xs_ ** 3 / 24 + 3 * xs_ ** 5 / 640)) == 0
+vs_ = sp.symbols("v", positive=True)
+assert sp.simplify(sp.series(sp.acos(1 - vs_) / sp.sqrt(2 * vs_), vs_, 0, 2).removeO() - (1 + vs_ / 12)) == 0
+
+
+def qmul(p, q):
+    return np.r_[p[0] * q[0] - p[1:] @ q[1:], p[0] * q[1:] + q[0] * p[1:] + np.cross(p[1:], q[1:])]
+
+
+def half_cmp(x, y):
+    # Cl_{3,0} 中 xy = x.y + I(x ^ y)；取 I n -> -n 的四元数表示
+    u = np.r_[x @ y, -np.cross(x, y)]
+    return (np.r_[1., 0, 0, 0] + u) / math.sqrt(2 * (1 + x @ y))
+
+
+tri_dev = 0.0
+for _ in range(500):
+    nm = RNG.normal(size=(3, 3))
+    nm /= np.linalg.norm(nm, axis=1)[:, None]
+    if np.linalg.det(nm) < 0.05:
+        continue
+    hq = qmul(qmul(half_cmp(nm[0], nm[1]), half_cmp(nm[1], nm[2])), half_cmp(nm[2], nm[0]))
+    om = 2 * math.atan2(np.linalg.norm(hq[1:]), hq[0])
+    ax = hq[1:] / np.linalg.norm(hq[1:])
+    tri_dev = max(tri_dev, abs(om - deficit_from_normals(*nm)), min(np.abs(ax - nm[0]).max(), np.abs(ax + nm[0]).max()))
+assert tri_dev < 1e-9
+ok("F22", f"simple rotations D = 2..6: im(R-1) = hinge plane, S, A, ||R-1||_op = 2|sin(d/2)|, HS = 2 sqrt2 |sin(d/2)|, "
+          f"|d| = 2 asin(||R-1||/2), Tr R - (D-2) = 2 cos d (max dev {dev:.1e}); +-90 deg share S and chord, odd "
+          f"channel flips; every SO(3) element has rank(R-1) <= 2; double rotation (0.7, 0.4): singular values "
+          f"{np.round(sv4, 4).tolist()}; series 2 asin(x/2) = x + x^3/24 + 3x^5/640, acos(1-v) = sqrt(2v)(1 + v/12 + ...); "
+          f"half-comparison holonomy of three face normals: angle = deficit, axis = +-n1 (500 corners, dev {tri_dev:.1e})")
+
+# ----------------------------------------------------------------------------
+# F23  弦与矢高：示例铰链闭式、锥点与鞍点、环面与细分
+# ----------------------------------------------------------------------------
+dh_ = 2 * sp.pi - 4 * sp.acos(r6(1, 3))
+assert sp.simplify(sp.cos(dh_ / 2) - r6(7, 9)) == 0
+assert sp.simplify(1 - sp.cos(dh_) - r6(64, 81)) == 0
+assert sp.simplify(2 * sp.sin(dh_ / 2) - 8 * sp.sqrt(2) / 9) == 0
+assert sp.simplify(sp.sin(dh_) - 56 * sp.sqrt(2) / 81) == 0
+cones = {}
+for name, d in (("3 squares", 2 * math.pi - 3 * math.pi / 2), ("5 squares", 2 * math.pi - 5 * math.pi / 2),
+                ("5 triangles", 2 * math.pi - 5 * math.pi / 3), ("7 triangles", 2 * math.pi - 7 * math.pi / 3)):
+    cones[name] = (round(math.degrees(d), 6), round(1 - math.cos(d), 12), round(2 * abs(math.sin(d / 2)), 12))
+assert cones["3 squares"][1:] == cones["5 squares"][1:] and cones["3 squares"][0] == -cones["5 squares"][0] == 90
+assert cones["5 triangles"][1:] == cones["7 triangles"][1:] and cones["5 triangles"][0] == -cones["7 triangles"][0] == 60
+
+
+def angle_deficits(vs, faces):
+    ang = np.zeros(len(vs))
+    for f_ in faces:
+        k = len(f_)
+        for t in range(k):
+            p, q, r = f_[t], f_[(t + 1) % k], f_[(t - 1) % k]
+            u_, w_ = vs[q] - vs[p], vs[r] - vs[p]
+            ang[p] += math.acos(np.clip(u_ @ w_ / np.linalg.norm(u_) / np.linalg.norm(w_), -1, 1))
+    return 2 * math.pi - ang
+
+
+nu_, nv_ = 12, 8
+tv = [np.array([(3 + math.cos(2 * math.pi * j / nv_)) * math.cos(2 * math.pi * i / nu_),
+                (3 + math.cos(2 * math.pi * j / nv_)) * math.sin(2 * math.pi * i / nu_),
+                math.sin(2 * math.pi * j / nv_)]) for i in range(nu_) for j in range(nv_)]
+idx = lambda i, j: (i % nu_) * nv_ + (j % nv_)
+tf = [f_ for i in range(nu_) for j in range(nv_)
+      for f_ in ((idx(i, j), idx(i + 1, j), idx(i + 1, j + 1)), (idx(i, j), idx(i + 1, j + 1), idx(i, j + 1)))]
+td = angle_deficits(tv, tf)
+assert abs(td.sum()) < 1e-9 and (td > 1e-9).any() and (td < -1e-9).any()
+ico = [np.array(v, float) / np.linalg.norm(v) for v in
+       [(-1, gphi, 0), (1, gphi, 0), (-1, -gphi, 0), (1, -gphi, 0), (0, -1, gphi), (0, 1, gphi),
+        (0, -1, -gphi), (0, 1, -gphi), (gphi, 0, -1), (gphi, 0, 1), (-gphi, 0, -1), (-gphi, 0, 1)]]
+itris = [(0, 11, 5), (0, 5, 1), (0, 1, 7), (0, 7, 10), (0, 10, 11), (1, 5, 9), (5, 11, 4), (11, 10, 2),
+         (10, 7, 6), (7, 1, 8), (3, 9, 4), (3, 4, 2), (3, 2, 6), (3, 6, 8), (3, 8, 9), (4, 9, 5),
+         (2, 4, 11), (6, 2, 10), (8, 6, 7), (9, 8, 1)]
+refine = []
+for level in range(5):
+    dd = angle_deficits(ico, itris)
+    assert abs(dd.sum() - 4 * math.pi) < 1e-9
+    refine.append((len(ico), float(np.sum(2 * np.abs(np.sin(dd / 2)))), float(np.sum(1 - np.cos(dd)))))
+    cache, new = {}, []
+    for (a0, b0, c0) in itris:
+        mids = []
+        for (p, q) in ((a0, b0), (b0, c0), (c0, a0)):
+            key = (min(p, q), max(p, q))
+            if key not in cache:
+                mv = ico[p] + ico[q]
+                ico.append(mv / np.linalg.norm(mv))
+                cache[key] = len(ico) - 1
+            mids.append(cache[key])
+        new += [(a0, mids[0], mids[2]), (b0, mids[1], mids[0]), (c0, mids[2], mids[1]), tuple(mids)]
+    itris = new
+assert abs(refine[-1][1] - 4 * math.pi) < 1e-3 and all(refine[k + 1][2] < refine[k][2] / 3 for k in range(4))
+ok("F23", "sample hinge: cos(d/2) = 7/9, 1-cos d = 64/81, 2 sin(d/2) = 8 sqrt2/9, sin d = 56 sqrt2/81; "
+          f"cone/saddle (deg, sagitta, chord): {cones}; polyhedral 12x8 torus: sum deficit {td.sum():.1e}, "
+          f"{int((td < -1e-9).sum())} negative and {int((td > 1e-9).sum())} positive vertices; geodesic spheres "
+          "(V, chord sum, sagitta sum): " + ", ".join(f"({v}, {c:.4f}, {s_:.4f})" for v, c, s_ in refine))
 
 print(f"\nall {len(PASSED)} checks passed in {time.time() - T0:.1f} s")
