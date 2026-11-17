@@ -85,9 +85,6 @@ async function input(selector, value, p = page) {
   await settle(p);
 }
 async function pause(p = page) {
-  // 先交付两帧并短暂收敛，让 kit.autoplay 的初次 IntersectionObserver 回调完成。
-  await p.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-  await settle(p, 50);
   // 读取与按键放在同一个页面任务里：Playwright 点击前会把播放键滚入视野、舞台可能随之离开视野，
   // kit.autoplay 的观察器若在读取之后、点击之前先暂停，点击就会重新开播。同步执行时观察器回调插不进来；
   // 仍由播放键自己的处理函数暂停，已暂停时不按。
@@ -541,12 +538,18 @@ for (const colorScheme of ['dark', 'light']) for (const lang of ['zh', 'en']) fo
   check(`${tag}: system color scheme without palette override`, await p.evaluate(scheme =>
     matchMedia(`(prefers-color-scheme: ${scheme})`).matches && document.documentElement.dataset.trPalette === undefined, colorScheme));
   await checkLinks(p, tag);
+  // 引用卡以静止的 Pascal 卡开场，不安装自动播放；完整书内实验室先见证唯一的初次启动。
+  if (embed && !figure) {
+    await p.locator('#stage').scrollIntoViewIfNeeded();
+    if (!await until(p, () => window.OCTAVE_FIELD_DEBUG.state.playing)) throw new Error(`${tag}: initial autoplay did not start`);
+  }
   // 未指定 preset 的完整书内实验室默认从螺旋卡开场；先通过真实导览返回首卡。
   if (embed && !figure) { await p.click('[data-tour="prev"]'); await settle(p); await pause(p); }
   for (const [i, card] of Object.keys(CARDS).entries()) {
     if (embed) { if (i) { await p.click('[data-tour="next"]'); await settle(p); } await pause(p); }
     else await pick(card, p);
     await p.locator('#stage').scrollIntoViewIfNeeded(); await settle(p);
+    await pause(p);
     checkPreset(await state(p), card, `${tag}/${card}`);
     const view = await stageView(p, '#stage', figure), overlaps = await labelOverlaps(p);
     check(`${tag}/${card}: zero overlaps, HUD collisions and overflow`, view.layout.length === 0 && view.hud.length === 0
