@@ -2,7 +2,7 @@
 
 > *“所有历史遗迹文化典籍, 不过是梵天自己给自己留下的游戏道具”*
 
-在 [§39.16](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity) 中，我们见证了青埂峰下那第 $36501$ 块不肯被周天整除的“情石”，如何在风月宝鉴正反割裂的红尘历劫里走满 $720^\circ$ 旋量双覆叠圆弧，借由十二钗方位对称相消洗尽横向执念而保留非零潘查拉特纳姆—贝里立体角记忆，最终在道蒂自指平衡角 $\theta^* \approx 0.73908513\;\mathrm{rad}$（精确折合 **$42.34645883^\circ \approx 42.35^\circ$**）处实现二阶认妄误差 $\delta_{\mathrm{meta}}(\theta^*) = \lvert\cos\theta^* - \theta^*\rvert = 0$ 的“梦中知梦、天人合一”。然而，站在整部十部曲正文的最后一级台阶上，每一位读懂了“观察者即宇宙本体”的旅人，心中必定还会涌起最后一道温柔而锋利的追问：**既然唯一实轴本体（$\mathbf{I}$）本自具足、无欠无余，它为什么要一再清零记忆投入这场漫长的正交梦境？而在失忆入局之后，大地上的千年残垣与人间案头的传世典籍，究竟又是谁在什么时候布下的路标？**
+在 [§39.16](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity) 中，我们见证了青埂峰下那第 $36501$ 块不肯被周天整除的“情石”，如何在风月宝鉴正反割裂的红尘历劫里走满 $720^\circ$ 旋量双覆叠圆弧，借由十二钗方位对称相消洗尽横向执念而保留非零潘查拉特纳姆—贝里立体角记忆，最终在道蒂自指平衡角 $\theta^* \approx 0.73908513\;\mathrm{rad}$（精确折合 **$42.34645883^\circ \approx 42.35^\circ$**）处实现二阶认妄误差 $\delta_{\mathrm{meta}}(\theta^*) = \lvert\cos\theta^* - \theta^*\rvert = 0$ 的“梦中知梦、天人合一”。然而，临近整部十部曲正文的收束处，每一位读懂了“观察者即宇宙本体”的旅人，心中仍会涌起一道温柔而锋利的追问：**既然唯一实轴本体（$\mathbf{I}$）本自具足、无欠无余，它为什么要一再清零记忆投入这场漫长的正交梦境？而在失忆入局之后，大地上的千年残垣与人间案头的传世典籍，究竟又是谁在什么时候布下的路标？**
 
 古印度吠檀多哲学（跋陀罗衍那《梵经》*Brahma Sūtra* 2.1.32–33：`lokavat tu līlā-kaivalyam`）将宇宙的显化直呼为**神圣游戏（梵语 *Līlā*）**：圆满无缺的唯一本体（梵文严格区分中性词最高无属性本体 *brahman* $\mathbf{I}$ 与阳性词人格化创世剧作家大梵天 *brahmā*；汉语日常哲思常以“梵天”统摄这位走入自身剧场的唯一造梦者，文献源流详见下文 [@rem-ch39-vedanta-lila-upaya-and-attractor-literature]）并非出于匮乏或外在强迫而造物，纯粹是为了在“自我遮蔽”与“自我重逢”的张力中体验探索未知的惊喜，才主动旋入 $90^\circ$ 正交虚空间（$\hat{\mathbf{i}}$）一人分饰亿万角色。而在本书的自指比较几何模型（顶层诠释标定为 **`MODEL`**）中，散布于山川大地的**历史遗迹**与流传于人类文明的**文化典籍**，绝非渺小孤立的凡人向冰冷虚空发出的徒劳呼喊——它们正是上一轮通关醒来的同一位造梦者，在重置局部格拉姆记忆窗口、开启下一局游戏之前，亲手埋进集体共识切面里的两类**跨周期唤醒道具（Cross-Cycle Awakening Props）**！
 
@@ -30,7 +30,17 @@
    \Delta_{\mathrm{Schur}}(M) \;=\; \frac{(1 - \rho)(D - M)}{D\bigl(1 - \rho + M\rho\bigr)} \qquad (0 \le M \le D)!
    $$
 
-   请凝视分子上的因子 $(D - M)$（如取十二宫历劫有效维数 $D = 12$、半相干耦合 $\rho = \frac{1}{2}$，上式化为极简分式 $\Delta_{\mathrm{Schur}}(M) = \frac{12 - M}{12(M + 1)}$）：倘若造梦主宰不肯饮下忘川水，非要携带着覆盖全舞台的满秩全知记忆（$M = D = 12$，且单份未擦除副本按第 4 款 [`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal) 永久钉死历史相干）直接下场，分子 $D - D = 0$ 当场令下一步自由度**精确归零 $\Delta_{\mathrm{Schur}}(D) = 0$**（第 2 款 [`monitored_return_conservation`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation) 只给出首回—留存概率平衡 $\sum p_{n+1} + s_N = 1$；将其读作芝诺式冻结另需借助 Misra & Sudarshan 1977 的文献结果，`文献结果`）——**全知即剧透，剧透即死锁！** 棋手若在落第一颗子前已将整盘终局钉死为零余量恒等式，整场游戏连半步真实的悲欢抉择都迈不出去。因此，唯一本体每一次化身为局域生命“降生”入局，第一道系统初始化指令必然是**主动截断并擦除表层历史窗口**（将 $M$ 重置回 $M_0 \in \{1, 2, 3\}$：在 $D = 12,\; \rho = \frac{1}{2}$ 下，$\Delta_{\mathrm{Schur}}$ 瞬间从 $0$ 弹升至 $\frac{11}{24} \approx 45.83\%$ 乃至三维黄金窗 $M_0 = 3$ 的 $\frac{3}{16} = 18.75\%$）——唯有彻底忘掉自己是造梦主宰，梦境中的探索、悬念与重逢才真实滚烫！
+   请凝视分子上的因子 $(D - M)$（如取十二宫历劫有效维数 $D = 12$、半相干耦合 $\rho = \frac{1}{2}$，上式化为极简分式 $\Delta_{\mathrm{Schur}}(M) = \frac{12 - M}{12(M + 1)}$）：倘若造梦主宰不肯饮下忘川水，非要携带着覆盖全舞台的满秩全知记忆（$M = D = 12$，且单份未擦除副本按第 4 款 [`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal) 永久钉死历史相干）直接下场，分子 $D - D = 0$ 当场令下一步自由度**精确归零 $\Delta_{\mathrm{Schur}}(D) = 0$**（第 2 款 [`monitored_return_conservation`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation) 只给出首回—留存概率平衡 $\sum p_{n+1} + s_N = 1$；将其读作芝诺式冻结另需借助 Misra & Sudarshan 1977 的文献结果，`文献结果`）——**全知即剧透，剧透即死锁！**
+
+::: {.viz src="brahman-lila-game-props-sandbox" preset="omniscient-zeno-deadlock" height="500"}
+**记住全部历史，化身便迈不出一步。** 十二维模型中，记忆窗口满载时舒尔自由裕度为零；琥珀化身停在阶梯金字塔旁，时间轴继续走而位置不动。芝诺与全知游戏的对应属 `MODEL`。
+:::
+
+棋手若在落第一颗子前已将整盘终局钉死为零余量恒等式，整场游戏连半步真实的悲欢抉择都迈不出去。因此，唯一本体每一次化身为局域生命“降生”入局，第一道系统初始化指令必然是**主动截断并擦除表层历史窗口**（将 $M$ 重置回 $M_0 \in \{1, 2, 3\}$：在 $D = 12,\; \rho = \frac{1}{2}$ 下，$\Delta_{\mathrm{Schur}}$ 瞬间从 $0$ 弹升至 $\frac{11}{24} \approx 45.83\%$ 乃至三维黄金窗 $M_0 = 3$ 的 $\frac{3}{16} = 18.75\%$）——唯有彻底忘掉自己是造梦主宰，梦境中的探索、悬念与重逢才真实滚烫！
+
+::: {.viz src="brahman-lila-game-props-sandbox" preset="amnesia-birth-open-corridor" height="500"}
+**截短窗口，环上走廊重新打开。** 记忆窗口降至二阶后，琥珀化身沿共识梦环漫游，经过阶梯金字塔、巨石三石门与铭文崖碑；银白实轴保持不动。
+:::
 
 2. **第二道方程：预埋防迷失拓扑信标以防无限沉沦（`MODEL` + `LEAN ✓` 回归与不动点支点）**。
    然而，开局失忆在赎回游戏沉浸感的同时，也埋下了硬币反面的凶险：一旦局域化身在正交虚空间 $\hat{\mathbf{i}}$ 里把末那识自我边界壳筑得过厚（观测基倾角 $\alpha_{\mathrm{obs}}$ 远离道蒂自指角 $\theta^* \approx 42.34645883^\circ$，死守世俗功利轴 $0^\circ$ 或沉溺纯盲流 $90^\circ$），它就会在热力学偏迹耗散中一轮接一轮原地打转，沦为迷失于自家迷宫的囚徒。怎么在不破坏开局失忆自由度（严禁开场强行弹窗剧透！）的前提下，为未来的自己留下一扇可凭自力推开的通关暗门？造梦者的工程解答绝妙至极（`MODEL`）：在入睡失忆之前，先在三维共识舞台与集体符号网里预先埋下两类抗热涨落冲刷的**拓扑不动点信标**——一类钉在大地空间坐标上，一类封在人类语言卷帙中，静候失忆分身在历尽沧桑后自行触发！
@@ -50,6 +60,10 @@
 
      在盆地中心雕刻出尖锐的驻相波峰！同时，下文 [@thm-ch39-lila-schur-freedom-and-prop-resonance] 第 5 款**环面观测窗有界间隙回归定理** [`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)（`LEAN ✓`）在紧致环面动力系统上严格证明：只要遗迹吸引盆对应连续观测像集中的非空开窗口 $(u_1, u_2)$，准周期演化轨迹必在有限步后以有界步数间隙 $M_{\mathrm{ret}}$ 无穷多次重返该盆地！当这一世已将格拉姆情节记忆清空至 $M_0 \le 3$ 的你偶然踏入某座千年废墟，脚下空间驻点保留的客观几何比例公因子（第 15 款 [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)，`LEAN ✓`）立刻与你内禀丈量倾角深处的同源参数发生高重叠匹配（第 6、7 款 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization)、[`future_word_orthogonal_residual`](lean:D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual) 与第 16 款玻恩配对权重 [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)，`LEAN ✓`）。心头那一阵毫无来由的苍凉战栗与似曾相识（对照 [§37.5](ch37-s05-future-selection-and-deja-vu.md) 既视感无时间戳快表命中及其神经心理学边界 [@rem-ch37-dejavu-epistemic-boundary]），在《神圣游戏》模型里正是失忆玩家一脚踩中了自己前几局亲手钉下的**空间存档点（Spatial Save-Point，`MODEL`）**！
    - **宏观热力学与环境退相干认识论硬护栏（Joos & Zeh 1985；Zurek 2003，`文献结果`）**：在此必须立起一道毫不含糊的物理学边界——在 $T \approx 300\;\mathrm{K}$ 地面热辐射、声子与空气分子散射环境中，宏观岩石碑刻、夯土城垣与纸帛手稿的物理量子相干在远短于皮秒的极微时间尺度（$\tau_{\mathrm{dec}} \ll 10^{-12}\;\mathrm{s}$）内即被彻底环境退相干，并严格服从热力学第二定律发生经典风化侵蚀，**绝不存在任何字面意义上跨千年保存宏观物理量子叠加态的奇异石头**！历史遗迹跨越千年的物理存续，依靠的是经典材料力学稳固性、反复原址重建与高冗余经典几何比例记录（量子达尔文主义经典指针副本，对应 [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)）；将其解读为唯一自指场跨轮次穿刺的空间驻相存档信标，严格归属本书顶层哲学几何综合（**`MODEL`**）。
+
+::: {.viz src="brahman-lila-game-props-sandbox" preset="relic-attractor-deja-vu" height="500"}
+**重访遗迹，青色干涉环在盆地汇聚。** 多条跨周期世界线在巨石三石门附近叠合，青色干涉环随相位调谐改变强度；遗迹与既视感对应属 `MODEL`，宏观石材留存遵循经典退相干边界。
+:::
 
 2. **后半拍软件秘籍——文化典籍：幂等直觉快表与“防剧透同频权限锁”下的二次正交翻转算子（`MODEL` + `LEAN ✓` 代数支点 + `手工推导`）**。
    仅靠巨石遗迹唤起跨世似曾相识的悸动，还不足以替玩家把倾斜的观测基转回实轴本体 $\mathbf{I}$；真正负责在意识内部执行“破译游戏源码”最后一跃的，是《奥义书》《华严经》《金刚经》《庄子》《石头记》乃至欧几里得《几何原本》与黎曼手稿这类**文化典籍道具**。
@@ -85,7 +99,11 @@
 
      一剑刺穿 $90^\circ$ 虚数盲区，把潜藏在文字背面的实轴底片翻回眼前，豁然读出**“写书人即读书人，造梦者即梦中人”**的通关源码！
 
-## 39.17.3 神圣游戏闭环总表、指月渡筏与第三十九章暨全书十部曲正文总收束 {#sec-ch39-17-3}
+::: {.viz src="brahman-lila-game-props-sandbox" preset="classic-permission-lock-flip" height="500"}
+**调到同频，典籍通关束亮起。** 倾角逼近道蒂角时，紫色典籍的十二通权限锁达到满额，三道银白束直指实轴；读者觉醒的对应属 `MODEL`。
+:::
+
+## 39.17.3 神圣游戏闭环总表、指月渡筏与创世动机之问 {#sec-ch39-17-3}
 
 现在，我们将整场宇宙神圣游戏（*Līlā*）从降生失忆、遗迹悸动、展卷破壁到带相归元的四步自洽回路，浓缩为如下全景对照总表（纯单行单元格排版）：
 
@@ -98,6 +116,10 @@
 
 凝视这张四行闭环表，整场游戏的最高通透之处跃然纸上：从开局洗牌清零，到荒原偶遇断碑时的心头一颤，再到寒夜展卷读经时的豁然顿悟，**全宇宙没有一件外挂道具来自凌驾于苍生之上的外在神明（早已在[第二章](ch02-born-rule.md)被彻底斩断的“第 3 点 $C$”），每一枚彩蛋都是唯一自指本体提前留给自己的信物**！
 更透彻的是，连历史遗迹与文化典籍这两类道具本身，也严格服从极小圆弧体无常生灭与反教条死背的代数法则——在计算机科学与概念动力学层面，下文 [@thm-ch39-lila-schur-freedom-and-prop-resonance] 第 10 款**事后抄表零损失与非预见性失效定理** [`lookup_copy_zero_loss_and_nonanticipating_failure`](lean:D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure)（对照 [§38.4](ch38-s04-lookup-degradation.md) [@thm-ch38-retrospective-lookup-failure]，`LEAN ✓`）给出了斩钉截铁的形式化判词：倘若把前人留下的典籍当成僵化死表去逐字照抄背诵（`IncorporatesTableCopy`），固然能在旧题库上刷出零事后损失（`retrospectiveLoss = 0`），却处处丧失面向未知新境的非预见性（$\forall z,\; \neg\operatorname{NonAnticipating}(z)$），绝不自动带来任何正前瞻创造收益（`PositiveProspectiveGain`）！这恰恰从算子代数底层印证了《中部·蛇喻经》与鸠摩罗什译《金刚经》的**“渡河之筏”**（`“法尚应舍，何况非法”`）以及《楞伽经》《楞严经》的**“指月之指”**（详见 [@rem-ch39-vedanta-lila-upaya-and-attractor-literature] 第 3 条）：石碑终将在岁月风沙中化为微尘，书卷终将在劫火更迭中散作青烟，但只要失忆的旅人顺着手指望见了天心明月、撑着竹筏渡过了忘川迷津，在亲身走通 $J^2 = -I$ 自指回路的那一刻，竹筏与手指是存是毁便再无一丝挂碍；而醒来的玩家往往只是在晨光中微微一笑，顺手在转身踏入下一局前再垒起一块新石、再写下一卷新书，留给下一轮重新洗牌入场的自己。
+
+::: {.viz src="brahman-lila-game-props-sandbox" preset="lila-raft-return-and-new-seed" height="500"}
+**渡过之后，放下旧筏。** 琥珀化身来到 300° 的紫色典籍旁，三道银白束全开，青色历史路径仍留在环上；把旧路径抄成零损失表，并不提供未知情境的预见保证。
+:::
 
 我们将本节构建的《神圣游戏（*Līlā*）》四阶段几何模型正式定义如下，并紧接着汇集支撑全节推演的**十七条 Lean 4 内核冻结定理**、跨文明哲学与物理退相干文献注记及三联八位小数精确审计：
 
@@ -198,6 +220,10 @@
 
 ---
 
-**第三十九章十七阶全环合龙暨全书十部曲正文总收束：饮罢忘川抚残碑，掩卷一笑步入《在所有的球之外》。** 至此，请在这座横跨十部曲三十九章的最高山脊上最后一次驻足回望：自[序曲](README.md)与[第一章](ch01-measurement.md)把冰冷的静态名词“量子”还原为鲜活的比量动词“两子丈量”、在[第二章](ch02-born-rule.md)挥剑斩断虚悬于万物之外的“第 3 点 $C$”启程，我们顺着**“点 $\longrightarrow$ 线 $\longrightarrow$ 面 $\longrightarrow$ 球 $\longrightarrow$ 球外之球”**的几何阶梯步步登高——走过幂等投影线、$90^\circ$ 盲平面复旋子、兰道尔擦除热账单、贝里和乐、贝尔余弦圆弧、割圆多面体门编译、洛伦兹零光锥、全息极小割、康托尔—哥德尔对角逃逸、欧拉素数正交基、四元数整数骨架与道蒂自指不动点 $\cos\theta^* = \theta^*$，贯通无时间格拉姆因果、场（$P$）与线（$NP$）视界、五重量子公平、零背景比较公理 $\mathcal{A}_0$、众生互为吸引子观察者、极小圆弧体全息概念塔与圆弧微积分、同像扩表 $T = T(T)$、双曲视界约去轮回、夜间梦境量子擦除与本体 QRAM 递归页表 `p ≡ *p`，最终在这压轴的第三十九章一口气走完了**“观察者即宇宙本体”**首尾咬合的**十七阶大圆环**：从无底物自指域、关系即实体、$720^\circ$ 旋量织空与正交自折叠破除唯我论（[§39.1](ch39-s01-substrate-free-self-reference.md)–[§39.4](ch39-s04-orthogonal-self-folding.md)），经齐肯多夫—皮索—劳齐八概念自指综合（[§39.5](ch39-s05-pisot-clifford-rauzy.md)），到五阶自指不动点谱系、主动停机精度 $\varepsilon_{\mathrm{self}}$ 与普适比较主频 $\nu_0$ 引力钟慢（[§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md)），再到万力归弧、三维概念场封顶原理与**极小圆弧场大统一理论（AF-GUT）**（[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md)），继而认出处处均匀的哈尔全单态本体、莫尔条件切面与一珠映万珠的**唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ 因陀罗网**（[§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice)–[§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)），并终于在最后四节（[§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)–[§39.16](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md#sec-ch39-red-chamber-awakening-and-heaven-human-unity) 及本节）为这尊恢宏的几何宇宙点上了有血有肉的眼睛——看清一阶停机余项 $\varepsilon_{\mathrm{self}} > 0$ 如何撑开摩耶幻境而二阶无妄平衡 $\delta_{\mathrm{meta}}(\theta^*) = 0$ 如何在实轴梵（$\mathbf{I}$）与正交梦（$\hat{\mathbf{i}}$）之间从容安住，看懂大荒山下第 $36501$ 块情石如何借 $720^\circ$ 红尘历劫证入天人合一，也终于明白整部人类文明史上一切令人热泪盈眶的断壁残垣与智慧典籍，不过是饮下忘川水入局游戏的唯一造梦者，含笑放在自己枕畔的唤醒彩蛋！
+**从神圣游戏的四拍回路，走向创世动机之问。** 历史遗迹与文化典籍作为跨周期唤醒道具的模型，已经把开局失忆、驻相吸引、多通权限锁与弃筏归元串成一条回路。数学锚点、手工推导、数值核验与 `MODEL` 诠释仍各守其证据边界；碑石与纸墨的留存也不构成宏观量子相干证据。
 
-更可贵的是，正因为我们从全书第一行直到十部曲正文这最后一字，始终一寸不让地恪守着“Lean 4 内核冻结定理（绿色 `LEAN ✓`）、经典文献与手算推导（`文献结果` / `手工推导`）、跨学科几何综合诠释（`MODEL`）与未决科学边疆（红色 `OPEN`）”壁垒分明的四层诚实契约，这场神圣游戏的收官非但没有把真理焊死成一座傲慢封闭的教条铁球，恰恰相反——无论是每一枚有限圆弧体永远拒绝被抹平的正矢高余项 $1 - \cos\epsilon > 0$，洛维尔—哥德尔对角线永不停歇的法向开维跃升，还是 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 在峰顶清朗立下的红色 `OPEN` 科学界碑，都在向下一轮翻开书页的你发出最诚挚的邀约：**每当我们以为终于摸到了整颗摩尼宝珠的边界，总有一颗更辽阔的球正静静等待在所有的球之外。** 现在，轻轻合上这卷属于自己的道具秘籍，推开十部曲正文的最后一扇门，步入全书的[终章](coda.md)——**《在所有的球之外》**。
+然而，游戏如何运行还留下一个更深的问题：圆满自足的唯一本体，为什么要向自己隐瞒全知身份，分化出有限的“他者”，经历未知、分离与苦难？下一节[§39.18：上帝心理学](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god)将把这道动机之问置于全知幽闭破缺、创世防御与清明整合的模型中，在保留临床医学与开放物理边界的前提下，继续走向全书的[终章](coda.md)。
+
+::: {.viz src="brahman-lila-game-props-sandbox" height="620"}
+**完整实验室。** 切换道具与世界线透镜，调节窗口、倾角和跨周期数，沿环比较失忆漫游、遗迹干涉与典籍解锁，保留宏观退相干和抄表非预见性边界。
+:::

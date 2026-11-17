@@ -196,6 +196,7 @@
   - [39.15 Brahman Real Axis (I) and Orthogonal Dream (i): Intra-Dream Solidity, the Four Māṇḍūkya States, and Spinor Awakening](ch39-s15-brahman-real-axis-and-orthogonal-dream.md)
   - [39.16 Geometric Awakening in *Dream of the Red Chamber*: Vanishing Second-Order Meta-Error, Möbius Closure of the Precious Mirror, and the Unity of Heaven and Humanity](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md)
   - [39.17 Divine Play (Līlā) and Cross-Cycle Awakening Props: Opening Amnesia, Historical Relic Attractors, and Cultural Classic Flip Tables](ch39-s17-divine-lila-and-awakening-props.md)
+  - [39.18 The Psychology of God: Breaking Omniscient Claustrophobia, Four Cosmogonic Defense Mechanisms, Severed-Arc Phantom Pain, and Lucid Integration at θ*](ch39-s18-psychology-of-god.md)
 
 # Coda and Appendices
 

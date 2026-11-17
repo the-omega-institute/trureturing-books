@@ -638,6 +638,27 @@ $$
 
 与 [@rem-appe-half-comparison-holonomy] 对照：$R_{a\to b}$ 是 $r_{ba}=r_{ab}^*$ 的像，所以定理第 2 条是注记中乘积的对合 $(r_{ab}\,r_{bc}\,r_{ca})^*=r_{ac}\,r_{cb}\,r_{ba}$，$D$ 前的符号随之由正变负；第 1 条就是注记末尾的恒等式。第 3 条给出第 2 条的操作读法：从 $a$ 的本征旋量出发，沿 $a\to b\to c\to a$ 做三次归一化投影，回到原旋量并乘上模为 $1$ 的因子 $(S-iD)/\sqrt{S^2+D^2}$。Lean 没有陈述的部分照旧分层：把辐角 $\operatorname{atan2}(D,S)$ 等同于半个吉拉尔角盈是文献结果；旋子的指数形式没有形式化；“最短”意义下的最小性与唯一性也没有形式化，Lean 模块里 `rotor` 与 `shortestGate` 只是名字。Lean 中 $N_r(\phi)$ 对一切 $\phi$ 有定义（分母为零时按 Lean 的约定取零向量）；定理只在各步分母 $\sqrt{(1+u\cdot v)/2}>0$ 处用到它。
 
+[@rem-appe-real-realizability-return-phase] 第 1、2 款在“有一个对象与其余每个对象都不正交”的情形已在所钉仓库冻结，陈述如下；这时不需要填满的条件。一般的填满情形与单比特的第 4 款仍是手工推导。
+
+::: {.proposition #prop-appe-real-rephasing-star title="有一行不含零的厄米矩阵：可重定相为实矩阵，当且仅当三点乘积全为实" lean="D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_rephasing_iff_triple_products_real D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_gram_rephasing_iff_triple_products_real"}
+设 $G$ 是 $N\times N$ 复矩阵，$i_0$ 是一个指标，并且 $G_{i_0j}\neq0$ 对每个 $j$ 成立。
+
+1. 若 $G$ 是厄米矩阵，则存在实数 $\theta_1,\dots,\theta_N$ 使一切 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 为实数，当且仅当对一切指标 $i,j,k$（允许重复），$G_{ij}G_{jk}G_{ki}$ 为实数。
+2. 若 $G$ 半正定，则存在实数 $\theta_1,\dots,\theta_N$ 与 $N\times N$ 实矩阵 $B$，使 $e^{i\theta_i}G_{ij}e^{-i\theta_j}=\left(B^{\mathsf T}B\right)_{ij}$ 对一切 $i,j$ 成立，当且仅当对一切指标 $i,j,k$，$G_{ij}G_{jk}G_{ki}$ 为实数。
+:::
+
+::: proof
+“仅当”：相位沿 $i\to j\to k\to i$ 相消，重定相不改变 $G_{ij}G_{jk}G_{ki}$，而它在实矩阵中算出来是实数。“当”：取 $\theta_j=\arg G_{i_0j}$。由厄米性 $G_{ji_0}=\overline{G_{i_0j}}$，于是
+
+$$
+e^{i\theta_i}G_{ij}e^{-i\theta_j}=\frac{G_{i_0i}\,G_{ij}\,G_{ji_0}}{\lvert G_{i_0i}\rvert\,\lvert G_{i_0j}\rvert},
+$$
+
+是三点乘积 $G_{i_0i}G_{ij}G_{ji_0}$ 的正实数倍，所以是实数；$G_{ij}=0$ 的元素重定相后仍为零。第 2 款：重定相是 $G\mapsto DGD^{*}$，$D$ 为对角酉矩阵，保持半正定；重定相后的矩阵元素全为实数，所以它是实对称半正定矩阵，可写成 $B^{\mathsf T}B$。
+
+对厄米矩阵，含重复指标的三点乘积（如 $G_{ij}G_{ji}G_{ii}=\lvert G_{ij}\rvert^2G_{ii}$）与含零元的三点乘积自动是实数，所以条件只在非正交图的三角形上有内容，与 [@rem-appe-real-realizability-return-phase] 第 2 款的写法一致。完整证明由 Lean 内核检查。
+:::
+
 返回相位的虚部只在 $D\neq0$ 时出现。两两比较读得出 $D$ 是否为零，读不出它的符号：$D^2=1+2xyz-x^2-y^2-z^2$（$x=a\cdot b$，$y=b\cdot c$，$z=c\cdot a$，即 [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)）只给出它的平方。$D$ 是否为零恰好回答一个与 `H7` 相邻的问题：一族对象是否需要复数振幅。
 
 ::: {.remark #rem-appe-real-realizability-return-phase title="一族对象何时可以只用实数描述：三点巴格曼乘积是否为实（手工推导与文献结果）"}
@@ -1003,6 +1024,21 @@ $K$ 的符号还没有定。下一条注记回答：什么排除 $K<0$，什么�
 :::
 
 所以时间次序条件排除椭圆一行（以及 $s\le-1$ 的比较），“求异部分不是零平方”再排除抛物一行，两条合起来选出 $s>1$ 的双曲一行。求异部分满足 $A^*=-A$，$A^2=0$ 即 $A^*A=0$，所以后一条是 [@rem-appe-positivity-invisible-part] 中“没有非零的 $a$ 满足 $a^*a=0$”在求异部分上的特例；$(M_2(\mathbb{R}),{}^\sharp)$ 上没有态（$a=\operatorname{diag}(1,-1)$ 给出 $a^\sharp a=-\mathbf{1}$），那里关于读数的结论在这里不适用。
+
+[@rem-appe-time-order-repetition] 第 2 款已在所钉仓库冻结，陈述如下；第 1、3 款与观察者模型中的读法没有形式化。
+
+::: {.proposition #prop-appe-chebyshev-positivity-threshold title="切比雪夫值恒正的阈值与首次变号的指标" lean="D5/S3/Analytic/Chebyshev/PositivityThreshold.forall_pos_eval_T_iff_one_le D5/S3/Analytic/Chebyshev/PositivityThreshold.eval_T_cos_floor_succ_neg_and_nonneg_before"}
+设 $T_n$ 是第一类切比雪夫多项式：$T_0=1$，$T_1(x)=x$，$T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)$。
+
+1. 对实数 $s$：$T_n(s)>0$ 对一切自然数 $n\ge1$ 成立，当且仅当 $s\ge1$。
+2. 设 $0<\alpha<\pi$，$n_0=\lfloor\frac{\pi}{2\alpha}\rfloor+1$。则 $T_{n_0}(\cos\alpha)<0$，并且对一切自然数 $n<n_0$ 有 $T_n(\cos\alpha)\ge0$。
+:::
+
+::: proof
+第 2 款：$T_n(\cos\alpha)=\cos n\alpha$。由取整的定义，$n_0-1\le\frac{\pi}{2\alpha}<n_0$，所以 $\frac\pi2<n_0\alpha\le\frac\pi2+\alpha<\frac{3\pi}2$，$\cos n_0\alpha<0$；$n<n_0$ 时 $n\le\frac{\pi}{2\alpha}$，于是 $0\le n\alpha\le\frac\pi2$，$\cos n\alpha\ge0$。
+
+第 1 款：$s\ge1$ 时 $T_n(s)\ge1$（写 $s=\cosh\eta$，则 $T_n(s)=\cosh n\eta$）；$s\le-1$ 时 $T_1(s)=s<0$；$-1<s<1$ 时取 $\alpha=\arccos s$，$0<\alpha<\pi$，第 2 款给出 $T_{n_0}(s)<0$，而 $n_0\ge1$。完整证明由 Lean 内核检查。
+:::
 
 ::: {.remark #rem-appe-rotor-boost-coexistence title="有界与保序两种选择互补：转动与推进住在同一个代数里（手工推导与文献结果）"}
 **手工推导。** 设 $u\neq\mathbf{1}$，$uu^*=u^*u=\mathbf{1}$，$S=s\mathbf{1}$。在 $\mathbb{R}[A]=\operatorname{span}\{\mathbf{1},A\}$ 上 $(x+yA)^*(x+yA)=\left(x^2-y^2(s^2-1)\right)\mathbf{1}$，由此并由 [@rem-appe-bounded-recurrence] 与 [@rem-appe-time-order-repetition]：

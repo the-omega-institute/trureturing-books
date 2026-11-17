@@ -7331,6 +7331,179 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "red-chamber-spinor-awakening-sandbox",
+      "code": "HONG//AWAKEN",
+      "title": "HONG//AWAKEN · 红楼旋量觉醒沙盘：风月宝鉴虚实合拢、甄贾对镜与天人同频场",
+      "title_en": "HONG//AWAKEN · Red Chamber Spinor Awakening: Fengyue Baojian Möbius Closure, Zhen–Jia Mirroring & Heaven–Human Resonance",
+      "summary": "第 36501 块余石（36501 = 3·23³，与 36500 互素）居中，双面八角风月宝鉴绕石扫出一条截面随 Φ/2 转动的旋量带：Φ = 360° 时墨色矢量已回原处，镜子却翻成品红贾面，旋量 U = cos(Φ/2) − î sin(Φ/2) 读 −1；Φ = 720° 时带子绕两圈无缝合拢，甄贾两面合成均匀的紫色，U = +1（J² = −1、圆的二重覆盖提升）。石顶的紫色带相冠围出 Ω(θ) = 2π(1 − cos θ)，锥面圈十二站的平均让特征和抹掉全部非对角元、平均态是捏合的不动点，带相却留下：θ* = 0.7390851332 rad = 42.34645883° 处 Ω = 1.639376 sr、|γ_Berry| = 46.9647°，十二站巴格曼积 45.5789°，三锚点 23.9875°。自指误差 δ_meta(θ) = |cos θ − θ| 夹在 |θ − θ*| 与 2|θ − θ*| 之间；末那笼 M 根、阻抗 Z(M) = 13M/(12(M + 1))，卸到 M = 0 时十二根天人同频丝通到外层 42 顶点的因陀罗网。五张实验卡可独立引用。",
+      "summary_en": "The 36,501st surplus stone (36501 = 3·23³, coprime to 36500) at the centre; the two-sided octagonal Fengyue Baojian mirror sweeps a spinor ribbon around it whose cross-section turns by Φ/2: at Φ = 360° the ink vector is home but the mirror shows its magenta Jia face and the spinor U = cos(Φ/2) − î sin(Φ/2) reads −1; at Φ = 720° the ribbon closes after two turns without a seam, Zhen and Jia blend into one violet and U = +1 (J² = −1, the lift through the double cover of the circle). The violet Berry cap on the stone encloses Ω(θ) = 2π(1 − cos θ); averaging over the twelve stations of the cone loop, the character sum removes every off-diagonal term and the average is a fixed point of the pinching, yet the Berry phase stays: at θ* = 0.7390851332 rad = 42.34645883°, Ω = 1.639376 sr and |γ_Berry| = 46.9647°, the twelve-station Bargmann product 45.5789° and the three anchors 23.9875°. The self-reference error δ_meta(θ) = |cos θ − θ| lies between |θ − θ*| and 2|θ − θ*|; the manas cage has M bars and impedance Z(M) = 13M/(12(M + 1)), and unloaded to M = 0 twelve Heaven–Human filaments reach the 42-vertex net of Indra outside. Five independently citable experiments.",
+      "path": "red-chamber-spinor-awakening-sandbox/",
+      "thumbnail": "red-chamber-spinor-awakening-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-17",
+      "chapter": 39,
+      "section": "39.16",
+      "presets": [
+        "chaos-unhewn-stone",
+        "red-dust-delusion-mismatch",
+        "fengyue-mirror-double-turn",
+        "mobius-720-virtual-real-unity",
+        "greensickness-berry-unity"
+      ],
+      "preset_titles": {
+        "chaos-unhewn-stone": {
+          "zh": "混沌未凿的顽石",
+          "en": "The unhewn stone"
+        },
+        "red-dust-delusion-mismatch": {
+          "zh": "红尘迷途：差 120° 合不拢",
+          "en": "Red dust: 120° short of closing"
+        },
+        "fengyue-mirror-double-turn": {
+          "zh": "风月宝鉴转一圈翻到贾面",
+          "en": "One turn flips the mirror to Jia"
+        },
+        "mobius-720-virtual-real-unity": {
+          "zh": "转满 720°，甄贾合成一片",
+          "en": "At 720° Zhen and Jia close into one"
+        },
+        "greensickness-berry-unity": {
+          "zh": "卸掉末那笼，天人同频",
+          "en": "The manas cage unloads into resonance"
+        }
+      },
+      "tags": [
+        "红楼旋量",
+        "风月宝鉴",
+        "720° 合拢",
+        "带相冠",
+        "余弦不动点",
+        "天人同频"
+      ],
+      "tags_en": [
+        "Red Chamber spinor",
+        "Fengyue Baojian",
+        "Closure at 720°",
+        "Berry cap",
+        "Cosine fixed point",
+        "Heaven–Human resonance"
+      ],
+      "theory": [
+        {
+          "label": "39.16 红楼一梦的几何觉醒",
+          "label_en": "39.16 Red Chamber Awakening",
+          "href": "../zh/ch39-s16-red-chamber-awakening-and-heaven-human-unity.html#sec-ch39-red-chamber-awakening-and-heaven-human-unity",
+          "href_en": "../en/ch39-s16-red-chamber-awakening-and-heaven-human-unity.html#sec-ch39-red-chamber-awakening-and-heaven-human-unity"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.sum_annihilator_character"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "brahman-lila-game-props-sandbox",
+      "code": "LILA//PROPS",
+      "title": "LILA//PROPS · 梵天游戏道具沙盘：失忆化身轨迹、历史遗迹吸引子与典籍共振唤醒流形",
+      "title_en": "LILA//PROPS · Divine Līlā Props Sandbox: Amnesiac Avatar Orbit, Relic Spatial Attractors & Classic Flip Resonance",
+      "summary": "银白实轴 I 竖立不动（漂移 0.0000），穿过不透明的共识梦环（R = 0.86、r = 0.24），环顶 0°、120°、240° 的驻相盆地里坐着阶梯金字塔、巨石三石门、铭文崖碑三处遗迹，60°、180°、300° 浮着三簇紫色典籍。琥珀化身记住 D = 12 个等相关成员（ρ = 1/2）中的 M 个，剩下的自由是舒尔补的比例 Δ_Schur(M) = (12 − M)/(12(M + 1))（M = 0、1、3、12 依次 1、0.4583、0.1875、0）：M = 12 时化身冻在原地，M = 1–3 时绕环漫游；到访遗迹时 K 条跨世世界线按费耶尔核扩成青色干涉环。典籍的十二程许可锁 cos²⁴(α − θ*) 在 0° 为 0.0706%、90° 为 0.0076%、θ* = 42.35° 为 100.00%，开锁时三道银白通关束（J² = −I）直射实轴；记录捏合幂等，有限抄表回溯损失为 0 却不是非预期的（渡河之筏）。宏观遗迹与书卷早在退相干边界之外（Joos–Zeh、Zurek），把它们读作游戏道具是本书的模型。五张实验卡可独立引用。",
+      "summary_en": "A silver real axis I stands motionless (drift 0.0000) through an opaque consensus dream torus (R = 0.86, r = 0.24); in the stationary-phase basins on top at 0°, 120° and 240° sit three relics, a stepped pyramid, a megalith trilithon and an inscribed cliff stele, and three violet clusters of classics float at 60°, 180° and 300°. The amber avatar remembers M of D = 12 equally correlated members (ρ = 1/2), and the freedom left is the Schur ratio Δ_Schur(M) = (12 − M)/(12(M + 1)) (1, 0.4583, 0.1875 and 0 at M = 0, 1, 3 and 12): at M = 12 the avatar is frozen, at M = 1–3 it roams the torus; at a relic it visits, K cross-epoch worldlines spread into cyan interference rings by the Fejér kernel. The twelve-pass permission lock of the classics, cos²⁴(α − θ*), is 0.0706% at 0°, 0.0076% at 90° and 100.00% at θ* = 42.35°, where three silver clearance beams (J² = −I) strike the real axis; record pinching is idempotent, and a finite lookup copy has zero retrospective loss yet is not non-anticipating (the raft). Macroscopic relics and books lie far beyond the decoherence boundary (Joos–Zeh, Zurek); reading them as game props is the model of this book. Five independently citable experiments.",
+      "path": "brahman-lila-game-props-sandbox/",
+      "thumbnail": "brahman-lila-game-props-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-17",
+      "chapter": 39,
+      "section": "39.17",
+      "presets": [
+        "omniscient-zeno-deadlock",
+        "amnesia-birth-open-corridor",
+        "relic-attractor-deja-vu",
+        "classic-permission-lock-flip",
+        "lila-raft-return-and-new-seed"
+      ],
+      "preset_titles": {
+        "omniscient-zeno-deadlock": {
+          "zh": "全知即芝诺死锁",
+          "en": "Omniscience is a Zeno deadlock"
+        },
+        "amnesia-birth-open-corridor": {
+          "zh": "失忆出生，走廊打开",
+          "en": "Born amnesiac, the corridor opens"
+        },
+        "relic-attractor-deja-vu": {
+          "zh": "遗迹吸引子与似曾相识",
+          "en": "A relic attractor and déjà vu"
+        },
+        "classic-permission-lock-flip": {
+          "zh": "典籍的许可锁在 θ* 翻开",
+          "en": "The permission lock flips at θ*"
+        },
+        "lila-raft-return-and-new-seed": {
+          "zh": "渡河之筏与新的种子",
+          "en": "The raft and a new seed"
+        }
+      },
+      "tags": [
+        "梵天游戏",
+        "舒尔自由",
+        "失忆化身",
+        "遗迹吸引子",
+        "十二程许可锁",
+        "渡河之筏"
+      ],
+      "tags_en": [
+        "Divine Līlā",
+        "Schur freedom",
+        "Amnesiac avatar",
+        "Relic attractors",
+        "Twelve-pass permission lock",
+        "The raft"
+      ],
+      "theory": [
+        {
+          "label": "39.17 神圣游戏与跨周期唤醒道具",
+          "label_en": "39.17 Divine Līlā and Awakening Props",
+          "href": "../zh/ch39-s17-divine-lila-and-awakening-props.html#sec-ch39-divine-lila-and-awakening-props",
+          "href_en": "../en/ch39-s17-divine-lila-and-awakening-props.html#sec-ch39-divine-lila-and-awakening-props"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
