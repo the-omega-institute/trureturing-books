@@ -394,14 +394,14 @@ section: "Part V · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Proposition 17.4 · Theorem 19.6</p>
+  <p class="kicker">Proposition 17.4 · Theorem 19.7</p>
   <h2 class="t">The light cone fixes the metric; on the bridge graph <em>max-flow equals min-cut</em></h2>
 <TheoremCard class="compact mt-s" label="Proposition 17.4" title="Null-cone quadratic-form rigidity" gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" cite="prop-null-cone-rigidity">
 
 Let $S$ be a real quadratic form on $\operatorname{Space}(d)$. If $\operatorname{minkowski}_d(v) = 0$ always implies $S(v) = 0$, then $S = S(1, 0) \cdot \operatorname{minkowski}_d$.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Theorem 19.6" title="Discrete bridge-graph quantum max-flow min-cut" gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result" cite="thm-bridge-quantum-maxflow-mincut">
+<TheoremCard class="compact mt-s" label="Theorem 19.7" title="Discrete bridge-graph quantum max-flow min-cut" gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result" cite="thm-bridge-quantum-maxflow-mincut">
 
 For natural numbers $0 < a \le b$, $0 < c \le d$ with $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$, the width-three bridge graph has $\operatorname{QMaxFlow} = \operatorname{QMinCut} = \min(ad, bc)$.
 
