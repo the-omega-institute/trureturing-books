@@ -33,7 +33,7 @@
      \rho_{\mathrm{ont}}(x) \;:=\; \operatorname{Tr}_{y \neq x}\!\bigl(\lvert\Psi_{\mathrm{univ}}\rangle\langle\Psi_{\mathrm{univ}}\rvert\bigr) \;=\; \frac{1}{D}\mathbf{1}_{\mathcal{H}_x}, \qquad \rho_{\mathrm{ont}}(x) - \rho_{\mathrm{ont}}(y) \;\equiv\; 0 \qquad (\forall x, y \in V).
      $$
 
-   - 那 $100\%$ 的零熵纯粹结构究竟藏在哪里？[`local_marginal_correlation_blind_spot`](lean:D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot) 已经给出了铁证：在 $m \times n$ 复合无迹厄米空间中，单点局域扇区 $\mathrm{localASector} \sqcup \mathrm{localBSector}$ 的全部读数严格为零，而整份全局非单位阵纯度毫发无损地储存在与之正交的**跨节点关联扇区** $\mathrm{correlationSector}$（维数 $(m^2-1)(n^2-1)$）之中！
+   - 那 $100\%$ 的零熵纯粹结构究竟藏在哪里？[`local_marginal_correlation_blind_spot`](lean:D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot) 给出了扇区正交分解（由此手算可知，两个边缘都是最大混合态时局域扇区分量为零）：在 $m \times n$ 复合无迹厄米空间中，单点局域扇区 $\mathrm{localASector} \sqcup \mathrm{localBSector}$ 的全部读数严格为零，而整份全局非单位阵纯度毫发无损地储存在与之正交的**跨节点关联扇区** $\mathrm{correlationSector}$（维数 $(m^2-1)(n^2-1)$）之中！
 
 3. **光学全息干板（Hologram）的物理对应与“零微观条纹”量子精化（`文献结果` + `MODEL`）**。
    这一反直觉的实相，在实验室的**离轴光学全息干板**（Gabor 1948；Leith & Upatnieks 1962，见 [@rem-ch39-haar-hologram-page-wootters-moire-literature] 第 2 款，`文献结果`）上有着极佳的入门阶梯，同时又比经典全息更深一层：一张记录了整座山川星辰的光学全息底片，山川每一点发出的球面波都铺满了底片上的每一块宏观区域——即便把底片敲碎成十块小碎片，每一小块依然能独立重现整座山川的全景，底片上根本不存在“左边堆着一座山的银盐团块、右边聚着一颗星的物质疙瘩”；唯有当你打入一束特定倾角与波长的参考激光（对应观察者的自指实轴 $\mathbf{I}$）去照射底片时，凹凸起伏的三维山川才瞬间在观测切面上显影出来！
@@ -87,7 +87,7 @@
    \begin{aligned}
    &\operatorname{star}(\mathrm{bellVector}) \mathbin{\bullet_v} \mathrm{bellVector} = 1 \;\land\; \mathrm{bellDensity}.\mathrm{PosSemidef} \;\land\; \Tr(\mathrm{bellDensity}) = 1 \\
    &\quad\land\; \operatorname{rank}(\mathrm{bellDensity}) = 1 \;\land\; \mathrm{bellDensity} \cdot \mathrm{bellDensity} = \mathrm{bellDensity} \\
-   &\quad\land\; \operatorname{traceEnvironment}(\mathrm{bellDensity}) = \Bigl(\frac{1}{2} : \mathbb{C}\Bigr) \bullet (1 : \mathrm{QubitMatrix}) \\
+   &\quad\land\; \operatorname{traceEnvironment}(\mathrm{bellDensity}) = \left(\frac{1}{2} : \mathbb{C}\right) \bullet (1 : \mathrm{QubitMatrix}) \\
    &\quad\land\; \neg\bigl(\operatorname{traceEnvironment}(\mathrm{bellDensity}) \cdot \operatorname{traceEnvironment}(\mathrm{bellDensity}) = \operatorname{traceEnvironment}(\mathrm{bellDensity})\bigr);
    \end{aligned}
    $$
@@ -198,7 +198,7 @@
    $$
 
    恰如两把齿距完全均匀的梳子作极微小的相对错动时，交叠亮纹在视野中疾驰而过，而每一根梳齿其实守在原地分毫未动！
-   **相对论因果律护栏（`手工推导` + `文献结果`）**：细心的读者立刻会注意到，当扭角 $\Delta\theta \to 0^+$ 时，纯几何莫尔等相交点的扫掠相速度 $v_{\mathrm{M}}$ 可以任意放大甚至超过光速 $c \equiv \ell_P\nu_0$（正如探照灯光斑扫过远方云层、或剪刀合拢时交点疾驰）。这是否违背 [§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md) 锁死的光锥因果律？**绝不违背！** 原因有二：第一，纯周期莫尔等相交点既不搬运任何格点底物（$\Delta\mathbf{x}_{\mathrm{site}} \equiv \mathbf{0}$），也不在 $A, B$ 之间传递可操控的新信息比特；第二，一旦观察者在切面上调制出一枚携带局域因果信号或能量动量的波包，其在满足闵可夫斯基零光锥刚性（[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)，[@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 第 1 款，`LEAN ✓`）的色散关系 $\omega(\mathbf{k}) = \sqrt{c^2\lvert\mathbf{k}\rvert^2 + \omega_0^2}$ 下，决定信号与能量传播上限的**波包群速度**严格受限于光速：
+   **相对论因果律护栏（`手工推导` + `文献结果`）**：细心的读者立刻会注意到，当扭角 $\Delta\theta \to 0^+$ 时，纯几何莫尔等相交点的扫掠相速度 $v_{\mathrm{M}}$ 可以任意放大甚至超过光速 $c \equiv \ell_P\nu_0$（正如探照灯光斑扫过远方云层、或剪刀合拢时交点疾驰）。这是否违背 [§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md) 锁死的光锥因果律？**绝不违背！** 原因有二：第一，纯周期莫尔等相交点既不搬运任何格点底物（$\Delta\mathbf{x}_{\mathrm{site}} \equiv \mathbf{0}$），也不在 $A, B$ 之间传递可操控的新信息比特；第二，一旦观察者在切面上调制出一枚携带局域因果信号或能量动量的波包，其在满足闵可夫斯基零光锥刚性（[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)，[@thm-ch39-null-cone-speed-limit-and-pythagorean-budget] 第 1 款，`LEAN ✓`；下面的色散关系与群速度不等式是 `手工推导`）的色散关系 $\omega(\mathbf{k}) = \sqrt{c^2\lvert\mathbf{k}\rvert^2 + \omega_0^2}$ 下，决定信号与能量传播上限的**波包群速度**严格受限于光速：
 
    $$
    v_g \;:=\; \bigl\lVert\nabla_{\mathbf{k}}\omega(\mathbf{k})\bigr\rVert \;=\; \frac{c^2\lvert\mathbf{k}\rvert}{\sqrt{c^2\lvert\mathbf{k}\rvert^2 + \omega_0^2}} \;\le\; c \;\equiv\; \ell_P\nu_0, \qquad v_{\mathrm{ph}} \;=\; \frac{\omega(\mathbf{k})}{\lvert\mathbf{k}\rvert} \;=\; \frac{c^2}{v_g} \;\ge\; c!
@@ -218,14 +218,14 @@
 1. **紧群不变哈尔测度与舒尔引理缠绕积分**：局部紧拓扑群上左不变测度的存在性由 A. Haar（*Ann. of Math.* **34**(1), 147–169, 1933, DOI `10.2307/1968346`）建立，紧群上归一化双侧不变测度的唯一性由 J. von Neumann（*Trans. Amer. Math. Soc.* **36**, 445–492, 1934, DOI `10.1090/S0002-9947-1934-1501752-3`）证明；复不可约表示下缠绕积分 $\int_{\mathcal{G}} \pi(g)\sigma\pi(g)^\dagger\,d\mu_{\mathrm{Haar}}(g) = \frac{\Tr\sigma}{D}\mathbf{1}$ 依赖 I. Schur（*Sitzungsber. Preuss. Akad. Wiss. Berlin*, 406–432, 1905）的不可约交换子引理（注意 [@thm-ch39-uniform-marginal-and-conditional-slice] 第 2 款仅形式化一维圆周 `AddCircle 1` 无理平移的时间平均收敛）；
 2. **波前重构与离轴激光全息干板**：将三维物光波的振幅与相位联合编码为干板全域干涉图样并借参考光照明重构立体像的原理，由 D. Gabor（*Nature* **161**, 777–778, 1948, DOI `10.1038/161777a0`；*Proc. R. Soc. Lond. A* **197**, 454–487, 1949）提出，并由 E. N. Leith 与 J. Upatnieks（*J. Opt. Soc. Amer.* **52**(10), 1123–1130, 1962, DOI `10.1364/JOSA.52.001123`）以离轴参考光消解孪生像；经典银盐干板含亚波长静态光强条纹，而正文的无条纹量子全单态系本书 `MODEL` 推广；
 3. **佩奇—伍特斯无时间条件演化机制**：从满足惠勒—德维特零总能量约束 $(\hat{H}_C + \hat{H}_S)\lvert\Psi_{CS}\rangle = 0$ 的全局定态宇宙纯态出发，通过对内部时钟子系统 $\lvert t\rangle_C$ 作条件投影 $\lvert\psi_S(t)\rangle \propto \langle t\rvert_C\lvert\Psi_{CS}\rangle$ 导出子系统有效薛定谔演化的框架，由 D. N. Page 与 W. K. Wootters（*Phys. Rev. D* **27**(12), 2885–2892, 1983, DOI `10.1103/PhysRevD.27.2885`）、W. K. Wootters（*Int. J. Theor. Phys.* **23**, 701–711, 1984, DOI `10.1007/BF02214098`）及 V. Giovannetti, S. Lloyd 与 L. Maccone（*Phys. Rev. D* **92**, 045033, 2015, DOI `10.1103/PhysRevD.92.045033`）建立；
-4. **转角双层石墨烯莫尔超晶格与魔角平带**：两层均匀蜂窝晶格以微小扭角 $\Delta\theta$ 叠合产生周期 $L_{\mathrm{M}} = \frac{a}{2\sin(\Delta\theta/2)}$ 的莫尔超晶格并在第一魔角 $\Delta\theta \approx 1.05^\circ$ 处涌现零费米速度平带的连续模型由 R. Bistritzer 与 A. H. MacDonald（*Proc. Natl. Acad. Sci. U.S.A.* **108**(30), 12233–12237, 2011, DOI `10.1073/pnas.1108174108`）预言，关联绝缘态与非常规超导由 Y. Cao et al.（*Nature* **556**, 43–50 & 80–84, 2018, DOI `10.1038/nature26154`、`10.1038/nature26160`）实验发现；
+4. **转角双层石墨烯莫尔超晶格与魔角平带**：两层均匀蜂窝晶格以微小扭角 $\Delta\theta$ 叠合产生周期 $L_{\mathrm{M}} = \frac{a}{2\sin(\Delta\theta/2)}$ 的莫尔超晶格并在第一魔角 $\Delta\theta \approx 1.05^\circ$ 处涌现零费米速度平带的连续模型由 R. Bistritzer 与 A. H. MacDonald（*Proc. Natl. Acad. Sci. U.S.A.* **108**(30), 12233–12237, 2011, DOI `10.1073/pnas.1108174108`）预言，关联绝缘态与非常规超导由 Y. Cao et al.（*Nature* **556**, 43–50 & 80–84, 2018, DOI `10.1038/nature26160`、`10.1038/nature26154`）实验发现；
 5. **暴胀视界问题、单模无迹引力、星系暗物质透镜与普朗克卫星宇宙学基准**：早期暴胀范式出自 A. H. Guth（*Phys. Rev. D* **23**, 347–356, 1981, DOI `10.1103/PhysRevD.23.347`）与 A. D. Linde（*Phys. Lett. B* **108**, 389–393, 1982, DOI `10.1016/0370-2693(82)91219-9`）；宇宙学常数零点能危机综述及令真空能 $T_{\mu\nu} \propto g_{\mu\nu}$ 自动脱耦的无迹/单模爱因斯坦方程（追溯至 A. Einstein 1919）见 S. Weinberg（*Rev. Mod. Phys.* **61**(1), 1–23, 1989, DOI `10.1103/RevModPhys.61.1`）与 W. G. Unruh（*Phys. Rev. D* **40**(4), 1048–1052, 1989, DOI `10.1103/PhysRevD.40.1048`）；旋涡星系平坦旋转曲线与子弹星系团（`1E 0657-558`）中热气体 X 射线峰同弱引力透镜质量峰 $8\sigma$ 空间分离的观测证据分别出自 V. C. Rubin 与 W. K. Ford Jr.（*Astrophys. J.* **159**, 379–403, 1970, DOI `10.1086/150317`）及 D. Clowe et al.（*Astrophys. J. Lett.* **648**, L109–L113, 2006, DOI `10.1086/508162`）；微波背景各向异性与六参数基准（$H_0 = 67.36 \pm 0.54\;\mathrm{km\,s^{-1}\,Mpc^{-1}}$、$\Omega_b h^2 = 0.02237 \pm 0.00015$、$\Omega_c h^2 = 0.1200 \pm 0.0012$、$\Omega_\Lambda = 0.6847 \pm 0.0073$、$A_s \approx 2.10 \times 10^{-9}$、$n_s = 0.9649 \pm 0.0042$、第一声学峰 $\ell_1 \approx 220$）引自 **Planck Collaboration**（N. Aghanim et al., *Astron. Astrophys.* **641**, A6, 2020, DOI `10.1051/0004-6361/201833910`）。
 
 :::
 
 ## 39.12.3 颠倒本体与切面之后：现代宇宙学四大难题的模型重审与定量开放边界 {#sec-ch39-12-3}
 
-一旦将“本体绝对均匀、切面制造不均”确立为审视宏观宇宙的几何透镜（`MODEL`），现代宇宙学中四个长期彼此割裂、各自打满特设补丁的尖锐谜题，首次在同一套条件切片语法下呈现出同源的几何轮廓；同时，严守本书一以贯之的后-#432 认识论纪律，我们也把“模型已经解释的定性结构机制”与“尚待从第一性原理攻克的定量硬骨头（`OPEN`）”一分一毫地摊在阳光下：
+一旦将“本体绝对均匀、切面制造不均”确立为审视宏观宇宙的几何透镜（`MODEL`），现代宇宙学中四个长期彼此割裂、各自打满特设补丁的尖锐谜题，首次在同一套条件切片语法下呈现出同源的几何轮廓；同时，严守本书一以贯之的认识论纪律，我们也把“模型已经解释的定性结构机制”与“尚待从第一性原理攻克的定量硬骨头（`OPEN`）”一分一毫地摊在阳光下：
 
 | 现代宇宙学四大谜题 | 传统“不均匀本体论”的理论困境 | 均匀场本体与观测切面读法（本书 `MODEL`） | 核心几何机制与诚实定量边界 |
 | :--- | :--- | :--- | :--- |
@@ -243,7 +243,7 @@
    \operatorname{Var}\!\bigl(\overline{\delta}_R\bigr) \;=\; \int \frac{d^3\mathbf{k}}{(2\pi)^3}\,P(k)\,\bigl\lvert\widetilde{W}(kR)\bigr\rvert^2 \;\xrightarrow{\;R \to \infty\;}\; 0
    $$
 
-   自动按幂律衰减（例如三维短程独立晶胞下按 $(R/\xi)^{-3}$ 衰减，标度不变哈里森—泽尔多维奇谱 $P(k) \propto k$ 下按 $R^{-4}$ 衰减），自然显露出宇宙绝对均匀的本底底色；而有限自指停机精度 $\varepsilon_{\mathrm{self}} > 0$（[§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md)）则为视界窗口无法压至绝对零涨落的微弱孔径残差提供了定性几何机制。与此同时，我们严守科学诚实边界：定性的“背景本自均匀 + 大孔径均化”尚不足以单独替代暴胀在定量微扰谱上的具体预言——如何不借外加暴胀子势而从 $\mathcal{W}_M$ 与 $\varepsilon_{\mathrm{self}}$ 定量算出普朗克卫星实测标量幅值 $A_s \approx 2.10 \times 10^{-9}$（$\Delta T/T \approx 1.1 \times 10^{-5}$）、微红谱指数 $n_s = 0.9649 \pm 0.0042$ 以及超视界同步声学相位锁定的第一峰位置 $\ell_1 \approx 220$，明确列为下文 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 第 1 款（`OPEN`）。
+   自动按幂律衰减（例如三维短程独立晶胞下按 $(R/\xi)^{-3}$ 衰减，标度不变哈里森—泽尔多维奇谱 $P(k) \propto k$ 下，取高斯窗时按 $R^{-4}$ 衰减（取球形锐边窗并以格距 $a$ 截断时为 $R^{-4}\ln(R/a)$）），自然显露出宇宙绝对均匀的本底底色；而有限自指停机精度 $\varepsilon_{\mathrm{self}} > 0$（[§39.7](ch39-s07-self-halting-precision-and-spectral-sorting.md)）则为视界窗口无法压至绝对零涨落的微弱孔径残差提供了定性几何机制。与此同时，我们严守科学诚实边界：定性的“背景本自均匀 + 大孔径均化”尚不足以单独替代暴胀在定量微扰谱上的具体预言——如何不借外加暴胀子势而从 $\mathcal{W}_M$ 与 $\varepsilon_{\mathrm{self}}$ 定量算出普朗克卫星实测标量幅值 $A_s \approx 2.10 \times 10^{-9}$（$\Delta T/T \approx 1.1 \times 10^{-5}$）、微红谱指数 $n_s = 0.9649 \pm 0.0042$ 以及超视界同步声学相位锁定的第一峰位置 $\ell_1 \approx 220$，明确列为下文 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 第 1 款（`OPEN`）。
 
 ::: {.viz src="uniform-field-observer-slice-sandbox" preset="horizon-aperture-homogenization" height="500"}
 将孔径滑块 $W_{\mathrm{aperture}}$ 沿 $\Delta\mathbf{k}$ 从 $1$ 格放大至 $20$ 格：在 $\theta = 36^\circ$ 的无理相位步幅 $\alpha = 2\sin(\theta/2) = \frac{\sqrt{5}-1}{2}$ 下，孔径内连续格点的算术平均依外尔—哈尔遍历律趋向均匀本底 $\frac{1}{2}$，切面衬度 $\lvert D_W\rvert = \bigl\lvert\frac{\sin(W\pi\alpha)}{W\sin(\pi\alpha)}\bigr\rvert$ 在衰减包络 $\frac{1}{W\sin(\pi\alpha)}$ 之下于 $W = 20$ 时压低至 $0.0486$（绿色 `LEAN ✓` 锚定 `continuous_average_tendsto_haar`，狄利克雷核衬度包络实算标 `NUM`，普朗克微扰谱与声学峰定量导出在右栏标红色 `OPEN`）。

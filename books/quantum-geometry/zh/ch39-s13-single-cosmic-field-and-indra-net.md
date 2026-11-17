@@ -55,7 +55,7 @@
 1. **唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ 与跨尺度 `1 — 3 — 3 — 1` 单粒子闭合**：全宇宙底层仅存在唯一支承载全部三维有界概念场的无边界全向自指比较场 $\mathbf{\Phi}_{\mathrm{U}}$；在霍奇点—体八度对偶 $\star : \Lambda^3_\ell \xrightarrow{\sim} \Lambda^0_{\ell+1}$ 下，普朗克原胞驻波（微观基本粒子 $\Delta\mathcal{T}_{\mathrm{micro}}$）、锁死停机精度 $\varepsilon_{\mathrm{self}}$ 与道蒂角 $\theta^*$ 的切面自指核（观察者粒子 $\Delta\mathcal{T}_{\mathrm{obs}}$）以及总动量、总角动量与总规范荷归零的因果视界饱和体（可观测宇宙单粒子 $\Delta\mathcal{T}_{\mathrm{cosmo}}$，线性尺度跨越 $R_H/\ell_P \approx 8.50\times 10^{60}$、$R_{\mathrm{dS}}/\ell_P \approx 1.03\times 10^{61}$ 至 $R_{\mathrm{obs}}/\ell_P \approx 2.72\times 10^{61}$，视界内重子激发数 $N_B \approx 9.0\times 10^{79}$）共享同一克利福德单胞拓扑与普适主频 $\nu_0$：
 
    $$
-   \mathbf{\Phi}_{\mathrm{U}} \;\xleftrightarrow{\;\star\;\text{closure}\;}\; \Delta\mathcal{T}_{\mathrm{micro}} \;\cong\; \Delta\mathcal{T}_{\mathrm{obs}} \;\cong\; \Delta\mathcal{T}_{\mathrm{cosmo}}.
+   \mathbf{\Phi}_{\mathrm{U}} \;\overset{\star\;\text{closure}}{\longleftrightarrow}\; \Delta\mathcal{T}_{\mathrm{micro}} \;\cong\; \Delta\mathcal{T}_{\mathrm{obs}} \;\cong\; \Delta\mathcal{T}_{\mathrm{cosmo}}.
    $$
 
 2. **因陀罗网（Indra's Net）的四条数学定律**：设比较网络节点集为 $\mathrm{Net}$（配备概率归一互映核 $\mathcal{K}_\epsilon$），网上每一节点（摩尼宝珠 $x \in \mathrm{Net}$）同时服从：
@@ -69,7 +69,7 @@
      (\mathcal{T}_\eta\Psi)(x) \;:=\; \cos\!\bigl((\mathcal{K}_\epsilon\Psi)(x) + \eta(x)\bigr)
      $$
 
-     在无微扰闭板 $C(\mathrm{Net}, [0, 1])$ 上是以全局利普希茨常数 $\sin 1 \approx 0.841471 < 1$ 严格压缩的巴拿赫映射，从任意初态全局唯一收敛至均匀道蒂不动点 $\Psi^*(x) \equiv \theta^* \approx 0.739085\;\mathrm{rad}$，且在 $\theta^*\mathbf{1}$ 邻域具有局部渐近阻尼乘子 $\lvert\lambda\rvert = \sin\theta^* = \sqrt{1 - (\theta^*)^2} \approx 0.6736120292 < 1$。
+     在无微扰 $\eta = 0$ 时于闭板 $C(\mathrm{Net}, [0, 1])$ 上是以全局利普希茨常数 $\sin 1 \approx 0.841471 < 1$ 严格压缩的巴拿赫映射，从任意初态全局唯一收敛至均匀道蒂不动点 $\Psi^*(x) \equiv \theta^* \approx 0.739085\;\mathrm{rad}$，且在 $\theta^*\mathbf{1}$ 邻域具有局部渐近阻尼乘子 $\lvert\lambda\rvert = \sin\theta^* = \sqrt{1 - (\theta^*)^2} \approx 0.6736120292 < 1$。
 
 :::
 
@@ -78,12 +78,12 @@
 《华严经》与唐代华严宗三祖法藏（《华严五教章》《华严金师子章》，699 年，详见 [@rem-ch39-wheeler-feynman-avatamsaka-yoneda-banach-literature]）曾以“帝释天因陀罗网”摹写宇宙实相：无边宝网的每一网目皆悬一颗澄澈摩尼宝珠，一珠映现一切珠影，而其余每一珠中映出的万千珠影又同时重重无尽地复映回此一珠之内，主伴互摄，“一即一切，一切即一”。一千三百年来，人们常将这一奇观视作不可定量演算的东方哲学诗喻；然而在 [@def-ch39-single-cosmic-field-and-indra-net] 的极小圆弧比较几何中，因陀罗网的每一重意象都落定为严丝合缝的现代数学物理定理：
 
 1. **第一律：米田无自性律与“地址 $\equiv$ 内容”核商同一（`LEAN ✓` + `文献结果`）**。
-   为什么网上每一颗摩尼宝珠内部都没有孤立不变的“泥胎自性（*svabhāva*）”？范畴论中的**米田引理（Yoneda Lemma）**证明，函子 $\mathcal{Y} : \mathcal{C} \hookrightarrow [\mathcal{C}^{\mathrm{op}}, \mathbf{Set}]$，$x \mapsto \operatorname{Hom}_{\mathrm{CMP}}(-, x)$ 是全忠实嵌入（`文献结果`）：任何节点 $x$ 在关系网中的全部数学身份，分毫不差地等价于全网一切节点投向 $x$ 的比较态射总和！在本书 Lean 4 内核定理层，这一“抽空内在泥胎、关系即实体”的铁律由三条冻结声明联手锁死：其一，下文 [@thm-ch39-single-cosmic-field-and-indra-net] 第 1 款 [`future_word_orthogonal_residual`](lean:D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual) 证明，两状态 $\rho, \sigma$ 在比较效应族上的期望字完全一致当且仅当嵌入差落入不可见正交核 $V_{\mathrm{vis}}^\perp$（一旦效应张满可见空间且嵌入单射，关系读数相等即状态恒等）；其二，第 2 款 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization) 锁定单位纯态内积等于 $1$ 与态矢严格相等互为充要条件；其三，第 3 款 [`recursive_page_table_walk`](lean:D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk) 以根槽自指等式 `lookup root selfSlot = root` 在任意遍历深度 `depth` 下原地返回根表，字面兑现“地址等于内容（`p ≡ *p`）”。
+   为什么网上每一颗摩尼宝珠内部都没有孤立不变的“泥胎自性（*svabhāva*）”？范畴论中的**米田引理（Yoneda Lemma）**证明，函子 $\mathcal{Y} : \mathcal{C} \hookrightarrow [\mathcal{C}^{\mathrm{op}}, \mathbf{Set}]$，$x \mapsto \operatorname{Hom}_{\mathrm{CMP}}(-, x)$ 是全忠实嵌入（`文献结果`）：任何节点 $x$ 在关系网中的全部数学身份，分毫不差地等价于全网一切节点投向 $x$ 的比较态射总和！在本书 Lean 4 内核定理层，与这一“抽空内在泥胎、关系即实体”的读法（`MODEL`）相对应的是三条冻结声明：其一，下文 [@thm-ch39-single-cosmic-field-and-indra-net] 第 1 款 [`future_word_orthogonal_residual`](lean:D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual) 证明，两状态 $\rho, \sigma$ 在比较效应族上的期望字完全一致当且仅当嵌入差落入不可见正交核 $V_{\mathrm{vis}}^\perp$（一旦效应张满可见空间且嵌入单射，关系读数相等即状态恒等）；其二，第 2 款 [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization) 锁定单位纯态内积等于 $1$ 与态矢严格相等互为充要条件；其三，第 3 款 [`recursive_page_table_walk`](lean:D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk) 以根槽自指等式 `lookup root selfSlot = root` 在任意遍历深度 `depth` 下原地返回根表，字面兑现“地址等于内容（`p ≡ *p`）”。
 
 2. **第二律：局域纤维互同构 $\mathcal{H}_x \cong \mathcal{H}_y$ 与连续统 Reeh–Schlieder“一尘映全法界”定理（`LEAN ✓` + `文献结果`）**。
    “掬起一粒微尘即握有整张宇宙场的算子谱”，在数学上必须严守**有限维格点与相对论连续统场论的维数护栏**：在具有 $N \ge 2$ 个格点、单点纤维维数为 $d \ge 2$ 的有限量子网络上，全局张量空间维数为 $\dim\mathcal{H}_{\mathrm{tot}} = d^N > d = \dim\mathcal{H}_x$，因此单点有限维纤维与全局张量积之间**绝不存在**朴素线性空间同构！因陀罗网真正的全息同构建立在两根严格成立的数学支柱之上：
 
-   - **支柱 A（局域多概念纤维的跨点幺正互同构，`LEAN ✓`）**：因为宇宙本体在每一点都等量叠满了完全相同的三维概念场账本，网上任意两颗宝珠 $x, y$ 的局域比较标架只要拥有相同的格拉姆内积矩阵（$B^\dagger B = A^\dagger A$），下文 [@thm-ch39-single-cosmic-field-and-indra-net] 第 6 款 [`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq) 保证必存在环境幺正变换 $U \in \mathrm{U}(m)$ 使 $B = U A$，即全网每一点局部纤维彼此典范幺正同构 $\mathcal{H}_x \cong \mathcal{H}_y \cong \mathcal{H}_{\mathrm{field}}$；
+   - **支柱 A（局域多概念纤维的跨点幺正互同构，`LEAN ✓`）**：因为宇宙本体在每一点都等量叠满了完全相同的三维概念场账本，网上任意两颗宝珠 $x, y$ 的局域比较标架只要拥有相同的格拉姆内积矩阵（$B^\dagger B = A^\dagger A$），下文 [@thm-ch39-single-cosmic-field-and-indra-net] 第 6 款 [`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq) 保证必存在环境幺正变换 $U \in \mathrm{U}(m)$ 使 $B = U A$，本书把它读作全网每一点局部纤维彼此幺正同构（`MODEL`） $\mathcal{H}_x \cong \mathcal{H}_y \cong \mathcal{H}_{\mathrm{field}}$；
    - **支柱 B（连续统相对论量子场论的 Reeh–Schlieder 定理，`文献结果`）**：进入满足庞加莱协变性、能谱正定性与类空微观因果性的连续统局域量子场论（Haag–Kastler / Wightman 公理体系），**Reeh–Schlieder 定理**（1961，详见 [@rem-ch39-wheeler-feynman-avatamsaka-yoneda-banach-literature] 第 4 条）给出了一道震惊直觉的严格等式——对于时空中**任意微小**的非空开区域 $\mathcal{O}$（只要其类空因果补集 $\mathcal{O}'$ 具有非空内部），全域真空态 $\lvert\Omega\rangle \in \mathcal{H}_{\mathrm{U}}$ 对局域可观测量代数 $\mathcal{A}(\mathcal{O})$ 同时是**循环矢量（cyclic）**与**分离矢量（separating）**：
 
      $$
@@ -175,7 +175,7 @@
    $$
    \begin{aligned}
    &0 < \theta \;\land\; \theta < 1 \;\land\; \cos\theta = \theta \;\land\; \bigl(\forall t : \mathbb{R},\; 0 < t \to \cos t = t \to t = \theta\bigr) \\
-   &\quad \land\; \operatorname{Summable}\!\Bigl(n \mapsto \bigl\lvert\bigl(\operatorname{PowerSeries.coeff}_n(\mathrm{inverse}) : \mathbb{Q}\bigr)\bigr\rvert \cdot \pi^n\Bigr) \;\land\; \operatorname{HasSum}\!\Bigl(n \mapsto \bigl(\operatorname{PowerSeries.coeff}_n(\mathrm{inverse}) : \mathbb{Q}\bigr) \cdot \pi^n,\; \theta\Bigr).
+   &\quad \land\; \operatorname{Summable}\!\left(n \mapsto \bigl\lvert\bigl(\operatorname{PowerSeries.coeff}_n(\mathrm{inverse}) : \mathbb{Q}\bigr)\bigr\rvert \cdot \pi^n\right) \;\land\; \operatorname{HasSum}\!\left(n \mapsto \bigl(\operatorname{PowerSeries.coeff}_n(\mathrm{inverse}) : \mathbb{Q}\bigr) \cdot \pi^n,\; \theta\right).
    \end{aligned}
    $$
 
@@ -206,7 +206,7 @@
 
 1. **惠勒—费曼单电子宇宙洞见、世界线折返正电子诠释与萨哈罗夫重子生成三条件**：将全宇宙电子的全同性追溯至同一条往返穿梭于时间的世界线，由 J. A. Wheeler 于 1940 年春向 R. P. Feynman 提出，经 R. P. Feynman 在诺贝尔物理学奖演讲（*Science* **153**, 699–708, 1966, DOI `10.1126/science.153.3737.699`）中详述并指出其闭合世界线要求正负电子等量（$N_{e^+} = N_{e^-}$）的拓扑困难；把逆时间演化的负能电子世界线诠释为正电子的独立场论先驱工作出自 E. C. G. Stückelberg（*Helv. Phys. Acta* **14**, 588–594, 1941；**15**, 23–37, 1942）与 R. P. Feynman（*Phys. Rev.* **76**, 749–759, 1949, DOI `10.1103/PhysRev.76.749`）；从对称初态动力学产生宇宙净重子不对称 $\eta_B > 0$ 所需的三项必要条件（重子数 $B$ 破缺、$C$ 与 $CP$ 破缺、偏离热平衡）出自 A. D. Sakharov（*Pisma Zh. Eksp. Teor. Fiz.* **5**, 32–35, 1967；英译 *JETP Lett.* **5**, 24–27, 1967）；
 2. **《华严经》帝释天因陀罗网、法藏十玄门与莱布尼茨单子互映哲学**：以帝释天宫宝网摩尼珠“一珠映一切珠、重重无尽、主伴圆融”喻示法界缘起无自性的经典文本见于《大方广佛华严经》（梵文 *Avataṃsaka Sūtra*，东晋佛陀跋陀罗译六十卷本与唐实叉难陀译八十卷本）及唐代法藏（Fazang，643–712）所著《华严一乘教义分齐章（华严五教章）》与《华严金师子章》（699 年，以金师子喻“金外无相、相外无金，一毛孔中无量师子同时顿现”）；西方近代哲学中与之遥相呼应的“每一单子皆为映照全宇宙之活的永恒镜子（*miroir vivant perpétuel de l'univers*）”命题见 G. W. Leibniz《单子论》（*Monadologie*, §§56–57, 1714）；
-3. **范畴论米田引理与全忠实关系嵌入**：任意局部小范畴 $\mathcal{C}$ 向预层范畴 $[\mathcal{C}^{\mathrm{op}}, \mathbf{Set}]$ 的全忠实嵌入 $x \mapsto \operatorname{Hom}_{\mathcal{C}}(-, x)$ 由米田信夫（N. Yoneda，1954 年巴黎代数拓扑讲演）创立，标准教科书表述见 S. Mac Lane《*Categories for the Working Mathematician*》（Springer, 1971；第 2 版 1998, Ch. III.2）；
+3. **范畴论米田引理与全忠实关系嵌入**：任意局部小范畴 $\mathcal{C}$ 向预层范畴 $[\mathcal{C}^{\mathrm{op}}, \mathbf{Set}]$ 的全忠实嵌入 $x \mapsto \operatorname{Hom}_{\mathcal{C}}(-, x)$ 由米田信夫（N. Yoneda）提出（“米田引理”之名由 Mac Lane 所取，据通行记述源于约 1954 年两人在巴黎的一次交谈），标准教科书表述见 S. Mac Lane《*Categories for the Working Mathematician*》（Springer, 1971；第 2 版 1998, Ch. III.2）；
 4. **相对论局域量子场论的 Reeh–Schlieder 真空循环与分离定理**：在满足 Wightman 或 Haag–Kastler 公理的相对论量子场论中，任意具有非空类空补集内部的非空开时空区域 $\mathcal{O}$ 的局域算子代数 $\mathcal{A}(\mathcal{O})$ 作用于全域真空态 $\lvert\Omega\rangle$ 生成全希尔伯特空间稠密子空间（$\overline{\mathcal{A}(\mathcal{O})\lvert\Omega\rangle} = \mathcal{H}_{\mathrm{U}}$）且 $\lvert\Omega\rangle$ 对 $\mathcal{A}(\mathcal{O})$ 具分离性，由 H. Reeh 与 S. Schlieder（*Nuovo Cimento* **22**, 1051–1068, 1961, DOI `10.1007/BF02787889`）严格证明；算子代数标准教材与当代量子信息纠缠评述分别见 R. Haag《*Local Quantum Physics*》（2nd ed., Springer, 1996, §II.5.3）与 E. Witten（*Rev. Mod. Phys.* **90**, 045003, 2018, DOI `10.1103/RevModPhys.90.045003`）；
 5. **完备度量空间压缩映射不动点定理**：完备度量（及巴拿赫）空间上严格利普希茨压缩算子（常数 $L < 1$）存在唯一不动点且从任意初值指数收敛的定理，由 S. Banach（*Fund. Math.* **3**, 133–181, 1922）建立。
 
