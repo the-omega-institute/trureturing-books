@@ -638,6 +638,27 @@ Item 1: write $x=a\cdot b$, $y=b\cdot c$, $z=c\cdot a$. Substituting the Gram id
 
 Compare with [@rem-appe-half-comparison-holonomy]: $R_{a\to b}$ is the image of $r_{ba}=r_{ab}^*$, so item 2 of the theorem is the involution of the product in the remark, $(r_{ab}\,r_{bc}\,r_{ca})^*=r_{ac}\,r_{cb}\,r_{ba}$, and the sign in front of $D$ changes from plus to minus accordingly; item 1 is the identity at the end of the remark. Item 3 is the operational reading of item 2: start from an eigenspinor of $a$, apply the three normalized projections along $a\to b\to c\to a$, and the spinor returns multiplied by the unit-modulus factor $(S-iD)/\sqrt{S^2+D^2}$. What Lean does not state keeps its earlier status. Identifying the argument $\operatorname{atan2}(D,S)$ with half the Girard excess is a literature result. The exponential form of the rotor is not formalized, and neither is any minimality or uniqueness in the sense of "shortest": in the Lean module `rotor` and `shortestGate` are names only. In Lean $N_r(\phi)$ is defined for every $\phi$ (when the denominator vanishes, Lean's convention returns the zero vector); the theorem uses it only where each denominator $\sqrt{(1+u\cdot v)/2}$ is positive.
 
+Items 1 and 2 of [@rem-appe-real-realizability-return-phase] are frozen in the pinned repository in the case where one object is non-orthogonal to every other one, in the following form; no filling condition is needed there. The general filled case and the qubit statement of item 4 remain manual derivations.
+
+::: {.proposition #prop-appe-real-rephasing-star title="A Hermitian Matrix with a Row without Zeros: Rephasable to a Real Matrix If and Only If All Three-Point Products Are Real" lean="D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_rephasing_iff_triple_products_real D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_gram_rephasing_iff_triple_products_real"}
+Let $G$ be an $N\times N$ complex matrix and $i_0$ an index such that $G_{i_0j}\neq0$ for every $j$.
+
+1. If $G$ is Hermitian, then there are real numbers $\theta_1,\dots,\theta_N$ such that every $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ is real if and only if $G_{ij}G_{jk}G_{ki}$ is real for all indices $i,j,k$ (repetitions allowed).
+2. If $G$ is positive semidefinite, then there are real numbers $\theta_1,\dots,\theta_N$ and a real $N\times N$ matrix $B$ with $e^{i\theta_i}G_{ij}e^{-i\theta_j}=\left(B^{\mathsf T}B\right)_{ij}$ for all $i,j$ if and only if $G_{ij}G_{jk}G_{ki}$ is real for all indices $i,j,k$.
+:::
+
+::: proof
+"Only if": the phases cancel around $i\to j\to k\to i$, so rephasing does not change $G_{ij}G_{jk}G_{ki}$, and computed in a real matrix it is real. "If": take $\theta_j=\arg G_{i_0j}$. Since $G$ is Hermitian, $G_{ji_0}=\overline{G_{i_0j}}$, hence
+
+$$
+e^{i\theta_i}G_{ij}e^{-i\theta_j}=\frac{G_{i_0i}\,G_{ij}\,G_{ji_0}}{\lvert G_{i_0i}\rvert\,\lvert G_{i_0j}\rvert},
+$$
+
+a positive multiple of the three-point product $G_{i_0i}G_{ij}G_{ji_0}$, and therefore real; an entry $G_{ij}=0$ stays zero. Item 2: rephasing is $G\mapsto DGD^{*}$ with $D$ a diagonal unitary, which preserves positive semidefiniteness; the rephased matrix has real entries, so it is a real symmetric positive semidefinite matrix and can be written $B^{\mathsf T}B$.
+
+For a Hermitian matrix, three-point products with a repeated index (such as $G_{ij}G_{ji}G_{ii}=\lvert G_{ij}\rvert^2G_{ii}$) and those containing a zero entry are automatically real, so the condition has content only on the triangles of the non-orthogonality graph, in agreement with item 2 of [@rem-appe-real-realizability-return-phase]. The full proof is checked by the Lean kernel.
+:::
+
 The imaginary part of the return phase appears only when $D\neq0$. Pairwise comparisons can tell whether $D$ vanishes but not its sign: $D^2=1+2xyz-x^2-y^2-z^2$ (with $x=a\cdot b$, $y=b\cdot c$, $z=c\cdot a$; this is [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)) gives only its square. Whether $D$ vanishes answers a question adjacent to `H7`: whether a family of objects needs complex amplitudes.
 
 ::: {.remark #rem-appe-real-realizability-return-phase title="When a Family of Objects Can Be Described with Real Numbers Alone: Whether the Three-Point Bargmann Products Are Real (Manual Derivation and Literature)"}
@@ -1003,6 +1024,21 @@ By item 3, under the time-order condition the following are equivalent: $K>0$; t
 :::
 
 So the time-order condition excludes the elliptic row (and comparisons with $s\le-1$), "the difference part is not square-zero" then excludes the parabolic row, and together they select the hyperbolic row with $s>1$. The difference part satisfies $A^*=-A$, so $A^2=0$ means $A^*A=0$; the second statement is therefore the special case, for difference parts, of "no nonzero $a$ satisfies $a^*a=0$" in [@rem-appe-positivity-invisible-part]. The algebra $(M_2(\mathbb{R}),{}^\sharp)$ has no states ($a=\operatorname{diag}(1,-1)$ gives $a^\sharp a=-\mathbf{1}$), so the conclusions about readings there do not apply here.
+
+Item 2 of [@rem-appe-time-order-repetition] is frozen in the pinned repository, in the following form; items 1 and 3 and the reading in the observer model are not formalized.
+
+::: {.proposition #prop-appe-chebyshev-positivity-threshold title="The Positivity Threshold of Chebyshev Values and the Index of the First Sign Change" lean="D5/S3/Analytic/Chebyshev/PositivityThreshold.forall_pos_eval_T_iff_one_le D5/S3/Analytic/Chebyshev/PositivityThreshold.eval_T_cos_floor_succ_neg_and_nonneg_before"}
+Let $T_n$ be the Chebyshev polynomials of the first kind: $T_0=1$, $T_1(x)=x$, $T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)$.
+
+1. For a real number $s$: $T_n(s)>0$ for every natural number $n\ge1$ if and only if $s\ge1$.
+2. Let $0<\alpha<\pi$ and $n_0=\lfloor\frac{\pi}{2\alpha}\rfloor+1$. Then $T_{n_0}(\cos\alpha)<0$, and $T_n(\cos\alpha)\ge0$ for every natural number $n<n_0$.
+:::
+
+::: proof
+Item 2: $T_n(\cos\alpha)=\cos n\alpha$. By the definition of the floor, $n_0-1\le\frac{\pi}{2\alpha}<n_0$, so $\frac\pi2<n_0\alpha\le\frac\pi2+\alpha<\frac{3\pi}2$ and $\cos n_0\alpha<0$; for $n<n_0$ we have $n\le\frac{\pi}{2\alpha}$, hence $0\le n\alpha\le\frac\pi2$ and $\cos n\alpha\ge0$.
+
+Item 1: for $s\ge1$, $T_n(s)\ge1$ (writing $s=\cosh\eta$, $T_n(s)=\cosh n\eta$); for $s\le-1$, $T_1(s)=s<0$; for $-1<s<1$ take $\alpha=\arccos s$, so that $0<\alpha<\pi$, and item 2 gives $T_{n_0}(s)<0$ with $n_0\ge1$. The full proof is checked by the Lean kernel.
+:::
 
 ::: {.remark #rem-appe-rotor-boost-coexistence title="Bounded and Order-Preserving Are Complementary Selections: Rotations and Boosts Live in One Algebra (Manual Derivation and Literature)"}
 **Manual derivation.** Let $u\neq\mathbf{1}$, $uu^*=u^*u=\mathbf{1}$, $S=s\mathbf{1}$. On $\mathbb{R}[A]=\operatorname{span}\{\mathbf{1},A\}$ one has $(x+yA)^*(x+yA)=\left(x^2-y^2(s^2-1)\right)\mathbf{1}$; together with [@rem-appe-bounded-recurrence] and [@rem-appe-time-order-repetition] this gives:
