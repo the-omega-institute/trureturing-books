@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery",
+  "declarations": {
+    "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior": {
+      "module": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery",
+      "name": "D5.S3.Quantum.Decoherence.CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior",
+      "kind": "theorem",
+      "statement_id": "sha256:02c1d86bb12d0097d9aca6900486b4c6189424dc7034cbc38c246c15b6fac799",
+      "line": 31,
+      "signature": "theorem canonical_copied_address_record_eq_prior : D5.S3.Observer.MeasurementMarginal.copiedAddressRecord = D5.S3.Quantum.Decoherence.ReducedRecordAccessDefect.copiedAddressRecord",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect": {
+      "module": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery",
+      "name": "D5.S3.Quantum.Decoherence.CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect",
+      "kind": "theorem",
+      "statement_id": "sha256:02c1d86bb12d0097d9aca6900486b4c6189424dc7034cbc38c246c15b6fac799",
+      "line": 42,
+      "signature": "theorem reduced_irreversibility_is_canonical_record_access_defect (rho sigma : QubitMatrix) (hdiag : ∀ i, rho i i = sigma i i) (hcoherence : ∃ i j, i ≠ j ∧ rho i j ≠ sigma i j) : D5.S3.Quantum.Decoherence.ReducedRecordAccessDefect.copyUnitary ∈ Matrix.unitaryGroup (Fin 2 × Fin 2) ℂ ∧ unitaryEvolution D5.S3.Quantum.Decoherence.ReducedRecordAccessDefect.copyUn",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

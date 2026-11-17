@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Contextuality/SteeringEllipsoidFThreeThreshold",
+  "declarations": {
+    "D5/S3/Quantum/Contextuality/SteeringEllipsoidFThreeThreshold.result": {
+      "module": "D5/S3/Quantum/Contextuality/SteeringEllipsoidFThreeThreshold",
+      "name": "D5.S3.Quantum.Contextuality.SteeringEllipsoidFThreeThreshold.result",
+      "kind": "theorem",
+      "statement_id": "sha256:0cf456207eda24e675e01d1e4ca95ccd412159c00cc4bace39ce40af9a0873b5",
+      "line": 327,
+      "signature": "theorem result : claim",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

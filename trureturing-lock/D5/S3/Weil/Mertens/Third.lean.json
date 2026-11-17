@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/Mertens/Third",
+  "declarations": {
+    "D5/S3/Weil/Mertens/Third.E₃.bound''": {
+      "module": "D5/S3/Weil/Mertens/Third",
+      "name": "Mertens.E₃.bound''",
+      "kind": "theorem",
+      "statement_id": "sha256:1092147d1d369790f4424b90acb329aa0551ad76cd7585062b7e74c3cc3c5eae",
+      "line": 335,
+      "signature": "theorem E₃.bound'' : (fun x ↦ ∏ p ∈ Ioc 0 ⌊ x ⌋₊ with p.Prime, (1 - (1:ℝ) / p)) ~[atTop] (fun x ↦ exp (-eulerMascheroniConstant) / log x)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

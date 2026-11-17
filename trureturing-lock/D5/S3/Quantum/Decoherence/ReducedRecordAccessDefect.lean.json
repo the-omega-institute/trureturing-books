@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect",
+  "declarations": {
+    "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect": {
+      "module": "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect",
+      "name": "D5.S3.Quantum.Decoherence.ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect",
+      "kind": "theorem",
+      "statement_id": "sha256:62d42f267c4e451e307d97488260302800a39a5186538134884bc9703e414c45",
+      "line": 130,
+      "signature": "theorem reduced_irreversibility_is_access_defect (rho sigma : QubitMatrix) (hdiag : ∀ i, rho i i = sigma i i) (hcoherence : ∃ i j, i ≠ j ∧ rho i j ≠ sigma i j) : copyUnitary ∈ Matrix.unitaryGroup (Fin 2 × Fin 2) ℂ ∧ (unitaryEvolution copyUnitary (blankEnvironmentJointState rho) = controlledRecordJointState copiedAddressRecord rho ∧ unitaryEvolution copyUnitary (blankEnvironmentJointState sigma) = controlledRecordJointState copiedAddressRecord sigma) ∧ traceEnvironment (controlledRecordJointState copiedAddressRecord rho) = traceEnvironment (controlledRecordJointState copiedAddressRecord sigma) ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

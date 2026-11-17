@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumStates/PhaseLockedOverlap",
+  "declarations": {
+    "D5/S3/QuantumStates/PhaseLockedOverlap.phase_locked_overlap_is_rotated_real": {
+      "module": "D5/S3/QuantumStates/PhaseLockedOverlap",
+      "name": "D5.S3.QuantumStates.PhaseLockedOverlap.phase_locked_overlap_is_rotated_real",
+      "kind": "theorem",
+      "statement_id": "sha256:a9a068c585f43a7aa355619c8fc899910e973d9b857f76930d832b94cb89b559",
+      "line": 20,
+      "signature": "theorem phase_locked_overlap_is_rotated_real (phase overlap : ℂ) (hphase : ‖phase‖ = 1) (hlock : star overlap = (phase⁻¹) ^ 2 * overlap) : ∃ r : ℝ, overlap = phase * r",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

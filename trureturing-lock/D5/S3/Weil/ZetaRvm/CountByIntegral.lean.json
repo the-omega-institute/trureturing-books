@@ -1,0 +1,42 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/ZetaRvm/CountByIntegral",
+  "declarations": {
+    "D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_eq_zero_iff": {
+      "module": "D5/S3/Weil/ZetaRvm/CountByIntegral",
+      "name": "Zeta23.RvM.completedRiemannZeta_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:6d883d7a50f0cc2526c699672200d7984a183c39653a8e71226e8724a7c8fe04",
+      "line": 74,
+      "signature": "lemma completedRiemannZeta_eq_zero_iff {s : ℂ} : completedRiemannZeta s = 0 ↔ IsNontrivialZero s",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_eq_zero_iff_of_re_pos": {
+      "module": "D5/S3/Weil/ZetaRvm/CountByIntegral",
+      "name": "Zeta23.RvM.completedRiemannZeta_eq_zero_iff_of_re_pos",
+      "kind": "theorem",
+      "statement_id": "sha256:6d883d7a50f0cc2526c699672200d7984a183c39653a8e71226e8724a7c8fe04",
+      "line": 55,
+      "signature": "lemma completedRiemannZeta_eq_zero_iff_of_re_pos {s : ℂ} (hs : 0 < s.re) : completedRiemannZeta s = 0 ↔ riemannZeta s = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_ne_zero_of_one_le_re": {
+      "module": "D5/S3/Weil/ZetaRvm/CountByIntegral",
+      "name": "Zeta23.RvM.completedRiemannZeta_ne_zero_of_one_le_re",
+      "kind": "theorem",
+      "statement_id": "sha256:6d883d7a50f0cc2526c699672200d7984a183c39653a8e71226e8724a7c8fe04",
+      "line": 62,
+      "signature": "lemma completedRiemannZeta_ne_zero_of_one_le_re {s : ℂ} (hs : 1 ≤ s.re) : completedRiemannZeta s ≠ 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_ne_zero_of_re_nonpos": {
+      "module": "D5/S3/Weil/ZetaRvm/CountByIntegral",
+      "name": "Zeta23.RvM.completedRiemannZeta_ne_zero_of_re_nonpos",
+      "kind": "theorem",
+      "statement_id": "sha256:6d883d7a50f0cc2526c699672200d7984a183c39653a8e71226e8724a7c8fe04",
+      "line": 67,
+      "signature": "lemma completedRiemannZeta_ne_zero_of_re_nonpos {s : ℂ} (hs : s.re ≤ 0) : completedRiemannZeta s ≠ 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

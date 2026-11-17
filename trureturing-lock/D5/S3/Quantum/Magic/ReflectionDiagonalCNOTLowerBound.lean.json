@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Magic/ReflectionDiagonalCNOTLowerBound",
+  "declarations": {
+    "D5/S3/Quantum/Magic/ReflectionDiagonalCNOTLowerBound.result": {
+      "module": "D5/S3/Quantum/Magic/ReflectionDiagonalCNOTLowerBound",
+      "name": "D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound.result",
+      "kind": "theorem",
+      "statement_id": "sha256:372df8dafb6e47b8241406c70dd19eac4711a686a00f7219508d684aafe46d13",
+      "line": 510,
+      "signature": "theorem result : claim",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

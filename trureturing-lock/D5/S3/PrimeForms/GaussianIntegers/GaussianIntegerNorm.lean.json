@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/PrimeForms/GaussianIntegers/GaussianIntegerNorm",
+  "declarations": {
+    "D5/S3/PrimeForms/GaussianIntegers/GaussianIntegerNorm.gaussian_integer_mul_conj_eq_sq_add_sq": {
+      "module": "D5/S3/PrimeForms/GaussianIntegers/GaussianIntegerNorm",
+      "name": "D5.S3.PrimeForms.GaussianIntegers.GaussianIntegerNorm.gaussian_integer_mul_conj_eq_sq_add_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:797ba0f4a787cad3d0364fb394e64b549bed6e07d39aac89613610e425d56012",
+      "line": 16,
+      "signature": "theorem gaussian_integer_mul_conj_eq_sq_add_sq (a b : ℤ) : ((a : ℂ) + (b : ℂ) * Complex.I) * conj ((a : ℂ) + (b : ℂ) * Complex.I) = ((a ^ 2 + b ^ 2 : ℤ) : ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

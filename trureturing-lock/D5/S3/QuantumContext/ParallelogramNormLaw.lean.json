@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumContext/ParallelogramNormLaw",
+  "declarations": {
+    "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law": {
+      "module": "D5/S3/QuantumContext/ParallelogramNormLaw",
+      "name": "D5.S3.QuantumContext.ParallelogramNormLaw.inner_product_norm_parallelogram_law",
+      "kind": "theorem",
+      "statement_id": "sha256:b5f8dcc99110316f0bf42a48eff539f0ae4728b825b2e078ccda8269c36afcc2",
+      "line": 22,
+      "signature": "theorem inner_product_norm_parallelogram_law {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (x y : E) : ‖x + y‖ ^ 2 + ‖x - y‖ ^ 2 = 2 * (‖x‖ ^ 2 + ‖y‖ ^ 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

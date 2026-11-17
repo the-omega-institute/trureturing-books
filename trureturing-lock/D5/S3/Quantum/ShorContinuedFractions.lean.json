@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/ShorContinuedFractions",
+  "declarations": {
+    "D5/S3/Quantum/ShorContinuedFractions.shor_coprime_candidate": {
+      "module": "D5/S3/Quantum/ShorContinuedFractions",
+      "name": "QuantumShorContinuedFractions.shor_coprime_candidate",
+      "kind": "theorem",
+      "statement_id": "sha256:96eaed2aaf87cb3727a47b03370d0deef045c75b0551a5fef99e99a7a31eb504",
+      "line": 127,
+      "signature": "theorem shor_coprime_candidate (c : Parameters) (n : ℕ) (hsize : c.modulus ^ 2 ≤ 2 ^ n) (s : Fin c.period) (y : Fin (2 ^ n)) (hnear : Nearest (2 ^ n) (s.val / (c.period : ℝ)) y) (hcop : Nat.Coprime s.val c.period) : c.period ∈ (candidates y.val (2 ^ n) c.modulus).map Rat.den",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/ShorContinuedFractions.shor_nearest_candidate": {
+      "module": "D5/S3/Quantum/ShorContinuedFractions",
+      "name": "QuantumShorContinuedFractions.shor_nearest_candidate",
+      "kind": "theorem",
+      "statement_id": "sha256:96eaed2aaf87cb3727a47b03370d0deef045c75b0551a5fef99e99a7a31eb504",
+      "line": 116,
+      "signature": "theorem shor_nearest_candidate (c : Parameters) (n : ℕ) (hsize : c.modulus ^ 2 ≤ 2 ^ n) (s : Fin c.period) (y : Fin (2 ^ n)) (hnear : Nearest (2 ^ n) (s.val / (c.period : ℝ)) y) : reduced s.val c.period ∈ candidates y.val (2 ^ n) c.modulus ∧ (reduced s.val c.period).den ∣ c.period",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

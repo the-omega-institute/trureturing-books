@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Tower/DBonacci/Names",
+  "declarations": {
+    "D5/S0/Tower/DBonacci/Names.dbonacci_name_card": {
+      "module": "D5/S0/Tower/DBonacci/Names",
+      "name": "D5.S0.Tower.DBonacci.Names.dbonacci_name_card",
+      "kind": "theorem",
+      "statement_id": "sha256:8f3d7f6f38b35c7ea7a601c4a037d90dfd0d926ef07ed37a99d441624715f24a",
+      "line": 245,
+      "signature": "theorem dbonacci_name_card (d Q : Nat) : Fintype.card (DBonacciName d Q) = dbonacci d (Q + 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Tower/DBonacci/Names.dbonacci_name_card_of_lt": {
+      "module": "D5/S0/Tower/DBonacci/Names",
+      "name": "D5.S0.Tower.DBonacci.Names.dbonacci_name_card_of_lt",
+      "kind": "theorem",
+      "statement_id": "sha256:8f3d7f6f38b35c7ea7a601c4a037d90dfd0d926ef07ed37a99d441624715f24a",
+      "line": 227,
+      "signature": "theorem dbonacci_name_card_of_lt (d Q : Nat) (hlength : Q < d) : Fintype.card (DBonacciName d Q) = 2 ^ Q",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

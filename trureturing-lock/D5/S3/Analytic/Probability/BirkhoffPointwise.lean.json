@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Analytic/Probability/BirkhoffPointwise",
+  "declarations": {
+    "D5/S3/Analytic/Probability/BirkhoffPointwise.birkhoff_pointwise_ergodic": {
+      "module": "D5/S3/Analytic/Probability/BirkhoffPointwise",
+      "name": "D5.S3.Analytic.Probability.BirkhoffPointwise.birkhoff_pointwise_ergodic",
+      "kind": "theorem",
+      "statement_id": "sha256:0ab66002c458006cbc14e8ece3e1b209f99a2efdc5d1558d495c57e64c978962",
+      "line": 505,
+      "signature": "theorem birkhoff_pointwise_ergodic {α : Type*} [MeasurableSpace α] {μ : Measure α} [IsProbabilityMeasure μ] {T : α → α} (hT : Ergodic T μ) {g : α → ℝ} (hg : Integrable g μ) : ∀ᵐ x ∂μ, Filter.Tendsto (fun n => birkhoffAverage ℝ T g n x) Filter.atTop (nhds (∫ y, g y ∂μ))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

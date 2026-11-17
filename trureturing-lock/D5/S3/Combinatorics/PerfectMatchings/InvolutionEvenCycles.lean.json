@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles",
+  "declarations": {
+    "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.equivalence": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.InvolutionEvenCycles.equivalence",
+      "kind": "def",
+      "statement_id": "sha256:5b848bb8446166bfc5fa762209b5fe0e718b2a43dd83a1365ad59f7362d535ac",
+      "line": 548,
+      "signature": "def equivalence : (FixedPointFreeInvolution X × FixedPointFreeInvolution X) ≃ {q : Perm X // (∀ x, q x ≠ x) ∧ ∀ c ∈ q.cycleFactorsFinset, Even c.support.card} where toFun",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_interlacing": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.InvolutionEvenCycles.rooted_interlacing",
+      "kind": "theorem",
+      "statement_id": "sha256:5b848bb8446166bfc5fa762209b5fe0e718b2a43dd83a1365ad59f7362d535ac",
+      "line": 514,
+      "signature": "theorem rooted_interlacing (s t : FixedPointFreeInvolution X) : recover (forward (s,t)) = (s,t) ∧ (∀ x y, (interlace s t).SameCycle x y ↔ Connected s.val t.val x y) ∧ (∀ x, Connected s.val t.val x (componentRoot s t x) ∧ ∀ y, Connected s.val t.val x y → componentRoot s t x ≤ y) ∧ (∀ m, (∀ y, Connected s.val t.val m y → m ≤ y) → ∀ k : ℕ, (interlace s t ^ (2*k)) m = ((t.val*s.val)^k) m ∧ (interlace s t ^ (2*k+1)) m = s.val (((t.val*s.val)^k) m)) ∧ (∀ x, interlace s t x = (if firstPhase s t x then s.val x else t.val x) ∧ (interlace s t)⁻¹ x = (if firstPhase s t x then t.val x else s.val x) ∧ (cyc",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_reconstruction": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.InvolutionEvenCycles.rooted_reconstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:5b848bb8446166bfc5fa762209b5fe0e718b2a43dd83a1365ad59f7362d535ac",
+      "line": 539,
+      "signature": "theorem rooted_reconstruction (q : {q : Perm X // (∀ x, q x ≠ x) ∧ ∀ c ∈ q.cycleFactorsFinset, Even c.support.card}) : forward (recover q) = q ∧ ∀ x, (recover q).1.val x = (if cyclePhase q.val x then q.val x else q.val⁻¹ x) ∧ (recover q).2.val x = (if cyclePhase q.val x then q.val⁻¹ x else q.val x)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

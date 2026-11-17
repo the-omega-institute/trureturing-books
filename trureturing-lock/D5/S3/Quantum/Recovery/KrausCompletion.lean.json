@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Recovery/KrausCompletion",
+  "declarations": {
+    "D5/S3/Quantum/Recovery/KrausCompletion.complete_quantum_channel": {
+      "module": "D5/S3/Quantum/Recovery/KrausCompletion",
+      "name": "D5.S3.Quantum.Recovery.KrausCompletion.complete_quantum_channel",
+      "kind": "theorem",
+      "statement_id": "sha256:2909ef65010735ed4ca29ba011f64369fe2438d906d77a2deab5a2e1fba79a09",
+      "line": 90,
+      "signature": "theorem complete_quantum_channel (K : s → Matrix b a ℂ) (P : Matrix a a ℂ) (v : b) (hP : Pᴴ = P) (hPP : P * P = P) (hK : (∑ i, (K i)ᴴ * K i) = P) : ∃ channel : QuantumChannel a b, ∀ X : Matrix a a ℂ, CStarMatrix.ofMatrix.symm (channel.toCompletelyPositiveMap (CStarMatrix.ofMatrix X)) = (∑ i, K i * X * (K i)ᴴ) + Matrix.trace ((1 - P) * X) • Matrix.single v v (1 : ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

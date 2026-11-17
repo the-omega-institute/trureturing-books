@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Midline/CayleyCriticalLine",
+  "declarations": {
+    "D5/S3/Midline/CayleyCriticalLine.cayleyRatio": {
+      "module": "D5/S3/Midline/CayleyCriticalLine",
+      "name": "D5.S3.Midline.CayleyCriticalLine.cayleyRatio",
+      "kind": "def",
+      "statement_id": "sha256:79d47c185587dd1e3fcd1e39f5f5c9f222bde94a52e7ae3c3d5e07f4270fa8a2",
+      "line": 30,
+      "signature": "noncomputable def cayleyRatio (s : ℂ) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line": {
+      "module": "D5/S3/Midline/CayleyCriticalLine",
+      "name": "D5.S3.Midline.CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line",
+      "kind": "theorem",
+      "statement_id": "sha256:79d47c185587dd1e3fcd1e39f5f5c9f222bde94a52e7ae3c3d5e07f4270fa8a2",
+      "line": 46,
+      "signature": "theorem cayley_ratio_norm_one_iff_critical_line (s : ℂ) : ‖cayleyRatio s‖ = 1 ↔ s.re = (1 : ℝ) / 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

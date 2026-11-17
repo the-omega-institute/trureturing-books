@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Phase/ThreeGap/Main",
+  "declarations": {
+    "D5/S1/Phase/ThreeGap/Main.three_gap_card_le_three": {
+      "module": "D5/S1/Phase/ThreeGap/Main",
+      "name": "ThreeGap.three_gap_card_le_three",
+      "kind": "theorem",
+      "statement_id": "sha256:73452cca2519671f0aac9172804b037d4893debaea39150d42b302516ea39ac3",
+      "line": 223,
+      "signature": "theorem three_gap_card_le_three (a : ℝ) (N : ℕ) : (gaps a N).toFinset.card ≤ 3",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Phase/ThreeGap/Main.three_gap_lengths_eq": {
+      "module": "D5/S1/Phase/ThreeGap/Main",
+      "name": "ThreeGap.three_gap_lengths_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:73452cca2519671f0aac9172804b037d4893debaea39150d42b302516ea39ac3",
+      "line": 237,
+      "signature": "theorem three_gap_lengths_eq (a : ℝ) {N : ℕ} (h3 : (gaps a N).toFinset.card = 3) : (gaps a N).toFinset = ({etaPos a N, etaNeg a N, etaPos a N + etaNeg a N} : Finset ℝ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

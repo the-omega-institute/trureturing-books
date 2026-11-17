@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Fourier/GoldenModelSetDelone",
+  "declarations": {
+    "D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone": {
+      "module": "D5/S3/Fourier/GoldenModelSetDelone",
+      "name": "D5.S3.Fourier.GoldenModelSetDelone.exists_golden_modelSet_delone",
+      "kind": "theorem",
+      "statement_id": "sha256:8042cf8abe862d6acfbc12d230ebe0b3eb1c6134ad9fe1ed3108c6e5015e6bfa",
+      "line": 138,
+      "signature": "theorem exists_golden_modelSet_delone : ∃ D : Delone.DeloneSet ℝ, D.carrier = modelSet goldenWindow ∧ D.packingRadius = (1 / 2 : ℝ≥0) ∧ D.coveringRadius = (3 : ℝ≥0)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Fourier/GoldenModelSetDelone.norm_separation": {
+      "module": "D5/S3/Fourier/GoldenModelSetDelone",
+      "name": "D5.S3.Fourier.GoldenModelSetDelone.norm_separation",
+      "kind": "theorem",
+      "statement_id": "sha256:8042cf8abe862d6acfbc12d230ebe0b3eb1c6134ad9fe1ed3108c6e5015e6bfa",
+      "line": 37,
+      "signature": "theorem norm_separation (u v : GoldenInt) (hne : u ≠ v) (B : ℝ) (hB : |embedding (conj u) - embedding (conj v)| ≤ B) : 1 ≤ |embedding u - embedding v| * B",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

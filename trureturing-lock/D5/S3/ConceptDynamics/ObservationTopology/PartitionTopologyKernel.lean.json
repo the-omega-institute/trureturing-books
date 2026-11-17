@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel",
+  "declarations": {
+    "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.PartitionTopologyKernel.partition_inseparable_iff_kernel",
+      "kind": "theorem",
+      "statement_id": "sha256:8dfabfe9835ba29a6bf90b392eee5c5fc9a0c1258b931a73be90285abc196678",
+      "line": 18,
+      "signature": "theorem partition_inseparable_iff_kernel {X B : Type*} (readout : Concept X B) (x y : X) : @Inseparable X (partitionTopology readout) x y <-> readout x = readout y",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

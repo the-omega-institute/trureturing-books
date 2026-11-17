@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/Robin/LcmRobinResponse",
+  "declarations": {
+    "D5/S3/Arith/Robin/LcmRobinResponse.common_robin_response": {
+      "module": "D5/S3/Arith/Robin/LcmRobinResponse",
+      "name": "D5.S3.Arith.Robin.LcmRobinResponse.common_robin_response",
+      "kind": "theorem",
+      "statement_id": "sha256:54c9687b684eea79469f4207c1590abe1ae1a4194ed94a7b2492c29c9866c561",
+      "line": 367,
+      "signature": "theorem common_robin_response {u : ℝ} (hu : 10000 ≤ u) (hE : Mertens.E₃ u < -4 / Real.sqrt u - (Chebyshev.psi u - u) / (u * Real.log u)) : let D",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

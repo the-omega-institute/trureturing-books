@@ -1,0 +1,60 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+  "declarations": {
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.basisPinchingState": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.basisPinchingState",
+      "kind": "def",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 132,
+      "signature": "noncomputable def basisPinchingState (rho : DensityState n) : DensityState n",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.cfc_diagonal": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.cfc_diagonal",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 57,
+      "signature": "lemma cfc_diagonal (f : ℝ → ℝ) (a : n -> ℝ) : cfc f (Matrix.diagonal fun i => (a i : ℂ)) = Matrix.diagonal fun i => (f (a i) : ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.cfc_log_diagonal": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.cfc_log_diagonal",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 93,
+      "signature": "lemma cfc_log_diagonal (a : n -> ℝ) : CFC.log (Matrix.diagonal fun i => (a i : ℂ)) = Matrix.diagonal fun i => (Real.log (a i) : ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 383,
+      "signature": "theorem entropy_production_coherence_deletion_identity (U : Matrix n n ℂ) (hU : U ∈ Matrix.unitaryGroup n ℂ) (rho : ℕ → DensityState n) (hStep : ∀ k, rho (k + 1) = basisPinchingState (unitaryConjugateState U hU (rho k))) : (∀ k, vonNeumannEntropy (rho (k + 1)) - vonNeumannEntropy (rho k) = quantumRelativeEntropy (unitaryConjugateState U hU (rho k)) (basisPinchingState (unitaryConjugateState U hU (rho k))) ∧ 0 ≤ quantumRelativeEntropy (unitaryConjugateState U hU (rho k)) (basisPinchingState (unitaryConjugateState U hU (rho k)))) ∧ (∀ N, vonNeumannEntropy (rho N) - vonNeumannEntropy (rho 0) = ∑ ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.unitaryConjugateState": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.unitaryConjugateState",
+      "kind": "def",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 119,
+      "signature": "noncomputable def unitaryConjugateState (U : Matrix n n ℂ) (hU : U ∈ Matrix.unitaryGroup n ℂ) (rho : DensityState n) : DensityState n",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.von_neumann_entropy_basisPinchingState": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.von_neumann_entropy_basisPinchingState",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 251,
+      "signature": "lemma von_neumann_entropy_basisPinchingState (rho : DensityState n) : vonNeumannEntropy (basisPinchingState rho) = -(∑ i, (densityMatrix rho i i).re * Real.log (densityMatrix rho i i).re)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

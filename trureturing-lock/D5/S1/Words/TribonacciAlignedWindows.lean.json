@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Words/TribonacciAlignedWindows",
+  "declarations": {
+    "D5/S1/Words/TribonacciAlignedWindows.aligned_windows": {
+      "module": "D5/S1/Words/TribonacciAlignedWindows",
+      "name": "D5.S1.Words.TribonacciAlignedWindows.aligned_windows",
+      "kind": "theorem",
+      "statement_id": "sha256:114922f5456de1bf2641fe038c678bea692fbd9bb8260247f474229db7f9e81b",
+      "line": 99,
+      "signature": "theorem aligned_windows : ∃ K : ℕ, 0 < K ∧ ∃ J : ℕ, 1 ≤ J ∧ ∀ j : ℕ, J ≤ j → ∃ m s : ℕ, 3 ≤ m ∧ Odd m ∧ Even s ∧ N j ≤ K*m ∧ s+2*m ≤ N j ∧ ∀ i : ℕ, i < m-1 → W (s+i+m) = W (s+i)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

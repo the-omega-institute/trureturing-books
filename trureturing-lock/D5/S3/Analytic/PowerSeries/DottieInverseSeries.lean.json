@@ -1,0 +1,51 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+  "declarations": {
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.alpha": {
+      "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+      "name": "D5.S3.Analytic.PowerSeries.DottieInverseSeries.alpha",
+      "kind": "def",
+      "statement_id": "sha256:68009262b75a20a6159bd6c19332bbca23a4eaacdf08c25178433927d0eef42c",
+      "line": 29,
+      "signature": "def alpha (n : ℕ) : ℚ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.arcsine": {
+      "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+      "name": "D5.S3.Analytic.PowerSeries.DottieInverseSeries.arcsine",
+      "kind": "def",
+      "statement_id": "sha256:68009262b75a20a6159bd6c19332bbca23a4eaacdf08c25178433927d0eef42c",
+      "line": 34,
+      "signature": "def arcsine : ℚ⟦X⟧",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.forward": {
+      "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+      "name": "D5.S3.Analytic.PowerSeries.DottieInverseSeries.forward",
+      "kind": "def",
+      "statement_id": "sha256:68009262b75a20a6159bd6c19332bbca23a4eaacdf08c25178433927d0eef42c",
+      "line": 36,
+      "signature": "def forward : ℚ⟦X⟧",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.inverse": {
+      "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+      "name": "D5.S3.Analytic.PowerSeries.DottieInverseSeries.inverse",
+      "kind": "def",
+      "statement_id": "sha256:68009262b75a20a6159bd6c19332bbca23a4eaacdf08c25178433927d0eef42c",
+      "line": 38,
+      "signature": "def inverse : ℚ⟦X⟧",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint": {
+      "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+      "name": "D5.S3.Analytic.PowerSeries.DottieInverseSeries.rational_inverse_endpoint",
+      "kind": "theorem",
+      "statement_id": "sha256:68009262b75a20a6159bd6c19332bbca23a4eaacdf08c25178433927d0eef42c",
+      "line": 545,
+      "signature": "theorem rational_inverse_endpoint : ∃ θ : ℝ, 0 < θ ∧ θ < 1 ∧ Real.cos θ = θ ∧ (∀ t : ℝ, 0 < t → Real.cos t = t → t = θ) ∧ Summable (fun n : ℕ => |((PowerSeries.coeff n inverse : ℚ) : ℝ)| * Real.pi ^ n) ∧ HasSum (fun n : ℕ => ((PowerSeries.coeff n inverse : ℚ) : ℝ) * Real.pi ^ n) θ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

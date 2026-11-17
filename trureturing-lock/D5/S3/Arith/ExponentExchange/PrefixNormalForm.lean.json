@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/ExponentExchange/PrefixNormalForm",
+  "declarations": {
+    "D5/S3/Arith/ExponentExchange/PrefixNormalForm.exists_antitone_exponent_form": {
+      "module": "D5/S3/Arith/ExponentExchange/PrefixNormalForm",
+      "name": "D5.S3.Arith.ExponentExchange.PrefixNormalForm.exists_antitone_exponent_form",
+      "kind": "theorem",
+      "statement_id": "sha256:c7c4bc578f5fb32a4b2c5e055da8a3cf37f62b48837932f40d8615540c2874bf",
+      "line": 45,
+      "signature": "theorem exists_antitone_exponent_form {n : ℕ} (hn : 1 ≤ n) : ∃ m : ℕ, 1 ≤ m ∧ m ≤ n ∧ m.primeFactors.card = n.primeFactors.card ∧ (∀ p q : ℕ, p.Prime → q.Prime → p < q → m.factorization q ≤ m.factorization p) ∧ (ArithmeticFunction.sigma 1 n : ℝ) / n ≤ (ArithmeticFunction.sigma 1 m : ℝ) / m",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

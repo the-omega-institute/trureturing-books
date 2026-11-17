@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Factorization/PrimeLogIndependence",
+  "declarations": {
+    "D5/S3/Factorization/PrimeLogIndependence.prime_log_indep": {
+      "module": "D5/S3/Factorization/PrimeLogIndependence",
+      "name": "D5.S3.Factorization.PrimeLogIndependence.prime_log_indep",
+      "kind": "theorem",
+      "statement_id": "sha256:948f581f4c54ea111495e1f0467dfd1210f011e8a9042821a5c8716e7eb1d301",
+      "line": 61,
+      "signature": "theorem prime_log_indep (S : Finset ℕ) (k : ℕ → ℤ) (hp : ∀ p ∈ S, p.Prime) (h : ∑ p ∈ S, (k p : ℝ) * Real.log p = 0) : ∀ p ∈ S, k p = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

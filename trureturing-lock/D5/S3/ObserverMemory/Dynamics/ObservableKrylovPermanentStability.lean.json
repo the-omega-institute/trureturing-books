@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability",
+  "declarations": {
+    "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently": {
+      "module": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability",
+      "name": "D5.S3.ObserverMemory.Dynamics.ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently",
+      "kind": "theorem",
+      "statement_id": "sha256:b6d4bd6cde95c727efecb6595ae12bf4280fef94c483489b44ce60fcbc3b3517",
+      "line": 74,
+      "signature": "theorem observable_krylov_once_stable_permanently (T : V →ₗ[K] V) (C : V →ₗ[K] Y) (m : Nat) (hStable : observableKrylov T C m = observableKrylov T C (m + 1)) : forall r : Nat, observableKrylov T C (m + r) = observableKrylov T C m",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

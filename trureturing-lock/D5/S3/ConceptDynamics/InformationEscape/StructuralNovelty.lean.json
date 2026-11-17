@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty",
+  "declarations": {
+    "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_not_mem_semanticClosureWithout": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.lowersEscape_iff_not_mem_semanticClosureWithout",
+      "kind": "theorem",
+      "statement_id": "sha256:36357323a2c9d6901b7bb61bf4efd25d956ea9a05eae2e6fbde8b6f169fd406d",
+      "line": 210,
+      "signature": "theorem lowersEscape_iff_not_mem_semanticClosureWithout {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) (nondegenerate : arena.Nondegenerate) : catalog.LowersEscape index ↔ (catalog.theoremAt index).primitives.toKernel ∉ catalog.semanticClosureWithout index",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.lowersEscape_iff_strict_kernel_novelty",
+      "kind": "theorem",
+      "statement_id": "sha256:36357323a2c9d6901b7bb61bf4efd25d956ea9a05eae2e6fbde8b6f169fd406d",
+      "line": 195,
+      "signature": "theorem lowersEscape_iff_strict_kernel_novelty {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) (nondegenerate : arena.Nondegenerate) : catalog.LowersEscape index ↔ D5.S3.ConceptDynamics.Faithfulness.JointFaithfulnessLeibnizCriterion.jointKernel (fun definition : Set.insert (catalog.taggedQuotientCut index) (catalog.quotientCutsWithout index) => definition.1) ⊂ D5.S3.ConceptDynamics.Faithfulness.JointFaithfulnessLeibnizCriterion.jointKernel (fun definition : catalog.quotientCutsWithout index => definition.1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.structurallyLowersEscape_iff_lowersEscape": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.structurallyLowersEscape_iff_lowersEscape",
+      "kind": "theorem",
+      "statement_id": "sha256:36357323a2c9d6901b7bb61bf4efd25d956ea9a05eae2e6fbde8b6f169fd406d",
+      "line": 89,
+      "signature": "theorem structurallyLowersEscape_iff_lowersEscape {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) (nondegenerate : arena.Nondegenerate) : catalog.StructurallyLowersEscape index ↔ catalog.LowersEscape index",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

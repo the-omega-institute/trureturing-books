@@ -1,0 +1,258 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+  "declarations": {
+    "D5/S3/Quantum/Routing/HannRouterProfiles.AddressDistribution": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.AddressDistribution",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 504,
+      "signature": "abbrev AddressDistribution (n : ℕ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.ClassDistribution": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.ClassDistribution",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 500,
+      "signature": "abbrev ClassDistribution (n : ℕ) (q : Router n → ℝ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.DeepestActive": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.DeepestActive",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 800,
+      "signature": "def DeepestActive : (n : ℕ) → (Router n → ℝ) → Prop | 0, _ => True | n + 1, q => ∀ u : Address n, q (deepest n u) < 1 private theorem rank_deepest (n : ℕ) (q : Router n → ℝ) (hq : ∀ v, q v ≤ 1) : (gram n q).rank = 2 ^ n ↔ DeepestActive n q",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.Environment": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.Environment",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 178,
+      "signature": "abbrev Environment (n : ℕ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.Profile": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.Profile",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 194,
+      "signature": "def Profile (n : ℕ) (q : Router n → ℝ) : Type",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.Router": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.Router",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 29,
+      "signature": "abbrev Router : ℕ → Type | 0 => Empty | n + 1 => Option (Bool × Router n) /-- Read the literal router field, never an incident or output rail. -/ def routerLabel : (n : ℕ) → Tree n → Router n → Qutrit | 0, _, v => nomatch v | _ + 1, t, none => t.2.1 | n + 1, t, some (b, v) => routerLabel n (if b then t.2.2.2 else t.2.2.1) v /-- Append the final bit while preserving the circuit's head-first address order. -/ def snoc : (n : ℕ) → Address n → Bool → Address (n + 1) | 0, _, b => (b, ()) | n + 1, a, b => (a.1, snoc n a.2 b) /-- The depth-n router reached by a length-n prefix in a tree of depth n+1.",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.SameProfile": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.SameProfile",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 132,
+      "signature": "def SameProfile (n : ℕ) (q : Router n → ℝ) (a a' : Address n) (bus bus' : Qutrit) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.Separates": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.Separates",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 137,
+      "signature": "def Separates (n : ℕ) (q : Router n → ℝ) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.addressEnergy": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.addressEnergy",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 443,
+      "signature": "def addressEnergy (n : ℕ) (q : Router n → ℝ) (p : Address n → ℝ) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.classEnergy": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.classEnergy",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 451,
+      "signature": "def classEnergy (n : ℕ) (q : Router n → ℝ) (x : Profile n q → ℝ) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.classMass": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.classMass",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 507,
+      "signature": "def classMass (n : ℕ) (q : Router n → ℝ) (p : AddressDistribution n) : ClassDistribution n q",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.classRecord": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.classRecord",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 261,
+      "signature": "def classRecord (n : ℕ) (q : Router n → ℝ) (c : Profile n q) : Environment n → ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.classSum": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.classSum",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 362,
+      "signature": "def classSum {R : Type} [AddCommMonoid R] (n : ℕ) (q : Router n → ℝ) (x : Address n → R) (c : Profile n q) : R",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.deepest": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.deepest",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 45,
+      "signature": "def deepest : (n : ℕ) → Address n → Router (n + 1) | 0, _ => none | n + 1, a => some (a.1, deepest n a.2) /-- Router labels after the actual sequential load, with any external qutrit bus. -/ def loadedLabel (n : ℕ) (a : Address n) (bus : Qutrit) (v : Router n) : Qutrit",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.distributionInput": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.distributionInput",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 742,
+      "signature": "def distributionInput (n : ℕ) (p : AddressDistribution n) (ab : Address n × Bool) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.gram": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.gram",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 334,
+      "signature": "def gram (n : ℕ) (q : Router n → ℝ) : Matrix (Address n) (Address n) ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.inputDistribution": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.inputDistribution",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 723,
+      "signature": "def inputDistribution (n : ℕ) (ψ : Address n × Bool → ℂ) (hψ : HannRouterDephasing.Normalized n ψ) : AddressDistribution n where weights",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.jointOutput": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.jointOutput",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 654,
+      "signature": "def jointOutput (n : ℕ) (q : Router n → ℝ) (D : Address n → Bool) (ψ : Address n × Bool → ℂ) (s : State n) (e : Environment n) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.loadedLabel": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.loadedLabel",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 50,
+      "signature": "def loadedLabel (n : ℕ) (a : Address n) (bus : Qutrit) (v : Router n) : Qutrit",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.noisyOutput": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.noisyOutput",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 660,
+      "signature": "def noisyOutput (n : ℕ) (q : Router n → ℝ) (D : Address n → Bool) (ψ : Address n × Bool → ℂ) : Matrix (State n) (State n) ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.physical_profile_event": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.physical_profile_event",
+      "kind": "theorem",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 812,
+      "signature": "theorem physical_profile_event (n : ℕ) (q : Router n → ℝ) (hq : ∀ v, 0 ≤ q v) (hq' : ∀ v, q v ≤ 1) (D : Address n → Bool) : (∀ (a : Address n) (bus : Qutrit), treeRecord n q ((load n n) (loading n a bus 0)).2.2 = record n q a) ∧ (∀ t : Tree n, (∑ e, Complex.normSq (treeRecord n q t e)) = 1) ∧ (∀ (a b : Address n) (bus bus' : Qutrit), profile n q a = profile n q b ↔",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.profile": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.profile",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 207,
+      "signature": "def profile (n : ℕ) (q : Router n → ℝ) (a : Address n) : Profile n q",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.profile_separation_iff": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.profile_separation_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 142,
+      "signature": "theorem profile_separation_iff (n : ℕ) (q : Router (n + 1) → ℝ) : (∀ (a a' : Address (n + 1)) (bus bus' : Qutrit), (∀ v, q v < 1 → loadedLabel (n + 1) a bus v = loadedLabel (n + 1) a' bus' v) → a = a') ↔ ∀ u : Address n, q (deepest n u) < 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.record": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.record",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 190,
+      "signature": "def record (n : ℕ) (q : Router n → ℝ) (a : Address n) (e : Environment n) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.routerLabel": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.routerLabel",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 34,
+      "signature": "def routerLabel : (n : ℕ) → Tree n → Router n → Qutrit | 0, _, v => nomatch v | _ + 1, t, none => t.2.1 | n + 1, t, some (b, v) => routerLabel n (if b then t.2.2.2 else t.2.2.1) v /-- Append the final bit while preserving the circuit's head-first address order. -/ def snoc : (n : ℕ) → Address n → Bool → Address (n + 1) | 0, _, b => (b, ()) | n + 1, a, b => (a.1, snoc n a.2 b) /-- The depth-n router reached by a length-n prefix in a tree of depth n+1. -/ def deepest : (n : ℕ) → Address n → Router (n + 1) | 0, _ => none | n + 1, a => some (a.1, deepest n a.2) /-- Router labels after the actual s",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.snoc": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.snoc",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 40,
+      "signature": "def snoc : (n : ℕ) → Address n → Bool → Address (n + 1) | 0, _, b => (b, ()) | n + 1, a, b => (a.1, snoc n a.2 b) /-- The depth-n router reached by a length-n prefix in a tree of depth n+1. -/ def deepest : (n : ℕ) → Address n → Router (n + 1) | 0, _ => none | n + 1, a => some (a.1, deepest n a.2) /-- Router labels after the actual sequential load, with any external qutrit bus. -/ def loadedLabel (n : ℕ) (a : Address n) (bus : Qutrit) (v : Router n) : Qutrit",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.squaredFidelity": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.squaredFidelity",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 665,
+      "signature": "def squaredFidelity (n : ℕ) (q : Router n → ℝ) (D : Address n → Bool) (ψ : Address n × Bool → ℂ) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannRouterProfiles.treeRecord": {
+      "module": "D5/S3/Quantum/Routing/HannRouterProfiles",
+      "name": "D5.S3.Quantum.Routing.HannRouterProfiles.treeRecord",
+      "kind": "def",
+      "statement_id": "sha256:3253b6f36ddb199dacee2df66b9289dc2417b2e355121167cb70239c9af09aae",
+      "line": 186,
+      "signature": "def treeRecord (n : ℕ) (q : Router n → ℝ) (t : Tree n) (e : Environment n) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

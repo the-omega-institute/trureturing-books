@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Solenoid/ThroatTransitionCocycle",
+  "declarations": {
+    "D5/S1/Solenoid/ThroatTransitionCocycle.three_lift_difference_cocycle": {
+      "module": "D5/S1/Solenoid/ThroatTransitionCocycle",
+      "name": "D5.S1.Solenoid.ThroatTransitionCocycle.three_lift_difference_cocycle",
+      "kind": "theorem",
+      "statement_id": "sha256:14243135706bf0bd3412b243b45d2ec46ce3ba16d1342b8569f2b2b50ff4fc12",
+      "line": 19,
+      "signature": "theorem three_lift_difference_cocycle {U : Type*} (sAlpha sBeta sGamma : U → UniversalSolenoid) (hAlphaBeta : UniversalSolenoid.projection ∘ sAlpha = UniversalSolenoid.projection ∘ sBeta) (hBetaGamma : UniversalSolenoid.projection ∘ sBeta = UniversalSolenoid.projection ∘ sGamma) : ∃ kAlphaBeta kBetaGamma kAlphaGamma : U → UniversalSolenoid, ((∀ u, UniversalSolenoid.projection (kAlphaBeta u) = 0) ∧ (∀ u, sBeta u = sAlpha u + kAlphaBeta u) ∧ ∀ k : U → UniversalSolenoid, ((∀ u, UniversalSolenoid.projection (k u) = 0) ∧ (∀ u, sBeta u = sAlpha u + k u)) → k = kAlphaBeta) ∧ ((∀ u, UniversalSolenoid.",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

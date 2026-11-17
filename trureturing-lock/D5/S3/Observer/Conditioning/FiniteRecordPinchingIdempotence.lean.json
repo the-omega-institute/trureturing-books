@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence",
+  "declarations": {
+    "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent": {
+      "module": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence",
+      "name": "D5.S3.Observer.Conditioning.FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent",
+      "kind": "theorem",
+      "statement_id": "sha256:aa98f3d97aefae1bd76833f5e8f63d71879209a9a35f8af5d9afd5f31ebb96f7",
+      "line": 30,
+      "signature": "theorem finite_record_pinching_idempotent {n kappa : Type*} [Fintype n] [DecidableEq n] [Fintype kappa] (P : kappa -> Matrix n n ℂ) (hP : IsRecordMeasurement P) : Function.comp (unreadState P) (unreadState P) = unreadState P",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

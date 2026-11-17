@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal",
+  "declarations": {
+    "D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal.finite_kraus_instrument_born_marginal": {
+      "module": "D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal",
+      "name": "D5.S3.Quantum.Measurement.FiniteKrausInstrumentBornMarginal.finite_kraus_instrument_born_marginal",
+      "kind": "theorem",
+      "statement_id": "sha256:4c75756d5a0d7a9a8cedfa976c4bd2cf0294014a82782dbf959e4185ddf89661",
+      "line": 36,
+      "signature": "theorem finite_kraus_instrument_born_marginal {n Setting Outcome Kraus : Type*} [Fintype n] [Nonempty n] [DecidableEq n] [Fintype Outcome] [Fintype Kraus] (instrumentKraus : {K : Setting -> Outcome -> Kraus -> Matrix n n ℂ // ∀ x, ∑ a, ∑ k, star (K x a k) * K x a k = 1}) (rho : DensityState n) : ∀ x a, let state : Matrix n n ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

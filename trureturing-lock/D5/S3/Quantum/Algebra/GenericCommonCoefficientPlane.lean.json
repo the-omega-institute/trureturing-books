@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/GenericCommonCoefficientPlane",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/GenericCommonCoefficientPlane.common_plane": {
+      "module": "D5/S3/Quantum/Algebra/GenericCommonCoefficientPlane",
+      "name": "D5.S3.Quantum.Algebra.GenericCommonCoefficientPlane.common_plane",
+      "kind": "theorem",
+      "statement_id": "sha256:a8cdb57842acd22cc096a9e766abc2245cd7aa4b60d58cce4769f6a5d7735d3d",
+      "line": 511,
+      "signature": "theorem common_plane {a b : ℕ} (hab : 3 * a < 2 * b) (X : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (hX : LinearIndependent ℂ X) (hinj : Function.Injective (stack X).mulVecLin) : ∃ L : Submodule ℂ (Fin 3 → ℂ), finrank ℂ L = 2 ∧ ∀ T : Matrix (Fin 3) (Fin 3) ℂ, T.IsHermitian → (stack X)ᴴ * Matrix.kronecker T (1 : Matrix (Fin a) (Fin a) ℂ) * stack X = 0 → ∀ u ∈ L, ∀ v ∈ L, star u ⬝ᵥ (T *ᵥ v) = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

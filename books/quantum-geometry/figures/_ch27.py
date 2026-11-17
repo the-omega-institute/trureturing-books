@@ -8,13 +8,12 @@ declaration the chapter cites with lean= (green). `lean_box` reads trureturing.l
 declaration that is not there with kind "theorem", so green never lands on anything else.
 """
 
-import json
 from pathlib import Path
 
-from tbook import figkit
+from tbook import figkit, lean
 
 ROOT = Path(__file__).resolve().parents[3]
-LOCK = ROOT / "trureturing.lock.json"
+LOCK = lean.Lock.load()
 
 TITLE = 14
 CODE = 13
@@ -26,9 +25,8 @@ WIDTH = 460
 
 
 def lock_kind(gid: str) -> str | None:
-    decls = json.loads(LOCK.read_text(encoding="utf-8"))["declarations"]
-    d = decls.get(gid)
-    return d["kind"] if d else None
+    d = LOCK.declarations.get(gid) if LOCK else None
+    return d.get("kind") if d else None
 
 
 class Box:

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound",
+  "declarations": {
+    "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound": {
+      "module": "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound",
+      "name": "D5.S3.Observer.Tomography.FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:9eed3d89d4955c0693aef4fea4a4ee687b30ab3a641ef049527d6681d6b46b53",
+      "line": 26,
+      "signature": "theorem finite_rank_concentration_mode_bound (concentrationEigenvalue : ℕ → ℝ) (intervalRadius frequencyMeasure threshold : ℝ) (hNonneg : ∀ j, 0 ≤ concentrationEigenvalue j) (hSummable : Summable concentrationEigenvalue) (hTrace : ∑' j, concentrationEigenvalue j = intervalRadius * frequencyMeasure / Real.pi) (hThreshold : 0 < threshold) : Set.Finite {j | threshold ≤ concentrationEigenvalue j} ∧ (({j | threshold ≤ concentrationEigenvalue j} : Set ℕ).ncard : ℝ) ≤ intervalRadius * frequencyMeasure / (Real.pi * threshold)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

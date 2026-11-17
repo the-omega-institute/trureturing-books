@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumBounds/TsirelsonTightness",
+  "declarations": {
+    "D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest": {
+      "module": "D5/S3/QuantumBounds/TsirelsonTightness",
+      "name": "D5.S3.QuantumBounds.TsirelsonTightness.bell_chsh_state_expectation_is_greatest",
+      "kind": "theorem",
+      "statement_id": "sha256:3451081fe38466a5fd8337589eec08de917ffbf27590216c4abdde0b633f9335",
+      "line": 26,
+      "signature": "theorem bell_chsh_state_expectation_is_greatest : IsGreatest (Set.range fun state : { rho : CHSHWitness.TwoQubitMatrix // rho.PosSemidef ∧ Matrix.trace rho = 1 } => RCLike.re (Matrix.trace (state.1 * CHSHWitness.chshOperator))) (2 * Real.sqrt 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

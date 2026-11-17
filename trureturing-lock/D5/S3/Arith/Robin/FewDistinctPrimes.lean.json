@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/Robin/FewDistinctPrimes",
+  "declarations": {
+    "D5/S3/Arith/Robin/FewDistinctPrimes.robin_lt_223092870": {
+      "module": "D5/S3/Arith/Robin/FewDistinctPrimes",
+      "name": "D5.S3.Arith.Robin.FewDistinctPrimes.robin_lt_223092870",
+      "kind": "theorem",
+      "statement_id": "sha256:577208920f6c5f41b1c2d253eebf287c8678b43e115d3b30c90c4adce46c05b2",
+      "line": 568,
+      "signature": "theorem robin_lt_223092870 {n : ℕ} (hn : 5040 < n) (hn' : n < 223092870) : (ArithmeticFunction.sigma 1 n : ℝ) / n < Real.exp Real.eulerMascheroniConstant * Real.log (Real.log (n : ℝ))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Arith/Robin/FewDistinctPrimes.robin_of_card_primeFactors_le_eight": {
+      "module": "D5/S3/Arith/Robin/FewDistinctPrimes",
+      "name": "D5.S3.Arith.Robin.FewDistinctPrimes.robin_of_card_primeFactors_le_eight",
+      "kind": "theorem",
+      "statement_id": "sha256:577208920f6c5f41b1c2d253eebf287c8678b43e115d3b30c90c4adce46c05b2",
+      "line": 499,
+      "signature": "theorem robin_of_card_primeFactors_le_eight {n : ℕ} (hn : 5040 < n) (hcard : n.primeFactors.card ≤ 8) : (ArithmeticFunction.sigma 1 n : ℝ) / n < Real.exp Real.eulerMascheroniConstant * Real.log (Real.log (n : ℝ))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Constants/PentagonCosines",
+  "declarations": {
+    "D5/S3/Constants/PentagonCosines.pentagon_golden_cosines": {
+      "module": "D5/S3/Constants/PentagonCosines",
+      "name": "D5.S3.Constants.PentagonCosines.pentagon_golden_cosines",
+      "kind": "theorem",
+      "statement_id": "sha256:038cd8610f04ca79d22518cdee753555520de8a2c93fd7b411d397fa70b6ba42",
+      "line": 45,
+      "signature": "theorem pentagon_golden_cosines : 2 * Real.cos (Real.pi / 5) = Real.goldenRatio ∧ 2 * Real.cos (2 * Real.pi / 5) = Real.goldenRatio⁻¹ ∧ 2 * Real.cos (Real.pi / 5) + 2 * Real.cos (2 * Real.pi / 5) = Real.sqrt 5 ∧ Irrational (2 * Real.cos (2 * Real.pi / 5))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

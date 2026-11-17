@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",
+  "declarations": {
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound.QMaxFlow_attained",
+      "kind": "theorem",
+      "statement_id": "sha256:06b305ef00d70bec3cf0f07510dc024d6d39db5dfc8aec9d8456823c6e2eda29",
+      "line": 93,
+      "signature": "theorem QMaxFlow_attained (a b c d : ℕ) : ∃ (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin d) (Fin c) ℂ), (flow M N).rank = QMaxFlow a b c d",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound.QMaxFlow_le_QMinCut",
+      "kind": "theorem",
+      "statement_id": "sha256:06b305ef00d70bec3cf0f07510dc024d6d39db5dfc8aec9d8456823c6e2eda29",
+      "line": 140,
+      "signature": "theorem QMaxFlow_le_QMinCut (a b c d : ℕ) : QMaxFlow a b c d ≤ QMinCut a b c d",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound.cone_QMinCut",
+      "kind": "theorem",
+      "statement_id": "sha256:06b305ef00d70bec3cf0f07510dc024d6d39db5dfc8aec9d8456823c6e2eda29",
+      "line": 158,
+      "signature": "theorem cone_QMinCut {a b c d : ℕ} (ha : 0 < a) (hc : 0 < c) (hab : a * a + b * b ≤ 3 * a * b) (hcd : c * c + d * d ≤ 3 * c * d) : QMinCut a b c d = min (a * d) (b * c)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal",
+  "declarations": {
+    "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal": {
+      "module": "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal",
+      "name": "D5.S3.Quantum.Entanglement.BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal",
+      "kind": "theorem",
+      "statement_id": "sha256:9ef86e623a3b8a4bfc44f4e69b1ec7aa2509d172ceba176d20ab2ba40581a844",
+      "line": 83,
+      "signature": "theorem bell_pure_state_has_maximally_mixed_marginal : star bellVector ⬝ᵥ bellVector = 1 /\\ bellDensity.PosSemidef /\\ Matrix.trace bellDensity = 1 /\\ Matrix.rank bellDensity = 1 /\\ bellDensity * bellDensity = bellDensity /\\ traceEnvironment bellDensity = (1 / 2 : Complex) • (1 : QubitMatrix) /\\ Not (traceEnvironment bellDensity * traceEnvironment bellDensity = traceEnvironment bellDensity)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

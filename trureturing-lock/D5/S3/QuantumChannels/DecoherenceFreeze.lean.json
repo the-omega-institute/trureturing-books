@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumChannels/DecoherenceFreeze",
+  "declarations": {
+    "D5/S3/QuantumChannels/DecoherenceFreeze.criticalInverseTemperature": {
+      "module": "D5/S3/QuantumChannels/DecoherenceFreeze",
+      "name": "D5.S3.QuantumChannels.DecoherenceFreeze.criticalInverseTemperature",
+      "kind": "def",
+      "statement_id": "sha256:0eb681c9617e920fdd3e6f44d99ac1436618cb562998979a5a8383fee70e7ea6",
+      "line": 17,
+      "signature": "noncomputable def criticalInverseTemperature (entropyTax passiveEnergy : ℝ) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumChannels/DecoherenceFreeze.decoherence_freeze_iff_above_critical": {
+      "module": "D5/S3/QuantumChannels/DecoherenceFreeze",
+      "name": "D5.S3.QuantumChannels.DecoherenceFreeze.decoherence_freeze_iff_above_critical",
+      "kind": "theorem",
+      "statement_id": "sha256:0eb681c9617e920fdd3e6f44d99ac1436618cb562998979a5a8383fee70e7ea6",
+      "line": 22,
+      "signature": "theorem decoherence_freeze_iff_above_critical {beta entropyTax passiveEnergy : ℝ} (hbeta : 0 < beta) (henergy : 0 < passiveEnergy) : 0 < freezeDeposit beta entropyTax passiveEnergy ↔ criticalInverseTemperature entropyTax passiveEnergy < beta",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumChannels/DecoherenceFreeze.freezeDeposit": {
+      "module": "D5/S3/QuantumChannels/DecoherenceFreeze",
+      "name": "D5.S3.QuantumChannels.DecoherenceFreeze.freezeDeposit",
+      "kind": "def",
+      "statement_id": "sha256:0eb681c9617e920fdd3e6f44d99ac1436618cb562998979a5a8383fee70e7ea6",
+      "line": 13,
+      "signature": "noncomputable def freezeDeposit (beta entropyTax passiveEnergy : ℝ) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

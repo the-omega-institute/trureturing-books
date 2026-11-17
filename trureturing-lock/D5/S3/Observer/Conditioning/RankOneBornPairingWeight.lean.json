@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight",
+  "declarations": {
+    "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight": {
+      "module": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight",
+      "name": "D5.S3.Observer.Conditioning.RankOneBornPairingWeight.rank_one_born_pairing_weight",
+      "kind": "theorem",
+      "statement_id": "sha256:3fd7a21edfbcbab67f68210ebcce0fc11fba19166510569af2ece042b6df68b2",
+      "line": 36,
+      "signature": "theorem rank_one_born_pairing_weight {n kappa : Type*} [Fintype n] [DecidableEq n] [Fintype kappa] (P : kappa -> Matrix n n ℂ) (rho : Matrix n n ℂ) (k : kappa) (phi psi : n -> ℂ) (hP : IsRecordMeasurement P) (hState : rho.PosSemidef ∧ Matrix.trace rho = 1) (hProjection : P k = Matrix.vecMulVec phi (star phi)) (hPureState : rho = Matrix.vecMulVec psi (star psi)) : recordWeight P rho k = ((‖star phi ⬝ᵥ psi‖ ^ 2 : ℝ) : ℂ) ∧ recordWeight P rho k = Matrix.trace (rho * P k) ∧ unreadState P rho = ∑ j, recordWeight P rho j • conditionalState P rho j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

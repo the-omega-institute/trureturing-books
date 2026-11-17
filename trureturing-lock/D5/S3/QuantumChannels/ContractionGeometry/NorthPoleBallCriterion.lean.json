@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion",
+  "declarations": {
+    "D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.north_pole_ball_preserving_iff": {
+      "module": "D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion",
+      "name": "D5.S3.QuantumChannels.ContractionGeometry.NorthPoleBallCriterion.north_pole_ball_preserving_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f28dc7ec72ddf37572aff57f5939faa8825992f395b25402c81a6aba30f3022b",
+      "line": 45,
+      "signature": "theorem north_pole_ball_preserving_iff (a lambda : ℝ) (ha0 : 0 ≤ a) (ha1 : a ≤ 1) : (∀ x y z : ℝ, x ^ 2 + y ^ 2 + z ^ 2 ≤ 1 → (lambda * x) ^ 2 + (lambda * y) ^ 2 + (dampedAxis (1 - a) z) ^ 2 ≤ 1) ↔ lambda ^ 2 ≤ a",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

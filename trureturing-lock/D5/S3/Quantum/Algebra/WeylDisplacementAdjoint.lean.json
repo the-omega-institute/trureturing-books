@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/WeylDisplacementAdjoint",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacementAdjoint",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacementAdjoint.displacement_adjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:8aae4e564b5324721006f2820a517ebfe2132d726deb1f4861e2df87f09df85e",
+      "line": 154,
+      "signature": "theorem displacement_adjoint (a b : ZMod M) : star (displacement M a b) = windowRoot M ^ (a * b).val • displacement M (-a) (-b)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

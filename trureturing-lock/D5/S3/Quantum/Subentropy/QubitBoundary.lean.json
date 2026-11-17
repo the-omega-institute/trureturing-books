@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Subentropy/QubitBoundary",
+  "declarations": {
+    "D5/S3/Quantum/Subentropy/QubitBoundary.qubit_subentropy_near_pure": {
+      "module": "D5/S3/Quantum/Subentropy/QubitBoundary",
+      "name": "D5.S3.Quantum.Subentropy.QubitBoundary.qubit_subentropy_near_pure",
+      "kind": "theorem",
+      "statement_id": "sha256:b64cbfc7f241d6eca52067fa57f532696ef90458007cfb3acfeffe3c8a0d991a",
+      "line": 74,
+      "signature": "theorem qubit_subentropy_near_pure (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A.PosSemidef) (htr : A.trace = 1) : let δ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

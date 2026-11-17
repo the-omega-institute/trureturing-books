@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Carrier/Ring",
+  "declarations": {
+    "D5/S0/Carrier/Ring.GoldenInt": {
+      "module": "D5/S0/Carrier/Ring",
+      "name": "D5.S0.Carrier.GoldenInt",
+      "kind": "inductive",
+      "statement_id": "sha256:cf9edcb1b0afa3e79e62dbc00419cce07094df49bbc47cafd4e7a6158ac052e7",
+      "line": 13,
+      "signature": "@[ext] structure GoldenInt where a : ℤ b : ℤ deriving DecidableEq instance : Zero GoldenInt",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

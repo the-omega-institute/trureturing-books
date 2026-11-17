@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization",
+  "declarations": {
+    "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.TargetContinuityFactorization.target_factors_iff_continuous_partition",
+      "kind": "theorem",
+      "statement_id": "sha256:54fbe84e633a6079f45ef103bf95a7e5fc6d8971612eefcde6b1ec5950155c7b",
+      "line": 73,
+      "signature": "theorem target_factors_iff_continuous_partition {X Coordinate Target : Type*} [Nonempty X] (readout : Concept X Coordinate) (target : Concept X Target) : Refines target readout <-> @Continuous X Target (partitionTopology readout) ⊥ target",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

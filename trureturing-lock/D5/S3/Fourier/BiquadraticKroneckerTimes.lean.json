@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Fourier/BiquadraticKroneckerTimes",
+  "declarations": {
+    "D5/S3/Fourier/BiquadraticKroneckerTimes.dense_circle_sequence": {
+      "module": "D5/S3/Fourier/BiquadraticKroneckerTimes",
+      "name": "D5.S3.Fourier.BiquadraticKroneckerTimes.dense_circle_sequence",
+      "kind": "theorem",
+      "statement_id": "sha256:9a1bccab28e15dc6e95d56888c7378054647d211246fcb8e373ca4071beb47df",
+      "line": 97,
+      "signature": "theorem dense_circle_sequence {ι : Type*} [Fintype ι] (a : ι → ℝ) (hind : ∀ (k : ι → ℤ) (m : ℤ), (∑ i, (k i : ℝ)*a i) = m → (∀ i, k i = 0)) (z : ι → Circle) : ∃ m : ℕ → ℕ, Tendsto (fun n i => Circle.exp (2*Real.pi*a i)^(m n)) atTop (𝓝 z)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy",
+  "declarations": {
+    "D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy": {
+      "module": "D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy",
+      "name": "D5.S3.Quantum.Entanglement.KBonacciDirectRankEntropy.complete_original_direct_rank_entropy",
+      "kind": "theorem",
+      "statement_id": "sha256:5af0c09aac42c6a2d5e3a9e9c5495f7809356764b8221bcb57fe71d807bdd5a3",
+      "line": 174,
+      "signature": "theorem complete_original_direct_rank_entropy : completeOriginal72",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

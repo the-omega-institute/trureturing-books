@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation",
+  "declarations": {
+    "D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation": {
+      "module": "D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation",
+      "name": "D5.S3.ConceptDynamics.Revision.RevisionConflictNoncommutation.revision_conflict_noncommutation",
+      "kind": "theorem",
+      "statement_id": "sha256:c730293a4a5199eaaf6a82d8ab56dba5408c8b42370666ab5245a86a28c39941",
+      "line": 37,
+      "signature": "theorem revision_conflict_noncommutation : let A : Set (Fin 3)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

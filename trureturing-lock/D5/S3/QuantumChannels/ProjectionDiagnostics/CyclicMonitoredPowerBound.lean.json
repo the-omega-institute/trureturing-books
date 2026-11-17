@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound",
+  "declarations": {
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredPowerBound.cyclic_power_contraction",
+      "kind": "theorem",
+      "statement_id": "sha256:544bab1da74377d730da774b8a4e819c2ae05ed8bd08302690f80efa5203f0e1",
+      "line": 61,
+      "signature": "theorem cyclic_power_contraction (U : E ≃ₗᵢ[ℂ] E) (v : E) (hv : ‖v‖ = 1) : ∃ N : ℕ, 1 ≤ N ∧ ∃ q : ℝ, 0 ≤ q ∧ q < 1 ∧ ‖cyclicStep U v ^ N‖ ≤ q",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

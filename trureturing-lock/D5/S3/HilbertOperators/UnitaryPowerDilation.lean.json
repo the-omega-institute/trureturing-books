@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/HilbertOperators/UnitaryPowerDilation",
+  "declarations": {
+    "D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation": {
+      "module": "D5/S3/HilbertOperators/UnitaryPowerDilation",
+      "name": "D5.S3.HilbertOperators.UnitaryPowerDilation.exists_unitary_power_dilation",
+      "kind": "theorem",
+      "statement_id": "sha256:0b24c66dfd0fb41da8947e3e6f71c85367246a5dbc85d1d6f46805d7e78f46a0",
+      "line": 533,
+      "signature": "theorem exists_unitary_power_dilation (T : E →L[ℂ] E) (hT : ‖T‖ ≤ 1) : ∃ (H : Type u) (_ : NormedAddCommGroup H) (_ : InnerProductSpace ℂ H) (_ : CompleteSpace H) (V : E →L[ℂ] H) (U : H →L[ℂ] H), (∀ x y : E, ⟪V x, V y⟫_ℂ = ⟪x, y⟫_ℂ) ∧ U ∈ unitary (H →L[ℂ] H) ∧ (∀ (n : ℕ) (x : E), ContinuousLinearMap.adjoint V ((U ^ n) (V x)) = (T ^ n) x)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

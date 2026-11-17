@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/ObserverCommutator",
+  "declarations": {
+    "D5/S3/Quantum/ObserverCommutator.observer_read_update_commutator_formula": {
+      "module": "D5/S3/Quantum/ObserverCommutator",
+      "name": "D5.S3.Quantum.ObserverCommutator.observer_read_update_commutator_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:64adf72ef394f71ee3b349cfaac0f75e831d9009d6ca5ef3ad4f9085b1a6212f",
+      "line": 16,
+      "signature": "theorem observer_read_update_commutator_formula {index : Type*} (tau : Equiv.Perm index) (f : index -> Complex) (psi : Register index) : observerUpdate tau (readObservable f psi) - readObservable f (observerUpdate tau psi) = fun i => (f (tau.symm i) - f i) * psi (tau.symm i)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

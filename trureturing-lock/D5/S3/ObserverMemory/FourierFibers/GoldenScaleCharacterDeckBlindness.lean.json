@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness",
+  "declarations": {
+    "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_fourier_readout_step": {
+      "module": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness",
+      "name": "D5.S3.ObserverMemory.FourierFibers.GoldenScaleCharacterDeckBlindness.golden_helix_fourier_readout_step",
+      "kind": "theorem",
+      "statement_id": "sha256:8ffd5271257fcb57f60f34686e893c2a82ca5cb2ca2c70474743d3f4cc2a2fb4",
+      "line": 69,
+      "signature": "theorem golden_helix_fourier_readout_step (mode : ℤ) (state : GoldenHelixState) : goldenHelixFourierReadout mode (goldenHelixStep state) = goldenHelixFourierReadout mode state",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_step_changes_level": {
+      "module": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness",
+      "name": "D5.S3.ObserverMemory.FourierFibers.GoldenScaleCharacterDeckBlindness.golden_helix_step_changes_level",
+      "kind": "theorem",
+      "statement_id": "sha256:8ffd5271257fcb57f60f34686e893c2a82ca5cb2ca2c70474743d3f4cc2a2fb4",
+      "line": 78,
+      "signature": "theorem golden_helix_step_changes_level (state : GoldenHelixState) : (goldenHelixStep state).level ≠ state.level",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.level_fourier_joint_readout_detects_step": {
+      "module": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness",
+      "name": "D5.S3.ObserverMemory.FourierFibers.GoldenScaleCharacterDeckBlindness.level_fourier_joint_readout_detects_step",
+      "kind": "theorem",
+      "statement_id": "sha256:8ffd5271257fcb57f60f34686e893c2a82ca5cb2ca2c70474743d3f4cc2a2fb4",
+      "line": 97,
+      "signature": "theorem level_fourier_joint_readout_detects_step (mode : ℤ) (state : GoldenHelixState) : ((goldenHelixStep state).level, goldenHelixFourierReadout mode (goldenHelixStep state)) ≠ (state.level, goldenHelixFourierReadout mode state)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

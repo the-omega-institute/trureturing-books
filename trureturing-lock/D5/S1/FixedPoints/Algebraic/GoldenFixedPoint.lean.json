@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
+  "declarations": {
+    "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap": {
+      "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
+      "name": "D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.goldenReciprocalMap",
+      "kind": "def",
+      "statement_id": "sha256:0711b0acf1a066d33ef6b75f82f22ba4f01249fa4455c41dba1a5eed0761f4c2",
+      "line": 35,
+      "signature": "noncomputable def goldenReciprocalMap (x : Real) : Real",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique": {
+      "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
+      "name": "D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.golden_fixed_point_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:0711b0acf1a066d33ef6b75f82f22ba4f01249fa4455c41dba1a5eed0761f4c2",
+      "line": 40,
+      "signature": "theorem golden_fixed_point_unique : 0 < (1 + Real.sqrt 5) / 2 ∧ goldenReciprocalMap ((1 + Real.sqrt 5) / 2) = (1 + Real.sqrt 5) / 2 ∧ ∀ x : Real, 0 < x → (goldenReciprocalMap x = x ↔ x = (1 + Real.sqrt 5) / 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

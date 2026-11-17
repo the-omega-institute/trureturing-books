@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumBounds/GramRealizability",
+  "declarations": {
+    "D5/S3/QuantumBounds/GramRealizability.gram_realizability": {
+      "module": "D5/S3/QuantumBounds/GramRealizability",
+      "name": "D5.S3.QuantumBounds.GramRealizability.gram_realizability",
+      "kind": "theorem",
+      "statement_id": "sha256:ade6097b22f442dc2db407cdbcfb3841cc7c197b6f264b5826ca0c981300eb3f",
+      "line": 37,
+      "signature": "theorem gram_realizability {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℂ V] [CompleteSpace V] (Q : V →L[ℂ] V) : 0 ≤ Q ↔ ∃ O : V →L[ℂ] V, Q = O.adjoint ∘L O ∧ ∀ x y : V, inner ℂ (Q x) y = inner ℂ (O x) (O y)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

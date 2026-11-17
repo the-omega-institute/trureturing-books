@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength",
+  "declarations": {
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength",
+      "name": "QuantumShorContinuedFractions.convergents_length_log",
+      "kind": "theorem",
+      "statement_id": "sha256:db83d7726d5fdcb9f3e330b3679847bee1057c710ec49cda6c40bd083e68fbf4",
+      "line": 58,
+      "signature": "theorem convergents_length_log (x : ℚ) : (convergents x).length ≤ 2 * Nat.log 2 x.den + 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

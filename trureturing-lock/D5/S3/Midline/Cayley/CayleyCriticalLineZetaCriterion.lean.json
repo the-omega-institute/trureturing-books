@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion",
+  "declarations": {
+    "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion": {
+      "module": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion",
+      "name": "D5.S3.Midline.Cayley.CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",
+      "kind": "theorem",
+      "statement_id": "sha256:547e2360b6d7272103f80eba1b75ee6b705e5b162495aec1081f40c28169769a",
+      "line": 76,
+      "signature": "theorem cayley_critical_line_zeta_criterion : (∀ s : Complex, ‖cayleyCoefficient s‖ = 1 ↔ s.re = (1 : Real) / 2) ∧ (RiemannHypothesis ↔ ∀ rho : Complex, riemannZeta rho = 0 → (¬∃ n : Nat, rho = -2 * (n + 1)) → rho ≠ 1 → logarithmicRadialDefect rho = 0)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

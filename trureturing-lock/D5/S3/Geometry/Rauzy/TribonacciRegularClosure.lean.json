@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Geometry/Rauzy/TribonacciRegularClosure",
+  "declarations": {
+    "D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_closure_interior": {
+      "module": "D5/S3/Geometry/Rauzy/TribonacciRegularClosure",
+      "name": "D5.S3.Geometry.Rauzy.TribonacciRegularClosure.rauzyFractal_closure_interior",
+      "kind": "theorem",
+      "statement_id": "sha256:2d4244267ee580101d4938c8f59d145641170f523f340e6b4a6e375640ac7a8d",
+      "line": 117,
+      "signature": "theorem rauzyFractal_closure_interior {z : Complex} (hz : z ∈ Binet.tribonacciCharacteristicPolynomial.roots) (hz_ne : z ≠ (Values.tribonacciConstant : Complex)) : closure (interior (rauzyFractal z)) = rauzyFractal z",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_prefix_cover": {
+      "module": "D5/S3/Geometry/Rauzy/TribonacciRegularClosure",
+      "name": "D5.S3.Geometry.Rauzy.TribonacciRegularClosure.rauzyFractal_prefix_cover",
+      "kind": "theorem",
+      "statement_id": "sha256:2d4244267ee580101d4938c8f59d145641170f523f340e6b4a6e375640ac7a8d",
+      "line": 87,
+      "signature": "theorem rauzyFractal_prefix_cover {z : Complex} (hz : z ∈ D5.S0.Tower.Tribonacci.Binet.tribonacciCharacteristicPolynomial.roots) (hz_ne : z ≠ (D5.S0.Tower.Tribonacci.Values.tribonacciConstant : Complex)) : zeroPrefixMap z '' rauzyFractal z ∪ oneZeroPrefixMap z '' rauzyFractal z ∪ oneOneZeroPrefixMap z '' rauzyFractal z = rauzyFractal z",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

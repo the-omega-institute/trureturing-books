@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Foundation/ExclusionBallFaces",
+  "declarations": {
+    "D5/S3/Quantum/Foundation/ExclusionBallFaces.exclusion_ball_faces": {
+      "module": "D5/S3/Quantum/Foundation/ExclusionBallFaces",
+      "name": "D5.S3.Quantum.Foundation.ExclusionBallFaces.exclusion_ball_faces",
+      "kind": "theorem",
+      "statement_id": "sha256:6f9c2a4cdc70cabd08f25618679d45a12dbe0a47484f78de06e174a907c55da7",
+      "line": 245,
+      "signature": "theorem exclusion_ball_faces {C : PointedCone ℝ V} {u : V →ₗ[ℝ] ℝ} (hclosed : IsClosed (C : Set V)) (hstrict : ∀ x ∈ C, x ≠ 0 → 0 < u x) (hgen : Submodule.span ℝ (C : Set V) = ⊤) (hB : exclusionBalls C u) : (∀ p : pure C u, (exclusion C u p).Nontrivial ∧ IsCompact (exclusion C u p) ∧ Convex ℝ (exclusion C u p) ∧ IsExposed ℝ (base C u) (exclusion C u p) ∧ IsExtreme ℝ (base C u) (exclusion C u p) ∧ exclusion C u p ≠ base C u ∧ ∃ f, confirms C u p f ∧ exclusion C u p = {x | x ∈ base C u ∧ f x = 0}) ∧ (∀ F : Set V, F.Nonempty → Convex ℝ F → IsExtreme ℝ (base C u) F → F ≠ base C u → (∃ p : pure C u",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

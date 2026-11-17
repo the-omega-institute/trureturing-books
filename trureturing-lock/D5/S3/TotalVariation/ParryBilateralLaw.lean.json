@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/TotalVariation/ParryBilateralLaw",
+  "declarations": {
+    "D5/S3/TotalVariation/ParryBilateralLaw.bilateral_parry_law": {
+      "module": "D5/S3/TotalVariation/ParryBilateralLaw",
+      "name": "D5.S3.TotalVariation.ParryBilateralLaw.bilateral_parry_law",
+      "kind": "theorem",
+      "statement_id": "sha256:a2c5f795fdcab2a4c50f9e294d743517d7692456a5111f391e21592ffc077842",
+      "line": 338,
+      "signature": "theorem bilateral_parry_law (k : ℕ) (hk : 2 ≤ k) : ∃ (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (ν : ProbabilityMeasure (ℤ → State k)), (∀ (b : Bool) (r : RelationPath k) (t : ℤ), ((e (b, r)).val t).1 = signAt b r.val t) ∧ (∀ (z : Bool × RelationPath k) (t : ℤ), let j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/TotalVariation/ParryBilateralLaw.bilateral_reset_coding": {
+      "module": "D5/S3/TotalVariation/ParryBilateralLaw",
+      "name": "D5.S3.TotalVariation.ParryBilateralLaw.bilateral_reset_coding",
+      "kind": "theorem",
+      "statement_id": "sha256:a2c5f795fdcab2a4c50f9e294d743517d7692456a5111f391e21592ffc077842",
+      "line": 59,
+      "signature": "theorem bilateral_reset_coding (k : ℕ) (hk : 2 ≤ k) : ∃ e : (Bool × RelationPath k) ≃ᵐ ResetPath k, (∀ (b : Bool) (r : RelationPath k) (t : ℤ), ((e (b, r)).val t).1 = signAt b r.val t) ∧ (∀ (z : Bool × RelationPath k) (t : ℤ), let j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

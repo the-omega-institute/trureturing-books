@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Divergence/CanonicalChannelDPI",
+  "declarations": {
+    "D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi": {
+      "module": "D5/S3/Quantum/Divergence/CanonicalChannelDPI",
+      "name": "D5.S3.Quantum.Divergence.CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi",
+      "kind": "theorem",
+      "statement_id": "sha256:774796337df6c0109376f820de48bf7a93d7e6f1796a0103e39fcfbf9b0bcb9b",
+      "line": 321,
+      "signature": "theorem extended_quantum_relative_entropy_channel_dpi {a : Type u} {b : Type v} [Fintype a] [DecidableEq a] [Nonempty a] [Fintype b] [DecidableEq b] [Nonempty b] (Φ : QuantumChannel a b) (ρ σ : DensityState a) : extendedQuantumRelativeEntropy (Φ.mapState ρ) (Φ.mapState σ) ≤ extendedQuantumRelativeEntropy ρ σ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

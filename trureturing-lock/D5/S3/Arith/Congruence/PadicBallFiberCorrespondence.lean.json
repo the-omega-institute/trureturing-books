@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence",
+  "declarations": {
+    "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range": {
+      "module": "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence",
+      "name": "D5.S3.Arith.Congruence.PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range",
+      "kind": "theorem",
+      "statement_id": "sha256:7de42d9d0f6fa8adb1cfe8591727254de8414c98c86c8273350a51ce755110cb",
+      "line": 36,
+      "signature": "theorem congruenceFiber_eq_closedBall_inter_range (p k : ℕ) [Fact p.Prime] (x : ℤ) : congruenceFiber p k x = Metric.closedBall (x : ℚ_[p]) ((p : ℝ) ^ (-k : ℤ)) ∩ Set.range ((↑) : ℤ → ℚ_[p])",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

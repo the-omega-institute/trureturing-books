@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion",
+  "declarations": {
+    "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion": {
+      "module": "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion",
+      "name": "D5.S3.Combinatorics.Graph.LinearForests.DirectedForestCompletion.directed_forest_completion",
+      "kind": "theorem",
+      "statement_id": "sha256:fdfe078d2aec36a0e7fd271d7842bbc4261d6d59a44852c946c52accbff9e94d",
+      "line": 595,
+      "signature": "theorem directed_forest_completion [Finite V] (E : V → V → Prop) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (hc : 2 ≤ Nat.card (Component E)) : ∃ (q : Component E ≃ Tail E) (h : Component E ≃ Head E) (Φ : CycleCompletion E ≃ FullCycle (Component E)), (∀ A, Quotient.mk (EqvGen.setoid E) (q A).1 = A) ∧ (∀ A, Quotient.mk (EqvGen.setoid E) (h A).1 = A) ∧ (∀ σ A, σ.1 (q A) = h ((Φ σ).1 A)) ∧ Nonempty (CycleCompletion E) ∧ Nat.card (CycleCompletion E) = (Nat.card (Component E) - 1).factorial ∧ UniformCompletionLaw E q h Φ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

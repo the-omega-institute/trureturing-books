@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection",
+  "declarations": {
+    "D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection.partitionTopology": {
+      "module": "D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection",
+      "name": "D5.S3.ConceptDynamics.Epistemic.PartitionKnowledgeNegativeIntrospection.partitionTopology",
+      "kind": "def",
+      "statement_id": "sha256:c034b51365c5a0278a8aa99d7429bcb9b7f0eb6d7eb5304f46bbe9bbc7ffb2d5",
+      "line": 32,
+      "signature": "@[reducible] def partitionTopology {X B : Type _} (readout : Concept X B) : TopologicalSpace X",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

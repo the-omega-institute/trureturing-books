@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Resource/SeparableConeResidualWitness",
+  "declarations": {
+    "D5/S3/Resource/SeparableConeResidualWitness.separable_cone_residual_witness": {
+      "module": "D5/S3/Resource/SeparableConeResidualWitness",
+      "name": "D5.S3.Resource.SeparableConeResidualWitness.separable_cone_residual_witness",
+      "kind": "theorem",
+      "statement_id": "sha256:39bcfa26c19a9b2e02629b0d2cfac639d73a751e262b2e279fdc6550c39d3fdf",
+      "line": 259,
+      "signature": "theorem separable_cone_residual_witness {R : CompositeMatrix m n} (hR : R.PosSemidef) : let P",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

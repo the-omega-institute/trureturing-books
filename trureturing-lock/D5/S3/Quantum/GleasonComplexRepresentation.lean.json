@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/GleasonComplexRepresentation",
+  "declarations": {
+    "D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation": {
+      "module": "D5/S3/Quantum/GleasonComplexRepresentation",
+      "name": "Gleason.ProjectionPackage.gleason_representation",
+      "kind": "theorem",
+      "statement_id": "sha256:dd9874dc790ed4367402ce8fce42837ee0c9f1b2ff1ccb61b47c1769440a4326",
+      "line": 899,
+      "signature": "theorem ProjectionPackage.gleason_representation (OP : ProjectionPackage N) (hN : 3 ≤ N) : ∃! ρ : Matrix (Fin N) (Fin N) ℂ, ρ.PosSemidef ∧ ρ.trace = 1 ∧ ∀ P, IsStarProjection P → OP.p P = ((ρ * P).trace).re",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay",
+  "declarations": {
+    "D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay.repeated_record_exponential_decay": {
+      "module": "D5/S3/Quantum/Decoherence/RepeatedRecordExponentialDecay",
+      "name": "D5.S3.Quantum.Decoherence.RepeatedRecordExponentialDecay.repeated_record_exponential_decay",
+      "kind": "theorem",
+      "statement_id": "sha256:1b81efb297c329422680250f2df3918d278338dc7c99b9ea89f8235f79b03d85",
+      "line": 251,
+      "signature": "theorem repeated_record_exponential_decay {d e : Nat} (record : Fin d -> Fin e -> ℂ) (hNormalized : ∀ i, ∑ a, ‖record i a‖ ^ 2 = 1) (q : Set.Ico (0 : ℝ) 1) (hBound : ∀ i j, record i ≠ record j -> ‖recordGram record i j‖ ≤ (q : ℝ)) : let pinching",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

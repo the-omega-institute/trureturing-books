@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns",
+  "declarations": {
+    "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result": {
+      "module": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns",
+      "name": "D5.S3.Fourier.Asymptotics.TorusObservationWindowReturns.result",
+      "kind": "theorem",
+      "statement_id": "sha256:2b292c7cf24d1e5935e5c7c193199cddf13fb0db5e503070c8c0a2e85e358614",
+      "line": 22,
+      "signature": "theorem result {I : Type*} [Fintype I] (g : I → Circle) : let G",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

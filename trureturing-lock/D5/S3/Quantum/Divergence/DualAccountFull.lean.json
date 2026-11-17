@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Divergence/DualAccountFull",
+  "declarations": {
+    "D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full": {
+      "module": "D5/S3/Quantum/Divergence/DualAccountFull",
+      "name": "D5.S3.Quantum.Divergence.DualAccountFull.dual_account_full",
+      "kind": "theorem",
+      "statement_id": "sha256:35bc509bf4b82c079bd7c8c06a5c9d31ce83461f536ff1ceb9b31c11ce8b61a0",
+      "line": 72,
+      "signature": "theorem dual_account_full {d : ℕ} [NeZero d] (Z X : RankOneContext d) (hZ : IsRecordMeasurement Z.projector) (hX : IsRecordMeasurement X.projector) (hZX : ∀ j k, overlap Z X j k = (d : ℝ)⁻¹) (rho sigma : DensityState (Fin d)) (hFixed : unreadState Z.projector rho.1 = rho.1) (hPinch : unreadState X.projector rho.1 = sigma.1) : let omega",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Divergence/DualAccountFull.entropy_freedom_segment": {
+      "module": "D5/S3/Quantum/Divergence/DualAccountFull",
+      "name": "D5.S3.Quantum.Divergence.DualAccountFull.entropy_freedom_segment",
+      "kind": "theorem",
+      "statement_id": "sha256:35bc509bf4b82c079bd7c8c06a5c9d31ce83461f536ff1ceb9b31c11ce8b61a0",
+      "line": 118,
+      "signature": "theorem entropy_freedom_segment {d : ℕ} [NeZero d] (rho : DensityState (Fin d)) : let omega",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/Probability/FiniteGaussianSchoenberg",
+  "declarations": {
+    "D5/S3/Weil/Probability/FiniteGaussianSchoenberg.gram_distance_conditionally_negative": {
+      "module": "D5/S3/Weil/Probability/FiniteGaussianSchoenberg",
+      "name": "D5.S3.Weil.Probability.FiniteGaussianSchoenberg.gram_distance_conditionally_negative",
+      "kind": "theorem",
+      "statement_id": "sha256:1bb9eb03c42c0123868dc5999a99ba07a036f580ec1d24a0dd4c69844d7cbf47",
+      "line": 103,
+      "signature": "theorem gram_distance_conditionally_negative (A : Matrix I I ℝ) (hA : A.PosSemidef) (x : I → ℝ) (hx : ∑ i, x i = 0) : (∑ i, ∑ j, x i * x j * (A i i + A j j - 2 * A i j)) ≤ 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Carrier/GoldenRatio",
+  "declarations": {
+    "D5/S0/Carrier/GoldenRatio.golden_ratio_spec": {
+      "module": "D5/S0/Carrier/GoldenRatio",
+      "name": "D5.S0.Carrier.golden_ratio_spec",
+      "kind": "theorem",
+      "statement_id": "sha256:a365beeb85e26bb1c7b6ee52d6535048e4a071ee4f0d1e0dfe3e1a3f4a0f81ef",
+      "line": 13,
+      "signature": "theorem golden_ratio_spec : Real.goldenRatio = (1 + Real.sqrt 5) / 2 ∧ Real.goldenRatio ^ 2 = Real.goldenRatio + 1 ∧ 1 - Real.goldenRatio = -(1 / Real.goldenRatio)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

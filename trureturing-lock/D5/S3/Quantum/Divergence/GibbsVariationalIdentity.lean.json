@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Divergence/GibbsVariationalIdentity",
+  "declarations": {
+    "D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_state_posDef": {
+      "module": "D5/S3/Quantum/Divergence/GibbsVariationalIdentity",
+      "name": "D5.S3.Quantum.Divergence.GibbsVariationalIdentity.gibbs_state_posDef",
+      "kind": "theorem",
+      "statement_id": "sha256:a2a5b66e92f74d67c7e2d5ba4112e1c43ffc95c5528cfc21d6b27d18552f5f5a",
+      "line": 69,
+      "signature": "theorem gibbs_state_posDef (H : CStarMatrix n n ℂ) (hH : IsSelfAdjoint H) : (CStarMatrix.ofMatrix.symm (gibbsState H hH).1).PosDef",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Divergence/GibbsVariationalIdentity.gibbs_variational_identity": {
+      "module": "D5/S3/Quantum/Divergence/GibbsVariationalIdentity",
+      "name": "D5.S3.Quantum.Divergence.GibbsVariationalIdentity.gibbs_variational_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:a2a5b66e92f74d67c7e2d5ba4112e1c43ffc95c5528cfc21d6b27d18552f5f5a",
+      "line": 87,
+      "signature": "theorem gibbs_variational_identity (H : CStarMatrix n n ℂ) (hH : IsSelfAdjoint H) (rho : DensityState n) : Real.log (partitionFunction H) = (Matrix.trace (CStarMatrix.ofMatrix.symm (H * rho.1))).re + vonNeumannEntropy rho + quantumRelativeEntropy rho (gibbsState H hH)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

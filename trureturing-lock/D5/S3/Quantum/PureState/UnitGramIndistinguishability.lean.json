@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/PureState/UnitGramIndistinguishability",
+  "declarations": {
+    "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization": {
+      "module": "D5/S3/Quantum/PureState/UnitGramIndistinguishability",
+      "name": "D5.S3.Quantum.PureState.UnitGramIndistinguishability.unit_gram_overlap_characterization",
+      "kind": "theorem",
+      "statement_id": "sha256:b655c2b0b304d3a523be8f5022da59f14187460754f17bba688e25cd3b2bbd9a",
+      "line": 24,
+      "signature": "theorem unit_gram_overlap_characterization {𝕜 Index E : Type*} [RCLike 𝕜] [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] (record : Index → E) (normalized : ∀ i, ‖record i‖ = 1) : (∀ i j, ⟪record i, record j⟫_𝕜 = 1 ↔ record i = record j) ∧ Equivalence (fun i j => ⟪record i, record j⟫_𝕜 = 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

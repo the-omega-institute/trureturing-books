@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumContext/ThreeAnchorGram",
+  "declarations": {
+    "D5/S3/QuantumContext/ThreeAnchorGram.threeAnchorGram": {
+      "module": "D5/S3/QuantumContext/ThreeAnchorGram",
+      "name": "D5.S3.QuantumContext.ThreeAnchorGram.threeAnchorGram",
+      "kind": "def",
+      "statement_id": "sha256:5382fe3c8588b957db5e4a18e2cb9472114976d2d28d9fccbe743483c9ced0e0",
+      "line": 20,
+      "signature": "def threeAnchorGram {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v w : E) : Matrix (Fin 3) (Fin 3) ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula": {
+      "module": "D5/S3/QuantumContext/ThreeAnchorGram",
+      "name": "D5.S3.QuantumContext.ThreeAnchorGram.three_anchor_gram_det_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:5382fe3c8588b957db5e4a18e2cb9472114976d2d28d9fccbe743483c9ced0e0",
+      "line": 25,
+      "signature": "theorem three_anchor_gram_det_formula {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v w : E) : (threeAnchorGram u v w).det = ‖u‖ ^ 2 * ‖v‖ ^ 2 * ‖w‖ ^ 2 + 2 * ⟪u, v⟫_ℝ * ⟪u, w⟫_ℝ * ⟪v, w⟫_ℝ - ‖u‖ ^ 2 * ⟪v, w⟫_ℝ ^ 2 - ‖v‖ ^ 2 * ⟪u, w⟫_ℝ ^ 2 - ‖w‖ ^ 2 * ⟪u, v⟫_ℝ ^ 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff": {
+      "module": "D5/S3/QuantumContext/ThreeAnchorGram",
+      "name": "D5.S3.QuantumContext.ThreeAnchorGram.three_anchor_gram_det_pos_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:5382fe3c8588b957db5e4a18e2cb9472114976d2d28d9fccbe743483c9ced0e0",
+      "line": 38,
+      "signature": "theorem three_anchor_gram_det_pos_iff {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v w : E) : 0 < (threeAnchorGram u v w).det ↔ LinearIndependent ℝ ![u, v, w]",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

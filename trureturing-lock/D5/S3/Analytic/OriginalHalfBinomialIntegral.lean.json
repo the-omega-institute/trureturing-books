@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Analytic/OriginalHalfBinomialIntegral",
+  "declarations": {
+    "D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one": {
+      "module": "D5/S3/Analytic/OriginalHalfBinomialIntegral",
+      "name": "D5.S3.Analytic.OriginalHalfBinomialIntegral.b_le_one",
+      "kind": "theorem",
+      "statement_id": "sha256:60d38eaca300529aec21cb61b7f4d861c7f369512f0b094c97bc603dc98133c0",
+      "line": 31,
+      "signature": "theorem b_le_one (n : ℕ) : b n ≤ 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Analytic/OriginalHalfBinomialIntegral.b_nonneg": {
+      "module": "D5/S3/Analytic/OriginalHalfBinomialIntegral",
+      "name": "D5.S3.Analytic.OriginalHalfBinomialIntegral.b_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:60d38eaca300529aec21cb61b7f4d861c7f369512f0b094c97bc603dc98133c0",
+      "line": 29,
+      "signature": "theorem b_nonneg (n : ℕ) : 0 ≤ b n",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Analytic/OriginalHalfBinomialIntegral.binomial_hasSum": {
+      "module": "D5/S3/Analytic/OriginalHalfBinomialIntegral",
+      "name": "D5.S3.Analytic.OriginalHalfBinomialIntegral.binomial_hasSum",
+      "kind": "theorem",
+      "statement_id": "sha256:60d38eaca300529aec21cb61b7f4d861c7f369512f0b094c97bc603dc98133c0",
+      "line": 76,
+      "signature": "theorem binomial_hasSum (u : ℝ) (hu0 : 0 ≤ u) (hu1 : u < 1) : HasSum (fun n : ℕ => b n * u ^ n) (1 / Real.sqrt (1 - u))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

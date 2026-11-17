@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel",
+  "declarations": {
+    "D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel.environment_marginal_channel": {
+      "module": "D5/S3/Quantum/Decoherence/EnvironmentMarginalChannel",
+      "name": "D5.S3.Quantum.Decoherence.EnvironmentMarginalChannel.environment_marginal_channel",
+      "kind": "theorem",
+      "statement_id": "sha256:db9e9bb4430d3e35135dc296dee377f026345059326d011ef77987478f8eeea8",
+      "line": 32,
+      "signature": "theorem environment_marginal_channel {d e : Nat} (record : Fin d -> Fin e -> ℂ) (rho : Matrix (Fin d) (Fin d) ℂ) : let recording : Matrix (Fin d × Fin e) (Fin d) ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

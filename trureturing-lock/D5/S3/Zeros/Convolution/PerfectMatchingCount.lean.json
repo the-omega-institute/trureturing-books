@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Zeros/Convolution/PerfectMatchingCount",
+  "declarations": {
+    "D5/S3/Zeros/Convolution/PerfectMatchingCount.FixedPointFreeInvolution": {
+      "module": "D5/S3/Zeros/Convolution/PerfectMatchingCount",
+      "name": "D5.S3.Zeros.Convolution.PerfectMatchingCount.FixedPointFreeInvolution",
+      "kind": "def",
+      "statement_id": "sha256:caf959099b98eea6648d3c0d1aa2f8865db155c7bcbd4ca8877fa944772952af",
+      "line": 30,
+      "signature": "abbrev FixedPointFreeInvolution (α : Type*)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

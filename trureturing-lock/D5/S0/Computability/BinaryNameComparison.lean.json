@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Computability/BinaryNameComparison",
+  "declarations": {
+    "D5/S0/Computability/BinaryNameComparison.name_compare_run": {
+      "module": "D5/S0/Computability/BinaryNameComparison",
+      "name": "PredictiveThermodynamic.BinaryNames.name_compare_run",
+      "kind": "theorem",
+      "statement_id": "sha256:7c1361ac8036dc6b2fdbaa26b2b50cd6ee2a25df2055eacfba38665cce721f31",
+      "line": 111,
+      "signature": "theorem name_compare_run (a b output frame : List Bool) : Nonempty (EvalsToInTime compareMachine.step (compareCfg (some .compare) ⟨none, none, true⟩ a b [] [] output frame) (some (compareCfg none ⟨none, none, true⟩ a b [] [] (decide (a = b) :: output) frame)) (2 * (a.length + b.length) + 4))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

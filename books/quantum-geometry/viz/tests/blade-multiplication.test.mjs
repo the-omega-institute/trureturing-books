@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { loadLock } from '../../../../tools/node/slides-lib.mjs';
 // Browser regression suite for BLADE//XOR (books/quantum-geometry/viz/blade-multiplication/):
 //   node books/quantum-geometry/viz/tests/blade-multiplication.test.mjs        (or node tools/node/viz-test.mjs quantum-geometry)
 // It first runs the quality gates every stage-first page must pass, then reads the page through the read-only probe
@@ -12,7 +13,7 @@ import { session, stageFirstChecks, settle, until, cjkLeftovers } from '../../..
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..');
 const BOOK = 'quantum-geometry', ID = 'blade-multiplication';
-const lock = JSON.parse(fs.readFileSync(path.join(ROOT, 'trureturing.lock.json'), 'utf8'));
+const lock = loadLock();
 const chapter = fs.readFileSync(path.join(ROOT, 'books', BOOK, 'zh', 'ch25-rewriting-and-xor.md'), 'utf8');
 
 /* ---------- independent algebra: complex 2 × 2 matrices ---------- */
@@ -165,7 +166,7 @@ check('in the vector scene clicking a cell jumps to that term (4e₂ · 3e₁ is
 
 /* ---------- evidence: the declaration map comes from the chapter and the lock file ---------- */
 const chapterGids = [...new Set([...chapter.matchAll(/lean="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/)))].filter((g) => lock.declarations[g] && lock.declarations[g].kind === 'theorem');
-const url = (gid) => `https://github.com/${lock.repo}/blob/${lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${lock.declarations[gid].line}`;
+const url = (gid) => `https://github.com/${lock.repo}/blob/${lock.declarations[gid].commit || lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${lock.declarations[gid].line}`;
 const map = await D(() => [...document.querySelectorAll('#declmap .lean a[data-lean-gid]')].map((a) => [a.dataset.leanGid, a.href]));
 check(`the declaration map lists exactly the ${chapterGids.length} theorems chapter 25 cites with lean=`, map.length === chapterGids.length && eq(map.map(([g]) => g).sort(), [...chapterGids].sort()), JSON.stringify(map.map(([g]) => g)));
 check('every entry of the map links to the pinned commit, file and line of the lock file', map.every(([g, h]) => h === url(g)));

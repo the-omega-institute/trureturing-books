@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Deficit/Beatty/FiberCapacityPair",
+  "declarations": {
+    "D5/S1/Deficit/Beatty/FiberCapacityPair.golden_dual_fiber_capacity_pair": {
+      "module": "D5/S1/Deficit/Beatty/FiberCapacityPair",
+      "name": "D5.S1.Deficit.Beatty.FiberCapacityPair.golden_dual_fiber_capacity_pair",
+      "kind": "theorem",
+      "statement_id": "sha256:02972131e4af7bacb525694293c1b5cc98a91b857413cdef578a3a2f73e67e53",
+      "line": 389,
+      "signature": "theorem golden_dual_fiber_capacity_pair (b : ℤ) (hb : 0 ≤ b) : (goldenDualFiber b).ncard ∈ ({2, 3} : Set ℕ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair": {
+      "module": "D5/S1/Deficit/Beatty/FiberCapacityPair",
+      "name": "D5.S1.Deficit.Beatty.FiberCapacityPair.golden_fiber_capacity_pair",
+      "kind": "theorem",
+      "statement_id": "sha256:02972131e4af7bacb525694293c1b5cc98a91b857413cdef578a3a2f73e67e53",
+      "line": 250,
+      "signature": "theorem golden_fiber_capacity_pair (a : ℤ) (ha : 1 ≤ a) : (goldenFiber a).ncard ∈ ({4, 5} : Set ℕ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

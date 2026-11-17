@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Recurrence/NormOneTraceAddition",
+  "declarations": {
+    "D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence": {
+      "module": "D5/S1/Recurrence/NormOneTraceAddition",
+      "name": "D5.S1.Recurrence.NormOneTraceAddition.trace_recurrence",
+      "kind": "theorem",
+      "statement_id": "sha256:92a7988dadc0a3b8e723075585142821237a04e2b403ae63692e8ee713e845f0",
+      "line": 89,
+      "signature": "theorem trace_recurrence (a b : R) (hab : a * b = 1) (m : Nat) : a ^ (m + 2) + b ^ (m + 2) = (a + b) * (a ^ (m + 1) + b ^ (m + 1)) - (a ^ m + b ^ m)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

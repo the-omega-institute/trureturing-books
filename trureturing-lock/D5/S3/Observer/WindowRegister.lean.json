@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/WindowRegister",
+  "declarations": {
+    "D5/S3/Observer/WindowRegister.clockMatrix": {
+      "module": "D5/S3/Observer/WindowRegister",
+      "name": "D5.S3.Observer.WindowRegister.clockMatrix",
+      "kind": "def",
+      "statement_id": "sha256:1f03573f26ffc97bee9217cd4164f7e0941cb73ba680130d6cfd2e970fc3554a",
+      "line": 31,
+      "signature": "noncomputable def clockMatrix (M : ℕ) : Matrix (ZMod M) (ZMod M) ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Observer/WindowRegister.shiftMatrix": {
+      "module": "D5/S3/Observer/WindowRegister",
+      "name": "D5.S3.Observer.WindowRegister.shiftMatrix",
+      "kind": "def",
+      "statement_id": "sha256:1f03573f26ffc97bee9217cd4164f7e0941cb73ba680130d6cfd2e970fc3554a",
+      "line": 35,
+      "signature": "def shiftMatrix (M : ℕ) [NeZero M] : Matrix (ZMod M) (ZMod M) ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Observer/WindowRegister.windowRoot": {
+      "module": "D5/S3/Observer/WindowRegister",
+      "name": "D5.S3.Observer.WindowRegister.windowRoot",
+      "kind": "def",
+      "statement_id": "sha256:1f03573f26ffc97bee9217cd4164f7e0941cb73ba680130d6cfd2e970fc3554a",
+      "line": 22,
+      "signature": "noncomputable def windowRoot (M : ℕ) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

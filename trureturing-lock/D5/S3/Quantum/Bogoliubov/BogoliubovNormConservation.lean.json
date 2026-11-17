@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation",
+  "declarations": {
+    "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation": {
+      "module": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation",
+      "name": "D5.S3.Quantum.Bogoliubov.BogoliubovNormConservation.bogoliubov_norm_conservation",
+      "kind": "theorem",
+      "statement_id": "sha256:f8d4e451ac8459519dca05b63dd8ddbd9dfb9f9e46b70e4db0b37d2d04517e94",
+      "line": 14,
+      "signature": "theorem bogoliubov_norm_conservation (r : ℝ) : |Real.cosh r| ^ 2 - |Real.sinh r| ^ 2 = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

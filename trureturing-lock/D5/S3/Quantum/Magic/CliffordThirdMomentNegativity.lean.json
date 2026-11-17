@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Magic/CliffordThirdMomentNegativity",
+  "declarations": {
+    "D5/S3/Quantum/Magic/CliffordThirdMomentNegativity.result": {
+      "module": "D5/S3/Quantum/Magic/CliffordThirdMomentNegativity",
+      "name": "D5.S3.Quantum.Magic.CliffordThirdMomentNegativity.result",
+      "kind": "theorem",
+      "statement_id": "sha256:8532a0ef00a289544d8e4740ee71c4efe03920036ea636be7b7dca2fd58c007b",
+      "line": 148,
+      "signature": "theorem result : ¬ claim",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

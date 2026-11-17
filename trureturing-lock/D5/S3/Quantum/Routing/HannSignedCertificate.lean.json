@@ -1,0 +1,186 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+  "declarations": {
+    "D5/S3/Quantum/Routing/HannSignedCertificate.Coeff": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Coeff",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 80,
+      "signature": "abbrev Coeff (n : ℕ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.Environment": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Environment",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 79,
+      "signature": "abbrev Environment (n : ℕ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.Output": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Output",
+      "kind": "inductive",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 153,
+      "signature": "structure Output (n : ℕ) where dimension : ℕ kernel : List (Coeff n) representative : Option (Coeff n) def Output.flag {n : ℕ} (o : Output n) : Bool",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.Output.flag": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.Output.flag",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 158,
+      "signature": "def Output.flag {n : ℕ} (o : Output n) : Bool",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.childEnvironment": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.childEnvironment",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 86,
+      "signature": "def childEnvironment (n : ℕ) (e : Environment (n + 1)) (b : Bool) : Environment n",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.densityGram": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.densityGram",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 876,
+      "signature": "def densityGram (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) : Matrix (Address n) (Address n) ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.embed": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.embed",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 105,
+      "signature": "def embed (n : ℕ) (b : Bool) (x : Coeff n) : Coeff (n + 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.inherited": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.inherited",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 161,
+      "signature": "def inherited (n : ℕ) (l r : Output n) : List (Coeff (n + 1))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.labelIndex": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.labelIndex",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 56,
+      "signature": "def labelIndex : Qutrit → ℤ | .wait => 0 | .zero => 1 | .one => 2 /-- The three specified Fourier coordinates, with nonnegative real square roots. -/ def localRecord (q : ℝ) (s : Qutrit) (e : Fin 3) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.localRecord": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.localRecord",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 62,
+      "signature": "def localRecord (q : ℝ) (s : Qutrit) (e : Fin 3) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.omega": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.omega",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 27,
+      "signature": "def omega : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.outputs": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.outputs",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 185,
+      "signature": "def outputs : (n : ℕ) → (Router n → ℝ) → Output n | 0, _ => ⟨1, [], some (fun _ => 1)⟩ | n + 1, q => step n (q none) (outputs n (restrict n q false)) (outputs n (restrict n q true)) /-- Sound coefficient data and the exact dimension/list accounting. -/ structure Sound (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) (o : Output n) : Prop where kernel_sound : ∀ x ∈ o.kernel, synthesis n q bus x = 0 representative_sound : ∀ u, o.representative = some u → synthesis n q bus u = vacuumRecord n q dimension_positive : 0 < o.dimension count : o.kernel.length + o.dimension = 2 ^ n private theorem inherited_so",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.record": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.record",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 90,
+      "signature": "def record (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) (a : Address n) (e : Environment n) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.recordMatrix": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.recordMatrix",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 868,
+      "signature": "def recordMatrix (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) : Matrix (Environment n) (Address n) ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.restrict": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.restrict",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 83,
+      "signature": "def restrict (n : ℕ) (q : Router (n + 1) → ℝ) (b : Bool) : Router n → ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.signed_event": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.signed_event",
+      "kind": "theorem",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 964,
+      "signature": "theorem signed_event (n : ℕ) (q : Router n → ℝ) (hq : ∀ v, -(1 / 2 : ℝ) ≤ q v) (hq' : ∀ v, q v ≤ 1) (bus : Qutrit) : Module.finrank ℂ (LinearMap.range (synthesis n q bus)) = (outputs n q).dimension ∧ (outputs n q).kernel.length = 2 ^ n - (outputs n q).dimension ∧ (vacuumRecord n q ∈ LinearMap.range (synthesis n q bus) ↔ (outputs n q).flag = true) ∧ (∀ u, (outputs n q).representative = some u → synthesis n q bus u = vacuumRecord n q) ∧ (∀ x, synthesis n q bus x = 0 ↔ ∃! α : Fin (outputs n q).kernel.length → ℂ, x = ∑ i, α i • (outputs n q).kernel.get i) ∧ (∀ a b, standardGram n q bus a b = ((∏ v",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.standardGram": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.standardGram",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 871,
+      "signature": "def standardGram (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) : Matrix (Address n) (Address n) ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.step": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.step",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 165,
+      "signature": "def step (n : ℕ) (q : ℝ) (l r : Output n) : Output (n + 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.synthesis": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.synthesis",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 98,
+      "signature": "def synthesis (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) : Coeff n →ₗ[ℂ] (Environment n → ℂ) where toFun x e",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannSignedCertificate.vacuumRecord": {
+      "module": "D5/S3/Quantum/Routing/HannSignedCertificate",
+      "name": "D5.S3.Quantum.Routing.HannSignedCertificate.vacuumRecord",
+      "kind": "def",
+      "statement_id": "sha256:90914d9e2ff8f043202c79c7b7b4386c72b893cf18700459253d9cc027d0a552",
+      "line": 94,
+      "signature": "def vacuumRecord (n : ℕ) (q : Router n → ℝ) (e : Environment n) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

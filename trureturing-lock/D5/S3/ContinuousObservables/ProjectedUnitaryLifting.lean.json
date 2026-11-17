@@ -1,0 +1,114 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+  "declarations": {
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.IsSingularPair": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.IsSingularPair",
+      "kind": "inductive",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 508,
+      "signature": "structure IsSingularPair (E : ProjUnitaryEncoding ℋ) (ψ : ℋ) (σ : ℝ) : Prop where P_eq : E.P ψ = ψ nonneg : 0 ≤ σ le_one : σ ≤ 1 gram : (E.encoded†) (E.encoded ψ) = ((σ : ℂ) ^ 2) • ψ section Defs variable (E : ProjUnitaryEncoding ℋ) noncomputable def lvOf (ψ : ℋ) (σ : ℝ) : ℋ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.Rref": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.Scalar.Rref",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 143,
+      "signature": "noncomputable def Rref (x : ℝ) : M₂",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.phaseZ": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.Scalar.phaseZ",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 146,
+      "signature": "noncomputable def phaseZ (φ : ℝ) : M₂",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.Scalar.seqR": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.Scalar.seqR",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 149,
+      "signature": "noncomputable def seqR : List ℝ → ℝ → M₂ | [], _ => 1 | φ :: Φ, x => phaseZ φ * Rref x * seqR Φ x noncomputable def Wrot (x : ℝ) : M₂",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.altSeq": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.altSeq",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 188,
+      "signature": "noncomputable def altSeq (E : ProjUnitaryEncoding ℋ) : List ℝ → L ℋ | [] => 1 | φ :: Φ => (if Even Φ.length then phaseOp E.P' φ * E.U else phaseOp E.P φ * E.U†) * altSeq E Φ variable (E : ProjUnitaryEncoding ℋ) @[simp] private theorem altSeq_cons (φ : ℝ) (Φ : List ℝ) : altSeq E (φ :: Φ) = (if Even Φ.length then phaseOp E.P' φ * E.U else phaseOp E.P φ * E.U†) * altSeq E Φ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.altSeq_apply_singular": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.altSeq_apply_singular",
+      "kind": "theorem",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 704,
+      "signature": "theorem altSeq_apply_singular (h : IsSingularPair E ψ σ) (Φ : List ℝ) : altSeq E Φ ψ = (seqR Φ σ) 0 0 • (if Even Φ.length then ψ else lvOf E ψ σ) + (seqR Φ σ) 1 0 • (if Even Φ.length then rvpOf E ψ σ else lvtOf E ψ σ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvOf": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.lvOf",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 522,
+      "signature": "noncomputable def lvOf (ψ : ℋ) (σ : ℝ) : ℋ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.lvtOf": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.lvtOf",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 525,
+      "signature": "noncomputable def lvtOf (ψ : ℋ) (σ : ℝ) : ℋ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.ofRaw": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.ofRaw",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 738,
+      "signature": "noncomputable def ofRaw (U P Pt : H →ₗ[ℂ] H) (hU : star U * U = 1) (hU' : U * star U = 1) (hP : IsStarProjection P) (hPt : IsStarProjection Pt) : ProjUnitaryEncoding H where U",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.phaseOp": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.phaseOp",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 174,
+      "signature": "noncomputable def phaseOp (P : L ℋ) (φ : ℝ) : L ℋ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.polynomial_lifting": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.polynomial_lifting",
+      "kind": "theorem",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 756,
+      "signature": "theorem polynomial_lifting (E : ProjUnitaryEncoding H) (Ψ : List ℝ) (R : ℂ[X]) (hscalar : ∀ x ∈ Set.Icc (0 : ℝ) 1, seqR Ψ x 0 0 = if Even Ψ.length then R.eval ((x : ℂ) ^ 2) else (x : ℂ) * R.eval ((x : ℂ) ^ 2)) : (Even Ψ.length → E.P * altSeq E Ψ * E.P = E.P * aeval (E.encoded† * E.encoded) R * E.P) ∧ (Odd Ψ.length → E.P' * altSeq E Ψ * E.P = E.encoded * aeval (E.encoded† * E.encoded) R)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/ProjectedUnitaryLifting.rvpOf": {
+      "module": "D5/S3/ContinuousObservables/ProjectedUnitaryLifting",
+      "name": "D5.S3.ContinuousObservables.ProjectedUnitaryLifting.rvpOf",
+      "kind": "def",
+      "statement_id": "sha256:db67da63789c3d3989d60d227a405bfba234cf1e83c6319db90552cc3277b939",
+      "line": 528,
+      "signature": "noncomputable def rvpOf (ψ : ℋ) (σ : ℝ) : ℋ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

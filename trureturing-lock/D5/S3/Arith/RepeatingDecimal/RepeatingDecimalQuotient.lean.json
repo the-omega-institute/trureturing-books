@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient",
+  "declarations": {
+    "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_invariant": {
+      "module": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient",
+      "name": "D5.S3.Arith.RepeatingDecimal.RepeatingDecimalQuotient.long_division_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:5abc9a924c79bebaaa007bb67ce76a5f19dc06d6f32a6afd8e03bb1e61e6ef59",
+      "line": 39,
+      "signature": "theorem long_division_invariant (b p q n : ℕ) : q * longDivisionPrefix b p q n + remainder b p q n = b ^ n * p",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_period": {
+      "module": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient",
+      "name": "D5.S3.Arith.RepeatingDecimal.RepeatingDecimalQuotient.long_division_period",
+      "kind": "theorem",
+      "statement_id": "sha256:5abc9a924c79bebaaa007bb67ce76a5f19dc06d6f32a6afd8e03bb1e61e6ef59",
+      "line": 125,
+      "signature": "theorem long_division_period {b p q : ℕ} (hb : 1 < b) (hp : p < q) (L : ℕ) (hL : q ∣ b ^ L - 1) : Function.Periodic (digit b p q) L ∧ ((b : ℝ) ^ L - 1) * ((p : ℝ) / q) = (longDivisionPrefix b p q L : ℝ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_value": {
+      "module": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient",
+      "name": "D5.S3.Arith.RepeatingDecimal.RepeatingDecimalQuotient.long_division_value",
+      "kind": "theorem",
+      "statement_id": "sha256:5abc9a924c79bebaaa007bb67ce76a5f19dc06d6f32a6afd8e03bb1e61e6ef59",
+      "line": 88,
+      "signature": "theorem long_division_value {b p q : ℕ} (hb : 1 < b) (hp : p < q) : HasSum (fun n => (digit b p q n : ℝ) / (b : ℝ) ^ (n + 1)) ((p : ℝ) / q) ∧ Tendsto (fun n => (longDivisionPrefix b p q n : ℝ) / (b : ℝ) ^ n) atTop (𝓝 ((p : ℝ) / q))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

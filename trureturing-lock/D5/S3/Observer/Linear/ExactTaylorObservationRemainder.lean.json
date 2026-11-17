@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/Linear/ExactTaylorObservationRemainder",
+  "declarations": {
+    "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le": {
+      "module": "D5/S3/Observer/Linear/ExactTaylorObservationRemainder",
+      "name": "D5.S3.Observer.Linear.ExactTaylorObservationRemainder.exp_tail_le",
+      "kind": "theorem",
+      "statement_id": "sha256:73b8364fdd91508d12be5d6810c93607d1ed9afc0fd8e9702450ada2fc696e44",
+      "line": 25,
+      "signature": "theorem exp_tail_le {𝕜 A : Type*} [RCLike 𝕜] [NormedRing A] [NormedAlgebra 𝕜 A] [CompleteSpace A] [NormOneClass A] (z : A) (r : ℝ) (n : ℕ) (hr : 0 ≤ r) (hz : ‖z‖ ≤ r) : ‖NormedSpace.exp z - ∑ k ∈ range n, ((k.factorial : 𝕜)⁻¹) • z ^ k‖ ≤ r ^ n / (n.factorial : ℝ) * Real.exp r",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

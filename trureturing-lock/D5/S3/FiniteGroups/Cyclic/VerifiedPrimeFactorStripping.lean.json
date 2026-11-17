@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping",
+  "declarations": {
+    "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping.stripFactors_correct": {
+      "module": "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping",
+      "name": "PrimeFactorStripping.stripFactors_correct",
+      "kind": "theorem",
+      "statement_id": "sha256:f7057762ad30365e0185653dd26f24f5955b5c6ae000fe2ed82c658a4c75b632",
+      "line": 93,
+      "signature": "theorem stripFactors_correct {G : Type*} [Monoid G] [DecidableEq G] (x : G) (P : List ℕ) (m : ℕ) (hm : 0 < m) (hxm : x ^ m = 1) (hcover : ∀ p : ℕ, p.Prime → p ∣ m → p ∈ P) : let M",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

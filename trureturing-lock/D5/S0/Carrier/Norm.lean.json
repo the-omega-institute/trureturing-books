@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Carrier/Norm",
+  "declarations": {
+    "D5/S0/Carrier/Norm.norm": {
+      "module": "D5/S0/Carrier/Norm",
+      "name": "D5.S0.Carrier.norm",
+      "kind": "def",
+      "statement_id": "sha256:c4f5cc5e163371dd94da0a55809709297a222bd47ad93480f32df345f87ddf60",
+      "line": 13,
+      "signature": "def norm (x : GoldenInt) : ℤ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

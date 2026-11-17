@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Analytic/ReflectedSpectrum/EllipticHyperbolicReflectionTrichotomy",
+  "declarations": {
+    "D5/S3/Analytic/ReflectedSpectrum/EllipticHyperbolicReflectionTrichotomy.elliptic_hyperbolic_reflection_trichotomy": {
+      "module": "D5/S3/Analytic/ReflectedSpectrum/EllipticHyperbolicReflectionTrichotomy",
+      "name": "D5.S3.Analytic.ReflectedSpectrum.EllipticHyperbolicReflectionTrichotomy.elliptic_hyperbolic_reflection_trichotomy",
+      "kind": "theorem",
+      "statement_id": "sha256:c3668a3804ac22227a00876a1cb051301e773d8599763071d21c8f70d633125d",
+      "line": 124,
+      "signature": "theorem elliptic_hyperbolic_reflection_trichotomy (delta gamma : ℝ) : (Matrix.trace (hyperbolicGenerator delta) = 0 ∧ Matrix.det (hyperbolicGenerator delta) = -(delta ^ 2) ∧ hyperbolicGenerator delta * hyperbolicGenerator delta = !![delta ^ 2, 0; 0, delta ^ 2]) ∧ (Matrix.trace neutralGenerator = 0 ∧ Matrix.det neutralGenerator = 0 ∧ neutralGenerator * neutralGenerator = 0) ∧ (Matrix.trace (ellipticGenerator gamma) = 0 ∧ Matrix.det (ellipticGenerator gamma) = gamma ^ 2 ∧ ellipticGenerator gamma * ellipticGenerator gamma = !![-(gamma ^ 2), 0; 0, -(gamma ^ 2)])",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

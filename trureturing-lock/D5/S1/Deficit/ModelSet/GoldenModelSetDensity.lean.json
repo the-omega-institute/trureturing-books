@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Deficit/ModelSet/GoldenModelSetDensity",
+  "declarations": {
+    "D5/S1/Deficit/ModelSet/GoldenModelSetDensity.golden_model_set_density": {
+      "module": "D5/S1/Deficit/ModelSet/GoldenModelSetDensity",
+      "name": "D5.S1.Deficit.ModelSet.GoldenModelSetDensity.golden_model_set_density",
+      "kind": "theorem",
+      "statement_id": "sha256:6a9412eb64c14e73704262a4a40485c9122ee275a5476555c09a91cf1c789455",
+      "line": 160,
+      "signature": "theorem golden_model_set_density : (∀ n : Nat, (goldenPrefix n).card = n ∧ ∀ x : GoldenInt, x ∈ goldenPrefix n ↔ x ∈ goldenModelSet ∧ 0 ≤ embedding x ∧ embedding x < betaReal n) ∧ Tendsto (fun n : Nat => ((goldenPrefix n).card : Real) / betaReal n) atTop (nhds (1 / Real.sqrt 5))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup",
+  "declarations": {
+    "D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial": {
+      "module": "D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup",
+      "name": "D5.S3.Analytic.ShiftedXiPoisson.ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial",
+      "kind": "theorem",
+      "statement_id": "sha256:cb5b35f3f879e3dcc08e75396f59afd4bb6a44b7058176a70ff34c2ff88285da",
+      "line": 40,
+      "signature": "lemma xiReading_eq_zero_iff_nontrivial (rho : ℂ) : xiReading rho = 0 ↔ Zeta23.IsNontrivialZero rho",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

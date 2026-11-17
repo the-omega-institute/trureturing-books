@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/HilbertOperators/Stinespring",
+  "declarations": {
+    "D5/S3/HilbertOperators/Stinespring.stinespring_dilation": {
+      "module": "D5/S3/HilbertOperators/Stinespring",
+      "name": "D5.S3.HilbertOperators.Stinespring.stinespring_dilation",
+      "kind": "theorem",
+      "statement_id": "sha256:8b1f001fa093ddd76bc2aeae51ba8b2dadd6cba9e82f4ebfd2a2395494096c23",
+      "line": 725,
+      "signature": "theorem stinespring_dilation {A H : Type u} [CStarAlgebra A] [PartialOrder A] [StarOrderedRing A] [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H] (φ : A →CP (H →L[ℂ] H)) : ∃ (K : Type u) (_ : NormedAddCommGroup K) (_ : InnerProductSpace ℂ K) (_ : CompleteSpace K) (π : A →⋆ₐ[ℂ] (K →L[ℂ] K)) (V : H →L[ℂ] K), ∀ (a : A) (x : H), (φ a) x = (V†) ((π a) (V x))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

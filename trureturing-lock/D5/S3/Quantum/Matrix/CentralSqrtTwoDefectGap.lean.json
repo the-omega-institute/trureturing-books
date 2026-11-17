@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap",
+  "declarations": {
+    "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.central_spectral_gap": {
+      "module": "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap",
+      "name": "D5.S3.Quantum.Matrix.CentralSqrtTwoDefectGap.central_spectral_gap",
+      "kind": "theorem",
+      "statement_id": "sha256:db4e46e74ee00801b8429452173160860d3d486955c18142ca6d4ae7401fd518",
+      "line": 732,
+      "signature": "theorem central_spectral_gap (n : ℕ) (lambda : Fin (2 * (n + 1) - 1 + 1) → ℝ) (hlambda : Finset.univ.val.map lambda = (centralDefect (n + 1) (by omega)).charpoly.roots) (i j : Fin (2 * (n + 1) - 1 + 1)) (hij : i ≠ j) : (2 * Real.sqrt 2 / (1 + Real.sqrt 2) ^ 2) / (n + 1 : ℝ) ^ 3 ≤ |lambda i - lambda j|",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap.recurrence_endpoint_observability": {
+      "module": "D5/S3/Quantum/Matrix/CentralSqrtTwoDefectGap",
+      "name": "D5.S3.Quantum.Matrix.CentralSqrtTwoDefectGap.recurrence_endpoint_observability",
+      "kind": "theorem",
+      "statement_id": "sha256:db4e46e74ee00801b8429452173160860d3d486955c18142ca6d4ae7401fd518",
+      "line": 141,
+      "signature": "theorem recurrence_endpoint_observability (n : ℕ) (hn : 1 ≤ n) (t b : ℝ) (y : ℕ → ℝ) (hzero : y 0 = 0) (hrec : ∀ j, j + 2 ≤ n + 1 → y (j + 2) = t * y (j + 1) - y j) (hboundary : y (n + 1) = b * y n) : (∑ j ∈ Finset.range n, y (j + 1) ^ 2) ≤ (1 + |b|) ^ 2 * (n : ℝ) ^ 3 * y n ^ 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

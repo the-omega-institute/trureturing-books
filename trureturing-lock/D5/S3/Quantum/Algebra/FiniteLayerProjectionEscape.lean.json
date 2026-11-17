@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape": {
+      "module": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape",
+      "name": "D5.S3.Quantum.Algebra.FiniteLayerProjectionEscape.finite_layer_projection_escape",
+      "kind": "theorem",
+      "statement_id": "sha256:8d1ffb7dce722cbfbc090063ea1001cdb9a4c3d9318b8bf1654a891ebc60e4fd",
+      "line": 32,
+      "signature": "theorem finite_layer_projection_escape (S : Submodule 𝕜 V) [IsClosed (S : Set V)] (hResidual : Sᗮ ≠ ⊥) : ∃ e : V, e ∈ Sᗮ ∧ ‖e‖ = 1 ∧ S.starProjection e = 0 ∧ Metric.infDist e (S : Set V) = 1 ∧ ‖ContinuousLinearMap.id 𝕜 V - S.starProjection‖ = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

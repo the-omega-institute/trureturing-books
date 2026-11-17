@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/CommonPhasePolynomial",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem": {
+      "module": "D5/S3/Quantum/Algebra/CommonPhasePolynomial",
+      "name": "D5.S3.Quantum.Algebra.PhasePolynomial.complete_common_phase_polynomial_theorem",
+      "kind": "theorem",
+      "statement_id": "sha256:554cae5cfdab1173bddb0992c2f20cf2ed64bc08aa13e2a91f86fd3ee591a629",
+      "line": 712,
+      "signature": "theorem complete_common_phase_polynomial_theorem (p : Poly ι) : (∃! q : Poly ι, ∀ z, actual q z = eval (cartesian z) p) ∧ ((toCartesian p).totalDegree = p.totalDegree) ∧ (∀ n, (toCartesian p).IsHomogeneous n ↔ p.IsHomogeneous n) ∧ (Invariant p ↔ Balanced p) ∧ (Invariant p ↔ p ∈ quadraticAlgebra (ι",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

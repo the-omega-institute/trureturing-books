@@ -1,0 +1,42 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Diagonal/EscapeCount",
+  "declarations": {
+    "D5/S0/Diagonal/EscapeCount.IsEscaped": {
+      "module": "D5/S0/Diagonal/EscapeCount",
+      "name": "D5.S0.Diagonal.EscapeCount.IsEscaped",
+      "kind": "def",
+      "statement_id": "sha256:14c5e871019d250bbba8a1cfb0c399fd2e9a89049951d338ff133e02d61c38ba",
+      "line": 25,
+      "signature": "def IsEscaped (f : Y → Y) (g : A → A → Y) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/EscapeCount.diagonal": {
+      "module": "D5/S0/Diagonal/EscapeCount",
+      "name": "D5.S0.Diagonal.EscapeCount.diagonal",
+      "kind": "def",
+      "statement_id": "sha256:14c5e871019d250bbba8a1cfb0c399fd2e9a89049951d338ff133e02d61c38ba",
+      "line": 22,
+      "signature": "def diagonal (f : Y → Y) (g : A → A → Y) : A → Y",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed": {
+      "module": "D5/S0/Diagonal/EscapeCount",
+      "name": "D5.S0.Diagonal.EscapeCount.diagonal_landing_fixed",
+      "kind": "theorem",
+      "statement_id": "sha256:14c5e871019d250bbba8a1cfb0c399fd2e9a89049951d338ff133e02d61c38ba",
+      "line": 28,
+      "signature": "theorem diagonal_landing_fixed {f : Y → Y} {g : A → A → Y} {a₀ : A} : g a₀ = diagonal f g → f (g a₀ a₀) = g a₀ a₀",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/EscapeCount.escaped_listing_card": {
+      "module": "D5/S0/Diagonal/EscapeCount",
+      "name": "D5.S0.Diagonal.EscapeCount.escaped_listing_card",
+      "kind": "theorem",
+      "statement_id": "sha256:14c5e871019d250bbba8a1cfb0c399fd2e9a89049951d338ff133e02d61c38ba",
+      "line": 140,
+      "signature": "theorem escaped_listing_card [Fintype A] [Fintype Y] (f : Y → Y) : Nat.card {g : A → A → Y // IsEscaped f g} = (Fintype.card Y ^ Fintype.card A - Nat.card {y : Y // f y = y}) ^ Fintype.card A",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

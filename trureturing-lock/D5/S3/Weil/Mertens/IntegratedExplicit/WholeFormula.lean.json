@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula",
+  "declarations": {
+    "D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula.actual_integrated_explicit_formula": {
+      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula",
+      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.actual_integrated_explicit_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:cab649cc02a4fa8d3fde419fa15ee4281e02205eb85a950a6ff6bcbdb38c428e",
+      "line": 280,
+      "signature": "theorem actual_integrated_explicit_formula {y : ℝ} (hy : 0 < y) : actualH y = ((U (Real.exp y) - Real.log (2 * Real.pi) + trivialT y : ℝ) : ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

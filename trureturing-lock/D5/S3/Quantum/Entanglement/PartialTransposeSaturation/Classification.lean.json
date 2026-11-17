@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Entanglement/PartialTransposeSaturation/Classification",
+  "declarations": {
+    "D5/S3/Quantum/Entanglement/PartialTransposeSaturation/Classification.result": {
+      "module": "D5/S3/Quantum/Entanglement/PartialTransposeSaturation/Classification",
+      "name": "D5.S3.Quantum.Entanglement.PartialTransposeSaturation.result",
+      "kind": "theorem",
+      "statement_id": "sha256:f1c84f5114a4fbf5bb0f96821cf9a0c6a41b526618660d5e0c8158897fe58e93",
+      "line": 669,
+      "signature": "theorem result (A₁ A₂ : Matrix (Fin m₁) (Fin n₁) ℂ) (B₁ B₂ : Matrix (Fin m₂) (Fin n₂) ℂ) (hA : LinearIndependent ℂ ![A₁, A₂]) (hB : LinearIndependent ℂ ![B₁, B₂]) : (partialTranspose A₁ A₂ B₁ B₂).rank = 2 * (tensorSum A₁ A₂ B₁ B₂).rank ↔ (vRank A₁ A₂ = 2 * hRank A₁ A₂ ∧ vRank B₁ B₂ = 2 * hRank B₁ B₂) ∨ (hRank A₁ A₂ = 2 * vRank A₁ A₂ ∧ hRank B₁ B₂ = 2 * vRank B₁ B₂)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

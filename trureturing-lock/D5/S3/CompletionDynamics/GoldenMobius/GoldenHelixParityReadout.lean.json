@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/CompletionDynamics/GoldenMobius/GoldenHelixParityReadout",
+  "declarations": {
+    "D5/S3/CompletionDynamics/GoldenMobius/GoldenHelixParityReadout.golden_helix_two_step_orientation_complete_state_distinct": {
+      "module": "D5/S3/CompletionDynamics/GoldenMobius/GoldenHelixParityReadout",
+      "name": "D5.S3.CompletionDynamics.GoldenMobius.GoldenHelixParityReadout.golden_helix_two_step_orientation_complete_state_distinct",
+      "kind": "theorem",
+      "statement_id": "sha256:0b0f1704d3585feca90d44bb09e5937a7240b45fe0154767b23d354885778532",
+      "line": 63,
+      "signature": "theorem golden_helix_two_step_orientation_complete_state_distinct (state : GoldenHelixState) : (goldenHelixStep (goldenHelixStep state)).orientation = state.orientation ∧ goldenHelixStep (goldenHelixStep state) ≠ state",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

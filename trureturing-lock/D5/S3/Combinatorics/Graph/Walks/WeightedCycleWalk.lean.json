@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk",
+  "declarations": {
+    "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk.circuit_length": {
+      "module": "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk",
+      "name": "D5.S3.Combinatorics.Graph.Walks.WeightedCycleWalk.circuit_length",
+      "kind": "theorem",
+      "statement_id": "sha256:8290384519fabbb47b99d637a47009c4903ac3ed57f4f1bccfa01c7a1cac221e",
+      "line": 77,
+      "signature": "theorem circuit_length (n : ℕ) : (circuit n).length = 2 * (n + 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

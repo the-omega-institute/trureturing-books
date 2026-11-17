@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Fourier/FinitePoisson",
+  "declarations": {
+    "D5/S3/Fourier/FinitePoisson.finite_poisson_summation": {
+      "module": "D5/S3/Fourier/FinitePoisson",
+      "name": "D5.S3.Fourier.FinitePoisson.finite_poisson_summation",
+      "kind": "theorem",
+      "statement_id": "sha256:bead691cec70f8a3549ce49e2af64afa08ae7a4ce8ddc01eb0fb12fc5b06d35c",
+      "line": 145,
+      "signature": "theorem finite_poisson_summation (H : AddSubgroup (ZMod m)) (f : ZMod m → ℂ) : ∑ h : H, f h.1 = ((Fintype.card H : ℂ) / (m : ℂ)) * ∑ k : annihilator H, ZMod.dft f k.1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Fourier/FinitePoisson.sum_annihilator_character": {
+      "module": "D5/S3/Fourier/FinitePoisson",
+      "name": "D5.S3.Fourier.FinitePoisson.sum_annihilator_character",
+      "kind": "theorem",
+      "statement_id": "sha256:bead691cec70f8a3549ce49e2af64afa08ae7a4ce8ddc01eb0fb12fc5b06d35c",
+      "line": 110,
+      "signature": "theorem sum_annihilator_character (H : AddSubgroup (ZMod m)) (x : ZMod m) : ∑ k : annihilator H, character k.1 x = if x ∈ H then (Fintype.card (annihilator H) : ℂ) else 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

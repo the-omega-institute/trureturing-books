@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/SorkinThirdOrder",
+  "declarations": {
+    "D5/S3/Quantum/SorkinThirdOrder.sorkin_third_order_cancellation": {
+      "module": "D5/S3/Quantum/SorkinThirdOrder",
+      "name": "D5.S3.Quantum.SorkinThirdOrder.sorkin_third_order_cancellation",
+      "kind": "theorem",
+      "statement_id": "sha256:c94f4874e555b783efb4ad198b4982a94d87d7982fd171732c71c1d3234a293e",
+      "line": 26,
+      "signature": "theorem sorkin_third_order_cancellation (v : α → R) (A B C : Finset α) (hAB : Disjoint A B) (hAC : Disjoint A C) (hBC : Disjoint B C) : amplitudeWeight v (A ∪ B ∪ C) - amplitudeWeight v (A ∪ B) - amplitudeWeight v (A ∪ C) - amplitudeWeight v (B ∪ C) + amplitudeWeight v A + amplitudeWeight v B + amplitudeWeight v C = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

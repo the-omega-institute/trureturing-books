@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
+  "declarations": {
+    "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
+      "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
+      "name": "D5.S0.Automata.BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes",
+      "kind": "theorem",
+      "statement_id": "sha256:87b15f790efca613794d25fe2bc822ee2420eb2ab847760e509a3059c25a8f17",
+      "line": 45,
+      "signature": "theorem base_success_iff_noAdjacentOnes (word : List (Fin 2)) : (∃ state, binaryZeckendorfBase.eval word = some state) ↔ NoAdjacentOnes word",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

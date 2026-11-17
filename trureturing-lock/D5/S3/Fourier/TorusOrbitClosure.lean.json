@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Fourier/TorusOrbitClosure",
+  "declarations": {
+    "D5/S3/Fourier/TorusOrbitClosure.result": {
+      "module": "D5/S3/Fourier/TorusOrbitClosure",
+      "name": "D5.S3.Fourier.TorusOrbitClosure.result",
+      "kind": "theorem",
+      "statement_id": "sha256:8c283fe33e89d76665cb860f51d101c10b70cc7a10417d2848ee64521e1c002c",
+      "line": 24,
+      "signature": "theorem result {I : Type*} [Fintype I] (g z : I → Circle) : z ∈ closure (range (fun n : ℕ => g ^ n)) ↔ ∀ k : I → ℤ, (∏ i, (g i) ^ (k i)) = 1 → (∏ i, (z i) ^ (k i)) = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
+  "declarations": {
+    "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.DiagonalTopologicalEscape.complete_diagonal_not_continuous",
+      "kind": "theorem",
+      "statement_id": "sha256:b2dce622e28cc3d577134dcf48e071bba88a752c8938fc22ce39d0a4f4db8f38",
+      "line": 30,
+      "signature": "theorem complete_diagonal_not_continuous {Address Coordinate Output : Type*} [Nonempty Address] (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : ¬ @Continuous Address Output (partitionTopology latent) ⊥ (relativeSemanticDiagonal twist latent decoderCatalog)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty",
+      "kind": "theorem",
+      "statement_id": "sha256:b2dce622e28cc3d577134dcf48e071bba88a752c8938fc22ce39d0a4f4db8f38",
+      "line": 50,
+      "signature": "theorem complete_diagonal_separationDeficit_nonempty {Address Coordinate Output : Type*} [Nonempty Address] (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : (separationDeficit latent (relativeSemanticDiagonal twist latent decoderCatalog)).Nonempty",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement",
+      "kind": "theorem",
+      "statement_id": "sha256:b2dce622e28cc3d577134dcf48e071bba88a752c8938fc22ce39d0a4f4db8f38",
+      "line": 74,
+      "signature": "theorem complete_diagonal_strict_topology_refinement {Address Coordinate Output : Type*} [Nonempty Address] (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : StrictObservationRefinement (partitionTopology latent) (partitionTopology (conceptJoin latent (relativeSemanticDiagonal twist latent decoderCatalog)))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.DiagonalTopologicalEscape.complete_diagonal_topological_settlement",
+      "kind": "theorem",
+      "statement_id": "sha256:b2dce622e28cc3d577134dcf48e071bba88a752c8938fc22ce39d0a4f4db8f38",
+      "line": 94,
+      "signature": "theorem complete_diagonal_topological_settlement {Address Coordinate Output : Type*} [Nonempty Address] (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : (¬Refines (relativeSemanticDiagonal twist latent decoderCatalog) latent) ∧ (¬ @Continuous Address Output (partitionTopology latent) ⊥ (relativeSemanticDiagonal twist latent decoderCatalog)) ∧ (separationDeficit latent (relativeSemanticDiagonal twist latent decoderCatalog)).Nonempty",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Diagonal/SelfApplicationFates",
+  "declarations": {
+    "D5/S0/Diagonal/SelfApplicationFates.BinaryFractionalMap": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.BinaryFractionalMap",
+      "kind": "inductive",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 12,
+      "signature": "structure BinaryFractionalMap where a : Fin 2 b : Fin 2 c : Fin 2 d : Fin 2 deriving DecidableEq, Fintype def determinant (m : BinaryFractionalMap) : Int",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.HasFate": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.HasFate",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 41,
+      "signature": "def HasFate (m : BinaryFractionalMap) : SelfApplicationFate → Prop | .empty => fixedCoefficients m = (0, 0, 0) | .dead => fixedCoefficients m = (0, 0, -1) | .collapse => (discriminant m = 0 ∨ discriminant m = 4) ∧ fixedCoefficients m ≠ (0, 0, 0) ∧ fixedCoefficients m ≠ (0, 0, -1) | .live => discriminant m = 5 instance (m : BinaryFractionalMap) (fate : SelfApplicationFate) : Decidable (HasFate m fate)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.IsPhiFamily": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.IsPhiFamily",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 53,
+      "signature": "def IsPhiFamily (m : BinaryFractionalMap) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.Nondegenerate": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.Nondegenerate",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 22,
+      "signature": "def Nondegenerate (m : BinaryFractionalMap) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.SelfApplicationFate": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.SelfApplicationFate",
+      "kind": "inductive",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 34,
+      "signature": "inductive SelfApplicationFate | empty | dead | collapse | live deriving DecidableEq, Fintype def HasFate (m : BinaryFractionalMap) : SelfApplicationFate → Prop | .empty => fixedCoefficients m = (0, 0, 0) | .dead => fixedCoefficients m = (0, 0, -1) | .collapse => (discriminant m = 0 ∨ discriminant m = 4) ∧ fixedCoefficients m ≠ (0, 0, 0) ∧ fixedCoefficients m ≠ (0, 0, -1) | .live => discriminant m = 5 instance (m : BinaryFractionalMap) (fate : SelfApplicationFate) : Decidable (HasFate m fate)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.determinant": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.determinant",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 19,
+      "signature": "def determinant (m : BinaryFractionalMap) : Int",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.discriminant": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.discriminant",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 30,
+      "signature": "def discriminant (m : BinaryFractionalMap) : Int",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.fixedCoefficients": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.fixedCoefficients",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 27,
+      "signature": "def fixedCoefficients (m : BinaryFractionalMap) : Int × Int × Int",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.fixedPolynomial": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.fixedPolynomial",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 24,
+      "signature": "def fixedPolynomial (m : BinaryFractionalMap) (x : Rat) : Rat",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.self_application_four_fates": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.self_application_four_fates",
+      "kind": "theorem",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 61,
+      "signature": "theorem self_application_four_fates (m : BinaryFractionalMap) (hm : Nondegenerate m) : (∃! fate, HasFate m fate) ∧ (HasFate m .live ↔ IsPhiFamily m) ∧ (HasFate m .live → fixedCoefficients m = (1, -1, -1) ∨ fixedCoefficients m = (1, 1, -1)) ∧ (HasFate m .live → discriminant m = 1 ^ 2 + 4)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

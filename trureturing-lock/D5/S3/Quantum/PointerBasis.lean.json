@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/PointerBasis",
+  "declarations": {
+    "D5/S3/Quantum/PointerBasis.fourier_phase_damping_fixed_iff": {
+      "module": "D5/S3/Quantum/PointerBasis",
+      "name": "D5.S3.Quantum.PointerBasis.fourier_phase_damping_fixed_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:61fd6d3805dfd0f4d09e70de984b976a1a83cb0a390091d6762ae40f261700ad",
+      "line": 57,
+      "signature": "theorem fourier_phase_damping_fixed_iff (c : DampingCoefficient) (hCoefficient : (c : Real) ≠ 1) (rho : QubitMatrix) : fourierPhaseDamping c rho = rho ↔ ∀ i j, i ≠ j -> hadamardCoordinates rho i j = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

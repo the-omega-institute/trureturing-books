@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Diagonal/SechPath",
+  "declarations": {
+    "D5/S0/Diagonal/SechPath.discrete_sech_path_positive": {
+      "module": "D5/S0/Diagonal/SechPath",
+      "name": "D5.S0.Diagonal.SechPath.discrete_sech_path_positive",
+      "kind": "theorem",
+      "statement_id": "sha256:b5a982ea31a3d227a3145e5090e42eb892542ef87da7650c1f1e54fd70cfe397",
+      "line": 14,
+      "signature": "theorem discrete_sech_path_positive (eta0 delta : ℝ) : ∀ k : ℕ, 0 < 1 / Real.cosh (eta0 + (k : ℝ) * delta)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

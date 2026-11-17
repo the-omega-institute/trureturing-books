@@ -131,7 +131,7 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .cache/trureturing
-          key: trureturing-state-${{ hashFiles('trureturing.lock.json') }}
+          key: trureturing-state-${{ hashFiles('trureturing.lock.json', 'trureturing-lock/**') }}
           restore-keys: trureturing-state-
 
       - name: Books, bilingual parity and Lean citations
@@ -189,7 +189,7 @@ jobs:
           if [ -d .cache ]; then ln -s "$GITHUB_WORKSPACE/.cache" "$dir/.cache"; fi
           cd "$dir"
           git rm -r -q books/example-*
-          python3 - <<'PY'
+          PYTHONPATH="$GITHUB_WORKSPACE/tools" python3 - <<'PY'
           import re
           from pathlib import Path
 
@@ -220,7 +220,7 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/node_modules" "$dir/node_modules"
           if [ -d .cache ]; then ln -s "$GITHUB_WORKSPACE/.cache" "$dir/.cache"; fi
           cd "$dir"
-          python3 - <<'PY'
+          PYTHONPATH="$GITHUB_WORKSPACE/tools" python3 - <<'PY'
           import json
           import re
           from pathlib import Path
@@ -229,10 +229,12 @@ jobs:
           text, n = re.subn(r"(?m)^hide\s*=\s*\[\]", 'hide = ["example-*"]', site.read_text(encoding="utf-8"))
           assert n == 1, "site.toml: expected the line hide = [] under [books]"
           site.write_text(text, encoding="utf-8")
-          lock_path = Path("trureturing.lock.json")
-          lock = json.loads(lock_path.read_text(encoding="utf-8"))
-          lock.update(commit="4c76e4a56525afbb474bf04a03ee2ff4aec5da45", declarations={})
-          lock_path.write_text(json.dumps(lock, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          from tbook import lean
+          lock = lean.Lock.load()
+          assert lock is not None
+          lock.commit = "4c76e4a56525afbb474bf04a03ee2ff4aec5da45"
+          lock.declarations = {}
+          lock.save()
           PY
           ./tbook check | tee "$RUNNER_TEMP/hidden-check.txt"
           grep -q '^check: hidden by site.toml \[books\]\.hide, not checked: example-' "$RUNNER_TEMP/hidden-check.txt"
@@ -618,6 +620,7 @@ jobs:
         uses: ./.github/actions/build-cache
         with:
           mode: restore
+          scope: films
           pages-url: ${{ steps.pages.outputs.base_url }}
 
       - name: Snapshot restored build-cache entries
@@ -641,7 +644,9 @@ jobs:
           github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
           (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
         continue-on-error: true
-        run: python3 tools/ci/cache_store.py export --baseline "$RUNNER_TEMP/build-cache-before.json" --out "$RUNNER_TEMP/build-cache-shard"
+        env:
+          CI_ITEMS: ${{ toJSON(matrix.items) }}
+        run: python3 tools/ci/cache_store.py export --baseline "$RUNNER_TEMP/build-cache-before.json" --out "$RUNNER_TEMP/build-cache-shard" --include-films-env CI_ITEMS
 
       - name: Upload added build-cache entries
         if: >-
@@ -721,6 +726,7 @@ jobs:
         uses: ./.github/actions/build-cache
         with:
           mode: restore
+          film-baseline: 'true'
 
       - name: Download current build-cache shards separately
         if: >-
@@ -752,7 +758,7 @@ jobs:
           (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
           (needs.plan.outputs.build == 'true' || needs.plan.outputs.media == 'true' || needs.plan.outputs.films == 'true')
         continue-on-error: true
-        run: python3 tools/ci/cache_store.py merge "$RUNNER_TEMP"/build-cache-shards/*
+        run: python3 tools/ci/cache_store.py merge --prefer-imported "$RUNNER_TEMP"/build-cache-shards/*
 
       - name: Save the aggregated build cache
         if: >-
@@ -779,6 +785,32 @@ jobs:
         with:
           name: tbook-build-store
           path: .cache/artifacts
+          include-hidden-files: true
+          compression-level: 0
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Save reusable film entries
+        if: >-
+          steps.verified.outcome == 'success' && needs.plan.outputs.films == 'true' &&
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
+          steps.cache-merge.outputs.entries != '' && steps.cache-merge.outputs.entries != '0'
+        uses: actions/cache/save@v5
+        with:
+          path: .cache/artifacts/films
+          key: film-cache-v1-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Publish reusable films for pull requests
+        if: >-
+          steps.verified.outcome == 'success' && needs.plan.outputs.films == 'true' &&
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
+          steps.cache-merge.outputs.entries != '' && steps.cache-merge.outputs.entries != '0'
+        uses: actions/upload-artifact@v6
+        with:
+          name: tbook-film-store
+          path: .cache/artifacts/films
           include-hidden-files: true
           compression-level: 0
           if-no-files-found: warn

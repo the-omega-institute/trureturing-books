@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Divergence/GeneralConvexReverseTestAttainment",
+  "declarations": {
+    "D5/S3/Quantum/Divergence/GeneralConvexReverseTestAttainment.original_reverse_test_extended_attainment": {
+      "module": "D5/S3/Quantum/Divergence/GeneralConvexReverseTestAttainment",
+      "name": "D5.S3.Quantum.Divergence.GeneralConvexReverseTestAttainment.original_reverse_test_extended_attainment",
+      "kind": "theorem",
+      "statement_id": "sha256:f7c4aefd9d133682c286911ab58791b10d4da0fe8125854f5148a0cab2ae45f7",
+      "line": 383,
+      "signature": "theorem original_reverse_test_extended_attainment {f : ℝ → ℝ} (hf : ConvexOn ℝ (Ioi 0) f) : ∃ F : Family ρ σ, familyCost hf F = sInf (attainableCosts.{u} hf ρ σ) ∧ sInf (attainableCosts.{u} hf ρ σ) ≠ ⊥ ∧ (ρ = 0 → σ = 0 → sInf (attainableCosts.{u} hf ρ σ) = 0) ∧ (scalarMeasure F).Regular ∧ IsFiniteMeasure (liftedMeasure.{u} (scalarMeasure F)) ∧ (∃ R : NormalL1ReverseTest ρ σ (liftedMeasure.{u} (scalarMeasure F)), R.p = (fun x => x.down.val) ∧ R.q = (fun x => 1 - x.down.val) ∧ closedPerspectiveCost hf (liftedMeasure (scalarMeasure F)) R.p R.q = sInf (attainableCosts.{u} hf ρ σ)) ∧ ∃ Γ : (Interva",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

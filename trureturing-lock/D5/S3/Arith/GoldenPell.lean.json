@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/GoldenPell",
+  "declarations": {
+    "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm": {
+      "module": "D5/S3/Arith/GoldenPell",
+      "name": "D5.S3.Arith.GoldenPell.pell_form_eq_four_mul_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:c97735b84c325d32ca097c3de9bf52294a373b4aacd44ebf62d92dd3fbb46cc5",
+      "line": 83,
+      "signature": "theorem pell_form_eq_four_mul_norm (g : GoldenInt) : (2 * g.a + g.b) ^ 2 - 5 * g.b ^ 2 = 4 * norm g",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib": {
+      "module": "D5/S3/Arith/GoldenPell",
+      "name": "D5.S3.Arith.GoldenPell.pell_pm_four_iff_signed_lucas_fib",
+      "kind": "theorem",
+      "statement_id": "sha256:c97735b84c325d32ca097c3de9bf52294a373b4aacd44ebf62d92dd3fbb46cc5",
+      "line": 101,
+      "signature": "theorem pell_pm_four_iff_signed_lucas_fib (x y : ℤ) : (x ^ 2 - 5 * y ^ 2 = 4 ∨ x ^ 2 - 5 * y ^ 2 = -4) ↔ ∃ (s : Bool) (n : ℤ), x = signedInt s (goldenLucasZ n) ∧ y = signedInt s (Int.fib n)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

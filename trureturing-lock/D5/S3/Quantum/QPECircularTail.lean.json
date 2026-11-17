@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/QPECircularTail",
+  "declarations": {
+    "D5/S3/Quantum/QPECircularTail.qpe_circular_tail_le": {
+      "module": "D5/S3/Quantum/QPECircularTail",
+      "name": "QuantumPhaseEstimationGeneral.qpe_circular_tail_le",
+      "kind": "theorem",
+      "statement_id": "sha256:8aaa69adf6180ea252efe4003828671b2d2b4c902d4f92d383b71506b3fe76e7",
+      "line": 385,
+      "signature": "theorem qpe_circular_tail_le (t : ℕ) (φ ρ : ℝ) (hrho : 0 < ρ) : (∑ j ∈ Finset.univ.filter (fun j : Fin (2 ^ t) => ρ ≤ ‖((φ - (j.val : ℝ) / (2 : ℝ) ^ t : ℝ) : UnitAddCircle)‖), probability (2 ^ t) φ j) ≤ 1 / (2 * (2 : ℝ) ^ t * ρ) + 1 / (2 * ((2 : ℝ) ^ t * ρ) ^ 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/QPECircularTail.reciprocal_square_shifted_finite_tail_le": {
+      "module": "D5/S3/Quantum/QPECircularTail",
+      "name": "QuantumPhaseEstimationGeneral.reciprocal_square_shifted_finite_tail_le",
+      "kind": "theorem",
+      "statement_id": "sha256:8aaa69adf6180ea252efe4003828671b2d2b4c902d4f92d383b71506b3fe76e7",
+      "line": 50,
+      "signature": "lemma reciprocal_square_shifted_finite_tail_le (a : Real) (n : Nat) (ha : 0 < a) : (∑ k ∈ Finset.range n, 1 / (a + (k : Real)) ^ 2) <= 1 / a ^ 2 + 1 / a",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

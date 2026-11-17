@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/GoldenResourceOptimalInteger",
+  "declarations": {
+    "D5/S3/Arith/GoldenResourceOptimalInteger.golden_resource_unique_optimum": {
+      "module": "D5/S3/Arith/GoldenResourceOptimalInteger",
+      "name": "D5.S3.Arith.GoldenResourceOptimalInteger.golden_resource_unique_optimum",
+      "kind": "theorem",
+      "statement_id": "sha256:dbf7c2a7836c7330538b443a6fbc66e43e2a7f9dc0e8fd55e98f7cdab4ee22af",
+      "line": 272,
+      "signature": "theorem golden_resource_unique_optimum {n : ℕ} (hn : 1 ≤ n) : goldenResourceObjective (1 / 25) n ≤ goldenResourceObjective (1 / 25) 5040 ∧ (goldenResourceObjective (1 / 25) n = goldenResourceObjective (1 / 25) 5040 ↔ n = 5040)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

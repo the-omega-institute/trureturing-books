@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/PrimeForms/QuadraticResidues",
+  "declarations": {
+    "D5/S3/PrimeForms/QuadraticResidues.square_residues_and_sum_obstruction": {
+      "module": "D5/S3/PrimeForms/QuadraticResidues",
+      "name": "D5.S3.PrimeForms.QuadraticResidues.square_residues_and_sum_obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:6fc355cbedf65680c23977571b36225b73188180743fb14b77d566ca88e3d1e3",
+      "line": 12,
+      "signature": "theorem square_residues_and_sum_obstruction : (∀ n : ℕ, n ^ 2 % 4 = 0 ∨ n ^ 2 % 4 = 1) ∧ (∀ a b : ℕ, (a ^ 2 + b ^ 2) % 4 ≠ 3)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

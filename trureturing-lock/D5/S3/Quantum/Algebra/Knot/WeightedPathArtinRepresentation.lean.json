@@ -1,0 +1,69 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.Artin": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.Artin",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 43,
+      "signature": "abbrev Artin (n : ℕ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovEquivalent": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.MarkovEquivalent",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 298,
+      "signature": "abbrev MarkovEquivalent",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovStep": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.MarkovStep",
+      "kind": "inductive",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 287,
+      "signature": "inductive MarkovStep : PositiveBraid → PositiveBraid → Prop | conjugation (n : ℕ) (hn : 0 < n) (b c : Artin n) : MarkovStep ⟨⟨n, hn⟩, b⟩ ⟨⟨n, hn⟩, c * b * c⁻¹⟩ | positive (n : ℕ) (hn : 0 < n) (b : Artin n) : MarkovStep ⟨⟨n, hn⟩, b⟩ ⟨⟨n + 1, by omega⟩, strandInclusion n b * lastGenerator n hn⟩ | negative (n : ℕ) (hn : 0 < n) (b : Artin n) : MarkovStep ⟨⟨n, hn⟩, b⟩ ⟨⟨n + 1, by omega⟩, strandInclusion n b * (lastGenerator n hn)⁻¹⟩ /-- Finite equivalence chains of the actual algebraic Markov moves. -/ abbrev MarkovEquivalent",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.PositiveBraid": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.PositiveBraid",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 284,
+      "signature": "abbrev PositiveBraid",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.artinRelators": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.artinRelators",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 38,
+      "signature": "def artinRelators (n : ℕ) : Set (FreeGroup (Fin (n - 1)))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.lastGenerator": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.lastGenerator",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 280,
+      "signature": "def lastGenerator (n : ℕ) (hn : 0 < n) : Artin (n + 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.strandInclusion": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.strandInclusion",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 224,
+      "signature": "def strandInclusion (n : ℕ) : Artin n →* Artin (n + 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

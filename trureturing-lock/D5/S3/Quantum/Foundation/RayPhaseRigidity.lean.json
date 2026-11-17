@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Foundation/RayPhaseRigidity",
+  "declarations": {
+    "D5/S3/Quantum/Foundation/RayPhaseRigidity.PreservesRay": {
+      "module": "D5/S3/Quantum/Foundation/RayPhaseRigidity",
+      "name": "D5.S3.Quantum.Foundation.RayPhaseRigidity.PreservesRay",
+      "kind": "def",
+      "statement_id": "sha256:33a591cb2edb3f9927d21a39fcf060aeddd8cc3c03d083195128c4f4d9347180",
+      "line": 54,
+      "signature": "def PreservesRay (A : Matrix ι ι ℂ) (x : ι → ℂ) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Foundation/RayPhaseRigidity.RaySupportConnected": {
+      "module": "D5/S3/Quantum/Foundation/RayPhaseRigidity",
+      "name": "D5.S3.Quantum.Foundation.RayPhaseRigidity.RaySupportConnected",
+      "kind": "def",
+      "statement_id": "sha256:33a591cb2edb3f9927d21a39fcf060aeddd8cc3c03d083195128c4f4d9347180",
+      "line": 59,
+      "signature": "def RaySupportConnected (tests : Set (ι → ℂ)) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests": {
+      "module": "D5/S3/Quantum/Foundation/RayPhaseRigidity",
+      "name": "D5.S3.Quantum.Foundation.RayPhaseRigidity.unitary_phase_of_connected_ray_tests",
+      "kind": "theorem",
+      "statement_id": "sha256:33a591cb2edb3f9927d21a39fcf060aeddd8cc3c03d083195128c4f4d9347180",
+      "line": 97,
+      "signature": "theorem unitary_phase_of_connected_ray_tests (A : Matrix ι ι ℂ) (hA : A ∈ Matrix.unitaryGroup ι ℂ) (hcoord : ∀ i : ι, PreservesRay A (Pi.single i 1)) (tests : Set (ι → ℂ)) (htests : ∀ x ∈ tests, PreservesRay A x) (hconnect : RaySupportConnected tests) : ∃ c : ℂ, ‖c‖ = 1 ∧ A = c • (1 : Matrix ι ι ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

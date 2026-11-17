@@ -1,0 +1,42 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
+  "declarations": {
+    "D5/S3/ContinuousObservables/IntervalSOSCompletion.Poly.evenRoot": {
+      "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
+      "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.Poly.evenRoot",
+      "kind": "def",
+      "statement_id": "sha256:804deaf76d19d115e9674a9ff4fb54d294112b6294fd125432c2fb4823a4d433",
+      "line": 198,
+      "signature": "noncomputable def evenRoot (P : ℂ[X]) : ℂ[X]",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/IntervalSOSCompletion.Poly.oddRoot": {
+      "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
+      "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.Poly.oddRoot",
+      "kind": "def",
+      "statement_id": "sha256:804deaf76d19d115e9674a9ff4fb54d294112b6294fd125432c2fb4823a4d433",
+      "line": 200,
+      "signature": "noncomputable def oddRoot (P : ℂ[X]) : ℂ[X]",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_phase_unitary_completion": {
+      "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
+      "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_phase_unitary_completion",
+      "kind": "theorem",
+      "statement_id": "sha256:804deaf76d19d115e9674a9ff4fb54d294112b6294fd125432c2fb4823a4d433",
+      "line": 912,
+      "signature": "theorem exists_phase_unitary_completion (k : ℕ) (p : ℝ[X]) (hp : p.natDegree ≤ k) (hpar : HasParity (p.map (algebraMap ℝ ℂ)) k) (hbound : ∀ x ∈ Set.Icc (-1 : ℝ) 1, p.eval x ^ 2 ≤ 1) : ∃ (B C : ℝ[X]) (U : CyclicObservable 2), 1 - p ^ 2 = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1) ∧ U = phaseCompletion p B C ∧ star U * U = 1 ∧ U * star U = 1 ∧ (∀ t, (U t).det = 1) ∧ (∀ t, (U t 0 0).re = p.eval (windingPhase t).re)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/IntervalSOSCompletion.exists_sumsq_decomposition": {
+      "module": "D5/S3/ContinuousObservables/IntervalSOSCompletion",
+      "name": "D5.S3.ContinuousObservables.IntervalSOSCompletion.exists_sumsq_decomposition",
+      "kind": "theorem",
+      "statement_id": "sha256:804deaf76d19d115e9674a9ff4fb54d294112b6294fd125432c2fb4823a4d433",
+      "line": 845,
+      "signature": "theorem exists_sumsq_decomposition (k : ℕ) (A : ℝ[X]) (hAe : IsEven (A.map (algebraMap ℝ ℂ))) (hAd : A.natDegree ≤ 2 * k) (hA : ∀ x ∈ Set.Icc (-1 : ℝ) 1, 0 ≤ A.eval x) : ∃ B C : ℝ[X], A = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

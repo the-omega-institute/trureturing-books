@@ -192,7 +192,7 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .cache/trureturing
-          key: trureturing-state-${{ hashFiles('trureturing.lock.json') }}
+          key: trureturing-state-${{ hashFiles('trureturing.lock.json', 'trureturing-lock/**') }}
           restore-keys: trureturing-state-
 
       - name: Configure Pages
@@ -206,6 +206,7 @@ jobs:
         uses: ./.github/actions/build-cache
         with:
           mode: restore
+          film-baseline: 'true'
           pages-url: ${{ steps.pages.outputs.base_url }}
 
       - name: Check

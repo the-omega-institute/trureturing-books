@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Diagonal/Lawvere/QualitativeEscape",
+  "declarations": {
+    "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package": {
+      "module": "D5/S0/Diagonal/Lawvere/QualitativeEscape",
+      "name": "D5.S0.Diagonal.Lawvere.QualitativeEscape.self_application_fragment_package",
+      "kind": "theorem",
+      "statement_id": "sha256:f4f9c8f7bbe3d674e020788a338506fda2a7e7512386a5142bec282841247c0e",
+      "line": 48,
+      "signature": "theorem self_application_fragment_package (f : Y → Y) (g : A → A → Y) : (∀ a : A, diagonal f g a = f (g a a)) ∧ (IsEscaped f g ↔ diagonal f g ∉ Set.range g) ∧ ((∀ y, f y ≠ y) → ∀ h : A → A → Y, IsEscaped f h) ∧ (∃ (f₀ : Bool → Bool) (g₀ : Unit → Unit → Bool), ¬ IsEscaped f₀ g₀)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

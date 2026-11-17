@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealSpaces",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealSpaces.real_geometric_multiplicity": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealSpaces",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonRealSpaces.real_geometric_multiplicity",
+      "kind": "theorem",
+      "statement_id": "sha256:8761c39ae3bc54b88708b5959054fd48ebee56714a6e73955f5318f05ce04be2",
+      "line": 76,
+      "signature": "theorem real_geometric_multiplicity (m : ℕ) [NeZero (2 * m)] (hm : 3 ≤ m) {r : ℕ} (hr : 2 ≤ r) (hrm : r < m) (μ : ℝ) (hμ : μ = positiveRoot m r ∨ μ = -positiveRoot m r) : Module.finrank ℝ ((realOperator m).eigenspace μ) = 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { loadLock } from '../../../../tools/node/slides-lib.mjs';
 // Browser regression suite for ZYZ//COMPILE (books/quantum-geometry/viz/zyz-compile/).
 //   node books/quantum-geometry/viz/tests/zyz-compile.test.mjs        (or node tools/node/viz-test.mjs quantum-geometry)
 // The page multiplies rotors on Cl(3,0) blade masks. The suite recomputes everything with 2 × 2 complex matrices
@@ -175,7 +176,7 @@ await setRange('now', 1.25); s = await state();
 check('scrubbing the rail turns part of a factor, as SU(2) says', close(s.t, 1.25) && rotorErr(s, 1.25) < 1e-12);
 
 // the claim map: exactly the theorems of the chapter, as the lock file has them
-const lock = JSON.parse(readFileSync(new URL('../../../../trureturing.lock.json', import.meta.url), 'utf8')).declarations;
+const lock = loadLock().declarations;
 const chapter = readFileSync(new URL('../../zh/ch26-single-qubit-rotor-compilation.md', import.meta.url), 'utf8');
 const cited = [...new Set([...chapter.matchAll(/lean="([^"]+)"/g)].map((m) => m[1]))].filter((g) => lock[g] && lock[g].kind === 'theorem').sort();
 const mapped = [...new Set(await page.$$eval('#drawer ul.claims a[data-lean-gid]', (as) => as.map((a) => a.dataset.leanGid)))].sort();

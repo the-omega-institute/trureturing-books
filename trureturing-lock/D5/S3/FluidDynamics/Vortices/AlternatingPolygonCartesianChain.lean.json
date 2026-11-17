@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.cartesian_chain": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonCartesianChain.cartesian_chain",
+      "kind": "theorem",
+      "statement_id": "sha256:738b9ec376753f44a385f42d528c0fee54a236bc0bcbc4cc9a3bd9d1c9203590",
+      "line": 89,
+      "signature": "theorem cartesian_chain (m : ℕ) (hm : 1 ≤ m) : realOperator m (cartesian0 m) = 0 ∧ realOperator m (cartesian1 m) = cartesian0 m",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonCartesianChain.unbounded_linear_drift",
+      "kind": "theorem",
+      "statement_id": "sha256:738b9ec376753f44a385f42d528c0fee54a236bc0bcbc4cc9a3bd9d1c9203590",
+      "line": 117,
+      "signature": "theorem unbounded_linear_drift (m : ℕ) (hm : 1 ≤ m) : (∀ t : ℝ, HasDerivAt (fun τ : ℝ => cartesian1 m + τ • cartesian0 m) (realOperator m (cartesian1 m + t • cartesian0 m)) t) ∧ ¬ Bornology.IsBounded (Set.range (fun t : ℝ => cartesian1 m + t • cartesian0 m))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

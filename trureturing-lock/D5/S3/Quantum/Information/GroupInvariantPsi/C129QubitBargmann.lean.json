@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann",
+  "declarations": {
+    "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.explicit_qubit_orientation": {
+      "module": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann",
+      "name": "D5.S3.Quantum.Information.GroupInvariantPsi.C129QubitBargmann.explicit_qubit_orientation",
+      "kind": "theorem",
+      "statement_id": "sha256:9d24508d35d99b17cb22cc6d691a82d92563c7ffe6fb259bff0b1d3714941555",
+      "line": 62,
+      "signature": "theorem explicit_qubit_orientation : tripleBargmann ![(0 : ℝ), 0, 1] ![1, 0, 0] ![0, 1, 0] = (1 + Complex.I) / 4 ∧ tripleBargmann ![(0 : ℝ), 0, 1] ![1, 0, 0] ![0, -1, 0] = (1 - Complex.I) / 4",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch": {
+      "module": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann",
+      "name": "D5.S3.Quantum.Information.GroupInvariantPsi.C129QubitBargmann.triple_bargmann_bloch",
+      "kind": "theorem",
+      "statement_id": "sha256:9d24508d35d99b17cb22cc6d691a82d92563c7ffe6fb259bff0b1d3714941555",
+      "line": 52,
+      "signature": "theorem triple_bargmann_bloch (r₁ r₂ r₃ : Fin 3 → ℝ) : tripleBargmann r₁ r₂ r₃ = (((1 + r₁ ⬝ᵥ r₂ + r₂ ⬝ᵥ r₃ + r₃ ⬝ᵥ r₁ : ℝ) : ℂ) / 4) + (((r₁ ⬝ᵥ (r₂ ⨯₃ r₃) : ℝ) : ℂ) * Complex.I / 4)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

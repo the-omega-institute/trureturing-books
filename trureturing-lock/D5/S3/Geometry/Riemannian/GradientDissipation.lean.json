@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Geometry/Riemannian/GradientDissipation",
+  "declarations": {
+    "D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation": {
+      "module": "D5/S3/Geometry/Riemannian/GradientDissipation",
+      "name": "Original172.S2_dissipation",
+      "kind": "theorem",
+      "statement_id": "sha256:d2d84f9aaaba9680028befa6be5b742d24165cea34dd02b325e023472e121c5e",
+      "line": 157,
+      "signature": "theorem S2_dissipation {T : ℝ} (hT : 0 < T) (V : M → ℝ) (x : ℝ → M) (hV : ContMDiff 𝕀 IR 1 V) (hx : ContMDiffOn IR 𝕀 1 x (Icc (0 : ℝ) T)) (hflow : ∀ t ∈ Icc (0 : ℝ) T, mfderivWithin IR 𝕀 x (Icc (0 : ℝ) T) t 1 = -actualGradient V (x t)) : IntervalIntegrable (fun t => ‖mfderiv IR 𝕀 x t 1‖) volume 0 T ∧ IntervalIntegrable (fun t => ‖mfderiv IR 𝕀 x t 1‖ ^ 2) volume 0 T ∧ V (x 0) - V (x T) = ∫ t in (0 : ℝ)..T, ‖mfderiv IR 𝕀 x t 1‖ ^ 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

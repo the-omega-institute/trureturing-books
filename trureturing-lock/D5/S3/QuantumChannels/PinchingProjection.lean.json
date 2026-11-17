@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumChannels/PinchingProjection",
+  "declarations": {
+    "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass": {
+      "module": "D5/S3/QuantumChannels/PinchingProjection",
+      "name": "D5.S3.QuantumChannels.PinchingProjection.pinching_discarded_coherence_mass",
+      "kind": "theorem",
+      "statement_id": "sha256:89589cffec4065508d46b324a472f9464b0c1bf461d0ce87567073df22ff6147",
+      "line": 104,
+      "signature": "theorem pinching_discarded_coherence_mass (rho : QubitMatrix) : hilbertSchmidtInner (rho - pinching rho) (rho - pinching rho) = Complex.normSq (rho 0 1) + Complex.normSq (rho 1 0)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal": {
+      "module": "D5/S3/QuantumChannels/PinchingProjection",
+      "name": "D5.S3.QuantumChannels.PinchingProjection.pinching_hilbert_schmidt_orthogonal",
+      "kind": "theorem",
+      "statement_id": "sha256:89589cffec4065508d46b324a472f9464b0c1bf461d0ce87567073df22ff6147",
+      "line": 48,
+      "signature": "theorem pinching_hilbert_schmidt_orthogonal (rho : QubitMatrix) : hilbertSchmidtInner (pinching rho) (rho - pinching rho) = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean": {
+      "module": "D5/S3/QuantumChannels/PinchingProjection",
+      "name": "D5.S3.QuantumChannels.PinchingProjection.pinching_hilbert_schmidt_pythagorean",
+      "kind": "theorem",
+      "statement_id": "sha256:89589cffec4065508d46b324a472f9464b0c1bf461d0ce87567073df22ff6147",
+      "line": 68,
+      "signature": "theorem pinching_hilbert_schmidt_pythagorean (rho : QubitMatrix) : hilbertSchmidtInner rho rho = hilbertSchmidtInner (pinching rho) (pinching rho) + hilbertSchmidtInner (rho - pinching rho) (rho - pinching rho)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

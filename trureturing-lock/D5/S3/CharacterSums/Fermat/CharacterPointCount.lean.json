@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/CharacterSums/Fermat/CharacterPointCount",
+  "declarations": {
+    "D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum": {
+      "module": "D5/S3/CharacterSums/Fermat/CharacterPointCount",
+      "name": "D5.S3.CharacterSums.Fermat.CharacterPointCount.norm_jacobiSum",
+      "kind": "theorem",
+      "statement_id": "sha256:06adbb3f4d3939fb35410fe6889c079d1e4cccc07d7e50ba905727637b633ea3",
+      "line": 533,
+      "signature": "lemma norm_jacobiSum {χ ψ : MulChar F ℂ} (hχ : χ ≠ 1) (hψ : ψ ≠ 1) (hχψ : χ * ψ ≠ 1) : ‖jacobiSum χ ψ‖ = Real.sqrt (Fintype.card F)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum": {
+      "module": "D5/S3/CharacterSums/Fermat/CharacterPointCount",
+      "name": "D5.S3.CharacterSums.Fermat.CharacterPointCount.power_fiber_card_eq_one_add_character_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:06adbb3f4d3939fb35410fe6889c079d1e4cccc07d7e50ba905727637b633ea3",
+      "line": 197,
+      "signature": "theorem power_fiber_card_eq_one_add_character_sum (χ : MulChar F ℂ) {d : ℕ} (hd : 0 < d) (hχ : orderOf χ = d) (a : F) : (Nat.card {x : F // x ^ d = a} : ℂ) = 1 + ∑ i ∈ Ico 1 d, (χ ^ i) a",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

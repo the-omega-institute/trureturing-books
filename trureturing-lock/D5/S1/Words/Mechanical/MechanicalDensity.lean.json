@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Words/Mechanical/MechanicalDensity",
+  "declarations": {
+    "D5/S1/Words/Mechanical/MechanicalDensity.lower_mechanical_window_true_discrepancy": {
+      "module": "D5/S1/Words/Mechanical/MechanicalDensity",
+      "name": "D5.S1.Words.Mechanical.lower_mechanical_window_true_discrepancy",
+      "kind": "theorem",
+      "statement_id": "sha256:5f86eb22102404e38bdfe57553697febce5a56282498efc3673d6adf9a3784fb",
+      "line": 13,
+      "signature": "theorem lower_mechanical_window_true_discrepancy {alpha rho : Real} (halpha0 : 0 ≤ alpha) (halpha1 : alpha < 1) (i n : Nat) : |(lowerMechanicalWindowTrueCount alpha rho i n : Real) - (n : Real) * alpha| < 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

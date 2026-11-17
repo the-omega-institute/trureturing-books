@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization",
+  "declarations": {
+    "D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization.failure_count_le": {
+      "module": "D5/S3/FiniteGroups/Cyclic/HalfOrderSynchronization",
+      "name": "HalfOrderSynchronization.failure_count_le",
+      "kind": "theorem",
+      "statement_id": "sha256:1ea12a9a57ee5317d74919c7bb39deb24c09e4c4fb901a919fd593a37f9b335c",
+      "line": 139,
+      "signature": "theorem failure_count_le {I : Type*} [Fintype I] [Nonempty I] {G : I → Type*} [∀ i, Group (G i)] [∀ i, Fintype (G i)] [∀ i, IsCyclic (G i)] (epsilon : ∀ i, G i) (he : ∀ i, orderOf (epsilon i) = 2) : Nat.card {x : ∀ i, G i // ¬ (Even (orderOf x) ∧ x ^ (orderOf x / 2) ≠ epsilon)} * 2 ^ (Fintype.card I - 1) ≤ Nat.card (∀ i, G i)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

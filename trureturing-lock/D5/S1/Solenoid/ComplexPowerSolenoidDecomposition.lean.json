@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition",
+  "declarations": {
+    "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmicCharge_eq_zero_iff": {
+      "module": "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition",
+      "name": "D5.S1.Solenoid.ComplexPowerSolenoidDecomposition.logarithmicCharge_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:6c65730e898dfecaf1713b801e9071c7d8bb4550c73083a266c87b4e84c5ccbd",
+      "line": 205,
+      "signature": "theorem logarithmicCharge_eq_zero_iff (z : ComplexPowerThread) : logarithmicCharge z = 0 ↔ ∀ m, ‖z.coord m‖ = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmic_charge_conservation": {
+      "module": "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition",
+      "name": "D5.S1.Solenoid.ComplexPowerSolenoidDecomposition.logarithmic_charge_conservation",
+      "kind": "theorem",
+      "statement_id": "sha256:6c65730e898dfecaf1713b801e9071c7d8bb4550c73083a266c87b4e84c5ccbd",
+      "line": 75,
+      "signature": "theorem logarithmic_charge_conservation (z : ComplexPowerThread) (m : ℕ+) : (m.1 : ℝ) * Real.log ‖z.coord m‖ = logarithmicCharge z",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

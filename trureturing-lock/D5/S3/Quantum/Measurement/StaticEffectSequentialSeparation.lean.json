@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Measurement/StaticEffectSequentialSeparation",
+  "declarations": {
+    "D5/S3/Quantum/Measurement/StaticEffectSequentialSeparation.same_effects_different_two_step_joint_law": {
+      "module": "D5/S3/Quantum/Measurement/StaticEffectSequentialSeparation",
+      "name": "D5.S3.Quantum.Measurement.StaticEffectSequentialSeparation.same_effects_different_two_step_joint_law",
+      "kind": "theorem",
+      "statement_id": "sha256:3ea176c7c539c1e2ba0a610a37be2dd411f4c5974ac43ab4823a57398a267066",
+      "line": 40,
+      "signature": "theorem same_effects_different_two_step_joint_law : let projectiveKraus : Bool -> QubitMatrix",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

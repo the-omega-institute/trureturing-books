@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/CovariantCommutator",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula": {
+      "module": "D5/S3/Quantum/Algebra/CovariantCommutator",
+      "name": "D5.S3.Quantum.Algebra.CovariantCommutator.covariant_commutator_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:5a2e3c26e6dab3585f60cc6ab0209200ba39d5ba0815c6004a74f5c04e2364f6",
+      "line": 32,
+      "signature": "theorem covariant_commutator_formula {B : Type*} [Ring B] {U f translated : B} (hcov : SemiconjBy U f translated) : U * f - f * U = (translated - f) * U",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

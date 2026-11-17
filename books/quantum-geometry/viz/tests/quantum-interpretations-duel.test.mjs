@@ -1,3 +1,4 @@
+import { loadLock } from '../../../../tools/node/slides-lib.mjs';
 // Independent regression checks for the sealed lab, its six cards and five interpretation lenses.
 import { readFileSync } from 'node:fs';
 import { session, stageFirstChecks, settle, until, routeLocalFonts } from '../../../../tools/node/viz-testkit.mjs';
@@ -149,7 +150,7 @@ try {
   await stageFirstChecks(T, 'quantum-geometry', 'quantum-interpretations-duel');
   const html = readFileSync(new URL('../quantum-interpretations-duel/index.html', import.meta.url), 'utf8');
   const gids = [...html.matchAll(/data-lean-gid="([^"]+)"/g)].map((m) => m[1]);
-  const lock = JSON.parse(readFileSync(new URL('../../../../trureturing.lock.json', import.meta.url), 'utf8'));
+  const lock = loadLock();
   check('all 20 distinct cited declarations are locked as theorems', new Set(gids).size === 20 && gids.every((gid) => lock.declarations[gid]?.kind === 'theorem'));
   check('independent 4×4 CHSH expectation is 2√2', near(CHSH, 2 * Math.SQRT2));
   let classicalMax = 0;

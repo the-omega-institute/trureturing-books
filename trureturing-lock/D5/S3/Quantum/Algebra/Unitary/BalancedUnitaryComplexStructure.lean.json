@@ -1,0 +1,87 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure",
+      "kind": "def",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 24,
+      "signature": "def relativeComplexStructure {n : Type*} [Fintype n] (A B : Matrix n n ℂ) : Matrix n n ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_conjTranspose_mul": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure_conjTranspose_mul",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 60,
+      "signature": "theorem relativeComplexStructure_conjTranspose_mul {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hA : Aᴴ * A = halfIdentity) (hB : B * Bᴴ = halfIdentity) : (relativeComplexStructure A B)ᴴ * relativeComplexStructure A B = (1 : Matrix n n ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_is_skewAdjoint": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure_is_skewAdjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 30,
+      "signature": "theorem relativeComplexStructure_is_skewAdjoint {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) : (relativeComplexStructure A B)ᴴ = -(relativeComplexStructure A B)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_mul_conjTranspose": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure_mul_conjTranspose",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 44,
+      "signature": "theorem relativeComplexStructure_mul_conjTranspose {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hA : A * Aᴴ = halfIdentity) (hB : Bᴴ * B = halfIdentity) : relativeComplexStructure A B * (relativeComplexStructure A B)ᴴ = (1 : Matrix n n ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure_square",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 90,
+      "signature": "theorem relativeComplexStructure_square {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) (hA : A * Aᴴ = halfIdentity) (hB : Bᴴ * B = halfIdentity) : relativeComplexStructure A B * relativeComplexStructure A B = -(1 : Matrix n n ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeInvolution",
+      "kind": "def",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 105,
+      "signature": "def relativeInvolution {n : Type*} [Fintype n] (A B : Matrix n n ℂ) : Matrix n n ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution_isHermitian": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeInvolution_isHermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 111,
+      "signature": "theorem relativeInvolution_isHermitian {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) : (relativeInvolution A B)ᴴ = relativeInvolution A B",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution_square": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeInvolution_square",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 122,
+      "signature": "theorem relativeInvolution_square {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) (hA : A * Aᴴ = halfIdentity) (hB : Bᴴ * B = halfIdentity) : relativeInvolution A B * relativeInvolution A B = (1 : Matrix n n ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 75,
+      "signature": "theorem square_eq_neg_one_of_skewAdjoint_unitary {n : Type*} [Fintype n] [DecidableEq n] (R : Matrix n n ℂ) (hSkew : Rᴴ = -R) (hUnitary : R * Rᴴ = (1 : Matrix n n ℂ)) : R * R = -(1 : Matrix n n ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/Robin/OffLinePeak/OriginalLocalA",
+  "declarations": {
+    "D5/S3/Arith/Robin/OffLinePeak/OriginalLocalA.original_zero_robin5040_localA": {
+      "module": "D5/S3/Arith/Robin/OffLinePeak/OriginalLocalA",
+      "name": "D5.S3.Arith.Robin.OriginalLocalA.original_zero_robin5040_localA",
+      "kind": "theorem",
+      "statement_id": "sha256:6b21dd90aa68cee90a709c7eba7b7d09bd798393ca925c5f514a008b6881f94b",
+      "line": 155,
+      "signature": "theorem original_zero_robin5040_localA (ρ : ℂ) (hρ : IsNontrivialZero ρ) (hβ : 1 / 2 < ρ.re) (hγ : 0 < ρ.im) : let δ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

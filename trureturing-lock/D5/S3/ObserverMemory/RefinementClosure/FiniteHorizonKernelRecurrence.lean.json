@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ObserverMemory/RefinementClosure/FiniteHorizonKernelRecurrence",
+  "declarations": {
+    "D5/S3/ObserverMemory/RefinementClosure/FiniteHorizonKernelRecurrence.finite_horizon_stabilizes_at_completionDepth": {
+      "module": "D5/S3/ObserverMemory/RefinementClosure/FiniteHorizonKernelRecurrence",
+      "name": "D5.S3.ObserverMemory.RefinementClosure.FiniteHorizonKernelRecurrence.finite_horizon_stabilizes_at_completionDepth",
+      "kind": "theorem",
+      "statement_id": "sha256:7fe54be78f1d82a5b5d6169cea48e8626f0a26901386548ca24d5b9fb5e12dea",
+      "line": 100,
+      "signature": "theorem finite_horizon_stabilizes_at_completionDepth {Y : Type u} {O : Type v} [Fintype Y] (tau : Y -> Y) (q : Y -> O) : finiteHorizonKernel tau q (completionDepth tau q) = Setoid.ker (completeItinerary tau q)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

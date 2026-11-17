@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumBounds/LandauIdentity",
+  "declarations": {
+    "D5/S3/QuantumBounds/LandauIdentity.landau_identity": {
+      "module": "D5/S3/QuantumBounds/LandauIdentity",
+      "name": "D5.S3.QuantumBounds.LandauIdentity.landau_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:eb5456fead13460dedc7a9b323bfca88192a4b3902069dadc3e9184bdc7a74f7",
+      "line": 32,
+      "signature": "theorem landau_identity {m n : Type*} [Fintype m] [DecidableEq m] [Fintype n] [DecidableEq n] (A₀ A₁ : Matrix m m ℂ) (B₀ B₁ : Matrix n n ℂ) (hA₀ : A₀.IsHermitian ∧ A₀ ^ 2 = 1) (hA₁ : A₁.IsHermitian ∧ A₁ ^ 2 = 1) (hB₀ : B₀.IsHermitian ∧ B₀ ^ 2 = 1) (hB₁ : B₁.IsHermitian ∧ B₁ ^ 2 = 1) : let S",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

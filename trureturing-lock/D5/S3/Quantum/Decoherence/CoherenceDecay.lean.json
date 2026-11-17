@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Decoherence/CoherenceDecay",
+  "declarations": {
+    "D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero": {
+      "module": "D5/S3/Quantum/Decoherence/CoherenceDecay",
+      "name": "D5.S3.Quantum.Decoherence.CoherenceDecay.equal_superposition_coherence_tendsto_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:d2815c42813bded56d08f92a8e4e0e3a427740840e3f9cbf6e6586bb61ddd4ff",
+      "line": 17,
+      "signature": "theorem equal_superposition_coherence_tendsto_zero (c : DampingCoefficient) (hCoefficient : (c : Real) < 1) : Tendsto (fun N : Nat => phaseDampingIterate c N equalSuperpositionDensity 0 1) atTop (nhds 0)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

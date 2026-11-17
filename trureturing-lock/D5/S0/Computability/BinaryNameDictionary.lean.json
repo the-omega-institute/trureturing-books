@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Computability/BinaryNameDictionary",
+  "declarations": {
+    "D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run": {
+      "module": "D5/S0/Computability/BinaryNameDictionary",
+      "name": "PredictiveThermodynamic.BinaryNames.dictionary_lookup_run",
+      "kind": "theorem",
+      "statement_id": "sha256:6094fd21bb806d0d4c36fcecdb70e44424ec7a92cfd72467b27c4563927fd67e",
+      "line": 135,
+      "signature": "theorem dictionary_lookup_run (query : List Bool) (names : List Conventional.Name) (frame : List Bool) : Nonempty (EvalsToInTime dictionaryMachine.step (lookupCfg .start query [] [] [] frame (dictionaryStream names) [] []) (some (dictionaryCfg none ⟨⟨none, none, true⟩, none, false⟩ (compareStacks query [] [] [] [] frame) (dictionaryStream names) [] (decide (query ∈ names) :: List.replicate (names.idxOf query) true))) ((2 * query.length + 12) * names.length + 4 * (dictionaryStream names).length + 3))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

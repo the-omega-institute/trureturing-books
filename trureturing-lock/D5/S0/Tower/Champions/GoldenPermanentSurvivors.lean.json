@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Tower/Champions/GoldenPermanentSurvivors",
+  "declarations": {
+    "D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_known_closed_preperiodic_carrier_subset": {
+      "module": "D5/S0/Tower/Champions/GoldenPermanentSurvivors",
+      "name": "D5.S0.Tower.Champions.GoldenPermanentSurvivors.golden_known_closed_preperiodic_carrier_subset",
+      "kind": "theorem",
+      "statement_id": "sha256:fb6984d789aa176bb1229a8c745ddfe2af2e57f9b2983163b759a53a3a52e2ea",
+      "line": 116,
+      "signature": "theorem golden_known_closed_preperiodic_carrier_subset : {state | IsGoldenKnownClosedPreperiodicState state} ⊆ goldenClosedPermanentSet",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_strict_permanent_set_eq_empty": {
+      "module": "D5/S0/Tower/Champions/GoldenPermanentSurvivors",
+      "name": "D5.S0.Tower.Champions.GoldenPermanentSurvivors.golden_strict_permanent_set_eq_empty",
+      "kind": "theorem",
+      "statement_id": "sha256:fb6984d789aa176bb1229a8c745ddfe2af2e57f9b2983163b759a53a3a52e2ea",
+      "line": 47,
+      "signature": "theorem golden_strict_permanent_set_eq_empty : goldenStrictPermanentSet = ∅",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

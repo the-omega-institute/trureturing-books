@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair",
+  "declarations": {
+    "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness": {
+      "module": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair",
+      "name": "D5.S3.Fourier.CharacterSelection.SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness",
+      "kind": "theorem",
+      "statement_id": "sha256:987b3a8cb84758489dbe373ffb11943a4033e51514ff5f32f747a1c3bc25a0cd",
+      "line": 46,
+      "signature": "theorem tetra_defects_incidence_repair_and_exactness {V : Type u} {A : Type v} [Fintype V] [Nonempty V] [AddCommGroup A] (F : V → V → V → A) : (∑ r : V, faceErrors F r) = tetraDefects F ∧ (∃ r : V, Fintype.card V * faceErrors F r ≤ tetraDefects F) ∧ (∀ edge : V → V → A, tetraDefects F ≤ 4 * Fintype.card V * edgeErrors F edge) ∧ ((∀ r i j k, F i j k - F r j k + F r i k - F r i j = 0) ↔ ∃ edge : V → V → A, ∀ i j k, F i j k = edge j k - edge i k + edge i j)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

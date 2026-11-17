@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Combinatorics/Partitions/ColouredEulerLedger",
+  "declarations": {
+    "D5/S3/Combinatorics/Partitions/ColouredEulerLedger.coloured_coefficient": {
+      "module": "D5/S3/Combinatorics/Partitions/ColouredEulerLedger",
+      "name": "D5.S3.Combinatorics.Partitions.ColouredEulerLedger.coloured_coefficient",
+      "kind": "theorem",
+      "statement_id": "sha256:c093d56982a51511137fbec5256046afbce4527120d49576e99425b789d5a110",
+      "line": 73,
+      "signature": "theorem coloured_coefficient (colors : ℕ → ℕ) (n : ℕ) : coeff n (eulerSeries (fun i => (colors (i + 1) : ℤ))) = (Nat.card (ColouredPartition colors n) : ℤ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

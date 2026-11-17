@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Routing/HannSpatialQram",
+  "declarations": {
+    "D5/S3/Quantum/Routing/HannSpatialQram.correctness": {
+      "module": "D5/S3/Quantum/Routing/HannSpatialQram",
+      "name": "D5.S3.Quantum.Routing.HannSpatialQram.correctness",
+      "kind": "theorem",
+      "statement_id": "sha256:535492acd5585141a50f634a6c31134a749d52d58728b88ab5396e4185c507a3",
+      "line": 303,
+      "signature": "theorem correctness : (∀ (n : ℕ) (a : Address n) (b : Qutrit) (k : ℕ), k ≤ n → load n k (loading n a b 0) = loading n a b k) ∧ (∀ (n : ℕ) (a : Address n) (p : Qutrit), transport n (input n (programmed n a n) p) = arrived n a p ∧ ∀ i : Address n, leaf n (transport n (input n (programmed n a n) p)) i = if i = a then p else wait) ∧ (∀ (n : ℕ) (D : Address n → Bool) (a : Address n) (b : Bool), query n D (clean n a b) = clean n a (xor b (D a))) ∧ (∀ (n : ℕ) (D : Address n → Bool), (queryMatrix n D)ᴴ * queryMatrix n D = 1 ∧ queryMatrix n D * (queryMatrix n D)ᴴ = 1 ∧ ∀ ψ : Address n × Bool → ℂ, query",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

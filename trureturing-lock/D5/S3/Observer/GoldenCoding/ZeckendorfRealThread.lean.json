@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/GoldenCoding/ZeckendorfRealThread",
+  "declarations": {
+    "D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective": {
+      "module": "D5/S3/Observer/GoldenCoding/ZeckendorfRealThread",
+      "name": "D5.S3.Observer.GoldenCoding.ZeckendorfRealThread.zeckendorf_real_thread_injective",
+      "kind": "theorem",
+      "statement_id": "sha256:87b5091d203eefbccc2aa6cb991527f1196fa514d04fe5915e105009a6f7ed85",
+      "line": 42,
+      "signature": "theorem zeckendorf_real_thread_injective : Function.Injective zeckendorfRealThread",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/ZetaBridge/RealAxisNonvanishing",
+  "declarations": {
+    "D5/S3/Weil/ZetaBridge/RealAxisNonvanishing.riemannZeta_real_zero_outside_Ioo": {
+      "module": "D5/S3/Weil/ZetaBridge/RealAxisNonvanishing",
+      "name": "D5.S3.Weil.ZetaBridge.RealAxisNonvanishing.riemannZeta_real_zero_outside_Ioo",
+      "kind": "theorem",
+      "statement_id": "sha256:540e7b3f3efe8e7e13fe6d56c6c978ad090482a687c59d60d0b357071a52a2c8",
+      "line": 25,
+      "signature": "theorem riemannZeta_real_zero_outside_Ioo (x : ℝ) (hout : ¬ (0 < x ∧ x < 1)) (hz : riemannZeta (x : ℂ) = 0) : ∃ n : ℕ, x = -2 * (n + 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

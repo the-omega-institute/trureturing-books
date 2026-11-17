@@ -1,0 +1,51 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+  "declarations": {
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.candidates": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+      "name": "QuantumShorContinuedFractions.candidates",
+      "kind": "def",
+      "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
+      "line": 87,
+      "signature": "def candidates (y Q N : ℕ) : List ℚ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.convergents": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+      "name": "QuantumShorContinuedFractions.convergents",
+      "kind": "def",
+      "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
+      "line": 37,
+      "signature": "def convergents (x : ℚ) : List ℚ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.mem_convergents_iff": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+      "name": "QuantumShorContinuedFractions.mem_convergents_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
+      "line": 67,
+      "signature": "theorem mem_convergents_iff (x z : ℚ) : z ∈ convergents x ↔ ∃ k, Real.convergent (x : ℝ) k = z",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+      "name": "QuantumShorContinuedFractions.reduced",
+      "kind": "def",
+      "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
+      "line": 91,
+      "signature": "def reduced (s r : ℕ) : ℚ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den": {
+      "module": "D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents",
+      "name": "QuantumShorContinuedFractions.reduced_den",
+      "kind": "theorem",
+      "statement_id": "sha256:7db5d6c02eefbe475c837c7fb8b344784be3e5d83f1abafc6171e2e1e7dd1c6a",
+      "line": 93,
+      "signature": "theorem reduced_den (s r : ℕ) (hr : 0 < r) : (reduced s r).den = r / Nat.gcd s r",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

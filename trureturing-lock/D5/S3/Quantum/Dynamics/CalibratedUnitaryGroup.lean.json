@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup",
+  "declarations": {
+    "D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group": {
+      "module": "D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup",
+      "name": "D5.S3.Quantum.Dynamics.CalibratedUnitaryGroup.calibrated_group",
+      "kind": "theorem",
+      "statement_id": "sha256:5e4a013e1c1828b7b50300bc5357ff8f05c4146010c5e17e1a3043f26b90576a",
+      "line": 23,
+      "signature": "theorem calibrated_group {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H] (U : ℝ → H →L[ℂ] H) (G : H →L[ℂ] H) (hzero : U 0 = 1) (hgroup : ∀ s t, U (s + t) = U s * U t) (hunit : ∀ t, star (U t) * U t = 1) (hderiv : HasDerivAt U G 0) (ℏ : ℝ) (hℏ : ℏ ≠ 0) : let Hamiltonian",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

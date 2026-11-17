@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/DivergenceSupport/LandauerSaturation",
+  "declarations": {
+    "D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff": {
+      "module": "D5/S3/DivergenceSupport/LandauerSaturation",
+      "name": "D5.S3.DivergenceSupport.LandauerSaturation.landauer_saturation_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:21cfbcef33510168535c20f012b8dedf1af2c2703064bedec1e4717ddfffc433",
+      "line": 60,
+      "signature": "theorem landauer_saturation_iff (beta heat entropyChange mutualInfo divergence : Real) (hbalance : beta * heat = -entropyChange + mutualInfo + divergence) (hmutualInfo : 0 <= mutualInfo) (hdivergence : 0 <= divergence) : -entropyChange = beta * heat ↔ mutualInfo = 0 ∧ divergence = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/DivergenceSupport/LandauerSaturation.landauer_strict_iff": {
+      "module": "D5/S3/DivergenceSupport/LandauerSaturation",
+      "name": "D5.S3.DivergenceSupport.LandauerSaturation.landauer_strict_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:21cfbcef33510168535c20f012b8dedf1af2c2703064bedec1e4717ddfffc433",
+      "line": 73,
+      "signature": "theorem landauer_strict_iff (beta heat entropyChange mutualInfo divergence : Real) (hbalance : beta * heat = -entropyChange + mutualInfo + divergence) (hmutualInfo : 0 <= mutualInfo) (hdivergence : 0 <= divergence) : -entropyChange < beta * heat ↔ 0 < mutualInfo + divergence",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

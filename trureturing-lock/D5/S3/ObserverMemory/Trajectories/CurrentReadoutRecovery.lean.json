@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ObserverMemory/Trajectories/CurrentReadoutRecovery",
+  "declarations": {
+    "D5/S3/ObserverMemory/Trajectories/CurrentReadoutRecovery.recover_current_readout": {
+      "module": "D5/S3/ObserverMemory/Trajectories/CurrentReadoutRecovery",
+      "name": "D5.S3.ObserverMemory.Trajectories.CurrentReadoutRecovery.recover_current_readout",
+      "kind": "theorem",
+      "statement_id": "sha256:df142707c3bb819813cd285c35dea2867e6367534d85c5116e2340887673336e",
+      "line": 35,
+      "signature": "theorem recover_current_readout {X B : Type*} (F : X -> X) (q : X -> B) : q = itineraryHead ∘ completeItinerary F q",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.CollisionFree": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.CollisionFree",
+      "kind": "def",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 27,
+      "signature": "def CollisionFree {N : ℕ} (z : Configuration N) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.angular_readout": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.angular_readout",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 339,
+      "signature": "theorem angular_readout {N : ℕ} (b Ω ρ : ℝ) {z : Configuration N} (hz : CollisionFree z) (hn : ∀ j : Fin N, z (.inl j) ^ 2 + z (.inr j) ^ 2 = ρ ^ 2) (j : Fin N) : z (.inl j) * field N b Ω z (.inr j) - z (.inr j) * field N b Ω z (.inl j) = charge N j * Ω * ρ ^ 2 + (b / 4) * ((∑ k : Fin N, charge N k) - charge N j)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.field",
+      "kind": "def",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 32,
+      "signature": "def field (N : ℕ) (b Ω : ℝ) (z : Configuration N) : Configuration N",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field_differentiable_at": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.field_differentiable_at",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 50,
+      "signature": "theorem field_differentiable_at {N : ℕ} (b Ω : ℝ) {z : Configuration N} (hz : CollisionFree z) : DifferentiableAt ℝ (field N b Ω) z",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field_scaling": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.field_scaling",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 159,
+      "signature": "theorem field_scaling (N : ℕ) {b Ω R : ℝ} (hR : R ≠ 0) (hb : b = 4 * Ω * R ^ 2) (w : Configuration N) (_hw : CollisionFree w) : field N b Ω (R • w) = (2 * Ω * R) • AlternatingPolygonSpectrum.field N w",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.jacobian_scaling": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.jacobian_scaling",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 176,
+      "signature": "theorem jacobian_scaling (N : ℕ) {b Ω R : ℝ} (hR : R ≠ 0) (hb : b = 4 * Ω * R ^ 2) : jacobian N b Ω (R • polygon N) = (2 * Ω) • AlternatingPolygonSpectrum.jacobian N",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.normalized_field": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.normalized_field",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 152,
+      "signature": "theorem normalized_field (N : ℕ) : field N 2 (1 / 2) = AlternatingPolygonSpectrum.field N",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.radius": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.radius",
+      "kind": "def",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 48,
+      "signature": "def radius (b Ω : ℝ) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.regular",
+      "kind": "def",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 235,
+      "signature": "def regular (N : ℕ) (ρ θ : ℝ) : Configuration N",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.regular_equilibrium_iff_radius",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 436,
+      "signature": "theorem regular_equilibrium_iff_radius {N : ℕ} (hN : 3 ≤ N) {b Ω ρ : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) (hρ : 0 < ρ) (θ : ℝ) : field N b Ω (regular N ρ θ) = 0 ↔ Even N ∧ ρ = radius b Ω",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.rotate": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.rotate",
+      "kind": "def",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 229,
+      "signature": "def rotate {N : ℕ} (θ : ℝ) (z : Configuration N) : Configuration N",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.scaled_equilibrium": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.scaled_equilibrium",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 215,
+      "signature": "theorem scaled_equilibrium (m : ℕ) (hm : 1 ≤ m) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : CollisionFree ((radius b Ω) • polygon (2 * m)) ∧ field (2 * m) b Ω ((radius b Ω) • polygon (2 * m)) = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras",
+  "declarations": {
+    "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras": {
+      "module": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras",
+      "name": "D5.S3.Quantum.Tomography.ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras",
+      "kind": "theorem",
+      "statement_id": "sha256:6cae4dbca64ca41bbf6386568b9390f248c98598383fe8e5b556b99db1e7548e",
+      "line": 33,
+      "signature": "theorem complementary_context_probability_pythagoras {d L E : Type*} [Fintype d] [Nonempty d] [Fintype L] [NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteSpace E] (rho : Matrix d d ℂ) (state : E) (probability : L -> d -> ℝ) (visible : Submodule ℝ E) [IsClosed (visible : Set E)] (hpurity : (Matrix.trace (rho * rho)).re - (Fintype.card d : ℝ)⁻¹ = ‖state‖ ^ 2) (hcoordinates : ‖visible.starProjection state‖ ^ 2 = ∑ l, ∑ j, (probability l j - (Fintype.card d : ℝ)⁻¹) ^ 2) : (Matrix.trace (rho * rho)).re - (Fintype.card d : ℝ)⁻¹ = (∑ l, ∑ j, (probability l j - (Fintype.card d : ℝ)⁻¹) ^ 2) + r",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.residualMass": {
+      "module": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras",
+      "name": "D5.S3.Quantum.Tomography.ComplementaryContextProbabilityPythagoras.residualMass",
+      "kind": "def",
+      "statement_id": "sha256:6cae4dbca64ca41bbf6386568b9390f248c98598383fe8e5b556b99db1e7548e",
+      "line": 26,
+      "signature": "def residualMass {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteSpace E] (visible : Submodule ℝ E) [IsClosed (visible : Set E)] (state : E) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

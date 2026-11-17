@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction",
+  "declarations": {
+    "D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction": {
+      "module": "D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction",
+      "name": "D5.S3.Quantum.Entanglement.KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:7407a37a5a89105030d45e60cd98481d2d689fe341e26ee23e7bc372806faebd",
+      "line": 34,
+      "signature": "theorem actual_encoder_spectral_obstruction (N k mX mY : ℕ) (hN : 2 ≤ N) (hk : 2 ≤ k) (_hmX : 1 ≤ mX) (_hmY : 1 ≤ mY) : let primeNumbers (N : ℕ) (b : Bool) : Finset (Fin (N + 1))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

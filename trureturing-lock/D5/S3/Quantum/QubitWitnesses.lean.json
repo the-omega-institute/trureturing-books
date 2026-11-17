@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/QubitWitnesses",
+  "declarations": {
+    "D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector": {
+      "module": "D5/S3/Quantum/QubitWitnesses",
+      "name": "D5.S3.Quantum.QubitWitnesses.pauli_observables_have_no_common_eigenvector",
+      "kind": "theorem",
+      "statement_id": "sha256:6ffbe3f05bf1773318869947f3016fda7edbe5a99e6b91bfd6f9236efa6db474",
+      "line": 18,
+      "signature": "theorem pauli_observables_have_no_common_eigenvector (psi : QubitState) (x z : ℂ) (hX : Matrix.mulVec qubitX psi = x • psi) (hZ : Matrix.mulVec qubitZ psi = z • psi) : psi = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply": {
+      "module": "D5/S3/Quantum/QubitWitnesses",
+      "name": "D5.S3.Quantum.QubitWitnesses.phaseDampingIterate_apply",
+      "kind": "theorem",
+      "statement_id": "sha256:6ffbe3f05bf1773318869947f3016fda7edbe5a99e6b91bfd6f9236efa6db474",
+      "line": 95,
+      "signature": "theorem phaseDampingIterate_apply (c : DampingCoefficient) (N : ℕ) (rho : QubitMatrix) (i j : Fin 2) : phaseDampingIterate c N rho i j = if i = j then rho i j else (((c : ℝ) : ℂ) ^ N * rho i j)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

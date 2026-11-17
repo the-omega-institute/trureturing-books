@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/Mertens/Cryptids/VonMangoldtCount/Foundation",
+  "declarations": {
+    "D5/S3/Weil/Mertens/Cryptids/VonMangoldtCount/Foundation.mem_criticalStrip_of_isNontrivialZetaZero": {
+      "module": "D5/S3/Weil/Mertens/Cryptids/VonMangoldtCount/Foundation",
+      "name": "ConjectureMachines.Semantics.Riemann.VonMangoldtCount.mem_criticalStrip_of_isNontrivialZetaZero",
+      "kind": "theorem",
+      "statement_id": "sha256:2e25be5f3d4f281c5e40346298a47aaaf2b592df231e08153ad153676d8f2213",
+      "line": 777,
+      "signature": "theorem mem_criticalStrip_of_isNontrivialZetaZero {s : ℂ} (hs : IsNontrivialZetaZero s) : 0 < s.re ∧ s.re < 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

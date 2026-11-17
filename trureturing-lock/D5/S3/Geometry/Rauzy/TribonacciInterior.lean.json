@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Geometry/Rauzy/TribonacciInterior",
+  "declarations": {
+    "D5/S3/Geometry/Rauzy/TribonacciInterior.rauzyFractal_interior_nonempty": {
+      "module": "D5/S3/Geometry/Rauzy/TribonacciInterior",
+      "name": "D5.S3.Geometry.Rauzy.TribonacciInterior.rauzyFractal_interior_nonempty",
+      "kind": "theorem",
+      "statement_id": "sha256:5bc65d912461bfe7e0d735b920f234ce4cae836bbee269ff75f705f4814dfc05",
+      "line": 253,
+      "signature": "theorem rauzyFractal_interior_nonempty {z : Complex} (hz : z ∈ Binet.tribonacciCharacteristicPolynomial.roots) (hz_ne : z ≠ (Values.tribonacciConstant : Complex)) : (interior (RauzyFractal.rauzyFractal z)).Nonempty",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

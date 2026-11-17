@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth",
+  "declarations": {
+    "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result": {
+      "module": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth",
+      "name": "D5.S3.Quantum.Dynamics.OpenIntegrableCircuitMinDepth.result",
+      "kind": "theorem",
+      "statement_id": "sha256:506538fadb7e769355523dcb17dd81c61ac7568f3887d3da683617ce1b58d8f1",
+      "line": 57,
+      "signature": "theorem result (N κ : ℕ) (hκ : 1 ≤ κ) (hN : 2 * κ ≤ N) : minDepth N κ = N / (κ + 1) + 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

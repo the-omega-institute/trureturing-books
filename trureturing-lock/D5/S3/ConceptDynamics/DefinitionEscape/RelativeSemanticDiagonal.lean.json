@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal",
+  "declarations": {
+    "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relativeSemanticDiagonal": {
+      "module": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal",
+      "name": "D5.S3.ConceptDynamics.DefinitionEscape.RelativeSemanticDiagonal.relativeSemanticDiagonal",
+      "kind": "def",
+      "statement_id": "sha256:957023a4124f6ab871743dc9586757c92c2b0b3ecaa419007d5a217b05742af4",
+      "line": 38,
+      "signature": "def relativeSemanticDiagonal {Address Coordinate Output : Type*} (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) : Concept Address Output",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode": {
+      "module": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal",
+      "name": "D5.S3.ConceptDynamics.DefinitionEscape.RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode",
+      "kind": "theorem",
+      "statement_id": "sha256:957023a4124f6ab871743dc9586757c92c2b0b3ecaa419007d5a217b05742af4",
+      "line": 48,
+      "signature": "theorem relative_semantic_diagonal_ne_listed_decode {Address Coordinate Output : Type*} (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (address : Address) : relativeSemanticDiagonal twist latent decoderCatalog ≠ decoderCatalog address ∘ latent",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective": {
+      "module": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal",
+      "name": "D5.S3.ConceptDynamics.DefinitionEscape.RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective",
+      "kind": "theorem",
+      "statement_id": "sha256:957023a4124f6ab871743dc9586757c92c2b0b3ecaa419007d5a217b05742af4",
+      "line": 79,
+      "signature": "theorem relative_semantic_diagonal_target_inadequate_of_surjective {Address Coordinate Output : Type*} (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : ¬TargetAdequate latent (relativeSemanticDiagonal twist latent decoderCatalog)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { loadLock } from '../../../../tools/node/slides-lib.mjs';
 // Browser suite for ORTHO//CELL (spherical-trihedron-cell): the quality gates every stage-first page passes, then the
 // page's own claims, each checked against an algorithm written here (Pauli matrices for the rotors, the spherical law of
 // cosines and Van Oosterom–Strackee for the angles, step-by-step projected transport for the holonomy), never against
@@ -35,7 +36,7 @@ for (const [f, text] of Object.entries(src)) {
 const leanAttrs = [...src['index.html'].matchAll(/data-lean-gid="([^"]+)"/g)].map((m) => m[1]);
 check('source: every data-lean-gid is one of the six locked theorems', leanAttrs.length > 0 && leanAttrs.every((g) => GIDS.includes(g)), leanAttrs.filter((g) => !GIDS.includes(g)).join(' | '));
 check('source: all six locked theorems are cited', GIDS.every((g) => leanAttrs.includes(g)), GIDS.filter((g) => !leanAttrs.includes(g)).join(' | '));
-const lock = JSON.parse(fs.readFileSync(path.join(DIR, '..', '..', '..', '..', 'trureturing.lock.json'), 'utf8'));
+const lock = loadLock();
 check('source: the six GIDs are theorems of trureturing.lock.json', GIDS.every((g) => lock.declarations[g] && lock.declarations[g].kind === 'theorem'), GIDS.filter((g) => !lock.declarations[g]).join(' | '));
 const cls = (name) => (src['index.html'].match(new RegExp(`class="(?:[^"]*\\s)?${name}(?:\\s[^"]*)?"`, 'g')) || []).length;
 check('source: every .zh fragment has its .en sibling (equal counts)', cls('zh') === cls('en') && cls('zh') > 20, `${cls('zh')} zh / ${cls('en')} en`);

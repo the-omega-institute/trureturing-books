@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Recovery/CoherentUniformAmplification",
+  "declarations": {
+    "D5/S3/Quantum/Recovery/CoherentUniformAmplification.exact_coherent_amplification": {
+      "module": "D5/S3/Quantum/Recovery/CoherentUniformAmplification",
+      "name": "D5.S3.Quantum.Recovery.CoherentUniformAmplification.exact_coherent_amplification",
+      "kind": "theorem",
+      "statement_id": "sha256:4273c5d9e26e93c622e954681930f21f2aba27b5a46c5ac627819877c67c972d",
+      "line": 520,
+      "signature": "theorem exact_coherent_amplification (J : Matrix l s ℂ) (C P : Matrix l l ℂ) (p : ℝ) (hJ : Jᴴ*J = 1) (hC : Cᴴ*C = 1) (hP : Pᴴ = P) (hPP : P*P = P) (hA : (P*(C*J))ᴴ*(P*(C*J)) = (p:ℂ) • (1 : Matrix s s ℂ)) (hp : 0 < p) (hp1 : p ≤ 1) : let n",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation": {
+      "module": "D5/S3/Quantum/Recovery/CoherentUniformAmplification",
+      "name": "D5.S3.Quantum.Recovery.CoherentUniformAmplification.uniform_operator_rotation",
+      "kind": "theorem",
+      "statement_id": "sha256:4273c5d9e26e93c622e954681930f21f2aba27b5a46c5ac627819877c67c972d",
+      "line": 214,
+      "signature": "theorem uniform_operator_rotation (J : Matrix l s ℂ) (C P : Matrix l l ℂ) (p : ℝ) (hJ : Jᴴ * J = 1) (hC : Cᴴ * C = 1) (hP : Pᴴ = P) (hPP : P * P = P) (hA : (P * (C * J))ᴴ * (P * (C * J)) = (p : ℂ) • (1 : Matrix s s ℂ)) (hp : 0 < p) (hple : p ≤ 1) : let U",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

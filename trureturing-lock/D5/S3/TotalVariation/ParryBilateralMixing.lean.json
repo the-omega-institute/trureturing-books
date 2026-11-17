@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/TotalVariation/ParryBilateralMixing",
+  "declarations": {
+    "D5/S3/TotalVariation/ParryBilateralMixing.bilateral_parry_mixing": {
+      "module": "D5/S3/TotalVariation/ParryBilateralMixing",
+      "name": "D5.S3.TotalVariation.ParryBilateralMixing.bilateral_parry_mixing",
+      "kind": "theorem",
+      "statement_id": "sha256:c7a68e742da1da9ceb97feb4fbd977277d191f8bd1213f4ba10556f825716293",
+      "line": 36,
+      "signature": "theorem bilateral_parry_mixing (k : ℕ) (hk : 2 ≤ k) : ∃ (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (ν : ProbabilityMeasure (ℤ → State k)), (∀ (b : Bool) (r : RelationPath k) (t : ℤ), ((e (b, r)).val t).1 = signAt b r.val t) ∧ (∀ (z : Bool × RelationPath k) (t : ℤ), let j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

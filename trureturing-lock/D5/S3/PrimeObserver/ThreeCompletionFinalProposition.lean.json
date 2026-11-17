@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/PrimeObserver/ThreeCompletionFinalProposition",
+  "declarations": {
+    "D5/S3/PrimeObserver/ThreeCompletionFinalProposition.prime_observer_three_completion_final_proposition": {
+      "module": "D5/S3/PrimeObserver/ThreeCompletionFinalProposition",
+      "name": "D5.S3.PrimeObserver.ThreeCompletionFinalProposition.prime_observer_three_completion_final_proposition",
+      "kind": "theorem",
+      "statement_id": "sha256:1038cc2679ff5b079be6f116fc7e197edfe47719d6b724af0b76b8be8d9cb106",
+      "line": 39,
+      "signature": "theorem prime_observer_three_completion_final_proposition (s : Real) : Function.Bijective primeExponentLanguageEquiv ∧ ((∃ q : PMF Nat, RealizesPrimeExponentLaw s q) ↔ 1 < s) ∧ (relativePhaseDensityWitness.1 ≠ relativePhaseDensityWitness.2 ∧ qubitPrimeDiagonalLanguage relativePhaseDensityWitness.1 = qubitPrimeDiagonalLanguage relativePhaseDensityWitness.2 ∧ qubitOperatorLanguage relativePhaseDensityWitness.1 ≠ qubitOperatorLanguage relativePhaseDensityWitness.2) ∧ (Refines qubitPrimeDiagonalLanguage qubitOperatorLanguage ∧ ¬Refines qubitOperatorLanguage qubitPrimeDiagonalLanguage)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

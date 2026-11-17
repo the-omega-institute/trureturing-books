@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/GronwallLowerEnvelope",
+  "declarations": {
+    "D5/S3/Weil/GronwallLowerEnvelope.gronwall_envelopes": {
+      "module": "D5/S3/Weil/GronwallLowerEnvelope",
+      "name": "D5.S3.Weil.GronwallLowerEnvelope.gronwall_envelopes",
+      "kind": "theorem",
+      "statement_id": "sha256:c60de55af3115013bec6914e8646e38d066c81c25fded53f1dc362ec12766da0",
+      "line": 234,
+      "signature": "theorem gronwall_envelopes (ε : ℝ) (hε : 0 < ε) : (∃ N : ℕ, ∀ n : ℕ, N ≤ n → (ArithmeticFunction.sigma 1 n : ℝ) / (Real.exp Real.eulerMascheroniConstant * n * Real.log (Real.log n)) ≤ 1 + ε) ∧ (∀ N : ℕ, ∃ n : ℕ, N ≤ n ∧ 1 - ε ≤ (ArithmeticFunction.sigma 1 n : ℝ) / (Real.exp Real.eulerMascheroniConstant * n * Real.log (Real.log n)))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

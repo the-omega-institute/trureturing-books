@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Fourier/MildPathRegularity",
+  "declarations": {
+    "D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path": {
+      "module": "D5/S3/FluidDynamics/Fourier/MildPathRegularity",
+      "name": "D5.S3.FluidDynamics.Fourier.MildPathRegularity.all_grade_regularity_of_mild_path",
+      "kind": "theorem",
+      "statement_id": "sha256:be3ee4050a42f97653ece80b4b7dc35917a7fba013f30e298d5314c8652ef867",
+      "line": 28,
+      "signature": "theorem all_grade_regularity_of_mild_path : (∀ (ν τ : ℝ), 0 < ν → 0 < τ → let K",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Measurements/RelevantSpaceQuantumKac",
+  "declarations": {
+    "D5/S3/Quantum/Measurements/RelevantSpaceQuantumKac.pure_vector_quantum_kac": {
+      "module": "D5/S3/Quantum/Measurements/RelevantSpaceQuantumKac",
+      "name": "D5.S3.Quantum.Measurements.RelevantSpaceQuantumKac.pure_vector_quantum_kac",
+      "kind": "theorem",
+      "statement_id": "sha256:a47c14b8b5a9003995c237f9b15762deda525b0042f34134eb01b767f8f54493",
+      "line": 461,
+      "signature": "theorem pure_vector_quantum_kac (L : α → H →L[ℂ] H) (v : H) (hv : ‖v‖ = 1) (hTP : ∑ a, (L a).adjoint * L a = 1) (hunital : let C",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumChannels/AmplitudeDampingContraction",
+  "declarations": {
+    "D5/S3/QuantumChannels/AmplitudeDampingContraction.HasPureBoundaryEndpoint": {
+      "module": "D5/S3/QuantumChannels/AmplitudeDampingContraction",
+      "name": "D5.S3.QuantumChannels.AmplitudeDampingContraction.HasPureBoundaryEndpoint",
+      "kind": "def",
+      "statement_id": "sha256:befffbfe17801011efad4da06b5c4f56b57ccd93108b854f3d8c69300b1f7e07",
+      "line": 31,
+      "signature": "def HasPureBoundaryEndpoint (ratio : ℝ → ℝ) (bound : ℝ) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumChannels/AmplitudeDampingContraction.amplitude_damping_sld_rld_endpoints": {
+      "module": "D5/S3/QuantumChannels/AmplitudeDampingContraction",
+      "name": "D5.S3.QuantumChannels.AmplitudeDampingContraction.amplitude_damping_sld_rld_endpoints",
+      "kind": "theorem",
+      "statement_id": "sha256:befffbfe17801011efad4da06b5c4f56b57ccd93108b854f3d8c69300b1f7e07",
+      "line": 62,
+      "signature": "theorem amplitude_damping_sld_rld_endpoints (gamma : ℝ) (hgamma0 : 0 ≤ gamma) (hgamma1 : gamma < 1) : (∀ u : ℝ, coherenceRatio sldRadialProfile gamma u = 1 - gamma) ∧ HasPureBoundaryEndpoint (coherenceRatio rldRadialProfile gamma) 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumChannels/AmplitudeDampingContraction.coherenceRatio": {
+      "module": "D5/S3/QuantumChannels/AmplitudeDampingContraction",
+      "name": "D5.S3.QuantumChannels.AmplitudeDampingContraction.coherenceRatio",
+      "kind": "def",
+      "statement_id": "sha256:befffbfe17801011efad4da06b5c4f56b57ccd93108b854f3d8c69300b1f7e07",
+      "line": 26,
+      "signature": "noncomputable def coherenceRatio (profile : ℝ → ℝ) (gamma u : ℝ) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis": {
+      "module": "D5/S3/QuantumChannels/AmplitudeDampingContraction",
+      "name": "D5.S3.QuantumChannels.AmplitudeDampingContraction.dampedAxis",
+      "kind": "def",
+      "statement_id": "sha256:befffbfe17801011efad4da06b5c4f56b57ccd93108b854f3d8c69300b1f7e07",
+      "line": 13,
+      "signature": "def dampedAxis (gamma u : ℝ) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+  "declarations": {
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.NiceOdd": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.NiceOdd",
+      "kind": "def",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 122,
+      "signature": "def NiceOdd (epsilon : G.Dart → ZMod 2) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.Reverses": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.Reverses",
+      "kind": "def",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 110,
+      "signature": "def Reverses (epsilon : G.Dart → ZMod 2) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_flip": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.alternating_cycle_flip",
+      "kind": "theorem",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 237,
+      "signature": "theorem alternating_cycle_flip {M : G.Subgraph} (hM : M.IsPerfectMatching) {v : V} {p : G.Walk v v} (hp : p.IsCycle) (ha : p.toSubgraph.spanningCoe.IsAlternating M.spanningCoe) : Even p.length ∧ (∃ N : G.Subgraph, N.IsPerfectMatching ∧ (∀ x y, N.Adj x y ↔ (M.Adj x y ∧ ¬ p.toSubgraph.Adj x y) ∨ (p.toSubgraph.Adj x y ∧ ¬ M.Adj x y))) ∧ ∃ N : (G.induce p.toSubgraph.vertsᶜ).Subgraph, N.IsPerfectMatching",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_transport": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.alternating_cycle_transport",
+      "kind": "theorem",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 599,
+      "signature": "theorem alternating_cycle_transport {n : ℕ} (label : V ≃ Fin (2 * n)) {epsilon : G.Dart → ZMod 2} (he : Reverses epsilon) (M : {M : G.Subgraph // M.IsPerfectMatching}) {v : V} {p : G.Walk v v} (hp : p.IsCycle) (ha : p.toSubgraph.spanningCoe.IsAlternating M.val.spanningCoe) : ∃ N : {N : G.Subgraph // N.IsPerfectMatching}, (∀ x y, N.val.Adj x y ↔ (M.val.Adj x y ∧ ¬p.toSubgraph.Adj x y) ∨ (p.toSubgraph.Adj x y ∧ ¬M.val.Adj x y)) ∧ matchingTau label epsilon M * matchingTau label epsilon N = -(p.darts.map (dartSign epsilon)).prod",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.matchingEquiv": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.CallanA002067Hafnian.matchingEquiv",
+      "kind": "def",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 95,
+      "signature": "noncomputable def matchingEquiv (n : ℕ) : {M : (⊤ : SimpleGraph (Fin (2 * n))).Subgraph // M.IsPerfectMatching} ≃ P n where toFun",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.niceOdd_matching_tau_eq": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.niceOdd_matching_tau_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 679,
+      "signature": "theorem niceOdd_matching_tau_eq {n : ℕ} (label : V ≃ Fin (2 * n)) {epsilon : G.Dart → ZMod 2} (he : Reverses epsilon) (ho : NiceOdd epsilon) (M N : {M : G.Subgraph // M.IsPerfectMatching}) : matchingTau label epsilon M = matchingTau label epsilon N",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.orientationUnit": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.WeightedPfaffianMatching.orientationUnit",
+      "kind": "def",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 976,
+      "signature": "noncomputable def orientationUnit (label : V ≃ Fin (2 * n)) (epsilon : G.Dart → ZMod 2) : ℤˣ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.weighted_pfaffian_identity": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.WeightedPfaffianMatching.weighted_pfaffian_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 983,
+      "signature": "theorem weighted_pfaffian_identity [Fintype V] {R : Type*} [CommRing R] (label : V ≃ Fin (2 * n)) {epsilon : G.Dart → ZMod 2} (he : Reverses epsilon) (ho : NiceOdd epsilon) (w : G.edgeSet → R) : pfaffian (orientedMatrix label epsilon w) = ((orientationUnit label epsilon : ℤ) : R) * partitionFunction w",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

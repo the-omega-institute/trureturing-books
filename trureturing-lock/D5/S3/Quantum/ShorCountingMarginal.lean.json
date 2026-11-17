@@ -1,0 +1,60 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/ShorCountingMarginal",
+  "declarations": {
+    "D5/S3/Quantum/ShorCountingMarginal.qpe_arbitrary_phase_lower_bound": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumPhaseEstimationGeneral.qpe_arbitrary_phase_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 144,
+      "signature": "theorem qpe_arbitrary_phase_lower_bound (N : ℕ) (hN : 0 < N) (θ : ℝ) (b : Fin N) (hnear : Nearest N θ b) : 4 / Real.pi ^ 2 ≤ probability N θ b",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.qpe_probability_normalized": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumPhaseEstimationGeneral.qpe_probability_normalized",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 300,
+      "signature": "theorem qpe_probability_normalized {N : ℕ} (hN : 0 < N) (θ : ℝ) : (∑ y : Fin N, probability N θ y) = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_distribution_normalized": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_distribution_normalized",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 685,
+      "signature": "theorem shor_distribution_normalized (n : ℕ) : (∑ y : Fin (2 ^ n), normSquared (runQPE c.modularOperator n c.input y)) = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_mixture_peak_lower_bound": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_mixture_peak_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 692,
+      "signature": "theorem shor_mixture_peak_lower_bound (n : ℕ) (s : Fin c.period) (b : Fin (2 ^ n)) (hb : Nearest (2 ^ n) (s.val / c.period) b) : (c.period : ℝ)⁻¹ * (4 / Real.pi ^ 2) ≤ normSquared (runQPE c.modularOperator n c.input b)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_phase_accuracy_bound": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_phase_accuracy_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 679,
+      "signature": "theorem shor_phase_accuracy_bound (n : ℕ) (s : Fin c.period) (b : Fin (2 ^ n)) (hb : Nearest (2 ^ n) (s.val / c.period) b) : 4 / Real.pi ^ 2 ≤ probability (2 ^ n) (s.val / c.period) b",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/ShorCountingMarginal.shor_qpe_probability_mixture": {
+      "module": "D5/S3/Quantum/ShorCountingMarginal",
+      "name": "QuantumShorOrderFindingCore.Parameters.shor_qpe_probability_mixture",
+      "kind": "theorem",
+      "statement_id": "sha256:1aab219908fa10dc7e256e36f1555caf11d35ef579d56fb713c3d71fe16afea5",
+      "line": 671,
+      "signature": "theorem shor_qpe_probability_mixture (n : ℕ) (y : Fin (2 ^ n)) : normSquared (runQPE c.modularOperator n c.input y) = (c.period : ℝ)⁻¹ * ∑ s : Fin c.period, probability (2 ^ n) (s.val / c.period) y",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

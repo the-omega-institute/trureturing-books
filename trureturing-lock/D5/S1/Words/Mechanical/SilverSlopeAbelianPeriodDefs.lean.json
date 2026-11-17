@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Words/Mechanical/SilverSlopeAbelianPeriodDefs",
+  "declarations": {
+    "D5/S1/Words/Mechanical/SilverSlopeAbelianPeriodDefs.silverSlope": {
+      "module": "D5/S1/Words/Mechanical/SilverSlopeAbelianPeriodDefs",
+      "name": "D5.S1.Words.Mechanical.silverSlope",
+      "kind": "def",
+      "statement_id": "sha256:d35819009aa794a0b78237d4b9d53f418f29ff9fda45942dbbc5ed0de749b9cc",
+      "line": 41,
+      "signature": "noncomputable def silverSlope : Real",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Tower/DBonacci/PerronRoot",
+  "declarations": {
+    "D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_strictMonoOn": {
+      "module": "D5/S0/Tower/DBonacci/PerronRoot",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacciPerronRoot_strictMonoOn",
+      "kind": "theorem",
+      "statement_id": "sha256:86171864d0775a2d857dc7ba82df31fd5f95f45eeebb1420c6bd555499db7a4c",
+      "line": 265,
+      "signature": "theorem dbonacciPerronRoot_strictMonoOn : StrictMonoOn dbonacciPerronRoot (Set.Ici 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_tendsto_two": {
+      "module": "D5/S0/Tower/DBonacci/PerronRoot",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacciPerronRoot_tendsto_two",
+      "kind": "theorem",
+      "statement_id": "sha256:86171864d0775a2d857dc7ba82df31fd5f95f45eeebb1420c6bd555499db7a4c",
+      "line": 294,
+      "signature": "theorem dbonacciPerronRoot_tendsto_two : Tendsto dbonacciPerronRoot atTop (nhds 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_three_eq_tribonacciConstant": {
+      "module": "D5/S0/Tower/DBonacci/PerronRoot",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacciPerronRoot_three_eq_tribonacciConstant",
+      "kind": "theorem",
+      "statement_id": "sha256:86171864d0775a2d857dc7ba82df31fd5f95f45eeebb1420c6bd555499db7a4c",
+      "line": 283,
+      "signature": "theorem dbonacciPerronRoot_three_eq_tribonacciConstant : dbonacciPerronRoot 3 = D5.S0.Tower.Tribonacci.Values.tribonacciConstant",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_two_eq_goldenRatio": {
+      "module": "D5/S0/Tower/DBonacci/PerronRoot",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacciPerronRoot_two_eq_goldenRatio",
+      "kind": "theorem",
+      "statement_id": "sha256:86171864d0775a2d857dc7ba82df31fd5f95f45eeebb1420c6bd555499db7a4c",
+      "line": 272,
+      "signature": "theorem dbonacciPerronRoot_two_eq_goldenRatio : dbonacciPerronRoot 2 = Real.goldenRatio",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Tower/DBonacci/PerronRoot.two_sub_dbonacciPerronRoot_eq_inv_pow": {
+      "module": "D5/S0/Tower/DBonacci/PerronRoot",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.two_sub_dbonacciPerronRoot_eq_inv_pow",
+      "kind": "theorem",
+      "statement_id": "sha256:86171864d0775a2d857dc7ba82df31fd5f95f45eeebb1420c6bd555499db7a4c",
+      "line": 215,
+      "signature": "theorem two_sub_dbonacciPerronRoot_eq_inv_pow (d : Nat) (hd : 2 ≤ d) : 2 - dbonacciPerronRoot d = (dbonacciPerronRoot d)⁻¹ ^ d",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+  "declarations": {
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.evolvedDensity": {
+      "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+      "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.evolvedDensity",
+      "kind": "def",
+      "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
+      "line": 66,
+      "signature": "def evolvedDensity (H : Matrix n n ℂ) (rho : DensityState n) (t : ℝ) : Matrix n n ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.hamiltonianGenerator": {
+      "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+      "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.hamiltonianGenerator",
+      "kind": "def",
+      "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
+      "line": 58,
+      "signature": "def hamiltonianGenerator (H : Matrix n n ℂ) : Matrix n n ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.hamiltonianPropagator": {
+      "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+      "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.hamiltonianPropagator",
+      "kind": "def",
+      "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
+      "line": 62,
+      "signature": "def hamiltonianPropagator (H : Matrix n n ℂ) (t : ℝ) : Matrix n n ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projectionProbability": {
+      "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+      "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.projectionProbability",
+      "kind": "def",
+      "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
+      "line": 71,
+      "signature": "def projectionProbability (H : Matrix n n ℂ) (rho : DensityState n) (P : Matrix n n ℂ) (t : ℝ) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow": {
+      "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+      "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.projection_probability_flow",
+      "kind": "theorem",
+      "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
+      "line": 217,
+      "signature": "theorem projection_probability_flow (H P : Matrix n n ℂ) (rho : DensityState n) (hH : H.IsHermitian) (hP : IsStarProjection P) : (∀ t : ℝ, (projectionProbability H rho P t : ℂ) = bornProbability (evolvedDensity H rho t) P) ∧ (∀ t : ℝ, HasDerivAt (projectionProbability H rho P) (Complex.re (Complex.I * Matrix.trace (evolvedDensity H rho t * (H * P - P * H)))) t ∧ ((Complex.I * Matrix.trace (evolvedDensity H rho t * (H * P - P * H))).re : ℂ) = Complex.I * Matrix.trace (evolvedDensity H rho t * (H * P - P * H))) ∧ (H * P - P * H = 0 → ∀ t : ℝ, projectionProbability H rho P t = projectionProbabili",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

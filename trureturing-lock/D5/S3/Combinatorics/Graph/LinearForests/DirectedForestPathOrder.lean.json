@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestPathOrder",
+  "declarations": {
+    "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestPathOrder.component_path_order": {
+      "module": "D5/S3/Combinatorics/Graph/LinearForests/DirectedForestPathOrder",
+      "name": "D5.S3.Combinatorics.Graph.LinearForests.DirectedForestPathOrder.component_path_order",
+      "kind": "theorem",
+      "statement_id": "sha256:bf77cd8b966db22d542a0a49adabcecce29ed191bf139518c9465306173f3f75",
+      "line": 161,
+      "signature": "theorem component_path_order [Finite V] (E : V → V → Prop) (hout : Relator.RightUnique E) (hin : Relator.LeftUnique E) (ha : ∀ x, ¬ TransGen E x x) (A : Component E) : ∃! e : Fin (Nat.card (ComponentFiber E A)) ≃ ComponentFiber E A, ∀ i j, E (e i).1 (e j).1 ↔ i.1 + 1 = j.1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/Congruence/PadicObservationDistance",
+  "declarations": {
+    "D5/S3/Arith/Congruence/PadicObservationDistance.observation_distance_eq_padic_valuation": {
+      "module": "D5/S3/Arith/Congruence/PadicObservationDistance",
+      "name": "D5.S3.Arith.Congruence.PadicObservationDistance.observation_distance_eq_padic_valuation",
+      "kind": "theorem",
+      "statement_id": "sha256:a2ee98a226e6879e250d93dcc699664b38c366ebd12fc4fdcbf98e066f397efb",
+      "line": 43,
+      "signature": "theorem observation_distance_eq_padic_valuation (p : Nat) (x y : Int) (hp : p.Prime) (hxy : x ≠ y) : observationDistance p hp x y = (p : ℝ) ^ (-(padicValInt p (x - y) : Int))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

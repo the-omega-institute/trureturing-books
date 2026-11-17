@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Matrix/BuresWassersteinTransport",
+  "declarations": {
+    "D5/S3/Quantum/Matrix/BuresWassersteinTransport.finite_barycenter_of_dual": {
+      "module": "D5/S3/Quantum/Matrix/BuresWassersteinTransport",
+      "name": "D5.S3.Quantum.Matrix.BuresWassersteinTransport.finite_barycenter_of_dual",
+      "kind": "theorem",
+      "statement_id": "sha256:f251722bf20e2a48a7c1c20d4b0e66f72f46ed81f918482d6b78463a545292a2",
+      "line": 41,
+      "signature": "theorem finite_barycenter_of_dual {m n : ℕ} (w : Fin n → ℝ) (A T : Fin n → Matrix (Fin m) (Fin m) ℂ) {W : Matrix (Fin m) (Fin m) ℂ} (hw : ∀ j, 0 < w j) (hws : ∑ j, w j = 1) (hA : ∀ j, (A j).PosDef) (hW : W.PosDef) (hT : ∀ j, (T j).PosDef) (htransport : ∀ j, T j * W * T j = A j) (hbalance : ∑ j, w j • T j = 1) : (∀ X : Matrix (Fin m) (Fin m) ℂ, X.PosDef → (∑ j, w j * buresWassersteinDistance W (A j) ^ 2) ≤ ∑ j, w j * buresWassersteinDistance X (A j) ^ 2) ∧ (∀ X : Matrix (Fin m) (Fin m) ℂ, X.PosDef → (((∑ j, w j * buresWassersteinDistance X (A j) ^ 2) ≤ ∑ j, w j * buresWassersteinDistance W (A j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

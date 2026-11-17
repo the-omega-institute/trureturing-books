@@ -1,0 +1,78 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+  "declarations": {
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.P": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S0.Certificates.Combinatorics.DeformedJucysMurphyNoncommutation.P",
+      "kind": "def",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 25,
+      "signature": "abbrev P (k : ℕ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.canonical_mate": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.CanonicalPairListing.canonical_mate",
+      "kind": "theorem",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 250,
+      "signature": "theorem canonical_mate {n : ℕ} (p : P n) (i : Fin n) : p.val (canonicalListing p ⟨2 * i.val, by omega⟩) = canonicalListing p ⟨2 * i.val + 1, by omega⟩",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversionCrossNestEquiv": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S0.Certificates.Combinatorics.NormalizedPfaffianCount.inversionCrossNestEquiv",
+      "kind": "def",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 744,
+      "signature": "noncomputable def inversionCrossNestEquiv {n : ℕ} (s : Equiv.Perm (Pos n)) (hs : s ∈ normalizedListings n) : InvType s ≃ CrossType (pairingOfListing s) ⊕ (NestType (pairingOfListing s) × Fin 2) where toFun",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversion_card_eq_cross_add_two_nesting_card": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S0.Certificates.Combinatorics.NormalizedPfaffianCount.inversion_card_eq_cross_add_two_nesting_card",
+      "kind": "theorem",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 848,
+      "signature": "theorem inversion_card_eq_cross_add_two_nesting_card {n : ℕ} (s : Equiv.Perm (Pos n)) (hs : s ∈ normalizedListings n) : Fintype.card (InvType s) = Fintype.card (CrossType (pairingOfListing s)) + 2 * Fintype.card (NestType (pairingOfListing s))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listingEquiv": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.CanonicalPairListing.listingEquiv",
+      "kind": "def",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 241,
+      "signature": "noncomputable def listingEquiv (n : ℕ) : {s : Equiv.Perm (Fin (2 * n)) // s ∈ normalizedListings n} ≃ P n where toFun s",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listing_value_canonical": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.CanonicalPairListing.listing_value_canonical",
+      "kind": "theorem",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 404,
+      "signature": "theorem listing_value_canonical {n : ℕ} (f : Fin (2 * n) → Fin (2 * n) → ℤˣ) (hf : ∀ x y, x ≠ y → f y x = -f x y) (s : Equiv.Perm (Fin (2 * n))) : listingValue f s = listingValue f (canonicalListing (pairingOfListing s))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S0.Certificates.IshikawaKoutschanMotzkinPfaffianRefutation.pfaffian",
+      "kind": "def",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 60,
+      "signature": "def pfaffian {R : Type*} [CommRing R] {n : ℕ} (A : Matrix (Fin (2 * n)) (Fin (2 * n)) R) : R",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian_eq_crossing_sum": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S0.Certificates.Combinatorics.NormalizedPfaffianCount.pfaffian_eq_crossing_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 950,
+      "signature": "theorem pfaffian_eq_crossing_sum {n : ℕ} {R : Type*} [CommRing R] (A : Matrix (Pos n) (Pos n) R) : pfaffian A = ∑ s ∈ normalizedListings n, crossingCoefficient (pairingOfListing s) * (∏ a : lowerEndpoints (pairingOfListing s), A a.val ((pairingOfListing s).val a.val))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

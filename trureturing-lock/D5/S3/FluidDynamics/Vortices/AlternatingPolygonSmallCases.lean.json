@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.dipole": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSmallCases.dipole",
+      "kind": "theorem",
+      "statement_id": "sha256:4f1efa32565542d76c788c5cf06ed802b61b264f821326ba088b3fd12a5763fc",
+      "line": 30,
+      "signature": "theorem dipole (μ : ℂ) : (jacobian 2).charpoly = X ^ 2 * (X ^ 2 + C (1 / 2 : ℝ)) ∧ ((actualOperator 1).HasEigenvalue μ ↔ μ = 0 ∨ μ = Complex.I / (Real.sqrt 2 : ℂ) ∨ μ = -(Complex.I / (Real.sqrt 2 : ℂ)))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.square": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSmallCases.square",
+      "kind": "theorem",
+      "statement_id": "sha256:4f1efa32565542d76c788c5cf06ed802b61b264f821326ba088b3fd12a5763fc",
+      "line": 53,
+      "signature": "theorem square (μ : ℂ) : (jacobian 4).charpoly = X ^ 2 * (X ^ 2 + C (2 : ℝ)) * (X ^ 2 + C (1 / 4 : ℝ)) ^ 2 ∧ ((actualOperator 2).HasEigenvalue μ ↔ μ = 0 ∨ μ = Complex.I * (Real.sqrt 2 : ℂ) ∨ μ = -(Complex.I * (Real.sqrt 2 : ℂ)) ∨ μ = Complex.I / 2 ∨ μ = -(Complex.I / 2))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/ConceptJoinUniversal",
+  "declarations": {
+    "D5/S3/ConceptDynamics/ConceptJoinUniversal.Refines": {
+      "module": "D5/S3/ConceptDynamics/ConceptJoinUniversal",
+      "name": "D5.S3.ConceptDynamics.ConceptJoinUniversal.Refines",
+      "kind": "def",
+      "statement_id": "sha256:46dfcb4e0f994ccdbaff9a38e548f8f79ce92541a1946fce7fbf8f0781d54808",
+      "line": 28,
+      "signature": "def Refines {X C D : Type _} (q_C : Concept X C) (q_D : Concept X D) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/ConceptJoinUniversal.conceptJoin": {
+      "module": "D5/S3/ConceptDynamics/ConceptJoinUniversal",
+      "name": "D5.S3.ConceptDynamics.ConceptJoinUniversal.conceptJoin",
+      "kind": "def",
+      "statement_id": "sha256:46dfcb4e0f994ccdbaff9a38e548f8f79ce92541a1946fce7fbf8f0781d54808",
+      "line": 32,
+      "signature": "def conceptJoin {X C D : Type _} (q_C : Concept X C) (q_D : Concept X D) : Concept X (C × D)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/InverseChordCirculant",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/InverseChordCirculant.chordWeight_dft": {
+      "module": "D5/S3/FluidDynamics/Vortices/InverseChordCirculant",
+      "name": "D5.S3.FluidDynamics.Vortices.InverseChordCirculant.chordWeight_dft",
+      "kind": "theorem",
+      "statement_id": "sha256:e8719a3e6738f6c2b6406faa186b33f7c382e2e73a7d9543762eee075182c85c",
+      "line": 231,
+      "signature": "theorem chordWeight_dft (N : ℕ) [NeZero N] (k : ZMod N) : ZMod.dft (fun l => (chordWeight N l : ℂ)) k = ((((N : ℝ) ^ 2 - 1) / 12 - (k.val : ℝ) * ((N : ℝ) - k.val) / 2 : ℝ) : ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Ledger/GenerationArrowOfTime",
+  "declarations": {
+    "D5/S1/Ledger/GenerationArrowOfTime.length_strictly_increases_under_generation": {
+      "module": "D5/S1/Ledger/GenerationArrowOfTime",
+      "name": "D5.S1.Ledger.GenerationArrowOfTime.length_strictly_increases_under_generation",
+      "kind": "theorem",
+      "statement_id": "sha256:5eec49e020552ad9785cc9dd842de09c844721fa23508246e3f87592c62da6bf",
+      "line": 70,
+      "signature": "theorem length_strictly_increases_under_generation (a u : PrimeExponent) : u ≠ 0 → length (a + u) > length a",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

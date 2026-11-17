@@ -1,0 +1,42 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity",
+  "declarations": {
+    "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary": {
+      "module": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity",
+      "name": "D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.energy_eigenstate_stationary",
+      "kind": "theorem",
+      "statement_id": "sha256:d5563afe7bd312f16b4e6f7c9f441317f7de6d07a379a2a024ddcd34ddbbc1f7",
+      "line": 54,
+      "signature": "theorem energy_eigenstate_stationary (H : Matrix n n ℂ) (hH : H.IsHermitian) (v : n → ℂ) (hv : star v ⬝ᵥ v = 1) (E t : ℝ) (he : H *ᵥ v = (E : ℂ) • v) : let U",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero": {
+      "module": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity",
+      "name": "D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.energy_eigenstate_variance_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:d5563afe7bd312f16b4e6f7c9f441317f7de6d07a379a2a024ddcd34ddbbc1f7",
+      "line": 98,
+      "signature": "theorem energy_eigenstate_variance_zero (H : Matrix n n ℂ) (v : n → ℂ) (hv : star v ⬝ᵥ v = 1) (E : ℝ) (he : H *ᵥ v = (E : ℂ) • v) : variance (pureDensityState v hv) H = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.exp_mulVec_of_eigenvector": {
+      "module": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity",
+      "name": "D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.exp_mulVec_of_eigenvector",
+      "kind": "theorem",
+      "statement_id": "sha256:d5563afe7bd312f16b4e6f7c9f441317f7de6d07a379a2a024ddcd34ddbbc1f7",
+      "line": 24,
+      "signature": "theorem exp_mulVec_of_eigenvector (A : Matrix n n ℂ) (v : n → ℂ) (μ : ℂ) (hv : A *ᵥ v = μ • v) : NormedSpace.exp A *ᵥ v = Complex.exp μ • v",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.pureDensityState": {
+      "module": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity",
+      "name": "D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.pureDensityState",
+      "kind": "def",
+      "statement_id": "sha256:d5563afe7bd312f16b4e6f7c9f441317f7de6d07a379a2a024ddcd34ddbbc1f7",
+      "line": 43,
+      "signature": "def pureDensityState (v : n → ℂ) (hv : star v ⬝ᵥ v = 1) : DensityState n",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

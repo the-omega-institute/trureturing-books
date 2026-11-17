@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/DivergenceSupport/LandauerIdentity",
+  "declarations": {
+    "D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances": {
+      "module": "D5/S3/DivergenceSupport/LandauerIdentity",
+      "name": "D5.S3.DivergenceSupport.LandauerIdentity.landauer_identity_from_balances",
+      "kind": "theorem",
+      "statement_id": "sha256:e5cd8297d133a460110e113875999a9abc59a005e4b478921f9d80017686a118",
+      "line": 23,
+      "signature": "theorem landauer_identity_from_balances (beta heat systemEntropyChange reservoirEntropyChange mutualInformation reservoirDivergence : Real) (hReservoir : beta * heat = reservoirEntropyChange + reservoirDivergence) (hUnitary : mutualInformation = systemEntropyChange + reservoirEntropyChange) : beta * heat = -systemEntropyChange + mutualInformation + reservoirDivergence",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

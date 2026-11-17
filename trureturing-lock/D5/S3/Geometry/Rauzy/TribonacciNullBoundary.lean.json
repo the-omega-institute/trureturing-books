@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Geometry/Rauzy/TribonacciNullBoundary",
+  "declarations": {
+    "D5/S3/Geometry/Rauzy/TribonacciNullBoundary.rauzyFractal_frontier_volume_zero": {
+      "module": "D5/S3/Geometry/Rauzy/TribonacciNullBoundary",
+      "name": "D5.S3.Geometry.Rauzy.TribonacciNullBoundary.rauzyFractal_frontier_volume_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:0fd54f69d1ef19cfe06de38b31f3f64b120454fda9a730b10d8fa2fcf7edcc25",
+      "line": 39,
+      "signature": "theorem rauzyFractal_frontier_volume_zero {z : Complex} (hz : z ∈ Binet.tribonacciCharacteristicPolynomial.roots) (hz_ne : z ≠ (Values.tribonacciConstant : Complex)) : volume (frontier (RauzyFractal.rauzyFractal z)) = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

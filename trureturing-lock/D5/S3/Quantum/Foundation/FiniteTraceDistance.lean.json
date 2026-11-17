@@ -1,0 +1,60 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+  "declarations": {
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance",
+      "kind": "def",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 463,
+      "signature": "def traceDistance (rho sigma : DensityState ι) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance_contract",
+      "kind": "theorem",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 505,
+      "signature": "theorem traceDistance_contract (channel : QuantumChannel ι ι) (rho sigma : DensityState ι) : traceDistance (channel.mapState rho) (channel.mapState sigma) ≤ traceDistance rho sigma",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_le_one": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance_le_one",
+      "kind": "theorem",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 485,
+      "signature": "theorem traceDistance_le_one (rho sigma : DensityState ι) : traceDistance rho sigma ≤ 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_nonneg": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 466,
+      "signature": "theorem traceDistance_nonneg (rho sigma : DensityState ι) : 0 ≤ traceDistance rho sigma",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_symm": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance_symm",
+      "kind": "theorem",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 469,
+      "signature": "theorem traceDistance_symm (rho sigma : DensityState ι) : traceDistance rho sigma = traceDistance sigma rho",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_triangle": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance_triangle",
+      "kind": "theorem",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 476,
+      "signature": "theorem traceDistance_triangle (rho sigma tau : DensityState ι) : traceDistance rho tau ≤ traceDistance rho sigma + traceDistance sigma tau",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

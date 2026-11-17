@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Scale/Fibonacci",
+  "declarations": {
+    "D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm": {
+      "module": "D5/S1/Scale/Fibonacci",
+      "name": "D5.S1.Scale.fib_cassini_from_golden_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:751177242ed35f6038442f34be0329f08c8b2dc1ddcc1dafc85cddc43dcf9266",
+      "line": 37,
+      "signature": "theorem fib_cassini_from_golden_norm (n : ℕ) : (Nat.fib n : ℤ) * (Nat.fib (n + 2) : ℤ) - (Nat.fib (n + 1) : ℤ) ^ 2 = (-1 : ℤ) ^ (n + 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/CommonCoefficientPlane.common_plane": {
+      "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
+      "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.common_plane",
+      "kind": "theorem",
+      "statement_id": "sha256:17ace9e49ed128f58b14260ed84b9c5c2277248d1c815efe523e4d4a6328e26b",
+      "line": 951,
+      "signature": "theorem common_plane (X : Fin 3 → Matrix (Fin 3) (Fin 5) ℂ) (hX : LinearIndependent ℂ X) (hinj : Function.Injective (stack X).mulVecLin) : ∃ L : Submodule ℂ (Fin 3 → ℂ), finrank ℂ L = 2 ∧ ∀ T : Matrix (Fin 3) (Fin 3) ℂ, T.IsHermitian → (stack X)ᴴ * Matrix.kronecker T (1 : Matrix (Fin 3) (Fin 3) ℂ) * stack X = 0 → ∀ u ∈ L, ∀ v ∈ L, star u ⬝ᵥ (T *ᵥ v) = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression": {
+      "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
+      "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.compression",
+      "kind": "def",
+      "statement_id": "sha256:17ace9e49ed128f58b14260ed84b9c5c2277248d1c815efe523e4d4a6328e26b",
+      "line": 42,
+      "signature": "def compression {a b : ℕ} (X : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (T : Matrix (Fin 3) (Fin 3) ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/CommonCoefficientPlane.compression_eq_sum": {
+      "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
+      "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.compression_eq_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:17ace9e49ed128f58b14260ed84b9c5c2277248d1c815efe523e4d4a6328e26b",
+      "line": 50,
+      "signature": "theorem compression_eq_sum {a b : ℕ} (X : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (T : Matrix (Fin 3) (Fin 3) ℂ) : compression X T = ∑ r, ∑ s, T r s • ((X r)ᴴ * X s)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

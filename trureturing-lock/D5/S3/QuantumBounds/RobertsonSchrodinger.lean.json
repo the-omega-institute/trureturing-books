@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumBounds/RobertsonSchrodinger",
+  "declarations": {
+    "D5/S3/QuantumBounds/RobertsonSchrodinger.gram_wedge_identity": {
+      "module": "D5/S3/QuantumBounds/RobertsonSchrodinger",
+      "name": "D5.S3.QuantumBounds.RobertsonSchrodinger.gram_wedge_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:b919cc130f0ad5f3117a95ca3451790a4c69ea212b51d3de6a6db1ec1cb12b5e",
+      "line": 29,
+      "signature": "theorem gram_wedge_identity {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] (u v : E) : let G",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger": {
+      "module": "D5/S3/QuantumBounds/RobertsonSchrodinger",
+      "name": "D5.S3.QuantumBounds.RobertsonSchrodinger.robertson_schrodinger",
+      "kind": "theorem",
+      "statement_id": "sha256:b919cc130f0ad5f3117a95ca3451790a4c69ea212b51d3de6a6db1ec1cb12b5e",
+      "line": 46,
+      "signature": "theorem robertson_schrodinger {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] (A B : E →ₗ[ℂ] E) (psi : E) (hA : A.IsSymmetric) (hB : B.IsSymmetric) (hpsi : ‖psi‖ = 1) : let u",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

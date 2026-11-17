@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/WeylDisplacementConjugation",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacementConjugation",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacementConjugation.displacement_conjugation",
+      "kind": "theorem",
+      "statement_id": "sha256:075eec65bcc56a391500706f213ef3bc1b27041f36952fc4c71abd4ade27a9ab",
+      "line": 94,
+      "signature": "theorem displacement_conjugation (a b c d : ZMod M) : displacement M a b * displacement M c d * star (displacement M a b) = windowRoot M ^ (b * c - a * d).val • displacement M c d",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

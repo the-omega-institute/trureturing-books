@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric",
+  "declarations": {
+    "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric": {
+      "module": "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric",
+      "name": "D5.S3.ConceptDynamics.RefinementGeometry.RefinementUltrametric.refinementDistance_ultrametric",
+      "kind": "theorem",
+      "statement_id": "sha256:489b97c330f19221fd19b63ff7424508a911bb08caadf2e95818b62a70335713",
+      "line": 196,
+      "signature": "theorem refinementDistance_ultrametric {X : Type*} (Coordinate : Nat → Type*) (readout : (level : Nat) → Concept X (Coordinate level)) (horizon : Nat) (x y z : X) : refinementDistance Coordinate readout horizon x z ≤ max (refinementDistance Coordinate readout horizon x y) (refinementDistance Coordinate readout horizon y z)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

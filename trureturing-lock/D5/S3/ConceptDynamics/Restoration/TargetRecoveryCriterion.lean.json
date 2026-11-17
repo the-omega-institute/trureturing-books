@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion",
+  "declarations": {
+    "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion": {
+      "module": "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion",
+      "name": "D5.S3.ConceptDynamics.Restoration.TargetRecoveryCriterion.target_recovery_criterion",
+      "kind": "theorem",
+      "statement_id": "sha256:b00b35b9fad01258b563836e879dfb6cd8370b8d8d4f8c83cfafb011a2cc3a56",
+      "line": 37,
+      "signature": "theorem target_recovery_criterion {X ProcessState Target : Type*} [Nonempty X] (process : Concept X ProcessState) (target : Concept X Target) : ((∃ recover : ProcessState → Target, target = recover ∘ process) ↔ ∀ ⦃x y : X⦄, process x = process y → target x = target y) ∧ ((∀ ⦃x y : X⦄, process x = process y → target x = target y) ↔ defectRelation process target = ∅) ∧ (defectRelation process target = ∅ ↔ ∃ recover : ProcessState → Target, target = recover ∘ process) ∧ ((¬∃ recover : ProcessState → Target, target = recover ∘ process) ↔ (defectRelation process target).Nonempty)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

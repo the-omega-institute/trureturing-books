@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/OriginExclusionSegmentRigidity",
+  "declarations": {
+    "D5/S3/Quantum/OriginExclusionSegmentRigidity.b_constraint_recenter": {
+      "module": "D5/S3/Quantum/OriginExclusionSegmentRigidity",
+      "name": "D5.S3.Quantum.OriginExclusionSegmentRigidity.b_constraint_recenter",
+      "kind": "theorem",
+      "statement_id": "sha256:d36c95af2e609979c46fc7f9443cec420f3d4b192f523d3a50911169c06312f9",
+      "line": 25,
+      "signature": "theorem b_constraint_recenter (t b : ℝ) : b ^ 2 ≤ t * (1 - t) ↔ (t - (1 / 2 : ℝ)) ^ 2 + b ^ 2 ≤ (1 / 2 : ℝ) ^ 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/PrimeObserver/ProjectiveMemory/GoldenProjectiveMultiplier",
+  "declarations": {
+    "D5/S3/PrimeObserver/ProjectiveMemory/GoldenProjectiveMultiplier.projective_defect_modal_step": {
+      "module": "D5/S3/PrimeObserver/ProjectiveMemory/GoldenProjectiveMultiplier",
+      "name": "D5.S3.PrimeObserver.ProjectiveMemory.GoldenProjectiveMultiplier.projective_defect_modal_step",
+      "kind": "theorem",
+      "statement_id": "sha256:6057ce29d0a124d81534e28cce7200c9c272d737efc28bf3b8d9c3bd64f75b10",
+      "line": 47,
+      "signature": "theorem projective_defect_modal_step {A D : ℝ} (hA : A ≠ 0) : projectiveDefect (goldenModalStep (A, D)) = goldenProjectiveMultiplier * projectiveDefect (A, D)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Midline/Cayley/LogarithmicRadialDefect",
+  "declarations": {
+    "D5/S3/Midline/Cayley/LogarithmicRadialDefect.logarithmicRadialDefect": {
+      "module": "D5/S3/Midline/Cayley/LogarithmicRadialDefect",
+      "name": "D5.S3.Midline.Cayley.LogarithmicRadialDefect.logarithmicRadialDefect",
+      "kind": "def",
+      "statement_id": "sha256:c9fce0bdf0a41ab34320b74f16c34e33a4745259b23f386b2eea80a18d362aa9",
+      "line": 27,
+      "signature": "noncomputable def logarithmicRadialDefect (rho : Complex) : Real",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

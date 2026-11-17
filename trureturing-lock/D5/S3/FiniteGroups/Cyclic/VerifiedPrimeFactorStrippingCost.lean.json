@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStrippingCost",
+  "declarations": {
+    "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStrippingCost.stripFactorsCost_spec": {
+      "module": "D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStrippingCost",
+      "name": "PrimeFactorStrippingCost.stripFactorsCost_spec",
+      "kind": "theorem",
+      "statement_id": "sha256:87eb6a7522a7d2250d9bf117b50f1d0112f908daca4ccd72cabf96cf7500907f",
+      "line": 148,
+      "signature": "theorem stripFactorsCost_spec {G : Type*} [Monoid G] [DecidableEq G] (x : G) (P : List ℕ) (m : ℕ) : let result",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

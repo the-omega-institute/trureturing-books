@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Certificates/Quandles/BraidColoringTransport",
+  "declarations": {
+    "D5/S0/Certificates/Quandles/BraidColoringTransport.crossing_yang_baxter": {
+      "module": "D5/S0/Certificates/Quandles/BraidColoringTransport",
+      "name": "D5.S0.Certificates.Quandles.BraidColoringTransport.crossing_yang_baxter",
+      "kind": "theorem",
+      "statement_id": "sha256:98607b9c40a6fe41a7bb8c88e2ceebbb206022b9d602c818158138d63eca5cf5",
+      "line": 61,
+      "signature": "theorem crossing_yang_baxter (x y z : Q) : crossing₁ (crossing₂ (crossing₁ (x, (y, z)))) = crossing₂ (crossing₁ (crossing₂ (x, (y, z))))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

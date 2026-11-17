@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut",
+  "declarations": {
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowMinCut.result",
+      "kind": "theorem",
+      "statement_id": "sha256:06aeda0a0a7b05ee56b3db072016c177d52684f278224603dac7e149e7c4f8ee",
+      "line": 116,
+      "signature": "theorem result : claim",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

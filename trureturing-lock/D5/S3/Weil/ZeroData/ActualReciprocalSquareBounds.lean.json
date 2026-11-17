@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",
+  "declarations": {
+    "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_height_gt_ten": {
+      "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",
+      "name": "D5.S3.Weil.ZeroData.ActualReciprocalSquareBounds.actual_height_gt_ten",
+      "kind": "theorem",
+      "statement_id": "sha256:563604f18b7b6b0b20061f480be12cd4392440ddd8f89215134196eb17f9f3e3",
+      "line": 789,
+      "signature": "theorem actual_height_gt_ten (rho : ℂ) (hrho : IsNontrivialZero rho) : 10 < |rho.im|",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

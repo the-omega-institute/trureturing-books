@@ -1,0 +1,69 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/Conditioning",
+  "declarations": {
+    "D5/S3/Observer/Conditioning.IsRecordMeasurement": {
+      "module": "D5/S3/Observer/Conditioning",
+      "name": "D5.S3.Observer.Conditioning.IsRecordMeasurement",
+      "kind": "inductive",
+      "statement_id": "sha256:ed6f30958e446325932ee89f5919e5399b7f57de483aae2fd9143b7d7189924d",
+      "line": 30,
+      "signature": "structure IsRecordMeasurement (P : kappa -> Matrix n n ℂ) : Prop where selfAdjoint : forall k, star (P k) = P k idempotent : forall k, P k * P k = P k orthogonal : forall k l, k ≠ l -> P k * P l = 0 complete : ∑ k, P k = 1 /-- The state obtained by measuring the record and then discarding its value. -/ def unreadState (P : kappa -> Matrix n n ℂ) (rho : Matrix n n ℂ) : Matrix n n ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Observer/Conditioning.conditionalState": {
+      "module": "D5/S3/Observer/Conditioning",
+      "name": "D5.S3.Observer.Conditioning.conditionalState",
+      "kind": "def",
+      "statement_id": "sha256:ed6f30958e446325932ee89f5919e5399b7f57de483aae2fd9143b7d7189924d",
+      "line": 137,
+      "signature": "noncomputable def conditionalState (P : kappa -> Matrix n n ℂ) (rho : Matrix n n ℂ) (k : kappa) : Matrix n n ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Observer/Conditioning.conditionalState_isState": {
+      "module": "D5/S3/Observer/Conditioning",
+      "name": "D5.S3.Observer.Conditioning.conditionalState_isState",
+      "kind": "theorem",
+      "statement_id": "sha256:ed6f30958e446325932ee89f5919e5399b7f57de483aae2fd9143b7d7189924d",
+      "line": 143,
+      "signature": "theorem conditionalState_isState (hP : IsRecordMeasurement P) {rho : Matrix n n ℂ} (hRho : rho.PosSemidef) (hTr : Matrix.trace rho = 1) {k : kappa} (hk : recordWeight P rho k ≠ 0) : (conditionalState P rho k).PosSemidef /\\ Matrix.trace (conditionalState P rho k) = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Observer/Conditioning.recordWeight": {
+      "module": "D5/S3/Observer/Conditioning",
+      "name": "D5.S3.Observer.Conditioning.recordWeight",
+      "kind": "def",
+      "statement_id": "sha256:ed6f30958e446325932ee89f5919e5399b7f57de483aae2fd9143b7d7189924d",
+      "line": 41,
+      "signature": "noncomputable def recordWeight (P : kappa -> Matrix n n ℂ) (rho : Matrix n n ℂ) (k : kappa) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Observer/Conditioning.recordWeight_sum": {
+      "module": "D5/S3/Observer/Conditioning",
+      "name": "D5.S3.Observer.Conditioning.recordWeight_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:ed6f30958e446325932ee89f5919e5399b7f57de483aae2fd9143b7d7189924d",
+      "line": 47,
+      "signature": "theorem recordWeight_sum (hP : IsRecordMeasurement P) (rho : Matrix n n ℂ) : ∑ k, recordWeight P rho k = Matrix.trace rho",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Observer/Conditioning.unreadState": {
+      "module": "D5/S3/Observer/Conditioning",
+      "name": "D5.S3.Observer.Conditioning.unreadState",
+      "kind": "def",
+      "statement_id": "sha256:ed6f30958e446325932ee89f5919e5399b7f57de483aae2fd9143b7d7189924d",
+      "line": 37,
+      "signature": "def unreadState (P : kappa -> Matrix n n ℂ) (rho : Matrix n n ℂ) : Matrix n n ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Observer/Conditioning.unreadState_fixed_iff": {
+      "module": "D5/S3/Observer/Conditioning",
+      "name": "D5.S3.Observer.Conditioning.unreadState_fixed_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:ed6f30958e446325932ee89f5919e5399b7f57de483aae2fd9143b7d7189924d",
+      "line": 108,
+      "signature": "theorem unreadState_fixed_iff (hP : IsRecordMeasurement P) (rho : Matrix n n ℂ) : unreadState P rho = rho <-> forall k l, k ≠ l -> P k * rho * P l = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

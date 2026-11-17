@@ -8,9 +8,12 @@
 书中环境  ::: {.theorem #thm-x lean="D5/S1/Deficit/DeficitThreeValued.deficit_three_valued"}
    │  GID = <模块路径>.<声明名>
    ▼
-trureturing.lock.json   commit = 8a24ea4e…（40 位 SHA）
-   │  name = D5.S1.Deficit.deficit_three_valued, kind = theorem,
-   │  statement_id = sha256:…（模块陈述摘要）, line = 264
+trureturing.lock.json         {schema: lock-pointer.v2, path: trureturing-lock}
+   │
+trureturing-lock/index.json   {repo, branch: dev}
+   │
+trureturing-lock/D5/S1/Deficit/DeficitThreeValued.lean.json
+   │  D5/...deficit_three_valued → {name, kind, statement_id, line, commit: 8a24ea4e…}
    ▼
 trureturing @ commit:  Golden/Frozen/state/D5/S1/Deficit/DeficitThreeValued.lean.json
    │  {statement_id, declarations: [{declaration_name_key: "ns(…,20:deficit_three_valued)", kind: "theorem"}]}
@@ -20,7 +23,7 @@ trureturing @ commit:  D5/S1/Deficit/DeficitThreeValued.lean   （Lean 源；由
 
 trureturing 的冻结律（其 `CLAUDE.md` §1.3）规定：**模块的状态片 `Golden/Frozen/state/<module>.lean.json` 存在，当且仅当该模块已冻结**；状态片只在声明经内核验证（无 `sorry`、无私有公理）后由 trureturing 的流程写入。因此“在所钉提交上，状态片列有该声明且种类为 theorem”就是本书库对“已经 Lean 验证”的判据。
 
-这条判据只在 trureturing 的集成分支上成立：冻结律由 trureturing 的 CI 在 `site.toml` 的 `[trureturing].branch`（默认 `dev`）上执行。GitHub 也会按 SHA 提供从未合入的提交（任何人发起的 PR 的 head、其他分支），那些提交上的状态片可以是任意内容。所以**所钉提交必须能从该分支到达**：`./tbook pin` 拒绝不在分支上的提交，`./tbook check` 每次复核（§2）。锁文件的 `branch` 字段记录的就是被核对的分支，`./tbook check` 要求它与 `site.toml` 的分支相同（改了 `site.toml` 的分支就要重新 `./tbook pin`，或在提交也在新分支上时 `./tbook pin --refresh`），站点清单发布的分支因此就是被核对的分支。`[trureturing].branch` 必须是 trureturing 中一个**现有分支**的名字，因为 git 与 GitHub compare API 读的不只是分支名：`compare/<sha>...<sha>` 与 `compare/<sha>^0...<sha>` 的结果都是 `identical`；`dev-12-g7bbf30f` 这类形如 `git describe` 输出的名字，git 与 compare API 都读作 `-g` 后面那段缩写所指的提交；`owner:branch` 指向另一个仓库（例如 fork）的分支；`pull/123/head` 在 git 里是 `refs/pull/123/head`，即某个 PR 的 head。核对分两步。
+这条判据只在 trureturing 的集成分支上成立：冻结律由 trureturing 的 CI 在 `site.toml` 的 `[trureturing].branch`（默认 `dev`）上执行。GitHub 也会按 SHA 提供从未合入的提交（任何人发起的 PR 的 head、其他分支），那些提交上的状态片可以是任意内容。所以**所钉提交必须能从该分支到达**：`./tbook pin` 拒绝不在分支上的提交，`./tbook check` 每次复核（§2）。锁索引的 `branch` 字段记录的就是被核对的分支，声明解析结果按模块分片保存在 `trureturing-lock/`，根级 `trureturing.lock.json` 只保留稳定指针；`./tbook check` 要求索引分支与 `site.toml` 相同（改了 `site.toml` 的分支就要重新 `./tbook pin`，或在提交也在新分支上时 `./tbook pin --refresh`），站点清单发布的分支因此就是被核对的分支。`[trureturing].branch` 必须是 trureturing 中一个**现有分支**的名字，因为 git 与 GitHub compare API 读的不只是分支名：`compare/<sha>...<sha>` 与 `compare/<sha>^0...<sha>` 的结果都是 `identical`；`dev-12-g7bbf30f` 这类形如 `git describe` 输出的名字，git 与 compare API 都读作 `-g` 后面那段缩写所指的提交；`owner:branch` 指向另一个仓库（例如 fork）的分支；`pull/123/head` 在 git 里是 `refs/pull/123/head`，即某个 PR 的 head。核对分两步。
 
 第一步只看名字，不问任何人。下列写法都是错误：`git check-ref-format --branch` 不接受的名字（含 `^`、`~`、`:`、`?`、`*`、`[`、`\`、`..`、`@{`、空白或控制字符；以 `-` 开头或以 `.` 结尾；有空的分量，即以 `/` 开头或结尾或含 `//`；有以 `.` 开头或以 `.lock` 结尾的分量；`HEAD`）；单独的 `@`（在修订表达式里 git 把它当作 `HEAD`）与含 Unicode 空白或不可见字符的名字（git 接受，但不同的名字会显示得一模一样）；完整 SHA、所钉提交的缩写 SHA 与 `refs/…`。
 
@@ -69,14 +72,14 @@ trureturing 的冻结律（其 `CLAUDE.md` §1.3）规定：**模块的状态片
 
 状态片是 trureturing 自己的账本。为了不只依赖账本，`./tbook lean-project` 生成一个 Lake 工程：
 
-- `lean-toolchain` 取自所钉提交；`lakefile.toml` 以 `rev = <commit>` 依赖 trureturing；
+- `lean-toolchain` 与 `lakefile.toml` 取自生成时 `dev` 的当前头；分片中的历史证据 SHA 仍由 `./tbook check` 单独复核；
 - 导入每个被引用的模块，对每条声明检查：存在；位于预期模块；种类与锁文件一致；`collectAxioms` 的结果只含 `propext`、`Classical.choice`、`Quot.sound`（因而没有 `sorryAx`）。
 
 它需要构建被引用模块及其依赖（Mathlib 用 `lake exe cache get`），耗时较长，所以每周和发版前运行（`.github/workflows/lean-verify.yml`；设置仓库变量 `REQUIRE_LEAN_VERIFY=true` 可让 Release 依赖它）。
 
 ## 4. 升级所钉提交时
 
-`./tbook pin` 先核对目标提交在 `site.toml` 的分支上（不在，或 GitHub 回答没有这个分支，则 **Refused**，锁文件不写；无法判定时 GitHub Actions 中拒绝、其他情况列为 **Warnings**；不带参数时用 `git ls-remote` 取 `refs/heads/<分支>` 的头，分支不存在则直接报错退出），再列出：新增与删除的 GID（仍被引用但无法解析的只列在 Unresolved）、名称或种类变化、**模块陈述摘要变化**、源码行号变化。`statement_id` 是模块级摘要：它变了，说明该模块中至少一条声明的陈述变了，不一定是你引用的那条。合并前必须对照新旧提交的 Lean 源复核被引用定理的陈述，并同步书中文字（`skills/trureturing-pin`）。
+`./tbook pin` 先核对目标提交在 `site.toml` 的分支上（不在，或 GitHub 回答没有这个分支，则 **Refused**，锁文件不写；无法判定时 GitHub Actions 中拒绝、其他情况列为 **Warnings**；不带参数时用 `git ls-remote` 取 `refs/heads/<分支>` 的头，分支不存在则直接报错退出），再列出：新增与删除的 GID（仍被引用但无法解析的只列在 Unresolved）、名称或种类变化、**模块陈述摘要变化**、源码行号变化。`statement_id` 是模块级摘要：它变了，说明该模块中至少一条声明的陈述变了，不一定是你引用的那条。每条声明在所属模块分片中保留实际证据 SHA；刷新 `dev` 时只更新新增或摘要变化的分片，未变化声明继续指向原证据。合并前必须对照新旧提交的 Lean 源复核被引用定理的陈述，并同步书中文字（`skills/trureturing-pin`）。
 
 ## 5. 不由机器保证、需要人工负责的部分
 

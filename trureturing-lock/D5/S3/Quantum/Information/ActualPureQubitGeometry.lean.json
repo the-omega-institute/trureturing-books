@@ -1,0 +1,42 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Information/ActualPureQubitGeometry",
+  "declarations": {
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace": {
+      "module": "D5/S3/Quantum/Information/ActualPureQubitGeometry",
+      "name": "D5.S3.Quantum.Information.ActualPureQubitCostInfimum.blochMatrix_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:d6295d809e769b7736bedc71a7e1a58bd5adaa58f3eaf12aded8d5a663d967d0",
+      "line": 58,
+      "signature": "theorem blochMatrix_trace (a : ℝ) (r : EuclideanSpace ℝ (Fin 3)) : Matrix.trace (blochMatrix a r) = (a : ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_blochMatrix": {
+      "module": "D5/S3/Quantum/Information/ActualPureQubitGeometry",
+      "name": "D5.S3.Quantum.Information.ActualPureQubitCostInfimum.bloch_blochMatrix",
+      "kind": "theorem",
+      "statement_id": "sha256:d6295d809e769b7736bedc71a7e1a58bd5adaa58f3eaf12aded8d5a663d967d0",
+      "line": 63,
+      "signature": "theorem bloch_blochMatrix (a : ℝ) (r : EuclideanSpace ℝ (Fin 3)) : bloch (blochMatrix a r) = r",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian": {
+      "module": "D5/S3/Quantum/Information/ActualPureQubitGeometry",
+      "name": "D5.S3.Quantum.Information.ActualPureQubitCostInfimum.bloch_geometry_of_isHermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:d6295d809e769b7736bedc71a7e1a58bd5adaa58f3eaf12aded8d5a663d967d0",
+      "line": 68,
+      "signature": "theorem bloch_geometry_of_isHermitian (M : Matrix (Fin 2) (Fin 2) ℂ) (hM : M.IsHermitian) : M = blochMatrix (Matrix.trace M).re (bloch M) ∧ (Matrix.trace M = 1 → M * M = M → ‖bloch M‖ = 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef": {
+      "module": "D5/S3/Quantum/Information/ActualPureQubitGeometry",
+      "name": "D5.S3.Quantum.Information.ActualPureQubitCostInfimum.norm_bloch_le_trace_of_posSemidef",
+      "kind": "theorem",
+      "statement_id": "sha256:d6295d809e769b7736bedc71a7e1a58bd5adaa58f3eaf12aded8d5a663d967d0",
+      "line": 100,
+      "signature": "theorem norm_bloch_le_trace_of_posSemidef (M : Matrix (Fin 2) (Fin 2) ℂ) (hM : M.PosSemidef) : ‖bloch M‖ ≤ (Matrix.trace M).re",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

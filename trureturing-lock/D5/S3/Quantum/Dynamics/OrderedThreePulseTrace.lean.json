@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Dynamics/OrderedThreePulseTrace",
+  "declarations": {
+    "D5/S3/Quantum/Dynamics/OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound": {
+      "module": "D5/S3/Quantum/Dynamics/OrderedThreePulseTrace",
+      "name": "D5.S3.Quantum.Dynamics.OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:18558b28ede14237d806963cd65f67bc095a23fc4427064b79ff5671e2f0c4fe",
+      "line": 38,
+      "signature": "theorem ordered_three_pulse_real_trace_bound (A B C : Matrix I I ℝ) (hA : A.IsSymm) (hB : B.IsSymm) (hC : C.IsSymm) (L : ℝ) (hL : 0 ≤ L) (hAn : @norm (Matrix I I ℝ) Matrix.frobeniusNormedAddCommGroup.toNorm A ≤ L) (hBn : @norm (Matrix I I ℝ) Matrix.frobeniusNormedAddCommGroup.toNorm B ≤ L) (hCn : @norm (Matrix I I ℝ) Matrix.frobeniusNormedAddCommGroup.toNorm C ≤ L) (t : ℝ) (ht : 0 < t) : (∀ X : Matrix I I ℂ, pulse0 X 0 = X) ∧ (∀ X : Matrix I I ℂ, ∀ s : ℝ, s ≠ 0 → pulse0 X s = ((s : ℂ) * Complex.I)⁻¹ • (NormedSpace.exp (((s : ℂ) * Complex.I) • X) - 1)) ∧ |(Matrix.trace (pulse0 (A.map Complex.of",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

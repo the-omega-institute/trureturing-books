@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_cartesian_chain": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalDerivative.physical_cartesian_chain",
+      "kind": "theorem",
+      "statement_id": "sha256:10390e51aca35e15d3d1f77b7dee8f0d3ee5d738e3744479e4b625809897f55b",
+      "line": 35,
+      "signature": "theorem physical_cartesian_chain (m : ℕ) (hm : 1 ≤ m) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : physicalRealOperator m b Ω (cartesian0 m) = 0 ∧ physicalRealOperator m b Ω ((2 * Ω)⁻¹ • cartesian1 m) = cartesian0 m",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_derivative": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalDerivative.physical_derivative",
+      "kind": "theorem",
+      "statement_id": "sha256:10390e51aca35e15d3d1f77b7dee8f0d3ee5d738e3744479e4b625809897f55b",
+      "line": 20,
+      "signature": "theorem physical_derivative (N : ℕ) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : HasFDerivAt (AlternatingPolygonParameters.field N b Ω) (((2 * Ω) • jacobian N).toLin'.toContinuousLinearMap) (AlternatingPolygonParameters.radius b Ω • polygon N)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

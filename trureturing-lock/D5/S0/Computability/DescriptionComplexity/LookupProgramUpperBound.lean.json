@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Computability/DescriptionComplexity/LookupProgramUpperBound",
+  "declarations": {
+    "D5/S0/Computability/DescriptionComplexity/LookupProgramUpperBound.lookup_program_upper_bound": {
+      "module": "D5/S0/Computability/DescriptionComplexity/LookupProgramUpperBound",
+      "name": "D5.S0.Computability.DescriptionComplexity.LookupProgramUpperBound.lookup_program_upper_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:0076683db329909e7855327da56533173c6437ef0fc6bbf573cabfca2df1e52e",
+      "line": 47,
+      "signature": "theorem lookup_program_upper_bound {Record TotalProgram : Type*} {consistent : TotalProgram -> Record -> Prop} {programCost : TotalProgram -> Nat} {recordComplexity : Record -> Nat} {overhead : Nat} (compiler : LookupCompiler Record TotalProgram consistent programCost recordComplexity overhead) (record : Record) : spectrumBottom compiler record <= recordComplexity record + overhead",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

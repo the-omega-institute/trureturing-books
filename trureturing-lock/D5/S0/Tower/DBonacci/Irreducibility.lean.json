@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Tower/DBonacci/Irreducibility",
+  "declarations": {
+    "D5/S0/Tower/DBonacci/Irreducibility.dbonacciPerronRoot_simple": {
+      "module": "D5/S0/Tower/DBonacci/Irreducibility",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacciPerronRoot_simple",
+      "kind": "theorem",
+      "statement_id": "sha256:785f43641b6c0a3a54476f90cbb8c6c5031cc1022cfbdee40d3ea9b280469099",
+      "line": 168,
+      "signature": "theorem dbonacciPerronRoot_simple (q : ℕ) (hq : 2 ≤ q) : (X ^ q - ∑ i ∈ Finset.range q, X ^ i : ℂ[X]).IsRoot (dbonacciPerronRoot q : ℂ) ∧ (X ^ q - ∑ i ∈ Finset.range q, X ^ i : ℂ[X]).derivative.eval (dbonacciPerronRoot q : ℂ) ≠ 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Tower/DBonacci/Irreducibility.dbonacci_complex_root_location": {
+      "module": "D5/S0/Tower/DBonacci/Irreducibility",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacci_complex_root_location",
+      "kind": "theorem",
+      "statement_id": "sha256:785f43641b6c0a3a54476f90cbb8c6c5031cc1022cfbdee40d3ea9b280469099",
+      "line": 119,
+      "signature": "theorem dbonacci_complex_root_location (q : ℕ) (hq : 2 ≤ q) {z : ℂ} (hz : (X ^ q - ∑ i ∈ Finset.range q, X ^ i : ℂ[X]).IsRoot z) : 1 ≤ ‖z‖ ↔ z = (dbonacciPerronRoot q : ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Tower/DBonacci/Irreducibility.dbonacci_irreducible": {
+      "module": "D5/S0/Tower/DBonacci/Irreducibility",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacci_irreducible",
+      "kind": "theorem",
+      "statement_id": "sha256:785f43641b6c0a3a54476f90cbb8c6c5031cc1022cfbdee40d3ea9b280469099",
+      "line": 260,
+      "signature": "theorem dbonacci_irreducible (q : ℕ) (hq : 2 ≤ q) : Irreducible (X ^ q - ∑ i ∈ Finset.range q, X ^ i : ℤ[X]) ∧ Irreducible (X ^ q - ∑ i ∈ Finset.range q, X ^ i : ℚ[X])",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/ChineseRemainder",
+  "declarations": {
+    "D5/S3/Arith/ChineseRemainder.chinese_remainder_bijective": {
+      "module": "D5/S3/Arith/ChineseRemainder",
+      "name": "D5.S3.Arith.ChineseRemainder.chinese_remainder_bijective",
+      "kind": "theorem",
+      "statement_id": "sha256:046a0b8984ed57e930343d57f66270c94f40b1aef0ff725c6f0be7a03082bda4",
+      "line": 15,
+      "signature": "theorem chinese_remainder_bijective (m n : ℕ) (h : Nat.Coprime m n) : Function.Bijective (ZMod.castHom (show m.lcm n ∣ m * n by simp [Nat.lcm_dvd_iff]) (ZMod m × ZMod n))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

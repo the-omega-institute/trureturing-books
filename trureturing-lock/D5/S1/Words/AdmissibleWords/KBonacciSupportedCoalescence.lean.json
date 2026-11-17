@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence",
+  "declarations": {
+    "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence.prefix_coupling_supported_coalescence": {
+      "module": "D5/S1/Words/AdmissibleWords/KBonacciSupportedCoalescence",
+      "name": "D5.S1.Words.AdmissibleWords.KBonacciConditionalBlockCoupling.prefix_coupling_supported_coalescence",
+      "kind": "theorem",
+      "statement_id": "sha256:abc37ee6575537e1da447d559caa5775ba6146bd0912cbb3d81d81fa8381a75b",
+      "line": 37,
+      "signature": "theorem prefix_coupling_supported_coalescence {k n : ℕ} (hk : 0 < k) (sites : List (Fin n)) (hn : sites.Nodup) (horder : sites.Pairwise (fun i j => i.val < j.val)) (fixed : Finset (Fin n)) (hfree : ∀ i ∈ sites, i ∉ fixed) (hcover : ∀ i : Fin n, i ∉ fixed → i ∈ sites) (x y : Fin n → Bool) (hx : (completions k n fixed x).Nonempty) (hy : (completions k n fixed y).Nonempty) (hfar : ∀ i ∈ sites, ∀ j ∈ fixed, i.val < j.val → x j = y j) : ∀ w : (Fin n → Bool) × (Fin n → Bool), prefixCoupling sites fixed x y hx hy w ≠ 0 → ∀ r q : Fin sites.length, r ≤ q → w.1 (sites.get r) = false → w.2 (sites.get r) ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

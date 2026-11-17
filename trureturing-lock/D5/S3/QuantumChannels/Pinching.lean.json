@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumChannels/Pinching",
+  "declarations": {
+    "D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner": {
+      "module": "D5/S3/QuantumChannels/Pinching",
+      "name": "D5.S3.QuantumChannels.Pinching.hilbertSchmidtInner",
+      "kind": "def",
+      "statement_id": "sha256:a2d607b73d91667b0155bc13e9cc87d26e19c117a12aba855531582186a71350",
+      "line": 20,
+      "signature": "def hilbertSchmidtInner (A B : QubitMatrix) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumChannels/Pinching.pinching": {
+      "module": "D5/S3/QuantumChannels/Pinching",
+      "name": "D5.S3.QuantumChannels.Pinching.pinching",
+      "kind": "def",
+      "statement_id": "sha256:a2d607b73d91667b0155bc13e9cc87d26e19c117a12aba855531582186a71350",
+      "line": 16,
+      "signature": "def pinching (rho : QubitMatrix) : QubitMatrix",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

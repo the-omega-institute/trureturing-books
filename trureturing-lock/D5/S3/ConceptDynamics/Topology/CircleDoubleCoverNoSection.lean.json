@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection",
+  "declarations": {
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section": {
+      "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection",
+      "name": "D5.S3.ConceptDynamics.Topology.CircleDoubleCoverNoSection.no_continuous_global_section",
+      "kind": "theorem",
+      "statement_id": "sha256:f5e0857a6af4673b8e6b849c8e3f46c5021a9c9fa548482a34028639cba1d5e0",
+      "line": 28,
+      "signature": "theorem no_continuous_global_section : ¬ ∃ s : Circle → Circle, Continuous s ∧ ∀ z : Circle, s z ^ 2 = z",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

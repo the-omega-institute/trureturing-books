@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumBounds/PeritoTsirelson",
+  "declarations": {
+    "D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le": {
+      "module": "D5/S3/QuantumBounds/PeritoTsirelson",
+      "name": "D5.S3.QuantumBounds.PeritoTsirelson.bell_value_le",
+      "kind": "theorem",
+      "statement_id": "sha256:9c2aa5574b319e98453d9c0136976488e5e6d030fcb67e39c1cf3cdb622a2afb",
+      "line": 832,
+      "signature": "theorem bell_value_le {n m : ℕ} (d : ℕ) (hd : 2 ≤ d) (A : Fin 2 → Matrix (Fin n) (Fin n) ℂ) (B : Fin d → Matrix (Fin m) (Fin m) ℂ) (ρ : DensityState (Fin n × Fin m)) (hA : ∀ x, A x ∈ unitaryGroup (Fin n) ℂ) (hB : ∀ y, B y ∈ unitaryGroup (Fin m) ℂ) : bellValue d A B ρ.1 ≤ 2 / Real.sin (Real.pi / (2 * (d : ℝ)))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

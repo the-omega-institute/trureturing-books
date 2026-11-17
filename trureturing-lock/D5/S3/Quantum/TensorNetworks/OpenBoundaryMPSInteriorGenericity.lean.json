@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSInteriorGenericity",
+  "declarations": {
+    "D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSInteriorGenericity.intrinsic_interior_recovery": {
+      "module": "D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSInteriorGenericity",
+      "name": "D5.S3.Quantum.TensorNetworks.OpenBoundaryMPSInteriorGenericity.intrinsic_interior_recovery",
+      "kind": "theorem",
+      "statement_id": "sha256:7ba2a211e3056533ae92090b68758586e972c6c1214e36c7759a2a41bda4b66d",
+      "line": 303,
+      "signature": "theorem intrinsic_interior_recovery (m : ℕ) (hm : 2 ≤ m) : intrinsicInteriorRecovery m",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

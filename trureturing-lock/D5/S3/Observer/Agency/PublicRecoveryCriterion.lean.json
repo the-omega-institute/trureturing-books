@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/Agency/PublicRecoveryCriterion",
+  "declarations": {
+    "D5/S3/Observer/Agency/PublicRecoveryCriterion.public_recovery_criterion": {
+      "module": "D5/S3/Observer/Agency/PublicRecoveryCriterion",
+      "name": "D5.S3.Observer.Agency.PublicRecoveryCriterion.public_recovery_criterion",
+      "kind": "theorem",
+      "statement_id": "sha256:40cb9fdeed44141497d16177da25f6a264d884298090e06956ce865c70271fe4",
+      "line": 38,
+      "signature": "theorem public_recovery_criterion {Control Public Hidden Ledger : Type*} [AddGroup Control] [AddGroup Public] [AddGroup Hidden] [AddGroup Ledger] (H : Control →+ Public) (K : Control →+ Hidden) (L : Control →+ Ledger) : ((∃ recover : H.range →+ Hidden, K = recover.comp H.rangeRestrict) ↔ H.ker ≤ K.ker) ∧ (H.ker ≤ K.ker ↔ H.ker.map K = ⊥) ∧ (H.ker.map K = ⊥ ↔ ∃ recover : H.range →+ Hidden, K = recover.comp H.rangeRestrict) ∧ (H.ker ⊓ L.ker).map K ≤ H.ker.map K",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

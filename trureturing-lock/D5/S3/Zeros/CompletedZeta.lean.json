@@ -1,0 +1,51 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Zeros/CompletedZeta",
+  "declarations": {
+    "D5/S3/Zeros/CompletedZeta.completedZetaReading": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.completedZetaReading",
+      "kind": "def",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 27,
+      "signature": "noncomputable def completedZetaReading (s : ℂ) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Zeros/CompletedZeta.xiReading": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xiReading",
+      "kind": "def",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 31,
+      "signature": "noncomputable def xiReading (s : ℂ) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Zeros/CompletedZeta.xi_reading_differentiable": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xi_reading_differentiable",
+      "kind": "theorem",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 43,
+      "signature": "theorem xi_reading_differentiable : Differentiable ℂ xiReading",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xi_reading_eq_completed_zeta",
+      "kind": "theorem",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 35,
+      "signature": "theorem xi_reading_eq_completed_zeta {s : ℂ} (hs₀ : s ≠ 0) (hs₁ : s ≠ 1) : xiReading s = (1 / 2 : ℂ) * s * (s - 1) * completedZetaReading s",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Zeros/CompletedZeta.xi_reading_reflection": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xi_reading_reflection",
+      "kind": "theorem",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 50,
+      "signature": "@[simp] theorem xi_reading_reflection (s : ℂ) : xiReading (1 - s) = xiReading s",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

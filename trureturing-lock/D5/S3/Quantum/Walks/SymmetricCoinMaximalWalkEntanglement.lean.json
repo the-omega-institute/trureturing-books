@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement",
+  "declarations": {
+    "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result": {
+      "module": "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement",
+      "name": "D5.S3.Quantum.Walks.SymmetricCoinMaximalWalkEntanglement.result",
+      "kind": "theorem",
+      "statement_id": "sha256:3371431625534eebe498e0ae4b324d519cd0742d6a96cc24716897c867b25655",
+      "line": 733,
+      "signature": "theorem result : claim",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

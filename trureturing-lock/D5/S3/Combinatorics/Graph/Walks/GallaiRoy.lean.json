@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Combinatorics/Graph/Walks/GallaiRoy",
+  "declarations": {
+    "D5/S3/Combinatorics/Graph/Walks/GallaiRoy.IsDirectedPath": {
+      "module": "D5/S3/Combinatorics/Graph/Walks/GallaiRoy",
+      "name": "GallaiRoy.IsDirectedPath",
+      "kind": "def",
+      "statement_id": "sha256:d5957773c60b04f8925a028571b2bf1a1f66eed878d42be4d7ae2aa327854751",
+      "line": 36,
+      "signature": "def IsDirectedPath (o : V → V → Prop) {m : ℕ} (f : Fin m → V) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/Graph/Walks/GallaiRoy.IsOrientation": {
+      "module": "D5/S3/Combinatorics/Graph/Walks/GallaiRoy",
+      "name": "GallaiRoy.IsOrientation",
+      "kind": "def",
+      "statement_id": "sha256:d5957773c60b04f8925a028571b2bf1a1f66eed878d42be4d7ae2aa327854751",
+      "line": 32,
+      "signature": "def IsOrientation (G : SimpleGraph V) (o : V → V → Prop) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Combinatorics/Graph/Walks/GallaiRoy.colorable_iff_exists_orientation": {
+      "module": "D5/S3/Combinatorics/Graph/Walks/GallaiRoy",
+      "name": "GallaiRoy.colorable_iff_exists_orientation",
+      "kind": "theorem",
+      "statement_id": "sha256:d5957773c60b04f8925a028571b2bf1a1f66eed878d42be4d7ae2aa327854751",
+      "line": 156,
+      "signature": "theorem colorable_iff_exists_orientation [Finite V] (G : SimpleGraph V) (k : ℕ) : G.Colorable k ↔ ∃ o : V → V → Prop, IsOrientation G o ∧ ∀ (m : ℕ) (f : Fin m → V), IsDirectedPath o f → m ≤ k",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

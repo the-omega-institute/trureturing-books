@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuadraticForms/ChordalPsdCompletion",
+  "declarations": {
+    "D5/S3/QuadraticForms/ChordalPsdCompletion.exists_posSemidef_completion": {
+      "module": "D5/S3/QuadraticForms/ChordalPsdCompletion",
+      "name": "D5.S3.QuadraticForms.ChordalPsdCompletion.exists_posSemidef_completion",
+      "kind": "theorem",
+      "statement_id": "sha256:9e836481bacd3e34dabe5fd9912111b7f5ca9c0841d80801d261f038b9430a10",
+      "line": 145,
+      "signature": "theorem exists_posSemidef_completion {V : Type u} [Finite V] (G : SimpleGraph V) (hG : G.IsChordal) (A : Matrix V V ℝ) (hA : ∀ C : Set V, G.IsClique C → (A.submatrix (Subtype.val : C → V) Subtype.val).PosSemidef) : ∃ B : Matrix V V ℝ, B.PosSemidef ∧ ∀ i j, i = j ∨ G.Adj i j → B i j = A i j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

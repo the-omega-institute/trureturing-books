@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/PrimeForms/ThreeModFourDescent",
+  "declarations": {
+    "D5/S3/PrimeForms/ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq": {
+      "module": "D5/S3/PrimeForms/ThreeModFourDescent",
+      "name": "D5.S3.PrimeForms.ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:1bc6080d42258c1006c2391ec26678c526a3bbf287ec92ba8acfce9d9c1d46c9",
+      "line": 24,
+      "signature": "theorem prime_dvd_dvd_of_dvd_sq_add_sq (q a b : ℕ) (hq : q.Prime) (h3 : q % 4 = 3) (h : q ∣ a ^ 2 + b ^ 2) : q ∣ a ∧ q ∣ b",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

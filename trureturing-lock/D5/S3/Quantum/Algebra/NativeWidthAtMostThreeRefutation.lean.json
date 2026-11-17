@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.claim": {
+      "module": "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation",
+      "name": "D5.S3.Quantum.Algebra.NativeWidthAtMostThreeRefutation.claim",
+      "kind": "def",
+      "statement_id": "sha256:f696694523af91857b7b4cd6f118727f1d6a43446cbdf6f0cd6d418faad9823a",
+      "line": 212,
+      "signature": "def claim : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation.positive_scalar_obstruction": {
+      "module": "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation",
+      "name": "D5.S3.Quantum.Algebra.NativeWidthAtMostThreeRefutation.positive_scalar_obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:f696694523af91857b7b4cd6f118727f1d6a43446cbdf6f0cd6d418faad9823a",
+      "line": 977,
+      "signature": "theorem positive_scalar_obstruction (M : MatM 3) (N : MatN 3) (lambda : ℝ) (hlambda : 0 < lambda) : ¬ ((∑ r, Matrix.kronecker (M r) (N r))ᴴ * (∑ r, Matrix.kronecker (M r) (N r)) = (lambda : ℂ) • (1 : Matrix (Fin 5 × Fin 3) (Fin 5 × Fin 3) ℂ))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

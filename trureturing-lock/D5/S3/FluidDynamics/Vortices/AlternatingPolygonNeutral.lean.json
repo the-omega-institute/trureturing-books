@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_generalized_finrank": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonNeutral.neutral_generalized_finrank",
+      "kind": "theorem",
+      "statement_id": "sha256:902ef321bab9a22210c107a41b876e852648b7b402502dfee1a32d9e08865e51",
+      "line": 184,
+      "signature": "theorem neutral_generalized_finrank (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) : Module.finrank ℂ ((actualOperator m).maxGenEigenspace 0) = 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_geometric_finrank": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonNeutral.neutral_geometric_finrank",
+      "kind": "theorem",
+      "statement_id": "sha256:902ef321bab9a22210c107a41b876e852648b7b402502dfee1a32d9e08865e51",
+      "line": 224,
+      "signature": "theorem neutral_geometric_finrank (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) : Module.finrank ℂ ((actualOperator m).eigenspace 0) = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

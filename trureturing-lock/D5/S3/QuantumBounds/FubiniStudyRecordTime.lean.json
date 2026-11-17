@@ -1,0 +1,42 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
+  "declarations": {
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle": {
+      "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
+      "name": "D5.S3.QuantumBounds.FubiniStudyRecordTime.fsAngle",
+      "kind": "def",
+      "statement_id": "sha256:11e539937522cbc33603e9e316fd8c4cef1113e95b0b82ccefe65fd198bfe13a",
+      "line": 30,
+      "signature": "noncomputable def fsAngle (a b : E) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle": {
+      "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
+      "name": "D5.S3.QuantumBounds.FubiniStudyRecordTime.fs_angle_triangle",
+      "kind": "theorem",
+      "statement_id": "sha256:11e539937522cbc33603e9e316fd8c4cef1113e95b0b82ccefe65fd198bfe13a",
+      "line": 33,
+      "signature": "theorem fs_angle_triangle (a b c : E) (ha : ‖a‖ = 1) (hb : ‖b‖ = 1) (hc : ‖c‖ = 1) : fsAngle a c ≤ fsAngle a b + fsAngle b c",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound": {
+      "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
+      "name": "D5.S3.QuantumBounds.FubiniStudyRecordTime.record_count_upper_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:11e539937522cbc33603e9e316fd8c4cef1113e95b0b82ccefe65fd198bfe13a",
+      "line": 80,
+      "signature": "theorem record_count_upper_bound (N : ℕ) (a m₀ m₁ : Fin N → E) (ha : ∀ i, ‖a i‖ = 1) (h₀ : ∀ i, ‖m₀ i‖ = 1) (h₁ : ∀ i, ‖m₁ i‖ = 1) (horth : ∀ i, inner ℂ (m₀ i) (m₁ i) = 0) (energy hbar T : ℝ) (τ : Fin N → ℝ) (henergy : 0 < energy) (hhbar : 0 < hbar) (speed₀ : ∀ i, fsAngle (a i) (m₀ i) ≤ energy * τ i / hbar) (speed₁ : ∀ i, fsAngle (a i) (m₁ i) ≤ energy * τ i / hbar) (budget : ∑ i, τ i ≤ T) : (N : ℝ) ≤ 4 * energy * T / (Real.pi * hbar)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound": {
+      "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
+      "name": "D5.S3.QuantumBounds.FubiniStudyRecordTime.record_time_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:11e539937522cbc33603e9e316fd8c4cef1113e95b0b82ccefe65fd198bfe13a",
+      "line": 59,
+      "signature": "theorem record_time_lower_bound (a m₀ m₁ : E) (ha : ‖a‖ = 1) (h₀ : ‖m₀‖ = 1) (h₁ : ‖m₁‖ = 1) (horth : inner ℂ m₀ m₁ = 0) (energy hbar τ : ℝ) (henergy : 0 < energy) (hhbar : 0 < hbar) (speed₀ : fsAngle a m₀ ≤ energy * τ / hbar) (speed₁ : fsAngle a m₁ ≤ energy * τ / hbar) : Real.pi * hbar / (4 * energy) ≤ τ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

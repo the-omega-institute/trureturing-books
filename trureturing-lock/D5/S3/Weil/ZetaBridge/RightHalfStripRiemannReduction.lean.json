@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction",
+  "declarations": {
+    "D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh": {
+      "module": "D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction",
+      "name": "D5.S3.Weil.ZetaBridge.RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh",
+      "kind": "theorem",
+      "statement_id": "sha256:0c230a6759a124696a2512db419424da8cec03eefde3f5514acdc29e7f51bce3",
+      "line": 143,
+      "signature": "theorem golden_right_half_strip_implies_rh (hRight : forall rho : Complex, riemannZeta rho = 0 -> (1 : Real) / 2 < rho.re -> rho.re < 1 -> False) : RiemannHypothesis",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

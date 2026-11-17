@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonDecomposition",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonDecomposition.geometric_eq_algebraic": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonDecomposition",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonDecomposition.geometric_eq_algebraic",
+      "kind": "theorem",
+      "statement_id": "sha256:e0f3a1ee2a22374a44dbf0bdac2fe5f9d91db9fc8fa2eecbb9e24f15ed63e2fd",
+      "line": 75,
+      "signature": "theorem geometric_eq_algebraic (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) {μ : ℂ} (hμ : μ ≠ 0) : Module.finrank ℂ ((actualOperator m).eigenspace μ) = (((jacobian (2 * m)).map Complex.ofRealHom).charpoly).rootMultiplicity μ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

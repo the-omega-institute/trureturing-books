@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Topology/SphereOrthogonalityCover",
+  "declarations": {
+    "D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six": {
+      "module": "D5/S3/Topology/SphereOrthogonalityCover",
+      "name": "D5.S3.Topology.SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six",
+      "kind": "theorem",
+      "statement_id": "sha256:4afe43b854e2458ef67f9357e4f8b808f2257340b1afb27d2212da242bca7b99",
+      "line": 416,
+      "signature": "theorem sphere_two_open_orthogonality_free_cover_lower_six {k : ℕ} (U : Fin k → Set (sphere (0 : EuclideanSpace ℝ (Fin 3)) 1)) (hopen : ∀ i, IsOpen (U i)) (hcover : ∀ x, ∃ i, x ∈ U i) (hfree : ∀ i, OrthogonalityFree (U i)) : 6 ≤ k",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

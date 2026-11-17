@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Certificates/MinkowskiNullConeRigidity",
+  "declarations": {
+    "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null": {
+      "module": "D5/S0/Certificates/MinkowskiNullConeRigidity",
+      "name": "D5.S0.Certificates.MinkowskiNullConeRigidity.eq_smul_minkowski_of_null",
+      "kind": "theorem",
+      "statement_id": "sha256:fdb3d06f468e263fb3dedde86e8fff8b4c5e726076ba1dc547fb3aeac07b4b22",
+      "line": 62,
+      "signature": "theorem eq_smul_minkowski_of_null {d : Nat} (S : QuadraticForm Real (Space d)) (hnull : forall v, minkowski d v = 0 -> S v = 0) : S = S (1, 0) • minkowski d",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Certificates/MinkowskiNullConeRigidity.exists_smul_minkowski_of_null": {
+      "module": "D5/S0/Certificates/MinkowskiNullConeRigidity",
+      "name": "D5.S0.Certificates.MinkowskiNullConeRigidity.exists_smul_minkowski_of_null",
+      "kind": "theorem",
+      "statement_id": "sha256:fdb3d06f468e263fb3dedde86e8fff8b4c5e726076ba1dc547fb3aeac07b4b22",
+      "line": 74,
+      "signature": "theorem exists_smul_minkowski_of_null {d : Nat} (S : QuadraticForm Real (Space d)) (hnull : forall v, minkowski d v = 0 -> S v = 0) : exists f : Real, S = f • minkowski d",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S0/Certificates/MinkowskiNullConeRigidity.null_cone_spatial_rigidity": {
+      "module": "D5/S0/Certificates/MinkowskiNullConeRigidity",
+      "name": "D5.S0.Certificates.MinkowskiNullConeRigidity.null_cone_spatial_rigidity",
+      "kind": "theorem",
+      "statement_id": "sha256:fdb3d06f468e263fb3dedde86e8fff8b4c5e726076ba1dc547fb3aeac07b4b22",
+      "line": 42,
+      "signature": "theorem null_cone_spatial_rigidity {d : Nat} (S : QuadraticForm Real (Space d)) (hnull : forall v, minkowski d v = 0 -> S v = 0) (w : EuclideanSpace Real (Fin d)) : S (0, w) = -S (1, 0) * ‖w‖ ^ 2 ∧ QuadraticMap.polar S (1, 0) (0, w) = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

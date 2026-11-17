@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence",
+  "declarations": {
+    "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_integer_independence": {
+      "module": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence",
+      "name": "D5.S3.Weil.PrimeAddress.PrimeLogIndependence.prime_log_integer_independence",
+      "kind": "theorem",
+      "statement_id": "sha256:055723a8b281d50ffd245e26aa4983c0fd08308fe4b701498ce4ea0184fa09ea",
+      "line": 14,
+      "signature": "theorem prime_log_integer_independence : LinearIndependent ℤ (fun p : Nat.Primes => Real.log p)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence": {
+      "module": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence",
+      "name": "D5.S3.Weil.PrimeAddress.PrimeLogIndependence.prime_log_rational_independence",
+      "kind": "theorem",
+      "statement_id": "sha256:055723a8b281d50ffd245e26aa4983c0fd08308fe4b701498ce4ea0184fa09ea",
+      "line": 50,
+      "signature": "theorem prime_log_rational_independence : LinearIndependent ℚ (fun p : Nat.Primes => Real.log p)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

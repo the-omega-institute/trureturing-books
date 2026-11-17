@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/Convention",
+  "declarations": {
+    "D5/S3/Weil/Convention.classicalZeta": {
+      "module": "D5/S3/Weil/Convention",
+      "name": "D5.S3.Weil.Convention.classicalZeta",
+      "kind": "def",
+      "statement_id": "sha256:58cab65c4d89824384f63b0f12326f47f769eed1b6b7a813ecba718229b57fe1",
+      "line": 36,
+      "signature": "noncomputable def classicalZeta : ZetaFunction",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Weil/Convention.criticalAbscissa": {
+      "module": "D5/S3/Weil/Convention",
+      "name": "D5.S3.Weil.Convention.criticalAbscissa",
+      "kind": "def",
+      "statement_id": "sha256:58cab65c4d89824384f63b0f12326f47f769eed1b6b7a813ecba718229b57fe1",
+      "line": 42,
+      "signature": "noncomputable def criticalAbscissa : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

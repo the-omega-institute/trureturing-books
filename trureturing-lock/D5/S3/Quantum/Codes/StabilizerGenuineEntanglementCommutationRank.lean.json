@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank",
+  "declarations": {
+    "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul": {
+      "module": "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank",
+      "name": "D5.S3.Quantum.Codes.StabilizerGenuineEntanglementCommutationRank.pauli_word_mul",
+      "kind": "theorem",
+      "statement_id": "sha256:bad0535f7823627be65ee675e67fe0737db38edfda900bb1e9540f9f84246b07",
+      "line": 106,
+      "signature": "theorem pauli_word_mul {N p : ℕ} [NeZero p] (a b : PauliWord N p) : pauliWordOperator a * pauliWordOperator b = windowRoot p ^ (∑ n, a.z n * b.x n).val • pauliWordOperator (wordMul a b)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

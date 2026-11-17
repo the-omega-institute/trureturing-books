@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Geometry/FixedPoint/Brouwer",
+  "declarations": {
+    "D5/S3/Geometry/FixedPoint/Brouwer.Brouwer": {
+      "module": "D5/S3/Geometry/FixedPoint/Brouwer",
+      "name": "D5.S3.Geometry.FixedPoint.Brouwer",
+      "kind": "theorem",
+      "statement_id": "sha256:5551c05c128aa510e8a3432b00de558b7e2a04a7cec3856daabbf9ae698b4d74",
+      "line": 43,
+      "signature": "theorem Brouwer (hf : Continuous f) : ∃ x, f x = x",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Divergence/SpectralCeilingRelativeEntropy",
+  "declarations": {
+    "D5/S3/Quantum/Divergence/SpectralCeilingRelativeEntropy.actual_matrix_spectral_ceiling_strong_klein": {
+      "module": "D5/S3/Quantum/Divergence/SpectralCeilingRelativeEntropy",
+      "name": "D5.S3.Quantum.Divergence.SpectralCeilingRelativeEntropy.actual_matrix_spectral_ceiling_strong_klein",
+      "kind": "theorem",
+      "statement_id": "sha256:e01f32f9b0ed563dd19452a92c9e85955e3eb6428cab96dd33960a991c77c39b",
+      "line": 244,
+      "signature": "theorem actual_matrix_spectral_ceiling_strong_klein {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hA : A.PosSemidef) (hB : B.PosSemidef) (M : ℝ) (hM : 0 < M) (ceilingA : A ≤ (M : ℂ) • (1 : Matrix n n ℂ)) (ceilingB : B ≤ (M : ℂ) • (1 : Matrix n n ℂ)) (support : ∀ v, B *ᵥ v = 0 → A *ᵥ v = 0) : ((A - B)ᴴ * (A - B)).trace.re / (2 * M) ≤ (A * (cfc Real.log A - cfc Real.log B)).trace.re - A.trace.re + B.trace.re",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

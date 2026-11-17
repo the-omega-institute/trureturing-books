@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSDensityRecovery",
+  "declarations": {
+    "D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSDensityRecovery.observable_chart_phase_recovery": {
+      "module": "D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSDensityRecovery",
+      "name": "D5.S3.Quantum.TensorNetworks.OpenBoundaryMPSDensityRecovery.observable_chart_phase_recovery",
+      "kind": "theorem",
+      "statement_id": "sha256:52929273732380a55e32c58e68b23f1f1a4b342aa1015e6688c605a09cb6be07",
+      "line": 241,
+      "signature": "theorem observable_chart_phase_recovery (m : ℕ) (ψ φ : Word (3 + m) → ℂ) (hψ : ψ ∈ openBoundaryMPS (3 + m)) (hφ : φ ∈ openBoundaryMPS (3 + m)) (hc : ObservableChart m ψ) : rawPrefix 3 m φ = rawPrefix 3 m ψ ↔ ∃ z : ℂ, ‖z‖ = 1 ∧ φ = z • ψ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

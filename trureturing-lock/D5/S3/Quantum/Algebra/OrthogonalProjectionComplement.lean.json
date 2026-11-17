@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities": {
+      "module": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement",
+      "name": "D5.S3.Quantum.Algebra.OrthogonalProjectionComplement.orthogonal_complement_projection_identities",
+      "kind": "theorem",
+      "statement_id": "sha256:8b71a66065ac5a972ceede76769582b87af61db062093d9cd77768e52d743e38",
+      "line": 34,
+      "signature": "theorem orthogonal_complement_projection_identities (M : Submodule 𝕜 E) [IsClosed (M : Set E)] : Mᗮ.starProjection = ContinuousLinearMap.id 𝕜 E - M.starProjection ∧ M.starProjection ∘L M.starProjection = M.starProjection ∧ Mᗮ.starProjection ∘L Mᗮ.starProjection = Mᗮ.starProjection ∧ M.starProjection ∘L Mᗮ.starProjection = 0 ∧ Mᗮ.starProjection ∘L M.starProjection = 0 ∧ M.starProjection + Mᗮ.starProjection = ContinuousLinearMap.id 𝕜 E",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

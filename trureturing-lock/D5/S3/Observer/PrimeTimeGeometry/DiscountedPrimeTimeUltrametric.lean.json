@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/PrimeTimeGeometry/DiscountedPrimeTimeUltrametric",
+  "declarations": {
+    "D5/S3/Observer/PrimeTimeGeometry/DiscountedPrimeTimeUltrametric.discounted_prime_time_distance_strong_triangle": {
+      "module": "D5/S3/Observer/PrimeTimeGeometry/DiscountedPrimeTimeUltrametric",
+      "name": "D5.S3.Observer.PrimeTimeGeometry.DiscountedPrimeTimeUltrametric.discounted_prime_time_distance_strong_triangle",
+      "kind": "theorem",
+      "statement_id": "sha256:bab6939d17f39cf200971589b5b9971a1edb34f7810727695edb2893232dcd2b",
+      "line": 164,
+      "signature": "theorem discounted_prime_time_distance_strong_triangle {I X : Type*} {O : I -> Type*} (J : Finset I) (weight : I -> Real) (readout : forall i, X -> O i) (update : X -> X) (gamma : Real) (hpositive : ∀ i, 0 < weight i) (hgamma : gamma ∈ Set.Ioc 0 1) (x y z : X) : discountedPrimeTimeDistance J weight readout update gamma x z <= max (discountedPrimeTimeDistance J weight readout update gamma x y) (discountedPrimeTimeDistance J weight readout update gamma y z)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

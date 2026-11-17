@@ -1,0 +1,78 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+  "declarations": {
+    "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.joint_coherent_reversal",
+      "kind": "theorem",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 53,
+      "signature": "theorem joint_coherent_reversal {Copy : Type*} [Fintype Copy] [DecidableEq Copy] (records : Copy -> EnvironmentRecord) (rho : QubitMatrix) (i j : Fin 2) (hunit : ∀ k, star (recordOverlap (records k) i j) * recordOverlap (records k) i j = 1) : multiRecordChannel (reverseOn Finset.univ records) (multiRecordChannel records rho) i j = rho i j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.one_surviving_copy_composition_apply",
+      "kind": "theorem",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 73,
+      "signature": "theorem one_surviving_copy_composition_apply {Copy : Type*} [Fintype Copy] [DecidableEq Copy] (records : Copy -> EnvironmentRecord) (rho : QubitMatrix) (i j : Fin 2) (k : Copy) (hunit : ∀ l, l ≠ k -> star (recordOverlap (records l) i j) * recordOverlap (records l) i j = 1) : reverseChannelOn (Finset.univ.erase k) records (multiRecordChannel records rho) i j = recordOverlap (records k) i j * rho i j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.reverseChannelOn": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.reverseChannelOn",
+      "kind": "def",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 43,
+      "signature": "noncomputable def reverseChannelOn {Copy : Type*} [DecidableEq Copy] (copies : Finset Copy) (records : Copy -> EnvironmentRecord) (rho : QubitMatrix) : QubitMatrix",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.reverseOn": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.reverseOn",
+      "kind": "def",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 38,
+      "signature": "def reverseOn {Copy : Type*} [DecidableEq Copy] (copies : Finset Copy) (records : Copy -> EnvironmentRecord) : Copy -> EnvironmentRecord",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.reverseRecord": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.reverseRecord",
+      "kind": "def",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 29,
+      "signature": "def reverseRecord (record : EnvironmentRecord) : EnvironmentRecord",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.reverse_record_overlap": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.reverse_record_overlap",
+      "kind": "theorem",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 33,
+      "signature": "theorem reverse_record_overlap (record : EnvironmentRecord) (i j : Fin 2) : recordOverlap (reverseRecord record) i j = star (recordOverlap record i j)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.surviving_copy_blocks_reversal",
+      "kind": "theorem",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 107,
+      "signature": "theorem surviving_copy_blocks_reversal {Copy : Type*} [Fintype Copy] [DecidableEq Copy] (records : Copy -> EnvironmentRecord) (rho : QubitMatrix) (i j : Fin 2) (k : Copy) (hunit : ∀ l, l ≠ k -> star (recordOverlap (records l) i j) * recordOverlap (records l) i j = 1) (hblock : recordOverlap (records k) i j ≠ 1) (hrho : rho i j ≠ 0) : reverseChannelOn (Finset.univ.erase k) records (multiRecordChannel records rho) i j ≠ rho i j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.two_copy_joint_reversal_certificate",
+      "kind": "theorem",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 132,
+      "signature": "theorem two_copy_joint_reversal_certificate : let rho",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Magic/QubitWignerDeficitFactorRefutation",
+  "declarations": {
+    "D5/S3/Quantum/Magic/QubitWignerDeficitFactorRefutation.result": {
+      "module": "D5/S3/Quantum/Magic/QubitWignerDeficitFactorRefutation",
+      "name": "D5.S3.Quantum.Magic.QubitWignerDeficitFactorRefutation.result",
+      "kind": "theorem",
+      "statement_id": "sha256:b8affea68dafd1592007a09ae2baa1ac21aef4cdc342d199859bf92c5c67cd53",
+      "line": 335,
+      "signature": "theorem result : ¬ claim",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

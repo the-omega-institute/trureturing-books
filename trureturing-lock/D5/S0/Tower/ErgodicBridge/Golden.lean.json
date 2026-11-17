@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Tower/ErgodicBridge/Golden",
+  "declarations": {
+    "D5/S0/Tower/ErgodicBridge/Golden.golden_ergodic_bridge": {
+      "module": "D5/S0/Tower/ErgodicBridge/Golden",
+      "name": "D5.S0.Tower.ErgodicBridge.Golden.golden_ergodic_bridge",
+      "kind": "theorem",
+      "statement_id": "sha256:be50156c192f73c7ed3b0f0bae150c33044f51a5ef49931733c1088c8acd6076",
+      "line": 491,
+      "signature": "theorem golden_ergodic_bridge (Q : Nat) (hQ : 2 <= Q) (x : Real) (hx : x ∈ D5.S0.Tower.MetricGeometry.GoldenSurvivor.goldenNameHull Q) : ∃ state : D5.S0.Tower.Champions.GoldenSurvivorTubes.GoldenSurvivorState, GoldenUnitState state /\\ Filter.liminf (fun level => D5.S0.Tower.MetricGeometry.GoldenSurvivor.goldenSurvivor level x) Filter.atTop = goldenOrbitLowerValue state",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

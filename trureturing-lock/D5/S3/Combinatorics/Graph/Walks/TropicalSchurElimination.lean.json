@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Combinatorics/Graph/Walks/TropicalSchurElimination",
+  "declarations": {
+    "D5/S3/Combinatorics/Graph/Walks/TropicalSchurElimination.pivot_walks_and_distance": {
+      "module": "D5/S3/Combinatorics/Graph/Walks/TropicalSchurElimination",
+      "name": "D5.S3.Combinatorics.Graph.Walks.TropicalSchurElimination.pivot_walks_and_distance",
+      "kind": "theorem",
+      "statement_id": "sha256:5cbe76da3ee67a182300133cc3508ca0a374f25118945148c3372f9d143cf7da",
+      "line": 96,
+      "signature": "theorem pivot_walks_and_distance (W : V → V → ℝ≥0∞) (b : V) (a z : {x : V // x ≠ b}) : (∀ p : Walk a.val z.val, ∃ q : Walk a z, weight (schur W b) q ≤ weight W p) ∧ (∀ q : Walk a z, ∃ p : Walk a.val z.val, weight W p = weight (schur W b) q) ∧ distance (schur W b) a z = distance W a.val z.val",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Analytic/Isolation/RiemannZetaPositiveRealSign",
+  "declarations": {
+    "D5/S3/Analytic/Isolation/RiemannZetaPositiveRealSign.riemannZeta_ofReal_sign": {
+      "module": "D5/S3/Analytic/Isolation/RiemannZetaPositiveRealSign",
+      "name": "D5.S3.Analytic.Isolation.RiemannZetaPositiveRealSign.riemannZeta_ofReal_sign",
+      "kind": "theorem",
+      "statement_id": "sha256:d37a665217c227d52d110dabd4ee2c52f954ec7a8a64bbacb6783b6baca5f2aa",
+      "line": 435,
+      "signature": "theorem riemannZeta_ofReal_sign {x : ℝ} (hx : 0 < x) (hx1 : x ≠ 1) : (riemannZeta (x : ℂ)).im = 0 ∧ ((x < 1 ∧ (riemannZeta (x : ℂ)).re < 0) ∨ (1 < x ∧ 0 < (riemannZeta (x : ℂ)).re))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

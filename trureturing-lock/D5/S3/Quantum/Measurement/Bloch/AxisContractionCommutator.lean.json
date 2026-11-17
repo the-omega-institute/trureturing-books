@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator",
+  "declarations": {
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator": {
+      "module": "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator",
+      "name": "D5.S3.Quantum.Measurement.Bloch.axisContraction_commutator",
+      "kind": "theorem",
+      "statement_id": "sha256:6ef80fb01a07748ac5663420c8cde9059b0a15c141a0f98a26f7ace4a0ee818f",
+      "line": 62,
+      "signature": "theorem axisContraction_commutator (n m : Fin 3 → ℝ) (c d : ℝ) : axisContraction n c * axisContraction m d - axisContraction m d * axisContraction n c = ((1 - c) * (1 - d) * axisDot n m) • (axisOuter n m - axisOuter m n)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal": {
+      "module": "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator",
+      "name": "D5.S3.Quantum.Measurement.Bloch.axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal",
+      "kind": "theorem",
+      "statement_id": "sha256:6ef80fb01a07748ac5663420c8cde9059b0a15c141a0f98a26f7ace4a0ee818f",
+      "line": 71,
+      "signature": "theorem axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal {n m : Fin 3 → ℝ} {c d : ℝ} (hn : n ≠ 0) (hparallel : ¬ ∃ s : ℝ, m = s • n) (hdot : axisDot n m ≠ 0) (hc : c ≠ 1) (hd : d ≠ 1) : axisContraction n c * axisContraction m d - axisContraction m d * axisContraction n c ≠ 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisOuter_eq_implies_parallel": {
+      "module": "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator",
+      "name": "D5.S3.Quantum.Measurement.Bloch.axisOuter_eq_implies_parallel",
+      "kind": "theorem",
+      "statement_id": "sha256:6ef80fb01a07748ac5663420c8cde9059b0a15c141a0f98a26f7ace4a0ee818f",
+      "line": 41,
+      "signature": "theorem axisOuter_eq_implies_parallel {n m : Fin 3 → ℝ} (hn : n ≠ 0) (h : axisOuter n m = axisOuter m n) : ∃ s : ℝ, m = s • n",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

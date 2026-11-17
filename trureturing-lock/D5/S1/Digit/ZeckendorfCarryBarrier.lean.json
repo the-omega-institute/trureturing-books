@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Digit/ZeckendorfCarryBarrier",
+  "declarations": {
+    "D5/S1/Digit/ZeckendorfCarryBarrier.lower_support_carry_barrier": {
+      "module": "D5/S1/Digit/ZeckendorfCarryBarrier",
+      "name": "D5.S1.Digit.ZeckendorfCarryBarrier.lower_support_carry_barrier",
+      "kind": "theorem",
+      "statement_id": "sha256:ea8a899189d2e4774d88659058663a63e0461381a8c19bd2f2748bb8383724f6",
+      "line": 24,
+      "signature": "theorem lower_support_carry_barrier (P : List ℕ) (m j : ℕ) (hP : P.IsZeckendorfRep) (hm : 4 ≤ m) (hmin : ∀ k ∈ P, m ≤ k) (hj : m - 1 ≤ j) : ∀ k ∈ wdigits ((P.map Nat.fib).sum + Nat.fib j), m - 2 ≤ k",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

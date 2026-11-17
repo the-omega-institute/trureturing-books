@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Measurement/AntidistinguishabilityGram",
+  "declarations": {
+    "D5/S3/Quantum/Measurement/AntidistinguishabilityGram.gramPsd": {
+      "module": "D5/S3/Quantum/Measurement/AntidistinguishabilityGram",
+      "name": "D5.S3.Quantum.Measurement.AntidistinguishabilityGram.gramPsd",
+      "kind": "theorem",
+      "statement_id": "sha256:9a9165464b37c650c1b1a1a1f50a35f2d685101eb3eaf871d013dd3f4e4ce69e",
+      "line": 267,
+      "signature": "theorem gramPsd (ψ : Fin n → EuclideanSpace ℂ (Fin d)) : ((Matrix.gram ℂ ψ)).PosSemidef",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

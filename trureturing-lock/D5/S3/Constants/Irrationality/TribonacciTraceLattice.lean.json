@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Constants/Irrationality/TribonacciTraceLattice",
+  "declarations": {
+    "D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate": {
+      "module": "D5/S3/Constants/Irrationality/TribonacciTraceLattice",
+      "name": "D5.S3.Constants.Irrationality.TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate",
+      "kind": "theorem",
+      "statement_id": "sha256:a832146b2b4c48d9109ca16e9da17884e70f51288099d15f33df285b4ab4f582",
+      "line": 145,
+      "signature": "theorem tribonacci_secondary_root_add_conjugate : tribonacciSecondaryRoot.1 + conj tribonacciSecondaryRoot.1 = ((1 - t : Real) : Complex)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate": {
+      "module": "D5/S3/Constants/Irrationality/TribonacciTraceLattice",
+      "name": "D5.S3.Constants.Irrationality.TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate",
+      "kind": "theorem",
+      "statement_id": "sha256:a832146b2b4c48d9109ca16e9da17884e70f51288099d15f33df285b4ab4f582",
+      "line": 152,
+      "signature": "theorem tribonacci_secondary_root_mul_conjugate : tribonacciSecondaryRoot.1 * conj tribonacciSecondaryRoot.1 = ((t⁻¹ : Real) : Complex)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness",
+  "declarations": {
+    "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase": {
+      "module": "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness",
+      "name": "D5.S3.Quantum.Tomography.DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase",
+      "kind": "theorem",
+      "statement_id": "sha256:ce28ea72058b1d3f0c0e6ae0530285b70b546863db69e1862996e354a11dc053",
+      "line": 38,
+      "signature": "theorem diagonal_prime_observables_cannot_recover_relative_phase {I : Type*} : (forall observable : I -> QubitMatrix, (forall i, (observable i).IsDiag) -> equalSuperpositionDensity ≠ qubitZ * equalSuperpositionDensity * qubitZ /\\ jointReadout (fun i rho => bornProbability rho (observable i)) equalSuperpositionDensity = jointReadout (fun i rho => bornProbability rho (observable i)) (qubitZ * equalSuperpositionDensity * qubitZ)) /\\ (forall interface : QubitMatrix, bornProbability equalSuperpositionDensity interface ≠ bornProbability (qubitZ * equalSuperpositionDensity * qubitZ) interface -> Not ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

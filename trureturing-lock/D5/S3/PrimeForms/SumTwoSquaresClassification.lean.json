@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/PrimeForms/SumTwoSquaresClassification",
+  "declarations": {
+    "D5/S3/PrimeForms/SumTwoSquaresClassification.eq_sq_add_sq_iff_even_factorization": {
+      "module": "D5/S3/PrimeForms/SumTwoSquaresClassification",
+      "name": "D5.S3.PrimeForms.SumTwoSquaresClassification.eq_sq_add_sq_iff_even_factorization",
+      "kind": "theorem",
+      "statement_id": "sha256:58995ab202b580386db6d1345aa0a9bf400b6e5bde4540f0cc6dced48c6ca91a",
+      "line": 25,
+      "signature": "theorem eq_sq_add_sq_iff_even_factorization (n : ℕ) : (∃ a b : ℕ, n = a ^ 2 + b ^ 2) ↔ ∀ q : ℕ, q.Prime → q % 4 = 3 → Even (n.factorization q)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/DefinitionEscape/LatentAdequacyCriterion",
+  "declarations": {
+    "D5/S3/ConceptDynamics/DefinitionEscape/LatentAdequacyCriterion.TargetAdequate": {
+      "module": "D5/S3/ConceptDynamics/DefinitionEscape/LatentAdequacyCriterion",
+      "name": "D5.S3.ConceptDynamics.DefinitionEscape.LatentAdequacyCriterion.TargetAdequate",
+      "kind": "def",
+      "statement_id": "sha256:3d6aa8fe43d1d4bc54814fd9decf9b7273ea28a9d5c16d2b01e5f9bc89b40bb2",
+      "line": 33,
+      "signature": "def TargetAdequate {X Latent Target : Type*} (latent : Concept X Latent) (target : Concept X Target) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Deficit/Displacement/ZeckendorfNormSign",
+  "declarations": {
+    "D5/S1/Deficit/Displacement/ZeckendorfNormSign.betaGolden_norm_sign_of_least_zeckendorf_index": {
+      "module": "D5/S1/Deficit/Displacement/ZeckendorfNormSign",
+      "name": "D5.S1.Deficit.Displacement.ZeckendorfNormSign.betaGolden_norm_sign_of_least_zeckendorf_index",
+      "kind": "theorem",
+      "statement_id": "sha256:2aacb9544de445c7a33212f95d8597209daded1af99b7949cda907ca08d06aa8",
+      "line": 338,
+      "signature": "theorem betaGolden_norm_sign_of_least_zeckendorf_index {v k : ℕ} (hv : 0 < v) (hk : k ∈ wdigits v) (hmin : ∀ j ∈ wdigits v, k ≤ j) : (0 < norm (betaGolden v) ↔ Even k) ∧ (norm (betaGolden v) < 0 ↔ Odd k)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

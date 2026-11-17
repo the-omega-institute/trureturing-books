@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Deficit/ModelSet/GoldenCutAndProject",
+  "declarations": {
+    "D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project": {
+      "module": "D5/S1/Deficit/ModelSet/GoldenCutAndProject",
+      "name": "D5.S1.Deficit.ModelSet.GoldenCutAndProject.golden_model_set_subset_cut_and_project",
+      "kind": "theorem",
+      "statement_id": "sha256:4e1696e0028d2b851ddd46e2c957791d8377b1aa473bc5bb5c916aeb9b4e7c8c",
+      "line": 54,
+      "signature": "theorem golden_model_set_subset_cut_and_project : embedding '' goldenModelSet ⊆ goldenCutAndProjectSet",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

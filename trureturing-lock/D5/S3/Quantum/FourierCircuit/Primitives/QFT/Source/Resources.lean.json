@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources",
+  "declarations": {
+    "D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources.qftSource_circuit_event_count": {
+      "module": "D5/S3/Quantum/FourierCircuit/Primitives/QFT/Source/Resources",
+      "name": "QuantumAlg.QuantumFourierTransform.Source.qftSource_circuit_event_count",
+      "kind": "theorem",
+      "statement_id": "sha256:29f0424e2386e0d675fc12e12f82d21c487d943d53b7c12598846855bf5023a6",
+      "line": 99,
+      "signature": "public lemma qftSource_circuit_event_count (n : Nat) : ResourcePool.count event (circuit oracles n).eventCost = n * (if .gate .hadamard = event then 1 else 0) + n.choose 2 * (if .gate .controlledPhase = event then 1 else 0) + (n / 2) * (if .gate .swap = event then 1 else 0)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

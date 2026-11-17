@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Words/Mechanical/MechanicalBalance",
+  "declarations": {
+    "D5/S1/Words/Mechanical/MechanicalBalance.lowerMechanicalWindowTrueCount_eq_floor": {
+      "module": "D5/S1/Words/Mechanical/MechanicalBalance",
+      "name": "D5.S1.Words.Mechanical.lowerMechanicalWindowTrueCount_eq_floor",
+      "kind": "theorem",
+      "statement_id": "sha256:db7434e78bc669a2f0d5711175f8f744fc6dfba359dd5414cc8c05c753ad3399",
+      "line": 62,
+      "signature": "theorem lowerMechanicalWindowTrueCount_eq_floor {alpha rho : Real} (halpha0 : 0 ≤ alpha) (halpha1 : alpha < 1) (i n : Nat) : (lowerMechanicalWindowTrueCount alpha rho i n : Int) = ⌊rho + ((i + n : Nat) : Real) * alpha⌋ - ⌊rho + (i : Real) * alpha⌋",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

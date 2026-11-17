@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure",
+  "declarations": {
+    "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure": {
+      "module": "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure",
+      "name": "D5.S3.ConceptDynamics.DefinitionEscape.Adjudication.lookup_copy_zero_loss_and_nonanticipating_failure",
+      "kind": "theorem",
+      "statement_id": "sha256:ae6abf019d365160f5e1509600b94a2adc5b67136407ba1b0d7a175c17ae913c",
+      "line": 73,
+      "signature": "theorem lookup_copy_zero_loss_and_nonanticipating_failure {Z Answer : Type u} [Fintype Z] [DecidableEq Z] (comparison : CopyComparison Z Answer) (commitment : CopyCommitment Z) (usesCopy : IncorporatesTableCopy commitment) : retrospectiveLoss comparison (tableCopy comparison) = 0 ∧ (∀ z, ¬ NonAnticipating commitment z) ∧ ¬ (retrospectiveLoss comparison (tableCopy comparison) = 0 → ∀ prospectiveGain : (Z → Answer) → Nat, PositiveProspectiveGain prospectiveGain (tableCopy comparison))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

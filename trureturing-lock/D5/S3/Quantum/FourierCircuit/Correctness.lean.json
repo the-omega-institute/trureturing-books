@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/FourierCircuit/Correctness",
+  "declarations": {
+    "D5/S3/Quantum/FourierCircuit/Correctness.circuit_action": {
+      "module": "D5/S3/Quantum/FourierCircuit/Correctness",
+      "name": "QuantumAlg.QuantumFourierTransform.Source.circuit_action",
+      "kind": "theorem",
+      "statement_id": "sha256:fff846fef66b22a395637a8978df0d695ea6cd4a802b5809377b61ab7be3b47d",
+      "line": 32,
+      "signature": "theorem circuit_action (oracles : OracleModel) (q : Nat) (environment : oracles.Interpretation) (v : Fin (2 ^ q) → ℂ) : Matrix.mulVec (onBinaryLabels (circuit oracles q) environment) v = QuantumPhaseEstimationGeneral.QFT (2 ^ q) v",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

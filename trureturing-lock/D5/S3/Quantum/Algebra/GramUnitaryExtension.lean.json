@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/GramUnitaryExtension",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq": {
+      "module": "D5/S3/Quantum/Algebra/GramUnitaryExtension",
+      "name": "D5.S3.Quantum.Algebra.GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:70b7fbd2597a0dc19c76a7b19d7d76c6677882724bdf45769d54164b356a2ab9",
+      "line": 43,
+      "signature": "theorem exists_unitary_mul_eq_of_conjTranspose_mul_eq {m n : Type*} [Fintype m] [DecidableEq m] [Finite n] (B A : Matrix m n ℂ) (hGram : Bᴴ * B = Aᴴ * A) : ∃ U : Matrix.unitaryGroup m ℂ, B = (U : Matrix m m ℂ) * A",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

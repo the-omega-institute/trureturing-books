@@ -1,0 +1,51 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+  "declarations": {
+    "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform": {
+      "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+      "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform",
+      "kind": "def",
+      "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
+      "line": 14,
+      "signature": "def Qform (t P Q : ℤ) : ℤ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_discriminant": {
+      "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+      "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform_discriminant",
+      "kind": "theorem",
+      "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
+      "line": 27,
+      "signature": "theorem Qform_discriminant (t : ℤ) : (2 * t + 1) ^ 2 - 4 * (t ^ 2 + t + 1) = -3",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm": {
+      "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+      "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform_eq_eisNorm",
+      "kind": "theorem",
+      "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
+      "line": 21,
+      "signature": "theorem Qform_eq_eisNorm (t P Q : ℤ) : Qform t P Q = eisNorm (P - (t + 1) * Q) Q",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm": {
+      "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+      "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform_range_eq_eisNorm",
+      "kind": "theorem",
+      "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
+      "line": 35,
+      "signature": "theorem Qform_range_eq_eisNorm (t : ℤ) : Set.range (fun p : ℤ × ℤ => Qform t p.1 p.2) = Set.range (fun p : ℤ × ℤ => eisNorm p.1 p.2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/PrimeForms/Crossing/CrossingNormForm.eisNorm": {
+      "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+      "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.eisNorm",
+      "kind": "def",
+      "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
+      "line": 17,
+      "signature": "def eisNorm (x y : ℤ) : ℤ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

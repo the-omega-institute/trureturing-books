@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Digit/ZeckendorfAvoidanceCount",
+  "declarations": {
+    "D5/S1/Digit/ZeckendorfAvoidanceCount.uniform_avoidance_count": {
+      "module": "D5/S1/Digit/ZeckendorfAvoidanceCount",
+      "name": "D5.S1.Digit.ZeckendorfAvoidanceCount.uniform_avoidance_count",
+      "kind": "theorem",
+      "statement_id": "sha256:23e744990a7fd108acfb1ba5c732033917ea07b8b05cbf88be3d05bcd50ef35e",
+      "line": 43,
+      "signature": "theorem uniform_avoidance_count (H : ℕ) : ((legalWords H 0).filter (fun w => decide (¬ B1 <:+: w))).length ≤ Real.goldenRatio ^ (H + 1) * (1 - (Real.goldenRatio ^ (14 : ℕ))⁻¹) ^ (H / 14)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

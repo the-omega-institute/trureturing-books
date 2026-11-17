@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/PrimeNumberTheorem/MediumPNT",
+  "declarations": {
+    "D5/S3/Weil/PrimeNumberTheorem/MediumPNT.MediumPNT": {
+      "module": "D5/S3/Weil/PrimeNumberTheorem/MediumPNT",
+      "name": "MediumPNT",
+      "kind": "theorem",
+      "statement_id": "sha256:0a1daefb61e99b32d86497147e861a8f8027f7d9404b1330053923f8dfa45eb5",
+      "line": 32,
+      "signature": "theorem MediumPNT : ∃ c > 0, (ψ - id) =O[atTop] fun (x : ℝ) ↦ x * Real.exp (-c * (Real.log x) ^ ((1 : ℝ) / 10))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

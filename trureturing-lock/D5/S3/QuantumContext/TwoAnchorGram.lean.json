@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumContext/TwoAnchorGram",
+  "declarations": {
+    "D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.twoAnchorGram",
+      "kind": "def",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 18,
+      "signature": "def twoAnchorGram {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : Matrix (Fin 2) (Fin 2) ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 23,
+      "signature": "theorem two_anchor_gram_det_formula {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : (twoAnchorGram u v).det = ‖u‖ ^ 2 * ‖v‖ ^ 2 - (⟪u, v⟫_ℝ) ^ 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_pos_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 31,
+      "signature": "theorem two_anchor_gram_det_pos_iff {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : 0 < (twoAnchorGram u v).det ↔ LinearIndependent ℝ ![u, v]",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

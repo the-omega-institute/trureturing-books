@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ObserverMemory/RefinementClosure/PredictiveMemoryMinimalQuotient",
+  "declarations": {
+    "D5/S3/ObserverMemory/RefinementClosure/PredictiveMemoryMinimalQuotient.predictive_memory_minimal_quotient": {
+      "module": "D5/S3/ObserverMemory/RefinementClosure/PredictiveMemoryMinimalQuotient",
+      "name": "D5.S3.ObserverMemory.RefinementClosure.PredictiveMemoryMinimalQuotient.predictive_memory_minimal_quotient",
+      "kind": "theorem",
+      "statement_id": "sha256:32eff58d40c4b153a53aaf92fdcc908f550ea4cf1172f8bbd904470027c09f25",
+      "line": 38,
+      "signature": "theorem predictive_memory_minimal_quotient {X B M : Type*} (F : X -> X) (q : X -> B) (r : X -> M) (readout_factors : ∃ factor : M -> B, q = factor ∘ r) (update_factors : ∃ induced : M -> M, r ∘ F = induced ∘ r) : ∃! theta : Set.range r -> CompletedState F q, completionProjection F q = theta ∘ Set.rangeFactorization r",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

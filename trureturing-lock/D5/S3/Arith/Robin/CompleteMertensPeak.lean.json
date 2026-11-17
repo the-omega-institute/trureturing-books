@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/Robin/CompleteMertensPeak",
+  "declarations": {
+    "D5/S3/Arith/Robin/CompleteMertensPeak.U": {
+      "module": "D5/S3/Arith/Robin/CompleteMertensPeak",
+      "name": "D5.S3.Arith.Robin.CompleteMertensPeak.U",
+      "kind": "def",
+      "statement_id": "sha256:fa04d2b70636efd7884eeb9bbe14346e9ffe934b308b2d38aad941b1cb4e9f08",
+      "line": 43,
+      "signature": "def U (t : ℝ) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Arith/Robin/CompleteMertensPeak.finite_mertens_peak_of_signed_endpoint": {
+      "module": "D5/S3/Arith/Robin/CompleteMertensPeak",
+      "name": "D5.S3.Arith.Robin.CompleteMertensPeak.finite_mertens_peak_of_signed_endpoint",
+      "kind": "theorem",
+      "statement_id": "sha256:fa04d2b70636efd7884eeb9bbe14346e9ffe934b308b2d38aad941b1cb4e9f08",
+      "line": 704,
+      "signature": "theorem finite_mertens_peak_of_signed_endpoint (hLay : ∀ t : ℝ, 2 ≤ t → Q t = Chebyshev.psi t / t - (∑ n ∈ Finset.Ioc 0 ⌊t⌋₊, ArithmeticFunction.vonMangoldt n / (n : ℝ)) + log t - 1 - eulerMascheroniConstant) {A B : ℝ} (hA : 10000 ≤ A) (hAB : A ≤ B) (htailLower : -(1 / (2 * sqrt A)) < Q B - (∫ u in Ioi B, psiErrorKernel u * QuotientIntegralBudget.weightEnvelope u) / QuotientIntegralBudget.weightEnvelope B) (hpeak : sqrt A * (4 * (log A) ^ 2 / (1 + log A) + 9) < U A) : ∃ t ∈ Icc A B, let N",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

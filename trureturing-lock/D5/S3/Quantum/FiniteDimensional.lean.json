@@ -1,0 +1,51 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/FiniteDimensional",
+  "declarations": {
+    "D5/S3/Quantum/FiniteDimensional.QubitMatrix": {
+      "module": "D5/S3/Quantum/FiniteDimensional",
+      "name": "D5.S3.Quantum.FiniteDimensional.QubitMatrix",
+      "kind": "def",
+      "statement_id": "sha256:8448b6959a48d5c232600cbaa512d3eae6aadd57de71f1e30aad67fde1d1b63d",
+      "line": 15,
+      "signature": "abbrev QubitMatrix",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/FiniteDimensional.bornProbability": {
+      "module": "D5/S3/Quantum/FiniteDimensional",
+      "name": "D5.S3.Quantum.FiniteDimensional.bornProbability",
+      "kind": "def",
+      "statement_id": "sha256:8448b6959a48d5c232600cbaa512d3eae6aadd57de71f1e30aad67fde1d1b63d",
+      "line": 73,
+      "signature": "noncomputable def bornProbability {n : Type*} [Fintype n] (rho P : Matrix n n ℂ) : ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/FiniteDimensional.born_probability_skeleton": {
+      "module": "D5/S3/Quantum/FiniteDimensional",
+      "name": "D5.S3.Quantum.FiniteDimensional.born_probability_skeleton",
+      "kind": "theorem",
+      "statement_id": "sha256:8448b6959a48d5c232600cbaa512d3eae6aadd57de71f1e30aad67fde1d1b63d",
+      "line": 78,
+      "signature": "theorem born_probability_skeleton {n : Type*} [Fintype n] [DecidableEq n] (rho : Matrix n n ℂ) (hRho : rho.PosSemidef) (hTrace : Matrix.trace rho = 1) : bornProbability rho (1 : Matrix n n ℂ) = 1 ∧ (∀ P Q : Matrix n n ℂ, bornProbability rho (P + Q) = bornProbability rho P + bornProbability rho Q) ∧ ∀ P : Matrix n n ℂ, star P = P → P * P = P → 0 ≤ bornProbability rho P",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character": {
+      "module": "D5/S3/Quantum/FiniteDimensional",
+      "name": "D5.S3.Quantum.FiniteDimensional.qubit_matrix_algebra_has_no_character",
+      "kind": "theorem",
+      "statement_id": "sha256:8448b6959a48d5c232600cbaa512d3eae6aadd57de71f1e30aad67fde1d1b63d",
+      "line": 46,
+      "signature": "theorem qubit_matrix_algebra_has_no_character : IsEmpty (QubitMatrix →ₐ[ℂ] ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/FiniteDimensional.qubit_weyl_star": {
+      "module": "D5/S3/Quantum/FiniteDimensional",
+      "name": "D5.S3.Quantum.FiniteDimensional.qubit_weyl_star",
+      "kind": "theorem",
+      "statement_id": "sha256:8448b6959a48d5c232600cbaa512d3eae6aadd57de71f1e30aad67fde1d1b63d",
+      "line": 24,
+      "signature": "theorem qubit_weyl_star : qubitZ * qubitX = -(qubitX * qubitZ) ∧ star qubitX = qubitX ∧ star qubitZ = qubitZ ∧ qubitX ^ 2 = 1 ∧ qubitZ ^ 2 = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/SpinFactor/OriginalClassification",
+  "declarations": {
+    "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences": {
+      "module": "D5/S3/Quantum/SpinFactor/OriginalClassification",
+      "name": "D5.S3.Quantum.SpinFactor.OriginalClassification.complete_consequences",
+      "kind": "theorem",
+      "statement_id": "sha256:e0e691141d161e5e7575e0f5b7aadb7ef0bdeb68d4a3fb861adf3096fe71e524",
+      "line": 798,
+      "signature": "theorem complete_consequences (D : Relation) (hP : P2 D) (hPB : PB D) : ∃ ε : Orientation, (ε = .plus ∨ ε = .minus) ∧ (∀ a b : E, D a b = crossD ε a b) ∧ (Consequences D ∧ MatrixInterfaces (orientationBool ε) D)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

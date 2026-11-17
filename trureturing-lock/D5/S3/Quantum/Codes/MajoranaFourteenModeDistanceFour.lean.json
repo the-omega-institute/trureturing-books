@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Codes/MajoranaFourteenModeDistanceFour",
+  "declarations": {
+    "D5/S3/Quantum/Codes/MajoranaFourteenModeDistanceFour.result": {
+      "module": "D5/S3/Quantum/Codes/MajoranaFourteenModeDistanceFour",
+      "name": "D5.S3.Quantum.Codes.MajoranaFourteenModeDistanceFour.result",
+      "kind": "theorem",
+      "statement_id": "sha256:cc72752a1b62a31a8ede6d6574229b47109dba96701e607ef3a8baed4ddaa1da",
+      "line": 653,
+      "signature": "theorem result : claim",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

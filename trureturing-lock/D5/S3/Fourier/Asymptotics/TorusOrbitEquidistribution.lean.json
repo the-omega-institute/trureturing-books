@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution",
+  "declarations": {
+    "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result": {
+      "module": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution",
+      "name": "D5.S3.Fourier.Asymptotics.TorusOrbitEquidistribution.result",
+      "kind": "theorem",
+      "statement_id": "sha256:990d12ae0b8105b023c6a83152a2b2959ceb21caf6236c8d7defe7cbdfeba986",
+      "line": 24,
+      "signature": "theorem result {I : Type*} [Fintype I] (g : I → Circle) : let G",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

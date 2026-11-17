@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/FixedPoints/FiniteContractingStability",
+  "declarations": {
+    "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize": {
+      "module": "D5/S1/FixedPoints/FiniteContractingStability",
+      "name": "D5.S1.FixedPoints.FiniteContractingStability.finite_contracting_updates_stabilize",
+      "kind": "theorem",
+      "statement_id": "sha256:d7f526a9871c87847c7e6614c4680969a4c25bd5dedda51e1691e2bd129834b6",
+      "line": 27,
+      "signature": "theorem finite_contracting_updates_stabilize {X : Type*} [Finite X] (U : Set X → Set X) (hU : ∀ A : Set X, U A ⊆ A) (S : ℕ → Set X) (hS : ∀ n : ℕ, S (n + 1) = U (S n)) : (∃ N ≤ (S 0).ncard, ∀ n : ℕ, N ≤ n → S n = S N) ∧ {n : ℕ | S (n + 1) ≠ S n}.ncard ≤ (S 0).ncard",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

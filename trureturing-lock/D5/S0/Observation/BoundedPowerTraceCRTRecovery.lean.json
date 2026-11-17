@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S0/Observation/BoundedPowerTraceCRTRecovery",
+  "declarations": {
+    "D5/S0/Observation/BoundedPowerTraceCRTRecovery.power_trace_unique_of_crt_image": {
+      "module": "D5/S0/Observation/BoundedPowerTraceCRTRecovery",
+      "name": "D5.S0.Observation.BoundedPowerTraceCRTRecovery.power_trace_unique_of_crt_image",
+      "kind": "theorem",
+      "statement_id": "sha256:d4a16c9f62cd38eb6925515bd61b9cdb26de05163aca6b4d8ed26b667a011b36",
+      "line": 53,
+      "signature": "theorem power_trace_unique_of_crt_image {d : Type*} [Fintype d] [DecidableEq d] (M B : ℕ) (hM : 2 * B < M) (A C : Matrix d d ℤ) (j : ℕ) (hA : |powerTrace A j| < B) (hC : |powerTrace C j| < B) (himage : crtImage M (powerTrace A j) = crtImage M (powerTrace C j)) : powerTrace A j = powerTrace C j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/PureState/RecordCoherenceComplementarity",
+  "declarations": {
+    "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity": {
+      "module": "D5/S3/Quantum/PureState/RecordCoherenceComplementarity",
+      "name": "D5.S3.Quantum.PureState.RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity",
+      "kind": "theorem",
+      "statement_id": "sha256:b1bcaba28401bd8438d4f90abc83eed60a1bb8107fa04ac10cfd096e537c5f49",
+      "line": 29,
+      "signature": "theorem pure_record_distinguishability_coherence_complementarity {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] (recordLeft recordRight : E) (hLeft : ‖recordLeft‖ = 1) (hRight : ‖recordRight‖ = 1) : let c",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

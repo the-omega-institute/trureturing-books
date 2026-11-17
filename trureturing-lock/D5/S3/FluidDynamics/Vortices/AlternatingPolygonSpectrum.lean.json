@@ -1,0 +1,69 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.charge": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.charge",
+      "kind": "def",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 25,
+      "signature": "def charge (N : ℕ) (j : Fin N) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.charpoly_mode_product": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.charpoly_mode_product",
+      "kind": "theorem",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 686,
+      "signature": "theorem charpoly_mode_product (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) : (jacobian (2 * m)).charpoly = ∏ k : ZMod (2 * m), (X ^ 2 - C (gamma m k))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.distinctness_certificate": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.distinctness_certificate",
+      "kind": "theorem",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 53,
+      "signature": "lemma distinctness_certificate (m k l : ℕ) (hk : 2 ≤ k) (hkl : k < l) (hlm : l < m) : ((m : ℝ) - k) ^ 2 * ((k : ℝ) ^ 2 - 2) ≠ ((m : ℝ) - l) ^ 2 * ((l : ℝ) ^ 2 - 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.equilibrium_all": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.equilibrium_all",
+      "kind": "theorem",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 314,
+      "signature": "theorem equilibrium_all (m : ℕ) (hm : 1 ≤ m) : field (2 * m) (polygon (2 * m)) = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.jacobian": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.jacobian",
+      "kind": "def",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 50,
+      "signature": "def jacobian (N : ℕ) : Matrix (Fin N ⊕ Fin N) (Fin N ⊕ Fin N) ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.polygon": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.polygon",
+      "kind": "def",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 44,
+      "signature": "def polygon (N : ℕ) : Fin N ⊕ Fin N → ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.rotated_jacobian_all": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.rotated_jacobian_all",
+      "kind": "theorem",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 615,
+      "signature": "theorem rotated_jacobian_all (m : ℕ) (hm : 1 ≤ m) : (rotation (2 * m)).transpose * jacobian (2*m) * rotation (2*m) = Matrix.fromBlocks 0 (blockB m) (blockC m) 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

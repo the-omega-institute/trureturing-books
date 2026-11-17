@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Completion/UniformCompletionObstruction",
+  "declarations": {
+    "D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction": {
+      "module": "D5/S3/Quantum/Completion/UniformCompletionObstruction",
+      "name": "D5.S3.Quantum.Completion.UniformCompletionObstruction.uniform_completion_obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:cbd6cb9c51bba1fdbe3b53de67a7e65bc4016b1a4df3db91911e00d91f68dfee",
+      "line": 38,
+      "signature": "theorem uniform_completion_obstruction (S : I -> Submodule K H) [forall i, (S i).HasOrthogonalProjection] (stageFilter : Filter I) [NeBot stageFilter] (hProper : forall i, S i ≠ ⊤) : (forall i, ‖ContinuousLinearMap.id K H - (S i).starProjection‖ = 1) /\\ (¬ Tendsto (fun i => ‖ContinuousLinearMap.id K H - (S i).starProjection‖) stageFilter (nhds 0))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance",
+  "declarations": {
+    "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.riemann_zeta_conj": {
+      "module": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance",
+      "name": "D5.S3.Zeros.Symmetry.ZetaConjugationCovariance.riemann_zeta_conj",
+      "kind": "theorem",
+      "statement_id": "sha256:c71d7be1478c3fcf9ba5b711de18b38f2f07ec3798adbc033d07e7307a8064ee",
+      "line": 87,
+      "signature": "theorem riemann_zeta_conj (s : ℂ) : riemannZeta (conj s) = conj (riemannZeta s)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_conj": {
+      "module": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance",
+      "name": "D5.S3.Zeros.Symmetry.ZetaConjugationCovariance.xi_reading_conj",
+      "kind": "theorem",
+      "statement_id": "sha256:c71d7be1478c3fcf9ba5b711de18b38f2f07ec3798adbc033d07e7307a8064ee",
+      "line": 98,
+      "signature": "theorem xi_reading_conj (s : ℂ) : xiReading (conj s) = conj (xiReading s)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj": {
+      "module": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance",
+      "name": "D5.S3.Zeros.Symmetry.ZetaConjugationCovariance.xi_reading_one_sub_conj",
+      "kind": "theorem",
+      "statement_id": "sha256:c71d7be1478c3fcf9ba5b711de18b38f2f07ec3798adbc033d07e7307a8064ee",
+      "line": 105,
+      "signature": "theorem xi_reading_one_sub_conj (s : ℂ) : xiReading (1 - conj s) = conj (xiReading s)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

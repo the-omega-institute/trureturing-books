@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation",
+  "declarations": {
+    "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result": {
+      "module": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation",
+      "name": "D5.S3.Quantum.Dynamics.OpenIntegrableCircuitDepthRefutation.result",
+      "kind": "theorem",
+      "statement_id": "sha256:390c62f30a9dba597753aa85dfe27970c19da88c66e780fc68f1f7e4e5afcc0c",
+      "line": 75,
+      "signature": "theorem result : ¬ claim",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

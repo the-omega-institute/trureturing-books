@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/ObservationTopology/PrimitiveEscapeStrictRefinement",
+  "declarations": {
+    "D5/S3/ConceptDynamics/ObservationTopology/PrimitiveEscapeStrictRefinement.StrictObservationRefinement": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/PrimitiveEscapeStrictRefinement",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.PrimitiveEscapeStrictRefinement.StrictObservationRefinement",
+      "kind": "def",
+      "statement_id": "sha256:167b96ad9ce52ce5a3b45a097a86947a0541c492db8074d6e331c5f36983efff",
+      "line": 24,
+      "signature": "def StrictObservationRefinement {X : Type*} (coarse fine : TopologicalSpace X) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

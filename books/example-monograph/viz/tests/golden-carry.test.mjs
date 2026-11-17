@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { loadLock } from '../../../../tools/node/slides-lib.mjs';
 // Browser regression suite for GOLDEN//CARRY (books/example-monograph/viz/golden-carry/), the worked example of
 // skills/book-viz:
 //   node books/example-monograph/viz/tests/golden-carry.test.mjs      (or: node tools/node/viz-test.mjs example-monograph)
@@ -13,7 +14,7 @@ import { session, stageFirstChecks, settle, cjkLeftovers } from '../../../../too
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..');
 const BOOK = 'example-monograph', ID = 'golden-carry';
-const lock = JSON.parse(fs.readFileSync(path.join(ROOT, 'trureturing.lock.json'), 'utf8'));
+const lock = loadLock();
 
 /* ---------- independent implementation (BigInt, ℤ[φ] pairs) ---------- */
 const fibs = [1n, 2n]; // F₂, F₃, … — the Zeckendorf weights
@@ -234,8 +235,8 @@ await scene('map'); check('the scene chips switch scenes and show the evidence o
 /* ---------- evidence: Lean links at the pinned commit; honest labels ---------- */
 const links = await D(() => [...document.querySelectorAll('a[data-lean-gid]')].map((a) => [a.dataset.leanGid, a.href]));
 check('every Lean link points at the pinned commit, file and line of trureturing.lock.json', links.length >= 7 && links.every(([gid, href]) => {
-  const d = lock.declarations[gid]; return d && d.kind === 'theorem' && href === `https://github.com/${lock.repo}/blob/${lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${d.line}`;
-}), JSON.stringify(links.find(([gid, href]) => { const d = lock.declarations[gid]; return !d || href !== `https://github.com/${lock.repo}/blob/${lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${d.line}`; }) || ''));
+  const d = lock.declarations[gid]; return d && d.kind === 'theorem' && href === `https://github.com/${lock.repo}/blob/${d.commit || lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${d.line}`;
+}), JSON.stringify(links.find(([gid, href]) => { const d = lock.declarations[gid]; return !d || href !== `https://github.com/${lock.repo}/blob/${d.commit || lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${d.line}`; }) || ''));
 const cites = new Set(links.map(([g]) => g));
 check('the page cites the theorems of its four scenes', ['D5/S1/Deficit/DeficitInteger.deficit_integer', 'D5/S1/Deficit/DeficitThreeValued.deficit_three_valued', 'D5/S1/Deficit/GoldenPhaseDeficit.golden_phase_deficit', 'D5/S1/Words/Expansions/BasePhiNegativeBridge.betaContraction_mem_window'].every((g) => cites.has(g)));
 const registry = JSON.parse(fs.readFileSync(path.join(ROOT, 'books', BOOK, 'viz', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Deficit/Beatty/GoldenObserverRoute",
+  "declarations": {
+    "D5/S1/Deficit/Beatty/GoldenObserverRoute.golden_observer_route_w_c1": {
+      "module": "D5/S1/Deficit/Beatty/GoldenObserverRoute",
+      "name": "D5.S1.Deficit.Beatty.GoldenObserverRoute.golden_observer_route_w_c1",
+      "kind": "theorem",
+      "statement_id": "sha256:0de2cd1eb622081fba1c27c379a7c82591c68176de09b542723ac0a70fc5b837",
+      "line": 177,
+      "signature": "theorem golden_observer_route_w_c1 : (∀ v : ℕ, beta v = Real.sqrt 5 * (v : ℝ) + remainder v ∧ remainder v = (phi - 1) - Int.fract (((v : ℝ) + 1) * phi) ∧ remainder v ∈ Set.Ioc (phi - 2) (phi - 1) ∧ beta (v + 1) - beta v ∈ ({phi, phi ^ 2} : Set ℝ) ∧ (beta (v + 1) - beta v = phi ↔ beatty (v + 1) - beatty v = 1)) ∧ beta 2 - beta 1 = phi",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

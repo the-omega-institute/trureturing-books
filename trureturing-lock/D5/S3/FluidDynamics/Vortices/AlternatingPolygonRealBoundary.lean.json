@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealBoundary",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealBoundary.off_axis_is_real": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealBoundary",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonRealBoundary.off_axis_is_real",
+      "kind": "theorem",
+      "statement_id": "sha256:72294caf3e1d06c5f04bbcaffda5a99f98c6791acf5a4c05cb14f3e87770af7f",
+      "line": 56,
+      "signature": "theorem off_axis_is_real (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) {μ : ℂ} (hμ : (actualOperator m).HasEigenvalue μ) (hre : μ.re ≠ 0) : μ.im = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

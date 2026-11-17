@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/InformationEscape/ExactRate",
+  "declarations": {
+    "D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/ExactRate",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.lowersEscape_iff_uniqueCaptureCount_pos",
+      "kind": "theorem",
+      "statement_id": "sha256:76e405a82e7b3d3d1897cdfba06c536c57d3784df000bf03d9731c35f2c3259f",
+      "line": 150,
+      "signature": "theorem lowersEscape_iff_uniqueCaptureCount_pos {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) (nondegenerate : arena.Nondegenerate) : catalog.LowersEscape index ↔ 0 < catalog.uniqueCaptureCount index",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

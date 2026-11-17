@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Routing/HannUniformSection",
+  "declarations": {
+    "D5/S3/Quantum/Routing/HannUniformSection.binary_conformal_kernel": {
+      "module": "D5/S3/Quantum/Routing/HannUniformSection",
+      "name": "D5.S3.Quantum.Routing.HannUniformSection.binary_conformal_kernel",
+      "kind": "theorem",
+      "statement_id": "sha256:88a64587fddf0d9468390a936427674e96d030bbdfcc14ca017d4ee5d01fc586",
+      "line": 313,
+      "signature": "theorem binary_conformal_kernel (n : ℕ) (q : Router n → ℝ) (x : Address n → ℝ) (c : Node n → ℝ) (hx : ∀ a, 0 ≤ x a) (hxn : x ≠ 0) (hk : (matrix n q).mulVec (Sum.elim x c) = 0) : ∃ (u : Address n → ℝ) (d : Node n → ℝ), (matrix n q).mulVec (Sum.elim u d) = 0 ∧ u ≠ 0 ∧ (∀ a, u a = 0 ∨ u a = 1) ∧ (∀ a, u a ≠ 0 → 0 < x a) ∧ (∀ v, d v = 0 ∨ d v = -1 ∨ d v = 1) ∧ (∀ v, d v ≠ 0 → SignType.sign (d v) = SignType.sign (c v)) ∧ SignType.sign (d (root n)) = SignType.sign (c (root n))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannUniformSection.uniform_section": {
+      "module": "D5/S3/Quantum/Routing/HannUniformSection",
+      "name": "D5.S3.Quantum.Routing.HannUniformSection.uniform_section",
+      "kind": "theorem",
+      "statement_id": "sha256:88a64587fddf0d9468390a936427674e96d030bbdfcc14ca017d4ee5d01fc586",
+      "line": 593,
+      "signature": "theorem uniform_section (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) (hq : ∀ v, -(1 / 2 : ℝ) ≤ q v ∧ q v ≤ 1) : (Section n q bus = ∅ ∨ ∃ l r : ℝ, l ≤ r ∧ Section n q bus = Set.Icc l r ∧ UniformEndpoint n q bus l ∧ UniformEndpoint n q bus r) ∧ (0 ∈ Section n q bus → ∃ S : Finset (Address n), S.Nonempty ∧ (∑ a ∈ S, record n q bus a) = 0)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Routing/HannUniformSection.zero_certificate": {
+      "module": "D5/S3/Quantum/Routing/HannUniformSection",
+      "name": "D5.S3.Quantum.Routing.HannUniformSection.zero_certificate",
+      "kind": "theorem",
+      "statement_id": "sha256:88a64587fddf0d9468390a936427674e96d030bbdfcc14ca017d4ee5d01fc586",
+      "line": 344,
+      "signature": "theorem zero_certificate (n : ℕ) (q : Router n → ℝ) (bus : Qutrit) (hq : ∀ v, -(1 / 2 : ℝ) ≤ q v ∧ q v ≤ 1) (p : Address n → ℝ) (hp : ∀ a, 0 ≤ p a) (hm : (∑ a, p a) = 1) (hz : synthesis n q bus (fun a => (p a : ℂ)) = 0) : ∃ S : Finset (Address n), S.Nonempty ∧ (∀ a ∈ S, 0 < p a) ∧ (∑ a ∈ S, record n q bus a) = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

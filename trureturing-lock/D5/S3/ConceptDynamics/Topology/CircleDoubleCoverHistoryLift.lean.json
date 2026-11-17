@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift",
+  "declarations": {
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift": {
+      "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift",
+      "name": "D5.S3.ConceptDynamics.Topology.CircleDoubleCoverHistoryLift.circle_double_cover_history_lift",
+      "kind": "theorem",
+      "statement_id": "sha256:ccc9572bd218e8cdd478ed57c079d4c8012e632e59a0aa2a7ac7533e4f9bf20b",
+      "line": 36,
+      "signature": "theorem circle_double_cover_history_lift : let square : Circle → Circle",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

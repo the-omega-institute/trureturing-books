@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumChannels/CoherenceMassBridge",
+  "declarations": {
+    "D5/S3/QuantumChannels/CoherenceMassBridge.pinching_discarded_mass_eq_zero_iff": {
+      "module": "D5/S3/QuantumChannels/CoherenceMassBridge",
+      "name": "D5.S3.QuantumChannels.CoherenceMassBridge.pinching_discarded_mass_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:8bdfa71a048ea9c25b88351e02bb5c57c19927bb794ef73bc4505c8204ff22f0",
+      "line": 62,
+      "signature": "theorem pinching_discarded_mass_eq_zero_iff (rho : QubitMatrix) : hilbertSchmidtInner (rho - pinching rho) (rho - pinching rho) = 0 ↔ offDiag rho = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero": {
+      "module": "D5/S3/QuantumChannels/CoherenceMassBridge",
+      "name": "D5.S3.QuantumChannels.CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:8bdfa71a048ea9c25b88351e02bb5c57c19927bb794ef73bc4505c8204ff22f0",
+      "line": 81,
+      "signature": "theorem pinching_eq_self_iff_offDiag_eq_zero (rho : QubitMatrix) : pinching rho = rho ↔ offDiag rho = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

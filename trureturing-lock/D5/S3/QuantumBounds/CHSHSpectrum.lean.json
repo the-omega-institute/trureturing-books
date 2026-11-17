@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumBounds/CHSHSpectrum",
+  "declarations": {
+    "D5/S3/QuantumBounds/CHSHSpectrum.chsh_spectrum": {
+      "module": "D5/S3/QuantumBounds/CHSHSpectrum",
+      "name": "D5.S3.QuantumBounds.CHSHSpectrum.chsh_spectrum",
+      "kind": "theorem",
+      "statement_id": "sha256:5ccf546fb74b1d4784a0a7189b8563bbca1b4c46a85cb08439eb81d0e384631c",
+      "line": 101,
+      "signature": "theorem chsh_spectrum {m n : Type*} [Fintype m] [DecidableEq m] [Fintype n] [DecidableEq n] (N : ℝ) (hNpos : 0 < N) (hNlt : N < 4) (A₀ A₁ : Matrix m m ℂ) (B₀ B₁ : Matrix n n ℂ) (hA₀ : A₀.IsHermitian ∧ A₀ ^ 2 = 1) (hA₁ : A₁.IsHermitian ∧ A₁ ^ 2 = 1) (hB₀ : B₀.IsHermitian ∧ B₀ ^ 2 = 1) (hB₁ : B₁.IsHermitian ∧ B₁ ^ 2 = 1) (hC : spectrum ℝ (-((A₀ * A₁ - A₁ * A₀) ⊗ₖ (B₀ * B₁ - B₁ * B₀))) ⊆ {N, -N}) : let S",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

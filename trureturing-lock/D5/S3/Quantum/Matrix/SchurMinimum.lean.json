@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Matrix/SchurMinimum",
+  "declarations": {
+    "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least": {
+      "module": "D5/S3/Quantum/Matrix/SchurMinimum",
+      "name": "D5.S3.Quantum.Matrix.SchurMinimum.schur_quadratic_is_least",
+      "kind": "theorem",
+      "statement_id": "sha256:728cc51ddc52c8e210b60c965fd55c7bfbe7f437163200a456cf80bf10e376c7",
+      "line": 44,
+      "signature": "theorem schur_quadratic_is_least {m n : Type*} [Fintype m] [Fintype n] [DecidableEq n] (A : Matrix m m ℂ) (B : Matrix m n ℂ) (C : Matrix n n ℂ) (_hA : A.IsHermitian) (hC : C.PosDef) (x : m → ℂ) : let S",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

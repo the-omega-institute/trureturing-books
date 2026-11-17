@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Analysis/TrotterProduct",
+  "declarations": {
+    "D5/S3/Quantum/Analysis/TrotterProduct.trotter_product": {
+      "module": "D5/S3/Quantum/Analysis/TrotterProduct",
+      "name": "NormedSpace.trotter_product",
+      "kind": "theorem",
+      "statement_id": "sha256:76a369e1260e0750738f4c60a51b99d9537a00959ff613a3e1a6d536500aaceb",
+      "line": 230,
+      "signature": "theorem trotter_product (A B : 𝔸) : Filter.Tendsto (fun n : ℕ => (exp ((n : ℝ)⁻¹ • A) * exp ((n : ℝ)⁻¹ • B)) ^ n) Filter.atTop (nhds (exp (A + B)))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

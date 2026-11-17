@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonJordan",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonJordan.actual_normal_form": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonJordan",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonJordan.actual_normal_form",
+      "kind": "theorem",
+      "statement_id": "sha256:c4540a5b195af8d8d6c009dc3fdd0e80dd1678ff4a34fba5cf82cf5d0d0b8ee8",
+      "line": 46,
+      "signature": "theorem actual_normal_form (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) (v : Cartesian m) : cartesianCoordinates m (actualOperator m v) = modeOperator m (cartesianCoordinates m v)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

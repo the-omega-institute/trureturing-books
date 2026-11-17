@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/Robin/PrimeFiberPropagation",
+  "declarations": {
+    "D5/S3/Arith/Robin/PrimeFiberPropagation.divisorRatio": {
+      "module": "D5/S3/Arith/Robin/PrimeFiberPropagation",
+      "name": "D5.S3.Arith.Robin.PrimeFiberPropagation.divisorRatio",
+      "kind": "def",
+      "statement_id": "sha256:09b57a4ff5f4eafa7ec9e6e74be0d0775e883f7b8ae5a3e08a9676955b4989a4",
+      "line": 28,
+      "signature": "def divisorRatio (n : ℕ) : ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Zeros/Endpoints/XiEndpointValues",
+  "declarations": {
+    "D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values": {
+      "module": "D5/S3/Zeros/Endpoints/XiEndpointValues",
+      "name": "D5.S3.Zeros.Endpoints.XiEndpointValues.xi_reading_endpoint_values",
+      "kind": "theorem",
+      "statement_id": "sha256:0648d499fd32bc7fff51faf73ff211bb9072b7d2040d02d10bca7a2817bce22f",
+      "line": 17,
+      "signature": "theorem xi_reading_endpoint_values : xiReading 0 = (1 / 2 : ℂ) ∧ xiReading 1 = (1 / 2 : ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

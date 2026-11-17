@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean",
+  "declarations": {
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean.monitored_spectral_mean": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredSpectralMean",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredSpectralMean.monitored_spectral_mean",
+      "kind": "theorem",
+      "statement_id": "sha256:4814468ecc84e1ef38bfa78828a7dde5cd86c90c6e638f95c97c195788ed1754",
+      "line": 364,
+      "signature": "theorem monitored_spectral_mean (U : E ≃ₗᵢ[ℂ] E) (v : E) (hv : ‖v‖ = 1) : (occupiedSpectrum U v).Finite ∧ (occupiedSpectrum U v).ncard = Module.finrank ℂ (cyclicSpace U v) ∧ HasSum (fun n : ℕ => (n + 1 : ℝ) * returnProbability U v (n + 1)) ((occupiedSpectrum U v).ncard : ℝ) ∧ HasSum (fun n : ℕ => returnProbability U v (n + 1)) 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

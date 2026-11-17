@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/ZeroSum",
+  "declarations": {
+    "D5/S3/Weil/ZeroSum.IsNontrivialZero": {
+      "module": "D5/S3/Weil/ZeroSum",
+      "name": "D5.S3.Weil.ZeroSum.IsNontrivialZero",
+      "kind": "def",
+      "statement_id": "sha256:154bf5eb20dafaf731874c5a333f66d46013e89637103c8b19f9b773f0bceace",
+      "line": 24,
+      "signature": "def IsNontrivialZero (rho : ℂ) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

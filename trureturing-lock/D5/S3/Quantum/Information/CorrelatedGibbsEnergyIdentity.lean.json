@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity",
+  "declarations": {
+    "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference": {
+      "module": "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity",
+      "name": "D5.S3.Quantum.Information.CorrelatedGibbsEnergyIdentity.gibbs_relative_entropy_energy_difference",
+      "kind": "theorem",
+      "statement_id": "sha256:81e5d4c3c54523623d1cb3ffa11631f8043a86425e6161a03f1519b3710777e3",
+      "line": 42,
+      "signature": "theorem gibbs_relative_entropy_energy_difference [Nonempty n] (H : CStarMatrix n n ℂ) (hH : IsSelfAdjoint H) (beta : ℝ) (initial final : DensityState n) (hInitial : initial = thermalState H hH beta) : quantumRelativeEntropy final (thermalState H hH beta) = beta * (meanEnergy H final - meanEnergy H initial) - (vonNeumannEntropy final - vonNeumannEntropy initial)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change": {
+      "module": "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity",
+      "name": "D5.S3.Quantum.Information.CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change",
+      "kind": "theorem",
+      "statement_id": "sha256:81e5d4c3c54523623d1cb3ffa11631f8043a86425e6161a03f1519b3710777e3",
+      "line": 104,
+      "signature": "theorem marginal_entropy_change_eq_mutual_information_change (U : Matrix (A × B) (A × B) ℂ) (hU : U ∈ Matrix.unitaryGroup (A × B) ℂ) (rho : DensityState (A × B)) : let final",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

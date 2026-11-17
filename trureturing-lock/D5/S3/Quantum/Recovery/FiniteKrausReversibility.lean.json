@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Recovery/FiniteKrausReversibility",
+  "declarations": {
+    "D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse": {
+      "module": "D5/S3/Quantum/Recovery/FiniteKrausReversibility",
+      "name": "D5.S3.Quantum.Recovery.FiniteKrausReversibility.scalar_products_construct_left_inverse",
+      "kind": "theorem",
+      "statement_id": "sha256:d60d51c3e368805b95d4b276500065241b891930acd0cc9aac33415c9fc6a877",
+      "line": 99,
+      "signature": "theorem scalar_products_construct_left_inverse (E : s → Matrix n d ℂ) (hTP : (∑ a, (E a)ᴴ * E a) = 1) (v : d) (c : Matrix s s ℂ) (hE : ∀ a b, (E a)ᴴ * E b = c a b • (1 : Matrix d d ℂ)) : ∃ r : ℕ, ∃ A : Fin r → Matrix d n ℂ, (∑ b, (A b)ᴴ * A b) = 1 ∧ ∀ X : Matrix d d ℂ, (∑ b, A b * (∑ a, E a * X * (E a)ᴴ) * (A b)ᴴ) = X",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

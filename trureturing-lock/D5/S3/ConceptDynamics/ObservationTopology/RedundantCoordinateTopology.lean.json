@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/ObservationTopology/RedundantCoordinateTopology",
+  "declarations": {
+    "D5/S3/ConceptDynamics/ObservationTopology/RedundantCoordinateTopology.coordinate_inadequate_iff_strict_join_refinement": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/RedundantCoordinateTopology",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.RedundantCoordinateTopology.coordinate_inadequate_iff_strict_join_refinement",
+      "kind": "theorem",
+      "statement_id": "sha256:6dd82f75e32111566fd52184ac5bf024e578d5c1fd6da80edc6cd0f44c21cf0e",
+      "line": 69,
+      "signature": "theorem coordinate_inadequate_iff_strict_join_refinement {X Current Candidate : Type*} [Nonempty X] (current : Concept X Current) (candidate : Concept X Candidate) : (¬Refines candidate current) ↔ StrictObservationRefinement (partitionTopology current) (partitionTopology (conceptJoin current candidate))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

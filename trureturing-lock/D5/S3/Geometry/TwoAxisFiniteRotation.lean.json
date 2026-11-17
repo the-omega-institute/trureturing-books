@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Geometry/TwoAxisFiniteRotation",
+  "declarations": {
+    "D5/S3/Geometry/TwoAxisFiniteRotation.moving_axis_invariance": {
+      "module": "D5/S3/Geometry/TwoAxisFiniteRotation",
+      "name": "D5.S3.Geometry.TwoAxisFiniteRotation.moving_axis_invariance",
+      "kind": "theorem",
+      "statement_id": "sha256:d9ac78339e3f77f3c7873f510e3ffa6aef7877aa70cf744da6778d4611420194",
+      "line": 369,
+      "signature": "theorem moving_axis_invariance {Y : Type*} (F : (Space × Space) → Y) (p : Space × Space) (a b : Space) (hab : ⟪a, b⟫_ℝ ^ 2 < ‖a‖ ^ 2 * ‖b‖ ^ 2) (hlocal : ∀ (O : Orthogonal), determinant O = 1 → ∀ (T : Orthogonal), (T ∈ axisCircle (O a) ∨ T ∈ axisCircle (O b)) → F (rotatePair T (rotatePair O p)) = F (rotatePair O p)) (R : Orthogonal) (hR : determinant R = 1) : F (rotatePair R p) = F p",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word": {
+      "module": "D5/S3/Geometry/TwoAxisFiniteRotation",
+      "name": "D5.S3.Geometry.TwoAxisFiniteRotation.two_axis_finite_word",
+      "kind": "theorem",
+      "statement_id": "sha256:d9ac78339e3f77f3c7873f510e3ffa6aef7877aa70cf744da6778d4611420194",
+      "line": 327,
+      "signature": "theorem two_axis_finite_word (a b : Space) (hab : ⟪a, b⟫_ℝ ^ 2 < ‖a‖ ^ 2 * ‖b‖ ^ 2) (R : Orthogonal) (hR : determinant R = 1) : ∃ l : List Orthogonal, IsAxisWord a b l ∧ l.prod = R",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair": {
+      "module": "D5/S3/Geometry/TwoAxisFiniteRotation",
+      "name": "D5.S3.Geometry.TwoAxisFiniteRotation.unit_perpendicular_pair",
+      "kind": "theorem",
+      "statement_id": "sha256:d9ac78339e3f77f3c7873f510e3ffa6aef7877aa70cf744da6778d4611420194",
+      "line": 120,
+      "signature": "theorem unit_perpendicular_pair (a b : Space) : ∃ n : Space, ‖n‖ = 1 ∧ ⟪a, n⟫_ℝ = 0 ∧ ⟪b, n⟫_ℝ = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

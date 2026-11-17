@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Zeros/ZetaIdentities",
+  "declarations": {
+    "D5/S3/Zeros/ZetaIdentities.riemann_zeta_dirichlet_sum": {
+      "module": "D5/S3/Zeros/ZetaIdentities",
+      "name": "D5.S3.Zeros.ZetaIdentities.riemann_zeta_dirichlet_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:2beb43a0d49cc4c1a5376e240d53e574f998eb4797ee3f258553457b02c41115",
+      "line": 24,
+      "signature": "theorem riemann_zeta_dirichlet_sum (s : ℂ) (hs : 1 < s.re) : (∑' n : ℕ, (n : ℂ) ^ (-s)) = classicalZeta s",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product": {
+      "module": "D5/S3/Zeros/ZetaIdentities",
+      "name": "D5.S3.Zeros.ZetaIdentities.riemann_zeta_euler_product",
+      "kind": "theorem",
+      "statement_id": "sha256:2beb43a0d49cc4c1a5376e240d53e574f998eb4797ee3f258553457b02c41115",
+      "line": 30,
+      "signature": "theorem riemann_zeta_euler_product (s : ℂ) (hs : 1 < s.re) : (∏' p : Nat.Primes, (1 - (p : ℂ) ^ (-s))⁻¹) = classicalZeta s",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one": {
+      "module": "D5/S3/Zeros/ZetaIdentities",
+      "name": "D5.S3.Zeros.ZetaIdentities.riemann_zeta_residue_one",
+      "kind": "theorem",
+      "statement_id": "sha256:2beb43a0d49cc4c1a5376e240d53e574f998eb4797ee3f258553457b02c41115",
+      "line": 18,
+      "signature": "theorem riemann_zeta_residue_one : Tendsto (fun s : ℂ => (s - 1) * classicalZeta s) (𝓝[≠] 1) (𝓝 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

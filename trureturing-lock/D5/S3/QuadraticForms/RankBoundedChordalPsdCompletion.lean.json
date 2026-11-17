@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion",
+  "declarations": {
+    "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le": {
+      "module": "D5/S3/QuadraticForms/RankBoundedChordalPsdCompletion",
+      "name": "D5.S3.QuadraticForms.RankBoundedChordalPsdCompletion.exists_posSemidef_completion_rank_le",
+      "kind": "theorem",
+      "statement_id": "sha256:2529f90abca87c8361b0361257bad8c163fe9735b03e772db780e4d9976ec917",
+      "line": 265,
+      "signature": "theorem exists_posSemidef_completion_rank_le {V : Type u} [Finite V] (d : ℕ) (G : SimpleGraph V) (hG : G.IsChordal) (A : Matrix V V ℝ) (hA : ∀ C : Set V, G.IsClique C → (A.submatrix (Subtype.val : C → V) (Subtype.val : C → V)).PosSemidef ∧ (A.submatrix (Subtype.val : C → V) (Subtype.val : C → V)).rank ≤ d) : ∃ B : Matrix V V ℝ, B.PosSemidef ∧ B.rank ≤ d ∧ ∀ i j, i = j ∨ G.Adj i j → B i j = A i j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

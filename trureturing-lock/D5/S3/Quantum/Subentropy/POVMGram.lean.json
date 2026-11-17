@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Subentropy/POVMGram",
+  "declarations": {
+    "D5/S3/Quantum/Subentropy/POVMGram.cq_conditional_subentropy_guessing": {
+      "module": "D5/S3/Quantum/Subentropy/POVMGram",
+      "name": "D5.S3.Quantum.Subentropy.POVMGram.cq_conditional_subentropy_guessing",
+      "kind": "theorem",
+      "statement_id": "sha256:446a6e6924249aa0a4b61bec8d29f4b5a16a76547c60c1faa9456be7e32c17e5",
+      "line": 223,
+      "signature": "theorem cq_conditional_subentropy_guessing (p : X → ℝ) (hp : ∀ x, 0 ≤ p x) (hs : ∑ x, p x = 1) (ρ : X → DensityState B) : conditionalSubentropy p hp hs ρ ≤ 1 - pGuess p ρ ∧ 1 - pGuess p ρ ≤ -Real.log (pGuess p ρ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

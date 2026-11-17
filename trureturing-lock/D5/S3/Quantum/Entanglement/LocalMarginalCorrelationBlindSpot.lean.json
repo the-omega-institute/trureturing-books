@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot",
+  "declarations": {
+    "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot": {
+      "module": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot",
+      "name": "D5.S3.Quantum.Entanglement.LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot",
+      "kind": "theorem",
+      "statement_id": "sha256:45ff48fb17ad6bb45927222521fe070e00df96f13247b0a00de51e12049a5bee",
+      "line": 125,
+      "signature": "theorem local_marginal_correlation_blind_spot (m n : Nat) (hm : 1 ≤ m) (hn : 1 ≤ n) (_hproduct : 1 < m * n) : localASector m n ⊔ localBSector m n ⊔ correlationSector m n = bipartiteTraceZero m n ∧ Module.finrank ℝ ↥(localASector m n ⊔ localBSector m n) = (m ^ 2 - 1) + (n ^ 2 - 1) ∧ Module.finrank ℝ (correlationSector m n) = (m ^ 2 - 1) * (n ^ 2 - 1) ∧ (Module.finrank ℝ (correlationSector m n) : ℝ) / Module.finrank ℝ (bipartiteTraceZero m n) = (((m ^ 2 - 1) * (n ^ 2 - 1) : Nat) : ℝ) / (((m ^ 2) * (n ^ 2) - 1 : Nat) : ℝ) ∧ Submodule.IsOrtho (𝕜",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

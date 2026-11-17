@@ -1,0 +1,51 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.crossProduct_is_skewAdjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
+      "line": 64,
+      "signature": "theorem crossProduct_is_skewAdjoint {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) : (A * Bᴴ)ᴴ = -(A * Bᴴ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
+      "line": 74,
+      "signature": "theorem crossProduct_is_skewAdjoint_of_balanced_sum {n : Type*} [Fintype n] [DecidableEq n] (S A B : Matrix n n ℂ) (hS : S = A + B) (hUnitary : S * Sᴴ = (1 : Matrix n n ℂ)) (hA : A * Aᴴ = halfIdentity) (hB : B * Bᴴ = halfIdentity) : (A * Bᴴ)ᴴ = -(A * Bᴴ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossTerms_eq_zero": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.crossTerms_eq_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
+      "line": 30,
+      "signature": "theorem crossTerms_eq_zero {n : Type*} [Fintype n] [DecidableEq n] (S A B : Matrix n n ℂ) (hS : S = A + B) (hUnitary : S * Sᴴ = (1 : Matrix n n ℂ)) (hA : A * Aᴴ = halfIdentity) (hB : B * Bᴴ = halfIdentity) : A * Bᴴ + B * Aᴴ = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.halfIdentity": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.halfIdentity",
+      "kind": "def",
+      "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
+      "line": 25,
+      "signature": "def halfIdentity {n : Type*} [DecidableEq n] : Matrix n n ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.secondCross_eq_neg_first": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.secondCross_eq_neg_first",
+      "kind": "theorem",
+      "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
+      "line": 55,
+      "signature": "theorem secondCross_eq_neg_first {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) : B * Aᴴ = -(A * Bᴴ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

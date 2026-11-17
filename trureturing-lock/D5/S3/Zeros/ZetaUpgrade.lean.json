@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Zeros/ZetaUpgrade",
+  "declarations": {
+    "D5/S3/Zeros/ZetaUpgrade.HasUniqueSimplePoleWithResidue": {
+      "module": "D5/S3/Zeros/ZetaUpgrade",
+      "name": "D5.S3.Zeros.ZetaUpgrade.HasUniqueSimplePoleWithResidue",
+      "kind": "def",
+      "statement_id": "sha256:d42c4a0a6d7c0e9779156a97b715482e15a2795cac7aabc19ec834f7af06ef2e",
+      "line": 18,
+      "signature": "def HasUniqueSimplePoleWithResidue (f : ℂ -> ℂ) (z residue : ℂ) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one": {
+      "module": "D5/S3/Zeros/ZetaUpgrade",
+      "name": "D5.S3.Zeros.ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one",
+      "kind": "theorem",
+      "statement_id": "sha256:d42c4a0a6d7c0e9779156a97b715482e15a2795cac7aabc19ec834f7af06ef2e",
+      "line": 36,
+      "signature": "theorem classical_zeta_unique_simple_pole_residue_one : HasUniqueSimplePoleWithResidue classicalZeta 1 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product": {
+      "module": "D5/S3/Zeros/ZetaUpgrade",
+      "name": "D5.S3.Zeros.ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product",
+      "kind": "theorem",
+      "statement_id": "sha256:d42c4a0a6d7c0e9779156a97b715482e15a2795cac7aabc19ec834f7af06ef2e",
+      "line": 25,
+      "signature": "theorem riemann_zeta_dirichlet_sum_eq_euler_product (s : ℂ) (hs : 1 < s.re) : (∑' n : ℕ, (n : ℂ) ^ (-s)) = ∏' p : Nat.Primes, (1 - (p : ℂ) ^ (-s))⁻¹",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

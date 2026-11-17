@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification",
+  "declarations": {
+    "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification": {
+      "module": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification",
+      "name": "D5.S3.Observer.AgencyHolonomy.AnchoredPhaseClassification.anchored_phase_classification",
+      "kind": "theorem",
+      "statement_id": "sha256:2ea228f59ecd1079f6cd8ebd466361376207a74ac710698e6abee888fca1dae1",
+      "line": 94,
+      "signature": "theorem anchored_phase_classification [Fintype V] [Fintype E] (ht : NamedSpanningTree s t T) (R : Set V) (r : V) (hr : r ∈ R) : let chi",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

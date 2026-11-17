@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology",
+  "declarations": {
+    "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology.defectRelation_eq_separationDeficit": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.ResidualSeparationTopology.defectRelation_eq_separationDeficit",
+      "kind": "theorem",
+      "statement_id": "sha256:808836e09644eb2fcdfa3bbca69f9297933929a30684bfd2765c993c95d4f3e4",
+      "line": 28,
+      "signature": "theorem defectRelation_eq_separationDeficit {X Current Target : Type*} (current : Concept X Current) (target : Concept X Target) : defectRelation current target = separationDeficit current target",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology.separationDeficit": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.ResidualSeparationTopology.separationDeficit",
+      "kind": "def",
+      "statement_id": "sha256:808836e09644eb2fcdfa3bbca69f9297933929a30684bfd2765c993c95d4f3e4",
+      "line": 22,
+      "signature": "def separationDeficit {X Current Target : Type*} (current : Concept X Current) (target : Concept X Target) : Set (X × X)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

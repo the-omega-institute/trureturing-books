@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Contextuality/LinearDoilyNegativeLineParity",
+  "declarations": {
+    "D5/S3/Quantum/Contextuality/LinearDoilyNegativeLineParity.result": {
+      "module": "D5/S3/Quantum/Contextuality/LinearDoilyNegativeLineParity",
+      "name": "D5.S3.Quantum.Contextuality.LinearDoilyNegativeLineParity.result",
+      "kind": "theorem",
+      "statement_id": "sha256:7d56c905a27cf62bb239a83a20cc0d7006510038eca08b18b38ca683b669d5f9",
+      "line": 685,
+      "signature": "theorem result : claim",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

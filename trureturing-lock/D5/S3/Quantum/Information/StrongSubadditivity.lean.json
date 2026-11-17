@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Information/StrongSubadditivity",
+  "declarations": {
+    "D5/S3/Quantum/Information/StrongSubadditivity.entropy_relabelState": {
+      "module": "D5/S3/Quantum/Information/StrongSubadditivity",
+      "name": "D5.S3.Quantum.Information.StrongSubadditivity.entropy_relabelState",
+      "kind": "theorem",
+      "statement_id": "sha256:2e94aab734cc135dbc702e4ab09eabd0d67da93c98a44e34a6db6bdb859a9b68",
+      "line": 71,
+      "signature": "@[simp] theorem entropy_relabelState (e : m ≃ n) (rho : DensityState n) : vonNeumannEntropy (relabelState e rho) = vonNeumannEntropy rho",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Information/StrongSubadditivity.entropy_toMState": {
+      "module": "D5/S3/Quantum/Information/StrongSubadditivity",
+      "name": "D5.S3.Quantum.Information.StrongSubadditivity.entropy_toMState",
+      "kind": "theorem",
+      "statement_id": "sha256:2e94aab734cc135dbc702e4ab09eabd0d67da93c98a44e34a6db6bdb859a9b68",
+      "line": 56,
+      "signature": "theorem entropy_toMState (rho : DensityState n) : Sᵥₙ (toMState rho) = vonNeumannEntropy rho",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Information/StrongSubadditivity.strong_subadditivity": {
+      "module": "D5/S3/Quantum/Information/StrongSubadditivity",
+      "name": "D5.S3.Quantum.Information.StrongSubadditivity.strong_subadditivity",
+      "kind": "theorem",
+      "statement_id": "sha256:2e94aab734cc135dbc702e4ab09eabd0d67da93c98a44e34a6db6bdb859a9b68",
+      "line": 77,
+      "signature": "theorem strong_subadditivity {A B C : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B] [Fintype C] [DecidableEq C] (rho : DensityState (A × (B × C))) : vonNeumannEntropy rho + vonNeumannEntropy (marginalRight (marginalLeft rho)) ≤ vonNeumannEntropy (marginalRight (relabelState (Equiv.prodAssoc A B C) rho)) + vonNeumannEntropy (marginalLeft rho)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

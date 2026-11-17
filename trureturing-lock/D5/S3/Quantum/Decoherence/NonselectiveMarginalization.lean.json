@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Decoherence/NonselectiveMarginalization",
+  "declarations": {
+    "D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal": {
+      "module": "D5/S3/Quantum/Decoherence/NonselectiveMarginalization",
+      "name": "D5.S3.Quantum.Decoherence.NonselectiveMarginalization.nonselective_recording_marginal",
+      "kind": "theorem",
+      "statement_id": "sha256:645a742c6e7896714552969915b3f0e356a2d17c84ca74f4375ceb0b525a04bb",
+      "line": 32,
+      "signature": "theorem nonselective_recording_marginal {System Outcome : Type*} [Fintype System] [DecidableEq System] [Fintype Outcome] [DecidableEq Outcome] (projector : Outcome -> Matrix System System ℂ) (projectorSelfAdjoint : forall a, Matrix.conjTranspose (projector a) = projector a) (projectorOrthogonal : forall a b, projector a * projector b = if a = b then projector a else 0) (projectorComplete : ∑ a, projector a = 1) (rho : Matrix System System ℂ) : let recording : Matrix (System × Outcome) System ℂ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

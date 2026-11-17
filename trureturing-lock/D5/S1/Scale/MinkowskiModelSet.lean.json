@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Scale/MinkowskiModelSet",
+  "declarations": {
+    "D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec": {
+      "module": "D5/S1/Scale/MinkowskiModelSet",
+      "name": "D5.S1.Scale.minkowski_model_set_spec",
+      "kind": "theorem",
+      "statement_id": "sha256:072706fdc38d68c71dd04ac461b5f728248c44a55179226a3925e895ae875a22",
+      "line": 39,
+      "signature": "theorem minkowski_model_set_spec (window : Set ℝ) (y : ℝ) (label : JointCoordinates) : Function.Injective minkowskiEmbedding ∧ (goldenLattice : Set (ℝ × ℝ)) = Set.range minkowskiEmbedding ∧ (y ∈ modelSet window ↔ ∃ x : GoldenInt, embedding x = y ∧ embedding (conj x) ∈ window) ∧ ((y, label) ∈ labeledModelSet window ↔ ∃ (x : GoldenInt) (n : ℕ), embedding x = y ∧ embedding (conj x) ∈ window ∧ jointCoordinates x n = label)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Combinatorics/Graph/Chordal/GainPotential",
+  "declarations": {
+    "D5/S3/Combinatorics/Graph/Chordal/GainPotential.SimpleGraph.IsChordal.exists_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/GainPotential",
+      "name": "SimpleGraph.IsChordal.exists_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:c9afc969bcb685a1963b77ae7f23fd4282895734a1f3f4445cd2838e4c531dbb",
+      "line": 27,
+      "signature": "theorem IsChordal.exists_gain_potential [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (g : V → V → H) (hrev : ∀ i j, G.Adj i j → g j i = (g i j)⁻¹) (htri : ∀ i j k, G.Adj i j → G.Adj j k → G.Adj i k → g i j * g j k = g i k) : ∃ φ : V → H, ∀ i j, G.Adj i j → g i j = (φ i)⁻¹ * φ j",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

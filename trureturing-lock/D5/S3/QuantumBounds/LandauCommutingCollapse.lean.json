@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumBounds/LandauCommutingCollapse",
+  "declarations": {
+    "D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes": {
+      "module": "D5/S3/QuantumBounds/LandauCommutingCollapse",
+      "name": "D5.S3.QuantumBounds.LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes",
+      "kind": "theorem",
+      "statement_id": "sha256:288d43dd2c82b149f0a2ae0bc00a10a85eb0fe9e5b2803ebea2598036b108ded",
+      "line": 25,
+      "signature": "theorem chsh_square_eq_four_of_local_pair_commutes {m n : Type*} [Fintype m] [DecidableEq m] [Fintype n] [DecidableEq n] (A₀ A₁ : Matrix m m ℂ) (B₀ B₁ : Matrix n n ℂ) (hA₀ : A₀.IsHermitian ∧ A₀ ^ 2 = 1) (hA₁ : A₁.IsHermitian ∧ A₁ ^ 2 = 1) (hB₀ : B₀.IsHermitian ∧ B₀ ^ 2 = 1) (hB₁ : B₁.IsHermitian ∧ B₁ ^ 2 = 1) (hLocal : A₀ * A₁ = A₁ * A₀ ∨ B₀ * B₁ = B₁ * B₀) : let S",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

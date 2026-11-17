@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeRectangularBound",
+  "declarations": {
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeRectangularBound.bound": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeRectangularBound",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.NativeRectangularBound.bound",
+      "kind": "theorem",
+      "statement_id": "sha256:f905171e6d60ef935199ac6d507d1081c2b56f0e18415b7c853307c3c5655de5",
+      "line": 698,
+      "signature": "theorem bound {a b c d : ℕ} (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin d) (Fin c) ℂ) (lambda : ℝ) (hlambda : 0 < lambda) (hab : 3 * a < 2 * b) (hF : (∑ r, Matrix.kronecker (M r) (N r))ᴴ * (∑ r, Matrix.kronecker (M r) (N r)) = (lambda : ℂ) • (1 : Matrix (Fin b × Fin c) (Fin b × Fin c) ℂ)) : 2 * c ≤ d",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Zeros/ActualZeroGeometry",
+  "declarations": {
+    "D5/S3/Zeros/ActualZeroGeometry.rh_iff_nontrivial_zeros_on_line": {
+      "module": "D5/S3/Zeros/ActualZeroGeometry",
+      "name": "D5.S3.Zeros.ActualZeroGeometry.rh_iff_nontrivial_zeros_on_line",
+      "kind": "theorem",
+      "statement_id": "sha256:c0a2b97ad9467f1e0ba7ba502bfebae5ed586910249a009393ec30062fa9c16f",
+      "line": 45,
+      "signature": "theorem rh_iff_nontrivial_zeros_on_line : RiemannHypothesis ↔ ∀ rho : ℂ, Zeta23.IsNontrivialZero rho → rho.re = (1 : ℝ) / 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

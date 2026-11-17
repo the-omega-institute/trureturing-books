@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Foundation/EffectProbabilityExtension",
+  "declarations": {
+    "D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_density_representation": {
+      "module": "D5/S3/Quantum/Foundation/EffectProbabilityExtension",
+      "name": "D5.S3.Quantum.Foundation.EffectProbabilityExtension.effect_density_representation",
+      "kind": "theorem",
+      "statement_id": "sha256:639121ba69d1e46a2e7b994741420e62f1e0abef50af7f506f52242362d30dab",
+      "line": 324,
+      "signature": "theorem effect_density_representation {d : Type*} [Fintype d] [DecidableEq d] (p : CStarMatrix d d ℂ → ℝ) (hpos : ∀ E, 0 ≤ E → E ≤ 1 → 0 ≤ p E) (hadd : ∀ E F, 0 ≤ E → 0 ≤ F → E + F ≤ 1 → p (E + F) = p E + p F) (hnorm : p 1 = 1) : ∃! ρ : Matrix d d ℂ, ρ.PosSemidef ∧ Matrix.trace ρ = 1 ∧ ∀ E : CStarMatrix d d ℂ, 0 ≤ E → E ≤ 1 → Matrix.trace (ρ * CStarMatrix.ofMatrix.symm E) = (p E : ℂ)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_trace_unique": {
+      "module": "D5/S3/Quantum/Foundation/EffectProbabilityExtension",
+      "name": "D5.S3.Quantum.Foundation.EffectProbabilityExtension.effect_trace_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:639121ba69d1e46a2e7b994741420e62f1e0abef50af7f506f52242362d30dab",
+      "line": 46,
+      "signature": "theorem effect_trace_unique {d : Type*} [Fintype d] [DecidableEq d] (ρ σ : Matrix d d ℂ) (h : ∀ E : CStarMatrix d d ℂ, 0 ≤ E → E ≤ 1 → pairing ρ E = pairing σ E) : ρ = σ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

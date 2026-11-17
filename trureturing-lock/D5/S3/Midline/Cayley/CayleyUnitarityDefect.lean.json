@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Midline/Cayley/CayleyUnitarityDefect",
+  "declarations": {
+    "D5/S3/Midline/Cayley/CayleyUnitarityDefect.cayleyCoefficient": {
+      "module": "D5/S3/Midline/Cayley/CayleyUnitarityDefect",
+      "name": "D5.S3.Midline.Cayley.CayleyUnitarityDefect.cayleyCoefficient",
+      "kind": "def",
+      "statement_id": "sha256:53480f871ca9eb6393acbc326385c7b62468c023fe8bb218e1370c6108269822",
+      "line": 59,
+      "signature": "noncomputable def cayleyCoefficient (rho : Complex) : Complex",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

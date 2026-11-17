@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
+  "declarations": {
+    "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState": {
+      "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
+      "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.marginalLeft_productState",
+      "kind": "theorem",
+      "statement_id": "sha256:9ec1df9721285fac407a0803347b9035cea2b264d6c4f81851e81c97a0eb7dd3",
+      "line": 145,
+      "signature": "theorem marginalLeft_productState {A B : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B] (rho : DensityState A) (sigma : DensityState B) : marginalLeft (productState rho sigma) = sigma",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalRight_productState": {
+      "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
+      "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.marginalRight_productState",
+      "kind": "theorem",
+      "statement_id": "sha256:9ec1df9721285fac407a0803347b9035cea2b264d6c4f81851e81c97a0eb7dd3",
+      "line": 155,
+      "signature": "theorem marginalRight_productState {A B : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B] (rho : DensityState A) (sigma : DensityState B) : marginalRight (productState rho sigma) = rho",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState": {
+      "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
+      "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.quantumMutualInformation_productState",
+      "kind": "theorem",
+      "statement_id": "sha256:9ec1df9721285fac407a0803347b9035cea2b264d6c4f81851e81c97a0eb7dd3",
+      "line": 322,
+      "signature": "theorem quantumMutualInformation_productState {A B : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B] (rho : DensityState A) (sigma : DensityState B) : quantumMutualInformation (productState rho sigma) = 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

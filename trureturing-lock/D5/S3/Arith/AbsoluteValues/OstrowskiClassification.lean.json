@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification",
+  "declarations": {
+    "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification": {
+      "module": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification",
+      "name": "D5.S3.Arith.AbsoluteValues.OstrowskiClassification.rational_absolute_value_classification",
+      "kind": "theorem",
+      "statement_id": "sha256:9253e2b863db0dac4dbd6deccbcec201ace84620d3cbd413467d1290ce2ee6e7",
+      "line": 24,
+      "signature": "theorem rational_absolute_value_classification (f : AbsoluteValue ℚ ℝ) (hf : f.IsNontrivial) : f ≈ Rat.AbsoluteValue.real ∨ ∃! p : ℕ, ∃ (_ : Fact p.Prime), f ≈ Rat.AbsoluteValue.padic p",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

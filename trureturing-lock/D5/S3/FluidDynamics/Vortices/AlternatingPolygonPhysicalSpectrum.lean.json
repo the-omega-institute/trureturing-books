@@ -1,0 +1,69 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physicalRealOperator": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physicalRealOperator",
+      "kind": "def",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 61,
+      "signature": "def physicalRealOperator (m : ℕ) (b Ω : ℝ) : Module.End ℝ (RealCartesian m)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physicalRealOperator_eq": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physicalRealOperator_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 65,
+      "signature": "theorem physicalRealOperator_eq (m : ℕ) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : physicalRealOperator m b Ω = (2 * Ω) • realOperator m",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_negative_eigenvalue_iff": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physical_negative_eigenvalue_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 99,
+      "signature": "theorem physical_negative_eigenvalue_iff (m : ℕ) (hm : 3 ≤ m) {b Ω μ : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) (hμ : μ < 0) : (physicalRealOperator m b Ω).HasEigenvalue μ ↔ ∃ k : Fin (m - 2), μ = 2 * Ω * (-positiveRoot m (k.val + 2))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_positive_eigenvalue_iff": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physical_positive_eigenvalue_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 80,
+      "signature": "theorem physical_positive_eigenvalue_iff (m : ℕ) (hm : 3 ≤ m) {b Ω μ : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) (hμ : 0 < μ) : (physicalRealOperator m b Ω).HasEigenvalue μ ↔ ∃ k : Fin (m - 2), μ = 2 * Ω * positiveRoot m (k.val + 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_real_dimensions": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physical_real_dimensions",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 204,
+      "signature": "theorem physical_real_dimensions (m : ℕ) [NeZero (2 * m)] (hm : 3 ≤ m) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : Module.finrank ℝ (physicalStableSpace m b Ω) = 2 * (m - 2) ∧ Module.finrank ℝ (physicalUnstableSpace m b Ω) = 2 * (m - 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_stable_exhaustive": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physical_stable_exhaustive",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 151,
+      "signature": "theorem physical_stable_exhaustive (m : ℕ) (hm : 3 ≤ m) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : physicalStableSpace m b Ω = ⨆ μ : ℝ, ⨆ _ : μ < 0, (physicalRealOperator m b Ω).eigenspace μ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_unstable_exhaustive": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physical_unstable_exhaustive",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 175,
+      "signature": "theorem physical_unstable_exhaustive (m : ℕ) (hm : 3 ≤ m) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : physicalUnstableSpace m b Ω = ⨆ μ : ℝ, ⨆ _ : 0 < μ, (physicalRealOperator m b Ω).eigenspace μ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

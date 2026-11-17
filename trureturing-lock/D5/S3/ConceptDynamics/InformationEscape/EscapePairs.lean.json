@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/InformationEscape/EscapePairs",
+  "declarations": {
+    "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/EscapePairs",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.escapePairs_without_eq_union",
+      "kind": "theorem",
+      "statement_id": "sha256:b0be43b0e60a919ab3976a977603f2bd3b913f1c87da819ae147a468226dd1f9",
+      "line": 138,
+      "signature": "theorem escapePairs_without_eq_union {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) : catalog.escapePairs (catalog.without index) = catalog.escapePairs catalog.fullIndexSet ∪ catalog.uniqueCapturePairs index",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.uniqueCapturePairs_eq_sdiff": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/EscapePairs",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.uniqueCapturePairs_eq_sdiff",
+      "kind": "theorem",
+      "statement_id": "sha256:b0be43b0e60a919ab3976a977603f2bd3b913f1c87da819ae147a468226dd1f9",
+      "line": 64,
+      "signature": "theorem uniqueCapturePairs_eq_sdiff {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) : catalog.uniqueCapturePairs index = catalog.escapePairs (catalog.without index) \\ catalog.escapePairs catalog.fullIndexSet",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

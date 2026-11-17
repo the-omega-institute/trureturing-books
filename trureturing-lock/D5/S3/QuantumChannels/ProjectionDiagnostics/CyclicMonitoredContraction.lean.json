@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction",
+  "declarations": {
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredContraction.cyclic_future_kernel_eq_bot",
+      "kind": "theorem",
+      "statement_id": "sha256:8001628b65492fc63847ae0222f60c334645f820927f218b2b75e8a64282fbc3",
+      "line": 75,
+      "signature": "theorem cyclic_future_kernel_eq_bot (U : E ≃ₗᵢ[ℂ] E) (v : E) : (⨅ n : ℕ, LinearMap.ker ((cyclicClick U v).toLinearMap.comp ((cyclicStep U v).toLinearMap ^ n))) = ⊥",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

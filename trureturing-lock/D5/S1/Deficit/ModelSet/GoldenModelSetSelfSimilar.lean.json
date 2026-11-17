@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar",
+  "declarations": {
+    "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_model_set_self_similar": {
+      "module": "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar",
+      "name": "D5.S1.Deficit.GoldenModelSetSelfSimilar.golden_model_set_self_similar",
+      "kind": "theorem",
+      "statement_id": "sha256:d8572323fb2bb07500f22dc0392d3bd8e43f0a48362aa3a9ea465558678db2e1",
+      "line": 188,
+      "signature": "theorem golden_model_set_self_similar : goldenModelSet = phiBranch ∪ phiSquaredBranch ∧ Disjoint phiBranch phiSquaredBranch",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_window_volume": {
+      "module": "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar",
+      "name": "D5.S1.Deficit.GoldenModelSetSelfSimilar.golden_window_volume",
+      "kind": "theorem",
+      "statement_id": "sha256:d8572323fb2bb07500f22dc0392d3bd8e43f0a48362aa3a9ea465558678db2e1",
+      "line": 182,
+      "signature": "theorem golden_window_volume : volume goldenWindow = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

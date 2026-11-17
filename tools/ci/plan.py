@@ -24,7 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tbook import film_inputs, template as template_metadata
 from ci import viz_budget, testing
 
-VERSION = 6
+VERSION = 7
 SCHEMA = "tbook-ci-coverage-v1"
 DEPENDENCIES = "tbook-ci-dependencies-v1"
 SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -209,6 +209,8 @@ def suite_inputs(tree, slug, book, suite):
     if "@citations" in patterns:
         patterns.remove("@citations")
         patterns.extend(citation_inputs(tree, slug, ident))
+    if "trureturing.lock.json" in patterns:
+        patterns.append("trureturing-lock/**")
     roots = [suite, *(p for p in tree.files if p.endswith((".js", ".mjs")) and
                       any(fnmatch.fnmatchcase(p, pat) for pat in patterns))]
     return patterns, imports(tree, *roots)
@@ -568,7 +570,7 @@ def impact(current, previous, paths, *, full=False, template=False):
             films.update(uncertain_films)
             reasons.update(f"unknown shared film reads -> {film}" for film in uncertain_films)
             continue
-        if p == "trureturing.lock.json":
+        if p == "trureturing.lock.json" or p == "trureturing-lock/index.json" or p.startswith("trureturing-lock/"):
             shared_outputs("evidence lock: ", p)
             # Ordinary declared lock readers above still run. Only explicit link-only
             # readers delegate the unchanged browser behavior to static evidence checks.
@@ -577,7 +579,7 @@ def impact(current, previous, paths, *, full=False, template=False):
             films.update(uncertain_films)
             continue
         if p.startswith(("tools/", "theme/", "templates/", ".github/", "i18n/")) or p in (
-                "site.toml", "trureturing.lock.json", "package.json", "package-lock.json", "requirements.txt", "template.toml", "tbook"):
+                "site.toml", "trureturing.lock.json", "trureturing-lock/index.json", "package.json", "package-lock.json", "requirements.txt", "template.toml", "tbook") or p.startswith("trureturing-lock/"):
             everything("shared input: ", p)
         else:
             everything("unknown impact: ", p)

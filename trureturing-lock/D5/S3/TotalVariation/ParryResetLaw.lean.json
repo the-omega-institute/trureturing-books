@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/TotalVariation/ParryResetLaw",
+  "declarations": {
+    "D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law": {
+      "module": "D5/S3/TotalVariation/ParryResetLaw",
+      "name": "D5.S3.TotalVariation.ParryResetLaw.parry_stationary_law",
+      "kind": "theorem",
+      "statement_id": "sha256:f1def1d45a7ded5fabde68f7c2080b1b30564fff83957726a06255dc4ca220a4",
+      "line": 51,
+      "signature": "theorem parry_stationary_law (k : ℕ) (hk : 2 ≤ k) : let p",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

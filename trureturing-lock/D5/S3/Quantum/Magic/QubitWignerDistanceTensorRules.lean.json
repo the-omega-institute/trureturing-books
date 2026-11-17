@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Magic/QubitWignerDistanceTensorRules",
+  "declarations": {
+    "D5/S3/Quantum/Magic/QubitWignerDistanceTensorRules.resultEquatorial": {
+      "module": "D5/S3/Quantum/Magic/QubitWignerDistanceTensorRules",
+      "name": "D5.S3.Quantum.Magic.QubitWignerDistanceTensorRules.resultEquatorial",
+      "kind": "theorem",
+      "statement_id": "sha256:68dfd52df42ebafdaeceedcb71a1cff2a125a14956cf6cc0df2ba1c90156b060",
+      "line": 637,
+      "signature": "theorem resultEquatorial : claimEquatorial",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

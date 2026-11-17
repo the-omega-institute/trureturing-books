@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ContinuousObservables/PhaseSynthesisLifting",
+  "declarations": {
+    "D5/S3/ContinuousObservables/PhaseSynthesisLifting.cor8Phases": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesisLifting",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesisLifting.cor8Phases",
+      "kind": "def",
+      "statement_id": "sha256:7cd122c6ad66130811ead27238ded1a6b6b254f3e13522907095521fb512bb3b",
+      "line": 126,
+      "signature": "noncomputable def cor8Phases (φ₀ : ℝ) (Φ' : List ℝ) (hΦ : Φ' ≠ []) : List ℝ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesisLifting.native_phase_lifting": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesisLifting",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesisLifting.native_phase_lifting",
+      "kind": "theorem",
+      "statement_id": "sha256:7cd122c6ad66130811ead27238ded1a6b6b254f3e13522907095521fb512bb3b",
+      "line": 199,
+      "signature": "theorem native_phase_lifting {H : Type u} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [FiniteDimensional ℂ H] (rawU Pi PiTilde : H →ₗ[ℂ] H) (hU : star rawU * rawU = 1) (hU' : rawU * star rawU = 1) (hPi : IsStarProjection Pi) (hPiTilde : IsStarProjection PiTilde) (d : ℕ) (hd : 0 < d) (p : ℝ[X]) (hp : p.natDegree ≤ d) (hpar : HasParity (p.map (algebraMap ℝ ℂ)) d) (hbound : ∀ x ∈ Set.Icc (-1 : ℝ) 1, |p.eval x| ≤ 1) : ∃ (B C : ℝ[X]) (Ufield : D5.S3.ContinuousObservables.CentralWinding.CyclicObservable 2) (φ₀ : ℝ) (Φ : List ℝ) (hne : Φ ≠ []), 1 - p ^ 2 = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

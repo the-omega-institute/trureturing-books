@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Information/QubitNormalFormState",
+  "declarations": {
+    "D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy": {
+      "module": "D5/S3/Quantum/Information/QubitNormalFormState",
+      "name": "D5.S3.Quantum.Information.QubitNormalFormState.qubit_state_entropy",
+      "kind": "theorem",
+      "statement_id": "sha256:f508b0402c60c455c44b39347c8b9af2b3b511a793ccafff38aa66f2e83d7778",
+      "line": 103,
+      "signature": "theorem qubit_state_entropy (x z : ℝ) (h : x ^ 2 + z ^ 2 ≤ 1) : D5.S3.Quantum.Divergence.VonNeumannEntropyPinching.vonNeumannEntropy (qubitState x z h) = Real.binEntropy ((1 + Real.sqrt (x ^ 2 + z ^ 2)) / 2)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

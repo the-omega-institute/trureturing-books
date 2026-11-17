@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/TotalVariation/ParryBoundaryCylinderBound",
+  "declarations": {
+    "D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound": {
+      "module": "D5/S3/TotalVariation/ParryBoundaryCylinderBound",
+      "name": "D5.S3.TotalVariation.ParryBoundaryCylinderBound.parry_boundary_cylinder_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:d32add90330c2dba2e88e15d450db491eb328e05574510558ade7841fba4c9d3",
+      "line": 31,
+      "signature": "theorem parry_boundary_cylinder_bound (k : ℕ) (hk : 2 ≤ k) (R n : ℕ) (hn : 1 ≤ n) (C : Finset (List (ℕ × ℕ))) (hlen : ∀ cs ∈ C, cs.length = n) (hvalid : ∀ cs ∈ C, ∀ c ∈ cs, 1 ≤ c.1 ∧ 1 ≤ c.2 ∧ c.2 < k) (hfit : ∀ cs ∈ C, 2 + (cs.map (fun c => c.1 + c.2)).sum ≤ R) : let p",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

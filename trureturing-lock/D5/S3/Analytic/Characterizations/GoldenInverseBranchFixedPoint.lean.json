@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint",
+  "declarations": {
+    "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff": {
+      "module": "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint",
+      "name": "D5.S3.Analytic.Characterizations.GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:296a160c79b372e304965c1323d0f3edec3d3b7e1da8a9c15bfff38182e5cc23",
+      "line": 23,
+      "signature": "theorem golden_inverse_branch_positive_fixed_point_iff : ∀ x : ℝ, 0 < x → ((fun y : ℝ => 1 / (y + 1)) x = x ↔ x = Real.goldenRatio⁻¹)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

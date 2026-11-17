@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/ConceptFiberDecomposition",
+  "declarations": {
+    "D5/S3/ConceptDynamics/ConceptFiberDecomposition.Concept": {
+      "module": "D5/S3/ConceptDynamics/ConceptFiberDecomposition",
+      "name": "D5.S3.ConceptDynamics.ConceptFiberDecomposition.Concept",
+      "kind": "def",
+      "statement_id": "sha256:85c331b4c10db305346a102641ce62515386c16c7be2a5617f9623b37e3cc62d",
+      "line": 27,
+      "signature": "def Concept (X B : Type _)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/ConceptFiberDecomposition.ConceptFiber": {
+      "module": "D5/S3/ConceptDynamics/ConceptFiberDecomposition",
+      "name": "D5.S3.ConceptDynamics.ConceptFiberDecomposition.ConceptFiber",
+      "kind": "def",
+      "statement_id": "sha256:85c331b4c10db305346a102641ce62515386c16c7be2a5617f9623b37e3cc62d",
+      "line": 30,
+      "signature": "def ConceptFiber {X B : Type _} (q_C : Concept X B) (b : B)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition": {
+      "module": "D5/S3/ConceptDynamics/ConceptFiberDecomposition",
+      "name": "D5.S3.ConceptDynamics.ConceptFiberDecomposition.concept_fiber_decomposition",
+      "kind": "theorem",
+      "statement_id": "sha256:85c331b4c10db305346a102641ce62515386c16c7be2a5617f9623b37e3cc62d",
+      "line": 34,
+      "signature": "theorem concept_fiber_decomposition {X B : Type _} (q_C : Concept X B) : Nonempty (X ≃ Σ b : B, ConceptFiber q_C b)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

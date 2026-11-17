@@ -1,0 +1,42 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Recurrence/PellCompanionGcd",
+  "declarations": {
+    "D5/S1/Recurrence/PellCompanionGcd.P": {
+      "module": "D5/S1/Recurrence/PellCompanionGcd",
+      "name": "D5.S1.Recurrence.PellCompanionGcd.P",
+      "kind": "def",
+      "statement_id": "sha256:d586071be3d8ab650d0c5cfee5c27ece8fc00cb40f5971172495b2950e89d33d",
+      "line": 26,
+      "signature": "def P : Nat -> Nat | 0 => 0 | 1 => 1 | n + 2 => 2 * P (n + 1) + P n /-- Companion Pell numbers, with both initial values equal to one. -/ def Q : Nat -> Nat | 0 => 1 | 1 => 1 | n + 2 => 2 * Q (n + 1) + Q n /-- The two second-order sequences satisfy a coupled first-order recurrence. -/ theorem pell_companion_step (n : Nat) : P (n + 1) = P n + Q n ∧ Q (n + 1) = 2 * P n + Q n",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Recurrence/PellCompanionGcd.Q": {
+      "module": "D5/S1/Recurrence/PellCompanionGcd",
+      "name": "D5.S1.Recurrence.PellCompanionGcd.Q",
+      "kind": "def",
+      "statement_id": "sha256:d586071be3d8ab650d0c5cfee5c27ece8fc00cb40f5971172495b2950e89d33d",
+      "line": 32,
+      "signature": "def Q : Nat -> Nat | 0 => 1 | 1 => 1 | n + 2 => 2 * Q (n + 1) + Q n /-- The two second-order sequences satisfy a coupled first-order recurrence. -/ theorem pell_companion_step (n : Nat) : P (n + 1) = P n + Q n ∧ Q (n + 1) = 2 * P n + Q n",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Recurrence/PellCompanionGcd.pell_companion_coprime": {
+      "module": "D5/S1/Recurrence/PellCompanionGcd",
+      "name": "D5.S1.Recurrence.PellCompanionGcd.pell_companion_coprime",
+      "kind": "theorem",
+      "statement_id": "sha256:d586071be3d8ab650d0c5cfee5c27ece8fc00cb40f5971172495b2950e89d33d",
+      "line": 49,
+      "signature": "theorem pell_companion_coprime (n : Nat) : Nat.Coprime (P n) (Q n)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Recurrence/PellCompanionGcd.pell_companion_step": {
+      "module": "D5/S1/Recurrence/PellCompanionGcd",
+      "name": "D5.S1.Recurrence.PellCompanionGcd.pell_companion_step",
+      "kind": "theorem",
+      "statement_id": "sha256:d586071be3d8ab650d0c5cfee5c27ece8fc00cb40f5971172495b2950e89d33d",
+      "line": 38,
+      "signature": "theorem pell_companion_step (n : Nat) : P (n + 1) = P n + Q n ∧ Q (n + 1) = 2 * P n + Q n",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

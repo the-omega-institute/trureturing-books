@@ -438,7 +438,29 @@ export function namedBook(slug, root = ROOT) {
 export function loadLock(root = ROOT) {
   const file = join(root, 'trureturing.lock.json');
   if (!existsSync(file)) return null;
-  return JSON.parse(readFileSync(file, 'utf8'));
+  const pointer = JSON.parse(readFileSync(file, 'utf8'));
+  if (pointer.schema !== 'trureturing-books.lock-pointer.v2') return pointer;
+  if (pointer.path !== 'trureturing-lock') throw new Error('unsupported lock pointer path');
+  const dir = join(root, pointer.path);
+  const indexFile = join(dir, 'index.json');
+  if (!existsSync(indexFile)) return null;
+  const index = JSON.parse(readFileSync(indexFile, 'utf8'));
+  const declarations = {};
+  function visit(current) {
+    for (const entry of readdirSync(current, { withFileTypes: true })) {
+      const full = join(current, entry.name);
+      if (entry.isDirectory()) visit(full);
+      else if (entry.isFile() && entry.name.endsWith('.lean.json')) {
+        const shard = JSON.parse(readFileSync(full, 'utf8'));
+        for (const [gid, item] of Object.entries(shard.declarations || {})) {
+          if (gid.split('.')[0] !== shard.module || item.module !== shard.module) throw new Error(`invalid lock declaration ${gid}`);
+          declarations[gid] = { ...item, commit: item.commit || shard.commit || index.commit };
+        }
+      }
+    }
+  }
+  visit(dir);
+  return { ...index, commit: index.branch || 'dev', pinned_at: '', declarations };
 }
 
 // Source permalink of a locked declaration at the pinned commit (same as tbook.lean.Lock.source_url).
@@ -446,7 +468,8 @@ export function leanSourceUrl(lock, gid) {
   if (!lock) return '';
   const module = gid.slice(0, gid.indexOf('.')) || gid;
   const line = lock.declarations?.[gid]?.line;
-  return `https://github.com/${lock.repo}/blob/${lock.commit}/${module}.lean${line ? `#L${line}` : ''}`;
+  const commit = lock.declarations?.[gid]?.commit || lock.commit;
+  return `https://github.com/${lock.repo}/blob/${commit}/${module}.lean${line ? `#L${line}` : ''}`;
 }
 
 export const GID_RE = /^D[0-9]+\/S[0-9]+\/(?:[A-Za-z_][A-Za-z0-9_]*\/)*[A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)*$/;

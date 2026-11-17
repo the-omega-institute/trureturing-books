@@ -1,0 +1,51 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+  "declarations": {
+    "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.fluid_gap_from_mixed": {
+      "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+      "name": "D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.fluid_gap_from_mixed",
+      "kind": "theorem",
+      "statement_id": "sha256:b4c8a5f7ba832e91bad5796180bce860436e3f600f5a64d3b274a2fa1dbe294a",
+      "line": 303,
+      "signature": "theorem fluid_gap_from_mixed (nu : ℝ) : acceleration nu 1 1 (0, 1) 0 - acceleration nu 1 0 (0, 1) 0 = -Complex.I / 4",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_condition_fails": {
+      "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+      "name": "D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.mixed_condition_fails",
+      "kind": "theorem",
+      "statement_id": "sha256:b4c8a5f7ba832e91bad5796180bce860436e3f600f5a64d3b274a2fa1dbe294a",
+      "line": 267,
+      "signature": "theorem mixed_condition_fails : ¬ (∀ a b : State, P a = a → P b = 0 → P (B a b + B b a) = 0)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness": {
+      "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+      "name": "D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.mixed_witness",
+      "kind": "theorem",
+      "statement_id": "sha256:b4c8a5f7ba832e91bad5796180bce860436e3f600f5a64d3b274a2fa1dbe294a",
+      "line": 234,
+      "signature": "theorem mixed_witness : P (family 1 0) = family 1 0 ∧ P (family 0 1) = 0 ∧ P (B (family 1 0) (family 0 1) + B (family 0 1) (family 1 0)) 0 0 = Complex.I / 4",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure": {
+      "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+      "name": "D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.no_exact_closure",
+      "kind": "theorem",
+      "statement_id": "sha256:b4c8a5f7ba832e91bad5796180bce860436e3f600f5a64d3b274a2fa1dbe294a",
+      "line": 276,
+      "signature": "theorem no_exact_closure (nu : ℝ) : ¬ ∃ f : State → State, ∀ x, P (vectorField (L nu) B x) = f (P x)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_fluid_predictor_from_mixed": {
+      "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+      "name": "D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.no_fluid_predictor_from_mixed",
+      "kind": "theorem",
+      "statement_id": "sha256:b4c8a5f7ba832e91bad5796180bce860436e3f600f5a64d3b274a2fa1dbe294a",
+      "line": 319,
+      "signature": "theorem no_fluid_predictor_from_mixed (nu : ℝ) : ¬ ∃ predict : (Mode → Amplitude) → ℂ, ∀ alpha beta : ℝ, predict (lowObservation alpha beta) = acceleration nu alpha beta (0, 1) 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

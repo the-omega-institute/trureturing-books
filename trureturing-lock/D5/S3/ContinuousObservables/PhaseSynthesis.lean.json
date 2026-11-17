@@ -1,0 +1,69 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+  "declarations": {
+    "D5/S3/ContinuousObservables/PhaseSynthesis.exists_phase_factorization": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.exists_phase_factorization",
+      "kind": "theorem",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 395,
+      "signature": "theorem exists_phase_factorization (k : ℕ) (p : ℝ[X]) (hp : p.natDegree ≤ k) (hpar : HasParity (p.map (algebraMap ℝ ℂ)) k) (hbound : ∀ x ∈ Set.Icc (-1 : ℝ) 1, p.eval x ^ 2 ≤ 1) : ∃ (B C : ℝ[X]) (U : CyclicObservable 2) (φ₀ : ℝ) (Φ : List ℝ), 1 - p ^ 2 = B ^ 2 + (1 - X ^ 2) * C ^ 2 ∧ B.natDegree ≤ k ∧ C.natDegree ≤ k - 1 ∧ (k = 0 → C = 0) ∧ HasParity (B.map (algebraMap ℝ ℂ)) k ∧ HasParity (C.map (algebraMap ℝ ℂ)) (k - 1) ∧ U = phaseCompletion p B C ∧ star U * U = 1 ∧ U * star U = 1 ∧ (∀ t, (U t).det = 1) ∧ (∀ t, (U t 0 0).re = p.eval (windingPhase t).re) ∧ Φ.length = k ∧ qspPolyW φ₀ Φ = (p.map ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.exists_phases": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.exists_phases",
+      "kind": "theorem",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 247,
+      "signature": "theorem exists_phases (k : ℕ) (P Q : ℂ[X]) (hP : P.natDegree ≤ k) (hQ : Q.natDegree ≤ k - 1) (hQ0 : k = 0 → Q = 0) (hPpar : HasParity P k) (hQpar : HasParity Q (k - 1)) (hunit : P * conjP P + (1 - X ^ 2) * Q * conjP Q = 1) : ∃ φ₀ : ℝ, ∃ Φ : List ℝ, Φ.length = k ∧ qspPolyW φ₀ Φ = (P, Q)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.phaseDiagonal": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.phaseDiagonal",
+      "kind": "def",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 313,
+      "signature": "noncomputable def phaseDiagonal (φ : ℝ) : CyclicObservable 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.phaseProduct": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.phaseProduct",
+      "kind": "def",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 317,
+      "signature": "noncomputable def phaseProduct (φ₀ : ℝ) (Φ : List ℝ) : CyclicObservable 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.qspPolyW": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.qspPolyW",
+      "kind": "def",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 97,
+      "signature": "noncomputable def qspPolyW (φ₀ : ℝ) (Φ : List ℝ) : ℂ[X] × ℂ[X]",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.stepW": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.stepW",
+      "kind": "def",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 93,
+      "signature": "noncomputable def stepW (φ : ℝ) (PQ : ℂ[X] × ℂ[X]) : ℂ[X] × ℂ[X]",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ContinuousObservables/PhaseSynthesis.unstepW": {
+      "module": "D5/S3/ContinuousObservables/PhaseSynthesis",
+      "name": "D5.S3.ContinuousObservables.PhaseSynthesis.unstepW",
+      "kind": "def",
+      "statement_id": "sha256:4fa74e870400c0e516ff674356f5bf211d44ae448fe4900943b40a1f87f0698c",
+      "line": 106,
+      "signature": "noncomputable def unstepW (φ : ℝ) (PQ : ℂ[X] × ℂ[X]) : ℂ[X] × ℂ[X]",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

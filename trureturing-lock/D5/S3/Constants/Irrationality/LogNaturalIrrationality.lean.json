@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Constants/Irrationality/LogNaturalIrrationality",
+  "declarations": {
+    "D5/S3/Constants/Irrationality/LogNaturalIrrationality.irrational_log_natCast": {
+      "module": "D5/S3/Constants/Irrationality/LogNaturalIrrationality",
+      "name": "D5.S3.Constants.Irrationality.LogNaturalIrrationality.irrational_log_natCast",
+      "kind": "theorem",
+      "statement_id": "sha256:3db5a637014b11d9059db2073522fc8023feb92e90a78d8c3b33c025ce74eed5",
+      "line": 130,
+      "signature": "theorem irrational_log_natCast (n : ℕ) (hn : 2 ≤ n) : Irrational (Real.log (n : ℝ))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

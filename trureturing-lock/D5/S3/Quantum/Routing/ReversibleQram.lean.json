@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Routing/ReversibleQram",
+  "declarations": {
+    "D5/S3/Quantum/Routing/ReversibleQram.correctness": {
+      "module": "D5/S3/Quantum/Routing/ReversibleQram",
+      "name": "D5.S3.Quantum.Routing.ReversibleQram.correctness",
+      "kind": "theorem",
+      "statement_id": "sha256:07ebdbb032c2a26a85df415803daff40fa76a8bbf442745abc31db865e604f59",
+      "line": 208,
+      "signature": "theorem correctness : (∀ (n : ℕ) (a i : Address n) (e : Bool), leaf n (route n a (clean n e)) i = if i = a then e else false) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (w : Wires n) (r : G), query n D (a, w, r) = (a, w, r + readAmount n D (route n a w))) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (r : G), query n D (a, clean n true, r) = (a, clean n true, r + D a)) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] [Fintype G] [DecidableEq G] (D : Address n → G), (queryMatrix n D)ᴴ * queryMatrix n D = 1 ∧ queryMatrix n D * (queryMatrix",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

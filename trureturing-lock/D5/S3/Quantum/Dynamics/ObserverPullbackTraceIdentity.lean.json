@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity",
+  "declarations": {
+    "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity": {
+      "module": "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity",
+      "name": "D5.S3.Quantum.Dynamics.ObserverPullbackTraceIdentity.observer_pullback_trace_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:3bab964c7fe2ab39dea7a0b332d633f68051a87d107b430876d8ae3a87f3baeb",
+      "line": 37,
+      "signature": "theorem observer_pullback_trace_identity (channel : QuantumChannel d d) (heisenberg : MatrixAlgebra d →CP MatrixAlgebra d) (hduality : ∀ state effect : MatrixAlgebra d, Matrix.trace (channel.toCompletelyPositiveMap state * effect) = Matrix.trace (state * heisenberg effect)) (t : Nat) (rho : DensityState d) (effect : MatrixAlgebra d) : Matrix.trace ((evolvedState channel t rho).1 * effect) = Matrix.trace (rho.1 * ((fun A : MatrixAlgebra d => heisenberg A)^[t]) effect)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

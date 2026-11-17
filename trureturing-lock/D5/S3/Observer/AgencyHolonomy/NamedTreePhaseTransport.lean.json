@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport",
+  "declarations": {
+    "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport": {
+      "module": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport",
+      "name": "D5.S3.Observer.AgencyHolonomy.NamedTreePhaseTransport.selected_tree_transport",
+      "kind": "theorem",
+      "statement_id": "sha256:5023060ebfbed21f28c4c48c31620bf7b9b16c98e8d6bb27b669168a992c3892",
+      "line": 116,
+      "signature": "theorem selected_tree_transport (ht : NamedSpanningTree s t T) (r : V) : (∀ u : E → Circle, rootPhase ht r u r = 1) ∧ (∀ e ∈ T, ∀ u : E → Circle, rootPhase ht r u (t e) = u e * rootPhase ht r u (s e)) ∧ (∀ g : V → Circle, ∀ u : E → Circle, ∀ a : V, rootPhase ht r (gauge s t g u) a = g a * rootPhase ht r u a * (g r)⁻¹) ∧ (∀ a : V, Continuous (fun u : E → Circle => rootPhase ht r u a)) ∧ (∀ u w : E → Circle, ∀ a : V, rootPhase ht r (u * w) a = rootPhase ht r u a * rootPhase ht r w a) ∧ (∀ a : V, rootPhase ht r (1 : E → Circle) a = 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

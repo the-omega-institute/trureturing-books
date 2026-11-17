@@ -1,0 +1,78 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+  "declarations": {
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.InterpretationContext": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.InterpretationContext",
+      "kind": "inductive",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 36,
+      "signature": "structure InterpretationContext (Text ReaderAdmission Background EvaluationGoal Rule : Type*) where text : Text readerAdmission : ReaderAdmission background : Background evaluationGoal : EvaluationGoal interpretationRule : Rule /-- A stage is a relative interpretation fixed point when its next concept is conceptually equivalent to the current one and both have the same interpreted result in the fixed context. -/ def IsRelativeInterpretationFixedPoint {Text ReaderAdmission Background EvaluationGoal Rule Concept Meaning : Type*} (conceptuallyEquivalent : Concept -> Concept -> Prop) (interpret : ",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.IsBinaryFixedMeaning": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.IsBinaryFixedMeaning",
+      "kind": "def",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 100,
+      "signature": "def IsBinaryFixedMeaning (context : BinaryInterpretationContext) (meaning : Bool × Bool × Bool) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.IsRelativeInterpretationFixedPoint": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.IsRelativeInterpretationFixedPoint",
+      "kind": "def",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 47,
+      "signature": "def IsRelativeInterpretationFixedPoint {Text ReaderAdmission Background EvaluationGoal Rule Concept Meaning : Type*} (conceptuallyEquivalent : Concept -> Concept -> Prop) (interpret : InterpretationContext Text ReaderAdmission Background EvaluationGoal Rule -> Concept -> Meaning) (concepts : Nat -> Concept) (context : InterpretationContext Text ReaderAdmission Background EvaluationGoal Rule) (n : Nat) : Prop",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.alternateContext": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.alternateContext",
+      "kind": "def",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 91,
+      "signature": "def alternateContext : BinaryInterpretationContext where text",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.baselineContext": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.baselineContext",
+      "kind": "def",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 84,
+      "signature": "def baselineContext : BinaryInterpretationContext where text",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point",
+      "kind": "theorem",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 62,
+      "signature": "theorem conceptual_equivalence_and_stability_reach_fixed_point {Text ReaderAdmission Background EvaluationGoal Rule Concept Meaning : Type*} (conceptuallyEquivalent : Concept -> Concept -> Prop) (interpret : InterpretationContext Text ReaderAdmission Background EvaluationGoal Rule -> Concept -> Meaning) (concepts : Nat -> Concept) (context : InterpretationContext Text ReaderAdmission Background EvaluationGoal Rule) (n : Nat) (hConcept : conceptuallyEquivalent (concepts (n + 1)) (concepts n)) (hStable : interpret context (concepts (n + 1)) = interpret context (concepts n)) : IsRelativeInterpret",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points",
+      "kind": "theorem",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 108,
+      "signature": "theorem context_parameters_can_select_distinct_fixed_points : baselineContext.text = alternateContext.text ∧ baselineContext.interpretationRule = alternateContext.interpretationRule ∧ baselineContext.readerAdmission ≠ alternateContext.readerAdmission ∧ baselineContext.background ≠ alternateContext.background ∧ baselineContext.evaluationGoal ≠ alternateContext.evaluationGoal ∧ IsBinaryFixedMeaning baselineContext (false, false, false) ∧ IsBinaryFixedMeaning alternateContext (true, true, true) ∧ (false, false, false) ≠ (true, true, true)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.objective_claim_requires_invariant_common_factor",
+      "kind": "theorem",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 133,
+      "signature": "theorem objective_claim_requires_invariant_common_factor {Context Meaning Factor : Type*} (isFixedMeaning : Context -> Meaning -> Prop) (factor : Meaning -> Factor) (claim : ObjectiveInterpretationClaim isFixedMeaning factor) : ∃ commonFactor, ∀ context meaning, isFixedMeaning context meaning -> factor meaning = commonFactor",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

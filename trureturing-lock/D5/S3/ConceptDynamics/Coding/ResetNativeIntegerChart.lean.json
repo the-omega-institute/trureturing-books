@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart",
+  "declarations": {
+    "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit": {
+      "module": "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart",
+      "name": "D5.S3.ConceptDynamics.Coding.ResetNativeIntegerChart.gaussian_unit",
+      "kind": "theorem",
+      "statement_id": "sha256:646bb11535a35e0ec08bf24ba5f70d0ce7ddc9ced418772bbfd43e2ff8591ab8",
+      "line": 816,
+      "signature": "theorem gaussian_unit (u : GaussianIntˣ) : (u : GaussianInt) = 1 ∨ (u : GaussianInt) = Zsqrtd.sqrtd ∨ (u : GaussianInt) = -1 ∨ (u : GaussianInt) = -Zsqrtd.sqrtd",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

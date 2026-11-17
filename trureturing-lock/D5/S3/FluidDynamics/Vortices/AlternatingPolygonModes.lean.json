@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes",
+  "declarations": {
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes.charpoly_factored": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonModes.charpoly_factored",
+      "kind": "theorem",
+      "statement_id": "sha256:27b2bb824512bac66c12e94d2148c30cfbe517bc0a45bf0b6b440ebd7b3d6ef3",
+      "line": 229,
+      "signature": "theorem charpoly_factored (m : ℕ) (hm : 3 ≤ m) : (jacobian (2 * m)).charpoly = X ^ 2 * (X ^ 2 + C ((m : ℝ) ^ 2 / 2)) * (X ^ 2 + C (((m : ℝ) - 1) ^ 2 / 4)) ^ 2 * ∏ r ∈ Finset.Ico 2 m, (X ^ 2 - C (((m : ℝ) - r) ^ 2 * ((r : ℝ) ^ 2 - 2) / 4)) ^ 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes.charpoly_folded": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonModes.charpoly_folded",
+      "kind": "theorem",
+      "statement_id": "sha256:27b2bb824512bac66c12e94d2148c30cfbe517bc0a45bf0b6b440ebd7b3d6ef3",
+      "line": 193,
+      "signature": "theorem charpoly_folded (m : ℕ) (hm : 1 ≤ m) : (jacobian (2 * m)).charpoly = X ^ 2 * (X ^ 2 + C ((m : ℝ) ^ 2 / 2)) * ∏ r ∈ Finset.Ico 1 m, (X ^ 2 - C (((m : ℝ) - r) ^ 2 * ((r : ℝ) ^ 2 - 2) / 4)) ^ 2",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

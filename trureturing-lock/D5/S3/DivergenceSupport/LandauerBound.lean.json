@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/DivergenceSupport/LandauerBound",
+  "declarations": {
+    "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance": {
+      "module": "D5/S3/DivergenceSupport/LandauerBound",
+      "name": "D5.S3.DivergenceSupport.LandauerBound.landauer_bound_of_balance",
+      "kind": "theorem",
+      "statement_id": "sha256:f2f09673ac43e7b8285f1ee4d461acd081e02b0ca4b122f329b935e4cc4f0165",
+      "line": 14,
+      "signature": "theorem landauer_bound_of_balance (beta heat entropyChange mutualInfo divergence : ℝ) (hbalance : beta * heat = -entropyChange + mutualInfo + divergence) (hmutualInfo : 0 ≤ mutualInfo) (hdivergence : 0 ≤ divergence) : -entropyChange ≤ beta * heat",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

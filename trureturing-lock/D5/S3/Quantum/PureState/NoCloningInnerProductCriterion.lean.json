@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion",
+  "declarations": {
+    "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion": {
+      "module": "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion",
+      "name": "D5.S3.Quantum.PureState.NoCloningInnerProductCriterion.no_cloning_inner_product_criterion",
+      "kind": "theorem",
+      "statement_id": "sha256:7438f7fa0d13635399e6939877773f8cb348c6797f517253ec0d3d4dfc6407e4",
+      "line": 30,
+      "signature": "theorem no_cloning_inner_product_criterion {H : Type*} [NormedAddCommGroup H] [InnerProductSpace Complex H] (U : (H ⊗[Complex] H) ≃ₗᵢ[Complex] (H ⊗[Complex] H)) (psi phi blank : H) (psiNormalized : ‖psi‖ = 1) (phiNormalized : ‖phi‖ = 1) (blankNormalized : ‖blank‖ = 1) (clonesPsi : U (psi ⊗ₜ[Complex] blank) = psi ⊗ₜ[Complex] psi) (clonesPhi : U (phi ⊗ₜ[Complex] blank) = phi ⊗ₜ[Complex] phi) : inner Complex phi psi = inner Complex phi psi ^ 2 ∧ (phi = psi ∨ inner Complex phi psi = 0)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

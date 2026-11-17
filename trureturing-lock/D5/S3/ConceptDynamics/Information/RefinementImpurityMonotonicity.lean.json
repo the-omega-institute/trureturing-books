@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity",
+  "declarations": {
+    "D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity.refinement_impurity_monotone": {
+      "module": "D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity",
+      "name": "D5.S3.ConceptDynamics.Information.RefinementImpurityMonotonicity.refinement_impurity_monotone",
+      "kind": "theorem",
+      "statement_id": "sha256:2c70048ce03100ccbb2cd7befe9f7709f4de0319f2455ea3fbf0499e73e34dc4",
+      "line": 536,
+      "signature": "theorem refinement_impurity_monotone {X C D A : Type*} (mu : PMF X) (coarse : Concept X C) (refined : Concept X D) (target : Concept X A) (refinement : Refines coarse refined) : conditionalLogicalImpurity mu refined target ≤ conditionalLogicalImpurity mu coarse target",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

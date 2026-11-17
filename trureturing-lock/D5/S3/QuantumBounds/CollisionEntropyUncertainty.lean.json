@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/QuantumBounds/CollisionEntropyUncertainty",
+  "declarations": {
+    "D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty": {
+      "module": "D5/S3/QuantumBounds/CollisionEntropyUncertainty",
+      "name": "D5.S3.QuantumBounds.CollisionEntropyUncertainty.collision_entropy_uncertainty",
+      "kind": "theorem",
+      "statement_id": "sha256:0855b96a0deb4cbea90fe404db64da68ed3125ba1fd3ba64110ab7a9d49c4bff",
+      "line": 31,
+      "signature": "theorem collision_entropy_uncertainty {d : Nat} (hd : 0 < d) (p : Fin (d + 1) -> Fin d -> Real) (purity : Real) (hprob : forall b, (forall i, 0 <= p b i) /\\ ∑ i, p b i = 1) (hcollision : ∑ b, ∑ i, (p b i) ^ 2 = 1 + purity) : (d + 1 : Real) * Real.log ((d + 1 : Real) / (1 + purity)) <= ∑ b, shannonEntropy (p b)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

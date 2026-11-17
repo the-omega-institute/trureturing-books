@@ -1,0 +1,42 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic",
+  "declarations": {
+    "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_determinant": {
+      "module": "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic",
+      "name": "D5.S1.Words.Mechanical.silverPell_determinant",
+      "kind": "theorem",
+      "statement_id": "sha256:e82fc21915562af58e0a910b69e0f59cb952ef9c1102fe868c9f9c4ce8286b7a",
+      "line": 111,
+      "signature": "theorem silverPell_determinant (k : Nat) : (P (k + 2) : Int) * P k - (P (k + 1) : Int) ^ 2 = (-1 : Int) ^ (k + 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_error_formula": {
+      "module": "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic",
+      "name": "D5.S1.Words.Mechanical.silverPell_error_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:e82fc21915562af58e0a910b69e0f59cb952ef9c1102fe868c9f9c4ce8286b7a",
+      "line": 59,
+      "signature": "theorem silverPell_error_formula (k : Nat) : (P (k + 1) : Real) * silverSlope - P k = (-1 : Real) ^ k * silverSlope ^ (k + 1)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation": {
+      "module": "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic",
+      "name": "D5.S1.Words.Mechanical.silver_best_approximation",
+      "kind": "theorem",
+      "statement_id": "sha256:e82fc21915562af58e0a910b69e0f59cb952ef9c1102fe868c9f9c4ce8286b7a",
+      "line": 134,
+      "signature": "theorem silver_best_approximation (k m : Nat) (hm : 0 < m) (hmq : m < P (k + 2)) (z : Int) : silverSlope ^ (k + 1) ≤ |(m : Real) * silverSlope - z|",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_phase_mass": {
+      "module": "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic",
+      "name": "D5.S1.Words.Mechanical.silver_phase_mass",
+      "kind": "theorem",
+      "statement_id": "sha256:e82fc21915562af58e0a910b69e0f59cb952ef9c1102fe868c9f9c4ce8286b7a",
+      "line": 263,
+      "signature": "theorem silver_phase_mass (k : Nat) : ((P (k + 2) : Real) + silverSlope * P (k + 1)) * silverSlope ^ (k + 1) = 1",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

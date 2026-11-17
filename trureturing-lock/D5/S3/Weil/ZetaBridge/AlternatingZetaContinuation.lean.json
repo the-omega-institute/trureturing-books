@@ -1,0 +1,33 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Weil/ZetaBridge/AlternatingZetaContinuation",
+  "declarations": {
+    "D5/S3/Weil/ZetaBridge/AlternatingZetaContinuation.alternating_partialSums_eta_atom_fails_at_one": {
+      "module": "D5/S3/Weil/ZetaBridge/AlternatingZetaContinuation",
+      "name": "D5.S3.Weil.ZetaBridge.AlternatingZetaContinuation.alternating_partialSums_eta_atom_fails_at_one",
+      "kind": "theorem",
+      "statement_id": "sha256:cdd93560f7009aa99071c8b25813759475ef878fee8af17511fac04a305f6567",
+      "line": 442,
+      "signature": "theorem alternating_partialSums_eta_atom_fails_at_one : ¬ Filter.Tendsto (fun N ↦ ∑ n ∈ Finset.range N, (-1 : ℂ) ^ n * ((n + 1 : ℂ) ^ (-(1 : ℂ)))) Filter.atTop (nhds ((1 - (2 : ℂ) ^ (1 - (1 : ℂ))) * riemannZeta (1 : ℂ)))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Weil/ZetaBridge/AlternatingZetaContinuation.riemannZeta_ne_zero_of_real_mem_Ioo": {
+      "module": "D5/S3/Weil/ZetaBridge/AlternatingZetaContinuation",
+      "name": "D5.S3.Weil.ZetaBridge.AlternatingZetaContinuation.riemannZeta_ne_zero_of_real_mem_Ioo",
+      "kind": "theorem",
+      "statement_id": "sha256:cdd93560f7009aa99071c8b25813759475ef878fee8af17511fac04a305f6567",
+      "line": 481,
+      "signature": "theorem riemannZeta_ne_zero_of_real_mem_Ioo (x : ℝ) (h0 : 0 < x) (h1 : x < 1) : riemannZeta (x : ℂ) ≠ 0",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Weil/ZetaBridge/AlternatingZetaContinuation.tendsto_alternating_partialSums_eta_of_ne_one": {
+      "module": "D5/S3/Weil/ZetaBridge/AlternatingZetaContinuation",
+      "name": "D5.S3.Weil.ZetaBridge.AlternatingZetaContinuation.tendsto_alternating_partialSums_eta_of_ne_one",
+      "kind": "theorem",
+      "statement_id": "sha256:cdd93560f7009aa99071c8b25813759475ef878fee8af17511fac04a305f6567",
+      "line": 429,
+      "signature": "theorem tendsto_alternating_partialSums_eta_of_ne_one (s : ℂ) (hs : 0 < s.re) (hs1 : s ≠ 1) : Filter.Tendsto (fun N ↦ ∑ n ∈ Finset.range N, (-1 : ℂ) ^ n * ((n + 1 : ℂ) ^ (-s))) Filter.atTop (nhds ((1 - (2 : ℂ) ^ (1 - s)) * riemannZeta s))",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

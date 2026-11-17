@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S1/Words/TribonacciPrefixRefutation",
+  "declarations": {
+    "D5/S1/Words/TribonacciPrefixRefutation.result": {
+      "module": "D5/S1/Words/TribonacciPrefixRefutation",
+      "name": "D5.S1.Words.TribonacciPrefixRefutation.result",
+      "kind": "theorem",
+      "statement_id": "sha256:6c31f23e5cf0428d465913af0499bddbca7257a9b97e9f6b2b77fca5586949e5",
+      "line": 255,
+      "signature": "theorem result : ¬ claim",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Foundation/HermitianExclusionBall",
+  "declarations": {
+    "D5/S3/Quantum/Foundation/HermitianExclusionBall.all_pure_charts": {
+      "module": "D5/S3/Quantum/Foundation/HermitianExclusionBall",
+      "name": "D5.S3.Quantum.Foundation.HermitianExclusionBall.all_pure_charts",
+      "kind": "theorem",
+      "statement_id": "sha256:7b2152b3d4663c26d2363d08187fb1068595c5dcbad85ccad511ceb42ac45dd6",
+      "line": 186,
+      "signature": "theorem all_pure_charts (p : pure (cone : PointedCone ℝ (HermitianMat (Fin 3) ℂ)) unit) : ∃ a : ExclusionChart cone unit (p : HermitianMat (Fin 3) ℂ), a.dim = 3",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

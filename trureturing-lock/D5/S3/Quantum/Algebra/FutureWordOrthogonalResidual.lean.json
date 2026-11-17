@@ -1,0 +1,15 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual",
+  "declarations": {
+    "D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual": {
+      "module": "D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual",
+      "name": "D5.S3.Quantum.Algebra.FutureWordOrthogonalResidual.future_word_orthogonal_residual",
+      "kind": "theorem",
+      "statement_id": "sha256:3f191d6093aa27ce2d5ae61de9ae3c9a533e79215bba38a99caaaaf6512c5fd3",
+      "line": 44,
+      "signature": "theorem future_word_orthogonal_residual [FiniteDimensional 𝕜 E] {m : ℕ} (effect : Fin (m + 1) → E) (X : State → E) (rho sigma : State) : (futureExpectationWord (𝕜",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}

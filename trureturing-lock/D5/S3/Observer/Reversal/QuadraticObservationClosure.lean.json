@@ -1,0 +1,24 @@
+{
+  "schema": "trureturing-books.lock-module.v1",
+  "module": "D5/S3/Observer/Reversal/QuadraticObservationClosure",
+  "declarations": {
+    "D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment": {
+      "module": "D5/S3/Observer/Reversal/QuadraticObservationClosure",
+      "name": "D5.S3.Observer.Reversal.QuadraticObservationClosure.observed_increment",
+      "kind": "theorem",
+      "statement_id": "sha256:ac2a549469152986fd28611f54c52d8b72c6c4cdae7c922673fa411a72fb20f9",
+      "line": 45,
+      "signature": "theorem observed_increment (P L : E →ₗ[ℝ] E) (B : E →ₗ[ℝ] E →ₗ[ℝ] E) (a b : E) : P (vectorField L B (a + b)) - P (vectorField L B a) = P (L b) - P (B a b + B b a) - P (B b b)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    },
+    "D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff": {
+      "module": "D5/S3/Observer/Reversal/QuadraticObservationClosure",
+      "name": "D5.S3.Observer.Reversal.QuadraticObservationClosure.quadratic_closure_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:ac2a549469152986fd28611f54c52d8b72c6c4cdae7c922673fa411a72fb20f9",
+      "line": 54,
+      "signature": "theorem quadratic_closure_iff (P L : E →ₗ[ℝ] E) (B : E →ₗ[ℝ] E →ₗ[ℝ] E) (hP : ∀ x, P (P x) = P x) : (∃ f : E → E, ∀ x, P (vectorField L B x) = f (P x)) ↔ (∀ b, P b = 0 → P (L b) = 0) ∧ (∀ b, P b = 0 → P (B b b) = 0) ∧ (∀ a b, P a = a → P b = 0 → P (B a b + B b a) = 0)",
+      "commit": "8a9135753f8e966382379c101b3934b577c07b4c"
+    }
+  }
+}
