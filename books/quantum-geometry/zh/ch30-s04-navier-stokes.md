@@ -48,7 +48,7 @@ $$
 **三维：越拉越细。** 沿轴以恒定拉伸率拉这根涡管，不计粘性：它越来越长、越来越细，青色回路的环量 $\Gamma = \omega A$ 不变，所以品红的涡度按 $\Gamma/A$ 一路变大，即上式的 $\|\boldsymbol{\omega}\| \approx \Gamma/A$（示意模型，`MODEL`）。
 :::
 
-对比 [@rem-ch30-vorticity-transport-literature] 与计算复杂性中的维度分水岭，结构相变同时出现在 **$2 \to 3$**（以下为跨领域结构类比 `MODEL`，而非复杂性理论中的形式逻辑等价）：
+对比 [@rem-ch30-vorticity-transport-literature] 与计算复杂性中的维度分水岭，结构相变同时出现在 **$2 \to 3$**（前者是子句宽度，后者是空间维数；以下为跨领域结构类比 `MODEL`，而非复杂性理论中的形式逻辑等价）：
 
 - **二维平面情形（[@rem-ch30-vorticity-transport-literature]）$\leftrightarrow$ 类比二元链 2-SAT（`MODEL`）**：
   将 [@rem-ch30-vorticity-transport-literature] 所载的二维平面流情形与二元链 2-SAT 并置对照（`MODEL`），在本书锁定的 `trureturing@dev` 库中，冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 给出了二维周期傅里叶空间上的一项**条件性高阶正则性提升定理**：若已给定一条在 $[0, \tau]$ 上连续的加权 $H^2$ 零均值实无散温和解路径，且其初值在全部空间 Sobolev 阶数 $m \in \mathbb{N}$ 上可和，则该路径在每一空间阶数 $m$ 上皆满足强微分方程（无条件二维全局正则性经典定理另见 [@rem-ch30-navier-stokes-forced-literature]）。
@@ -210,13 +210,13 @@ $c_0$ 是整个多边形绕原点的无穷小转动：场对公共转动协变�
 
 这个样本把三件容易混在一起的事分开了。方程右端在无碰撞构型处可微（[`field_differentiable_at`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field_differentiable_at)），平衡点正是这样的构型，那里没有任何奇异；可是从六边形起，线性化恰有 $2(m - 2)$ 维的发散方向；而谱上中性的偶极与正方形，线性化方程照样有无界的解。可微不等于稳定，谱中性不等于有界。放回本章的类比（`MODEL`）：这里的“线”已经缩成平面上的点，点与点之间没有可供缠绕的结构，发散方向却一个不少，它们不需要涡管拉伸。三维的问题在别处：那里的涡丝不只是被搬运的点，还会被拉长。
 
-在正式陈述千禧年无外力开放猜想之前，我们先用专门的文献注记严格隔离二维全局光滑性定理与 **受迫情形（克雷陈述 C / D，含光滑外力 $\mathbf{f} \in C^\infty$）** 的外部文献结果，确保下方的红色 `OPEN` 猜想框纯粹聚焦于未决的无外力自治核心：
+在正式陈述千禧年无外力开放猜想之前，我们先用专门的文献注记严格隔离二维全局光滑性定理与 **受迫情形（克雷陈述 C / D，含光滑外力 $\mathbf{f} \in C^\infty$）** 的外部文献与宣称，确保下方的红色 `OPEN` 猜想框纯粹聚焦于无外力自治核心：
 
-::: {.remark #rem-ch30-navier-stokes-forced-literature title="兰姆恒等式、二维全局正则性与 2026 年受迫陈述 C / D 有限时间爆破的文献说明"}
-**文献结果，未在本书形式化。** 本节涉及的经典流体几何恒等式、二维无条件全局光滑性定理以及三维**受迫**纳维—斯托克斯爆破结果均属外部文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中：
+::: {.remark #rem-ch30-navier-stokes-forced-literature title="兰姆恒等式、二维全局正则性与 2026 年受迫陈述 C / D 有限时间爆破宣称的文献说明"}
+**文献结果，未在本书形式化。** 本节涉及的经典流体几何恒等式、二维无条件全局光滑性定理以及三维**受迫**纳维—斯托克斯爆破宣称均属外部文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中：
 
-1. **兰姆恒等式、螺旋度霍普夫不变量与二维无条件全局正则性**：对流分解 $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \boldsymbol{\omega}\times\mathbf{u}$ 源于 H. Lamb（*Hydrodynamics*）、无粘涡通量守恒源于开尔文环量定理（Lord Kelvin, 1869）、无粘流体螺旋度 $\mathcal{H} = \int \mathbf{u}\cdot\boldsymbol{\omega}\,dV$ 与 $S^3$ 霍普夫链环不变量的对应源于 J. J. Moreau（1961）与 H. K. Moffatt（1969）；二维不可压缩纳维—斯托克斯方程在任意时间上的无条件全局光滑解存在唯一性由 O. A. Ladyzhenskaya（*The Mathematical Theory of Viscous Incompressible Flow*, 1969）严格证明（注意：本书行内引用的冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 假设 $[0, \tau]$ 上连续温和解路径已给定，不等同于 Ladyzhenskaya 的无条件全局存在性定理）。
-2. **OpenAI 的受迫三维纳维—斯托克斯解答（克雷陈述 C / D）**：[官方公告](https://openai.com/index/navier-stokes-solution/)、166 页论文 [*Finite time blowup for Navier–Stokes*](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf)（定理 1.1、周期推论 10.6）与[固定源码](https://github.com/openai/NavierStokesAndEuler/tree/f9e8bc5b38b6e212696e8a30e3e91517af887bbd)给出同一项公开成果。对任意 $\nu>0$，从静止初态出发，构造光滑外力下的三维不可压缩解，使爆破前 $\sup_{t<T^*}\|\mathbf u(t)\|_{L^2}<\infty$ 而 $\limsup_{t\nearrow T^*}\|\mathbf u(t)\|_{L^\infty}=\infty$。能量界是速度场的性质；它不表示外力本身具有所谓“有界动能”。全空间 C 要求外力各阶时空导数速降，论文的光滑时空紧支外力满足更强条件；周期 D 的外力在空间周期、在时间速降，非零周期外力不能在整个 $\mathbb R^3$ 上空间紧支。[克雷原题](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf#page=2)接受 A、B、C、D 中任一陈述的证明，故 C / D 本身就是官方题目的一条解答路线；零外力 A / B 仍为下文的 `OPEN`。源码的最终入口是 `NavierStokes.Comparator.navier_stokes_breakdown_R3` 与 `navier_stokes_breakdown_periodic`。这是外部文献及其发布的形式化，未进入本书冻结账本；本书的独立复验状态另记于工程审读记录。
+1. **兰姆恒等式、螺旋度霍普夫不变量与二维无条件全局正则性**：对流分解 $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \boldsymbol{\omega}\times\mathbf{u}$ 源于 H. Lamb（*Hydrodynamics*）、无粘涡通量守恒源于开尔文环量定理（Lord Kelvin, 1869）、无粘流体螺旋度 $\mathcal{H} = \int \mathbf{u}\cdot\boldsymbol{\omega}\,dV$ 与 $S^3$ 霍普夫链环不变量的对应源于 J. J. Moreau（1961）与 H. K. Moffatt（1969）；二维不可压缩纳维—斯托克斯方程在任意时间上的无条件全局光滑解存在唯一性由 J. Leray（1933–1934，全平面）与 O. A. Ladyzhenskaya（1959；*The Mathematical Theory of Viscous Incompressible Flow*, 1969）严格证明（注意：本书行内引用的冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 假设 $[0, \tau]$ 上连续温和解路径已给定，不等同于 Ladyzhenskaya 的无条件全局存在性定理）。
+2. **OpenAI 宣称的受迫三维纳维—斯托克斯解答（克雷陈述 C / D）**：[官方公告](https://openai.com/index/navier-stokes-solution/)、166 页论文 [*Finite time blowup for Navier–Stokes*](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf)（定理 1.1、周期推论 10.6）与[固定源码](https://github.com/openai/NavierStokesAndEuler/tree/f9e8bc5b38b6e212696e8a30e3e91517af887bbd)给出同一项宣称（截至 2026 年 11 月未经同行评审，克雷数学所尚未认可；本书未独立重建）。按论文所述，对任意 $\nu>0$，从静止初态出发，构造光滑外力下的三维不可压缩解，使爆破前 $\sup_{t<T^*}\|\mathbf u(t)\|_{L^2}<\infty$ 而 $\limsup_{t\nearrow T^*}\|\mathbf u(t)\|_{L^\infty}=\infty$。能量界是速度场的性质；它不表示外力本身具有所谓“有界动能”。全空间 C 要求外力各阶时空导数速降，论文的光滑时空紧支外力满足更强条件；周期 D 的外力在空间周期、在时间速降，非零周期外力不能在整个 $\mathbb R^3$ 上空间紧支。[克雷原题](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf#page=2)接受 A、B、C、D 中任一陈述的证明，故 C / D 若经审查成立，本身就是官方题目的一条解答路线；零外力 A / B 仍为下文的 `OPEN`。源码的最终入口是 `NavierStokes.Comparator.navier_stokes_breakdown_R3` 与 `navier_stokes_breakdown_periodic`。这是外部文献及其发布的形式化，未进入本书冻结账本。
 3. **分别辨认 Euler 结果**：同一公告另附 57 页论文 [*Finite time blowup for the Euler equation*](https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-93345194ece1/euler.pdf)，其定理 1.1 针对 $\nu=0$、**无外力**、光滑紧支无散初值，给出有限时间梯度无界与涡量时间积分发散。公告将 Alpöge、Buckmaster 的同期工作明确归于**受迫 Euler**。这两项 Euler 工作与上述正粘性受迫 NS 构造的方程、数据和结论不同。
 :::
 
@@ -241,9 +241,9 @@ $$
 
 ## 30.4.3 场的自指与二次平流投影闭合阻碍定理（`LEAN ✓`） {#3-场的自指与二次平流投影闭合阻碍定理lean-}
 
-为什么 [@rem-ch30-lamb-decomposition-literature] 中的二次非线性平流耦合如此凶险？因为在我们的几何诠释（`MODEL`）中，它正是第 24 章**元自指 $\psi(\psi)$ 的连续场版本**——在线性偏微分方程中“算子”与“状态”泾渭分明，而在流体平流中，**速度场 $\mathbf{u}$ 既是“被搬运的状态”，同时又是“执行搬运的微分算子”**！在傅里叶频率空间中，二次自指耦合将波矢两两相加（$\mathbf{k}_1 + \mathbf{k}_2 \to \mathbf{k}_3$），不断跨尺度输运能量。对于仅能分辨低频有限模态幂等投影 $P$（满足 $P^2 = P$）的场内有限观察者而言，这种二次跨尺度耦合直接击穿了局部自洽闭合——这正是 `trureturing@dev` 内核已机械验证的**二次矢量场投影闭合判据与五模态流体平流闭合不可能性定理**：
+为什么 [@rem-ch30-lamb-decomposition-literature] 中的二次非线性平流耦合如此凶险？因为在我们的几何诠释（`MODEL`）中，它正是第 24 章**元自指 $\psi(\psi)$ 的连续场版本**——在线性偏微分方程中“算子”与“状态”泾渭分明，而在流体平流中，**速度场 $\mathbf{u}$ 既是“被搬运的状态”，同时又是“执行搬运的微分算子”**！在傅里叶频率空间中，二次自指耦合将波矢两两相加（$\mathbf{k}_1 + \mathbf{k}_2 \to \mathbf{k}_3$），不断跨尺度输运能量。对于仅能分辨低频有限模态幂等投影 $P$（满足 $P^2 = P$）的场内有限观察者而言，这种二次跨尺度耦合可以击穿局部自洽闭合——在一个五模态实例上，这正是 `trureturing@dev` 内核已机械验证的**二次矢量场投影闭合判据与五模态流体平流闭合不可能性定理**：
 
-::: {.theorem #thm-coda-quadratic-advection-no-closure title="二次矢量场投影闭合判据与有限模态流体平流闭合不可能性定理" lean="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure"}
+::: {.theorem #thm-coda-quadratic-advection-no-closure title="二次矢量场投影闭合判据与五模态流体平流闭合不可能性定理" lean="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure"}
 设 $E$ 为实模，$L : E \to_{\mathbb{R}} E$ 为线性粘性漂移算子，$B : E \to_{\mathbb{R}} E \to_{\mathbb{R}} E$ 为双线性平流算子，定义二次矢量场 $V(x) = L x - B(x, x)$；设 $P : E \to_{\mathbb{R}} E$ 为满足 $\forall x,\; P(P(x)) = P(x)$ 的幂等有限分辨率观测投影。则：
 
 1. **二次观测精确闭合充要判据**（[`quadratic_closure_iff`](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff)）：存在精确马尔可夫闭合映射 $f : E \to E$ 使得 $\forall x \in E,\; P(V(x)) = f(P(x))$，当且仅当以下三项正交泄漏条件同时恒等于零：
@@ -262,7 +262,7 @@ $$
    \operatorname{acceleration}_\nu(1, 1)_{(0, 1), 0} - \operatorname{acceleration}_\nu(1, 0)_{(0, 1), 0} = -\frac{i}{4} \neq 0.
    $$
 
-   因此，对任意粘性系数 $\nu \in \mathbb{R}$，有限低频观测投影下**不存在**任何精确自洽的闭合演化映射：
+   因此，对任意粘性系数 $\nu \in \mathbb{R}$，该五模态实例的低频观测投影下**不存在**任何精确自洽的闭合演化映射：
 
    $$
    \neg \exists f : \operatorname{State} \to \operatorname{State},\quad \forall x \in \operatorname{State},\; P\bigl(\operatorname{vectorField}(L_\nu, B, x)\bigr) = f(P(x)),
@@ -293,13 +293,13 @@ $$
 **文献结果，未在本书形式化。** 以下三项流体力学与几何分析经典结果均属外部文献，未在本书形式化：
 
 1. **柯尔莫哥洛夫（A. N. Kolmogorov, *Dokl. Akad. Nauk SSSR* **30**, 1941）湍流级联与耗散微尺度标度**：在各向同性高雷诺数湍流唯象理论中，惯性区能谱服从 $E(k) \propto \varepsilon^{2/3} k^{-5/3}$，粘性耗散微尺度为 $\eta = (\nu^3/\varepsilon)^{1/4}$，解析到微尺度 $\eta$ 所需的三维空间自由度数按 $N_{\mathrm{DOF}} \sim (L/\eta)^3 \sim \mathrm{Re}^{9/4}$ 增长；
-2. **陶哲轩（Terence Tao, *J. Amer. Math. Soc.* **29**, 601–674, 2016）平均化三维纳维—斯托克斯有限时间爆破定理**：对保持能量恒等式的一类双线性平均化三维纳维—斯托克斯算子，可通过嵌套涡环构造自相似流体逻辑门级联——母涡环将状态传递给空间尺度收缩为 $\lambda R$（$\lambda \in (0, 1)$）、局部时钟加快 $\lambda^{-2}$ 倍的子涡环，在超临界拉伸压倒粘性耗散时于有限时间 $T^* < \infty$ 内完成无穷步级联爆破；
+2. **陶哲轩（Terence Tao, *J. Amer. Math. Soc.* **29**, 601–674, 2016）平均化三维纳维—斯托克斯有限时间爆破定理**：对保持能量恒等式的一类双线性平均化三维纳维—斯托克斯算子，可在傅里叶空间的二进尺度上构造自相似流体逻辑门级联——每一级把能量带延时地传递给空间尺度收缩为 $\lambda R$（$\lambda \in (0, 1)$）、局部时钟比粘性时间加快得更多的下一级，在超临界拉伸压倒粘性耗散时于有限时间 $T^* < \infty$ 内完成无穷步级联爆破；
 3. **阿诺德（Vladimir Arnold, *Ann. Inst. Fourier* **16**, 319–361, 1966）$\operatorname{SDiff}(M)$ 测地线定理**：无粘不可压缩理想流体（欧拉方程，$\nu = 0$）的光滑演化轨迹，等价于无穷维保体积微分同胚群流形 $\operatorname{SDiff}(M)$ 在右不变 $L^2$ 动能度规下的常速**测地线**（该流形在众多二维截面上具有负截面曲率，导致相邻测地线指数发散；而当加入正粘性项 $\nu\nabla^2\mathbf{u}$ 时，纳维—斯托克斯流在 $\operatorname{SDiff}(M)$ 上受到偏离纯测地线流的耗散阻尼修正）。
 :::
 
 结合 [@thm-coda-quadratic-advection-no-closure] 与上述文献背景，我们在正交几何诠释模型（`MODEL`）中获得三点收官洞察：
 
-- **粘性耗散的兰道尔擦除角色与形式见证丝（`MODEL`）**：运动粘性 $\nu$ 的耗散可与第八章热浴擦除作类比（对照球面梯度耗散定理 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)），但不同模型中的能量律并非同一条定律。陶哲轩平均化模型或 OpenAI 受迫 NS 证明一经写出，就可检查具体推演；把证明画成“一维丝”不限制证明长度、归约成本或内核运行时间，也不保证某一问题族有多项式长度证书。
+- **粘性耗散的兰道尔擦除角色与形式见证丝（`MODEL`）**：运动粘性 $\nu$ 的耗散可与第八章热浴擦除作类比（对照球面梯度耗散定理 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)），但不同模型中的能量律并非同一条定律。陶哲轩平均化模型或 OpenAI 宣称的受迫 NS 证明一经写出，就可检查具体推演；把证明画成“一维丝”不限制证明长度、归约成本或内核运行时间，也不保证某一问题族有多项式长度证书。
 - **连续统理想化与离散两子丈量的物理边界（`MODEL`）**：连续 PDE 的数学爆破促使我们追问连续介质近似的适用范围。真实流体是否出现可压缩效应、空化或分子尺度修正，取决于材料、状态与尺度，不能由这份爆破构造推出任何一种必然过程。作者的**“光滑的球永远只是近似！”**在这里表达有限分辨率的认识论立场；它不否定连续方程的精确数学意义，也不证明自然界只能采用某种离散本体。
 - **离散逻辑场与连续流体场的六重正交几何类比表（`MODEL`）**：
 

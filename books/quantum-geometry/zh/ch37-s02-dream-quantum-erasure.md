@@ -1,4 +1,4 @@
-# 37.2 梦境作为“夜间量子擦除”：局部遗忘如何赎回缺失的正交分支？
+# 37.2 梦境作为“夜间量子擦除”：局部遗忘如何赎回被拧走的相位？
 
 既然白天的清醒专注是一台不停剪除 $\sin\theta$ 分叉并累积熵税的强捏合机器，有限心智若永不松开已知数据的钳口，格拉姆相容走廊便会越收越紧。我们在[第 36 章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)已经看到，把整张表推上 $\cos 90^\circ = 0$ 一次性格式化是代价惨重的宏观轮回；相比之下，大自然为生命演化出了一套精妙绝伦的**夜间软维护机制（`MODEL`（模型诠释））**——**梦境中的局部可逆遗忘**。
 
@@ -38,14 +38,14 @@
 **挂起时空锚 $\mathbf{u}_2$，相容行列式从 $0.104$ 升到 $0.36$，且不再含 $x_2$。** 取 $c_{12} = x_1 = \frac{4}{5}$：墨色的抛物线是三锚俱在时的 $\det G_3$，只在 $x_2 \in [0.28, 1]$ 的清醒窄窗里不小于 $0$（圆点是 $x_2 = 0.8$ 处的 $0.104$），在 $x_2 = 0$ 处为 $-0.28$，被打叉；青色的水平虚线是挂起 $\mathbf{u}_2$ 后只剩 $\mathbf{u}_1$ 与 $\mathbf{v}$ 的 $\det G_2 = 0.36$，青色箭头是这一步跃升。挂起只是让 $x_2$ 退出约束，$x_2 = 0$ 的三元组仍不是可实现的格拉姆矩阵，所以那个叉还在。行列式恒等式与正性边界由 [@ex-ch37-gram-constraint-release] 的三锚点冻结声明覆盖，图中数值是本章的应用。
 :::
 
-[@ex-ch37-gram-constraint-release] 一下子解开了梦境最迷人的结构之谜：梦里的荒诞拼贴绝不是杂乱无章的故障，而是当编年史坐标 $\mathbf{u}_2$ 退隐后，切片超平面改按**内禀情感与结构同构相位 $x_1$** 执行斜向跨层寻址——十年前的老街、千里外的面孔与白天未曾选中的 $\sin\theta$ 人生岔路，因为共享同一组内禀相位而在同一个梦境切片里重逢！
+[@ex-ch37-gram-constraint-release] 在本书的读法里（`MODEL`）一下子解开了梦境最迷人的结构之谜：梦里的荒诞拼贴绝不是杂乱无章的故障，而是当编年史坐标 $\mathbf{u}_2$ 退隐后，切片超平面改按**内禀情感与结构同构相位 $x_1$** 执行斜向跨层寻址——十年前的老街、千里外的面孔与白天未曾选中的 $\sin\theta$ 人生岔路，因为共享同一组内禀相位而在同一个梦境切片里重逢！
 
 量子光学中与记录擦除相关的外部实验文献背景及无信令边界，单独封装于 [@rem-ch37-quantum-eraser-literature]：
 
 ::: {.remark #rem-ch37-quantum-eraser-literature title="双缝路径标记与延迟选择量子擦除实验（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 将局部记录消除与非对角相干恢复相联系的实验原型，源自量子光学中的量子擦除（Quantum Eraser）经典文献，相关连续波光学装置与符合计数统计未包含在本书锁定的 `trureturing@dev` 声明集中：
 
-1. **量子擦除理论构想与光学双缝验证（M. O. Scully & K. Drühl, *Phys. Rev. A* **25**, 2208–2213, 1982；T. J. Herzog, P. G. Kwiat, H. Weinfurter & A. Zeilinger, *Phys. Rev. Lett.* **75**, 3034–3037, 1995）**：在双路径干涉仪中，若辅助环境探针记录了可区分的“哪条路径（which-path）”正交标记，信号子系统的约化密度矩阵非对角项归零，屏幕干涉条纹彻底消失；反之，若对路径探针执行与路径基互补的对角基投影（擦除路径可区分信息），则在按探针读出分类的条件子系综中，原本隐身的非对角干涉条纹被完整赎回；
+1. **量子擦除理论构想与光学干涉验证（M. O. Scully & K. Drühl, *Phys. Rev. A* **25**, 2208–2213, 1982；T. J. Herzog, P. G. Kwiat, H. Weinfurter & A. Zeilinger, *Phys. Rev. Lett.* **75**, 3034–3037, 1995）**：在双路径干涉仪中，若辅助环境探针记录了可区分的“哪条路径（which-path）”正交标记，信号子系统的约化密度矩阵非对角项归零，屏幕干涉条纹彻底消失；反之，若对路径探针执行与路径基互补的对角基投影（擦除路径可区分信息），则在按探针读出分类的条件子系综中，原本隐身的非对角干涉条纹被完整赎回；
 2. **延迟选择量子擦除实验与无逆因果信令边界（Y.-H. Kim, R. Yu, S. P. Kulik, Y. H. Shih & M. O. Scully, *Phys. Rev. Lett.* **84**, 1–5, 2000）**：利用自发参量下转换纠缠光子对证明，即便信号光子已先抵达探测屏，事后对闲置伴随光子选择保留路径信息或经分束器擦除路径信息，依然分别对应无干涉包络或互补干涉条纹（注意无条件边缘总和恒保持不变，绝不产生逆时间超光速通信，严格服从无信令定理）。
 :::
 
@@ -61,7 +61,7 @@ $$
 **两份记录只逆转一份。** 两份相位记录（c = −i）先后写入，品红的 ρ₀₁ 从 1/2 转到 −1/2；只逆转副本 0，相位盘上品红的箭头停在 −i/2，条纹比灰色虚线错开四分之一格；盘上的白色虚线记下箭头走过的路：转出半圈，再转回四分之一圈（[@thm-ch37-joint-coherent-record-erasure] 第 2 款）。
 :::
 
-下面两条内核定理将任意有限幺模记录族的联合逆转恢复律与这一双副本对比证书精确锁定如下：
+先说清适用范围：幺模条件 $\lvert\gamma\rvert = 1$ 意味着两个地址留下的环境记录彼此平行、不携带路径信息，$\lvert\rho_{ij}\rvert$ 从未减小；这里撤销的是受控相位（一种相位回波），不是 Scully–Drühl 意义下记录彼此正交（$\gamma = 0$）时的量子擦除，37.1 节的完全捏合也不能由此复原。下面两条内核定理将任意有限幺模记录族的联合逆转恢复律与这一双副本对比证书精确锁定如下：
 
 ::: {.theorem #thm-ch37-joint-coherent-record-erasure title="多副本幺模环境记录的联合相干逆转恢复定理与双副本精确对比证书" lean="D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate"}
 在 `trureturing` 冻结的观察者记忆联合相干逆转模块中，记单比特环境记录类型为 $\mathrm{EnvironmentRecord} = \operatorname{Fin} 2 \to \operatorname{Fin} 2 \to \mathbb{C}$，地址间记录格拉姆重叠为 $\operatorname{recordOverlap}(r, i, j) = \sum_{a \in \operatorname{Fin} 2} r(i, a)\,\overline{r(j, a)}$，振幅共轭逆转记录为 $\operatorname{reverseRecord}(r)(i, a) = \overline{r(i, a)}$，多副本顺序记录信道 `multiRecordChannel` 将矩阵第 $(i, j)$ 元乘以全部副本重叠之积 $\prod_k \operatorname{recordOverlap}(\mathrm{records}(k), i, j)$。以下两项结论同时成立：
@@ -78,7 +78,7 @@ $$
    \operatorname{multiRecordChannel}\bigl(\operatorname{reverseOn}(\operatorname{Finset.univ}, \mathrm{records}),\; \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{ij} \;=\; \rho_{ij};
    $$
 
-2. **双副本相位记录上局部擦除失灵与全局联合擦除复原的显式证书**（[`two_copy_joint_reversal_certificate`](lean:D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate)）：取均匀叠加纯态密度矩阵 $\rho = \mathrm{equalSuperpositionDensity} = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix}$，定义单模相位记录 $\mathrm{phaseRecord}(i, a)$ 在 $a = 0, i = 0$ 取 $1$、在 $a = 0, i = 1$ 取虚数单位 $i$、在 $a = 1$ 取 $0$，并令双副本族 $\mathrm{records} : \operatorname{Fin} 2 \to \mathrm{EnvironmentRecord}$ 两份皆取 $\mathrm{phaseRecord}$，记单元素子集 $\mathrm{copyZero} = \{0\} \subseteq \operatorname{Fin} 2$。通过选中子集逆转算子 `reverseChannelOn` 检验第 $(0, 1)$ 非对角相干元，以下四重等式同时成立：
+2. **双副本相位记录上局部逆转失灵与全局联合逆转复原的显式证书**（[`two_copy_joint_reversal_certificate`](lean:D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate)）：取均匀叠加纯态密度矩阵 $\rho = \mathrm{equalSuperpositionDensity} = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix}$，定义单模相位记录 $\mathrm{phaseRecord}(i, a)$ 在 $a = 0, i = 0$ 取 $1$、在 $a = 0, i = 1$ 取虚数单位 $i$、在 $a = 1$ 取 $0$，并令双副本族 $\mathrm{records} : \operatorname{Fin} 2 \to \mathrm{EnvironmentRecord}$ 两份皆取 $\mathrm{phaseRecord}$，记单元素子集 $\mathrm{copyZero} = \{0\} \subseteq \operatorname{Fin} 2$。通过选中子集逆转算子 `reverseChannelOn` 检验第 $(0, 1)$ 非对角相干元，以下四重等式同时成立：
 
    $$
    \begin{aligned}
@@ -98,7 +98,7 @@ $$
 **幺模前提不可少。** 若记录把两条路完全分开（重叠 c = 0，前提 |c|² = 1 不成立），写入第一份，品红的 ρ₀₁ 就缩没了，相位盘上的箭头缩成圆心的一点，屏上只剩青色虚线的包络；两份都逆转，ρ₀₁ 仍是 0，条纹回不来。这是页面按同一信道公式的数值，不在 [@thm-ch37-joint-coherent-record-erasure] 的适用范围内。
 :::
 
-[@thm-ch37-joint-coherent-record-erasure] 的第 2 款把梦境深浅的几何差异刻画得栩栩如生（`MODEL`（模型诠释））：当白天的两道已知约束把初始正向相干 $+1/2$ 扭转为反相 $-1/2$ 时，倘若你在半梦半醒间只松开了第 $0$ 道执念（`{0}`），残留的第 $1$ 道防线仍会把相位拧在虚轴 $-i/2$ 上；唯有进入深沉的放手状态，对整束局部副本同步执行联合共轭逆转（`Finset.univ`），白天被主观选择掩埋的 $+1/2$ 相干振幅才会原原本本地浮出水面！
+[@thm-ch37-joint-coherent-record-erasure] 的第 2 款把梦境深浅的几何差异刻画得栩栩如生（`MODEL`（模型诠释））：当白天的两道已知约束把初始正向相干 $+1/2$ 扭转为反相 $-1/2$ 时，倘若你在半梦半醒间只松开了第 $0$ 道执念（`{0}`），残留的第 $1$ 道防线仍会把相位拧在虚轴 $-i/2$ 上；唯有进入深沉的放手状态，对整束局部副本同步执行联合共轭逆转（`Finset.univ`），被两道相位记录拧走的 $+1/2$ 相干振幅才会原原本本地浮出水面！
 
 ::: {.viz src="dream-decoherence-unpinning" preset="quantum_eraser" height="500"}
 **全部副本联合逆转。** 两份相位记录都写入，再把两份都逆转：相位盘上品红的箭头沿半径 1/2 的灰色虚线圆转出半圈、再原路转回 1/2，条纹落回灰色虚线上；盘上的白色虚线是箭头走过的路：外圈转出半圈，内圈原路转回，品红圆点是每一步的落点 1/2、−i/2、−1/2（[@thm-ch37-joint-coherent-record-erasure] 第 1 款，每份记录满足 |c|² = 1）。

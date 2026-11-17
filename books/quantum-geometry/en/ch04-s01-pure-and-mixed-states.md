@@ -135,7 +135,7 @@ Complete positivity makes the Choi matrix, ordered by output–input coordinates
 The general C\*-algebraic representation-compression form is supplied by [@thm-stinespring-dilation]; [@thm-finite-channel-stinespring] obtains the finite matrix Schrodinger-picture form directly from Kraus operators. Minimum dimension, unique equivalence of minimal dilations, fixed-pure-environment unitary extension, and the physical interpretation of microscopic baths retain their respective literature status.
 :::
 
-An immediate, far-reaching consequence follows: **apparent local irreversibility is not dynamical destruction — it is an access defect caused by losing the environment key!**
+An immediate, far-reaching consequence follows: **within this model, apparent local irreversibility is not dynamical destruction — it is an access defect caused by losing the environment key!**
 
 Test this on the sharpest possible pair: prepare East $\rho = \lvert +\rangle\langle +\rvert = \frac{1}{2}\bigl(\begin{smallmatrix}1 & 1\\ 1 & 1\end{smallmatrix}\bigr)$ versus West $\sigma = \lvert -\rangle\langle -\rvert = \frac{1}{2}\bigl(\begin{smallmatrix}1 & -1\\ -1 & 1\end{smallmatrix}\bigr)$ alongside a blank environment qubit $\lvert 0\rangle_{\mathrm{env}}$, and apply the reversible controlled-copy unitary $U_{\mathrm{copy}}$ (a CNOT permutation flipping the environment bit $a \mapsto 1 - a$ iff the system bit is $1$). Afterward:
 
@@ -144,7 +144,7 @@ Test this on the sharpest possible pair: prepare East $\rho = \lvert +\rangle\la
 
 The next theorem packages all six parts of this diagnosis into a single kernel-verified statement.
 
-::: {.theorem #thm-reduced-access-defect title="Reduced Irreversibility Is an Environment-Record Access Defect" lean="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"}
+::: {.theorem #thm-reduced-access-defect title="Controlled-Copy Record: Equal Reduced States, Distinguishable Joint States, Global Reversibility" lean="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"}
 Let $\rho, \sigma \in M_2(\mathbb{C})$ be two qubit matrices with identical diagonal entries ($\forall i,\, \rho_{ii} = \sigma_{ii}$) but at least one distinct off-diagonal entry ($\exists i \neq j,\, \rho_{ij} \neq \sigma_{ij}$). Write $U_{\mathrm{copy}} \in M_{\mathrm{Fin}\,2 \times \mathrm{Fin}\,2}(\mathbb{C})$ for the controlled address-copy permutation matrix, $B(\tau) = \tau \otimes \lvert 0\rangle\langle 0\rvert_{\mathrm{env}}$ for the blank-environment joint embedding, $R(\tau)$ for the controlled-record joint state, and $\Tr_{\mathrm{env}}$ for the partial trace over the environment. Then all six statements hold:
 
 1. **Unitarity of global coupling**: $U_{\mathrm{copy}} \in U(\mathrm{Fin}\,2 \times \mathrm{Fin}\,2, \mathbb{C})$;

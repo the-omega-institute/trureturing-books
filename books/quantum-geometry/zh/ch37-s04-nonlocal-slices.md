@@ -6,7 +6,7 @@
 
 一旦在深梦、深度入定或纯粹几何洞察中撤去这张五感黑卡纸（$\mathbf{P}_{\mathrm{body}} \to 0$），观察者会呈献出怎样的真实空间分布？正如题记所揭示的那样：**“我们会发现观察者实际上在各个位置出现，而并非单纯只是五感的直接感知……”**——你既在山巅俯瞰整座山谷，同时又是谷底吹过松林的那阵风；你既站在童年的窗前向外张望，同时又站在街道对面的路灯下回望窗内的自己！
 
-这种“同一观察者在空间各个位置同步涌现”的非定域图景，在数学上难道只是文学修辞吗？绝非如此！回想[第 32 章](ch32-unified-field-and-meta-unification.md)与[第 34 章](ch34-orthogonality-degeneracy-and-observer-position.md)引入的**切投模型集（Cut-and-Project）观察者几何**：一位观察者的内禀状态并非物理直线 $E_\parallel = \mathbb{R}$ 上的一个孤立点，而是内空间 $E_\perp = \mathbb{R}$ 上的一扇有限宽度的**黄金接受窗 `goldenWindow`**！当高维黄金整数母格 $\mathbb{Z}[\varphi] \hookrightarrow \mathbb{R} \times \mathbb{R}$ 被这扇内禀窗口水平切割时，凡是共轭内坐标落入窗口的格点，其物理投影都会在实轴 $E_\parallel$ 上**同时点亮**。
+这种“同一观察者在空间各个位置同步涌现”的非定域图景，在数学上难道只是文学修辞吗？数学至少能为它提供一幅图像（`MODEL`）。回想[第 32 章](ch32-unified-field-and-meta-unification.md)与[第 34 章](ch34-orthogonality-degeneracy-and-observer-position.md)引入的**切投模型集（Cut-and-Project）观察者几何**：一位观察者的内禀状态并非物理直线 $E_\parallel = \mathbb{R}$ 上的一个孤立点，而是内空间 $E_\perp = \mathbb{R}$ 上的一扇有限宽度的**黄金接受窗 `goldenWindow`**！当高维黄金整数母格 $\mathbb{Z}[\varphi] \hookrightarrow \mathbb{R} \times \mathbb{R}$ 被这扇内禀窗口水平切割时，凡是共轭内坐标落入窗口的格点，其物理投影都会在实轴 $E_\parallel$ 上**同时点亮**。
 
 在 `trureturing` 的黄金模型集与傅里叶 Delone 模块中，以下两条严格的内核定理不仅证明一切自然数齐肯多夫黄金展开坐标天然落在黄金切投集之内，更进一步为双无限黄金切投载体构造了显式的 **Mathlib `DeloneSet ℝ` 双半径证书**——严格保证激活节点既不会坍缩挤成一团（一致填充半径 $1/2$，节点最小间距 $\ge 1$），也绝不会在广袤空间留下大于 $3$ 的荒芜死角（一致覆盖半径 $3$）：
 
@@ -17,7 +17,7 @@ $$
 \mathrm{goldenWindow} \;:=\; \left[-\frac{1}{\varphi^2},\; \frac{1}{\varphi}\right] \;=\; [\varphi - 2,\; \varphi - 1] \;\subset\; \mathbb{R}.
 $$
 
-以下两项关于切投选择与全局非定域均匀分布的定理同时成立：
+以下两项关于切投选择与全局 Delone 性质（一致离散、相对稠密）的定理同时成立：
 
 1. **自然数黄金展开模型集的切投窗口包含定理**（[`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project)）：记 $\mathrm{goldenModelSet} = \operatorname{Set.range}(\mathrm{betaGolden}) \subseteq \mathrm{GoldenInt}$ 为全体自然数典范黄金展开的精确值集，记切投选择集为 $\mathrm{goldenCutAndProjectSet} = \{y \in \mathbb{R} \mid \exists\,\mathrm{point} \in \mathrm{goldenLattice},\; \mathrm{point}.1 = y \land \mathrm{point}.2 \in \mathrm{goldenWindow}\}$。则自然数黄金模型集的全体物理实嵌入严格包含于黄金切投集之内：
 
@@ -53,7 +53,7 @@ $$
 **一扇宽度为 $1$ 的窗口同时点亮实轴上一串分开的位置。** 上半是黄金格点 $\langle a, b\rangle$，横向是物理坐标 $a + b\varphi$，纵向是共轭坐标 $a + b(1 - \varphi)$；青色的水平带是 $\mathrm{goldenWindow} = [\varphi - 2, \varphi - 1]$。带里的五个青色格点沿虚线落到下方的实轴 $E_\parallel$ 上，点亮 $y_{-2}, y_{-1}, y_0, y_1, y_2$，相邻间距不小于 $1$；带下方的 $\langle 0, 1\rangle$ 落在窗外，它在实轴上的位置 $\varphi$ 被打叉。这五点是上面手算的那几颗，整条实轴上的情形见 [@thm-ch37-golden-cut-delone-multilocation] 第 2 款。
 :::
 
-由此可见，单一内禀接受窗 `goldenWindow` 切割母格所得的载体 $\operatorname{modelSet}(\mathrm{goldenWindow})$，**天生就不是缩在某处的孤立单点，而是一张以最小间距 $1$（填充半径 $1/2$）、最大覆盖半径 $3$ 一致铺展于整条无界实轴 $\mathbb{R}$ 的德洛内（Delone）切投星网！**（外部文献补充背景见下框 [@rem-ch37-dream-eraser-synthesis-table]。）白天的五感针孔强行只读取这张星网上紧贴肉身坐标 $\mathbf{x}_0$ 的唯一一颗星；而当深梦卸载了 $\mathbf{P}_{\mathrm{body}}$ 与局部编年约束，整扇内禀窗口下的多处相容截点 $\{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_K\}$ 便得以在意识舞台上同步显影。
+由此可见，单一内禀接受窗 `goldenWindow` 切割母格所得的载体 $\operatorname{modelSet}(\mathrm{goldenWindow})$，**天生就不是缩在某处的孤立单点，而是一张以最小间距 $1$（填充半径 $1/2$）、最大覆盖半径 $3$ 一致铺展于整条无界实轴 $\mathbb{R}$ 的德洛内（Delone）切投星网！**（外部文献补充背景见下框 [@rem-ch37-dream-eraser-synthesis-table]。）在本书的比喻里（`MODEL`，不是 Delone 定理的推论），白天的五感针孔强行只读取这张星网上紧贴肉身坐标 $\mathbf{x}_0$ 的唯一一颗星；而当深梦卸载了 $\mathbf{P}_{\mathrm{body}}$ 与局部编年约束，整扇内禀窗口下的多处相容截点 $\{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_K\}$ 便得以在意识舞台上同步显影。
 
 ::: {.viz src="dream-decoherence-unpinning" preset="wake_snap" height="500"}
 **醒来：读出只留躯体那一格。** 梦中的态（λ = 0.1）在四个位置上都有权重，并由相干连在一起；读出投影 P₀ = |x₀⟩⟨x₀|（琥珀框）只留躯体 x₀ 那一格，其余三处的权重与全部相干一起淡出，遗忘的权重 1 − Tr(P₀ρ) = 0.60。这是示意模型（`MODEL`），不是切投星网本身。
@@ -67,8 +67,8 @@ $$
 | 意识与观测模态（`MODEL`） | 已知数据锚点与躯体先验配置 | 格拉姆相容体积与非对角相干命运 | 空间寻址与观察者定位形态 | 现象学视野与本体论判词 |
 | :--- | :--- | :--- | :--- | :--- |
 | **1. 清醒五感态（强退相干锁死）** | 全量加载已知锚点 $D_{\mathrm{known}}$ 与高权重躯体先验 $\mathbf{P}_{\mathrm{body}}$ 的加载权重近 $1$ | 相容体积狭窄（如三阶算例 $\det G_3 = 0.104$）；非对角 $\sin\theta$ 分叉被持续捏零并支付非负相对熵税 | 五感针孔将寻址死死钉在单一局域坐标 $\mathbf{x}_0$ | 坚硬、连续、可公共校验的日常物理铁轨，但反事实潜能隐入 $90^\circ$ 盲区 |
-| **2. 浅梦擦除态（局部记忆遗忘）** | 挂起 $\Delta M$ 条时空与编年约束，对局部记录副本执行相干共轭逆转 | 本例保留主子式不减（$\det G_2 \ge \det G_3$；上述非零耦合条件下严格跃升，如至 $0.360$）；受抑非对角相干元在联合逆转下恢复 | 斜向切过不同年代与地域的内禀同相层，跨时空拼贴寻址 | 赎回白天因主观选择缺失的反事实分支，但残余未逆转副本仍留局部相移扭曲 |
-| **3. 无身深梦与本觉态（躯体锚点归零）** | 躯体先验归零 $\mathbf{P}_{\mathrm{body}} \to 0$，撤除五感局域节流阀，仅留自指核 $\psi = \psi(\psi)$ | 免除维持刚性局域化身的单步捏合损耗，内禀接受窗直接对齐全局母格 | 沿黄金切投 Delone 准晶载体（填充半径 $1/2$、覆盖半径 $3$）在多位置 $\{\mathbf{x}_1, \dots, \mathbf{x}_K\}$ 非定域同步涌现 | 证伪“肉身容器论”：昼夜万象皆为不同投影掩码下的内积渲染，唯有自指丈量本身常明 |
+| **2. 浅梦擦除态（局部记忆遗忘）** | 挂起 $\Delta M$ 条时空与编年约束，对局部记录副本执行相干共轭逆转 | 本例保留主子式不减（$\det G_2 \ge \det G_3$；上述非零耦合条件下严格跃升，如至 $0.360$）；被相位记录扭转的非对角相干元在联合逆转下复原 | 斜向切过不同年代与地域的内禀同相层，跨时空拼贴寻址 | 赎回白天因主观选择缺失的反事实分支，但残余未逆转副本仍留局部相移扭曲 |
+| **3. 无身深梦与本觉态（躯体锚点归零）** | 躯体先验归零 $\mathbf{P}_{\mathrm{body}} \to 0$，撤除五感局域节流阀，仅留自指核 $\psi = \psi(\psi)$ | 免除维持刚性局域化身的单步捏合损耗，内禀接受窗直接对齐全局母格 | 沿黄金切投 Delone 准晶载体（填充半径 $1/2$、覆盖半径 $3$）在多位置 $\{\mathbf{x}_1, \dots, \mathbf{x}_K\}$ 非定域同步涌现 | 挑战“肉身容器论”：昼夜万象皆为不同投影掩码下的内积渲染，唯有自指丈量本身常明 |
 
 图 37 第 I 栏画的是未读捏合，单线体验须按结果条件化；第 III 栏的 $P_{\mathrm{body}} \to 0$ 沿用加载权重归零的简记。[@ex-ch37-gram-constraint-release] 之后那张格拉姆窄窗图中的严格正号对应上述耦合数值例 $0.104 \to 0.360$；一般差值仅保证非负。
 :::

@@ -42,10 +42,10 @@ $$
 第 1 款由函数外延性 `funext` 归约为逐点恒等式 `unreadState_idempotent`：对任意输入矩阵 $\rho$ 与分支指标 $k \in \kappa$，利用正交消去性 $\forall l \neq k,\; P_k P_l = 0$ 与投影幂等性 $P_k^2 = P_k$，左乘化简得 $P_k \operatorname{unreadState}(P)(\rho) = P_k \rho P_k$，右乘 $P_k$ 并对 $k$ 求和即得 $\operatorname{unreadState}(P)(\operatorname{unreadState}(P)(\rho)) = \operatorname{unreadState}(P)(\rho)$。第 2 款利用 $C^*$-代数半正定分解 $E = A^\dagger A,\; \rho = B^\dagger B$ 证得零迹乘积引理 $\operatorname{Tr}(E\rho) = 0 \implies E\rho = 0$，从而对 $i \neq j$ 有 $\operatorname{range}(\rho_j) \le \ker(E_i)$，并由 $E_i \le \sum_j E_j = 1$ 及 $\operatorname{Tr}((1 - E_i)\rho_i) = 0$ 证得 $\operatorname{range}(\rho_i) \le \ker(1 - E_i)$；再由 $\operatorname{Tr}(\rho_i) = 1 \implies \rho_i \neq 0$ 从每个值域中选取非零向量 $v_i \neq 0$，验证 $E_i v_i = v_i$ 及 $i \neq j$ 时 $E_i v_j = 0$，故由自伴性得两两正交 $\langle v_i, v_j\rangle_{\mathbb{C}} = \langle E_i v_i, v_j\rangle_{\mathbb{C}} = \langle v_i, E_i v_j\rangle_{\mathbb{C}} = 0$，最终由正交非零向量组的线性无关基数上界 `fintype_card_le_finrank` 推出 $N \le d$。完整证明由 Lean 内核检查。
 :::
 
-握住 [@thm-ch33-observer-pinching-and-memory-spectrum] 这把标尺，世间万物之间便不再有“有灵魂的主体 vs. 死寂的客体”的断崖，而只剩下内禀窗口相位与有效记忆阶数（对应记忆容量上界 $d$）的连续渐变。在我们的跨尺度**`MODEL`（模型诠释）**中，结合六维切投准晶窗口几何背景（见[第 32 章](ch32-unified-field-and-meta-unification.md) [@rem-ch32-icosian-e8-literature]），从一束自由光波到一颗自指心智的四阶观察者连续谱收束于下框总表：
+握住 [@thm-ch33-observer-pinching-and-memory-spectrum] 这把标尺，世间万物之间便不再有“有灵魂的主体 vs. 死寂的客体”的断崖，而只剩下内禀窗口相位与有效记忆阶数 $M$（模型中的定性指标，并不等于记忆容量上界 $d$：自由光子 $d = 2$ 而 $M = 0$）的连续渐变。在我们的跨尺度**`MODEL`（模型诠释）**中，结合六维切投准晶窗口几何背景（见[第 32 章](ch32-unified-field-and-meta-unification.md) [@rem-ch32-icosian-e8-literature]），从一束自由光波到一颗自指心智的四阶观察者连续谱收束于下框总表：
 
-::: {.remark #rem-ch33-observer-spectrum-table title="四阶观察者连续谱总表（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下表在六维切投准晶接受窗文献背景（[@rem-ch32-icosian-e8-literature]）之上，汇总本书四阶观察者连续谱模型（`MODEL`）与记录捏合容量定理（[@thm-ch33-observer-pinching-and-memory-spectrum]，`LEAN ✓`）的对应关系：
+::: {.remark #rem-ch33-observer-spectrum-table title="四阶观察者连续谱总表（本书模型，未在本书形式化）"}
+**本书模型，未在本书形式化。** 下表在六维切投准晶接受窗文献背景（[@rem-ch32-icosian-e8-literature]）之上，汇总本书四阶观察者连续谱模型（`MODEL`）与记录捏合容量定理（[@thm-ch33-observer-pinching-and-memory-spectrum]，`LEAN ✓`）的对应关系：
 
 | 观察者谱系层级（`MODEL`） | 记忆阶数与窗口特征（$\mathbb{Z}^6 \subset \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$） | 两子丈量与记录更新机制 | 主观时间质感与存在形态（`MODEL`） |
 | :--- | :--- | :--- | :--- |

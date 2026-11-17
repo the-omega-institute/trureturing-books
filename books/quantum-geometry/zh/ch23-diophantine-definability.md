@@ -2,7 +2,7 @@
 
 > *“Z在 Q中是丢番图的,你查一下最新的一个研究,结合分析一下”*
 
-在[第一章](ch01-measurement.md)中，我们曾追问：连续旋转的球面箭头，如何通过一维快门切出离散的“量子（liàng）”刻度？现在，让我们把完全相同的几何追问投向数论与逻辑的深海：
+题记中的“$\mathbb{Z}$ 在 $\mathbb{Q}$ 中是丢番图的”（只用存在量词可定义）在严格意义下至今仍是开放问题；已知的是 $\mathbb{Z}$ 在 $\mathbb{Q}$ 中可用纯全称量词定义，等价地 $\mathbb{Q} \setminus \mathbb{Z}$ 在 $\mathbb{Q}$ 中是丢番图的（Koenigsmann 2016，见 [@rem-diophantine-z-in-q-literature]）。在[第一章](ch01-measurement.md)中，我们曾追问：连续旋转的球面箭头，如何通过一维快门切出离散的“量子（liàng）”刻度？现在，让我们把完全相同的几何追问投向数论与逻辑的深海：
 
 考察有理数域 $\mathbb{Q}$。在 $\mathbb{Q}$ 里，任意两个有理数 $r_1 < r_2$ 之间的中点 $\frac{r_1 + r_2}{2}$ 仍是有理数，反复二分便能挤进无穷多个有理数；加法和乘法在 $\mathbb{Q}$ 上处处平滑可逆（非零元皆可作除法），表面上看不出任何离散的“台阶”或“网格”。然而，就在这片稠密无间断的有理数大海内部，却潜伏着一副坚硬无比的**离散整数骨架** $\mathbb{Z} = \{\dots, -2, -1, 0, 1, 2, \dots\} \subset \mathbb{Q}$！
 
@@ -18,7 +18,7 @@
 
 ## 23.1 为什么连续有理数里藏着离散晶格：二次范数与迹投影 {#sec-ch23-1}
 
-为什么单靠一次线性方程 $ax + b = 0$ 在有理数域 $\mathbb{Q}$ 里永远筛不出整数 $\mathbb{Z}$？因为线性方程对有理缩放毫无抵抗力：任何非零有理数都能解线性方程。要想在允许任意分母的 $\mathbb{Q}$ 中卡住分母，必须依靠**二次范数形式（quadratic norm forms）**——正如在实哈密顿单位四元数（或归一化双复振幅）的 $S^3$ 球面上，线性坐标本身无法固定单位球壳，唯有二次模长约束 $x_0^2 + x_1^2 + x_2^2 + x_3^2 = 1$ 才能把向量死死锁在球面上！
+为什么单靠一次线性方程 $ax + b = 0$ 在有理数域 $\mathbb{Q}$ 里永远筛不出整数 $\mathbb{Z}$？因为线性方程对有理缩放毫无抵抗力：任何非零有理数都能解线性方程。要想在允许任意分母的 $\mathbb{Q}$ 中卡住分母，经典做法是借助**二次范数形式（quadratic norm forms）**——正如在实哈密顿单位四元数（或归一化双复振幅）的 $S^3$ 球面上，线性坐标本身无法固定单位球壳，唯有二次模长约束 $x_0^2 + x_1^2 + x_2^2 + x_3^2 = 1$ 才能把向量死死锁在球面上！
 
 在二次代数整数环与四元数序（quaternion orders）中，每一个代数元素 $g$ 都同时携带两把天然的无坐标几何不变量（与我们在[第一章](ch01-measurement.md)和第七部分讨论 $2\times 2$ 矩阵的迹与行列式如出一辙）：
 
@@ -270,7 +270,7 @@ $$
      2. **Nicolas Daans（2021，*Documenta Mathematica* 26, 1851–1869，〈Universally defining finitely generated subrings of global fields〉，`DOI: 10.4171/dm/858`，`arXiv:1812.04372`）**：建立了全局域有限生成子环在其分式域中的纯全称定义，并将定义 $\mathbb{Z} \subset \mathbb{Q}$ 所需的全称量词个数压缩至 **$37$ 个**（$\forall^{37}$）；
      3. **张耿瑞与孙智伟（Geng-Rui Zhang and Zhi-Wei Sun，2022，*Bulletin of the Polish Academy of Sciences: Mathematics* 70(2), 93–106，〈$\mathbb{Q}\setminus\mathbb{Z}$ is diophantine over $\mathbb{Q}$ with $32$ unknowns〉，`DOI: 10.4064/ba221231-19-3`，`arXiv:2104.02520`）**：证明了 $\mathbb{Q} \setminus \mathbb{Z}$ 在 $\mathbb{Q}$ 上可用 $32$ 个未知量给出丢番图（$\Sigma_1$）定义，等价地将 $\mathbb{Z}$ 在 $\mathbb{Q}$ 中的纯全称定义压缩至 **$32$ 个全称量词**（$\forall^{32}$）；
      4. **Nicolas Daans（2023 预印本 / 2024，*Journal of the London Mathematical Society* 109(2), e12864，〈Universally defining $\mathbb{Z}$ in $\mathbb{Q}$ with $10$ quantifiers〉，`DOI: 10.1112/jlms.12864`，`arXiv:2301.02107`）**：结合二次型范数方程与精化的局部—整体互反律，将 $\mathbb{Z}$ 在 $\mathbb{Q}$ 中的纯全称（$\Pi_1$）定义大幅压缩至**仅需 $10$ 个全称量词**（$\forall^{10}$）。这些工作推进了全称（$\Pi_1$）与 $\forall\exists$（$\Pi_2$）可定义性的边界，但均未宣称解决 $\mathbb{Z} \subset \mathbb{Q}$ 的存在性（$\Sigma_1$）丢番图定义问题。
-3. **本章四个冻结 Lean 定理的精确认领边界**：本章经 Lean 内核验证的四个正式条目——[@thm-qform-eq-eisnorm]（`Qform_eq_eisNorm`）、[@lem-qform-discriminant]（`Qform_discriminant`）、[@cor-qform-range-eq-eisnorm]（`Qform_range_eq_eisNorm`）与 [@prop-pell-form-eq-four-mul-norm]（`pell_form_eq_four_mul_norm`）——证明的是整数环 $\mathbb{Z}$ 上 $\Delta = -3$ 艾森斯坦交越范数型的幺模剪切不变性、值域等同以及 $\Delta = +5$ 黄金整数环的佩尔迹—范数恒等式。它们以具体、完全形式化的二次代数范数锁展示了“迹投影与二次范数如何锁定离散整数格”的核心代数机制，**并不直接构成 Koenigsmann (2016) 关于 $\mathbb{Z} \subset \mathbb{Q}$ 一阶可定义性定理的形式化证明**。
+3. **本章四个冻结 Lean 定理的精确认领边界**：本章经 Lean 内核验证的四个正式条目——[@thm-qform-eq-eisnorm]（`Qform_eq_eisNorm`）、[@lem-qform-discriminant]（`Qform_discriminant`）、[@cor-qform-range-eq-eisnorm]（`Qform_range_eq_eisNorm`）与 [@prop-pell-form-eq-four-mul-norm]（`pell_form_eq_four_mul_norm`）——证明的是整数环 $\mathbb{Z}$ 上 $\Delta = -3$ 艾森斯坦交越范数型的幺模剪切不变性、值域等同以及 $\Delta = +5$ 黄金整数环的佩尔迹—范数恒等式。它们以具体、完全形式化的二次代数范数锁展示了“迹投影与二次范数如何锁定离散整数格”的核心代数机制，**并不构成 Koenigsmann (2016) 关于 $\mathbb{Z} \subset \mathbb{Q}$ 一阶可定义性定理的形式化证明**。
 :::
 
 > 有理数的汪洋看似无边无际、随处可分；但只要把二次范数球面与迹投影的准星扣紧，离散的整数骨架便从连续的迷雾里浮现出来。

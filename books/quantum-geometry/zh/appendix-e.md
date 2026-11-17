@@ -1,6 +1,6 @@
-# 附录 E 从比较公理到数学与物理公理体系：完整推导链、中间假设审计与极小反例集 {#附录-e-从比较公理到数学与物理公理体系}
+# 附录 E 从比较公理到数学与物理公理体系：完整推导链、中间假设审计与反例集 {#附录-e-从比较公理到数学与物理公理体系}
 
-本附录是[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)–[§32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)（[@def-ch32-axiom-of-comparison] 及六条形式化推论 [@cor-ch32-extensionality-and-quotient]–[@cor-ch32-bargmann-holonomy-and-path-product]）的**形式认识论配套审计台账**。在第 32 章正文中，我们将“两子丈量”提炼为零背景比较公理 $\mathcal{A}_0$ 与单指令几何积原语 $\mathrm{CMP}(\mathbf{A}, \mathbf{B}) = \mathbf{A}\cdot\mathbf{B} + \mathbf{A}\wedge\mathbf{B}$，并指出逻辑与集合外延、算术与数域完备化、度规几何、量子力学公设以及相对论—规范—内生贝里几何—离散路径乘积—热力学定律的核心骨架均可重构为 $\mathcal{A}_0$ 在显式桥接条件下的条件推论。为彻底杜绝“用一个口号偷换全部隐含前提”的公理滑坡，本附录逐条拆解每一条推导链：**哪些步骤仅凭两槽比较即可无损商化或完备化？哪些射影几何相位已在第 1 层内生闭环？哪些步骤必须补入可操作的实验测量、动力学生成元或复合层析判据？哪些步骤对应真实的代数签名、绝对值估值或交换统计分岔？当任一中间假设缺失时，能够证伪目标结论的极小反例（有限反例或可数无穷反例）究竟长什么样？**
+本附录是[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)–[§32.3](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)（[@def-ch32-axiom-of-comparison] 及六条形式化推论 [@cor-ch32-extensionality-and-quotient]–[@cor-ch32-bargmann-holonomy-and-path-product]）的**形式认识论配套审计台账**。在第 32 章正文中，我们将“两子丈量”提炼为零背景比较公理 $\mathcal{A}_0$ 与单指令几何积原语 $\mathrm{CMP}(\mathbf{A}, \mathbf{B}) = \mathbf{A}\cdot\mathbf{B} + \mathbf{A}\wedge\mathbf{B}$，并指出逻辑与集合外延、算术与数域完备化、度规几何、量子力学公设以及相对论—规范—内生贝里几何—离散路径乘积—热力学定律的核心骨架均可重构为 $\mathcal{A}_0$ 在显式桥接条件下的条件推论。为彻底杜绝“用一个口号偷换全部隐含前提”的公理滑坡，本附录逐条拆解每一条推导链：**哪些步骤仅凭两槽比较即可无损商化或完备化？哪些射影几何相位已在第 1 层内生闭环？哪些步骤必须补入可操作的实验测量、动力学生成元或复合层析判据？哪些步骤对应真实的代数签名、绝对值估值或交换统计分岔？当任一中间假设缺失时，能够证伪目标结论的反例（有限反例或可数无穷反例）究竟长什么样？**
 
 遵循与[附录 B](appendix-b.md)、[附录 D](appendix-d.md) 完全一致的认识论契约：凡对应 `trureturing@dev` 已冻结定理的环节均附有绿色 `LEAN ✓` 标记与可点击的内联声明链接（验证边界见[附录 C](appendix-c.md)）；经典数学与物理学定理标为 `文献结果`；显式构造的有限或可数无穷反例标为 `手工推导`；作者的统一几何架构标为 `MODEL`；尚未解决的数学与物理前沿则诚实标为红色 `OPEN`。
 
@@ -33,7 +33,7 @@
 为什么绝不能把 Layer 1 的几何性质误当成 Layer 0 抽象两槽接口的“无条件免费赠品”？下面四个纯有限维手工反例逐一给出了铁证：
 
 ::: {.example #ex-appe-layer0-countermodels title="第 0 层抽象比较接口的四个有限代数反例（手工推导）"}
-**手工推导。** 以下四个有限代数模型均满足 $2$ 可逆、奇偶正交分解以及相应的对合或成对单位互易律，却分别证伪了缺少 Layer 1 条件时的目标结论：
+**手工推导。** 以下四个有限代数模型均满足 $2$ 可逆与奇偶正交分解，(a)、(b)、(d) 还满足相应的对合或成对单位互易律（(c) 的 $B$ 不来自满足条款 III 的比较，见 [§E.8](#sec-appe-third-point-redundancy)），却分别证伪了缺少 Layer 1 条件时的目标结论：
 
 1. **反例 (a) 负自配对单点模型（证伪仅靠互易导出 $S(x, x) \ge 0$）**：
    取单元素集 $X = \{x_0\}$，目标代数 $\mathcal{A} = \mathbb{R}$（平凡对合 $\lambda^\dagger = \lambda$），定义 $\mathrm{CMP}(x_0, x_0) = -1$。奇偶分解给出 $S(x_0, x_0) = -1$、$A(x_0, x_0) = 0$，且成对互易乘积满足 $\mathrm{CMP}(x_0, x_0)\mathrm{CMP}(x_0, x_0) = (-1)(-1) = +1$；然而 $S(x_0, x_0) = -1 < 0$，直接违背正定自相似！这证明单位自配对 $S(x, x) = +1$ 是显式的 Layer 1 正向标定条件，不能单从平方等于 $+1$ 推出。
@@ -86,7 +86,7 @@ $$
      由划分拓扑核刻画定理 [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel)，拓扑不可分关系精确等于读出相等核；在非空源空间 `[Nonempty X]` 上，目标分解判据 [`target_factors_iff_continuous_partition`](lean:D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition) 与概念纤维分解定理 [`concept_fiber_decomposition`](lean:D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition) 证明：一切在比较核上无分歧的目标概念唯一穿过外延商空间 $X/{\sim_{\mathrm{CMP}}}$ 分解（在上例中 $X/{\sim_{\mathrm{CMP}}} \cong \{*\}$）。外延性无需额外公设，而是 `T1` 商化后的结构定理。
 2. **范畴论米田嵌入与反自指对角线分层（`文献结果` + `LEAN ✓`）**：
    - 将对象间比较提升为局部小范畴 $\mathcal{C}$ 的态射集 $\mathrm{Hom}_{\mathcal{C}}(-, X)$，米田引理（`文献结果`）证明米田函子 $y : \mathcal{C} \hookrightarrow [\mathcal{C}^{\mathrm{op}}, \mathbf{Set}]$ 全忠实——对象同构当且仅当其对一切探针对象的关系态射函子自然同构。
-   - 若企图在无分层单域中令编码表穷尽自身的全部否定对角线谓词（朴素概括 $U = \{x \mid x \notin x\}$），相对语义对角线逃逸定理 [`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 与洛维尔（Lawvere）定性自应用包 [`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package)（`LEAN ✓`）证明：任何满射列出必被无不动点否定自修饰器击穿，从而强制导出正则分层或类型分层。
+   - 若企图在无分层单域中令编码表穷尽自身的全部否定对角线谓词（朴素概括 $U = \{x \mid x \notin x\}$），相对语义对角线逃逸定理 [`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 与洛维尔（Lawvere）定性自应用包 [`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package)（`LEAN ✓`）证明：任何满射列出必被无不动点否定自修饰器击穿，从而强制导出正则分层或类型分层（后一步是本书的解释，不在 Lean 陈述中）。
 3. **ZFC 高阶存在公理的诚实边界（`T4` + 有限与可数双反例）**：
    比较核商化与对角线逃逸（并见[第 38 章 §38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 哥德尔自指盲点）**不能**导出 ZFC 的无穷公理、无限制配对/幂集公理、替换公理或选择公理。**有限与可数无穷双反例（`手工推导`）**：(i) 考察冯·诺依曼累积谱系的第 $5$ 层有限集 $V_5$（元素个数 $|V_5| = 65{,}536$），其上成员关系 $\in$ 满足外延公理、空集公理、正则基础公理、子集分离模式及对 $V_5$ 内元素的并集封闭性，但因一切元素均为有限集而直接证伪 **ZFC 无穷公理**，且在顶阶元素 $V_4 \in V_5$（$\operatorname{rank}(V_4) = 4$）处同时证伪无限制**配对公理与幂集公理**（单点对 $\{V_4\}$ 与幂集 $\mathcal{P}(V_4) = V_5$ 秩均为 $5$，逃出 $V_5$ 之外！）；(ii) 进一步升至可数无穷遗传有限集宇宙 $V_\omega := \bigcup_{k < \omega} V_k$，其上已完整满足 $\mathrm{ZFC} - \text{无穷公理}$ 的全部其余公理（含无限制配对、幂集、并集、基础与替换公理），却依然证伪 **ZFC 无穷公理**！高阶无穷基数与选择原则属于不可约的外部集合论强度（`T4` / `H9`）。
 :::
@@ -163,7 +163,7 @@ $$
 ::: {.remark #rem-appe-quantum-chain title="推导链四审计：量子力学五大公设的逐条桥接、效应可加性与局域层析极小性（LEAN ✓ 与文献结果）"}
 **五大量子公设的桥接条件与缺失反例总览。**
 
-1. **公设一（复希尔伯特状态空间 $\mathcal{H}$）**：由 Layer 1 极化恒等式、`T3` 复结构 $J^2 = -I$ 与 `T1` 柯西完备化联合铸就（缺完备化则退回可数无穷有理内积空间 $\mathbb{Q}[i]^d$）。
+1. **公设一（复希尔伯特状态空间 $\mathcal{H}$）**：由 Layer 1 极化恒等式、`T3` 复结构 $J^2 = -I$ 与 `T1` 柯西完备化联合铸就（复结构 $J$ 还须与内积相容；缺完备化则退回可数无穷有理内积空间 $\mathbb{Q}[i]^d$）。
 2. **公设二（可观测量与玻恩概率律 $p(E) = \operatorname{Tr}(\rho E)$）**：在单量子比特 $d = 2$ 上，仅要求正交投影基可加性 $f(P_{\mathbf{r}}) + f(P_{-\mathbf{r}}) = 1$ **无法**导出玻恩规则——除[第 2 章](ch02-born-rule.md) [@ex-qubit-busch-reconstruction] 展示的不连续半球指示函数外，还存在无穷光滑的奇三次标架函数反例（见下框 [@ex-appe-qubit-cubic-and-tomography]）！跨越这道鸿沟有两条已形式化的有限维精确路线：有限维效应路线保留全效应域（POVM，$0 \le E \le I$）上的有限可加性（`T2`），由有限维布施定理 [`effect_density_representation`](lean:D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_density_representation)（[@thm-busch-effect-density]，`LEAN ✓`）在一切有限维 $d \ge 2$ 唯一锁定 $p(E) = \operatorname{Tr}(\rho E)$；有限复维 $d \ge 3$ 的投影路线则对全体星投影施加非负性、单位归一与正交投影可加性（`T2`，不把正交投影可加性替换为任意矩阵上的函数可加性），使用[第 2 章](ch02-born-rule.md)已验证的有限复投影格里森定理 [`gleason_representation`](lean:D5/S3/Quantum/GleasonComplexRepresentation.Gleason.ProjectionPackage.gleason_representation)（[@thm-gleason-finite-projection]，`LEAN ✓`）唯一给出密度矩阵表示 $p(P) = \operatorname{Re}\operatorname{Tr}(\rho P)$。两者均不从两两公平直接推出底层内积结构及跨标架／效应赋值公理；实希尔伯特空间与无限维闭子空间投影格上的更广格里森形式及可数可加布施形式需另列精确声明与额外前提（Gleason 1957；Busch 2003，[@rem-gleason-literature]，`文献结果`）。至于从排斥球面极对偶与自旋因子几何出发重构有限维态锥的配套机制，详见[附录 F](appendix-f.md)。
 3. **公设三（测量后条件化更新与罗伯逊—薛定谔测不准界）**：秩一投影通道的玻恩配对权重由 [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)（`LEAN ✓`）刻画，对易子与反交换子共同撑起的测不准下界由 [`robertson_schrodinger`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger)（`LEAN ✓`）给出。但注意单次玻恩统计本身**不能**唯一决定测量后状态更新！
    - **有限非可重复重置仪器反例（`手工推导`）**：对比标准吕德斯（Lüders）投影仪器 $\mathcal{I}_k(\rho) = P_k \rho P_k$ 与重置仪器 $\mathcal{J}_k(\rho) = \operatorname{Tr}(\rho P_k)\,|+\rangle\langle +|$（其中 $P_0 = |0\rangle\langle 0|,\; P_1 = |1\rangle\langle 1|,\; |+\rangle = \frac{|0\rangle+|1\rangle}{\sqrt{2}}$）。两者给出**完全相同的单次玻恩概率** $\operatorname{Tr}(\mathcal{J}_k(\rho)) = \operatorname{Tr}(\rho P_k)$，但在满足 $\operatorname{Tr}(\rho P_0) > 0$ 的任意初态（使条件分母 $\operatorname{Tr}(\mathcal{J}_0(\rho)) = \operatorname{Tr}(\rho P_0) > 0$ 非零良定）上紧接着连测第二次 $Z$ 时，$\mathcal{J}_0$ 在首次读出 $0$ 后却以
@@ -228,7 +228,7 @@ $$
 $$
 
 ::: {.remark #rem-appe-spacetime-chain title="推导链五与六联合审计：闵可夫斯基光锥、内生贝里和乐对时空规范丛、平稳作用量阶梯、捏合熵增与付费比较边界（LEAN ✓、手工反例与 OPEN 前沿）"}
-**五组物理与计算推论的精确桥接条件及极小反例。**
+**五组物理与计算推论的精确桥接条件及反例。**
 
 1. **欧氏椭圆旋转、$\mathcal{Cl}_{3,0}$ 伪标量代数负号 vs. 闵可夫斯基双曲光锥刚性（`T3` + `LEAN ✓`）**：
    如 E.1 节反例 (b) 所示，紧致欧氏签名 $t^2 + \|\mathbf{x}\|^2$ 不会产生因果光锥；虽然[第 34 章 §34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave) 在三维克利福德代数 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 中由体积伪标量 $\mathbf{I}_3 = e_1 e_2 e_3$ 闭合内生给出代数负号 $\mathbf{I}_3^2 = -1$ 与副向量范数型 $c^2 dt^2 - d\mathbf{x}^2$（`MODEL` + `手工推导`），但将该代数二次型提升为全局双曲 $(1, d)$ 时空流形上的偏微分方程因果锥结构，仍必须显式作出 `T3` 洛伦兹因果锥分支选择；一旦选定该零锥，零光锥刚性定理 [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)（`LEAN ✓`）即严格证明：任何在零光锥 $t^2 - \|\mathbf{x}\|^2 = 0$ 上归零的实二次型必然全局正比于闵可夫斯基度规。
@@ -254,19 +254,19 @@ $$
 
    - **Layer 2 保单位捏合桥接（`LEAN ✓`）**：热力学第二定律的单向非负性要求粗粒化映射是**保单位（双随机，即不借助外部冷库偷排熵）的正交基底记录捏合通道 $\mathcal{E}_P(I) = I$**（`T2` Layer 2），此时相干删除熵产生恒等式 [`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity)（`LEAN ✓`）精确给出 $\Delta S_{\mathrm{vN}} = S(\mathcal{E}_P(\rho)) - S(\rho) = D(\rho \,\|\, \mathcal{E}_P(\rho)) \ge 0$（关于有限窗口预测充分统计蒸馏与全宇宙共享时间箭头的低熵过去假设及 $\Lambda_{\mathrm{cos}}$ 反循环边界，见[第 34 章 §34.22](ch34-s22-memory-renormalization-and-learning.md#sec-ch34-memory-renormalization-and-learning)–[§34.23](ch34-s23-cosmological-arrow-and-horizon-floor.md#sec-ch34-cosmological-arrow-and-horizon-floor) 与 [@prob-ch34-past-hypothesis-and-cosmological-constant]）。
 5. **可逆付费名字比较、球极神谕相对化 vs. 计算复杂性开放前沿（`LEAN ✓` + `文献结果` + `OPEN`）**：
-   在离散计算底层，二进名字可逆付费比较定理 [`name_compare_run`](lean:D5/S0/Computability/BinaryNameComparison.name_compare_run)（`LEAN ✓`）证明：对任意二进字 $a, b$，可逆状态机 `compareMachine` 在至多 **$2(|a| + |b|) + 4$** 步内（当等长 $|a| = |b| = \ell$ 时上界为 $4\ell + 4$ 步）完成相等性判别并完美复原输入纸带 $a, b$ 与上下文栈。进一步地，[第 38 章 §38.6–§38.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 结合北极球极盲点对偶 $\Pi_N : S^D\setminus\{N\}\xrightarrow{\sim}\mathbb{R}^D$ 与贝克—吉尔—索洛维（Baker–Gill–Solovay 1975，`文献结果`）神谕相对化定理（存在神谕 $A, B$ 使 $\mathrm{P}^A = \mathrm{NP}^A$ 而 $\mathrm{P}^B \neq \mathrm{NP}^B$）揭示了纯黑盒相对化对角线技术无法裁决标准复杂性分离的根源；因此无神谕标准图灵机猜想 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$（[@prob-ch38-unrelativized-p-vs-np-and-independence]）在此严格标定为 `T4` / `H9` 红色 `OPEN` 前沿。
+   在离散计算底层，二进名字可逆付费比较定理 [`name_compare_run`](lean:D5/S0/Computability/BinaryNameComparison.name_compare_run)（`LEAN ✓`）证明：对任意二进字 $a, b$，可逆状态机 `compareMachine` 在至多 **$2(|a| + |b|) + 4$** 步内（当等长 $|a| = |b| = \ell$ 时上界为 $4\ell + 4$ 步）完成相等性判别并完美复原输入纸带 $a, b$ 与上下文栈。进一步地，[第 38 章 §38.6–§38.7](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 结合北极球极盲点对偶 $\Pi_N : S^D\setminus\{N\}\xrightarrow{\sim}\mathbb{R}^D$（示意图景，`MODEL`，与 BGS 定理没有数学联系）与贝克—吉尔—索洛维（Baker–Gill–Solovay 1975，`文献结果`）神谕相对化定理（存在神谕 $A, B$ 使 $\mathrm{P}^A = \mathrm{NP}^A$ 而 $\mathrm{P}^B \neq \mathrm{NP}^B$）揭示了纯黑盒相对化对角线技术无法裁决标准复杂性分离的根源；因此无神谕标准图灵机猜想 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$（[@prob-ch38-unrelativized-p-vs-np-and-independence]）在此严格标定为 `T4` / `H9` 红色 `OPEN` 前沿。
 :::
 
 ---
 
 ## E.7 九大中间假设（H1–H9）全景审计与进一步处理总表 {#sec-appe-audit-table}
 
-我们将上述六条形式化推论（[@cor-ch32-extensionality-and-quotient]–[@cor-ch32-bargmann-holonomy-and-path-product]）及 E.1–E.6 节中识别出的**全部九大中间假设（`H1`–`H9`）**、缺失时的极小反例（严格区分有限模型与可数无穷模型）、四分类编码（`T1`–`T4`）、进一步处理机制以及认识论依据等级，统一收束于下框权威全景审计总表（与[第 32.3.4 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-6-4) [@rem-ch32-comparison-axiom-literature] 逐号严格对齐）：
+我们将上述六条形式化推论（[@cor-ch32-extensionality-and-quotient]–[@cor-ch32-bargmann-holonomy-and-path-product]）及 E.1–E.6 节中识别出的**全部九大中间假设（`H1`–`H9`）**、缺失时的反例（严格区分有限模型与可数无穷模型）、四分类编码（`T1`–`T4`）、进一步处理机制以及认识论依据等级，统一收束于下框权威全景审计总表（与[第 32.3.4 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-6-4) [@rem-ch32-comparison-axiom-literature] 逐号严格对齐）：
 
 ::: {.remark #rem-appe-master-audit-table title="从比较公理 A₀ 到各学科公理的九大中间假设（H1–H9）审计与处理机制总表"}
 **全景审计总账（汇总推论 [@cor-ch32-extensionality-and-quotient]–[@cor-ch32-bargmann-holonomy-and-path-product] 与 E.1–E.6 节）。**
 
-| 编号与中间假设 | 所属推论链 | 缺失时的极小反例（有限 vs. 可数无穷） | 分类 | 进一步处理机制 | 认识论依据 |
+| 编号与中间假设 | 所属推论链 | 缺失时的反例（有限 vs. 可数无穷） | 分类 | 进一步处理机制 | 认识论依据（`LEAN ✓` 只标相关的条件结论，本假设未被 Lean 消去） |
 | :--- | :--- | :--- | :---: | :--- | :--- |
 | **`H1` 比较等价核商化**（以及特征 $\neq 2$ 使 $2 \in \mathcal{A}^\times$ 可逆） | 逻辑与外延（[@cor-ch32-extensionality-and-quotient]） | **有限反例**：$\mathbb{F}_2$ 上 $+1 = -1$ 致奇偶塌缩；二元集 $\{a_1, a_2\}$ 上 $\mathrm{CMP} \equiv 1$ 违背原始同一律 | `T1` | 对原始域按不可分核取典范商空间 $X/{\sim_{\mathrm{CMP}}}$，使外延性成为商集定理 | `LEAN ✓`（[`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel)、[`target_factors_iff_continuous_partition`](lean:D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition)、[`future_word_orthogonal_residual`](lean:D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual)） |
 | **`H2` 正自配对、秩 $2$ 简单双向量椭圆负平方与 $n$ 点格拉姆半正定**（含球面三面角 $\Delta\mathcal{T}_\epsilon$ 曲率分岔） | Layer 0 $\to$ Layer 1 几何基座与曲率三分（E.1、E.4 节，[@cor-ch32-parallelogram-quadratic-and-gram]） | **有限反例**：单点 $\mathrm{CMP} = -1$；对偶数 $1\pm\varepsilon$ 与分裂复数 $\cosh\eta\pm j\sinh\eta$；$\mathcal{Cl}_{4,0}$ 非简单 $e_1\wedge e_2 + e_3\wedge e_4$；$3\times 3$ 实矩阵 $\det S = -3 < 0$；仿射平直 $\Omega = 0$ 对比单位球面 $\Omega(\epsilon) > 0$ | `T3` + Layer 1 | 显式声明正定克利福德单叶实现与定向 $D \ge 3$ 球面/切平面/双曲常曲率分支 | `LEAN ✓`（[`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity)、[`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness)）+ `手工推导`（[@ex-appe-layer0-countermodels]）+ `文献结果`（Schoenberg） |

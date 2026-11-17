@@ -4,7 +4,7 @@
 
 回望[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)，零背景比较公理 $\mathcal{A}_0$ 对**两个**单位态给出了互易公平律 $\cos^2\epsilon + \sin^2\epsilon = 1$；而在本章第二节中，我们又在宏观极限 $\epsilon = \frac{\pi}{2}$ 处考察了整块八分球面。倘若把比较公理从两态推进到最小非共面**三态闭环** $(\mathbf{A}, \mathbf{B}, \mathbf{C})$，并让步长取任意小角 $\epsilon \in (0, \frac{\pi}{2}]$，会发生什么？
 
-在单位球面 $S^2 \subset \mathbb{R}^3$ 上，选取直角转枢顶点 $\mathbf{B} = \mathbf{e}_2$，分别沿着两面互相垂直的坐标平面墙 $\mathbf{e}_2 \wedge \mathbf{e}_1$ 与 $\mathbf{e}_2 \wedge \mathbf{e}_3$ 各迈出弧长 $\epsilon$，得到三根单位状态射线：
+在单位球面 $S^2 \subset \mathbb{R}^3$（本节读作单比特布洛赫球：球面上的点是纯态，球内的点是混态）上，选取直角转枢顶点 $\mathbf{B} = \mathbf{e}_2$，分别沿着两面互相垂直的坐标平面墙 $\mathbf{e}_2 \wedge \mathbf{e}_1$ 与 $\mathbf{e}_2 \wedge \mathbf{e}_3$ 各迈出弧长 $\epsilon$，得到三根单位状态射线：
 
 $$
 \mathbf{B} = \mathbf{e}_2, \qquad \mathbf{A}(\epsilon) = \sin\epsilon\,\mathbf{e}_1 + \cos\epsilon\,\mathbf{e}_2, \qquad \mathbf{C}(\epsilon) = \sin\epsilon\,\mathbf{e}_3 + \cos\epsilon\,\mathbf{e}_2.
@@ -45,7 +45,7 @@ $$
    其四个正交基片分量的平方和恒等于 $\cos^4\frac{\epsilon}{2} + 2\sin^2\frac{\epsilon}{2}\cos^2\frac{\epsilon}{2} + \sin^4\frac{\epsilon}{2} = \bigl(\cos^2\frac{\epsilon}{2} + \sin^2\frac{\epsilon}{2}\bigr)^2 \equiv 1$！而交换两步次序的换位子差 $U_{23}(\epsilon)U_{12}(\epsilon) - U_{12}(\epsilon)U_{23}(\epsilon) = -2\sin^2\frac{\epsilon}{2}\,\mathbf{e}_1\mathbf{e}_3$（对应 [@thm-ch34-readout-kernel-and-covariant-commutator] 第 2 款 `covariant_commutator_formula`），则分毫不差地落在了第三张正交平面 $\mathbf{e}_1\mathbf{e}_3$ 上。
 
 ::: {.viz src="spherical-trihedron-cell" preset="twice-walls" height="520"}
-**沿两面垂直墙走两步：在转枢 $B$ 拐过直角，旋子乘积自然长出横向面分量。** 先由 $U_{12}(\epsilon)$ 沿第一面墙走到 $B$，再由 $U_{23}(\epsilon)$ 拐 $90^\circ$ 走到 $C$；两枚紫色墙旋子相乘除保留两墙生成元外，精确多出横向 $-\sin^2(\epsilon/2)\,e_1e_3$ 项（绿色 `LEAN ✓` `two_axis_finite_word` 与 `covariant_commutator_formula`）。
+**沿两面垂直墙走两步：在转枢 $B$ 拐过直角，旋子乘积自然长出横向面分量。** 先由 $U_{12}(\epsilon)$ 沿第一面墙走到 $B$，再由 $U_{23}(\epsilon)$ 拐 $90^\circ$ 走到 $C$；两枚紫色墙旋子相乘除保留两墙生成元外，精确多出横向 $-\sin^2(\epsilon/2)\,e_1e_3$ 项（旋子乘积为手算；绿色 `LEAN ✓` `two_axis_finite_word` 与 `covariant_commutator_formula` 只担保相关的一般引理）。
 :::
 
 ## 34.4.2 公平平方撑起品红球面帽：吉拉尔角超与万曲率之母 {#sec-ch34-4-2}
@@ -54,7 +54,7 @@ $$
 
 不妨直接对比青色平直欧氏弦切面 $\triangle_{\mathrm{flat}} ABC$ 与品红球面帽 $\triangle_{\mathrm{sph}} ABC$（球面三角与吉拉尔公式属经典文献结果，见下方 [@rem-ch34-regge-spinfoam-trihedron-literature]）：
 
-- **若用平直刀片硬削弦三角形 $\triangle_{\mathrm{flat}} ABC$**：两条直角墙上的弦长同为 $2\sin\frac{\epsilon}{2}$，底弦长为 $\sqrt{2}\sin\epsilon$，平面三角形内角和死锁在 $\alpha_{\mathrm{flat}} + \beta_{\mathrm{flat}} + \gamma_{\mathrm{flat}} = \pi$。由余弦定理算出转枢顶角满足 $\cos\beta_{\mathrm{flat}} = \sin^2\frac{\epsilon}{2} > 0$，故 $\beta_{\mathrm{flat}} < 90^\circ$ 被挤成了锐角；更致命的是，平削面内部每一点的模长都跌破了 $1$（$\|\mathbf{x}\| < 1$），当场违背量子纯态的单位公平归一化！
+- **若用平直刀片硬削弦三角形 $\triangle_{\mathrm{flat}} ABC$**：两条直角墙上的弦长同为 $2\sin\frac{\epsilon}{2}$，底弦长为 $\sqrt{2}\sin\epsilon$，平面三角形内角和死锁在 $\alpha_{\mathrm{flat}} + \beta_{\mathrm{flat}} + \gamma_{\mathrm{flat}} = \pi$。由余弦定理算出转枢顶角满足 $\cos\beta_{\mathrm{flat}} = \sin^2\frac{\epsilon}{2} > 0$，故 $\beta_{\mathrm{flat}} < 90^\circ$ 被挤成了锐角；更致命的是，平削面内部每一点的模长都跌破了 $1$（$\|\mathbf{x}\| < 1$），当场跌出了纯态所在的单位球皮，沦为混态！
 - **守住处处 $\|\mathbf{x}\|^2 = 1$ 的公平球面帽 $\triangle_{\mathrm{sph}} ABC$**：把削面内部每一点都公平地径向撑回单位球皮上，转枢大圆夹角严格保住 $\beta = \frac{\pi}{2}$；对 $\epsilon \in (0, \frac{\pi}{2})$，两个底角由纳皮尔（Napier）球面直角正切律放大为
 
   $$
@@ -76,7 +76,7 @@ $$
    $$
 
    其中 $\hat{\mathbf{I}}_{\mathbf{A}}$ 为起点 $\mathbf{A}(\epsilon)$ 处切平面的单位双向量。
-2. **坐标墙两步旋子横项与闭环半角超的二阶吻合及四阶分离**：与此同时，仅走两面固定坐标墙而不补第三段回程测地弧的未闭合旋子乘积 $U_{23}(\epsilon)U_{12}(\epsilon)$，其横向交叉项系数为 $-\sin^2\frac{\epsilon}{2} = -\frac{\epsilon^2}{4} + \frac{\epsilon^4}{48} + O(\epsilon^6)$；而三段测地边闭合后的旋量半角超为 $-\frac{1}{2}\Omega(\epsilon) = -\frac{\epsilon^2}{4} - \frac{\epsilon^4}{24} + O(\epsilon^6)$。两者在无穷小极限 $\epsilon \to 0^+$ 下的**二阶主项 $O(\epsilon^2)$ 精确吻合**，但在有限步长 $\epsilon$ 下于四阶项 $O(\epsilon^4)$ 发生分离——例如在宏观八分球面端点 $\epsilon = \frac{\pi}{2}$ 处，未闭合双墙乘积的横向分量为 $-\sin^2\frac{\pi}{4} = -\frac{1}{2}$，唯有左乘第三段闭合测地边旋子 $U_{CA}(\frac{\pi}{2})$ 构成完整回路 $U_{CA}(\frac{\pi}{2})\,U_{23}(\frac{\pi}{2})\,U_{12}(\frac{\pi}{2})$，才能精确恢复八分球面积 $\Omega(\frac{\pi}{2}) = \frac{\pi}{2}$ 对应的完整旋量贝里相位 $-\frac{1}{2}\Omega(\frac{\pi}{2}) = -\frac{\pi}{4} \approx -0.7854$（与第二节 [@ex-ch34-spherical-addressing-and-octant-rotors] 完全衔接）！
+2. **坐标墙两步旋子横项与闭环半角超的二阶吻合及四阶分离**：与此同时，仅走两面固定坐标墙而不补第三段回程测地弧的未闭合旋子乘积 $U_{23}(\epsilon)U_{12}(\epsilon)$，其横向交叉项系数为 $-\sin^2\frac{\epsilon}{2} = -\frac{\epsilon^2}{4} + \frac{\epsilon^4}{48} + O(\epsilon^6)$；而三段测地边闭合后的旋量半角超为 $-\frac{1}{2}\Omega(\epsilon) = -\frac{\epsilon^2}{4} - \frac{\epsilon^4}{24} + O(\epsilon^6)$。两者在无穷小极限 $\epsilon \to 0^+$ 下的**二阶主项 $O(\epsilon^2)$ 在模上精确吻合**（放到同一基片 $\mathbf{e}_1\mathbf{e}_3$ 上二者符号相反），但在有限步长 $\epsilon$ 下于四阶项 $O(\epsilon^4)$ 发生分离——例如在宏观八分球面端点 $\epsilon = \frac{\pi}{2}$ 处，未闭合双墙乘积的横向分量为 $-\sin^2\frac{\pi}{4} = -\frac{1}{2}$，唯有左乘第三段闭合测地边旋子 $U_{CA}(\frac{\pi}{2})$ 构成完整回路 $U_{CA}(\frac{\pi}{2})\,U_{23}(\frac{\pi}{2})\,U_{12}(\frac{\pi}{2})$，才能精确恢复八分球面积 $\Omega(\frac{\pi}{2}) = \frac{\pi}{2}$ 对应的完整旋量贝里相位 $-\frac{1}{2}\Omega(\frac{\pi}{2}) = -\frac{\pi}{4} \approx -0.7854$（与第二节 [@ex-ch34-spherical-addressing-and-octant-rotors] 完全衔接）！
 
 这枚夹在“两次正交”与“一次正交”之间的二维面缺陷二上链，正是现代物理学四大曲率与非对易结构的共同几何胚胎（文献背景与本书 `MODEL` 综合）：放到量子自旋态上，它是李代数换位子 $[\hat{J}_{12}, \hat{J}_{23}] = i\hbar\hat{J}_{31}$ 与贝里几何相位 $-\frac{1}{2}\Omega$；放到局域相位丛上，它是杨—米尔斯规范场强 $F_{\mu\nu} = [D_\mu, D_\nu]$；放到切丛平行移动上，它就是黎曼曲率张量 $R^\rho_{\ \sigma\mu\nu}$！
 
@@ -89,7 +89,7 @@ $$
 章首箴言特意点出“**一个极小的三角弧面体**”，这“极小”（$\epsilon \ll 1$）三字背后藏着三重不可替代的几何深意：
 
 1. **撑开 $D \to D + 1$ 新维度的第一块三维体积砖**：
-   假如第二步不拐 $90^\circ$，而是留在同一张平面 $\mathbf{e}_1\wedge\mathbf{e}_2$ 内做共面两步（$\mathbf{A}_{\mathrm{cop}}\cdot\mathbf{C}_{\mathrm{cop}} = \cos 2\epsilon$），三态格拉姆矩阵行列式恒等于零 $\det G_{\mathrm{coplanar}} \equiv 0$，宇宙永远被拍扁在二维纸面上。唯有在转枢 $\mathbf{B}$ 处正交折入新墙（对应下方 [@thm-ch34-trihedron-cochain-and-moving-axis] 第 4 款 `finite_layer_projection_escape`），三态格拉姆行列式才当场跃升为严格正值：
+   假如第二步不拐 $90^\circ$，而是留在同一张平面 $\mathbf{e}_1\wedge\mathbf{e}_2$ 内做共面两步（$\mathbf{A}_{\mathrm{cop}}\cdot\mathbf{C}_{\mathrm{cop}} = \cos 2\epsilon$），三态格拉姆矩阵行列式恒等于零 $\det G_{\mathrm{coplanar}} \equiv 0$，宇宙永远被拍扁在二维纸面上。唯有在转枢 $\mathbf{B}$ 处折出原平面（这里取正交折入新墙，对应下方 [@thm-ch34-trihedron-cochain-and-moving-axis] 第 4 款 `finite_layer_projection_escape`），三态格拉姆行列式才当场跃升为严格正值：
 
    $$
    \det G(\Delta\mathcal{T}_\epsilon) \;=\; \det\begin{pmatrix} 1 & \cos\epsilon & \cos^2\epsilon \\ \cos\epsilon & 1 & \cos\epsilon \\ \cos^2\epsilon & \cos\epsilon & 1 \end{pmatrix} \;=\; (1 - \cos^2\epsilon)^2 \;=\; \sin^4\epsilon \;>\; 0 \quad \bigl(\forall\epsilon \in (0, \tfrac{\pi}{2}]\bigr).
@@ -106,7 +106,7 @@ $$
    秘密全写在这行泰勒级数里！在一阶线性尺度 $O(\epsilon)$ 上，球面斜边伪装得跟欧氏平直地板勾股定理 $\sqrt{2}\,\epsilon$ 一模一样，而品红球面帽的角超曲率 $\Omega(\epsilon) = \frac{1}{2}\epsilon^2 + O(\epsilon^4)$ 与斜边相对收缩率 $-\frac{1}{12}\epsilon^2$ 全都藏在二阶无穷小 $O(\epsilon^2)$ 里，宏观粗糙尺子根本察觉不到。反过来，在本书的有限带宽观察者模型（`MODEL`）中，任何真实观察者都存在非零最小分辨步长 $\epsilon_{\min} > 0$，于是宇宙底层不可能无限切碎成光滑零曲率平面，而必留下不可抹除的**最小曲率与几何相位量子** $\Omega_{\min} \approx \frac{1}{2}\epsilon_{\min}^2$！
 
 ::: {.viz src="spherical-trihedron-cell" preset="gram-brick" height="520"}
-**共面两步体积恒为零，正交三面角撑出堇紫色的三维格拉姆体积砖。** 对比共面两步（$\det G = 0$，压扁在旧平面内）与正交三面角（$\det G = \sin^4\epsilon > 0$，堇紫色体积砖 $\sin^2\epsilon$）：小角下 $c_\epsilon$ 贴近 $\sqrt{2}\epsilon$ 制造平直幻象，灰色示意带标出最小步长 $\epsilon_{\min}$ 模型（绿色 `LEAN ✓` 锚定 `unit_perpendicular_pair`、`lagrange_gram_identity` 与 `finite_layer_projection_escape`）。
+**共面两步体积恒为零，正交三面角撑出堇紫色的三维格拉姆体积砖。** 对比共面两步（$\det G = 0$，压扁在旧平面内）与正交三面角（$\det G = \sin^4\epsilon > 0$，堇紫色体积砖 $\sin^2\epsilon$）：小角下 $c_\epsilon$ 贴近 $\sqrt{2}\epsilon$ 制造平直幻象，灰色示意带标出最小步长 $\epsilon_{\min}$ 模型（格拉姆行列式为手算；绿色 `LEAN ✓` `unit_perpendicular_pair`、`lagrange_gram_identity` 与 `finite_layer_projection_escape` 只担保相关的一般引理）。
 :::
 
 3. **“球体永远是近似的”：离散弧面体拼砖与八分球面宏观汇合**：
@@ -137,13 +137,13 @@ $$
 :::
 
 ::: proof
-第 1 款通过四面体四面关联计数重排求和导出均值鸽巢修补界，并证明 $V$ 上的二上链 $F$ 全局等于一维边势上边缘 $F(i, j, k) = \mathrm{edge}(j, k) - \mathrm{edge}(i, k) + \mathrm{edge}(i, j)$ 当且仅当其四顶点四面体三上边缘处处归零（当该三上边缘恒为零时，固定任意锚点 $r_0$ 取 $\mathrm{edge}(u, v) = F(r_0, u, v)$ 即可显式构造；反之，孤立三顶点上的单个非零面值总能平凡并入一维边赋值，而对任意一维边势全局非精确则要求多顶点二上链具备非零四面体缺陷 $\operatorname{tetraDefects}(F) > 0$，与单条测地闭合回路的平行移动球面角超和乐 $\Omega(\epsilon)$ 分属不同层级）。第 2 款利用第 3 款保证的非退化面积 $\lVert a\rVert^2\lVert b\rVert^2 - \langle a, b\rangle^2 > 0$ 调用双轴有限字生成定理 `two_axis_finite_word`，沿旋转字长度归纳将局部两面墙圆周上的不变性传播到整个 $\mathrm{SO}(3)$。第 4 款在非零闭补空间 $S^\perp$ 中取单位向量 $e$，为三面角第三顶点跳出第一面墙平面 $S = \operatorname{span}\{\mathbf{e}_1, \mathbf{e}_2\}$ 撑开非零体积砖提供精确泛函依据。完整证明由 Lean 内核检查。
+第 1 款通过四面体四面关联计数重排求和导出均值鸽巢修补界，并证明 $V$ 上的二上链 $F$ 全局等于一维边势上边缘 $F(i, j, k) = \mathrm{edge}(j, k) - \mathrm{edge}(i, k) + \mathrm{edge}(i, j)$ 当且仅当其四顶点四面体三上边缘处处归零（当该三上边缘恒为零时，固定任意锚点 $r_0$ 取 $\mathrm{edge}(u, v) = F(r_0, u, v)$ 即可显式构造；反之，孤立三顶点上的单个非零面值总能平凡并入一维边赋值，而对任意一维边势全局非精确则要求多顶点二上链具备非零四面体缺陷 $\operatorname{tetraDefects}(F) > 0$，与单条测地闭合回路的平行移动球面角超和乐 $\Omega(\epsilon)$ 分属不同层级）。第 2 款利用前提中给出的非退化面积 $\lVert a\rVert^2\lVert b\rVert^2 - \langle a, b\rangle^2 > 0$ 调用双轴有限字生成定理 `two_axis_finite_word`，沿旋转字长度归纳将局部两面墙圆周上的不变性传播到整个 $\mathrm{SO}(3)$。第 4 款在非零闭补空间 $S^\perp$ 中取单位向量 $e$，为三面角第三顶点跳出第一面墙平面 $S = \operatorname{span}\{\mathbf{e}_1, \mathbf{e}_2\}$ 撑开非零体积砖提供精确泛函依据。完整证明由 Lean 内核检查。
 :::
 
 ::: {.example #ex-ch34-infinitesimal-trihedron-calculus title="极小三角弧面体在三档步长下的精确解析与数值对照（手工推导与数值核验）"}
 为了把平直近似、球面角超与三维体积砖的数量级关系看得一清二楚，我们在 $\epsilon = 15^\circ$（$\frac{\pi}{12}\;\mathrm{rad}$，小步长区）、$\epsilon = 45^\circ$（$\frac{\pi}{4}\;\mathrm{rad}$，中尺度区）与 $\epsilon = 90^\circ$（$\frac{\pi}{2}\;\mathrm{rad}$，宏观八分球面极限）三档代表性步长上手工核算全部几何量：
 
-- **当 $\epsilon = 15^\circ = \frac{\pi}{12} \approx 0.2618\;\mathrm{rad}$ 时**：$\cos c_{15^\circ} = \cos^2 15^\circ = \frac{2+\sqrt{3}}{4} \approx 0.9330$，球面一次直弧 $c_{15^\circ} \approx 0.3681\;\mathrm{rad}$（$21.09^\circ$），与平直勾股斜边 $\sqrt{2}\epsilon \approx 0.3702\;\mathrm{rad}$（$21.21^\circ$）仅差 $0.58\%$；但底角已抬升至 $\alpha \approx 45.99^\circ$，吐出球面角超 $\Omega(15^\circ) \approx 0.0347\;\mathrm{rad}$（$1.99^\circ$）、闭环旋量半相位 $-\frac{1}{2}\Omega \approx -0.0173\;\mathrm{rad}$（对比墙旋子横项 $-\sin^2 7.5^\circ \approx -0.0170$），格拉姆行列式 $\det G = \sin^4 15^\circ = \frac{7 - 4\sqrt{3}}{16} \approx 0.0045 > 0$。
+- **当 $\epsilon = 15^\circ = \frac{\pi}{12} \approx 0.2618\;\mathrm{rad}$ 时**：$\cos c_{15^\circ} = \cos^2 15^\circ = \frac{2+\sqrt{3}}{4} \approx 0.9330$，球面一次直弧 $c_{15^\circ} \approx 0.3681\;\mathrm{rad}$（$21.09^\circ$），与平直勾股斜边 $\sqrt{2}\epsilon \approx 0.3702\;\mathrm{rad}$（$21.21^\circ$）仅差 $0.58\%$；但底角已抬升至 $\alpha \approx 45.99^\circ$，吐出球面角超 $\Omega(15^\circ) \approx 0.0347\;\mathrm{rad}$（$1.99^\circ$）、闭环旋量半相位 $-\frac{1}{2}\Omega \approx -0.0173\;\mathrm{rad}$（对比墙旋子横项的模 $\sin^2 7.5^\circ \approx 0.0170$），格拉姆行列式 $\det G = \sin^4 15^\circ = \frac{7 - 4\sqrt{3}}{16} \approx 0.0045 > 0$。
 - **当 $\epsilon = 45^\circ = \frac{\pi}{4} \approx 0.7854\;\mathrm{rad}$ 时**：全部读数收成极其优美的闭式代数常数——$\cos c_{45^\circ} = \frac{1}{2}$ 给出精确球面斜边 $c_{45^\circ} = \frac{\pi}{3} = 60^\circ \approx 1.0472\;\mathrm{rad}$（显著短于平直值 $\frac{\sqrt{2}\pi}{4} \approx 1.1107\;\mathrm{rad}$），底角等于正四面体魔角 $\alpha = \arctan\sqrt{2} \approx 54.74^\circ$，球面角超精确等于 $\Omega(45^\circ) = \arcsin\frac{1}{3} \approx 0.3398\;\mathrm{rad}$（$19.47^\circ$），旋量半相位 $-\frac{1}{2}\arcsin\frac{1}{3} \approx -0.1699\;\mathrm{rad}$，格拉姆行列式 $\det G = \sin^4 45^\circ = \frac{1}{4} = 0.2500$。
 - **当 $\epsilon = 90^\circ = \frac{\pi}{2} \approx 1.5708\;\mathrm{rad}$ 时**：$\cos c_{90^\circ} = 0$，$c_{90^\circ} = \frac{\pi}{2} = 90^\circ$，三内角全为直角 $\alpha = \beta = \gamma = 90^\circ$（其中 $\alpha(90^\circ) = 90^\circ$ 为 $\epsilon \to \frac{\pi}{2}^-$ 时 $\arctan(\sec\epsilon)$ 的连续延拓极限，即 $\operatorname{atan2}(1, \cos\epsilon)$），角超达到八分球面积 $\Omega(90^\circ) = \frac{\pi}{2} \approx 1.5708\;\mathrm{rad}$，旋量贝里相位 $-\frac{\pi}{4} \approx -0.7854\;\mathrm{rad}$，格拉姆行列式满额 $\det G = 1$。
 
@@ -157,7 +157,7 @@ $$
 ::: {.remark #rem-ch34-regge-spinfoam-trihedron-literature title="吉拉尔角超、高斯—博内和乐与雷吉离散引力单纯形（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节关于极小三角弧面体的推演严格区分三层依据：
 
-1. **球面几何、微分几何与离散引力经典文献**：球面直角三角形纳皮尔法则 $\cos c = \cos a\cos b$、$\tan\alpha = \tan a / \sin b$ 与吉拉尔（Girard 1629）球面角超公式 $\Omega = \alpha + \beta + \gamma - \pi$；测地三角形回路上的高斯—博内平行移动转角定理、潘查拉特纳姆（Pancharatnam 1956）与贝里（Berry 1984）半立体角旋量和乐相因子 $\exp(-\frac{1}{2}\Omega\hat{\mathbf{I}}_{\mathbf{A}})$；以及雷吉（Regge 1961, *General Relativity without Coordinates*）用无坐标平坦单纯形骨架构成离散曲率角亏的雷吉演算，连同圈量子引力中的自旋泡沫四面体/四维单形振幅文献（Rovelli & Smolin 1995；Perez 2013）；
+1. **球面几何、微分几何与离散引力经典文献**：球面直角三角形纳皮尔法则 $\cos c = \cos a\cos b$、$\tan\alpha = \tan a / \sin b$ 与吉拉尔（Girard 1629）球面角超公式 $\Omega = \alpha + \beta + \gamma - \pi$；测地三角形回路上的高斯—博内平行移动转角定理、潘查拉特纳姆（Pancharatnam 1956）与贝里（Berry 1984）半立体角旋量和乐相因子 $\exp(-\frac{1}{2}\Omega\hat{\mathbf{I}}_{\mathbf{A}})$；以及雷吉（Regge 1961, *General Relativity without Coordinates*）用无坐标平坦单纯形骨架构成离散曲率角亏的雷吉演算，连同圈量子引力中自旋网络的面积/体积离散谱（Rovelli & Smolin 1995）与自旋泡沫四面体/四维单形振幅文献（Perez 2013）；
 2. **本书内核验证定理（`LEAN ✓`）**：单纯二上链四面体精确修补判据、运动双轴圆向全局 $\mathrm{SO}(3)$ 旋转传播、拉格朗日—格拉姆恒等式与正交残差逃逸（[@thm-ch34-trihedron-cochain-and-moving-axis]），以及前两节锁定的公共单位法线、双轴有限字、划分拓扑不可分核与协变换位子公式（[@thm-ch34-perpendicular-axis-and-pullback]、[@thm-ch34-readout-kernel-and-covariant-commutator]）；
 3. **本书几何诠释与物理模型（`MODEL`）**：将“正交一次”与“正交两次”诠释为同一枚球面直角三面角原胞 $\Delta\mathcal{T}_\epsilon$ 的双重正交投影、引入有限带宽最小分辨步长 $\epsilon_{\min} > 0$ 与最小曲率量子 $\Omega_{\min} \approx \frac{1}{2}\epsilon_{\min}^2$，以及将离散弧面体拼砖对接至光滑球面近似和三阶劳齐分形扭率，均属本书原创理论模型（`MODEL`）。
 :::

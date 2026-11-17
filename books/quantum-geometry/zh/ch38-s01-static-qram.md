@@ -1108,7 +1108,7 @@ $$
 对照 [@rem-ch38-qram-page-wootters-literature]，指针与本体存储分离架构立即推演出两条贯通全书的核心**`MODEL`（模型诠释）**结论：
 
 1. **为什么全局阵列是无时间 $P = NP$，而局部指针必须顺着 `ptr++` 逐帧流逝时间？**
-   在全局本体存储端，整座 $\bigl\{\lvert\Phi(x)\rangle_{\mathrm{mem}}\bigr\}_{x \in \mathbb{Z}^6}$ 阵列早已跨越所有格点同时铺展就绪，不存在先后次序，呈现顺序无关的 $P = NP$ 式静态全息（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell] 与[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）。然而，场内任何一枚物理观察者指针寄存器都受限于有限位宽与有限记忆窗口 $M < \infty$，并面对标准计算模型下未决的有限观察者复杂性防火墙（[@conj-p-neq-np]）。有限位宽的地址总线绝无可能在单周期内把整座宇宙阵列一口吞入缓存，而只能沿着因果历史彼此相容而不退化锁死的地址序列（局部格拉姆椭圆体正定体积背景见[第 29 章](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]），一步一拍地执行指针自增 `ptr++`。**我们毕生感叹的“时间流逝”，在硬件底层不过是有限指针 `ptr++` 扫过静态全息晶格时的扫描帧率。**
+   在全局本体存储端，整座 $\bigl\{\lvert\Phi(x)\rangle_{\mathrm{mem}}\bigr\}_{x \in \mathbb{Z}^6}$ 阵列早已跨越所有格点同时铺展就绪，不存在先后次序，呈现顺序无关的 $P = NP$ 式静态全息（这里借用 $P = NP$ 之名，见 §38.4；[第 29 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell] 与[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）。然而，场内任何一枚物理观察者指针寄存器都受限于有限位宽与有限记忆窗口 $M < \infty$，并面对标准计算模型下未决的有限观察者复杂性防火墙（[@conj-p-neq-np]）。有限位宽的地址总线绝无可能在单周期内把整座宇宙阵列一口吞入缓存，而只能沿着因果历史彼此相容而不退化锁死的地址序列（局部格拉姆椭圆体正定体积背景见[第 29 章](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]），一步一拍地执行指针自增 `ptr++`。**我们毕生感叹的“时间流逝”，在硬件底层不过是有限指针 `ptr++` 扫过静态全息晶格时的扫描帧率。**
 
 ::: {.viz src="pointer-ontology-deref" preset="linear64" height="500"}
 **读最后一格，要把 64 格走一遍。** 琥珀色的读头沿总线一拍读一格，读过的格变亮；读到地址 63 用了 64 步，而上方的路由树在第 6 步就已走到叶子。
@@ -1164,6 +1164,6 @@ $$
 首先验证受控翻转置换矩阵满足 $\mathrm{copyUnitary} \in \operatorname{Matrix.unitaryGroup}(\operatorname{Fin} 2 \times \operatorname{Fin} 2, \mathbb{C})$，并展开分块矩阵乘法证得前向演化恒等式 $\operatorname{unitaryEvolution}(\mathrm{copyUnitary}, B(\tau)) = R_{\mathrm{addr}}(\tau)$（其中 [`canonical_copied_address_record_eq_prior`](lean:D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior) 确认由拷贝地址映射 `copiedAddressRecord` 构造的典范受控记录与显式分块记录逐项相等）。由假设 $\exists i \neq j,\; \rho_{ij} \neq \sigma_{ij}$，两份四维联合态在对应副对角地址块上严格不等，故 $R_{\mathrm{addr}}(\rho) \neq R_{\mathrm{addr}}(\sigma)$。对第二因子求偏迹 $\operatorname{traceEnvironment}$ 时，地址正交分支令副对角块因指标错位而消去，仅存主对角元 $\rho_{ii} = \sigma_{ii}$，从而 $\operatorname{traceEnvironment}(R_{\mathrm{addr}}(\rho)) = \operatorname{traceEnvironment}(R_{\mathrm{addr}}(\sigma))$；若存在单值函数 $\mathrm{recover}$ 同时还原两者，则由输入相等必得输出相等 $R_{\mathrm{addr}}(\rho) = R_{\mathrm{addr}}(\sigma)$，与全局不等矛盾。最后利用幺正矩阵群性质 $\mathrm{copyUnitary}^* \mathrm{copyUnitary} = 1$ 代入结合律，即得伴随算子对 $B(\rho)$ 与 $B(\sigma)$ 的精确无损还原。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch38-copied-address-dereference-and-access-defect] 一举剥除了“波包神秘坍缩”的形而上学迷雾：**解引用 `*ptr` 从未在宇宙本体内存里销毁过半点相干信息；所谓“不可逆坍缩”，纯粹是因为局部指针只读取了当前匹配掩码的单一路径，而把其余正交地址分支留在了自身寄存器位宽之外的访问盲区里！**
+[@thm-ch38-copied-address-dereference-and-access-defect] 在 `MODEL` 中一举剥除了“波包神秘坍缩”的形而上学迷雾（它是退相干的一个两比特最小实例，并不解决“为何出现单一结果”的测量问题）：**解引用 `*ptr` 从未在宇宙本体内存里销毁过半点相干信息；所谓“不可逆坍缩”，纯粹是因为局部指针只读取了当前匹配掩码的单一路径，而把其余正交地址分支留在了自身寄存器位宽之外的访问盲区里！**
 
 ---

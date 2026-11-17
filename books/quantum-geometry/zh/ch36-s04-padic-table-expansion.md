@@ -30,7 +30,7 @@
 第 1 款直接调用 Mathlib 的有理数绝对值分类核心定理 `Rat.AbsoluteValue.equiv_real_or_padic` 拆分为实绝对值分支与存在素数 $p$ 的 $p$ 进分支；对后一分支的唯一性，若素数 $p, q$ 同时满足 `f ≈ padic p` 与 `f ≈ padic q`，由绝对值等价关系的对称性与传递性得 `padic p ≈ padic q`，在 $(p : \mathbb{Q})$ 处比较两侧估值（$\lvert p\rvert_p < 1$ 而当 $q \neq p$ 时 $\lvert p\rvert_q = 1$）即可推出 $p = q$；第 2 款将整数模同余 $x \equiv y \pmod{p^k}$ 改写为整除关系 $(p : \mathbb{Z})^k \mid (y - x)$，利用 `PadicInt` 范数与整除性等价桥接定理 `modeq_iff_padic_dist_le` 证得 $x \equiv y \pmod{p^k} \iff \operatorname{dist}((x : \mathbb{Q}_p), (y : \mathbb{Q}_p)) \le (p : \mathbb{R})^{-k}$，取集合外延性即得交集等式；第 3 款由欧氏余数相等充要条件将 $\operatorname{precisionReading}(p, k, x) = \operatorname{precisionReading}(p, k, y)$ 化为 $(p : \mathbb{Z})^k \mid (x - y)$，在 $p$ 为素数且 $x - y \neq 0$ 的前提下由 `padicValInt_dvd_iff` 证明该整除关系当且仅当 $k \le \operatorname{padicValInt}\,p\,(x - y)$，取逻辑否定即得不相等集合恰为 $\{k \in \mathbb{N} \mid \operatorname{padicValInt}\,p\,(x - y) + 1 \le k\}$，其最小元正是 $v_p(x - y) + 1$；第 4 款在 $x \neq y$ 分支展开 `dif_neg`，调用 `IsLeast.nat_find_eq` 将第 3 款锁定的最小元代入指数 $1 - (v_p(x - y) + 1) = -v_p(x - y)$ 化简即得。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch36-ostrowski-padic-ball-and-blind-spot] 把连续实数与 $p$ 进数之间的几何鸿沟照得纤毫毕现：在阿基米德实标尺 $\lvert\cdot\rvert_\infty$ 下，把 $1$ 不断相加就会越走越远（$\lvert 1 + 1 + \dots + 1\rvert_\infty = n \to \infty$），低位微扰一旦累积进位便会向高位全局蔓延——比如十比特二进制整数 $511 = 0111111111_2$ 加上一个最小单位 $+1$，进位波瞬间冲垮全部十个比特翻成 $512 = 1000000000_2$！相反，在素数 $p$ 对应的 $p$ 进标尺下，模 $p^k$ 余数表 $\mathbb{Z}/p^k\mathbb{Z}$ 的每一个桶都由 $\mathbb{Q}_p$ 中相应闭球的整数点组成；两个相异整数 $x, y$ 只要在前 $k$ 层余数读出相同（$k \le v_p(x - y)$），它们就共享同一条前缀树枝，直到第 $k^* = v_p(x - y) + 1$ 层才干脆利落地分道扬镳。
+[@thm-ch36-ostrowski-padic-ball-and-blind-spot] 把连续实数与 $p$ 进数之间的几何鸿沟照得纤毫毕现：在阿基米德实标尺 $\lvert\cdot\rvert_\infty$ 下，把 $1$ 不断相加就会越走越远（$\lvert 1 + 1 + \dots + 1\rvert_\infty = n \to \infty$），低位微扰一旦累积进位便会向高位全局蔓延——比如十比特二进制整数 $511 = 0111111111_2$ 加上一个最小单位 $+1$，进位波瞬间冲垮全部十个比特翻成 $512 = 1000000000_2$！相反，在素数 $p$ 对应的 $p$ 进标尺下，模 $p^k$ 余数表 $\mathbb{Z}/p^k\mathbb{Z}$ 的每一个桶都由 $\mathbb{Q}_p$ 中相应闭球的整数点组成；两个相异整数 $x, y$ 只要在前 $k$ 层余数读出相同（$k \le v_p(x - y)$），它们就共享同一条前缀树枝，直到第 $k^* = v_p(x - y) + 1$ 层才干脆利落地分道扬镳。区别不在有无进位——$p$ 进加法照样进位，在 $\mathbb{Z}_2$ 中 $511 + 1 = 512$ 同样翻转十个比特；区别在度量：进位只向高位传播，而高位在 $p$ 进度量下权重越来越小，已经写定的低位不受影响。
 
 是什么几何法则禁止了不同余数桶之间的边界粘连与进位串扰？正是比普通三角不等式严格得多的**超度量强三角不等式（Ultrametric Strong Triangle Inequality）**——无论是在有限视界概念前缀细化树上，还是在多坐标折扣素数时间观测通道上，任意三点间的距离永远受控于较长那一步的最大值而非两步之和：
 
@@ -64,7 +64,7 @@
 **胚胎二分卵裂与分歧奇异枝（$p = 2, K = 10$）**：单层扇出仅 $2$，区分 $N = 1024$ 态需串行穿透 $10$ 层前缀树，首层碰撞对达 $261{,}632$；同时因 $2 \mid \Delta(x^2-2)$，基根 $a_0 = 0$ 处导数模 $2$ 归零，品红/紫色分歧枝在 $k = 2$ 阻断。
 :::
 
-2. **基表一票否决（如 $p = 3, 5$）vs 亨泽尔 $O(1)$ 零进位查表（如 $p = 7$）**：当观察者换用 $p = 3$ 或 $p = 5$ 时，只需扫描一次基表 $\mathbb{F}_p$ 发现平方剩余里没有 $2$，在深度 $k = 1$ 处当场即可断定 $\mathbb{Z}_p$ 中绝无解，连第二层都不必翻开！而当观察者扩表到非分歧分裂素数 $p = 7$（$7 \nmid 8$）时，奇迹发生了：基表 $\mathbb{Z}/7\mathbb{Z}$ 中存在单根 $a_0 = 3$（$3^2 - 2 = 7 \equiv 0 \pmod 7$），且导数 $f'(3) = 6 \equiv -1 \not\equiv 0 \pmod 7$。观察者根本不需要在每一层重新解非线性方程，只需在 $7 \times 7$ 基表里查出**唯一固定不变的模逆元** $[f'(3)]^{-1} \equiv 6 \pmod 7$，随后每一层只做一次 $O(1)$ 查表更新 $x_{k+1} \equiv x_k - f(x_k)\cdot 6 \pmod{7^{k+1}}$，就能像拉拉链一样逐位吐出无穷精度的 $7$ 进根，**已经写定的低位数字永不涂改、永无向后进位**：
+2. **基表一票否决（如 $p = 3, 5$）vs 亨泽尔逐层查表（如 $p = 7$）**：当观察者换用 $p = 3$ 或 $p = 5$ 时，只需扫描一次基表 $\mathbb{F}_p$ 发现平方剩余里没有 $2$，在深度 $k = 1$ 处当场即可断定 $\mathbb{Z}_p$ 中绝无解，连第二层都不必翻开！而当观察者扩表到非分歧分裂素数 $p = 7$（$7 \nmid 8$）时，奇迹发生了：基表 $\mathbb{Z}/7\mathbb{Z}$ 中存在单根 $a_0 = 3$（$3^2 - 2 = 7 \equiv 0 \pmod 7$），且导数 $f'(3) = 6 \equiv -1 \not\equiv 0 \pmod 7$。观察者根本不需要在每一层重新解非线性方程，只需在 $7 \times 7$ 基表里查出**唯一固定不变的模逆元** $[f'(3)]^{-1} \equiv 6 \pmod 7$，随后每一层只做一次查表更新 $x_{k+1} \equiv x_k - f(x_k)\cdot 6 \pmod{7^{k+1}}$，就能像拉拉链一样逐位吐出无穷精度的 $7$ 进根，**已经写定的低位数字永不涂改、永无向后进位**：
 
    $$
    \begin{aligned}
@@ -141,11 +141,11 @@ $$
 **多观察者中国剩余解耦与阿代尔乘积守恒（$x = 12/35$）**：品红阿基米德实对数项 $\ln\lvert x\rvert_\infty$ 与离散素数观察者对数项 $\ln\lvert x\rvert_2, \ln\lvert x\rvert_3, \ln\lvert x\rvert_5, \ln\lvert x\rvert_7$ 精确对冲归零，实范数与全体素数范数之积恒等于 $1$。
 :::
 
-现在，整章最惊心动魄的闭环到了：**既然素数 $p$ 一直在扩大就是在扩表，为什么观察者不能干脆一步跳到“无穷大素数”——即阿拉克洛夫几何中的无穷远阿基米德位 $p_\infty$——去一步成佛呢？**
+现在，整章最惊心动魄的闭环到了：**既然素数 $p$ 一直在扩大就是在扩表，为什么观察者不能干脆一步跳到“无穷大素数”——即阿拉克洛夫几何中的无穷远阿基米德位 $p_\infty$——去一步成佛呢？**（数学上，素数变大并不逼近阿基米德位：对固定的 $x \neq 0$，$p$ 足够大时 $\lvert x\rvert_p = 1$；“无穷远素数” $p_\infty$ 只是奥斯特洛夫斯基分类里阿基米德绝对值的名字，不是素数序列的极限，下面的“跳入 $p_\infty$”是比喻。）
 
 这恰恰是本章第 1 节“直接冲向 $\theta = 90^\circ$ 纯光即是失忆轮回”在数论上的**同构镜像**（`MODEL`）：
 
-- 一旦妄图越过有限素数，一步跳进无穷远阿基米德连续极限 $p_\infty$，支撑零进位查表的超度量强三角不等式当场失效！既开又闭的模桶隔墙瞬间融化为连续实直线，局部 $+1$ 微扰重新触发横扫全部数位的全局进位雪崩（如 $511 + 1 = 512$ 十位连翻），辛苦积累的局部无串扰表项在连续进位洪流中彻底冲毁，坠回 $p = 2, K = 10$ 的胚胎二分起点——**跳入 $p_\infty$，正是算术版的化光失忆轮回**；
+- 一旦妄图越过有限素数，一步跳进无穷远阿基米德位 $p_\infty$，支撑前缀查表的超度量强三角不等式当场失效！既开又闭的模桶隔墙瞬间融化为连续实直线，局部 $+1$ 微扰重新触发横扫全部数位的全局进位雪崩（如 $511 + 1 = 512$ 十位连翻），辛苦积累的局部无串扰表项在连续进位洪流中彻底冲毁，坠回 $p = 2, K = 10$ 的胚胎二分起点——**跳入 $p_\infty$，正是算术版的化光失忆轮回**；
 - 反过来，**欧几里得素数无穷多定理**（文献结果，详见下框 [@rem-ch36-padic-hensel-bruhat-tits-literature]）为有限观察者筑起了与逆古德曼快度阶梯 $\eta_k = \eta_0 + k\,\Delta\eta$ 完全对偶的算术护栏：无论当前已经联合了多少个有限素数 $\{p_1, p_2, \dots, p_r\}$，构造欧几里得数 $M_r = \prod_{j=1}^r p_j + 1$（例如 $2\cdot 3\cdot 5 + 1 = 31$，$2\cdot 3\cdot 5\cdot 7 + 1 = 211$，乃至合数 $2\cdot 3\cdot 5\cdot 7\cdot 11\cdot 13 + 1 = 30{,}031 = 59 \times 509$），其最小素因子 $p^*$ 都必然是一个不在旧名录中的**全新有限素数**！离散素数序列 $2 < 3 < 5 < 7 < \dots < p_r < p_{r+1} < \dots$ 永不封顶、永不枯竭——观察者可以沿着无穷离散的素数阶梯永续扩表，永远保有既开又闭的零进位清醒边界，而绝不需要、也绝不会撞上 $p_\infty$ 的失忆断崖：
 
 ::: {.viz src="padic-prime-table-tree" preset="euclid" height="500"}
@@ -157,15 +157,15 @@ $$
 
 1. **亨泽尔（Kurt Hensel, 1897, 1908）$p$ 进展开与牛顿—亨泽尔提根引理**：对整系数或 $p$ 进整系数多项式 $f \in \mathbb{Z}_p[x]$ 及初值 $a_0 \in \mathbb{Z}_p$，若满足非退化条件 $\lvert f(a_0)\rvert_p < \lvert f'(a_0)\rvert_p^2$（特别地，当 $f(a_0) \equiv 0 \pmod p$ 且 $f'(a_0) \not\equiv 0 \pmod p$ 时），则递推 $x_{k+1} = x_k - f(x_k)/f'(x_k)$（在导数为单位的上述特例中，模 $p^{k+1}$ 的逐位查表提根可复用固定基表逆元 $[f'(a_0)]^{-1} \bmod p$）收敛到根 $\alpha \in \mathbb{Z}_p$，此根在 $\lvert\alpha - a_0\rvert_p < \lvert f'(a_0)\rvert_p$ 的球内唯一，且满足 $\alpha \equiv a_0 \pmod p$；在整体考察各素数时，若固定首一多项式 $f \in \mathbb{Z}[x]$ 且 $\Delta(f) \neq 0$，则整除判别式的有限个素数 $p \mid \Delta(f)$ 构成模 $p$ 约化可能出现重根（满足 $f'(a_0) \equiv 0 \pmod p$）的候选奇异轨迹；
 2. **布吕阿—蒂茨（François Bruhat & Jacques Tits, 1972）树 $\mathcal{T}_p$**：二维 $p$ 进射影线性群 $\mathrm{PGL}_2(\mathbb{Q}_p)$ 自然作用于其同构类格构成的 $(p+1)$ 价无穷正则无环树 $\mathcal{T}_p$ 上，树的无穷远理想边界 $\partial\mathcal{T}_p \cong \mathbb{P}^1(\mathbb{Q}_p)$ 恰为 $p$ 进射影直线，而从选定基点向边界延伸的无限测地射线一一对应于 $p$ 进前缀查表路径；
-3. **$p$ 进 AdS/CFT 全息树对偶（Yuri Manin 2002；Gubser, Knaute, Parikh, Samberg & Witaszczyk 2017；Heydeman, Marcolli, Saberi & Stoica 2016）**：在算术全息纲领中，本章第 2 节的连续庞加莱双曲圆盘被离散布吕阿—蒂茨树 $\mathcal{T}_p$ 精确替代——树体（bulk）向内的离散径向步数直接对应 $p$ 进查表精度层级 $k$（对相异的 $x, y \in \mathbb{Z}_p$，以单位球 $\mathbb{Z}_p$ 对应的顶点为深度 $0$，边界超度量距离 $\lvert x - y\rvert_p = p^{-k}$ 由两条前缀射线在树体内的最近公共祖先深度唯一决定），完美印证了“双曲快度离散阶梯”与“$p$ 进前缀查表树”在全息几何中的深层对偶；
+3. **$p$ 进 AdS/CFT 全息树对偶（Yu. I. Manin & M. Marcolli, *Adv. Theor. Math. Phys.* **5**, 617–650, 2001；Gubser, Knaute, Parikh, Samberg & Witaszczyk 2017；Heydeman, Marcolli, Saberi & Stoica 2016）**：在算术全息纲领中，本章第 2 节的连续庞加莱双曲圆盘被离散布吕阿—蒂茨树 $\mathcal{T}_p$ 精确替代——树体（bulk）向内的离散径向步数直接对应 $p$ 进查表精度层级 $k$（对相异的 $x, y \in \mathbb{Z}_p$，以单位球 $\mathbb{Z}_p$ 对应的顶点为深度 $0$，边界超度量距离 $\lvert x - y\rvert_p = p^{-k}$ 由两条前缀射线在树体内的最近公共祖先深度唯一决定），在本书的读法里（`MODEL`）呼应了“双曲快度离散阶梯”与“$p$ 进前缀查表树”在全息几何中的深层对偶；
 4. **阿拉克洛夫（Suren Arakelov, 1974）算术曲面与无穷远位 $p_\infty$**：为使整数谱 $\operatorname{Spec}\mathbb{Z}$ 具备类似紧致黎曼曲面的交点数守恒，阿拉克洛夫几何在全体有限素数位 $\{p\}$ 之外形式添入连续阿基米德位 $p_\infty$，此时 [@thm-ch36-crt-and-adelic-product-formula] 第 2 款的乘积公式在对数形式下 $\ln\lvert x\rvert_\infty + \sum_p \ln\lvert x\rvert_p = 0$ 恰对应紧致曲线上主除子次数为零定理；
 5. **欧几里得素数无穷多定理（《几何原本》第 IX 卷命题 20）**：对任意有限素数集 $\{p_1, \dots, p_r\}$，整数 $M = \prod_{j=1}^r p_j + 1 > 1$ 不被任何 $p_j$ 整除，故其素因子分解中必含至少一个新素数 $p^* \notin \{p_1, \dots, p_r\}$（注：$M$ 本身未必是素数，如 $2\cdot 3\cdot 5\cdot 7\cdot 11\cdot 13 + 1 = 30{,}031 = 59 \times 509$，但 $59$ 与 $509$ 均为严格落在原有限表之外的新素数）。将素数 $p$ 诠释为观察者查表基数、将跃入 $p_\infty$ 诠释为失忆轮回悬崖，则属于本书的数论—几何观察者模型（`MODEL`）。
 :::
 
 我们将观察者沿素数阶梯从胚胎二分起点走向无穷离散扩表的四阶段演化机制汇总于下框对照表：
 
-::: {.remark #rem-ch36-prime-table-evolution-summary title="素数观察者扩表四阶段与连续进位悬崖对照总表（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下表以 $N = 1024 = 2^{10}$ 状态空间为基准，综合本章内核定理（`LEAN ✓`）、亨泽尔与欧几里得文献背景及本书观察者扩表模型（`MODEL`）：
+::: {.remark #rem-ch36-prime-table-evolution-summary title="素数观察者扩表四阶段与连续进位悬崖对照总表（作者模型汇总，`MODEL`）"}
+**作者模型汇总（`MODEL`），非文献结果。** 下表以 $N = 1024 = 2^{10}$ 状态空间为基准，综合本章内核定理（`LEAN ✓`）、亨泽尔与欧几里得文献背景及本书观察者扩表模型（`MODEL`）：
 
 | 演化阶段与代表位点 | 单层扇出与模桶结构 | 串行深度 $K(p)$ 与首层碰撞对 $E_1$ | 进位与分歧特征 | 观察者扩表与轮回判词（`MODEL`） |
 | :--- | :--- | :--- | :--- | :--- |
@@ -193,7 +193,7 @@ $$
 
 使用 [@thm-golden-projective-multiplier] 时必须严守两项边界：其一，前提 $A \neq 0$ 不可省略——在 Lean 的全函数实数除法中 $D / 0 = 0$ 只是形式退化值，不具备射影几何意义；其二，切勿把环境稳定根 $\bar{\varphi} = -\varphi^{-1}$ 与射影比值倍率 $-\varphi^{-2}$ 混为一谈，且在带强迫更新 $\theta' = -\varphi^{-2}\theta + \mathrm{forcing}$ 下，唯有 $\mathrm{forcing} = 0$ 时零缺陷不动点 $\theta = 0$ 才得以保持。
 
-再手算素数对角语言与量子算子语言之间的相位盲区：在二能级系统中，取等权叠加态 $\psi = \frac{1}{\sqrt{2}}(1, 1)$ 与正交相位态 $\phi = \frac{1}{\sqrt{2}}(1, i)$——或者直接取模块冻结的密度态见证对 $\rho_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ 与经泡利矩阵 $Z = \operatorname{diag}(1, -1)$ 共轭翻转相位后的 $\rho_- = Z\rho_+ Z = \frac{1}{2}\begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}$。两者在计算基下的对角概率分布同为 $(1/2, 1/2)$，但密度矩阵的非对角相干元符号相反（$+1/2$ 对 $-1/2$），手算即可确认仅保留对角读出的语言绝无可能逆向恢复相对量子相位。
+再手算素数对角语言与量子算子语言之间的相位盲区：在二能级系统中，取等权叠加态 $\psi = \frac{1}{\sqrt{2}}(1, 1)$ 与相位态 $\phi = \frac{1}{\sqrt{2}}(1, i)$——或者直接取模块冻结的密度态见证对 $\rho_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ 与经泡利矩阵 $Z = \operatorname{diag}(1, -1)$ 共轭翻转相位后的 $\rho_- = Z\rho_+ Z = \frac{1}{2}\begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}$。两者在计算基下的对角概率分布同为 $(1/2, 1/2)$，但密度矩阵的非对角相干元符号相反（$+1/2$ 对 $-1/2$），手算即可确认仅保留对角读出的语言绝无可能逆向恢复相对量子相位。
 
 在 `D5.S3.PrimeObserver.ThreeCompletionFinalProposition` 及其上游模块中，三类完备化对象与细化方向定义如下：
 
@@ -218,7 +218,7 @@ $$
    \operatorname{qubitOperatorLanguage}(\operatorname{relativePhaseDensityWitness}.1) \;\neq\; \operatorname{qubitOperatorLanguage}(\operatorname{relativePhaseDensityWitness}.2);
    $$
 
-4. **算子语言严格细化对角语言**：$\operatorname{Refines}(\operatorname{qubitPrimeDiagonalLanguage}, \operatorname{qubitOperatorLanguage})$ 成立，而逆向细化 $\neg\,\operatorname{Refines}(\operatorname{qubitOperatorLanguage}, \operatorname{qubitPrimeDiagonalLanguage})$ 不成立。
+4. **算子语言严格细化对角语言**：$\operatorname{Refines}(\operatorname{qubitPrimeDiagonalLanguage}, \operatorname{qubitOperatorLanguage})$ 成立，而逆向细化不成立，即 $\neg\,\operatorname{Refines}(\operatorname{qubitOperatorLanguage}, \operatorname{qubitPrimeDiagonalLanguage})$ 成立。
 :::
 
 ::: proof

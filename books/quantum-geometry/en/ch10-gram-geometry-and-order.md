@@ -1,4 +1,4 @@
-# Chapter 10 Pairwise Comparison, Always Consistent, Order-Independent: Dissolving the Non-Commutativity Illusion and Berry Phase {#pairwise-comparison-always-consistent-order-independent-dissolving-the-non-commutativity-illusion-and-berry-phase}
+# Chapter 10 Pairwise Comparison, Always Consistent, Order-Independent: Dissolving the Non-Commutativity Puzzle and Berry Phase {#pairwise-comparison-always-consistent-order-independent-dissolving-the-non-commutativity-illusion-and-berry-phase}
 
 > *"I keep feeling that the essence of quantum theory is this: compare things pairwise, always consistently, regardless of order."*
 
@@ -351,7 +351,7 @@ Notice that [@lemma-unit-gram-equality] requires overlap equal to $1$, not modul
 
 ### 10.4.1 A Timeless Interpretation: How Gram Geometry Constrains Causally Compatible Choices {#sec-timeless-gram-causality}
 
-> **Author's Original Words**: *"The essence of order-independence is that sequential before-and-after time simply does not exist at all... and that is why causality is so necessary." This single sentence slices straight through the 2,500-year-old "riddle of time" and "Hume's knot of causality."*
+> **Author's Original Words**: *"The essence of order-independence is that sequential before-and-after time simply does not exist at all... and that is why causality is so necessary."* This single sentence slices straight through the 2,500-year-old "riddle of time" and "Hume's knot of causality."
 >
 > **Author's Original Words**: *"Because the observer is finite, the causality experienced is finite; the observer's choice is made within the causally compatible space, continuously picking points in the time field."*
 
@@ -433,7 +433,7 @@ X \otimes Z & Z \otimes X & Y \otimes Y
 \end{matrix}
 $$
 
-Along each of the three rows and each of the three columns, the three observables commute pairwise: all three row products equal $+I_4$, the first two column products equal $+I_4$, and the third column product equals $(X \otimes X)(Z \otimes Z)(Y \otimes Y) = (-Y \otimes Y)(Y \otimes Y) = -I_4$ because $(XZ) \otimes (ZX) = (-iY) \otimes (-iY) = -Y \otimes Y$. Since every one of the $9$ observables belongs to **exactly two** of these $6$ contexts (one row and one column), any noncontextual assignment $\nu(O) \in \{\pm 1\}$ respecting the operator product sign on every row and column would make the product of the three row equations equal $(+1)(+1)(+1) = +1$ and the product of the three column equations equal $(+1)(+1)(-1) = -1$, whereas both equal $\prod_O \nu(O)^2 = +1$ — an immediate parity contradiction.
+Along each of the three rows and each of the three columns, the three observables commute pairwise: all three row products equal $+I_4$, the first two column products equal $+I_4$, and the third column product equals $(X \otimes X)(Z \otimes Z)(Y \otimes Y) = (-Y \otimes Y)(Y \otimes Y) = -I_4$ because $(XZ) \otimes (XZ) = (-iY) \otimes (-iY) = -Y \otimes Y$. Since every one of the $9$ observables belongs to **exactly two** of these $6$ contexts (one row and one column), any noncontextual assignment $\nu(O) \in \{\pm 1\}$ respecting the operator product sign on every row and column would make the product of the three row equations equal $(+1)(+1)(+1) = +1$ and the product of the three column equations equal $(+1)(+1)(-1) = -1$, whereas both equal $\prod_O \nu(O)^2 = +1$ — an immediate parity contradiction.
 
 Expanding from this 9-point subgrid to the full 15-point, 15-line symplectic configuration of nontrivial two-qubit Pauli observables — or more generally to any 4-dimensional nondegenerate $\mathbb{F}_2$-symplectic subspace embedded in the $N$-qubit Pauli group for $N \ge 2$ (the symplectic generalized quadrangle $W(3,2)$, known as a linear doily) — reveals an intrinsic parity invariant independent of the ambient qubit count $N$. In the Lean formalization on $(\mathbb{Z}_2 \times \mathbb{Z}_2)^N$ (`Fin N → ZMod 2 × ZMod 2`), `canonicalLabel` sends $(0,0), (0,1), (1,0), (1,1)$ to the single-qubit Pauli matrices $I_2, Z, X, Y$ (with $Y = iXZ = \bigl(\begin{smallmatrix} 0 & -i \\ i & 0 \end{smallmatrix}\bigr)$), and $\operatorname{observable}(v)$ takes the corresponding $N$-fold Kronecker Pauli word; the binary symplectic form is
 

@@ -56,7 +56,7 @@ $$
 
 既然内禀观察者在投影屏上看似永远在追赶 $P = NP$ 的地平线，为什么这绝不赋予我们断言 $P \neq NP$ 的权利？答案同时镌刻在**一阶量词结构的不对称性**与现代元复杂性的**三大证明屏障**之中。
 
-首先是**量词不对称与自相矛盾的全称封顶**（数理逻辑结构 + 本书 `MODEL`）。对任意固定 $\mathrm{NP}$ 完全判定语言 $L_\star$（验证关系为多项式时间谓词 $V_\star$，`文献结果`），两项断言具有截然不对称的量词前缀：
+首先是**量词不对称与越权的全称封顶**（数理逻辑结构 + 本书 `MODEL`）。对任意固定 $\mathrm{NP}$ 完全判定语言 $L_\star$（验证关系为多项式时间谓词 $V_\star$，`文献结果`），两项断言具有截然不对称的量词前缀：
 
 $$
 \mathrm{P} = \mathrm{NP} \;\Longleftrightarrow\; \exists A_{\mathrm{poly}}\,\forall x,\; A_{\mathrm{poly}}(x) = L_\star(x),
@@ -64,13 +64,13 @@ $$
 \mathrm{P} \neq \mathrm{NP} \;\Longleftrightarrow\; \forall A_{\mathrm{poly}}\,\exists x,\; A_{\mathrm{poly}}(x) \neq L_\star(x).
 $$
 
-前者是一条**存在性命题**——只需在算法空间中寻获**一个**多项式时间折叠器 $\exists A_{\mathrm{poly}}$；后者却是一条横跨无穷算法宇宙的**全称否定命题**——要求对**一切**可能的多项式时间算法 $\forall A_{\mathrm{poly}}$（涵盖人类尚未构想的一切高维代数同调、算术几何与自指压缩路径），逐一担保必有反例输入 $\exists x$ 使其折戟。倘若有人援引 [§38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 的“宇宙不闭合、维度永远生长”去断言无条件的 $\mathrm{P} \neq \mathrm{NP}$，当场就会陷入自我推翻的逻辑死结：要想把全称量词 $\forall A_{\mathrm{poly}}$ 彻底焊死封顶、担保未来任何高维折叠都绝无可能奏效，断言者必须先假定自己已经站到算法宇宙之外完成了**全局闭合遍历**！只要观察者嵌在场内、自指盲点孔径满足 $\delta_{\mathrm{blind}} > 0$，北极邻域就恒残留一片归一化球冠测度
+前者是一条**存在性命题**——只需在算法空间中寻获**一个**多项式时间折叠器 $\exists A_{\mathrm{poly}}$；后者却是一条横跨无穷算法宇宙的**全称否定命题**——要求对**一切**可能的多项式时间算法 $\forall A_{\mathrm{poly}}$（涵盖人类尚未构想的一切高维代数同调、算术几何与自指压缩路径），逐一担保必有反例输入 $\exists x$ 使其折戟。倘若有人援引 [§38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 的“宇宙不闭合、维度永远生长”去断言无条件的 $\mathrm{P} \neq \mathrm{NP}$，当场就越了权：要想把全称量词 $\forall A_{\mathrm{poly}}$ 彻底焊死封顶、担保未来任何高维折叠都绝无可能奏效，断言者需要的是一个覆盖一切多项式时间算法的证明，而“维度永远生长”的体验并不是这样的证明。全称命题并不需要逐一遍历才能确立——时间层次定理就以一个有限证明对一切多项式时间算法确立了 $\mathrm{P} \neq \mathrm{EXP}$（`文献结果`）；$\mathrm{P} \neq \mathrm{NP}$ 若被证明，同样会是这样一个有限证明（见 [@prob-ch38-unrelativized-p-vs-np-and-independence] 第 1 款）。在球极图景里，只要观察者嵌在场内、自指盲点孔径满足 $\delta_{\mathrm{blind}} > 0$，北极邻域就恒残留一片归一化球冠测度
 
 $$
 \Delta_{\mathrm{unprovable}}(\delta_{\mathrm{blind}}) \;=\; \sin^2\!\frac{\delta_{\mathrm{blind}}}{2} \;>\; 0
 $$
 
-的未遍历盲区（`MODEL`；在微弧示意读数中对应恒正的全称封顶缺口）。局部经验到的“追逐未竟”，永远不能越权升格为全称否定的“终局判决”。
+的未遍历盲区（`MODEL`；在微弧示意读数中对应恒正的全称封顶缺口，并非可证性的数学度量）。局部经验到的“追逐未竟”，永远不能越权升格为全称否定的“终局判决”。
 
 更深刻的是，二十世纪下半叶以来的理论计算机科学与数理逻辑已经用严格定理证明：**单凭 [§38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp) 所倚重的纯对角化逃逸，在数学上根本不可能单独裁决非相对化的 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$**！
 
@@ -80,7 +80,7 @@ $$
 1. **Baker–Gill–Solovay 相对化屏障（T. Baker, J. Gill & R. Solovay, *SIAM J. Comput.* **4**, 431–442, 1975）**：显式构造出两类神谕（oracle）语言 $A$ 与 $B$——取 $A$ 为 $\mathrm{PSPACE}$ 完全语言（如量化布尔公式真值集 $\mathrm{TQBF}$）时，确定性与非确定性多项式时间神谕机双双坍缩至 $\mathrm{PSPACE}$，故 $\mathrm{P}^A = \mathrm{NP}^A$；而用稀疏延迟对角法构造神谕 $B$ 时，则有 $\mathrm{P}^B \neq \mathrm{NP}^B$。由于康托尔—哥德尔—Lawvere 式的纯黑盒模拟与自作用对角线论证（[§38.6](ch38-s06-uncompleted-horizon.md#sec-ch38-uncompleted-horizon-godel-pnp)）在接入任意神谕 $O$ 后原封不动地一致成立（即“可相对化”），**任何仅依赖纯对角逃逸的证明路线必然同时撞上 $A$ 与 $B$ 的反向结论，从而在数学上绝无可能单独解决非相对化的 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$**！
 2. **Razborov–Rudich 自然证明屏障（A. A. Razborov & S. Rudich, *J. Comput. Syst. Sci.* **55**, 24–35, 1997）**：在标准密码学伪随机发生器（PRG，如存在抗 $2^{n^\varepsilon}$ 规模电路的单向函数）硬度假设下，任何同时满足**构造性**（给定真值表可在 $2^{O(n)}$ 时间内判定）与**稠密性/普遍性**（在全部 $n$ 元布尔函数中占比不少于 $2^{-O(n)}$）的“自然组合电路下界证明”，都无法证明 $\mathrm{NP} \not\subset \mathrm{P/poly}$——因为一把锋利到足以排斥一切小规模多项式电路的通用硬度标尺，其自身就会变成攻破密码学伪随机发生器的高效区分器；
 3. **Aaronson–Wigderson 代数化屏障（S. Aaronson & A. Wigderson, *ACM Trans. Comput. Theory* **1**, 2:1–2:54, 2009）**：即便引入曾成功绕过相对化屏障证出 $\mathrm{IP} = \mathrm{PSPACE}$ 的算术化（arithmetization）与低次多项式扩张神谕 $\widetilde{A}$，仍然存在使之塌缩与使之分离的代数化神谕偶对，表明分离 $\mathrm{P}$ 与 $\mathrm{NP}$ 必须动用真正深入计算内部结构的**非代数化**新几何与新组合工具；
-4. **哥德尔第二不完备定理与形式独立性探讨（K. Gödel, 1931; R. A. DeMillo & R. J. Lipton, *Inf. Process. Lett.* **11**, 195–198, 1980; A. A. Razborov, *London Math. Soc. Lecture Note Ser.* **224**, 344–386, 1995; S. Aaronson, *SIGACT News* **34**(3), 18–23, 2003）**：哥德尔第二不完备定理证明任何一致的递归公理化算术理论 $T \supseteq \mathrm{PA}$ 均无法在系统内部自证一致性 $\operatorname{Con}(T)$；在此启发下，DeMillo–Lipton、Razborov（有界算术）与 Aaronson 等学者系统探讨了 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 相对于弱算术片段乃至 $\mathrm{PA}$、$\mathrm{ZFC}$ 等强基础公理系统是否可能具有形式独立性。然而，非相对化的 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 究竟在 $\mathrm{PA}$/$\mathrm{ZFC}$ 内可证、可证伪，抑或形式独立，迄今在数学上严格属于悬而未决的开放问题（`OPEN`）。
+4. **哥德尔第二不完备定理与形式独立性探讨（K. Gödel, 1931; R. A. DeMillo & R. J. Lipton, *Proc. 12th ACM STOC*, 45–57, 1980; A. A. Razborov, in *Feasible Mathematics II*, Birkhäuser, 344–386, 1995; S. Aaronson, “Is P Versus NP Formally Independent?”, *Bull. EATCS* **81**, 109–136, 2003）**：哥德尔第二不完备定理证明任何一致的递归公理化算术理论 $T \supseteq \mathrm{PA}$ 均无法在系统内部自证一致性 $\operatorname{Con}(T)$；在此启发下，DeMillo–Lipton、Razborov（有界算术）与 Aaronson 等学者系统探讨了 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 相对于弱算术片段乃至 $\mathrm{PA}$、$\mathrm{ZFC}$ 等强基础公理系统是否可能具有形式独立性。然而，非相对化的 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 究竟在 $\mathrm{PA}$/$\mathrm{ZFC}$ 内可证、可证伪，抑或形式独立，迄今在数学上严格属于悬而未决的开放问题（`OPEN`）。
 :::
 
 在球极投影沙盘上，我们可以用神谕投影切面的倾角 $\psi \in [0^\circ, 90^\circ]$ 直观演示 [@rem-ch38-bgs-natural-algebrization-barriers-literature] 第 1 条的相对化二象性（`MODEL`）：当切面平贴赤道折叠对称面 $\psi = 0^\circ$ 时，对应接入 $\mathrm{TQBF}$ 型神谕 $A$ 的世界截面，验证分支与生成路径在同相折叠核上重合，显影出 $\mathrm{P}^A = \mathrm{NP}^A$ 的局部坍缩。
@@ -97,10 +97,10 @@ $$
 
 在 `trureturing` 已冻结的内核声明库中，支撑本节几何语言的一维凯莱紧化边界充要判据、固定基切片相位读出盲区、观测划分核折叠以及事后零损对前瞻非预见性的双向视差，严格锚定于以下四联命题：
 
-::: {.proposition #prop-ch38-cayley-stereographic-and-blindspot-suspension title="凯莱紧化边界双射、对角相位读出盲区、划分核折叠与事后—前瞻视差包" lean="D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure"}
+::: {.proposition #prop-ch38-cayley-stereographic-and-blindspot-suspension title="凯莱比值单位圆判据、对角相位读出盲区、划分核折叠与事后—前瞻视差包" lean="D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure"}
 在 `trureturing` 冻结的复谱中线、量子层析相位盲区、观测划分拓扑与回顾性查表裁定模块中，以下四项定理同时成立：
 
-1. **一维凯莱分式变换的单位圆边界充要判据**（[`cayley_ratio_norm_one_iff_critical_line`](lean:D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line)）：对任意复数 $s \in \mathbb{C}$（记 $\operatorname{cayleyRatio}(s) := (s - 1)/s$，在 Lean 全函数除法约定下 $s = 0$ 时取值 $0$；当 $s \neq 0$ 时将无界临界直线 $\operatorname{Re}(s) = \frac{1}{2}$ 共形映入挖去无穷远像点 $1$ 的单位圆周 $S^1 \setminus \{1\}$），成立
+1. **一维凯莱分式变换的单位圆边界充要判据**（[`cayley_ratio_norm_one_iff_critical_line`](lean:D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line)）：对任意复数 $s \in \mathbb{C}$（记 $\operatorname{cayleyRatio}(s) := (s - 1)/s$，在 Lean 全函数除法约定下 $s = 0$ 时取值 $0$），成立
 
    $$
    \lVert \operatorname{cayleyRatio}(s) \rVert = 1 \;\Longleftrightarrow\; \operatorname{Re}(s) = \frac{1}{2};
@@ -121,7 +121,7 @@ $$
 第 1 款在 $s = 0$ 处由全函数除法给出 $\operatorname{cayleyRatio}(0) = 0$（两端同假），在 $s \neq 0$ 处由精确模方亏量恒等式 $\lVert(s - 1)/s\rVert^2 - 1 = (1 - 2\operatorname{Re}(s))/\lvert s\rvert^2$ 直接锁定（同见 [@thm-ch36-taylor-tail-and-cayley-boundary] 第 2 款）。第 2 款在计算基下展开 $\rho_\pm$ 的对角迹 $(d_0 + d_1)/2$ 消去非对角相干符号 $\pm 1/2$，并以泡利 $X$ 上 $+1 \neq -1$ 的玻恩读出见证非对角分离（同见 [@thm-ch31-diagonal-phase-blindness]）。第 3 款由诱导拓扑 `Topology.induced readout ⊥`（离散余域拓扑拉回）的邻域包含关系直接归约为单点纤维相等 `readout x = readout y`。第 4 款已在 [@thm-ch38-retrospective-lookup-failure] 与 [@thm-ch38-uncompleted-horizon-diagonal-refinement] 第 4 款中核验。完整证明由 Lean 内核检查。
 :::
 
-在此必须以最高学术诚实划清边界：[@prop-ch38-cayley-stereographic-and-blindspot-suspension] 严格锁定的是一维凯莱紧化边界刻画（有限参数像恒漏掉无穷远点 $w = 1$）、单一固定基切片对相对相位的盲区、局部读出商核的拓扑折叠以及事后零损对前瞻非预见性的视差；**它既不证明也不证伪标准图灵机上非相对化的 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$，后者连同其公理独立性地位依然是严格开放的数学前沿（`OPEN`）**：
+在此必须以最高学术诚实划清边界：[@prop-ch38-cayley-stereographic-and-blindspot-suspension] 严格锁定的是一维凯莱紧化边界刻画（有限参数像恒漏掉无穷远点 $w = 1$，这一点是盒外的初等观察，不在 Lean 陈述中）、单一固定基切片对相对相位的盲区、局部读出商核的拓扑折叠以及事后零损对前瞻非预见性的视差；**它既不证明也不证伪标准图灵机上非相对化的 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$，后者连同其公理独立性地位依然是严格开放的数学前沿（`OPEN`）**：
 
 ::: {.problem #prob-ch38-unrelativized-p-vs-np-and-independence title="非相对化 P 与 NP 的分离或塌缩及公理独立性边界"}
 在固定有限字母表与标准统一图灵机模型下，跨越相对化、自然证明与代数化三大屏障（[@rem-ch38-bgs-natural-algebrization-barriers-literature]）解决以下两项相互关联的开放问题：

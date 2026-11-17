@@ -8,7 +8,7 @@ $$
 x_{k+1} = 1 + \frac{1}{x_k}, \qquad x_0>0.
 $$
 
-有限步展开只包含有限层分式，底部仍是初值 $x_0$。无穷连分数 $1+1/(1+1/(\cdots))$ 则表示这些有限截断的极限，须另证收敛；不能把它等同于每个有限的 $x_{k+1}$。下文算例给出收敛的直接依据。
+有限步展开只包含有限层分式，底部仍是初值 $x_0$。无穷连分数 $1+1/(1+1/(\cdots))$ 则表示这些有限截断的极限，须另证收敛；不能把它等同于每个有限的 $x_{k+1}$。收敛可以手算（手工推导）：从任意 $x_0 > 0$ 出发有 $x_1 > 1$，此后各项都不小于 $1$，而 $\lvert x_{k+1} - \varphi\rvert = \lvert 1/x_k - 1/\varphi\rvert = \lvert x_k - \varphi\rvert/(x_k\varphi) \le \lvert x_k - \varphi\rvert/\varphi$，误差每步至少缩到原来的 $1/\varphi \approx 0.618$ 倍。
 
 这正是我们在[第二十三章](ch23-diophantine-definability.md)研究黄金整数佩尔方程时遇到的连分数生成元！在 Lean 模块 `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint` 中，这一倒数残差自指映射被定义为 [`goldenReciprocalMap`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap)。
 

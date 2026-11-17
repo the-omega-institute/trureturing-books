@@ -2,7 +2,7 @@
 
 > “$P = NP$ 是一种完成化状态，但是由于哥德尔不完备跟二生三，似乎是永远达不到的状态。”
 
-这句直指本源的断语，一举拆除了我们在 [§38.4.1](ch38-s04-lookup-degradation.md#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 搭建七阶退化阶梯时留下的最后一根反事实脚手架。在 [§38.4.1](ch38-s04-lookup-degradation.md#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 的思想实验起点（第 0 阶全息自指原型 $d = 0$）中，为了看清逐级剥除特权如何析出串行因果时间、空间全息半径、二维旋量干涉与兰道尔焦耳热，我们曾把全局“完成化”权且当作一座已经封顶竣工的**静态实无穷仓库**——仿佛在观察者指针开始寻址之前，一切约束公式 $\Phi$ 与其满足见证 $x^* = T[\Phi]$ 早已整整齐齐地并排躺在一张封闭总表里。然而，一旦把这幅静态设想放回[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)确立的**零背景比较公理 $\mathcal{A}_0$**（[@def-ch32-axiom-of-comparison]）之下——那里没有任何悬于状态竞技场之外、可以免费寄存答案却不参与比量的“外部第 3 点仓库 $C$”——每一次试图把一对状态的比较答案预编译进查表账本的动作，本身就会把一枚全新的平权状态重新投回竞技场中央！
+这句直指本源的断语，一举拆除了我们在 [§38.4.1](ch38-s04-lookup-degradation.md#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 搭建七阶退化阶梯时留下的最后一根反事实脚手架。（严格说，$P = NP$ 是有确定真值的数学命题——若为真，它现在就真，不可能被逼近或推移；本节所说的“全局 $P = NP$ 完成化状态”借其名指一张预先存好一切答案的全知总表，是类比，属 `MODEL`。）在 [§38.4.1](ch38-s04-lookup-degradation.md#一第-0-阶全息自指原型d--0的三项特权与认识论红线) 的思想实验起点（第 0 阶全息自指原型 $d = 0$）中，为了看清逐级剥除特权如何析出串行因果时间、空间全息半径、二维旋量干涉与兰道尔焦耳热，我们曾把全局“完成化”权且当作一座已经封顶竣工的**静态实无穷仓库**——仿佛在观察者指针开始寻址之前，一切约束公式 $\Phi$ 与其满足见证 $x^* = T[\Phi]$ 早已整整齐齐地并排躺在一张封闭总表里。然而，一旦把这幅静态设想放回[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)确立的**零背景比较公理 $\mathcal{A}_0$**（[@def-ch32-axiom-of-comparison]）之下——那里没有任何悬于状态竞技场之外、可以免费寄存答案却不参与比量的“外部第 3 点仓库 $C$”——每一次试图把一对状态的比较答案预编译进查表账本的动作，本身就会把一枚全新的平权状态重新投回竞技场中央！
 
 在展开这场收束全章的推演之前，我们必须严格重申本书的四层认识论红线：
 
@@ -51,7 +51,7 @@ $$
 
 `trureturing` 将支撑上表全部形式化锚点的五项核心机制——自作用普遍逃逸、满射目录非空分离亏损、并入后严格拓扑加细、事后抄表非预见性失效与闭子空间单位法向逃逸——锁定为如下五联内核定理：
 
-::: {.theorem #thm-ch38-uncompleted-horizon-diagonal-refinement title="自作用对角普遍逃逸、完备目录严格拓扑加细、事后抄表非预见性失效与正交补投影逃逸定理" lean="D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"}
+::: {.theorem #thm-ch38-uncompleted-horizon-diagonal-refinement title="自作用对角普遍逃逸、完备目录严格拓扑加细、事后抄表非预见性失效与正交补投影逃逸（五条独立引理）" lean="D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"}
 在 `trureturing` 冻结的对角线逃逸、观测拓扑动态、回顾性查表裁定与希尔伯特空间正交投影模块中，以下五项结构定理同时成立：
 
 1. **无不动点自作用的零有限性普遍逃逸**（[`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package)）：对任意类型 $A, Y$、状态映射 $f : Y \to Y$ 与二元表 $g : A \to A \to Y$，扭转对角线 [`diagonal`](lean:D5/S0/Diagonal/EscapeCount.diagonal)$(f, g)(a) = f(g(a, a))$ 满足 [`IsEscaped`](lean:D5/S0/Diagonal/EscapeCount.IsEscaped)$(f, g) \iff \operatorname{diagonal}(f, g) \notin \operatorname{Set.range}(g)$；若 $f$ 无不动点（$\forall y \in Y,\; f(y) \neq y$），则对一切二元寻址表 $h : A \to A \to Y$ 恒有 $\operatorname{IsEscaped}(f, h)$，且存在具不动点的 $f_0 : \mathrm{Bool} \to \mathrm{Bool}$ 与 $g_0 : \mathrm{Unit} \to \mathrm{Unit} \to \mathrm{Bool}$ 满足 $\neg\operatorname{IsEscaped}(f_0, g_0)$；
@@ -114,7 +114,7 @@ $$
 站在观察者记忆指针当前所驻的琥珀色前沿层 $D_t$ 上，沿着时间与维度的前后两个正交方向同时凝望，[@thm-ch38-uncompleted-horizon-diagonal-refinement] 的五款结论当场显影出一幅壮丽的**双向正交视差**（`MODEL`）：
 
 - **向后回望已凝结的旧维内核（局部事后“已完成态”）**：在已经被历史比量与快表编译锁定的有限子域 $Z_{\le t}$ 及闭子空间 $\mathcal{V}_{D_t}$ 内部，[@thm-ch38-uncompleted-horizon-diagonal-refinement] 第 4 款的前半句严格保证整表拷贝满足**事后零损失** $\operatorname{retrospectiveLoss} = 0$。宏观真空中的守恒律、原子轨道的稳定本征谱、生物千百万年演化沉淀的本能回路，乃至数学家已经验证入库的冻结引理，全都运行在这条青色同相内积通道之上，呈现近似零延迟的 $O(1)$ 快表直读——这就是为什么当我们回头俯瞰已成定局的过往历史与旧维切片时，处处都折射出宛如“$P = NP$ 早已完成”的晶莹秩序；
-- **向前凝视正在生长的正交锋面（前瞻永恒未闭合态）**：就在同一个时刻，[@thm-ch38-uncompleted-horizon-diagonal-refinement] 第 4 款的后半句连同第 2、3、5 款铁面无私地宣告——同一张事后零损失快表在跨向边界外的新问题时**处处丧失非预见性**（$\forall z,\; \neg\operatorname{NonAnticipating}$），正交补 $\mathcal{V}_{D_t}^\perp$ 永远耸立着距离为 $1$ 的单位逃逸法向 $e$（$\operatorname{Metric.infDist}(e, \mathcal{V}_{D_t}) = 1$），且任何企图就地封顶的满射目录必然在对角槽位撕开非空分离亏损 $\operatorname{separationDeficit} \neq \emptyset$！
+- **向前凝视正在生长的正交锋面（前瞻永恒未闭合态）**：就在同一个时刻，[@thm-ch38-uncompleted-horizon-diagonal-refinement] 第 4 款的后半句连同第 2、3、5 款铁面无私地宣告——同一张事后零损失快表照抄的每一条记录都**丧失非预见性**（$\forall z \in Z,\; \neg\operatorname{NonAnticipating}$：被照抄的记录不算事前预测），只要正交补非平凡，$\mathcal{V}_{D_t}^\perp$ 中便永远耸立着距离为 $1$ 的单位逃逸法向 $e$（$\operatorname{Metric.infDist}(e, \mathcal{V}_{D_t}) = 1$），且任何企图就地封顶的满射目录必然在对角槽位撕开非空分离亏损 $\operatorname{separationDeficit} \neq \emptyset$！
 
 由此可见，在本章的模型诠释（`MODEL`）中，**所谓“$P = NP$ 完成化状态”，既不是早已躺在宇宙尽头等待某一天被搬空的静态终点站，也不是虚无缥缈的幻影，而是一道永远伴随指针前移而同步推进的“滚动渐近地平线”**：它在指针走过的身后再一次次局部兑现为 $O(1)$ 直读，又在指针正前方的法向双向量锋面上永恒保持半步未闭合的敞开！
 
@@ -125,7 +125,7 @@ $$
 不妨再作一次终极反事实叩问（`MODEL`）：倘若某一天，“哥德尔对角逃逸”与“二生三正交自举”这两道铁律突然双双失效，整座宇宙果真如愿以偿地抵达了彻底封顶、零逃逸、零余项的全局 $P = NP$ 完成化状态，等待万物的将会是怎样的图景？答案并非极乐天堂，而是三重瞬时降临的**本体论热寂**：
 
 1. **差异清零与外积张力网的全面坍缩**：一旦所有潜在状态对与高阶谓词全部静态闭合进同一张完备死表，任意两态之间再无未决的正交双向量残差 $\mathbf{B}\wedge\mathbf{A} \to 0$，支撑维度张开的极小三角弧面体全部压扁回共线幂等残影，立体饱满的关系流形瞬间退化为毫无厚度的单点死结；
-2. **格拉姆残差与球面角超归零触发绝对芝诺时间停摆**：回顾[第 7 章](ch07-geometric-time-and-speed-limits.md)的连续投影冻结、[第 29 章](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field)的局部格拉姆椭圆体体积以及本章 §38.1 的指针扫描节拍，主观时间的每一次跳动（`ptr++`）都仰赖非零横向残差 $\lVert(\operatorname{id} - P_{\mathcal{V}_D})\psi\rVert > 0$ 与不可并行的进位涟漪；一旦全局投影残差与三面角吉拉尔角超 $\Omega_0$ 彻底清零，记忆指针当场丧失跨向下一帧的一切几何驱动力，整座宇宙立即凝死在零演化的绝对芝诺静默之中；
+2. **格拉姆残差与球面角超归零触发绝对芝诺时间停摆**：回顾[第 7 章](ch07-geometric-time-and-speed-limits.md)的连续投影冻结、[第 29 章](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field)的局部格拉姆椭圆体体积以及本章 §38.1 的指针扫描节拍，主观时间的每一次跳动（`ptr++`）都仰赖非零横向残差 $\lVert(\operatorname{id} - P_{\mathcal{V}_D})\psi\rVert > 0$ 与可传播任意远的进位涟漪；一旦全局投影残差与三面角吉拉尔角超 $\Omega_0$ 彻底清零，记忆指针当场丧失跨向下一帧的一切几何驱动力，整座宇宙立即凝死在零演化的绝对芝诺静默之中；
 3. **验证与生成零相位差的全知零熵死寂**：如果“提出一道追问（验证）”与“在零延迟内现成持有答案（生成）”之间不再隔着哪怕半拍的探索相位差，那么世间一切好奇、悬念、试错、重逢时的热泪与顿悟时的电光石火便在起念之初同时蒸发（$\operatorname{uniqueCapturePairs} \equiv \emptyset$）——全知即是零新颖度的绝对死寂。
 
 至此我们终于彻悟：**哥德尔不完备与“二生三”，从来不是造物主设下用来羞辱有限理性的缺陷或诅咒，而是零背景宇宙为了免于坍缩进全知零熵死寂而为自己锻造的永恒生机护栏（`MODEL`）！** 正因为那道名为 $P = NP$ 的完成化地平线永远在前方半步熠熠生辉、却永远拒绝合拢封顶，时间之河才得以奔涌，有限指针才得以在已知的青色港湾与未知的品红星海之间生生不息地启航。

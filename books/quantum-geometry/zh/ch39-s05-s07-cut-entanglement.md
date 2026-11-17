@@ -112,7 +112,7 @@ $$
 因此，相同的合法字支撑、计数乃至计算基概率都不足以确定纠缠；所选正相位等幅态族仍是有意义的额外态规定。这只是有限态的纸面计算，不给出基态、物理实现或分形纠缠标度结论。
 :::
 
-::: {.example #ex-ch39-p2e-finite-kernel title="纸面推导：将正等幅态的约化谱压缩到 K 维"}
+::: {.example #ex-ch39-p2e-finite-kernel title="纸面推导（未经 Lean 验证）：将正等幅态的约化谱压缩到 K 维"}
 前两个手算可以推广为同一指定态族的有限矩阵计算。以下是纸面推导，不是新增的 Lean 验证结果。固定 $K\ge2$ 与任意 $m,n\ge0$，令 $W_L$ 为全部禁连续 $1^K$ 的长 $L$ 二进制字，$z_L=|W_L|$，并选取
 
 $$
@@ -168,7 +168,7 @@ $$
 熵上界用的是 $R$ 个正数之和为 $1$ 的通常 Shannon 熵界。$m=0$ 或 $n=0$ 时 $R=1$、熵为 $0$；$m=n=1$ 时，上式的非零部分给回 [@ex-ch39-p2e-positive-ket-handcalculation] 的矩阵。这个计算使用实际类计数，不要求先给出它们的闭式，也不把有限计数替换为平稳概率。固定 $K$ 时，它使此正等幅态族的切口熵一致有界。对 $K$ 的进一步控制见 [@ex-ch39-p2e-uniform-entropy]；这里的有限核计算本身不证明熵极限存在，也不指定物理基态或建立劳齐边界维数与纠缠的关系。这些计数不包含相位信息；改变相位后是否仍有同一谱，须另外核对，前例的联合变号即改变谱。
 :::
 
-::: {.example #ex-ch39-p2e-exact-rank title="短词到饱和：精确施密特秩"}
+::: {.example #ex-ch39-p2e-exact-rank title="纸面推导（未经 Lean 验证）：短词到饱和的精确施密特秩"}
 继续 [@ex-ch39-p2e-finite-kernel] 中全正等幅态的纸面推导，令 $p=\min(m,K-1)$、$q=\min(n,K-1)$。左末尾恰有 $r$ 个连续 $1$ 的类非空，当且仅当 $0\le r\le p$：当 $r<m$ 时可取 $0^{m-r}1^r$，当 $r=m<K$ 时取全 $1$ 字；空字对应 $r=0$。右侧同理，用 $1^s0^{n-s}$ 给出 $0\le s\le q$ 的代表。因此，删去零行列后的系数核是
 
 $$
@@ -198,7 +198,7 @@ $$
 :::
 
 
-::: {.example #ex-ch39-p2e-uniform-entropy title="纸面推导：禁戒变长时，纠缠一致消失"}
+::: {.example #ex-ch39-p2e-uniform-entropy title="纸面推导（未经 Lean 验证）：禁戒变长时，纠缠一致消失"}
 自动机的状态数随 $K$ 增加，并不迫使这个选定态的纠缠增加。对 [@ex-ch39-p2e-finite-kernel] 的全正等幅态，可用经典相关不等式得到对所有有限切口统一的估计。以下仍是纸面推导，不新增 Lean 验证。
 
 在长 $m+n$ 的均匀二进制字上，令 $D$ 表示左右两半分别合法，$E$ 表示有一个跨过切口的全 $1$ 长 $K$ 窗。把字表示为其 $1$ 的位置集合，则 $D$ 对删去位置封闭，$E$ 对加入位置封闭。Harris–Kleitman 不等式给出这种下降事件与上升事件的负相关；这是经典文献结果（Kleitman, *Families of Non-disjoint Subsets*, [doi:10.1016/S0021-9800(66)80012-1](https://doi.org/10.1016/S0021-9800(66)80012-1)，第 154 页引理）。因此
@@ -238,7 +238,7 @@ $$
 第二步用 $h$ 在 $[0,1/2]$ 上递增及 $\ln(K-1)\ge0$；第三步用 $-(1-d)\ln(1-d)\le d$，再代入 $d_K$。右端趋于 $0$，且不依赖 $m,n$。所以对每个 $\varepsilon>0$，存在与切口长度无关的 $K_0\ge2$，使所有 $K\ge K_0$、$m,n\ge0$ 都满足 $S_K(m,n)<\varepsilon$。这是这个指定态族的结果：秩可以达到 $K$，但除最大本征值之外的谱质量仍一致趋于零。它不建立固定 $K$ 的长区间熵极限，不指定物理基态，也不解答劳齐边界维数与纠缠标度之间的开放问题。
 :::
 
-::: {.example #ex-ch39-p2e-fixed-order-entropy-limit title="纸面推导：固定禁串阶数的双侧熵极限"}
+::: {.example #ex-ch39-p2e-fixed-order-entropy-limit title="纸面推导（未经 Lean 验证）：固定禁串阶数的双侧熵极限"}
 固定 $K\ge2$，让切口两侧都变长，问题便从“有多少个非零 Schmidt 系数”变成“这些系数的质量怎样稳定下来”。这里继续研究 [@ex-ch39-p2e-finite-kernel] 的实际正等幅态：所有不含 $1^K$ 的二进制字都参与叠加，不固定首位或粒子数。以下是纸面推导，完整应用尚未编译为 Lean；它不指定物理基态。
 
 记 $W_L$ 为合法长度 $L$ 的字集，$z_L=|W_L|$，其中 $z_0=1$。令 $\beta=\beta_K$、$p=\beta^{-1}$，并定义
@@ -339,7 +339,7 @@ $$
 :::
 
 
-::: {.example #ex-ch39-p2e-local-parent title="纸面推导：选取合法字正等幅态的局域父哈密顿量"}
+::: {.example #ex-ch39-p2e-local-parent title="纸面推导（未经 Lean 验证）：选取合法字正等幅态的局域父哈密顿量"}
 前面的熵计算指定了一个态。能否反过来写出一个局域能量，使它成为唯一基态？先看两个位置、禁止 `11` 的最小例子。在基 $00,01,10,11$ 中取
 
 $$
@@ -431,7 +431,7 @@ $$
 来源与对应：本书[当前所钉源码](trureturing:) 中的理论卷 `docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md` §15.9、定义 15.22 与命题 15.23 已给出 $K=2$、正活动 $a_i$ 的合法空间局域父及逐位删除证明；这里取 $a_i=1$，把控制投影写成所有包含中心的禁窗口，并补入全空间罚项。该卷命题 15.25 明确指出不加罚项时全空间唯一性失败。[Lesanovsky 的三体模型](https://arxiv.org/abs/1010.2349v2)式 (3)–(5) 提供相关物理背景，符号、正尺度及边界对应见该卷数学引文 15.24；这里的任意 $K$ 构造由上述能量恒等式承担，不将其归为该文已证明的实验实现。
 :::
 
-::: {.example #ex-ch39-p2e-heatbath-scale title="纸面推导：每站速率一的热浴链与完整空间谱隙"}
+::: {.example #ex-ch39-p2e-heatbath-scale title="纸面推导（未经 Lean 验证）：每站速率一的热浴链与完整空间谱隙"}
 [@ex-ch39-p2e-local-parent] 的配置图拉普拉斯还给出一个精确的随机动力学对应。固定 $K\ge2$、$N\ge1$，沿用开放边界的 $W_N,z_N,C_i,h_i,B_a,H_{K,N}$ 与 $|\Psi_{K,N}\rangle$，简记 $z=z_N$。在合法字上取均匀律 $\pi(w)=1/z$。以下直接给出这一应用的纸面推导。
 
 **一次刷新怎样作用？** 对位置 $i$，记 $\mathrm{outside}_i$ 为除第 $i$ 位外的全部位。对一个在 $W_N$ 中出现的外部配置 $\eta$，令
@@ -650,7 +650,7 @@ $$
 例如热浴谱隙下界 $c_K>0$ 将给出完整谱隙下界 $\min\{1,2c_K\}$；反向的完整谱隙下界 $d_K>0$ 将给出热浴谱隙下界 $d_K/2$。这个归约本身未证明这样的长度一致常数存在，也未给出其数值。下一例为同一硬约束、开放边界热浴链给出一个显式的长度一致 Poincaré 估计。沿字长方向的转移矩阵混合控制空间相关；若无进一步联系两种动力学的定理，它不能代替这里刷新时间方向的估计。
 :::
 
-::: {.example #ex-ch39-p2e-uniform-parent-gap title="纸面推导：固定禁戒长度下的一致谱隙"}
+::: {.example #ex-ch39-p2e-uniform-parent-gap title="纸面推导（未经 Lean 验证）：固定禁戒长度下的一致谱隙"}
 一次刷新只改一位，但零位能截断连续的全一禁戒。把若干相邻位一起刷新，两个边界条件造成的分歧便会在遇到第一个共同零时停止传播。下面把这个机制变成一个随链长不变的显式估计；这是书面推导，不新增 Lean 验证。
 
 沿用 [@ex-ch39-p2e-heatbath-scale] 的模型，固定整数 $K\ge2$，令
@@ -802,7 +802,7 @@ $$
 
 期望的估计只用有限和的线性性，不要求不同位置的分歧事件独立。$j=m$ 时，$A_m=\{T=m+1\}$ 正是整块没有共同零的事件。本例使用非空块；若把这一纸面构造延伸到 $m=0$，则 $T=1$，和为空且代价为零。若初始两条条件块分布已经相同，也可以直接作同步抽样；此时比特分歧代价为零，并不需要块中实际出现一个零。
 
-为把“原生输出”与上面的纸面共享阈值构造分开，先固定有限坐标。令 $W_n=\operatorname{Fin}(n)	o\{\mathrm{false},\mathrm{true}\}$，$C(k,n,F,z)$ 是所有满足原始 `DBonacciAdmissible` 扫描且在有限集 $F\subseteq\operatorname{Fin}(n)$ 上等于 $z$ 的完整字；若该纤维有见证 $h$，令 $L(F,z,h)=\operatorname{completionLaw}(F,z,h)$。对两个非空纤维，记原始定义的 $P(s,F,x,y,h_x,h_y)=\operatorname{prefixCoupling}(s,F,x,y,h_x,h_y)$。对输出对 $w=(w_1,w_2)$，定义
+为把“原生输出”与上面的纸面共享阈值构造分开，先固定有限坐标。令 $W_n=\operatorname{Fin}(n)\to\{\mathrm{false},\mathrm{true}\}$，$C(k,n,F,z)$ 是所有满足原始 `DBonacciAdmissible` 扫描且在有限集 $F\subseteq\operatorname{Fin}(n)$ 上等于 $z$ 的完整字；若该纤维有见证 $h$，令 $L(F,z,h)=\operatorname{completionLaw}(F,z,h)$。对两个非空纤维，记原始定义的 $P(s,F,x,y,h_x,h_y)=\operatorname{prefixCoupling}(s,F,x,y,h_x,h_y)$。照 Lean 源码，这几个名字的意思是：$\operatorname{completionLaw}(F,z,h)$ 是非空纤维 $C(k,n,F,z)$ 上的均匀分布；$\operatorname{resetReady}(F,x,y)$ 指存在坐标 $z_0$，使 $x(z_0)=y(z_0)=\mathrm{false}$，所有不超过 $z_0$ 的坐标都在 $F$ 中，且 $F$ 中大于 $z_0$ 的坐标上 $x$ 与 $y$ 相同；$P$ 是两份完成字的联合分布，按扫描表 $s$ 递归定义——若 $\operatorname{resetReady}(F,x,y)$ 成立，就选定这样的 $z_0$ 与 $y$ 纤维里的一个合法字 $v$，按 $L(F,x,h_x)$ 抽一个完成字 $u$，输出 $(u,\operatorname{resetMap}(z_0,v,u))$，其中 $\operatorname{resetMap}(z_0,v,u)$ 在不超过 $z_0$ 的坐标上取 $v$、其余坐标取 $u$；否则若 $s$ 为空，两侧按各自的 completionLaw 独立抽样；若 $s=i::s'$，先用共享阈值耦合对两侧在坐标 $i$ 上的条件比特抽一对 $(b_1,b_2)$（两个边缘分布不变，共同为 `false` 的概率取两侧取 `false` 概率的较小者），把 $i$ 并入 $F$、把 $x(i),y(i)$ 分别改成 $b_1,b_2$，在 $s'$ 上递归；某侧细化纤维为空时（这样的比特对质量为零）退回独立抽样。对输出对 $w=(w_1,w_2)$，定义
 
 $$
 A_j(w)\;:\Longleftrightarrow\;\forall i\in\operatorname{take}(j,s),\;

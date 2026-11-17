@@ -250,7 +250,7 @@ $$
    当 $x \in \mathrm{UnitSphere}$（$\norm{x} = 1$）时，这给出 $2\langle x, a_i\rangle_{\mathbb{R}}^2 \ge 2M^2 \ge 6\norm{x}^2 = 6 > 5$，故 $x \in \operatorname{color}(i)$。完整证明由 Lean 内核检查。
 :::
 
-既然 6 块无正交对的开集已经够用，能不能再省一点，只用 5 块甚至 4 块开集就把球面盖住？下面的推论借助博苏克—乌拉姆（Borsuk–Ulam）型球面拓扑阻碍，给出了斩钉截铁的否定回答：**6 是绝对不可逾越的拓扑下界**。
+既然 6 块无正交对的开集已经够用，能不能再省一点，只用 5 块甚至 4 块开集就把球面盖住？下面的推论借助球面不可缩（布劳威尔型）拓扑阻碍，给出了斩钉截铁的否定回答：**6 是绝对不可逾越的拓扑下界**。
 
 在 Lean 模块 `SphereOrthogonalityCover` 中，对单位球面子集 $U \subseteq S^2$，谓词 `OrthogonalityFree U` 定义为
 

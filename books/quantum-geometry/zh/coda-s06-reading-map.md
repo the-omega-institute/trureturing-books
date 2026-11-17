@@ -1,6 +1,6 @@
 # 全书十部曲阅读与依赖导图 {#sec-coda-reading-map}
 
-全书由 **[序曲](README.md)**、**十部曲**、**终章** 与 **[附录 A](appendix-a.md)–[附录 I](appendix-i.md)** 构成。下图展示了从第一部到第十部的概念演进脉络与形式化模块依赖关系：
+全书由 **[序曲](README.md)**、**十部曲**、**终章** 与 **[附录 A](appendix-a.md)–[附录 I](appendix-i.md)** 构成。下图展示了从第一部到第十部的概念演进脉络与建议阅读顺序：
 
 ```
                         ┌──────────────────────────────────────────┐
@@ -75,7 +75,7 @@
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 39 章](ch39-observer-is-ontological-universe.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝、量子公平、大一统元统一、语境不动点、劳维尔同像扩表 $T = T(T)$、商拓扑约去轮回、概念纤维分解与齐肯多夫线程）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 参考引擎及其冻结依据与 `FiniteRecordCosineObstruction` 的剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对所钉冻结声明、书面证明与开放问题的证据边界）$\to$ [附录 E](appendix-e.md)（核验从零背景比较公理 $\mathcal{A}_0$ 到数学与物理公理体系的三层推演与桥接假设总账）$\to$ [附录 F](appendix-f.md)–[附录 I](appendix-i.md)（审阅态锥极性重构、稳定子多面体之外的魔性与转向阈值、有限视界观察者与历史账本，以及量子信息散度、逆测试可达性、子熵与可分锥残差见证四组专题形式化核验）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 参考引擎及其冻结依据与 `FiniteRecordCosineObstruction` 的剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对所钉冻结声明、书面证明与开放问题的证据边界）$\to$ [附录 E](appendix-e.md)（核验从零背景比较公理 $\mathcal{A}_0$ 到数学与物理公理体系的三层推演与桥接假设总账）$\to$ [附录 F](appendix-f.md)–[附录 I](appendix-i.md)（审阅排除面与定向关系分类、稳定子多面体之外的魔性与转向阈值、有限视界观察者与历史账本，以及量子信息散度、逆测试可达性、子熵与可分锥残差见证四组专题形式化核验）。
 
 ## 第六至第十部（第 21–39 章）核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -96,8 +96,8 @@
 | **第 23 章** | T23.3 | `D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm` | 参数化二次型簇 $Q_t(x,y)$ 在 $\mathbb{Z}^2$ 上的值域恒等于艾森斯坦范数集 |
 | **第 23 章** | T23.4 | `D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm` | 黄金整数环 $\mathbb{Z}[\varphi]$ 的佩尔型恒等式：$(2a+b)^2 - 5b^2 = 4\operatorname{norm}(g)$ |
 | **第 24 章**：余弦不动点与自指 | T24.1 | `D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize` | 有限载体上单调收缩更新序列的有限步不动点稳定性与跳变次数上界 |
-| **第 24 章** | T24.2 | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point` | 概念等价与解释稳定性共同达成相对解释不动点 |
-| **第 24 章** | T24.3 | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points` | 相同文本与规则在不同背景与目标参数下分岔出截然不同的二元不动点 |
+| **第 24 章** | T24.2 | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point` | 概念等价与解释稳定性共同达成相对解释不动点（按定义即二者的合取，Lean 证明为合取引入） |
+| **第 24 章** | T24.3 | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points` | 有限实例：相同文本与规则在两个具体布尔语境的不同背景与目标参数下分岔出截然不同的二元不动点 |
 | **第 24 章** | T24.4 | `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique` | 黄金倒数自指映射 $x \mapsto 1 + 1/x$ 在正实轴上的唯一不动点 $\varphi = (1+\sqrt{5})/2$ |
 | **第 25 章**：XOR–Pauli 几何代数引擎 | T25.1 | `D5/S3/Quantum/FiniteDimensional.qubit_weyl_star` | 单量子比特外尔算子 $X, Z$ 的反对易、自伴与对合代数律 |
 | **第 25 章** | T25.2 | `D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character` | $2\times 2$ 量子比特矩阵代数不存在保全局矩阵乘法的复代数特征标 |
@@ -127,14 +127,14 @@
 | **第 32 章** | T32.3 | `D5/S0/Computability/BinaryNameComparison.name_compare_run` | 按位二进制名字比较机器在显式线性步数上界 $2(|a|+|b|)+4$ 内停机并写入相等位与复原输入栈 |
 | **第 32 章** | T32.4 | `D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run` | 顺序词典查表机器在显式线性付费步数上界内停机并输出命中位、一元下标与复原词典流 |
 | **第 32 章** | T32.5 | `D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual` | 两量子态的全部未来期望字相等当且仅当态差正交于全部未来效应字 |
-| **第 33 章**：万物观察者与互吸引子 | T33.1 | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor` | 跨语境客观断言充要条件：全局一致断言必须穿过语境不变公共因子分解 |
+| **第 33 章**：万物观察者与互吸引子 | T33.1 | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor` | 跨语境客观断言的定义展开：全局一致断言按定义即穿过语境不变公共因子分解（Lean 证明即该假设本身） |
 | **第 33 章** | T33.2 | `D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result` | 紧致环面观测窗有界间隙与正访问密度回归定理：奠定互吸引子双螺旋重逢 |
 | **第 34 章**：正交简并盲区与位置反演 | T34.1 | `D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel` | 划分拓扑不可分等价于观测商等价核：刻画一次正交投影的深度简并盲区 |
 | **第 34 章** | T34.2 | `D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair` | 对任意 $a,b\in\mathbb{R}^3$，存在同时垂直于二者的单位向量 |
 | **第 34 章** | T34.3 | `D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness` | 四面体顶点亏损和恒等式、最优参考顶点上界及恰当性等价于棱势可修补判据 |
 | **第 34 章** | T34.4 | `D5/S3/Geometry/TwoAxisFiniteRotation.moving_axis_invariance` | 绕任意两条不共线随动轴局部旋转不变的成对不变量在全体 $\mathrm{SO}(3)$ 旋转下保持不变 |
 | **第 35 章**：乘光而来与自指扩表 | T35.1 | `D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion` | 目标读出从观测轨迹精确恢复当且仅当穿过诱导等价核因式分解 |
-| **第 35 章** | T35.2 | `D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode` | 劳维尔相对语义对角线突破任何固定枚举求值表，驱动同像扩表 $T = T(T)$ |
+| **第 35 章** | T35.2 | `D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode` | 若扭转映射 $\mathrm{twist}$ 没有不动点，劳维尔相对语义对角线突破任何固定枚举求值表，驱动同像扩表 $T = T(T)$ |
 | **第 36 章**：双曲阶梯与约去轮回 | T36.1 | `D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le` | 单位范数为 $1$ 的完备实或复赋范代数中，$0\le r$、$\|z\|\le r$ 时，指数的前 $n$ 项截断余项范数不超过 $r^n e^r/n!$ |
 | **第 36 章** | T36.2 | `D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition` | 目标映射穿过商空间核分解当且仅当在划分拓扑下连续：以商映射约去轮回冗余 |
 | **第 37 章**：梦境量子擦除与非定域分支 | T37.1 | `D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal` | 所选矩阵元的每个记录重叠模长均为 $1$ 时，共轭全部记录振幅后复合信道恢复该矩阵元 |
@@ -146,4 +146,4 @@
 
 走到全书最后一页，不妨把这一路攀登所借用的全部名字也轻轻放下：正如[第 34 章 §34.5](ch34-s05-triadic-bootstrap.md#sec-ch34-triadic-bootstrap-and-beyond-names)所揭示的那样，无论是[第 32 章 §32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)的“比较公理 $\mathcal{A}_0$”，还是“极小三角弧面体 $\Delta\mathcal{T}_\epsilon$”，抑或“点、线、面、球”，归根结底都只是场内观察者在语言逻辑快表里立起的一枚枚幂等指针（`MODEL`）。指针存在的全部意义，是领着我们穿过一维符号核的盲区，直到把梯子撤去——梯子撤去之后，没有不可企及的彼岸神秘，只剩观察者自身正在运转的 $\psi = \psi(\psi)$ 与宇宙本体严丝合缝的同构共鸣：**本体虽超出一维名相之“知”，却正在每一次平视比量中活成“这么个感觉”。**
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，在 [附录 C](appendix-c.md) 中核对 Lean 验证、书面证明与开放问题的证据边界，在 [附录 D](appendix-d.md) 中纵览量子力学六大经典未解难题与五大诠释流派的几何对决，在 [附录 E](appendix-e.md) 中审阅从零背景比较公理 $\mathcal{A}_0$ 导出数学与物理公理体系的分层推演总账，并沿四篇专题附录继续深潜：[附录 F](appendix-f.md) 回答重定心排除圆盘、尖锥面极性、三能级纯态三维排除坐标图与四维自旋因子双定向如何在显式公理下重构态锥几何；[附录 G](appendix-g.md) 回答走出稳定子多面体之后，马约拉纳编码低权非稳定子对易算子、单比特维格纳距离赤道张量律与单因子亏损非因子化、11 维克利福德三阶矩负性及双比特三设置转向椭球中心阈值 $2/3$ 如何刻画魔性与语境性边界；[附录 H](appendix-h.md) 回答有限视界观察者如何以未来行程首坐标还原当前读出、在完备深度稳定预测视界、将记忆穿过预测商分解，并用螺线管隐藏纤维上同调与加性历史账本收窄不可见核；[附录 I](appendix-i.md) 则回答冯·诺依曼代数凸逆测试扩展值可达性、正定矩阵 Bures–Wasserstein 重心对偶证书、经典—量子条件子熵猜测界、投影支撑 Kraus 通道重置补全与可分锥最近点规范残差见证如何连接变分信息散度与锥逼近分离证书。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，在 [附录 C](appendix-c.md) 中核对 Lean 验证、书面证明与开放问题的证据边界，在 [附录 D](appendix-d.md) 中纵览量子力学六大经典未解难题与五大诠释流派的几何对决，在 [附录 E](appendix-e.md) 中审阅从零背景比较公理 $\mathcal{A}_0$ 导出数学与物理公理体系的分层推演总账，并沿四篇专题附录继续深潜：[附录 F](appendix-f.md) 回答重定心排除圆盘、尖锥面极性、三能级纯态三维排除坐标图与四维自旋因子双定向如何在显式公理下对排除面与定向关系作出分类；[附录 G](appendix-g.md) 回答走出稳定子多面体之后，马约拉纳编码低权非稳定子对易算子、单比特维格纳距离赤道张量律与单因子亏损非因子化、11 维克利福德三阶矩负性及双比特三设置转向椭球中心阈值 $2/3$ 如何刻画魔性与转向边界；[附录 H](appendix-h.md) 回答有限视界观察者如何以未来行程首坐标还原当前读出、在完备深度稳定预测视界、将记忆穿过预测商分解，并用螺线管隐藏纤维上同调与加性历史账本收窄不可见核；[附录 I](appendix-i.md) 则回答冯·诺依曼代数凸逆测试扩展值可达性、正定矩阵 Bures–Wasserstein 重心对偶证书、经典—量子条件子熵猜测界、投影支撑 Kraus 通道重置补全与可分锥最近点规范残差见证如何连接变分信息散度与锥逼近分离证书。

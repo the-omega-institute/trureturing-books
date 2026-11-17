@@ -59,7 +59,7 @@ $$
 
 这一步同时接通了有限余数递推、无穷位值与周期核 $999999$。在生成元 $1/7$ 面前，无穷轮重复兜圈不再提供新的数字信息。
 
-在 `trureturing` 的形式化武库中，“通过商拓扑分解冗余纤维”、“通过零化子对偶一次性坍缩周期子群求和”（呼应[第 15 章](ch15-grover-qft-and-period-finding.md)的周期提取与[第 22 章](ch22-primes-euler-products-and-zeros.md)的生成元约分）以及“闭子群轨道长程极限由单一生成元不变测度完全决定”（呼应[第 31 章](ch31-quantum-fairness.md)），由以下四条严丝合缝的 Lean 4 定理共同铸就：
+在 `trureturing` 的形式化武库中，“通过商拓扑分解冗余纤维”、“通过零化子对偶一次性坍缩周期子群求和”（呼应[第 15 章](ch15-grover-qft-and-period-finding.md)的周期提取与[第 22 章](ch22-primes-euler-products-and-zeros.md)的生成元约分）以及“闭子群轨道长程极限由单一生成元不变测度完全决定”（呼应[第 31 章](ch31-quantum-fairness.md)），由以下四条严丝合缝的 Lean 4 定理各自锁定（四条彼此独立，并不合成一条关于理解或轮回的定理）：
 
 ::: {.theorem #thm-ch36-quotient-annihilator-and-factorization title="划分拓扑连续商分解、有限零化子对偶求和与紧致环面生成元遍历定理" lean="D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition D5/S3/Fourier/FinitePoisson.sum_annihilator_character D5/S3/Fourier/FinitePoisson.finite_poisson_summation D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"}
 在 `trureturing` 冻结的概念观测拓扑、有限交换群对偶分析与紧致环面渐近模块中，以下四项商分解与生成元约化定理同时成立：
@@ -149,8 +149,8 @@ $$
 
 我们将这三种生存与认知形态在全书正交几何模型（`MODEL`）中的精确对比收束于下框总表：
 
-::: {.remark #rem-ch36-samsara-exit-table title="三种生存与认知形态的正交几何对比总表（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下表汇总逆古德曼双曲快度与余弦不动点文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）同本书 `MODEL` 及商分解—零化子内核定理（[@thm-ch36-quotient-annihilator-and-factorization]，`LEAN ✓`）的三态对照：
+::: {.remark #rem-ch36-samsara-exit-table title="三种生存与认知形态的正交几何对比总表（作者模型汇总，`MODEL`）"}
+**作者模型汇总（`MODEL`），非文献结果。** 下表汇总逆古德曼双曲快度与余弦不动点文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）同本书 `MODEL` 及商分解—零化子内核定理（[@thm-ch36-quotient-annihilator-and-factorization]，`LEAN ✓`）的三态对照：
 
 | 生存与演化形态（`MODEL`） | 角度与耦合机制 | 一维自指锚点与查找表 $T$ 命运 | 几何拓扑轨迹特征 | 认识论与生命意义判词 |
 | :--- | :--- | :--- | :--- | :--- |

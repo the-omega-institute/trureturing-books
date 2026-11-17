@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "c61f1fe33cd305cef70ee7ba651d7a9da283ac45",
-  "pinned_at": "2026-11-17T15:22:13Z",
+  "commit": "83ef0ab7e589ccdb8871248dd187c667b7e6eff3",
+  "pinned_at": "2026-11-17T16:56:11Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5124,6 +5124,14 @@
       "statement_id": "sha256:f905171e6d60ef935199ac6d507d1081c2b56f0e18415b7c853307c3c5655de5",
       "line": 698,
       "signature": "theorem bound {a b c d : ℕ} (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin d) (Fin c) ℂ) (lambda : ℝ) (hlambda : 0 < lambda) (hab : 3 * a < 2 * b) (hF : (∑ r, Matrix.kronecker (M r) (N r))ᴴ * (∑ r, Matrix.kronecker (M r) (N r)) = (lambda : ℂ) • (1 : Matrix (Fin b × Fin c) (Fin b × Fin c) ℂ)) : 2 * c ≤ d"
+    },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeSaturation.native_saturation_iff": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeSaturation",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.NativeSaturation.native_saturation_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:fdf6e542c260f73892fa96cc1f74110b8bb303982eff57c69a6de9e51cadae30",
+      "line": 89,
+      "signature": "theorem native_saturation_iff (a b q : ℕ) (hq : 0 < q) : (∃ (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin (3 * q)) (Fin (2 * q)) ℂ), (∑ r, kronecker (M r) (N r))ᴴ * (∑ r, kronecker (M r) (N r)) = (1 : Matrix (Fin b × Fin (2 * q)) (Fin b × Fin (2 * q)) ℂ)) ↔ 2 * b ≤ 3 * a"
     },
     "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained": {
       "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",

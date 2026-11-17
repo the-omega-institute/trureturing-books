@@ -109,7 +109,7 @@ $$
 \lvert\psi_n\rvert^2 \;=\; \bigl\lvert n^{-\sigma - \hat{\mathbf{i}}\,t}\bigr\rvert^2 \;=\; n^{-2\sigma} \;=\; n^{-1} \quad \Longleftrightarrow \quad 2\sigma = 1 \quad \Longleftrightarrow \quad \sigma = \frac{1}{2}.
 $$
 
-令人击节赞叹的是，同一个指数 $\frac{1}{2}$ 也分毫不差地镌刻在双曲测地流的马鞍曲率上（`文献结果，未在本书形式化`）：在塞尔伯格迹公式（Selberg, 1956）与古茨维勒半经典周期轨道迹公式（Gutzwiller, 1971；以及 Berry & Keating, 1999 的标度哈密顿量 $\hat{H}_{\mathrm{BK}} = \frac{1}{2}(\hat{x}\hat{p} + \hat{p}\hat{x})$）中，本原闭合测地线 $\gamma_p$（本征周期/弧长 $L_p = \ln p$）穿过双曲马鞍面时，横向不稳定流形上的邻近轨道束按李雅普诺夫因子 $e^{+L_p/2}$ 指数发散，导致横向驻相高斯积分析出的单圈稳定性雅可比幅值因子 $\lvert\det(I - M_p)\rvert^{-1/2}$ 渐近锁定在
+令人击节赞叹的是，同一个指数 $\frac{1}{2}$ 也分毫不差地镌刻在双曲测地流的马鞍曲率上（`文献结果，未在本书形式化`）：在塞尔伯格迹公式（Selberg, 1956）与古茨维勒半经典周期轨道迹公式（Gutzwiller, 1971；以及 Berry & Keating, 1999 的标度哈密顿量 $\hat{H}_{\mathrm{BK}} = \frac{1}{2}(\hat{x}\hat{p} + \hat{p}\hat{x})$）中，本原闭合测地线 $\gamma_p$（本征周期/弧长 $L_p$；在塞尔伯格迹公式里 $L_p$ 并不是 $\ln p$，只在 Berry & Keating 猜想性的图景中才取 $L_p = \ln p$，`OPEN`）穿过双曲马鞍面时，横向不稳定流形上的邻近轨道束按李雅普诺夫因子 $e^{+L_p/2}$ 指数发散，导致横向驻相高斯积分析出的单圈稳定性雅可比幅值因子 $\lvert\det(I - M_p)\rvert^{-1/2}$ 渐近锁定在
 
 $$
 \lvert\det(I - M_p)\rvert^{-1/2} \;\sim\; e^{-L_p / 2} \;=\; e^{-(\ln p) / 2} \;=\; p^{-1/2}!
@@ -148,7 +148,7 @@ $$
 \rho_{\mathrm{rogue}} \;=\; \frac{1}{2} \pm \delta \pm i\gamma_0 \qquad (\delta \neq 0,\; \gamma_0 \neq 0)!
 $$
 
-在解析数论史上，Davenport 与 Heilbronn（1936）构造的狄利克雷级数线性组合同样满足完全相同的黎曼型函数方程与临界线实值性，却因为**缺乏素数欧拉乘积**而在 $\sigma \neq \frac{1}{2}$ 处滋生出无穷多颗离线零点（`文献结果，未在本书形式化`）。换言之：半密度平方律与正逆双臂平衡深刻揭示了为什么 $\sigma = \frac{1}{2}$ 是算术宇宙唯一的幺正对称脊线（`MODEL`）；临界线上确有无穷多个零点，这是 Hardy（1914）的定理（`文献结果，未在本书形式化`），上文的图像只说明实值函数每变号一次给出一个零点，并不推出变号无穷多次；但若要彻底排除无穷多条路径在 $\sigma \neq \frac{1}{2}$ 处“四点串谋相消”的极端可能，就必须把 $\sigma > 1$ 区**欧拉乘积独有的乘性正定性**一路无损运送过 $s = 1$ 极点势垒——这正是为什么**黎曼猜想（[@conj-riemann-hypothesis]）至今仍列为开放猜想（`OPEN`）**，也正是下一节 [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 必须引入乘性波前舒尔补枢轴与多级共振隧穿的根本原因！
+在解析数论史上，Davenport 与 Heilbronn（1936）构造的狄利克雷级数线性组合同样满足完全相同的黎曼型函数方程与临界线实值性，却因为**缺乏素数欧拉乘积**而在 $\sigma \neq \frac{1}{2}$ 处滋生出无穷多颗离线零点（`文献结果，未在本书形式化`）。换言之：半密度平方律与正逆双臂平衡深刻揭示了为什么 $\sigma = \frac{1}{2}$ 是算术宇宙唯一的幺正对称脊线（`MODEL`）；临界线上确有无穷多个零点，这是 Hardy（1914）的定理（`文献结果，未在本书形式化`），上文的图像只说明实值函数每变号一次给出一个零点，并不推出变号无穷多次；但若要彻底排除无穷多条路径在 $\sigma \neq \frac{1}{2}$ 处“四点串谋相消”的极端可能，照本书的读法，就要把 $\sigma > 1$ 区**欧拉乘积独有的乘性正定性**一路无损运送过 $s = 1$ 极点势垒——这一步至今没有任何已知证明，这正是为什么**黎曼猜想（[@conj-riemann-hypothesis]）至今仍列为开放猜想（`OPEN`）**，也正是下一节 [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 必须引入乘性波前舒尔补枢轴与多级共振隧穿的根本原因！
 
 **第三重机制——莫比乌斯外积随机游走标度律：Littlewood 等价定理与无偏 $\sqrt{x}$ 包络。** 从费米型外积路径积分 $1/\zeta(s) = \sum_{n \ge 1}\mu(n)n^{-s}$ 的另一侧面看，J. E. Littlewood（1912）严格证明了黎曼猜想（[@conj-riemann-hypothesis]）与梅尔滕斯莫比乌斯累加函数 $M(x)$ 的平方根渐近界完全等价（`文献结果，未在本书形式化`）：
 
@@ -252,7 +252,7 @@ $$
 下面的第四张实验卡将 [@ex-ch34-weil-prime-staircase-reconstruction] 的双向对偶搬上交互舞台，让你亲手滑动零点对截断数 $K$，目睹平滑谐波如何一步步咬合耸立为锐利的素数阶梯：
 
 ::: {.viz src="riemann-prime-arc-path-integral-sandbox" preset="weil-explicit-prime-staircase" height="520"}
-**韦伊显式对偶：临界线零点驻波曲面雕刻切比雪夫素数阶梯实验卡（`weil-explicit-prime-staircase`）。** 推进谱截止频率 $t$ 或调节零点对上限 $K \in [5, 50]$（预设停在 $t = 145 > \gamma_{50}$ 叠满 $50$ 对零点，点按播放可从 $t = 0$ 重演逐层生长；琥珀色标出最前排当前重构剖面 $K(t)$ 与可拖动读数点手柄 $x^*$）：后缘主项斜坡逐行累加驻波谐波 $-2\operatorname{Re}(x^{\rho_k}/\rho_k)$ 铺成紫色三维部分和曲面，最前排琥珀色剖面在 $x = 6, 10, 12$ 等合数处异相抵消压平，而在 $x = 2, 3, 4, 5, 7, 8, 9, 11, 13$ 处陡升紧贴青色精确中点阶梯 $\psi_0(x)$，前方地面上品红色零点驻波残差同步逼近青色锯齿，条带小图逐整数对比青色精确阶跃 $\Lambda(n)$ 与紫色重建升高（绿色 `LEAN ✓` 在 $y = \ln x^*$ 处实时核对 `actual_integrated_explicit_formula`）。
+**韦伊显式对偶：临界线零点驻波曲面雕刻切比雪夫素数阶梯实验卡（`weil-explicit-prime-staircase`）。** 推进谱截止频率 $t$ 或调节零点对上限 $K \in [5, 50]$（预设停在 $t = 145 > \gamma_{50}$ 叠满 $50$ 对零点，点按播放可从 $t = 0$ 重演逐层生长；琥珀色标出最前排当前重构剖面 $K(t)$ 与可拖动读数点手柄 $x^*$）：后缘主项斜坡逐行累加驻波谐波 $-2\operatorname{Re}(x^{\rho_k}/\rho_k)$ 铺成紫色三维部分和曲面，最前排琥珀色剖面在 $x = 6, 10, 12$ 等合数处异相抵消压平，而在 $x = 2, 3, 4, 5, 7, 8, 9, 11, 13$ 处陡升紧贴青色精确中点阶梯 $\psi_0(x)$，前方地面上品红色零点驻波残差同步逼近青色锯齿，条带小图逐整数对比青色精确阶跃 $\Lambda(n)$ 与紫色重建升高（绿色 `LEAN ✓` 标出 `actual_integrated_explicit_formula`）。
 :::
 
 ## 34.28.4 文献脉络与认识论边界审计，及向 §34.29 算术枢轴隧穿的交棒 {#sec-ch34-28-4}
@@ -274,5 +274,5 @@ $$
 与此同时，这座沙盘也把整部数论最惊心动魄的悬念摆到了我们面前：既然在右侧 $\sigma > 1$ 的欧拉乘积安全区里，每一枚素数极小圆弧体 $\Delta\mathcal{T}_p$ 原本完全乘性解耦、严格无零点且具备天然正定性，为什么过去一百多年的传统解析数论一旦试图把这份正定性推过 $s = 1$ 发散极点山峰去猎杀假想的离线四元组 $\frac{1}{2} \pm \delta \pm i\gamma_0$，就会在按自然数大小 $n = 1, 2, \dots, M$ 排队截断时迎头撞上**算术一维排序壁垒**与**图兰（Turán）芝诺假零点陷阱**，甚至连最强的单级磨光器也卡在 $\vartheta = \frac{4}{7}$ 衰减墙前？把 [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization) 破除排序壁垒的**局部波前稀疏舒尔枢轴重整**与 [§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 潜入 $90^\circ$ 盲区的**内割弦多级共振隧穿**双剑合璧——请翻开下一节 [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)！
 
 ::: {.viz src="riemann-prime-arc-path-integral-sandbox" height="640"}
-**黎曼路径积分与素数极小圆弧体临界线相消完整交互实验室（`riemann-prime-arc-path-integral-sandbox`）。** 在统一暗色三栏实验台中自由切换全部四张递进实验卡——“欧拉局域绕行、复合路径螺旋与莫比乌斯外积对偶”、“临界线 $\sigma = \frac{1}{2}$ 半密度双壳锁相与零点归零”、“偏离临界线正逆双壳失衡分裂”以及“韦伊显式对偶：零点驻波曲面雕刻素数阶梯”——实时联动实部滑块 $\sigma \in [0.20, 2.00]$、路径数 $N \in [20, 400]$、前五颗真实黎曼零点胶囊 $\gamma_1\text{–}\gamma_5$、莫比乌斯外积对偶开关与显式公式零点对数 $K \in [5, 50]$（紫色绘制自然数复合路径链 $\sum n^{-s}$、欧拉部分乘积、零点驻波部分和曲面与 `ARGUED` 文献依据，青色绘制地面正向壳环 $p^{-\sigma}$ 与精确切比雪夫阶梯 $\psi_0(x)$ 及 $\Lambda(n)$ 阶跃，品红色标示逆向对偶壳环 $p^{-(1-\sigma)}$、莫比乌斯外积链 $\sum\mu(n)n^{-s}$ 与零点驻波残差，琥珀色标出延拓竖轴与落点珠 $\zeta(s)$、当前零点胶囊 $\gamma_k$、最前排重构剖面 $K(t)$ 及交互手柄，红色专用于标示 [@conj-riemann-hypothesis] 的 `OPEN` 开放边界，绿色 `LEAN ✓` 实时核验 [@thm-ch34-riemann-prime-arc-bridge] 的全部七项 `trureturing` 内核定理实例）。
+**黎曼路径积分与素数极小圆弧体临界线相消完整交互实验室（`riemann-prime-arc-path-integral-sandbox`）。** 在统一暗色三栏实验台中自由切换全部四张递进实验卡——“欧拉局域绕行、复合路径螺旋与莫比乌斯外积对偶”、“临界线 $\sigma = \frac{1}{2}$ 半密度双壳锁相与零点归零”、“偏离临界线正逆双壳失衡分裂”以及“韦伊显式对偶：零点驻波曲面雕刻素数阶梯”——实时联动实部滑块 $\sigma \in [0.20, 2.00]$、路径数 $N \in [20, 400]$、前五颗真实黎曼零点胶囊 $\gamma_1\text{–}\gamma_5$、莫比乌斯外积对偶开关与显式公式零点对数 $K \in [5, 50]$（紫色绘制自然数复合路径链 $\sum n^{-s}$、欧拉部分乘积、零点驻波部分和曲面与 `ARGUED` 文献依据，青色绘制地面正向壳环 $p^{-\sigma}$ 与精确切比雪夫阶梯 $\psi_0(x)$ 及 $\Lambda(n)$ 阶跃，品红色标示逆向对偶壳环 $p^{-(1-\sigma)}$、莫比乌斯外积链 $\sum\mu(n)n^{-s}$ 与零点驻波残差，琥珀色标出延拓竖轴与落点珠 $\zeta(s)$、当前零点胶囊 $\gamma_k$、最前排重构剖面 $K(t)$ 及交互手柄，红色专用于标示 [@conj-riemann-hypothesis] 的 `OPEN` 开放边界，绿色 `LEAN ✓` 标出 [@thm-ch34-riemann-prime-arc-bridge] 的全部七项 `trureturing` 内核定理实例）。
 :::

@@ -113,7 +113,7 @@ The complete $8\times 8$ multiplication Cayley table for the canonical basis bla
    R_z(\alpha) = \cos\frac{\alpha}{2} - e_{12}\sin\frac{\alpha}{2}, \qquad R_y(\beta) = \cos\frac{\beta}{2} - e_{31}\sin\frac{\beta}{2}.
    $$
 
-   They obey the coaxial half-angle addition laws $R_z(\alpha)R_z(\gamma) = R_z(\alpha + \gamma)$ and $R_y(\alpha)R_y(\beta) = R_y(\alpha + \beta)$, inverse cancellation $R_z(\alpha)R_z(-\alpha) = 1$, and the universal three-factor ZYZ synthesis:
+   They obey the coaxial half-angle addition laws $R_z(\alpha)R_z(\gamma) = R_z(\alpha + \gamma)$ and $R_y(\alpha)R_y(\beta) = R_y(\alpha + \beta)$, inverse cancellation $R_z(\alpha)R_z(-\alpha) = 1$, and the universal three-factor ZYZ synthesis (for an arbitrary $\mathrm{U}(2)$ gate, up to a global phase):
 
    $$
    R_{\mathrm{ZYZ}}(\alpha, \beta, \gamma) = R_z(\alpha)\,R_y(\beta)\,R_z(\gamma), \qquad R_{\mathrm{ZYZ}}(\alpha, 0, \gamma) = R_z(\alpha + \gamma).
@@ -148,7 +148,7 @@ $$
 ## B.5 Relativistic Spacetime Algebras $\mathcal{Cl}_{1,1}(\mathbb{R})$ and $\mathcal{Cl}_{1,3}(\mathbb{R})$ {#sec-appendix-b-spacetime-algebra}
 
 ::: {.remark #rem-appendix-b-sta-lorentz-literature title="Spacetime Algebra $\mathcal{Cl}_{1,3}(\mathbb{R})$, Hyperbolic Boost Rotors, and Lorentz Lie Brackets (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book (the discrete hyperbolic norm-difference conservation law is formally verified by `bogoliubov_norm_conservation` cited below, and null-cone quadratic-form rigidity by `eq_smul_minkowski_of_null` in Section B.6).** In Part V (Chapters 17–18), replacing the Euclidean signature with the Minkowski metric $\eta_{\mu\nu} = \operatorname{diag}(+1, -1, -1, -1)$ yields the four-dimensional Spacetime Algebra (STA) $\mathcal{Cl}_{1,3}(\mathbb{R})$ (whose 2D lightcone slice is $\mathcal{Cl}_{1,1}(\mathbb{R})$):
+**Literature result, not formalized in this book (the hyperbolic cosine–sine norm-difference conservation law is formally verified by `bogoliubov_norm_conservation` cited below, and null-cone quadratic-form rigidity by `eq_smul_minkowski_of_null` in Section B.6).** In Part V (Chapters 17–18), replacing the Euclidean signature with the Minkowski metric $\eta_{\mu\nu} = \operatorname{diag}(+1, -1, -1, -1)$ yields the four-dimensional Spacetime Algebra (STA) $\mathcal{Cl}_{1,3}(\mathbb{R})$ (whose 2D lightcone slice is $\mathcal{Cl}_{1,1}(\mathbb{R})$):
 
 1. **Dirac Generators $\gamma_\mu$ and Metric Anticommutation**:
 
@@ -191,7 +191,7 @@ $$
 ## B.6 Master Identity Catalog and Formal Epistemic Tags {#sec-appendix-b-identity-catalog}
 
 ::: {.remark #rem-appendix-b-epistemic-boundary title="Epistemic Boundary Declaration for Appendix B"}
-Literature result, not formalized in this book: In this cheat sheet, every identity tagged `LEAN ✓` with a clickable GID link (rows B.1–B.10 below) corresponds directly to a frozen theorem verified by the Lean 4 kernel at `trureturing@dev` commit [{commit}](trureturing:) (see [Appendix C](appendix-c.md) for verification boundaries). General graded Clifford algebra axioms for $\mathcal{Cl}_{p,q}(\mathbb{R})$, the explicit $8\times 8$ 3-bit blade multiplication table enumeration, and the continuous four-dimensional spacetime algebra $\mathcal{Cl}_{1,3}(\mathbb{R})$ Lie brackets (row B.11 below, tagged `definition` or `Literature result`) are presented as standard algebraic reference tools to support the reader's calculations:
+This cheat sheet mixes two levels of evidence. Every identity tagged `LEAN ✓` with a clickable GID link (rows B.1–B.10 below) corresponds directly to a frozen theorem verified by the Lean 4 kernel at `trureturing@dev` commit [{commit}](trureturing:) (see [Appendix C](appendix-c.md) for verification boundaries). General graded Clifford algebra axioms for $\mathcal{Cl}_{p,q}(\mathbb{R})$, the explicit $8\times 8$ 3-bit blade multiplication table enumeration, and the continuous four-dimensional spacetime algebra $\mathcal{Cl}_{1,3}(\mathbb{R})$ Lie brackets (row B.11 below, tagged `definition` or `Literature result`) are presented as standard algebraic reference tools to support the reader's calculations:
 
 | # | Algebra | Identity / Law Name | Exact Formula | Epistemic Tag & `trureturing@dev` Anchor |
 | :---: | :---: | :--- | :--- | :--- |
@@ -203,7 +203,7 @@ Literature result, not formalized in this book: In this cheat sheet, every ident
 | B.6 | $\mathcal{Cl}_{3,0}$ / Bloch | Real 3D Bloch decomposition & norm bound of qubit states | $\rho = \frac{1}{2}(I + r_x X + r_y Y + r_z Z),\; \|\mathbf{r}\| \le \operatorname{Tr}(\rho)$ | `LEAN ✓` ([`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian), [`norm_bloch_le_trace_of_posSemidef`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef)) |
 | B.7 | $\mathbb{F}_2^{2n}$ / Pauli | Multi-qubit Pauli word multiplication & commutation rank | $P(a)P(b) = \text{phase}(a,b)\,P(a \oplus b)$ | `LEAN ✓` ([`pauli_word_mul`](lean:D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul)) |
 | B.8 | $\mathrm{SO}(3)$ | Finite words from the full circles of two non-collinear axes | For $a,b\in\mathbb{R}^3$ with $\langle a,b\rangle^2<\|a\|^2\|b\|^2$, every $R\in\mathrm{SO}(3)$ is the product of a finite word of rotations about $a$ or $b$ | `LEAN ✓` ([`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word)) |
-| B.9 | $\mathcal{Cl}_{1,1}$ / $\mathcal{Cl}_{1,3}$ | Bogoliubov hyperbolic rotor norm conservation | $\cosh^2 r - \sinh^2 r = 1$ (whereby the boost rotor preserves $|\alpha'|^2 - |\beta'|^2 = |\alpha|^2 - |\beta|^2$) | `LEAN ✓` ([`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)) |
+| B.9 | $\mathcal{Cl}_{1,1}$ / $\mathcal{Cl}_{1,3}$ | Bogoliubov hyperbolic rotor norm conservation | $\cosh^2 r - \sinh^2 r = 1$ (whereby the boost rotor preserves $|\alpha'|^2 - |\beta'|^2 = |\alpha|^2 - |\beta|^2$; this consequence is not formalized) | `LEAN ✓` ([`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)) |
 | B.10 | $\mathcal{Cl}_{1,3}$ | Minkowski null-cone rigidity of real quadratic forms on $\mathbb R\times\mathbb R^d$ | $\begin{aligned}&(\forall v,\\&\eta(v,v)=0\\&\implies Q(v)=0)\\&\implies\exists c\in\mathbb{R},\\&Q=c\,\eta\end{aligned}$ | `LEAN ✓` ([`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)) |
 | B.11 | $\mathcal{Cl}_{3,0}$ / $\mathcal{Cl}_{1,3}$ | 8D blade Cayley table, Hodge duality & Lorentz Lie brackets | $E_a E_b = (-1)^{\operatorname{inv}(a,b)}E_{a\oplus b},\; [K_i, K_j] = -\varepsilon_{ijk}J_k$ | `definition` / `Literature result` (standard Clifford algebra textbook identities) |
 
