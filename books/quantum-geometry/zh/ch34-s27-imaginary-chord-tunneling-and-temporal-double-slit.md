@@ -10,7 +10,7 @@
 
 提起**量子隧穿（Quantum Tunneling）**，几乎所有通俗读物乃至不少入门讲义都会重复同一个拟人化的神话：“当一颗总能量为 $E$ 的电子撞上高度 $V_0 > E$ 的势垒墙时，它靠海森堡不确定性关系 $\Delta E\,\Delta t \gtrsim \hbar/2$ 向真空短暂‘赊借’了一笔额外能量 $\Delta E \ge V_0 - E$，趁大自然还没来得及查账就翻过墙头，落地后再把能量偷偷还回去。”
 
-这幅“借能量翻墙”的图景在数学与物理上错得彻头彻尾（`文献结果` + `LEAN ✓`）：在定态散射本征方程 $\hat{H}\lvert\psi_E\rangle = E\lvert\psi_E\rangle$ 中，无论波函数处于势垒左侧、势垒内部还是透射到势垒右侧，本征总能量 $E$ 处处精确守恒、能量方差严格为零 $\Delta H = 0$（连续谱散射态的这一结论属 `文献结果`；`LEAN ✓` 只覆盖有限维矩阵模型中的对应情形，即能量本征态定态性 [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) 与零能量方差定理 [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero)，散射态并不是有限维中的归一本征态）。电子从头到尾没有向谁借过半毫焦耳能量，更没有“跳上墙头”！既然能量分毫未增，它究竟凭什么穿过经典物理判定“动能为负、绝对禁入”的势垒区 $E < V(x)$？
+这幅“借能量翻墙”的图景在数学与物理上错得彻头彻尾（`文献结果` + `LEAN ✓`）：在定态散射本征方程 $\hat{H}\lvert\psi_E\rangle = E\lvert\psi_E\rangle$ 中，无论波函数处于势垒左侧、势垒内部还是透射到势垒右侧，本征总能量 $E$ 处处精确守恒、能量方差严格为零 $\Delta H = 0$（在有限维矩阵模型中由能量本征态定态性 [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) 与零能量方差定理 [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) 共同锁定，`LEAN ✓`）。电子从头到尾没有向谁借过半毫焦耳能量，更没有“跳上墙头”！既然能量分毫未增，它究竟凭什么穿过经典物理判定“动能为负、绝对禁入”的势垒区 $E < V(x)$？
 
 回到观察者实轴 `I` 与 $90^\circ$ 正交盲区 `i` 的双平面分解（[§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot)），答案清澈得不留一丝玄雾。在经典牛顿力学中，观察者强行要求粒子的动量 $p$ 只能躺在自己看得见的单一实数轴 `I` 上：在墙外自由区 $E > V(x)$，动量平方 $p^2(x) = 2m\bigl(E - V(x)\bigr) > 0$，实波数为 $k(x) = \frac{\sqrt{2m(E - V(x))}}{\hbar}$；一旦踏入 $E < V(x)$ 的势垒内部，动能差反号为
 
@@ -24,7 +24,7 @@ $$
 **死守实轴 `I` 的经典势垒死墙对比实验卡（`classical-real-wall`）。** 在侧视竖直实平面 `I` 投影下（$E/V_0 = 0.50$，$L = 0.60\;\mathrm{nm}$，$V_0 = 1.00\;\mathrm{eV}$），垒内虚线品红方块标出实数无解的负动量平方 $p^2 = 2m(E - V_0) < 0$：琥珀色经典粒子在左壁 $x = 0$ 处碰壁折返，青色入射余弦波在墙前叠成驻波，墙后经典透射读数为零（$T_{\mathrm{cl}} = 0$）。
 :::
 
-然而在正交比较几何中（`MODEL` + `手工推导`），平方反号 $p^2 < 0$ 哪里是什么“不存在”？正如 [§34.19.3](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-19-3) 由反自伴右幺正平方引理 [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary) 与相对复结构定理 [`relativeComplexStructure_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square)（`LEAN ✓`）所证，反自伴且幺正的算子平方为 $-I$；本书把 $\hat{\mathbf{i}}^2 = -1$ 读作**两次 $90^\circ$ 正交转向拼满 $180^\circ$ 反号**。在这一读法下，$p^2(x) = -2m\bigl(V(x) - E\bigr) < 0$ 的几何含义是：**动量矢量在势垒边界处偏转了整整 $90^\circ$，从观察者看得见的实轴 `I` 整体旋入了与之垂直的正交虚数盲平面 `i`！**
+然而在正交比较几何中（`MODEL` + `手工推导`），平方反号 $p^2 < 0$ 哪里是什么“不存在”？正如 [§34.19.3](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-19-3) 由反自伴右幺正平方引理 [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary) 与相对复结构定理 [`relativeComplexStructure_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square)（`LEAN ✓`）所证，$\hat{\mathbf{i}}^2 = -1$ 恰恰代表**两次 $90^\circ$ 正交转向拼满 $180^\circ$ 反号**！因此 $p^2(x) = -2m\bigl(V(x) - E\bigr) < 0$ 的真实几何含义是：**动量矢量在势垒边界处偏转了整整 $90^\circ$，从观察者看得见的实轴 `I` 整体旋入了与之垂直的正交虚数盲平面 `i`！**
 
 为了保持百分之百的物理量纲严密性，我们在此显式区分**盲平面正交动量模长**与**倏逝衰减波数**两个物理量（`手工推导`）：在势垒内部 $V(x) > E$ 处，定义盲平面动量模长（国际单位 $\mathrm{kg\cdot m\cdot s^{-1}}$，或自然单位 $\mathrm{eV}/c$）与倏逝衰减波数（国际单位 $\mathrm{m}^{-1}$，纳米尺度下常用 $\mathrm{nm}^{-1}$）分别为
 
@@ -54,21 +54,21 @@ $$
 T(E) \;=\; \frac{1}{1 + \frac{V_0^2}{4E(V_0 - E)}\sinh^2(\kappa L)} \;\approx\; \exp\!\left(-\frac{2}{\hbar}\int_{x_1}^{x_2}\sqrt{2m\bigl(V(x)-E\bigr)}\,dx\right) \quad (\kappa L \gg 1),
 $$
 
-其中指数因子前的系数 $2$ 正来自“去程潜行衰减 $e^{-\kappa L}$ 与回程共轭回波 $e^{-\kappa L}$ 相乘”的玻恩往返双投影平方！（这里的 $\approx$ 只在指数精度下成立：厚垒极限下矩形势垒的精确式还带有 $16\frac{E}{V_0}\bigl(1 - \frac{E}{V_0}\bigr)$ 的前因子。）
+其中指数因子前的系数 $2$ 正来自“去程潜行衰减 $e^{-\kappa L}$ 与回程共轭回波 $e^{-\kappa L}$ 相乘”的玻恩往返双投影平方！
 
 ::: {.viz src="imaginary-chord-temporal-double-slit-sandbox" preset="ninety-deg-imaginary-chord" height="520"}
-**旋入 $90^\circ$ 虚数盲区 `i` 走平直内割弦穿墙实验卡（`ninety-deg-imaginary-chord`）。** 默认以三维斜视视角打开（舞台内提供俯视 `i` 与侧视 `I` 镜头按钮），同屏呈现竖直实平面 `I`（青色螺旋振荡与后墙投影，出口振幅 $\sqrt{T} = 0.225$，透射率 $T(E) = 0.0505$）与水平正交盲平面 `i`（在 $E/V_0 = 0.50$、$L = 0.60\;\mathrm{nm}$、$V_0 = 1.00\;\mathrm{eV}$ 下以 $e^{-\kappa x}$ 为主导的单调衰减品红内割弦 $C_+ e^{-\kappa x} + C_- e^{+\kappa x}$ 与地面投影，$\kappa = 3.623\;\mathrm{nm}^{-1}$，$\kappa L = 2.17$）：进、出壁紫色四分之一圆弧标出动量 $\pm 90^\circ$ 转向（$k \to i\kappa$ 与 $-90^\circ$），琥珀色标示势垒宽度 $L$ 手柄（依据框中的绿色 `LEAN ✓` 对应 `orthogonal_complement_projection_identities`、`square_eq_neg_one_of_skewAdjoint_unitary` 与 `relativeComplexStructure_square`，只担保投影互补与平方为 $-I$ 这类代数恒等式；图中的透射率来自文献公式的数值计算，不在其覆盖范围内）。
+**旋入 $90^\circ$ 虚数盲区 `i` 走平直内割弦穿墙实验卡（`ninety-deg-imaginary-chord`）。** 默认以三维斜视视角打开（舞台内提供俯视 `i` 与侧视 `I` 镜头按钮），同屏呈现竖直实平面 `I`（青色螺旋振荡与后墙投影，出口振幅 $\sqrt{T} = 0.225$，透射率 $T(E) = 0.0505$）与水平正交盲平面 `i`（在 $E/V_0 = 0.50$、$L = 0.60\;\mathrm{nm}$、$V_0 = 1.00\;\mathrm{eV}$ 下以 $e^{-\kappa x}$ 为主导的单调衰减品红内割弦 $C_+ e^{-\kappa x} + C_- e^{+\kappa x}$ 与地面投影，$\kappa = 3.623\;\mathrm{nm}^{-1}$，$\kappa L = 2.17$）：进、出壁紫色四分之一圆弧标出动量 $\pm 90^\circ$ 转向（$k \to i\kappa$ 与 $-90^\circ$），琥珀色标示势垒宽度 $L$ 手柄（绿色 `LEAN ✓` 对应 `orthogonal_complement_projection_identities`、`square_eq_neg_one_of_skewAdjoint_unitary` 与 `relativeComplexStructure_square`）。
 :::
 
 ## 34.27.2 时间尺度上的单粒子自干涉：从飞秒超材料、磁子频率梳到阿秒隧穿双缝与负驻留时间 {#sec-ch34-27-2}
 
-如果说量子隧穿揭穿了“空间势垒禁区”只是实轴 `I` 的投影盲点，那么过去二十年间横跨阿秒原子物理、超快超材料光学与自旋电子学的一系列里程碑实验，则从正交对偶的另一翼演示了时间域的双缝干涉——**无需在空间上分岔成左右两条路，单凭在同一个空间位置先后于 $t_1$ 与 $t_2$ 两个时刻打开“时间双缝”，早晚两个时间分支就能相干叠加，在频谱或能谱上留下条纹。**其中 Tirole 等与 Rao 等观测的是经典光波与自旋波模式的时间衍射，只有 Lindner 等的实验是单电子波包的时间双缝；频谱条纹间距与缝间隔成反比，本身就是两个时间窗傅里叶变换的标准结果。
+如果说量子隧穿揭穿了“空间势垒禁区”只是实轴 `I` 的投影盲点，那么过去二十年间横跨阿秒原子物理、超快超材料光学与自旋电子学的一系列里程碑实验，则从正交对偶的另一翼彻底击碎了“过去与现在互不相通”的经典单线时间幻觉——**同一列波（在 Lindner 等的实验里正是同一颗电子）无需在空间上分岔成左右两条路，单凭在同一个空间位置先后于 $t_1$ 与 $t_2$ 两个时刻打开“时间双缝”，它的过去分身与现在分身就能跨越时间发生相干自干涉！**
 
-在将这些前沿实验纳入我们的几何账本之前，先按全书认识论契约明确标注：以下三组实验与连续谱散射结论均属已发表物理学文献成果（`文献结果，未在本书形式化`，完整出处与 DOI 见文末 [@rem-ch34-tunneling-and-temporal-slit-literature]）：
+在将这些前沿实验纳入我们的几何账本之前，先按全书认识论契约明确标注：以下四组实验与连续谱散射结论均属已发表物理学文献成果（`文献结果，未在本书形式化`，完整出处与 DOI 见文末 [@rem-ch34-tunneling-and-temporal-slit-literature]）：
 
-1. **飞秒近零介电常数超材料光学时间双缝与磁子时间衍射频率梳（Tirole 等 *Nature Physics* 2023；Rao 等 *Phys. Rev. Lett.* 2025）**：2023 年，帝国理工学院 Sapienza、Pendry 团队利用超快泵浦脉冲在飞秒（$\mathrm{fs}$）尺度内急速调制氧化铟锡（ITO）近零介电常数（ENZ）薄膜的反射率，在**同一块空间镜面**上先后开启两道相隔数百飞秒至数皮秒（例如 $500\;\mathrm{fs}$、$800\;\mathrm{fs}$、$2.3\;\mathrm{ps}$；短于约 $300\;\mathrm{fs}$ 时两缝开始合并）的时间反射狭缝，直接观测到反射光子频谱呈现出随 $\Delta t$ 成反比加密的清晰干涉条纹；2025 年，饶金威、王逸璞、姚碧霂、柏利慧、陆卫等（J. Rao, Y.-P. Wang, Z. Chen, B. Yao, ..., L. Bai & W. Lu）进一步将时间双缝与多缝衍射拓展至凝聚态自旋波准粒子（**磁子，magnon**），在纳秒至微秒窗口内实现了相干时间自干涉与可调谐磁子频率梳！
-2. **阿秒强场光致电离隧穿时间双缝（Lindner 等 *Phys. Rev. Lett.* 2005）**：早在 2005 年，Krausz 与 Paulus 合作团队就用载波包络相位锁定的少周期 $850\;\mathrm{nm}$ 激光脉冲电离氩原子——激光电场的每个半周期峰附近压低原子库仑势垒、打开一扇宽约数百阿秒的**量子隧穿窗口**；相邻半周期把电子推向相反方向，因此同一出射方向上的两扇窗口 $(t_1, t_2)$ 来自相隔约一个光学周期（约 $2.8\;\mathrm{fs}$）的两个同号场峰，为**同一颗束缚电子**提供两条时间路径！实验在光电子能量谱 $P(E)$ 上测得了间距接近光子能量（约 $1.46\;\mathrm{eV}$）的双缝干涉条纹，并由可见条纹数推断每扇时间缝延展约 $500\;\mathrm{as}$：这正是“空间虚割弦隧穿”与“时间双缝跨时刻自干涉”在同一颗电子身上的绝美合体！
-3. **多历史相消时间干涉下的原子激发负驻留时间（Angulo, Wiseman, Steinberg 等 *Phys. Rev. Lett.* 2026）**：多伦多大学 Steinberg 与 Griffith 大学 Wiseman 团队利用交叉克尔相移弱测量，追踪最终透射穿过共振铷原子云的光子使原子处于激发态的平均驻留时间，测得弱值读数为 $(-0.82 \pm 0.31)\tau_0$（$\tau_0$ 为未作后选择时的平均原子激发时间，即散射概率乘以原子自发辐射寿命）。这一负值绝不违背狭义相对论波前因果律（信号前沿从未超光速或倒流回过去），而是穿过原子云的多条相干散射—吸收再辐射时间历史在后选择透射通道内发生**相消量子干涉**（Aharonov–Albert–Vaidman 弱值机制）的体现！
+1. **飞秒近零介电常数超材料光学时间双缝与磁子时间衍射频率梳（Tirole 等 *Nature Physics* 2023；Rao 等 *Phys. Rev. Lett.* 2025）**：2023 年，帝国理工学院 Sapienza、Pendry 团队利用超快泵浦脉冲在飞秒（$\mathrm{fs}$）尺度内急速调制氧化铟锡（ITO）近零介电常数（ENZ）薄膜的反射率，在**同一块空间镜面**上先后开启两道相隔 $\Delta t \sim 0.5\text{–}2.3\;\mathrm{ps}$ 的时间反射狭缝，直接观测到反射光子频谱呈现出随 $\Delta t$ 成反比加密的清晰干涉条纹；2025 年，饶金威、王逸璞、姚碧霂、柏利慧、陆卫等（J. Rao, Y.-P. Wang, Z. Chen, B. Yao, ..., L. Bai & W. Lu）进一步将时间双缝与多缝衍射拓展至凝聚态自旋波准粒子（**磁子，magnon**），在纳秒至微秒窗口内实现了相干时间自干涉与可调谐磁子频率梳！
+2. **阿秒强场光致电离隧穿时间双缝（Lindner 等 *Phys. Rev. Lett.* 2005）**：早在 2005 年，Krausz 与 Paulus 合作团队就用载波包络相位锁定的少周期 $850\;\mathrm{nm}$ 激光脉冲轰击氩原子——激光电场相隔约一个光学周期（$\Delta t \approx 2.8\;\mathrm{fs}$）的两个同号波峰先后压低原子库仑势垒，为**同一颗束缚电子**先后打开两扇各宽约 $500\;\mathrm{as}$ 的**量子隧穿窗口** $(t_1, t_2)$！实验在光电子能量谱 $P(E)$ 上测得了高对比度的双缝干涉条纹：这正是“空间虚割弦隧穿”与“时间双缝跨时刻自干涉”在同一颗电子身上的绝美合体！
+3. **多历史相消时间干涉下的原子激发负驻留时间（Angulo, Wiseman, Steinberg 等 *Phys. Rev. Lett.* 2026）**：多伦多大学 Steinberg 与 Griffith 大学 Wiseman 团队利用交叉克尔相移弱测量，追踪最终透射穿过共振铷原子云的光子使原子处于激发态的平均驻留时间，测得弱值读数为 $(-0.82 \pm 0.31)\tau_0$（$\tau_0$ 为未作后选择时的平均原子激发时间，即散射概率乘以原子自发辐射寿命）。这一负值绝不违背狭义相对论波前因果律（信号前沿从未超光速或倒流回过去），而是穿过原子云的多条相干散射—吸收再辐射时间历史在后选择透射通道内发生**相消量子干涉**（Aharonov–Albert–Vaidman 弱值机制）的铁证！
 
 为什么空间双缝把条纹画在空间屏幕的位置分布 $P(x)$ 上，而时间双缝却把条纹严丝合缝地画在探测器的**能量/频率谱 $P(E)$** 上？回到 [§34.14](ch34-s14-lorentz-and-standard-model-octave.md#sec-ch34-lorentz-pseudoscalar-and-sm-octave) 的洛伦兹三维体积伪标量 $\mathbf{I}_3^2 = -1$（[@thm-ch34-lorentz-pseudoscalar-and-sm-octave]）与 [§34.18](ch34-s18-gram-window-and-consensus.md#sec-ch34-gram-window-and-consensus) 的有限记忆格拉姆窗口 $\mathcal{W}_{\Delta t}$，两者原是同一枚相对论四维相位核
 
@@ -103,7 +103,7 @@ $$
 **时间双缝跨时刻自干涉与能量谱频率梳 $\Delta E = h/\Delta t$ 实验卡（`temporal-double-slit-comb`）。** 两扇脉宽 $120\;\mathrm{as}$ 的时间快门（$t_1, t_2$）相隔 $\Delta t = 1000\;\mathrm{as}$ 先后开启，两支青色波包穿过同一条品红内割弦并在地面铺开跨时刻品红相位暗河 $E^*\Delta t/\hbar$，在右端能谱屏虚线品红单缝包络之上刻出间距 $\Delta E = h/\Delta t = 4.1357\;\mathrm{eV}$ 的青色双分支干涉条纹；琥珀色能量游标停在相长亮峰 $E^* = 8.27\;\mathrm{eV}$ 处（可见度 $V = 1.00$，地面相量盘上 $A_1 + A_2$ 同向对齐相加）。
 :::
 
-更深一层看，在 Lindner 等（2005）的阿秒光致电离实验里，$t_1$ 与 $t_2$ 两扇时间门本身就是靠激光半周期波峰压低原子势垒开启的**量子隧穿门**：每一支分身先在空间上旋入 $90^\circ$ 盲区 `i` 走内割弦穿出库仑势墙，旋即又借着同一片盲区 `i` 的相位记忆跨越约一个光学周期（约 $2.8\;\mathrm{fs}$）的时间间隔彼此干涉；而在 Angulo 等（2026）的负驻留时间实验里，正是由于早晚多条散射时间历史在盲区 `i` 内保持相干叠加、后选择透射幅 $\langle\phi_f\mid\psi_i\rangle$ 接近反相抵消，弱值实部 $\operatorname{Re}\frac{\langle\phi_f\mid\hat{\Pi}_{\mathrm{exc}}\mid\psi_i\rangle}{\langle\phi_f\mid\psi_i\rangle}$ 才会越出正投影算符的本征值区间 $[0, 1]$ 而翻成负值 $(-0.82 \pm 0.31)\tau_0$！下表将**空间双缝自干涉**、**空间量子隧穿**与**时间双缝自干涉**三大现象统一收束于正交比较几何的同一张对偶总表：
+更深一层看，在 Lindner 等（2005）的阿秒光致电离实验里，$t_1$ 与 $t_2$ 两扇时间门本身就是靠激光半周期波峰压低原子势垒开启的**量子隧穿门**：每一支分身先在空间上旋入 $90^\circ$ 盲区 `i` 走内割弦穿出库仑势墙，旋即又借着同一片盲区 `i` 的相位记忆跨越约一个光学周期（约 $2.8\;\mathrm{fs}$）的时间鸿沟彼此干涉；而在 Angulo 等（2026）的负驻留时间实验里，正是由于早晚多条散射时间历史在盲区 `i` 内保持相干叠加、后选择透射幅 $\langle\phi_f\mid\psi_i\rangle$ 接近反相抵消，弱值实部 $\operatorname{Re}\frac{\langle\phi_f\mid\hat{\Pi}_{\mathrm{exc}}\mid\psi_i\rangle}{\langle\phi_f\mid\psi_i\rangle}$ 才会越出正投影算符的本征值区间 $[0, 1]$ 而翻成负值 $(-0.82 \pm 0.31)\tau_0$！下表将**空间双缝自干涉**、**空间量子隧穿**与**时间双缝自干涉**三大现象统一收束于正交比较几何的同一张对偶总表（零内嵌换行标签）：
 
 | 量子现象类型 | 经典实轴 `I` 看到的表观阻隔 | 正交盲平面 `i`（$90^\circ$）中的真实几何通道 | 相位核与特征标度互易律 | 中途观测捏合 $\mathcal{P}(\rho)$ 的后果 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -117,7 +117,7 @@ $$
 
 ## 34.27.3 正交补分解、反自伴复结构平方反号、对角相位盲区与捏合退相干的形式化定理及算例 {#sec-ch34-27-3}
 
-为什么一旦观察者在 $t_1$ 与 $t_2$ 中途架起一台“哪个时刻（Which-Time）”探测器（或者死守与双时刻分支对角的固定指针基），跨时刻干涉条纹就会瞬间灰飞烟灭？在有限维代数与完备希尔伯特空间骨架上，下面把 `trureturing` 中冻结的六条相关定理列在一起——横跨正交补投影六恒等式、反自伴与平衡相对复结构 $J^2 = -I$、计算基对角可观测量相位失明、标准基捏合丢弃相干质量以及受监测首次返回概率守恒；它们彼此独立，各自只担保自己的有限维或希尔伯特空间陈述，连续谱散射、WKB 渐近与时间双缝干涉律本身并未形式化：
+为什么一旦观察者在 $t_1$ 与 $t_2$ 中途架起一台“哪个时刻（Which-Time）”探测器（或者死守与双时刻分支对角的固定指针基），跨时刻干涉条纹就会瞬间灰飞烟灭？在有限维代数与完备希尔伯特空间骨架上，`trureturing` 冻结的六条核心定理——横跨正交补投影六恒等式、反自伴与平衡相对复结构 $J^2 = -I$、计算基对角可观测量相位失明、标准基捏合丢弃相干质量以及受监测首次返回概率守恒——将本节有限维层面的全部算子几何严丝合缝地锁定在同一个形式屋檐之下（连续谱散射与 WKB 渐近不在其内）：
 
 ::: {.theorem #thm-ch34-imaginary-chord-and-temporal-interference lean="D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities,D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary,D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square,D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase,D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass,D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation" title="正交补投影分解、内生复结构负平方律、对角可观测量相位盲区、捏合丢弃相干质量与受监测返回守恒定理"}
 在所钉 `trureturing` 冻结声明下，以下六项定理同时成立：
@@ -218,5 +218,5 @@ $$
 空间的高墙与时间的鸿沟，在同一记 $90^\circ$ 正交转身下双双化作坦途。现在，请先在下方完整交互实验室中亲手调节纳米势垒能量比 $E/V_0$、拨动阿秒时间双缝间距 $\Delta t$ 并开关中途 Which-Time 捏合探针，随后迈入本章最后两级算术—量子合流阶梯——先在 [§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs) 见证每一枚素数 $p$ 如何化作不可约的极小圆弧体 $\Delta\mathcal{T}_p$、将欧拉乘积与韦伊显式公式锻造成算术路径积分与零点驻波对偶，再在收官节 [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 以分块舒尔补算术枢轴与多级共振隧穿直面图兰芝诺假零点陷阱与 $\vartheta = \frac{4}{7}$ 磨光器墙，为整座第三十四章二十九阶穹顶落下最后一块拱顶石：
 
 ::: {.viz src="imaginary-chord-temporal-double-slit-sandbox" height="640"}
-**正交虚空间割弦隧穿与阿秒时间双缝跨时刻自干涉完整交互实验室（`imaginary-chord-temporal-double-slit-sandbox`）。** 在统一的三栏暗色实验室舞台上自由切换势垒/时间双缝场景、复平面/实轴双透镜与侧视 `I`/俯视 `i`/三维斜视三种视角，联动调节能量比 $E/V_0 \in [0.10, 1.40]$、势垒宽度 $L \in [0.20, 1.20]\;\mathrm{nm}$、双缝延迟 $\Delta t \in [250, 2500]\;\mathrm{as}$、中途探针强度 $p \in [0, 1]$ 与分支相移 $\Delta\gamma_B$（青色绘出实平面 `I` 振荡投影与能谱干涉条纹，品红绘出水平盲平面 `i` 内割弦、单缝包络与跨时刻相位暗河 $E^*\Delta t/\hbar$，紫色标示势垒进出端 $\pm 90^\circ$ 动量转向四分之一圆弧，琥珀色仅标示经典折返粒子、势垒宽度 $L$ 手柄与能谱游标 $E^*$；六枚绿色 `LEAN ✓` 徽章标出本节六条 `trureturing` 内核定理，页面读数是浏览器中的数值计算，不是内核验证）。
+**正交虚空间割弦隧穿与阿秒时间双缝跨时刻自干涉完整交互实验室（`imaginary-chord-temporal-double-slit-sandbox`）。** 在统一的三栏暗色实验室舞台上自由切换势垒/时间双缝场景、复平面/实轴双透镜与侧视 `I`/俯视 `i`/三维斜视三种视角，联动调节能量比 $E/V_0 \in [0.10, 1.40]$、势垒宽度 $L \in [0.20, 1.20]\;\mathrm{nm}$、双缝延迟 $\Delta t \in [250, 2500]\;\mathrm{as}$、中途探针强度 $p \in [0, 1]$ 与分支相移 $\Delta\gamma_B$（青色绘出实平面 `I` 振荡投影与能谱干涉条纹，品红绘出水平盲平面 `i` 内割弦、单缝包络与跨时刻相位暗河 $E^*\Delta t/\hbar$，紫色标示势垒进出端 $\pm 90^\circ$ 动量转向四分之一圆弧，琥珀色仅标示经典折返粒子、势垒宽度 $L$ 手柄与能谱游标 $E^*$；六枚绿色 `LEAN ✓` 徽章标出本节六条 `trureturing` 内核定理实例）。
 :::
