@@ -2381,6 +2381,22 @@
       "line": 97,
       "signature": "theorem dense_circle_sequence {ι : Type*} [Fintype ι] (a : ι → ℝ) (hind : ∀ (k : ι → ℤ) (m : ℤ), (∑ i, (k i : ℝ)*a i) = m → (∀ i, k i = 0)) (z : ι → Circle) : ∃ m : ℕ → ℕ, Tendsto (fun n i => Circle.exp (2*Real.pi*a i)^(m n)) atTop (𝓝 z)"
     },
+    "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.flat_exact_iff": {
+      "module": "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy",
+      "name": "D5.S3.Fourier.CharacterSelection.PeriodicGridHolonomy.flat_exact_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f5c02a5aeed735181dccbe971a63911f541b0007b8c21203d1377fa715097bb6",
+      "line": 384,
+      "signature": "theorem flat_exact_iff {M N : ℕ} [NeZero M] [NeZero N] (y : EdgeLabel M N) (hy : Flat y) : (∃ x : Fin M → Fin N → ZMod 2, gradient x = y) ↔ rowHolonomy y 0 = 0 ∧ columnHolonomy y 0 = 0"
+    },
+    "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.horizontal_seam_counterexample": {
+      "module": "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy",
+      "name": "D5.S3.Fourier.CharacterSelection.PeriodicGridHolonomy.horizontal_seam_counterexample",
+      "kind": "theorem",
+      "statement_id": "sha256:f5c02a5aeed735181dccbe971a63911f541b0007b8c21203d1377fa715097bb6",
+      "line": 413,
+      "signature": "theorem horizontal_seam_counterexample (M N : ℕ) [NeZero M] [NeZero N] (_hM : 3 ≤ M) (_hN : 3 ≤ N) : Flat (seam (M"
+    },
     "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness": {
       "module": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair",
       "name": "D5.S3.Fourier.CharacterSelection.SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness",
