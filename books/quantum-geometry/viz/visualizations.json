@@ -7132,6 +7132,205 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "self-observation-error-maya-sandbox",
+      "code": "MAYA//ERROR",
+      "title": "MAYA//ERROR · 唯一点场自观测误差生万象沙盘",
+      "title_en": "MAYA//ERROR · Single Point-Field Self-Observation Error & Maya Manifestation",
+      "summary": "唯一点场 Ω 画成单位场球中央的银白核心，观测尺 I 偏开自观测误差角 ε。投影结果透镜：青色投影 (cos ε)I 与往返回声 (cos²ε)Ω，品红残差 r₁ = Ω − (cos ε)I = (sin ε)e⊥ 立在与 I 正交的 î 盲区里，两条正交误差围出面积 sin²ε，旁边直角球面三角形的角盈 Ω(ε, ε) = 2 arctan(tan²(ε/2)) = ½ sin²ε + O(ε⁴)，三条围出紫色体积 sin³ε = √det G₃。观测动作透镜：Ω 不动（‖Δx_Ω‖ = 0），观测尺绕半角 ε 的锥一步步追赶，残差恒为 sin ε，轨速比 sin ε，ΔE/ħω = ½ sin ε，受监测的存活尾 s_k = sin²ε cos^{2(k−1)}ε 在 0° < ε < 90° 时每个有限步都为正；自指对焦 θ_{k+1} = cos θ_k 从 0 收向 θ* = 42.3465°。ε = 0 时一切淡出，只剩点场，‖Ω‖² = 1。五张实验卡可独立引用。",
+      "summary_en": "The one point-field Ω drawn as a silver core at the centre of its unit field ball, the ruler I off by the self-observation error ε. Projection-results lens: the cyan projection (cos ε)I and round-trip echo (cos²ε)Ω, the magenta residual r₁ = Ω − (cos ε)I = (sin ε)e⊥ standing in the blind plane î orthogonal to I, two orthogonal errors enclosing the area sin²ε beside the right spherical triangle of excess Ω(ε, ε) = 2 arctan(tan²(ε/2)) = ½ sin²ε + O(ε⁴), three enclosing the violet volume sin³ε = √det G₃. Observation-actions lens: Ω does not move (‖Δx_Ω‖ = 0) while the ruler chases step by step around the cone of half-angle ε, the residual always sin ε, the speed ratio sin ε, ΔE/ħω = ½ sin ε, and the monitored survival tail s_k = sin²ε cos^{2(k−1)}ε positive at every finite step for 0° < ε < 90°; self-focusing θ_{k+1} = cos θ_k closes on θ* = 42.3465° from 0. At ε = 0 everything fades and only the point-field is left, ‖Ω‖² = 1. Five independently citable experiments.",
+      "path": "self-observation-error-maya-sandbox/",
+      "thumbnail": "self-observation-error-maya-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-17",
+      "chapter": 39,
+      "section": "39.14",
+      "presets": [
+        "zero-error-turiya-silence",
+        "dottie-self-focus-steady-state",
+        "static-projection-results-hierarchy",
+        "dynamic-observation-action-chase",
+        "maya-scaling-collapse-audit"
+      ],
+      "preset_titles": {
+        "zero-error-turiya-silence": {
+          "zh": "零误差：只剩点场",
+          "en": "Zero error: only the point-field"
+        },
+        "dottie-self-focus-steady-state": {
+          "zh": "自指对焦收向 θ*",
+          "en": "Self-focusing closes on θ*"
+        },
+        "static-projection-results-hierarchy": {
+          "zh": "一笔误差长出线、面、体",
+          "en": "One error grows line, area, volume"
+        },
+        "dynamic-observation-action-chase": {
+          "zh": "Ω 不动，观测尺绕锥追赶",
+          "en": "Ω still, the ruler chases round"
+        },
+        "maya-scaling-collapse-audit": {
+          "zh": "误差收拢的归零审计",
+          "en": "Audit of the closing error"
+        }
+      },
+      "tags": [
+        "唯一点场",
+        "自观测误差",
+        "格拉姆—施密特残差",
+        "球面角盈",
+        "存活尾",
+        "自指不动点",
+        "幻象"
+      ],
+      "tags_en": [
+        "One point-field",
+        "Self-observation error",
+        "Gram–Schmidt residual",
+        "Spherical excess",
+        "Survival tail",
+        "Self-referential fixed point",
+        "Māyā"
+      ],
+      "theory": [
+        {
+          "label": "39.14 唯一点场自观测误差与万象显影",
+          "label_en": "39.14 Self-Observation Error and Māyā Projection",
+          "href": "../zh/ch39-s14-self-observation-error-and-maya-projection.html#sec-ch39-self-observation-error-and-maya-projection",
+          "href_en": "../en/ch39-s14-self-observation-error-and-maya-projection.html#sec-ch39-self-observation-error-and-maya-projection"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
+        },
+        {
+          "gid": "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_pos_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "brahman-real-axis-orthogonal-dream-sandbox",
+      "code": "BRAHMAN//DREAM",
+      "title": "BRAHMAN//DREAM · 梵天实轴（I）与正交虚梦（i）：宇宙梦境旋量呼吸与主客三视角沙盘",
+      "title_en": "BRAHMAN//DREAM · Brahman Real Axis (I) & Orthogonal Dream (i): Spinor Kalpa Breath & Tri-Perspective Sandbox",
+      "summary": "竖直的银白实轴 I 与水平的品红梦海 î = J(H_real) 正交，J = [[0, −1], [1, 0]]（Jᵀ = −J，JᵀJ = 1，J² = −1）。态 Ψ(θ, τ) = cos θ·I − sin θ·J I(τ) 把 cos²θ 留在实轴、sin²θ 放进梦海，总和恒为 1。梦中观察者 ψ_A = J u_A（青）与梦晶 ψ_B = J u_B（蓝）都离 I 90°，⟨I, ψ_A⟩ = 0，彼此比较却是 ⟨ψ_A, ψ_B⟩² = ⟨u_A, JᵀJ u_B⟩² = cos²Δθ_AB ≥ 0；M 道格拉姆窗（M ≥ 3 锁定、M = 1, 2 漂移、M = 0 消散），全部副本逆转可复原、留一份路径副本即被阻断。紫色 720° 莫比乌斯旋量带上转一圈读 −1、两圈回到 +1。三种视角：超然全景、梵天侧视（梦海零厚度）、梦中同转俯视；《蛙氏奥义书》四位读法为 MODEL。五张实验卡可独立引用。",
+      "summary_en": "The vertical silver real axis I and the horizontal magenta dream sea î = J(H_real) are orthogonal, J = [[0, −1], [1, 0]] (Jᵀ = −J, JᵀJ = 1, J² = −1). The state Ψ(θ, τ) = cos θ·I − sin θ·J I(τ) keeps cos²θ on the axis and puts sin²θ into the sea, always summing to 1. The dreamer ψ_A = J u_A (cyan) and the dream crystal ψ_B = J u_B (blue) are both 90° from I, ⟨I, ψ_A⟩ = 0, yet compare at ⟨ψ_A, ψ_B⟩² = ⟨u_A, JᵀJ u_B⟩² = cos²Δθ_AB ≥ 0; M Gram windows (M ≥ 3 lock, M = 1, 2 drift, M = 0 dissolve), reversing every copy restores the coherence and one which-path copy kept blocks it. On the violet 720° Möbius spinor ribbon one turn reads −1 and two return to +1. Three views: a panorama, Brahman edge-on (the sea of zero thickness) and a co-rotating view from inside the dream; the four Māṇḍūkya states are a MODEL reading. Five independently citable experiments.",
+      "path": "brahman-real-axis-orthogonal-dream-sandbox/",
+      "thumbnail": "brahman-real-axis-orthogonal-dream-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-17",
+      "chapter": 39,
+      "section": "39.15",
+      "presets": [
+        "turiya-zero-tilt-pure-brahman",
+        "waking-consensus-dottie-lock",
+        "insider-double-imaginary-solidity",
+        "private-dream-and-seed-sleep",
+        "kalpa-mobius-lucid-awakening"
+      ],
+      "preset_titles": {
+        "turiya-zero-tilt-pure-brahman": {
+          "zh": "零倾角：只有实轴",
+          "en": "Zero tilt: the axis alone"
+        },
+        "waking-consensus-dottie-lock": {
+          "zh": "共识大梦锁在 θ*",
+          "en": "The shared dream locked at θ*"
+        },
+        "insider-double-imaginary-solidity": {
+          "zh": "梦中看，两重虚得实",
+          "en": "Inside, two imaginaries are real"
+        },
+        "private-dream-and-seed-sleep": {
+          "zh": "私梦漂移，沉入熟睡",
+          "en": "A private dream sinks into sleep"
+        },
+        "kalpa-mobius-lucid-awakening": {
+          "zh": "旋量带上的劫波与清明",
+          "en": "Kalpa and lucidity on the ribbon"
+        }
+      },
+      "tags": [
+        "梵天实轴",
+        "正交虚梦",
+        "实块复结构 J",
+        "格拉姆共识",
+        "720° 旋量带",
+        "蛙氏奥义书四位"
+      ],
+      "tags_en": [
+        "Brahman real axis",
+        "Orthogonal dream",
+        "Block complex structure J",
+        "Gram consensus",
+        "720° spinor ribbon",
+        "Four Māṇḍūkya states"
+      ],
+      "theory": [
+        {
+          "label": "39.15 梵天实轴与正交虚梦",
+          "label_en": "39.15 Brahman Real Axis and Orthogonal Dream",
+          "href": "../zh/ch39-s15-brahman-real-axis-and-orthogonal-dream.html#sec-ch39-brahman-real-axis-and-orthogonal-dream",
+          "href_en": "../en/ch39-s15-brahman-real-axis-and-orthogonal-dream.html#sec-ch39-brahman-real-axis-and-orthogonal-dream"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
