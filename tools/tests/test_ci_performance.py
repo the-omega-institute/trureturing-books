@@ -90,6 +90,18 @@ class TrustedCacheTest(unittest.TestCase):
         self.run["created_at"] = "2026-11-16T03:00:00Z"
         self.assertEqual(trusted_cache.find("owner/books", "main", api), (17, 42))
 
+    def test_late_finishing_pages_and_reruns_supply_the_freshest_store(self):
+        self.run.update(created_at='2026-11-16T01:00:00Z', updated_at='2026-11-16T03:00:00Z')
+        self.ci_runs = [dict(self.run, id=20, workflow_id=4,
+                             created_at='2026-11-16T02:00:00Z', updated_at='2026-11-16T02:30:00Z')]
+        def api(endpoint):
+            if '/runs/20/artifacts?' in endpoint:
+                return {'artifacts': [dict(self.artifact, id=43)]}
+            return self.api(endpoint)
+        self.assertEqual(trusted_cache.find('owner/books', 'main', api), (17, 42))
+        self.ci_runs[0].update(run_attempt=2, updated_at='2026-11-16T04:00:00Z')
+        self.assertEqual(trusted_cache.find('owner/books', 'main', api), (20, 43))
+
     def test_ci_store_has_the_same_source_and_success_requirements(self):
         original = dict(self.run, id=20, workflow_id=4)
         self.run["conclusion"] = "failure"
@@ -316,6 +328,33 @@ class AffectedPlanTest(unittest.TestCase):
         self.write("template.toml", metadata.replace('"CONTRIBUTING.md"', '"assets/"'))
         other = planner.Tree(self.root, self.commit())
         self.assertTrue(planner.impact(other, old, ["template.toml"])["exports"])
+
+    def test_pages_workflow_reuses_book_evidence_but_keeps_assembly_and_explicit_readers(self):
+        import json
+        path = ".github/workflows/pages.yml"
+        self.write(path, "name: Pages\n")
+        self.write("tools/tests/test_ci_performance.py", "import unittest\n"
+                   "class PipelineTest(unittest.TestCase):\n    def test_ok(self): pass\n")
+        old = planner.Tree(self.root, self.commit())
+        self.write(path, "name: Updated Pages\n")
+        head = planner.Tree(self.root, self.commit())
+        for current, previous in ((head, old), (old, head)):
+            result = planner.impact(current, previous, [path])
+            self.assertTrue(result["site"])
+            self.assertIn("test_ci_performance.PipelineTest", result["unit_tests"])
+            for key in ("books", "suites", "films", "slides", "exports", "browser_tests"):
+                self.assertEqual(result[key], [], key)
+        deps = "books/one/viz/tests/dependencies.json"
+        data = json.loads((self.root / deps).read_text())
+        data["suites"]["a.test.mjs"].append(path)
+        self.write(deps, json.dumps(data))
+        self.write("books/one/viz/tests/a.test.mjs",
+                   f'import fs from "node:fs"; fs.readFileSync("{path}", "utf8");\n')
+        reader = planner.Tree(self.root, self.commit())
+        for current, previous in ((reader, old), (old, reader)):
+            result = planner.impact(current, previous, [path])
+            self.assertEqual(result["suites"], ["books/one/viz/tests/a.test.mjs"])
+            self.assertEqual(result["books"], ["one"])
 
     def test_template_metadata_nonversion_invalid_and_absent_inputs_keep_full_fallback(self):
         head, old = self.template_release()
@@ -1185,6 +1224,27 @@ class ExactRunnerTest(unittest.TestCase):
 
 
 class DeploymentCoverageTest(unittest.TestCase):
+    def test_deploy_after_optional_films_skip_requires_successful_assembly(self):
+        import re
+        from test_verification import gha_if
+        workflow = Path(__file__).resolve().parents[2] / ".github/workflows/pages.yml"
+        block = workflow.read_text().split("\n  deploy:\n", 1)[1].split("\n  coverage:\n", 1)[0]
+        condition = re.search(r"^    if: (.+)$", block, re.M).group(1).strip('"')
+        for films in ("success", "skipped"):
+            for build in ("success", "failure", "cancelled", "skipped"):
+                for enabled, site, cancelled in (("true", "true", False), ("false", "true", False),
+                                                  ("true", "false", False), ("true", "true", True)):
+                    # GitHub implicitly requires successful ancestors unless the condition
+                    # contains a status function, even if the direct build need succeeded.
+                    implicit_success = (films == "success" and build == "success")
+                    explicit_status = bool(re.search(r"\b(?:always|success|failure|cancelled)\(", condition))
+                    allowed = (explicit_status or implicit_success) and gha_if(
+                        condition, event="workflow_run", ref="refs/heads/main", cancelled=cancelled,
+                        context={"needs.build.result": build, "needs.plan.outputs.site": site,
+                                 "needs.probe.outputs.enabled": enabled})
+                    with self.subTest(films=films, build=build, enabled=enabled, site=site, cancelled=cancelled):
+                        self.assertEqual(allowed, build == "success" and enabled == site == "true" and not cancelled)
+
     def test_only_active_success_is_valid_and_missing_deployment_forces_fallback(self):
         def get(endpoint):
             if "/statuses?" in endpoint:
