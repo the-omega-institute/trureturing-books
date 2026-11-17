@@ -653,7 +653,7 @@ def s3_table():
     return mul, inv
 
 
-def count_flat_gains_mod_gauge(nv, edges):
+def count_tree_gauged_flat_gains(nv, edges):
     """树边规范固定为单位元后，满足三角相容的 S3 值增益的个数。"""
     mul, inv = s3_table()
     adj = {frozenset(e) for e in edges}
@@ -714,10 +714,10 @@ def check_r18():
     )
     # 计数等于 |Hom(pi_1, S3)|：单连通（四轮、八面体，均非弦图）时为 1，这是必要而非充分条件；
     # pi_1 = Z（四圈、三角剖分圆环）时为 6
-    assert count_flat_gains_mod_gauge(5, wheel) == 1
-    assert count_flat_gains_mod_gauge(6, octa) == 1
-    assert count_flat_gains_mod_gauge(4, c4) == 6
-    assert count_flat_gains_mod_gauge(8, annulus) == 6
+    assert count_tree_gauged_flat_gains(5, wheel) == 1
+    assert count_tree_gauged_flat_gains(6, octa) == 1
+    assert count_tree_gauged_flat_gains(4, c4) == 6
+    assert count_tree_gauged_flat_gains(8, annulus) == 6
     # 第 3 款：四轮图上轮辋和乐的偏差不超过 4 个三角形偏差之和
     worst = 0.0
     for scale in (0.01, 0.1, 0.5):
@@ -830,6 +830,31 @@ def check_r20():
     assert orbit_sup(-np.eye(2, dtype=complex)) < 1.0 + 1e-9
     assert abs(orbit_sup(par) - 400) < 1e-6
     assert orbit_sup(hyp) > 1e8 and orbit_sup(lox) > 1e3
+    # s = -1 的抛物元：u^n = (-1)^n (1 - n A)
+    neg_par = -par
+    a_par = (neg_par - adj2(neg_par)) / 2
+    for n in range(7):
+        assert np.allclose(np.linalg.matrix_power(neg_par, n), (-1) ** n * (np.eye(2) - n * a_par))
+    # 逐个比较有界而读数表非半正定：M_2(R) 中三点，CMP(x, y) = adj(x) y
+    lam = 2.0
+    j0 = np.array([[0.0, -1.0], [1.0, 0.0]])
+    j1 = np.array([[0.0, -lam], [1.0 / lam, 0.0]])
+    pts = [np.eye(2), np.cos(np.pi / 4) * np.eye(2) + np.sin(np.pi / 4) * j0,
+           np.cos(np.pi / 4) * np.eye(2) - np.sin(np.pi / 4) * j1]
+    cmp_ = [[adj2(x) @ y for y in pts] for x in pts]
+    gram = np.zeros((3, 3))
+    for i in range(3):
+        for k in range(3):
+            c = cmp_[i][k]
+            assert np.allclose(adj2(c), cmp_[k][i]) and np.allclose(c @ adj2(c), np.eye(2))
+            assert np.allclose((c + adj2(c)) / 2, np.trace(c) / 2 * np.eye(2))
+            gram[i, k] = np.trace(c) / 2
+            for m in range(3):
+                assert np.allclose(cmp_[i][k] @ cmp_[k][m], cmp_[i][m])
+            assert orbit_sup(c.astype(complex), steps=2000) < 3.0
+    assert np.allclose([gram[0, 1], gram[0, 2], gram[1, 2]], [np.sqrt(0.5), np.sqrt(0.5), -0.125])
+    assert abs(np.linalg.det(gram) + 9 / 64) < 1e-12 and np.linalg.eigvalsh(gram)[0] < -0.05
+    assert abs(np.trace(pts[1] @ pts[2])) > 2  # 生成的群含双曲元，无界
     # 矢高的 n 次复合：v_2 = 2 v (2 - v)
     v = sp.symbols("v")
     assert sp.expand(1 - sp.chebyshevt(2, 1 - v) - 2 * v * (2 - v)) == 0
