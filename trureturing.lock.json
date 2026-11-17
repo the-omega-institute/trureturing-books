@@ -1709,6 +1709,14 @@
       "line": 152,
       "signature": "theorem tribonacci_secondary_root_mul_conjugate : tribonacciSecondaryRoot.1 * conj tribonacciSecondaryRoot.1 = ((t⁻¹ : Real) : Complex)"
     },
+    "D5/S3/Constants/NewtonHankelRealRootCriterion.newtonHankel_posSemidef_iff_roots_real": {
+      "module": "D5/S3/Constants/NewtonHankelRealRootCriterion",
+      "name": "D5.S3.Constants.NewtonHankelRealRootCriterion.newtonHankel_posSemidef_iff_roots_real",
+      "kind": "theorem",
+      "statement_id": "sha256:c156199d58ec6d11710648af15bcebb6d3bb49de25d879a9e725d8b809b2f8f2",
+      "line": 320,
+      "signature": "theorem newtonHankel_posSemidef_iff_roots_real {d : Nat} (roots : Fin d → Complex) (hconj : ∀ w, w ∈ Finset.univ.image roots ↔ conj w ∈ Finset.univ.image roots) : Matrix.PosSemidef (newtonHankel roots) ↔ ∀ j, ∃ r : Real, roots j = (r : Complex)"
+    },
     "D5/S3/Constants/PentagonCosines.pentagon_golden_cosines": {
       "module": "D5/S3/Constants/PentagonCosines",
       "name": "D5.S3.Constants.PentagonCosines.pentagon_golden_cosines",
@@ -5805,6 +5813,14 @@
       "line": 32,
       "signature": "theorem MediumPNT : ∃ c > 0, (ψ - id) =O[atTop] fun (x : ℝ) ↦ x * Real.exp (-c * (Real.log x) ^ ((1 : ℝ) / 10))"
     },
+    "D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.canonical_curvature_posSemidef_implies_rh": {
+      "module": "D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree",
+      "name": "D5.S3.Weil.Probability.CanonicalLiCurvatureZeroFree.canonical_curvature_posSemidef_implies_rh",
+      "kind": "theorem",
+      "statement_id": "sha256:f7b0d4dea01e0aba00e8b39361ae38699b4ae5385058ceb5d7690bde72602ecb",
+      "line": 126,
+      "signature": "theorem canonical_curvature_posSemidef_implies_rh (positive : ∀ N : ℕ, (toeplitzMatrix canonicalLiCurvature N).PosSemidef) : RiemannHypothesis"
+    },
     "D5/S3/Weil/Probability/CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable": {
       "module": "D5/S3/Weil/Probability/CanonicalLiDiskEquivalence",
       "name": "D5.S3.Weil.Probability.CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable",
@@ -5821,6 +5837,14 @@
       "line": 295,
       "signature": "theorem canonical_li_nonnegative_implies_rh (nonnegative : ∀ n : ℕ, 1 ≤ n → 0 ≤ canonicalLiCoefficient n) : RiemannHypothesis"
     },
+    "D5/S3/Weil/Probability/CircleHerglotzCompletion.circle_herglotz_iff": {
+      "module": "D5/S3/Weil/Probability/CircleHerglotzCompletion",
+      "name": "D5.S3.Weil.Probability.CircleHerglotzCompletion.circle_herglotz_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:6d5865bfbd8f27be4c5c626be761a9c868e8813325723afc469a62bf16752186",
+      "line": 133,
+      "signature": "theorem circle_herglotz_iff (c : ℤ → ℂ) (normalized : c 0 = 1) : (∀ N : ℕ, (toeplitzMatrix c N).PosSemidef) ↔ ∃! μ : ProbabilityMeasure Circle, ∀ n : ℤ, circleMoment (μ : Measure Circle) n = c n"
+    },
     "D5/S3/Weil/Probability/FiniteGaussianSchoenberg.gram_distance_conditionally_negative": {
       "module": "D5/S3/Weil/Probability/FiniteGaussianSchoenberg",
       "name": "D5.S3.Weil.Probability.FiniteGaussianSchoenberg.gram_distance_conditionally_negative",
@@ -5828,6 +5852,46 @@
       "statement_id": "sha256:1bb9eb03c42c0123868dc5999a99ba07a036f580ec1d24a0dd4c69844d7cbf47",
       "line": 103,
       "signature": "theorem gram_distance_conditionally_negative (A : Matrix I I ℝ) (hA : A.PosSemidef) (x : I → ℝ) (hx : ∑ i, x i = 0) : (∑ i, ∑ j, x i * x j * (A i i + A j j - 2 * A i j)) ≤ 0"
+    },
+    "D5/S3/Weil/Probability/LiCurvatureProbabilityCompletion.li_curvature_criterion_without_herglotz": {
+      "module": "D5/S3/Weil/Probability/LiCurvatureProbabilityCompletion",
+      "name": "D5.S3.Weil.Probability.LiCurvatureProbabilityCompletion.li_curvature_criterion_without_herglotz",
+      "kind": "theorem",
+      "statement_id": "sha256:b5a0e2ca17cef2a62fe390baf6b73c5ae2b90f74dee44d60c6e8a4e837bb20d9",
+      "line": 82,
+      "signature": "theorem li_curvature_criterion_without_herglotz (c : ℤ → ℂ) (L : ℕ → ℝ) (normalized : c 0 = 1) (liCriterion : RiemannHypothesis ↔ ∀ n, 0 ≤ L n) (zeroValue : L 0 = 0) (firstNonnegative : 0 ≤ L 1) (recurrence : ∀ n, 1 ≤ n → L (n + 1) - 2 * L n + L (n - 1) = 2 * L 1 * (c n).re) (rhFourierRepresentation : RiemannHypothesis → ∃ μ : Measure Circle, IsProbabilityMeasure μ ∧ ∀ n, c n = circleMoment μ n) : RiemannHypothesis ↔ ∀ N : ℕ, (toeplitzMatrix c N).PosSemidef"
+    },
+    "D5/S3/Weil/TestFunctions/LiCurvatureCriterion.circle_moment_toeplitz_posSemidef": {
+      "module": "D5/S3/Weil/TestFunctions/LiCurvatureCriterion",
+      "name": "D5.S3.Weil.TestFunctions.LiCurvatureCriterion.circle_moment_toeplitz_posSemidef",
+      "kind": "theorem",
+      "statement_id": "sha256:447b8b89cd708b241111cbd769c3d9548dc21dcafc3b76334a1147fa59044da4",
+      "line": 154,
+      "signature": "theorem circle_moment_toeplitz_posSemidef (mu : Measure Circle) [IsFiniteMeasure mu] (N : Nat) : Matrix.PosSemidef (toeplitzMatrix (circleMoment mu) N)"
+    },
+    "D5/S3/Weil/TestFunctions/LiCurvatureCriterion.geometric_energy_second_difference": {
+      "module": "D5/S3/Weil/TestFunctions/LiCurvatureCriterion",
+      "name": "D5.S3.Weil.TestFunctions.LiCurvatureCriterion.geometric_energy_second_difference",
+      "kind": "theorem",
+      "statement_id": "sha256:447b8b89cd708b241111cbd769c3d9548dc21dcafc3b76334a1147fa59044da4",
+      "line": 243,
+      "signature": "theorem geometric_energy_second_difference (z : Circle) (n : Nat) (hn : 1 <= n) : Complex.normSq (geometricPolynomial (n + 1) z) - 2 * Complex.normSq (geometricPolynomial n z) + Complex.normSq (geometricPolynomial (n - 1) z) = 2 * (((z : Complex) ^ n).re)"
+    },
+    "D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction.negative_recurrence_bounds_smallest_eigenvalue": {
+      "module": "D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction",
+      "name": "D5.S3.Weil.TestFunctions.LiCurvatureFiniteReconstruction.negative_recurrence_bounds_smallest_eigenvalue",
+      "kind": "theorem",
+      "statement_id": "sha256:5058f928ee1a991463e61d7a74de40683397cb07940047d296a3709a9beb90c5",
+      "line": 213,
+      "signature": "theorem negative_recurrence_bounds_smallest_eigenvalue (u : Nat → Real) (L : Real) (c : Int → Complex) (h0 : u 0 = 0) (h1 : u 1 = L) (hL : 0 ≤ L) (hc0 : c 0 = 1) (hHerm : ∀ k : Int, c (-k) = star (c k)) (hRec : ∀ n : Nat, 1 ≤ n → u (n + 1) - 2 * u n + u (n - 1) = 2 * L * (c (n : Int)).re) (n : Nat) (hn : 1 ≤ n) (hLpos : 0 < L) (hu : u n < 0) : ∃ hT : Matrix.IsHermitian (fun j k : Fin n => c ((j : Int) - (k : Int))), hT.eigenvalues₀ ⟨n - 1, by simpa using (Nat.sub_lt hn (by decide : 0 < 1))⟩ ≤ u n / ((n : Real) * L) ∧ u n / ((n : Real) * L) < 0"
+    },
+    "D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction.recurrence_eq_toeplitz_ones_quadratic": {
+      "module": "D5/S3/Weil/TestFunctions/LiCurvatureFiniteReconstruction",
+      "name": "D5.S3.Weil.TestFunctions.LiCurvatureFiniteReconstruction.recurrence_eq_toeplitz_ones_quadratic",
+      "kind": "theorem",
+      "statement_id": "sha256:5058f928ee1a991463e61d7a74de40683397cb07940047d296a3709a9beb90c5",
+      "line": 160,
+      "signature": "theorem recurrence_eq_toeplitz_ones_quadratic (u : Nat → Real) (L : Real) (c : Int → Complex) (h0 : u 0 = 0) (h1 : u 1 = L) (hL : 0 ≤ L) (hc0 : c 0 = 1) (hHerm : ∀ k : Int, c (-k) = star (c k)) (hRec : ∀ n : Nat, 1 ≤ n → u (n + 1) - 2 * u n + u (n - 1) = 2 * L * (c (n : Int)).re) (n : Nat) (hn : 1 ≤ n) : u n = L * (star (fun _ : Fin n => (1 : Complex)) ⬝ᵥ ((fun j k : Fin n => c ((j : Int) - (k : Int))) *ᵥ (fun _ : Fin n => (1 : Complex)))).re"
     },
     "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum": {
       "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",
@@ -6004,6 +6068,14 @@
       "statement_id": "sha256:2d6fe9ba77e00d61b8e227b143eb5e25be29f3df02e1e3a5094b9c7a1498406e",
       "line": 233,
       "signature": "theorem canonical_li_one : canonicalLiCoefficient 1 = 1 + Real.eulerMascheroniConstant / 2 - Real.log (2 * Real.sqrt Real.pi)"
+    },
+    "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_one_pos": {
+      "module": "D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion",
+      "name": "D5.S3.Zeros.Endpoints.CanonicalLiLocalExpansion.canonical_li_one_pos",
+      "kind": "theorem",
+      "statement_id": "sha256:2d6fe9ba77e00d61b8e227b143eb5e25be29f3df02e1e3a5094b9c7a1498406e",
+      "line": 243,
+      "signature": "theorem canonical_li_one_pos : 0 < canonicalLiCoefficient 1"
     },
     "D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values": {
       "module": "D5/S3/Zeros/Endpoints/XiEndpointValues",
