@@ -216,7 +216,7 @@ $$
 1. 若规范群在 $\mathbb{C}^N$ 上不可约（如定义表示上的 $\mathrm{SU}(N)$），则对和乐矩阵实线性、规范不变且与回路定向无关的单回路读数只有矢高（差一个仿射变换）；规范项属于这一类。
 2. 雷吉作用量 $\sum_hA_h\delta_h$ 对角亏是一次的，读的是带符号的转角，需要一个随回路反向而变号的配对对象，即铰链的对偶平面。它不是矢高之和：铰链度量按 $a^{D-2}$、角亏按 $a^2$ 标度时（$D$ 为复形维数，铰链个数按 $a^{-D}$），$\sum_hA_h(1 - \cos\delta_h)$ 在加细下按 $a^2$ 趋于零。
 3. 在闭凸多面体上，$\sum_v\delta_v = 4\pi$ 与形状无关（即 $720^\circ$；笛卡尔总角亏定理，见 [@rem-hairy-ball-adams-literature] 第 2 条），而 $\sum_v(1 - \cos\delta_v)$ 依赖形状。
-4. 三面角顶点的角亏等于三个面外法向 $n_1, n_2, n_3$ 所张球面三角形的吉拉尔角盈（极三角形定理），因而由 [@rem-appe-half-comparison-holonomy] 的闭式给出：$\delta_v = 2\operatorname{atan2}\bigl(\lvert[n_1, n_2, n_3]\rvert,\ 1 + n_1\cdot n_2 + n_2\cdot n_3 + n_3\cdot n_1\bigr)$；分母为正时即 $\tan\frac{\delta_v}{2} = \frac{\lvert[n_1, n_2, n_3]\rvert}{1 + n_1\cdot n_2 + n_2\cdot n_3 + n_3\cdot n_1}$。
+4. 三面角顶点的角亏等于三个面外法向 $n_1, n_2, n_3$ 所张球面三角形的吉拉尔角盈（极三角形定理），因而由 [@rem-appe-half-comparison-holonomy] 的闭式给出：$\delta_v = 2\operatorname{atan2}\bigl(\lvert[n_1, n_2, n_3]\rvert,\ 1 + n_1\cdot n_2 + n_2\cdot n_3 + n_3\cdot n_1\bigr)$；分母为正时即 $\tan\frac{\delta_v}{2} = \frac{\lvert[n_1, n_2, n_3]\rvert}{1 + n_1\cdot n_2 + n_2\cdot n_3 + n_3\cdot n_1}$。记 $S = 1 + n_1\cdot n_2 + n_2\cdot n_3 + n_3\cdot n_1$，$D = [n_1, n_2, n_3]$；三个法向两两不对径时，恒等式 $S^2 + D^2 = 2\prod_{i<j}(1 + n_i\cdot n_j)$ 与三次旋子门的返回相位 $(S - iD)/\sqrt{S^2 + D^2}$ 已在泡利矩阵模型里冻结（[@thm-appe-bloch-triangle-return-phase]）。把这个相位的辐角等同于半个角盈、再把角盈等同于顶点角亏，仍是文献结果。
 
 因此“万力归弧”的确切内容是：两类力都由回路和乐偏离单位元来描述，并共用同一组比安基与斯托克斯恒等式；规范项读偶通道，引力项读带符号的转角（符号由奇通道确定）并以铰链度量加权。把这一区别当作规范力与引力的结构差异属于本书的读法（`MODEL`）；它不确定规范群、耦合常数或动力学。
 :::

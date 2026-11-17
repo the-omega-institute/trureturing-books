@@ -570,7 +570,7 @@ $$
 
 **Literature.** The right-hand side above has the form $\cos\frac\Omega2+\sin\frac\Omega2\,\mathbf{I}a$, a rotor that fixes $a$, with $\frac\Omega2=\operatorname{atan2}\bigl([a,b,c],\,1+a\cdot b+b\cdot c+c\cdot a\bigr)$; when the denominator is positive this is $\tan\frac\Omega2=\dfrac{[a,b,c]}{1+a\cdot b+b\cdot c+c\cdot a}$. The absolute value $\lvert\Omega\rvert$ is the area of the spherical triangle $abc$, that is, its Girard excess, and the sign of $\Omega$ is the sign of $[a,b,c]$ (van Oosterom–Strackee 1983; Eriksson 1990).
 
-**Correspondence with frozen theorems.** The two quantities in the numerator, $1+a\cdot b+b\cdot c+c\cdot a$ and $[a,b,c]$, are the real and imaginary parts of $4\operatorname{Tr}(P_aP_bP_c)$ in [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch). Combining the identity above with $\det G(a,b,c)=[a,b,c]^2$ gives
+**Correspondence with frozen theorems.** The product formula and the identity for the denominator are frozen in the Pauli-matrix model; see [@thm-appe-bloch-triangle-return-phase]. The two quantities in the numerator, $1+a\cdot b+b\cdot c+c\cdot a$ and $[a,b,c]$, are the real and imaginary parts of $4\operatorname{Tr}(P_aP_bP_c)$ in [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch). Combining the identity above with $\det G(a,b,c)=[a,b,c]^2$ (the expansion of $[a,b,c]^2$ is frozen as [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)) gives
 
 $$
 \det G(a,b,c)=(2-v_{ab})(2-v_{bc})(2-v_{ca})\,(1-\cos\Omega),\qquad v_{xy}=1-x\cdot y ,
@@ -580,6 +580,59 @@ where the expansion of $\det G$ is [`three_anchor_gram_det_formula`](lean:D5/S3/
 :::
 
 On the Bloch sphere $S(r)^2=1-\frac v2$ is $\cos^2\frac\theta2$: the squared similarity of the half comparison equals $1$ minus half the sagitta. This is the Born weight written in chord–sagitta terms; it does not replace the additivity premise of `H5`. The determinant formula says that the three-point Gram volume equals the product of the three complementary sagittas times the sagitta of the excess; the value $\det G=\sin^4\epsilon$ of the "two begets three" cell in [§32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison) is a special case. For `H8` this means that the projective holonomy native to Layer 1 needs no new input: it is what one gets under Clause IV by taking the square root of the full comparison. What still needs new Layer-2 input is a fibre connection that varies with the spacetime base point, together with its dynamics.
+
+The product formula does not rest on the manual derivation alone. Replace $\mathcal{Cl}_{3,0}$ by its Pauli-matrix model ($e_k\mapsto\sigma_k$, $\mathbf{I}\mapsto i\mathbf{1}$, the involution ${}^*$ becoming the conjugate transpose); the half comparison is then a concrete $2\times2$ unitary matrix, and the two statements below are verified in Lean. For $r\in\mathbb{R}^3$ write $r\cdot\sigma=r_1\sigma_x+r_2\sigma_y+r_3\sigma_z$ and $P_r=\frac12(\mathbf{1}+r\cdot\sigma)$; for $\phi\in\mathbb{C}^2$ write the normalized projection onto $r$ as
+
+$$
+N_r(\phi):=\frac{P_r\phi}{\sqrt{\operatorname{Re}\,\phi^\dagger P_r\phi}} .
+$$
+
+::: {.lemma #lem-appe-rotor-gate-normalized-projection title="The Rotor Gate Carries $a\cdot\sigma$ to $b\cdot\sigma$ and Acts on Eigenspinors as the Normalized Projection" lean="D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.rotor_shortest_gate"}
+Let $a,b\in\mathbb{R}^3$ be unit vectors with $b\neq-a$, and put
+
+$$
+R_{a\to b}:=\frac{\mathbf{1}+(b\cdot\sigma)(a\cdot\sigma)}{\sqrt{2(1+a\cdot b)}} .
+$$
+
+Then
+
+1. $R_{a\to b}\,R_{a\to b}^\dagger=\mathbf{1}$;
+2. $R_{a\to b}\,(a\cdot\sigma)\,R_{a\to b}^\dagger=b\cdot\sigma$;
+3. for every $\psi\in\mathbb{C}^2$ with $\psi^\dagger\psi=1$ and $P_a\psi=\psi$, one has $R_{a\to b}\,\psi=N_b(\psi)$.
+:::
+
+::: proof
+Write $A=a\cdot\sigma$ and $B=b\cdot\sigma$, so that $A^2=B^2=\mathbf{1}$ and $AB+BA=2(a\cdot b)\mathbf{1}$. The numerator $\mathbf{1}+BA$ satisfies $(\mathbf{1}+BA)(\mathbf{1}+AB)=2(1+a\cdot b)\mathbf{1}$ and $(\mathbf{1}+BA)A(\mathbf{1}+AB)=2(1+a\cdot b)B$, which are the first two items. For the third, $A\psi=\psi$ gives $(\mathbf{1}+BA)\psi=2P_b\psi$, while $\psi^\dagger P_b\psi=\frac{1+a\cdot b}{2}>0$, so the two normalizing factors agree. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-appe-bloch-triangle-return-phase title="Return Phase of Three Rotor Gates around a Bloch Triangle" lean="D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"}
+Let $a,b,c\in\mathbb{R}^3$ be unit vectors with $b\neq-a$, $c\neq-b$ and $a\neq-c$. Put
+
+$$
+S:=1+a\cdot b+b\cdot c+c\cdot a,\qquad D:=a\cdot(b\times c).
+$$
+
+Then
+
+1. $S^2+D^2=2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a)$, and $S^2+D^2>0$;
+2. the three rotor gates compose to
+
+   $$
+   R_{c\to a}\,R_{b\to c}\,R_{a\to b}=\frac{S\,\mathbf{1}-iD\,(a\cdot\sigma)}{\sqrt{S^2+D^2}} ;
+   $$
+
+3. for every $\psi\in\mathbb{C}^2$ with $\psi^\dagger\psi=1$ and $P_a\psi=\psi$, the successive normalized projections onto $b$, $c$ and $a$ give
+
+   $$
+   N_a\bigl(N_c(N_b(\psi))\bigr)=\frac{S-iD}{\sqrt{S^2+D^2}}\,\psi .
+   $$
+:::
+
+::: proof
+Item 1: write $x=a\cdot b$, $y=b\cdot c$, $z=c\cdot a$. Substituting the Gram identity $D^2=1+2xyz-x^2-y^2-z^2$ ([`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)), the sum $S^2+D^2$ expands to $2(1+x)(1+y)(1+z)$, and each factor is positive because no two of the vectors are antipodal. Item 2: the three numerators multiply to $(\mathbf{1}+AC)(\mathbf{1}+CB)(\mathbf{1}+BA)=2S\,\mathbf{1}-2iD\,A$, and by item 1 the three normalizing factors multiply to $2\sqrt{S^2+D^2}$. Item 3: the third item of [@lem-appe-rotor-gate-normalized-projection] replaces each normalized projection by the corresponding rotor gate, and its first two items guarantee that after each step the spinor is still a unit spinor lying in the eigenspace the next step requires; the last step uses $A\psi=\psi$. The full proof is checked by the Lean kernel.
+:::
+
+Compare with [@rem-appe-half-comparison-holonomy]: $R_{a\to b}$ is the image of $r_{ba}=r_{ab}^*$, so item 2 of the theorem is the involution of the product in the remark, $(r_{ab}\,r_{bc}\,r_{ca})^*=r_{ac}\,r_{cb}\,r_{ba}$, and the sign in front of $D$ changes from plus to minus accordingly; item 1 is the identity at the end of the remark. Item 3 is the operational reading of item 2: start from an eigenspinor of $a$, apply the three normalized projections along $a\to b\to c\to a$, and the spinor returns multiplied by the unit-modulus factor $(S-iD)/\sqrt{S^2+D^2}$. What Lean does not state keeps its earlier status. Identifying the argument $\operatorname{atan2}(D,S)$ with half the Girard excess is a literature result. The exponential form of the rotor is not formalized, and neither is any minimality or uniqueness in the sense of "shortest": in the Lean module `rotor` and `shortestGate` are names only. In Lean $N_r(\phi)$ is defined for every $\phi$ (when the denominator vanishes, Lean's convention returns the zero vector); the theorem uses it only where each denominator $\sqrt{(1+u\cdot v)/2}$ is positive.
 
 ### E.8.5 The Born Weight: on a Qubit the Gap Can Be Restated as Minimal Tomographic Rank {#sec-appe-born-minimal-rank}
 
@@ -764,7 +817,7 @@ In this reading (`MODEL`), the choice of exchange statistics is whether the sect
 | `H3` parallelogram polarization | `T2` condition | the chord distance comes from the GNS inner product of a positive functional, so the input "inner product" becomes "positive reading"; completion remains `T1` | [@rem-appe-gram-from-flatness], item 2 |
 | `H5` Born weight | `T2` additivity condition | only for rules that depend on pairwise comparison alone: for $d\ge3$, boundedness, normalization on every orthonormal basis and $f(1)=1$ already give the Born rule; for $d=2$ and continuous rules, full effect additivity can be replaced by "antipodal normalization, $f(1)=1$ and minimal tomographic rank"; still a `T2` input | [@rem-appe-born-zonal-minimal-rank] |
 | `H8` Lorentz signature | `T3` bifurcation | can be read as the same choice as the signature bifurcation of `H2` (`MODEL`) | end of E.8.1 |
-| `H8` projective holonomy of Layer 1 | native to Layer 1 | closed form in $\mathcal{Cl}_{3,0}$ as the three-point holonomy of the half comparison | [@rem-appe-half-comparison-holonomy] |
+| `H8` projective holonomy of Layer 1 | native to Layer 1 | closed form in $\mathcal{Cl}_{3,0}$ as the three-point holonomy of the half comparison; in the Pauli-matrix model the product formula and the return phase are frozen | [@rem-appe-half-comparison-holonomy], [@thm-appe-bloch-triangle-return-phase] |
 | `H6` two-sided invertibility | `T2` condition | the defect of one-sided fairness is a projection, and the unilateral shift as a comparison value violates Clause III; it can nevertheless arise as the induced evolution in a model satisfying Clauses I–IV and the positivity condition, even when the algebra carries a faithful trace; past completeness or a finite-dimensional state space is each sufficient | [@rem-appe-one-sided-fairness], [@ex-appe-bilateral-shift-model] |
 | `H6` strong continuity | `T2` condition | for a time-homogeneous family, equivalent to continuity of the sagitta reading at zero; measurability alone is not enough; in finite dimension this connects with [@thm-calibrated-unitary-group] | [@rem-appe-sagitta-continuity] |
 | `H6` generator | `T4` input $H$ | the chord rate tends to $-iH$ and the sagitta rate to $H^2/2$, with explicit errors; finite-step speed bounds; $H$ itself remains an input | [@rem-appe-generator-chord-sagitta] |
