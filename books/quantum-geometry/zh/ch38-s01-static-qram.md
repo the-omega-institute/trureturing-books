@@ -197,7 +197,7 @@ correctness :
 [@thm-ch38-spatial-qutrit-qram-correctness] 验证的是上述**固定经典数据、顺序装载的理想空间三态电路**，不将它在脏配置上的置换等同于附录 A 图 10 的流水线调度，也不把早期架构文献的辅助比特 $f$ 等同于 $W$。它不给出物理哈密顿量、硬件实现、噪声、资源、深度或叠加态总活跃节点数的界，更不复制未知量子态。前述独立布尔网络与一般加法群读出、Page–Wootters 文献机制、2008 年架构的每分支路径计数和观察者—宇宙 `MODEL` 均保留各自边界。下图仍只是该架构文献的路径示意。
 
 ::: {.viz src="pointer-ontology-deref" preset="qram_tree" height="500"}
-**一个地址只拨动一条路上的 6 个开关。** 地址 41 = 101001₂ 从树根进来，每一拍按一位拨一层：六拍后青色的路通到第 42 格，63 个开关里只亮这 6 个；同一时刻，底部琥珀色的扫描读头才读过 6 格。树的深度与开关数照 [@rem-ch38-qram-page-wootters-literature] 的桶链式 QRAM 画出（文献结果，未在本书形式化）。
+**一个地址只拨动一条路上的 6 个开关。** 地址 41 = 101001₂ 从树根进来，每一拍按一位拨一层：六拍后青色的路通到第 42 格，63 个开关里只亮这 6 个（这是单个经典地址的情形；叠加地址下各分支合计会触及更多开关）；同一时刻，底部琥珀色的扫描读头才读过 6 格。树的深度与开关数照 [@rem-ch38-qram-page-wootters-literature] 的桶链式 QRAM 画出（文献结果，未在本书形式化）。
 :::
 
 先在前述 Hann 顺序空间电路的深度一情形手算一次。两个地址是 $a_0=(\mathrm{false},())$、$a_1=(\mathrm{true},())$，输入总线为 $\mathrm{false}$，地址振幅各为 $1/\sqrt2$；经典存储 $D$ 任意固定。完整装载后，唯一的路由器分别处于 $0$、$1$。取 $0\le q\le1$，用四维环境的正交归一基 $e_*,e_W,e_0,e_1$ 保存一次局部记录：
@@ -1105,10 +1105,10 @@ $$
 
 这是有限深度的 signed Hann 实数概率模型中的定理。它不把 signed record 解释成物理量子信道，不给出硬件实现、算法复杂度或计算时间结论，也不把任意可行概率分布断言为均匀分布。完整证明由 `trureturing` 的 Lean 内核检查。
 :::
-对照 [@rem-ch38-qram-page-wootters-literature]，指针与本体存储分离架构立即推演出两条贯通全书的核心**`MODEL`（模型诠释）**结论：
+对照 [@rem-ch38-qram-page-wootters-literature]，我们由指针与本体存储分离架构类比出两条贯通全书的核心**`MODEL`（模型诠释）**结论（这是作者的类比，并非由所引文献推出）：
 
-1. **为什么全局阵列是无时间 $P = NP$，而局部指针必须顺着 `ptr++` 逐帧流逝时间？**
-   在全局本体存储端，整座 $\bigl\{\lvert\Phi(x)\rangle_{\mathrm{mem}}\bigr\}_{x \in \mathbb{Z}^6}$ 阵列早已跨越所有格点同时铺展就绪，不存在先后次序，呈现顺序无关的 $P = NP$ 式静态全息（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell] 与[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）。然而，场内任何一枚物理观察者指针寄存器都受限于有限位宽与有限记忆窗口 $M < \infty$，并面对标准计算模型下未决的有限观察者复杂性防火墙（[@conj-p-neq-np]）。有限位宽的地址总线绝无可能在单周期内把整座宇宙阵列一口吞入缓存，而只能沿着因果历史彼此相容而不退化锁死的地址序列（局部格拉姆椭圆体正定体积背景见[第 29 章](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]），一步一拍地执行指针自增 `ptr++`。**我们毕生感叹的“时间流逝”，在硬件底层不过是有限指针 `ptr++` 扫过静态全息晶格时的扫描帧率。**
+1. **为什么全局阵列像一张已写好的无时间总表，而局部指针必须顺着 `ptr++` 逐帧流逝时间？**
+   在全局本体存储端，整座 $\bigl\{\lvert\Phi(x)\rangle_{\mathrm{mem}}\bigr\}_{x \in \mathbb{Z}^6}$ 阵列早已跨越所有格点同时铺展就绪，不存在先后次序，呈现顺序无关、像一张已写好之表的静态全息（查表不等于 $P = NP$：$P$、$NP$ 是判定问题类，一张铺好的数据阵列本身既不是 $P = NP$ 也不是 $P \neq NP$，见 §38.4；静态晶体图景参照[第 29 章](ch29-timeless-causality-and-gram-space.md) [@thm-ch29-gram-rigidity-and-pell] 与[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）。然而，场内任何一枚物理观察者指针寄存器都受限于有限位宽与有限记忆窗口 $M < \infty$，并面对标准计算模型下未决的有限观察者复杂性防火墙（[@conj-p-neq-np]）。有限位宽的地址总线绝无可能在单周期内把整座宇宙阵列一口吞入缓存，而只能沿着因果历史彼此相容而不退化锁死的地址序列（局部格拉姆椭圆体正定体积背景见[第 29 章](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]），一步一拍地执行指针自增 `ptr++`。**我们毕生感叹的“时间流逝”，在硬件底层不过是有限指针 `ptr++` 扫过静态全息晶格时的扫描帧率。**
 
 ::: {.viz src="pointer-ontology-deref" preset="linear64" height="500"}
 **读最后一格，要把 64 格走一遍。** 琥珀色的读头沿总线一拍读一格，读过的格变亮；读到地址 63 用了 64 步，而上方的路由树在第 6 步就已走到叶子。
@@ -1164,6 +1164,6 @@ $$
 首先验证受控翻转置换矩阵满足 $\mathrm{copyUnitary} \in \operatorname{Matrix.unitaryGroup}(\operatorname{Fin} 2 \times \operatorname{Fin} 2, \mathbb{C})$，并展开分块矩阵乘法证得前向演化恒等式 $\operatorname{unitaryEvolution}(\mathrm{copyUnitary}, B(\tau)) = R_{\mathrm{addr}}(\tau)$（其中 [`canonical_copied_address_record_eq_prior`](lean:D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior) 确认由拷贝地址映射 `copiedAddressRecord` 构造的典范受控记录与显式分块记录逐项相等）。由假设 $\exists i \neq j,\; \rho_{ij} \neq \sigma_{ij}$，两份四维联合态在对应副对角地址块上严格不等，故 $R_{\mathrm{addr}}(\rho) \neq R_{\mathrm{addr}}(\sigma)$。对第二因子求偏迹 $\operatorname{traceEnvironment}$ 时，地址正交分支令副对角块因指标错位而消去，仅存主对角元 $\rho_{ii} = \sigma_{ii}$，从而 $\operatorname{traceEnvironment}(R_{\mathrm{addr}}(\rho)) = \operatorname{traceEnvironment}(R_{\mathrm{addr}}(\sigma))$；若存在单值函数 $\mathrm{recover}$ 同时还原两者，则由输入相等必得输出相等 $R_{\mathrm{addr}}(\rho) = R_{\mathrm{addr}}(\sigma)$，与全局不等矛盾。最后利用幺正矩阵群性质 $\mathrm{copyUnitary}^* \mathrm{copyUnitary} = 1$ 代入结合律，即得伴随算子对 $B(\rho)$ 与 $B(\sigma)$ 的精确无损还原。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch38-copied-address-dereference-and-access-defect] 一举剥除了“波包神秘坍缩”的形而上学迷雾：**解引用 `*ptr` 从未在宇宙本体内存里销毁过半点相干信息；所谓“不可逆坍缩”，纯粹是因为局部指针只读取了当前匹配掩码的单一路径，而把其余正交地址分支留在了自身寄存器位宽之外的访问盲区里！**
+[@thm-ch38-copied-address-dereference-and-access-defect] 给出退相干图像的一个最小实例：在这个两比特模型里，受控拷贝没有销毁相干项，而是把它搬进了记录，偏迹后的局部边缘因此看起来不可逆，而伴随幺正仍可将其还原。它并不解决“为何出现单一结果”的测量问题。在 `MODEL` 中，我们把它推广读作：**解引用 `*ptr` 不在宇宙本体内存里销毁相干信息；所谓“不可逆坍缩”，是因为局部指针只读取了当前匹配掩码的单一路径，而把其余正交地址分支留在了自身寄存器位宽之外的访问盲区里！**
 
 ---
