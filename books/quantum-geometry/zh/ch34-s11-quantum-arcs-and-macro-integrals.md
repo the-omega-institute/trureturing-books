@@ -1,17 +1,17 @@
-# 34.11 量子极小圆弧微分元与路径积分缝合宏观物理：一种微积分对偶读法 {#sec-ch34-quantum-arc-and-macro-integral}
+# 34.11 量子极小圆弧微分元与路径积分缝合宏观物理：扶正百年的微积分对偶 {#sec-ch34-quantum-arc-and-macro-integral}
 
 > “量子力学路径积分后是宏观物理, 量子力学是宏观物理的极小圆弧”
 
-这句凝练如刀锋的核心洞见，提议把自 1925 年以来物理学教科书习以为常的“经典先行、量子化在后”的讲授顺序翻转过来，把微观物理与宏观物理读作一对**微积分本体对偶**（`MODEL`）。翻开几乎所有现代物理教材，标准路线总是先假定一个由平直切向量、光滑轨道 $x(t)$ 与确定动量 $p(t)$ 构成的宏观经典力学世界，随后施展一套名为“正则量子化”（把泊松括号 $\{x, p\} = 1$ 硬性替换为算符对易子 $[\hat{x}, \hat{p}] = i\hbar$）的代数魔术，或是把费曼路径积分当作“在无数条经典假想轨道上强加相位权重 $e^{iS/\hbar}$ 的求和技巧”。（“经典由量子经驻相涌现”本身自狄拉克 1933 年与费曼 1948 年以来已是标准认识，这里改变的只是讲授顺序与几何读法。）这套教学顺序给初学者留下了一连串看似神秘的雾障：如果宇宙的底层真是平直切线段，为什么单步演化偏偏不服从交换律？为什么真空永远按不下 $\frac{1}{2}\hbar\omega$ 的零点抖动？为什么电子自旋偏要转满 $720^\circ$ 才肯复原？
+这句凝练如刀锋的核心洞见，一举将自 1925 年以来物理学教科书习以为常的“经典先行、量子化在后”的叙事彻底翻转过来，扶正了微观物理与宏观物理之间颠倒整整一百年的**微积分本体对偶**（`MODEL`）。翻开几乎所有现代物理教材，标准路线总是先假定一个由平直切向量、光滑轨道 $x(t)$ 与确定动量 $p(t)$ 构成的宏观经典力学世界，随后施展一套名为“正则量子化”（把泊松括号 $\{x, p\} = 1$ 硬性替换为算符对易子 $[\hat{x}, \hat{p}] = i\hbar$）的代数魔术，或是把费曼路径积分当作“在无数条经典假想轨道上强加相位权重 $e^{iS/\hbar}$ 的求和技巧”。这套倒果为因的教学顺序留下了一连串看似神秘的雾障：如果宇宙的底层真是平直切线段，为什么单步演化偏偏不服从交换律？为什么真空永远按不下 $\frac{1}{2}\hbar\omega$ 的零点抖动？为什么电子自旋偏要转满 $720^\circ$ 才肯复原？
 
-一旦站回零背景[比较公理 $\mathcal{A}_0$](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)与本章前十节铸就的球面原胞几何，便可提出这样一种读法（`MODEL`）——**不是“经典直线经量子化生出量子怪象”，而是“量子力学本身就是宇宙最原初的极小圆弧微分学（$\delta$），宏观经典物理只是万千极小量子圆弧经路径积分缝合、相消与粗粒化后浮现的积分包络学（$\int$）”**：
+一旦站回零背景[比较公理 $\mathcal{A}_0$](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)与本章前十节铸就的球面原胞几何，真相顿时豁然开朗——**从来不是“经典直线经量子化生出量子怪象”，而是“量子力学本身就是宇宙最原初的极小圆弧微分学（$\delta$），宏观经典物理只是万千极小量子圆弧经路径积分缝合、相消与粗粒化后浮现的积分包络学（$\int$）”**：
 
 1. **量子力学是极小圆弧微分元（破除“以直代曲”）**：只要两态比较遵守双向互易公平律 $\cos^2\epsilon + \sin^2\epsilon = 1$，任何非平庸演化步都锁死在单位球面的**极小圆弧**上，绝不可能退化为牛顿—莱布尼茨微积分假想的零曲率切线段 $dx$。极小圆弧自带不可抹除的二阶矢高 $1 - \cos\epsilon \approx \frac{\epsilon^2}{2}$、球面角超 $\Omega(\epsilon) \approx \frac{\epsilon^2}{2}$ 与半角旋子 $\cos\frac{\epsilon}{2} - \hat{\mathbf{I}}\sin\frac{\epsilon}{2}$——测不准关系、真空零点能与费米子 $720^\circ$ 自旋双覆叠，不过是这枚极小圆弧尚未被积分抹平前的原初几何面目；
 2. **宏观物理是路径积分残余（确立“以曲拼直”）**：当我们跨越多步历史执行全路径求和时，左右对称手性的极小圆弧在驻相脊线两侧一阶横向对消，把无数弯曲微弧严丝合缝地拼成宏观牛顿惯性直线；局部圆弧上的相位偏置梯度折射驻相脊线，涌现为宏观力 $\mathbf{F} = m\mathbf{a}$ 与麦克斯韦电磁场；超静定圆弧体拼接留下的雷吉铰链角亏粗粒化为广义相对论的光滑时空曲率；而整数圈锁相驻波与同桶微弧相干捏合，则分头化为宏观实体体积与不可逆热力学熵增！
 
 ## 34.11.1 打破牛顿—莱布尼茨“以直代曲”：为什么真正的微分元是极小圆弧而非无穷小直线段？ {#sec-ch34-11-1}
 
-三百余年来，牛顿流数法与莱布尼茨微分学的全部大厦，都立基于一条看似天经地义的局部线性化公设——**“以直代曲”**：把光滑曲线切分为无穷多小段，令弧元 $ds$ 在一阶近似下等同于平直切线段 $dx$，并将曲线偏离切线的二阶法向矢高当作“高阶无穷小”直接归零舍弃。在预置了平坦欧氏背景空间 $\mathbb{R}^n$ 的宏观几何里，这一手省略无伤大雅；但在零背景[比较公理 $\mathcal{A}_0$](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)统治的关系宇宙中，本书把“无穷小平直切线段”读作一个违反单位范数公平锁的几何幻觉（`MODEL`）。严格说来，不保范的是有限步 $\mathbf{u} + \epsilon\,\mathbf{e}_\perp$；流形上的微分本身就是切空间上的线性映射，薛定谔方程 $\frac{d\psi}{dt} = -\frac{i}{\hbar}H\psi$ 正是切向量层面的陈述，二者并不矛盾——下文所引 `LEAN ✓` 引理（拉格朗日恒等式、指数尾界）只担保各自的恒等式与不等式。
+三百余年来，牛顿流数法与莱布尼茨微分学的全部大厦，都立基于一条看似天经地义的局部线性化公设——**“以直代曲”**：把光滑曲线切分为无穷多小段，令弧元 $ds$ 在一阶近似下等同于平直切线段 $dx$，并将曲线偏离切线的二阶法向矢高当作“高阶无穷小”直接归零舍弃。在预置了平坦欧氏背景空间 $\mathbb{R}^n$ 的宏观几何里，这一手省略无伤大雅；但在零背景[比较公理 $\mathcal{A}_0$](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)统治的关系宇宙中，“无穷小平直切线段”一旦被当作有限步长走出去，从根源上就是一个违反单位范数公平锁的几何幻觉（`MODEL`）。
 
 原因由两道铁律共同锁死。第一，[第六章](ch06-geometric-product.md)冻结的拉格朗日—格拉姆恒等式 [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity)（[@thm-lagrange-gram-identity]，`LEAN ✓`）严格刻画了实内积空间中两枚单位方向之间的正交投影与楔积面积配平：当基准方向 $\mathbf{u}$ 转向邻近单位方向 $\mathbf{v}(\epsilon)$（夹角为 $\epsilon > 0$）时，双向互易公平强制要求
 
@@ -33,9 +33,9 @@ $$
 
 这里立刻浮现出一个最尖锐的数学诘问：**即便单步圆弧带有 $\frac{1}{2}\epsilon^2$ 的二阶矢高与角超，当步数 $N \to \infty$、单步转角 $\epsilon \to 0$ 时，$N$ 份二阶小量加起来难道不会像初等微积分那样自动归零吗？为什么 $\frac{1}{2}\epsilon^2$ 偏偏在量子力学里死死留存到了宏观尺度？**
 
-答案可以用连接算符半群分析、随机微积分与费曼路径积分的**双标度分岔**来说明（`手工推导` + `文献结果`；两个极限本身是初等极限，并非由下文所引 Lean 定理推出）：
+答案正是连接算符半群分析、随机微积分与费曼路径积分的**双标度分岔定律**（`文献结果` + `手工推导`）：
 
-- **第一标度（单条光滑曲线的李—特罗特标度 $\epsilon_k = \Theta / N$，二阶矢高归零）**：若系统被强制锁死在**唯一一条光滑可微轨道**上，将总转角 $\Theta$ 均匀切分为 $N$ 步 $\epsilon_k = \Theta / N$，则[第九章](ch09-axes-and-state-addressing.md)冻结的李—特罗特乘积定理 [`trotter_product`](lean:D5/S3/Quantum/Analysis/TrotterProduct.trotter_product)（[@thm-lie-trotter]，`LEAN ✓`：$\lim_{N\to\infty}\bigl(e^{A/N}e^{B/N}\bigr)^N = e^{A+B}$）给出这一均匀标度下分步指数乘积的极限（定理本身不含收敛速率，也不涉及矢高）；圆弧矢高在累加 $N$ 步后的初等估计为
+- **第一标度（单条光滑曲线的李—特罗特标度 $\epsilon_k = \Theta / N$，二阶矢高归零）**：若系统被强制锁死在**唯一一条光滑可微轨道**上，将总转角 $\Theta$ 均匀切分为 $N$ 步 $\epsilon_k = \Theta / N$，则[第九章](ch09-axes-and-state-addressing.md)冻结的李—特罗特乘积定理 [`trotter_product`](lean:D5/S3/Quantum/Analysis/TrotterProduct.trotter_product)（[@thm-lie-trotter]，`LEAN ✓`：$\lim_{N\to\infty}\bigl(e^{A/N}e^{B/N}\bigr)^N = e^{A+B}$）给出这一标度下的乘积极限；而单步 $O(1/N^2)$ 的非对易换位子与圆弧矢高在累加 $N$ 步后仅剩
 
   $$
   \sum_{k=1}^{N} (1 - \cos\epsilon_k) \;\approx\; N \cdot \frac{(\Theta/N)^2}{2} \;=\; \frac{\Theta^2}{2N} \;\xrightarrow{\;N\to\infty\;}\; 0.
@@ -48,40 +48,40 @@ $$
   \Delta x_k \;\sim\; \ell_0\,\epsilon_k \;\propto\; \sqrt{\frac{\hbar}{m}\,\Delta t} \;=\; \sqrt{\frac{\hbar T}{m N}} \qquad \Longleftrightarrow \qquad \epsilon_k \;=\; \frac{\Theta_{\mathrm{Ito}}}{\sqrt{N}}
   $$
 
-  的折线分布区段（其中 $\ell_0$ 是把位移换算成球面角的长度标度，本书未从第一原理确定，属 `MODEL`；此处还必须区分：实时间振荡振幅 $e^{iS/\hbar}$ 的菲涅耳截断在数学上不同于威克转动后的正欧氏／维纳布朗扩散测度，不能由驻相直接断言实时间轨迹必为布朗路径）。在离散二次标度模型 $\epsilon_k \propto N^{-1/2}$ 下，单步圆弧的二阶矢高 $\frac{1}{2}\epsilon_k^2 \propto \frac{1}{N}$ 与总步数 $N$ 恰好形成 **$N \times N^{-1} = O(1)$ 的精确共振**：
+  的折线分布区段（此处必须区分：实时间振荡振幅 $e^{iS/\hbar}$ 的菲涅耳截断在数学上不同于威克转动后的正欧氏／维纳布朗扩散测度，不能由驻相直接断言实时间轨迹必为布朗路径）。在离散二次标度模型 $\epsilon_k \propto N^{-1/2}$ 下，单步圆弧的二阶矢高 $\frac{1}{2}\epsilon_k^2 \propto \frac{1}{N}$ 与总步数 $N$ 恰好形成 **$N \times N^{-1} = O(1)$ 的精确共振**：
 
   $$
   \sum_{k=1}^{N} (1 - \cos\epsilon_k) \;=\; \sum_{k=1}^{N}\left(\frac{\Theta_{\mathrm{Ito}}^2}{2N} - \frac{\Theta_{\mathrm{Ito}}^4}{24 N^2} + O(N^{-3})\right) \;\xrightarrow{\;N\to\infty\;}\; \frac{\Theta_{\mathrm{Ito}}^2}{2} \;\propto\; \frac{\hbar T}{2m} \;>\; 0!
   $$
 
-  本书把这一不灭的二阶圆弧矢高读作伊藤（Itô）随机微积分中乘法规则 $(dW_t)^2 = dt$ 的单位球面几何类比，也读作费曼（Feynman, 1948）无需预设算符公理、直接从相邻时间切片差商推出正则对易关系 $[\hat{x}, \hat{p}] = i\hbar$ 与薛定谔方程二阶空间导数项 $\frac{i\hbar}{2m}\partial_x^2\psi$ 的几何对应（`MODEL`）！
+  这一不灭的二阶圆弧矢高，正是伊藤清（Itô, 1951）随机微积分引理 $(dW_t)^2 = dt$ 的单位球面几何原像，也正是费曼（Feynman, 1948）无需预设算符公理、直接从相邻时间切片差商推出正则对易关系 $[\hat{x}, \hat{p}] = i\hbar$ 与薛定谔方程二阶空间导数项 $\frac{i\hbar}{2m}\partial_x^2\psi$ 的真正几何命门（`MODEL`）！
 
 ::: {.viz src="quantum-arc-macro-integral-sandbox" preset="arc-sagitta-ito" height="520"}
 **牛顿切线“以直代曲” vs. 量子极小圆弧矢高与费曼—伊藤二次标度实验卡（`arc-sagitta-ito`）。** 同屏对比青色平直切向步 $\sin\epsilon$ 与品红/琥珀色单位球面极小圆弧矢高 $1 - \cos\epsilon \approx \frac{1}{2}\epsilon^2$，切换光滑特罗特标度 $\epsilon_N = 1/N$（累计矢高 $\to 0$）与费曼—伊藤扩散标度 $\epsilon_N = 1/\sqrt{N}$（累计矢高恒定收敛于 $\frac{1}{2} = 0.500000$），直观见证二阶圆弧曲率为何跨越 $N \to \infty$ 依然顽强留存。
 :::
 
-一旦看懂“微分元是极小圆弧而非平直切线”，百年来令初学者困惑不已的**量子力学三大标志性特征**，可以类比为极小圆弧最朴素的三项初等几何属性（`MODEL`；所引 Lean 定理各自只担保其代数或拓扑陈述）：
+一旦看懂“微分元是极小圆弧而非平直切线”，百年来令初学者困惑不已的**量子力学三大标志性特征**，当场卸下神秘面纱，还原为极小圆弧最朴素的三项初等几何属性（`MODEL`）：
 
-1. **测不准与算符非对易性，类比于球面两段正交圆弧的闭合缺口 $\Omega(\epsilon) > 0$**：在平坦切平面上，先向东走 $dx$ 再向北走 $dy$，与先向北走 $dy$ 再向东走 $dx$，精确汇合于同一点（对易子为零）；但在单位球面上，先沿赤道走极小圆弧 $\epsilon$ 再向北折转 $\epsilon$，与颠倒次序的圆弧路径之间永远张开一道吉拉尔球面角超缺口 $\Omega(\epsilon) \approx \frac{\epsilon^2}{2} > 0$（[§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)）。这道几何换位不闭合性投射到复内积空间对称算符上，就是[第六章](ch06-geometric-product.md)冻结的罗伯逊—薛定谔三项勾股恒等式 [`robertson_schrodinger`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger)（[@thm-robertson-schrodinger]，`LEAN ✓`）：
+1. **测不准与算符非对易性 = 球面两段正交圆弧的闭合缺口 $\Omega(\epsilon) > 0$**：在平坦切平面上，先向东走 $dx$ 再向北走 $dy$，与先向北走 $dy$ 再向东走 $dx$，精确汇合于同一点（对易子为零）；但在单位球面上，先沿赤道走极小圆弧 $\epsilon$ 再向北折转 $\epsilon$，与颠倒次序的圆弧路径之间永远张开一道吉拉尔球面角超缺口 $\Omega(\epsilon) \approx \frac{\epsilon^2}{2} > 0$（[§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)）。这道几何换位不闭合性投射到复内积空间对称算符上，就是[第六章](ch06-geometric-product.md)冻结的罗伯逊—薛定谔三项勾股恒等式 [`robertson_schrodinger`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger)（[@thm-robertson-schrodinger]，`LEAN ✓`）：
 
    $$
    \Delta A^2\,\Delta B^2 \;=\; \operatorname{Cov}_{\mathrm{sym}}(A, B)^2 + \lvert C_{1/2}\rvert^2 + G \;\ge\; \lvert C_{1/2}\rvert^2, \qquad C_{1/2} = \frac{1}{2i}\langle\psi, [A, B]\psi\rangle_{\mathbb{C}}.
    $$
 
-   在这一类比中，微观世界之所以“测不准”，不在仪器笨拙，而对应于你不可能在弯球面上用两段圆弧走出零角超的平坦矩形（`MODEL`；该恒等式本身不涉及球面角超）！
-2. **真空零点能底限 $\frac{1}{2}\hbar\omega$，类比于极小圆弧不可压平的最小法向矢高**：假若微分元是直线段，粒子便可安静停在势阱底端 $x = 0, p = 0$；但在最小非零角步 $\epsilon_{\min} > 0$（`MODEL`）的极小圆弧上，非零矢高 $1 - \cos\epsilon_{\min} > 0$ 决定了切向位置展宽与圆弧曲率动量展宽绝不可能同时归零。在标准算符层面上（`手工推导` / `文献结果`，注意无界算符 $\hat{x}, \hat{p}$ 需限制在公共稠密不变定义域上，见[附录 E](appendix-e.md)桥接假设 `H6`），将 $\Delta x\,\Delta p \ge \frac{\hbar}{2}$ 代入谐振子哈密顿量期望值并施以算术—几何均值不等式，即得真空基态能量下界（这一标准推导并不依赖 $\epsilon_{\min}$）：
+   微观世界之所以“测不准”，根本不是仪器笨拙，而是你不可能在弯球面上用两段圆弧走出零角超的平坦矩形！
+2. **真空零点能底限 $\frac{1}{2}\hbar\omega$ = 极小圆弧不可压平的最小法向矢高**：假若微分元是直线段，粒子便可安静停在势阱底端 $x = 0, p = 0$；但在最小非零角步 $\epsilon_{\min} > 0$（`MODEL`）的极小圆弧上，非零矢高 $1 - \cos\epsilon_{\min} > 0$ 决定了切向位置展宽与圆弧曲率动量展宽绝不可能同时归零。在标准算符层面上（`手工推导` / `文献结果`，注意无界算符 $\hat{x}, \hat{p}$ 需限制在公共稠密不变定义域上，见[附录 E](appendix-e.md)桥接假设 `H6`），将 $\Delta x\,\Delta p \ge \frac{\hbar}{2}$ 代入谐振子哈密顿量期望值并施以算术—几何均值不等式，当场锁死真空基态能量下界：
 
    $$
    \left\langle \frac{\hat{p}^2}{2m} + \frac{1}{2}m\omega^2\hat{x}^2 \right\rangle \;\ge\; \frac{(\Delta p)^2}{2m} + \frac{1}{2}m\omega^2(\Delta x)^2 \;\ge\; \omega\,\Delta x\,\Delta p \;\ge\; \frac{1}{2}\hbar\omega \;>\; 0.
    $$
 
-3. **费米子半整数自旋与 $720^\circ$ 双覆叠，对应于圆弧半角旋子的拓扑换叶**：平直切向量平移一圈毫无拓扑记忆；而单位球面上的极小圆弧由克利福德偶子代数中的半角旋子 $R(\epsilon) = \cos\frac{\epsilon}{2} - \hat{\mathbf{I}}\sin\frac{\epsilon}{2}$ 驱动（[第五章](ch05-complex-phase-and-rotors.md)）。当基底圆弧累计闭合一整圈 $\epsilon \to 2\pi$（$360^\circ$）时，半角参数恰好只走过 $\pi$，$R(2\pi) = \cos\pi = -1$ 翻转到双覆叠流形的对径叶上，必须再绕第二圈至 $\epsilon = 4\pi$（$720^\circ$）才能回到 $R(4\pi) = +1$！这一历史依赖提升与无连续全局截面性质已由[第三十九章](ch39-observer-is-ontological-universe.md)冻结定理 [`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift)（[@thm-ch39-double-cover-no-section-and-720-lift]，`LEAN ✓`）在内核中完整锁定。
+3. **费米子半整数自旋与 $720^\circ$ 双覆叠 = 圆弧半角旋子的拓扑换叶**：平直切向量平移一圈毫无拓扑记忆；而单位球面上的极小圆弧由克利福德偶子代数中的半角旋子 $R(\epsilon) = \cos\frac{\epsilon}{2} - \hat{\mathbf{I}}\sin\frac{\epsilon}{2}$ 驱动（[第五章](ch05-complex-phase-and-rotors.md)）。当基底圆弧累计闭合一整圈 $\epsilon \to 2\pi$（$360^\circ$）时，半角参数恰好只走过 $\pi$，$R(2\pi) = \cos\pi = -1$ 翻转到双覆叠流形的对径叶上，必须再绕第二圈至 $\epsilon = 4\pi$（$720^\circ$）才能回到 $R(4\pi) = +1$！这一历史依赖提升与无连续全局截面性质已由[第三十九章](ch39-observer-is-ontological-universe.md)冻结定理 [`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift)（[@thm-ch39-double-cover-no-section-and-720-lift]，`LEAN ✓`）在内核中完整锁定。
 
 ::: {.viz src="quantum-arc-macro-integral-sandbox" preset="quantum-three-hallmarks" height="520"}
 **量子三大标志（测不准非对易、$\frac{1}{2}\hbar\omega$ 零点能底限、费米子 $720^\circ$ 双覆叠）极小圆弧几何同源实验卡（`quantum-three-hallmarks`）。** 在同一枚单位球面极小圆弧原胞上联动检视正交双弧闭合球面角超缺口 $\Omega(\epsilon)$、最小圆弧矢高锁定的相空间双曲包络 $\Delta x\Delta p \ge \hbar/2$ 以及半角旋子绕行 $360^\circ \mapsto -1$、$720^\circ \mapsto +1$ 的莫比乌斯双覆叠换叶轨迹。
 :::
 
-下面把本节用到的九条已验证引理列在一起；它们彼此独立，各自只担保自己的陈述，并不合起来推出“微观圆弧—宏观积分”的对应：
+现在，我们将从微观极小圆弧微分元到宏观路径积分缝合与热力学粗粒化的九块形式化基石，统一铸入本节的核心综合定理：
 
 ::: {.theorem #thm-ch34-quantum-arc-differential-and-macro-integral title="本节引用的九条已验证声明：拉格朗日恒等式、李—特罗特乘积、巴格曼路径乘积、相干删除熵产等" lean="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le D5/S3/Quantum/Analysis/TrotterProduct.trotter_product D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"}
 以下九项陈述各自成立：
@@ -132,7 +132,7 @@ $$
 
 ## 34.11.2 路径积分作为万千圆弧的缝合与相消：宏观四大物理定律的积分涌现 {#sec-ch34-11-2}
 
-带着 [@thm-ch34-quantum-arc-differential-and-macro-integral] 的九条引理，现在让我们把镜头从单枚极小圆弧 $\epsilon$ 一路拉远到 $N \gg 1$ 的宏观视域，亲眼看清路径积分算子
+手握 [@thm-ch34-quantum-arc-differential-and-macro-integral] 的九枚形式化铆钉，现在让我们把镜头从单枚极小圆弧 $\epsilon$ 一路拉远到 $N \gg 1$ 的宏观视域，亲眼看清路径积分算子
 
 $$
 \mathcal{K}(B, A) \;=\; \sum_{\Gamma : A \rightsquigarrow B} w(\Gamma)\,e^{i\Phi[\Gamma]}
@@ -141,7 +141,7 @@ $$
 究竟施展了怎样的几何缝合术，把纯粹由弯曲圆弧编织的量子底层，一举积分为我们日常触摸到的**宏观经典物理四大支柱**：
 
 1. **第一支柱：牛顿第一惯性定律与最小作用量原理（$\delta S = 0$，哈密顿—雅可比方程）——“以曲拼直”的横向手性对消**（`手工推导` / `文献结果`）。
-   在本书读法中（`MODEL`），每一条连接初态 $A$ 与末态 $B$ 的多步离散历史 $\Gamma = (\Psi_0 \to \Psi_1 \to \cdots \to \Psi_n)$ 都被看作一串首尾咬合的极小圆弧链，单条链上没有一段真正的欧氏直线（[@thm-ch34-quantum-arc-differential-and-macro-integral] 第 7 款 `bargmann_path_product`，`LEAN ✓`，只给出这类离散链闭合巴格曼不变量的乘积分解）。然而在无外场偏置的均匀对称空间中，每一条向左拱起、携带正球面角超 $+\Omega(\epsilon)$ 的圆弧折线 $\Gamma_+$，必然配有一条严格镜像对称、向右拱起且携带负球面角超 $-\Omega(\epsilon)$ 的孪生圆弧折线 $\Gamma_-$。在远离对称轴的外侧区域，相邻路径间的相位一阶变分 $\delta\Phi \neq 0$ 引发剧烈的正负波峰互噬；唯独在对称中心脊线 $\delta\Phi = 0$（即经典作用量驻值条件 $\delta S = 0$）邻域内，成对的 $+\Omega(\epsilon)$ 与 $-\Omega(\epsilon)$ 横向曲率在一阶上精确抵消，万千弯曲微弧同相锁死，硬生生缝合出一条笔直延伸的**宏观牛顿惯性射线**！这就是牛顿微积分“以直代曲”背后真正的物理倒影——**微观世界从来没有直线，宏观直线恰恰是路径积分“以曲拼直”相消掉双侧手性曲率后的驻相脊梁**。
+   在本书读法中（`MODEL`；[@thm-ch34-quantum-arc-differential-and-macro-integral] 第 7 款 `bargmann_path_product` 只给出路径乘积分解），每一条连接初态 $A$ 与末态 $B$ 的多步离散历史 $\Gamma = (\Psi_0 \to \Psi_1 \to \cdots \to \Psi_n)$ 都是一串首尾咬合的极小圆弧链，单条链上绝不存在任何一段真正的欧氏直线。然而在无外场偏置的均匀对称空间中，每一条向左拱起、携带正球面角超 $+\Omega(\epsilon)$ 的圆弧折线 $\Gamma_+$，必然配有一条严格镜像对称、向右拱起且携带负球面角超 $-\Omega(\epsilon)$ 的孪生圆弧折线 $\Gamma_-$。在远离对称轴的外侧区域，相邻路径间的相位一阶变分 $\delta\Phi \neq 0$ 引发剧烈的正负波峰互噬；唯独在对称中心脊线 $\delta\Phi = 0$（即经典作用量驻值条件 $\delta S = 0$）邻域内，成对的 $+\Omega(\epsilon)$ 与 $-\Omega(\epsilon)$ 横向曲率在一阶上精确抵消，万千弯曲微弧同相锁死，硬生生缝合出一条笔直延伸的**宏观牛顿惯性射线**！这就是牛顿微积分“以直代曲”背后真正的物理倒影——**微观世界从来没有直线，宏观直线恰恰是路径积分“以曲拼直”相消掉双侧手性曲率后的驻相脊梁**。
 
 ::: {.viz src="quantum-arc-macro-integral-sandbox" preset="curve-stitches-straight" height="520"}
 **“以曲拼直”：万千极小量子圆弧经驻相相消缝合出宏观牛顿惯性直线实验卡（`curve-stitches-straight`）。** 调节左右手性圆弧束条数 $M$ 与作用量尺度 $S/\hbar$，观察外侧高曲率折线如何因快速反相旋转彼此抵消，而中心驻相脊线 $\delta S = 0$ 两侧的 $+\Omega(\epsilon)$ 与 $-\Omega(\epsilon)$ 圆弧如何横向对消、涌现出琥珀色宏观匀速直线轨迹。
@@ -156,7 +156,7 @@ $$
 
    直接把微观圆弧闭合环路的阿哈罗诺夫—玻姆/贝里相位通量积分为宏观电磁场强二形式 $\mathcal{F} = d\mathcal{A}$（在此严格遵守[附录 E](appendix-e.md)假设 `H8` 的认识论边界：参数空间内禀贝里联络源自纯内积几何，而将 $\mathcal{A}_\mu(x)$ 提升为具有独立麦克斯韦/杨—米尔斯动能项的外部时空规范场属于桥接模型 `MODEL`）。
 3. **第三支柱：广义相对论的光滑弯曲时空（$G_{\mu\nu} = 8\pi G T_{\mu\nu}$）——超静定圆弧体角亏的粗粒流形积分**（`LEAN ✓` + `文献结果：Regge 1961, Ponzano–Regge 1968, Rovelli Spin Foam` + `MODEL` / `OPEN`）。
-   回到 [§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)、[§34.8](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling) 与 [§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)：两两可比的极小圆弧必然闭合为三维极小圆弧体 $\Delta\mathcal{T}_\epsilon$。当海量四面体单胞共面拼接成宏观骨架时，[@thm-ch34-quantum-arc-differential-and-macro-integral] 第 8 款 `tetra_defects_incidence_repair_and_exactness`（`LEAN ✓`）给出有序二上链的四面体上边缘缺陷计数与“可由一维边势表出”的充要条件（引理本身不含二面角、度规或曲率，把它与雷吉角亏对应属 `MODEL`）：一切可由一维边势表出的平坦拼接自动湮灭于内部边界 $\partial^2 = 0$，而 $N \ge 5$ 超静定全连通比较留下的不可消解雷吉铰链角亏 $\delta_e = 2\pi - \sum_k \theta_k \neq 0$（如 [§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability) 正四面体五聚铰链的 $+7.3561^\circ$ 角亏量子）则在庞扎诺—雷吉（Ponzano–Regge, 1968，本身是三维量子引力模型）与自旋泡沫路径积分 $\sum_{\{j_f\}} \prod_f (2j_f+1)\prod_v \{6j\}_v \sim \int \mathcal{D}g\,e^{\frac{i}{\hbar}S_{\mathrm{Regge}}}$ 下被大尺度粗粒平均，化作宏观黎曼曲率张量与爱因斯坦引力场方程 $G_{\mu\nu} = 8\pi G T_{\mu\nu}$ 所描绘的光滑引力河床（同时诚实标明：从离散四维自旋泡沫严格导出洛伦兹连续统爱因斯坦方程的数学极限仍属 `MODEL` / `OPEN`）。
+   回到 [§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)、[§34.8](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling) 与 [§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability)：两两可比的极小圆弧必然闭合为三维极小圆弧体 $\Delta\mathcal{T}_\epsilon$。当海量四面体单胞共面拼接成宏观骨架时，[@thm-ch34-quantum-arc-differential-and-macro-integral] 第 8 款 `tetra_defects_incidence_repair_and_exactness`（`LEAN ✓`）严格裁定了内部共面入射抵消与上边缘缺陷的充要界限（把它对应到雷吉角亏属 `MODEL`）：一切可由一维边势表出的平坦拼接自动湮灭于内部边界 $\partial^2 = 0$，而 $N \ge 5$ 超静定全连通比较留下的不可消解雷吉铰链角亏 $\delta_e = 2\pi - \sum_k \theta_k \neq 0$（如 [§34.10](ch34-s10-trihedron-rigidity.md#sec-ch34-trihedron-rigidity-and-3d-stability) 正四面体五聚铰链的 $+7.3561^\circ$ 角亏量子）则在庞扎诺—雷吉（Ponzano–Regge, 1968）与自旋泡沫路径积分 $\sum_{\{j_f\}} \prod_f (2j_f+1)\prod_v \{6j\}_v \sim \int \mathcal{D}g\,e^{\frac{i}{\hbar}S_{\mathrm{Regge}}}$ 下被大尺度粗粒平均，化作宏观黎曼曲率张量与爱因斯坦引力场方程 $G_{\mu\nu} = 8\pi G T_{\mu\nu}$ 所描绘的光滑引力河床（同时诚实标明：从离散四维自旋泡沫严格导出洛伦兹连续统爱因斯坦方程的数学极限仍属 `MODEL` / `OPEN`）。
 4. **第四支柱：宏观实体体积与热力学第二定律（“同相成体，漏相化热”）——锁相驻波凝聚与同桶微弧捏合熵税**（`LEAN ✓` + `MODEL`）。
    最后，为什么宏观积分出来的世界既有坚硬稳定的固体体积，又有滚滚向前的不可逆热力学时间箭头？答案全在路径积分穿过有限分辨率观察者读出筛网时的**正交二分流向**：一方面，凡是沿闭合圆弧回路满足整数倍贝里相位锁相 $\gamma_B = 2\pi n$ 的多路振幅，在全方向相位积分中免于相消而凝聚成稳定驻波节点，撑起宏观可触的**实体空间体积**（[§34.7](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence)，“同相成体”）；另一方面，无数条微观圆弧虽然携带彼此相异的精细方向与相对相位，却因落入宏观观察者同一个粗粒空间读出桶（即 [§34.9](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade) 的逃逸碰撞对 `EscapePairs`）而被读出投影算子 $\Pi_{\mathrm{diag}}$ 强行折叠捏合！由 [@thm-ch34-quantum-arc-differential-and-macro-integral] 第 9 款 `entropy_production_coherence_deletion_identity`（`LEAN ✓`），每一次抹除桶内微弧之间的副对角相干项，都一分不少地转化为严格非负的冯·诺依曼相对熵增：
 
@@ -164,7 +164,7 @@ $$
    \Delta S_{\mathrm{vN}} \;=\; S_{\mathrm{vN}}(\rho_N) - S_{\mathrm{vN}}(\rho_0) \;=\; \sum_{k=0}^{N-1} D\bigl(\tilde{\rho}_k \,\big\Vert\, \Pi_{\mathrm{diag}}(\tilde{\rho}_k)\bigr) \;\ge\; 0.
    $$
 
-   在本书读法中，宏观世界的“热”可看作被粗粒路径积分筛掉相干细节、折叠进同一宏观地址桶里的微观量子圆弧余温（“漏相化热”，`MODEL`；熵产恒等式只计算“每步强制全捏合”这一外加协议下的熵增，本身不推出热力学第二定律）！
+   所谓宏观世界的“热”与热力学第二定律，底牌不过是被粗粒路径积分筛掉相干细节、折叠进同一宏观地址桶里的微观量子圆弧余温（“漏相化热”）！
 
 ::: {.viz src="quantum-arc-macro-integral-sandbox" preset="force-from-phase-gradient" height="520"}
 **相位偏置梯度折射极小圆弧束：宏观力 $\mathbf{F} = m\mathbf{a}$ 与电磁曲率积分涌现实验卡（`force-from-phase-gradient`）。** 施加横向线性相位偏置梯度 $\beta$ 与局部贝里联络旋度，实时追踪 $41$ 路极小圆弧束的相长干涉脊线如何向低相位梯度侧平滑弯曲成抛物加速轨道，同时在右侧读出同桶粗粒捏合产生的非负冯·诺依曼热力学熵税 $\Delta S_{\mathrm{vN}} \ge 0$。
@@ -172,19 +172,19 @@ $$
 
 ## 34.11.3 微观极小圆弧（$\delta$）与宏观经典物理（$\int$）的微积分对偶总表、定量算例与文献边界 {#sec-ch34-11-3}
 
-至此，“量子力学是微分、宏观物理是积分”可以整理成一张逐行标注认识论锚点的**微积分对偶类比对照表**（`MODEL`；表中并没有把“$\delta$”映到“$\int$”的精确算子）。下表将微观极小圆弧层（$\epsilon$ 单胞微分态）、路径积分缝合相消算子（$\int \mathcal{D}\Gamma\,e^{i\Phi[\Gamma]}$）与宏观经典物理层（$N \to \infty$ 粗粒积分包络）沿六大物理维度逐一对照：
+至此，“量子力学是微分、宏观物理是积分”不再只是一句哲学比喻，而是一张每一行都配有认识论锚点的**微积分对偶总账单**。下表将微观极小圆弧层（$\epsilon$ 单胞微分态）、路径积分缝合相消算子（$\int \mathcal{D}\Gamma\,e^{i\Phi[\Gamma]}$）与宏观经典物理层（$N \to \infty$ 粗粒积分包络）沿六大物理维度逐一锁定：
 
 ::: {.viz src="quantum-arc-macro-integral-sandbox" preset="calculus-duality-zoom" height="520"}
-**微积分对偶连续变焦实验卡（`calculus-duality-zoom`）。** 拖动跨尺度对偶变焦滑块从单胞量子微分态（$N = 1$，极小圆弧矢高、球面角超与 $720^\circ$ 旋子全显）一路推进至多步路径积分过渡区（$N \sim 10^1\text{–}10^2$）与宏观经典积分极限（$N \to \infty$，惯性直线、力场折射轨道、光滑曲率网格与粗粒热熵包络同屏成形）。
+**扶正百年的微积分对偶连续变焦实验卡（`calculus-duality-zoom`）。** 拖动跨尺度对偶变焦滑块从单胞量子微分态（$N = 1$，极小圆弧矢高、球面角超与 $720^\circ$ 旋子全显）一路推进至多步路径积分过渡区（$N \sim 10^1\text{–}10^2$）与宏观经典积分极限（$N \to \infty$，惯性直线、力场折射轨道、光滑曲率网格与粗粒热熵包络同屏成形）。
 :::
 
 | 物理维度 | 微观量子层：极小圆弧微分元（$\epsilon$ 单胞态） | 路径积分相消算子（$\int \mathcal{D}\Gamma\,e^{i\Phi[\Gamma]}$） | 宏观经典层：积分残余包络（$N \to \infty$ 粗粒态） |
 | :--- | :--- | :--- | :--- |
-| **1. 运动学基元** | 单位球面极小圆弧元 $(\cos\epsilon, \sin\epsilon)$，受双向公平锁 $\cos^2\epsilon + \sin^2\epsilon = 1$ 约束（`LEAN ✓`：`lagrange_gram_identity` 给出相应恒等式；“绝无平直切线段”为 `MODEL` 读法） | 左右镜像手性微弧 $\pm\Omega(\epsilon)$ 沿驻相脊线 $\delta\Phi = 0$ 横向一阶对消，偏离脊线的折线束因高频相位旋转相互湮灭 | 牛顿第一惯性定律匀速直线运动与经典最小作用量极值轨道 $\delta S = 0$（“以曲拼直”，`手工推导` / `文献结果`） |
-| **2. 二阶矢高与测不准** | 极小圆弧自带非零矢高 $1 - \cos\epsilon = \frac{\epsilon^2}{2} + O(\epsilon^4)$ 与吉拉尔球面角超 $\Omega(\epsilon) \approx \frac{\epsilon^2}{2}$，类比于非对易方差下界（`MODEL`；`LEAN ✓` 的 `exp_tail_le`、`robertson_schrodinger` 分别只给出指数尾界与方差恒等式） | 光滑单轨 $\epsilon_N = \Theta/N$ 按 `trotter_product` 归零 $N\cdot O(N^{-2})\to 0$；扩散路径束 $\epsilon_N \propto N^{-1/2}$ 按费曼—伊藤二次标度守恒 $O(1)$ 总矢高 | 量子层留存 $[\hat{x},\hat{p}] = i\hbar$、真空零点能底限 $\frac{1}{2}\hbar\omega$ 与薛定谔 $\partial_x^2\psi$ 扩散项；宏观 $\hbar/S_{\mathrm{cl}} \to 0$ 退化为确定性哈密顿—雅可比流（`文献结果` / `手工推导`） |
+| **1. 运动学基元** | 单位球面极小圆弧元 $(\cos\epsilon, \sin\epsilon)$，受双向公平锁 $\cos^2\epsilon + \sin^2\epsilon = 1$ 约束（`LEAN ✓`：`lagrange_gram_identity`），绝无平直切线段（`MODEL`） | 左右镜像手性微弧 $\pm\Omega(\epsilon)$ 沿驻相脊线 $\delta\Phi = 0$ 横向一阶对消，偏离脊线的折线束因高频相位旋转相互湮灭 | 牛顿第一惯性定律匀速直线运动与经典最小作用量极值轨道 $\delta S = 0$（“以曲拼直”，`手工推导` / `文献结果`） |
+| **2. 二阶矢高与测不准** | 极小圆弧自带非零矢高 $1 - \cos\epsilon = \frac{\epsilon^2}{2} + O(\epsilon^4)$ 与吉拉尔球面角超 $\Omega(\epsilon) \approx \frac{\epsilon^2}{2}$，锁死非对易方差下界（`MODEL`；`LEAN ✓` 仅指 `exp_tail_le`, `robertson_schrodinger` 本身） | 光滑单轨 $\epsilon_N = \Theta/N$ 按 `trotter_product` 归零 $N\cdot O(N^{-2})\to 0$；扩散路径束 $\epsilon_N \propto N^{-1/2}$ 按费曼—伊藤二次标度守恒 $O(1)$ 总矢高 | 量子层留存 $[\hat{x},\hat{p}] = i\hbar$、真空零点能底限 $\frac{1}{2}\hbar\omega$ 与薛定谔 $\partial_x^2\psi$ 扩散项；宏观 $\hbar/S_{\mathrm{cl}} \to 0$ 退化为确定性哈密顿—雅可比流（`文献结果` / `手工推导`） |
 | **3. 相位偏置与宏观力** | 相邻极小圆弧之间加载空间非均匀局部贝里联络与势相位偏置 $\delta\phi = \frac{q}{\hbar}\mathcal{A}_\mu dx^\mu - \frac{1}{\hbar}V dt$ | 巴格曼多步传播链 `bargmann_path_product`（`LEAN ✓`）使相长干涉脊线向低相位梯度侧折射，闭合小面元按斯托克斯定理积分环路相位通量 | 牛顿第二定律 $\mathbf{F} = -\nabla V = m\mathbf{a}$、洛伦兹力与麦克斯韦宏观电磁场强 $\mathcal{F} = d\mathcal{A}$（`文献结果` / `MODEL`，外部规范动力学边界见假设 `H8`） |
 | **4. 旋量拓扑双覆叠** | 半角旋子 $\cos\frac{\epsilon}{2} - \hat{\mathbf{I}}\sin\frac{\epsilon}{2}$ 绕行 $360^\circ$ 换叶翻转至 $-1$，唯绕满 $720^\circ$ 方始闭合复原（`LEAN ✓`：`circle_double_cover_history_lift`） | 双覆叠拓扑同伦扇区带权求和：奇半整数自旋交换路径保留拓扑负号 $(-1)$，偶整数自旋路径同相叠加放大 | 费米子泡利不相容简并排斥刚性（支撑原子壳层与宏观固体不可压缩性）与玻色子宏观相干经典场（`文献结果` / `MODEL`） |
-| **5. 超静定单纯形角亏** | 全连通 $K_N$ 极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的二上链缺陷（`LEAN ✓`：`tetra_defects_incidence_repair_and_exactness`，只担保上链计数）与 $N \ge 5$ 超静定铰链角亏 $\delta_e = 2\pi - \sum_k \theta_k$（`MODEL`） | 共面内壁按 $\partial^2 = 0$ 成对抵消，庞扎诺—雷吉与自旋泡沫配分函数对离散铰链角亏执行大尺度粗粒平均 | 广义相对论光滑黎曼曲率张量与爱因斯坦引力场方程 $G_{\mu\nu} = 8\pi G T_{\mu\nu}$（`文献结果`；四维洛伦兹连续统极限标 `MODEL` / `OPEN`） |
+| **5. 超静定单纯形角亏** | 全连通 $K_N$ 极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的二上链缺陷（`LEAN ✓`：`tetra_defects_incidence_repair_and_exactness`）与 $N \ge 5$ 超静定铰链角亏 $\delta_e = 2\pi - \sum_k \theta_k$（`MODEL`） | 共面内壁按 $\partial^2 = 0$ 成对抵消，庞扎诺—雷吉与自旋泡沫配分函数对离散铰链角亏执行大尺度粗粒平均 | 广义相对论光滑黎曼曲率张量与爱因斯坦引力场方程 $G_{\mu\nu} = 8\pi G T_{\mu\nu}$（`文献结果`；四维洛伦兹连续统极限标 `MODEL` / `OPEN`） |
 | **6. 驻波体积与热力学熵** | 依特定实直线 Delone 集离散间距 $r_{\mathrm{pack}} = \frac{1}{2}$（`LEAN ✓`：`exists_golden_modelSet_delone`）作结构类比，模型单胞态兼具主对角驻波模长与异向微弧副对角相干 | 整数圈锁相回路 $\gamma_B = 2\pi n$ 相长幸存；落入同一宏观粗粒读出桶 `EscapePairs` 的微弧经对角捏合 $\Pi_{\mathrm{diag}}$ 抹除副对角相位相干 | “同相成体，漏相化热”：幸存驻波节点凝聚为宏观实体体积（[§34.7](ch34-s07-standing-wave-volume.md#sec-ch34-standing-wave-volume-emergence)），被删微弧相干严格化为非负冯·诺依曼热力学熵增 $\Delta S_{\mathrm{vN}} = \sum_k D(\tilde{\rho}_k \Vert \Pi_{\mathrm{diag}}(\tilde{\rho}_k)) \ge 0$（`LEAN ✓`：`entropy_production_coherence_deletion_identity`） |
 
 下面我们用一组完全闭式可核验的定量基准算例，把极小圆弧矢高、光滑特罗特归零对比费曼—伊藤守恒，以及 $41$ 路圆弧束的相位折射与捏合熵税逐位算透：
@@ -262,10 +262,10 @@ $$
 2. **实验文献的实际测量范围**：（a）Lindner 等（*Phys. Rev. Lett.* **95**, 040401, 2005，[doi:10.1103/PhysRevLett.95.040401](https://doi.org/10.1103/PhysRevLett.95.040401)）利用约 $500\;\mathrm{as}$ 的光致电离时间窗测得受哪一历史信息调控的角分辨电子能谱干涉条纹；（b）Tirole 等（*Nature Phys.* **19**, 999, 2023，[doi:10.1038/s41567-023-01993-w](https://doi.org/10.1038/s41567-023-01993-w)）以氧化铟锡（ITO）超快时变门控观测光束时间双缝频谱干涉，属于光束时间折射与频谱条纹演示，而非单光子源实验；（c）Rao 等（*Phys. Rev. Lett.* **135**, 066704, 2025，[doi:10.1103/jc1c-k3ll](https://doi.org/10.1103/jc1c-k3ll)）报道时变强耦合磁子模式的时间衍射，不应自动外推为逐个单磁子数据；（d）Angulo 等（*Phys. Rev. Lett.* **136**, 153601, 2026，[doi:10.1103/gjfq-k9dv](https://doi.org/10.1103/gjfq-k9dv)）结合交叉克尔（cross-Kerr）弱探针、相干信号与点击／无点击差分推断，测得光子透射条件下原子激发态的负条件弱时间——该效应超出了单纯脉冲峰值重塑，但仍属条件弱相互作用读数，并非粒子沿时间倒流或额外虚空间轴行进的直接证明（虚平面内割弦仍标为 `MODEL`）。
 :::
 
-至此，我们在第十一级阶梯上给出了一种微积分对偶读法（`MODEL`）：微观量子力学被读作单位球面上不可线性化的极小圆弧微分元（$\delta$），而宏观牛顿惯性、力场折射、弯曲时空、实体体积与热力学熵增，被读作万千量子圆弧经路径积分“以曲拼直、同相成体、漏相化热”后浮现的积分包络（$\int$）。然而，顺着这道路径积分之桥再往前追问一步，整座物理学与几何学的底层本体论还将迎来一场更彻底的回环贯通：既然路径积分能把微观量子圆弧缝合成宏观物理，宇宙难道是一条“从底层砖块单向堆砌上层建筑”的单行道吗？**为什么老子说“反者道之动”，现代物理学又说“万物皆为场”？为什么在几何学里我们总是说“线、面、体”，在矢量分析里总是说“梯度、旋度、散度”，在物理学里又总是说“粒子、波、场”——为什么人类最核心的空间概念与物理概念偏偏总是“三个概念成一组”，既不止于二、也不溢于四？** 先在下方 `ARC//MACRO` 完整交互实验室中亲手推演极小圆弧矢高、费曼—伊藤二次标度、量子三大圆弧特征、“以曲拼直”驻相缝合与微积分跨尺度变焦，随后步入 [§34.12](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop)，揭开“一弧生三相、万物互为路径积分”的圆满闭环：
+至此，我们在第十一级阶梯上扶正了颠倒百年的微积分对偶：微观量子力学正是单位球面上不可线性化的极小圆弧微分元（$\delta$），而宏观牛顿惯性、力场折射、弯曲时空、实体体积与热力学熵增，全都是万千量子圆弧经路径积分“以曲拼直、同相成体、漏相化热”后浮现的积分包络（$\int$）。然而，顺着这道路径积分之桥再往前追问一步，整座物理学与几何学的底层本体论还将迎来一场更彻底的回环贯通：既然路径积分能把微观量子圆弧缝合成宏观物理，宇宙难道是一条“从底层砖块单向堆砌上层建筑”的单行道吗？**为什么老子说“反者道之动”，现代物理学又说“万物皆为场”？为什么在几何学里我们总是说“线、面、体”，在矢量分析里总是说“梯度、旋度、散度”，在物理学里又总是说“粒子、波、场”——为什么人类最核心的空间概念与物理概念偏偏总是“三个概念成一组”，既不止于二、也不溢于四？** 先在下方 `ARC//MACRO` 完整交互实验室中亲手推演极小圆弧矢高、费曼—伊藤二次标度、量子三大圆弧特征、“以曲拼直”驻相缝合与微积分跨尺度变焦，随后步入 [§34.12](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop)，揭开“一弧生三相、万物互为路径积分”的圆满闭环：
 
 ::: {.viz src="quantum-arc-macro-integral-sandbox" height="640"}
-**量子极小圆弧微分元（$\delta$）与路径积分缝合宏观物理（$\int$）完整交互实验室（`ARC//MACRO`）。** 自由切换“圆弧矢高对费曼—伊藤标度—量子三大圆弧特征—以曲拼直驻相惯性—相位梯度折射力场与熵税—微积分跨尺度对偶变焦”五张实验卡，调节极小圆弧角 $\epsilon$、切片步数 $N$、圆弧束条数 $M$、横向相位偏置梯度 $\beta$ 与跨尺度变焦倍率，同屏核验青色切向步 $\sin\epsilon$、品红圆弧矢高 $1 - \cos\epsilon$ 与球面角超 $\Omega(\epsilon)$、琥珀色驻相宏观轨道及紫色粗粒捏合熵增 $\Delta S_{\mathrm{vN}}$；绿色 `LEAN ✓` 徽章只对应九条冻结内核定理各自的陈述。
+**量子极小圆弧微分元（$\delta$）与路径积分缝合宏观物理（$\int$）完整交互实验室（`ARC//MACRO`）。** 自由切换“圆弧矢高对费曼—伊藤标度—量子三大圆弧特征—以曲拼直驻相惯性—相位梯度折射力场与熵税—微积分跨尺度对偶变焦”五张实验卡，调节极小圆弧角 $\epsilon$、切片步数 $N$、圆弧束条数 $M$、横向相位偏置梯度 $\beta$ 与跨尺度变焦倍率，同屏核验青色切向步 $\sin\epsilon$、品红圆弧矢高 $1 - \cos\epsilon$ 与球面角超 $\Omega(\epsilon)$、琥珀色驻相宏观轨道及紫色粗粒捏合熵增 $\Delta S_{\mathrm{vN}}$；绿色 `LEAN ✓` 徽章严格对应九条冻结内核定理。
 :::
 
 ---
