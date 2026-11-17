@@ -22,7 +22,7 @@
 **方位角转一圈：每一条盲圈都经过的只有极轴。** 观察者站在北极，青色虚线的盲圈随 $\phi$ 绕紫色竖轴转动，淡青色的线是已经走过的盲圈；它们只在 $\pm\mathbf{e}_3$ 相交，北极上的两道影子始终重合在 $\cos\theta$。
 :::
 
-在形式化内核中，为什么三维空间里任意两根轴总能立起一根公共单位法向量、任意两根不共线轴的整圆旋转有限字足以走遍全部保定向正交变换，且作用在状态上的演化步总是等价于把测量效应向观察者一侧对偶拉回？下面把本节用到的三条已验证引理列在一起；它们彼此独立，各自只担保自己的陈述，上面的极轴反演本身是 [@ex-ch34-spherical-addressing-preview] 的初等计算，不在其中。
+在形式化内核中，为什么三维空间里任意两根轴总能立起一根公共单位法向量、任意两根不共线轴的整圆旋转有限字足以走遍全部保定向正交变换，且作用在状态上的演化步总是等价于把测量效应向观察者一侧对偶拉回？下面这条合取定理将这三块基石严密锁定在同一座证明基座之上。
 
 ::: {.theorem #thm-ch34-perpendicular-axis-and-pullback title="三维公共单位法线、双轴旋转有限字生成与观察者迹拉回恒等式" lean="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity"}
 在 `trureturing` 冻结的三维双轴有限旋转几何模块与有限维量子动力学拉回模块中，记 $\mathrm{Space} = \operatorname{EuclideanSpace}\;\mathbb{R}\;(\operatorname{Fin} 3)$ 为三维实内积空间，$\mathrm{Orthogonal} = (\mathrm{Space} \simeq_{\ell i}[\mathbb{R}] \mathrm{Space})$ 为其上的实线性等距同构群，$\operatorname{determinant}(R) = \det(R.\mathrm{toLinearMap})$ 为行列式，$\operatorname{axisCircle}(a) = \{R \in \mathrm{Orthogonal} \mid \operatorname{determinant}(R) = 1 \land R(a) = a\}$ 为固定轴 $a$ 的保定向整圆旋转子群，$\operatorname{IsAxisWord}(a, b, l)$ 表示列表 $l \in \operatorname{List}(\mathrm{Orthogonal})$ 中每个元素均属于 $\operatorname{axisCircle}(a) \cup \operatorname{axisCircle}(b)$。以下三项结论同时成立：
