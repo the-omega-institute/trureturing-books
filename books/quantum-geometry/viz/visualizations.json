@@ -6400,6 +6400,100 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "arc-body-calculus-sandbox",
+      "code": "ARC//CALCULUS",
+      "title": "ARC//CALCULUS · 极小圆弧体微积分重塑：以旋代差、矢高相变与有限精度斯托克斯沙盘",
+      "title_en": "ARC//CALCULUS · Minimal Arc-Body Calculus: Rotors for Differences, the Sagitta Phase Transition and Finite-Precision Stokes",
+      "summary": "每一步都是一枚模长为 1 的极小圆弧旋子：横向切弦 c = sin κε 与轴向矢高 v = 2 sin²(κε/2) 满足 (1 − v)² + c² = 1。滑板坡在竖直处斜率 tan θ 爆掉，紫色旋子照转；向 90° 盲面迈一步的复步 Im f(x₀ + iε)/ε 不做相减，e^x sin x 在 ε = 10⁻¹⁷ 时仍准到机器精度，前向差分却归零、误差 100%；N = 1/ε 步、每步转 σ₀ε^α 的随机旋子在球上游走，粗糙度 α 从 1 降到 1/2，矢高总和从 0.0005 锁到 0.5（伊藤修正）；上半球分成 M 个球面三角，北极正则矢高联络的内棱 ±Φ 正反相消，外圈环流等于角盈之和 2π，M = 4 也没有离散化误差；四面体、八面体及其细分的闭壳上 V − E + F = 2，curl grad = 0、div curl = 0，全部四面体上边缘为 0。五张实验卡可独立引用。",
+      "summary_en": "Every step is a unit rotor on a minimal circular arc: the transverse chord c = sin κε and the axial sagitta v = 2 sin²(κε/2) satisfy (1 − v)² + c² = 1. On a skate ramp the slope tan θ blows up at the vertical while the violet rotor keeps turning; the complex step Im f(x₀ + iε)/ε into the 90° blind sheet subtracts nothing, and for e^x sin x it stays exact to machine precision at ε = 10⁻¹⁷ while the forward difference collapses to 0, 100% off; a random rotor walk of N = 1/ε steps of angle σ₀ε^α roams the sphere, and as the roughness α falls from 1 to 1/2 the sagitta sum locks from 0.0005 onto 0.5 (the Itô term); on M spherical triangles of the upper hemisphere the interior arcs ±Φ of the North-Pole-regular sagitta connection cancel in pairs, so the rim circulation equals the sum of the excesses, 2π, with no discretization error already at M = 4; on the closed shells of the tetrahedron, the octahedron and their subdivisions V − E + F = 2, curl grad = 0, div curl = 0 and every tetrahedral coboundary vanishes. Five independently citable experiments.",
+      "path": "arc-body-calculus-sandbox/",
+      "thumbnail": "arc-body-calculus-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-17",
+      "chapter": 34,
+      "section": "34.30",
+      "presets": [
+        "osculating-rotor-vs-tangent",
+        "blind-zone-complex-step",
+        "roughness-ito-phase-transition",
+        "finite-mesh-stokes-cancellation",
+        "coboundary-d2-zero-closed-shell"
+      ],
+      "preset_titles": {
+        "osculating-rotor-vs-tangent": {
+          "zh": "滑板坡上的密切旋子与切线斜率：竖直处 tan θ 爆掉，旋子照转",
+          "en": "The osculating rotor against the tangent slope on a skate ramp: tan θ blows up at the vertical, the rotor keeps turning"
+        },
+        "blind-zone-complex-step": {
+          "zh": "向 90° 盲区迈一步的复步求导：不相减，ε = 10⁻¹⁷ 仍准",
+          "en": "The complex step into the 90° blind sheet: no subtraction, still exact at ε = 10⁻¹⁷"
+        },
+        "roughness-ito-phase-transition": {
+          "zh": "路径序旋子管与矢高相变：α = 1/2 时矢高总和锁到 0.5",
+          "en": "The path-ordered rotor tube and the sagitta phase transition: at α = 1/2 the sagitta sum locks onto 0.5"
+        },
+        "finite-mesh-stokes-cancellation": {
+          "zh": "半球上的有限网格斯托克斯：内棱正反相消，M = 4 也不差",
+          "en": "Finite-mesh Stokes on a hemisphere: interior arcs cancel in pairs, exact already at M = 4"
+        },
+        "coboundary-d2-zero-closed-shell": {
+          "zh": "闭合的极小圆弧壳：curl grad = 0，div curl = 0，边界的边界是空的",
+          "en": "A closed minimal-arc shell: curl grad = 0, div curl = 0, the boundary of a boundary is empty"
+        }
+      },
+      "tags": [
+        "以旋代差",
+        "切弦与矢高",
+        "复步求导",
+        "伊藤矢高相变",
+        "有限网格斯托克斯",
+        "d² = 0 闭壳"
+      ],
+      "tags_en": [
+        "Rotors for differences",
+        "Chord and sagitta",
+        "Complex-step derivative",
+        "Itô sagitta transition",
+        "Finite-mesh Stokes",
+        "d² = 0 closed shell"
+      ],
+      "theory": [
+        {
+          "label": "§34.30 极小圆弧体微积分重塑：以旋代差、矢高相变与有限精度斯托克斯定理",
+          "label_en": "§34.30 Rebuilding Calculus from Minimal Circular-Arc Bodies: Rotor Differentials, the Sagitta Phase Transition, and Finite-Precision Stokes Exactness",
+          "href": "../zh/ch34-s30-arc-body-calculus-and-finite-stokes.html",
+          "href_en": "../en/ch34-s30-arc-body-calculus-and-finite-stokes.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow"
+        },
+        {
+          "gid": "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/TrotterProduct.trotter_product"
+        },
+        {
+          "gid": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }
