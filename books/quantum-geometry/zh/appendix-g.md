@@ -1,4 +1,4 @@
-# 附录 G 稳定子多面体之外：马约拉纳编码、克利福德魔性与转向语境性 {#sec-appendix-g}
+# 附录 G 稳定子多面体之外：马约拉纳编码、克利福德魔性与三设置转向 {#sec-appendix-g}
 
 在正文的几何脉络中，我们已经从五条彼此呼应的路径触及了有限维量子结构的代数骨架：[第十章](ch10-gram-geometry-and-order.md)剖析了对易顺序、相容格拉姆几何与双比特泡利花边图（doily）的语境奇偶约束；[第十三章](ch13-entanglement-and-chsh.md)揭示了双量子比特余弦圆弧如何突破贝尔（CHSH）折线上界，并把远端条件态塑造成转向椭球；[第十四章](ch14-cloning-codes-and-braids.md)与[14.2 节](ch14-s02-pauli-syndromes.md)建立了广义泡利字综合征与稳定子纠错码的辛正交判据；[第十六章](ch16-qsvt-walks-and-compilation.md)与[16.8 节](ch16-s08-finite-gate-polytopes.md)展示了离散门集如何在三维球面上张成有限割圆多面体；[附录 B](appendix-b.md)则系统汇总了克利福德几何代数 $\mathrm{Cl}_{3,0}(\mathbb{R})$ 的分级基片、异或乘法表与二元辛相空间字典。
 
@@ -7,10 +7,10 @@
 1. **有限模数马约拉纳稳定子码的距离上限**：在二元自正交校验子空间含全 $1$ 宇称向量且保有正逻辑维数的条件下，$n \le 14$ 个马约拉纳模式能否容身码距至少为 $4$ 的二元编码？
 2. **离散相空间魔性的张量复合律**：当两个单比特密度态都落在布洛赫球赤道平面（$Z$ 分量为 $0$）时，双比特离散 Wigner $\ell^1$ 距离是否遵循精确的乘性复合定律？
 3. **非赤道张量缺额的可分解性边界**：一旦第二个单比特因子离开赤道进入正卦限，双比特张量距离与乘性基线之间的缺额（deficit）还能否统一写成“首因子距离乘单变量函数”的因式分解？
-4. **奇素数维克利福德三阶矩的逐点正性检验**：在奇素数维量子系统中，任意归一纯态在任意随机拉格朗日子空间置换算子上的三阶矩迹 $\kappa$，是否如朴素概率类比所期待的那样恒满足逐点区间界 $0 \le \kappa \le 1$？
+4. **奇素数维克利福德三阶矩的逐点正性检验**：在奇素数维量子系统中，任意归一纯态在任意随机拉格朗日子空间置换算子上的三阶矩迹 $\kappa$，是否如 Zhu、Mao 与 Yi（2024）猜想 2 的逐点条款所断言的那样恒满足逐点区间界 $0 \le \kappa \le 1$？
 5. **三设置泡利转向的椭球中心临界半径**：在双量子比特系统中，Bob 条件转向椭球中心长度 $t = \|\vec{c}_B\|$ 究竟在哪个尖锐阈值处截断三正交设置转向参数 $F_3 > 1$ 的违背能力？
 
-本附录以纯有限维矩阵手算与已冻结的五条 Lean 4 内核定理（验证边界见[附录 C](appendix-c.md)）逐一回答上述问题。需要先行申明认识论边界：这五节串联的共同主线是**有限维代数与凸几何表征的可达边界与精确反例**，本书**不声称**二元编码汉明重、单双比特 Wigner $\ell^1$ 距离、奇素数维克利福德三阶矩与双比特三设置转向参数这五种量在资源论意义下互为充要条件。
+本附录以纯有限维矩阵手算与已冻结的五条 Lean 4 内核定理（验证边界见[附录 C](appendix-c.md)）逐一回答上述问题。这五个问题都来自已发表文献中的猜想或开放问题，所引 Lean 模块对它们的结算方式如下（文献结果的出处；结算本身是 Lean 验证的）：问题 1 是 M. B. Hastings《Small Majorana fermion codes》（*Quantum Inf. Comput.* **17**, 2017；arXiv:1703.00612）中关于至多 $14$ 个模式的判断，结算为证明；问题 2 与问题 3 分别是 S. Dutta 与 Tushar《A Phase-Space Geometric Measure of Magic in Qubit Systems》（arXiv:2603.20792，2026）的猜想 5.6（赤道乘性）与猜想 5.5 中的因式分解条款，前者结算为证明，后者结算为反例；问题 4 是 H. Zhu、C. Mao 与 C. Yi《Third moments of qudit Clifford orbits and 3-designs based on magic orbits》（arXiv:2410.13575，2024）猜想 2 的逐点条款，结算为反例（该猜想中的聚合不等式未被断言或否定）；问题 5 来自 A. F. Ducuara、C. E. Susa 与 P. Skrzypczyk《Locally inaccessible hidden quantum correlations》（*Phys. Rev. A* **110**, 022435, 2024）中只依赖 Bob 椭球中心长度的转向界问题（原文报告了约 $0.66$ 的数值阈值），结算为精确阈值 $2/3$ 的证明。需要先行申明认识论边界：这五节串联的共同主线是**有限维代数与凸几何表征的可达边界与精确反例**，本书**不声称**二元编码汉明重、单双比特 Wigner $\ell^1$ 距离、奇素数维克利福德三阶矩与双比特三设置转向参数这五种量在资源论意义下互为充要条件。
 
 ---
 
@@ -91,7 +91,7 @@ $$
 \|\operatorname{WignerOne}(\rho_A) - q\|_1 \;\ge\; \left|\frac{3}{5} - q_{(0,0)}\right| + \left|-\frac{1}{10} - q_{(0,1)}\right| \;\ge\; \left(\frac{3}{5} - \frac{1}{2}\right) + \left(0 - \left(-\frac{1}{10}\right)\right) = \frac{1}{10} + \frac{1}{10} = \frac{1}{5}.
 $$
 
-反过来，取棱上凸组合 $q_* = \frac{2}{5} W_1(\lvert +X\rangle\langle +X\rvert) + \frac{3}{5} W_1(\lvert +Y\rangle\langle +Y\rvert) = (\frac{1}{2}, 0, \frac{1}{5}, \frac{3}{10}) \in \operatorname{Wfree}$，直接相减得 $\|\operatorname{WignerOne}(\rho_A) - q_*\|_1 = \frac{1}{10} + \frac{1}{10} + 0 + 0 = \frac{1}{5}$，故精确算出 $\operatorname{COne}(\rho_A) = \frac{1}{5}$！若将两个赤道态 $\rho_A \otimes \rho_A$ 张量复合，下面的定理断言无需在 $60$ 个双比特稳定子纯态张成的 $16$ 维多面体中重新盲搜：
+反过来，取棱上凸组合 $q_* = \frac{2}{5} W_1(\lvert +X\rangle\langle +X\rvert) + \frac{3}{5} W_1(\lvert +Y\rangle\langle +Y\rvert) = (\frac{1}{2}, 0, \frac{1}{5}, \frac{3}{10}) \in \operatorname{Wfree}$，直接相减得 $\|\operatorname{WignerOne}(\rho_A) - q_*\|_1 = \frac{1}{10} + \frac{1}{10} + 0 + 0 = \frac{1}{5}$，故精确算出 $\operatorname{COne}(\rho_A) = \frac{1}{5}$！若将两个赤道态 $\rho_A \otimes \rho_A$ 张量复合，下面的定理断言无需在 $60$ 个双比特稳定子纯态在 $\mathbb{R}^{16}$ 中张成的多面体中重新盲搜：
 
 $$
 \operatorname{CTwo}(\rho_A \otimes \rho_A) = \frac{1}{5} + \frac{1}{5} + \frac{1}{5}\times\frac{1}{5} = \frac{11}{25}, \qquad \text{等价于}\quad 1 + \operatorname{CTwo}(\rho_A \otimes \rho_A) = \bigl(1 + \operatorname{COne}(\rho_A)\bigr)^2 = \frac{36}{25}.
@@ -125,7 +125,7 @@ $$
 
 ## G.3 Wigner 张量缺额的单因子分解反例 {#sec-appendix-g-3}
 
-既然双赤道态满足 $1 + \operatorname{CTwo}(\rho \otimes_k \sigma) = (1 + \operatorname{COne}(\rho))(1 + \operatorname{COne}(\sigma))$，一个非常自然的猜想随之浮现：若固定第一个因子 $\rho$ 仍在赤道上（$\operatorname{bloch}(\rho, \mathrm{Z}) = 0$ 且 $\operatorname{COne}(\rho) > 0$），而让第二个因子 $\sigma$ 走出赤道、进入布洛赫球严格正卦限 $\operatorname{bloch}(\sigma, \mathrm{X})\operatorname{bloch}(\sigma, \mathrm{Y})\operatorname{bloch}(\sigma, \mathrm{Z}) > 0$，两者偏离乘性律的**张量缺额（tensor deficit）**是否至少能按首因子魔性 $\operatorname{COne}(\rho)$ 线性拆开，写成 $\operatorname{deficit}(\rho, \sigma) = \operatorname{COne}(\rho)\, f(\sigma)$？
+既然双赤道态满足 $1 + \operatorname{CTwo}(\rho \otimes_k \sigma) = (1 + \operatorname{COne}(\rho))(1 + \operatorname{COne}(\sigma))$，一个自然的猜想随之浮现（即 Dutta 与 Tushar 猜想 5.5 中的因式分解条款）：若固定第一个因子 $\rho$ 仍在赤道上（$\operatorname{bloch}(\rho, \mathrm{Z}) = 0$ 且 $\operatorname{COne}(\rho) > 0$），而让第二个因子 $\sigma$ 走出赤道、进入布洛赫球严格正卦限 $\operatorname{bloch}(\sigma, \mathrm{X})\operatorname{bloch}(\sigma, \mathrm{Y})\operatorname{bloch}(\sigma, \mathrm{Z}) > 0$，两者偏离乘性律的**张量缺额（tensor deficit）**是否至少能按首因子魔性 $\operatorname{COne}(\rho)$ 线性拆开，写成 $\operatorname{deficit}(\rho, \sigma) = \operatorname{COne}(\rho)\, f(\sigma)$？
 
 在源码模块 `QubitWignerDeficitFactorRefutation` 中，张量缺额 `deficit` 与待检验的单因子分解命题 `claim` 精确定义为：
 
@@ -181,7 +181,7 @@ $$
 
 ## G.4 十一维克利福德三阶矩的负期望反例 {#sec-appendix-g-4}
 
-在偶维单量子比特（$d = 2$）中，我们已经看到离散相点核权重本身就会对纠缠稳定子态取负值；而在奇素数维 $d \ge 3$（如 $d = 3, 5, 7, 11$）的量子位（qudit）系统中，Gross 定理（文献背景，未在本节重复锁定）指出奇素数维稳定子态的离散 Wigner 函数恒非负。正是这一漂亮性质容易诱发一种过度的“正性外推错觉”：在奇素数维多拷贝克利福德表示论（Schur–Weyl 对偶）中，张成三拷贝克利福德群换位子代数的**随机拉格朗日子空间置换算子** $R(d, n, T)$，在任意归一纯态的三重张量立方 $\lvert\Psi\rangle^{\otimes 3}$ 上的期望迹 $\kappa(d, n, \Psi, T)$，会不会对一切奇素数 $d$、一切模式数 $n$、一切归一态 $\Psi$ 与一切随机拉格朗日子空间 $T$ 都恒落在闭区间 $[0, 1]$ 内？
+在偶维单量子比特（$d = 2$）中，我们已经看到离散相点核权重本身就会对纠缠稳定子态取负值；而在奇素数维 $d \ge 3$（如 $d = 3, 5, 7, 11$）的量子位（qudit）系统中，Gross 定理（D. Gross 2006 的离散 Hudson 定理，文献背景，未在本节重复锁定）指出奇素数维中纯态的离散 Wigner 函数非负当且仅当它是稳定子态。与这类正性结构相邻，Zhu、Mao 与 Yi（2024）的猜想 2 在其逐点条款中对下面的问题给出了肯定的断言：在奇素数维多拷贝克利福德表示论（Schur–Weyl 对偶）中，张成三拷贝克利福德群换位子代数的**随机拉格朗日子空间置换算子** $R(d, n, T)$，在任意归一纯态的三重张量立方 $\lvert\Psi\rangle^{\otimes 3}$ 上的期望迹 $\kappa(d, n, \Psi, T)$，会不会对一切奇素数 $d$、一切模式数 $n$、一切归一态 $\Psi$ 与一切随机拉格朗日子空间 $T$ 都恒落在闭区间 $[0, 1]$ 内？
 
 先精确对齐源码模块 `CliffordThirdMomentNegativity` 中的五个核心定义：
 
