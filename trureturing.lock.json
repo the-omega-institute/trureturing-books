@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4e2a0d3fcca69885dfcf5b56184838554ebb5239",
-  "pinned_at": "2026-11-17T05:43:16Z",
+  "commit": "776129eb1e0e88033b2f3d3cc5854e97dd4cdbae",
+  "pinned_at": "2026-11-17T10:43:44Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -772,6 +772,22 @@
       "statement_id": "sha256:6c31f23e5cf0428d465913af0499bddbca7257a9b97e9f6b2b77fca5586949e5",
       "line": 255,
       "signature": "theorem result : ¬ claim"
+    },
+    "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds": {
+      "module": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases",
+      "name": "D5.S3.Analytic.Asymptotics.AccumulatedSagittaPhases.accumulated_sagitta_bounds",
+      "kind": "theorem",
+      "statement_id": "sha256:d1d175e225c0686f56eca25ed2de0ae10e8d619964770ba480af65e623cf2799",
+      "line": 93,
+      "signature": "theorem accumulated_sagitta_bounds (σ T α : ℝ) (N : ℕ) : N * (stepAngle σ T α N ^ 2 / 2 - stepAngle σ T α N ^ 4 / 24) ≤ accumulatedSagitta σ T α N ∧ accumulatedSagitta σ T α N ≤ N * (stepAngle σ T α N ^ 2 / 2)"
+    },
+    "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases": {
+      "module": "D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases",
+      "name": "D5.S3.Analytic.Asymptotics.AccumulatedSagittaPhases.accumulated_sagitta_phases",
+      "kind": "theorem",
+      "statement_id": "sha256:d1d175e225c0686f56eca25ed2de0ae10e8d619964770ba480af65e623cf2799",
+      "line": 103,
+      "signature": "theorem accumulated_sagitta_phases (σ T α : ℝ) (hT : 0 < T) : (1 / 2 < α → Tendsto (accumulatedSagitta σ T α) atTop (𝓝 0)) ∧ (α = 1 / 2 → Tendsto (accumulatedSagitta σ T α) atTop (𝓝 (σ ^ 2 * T / 2))) ∧ (σ ≠ 0 → 0 < α → α < 1 / 2 → Tendsto (accumulatedSagitta σ T α) atTop atTop)"
     },
     "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff": {
       "module": "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint",
@@ -3009,7 +3025,7 @@
       "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
       "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.common_plane",
       "kind": "theorem",
-      "statement_id": "sha256:31f0a9c9487ecabe45030acc92e7154d2b86e4eb15a01c148efffd2fb9896cbe",
+      "statement_id": "sha256:17ace9e49ed128f58b14260ed84b9c5c2277248d1c815efe523e4d4a6328e26b",
       "line": 951,
       "signature": "theorem common_plane (X : Fin 3 → Matrix (Fin 3) (Fin 5) ℂ) (hX : LinearIndependent ℂ X) (hinj : Function.Injective (stack X).mulVecLin) : ∃ L : Submodule ℂ (Fin 3 → ℂ), finrank ℂ L = 2 ∧ ∀ T : Matrix (Fin 3) (Fin 3) ℂ, T.IsHermitian → (stack X)ᴴ * Matrix.kronecker T (1 : Matrix (Fin 3) (Fin 3) ℂ) * stack X = 0 → ∀ u ∈ L, ∀ v ∈ L, star u ⬝ᵥ (T *ᵥ v) = 0"
     },
@@ -3017,7 +3033,7 @@
       "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
       "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.compression",
       "kind": "def",
-      "statement_id": "sha256:31f0a9c9487ecabe45030acc92e7154d2b86e4eb15a01c148efffd2fb9896cbe",
+      "statement_id": "sha256:17ace9e49ed128f58b14260ed84b9c5c2277248d1c815efe523e4d4a6328e26b",
       "line": 42,
       "signature": "def compression {a b : ℕ} (X : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (T : Matrix (Fin 3) (Fin 3) ℂ)"
     },
@@ -3025,7 +3041,7 @@
       "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
       "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.compression_eq_sum",
       "kind": "theorem",
-      "statement_id": "sha256:31f0a9c9487ecabe45030acc92e7154d2b86e4eb15a01c148efffd2fb9896cbe",
+      "statement_id": "sha256:17ace9e49ed128f58b14260ed84b9c5c2277248d1c815efe523e4d4a6328e26b",
       "line": 50,
       "signature": "theorem compression_eq_sum {a b : ℕ} (X : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (T : Matrix (Fin 3) (Fin 3) ℂ) : compression X T = ∑ r, ∑ s, T r s • ((X r)ᴴ * X s)"
     },
@@ -3137,7 +3153,7 @@
       "module": "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation",
       "name": "D5.S3.Quantum.Algebra.NativeWidthAtMostThreeRefutation.claim",
       "kind": "def",
-      "statement_id": "sha256:e58e16196aaf6869df45e2efc6ae1aadd88236c678940b66fe8fef4a7f5f2e3d",
+      "statement_id": "sha256:f696694523af91857b7b4cd6f118727f1d6a43446cbdf6f0cd6d418faad9823a",
       "line": 212,
       "signature": "def claim : Prop"
     },
@@ -3145,7 +3161,7 @@
       "module": "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation",
       "name": "D5.S3.Quantum.Algebra.NativeWidthAtMostThreeRefutation.positive_scalar_obstruction",
       "kind": "theorem",
-      "statement_id": "sha256:e58e16196aaf6869df45e2efc6ae1aadd88236c678940b66fe8fef4a7f5f2e3d",
+      "statement_id": "sha256:f696694523af91857b7b4cd6f118727f1d6a43446cbdf6f0cd6d418faad9823a",
       "line": 977,
       "signature": "theorem positive_scalar_obstruction (M : MatM 3) (N : MatN 3) (lambda : ℝ) (hlambda : 0 < lambda) : ¬ ((∑ r, Matrix.kronecker (M r) (N r))ᴴ * (∑ r, Matrix.kronecker (M r) (N r)) = (lambda : ℂ) • (1 : Matrix (Fin 5 × Fin 3) (Fin 5 × Fin 3) ℂ))"
     },
@@ -5689,7 +5705,7 @@
       "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",
       "name": "D5.S3.Weil.ZeroData.ActualReciprocalSquareBounds.actual_height_gt_ten",
       "kind": "theorem",
-      "statement_id": "sha256:91cc4473f454135e23da562c3028d1d2bbb147f3a7c1f0ba03aa208c141ac4b5",
+      "statement_id": "sha256:563604f18b7b6b0b20061f480be12cd4392440ddd8f89215134196eb17f9f3e3",
       "line": 789,
       "signature": "theorem actual_height_gt_ten (rho : ℂ) (hrho : IsNontrivialZero rho) : 10 < |rho.im|"
     },

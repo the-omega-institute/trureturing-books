@@ -121,6 +121,36 @@ Watch the sign of the leading exponent **$2\alpha - 1$**! Without adding a singl
 **The Path-Ordered Rotor Tube and the Sagitta Phase Transition: At $\alpha = \frac{1}{2}$ the Sagitta Sum Locks onto $0.5$ (`roughness-ito-phase-transition`).** Trace the violet path-ordered rotor tube of $N = 1/\epsilon$ unit-modulus steps of angle $\sigma_0\epsilon^\alpha$ across the unit sphere while dragging the amber handle for roughness exponent $\alpha$: as $\alpha$ drops from the smooth phase $\alpha = 1$ to the critical Brownian/Feynman threshold $\alpha = \frac{1}{2}$, the magenta cumulative sagitta bar $\Sigma_{\mathrm{sag}}$ rises from $0.0005$ and locks onto $0.5$ (Itô's $\frac{1}{2}\sigma_0^2 T$ drift), depressing the magenta Itô latitude ring $\mathbb{E}[z] = (1 - v_\epsilon)^N$ in lockstep (green `LEAN ✓` badges anchor `exp_tail_le` and `trotter_product`).
 :::
 
+The expansion above gives only the leading terms. The frozen library has a non-asymptotic version: two-sided bounds that hold for every finite $N$, and the three limit regimes that follow from them.
+
+::: {.lemma #lem-ch34-accumulated-sagitta-bounds title="Two-Sided Bounds on the Accumulated Sagitta at Every Finite Step Count" lean="D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds"}
+Let $\sigma,T,\alpha$ be real numbers and $N$ a natural number. Write $\theta_N=\sigma\,(T/N)^{\alpha}$ for the step angle and $\Sigma_N=N\,(1-\cos\theta_N)$ for the accumulated sagitta. Then
+
+$$
+N\left(\frac{\theta_N^2}{2}-\frac{\theta_N^4}{24}\right)\ \le\ \Sigma_N\ \le\ N\,\frac{\theta_N^2}{2}.
+$$
+
+Division and real powers follow Lean's total-function conventions here: $T/N=0$ when $N=0$, and real powers of a negative base are those defined in Mathlib. The inequality carries no sign or size condition on $\sigma,T,\alpha$.
+:::
+
+::: proof
+Both sides come from the pointwise cosine bounds $\frac{x^2}{2}-\frac{x^4}{24}\le1-\cos x\le\frac{x^2}{2}$, valid for every real $x$, taken at $x=\theta_N$ and multiplied by $N\ge0$. The upper bound is $\cos x\ge1-\frac{x^2}{2}$. For the lower bound, write $1-\cos x=2\sin^2\frac x2$ and use $\lvert y-\sin y\rvert\le\frac{\lvert y\rvert^3}{6}$ at $y=\frac x2$: expanding $\sin^2y=\bigl(y-(y-\sin y)\bigr)^2$ and discarding the square of the difference gives $\sin^2y\ge y^2-\frac{y^4}{3}$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch34-accumulated-sagitta-phases title="The Three Limit Regimes of the Accumulated Sagitta: $\alpha$ Above, At and Below $\frac{1}{2}$" lean="D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"}
+Let $\sigma,T,\alpha$ be real numbers with $T>0$, and let $\theta_N$ and $\Sigma_N$ be as in [@lem-ch34-accumulated-sagitta-bounds]. As $N\to\infty$:
+
+1. if $\alpha>\frac12$, then $\Sigma_N\to0$;
+2. if $\alpha=\frac12$, then $\Sigma_N\to\frac{\sigma^2T}{2}$;
+3. if $\sigma\neq0$ and $0<\alpha<\frac12$, then $\Sigma_N\to+\infty$.
+:::
+
+::: proof
+For positive $N$ one has $N\theta_N^2=c\,N^{1-2\alpha}$ and $\theta_N^2=c\,N^{-2\alpha}$ with $c=\sigma^2T^{2\alpha}$. When $\alpha>\frac12$, the upper bound of [@lem-ch34-accumulated-sagitta-bounds] tends to $0$ while $\Sigma_N\ge0$. When $\alpha=\frac12$, the upper bound is the constant $\frac{\sigma^2T}{2}$ and the lower bound is $\frac{\sigma^2T}{2}-\frac{(\sigma^2T)^2}{24N}$, and the two squeeze the limit. When $0<\alpha<\frac12$, $\theta_N^2\to0$, so from some step on it is at most $6$, and from then on the lower bound is at least $\frac c4N^{1-2\alpha}$; $\sigma\neq0$ makes $c>0$, hence the divergence. The full proof is checked by the Lean kernel.
+:::
+
+With $\epsilon=T/N$ and $\sigma=\sigma_0$, $\Sigma_N$ is the $\Sigma_{\mathrm{sag}}(\epsilon,\alpha)$ above: Regimes I and II correspond to item 1, Regime III to item 2, and Regime IV to item 3. The theorem does not cover $\alpha\le0$: for $\alpha=0$ and $\sigma=2\pi$ every step is a full turn and $\Sigma_N\equiv0$, so the condition $\alpha>0$ in item 3 cannot be dropped (manual derivation). Nor does the theorem concern paths with unequal steps or random signs; the statements above about the Itô correction and rough-path theory keep their own labels as literature results.
+
 With single-step rotor derivatives and one-dimensional product integrals unified, we arrive at the architectural crown of calculus: exterior differentiation and the generalized Stokes theorem on curved manifolds.
 
 ## 34.30.3 Zero-Error Finite-Mesh Stokes Exactness on `1—3—3—1`, a Three-Line Gauss–Bonnet Proof, and Non-Abelian Surface Whiskering {#sec-ch34-30-3}

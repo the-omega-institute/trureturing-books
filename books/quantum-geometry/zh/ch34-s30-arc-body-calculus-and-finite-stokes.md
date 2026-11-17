@@ -121,6 +121,36 @@ $$
 **路径序旋子管与矢高相变：$\alpha = \frac{1}{2}$ 时矢高总和锁到 $0.5$ 实验卡（`roughness-ito-phase-transition`）。** 在单位球面上追踪 $N = 1/\epsilon$ 步、单步转角 $\sigma_0\epsilon^\alpha$ 的紫色路径序旋子管（每一步模长严格保持为 $1$，琥珀色手柄调节粗糙度指数 $\alpha$）：当 $\alpha$ 从光滑相 $\alpha = 1$ 降至临界布朗/费曼指数 $\alpha = \frac{1}{2}$ 时，品红色累计矢高柱 $\Sigma_{\mathrm{sag}}$ 从 $0.0005$ 稳稳锁死到非零宏观常数 $0.5$（即伊藤二阶修正项 $\frac{1}{2}\sigma_0^2 T$），并同步压低品红色伊藤期望纬圈 $\mathbb{E}[z] = (1 - v_\epsilon)^N$（绿色 `LEAN ✓` 锚定 `exp_tail_le` 与 `trotter_product`）。
 :::
 
+上面的展开式只给出首项。冻结库里有它的非渐近版本：对每个有限的 $N$ 都成立的双侧界，以及由它推出的三个极限区间。
+
+::: {.lemma #lem-ch34-accumulated-sagitta-bounds title="累计矢高在每个有限步数上的双侧界" lean="D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds"}
+设 $\sigma,T,\alpha$ 为实数，$N$ 为自然数。记单步转角 $\theta_N=\sigma\,(T/N)^{\alpha}$，累计矢高 $\Sigma_N=N\,(1-\cos\theta_N)$。则
+
+$$
+N\left(\frac{\theta_N^2}{2}-\frac{\theta_N^4}{24}\right)\ \le\ \Sigma_N\ \le\ N\,\frac{\theta_N^2}{2}.
+$$
+
+这里的除法与实数幂按 Lean 的全函数约定取值：$N=0$ 时 $T/N=0$，负底数的实数幂按 Mathlib 的定义。不等式对 $\sigma,T,\alpha$ 没有符号或大小的限制。
+:::
+
+::: proof
+两侧都来自对任意实数 $x$ 成立的逐点余弦界 $\frac{x^2}{2}-\frac{x^4}{24}\le1-\cos x\le\frac{x^2}{2}$，取 $x=\theta_N$ 再乘以 $N\ge0$。上界就是 $\cos x\ge1-\frac{x^2}{2}$。下界先写 $1-\cos x=2\sin^2\frac x2$，再用 $\lvert y-\sin y\rvert\le\frac{\lvert y\rvert^3}{6}$（取 $y=\frac x2$）：把 $\sin^2y=\bigl(y-(y-\sin y)\bigr)^2$ 展开并舍去差的平方，得 $\sin^2y\ge y^2-\frac{y^4}{3}$。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch34-accumulated-sagitta-phases title="累计矢高的三个极限区间：$\alpha$ 大于、等于、小于 $\frac{1}{2}$" lean="D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"}
+设 $\sigma,T,\alpha$ 为实数，$T>0$，$\theta_N$ 与 $\Sigma_N$ 同 [@lem-ch34-accumulated-sagitta-bounds]。当 $N\to\infty$ 时：
+
+1. 若 $\alpha>\frac12$，则 $\Sigma_N\to0$；
+2. 若 $\alpha=\frac12$，则 $\Sigma_N\to\frac{\sigma^2T}{2}$；
+3. 若 $\sigma\neq0$ 且 $0<\alpha<\frac12$，则 $\Sigma_N\to+\infty$。
+:::
+
+::: proof
+对正的 $N$ 有 $N\theta_N^2=c\,N^{1-2\alpha}$ 与 $\theta_N^2=c\,N^{-2\alpha}$，其中 $c=\sigma^2T^{2\alpha}$。$\alpha>\frac12$ 时 [@lem-ch34-accumulated-sagitta-bounds] 的上界趋于 $0$，而 $\Sigma_N\ge0$。$\alpha=\frac12$ 时上界恒为 $\frac{\sigma^2T}{2}$，下界为 $\frac{\sigma^2T}{2}-\frac{(\sigma^2T)^2}{24N}$，两者夹出极限。$0<\alpha<\frac12$ 时 $\theta_N^2\to0$，从某一步起不超过 $6$，此后下界至少是 $\frac c4N^{1-2\alpha}$；$\sigma\neq0$ 使 $c>0$，于是发散。完整证明由 Lean 内核检查。
+:::
+
+取 $\epsilon=T/N$、$\sigma=\sigma_0$，$\Sigma_N$ 就是上文的 $\Sigma_{\mathrm{sag}}(\epsilon,\alpha)$：相区 I、II 对应第 1 款，相区 III 对应第 2 款，相区 IV 对应第 3 款。定理没有覆盖 $\alpha\le0$：$\alpha=0$、$\sigma=2\pi$ 时每一步都转满一圈，$\Sigma_N\equiv0$，所以第 3 款中的 $\alpha>0$ 不能去掉（手工推导）。定理也不涉及步长不等或符号随机的路径；上文关于伊藤修正项与粗糙路径理论的陈述，仍按各自的标注读作文献结果。
+
 单步导数与一维路径乘积积分各就各位之后，我们迎来了微积分大厦最壮丽的穹顶：高维流形上的外微分与广义斯托克斯定理。
 
 ## 34.30.3 `1—3—3—1` 有限网格零误差斯托克斯定理、三行高斯—博内证明与非阿贝尔面和乐锚定 {#sec-ch34-30-3}
