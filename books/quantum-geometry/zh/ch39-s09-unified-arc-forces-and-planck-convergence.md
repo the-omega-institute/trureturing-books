@@ -354,6 +354,66 @@ $$
 第 1 条的证明只用到两件事：两个面法向的比较 $n_F\cdot n_G$，以及每个面的边界闭合；把前者读作 [@def-ch32-axiom-of-comparison] 条款 II 的求同通道，是本书的读法（`MODEL`）。第 2 条说，三维时与铰链长度共轭的量正是角亏这段弧。四维时 $\frac{\partial S}{\partial\ell_k} = \sum_h\delta_h\,\frac{\partial A_h}{\partial\ell_k}$ 依赖一般维数的施莱夫利公式（文献结果；见 J. Milnor, “The Schläfli differential equality”, 收于 *Collected Papers of John Milnor* 第 1 卷, 1994）。洛伦兹签名、耦合常数与量子化不由此给出（[@prob-ch34-gravity-dynamics-and-coupling]）。
 :::
 
+规范一侧也可以对作用量求一阶变分。转动一条链，威尔逊作用量的变化只经过含这条链的那些小方格：
+
+::: {.remark #rem-ch39-wilson-staple-equation-of-motion title="格点杨—米尔斯方程：链与订书钉和之积的奇通道（手工推导与文献结果）"}
+**手工推导；威尔逊作用量（Wilson 1974）、订书钉写法与格点运动方程的通行形式，以及连续极限下的对应为文献结果，未在本书形式化。** 设 $d$ 维周期超立方格点每个方向至少有两个格点，链变量 $U_\mu(x) \in G$ 从 $x$ 指向 $x + \hat{\mu}$，$G = \mathrm{U}(N)$ 或 $\mathrm{SU}(N)$。小方格和乐按 [@rem-ch39-plaquette-sagitta-and-wilson-action] 第 4 条的次序取为 $U_{\mu\nu}(x) = U_\mu(x)U_\nu(x + \hat{\mu})U_\mu(x + \hat{\nu})^{-1}U_\nu(x)^{-1}$，作用量为 $S_W = \beta\sum_{x}\sum_{\mu < \nu}\left(1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_{\mu\nu}(x)\right)$。对一条链 $\ell = (x, \mu)$ 定义订书钉和
+
+$$
+\Sigma_\mu(x) = \sum_{\nu \ne \mu}\left(U_\nu(x + \hat{\mu})\,U_\mu(x + \hat{\nu})^{-1}\,U_\nu(x)^{-1} + U_\nu(x + \hat{\mu} - \hat{\nu})^{-1}\,U_\mu(x - \hat{\nu})^{-1}\,U_\nu(x - \hat{\nu})\right),
+$$
+
+记 $M_\ell = U_\mu(x)\Sigma_\mu(x)$（从 $x$ 出发、回到 $x$ 的 $2(d - 1)$ 个小方格回路之和），它的奇通道 $A(M) = \frac{1}{2}(M - M^\dagger)$，以及去迹的奇通道 $A_0(M) = A(M) - \frac{1}{N}\operatorname{Tr}A(M)\,\mathbf{1}$。
+
+1. **对单条链是线性的。** $S_W = C_\ell - \frac{\beta}{N}\operatorname{Re}\operatorname{Tr}\bigl(U_\mu(x)\Sigma_\mu(x)\bigr)$，其中 $C_\ell$ 不含 $U_\mu(x)$。证明：含链 $\ell$ 的小方格恰有 $2(d - 1)$ 个，每个 $\nu \ne \mu$ 各有基点在 $x$ 与在 $x - \hat{\nu}$ 的两个；由 $\operatorname{Re}\operatorname{Tr}U^{-1} = \operatorname{Re}\operatorname{Tr}U$ 与迹的循环性，每个的 $\operatorname{Re}\operatorname{Tr}$ 都等于 $\operatorname{Re}\operatorname{Tr}(U_\mu(x)\,\cdot\,\text{对应的订书钉})$。
+2. **有限转动的精确变化。** 把 $U_\mu(x)$ 换成 $VU_\mu(x)$（$V \in G$），则 $\Delta S_W = -\frac{\beta}{N}\operatorname{Re}\operatorname{Tr}\bigl((V - \mathbf{1})M_\ell\bigr)$：作用量的变化是转动的割弦 $V - \mathbf{1}$ 与 $M_\ell$ 的配对，对任意大小的转动都精确成立。
+3. **一阶变分。** 设 $X$ 反厄米（$G = \mathrm{SU}(N)$ 时再要求 $\operatorname{Tr}X = 0$），则
+
+   $$
+   \frac{d}{d\varepsilon}\,S_W\bigl(e^{\varepsilon X}U_\mu(x)\bigr)\bigr\rvert_{\varepsilon = 0} = -\frac{\beta}{N}\operatorname{Re}\operatorname{Tr}(XM_\ell) = -\frac{\beta}{N}\operatorname{Tr}\bigl(X\,A(M_\ell)\bigr),
+   $$
+
+   因为对反厄米的 $X$ 有 $\overline{\operatorname{Tr}(XM)} = \operatorname{Tr}(M^\dagger X^\dagger) = -\operatorname{Tr}(XM^\dagger)$。$\operatorname{Tr}X = 0$ 时 $A$ 可换成 $A_0$。
+4. **运动方程。** 在 $\mathfrak{su}(N)$ 上 $\langle X, Y\rangle = -\operatorname{Tr}(XY)$ 是正定内积（$-\operatorname{Tr}(XX) = \operatorname{Tr}(X^\dagger X)$），第 3 条说 $S_W$ 对这条链的梯度是 $\frac{\beta}{N}A_0(M_\ell)$。所以 $S_W$ 对链 $\ell$ 在 $\mathrm{SU}(N)$ 内的一切变分驻定，当且仅当 $A_0\bigl(U_\mu(x)\Sigma_\mu(x)\bigr) = 0$；对 $\mathrm{U}(N)$ 则当且仅当 $A\bigl(U_\mu(x)\Sigma_\mu(x)\bigr) = 0$，即 $U_\mu(x)\Sigma_\mu(x)$ 厄米。作用量读的是各小方格的偶通道（矢高），它对链的导数读的是链与订书钉和之积的奇通道。
+5. **顶点处的恒等式。** 对每个顶点 $x$，恒有
+
+   $$
+   \sum_{\mu}\left(A_0\bigl(U_\mu(x)\Sigma_\mu(x)\bigr) - A_0\bigl(\Sigma_\mu(x - \hat{\mu})\,U_\mu(x - \hat{\mu})\bigr)\right) = 0 .
+   $$
+
+   两项都是以 $x$ 为基点的回路。证明：只在 $x$ 处作规范变换 $g = e^{\varepsilon X}$，离开 $x$ 的链变为 $gU$，进入 $x$ 的链变为 $Ug^{-1}$，$S_W$ 不变；按第 3 条对 $\varepsilon$ 求导，离开的链贡献 $-\frac{\beta}{N}\operatorname{Tr}(XA_0(U\Sigma))$，进入的链贡献 $+\frac{\beta}{N}\operatorname{Tr}(XA_0(\Sigma U))$，总和对一切 $X \in \mathfrak{su}(N)$ 为零，取 $X$ 为上式左端即得。也可以逐对验证：以 $x$ 为角的每个小方格在 $x$ 处的两条链上各贡献一个以 $x$ 为基点的回路；两条链同为离开或同为进入 $x$ 时，两个回路互逆、所带符号相同，一条离开一条进入时，两个回路相同、所带符号相反，而 $A(L^{-1}) = -A(L)$，所以逐对相消。由于每一项中 $\operatorname{Tr}(U\Sigma) = \operatorname{Tr}(\Sigma U)$，把 $A_0$ 换成 $A$ 等式仍成立。这一恒等式对任何构型都成立，与是否满足运动方程无关。
+6. **$\mathrm{U}(1)$ 的形式。** 记 $\theta_p$ 为小方格 $p$ 的通量，$\epsilon(\ell, p) = \pm 1$ 表示 $p$ 的边界是否顺着链 $\ell$ 的方向经过它。则 $A\bigl(U_\ell\Sigma_\ell\bigr) = i\sum_{p \ni \ell}\epsilon(\ell, p)\sin\theta_p$，运动方程是 $\sum_{p \ni \ell}\epsilon(\ell, p)\sin\theta_p = 0$。第 5 条化为：在每个顶点，按离开为正、进入为负对上式求和，结果恒为零，因为每个以 $x$ 为角的小方格恰在 $x$ 处的两条链上各出现一次，两次的符号相反。单个小方格 $S = \beta(1 - \cos\theta)$ 对 $\theta$ 的导数是 $\beta\sin\theta$：偶通道的导数是奇通道。
+7. **数值核对。** 在边长为 $3$ 的四维周期格点上取随机的 $\mathrm{SU}(2)$、$\mathrm{SU}(3)$ 与 $\mathrm{U}(3)$ 构型（$\beta = 2.3$），第 2 条的有限转动公式与直接重算作用量之差不超过 $10^{-12}$，第 3 条与步长 $10^{-5}$ 的中心差分的相对偏差在 $10^{-7}$ 以下，第 5 条在各顶点的偏差不超过 $2 \times 10^{-15}$；边长为 $2$ 的格点上第 1、5 条同样成立。$\mathrm{SU}(3)$ 中沿 $-A_0$ 方向对单条链作梯度流，作用量单调下降并停在 $A_0 = 0$ 处。
+
+与立方体上的比安基恒等式（[@rem-ch39-cube-bianchi-sagitta]）并列：比安基恒等式与第 5 条都对一切构型成立，运动方程只对作用量的驻点成立。前者来自立方体边界上每条棱恰好出现两次、方向相反；后者来自顶点处的规范不变性，也就是第 5 条中的逐对相消。这里不主张两者之间有或没有推导关系。在 $\mathrm{U}(1)$ 中三者分别是 $\sum_{f \subset \partial c}\theta_f \in 2\pi\mathbb{Z}$、$\sum_{p \ni \ell}\epsilon(\ell, p)\sin\theta_p = 0$ 与它在顶点处的散度恒为零。光滑场的连续极限下，这三者分别对应 $D_{[\lambda}F_{\mu\nu]} = 0$、$D_\mu F_{\mu\nu} = 0$ 与 $D_\nu D_\mu F_{\mu\nu} = 0$（文献结果）。与 [@rem-ch39-schlafli-regge-deficit-gradient] 并读：三维雷吉作用量对棱长的导数就是角亏本身，威尔逊作用量对链的导数是奇通道，在 $\mathrm{U}(1)$ 中是 $\sin\theta_p$ 而不是 $\theta_p$。把这一区别当作两类力的结构差异，是本书的读法（`MODEL`）；规范群、耦合常数与量子动力学不由此给出。
+
+威尔逊作用量见 K. G. Wilson（*Phys. Rev. D* **10**, 2445–2459, 1974）；作用量对单条链的线性依赖与订书钉写法见 C. Gattringer 与 C. B. Lang 的教科书 *Quantum Chromodynamics on the Lattice*（Lecture Notes in Physics **788**, Springer, 2010, DOI `10.1007/978-3-642-01850-3`）。
+:::
+
+小方格的矢高还可以按偶、奇两个通道精确拆开，并给出用链弦表示的二阶展开：
+
+::: {.remark #rem-ch39-plaquette-even-odd-expansion title="小方格矢高的偶奇勾股分解与二阶展开的余项（手工推导）"}
+**手工推导。** 设 $P \in \mathrm{U}(N)$ 为小方格和乐，本征角 $\theta_j \in (-\pi, \pi]$，$\bar{v}(P) = N - \operatorname{Re}\operatorname{Tr}P$，偶通道的矢高矩阵 $v_P = \mathbf{1} - \frac{1}{2}(P + P^\dagger)$，奇通道 $A_P = \frac{1}{2}(P - P^\dagger)$。
+
+1. **勾股分解。** $\bar{v}(P) = \frac{1}{2}\lVert A_P\rVert_F^2 + \frac{1}{2}\lVert v_P\rVert_F^2$，按本征角写即 $\sum_j(1 - \cos\theta_j) = \frac{1}{2}\sum_j\sin^2\theta_j + \frac{1}{2}\sum_j(1 - \cos\theta_j)^2$。证明：$P - \mathbf{1} = -v_P + A_P$，$v_P$ 厄米、$A_P$ 反厄米，故 $\operatorname{Tr}\bigl((P - \mathbf{1})^\dagger(P - \mathbf{1})\bigr) = \operatorname{Tr}(v_P^2) - \operatorname{Tr}(A_P^2)$，交叉项 $\operatorname{Tr}(v_PA_P)$ 与 $\operatorname{Tr}(A_Pv_P)$ 相消；再用 $\bar{v}(P) = \frac{1}{2}\lVert P - \mathbf{1}\rVert_F^2$。
+2. **矢高与奇通道平方的比较。** 因为 $v_P \ge 0$，$\lVert v_P\rVert_F^2 \le \lVert v_P\rVert_{\mathrm{op}}\operatorname{Tr}v_P = \lVert v_P\rVert_{\mathrm{op}}\,\bar{v}(P)$，所以
+
+   $$
+   \left(1 - \frac{1}{2}\lVert v_P\rVert_{\mathrm{op}}\right)\bar{v}(P) \le \frac{1}{2}\lVert A_P\rVert_F^2 \le \bar{v}(P),
+   $$
+
+   左边等号当且仅当 $v_P$ 的非零本征值彼此相等（例如 $\mathrm{U}(1)$ 与 $\mathrm{SU}(2)$）。$\frac{1}{2}\lVert A_P\rVert_F^2 = \frac{1}{2}\sum_j\sin^2\theta_j$ 是由奇通道写出的另一种小方格项；两者的相对差不超过 $\frac{1}{2}\lVert v_P\rVert_{\mathrm{op}} = \frac{1}{4}\lVert P - \mathbf{1}\rVert_{\mathrm{op}}^2$，它是规范不变的，对光滑场按 $a^4$ 趋零。由双侧酉不变性与三角不等式，$\lVert P - \mathbf{1}\rVert_{\mathrm{op}} \le \sum_{\ell \in \partial p}\lVert U_\ell - \mathbf{1}\rVert_{\mathrm{op}}$，于是相对差也不超过四条链弦之和平方的 $\frac{1}{4}$。在 $\mathrm{U}(1)$ 中取 $h = w = e^{i\phi}$、$h' = w' = e^{-i\phi}$，$\phi \to 0$ 时这一步的两边之比趋于 $1$。
+3. **二阶展开与余项。** 记 $x_1 = h - \mathbf{1}$、$x_2 = w - \mathbf{1}$、$x_3 = h'^{-1} - \mathbf{1}$、$x_4 = w'^{-1} - \mathbf{1}$，$c_i = \lVert x_i\rVert_{\mathrm{op}}$（$\lVert h'^{-1} - \mathbf{1}\rVert_{\mathrm{op}} = \lVert h' - \mathbf{1}\rVert_{\mathrm{op}}$）。展开 $P = (\mathbf{1} + x_1)(\mathbf{1} + x_2)(\mathbf{1} + x_3)(\mathbf{1} + x_4)$ 得
+
+   $$
+   P - \mathbf{1} = \sum_i x_i + \sum_{i < j}x_ix_j + R, \qquad \lVert R\rVert_{\mathrm{op}} \le e_3(c) + e_4(c),
+   $$
+
+   $e_k$ 为 $c_1, \dots, c_4$ 的第 $k$ 个初等对称多项式：$R$ 是全部三重与四重有序乘积之和，算子范数次可乘。常数不能改小：四个弦相同、彼此对易时 $R = 4x^3 + x^4$，$x \to 0$ 时比值趋于 $1$。
+4. **能证明到哪一步。** 第 3 条的余项按链弦的三次方控制 $\lVert P - \mathbf{1}\rVert$。链弦依赖规范；对光滑场取使链弦为 $O(a)$ 的规范，把第 3 条与链变量的泰勒展开合用，得到的是 $\sqrt{\bar{v}(P)}$ 的首项加 $O(a^3)$ 的误差，即 $\bar{v}(P)$ 的首项 $\frac{a^4}{2}\operatorname{Tr}F_{\mu\nu}^2$ 加 $O(a^5)$。[@rem-ch39-plaquette-sagitta-and-wilson-action] 第 5 条的 $O(a^6)$（在那里标为文献结果）来自在小方格中心展开时奇数阶项的对称相消；第 3 条的界本身给不出它。
+5. **数值核对。** 对 $\mathrm{U}(1)$ 到 $\mathrm{U}(5)$ 中的随机元，第 1 条的偏差不超过 $2 \times 10^{-15}$；第 2 条与第 3 条的不等式在 3000 组随机的四链小方格上都成立，比值的最大值分别为 $1.0000$ 与 $0.9999$，与上面所说的极限情形一致。对一个光滑的 $\mathrm{SU}(2)$ 势以路径有序指数取链变量，$\bar{v}(P)$ 与在小方格中心取值的 $\frac{a^4}{2}\operatorname{Tr}F_{\mu\nu}^2$ 之差在 $a$ 减半时缩小为约 $2^{-6}$ 倍，改在角点取值则约为 $2^{-5}$ 倍。
+:::
+
 零作用量并不总是纯规范。在环面这样有不可缩回路的格点上，下面的冻结定理给出一个 $\mathbb{Z}/2$ 系数的实例：
 
 ::: {.theorem #thm-ch39-periodic-grid-flat-not-exact title="周期网格上的平坦 Z/2 边标号：梯度判据与一条缝的反例" lean="D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.flat_exact_iff,D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.horizontal_seam_counterexample"}
