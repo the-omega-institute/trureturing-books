@@ -6,7 +6,7 @@
 
 但在真实的超导芯片、离子阱与室温凝聚态实验室里，实验物理学家最常打交道的却不是球皮上的纯态，而是缩进了球体肚子里的**混合态**（mixed state）：布洛赫向量 $\vv{r}$ 的长度不再等于 $1$，而是变成了一根截短的线段 $\norm{\vv{r}} < 1$，甚至一步步萎缩成球心正中央那个毫无方向可言的死点 $\vv{r} = \vv{0}$。
 
-那截原本好端端的长度 $1 - \norm{\vv{r}}$ 究竟被谁偷走了？“退相干（decoherence）”真的是微观世界在某种神秘摩擦下发生了不可逆的本体毁灭吗？作为第一部“从点到线”的收官之章，我们将揭开混合态的几何机制：**正交记录耦合与环境偏迹边缘化如何在更大空间中压短局部状态**（[@thm-nonselective-marginal]、[@thm-reduced-access-defect]，并由 C\*-代数表示压缩 [@thm-stinespring-dilation] 与一般信道薛定谔图景扩张文献 [@rem-stinespring-literature] 对照补充）。不妨借斜刺的长矛和它截短的影子来想象局部布洛赫向量的缩短；实际求偏迹的是联合密度算子。
+那截原本好端端的长度 $1 - \norm{\vv{r}}$ 究竟被谁偷走了？“退相干（decoherence）”真的是微观世界在某种神秘摩擦下发生了不可逆的本体毁灭吗？作为第一部“从点到线”的收官之章，我们将揭开混合态的几何机制：**正交记录耦合与环境偏迹边缘化如何在更大空间中压短局部状态**（[@thm-nonselective-marginal]、[@thm-reduced-access-defect]，并由 C\*-代数表示压缩 [@thm-stinespring-dilation]、任意有限矩阵信道的等距扩张 [@thm-finite-channel-stinespring] 与极小扩张等文献结论 [@rem-stinespring-literature] 对照补充）。不妨借斜刺的长矛和它截短的影子来想象局部布洛赫向量的缩短；实际求偏迹的是联合密度算子。
 
 ::: {.figure src="ch04-overview"}
 **图 4。** 本章地图，三栏都是布洛赫球的竖直截面：第 I 栏，琥珀色的局部箭头朝着球皮上的 $\lvert +\rangle$（虚线），却只到 $\cos\theta_{\mathrm{env}}$ 就停在球里；第 II 栏，振幅阻尼（$\gamma = \frac{1}{2}$）把球缩小并往北推成青色的椭圆，北极的 $\rho$ 不动，$+x$ 上的 $\sigma$ 被拉向北方，两点之间的线从虚线缩成实线，$T$ 从 $0.707$ 降到 $0.433$（[@prop-trace-distance-metric-contraction]；这个信道的布洛赫形式是文献结果，未在本书形式化）；第 III 栏，琥珀色的点先抹掉横向部分、落到竖轴上，再抹掉 $r_z$、落到紫色的球心 $\frac{1}{2}I$。

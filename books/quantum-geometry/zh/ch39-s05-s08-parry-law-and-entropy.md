@@ -328,8 +328,8 @@ $$
 设阶数 $K \ge 3$ 的皮索切投点集或局域受约束多体哈密顿量，其内部接受窗 $\mathcal{R}_K$ 具有豪斯多夫维数严格大于整数余维的拓扑分形边界（例如 $K = 3$ 时文献结果给出 $D_F = \dim_H(\partial\mathcal{R}_3) \approx 1.09336 > 1$）。是否存在严格构造的一族局域有能隙基态或切投编码量子态，当区域特征尺度 $R \to \infty$ 时，其跨边界双体纠缠熵 $S_{\mathrm{ent}}(R)$ 严格服从由内部劳齐边界维数 $D_F$ 支配的反常标度律（如主项 $S_{\mathrm{ent}}(R) \asymp R^{D_F}$ 或精确锁定系数的对数/次主导分形修正项），并能给出标准余维一面积律失效或保持的充要谱间隙与局域性判据？在本书框架内，任何诸如 $S_{\mathrm{ent}} \propto R^{D_F}$ 的“分形视界面积律”表述均作为待证开放问题（`OPEN`）与启发性物理构想（`MODEL`）列出，绝不作为已证形式定理或引力面积律定理宣称。
 :::
 
-::: {.remark #rem-ch39-p2e-physical-tribonacci-interface title="物理 Tribonacci 跃迁链与有限开链接口（文献模型，未在本书形式化）"}
-**文献模型，未在本书形式化。** 一个可供研究的具体物理对象是零在位势的最近邻跃迁链。依 Kolehmainen–Lado–Moustaj，*One-dimensional quasicrystals with tensor-network finite-state automata*（[arXiv:2609.06040v1](https://arxiv.org/pdf/2609.06040v1)，§III 式 (2)–(3)、附录 B.2），取替代规则 $\sigma(A)=AB$、$\sigma(B)=AC$、$\sigma(C)=A$，以及从 $A$ 出发的不动无限词 $W=\lim_{j\to\infty}\sigma^j(A)$，字母从 $W_0$ 编号。固定 $0<\rho<1$，以 $t_C=1$ 为能量单位，令 $t_A=\rho^2$、$t_B=\rho$，即 $t_A/t_B=t_B/t_C=\rho$。对每个整数 $N\ge2$，在单粒子格点空间 $\mathbb{C}^N$ 的基 $\{\lvert i\rangle:0\le i<N\}$ 上定义
+::: {.remark #rem-ch39-p2e-physical-tribonacci-interface title="物理 Tribonacci 跃迁链与有限开链接口"}
+**文献模型与边界约定。** 一个可供研究的具体物理对象是零在位势的最近邻跃迁链。依 Kolehmainen–Lado–Moustaj，*One-dimensional quasicrystals with tensor-network finite-state automata*（[arXiv:2609.06040v1](https://arxiv.org/pdf/2609.06040v1)，§III 式 (2)–(3)、附录 B.2），取替代规则 $\sigma(A)=AB$、$\sigma(B)=AC$、$\sigma(C)=A$，以及从 $A$ 出发的不动无限词 $W=\lim_{j\to\infty}\sigma^j(A)$，字母从 $W_0$ 编号。固定 $0<\rho<1$，以 $t_C=1$ 为能量单位，令 $t_A=\rho^2$、$t_B=\rho$，即 $t_A/t_B=t_B/t_C=\rho$。对每个整数 $N\ge2$，在单粒子格点空间 $\mathbb{C}^N$ 的基 $\{\lvert i\rangle:0\le i<N\}$ 上定义
 
 $$
 h_N=\sum_{i=0}^{N-2}t_{W_i}\bigl(\lvert i\rangle\langle i+1\rvert+\lvert i+1\rangle\langle i\rvert\bigr).
@@ -346,15 +346,73 @@ h_{\rho,j}&=h_{N_j}\quad(j\ge1).
 \end{aligned}
 $$
 
-对每个固定的 $\rho\in(0,1)$，下文将证明沿上述确定的偶数格点开前缀有
+在这些确定的偶数格点开前缀上，定义
 
 $$
-\delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}\longrightarrow0\qquad(j\to\infty).
+\delta_{\rho,j}:=\min\{\lvert\lambda\rvert:\lambda\in\operatorname{Spec}(h_{\rho,j})\}.
 $$
 
-下文 [@ex-ch39-p2e-tribonacci-prefix-rate] 给出这一极限的纸面定量推导，并说明收敛对 $0<\rho<1$ 一致成立；整条应用在本书仍以纸面证明呈现，不带独立 Lean 验证徽章，也不声称解决外部新猜想。有限矩阵的可逆性、无限体积谱中零点的归属、有限分辨率态密度或 Anderson 局域化意义下的临界性，都不能直接替代这一指定边界与前缀序列的极限问题。Krebbekx–Moustaj–Dajani–Morais Smith 的 *Multifractal Properties of Tribonacci Chains*（[*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204)，§II.B.1、§III.A.1、§V）采用周期逼近与微扰重整化研究物理谱及临界性；本书不将其解释为上述对所有 $\rho\in(0,1)$ 的有限开链结论。
+[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 的单独陈述给出每个固定 $\rho\in(0,1)$ 的全序列极限。更强的 [@ex-ch39-p2e-tribonacci-prefix-rate] 保留定量纸面推导：对所有 $j\ge4$、$0<\rho<1$，有 $\delta_{\rho,j}\le73728/N_j$，并由此得到关于 $\rho$ 的一致收敛。整条定量应用仍以纸面证明呈现，不带独立 Lean 验证徽章，也不声称解决外部新猜想。有限矩阵的可逆性、无限体积谱中零点的归属、有限分辨率态密度或 Anderson 局域化意义下的临界性，都不能直接替代这一指定边界与前缀序列的极限证明。Krebbekx–Moustaj–Dajani–Morais Smith 的 *Multifractal Properties of Tribonacci Chains*（[*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204)，§II.B.1、§III.A.1、§V）采用周期逼近与微扰重整化研究物理谱及临界性；本书不将其解释为上述对所有 $\rho\in(0,1)$ 的有限开链结论。
 
-要讨论物理空间切口的熵，还须指定多体哈密顿量、填充及态；若选择粒子数守恒的 Slater 基态，须构造其实际占据投影 $P_{\mathrm{occ}}$，并对选定格点子集 $I$ 取关联矩阵压缩 $\chi_I P_{\mathrm{occ}}\chi_I$，其中 $\chi_I$ 投影到这些格点。Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。上述极限只处理这一单粒子谱距离：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
+**实际 Slater 态与关联矩阵约定。** 要讨论物理空间切口的熵，还须指定多体哈密顿量、填充及态。以下是文献构造与文献结果，未在本书形式化。让这 $N$ 个原始格点保持自然顺序 $0,\ldots,N-1$，以布尔占据串的占据子集 $S$ 标记正交归一基 $\lvert S\rangle$。选取整数 $0\le k\le N$ 和复矩阵 $V\in\mathbb{C}^{N\times k}$，其列是所占据的正交归一单粒子模式，即 $V^\dagger V=I_k$。对大小为 $k$ 的 $S$，令 $V_S$ 按递增格点顺序保留这些行，列顺序保持不变，定义实际的多体振幅
+
+$$
+\langle S\mid\Psi_V\rangle=
+\begin{cases}
+\det(V_S),&\lvert S\rvert=k,\\
+0,&\lvert S\rvert\ne k.
+\end{cases}
+$$
+
+这就是 Slater 行列式在有序占据基中的展开；空行列式取 $1$，所以 $k=0$ 给出真空。这里的占据基已经归一化，振幅不再乘以 $1/\sqrt{k!}$。Dereziński 的 [*Clifford algebras and fermions*](https://www.fuw.edu.pl/~derezins/clifford.pdf)，§7.1–7.2 式 (7.51)–(7.54)，给出 CAR、有序占据基与归一化 Slater 行列式。这一态的选择保留了振幅与费米符号；仅找一个具有所需关联矩阵的密度矩阵不能替代它。把它用于上述跃迁链的基态时，仍须指定所占模式、填充及多体哈密顿量，并核对能量最小性。
+
+令 $P=VV^\dagger$，$\rho_V=\lvert\Psi_V\rangle\langle\Psi_V\rvert$，并令 $c_i$ 为按原始格点顺序定义的费米湮灭算符。关联矩阵的指标约定为
+
+$$
+\begin{aligned}
+K_{ij}&=\Tr(\rho_V c_j^\dagger c_i)=P_{ij},\\
+C_{ij}&=\Tr(\rho_V c_i^\dagger c_j)=P_{ji},\qquad C=P^{\mathsf T}.
+\end{aligned}
+$$
+
+Dereziński 的定理 8.1，特别是式 (8.103) 的 $\omega_\pi(d\Gamma(h))=\Tr(\pi h)$，支持这一二点函数约定。Peschel，[*Calculation of reduced density matrices from correlation functions*](https://arxiv.org/pdf/cond-mat/0212631v1)，式 (7)、(9)–(10)，采用上面的 $C$ 约定；其式 (12) 中的转置不能略去。对实投影矩阵，两种记法可以重合；推广到复模式时必须保留转置区别。Peschel 还明确指出：对非 Slater 态，按同一二点函数重建的自由费米密度矩阵一般不能复现其他期望值。因此，关联矩阵相合本身不能确定一般密度矩阵。
+
+**空间压缩的完整谱。** 对上述 Slater 态，指定由 $\ell$ 个原始格点组成的空间区域 $I$。令 $V_I$ 只保留这些格点的行，并把 $P_I=V_I V_I^\dagger$ 看作作用在该区域上的 $\ell\times\ell$ 压缩矩阵，而不是补集上带额外零空间的 $N\times N$ 矩阵。文献中的费米子系统约定下，若 $\nu_1,\ldots,\nu_\ell\in[0,1]$ 是它的全部特征值，包括 $0$、$1$ 与重复值，则约化密度矩阵 $\rho_I$ 的特征值多重集恰有 $2^\ell$ 项，按所有占据串逐项列为
+
+$$
+\begin{aligned}
+b_a(0)&=1-\nu_a,\qquad b_a(1)=\nu_a,\\
+\lambda_{\boldsymbol n}&=\prod_{a=1}^{\ell}b_a(n_a),\qquad
+\boldsymbol n\in\{0,1\}^{\ell}.
+\end{aligned}
+$$
+
+相同数值按重数保留，零特征值也保留；显式选择两个因子避免了端点处的 $0^0$。例如，一个完全空或完全满的模式仍贡献一对特征值 $1,0$，不能从完整密度谱中删去。$\ell=0$ 时空乘积为 $1$，密度谱只有这一项。使用自然对数，熵为
+
+$$
+\begin{aligned}
+S(\rho_I)&=\sum_{a=1}^{\ell}h(\nu_a),\\
+h(x)&=-x\log x-(1-x)\log(1-x).
+\end{aligned}
+$$
+
+这里 $x\log x$ 在 $x=0$ 时按连续延拓取 $0$，故 $h(0)=h(1)=0$；若以比特计量，需将熵除以 $\log 2$。Peschel 的式 (8)–(11) 给出约化自由费米密度矩阵的模式描述；Klich，[*Lower entropy bounds and particle number fluctuations in a Fermi sea*](https://arxiv.org/pdf/quant-ph/0406068v2)，式 (4) 的投影模式分解、式 (7) 及其后的 $\operatorname{diag}(1-d_i,d_i)$ 约化因子与式 (11)，给出这一乘积谱和熵公式的依据。更一般的粒子数规范不变高斯密度矩阵也有同样配方，此时压缩的是其单粒子关联算符，不要求全空间关联算符为投影。高斯性是这里的假设，不能由所期待的谱公式倒推。含 $0$ 或 $1$ 时，Peschel 式 (12) 的矩阵对数不能直接使用；上述因子与连续延拓保留了这些端点。
+
+占据模式上的 $k\times k$ Gram 矩阵 $V_I^\dagger V_I$ 与 $P_I$ 有相同的非零谱，但两者维数可以不同。只掌握前者的谱还不足以列出空间密度矩阵的全部 $2^\ell$ 个特征值：必须把非零压缩谱按重数保留，再用零补足到 $\ell$ 项。熵求和中零模式贡献为零，容易掩盖这一完整谱的维数差别。这些谱关系是已有文献结论；本书尚需建立它们与具体占据载体的对应。
+
+**尚待形式化的空间接口。** 直接目标限定为 $0\le\ell\le N$ 时的连续前缀 $I=\{0,\ldots,\ell-1\}$。令 $a,a'\in\{0,1\}^{\ell}$ 为前缀占据串，$b\in\{0,1\}^{N-\ell}$ 为尾部占据串；$ab$ 表示按原始格点顺序先接 $a$、再接 $b$。用前面定义的同一个行列式振幅写出普通张量部分迹：
+
+$$
+\begin{aligned}
+\psi_V(a,b)&:=\langle ab\mid\Psi_V\rangle,\\
+R_I(a,a')&:=\sum_{b\in\{0,1\}^{N-\ell}}
+\psi_V(a,b)\,\overline{\psi_V(a',b)}.
+\end{aligned}
+$$
+
+这里 $R_I$ 是作用在全部 $2^\ell$ 个前缀占据串上的矩阵，求和遍历被迹去的尾部格点占据串。待证的是这个具体矩阵具有上面的完整谱多重集与端点安全的熵公式，包括 $\ell=0,N$，并使用全部 $\ell$ 个压缩特征值及其重数。Klich 的式 (7) 使用适当的费米张量积；它本身不替本书证明这一字面上的有序格点张量部分迹对应。任意不连续格点子集还涉及 Jordan–Wigner 字符串与费米子系统选择，须另行建立对应。以所需空间谱为前提的条件命题也不会构造出该态或完成这一目标。这里的文献说明不提供归一化、二点函数、基态、高斯性或空间谱的新 Lean 编译证据，地址数位切口仍不能充当物理空间切口。
+
+Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。上述极限只处理这一单粒子谱前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
 :::
 
 在这个实际词上，普通字母计数的平衡性与按位置奇偶加权的和是不同的量。沿用 $A=0$、$B=1$、$C=2$ 的字母编码，取整数权重
@@ -502,8 +560,188 @@ $$
 与 $s=0$、$m=m_n$ 时的统一界矛盾。这个反证覆盖每个正实数 $K$；从零开始的具体反例族是证明中的构造，不是另加假设，也不是由有限样本外推的结论。完整证明由 Lean 内核检查。
 :::
 
+反例族说明某些真实前缀的电荷可以逐层累积；要控制任意起点、任意长度的区段，还须同时控制每层块内部的所有前缀。这里可以复用一个与 Tribonacci 字母表无关的估计：每层至多留下一块未走完的子块，其余完整子块的电荷逐层相加。
+
+下列前缀包络、统一对数平方界及后文的固定参数开链收敛定理按书面证明收录。源文见 [前缀包络与区段界](https://github.com/the-omega-institute/trureturing/pull/30646)及 [开链收敛](https://github.com/the-omega-institute/trureturing/pull/30678)；各证明另给出固定版本的原文定位。这些结果尚无所钉 `dev` 提交中的匹配冻结声明，因此不计入本书的 Lean 验证，论证由作者与评审负责。前述 [@ex-ch39-p2e-tribonacci-prefix-rate] 的定量纸面结论保持其原有证据范围。
+
+::: {.lemma #lem-ch39-p2e-substitution-prefix-envelope title="替代词的逐层前缀包络" status="written-proof" proof="pf-ch39-p2e-substitution-prefix-envelope" repository="https://github.com/the-omega-institute/trureturing" source="SubstitutionPrefixEnvelope, Theorem 1.2" request="https://github.com/the-omega-institute/trureturing-requests/issues/271"}
+设 $\mathcal A$ 为任意字母表，$w:\mathcal A\to\mathbb Z$ 为整数权重，$f$ 将每个字母映为一个有限字，并按拼接延伸到有限字。约定 $f^0(a)$ 为单字母字 $a$，且
+
+$$
+Q(v)=\sum_{r=0}^{|v|-1}(-1)^r w(v_r).
+$$
+
+设 $M\in\mathbb Z$、$B\in\mathbb N$、$H:\mathbb N\to\mathbb Z$ 满足
+
+$$
+\begin{aligned}
+&0\le M,\qquad 0\le H(i)
+&&\text{对所有 }i\in\mathbb N,\\
+&|w(a)|\le M,\qquad |f(a)|\le B
+&&\text{对所有 }a\in\mathcal A,\\
+&|Q(f^i(a))|\le H(i)
+&&\text{对所有 }i\in\mathbb N,\ a\in\mathcal A.
+\end{aligned}
+$$
+
+则对所有 $j,t\in\mathbb N$ 与 $a\in\mathcal A$，
+
+$$
+\left|Q\bigl(\operatorname{take}_t(f^j(a))\bigr)\right|
+\le P(j):=M+B\sum_{i=0}^{j-1}H(i).
+$$
+
+其中 $\operatorname{take}_t$ 取前 $\min(t,|f^j(a)|)$ 个字母，$j=0$ 时求和为空。结论包含空前缀、整个像与超出字长的截取指标；不要求字母表有限、像非空或像长具有特定奇偶性。
+:::
+
+::: {.proof #pf-ch39-p2e-substitution-prefix-envelope}
+本证明依照 [源文 SubstitutionPrefixEnvelope, Theorem 1.2](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S1/Words/SubstitutionPrefixEnvelope.md) 的陈述与论证展开。
+
+局部从正号开始的交替和满足 $Q(uv)=Q(u)+(-1)^{|u|}Q(v)$，所以 $|Q(uv)|\le|Q(u)|+|Q(v)|$。零层像只是一个字母，所有前缀的绝对电荷至多为 $M$。将 $f^{j+1}(a)$ 写成由 $f(a)$ 指定的至多 $B$ 个 $j$ 层子块，任意前缀由若干完整子块与至多一个子块的前缀组成。完整部分贡献至多 $BH(j)$，未完成的部分由归纳假设控制在 $P(j)$ 内，故总量至多 $P(j)+BH(j)=P(j+1)$。若截取指标超过总长，则只有完整块；空像同样不增加电荷。整个归纳只用绝对值估计，不丢掉拼接时的相位。
+:::
+
+对于实际 Tribonacci 词，完整块的电荷公式给出线性的 $H(j)$，上式便给出二次的 $P(j)$。还需把任意实际区段放进合适层数的块中，才能得到与起点无关的界。
+
+::: {.theorem #thm-ch39-p2e-tribonacci-uniform-log-squared title="实际 Tribonacci 词的统一对数平方区段界" status="written-proof" proof="pf-ch39-p2e-tribonacci-uniform-log-squared" repository="https://github.com/the-omega-institute/trureturing" source="TribonacciUniformLogSquared, Theorem 1.1" request="https://github.com/the-omega-institute/trureturing-requests/issues/272"}
+取 $\sigma(A)=AB$、$\sigma(B)=AC$、$\sigma(C)=A$，令 $W=\lim_{n\to\infty}\sigma^n(A)$ 为从 $A$ 出发、从零编号的无限词。赋予整数权重 $w(A)=2$、$w(B)=1$、$w(C)=0$，并在每个区段内部从正号开始定义
+
+$$
+F(W_{[s,s+m)})=\sum_{r=0}^{m-1}(-1)^r w(W_{s+r}).
+$$
+
+存在一个与起点及长度都无关的实常数 $C>0$，使
+
+$$
+\forall s,m\in\mathbb N,\qquad
+\left|F(W_{[s,s+m)})\right|
+\le C\bigl(\log(m+2)\bigr)^2.
+$$
+
+整数电荷与自然数长度在不等式中视为实数，$\log$ 为自然对数。量词包含 $m=0$，此时电荷为零；即使 $s$ 为奇数，区段首项仍取正号。
+:::
+
+::: {.proof #pf-ch39-p2e-tribonacci-uniform-log-squared}
+本证明依照 [源文 TribonacciUniformLogSquared, Theorem 1.1](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S1/Words/TribonacciUniformLogSquared.md) 的陈述与论证展开。
+
+**完整块到前缀。** 沿用 $\tau=\sigma^4$。它的三个像长分别为 $13,11,7$。前面求出的完整块电荷为 $2$、$2-(-1)^j$ 与 $2-(2j+2)(-1)^j$，因此对所有字母 $X$ 与层数 $j$，
+
+$$
+|F(\tau^j(X))|\le H(j):=2j+4.
+$$
+
+把 [@lem-ch39-p2e-substitution-prefix-envelope] 用于 $M=2$、$B=13$ 与此 $H$，得到每个 $j$ 层像的所有前缀的共同包络
+
+$$
+\begin{aligned}
+P(j)&=2+13\sum_{i=0}^{j-1}(2i+4)\\
+&=2+13j^2+39j.
+\end{aligned}
+$$
+
+这是对所有截取位置的控制，不能仅由完整 $A$ 块的恒定电荷 $2$ 代替。
+
+**前缀到局部区段。** 设 $v$ 是 $T=\tau^j(X)\tau^j(Y)$ 的一个连续子字。$T$ 的每个前缀至多由这两个块各自的一个前缀拼成，故其绝对电荷至多为 $2P(j)$。若 $R$ 是 $v$ 之前的前缀，则 $R$ 与 $Rv$ 都是 $T$ 的前缀，而
+
+$$
+F(Rv)-F(R)=(-1)^{|R|}F(v).
+$$
+
+取绝对值得到
+
+$$
+|F(v)|\le4P(j)\le156(j+1)^2\qquad(j\in\mathbb N).
+$$
+
+这个两块估计不要求块长为奇数，也不预设这两个块在无限词中的出现位置。只落在一个块内的区段也适用，因为它是 $\tau^j(X)\tau^j(X)$ 的连续子字。
+
+**实际词中的包含关系。** 三个 $\tau$ 像的长度都至少为 $7$。从零层长度为一出发，对所有字母同时归纳，每一步至少拼接七个前层像，故
+
+$$
+|\tau^j(X)|\ge7^j\qquad\text{对所有 }j\in\mathbb N,\ X\in\{A,B,C\}.
+$$
+
+现在固定任意 $s$ 与 $m>0$，取 $k=\lfloor\log_7 m\rfloor$、$j=k+1$，使 $7^k\le m<7^j$。选足够大的 $N\ge j$，使 $s+m\le|\tau^N(A)|$。由于这些 $A$ 像是 $W$ 的实际前缀，$W_{[s,s+m)}$ 恰等于从 $\tau^N(A)$ 删去前 $s$ 个字母后再取 $m$ 个字母的字。迭代的拼接恒等式进一步给出
+
+$$
+\tau^N(A)=\tau^j\bigl(\tau^{N-j}(A)\bigr).
+$$
+
+右边是按实际出现顺序排列的 $j$ 层块，且每一块都严格长于 $m$。从区段首字母所在块开始，长度为 $m$ 的区段只能留在这一块内，或进入紧随其后的第二块；若进入第二块，剩余长度小于 $m$，不可能穿过整个第二块。若首块已经是最后一块，则总长度条件保证区段在该块内结束。因此，整个实际区段确实包含于一块或两块相邻像中，可以应用上一段的 $156(j+1)^2$ 界。选择较高的 $N$ 只为容纳起点 $s$；决定估计大小的 $j$ 只由 $m$ 决定。
+
+**层数到长度。** 由 $2^k\le7^k\le m$ 与对数的单调性，
+
+$$
+\begin{aligned}
+k\log2&\le\log(m+2),\\
+\log2&\le\log(m+2),\\
+(j+1)\log2=(k+2)\log2&\le3\log(m+2).
+\end{aligned}
+$$
+
+两边非负且 $\log2>0$，所以平方并代入区段估计，得到
+
+$$
+\begin{aligned}
+|F(W_{[s,s+m)})|
+&\le156(j+1)^2\\
+&\le\frac{1404}{(\log2)^2}\bigl(\log(m+2)\bigr)^2.
+\end{aligned}
+$$
+
+空区段的电荷为零，另行直接满足同一不等式。于是 $C=1404/(\log2)^2>0$ 是存在量词的一个充分见证；这里没有优化这个常数。
+:::
+
 ::: {.remark #rem-ch39-p2e-tribonacci-refutation-boundaries title="交替偏差、谱文献与物理适用边界"}
-**文献背景与适用边界，未作为本书的物理形式化结论。** 上面的平方是替代层数 $n$ 的平方。该反证没有给出所有长度上的最优上界，也没有否定或证明 $O((\log(m+2))^2)$ 的统一上界。$m_n$ 是键字的前缀长度，不能直接等同于前面指定的偶数格点数 $N_j$。
+**文献背景与适用边界，未作为本书的物理形式化结论。** 前缀反例中 $|q_n|\ge n^2$ 的平方是替代层数 $n$ 的平方，但已有的长度估计也确定了最坏情形的阶。在本备注中，记 $Q(s,m)=F(W_{[s,s+m)})$，并将电荷与长度视为实数参与以下不等式。对 $n\ge1$，已有 $0<\log(m_n+2)\le n\log39$；两边非负且 $\log39>0$，平方后结合 [@thm-ch39-p2e-tribonacci-uniform-log-squared]，用同一个 $C>0$ 得到
+
+$$
+\begin{aligned}
+\frac{(\log(m_n+2))^2}{(\log39)^2}
+&\le n^2\le|q_n|=|Q(0,m_n)|\\
+&\le C(\log(m_n+2))^2.
+\end{aligned}
+$$
+
+递推式给出 $m_{n+1}=|\sigma^{4(n+1)}(C)|+m_n>m_n$，因为每个字母像都非空。因此，这些实际前缀长度严格递增且无界，沿它们已得到对数平方阶的双侧界。$n=0$ 时 $m_0=q_0=0$，不在这个正下界的适用范围内。
+
+为明确长度截止与精确长度的区别，在本备注中定义
+
+$$
+\begin{aligned}
+P(M)&=\max_{\substack{m\in\mathbb N\\0\le m\le M}}|Q(0,m)|,\\
+R(M)&=\sup_{\substack{s\in\mathbb N\\m\in\mathbb N,\ m\le M}}|Q(s,m)|.
+\end{aligned}
+$$
+
+这里 $M\in\mathbb N$；$R(M)$ 中的起点 $s$ 遍历所有自然数，不受 $M$ 限制。$P(M)$ 是非空有限集的最大值；统一上界使 $R(M)$ 的非空取值集有上界。对每个正自然数 $M$，同一个常数 $C>0$ 满足
+
+$$
+\begin{aligned}
+\frac{(\log(M+2))^2}{4(\log39)^2}
+&\le P(M)\le R(M)\\
+&\le C(\log(M+2))^2.
+\end{aligned}
+$$
+
+下界可直接由已有前缀估计推出。当 $M\ge13$ 时，取 $n=\lfloor\log_{13}M\rfloor\ge1$，则 $13^n\le M<13^{n+1}$，而 $m_n\le13^n\le M$，故 $P(M)\ge|Q(0,m_n)|\ge n^2$。又由 $M+2\le3M$，
+
+$$
+\begin{aligned}
+\log(M+2)&\le\log3+\log M\\
+&\le\log3+(n+1)\log13\\
+&\le(n+1)\log39\le2n\log39.
+\end{aligned}
+$$
+
+平方并除以正数 $4(\log39)^2$ 即得所需下界。当 $1\le M\le12$ 时，用实际单字母前缀 $W_{[0,1)}=A$，其电荷 $Q(0,1)=2$，故 $P(M)\ge2$；同时 $\log(M+2)\le\log14<\log39$，所需下界的左端小于 $1/4$。上界则对每个 $m\le M$ 与任意 $s\in\mathbb N$ 使用统一界和 $0<\log(m+2)\le\log(M+2)$，再取最大值或上确界；$s=0$ 的情形给出 $P(M)\le R(M)$。因此，前缀累计最大值与所有起点的累计上确界都是对数平方阶，统一上界的最坏情形阶已经是锐的。这里没有优化常数；$M=0$ 时 $P(0)=R(0)=0$，上述正下界不成立。
+
+这仍须与每个精确长度上的断言区分开。完整 $A$ 像给出另一族实际前缀：令 $\ell_n=|\sigma^{4n}(A)|$，则前面的 $a_n=2$ 与实际前缀包含关系给出
+
+$$
+Q(0,\ell_n)=2,\qquad \ell_n\ge4n+1\qquad(n\in\mathbb N).
+$$
+
+长度下界来自 $\sigma^{k+1}(A)=\sigma^k(A)\sigma^k(B)$（$k\ge0$）：每个 $B$ 像非空，故长度从一开始，每一步至少增加一。因而 $\ell_n\to\infty$，而 $|Q(0,\ell_n)|/(\log(\ell_n+2))^2\to0$：不存在 $c>0$ 与 $m_0\in\mathbb N$，使所有 $m\ge m_0$ 都有 $|Q(0,m)|\ge c(\log(m+2))^2$。对所有起点同时要求这种下界也不成立，因为它包含起点零。若固定精确长度后才对起点取上确界，记 $E(m)=\sup_{s\in\mathbb N}|Q(s,m)|$，则是否存在 $c>0$、$m_0\in\mathbb N$，使每个 $m\ge m_0$ 都满足 $E(m)\ge c(\log(m+2))^2$，并未由这里的论证确定；一个起点上的常电荷不控制其他起点，而累计最大值允许选取较短的长度。最优常数同样未在这里确定。$m_n$ 是键字的前缀长度，不能直接等同于前面指定的偶数格点数 $N_j$。
 
 Adamczewski，*Symbolic discrepancy and self-similar dynamics*（[doi:10.5802/aif.2079](https://doi.org/10.5802/aif.2079)，定理 1、命题 10–11）提供替代系统偏差与临界谱消去的一般框架。其加权下界中存在合适零均值字母权重的结论，并不自动指定这里随位置交替的权重；若把位置奇偶性编码进扩充字母表，还须另行核对本原性、频率、权重与消去条件。上面的证明直接计算原始字，既不借用该存在性结论来指定权重，也不据此主张机制或具体公式的文献新颖性。
 
@@ -511,7 +749,7 @@ Adamczewski，*Symbolic discrepancy and self-similar dynamics*（[doi:10.5802/ai
 
 Hermisson 对多字母替代的边缘重整化特征值与无穷动力学指数的讨论（[doi:10.1088/0305-4470/33/1/304](https://doi.org/10.1088/0305-4470/33/1/304)，arXiv:cond-mat/9808238，第 11 页）没有在该处给出本字的特定标度。Hida 的 Fibonacci XXZ 分析（[doi:10.1143/JPSJ.73.2296](https://doi.org/10.1143/JPSJ.73.2296)，arXiv:cond-mat/0404606v2）中，式 (38) 的 $\Delta E\sim\exp[-\kappa(\log N)^2]$ 属于强弱耦合分离下的相互作用各向同性模型的微扰重整化；式 (28) 的自由 XY 情形给出的是有限指数幂律 $\Delta E\sim N^{-z}$。这些结论不替代对本链实际有限矩阵、端点、奇偶截断与所求谱量的核对。
 
-[@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线；它没有反驳某个多项式谱隙界，没有决定指定偶数开前缀的 $\delta_{\rho,j}$ 及其速率，也没有构造多体态或证明空间纠缠标度。后面的奇数重复窗口与完整逆矩阵质量路线仍须按各自前提拼接；[@prob-ch39-p2e-fractal-horizon] 的物理态、空间切口与劳齐边界对应仍需独立建立。
+[@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线。[@thm-ch39-p2e-tribonacci-uniform-log-squared] 提供的是实际词上、对起点一致的交替电荷控制；结合前面的有限乘积恒等式，它可作为分析跃迁比值的组合输入。它本身没有给出完整逆矩阵的范数或质量估计，也没有反驳某个多项式谱隙界。[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 另用具体正电荷前缀和一个完整逆矩阵元素证明 $\delta_{\rho,j}\to0$；下文 [@ex-ch39-p2e-tribonacci-prefix-rate] 已按同一组实际跃迁、奇数重复窗口与完整逆矩阵质量估计的前提，完成更强的 $73728/N_j$ 纸面应用，并给出参数一致收敛；它不由交替电荷界单独推出。沿前述 Slater 态路线讨论空间纠缠时，还须构造实际占据投影并分析空间压缩；物理态、空间切口与劳齐边界的对应及 [@prob-ch39-p2e-fractal-horizon] 的熵标度仍需独立建立。
 :::
 
 ::: {.remark #rem-ch39-p2e-tridiagonal-localization title="保留端点残差的三对角局部化（文献结果，未在本书形式化）"}
@@ -525,7 +763,7 @@ $$
 \end{aligned}
 $$
 
-这里仅限制输入支撑，输出仍在整轴上：对应的 $(n+2)\times n$ 矩阵保留两条向外的残差行，不能将它换成丢弃这两行的 $n\times n$ 压缩。该式对位置取下确界；选取实际区段与单位向量时可保留任意正余量。它提供了 $1/n$ 量级的 $\ell^2$ 局部化工具，却尚未闭合前面的 Tribonacci 开链问题：还须证明相应整轴模型的零谱前提，并把连同一层邻接站点的实际词区段转植进指定的有限开前缀，核对长度比例与小尺度情形。这些接口在本书中仍未验证。
+这里仅限制输入支撑，输出仍在整轴上：对应的 $(n+2)\times n$ 矩阵保留两条向外的残差行，不能将它换成丢弃这两行的 $n\times n$ 压缩。该式对位置取下确界；选取实际区段与单位向量时可保留任意正余量。它提供了 $1/n$ 量级的 $\ell^2$ 局部化工具。若沿此整轴路线研究 Tribonacci 有限开链，仍须证明相应整轴模型的零谱前提，并把连同一层邻接站点的实际词区段转植进指定的有限开前缀，核对长度比例与小尺度情形。这些接口在本书中仍未验证；[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 的有限矩阵证明不依赖它们。
 :::
 
 另一条有限矩阵路线利用奇数长度的重复：奇数平移把偶数键与奇数键互换，前代入中的两串跃迁比值因而可以配对。下面的下界把这一抵消机制写成实际逆矩阵的定量结论。
@@ -770,6 +1008,105 @@ $$
 :::
 
 上例给出指定偶数开前缀的纸面 $1/N_j$ 界与趋零结论。分形熵标度仍需独立的物理态与空间切口论证；[@prob-ch39-p2e-fractal-horizon] 的这些部分保持开放。
+
+前面的定量纸面应用已经给出更强的速率。另一个独立论证只需 [@thm-ch39-p2e-tribonacci-prefix-log-refutation] 中构造的实际前缀：奇数层的正电荷无界，因而可使完整逆矩阵的一个条目充分大。
+
+::: {.theorem #thm-ch39-p2e-tribonacci-open-chain-zero-gap title="实际正跃迁 Tribonacci 开链的全序列谱距离趋零" status="written-proof" proof="pf-ch39-p2e-tribonacci-open-chain-zero-gap" repository="https://github.com/the-omega-institute/trureturing" source="TribonacciOpenPathGap, Theorem 1.7" request="https://github.com/the-omega-institute/trureturing-requests/issues/273"}
+取 $\sigma(A)=AB$、$\sigma(B)=AC$、$\sigma(C)=A$ 的从 $A$ 出发的实际不动词 $W$，以及权重 $w(A)=2$、$w(B)=1$、$w(C)=0$。对每个固定实数 $0<\rho<1$，令 $t_i=\rho^{w(W_i)}$。对整数 $j\ge1$，令
+
+$$
+\begin{aligned}
+L_j&=|\sigma^j(A)|,\qquad N_j=2\lfloor L_j/2\rfloor,\\
+(h_{\rho,j})_{ab}&=\begin{cases}
+t_a,&a+1=b,\\
+t_b,&b+1=a,\\
+0,&\text{其他情形},
+\end{cases}\quad 0\le a,b<N_j,\\
+\delta_{\rho,j}&=\min\{|\lambda|:\lambda\in\operatorname{Spec}(h_{\rho,j})\}.
+\end{aligned}
+$$
+
+矩阵作用于 $\mathbb C^{N_j}$，对角线为零，只有最近邻物理键 $t_0,\ldots,t_{N_j-2}$，没有首尾闭合键；其特征值均为实数。则
+
+$$
+\lim_{j\to\infty}\delta_{\rho,j}=0.
+$$
+
+等价地，对每个 $\varepsilon>0$，存在整数 $J\ge1$，使每个整数 $j\ge J$ 都满足 $0\le\delta_{\rho,j}<\varepsilon$。
+:::
+
+::: {.proof #pf-ch39-p2e-tribonacci-open-chain-zero-gap}
+本证明依照 [源文 TribonacciOpenPathGap, Theorem 1.7](https://github.com/the-omega-institute/trureturing/blob/7e18f7fa28f0da457a7df181edb112a2cba4c210/Blueprint/D5/S3/Quantum/Dynamics/TribonacciOpenPathGap.md) 的陈述与论证展开。
+
+先固定一个真实的奇长前缀，再把同一个前缀放进所有足够长的开链。沿用 [@thm-ch39-p2e-tribonacci-prefix-log-refutation] 证明中的 $\tau=\sigma^4$、$F$ 与
+
+$$
+U_0=\varepsilon,\qquad U_{n+1}=\sigma^{4(n+1)}(C)U_n,\qquad m_n=|U_n|.
+$$
+
+该证明已逐字建立 $U_n=W_{[0,m_n)}$ 以及 $F(U_n)=1-(-1)^n(n^2+3n+1)$。每个新增块 $\sigma^{4(n+1)}(C)$ 都为奇长，所以 $m_{n+1}\equiv1+m_n\pmod2$。由 $m_0=0$ 归纳得到 $m_n\equiv n\pmod2$。故对每个奇数 $n$，可写
+
+$$
+m_n=2q+1,\qquad F(U_n)=(n+1)(n+2)>0.
+$$
+
+设 $N_j\ge m_n+1$，记 $M=\lfloor L_j/2\rfloor$，则 $N_j=2M$ 且 $q<M$。取整条物理开链 $H=h_{\rho,j}$。使用 [@ex-ch39-p2e-open-chain-residual] 的双对角块 $B=L(t,M)$、正块 $C$ 与 $D=\operatorname{diag}((-1)^r)_{r=0}^{M-1}$；它们满足
+
+$$
+\begin{aligned}
+B_{r,r}&=t_{2r},\qquad B_{r,r-1}=-t_{2r-1},\\
+D^2&=I,\qquad DCD=B.
+\end{aligned}
+$$
+
+第二个矩阵元素公式用于 $1\le r<M$。所有 $t_i>0$，所以 $B$ 的对角元非零，普通逆矩阵 $G=B^{-1}$ 存在，且 $C^{-1}=DGD$。把站点按偶数 $2r$、奇数 $2r+1$ 排列，整条开链及其逆为
+
+$$
+\begin{aligned}
+H&=\begin{pmatrix}0&C\\C^{\mathsf T}&0\end{pmatrix},\\
+H^{-1}&=\begin{pmatrix}0&(C^{-1})^{\mathsf T}\\C^{-1}&0\end{pmatrix}.
+\end{aligned}
+$$
+
+这里两式都表示置换后的坐标；$H$ 的可逆性也随之得到。前代入的首列从 $G_{0,0}=1/t_0$ 开始，对 $1\le r<M$ 满足 $t_{2r}G_{r,0}=t_{2r-1}G_{r-1,0}$，因而
+
+$$
+G_{q,0}=\frac{\prod_{r=0}^{q-1}t_{2r+1}}{\prod_{r=0}^{q}t_{2r}}>0.
+$$
+
+这就是前述 Green 元素公式在起点零的情形，$q=0$ 时分子按空积 $1$ 计。回到物理站点，$D$ 的符号给出 $(H^{-1})_{2q+1,0}=(-1)^qG_{q,0}$。代入实际跃迁 $t_i=\rho^{w(W_i)}$，注意分母包含最后一条偶数键 $t_{2q}$，得到
+
+$$
+\begin{aligned}
+|(H^{-1})_{2q+1,0}|&=G_{q,0}\\
+&=\rho^{-\sum_{i=0}^{2q}(-1)^iw(W_i)}\\
+&=\rho^{-F(U_n)}=\rho^{-(n+1)(n+2)}.
+\end{aligned}
+$$
+
+用到的物理键恰在 $0,\ldots,2q$ 内，站点 $2q+1<N_j$；$N_j\ge|U_n|+1$ 正是保留最后这条键及其右端站点的条件。这里取的是完整 $N_j$ 站点矩阵的逆元素，外侧站点都保留，没有以局部压缩的逆替代它，也没有补接边界键。
+
+谱转换使用复欧氏空间上的诱导算子范数 $\|T\|_{2\to2}=\sup_{\|v\|_2=1}\|Tv\|_2$。以单位坐标向量 $e_0$ 测试，
+
+$$
+|(H^{-1})_{2q+1,0}|\le\|H^{-1}e_0\|_2\le\|H^{-1}\|_{2\to2}.
+$$
+
+此处不使用逐元素最大值范数。$H$ 是可逆 Hermitian 矩阵，其逆仍为 Hermitian，逆的特征值为原特征值的倒数。有限维谱定理使 $H^{-1}$ 的欧氏算子范数等于其特征值绝对值的最大值；所以存在原矩阵的实特征值 $\lambda$，满足
+
+$$
+\begin{aligned}
+|\lambda|&=\|H^{-1}\|_{2\to2}^{-1},\\
+0\le\delta_{\rho,j}&\le|\lambda|\le\rho^{(n+1)(n+2)}.
+\end{aligned}
+$$
+
+最后给定 $\varepsilon>0$。因 $0<\rho<1$，可选自然数 $k$ 使 $\rho^k<\varepsilon$，再固定奇数 $n=2k+1$。有 $(n+1)(n+2)\ge k$，故上述界小于 $\varepsilon$。实际替代长度满足 $L_j\ge j+1$，从而 $N_j\ge L_j-1\ge j$；因此存在 $J\ge1$，使所有 $j\ge J$ 都有 $N_j\ge m_n+1$，并适用同一个前缀的估计。$n$ 只按 $\rho,\varepsilon$ 选择一次，此后每个 $j\ge J$ 都得到 $0\le\delta_{\rho,j}<\varepsilon$，并非只挑出一条子序列。
+
+源声明将 $j=0$ 时的 `gap` 定义为 $0$，以避开零维矩阵的空特征值集合；$j\ge1$ 时 $L_j\ge2$，其定义正是这里非空有限实谱的最小绝对值。这个单点约定不改变极限。
+:::
+
+这条单独的收敛定理只陈述每个固定正 $\rho$ 的全序列极限；它的单个逆矩阵条目论证不提供 $1/N_j$ 速率。前面的 [@ex-ch39-p2e-tribonacci-prefix-rate] 已用实际重复窗口与完整逆矩阵质量估计给出更强的 $73728/N_j$ 纸面界及参数一致收敛。两条论证的证据范围须分别保留；物理态、空间切口与分形熵标度仍需另外建立。
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
 **帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`，移位熵与阿布拉莫夫公式属 `文献结果`，分形面积律属 `OPEN`。

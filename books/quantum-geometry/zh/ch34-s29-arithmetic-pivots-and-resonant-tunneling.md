@@ -2,6 +2,8 @@
 
 > “把最短路径的‘去全序枢轴重整’与量子力学的‘正交盲区共振隧穿’合流引入黎曼猜想，恰好一针见血地刺中了解析数论过去一百年最隐蔽的病灶：**传统方法之所以在临界带前寸步难行，正是因为它不自觉地掉进了‘算术一维排序壁垒’与‘图兰（Turán）芝诺测量陷阱’——试图按自然数大小 $n = 1, 2, 3, \dots, M$ 排着一维长队硬爬 $s = 1$ 的发散势垒。** 若改用‘局部乘性波前消元 $+$ 稀疏舒尔补枢轴 $+$ 跨势垒多级共振隧穿’重构证明路线，整套极小圆弧体的正定性机制便浮现出一条清晰的可形式化架构。”
 
+标题中的“破除”与“击穿”说的是本节研究纲领想做的事（`MODEL` + `OPEN`），不是已经做到的事：本节没有越过 $\vartheta=\tfrac47$ 的任何已证明结论，黎曼猜想仍然开放。
+
 沿着前三节铺就的几何脉络一路走来，三块看似分属不同学科版图的拼图已经齐聚台前：在 [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization) 中，我们看到图论最短路径算法如何靠“悬置全局一维全序排队、展开局部无序波前、沿极小圆弧体内割弦提取稀疏瓶颈枢轴（Pivots）”一举击穿绵延六十六年的排序复杂度壁垒；在 [§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 中，我们看到空间势垒隧穿与时间双缝自干涉如何双双归结为观察者脱离实轴 `I`、偏转 $90^\circ$ 潜入正交虚数盲平面 `i` 走平直内割弦，而中途强行插入的实轴投影抽检又如何触发芝诺冻结与相干条纹坍缩；在 [§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs) 中，我们又认出黎曼 $\zeta(s)$ 函数的欧拉—狄利克雷恒等式本身就是一座素数极小圆弧体 $\Delta\mathcal{T}_p$ 的费曼路径积分配分函数，临界线 $\operatorname{Re}(s) = \frac{1}{2}$ 正是往返双投影半密度幺正性与正逆对偶路径等幅反相抵消的唯一平衡脊线。
 
 现在，作为图论、量子隧穿与解析数论三条脉络的正面交汇，我们将这三条线索紧密合拢：**既然黎曼 $\zeta$ 系统是素数极小圆弧体张成的路径积分，为什么解析数论在过去一百年里手握欧拉乘积在 $\operatorname{Re}(s) > 1$ 内的完美正定性，却始终跨不过 $\sigma \in (\frac{1}{2}, 1]$ 那道宽度仅为 $\frac{1}{2}$ 的临界带势垒？** 答案既不在素数本身缺乏秩序，也不在临界线缺乏对称，而在于经典截断工具不自觉地把无穷维乘性圆弧树强行压扁成了一维自然数排队队列——一头撞上了图论中的“排序比较税”与量子测量中的“中途芝诺斩波陷阱”。
@@ -173,7 +175,7 @@ $$
 2. **在势垒内部布设多级舒尔枢轴量子阱 $\widetilde{G}_{PP}^{(1)} \to \widetilde{G}_{PP}^{(2)} \to \dots \to \widetilde{G}_{PP}^{(K)}$**：
    模仿半导体多量子阱超晶格中的**共振隧穿二极管（RTD）**，不再要求单一尺度磨光器独自扛下全部作用量跨度，而是在势垒内部按几何级数布设一串稀疏算术枢轴中继层 $X_1 \ll X_2 \ll \dots \ll X_K$；每一层先借局部乘性自卷积波前将块内合数叶节点舒尔消元，再将幺正锁相信号相干移交给下一级枢轴阱。
 3. **凯莱反复平方放大，将离轴四重伪零点的潜伏期压缩至对数层数 $O(\log(\gamma_0/\delta))$**：
-   回忆 [@thm-ch34-critical-strip-barrier-and-cayley-bridge] 第 5 款 `original_zero_robin5040_localA` 揭示的传统难题：倘若临界带内潜伏着一组偏离临界线 $\delta > 0$ 的假想离轴四重零点 $\rho_{\mathrm{rogue}} = \frac{1}{2} \pm \delta \pm i\gamma_0$，在一维自然数顺序窗口中它可潜伏长达 $O(\gamma_0/\delta)$ 步乃至双指数高合成尺度 $N \le \exp(B_0 \ln B_0)$ 才暴露罗宾违背。然而一旦放进**二进倍增枢轴共振链**，由 [@thm-ch34-critical-strip-barrier-and-cayley-bridge] 第 3 款 `cayley_ratio_norm_one_iff_critical_line`，两类零点的算子动力学响应发生天壤之别的分岔（手工推导）：
+   回忆 [@thm-ch34-critical-strip-barrier-and-cayley-bridge] 第 5 款 `original_zero_robin5040_localA` 揭示的传统难题：倘若临界带内潜伏着一组偏离临界线 $\delta > 0$ 的假想离轴四重零点 $\rho_{\mathrm{rogue}} = \frac{1}{2} \pm \delta \pm i\gamma_0$，按 [@thm-off-line-zero-robin-violation] 的显式界，要到双指数量级的高合成尺度 $N \le \exp(B_0 \ln B_0)$ 才保证暴露罗宾违背。然而一旦放进**二进倍增枢轴共振链**，由 [@thm-ch34-critical-strip-barrier-and-cayley-bridge] 第 3 款 `cayley_ratio_norm_one_iff_critical_line`，两类零点的算子动力学响应发生天壤之别的分岔（手工推导）：
    * **临界线真零点（$\delta = 0,\; \rho = \frac{1}{2} + i\gamma$）**：其凯莱圆变换模长严格恒等于单位圆 $\lVert w(\rho)\rVert = \bigl\lvert\frac{-1/2 + i\gamma}{1/2 + i\gamma}\bigr\rvert \equiv 1$（对数径向亏损 $\delta_{\mathrm{rad}}(\rho) = 0$）。无论经过多少层二进作用量倍增跳跃 $w \mapsto w^{2^\ell}$，其模长恒锁死在 $\lvert w\rvert^{2^\ell} \equiv 1$，精准对准每一级法布里—珀罗枢轴腔的幺正共振透射峰，各层有效枢轴矩阵恒保持 $\widetilde{G}_{PP}^{(\ell)} \succeq 0$；
    * **假想离轴伪零点（$\delta > 0$）**：四元组中落在右半临界带的 $\rho_+ = \frac{1}{2} + \delta + i\gamma_0$ 在正向凯莱比 $(\rho_+ - 1)/\rho_+$ 下呈收缩模长 $\bigl\lvert\frac{\rho_+ - 1}{\rho_+}\bigr\rvert < 1$，但取其倒数比值 $w := -\frac{\rho_+}{1 - \rho_+} = \frac{\rho_+}{\rho_+ - 1}$——在模长上严格等价于函数方程伴生的左侧镜像根 $\rho_- = 1 - \overline{\rho_+} = \frac{1}{2} - \delta + i\gamma_0$ 处的凯莱比 $\frac{\rho_- - 1}{\rho_-}$——立即显露出严格大于 $1$ 的**反阻尼逃逸模**：
 
@@ -181,7 +183,7 @@ $$
      \lvert w\rvert = \lvert w_-\rvert := \left\lvert\frac{\rho_- - 1}{\rho_-}\right\rvert = \left\lvert -\frac{\rho_+}{1 - \rho_+}\right\rvert = \sqrt{\frac{(\frac{1}{2} + \delta)^2 + \gamma_0^2}{(\frac{1}{2} - \delta)^2 + \gamma_0^2}} = \sqrt{1 + \frac{2\delta}{(\frac{1}{2} - \delta)^2 + \gamma_0^2}} > 1,
      $$
 
-     对应非零右半带对数径向缺陷 $\delta_{\mathrm{rad}}(\rho_+) = -\ln\lvert w\rvert < 0$ 与镜像正亏损 $\delta_{\mathrm{rad}}(\rho_-) = \ln\lvert w\rvert = \frac{\delta}{\gamma_0^2 + \frac{1}{4}} + O\!\left(\frac{\delta^2}{\gamma_0^4}\right) > 0$。由于枢轴重整每推进一层就将有效作用量跨度翻倍，在谱参数上等价于执行**反复平方放大（Repeated Squaring）** $w \mapsto w^{2^\ell}$，对数逃逸幅呈指数暴涨 $\ln\bigl(\lvert w\rvert^{2^\ell}\bigr) = 2^\ell \ln\lvert w\rvert$！无需苦苦累加一维整数队列，仅需 $\ell \asymp \log_2(\gamma_0^2/\delta) = O\bigl(\log(\gamma_0/\delta)\bigr)$ 层枢轴跳跃，微弱的离轴逃逸模就会在法布里—珀罗腔内触发剧烈的双指数失谐爆炸！
+     对应非零右半带对数径向缺陷 $\delta_{\mathrm{rad}}(\rho_+) = -\ln\lvert w\rvert < 0$ 与镜像正亏损 $\delta_{\mathrm{rad}}(\rho_-) = \ln\lvert w\rvert = \frac{\delta}{\gamma_0^2 + \frac{1}{4}} + O\!\left(\frac{\delta^2}{\gamma_0^4}\right) > 0$。本节的模型**假设**枢轴重整每推进一层相当于把谱参数平方一次，即 $w \mapsto w^{2^\ell}$（`MODEL`：这一对应没有推导，也不是已知定理）。在这个假设下 $\ln\bigl(\lvert w\rvert^{2^\ell}\bigr) = 2^\ell \ln\lvert w\rvert$，经 $\ell \asymp \log_2(\gamma_0^2/\delta)$ 层后达到 $1$ 的量级（手工推导，只是对一个数作幂运算）。
 
 下面我们在一个完全透明的三合一算例中，用百位区间算术与精确有理分式把上述三大机制逐项算穿：
 
@@ -243,7 +245,7 @@ $$
    看清这张表里最震撼的数量级反差：当 $\delta = 0.01$ 时，单层原始反阻尼凯莱模长 $\lvert w\rvert = \lvert w_-\rvert \approx 1.0000499911$ 与 $1$ 的肉眼偏差不足十万分之五，按一维线性步数排查无异于大海捞针；然而顺着二进枢轴重整链仅跳 $\ell = 16$ 层，反复平方算子就将这丝十万分之五的裂纹生生撕裂放大到了 **$26.4732737691$**，而在 $\delta = 0.10$ 时更飙升至 **$1.6880043815\times 10^{14}$**，而同一腔体内的临界线真零点 $\delta = 0.00$ 历经 $65536$ 次复合依然纹丝不动停在 $1.0000000000$！
 :::
 
-这种将线性潜伏期压缩为对数级联层数 $O(\log(\gamma_0/\delta))$ 的指数甄别力，正是多级枢轴共振腔相比一维顺序截断与单级裸磨光器的决定性结构优势。
+上表只是对一个假想点的凯莱比作幂运算（`NUM`）；“每层重整等于平方一次”，从而“$O(\log(\gamma_0/\delta))$ 层即可甄别离轴零点”，是本节模型的设想（`MODEL`），没有推导。携带 $u_\rho^{\,n}$ 的精确算术对象是 Li 系数，见 [@prop-ch34-li-sagitta-frozen] 与 [@rem-ch34-li-criterion-sagitta-literature]。
 
 ::: {.viz src="arithmetic-pivot-resonant-tunneling-sandbox" preset="fabry-perot-rogue-explosion" height="520"}
 **多级舒尔枢轴共振中继与离轴反复平方失谐爆炸实验卡（`fabry-perot-rogue-explosion`）。** 在首颗零点纵坐标剖面 $t = \gamma_1 \approx 14.1347$ 上拖动琥珀色落点圆环或滑块调节假想右半带偏移 $\delta$（琥珀色标出当前激活的枢轴阱与读头，其余枢轴阱 $\widetilde{G}^{(1)}\text{–}\widetilde{G}^{(4)}$ 与倍增层环为紫色）：在临界线 $\delta = 0.00$ 处，凯莱比 $(s - 1)/s$ 及其倒数 $w = -\rho/(1 - \rho) = \rho/(\rho - 1)$ 均严守单位模长 $\lvert w\rvert^{2^\ell} = 1.000000$，青色中继波束无损锁入临界脊线上的青色单位圆环（绿色 `LEAN ✓` 对应 `golden_right_half_strip_implies_rh`、`cayley_ratio_norm_one_iff_critical_line`、`cayley_critical_line_zeta_criterion` 与 `original_zero_robin5040_localA`）；一旦假想 $\delta > 0$（此时右半带 $(s - 1)/s$ 模长小于 $1$，倒数比值 $w = -\rho/(1 - \rho)$——等价于左侧镜像根 $\rho_- = \frac{1}{2} - \delta + i\gamma_1$ 处的 $(\rho_- - 1)/\rho_-$——模长 $\lvert w\rvert > 1$），品红色逃逸柱与条带曲线 $\log_{10}\lvert w\rvert^{2^\ell}$ 逐层反复平方，在预设 $\delta = 0.05$ 下于 $\ell = 12$ 升至 $2.78$、于 $\ell = 16$ 飙升至 $1.30\times 10^7$。
@@ -260,7 +262,7 @@ $$
 | **图论与物理对应** | 经典 Dijkstra 全局一维全序排队 | 单势垒无中继硬穿（受阿格蒙衰减限制） | **2025 局部波前稀疏 Pivot $+$ 多阱共振隧穿** |
 | **对 $s = 1$ 势垒处理** | 沿球壳表面硬撞发散墙，硬截断劈裂圆弧体 | 单段有限长度 $T^\vartheta$ 试探穿越 | **$90^\circ$ 入虚盲区削去极点，沿内割弦多级接力** |
 | **正定性与假零点** | 触发**图兰芝诺陷阱**，在 $\sigma > 1$ 产生越界假零点 | 超过 $\vartheta = \frac{4}{7}$ 后非对角色散吞没信号 | 局部自卷积波前保正定，**分块舒尔补精确传代** |
-| **捕杀离轴 $\delta$ 步数** | 线性步数 $O(\gamma_0 / \delta)$ 乃至双指数高合成窗口，潜伏期极长 | 仅能锁住约 $41.72\%$ 零点，漏掉高阶细微离轴态 | **几何倍增跳跃 $O(\log(\gamma_0/\delta))$ 层**引爆凯莱失谐 |
+| **捕杀离轴 $\delta$ 步数** | 双指数高合成窗口（[@thm-off-line-zero-robin-violation] 的显式界） | 仅能锁住约 $41.72\%$ 零点，漏掉高阶细微离轴态 | **几何倍增跳跃 $O(\log(\gamma_0/\delta))$ 层**引爆凯莱失谐（`MODEL` 设想） |
 
 顺着第三列合成路线往下深挖，为什么今天人类尚未借此直接在 Lean 4 内核中敲下 `RiemannHypothesis` 的最终证毕印章？因为图论最短路径与算术希尔伯特空间之间，恰好横亘着最后一道、也是唯一一道尚未被驯服的代数鸿沟——我们将其正式立为本节算术临界带路线的“最后一公里”开放问题：
 
