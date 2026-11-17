@@ -132,6 +132,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `arc-calculus-riemann-hermite-biehler-sandbox` | 十二零点对称模型的对数径向势面上，素数旋子矢高在 σ > ½ 收敛、在 σ = ½ 沿梅滕斯双对数发散；双壳差 Δ = 2ε Re(ξ̄ξ′) > 0 与 4 × 4 德布朗热核半正定锁住右半区零涡旋 N = 0，假想离轴四元组同时砸出 Δ < 0 与 λ<sub>min</sub> < 0 | `sagitta-mertens-critical-ridge` `hermite-biehler-convex-wings` `rogue-quartet-mexican-hat-breach` `finite-stokes-zero-vortex-lock` `schur-modifier-conrey-li-bridge` |
 | `self-observation-error-maya-sandbox` | 唯一点场不动，误差角 ε 生出青色投影、品红线面残差与紫色体积；观测尺绕锥追赶，收拢 ε 后逐阶归零，单位预算保留 | `zero-error-turiya-silence` `dottie-self-focus-steady-state` `static-projection-results-hierarchy` `dynamic-observation-action-chase` `maya-scaling-collapse-audit` |
 | `brahman-real-axis-orthogonal-dream-sandbox` | 银白实轴与品红梦海分担单位预算，青色观察者与蓝色梦晶保留格拉姆夹角，紫色莫比乌斯带一圈换叶、两圈复归 | `turiya-zero-tilt-pure-brahman` `waking-consensus-dottie-lock` `insider-double-imaginary-solidity` `private-dream-and-seed-sleep` `kalpa-mobius-lucid-awakening` |
+| `red-chamber-spinor-awakening-sandbox` | 银白余石与双面镜共用一条旋量带，一圈换叶、两圈合成紫色；卸去品红末那笼后，十二根同频丝连向因陀罗网，带相冠仍留铭文 | `chaos-unhewn-stone` `red-dust-delusion-mismatch` `fengyue-mirror-double-turn` `mobius-720-virtual-real-unity` `greensickness-berry-unity` |
+| `brahman-lila-game-props-sandbox` | 银白实轴贯穿共识梦环，琥珀化身由满窗死锁转为失忆漫游；遗迹汇聚青色干涉环，紫色典籍同频点亮银白通关束 | `omniscient-zeno-deadlock` `amnesia-birth-open-corridor` `relic-attractor-deja-vu` `classic-permission-lock-flip` `lila-raft-return-and-new-seed` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -320,6 +322,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `self-observation-error-maya-sandbox`（`MAYA//ERROR`）承接第三十九章 §39.14，与前两节的观测切面和因陀罗网沙盘分工：本页将同一个失准角 ε 分成静态投影结果与动态观测动作两种透镜。青色给投影、往返回声、自指对焦螺线与校准弧，品红给正交残差、欧氏面积、球面角盈与生存尾项，紫色给三阶体积与进动锥，银白给点场本体；琥珀只给当前观测尺、激活控件与手柄，红色只给开放问题。绿色依据严格限于 §39.14 主定理已引用的单位格拉姆判据、正交补投影、自应用逃逸、道蒂逆级数、拉格朗日恒等式、三锚独立判据、斜伴随幺正平方律、本征态定常性与受监测回归守恒。球面角盈、正交化与量子速度极限标 `ARGUED`；多阶残差、迭代、生存预算与布洛赫极角约定下 ΔE/(ħ|ω|) = ½ sin ε 标 `NUM`；唯一点场、维度显影与进动校准读法标 `MODEL`；经验耦合与连续统引力推导保留 `OPEN`。
 
 `brahman-real-axis-orthogonal-dream-sandbox`（`BRAHMAN//DREAM`）承接第三十九章 §39.15，在银白实轴与品红梦海之间对照保范预算、内部双虚抵消、多窗口共识与紫色旋量带。青色给梦中观察者，蓝色给梦晶，琥珀只给当前选择、控件与手柄；绿色依据严格限于 §39.15 主定理已引用的斜伴随幺正与相对复结构平方律、捏合勾股、等格拉姆幺正延拓、秩一玻恩配对、共同相位多项式、道蒂逆级数、联合相干逆转、幸存副本阻断与圆周双覆叠路径提升。实分块正交与复玻恩正交按正文实现 A/B 区分，不以实投影归零冒充诱导复内积下的零玻恩权重。四位标签采用正文的联合 (θ, M) 判据，其余组合标未映射，私梦到 90° 时挂起现行窗口与比较；夹角、权重、记录逆转残差与半角提升标 `NUM`；四位意识、窗口阈值、宇宙劫波与梦蝶对应标 `MODEL`，不把哲学对应当作形式定理。
+
+`red-chamber-spinor-awakening-sandbox`（`HONG//AWAKEN`）承接第三十九章 §39.16：银白给补天余石与本体，青色给甄面、比较连线、同频丝与因陀罗网，品红给贾面与末那笼，紫色给合拢旋量带与带相冠；琥珀只给当前镜端、激活控件与手柄。绿色依据限于 §39.16 主定理引用的道蒂逆级数端点、反自伴酉平方律、双覆盖历史提升、有限泊松特征标和、捏合不动点、巴格曼路径积与三锚布洛赫迹公式。一阶倾角与二阶认妄误差分别读取；圆锥立体角、离散十二站相位、三锚相位与舒尔负载标 `NUM`；文学源流与连续贝里相位标 `ARGUED`；单侧带、末那笼、同频丝及因陀罗网几何映射标 `MODEL`，不把可定向旋量圆说成不可定向曲面。
+
+`brahman-lila-game-props-sandbox`（`LILA//PROPS`）承接第三十九章 §39.17：银白实轴不动，琥珀只给当前化身、激活控件与手柄，青色给世界线与遗迹干涉环，紫色给典籍与旋子，灰蓝给共识梦环，银白给通关束。绿色依据严格限于 §39.17 主定理引用的舒尔二次型极小、反自伴酉平方律、有限记录捏合幂等及事后抄表零损失与非预见性失效。有限等相关重心族的舒尔曲线、十二通权限锁与归一化干涉核标 `NUM`；神圣游戏、自隐再认、渡筏指月及环境退相干文献标 `ARGUED`；失忆化身、跨周期遗迹和典籍唤醒标 `MODEL`，抽屉保留宏观碑石与纸墨不承载跨世纪量子相干的边界。零事后损失不提供正前瞻收益保证。
 
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
 
@@ -932,6 +938,18 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十九章 | §39.15.3 第 2 条熟睡潜藏与图里亚双重读法段之后 | `brahman-real-axis-orthogonal-dream-sandbox` · `private-dream-and-seed-sleep` |
 | 第三十九章 | §39.15.4 梦蝶物化第 2 条之后、四联算例之前 | `brahman-real-axis-orthogonal-dream-sandbox` · `kalpa-mobius-lucid-awakening` |
 | 第三十九章 | §39.15 末（转入红楼觉醒的收束段之后） | `brahman-real-axis-orthogonal-dream-sandbox` 完整实验室 |
+| 第三十九章 | §39.16.1 第 1 条零倾角顽石段之后、第 2 条之前 | `red-chamber-spinor-awakening-sandbox` · `chaos-unhewn-stone` |
+| 第三十九章 | §39.16.1 末（二阶认妄误差与非零一阶倾角对照段之后） | `red-chamber-spinor-awakening-sandbox` · `red-dust-delusion-mismatch` |
+| 第三十九章 | §39.16.2 的 360° 负叶提升条目之后、720° 条目之前 | `red-chamber-spinor-awakening-sandbox` · `fengyue-mirror-double-turn` |
+| 第三十九章 | §39.16.2 的 720° 甄贾同圆条目之后、模型定义之前 | `red-chamber-spinor-awakening-sandbox` · `mobius-720-virtual-real-unity` |
+| 第三十九章 | §39.16.3 第 3 条贝里铭文与离散相位对照段之后、主定理之前 | `red-chamber-spinor-awakening-sandbox` · `greensickness-berry-unity` |
+| 第三十九章 | §39.16 末（转入神圣游戏的桥接段之后） | `red-chamber-spinor-awakening-sandbox` 完整实验室 |
+| 第三十九章 | §39.17.1 第 1 条全知零余量死锁段之后、窗口截断段之前 | `brahman-lila-game-props-sandbox` · `omniscient-zeno-deadlock` |
+| 第三十九章 | §39.17.1 第 1 条窗口截断与探索自由段之后、第 2 条之前 | `brahman-lila-game-props-sandbox` · `amnesia-birth-open-corridor` |
+| 第三十九章 | §39.17.2 第 1 条宏观环境退相干边界段之后、第 2 条之前 | `brahman-lila-game-props-sandbox` · `relic-attractor-deja-vu` |
+| 第三十九章 | §39.17.2 第 2 条二次正交破壁结语之后、§39.17.3 之前 | `brahman-lila-game-props-sandbox` · `classic-permission-lock-flip` |
+| 第三十九章 | §39.17.3 指月渡筏与抄表非预见性边界段之后、模型定义之前 | `brahman-lila-game-props-sandbox` · `lila-raft-return-and-new-seed` |
+| 第三十九章 | §39.17 末（转入终章的桥接段之后） | `brahman-lila-game-props-sandbox` 完整实验室 |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget` |
 | 终章 | 空间吸引子 · 二 “回到洛伦兹”一段中“吸引子的体积为零”一句之后 | `spatial-attractor-deja-vu` · `shrink` |

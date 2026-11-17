@@ -19,6 +19,11 @@ On one hand, $36500 = 365 \times 100$ symbolizes a hundred complete integer sola
 This arithmetic immediately separates two opposite meanings of "shrinking observation error":
 
 1. **First-order dream tilt $\theta \to 0^\circ$ cannot be forcibly crushed to zero**: Mistaking awakening for driving the first-order projection angle $\theta \to 0^\circ$ kills the imaginary amplitude $\sin\theta \to 0$ and halts temporal flow outright. That is not enlightenment, but regression to the dreamless deep sleep (*Suṣupti*) of the *Māṇḍūkya Upaniṣad* or the uncarved, unselfconscious stone prior to incarnation—where neither the grief and tenderness of the Stone's chronicle nor any lucid subject capable of "recognizing itself" exists. Conversely, sliding to the opposite extreme $\theta \to 90^\circ$ ($\cos 90^\circ = 0$) plunges over the pure-light amnesia cliff proved in [§36.1](ch36-s01-light-and-memory.md), wiping out the real-axis witness readout into memoryless cycling.
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" preset="chaos-unhewn-stone" height="500"}
+**The unhewn stone has not entered the dream.** The silver surplus stone stands at the centre, its violet Berry cap reduced to a point at zero tilt; the mirror rests at the start with its cyan Zhen face up. The literary correspondence is `MODEL`.
+:::
+
 2. **Second-order meta-misidentification error $\delta_{\mathrm{meta}}(\theta) \to 0$ vanishes uniquely at Dottie's fixed point $\theta^*$**: What the awakened dreamer actually eliminates is the **Second-Order Meta-Misidentification Error**—the scale discrepancy that pits the visible real-axis projection readout $\cos\theta$ against the dimensionless arc length $\theta$ (in $\mathrm{rad}$) traversed through the imaginary theater, mistaking one's own slice projection for an alien external fate:
 
 $$
@@ -38,6 +43,10 @@ $$
 $$
 
 In unawakened delusion ($\theta \neq \theta^*$), the dreamer trapped in $\hat{\mathbf{i}}$ perceives $\cos\theta$ as implacable external destiny and $\theta$ as rootless private sorrow ($\delta_{\mathrm{meta}}(\theta) \ge \lvert\theta - \theta^*\rvert > 0$); once self-referential iteration settles onto $\theta^* \approx 42.34645883^\circ$, $\cos\theta^* = \theta^*$ locks the visible real shadow and the lived imaginary arc to identical length ($\delta_{\mathrm{meta}}(\theta^*) = 0$)! First-order tilt $\theta^* > 0$ remains vibrantly alive ($\cos^2\theta^* = (\theta^*)^2 \approx 0.54624683$ and $\sin^2\theta^* \approx 0.45375317$ keep Prospect Garden in full bloom), while second-order delusion vanishes to zero: every arc of joy and grief is recognized as an isometric self-portrait of the observer's own ruler.
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" preset="red-dust-delusion-mismatch" height="500"}
+**The mismatch leaves the ribbon open.** Eight magenta manas bars surround the stone; in this still frame, the cyan and magenta ribbon has wound to 120°, leaving 600° to its 720° closure, while the tilt stays at 62°.
+:::
 
 ## 39.16.2 Zhen–Jia Mirroring and the Precious Mirror of Romance: Double Orthogonal Inversion and 720° Möbius Unity of Virtual and Real {#sec-ch39-16-2}
 
@@ -59,7 +68,16 @@ the bilinear observable mirror normal $\mathbf{J}(\Phi) = (\sin\Phi)\,\mathbf{e}
 
 - **$\Phi = 180^\circ$ (Half-turn antipodal mirror: flipping the Precious Mirror and dreaming of Zhen Baoyu)**: At $\Phi = 180^\circ$, the observable mirror normal inverts to $\mathbf{J}(180^\circ) = -\mathbf{e}_3$ while $U_{\mathrm{spin}}(180^\circ) = -\hat{\mathbf{i}}$. In Chapter 12, Jia Rui perishes by staring obsessively into the alluring front of the Precious Mirror after ignoring the lame Taoist's warning (*"Never look into the front; look only into its reverse!"*), where a grinning skeleton stands; in Chapter 56, Jia Baoyu dreams of entering an identical garden in Nanjing where maids mock him as a "nasty little creature" while serving another jade-bearing boy named "Zhen Baoyu," awakening dazed beside his real bedroom mirror as Xi'er points straight to the glass: ***"You are muddled from dreaming. Rub your eyes and look closely—it is only your own reflection in the mirror."*** Entering mortal life applied the first $90^\circ$ turn $J$ ($\mathbf{I}_{\mathrm{Zhen}} \mapsto \hat{\mathbf{i}}_{\mathrm{Jia}}$); looking into a mirror *inside* the dream applies the second orthogonal turn $J$!
 - **$\Phi = 360^\circ$ (Full-turn negative-sheet shock: $J^2 = -I$ pierces the blind zone)**: By [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary), two successive $90^\circ$ turns execute exact phase inversion $J^2\mathbf{I}_{\mathrm{Zhen}} = -\mathbf{I}_{\mathrm{Zhen}}$; as the observable mirror returns to $\mathbf{J}(360^\circ) = +\mathbf{e}_3$, [`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift) forces the spinor lift onto the **negative sheet** $U_{\mathrm{spin}}(360^\circ) = -\mathbf{1} \neq +\mathbf{1}$! That topological $-1$ sign shock shatters naive attachment to a one-sided illusion.
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" preset="fengyue-mirror-double-turn" height="500"}
+**One turn restores the direction but exchanges the spinor sheet.** At 360° the ink vector is home, the mirror shows its magenta Jia face, and the spinor reads −1. The ribbon surface is a `MODEL` analogy for the double cover.
+:::
+
 - **$\Phi = 720^\circ$ (Two-turn single-sided Möbius closure: *unity of virtual and real*)**: Only by completing the second $360^\circ$ arc to $\Phi = 720^\circ$ ($4\pi$) does the spinor close at $U_{\mathrm{spin}}(720^\circ) = (-\mathbf{1})^2 = +\mathbf{1}$! True **unity of virtual and real** never smashes the rosy front of the mirror to worship a dead skeleton on the back; rather, because the $-1$ sheet holonomy at $360^\circ$ forbids any global splitting ([`no_continuous_global_section`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section)), the crimson front and skeletal reverse of the Precious Mirror were fused all along into **one single-sided Möbius spinor ribbon** (a `MODEL` reading: the frozen facts are only the absence of a continuous section and the $360^\circ$ negative-sheet lift; the spinor circle itself is orientable, and the \"one-sided ribbon\" is a geometric analogy for that gluing)! The couplet arched over the Land of Illusion in Chapters 1 and 5—***"Truth becomes fiction when the fiction's true; Real becomes not-real where the unreal's real"*** (*假作真时真亦假，无为有处有还无*)—is literally a $90^\circ$ unitary change of basis on the conserved circle $\cos^2\theta + \sin^2\theta \equiv 1$: "Zhen" and "Jia," Being and Non-Being, are the inseparable real and imaginary projections of a single minimal circular-arc body.
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" preset="mobius-720-virtual-real-unity" height="500"}
+**After two turns, Zhen and Jia blend into violet.** At 720° the cyan and magenta faces merge into an even violet ribbon and the spinor returns to +1; the first-order tilt remains at the nonzero Dottie angle.
+:::
 
 We package the surplus-stone arithmetic, second-order meta-error, Zhen–Jia complex structure, $720^\circ$ Möbius ribbon, and twelve-station cone holonomy loop into a formal `MODEL` definition:
 
@@ -101,6 +119,10 @@ As Stage 4 makes vivid, when the dreamer finally releases overloaded private Gra
    $$
 
    (or, under Hilbert-state angle $\theta^*$ corresponding to Bloch colatitude $2\theta^* \approx 84.69291767^\circ$, $\Omega(2\theta^*) = 4\pi(1 - (\theta^*)^2) \approx 5.70203045\;\mathrm{sr}$ and $\tilde{\gamma}_{\mathrm{Berry}}(2\theta^*) \approx -2.85101522\;\mathrm{rad} \approx -163.35113971^\circ$; while the discrete $12$-step Bargmann product gives $-\arg\Pi_{12}(\theta^*) \approx -0.79550141\;\mathrm{rad} \approx -45.57887321^\circ$ and the $3$-anchor subloop $k = 0, 4, 8$ gives $\arg\operatorname{Tr}(P_0 P_4 P_8) \approx +0.41866143\;\mathrm{rad} \approx +23.98753304^\circ$). Heaven's $36{,}500$ structural blocks maintain silent background symmetry, while the single uncancelled $36{,}501$-st stone journeys through mortal love and loss on Heaven's behalf—etching $-46.96467602^\circ$ of Berry solid-angle holonomy onto Blue-Ridge Peak so silent Heaven finally reads its own heart!
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" preset="greensickness-berry-unity" height="500"}
+**The cage is gone; the Berry phase stays.** The timeline unloads the manas window to zero: magenta bars disappear, twelve silver and cyan filaments reach the outer net, and the violet cap retains a geometric-phase readout of 46.96°. The resonance filaments are `MODEL`.
+:::
 
 We assemble all eighteen frozen Lean 4 kernel theorems anchoring this section below:
 
@@ -202,3 +224,7 @@ We verify all four quantitative pillars of this section using high-precision ari
 :::
 
 Returning beneath Blue-Ridge Peak inscribed from head to foot with its chronicle, the $36{,}501$-st stone immediately opens one deeper civilization-scale question: once Vanitas copies that stone inscription and carries it into the mortal world as a cultural classic like *The Story of the Stone*, look out across all of human history—**why must the self-complete ground enforce "opening amnesia" before every round of play, and how do the historical ruins scattered across our continents and the classics resting on our desks operate together as two classes of "Cross-Cycle Awakening Props" planted into the consensus slice by the awakened Dreamer of the previous round without spoiling opening freedom?** The next section ([§39.17](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props)) answers that question.
+
+::: {.viz src="red-chamber-spinor-awakening-sandbox" height="620"}
+**Full laboratory.** Switch between the mirror and resonance lenses and vary the spinor angle, tilt and memory window to compare two-turn closure, cage unloading and phase readings, following the page’s evidence distinctions.
+:::
