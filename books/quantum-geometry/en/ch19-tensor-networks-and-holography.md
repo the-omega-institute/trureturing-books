@@ -6,10 +6,10 @@ In [Chapter 2](ch02-born-rule.md) and [Chapter 3](ch03-projectors-and-duality.md
 
 The opening epigraph takes this linear-algebraic fact as the intuitive bridge to tensor networks: when we move from a single state ray to a **tensor network** wired together by contracted bond indices, how is the maximum entanglement rank ("flow") transmissible across the network constrained by the narrowest bottleneck cross-section ("cut capacity") inside it?
 
-In keeping with our three-tier epistemological contract and the discrete facet-stitching viewpoint, this chapter maintains three strict boundaries:
+In keeping with our three-tier epistemological contract and the discrete facet-stitching principle (R3), this chapter maintains three strict boundaries:
 
 1. **Lean-verified finite-dimensional bridge-graph and open-boundary MPS theorems**: In the `BridgeGraph` module family, for the width-three (`Fin 3`) Kronecker bridge contraction $\operatorname{flow}(M, N) = \sum_{r \in \operatorname{Fin} 3} M_r \otimes N_r$, we prove attainment of maximal rank ([@lemma-bridge-flow-attained]), the universal min-cut upper bound ([@prop-bridge-flow-cut-bound]), simplification of the min-cut on the quadratic cone ([@cor-bridge-cone-mincut]), and the exact discrete quantum max-flow min-cut theorem on the ordered cone ([@thm-bridge-quantum-maxflow-mincut]); we then prove in the open-boundary bond-dimension-$2$ matrix product state (MPS) modules that an unnormalized three-site prefix marginal determines the global state up to a unit phase on an explicit observable chart ([@thm-mps-observable-phase-recovery]), and that for chain lengths $3 + m \ge 5$ phase-unique recovery from any interior three-site marginal holds on a nonempty open dense principal locus ([@thm-mps-generic-interior-recovery]);
-2. **Discrete log-capacity polyhedral facets and seam stitching**: Passing to logarithmic bond-capacity coordinates ([@ex-log-capacity-facets]), we show how the lower envelope of three affine hyperplanes carves out discrete polyhedral facets joined along the bottleneck seam $ad = bc$;
+2. **Discrete log-capacity polyhedral facets and seam stitching (R3)**: Passing to logarithmic bond-capacity coordinates ([@ex-log-capacity-facets]), we show how the lower envelope of three affine hyperplanes carves out discrete polyhedral facets joined along the bottleneck seam $ad = bc$;
 3. **Literature boundary for continuum holography**: Multi-scale entanglement renormalization ansatz (MERA) schematics and the continuum AdS/CFT Ryu–Takayanagi (RT) minimal-surface formula are confined to an explicit literature remark ([@rem-ryu-takayanagi-literature]), never conflated with our finite-dimensional width-three bridge theorem.
 
 ::: {.figure src="ch19-overview"}
@@ -32,7 +32,7 @@ Lengthen the interval from one site to four neighbouring sites: cutting the legs
 **Four sites: the cut runs through the network.** Four neighbouring sites at the bottom form the amber interval. Severing their four legs is not the cheapest option: the magenta minimal cut dips into the network and severs only 3 bonds, with the cyan tensors on its inner side. The page counts severed legs, which only bounds the rank from above; as noted above, in a general network the max-flow can fall short of the min-cut, and the network itself is a schematic model.
 :::
 
-The bridge-graph model, the definitions of `QMaxFlow` and `QMinCut`, and the cone-domain "flow equals cut" statement below come from F. Gesmundo, V. Lysikov and V. Steffan, *Quantum max-flow in the bridge graph*, Transformation Groups 30 (2025) 1751–1784 (DOI: `10.1007/s00031-024-09863-2`, arXiv:2212.09794); the source letters $(a, b, a', b')$ correspond to our $(a, b, c, d)$, the width-three case is the source's Conjecture 3.15, and the source's Proposition 3.18 reduces general width to it (that reduction remains a literature result, not formalized in this book). In the Lean module `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound`, fix four natural-number bond dimensions $a, b, c, d \in \mathbb{N}$ and a bridge of width $3$ (indexed by $r \in \operatorname{Fin} 3$):
+The bridge-graph model, the definitions of `QMaxFlow` and `QMinCut`, and the cone-domain "flow equals cut" statement below (the source's Conjecture 3.15) come from F. Gesmundo, V. Lysikov and V. Steffan, *Quantum max-flow in the bridge graph*, Transformation Groups 30 (2025) 1751–1784 (DOI: `10.1007/s00031-024-09863-2`, arXiv:2212.09794); the source letters $(a, b, a', b')$ correspond to our $(a, b, c, d)$. In the Lean module `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound`, fix four natural-number bond dimensions $a, b, c, d \in \mathbb{N}$ and a bridge of width $3$ (indexed by $r \in \operatorname{Fin} 3$):
 
 - Let $M : \operatorname{Fin} 3 \to M_{a\times b}(\mathbb{C})$ be a triple of $a\times b$ complex matrices and $N : \operatorname{Fin} 3 \to M_{d\times c}(\mathbb{C})$ a triple of $d\times c$ complex matrices;
 - Define the **width-three bridge flow matrix** `flow` as the sum of three Kronecker products:
@@ -146,9 +146,9 @@ Together, $\operatorname{flow}(M, N)$ is a $6\times 6$ permutation matrix of ran
 
 ## 19.3 Cone domains and discrete capacity facets {#sec-discrete-facet-stitching}
 
-In [@ex-bridge-two-three], the internal bridge cut $3ac = 12$ sits well above the outer boundary cuts $ad = bc = 6$. Why do the quadratic cone inequalities $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ lie inside the region where the three-bridge interior never bottlenecks the outer cuts?
+In [@ex-bridge-two-three], the internal bridge cut $3ac = 12$ sits well above the outer boundary cuts $ad = bc = 6$. Why do the quadratic cone inequalities $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ lie inside the natural domain where the three-bridge interior never bottlenecks the outer cuts?
 
-A one-line algebraic check tells the story: when $a > 0$, $a^2 + b^2 \le 3ab$ forces $b^2 < a^2 + b^2 \le 3ab$, so $b < 3a$ (and similarly $c > 0$ with $c^2 + d^2 \le 3cd$ forces $d < 3c$). Multiplying $b < 3a$ by $c$ gives $bc < 3ac$, and multiplying $d < 3c$ by $a$ gives $ad < 3ac$. Thus, whenever $(a, b)$ and $(c, d)$ lie inside the quadratic cone $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ (with $a > 0$ and $c > 0$), the internal cut $3ac$ never undercuts $\min(ad, bc)$, so $\operatorname{QMinCut}(a, b, c, d)$ simplifies to $\min(ad, bc)$. The cone is only sufficient: $b \le 3a$ or $d \le 3c$ already keeps the bridges from being the bottleneck; the narrower cone is the domain of the flow-equals-cut theorem below.
+A one-line algebraic check tells the story: when $a > 0$, $a^2 + b^2 \le 3ab$ forces $b^2 < a^2 + b^2 \le 3ab$, so $b < 3a$ (and similarly $c > 0$ with $c^2 + d^2 \le 3cd$ forces $d < 3c$). Multiplying $b < 3a$ by $c$ gives $bc < 3ac$, and multiplying $d < 3c$ by $a$ gives $ad < 3ac$. Thus, whenever $(a, b)$ and $(c, d)$ lie inside the quadratic cone $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ (with $a > 0$ and $c > 0$), the internal cut $3ac$ never undercuts $\min(ad, bc)$, so $\operatorname{QMinCut}(a, b, c, d)$ simplifies to $\min(ad, bc)$.
 
 ::: {.viz src="eth-horizon-crossover" preset="narrow" height="500"}
 **Bridges too narrow: they are the bottleneck.** The bridge graph $(a, b, c, d) = (1, 5, 1, 5)$: both outer cuts are $5$, but the three bridges carry only $3ac = 3$, and the smallest cut, marked by the dashed magenta line, crosses leg $a$, the three bridges and leg $c$. On the right the flow matrix is $5 \times 5$, and its cyan singular values vanish after the third: the rank is just $3$. Since $1^2 + 5^2 = 26 > 3 \cdot 1 \cdot 5$, these dimensions lie outside the cone ([@prop-bridge-flow-cut-bound]).
@@ -175,7 +175,7 @@ By definition, $\operatorname{QMinCut}(a, b, c, d) = \min(3ac, \min(ad, bc))$, s
 
 Notice the exact hypotheses of [@cor-bridge-cone-mincut]: this corollary requires $0 < a$, $0 < c$, $a^2 + b^2 \le 3ab$, and $c^2 + d^2 \le 3cd$, and **does not assume the ordering conditions $a \le b$ or $c \le d$** (which are needed only for the lower-bound construction in the next section).
 
-Now let us interpret $\operatorname{QMinCut}(a, b, c, d) = \min(3ac, ad, bc)$ through our **discrete polyhedral facet-stitching lens**. For positive integers $a, b, c, d > 0$, introduce logarithmic bond capacities
+Now let us interpret $\operatorname{QMinCut}(a, b, c, d) = \min(3ac, ad, bc)$ through our **discrete polyhedral facet-stitching lens (R3)**. For positive integers $a, b, c, d > 0$, introduce logarithmic bond capacities
 
 $$
 u = \ln a, \qquad v = \ln b, \qquad w = \ln c, \qquad z = \ln d.
@@ -220,7 +220,7 @@ The three candidate cut capacities are now $(3ac, ad, bc) = (12, 8, 6)$, with $\
 
 Combining the universal upper bound $\operatorname{QMaxFlow} \le \operatorname{QMinCut}$ ([@prop-bridge-flow-cut-bound]) with the cone simplification $\operatorname{QMinCut} = \min(ad, bc)$ ([@cor-bridge-cone-mincut]) leaves the constructive lower bound: on the ordered cone domain $0 < a \le b$, $0 < c \le d$ with $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$, does there always exist a pair $(M, N)$ whose bridge contraction achieves rank $\min(ad, bc)$?
 
-The Lean module `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowMinCut` proves this in full via [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result), where `claim` expands to the universal statement below. This is the width-three case of the source's Conjecture 3.15; the upstream literature search was bounded and found no earlier settlement, which is not an exhaustive claim of originality.
+The Lean module `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowMinCut` proves this in full via [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result), where `claim` expands to the universal statement below.
 
 ::: {.theorem #thm-bridge-quantum-maxflow-mincut title="Discrete bridge-graph quantum max-flow min-cut" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"}
 For all natural numbers $a, b, c, d \in \mathbb{N}$ satisfying $0 < a$, $a \le b$, $0 < c$, $c \le d$, and the quadratic cone inequalities
@@ -620,7 +620,7 @@ where $G_N$ is the bulk Newton gravitational constant and $\gamma_A$ is the mini
 Two guardrails are mandatory when comparing discrete tensor-network bounds with holographic entanglement entropy:
 
 1. **Never write $S(A) = a \wedge b$** or assert that arbitrary tensor networks universally saturate their minimum cut;
-2. **Respect the discrete-facet boundary**: in this book, the geometric bridge from [@thm-bridge-quantum-maxflow-mincut] to holographic ideas proceeds strictly through the discrete log-capacity polyhedral facets, bottlenecks, and seam stitching of [@ex-log-capacity-facets], without claiming that a continuum limit or holographic duality has been proved.
+2. **Respect the R3 discrete-facet boundary**: in this book, the geometric bridge from [@thm-bridge-quantum-maxflow-mincut] to holographic ideas proceeds strictly through the discrete log-capacity polyhedral facets, bottlenecks, and seam stitching of [@ex-log-capacity-facets], without claiming that a continuum limit or holographic duality has been proved.
 
 See S. Ryu & T. Takayanagi, *Phys. Rev. Lett.* **96**, 181602 (2006), DOI: `10.1103/PhysRevLett.96.181602`; B. Swingle, *Phys. Rev. D* **86**, 065007 (2012), DOI: `10.1103/PhysRevD.86.065007`; and J. D. Bekenstein, *Phys. Rev. D* **7**, 2333 (1973), DOI: `10.1103/PhysRevD.7.2333`.
 :::

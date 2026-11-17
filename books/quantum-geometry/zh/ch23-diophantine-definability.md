@@ -2,7 +2,7 @@
 
 > *“Z在 Q中是丢番图的,你查一下最新的一个研究,结合分析一下”*
 
-题记是作者提出这一问题时的原话；严格意义下，“$\mathbb{Z}$ 在 $\mathbb{Q}$ 中是丢番图的”（即只用存在量词可定义）至今仍是开放问题。已知的是 $\mathbb{Z}$ 在 $\mathbb{Q}$ 中可用纯全称量词定义，等价地 $\mathbb{Q} \setminus \mathbb{Z}$ 在 $\mathbb{Q}$ 中是丢番图的（Koenigsmann 2016，见 [@rem-diophantine-z-in-q-literature]）。在[第一章](ch01-measurement.md)中，我们曾追问：连续旋转的球面箭头，如何通过一维快门切出离散的“量子（liàng）”刻度？现在，让我们把完全相同的几何追问投向数论与逻辑的深海：
+题记中的“$\mathbb{Z}$ 在 $\mathbb{Q}$ 中是丢番图的”（只用存在量词可定义）在严格意义下至今仍是开放问题；已知的是 $\mathbb{Z}$ 在 $\mathbb{Q}$ 中可用纯全称量词定义，等价地 $\mathbb{Q} \setminus \mathbb{Z}$ 在 $\mathbb{Q}$ 中是丢番图的（Koenigsmann 2016，见 [@rem-diophantine-z-in-q-literature]）。在[第一章](ch01-measurement.md)中，我们曾追问：连续旋转的球面箭头，如何通过一维快门切出离散的“量子（liàng）”刻度？现在，让我们把完全相同的几何追问投向数论与逻辑的深海：
 
 考察有理数域 $\mathbb{Q}$。在 $\mathbb{Q}$ 里，任意两个有理数 $r_1 < r_2$ 之间的中点 $\frac{r_1 + r_2}{2}$ 仍是有理数，反复二分便能挤进无穷多个有理数；加法和乘法在 $\mathbb{Q}$ 上处处平滑可逆（非零元皆可作除法），表面上看不出任何离散的“台阶”或“网格”。然而，就在这片稠密无间断的有理数大海内部，却潜伏着一副坚硬无比的**离散整数骨架** $\mathbb{Z} = \{\dots, -2, -1, 0, 1, 2, \dots\} \subset \mathbb{Q}$！
 
@@ -10,7 +10,7 @@
 
 更令人拍案叫绝的是：在现代算术几何的一阶可定义性文献中（见章末 [@rem-diophantine-z-in-q-literature]），数学家用来在有理数域 $\mathbb{Q}$ 中刻画整数骨架的核心几何工具，恰恰是我们全书反复锤炼的老朋友——**四元数代数（quaternion algebras）的约化范数球面 $\operatorname{Nrd}(\alpha)$ 与约化迹投影 $\operatorname{Trd}(\alpha)$**，以及二元二次范数型的判别式不变量！
 
-本章将沿着“范数球面与迹投影如何锁住离散整格”这一主线，首先在 Lean 4 中严格建立两组整数环上的二次范数恒等式（它们是范数与迹锁定整格的最小例子，变量一开始就取在 $\mathbb{Z}$ 上，本身并不涉及在 $\mathbb{Q}$ 中挑出 $\mathbb{Z}$）——判别式恒为 $\Delta = -3$ 的**艾森斯坦（Eisenstein / Löschian）六角交越范数型**与判别式为 $\Delta = +5$ 的**黄金整数佩尔（Pell）迹—范数恒等式**；随后在第三层认识论边界审计框（[@rem-diophantine-z-in-q-literature]）中，剖析有理数域中一阶定义整数集的文献脉络、量词前缀（$\forall$、$\forall\exists$ 与存在性丢番图 $\exists$）的本质分野，以及它与希尔伯特第十问题 $\mathrm{H10}(\mathbb{Q})$ 的关联。
+本章将沿着“范数球面与迹投影如何锁住离散整格”这一主线，首先在 Lean 4 中严格建立两条最核心的二次代数整数范数锁——判别式恒为 $\Delta = -3$ 的**艾森斯坦（Eisenstein / Löschian）六角交越范数型**与判别式为 $\Delta = +5$ 的**黄金整数佩尔（Pell）迹—范数恒等式**；随后在第三层认识论边界审计框（[@rem-diophantine-z-in-q-literature]）中，剖析有理数域中一阶定义整数集的文献脉络、量词前缀（$\forall$、$\forall\exists$ 与存在性丢番图 $\exists$）的本质分野，以及它与希尔伯特第十问题 $\mathrm{H10}(\mathbb{Q})$ 的关联。
 
 ::: {.figure src="ch23-overview"}
 **图 23。** 本章地图：第 I 栏，艾森斯坦六角格上青色的范数 $7$ 圆穿过 $12$ 个格点，$t = -1$ 与 $t = 2$ 两块品红的格子一正一斜、面积相同（§23.1–§23.2）；第 II 栏，黄金单位 $\varphi^n$ 交替落在 $g\bar{g} = +1$ 与 $-1$ 两支品红双曲线上，点旁是 $(L_n, F_n)$（§23.2）；第 III 栏，按分母排开的有理数里，分母为 $1$ 的青色一行就是 $\mathbb{Z}$，紫色标签是用全称量词定义 $\mathbb{Z}$ 的文献结果，红色标签是“只用存在量词能否定义”这一开放问题（§23.3）。
@@ -173,7 +173,7 @@ $$
 **转 45° 去读：迹与佩尔恒等式。** 青色对角线上的影子是迹 $2a + b = 5$，虚线对角线上的是 $\sqrt{5}\,b$；$5^2 - 5 \cdot 1^2 = 20 = 4 \times 5$，品红双曲线在这对新坐标里就是 $x^2 - 5y^2 = 20$（[@prop-pell-form-eq-four-mul-norm]）。
 :::
 
-请看 [@prop-pell-form-eq-four-mul-norm] 的惊人威力：在同一个模块 `GoldenPell` 中，正是凭借 $(2a + b)^2 - 5b^2 = 4\,\operatorname{norm}(g)$ 这座桥梁，Lean 进一步验证了**佩尔—卢卡斯—斐波那契对应** [`pell_pm_four_iff_signed_lucas_fib`](lean:D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib)（该定理只陈述下面首尾两端的等价，中间经过单位元的一步是证明路线）：两个整数 $(x, y) \in \mathbb{Z}^2$ 满足不定二次丢番图方程
+请看 [@prop-pell-form-eq-four-mul-norm] 的惊人威力：在同一个模块 `GoldenPell` 中，正是凭借 $(2a + b)^2 - 5b^2 = 4\,\operatorname{norm}(g)$ 这座桥梁，Lean 进一步验证了著名的**佩尔—卢卡斯—斐波那契锁定定理** [`pell_pm_four_iff_signed_lucas_fib`](lean:D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib)：两个整数 $(x, y) \in \mathbb{Z}^2$ 满足不定二次丢番图方程
 
 $$
 x^2 - 5y^2 = \pm 4,
@@ -270,7 +270,7 @@ $$
      2. **Nicolas Daans（2021，*Documenta Mathematica* 26, 1851–1869，〈Universally defining finitely generated subrings of global fields〉，`DOI: 10.4171/dm/858`，`arXiv:1812.04372`）**：建立了全局域有限生成子环在其分式域中的纯全称定义，并将定义 $\mathbb{Z} \subset \mathbb{Q}$ 所需的全称量词个数压缩至 **$37$ 个**（$\forall^{37}$）；
      3. **张耿瑞与孙智伟（Geng-Rui Zhang and Zhi-Wei Sun，2022，*Bulletin of the Polish Academy of Sciences: Mathematics* 70(2), 93–106，〈$\mathbb{Q}\setminus\mathbb{Z}$ is diophantine over $\mathbb{Q}$ with $32$ unknowns〉，`DOI: 10.4064/ba221231-19-3`，`arXiv:2104.02520`）**：证明了 $\mathbb{Q} \setminus \mathbb{Z}$ 在 $\mathbb{Q}$ 上可用 $32$ 个未知量给出丢番图（$\Sigma_1$）定义，等价地将 $\mathbb{Z}$ 在 $\mathbb{Q}$ 中的纯全称定义压缩至 **$32$ 个全称量词**（$\forall^{32}$）；
      4. **Nicolas Daans（2023 预印本 / 2024，*Journal of the London Mathematical Society* 109(2), e12864，〈Universally defining $\mathbb{Z}$ in $\mathbb{Q}$ with $10$ quantifiers〉，`DOI: 10.1112/jlms.12864`，`arXiv:2301.02107`）**：结合二次型范数方程与精化的局部—整体互反律，将 $\mathbb{Z}$ 在 $\mathbb{Q}$ 中的纯全称（$\Pi_1$）定义大幅压缩至**仅需 $10$ 个全称量词**（$\forall^{10}$）。这些工作推进了全称（$\Pi_1$）与 $\forall\exists$（$\Pi_2$）可定义性的边界，但均未宣称解决 $\mathbb{Z} \subset \mathbb{Q}$ 的存在性（$\Sigma_1$）丢番图定义问题。
-3. **本章四个冻结 Lean 定理的精确认领边界**：本章经 Lean 内核验证的四个正式条目——[@thm-qform-eq-eisnorm]（`Qform_eq_eisNorm`）、[@lem-qform-discriminant]（`Qform_discriminant`）、[@cor-qform-range-eq-eisnorm]（`Qform_range_eq_eisNorm`）与 [@prop-pell-form-eq-four-mul-norm]（`pell_form_eq_four_mul_norm`）——证明的是整数环 $\mathbb{Z}$ 上 $\Delta = -3$ 艾森斯坦交越范数型的幺模剪切不变性、值域等同以及 $\Delta = +5$ 黄金整数环的佩尔迹—范数恒等式。它们是“迹投影与二次范数锁定离散整数格”这类不变量的最小例子，变量一开始就取在 $\mathbb{Z}$ 上，**与 Koenigsmann (2016) 关于 $\mathbb{Z} \subset \mathbb{Q}$ 一阶可定义性定理的证明没有逻辑关系，也不是其中任何一步的形式化**。
+3. **本章四个冻结 Lean 定理的精确认领边界**：本章经 Lean 内核验证的四个正式条目——[@thm-qform-eq-eisnorm]（`Qform_eq_eisNorm`）、[@lem-qform-discriminant]（`Qform_discriminant`）、[@cor-qform-range-eq-eisnorm]（`Qform_range_eq_eisNorm`）与 [@prop-pell-form-eq-four-mul-norm]（`pell_form_eq_four_mul_norm`）——证明的是整数环 $\mathbb{Z}$ 上 $\Delta = -3$ 艾森斯坦交越范数型的幺模剪切不变性、值域等同以及 $\Delta = +5$ 黄金整数环的佩尔迹—范数恒等式。它们以具体、完全形式化的二次代数范数锁展示了“迹投影与二次范数如何锁定离散整数格”的核心代数机制，**并不构成 Koenigsmann (2016) 关于 $\mathbb{Z} \subset \mathbb{Q}$ 一阶可定义性定理的形式化证明**。
 :::
 
 > 有理数的汪洋看似无边无际、随处可分；但只要把二次范数球面与迹投影的准星扣紧，离散的整数骨架便从连续的迷雾里浮现出来。

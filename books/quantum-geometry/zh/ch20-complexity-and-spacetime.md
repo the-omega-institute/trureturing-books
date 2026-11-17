@@ -1,4 +1,4 @@
-# 第二十章 门复杂度是体积吗？黑洞内部生长、虫洞桥与计算复杂性边界 {#门复杂度即体积黑洞内部生长虫洞桥与计算复杂性边界}
+# 第二十章 门复杂度即体积：黑洞内部生长、虫洞桥与计算复杂性边界 {#门复杂度即体积黑洞内部生长虫洞桥与计算复杂性边界}
 
 > *“P/NP 跟初始结构相关，有的初始结构可以推出 P=NP 处理无穷问题的本质就是进行因式分解，看如何把无穷 “约掉 ” ，本质不断的用已知关于无穷的结论构造，约 P/NP 跟查表算法，顺序，记忆顺序有关，全部用量子门计数最核心的问题其实是证明一个命题的通用方式”*
 
@@ -6,7 +6,7 @@
 
 在进入正文之前，我们必须对章首题记作一次最诚实的认识论界定：题记忠实保留了作者原始手稿中关于“初始结构、查表顺序与量子门计数”的直觉思考原声，但它只是一段启发性的哲学题记，**绝不构成对 $\mathrm{P} = \mathrm{NP}$ 的数学证明**。在本章中，我们将严格执行三层认识论分级：
 
-1. **第一层（绿色 `LEAN ✓`）**：我们完整证明四条冻结定理——开放边界可积量子电路族的精确最小并行深度公式 $\operatorname{minDepth}(N, \kappa) = \lfloor N/(\kappa + 1)\rfloor + 1$（[@thm-open-circuit-min-depth]）、对两条文献深度猜想公式的显式反例证伪（[@lemma-open-circuit-depth-refutation]）、$2n$ 比特反射对称对角酉算子在 $\{\mathrm{CNOT}, R_z\}$ 门集下的指数级 CNOT 下界 $2^{2n-1} + 2n - 2$（[@prop-reflection-cnot-lower-bound]），以及二分偶圈图上典范闭合遍历的精确步长 $2(n+2)$（[@cor-even-cycle-length]；它与量子电路只是同名，列入这里是为了 20.4 的名实辨析）；
+1. **第一层（绿色 `LEAN ✓`）**：我们完整证明四条冻结定理——开放边界可积量子电路族的精确最小并行深度公式 $\operatorname{minDepth}(N, \kappa) = \lfloor N/(\kappa + 1)\rfloor + 1$（[@thm-open-circuit-min-depth]）、对两条文献深度猜想公式的显式反例证伪（[@lemma-open-circuit-depth-refutation]）、$2n$ 比特反射对称对角酉算子在 $\{\mathrm{CNOT}, R_z\}$ 门集下的指数级 CNOT 下界 $2^{2n-1} + 2n - 2$（[@prop-reflection-cnot-lower-bound]），以及二分偶圈图上典范闭合遍历的精确步长 $2(n+2)$（[@cor-even-cycle-length]）；
 2. **第二层（文献注记）**：在 [@rem-complexity-growth-literature] 与 [@rem-computational-model-literature] 中澄清态复杂度定义、Nielsen 几何、热化后线性增长叙述的时间窗，以及统一图灵机模型与预存查表成本的核算规则；
 3. **第三层（红色 `OPEN`）**：将全息物理与计算复杂性理论中的三大核心未解问题——**复杂度等于体积（CV）**（[@conj-complexity-equals-volume]）、**$\mathrm{ER}=\mathrm{EPR}$**（[@conj-er-equals-epr]）与 **$\mathrm{P}\neq\mathrm{NP}$**（[@conj-p-neq-np]）——严格标记为不带 `lean` 属性的开放猜想。
 
@@ -196,7 +196,7 @@ $$
 **边界时间往后走，穿过黑洞内部的切片越拉越长；它与门数是否成正比是开放问题。** 示意的双边黑洞彭罗斯图：左右竖边是两个边界，上下锯齿线是奇点，对角虚线是视界。紫色的切片 $\Sigma_t$ 两端钉在边界时刻 $t = 0, 1, 2, 3$ 上，越往后越长（示意，未计算体积）。红色标签是复杂度—体积猜想（[@conj-complexity-equals-volume]），开放问题。
 :::
 
-这一下界的问题来自 X. Huang、T. Kosugi、H. Nishi 与 Y.-i. Matsushita，*Optimized Synthesis of Circuits for Diagonal Unitary Matrices with Reflection Symmetry*，J. Phys. Soc. Jpn. 93, 054002 (2024)，arXiv:2310.06676：该文的算法 1 用恰好 $2^{2n-1} + 2n - 2$ 个 $\mathrm{CNOT}$ 实现任意这类对角酉算子（匹配的上界，文献结果，未在本书形式化），并在结论节猜想最坏情形不能更少。Lean 的 `D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound` 模块对偶数比特数 $m = 2n$（$n \ge 1$）给出了这条下界的肯定定理。让我们先把模块中的电路与门集定义交代清楚：
+这一下界原是 X. Huang、T. Kosugi、H. Nishi 与 Y.-i. Matsushita（*Optimized Synthesis of Circuits for Diagonal Unitary Matrices with Reflection Symmetry*，J. Phys. Soc. Jpn. 93, 054002 (2024)，arXiv:2310.06676）在结论节提出的猜想，该文的算法 1 给出了匹配的上界（文献结果，未在本书形式化）。Lean 的 `D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound` 模块对偶数比特数 $m = 2n$（$n \ge 1$）给出了一个干净利落的肯定定理。让我们先把模块中的电路与门集定义交代清楚：
 
 - 记 $m$ 比特计算基类型为 $\operatorname{Qubits}(m) = (\operatorname{Fin} m \to \operatorname{Bool})$（共 $2^m$ 个布尔位串）；
 - 无辅助比特（ancilla-free）基本门类型 `gate m` 定义为两类门的不交并
@@ -258,7 +258,7 @@ $$
 :::
 
 ::: {.figure src="ch20-parity-labels"}
-**CNOT 下界数的是导线上的奇偶标签：每个所需的非零偶标签都要出现，奇加奇的偶诞生与奇复原则须在总次数上平衡。** 左栏是 $n = 1$ 的两比特电路：导线 0 始终是青色的 $z_0$；导线 1 先是青色的 $z_1$，第一个 $\mathrm{CNOT}$（偶诞生）后变成品红的 $z_0 \oplus z_1$，$R_z$ 在它上面注入相位，第二个 $\mathrm{CNOT}$（奇复原）后又回到青色的 $z_1$，合计 $1 + 1 = 2$ 个 $\mathrm{CNOT}$；脚本逐元核对过这条电路等于 $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ 乘一个全局相位。右栏是 $n = 2$ 时必须在导线上出现的 $7$ 个品红的非零偶奇偶标签，加上至少 $3$ 次复原，合计下界 $10$；绿色标签是 [@prop-reflection-cnot-lower-bound]。图不说明 $10$ 能否达到；上文所引文献的算法 1 在 $n = 2$ 时恰好用 $10$ 个 $\mathrm{CNOT}$（文献结果）。
+**CNOT 下界数的是导线上的奇偶标签：每个所需的非零偶标签都要出现，奇加奇的偶诞生与奇复原则须在总次数上平衡。** 左栏是 $n = 1$ 的两比特电路：导线 0 始终是青色的 $z_0$；导线 1 先是青色的 $z_1$，第一个 $\mathrm{CNOT}$（偶诞生）后变成品红的 $z_0 \oplus z_1$，$R_z$ 在它上面注入相位，第二个 $\mathrm{CNOT}$（奇复原）后又回到青色的 $z_1$，合计 $1 + 1 = 2$ 个 $\mathrm{CNOT}$；脚本逐元核对过这条电路等于 $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ 乘一个全局相位。右栏是 $n = 2$ 时必须在导线上出现的 $7$ 个品红的非零偶奇偶标签，加上至少 $3$ 次复原，合计下界 $10$；绿色标签是 [@prop-reflection-cnot-lower-bound]。图不说明 $10$ 能否达到。
 :::
 
 按照认识论诚实原则，必须指出 [@prop-reflection-cnot-lower-bound] 的三条严格边界：
@@ -351,12 +351,12 @@ $$
 
 ### 20.4.1 从时空门计数通往无时间因果与场线分野 {#sec-timeless-crystal-page-numbers}
 
-走到第五部收官处，本章经 Lean 4 内核形式化验证的四条结果——固定有序开放边界可积电路族在 $1 \le \kappa$、$2\kappa \le N$ 下的最小并行深度闭式解 $L = \lfloor N/(\kappa+1)\rfloor + 1$（[@thm-open-circuit-min-depth]）、两条文献深度公式的反例证伪（[@lemma-open-circuit-depth-refutation]）、对每个正整数 $n$，都存在 $2n$ 比特反射对称对角酉算子的显式困难见证，其在无辅助比特的固定门集 $\{\mathrm{CNOT}, R_z\}$ 下精确合成（允许全局因子）所需的指数级 $\mathrm{CNOT}$ 门计数下界为 $2^{2n-1} + 2n - 2$（[@prop-reflection-cnot-lower-bound]），以及偶圈图标准闭合遍历的精确步长（[@cor-even-cycle-length]，与量子电路只是同名）——与三大开放猜想（[@conj-complexity-equals-volume]、[@conj-er-equals-epr]、[@conj-p-neq-np]）共同立起了一座清晰的几何坐标：在各自的固定电路族与门集约束下，最少层数 $L$ 与困难见证的指数级双比特门数各有严格的适用边界；本书再从中读出局域观察者跨越空间纠缠割、对齐高维相位所付旋转代价的几何诠释（`MODEL`）；这一诠释的结论既不依赖、也不支持三条开放猜想。
+走到第五部收官处，本章经 Lean 4 内核形式化验证的四条结果——固定有序开放边界可积电路族在 $1 \le \kappa$、$2\kappa \le N$ 下的最小并行深度闭式解 $L = \lfloor N/(\kappa+1)\rfloor + 1$（[@thm-open-circuit-min-depth]）、两条文献深度公式的反例证伪（[@lemma-open-circuit-depth-refutation]）、对每个正整数 $n$，都存在 $2n$ 比特反射对称对角酉算子的显式困难见证，其在无辅助比特的固定门集 $\{\mathrm{CNOT}, R_z\}$ 下精确合成（允许全局因子）所需的指数级 $\mathrm{CNOT}$ 门计数下界为 $2^{2n-1} + 2n - 2$（[@prop-reflection-cnot-lower-bound]），以及偶圈图标准闭合遍历的精确步长（[@cor-even-cycle-length]）——与三大开放猜想（[@conj-complexity-equals-volume]、[@conj-er-equals-epr]、[@conj-p-neq-np]）共同立起了一座清晰的几何坐标：在各自的固定电路族与门集约束下，最少层数 $L$ 与困难见证的指数级双比特门数各有严格的适用边界；本书再从中读出局域观察者跨越空间纠缠割、对齐高维相位所付旋转代价的几何诠释。
 
-这自然引出了一个更深层的本体论与复杂性追问：如果[第十章](ch10-gram-geometry-and-order.md)揭示的格拉姆矩阵重构具有“两两比较、永远一致、顺序无关”的无时间几何刚性，那么为什么局域观察者依然要承受特定电路族中并行深度 $L$ 的下界，并面对 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 这道至今未决的正交视界？在跨越第六部“球外之球”（对角线逃逸、素数谱与 $\psi = \psi(\psi)$）与第七部“机械法典”（无矩阵克利福德引擎、ZYZ 旋转器编译与 Lean 4 源码审计）之后，我们将在**第八部**给出完整的展开：
+这自然引出了一个更深层的本体论与复杂性追问：如果[第十章](ch10-gram-geometry-and-order.md)揭示的格拉姆矩阵重构具有“两两比较、永远一致、顺序无关”的无时间几何刚性，那么为什么局域观察者依然必须承受并行深度 $L$ 的硬下界与 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 的正交视界？在跨越第六部“球外之球”（对角线逃逸、素数谱与 $\psi = \psi(\psi)$）与第七部“机械法典”（无矩阵克利福德引擎、ZYZ 旋转器编译与 Lean 4 源码审计）之后，我们将在**第八部**给出完整的展开：
 
-- **[第二十九章](ch29-timeless-causality-and-gram-space.md)** 将把第十章的格拉姆椭圆体（$\det G \ge 0$）与无时间约束及条件时间切片文献背景（见第二十九章 `remark` 文献注记）合拢，提出一种诠释（`MODEL`）：把顺序门深度 $L$ 读作有限观察者沿半正定矩阵补全（$G_{M+1} \succeq 0$）在静态时间场中一步步选点对齐晶面所需的最小旋转步数；
-- **[第三十章](ch30-fields-lines-eth-and-navier-stokes.md)** 将进一步在一个诠释性的几何框架（`MODEL`）下——它把全局静态场模型与场内有限观察者对照，并把 $\mathrm{P}$ 读作无旋引导场、$\mathrm{NP}$ 读作零横截面一维见证丝，其中 $\mathrm{P}\neq\mathrm{NP}$ 仍只是开放猜想（[@conj-p-neq-np]），不被假定成立——结合专门文献注记审视细粒度复杂性中 2026 年两篇亚指数 3-SAT 预印本的讨论、宇宙尺度对照与三维流体平流闭合障碍；
+- **[第二十九章](ch29-timeless-causality-and-gram-space.md)** 将把第十章的格拉姆椭圆体（$\det G \ge 0$）与无时间约束及条件时间切片文献背景（见第二十九章 `remark` 文献注记）合拢，阐明为什么可以把顺序门深度 $L$ 读作有限观察者沿半正定矩阵补全（$G_{M+1} \succeq 0$）在静态时间场中一步步选点对齐晶面所需的最小旋转步数；
+- **[第三十章](ch30-fields-lines-eth-and-navier-stokes.md)** 将进一步在“全局静态场模型 vs. 场内有限观察者 $\mathrm{P}\neq\mathrm{NP}$（[@conj-p-neq-np]）”以及“$\mathrm{P}$ 是无旋引导场、$\mathrm{NP}$ 是零横截面一维见证丝”的几何框架下，结合专门文献注记审视细粒度复杂性中的张量网络秩约分讨论、宇宙尺度对照与三维流体平流闭合障碍；
 - **[第三十一章](ch31-quantum-fairness.md)** 与 **[第三十二章](ch32-unified-field-and-meta-unification.md)** 则把两子互易、互补勾股、不可克隆、正交视界与环面遍历升华为消除几何特权的五重公平体系（`MODEL`），并在零外部背景的《正交自指统一场》诠释纲领中完成跨领域统一理论的元统一合拢。
 
 > 把已证的定理刻进绿色的内核基石，把前人的经典结果归入透明的文献账册，把未知的深渊诚实地标上红色的开放界碑——这才是几何直觉与形式化理性并肩前行时最庄严的诚实。

@@ -52,7 +52,7 @@
 - [第十七章 狭义相对论的几何脱魅：双曲旋转、光锥零线与时空面积](ch17-lorentz-geometry.md)
 - [第十八章 狄拉克旋量与规范场：为什么粒子要在球外绕行，为什么力是面积的曲率？](ch18-spinors-and-gauge-curvature.md)
 - [第十九章 纠缠编织空间：张量网络、全息对偶与离散最小割定理](ch19-tensor-networks-and-holography.md)
-- [第二十章 门复杂度是体积吗？黑洞内部生长、虫洞桥与计算复杂性边界](ch20-complexity-and-spacetime.md)
+- [第二十章 门复杂度即体积：黑洞内部生长、虫洞桥与计算复杂性边界](ch20-complexity-and-spacetime.md)
 
 # 第六部 越界·球外之球：哥德尔逃逸、算术频谱与 $\psi = \psi(\psi)$
 

@@ -27,7 +27,7 @@ $$
 \psi = \psi(\psi).
 $$
 
-在本章中，我们将把这幅自指画卷拆解为四个相互辉映的层次；前三层各有 Lean 4 形式化定理，但它们都不涉及余弦，余弦不动点本身的存在、唯一与收敛在本章是文献结果：**有限状态空间上的单调收缩稳定化定理**、**相邻步解释语境相对不动点与语境非唯一性定理**、**正实数上黄金连分数自指映射 $x = 1 + 1/x$ 的唯一代数不动点定理**，以及收录在文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中的**Dottie 余弦自指 $\cos\theta^* = \theta^*$ 的经典分析与超越数论背景**。
+在本章中，我们将用严密的数学与 Lean 4 形式化定理，把这幅自指画卷拆解为四个相互辉映的层次：**有限状态空间上的单调收缩稳定化定理**、**相邻步解释语境相对不动点与语境非唯一性定理**、**正实数上黄金连分数自指映射 $x = 1 + 1/x$ 的唯一代数不动点定理**，以及收录在文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中的**Dottie 余弦自指 $\cos\theta^* = \theta^*$ 的经典分析与超越数论背景**。
 
 ::: {.figure src="ch24-overview"}
 **图 24。** 本章地图：第 I 栏，青色的曲线 $y = 1 + 1/x$ 与灰色对角线 $y = x$ 在正半轴上只交于绿色的 $\varphi \approx 1.618$（[@cor-golden-fixed-point-unique]）；第 II 栏，青色的余弦曲线与灰色对角线 $y = x$，从 $0$ 出发的蛛网一圈圈绕向 $\theta^* \approx 0.739$，那里一小段品红的切线斜率是 $-\sin\theta^*$（收敛与速率是既有结果的应用，完整推导见 [@ex-ch33-mutual-cosine-monotonic-lock]）；第 III 栏，§24.7 例中的 $3 \times 3$ 列表，用 $f_1$ 扭过的对角线 $(1, 2, 2)$ 正是青色的第 $1$ 行，落点上的值 $2$（绿圈）是 $f_1$ 的不动点（[@lem-diagonal-landing-fixed]）。
