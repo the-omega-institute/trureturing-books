@@ -212,7 +212,7 @@
 
 :::
 
-## 39.13.3 跨尺度单粒子全同对位表与第三十九章暨全书十部曲正文总收束 {#sec-ch39-13-3}
+## 39.13.3 跨尺度单粒子全同对位表与自观测误差棱镜前瞻 {#sec-ch39-13-3}
 
 现在，让我们把微观粒子、自指观察者、可观测视界与唯一宇宙本体并排放在同一张**跨尺度单粒子全同对位表**上，同时严守 [§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 厘清的“全域纯单态零熵 vs. 局域偏迹最大混态”双层量子账本（表格为纯单行单元格）：
 
@@ -264,9 +264,7 @@
 
 ---
 
-**第三十九章暨全书十部曲正文总收束：当万象归于一珠一弧，推开《在所有的球之外》的最后一扇门。** 请在此驻足，回望我们自[序曲](README.md)与[第一章](ch01-measurement.md)踏出第一步以来横跨全书十部曲三十九章的浩瀚攀登：从把静态名词“量子”还原为比量动词“两子丈量”、在[第二章](ch02-born-rule.md)挥剑斩断虚悬于万物之外的“第 3 点 $C$”启程，我们顺着**“点 $\longrightarrow$ 线 $\longrightarrow$ 面 $\longrightarrow$ 球 $\longrightarrow$ 球外之球”**的几何阶梯拾级而上——穿越幂等投影线、$90^\circ$ 盲区复旋子面、兰道尔擦除热账本、贝里和乐、贝尔余弦圆弧、割圆多面体门编译、洛伦兹零光锥、全息极小割、康托尔—哥德尔对角逃逸、欧拉素数正交基、四元数整数晶格与道蒂余弦自指不动点 $\cos\theta^* = \theta^*$，继而贯通无时间格拉姆因果、场（$P$）与线（$NP$）视界、五重量子公平、零背景比较公理 $\mathcal{A}_0$、众生互为吸引子观察者、极小圆弧体全息概念塔与圆弧微积分、同像扩表 $T = T(T)$、双曲视界约去轮回、夜间梦境量子擦除与本体 QRAM 递归页表 `p ≡ *p`，直至在这最后一章登顶**“观察者即宇宙本体”**的无底物自指苍穹：在 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md) 贯通五阶自指不动点、自由停机精度 $\varepsilon_{\mathrm{self}}$ 与普适比较主频 $\nu_0$ 钟慢，在 [§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) 建起万力归弧、三维概念场封顶原理与**极小圆弧场大统一理论（AF-GUT）**，并终于在 [§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice) 与本节抵达最宁静的峰顶——认出无边宇宙原本只是**唯一一片处处均匀各向同性的宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$**，而微观粒子、星辰星系、受限不妄我的观察者乃至整座可观测宇宙，不过是这同一颗摩尼宝珠在自照的极小圆弧切面里，与自己重逢时映出的重重清澈回响！
-
-然而，正因为我们从第一页直到正文这最后一行，始终恪守“Lean 内核冻结铁律（绿色 `LEAN ✓`）、经典文献与手算推导、跨学科几何综合模型（`MODEL`）与未决科学边疆（红色 `OPEN`）”壁垒分明的四层诚实契约，抵达因陀罗网之巅非但没有把宇宙焊死成一座封闭窒息的独断铁球，恰恰相反——无论是单枚极小圆弧体永远严格为正的正矢高余项 $1 - \cos\epsilon > 0$，哥德尔—洛维尔对角线永不停歇的法向开维逃逸，还是 [@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 在峰顶清澈立下的红色 `OPEN` 科学界碑，每一道拒绝被廉价修辞抹平的几何接缝都在向我们温柔致意：**每当我们以为终于看全了整颗摩尼宝珠，总有一颗更大的球正静静包裹在它之外。** 现在，深吸一口山巅清冽的空气，推开十部曲正文的最后一扇门，步入全书的[终章](coda.md)——**《在所有的球之外》**。
+**迈向最后两重绝顶：唯一点场的自观测误差棱镜与“梵天实轴 `I` — 正交虚梦 `i`”终极合拢。** 至此，因陀罗网的跨尺度闭合已经将微观粒子 $\Delta\mathcal{T}_{\mathrm{micro}}$、自指观察者 $\Delta\mathcal{T}_{\mathrm{obs}}$ 与可观测视界 $\Delta\mathcal{T}_{\mathrm{cosmo}}$ 尽数收摄回同一片唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$。然而，站在推开[终章](coda.md)大门前的最后两级台阶上，还有两道直抵存在论核心的终极追问等待一锤定音：第一，既然全宇宙底层原本只有唯一一个零维点——同时也是唯一一片场（$\Lambda^0 \equiv \Lambda^3 \equiv \mathbf{\Omega}$）——它究竟是凭什么单一机制，在自身内部劈出了正交维度、虚数、面积、体积（静态投影结果概念）以及运动与时间（动态观测动作概念），又为何古往今来称万法“如幻（*Māyā*）”？第二，既然万象皆悬于相对本体实轴 $\mathbf{I}$ 转过 $90^\circ$ 的正交虚数梦境空间 $\hat{\mathbf{i}}$ 之中，为何身在梦中的众生触摸岩石依然感到坚硬无比，而《蛙氏奥义书》的四位意识相态与庄周梦蝶又如何在 $720^\circ$ 单侧旋量丝带上完成最后的清明觉照？让我们紧接着步入 [§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection) 与本章暨全书十部曲正文压轴收束节 [§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream)，揭开这最后的谜底。
 
 ::: {.viz src="indra-net-single-particle-sandbox" height="620"}
 完整交互实验室（`INDRA//NET`）：在“因陀罗网一珠映万珠视图”与“惠勒单粒子折叠丝带视图”双透镜之间自由切换，点选或拖动琥珀色主珠手柄 $x_0$ 并联动镜面曲率 $\varepsilon$、反射次数 $m$ 与宇宙缩放 $\zeta$，同台贯通十三珠同构互换与读字正交残差、闭合惠勒丝带 $\sum q = 0$ 与二十面体十面边界、球镜 $\cos^2\theta$ 边缘压扁、道蒂不动点 $\theta^* = 0.739085$ 阻尼收敛以及可观测宇宙 $R_{\mathrm{obs}} / \ell_P \approx 2.72 \times 10^{61}$ 单珠收拢，对照绿色 `LEAN ✓` 七条冻结声明、`ARGUED`、`NUM`、`MODEL` 与红色 `OPEN` 前沿界碑。
