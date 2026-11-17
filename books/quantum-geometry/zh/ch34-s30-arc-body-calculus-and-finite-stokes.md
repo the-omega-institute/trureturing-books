@@ -202,8 +202,64 @@ $$
 
 $\lambda_1$ 与第 2 款的闭式 $1+\tfrac{\gamma_{\mathrm{EM}}}{2}-\ln(2\sqrt\pi)$ 一致。第三列略小于 $1$。对单位圆上的旋子有 $1-\cos n\theta\le n^2(1-\cos\theta)$（手工推导：$\lvert\sin nx\rvert\le n\lvert\sin x\rvert$）；因此在“全部零点都在临界线上”的前提下，[@rem-ch34-li-criterion-sagitta-literature] 的公式给出 $\lambda_n\le n^2\lambda_1$（带前提的推导，前提就是开放的猜想）。表中四个比值与这一不等式相容；这四个数都是正的，是数值事实，不是对一切 $n$ 的结论。
 
-**一组假想的离线四点。** 取 $\tfrac{7}{10}\pm5i$、$\tfrac{3}{10}\pm5i$（它们不是 ζ 的零点）。这四个点在 $s\mapsto1-s$ 与共轭下封闭，但 $\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ 在 $n=31$ 处第一次变负，值为 $-0.0943$；$n=31$ 处为负已冻结为 [`li_positivity_distinguishes_the_off_line_toy_spectrum`](lean:D5/S3/Zeros/ToySpectrum/OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum)。换一组点，变负可以晚得多：把假四点放到 $\tfrac12\pm0.1\pm14i$，单独这四点的和在 $n=88$ 第一次为负；再配上前 $80$ 对真实零点组成一个有限族，在线零点的非负贡献把第一次为负推迟到 $n=8446$（值为 $-0.858$）。这是这一个有限族的数值结果，不是关于 $\zeta$ 的 $\lambda_n$ 的陈述，也不是一般规律。
+**一组假想的离线四点。** 取 $\tfrac{7}{10}\pm5i$、$\tfrac{3}{10}\pm5i$（它们不是 ζ 的零点）。这四个点在 $s\mapsto1-s$ 与共轭下封闭，但 $\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ 在 $n=31$ 处第一次变负，值为 $-0.0943$；$n=31$ 处为负已冻结为 [`li_positivity_distinguishes_the_off_line_toy_spectrum`](lean:D5/S3/Zeros/ToySpectrum/OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum)。换一组点，变负可以晚得多：把假四点放到 $\tfrac12\pm0.1\pm14i$，单独这四点的和在 $n=88$ 第一次为负；再配上前 $80$ 对真实零点组成一个有限族，在线零点的非负贡献把第一次为负推迟到 $n=8446$（值为 $-0.858$）。这是这一个有限族的数值结果，不是关于 $\zeta$ 的 $\lambda_n$ 的陈述，也不是一般规律。不过，有限族中只要有旋子离开闭单位圆盘，变负迟早会发生（[@rem-ch34-finite-rotor-li-criterion]）。
 :::
+
+上例的两组假想四点都在 $s\mapsto1-s$ 与共轭下封闭，又都有旋子离开单位圆；无论单独看还是配上有限多对在线零点，$\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ 迟早变负。对有限多个旋子，这件事有一个精确的说法。它对 $\zeta$ 的零点什么也不说：零点有无穷多个，判据的难点正在那里，把零点截成有限族得到的结论也不能传回 $\lambda_n$。
+
+::: {.remark #rem-ch34-finite-rotor-li-criterion title="有限旋子族的 Li 判据（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 设 $u_1,\dots,u_m$ 是复数（允许为零、允许重复），对 $n\ge1$ 令 $\Lambda_n=\operatorname{Re}\sum_j\bigl(1-u_j^{\,n}\bigr)$。下列三条等价：
+
+1. 一切 $\lvert u_j\rvert\le1$；
+2. 一切 $n\ge1$ 有 $\Lambda_n\ge0$；
+3. 对每个 $\varepsilon>0$ 有常数 $C$，使一切 $n\ge1$ 有 $\Lambda_n\ge-C\,e^{\varepsilon n}$。
+
+这是 E. Bombieri 与 J. C. Lagarias（*J. Number Theory* **77**, 274–287, 1999）定理 1 的有限情形。那里的和是 $\sum_\rho\operatorname{Re}\bigl[1-(1-\tfrac1\rho)^{-n}\bigr]$，取 $u=\rho/(\rho-1)$，则 $\lvert u\rvert\le1$ 恰是 $\operatorname{Re}\rho\le\tfrac12$；这个 $u$ 是本节零点旋子 $u_\rho=1-\tfrac1\rho$ 的倒数，所以半平面的方向与上文相反（手工推导）。等于 $1$ 的 $u_j$ 对 $\Lambda_n$ 没有贡献，可以先去掉。这里不需要任何对称性。若模长两两互为倒数（对每个 $j$ 有 $j'$ 使 $\lvert u_{j'}\rvert\,\lvert u_j\rvert=1$，例如这组数在 $u\mapsto u^{-1}$ 下封闭），第 1 条用在 $u_j$ 与 $u_{j'}$ 上就给出 $\lvert u_j\rvert=1$：第 2 条成立当且仅当全部旋子都在单位圆上（手工推导）。
+
+1⇒2 逐项成立：$1-\operatorname{Re}u_j^{\,n}\ge1-\lvert u_j\rvert^n\ge0$；2⇒3 显然。反方向的要点是一个回归现象（手工推导）。把每个非零的 $u_j$ 写成 $\lvert u_j\rvert e^{i\phi_j}$，令 $g=(e^{i\phi_j})_j$，对给定的正整数 $L$ 令 $h=g^L$。按 [@thm-torus-power-orbit-closure] 第 1 款，一个点属于 $\{h^k:k\ge0\}$ 的闭包，当且仅当 $h$ 满足的每个整关系 $\prod_jh_j^{k_j}=1$ 它也满足；$h^{-1}$ 显然如此，因为 $\prod_jh_j^{-k_j}=\bigl(\prod_jh_j^{k_j}\bigr)^{-1}$。所以 $h^{-1}$ 在这个闭包里：对 $1$ 的任一邻域 $U$，有 $k\ge0$ 使 $h^k\in h^{-1}U$，即 $g^n\in U$，其中 $n=L(k+1)\ge L$。$L$ 任意，所以对每个 $\varepsilon>0$ 有无穷多个 $n$ 使一切 $\cos n\phi_j>1-\varepsilon$。对这样的 $n$，
+
+$$
+\operatorname{Re}\sum_ju_j^{\,n}=\sum_j\lvert u_j\rvert^n\cos n\phi_j\ \ge\ (1-\varepsilon)\sum_j\lvert u_j\rvert^n .
+$$
+
+若某个 $\lvert u_j\rvert=r>1$，取 $\varepsilon=\tfrac12$，便有无穷多个 $n$ 使 $\Lambda_n=m-\operatorname{Re}\sum_ju_j^{\,n}\le m-\tfrac12r^n$；取 $\varepsilon'>0$ 使 $e^{\varepsilon'}<r$，这与第 3 条矛盾（手工推导）。用矢高的话说：有限个旋子各次幂的累计矢高都非负，当且仅当没有一个旋子离开闭单位圆盘。
+
+两个提醒（手工推导）。其一，只看一部分幂次可能看不出来。四个点 $2e^{\pm2\pi i/3}$、$\tfrac12e^{\pm2\pi i/3}$ 在 $u\mapsto u^{-1}$ 与共轭下都封闭，其中两个在圆外。记 $\omega=e^{2\pi i/3}$，则 $\Lambda_n=4-\bigl(2^n+2^{-n}\bigr)\bigl(\omega^n+\omega^{-n}\bigr)$，而 $\omega^n+\omega^{-n}$ 在 $3\mid n$ 时为 $2$，否则为 $-1$。$3$ 不整除 $2^k$，所以对一切 $k\ge0$ 有 $\Lambda_{2^k}=4+2^{2^k}+2^{-2^k}>0$，而 $\Lambda_3=-\tfrac{49}{4}$。只看反复平方的幂次 $n=2^k$，累计矢高全为正，并不排除圆外的旋子；这个例子用到的是与倍增共振的相位 $\tfrac{2\pi}{3}$。沿一个等差数列 $n=d,2d,3d,\dots$ 检查则已足够：对 $u_j^{\,d}$ 用上面的等价。其二，对无穷多个旋子，上面的论证要配合 Bombieri–Lagarias 的收敛条件；对 $\zeta$ 的零点，“全部 $\lambda_n\ge0$ 蕴含 [@conj-riemann-hypothesis]”是另一条定理（[@prop-ch34-li-sagitta-frozen] 第 4 款），而 $\lambda_n$ 是否全部非负是开放的。
+:::
+
+有一个情形里，“全部累计矢高非负”不是开放问题而是定理：有限域上的椭圆曲线。
+
+::: {.remark #rem-ch34-finite-field-li-sums title="有限域上椭圆曲线的 Li 和（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 设 $E$ 是有限域 $\mathbb{F}_q$ 上的椭圆曲线，$N_n$ 是它在 $\mathbb{F}_{q^n}$ 上的点数（含无穷远点），$a=q+1-N_1$，$\alpha,\beta$ 是 $x^2-ax+q$ 的两根；则 $N_n=q^n+1-\alpha^n-\beta^n$（见 [@rem-ch29-hasse-gauss-literature] 及其中的文献）。令 $u=\alpha/\sqrt q$；由 $\alpha\beta=q$ 得 $\beta/\sqrt q=u^{-1}$，两个旋子 $u,u^{-1}$ 的累计矢高是
+
+$$
+\Lambda_n=2-\frac{\alpha^n+\beta^n}{q^{n/2}},\qquad N_n=\bigl(q^{n/2}-1\bigr)^2+q^{n/2}\,\Lambda_n
+$$
+
+（手工推导）。这两个旋子的模长互为倒数，按 [@rem-ch34-finite-rotor-li-criterion]，“一切 $n$ 有 $N_n\ge\bigl(q^{n/2}-1\bigr)^2$”等价于 $\lvert u\rvert=1$，即 $\lvert a\rvert\le2\sqrt q$（手工推导）。后者就是哈塞定理（H. Hasse, 1936），所以这里的 Li 和全部非负，并且 $0\le\Lambda_n\le4$。例如 $y^2=x^3+x+1$ 在 $\mathbb{F}_7$ 上 $a=3$，$N_1,N_2,N_3=5,55,380$，与上式一致（数值核对）。这里的正性有独立的来源：同源的次数是正定二次型；它不是从累计矢高推出来的。数域情形没有已知的这样的来源。
+:::
+
+回到 $\zeta$ 本身。经典的无零点论证也依赖一个累计余矢高的正性，只是只用到三个幂次；这条不等式已被冻结。
+
+::: {.proposition #prop-ch34-three-four-one-cosagitta title="3-4-1 不等式：$\zeta(1+x)^3\,\zeta(1+x+iy)^4\,\zeta(1+x+2iy)$ 的模不小于 1" lean="D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower.norm_zeta_product_ge_one"}
+记 $\zeta$ 为 Mathlib 的 `riemannZeta`。对一切实数 $x>0$ 与一切实数 $y$，
+
+$$
+\left\lvert\zeta(1+x)^3\,\zeta(1+x+iy)^4\,\zeta(1+x+2iy)\right\rvert\ \ge\ 1 .
+$$
+:::
+
+::: proof
+三个自变量的实部都是 $1+x>1$，欧拉乘积绝对收敛。左端之模的对数等于对素数 $p$ 与 $k\ge1$ 求和的 $\tfrac1k\,p^{-k(1+x)}\bigl(3+4\cos\phi+\cos2\phi\bigr)$，其中 $\phi=ky\ln p$。记 $v=1-\cos\phi$ 为素数幂旋子 $p^{-iky}$ 的矢高，则
+
+$$
+3+4\cos\phi+\cos2\phi=2(1+\cos\phi)^2=2(2-v)^2\ \ge\ 0 ,
+$$
+
+所以对数非负，模不小于 $1$。Lean 中这条结论把 `riemannZeta` 写成模 $1$ 平凡狄利克雷特征的 $L$ 级数，直接调用 Mathlib 对狄利克雷 $L$ 级数的同型不等式；Mathlib 的证明把三个欧拉因子的 $-\log(1-w)$ 展成泰勒级数，第 $n$ 项是 $2a^n\bigl(\operatorname{Re}z^n+1\bigr)^2/n$（$a=p^{-(1+x)}$，$z=p^{-iy}$），正是上式余矢高平方的逐项形式。完整证明由 Lean 内核检查。
+:::
+
+由此可得 $\zeta(1+iy)\neq0$（$y\ne0$）：若 $\zeta$ 在 $1+iy$ 处为零，$x\to0^+$ 时 $\zeta(1+x)^3$ 按 $x^{-3}$ 增长，$\zeta(1+x+iy)^4$ 至少按 $x^4$ 趋于零，$\zeta(1+x+2iy)$ 保持有界（$1+2iy\ne1$），乘积趋于 $0$，与命题矛盾（手工推导）。这个结论也可以从 [@prop-xi-zeros-strip-zeros] 直接读出；上面的论证是 Hadamard 与 de la Vallée Poussin（1896）的经典论证（文献结果）。它只用到三个幂次；由它及其改进得到的无零点区域在高处都收缩到直线 $\operatorname{Re}s=1$，目前不知道任何形如 $\operatorname{Re}s>1-\varepsilon$（$\varepsilon>0$ 固定）的无零点带（文献结果）。另一端，一切幂次的累计矢高非负（[@rem-ch34-li-criterion-sagitta-literature]）等价于开放的 [@conj-riemann-hypothesis]。
 
 单步导数与一维路径乘积积分各就各位之后，我们迎来了微积分大厦最壮丽的穹顶：高维流形上的外微分与广义斯托克斯定理。
 

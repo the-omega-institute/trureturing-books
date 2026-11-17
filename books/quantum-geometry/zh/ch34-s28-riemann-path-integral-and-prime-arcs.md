@@ -156,7 +156,7 @@ $$
 \text{黎曼猜想成立} \quad \Longleftrightarrow \quad \forall \varepsilon > 0,\;\; M(x) \;:=\; \sum_{1 \le n \le x} \mu(n) \;=\; \mathcal{O}_\varepsilon\!\bigl(x^{\frac{1}{2} + \varepsilon}\bigr).
 $$
 
-将其对照 [§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral) 的极小圆弧二阶标度律（`MODEL`）：$x$ 步彼此正交独立、无系统偏置的单位正负外积步（$\mu(n) \in \{-1, 0, +1\}$），其合成净涨落包络天然服从无偏布朗平方根标度 $\sqrt{x} = x^{1/2}$；倘若哪怕存在一组潜伏在 $\sigma_0 = \frac{1}{2} + \delta > \frac{1}{2}$ 处的离线四重零点，素数计数与莫比乌斯和的振荡误差就会被放大至 $x^{\sigma_0}$ 量级，无异于宣告不同素数极小圆弧体之间暗藏着破坏正交独立公平性的长程串谋偏置。下面我们用经百位精度检核的真实数值，将前五颗临界线零点与偏离临界线时的双壳分裂残差逐位算清：
+将其对照 [§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral) 的极小圆弧二阶标度律（`MODEL`）：$x$ 步彼此正交独立、无系统偏置的单位正负外积步（$\mu(n) \in \{-1, 0, +1\}$），其合成净涨落包络天然服从无偏布朗平方根标度 $\sqrt{x} = x^{1/2}$（把 $\mu(n)$ 当作独立的随机步只是模型：$\mu(n)$ 是确定的算术函数，各步并不独立，与之对应的严格陈述是上面的 Littlewood 等价式）；倘若哪怕存在一组潜伏在 $\sigma_0 = \frac{1}{2} + \delta > \frac{1}{2}$ 处的离线四重零点，素数计数与莫比乌斯和的振荡误差就会被放大至 $x^{\sigma_0}$ 量级，无异于宣告不同素数极小圆弧体之间暗藏着破坏正交独立公平性的长程串谋偏置。下面我们用经百位精度检核的真实数值，将前五颗临界线零点与偏离临界线时的双壳分裂残差逐位算清：
 
 ::: {.example #ex-ch34-critical-zeros-and-dual-shells title="前五颗真实黎曼零点的临界线归零检验与偏轴 $\sigma = 0.38 / 0.62$ 正逆双壳失衡基准算例"}
 本算例分两部分在 100 位工作精度下核验前五颗非平凡零点频率 $\gamma_1, \dots, \gamma_5$ 处的 $\lvert\zeta(\sigma + i\gamma_k)\rvert$ 模长及前四枚素数圆弧体的正逆双壳半径（`手工推导` / `NUM`）：

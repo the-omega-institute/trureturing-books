@@ -202,8 +202,64 @@ The zero ordinates in this example are numerical values (literature result, not 
 
 $\lambda_1$ agrees with the closed form $1+\tfrac{\gamma_{\mathrm{EM}}}{2}-\ln(2\sqrt\pi)$ of item 2. The third column sits just below $1$. For a rotor on the unit circle, $1-\cos n\theta\le n^2(1-\cos\theta)$ (manual derivation from $\lvert\sin nx\rvert\le n\lvert\sin x\rvert$); hence, under the hypothesis that all zeros lie on the critical line, the formula of [@rem-ch34-li-criterion-sagitta-literature] gives $\lambda_n\le n^2\lambda_1$ (a conditional derivation whose hypothesis is the open conjecture). The four ratios in the table are consistent with this inequality. That these four numbers are positive is a numerical fact, not a statement about all $n$.
 
-**A hypothetical off-line quartet.** Take $\tfrac{7}{10}\pm5i$ and $\tfrac{3}{10}\pm5i$ (these are not zeros of zeta). The four points are closed under $s\mapsto1-s$ and under conjugation, yet $\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ first turns negative at $n=31$, where it equals $-0.0943$; negativity at $n=31$ is frozen as [`li_positivity_distinguishes_the_off_line_toy_spectrum`](lean:D5/S3/Zeros/ToySpectrum/OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum). A different choice can delay the sign change considerably: move the fake quartet to $\tfrac12\pm0.1\pm14i$; on its own, its sum first turns negative at $n=88$; combined with the first $80$ pairs of actual zeros into one finite family, the nonnegative on-line contributions postpone the first negative value to $n=8446$ (where the sum is $-0.858$). This is a numerical fact about this one finite family, not a statement about the $\lambda_n$ of zeta and not a general rule.
+**A hypothetical off-line quartet.** Take $\tfrac{7}{10}\pm5i$ and $\tfrac{3}{10}\pm5i$ (these are not zeros of zeta). The four points are closed under $s\mapsto1-s$ and under conjugation, yet $\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ first turns negative at $n=31$, where it equals $-0.0943$; negativity at $n=31$ is frozen as [`li_positivity_distinguishes_the_off_line_toy_spectrum`](lean:D5/S3/Zeros/ToySpectrum/OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum). A different choice can delay the sign change considerably: move the fake quartet to $\tfrac12\pm0.1\pm14i$; on its own, its sum first turns negative at $n=88$; combined with the first $80$ pairs of actual zeros into one finite family, the nonnegative on-line contributions postpone the first negative value to $n=8446$ (where the sum is $-0.858$). This is a numerical fact about this one finite family, not a statement about the $\lambda_n$ of zeta and not a general rule. Still, as soon as a finite family has a rotor outside the closed unit disk, a negative value must eventually occur ([@rem-ch34-finite-rotor-li-criterion]).
 :::
+
+Both hypothetical quartets in the example are closed under $s\mapsto1-s$ and under conjugation, and both contain rotors that leave the unit circle; on its own or joined to finitely many on-line pairs, each makes $\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ negative sooner or later. For finitely many rotors this has an exact formulation. It says nothing about the zeros of $\zeta$: there are infinitely many of them, which is exactly where the difficulty lies, and a conclusion about a finite truncation of the zeros does not transfer to $\lambda_n$.
+
+::: {.remark #rem-ch34-finite-rotor-li-criterion title="Li's Criterion for a Finite Family of Rotors (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** Let $u_1,\dots,u_m$ be complex numbers (zeros and repetitions allowed), and for $n\ge1$ put $\Lambda_n=\operatorname{Re}\sum_j\bigl(1-u_j^{\,n}\bigr)$. The following are equivalent:
+
+1. $\lvert u_j\rvert\le1$ for every $j$;
+2. $\Lambda_n\ge0$ for every $n\ge1$;
+3. for every $\varepsilon>0$ there is a constant $C$ with $\Lambda_n\ge-C\,e^{\varepsilon n}$ for every $n\ge1$.
+
+This is the finite case of Theorem 1 of E. Bombieri and J. C. Lagarias (*J. Number Theory* **77**, 274–287, 1999). Their sum is $\sum_\rho\operatorname{Re}\bigl[1-(1-\tfrac1\rho)^{-n}\bigr]$; with $u=\rho/(\rho-1)$, the condition $\lvert u\rvert\le1$ is exactly $\operatorname{Re}\rho\le\tfrac12$. This $u$ is the reciprocal of the zero rotor $u_\rho=1-\tfrac1\rho$ of this section, so the half-plane points the other way from the one above (manual derivation). Entries $u_j=1$ contribute nothing to $\Lambda_n$ and can be dropped first. No symmetry is needed. If the moduli pair off as reciprocals (for each $j$ there is a $j'$ with $\lvert u_{j'}\rvert\,\lvert u_j\rvert=1$, as when the family is closed under $u\mapsto u^{-1}$), item 1 applied to $u_j$ and to $u_{j'}$ gives $\lvert u_j\rvert=1$: item 2 holds exactly when all the rotors lie on the unit circle (manual derivation).
+
+Item 1 implies item 2 term by term, $1-\operatorname{Re}u_j^{\,n}\ge1-\lvert u_j\rvert^n\ge0$, and item 2 trivially implies item 3. The converse rests on a recurrence (manual derivation). Write each nonzero $u_j$ as $\lvert u_j\rvert e^{i\phi_j}$, let $g=(e^{i\phi_j})_j$, and for a given positive integer $L$ let $h=g^L$. By item 1 of [@thm-torus-power-orbit-closure], a point lies in the closure of $\{h^k:k\ge0\}$ exactly when it satisfies every integer relation $\prod_jh_j^{k_j}=1$ that $h$ satisfies; $h^{-1}$ obviously does, since $\prod_jh_j^{-k_j}=\bigl(\prod_jh_j^{k_j}\bigr)^{-1}$. So $h^{-1}$ lies in that closure: for every neighbourhood $U$ of $1$ there is $k\ge0$ with $h^k\in h^{-1}U$, that is, $g^n\in U$ with $n=L(k+1)\ge L$. Since $L$ is arbitrary, for every $\varepsilon>0$ there are infinitely many $n$ with $\cos n\phi_j>1-\varepsilon$ for all $j$ at once. For such $n$,
+
+$$
+\operatorname{Re}\sum_ju_j^{\,n}=\sum_j\lvert u_j\rvert^n\cos n\phi_j\ \ge\ (1-\varepsilon)\sum_j\lvert u_j\rvert^n .
+$$
+
+If some $\lvert u_j\rvert=r>1$, taking $\varepsilon=\tfrac12$ gives infinitely many $n$ with $\Lambda_n=m-\operatorname{Re}\sum_ju_j^{\,n}\le m-\tfrac12r^n$; choosing $\varepsilon'>0$ with $e^{\varepsilon'}<r$, this contradicts item 3 (manual derivation). In the language of sagittas: the accumulated sagittas of finitely many rotors are nonnegative at every power exactly when no rotor leaves the closed unit disk.
+
+Two cautions (manual derivation). First, looking at only some of the powers may not reveal it. The four points $2e^{\pm2\pi i/3}$, $\tfrac12e^{\pm2\pi i/3}$ are closed under $u\mapsto u^{-1}$ and under conjugation, and two of them lie outside the circle. With $\omega=e^{2\pi i/3}$ one has $\Lambda_n=4-\bigl(2^n+2^{-n}\bigr)\bigl(\omega^n+\omega^{-n}\bigr)$, where $\omega^n+\omega^{-n}$ is $2$ if $3\mid n$ and $-1$ otherwise. Since $3$ never divides $2^k$, $\Lambda_{2^k}=4+2^{2^k}+2^{-2^k}>0$ for every $k\ge0$, while $\Lambda_3=-\tfrac{49}{4}$. Positive accumulated sagittas at the repeated-squaring powers $n=2^k$ alone do not rule out rotors outside the circle; this example uses the phase $\tfrac{2\pi}{3}$, which resonates with doubling. Checking along an arithmetic progression $n=d,2d,3d,\dots$ does suffice: apply the equivalence to the $u_j^{\,d}$. Second, for infinitely many rotors the argument needs the Bombieri–Lagarias convergence condition; for the zeros of zeta, "all $\lambda_n\ge0$ implies [@conj-riemann-hypothesis]" is a separate theorem (item 4 of [@prop-ch34-li-sagitta-frozen]), and whether all $\lambda_n$ are nonnegative is open.
+:::
+
+There is one setting in which "every accumulated sagitta is nonnegative" is a theorem rather than an open problem: elliptic curves over finite fields.
+
+::: {.remark #rem-ch34-finite-field-li-sums title="Li Sums of an Elliptic Curve over a Finite Field (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** Let $E$ be an elliptic curve over the finite field $\mathbb{F}_q$, let $N_n$ be its number of points over $\mathbb{F}_{q^n}$ (the point at infinity included), $a=q+1-N_1$, and let $\alpha,\beta$ be the roots of $x^2-ax+q$; then $N_n=q^n+1-\alpha^n-\beta^n$ (see [@rem-ch29-hasse-gauss-literature] and the literature cited there). Put $u=\alpha/\sqrt q$; since $\alpha\beta=q$, $\beta/\sqrt q=u^{-1}$, and the accumulated sagitta of the two rotors $u,u^{-1}$ is
+
+$$
+\Lambda_n=2-\frac{\alpha^n+\beta^n}{q^{n/2}},\qquad N_n=\bigl(q^{n/2}-1\bigr)^2+q^{n/2}\,\Lambda_n
+$$
+
+(manual derivation). The two rotors have reciprocal moduli, so by [@rem-ch34-finite-rotor-li-criterion], "$N_n\ge\bigl(q^{n/2}-1\bigr)^2$ for every $n$" is equivalent to $\lvert u\rvert=1$, that is, to $\lvert a\rvert\le2\sqrt q$ (manual derivation). The latter is Hasse's theorem (H. Hasse, 1936), so here every Li sum is nonnegative, and in fact $0\le\Lambda_n\le4$. For example, $y^2=x^3+x+1$ over $\mathbb{F}_7$ has $a=3$ and $N_1,N_2,N_3=5,55,380$, in agreement with the formula (numerical check). The positivity has an independent source here: the degree of an isogeny is a positive definite quadratic form; it is not deduced from accumulated sagittas. No such source is known over number fields.
+:::
+
+Back to zeta itself. The classical zero-free argument also rests on the positivity of an accumulated co-sagitta, but it uses only three powers, and this inequality is frozen.
+
+::: {.proposition #prop-ch34-three-four-one-cosagitta title="The 3-4-1 Inequality: $\zeta(1+x)^3\,\zeta(1+x+iy)^4\,\zeta(1+x+2iy)$ Has Modulus at Least 1" lean="D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower.norm_zeta_product_ge_one"}
+Let $\zeta$ denote Mathlib's `riemannZeta`. For every real $x>0$ and every real $y$,
+
+$$
+\left\lvert\zeta(1+x)^3\,\zeta(1+x+iy)^4\,\zeta(1+x+2iy)\right\rvert\ \ge\ 1 .
+$$
+:::
+
+::: proof
+All three arguments have real part $1+x>1$, where the Euler product converges absolutely. The logarithm of the modulus of the left-hand side is the sum over primes $p$ and $k\ge1$ of $\tfrac1k\,p^{-k(1+x)}\bigl(3+4\cos\phi+\cos2\phi\bigr)$ with $\phi=ky\ln p$. Writing $v=1-\cos\phi$ for the sagitta of the prime-power rotor $p^{-iky}$,
+
+$$
+3+4\cos\phi+\cos2\phi=2(1+\cos\phi)^2=2(2-v)^2\ \ge\ 0 ,
+$$
+
+so the logarithm is nonnegative and the modulus is at least $1$. In Lean the statement rewrites `riemannZeta` as the $L$-series of the trivial Dirichlet character modulo $1$ and calls Mathlib's inequality of the same shape for Dirichlet $L$-series; Mathlib's proof expands $-\log(1-w)$ for the three Euler factors as Taylor series, and the $n$-th term is $2a^n\bigl(\operatorname{Re}z^n+1\bigr)^2/n$ with $a=p^{-(1+x)}$ and $z=p^{-iy}$, which is the squared co-sagitta above, term by term. The full proof is checked by the Lean kernel.
+:::
+
+It follows that $\zeta(1+iy)\neq0$ for $y\ne0$: if zeta vanished at $1+iy$, then as $x\to0^+$ the factor $\zeta(1+x)^3$ would grow like $x^{-3}$, the factor $\zeta(1+x+iy)^4$ would tend to zero at least like $x^4$, and $\zeta(1+x+2iy)$ would stay bounded (since $1+2iy\ne1$), so the product would tend to $0$, contradicting the proposition (manual derivation). The same conclusion can be read directly from [@prop-xi-zeros-strip-zeros]; the argument above is the classical one of Hadamard and de la Vallée Poussin (1896) (literature result). It uses only three powers; the zero-free regions obtained from it and from its refinements all shrink towards the line $\operatorname{Re}s=1$ at large height, and no zero-free strip of the form $\operatorname{Re}s>1-\varepsilon$ with fixed $\varepsilon>0$ is known (literature result). At the other end, nonnegativity of the accumulated sagittas at every power ([@rem-ch34-li-criterion-sagitta-literature]) is equivalent to the open [@conj-riemann-hypothesis].
 
 With single-step rotor derivatives and one-dimensional product integrals unified, we arrive at the architectural crown of calculus: exterior differentiation and the generalized Stokes theorem on curved manifolds.
 
