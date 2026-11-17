@@ -189,6 +189,69 @@ External mathematical-physics literature governing continuum non-Abelian gauge t
 4. **High-Energy Renormalization-Group Extrapolation and the Minimal-SM Near-Meeting Triangle**: Extrapolating $\mathrm{SU}(3)_c \times \mathrm{SU}(2)_L \times \mathrm{U}(1)_Y$ couplings to high energy via renormalization-group flow originates in H. Georgi, H. R. Quinn, and S. Weinberg (*Phys. Rev. Lett.* **33**, 451–454, 1974, DOI `10.1103/PhysRevLett.33.451`). With modern precision $Z$-pole data, the **minimal Standard Model one-loop slopes $(b_1, b_2, b_3) = \bigl(\frac{41}{10}, -\frac{19}{6}, -7\bigr)$ (three fermion generations and one Higgs doublet) do not intersect at a single mathematical point**, instead forming an $\mathcal{O}(10^{-2})$ ($\alpha_i \approx 0.021\text{–}0.028$) **near-meeting triangle** across $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ unless threshold, higher-loop/gravitational, or new-sector physics enters.
 :::
 
+Reconnecting these two bodies of literature to the chord–sagitta language of [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) makes precise how the "gauge term" and the "gravity term" each read a holonomy:
+
+::: {.remark #rem-ch39-plaquette-sagitta-and-wilson-action title="The Wilson plaquette term is the sagitta of the plaquette holonomy (manual derivation and literature result)"}
+**Manual derivation; the identification with Wilson's action and its continuum limit, and the factorization of a disc holonomy into face holonomies, are literature results, not formalized in this book.** Let $U \in \mathrm{U}(N)$ be the holonomy of a plaquette, $S = \frac{1}{2}(U + U^\dagger)$ its similarity part, $v = \mathbf{1} - S$ its sagitta, $\Delta = U - \mathbf{1}$ its chord, and let the reading be the normalized trace $\varphi = \frac{1}{N}\operatorname{Tr}$.
+
+1. From $\Delta^\dagger\Delta = 2v$ ([@rem-appe-chord-sagitta-layer0]) one gets $\varphi(v) = 1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U = \frac{1}{2N}\operatorname{Tr}(\Delta^\dagger\Delta)$. In its standard normalization Wilson's plaquette action reads $S_W = \beta\sum_p\bigl(1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p\bigr)$ (Wilson 1974), and it equals $\beta\,\varphi(v(U_p))$ term by term. For $U \in \mathrm{SU}(2)$ the similarity part is already the real scalar $\frac{1}{2}\operatorname{Tr}U$ times the identity and no reading is needed; for general $U \in \mathrm{U}(2)$ and for $N \ge 3$ it is.
+2. Let the eigen-angles of $U$ be $\theta_j \in (-\pi, \pi]$. From $\frac{x^2}{2} - \frac{x^4}{24} \le 1 - \cos x \le \frac{x^2}{2}$, and $1 - \cos x \ge \frac{2x^2}{\pi^2}$ for $\lvert x\rvert \le \pi$,
+
+   $$
+   \frac{2}{\pi^2}\cdot\frac{1}{N}\sum_j\theta_j^2 \;\le\; \varphi(v) \;\le\; \frac{1}{2}\cdot\frac{1}{N}\sum_j\theta_j^2, \qquad \varphi(v) \;\ge\; \frac{1}{2N}\sum_j\theta_j^2 - \frac{1}{24N}\sum_j\theta_j^4.
+   $$
+
+3. The commutator holonomy $h = u_1u_2u_1^\dagger u_2^\dagger$ of two fair elements satisfies $h - \mathbf{1} = [u_1, u_2]\,(u_2u_1)^\dagger$ (take $U = u_1$, $f = u_2$, $\mathit{translated} = u_1u_2u_1^\dagger$ in [`covariant_commutator_formula`](lean:D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula), then multiply on the right by $(u_2u_1)^\dagger$), so $\varphi(v(h)) = \frac{1}{2}\varphi\bigl([u_1, u_2]^\dagger[u_1, u_2]\bigr)$: at finite aperture, the sagitta of the curvature is half the squared norm of the commutator.
+4. If a loop $C$ bounds a disc tiled by $M$ plaquettes, $W_C$ is the product, in shelling order, of the $M$ plaquette holonomies, each conjugated by a string of link variables (the non-abelian surface Stokes identity of [§34.30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-3), `Literature`). The norm $\lVert X\rVert_\varphi := \sqrt{\varphi(X^\dagger X)}$ is invariant under left and right multiplication by unitaries, and $ab - \mathbf{1} = (a - \mathbf{1})b + (b - \mathbf{1})$, so $\lVert W_C - \mathbf{1}\rVert_\varphi \le \sum_p\lVert U_p - \mathbf{1}\rVert_\varphi$, i.e. $\sqrt{\varphi(v(W_C))} \le \sum_p\sqrt{\varphi(v(U_p))}$; by the Cauchy–Schwarz inequality, $1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}W_C \le M\sum_p\bigl(1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p\bigr)$.
+5. For a smooth classical field, with link variables the path-ordered exponentials along the links, or $e^{iaA_\mu}$ at link midpoints, expanding about the centre of the plaquette gives $1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p = \frac{a^4}{2N}\operatorname{Tr}F_{\mu\nu}^2 + O(a^6)$ with $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu + i[A_\mu, A_\nu]$ (no sum; $\mu\nu$ is the plane of the plaquette).
+
+On a triangular face, third-point redundancy ([@def-appe-third-point-redundancy]) holds exactly when the face holonomy is $\mathbf{1}$, i.e. when its sagitta reading vanishes; carrying the same condition over to a plaquette (face holonomy $\mathbf{1}$), $S_W/\beta$ is the total sagitta of the failures of that condition. This is a kinematic rewriting only: the statistical weight, the measure, the values of the couplings and the quantum continuum limit are not supplied by it (for the last, see [@prob-ch34-rough-nonabelian-surface-calculus]).
+:::
+
+On the gravitational side the holonomy is read differently:
+
+::: {.remark #rem-ch39-regge-deficit-odd-channel title="The Regge deficit reads the signed angle, not a sum of sagittas (manual derivation and literature result)"}
+**Manual derivation; the Regge action and its convergence theorem, Descartes' total-defect theorem and the polar-triangle theorem are literature results, not formalized in this book.** The holonomy around a hinge $h$ is a rotation $R_h$ by the deficit angle $\delta_h$ (Regge 1961, `Literature`). In three dimensions ($R_h \in \mathrm{SO}(3)$; in dimension $D$ replace $\operatorname{Tr}R_h - 1$ by $\operatorname{Tr}R_h - (D - 2)$), with $K_h$ the unit generator of the plane of rotation, $\frac{1}{2}(\operatorname{Tr}R_h - 1) = \cos\delta_h$ and $-\frac{1}{2}\operatorname{Tr}(K_hR_h) = \sin\delta_h$. Reversing the loop leaves the first unchanged and flips the sign of the second.
+
+1. If the gauge group acts irreducibly on $\mathbb{C}^N$ (such as $\mathrm{SU}(N)$ in its defining representation), the only single-loop reading that is real-linear in the holonomy matrix, gauge invariant and independent of the orientation of the loop is the sagitta, up to an affine change; the gauge term is of this kind.
+2. The Regge action $\sum_hA_h\delta_h$ is of first order in the deficit: it reads the signed angle and needs a partner that changes sign with the loop, namely the plane dual to the hinge. It is not a sum of sagittas: when hinge measures scale as $a^{D-2}$ and deficits as $a^2$ ($D$ the dimension of the complex, the number of hinges scaling as $a^{-D}$), the sum $\sum_hA_h(1 - \cos\delta_h)$ tends to zero like $a^2$ under refinement.
+3. On a closed convex polyhedron $\sum_v\delta_v = 4\pi$ whatever the shape (the $720^\circ$ statement; Descartes' total-defect theorem, see item 2 of [@rem-hairy-ball-adams-literature]), whereas $\sum_v(1 - \cos\delta_v)$ depends on the shape.
+4. At a trihedral vertex the deficit equals the Girard excess of the spherical triangle spanned by the three outward face normals $n_1, n_2, n_3$ (the polar-triangle theorem), so the closed form of [@rem-appe-half-comparison-holonomy] gives $\delta_v = 2\operatorname{atan2}\bigl(\lvert[n_1, n_2, n_3]\rvert,\ 1 + n_1\cdot n_2 + n_2\cdot n_3 + n_3\cdot n_1\bigr)$; when the denominator is positive this is $\tan\frac{\delta_v}{2} = \frac{\lvert[n_1, n_2, n_3]\rvert}{1 + n_1\cdot n_2 + n_2\cdot n_3 + n_3\cdot n_1}$.
+
+The precise content of "all forces in one arc" is therefore this: both kinds of force are described by how far a loop holonomy departs from the identity, and both obey the same Bianchi and Stokes identities; the gauge term reads the even channel, and the gravity term reads the signed angle (its sign fixed by the odd channel), weighted by the measure of the hinge. Treating this as the structural difference between gauge forces and gravity is a reading of this book (`MODEL`); it fixes neither the gauge group, nor the couplings, nor the dynamics.
+:::
+
+The following example puts numbers on these two remarks:
+
+::: {.example #ex-ch39-sagitta-versus-deficit-audit title="Deficits against sagittas: the five regular polyhedra, the sample hinge and one commutator holonomy (manual derivation)"}
+1. **Regular polyhedra.** The number of vertices times the deficit is always $720^\circ$; the sums of sagittas differ:
+
+   | Polyhedron | Vertices | Deficit per vertex | Sum of deficits | $\sum_v(1 - \cos\delta_v)$ |
+   | :--- | :---: | :---: | :---: | :---: |
+   | Tetrahedron | $4$ | $180^\circ$ | $720^\circ$ | $8.0000$ |
+   | Cube | $8$ | $90^\circ$ | $720^\circ$ | $8.0000$ |
+   | Octahedron | $6$ | $120^\circ$ | $720^\circ$ | $9.0000$ |
+   | Dodecahedron | $20$ | $36^\circ$ | $720^\circ$ | $3.8197$ |
+   | Icosahedron | $12$ | $60^\circ$ | $720^\circ$ | $6.0000$ |
+
+2. **Normal formula.** At a vertex of the cube the three normals are mutually orthogonal, $[n_1, n_2, n_3] = 1$ and the denominator is $1$, so $\delta_v = 2\arctan 1 = 90^\circ$. At a vertex of the regular tetrahedron $n_i\cdot n_j = -\frac{1}{3}$, the denominator is $0$, and $\delta_v = 180^\circ$.
+3. **Sample hinge.** For four regular tetrahedra around an edge, $\delta_h = 360^\circ - 4\arccos\frac{1}{3} = 77.885^\circ = 1.3593\;\mathrm{rad}$, $\sin\delta_h = 0.9777$, $1 - \cos\delta_h = 0.7901$, $\frac{1}{2}\delta_h^2 = 0.9239$.
+4. **Commutator holonomy.** For rotors turning by $60^\circ$ about two orthogonal axes, item 3 of [@rem-ch39-plaquette-sagitta-and-wilson-action] gives $[u_1, u_2] = -2i\sin 30^\circ\sin 30^\circ\,(n_1\times n_2)\cdot\boldsymbol{\sigma}$, hence $v(h) = 2\sin^2 30^\circ\sin^2 30^\circ = \frac{1}{8}$, and the residual rotation is $2\arccos\frac{7}{8} = 57.91^\circ$, in agreement with the reading on the experiment card of [§32.5](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields).
+:::
+
+Zero action does not always mean pure gauge. On a lattice with non-contractible loops, such as a torus, the following frozen theorem gives an instance with $\mathbb{Z}/2$ coefficients:
+
+::: {.theorem #thm-ch39-periodic-grid-flat-not-exact title="Flat Z/2 edge labels on a periodic grid: the gradient criterion and a one-seam counterexample" lean="D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.flat_exact_iff,D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.horizontal_seam_counterexample"}
+Let $M, N$ be nonzero natural numbers, and let an edge label $y$ consist of two families $y.\mathrm{horizontal},\ y.\mathrm{vertical} : \operatorname{Fin} M \to \operatorname{Fin} N \to \mathbb{Z}/2$, with indices added modulo $M$ and $N$. Put $\operatorname{plaquette}(y, i, j) = y.\mathrm{horizontal}(i, j) + y.\mathrm{vertical}(i, j + 1) + y.\mathrm{horizontal}(i + 1, j) + y.\mathrm{vertical}(i, j)$; let $\operatorname{Flat}(y)$ mean that every $\operatorname{plaquette}(y, i, j)$ is $0$; let $\operatorname{rowHolonomy}(y, i) = \sum_j y.\mathrm{horizontal}(i, j)$ and $\operatorname{columnHolonomy}(y, j) = \sum_i y.\mathrm{vertical}(i, j)$. For a vertex label $x : \operatorname{Fin} M \to \operatorname{Fin} N \to \mathbb{Z}/2$ let $\operatorname{gradient}(x).\mathrm{horizontal}(i, j) = x(i, j + 1) + x(i, j)$ and $\operatorname{gradient}(x).\mathrm{vertical}(i, j) = x(i + 1, j) + x(i, j)$; and let $\operatorname{seam}(h, v)$ take the value $h$ on the horizontal edges with $j = N - 1$, the value $v$ on the vertical edges with $i = M - 1$, and $0$ elsewhere. Then:
+
+1. if $\operatorname{Flat}(y)$, then $\bigl(\exists x,\ \operatorname{gradient}(x) = y\bigr) \iff \operatorname{rowHolonomy}(y, 0) = 0 \land \operatorname{columnHolonomy}(y, 0) = 0$;
+2. if $3 \le M$ and $3 \le N$, then $\operatorname{Flat}(\operatorname{seam}(1, 0))$, $\operatorname{rowHolonomy}(\operatorname{seam}(1, 0), 0) = 1$, $\operatorname{columnHolonomy}(\operatorname{seam}(1, 0), 0) = 0$, and there is no $x$ with $\operatorname{gradient}(x) = \operatorname{seam}(1, 0)$.
+:::
+
+::: proof
+Necessity in item 1 holds because the terms of a gradient cancel in pairs when summed along any row or column. Sufficiency uses the decomposition of flat labels: a flat $y$ is the gradient of some vertex label plus $\operatorname{seam}(\operatorname{rowHolonomy}(y, 0), \operatorname{columnHolonomy}(y, 0))$, and the seam term vanishes when both holonomies are zero. Item 2 first checks that the seam label is flat and computes its two holonomies, then applies item 1: the row holonomy is $1 \ne 0$, so the label is not a gradient. The full proof is checked by the Lean kernel.
+:::
+
 The worked benchmark below verifies every hierarchy ratio, quadratic gravitational scaling point, and one-loop pairwise gauge crossing displayed in `FORCE//UNIFY`:
 
 ::: {.example #ex-ch39-hierarchy-and-one-loop-rg-calculus title="Gravitational Hierarchy Dilution, Quadratic Planck Convergence, and Minimal-SM One-Loop RG Near-Meeting Triangle (Manual Derivation and CODATA/PDG Verification)"}

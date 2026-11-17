@@ -189,6 +189,69 @@ $$
 4. **规范耦合重整化群高能演进与最小标准模型单圈近交汇三角区辨析**：利用重整化群方程将低能电磁、弱、强耦合向高能标度外推的纲领由 H. Georgi, H. R. Quinn 与 S. Weinberg（*Phys. Rev. Lett.* **33**, 451–454, 1974, DOI `10.1103/PhysRevLett.33.451`）奠定。必须严格注明的是：代入现代高精度 $Z$ 极点实验初值后，仅含三代费米子与单一希格斯二重态的**最小标准模型单圈斜率 $(b_1, b_2, b_3) = \bigl(\frac{41}{10}, -\frac{19}{6}, -7\bigr)$ 并不会在单一点精确三线相交**，而是在 $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ 能区围出一枚耦合强度处于 $\mathcal{O}(10^{-2})$（$\alpha_i \approx 0.021\text{–}0.028$）的**近交汇三角形**；若要实现精确单点交汇，仍需引入中间能标阈值修正、高圈/引力算符修正或新粒子扇区。
 :::
 
+把上面两类文献接回 [§34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 的弦—矢高语言，可以把“规范项”与“引力项”各自读取和乐的方式写得更确切：
+
+::: {.remark #rem-ch39-plaquette-sagitta-and-wilson-action title="威尔逊小方格项是小方格和乐的矢高（手工推导与文献结果）"}
+**手工推导；与威尔逊作用量及其连续极限的对应、圆盘上的面和乐分解为文献结果，未在本书形式化。** 设 $U \in \mathrm{U}(N)$ 是一个小方格的和乐，$S = \frac{1}{2}(U + U^\dagger)$ 为求同部分，$v = \mathbf{1} - S$ 为矢高，$\Delta = U - \mathbf{1}$ 为割弦，读数取归一迹 $\varphi = \frac{1}{N}\operatorname{Tr}$。
+
+1. 由 $\Delta^\dagger\Delta = 2v$（[@rem-appe-chord-sagitta-layer0]）得 $\varphi(v) = 1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U = \frac{1}{2N}\operatorname{Tr}(\Delta^\dagger\Delta)$。威尔逊小方格作用量按通行归一化写作 $S_W = \beta\sum_p\bigl(1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p\bigr)$（Wilson 1974），它逐项等于 $\beta\,\varphi(v(U_p))$。$U \in \mathrm{SU}(2)$ 时 $S = \frac{1}{2}(\operatorname{Tr}U)\mathbf{1}$ 已是实标量，不需要读数；一般的 $U \in \mathrm{U}(2)$ 与 $N \ge 3$ 时需要。
+2. 设 $U$ 的本征角为 $\theta_j \in (-\pi, \pi]$。由 $\frac{x^2}{2} - \frac{x^4}{24} \le 1 - \cos x \le \frac{x^2}{2}$ 与 $\lvert x\rvert \le \pi$ 时 $1 - \cos x \ge \frac{2x^2}{\pi^2}$，
+
+   $$
+   \frac{2}{\pi^2}\cdot\frac{1}{N}\sum_j\theta_j^2 \;\le\; \varphi(v) \;\le\; \frac{1}{2}\cdot\frac{1}{N}\sum_j\theta_j^2, \qquad \varphi(v) \;\ge\; \frac{1}{2N}\sum_j\theta_j^2 - \frac{1}{24N}\sum_j\theta_j^4.
+   $$
+
+3. 两个公平元 $u_1, u_2$ 的换位和乐 $h = u_1u_2u_1^\dagger u_2^\dagger$ 满足 $h - \mathbf{1} = [u_1, u_2]\,(u_2u_1)^\dagger$（在 [`covariant_commutator_formula`](lean:D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula) 中取 $U = u_1$、$f = u_2$、$\mathit{translated} = u_1u_2u_1^\dagger$，再两边右乘 $(u_2u_1)^\dagger$），所以 $\varphi(v(h)) = \frac{1}{2}\varphi\bigl([u_1, u_2]^\dagger[u_1, u_2]\bigr)$：有限孔径上的曲率矢高是对易子范数平方的一半。
+4. 若回路 $C$ 是由 $M$ 个小方格拼成的圆盘的边界，$W_C$ 等于 $M$ 个面和乐各自经一串链变量共轭后按剥壳次序的乘积（[§34.30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-30-3) 的非阿贝尔面斯托克斯恒等式，`文献结果`）。$\lVert X\rVert_\varphi := \sqrt{\varphi(X^\dagger X)}$ 在酉元左右乘下不变，且 $ab - \mathbf{1} = (a - \mathbf{1})b + (b - \mathbf{1})$，故 $\lVert W_C - \mathbf{1}\rVert_\varphi \le \sum_p\lVert U_p - \mathbf{1}\rVert_\varphi$，即 $\sqrt{\varphi(v(W_C))} \le \sum_p\sqrt{\varphi(v(U_p))}$；再由柯西—施瓦茨不等式，$1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}W_C \le M\sum_p\bigl(1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p\bigr)$。
+5. 对光滑经典场，链变量取沿棱的路径有序指数或棱中点处的 $e^{iaA_\mu}$，取小方格中心展开，$1 - \frac{1}{N}\operatorname{Re}\operatorname{Tr}U_p = \frac{a^4}{2N}\operatorname{Tr}F_{\mu\nu}^2 + O(a^6)$，$F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu + i[A_\mu, A_\nu]$（$\mu\nu$ 为该小方格所在平面，不求和）。
+
+对三角形面，第三点冗余（[@def-appe-third-point-redundancy]）成立当且仅当该面和乐为 $\mathbf{1}$，即矢高读数为零；把同一条件搬到小方格上（面和乐为 $\mathbf{1}$），$S_W/\beta$ 就是这一条件的偏差的矢高总和。这只是运动学上的改写：统计权重、测度、耦合常数的取值与量子连续极限都不由它给出（后者见 [@prob-ch34-rough-nonabelian-surface-calculus]）。
+:::
+
+引力一侧读取和乐的方式不同：
+
+::: {.remark #rem-ch39-regge-deficit-odd-channel title="雷吉角亏读的是带符号的转角，不是矢高之和（手工推导与文献结果）"}
+**手工推导；雷吉作用量及其收敛定理、笛卡尔总角亏定理与极三角形定理为文献结果，未在本书形式化。** 绕铰链 $h$ 一周的和乐是转角为 $\delta_h$ 的转动 $R_h$（Regge 1961，`文献结果`）。在三维中（$R_h \in \mathrm{SO}(3)$；$D$ 维时把 $\operatorname{Tr}R_h - 1$ 换成 $\operatorname{Tr}R_h - (D - 2)$），记 $K_h$ 为该转动平面的单位生成元，则 $\frac{1}{2}(\operatorname{Tr}R_h - 1) = \cos\delta_h$，$-\frac{1}{2}\operatorname{Tr}(K_hR_h) = \sin\delta_h$。回路反向时前者不变，后者变号。
+
+1. 若规范群在 $\mathbb{C}^N$ 上不可约（如定义表示上的 $\mathrm{SU}(N)$），则对和乐矩阵实线性、规范不变且与回路定向无关的单回路读数只有矢高（差一个仿射变换）；规范项属于这一类。
+2. 雷吉作用量 $\sum_hA_h\delta_h$ 对角亏是一次的，读的是带符号的转角，需要一个随回路反向而变号的配对对象，即铰链的对偶平面。它不是矢高之和：铰链度量按 $a^{D-2}$、角亏按 $a^2$ 标度时（$D$ 为复形维数，铰链个数按 $a^{-D}$），$\sum_hA_h(1 - \cos\delta_h)$ 在加细下按 $a^2$ 趋于零。
+3. 在闭凸多面体上，$\sum_v\delta_v = 4\pi$ 与形状无关（即 $720^\circ$；笛卡尔总角亏定理，见 [@rem-hairy-ball-adams-literature] 第 2 条），而 $\sum_v(1 - \cos\delta_v)$ 依赖形状。
+4. 三面角顶点的角亏等于三个面外法向 $n_1, n_2, n_3$ 所张球面三角形的吉拉尔角盈（极三角形定理），因而由 [@rem-appe-half-comparison-holonomy] 的闭式给出：$\delta_v = 2\operatorname{atan2}\bigl(\lvert[n_1, n_2, n_3]\rvert,\ 1 + n_1\cdot n_2 + n_2\cdot n_3 + n_3\cdot n_1\bigr)$；分母为正时即 $\tan\frac{\delta_v}{2} = \frac{\lvert[n_1, n_2, n_3]\rvert}{1 + n_1\cdot n_2 + n_2\cdot n_3 + n_3\cdot n_1}$。
+
+因此“万力归弧”的确切内容是：两类力都由回路和乐偏离单位元来描述，并共用同一组比安基与斯托克斯恒等式；规范项读偶通道，引力项读带符号的转角（符号由奇通道确定）并以铰链度量加权。把这一区别当作规范力与引力的结构差异属于本书的读法（`MODEL`）；它不确定规范群、耦合常数或动力学。
+:::
+
+下面的算例给这两条注记配上数值：
+
+::: {.example #ex-ch39-sagitta-versus-deficit-audit title="角亏与矢高的对账：五种正多面体、示例铰链与一个换位和乐（手工推导）"}
+1. **正多面体。** 顶点数乘角亏恒为 $720^\circ$；矢高之和各不相同：
+
+   | 多面体 | 顶点数 | 单顶点角亏 | 角亏之和 | $\sum_v(1 - \cos\delta_v)$ |
+   | :--- | :---: | :---: | :---: | :---: |
+   | 正四面体 | $4$ | $180^\circ$ | $720^\circ$ | $8.0000$ |
+   | 立方体 | $8$ | $90^\circ$ | $720^\circ$ | $8.0000$ |
+   | 正八面体 | $6$ | $120^\circ$ | $720^\circ$ | $9.0000$ |
+   | 正十二面体 | $20$ | $36^\circ$ | $720^\circ$ | $3.8197$ |
+   | 正二十面体 | $12$ | $60^\circ$ | $720^\circ$ | $6.0000$ |
+
+2. **法向公式。** 立方体顶点的三个法向两两正交，$[n_1, n_2, n_3] = 1$，分母为 $1$，$\delta_v = 2\arctan 1 = 90^\circ$。正四面体顶点处 $n_i\cdot n_j = -\frac{1}{3}$，分母为 $0$，$\delta_v = 180^\circ$。
+3. **示例铰链。** 四个正四面体共棱时 $\delta_h = 360^\circ - 4\arccos\frac{1}{3} = 77.885^\circ = 1.3593\;\mathrm{rad}$，$\sin\delta_h = 0.9777$，$1 - \cos\delta_h = 0.7901$，$\frac{1}{2}\delta_h^2 = 0.9239$。
+4. **换位和乐。** 绕两根正交轴各转 $60^\circ$ 的旋子，由 [@rem-ch39-plaquette-sagitta-and-wilson-action] 第 3 条，$[u_1, u_2] = -2i\sin 30^\circ\sin 30^\circ\,(n_1\times n_2)\cdot\boldsymbol{\sigma}$，故 $v(h) = 2\sin^2 30^\circ\sin^2 30^\circ = \frac{1}{8}$，余下的转角为 $2\arccos\frac{7}{8} = 57.91^\circ$，与 [§32.5](ch32-s05-physical-fields-and-six-domains.md#sec-ch32-physical-fields) 实验卡的读数一致。
+:::
+
+零作用量并不总是纯规范。在环面这样有不可缩回路的格点上，下面的冻结定理给出一个 $\mathbb{Z}/2$ 系数的实例：
+
+::: {.theorem #thm-ch39-periodic-grid-flat-not-exact title="周期网格上的平坦 Z/2 边标号：梯度判据与一条缝的反例" lean="D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.flat_exact_iff,D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.horizontal_seam_counterexample"}
+设 $M, N$ 为非零自然数，边标号 $y$ 由两族函数 $y.\mathrm{horizontal},\ y.\mathrm{vertical} : \operatorname{Fin} M \to \operatorname{Fin} N \to \mathbb{Z}/2$ 组成，指标加法取模。记 $\operatorname{plaquette}(y, i, j) = y.\mathrm{horizontal}(i, j) + y.\mathrm{vertical}(i, j + 1) + y.\mathrm{horizontal}(i + 1, j) + y.\mathrm{vertical}(i, j)$，$\operatorname{Flat}(y)$ 指一切 $\operatorname{plaquette}(y, i, j) = 0$，$\operatorname{rowHolonomy}(y, i) = \sum_j y.\mathrm{horizontal}(i, j)$，$\operatorname{columnHolonomy}(y, j) = \sum_i y.\mathrm{vertical}(i, j)$；顶点标号 $x : \operatorname{Fin} M \to \operatorname{Fin} N \to \mathbb{Z}/2$ 的梯度为 $\operatorname{gradient}(x).\mathrm{horizontal}(i, j) = x(i, j + 1) + x(i, j)$、$\operatorname{gradient}(x).\mathrm{vertical}(i, j) = x(i + 1, j) + x(i, j)$；$\operatorname{seam}(h, v)$ 在 $j = N - 1$ 的水平边上取 $h$、在 $i = M - 1$ 的竖直边上取 $v$，其余为 $0$。则：
+
+1. 若 $\operatorname{Flat}(y)$，则 $\bigl(\exists x,\ \operatorname{gradient}(x) = y\bigr) \iff \operatorname{rowHolonomy}(y, 0) = 0 \land \operatorname{columnHolonomy}(y, 0) = 0$；
+2. 若 $3 \le M$ 且 $3 \le N$，则 $\operatorname{Flat}(\operatorname{seam}(1, 0))$，$\operatorname{rowHolonomy}(\operatorname{seam}(1, 0), 0) = 1$，$\operatorname{columnHolonomy}(\operatorname{seam}(1, 0), 0) = 0$，且不存在 $x$ 使 $\operatorname{gradient}(x) = \operatorname{seam}(1, 0)$。
+:::
+
+::: proof
+第 1 款的必要性来自梯度沿每一行、每一列求和时逐项相消；充分性用平坦标号的分解：平坦的 $y$ 等于某个顶点标号的梯度加上 $\operatorname{seam}(\operatorname{rowHolonomy}(y, 0), \operatorname{columnHolonomy}(y, 0))$，两个和乐为零时缝项消失。第 2 款先验证缝标号平坦并算出它的两个和乐，再用第 1 款：行和乐为 $1 \ne 0$，所以它不是梯度。完整证明由 Lean 内核检查。
+:::
+
 我们在下框中对电子与质子引力—电磁等级比、引力耦合向普朗克单胞的二次攀升以及最小标准模型单圈重整化群三条两两交点作完整显式手算对账：
 
 ::: {.example #ex-ch39-hierarchy-and-one-loop-rg-calculus title="引力—电磁等级稀释比、普朗克二次合流与最小标准模型单圈重整化群近交汇三角基准算例（手工推导与 CODATA/PDG 数值核验）"}
