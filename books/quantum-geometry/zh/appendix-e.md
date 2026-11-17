@@ -287,7 +287,7 @@ $$
 
 E.7 的总表把 `H2` 记成并列的三项第 1 层条件：正自配对、秩 $2$ 双向量的椭圆负平方、多点格拉姆半正定；`H3` 再要求平行四边形极化。本节用[第 34 章 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 的弦—矢高分解重新过一遍这笔账，结论是这四项并不各自独立。在求同读数为实标量的情形，`H2` 的三项可以由两条更原始的条件推出：一条是**第三点冗余**（比较 $x$ 与 $z$ 不因取道第三点 $y$ 而改变），一条是**对合的正性**（非零差异的往返不为零也不为负）。`H3` 的极化一项由第三点冗余加一个正的读数给出。E.8.5 另外给单比特上的 `H5` 换了一种说法：只看两两比较的概率规则里，玻恩律是层析秩最小的那一个。E.8.6 与 E.8.7 用同一套记号检查 `H6` 与 `H7`：演化的可逆、时间连续、生成元与条件化，以及复合系统的参数计数与交换统计。这两小节不加新的条款，只把输入换成只谈比较对象与读数的形状，并用满足全部条款的模型标出边界。E.8.8 把比较用到系综上：每个对象都有对立者时，多点格拉姆半正定等价于“每个系综与自身的平均求同读数不为负”；单比特上的 `H5` 可以换成系综外延性，在 `MODEL` 读法下它是条款 I 用于系综。E.8.9 读一个对象沿时间的比较记录：读数表的秩数出能级，射线矢高始终离开零的对象说明态空间无穷维，这给 `H4` 一个读数判据但不推出它；两个通道合起来才定出轨道上的哈密顿量（`H6`）。
 
-E.8.10–E.8.12 处理台账上剩下的三项输入。E.8.10 把 E.8.1 的矢高表用到 $1+1$ 维观察者之间的比较上：舍去正性条件还选不出洛伦兹签名，还要“重复同一个比较不翻转时间次序”与“求异部分不是零平方”两条，而对同一个比较，正性条件与前一条不能同时成立。E.8.11 给保单位捏合的熵增写出精确恒等式与两侧界。E.8.12 说明二次作用量的有限步路径乘积精确等于驻相公式的主项；一般作用量只剩一维的显式抵消界，连续时间极限是文献结果或输入。
+E.8.10–E.8.12 处理台账上剩下的三项输入。E.8.10 把 E.8.1 的矢高表用到 $1+1$ 维观察者之间的比较上：舍去正性条件还选不出洛伦兹签名，还要“重复同一个比较不翻转时间次序”与“求异部分不是零平方”两条，而对同一个比较，正性条件与前一条不能同时成立。E.8.11 给保单位捏合的熵增写出精确恒等式与两侧界。E.8.12 说明二次作用量的有限步路径乘积精确等于驻相公式的主项；一般作用量只剩一维的显式抵消界，连续时间极限是文献结果或输入。E.8.13 回到 `H4` 与 `H7` 中仍写作单纯输入的三项（中心复结构、交换扇区与估值选择），各给一个精确形状，并用满足全部条款的模型说明它们仍是输入。
 
 先说清边界。这两条条件是加在 $\mathcal{A}_0$ 之外的，本节证明的是“若加入则推出”，不主张它们能从条款 I–III 推出；[@ex-appe-layer0-countermodels] 的反例恰好说明不能。本节的定理盒都对应冻结定理，其余推导标为 `手工推导`，引用的经典结论标为 `文献结果`。
 
@@ -1268,7 +1268,130 @@ $$
 **OPEN。** $3+1$ 维相互作用场论没有上述任何一条的对应定理；这一项仍按 E.7 的 `H9` 标为开放。
 :::
 
-### E.8.13 台账改了什么 {#sec-appe-reduced-ledger}
+### E.8.13 复结构、交换符号与估值：三项输入的精确形状 {#sec-appe-complex-exchange-valuation}
+
+E.8.7 之后台账仍把三项写成单纯的输入：`H7` 的中心复结构与交换扇区，以及 `H4` 的估值选择。本小节把第一项写成一条关于生成元与读数的条件，把第二项放到配置空间上，把第三项写成一条有界性判据；三项都仍是输入。
+
+下面的代数取有限直和 $\mathcal{A}=M_{n_1}(F_1)\oplus\cdots\oplus M_{n_m}(F_m)$，$F_k\in\{\mathbb{R},\mathbb{C},\mathbb{H}\}$，$n_k\ge1$，对合取逐块的共轭转置。记 $\operatorname{Sa}(\mathcal{A})=\{a:a^*=a\}$（求同部分），$\operatorname{Skew}(\mathcal{A})=\{a:a^*=-a\}$（求异部分），$U(\mathcal{A})=\{u:u^*u=uu^*=\mathbf{1}\}$（公平元）。$a=\frac12(a+a^*)+\frac12(a-a^*)$ 就是 E.8.1 的 $S$ 与 $A$。
+
+::: {.remark #rem-appe-agreement-difference-count title="求同部分与求异部分的维数：单个矩阵代数中只在复情形相等（手工推导）"}
+**手工推导。** 记 $d=\dim_{\mathbb{R}}F\in\{1,2,4\}$。$M_n(F)$ 中自伴矩阵的对角元是实数，反自伴矩阵的对角元是纯虚的（每个 $d-1$ 个参数），每对 $i<j$ 在两种情形下都有一个 $F$ 中的自由元。所以
+
+$$
+\dim\operatorname{Sa}=K_d(n)=n+d\cdot\frac{n(n-1)}{2},\qquad \dim\operatorname{Skew}=dn^2-K_d(n),\qquad \dim\operatorname{Sa}-\dim\operatorname{Skew}=(2-d)\,n,
+$$
+
+$K_d$ 是 [@rem-appe-tomography-count] 的计数函数。实、复、四元数三种情形的差分别为 $n$、$0$、$-2n$，与那里的复合缺额 $\frac{d(2-d)}4a(a-1)b(b-1)$ 带着同一个因子 $2-d$。对直和，维数相等不再说明问题：$M_2(\mathbb{R})\oplus\mathbb{H}$ 中 $\dim\operatorname{Sa}=3+1=4=1+3=\dim\operatorname{Skew}$，而两个直和项都不是复的。
+:::
+
+E.8.6 中生成一族公平元的是求异部分（弦率 $-iH$），读出的是求同部分（$H$）；在复量子理论里两者由乘以 $i$ 一一对应，且这个对应不随换架而变。下一条把它写成一条在直和上也适用的条件。
+
+::: {.remark #rem-appe-generator-reading-dictionary title="生成元—读数词典存在，当且仅当中心里有直角比较（手工推导与数值核验）"}
+**手工推导。** 称实线性双射 $\Phi:\operatorname{Skew}(\mathcal{A})\to\operatorname{Sa}(\mathcal{A})$ 为**协变词典**，若对一切 $u\in U(\mathcal{A})$ 与 $x\in\operatorname{Skew}(\mathcal{A})$ 有 $\Phi(uxu^*)=u\,\Phi(x)\,u^*$。以下四条等价：
+
+1. 存在协变词典；
+2. $\mathcal{A}$ 的中心含有 $J$，满足 $J^*=-J$，$J^2=-\mathbf{1}$；
+3. 每个 $F_k=\mathbb{C}$；
+4. 中心里求异部分与求同部分的维数相等。
+
+成立时这样的 $J$ 恰为 $(\pm i\mathbf{1}_1,\dots,\pm i\mathbf{1}_m)$，共 $2^m$ 个，$\Phi(x)=Jx$ 是协变词典。$\mathcal{A}=M_n(\mathbb{C})$ 时，协变的实线性映射恰为 $\Phi(x)=J\bigl(\alpha x+\gamma\operatorname{tr}(x)\mathbf{1}\bigr)$，$\alpha,\gamma\in\mathbb{R}$，$\operatorname{tr}$ 为复迹；$n\ge2$ 时它是双射当且仅当 $\alpha\neq0$ 且 $\alpha+n\gamma\neq0$，$n=1$ 时当且仅当 $\alpha+\gamma\neq0$。$m\ge2$ 时词典不唯一：不同直和项的中心部分之间可以任意实线性地混合。
+
+推导。(a) $U(M_n(F))$ 的实线性张成是 $M_n(F)$：张成对乘法封闭，含对角元取 $F$ 中单位元的对角阵（它们张成全部对角阵）与置换阵，置换阵乘对角矩阵单位给出每个 $qE_{ij}$；直和中 $(1,\dots,u_k,\dots,1)$ 与 $(-1,\dots,u_k,\dots,-1)$ 的平均是 $(0,\dots,u_k,\dots,0)$。所以与一切公平元对易的元素恰为中心元素。(b) $M_n(F)$ 的中心是 $Z(F)\mathbf{1}$，而 $Z(\mathbb{R})=\mathbb{R}$，$Z(\mathbb{C})=\mathbb{C}$，$Z(\mathbb{H})=\mathbb{R}$；所以中心里求同部分有 $m$ 维，求异部分的维数是复直和项的个数。
+
+- **2⇒1。** $J$ 居中且 $J^*=-J$ 时 $(Jx)^*=x^*J^*=xJ=Jx$，$x\mapsto Jx$ 把求异部分送到求同部分，逆映射是 $y\mapsto-Jy$，并且 $J\,uxu^*=u\,Jx\,u^*$。
+- **1⇒4。** 由协变性，$x$ 被一切共轭固定时 $\Phi(x)$ 也被固定；反之由单射。所以 $\Phi$ 把两边的固定子空间互相映满，由 (a) 它们是中心里的两部分。
+- **4⇒3⇒2。** 由 (b)，第 4 条说 $m$ 等于复直和项的个数；此时取 $J=(i\mathbf{1}_1,\dots,i\mathbf{1}_m)$。中心里的求异元素逐项在 $i\mathbb{R}\mathbf{1}_k$ 中，$J^2=-\mathbf{1}$ 迫使每项为 $\pm i$。
+- **$M_n(\mathbb{C})$ 的协变映射。** 令 $L(h)=\Phi(-Jh)$，它是 $\operatorname{Sa}$ 到自身的协变映射。实对角阵 $D$ 被对角公平元固定，所以 $L(D)$ 与它们全体对易，是实对角阵；$L$ 在实对角阵上与置换对易，所以 $L(D)=\alpha D+\gamma\operatorname{tr}(D)\mathbf{1}$。任一 $h=uDu^*$，故 $L(h)=\alpha h+\gamma\operatorname{tr}(h)\mathbf{1}$；$L$ 在无迹部分上乘 $\alpha$，在 $\mathbf{1}$ 上乘 $\alpha+n\gamma$。
+
+**数值核验（`NUM`）。** 把各代数实现为实矩阵代数，用随机公平元与逐块反射写出协变条件，求解空间：$M_n(\mathbb{C})$ 在 $n=1$ 时 $1$ 维，$n=2,3,4$ 时 $2$ 维，含可逆解；$M_n(\mathbb{R})$、$M_n(\mathbb{H})$（$n\le4$）、$\mathbb{R}\oplus\mathbb{C}$、$\mathbb{R}\oplus\mathbb{H}$、$M_2(\mathbb{R})\oplus\mathbb{H}$、$M_3(\mathbb{R})\oplus\mathbb{H}\oplus\mathbb{H}$ 没有可逆解；$\mathbb{C}\oplus\mathbb{C}$、$M_2(\mathbb{C})\oplus\mathbb{C}$、$M_2(\mathbb{C})\oplus M_2(\mathbb{C})$ 的解空间为 $4$、$5$、$6$ 维，含可逆解。
+:::
+
+所以 `H7` 中的“中心复结构”可以换一种说法（`MODEL`）：**每个求异部分配有一个求同读数，这个对应线性、可逆，并且不随公平元所作的换架而变。**
+
+::: {.remark #rem-appe-dictionary-independence title="词典不由条款 I–IV 与正性条件推出，并给出 H4 的复载体（手工推导与文献结果）"}
+**手工推导。**
+
+1. **满足全部条款而没有词典的模型。** 对 $F=\mathbb{R}$ 或 $\mathbb{H}$，取 $X=U(M_n(F))$（即 $\mathrm{O}(n)$ 或 $\mathrm{Sp}(n)$），$\mathcal{A}=M_n(F)$，$\mathrm{CMP}(x,y)=x^*y$。条款 II：$\mathrm{CMP}(x,y)^*=y^*x=\mathrm{CMP}(y,x)$；条款 III：$x^*y\,y^*x=\mathbf{1}$；条款 IV：$x^*y\,y^*z=x^*z$；条款 I：$\mathrm{CMP}(x,\mathbf{1})=\mathrm{CMP}(y,\mathbf{1})$ 已给出 $x=y$。正性条件：$\operatorname{Re}\operatorname{tr}(a^*a)=\sum_{i,j}\lvert a_{ij}\rvert^2$，所以 $a^*a=-t\mathbf{1}$（$t\ge0$）迫使 $-tn\ge0$，$t=0$，$a=0$。由 [@rem-appe-generator-reading-dictionary]，这两族模型没有协变词典。
+2. **它不是“计数相乘”。** 交换代数 $\mathbb{R}^n$（[@rem-appe-tomography-count] 中的 $d=0$）计数相乘，而 $\operatorname{Skew}=0$，没有词典。只在单个矩阵代数（$n\ge2$）之内，计数相乘、两部分维数相等、存在协变词典三者选出的都是复数。
+3. **复载体。** 设 $\mathcal{A}$ 的中心含 $J$（$J^*=-J$，$J^2=-\mathbf{1}$），$\pi$ 是 $\mathcal{A}$ 在有限维实内积空间 $V$ 上的保单位 $*$-表示（$\pi(a^*)=\pi(a)^{\mathsf T}$）。则 $R=\pi(J)$ 满足 $R^{\mathsf T}=-R$，$R^2=-I$，并与全体 $\pi(a)$ 对易；于是 $V$ 以 $R$ 为 $i$ 成为复向量空间，$\pi(\mathcal{A})$ 复线性地作用，且 $(\det R)^2=(-1)^{\dim V}$ 迫使 $\dim V$ 为偶数。这是 [@rem-appe-arithmetic-chain] 第 3 款的偶数实维与复载体。
+4. **$J$ 的符号。** 每个直和项上 $J$ 只定到符号：$M_n(\mathbb{C})$ 上逐元复共轭是 $*$-自同构，把 $i\mathbf{1}$ 换成 $-i\mathbf{1}$。[@rem-appe-real-realizability-return-phase] 第 5 款用的是同一个复共轭：它保持两两求同读数，改变 $D$ 的符号。
+
+**文献结果。** Stueckelberg（1960，*Helv. Phys. Acta* 33, 727）由不确定关系论证实希尔伯特空间上的量子理论须带一个与全体可观测量对易的复结构，从而与复量子理论等价；Moretti 与 Oppio 由庞加莱对称性得到一个与全体可观测量对易、到符号为止唯一的复结构（2017，*Rev. Math. Phys.* 29, 1750021；四元数情形见 2019，同刊 31, 1950013）。在一般概率理论中，Barnum、Müller 与 Ududec（2014，*New J. Phys.* 16, 123029）的三条公设留下实、复、四元数量子理论等候选，再加“能量可观测”只留下复量子理论。有限维实 $C^*$-代数在 $*$-同构意义下恰为上述直和，这是经典结果；本注记只用给定的直和，不依赖它。区分实与复量子理论的网络实验（Renou 等 2021，*Nature* 600, 625；Chen 等 2022 与 Li 等 2022，*Phys. Rev. Lett.* 128, 040403 与 040402）比较的是独立源网络中实与复的张量积复合，见[附录 D](appendix-d.md)；它们不涉及单个系统上的词典。
+:::
+
+交换扇区在配置空间上有一个精确的位置。两个全同对象在 $\mathbb{R}^d$ 中的位形，去掉质心以后是相对向量 $r\neq0$，并把 $r$ 与 $-r$ 认作同一个位形。
+
+::: {.remark #rem-appe-exchange-configuration-space title="交换回路不被三角形填满：配置空间只留下一个符号（手工推导与文献结果）"}
+**手工推导。** 记 $P_d=(\mathbb{R}^d\setminus\{0\})/\{r\sim-r\}$。$r\mapsto r/\lvert r\rvert$ 与对径映射相容，把 $P_d$ 形变收缩到 $S^{d-1}/\{\pm1\}=\mathbb{RP}^{d-1}$。
+
+1. $d=1$：$P_1\cong(0,\infty)$（取 $\lvert r\rvert$），可缩；不碰撞就没有交换的路径。
+2. $d=2$：$\mathbb{RP}^1\cong S^1$（角度加倍），基本群为 $\mathbb{Z}$，由转半圈 $\varphi\in[0,\pi]$ 生成；一维酉特征标为 $e^{i\alpha}$，$\alpha$ 任意。
+3. $d\ge3$：$S^{d-1}$ 单连通，对径映射无不动点，$S^{d-1}\to\mathbb{RP}^{d-1}$ 是二叶万有覆叠，基本群为 $\mathbb{Z}/2$。交换回路（$r$ 沿半个大圆走到 $-r$）提升为不闭合的路径，所以是非平凡元；走两次是整个大圆，在 $S^{d-1}$ 中可缩。一维酉特征标满足 $\chi^2=1$，只有 $\pm1$。
+
+用 [@rem-appe-triangle-simple-connectivity] 的语言（`MODEL`）：沿路径输运的 $\mathrm{U}(1)$ 值比较若在每个可缩回路上平凡，就是平坦的；$d\ge3$ 时交换回路不可缩，不被三角形填满，平坦性留下它的取值 $\pm1$ 不定。这是配置空间上的“条款 I 去掉标签而不选扇区”（[@rem-appe-swap-sagitta]）。
+
+**文献结果。** 全同粒子的路径积分权重构成基本群的一维表示，见 Laidlaw–DeWitt（1971，*Phys. Rev. D* 3, 1375）；二维允许任意相位，见 Leinaas–Myrheim（1977，*Nuovo Cimento B* 37, 1）。$\mathbb{RP}^{d-1}$ 的基本群是标准的覆叠空间计算。三个以上的对象在 $d\ge3$ 时基本群为对称群 $S_N$，它还有高维不可约表示（仲统计），本注记不讨论。
+:::
+
+符号能否由一个构造选出？下面重做一个经典构造，看 $(-1)^{2S}$ 在哪一步出现。
+
+::: {.example #ex-appe-berry-robbins-transport title="两个自旋 S 的输运基：交换符号在哪一步出现（手工推导与数值核验）"}
+**手工推导。** 用施温格表示：对象 1 的自旋 $S$ 用两个振子 $a_1,a_2$ 中的 $2S$ 个量子，对象 2 用 $b_1,b_2$ 中的 $2S$ 个量子。在四个振子共 $N=4S$ 个量子的空间中定义交换 $\mathrm{SU}(2)$ 的生成元
+
+$$
+K_x=\frac12\sum_{i}\bigl(a_i^\dagger b_i+b_i^\dagger a_i\bigr),\qquad K_y=-\frac{i}{2}\sum_{i}\bigl(a_i^\dagger b_i-b_i^\dagger a_i\bigr),\qquad K_z=\frac12\sum_{i}\bigl(a_i^\dagger a_i-b_i^\dagger b_i\bigr).
+$$
+
+物理的双自旋空间 $\mathcal{P}$ 是 $K_z=0$ 的部分，维数 $(2S+1)^2$。$E$ 记交换 $a_i\leftrightarrow b_i$，即两个自旋对换。
+
+1. **$\pi$ 转动等于对换乘一个数。** 在每个双重态 $(a_i^\dagger,b_i^\dagger)$ 上 $K_x$ 作用为 $\frac12\sigma_x$，而 $e^{-i\pi\sigma_x/2}=-i\sigma_x$：每个产生算子被对换并乘以 $-i$。所以在 $N$ 个量子的空间上 $e^{-i\pi K_x}=(-i)^NE$，$N=4S$ 时这个数是 $(-1)^{2S}$。
+2. **输运基。** 对 $r=(\theta,\varphi)\in S^2$ 令 $n_\varphi=(-\sin\varphi,\cos\varphi,0)$，$U(r)=\exp(-i\theta\,n_\varphi\cdot K)$，$\lvert M(r)\rangle=U(r)\lvert M\rangle$，$\lvert M\rangle\in\mathcal{P}$。在 $\theta=\pi$ 处 $\varphi$ 不定，但 $U(r)\lvert M\rangle=e^{-i\gamma K_z}e^{-i\pi K_x}\lvert M\rangle$（$\gamma=\varphi+\frac\pi2$），$e^{-i\pi K_x}\lvert M\rangle\in\mathcal{P}$ 而绕 $K_z$ 的转动在 $\mathcal{P}$ 上是恒等，所以 $\lvert M(r)\rangle$ 只依赖 $r$。
+3. **交换性质。** $-r=(\pi-\theta,\varphi+\pi)$，$n_{\varphi+\pi}=-n_\varphi$，故 $U(r)^{-1}U(-r)=\exp(i\pi\,n_\varphi\cdot K)=e^{-i\gamma K_z}e^{i\pi K_x}e^{i\gamma K_z}$。在 $\mathcal{P}$ 上两个 $K_z$ 因子都是恒等，$e^{i\pi K_x}=i^NE$，于是
+
+   $$
+   \lvert M(-r)\rangle=(-1)^{2S}\,\lvert EM(r)\rangle .
+   $$
+
+4. **平行输运。** $U^{-1}dU$ 落在 $i\operatorname{span}\{K_x,K_y,K_z\}$ 中；$K_x,K_y$ 把 $K_z$ 改变 $\pm1$，$K_z$ 在 $\mathcal{P}$ 上为零，所以 $\langle M'(r)\rvert d\lvert M(r)\rangle=0$。
+5. **单值性给出符号。** 设 $\Psi(r)=\sum_M\psi_M(r)\lvert M(r)\rangle$ 并要求 $\Psi(-r)=\Psi(r)$，则 $\psi_{EM}(-r)=(-1)^{2S}\psi_M(r)$。
+
+注意两点。第一，$r\neq\pm\hat z$ 时 $\lvert M(r)\rangle$ 一般不在 $\mathcal{P}$ 中：它们住在四个振子 $4S$ 个量子的更大空间里。第二，每个量子上的因子 $-i\sigma_x$ 平方为 $-\mathbf{1}$，是一个直角旋子；符号是 $4S$ 个这样的因子之积。它不是 [@rem-appe-half-comparison-holonomy] 的半比较 $r(u)$：$r(u)$ 只对求同读数 $s>-1$ 定义，而 $-\mathbf{1}$ 的求同读数是 $-1$。$(-1)^{2S}$ 与单个自旋 $S$ 转 $2\pi$ 的符号 $e^{-2\pi iS_z}=(-1)^{2S}$ 数值相同，构造并没有从别处推出这一相同。
+
+**数值核验（`NUM`）。** $S=\frac12,1,\frac32$（$N=2,4,6$）：$\lVert e^{-i\pi K_x}-(-i)^NE\rVert_{\max}\le7\times10^{-16}$；$200$ 个随机方向上第 3 款的残差 $\le1.3\times10^{-15}$，换成相反符号残差 $\ge0.9$；第 4 款的中心差分残差 $\le6\times10^{-10}$。
+:::
+
+::: {.remark #rem-appe-spin-statistics-inputs title="输运基不选符号；自旋—统计仍是输入（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** [@ex-appe-berry-robbins-transport] 是 Berry–Robbins（1997，*Proc. R. Soc. Lond. A* 453, 1771）的构造：交换转动的转轴取 $e_3\times r$，作用在施温格表示的更大空间上，给出交换规则 $\lvert M(-r)\rangle=(-1)^{2S}\lvert EM(r)\rangle$ 与平行输运条件（这里的对照依据 Papadopoulos 与 Reyes-Lega 2010，*Found. Phys.* 40, 829 的转述）。Berry 与 Robbins（2000，*J. Phys. A* 33, L207）描述了满足他们全部先前要求而给出相反交换符号的构造，例如在施温格表示中把对易子换成反对易子，并提出这些构造或许不可接受的理由。对 $S=\frac12$ 用费米振子重做 [@ex-appe-berry-robbins-transport] 第 1 款，得 $e^{-i\pi K_x}a_i^\dagger b_j^\dagger\lvert0\rangle=+a_j^\dagger b_i^\dagger\lvert0\rangle$，交换规则的符号为 $+1$（`NUM`）。单值性要求 $\Psi(-r)=\Psi(r)$ 在 Berry–Robbins 所主张的形式下也受到质疑（Reyes-Lega 2011，*J. Phys. A* 44, 325308）。自旋与统计的联系来自相对论局域量子场论：Fierz（1939）、Pauli（1940，*Phys. Rev.* 58, 716）、Lüders–Zumino（1958，*Phys. Rev.* 110, 1450）、Burgoyne（1958，*Nuovo Cimento* 8, 607）。比较公理不推出它。
+:::
+
+所以交换一项的输入有了精确的形状：$d\ge3$ 时交换回路只能带 $\pm1$，平坦的比较不选其中哪一个；施温格输运基把符号写成 $4S$ 个直角旋子之积，而同类构造也给出相反的符号。
+
+最后是估值。E.8.1 用“整数次幂有界”刻画椭圆一行（[@rem-appe-bounded-recurrence]）；奥斯特洛夫斯基分岔也有一条同样形式的判据。
+
+::: {.remark #rem-appe-bounded-integers-ultrametric title="整数倍有界当且仅当超度量：两行的估值表（手工推导与文献结果）"}
+**手工推导。** 设 $\lvert\cdot\rvert$ 是域 $K$ 上的绝对值（乘性、满足三角不等式、仅在 $0$ 处为零）。以下三条等价：
+
+1. $\{\lvert n\cdot1\rvert:n\in\mathbb{Z}\}$ 有界；
+2. 对一切整数 $n$，$\lvert n\cdot1\rvert\le1$；
+3. 强三角不等式 $\lvert x+y\rvert\le\max(\lvert x\rvert,\lvert y\rvert)$ 对一切 $x,y$ 成立。
+
+推导：3⇒2 对 $n$ 归纳，$\lvert n+1\rvert\le\max(\lvert n\rvert,1)$，再用 $\lvert-1\rvert=1$。2⇒1 显然。1⇒2：$\lvert n\rvert^k=\lvert n^k\rvert$ 对一切 $k$ 有界，只能 $\lvert n\rvert\le1$。2⇒3：由二项式展开与第 2 条，$\lvert x+y\rvert^k\le\sum_{j=0}^{k}\lvert\binom kj\rvert\,\lvert x\rvert^j\lvert y\rvert^{k-j}\le(k+1)\max(\lvert x\rvert,\lvert y\rvert)^k$，开 $k$ 次方后令 $k\to\infty$。
+
+强三角不等式下，若 $\lvert x\rvert>\lvert y\rvert$，则 $\lvert x+y\rvert\le\lvert x\rvert$，而 $\lvert x\rvert\le\max(\lvert x+y\rvert,\lvert y\rvert)$ 迫使 $\lvert x\rvert\le\lvert x+y\rvert$，所以 $\lvert x+y\rvert=\lvert x\rvert$。因此以 $x-y$、$y-z$、$x-z$ 为边的三角形，最长的两条边相等。
+
+| 整数的绝对值 | 三角不等式 | $\mathbb{Q}$ 上的非平凡绝对值 |
+| :--- | :--- | :--- |
+| 有界（$\le1$） | 强三角不等式，三角形都等腰 | 等价于某个 $\lvert\cdot\rvert_p$ |
+| 无界 | 普通三角不等式 | 等价于 $\lvert\cdot\rvert_\infty$ |
+
+与 [@rem-appe-bounded-recurrence] 相同的只有判据的形式：那里一个比较的求异部分满足正性条件，当且仅当它的整数次幂有界；这里绝对值是超度量，当且仅当每个整数的各次幂的绝对值有界。不同之处有三：乘性使 $\lvert n^k\rvert=\lvert n\rvert^k$ 要么有界、要么指数增长，没有对应抛物一行的线性增长；在 $\mathbb{Q}$ 上，无界一行中正整数按幂次增长，$\lvert n\rvert=n^\alpha$，$0<\alpha\le1$；有界一行给出 $\mathbb{Q}_p$，而 E.8.1 的椭圆转动与 $\mathbb{C}$ 在无界的阿基米德一行之上。所以两张表共享的是判据，不是对象。
+
+**文献结果。** 等价 1⇔2⇔3 是经典的；其中 2⇔3（$n$ 取自然数）对赋范除环在 Mathlib 中是 `isUltrametricDist_iff_forall_norm_natCast_le_one`（未在上游库冻结）。表中最后一列来自冻结定理 [`rational_absolute_value_classification`](lean:D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification)（[@thm-ch36-ostrowski-padic-ball-and-blind-spot]；Ostrowski 1916，*Acta Math.* 41, 271）：$\mathbb{Q}$ 上非平凡绝对值等价于 $\lvert\cdot\rvert_\infty$ 或唯一一个 $\lvert\cdot\rvert_p$，而前者在整数上无界、后者在整数上不超过 $1$，等价保持有界与否；无界一行的形式 $\lvert n\rvert=n^\alpha$ 是同一分类的经典表述。两行的标准绝对值满足乘积公式 $\lvert x\rvert_\infty\prod_p\lvert x\rvert_p=1$（$x\in\mathbb{Q}$，$x\neq0$），即冻结定理 [`rational_padic_product_formula`](lean:D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula)（[@thm-ch36-crt-and-adelic-product-formula]）。
+:::
+
+三条都不减少输入：实与四元数矩阵代数满足条款 I–IV 与正性条件而没有词典；交换回路的两个特征标都与平坦性相容；估值的两行都由冻结分类给出，比较的条款不在其间选择。
+
+### E.8.14 台账改了什么 {#sec-appe-reduced-ledger}
 
 ::: {.remark #rem-appe-reduced-ledger title="E.8 之后的台账（对 [@rem-appe-master-audit-table] 的补充）"}
 **补充审计（`MODEL` + `手工推导`，定理盒部分对应冻结定理）。** 下表只列发生变化的条目；`H1` 的处理机制与 [@rem-appe-master-audit-table] 相同。
@@ -1280,15 +1403,17 @@ $$
 | `H2` 多点格拉姆半正定 | 显式的第 1 层条件 | 由条款 IV 加正泛函推出，逆向成立；标量相似时由条款 IV 加正性条件推出；标量相似且每个对象有对立者时，等价于每个系综与自身的平均求同读数不为负，没有对立者则不够；偏离平坦时有定量下界 | [@thm-appe-chordal-gain-potential]、[@rem-appe-gram-from-flatness]、[@rem-appe-ensemble-positivity]、[@rem-appe-near-flat-gram-bound] |
 | `H3` 平行四边形极化 | `T2` 条件 | 弦距来自正泛函的 GNS 内积，输入由“内积”换成“正读数”；完备化仍为 `T1` | [@rem-appe-gram-from-flatness] 第 2 款 |
 | `H4` 正交余项不竭 | `T2/T4` 输入 | 对一个时间齐次对象：采样读数表的秩等于采样所见的能级数，余项永不枯竭当且仅当所见能级无穷；有限个能级的轨道必定回来，有限时长内射线矢高始终高于阈值给出维数下界，此后始终离开零推出轨道空间无穷维；仍是输入 | [@thm-appe-prony-hankel-rank]、[@rem-appe-orbit-rank-and-recurrence] |
+| `H4` 复载体 $R^2=-I$ | `T3` 载体维数奇偶 | 中心含 $J$（$J^*=-J$，$J^2=-\mathbf{1}$）时，$J$ 在任一保单位 $*$-表示上的像反对称、平方为 $-I$、与全体元素对易，载体实维数为偶；中心复结构本身仍是输入（见 `H7`） | [@rem-appe-dictionary-independence] 第 3 款 |
+| `H4` 奥斯特洛夫斯基估值选择 | `T3` 分岔 | 两行判据：绝对值在整数上有界当且仅当满足强三角不等式（此时三角形都等腰）；在 $\mathbb{Q}$ 上，由冻结分类，有界一行等价于某个 $\lvert\cdot\rvert_p$，无界一行等价于 $\lvert\cdot\rvert_\infty$；与 E.8.1 的有界判据同形，但没有对应抛物行的第三行，有界一行也不是椭圆转动所在的一行；选哪一行仍是输入 | [@rem-appe-bounded-integers-ultrametric]、[@thm-ch36-ostrowski-padic-ball-and-blind-spot] |
 | `H5` 玻恩权重 | `T2` 可加性条件 | 只对只依赖两两比较的规则：$d\ge3$ 时有界、在每组正交归一基上归一且 $f(1)=1$ 就定出玻恩律；$d=2$ 时对连续规则，全效应可加性可以换成“对径归一、$f(1)=1$、层析秩最小”，也可以不要连续性而换成系综外延性（`MODEL` 下读作条款 I 用于系综）；仍是 `T2` 输入 | [@rem-appe-born-zonal-minimal-rank]、[@rem-appe-ensemble-extensionality-born] |
-| `H8` 洛伦兹签名 | `T3` 分岔 | 与 `H2` 用同一张三分表，但为观察者之间的比较选另一行：在 $1+1$ 维观察者模型中（坐标变换的线性是输入），条款 III、速度读数反对称与同一条律给出含一个常数 $K$ 的族，$K$ 的符号就是矢高表的行；时间次序条件（重复同一个比较不翻转时间次序）排除椭圆行，“求异部分不是零平方”再排除抛物行；对同一个比较，正性条件与时间次序条件不能同时成立；零锥到二次型的一步由冻结命题承担 | [@rem-appe-frame-change-family]、[@rem-appe-time-order-repetition]、[@rem-appe-rotor-boost-coexistence]、[@rem-appe-causal-order-linearity]、[@prop-null-cone-rigidity] |
+| `H8` 洛伦兹签名 | `T3` 分岔 | 与 `H2` 用同一张三分表，但为观察者之间的比较选另一行：在 $1+1$ 维观察者模型中（坐标变换的线性是输入），条款 III、速度读数反对称与同一条律给出含一个常数 $K$ 的族，$K$ 的符号就是矢高表的行；时间次序条件（重复同一个比较不翻转时间次序）排除椭圆行，“求异部分不是零平方”再排除抛物行；对同一个比较，正性条件与时间次序条件不能同时成立；零锥到二次型的一步由冻结命题承担 | [@rem-appe-frame-change-family]、[@rem-appe-time-order-repetition]、[@prop-appe-chebyshev-positivity-threshold]、[@rem-appe-rotor-boost-coexistence]、[@rem-appe-causal-order-linearity]、[@prop-null-cone-rigidity] |
 | `H8` 第 1 层射影和乐 | 第 1 层内生 | 在 $\mathcal{Cl}_{3,0}$ 中由半比较的三点和乐给出闭式；其泡利矩阵模型中的乘积公式与返回相位已冻结 | [@rem-appe-half-comparison-holonomy]、[@thm-appe-bloch-triangle-return-phase] |
 | `H8` 保单位捏合熵增 | `T2` 条件 | 纯度恰好降低丢弃的相干质量 $c$；熵增等于相对熵，且 $\Delta S\ge\frac12\lVert\rho-\mathcal{P}(\rho)\rVert_1^2\ge c$；单比特上固定 $c$ 时 $\Delta S$ 的精确范围；已知的一般上界是 $\sqrt{c}$ 的阶（秩一基底捏合的 $\ell_1$ 界已冻结），不存在线性于 $c$ 的上界；“粗粒化是保单位的捏合”仍是输入 | [@rem-appe-pinching-exact-identities]、[@rem-appe-pinching-entropy-lower]、[@prop-appe-l1-coherence-bound]、[@rem-appe-pinching-entropy-upper] |
 | `H6` 双侧可逆 | `T2` 条件 | 单侧公平的亏损是投影，单侧移位作为比较值违反条款 III；但它可作为满足条款 I–IV 与正性条件的模型中的诱导演化出现，代数带忠实迹也不排除；过去完备或态空间有限维各自充分 | [@rem-appe-one-sided-fairness]、[@ex-appe-bilateral-shift-model] |
 | `H6` 强连续 | `T2` 条件 | 时间齐次族上等价于矢高读数在零点连续；只要求可测不够；有限维中由此接上 [@thm-calibrated-unitary-group] | [@rem-appe-sagitta-continuity] |
 | `H6` 生成元 | `T4` 输入 $H$ | 弦率趋于 $-iH$，矢高率趋于 $H^2/2$，均有显式误差；有限步速度界；在轨道张成的空间上，两个通道的轨道记录决定 $H$ 到酉等价为止，只用求同读数或只用玻恩权重都不够（二能级与三能级反例）；轨道的选取与 $H$ 在轨道外的作用仍是输入 | [@rem-appe-generator-chord-sagitta]、[@rem-appe-orbit-record-channels] |
 | `H6` 吕德斯条件化 | `T2` 条件 | 吕德斯态是确定通过检验者中保真度最大者，且唯一；迹范数与迹为 $1$ 的希尔伯特—施密特距离不给出吕德斯态；所用读数仍是输入 | [@rem-appe-luders-nearest] |
-| `H7` 局域层析与交换统计 | `T2` + `T3` | 参数计数 $K_d(ab)-K_d(a)K_d(b)=\frac{d(2-d)}4a(a-1)b(b-1)$；交换是矢高取 $0$ 与 $2$ 的公平对合，条款 I 去掉标签而不选扇区；一族给定对象在保留格拉姆阵到相位为止的意义下是否需要复数振幅：可比三角形填满每个圈时，当且仅当某个三点巴格曼乘积不是实数，单比特上当且仅当布洛赫向量不共一个过球心的平面；中心复结构与扇区选择仍是输入 | [@rem-appe-tomography-count]、[@rem-appe-swap-sagitta]、[@rem-appe-real-realizability-return-phase] |
+| `H7` 局域层析与交换统计 | `T2` + `T3` | 参数计数 $K_d(ab)-K_d(a)K_d(b)=\frac{d(2-d)}4a(a-1)b(b-1)$；交换是矢高取 $0$ 与 $2$ 的公平对合，条款 I 去掉标签而不选扇区；一族给定对象在保留格拉姆阵到相位为止的意义下是否需要复数振幅：可比三角形填满每个圈时，当且仅当某个三点巴格曼乘积不是实数（有一个对象与其余每个对象都不正交时，这一判定已冻结），单比特上当且仅当布洛赫向量不共一个过球心的平面；在 $M_n(\mathbb{R})$、$M_n(\mathbb{C})$、$M_n(\mathbb{H})$ 的有限直和中，中心复结构等价于协变的生成元—读数词典（求异部分到求同部分的、与公平元换架对易的实线性双射），它不由条款 I–IV 与正性条件推出；$d\ge3$ 时交换回路只容许 $\pm1$ 两个特征标，平坦的比较不选其一，施温格输运基把符号写成 $4S$ 个直角旋子之积，而同类构造也给出相反符号；中心复结构与扇区选择仍是输入 | [@rem-appe-tomography-count]、[@rem-appe-swap-sagitta]、[@rem-appe-real-realizability-return-phase]、[@prop-appe-real-rephasing-star]、[@rem-appe-generator-reading-dictionary]、[@rem-appe-dictionary-independence]、[@rem-appe-exchange-configuration-space]、[@ex-appe-berry-robbins-transport]、[@rem-appe-spin-statistics-inputs] |
 | `H9` 连续路径积分与平稳作用量 | `T4` 输入 | 二次作用量下 $N$ 步切片乘积在每个有限 $N$ 上精确等于驻相路径的贡献（含前因子与马斯洛夫相位），谐振子的误差是显式的 $O(N^{-2})$，时间步须落在矢高表的椭圆行；一般作用量只剩一维的显式抵消界；固定 $\hbar$ 时，连续极限在算子层面由特罗特—纳尔逊定理给出，不需要路径测度（有界变差的这种复测度不存在）；非二次势的时间切片收敛与大维数驻相是文献结果；相互作用场论仍为 `OPEN` | [@rem-appe-oscillator-time-slicing]、[@ex-appe-time-step-trichotomy]、[@rem-appe-oscillatory-cancellation-bounds]、[@rem-appe-path-integral-remaining-inputs] |
 
 新增的两条输入是条款 IV（[@def-appe-third-point-redundancy]）与正性条件（[@rem-appe-involution-positivity]）；读数由态给出且至少有一个态时，后者等价于没有非零的零平方元素，而这一部分对态的一切读数不可见（[@rem-appe-positivity-invisible-part]）；求同读数不是实标量时，读数表的半正定另需一个正泛函。条款 IV 不必对一切三点成立：可比三角形填满每个圈就够了，而且对一切群而言这是恰好够的条件（[@rem-appe-triangle-simple-connectivity]）。条款 IV 排除一切全比较的和乐，它刻画的是第 1 层的平坦骨架；带真实曲率的第 2 层联络必须放弃它，那时 [@thm-appe-chordal-gain-potential-stability] 与 [@rem-appe-near-flat-gram-bound] 给出偏离的代价。
@@ -1298,6 +1423,8 @@ E.8.6 与 E.8.7 不增加新的条款：`H6` 的可逆与连续两项各有一�
 E.8.8 与 E.8.9 同样不增加新的条款。E.8.8 把比较用到系综上：要推出读数表半正定，正性条件可以换成“每个对象有对立者，系综与自身的平均求同读数不为负”，后者仍容许的只有对一切求同读数不可见的抛物点对；单比特上的玻恩律可以由系综外延性推出。E.8.9 读一个对象的轨道：`H4` 有了可在有限步上检验的读数形式，`H6` 的 $H$ 在轨道空间上可以从两个通道的记录中读出。
 
 E.8.10–E.8.12 为观察者之间的比较增加两条输入：时间次序条件，以及“求异部分不是零平方”（它是 [@rem-appe-positivity-invisible-part] 中那一条件在求异部分上的特例）；在 $1+1$ 维中，坐标变换的线性也仍是输入。对同一个比较，正性条件与时间次序条件不能同时成立，`H2` 与 `H8` 由此分开：两者为不同的比较选同一张表上的不同行。E.8.11 不改变“粗粒化是保单位的捏合”这一输入，只给它的后果定量。E.8.12 把 `H9` 的路径积分一项缩小为：二次作用量在有限步上精确，一般作用量只有渐近陈述，连续极限在算子层面的存在是文献结果。
+
+E.8.13 不增加新的条款。`H7` 的中心复结构换成一条协变词典条件：每个求异部分配一个求同读数，对应线性、可逆且不随换架而变；在 $M_n(\mathbb{R})$、$M_n(\mathbb{C})$、$M_n(\mathbb{H})$ 的有限直和中它等价于中心复结构，并给出 `H4` 的复载体；实与四元数矩阵代数满足条款 I–IV 与正性条件而没有它。交换扇区换成配置空间基本群的一个特征标，$d\ge3$ 时只有 $\pm1$。`H4` 的估值选择换成“整数倍是否有界”。三者仍是输入。
 :::
 
 这一节没有减少输入的总数到零，它改变的是输入的形状：在求同读数为实标量的情形，`H2` 的三项原先是关于自配对、双向量与格拉姆矩阵的三条几何陈述，现在换成两条只用比较本身就能说出口的条件。一条说第三者不改变两者之比，一条说差异的往返留下正的痕迹。
