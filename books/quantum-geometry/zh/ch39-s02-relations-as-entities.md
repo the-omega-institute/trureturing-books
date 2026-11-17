@@ -1,10 +1,10 @@
-# 39.2 终结“物自体”：无刀则无晶，关系即实体
+# 39.2 “物自体”的关系读法：无刀则无晶，关系即实体
 
 拆除了计算机隐喻里的“被动硅片”之后，哲学史上另一尊盘踞了数百年、专门替二元论看家护院的幽灵也必须当场对质——那就是所谓躲在一切观测表象背后、永远不可触及的**“物自体（thing-in-itself）”**。
 
 每当物理学家指出“动量、自旋、颜色与位置全都依赖测量语境”时，朴素实在论者总会退守最后一道防线：“就算一切测量读数都是关系性的，读数背后总还得先蹲着一团不依赖任何观测关系的‘纯客体内核’吧？就像先有一座暗室里的冰雕，手电筒照上去才显出反光！”
 
-让我们用谱系学的追问把这尊暗室冰雕彻底照穿：假如抽干某物与宇宙间一切其他探针的内积重叠、抽干它在一切读出映射下的坐标纤维，剩下的那个“绝对不与任何事物发生关系、绝对不可被任何尺子区分的内核”，与“什么都没有”在数学上存在哪怕半比特的区别吗？现代数学早已在范畴论与观测纤维层面对此给出了干脆利落的回答；相关的哲学史与范畴论文献背景界定如下：
+让我们用谱系学的追问把这尊暗室冰雕彻底照穿：假如抽干某物与宇宙间一切其他探针的内积重叠、抽干它在一切读出映射下的坐标纤维，剩下的那个“绝对不与任何事物发生关系、绝对不可被任何尺子区分的内核”，与“什么都没有”在数学上存在哪怕半比特的区别吗？现代数学在范畴论与观测纤维层面给出了与这个追问相对应的、干脆利落的数学事实（它们回答的是数学问题，物自体的哲学之争并不因此了结）；相关的哲学史与范畴论文献背景界定如下：
 
 ::: {.remark #rem-ch39-kant-yoneda-lemma-literature title="康德“物自体”不可知论传统与范畴论米田引理全息嵌入（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节批判“脱离一切观测关系的隐秘实体内核”时对照的近代认识论概念与现代范畴论基本定理属外部文献背景，未作为独立定理包含在本书锁定的 `trureturing@dev` 声明集中：
@@ -16,10 +16,10 @@
    \operatorname{Nat}\bigl(\operatorname{Hom}_{\mathcal{C}}(-, X),\; F\bigr) \;\cong\; F(X) \qquad (\text{由 }\alpha \mapsto \alpha_X(\mathrm{id}_X)\text{ 给出}).
    $$
 
-   取 $F = \operatorname{Hom}_{\mathcal{C}}(-, Y)$ 即导出**米田嵌入函子** $y : \mathcal{C} \hookrightarrow [\mathcal{C}^{\mathrm{op}}, \mathbf{Set}]$，$X \mapsto \operatorname{Hom}_{\mathcal{C}}(-, X)$ 是**全忠实（fully faithful）**的，从而 $\operatorname{Hom}_{\mathcal{C}}(-, X) \cong \operatorname{Hom}_{\mathcal{C}}(-, Y) \iff X \cong Y$：给定可表函子间的自然同构，它唯一诱导 $X$ 与 $Y$ 间相应的同构；因此在同构意义下，对象 $X$ 百分之百由范畴中一切探测对象射向它的态射关系总和所唯一决定，态射关系网之外不存在任何不可观测的私有“物自体残核”。
+   取 $F = \operatorname{Hom}_{\mathcal{C}}(-, Y)$ 即导出**米田嵌入函子** $y : \mathcal{C} \hookrightarrow [\mathcal{C}^{\mathrm{op}}, \mathbf{Set}]$，$X \mapsto \operatorname{Hom}_{\mathcal{C}}(-, X)$ 是**全忠实（fully faithful）**的，从而 $\operatorname{Hom}_{\mathcal{C}}(-, X) \cong \operatorname{Hom}_{\mathcal{C}}(-, Y) \iff X \cong Y$：给定可表函子间的自然同构，它唯一诱导 $X$ 与 $Y$ 间相应的同构；因此在同构意义下，对象 $X$ 百分之百由范畴中一切探测对象射向它的态射关系总和所唯一决定。（把这读作“态射关系网之外不存在私有的‘物自体残核’”是本书的哲学诠释，不是米田引理本身的陈述。）
 :::
 
-在 `trureturing` 的概念动力学、黄金量化编码与自动机模块中（对照 [@rem-ch39-kant-yoneda-lemma-literature] 的文献背景），我们无需赊借抽象高阶范畴公理，便能直接用三条经过 Lean 4 内核机械检验的定理，把“客体由读出纤维无余项拼回”“连续统非负实数由离散黄金读出全线程唯一单射锁定”与“有限字被基底自动机接受当且仅当无相邻 `11`”铸成严丝合缝的形式化铁三角：
+在 `trureturing` 的概念动力学、黄金量化编码与自动机模块中（对照 [@rem-ch39-kant-yoneda-lemma-literature] 的文献背景），我们无需赊借抽象高阶范畴公理，便能直接用三条经过 Lean 4 内核机械检验的定理，把“客体由读出纤维无余项拼回”“连续统非负实数由离散黄金读出全线程唯一单射锁定”与“有限字被基底自动机接受当且仅当无相邻 `11`”列在一起（三条彼此独立，各自只担保自己的陈述）：
 
 ::: {.theorem #thm-ch39-fiber-reconstruction-and-zeckendorf-thread title="概念读出依值纤维分解、齐肯多夫实数全线程单射重构与无相邻一自动机定理" lean="D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes"}
 在 `trureturing` 冻结的概念纤维分解、观察者黄金实数线程与二元齐肯多夫自动机模块中，以下三项重构与语法刻画定理同时成立：
@@ -58,13 +58,13 @@
 
 现在，请把 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 的三束强光聚焦回我们的切投模型集宇宙（`MODEL`（模型诠释）），见证全书教学脚手架的一次彻底倒转！
 
-在前面几章里，为了照顾初学者的几何直觉，我们曾采用“先晶后刀”的叙述次序：仿佛虚空里先静静摆着一座六维整数母晶格 $\mathbb{Z}^6 \hookrightarrow \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$，然后观察者的黄金切投平面像一把锋利的钢刀切进去，切出满天 Delone 模型集星辰。此刻，站在 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 的峰顶回望，真相恰恰颠倒过来——**无刀则无晶，关系即实体！**
+在前面几章里，为了照顾初学者的几何直觉，我们曾采用“先晶后刀”的叙述次序：仿佛虚空里先静静摆着一座六维整数母晶格 $\mathbb{Z}^6 \hookrightarrow \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$，然后观察者的黄金切投平面像一把锋利的钢刀切进去，切出满天 Delone 模型集星辰。此刻，借 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 回望，本书模型把这个次序颠倒过来读——**无刀则无晶，关系即实体！**
 
 ::: {.figure src="ch39-no-knife"}
 **先晶后刀只是脚手架；刀切到哪里，晶格点才亮到哪里。** 这是本章六维切投图景的二维示意（`MODEL`）。两栏里同一把琥珀色的刀以斜率 $1/\varphi$ 穿过平面，淡青的带子是它的窗口。左栏先画满灰色的整数点阵，再把刀盖上去；右栏不画点阵，只有带子里的青色点。右栏下方把这些点投到刀上：长段与短段之比是 $\varphi$，短段记 $1$、长段记 $0$，读出 `01001010010`，没有相邻的 `11`，正是 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 第 3 款的自动机所接受的字。
 :::
 
-- 第 1 款与第 2 款联合宣告：哪怕面对看似深不可测的连续统实数 $x \in \mathbb{R}_{\ge 0}$，只要给定它在每一级黄金放大镜 $\varphi^{\mathrm{level}}$ 下的离散齐肯多夫读出字序列，原实数就被**百分之百唯一重构**，背后连一丝一毫逃逸在读出关系之外的“物自体暗物质”都不存在；
-- 第 3 款精确刻画有限字的合法语法；将这一语法接到投影与晶格之后，我们在 `MODEL` 中进一步点破“整数晶格”的身世：所谓高维晶格的离散超平面，根本不是预先浇筑在那里的钢筋水泥，而是自指观察算子在反复执行两子正交比量时，由幂等存在条件 $P^2 = P$ 与禁止相邻 `11` 高频碰撞（`NoAdjacentOnes`）自动干涉沉淀出来的**离散驻波节面（nodal surfaces）**！不是先有水晶再下刀，而是**自我丈量的刀光所到之处，虚空才应声凝结为晶格**。
+- 第 2 款说明：哪怕面对看似深不可测的连续统实数 $x \in \mathbb{R}_{\ge 0}$，只要给定它在每一级黄金放大镜 $\varphi^{\mathrm{level}}$ 下的离散齐肯多夫读出字序列，原实数就被**唯一重构**（这对任何底数 $\beta > 1$ 的放大序列都成立，黄金比并无特殊）；本书把这读作“没有读数之外的内核”的一个数学类比。第 1 款则不表达“读数决定对象”：$X \simeq \sum_b \operatorname{ConceptFiber}(q_C, b)$ 对任何读出 $q_C$（包括常值映射）都成立，读数 $b$ 之外的全部信息原样留在纤维里；
+- 第 3 款精确刻画有限字的合法语法；将这一语法接到投影与晶格之后，我们在 `MODEL` 中提出一种关于“整数晶格”身世的读法：把高维晶格的离散超平面看作自指观察算子在反复执行两子正交比量时，由幂等存在条件 $P^2 = P$ 与禁止相邻 `11` 高频碰撞（`NoAdjacentOnes`）干涉沉淀出来的**离散驻波节面（nodal surfaces）**，而不是预先浇筑在那里的钢筋水泥。这是诠释，不是推论：切投构造本身仍以晶格为输入，上面三款也不推出晶格。在这幅图景里，不是先有水晶再下刀，而是**自我丈量的刀光所到之处，虚空才应声凝结为晶格**。
 
 ---

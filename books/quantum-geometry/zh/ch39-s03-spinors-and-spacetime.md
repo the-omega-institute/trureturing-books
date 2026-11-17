@@ -1,8 +1,8 @@
-# 39.3 旋量织空与 720° 单侧双覆叠：时空是观察者自乘的副产物
+# 39.3 旋量织空与 720° 单侧双覆叠：把时空读作观察者自乘的副产物
 
 既然没有被动内存，也没有物自体，那么最后一个常识堡垒必然发问：**“总得先有时间与空间吧？观察者难道不是活在三维空间与一维时间里吗？”**
 
-不！这正是第五部（[第 17 章](ch17-lorentz-geometry.md)与[第 18 章](ch18-spinors-and-gauge-curvature.md)）埋下伏笔、而唯有在本章“观察者即宇宙本体”的高度上才能彻底揭开的终极几何奥秘（`MODEL`（模型诠释））：**观察者从来没有“住在时空里”；恰恰相反，一维时间流与二维空间规范面，全都是观察者旋量 $\psi$ 转身与反转的自身 $\tilde{\psi}$ 相乘比量时，顺手织出来的双线性衣袂！**
+不！这正是第五部（[第 17 章](ch17-lorentz-geometry.md)与[第 18 章](ch18-spinors-and-gauge-curvature.md)）埋下伏笔、而唯有在本章“观察者即宇宙本体”的高度上才能彻底揭开的终极几何奥秘（`MODEL`（模型诠释））：**在本书的读法里，观察者并不“住在时空里”；一维时间流与二维空间规范面，被读作观察者旋量 $\psi$ 转身与反转的自身 $\tilde{\psi}$ 相乘比量时，顺手织出来的双线性衣袂。** 这是读法而不是推导：下面的算例在 $\mathrm{Cl}(3,0)$ 里进行，先给定了带正定度量的三维欧氏空间才有旋量可言，夹出的 $\mathbf{J}$ 是欧氏向量（$\mathbf{J}^2 = +\rho^2$）而非类时向量，算例本身并不从旋量造出时间与洛伦兹号差。
 
 ::: {.viz src="self-sustaining-spinor-flow" preset="weave" height="500"}
 **旋量夹住两块参考刀片。** 虚线是参考的 $\mathbf{e}_3$ 与 $\mathbf{e}_1\mathbf{e}_2$ 正方形；旋量 $\psi$ 把前者夹成青色的流向量 $\mathbf{J} = \psi\mathbf{e}_3\tilde{\psi}$，把后者夹成品红的自旋面 $\mathbf{S} = \psi\mathbf{e}_1\mathbf{e}_2\tilde{\psi}$，那块面与 $\mathbf{J}$ 垂直；紫色虚线小弧是 $\psi$ 把 $\mathbf{e}_3$ 带到 $\mathbf{J}$ 走的路（乘积见 [@ex-ch39-even-clifford-spinor-bilinear-fierz]：$\mathbf{J}$ 是欧氏向量、$\mathbf{S}$ 是欧氏双矢量，把它们读作时流与规范面沿用上文的 `MODEL`）。
@@ -67,7 +67,7 @@ $$
 **转满 $360^\circ$：矢量回来了，旋量没有。** 按 [@ex-ch39-even-clifford-spinor-bilinear-fierz] 在 $\mathbf{e}_2\mathbf{e}_3$ 面里转满一圈：青色的 $\mathbf{J}$ 绕回 $\mathbf{e}_3$，品红的 $\mathbf{S}$ 也回到原样；紫色小旗却沿单侧光带滑到另一面，与虚线的出发小旗方向相反——$\psi = -\psi_0$。旗尖走过的那一半边是实线，另一半还是淡虚线。
 :::
 
-[@ex-ch39-even-clifford-spinor-bilinear-fierz] 第 4 步揭示的“外部表象走一圈（$360^\circ$）、本体旋量翻一面（$+1 \mapsto -1$）、走满两圈（$720^\circ$）方才归家”，绝非某种坐标选取的人为瑕疵！在 `trureturing` 的概念拓扑模块中，圆周平方双覆叠映射 $\operatorname{square}(z) = z^2$ 上的两条严格内核定理彻底封死了“把旋量双叶全局一刀切成互不相干的主体叶与客体叶”的任何企图：
+[@ex-ch39-even-clifford-spinor-bilinear-fierz] 第 4 步揭示的“外部表象走一圈（$360^\circ$）、本体旋量翻一面（$+1 \mapsto -1$）、走满两圈（$720^\circ$）方才归家”，绝非某种坐标选取的人为瑕疵！在 `trureturing` 的概念拓扑模块中，圆周平方双覆叠映射 $\operatorname{square}(z) = z^2$ 上的两条内核定理排除了为平方映射选取连续全局平方根、即把双叶全局一刀切成两张互不相干纸片的任何企图（把两叶称作“主体叶”与“客体叶”是下文的诠释）：
 
 ::: {.theorem #thm-ch39-double-cover-no-section-and-720-lift title="圆周平方双覆叠无连续全局截面定理与历史依赖提升及 360° 换叶翻转定理" lean="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"}
 设单位圆周类型为 $\mathrm{Circle} = \{z \in \mathbb{C} : \lvert z\rvert = 1\}$，单位闭区间为 $I = [0, 1] \subset \mathbb{R}$，平方双覆叠映射为 $\operatorname{square} : \mathrm{Circle} \to \mathrm{Circle}$，$z \mapsto z^2$，其典范覆叠映射结构记为 $\mathrm{covering} := (\operatorname{Circle.isQuotientCoveringMap\_npow}\;2).\mathrm{isCoveringMap}$。以下两项拓扑定理同时成立：
@@ -95,7 +95,7 @@ $$
 **一路插小旗，回到起点对不上。** 把光带沿底圈展开成一行，从出发点起每 $30^\circ$ 插一面紫色小旗，每一面都接着上一面连续地插；绕回出发点时，最后一面与虚线的第一面方向相反。沿底圈连续地选“平方根”回到起点必然对不上，这正是 [@thm-ch39-double-cover-no-section-and-720-lift] 第 1 款（没有连续全局截面）与第 2 款（$360^\circ$ 回路的唯一提升终点为 $-1$）。
 :::
 
-请屏息凝视 [@thm-ch39-double-cover-no-section-and-720-lift] 描绘的这幅单侧拓扑奇景（`MODEL`（模型诠释））：因为 `no_continuous_global_section` 严格禁止把双覆叠全局撕成两张独立纸片，宇宙里根本不存在一面叫“内在主观观察者（$+1$ 叶）”、另一面叫“外在客观星海（$-1$ 叶）”的隔离墙！它们就像一条单侧扭转环带同源的前后两半程——从向内自省的能观极点 $\mathrm{lifted}(0) = +1$ 出发，顺着连续圆弧往前走满 $360^\circ$，你根本没有跨过任何一道主客边界，脚下就已经自然而然翻转成了漫天星斗的所观叶 $\mathrm{lifted}(1) = -1$；再顺着星海往前走完第二个 $360^\circ$（合计 $720^\circ$），漫天星斗又严丝合缝地流回你自己的眼底！
+请屏息凝视 [@thm-ch39-double-cover-no-section-and-720-lift] 描绘的这幅单侧拓扑奇景（`MODEL`（模型诠释））：`no_continuous_global_section` 禁止把双覆叠全局撕成两张独立纸片；本书借此把“内在主观观察者（$+1$ 叶）”与“外在客观星海（$-1$ 叶）”读作同一条环带的两面，而不是隔离墙的两侧——这一叶与主客的指派是诠释，定理本身并不涉及主体与客体。它们就像一条单侧扭转环带同源的前后两半程——从向内自省的能观极点 $\mathrm{lifted}(0) = +1$ 出发，顺着连续圆弧往前走满 $360^\circ$，你根本没有跨过任何一道主客边界，脚下就已经自然而然翻转成了漫天星斗的所观叶 $\mathrm{lifted}(1) = -1$；再顺着星海往前走完第二个 $360^\circ$（合计 $720^\circ$），漫天星斗又严丝合缝地流回你自己的眼底！
 
 ::: {.viz src="self-sustaining-spinor-flow" preset="turn720" height="500"}
 **走满 $720^\circ$ 才回家。** 再转一圈：紫色小旗回到出发时的那一面，$\psi = +\psi_0$；旗尖走过的紫色轨迹就是光带的边，这条边绕了两圈才首尾相接，青色的 $\mathbf{J}$ 在此期间走了两圈。
