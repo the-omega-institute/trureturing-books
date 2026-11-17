@@ -1957,6 +1957,14 @@
       "line": 528,
       "signature": "noncomputable def rvpOf (ψ : ℋ) (σ : ℝ) : ℋ"
     },
+    "D5/S3/Divergence/CoherenceL1RelativeEntropyBound.result": {
+      "module": "D5/S3/Divergence/CoherenceL1RelativeEntropyBound",
+      "name": "D5.S3.Divergence.CoherenceL1RelativeEntropyBound.result",
+      "kind": "theorem",
+      "statement_id": "sha256:4fd64d7dbc92bb0134150c8bacfdbe38cf3c078e8eb4380e3a295429c085c978",
+      "line": 636,
+      "signature": "theorem result : claim"
+    },
     "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance": {
       "module": "D5/S3/DivergenceSupport/LandauerBound",
       "name": "D5.S3.DivergenceSupport.LandauerBound.landauer_bound_of_balance",
@@ -5804,6 +5812,14 @@
       "statement_id": "sha256:f1def1d45a7ded5fabde68f7c2080b1b30564fff83957726a06255dc4ca220a4",
       "line": 51,
       "signature": "theorem parry_stationary_law (k : ℕ) (hk : 2 ≤ k) : let p"
+    },
+    "D5/S3/TotalVariation/Pinsker.pinsker_inequality": {
+      "module": "D5/S3/TotalVariation/Pinsker",
+      "name": "D5.S3.TotalVariation.Pinsker.pinsker_inequality",
+      "kind": "theorem",
+      "statement_id": "sha256:6bf07124e9b609fb715e2bc717ac79c4525a423b07fee29631bf6814c46d89b6",
+      "line": 258,
+      "signature": "theorem pinsker_inequality {ι : Type*} [Fintype ι] (p q : ι → ℝ) (hp : (∀ i, 0 ≤ p i) ∧ ∑ i, p i = 1) (hq : (∀ i, 0 ≤ q i) ∧ ∑ i, q i = 1) (hac : ∀ i, q i = 0 → p i = 0) : 2 * (totalVariation p q) ^ 2 ≤ klDivergence p q"
     },
     "D5/S3/Weil/Convention.classicalZeta": {
       "module": "D5/S3/Weil/Convention",

@@ -287,6 +287,8 @@ Stepping back across the entire audit table ([@rem-appe-master-audit-table]), th
 
 The table in E.7 records `H2` as three parallel Layer-1 conditions: positive self-pairing, the elliptic negative square of a rank-$2$ bivector, and Gram positive semidefiniteness for any number of points. `H3` then adds parallelogram polarization. This section goes through the same accounts with the chord–sagitta decomposition of [Chapter 34 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes). The outcome is that the four items are not independent. When the similarity readings are real scalars, the three items of `H2` follow from two more primitive conditions: **third-point redundancy** (comparing $x$ with $z$ is not changed by routing through a third point $y$) and **positivity of the involution** (the round trip of a nonzero difference is neither zero nor negative). The polarization item of `H3` follows from third-point redundancy together with one positive reading. E.8.5 adds a restatement of `H5` on a qubit: among probability rules that see only pairwise comparison, the Born rule is the one of minimal tomographic rank. E.8.6 and E.8.7 use the same notation to examine `H6` and `H7`: invertibility of the evolution, continuity in time, the generator and conditioning, and then the parameter count of composites and exchange statistics. These two subsections add no clause; they only recast the inputs in terms of compared objects and readings, and use models satisfying every clause to mark the boundaries. E.8.8 applies comparison to ensembles: when every object has an opposite, Gram positivity for any number of points is equivalent to "every ensemble has a nonnegative averaged similarity with itself"; `H5` on a qubit can be replaced by ensemble extensionality, which in the `MODEL` reading is Clause I applied to ensembles. E.8.9 reads the record of comparisons of one object along time: the rank of the record counts energy levels, an object whose ray sagitta stays away from zero shows that the state space is infinite-dimensional, which gives `H4` a criterion in terms of readings without deriving it; only the two channels together fix the Hamiltonian on the orbit (`H6`).
 
+E.8.10–E.8.12 treat three inputs that the ledger still lists. E.8.10 applies the sagitta table of E.8.1 to comparisons between observers in $1+1$ dimensions: dropping the positivity condition does not yet select the Lorentz signature; two further statements are needed, "repeating the same comparison never reverses the order in time" and "the difference part is not square-zero", and for a single comparison the positivity condition and the first of these cannot hold together. E.8.11 gives exact identities and two-sided bounds for the entropy gain under a unit-preserving pinching. E.8.12 shows that for a quadratic action the finite-step path product equals the leading stationary-phase term exactly; for general actions only explicit one-dimensional cancellation bounds remain, and the continuum-time limit is a literature result or an input.
+
 The boundary first. Both conditions are added on top of $\mathcal{A}_0$. What is proved here is "if they are added, then the rest follows"; nothing here claims they can be derived from Clauses I–III, and the countermodels of [@ex-appe-layer0-countermodels] show they cannot. The theorem boxes of this section all correspond to frozen theorems. Every other derivation is marked `manual derivation`, and classical results that are quoted are marked `Literature`.
 
 ### E.8.1 One Pair: Chord and Sagitta Are Already Locked at Layer 0 {#sec-appe-chord-sagitta-layer0}
@@ -343,6 +345,8 @@ So the item "elliptic negative square" of `H2` can be replaced by a sentence tha
 Those two branches are not pathological models. Regard the $2\times2$ complex matrices as a real algebra and take the classical adjugate $a^\sharp=\operatorname{tr}(a)\mathbf{1}-a$ as the involution. Then $aa^\sharp=\det(a)\mathbf{1}$, the elements with $uu^\sharp=\mathbf{1}$ are exactly $\mathrm{SL}(2,\mathbb{C})$, the similarity part $S=\frac12\operatorname{tr}(u)\mathbf{1}$ of every such $u$ is automatically a central scalar, and the sagitta $v=1-\frac12\operatorname{tr}u$ is a complex number (`manual derivation`). The classical classification of Möbius transformations by their trace (`Literature`) reads as follows in terms of the sagitta: for $u\neq\pm\mathbf{1}$, the class is elliptic when $v\in(0,2)$, parabolic when $v\in\{0,2\}$, hyperbolic for every other real $v$, and loxodromic when $v\notin\mathbb{R}$. The generators of countermodel (b) all live here: $\varepsilon\mapsto\begin{pmatrix}0&1\\0&0\end{pmatrix}$, $j\mapsto\operatorname{diag}(1,-1)$, and the elliptic generator $\mapsto\operatorname{diag}(i,-i)$. All three satisfy $g^\sharp=-g$, and their squares are $0$, $+\mathbf{1}$ and $-\mathbf{1}$. The frozen theorem [`elliptic_hyperbolic_reflection_trichotomy`](lean:D5/S3/Analytic/ReflectedSpectrum/EllipticHyperbolicReflectionTrichotomy.elliptic_hyperbolic_reflection_trichotomy) gives the traces, determinants and squares of the hyperbolic form $\operatorname{diag}(\delta,-\delta)$ and the elliptic form $\begin{pmatrix}0&-\gamma\\\gamma&0\end{pmatrix}$ among real $2\times2$ traceless generators; its middle case is the zero matrix, so the nonzero nilpotent parabolic generator is not covered by that theorem. This algebra carries no normalized functional with $\varphi(a^\sharp a)\ge0$ (for $a=\operatorname{diag}(1,-1)$ one has $a^\sharp a=-\mathbf{1}$), so the reading argument of E.8.3 does not apply to it.
 
 $\mathrm{SL}(2,\mathbb{C})$ acts on Hermitian matrices $X=t\mathbf{1}+\mathbf{x}\cdot\boldsymbol\sigma$ by $X\mapsto uXu^\dagger$ and preserves $\det X=t^2-\lvert\mathbf{x}\rvert^2$; this is the spinor covering of the Lorentz group (`Literature`). The theorem [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null), already cited in E.6, says that the null cone fixes the quadratic form up to one scalar. If fairness is also required for the Hermitian adjoint ($uu^\dagger=\mathbf{1}$), what remains is $\mathrm{SU}(2)$, which contains only elliptic classes. This gives one reading that covers both `H2` and `H8` (`MODEL`): **the parabolic and hyperbolic branches left open at Layer 0 are the null rotations and boosts of Lorentz transformations; choosing the elliptic signature and choosing the Lorentz signature are the two answers to one question, whether the involution of a single algebra is required to be positive.**
+
+E.8.10 works this reading out ([@rem-appe-rotor-boost-coexistence]). Taking the positivity condition selects the elliptic row. Merely dropping it does not select the Lorentz signature: the time-order condition and "the difference part is not square-zero" are needed as well, and for a single comparison $u\neq\mathbf{1}$ the positivity condition and the time-order condition cannot both hold. So "taking or dropping" means choosing different rows of one three-way table for different comparisons.
 
 Applied to the difference part of a single comparison, the positivity condition has an equivalent form that speaks only of repeated comparison.
 
@@ -947,10 +951,291 @@ The same record also answers a question left by E.8.6: to what extent the Hamilt
 
 The ledger of E.8.6 records the Hamiltonian $H$ as an input that remains. This remark makes the statement precise: **on the space spanned by an orbit, $H$ is not an input beyond the readings; the complete record of the orbit in both channels determines it up to unitary equivalence.** Reading only the similarity channel loses more than the direction of time: it loses the sign of every level. Reading only the Born weights of the ray already leaves a genuine ambiguity with three levels. Similarity readings and Born weights together leave exactly the overall sign of the difference channel, which is time reversal. Clause II splits comparison into a similarity channel and a difference channel, and in dynamics neither can be dropped. What remains an input is the choice of orbit and the action of $H$ outside $\mathcal{K}$.
 
-### E.8.10 What Changes in the Ledger {#sec-appe-reduced-ledger}
+### E.8.10 Comparisons between Observers: Time Order Selects the Hyperbolic Row {#sec-appe-observer-comparison}
+
+Now let the objects of comparison be inertial observers in $1+1$ dimensions, each with its own coordinates $(t,x)$. For observers $o,o'$, let $\Lambda_{o\leftarrow o'}$ convert the coordinates of an event in $o'$ into its coordinates in $o$, and put $\mathrm{CMP}(o,o')=\Lambda_{o\leftarrow o'}$, with values in the real $*$-algebra $(M_2(\mathbb{R}),{}^\sharp)$ used in E.8.1, $a^\sharp=\operatorname{tr}(a)\mathbf{1}-a$, $aa^\sharp=\det(a)\mathbf{1}$. That coordinate changes are linear is an input here (`MODEL`); [@rem-appe-causal-order-linearity] shows that in $1+1$ dimensions it cannot be derived from the causal order.
+
+Here Clause III says $\det\Lambda_{o\leftarrow o'}=1$, and then Clause II only says that the reverse change is the inverse; the similarity part $S=\frac12\operatorname{tr}(\Lambda)\mathbf{1}$ is always a real scalar, so the sagitta table of E.8.1 applies directly. Write $\Lambda_{o\leftarrow o'}=\begin{pmatrix}a&b\\c&d\end{pmatrix}$. The origin of $o'$, $(\tau,0)$, is $(a\tau,c\tau)$ in $o$, so for $a\neq0$ the velocity reading of $o'$ relative to $o$ is $v(o,o')=c/a$; from the inverse matrix, $v(o',o)=-c/d$ for $d\neq0$.
+
+::: {.remark #rem-appe-frame-change-family title="The One-Parameter Family of Observer Comparisons: the Three Signs of K Are the Three Rows of the Sagitta Table (Manual Derivation and Literature)"}
+**Manual derivation.** Let $V$ be the set of velocity readings of all pairs of observers. Assume:
+
+1. Clause III: $\det\Lambda_{o\leftarrow o'}=1$ for every pair of observers;
+2. antisymmetric velocity readings: for every pair, $a\neq0$ and $v(o',o)=-v(o,o')$;
+3. one law: there is a map $L:V\to M_2(\mathbb{R})$ with $\Lambda_{o\leftarrow o'}=L(v(o,o'))$ for every pair, and $L(v)L(v')\in L(V)$ for $v,v'\in V$;
+4. $V$ contains a nonzero element.
+
+Then $0=v(o,o)\in V$, $L(0)=\mathbf{1}$, and there is a constant $K\in\mathbb{R}$ such that for every $v\in V$
+
+$$
+L(v)=\gamma(v)\begin{pmatrix}1&Kv\\v&1\end{pmatrix},\qquad \gamma(v)^2\left(1-Kv^2\right)=1;
+$$
+
+the sign of $\gamma(v)$ is not fixed by these assumptions. If $L(v)L(v')=L(w)$, then $1+Kvv'\neq0$, $w=\dfrac{v+v'}{1+Kvv'}$ and $\gamma(w)=\gamma(v)\gamma(v')(1+Kvv')$. Moreover
+
+$$
+S=\gamma\,\mathbf{1},\qquad A=\gamma\begin{pmatrix}0&Kv\\v&0\end{pmatrix},\qquad A^2=\gamma^2Kv^2\,\mathbf{1}=(\gamma^2-1)\,\mathbf{1},
+$$
+
+and the sagitta is $1-\gamma$. So for $v\neq0$, $K<0$, $K=0$ and $K>0$ fall in the elliptic, parabolic and hyperbolic rows of the table of E.8.1.
+
+Derivation: take $v\in V$, $v\neq0$, $L(v)=\begin{pmatrix}a&b\\c&d\end{pmatrix}$, $c=av\neq0$. Since $v$ is the velocity reading of some pair of observers, item 2 applied to that pair gives $c/a=c/d$, so $a=d$. Item 1 gives $a^2-bc=1$, so $b=K(v)\,va$ with $K(v)=\dfrac{a^2-1}{a^2v^2}$, and $a^2(1-K(v)v^2)=1$. For $v,v'\in V\setminus\{0\}$, item 3 gives $L(v)L(v')=L(w)$ with $w\in V$, whose two diagonal entries are equal (by the previous step when $w\neq0$; it is $\mathbf{1}$ when $w=0$). These diagonal entries are $\gamma(v)\gamma(v')(1+K(v)vv')$ and $\gamma(v)\gamma(v')(1+K(v')vv')$, so $K(v)=K(v')$. The diagonal entries of $L(w)$ are nonzero, which is $1+Kvv'\neq0$; the composition law is the ratio of the first entry of the second row to the first entry of the first row of the product.
+
+How the assumptions correspond to the classical derivation: linearity (homogeneity) is the value algebra $M_2(\mathbb{R})$; the relativity principle is item 3, where Clause IV gives only $\Lambda_{o\leftarrow o'}\Lambda_{o'\leftarrow o''}=\Lambda_{o\leftarrow o''}$, and closure also needs every velocity in $V$ to be available from every observer; the reciprocity principle is item 2, which says that velocity is a difference reading; "no dilation", which the classical derivation obtains from reciprocity and isotropy, is given here directly by Clause III, so isotropy does not appear.
+
+**Literature result.** The family with one constant $K$, obtained from the relativity principle without using light: P. Frank and H. Rothe, *Ann. Phys.* **339**, 825–855 (1911); J.-M. Lévy-Leblond, *Am. J. Phys.* **44**, 271–277 (1976) (homogeneity, isotropy, group structure and causality leave only the Lorentz transformations and their Galilean limit); N. D. Mermin, *Am. J. Phys.* **52**, 119–124 (1984). Reciprocity derived from the relativity principle, homogeneity of space-time and isotropy of space: V. Berzi and V. Gorini, *J. Math. Phys.* **10**, 1518–1524 (1969).
+:::
+
+The sign of $K$ is still open. The next remark says what excludes $K<0$ and what separates $K=0$ from $K>0$.
+
+::: {.remark #rem-appe-time-order-repetition title="Repeating a Comparison Never Reverses the Order in Time Exactly When the Similarity Reading Is at Least 1 (Manual Derivation)"}
+**Manual derivation.** Let $\mathcal{A}$ be a real $*$-algebra and $uu^*=u^*u=\mathbf{1}$, with similarity reading $S=s\mathbf{1}$.
+
+1. For every $n\ge0$, $S(u^n)=T_n(s)\,\mathbf{1}$.
+2. $T_n(s)>0$ for every $n\ge1$ if and only if $s\ge1$. For $-1<s<1$, write $s=\cos\alpha$ with $0<\alpha<\pi$; the least $n$ with $T_n(s)<0$ is $\lfloor\frac{\pi}{2\alpha}\rfloor+1$.
+3. In the family of [@rem-appe-frame-change-family], for $v\neq0$: $K>0$ if and only if $L(v)$ has two distinct real invariant lines; they are $x=\pm t/\sqrt{K}$, the same for every $v$. The line $t=0$ is invariant if and only if $K=0$. $A^2=0$ if and only if $K=0$.
+
+Derivation: item 1 follows from [@rem-appe-bounded-recurrence], $u^n=T_n(s)\mathbf{1}+U_{n-1}(s)A$ and $(u^n)^*=u^{-n}=T_n(s)\mathbf{1}-U_{n-1}(s)A$, by averaging. Item 2: for $s=\cosh\eta\ge1$, $T_n(s)=\cosh n\eta\ge1$; for $s\le-1$, $T_1(s)=s<0$; for $-1<s<1$, $T_n(s)=\cos n\alpha$, which is not negative for $n\le\frac{\pi}{2\alpha}$, while $n_0=\lfloor\frac{\pi}{2\alpha}\rfloor+1$ satisfies $\frac\pi2<n_0\alpha\le\frac\pi2+\alpha<\frac{3\pi}2$. Item 3: the eigenvalues of $L(v)$ are $\gamma(1\pm\sqrt{K}\,v)$; for $K>0$ the eigenvectors are $(1,\pm1/\sqrt{K})^{\mathsf T}$; for $K<0$ the eigenvalues are not real; for $K=0$, $L(v)=\gamma(\mathbf{1}+vN)$ with $N=\begin{pmatrix}0&0\\1&0\end{pmatrix}$, $N^2=0$, and the only real invariant line is spanned by $(0,1)^{\mathsf T}$; in general $L(v)(0,1)^{\mathsf T}=\gamma(Kv,1)^{\mathsf T}$.
+
+In the observer model (a `MODEL` reading), $S(\Lambda_{o\leftarrow o'})=a$ is the $o$-time of the event "one unit of $o'$-time has passed at the origin of $o'$". Say that the **time-order condition** holds if $S(u^n)>0$ for every comparison $u$ and every $n\ge1$: applying the same change of frame $n$ times, a later event at the origin is still later. By item 2 this is equivalent to $\gamma(v)\ge1$ for every $v$, that is, $K\ge0$ and $\gamma(v)>0$ for all $v$. For $K<0$ and $\gamma(v)>0$, put $\tan\alpha=\sqrt{-K}\,\lvert v\rvert$ with $0<\alpha<\frac\pi2$. In the coordinates $(t,\sqrt{-K}\,x)$, $L(v)$ is a rotation by $\alpha$, $S(L(v)^n)=\cos n\alpha$, and the first negative value occurs at $n=\lfloor\frac{\pi}{2\alpha}\rfloor+1$. If $n\alpha=\frac\pi2$ for some $n$, then $S(L(v)^n)=0$ and the velocity reading $c/a$ of that step is undefined; this is the case $1+Kvv'=0$ of the composition law.
+
+By item 3, under the time-order condition the following are equivalent: $K>0$; there is a finite speed $1/\sqrt{K}$ that is invariant for all observers; for $v\neq0$ the difference part is not square-zero. $K=0$ is the Galilean case: simultaneity is invariant under comparison, and the difference part $\gamma vN$ is square-zero.
+:::
+
+So the time-order condition excludes the elliptic row (and comparisons with $s\le-1$), "the difference part is not square-zero" then excludes the parabolic row, and together they select the hyperbolic row with $s>1$. The difference part satisfies $A^*=-A$, so $A^2=0$ means $A^*A=0$; the second statement is therefore the special case, for difference parts, of "no nonzero $a$ satisfies $a^*a=0$" in [@rem-appe-positivity-invisible-part]. The algebra $(M_2(\mathbb{R}),{}^\sharp)$ has no states ($a=\operatorname{diag}(1,-1)$ gives $a^\sharp a=-\mathbf{1}$), so the conclusions about readings there do not apply here.
+
+::: {.remark #rem-appe-rotor-boost-coexistence title="Bounded and Order-Preserving Are Complementary Selections: Rotations and Boosts Live in One Algebra (Manual Derivation and Literature)"}
+**Manual derivation.** Let $u\neq\mathbf{1}$, $uu^*=u^*u=\mathbf{1}$, $S=s\mathbf{1}$. On $\mathbb{R}[A]=\operatorname{span}\{\mathbf{1},A\}$ one has $(x+yA)^*(x+yA)=\left(x^2-y^2(s^2-1)\right)\mathbf{1}$; together with [@rem-appe-bounded-recurrence] and [@rem-appe-time-order-repetition] this gives:
+
+| Row | $s$ | positivity condition on $\mathbb{R}[A]$ (equivalent to bounded integer powers) | time-order condition | $A^2\neq0$ |
+| :--- | :--- | :---: | :---: | :---: |
+| elliptic | $-1<s<1$ | holds | fails | holds |
+| parabolic | $s=1$, $A\neq0$ | fails | holds | fails |
+| parabolic | $s=-1$, $A\neq0$ | fails | fails | fails |
+| $u=-\mathbf{1}$ | $s=-1$, $A=0$ | holds | fails | — |
+| hyperbolic | $s>1$ | fails | holds | holds |
+| hyperbolic | $s<-1$ | fails | fails | holds |
+
+So no $u\neq\mathbf{1}$ satisfies both conditions; the positivity condition alone selects the elliptic row (plus $-\mathbf{1}$); the time-order condition together with $A^2\neq0$ selects the hyperbolic row with $s>1$. `H2` and `H8` use the same three-way table but select different rows for different comparisons: comparisons between directions and states take the bounded row, comparisons between observers take the order-preserving row.
+
+Both can live in one algebra.
+
+1. In $\mathrm{Cl}(p,q)$ with orthonormal $e_i$, $(e_ie_j)^2=-e_i^2e_j^2$ for $i\neq j$: this is $-1$ when $e_i^2$ and $e_j^2$ have the same sign and $+1$ otherwise. With reversion as the involution, $B=e_ie_j$ satisfies $B^*B=-B^2$. So the positivity condition holds on coordinate planes inside a definite block and fails on mixed planes. Signature $(1,d)$ has $\frac{d(d-1)}2$ spatial coordinate planes (rotations, elliptic) and $d$ space-time coordinate planes (boosts, hyperbolic).
+2. View $M_2(\mathbb{C})$ as a real $*$-algebra with the involution $\sharp$ of E.8.1; the elements with $uu^\sharp=\mathbf{1}$ form $\mathrm{SL}(2,\mathbb{C})$. On the quaternion subalgebra $\operatorname{span}_{\mathbb{R}}\{\mathbf{1},i\sigma_1,i\sigma_2,i\sigma_3\}$ one has $a^\sharp a=\lvert a\rvert^2\mathbf{1}$, so the positivity condition holds; $\sigma_3^\sharp\sigma_3=-\mathbf{1}$, so it fails as soon as one boost generator is added. Every $u\in\mathrm{SL}(2,\mathbb{C})$ is uniquely $u=kb$ with $k\in\mathrm{SU}(2)$, $\frac12\operatorname{tr}k\in[-1,1]$, and $b$ positive definite Hermitian with determinant $1$, $\frac12\operatorname{tr}b\ge1$. Repeating the rotation factor does not amplify; repeating the boost factor does not reverse the order in time.
+3. One time direction only. On $\mathbb{R}^p\times\mathbb{R}^q$ take $Q(a,b)=\lvert a\rvert^2-\lvert b\rvert^2$. The open cone $\{Q>0\}$ deformation-retracts onto $\mathbb{R}^p\setminus\{0\}$ through $(a,(1-\lambda)b)$, $0\le\lambda\le1$, so it is connected for $p\ge2$ and has exactly two components for $p=1$, exchanged by $w\mapsto-w$. The "future and past" that the time-order condition needs exist only for $p=1$. For $p\ge2$ the plane spanned by two time directions is definite, its rotations are the elliptic comparisons of item 1, and repeating one turns the time axis around.
+
+The step from null cone to quadratic form is carried by the frozen proposition [@prop-null-cone-rigidity]: as Chapter 17 explains after that proposition, a linear map $B$ that maps the null cone into itself satisfies $\operatorname{minkowski}_d(Bw)=\lambda\operatorname{minkowski}_d(w)$ with $\lambda=\operatorname{minkowski}_d(Be_0)$, for every $d\in\mathbb{N}$. Comparing Gram determinants gives $\det(B)^2=\lambda^{d+1}$. If $\det B=\pm1$: for $d\ge2$ a negative $\lambda$ would change the signature, so $\lambda=1$; for $d=1$, $\lambda=-1$ does occur (the rotation by $90^\circ$, with $\det B=1$), its similarity reading is $0$, and the time-order condition excludes it. The proposition does not say why a null cone exists (that is $K>0$), nor does it give linearity or the time orientation.
+
+**Literature result.** The polar decomposition of matrices, and $\mathrm{SL}(2,\mathbb{C})$ as the spin cover of the Lorentz group.
+:::
+
+What remains is linearity.
+
+::: {.remark #rem-appe-causal-order-linearity title="In 1+1 Dimensions the Causal Order Does Not Force Linearity (Manual Derivation and Literature)"}
+**Manual derivation.** In $1+1$ dimensions use the null coordinates $p=t+x$, $q=t-x$. An event $Y$ lies in the closed future cone of $X$ ($t_Y-t_X\ge\lvert x_Y-x_X\rvert$) if and only if $p_Y\ge p_X$ and $q_Y\ge q_X$. Hence for any two strictly increasing bijections $f,g:\mathbb{R}\to\mathbb{R}$, the map $(p,q)\mapsto(f(p),g(q))$ preserves the causal order in both directions; it is affine if and only if $f$ and $g$ are, and $f(s)=s+\frac12\sin s$, $g(s)=s^3+s$ are not. So in $1+1$ dimensions the linearity in [@rem-appe-frame-change-family] is an input.
+
+**Literature result.** E. C. Zeeman, *J. Math. Phys.* **5**, 490–493 (1964): the group of automorphisms of Minkowski space that preserve the causal partial order is generated by the inhomogeneous Lorentz group and dilations. The example above shows that this fails in $1+1$ dimensions; this book has not checked in which dimensions it holds.
+:::
+
+### E.8.11 Entropy Gain under Pinching: Exact Identities and Two-Sided Bounds {#sec-appe-pinching-entropy}
+
+Item 4 of E.6 uses [`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity) to show that a unit-preserving basis pinching makes the entropy gain a relative entropy, hence nonnegative. The question here is how large it is. Take projections $P_1,\dots,P_m$ on $\mathbb{C}^d$, pairwise orthogonal with sum $\mathbf{1}$, and put $\mathcal{P}(\rho)=\sum_kP_k\rho P_k$, $X=\rho-\mathcal{P}(\rho)$, the discarded coherence mass $c=\lVert X\rVert_2^2=\sum_{k\neq l}\lVert P_k\rho P_l\rVert_2^2$ ($\lVert\cdot\rVert_2$ the Hilbert–Schmidt norm), and the entropy gain $\Delta S=S(\mathcal{P}(\rho))-S(\rho)$, with entropies in natural logarithms. For a qubit in the standard basis, the Hilbert–Schmidt Pythagorean split and $c=\lvert\rho_{01}\rvert^2+\lvert\rho_{10}\rvert^2$ are frozen for every complex $2\times2$ matrix ([@thm-pinching-pythagorean]).
+
+::: {.remark #rem-appe-pinching-exact-identities title="Three Exact Identities for Block Pinching (Manual Derivation and Literature)"}
+**Manual derivation.** For every state $\rho$ and every block pinching:
+
+1. The purity drops by exactly the discarded mass: $\operatorname{tr}\rho^2-\operatorname{tr}\mathcal{P}(\rho)^2=c$, and $\operatorname{tr}(\rho\,\mathcal{P}(\rho))=\operatorname{tr}\mathcal{P}(\rho)^2$.
+2. $\Delta S=D(\rho\Vert\mathcal{P}(\rho))$.
+3. The second-order Rényi entropy $S_2(\sigma)=-\log\operatorname{tr}\sigma^2$ increases by $S_2(\mathcal{P}(\rho))-S_2(\rho)=-\log\left(1-\dfrac{c}{\operatorname{tr}\rho^2}\right)$.
+
+Derivation: item 1. $\mathcal{P}$ is idempotent and self-adjoint for $\langle A,B\rangle=\operatorname{tr}(A^*B)$, so $\langle\mathcal{P}(\rho),X\rangle=\langle\mathcal{P}(\rho),\rho\rangle-\langle\mathcal{P}(\rho),\mathcal{P}(\rho)\rangle=0$; expand $\langle\mathcal{P}(\rho)+X,\mathcal{P}(\rho)+X\rangle$. This is [@thm-pinching-pythagorean] in general dimension and for general blocks. Item 2: with $U_j=\sum_ke^{2\pi ijk/m}P_k$, orthogonality of roots of unity gives $\mathcal{P}(\rho)=\frac1m\sum_{j=0}^{m-1}U_j\rho U_j^*\ge\frac1m\rho$, so the support of $\rho$ lies in the support of $\mathcal{P}(\rho)$. Like $\mathcal{P}(\rho)$, $\log\mathcal{P}(\rho)$ (taken on the support) is block diagonal, and $\operatorname{tr}(\rho B)=\operatorname{tr}(\mathcal{P}(\rho)B)$ for block-diagonal $B$; hence $-\operatorname{tr}\rho\log\mathcal{P}(\rho)=S(\mathcal{P}(\rho))$, and it remains to substitute into $D(\rho\Vert\sigma)=-S(\rho)-\operatorname{tr}\rho\log\sigma$. Item 3 follows directly from item 1.
+
+Item 2 is frozen for rank-one basis pinching: it is the step $k=0$ of [`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity) with $U=\mathbf{1}$. There the entropy and relative entropy are defined with Mathlib's convention $\log0=0$; by the support inclusion above, this agrees with the usual definitions here.
+
+**Literature result.** Under basis pinching, $\Delta S$ is the relative-entropy measure of coherence: T. Baumgratz, M. Cramer and M. B. Plenio, *Phys. Rev. Lett.* **113**, 140401 (2014). The inequality $\mathcal{P}(\rho)\ge\rho/m$ is the pinching inequality: M. Hayashi, *J. Phys. A* **35**, 10759–10773 (2002).
+:::
+
+On the purity side the statement is exact: the purity drops by exactly the coherence mass that is discarded. On the entropy side the gain is not a function of $c$, but $c$ bounds it from below.
+
+::: {.remark #rem-appe-pinching-entropy-lower title="The Entropy Gain Is at Least the Discarded Coherence Mass; the Exact Range on a Qubit (Manual Derivation and Literature)"}
+**Manual derivation.**
+
+1. For every state and every block pinching,
+
+$$
+\Delta S\ \ge\ \tfrac12\lVert\rho-\mathcal{P}(\rho)\rVert_1^2\ \ge\ c .
+$$
+
+The constant $1$ in $\Delta S\ge c$ cannot be raised: for a qubit with $z=0$, $\Delta S/c\to1$ as $r\to0$.
+2. Pure states: $\Delta S=H(p)\ge-\log(1-c)$ with $p_k=\operatorname{tr}(P_k\rho)$. This fails for mixed states: for a qubit with $z=0$, $\Delta S=\frac{r^2}2+\frac{r^4}{12}+O(r^6)$, while $-\log(1-c)=\frac{r^2}2+\frac{r^4}8+O(r^6)$.
+3. For a qubit $\rho=\frac12(\mathbf{1}+\mathbf{r}\cdot\boldsymbol\sigma)$, $\mathbf{r}=(x,y,z)$, $r=\lvert\mathbf{r}\rvert\le1$, pinched in the eigenbasis of $\sigma_3$ (for $r=1$ the integral is a convergent improper integral):
+
+$$
+\Delta S=\int_{\lvert z\rvert}^{r}\operatorname{artanh}t\,dt,\qquad c=\frac{r^2-z^2}{2}=\int_{\lvert z\rvert}^{r}t\,dt,
+$$
+
+and for each $c\in(0,\frac12]$,
+
+$$
+\ln2-h\left(\frac{1+\sqrt{2c}}{2}\right)\ \le\ \Delta S\ \le\ h\left(\frac{1+\sqrt{1-2c}}{2}\right),
+$$
+
+where $h(q)=-q\ln q-(1-q)\ln(1-q)$; the lower end is attained by the state with $z=0$, the upper end by a pure state.
+
+Derivation: the first inequality of item 1 is the quantum Pinsker inequality (`Literature`) combined with item 2 of [@rem-appe-pinching-exact-identities]. The second: $X$ is Hermitian and traceless; with eigenvalues $\lambda_i$, the sum of the positive eigenvalues and the sum of the absolute values of the negative ones both equal $\frac12\lVert X\rVert_1$, so $\sum\lambda_i^2\le\left(\sum_{\lambda_i>0}\lambda_i\right)^2+\left(\sum_{\lambda_i<0}\lvert\lambda_i\rvert\right)^2=\frac12\lVert X\rVert_1^2$, with equality exactly when $X$ has at most one positive and one negative eigenvalue. Item 2: $\mathcal{P}(\lvert\psi\rangle\langle\psi\rvert)=\sum_kp_k\lvert\psi_k\rangle\langle\psi_k\rvert$ with pairwise orthogonal $\psi_k$, so $\Delta S=H(p)$ and $c=1-\sum p_k^2$; then use $H(p)\ge-\log\sum p_k^2$ (Jensen's inequality). Item 3: with $g(t)=h(\frac{1+t}2)$ one has $S(\rho)=g(r)$, $S(\mathcal{P}(\rho))=g(\lvert z\rvert)$ and $g'(t)=-\operatorname{artanh}t$. Fix $c$ and let $F(z)=g(z)-g(\sqrt{z^2+2c})$ on $0\le z\le\sqrt{1-2c}$; then $F'(z)=z\left(\frac{\operatorname{artanh}r}{r}-\frac{\operatorname{artanh}z}{z}\right)\ge0$ because $t\mapsto\operatorname{artanh}t/t$ is increasing, and the values at the two ends are the two bounds.
+
+**Numerical check (`NUM`).** On $6000$ random states of $d=2,3,4,5$ with random blocks and all ranks (fixed random seed), neither inequality of item 1 is violated, and the second holds with equality up to rounding in some cases; the closed form of item 3 agrees with numerical integration to $3\times10^{-14}$, and both ends are attained at $c=0.05,0.2,0.45$. The pure-state example of [Chapter 37 §37.5.2](ch37-s05-future-selection-and-deja-vu.md#sec-ch37-p2g-dream-precompile) ($\theta=\frac\pi6$, $c=\frac38$) sits at the upper end: $\Delta S=h(\frac34)\approx0.5623$ (that is, $0.8113$ bits).
+
+**Literature result.** The quantum Pinsker inequality $D(\rho\Vert\sigma)\ge\frac12\lVert\rho-\sigma\rVert_1^2$: F. Hiai, M. Ohya and M. Tsukada, *Pacific J. Math.* **96**, 99–109 (1981). The classical case is frozen as [`pinsker_inequality`](lean:D5/S3/TotalVariation/Pinsker.pinsker_inequality).
+:::
+
+On the upper side there is a frozen proposition for rank-one basis pinching.
+
+::: {.proposition #prop-appe-l1-coherence-bound title="Relative-Entropy Coherence Is at Most ℓ1 Coherence" lean="D5/S3/Divergence/CoherenceL1RelativeEntropyBound.result"}
+Let $n\in\mathbb{N}$ and let $\rho$ be a positive semidefinite complex $n\times n$ matrix with trace $1$. Put $S_{\mathrm{bit}}(\sigma)=-\operatorname{Re}\operatorname{tr}f(\sigma)$, where $f(x)=x\log_2x$, $f(0)=0$, and $f(\sigma)$ is given by the continuous functional calculus. Then
+
+$$
+S_{\mathrm{bit}}\left(\operatorname{diag}(\rho_{11},\dots,\rho_{nn})\right)-S_{\mathrm{bit}}(\rho)\ \le\ \sum_{i\neq j}\lvert\rho_{ij}\rvert .
+$$
+:::
+
+::: proof
+Split the basis pinching into $n$ steps; step $k$ is the binary pinching with the $k$-th coordinate projection $P$ and $\mathbf{1}-P$. A binary pinching is the average of $\sigma$ and its reflection $R\sigma R$ ($R=2P-\mathbf{1}$), so the entropy gain of the step is the quantum Jensen–Shannon divergence of the two; by the frozen binary Holevo bound it is at most $\frac12\lVert\sigma-R\sigma R\rVert_1=2\lVert P\sigma(\mathbf{1}-P)\rVert_1$. The matrix $P\sigma(\mathbf{1}-P)$ has rank one, and its trace norm is the Euclidean length of the piece of the row deleted in this step, which is at most the sum of the moduli of its entries; the factor $2$ accounts for row and column together. The entropy gains of the steps telescope to the left-hand side, and the right-hand sides add up to at most $\sum_{i\neq j}\lvert\rho_{ij}\rvert$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark #rem-appe-pinching-entropy-upper title="Upper Bounds on the Entropy Gain, and Why None Is Linear in the Coherence Mass (Manual Derivation and Literature)"}
+**Manual derivation.**
+
+1. $\Delta S\le\log m$.
+2. $\Delta S\le T\log(d-1)+h(T)$ with $T=\frac12\lVert X\rVert_1\le T':=\frac12\sqrt{\operatorname{rank}(X)\,c}$; if $T'\le1-\frac1d$, $T$ may be replaced by $T'$, because $T\mapsto T\log(d-1)+h(T)$ is increasing on $[0,1-\frac1d]$.
+3. Rank-one basis pinching ($m=d$): by [@prop-appe-l1-coherence-bound] and the Cauchy–Schwarz inequality, $\dfrac{\Delta S}{\ln2}\le\sum_{i\neq j}\lvert\rho_{ij}\rvert\le\sqrt{d(d-1)\,c}$.
+4. There is no upper bound of the form $\Delta S\le Kc$. The pure state $\psi=\sqrt{1-\epsilon}\,\lvert0\rangle+\sqrt\epsilon\,\lvert1\rangle$ has $c=2\epsilon(1-\epsilon)$ and $\Delta S=h(\epsilon)$; as $\epsilon\to0$, $\Delta S/c=\frac12\ln\frac2c+\frac12+o(1)\to\infty$.
+
+Derivation: item 1 follows from $\mathcal{P}(\rho)=\frac1m\sum_jU_j\rho U_j^*$ in the derivation of item 2 of [@rem-appe-pinching-exact-identities] and $S(\sum_jq_j\rho_j)\le\sum_jq_jS(\rho_j)+H(q)$ (`Literature`). Item 2 is Audenaert's continuity bound (`Literature`) together with $\lVert X\rVert_1\le\sqrt{\operatorname{rank}X}\,\lVert X\rVert_2$. Item 3 compares the moduli of the $d(d-1)$ off-diagonal entries with their sum of squares $c$ by Cauchy–Schwarz.
+
+So the lower bound is of the order of $c$, while the known general upper bounds are only of the order of $\sqrt{c}$. On a qubit, item 3 of [@rem-appe-pinching-entropy-lower] gives the exact upper end, which is $\frac c2\ln\frac2c+O(c)$ as $c\to0$; whether for $d\ge3$ the upper bound can be improved to the order of $c\log\frac1c$ is not treated in this book.
+
+**Literature result.** K. M. R. Audenaert, *J. Phys. A* **40**, 8127–8136 (2007); the reverse inequality for concavity of the entropy used above is in M. A. Nielsen and I. L. Chuang, *Quantum Computation and Quantum Information* (Cambridge, 2000), Chapter 11. The inequality of [@prop-appe-l1-coherence-bound] was proposed as a conjecture by S. Rana, P. Parashar and M. Lewenstein, *Phys. Rev. A* **93**, 012110 (2016), Conjecture 7.
+:::
+
+So the item "a unit-preserving pinching does not decrease the entropy" of `H8` now has a quantitative form in finite dimension: the entropy gain is at least the discarded coherence mass $c$, the known general upper bounds are of the order of $\sqrt{c}$, and the purity drops by exactly $c$. What remains an input is the choice itself that coarse-graining is a unit-preserving pinching; the active-reset counterexample in item 4 of E.6 shows that it cannot be dropped.
+
+### E.8.12 Finite-Step Path Products: Stationary Phase Is Exact for Quadratic Actions {#sec-appe-finite-step-path-product}
+
+Item 3 of E.6 records $\delta S=0$ as a conditional result reached only through a continuum functional measure and the limit $\hbar\to0$. This subsection asks how much survives at a finite number of steps. Take $\hbar=m=1$, $H=\frac12p^2+\frac12\omega^2x^2$, $V=\frac12\omega^2x^2$, $\varepsilon=t/N$, and the single step
+
+$$
+U_\varepsilon=e^{-i\varepsilon V/2}\,e^{-i\varepsilon p^2/2}\,e^{-i\varepsilon V/2},
+$$
+
+whose kernel is the trapezoid short-time kernel $(2\pi i\varepsilon)^{-1/2}\exp i\left[\frac{(x-y)^2}{2\varepsilon}-\frac{\varepsilon\omega^2}{4}(x^2+y^2)\right]$; $U_\varepsilon^N$ is the $N$-step path product.
+
+::: {.remark #rem-appe-oscillator-time-slicing title="The N-Step Sliced Product of the Oscillator Is an Oscillator with a Modified Frequency (Manual Derivation and Literature)"}
+**Manual derivation.** Let $0<\varepsilon\omega<2$ and put
+
+$$
+\cos\theta=1-\frac{\varepsilon^2\omega^2}{2},\quad 0<\theta<\pi,\qquad \tilde\Omega=\omega\sqrt{1-\frac{\varepsilon^2\omega^2}{4}},\qquad \tilde H=\frac12p^2+\frac12\tilde\Omega^2x^2,
+$$
+
+so that $\sin\theta=\varepsilon\tilde\Omega$. Let $\tilde\varphi_n$ be the Hermite functions of frequency $\tilde\Omega$, $\tilde a=(\sqrt{\tilde\Omega}\,x+ip/\sqrt{\tilde\Omega})/\sqrt2$ and $\tilde n=\tilde a^\dagger\tilde a$.
+
+1. $U_\varepsilon\tilde\varphi_n=e^{-i\theta(n+\frac12)}\tilde\varphi_n$ for all $n$. Hence, exactly on $L^2(\mathbb{R})$, $U_\varepsilon=\exp\left(-i\theta(\tilde n+\tfrac12)\right)=\exp\left(-i\frac{\theta}{\tilde\Omega}\tilde H\right)$.
+2. For $\sin N\theta\neq0$ the kernel of $U_\varepsilon^N$ is the Mehler kernel of frequency $\tilde\Omega$ and angle $\Theta=N\theta$:
+
+$$
+K_N(x,y)=\left(\frac{\tilde\Omega}{2\pi\lvert\sin\Theta\rvert}\right)^{1/2}e^{-i\pi/4-i\pi\nu/2}\exp\left(\frac{i\tilde\Omega}{2\sin\Theta}\left[(x^2+y^2)\cos\Theta-2xy\right]\right),\qquad \nu=\left\lfloor\frac{\Theta}{\pi}\right\rfloor .
+$$
+
+3. The discrete action
+
+$$
+S_N=\sum_{k=0}^{N-1}\frac{(x_{k+1}-x_k)^2}{2\varepsilon}-\frac{\varepsilon\omega^2}{2}\sum_{k=1}^{N-1}x_k^2-\frac{\varepsilon\omega^2}{4}\left(x_0^2+x_N^2\right)
+$$
+
+with $x_0=y$, $x_N=x$ has a unique stationary point $\bar x$:
+
+$$
+\delta S_N=0\iff \bar x_k-\frac{\bar x_{k+1}+\bar x_{k-1}}{2}=(1-\cos\theta)\,\bar x_k,\qquad \bar x_k=\frac{y\sin((N-k)\theta)+x\sin(k\theta)}{\sin N\theta}.
+$$
+
+The Hessian $Q$ of $S_N$ in $x_1,\dots,x_{N-1}$ has $\det Q=\varepsilon^{-(N-1)}\dfrac{\sin N\theta}{\sin\theta}$ and $\nu$ negative eigenvalues, and
+
+$$
+K_N(x,y)=(2\pi\varepsilon)^{-N/2}e^{-i\pi N/4}\,(2\pi)^{(N-1)/2}\lvert\det Q\rvert^{-1/2}e^{i\pi\operatorname{sgn}Q/4}\,e^{iS_N(\bar x)} .
+$$
+
+The right-hand side is exactly the leading stationary-phase term at $\bar x$, including the prefactor $\lvert\det Q\rvert^{-1/2}$ and the Maslov phase $e^{-i\pi\nu/2}$. So **at every finite number of steps the path product equals the contribution of the stationary path exactly**, with zero remainder and without any limit $\hbar\to0$. The discrete Euler–Lagrange equation says that the sagitta of each step (its midpoint deviation) is $1-\cos\theta=\frac{\varepsilon^2\omega^2}2$ times the position.
+4. Errors against continuous time:
+
+$$
+\frac{(\omega t)^3}{24N^2}\le\Theta-\omega t\le\frac{(\omega t)^3}{24N^2\left(1-(\omega t/2N)^2\right)},\qquad \frac{(\omega t)^2}{8N^2}\le1-\frac{\tilde\Omega}{\omega}\le\frac{(\omega t)^2}{4N^2},
+$$
+
+and for a Schwartz function $\varphi$, with $\varphi_s=e^{-isH}\varphi$,
+
+$$
+\lVert U_\varepsilon^N\varphi-e^{-itH}\varphi\rVert\le(\Theta-\omega t)\,\lVert(\tilde n+\tfrac12)\varphi\rVert+t\left[\left(\frac{\omega}{\tilde\Omega}-1\right)\sup_{0\le s\le t}\tfrac12\lVert p^2\varphi_s\rVert+\omega(\omega-\tilde\Omega)\sup_{0\le s\le t}\tfrac12\lVert x^2\varphi_s\rVert\right],
+$$
+
+and the right-hand side is $O(N^{-2})$.
+
+Derivation: item 1. The Heisenberg actions of the three factors are $p\mapsto p-\frac{\varepsilon\omega^2}2x$, $x\mapsto x+\varepsilon p$ and $p\mapsto p-\frac{\varepsilon\omega^2}2x$; together $U_\varepsilon^*(x,p)^{\mathsf T}U_\varepsilon=M_\varepsilon(x,p)^{\mathsf T}$ with
+
+$$
+M_\varepsilon=\begin{pmatrix}\cos\theta&\varepsilon\\-\varepsilon\tilde\Omega^2&\cos\theta\end{pmatrix}=\begin{pmatrix}\cos\theta&\sin\theta/\tilde\Omega\\-\tilde\Omega\sin\theta&\cos\theta\end{pmatrix},
+$$
+
+which is the flow of $\tilde H$ for time $\theta/\tilde\Omega$. Hence $U_\varepsilon^*\tilde aU_\varepsilon=e^{-i\theta}\tilde a$, $U_\varepsilon$ maps $\ker\tilde a=\mathbb{C}\tilde\varphi_0$ into itself, and $U_\varepsilon\tilde\varphi_n$ carries one more factor $e^{-in\theta}$ than $U_\varepsilon\tilde\varphi_0$. The phase on the ground state: label $e^{-zx^2/2}$ ($\operatorname{Re}z>0$) by $z$. A kick maps $z$ to $z+\frac{i\varepsilon\omega^2}2$; a free step maps $e^{-zx^2/2}$ to $(1+i\varepsilon z)^{-1/2}e^{-\frac{z}{1+i\varepsilon z}x^2/2}$ (principal branch; Fourier transform of a Gaussian). Starting from $z_0=\tilde\Omega$: $z_1=\tilde\Omega+\frac{i\varepsilon\omega^2}2$ and $1+i\varepsilon z_1=\cos\theta+i\sin\theta=e^{i\theta}$. Expanding with $\tilde\Omega^2=\omega^2-\frac{\varepsilon^2\omega^4}4$ gives $z_1=(\tilde\Omega-\frac{i\varepsilon\omega^2}2)e^{i\theta}$, so the free step leads to $\tilde\Omega-\frac{i\varepsilon\omega^2}2$, the second kick returns to $\tilde\Omega$, and the total phase is $e^{-i\theta/2}$. Completeness of the Hermite functions gives the operator identity. Item 2 is Mehler's formula (`Literature`) for $\exp(-i\Theta(\tilde n+\frac12))$. Item 3: the stationarity equation is $\partial S_N/\partial x_k=0$. $Q=\frac1\varepsilon(2\cos\theta\,\mathbf{1}-J)$ with $J$ the adjacency matrix of the path graph, whose eigenvalues are $2\cos\frac{j\pi}N$ ($1\le j\le N-1$); this gives the determinant and the number $\#\{j:j\pi/N<\theta\}=\nu$ of negative eigenvalues. Integrate over $x_1,\dots,x_{N-1}$ with the Gauss–Fresnel integral (understood with Gaussian regularization; `Literature`: for a nondegenerate real quadratic form it equals the value at the stationary point times $(2\pi)^{n/2}\lvert\det Q\rvert^{-1/2}e^{i\pi\operatorname{sgn}Q/4}$), and use $(2\pi i\varepsilon)^{-1/2}=(2\pi\varepsilon)^{-1/2}e^{-i\pi/4}$. The modulus of the prefactor is $(2\pi)^{-1/2}\lvert\sin\theta/(\varepsilon\sin\Theta)\rvert^{1/2}=(\tilde\Omega/(2\pi\lvert\sin\Theta\rvert))^{1/2}$ and its phase is $e^{-i\pi N/4}e^{i\pi(N-1-2\nu)/4}=e^{-i\pi/4-i\pi\nu/2}$; the exponent agrees with item 2 because both are kernels of the same operator. Item 4: $f(u)=\arcsin u-u$ satisfies $\frac{u^2}2\le f'(u)\le\frac{u^2}{2(1-u^2)}$, and $\Theta-\omega t=2Nf(\frac{\omega t}{2N})$; also $1-\sqrt{1-y}\in[\frac y2,y]$. For the state bound insert $e^{-i\omega t(\tilde n+\frac12)}=e^{-i(\omega t/\tilde\Omega)\tilde H}$; the first difference is bounded by the spectral theorem and $\lvert e^{-ia}-e^{-ib}\rvert\le\lvert a-b\rvert$, the second by Duhamel's formula and $\frac{\omega}{\tilde\Omega}\tilde H-H=\left(\frac{\omega}{\tilde\Omega}-1\right)\frac{p^2}2-\omega(\omega-\tilde\Omega)\frac{x^2}2$.
+
+**Numerical check (`NUM`).** With $U_\varepsilon$ implemented by fast Fourier transform on a $4096$-point grid: for $\varepsilon\omega=0.3,1,1.9$, $\lVert U_\varepsilon\tilde\varphi_n-e^{-i\theta(n+\frac12)}\tilde\varphi_n\rVert\le4\times10^{-15}$ ($n<6$), while the ground state of frequency $\omega$ is not an eigenvector (residuals $2.4\times10^{-3}$, $8.8\times10^{-2}$, $0.49$ after removing the best multiple); $U_\varepsilon^N$ applied to a Gaussian wave packet differs from the integral against the kernel of item 2 by at most $6\times10^{-15}$, for cases with $\nu$ from $0$ to $19$; the assembly of item 3 agrees with item 2 at random points to $2\times10^{-13}$, and every count of negative eigenvalues matches. For a coherent state centred at $x=1$ and $t=3$, $N^2\lVert U_\varepsilon^N\varphi-e^{-itH}\varphi\rVert$ stays at $1.51$ from $N=8$ to $128$ and is always below the bound of item 4 (for example $9.2\times10^{-5}\le5.3\times10^{-4}$ at $N=128$).
+
+**Literature result.** The modified Hamiltonian of the Störmer–Verlet integrator for linear oscillators and the stability condition $\varepsilon\omega<2$: E. Hairer, C. Lubich and G. Wanner, *Geometric Numerical Integration*, 2nd ed. (Springer, 2006). The time-sliced oscillator and the angle $\theta$ with $2\sin\frac\theta2=\varepsilon\omega$: H. Kleinert, *Path Integrals in Quantum Mechanics, Statistics, Polymer Physics, and Financial Markets*, 5th ed. (World Scientific, 2009); the slicing convention there has not been checked term by term against the trapezoid convention used here. Background on the metaplectic representation: G. B. Folland, *Harmonic Analysis in Phase Space* (Princeton, 1989).
+:::
+
+The $1-\cos\theta$ of item 3 is exactly the sagitta of E.8.1, and it also decides how large a time step may be.
+
+::: {.example #ex-appe-time-step-trichotomy title="The Sagitta of a Time Step: Elliptic, Parabolic and Hyperbolic Slicings (Manual Derivation and Numerical Check)"}
+**Manual derivation.** The single-step matrix $M_\varepsilon=\begin{pmatrix}1-\frac{\varepsilon^2\omega^2}2&\varepsilon\\-\varepsilon\omega^2\left(1-\frac{\varepsilon^2\omega^2}4\right)&1-\frac{\varepsilon^2\omega^2}2\end{pmatrix}$ (with $\det M_\varepsilon=1$ for every $\varepsilon\omega>0$) has similarity reading $\frac12\operatorname{tr}M_\varepsilon=1-v$ with sagitta $v=\frac{\varepsilon^2\omega^2}2$. By the table of E.8.1: for $0<\varepsilon\omega<2$, $0<v<2$, elliptic, and $M_\varepsilon^n$ is bounded; for $\varepsilon\omega=2$, $v=2$, $M_\varepsilon=\begin{pmatrix}-1&\varepsilon\\0&-1\end{pmatrix}$, parabolic, and $M_\varepsilon^n=(-1)^n\begin{pmatrix}1&-n\varepsilon\\0&1\end{pmatrix}$ grows linearly; for $\varepsilon\omega>2$, $v>2$, hyperbolic, with exponential growth. $U_\varepsilon$ is always unitary; what grows is the spread in position and momentum, so the time step has to satisfy $\varepsilon\omega<2$ for the sliced product to keep it bounded.
+
+**Numerical check (`NUM`).** With $\omega=1$: for $\varepsilon=1.9$, $\lVert M_\varepsilon^n\rVert$ at $n=10,100,1000$ is $1.10$, $2.26$, $1.95$; for $\varepsilon=2$ it is $20.05$, $200$, $2000$; for $\varepsilon=2.1$ it is $9.4\times10^2$, $3.9\times10^{27}$, $6.0\times10^{273}$.
+:::
+
+Beyond quadratic actions there is no such exact equality at a finite number of steps. What remains are one-dimensional cancellation bounds: a stretch without a stationary point contributes a bounded amount, however long it is.
+
+::: {.remark #rem-appe-oscillatory-cancellation-bounds title="Stretches without a Stationary Point Cancel: Explicit Bounds for One-Dimensional Oscillatory Integrals and Sums (Manual Derivation and Literature)"}
+**Manual derivation.** Let $\lambda>0$.
+
+1. If $\varphi\in C^2[a,b]$, $\varphi'$ is monotone and $\lvert\varphi'\rvert\ge\mu>0$, then $\left\lvert\int_a^be^{i\lambda\varphi(s)}ds\right\rvert\le\dfrac{3}{\lambda\mu}$.
+2. If $\varphi\in C^2[a,b]$ and $\lvert\varphi''\rvert\ge\mu>0$, then $\left\lvert\int_a^be^{i\lambda\varphi(s)}ds\right\rvert\le\dfrac{4\sqrt3}{\sqrt{\lambda\mu}}$.
+3. If $A<B$ are integers, $f\in C^1[A,B]$, $f'$ is monotone, and $m+\delta\le f'\le m+1-\delta$ for an integer $m$ and some $0<\delta\le\frac12$, then $\left\lvert\sum_{n=A}^{B-1}e^{2\pi if(n)}\right\rvert\le\cot\dfrac{\pi\delta}{2}$, independently of the number of terms.
+
+Derivation: item 1, integrate by parts: $\int e^{i\lambda\varphi}=\left[\frac{e^{i\lambda\varphi}}{i\lambda\varphi'}\right]_a^b-\int e^{i\lambda\varphi}\left(\frac{1}{i\lambda\varphi'}\right)'$; the boundary term is at most $\frac2{\lambda\mu}$, and by monotonicity the integral term is at most $\frac1\lambda\left\lvert\frac1{\varphi'(b)}-\frac1{\varphi'(a)}\right\rvert\le\frac1{\lambda\mu}$. Item 2: $\varphi'$ is strictly monotone, $\{\lvert\varphi'\rvert<\eta\}$ is an interval of length at most $\frac{2\eta}{\mu}$, and on the remaining at most two intervals $\lvert\varphi'\rvert\ge\eta$, each contributing at most $\frac3{\lambda\eta}$ by item 1; the total $\frac6{\lambda\eta}+\frac{2\eta}\mu$ is smallest at $\eta=\sqrt{3\mu/\lambda}$. Item 3: $g_n=f(n+1)-f(n)\in[m+\delta,m+1-\delta]$ is monotone in $n$. With $c_n=\left(e^{2\pi ig_n}-1\right)^{-1}=-\frac12-\frac i2\cot\pi g_n$ one has $e^{2\pi if(n)}=c_n\left(e^{2\pi if(n+1)}-e^{2\pi if(n)}\right)$. Abel summation gives the bound $\lvert c_A\rvert+\lvert c_{B-1}\rvert+\sum_{n=A+1}^{B-1}\lvert c_n-c_{n-1}\rvert$; here $\lvert c_n\rvert\le\frac1{2\sin\pi\delta}$, and by monotonicity the last sum telescopes to $\frac12\lvert\cot\pi g_{B-1}-\cot\pi g_A\rvert\le\cot\pi\delta$; in total $\frac{1+\cos\pi\delta}{\sin\pi\delta}=\cot\frac{\pi\delta}2$.
+
+All three are one-dimensional; the $N$-step product is an $(N-1)$-dimensional integral, and how the constants behave with the dimension needs a separate estimate.
+
+**Numerical check (`NUM`).** For random phases and random quadratic oscillatory sums, the largest ratio of the integral to the bound is $0.57$ for item 1 and $0.45$ for item 2, and the largest ratio of the sum to the bound of item 3 is $0.97$.
+
+**Literature result.** Items 1 and 2 are van der Corput's lemma; for the constants see E. M. Stein, *Harmonic Analysis* (Princeton, 1993), Chapter VIII (where the constant of order $k$ is $5\cdot2^{k-1}-2$; here item 2 has $4\sqrt3<8$). Item 3 is the Kusmin–Landau inequality: L. J. Mordell, *Acta Arith.* **4**, 3–9 (1958); S. W. Graham and G. Kolesnik, *Van der Corput's Method of Exponential Sums* (Cambridge, 1991).
+:::
+
+What remains is the continuum-time limit.
+
+::: {.remark #rem-appe-path-integral-remaining-inputs title="What the Continuum-Time Limit Still Needs (Literature Result, Not Formalized in This Book; OPEN)"}
+**Literature result, not formalized in this book.**
+
+1. At fixed $\hbar$, no path measure is needed at the level of operators: if $H_0=\frac12p^2$ and $V$ are such that $H_0+V$ is essentially self-adjoint on $D(H_0)\cap D(V)$, then $\left(e^{-itV/N}e^{-itH_0/N}\right)^N\to e^{-itH}$ strongly. H. F. Trotter, *Proc. Amer. Math. Soc.* **10**, 545–551 (1959); E. Nelson, *J. Math. Phys.* **5**, 332–343 (1964). The frozen [`trotter_product`](lean:D5/S3/Quantum/Analysis/TrotterProduct.trotter_product) is the version for bounded elements of a Banach algebra and does not cover $p^2$.
+2. On path space there is no countably additive complex measure of bounded total variation that represents $e^{iS}\mathcal{D}x$: R. H. Cameron, *J. Math. and Phys.* **39**, 126–140 (1960). So the "continuum functional measure" of E.6 and E.7 should be read as "the limit of time-sliced oscillatory integrals", not as such a measure.
+3. For non-quadratic potentials: convergence of the time-sliced integrals and construction of the fundamental solution, D. Fujiwara, *J. Analyse Math.* **35**, 41–96 (1979) and *Duke Math. J.* **47**, 559–600 (1980); stationary phase with a remainder estimate on spaces of large dimension, D. Fujiwara, *Nagoya Math. J.* **124**, 61–97 (1991); monograph *Rigorous Time Slicing Approach to Feynman Path Integrals* (Springer, 2017). The conditions these results impose on the potential have not been checked item by item in this book.
+
+So the selection of paths by $\delta S=0$ is exact at a finite number of steps only for quadratic actions ([@rem-appe-oscillator-time-slicing]); for general actions there are only asymptotic statements in $\hbar$, with the explicit one-dimensional bounds of [@rem-appe-oscillatory-cancellation-bounds] and, in many dimensions, the literature of item 3.
+
+**OPEN.** Interacting field theory in $3+1$ dimensions has no counterpart of any of these theorems; this item stays open, as `H9` in E.7.
+:::
+
+### E.8.13 What Changes in the Ledger {#sec-appe-reduced-ledger}
 
 ::: {.remark #rem-appe-reduced-ledger title="The Ledger after E.8 (Supplement to [@rem-appe-master-audit-table])"}
-**Supplementary audit (`MODEL` + `manual derivation`; the theorem boxes correspond to frozen theorems).** The table lists only the entries that change. For `H1` and `H9` the processing mechanism is that of [@rem-appe-master-audit-table].
+**Supplementary audit (`MODEL` + `manual derivation`; the theorem boxes correspond to frozen theorems).** The table lists only the entries that change. For `H1` the processing mechanism is that of [@rem-appe-master-audit-table].
 
 | Entry | Original treatment | Treatment in E.8 | Basis |
 | :--- | :--- | :--- | :--- |
@@ -960,19 +1245,23 @@ The ledger of E.8.6 records the Hamiltonian $H$ as an input that remains. This r
 | `H3` parallelogram polarization | `T2` condition | the chord distance comes from the GNS inner product of a positive functional, so the input "inner product" becomes "positive reading"; completion remains `T1` | [@rem-appe-gram-from-flatness], item 2 |
 | `H4` the orthogonal residual never runs dry | `T2/T4` input | for one time-homogeneous object: the rank of the sampled table equals the number of levels the sampling sees, and the residual never runs dry exactly when infinitely many levels are seen; an orbit with finitely many levels comes back, a ray sagitta that stays above a threshold throughout a finite window bounds the dimension from below, and one that stays away from zero after some time implies that the orbit space is infinite-dimensional; still an input | [@thm-appe-prony-hankel-rank], [@rem-appe-orbit-rank-and-recurrence] |
 | `H5` Born weight | `T2` additivity condition | only for rules that depend on pairwise comparison alone: for $d\ge3$, boundedness, normalization on every orthonormal basis and $f(1)=1$ already give the Born rule; for $d=2$ and continuous rules, full effect additivity can be replaced by "antipodal normalization, $f(1)=1$ and minimal tomographic rank", or, without continuity, by ensemble extensionality (read as Clause I applied to ensembles under `MODEL`); still a `T2` input | [@rem-appe-born-zonal-minimal-rank], [@rem-appe-ensemble-extensionality-born] |
-| `H8` Lorentz signature | `T3` bifurcation | can be read as the same choice as the signature bifurcation of `H2` (`MODEL`) | end of E.8.1 |
+| `H8` Lorentz signature | `T3` bifurcation | uses the same three-way table as `H2` but selects another row for comparisons between observers: in the $1+1$-dimensional observer model (with linearity of coordinate changes as an input), Clause III, antisymmetric velocity readings and one law give a family with one constant $K$ whose sign is the row of the sagitta table; the time-order condition (repeating the same comparison never reverses the order in time) excludes the elliptic row, and "the difference part is not square-zero" then excludes the parabolic row; for a single comparison the positivity condition and the time-order condition cannot both hold; the step from null cone to quadratic form is carried by a frozen proposition | [@rem-appe-frame-change-family], [@rem-appe-time-order-repetition], [@rem-appe-rotor-boost-coexistence], [@rem-appe-causal-order-linearity], [@prop-null-cone-rigidity] |
 | `H8` projective holonomy of Layer 1 | native to Layer 1 | closed form in $\mathcal{Cl}_{3,0}$ as the three-point holonomy of the half comparison; in the Pauli-matrix model the product formula and the return phase are frozen | [@rem-appe-half-comparison-holonomy], [@thm-appe-bloch-triangle-return-phase] |
+| `H8` entropy gain under unit-preserving pinching | `T2` condition | the purity drops by exactly the discarded coherence mass $c$; the entropy gain equals a relative entropy, and $\Delta S\ge\frac12\lVert\rho-\mathcal{P}(\rho)\rVert_1^2\ge c$; the exact range of $\Delta S$ at fixed $c$ on a qubit; the known general upper bounds are of the order of $\sqrt{c}$ (the $\ell_1$ bound for rank-one basis pinching is frozen), and no upper bound linear in $c$ exists; "coarse-graining is a unit-preserving pinching" remains an input | [@rem-appe-pinching-exact-identities], [@rem-appe-pinching-entropy-lower], [@prop-appe-l1-coherence-bound], [@rem-appe-pinching-entropy-upper] |
 | `H6` two-sided invertibility | `T2` condition | the defect of one-sided fairness is a projection, and the unilateral shift as a comparison value violates Clause III; it can nevertheless arise as the induced evolution in a model satisfying Clauses I–IV and the positivity condition, even when the algebra carries a faithful trace; past completeness or a finite-dimensional state space is each sufficient | [@rem-appe-one-sided-fairness], [@ex-appe-bilateral-shift-model] |
 | `H6` strong continuity | `T2` condition | for a time-homogeneous family, equivalent to continuity of the sagitta reading at zero; measurability alone is not enough; in finite dimension this connects with [@thm-calibrated-unitary-group] | [@rem-appe-sagitta-continuity] |
 | `H6` generator | `T4` input $H$ | the chord rate tends to $-iH$ and the sagitta rate to $H^2/2$, with explicit errors; finite-step speed bounds; on the space spanned by an orbit, the record of the orbit in both channels determines $H$ up to unitary equivalence, while similarity readings alone or Born weights alone do not (two-level and three-level counterexamples); the choice of orbit and the action of $H$ outside it remain inputs | [@rem-appe-generator-chord-sagitta], [@rem-appe-orbit-record-channels] |
 | `H6` Lüders conditioning | `T2` condition | the Lüders state is the state of largest fidelity among those certain to pass the test, and it is unique; the trace norm and the Hilbert–Schmidt distance among trace-one states do not give the Lüders state; the reading used remains an input | [@rem-appe-luders-nearest] |
 | `H7` local tomography and exchange statistics | `T2` + `T3` | parameter count $K_d(ab)-K_d(a)K_d(b)=\frac{d(2-d)}4a(a-1)b(b-1)$; the swap is a fair involution with sagitta $0$ and $2$, and Clause I removes labels without choosing a sector; whether a given family of objects needs complex amplitudes, keeping its Gram matrix up to phases: when comparable triangles fill every cycle, exactly when some three-point Bargmann product is not real, and on a qubit exactly when the Bloch vectors do not lie in one plane through the center; the central complex structure and the choice of sector remain inputs | [@rem-appe-tomography-count], [@rem-appe-swap-sagitta], [@rem-appe-real-realizability-return-phase] |
+| `H9` continuum path integral and stationary action | `T4` input | for a quadratic action the $N$-step sliced product equals the contribution of the stationary path exactly at every finite $N$ (prefactor and Maslov phase included); for the oscillator the error is an explicit $O(N^{-2})$, and the time step has to lie in the elliptic row of the sagitta table; for general actions only explicit one-dimensional cancellation bounds remain; at fixed $\hbar$ the continuum limit at the level of operators is given by the Trotter–Nelson theorem and needs no path measure (no such complex measure of bounded variation exists); convergence of time slicing and stationary phase in large dimension for non-quadratic potentials are literature results; interacting field theory remains `OPEN` | [@rem-appe-oscillator-time-slicing], [@ex-appe-time-step-trichotomy], [@rem-appe-oscillatory-cancellation-bounds], [@rem-appe-path-integral-remaining-inputs] |
 
 The two new inputs are Clause IV ([@def-appe-third-point-redundancy]) and the positivity condition ([@rem-appe-involution-positivity]); when readings are given by states and at least one state exists, the latter is equivalent to the absence of nonzero elements of square zero, and this part is invisible to every reading by a state ([@rem-appe-positivity-invisible-part]); when the similarity readings are not real scalars, positive semidefiniteness of the table needs a positive functional in addition. Clause IV need not hold for all triples: it is enough that comparable triangles fill every cycle, and over all groups this is exactly the condition that is enough ([@rem-appe-triangle-simple-connectivity]). Clause IV excludes every holonomy of full comparisons, so it describes the flat skeleton of Layer 1. A Layer-2 connection with genuine curvature has to give it up, and then [@thm-appe-chordal-gain-potential-stability] and [@rem-appe-near-flat-gram-bound] state the price of the deviation.
 
 E.8.6 and E.8.7 add no clause: each of the invertibility and continuity items of `H6` gets a sufficient condition stated in terms of objects and readings (past completeness; continuity of the sagitta reading at zero), conditioning is recast as an optimization principle, and `H7` gets a one-line counting formula; these conditions remain inputs.
 
 E.8.8 and E.8.9 add no clause either. E.8.8 applies comparison to ensembles: to obtain a positive semidefinite table, the positivity condition can be replaced by "every object has an opposite, and every ensemble has a nonnegative averaged similarity with itself", which still allows only parabolic pairs invisible to every similarity reading; the qubit Born rule follows from ensemble extensionality. E.8.9 reads the orbit of one object: `H4` gets a form in terms of readings that can be checked in finitely many steps, and on the orbit space the $H$ of `H6` can be read from the record in both channels.
+
+E.8.10–E.8.12 add two inputs for comparisons between observers: the time-order condition, and "the difference part is not square-zero" (the special case, for difference parts, of the condition in [@rem-appe-positivity-invisible-part]); in $1+1$ dimensions the linearity of coordinate changes also remains an input. For a single comparison the positivity condition and the time-order condition cannot both hold, and this separates `H2` from `H8`: they select different rows of one table for different comparisons. E.8.11 does not change the input "coarse-graining is a unit-preserving pinching"; it quantifies its consequences. E.8.12 narrows the path-integral item of `H9`: quadratic actions are exact at a finite number of steps, general actions have only asymptotic statements, and the existence of the continuum limit at the level of operators is a literature result.
 :::
 
 This section does not bring the number of inputs down to zero. It changes their shape: when the similarity readings are real scalars, the three items of `H2` were three geometric statements about self-pairing, bivectors and Gram matrices, and they are now replaced by two conditions that can be stated with comparison alone. One says that a third party does not change the ratio of two. The other says that the round trip of a difference leaves a positive trace.
