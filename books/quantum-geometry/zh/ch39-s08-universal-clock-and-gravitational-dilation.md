@@ -92,7 +92,7 @@
    \eta_{\mathrm{info}}(r) \;\equiv\; \sin^2\theta_{\mathrm{grav}}(r) \;=\; \frac{\mathcal{I}_{\mathrm{local}}(r)}{\mathcal{I}_{\max}(r)} \;=\; \frac{M}{M_{\max}(r)} \;=\; \frac{2GM}{r c^2} \;=\; \frac{r_s}{r},
    $$
 
-   其中 $r_s := \frac{2GM}{c^2}$ 为史瓦西半径。由于总主频归一化预算恒等于 $1$（$\cos^2\theta_{\mathrm{grav}}(r) + \sin^2\theta_{\mathrm{grav}}(r) = 1$），扣除背景信息负载 $\eta_{\mathrm{info}}(r)$ 后，剩余可供局部观察者推进自身自指停机的平方带宽比例为 $\cos^2\theta_{\mathrm{grav}}(r) = 1 - \eta_{\mathrm{info}}(r)$；取算术平方根还原一阶时间流幅值，立得**与广义相对论球外静态史瓦西度规完全一致的非微扰引力钟慢公式**（`手工推导`）：
+   其中 $r_s := \frac{2GM}{c^2}$ 为史瓦西半径。由于总主频归一化预算恒等于 $1$（$\cos^2\theta_{\mathrm{grav}}(r) + \sin^2\theta_{\mathrm{grav}}(r) = 1$），扣除背景信息负载 $\eta_{\mathrm{info}}(r)$ 后，剩余可供局部观察者推进自身自指停机的平方带宽比例为 $\cos^2\theta_{\mathrm{grav}}(r) = 1 - \eta_{\mathrm{info}}(r)$；取算术平方根还原一阶时间流幅值。在上述标定下（负载率取 $M/M_{\max}(r)$，预算按平方分配；两者合起来就是输入面积半径坐标下的 $g_{00} = 1 - r_s/r$，`MODEL`），它在代数上重写为球外静态史瓦西度规的钟慢因子：
 
    $$
    \frac{d\tau}{dt} \;=\; \cos\theta_{\mathrm{grav}}(r) \;=\; \sqrt{1 - \eta_{\mathrm{info}}(r)} \;=\; \sqrt{1 - \frac{2GM}{r c^2}} \;=\; \sqrt{1 - \frac{r_s}{r}}.
@@ -104,7 +104,7 @@
    \frac{d\tau}{dt} \;=\; \sqrt{\bigl(1 - \eta_{\mathrm{info}}(r)\bigr)\!\left(1 - \frac{v_{\mathrm{loc}}^2}{c^2}\right)} \;=\; \sqrt{\left(1 - \frac{2GM}{r c^2}\right)\!\left(1 - \frac{v_{\mathrm{loc}}^2}{c^2}\right)}.
    $$
 
-   **认识论与动力学诚实边界（衔接 [§34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition) 与 [@prob-ch34-gravity-dynamics-and-coupling]）**：必须坦诚指明，上述全息主频分账（`MODEL` + `手工推导`）在借用贝肯斯坦—史瓦西饱和标度 $M_{\max}(r) = rc^2/(2G)$ 后，精确复现了静态球对称外部度规的**时间流逝函数（lapse）** $\sqrt{\lvert g_{00}(r)\rvert} = \sqrt{1 - r_s/r}$；然而它本身并不自动导出径向空间曲率分量 $g_{rr}(r) = -(1 - r_s/r)^{-1}$（决定广义相对论光线偏折的二倍因子与夏皮罗雷达延迟），也不替代包含压强与剪切应力的完整相对论能动张量耦合及真空爱因斯坦场方程 $R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$（后者仍属 [@rem-ch39-margolus-bekenstein-schwarzschild-literature] 第 2 条的广义相对论 `文献结果`）。从离散比较复形出发不预设连续流形而严格导出 $3+1$ 维洛伦兹无质量自旋-$2$ 引力动力学与牛顿常数 $G$ 归一化，依然是全书正式立案的开放问题 [@prob-ch34-gravity-dynamics-and-coupling]（`OPEN`）。
+   **认识论与动力学诚实边界（衔接 [§34.24](ch34-s24-interaction-sign-and-sagitta-composition.md#sec-ch34-interaction-sign-and-sagitta-composition) 与 [@prob-ch34-gravity-dynamics-and-coupling]）**：必须坦诚指明，上述全息主频分账（`MODEL` + `手工推导`）在借用贝肯斯坦—史瓦西饱和标度 $M_{\max}(r) = rc^2/(2G)$ 后，精确复现了静态球对称外部度规的**时间流逝函数（lapse）** $\sqrt{\lvert g_{00}(r)\rvert} = \sqrt{1 - r_s/r}$；然而它本身并不自动导出径向空间曲率分量 $g_{rr}(r) = -(1 - r_s/r)^{-1}$（决定广义相对论光线偏折的二倍因子与夏皮罗雷达延迟），也不替代包含压强与剪切应力的完整相对论能动张量耦合及真空爱因斯坦场方程 $R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$（后者仍属 [@rem-ch39-margolus-bekenstein-schwarzschild-literature] 第 2 条的广义相对论 `文献结果`）。从离散比较复形出发不预设连续流形而严格导出 $3+1$ 维洛伦兹无质量自旋-$2$ 引力动力学与牛顿常数 $G$ 归一化，依然是全书正式立案的开放问题 [@prob-ch34-gravity-dynamics-and-coupling]（`OPEN`）。其他预算律如 $1 - \tfrac{\eta}{2}$、$e^{-\eta/2}$ 有相同的牛顿极限，二阶系数不同。
 
 ::: {.viz src="universal-clock-gravity-dilation-sandbox" preset="holographic-mass-load" height="500"}
 **全息质量信息负载与静态引力钟慢实验卡（`holographic-mass-load`）。** 对照深空零负载观察者 $A$（$\eta_{\mathrm{info}} = 0,\; d\tau/dt = 1.0000$）与琥珀色负载手柄设在致密中子星表面 $r = 2.50\,r_s$（$\eta_{\mathrm{info}} = r_s/r = 0.400,\; \beta = 0$）的观察者 $B$：紫色全息球壳与两枚同速紫色底层主频飞轮 $\nu_0 = 1.000$ 下，$8$ 道穿入 $B$ 比较窗（共 $20$ 槽）的品红背景纠缠弧占去 $40.0\%$ 预算，令 $B$ 的青色固有时帧率降至 $d\tau/dt = \sqrt{0.60} = 0.7746$（经 $10$ 拍主频叠起 $10$ 对 $7.75$ 枚青色帧圆币）。

@@ -121,6 +121,90 @@ Watch the sign of the leading exponent **$2\alpha - 1$**! Without adding a singl
 **The Path-Ordered Rotor Tube and the Sagitta Phase Transition: At $\alpha = \frac{1}{2}$ the Sagitta Sum Locks onto $0.5$ (`roughness-ito-phase-transition`).** Trace the violet path-ordered rotor tube of $N = 1/\epsilon$ unit-modulus steps of angle $\sigma_0\epsilon^\alpha$ across the unit sphere while dragging the amber handle for roughness exponent $\alpha$: as $\alpha$ drops from the smooth phase $\alpha = 1$ to the critical Brownian/Feynman threshold $\alpha = \frac{1}{2}$, the magenta cumulative sagitta bar $\Sigma_{\mathrm{sag}}$ rises from $0.0005$ and locks onto $0.5$ (Itô's $\frac{1}{2}\sigma_0^2 T$ drift), depressing the magenta Itô latitude ring $\mathbb{E}[z] = (1 - v_\epsilon)^N$ in lockstep (green `LEAN ✓` badges anchor `exp_tail_le` and `trotter_product`).
 :::
 
+The expansion above gives only the leading terms. The frozen library has a non-asymptotic version: two-sided bounds that hold for every finite $N$, and the three limit regimes that follow from them.
+
+::: {.lemma #lem-ch34-accumulated-sagitta-bounds title="Two-Sided Bounds on the Accumulated Sagitta at Every Finite Step Count" lean="D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_bounds"}
+Let $\sigma,T,\alpha$ be real numbers and $N$ a natural number. Write $\theta_N=\sigma\,(T/N)^{\alpha}$ for the step angle and $\Sigma_N=N\,(1-\cos\theta_N)$ for the accumulated sagitta. Then
+
+$$
+N\left(\frac{\theta_N^2}{2}-\frac{\theta_N^4}{24}\right)\ \le\ \Sigma_N\ \le\ N\,\frac{\theta_N^2}{2}.
+$$
+
+Division and real powers follow Lean's total-function conventions here: $T/N=0$ when $N=0$, and real powers of a negative base are those defined in Mathlib. The inequality carries no sign or size condition on $\sigma,T,\alpha$.
+:::
+
+::: proof
+Both sides come from the pointwise cosine bounds $\frac{x^2}{2}-\frac{x^4}{24}\le1-\cos x\le\frac{x^2}{2}$, valid for every real $x$, taken at $x=\theta_N$ and multiplied by $N\ge0$. The upper bound is $\cos x\ge1-\frac{x^2}{2}$. For the lower bound, write $1-\cos x=2\sin^2\frac x2$ and use $\lvert y-\sin y\rvert\le\frac{\lvert y\rvert^3}{6}$ at $y=\frac x2$: expanding $\sin^2y=\bigl(y-(y-\sin y)\bigr)^2$ and discarding the square of the difference gives $\sin^2y\ge y^2-\frac{y^4}{3}$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch34-accumulated-sagitta-phases title="The Three Limit Regimes of the Accumulated Sagitta: $\alpha$ Above, At and Below $\frac{1}{2}$" lean="D5/S3/Analytic/Asymptotics/AccumulatedSagittaPhases.accumulated_sagitta_phases"}
+Let $\sigma,T,\alpha$ be real numbers with $T>0$, and let $\theta_N$ and $\Sigma_N$ be as in [@lem-ch34-accumulated-sagitta-bounds]. As $N\to\infty$:
+
+1. if $\alpha>\frac12$, then $\Sigma_N\to0$;
+2. if $\alpha=\frac12$, then $\Sigma_N\to\frac{\sigma^2T}{2}$;
+3. if $\sigma\neq0$ and $0<\alpha<\frac12$, then $\Sigma_N\to+\infty$.
+:::
+
+::: proof
+For positive $N$ one has $N\theta_N^2=c\,N^{1-2\alpha}$ and $\theta_N^2=c\,N^{-2\alpha}$ with $c=\sigma^2T^{2\alpha}$. When $\alpha>\frac12$, the upper bound of [@lem-ch34-accumulated-sagitta-bounds] tends to $0$ while $\Sigma_N\ge0$. When $\alpha=\frac12$, the upper bound is the constant $\frac{\sigma^2T}{2}$ and the lower bound is $\frac{\sigma^2T}{2}-\frac{(\sigma^2T)^2}{24N}$, and the two squeeze the limit. When $0<\alpha<\frac12$, $\theta_N^2\to0$, so from some step on it is at most $6$, and from then on the lower bound is at least $\frac c4N^{1-2\alpha}$; $\sigma\neq0$ makes $c>0$, hence the divergence. The full proof is checked by the Lean kernel.
+:::
+
+With $\epsilon=T/N$ and $\sigma=\sigma_0$, $\Sigma_N$ is the $\Sigma_{\mathrm{sag}}(\epsilon,\alpha)$ above: Regimes I and II correspond to item 1, Regime III to item 2, and Regime IV to item 3. The theorem does not cover $\alpha\le0$: for $\alpha=0$ and $\sigma=2\pi$ every step is a full turn and $\Sigma_N\equiv0$, so the condition $\alpha>0$ in item 3 cannot be dropped (manual derivation). Nor does the theorem concern paths with unequal steps or random signs; the statements above about the Itô correction and rough-path theory keep their own labels as literature results.
+
+Recast the Cayley ratio $w=(s-1)/s$ of [§22.4](ch22-s04-critical-line-and-rh.md#sec-ch22-4) in the language of this section: it is a rotor. For a point $\rho=\tfrac12+i\gamma$ on the critical line ($\gamma>0$), $u_\rho:=1-\tfrac1\rho$ lies on the unit circle; its chord $\Delta_\rho=u_\rho-1=-\tfrac1\rho$ has length $1/\lvert\rho\rvert$, its sagitta is $v_\rho=\operatorname{Re}\tfrac1\rho=\tfrac{2}{1+4\gamma^2}$, and the two obey the exact chord–sagitta identity of §34.30.1, $\lvert\Delta_\rho\rvert^2=2v_\rho$ (manual derivation). Sum $1-u_\rho^{\,n}$ over all nontrivial zeros of $\zeta$, counted with multiplicity and whether or not they lie on the critical line, and the resulting number has a name in analytic number theory: the Li coefficient (literature result; see [@rem-ch34-li-criterion-sagitta-literature] below). For a zero on the critical line the real part of the term, $1-\operatorname{Re}u_\rho^{\,n}$, is exactly the sagitta of the $n$-th power of the rotor $u_\rho$; whether every zero lies on the line is the open [@conj-riemann-hypothesis]. The pinned repository freezes the Li coefficients in their derivative definition, together with the following facts.
+
+::: {.proposition #prop-ch34-li-sagitta-frozen title="Chord–Sagitta Identities for Cayley Nodes, the Derivative-Defined Li Coefficients, and Their Two Relations to `RiemannHypothesis`" lean="D5/S3/Weil/FiniteSpectralCayleyIdentity.cayleyNode_normSq D5/S3/Weil/FiniteSpectralCayleyIdentity.cayleyNode_one_sub_normSq D5/S3/Weil/FiniteSpectralCayleyIdentity.finiteLiCoefficient_eq_diagonalHilbertSchmidtDefect D5/S3/Zeros/Endpoints/CanonicalLiLocalExpansion.canonical_li_one D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_complex_pairWeight_hasSum D5/S3/Weil/Probability/CanonicalLiNonnegativeConverse.canonical_li_nonnegative_implies_rh D5/S3/Weil/Probability/CanonicalLiDiskEquivalence.rh_iff_canonical_li_disk_summable D5/S3/Weil/ZeroData/UnconditionalCanonicalZeroData.zetaZeroData_representation_iff"}
+Let $\xi$ be the $\operatorname{xiReading}$ of [@def-xi-reading], let `RiemannHypothesis` be Mathlib's proposition (spelled out in item 2 of [@thm-cayley-critical-line-criterion]), and let $\gamma_{\mathrm{EM}}$ be the Euler–Mascheroni constant.
+
+1. **Cayley nodes.** For real $\gamma$ put $x(\gamma)=\dfrac{1}{4\gamma^2+1}$ and $c(\gamma)=\bigl(1-2x(\gamma)\bigr)+2\sqrt{x(\gamma)\bigl(1-x(\gamma)\bigr)}\;i$. Then $\lvert c(\gamma)\rvert^2=1$ and $\lvert1-c(\gamma)\rvert^2=4x(\gamma)$; moreover, for every finite index set $J$, every $\gamma:J\to\mathbb{R}$ and every natural number $n$,
+
+   $$
+   \sum_{j\in J}2\bigl(1-\operatorname{Re}c(\gamma_j)^n\bigr)=\sum_{j\in J}\bigl\lvert1-c(\gamma_j)^n\bigr\rvert^2 .
+   $$
+
+2. **Li coefficients.** Put $\lambda_0=0$ and, for each natural number $n$, $\lambda_{n+1}=\operatorname{Re}\left[\dfrac{1}{n!}\,\left.\dfrac{d^{\,n+1}}{ds^{\,n+1}}\bigl(s^n\operatorname{Log}\xi(s)\bigr)\right|_{s=1}\right]$, where $\operatorname{Log}$ is the principal branch of the complex logarithm. Then $\lambda_1=1+\dfrac{\gamma_{\mathrm{EM}}}{2}-\ln\bigl(2\sqrt\pi\bigr)$.
+3. **The same number on the zero side.** Let $\rho_0,\rho_1,\dots$ be the enumeration of the nontrivial zeros provided unconditionally by the pinned repository (its order is fixed by the axiom of choice; the zeros are pairwise distinct, and each zeta zero in the critical strip occurs exactly once), and let $m_k$ be the analytic multiplicity of $\rho_k$. Then the series $\sum_k\dfrac{m_k}{\rho_k(1-\rho_k)}$ converges to the same sum in every order of summation (Lean's `HasSum`), with sum $2+\gamma_{\mathrm{EM}}-2\ln\bigl(2\sqrt\pi\bigr)$.
+4. **Nonnegativity implies `RiemannHypothesis`.** If $\lambda_n\ge0$ for every natural number $n\ge1$, then `RiemannHypothesis` holds.
+5. **Disk-summability criterion.** `RiemannHypothesis` holds if and only if, for every real $0\le r<1$, the series $\sum_{n\ge0}\lvert\lambda_{n+1}\rvert\,r^n$ converges.
+:::
+
+::: proof
+Item 1 adds the squares of the real and imaginary parts of $c(\gamma)$, using $\bigl(\sqrt{x(1-x)}\bigr)^2=x(1-x)$ for $0<x\le1$; the summed identity expands $\lvert1-w\rvert^2=1-2\operatorname{Re}w+\lvert w\rvert^2$ term by term and inserts $\lvert c^n\rvert=1$. Item 2: for $n=0$ the definition reduces to the real part of $\xi'(1)/\xi(1)$, whose closed form is a frozen result of the same repository and uses Mathlib's asymptotics of zeta near $s=1$. Item 3 evaluates the partial-fraction expansion of $\xi'/\xi$ over the zeros at $s=1$, then uses the reflection $\xi'/\xi(0)=-\xi'/\xi(1)$ and the closed form of item 2. Item 4: $\lambda_{n+1}$ is the Taylor coefficient at $z=0$ of $(1-z)^{-2}\,(\xi'/\xi)\bigl(\tfrac{1}{1-z}\bigr)$; a power series with nonnegative coefficients has a singularity at its radius of convergence on the positive real axis, whereas this function is analytic at every point of the real segment $0\le z<1$, because the zeros of $\xi$ lie in the critical strip and $\tfrac{1}{1-z}\ge1$ is not one of them; hence the radius is at least $1$ and the sum $L(z)$ of the series is analytic in the unit disk; $\varphi(z)=\xi\bigl(\tfrac1{1-z}\bigr)$ satisfies $\varphi'=L\varphi$ near the origin, and by analytic continuation throughout the disk; if $\varphi$ vanished at a point of the disk, all its derivatives would vanish there and $\varphi$ would be identically zero, contradicting $\varphi(0)=\tfrac12$; so $\xi\bigl(\tfrac1{1-z}\bigr)$ has no zero in the unit disk, that is, $\xi$ has no zero with $\operatorname{Re}s>\tfrac12$, and the right-half-strip reduction yields `RiemannHypothesis`. The forward direction of item 5 derives analyticity of that function in the unit disk from `RiemannHypothesis`; the converse repeats the last step of item 4. The full proof is checked by the Lean kernel.
+:::
+
+The node $c(\gamma)$ of item 1 is the zero rotor: for $\gamma\ge0$, $c(\gamma)=u_\rho=1-\tfrac{1}{1/2+i\gamma}$; for $\gamma<0$, $c(\gamma)=c(-\gamma)=\overline{u_\rho}$ (the square root in the definition is nonnegative); in both cases $x(\gamma)=\tfrac12v_\rho$ (manual derivation). So the summed identity of item 1 says that twice the total sagitta of the $n$-th powers equals the total squared chord of the $n$-th powers. It is the chord–sagitta identity applied to $u^n$; it holds for any family of **real** $\gamma_j$ and says nothing about where the zeros of $\zeta$ lie. The sum in item 3 is exactly twice the closed form of item 2, hence $\lambda_1=\sum_k m_k\cdot\tfrac{1}{2\rho_k(1-\rho_k)}$ (manual derivation). Item 4 gives a sufficient condition for `RiemannHypothesis` and item 5 an equivalent form of it; neither premise (all $\lambda_n\ge0$; summability for every $r<1$) has been proved, and the Riemann hypothesis ([@conj-riemann-hypothesis]) remains open.
+
+::: {.remark #rem-ch34-li-criterion-sagitta-literature title="Li's Criterion Read Through the Sagitta (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** By the Hadamard product, the $\lambda_n$ of item 2 of [@prop-ch34-li-sagitta-frozen] equals $\sum_\rho\bigl[1-(1-\tfrac1\rho)^n\bigr]$, summed over all nontrivial zeros with multiplicity, truncated symmetrically at $\lvert\operatorname{Im}\rho\rvert\le H$ and then letting $H\to\infty$ (X.-J. Li, *J. Number Theory* **65**, 325–333, 1997). The functional equation pairs $\rho$ with $1-\rho$, and their rotors are reciprocal: $u_{1-\rho}=u_\rho^{-1}$. Put $v_\rho:=1-\tfrac12\bigl(u_\rho+u_\rho^{-1}\bigr)=\dfrac{1}{2\rho(1-\rho)}$; on the critical line this is the $\operatorname{Re}\tfrac1\rho$ used above, and off the line it is a complex number. Such a pair contributes $2\bigl[1-T_n(1-v_\rho)\bigr]$, with $T_n$ the Chebyshev polynomial of the first kind, so that
+
+$$
+\lambda_n=\sum_\rho\bigl[1-T_n(1-v_\rho)\bigr]
+$$
+
+(manual derivation resting on the literature result above). The right-hand side converges absolutely, so the truncation limit can be dropped: $1-T_n(1-v)$ is a polynomial in $v$ with no constant term, and the summability in item 3 of [@prop-ch34-li-sagitta-frozen] gives $\sum_k m_k\lvert v_{\rho_k}\rvert<\infty$ (manual derivation). At a zero $\rho=\tfrac12+i\gamma$ on the critical line, $v_\rho=\tfrac{2}{1+4\gamma^2}$ is a real number in $(0,2)$; writing $1-v_\rho=\cos\theta_\rho$, the bracket equals $1-\cos n\theta_\rho\ge0$. At a zero $\rho=\beta+i\gamma$ off the line $v_\rho$ is not real, because $\operatorname{Im}\rho(1-\rho)=\gamma(1-2\beta)$ and $\zeta$ has no real zero in $(0,1)$ ([@prop-zeta-real-axis-sign]), so $\gamma\ne0$.
+
+**Li's criterion** (Li 1997; E. Bombieri & J. C. Lagarias, *J. Number Theory* **77**, 274–287, 1999): [@conj-riemann-hypothesis] holds if and only if $\lambda_n\ge0$ for all $n\ge1$. That the conjecture implies nonnegativity is the termwise nonnegativity of the formula above; it depends on the zero-sum representation and is not frozen in the pinned repository. That nonnegativity implies the conjecture is item 4 of [@prop-ch34-li-sagitta-frozen]. Li's criterion is an equivalent restatement of the Riemann hypothesis, not a proof: it trades "the zeros lie on a line" for "infinitely many inequalities"; the criterion needs all of them, and checking finitely many is neither a proof of the conjecture nor progress toward one.
+:::
+
+::: {.example #ex-ch34-zero-rotor-sagitta-numbers title="Chord and Sagitta of the First Zero, the First Four Li Coefficients, and a Hypothetical Off-Line Quartet"}
+The zero ordinates in this example are numerical values (literature result, not formalized in this book); the other numbers were computed with 30 digits of precision and rounded as shown.
+
+**The first zero.** $\gamma_1=14.134725$: turning angle $\theta_1=2\arctan\tfrac{1}{2\gamma_1}=0.0707183$, sagitta $v_1=\tfrac{2}{1+4\gamma_1^2}=0.00249949$, chord $\tfrac{1}{\lvert\rho_1\rvert}=0.0707035$; and $1/\lvert\rho_1\rvert^2=0.00499899=2v_1$.
+
+**The first four Li coefficients**, computed directly from the definition in item 2 of [@prop-ch34-li-sagitta-frozen]:
+
+| $n$ | $\lambda_n$ | $\lambda_n/(n^2\lambda_1)$ |
+| :---: | :---: | :---: |
+| $1$ | $0.0230957$ | $1$ |
+| $2$ | $0.0923457$ | $0.999598$ |
+| $3$ | $0.2076389$ | $0.998930$ |
+| $4$ | $0.3687905$ | $0.997995$ |
+
+$\lambda_1$ agrees with the closed form $1+\tfrac{\gamma_{\mathrm{EM}}}{2}-\ln(2\sqrt\pi)$ of item 2. The third column sits just below $1$. For a rotor on the unit circle, $1-\cos n\theta\le n^2(1-\cos\theta)$ (manual derivation from $\lvert\sin nx\rvert\le n\lvert\sin x\rvert$); hence, under the hypothesis that all zeros lie on the critical line, the formula of [@rem-ch34-li-criterion-sagitta-literature] gives $\lambda_n\le n^2\lambda_1$ (a conditional derivation whose hypothesis is the open conjecture). The four ratios in the table are consistent with this inequality. That these four numbers are positive is a numerical fact, not a statement about all $n$.
+
+**A hypothetical off-line quartet.** Take $\tfrac{7}{10}\pm5i$ and $\tfrac{3}{10}\pm5i$ (these are not zeros of zeta). The four points are closed under $s\mapsto1-s$ and under conjugation, yet $\operatorname{Re}\sum\bigl[1-(1-\tfrac1\rho)^{n}\bigr]$ first turns negative at $n=31$, where it equals $-0.0943$; negativity at $n=31$ is frozen as [`li_positivity_distinguishes_the_off_line_toy_spectrum`](lean:D5/S3/Zeros/ToySpectrum/OffLineToySpectrum.li_positivity_distinguishes_the_off_line_toy_spectrum). A different choice can delay the sign change considerably: move the fake quartet to $\tfrac12\pm0.1\pm14i$; on its own, its sum first turns negative at $n=88$; combined with the first $80$ pairs of actual zeros into one finite family, the nonnegative on-line contributions postpone the first negative value to $n=8446$ (where the sum is $-0.858$). This is a numerical fact about this one finite family, not a statement about the $\lambda_n$ of zeta and not a general rule.
+:::
+
 With single-step rotor derivatives and one-dimensional product integrals unified, we arrive at the architectural crown of calculus: exterior differentiation and the generalized Stokes theorem on curved manifolds.
 
 ## 34.30.3 Zero-Error Finite-Mesh Stokes Exactness on `1—3—3—1`, a Three-Line Gauss–Bonnet Proof, and Non-Abelian Surface Whiskering {#sec-ch34-30-3}
