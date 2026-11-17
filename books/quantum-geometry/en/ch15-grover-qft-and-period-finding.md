@@ -1367,9 +1367,67 @@ Every prime divisor of the final output divides the original $m$, so coverage pl
 
 For $N=21,a=2$, input $m=12,P=[2,3]$ gives $6$; input $m=132,P=[2,3,11]$ also gives $6$, removing the odd excess factor $11$ left after halving. For the identity and $m=12$, the list $[2,3]$ gives $1$, whereas $[2]$ gives $3$ and $[6]$ gives $2$. In the last case, both original prime divisors $2,3$ divide a listed entry $6$, but neither occurs as an entry. Divisibility into some list member cannot replace the theorem's coverage condition.
 
-The classical repeated-division order algorithm appears in Andrew V. Sutherland, MIT 18.783, Spring 2015, Lecture 8, §8.3, Algorithm 8.2, printed page 3 ([lecture notes](https://math.mit.edu/classes/18.783/2015/LectureNotes8.pdf)). The notes start from a returning multiple in an additive group and its prime factorization. Here multiplication and the identity replace addition and zero; the statement permits arbitrary decidable monoids and extra list entries. No algorithmic originality is claimed.
+**How many power tests does the program actually call?** Keep the original input, guards, and output, and add a count component. First check the arithmetic conditions $1<p$, $0<m$, and $p\mid m$. If any fails, no power-equality test is called and the count is $0$. If all pass, call the interface $x^{m/p}=1$ once, counting $1$ whether it succeeds or fails. Only success recurses, at the same quotient $m/p$. The corresponding computable pair is defined by
 
-This conditional algorithm supplies no method for acquiring $P$ or efficiently factoring the exponent. With verified coverage, a positive returning exponent is indeed processed into the true order; obtaining the information needed for coverage remains a separate task. Termination supplies no bit or gate bound. No new quantum success probability, uniform-unit sampler, guarantee for arbitrarily correlated repetitions, hardware implementation, or complete recursive integer-factorization result follows here. Combining the classical Good law with fixed-base quantum observations still requires an explicit common joint law.
+```text
+stripFactorCost x p m =
+  if 1 < p ∧ 0 < m ∧ p ∣ m then
+    if x ^ (m / p) = 1 then
+      let r := stripFactorCost x p (m / p)
+      (r.1, r.2 + 1)
+    else (m, 1)
+  else (m, 0)
+
+stripFactorsCost x P m =
+  P.foldl (fun r p =>
+    let s := stripFactorCost x p r.1
+    (s.1, r.2 + s.2)) (m, 0)
+```
+
+The fold still processes the original list $P$ in its original order: the first component carries the current exponent, and the second accumulates calls. Write $\Phi(n)=\operatorname{Nat.log}(2,n)$. For $n>0$ this equals $\lfloor\log_2 n\rfloor$; Lean's total-function convention is $\operatorname{Nat.log}(2,0)=0$.
+
+::: {.theorem #thm-shor-prime-stripping-cost title="Exact output and a logarithmic power-test bound" lean="D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStrippingCost.stripFactorsCost_spec"}
+For every type $G:\operatorname{Type}\,u$ equipped with a monoid structure and decidable equality, every element $x\in G$, every finite list $P$ of natural numbers, and every $m\in\mathbb N$, put
+
+$$
+(M,C)=\operatorname{stripFactorsCost}(x,P,m).
+$$
+
+Then both clauses hold:
+
+$$
+\begin{aligned}
+M&=\operatorname{stripFactors}(x,P,m),\\
+C&\le P.\operatorname{length}+\operatorname{Nat.log}(2,m).
+\end{aligned}
+$$
+:::
+
+This count bound requires neither $m>0$ nor $x^m=1$. It also requires no prime-factor coverage, primality of entries, absence of duplicates, finiteness, group structure, or cancellation. For $m=0$, every entry stops at the arithmetic guard and the result is $(0,0)$; an empty list returns $(m,0)$. Entries $0$ and $1$ call no power test, while arbitrary other natural entries follow the original guards. The preceding exact-order theorem still requires its original positivity, returning, and coverage conditions.
+
+::: proof
+Strong induction on the current exponent proves equality of the first components: both programs stop under exactly the same conditions or recurse at the same $m/p$. Carry this equality through the list fold.
+
+For one list entry, let $n$ be its input, $n'$ its output, and $c$ its count. Prove the potential inequality
+
+$$
+c+\Phi(n')\le 1+\Phi(n).
+$$
+
+If the arithmetic guard fails, $c=0,n'=n$; if the power test fails, $c=1,n'=n$. Both terminal branches satisfy the inequality. On success, $p\ge2$, $p\mid n$, and $n>0$, so $n\ge2$ and
+
+$$
+\Phi(n/p)+1\le\Phi(n/2)+1=\Phi(n).
+$$
+
+The decrease in logarithmic potential therefore pays the cost $1$ of this successful test; apply the induction hypothesis at the quotient. Sum the single-entry inequalities along the original list. Intermediate potentials cancel, giving $C+\Phi(M)\le P.\operatorname{length}+\Phi(m)$. Dropping the nonnegative final potential gives the count bound. The full proof is checked by the Lean kernel.
+:::
+
+For example, retain $N=21,a=2,m=132,P=[2,3,11]$. The tested exponents are $66,33,22,6$, with residues $1,8,16,1$, respectively. The first and last tests succeed, and the two failed tests also count, so the returned pair is $(6,4)$. Finally $11\nmid6$: only the arithmetic guard is checked, with no additional power test.
+
+The classical repeated-division order algorithm appears in Andrew V. Sutherland, MIT 18.783, Spring 2015, Lecture 8, §8.3, Algorithm 8.2, printed page 3 ([lecture notes](https://math.mit.edu/classes/18.783/2015/LectureNotes8.pdf)). The notes start from a returning multiple in an additive group and its prime factorization. Here multiplication and the identity replace addition and zero; the statement permits arbitrary decidable monoids and extra list entries. No algorithmic originality is claimed. The count theorem above is derived in trureturing for that classical algorithm; no mathematical originality is claimed.
+
+This conditional algorithm supplies no method for acquiring $P$ or efficiently factoring the exponent. With verified coverage, a positive returning exponent is indeed processed into the true order; obtaining the information needed for coverage remains a separate task. The logarithmic bound counts only calls to the power-equality interface. It excludes acquiring $P$, evaluating arithmetic guards, and multiplications inside modular exponentiation, and supplies no running-time, bit-complexity, quantum-gate, or complete Shor complexity bound. No new quantum success probability, uniform-unit sampler, guarantee for arbitrarily correlated repetitions, hardware implementation, or complete recursive integer-factorization result follows here. Combining the classical Good law with fixed-base quantum observations still requires an explicit common joint law.
 
 **From the true order to factors: which bases fail?** Start with $N=15$ and $a=2$. The local orders modulo $3$ and $5$ are $2$ and $4$, so the global true order is $r=\operatorname{lcm}(2,4)=4$. The half-order power $2^2$ is locally $1$ and $-1$, respectively, and therefore is neither $1$ nor $-1$ modulo $15$. What matters is how many factors of $2$ occur in each local order: here, $1$ and $2$. We first count failing tuples in an arbitrary finite family of cyclic groups, then transport the same event to the actual unit group.
 
