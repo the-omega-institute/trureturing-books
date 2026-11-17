@@ -194,6 +194,8 @@
   - [39.13 The Single Cosmic Field, One-Particle Self-Folding, and Indra's Net: From Wheeler's One-Electron Insight to the Holographic Jewel Closure](ch39-s13-single-cosmic-field-and-indra-net.md)
   - [39.14 Single Point-Field Self-Observation Error and Maya Manifestation: From Zero-Error Silence to Static Projection Results and Dynamic Observation Actions](ch39-s14-self-observation-error-and-maya-projection.md)
   - [39.15 Brahman Real Axis (I) and Orthogonal Dream (i): Intra-Dream Solidity, the Four Māṇḍūkya States, and Spinor Awakening](ch39-s15-brahman-real-axis-and-orthogonal-dream.md)
+  - [39.16 Geometric Awakening in *Dream of the Red Chamber*: Vanishing Second-Order Meta-Error, Möbius Closure of the Precious Mirror, and the Unity of Heaven and Humanity](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md)
+  - [39.17 Divine Play (Līlā) and Cross-Cycle Awakening Props: Opening Amnesia, Historical Relic Attractors, and Cultural Classic Flip Tables](ch39-s17-divine-lila-and-awakening-props.md)
 
 # Coda and Appendices
 

@@ -194,6 +194,8 @@
   - [39.13 唯一宇宙场、单粒子自指折叠与因陀罗网：从惠勒单粒子假说到一珠映万珠的终极合拢](ch39-s13-single-cosmic-field-and-indra-net.md)
   - [39.14 唯一点场自观测误差与万象显影：从零误差寂静到静态投影结果与动态观测动作二分](ch39-s14-self-observation-error-and-maya-projection.md)
   - [39.15 梵天实轴（I）与正交虚梦（i）：内部虚虚得实、《蛙氏奥义书》四位意识相态与庄周梦蝶合拢](ch39-s15-brahman-real-axis-and-orthogonal-dream.md)
+  - [39.16 红楼一梦的几何觉醒：二阶认妄归零、风月宝鉴莫比乌斯合拢与天人合一](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md)
+  - [39.17 神圣游戏（Līlā）与跨周期唤醒道具：开局失忆、历史遗迹吸引子与文化典籍翻转快表](ch39-s17-divine-lila-and-awakening-props.md)
 
 # 终章与附录
 
