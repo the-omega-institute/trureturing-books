@@ -177,7 +177,7 @@ Stepping back across Steps 1–3, we also keep mathematical theorem and physical
 
 ## 31.4.3 Time as Monotonic Orthogonal Dimension Expansion: Finite-Box Saturation and Prime-Axis Escape {#sec-ch31-time-orthogonal-expansion}
 
-We now arrive at the closing sentence of this section's thesis: **"Time is orthogonal dimension expansion."** (`MODEL`) Mathematically, this sentence sets the fate of dynamics confined inside a fixed finite-dimensional box directly against the birth of orthogonal axes from a nontrivial complement.
+We now arrive at the closing sentence of this section's thesis: **"Time is orthogonal dimension expansion."** Mathematically, this sentence sets the fate of dynamics confined inside a fixed finite-dimensional box directly against the birth of orthogonal axes from a nontrivial complement.
 
 Consider first the Hilbert-space geometry of orthogonal complements and shell-by-shell expansion. For any closed subspace $M$ of a Hilbert space $E$, [`orthogonal_complement_projection_identities`](lean:D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities) locks the complement relation $P_{M^\perp} = \operatorname{id}_E - P_M$, idempotence of both projections, vanishing cross-products $P_M P_{M^\perp} = P_{M^\perp} P_M = 0$, and resolution of unity $P_M + P_{M^\perp} = \operatorname{id}_E$. In a real Hilbert space, [`finite_stage_expansion`](lean:D5/S3/Observer/Tomography/FiniteStageExpansion.finite_stage_expansion) proves that whenever closed shells satisfy $E_{k+1} \le S_k^\perp$ and $S_{k+1} = S_k \sqcup E_{k+1}$, the $n$-th cumulative subspace decomposes as $S_n = S_0 \sqcup \bigsqcup_{k=1}^n E_k$, the ambient space decomposes as $S_0 \sqcup \bigsqcup_{k=1}^n E_k \sqcup S_n^\perp$, and the remaining residual splits as $S_n^\perp = E_{n+1} \sqcup S_{n+1}^\perp$ (note that zero shells $E_{k+1} = \bot$ are permitted unless nonzero residuals are stipulated). Whenever the orthogonal complement $S^\perp$ is nontrivial, a unit escape direction exists at full metric distance one from $S$:
 
@@ -204,7 +204,7 @@ $$
 cannot generate new rank indefinitely; its strict growth steps are capped by the ambient dimension minus the initial readout rank:
 
 ::: {.theorem #thm-ch31-krylov-growth-stability title="Upper Bound on Strict Growth Steps of Finite-Dimensional Observable Krylov Chains" lean="D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound"}
-Let $V$ and $Y$ be finite-dimensional inner-product spaces over $\mathbb{K}$ (`[RCLike 𝕜]`), and let $T : V \to_{\mathbb{K}} V$ and $C : V \to_{\mathbb{K}} Y$ be $\mathbb{K}$-linear maps. For the ascending observable Krylov subspace chain $O_m = \operatorname{observableKrylov}(T, C, m)$ ($m \in \mathbb{N}$), the extended cardinality of strict growth stages satisfies the upper bound
+Let $V$ and $Y$ be finite-dimensional inner-product spaces over $\mathbb{K}$ (`[RCLike 𝕜]`), and let $T : V \to_{\mathbb{K}} V$ and $C : V \to_{\mathbb{K}} Y$ be $\mathbb{K}$-linear maps. For the ascending observable Krylov subspace chain $O_m = \operatorname{observableKrylov}(T, C, m)$ ($m \in \mathbb{N}$), the extended cardinality of strict growth stages satisfies
 
 $$
 \operatorname{encard}\bigl\{m \in \mathbb{N} \;\big|\; O_m < O_{m+1}\bigr\} \le \operatorname{finrank}_{\mathbb{K}} V - \operatorname{finrank}_{\mathbb{K}}(\operatorname{range} C).

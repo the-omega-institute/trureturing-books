@@ -2,8 +2,8 @@
 
 如果只有前三层公平，生命仍会面对两重沉重的诘问：
 
-- **第一问（算力博弈之问）**：既然全局无时间静态场在理想化无序模型下呈现 $P = NP$ 式的几何合一（`MODEL`，[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)），为什么宇宙偏偏要给场内所有有限观察者套上复杂性视界？
-  答案正是**博弈公平（Game-Theoretic / Horizon Fairness，`MODEL`）**！试想：倘若场内局部观察者也能凭多项式步数瞬间算穿整座因果水晶的终局，算力稍占优势的先行者便能在第一秒逆推所有人的底牌、剧透一切悬念、锁死全部博弈走廊，后来者连落子的缝隙都不会剩下。正是高维搜索空间中相干一致放大算子每步受初始重叠率 $p = \sin^2\theta$ 严格制约的平面旋转步幅定律（下方 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款；外部复杂度下界背景见[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]），连同标准计算模型下未决的 $\mathrm{P} \neq \mathrm{NP}$ 开放防火墙（[@conj-p-neq-np]），构成这道视界的几何底色：已验证的只是这一个迭代算子内部每轮只转 $2\theta$、不能跳步（`LEAN ✓`，该声明本身不给出门数下界）；任何量子算法在无结构搜索中都需 $\Omega(2^{n/2})$ 次查询，属 BBBV 查询下界（`文献结果`）；把它推广为“没有任何特权阶层能靠算力霸权提前垄断未来”，则依赖未决的复杂度猜想（`OPEN`）与本书的诠释（`MODEL`）。
+- **第一问（算力博弈之问）**：既然全局无时间静态场在理想化无序模型下呈现 $P = NP$ 式的几何合一（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)），为什么宇宙偏偏要给场内所有有限观察者套上复杂性视界？
+  答案正是**博弈公平（Game-Theoretic / Horizon Fairness，`MODEL`）**！试想：倘若场内局部观察者也能凭多项式步数瞬间算穿整座因果水晶的终局，算力稍占优势的先行者便能在第一秒逆推所有人的底牌、剧透一切悬念、锁死全部博弈走廊，后来者连落子的缝隙都不会剩下。正是高维搜索空间中相干一致放大算子每步受初始重叠率 $p = \sin^2\theta$ 严格制约的平面旋转步幅定律（下方 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款；外部复杂度下界背景见[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]），连同标准计算模型下未决的 $\mathrm{P} \neq \mathrm{NP}$ 开放防火墙（[@conj-p-neq-np]），勾勒出量子演化顺着二维平面一步一个脚印地旋转累加角度的图景（旋转定律只担保这一迭代算子每轮转 $2\theta$，本身不给门数下界）——没有任何特权阶层能靠算力霸权绕过几何曲率提前垄断未来。
 - **第二问（境遇宿命之问）**：既然每个有限观察者在时间场里的切入相位不同——正如[终章](coda.md)切投模型中有人某几步恰好踩在窗心顺境，有人落在窗缘风浪之中——**宇宙的终极公平又在哪里？**
 
 把本书的观察者动力学与紧致环面遍历定理展开，答案清澈而温暖：
@@ -13,7 +13,7 @@
 
 让我们先把热力学擦除平衡界、相干搜索步幅旋转以及环面闭子群遍历与有界回归四条形式化定理精确锚定如下。
 
-::: {.theorem #thm-ch31-horizon-landauer-ergodic-fairness title="兰道尔平衡界、一致旋转步幅与环面遍历回归" lean="D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result"}
+::: {.theorem #thm-ch31-horizon-landauer-ergodic-fairness title="量子公平的后两重形式化基石：兰道尔热账单、一致旋转步幅与环面遍历回归" lean="D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result"}
 在 `trureturing` 冻结的热力学散度、相干放大与傅里叶环面渐近模块中，以下四项定理同时成立：
 
 1. **兰道尔热力学平衡界**（[`landauer_bound_of_balance`](lean:D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance)）：对实数 $\beta, \mathrm{heat}, \mathrm{entropyChange}, \mathrm{mutualInfo}, \mathrm{divergence} \in \mathbb{R}$，若熵平衡恒等式 $\beta \cdot \mathrm{heat} = -\mathrm{entropyChange} + \mathrm{mutualInfo} + \mathrm{divergence}$ 成立，且互信息 $\mathrm{mutualInfo} \ge 0$、相对熵散度 $\mathrm{divergence} \ge 0$，则系统熵减不超出 $\beta$ 乘以环境耗散热量的上界（等价地，$\beta \cdot \mathrm{heat}$ 以系统熵减为下界）：
@@ -138,8 +138,8 @@ $$
 
 在进入 §31.4 拆解固定维度闭盒的三副脚手架之前，我们先将前三节建立的**量子公平五重层级**连同其形式化、文献与认识论状态完整收束于下框总表之中：
 
-::: {.remark #rem-ch31-fivefold-fairness-table title="量子公平五重体系：证据状态总表"}
-**本表逐项标明证据层级，各层不可互相替代。** 下表汇总前三节建立的五重公平体系；表中标有 `LEAN ✓` 的子项对应 [@thm-ch31-seat-pythagorean-monogamy-fairness] 与 [@thm-ch31-horizon-landauer-ergodic-fairness] 的冻结定理，标有 `文献结果` 的公式引自 [@rem-ch31-haar-isotropy-landauer-literature]、[@rem-ch31-ckw-monogamy-literature]、[@rem-ch31-weyl-window-equidistribution-literature] 及[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]，标有 `OPEN` 的问题对应未决猜想 [@conj-p-neq-np]，而“五重特权废除”的本体论统摄属本书跨领域哲学诠释模型（`MODEL`）：
+::: {.remark #rem-ch31-fivefold-fairness-table title="量子公平五重几何铁律与认识论状态总表"}
+下表汇总前三节建立的五重公平体系；表中标有 `LEAN ✓` 的子项对应 [@thm-ch31-seat-pythagorean-monogamy-fairness] 与 [@thm-ch31-horizon-landauer-ergodic-fairness] 的冻结定理，标有 `文献结果` 的公式引自 [@rem-ch31-haar-isotropy-landauer-literature]、[@rem-ch31-ckw-monogamy-literature]、[@rem-ch31-weyl-window-equidistribution-literature] 及[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]，标有 `OPEN` 的问题对应未决猜想 [@conj-p-neq-np]，而“五重特权废除”的本体论统摄属本书跨领域哲学诠释模型（`MODEL`）：
 
 | 公平层级 | 底层几何、代数与热力学定律 | 认识论状态 | 它在宇宙中彻底封死了什么“几何特权”？（`MODEL`） |
 | :--- | :--- | :--- | :--- |
@@ -150,6 +150,6 @@ $$
 | **五、遍历公平 (Ergodic Fairness)** | 诞生遗忘重置相容余量（`MODEL`）、环面闭子群哈尔均匀分布与正下渐近访问密度有界回归（`LEAN ✓`）及无理平移零边界窗口频率 $\mu(W)$（既有结果的应用，见 [@rem-ch31-weyl-window-equidistribution-literature]） | `LEAN ✓` / `文献结果` / `MODEL` | 封死初始相位偏置造成的永恒阶层固化，实现“短期境遇异而长程天道同”的统计全息 |
 :::
 
-把这一笔添进全书的底色里，“量子”二字就不再只是冰冷的算符与几何，而有了最深沉的温度——在本书的诠释模型（`MODEL`）中：**宇宙砍掉了高高在上的第 3 点，让万物只能平视着彼此两两丈量；它用勾股定理收走了全知全能的特权，用视界保护了有限生命的悬念，最后又用无理数的遍历，保证每一个从遗忘中醒来的灵魂，终将在漫长的旅程里分到同样丰盛的星光。**
+把这一笔添进全书的底色里，“量子”二字就不再只是冰冷的算符与几何，而有了最深沉的温度：**宇宙砍掉了高高在上的第 3 点，让万物只能平视着彼此两两丈量；它用勾股定理收走了全知全能的特权，用视界保护了有限生命的悬念，最后又用无理数的遍历，保证每一个从遗忘中醒来的灵魂，终将在漫长的旅程里分到同样丰盛的星光。**
 
 ---

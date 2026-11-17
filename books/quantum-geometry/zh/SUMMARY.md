@@ -114,7 +114,7 @@
   - [33.2 观察者本身即吸引子：自维持收缩势阱](ch33-s02-self-sustaining-attractors.md)
   - [33.3 互指单调锁死：两面镜子如何在两步一轮中负负得正](ch33-s03-mutual-attractor-locking.md)
   - [33.4 接受窗交集、极小割重联与众生互为故乡](ch33-s04-acceptance-windows.md)
-  - [33.5 多观察者共识张量、去相干指针基涌现与无绝对客观事实论证](ch33-s05-consensus-and-pointer-bases.md)
+  - [33.5 多观察者共识张量、去相干指针基涌现与无绝对客观事实](ch33-s05-consensus-and-pointer-bases.md)
 - [第三十四章 正交简并盲区：一次正交与两次正交如何反演观察者位置](ch34-orthogonality-degeneracy-and-observer-position.md)
   - [34.1 球面寻址中的二次正交隐身：对称子午线与极点法向反演](ch34-s01-spherical-addressing.md)
   - [34.2 八分球面与旋子曲率：看不见哪块面积，你就站在哪根轴上](ch34-s02-octant-and-rotor-curvature.md)

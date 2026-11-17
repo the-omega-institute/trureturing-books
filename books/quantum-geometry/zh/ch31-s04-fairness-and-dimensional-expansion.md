@@ -177,7 +177,7 @@ $$
 
 ## 31.4.3 时间作为单调正交维度扩张：有限盒饱和与素数新轴突围 {#sec-ch31-time-orthogonal-expansion}
 
-现在我们来到本节四句命题中最具突破性的最后一句话：**“时间是维度扩张.”**（`MODEL`） 在数学上，这句话把“封闭有限维盒子里的演化宿命”与“开放正交补空间中的新轴诞生”摆上了同一架天平。
+现在我们来到本节四句命题中最具突破性的最后一句话：**“时间是维度扩张.”** 在数学上，这句话把“封闭有限维盒子里的演化宿命”与“开放正交补空间中的新轴诞生”摆上了同一架天平。
 
 先看正交补空间与逐层壳扩张的精确希尔伯特几何。对完备内积空间 $E$ 中的任意闭子空间 $M$，正交补投影恒等式定理 [`orthogonal_complement_projection_identities`](lean:D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities) 锁定了余投影关系 $P_{M^\perp} = \operatorname{id}_E - P_M$、两个投影各自的幂等性、交叉复合恒为零（$P_M P_{M^\perp} = P_{M^\perp} P_M = 0$）以及恒等分解 $P_M + P_{M^\perp} = \operatorname{id}_E$；而在实希尔伯特空间中，有限阶壳扩张定理 [`finite_stage_expansion`](lean:D5/S3/Observer/Tomography/FiniteStageExpansion.finite_stage_expansion) 证明，只要每一层新增闭壳满足 $E_{k+1} \le S_k^\perp$ 且累积闭子空间按 $S_{k+1} = S_k \sqcup E_{k+1}$ 递推，第 $n$ 阶空间就精确分解为初始核与前 $n$ 层正交壳的直和 $S_n = S_0 \sqcup \bigsqcup_{k=1}^n E_k$，全空间分解为 $S_0 \sqcup \bigsqcup_{k=1}^n E_k \sqcup S_n^\perp$，且当前正交余空间满足递推剥离 $S_n^\perp = E_{n+1} \sqcup S_{n+1}^\perp$（注意该定理本身允许零壳 $E_{k+1} = \bot$，并不无条件强迫维数严格增长）。唯有当正交补空间非零时，有限层外部才必然存在与当前已知子空间保持满额单位距离的正交逃逸新轴：
 
