@@ -1,6 +1,6 @@
 # 极小圆弧体微积分与黎曼 ζ 函数：能严格说出的内容
 
-研究日期：2026-11-17。研究时的书库基线为 `d73f704229838d8d6763ad408242c80fb52a1b18`，trureturing 钉版为 `4e2a0d3fcca69885dfcf5b56184838554ebb5239`；入库时钉版已升到 `776129eb1e0e88033b2f3d3cc5854e97dd4cdbae`，第 6 节所列声明在两个提交上的陈述相同（其中 `ActualReciprocalSquareBounds` 模块只有一条辅助引理去掉了 `private`）。随本笔记入库的书稿改动只有 [§34.30.2](../../books/quantum-geometry/zh/ch34-s30-arc-body-calculus-and-finite-stokes.md) 末尾新增的一条命题、一条文献注记与一个算例（对应 Z1、Z3、Z4 与第 7 节的数值）；第 8 节对 §34.28–§34.29 既有表述的提示没有写进书稿。配套脚本 `riemann_arc_check.py` 与本笔记同目录。
+研究日期：2026-11-17。研究时的书库基线为 `d73f704229838d8d6763ad408242c80fb52a1b18`，trureturing 钉版为 `4e2a0d3fcca69885dfcf5b56184838554ebb5239`；入库时书库钉版为 `2e46b890e7befe502497de7e253e062ab7b9b392`，第 6 节所列声明在这两个提交上的陈述相同（其间 `ActualReciprocalSquareBounds` 模块只有一条辅助引理去掉了 `private`）。随本笔记入库的书稿改动只有 [§34.30.2](../../books/quantum-geometry/zh/ch34-s30-arc-body-calculus-and-finite-stokes.md) 末尾新增的一条命题、一条文献注记与一个算例（对应 Z1、Z3、Z4 与第 7 节的数值）；第 8 节对 §34.28–§34.29 既有表述的提示没有写进书稿。配套脚本 `riemann_arc_check.py` 与本笔记同目录。
 
 ## 0. 范围与诚实声明
 
