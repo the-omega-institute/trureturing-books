@@ -2,12 +2,12 @@
 
 在经典数字世界里，强权者可以把同一份比特串零成本复制一万份，同时向无数对象许下看似“百分之百排他”的绑定承诺。然而，一旦进入多量子比特交织的张量积几何，**关系公平（Relational Fairness，`MODEL`）**便展现出最温柔也最决绝的铁腕：**深切的交融不可批发，鲜活的灵魂切片不可盗版。**
 
-在 Lean 4 内核验证层面，这道防线由两条零自由参数的严格定理锁定（合并陈述于下方 [@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3–4 款）：
+在 Lean 4 内核验证层面，与这道防线相关的是下面两条已验证结论（合并陈述于下方 [@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3–4 款）：不可克隆内积判据与贝尔边缘；纠缠单配性本身没有对应的 Lean 声明，属于下方文献注记 [@rem-ch31-ckw-monogamy-literature]。
 
-1. **不可克隆内积判据**（[`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion)）：若同一个复线性等距算子 $U$ 能把两个归一化纯态 $\psi, \phi$ 同时从空白辅助态 $\mathrm{blank}$ 克隆为 $\psi\otimes\psi$ 与 $\phi\otimes\phi$，则它们的内积被迫满足幂等方程 $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$——从而要么 $\phi = \psi$（根本是同一个态），要么 $\langle\phi, \psi\rangle = 0$（彼此严格正交的经典可区分刻度）！任何处于非正交叠加张力中的未知状态，都绝无可能被通用机器盲目复印。
+1. **不可克隆内积判据**（[`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion)）：若同一个复线性等距算子 $U$ 能把两个归一化纯态 $\psi, \phi$ 同时从空白辅助态 $\mathrm{blank}$ 克隆为 $\psi\otimes\psi$ 与 $\phi\otimes\phi$，则它们的内积被迫满足幂等方程 $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$——从而要么 $\phi = \psi$（根本是同一个态），要么 $\langle\phi, \psi\rangle = 0$（彼此严格正交的经典可区分刻度）。任何处于非正交叠加张力中的未知状态，都无法被这样一台机器盲目复印（这里的“机器”是 $H \otimes H$ 上的线性等距同构；带辅助寄存器的一般量子操作同样不能克隆，属文献结果）。
 
 ::: {.viz src="quantum-fairness-ledger" preset="cloning" height="500"}
-**副本越多，每份越短。** 一个未知态复制成 $M$ 份时，每份的青色箭头只剩 $\eta = (M+2)/(3M)$，品红是丢掉的部分，保真度降向 $2/3$（通用对称克隆机，文献结果，未在本书形式化）。这台机器对每个态一视同仁，两极的态也一样变短。两极的空心圈标的是另一件事：一台机器若能把两个态都照抄，它们的内积只能是 $0$ 或 $1$（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3 款），所以像 $\lvert 0\rangle$、$\lvert 1\rangle$ 这样的一对正交态可以由另一台专为它们造的机器照抄。
+**副本越多，每份越短。** 一个未知态复制成 $M$ 份时，每份的青色箭头只剩 $\eta = (M+2)/(3M)$，品红是丢掉的部分，保真度降向 $2/3$（通用对称克隆机，文献结果：V. Bužek & M. Hillery 1996；N. Gisin & S. Massar 1997，未在本书形式化）。这台机器对每个态一视同仁，两极的态也一样变短。两极的空心圈标的是另一件事：一台机器若能把两个态都照抄，它们的内积只能是 $0$ 或 $1$（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3 款），所以像 $\lvert 0\rangle$、$\lvert 1\rangle$ 这样的一对正交态可以由另一台专为它们造的机器照抄。
 :::
 
 2. **贝尔纯态边缘最大混态定理**（[`bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal)）：当双量子比特结成秩一贝尔最大纠缠纯态 `bellDensity` 时，追踪掉伙伴环境所得的单体约化态 `traceEnvironment bellDensity` 精确等于 $\frac{1}{2}I_2$（且不幂等）——局部布洛赫偏置彻底退回球心零点，一分一毫的局部纯度偏私都不再私藏，全部关联都交给了跨子系统的共享平面！
@@ -16,12 +16,12 @@
 **满额相融。** 贝尔态 $\lvert\Phi^+\rangle_{AB}\otimes\lvert 0\rangle_C$：$\mathbf{A}$ 与 $\mathbf{B}$ 之间的品红纽带满额，$\mathbf{A}$ 的琥珀色箭头缩回球心，即 $\tfrac{1}{2}I_2$（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 4 款），与 $\mathbf{C}$ 之间一点也不剩。
 :::
 
-下面的形式化定理将席位互易、互补中心化纯度勾股、不可克隆与贝尔边缘混态四块公平基石统一锁定在同一座 Lean 4 证明基座上。
+下面把本章用到的四条已验证声明列在同一个定理盒里；它们彼此独立，各自只担保自己的陈述，“公平”是作者给它们起的总名（`MODEL`）。
 
-::: {.theorem #thm-ch31-seat-pythagorean-monogamy-fairness title="量子公平的前三重形式化基石：玻恩互易、互补勾股、不可克隆与贝尔混态边缘" lean="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"}
-在 `trureturing` 冻结的有限维量子测量、层析、纯态与纠缠模块中，以下四项公平性结构定理同时成立：
+::: {.theorem #thm-ch31-seat-pythagorean-monogamy-fairness title="秩一玻恩权重、中心化纯度勾股分解、不可克隆内积判据与贝尔混态边缘" lean="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"}
+在 `trureturing` 冻结的有限维量子测量、层析、纯态与纠缠模块中，以下四项结论分别成立：
 
-1. **秩一纯态玻恩配对的模方互易律**（[`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)）：设 $n, \kappa$ 为有限类型（`[Fintype n] [DecidableEq n] [Fintype kappa]`），$P : \kappa \to M_n(\mathbb{C})$ 满足记录测量公理 `IsRecordMeasurement P`，$\rho \in M_n(\mathbb{C})$ 为合法量子态（`rho.PosSemidef ∧ Matrix.trace rho = 1`）。若第 $k$ 个测量投影为秩一外积 $P_k = \phi\phi^*$（`Matrix.vecMulVec phi (star phi)`）且状态为纯态 $\rho = \psi\psi^*$（`Matrix.vecMulVec psi (star psi)`），则记录权重满足
+1. **秩一纯态的玻恩记录权重等于跃迁模方**（[`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)）：设 $n, \kappa$ 为有限类型（`[Fintype n] [DecidableEq n] [Fintype kappa]`），$P : \kappa \to M_n(\mathbb{C})$ 满足记录测量公理 `IsRecordMeasurement P`，$\rho \in M_n(\mathbb{C})$ 为合法量子态（`rho.PosSemidef ∧ Matrix.trace rho = 1`）。若第 $k$ 个测量投影为秩一外积 $P_k = \phi\phi^*$（`Matrix.vecMulVec phi (star phi)`）且状态为纯态 $\rho = \psi\psi^*$（`Matrix.vecMulVec psi (star psi)`），则记录权重满足
 
    $$
    \begin{aligned}
@@ -34,7 +34,7 @@
    &\qquad \bullet \operatorname{conditionalState}(P, \rho, j)\Bigr);
    \end{aligned}
    $$
-2. **互补测量语境的中心化纯度勾股守恒**（[`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras)）：设 $d, L$ 为有限类型且 $d$ 非空，$E$ 为完备实内积空间，`visible` 为 $E$ 的闭子空间。若量子态 $\rho \in M_d(\mathbb{C})$ 的中心化纯度满足 $\operatorname{Re}\operatorname{Tr}(\rho^2) - |d|^{-1} = \|\mathrm{state}\|^2$，且可见语境正交投影范数平方满足 $\|\mathrm{visible.starProjection}(\mathrm{state})\|^2 = \sum_{l \in L}\sum_{j \in d}\bigl(\mathrm{probability}(l, j) - |d|^{-1}\bigr)^2$，则中心化纯度预算严格分解为可见语境确定度与正交补残余质量之和：
+2. **中心化纯度的勾股分解**（[`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras)）：设 $d, L$ 为有限类型且 $d$ 非空，$E$ 为完备实内积空间，`visible` 为 $E$ 的闭子空间。若矩阵 $\rho \in M_d(\mathbb{C})$（不要求是量子态，$\mathrm{probability}$ 也不要求由 $\rho$ 给出）满足 $\operatorname{Re}\operatorname{Tr}(\rho^2) - |d|^{-1} = \|\mathrm{state}\|^2$，且可见语境正交投影范数平方满足 $\|\mathrm{visible.starProjection}(\mathrm{state})\|^2 = \sum_{l \in L}\sum_{j \in d}\bigl(\mathrm{probability}(l, j) - |d|^{-1}\bigr)^2$，则中心化纯度预算严格分解为可见语境确定度与正交补残余质量之和：
 
    $$
    \operatorname{Re}\operatorname{Tr}(\rho^2) - |d|^{-1} \;=\; \sum_{l \in L}\sum_{j \in d}\bigl(\mathrm{probability}(l, j) - |d|^{-1}\bigr)^2 \;+\; \operatorname{residualMass}(\mathrm{visible}, \mathrm{state});
@@ -54,7 +54,7 @@
 :::
 
 ::: proof
-第 1 款由秩一外积迹归约 `rank_one_pure_state_modulus_square_reduction` 与加权后验系综分解 `unread_eq_weighted_ensemble` 合取而成（并由复点积共轭反演给出对易模方 $\|\phi^* \bullet_v \psi\|^2 = \|\psi^* \bullet_v \phi\|^2$）；第 2 款由完备内积空间闭子空间正交分解 `Submodule.norm_sq_eq_add_norm_sq_starProjection` 代入假设即得；第 3 款利用线性等距算子保持张量积内积 $\langle\phi, \psi\rangle\langle\mathrm{blank}, \mathrm{blank}\rangle = \langle\phi, \psi\rangle^2$，由复数域整环幂等解 `eq_zero_or_one_of_sq_eq_self` 与单位向量内积取一判据 `inner_eq_one_iff_of_norm_eq_one` 归约为 $\phi = \psi$ 或正交；第 4 款直接对 $4\times 4$ 贝尔密度矩阵执行偏迹分块求和并验证 $(\frac{1}{2}I_2)^2 = \frac{1}{4}I_2 \neq \frac{1}{2}I_2$。完整证明由 Lean 内核检查。
+第 1 款由秩一外积迹归约 `rank_one_pure_state_modulus_square_reduction` 与加权后验系综分解 `unread_eq_weighted_ensemble` 合取而成（两向互易 $\|\phi^* \bullet_v \psi\|^2 = \|\psi^* \bullet_v \phi\|^2$ 不在第 1 款陈述之内，是盒外手算的 $|z| = |\bar z|$）；第 2 款由完备内积空间闭子空间正交分解 `Submodule.norm_sq_eq_add_norm_sq_starProjection` 代入假设即得；第 3 款利用线性等距算子保持张量积内积 $\langle\phi, \psi\rangle\langle\mathrm{blank}, \mathrm{blank}\rangle = \langle\phi, \psi\rangle^2$，由复数域整环幂等解 `eq_zero_or_one_of_sq_eq_self` 与单位向量内积取一判据 `inner_eq_one_iff_of_norm_eq_one` 归约为 $\phi = \psi$ 或正交；第 4 款直接对 $4\times 4$ 贝尔密度矩阵执行偏迹分块求和并验证 $(\frac{1}{2}I_2)^2 = \frac{1}{4}I_2 \neq \frac{1}{2}I_2$。完整证明由 Lean 内核检查。
 :::
 
 ::: {.figure src="ch31-cloning-lock"}
