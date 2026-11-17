@@ -861,6 +861,14 @@
       "line": 505,
       "signature": "theorem birkhoff_pointwise_ergodic {α : Type*} [MeasurableSpace α] {μ : Measure α} [IsProbabilityMeasure μ] {T : α → α} (hT : Ergodic T μ) {g : α → ℝ} (hg : Integrable g μ) : ∀ᵐ x ∂μ, Filter.Tendsto (fun n => birkhoffAverage ℝ T g n x) Filter.atTop (nhds (∫ y, g y ∂μ))"
     },
+    "D5/S3/Analytic/ReflectedSpectrum/EllipticHyperbolicReflectionTrichotomy.elliptic_hyperbolic_reflection_trichotomy": {
+      "module": "D5/S3/Analytic/ReflectedSpectrum/EllipticHyperbolicReflectionTrichotomy",
+      "name": "D5.S3.Analytic.ReflectedSpectrum.EllipticHyperbolicReflectionTrichotomy.elliptic_hyperbolic_reflection_trichotomy",
+      "kind": "theorem",
+      "statement_id": "sha256:c3668a3804ac22227a00876a1cb051301e773d8599763071d21c8f70d633125d",
+      "line": 124,
+      "signature": "theorem elliptic_hyperbolic_reflection_trichotomy (delta gamma : ℝ) : (Matrix.trace (hyperbolicGenerator delta) = 0 ∧ Matrix.det (hyperbolicGenerator delta) = -(delta ^ 2) ∧ hyperbolicGenerator delta * hyperbolicGenerator delta = !![delta ^ 2, 0; 0, delta ^ 2]) ∧ (Matrix.trace neutralGenerator = 0 ∧ Matrix.det neutralGenerator = 0 ∧ neutralGenerator * neutralGenerator = 0) ∧ (Matrix.trace (ellipticGenerator gamma) = 0 ∧ Matrix.det (ellipticGenerator gamma) = gamma ^ 2 ∧ ellipticGenerator gamma * ellipticGenerator gamma = !![-(gamma ^ 2), 0; 0, -(gamma ^ 2)])"
+    },
     "D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial": {
       "module": "D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup",
       "name": "D5.S3.Analytic.ShiftedXiPoisson.ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial",
@@ -1052,6 +1060,22 @@
       "statement_id": "sha256:06adbb3f4d3939fb35410fe6889c079d1e4cccc07d7e50ba905727637b633ea3",
       "line": 197,
       "signature": "theorem power_fiber_card_eq_one_add_character_sum (χ : MulChar F ℂ) {d : ℕ} (hd : 0 < d) (hχ : orderOf χ = d) (a : F) : (Nat.card {x : F // x ^ d = a} : ℂ) = 1 + ∑ i ∈ Ico 1 d, (χ ^ i) a"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/GainPotential.SimpleGraph.IsChordal.exists_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/GainPotential",
+      "name": "SimpleGraph.IsChordal.exists_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:c9afc969bcb685a1963b77ae7f23fd4282895734a1f3f4445cd2838e4c531dbb",
+      "line": 27,
+      "signature": "theorem IsChordal.exists_gain_potential [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (g : V → V → H) (hrev : ∀ i j, G.Adj i j → g j i = (g i j)⁻¹) (htri : ∀ i j k, G.Adj i j → G.Adj j k → G.Adj i k → g i j * g j k = g i k) : ∃ φ : V → H, ∀ i j, G.Adj i j → g i j = (φ i)⁻¹ * φ j"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/GainPotentialStability.SimpleGraph.IsChordal.exists_approximate_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/GainPotentialStability",
+      "name": "SimpleGraph.IsChordal.exists_approximate_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:4469509b9f4ea9d28f4034e5897b58095dafd18fa9782254777f46e800d87446",
+      "line": 28,
+      "signature": "theorem IsChordal.exists_approximate_gain_potential [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (g : V → V → H) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, G.Adj i j → g j i = (g i j)⁻¹) (htri : ∀ i j k, G.Adj i j → G.Adj j k → G.Adj i k → Dist.dist (g i j * g j k) (g i k) ≤ ε) : ∃ φ : V → H, ∀ i j, G.Adj i j → Dist.dist (g i j) ((φ i)⁻¹ * φ j) ≤ ((Nat.card V - 2 : ℕ) : ℝ) * ε"
     },
     "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory.alternating_completion_classification": {
       "module": "D5/S3/Combinatorics/Graph/LinearForests/CompatibleCycleInventory",
@@ -4157,6 +4181,14 @@
       "line": 44,
       "signature": "theorem schur_quadratic_is_least {m n : Type*} [Fintype m] [Fintype n] [DecidableEq n] (A : Matrix m m ℂ) (B : Matrix m n ℂ) (C : Matrix n n ℂ) (_hA : A.IsHermitian) (hC : C.PosDef) (x : m → ℂ) : let S"
     },
+    "D5/S3/Quantum/Measurement/AntidistinguishabilityGram.gramPsd": {
+      "module": "D5/S3/Quantum/Measurement/AntidistinguishabilityGram",
+      "name": "D5.S3.Quantum.Measurement.AntidistinguishabilityGram.gramPsd",
+      "kind": "theorem",
+      "statement_id": "sha256:9a9165464b37c650c1b1a1a1f50a35f2d685101eb3eaf871d013dd3f4e4ce69e",
+      "line": 267,
+      "signature": "theorem gramPsd (ψ : Fin n → EuclideanSpace ℂ (Fin d)) : ((Matrix.gram ℂ ψ)).PosSemidef"
+    },
     "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator": {
       "module": "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator",
       "name": "D5.S3.Quantum.Measurement.Bloch.axisContraction_commutator",
@@ -5644,6 +5676,14 @@
       "statement_id": "sha256:0a1daefb61e99b32d86497147e861a8f8027f7d9404b1330053923f8dfa45eb5",
       "line": 32,
       "signature": "theorem MediumPNT : ∃ c > 0, (ψ - id) =O[atTop] fun (x : ℝ) ↦ x * Real.exp (-c * (Real.log x) ^ ((1 : ℝ) / 10))"
+    },
+    "D5/S3/Weil/Probability/FiniteGaussianSchoenberg.gram_distance_conditionally_negative": {
+      "module": "D5/S3/Weil/Probability/FiniteGaussianSchoenberg",
+      "name": "D5.S3.Weil.Probability.FiniteGaussianSchoenberg.gram_distance_conditionally_negative",
+      "kind": "theorem",
+      "statement_id": "sha256:1bb9eb03c42c0123868dc5999a99ba07a036f580ec1d24a0dd4c69844d7cbf47",
+      "line": 103,
+      "signature": "theorem gram_distance_conditionally_negative (A : Matrix I I ℝ) (hA : A.PosSemidef) (x : I → ℝ) (hx : ∑ i, x i = 0) : (∑ i, ∑ j, x i * x j * (A i i + A j j - 2 * A i j)) ≤ 0"
     },
     "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_height_gt_ten": {
       "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",

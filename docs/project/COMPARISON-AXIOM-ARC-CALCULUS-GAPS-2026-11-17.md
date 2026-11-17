@@ -198,13 +198,13 @@ $$
 r_{ab}r_{bc}r_{ca}=\frac{(1+a\cdot b+b\cdot c+c\cdot a)+[a,b,c]\,\mathbf{I}a}{\sqrt{2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a)}},\qquad [a,b,c]=a\cdot(b\times c),
 $$
 
-其中 $\mathbf{I}=e_1e_2e_3$。右端是绕 $a$ 的旋子，转角 $\Omega$ 满足
+其中 $\mathbf{I}=e_1e_2e_3$。右端形如 $\cos\tfrac\Omega2+\sin\tfrac\Omega2\,\mathbf{I}a$，是绕 $a$ 的旋子，其中
 
 $$
-\tan\frac\Omega2=\frac{[a,b,c]}{1+a\cdot b+b\cdot c+c\cdot a},
+\frac\Omega2=\operatorname{atan2}\bigl([a,b,c],\;1+a\cdot b+b\cdot c+c\cdot a\bigr)\in(-\pi,\pi],\qquad\text{分母为正时即 }\tan\frac\Omega2=\frac{[a,b,c]}{1+a\cdot b+b\cdot c+c\cdot a}.
 $$
 
-$\Omega$ 是球面三角形 $abc$ 的吉拉尔角盈。同时全比较满足 $ab\cdot bc\cdot ca=1$。
+$\lvert\Omega\rvert$ 是球面三角形 $abc$ 的面积，即吉拉尔角盈；$\Omega$ 的符号由 $a,b,c$ 的定向 $[a,b,c]$ 的符号给出。同时全比较满足 $ab\cdot bc\cdot ca=1$。
 
 证明。展开 $(1+ab)(1+bc)(1+ca)=2+ab+ba+ca+ac+bc+a(bc)a$，其中用到 $ab\cdot bc=ac$、$bc\cdot ca=ba$、$ab\cdot ca=a(bc)a$、$ab\cdot bc\cdot ca=1$。标量部分为 $2(1+a\cdot b+b\cdot c+c\cdot a)$。双向量部分为 $b\wedge c+a(b\wedge c)a$；记 $b\wedge c=\mathbf{I}n$，$n=b\times c$，则 $a\,\mathbf{I}n\,a=\mathbf{I}(2(a\cdot n)a-n)$，两项之和为 $2(a\cdot n)\mathbf{I}a$。模长由公平性决定。转角公式是 van Oosterom–Strackee 与 Eriksson 的立体角公式。$\square$
 
@@ -261,7 +261,7 @@ $$
 \frac{\sigma^2T^{2\alpha}}{2}N^{1-2\alpha}\Bigl(1-\frac{\theta_N^2}{12}\Bigr)\le\Sigma_{\mathrm{sag}}(N)\le\frac{\sigma^2T^{2\alpha}}{2}N^{1-2\alpha}.
 $$
 
-所以 $N\to\infty$ 时：$\alpha>\tfrac12$ 趋于 $0$；$\alpha=\tfrac12$ 趋于 $\tfrac12\sigma^2T$；$\alpha<\tfrac12$ 趋于 $+\infty$。这是 §34.30.2 四相区的定理形式，且对每个有限 $N$ 给出双侧界。
+设 $T>0$。$N\to\infty$ 时：$\alpha>\tfrac12$ 趋于 $0$；$\alpha=\tfrac12$ 趋于 $\tfrac12\sigma^2T$；$0<\alpha<\tfrac12$ 且 $\sigma\neq0$ 时趋于 $+\infty$。这是 §34.30.2 四相区的定理形式，且对每个有限 $N$ 给出双侧界。发散一款需要 $\alpha>0$：$\alpha\le0$ 时步角不趋于零，$1-\cos\theta_N$ 可以反复回到零附近（例如 $\alpha=0$、$\sigma=2\pi$ 时累计矢高恒为零），下界中的因子 $1-\theta_N^2/12$ 也不再为正。
 
 随机符号旋子游走 $u_N=\prod_{k=1}^{N}(\cos\theta+\eta_kJ\sin\theta)$（$\eta_k=\pm1$ 独立等概率，$J^2=-1$）满足 $\mathbb{E}u_N=(\cos\theta)^N=(1-v_\theta)^N$：弦在均值中抵消，矢高以 $1-v$ 的乘积存留。对 $0\le v<1$，
 
