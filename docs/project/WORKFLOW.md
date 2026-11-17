@@ -1,82 +1,30 @@
-# 多智能体协同分工与五路并行工作流 · Multi-Agent Division of Labor & 5-Worktree Pipeline
+# 协作、交接与合入流程
 
-本文件记录 `trureturing-books` 书库（首部专著《量子计算的几何直觉》，代号 `ORTHO//QUANTUM`）的人机协同分工、三席独立形式化审查机制与多 Worktree 并行出版流水线。本文件存放于下游书库专属文档目录 `docs/project/WORKFLOW.md`，并在 `PROJECT.md` 中索引，不受上游模板更新覆盖。
+本文件只维护书库的长期操作流程。项目规则、角色分工、审查安排与文档准入以 [PROJECT.md](../../PROJECT.md) 为准；Issue、PR 与分支命名遵循 [贡献规范](../../CONTRIBUTING.md)。本目录只保留本文件，不保存批次规格、研究过程或验收记录。
 
----
+## 开始工作
 
-## 1. 角色分工（Division of Labor）
+1. 确认任务目标、范围与当前工作区，检查已有分支和 PR，接续尚未完成的实质工作；不先生成计划文档、研究笔记或交接清单。
+2. 从最新 `origin/main` 建立符合贡献规范的工作分支。并行任务使用隔离 worktree，遵循项目角色分工与并发上限；不改写其他任务的工作。
+3. 直接读取权威输入：正文及各语言目录、配置、锁文件和所钉冻结源码。共享规范查阅 [写作手册](../AUTHORING.md)、[验证契约](../VERIFICATION.md) 与对应 skill，不复制成批次规格或声明快照。
 
-本书库严格遵循“思想原创、正文精写、工程自动化、媒体专精、异构严审”的五元协同分工：
+## 修改与交接
 
-| 角色 | 承担主体 | 核心职责与交付边界 |
-| :--- | :--- | :--- |
-| **作者与总架构师**<br>*(Author & Principal Architect)* | **Auric** | 提出全书核心几何直觉、物理图像与哲学命题（两子丈量、有向夹角面积、正交两次寻址、球外之球、割圆多面体近似与泰勒余项逃逸、毛球定理与 $720^\circ$ 角亏、余弦自指不动点 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$）；审定目录脉络、章节题记与学术标准。 |
-| **中英双语正文主笔**；*(Chapter Prose Authoring — Text Only)* | **优先 Gemini，可选**；不可用时由 `codex-cli` 或其他可用模型承接 | **严格仅限文字内容**：仅负责全书 45 个单元（序曲、第一至第十部共 39 章、终章与附录 A–D）的中英文双语正文与附录文字撰写/修订；不以特定调用方式或凭据配置作为写作前置；**严禁**以正文作者角色承担 `viz/`、`films/`、`figures/*.py`、测试套件、构建工具或 Git/PR 工程任务。 |
-| **辅助工程与形式化对齐**<br>*(Auxiliary Engineering & Tooling)* | **Codex CLI**<br>*(`codex-cli`)* | 负责全部工程性辅助工作：从 `trureturing@dev` 提取并核验冻结的 Lean 4 定理签名与状态切片（生成各批次 `spec-batch-*.md` 规格书）、编写静态图脚本（静态图一律按 `PROJECT.md` 第 6 节第 5 条由脚本 `figures/<name>.py` 生成，`assets/` 只放照片一类确实不能由脚本画的图片）、编写第七部零依赖 Python 几何代数与转子编译参考引擎及测试、执行 `./tbook pin / check / build / epubcheck` 工具链验证，以及管理 Git 分支、Worktree 与上游模板修复 PR；优先正文作者不可用时，可另以正文作者角色承接写作。 |
-| **交互可视化与讲解视频**<br>*(Interactive Viz & Explainer Films)* | **Claude CLI (Opus 5.5)**<br>*(`claude -p --model opus`，严禁使用 Claude Subagent)* | 直接通过命令行调用 `claude` CLI（不派生 Claude Subagent），严格遵循 `books/example-monograph/` 示例框架完成全部交互式可视化（`books/<slug>/viz/<id>/`，百分之百对齐 `golden-carry` 的三栏 `.app` 结构、`theme/viz/{theme.css,shell.js}` 与 `main.js` 契约，严禁自创主题按钮或非标类名）与讲解视频（`books/<slug>/films/<name>/`，百分之百对齐 `golden-deficit` 的 `film.json`、`script.json`、`scenes.js` 与 `poster.jpg` 规范）。 |
-| **三席异构独立审查**<br>*(3-Seat Independent Verification)* | **GPT / Oracle + Codex CLI + Subagent**<br>*(`/sshx` `review_triplet_workers`)* | 对每个出版批次执行互不可见的独立三席审查（`architecture` 架构与契约席、`quality` 数学与教学质量席、`tests` 独立数值与构建验证席），所有阻塞性缺陷清零后方能合入主干。 |
+- 先改权威中文，再同步自然准确的英文。定理、证明与开放问题保持证据分级；媒体按对应 skill 制作。章节结构与统计接口直接遵循写作手册。
+- 托管文件的缺陷在模板仓库修复、发布后正式同步。需要新形式化结果时先在上游合入并冻结，再更新书库钉版；两个仓库的数学状态和发布状态分别核验。
+- 交接通过任务回复或已有 PR／Issue 说明实际改动、准确结果范围、候选提交、证据与剩余问题；不创建独立交接文件。临时计算使用仓库外的临时目录，完成后移除。
+- 正文、脚本与原始素材作为源码提交；统计、SVG、封面和静帧按 [源文件规则](../SOURCE-ONLY.md) 重建。旧分支的生成物冲突保留删除；锁文件、稳定编号和模板基线仍按来源审阅。
 
----
+## 验证与审查
 
-## 2. 全面对齐示例专著（`books/example-monograph/`）硬性规范
+1. 先执行 `./tbook test --list`，再执行 `./tbook test`；范围、证据复用及广泛浏览器选择的处理遵循项目规则第 10 节。结构检查与构建只覆盖受影响书籍和格式，普通输出按第 9 节决定是否查看页面。
+2. 出版批次按项目规则第 7 节安排独立的架构、质量和测试三席审查。架构席核对契约、证据分级与托管边界；质量席核对完整声明、数学推导、文献与双语含义；测试席独立核对数值和受影响输出。审查期间固定候选并保持只读，修复后复审受影响范围。
+3. 审查结果在任务交接或 PR 中给出候选身份、检查范围、实际结果、阻塞项与未完成事项；所有阻塞项解决后才合入。纯文档治理改动核对规范、文件范围与链接，不启动无关的书稿或媒体检查。
+4. 提交前检查新增文件是否符合项目规则第 11 节的文档白名单与过程产物禁令，并运行 `./tbook artifacts check`，阻止生成物回流。
 
-本仓库的章节、视频与演示文稿必须与 `books/example-monograph/` 的规范保持一致；交互可视化遵守共享运行时、页面契约与质量门，版式服从内容：
+## PR、CI 与发布
 
-1. **交互可视化（`books/<slug>/viz/<id>/`）按 `skills/book-viz` 的方法制作，细则见 `PROJECT.md` 第 6 节与 `skills/local-viz-cards/SKILL.md`**
-   - **执行载体**：一律直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**严禁派生 Claude Subagent**）。
-   - **舞台优先**：按对象选舞台，舞台占页面主体；使用共享的实验室版式 `.app.lab` 与运行时 `theme/viz/{theme.css,shell.js,kit.js}`，不自造私有运行时、主题切换或非标徽章。
-   - **按卡引用**：每张实验卡都是正文可引用的图（`::: {.viz src=… preset=…}`），中英文版本引用相同；PDF/EPUB 使用该卡的带标签静态图。
-   - **验收**：`stageFirstChecks` 与页面自己的独立核对全部通过；看过 `viz-shots` 的全部截图；封面与静态图已在本地重新生成并验收，提交只含源文件。
-2. **讲解视频（`books/<slug>/films/<name>/`）对齐 `books/example-monograph/films/golden-deficit/`**
-   - 固定包含 `film.json`、`script.json`、`scenes.js`、`poster.jpg`，由 `theme/film/film.sh` 渲染并执行 `FILM.init` 自检（0 `FILM_ERRORS`）。
-3. **演示文稿（`books/<slug>/slides/<deck>/`）对齐 `books/example-monograph/slides/overview/`**
-   - 固定包含 `slides.md` 与 `slides.en.md`，使用 `theme/slides` 标准版式与 `<TheoremCard>`、`<LeanBadge>`、`<Stat>`、`<Source>`、`<Tex>` 组件。
-4. **章节与前言（`books/<slug>/{zh,en}/`）对齐 `books/example-monograph/{zh,en}/`**
-   - 严格遵循 `ch01-golden-deficit.md` 的 `theorem / lemma / proposition / corollary / definition / proof / remark / example / conjecture / problem` 块结构与媒体嵌入语法。
-
----
-
-## 3. 三席独立审查与算力调度策略（`/sshx` Verification Protocol）
-
-为杜绝一切数学幻觉、定理越界包装或正负号/定义域疏漏，每一批次（Batch 1–8）均须通过 `/sshx` 协议的三席独立审查（`review_triplet_workers`）：
-
-1. **`architecture`（架构、契约与认识论边界席）**
-   - 核查三层认识论诚实分级：第一层 `theorem / lemma / proposition / corollary` 必须 100% 绑定 `trureturing.lock.json` 中 `kind = "theorem"` 的冻结声明（绿色 `LEAN ✓`）；第二层未形式化经典定理必须置于 `remark / example` 并标注 `文献结果，未在本书形式化` / `Literature result, not formalized in this book`；第三层开放问题必须使用无 `lean` 属性的 `conjecture / problem`（红色 `OPEN`）。
-   - 核查中英双语章节文件、环境序列（`kind`、`#id`、`lean`）、可视化与视频嵌入、SVG 颜色令牌语义（`theme/tokens.json` 中 `#46ffb2` 仅限 Lean 验证徽章，`#ffc83d` 仅限当前选择焦点）及 `template.toml` 托管文件零篡改。
-2. **`quality`（数学、物理与教学质量席）**
-   - 逐行比对 `trureturing@dev` 所钉提交中的 `.lean` 源码与 `.lean.json` 状态记录，检查定理盒前提、隐式类型类假设、定义域限制与 `proof` 解释机制是否完全忠实。
-   - 核查正文与文献评注中的每一个数学恒等式、矩阵展开、量子电路时序、极值角度与原始文献归属（精确到作者、论文与量词层级）。
-3. **`tests`（独立数值验算与构建产物席）**
-   - 编写独立 Python 验算脚本，对章内所有数值表格、角度/概率/范数/余项公式进行自动化验算。
-   - 按 `PROJECT.md` 第 10 节只验证本次改动及其依赖：先用 `./tbook test --list` 核对范围，再运行所选测试；结构检查限受影响书籍，导出限受影响格式，原话题记核对限改动章节。浏览器、截图与看图只覆盖受影响页面／媒体；共享运行时覆盖实际读者，未变部分复用范围适用的证据，不默认跑全目录工具测试或全部实验室，慢帧仅在相关修改／故障时显式运行。
-4. **审查轮次算力调度规则**
-   - **第一轮审查（Round 1）**：启用三异构载体——`1 nyxid-oracle`（外部独立视角）+ `1 codex-cli` + `1 isolated-token-subagent`。
-   - **第二轮及后续复审（Round 2+）**：由于 `nyxid-oracle` 响应延迟较高，复审轮次禁用 `nyxid-oracle`，改由 `2 codex-cli + 1 isolated-token-subagent` 高速完成修复验证闭环。
-
----
-
-## 4. 五路 Git Worktree 并行流水线（5-Worktree Pipeline）
-
-全书按 8 个分卷批次（PR #1 至 PR #8）推进。为使“审查/修复阶段”与“新章节创作/媒体制作阶段”完全解耦且保持跨章上下文连贯，仓库采用最多 **5 个并行 `git worktree`** 流水线：
-
-```text
-/Users/auricstudio/trureturing-books       (wt1) ──► 当前主批次审查 / 修复 / PR 合入
-/Users/auricstudio/trureturing-books-wt3   (wt3) ──► 下一批次并行写作 / 审查 / 修复
-/Users/auricstudio/trureturing-books-wt4   (wt4) ──► 后续批次并行写作 / 审查 / 修复
-/Users/auricstudio/trureturing-books-wt5   (wt5) ──► 后续批次并行写作 / 审查 / 修复
-/Users/auricstudio/trureturing-books-wt6   (wt6) ──► 后续批次并行写作 / 审查 / 修复
-```
-
-1. **阶段流水化（Pipelined Stages）**
-   - **Step A（辅助先行）**：由 `codex-cli` 在对应 worktree 中完成该批次 16 条冻结 Lean 4 定理的源码核验、精确签名提取（生成 `spec-batch-N.md`）与静态 SVG 绘制。
-   - **Step B（正文与媒体并行）**：优先由现有可用的 Gemini 作者依据规格书撰写中英双语章节正文；没有可用渠道时，由 `codex-cli` 或其他可用模型承接，正文写作继续推进；同时直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**禁止派生 Claude Subagent**），严格遵循 `books/example-monograph/` 示例框架制作该批次配套的交互可视化（`viz/`）与讲解视频（`films/`）。
-   - **Step C（只读保护与三席审查）**：进入 `/sshx` 审查阶段后，目标 worktree 处于严格只读保护状态，三席审查员并行输出结构化 JSON 报告。
-   - **Step D（靶向修复与复审合入）**：针对审查发现的所有阻塞项与建议项执行一次性闭环修复，通过复审与 GitHub Actions CI 后 Squash Merge 入 `main`，并将更新后的 `main`（含累积的 `SUMMARY.md` 与 `trureturing.lock.json`）变基同步至下一批次 worktree。
-2. **上游模板缺陷回馈机制**
-   - 凡 `template.toml` `[managed].paths` 下的托管文件（构建脚本、测试套件、主题样式、内置 skills）均不在本书库私自修改。若发现上游模板缺陷，由 `codex-cli` 在独立的 `trureturing-books-template` 仓库并行提交修复 PR、合入并升级模板版本后，通过 `./tbook template update` 零冲突同步回本书库。
-3. **署名与零模型标识边界**
-   - 除本工程工作流文档（`docs/project/WORKFLOW.md`）与 `PROJECT.md` 第 7 节如实记录多智能体协同分工外，**所有正式出版物文件**（`books/<slug>/**` 正文、图注、可视化与视频源码、代码注释、`site.toml`、根级 `README.md`）以及 **Git 提交说明与 PR 描述** 均严格执行零模型标识规则，仅署作者 `Auric` 之名。
-
-## 5. 源文件与生成结果的合并
-
-并行分支只提交正文、模板、脚本与原始素材；统计附录、地图 JSON、SVG、可视化封面与静帧留给本地和 CI 按输入重建。迁移前的分支若与已取消跟踪的输出冲突，保留删除，再合并源输入并运行受影响构建；不逐个合并生成文件。锁文件、声明稳定编号与模板同步基线仍按来源逐项审阅。合入前运行 `./tbook artifacts check`，防止旧分支把产物重新带回主干。
+1. 将改动提交为指向 `main` 的 PR，描述具体问题、最终行为、验证与已知限制；小修正可以没有 Issue，按贡献规范说明原因。
+2. 等待当前候选的适用 CI 与命名检查通过，处理评审后按贡献规范合入；不得直接或强制推送 `main`。
+3. 合入后核对实际提交、主干 CI 与适用的 Pages 部署。无出版输入变化时接受工作流按影响范围跳过发布，不为文档治理强制重建书籍。涉及 Release 时另按发布 skill 验证附件。
+4. 若外部依赖或基础设施失败，按失败阶段和实际输入定位，保留可审查成果并说明具体阻碍；不靠修改无关书稿或绕过必需检查通关。
