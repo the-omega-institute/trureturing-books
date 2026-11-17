@@ -326,7 +326,7 @@ $$
 
 曲率版本：$\Lambda_{k+1}-2\Lambda_k+\Lambda_{k-1}=\sum_j2v_ju_j^{\,k}$，其中 $v(u)=1-\tfrac12\bigl(u+u^{-1}\bigr)=-\dfrac{(u-1)^2}{2u}$；共轭封闭使 $p_1$ 为实数，故 $\sum_jv_j=m-p_1=\Lambda_1$。于是 $c_k=\sum_jw_ju_j^{\,k}$（一切 $k\in\mathbb{Z}$），$w_j=v_j/\Lambda_1$，并且 $v\bigl(1/\overline u\bigr)=\overline{v(u)}$。同样的分解给出 $T_N(c)=AM_wA^{*}$，$\bigl(M_w\bigr)_{i,\tau(i)}=\mu_iw(z_i)$。$w$ 只在 $z=1$ 处为零，这些列可以删去；单位圆上 $z\ne1$ 处 $v=1-\operatorname{Re}z>0$，$\Lambda_1>0$ 使 $w>0$；一对离开单位圆的取值给出两个非对角元 $\mu w(z)$ 与 $\mu\overline{w(z)}$，特征值为 $\pm\mu\lvert w(z)\rvert\ne0$。其余同上。$\square$
 
-**几点说明（手工推导）。** 其一，$u\mapsto1/\overline u$ 的封闭必须连重数一起成立，只有取值集合封闭不够：多重集 $\{2,\tfrac12,\tfrac12\}$ 的 $T_2$ 有 $p_{-1}=\tfrac92\ne p_1=3$，它不是厄尔米特的。其二，$\Lambda_1>0$ 不能去掉：$\Lambda_1<0$ 时单位圆上不等于 $1$ 的取值给出负特征值。其三，这里的 $d$ 是有限的；对 $\zeta$ 的零点 $d$ 是无穷，上面没有任何一步可以照搬。其四，这与厄尔米特的经典定理同一机制：多项式根的牛顿幂和作成的汉克尔二次型，正、负惯性数分别计数互异实根数加共轭根对数与共轭根对数（厄尔米特与西尔维斯特的经典结果；系统的叙述见 M. G. Krein, M. A. Naimark, *Linear and Multilinear Algebra* **10**, 265–308, 1981，俄文原版 1936；文献结果）；凯莱坐标把单位圆换成实轴。所钉仓库冻结的是其中“半正定当且仅当全为实根”的部分（[@prop-ch34-li-curvature-toeplitz] 第 6 款），不含惯性计数。上面的单位圆形式本书没有找到逐字相同的出处，不主张新颖性。
+**几点说明（手工推导）。** 其一，$u\mapsto1/\overline u$ 的封闭必须连重数一起成立，只有取值集合封闭不够：多重集 $\{2,\tfrac12,\tfrac12\}$ 的 $T_2$ 有 $p_{-1}=\tfrac92\ne p_1=3$，它不是厄尔米特的。其二，$\Lambda_1>0$ 不能去掉：$\Lambda_1<0$ 时单位圆上不等于 $1$ 的取值给出负特征值。其三，这里的 $d$ 是有限的；对 $\zeta$ 的零点 $d$ 是无穷，上面没有任何一步可以照搬。其四，这与厄尔米特的经典定理同一机制：多项式根的牛顿幂和作成的汉克尔二次型，正、负惯性数分别计数互异实根数加共轭根对数与共轭根对数（厄尔米特与西尔维斯特的经典结果；系统的叙述见 M. G. Krein, M. A. Naimark, *Linear and Multilinear Algebra* **10**, 265–308, 1981，俄文原版 1936；文献结果）；凯莱坐标把单位圆换成实轴。所钉仓库冻结的是其中“半正定当且仅当全为实根”的部分（[@prop-ch34-li-curvature-toeplitz] 第 6 款）与上面第 3 款的单位圆形式（[@prop-ch34-finite-toeplitz-circle-criterion]），都不含惯性计数。上面的单位圆形式本书没有找到逐字相同的出处，不主张新颖性。
 
 **与 Li 和的关系。** 由 [@prop-ch34-li-curvature-toeplitz] 第 3 款，$\Lambda_n=\Lambda_1\sum_{j,k<n}c_{j-k}$：有限族的 Li 和正是曲率托普利茨矩阵在全一向量上的读数。Li 和检验每个尺寸的一个向量；托普利茨矩阵检验一切向量，在尺寸 $d$ 处就看全了。
 
@@ -337,6 +337,29 @@ p_k=\frac{q^k+1-N_k}{q^{k/2}}\ (k\ge1),\qquad p_0=2g,\qquad N_n=q^n+1-q^{n/2}\bi
 $$
 
 （手工推导）。不同取值至多 $2g$ 个，所以由上面的第 2 款（取 $N=2g\ge d$）：“全部 $\lvert\alpha_i\rvert=\sqrt q$”等价于由 $N_1,\dots,N_{2g-1}$ 作出的 $2g\times2g$ 矩阵 $\bigl(p_{\lvert j-k\rvert}\bigr)$ 半正定（手工推导）。前者是韦伊定理（A. Weil, 1948；文献结果），所以这个矩阵对每条曲线都半正定。这只是韦伊定理的有限改写：正性来自韦伊的证明，不是来自这张表。
+:::
+
+上面第 3 款中“尺寸不小于互异取值数时，半正定当且仅当全在单位圆上”的部分已在所钉仓库冻结，陈述如下；惯性计数（第 2 款）与厄尔米特性（第 1 款）仍是手工推导。
+
+::: {.proposition #prop-ch34-finite-toeplitz-circle-criterion title="有限旋子族的单位圆判据" lean="D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.powerSum_toeplitz_posSemidef_of_norm_eq_one"}
+设 $u_1,\dots,u_m$ 是复数（允许重复），对 $k\in\mathbb{Z}$ 令 $p_k=\sum_ju_j^{\,k}$，并对 $N\ge1$ 令 $T_N=\bigl(p_{j-k}\bigr)_{0\le j,k<N}$。这里“半正定”指厄尔米特且 $x^{*}T_Nx\ge0$ 对一切 $x\in\mathbb{C}^N$ 成立。
+
+1. 设每个 $u_j\ne0$，指标集上有一个置换 $\sigma$ 使 $u_{\sigma(j)}=1/\overline{u_j}$ 对每个 $j$ 成立，并且 $u_1,\dots,u_m$ 中互异取值的个数不超过 $N$。则 $T_N$ 半正定，当且仅当 $\lvert u_j\rvert=1$ 对每个 $j$ 成立。
+2. 若 $\lvert u_j\rvert=1$ 对每个 $j$ 成立，则 $T_N$ 对每个 $N\ge1$ 半正定。
+:::
+
+::: proof
+置换 $\sigma$ 的存在与“多重集在 $u\mapsto1/\overline u$ 下封闭”是同一件事，所以第 1 款的假设与 [@rem-ch34-finite-toeplitz-inertia] 相同。
+
+第 2 款：模长为 $1$ 时 $u_j^{-k}=\overline{u_j^{\,k}}$，所以 $p_{j-k}=\sum_iu_i^{\,j}\,\overline{u_i^{\,k}}$，$T_N$ 是 $m$ 个秩一半正定矩阵之和。Lean 中把它读作单位圆上一个有限原子测度的矩矩阵，直接使用已冻结的 [`circle_moment_toeplitz_posSemidef`](lean:D5/S3/Weil/TestFunctions/LiCurvatureCriterion.circle_moment_toeplitz_posSemidef)。
+
+第 1 款的“当”方向就是第 2 款。“仅当”方向：以 $x$ 的分量为系数作多项式 $P(w)=\sum_{b<N}x_bw^b$，则
+
+$$
+x^{*}T_Nx=\sum_j\overline{P\bigl(\overline{u_j}\bigr)}\;P\bigl(\overline{u_{\sigma(j)}}\bigr).
+$$
+
+若某个取值 $z$ 不在单位圆上，则 $1/\overline z\ne z$。互异取值不超过 $N$ 个，所以可用拉格朗日插值取次数小于 $N$ 的 $P$，使它在 $\overline z$ 处取 $1$，在 $1/z$ 处取 $-1$，在其余取值的共轭处取 $0$。上式中只有 $u_j=z$ 与 $u_j=1/\overline z$ 的项不为零，每项等于 $-1$，于是 $x^{*}T_Nx<0$，$T_N$ 不是半正定的。完整证明由 Lean 内核检查。
 :::
 
 ::: {.example #ex-ch34-toeplitz-versus-li-numbers title="托普利茨检验与 Li 和的对照：假想四点、混合有限族、ζ 本身与亏格 2 曲线"}

@@ -326,7 +326,7 @@ so $T_N=AMA^{*}$, where $A$ is the $N\times d$ matrix whose $i$-th column is $\b
 
 The curvature version: $\Lambda_{k+1}-2\Lambda_k+\Lambda_{k-1}=\sum_j2v_ju_j^{\,k}$ with $v(u)=1-\tfrac12\bigl(u+u^{-1}\bigr)=-\dfrac{(u-1)^2}{2u}$; closure under conjugation makes $p_1$ real, so $\sum_jv_j=m-p_1=\Lambda_1$. Hence $c_k=\sum_jw_ju_j^{\,k}$ for every $k\in\mathbb{Z}$, with $w_j=v_j/\Lambda_1$, and $v\bigl(1/\overline u\bigr)=\overline{v(u)}$. The same factorization gives $T_N(c)=AM_wA^{*}$ with $\bigl(M_w\bigr)_{i,\tau(i)}=\mu_iw(z_i)$. The weight $w$ vanishes only at $z=1$, and those columns can be removed; at $z\ne1$ on the unit circle, $v=1-\operatorname{Re}z>0$ and $\Lambda_1>0$ make $w>0$; a pair of values off the circle gives two off-diagonal entries $\mu w(z)$ and $\mu\overline{w(z)}$, with eigenvalues $\pm\mu\lvert w(z)\rvert\ne0$. The rest is as above. $\square$
 
-**Remarks (manual derivation).** First, closure under $u\mapsto1/\overline u$ must hold with multiplicities; closure of the set of values is not enough: for the multiset $\{2,\tfrac12,\tfrac12\}$ one has $p_{-1}=\tfrac92\ne p_1=3$, and $T_2$ is not Hermitian. Second, $\Lambda_1>0$ cannot be dropped: when $\Lambda_1<0$ the values on the circle other than $1$ give negative eigenvalues. Third, $d$ is finite here; for the zeros of $\zeta$, $d$ is infinite, and no step above carries over. Fourth, this is the same mechanism as Hermite's classical theorem: for the Hankel quadratic form built from the Newton power sums of the roots of a polynomial, the positive and negative indices of inertia count the distinct real roots plus the pairs of conjugate roots, and the pairs of conjugate roots (the classical result of Hermite and Sylvester; a systematic account is M. G. Krein and M. A. Naimark, *Linear and Multilinear Algebra* **10**, 265–308, 1981, Russian original 1936; literature result); the Cayley coordinate replaces the unit circle by the real line. The pinned repository freezes the part "positive semidefinite if and only if all roots are real" (item 6 of [@prop-ch34-li-curvature-toeplitz]), without the count of inertia. We did not find the unit-circle form above stated verbatim in a source, and we claim no novelty.
+**Remarks (manual derivation).** First, closure under $u\mapsto1/\overline u$ must hold with multiplicities; closure of the set of values is not enough: for the multiset $\{2,\tfrac12,\tfrac12\}$ one has $p_{-1}=\tfrac92\ne p_1=3$, and $T_2$ is not Hermitian. Second, $\Lambda_1>0$ cannot be dropped: when $\Lambda_1<0$ the values on the circle other than $1$ give negative eigenvalues. Third, $d$ is finite here; for the zeros of $\zeta$, $d$ is infinite, and no step above carries over. Fourth, this is the same mechanism as Hermite's classical theorem: for the Hankel quadratic form built from the Newton power sums of the roots of a polynomial, the positive and negative indices of inertia count the distinct real roots plus the pairs of conjugate roots, and the pairs of conjugate roots (the classical result of Hermite and Sylvester; a systematic account is M. G. Krein and M. A. Naimark, *Linear and Multilinear Algebra* **10**, 265–308, 1981, Russian original 1936; literature result); the Cayley coordinate replaces the unit circle by the real line. The pinned repository freezes the part "positive semidefinite if and only if all roots are real" (item 6 of [@prop-ch34-li-curvature-toeplitz]) and the unit-circle form of item 3 above ([@prop-ch34-finite-toeplitz-circle-criterion]), both without the count of inertia. We did not find the unit-circle form above stated verbatim in a source, and we claim no novelty.
 
 **Relation to the Li sums.** By item 3 of [@prop-ch34-li-curvature-toeplitz], $\Lambda_n=\Lambda_1\sum_{j,k<n}c_{j-k}$: the Li sum of a finite family is exactly the reading of the curvature Toeplitz matrix at the all-ones vector. The Li sums test one vector at each size; the Toeplitz matrices test every vector and see everything at size $d$.
 
@@ -337,6 +337,29 @@ p_k=\frac{q^k+1-N_k}{q^{k/2}}\ (k\ge1),\qquad p_0=2g,\qquad N_n=q^n+1-q^{n/2}\bi
 $$
 
 (manual derivation). There are at most $2g$ distinct values, so by item 2 above (with $N=2g\ge d$), "every $\lvert\alpha_i\rvert=\sqrt q$" is equivalent to the positive semidefiniteness of the $2g\times2g$ matrix $\bigl(p_{\lvert j-k\rvert}\bigr)$ built from $N_1,\dots,N_{2g-1}$ (manual derivation). The former is Weil's theorem (A. Weil, 1948; literature result), so this matrix is positive semidefinite for every curve. This is only a finite reformulation of Weil's theorem: the positivity comes from Weil's proof, not from the table.
+:::
+
+The part of item 3 above that reads "when the size is at least the number of distinct values, positive semidefinite if and only if all on the unit circle" is frozen in the pinned repository, in the following form; the count of inertia (item 2) and Hermiticity (item 1) remain manual derivations.
+
+::: {.proposition #prop-ch34-finite-toeplitz-circle-criterion title="The Unit-Circle Criterion for a Finite Rotor Family" lean="D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.powerSum_toeplitz_posSemidef_of_norm_eq_one"}
+Let $u_1,\dots,u_m$ be complex numbers (repetitions allowed), put $p_k=\sum_ju_j^{\,k}$ for $k\in\mathbb{Z}$, and for $N\ge1$ let $T_N=\bigl(p_{j-k}\bigr)_{0\le j,k<N}$. Here "positive semidefinite" means Hermitian with $x^{*}T_Nx\ge0$ for every $x\in\mathbb{C}^N$.
+
+1. Suppose every $u_j\ne0$, there is a permutation $\sigma$ of the indices with $u_{\sigma(j)}=1/\overline{u_j}$ for every $j$, and the number of distinct values among $u_1,\dots,u_m$ is at most $N$. Then $T_N$ is positive semidefinite if and only if $\lvert u_j\rvert=1$ for every $j$.
+2. If $\lvert u_j\rvert=1$ for every $j$, then $T_N$ is positive semidefinite for every $N\ge1$.
+:::
+
+::: proof
+The existence of the permutation $\sigma$ is the same thing as closure of the multiset under $u\mapsto1/\overline u$, so the hypotheses of item 1 are those of [@rem-ch34-finite-toeplitz-inertia].
+
+Item 2: when the moduli are $1$, $u_j^{-k}=\overline{u_j^{\,k}}$, so $p_{j-k}=\sum_iu_i^{\,j}\,\overline{u_i^{\,k}}$ and $T_N$ is a sum of $m$ positive semidefinite matrices of rank one. In Lean it is read as the moment matrix of a finitely supported measure on the unit circle, and the frozen [`circle_moment_toeplitz_posSemidef`](lean:D5/S3/Weil/TestFunctions/LiCurvatureCriterion.circle_moment_toeplitz_posSemidef) applies directly.
+
+The "if" direction of item 1 is item 2. For "only if", take the entries of $x$ as the coefficients of a polynomial $P(w)=\sum_{b<N}x_bw^b$; then
+
+$$
+x^{*}T_Nx=\sum_j\overline{P\bigl(\overline{u_j}\bigr)}\;P\bigl(\overline{u_{\sigma(j)}}\bigr).
+$$
+
+If some value $z$ is off the unit circle, then $1/\overline z\ne z$. There are at most $N$ distinct values, so Lagrange interpolation gives a $P$ of degree less than $N$ that equals $1$ at $\overline z$, equals $-1$ at $1/z$, and vanishes at the conjugates of the other values. In the sum only the terms with $u_j=z$ and with $u_j=1/\overline z$ are nonzero, and each equals $-1$; hence $x^{*}T_Nx<0$ and $T_N$ is not positive semidefinite. The full proof is checked by the Lean kernel.
 :::
 
 ::: {.example #ex-ch34-toeplitz-versus-li-numbers title="Toeplitz Tests Against Li Sums: A Hypothetical Quartet, a Hybrid Finite Family, Zeta Itself, and a Genus-2 Curve"}
