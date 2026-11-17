@@ -2437,6 +2437,30 @@
       "line": 413,
       "signature": "theorem horizontal_seam_counterexample (M N : ℕ) [NeZero M] [NeZero N] (_hM : 3 ≤ M) (_hN : 3 ≤ N) : Flat (seam (M"
     },
+    "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.periodic_grid_linear_statistics": {
+      "module": "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy",
+      "name": "D5.S3.Fourier.CharacterSelection.PeriodicGridHolonomy.periodic_grid_linear_statistics",
+      "kind": "theorem",
+      "statement_id": "sha256:f5c02a5aeed735181dccbe971a63911f541b0007b8c21203d1377fa715097bb6",
+      "line": 795,
+      "signature": "theorem periodic_grid_linear_statistics (M N : ℕ) [NeZero M] [NeZero N] : Module.finrank (ZMod 2) (LinearMap.range (plaquetteLinear M N)) = M * N - 1 ∧ Module.finrank (ZMod 2) (flatSubspace M N) = M * N + 1 ∧ 0 < (Fintype.card {y : EdgeLabel M N // Flat y} : ℚ) ∧ 0 < (Fintype.card (EdgeLabel M N) : ℚ) ∧ (Fintype.card {y : EdgeLabel M N // ∃ x : Fin M → Fin N → ZMod 2, gradient x = y} : ℚ) / (Fintype.card {y : EdgeLabel M N // Flat y} : ℚ) = 1 / 4 ∧ (Fintype.card {y : EdgeLabel M N // Flat y} : ℚ) / (Fintype.card (EdgeLabel M N) : ℚ) = 1 / (2 : ℚ) ^ (M * N - 1) ∧ (Fintype.card {y : EdgeLabel M "
+    },
+    "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy.plaquette_relation_rank_one": {
+      "module": "D5/S3/Fourier/CharacterSelection/PeriodicGridHolonomy",
+      "name": "D5.S3.Fourier.CharacterSelection.PeriodicGridHolonomy.plaquette_relation_rank_one",
+      "kind": "theorem",
+      "statement_id": "sha256:f5c02a5aeed735181dccbe971a63911f541b0007b8c21203d1377fa715097bb6",
+      "line": 656,
+      "signature": "theorem plaquette_relation_rank_one {M N : ℕ} [NeZero M] [NeZero N] (coeff : Fin M → Fin N → ZMod 2) : PlaquetteRelation coeff ↔ ∀ i j, coeff i j = coeff 0 0"
+    },
+    "D5/S3/Fourier/CharacterSelection/SimpleGraphCycleSpace.finite_graph_cycle_space": {
+      "module": "D5/S3/Fourier/CharacterSelection/SimpleGraphCycleSpace",
+      "name": "D5.S3.Fourier.CharacterSelection.SimpleGraphCycleSpace.finite_graph_cycle_space",
+      "kind": "theorem",
+      "statement_id": "sha256:d0992f48f64a81ed098cee4629cf35e9ae90151898b2651f071cedb93715e77b",
+      "line": 127,
+      "signature": "theorem finite_graph_cycle_space {V : Type u} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [Fintype G.edgeSet] [Fintype G.ConnectedComponent] [MeasurableSpace (ZMod 2)] [MeasurableSingletonClass (ZMod 2)] : (simpleCycleSpace G = characterRelationSpace (ZMod 2) (endpointCharacters G) ∧ Fintype.card G.ConnectedComponent ≤ Fintype.card V ∧ Nat.card (Set.range (edgeDifferential G)) = 2 ^ (Fintype.card V - Fintype.card G.ConnectedComponent) ∧ (∀ y : G.edgeSet → ZMod 2, ((∃ x, edgeDifferential G x = y) ↔ ∀ (v : V) (p : G.Walk v v), p.IsCycle → walkParity y p = 0) ∧ (∀ (_hy : ∃ x, edgeDifferential"
+    },
     "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness": {
       "module": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair",
       "name": "D5.S3.Fourier.CharacterSelection.SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness",
