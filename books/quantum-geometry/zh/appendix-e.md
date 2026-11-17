@@ -285,7 +285,7 @@ $$
 
 ## E.8 第三点冗余与对合正性：用极小圆弧体微积分归约 `H2` 与 `H3` {#sec-appe-third-point-redundancy}
 
-E.7 的总表把 `H2` 记成并列的三项第 1 层条件：正自配对、秩 $2$ 双向量的椭圆负平方、多点格拉姆半正定；`H3` 再要求平行四边形极化。本节用[第 34 章 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 的弦—矢高分解重新过一遍这笔账，结论是这四项并不各自独立。在求同读数为实标量的情形，`H2` 的三项可以由两条更原始的条件推出：一条是**第三点冗余**（比较 $x$ 与 $z$ 不因取道第三点 $y$ 而改变），一条是**对合的正性**（非零差异的往返不为零也不为负）。`H3` 的极化一项由第三点冗余加一个正的读数给出。E.8.5 另外给 `H5` 换了一种说法：只看两两比较的概率规则里，玻恩律是层析秩最小的那一个。
+E.7 的总表把 `H2` 记成并列的三项第 1 层条件：正自配对、秩 $2$ 双向量的椭圆负平方、多点格拉姆半正定；`H3` 再要求平行四边形极化。本节用[第 34 章 §34.30](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes) 的弦—矢高分解重新过一遍这笔账，结论是这四项并不各自独立。在求同读数为实标量的情形，`H2` 的三项可以由两条更原始的条件推出：一条是**第三点冗余**（比较 $x$ 与 $z$ 不因取道第三点 $y$ 而改变），一条是**对合的正性**（非零差异的往返不为零也不为负）。`H3` 的极化一项由第三点冗余加一个正的读数给出。E.8.5 另外给单比特上的 `H5` 换了一种说法：只看两两比较的概率规则里，玻恩律是层析秩最小的那一个。
 
 先说清边界。这两条条件是加在 $\mathcal{A}_0$ 之外的，本节证明的是“若加入则推出”，不主张它们能从条款 I–III 推出；[@ex-appe-layer0-countermodels] 的反例恰好说明不能。本节的两个定理盒对应冻结定理，其余推导标为 `手工推导`，引用的经典结论标为 `文献结果`。
 
@@ -343,6 +343,30 @@ $$
 这两个分支本身并不是病态模型。把 $2\times2$ 复矩阵看成实代数，对合取经典伴随 $a^\sharp=\operatorname{tr}(a)\mathbf{1}-a$，则 $aa^\sharp=\det(a)\mathbf{1}$，满足 $uu^\sharp=\mathbf{1}$ 的元素恰是 $\mathrm{SL}(2,\mathbb{C})$；每个这样的 $u$ 的求同部分 $S=\frac12\operatorname{tr}(u)\mathbf{1}$ 自动是中心标量，矢高 $v=1-\frac12\operatorname{tr}u$ 是复数（`手工推导`）。按迹对莫比乌斯变换分类的经典结果（`文献结果`）翻译成矢高的语言是：$u\neq\pm\mathbf{1}$ 时，$v\in(0,2)$ 为椭圆类，$v\in\{0,2\}$ 为抛物类，$v$ 为其余实数时为双曲类，$v\notin\mathbb{R}$ 为斜驶类。反例 (b) 的生成元都住在这里：$\varepsilon\mapsto\begin{pmatrix}0&1\\0&0\end{pmatrix}$，$j\mapsto\operatorname{diag}(1,-1)$，椭圆生成元 $\mapsto\operatorname{diag}(i,-i)$，三者都满足 $g^\sharp=-g$，平方分别是 $0$、$+\mathbf{1}$、$-\mathbf{1}$。冻结定理 [`elliptic_hyperbolic_reflection_trichotomy`](lean:D5/S3/Analytic/ReflectedSpectrum/EllipticHyperbolicReflectionTrichotomy.elliptic_hyperbolic_reflection_trichotomy) 给出实 $2\times2$ 无迹生成元中双曲形 $\operatorname{diag}(\delta,-\delta)$ 与椭圆形 $\begin{pmatrix}0&-\gamma\\\gamma&0\end{pmatrix}$ 的迹、行列式与平方；它的中间情形是零矩阵，非零幂零的抛物生成元不在该定理之内。这个代数上没有满足 $\varphi(a^\sharp a)\ge0$ 的归一正泛函（$a=\operatorname{diag}(1,-1)$ 给出 $a^\sharp a=-\mathbf{1}$），所以 E.8.3 的读数论证不适用于它。
 
 $\mathrm{SL}(2,\mathbb{C})$ 经 $X\mapsto uXu^\dagger$ 作用在厄米矩阵 $X=t\mathbf{1}+\mathbf{x}\cdot\boldsymbol\sigma$ 上并保持 $\det X=t^2-\lvert\mathbf{x}\rvert^2$，这是洛伦兹群的旋量覆盖（`文献结果`）；E.6 已引用的 [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null) 说明零锥把二次型定到只差一个标量。若再要求对厄米共轭也公平（$uu^\dagger=\mathbf{1}$），剩下的就是 $\mathrm{SU}(2)$，只含椭圆类。由此得到 `H2` 与 `H8` 的一个统一读法（`MODEL`）：**第 0 层留出的抛物与双曲分支，就是洛伦兹变换里的零转动与推进；选椭圆签名与选洛伦兹签名，是同一个代数里对合正性的取与舍。**
+
+正性条件还有一个只谈重复比较的等价说法。
+
+::: {.remark #rem-appe-bounded-recurrence title="正性条件的操作形式：重复同一比较，读数不放大（手工推导与文献结果）"}
+**手工推导。** 设 $\mathcal{A}$ 是实 $*$-代数，$u$ 满足 $uu^*=u^*u=\mathbf{1}$，求同读数是实标量 $S=s\mathbf{1}$。由 $u+u^*=2s\mathbf{1}$ 与 $uu^*=\mathbf{1}$ 得 $u^2=2su-\mathbf{1}$，所以 $u^{n+1}=2su^n-u^{n-1}$，这是切比雪夫多项式的三项递推。于是对一切 $n\ge0$，
+
+$$
+u^{n}=T_n(s)\,\mathbf{1}+U_{n-1}(s)\,A,\qquad u^{-n}=T_n(s)\,\mathbf{1}-U_{n-1}(s)\,A,
+$$
+
+其中 $T_n$、$U_n$ 是第一类与第二类切比雪夫多项式，$U_{-1}=0$。把同一个比较连做 $n$ 次，矢高由 $v$ 变为 $v_n=1-T_n(1-v)$。
+
+在 $\operatorname{span}\{\mathbf{1},A\}$ 上任取一个范数。双向轨道 $\{u^n\}_{n\in\mathbb{Z}}$ 有界，当且仅当 $-1\le s\le1$，并且 $s=\pm1$ 时 $A=0$：
+
+- $\lvert s\rvert<1$：令 $s=\cos\theta$，则 $T_n(s)=\cos n\theta$，$U_{n-1}(s)=\dfrac{\sin n\theta}{\sin\theta}$，轨道有界；
+- $s=\pm1$：$u^n=(\pm1)^n(\mathbf{1}\pm nA)$，只在 $A=0$ 时有界；
+- $\lvert s\rvert>1$：令 $\lvert s\rvert=\cosh\eta$，则 $\lvert T_n(s)\rvert=\cosh n\eta$ 无界。此时 $A^2=(s^2-1)\mathbf{1}\neq0$，而 $A^*=-A$ 说明 $A$ 不是 $\mathbf{1}$ 的实数倍，所以 $\mathbf{1}$ 前的系数无界就使轨道无界。
+
+另一方面 $A^*A=-A^2=(1-s^2)\mathbf{1}$。把 [@rem-appe-involution-positivity] 的正性条件用在 $a=A$ 上：$1-s^2\le0$ 时必须 $A=0$，从而 $s^2=1$。这恰好也是“$-1\le s\le1$，并且 $s=\pm1$ 时 $A=0$”。所以对求同读数为实标量的比较，**正性条件对它的求异部分成立，当且仅当它的整数次幂有界**。
+
+**文献结果。** 多个比较同时出现时，有限维情形有同方向的结论。设 $\mathcal{A}$ 由有限维实或复向量空间上的线性算子组成，$\Gamma$ 是由满足 $gg^*=g^*g=\mathbf{1}$ 的元素构成的有界群。对 $\Gamma$ 的闭包取平均得到一个 $\Gamma$-不变的内积，在这个内积下 $\Gamma$ 的元素都是等距，于是对 $\Gamma$ 的实线性张成中的 $a$，$a^*$ 就是 $a$ 的伴随，$a^*a$ 是半正定算子，正性条件在这个张成上成立（紧群的酉化，Weyl 的平均方法）。
+:::
+
+三种情形正是上表的三行。椭圆的比较重复多少次，求同读数都留在 $[-1,1]$ 之内；抛物的比较求同读数不变，求异读数随次数线性增长；双曲的比较读数按指数增长。所以正性条件可以读成一条不放大的要求：**同一个比较重复任意多次，读数不发散。** 在洛伦兹群里，被它排除的线性增长与指数增长分别是零转动与推进。正性条件独立于条款 IV：取 $X=\mathrm{SL}(2,\mathbb{C})$、$\mathrm{CMP}(x,y)=x^\sharp y$，条款 II、III、IV 都成立，而正性条件失败。
 
 ### E.8.2 第三点冗余：势表示及其稳定性 {#sec-appe-gain-potential}
 
@@ -425,14 +449,14 @@ $C^*$-代数的酉群配上算子范数距离满足定理的等距条件，所�
 ::: {.remark #rem-appe-triangle-simple-connectivity title="三角相容何时足够：可比三角形填满每个圈（手工推导与文献结果）"}
 **手工推导。** 设 $G$ 是顶点集 $V$ 上的有限简单图，$H$ 为群，$g$ 定义在相邻的有序点对上，满足 $g(j,i)=g(i,j)^{-1}$，且在 $G$ 的每个三角形上 $g(i,j)\,g(j,k)=g(i,k)$。对一条走道 $w=(x_0,\dots,x_n)$（相继两点相邻），记 $\operatorname{hol}(w)=g(x_0,x_1)\cdots g(x_{n-1},x_n)$。允许两种改写：删去或插入一次原路折返，$x,y,x\leftrightarrow x$；把三角形的两条边换成第三条边，$x,y,z\leftrightarrow x,z$。两种改写都不改变 $\operatorname{hol}$。若 $G$ 的每条闭走道都能用这两种改写化成单点，称 $G$ **被三角形填满**。
 
-1. **充分。** 若 $G$ 被三角形填满，则任何群 $H$ 上满足上述两条的 $g$ 都是势之比。在每个连通分支取基点 $o$，令 $\varphi(x)=\operatorname{hol}(w)$，$w$ 为任一条从 $o$ 到 $x$ 的走道。两条这样的走道首尾相接成闭走道，它的 $\operatorname{hol}$ 为 $1$，所以 $\varphi$ 与走道的选取无关；对相邻的 $x,y$ 有 $\varphi(y)=\varphi(x)\,g(x,y)$，即 $g(x,y)=\varphi(x)^{-1}\varphi(y)$。
-2. **必要。** 若 $G$ 的某个连通分支没有被三角形填满，则存在群 $H$ 与满足上述两条的 $g$，它不是势之比。取 $H$ 为该分支上以 $o$ 为基点的闭走道在两种改写下的等价类，乘法为首尾相接；取一棵生成树，记 $\gamma_x$ 为树上从 $o$ 到 $x$ 的走道，令 $g(x,y)=[\gamma_x\,(x,y)\,\gamma_y^{-1}]$。它满足取逆与三角相容，并且任一以 $o$ 为基点的闭走道 $w$ 有 $\operatorname{hol}(w)=[w]$。势之比会使一切闭走道的 $\operatorname{hol}$ 等于 $1$，这与 $H$ 非平凡矛盾。
-3. **偏差按填充面积累积。** 设 $H$ 带双侧不变的伪度量 $d$，$g$ 精确满足取逆，而三角相容只在误差 $\varepsilon$ 之内成立：$d\bigl(g(i,j)\,g(j,k),\,g(i,k)\bigr)\le\varepsilon$。一条用 $A$ 次三角形改写化成单点的闭走道满足 $d(\operatorname{hol}(w),1)\le A\varepsilon$：折返不改变 $\operatorname{hol}$，每次三角形改写只替换乘积中间的一个因子，双侧不变性把这一步的偏差控制在 $\varepsilon$ 之内。
+1. **充分。** 若 $G$ 被三角形填满，则任何群 $H$ 上满足上述两条的 $g$ 都是势之比。在每个连通分支取基点 $o$，令 $\varphi(x)=\operatorname{hol}(w)$，$w$ 为任一条从 $o$ 到 $x$ 的走道。两条这样的走道，一条接上另一条的反向，成为闭走道，它的 $\operatorname{hol}$ 为 $1$；由取逆规则，反向走道的 $\operatorname{hol}$ 是原走道的逆，所以 $\varphi$ 与走道的选取无关；对相邻的 $x,y$ 有 $\varphi(y)=\varphi(x)\,g(x,y)$，即 $g(x,y)=\varphi(x)^{-1}\varphi(y)$。
+2. **必要。** 若 $G$ 的某个连通分支没有被三角形填满，则存在群 $H$ 与满足上述两条的 $g$，它不是势之比。取 $H$ 为该分支上以 $o$ 为基点的闭走道在两种改写下的等价类，乘法为首尾相接；取一棵生成树，记 $\gamma_x$ 为树上从 $o$ 到 $x$ 的走道，令 $g(x,y)=[\gamma_x\,(x,y)\,\gamma_y^{-1}]$，在其余分支上令 $g\equiv1$。它满足取逆与三角相容，并且任一以 $o$ 为基点的闭走道 $w$ 有 $\operatorname{hol}(w)=[w]$。这个 $H$ 非平凡：设以 $x$ 为基点的闭走道 $w$ 不能化成单点，则 $\gamma_x\,w\,\gamma_x^{-1}$ 是以 $o$ 为基点的闭走道，它能化成单点当且仅当 $w$ 能。势之比会使一切闭走道的 $\operatorname{hol}$ 等于 $1$，这与 $H$ 非平凡矛盾。
+3. **偏差按填充面积累积。** 设 $H$ 带双侧不变的伪度量 $d$，$g$ 精确满足取逆，而三角相容只在误差 $\varepsilon$ 之内成立：在每个三角形上 $d\bigl(g(i,j)\,g(j,k),\,g(i,k)\bigr)\le\varepsilon$（由双侧不变性与取逆规则，三个顶点的六种排序给出同一个偏差）。一条用 $A$ 次三角形改写化成单点的闭走道满足 $d(\operatorname{hol}(w),1)\le A\varepsilon$，两个方向的改写都计入 $A$：折返不改变 $\operatorname{hol}$；每次三角形改写把乘积中的一段 $g(x,y)\,g(y,z)$ 换成 $g(x,z)$，或者反过来，双侧不变性把这一步的偏差控制在 $\varepsilon$ 之内。
 
-**文献结果。** 第 2 款中的群是 $G$ 的团复形（以 $G$ 的团为单形）的棱道群，它同构于团复形的基本群（Spanier, *Algebraic Topology*, 1966, 第 3 章）；“被三角形填满”就是团复形的每个连通分支单连通。连通弦图的团复形可缩，所以 [@thm-appe-chordal-gain-potential] 是第 1 款的特例。
+**文献结果。** 第 2 款中的群是 $G$ 的团复形（以 $G$ 的团为单形）的棱道群，它同构于团复形的基本群（Spanier, *Algebraic Topology*, 1966, 第 3 章）；“被三角形填满”就是团复形的每个连通分支单连通。连通弦图的团复形可缩：单纯顶点的邻居张成一个单形，删去这个顶点是形变收缩，并且保持连通，沿消去次序归纳即得。所以 [@thm-appe-chordal-gain-potential] 是第 1 款的特例。
 :::
 
-两个例子标出边界。四圈没有三角形，它的闭走道群是 $\mathbb{Z}$，第 2 款的 $g$ 把绕圈一周记成生成元，任意和乐都允许。在四圈中央加一个与四点都相邻的轮毂，得到的四轮图不是弦图，因为外圈仍是无弦的四圈；它却被四个三角形填满，三角相容仍然推出势表示。所以对条款 IV 而言，要紧的是可比三角形能否填满每个圈。第 3 款是 §34.30.3 有限精度斯托克斯定理的组合形式：和乐的偏差不超过所围三角形的个数乘以单个三角形的偏差。
+两个例子标出边界。四圈没有三角形，它的闭走道群是 $\mathbb{Z}$，第 2 款的 $g$ 把绕圈一周记成生成元，任意和乐都允许。在四圈中央加一个与四点都相邻的轮毂，得到的四轮图不是弦图，因为外圈仍是无弦的四圈；它却被四个三角形填满，三角相容仍然推出势表示。所以对条款 IV 而言，要紧的是可比三角形能否填满每个圈。第 3 款可以和 §34.30.3 的有限网格斯托克斯定理对照着读：和乐的偏差不超过填充所用的三角形改写次数乘以单个三角形的偏差；填充是一张圆盘时，这个次数就是圆盘里三角形的个数。
 
 ### E.8.3 从势表示到格拉姆半正定与弦距 {#sec-appe-gram-from-potential}
 
@@ -555,12 +579,12 @@ $$
 
 $S(r)^2=1-\frac v2$ 在布洛赫球上就是 $\cos^2\frac\theta2$：半比较求同读数的平方等于 $1$ 减去半个矢高，这是玻恩权重的弦—矢高写法，它本身不替代 `H5` 的可加性前提。行列式公式说的是：三点格拉姆体积等于三个互补矢高之积乘以角盈的矢高，[§32.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)“二生三”原胞的 $\det G=\sin^4\epsilon$ 是它的特例。对 `H8` 而言，第 1 层内生的射影和乐不需要新的输入，它是条款 IV 之下把全比较开平方的结果；仍然需要第 2 层新输入的，是随时空基点变化的纤维联络及其动力学。
 
-### E.8.5 玻恩权重：只看两两比较的规则里，层析秩最小者唯一 {#sec-appe-born-minimal-rank}
+### E.8.5 玻恩权重：单比特上的缺口可以换成层析秩最小 {#sec-appe-born-minimal-rank}
 
-`H5` 的缺口是：从两两公平推不出概率对矢高仿射，[@ex-appe-qubit-cubic-and-tomography] 的三次函数就是反例。下面把这个缺口换一种说法，它与 `H7` 用的是同一种计数。
+`H5` 的缺口在单比特上最宽。$d\ge3$ 时，在每组正交归一基上归一已经把只依赖两两比较的规则定成玻恩律；$d=2$ 时它只剩对径归一，[@ex-appe-qubit-cubic-and-tomography] 的三次函数满足它而不是玻恩律。下面把单比特上缺的那条输入换一种说法，它与 `H7` 用的是同一种计数。
 
-::: {.remark #rem-appe-born-zonal-minimal-rank title="单比特上玻恩律是层析秩最小的带状概率规则（手工推导与文献结果）"}
-**手工推导。** 在布洛赫球面 $S^2$ 上考虑只依赖两两比较的出口概率：制备 $\mathbf{s}$、出口 $\mathbf{r}$ 的概率为 $p(\mathbf{r}\mid\mathbf{s})=f(\mathbf{s}\cdot\mathbf{r})$，$f$ 是 $[-1,1]$ 上的连续函数。假设
+::: {.remark #rem-appe-born-zonal-minimal-rank title="单比特上玻恩律是层析秩最小的带状概率规则（手工推导）"}
+**手工推导。** 在布洛赫球面 $S^2$ 上考虑只依赖两两比较的出口概率：制备 $\mathbf{s}$、出口 $\mathbf{r}$ 的概率为 $p(\mathbf{r}\mid\mathbf{s})=f(\mathbf{s}\cdot\mathbf{r})$，$f$ 是 $[-1,1]$ 上的连续函数。记 $t=\mathbf{s}\cdot\mathbf{r}$，这一对的矢高是 $v=1-t$。假设
 
 - **对径归一**：$f(t)+f(-t)=1$；
 - **确定性**：$f(1)=1$。
@@ -571,7 +595,7 @@ $$
 K(f)=\sum_{l:\,c_l\neq0}(2l+1),
 $$
 
-$f$ 不是多项式时 $K(f)=\infty$。理由是球谐加法定理 $P_l(\mathbf{s}\cdot\mathbf{r})=\frac{4\pi}{2l+1}\sum_{m}Y_{lm}(\mathbf{s})\,Y_{lm}(\mathbf{r})$：$c_l\neq0$ 的每一阶贡献 $2l+1$ 个线性无关的函数 $Y_{lm}(\mathbf{r})$，而系数向量 $\bigl(Y_{lm}(\mathbf{s})\bigr)$ 随 $\mathbf{s}$ 变动张满整个系数空间。
+$f$ 不是多项式时 $K(f)=\infty$。对多项式 $f$，理由是实球谐函数的加法定理 $P_l(\mathbf{s}\cdot\mathbf{r})=\frac{4\pi}{2l+1}\sum_{m}Y_{lm}(\mathbf{s})\,Y_{lm}(\mathbf{r})$：$c_l\neq0$ 的每一阶贡献 $2l+1$ 个线性无关的函数 $Y_{lm}(\mathbf{r})$，而系数向量 $\bigl(Y_{lm}(\mathbf{s})\bigr)$ 随 $\mathbf{s}$ 变动张满整个系数空间。$f$ 不是多项式时有无穷多个 $c_l\neq0$；对每个这样的 $l$，$f(\mathbf{s}\cdot\,\cdot\,)$ 在 $l$ 阶球谐函数空间上的投影是 $c_lP_l(\mathbf{s}\cdot\,\cdot\,)$（Funk–Hecke 公式），而这个空间在旋转下不可约，所以张成空间投影到它的全体，维数至少是 $2l+1$。
 
 对径归一迫使 $c_0=\frac12$，并使偶数阶 $l\ge2$ 的系数为零；确定性排除了 $f\equiv\frac12$，所以至少有一个奇数阶出现。于是
 
@@ -581,10 +605,12 @@ $$
 
 三次规则 $f(t)=\frac12(1+t^3)$ 含有 $l=0,1,3$ 三阶（$t^3=\frac35P_1+\frac25P_3$），层析秩为 $1+3+7=11$。
 
-**文献结果。** 在 $\mathbb{CP}^{d-1}$ 上，规则 $p=f\bigl(\lvert\langle x\mid y\rangle\rvert^2\bigr)$ 在每组正交归一基上归一且 $f(1)=1$ 时，层析秩的最小值是 $d^2$，只在 $f(t)=t$ 处取到：带状函数按酉群的不可约分量分解，一阶分量的维数是 $d^2-1$，更高阶分量的维数更大。以状态空间维数 $K=N^2$ 为公理见 Hardy (2001)，玻恩律的备选规则与酉群表示的对应见 Galley–Masanes (2017)。本书对 $d=2,3,4$ 用随机采样的概率表做了数值核对，没有给出一般 $d$ 的证明。
+**$d\ge3$ 不需要计数（手工推导）。** 在 $\mathbb{CP}^{d-1}$ 上设 $p=f\bigl(\lvert\langle x\mid y\rangle\rvert^2\bigr)$，$f$ 有界，$f(1)=1$，并且在每组正交归一基上归一。单位向量在一组基下的模方可以取到概率单纯形上的任何一点，所以对一切 $t_i\ge0$、$\sum_it_i=1$ 有 $\sum_if(t_i)=1$。取 $(1,0,\dots,0)$ 得 $f(0)=0$。$d\ge3$ 时比较 $(t,s,1-t-s,0,\dots)$ 与 $(t+s,0,1-t-s,0,\dots)$，得 $f(t)+f(s)=f(t+s)$；有界的可加函数是线性的，于是 $f(t)=t$，层析秩 $d^2$ 是结论而不是输入。带状规则是格里森定理（[@thm-gleason-finite-projection]）所处理的标架函数的特例，上面这几行推导不依赖那条定理。$d=2$ 时单纯形只有一条边，这个比较做不出来，剩下的只有对径归一。
+
+**文献背景。** Hardy (2001) 的简单性公理要求状态空间的参数个数 $K$ 取与其余公理相容的最小值，并由此推出 $K=N^2$；Galley–Masanes (2017) 把玻恩律的备选规则对应到酉群的表示。两者是“层析秩最小”这类条件的先例，上面的陈述与推导不取自其中任何一篇。
 :::
 
-所以在“概率只依赖两两比较”的前提下，`H5` 的可加性输入可以换成一句计数：一个制备的全部预言由 $d^2$ 个实数决定，不能更少。$d^2$ 正是 `H7` 的局域层析计数用到的 $\dim_{\mathbb{R}}\operatorname{Herm}(d)$。对单比特，$4=1+3$ 也是 [@rem-appe-gram-from-flatness] 的格拉姆嵌入（布洛赫向量的三个坐标）加上归一所占的维数：概率对矢高仿射，等价于概率是嵌入坐标的仿射函数。这只是换了输入的形状。层析秩最小本身仍是一条 `T2` 操作假设，两两公平推不出它；连续性前提之外的规则也不在这条注记的范围内，例如 [@rem-appe-quantum-chain] 提到的不连续半球函数。
+所以在“概率只依赖两两比较”的前提下，`H5` 的输入可以这样分。$d\ge3$ 时投影可加性已经足够。$d=2$ 时还缺一条：它可以是 E.7 所列的全效应可加性，也可以是一句计数，即一个制备的全部预言由 $4$ 个实数决定，不能更少。$4$ 正是 `H7` 的局域层析计数用到的 $\dim_{\mathbb{R}}\operatorname{Herm}(2)$，也是 [@rem-appe-gram-from-flatness] 的格拉姆嵌入（布洛赫向量的三个坐标）加上归一所占的维数：概率对矢高仿射，等价于概率是嵌入坐标的仿射函数。这只是换了输入的形状。层析秩最小本身仍是一条 `T2` 操作假设，两两公平推不出它；不连续的规则，以及不只依赖两两比较的规则，都不在这条注记的范围内。
 
 ### E.8.6 台账改了什么 {#sec-appe-reduced-ledger}
 
@@ -594,10 +620,10 @@ $$
 | 条目 | 原处理 | 加入两条条件之后 | 依据 |
 | :--- | :--- | :--- | :--- |
 | `H2` 正自配对 | 显式的第 1 层标定 | 由条款 IV 推出 | [@rem-appe-anchoring-consequences] 第 1 款 |
-| `H2` 椭圆负平方 | `T3` 分岔 | 求同读数为实标量时由正性条件推出；非标量时不成立 | [@rem-appe-involution-positivity] |
+| `H2` 椭圆负平方 | `T3` 分岔 | 求同读数为实标量时由正性条件推出；此时正性条件对每个比较的求异部分等价于它的整数次幂有界；非标量时不成立 | [@rem-appe-involution-positivity]、[@rem-appe-bounded-recurrence] |
 | `H2` 多点格拉姆半正定 | 显式的第 1 层条件 | 由条款 IV 加正泛函推出，逆向成立；标量相似时由条款 IV 加正性条件推出；偏离平坦时有定量下界 | [@thm-appe-chordal-gain-potential]、[@rem-appe-gram-from-flatness]、[@rem-appe-near-flat-gram-bound] |
 | `H3` 平行四边形极化 | `T2` 条件 | 弦距来自正泛函的 GNS 内积，输入由“内积”换成“正读数”；完备化仍为 `T1` | [@rem-appe-gram-from-flatness] 第 2 款 |
-| `H5` 玻恩权重 | `T2` 可加性条件 | 概率只依赖两两比较时，可加性可以换成“层析秩最小”；单比特为手工推导，一般维数为文献结果；仍是 `T2` 输入 | [@rem-appe-born-zonal-minimal-rank] |
+| `H5` 玻恩权重 | `T2` 可加性条件 | 只对只依赖两两比较的规则：$d\ge3$ 时有界、在每组正交归一基上归一且 $f(1)=1$ 就定出玻恩律；$d=2$ 时对连续规则，全效应可加性可以换成“对径归一、$f(1)=1$、层析秩最小”；仍是 `T2` 输入 | [@rem-appe-born-zonal-minimal-rank] |
 | `H8` 洛伦兹签名 | `T3` 分岔 | 可与 `H2` 的签名分岔读作同一处取舍（`MODEL`） | E.8.1 末段 |
 | `H8` 第 1 层射影和乐 | 第 1 层内生 | 在 $\mathcal{Cl}_{3,0}$ 中由半比较的三点和乐给出闭式 | [@rem-appe-half-comparison-holonomy] |
 

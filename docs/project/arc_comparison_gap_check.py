@@ -643,7 +643,7 @@ def check_e4_e5():
 
 
 # ---------------------------------------------------------------------------
-# R18  三角相容何时足够：模规范后的平坦增益个数等于 |Hom(pi_1, H)|
+# R18  三角相容何时足够：树规范固定后的平坦增益个数等于 |Hom(pi_1, H)|
 # ---------------------------------------------------------------------------
 def s3_table():
     perms = [(0, 1, 2), (1, 0, 2), (0, 2, 1), (2, 1, 0), (1, 2, 0), (2, 0, 1)]
@@ -712,7 +712,8 @@ def check_r18():
         + [(i, 4 + i) for i in range(4)]
         + [(i, 4 + (i + 1) % 4) for i in range(4)]
     )
-    # 单连通（四轮、八面体，均非弦图）：只有平凡类；pi_1 = Z（四圈、三角剖分圆环）：|Hom(Z, S3)| = 6
+    # 计数等于 |Hom(pi_1, S3)|：单连通（四轮、八面体，均非弦图）时为 1，这是必要而非充分条件；
+    # pi_1 = Z（四圈、三角剖分圆环）时为 6
     assert count_flat_gains_mod_gauge(5, wheel) == 1
     assert count_flat_gains_mod_gauge(6, octa) == 1
     assert count_flat_gains_mod_gauge(4, c4) == 6
@@ -730,7 +731,7 @@ def check_r18():
             dev = np.linalg.norm(hol - np.eye(n), 2)
             assert dev <= 4 * eps + 1e-12
             worst = max(worst, dev / (4 * eps))
-    record("R18 平坦增益计数与面积界（比值应 <= 1）", worst, "四轮/八面体: 1 类; 四圈/圆环: 6 类")
+    record("R18 平坦增益计数与面积界（比值应 <= 1）", worst, "规范固定后 四轮/八面体: 1; 四圈/圆环: 6")
 
 
 # ---------------------------------------------------------------------------
@@ -759,7 +760,80 @@ def check_r19():
         assert numeric_rank(0.3 + 0.7 * w) == d * d
         assert numeric_rank(w**2) == (d * (d + 1) // 2) ** 2
         assert numeric_rank(3 * w**2 - 2 * w**3) > d * d
-    record("R19 层析秩：仿射规则为 d^2，非仿射规则更大", 0.0, "S^2 与 CP^{d-1}, d = 2, 3, 4")
+    # d = 2：对径归一允许非仿射的多项式规则
+    assert sp.expand((3 * tt**2 - 2 * tt**3) + (3 * (1 - tt) ** 2 - 2 * (1 - tt) ** 3) - 1) == 0
+    # d = 3：单纯形上 sum f(t_i) = 1 的多项式解（次数 <= 5）只有仿射的 a + (1 - 3a) t；f(1) = 1 再给出 a = 0
+    t1, t2 = sp.symbols("t1 t2")
+    coeffs = sp.symbols("a0:6")
+
+    def poly(x):
+        return sum(c * x**k for k, c in enumerate(coeffs))
+
+    constraint = sp.Poly(sp.expand(poly(t1) + poly(t2) + poly(1 - t1 - t2) - 1), t1, t2)
+    solution = sp.solve(constraint.coeffs(), coeffs, dict=True)
+    assert len(solution) == 1
+    solved = [sp.simplify(sp.sympify(c).subs(solution[0])) for c in coeffs]
+    assert all(c == 0 for c in solved[2:])
+    assert sp.simplify(3 * solved[0] + solved[1] - 1) == 0
+    record("R19 层析秩与 d = 3 的可加性", 0.0, "S^2: 4/11/8; CP^{d-1} 仿射 d^2; d = 3 归一解仿射")
+
+
+
+# ---------------------------------------------------------------------------
+# R20  u^n = T_n(s) + U_{n-1}(s) A，轨道有界 <=> 椭圆或 +-1
+# ---------------------------------------------------------------------------
+def cheb_pair(n, s):
+    """返回 (T_n(s), U_{n-1}(s))，n >= 0，U_{-1} = 0。"""
+    t_prev, t_cur = 1.0 + 0j, s
+    u_prev, u_cur = 0j, 1.0 + 0j
+    if n == 0:
+        return t_prev, u_prev
+    for _ in range(n - 1):
+        t_prev, t_cur = t_cur, 2 * s * t_cur - t_prev
+        u_prev, u_cur = u_cur, 2 * s * u_cur - u_prev
+    return t_cur, u_cur
+
+
+def check_r20():
+    worst = 0.0
+    for _ in range(200):
+        u = random_sl2c()
+        s = np.trace(u) / 2
+        a = (u - adj2(u)) / 2
+        assert np.allclose(a @ a, (s * s - 1) * np.eye(2))
+        p = np.eye(2, dtype=complex)
+        q = np.eye(2, dtype=complex)
+        for n in range(9):
+            tn, un = cheb_pair(n, s)
+            scale = max(1.0, np.abs(p).max())
+            worst = max(worst, np.abs(p - (tn * np.eye(2) + un * a)).max() / scale)
+            worst = max(worst, np.abs(q - (tn * np.eye(2) - un * a)).max() / scale)
+            p, q = p @ u, q @ adj2(u)
+    assert worst < 1e-12
+
+    def orbit_sup(u, steps=400):
+        p = np.eye(2, dtype=complex)
+        q = np.eye(2, dtype=complex)
+        ui = np.linalg.inv(u)
+        m = 1.0
+        for _ in range(steps):
+            p, q = p @ u, q @ ui
+            m = max(m, np.abs(p).max(), np.abs(q).max())
+        return m
+
+    th = 0.7
+    ell = np.array([[np.cos(th), -np.sin(th)], [np.sin(th), np.cos(th)]], dtype=complex)
+    par = np.array([[1, 1], [0, 1]], dtype=complex)
+    hyp = np.diag([np.exp(0.05), np.exp(-0.05)]).astype(complex)
+    lox = np.diag([np.exp(0.02 + 0.6j), np.exp(-0.02 - 0.6j)])
+    assert orbit_sup(ell) < 1.0 + 1e-9
+    assert orbit_sup(-np.eye(2, dtype=complex)) < 1.0 + 1e-9
+    assert abs(orbit_sup(par) - 400) < 1e-6
+    assert orbit_sup(hyp) > 1e8 and orbit_sup(lox) > 1e3
+    # 矢高的 n 次复合：v_2 = 2 v (2 - v)
+    v = sp.symbols("v")
+    assert sp.expand(1 - sp.chebyshevt(2, 1 - v) - 2 * v * (2 - v)) == 0
+    record("R20 切比雪夫幂公式的相对偏差", worst, "椭圆有界; 抛物线性; 双曲与斜驶指数")
 
 
 
@@ -780,6 +854,7 @@ def main():
     check_h7()
     check_r18()
     check_r19()
+    check_r20()
     width = max(len(tag) for tag, _, _ in REPORT)
     for tag, value, note in REPORT:
         print(f"{tag:<{width}}  {value:.3e}  {note}")

@@ -74,6 +74,20 @@ $\mathrm{SL}(2,\mathbb{C})$ 通过 $X\mapsto uXu^\dagger$ 作用在厄米矩阵 
 
 附录 E 反例 (c) 的非简单双向量 $B=e_1e_2+e_3e_4$ 属于另一种情形。$B$ 本身不是 $\mathcal{Cl}_{4,0}$ 中任何公平元（对反转对合）的求异部分：与 $B$ 对易的自反转元只能是 $\alpha+\beta e_{1234}$，而 $S^2=\mathbf{1}+B^2=-\mathbf{1}+2e_{1234}$ 要求 $\alpha^2+\beta^2=-1$。能出现的是它的倍数 $tB$（$\lvert t\rvert\le\tfrac12$）：四个向量的复合比较 $(\cos\tfrac\pi4+e_1e_2\sin\tfrac\pi4)(\cos\tfrac\pi4+e_3e_4\sin\tfrac\pi4)$ 的求异部分是 $\tfrac12B$，求同部分是 $\tfrac12(\mathbf{1}+e_{1234})$，后者离开了实标量而落在偶子代数的中心 $\mathbb{R}\oplus\mathbb{R}e_{1234}$ 里。
 
+### R20 正性条件等价于重复比较有界（手工推导；多点情形为文献结果）
+
+设 $u$ 公平，求同读数为实标量 $s$。
+
+1. $u^2=2su-\mathbf{1}$（由 $u+u^*=2s$、$uu^*=\mathbf{1}$），故 $u^{n+1}=2su^n-u^{n-1}$，对 $n\ge0$ 有 $u^{\pm n}=T_n(s)\mathbf{1}\pm U_{n-1}(s)A$（$U_{-1}=0$；$n=0,1$ 直接验证，其余由三项递推；$u^*=s-A$ 给出负幂）。连做 $n$ 次同一比较的矢高是 $v_n=1-T_n(1-v)$，例如 $v_2=2v(2-v)$。
+2. 在 $\operatorname{span}\{\mathbf{1},A\}$ 上任取范数。$\{u^n\}_{n\in\mathbb{Z}}$ 有界当且仅当 $s\in[-1,1]$ 且 $s=\pm1$ 时 $A=0$。$\lvert s\rvert<1$ 时系数为 $\cos n\theta$ 与 $\sin n\theta/\sin\theta$；$s=\pm1$ 时 $u^n=(\pm1)^n(\mathbf{1}\pm nA)$；$\lvert s\rvert>1$ 时 $\lvert T_n(s)\rvert=\cosh n\eta$，且 $A\neq0$、$A^*=-A$ 使 $A$ 与 $\mathbf{1}$ 实线性无关。
+3. $A^*A=(1-s^2)\mathbf{1}$，所以 $(\mathrm{Pos})$ 用在 $a=A$ 上恰好是“$s\in[-1,1]$ 且 $s=\pm1$ 时 $A=0$”。于是：$(\mathrm{Pos})$ 对 $u$ 的求异部分成立，当且仅当 $u$ 的整数次幂有界。
+4. 对合是 $\mathbb{C}$-线性时 $s$ 可以是复数（如 $(M_2(\mathbb{C}),\operatorname{adj})$）；$s=\cos\theta$、$\operatorname{Im}\theta\neq0$ 时 $\lvert\cos n\theta\rvert\ge\sinh(n\lvert\operatorname{Im}\theta\rvert)$，轨道无界。所以有界性同时排除斜驶类。
+5. 多点（文献结果）：有限维向量空间上由公平元构成的有界群 $\Gamma$，其闭包是紧群，平均得到 $\Gamma$-不变内积；对 $a\in\operatorname{span}_{\mathbb{R}}\Gamma$，$a^*=\sum\lambda_ig_i^{-1}$ 就是伴随，$a^*a\ge0$，$(\mathrm{Pos})$ 在该张成上成立。标量相似时 R7 第 3 款所用的 $a=\sum\lambda_ig_i$ 正在这个张成里，所以“比较值生成的群有界”可以代替 $(\mathrm{Pos})$ 推出 Gram 半正定。
+
+$(\mathrm{Pos})$ 独立于条款 IV：$X=\mathrm{SL}(2,\mathbb{C})$、$c_{xy}=x^\sharp y$ 满足条款 II–IV 而 $(\mathrm{Pos})$ 失败。R20 给出的是 $(\mathrm{Pos})$ 的等价操作形式，不是更弱的条件。它把 `H2` 的签名取舍读成稳定性：椭圆有界，抛物线性增长，双曲指数增长；后两者在洛伦兹群里是零转动与推进，与 R3 的读法一致。
+
+复算：随机 $\mathrm{SL}(2,\mathbb{C})$ 元素上 $u^n=T_n(s)+U_{n-1}(s)A$（$n\le8$）的相对偏差不超过 $10^{-13}$；椭圆、抛物、双曲、斜驶四个标准元在 $\lvert n\rvert\le400$ 内的轨道上界分别为 $1$、$400$、$e^{20}$ 量级与 $e^{8}$ 量级。
+
 ## 2. 三点：比安基与斯托克斯只需要条款 III
 
 本节不假设链式律，只用 $c_{yx}=c_{xy}^{-1}$。
@@ -194,12 +208,12 @@ $$
 设 $G$ 为有限简单图，$H$ 为群，$g$ 定义在相邻的有序点对上，$g(j,i)=g(i,j)^{-1}$，且在 $G$ 的每个三角形上 $g(i,j)g(j,k)=g(i,k)$。走道 $w=(x_0,\dots,x_n)$ 的 $\operatorname{hol}(w)=g(x_0,x_1)\cdots g(x_{n-1},x_n)$ 在两种改写下不变：折返 $x,y,x\leftrightarrow x$（由取逆），三角形 $x,y,z\leftrightarrow x,z$（由三角相容）。称 $G$ 被三角形填满，若每条闭走道都能用这两种改写化成单点。
 
 1. 若 $G$ 被三角形填满，则任何群上的这种 $g$ 都是势之比：$\varphi(x):=\operatorname{hol}(o\to x)$ 与走道无关，$g(x,y)=\varphi(x)^{-1}\varphi(y)$。
-2. 若某个连通分支没有被填满，取 $H$ 为该分支上以 $o$ 为基点的闭走道模两种改写的群，取生成树与树走道 $\gamma_x$，令 $g(x,y)=[\gamma_x(x,y)\gamma_y^{-1}]$。取逆由折返给出；三角相容由 $[\gamma_x(x,y)\gamma_y^{-1}][\gamma_y(y,z)\gamma_z^{-1}]=[\gamma_x(x,y,z)\gamma_z^{-1}]=[\gamma_x(x,z)\gamma_z^{-1}]$ 给出；闭走道 $w$ 的 $\operatorname{hol}(w)=[\gamma_ow\gamma_o^{-1}]=[w]$。势之比使一切闭走道的 $\operatorname{hol}$ 为 $1$，与 $H$ 非平凡矛盾。
+2. 若某个连通分支没有被填满，取 $H$ 为该分支上以 $o$ 为基点的闭走道模两种改写的群，取生成树与树走道 $\gamma_x$，令 $g(x,y)=[\gamma_x(x,y)\gamma_y^{-1}]$，其余分支上令 $g\equiv1$。取逆由折返给出；三角相容由 $[\gamma_x(x,y)\gamma_y^{-1}][\gamma_y(y,z)\gamma_z^{-1}]=[\gamma_x(x,y,z)\gamma_z^{-1}]=[\gamma_x(x,z)\gamma_z^{-1}]$ 给出；闭走道 $w$ 的 $\operatorname{hol}(w)=[\gamma_ow\gamma_o^{-1}]=[w]$。$H$ 非平凡：以 $x$ 为基点的闭走道 $w$ 能化成单点，当且仅当以 $o$ 为基点的 $\gamma_xw\gamma_x^{-1}$ 能。势之比使一切闭走道的 $\operatorname{hol}$ 为 $1$，与 $H$ 非平凡矛盾。
 3. 设 $H$ 带双侧不变伪度量，取逆精确成立，三角相容的偏差不超过 $\varepsilon$。用 $A$ 次三角形改写化成单点的闭走道满足 $d(\operatorname{hol}(w),1)\le A\varepsilon$：一次三角形改写把 $a\,g(x,y)g(y,z)\,b$ 换成 $a\,g(x,z)\,b$，双侧不变性给出这一步的距离不超过 $\varepsilon$，再用三角不等式。双侧不变性还推出 $d(x^{-1},y^{-1})=d(x,y)$，所以三角形三个顶点的各种排序给出同一条偏差条件。
 
-所以“对一切群，三角相容推出势表示”当且仅当 $G$ 被三角形填满。第 2 款的群是团复形的棱道群，同构于它的基本群（Spanier, *Algebraic Topology*, 1966, 第 3 章），被三角形填满即团复形各分支单连通；连通弦图的团复形可缩，冻结定理 `IsChordal.exists_gain_potential` 是第 1 款的特例。四圈的棱道群是 $\mathbb{Z}$；四轮图与八面体图都不是弦图而团复形单连通。第 3 款是 R5 的组合形式：偏差按填充面积累积，弦图上冻结定理给出的 $(\lvert V\rvert-2)\varepsilon$ 是沿消去次序的一种填充。
+所以“对一切群，三角相容推出势表示”当且仅当 $G$ 被三角形填满。第 2 款的群是团复形的棱道群，同构于它的基本群（Spanier, *Algebraic Topology*, 1966, 第 3 章），被三角形填满即团复形各分支单连通；连通弦图的团复形可缩（单纯顶点的邻居张成一个单形，删去它是形变收缩并保持连通，沿消去次序归纳），冻结定理 `IsChordal.exists_gain_potential` 是第 1 款的特例。四圈的棱道群是 $\mathbb{Z}$；四轮图与八面体图都不是弦图而团复形单连通。第 3 款是 R5 的组合形式：偏差按填充面积累积，弦图上冻结定理给出的 $(\lvert V\rvert-2)\varepsilon$ 是沿消去次序的一种填充。
 
-复算：对 $S_3$ 值增益，把生成树上的值规范固定为单位元后穷举，四轮图与八面体图各只有 $1$ 个平坦类，四圈与三角剖分圆环各有 $6=\lvert\operatorname{Hom}(\mathbb{Z},S_3)\rvert$ 个。
+复算：对 $S_3$ 值增益，把生成树上的值规范固定为单位元后穷举，满足三角相容的增益在四轮图与八面体图上各只有 $1$ 个，在四圈与三角剖分圆环上各有 $6=\lvert\operatorname{Hom}(\mathbb{Z},S_3)\rvert$ 个。这个计数等于 $\lvert\operatorname{Hom}(\pi_1,S_3)\rvert$；它等于 $1$ 是单连通的必要条件，不是充分条件。
 
 ## 4. 曲率来自半比较
 
@@ -350,22 +364,26 @@ $$
 
 有限孔径下 $H$ 的可识别性有明确边界：$D=e^{-i\epsilon H}$ 只在谱落在 $(-\pi/\epsilon,\pi/\epsilon]$ 时唯一决定 $H$；与 $H$ 对易、谱为 $\tfrac{2\pi}{\epsilon}\mathbb{Z}$ 的修正给出同一组采样比较。
 
-### R19 `H5`：只依赖两两比较的概率规则里，玻恩律的层析秩最小（单比特为手工推导；一般维数为文献结果）
+### R19 `H5`：单比特上带状规则以层析秩最小刻画玻恩律；$d\ge3$ 时归一已经足够（手工推导）
 
 单比特上玻恩权重是矢高的仿射函数 $p=1-\tfrac v2$；对 POVM $E_k=w_k(\mathbf{1}+n_k\cdot\boldsymbol\sigma)$（$\sum_kw_k=1$，$\sum_kw_kn_k=0$），$\sum_kw_kv(r,n_k)=1$ 与 $r$ 无关，这正是归一化所需的一阶矩条件。附录 E 的三次反例对矢高不是仿射的，从两两公平推不出这条仿射性。下面把它换成一条计数条件。
 
 设 $p(\mathbf{r}\mid\mathbf{s})=f(\mathbf{s}\cdot\mathbf{r})$，$f$ 在 $[-1,1]$ 上连续，$f(t)+f(-t)=1$，$f(1)=1$。记 $f=\sum_lc_lP_l$ 为勒让德展开，$K(f)$ 为 $\{\mathbf{r}\mapsto f(\mathbf{s}\cdot\mathbf{r})\}_{\mathbf{s}}$ 的线性张成的维数。
 
-1. $K(f)=\sum_{c_l\neq0}(2l+1)$，$f$ 不是多项式时为 $\infty$。证明：$V_f=\operatorname{span}\{f(\mathbf{s}\cdot\,\cdot)\}$ 在旋转下不变。$f$ 为多项式时，由加法定理 $f(\mathbf{s}\cdot\mathbf{r})=\sum_lc_l\frac{4\pi}{2l+1}\sum_mY_{lm}(\mathbf{s})Y_{lm}(\mathbf{r})$；球谐函数作为 $\mathbf{s}$ 的函数线性无关，所以系数向量张满，$V_f=\bigoplus_{c_l\neq0}\mathcal{H}_l$。$f$ 不是多项式时有无穷多个 $c_l\neq0$，$V_f$ 在每个这样的 $\mathcal{H}_l$ 上的投影非零，维数无穷。
+1. $K(f)=\sum_{c_l\neq0}(2l+1)$，$f$ 不是多项式时为 $\infty$。证明：$V_f=\operatorname{span}\{f(\mathbf{s}\cdot\,\cdot)\}$ 在旋转下不变。$f$ 为多项式时，由实球谐函数的加法定理 $f(\mathbf{s}\cdot\mathbf{r})=\sum_lc_l\frac{4\pi}{2l+1}\sum_mY_{lm}(\mathbf{s})Y_{lm}(\mathbf{r})$；球谐函数作为 $\mathbf{s}$ 的函数线性无关，所以系数向量张满，$V_f=\bigoplus_{c_l\neq0}\mathcal{H}_l$。$f$ 不是多项式时有无穷多个 $c_l\neq0$，$V_f$ 在每个这样的 $\mathcal{H}_l$ 上的投影含有非零元 $c_lP_l(\mathbf{s}\cdot\,\cdot\,)$，而 $\mathcal{H}_l$ 不可约，投影的像是整个 $\mathcal{H}_l$，维数无穷。
 2. $f(t)+f(-t)=1$ 与 $P_l(-t)=(-1)^lP_l(t)$ 给出 $c_0=\tfrac12$，偶数阶 $l\ge2$ 的系数为零。$f(1)=1$ 排除 $f\equiv\tfrac12$，所以有奇数阶出现，$K(f)\ge1+3$。
 3. $K(f)=4$ 当且仅当只出现 $l=0,1$，即 $f=\tfrac12+c_1t$；$f(1)=1$ 给出 $c_1=\tfrac12$，$f(t)=\tfrac{1+t}2=1-\tfrac v2$。
 4. 三次规则 $\tfrac12(1+t^3)$：$t^3=\tfrac35P_1+\tfrac25P_3$，$K=1+3+7=11$。只含 $l=0,3$ 的归一规则 $\tfrac12+\tfrac12P_3$ 取值在 $[0,1]$ 内，$K=8$。
 
-一般维数（文献结果，本轮未证明）：在 $\mathbb{CP}^{d-1}$ 上，$p=f(\lvert\langle x\mid y\rangle\rvert^2)$ 在每组正交归一基上归一且 $f(1)=1$ 时 $K(f)\ge d^2$，等号只在 $f(t)=t$。骨架是：带状函数按 $\mathrm{U}(d)$ 的不可约分量 $\mathcal{H}_k$ 无重数分解，$\dim\mathcal{H}_k=\binom{d+k-1}{k}^2-\binom{d+k-2}{k-1}^2$ 随 $k$ 递增，$\dim\mathcal{H}_1=d^2-1$；归一使 $k=0$ 分量为 $\tfrac1d\neq0$，$f(1)=1$ 使 $f$ 非常数；仿射规则 $a+bt$ 的归一条件 $da+b=1$ 与 $a+b=1$ 给出 $a=0$。出处：Hardy（arXiv:quant-ph/0101012）以 $K=N^2$ 为公理；Galley–Masanes（*Quantum* **1**, 15, 2017）把备选概率规则对应到酉群表示。按记忆中的书目信息列出，未调阅原文核对。
+$d\ge3$（手工推导）：在 $\mathbb{CP}^{d-1}$ 上设 $p=f(\lvert\langle x\mid y\rangle\rvert^2)$，$f$ 有界，$f(1)=1$，在每组正交归一基上归一。模方向量取遍概率单纯形，故 $\sum_if(t_i)=1$ 对单纯形上一切点成立；$(1,0,\dots)$ 给出 $f(0)=0$；$d\ge3$ 时 $(t,s,1-t-s,0,\dots)$ 与 $(t+s,0,1-t-s,0,\dots)$ 给出 $f(t)+f(s)=f(t+s)$，有界可加函数线性，$f(t)=t$。所以 $d\ge3$ 时带状规则不需要秩条件，$K=d^2$ 是结论；层析秩最小只在 $d=2$ 是真正的额外输入，这与格里森定理的例外维数相同。
 
-复算：随机采样的概率表的数值秩，$S^2$ 上玻恩律为 $4$、三次规则为 $11$、$\tfrac12+\tfrac12P_3$ 为 $8$；$\mathbb{CP}^{d-1}$（$d=2,3,4$）上仿射规则为 $d^2$，$t^2$ 为 $\bigl(\tfrac{d(d+1)}2\bigr)^2$。
+不加基归一时另有一条秩的陈述，本轮没有逐步证明，也没有写进书稿：$f$ 连续、非负、非常数且 $f(1)=1$ 时 $K(f)\ge d^2$。骨架是带状函数按 $\mathrm{U}(d)$ 的不可约分量 $\mathcal{H}_k$ 无重数分解，$\dim\mathcal{H}_k=\binom{d+k-1}{k}^2-\binom{d+k-2}{k-1}^2$ 随 $k$ 递增，$\dim\mathcal{H}_1=d^2-1$，$k=0$ 分量是 $f$ 的均值，为正。
 
-读法：$d^2=\dim_{\mathbb{R}}\operatorname{Herm}(d)$ 与 R15 的局域层析计数是同一个数；对单比特，$4=1+3$ 是 R7 的 Gram 嵌入加归一所占的维数，概率对矢高仿射等价于概率是嵌入坐标的仿射函数。`H5` 的输入由“效应可加性”换成“概率只依赖两两比较，且层析秩最小”。后者仍是操作假设，两两公平推不出它。
+文献背景：Hardy（arXiv:quant-ph/0101012）的简单性公理要求 $K$ 取与其余公理相容的最小值，并由此推出 $K=N^2$；Galley–Masanes（*Quantum* **1**, 15, 2017）把备选概率规则对应到酉群表示。两者是“层析秩最小”这类条件的先例，R19 的陈述与推导不取自其中任何一篇。
+
+复算：随机采样的概率表的数值秩，$S^2$ 上玻恩律为 $4$、三次规则为 $11$、$\tfrac12+\tfrac12P_3$ 为 $8$；$\mathbb{CP}^{d-1}$（$d=2,3,4$）上仿射规则为 $d^2$，$t^2$ 为 $\bigl(\tfrac{d(d+1)}2\bigr)^2$；对 $d=3$ 用符号计算核对：次数不超过 $5$ 的多项式若在单纯形上满足 $\sum_if(t_i)=1$，必为仿射。
+
+读法：单比特上 $4=\dim_{\mathbb{R}}\operatorname{Herm}(2)$ 与 R15 的局域层析计数是同一个数，也是 R7 的 Gram 嵌入加归一所占的维数，概率对矢高仿射等价于概率是嵌入坐标的仿射函数。对连续的带状规则，`H5` 在 $d=2$ 的输入可以由“全效应可加性”换成“对径归一、$f(1)=1$、层析秩最小”；$d\ge3$ 时投影可加性已经足够。层析秩最小仍是操作假设，两两公平推不出它。
 
 ## 7. 缺口台账
 
@@ -373,11 +391,11 @@ $$
 | --- | --- | --- |
 | `H1` | R1 的对易证明用到 $2$ 可逆；其余未变 | 核商化、特征非 $2$ |
 | `H2` 正自配对 | 由条款 IV 推出（R6） | 条款 IV |
-| `H2` 椭圆负平方 | 求同读数为实标量时由 $(\mathrm{Pos})$ 推出；非标量时不成立（R2、R7） | 对合正性、标量相似 |
+| `H2` 椭圆负平方 | 求同读数为实标量时由 $(\mathrm{Pos})$ 推出；非标量时不成立（R2、R7）；$(\mathrm{Pos})$ 对求异部分等价于整数次幂有界（R20） | 对合正性（或重复比较有界）、标量相似 |
 | `H2` 多点 Gram 半正定 | 由条款 IV 加正泛函推出，逆向成立；标量相似时由条款 IV 加 $(\mathrm{Pos})$ 推出；偏离平坦时有稳定界（R7、R8） | 条款 IV，以及正泛函或 $(\mathrm{Pos})$ |
 | `H3` | 内积由正泛函的 GNS 形式给出，弦距自动满足极化（R7）；输入由“内积”换成“正读数” | 条款 IV、正泛函、柯西完备化 |
 | `H4` | $R^2=-I$ 是锁死恒等式在 $v=1$ 处的切片（R1） | 正交余项不枯竭、估值选择 |
-| `H5` | 概率只依赖两两比较时，可加性可换成层析秩最小；单比特有完整证明，一般维数为文献结果（R19） | 效应可加性，或“带状 + 层析秩最小” |
+| `H5` | 只对带状规则：$d\ge3$ 时基归一加 $f(1)=1$ 已定出玻恩律；$d=2$ 时全效应可加性可换成层析秩最小（R19） | 效应可加性；或在 $d=2$：连续、带状、对径归一、$f(1)=1$、层析秩最小 |
 | `H6` | 时间平移编码为齐次比较族时，群律来自条款 IV；给出 $H$ 的混叠等价类（R17） | 演化的双侧可逆性、可重复最小扰动条件化、强连续性、$H$ |
 | `H7` | 缺口维数 $\dim O_1\dim O_2$；共用中心直角比较是缺口消失的充分条件（R15） | 中心复结构的存在、交换统计 |
 | `H8` | 洛伦兹签名与 `H2` 签名可读作同一处取舍（R3，模型读法）；$\mathcal{Cl}_{3,0}$ 中射影和乐来自半比较（R9）；比安基与斯托克斯来自条款 III（R4、R5）；捏合为偶部（R16） | 签名取舍、随基点变化的联络及其动力学 |
@@ -431,4 +449,4 @@ $$
 
 **上游形式化。** 冻结库中尚无对应声明、且证明有实际内容的候选，按价值排序：R12（累计矢高的有限 $N$ 双侧界与三个极限区间；均值旋子夹逼的两侧分别是钉版 Mathlib 中 `Real.one_sub_inv_le_log_of_pos` 与 `Real.one_sub_le_exp_neg` 的直接推论，按上游规则不单独立项；$(\cos(t/\sqrt n))^n$ 的极限在上游已有私有引理，需要时应公开原声明后复用）、R9（半旋子和乐的闭式与 $\tan(\Omega/2)$）、R15 的实情形计数、R10 第 5 款、R14、R11。R1、R4、R5 是由假设代入加环运算得到的恒等式，适合作为上述定理证明中被消费的引理，不宜单独立项。形式化之前还须检索钉版 Mathlib。
 
-**未解决。** $(\mathrm{Pos})$ 能否由更弱的比较条件推出，本轮没有结果。条款 IV 一侧，R18 给出了恰好足够的条件（可比三角形填满每个圈）；它只有手工推导，冻结定理覆盖的是弦图这一特例。`H5` 一侧，R19 对一般维数只引用文献，层析秩最小能否由更弱的比较条件推出没有结果。[@prob-ch34-rough-nonabelian-surface-calculus] 的两项目标未触及：R5 与 R8 只处理有限孔径，不涉及 $\alpha<\tfrac12$ 的细分极限。
+**未解决。** $(\mathrm{Pos})$ 一侧，R20 给出了等价的操作形式（重复比较有界），并说明它独立于条款 IV；它能否由别的更弱的比较条件推出，没有结果。条款 IV 一侧，R18 给出了恰好足够的条件（可比三角形填满每个圈）；它只有手工推导，冻结定理覆盖的是弦图这一特例。`H5` 一侧，R19 只处理带状规则；单比特上层析秩最小能否由更弱的比较条件推出没有结果。[@prob-ch34-rough-nonabelian-surface-calculus] 的两项目标未触及：R5 与 R8 只处理有限孔径，不涉及 $\alpha<\tfrac12$ 的细分极限。
