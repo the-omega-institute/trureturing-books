@@ -165,17 +165,17 @@ $$
 :::
 
 <!-- alias: #rem-qsvt-solovay-kitaev-literature -->
-::: {.remark #rem-solovay-kitaev-literature title="Solovay–Kitaev 门编译定理与多对数字长上界（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 当我们将目标从连续两轴旋转（[@prop-two-axis-finite-word]）转向离散有限门集编译时，一般有限门集字长的一个多对数上界由量子编译理论中的 **Solovay–Kitaev 定理**（参见 C. M. Dawson and M. A. Nielsen, *The Solovay–Kitaev algorithm*, Quantum Inf. Comput. **6**, 81–95, 2006, arXiv:quant-ph/0505030）给出；它不是 $\{H, T\}$ 的最优字长：
+::: {.remark #rem-solovay-kitaev-literature title="Solovay–Kitaev 门编译定理与多对数多面体逼近复杂度（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 当我们将目标从连续两轴旋转（[@prop-two-axis-finite-word]）转向离散有限门集编译时，其渐近字长的上界由量子编译理论中的 **Solovay–Kitaev 定理**（参见 C. M. Dawson and M. A. Nielsen, *The Solovay–Kitaev algorithm*, Quantum Inf. Comput. **6**, 81–95, 2006, arXiv:quant-ph/0505030）给出：
 
-1. **多对数字长上界 $L = O(\log^c(1/\varepsilon))$**：设 $\mathcal{G} \subset \mathrm{SU}(2)$ 为有限、含逆元（$\mathcal{G} = \mathcal{G}^{-1}$）且生成稠密子群 $\langle\mathcal{G}\rangle$ 的离散门集。则对任意目标幺正门 $U \in \mathrm{SU}(2)$ 及任意足够小的精度 $\varepsilon > 0$，存在长度 $L = O\bigl(\log^c(1/\varepsilon)\bigr)$ 的门字 $w \in \mathcal{G}^*$ 使得算子范数误差满足 $\norm{U - w}_{\mathrm{op}} \le \varepsilon$。在 Dawson–Nielsen 的经典五因子群换位子递归构造中，每一层递归用 $5$ 个前一层近似字拼出精度从 $\varepsilon_{k-1}$ 提升至 $\varepsilon_k = O(\varepsilon_{k-1}^{3/2})$ 的修正字，从而给出幂指数
+1. **多对数渐近字长 $L = O(\log^c(1/\varepsilon))$**：设 $\mathcal{G} \subset \mathrm{SU}(2)$ 为有限、含逆元（$\mathcal{G} = \mathcal{G}^{-1}$）且生成稠密子群 $\langle\mathcal{G}\rangle$ 的离散门集。则对任意目标幺正门 $U \in \mathrm{SU}(2)$ 及任意足够小的精度 $\varepsilon > 0$，存在长度 $L = O\bigl(\log^c(1/\varepsilon)\bigr)$ 的门字 $w \in \mathcal{G}^*$ 使得算子范数误差满足 $\norm{U - w}_{\mathrm{op}} \le \varepsilon$。在 Dawson–Nielsen 的经典五因子群换位子递归构造中，每一层递归用 $5$ 个前一层近似字拼出精度从 $\varepsilon_{k-1}$ 提升至 $\varepsilon_k = O(\varepsilon_{k-1}^{3/2})$ 的修正字，从而给出幂指数
 
    $$
    c = \frac{\ln 5}{\ln(3/2)} \approx 3.97
    $$
 
-   （其中的隐含常数依赖于具体门集与所选误差度量）。这个 $c$ 只是 Dawson–Nielsen 构造的指数，不是最优值：Kuperberg 的预印本（*Breaking the cubic barrier in the Solovay–Kitaev algorithm*, arXiv:2306.13158, 2023）把一般门集的指数降到约 $1.44$。对本章的 Clifford+T 门集（由 $H$ 与 $T$ 生成），数论合成直接给出 $O(\log(1/\varepsilon))$ 的字长：Kliuchnikov、Maslov 与 Mosca（Phys. Rev. Lett. **110**, 190502, 2013, doi:10.1103/PhysRevLett.110.190502）借助常数个辅助比特做到这一阶；Selinger（*Efficient Clifford+T approximation of single-qubit operators*, arXiv:1212.6253）对任意 $U \in \mathrm{SU}(2)$ 不用辅助比特给出 $T$ 门数约 $12\log_2(1/\varepsilon)$；Ross 与 Selinger（*Optimal ancilla-free Clifford+T approximation of z-rotations*, Quantum Inf. Comput. **16**, 901–953, 2016, arXiv:1403.2975）对绕 $z$ 轴的旋转求出最短电路，典型 $T$ 门数约为 $3\log_2(1/\varepsilon)$。反过来，长度不超过 $L$ 的门字只有指数多个，而盖满三维的 $\mathrm{SU}(2)$ 需要约 $\varepsilon^{-3}$ 个半径为 $\varepsilon$ 的球，所以任何有限门集的最坏字长都至少是 $\Omega(\log(1/\varepsilon))$（手工推导）；对 Clifford+T，字长的阶因此是 $\Theta(\log(1/\varepsilon))$。
-2. **门集 $\{H, T\}$ 的逆门封闭与射影规范**：对于标准容错门集 $\{H, T\}$，由于 $H$ 自身是二阶对合门（$H^{-1} = H$），而 $T$ 是八阶相位门（在射影群 $\mathrm{PU}(2)$ 中 $T^{-1} = T^7$；若在 $\mathrm{SU}(2)$ 中使用幺模提升 $\tilde{H} = iH, \tilde{T} = e^{-i\pi/8}T$，则 $\tilde{H}^{-1} = -\tilde{H} = \tilde{H}^3$、$\tilde{T}^{-1} = -\tilde{T}^7 = \tilde{T}^{15}$，中心符号 $\pm I_2$ 需在提升中一致追踪），逆门均可用常数个正向门拼出，因此在射影距离 $\delta(U, V) = \min_{\varphi}\norm{U - e^{i\varphi}V}_{\mathrm{op}}$ 下同样继承 $L = O(\log^c(1/\varepsilon))$ 的长度上界，仅有限前因子发生相应缩放。
+   （其中的隐含常数依赖于具体门集与所选误差度量）。这个 $c$ 只是 Dawson–Nielsen 构造的指数，并不是 $\{H, T\}$ 的最优阶：对 Clifford+T 门集，数论合成直接给出 $O(\log(1/\varepsilon))$ 的字长（P. Selinger, *Efficient Clifford+T approximation of single-qubit operators*, arXiv:1212.6253；N. J. Ross and P. Selinger, *Optimal ancilla-free Clifford+T approximation of z-rotations*, Quantum Inf. Comput. **16**, 901–953, 2016）；而长度不超过 $L$ 的门字只有指数多个，盖满三维的 $\mathrm{SU}(2)$ 却需要约 $\varepsilon^{-3}$ 个半径为 $\varepsilon$ 的球，故任何有限门集的最坏字长都至少是 $\Omega(\log(1/\varepsilon))$，Clifford+T 的字长阶因此是 $\Theta(\log(1/\varepsilon))$。
+2. **门集 $\{H, T\}$ 的逆门封闭与射影规范**：对于标准容错门集 $\{H, T\}$，由于 $H$ 自身是二阶对合门（$H^{-1} = H$），而 $T$ 是八阶相位门（在射影群 $\mathrm{PU}(2)$ 中 $T^{-1} = T^7$；若在 $\mathrm{SU}(2)$ 中使用幺模提升 $\tilde{H} = iH, \tilde{T} = e^{-i\pi/8}T$，则 $\tilde{H}^{-1} = -\tilde{H} = \tilde{H}^3$、$\tilde{T}^{-1} = -\tilde{T}^7 = \tilde{T}^{15}$，中心符号 $\pm I_2$ 需在提升中一致追踪），逆门均可用常数个正向门拼出，因此在射影距离 $\delta(U, V) = \min_{\varphi}\norm{U - e^{i\varphi}V}_{\mathrm{op}}$ 下同样继承 $L = O(\log^c(1/\varepsilon))$ 的渐近长度结论，仅有限前因子发生相应缩放。
 3. **李代数换位子步长的精确尺度（切勿线性化误写）**：Solovay–Kitaev 递归步的核心局部恒等式是群换位子的 Baker–Campbell–Hausdorff 展开
 
    $$
@@ -183,11 +183,11 @@ $$
    $$
 
    这里要合成步长为 $O(\varepsilon)$ 的微小旋转修正 $\exp([A, B])$，必须取两根步长为 **$O(\sqrt{\varepsilon})$** 的旋转生成元 $A, B$，使换位子主项 $[A, B]$ 落在 $O(\sqrt{\varepsilon})\cdot O(\sqrt{\varepsilon}) = O(\varepsilon)$ 量级，而高阶残差落在 $O\bigl((\sqrt{\varepsilon})^3\bigr) = O(\varepsilon^{3/2})$ 量级（绝不能错写成换位子对原步长呈线性关系）。
-4. **反柏拉图边界重申**：Solovay–Kitaev 定理是一个关于 $\varepsilon \to 0$ 时字长增长率上界的渐近逼近定理——它**既不意味着**在任何有限字长 $L < \infty$ 下最坏目标门 $U \notin \mathcal{W}_{\le L}$ 的覆盖残差可以归零（虽然恰好已属于有限字集 $\mathcal{W}_{\le L}$ 的离散顶点如 $I, H, T$ 本身具有零误差，但在整个连续群或球面上，最坏覆盖半径 $\varepsilon_L > 0$ 对一切有限 $L$ 恒成立），**也不允许**把固定初态在 $S^2$ 上的单态覆盖误差 $\varepsilon_L$ 直接等同于 $\mathrm{SU}(2)/\mathrm{PU}(2)$ 上的全门编译误差。
+4. **反柏拉图边界重申**：Solovay–Kitaev 定理是一个关于 $\varepsilon \to 0$ 时字长增长率的渐近逼近定理——它**既不意味着**在任何有限字长 $L < \infty$ 下最坏目标门 $U \notin \mathcal{W}_{\le L}$ 的覆盖残差可以归零（虽然恰好已属于有限字集 $\mathcal{W}_{\le L}$ 的离散顶点如 $I, H, T$ 本身具有零误差，但在整个连续群或球面上，最坏覆盖半径 $\varepsilon_L > 0$ 对一切有限 $L$ 恒成立），**也不允许**把固定初态在 $S^2$ 上的单态覆盖误差 $\varepsilon_L$ 直接等同于 $\mathrm{SU}(2)/\mathrm{PU}(2)$ 上的全门编译误差。
 :::
 
 ::: {.viz src="gate-word-polytope" preset="shrink" height="500"}
-**最大的缺口一级级缩小，却补不上。** 门长从 $0$ 走到 $20$：青色的可达点一层层变密，品红虚线圈出的最大空球冠从 $180^\circ$ 缩到 $\varepsilon_{20} = 9.10^\circ$，有几层一点也不缩；到 $L = 20$ 有 $971$ 个点，洞仍然在。旁边品红的台阶是页面对每个 $L$ 实算的覆盖半径 $\varepsilon_L$（琥珀色的是 $L = 20$），不拟合任何渐近速率；渐近字长的界是 [@rem-solovay-kitaev-literature] 中的文献结果。
+**最大的缺口一级级缩小，却补不上。** 门长从 $0$ 走到 $20$：青色的可达点一层层变密，品红虚线圈出的最大空球冠从 $180^\circ$ 缩到 $\varepsilon_{20} = 9.10^\circ$，有几层一点也不缩；到 $L = 20$ 有 $971$ 个点，洞仍然在。旁边品红的台阶是页面对每个 $L$ 实算的覆盖半径 $\varepsilon_L$（琥珀色的是 $L = 20$），不拟合任何渐近速率；渐近字长是 [@rem-solovay-kitaev-literature] 的文献结果。
 :::
 
 至此，第四部“高维球体——纠缠、拓扑与量子算法”的四章旅程全部合拢：我们从双比特 $6 + 9 = 15$ 的关联扇区与贝尔 $45^\circ$ 余弦破缺（[第十三章](ch13-entanglement-and-chsh.md)）出发，用泡利稳定子与架编织把脆弱的局部线藏进正交综合征子空间（[第十四章](ch14-cloning-codes-and-braids.md)），在不变平面旋转与有限群对偶零化子相消中看清了 Grover 与 Shor 算法的几何引擎（[第十五章](ch15-grover-qft-and-period-finding.md)），最终在切比雪夫递推与三维割圆多面体 $P_L$ 中直面了有限离散门字逼近连续球面的永恒残差 $\varepsilon_L > 0$（本章）。正是这道在任何有限步内都无法彻底抹平的多面体缝隙，为我们打开了通往第五部与第六部——时空与观察者复杂性、不完备性对角线逃逸与余弦自指不动点（其经典分析与算术性质见[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）——的深层大门。

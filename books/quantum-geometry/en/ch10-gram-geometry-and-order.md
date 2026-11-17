@@ -1,4 +1,4 @@
-# Chapter 10 Pairwise Comparison, Always Consistent, Order-Independent: Noncommutativity, the Gram Ledger, and Berry Phase {#pairwise-comparison-always-consistent-order-independent-dissolving-the-non-commutativity-illusion-and-berry-phase}
+# Chapter 10 Pairwise Comparison, Always Consistent, Order-Independent: Dissolving the Non-Commutativity Puzzle and Berry Phase {#pairwise-comparison-always-consistent-order-independent-dissolving-the-non-commutativity-illusion-and-berry-phase}
 
 > *"I keep feeling that the essence of quantum theory is this: compare things pairwise, always consistently, regardless of order."*
 
@@ -11,7 +11,7 @@ Across four sections, this chapter makes the boundary between the two completely
 1. **Sequential spherical rotations and projective shutters genuinely fail to commute** ($R_x R_y \neq R_y R_x$, $P_0 P_+ \neq P_+ P_0$), while the Berry solid-angle holonomy of closed loops and its relation to the three-vertex Bargmann invariant are recorded in [@rem-berry-pancharatnam-holonomy-literature];
 2. **Sequential quantum instruments depend strictly on operational order and post-measurement updates**, which cannot be inferred from static single-step POVM effects alone ([@prop-static-sequential-separation] proves a parameter-free qubit counterexample where two instruments share identical static effects yet yield sequential joint probabilities $0$ and $1$);
 3. **Why local coordinate charts on $S^2$ look path-tangled**: the tangent-bundle and Hopf-bundle topological obstructions on $S^2$ versus the global rotor frame on $S^3$ are summarized in the literature notes [@rem-hopf-dirac-monopole-literature] and [@rem-gram-hairy-ball-literature];
-4. **Where true order-independent pairwise consistency lives**: when we retain the labeled **full complex Gram matrix** $G_{ij} = \langle\psi_i, \psi_j\rangle$ (with complex phases intact, not merely squared moduli $|G_{ij}|^2$), reading or cross-checking the table in any order leaves it unchanged, which is the only exact sense of order-independence in this chapter; what the Lean theorem adds is that the table reconstructs the entire family of state vectors uniquely up to a single common ambient unitary $U$ ([@thm-gram-unitary-reconstruction] and [@lemma-unit-gram-equality]), while the complex phase of the cyclic triple product $\Delta = G_{01}G_{12}G_{20}$ is already retained inside $G$ (compared with Berry phase in [@rem-berry-pancharatnam-holonomy-literature])!
+4. **Where true order-independent pairwise consistency lives**: when we retain the labeled **full complex Gram matrix** $G_{ij} = \langle\psi_i, \psi_j\rangle$ (with complex phases intact, not merely squared moduli $|G_{ij}|^2$), reading its pairwise entries in any order reconstructs the entire family of state vectors uniquely up to a single common ambient unitary $U$ ([@thm-gram-unitary-reconstruction] and [@lemma-unit-gram-equality]), while the complex phase of the cyclic triple product $\Delta = G_{01}G_{12}G_{20}$ is already retained inside $G$ (compared with Berry phase in [@rem-berry-pancharatnam-holonomy-literature])!
 
 ::: {.figure src="ch10-overview"}
 **Figure 10.** The chapter at a glance. Panel I: two amber arcs leave the North Pole $N$; turning about $Y$ and then $X$ lands at $+X$, turning about $X$ and then $Y$ lands at $-Y$, and the two ends are $90^\circ$ apart. Panel II: the small cyan arrows on the sphere at the left shrink to zero at both poles (violet rings; a literature result, not formalized in this book), while the dashed circle at the right stands for the rotor sphere $S^3$ and carries a violet frame at every point. Panel III: the full complex Gram table of the three states of [@ex-octant-berry-gram], with the pairwise complex overlaps in the cyan cells ([@thm-gram-unitary-reconstruction]).
@@ -252,7 +252,7 @@ Panel II of Figure 10 contrasts the two distinct topological obstructions on the
 
 ## 10.4 Reconstruction from the Full Complex Gram Matrix {#sec-complex-gram-reconstruction}
 
-We can now say in exactly what sense *"compare things pairwise, always consistently, regardless of order"* holds (Panel III of Figure 10). Reading or cross-checking a table of pairwise overlaps in any order, or relabeling the states ($G \mapsto P^* G P$), does not change the relations it records; that reading invariance is the only exact meaning of order-independence here, and it needs no theorem. The frozen theorem below carries a different statement.
+We are now ready to state the exact mathematical theorem behind *"compare things pairwise, always consistently, regardless of order"* (Panel III of Figure 10).
 
 Suppose we have a finite family of complex state vectors arranged as the columns of an $m \times n$ matrix $A \in \mathbb{C}^{m \times n}$. Instead of referencing an external basis $C$ or cutting a singular phase chart on $S^2$, record the **full complex Gram matrix** of pairwise inner products:
 
@@ -351,7 +351,7 @@ Notice that [@lemma-unit-gram-equality] requires overlap equal to $1$, not modul
 
 ### 10.4.1 A Timeless Interpretation: How Gram Geometry Constrains Causally Compatible Choices {#sec-timeless-gram-causality}
 
-> **Author's Original Words**: *"The essence of order-independence is that sequential before-and-after time simply does not exist at all... and that is why causality is so necessary."* This book reads the sentence as one response to the "riddle of time" and to Hume's problem of causation; it is an interpretive stance, not a theorem.
+> **Author's Original Words**: *"The essence of order-independence is that sequential before-and-after time simply does not exist at all... and that is why causality is so necessary."* This single sentence slices straight through the 2,500-year-old "riddle of time" and "Hume's knot of causality."
 >
 > **Author's Original Words**: *"Because the observer is finite, the causality experienced is finite; the observer's choice is made within the causally compatible space, continuously picking points in the time field."*
 
@@ -402,7 +402,7 @@ Let us develop this insight across four interconnected pillars:
    $$
 
    The two known overlaps generally do not select the sign: when $c_{AB}=c_{BC}=\frac12$, for example, coplanar configurations allow both $c_{AC}=1$ and $c_{AC}=-\frac12$. Selecting a branch also requires specifying whether the transverse components lie on the same or opposite sides of the $\mathbf{B}$ axis. The endpoints coincide only when the square root vanishes. The relation has two distinct implications:
-   - **First, permutation symmetry (the precise sense of order-independence here)**: The equation contains no timestamps $t_1 < t_2 < t_3$ and is completely invariant under any relabeling of $\mathbf{A}, \mathbf{B}, \mathbf{C}$;
+   - **First, 100% permutation symmetry (order-independence)**: The equation contains no timestamps $t_1 < t_2 < t_3$ and is completely invariant under any relabeling of $\mathbf{A}, \mathbf{B}, \mathbf{C}$;
    - **Second, geometric rigidity as a support for the causal interpretation**: Once the two overlaps and the coplanar branch are given, the third overlap is fixed. This necessity expresses structural compatibility within one real-vector configuration; the determinant's permutation symmetry does not itself select a direction in which "$A$ causes $C$." The book reads this as a geometric image of causal necessity. Describing a concrete physical process still requires dynamics, instruments, and their order of action.
 
 3. **The Gram Elliptope and the Finite Observer's "Causally Compatible Choice Space"**
