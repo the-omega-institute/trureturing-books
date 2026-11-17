@@ -30,7 +30,7 @@ $$
    \delta_h \;:=\; 2\pi - \sum_{k \ni h} \theta_k(\Delta\mathcal{T}_\epsilon), \qquad N_h \;:=\; \frac{A_h}{\ell_P^2}, \qquad \ell_P^2 \;:=\; \frac{\hbar G}{c^3}.
    $$
 
-   以铰链 $h$ 所穿过的无量纲普朗克面积元个数 $N_h = A_h / \ell_P^2$ 对角亏 $\delta_h$ 加权（配归一化系数 $\kappa_{\mathrm{grav}} = \frac{1}{8\pi}$），右项立化为纯无量纲雷吉引力相位 $\frac{1}{8\pi}\sum_h (A_h/\ell_P^2)\delta_h = \frac{c^3}{8\pi\hbar G}\sum_h A_h\delta_h = S_{\mathrm{Regge}}/\hbar$；在满足胖单纯形（fat-simplex）条件的网格加细极限下，它按奇格—米勒—施拉德（Cheeger–Müller–Schrader, 1984）收敛定理趋向光滑爱因斯坦—希尔伯特引力相位 $\frac{c^3}{16\pi\hbar G}\int R\sqrt{-g}\,d^4x$（`文献结果`；洛伦兹路径积分复振荡测度与完整自旋-$2$ 动力学涌现仍严格受[附录 E](appendix-e.md#sec-appe-spacetime) `H8`/`H9` 与 [@prob-ch34-gravity-dynamics-and-coupling] 审计）。
+   以铰链 $h$ 所穿过的无量纲普朗克面积元个数 $N_h = A_h / \ell_P^2$ 对角亏 $\delta_h$ 加权（配归一化系数 $\kappa_{\mathrm{grav}} = \frac{1}{8\pi}$），右项立化为纯无量纲雷吉引力相位 $\frac{1}{8\pi}\sum_h (A_h/\ell_P^2)\delta_h = \frac{c^3}{8\pi\hbar G}\sum_h A_h\delta_h = S_{\mathrm{Regge}}/\hbar$；在满足胖单纯形（fat-simplex）条件的网格加细极限下，它按奇格—米勒—施拉德（Cheeger–Müller–Schrader, 1984）收敛定理（该定理针对正定度规；洛伦兹情形见后）趋向光滑爱因斯坦—希尔伯特引力相位 $\frac{c^3}{16\pi\hbar G}\int R\sqrt{-g}\,d^4x$（`文献结果`；洛伦兹路径积分复振荡测度与完整自旋-$2$ 动力学涌现仍严格受[附录 E](appendix-e.md#sec-appe-spacetime) `H8`/`H9` 与 [@prob-ch34-gravity-dynamics-and-coupling] 审计）。
 
 3. **万力同归驻相选路 $\delta\Phi_{\mathrm{total}} = 0$**：
    在经典牛顿力学教科书里，“力 $\mathbf{F}$”常被想象成栓在质点上的无形钩索；而在圆弧路径积分几何（[§34.6](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)、[§34.11](ch34-s11-quantum-arcs-and-macro-integrals.md#sec-ch34-quantum-arc-and-macro-integral)）中，宇宙里从来没有超距拉扯的钩索！无论是洛伦兹电磁偏转、弱同位旋跃迁、夸克色通量管拉拽，还是苹果向地面坠落、星光掠过太阳弯曲，全都是万千极小圆弧路径在求和 $\mathcal{Z}_{\mathrm{Unified}}$ 时执行同一条**驻相波前折射律**
@@ -116,7 +116,7 @@ $$
    当能量抵近 $E_P$、距离抵近 $\ell_P$ 时，为什么极小圆弧体几何不会像连续点粒子场论那样跌入 $GM/r \to \infty$ 的紫外发散奇点？两道内生几何闸门提前锁住了底线（`MODEL` + `LEAN ✓` 组合计数支点）：
 
    - *第一道闸门（视界信息饱和锁）*：如 [§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md#sec-ch39-universal-clock-and-gravitational-dilation) 所示，一旦质能压缩至史瓦西视界半径 $r = r_s$，背景全息纠缠负载即触及物理上限 $\eta_{\mathrm{info}} = 100\%$（局域自指停机帧率 $d\tau/dt = 0$），任何外部探针无法在有限主频预算内继续向小于单像素的内部无限压入信息；
-   - *第二道闸门（麦克斯韦—拉曼 $N = 3, 4$ 静定归零截断）*：由 [@thm-ch39-unified-arc-algebraic-and-rigidity-anchors] 第 5 款（[`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact) 球面欧拉正合计数 $V - E + F = 2$，`LEAN ✓`）导出的三维刚性盈余多项式
+   - *第二道闸门（麦克斯韦—拉曼 $N = 3, 4$ 静定归零截断）*：与 [@thm-ch39-unified-arc-algebraic-and-rigidity-anchors] 第 5 款（[`face_cycle_exact`](lean:D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact) 球面欧拉正合计数 $V - E + F = 2$，`LEAN ✓`）所用的欧拉计数相容的三维刚性盈余多项式（它本身是 $\binom{N}{2} - (3N - 6)$ 的算术展开；$d$ 维时为 $\frac{(N-d)(N-d-1)}{2}$，根为 $d$ 与 $d + 1$）
 
      $$
      \Delta E(N) \;=\; \binom{N}{2} - (3N - 6) \;=\; \frac{(N - 3)(N - 4)}{2}
