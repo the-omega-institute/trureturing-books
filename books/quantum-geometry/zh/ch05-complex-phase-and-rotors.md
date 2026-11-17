@@ -10,7 +10,7 @@
 
 然而，只要我们的目光还停留在静态的一维线段上，量子力学里最令初学者困惑的第二座大山就依然横亘在眼前：**既然一切测量结果和概率都是实实在在的实数，为什么量子力学的状态演化与量子门非得引进虚数单位 $i = \sqrt{-1}$ 不可？** 在传统教科书里，$i$ 往往被渲染成某种不可捉摸的“纯复代数幽灵”，仿佛微观粒子天生生活在一座人类视觉无法企及的“虚数空间”里。
 
-进入第二部《展翼·从线到面》，本章将彻底撕下虚数单位 $i$ 的神秘面纱。我们将证明：**单根量子态只能确定一条一维方向线；而量子门之所以能让量子态转向，是因为一对不共线的量子态（或一对平衡正交算子分量）张出了一块二维有向面积（二向量 bivector）！** 所谓的虚数单位 $i$，根本不是什么“虚幻的数字”，而是二维平面内**正交 $90^\circ$ 旋转生成元**的代数记号——因为在同一张平面上连续执行两次 $90^\circ$ 正交转向（$90^\circ + 90^\circ = 180^\circ$），任何向量都会严丝合缝地指向自己的反方向！
+进入第二部《展翼·从线到面》，本章将试着撕下虚数单位 $i$ 的神秘面纱，给出一种几何读法：**单根量子态只能确定一条一维方向线；而量子门之所以能让量子态转向，是因为一对不共线的量子态（或一对平衡正交算子分量）张出了一块二维有向面积（二向量 bivector）！** 所谓的虚数单位 $i$，根本不是什么“虚幻的数字”，而是二维平面内**正交 $90^\circ$ 旋转生成元**的代数记号——因为在同一张平面上连续执行两次 $90^\circ$ 正交转向（$90^\circ + 90^\circ = 180^\circ$），任何向量都会严丝合缝地指向自己的反方向！
 
 ::: {.figure src="ch05-overview"}
 **图 5。** 本章地图：第 I 栏，品红的小方块是单位二向量 $\vv{I}$，琥珀色的 $\vv{e}_1$ 右乘两次 $\vv{I}$，沿两段紫色的弧经 $\vv{e}_2$ 转到 $-\vv{e}_1$；第 II 栏（示意），两支互相垂直、长 $\frac{1}{\sqrt{2}}$ 的箭头 $A$、$B$ 拼出落在虚线单位圆上的紫色斜箭头 $S = A + B$，它们张出的品红方块是 $J = 2AB^*$；第 III 栏，左边是旋子，右边是旋转，平方 $z \mapsto z^2$ 把左圆送到右圆：转角从 $0^\circ$ 到 $360^\circ$，右边绕满一圈回到琥珀色的出发点，左边紫色的弧只从 $1$ 走了半圈，停在琥珀色的 $-1$（[@thm-circle-double-cover-history-lift]）。
@@ -54,7 +54,7 @@ $$
 
 真相大白！几个世纪以来被称为“虚数（imaginary number）”的 $i$，在几何上一点也不“虚”：**只要一个算子代表平面内保模长的 $90^\circ$ 正交转向（在矩阵代数中表现为反自伴性 $R^* = -R$ 与右幺正性 $R R^* = I$ 的结合），它连续作用两次就必然等于反向算子 $-I$**。
 
-在 Lean 4 形式化库 `Quantum/Algebra/Unitary` 中，我们无需预先假定任何外加的复几何公设，而是直接从最基本的**平衡幺正分解** $S = A + B$ 出发，严格证明了这一正交转向生成元的诞生机制：当你把一个右幺正门 $S$（满足 $S S^* = I$）拆成两个各占一半模长的平衡分量 $A$ 与 $B$（即 $A A^* = \frac{1}{2}I$ 且 $B B^* = \frac{1}{2}I$，在 Lean 中记作 [`halfIdentity`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.halfIdentity)）时，幺正保模长条件会强行迫使两分量的对称交叉项归零（$A B^* + B A^* = 0$），从而使它们的交叉乘积 $A B^*$ 自动成为一个反自伴的旋转生成元！
+在 Lean 4 形式化库 `Quantum/Algebra/Unitary` 中，我们不借助外加的几何代数，直接在复矩阵代数内从**平衡幺正分解** $S = A + B$ 出发，严格证明了下面这组恒等式：当你把一个右幺正门 $S$（满足 $S S^* = I$）拆成两个各占一半模长的平衡分量 $A$ 与 $B$（即 $A A^* = \frac{1}{2}I$ 且 $B B^* = \frac{1}{2}I$，在 Lean 中记作 [`halfIdentity`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.halfIdentity)）时，幺正保模长条件会强行迫使两分量的对称交叉项归零（$A B^* + B A^* = 0$），从而使它们的交叉乘积 $A B^*$ 自动成为一个反自伴的旋转生成元！
 
 ::: {.theorem #thm-balanced-sum-skew-adjoint title="平衡幺正和的正交交叉抵消与交叉积反自伴定理" lean="D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum"}
 设 $n$ 为有限可判等指标类型，$S, A, B \in M_n(\mathbb{C})$ 为 $n \times n$ 复矩阵。记半恒等矩阵为 $H_{1/2} := \frac{1}{2}I_n$（[`halfIdentity`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.halfIdentity)）。若 $S, A, B$ 满足：
@@ -120,7 +120,7 @@ $$
 （[`relativeComplexStructure_mul_conjTranspose`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_mul_conjTranspose)；对偶地，若 $A^* A = \frac{1}{2}I_n$ 且 $B B^* = \frac{1}{2}I_n$，则 $J^* J = 4 B(A^* A)B^* = 2 B B^* = I_n$，[`relativeComplexStructure_conjTranspose_mul`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_conjTranspose_mul)）。于是 $J$ 同时满足反自伴性 $J^* = -J$ 与右幺正性 $J J^* = I_n$，直接调用 [@lemma-skew-adjoint-unitary-square] 即得 $J^2 = -I_n$。完整证明由 Lean 内核检查。
 :::
 
-不仅如此，在同一模块中，若把这枚代表单位旋转平面的反自伴复结构 $J$ 乘上标量 $i$，就得到与之配对的**相对对合算子** $K := iJ$（[`relativeInvolution`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution)）：由于 $i$ 与 $J$ 在取伴随时双双变号（$(-i)(-J) = iJ$）且在平方时负负得正（$i^2 J^2 = (-1)(-I_n) = I_n$），$K = iJ$ 自动成为一个满足 $K^* = K$（[`relativeInvolution_isHermitian`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution_isHermitian)）且 $K^2 = I_n$（[`relativeInvolution_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution_square)）的厄米对合反射轴！这再次印证了[第三章](ch03-projectors-and-duality.md)揭示的霍奇对偶图景：每一张平方为 $-I$ 的旋转面积 $J$，都与一根平方为 $+I$ 的厄米可观测轴 $iJ$ 形影不离。
+不仅如此，在同一模块中，若把这枚代表单位旋转平面的反自伴复结构 $J$ 乘上标量 $i$，就得到与之配对的**相对对合算子** $K := iJ$（[`relativeInvolution`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution)）：由于 $i$ 与 $J$ 在取伴随时双双变号（$(-i)(-J) = iJ$）且在平方时负负得正（$i^2 J^2 = (-1)(-I_n) = I_n$），$K = iJ$ 自动成为一个满足 $K^* = K$（[`relativeInvolution_isHermitian`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution_isHermitian)）且 $K^2 = I_n$（[`relativeInvolution_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution_square)）的厄米对合反射轴！按[第三章](ch03-projectors-and-duality.md)的霍奇对偶读法：每一张平方为 $-I$ 的旋转面积 $J$，都配有一根平方为 $+I$ 的厄米对合 $iJ$。需要划清边界：以上恒等式都在复矩阵代数 $M_n(\mathbb{C})$ 内成立，本身已用到 $\mathbb{C}$ 与共轭转置；例如 $A = \frac{1}{\sqrt{2}}I_n$、$B = -\frac{i}{\sqrt{2}}I_n$ 满足全部前提，此时 $J = iI_n$、$K = -I_n$。所以它们证明的是“平衡正交对给出一个平方为 $-I$ 的反自伴幺正元”，并不构成 $i$ 从实几何中产生的证明；把 $i$ 读作旋转平面的生成元，是本书的几何读法。
 
 ## 5.2 从欧拉公式 $e^{i\theta}$ 到克利福德旋子 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$ {#sec-euler-to-rotor}
 

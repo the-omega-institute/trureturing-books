@@ -319,7 +319,7 @@ $$
 在 `[0, 1]` 上对常数矩阵 $X$ 积分即得 $\operatorname{pulse0}(X, 0) = X$；当 $s \neq 0$ 时，利用微积分基本定理对导数 $\frac{d}{dr}\bigl((si)^{-1}\exp(sriX)\bigr) = \exp(sriX)X$ 在 $[0, 1]$ 上积分即得结论 2。对于结论 3，将每个 $\operatorname{pulse0}(X_{\mathbb{C}}, t)$ 展开为 $X_{\mathbb{C}} + \frac{it}{2}X_{\mathbb{C}}^2 + R_2(X_{\mathbb{C}}, t)$。由于 $A, B, C$ 为实对称矩阵，一阶虚部项 $i\frac{t}{2}\bigl(\Tr(A^2BC) + \Tr(AB^2C) + \Tr(ABC^2)\bigr)$ 的迹为纯虚数，在取实部 $\operatorname{Re}\Tr(\cdots)$ 时自动归零！剩余各项均为 $t^2$ 阶及以上，利用算子范数被弗罗贝尼乌斯范数控制（$\norm{X}_{\mathrm{op}} \le \norm{X}_F \le L$）及积分泰勒余项估计，各项系数累加严格受 $\frac{5}{4}L^5 t^2$ 控制。完整证明由 Lean 内核检查。
 :::
 
-请留意 [@prop-ordered-pulse-error] 证明中那个极其精妙的几何机制：**为什么误差不是一阶的 $O(t)$，而是直接跳到了二阶的 $O(t^2)$？** 因为实对称矩阵 $A, B, C$ 的一阶修正项带有纯虚因子 $i t / 2$，而对称矩阵乘积的迹为实数，所以在取迹的实部 $\operatorname{Re}\Tr(\cdots)$ 时，一阶漂移被正交虚轴自动滤除！（同时遵守诚实契约：`pulse0` 是积分指数乘矩阵核而非幺正演化算符或硬件门保真度，其中 `NormedSpace.exp` 采用局部 $L^2$ 算子范数拓扑，而前提界 $L$ 显式施加在弗罗贝尼乌斯范数上。）
+请留意 [@prop-ordered-pulse-error] 证明中那个极其精妙的几何机制：**为什么误差不是一阶的 $O(t)$，而是直接跳到了二阶的 $O(t^2)$？** 因为实对称矩阵 $A, B, C$ 的一阶修正项带有纯虚因子 $i t / 2$，而实矩阵乘积的迹为实数（对称性的作用是让 $\exp(itX)$ 幺正，从而控制余项），所以在取迹的实部 $\operatorname{Re}\Tr(\cdots)$ 时，一阶漂移被正交虚轴自动滤除！（同时遵守诚实契约：`pulse0` 是积分指数乘矩阵核而非幺正演化算符或硬件门保真度，其中 `NormedSpace.exp` 采用局部 $L^2$ 算子范数拓扑，而前提界 $L$ 显式施加在弗罗贝尼乌斯范数上。）
 
 ::: {.figure src="ch11-trace-order"}
 **一阶漂移全在虚部，实部偏差从二阶才开始。** 双对数坐标：品红的线是三段脉冲核乘积的迹的虚部，小 $t$ 时按 $t$ 增长，斜率在 $t \to 0$ 时趋于 $1$；青色的线是迹的实部与 $\Tr(ABC)$ 的偏差，小 $t$ 时按 $t^2$ 增长，斜率在 $t \to 0$ 时趋于 $2$；绿色虚线是 [@prop-ordered-pulse-error] 的界 $\frac{5}{4}L^5 t^2$，青色的线始终在它下方。这里取了三个弗罗贝尼乌斯范数为 $1$ 的实对称 $2\times 2$ 矩阵（$L = 1$），两条曲线是数值结果。
@@ -350,7 +350,7 @@ $$
    $$
    \varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}} \qquad (\text{单步即 }\varphi \longmapsto \varphi - \lambda),
    $$
-   同时后续赤道投影读出轴按同一相对关系旋转；推到电路最左端的残余算符 $R_z(\phi_{\mathrm{frame}})$ 在最终 $Z$ 基投影测量 $\lvert b\rangle\langle b\rvert$（$b \in \{0, 1\}$）上由对角对易（对照 [@thm-hermitian-eigenstate-stationary]）不改变测量概率，在理想脉冲调度下实现零附加模拟脉冲时长（$\Delta t_{\mathrm{analog}} = 0$）。
+   同时后续赤道投影读出轴按同一相对关系旋转；推到电路最左端的残余算符 $R_z(\phi_{\mathrm{frame}})$ 在最终 $Z$ 基投影测量 $\lvert b\rangle\langle b\rvert$（$b \in \{0, 1\}$）上由对角对易（对照 [@thm-hermitian-eigenstate-stationary]）不改变测量概率，在理想脉冲调度下实现零附加模拟脉冲时长（$\Delta t_{\mathrm{analog}} = 0$）。这一调度要求后续的门与读出都能随参考系相位一并改写：单比特赤道门与 $Z$ 基读出可以；与单比特 $Z$ 不对易的两比特门（例如 iSWAP 类门）需要额外的参考系处理或补一个物理 $Z$ 门（参见 [@rem-pulses-literature] 第 1 条所引 McKay 等人的工作）。
 3. **可观测测量概率核对**：取初态 $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，先作用 $R_z(\pi/2)$ 再作用 $R_x(\pi/2) = R_0(\pi/2)$ 并做 $Z$ 基读出，有
    $$
    R_x(\pi/2)\,R_z(\pi/2)\lvert +\rangle = R_z(\pi/2)\,R_{-\pi/2}(\pi/2)\lvert +\rangle = e^{-i\pi/4}\lvert 0\rangle,
@@ -415,7 +415,7 @@ $$
    $$
    R_z(\lambda)\,R_\varphi(\theta)\,R_z(-\lambda) = R_{\varphi + \lambda}(\theta)
    $$
-   以及等价的右移交换式 $R_\varphi(\theta)\,R_z(\lambda) = R_z(\lambda)\,R_{\varphi - \lambda}(\theta)$。在主动共轭式 $R_z(\lambda) R_\varphi(\theta) R_z(-\lambda) = R_{\varphi + \lambda}(\theta)$ 中取 $\lambda = \frac{\pi}{2}$、$\varphi = 0$，基准驱动轴从 $X$（$\varphi = 0$）映为 $+Y$（$\varphi + \lambda = \frac{\pi}{2}$）；而在电路编译中，软件用被动参考系寄存器记录 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$（理想调度下无需施加额外模拟微波脉冲，$\Delta t_{\mathrm{analog}} = 0$），将前置 $R_z(\lambda)$ 向终端 $Z$ 基读出侧交换穿过 $R_\varphi(\theta)$ 时，实际发射脉冲的物理驱动角须按 $R_\varphi(\theta) R_z(\lambda) = R_z(\lambda) R_{\varphi - \lambda}(\theta)$ 设为 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}} = \varphi - \lambda$。例如对初态 $\lvert +\rangle$，一次主动物理旋转 $R_z(\pi/2)$ 将布洛赫方向变为 $+y$；若后续紧接 $R_x(\pi/2)$ 与最终 $Z$ 基测量，则 $R_x(\pi/2) R_z(\pi/2)\lvert +\rangle = R_z(\pi/2) R_{-\pi/2}(\pi/2)\lvert +\rangle$ 给出 $P(0) = 1$，证明被动虚拟 $Z$ 更新必须把后续物理控制脉冲（以 $\varphi_{\mathrm{phys}} = -\pi/2$ 替换 $\varphi = 0$）与读出算符按逆向关系一致变换（[@cor-frame-pullback-readout]）。
+   以及等价的右移交换式 $R_\varphi(\theta)\,R_z(\lambda) = R_z(\lambda)\,R_{\varphi - \lambda}(\theta)$。在主动共轭式 $R_z(\lambda) R_\varphi(\theta) R_z(-\lambda) = R_{\varphi + \lambda}(\theta)$ 中取 $\lambda = \frac{\pi}{2}$、$\varphi = 0$，基准驱动轴从 $X$（$\varphi = 0$）映为 $+Y$（$\varphi + \lambda = \frac{\pi}{2}$）；而在电路编译中，软件用被动参考系寄存器记录 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$（理想调度下无需施加额外模拟微波脉冲，$\Delta t_{\mathrm{analog}} = 0$），将前置 $R_z(\lambda)$ 向终端 $Z$ 基读出侧交换穿过 $R_\varphi(\theta)$ 时，实际发射脉冲的物理驱动角须按 $R_\varphi(\theta) R_z(\lambda) = R_z(\lambda) R_{\varphi - \lambda}(\theta)$ 设为 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}} = \varphi - \lambda$。例如对初态 $\lvert +\rangle$，一次主动物理旋转 $R_z(\pi/2)$ 将布洛赫方向变为 $+y$；若后续紧接 $R_x(\pi/2)$ 与最终 $Z$ 基测量，则 $R_x(\pi/2) R_z(\pi/2)\lvert +\rangle = R_z(\pi/2) R_{-\pi/2}(\pi/2)\lvert +\rangle$ 给出 $P(0) = 1$，说明被动虚拟 $Z$ 更新需要把后续物理控制脉冲（以 $\varphi_{\mathrm{phys}} = -\pi/2$ 替换 $\varphi = 0$）与读出算符按逆向关系一致变换（[@cor-frame-pullback-readout]）。
 4. **无量纲 `pulse0` 三脉冲迹误差数值核对**：在 [@prop-ordered-pulse-error] 的独立无量纲模型中，取弗罗贝尼乌斯范数上界 $L = 1$、步长参数 $t = 0.1$，则三段积分核乘积的迹实部与 $\Tr(ABC)$ 的偏差上界为
 
    $$
@@ -441,7 +441,7 @@ $$
 **失谐时，面积不再说了算。** 同一个面积 $\pi/2$ 的高斯包络，驱动频率偏了 $5\,\mathrm{MHz}$：紫色的转轴倾出赤道并随包络晃动：紫色虚线是轴端走过的路，在包络峰值处离赤道最近，倾出 $12^\circ$；脉冲结束时包络归零，淡色的转轴回到竖直。琥珀色的态没有停在白色虚线（不失谐）的终点上，两点之间的白色短弧标出差了约 $26^\circ$。页面把脉冲切成上千小段按时间次序相乘，这是数值演示。
 :::
 
-到这里，我们已经看到了一个意味深长的趋势：原本以为必须靠物理外力去硬推量子态的 $Z$ 门，其实只需要**移动观察者自己的参考系注意力（相位基准）**就能零耗时完成。如果沿着这个方向再往前推到极致——**我们能不能干脆连所有的单比特门和多比特门都不再去“硬推”量子态，而是先铺好一张静止的纠缠网络，仅仅靠观察者一步步移动测量视线（注意力方向），就把整场通用量子计算全部算完？** 让我们推开第三部收官之章——[第十二章](ch12-measurement-computation-and-gradients.md)的大门。
+到这里，我们已经看到了一个意味深长的趋势：原本以为必须靠物理外力去硬推量子态的 $Z$ 门，其实只需要**移动观察者自己的参考系（相位基准；本书把它读作“注意力”）**，无需附加的模拟脉冲时长即可完成。如果沿着这个方向再往前推到极致——**我们能不能干脆连所有的单比特门和多比特门都不再去“硬推”量子态，而是先铺好一张静止的纠缠网络，仅仅靠观察者一步步移动测量视线（注意力方向），就把整场通用量子计算全部算完？** 让我们推开第三部收官之章——[第十二章](ch12-measurement-computation-and-gradients.md)的大门。
 
 ::: {.viz src="pulse-area-virtual-z" height="560"}
 脉冲面积与虚拟 $Z$ 的完整实验室：拖包络的顶与右端改面积和时长，改驱动相位、失谐与虚拟 $Z$ 的角度，加第二个脉冲并换序，或在实验室系与旋转系之间切换。绿色框只引用本章用 Lean 验证的定理；面积律与虚拟 $Z$ 调度是文献结果，未在本书形式化。

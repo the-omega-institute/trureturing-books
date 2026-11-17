@@ -2,7 +2,7 @@
 
 > *“把观察者内生放进来思考,何时粒子、何时波,似乎是观察者的注意力问题”*
 
-在[第十一章](ch11-pulses-and-virtual-z.md)末尾，我们看到了一幕奇妙的硬件翻转：绕能量轴旋转的虚拟 $Z$ 门不需要给量子比特注入哪怕一纳秒的物理微波脉冲，只需要把观察者手里的参考系相位刻度拨动一下。现在，作为第三部“合拢·从面到球”的收官之章，让我们把“观察者内生注意力”这条线索推向它在量子信息与变分优化中的三座高峰：
+在[第十一章](ch11-pulses-and-virtual-z.md)末尾，我们看到了一幕奇妙的硬件翻转：绕能量轴旋转的虚拟 $Z$ 门不需要给量子比特注入哪怕一纳秒的物理微波脉冲，只需要把观察者手里的参考系相位刻度拨动一下。现在，作为第三部“合拢·从面到球”的收官之章，让我们把“观察者内生注意力”（本书对“选择测量基”的称呼）这条线索推向它在量子信息与变分优化中的三座高峰：
 
 1. **基于测量的单向量子计算（MBQC）**：如果预先制备好一张多比特纠缠簇态（cluster state），我们甚至不需要在计算过程中再施加任何幺正双比特门——仅仅通过一步步在球面赤道上选择不同的测量基角 $\alpha$（转移观察者的注意力焦点），并把前一步的测量结果通过经典前馈（feedforward）修正下一步的测量轴，就能在未测量的输出节点上驱动出任意量子逻辑门！
 2. **泡利参数位移律（Parameter-Shift Rule）**：当观察者想要在参数化量子电路里顺着期望值曲面求导数 $\partial_\theta f(\theta)$ 时，他不需要像经典微积分那样取极小步长 $\delta\theta \to 0$ 去做容易放大散粒噪声的有限差分近似；因为在单次泡利旋转下球面截面天然是纯粹的一阶正余弦波，只需把参数精确拨到左右**正交 $90^\circ$** 的两个位移设置点 $\theta \pm \frac{\pi}{2}$ 分别求取（或通过重复采样估计）期望值 $f(\theta \pm \frac{\pi}{2})$，两者的差商就给出**零有限差分截断误差的精确解析导数恒等式**（尽管有限次采样估计期望值时仍保留常规统计散粒噪声）！
@@ -256,7 +256,7 @@ $$
 
 与上述均匀球面测度集中和随机电路梯度定律**完全独立**，在算子层析与时频集中分析中还有另一类常被对比的数学问题：**当一个非负实数列 $\lambda : \mathbb{N} \to \mathbb{R}$ 可和且满足有限迹恒等式 $\sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$ 时，如何从上界控制它超过给定阈值 $\tau > 0$ 的模式个数？** 在 Lean 模块 `FiniteRankConcentrationModeBound` 中，下面的冻结推论给出了这一**充分计数上界**：任何超过正阈值 $\tau > 0$ 的超水平集 $S_\tau = \{j \in \mathbb{N} \mid \tau \le \lambda_j\}$ 必然是有限集，且其基数受显式上界 $\frac{R W}{\pi \tau}$ 控制。（请务必注意边界：该定理只是一个关于非负可和序列的**充分计数上界**，既不是超水平集有限的必要条件——例如不可和的调和序列 $\lambda_j = \frac{1}{j+1}$ 总和发散，但对每个正阈值 $\tau > 0$ 同样只有有限项满足 $\lambda_j \ge \tau$——也不提供逃离贫瘠高原或保证电路梯度非零的机制，因为有限维密度矩阵天然迹为 $1$，且有限迹预算丝毫不能阻止常数目标函数的梯度恒为零。）
 
-::: {.corollary #cor-finite-trace-mode-budget title="有限迹集中算子的超阈值模式有限性与基数上界" lean="D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound"}
+::: {.corollary #cor-finite-trace-mode-budget title="非负可和数列的超阈值项有限性与计数上界" lean="D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound"}
 设 $\lambda = \operatorname{concentrationEigenvalue} : \mathbb{N} \to \mathbb{R}$ 为实数列，$R = \operatorname{intervalRadius}$、$W = \operatorname{frequencyMeasure}$、$\tau = \operatorname{threshold}$ 为实数。若满足：
 
 1. **非负性**：对一切 $j \in \mathbb{N}$，$0 \le \lambda_j$；
@@ -310,7 +310,7 @@ $$
    \vv{r}' = \Bigl(\frac{21\sqrt{3}}{2\sqrt{403}},\; 0,\; \frac{17}{2\sqrt{403}}\Bigr) \approx (0.90593576,\; 0,\; 0.42341516),
    $$
 
-   新势能 $V(\vv{r}') \approx 0.42341516 < 0.5$。同时注意，该切空间梯度场 $\operatorname{grad}_{S^2} V(\vv{r}) = \vv{e}_3 - r_z \vv{r}$ 在南北两极 $\vv{r} = \pm \vv{e}_3$（$r_z = \pm 1$）处精确归零，两极孤立驻点指标之和为 $1 + 1 = 2 = \chi(S^2)$——这正是[第十章](ch10-gram-geometry-and-order.md)**庞加莱—霍普夫与偶维球面毛球定理**（文献结果，未在本书形式化；见第十章 `#rem-gram-hairy-ball-literature`）在球面变分优化中的直接显影：由于偶维球面 $S^2$ 上不存在处处非零的光滑切向量场，任何光滑球面代价函数的负黎曼梯度下降流都必然包含梯度为零的驻点（全局极值、局部陷阱或鞍点奇点），无法在整个球面上构造处处无驻点的光滑下降场。
+   新势能 $V(\vv{r}') \approx 0.42341516 < 0.5$。同时注意，该切空间梯度场 $\operatorname{grad}_{S^2} V(\vv{r}) = \vv{e}_3 - r_z \vv{r}$ 在南北两极 $\vv{r} = \pm \vv{e}_3$（$r_z = \pm 1$）处精确归零，两极孤立驻点指标之和为 $1 + 1 = 2 = \chi(S^2)$——这与[第十章](ch10-gram-geometry-and-order.md)**庞加莱—霍普夫与偶维球面毛球定理**（文献结果，未在本书形式化；见第十章 `#rem-gram-hairy-ball-literature`）相容（梯度场有零点本身只需紧致性：连续函数在 $S^2$ 上必取到极值；另外，变分电路的参数空间通常是环面而非 $S^2$）：由于偶维球面 $S^2$ 上不存在处处非零的光滑切向量场，任何光滑球面代价函数的负黎曼梯度下降流都必然包含梯度为零的驻点（全局极值、局部陷阱或鞍点奇点），无法在整个球面上构造处处无驻点的光滑下降场。
 4. **受限实球面 $S^{2^n - 1}$ 上的二阶矩赤道集中算例**：对 $\mathbb{R}^d$（$d = 2^n$）中均匀分布的实单位向量，对称性给出 $\mathbb{E}[x_1^2] = \frac{1}{d}$，从而 $\Pr(|x_1| \ge \varepsilon) \le \frac{1}{d\varepsilon^2}$。取 $n = 20$（$d = 1{,}048{,}576$）、$\varepsilon = 0.1$，得
 
    $$
@@ -329,7 +329,7 @@ $$
 **文献结果，未在本书形式化。** 本章涉及的四项量子计算与变分优化经典文献结论，其严格成立前提与本书形式化定理的职责边界如下：
 
 1. **基于测量的量子计算（MBQC）**（R. Raussendorf & H. J. Briegel, *A one-way quantum computer*, Phys. Rev. Lett. **86**, 5188, 2001, DOI `10.1103/PhysRevLett.86.5188`）：MBQC 的通用性依赖多体纠缠簇态资源（如二维簇态）、破坏性单比特投影测量、测量结果的固有随机性、泡利副产物修正以及自适应经典前馈。本章冻结引理 [@lemma-measurement-branch-sum] 仅证明记录测量分支权重的总迹守恒，不直接证明量子传态或 MBQC 通用性。
-2. **参数位移律（Parameter-Shift Rule）**（M. Schuld, V. Bergholm, C. Gogolin, J. Izaac, & N. Killoran, *Evaluating analytic gradients on quantum hardware*, Phys. Rev. A **99**, 032331, 2019, DOI `10.1103/PhysRevA.99.032331`）：两采样点精确恒等式 $\partial_\theta f(\theta) = \frac{1}{2}[f(\theta + \pi/2) - f(\theta - \pi/2)]$ 要求参数 $\theta$ 仅在单扇门 $e^{-i\theta P/2}$ 中出现一次，且生成元满足厄米对合归一化条件 $P = P^*, P^2 = I$。本章冻结命题 [@prop-measurement-gradient-flow]（与第七章 `#prop-projection-probability-flow` 对应）证明的是无穷小对易子导数 $\operatorname{Re}(i\Tr(\rho_t[H, P]))$ 及其纯实性，而非有限移位两采样公式。
+2. **参数位移律（Parameter-Shift Rule）**（M. Schuld, V. Bergholm, C. Gogolin, J. Izaac, & N. Killoran, *Evaluating analytic gradients on quantum hardware*, Phys. Rev. A **99**, 032331, 2019, DOI `10.1103/PhysRevA.99.032331`；同一规则亦见 K. Mitarai, M. Negoro, M. Kitagawa, & K. Fujii, *Quantum circuit learning*, Phys. Rev. A **98**, 032309, 2018）：两采样点精确恒等式 $\partial_\theta f(\theta) = \frac{1}{2}[f(\theta + \pi/2) - f(\theta - \pi/2)]$ 要求参数 $\theta$ 仅在单扇门 $e^{-i\theta P/2}$ 中出现一次，且生成元满足厄米对合归一化条件 $P = P^*, P^2 = I$。本章冻结命题 [@prop-measurement-gradient-flow]（与第七章 `#prop-projection-probability-flow` 对应）证明的是无穷小对易子导数 $\operatorname{Re}(i\Tr(\rho_t[H, P]))$ 及其纯实性，而非有限移位两采样公式。
 3. **量子自然梯度与 Fubini–Study 度量**（J. Stokes, J. Izaac, N. Killoran, & G. Carleo, *Quantum natural gradient*, Quantum **4**, 269, 2020, DOI `10.22331/q-2020-05-25-269`）：在纯态射影流形上，量子自然梯度采用 Fubini–Study 度量（差约定常数因子）。对单比特旋量 $\lvert\psi(\theta, \varphi)\rangle = \cos(\theta/2)\lvert 0\rangle + e^{i\varphi}\sin(\theta/2)\lvert 1\rangle$，Fubini–Study 线元为 $ds_{\mathrm{FS}}^2 = \frac{1}{4}(d\theta^2 + \sin^2\theta\,d\varphi^2) = \frac{1}{4} ds_{S^2}^2$，故在该坐标下单位布洛赫球面梯度与 Fubini–Study 梯度相差因子 $4$；在一般参数化电路中，拉回度量张量可能奇异，需通过商空间或伪逆正则化处理。本章冻结定理 [@thm-riemannian-gradient-dissipation] 在给定负里斯梯度常微分方程的前提下证明有限时间能量耗散恒等式，不证明收敛性、全局极小性或梯度轨迹为测地线。
 4. **高维测度集中与贫瘠高原（Barren Plateaus）**（J. R. McClean, S. Boixo, V. N. Smelyanskiy, R. Babbush, & H. Neven, *Barren plateaus in quantum neural network training landscapes*, Nat. Commun. **9**, 4812, 2018, DOI `10.1038/s41467-018-07090-4`；以及 M. Cerezo, A. Sone, T. Volkoff, L. Cincio, & P. J. Coles, *Cost function dependent barren plateaus in shallow parametrized quantum circuits*, Nat. Commun. **12**, 1791, 2021, DOI `10.1038/s41467-021-21728-w`）：变分量子电路梯度方差指数衰减定理依赖特定的随机电路分布、酉 $2$-设计（unitary $2$-design）近似假设、可观测量的全局/局域性以及电路深度条件。正文中讨论的实振幅单位球面 $S^{2^n - 1}$ 仅是受限状态模型（一般归一化 $n$ 比特复态矢位于实球面 $S^{2^{n+1}-1}$ 上，物理纯态射线则构成复射影空间 $\mathbb{CP}^{2^n - 1}$）。单纯的球面赤道集中或无关的有限迹谱模式计数界（[@cor-finite-trace-mode-budget]）本身均不单独证明随机电路梯度的指数衰减。
 :::
@@ -338,7 +338,7 @@ $$
 
 ### 12.4.1 第三部小结：单球已合拢，多球待交织 {#第三部小结单球已合拢多球待交织}
 
-回望第三部《合拢·从面到球》（[第九章](ch09-axes-and-state-addressing.md)至第十二章），我们用十八条经 Lean 4 内核验证的定理级结论，把单量子比特球面从局部坐标轴一路合拢到了硬件脉冲与注意力计算：
+回望第三部《合拢·从面到球》（[第九章](ch09-axes-and-state-addressing.md)至第十二章），我们用经 Lean 4 内核验证的定理级结论，把单量子比特球面从局部坐标轴一路合拢到了硬件脉冲与注意力计算：
 
 - **第九章**从三维空间任意两向量的公共单位法向量（[@lemma-three-axis-normal]）出发，阐明了北极两角寻址 $R_z(\varphi)R_y(\theta)N$，证明了任意两不共线轴生成 $\mathrm{SO}(3)$ 的有限旋转字存在性（[@thm-two-axis-finite-word]），用 Lie–Trotter 公式（[@thm-lie-trotter]）说明两轴极小转动交替进行的极限是生成元相加后的那一次转动，并用有理六轴构造（[@prop-rational-six-axis-cover]）与拓扑六色下界（[@cor-six-colors-necessary]）锁定了球面无正交对开覆盖的最小块数 $6$；
 - **第十章**区分了物理操作的时间非对易性（[@prop-static-sequential-separation]）、二维球面毛球/霍普障碍与三维旋转器球 $S^3$ 的全局标架，证明了完整复格拉姆矩阵 $B^*B = A^*A$ 在差一个公共外围幺正变换 $U$ 下唯一重构整族状态（[@thm-gram-unitary-reconstruction]、[@lemma-unit-gram-equality]），用同纬度复内积公式（[@cor-latitude-complex-overlap]）将八分球贝里立体角直接写进了格拉姆矩阵元，并证明三点巴格曼迹等于标量部分加三根布洛赫向量的有向体积（[@thm-qubit-bargmann-bloch]）；
