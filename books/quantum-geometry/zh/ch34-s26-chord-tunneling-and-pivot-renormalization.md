@@ -2,9 +2,9 @@
 
 > “将打破四十年‘排序壁垒’的最短路径新突破放回我们的正交比较几何中，它所做的核心优化可以浓缩为一句话：**放弃在极小圆弧体的正交侧壁上逐点做全局一维去相干排队，改为先沿球面顶盖展开无序局部波前，再直接切入圆弧体肚子里的‘平直内割弦面’完成跨尺度跳跃——其局部机制是‘粒子化波成场、场缩为枢轴新点’的八度重整化，而在路径积分底层，这恰恰就是悬置中间测量、经由虚数盲区 $\hat{\mathbf{i}}$ 穿透势垒的‘量子隧穿（瞬子捷径）’。**”
 
-在[§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)中，我们看到一枚极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 同时容纳了“沿正交侧壁走两步”与“沿球面大圆跨一步”的双重投影；在[§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)中，杨辉三角 `1—3—3—1` 的外代数回文又揭示了饱和三维体积（$\Lambda^3_\ell$）如何在高一概念层级归零为单自由度新点（$\Lambda^0_{\ell+1}$）；而在[第七章](ch07-geometric-time-and-speed-limits.md)、[第三十三章](ch33-all-beings-observers-and-mutual-attractors.md)与[第三十七章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)中，我们反复印证了一条观察者动力学铁律——高频投影测量会把相干扫掠的二维面积钉死在一维经典时间线上，唯有在有限接受窗内悬置中间读出，正交分支才能借相干叠加绕开局部死锁。
+题记把这项算法突破的“核心优化”读成极小圆弧体上的几何动作与量子隧穿，这是本书的类比读法（`MODEL`），不是对算法步骤的复述；算法实际做了什么，见下方 [@rem-ch34-sssp-sorting-barrier-and-instanton-literature]。在[§34.4](ch34-s04-infinitesimal-trihedron.md#sec-ch34-infinitesimal-spherical-trihedron)中，我们看到一枚极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 同时容纳了“沿正交侧壁走两步”与“沿球面大圆跨一步”的双重投影；在[§34.13](ch34-s13-point-volume-octave.md#sec-ch34-point-volume-octave-and-particle-field)中，杨辉三角 `1—3—3—1` 的外代数回文又揭示了饱和三维体积（$\Lambda^3_\ell$）如何在高一概念层级归零为单自由度新点（$\Lambda^0_{\ell+1}$）；而在[第七章](ch07-geometric-time-and-speed-limits.md)、[第三十三章](ch33-all-beings-observers-and-mutual-attractors.md)与[第三十七章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)中，我们反复印证了一条观察者动力学铁律——高频投影测量会把相干扫掠的二维面积钉死在一维经典时间线上，唯有在有限接受窗内悬置中间读出，正交分支才能借相干叠加绕开局部死锁。
 
-在 [§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–[§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary) 逐一立起六节认识论压力测试界碑之后，现在把这套正交比较几何对准理论计算机科学中一道屹立近四十年的险峰：自戴克斯特拉（Dijkstra, 1959）提出贪心波前寻路、弗雷德曼与塔扬（Fredman & Tarjan, 1987）用斐波那契堆将其推至 $O(m + n\log n)$ 以来，比较—加法模型下非负实权有向图的单源最短路径（SSSP）长期受困于稀疏图上的 $\Omega(n\log n)$“排序壁垒”；直至 2025 年，段然、毛嘉怡、毛啸、束欣凯与尹龙晖给出确定性 $O(m\log^{2/3} n)$ 算法（STOC 2025 最佳论文），在不依赖随机化或整数位运算的前提下正面击穿了这道壁垒（文献边界见下方 [@rem-ch34-sssp-sorting-barrier-and-instanton-literature]）。为什么人类直觉曾深信“算清最短距离就非得替全图顶点排好全局名次不可”？放回极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的立体解剖台上，这桩四十年悬案的几何病根与破局刀法一望即知（`MODEL`）。
+在 [§34.20](ch34-s20-single-outcome-and-attractor-basins.md#sec-ch34-single-outcome-attractor-basins)–[§34.25](ch34-s25-generations-and-quantitative-boundary.md#sec-ch34-generations-and-quantitative-boundary) 逐一立起六节认识论压力测试界碑之后，现在把这套正交比较几何对准理论计算机科学中一道屹立近四十年的险峰：自戴克斯特拉（Dijkstra, 1959）提出贪心波前寻路、弗雷德曼与塔扬（Fredman & Tarjan, 1987）用斐波那契堆将其推至 $O(m + n\log n)$ 以来，比较—加法模型下非负实权有向图的单源最短路径（SSSP）在稀疏图上长期停留在这一上界——其中的 $n\log n$ 来自按距离逐个弹出顶点的排序，因而被称为“排序壁垒”（它是 Dijkstra 方法的上界障碍，不是 SSSP 本身的下界）；直至 2025 年，段然、毛嘉怡、毛啸、束欣凯与尹龙晖给出确定性 $O(m\log^{2/3} n)$ 算法（STOC 2025 最佳论文），在不依赖随机化或整数位运算的前提下，于稀疏图上首次打破了 Dijkstra 的 $O(m + n\log n)$ 时间界（文献边界见下方 [@rem-ch34-sssp-sorting-barrier-and-instanton-literature]）。为什么人类直觉曾深信“算清最短距离就非得替全图顶点排好全局名次不可”？放回极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的立体解剖台上，这桩四十年悬案的几何病根与破局刀法一望即知（`MODEL`）。
 
 ## 34.26.1 几何优化与圆弧体三面解剖：从“爬正交侧壁”切入“平直内割弦面” {#sec-ch34-26-1}
 
@@ -30,7 +30,7 @@ $$
 :::
 
 2. **外凸品红球面顶盖（$\triangle_{\mathrm{sph}} ABC$）——有限 $k$ 步窗口内的无序惠更斯波前松弛**：
-   倘若我们在局部有限深度 $k$ 的窗口内**果断关掉全局优先队列**，改做 $k$ 轮不排名的并行贝尔曼—福特（Bellman–Ford）局部边松弛，几何图景立刻焕然一新！没有了全局一维标尺的逐点打断，距离波前不再被捆死在坐标墙折角上，而是如同惠更斯（Huygens）次波包络一般，顺着向外鼓起的**品红球面顶盖 $\triangle_{\mathrm{sph}} ABC$** 自由铺开。由球面勾股内积 $\mathbf{A}(\epsilon)\cdot\mathbf{C}(\epsilon) = \cos^2\epsilon$（其在一般复内积空间上的测地三角不等式基础由 [@thm-ch34-chord-tunneling-and-pivot-renormalization] 第 1 款 `fs_angle_triangle` 严格锁定），顶盖大圆测地弧长直接缩短为 $L_{\mathrm{cap}}(\epsilon) = \arccos(\cos^2\epsilon) < 2\epsilon$，同时张开严格为正的吉拉尔球面角超曲率
+   倘若我们在局部有限深度 $k$ 的窗口内**果断关掉全局优先队列**，改做 $k$ 轮不排名的并行贝尔曼—福特（Bellman–Ford）局部边松弛，几何图景立刻焕然一新！没有了全局一维标尺的逐点打断，距离波前不再被捆死在坐标墙折角上，而是如同惠更斯（Huygens）次波包络一般，顺着向外鼓起的**品红球面顶盖 $\triangle_{\mathrm{sph}} ABC$** 自由铺开。由球面勾股内积 $\mathbf{A}(\epsilon)\cdot\mathbf{C}(\epsilon) = \cos^2\epsilon$（其在一般复内积空间上的测地三角不等式基础由 [@thm-ch34-chord-tunneling-and-pivot-renormalization] 第 1 款 `fs_angle_triangle` 给出，那是非严格的 $\le$；下面的严格不等号来自 [@ex-ch34-trihedron-chord-and-tropical-schur] 的手算），顶盖大圆测地弧长直接缩短为 $L_{\mathrm{cap}}(\epsilon) = \arccos(\cos^2\epsilon) < 2\epsilon$，同时张开严格为正的吉拉尔球面角超曲率
 
    $$
    L_{\mathrm{cap}}(\epsilon) \;=\; \arccos(\cos^2\epsilon), \qquad \Omega(\epsilon) \;=\; 2\arctan\!\left(\tan^2\frac{\epsilon}{2}\right) \;>\; 0.
@@ -39,11 +39,11 @@ $$
    更妙的是，在热带极小加代数 $(\mathbb{R}\cup\{+\infty\}, \oplus = \min, \otimes = +)$ 中，取极小运算天生满足**交换律** $\min(x, y) = \min(y, x)$ 与**幂等律** $\min(x, x) = x$：在 $k$ 步无序波前扫掠期间，局部微绕路与正权小环路根本不需要全知考官替它们排先后座次，较长的支路在局部汇合处便会被较短支路幂等覆盖、自行湮灭！
 
 ::: {.viz src="trihedron-chord-pivot-tunneling-sandbox" preset="cap-wavefront-relax" height="520"}
-**品红球面顶盖无序波前松弛实验卡（`cap-wavefront-relax`）。** 关闭全局排序探针后，在 $\epsilon = 60^\circ$ 处 $k = 3$ 道品红无序波前从 $\mathbf{A}$ 铺过外凸品红球面顶盖 $\triangle_{\mathrm{sph}} ABC$（吉拉尔角超 $\Omega = 36.87^\circ$），琥珀色当前读头沿顶盖测地弧走 $\arccos(\cos^2\epsilon) = 1.318 < 2\epsilon = 2.094$，短于紫色正交双壁并逼近青色内割弦（`fs_angle_triangle` 标绿色 `LEAN ✓`）。
+**品红球面顶盖无序波前松弛实验卡（`cap-wavefront-relax`）。** 关闭全局排序探针后，在 $\epsilon = 60^\circ$ 处 $k = 3$ 道品红无序波前从 $\mathbf{A}$ 铺过外凸品红球面顶盖 $\triangle_{\mathrm{sph}} ABC$（吉拉尔角超 $\Omega = 36.87^\circ$），琥珀色当前读头沿顶盖测地弧走 $\arccos(\cos^2\epsilon) = 1.318 < 2\epsilon = 2.094$，短于紫色正交双壁并逼近青色内割弦（`fs_angle_triangle` 的绿色 `LEAN ✓` 担保非严格的 $L_{\mathrm{cap}} \le 2\epsilon$，严格不等号来自手算）。
 :::
 
 3. **圆弧体肚内的青色平直内割弦面（$\triangle_{\mathrm{flat}} ABC$ / 对角割面 $OAC$）——热带舒尔补消元与跨尺度穿底跳跃**：
-   然而，单靠品红球面顶盖上的局部波前松弛还差最惊险的临门一刀：品红顶盖处处受制于单位球壳约束 $\lVert\mathbf{x}\rVert = 1$，如果任由无序贝尔曼—福特波前盲目扩散到全图 $n$ 层，复杂度反而会退化回 $O(mn)$。真正的破壁一刀，是在 $k$ 步局部波前平衡之后，把非瓶颈内部顶点集 $\mathrm{Interior}$ 一次性**消元积分掉**，只保留统领大棵最短路子树的稀疏边界**枢轴点（Pivots）** $p_1, p_2, \dots$，直接写出枢轴之间的**热带舒尔补（Tropical Schur Complement）有效跳跃边权**：
+   然而，单靠品红球面顶盖上的局部波前松弛还差最惊险的临门一刀：品红顶盖处处受制于单位球壳约束 $\lVert\mathbf{x}\rVert = 1$，如果任由无序贝尔曼—福特波前盲目扩散到全图 $n$ 层，复杂度反而会退化回 $O(mn)$。本书的几何读法是（`MODEL`；段然等人的算法实际是用 $k$ 步贝尔曼—福特松弛找出所辖子树至少含 $k$ 个顶点的枢轴，把递归前沿缩小到至多 $\lvert U\rvert/k$ 个点，并不显式计算枢轴之间的舒尔补边权）：在 $k$ 步局部波前平衡之后，把非瓶颈内部顶点集 $\mathrm{Interior}$ 一次性**消元积分掉**，只保留统领大棵最短路子树的稀疏边界**枢轴点（Pivots）** $p_1, p_2, \dots$，直接写出枢轴之间的**热带舒尔补（Tropical Schur Complement）有效跳跃边权**：
 
    $$
    W_{\mathrm{eff}}(p_1, p_2) \;=\; \min\!\Bigl(W_{p_1 p_2},\; \min_{b \in \mathrm{Interior}}\bigl(W_{p_1 b} + W_{b p_2}\bigr)\Bigr)
@@ -74,7 +74,7 @@ $$
 2. **第一拍 · 点化为波（$\Lambda^0_\ell \to \Lambda^2_\ell$，粒子源展开为无序局部波前）**：
    从第 $\ell$ 层当前边界源点集出发，释放 $k$ 步无序并行贝尔曼—福特松弛。离散点源不再排队单走，而是沿多条相邻出边同时张开一片覆盖 $k$ 步邻域的**品红二维惠更斯波前（$\Lambda^2_\ell$）**。
 3. **第二拍 · 波凝成场（$\Lambda^2_\ell \to \Lambda^3_\ell$，波前弛豫闭合成局部作用量体积场）**：
-   在 $k$ 步邻域内部，多路相交波前借热带 $\min$ 幂等相消抹平微绕路与局部短环，弛豫闭合为一团内部距离自洽锁定的**堇紫色局部作用量势场体积块（$\Lambda^3_\ell$）**。在概念动力学与内积几何骨架上，这种按读出映射将底层状态空间严丝合缝拆成商纤维簇并在弦图消元序下逐点收缩补全的结构，分别由下方 [@thm-ch34-chord-tunneling-and-pivot-renormalization] 的概念纤维分解 `concept_fiber_decomposition`、划分核等价 `partition_inseparable_iff_kernel` 与弦图单纯消元半正定补全 `exists_posSemidef_completion` 提供精确形式参照。
+   在 $k$ 步邻域内部，多路相交波前借热带 $\min$ 幂等相消抹平微绕路与局部短环，弛豫闭合为一团内部距离自洽锁定的**堇紫色局部作用量势场体积块（$\Lambda^3_\ell$）**。在概念动力学与内积几何的相邻语境里，下方 [@thm-ch34-chord-tunneling-and-pivot-renormalization] 的概念纤维分解 `concept_fiber_decomposition`、划分核等价 `partition_inseparable_iff_kernel` 与弦图单纯消元半正定补全 `exists_posSemidef_completion` 各自只担保自己的陈述（读出纤维的依赖和分解、读出划分的拓扑不可分性、实矩阵的半正定补全）；它们与贝尔曼—福特松弛、枢轴选取或 $(\min, +)$ 距离没有逻辑联系，此处的对应属本书 `MODEL`。
 4. **第三拍 · 体缩为枢轴新点（$\Lambda^3_\ell \equiv \Lambda^0_{\ell+1}$，斯托克斯边界浓缩与向心跨层跃升）**：
    在这团闭合的局部体积场 $\Lambda^3_\ell$ 中，凡在局部最短路森林里所辖子树规模不足 $k$ 个活跃顶点的节点，其最终最短距离已经在 $k$ 步波前内尘埃落定，当场作为内部体自由度被积分消去！唯有那些统领至少 $k$ 个活跃后代顶点的咽喉出口——至多只占边界规模 $\frac{1}{k}$ 的稀疏**枢轴点（Pivots）**——才承接整团局部体积的跨区通量（恰如[§34.8](ch34-s08-clifford-monads.md#sec-ch34-clifford-monad-tiling)多胞内部对消后向边界浓缩的斯托克斯面纱），在 $\ell + 1$ 层粗粒化账本上收缩重整为一枚枚新的**点粒子（$\Lambda^0_{\ell+1}$）**！紧接着，高一层的递归过程直接在这些稀疏枢轴新点之间沿着圆盘深处的青色内割弦跨尺度飞跃，一口气免除了对底下 $(1 - \frac{1}{k})$ 绝大多数普通顶点的全局排序！
 
@@ -83,12 +83,12 @@ $$
 $$
 
 ::: {.viz src="trihedron-chord-pivot-tunneling-sandbox" preset="holographic-pivot-cone" height="520"}
-**向心多尺度全息重整化锥实验卡（`holographic-pivot-cone`）。** 在三维八分球顶盖（$\epsilon = 90^\circ$）上，$N = 64$ 个青色谢尔宾斯基边界点（$\Lambda^0$）经品红波前面片（$\Lambda^2$）每 $k = 3$ 个凝聚为一颗紫色枢轴（$64 \to 22 \to 8 \to 3 \to 1$），由紫色树管逐层沉入体内至 $r = 0.707$（与青色内割弦中点 $\mathbf{M}$ 的 $r = 0.707$ 同深）；球壳 $r = 1$ 上的浅色细线描出 Dijkstra 结清全序，琥珀色标示唯一移动读头（全息锥对应属本书 `MODEL`，概念纤维分解 `concept_fiber_decomposition` 标绿色 `LEAN ✓`）。
+**向心多尺度全息重整化锥实验卡（`holographic-pivot-cone`）。** 在三维八分球顶盖（$\epsilon = 90^\circ$）上，$N = 64$ 个青色谢尔宾斯基边界点（$\Lambda^0$）经品红波前面片（$\Lambda^2$）每 $k = 3$ 个凝聚为一颗紫色枢轴（$64 \to 22 \to 8 \to 3 \to 1$），由紫色树管逐层沉入体内至 $r = 0.707$（与青色内割弦中点 $\mathbf{M}$ 的 $r = 0.707$ 同深）；球壳 $r = 1$ 上的浅色细线描出 Dijkstra 结清全序，琥珀色标示唯一移动读头（全息锥对应属本书 `MODEL`；依据框中 `concept_fiber_decomposition` 的绿色 `LEAN ✓` 只担保读出纤维的类型等价，不担保这幅算法图景）。
 :::
 
 ## 34.26.3 球面测地三角律、弦图消元补全与概念纤维分解的形式化定理及手算检验 {#sec-ch34-26-3}
 
-在严格区分认识论层级的前提下，我们将本节涉及的五项有限维与一般内积/拓扑核心结构——**复射影富比尼—施图迪（Fubini–Study）测地夹角三角不等式、实拉格朗日—格拉姆双矢面积亏损恒等式、读出划分拓扑不可分核充要刻画、有限弦图按单纯顶点消元的半正定矩阵补全存在性，以及任意概念读出下的依赖和纤维分解**——汇总为经 `trureturing` Lean 4 内核验证的本节主定理：
+在严格区分认识论层级的前提下，我们将本节涉及的五项有限维与一般内积/拓扑核心结构——**复射影富比尼—施图迪（Fubini–Study）测地夹角三角不等式、实拉格朗日—格拉姆双矢面积亏损恒等式、读出划分拓扑不可分核充要刻画、有限弦图按单纯顶点消元的半正定矩阵补全存在性，以及任意概念读出下的依赖和纤维分解**——列在一起；它们都经 `trureturing` Lean 4 内核验证，但彼此独立，各自只担保自己的陈述，其中只有第 1 款与本节的长度比较直接相关：
 
 ::: {.theorem #thm-ch34-chord-tunneling-and-pivot-renormalization lean="D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle,D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity,D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel,D5/S3/QuadraticForms/ChordalPsdCompletion.exists_posSemidef_completion,D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition" title="富比尼—施图迪测地三角律、拉格朗日—格拉姆恒等式、划分不可分核、弦图单纯消元补全与概念纤维分解定理"}
 在所钉 `trureturing` 冻结声明中，以下五项数学定理同时成立：
@@ -125,7 +125,7 @@ $$
 :::
 
 ::: proof
-第 1 款对复内积 $\langle a, b\rangle_{\mathbb{C}}$ 与 $\langle b, c\rangle_{\mathbb{C}}$ 分别选取模长为 $1$ 的相位对齐因子 $u, v \in \mathbb{C}$，转入底层实内积空间考察三单位向量 $(\overline{u}\cdot a,\, b,\, v\cdot c)$：此时前两段实内积分别等于 $\lVert\langle a, b\rangle_{\mathbb{C}}\rVert$ 与 $\lVert\langle b, c\rangle_{\mathbb{C}}\rVert$，而首尾实内积不超过模长 $\lVert\langle a, c\rangle_{\mathbb{C}}\rVert$，结合实内积空间无向夹角三角不等式与 $\arccos$ 在 $[-1, 1]$ 上的递减性即得结论（取实子空间嵌入 $\mathbb{R}^3 \hookrightarrow \mathbb{C}^3$ 及正交侧壁顶点 $a = \mathbf{A}(\epsilon),\, b = \mathbf{B},\, c = \mathbf{C}(\epsilon)$，左边即为顶盖大圆弧 $L_{\mathrm{cap}}(\epsilon)$，右边即为两扇侧壁弧长之和 $L_{\mathrm{walls}}(\epsilon) = 2\epsilon$）。第 2 款将右端反对称双和展开并交换求和指标 $i \leftrightarrow j$，直接化归为平方和乘积减去内积平方，锁定单位球面上两态弦向分离与内积亏损的精确代数关系。第 3 款与第 5 款刻画粗粒化重整化映射的商—纤维精确对偶：拉回离散拓扑中的单点纤维天然既开又闭，使同一读出核内的微观状态拓扑不可分，同时 `Equiv.sigmaFiberEquiv` 与 `Equiv.psigmaEquivSubtype` 将原空间 $X$ 无损重构为基空间坐标（对应下一层粗粒枢轴指标 $b \in B$）与各坐标上方内部纤维 $\operatorname{ConceptFiber}(q_C, b)$ 的依赖和。第 4 款对有限顶点集基数作强归纳：非空弦图由狄拉克（Dirac）极小团分隔子定理保证必含单纯顶点 $v$（其邻域构成完全团），归纳消去 $v$ 补全 $V \setminus \{v\}$ 上的诱导弦图后，利用等格拉姆压缩算子对齐邻域向量并补入一维正交残差坐标 $r = \sqrt{\lVert y_{\mathrm{root}}\rVert^2 - \lVert Z(y_{\mathrm{root}})\rVert^2}$ 完成全局格拉姆拼合。此处须恪守认识论边界：第 4 款在欧氏实内积空间中证明了沿单纯消元序的半正定矩阵存在性补全；有向图在热带 $(\min, +)$ 半环上的单顶点舒尔补行走压缩与下确界距离守恒紧接着由下方 [@prop-ch34-tropical-pivot-walk-distance] 给出机器验证，而比较—加法模型下的 $O(m\log^{2/3} n)$ 渐近算法时间复杂度上界仍属段然等人（2025）的计算机科学文献结论，不冒充内核已证复杂度定理。完整证明由 Lean 内核检查。
+第 1 款对复内积 $\langle a, b\rangle_{\mathbb{C}}$ 与 $\langle b, c\rangle_{\mathbb{C}}$ 分别选取模长为 $1$ 的相位对齐因子 $u, v \in \mathbb{C}$，转入底层实内积空间考察三单位向量 $(\overline{u}\cdot a,\, b,\, v\cdot c)$：此时前两段实内积分别等于 $\lVert\langle a, b\rangle_{\mathbb{C}}\rVert$ 与 $\lVert\langle b, c\rangle_{\mathbb{C}}\rVert$，而首尾实内积不超过模长 $\lVert\langle a, c\rangle_{\mathbb{C}}\rVert$，结合实内积空间无向夹角三角不等式与 $\arccos$ 在 $[-1, 1]$ 上的递减性即得结论（取实子空间嵌入 $\mathbb{R}^3 \hookrightarrow \mathbb{C}^3$ 及正交侧壁顶点 $a = \mathbf{A}(\epsilon),\, b = \mathbf{B},\, c = \mathbf{C}(\epsilon)$，左边即为顶盖大圆弧 $L_{\mathrm{cap}}(\epsilon)$，右边即为两扇侧壁弧长之和 $L_{\mathrm{walls}}(\epsilon) = 2\epsilon$）。第 2 款将右端反对称双和展开并交换求和指标 $i \leftrightarrow j$，直接化归为平方和乘积减去内积平方，锁定单位球面上两态弦向分离与内积亏损的精确代数关系。第 3 款与第 5 款刻画粗粒化重整化映射的商—纤维精确对偶：拉回离散拓扑中的单点纤维天然既开又闭，使同一读出核内的微观状态拓扑不可分，同时 `Equiv.sigmaFiberEquiv` 与 `Equiv.psigmaEquivSubtype` 将原空间 $X$ 无损重构为基空间坐标（本书模型中读作下一层粗粒枢轴指标 $b \in B$）与各坐标上方内部纤维 $\operatorname{ConceptFiber}(q_C, b)$ 的依赖和。第 4 款对有限顶点集基数作强归纳：非空弦图由狄拉克（Dirac）极小团分隔子定理保证必含单纯顶点 $v$（其邻域构成完全团），归纳消去 $v$ 补全 $V \setminus \{v\}$ 上的诱导弦图后，利用等格拉姆压缩算子对齐邻域向量并补入一维正交残差坐标 $r = \sqrt{\lVert y_{\mathrm{root}}\rVert^2 - \lVert Z(y_{\mathrm{root}})\rVert^2}$ 完成全局格拉姆拼合。此处须恪守认识论边界：第 4 款在欧氏实内积空间中证明了沿单纯消元序的半正定矩阵存在性补全；有向图在热带 $(\min, +)$ 半环上的单顶点舒尔补行走压缩与下确界距离守恒紧接着由下方 [@prop-ch34-tropical-pivot-walk-distance] 给出机器验证，而比较—加法模型下的 $O(m\log^{2/3} n)$ 渐近算法时间复杂度上界仍属段然等人（2025）的计算机科学文献结论，不冒充内核已证复杂度定理。完整证明由 Lean 内核检查。
 :::
 
 ::: {.proposition #prop-ch34-tropical-pivot-walk-distance lean="D5/S3/Combinatorics/Graph/Walks/TropicalSchurElimination.pivot_walks_and_distance" title="任意顶点类型有向箭图上单顶点热带舒尔补消元的行走压缩与下确界距离守恒"}
@@ -197,7 +197,7 @@ $$
 
 ## 34.26.4 与量子隧穿的三重同源：阿格蒙瞬子测地线、悬置排序抗芝诺阻尼与共振枢轴中继 {#sec-ch34-26-4}
 
-为什么章首原声命题断言，这套最短路径突破在路径积分底层“**恰恰就是悬置中间测量、经由虚数盲区 $\hat{\mathbf{i}}$ 穿透势垒的量子隧穿（瞬子捷径）**”？这不是表面的辞藻联想，而是横跨**变分方程、观测去相干与多尺度散射**的三重数学物理同构（`MODEL` + `文献结果，未在本书形式化`）：
+为什么章首原声命题断言，这套最短路径突破在路径积分底层“**恰恰就是悬置中间测量、经由虚数盲区 $\hat{\mathbf{i}}$ 穿透势垒的量子隧穿（瞬子捷径）**”？这里给出横跨**变分方程、观测去相干与多尺度散射**的三处对应：第一处是文献中的数学事实，后两处是类比，没有任何映射被定义或证明（`MODEL` + `文献结果，未在本书形式化`）：
 
 1. **第一重同源（数学泛函恒等）：威克虚数旋转下的阿格蒙（Agmon）欧氏瞬子作用量字面就是最短路径泛函**：
    在经典允许区 $E > V(x)$ 中，动量 $p(x) = \sqrt{2m(E - V(x))}$ 为实数，费曼路径积分累加振荡旋转器相因子 $\exp\bigl(\frac{i}{\hbar}\int_\Gamma p\,ds\bigr)$。一旦撞上高耸的势垒 $V(x) > E$，经典实轨迹被迫在转折点碰壁折返；然而在量子力学中，动量解析延拓进正交虚数盲区 $p(x) \mapsto \hat{\mathbf{i}}\sqrt{2m(V(x) - E)}$（等价于威克虚时间旋转 $t \mapsto -i\tau$），振荡相位瞬间翻转为实指数衰减权重 $\exp(-S_E[\Gamma]/\hbar)$！在半经典极限 $\hbar \to 0^+$（热带去量子化极限 $-\hbar\ln\sum_\alpha e^{-S_\alpha/\hbar} \to \min_\alpha S_\alpha$）下，一切绕远路的势垒下轨迹都被指数级抹杀，唯一主导隧穿振幅的**欧氏瞬子（Instanton）鞍点轨迹**，字面解的正是以**阿格蒙度规** $ds_{\mathrm{Agmon}} = \sqrt{2m(V(x) - E)}\,ds$ 为边权的**单源最短路径问题**：
@@ -207,10 +207,10 @@ $$
    $$
 
    圆弧体肚内那条跌破单位球壳（$\lVert\mathbf{x}\rVert < 1$）的青色内割直弦 $\overline{AC}$，在几何上恰恰对应穿过经典禁戒势垒底部的阿格蒙瞬子测地捷径！
-2. **第二重同源（测量动力学同构）：在 $k$ 步窗口内悬置全局排序 $\equiv$ 撤除高频投影监测以解除量子芝诺冻结**：
-   既然势垒底下一直横着那条更短的内割弦，为什么传统 Dijkstra 四十年来视而不见？回想[第七章](ch07-geometric-time-and-speed-limits.md)揭示的**量子芝诺效应（Quantum Zeno Effect）**：只要外部观察者以极高频率反复追问投影读数“此刻粒子究竟在哪一格？”，连续的去相干捏合就会实时斩断非对角二向量旋转面积，把量子隧穿死死冻结在零概率上！传统全局堆算法每松弛一步就向全图追问“此刻谁是全局第一名”，正是算法世界里的**高频芝诺投影监控**——它迫使状态处处留在完全排好经典名次的正交侧壁上，寸步不得潜入未定序盲区。反过来，新算法在 $k$ 步局部窗口内**悬置全局序测量**，允许内部点在不排名的叠加松弛态中自由干涉对消，恰恰是撤去中间芝诺监控锁、放行跨势垒隧穿的计算实现（关于虚数盲区弦与实测去相干的更深层相位机制，我们将在紧随其后的[§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit)继续推演）！
-3. **第三重同源（多尺度中继同构）：稀疏枢轴（Pivots）$\equiv$ 法布里—珀罗（Fabry–Pérot）共振隧穿准束缚中继站**：
-   反过来问：既然悬置排序能隧穿，为什么不干脆把窗口放宽到整张图（$k = n$，彻底退化为全局贝尔曼—福特）？物理答案同样一针见血：面对一堵厚度趋于无穷的宽势垒，毫无中继的单次盲目隧穿振幅会随厚度指数衰减归零——对应全局贝尔曼—福特在深层网络中沦为 $O(mn)$ 的漫散波耗散！介观凝聚态物理中，辻与江崎（Tsu & Esaki, 1973）发现大自然穿透厚势垒的绝技是**共振隧穿（Resonant Tunneling）**：在厚势垒内部每隔固定尺度布设一座双势垒量子阱（法布里—珀罗谐振腔），让衰减波在准束缚能级上锁相驻波放大，再接力隧穿下一段势垒，透射率竟可直逼 $100\%$！算法中统领子树规模 $\ge k$ 的稀疏**枢轴点**，扮演的分毫不差就是这排**共振锁相中继站**——只在至多 $\lvert U\rvert / k$ 个高容量枢轴节点上重新锚定实距离，把厚重势垒切分为一段段可控的 $k$ 步相干隧穿窗，既打碎了 $\Omega(n\log n)$ 芝诺排序墙，又锁住了 $O(m\log^{2/3} n)$ 的零耗散确定性收敛！
+2. **第二重同源（测量动力学类比）：在 $k$ 步窗口内悬置全局排序，类比于撤除高频投影监测以解除量子芝诺冻结**：
+   既然势垒底下一直横着那条更短的内割弦，为什么传统 Dijkstra 四十年来视而不见？回想[第七章](ch07-geometric-time-and-speed-limits.md)揭示的**量子芝诺效应（Quantum Zeno Effect）**：只要外部观察者以极高频率反复追问投影读数“此刻粒子究竟在哪一格？”，连续的去相干捏合就会实时斩断非对角二向量旋转面积，把量子隧穿死死冻结在零概率上！传统全局堆算法每松弛一步就向全图追问“此刻谁是全局第一名”，正是算法世界里的**高频芝诺投影监控**——它迫使状态处处留在完全排好经典名次的正交侧壁上，寸步不得潜入未定序盲区。反过来，新算法在 $k$ 步局部窗口内**悬置全局序测量**，允许内部点在不排名的叠加松弛态中自由干涉对消，可以类比为撤去中间芝诺监控锁、放行跨势垒隧穿（关于虚数盲区弦与实测去相干的更深层相位机制，我们将在紧随其后的[§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit)继续推演）！
+3. **第三重同源（多尺度中继类比）：稀疏枢轴（Pivots）类比于法布里—珀罗（Fabry–Pérot）共振隧穿准束缚中继站**：
+   反过来问：既然悬置排序能隧穿，为什么不干脆把窗口放宽到整张图（$k = n$，彻底退化为全局贝尔曼—福特）？物理答案同样一针见血：面对一堵厚度趋于无穷的宽势垒，毫无中继的单次盲目隧穿振幅会随厚度指数衰减归零——对应全局贝尔曼—福特在深层网络中沦为 $O(mn)$ 的漫散波耗散！介观凝聚态物理中，朱兆祥与江崎玲於奈（Tsu & Esaki, 1973）发现大自然穿透厚势垒的绝技是**共振隧穿（Resonant Tunneling）**：在厚势垒内部每隔固定尺度布设一座双势垒量子阱（法布里—珀罗谐振腔），让衰减波在准束缚能级上锁相驻波放大，再接力隧穿下一段势垒，透射率竟可直逼 $100\%$！算法中统领子树规模 $\ge k$ 的稀疏**枢轴点**，在本书类比中扮演的就是这排**共振锁相中继站**——只在至多 $\lvert U\rvert / k$ 个高容量枢轴节点上重新锚定实距离，把厚重势垒切分为一段段可控的 $k$ 步相干隧穿窗，既绕开了 Dijkstra 的 $O(m + n\log n)$ 排序瓶颈，又避免了 $O(mn)$ 的漫散，得到确定性的 $O(m\log^{2/3} n)$ 时间界（`文献结果`）！
 
 下表将“传统全局排序爬壁态”与“枢轴波前重整穿弧隧穿态”在五个维度上一一对齐：
 
@@ -230,7 +230,7 @@ $$
 **文献结果，未在本书形式化。** 本节严守三层认识论边界，将经典与前沿文献结论同本书内核验证定理及几何模型明确区分如下：
 
 1. **单源最短路径（SSSP）与排序壁垒文献**：戴克斯特拉（Dijkstra, *Numer. Math.* **1**, 269–271, 1959）创立非负权贪心波前算法；弗雷德曼与塔扬（Fredman & Tarjan, *J. ACM* **34**, 596–615, 1987）以斐波那契堆实现比较—加法模型下的 $O(m + n\log n)$ 上界；海乌普勒等（Haeupler, Hladík, Rozhoň, Tarjan & Tětek, *FOCS 2024*）证明在要求按距离顺序输出全体顶点的前提下，配工作集堆的 Dijkstra 具有普遍最优性；段然、毛嘉怡、毛啸、束欣凯与尹龙晖（Duan, Mao, Mao, Shu & Yin, *STOC 2025* Best Paper, DOI `10.1145/3717823.3718179`, `arXiv:2504.17033`）给出有向非负实权图在比较—加法模型下的确定性 $O(m\log^{2/3} n)$ 单源最短路径算法。此处有一条至关重要的信息论边界必须交代清楚：**计算单源最短路径距离值（及最短路树）之所以能突破 $O(m + n\log n)$（在 $m = O(n)$ 的稀疏图上达到 $o(n\log n)$），恰恰因为它不需要按距离从小到大的排好序列表输出全部 $n$ 个顶点**——若强制要求输出全体顶点的距离全序排列，比较排序的信息论下界 $\Omega(n\log n)$ 依然严格有效；
-2. **欧氏瞬子、阿格蒙度规、芝诺冻结、共振隧穿与 MERA 全息文献**：阿格蒙（Agmon, *Lectures on Exponential Decay of Solutions of Second-Order Elliptic Equations*, Princeton Univ. Press, 1982）建立势垒禁戒区 $V(x) > E$ 上的黎曼度规 $ds_{\mathrm{Agmon}}^2 = 2m(V(x)-E)_+\,dx^2$ 与指数衰减测地界；科尔曼（Coleman, *Phys. Rev. D* **15**, 2929, 1977）奠定虚时间欧氏瞬子半经典隧穿理论；米斯拉与苏达山（Misra & Sudarshan, *J. Math. Phys.* **18**, 756, 1977）严格表述高频投影观测下的量子芝诺效应；辻与江崎（Tsu & Esaki, *Appl. Phys. Lett.* **22**, 562, 1973）提出超晶格有限多势垒准束缚态共振隧穿；维达尔（Vidal, *Phys. Rev. Lett.* **99**, 220405, 2007）与斯温格尔（Swingle, *Phys. Rev. D* **86**, 065007, 2012）建立多尺度纠缠重整化拟设（MERA）及其离散双曲全息几何对应；
+2. **欧氏瞬子、阿格蒙度规、芝诺冻结、共振隧穿与 MERA 全息文献**：阿格蒙（Agmon, *Lectures on Exponential Decay of Solutions of Second-Order Elliptic Equations*, Princeton Univ. Press, 1982）建立势垒禁戒区 $V(x) > E$ 上的黎曼度规 $ds_{\mathrm{Agmon}}^2 = 2m(V(x)-E)_+\,dx^2$ 与指数衰减测地界；科尔曼（Coleman, *Phys. Rev. D* **15**, 2929, 1977）奠定虚时间欧氏瞬子半经典隧穿理论；米斯拉与苏达山（Misra & Sudarshan, *J. Math. Phys.* **18**, 756, 1977）严格表述高频投影观测下的量子芝诺效应；朱兆祥与江崎玲於奈（Tsu & Esaki, *Appl. Phys. Lett.* **22**, 562, 1973）提出超晶格有限多势垒准束缚态共振隧穿；维达尔（Vidal, *Phys. Rev. Lett.* **99**, 220405, 2007）与斯温格尔（Swingle, *Phys. Rev. D* **86**, 065007, 2012）建立多尺度纠缠重整化拟设（MERA）及其离散双曲全息几何对应；
 3. **本书内核锚点（`LEAN ✓`）与原创几何模型（`MODEL`）**：[@thm-ch34-chord-tunneling-and-pivot-renormalization] 锁定富比尼—施图迪测地三角律、拉格朗日—格拉姆恒等式、划分不可分核、弦图单纯消元半正定补全与概念纤维分解五项有限维/拓扑骨架，[@prop-ch34-tropical-pivot-walk-distance]（`pivot_walks_and_distance`）进一步在宇宙多态任意顶点类型上锁定单顶点热带 $(\min, +)$ 舒尔补消元的行走压缩与下确界距离精确守恒；而将 SSSP 的“爬墙—顶盖波前—内割弦消元—稀疏枢轴递归”映射至极小圆弧体 $\Delta\mathcal{T}_\epsilon$ 的三张几何面、`1—3—3—1` 点体八度重整化以及阿格蒙瞬子/共振隧穿中继，则属本书原创跨学科几何诠释模型（`MODEL`）。
 :::
 

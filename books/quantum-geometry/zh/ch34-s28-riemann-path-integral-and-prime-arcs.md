@@ -89,7 +89,7 @@ $$
    \frac{1}{\zeta(s)} \;=\; \prod_{p \in \mathbb{P}} \bigl(1 - p^{-s}\bigr) \;=\; \sum_{n=1}^{\infty} \mu(n)\,n^{-\sigma} e^{-\hat{\mathbf{i}}\,t\ln n} \qquad (\operatorname{Re}(s) > 1).
    $$
 
-   审视 $\mu(n)$ 的三值规则，便可认出它在克利福德外代数 $\bigoplus_{k \ge 0}\Lambda^k$ 中的精确手性身份（`MODEL` + `手工推导`）：一旦某条复合路径在同一枚素数圆弧体上重复踩踏两次（$p^2 \mid n$），立即触发自比较去同存异归零 $\mathbf{e}_p \wedge \mathbf{e}_p = 0 \implies \mu(n) = 0$（**严格泡利不相容，禁止同轴二次缠绕自交**）；唯有当路径由 $k$ 枚互异素数圆弧体正交楔积 $\mathbf{e}_{p_1}\wedge\mathbf{e}_{p_2}\wedge\cdots\wedge\mathbf{e}_{p_k}$ 构成无平方因子整数 $n = p_1 p_2\cdots p_k$ 时，才存活并携带外积阶交替反相符号 $\mu(n) = (-1)^k$！
+   审视 $\mu(n)$ 的三值规则，便可认出它在克利福德外代数 $\bigoplus_{k \ge 0}\Lambda^k$ 中的精确手性身份（`MODEL` + `手工推导`）：一旦某条复合路径在同一枚素数圆弧体上重复踩踏两次（$p^2 \mid n$），立即触发自比较去同存异归零 $\mathbf{e}_p \wedge \mathbf{e}_p = 0 \implies \mu(n) = 0$（**严格泡利不相容，禁止同轴二次缠绕自交**）；唯有当路径由 $k$ 枚互异素数圆弧体正交楔积 $\mathbf{e}_{p_1}\wedge\mathbf{e}_{p_2}\wedge\cdots\wedge\mathbf{e}_{p_k}$ 构成无平方因子整数 $n = p_1 p_2\cdots p_k$ 时，才存活并携带外积阶交替反相符号 $\mu(n) = (-1)^k$！（把 $\mu$ 读作费米型素数气体的符号，文献中见 Spector, *Commun. Math. Phys.* **127**, 239–252, 1990。）
 
 ::: {.viz src="riemann-prime-arc-path-integral-sandbox" preset="euler-dirichlet-phasor-spiral" height="520"}
 **欧拉局域绕行算子、狄利克雷复合路径相量螺旋与莫比乌斯外积对偶实验卡（`euler-dirichlet-phasor-spiral`）。** 在绝对收敛区 $\sigma = 1.50,\; t = \gamma_1 \approx 14.1347$ 下，将整数 $n \le 160$ 的箭头 $n^{-\sigma}e^{-\hat{\mathbf{i}}t\ln n}$ 首尾相接抬升至作用量高度 $\ln n = \sum m_p\ln p$（素数幂台阶永不同高）：紫色复合路径链 $\sum n^{-s}$ 与紫色欧拉部分乘积 $\prod_{p \le 160}(1 - p^{-s})^{-1}$ 共同收拢于琥珀色延拓轴与落点珠 $\zeta(s) \approx 0.5421 + 0.0499i$（地面围以青色正向壳 $p^{-\sigma}$ 及其上的琥珀色 $\sigma$ 拖动手柄），而品红色莫比乌斯外积链 $\sum\mu(n)n^{-s}$ 在 $n = 4, 8, 9, 12, \dots$ 处原地只升不走（$\mu = 0$）并收拢于品红落点珠 $1/\zeta(s) \approx 1.8291 - 0.1683i$；读数栏同步核验 $\operatorname{Re}(s) > 0$ 上的交错 $\eta$ 延拓（绿色 `LEAN ✓` 对应 `prime_log_rational_independence`、`riemann_zeta_dirichlet_sum_eq_euler_product` 与 `tendsto_alternating_partialSums_eta_of_ne_one`）。
@@ -99,23 +99,23 @@ $$
 
 把镜头从绝对收敛安全区 $\sigma > 1$ 推入非平凡临界带 $0 < \sigma < 1$：在路径积分视野下，**一颗黎曼非平凡零点 $\zeta(\rho) = 0$ 的物理真身究竟是什么？**
 
-它绝非空无一物的死寂，而是 [§34.9](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade) 与 [§34.12](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop)“反者道之动”在算术宇宙中的极致显影（`MODEL`）——经解析延拓后的无穷多条算术路径相量在复平面原点 `O` 处达成了百分之百的相消干涉，使得可见实轴 `I` 投影与 $90^\circ$ 虚盲区 `i` 投影在同一复频率处双双归零！那么，在整个开带 $0 < \sigma < 1$ 之中，为什么实部恰好等于二分之一的**临界线 $\sigma = \frac{1}{2}$** 拥有独一无二的几何地位？顺着极小圆弧体的几何结构逐层剖析，三道互锁机制连同它们各自的认识论射程一并水落石出：
+它绝非空无一物的死寂，而是 [§34.9](ch34-s09-reversal-and-concept-cascade.md#sec-ch34-reversal-diagonal-and-concept-cascade) 与 [§34.12](ch34-s12-triadic-duality.md#sec-ch34-triadic-duality-and-field-loop)“反者道之动”在算术宇宙中的极致显影（`MODEL`）——经解析延拓后的无穷多条算术路径相量在复平面原点 `O` 处达成了百分之百的相消干涉，使得可见实轴 `I` 投影与 $90^\circ$ 虚盲区 `i` 投影在同一复频率处双双归零！那么，在整个开带 $0 < \sigma < 1$ 之中，为什么实部恰好等于二分之一的**临界线 $\sigma = \frac{1}{2}$** 拥有独一无二的几何地位？顺着极小圆弧体的几何结构逐层剖析，可以给出三个启发式读法，连同它们各自的认识论射程：它们都只说明 $\frac{1}{2}$ 是对称轴所在，不提供任何关于零点位置的信息。
 
-**第一重机制——往返双投影平方律与半密度幺正性：筛法计数密度是 $p^{-1}$，单程波幅唯一锁向 $p^{-1/2}$。** 回望 [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 由秩一玻恩配对权重定理 [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)（[@thm-ch34-roundtrip-born-and-imaginary-blindspot]，`LEAN ✓`）锁定的测量铁律：观察者在宏观实轴 `I` 上清点的经典概率密度，是经过“被测态投向我、我再投回被测态”**往返两次投影闭合后的玻恩模平方 $\lvert\psi\rvert^2 = \cos^2\theta$**；而真正进入费曼路径积分参与相干相位叠加的，则是尚未平方的**单程旋量振幅 $\psi$**。
+**第一重机制——往返双投影平方律与半密度幺正性：筛法计数密度是 $p^{-1}$，在半密度约定下单程波幅取 $p^{-1/2}$。** 回望 [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 的往返双投影平方律（其中秩一玻恩配对权重定理 [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) 属 [@thm-ch34-roundtrip-born-and-imaginary-blindspot]，`LEAN ✓`；它担保的是秩一投影的玻恩权重恒等式，与狄利克雷级数各项的归一化没有逻辑联系，下面把它推广到算术路径属本书类比）：观察者在宏观实轴 `I` 上清点的经典概率密度，是经过“被测态投向我、我再投回被测态”**往返两次投影闭合后的玻恩模平方 $\lvert\psi\rvert^2 = \cos^2\theta$**；而真正进入费曼路径积分参与相干相位叠加的，则是尚未平方的**单程旋量振幅 $\psi$**。
 
-在自然数筛法与乘性遍历测度中，素数 $p$ 整除随机正整数的渐近命中占比（跨过该素数圆弧体的宏观经典概率权重）严格等于 $w_p = \frac{1}{p} = p^{-1}$；推广到连续尺度坐标 $n > 0$ 上，对数路径作用量微元 $d(\ln n) = \frac{dn}{n}$ 赋予单位尺度区间的天然哈尔（Haar）测度密度同样是 $n^{-1}$。若要求单条算术路径振幅 $\psi_n(s) = n^{-\sigma - \hat{\mathbf{i}}t}$ 在尺度重整化下保持**幺正概率预算守恒**——即构成微分几何与几何量子化中的 Kostant–Souriau **半密度（$\frac{1}{2}$-density）**，使模平方密度乘以线性微元精确匹配乘性作用量微元 $\lvert\psi_n\rvert^2\,dn = d(\ln n) = \frac{dn}{n}$（`MODEL` + `手工推导`）——则单程路径振幅模长必须唯一取宏观计数密度的算术平方根：
+在自然数筛法与乘性遍历测度中，素数 $p$ 整除随机正整数的渐近命中占比（跨过该素数圆弧体的宏观经典概率权重）严格等于 $w_p = \frac{1}{p} = p^{-1}$；推广到连续尺度坐标 $n > 0$ 上，对数路径作用量微元 $d(\ln n) = \frac{dn}{n}$ 赋予单位尺度区间的天然哈尔（Haar）测度密度同样是 $n^{-1}$。若要求单条算术路径振幅 $\psi_n(s) = n^{-\sigma - \hat{\mathbf{i}}t}$ 在尺度重整化下保持**幺正概率预算守恒**——即构成微分几何与几何量子化中的 Kostant–Souriau **半密度（$\frac{1}{2}$-density）**，使模平方密度乘以线性微元精确匹配乘性作用量微元 $\lvert\psi_n\rvert^2\,dn = d(\ln n) = \frac{dn}{n}$（`MODEL` + `手工推导`）——则单程路径振幅模长应取宏观计数密度的算术平方根：
 
 $$
 \lvert\psi_n\rvert^2 \;=\; \bigl\lvert n^{-\sigma - \hat{\mathbf{i}}\,t}\bigr\rvert^2 \;=\; n^{-2\sigma} \;=\; n^{-1} \quad \Longleftrightarrow \quad 2\sigma = 1 \quad \Longleftrightarrow \quad \sigma = \frac{1}{2}.
 $$
 
-令人击节赞叹的是，同一个指数 $\frac{1}{2}$ 也分毫不差地镌刻在双曲测地流的马鞍曲率上（`文献结果，未在本书形式化`）：在塞尔伯格迹公式（Selberg, 1956）与古茨维勒半经典周期轨道迹公式（Gutzwiller, 1971；以及 Berry & Keating, 1999 的标度哈密顿量 $\hat{H}_{\mathrm{BK}} = \frac{1}{2}(\hat{x}\hat{p} + \hat{p}\hat{x})$）中，本原闭合测地线 $\gamma_p$（本征周期/弧长 $L_p = \ln p$）穿过双曲马鞍面时，横向不稳定流形上的邻近轨道束按李雅普诺夫因子 $e^{+L_p/2}$ 指数发散，导致横向驻相高斯积分析出的单圈稳定性雅可比幅值因子 $\lvert\det(I - M_p)\rvert^{-1/2}$ 渐近锁定在
+同一个指数 $\frac{1}{2}$ 也出现在文献中的一种猜想性类比里：在塞尔伯格迹公式（Selberg, 1956）与古茨维勒半经典周期轨道迹公式（Gutzwiller, 1971）中，本原闭合测地线的单圈稳定性因子按 $e^{-L/2}$ 衰减（`文献结果，未在本书形式化`），但那里的测地线长度 $L$ 并不是 $\ln p$；存在一个周期轨道长度恰为 $L_p = \ln p$ 的动力系统，正是 Berry & Keating（1999，标度哈密顿量 $\hat{H}_{\mathrm{BK}} = \frac{1}{2}(\hat{x}\hat{p} + \hat{p}\hat{x})$）与希尔伯特—波利亚纲领的**猜想性**图景（`OPEN`）。在这一图景中，本原闭合测地线 $\gamma_p$ 穿过双曲马鞍面时，横向不稳定流形上的邻近轨道束按李雅普诺夫因子 $e^{+L_p/2}$ 指数发散，导致横向驻相高斯积分析出的单圈稳定性雅可比幅值因子 $\lvert\det(I - M_p)\rvert^{-1/2}$ 渐近锁定在
 
 $$
 \lvert\det(I - M_p)\rvert^{-1/2} \;\sim\; e^{-L_p / 2} \;=\; e^{-(\ln p) / 2} \;=\; p^{-1/2}!
 $$
 
-**第二重机制——正逆比较对偶（$s \leftrightarrow 1 - s$）：单对双臂干涉仪的等幅锁死 vs. 无穷多路径求和的四元组认识论边界。** 再看 [@thm-ch34-riemann-prime-arc-bridge] 第 3、4 款给出的全局完备反射方程 $\operatorname{xiReading}(1 - s) = \operatorname{xiReading}(s)$（古典记法写作 $\xi(s) = \frac{1}{2}s(s-1)\pi^{-s/2}\Gamma(\frac{s}{2})\zeta(s) = \xi(1 - s)$）。为什么这条正逆对偶反射轴偏偏立在 $\sigma = \frac{1}{2}$ 处，而不是立在原点 $0$ 处？回溯黎曼 1859 年的原始推导（`文献结果`），他是将一维圆周热核路径积分——雅可比 $\vartheta$ 函数 $\vartheta(\tau) = \sum_{n \in \mathbb{Z}} e^{-\pi n^2 \tau}$——施行泊松求和互换 $\vartheta(\tau) = \tau^{-1/2}\vartheta(\tau^{-1})$ 后再做梅林变换导出该式的：这在概念塔中恰是**零阶紫外点晶格与对偶红外长波场的傅里叶—霍奇互换**，一维高斯路径积分自带的雅可比平方根因子 $\tau^{-1/2}$ 硬生生把正逆对偶中心钉在了 $s$ 与 $1 - s$ 的正中央 $\frac{1}{2}$（`MODEL`）！
+**第二重机制——正逆比较对偶（$s \leftrightarrow 1 - s$）：单对双臂干涉仪的等幅平衡 vs. 无穷多路径求和的四元组认识论边界。** 再看 [@thm-ch34-riemann-prime-arc-bridge] 第 3、4 款给出的全局完备反射方程 $\operatorname{xiReading}(1 - s) = \operatorname{xiReading}(s)$（古典记法写作 $\xi(s) = \frac{1}{2}s(s-1)\pi^{-s/2}\Gamma(\frac{s}{2})\zeta(s) = \xi(1 - s)$）。为什么这条正逆对偶反射轴偏偏立在 $\sigma = \frac{1}{2}$ 处，而不是立在原点 $0$ 处？回溯黎曼 1859 年的原始推导（`文献结果`），他是将一维圆周热核路径积分——雅可比 $\vartheta$ 函数 $\vartheta(\tau) = \sum_{n \in \mathbb{Z}} e^{-\pi n^2 \tau}$——施行泊松求和互换 $\vartheta(\tau) = \tau^{-1/2}\vartheta(\tau^{-1})$ 后再做梅林变换导出该式的：这在概念塔中恰是**零阶紫外点晶格与对偶红外长波场的傅里叶—霍奇互换**，一维高斯路径积分自带的雅可比平方根因子 $\tau^{-1/2}$ 硬生生把正逆对偶中心钉在了 $s$ 与 $1 - s$ 的正中央 $\frac{1}{2}$（`MODEL`）！
 
 现在，让我们先在**单枚素数极小圆弧体 $\Delta\mathcal{T}_p$（$p > 1$）的正逆对偶双分支**上做一次零外援的精确代数检验（`手工推导`）。记正向壳层收缩模长为 $A_+(\sigma) := p^{-\sigma}$，逆向对偶壳层收缩模长为 $A_-(\sigma) := p^{-(1-\sigma)}$（注意两者的往返乘积对一切 $\sigma \in \mathbb{R}$ 恒守玻恩筛法密度不变量 $A_+(\sigma)A_-(\sigma) = p^{-\sigma}p^{-(1-\sigma)} = p^{-1}$）。把携带任意相位角 $\alpha, \beta \in \mathbb{R}$ 的正逆两臂波束送入同一台双臂迈克尔逊干涉仪合成 $Z_p(\sigma; \alpha, \beta) := p^{-\sigma}e^{i\alpha} + p^{-(1-\sigma)}e^{i\beta}$，其输出强度恒等变形为：
 
@@ -127,10 +127,10 @@ $$
 \end{aligned}
 $$
 
-由于 $p > 1 \implies \ln p > 0$ 且 $1 + \cos(\alpha - \beta) \ge 0$，上式立即给出两条铁一般的充要判据（`手工推导`）：
+由于 $p > 1 \implies \ln p > 0$ 且 $1 + \cos(\alpha - \beta) \ge 0$，上式对这一两项玩具模型立即给出两条判据（`手工推导`；$\zeta$ 本身并不是这样的两项和）：
 
 - **偏离临界线时（$\sigma \neq \frac{1}{2}$）——单对双臂壳层轻重失衡，绝无可能自相抵消**：只要 $\sigma \neq \frac{1}{2}$，正向壳层半径 $p^{-\sigma}$ 与逆向对偶壳层半径 $p^{-(1-\sigma)}$ 便严格不等，留下抹不掉的双臂振幅差下界 $\lvert Z_p(\sigma; \alpha, \beta)\rvert \ge \lvert p^{-\sigma} - p^{-(1-\sigma)}\rvert > 0$；与此同时，在 $\sigma \neq \frac{1}{2}$ 的复平面区域内，$\operatorname{Re}\xi(\sigma + it) = 0$ 与 $\operatorname{Im}\xi(\sigma + it) = 0$ 是两条互不统属的实曲线（实余维数为 $2$）。
-- **踏上临界线时（$\sigma = \frac{1}{2}$）——双臂 $100\%$ 等幅锁死，且完备谱轨迹坍缩为一维实曲线（余维数 $2 \to 1$）**：唯独在 $\sigma = \frac{1}{2}$ 上，正逆两臂模长在半密度半径 $p^{-1/2} = p^{-(1-1/2)}$ 处精确相等，一旦相位差跨入反相半周 $\alpha - \beta \equiv \pi \pmod{2\pi}$（$e^{i(\alpha-\beta)} = -1$），单对双臂输出当场归零！更重要的是，对全局完备读数而言，在 $s = \frac{1}{2} + it$（$t \in \mathbb{R}$）上恰有 $1 - \bar{s} = \frac{1}{2} + it = s$，代入 [@thm-ch34-riemann-prime-arc-bridge] 第 4 款（`xi_reading_one_sub_conj`）立得：
+- **踏上临界线时（$\sigma = \frac{1}{2}$）——双臂等幅平衡，且完备谱轨迹坍缩为一维实曲线（余维数 $2 \to 1$）**：唯独在 $\sigma = \frac{1}{2}$ 上，正逆两臂模长在半密度半径 $p^{-1/2} = p^{-(1-1/2)}$ 处精确相等，一旦相位差跨入反相半周 $\alpha - \beta \equiv \pi \pmod{2\pi}$（$e^{i(\alpha-\beta)} = -1$），单对双臂输出当场归零！更重要的是，对全局完备读数而言，在 $s = \frac{1}{2} + it$（$t \in \mathbb{R}$）上恰有 $1 - \bar{s} = \frac{1}{2} + it = s$，代入 [@thm-ch34-riemann-prime-arc-bridge] 第 4 款（`xi_reading_one_sub_conj`）立得：
 
   $$
   \overline{\operatorname{xiReading}\!\left(\tfrac{1}{2} + it\right)} \;=\; \operatorname{xiReading}\!\left(1 - \overline{\bigl(\tfrac{1}{2} + it\bigr)}\right) \;=\; \operatorname{xiReading}\!\left(\tfrac{1}{2} + it\right) \;\Longrightarrow\; \operatorname{Im}\operatorname{xiReading}\!\left(\tfrac{1}{2} + it\right) \;=\; 0!
@@ -148,7 +148,7 @@ $$
 \rho_{\mathrm{rogue}} \;=\; \frac{1}{2} \pm \delta \pm i\gamma_0 \qquad (\delta \neq 0,\; \gamma_0 \neq 0)!
 $$
 
-在解析数论史上，Davenport 与 Heilbronn（1936）构造的狄利克雷级数线性组合同样满足完全相同的黎曼型函数方程与临界线实值性，却因为**缺乏素数欧拉乘积**而在 $\sigma \neq \frac{1}{2}$ 处滋生出无穷多颗离线零点（`文献结果，未在本书形式化`）。换言之：半密度平方律与正逆双臂平衡深刻揭示了为什么 $\sigma = \frac{1}{2}$ 是算术宇宙唯一的幺正对称脊线（`MODEL`）；临界线上确有无穷多个零点，这是 Hardy（1914）的定理（`文献结果，未在本书形式化`），上文的图像只说明实值函数每变号一次给出一个零点，并不推出变号无穷多次；但若要彻底排除无穷多条路径在 $\sigma \neq \frac{1}{2}$ 处“四点串谋相消”的极端可能，就必须把 $\sigma > 1$ 区**欧拉乘积独有的乘性正定性**一路无损运送过 $s = 1$ 极点势垒——这正是为什么**黎曼猜想（[@conj-riemann-hypothesis]）至今仍列为开放猜想（`OPEN`）**，也正是下一节 [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 必须引入乘性波前舒尔补枢轴与多级共振隧穿的根本原因！
+在解析数论史上，Davenport 与 Heilbronn（1936）构造的狄利克雷级数线性组合同样满足完全相同的黎曼型函数方程与临界线实值性，却因为**缺乏素数欧拉乘积**而在 $\sigma \neq \frac{1}{2}$ 处滋生出无穷多颗离线零点（`文献结果，未在本书形式化`）。换言之：半密度平方律与正逆双臂平衡深刻揭示了为什么 $\sigma = \frac{1}{2}$ 是算术宇宙唯一的幺正对称脊线（`MODEL`）；临界线上确有无穷多个零点，这是 Hardy（1914）的定理（`文献结果，未在本书形式化`），上文的图像只说明实值函数每变号一次给出一个零点，并不推出变号无穷多次；若要排除无穷多条路径在 $\sigma \neq \frac{1}{2}$ 处“四点串谋相消”的可能，本书设想的路线是把 $\sigma > 1$ 区**欧拉乘积独有的乘性正定性**一路运送过 $s = 1$ 极点势垒——这一步没有任何已知证明，**黎曼猜想（[@conj-riemann-hypothesis]）至今仍列为开放猜想（`OPEN`）**；下一节 [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling) 把乘性波前舒尔补枢轴与多级共振隧穿作为研究纲领与类比提出。
 
 **第三重机制——莫比乌斯外积随机游走标度律：Littlewood 等价定理与无偏 $\sqrt{x}$ 包络。** 从费米型外积路径积分 $1/\zeta(s) = \sum_{n \ge 1}\mu(n)n^{-s}$ 的另一侧面看，J. E. Littlewood（1912）严格证明了黎曼猜想（[@conj-riemann-hypothesis]）与梅尔滕斯莫比乌斯累加函数 $M(x)$ 的平方根渐近界完全等价（`文献结果，未在本书形式化`）：
 
@@ -223,7 +223,7 @@ $$
 \end{aligned}
 $$
 
-请细细品味这组公式背后的双向雕刻奇观：单独拎出任何一对零点 $\frac{1}{2} \pm i\gamma_k$，它在整个正半轴上只不过是一列处处光滑起伏的半密度对数余弦—正弦波，哪有一丝一毫“离散整数或素数判别”的棱角？然而当你把 $K = 5$、$K = 20$、$K = 50$ 乃至成千上万对零点的驻波叠加起来时，它们在 $x = 6, 10, 12, \dots$ 等普通合数区间内波峰对波谷正负抵消、抹出平坦台阶，唯独在素数与素数幂位置 $x = 2, 3, 4 = 2^2, 5, 7, 8 = 2^3, 9 = 3^2, 11, 13, \dots$ 上同相锁死，刀削斧劈般拉起垂直跃升的素数幂阶梯！
+请细细品味这组公式背后的双向雕刻奇观：单独拎出任何一对零点 $\frac{1}{2} \pm i\gamma_k$，它在整个正半轴上只不过是一列处处光滑起伏的半密度对数余弦—正弦波，哪有一丝一毫“离散整数或素数判别”的棱角？然而当你把 $K = 5$、$K = 20$、$K = 50$ 乃至成千上万对零点的驻波叠加起来时，它们在 $x = 6, 10, 12, \dots$ 等普通合数区间内波峰对波谷正负抵消、抹出平坦台阶，唯独在素数与素数幂位置 $x = 2, 3, 4 = 2^2, 5, 7, 8 = 2^3, 9 = 3^2, 11, 13, \dots$ 上同相叠加，拉起垂直跃升的素数幂阶梯！（有限 $K$ 时，条件收敛与吉布斯型过冲仍留下误差，见下表。）
 
 ::: {.example #ex-ch34-weil-prime-staircase-reconstruction title="零点驻波雕刻素数阶梯：切比雪夫函数 $\psi(x)$、中点目标值 $\psi_0(x)$ 与 $K = 5, 20, 50$ 对零点谱重构精确算例"}
 在 100 位工作精度下对整数刻度 $x \in \{2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13\}$ 逐点计算精确阶梯值 $\psi(x) = \ln\operatorname{lcm}(1, \dots, x)$、中点显式公式目标值 $\psi_0(x) = \psi(x) - \frac{1}{2}\Lambda(x)$，以及分别叠加前 $K = 5$、$K = 20$ 与 $K = 50$ 对临界线共轭零点 $\frac{1}{2} \pm i\gamma_k$ 所得的驻波重构值 $\psi_{0, K}(x)$，四舍五入至小数点后六位对照如下（`手工推导` / `NUM`）：
@@ -246,13 +246,13 @@ $$
 
 1. **跃迁中点锁相**：在素数（$x = 2, 3, 5, 7, 11, 13$）与高次素数幂（$x = 4 = 2^2,\; 8 = 2^3,\; 9 = 3^2$）处，零点谐波和并非收敛向台阶上沿 $\psi(x)$，而是按傅里叶级数狄利克雷中点收敛律精准穿过跳变中点 $\psi_0(x) = \psi(x) - \frac{1}{2}\ln p$——例如在 $x = 5$ 处，仅用 $K = 50$ 对零点就给出 $\psi_{0,50}(5) \approx 3.289860$，距精确中点 $\psi_0(5) = \ln 60 - \frac{1}{2}\ln 5 \approx 3.289626$ 误差仅 $2.35\times 10^{-4}$；在 $x = 7$ 与 $x = 13$ 处误差亦分别收敛至 $3.88\times 10^{-3}$ 与 $1.15\times 10^{-2}$！
 2. **非素数幂合数平台消平**：在 $x = 6 = 2\times 3$ 与 $x = 10 = 2\times 5$ 处，冯·芒戈尔特权重 $\Lambda(6) = \Lambda(10) = 0$（因为跨越两根互异素数轴的复合路径不贡献单轴对数新跃迁），故 $\psi(x) = \psi_0(x)$，光滑零点波在此自动异相抵消，压平出 $\ln 60 \approx 4.094345$ 与 $\ln 2520 \approx 7.832014$ 两段水平平台。
-3. **素数阶梯与零点驻波的双向互生**：素数极小圆弧体的无穷复合路径积分凝结出了零点谱，而零点谱驻波反向叠加又将全体素数与素数幂从连续实轴中分毫不差地雕刻出来！
+3. **素数阶梯与零点驻波的双向互生**：素数极小圆弧体的无穷复合路径积分凝结出了零点谱，而零点谱驻波反向叠加又在对全体零点求和（条件收敛）的意义下，将全体素数与素数幂从连续实轴中雕刻出来！
 :::
 
 下面的第四张实验卡将 [@ex-ch34-weil-prime-staircase-reconstruction] 的双向对偶搬上交互舞台，让你亲手滑动零点对截断数 $K$，目睹平滑谐波如何一步步咬合耸立为锐利的素数阶梯：
 
 ::: {.viz src="riemann-prime-arc-path-integral-sandbox" preset="weil-explicit-prime-staircase" height="520"}
-**韦伊显式对偶：临界线零点驻波曲面雕刻切比雪夫素数阶梯实验卡（`weil-explicit-prime-staircase`）。** 推进谱截止频率 $t$ 或调节零点对上限 $K \in [5, 50]$（预设停在 $t = 145 > \gamma_{50}$ 叠满 $50$ 对零点，点按播放可从 $t = 0$ 重演逐层生长；琥珀色标出最前排当前重构剖面 $K(t)$ 与可拖动读数点手柄 $x^*$）：后缘主项斜坡逐行累加驻波谐波 $-2\operatorname{Re}(x^{\rho_k}/\rho_k)$ 铺成紫色三维部分和曲面，最前排琥珀色剖面在 $x = 6, 10, 12$ 等合数处异相抵消压平，而在 $x = 2, 3, 4, 5, 7, 8, 9, 11, 13$ 处陡升紧贴青色精确中点阶梯 $\psi_0(x)$，前方地面上品红色零点驻波残差同步逼近青色锯齿，条带小图逐整数对比青色精确阶跃 $\Lambda(n)$ 与紫色重建升高（绿色 `LEAN ✓` 在 $y = \ln x^*$ 处实时核对 `actual_integrated_explicit_formula`）。
+**韦伊显式对偶：临界线零点驻波曲面雕刻切比雪夫素数阶梯实验卡（`weil-explicit-prime-staircase`）。** 推进谱截止频率 $t$ 或调节零点对上限 $K \in [5, 50]$（预设停在 $t = 145 > \gamma_{50}$ 叠满 $50$ 对零点，点按播放可从 $t = 0$ 重演逐层生长；琥珀色标出最前排当前重构剖面 $K(t)$ 与可拖动读数点手柄 $x^*$）：后缘主项斜坡逐行累加驻波谐波 $-2\operatorname{Re}(x^{\rho_k}/\rho_k)$ 铺成紫色三维部分和曲面，最前排琥珀色剖面在 $x = 6, 10, 12$ 等合数处异相抵消压平，而在 $x = 2, 3, 4, 5, 7, 8, 9, 11, 13$ 处陡升紧贴青色精确中点阶梯 $\psi_0(x)$，前方地面上品红色零点驻波残差同步逼近青色锯齿，条带小图逐整数对比青色精确阶跃 $\Lambda(n)$ 与紫色重建升高（依据框中的绿色 `LEAN ✓` 对应 `actual_integrated_explicit_formula`，那是对全体零点求和、以 $\frac{1}{\rho(1-\rho)}$ 为核的积分形式；图中画的是至多 $50$ 对零点的点态公式，属文献结果的数值演示）。
 :::
 
 ## 34.28.4 文献脉络与认识论边界审计，及向 §34.29 算术枢轴隧穿的交棒 {#sec-ch34-28-4}
@@ -274,5 +274,5 @@ $$
 与此同时，这座沙盘也把整部数论最惊心动魄的悬念摆到了我们面前：既然在右侧 $\sigma > 1$ 的欧拉乘积安全区里，每一枚素数极小圆弧体 $\Delta\mathcal{T}_p$ 原本完全乘性解耦、严格无零点且具备天然正定性，为什么过去一百多年的传统解析数论一旦试图把这份正定性推过 $s = 1$ 发散极点山峰去猎杀假想的离线四元组 $\frac{1}{2} \pm \delta \pm i\gamma_0$，就会在按自然数大小 $n = 1, 2, \dots, M$ 排队截断时迎头撞上**算术一维排序壁垒**与**图兰（Turán）芝诺假零点陷阱**，甚至连最强的单级磨光器也卡在 $\vartheta = \frac{4}{7}$ 衰减墙前？把 [§34.26](ch34-s26-chord-tunneling-and-pivot-renormalization.md#sec-ch34-chord-tunneling-and-pivot-renormalization) 破除排序壁垒的**局部波前稀疏舒尔枢轴重整**与 [§34.27](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit) 潜入 $90^\circ$ 盲区的**内割弦多级共振隧穿**双剑合璧——请翻开下一节 [§34.29](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)！
 
 ::: {.viz src="riemann-prime-arc-path-integral-sandbox" height="640"}
-**黎曼路径积分与素数极小圆弧体临界线相消完整交互实验室（`riemann-prime-arc-path-integral-sandbox`）。** 在统一暗色三栏实验台中自由切换全部四张递进实验卡——“欧拉局域绕行、复合路径螺旋与莫比乌斯外积对偶”、“临界线 $\sigma = \frac{1}{2}$ 半密度双壳锁相与零点归零”、“偏离临界线正逆双壳失衡分裂”以及“韦伊显式对偶：零点驻波曲面雕刻素数阶梯”——实时联动实部滑块 $\sigma \in [0.20, 2.00]$、路径数 $N \in [20, 400]$、前五颗真实黎曼零点胶囊 $\gamma_1\text{–}\gamma_5$、莫比乌斯外积对偶开关与显式公式零点对数 $K \in [5, 50]$（紫色绘制自然数复合路径链 $\sum n^{-s}$、欧拉部分乘积、零点驻波部分和曲面与 `ARGUED` 文献依据，青色绘制地面正向壳环 $p^{-\sigma}$ 与精确切比雪夫阶梯 $\psi_0(x)$ 及 $\Lambda(n)$ 阶跃，品红色标示逆向对偶壳环 $p^{-(1-\sigma)}$、莫比乌斯外积链 $\sum\mu(n)n^{-s}$ 与零点驻波残差，琥珀色标出延拓竖轴与落点珠 $\zeta(s)$、当前零点胶囊 $\gamma_k$、最前排重构剖面 $K(t)$ 及交互手柄，红色专用于标示 [@conj-riemann-hypothesis] 的 `OPEN` 开放边界，绿色 `LEAN ✓` 实时核验 [@thm-ch34-riemann-prime-arc-bridge] 的全部七项 `trureturing` 内核定理实例）。
+**黎曼路径积分与素数极小圆弧体临界线相消完整交互实验室（`riemann-prime-arc-path-integral-sandbox`）。** 在统一暗色三栏实验台中自由切换全部四张递进实验卡——“欧拉局域绕行、复合路径螺旋与莫比乌斯外积对偶”、“临界线 $\sigma = \frac{1}{2}$ 半密度双壳锁相与零点归零”、“偏离临界线正逆双壳失衡分裂”以及“韦伊显式对偶：零点驻波曲面雕刻素数阶梯”——实时联动实部滑块 $\sigma \in [0.20, 2.00]$、路径数 $N \in [20, 400]$、前五颗真实黎曼零点胶囊 $\gamma_1\text{–}\gamma_5$、莫比乌斯外积对偶开关与显式公式零点对数 $K \in [5, 50]$（紫色绘制自然数复合路径链 $\sum n^{-s}$、欧拉部分乘积、零点驻波部分和曲面与 `ARGUED` 文献依据，青色绘制地面正向壳环 $p^{-\sigma}$ 与精确切比雪夫阶梯 $\psi_0(x)$ 及 $\Lambda(n)$ 阶跃，品红色标示逆向对偶壳环 $p^{-(1-\sigma)}$、莫比乌斯外积链 $\sum\mu(n)n^{-s}$ 与零点驻波残差，琥珀色标出延拓竖轴与落点珠 $\zeta(s)$、当前零点胶囊 $\gamma_k$、最前排重构剖面 $K(t)$ 及交互手柄，红色专用于标示 [@conj-riemann-hypothesis] 的 `OPEN` 开放边界，绿色 `LEAN ✓` 标出 [@thm-ch34-riemann-prime-arc-bridge] 的全部七项 `trureturing` 内核定理，页面读数是浏览器中的数值计算，不是内核验证）。
 :::
