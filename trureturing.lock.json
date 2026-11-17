@@ -5837,6 +5837,14 @@
       "line": 143,
       "signature": "theorem golden_right_half_strip_implies_rh (hRight : forall rho : Complex, riemannZeta rho = 0 -> (1 : Real) / 2 < rho.re -> rho.re < 1 -> False) : RiemannHypothesis"
     },
+    "D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower.norm_zeta_product_ge_one": {
+      "module": "D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower",
+      "name": "norm_zeta_product_ge_one",
+      "kind": "theorem",
+      "statement_id": "sha256:86f1566bd7adbda77779dd9500ccb3eabba9eb8462e5e7d77ee7c3227d8197ad",
+      "line": 132,
+      "signature": "lemma norm_zeta_product_ge_one {x : ℝ} (hx : 0 < x) (y : ℝ) : ‖ζ (1 + x) ^ 3 * ζ (1 + x + I * y) ^ 4 * ζ (1 + x + 2 * I * y)‖ ≥ 1"
+    },
     "D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_eq_zero_iff": {
       "module": "D5/S3/Weil/ZetaRvm/CountByIntegral",
       "name": "Zeta23.RvM.completedRiemannZeta_eq_zero_iff",
