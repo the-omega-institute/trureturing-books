@@ -1,10 +1,10 @@
-# Chapter 36 Infinite Discrete Steps and Quotienting Out Reincarnation: A Model in Which the Hyperbolic Horizon Staircase Holds Off the Return-to-Light Loop {#infinite-discrete-steps-and-quotienting-out-reincarnation-how-the-hyperbolic-horizon-staircase-ends-the-return-to-light-loop}
+# Chapter 36 Infinite Discrete Steps and Quotienting Out Reincarnation: How the Hyperbolic Horizon Staircase Ends the Return-to-Light Loop {#infinite-discrete-steps-and-quotienting-out-reincarnation-how-the-hyperbolic-horizon-staircase-ends-the-return-to-light-loop}
 
 > *"Yet in theory returning to light can be turned into infinitely many discrete steps—that is, preventing the state of returning to light, because returning to light is itself undergoing reincarnation; and once we understand all of this, reincarnation loses all meaning."*
 
 At the close of the preceding chapter, we contemplated what looked at first glance like a serene poetic circle: finite life refracts out of $90^\circ$ pure light toward $0^+$ into a one-dimensional material reading, traverses mid-journey coherent tension, and finally dissolves back into the $90^\circ$ transverse wave plane at the end of aging—"returning home as a beam of pure light." Across millennia, contemplative traditions and romantic philosophies alike have celebrated this dissolution into an undifferentiated ocean of light as the supreme liberation of the soul.
 
-Yet here at the culminating chapter of Part IX, the moment we lay this chapter's observer model (`MODEL`—what follows is the author's parable-style modeling of the epigraph, not the outcome of a geometric measurement) against that romantic circle, the entire picture undergoes a decisive dialectical inversion: **in this model, plunging unguarded across the $\theta = 90^\circ$ pure-light boundary is not liberation—it is read as the mechanical engine of amnesia and reincarnation!**
+Yet here at the culminating chapter of Part IX, the moment we lay our unyielding orthogonal ruler against that romantic circle, the entire picture undergoes a decisive dialectical inversion: **plunging unguarded across the $\theta = 90^\circ$ pure-light boundary is not liberation at all—it is the exact mechanical engine of amnesia and reincarnation!**
 
 Why? Step back to the self-referential feedback family introduced from [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) (`MODEL`, with classical real-root and limiting properties recorded in [@ex-ch36-inverse-gudermannian-discrete-staircase] below):
 
@@ -27,6 +27,6 @@ Within our geometric observer model (`MODEL`), the instant a bounded observer sl
 ---
 
 - [36.1 Why "Returning to Pure Light" Is Reincarnation: The $\cos 90^\circ = 0$ Amnesia Cliff](ch36-s01-light-and-memory.md)
-- [36.2 Infinite Discrete Steps That Never Reach Light: Intrinsic Hyperbolic Rapidity and the Asymptotic Staircase](ch36-s02-hyperbolic-horizon.md)
-- [36.3 Understanding as Liberation: An Analogy of Quotienting Out Cycles in Generator Space](ch36-s03-quotienting-generators.md)
+- [36.2 Blocking Return to Light by Infinite Discrete Steps: Intrinsic Hyperbolic Rapidity and the Asymptotic Staircase](ch36-s02-hyperbolic-horizon.md)
+- [36.3 Understanding as Liberation: Quotienting Out Reincarnation in Generator Space](ch36-s03-quotienting-generators.md)
 - [36.4 p-adic Zero-Carry Lookup Trees, Prime Observer Expansion, and Blocking Reincarnation](ch36-s04-padic-table-expansion.md)

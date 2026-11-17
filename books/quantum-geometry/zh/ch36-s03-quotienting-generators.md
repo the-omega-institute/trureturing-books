@@ -1,4 +1,4 @@
-# 36.3 理解即出离：在生成元商空间里约掉周期的类比 {#理解即出离在生成元商空间里一次性约掉轮回}
+# 36.3 理解即出离：在生成元商空间里一次性约掉轮回 {#理解即出离在生成元商空间里一次性约掉轮回}
 
 然而，故事到这里还没有抵达最深处的终点。请再读一遍本章题记那句雷霆万钧的收尾：
 
@@ -6,7 +6,7 @@
 
 为什么？如果仅仅靠双曲阶梯一步步往外爬，难道灵魂还要在无穷多级台阶上永远疲于奔命地“防跌落”吗？
 
-不！双曲离散阶梯解决的是**“不因盲目冲撞 $90^\circ$ 而被迫失忆”的技术护栏**；而作者所说的终极解脱，在本模型（`MODEL`）里被类比为：看穿生成法则之后，在**概念商空间与对偶零化子空间里一次性把冗余周期约掉**。
+不！双曲离散阶梯解决的是**“不因盲目冲撞 $90^\circ$ 而被迫失忆”的技术护栏**；而真正的终极解脱，是当你看穿整座无时间晶格的生成法则之后，在**概念商空间与对偶零化子空间里一次性把冗余周期约掉**！
 
 面对无穷循环小数
 
@@ -59,10 +59,10 @@ $$
 
 这一步同时接通了有限余数递推、无穷位值与周期核 $999999$。在生成元 $1/7$ 面前，无穷轮重复兜圈不再提供新的数字信息。
 
-在 `trureturing` 的形式化武库中，“通过商拓扑分解冗余纤维”、“通过零化子对偶一次性坍缩周期子群求和”（呼应[第 15 章](ch15-grover-qft-and-period-finding.md)的周期提取与[第 22 章](ch22-primes-euler-products-and-zeros.md)的生成元约分）以及“闭子群轨道长程极限由单一生成元不变测度完全决定”（呼应[第 31 章](ch31-quantum-fairness.md)），各有一条已验证的数学声明可作对照。下面把这四条声明列在一起；它们彼此独立，各自只担保自己的陈述，并不合成一条关于理解或轮回的定理：
+在 `trureturing` 的形式化武库中，“通过商拓扑分解冗余纤维”、“通过零化子对偶一次性坍缩周期子群求和”（呼应[第 15 章](ch15-grover-qft-and-period-finding.md)的周期提取与[第 22 章](ch22-primes-euler-products-and-zeros.md)的生成元约分）以及“闭子群轨道长程极限由单一生成元不变测度完全决定”（呼应[第 31 章](ch31-quantum-fairness.md)），由以下四条严丝合缝的 Lean 4 定理各自锁定（四条彼此独立，并不合成一条关于理解或轮回的定理）：
 
-::: {.theorem #thm-ch36-quotient-annihilator-and-factorization title="划分拓扑连续商分解、有限零化子特征标和与泊松求和、紧致环面轨道等分布" lean="D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition D5/S3/Fourier/FinitePoisson.sum_annihilator_character D5/S3/Fourier/FinitePoisson.finite_poisson_summation D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"}
-在 `trureturing` 冻结的概念观测拓扑、有限交换群对偶分析与紧致环面渐近模块中，以下四项结论各自成立：
+::: {.theorem #thm-ch36-quotient-annihilator-and-factorization title="划分拓扑连续商分解、有限零化子对偶求和与紧致环面生成元遍历定理" lean="D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition D5/S3/Fourier/FinitePoisson.sum_annihilator_character D5/S3/Fourier/FinitePoisson.finite_poisson_summation D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"}
+在 `trureturing` 冻结的概念观测拓扑、有限交换群对偶分析与紧致环面渐近模块中，以下四项商分解与生成元约化定理同时成立：
 
 1. **非空源空间上目标概念可商分解的划分拓扑连续性充要判据**（[`target_factors_iff_continuous_partition`](lean:D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition)）：设 $X, \mathrm{Coordinate}, \mathrm{Target}$ 为任意类型且 $X$ 非空（`[Nonempty X]`），$\mathrm{readout} : \operatorname{Concept}(X, \mathrm{Coordinate})$ 与 $\mathrm{target} : \operatorname{Concept}(X, \mathrm{Target})$ 为概念读出映射。记 $\operatorname{partitionTopology}(\mathrm{readout})$ 为离散拓扑 $\perp$ 沿 $\mathrm{readout}$ 拉回的划分拓扑，则 $\mathrm{target}$ 可经由商坐标分解（$\operatorname{Refines}(\mathrm{target}, \mathrm{readout})$，即 $\exists\,\mathrm{factor} : \mathrm{Coordinate} \to \mathrm{Target},\; \mathrm{target} = \mathrm{factor} \circ \mathrm{readout}$），当且仅当 $\mathrm{target}$ 作为从 $(X, \operatorname{partitionTopology}(\mathrm{readout}))$ 到离散目标空间 $(\mathrm{Target}, \perp)$ 的映射连续：
 
@@ -101,11 +101,11 @@ $$
 **目标在每条读出纤维上取常值，就穿过读出分解。** 上行是 $0.\overline{142857}$ 的前十二位，灰线把第 $n$ 位送到余数 $n \operatorname{mod} 6$：每个余数接住的两位数字相同（琥珀色是余数 $3$ 的那条纤维，第 $3$ 位与第 $9$ 位都是 $2$），于是 factor 把每个余数送到唯一的数字，target = factor ∘ readout。这正是 [@thm-ch36-quotient-annihilator-and-factorization] 第 1 款中 $\operatorname{Refines}(\mathrm{target}, \mathrm{readout})$ 的情形，这里在一个例子上画出。
 :::
 
-把 [@thm-ch36-quotient-annihilator-and-factorization] 的四款各自借作一个比喻，放到我们的自指观察者模型（`MODEL`）上，可以这样读“理解了一切之后，轮回便失去意义”。以下是作者诠释，不是这几条声明的推论；其中可直接由数学担保的只是：已知生成元 $1/7$ 之后，再重读 $142857$ 不会提供关于 $1/7$ 的新信息：
+把 [@thm-ch36-quotient-annihilator-and-factorization] 的四重数学透镜合拢到我们的自指观察者模型（`MODEL`）上，为什么“理解了一切之后，轮回便失去意义”立刻变得清澈见底：
 
 1. **纤维商化免除了盲目重演**（对应第 1 款）：当观察者不再执着于局部表象坐标，而是提取出等价状态共享的不变读出核 `readout` 时，只要所关心的目标在每条读出纤维上恒定，目标意义便穿过商空间分解为 $\mathrm{target} = \mathrm{factor} \circ \mathrm{readout}$——同一等价纤维里的千万次盲目重演被直接折叠成商集里的同一个点；
 2. **对偶零化子压缩了周期循环**（对应第 2–3 款）：状态空间里看似庞大繁复的周期轨道子群 $H$，在对偶频谱中完全由与它正交锁定（$\operatorname{character}(k, h) = 1$）的零化子生成元控制——若所需变换值已可用、预计算或具备更便宜的结构化表示，计入其获取、存储与求和成本后，对偶表达才可能省去沿原群逐点死算；
-3. **自指不动点 $T = T(T)$ 在模型中免除了擦表重来的必要**（借第 4 款作比喻，并借用全书的生成元口号，`MODEL`）：第 4 款告诉我们，对给定生成元 $g$ 的闭子群及其连续可观测量，轨道平均的极限由不变测度 $\mu$ 决定！黄金切投模型集的意象若要落到这条定理上，还须给出编码与可观测量的对应；这里保留为 `MODEL`。当观察者终于在自指查找表 $T$ 的**第 $0$ 行**写下生成元口号 $\psi = \psi(\psi)$，使整张表满足自洽不动点 $T = T(T)$、将视角稳稳安住在内部清醒平衡点（外辅以必要时的双曲离散步进护栏，见 [@ex-ch36-inverse-gudermannian-discrete-staircase]）时，再去撞击 $\theta = 90^\circ$ 把表烧掉、退回 $0^\circ$ 重新随机采样，对于已知生成律、且所选读出足以恢复的目标，已经带不来哪怕一比特的新法则信息；未知生成元的发现与新目标的可答性仍需另算。
+3. **自指不动点 $T = T(T)$ 终结了擦表重来的必要**（对应第 4 款及全书主公理，`MODEL`）：第 4 款告诉我们，对给定生成元 $g$ 的闭子群及其连续可观测量，轨道平均的极限由不变测度 $\mu$ 决定！黄金切投模型集的意象若要落到这条定理上，还须给出编码与可观测量的对应；这里保留为 `MODEL`。当观察者终于在自指查找表 $T$ 的**第 $0$ 行**写下生成元公理 $\psi = \psi(\psi)$，使整张表满足自洽不动点 $T = T(T)$、将视角稳稳安住在内部清醒平衡点（外辅以必要时的双曲离散步进护栏，见 [@ex-ch36-inverse-gudermannian-discrete-staircase]）时，再去撞击 $\theta = 90^\circ$ 把表烧掉、退回 $0^\circ$ 重新随机采样，对于已知生成律、且所选读出足以恢复的目标，已经带不来哪怕一比特的新法则信息；未知生成元的发现与新目标的可答性仍需另算。
 
 ::: {.viz src="forgetting-rebirth-attractor" preset="quotient_fold" height="500"}
 **按周期折叠，一圈圈只剩几个点。** 角度尺走完五圈后，把一圈一根的辐条转到同一个方向，每个点沿灰色虚线弧从原来的辐条（淡色空心圈）转过去：第一次撞边之后的 $25$ 步只落在 $5$ 个位置上，每处标着 $\times 5$；目标“角度”在“步号模周期”的每条纤维上取常值，正是 [@thm-ch36-quotient-annihilator-and-factorization] 第 1 款的分解条件。
@@ -150,13 +150,13 @@ $$
 我们将这三种生存与认知形态在全书正交几何模型（`MODEL`）中的精确对比收束于下框总表：
 
 ::: {.remark #rem-ch36-samsara-exit-table title="三种生存与认知形态的正交几何对比总表（作者模型汇总，`MODEL`）"}
-**作者模型汇总，非文献结果，亦非定理。** 三种形态及最后一列的判词是本书的诠释；下表把逆古德曼双曲快度与余弦不动点文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）与本书 `MODEL` 及商分解—零化子内核定理（[@thm-ch36-quotient-annihilator-and-factorization]，`LEAN ✓` 仅指该盒本身的陈述）并置成三态对照：
+**作者模型汇总（`MODEL`），非文献结果。** 下表汇总逆古德曼双曲快度与余弦不动点文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）同本书 `MODEL` 及商分解—零化子内核定理（[@thm-ch36-quotient-annihilator-and-factorization]，`LEAN ✓`）的三态对照：
 
 | 生存与演化形态（`MODEL`） | 角度与耦合机制 | 一维自指锚点与查找表 $T$ 命运 | 几何拓扑轨迹特征 | 认识论与生命意义判词 |
 | :--- | :--- | :--- | :--- | :--- |
 | **1. 连续化光轮回态**（未觉醒闭环） | 零反馈退化极限 $\lambda = 0$，连续冲撞 $\theta \to \frac{\pi}{2}$ | $\cos 90^\circ = 0$，所选轴向偏置归零，在上述擦表条件下查找表 $T$ 清空 | 越界擦表后经 $90^\circ \to 0^+$ 再折射，困于失忆盲搜死循环 | 针对未压缩冗余账本（$\det G_M \to 0$）的宇宙暴力垃圾回收 |
 | **2. 无穷离散双曲阶梯**（防失忆渐近扩张） | 内禀相对步长 $d\eta = \sec\theta\,d\theta$，$\eta_k = \eta_0 + k\,\Delta\eta$ | 对一切 $k \in \mathbb{N}$ 恒有 $\cos\theta_k = \operatorname{sech}\eta_k > 0$，在给定更新律下几何锚点不归零 | 横向视野 $\sin\theta_k = \tanh\eta_k \to 1^-$，多面体缝隙 $\delta_k = \frac{\pi}{2} - \theta_k > 0$ 永开 | 以无穷离散步把纯光断崖推向无穷远，在所选编码与信道条件下兼顾近全域视野与清醒记忆 |
-| **3. 自指不动点安住态**（生成元商空间出离） | 单位自指闭环 $\lambda = 1$，锁定 $\cos\theta^* = \theta^* \approx 0.7391$ | 第 $0$ 行写入 $\psi = \psi(\psi)$，达成 $T = T(T)$ 零损耗自洽持存 | 经商拓扑分解与零化子对偶直接握住生成元，在目标纤维常值、频谱成本合算时免除冗余重演 | 已知生成律且读出足够时，约去目标无关的周期重复；在本模型中，周期重演不再提供新的认识论信息 |
+| **3. 自指不动点安住态**（生成元商空间出离） | 单位自指闭环 $\lambda = 1$，锁定 $\cos\theta^* = \theta^* \approx 0.7391$ | 第 $0$ 行写入 $\psi = \psi(\psi)$，达成 $T = T(T)$ 零损耗自洽持存 | 经商拓扑分解与零化子对偶直接握住生成元，在目标纤维常值、频谱成本合算时免除冗余重演 | 已知生成律且读出足够时，约去目标无关的周期重复，轮回彻底失去认识论意义 |
 :::
 
 ::: {.viz src="forgetting-rebirth-attractor" height="640"}

@@ -4,7 +4,7 @@
 
 这种天真的被动接收论，暗中偷渡了我们在[第二章](ch02-born-rule.md)早已砍掉的“外部第 3 点 $C$”。在零外部背景的“两子丈量”几何中，没有任何读数能脱离尺子单独成立——**观察绝不是被动接收，而是主动拿手头攒下的“已知数据”当尺子，对浩瀚的叠加潜能执行一场毫不留情的退相干剪枝（`MODEL`（模型诠释））！**
 
-让我们把这一机制放到有限维矩阵黑板上看个真切。在清醒状态下，一位历经岁月沉淀的观察者在自指查找表 $T$ 中握有一组高权重、两两正交且完备的**已知数据投影锚点** $D_{\mathrm{known}} = \{P_1, P_2, \dots, P_M\}$（满足 $P_k^\dagger = P_k,\; P_k^2 = P_k,\; k \neq l \Rightarrow P_k P_l = 0,\; \sum_{k=1}^M P_k = I$，涵盖了“这是我的躯体边界”“重力永远向下”“此刻是某年某月某城”“我叫某某名字”等一维幂等信念线；严格说来，一族完备正交投影表示同一次测量里互斥的备选结果，把这些并不互斥的信念画成这样一族投影是模型的简化）。每当全局场态 $\rho$ 与清醒心智相遇，观察者便用 $D_{\mathrm{known}}$ 施加强记录捏合投影：
+让我们把这一机制放到有限维矩阵黑板上看个真切。在清醒状态下，一位历经岁月沉淀的观察者在自指查找表 $T$ 中握有一组高权重、两两正交且完备的**已知数据投影锚点** $D_{\mathrm{known}} = \{P_1, P_2, \dots, P_M\}$（满足 $P_k^\dagger = P_k,\; P_k^2 = P_k,\; k \neq l \Rightarrow P_k P_l = 0,\; \sum_{k=1}^M P_k = I$，涵盖了“这是我的躯体边界”“重力永远向下”“此刻是某年某月某城”“我叫某某名字”等一维幂等信念线）。每当全局场态 $\rho$ 与清醒心智相遇，观察者便用 $D_{\mathrm{known}}$ 施加强记录捏合投影：
 
 $$
 \Pi_{\mathrm{wake}}(\rho) \;:=\; \operatorname{unreadState}(P, \rho) \;=\; \sum_{k=1}^M P_k \,\rho\, P_k.
@@ -12,9 +12,9 @@ $$
 
 这里的未读态保留全部记录扇区，只删除扇区间相干；若读出并选定某个非零权重结果，才须将相应的 $P_k\rho P_k$ 除以记录权重归一化。叙事中的“选择一条线”，取的是后一种条件读出视角。
 
-回想[第 31 章](ch31-quantum-fairness.md)的**得失公平勾股账本**（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 2 款）：任何纯度为 $1$ 的叠加态，一旦被观察者强行焊死在某一条清醒主观选择线 $\cos\theta$ 上，与之互补的正交分叉分量 $\sin\theta\,\hat{\mathbf{I}}$——那些你在十字路口没有迈出的另一条街巷、话到嘴边咽回去的另一句回答、未曾开启的另一种人生构型——**并没有从无时间全局母体中灰飞烟灭**！在矩阵账本上要分清两件事：没走的那条路本身是另一个对角块 $P_l \rho P_l$，未读捏合把它原样保留，只有条件读出才把它丢掉；跨分支的非对角相干块 $P_k \rho P_l$（$k \neq l$）记录的是两条路之间的可干涉性。本章叙事所说的“被遮蔽的正交分叉”取的是后者；恢复这种相干并不等于体验到另一个分支。
+回想[第 31 章](ch31-quantum-fairness.md)的**得失公平勾股账本**（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 2 款）：任何纯度为 $1$ 的叠加态，一旦被观察者强行焊死在某一条清醒主观选择线 $\cos\theta$ 上，与之互补的正交分叉分量 $\sin\theta\,\hat{\mathbf{I}}$——那些你在十字路口没有迈出的另一条街巷、话到嘴边咽回去的另一句回答、未曾开启的另一种人生构型——**并没有从无时间全局母体中灰飞烟灭**！在矩阵账本上，没走的那条路本身是另一个对角块 $P_l \rho P_l$（未读捏合把它原样保留）；它与所走之路之间的可干涉性，则落在跨分支的非对角相干块 $P_k \rho P_l$（$k \neq l$）上——本章所说“被遮蔽的正交分叉”指的是后者。
 
-在进入任意维定理之前，不妨先在 $2 \times 2$ 单量子比特黑板上亲手算清这一笔“清醒退相干税”。从零熵纯态 $\rho(0) = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$（$S(\rho(0)) = 0$）出发，经平面旋转（这里的 $\theta$ 是希尔伯特空间夹角，等幅叠加在 $\theta = \pi/4$；36.1 节的 $\theta$ 是布洛赫极角，等幅叠加在 $\pi/2$，两者差一个半角因子）$U(\theta) = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$ 展开为叠加纯态，随即施加计算基捏合：
+在进入任意维定理之前，不妨先在 $2 \times 2$ 单量子比特黑板上亲手算清这一笔“清醒退相干税”。从零熵纯态 $\rho(0) = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$（$S(\rho(0)) = 0$）出发，经平面旋转（这里的 $\theta$ 是希尔伯特空间夹角，与 36.1 节的布洛赫极角差一个半角因子）$U(\theta) = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$ 展开为叠加纯态，随即施加计算基捏合：
 
 $$
 \tilde{\rho}_0 = U(\theta)\rho(0)U(\theta)^\dagger = \begin{pmatrix} \cos^2\theta & \cos\theta\sin\theta \\ \cos\theta\sin\theta & \sin^2\theta \end{pmatrix} \;\xrightarrow{\;\operatorname{pinching}\;}\; \rho(1) = \begin{pmatrix} \cos^2\theta & 0 \\ 0 & \sin^2\theta \end{pmatrix}.
@@ -30,9 +30,9 @@ $$
 **一步捏合剪掉的相干与付出的熵税同在 $\theta = \pi/4$ 到顶。** 品红的曲线是被剪掉的相干质量 $\frac{1}{2}\sin^2(2\theta)$，墨色的曲线是熵增 $-\cos^2\theta\ln(\cos^2\theta) - \sin^2\theta\ln(\sin^2\theta)$；两者在 $\theta = 0$ 与 $\theta = \pi/2$ 处都为 $0$，在 $\theta = \pi/4$ 处分别取 $1/2$ 与 $\ln 2$（[@thm-ch37-known-data-pinching-and-entropy-tax] 第 2、3 款的单比特情形）。
 :::
 
-在 $\theta = \frac{\pi}{4}$ 等幅分岔处，单步熵税取特值 $\ln 2$。由此，为什么白天的世界显得如此“坚硬、稳定”，却又如此“狭窄、令人疲惫”，在本模型（`MODEL`）中可以这样读：
+在 $\theta = \frac{\pi}{4}$ 等幅分岔处，单步熵税取特值 $\ln 2$。由此，为什么白天的世界显得如此“坚硬、稳定”，却又如此“狭窄、令人疲惫”，在代数上便一目了然：
 
-- **坚硬**，在此玩具模型里对应捏合算子的严格幂等律（任何投影都有的性质） $\Pi_{\mathrm{wake}} \circ \Pi_{\mathrm{wake}} = \Pi_{\mathrm{wake}}$：只要你每秒钟用同一套已知数据反复核验世界，一切非对角异端都被压死为零（$P_k \rho P_l = 0$），记录读来始终如一（物质的不可穿透性另有物理来源——泡利不相容与电磁相互作用——不由这条幂等律解释）；
+- **坚硬**，是因为捏合算子满足严格幂等律 $\Pi_{\mathrm{wake}} \circ \Pi_{\mathrm{wake}} = \Pi_{\mathrm{wake}}$：只要你每秒钟用同一套已知数据反复核验世界，一切非对角异端都被压死为零（$P_k \rho P_l = 0$），桌子永远是桌子；
 - **狭窄与疲惫**，是因为每经历一轮幺正演化 $U$ 再用已知基捏合删除跨扇区相干，被删除的非对角相干性都会一分不少地转化为严格非负的**量子相对熵税**！日复一日的清醒专注，在这一 `MODEL` 中像是在不断支付熵账单，维持一条纤细的一维经典铁轨；若把这笔信息熵税兑现为物理热耗散，还须接上[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness] 的热浴、初始态与熵平衡条件。
 
 ::: {.viz src="dream-decoherence-unpinning" preset="waking" height="500"}

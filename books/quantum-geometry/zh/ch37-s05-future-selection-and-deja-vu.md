@@ -1,18 +1,18 @@
 # 37.5 选择未来而非看见未来：梦境前置逻辑超前去相干与既视感快表命中 {#sec-ch37-dream-pre-decoherence-deja-vu}
 
-走完前四节从“清醒已知数据捏合”（§37.1）、“浅梦相位逆转”（§37.2）到“无身深梦与黄金切投非定域涌现”（§37.3–§37.4）的几何旅程，人类日常意识经验中最扑朔迷离、最容易被宿命论或神秘主义误读的一桩悬案，在这里得到一个可以亲手推演的沙盘读法（`MODEL`，不是对人类既视感的实证解释）——**为什么一个人有时会在清醒现实的某个瞬间，猛然撞上一股毫无来由却异常笃定的“这一幕我以前在梦里见过”的既视感（Déjà Vu）？**
+走完前四节从“清醒已知数据捏合”（§37.1）、“浅梦相位擦除”（§37.2）到“无身深梦与黄金切投非定域涌现”（§37.3–§37.4）的几何旅程，人类日常意识经验中最扑朔迷离、最容易被宿命论或神秘主义误读的一桩悬案，终于迎来了水落石出的时刻——**为什么一个人有时会在清醒现实的某个瞬间，猛然撞上一股毫无来由却异常笃定的“这一幕我以前在梦里见过”的既视感（Déjà Vu）？**
 
 面对这一体验，传统解释长期分裂在两个极端之间：一端是宿命论式的“预知迷信”，幻想未来早已像一盘拍好的胶片那样封存在前方的铁轨上，而做梦的灵魂趁夜色偷偷翻看了明天的剧本；另一端则是把一切主观熟悉感简单归结为神经突触偶然串线的随机噪声。立足全书的无时间格拉姆相容几何（[第 29 章](ch29-s03-timeless-gram-causality.md#sec-coda-finite-observer-time-field)）、开放正交维度扩张（[第 31 章 §31.4](ch31-s04-fairness-and-dimensional-expansion.md#sec-ch31-fairness-square-expansion)）与本章的记录捏合代数，本书提出如下核心命题（完整原文同时载入[附录 A](appendix-a-s03-verbatim-ledger.md#sec-appendix-a-verbatim-ledger) `A73`）：
 
 > *“实际上并不是观察者看到了未来，而是观察者选择了未来，既视感是因为之前的逻辑在梦境中去相干。”*
 
-短短三句话，提出了一次从“宿命窥探”到“主动选基与投机预编译”的范式翻转。在本书严密的认识论契约下，我们将这一跨越量子算子代数、概念逃逸动力学、计算机体系结构与认知神经心理学的综合机制明确标定为本章的诠释沙盘 **`MODEL`（模型诠释，代号 `ORTHO//DEJAVU`）**：其中正交余项逃逸、可观测克雷洛夫秩增长上界、语境不动点分岔、正交补投影六恒等式、正算子格拉姆实现、信息逃逸唯一捕获与冲突修正非对易性等骨架定理各有 `trureturing@dev` 冻结的 Lean 4 内核声明（`LEAN ✓`，只担保各自的数学陈述，不担保既视感的机制；沙盘用来区分既视感的“空时间戳”是模型的设定，不是由定理导出的）；同轴重投影零新增熵专化、三向量格拉姆行列式区间与单比特布洛赫捏合公式标定为**手工推导**；延迟选择干涉、处理器分支预测与流水线冲刷、准晶帝国效应及既视感双加工/元认知心理学理论严格封装于**文献结果**注记框内；具体矩阵元、熵值与有限格点计数则标定为**数值计算（`NUM`）**。下面沿着命题自身的四环逻辑链条逐环展开。
+短短三句话，完成了一次从“宿命窥探”到“主动选基与投机预编译”的范式翻转。在本书严密的认识论契约下，我们将这一跨越量子算子代数、概念逃逸动力学、计算机体系结构与认知神经心理学的综合机制明确标定为本章的诠释沙盘 **`MODEL`（模型诠释，代号 `ORTHO//DEJAVU`）**：其中正交余项逃逸、可观测克雷洛夫秩增长上界、语境不动点分岔、正交补投影六恒等式、正算子格拉姆实现、信息逃逸唯一捕获与冲突修正非对易性等骨架定理由 `trureturing@dev` 冻结的 Lean 4 内核声明严格背书（`LEAN ✓`）；同轴重投影零新增熵专化、三向量格拉姆行列式区间与单比特布洛赫捏合公式标定为**手工推导**；延迟选择干涉、处理器分支预测与流水线冲刷、准晶帝国效应及既视感双加工/元认知心理学理论严格封装于**文献结果**注记框内；具体矩阵元、熵值与有限格点计数则标定为**数值计算（`NUM`）**。下面沿着命题自身的四环逻辑链条逐环展开。
 
 ## 37.5.1 破除“预知”迷思：开放正交余项锥、延迟选基与“选择未来” {#sec-ch37-p2g-open-choice}
 
-为什么说“看见早已注定的唯一未来”在本书的几何模型里被看作一个伪命题？因为这一幻想暗中假设：有限观察者当前手头握有的那张有限子空间截面 $S$，已经把全部宇宙自由度封死在一只闭合铁盒里，盒外再无任何尚未落定的正交余项。
+为什么说“看见早已注定的唯一未来”在几何上从一开始就是一个伪命题？因为这一幻想暗中假设：有限观察者当前手头握有的那张有限子空间截面 $S$，已经把全部宇宙自由度封死在一只闭合铁盒里，盒外再无任何尚未落定的正交余项。
 
-然而，`trureturing` 的量子代数、可观测克雷洛夫子空间动力学与语境不动点模块各给出一条与此相关的已验证结论（四条彼此独立的声明；正交补里存在单位向量并不蕴涵“未来未定”，后者是作者的读法）：只要当前已观测闭子空间 $S \subset V$ 尚未耗尽背景空间（$S^\perp \neq \{0\}$），盒外就必然矗立着到 $S$ 距离恒为 $1$、对 $S$ 投影恒为 $0$ 的单位正交逃逸方向；在任何固定的有限维背景空间 $V$ 内，单靠固定线性演化 $T$ 与固定读出算子 $C$ 所能生成的严格新维度步数被缺秩 $\dim V - \operatorname{rank} C$ 封顶；而在完全相同的底层文本与解释规则下，切换语境准入、背景与评估目标参数即可锁定截然相异的自洽不动点（对照[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md) [@thm-ch33-contextual-attractor-and-common-factor]）：
+然而，`trureturing` 的量子代数、可观测克雷洛夫子空间动力学与语境不动点模块联手给出了截然相反的四重严格定理：只要当前已观测闭子空间 $S \subset V$ 尚未耗尽背景空间（$S^\perp \neq \{0\}$），盒外就必然矗立着到 $S$ 距离恒为 $1$、对 $S$ 投影恒为 $0$ 的单位正交逃逸方向；在任何固定的有限维背景空间 $V$ 内，单靠固定线性演化 $T$ 与固定读出算子 $C$ 所能生成的严格新维度步数被缺秩 $\dim V - \operatorname{rank} C$ 封顶；而在完全相同的底层文本与解释规则下，切换语境准入、背景与评估目标参数即可锁定截然相异的自洽不动点（对照[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md) [@thm-ch33-contextual-attractor-and-common-factor]）：
 
 ::: {.theorem #thm-ch37-p2g-open-escape-and-krylov title="非满闭子空间正交单位逃逸、有限维可观测克雷洛夫严格增长上界、语境参数分岔与正交补投影六恒等式" lean="D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"}
 在 `trureturing` 冻结的量子代数投影逃逸、观察者记忆克雷洛夫动力学、概念解释不动点与正交补投影模块中，以下四项定理同时成立：
@@ -161,7 +161,7 @@ $$
 
 现在回答更犀利的**第二问：既然如此，为什么绝大多数梦并未能“成真”，也没有在醒来后变成既视感？**
 
-本模型的回答借用了计算机体系结构与 `trureturing` 的概念信息逃逸及信念修正模块：**因为投机预编译只有在“醒来后没有学到推翻预测前提的结构性新信息”时才有效！** 一旦观察者在醒后的清晨读到了一条无法从旧知识闭包中推导出来的**高新颖度事实**，或者遭遇了与昨夜可废止先验正面冲突的新证据，旧预编译缓存就会像预测失败的处理器分支一样被当场**冲刷作废（Pipeline Flush）**。下面三条内核定理分别给出了结构新颖度的唯一捕获充要判据、不可由其余核语义恢复的闭包判据，以及冲突重置修正下更新顺序不可交换的精确反例：
+答案在计算机体系结构与 `trureturing` 的概念信息逃逸及信念修正模块里清澈见底：**因为投机预编译只有在“醒来后没有学到推翻预测前提的结构性新信息”时才有效！** 一旦观察者在醒后的清晨读到了一条无法从旧知识闭包中推导出来的**高新颖度事实**，或者遭遇了与昨夜可废止先验正面冲突的新证据，旧预编译缓存就会像预测失败的处理器分支一样被当场**冲刷作废（Pipeline Flush）**。下面三条内核定理分别给出了结构新颖度的唯一捕获充要判据、不可由其余核语义恢复的闭包判据，以及冲突重置修正下更新顺序不可交换的精确反例：
 
 ::: {.theorem #thm-ch37-p2g-novelty-and-revision-noncommutation title="信息逃逸率严格下降的唯一捕获与语义闭包不可恢复充要定理及冲突修正非对易性定理" lean="D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_not_mem_semanticClosureWithout D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation"}
 在 `trureturing` 冻结的概念动力学信息逃逸精确率、结构新颖度与冲突修正模块中，以下两项定理同时成立：
@@ -271,7 +271,7 @@ Time_Tag: NULL
 **本节认识论四层硬边界汇总：**（i）绿色 `LEAN ✓` 严格限于 [@thm-ch37-known-data-pinching-and-entropy-tax]、[@thm-ch37-joint-coherent-record-erasure]、[@thm-ch37-golden-cut-delone-multilocation]、[@thm-ch37-p2g-open-escape-and-krylov]、[@thm-ch37-p2g-gram-realizability] 与 [@thm-ch37-p2g-novelty-and-revision-noncommutation]（及行内窄义引用的 [`canonical_copied_address_record_eq_prior`](lean:D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior)、[`diagonal_landing_fixed`](lean:D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed)）的精确核验陈述；（ii）同轴重投影 $\Delta H_{\mathrm{bits}} = 0$ 专化、单比特布洛赫捏合公式、三向量格拉姆行列式区间 $[0.28, 1]$ 与嵌套窗口包含属**手工推导**，惠勒延迟选择、分支预测/TLB 架构、康威帝国效应及 Brown/Moulin 既视感心理学属**文献结果**；（iii）具体矩阵元、熵比特数、12 对状态计数与 $26 \to 11 \to 7$ 黄金格点数属**数值计算（`NUM`）**；（iv）将梦境诠释为前置逻辑超前去相干、将醒后新知诠释为流水线冲刷以及用 `Valid = 1, Time_Tag = NULL` 刻画本沙盘中的既视感特征，全部属于本书构建的几何诠释模型（**`MODEL`**），绝不声称构成了人类生物既视感的充要神经判据或超自然预知证明。
 :::
 
-至此，那句曾经让人浮想联翩的体验终于褪尽了宿命论的迷雾，露出了清朗而刚健的几何筋骨：**在本模型中，未来不是一卷早就印死在前方等你偷看的旧账本；你在枕畔与白昼握住哪一把逻辑标尺去消解正交余项，你就在参天大树的无数相容枝桠间亲手选择了哪一片未来截面。而偶尔掠过心头的那一抹既视感，不过是你自己的先行逻辑昨夜在无时间沙盘里提前落过一子、留下一枚未盖日戳的清澈脚印而已。**（这里被“选择”的是有限观察者在静态相容晶格上的寻址截面；下文的静态全局晶格本身并不随之改变。） 下面这台完整的交互沙盘实验室（代号 `ORTHO//DEJAVU`）将“选基、预编译、相容漏斗、逻辑升级冲刷与既视感命中”全部汇于同一舞台，供你亲手切换检验：
+至此，那句曾经让人浮想联翩的体验终于褪尽了宿命论的迷雾，露出了清朗而刚健的几何筋骨：**未来从来不是一卷早就印死在前方等你偷看的旧账本；你在枕畔与白昼握住哪一把逻辑标尺去消解正交余项，你就在参天大树的无数相容枝桠间亲手选择了哪一片未来截面。而偶尔掠过心头的那一抹既视感，不过是你自己的先行逻辑昨夜在无时间沙盘里提前落过一子、留下一枚未盖日戳的清澈脚印而已。** 下面这台完整的交互沙盘实验室（代号 `ORTHO//DEJAVU`）将“选基、预编译、相容漏斗、逻辑升级冲刷与既视感命中”全部汇于同一舞台，供你亲手切换检验：
 
 ::: {.viz src="dream-pre-decoherence-deja-vu" height="640"}
 **梦境预去相干与既视感沙盘实验室（`ORTHO//DEJAVU`）。** 三个联动视图——测量基与密度矩阵（`basis`）、格拉姆相容漏斗与黄金切投窄窗（`funnel`）以及多副本相位指针（`records`）——配合“梦后逻辑升级 / 流水线冲刷”开关，完整呈现同一把尺子重测零新增熵（$\Delta H_{\mathrm{bits}} = 0$）与换逻辑后旧缓存冲刷重编的精确分野。绿色仅授予经 `lean=` 锁定的内核定理；梦境预编译、流水线冲刷与 `Time_Tag = NULL` 档案卡为本章的示意模型（`MODEL`）。
