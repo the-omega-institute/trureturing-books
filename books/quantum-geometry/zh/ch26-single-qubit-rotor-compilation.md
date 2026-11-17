@@ -419,7 +419,7 @@ self_test()
 
 至此，我们已经亲手建造并运行了第七部的前两章工程构件（`GeometricState` 与 `RotorCompiler`）。
 
-::: {.film src="007-zyz-compile"}
+::: {.film src="zyz-compile"}
 **把一个旋转编译成三段：ZYZ 与夹心作用（2 分 5 秒）。** 绕紫色 $z$ 轴转动时，青色的影子 $\tfrac{1}{2}e_3$ 不动，品红的那一份扫过整角，而旋转器在小圆盘上只走半角；接着琥珀色的箭头依次绕 $z$、$y$、$z$ 转过 $\gamma$、$\beta$、$\alpha$，三枚旋转器乘成一枚四系数的旋转器 $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$，夹住三根基向量即得 ZYZ 矩阵的三列；绕它自己的轴转一次 $67.9^\circ$ 落在同一点（单一转轴属于 [@rem-zyz-euler-compilation-literature] 的文献结果，旋转器编译是数值演示）；随后演示 $T$ 门与阿达玛门，最后在纯态 $\rho = \operatorname{blochMatrix}(1, v)$ 上引用本章四条冻结定理（[@thm-bloch-matrix-trace]、[@lemma-bloch-coordinate-recovery]、[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）。
 :::
 

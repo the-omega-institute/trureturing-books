@@ -1,0 +1,29 @@
+{
+  "title": "One Plane Is Not Enough: Three Axes, One Sphere",
+  "title_zh": "一张面装不下：三根轴与一颗球",
+  "summary": "Third film of the prelude series. The turning disc of the previous film is one plane; a spin can be measured along three directions at right angles, three axes give three planes crossing at right angles, and every arrow of length one ends on the unit sphere. That standard quantum theory places every pure qubit state on this sphere is a literature result, marked ARGUED and not formalized in this book. Each point v = (x, y, z) has a two-by-two readout table B(v) = [[z, x − iy], [x + iy, −z]] (Lean, B_formula_core); the north pole gives Z, the point (1, 0, 0) gives X, and B(v)·B(v) = I is checked by exact arithmetic on screen for v = (2/3, 1/3, 2/3). Two angles address a point: at a fixed tilt of 50° the point walks a latitude of radius sin 50° ≈ 0.77 at height cos 50° ≈ 0.64, and only at 90° is the circle the equator, whose plane passes through the centre (computed on screen). Two quarter turns about x and z taken in opposite orders end 90° apart (computed on screen), and the readout tables feel the order too: Z·X = −(X·Z) (Lean, qubit_weyl_star).",
+  "summary_zh": "序曲系列第三部。上一部的转动圆盘只是一张平面；自旋可以沿三个两两垂直的方向丈量，三根轴给出三张两两成直角相交的平面，每一支长度为 1 的箭头都落在单位球面上。标准量子理论把单量子比特的每个纯态放在这颗球面上，这是文献结果，片中标为论证（ARGUED），未在本书形式化。球面上的每个点 v = (x, y, z) 配一张二乘二读数表 B(v) = [[z, x − iy], [x + iy, −z]]（Lean，B_formula_core）；北极给出 Z，点 (1, 0, 0) 给出 X；B(v)·B(v) = I 在屏幕上以 v = (2/3, 1/3, 2/3) 精确计算。两个角给出地址：倾角固定为 50° 时，点沿半径 sin 50° ≈ 0.77、高度 cos 50° ≈ 0.64 的纬圈运动，只有倾角为 90° 时这一圈才是赤道，其平面经过球心（屏幕上的计算）。绕 x 轴与绕 z 轴各转四分之一圈，按相反顺序做，终点相隔 90°（屏幕上的计算）；读数表也感觉得到顺序：Z·X = −(X·Z)（Lean，qubit_weyl_star）。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-16",
+  "duration": "2:03",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · one turning disc tilted into three axes, three planes and the unit sphere; a latitude, the equator and two orders of quarter turns",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core",
+    "D5/S3/Quantum/FiniteDimensional.qubit_weyl_star"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_prelude-three-axes_720p_narrated.mp4",
+    "cover": "quantum-geometry_prelude-three-axes_cover.jpg"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "title": "The Normal Comes From Outside: A Sphere Beyond the Sphere",
+  "title_zh": "法线从外面来：球外之球",
+  "summary": "Living inside a flat sheet, can you point to the sheet's own up? Every arrow drawn in the sheet is a e₁ + b e₂ and stays in it. Placed in a three-dimensional room, the sheet gets its normal e₃ = ⋆₃(e₁ ∧ e₂) = (0, 0, 1), at right angles to e₁ and e₂: the up comes from outside. For the whole room, ⋆₃I₃ = 1 is a number, not a fourth arrow; one dimension down, a unit circle in a plane becomes the equator of a sphere once one new direction ±e₃ is added, and the radius stays 1 (at height 3/5 the slice has radius 4/5). Standing on one axis, a direction reads the cosine of its angle to it: the poles read 1 and −1, the whole equator reads 0. Six opposite directions mixed equally average to the centre, ρ = ½I; two directions 60° apart mixed half and half give an arrow of length √3/2 ≈ 0.866. These numbers are computed on screen. Lean checks that every positive semidefinite 2 × 2 complex matrix M has ‖bloch M‖ ≤ Re tr M, so a state's arrow is at most 1 long. The echo of Gödel is the book's analogy (argued), with its exact theorems in chapter 21.",
+  "summary_zh": "住在一张平平的薄片里，你能指出薄片自己的“上”吗？薄片里画出的每一支箭头都是 a e₁ + b e₂，都留在薄片之内。把薄片放进三维房间，它有了法线 e₃ = ⋆₃(e₁ ∧ e₂) = (0, 0, 1)，与 e₁、e₂ 都成直角：“上”来自外面。对整间房间，⋆₃I₃ = 1 只是一个数，不是第四根箭头；退一维看，平面里的单位圆添上一个新方向 ±e₃ 后成了球的赤道，半径仍是 1（高度 3/5 处的截圆半径为 4/5）。站在一根轴上，每个方向读出它与这根轴夹角的余弦：两极读出 1 与 −1，整条赤道读出 0。六个相反方向等量混合，平均落回球心，ρ = ½I；相隔 60° 的两个方向各取一半，箭头长度为 √3/2 ≈ 0.866。这些数都在屏幕上算出。Lean 检验：每个 2 × 2 复半正定矩阵 M 都满足 ‖bloch M‖ ≤ Re tr M，因此一个态的箭头长度不超过 1。哥德尔的回声是本书的类比（论证，未经内核检验），严格的定理见第 21 章。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-16",
+  "duration": "2:06",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a magenta sheet seen from inside and from a room, its violet normal, a cyan circle becoming the equator of a wireframe sphere, one axis and its blind ring, six directions averaging to the centre",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_prelude-normal-escape_720p_narrated.mp4",
+    "cover": "quantum-geometry_prelude-normal-escape_cover.jpg"
+  }
+}

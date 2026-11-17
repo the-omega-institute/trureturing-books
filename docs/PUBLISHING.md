@@ -10,7 +10,7 @@
 | PDF 学术预印本版（A4 单栏） | `./tbook build pdf --variant academic`（书中须先启用） | `build/dist/<slug>/<slug>-<version>-<lang>-academic.pdf` |
 | EPUB 3（Apple Books） | `./tbook build epub` | `build/dist/<slug>/<slug>-<version>-<lang>.epub` |
 | 演示文稿 | `./tbook build slides` | `build/slides/<slug>/`（PDF：`<deck>-<lang>.pdf`） |
-| 视频 | `./tbook build films`（`--film <NNN>-<name>` 只渲染这几部） | `build/films/<slug>/<film id>/`（`film.json` 的 `outputs` 所列文件），并重新发布到已有站点的 `_site/<slug>/films/` |
+| 视频 | `./tbook build films`（`--film <name>` 只渲染这几部） | `build/films/<slug>/<name>/`（`film.json` 的 `outputs` 所列文件），并重新发布到已有站点的 `_site/<slug>/films/` |
 | 可视化 | `./tbook build viz` | 重新发布到已有的 `_site/<slug>/viz/`（`viz`、`films` 加 `--book` 只重发选定的书，首页与 manifest 保留其他书） |
 | 站点（含可视化、视频） | `./tbook build site` | `_site/` |
 | 全部 | `./tbook build all` | 以上全部 |
@@ -19,7 +19,7 @@
 
 EPUB 保留原生 MathML。超宽公式与表格在各自容器内横向滚动，保留完整内容和阅读字号；页面本身应随阅读栏宽度重排。EPUBCheck 验证结构，不能代替已知版面问题处的阅读检查；浏览器原生 MathML 的检查也不等于 Apple Books 实测认证。
 
-视频与其他产物一样随站点构建：站点在 `_site/<slug>/films/<film id>/<文件>` 同源托管视频（Content-Type 与按字节范围请求都正确，iOS Safari 需要这两点；Release 附件的地址在那里不能播放），不再为单个视频发 Release；视频计入 GitHub Pages 站点 1 GB 的上限。只构建、托管 `film.json` 的 `outputs` 所列的文件：默认只有 720p 旁白版与封面，50 秒的示例视频共约 6.5 MB（视频 6.1 MB、封面 0.5 MB，另有提交的海报 0.16 MB），约合每分钟 8 MB；同时列出 1080p 旁白版、1080p 与 720p 纯配乐时约 70 MB（每分钟约 84 MB）。渲染视频需要视频工具链（`bash theme/film/setup.sh` 与系统的 ffmpeg）。环境变量 `TBOOK_FILMS` 决定缓存未命中时怎么办：`auto`（默认）有工具链就渲染，没有则警告，站点不含该视频；`require` 无法渲染即构建失败；`skip` 从不渲染。三种情况下缓存命中的视频都照常恢复。
+视频与其他产物一样随站点构建：站点在 `_site/<slug>/films/<name>/<文件>` 同源托管视频（Content-Type 与按字节范围请求都正确，iOS Safari 需要这两点；Release 附件的地址在那里不能播放），不再为单个视频发 Release；视频计入 GitHub Pages 站点 1 GB 的上限。只构建、托管 `film.json` 的 `outputs` 所列的文件：默认只有 720p 旁白版与封面，50 秒的示例视频共约 6.5 MB（视频 6.1 MB、封面 0.5 MB，另有提交的海报 0.16 MB），约合每分钟 8 MB；同时列出 1080p 旁白版、1080p 与 720p 纯配乐时约 70 MB（每分钟约 84 MB）。渲染视频需要视频工具链（`bash theme/film/setup.sh` 与系统的 ffmpeg）。环境变量 `TBOOK_FILMS` 决定缓存未命中时怎么办：`auto`（默认）有工具链就渲染，没有则警告，站点不含该视频；`require` 无法渲染即构建失败；`skip` 从不渲染。三种情况下缓存命中的视频都照常恢复。
 
 学术预印本的官方技术要求与项目版式选择见 [PDF-TYPOGRAPHY.md](PDF-TYPOGRAPHY.md)。
 
@@ -33,7 +33,7 @@ EPUB 保留原生 MathML。超宽公式与表格在各自容器内横向滚动�
 
 EPUB 按 Apple Books 的要求生成：EPUB 3、MathML 数学、PNG 封面、导航目录与 landmarks、`dc:language` 与 `ibooks:version` 元数据、`META-INF/com.apple.ibooks.display-options.xml`；样式不强制页面背景，在白/米/灰/夜间主题下都可读（夜间主题切换为霓虹强调色）。每次构建后由 epubcheck 校验。
 
-上架 Apple Books 需要通过 Apple Books for Authors / iTunes Producer 提交；若需要 ISBN，在 `book.toml` 的 `[book.isbn]` 中按语言填写，它会成为 EPUB 的标识符。
+上架 Apple Books 需要通过 Apple Books for Authors / iTunes Producer 提交；若需要 ISBN，在 `book.toml` 的 `[book.isbn]` 中按语言填写，它会成为 EPUB 的标识符。出版 DOI 写在 `book.toml` 的 `[book].doi`（推荐 Zenodo 概念 DOI）；若省略，构建会从根目录的 `.zenodo.json`、`CITATION.cff` 或 README 中明确的 Zenodo DOI 链接读取。模板不会联网猜测 DOI，也不会把版本 DOI 自动写回源码。
 
 ## 4. 持续集成与发布
 
@@ -44,7 +44,7 @@ EPUB 按 Apple Books 的要求生成：EPUB 3、MathML 数学、PNG 封面、导
 | `release.yml` | tag `<slug>-v<version>`（单本，须等于 `book.toml` 的 version）或 `v*`（全部书，仅下游书库，如 `v2026.11.08`、`v3.0.0`） | 构建整个站点（含视频），创建 GitHub Release，附所选书的 PDF、EPUB 与幻灯片 PDF（`<slug>-<deck>-<lang>.pdf`），以及全站的构建缓存（`cache-*.tar` 与 `build-cache.json`，§5）；Release 先建为草稿，附件全部上传后才发布，已发布的 Release 不再改动附件；只有语义化版本的预发布（`book.toml` 的 `1.0.0-rc.1`，或 tag `v3.0.0-rc.1`）标为 pre-release；以日期开头的版本（`YYYY.MM.DD`、`YYYY-MM-DD` 或 `YYYYMMDD`，月、日补零）无论后面跟什么都是正式发布，如同一天的第二次发布 `v2026.11.08-2`；以 `film-` 开头、不指向任何书的 tag（旧的逐片视频 tag）只给出提示并跳过，不发布任何东西，可以删除；`site.toml` 的 `[books] hide` 隐藏的书不发布：`v*` 不含它们，指向它们的 `<slug>-v*` 失败并说明原因 |
 | `lean-verify.yml` | 每周、手动、可被 Release 调用 | Lake 工程深度验证被引用定理的公理闭包 |
 | `trureturing-bump.yml` | 每周、手动 | 把所钉的 trureturing 提交升级到最新并开 PR；标题前缀 `[refused]`（目标提交不在 `site.toml` 的分支上或无法核实）、`[unresolved]`（有引用无法解析）、`[pin failed]`、`[check fails]`、`[review statements]` 提示需要处理的情况；前三种 PR 不改锁文件，与 `[check fails]` 一样以草稿开出 |
-| `template-sync.yml` | 每周、手动（仅下游） | 升级到模板新版本并开 PR（有冲突时标题以 `[conflicts]` 开头，`.template-new` 文件一并提交） |
+| `template-sync.yml` | 每周、手动（仅下游） | 升级到模板新版本并开 PR（标题使用 `chore(template): …`，冲突时在摘要中标注 `[conflicts]`，`.template-new` 文件一并提交） |
 | `template-release.yml` | tag `v*`（仅模板仓库） | 核对版本与清单、跑 CI 后发布模板版本，附示例站点的构建缓存（同样先建草稿、上传后发布） |
 
 `ci.yml` 的选择检查从 JSON 文件读取完整计划；CI 与 Pages 的汇总从另一份 JSON 文件读取完整 `needs`，并直接使用其中的 `plan.outputs.plan`，没有第二份计划副本。工作流用带引号的 here-document 接收 `toJSON` 编码的数据，由运行器先写脚本再落盘；计划和汇总载荷不进入进程参数或环境变量，字符串中的换行与 shell 语法不会被执行。矩阵、检查条件、精确浏览器报告核对与覆盖来源保持原有契约；缺少计划、作业结果或执行报告仍使汇总失败。
@@ -126,19 +126,21 @@ CI 精确项为 `books/<slug>/viz/tests/<id>.test.mjs#<part>`，未分部仍为�
 
 **慢帧复查（`viz-slow`）。** `--slow` 令 `VIZ_SLOW_FRAMES=1000`，用于发现固定等待时间造成的偶发失败。每周三的本工作流定时入口只选择 slow profile；手动运行由默认关闭的 `slow_frames` 控制，调用者也可明确传入。slow 使用独立成功基准：相同输入、运行时与检查定义已经覆盖时不开 runner；首次或基准失效按实际 Git 差异选择，无法比较时明确失败；不因覆盖工件缺失而全量慢帧复测。共享运行时、测试工具或 suite 改动后的本地复查仍见 [book-viz](../skills/book-viz/SKILL.md)。
 
-开发分支在 PR 上运行选择后的 CI，不再因分支 push 重复运行；尚未开 PR 时可手动运行。PR 与 main 被新提交取代的 CI 会取消，Pages 仍串行保存缓存并部署。默认分支名称若不是 main，需同步调整两个工作流的 push 分支过滤。分支保护继续要求稳定的 **Check**；媒体分片数量现在动态变化；若曾将单个矩阵检查设为必需检查，维护者须改为 Check。
+开发分支在 PR 上运行选择后的 CI，不再因分支 push 重复运行；尚未开 PR 时可手动运行。PR 与 main 被新提交取代的 CI 会取消，Pages 仍串行保存缓存并部署。默认分支名称若不是 main，需同步调整两个工作流的 push 分支过滤。分支保护要求稳定的 **Check** 与 **PR conventions**，后者校验标题和源分支，启用步骤见 [贡献与协作规范](../CONTRIBUTING.md)；媒体分片数量现在动态变化；若曾将单个矩阵检查设为必需检查，维护者须改为 Check。
 
 ## 5. 构建缓存
 
 构建单元（每个语言版本的 HTML、每种 PDF、EPUB、每本书的幻灯片、每个视频）的输入没有变化时不再构建，而是恢复存下的产物（`tools/tbook/buildcache.py`；键与本地存储见 `docs/ARCHITECTURE.md`）。视频不是特例，与 PDF、幻灯片走同一条路。查找顺序：
 
-1. 本地存储 `.cache/artifacts/`。在 GitHub Actions 中，组合动作 `.github/actions/build-cache` 在构建前恢复它（Actions 缓存，按前缀 `build-cache-v1-` 先找本次运行所在 ref 的最新一份，再找默认分支的），PR 事件不读 Actions 缓存，改读成功的默认分支 Pages 运行的 `tbook-build-store` 工件；
+1. 本地存储 `.cache/artifacts/`。在 GitHub Actions 中，组合动作 `.github/actions/build-cache` 在构建前恢复它（Actions 缓存，按前缀 `build-cache-v1-` 先找本次运行所在 ref 的最新一份，再找默认分支的），PR 事件不读 Actions 缓存，改读成功的默认分支 CI 或 Pages 运行的 `tbook-build-store` 工件；
 2. 设置了 `TBOOK_CACHE_REMOTE=1` 时（构建步骤都设置，并传入 `GITHUB_TOKEN`），查最新的 5 个附有 `build-cache.json` 的已发布 Release（手工发的、没有该文件的 Release 不占名额），下载对应的 `cache-*.tar`，核对 SHA-256 后恢复。没有任何 Actions 缓存的构建（新仓库、缓存被清除、PR）由此从整站 Release 恢复；
 3. 都没有时构建，并存入本地存储。
 
-只有 `pages.yml` 保存 Actions 缓存：在默认分支上（push 或手动运行）构建后执行 `./tbook cache prune`（只留当前输入的条目），再由 `./tbook cache key` 算出存储内容的摘要 `build-cache-v1-<sha256>`。它与恢复到的键去掉运行后缀 `-r…` 后的部分相同时不再上传；不同时以 `build-cache-v1-<sha256>-r<run id>-<run attempt>` 保存。运行后缀使每次保存都得到一个新键，成为最新的一份：缓存键不能覆盖，存储回到早先的内容（例如回滚）时，若沿用早先的键，保存会因键已存在而落空，恢复就仍取那份更新却已过时的存储。每次保存的是整个存储，仓库的 Actions 缓存超过上限（默认 10 GB）时，GitHub 先淘汰最久未用的条目，恢复总是取最新的一份。构建失败时也保存，已完成的单元（例如先渲染好的视频）不必重做；构建步骤自己的时限（210 分钟）短于作业的时限，超时只让这一步失败，保存照常进行，重新运行或下一次推送从已完成处继续（作业超时会被取消，保存也随之跳过）。`pages` 并发组使它同一时间只运行一个，后一次运行恢复前一次保存的结果。`ci.yml` 只恢复、不保存，`films` 作业在默认分支与 tag 的推送上不构建视频（`pages.yml` 与发版工作流会构建）；`release.yml` 不保存 Actions 缓存，而是把缓存附在 Release 上。
+`pages.yml` 与默认分支成功的 CI 聚合都保存 Actions 缓存。Pages 构建后执行 `./tbook cache prune`（只留当前输入的条目），再由 `./tbook cache key` 算出存储内容的摘要 `build-cache-v1-<sha256>`。它与恢复到的键去掉运行后缀 `-r…` 后的部分相同时不再上传；不同时以 `build-cache-v1-<sha256>-r<run id>-<run attempt>` 保存。运行后缀使每次保存都得到一个新键，成为最新的一份：缓存键不能覆盖，存储回到早先的内容（例如回滚）时，若沿用早先的键，保存会因键已存在而落空，恢复就仍取那份更新却已过时的存储。每次保存的是整个存储，仓库的 Actions 缓存超过上限（默认 10 GB）时，GitHub 先淘汰最久未用的条目，恢复总是取最新的一份。Pages 在构建失败时也保存，已完成的单元（例如先渲染好的视频）不必重做；构建步骤自己的时限（210 分钟）短于作业的时限，超时只让这一步失败，保存照常进行，重新运行或下一次推送从已完成处继续（作业超时会被取消，保存也随之跳过）。`pages` 并发组使它同一时间只运行一个，后一次运行恢复前一次保存的结果。`films` 作业在默认分支与 tag 的推送上不构建视频（`pages.yml` 与发版工作流会构建）；`release.yml` 不保存 Actions 缓存，而是把缓存附在 Release 上。
 
-PR 复用 Pages 构建：默认分支成功的 `pages.yml` 在构建后上传 `tbook-build-store`（保留 7 天，含隐藏文件，不压缩已压缩的视频）。PR 用 GitHub API 选择默认分支最近 20 次成功 Pages 运行中仍有工件的一次，核对 workflow ID、源仓库、分支、事件（只允许 push / workflow_dispatch）、完成状态与结果，再按不可混淆的 run ID / artifact ID 下载。需要 `actions: read`；被调用的 CI 的调用者也须授予它。权限不足、工件过期或下载失败时照常构建，仍可从 Release 恢复。PR 自己的 Actions 缓存与工件始终不读；每个构建单元仍按当前输入键与逐文件摘要验证。信任边界见 `docs/VERIFICATION.md` §2。
+CI 的构建、幻灯片与影片作业在恢复后记录已验证条目的键，只上传构建中新增的完整条目（`tools/ci/cache_store.py snapshot|export`；临时分片保留 1 天）。稳定 Check 先确认全部计划作业成功，再恢复已有存储，按本次运行尝试分别下载分片并逐条校验、原子合并，最后保存 Actions 缓存与 `tbook-build-store`。相同输入键可能因编码器而有不同字节，合并保留一份完整有效条目，绝不逐文件覆盖混合两种编码。Check 没有出版字体或工具，不重新计算 PDF 等当前键；它只保留每个单元最新的两个已验证键，删除损坏条目、链接与其他未验证文件（动作 `prune: 'false'` 仅供 `check` 聚合使用）。这条写入链只在默认分支的 push、workflow_dispatch、schedule 中运行；PR、其他分支、失败或取消的计划均不发布聚合存储。新增条目才跨作业上传，完整存储仍需在聚合时下载和发布；这部分传输成本不会消失。缓存传输失败只导致后续缓存未命中，不改变检查结果。
+
+PR 复用默认分支构建：成功的 `ci.yml` 聚合与 `pages.yml` 构建上传 `tbook-build-store`（保留 7 天，含隐藏文件，不压缩已压缩的视频）。PR 用 GitHub API 分别检查默认分支最近 20 次成功 CI 与 Pages 运行，从新到旧选择仍有工件的一次，核对 workflow ID、源仓库、分支、事件（push / workflow_dispatch，CI 另允许 schedule）、完成状态与结果，再按不可混淆的 run ID / artifact ID 下载。需要 `actions: read`；被调用的 CI 的调用者也须授予它。权限不足、工件过期或下载失败时照常构建，仍可从 Release 恢复。PR 自己的 Actions 缓存与工件始终不读；每个构建单元仍按当前输入键与逐文件摘要验证。信任边界见 `docs/VERIFICATION.md` §2。
 
 仍会重复渲染的情形：改动了视频输入且缓存未命中的 PR 仍须渲染。CI 先选择待验证影片，再按完整影片动态分成最多 4 个非空分片，每片通过 `python tools/ci/films.py --selection-env CI_ITEMS` 执行分配的精确集合，所选影片各执行一次；空集合不开影片作业。所选影片缓存未命中时，缺工具链或渲染失败会使作业失败。合入后 Pages 渲染并保存新键，此后 PR 即可复用，无须等待发版。工件超过 7 天、从未成功构建 Pages，或 PR 的输入与默认分支和 Release 都不同，仍会重建。可视化同样先选择 suite，再动态分成最多 8 个非空分片，所选 suite 各执行一次，空集合不开作业。分片减少等待时间，冷构建总计算量不会随之减少；多个分片也会增加工具链安装开销与并发需求。
 

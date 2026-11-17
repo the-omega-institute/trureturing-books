@@ -153,7 +153,7 @@ Bivector geometry answers both questions in two transparent steps:
 
 To maintain strict formal boundaries: [@lemma-skew-adjoint-unitary-square] and [@thm-relative-complex-structure-square] verify the matrix-level identities $R^2 = -I_n$ and $J^2 = -I_n$ in the Lean kernel, whereas the identification of the full three-dimensional Clifford algebra with the Pauli matrix algebra $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ (real dimension $8$), its **even subalgebra** with the quaternion algebra $\mathrm{Cl}^+_{3,0}(\mathbb{R}) \cong \mathbb{H}$ (real dimension $4$, whose unit sphere $S^3 \cong \mathrm{SU}(2)$ consists of rotors), and the full three-dimensional Rodrigues sandwich formula are documented as classical background in [@rem-clifford-rotor-literature].
 
-::: {.film src="001-qubit-bloch-rotor"}
+::: {.film src="qubit-bloch-rotor"}
 **Half-angle rotors and the Bloch sphere (47 seconds).** An arrow on the sphere is a pure state; the geometric product splits its relation to the ruler into $\cos\theta$ along the line and $\sin\theta$ spanning an area; a rotor turns by half the angle from each side, so that after $360^\circ$ the arrow is back while the rotor is off by a sign, and only $720^\circ$ brings the rotor back.
 :::
 

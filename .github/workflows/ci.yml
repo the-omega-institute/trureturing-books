@@ -45,7 +45,8 @@ permissions:
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}${{ github.event_name == 'schedule' && '-schedule' || '' }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref_type == 'branch') }}
+  # Finish default-branch producers so the next push can inherit their trusted evidence.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   PYTHONUNBUFFERED: '1'
@@ -61,11 +62,15 @@ jobs:
       site: ${{ steps.plan.outputs.site }}
       publish: ${{ steps.plan.outputs.publish }}
       validate: ${{ steps.plan.outputs.validate }}
+      browser: ${{ steps.plan.outputs.browser }}
+      browser_matrix: ${{ steps.plan.outputs.browser_matrix }}
       build: ${{ steps.plan.outputs.build }}
       viz: ${{ steps.plan.outputs.viz }}
       viz_slow: ${{ steps.plan.outputs.viz_slow }}
       media: ${{ steps.plan.outputs.media }}
       films: ${{ steps.plan.outputs.films }}
+      stills: ${{ steps.plan.outputs.stills }}
+      still_matrix: ${{ steps.plan.outputs.still_matrix }}
       build_matrix: ${{ steps.plan.outputs.build_matrix }}
       viz_matrix: ${{ steps.plan.outputs.viz_matrix }}
       slow_matrix: ${{ steps.plan.outputs.slow_matrix }}
@@ -237,25 +242,87 @@ jobs:
           node tools/node/slides-check.mjs
           python tools/ci/run.py unit --plan-file "$RUNNER_TEMP/ci-plan.json"
 
-      # Install a browser only when an affected browser regression is selected.
-      - name: Set up Chromium for selected browser regressions
-        if: fromJSON(needs.plan.outputs.plan).selections.normal.checks.browser
+  browser:
+    name: Tool browser regressions (${{ matrix.shard }})
+    needs: plan
+    if: needs.plan.outputs.browser == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.browser_matrix) }}
+    steps:
+      - name: Check out
+        uses: actions/checkout@v5
+      - name: Materialize the selected plan and browser shard
+        run: |
+          cat <<'TBOOK_PLAN_JSON' > "$RUNNER_TEMP/ci-plan.json"
+          ${{ toJSON(fromJSON(needs.plan.outputs.plan)) }}
+          TBOOK_PLAN_JSON
+          cat <<'TBOOK_BROWSER_JSON' > "$RUNNER_TEMP/browser.json"
+          ${{ toJSON(matrix.items) }}
+          TBOOK_BROWSER_JSON
+      - name: Set up selected browser tools
         uses: ./.github/actions/setup
         with:
           browsers: 'true'
           fonts: 'false'
-          mdbook: 'false'
-
-      - name: Selected browser regressions
-        if: fromJSON(needs.plan.outputs.plan).selections.normal.checks.browser
+          mdbook: 'true'
+      - name: Run the selected browser shard
         env:
           PYTHONPATH: tools
-        run: python tools/ci/run.py browser --plan-file "$RUNNER_TEMP/ci-plan.json"
+        run: python tools/ci/run.py browser --plan-file "$RUNNER_TEMP/ci-plan.json" --items-file "$RUNNER_TEMP/browser.json"
+
+  stills:
+    name: Prepare visualization images (${{ matrix.shard }})
+    needs: plan
+    if: needs.plan.outputs.stills == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.still_matrix) }}
+    permissions:
+      contents: read
+      actions: read
+      pages: read
+    steps:
+      - name: Check out
+        uses: actions/checkout@v5
+      - name: Set up capture tools
+        uses: ./.github/actions/setup
+        with:
+          browsers: 'true'
+          fonts: 'true'
+          mdbook: 'false'
+      - name: Restore reusable images
+        uses: ./.github/actions/build-cache
+        with:
+          mode: restore
+          scope: images
+      - name: Prepare selected images
+        env:
+          TBOOK_CACHE_REMOTE: '1'
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          cat <<'TBOOK_IMAGES_JSON' > "$RUNNER_TEMP/images.json"
+          ${{ toJSON(matrix.items) }}
+          TBOOK_IMAGES_JSON
+          python3 tools/ci/stills.py --items-file "$RUNNER_TEMP/images.json" --out "$RUNNER_TEMP/prepared-images"
+      - name: Share complete image entries with every export
+        uses: actions/upload-artifact@v6
+        with:
+          name: tbook-stills-${{ github.run_attempt }}-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/prepared-images
+          include-hidden-files: true
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 1
 
   build:
     name: Build books (${{ matrix.name }})
-    if: needs.plan.outputs.build == 'true'
-    needs: plan
+    if: always() && !cancelled() && needs.plan.outputs.build == 'true' && (needs.stills.result == 'success' || needs.stills.result == 'skipped')
+    needs: [plan, stills]
     runs-on: ubuntu-24.04
     # Cold exports of large books capture all cited visualization stills before typesetting.
     timeout-minutes: 120
@@ -274,9 +341,9 @@ jobs:
       - name: Set up the toolchain
         uses: ./.github/actions/setup
         with:
-          browsers: ${{ matrix.target != 'html' }}
+          browsers: 'false'
           fonts: 'true'
-          mdbook: 'true'
+          mdbook: ${{ matrix.target == 'html' }}
 
       - name: Configure Pages
         # The site's address is part of every cache key. Without Pages (not enabled, or not readable) this
@@ -291,10 +358,28 @@ jobs:
           mode: restore
           pages-url: ${{ steps.pages.outputs.base_url }}
 
+      - name: Download prepared visualization images
+        if: matrix.target != 'html' && needs.plan.outputs.stills == 'true'
+        uses: actions/download-artifact@v7
+        with:
+          pattern: tbook-stills-${{ github.run_attempt }}-*
+          path: ${{ runner.temp }}/prepared-image-shards
+      - name: Import verified image entries
+        if: matrix.target != 'html' && needs.plan.outputs.stills == 'true'
+        run: python3 tools/ci/cache_store.py merge "$RUNNER_TEMP"/prepared-image-shards/*
+
+      - name: Snapshot restored build-cache entries
+        if: >-
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+        continue-on-error: true
+        run: python3 tools/ci/cache_store.py snapshot "$RUNNER_TEMP/build-cache-before.json"
+
       - name: Build
         env:
           TBOOK_CACHE_REMOTE: '1'
           GITHUB_TOKEN: ${{ github.token }}
+          TBOOK_STILLS_REQUIRE_CACHE: '1'
           TARGET: ${{ matrix.target }}
           BOOKS_JSON: ${{ toJSON(matrix.books) }}
           VARIANT: ${{ matrix.variant }}
@@ -304,6 +389,29 @@ jobs:
           args=()
           for book in "${books[@]}"; do args+=(--book "$book"); done
           ./tbook build "$TARGET" "${args[@]}" ${VARIANT:+--variant "$VARIANT"}
+
+      - name: Export added build-cache entries
+        id: cache-shard
+        if: >-
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+        continue-on-error: true
+        run: python3 tools/ci/cache_store.py export --baseline "$RUNNER_TEMP/build-cache-before.json" --out "$RUNNER_TEMP/build-cache-shard"
+
+      - name: Upload added build-cache entries
+        if: >-
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
+          steps.cache-shard.outputs.entries != '' && steps.cache-shard.outputs.entries != '0'
+        continue-on-error: true
+        uses: actions/upload-artifact@v6
+        with:
+          name: tbook-build-shard-${{ github.run_attempt }}-build-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/build-cache-shard
+          include-hidden-files: true
+          compression-level: 0
+          if-no-files-found: warn
+          retention-days: 1
 
       - name: Upload downloads (PDF, EPUB)
         if: matrix.target != 'html'
@@ -431,11 +539,41 @@ jobs:
           mode: restore
           pages-url: ${{ steps.pages.outputs.base_url }}
 
+      - name: Snapshot restored build-cache entries
+        if: >-
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+        continue-on-error: true
+        run: python3 tools/ci/cache_store.py snapshot "$RUNNER_TEMP/build-cache-before.json"
+
       - name: Build slides (HTML, browser checks, PDF)
         env:
           TBOOK_CACHE_REMOTE: '1'
           GITHUB_TOKEN: ${{ github.token }}
         run: python tools/ci/run.py slides --plan-file "$RUNNER_TEMP/ci-plan.json"
+
+      - name: Export added build-cache entries
+        id: cache-shard
+        if: >-
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+        continue-on-error: true
+        run: python3 tools/ci/cache_store.py export --baseline "$RUNNER_TEMP/build-cache-before.json" --out "$RUNNER_TEMP/build-cache-shard"
+
+      - name: Upload added build-cache entries
+        if: >-
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
+          steps.cache-shard.outputs.entries != '' && steps.cache-shard.outputs.entries != '0'
+        continue-on-error: true
+        uses: actions/upload-artifact@v6
+        with:
+          name: tbook-build-shard-${{ github.run_attempt }}-slides
+          path: ${{ runner.temp }}/build-cache-shard
+          include-hidden-files: true
+          compression-level: 0
+          if-no-files-found: warn
+          retention-days: 1
 
       - name: Upload slide PDFs
         uses: actions/upload-artifact@v6
@@ -482,6 +620,13 @@ jobs:
           mode: restore
           pages-url: ${{ steps.pages.outputs.base_url }}
 
+      - name: Snapshot restored build-cache entries
+        if: >-
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+        continue-on-error: true
+        run: python3 tools/ci/cache_store.py snapshot "$RUNNER_TEMP/build-cache-before.json"
+
       - name: Build film shard
         env:
           TBOOK_CACHE_REMOTE: '1'
@@ -490,12 +635,35 @@ jobs:
           CI_ITEMS: ${{ toJSON(matrix.items) }}
         run: python tools/ci/films.py --selection-env CI_ITEMS
 
+      - name: Export added build-cache entries
+        id: cache-shard
+        if: >-
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+        continue-on-error: true
+        run: python3 tools/ci/cache_store.py export --baseline "$RUNNER_TEMP/build-cache-before.json" --out "$RUNNER_TEMP/build-cache-shard"
+
+      - name: Upload added build-cache entries
+        if: >-
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
+          steps.cache-shard.outputs.entries != '' && steps.cache-shard.outputs.entries != '0'
+        continue-on-error: true
+        uses: actions/upload-artifact@v6
+        with:
+          name: tbook-build-shard-${{ github.run_attempt }}-films-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/build-cache-shard
+          include-hidden-files: true
+          compression-level: 0
+          if-no-files-found: warn
+          retention-days: 1
+
   check:
     name: Check
-    needs: [plan, validate, build, viz, viz-slow, media, films]
+    needs: [plan, validate, browser, stills, build, viz, viz-slow, media, films]
     if: always()
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 20
     steps:
       - name: Check out
         uses: actions/checkout@v5
@@ -506,6 +674,7 @@ jobs:
           pattern: tbook-viz-${{ github.run_attempt }}-*
           path: viz-reports
       - name: Require every planned job to succeed
+        id: verified
         # Preserve all needs outputs, including the complete original plan, in a file.
         run: |
           cat <<'TBOOK_NEEDS_JSON' > "$RUNNER_TEMP/ci-needs.json"
@@ -539,3 +708,101 @@ jobs:
           if-no-files-found: error
           retention-days: 90
           overwrite: true
+
+      # Cache shards only become a trusted complete store after the planned work has succeeded.
+      # Restore the prior store here, rather than letting matrix jobs replace one another's additions.
+      - name: Restore the prior build store for aggregation
+        if: >-
+          steps.verified.outcome == 'success' &&
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
+          (needs.plan.outputs.build == 'true' || needs.plan.outputs.media == 'true' || needs.plan.outputs.films == 'true')
+        continue-on-error: true
+        uses: ./.github/actions/build-cache
+        with:
+          mode: restore
+
+      - name: Download current build-cache shards separately
+        if: >-
+          steps.verified.outcome == 'success' &&
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
+          (needs.plan.outputs.build == 'true' || needs.plan.outputs.media == 'true' || needs.plan.outputs.films == 'true')
+        continue-on-error: true
+        uses: actions/download-artifact@v7
+        with:
+          pattern: tbook-build-shard-${{ github.run_attempt }}-*
+          path: ${{ runner.temp }}/build-cache-shards
+
+      - name: Download prepared images for the trusted aggregate
+        if: >-
+          steps.verified.outcome == 'success' && needs.plan.outputs.stills == 'true' &&
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+        uses: actions/download-artifact@v7
+        with:
+          pattern: tbook-stills-${{ github.run_attempt }}-*
+          path: ${{ runner.temp }}/build-cache-shards
+
+      - name: Merge verified complete build-cache entries
+        id: cache-merge
+        if: >-
+          steps.verified.outcome == 'success' &&
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
+          (needs.plan.outputs.build == 'true' || needs.plan.outputs.media == 'true' || needs.plan.outputs.films == 'true')
+        continue-on-error: true
+        run: python3 tools/ci/cache_store.py merge "$RUNNER_TEMP"/build-cache-shards/*
+
+      - name: Save the aggregated build cache
+        if: >-
+          steps.verified.outcome == 'success' &&
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
+          steps.cache-merge.outputs.entries != '' && steps.cache-merge.outputs.entries != '0'
+        continue-on-error: true
+        uses: ./.github/actions/build-cache
+        with:
+          mode: save
+          # No publishing toolchain is installed in Check. Revalidate the merged entries without
+          # recalculating PDF keys from this runner's different font set.
+          prune: 'false'
+
+      - name: Publish the trusted build store
+        if: >-
+          steps.verified.outcome == 'success' &&
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') &&
+          steps.cache-merge.outputs.entries != '' && steps.cache-merge.outputs.entries != '0'
+        continue-on-error: true
+        uses: actions/upload-artifact@v6
+        with:
+          name: tbook-build-store
+          path: .cache/artifacts
+          include-hidden-files: true
+          compression-level: 0
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Save the visualization image cache
+        if: >-
+          steps.verified.outcome == 'success' && needs.plan.outputs.stills == 'true' &&
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+        uses: actions/cache/save@v5
+        with:
+          path: .cache/artifacts/viz-stills
+          key: image-cache-v1-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Publish reusable visualization images
+        if: >-
+          steps.verified.outcome == 'success' && needs.plan.outputs.stills == 'true' &&
+          github.ref == format('refs/heads/{0}', github.event.repository.default_branch) &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+        uses: actions/upload-artifact@v6
+        with:
+          name: tbook-image-store
+          path: .cache/artifacts/viz-stills
+          include-hidden-files: true
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7

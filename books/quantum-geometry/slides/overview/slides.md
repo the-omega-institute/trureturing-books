@@ -3,7 +3,7 @@
 theme: ../../../../theme/slides
 preloadImages: false
 title: "量子计算的几何直觉 · 全书概览"
-info: "《量子计算的几何直觉》全书概览：四重盲区与十部三十九章升维阶梯，十部各自的核心图景、主要的 Lean 已验证定理、文献结果与开放问题，三层依据的条数，以及全书三十九章依赖导图。"
+info: "《量子计算的几何直觉》全书概览：四重盲区与十部升维阶梯，十部各自的核心图景、主要的 Lean 已验证定理、文献结果与开放问题，证据边界与推荐阅读路径。"
 htmlAttrs:
   lang: "zh-CN"
 deck:
@@ -11,13 +11,13 @@ deck:
   book: "量子计算的几何直觉"
   title: "全书概览"
   version: "0.1.0"
-  blurb: "从两子丈量到球外之球：十部三十九章的核心图景、主要定理与三层依据，一份四十八页的演示看完全书。"
+  blurb: "从两子丈量到球外之球：十部的核心图景、主要定理与三层依据，沿演示中的推荐路径阅读全书。"
 layout: cover
 ---
 
 <p class="kicker">量子计算的几何直觉 · 全书概览</p>
 <h1 class="display">从两子丈量<br>到 <em>ψ = ψ(ψ)</em></h1>
-<p class="lead">十部三十九章，沿“点 → 线 → 面 → 球 → 球外之球”的阶梯，把量子计算还原为可以手算的几何。书负责解释为什么如此，Lean 内核负责担保确实如此。</p>
+<p class="lead">十部，沿“点 → 线 → 面 → 球 → 球外之球”的阶梯，把量子计算还原为可以手算的几何。书负责解释为什么如此，Lean 内核负责担保确实如此。</p>
 
 ---
 # 02 全书一句话
@@ -54,7 +54,7 @@ section: "十部导读"
 ---
 
 <div class="body">
-  <p class="kicker">Ten parts, thirty-nine chapters</p>
+  <p class="kicker">Ten parts</p>
   <h2 class="t">十部是一架阶梯，<em>一部比一部高一维</em></h2>
   <img src="./img/prelude-parts.zh.svg" alt="十条横条，每条是一部，横跨它所含的章，一部比一部高一级。" style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
   <p class="lead mt-s">前九部各四章、第十部三章：点 → 线、线 → 面、面 → 球、多球共振、时空之球、球外之球、铸器与验证、贯通、互照、不二。</p>
@@ -836,49 +836,21 @@ section: "三层依据"
 <div class="body">
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">三层依据，<em>三种颜色</em>，从不越级</h2>
-  <div class="split mt">
-    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色是带 Lean 引用的定理条数，紫色是文献结果的条数，红色是开放猜想与开放问题的条数；绿色下注锁文件里 theorem 声明的条数。" style="display: block; width: 900px; max-width: 100%;">
-    <div>
-      <ul class="plain">
-        <li><span class="hl-ok">LEAN ✓</span>：带 lean= 的定理、引理、命题与推论</li>
-        <li><span class="hl-violet">文献结果</span>：写明“文献结果，未在本书形式化”的注记与例</li>
-        <li><span class="hl-warn">OPEN</span>：开放猜想与开放问题，不带 Lean 引用</li>
-      </ul>
-      <p class="lead mt">左图的条数由图脚本从正文与锁文件 <span class="mono">trureturing.lock.json</span> 算出，随书更新；锁文件钉住 <PinnedCommit />。</p>
-    </div>
-  </div>
+  <ul class="plain mt">
+    <li><span class="hl-ok">LEAN ✓</span>：逐条引用所钉提交的冻结定理，完整证明由内核检查</li>
+    <li><span class="hl-violet">书面证明与文献结果</span>：明确来源与适用边界，书面证明由作者与评审负责</li>
+    <li><span class="hl-warn">OPEN</span>：开放猜想与开放问题，保留未证身份</li>
+  </ul>
+  <p class="lead mt">每项结果的依据随正文给出；所钉提交为 <PinnedCommit />。</p>
 </div>
-<Source>按中文正文与 trureturing.lock.json 统计 · 序曲 prelude-three-tiers · 附录 C</Source>
+<Source>序曲“形式化验证与诚实标注契约” · 附录 C</Source>
 
 ---
-# 47 依赖导图
-section: "依赖导图"
----
-
-<div class="body">
-  <p class="kicker">Reading and dependency map</p>
-  <div class="split">
-    <img src="./img/coda-dependency-tree.zh.svg" alt="圆点自上而下是全书各章，弧形箭头来自回头引用最多的那一章。" style="display: block; height: 720px; max-width: 100%; margin: 0 auto;">
-    <div>
-      <h2 class="t">哪一章<em>依赖</em>哪一章</h2>
-      <p class="lead">指向每一章的弧形箭头，来自它回头引用最多的那一章；引用越多，箭头越粗。</p>
-      <ul class="plain mt">
-        <li><b>物理直觉：</b>序曲 → 第 1–12 章 → 第 17–19 章 → 第 33–34 章</li>
-        <li><b>算法编译：</b>第 2 章 → 第 13–16 章 → 第 25–27 章 → 第 38 章</li>
-        <li><b>逻辑与数论：</b>第 10 章 → 第 21–24 章 → 第 29–39 章</li>
-        <li><b>内核审计：</b>序曲 → 第 25–28 章 → 附录 C</li>
-      </ul>
-    </div>
-  </div>
-</div>
-<Source>终章“全书十部曲三十九章阅读与依赖导图”（coda-dependency-tree）</Source>
-
----
-# 48 结尾
+# 47 结尾
 layout: cover
 ---
 
 <p class="kicker">Read · Verify · Watch</p>
 <h1 class="display">书负责解释，<br><em>Lean</em> 负责成立</h1>
-<p class="lead">在线阅读，下载 PDF 与 EPUB；十部三十九章配有静态图、交互实验室与讲解视频；每一条定理都能在所钉的 trureturing 提交上逐条核对。</p>
-<p class="lead mt mono hl-cyan">序曲 → 第一章 · 附录 C：锁定声明完整索引</p>
+<p class="lead">在线阅读，下载 PDF 与 EPUB；十部配有静态图、交互实验室与讲解视频；每一条定理都能在所钉的 trureturing 提交上逐条核对。</p>
+<p class="lead mt mono hl-cyan">序曲 → 第一章 · 附录 C：验证依据与开放问题边界</p>

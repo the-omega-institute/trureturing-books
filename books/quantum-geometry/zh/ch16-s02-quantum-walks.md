@@ -68,60 +68,68 @@ $$
 :::
 
 ::: {.remark #rem-qsvt-walks-literature title="完整 QSVT 可实现性与黏合树加速（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 这里登记完整 QSVT 与图游走的文献结论。Theorem 3 在旋转约定下的充分性，以及同一补全的有符号圆分解，已在下文 [@thm-polynomial-phase-synthesis]、[@thm-signed-circle-phase-factorization] 中单独形式化；以下完整充要刻画、实部电路与查询语义仍按文献边界陈述；任意原始投影酉算子的复多项式提升另见 [@thm-projected-unitary-polynomial-lifting]、[@thm-native-phase-projected-lifting]。
+**文献结果，未在本书形式化。** 这里登记完整 QSVT 与图游走的文献结论。Theorem 3 在旋转约定下的充分性，以及同一补全的有符号圆分解，已在下文 [@thm-polynomial-phase-synthesis]、[@thm-signed-circle-phase-factorization] 中单独形式化；以下完整充要刻画、实部电路与查询语义仍按文献边界陈述；任意原始投影酉算子的复多项式提升另见 [@thm-projected-unitary-polynomial-lifting]、[@thm-native-phase-projected-lifting]。Haah 的完整 Laurent 环有序分解另见 [@thm-haah-laurent-factorization]。
 
 1. **量子奇异值变换（QSVT）的复幺正补全与实目标多项式提取定理**（A. Gilyén, Y. Su, G. H. Low, and N. Wiebe, *Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics*, Proc. 51st ACM STOC, 193–204, 2019, doi:10.1145/3313276.3316366，Theorem 3 与 Theorem 17 / Corollary 18）：设矩阵 $A$ 通过块编码（block encoding）嵌入幺正算子 $U$ 的投影块 $\tilde{\Pi} U \Pi = A$（$\norm{A}_{\mathrm{op}} \le 1$）。文献严格区分两层可实现性定理：
    - **直接二维复多项式量子信号处理（QSP，Theorem 3）**：复多项式对 $(P_{\mathrm{c}}, Q_{\mathrm{c}}) \in \mathbb{C}[x]^2$ 能直接作为单一交替相位序列算子 $U_{\Phi}(x)$ 的二维矩阵元实现，当且仅当 $\deg(P_{\mathrm{c}}) \le d$、$\deg(Q_{\mathrm{c}}) \le d - 1$，$P_{\mathrm{c}}$ 具有确定奇偶性 $d \bmod 2$，$Q_{\mathrm{c}}$ 具有相反奇偶性 $(d-1) \bmod 2$，且在一切 $x \in [-1, 1]$ 上满足复模方幺正归一恒等式 $|P_{\mathrm{c}}(x)|^2 + (1 - x^2)|Q_{\mathrm{c}}(x)|^2 = 1$。
    - **一般有界实多项式 QSVT 的复补全与实部投影实现（Theorem 17 / Corollary 18）**：对于一般有界实目标多项式 $P_{\mathrm{target}} \in \mathbb{R}[x]$——满足 (i) $\deg(P_{\mathrm{target}}) \le d$；(ii) 具有确定奇偶性 $d \bmod 2$；(iii) 在区间 $[-1, 1]$ 上满足一致范数界 $|P_{\mathrm{target}}(x)| \le 1$（例如奇一次实多项式 $P_{\mathrm{target}}(x) = x/2$，其在端点 $x = 1$ 处 $P_{\mathrm{target}}(1)^2 = 1/4 < 1$，因此不可能直接用实多项式配成 $P_{\mathrm{target}}(x)^2 + (1 - x^2)Q(x)^2 = 1$）——由 Fejér–Riesz 因式分解定理，总存在满足上述 Theorem 3 条件的复多项式补全对 $(P_{\mathrm{c}}, Q_{\mathrm{c}}) \in \mathbb{C}[x]^2$ 使得 $\operatorname{Re} P_{\mathrm{c}}(x) = P_{\mathrm{target}}(x)$ 且 $|P_{\mathrm{c}}(x)|^2 + (1 - x^2)|Q_{\mathrm{c}}(x)|^2 = 1$。在电路上引入一颗额外的 $\lvert +\rangle$ 控制辅助比特，相干叠加相位序列 $U_{\Phi}$ 与相位取负的序列 $U_{-\Phi}$ 得到实部组合 $\frac{1}{2}(U_{\Phi} + U_{-\Phi})$，最后配合辅助比特向 $\langle +\rvert$ 的投影以及依奇偶性选取的块投影（$d$ 为奇时取 $\tilde{\Pi}(\cdot)\Pi$，$d$ 为偶时取 $\Pi(\cdot)\Pi$），即仅调用 $d$ 次 $U$ 与 $U^*$ 精确实现奇异值实多项式变换 $P_{\mathrm{target}}^{(\mathrm{SV})}(A)$。
 
-   **从整条 Laurent 环到有序因子。** 上述 QSP 序列还有一种直接以矩阵系数表述的分解层：J. Haah, *Product Decomposition of Periodic Functions in Quantum Signal Processing*, Quantum **3**, 190 (2019), [doi:10.22331/q-2019-10-07-190](https://doi.org/10.22331/q-2019-10-07-190)，[arXiv:1806.10236v4，Definition 1 与 Theorem 2](https://arxiv.org/html/1806.10236v4#Thmlemma1)。以下陈述与归纳思路均为该文的**文献结果，未在本书形式化**。
-
-   给定任意整数指标上的有限支撑系数族 $C:\mathbb{Z}\to M_2(\mathbb{C})$，写成形式 Laurent 多项式 $F(t)=\sum_{j\in\mathbb{Z}}C_jt^j$。Haah 的 $\mathcal{P}_n$ 要求 $C_j=0$（$|j|>n$），且对每个 $|\eta|=1$ 都有 $F(\eta)\in\mathrm{SU}(2)$，即 $F(\eta)^*F(\eta)=I$、$\det F(\eta)=1$；其中星号是求值后矩阵的共轭转置。子集 $\mathcal{E}_n$ 另要求支撑落在 $\{-n,-n+2,\ldots,n\}$，即非零项的指数与 $n$ 同奇偶。**实际次数为 $n$** 的条件是 $C_n\ne0$ **或** $C_{-n}\ne0$，不是只有次数上界。
-
-   对秩一正交投影 $P$（$P^*=P$、$P^2=P$、$\operatorname{rank}P=1$），定义原始因子
-
-   $$
-   E_P(t)=tP+t^{-1}(I-P).
-   $$
-
-   它在投影线及其正交补上分别乘以 $t$ 与 $t^{-1}$；例如 $P=\operatorname{diag}(1,0)$ 时就是 $\operatorname{diag}(t,t^{-1})$。在单位圆上，这两个特征值模长均为 $1$、乘积为 $1$，故 $E_P\in\mathcal{E}_1$。Haah 的 Theorem 2 说明：对每个 $n\ge0$、每个实际次数为 $n$ 的 $F\in\mathcal{E}_n$，存在唯一的 $E_0\in\mathrm{SU}(2)$ 与**长度恰为 $n$ 的有序**秩一正交投影列表 $(P_1,\ldots,P_n)$，使
-
-   $$
-   F(t)=E_0\prod_{k=1}^{n}\bigl(tP_k+t^{-1}(I-P_k)\bigr).
-   $$
-
-   乘积按 $k=1,\ldots,n$ 从左到右排列，等式是逐系数的 Laurent 多项式恒等式。$n=0$ 时，$F=C_0$ 是任意的 $\mathrm{SU}(2)$ 常矩阵，$E_0=C_0$、投影列表为空；这里从不对 $t=0$ 求值。反方向，任意 $n$ 个原始因子的乘积都属于 $\mathcal{E}_n$，但实际次数可能小于 $n$。例如直接展开并用 $P(I-P)=0$ 得 $E_P(t)E_{I-P}(t)=I$：人为补长的列表不具有上述唯一性。
-
-   **为何能从末端剥去一个因子？** Haah 的 Definition 1 把系数取伴随定义为 $F^{\dagger}(t)=\sum_j C_j^{\dagger}t^j$；它不反转指数。因此在单位圆上应写 $F(\eta)^*=F^{\dagger}(\eta^{-1})$，一般不能写成 $F^{\dagger}(\eta)$。圆上无穷多个取值把幺正与行列式关系提升为 Laurent 恒等式：对每个矩阵元乘以足够高的 $t$ 次幂后，普通多项式在无穷多个点为零，故各系数为零。对于 $n>0$，比较极端系数得到
-
-   $$
-   \begin{aligned}
-   \det C_n&=\det C_{-n}=0,\\
-   C_{-n}^{\dagger}C_n&=0,\qquad C_nC_{-n}^{\dagger}=0.
-   \end{aligned}
-   $$
-
-   非零的端点矩阵于是秩为一。文献利用这些关系选出唯一的末端投影 $P$，满足 $C_n(I-P)=0$ 与 $C_{-n}P=0$。在 $n>0$ 且 $C_n\ne0$ 的分支，投影到 $C_n$ 的行空间便给出
-
-   $$
-   P=P_n=\frac{C_n^{\dagger}C_n}{\Tr(C_n^{\dagger}C_n)}.
-   $$
-
-   分母在这个分支严格为正；常数情形不使用此式。若选用非零的负端点，文献的平行论证从 $C_{-n}$ 的行空间选出互补投影，同样满足两条消去条件；无需把原假设中的“或”改成额外的正端点假设。
-
-   令 $G(t)=F(t)\bigl(t^{-1}P+t(I-P)\bigr)=F(t)E_P(t)^{-1}$。把支撑外的 $C_j$ 约定为零，乘法的系数更新是
-
-   $$
-   G_j=C_{j+1}P+C_{j-1}(I-P).
-   $$
-
-   两条消去条件使 $t^{n+1}$ 与 $t^{-n-1}$ 项消失，奇偶支撑再把次数上界降至 $n-1$；单位圆上的 $\mathrm{SU}(2)$ 性质仍保留。次数恰为 $n-1$：否则由 $F=GE_P$、$\deg F\le\deg G+1$ 会与 $F$ 的实际次数 $n$ 矛盾。这样可对 $G\in\mathcal{E}_{n-1}$ 归纳，再在右侧接回 $P_n=P$。任一长度恰为 $n$ 的分解，其末端投影都必须满足同样的端点消去条件，因而被非零端点唯一确定；逐步剥离便得到整个有序列表及剩余常矩阵的唯一性。这是 Haah 纸面证明的骨架，不是本书新增的内核证明。
-
-   **精确合成的边界。** Theorem 2 分解的是已经给定、在整个单位圆上取值于 $\mathrm{SU}(2)$ 且满足上述奇偶条件的完整矩阵环。把有界实目标多项式补全到这样的环、选定 $t$ 与信号变量的相位约定、以及在特定 QSP 约定下由反演对称性限制各 $P_k$ 到布洛赫赤道，仍需额外条件与论证（见 Haah §3.1 及本条前述 Gilyén 等人的补全结果）。再把二维信号作用提升为矩阵奇异值变换，还需块编码与投影桥梁。因此这里的有序投影唯一性不等于实角代表的唯一性，不覆盖补长列表，也不单独给出数值稳定性、效率或硬件实现保证。
-
 2. **量子游走指数加速的图结构与黑盒边界**（A. M. Childs, R. Cleve, E. Deotto, E. Farhi, S. Gutmann, and D. A. Spielman, *Exponential algorithmic speedup by a quantum walk*, Proc. 35th ACM STOC, 59–68, 2003, doi:10.1145/780542.780552, arXiv:quant-ph/0209131）：在两棵深度为 $n$ 的二叉树在叶节点随机交错黏合而成的“黏合树（glued trees）”图族上，给定邻接表黑盒（oracle）访问，从入口根顶点出发的连续时间量子游走因在每一层等距列子空间上保持对称均匀叠加，把指数多顶点的图坍缩为长度为 $2n+2$ 的一维链，从而在 $\mathrm{poly}(n)$ 时间内以有界概率穿透到出口根顶点 `EXIT`；而 Childs 等人证明，任何最多执行 $2^{n/6}$ 次黑盒查询的经典算法找到 `EXIT` 顶点的概率至多为 $4\cdot 2^{-n/6}$（即要达到常数成功概率必须付出 $2^{\Omega(n)}$ 次经典黑盒查询）。这一指数优势严格依赖于图族的层对称约简、黑盒访问模型与特定穿行任务定义；对于缺乏此类对称结构的任意一般图或无结构迷宫，量子游走的干涉相消并不能自动把所有回头路径清零。
 
 :::
+
+**从整条 Laurent 环到有序因子。** 上述 QSP 序列还有一种直接以矩阵系数表述的分解层：J. Haah, *Product Decomposition of Periodic Functions in Quantum Signal Processing*, Quantum **3**, 190 (2019), [doi:10.22331/q-2019-10-07-190](https://doi.org/10.22331/q-2019-10-07-190)，[arXiv:1806.10236v4，Definition 1 与 Theorem 2](https://arxiv.org/html/1806.10236v4#Thmlemma1)。下面给出该代数定理的 Lean 形式化，补全与实现所需的额外条件仍单独保留。
+
+设 $n\in\mathbb{N}$。给定任意整数指标上的有限支撑系数族 $C:\mathbb{Z}\to M_2(\mathbb{C})$，写成形式 Laurent 多项式 $F(t)=\sum_{j\in\mathbb{Z}}C_jt^j$。Haah 的 $\mathcal{P}_n$ 要求 $C_j=0$（$|j|>n$），且对每个 $|\eta|=1$ 都有 $F(\eta)\in\mathrm{SU}(2)$，即 $F(\eta)^*F(\eta)=I$、$\det F(\eta)=1$；其中星号是求值后矩阵的共轭转置。子集 $\mathcal{E}_n$ 另要求支撑落在 $\{-n,-n+2,\ldots,n\}$，即非零项的指数与 $n$ 同奇偶。**实际次数为 $n$** 的条件是 $C_n\ne0$ **或** $C_{-n}\ne0$，不是只有次数上界。
+
+对秩一正交投影 $P$（$P^*=P$、$P^2=P$、$\operatorname{rank}P=1$），定义原始因子
+
+$$
+E_P(t)=tP+t^{-1}(I-P).
+$$
+
+它在投影线及其正交补上分别乘以 $t$ 与 $t^{-1}$；例如 $P=\operatorname{diag}(1,0)$ 时就是 $\operatorname{diag}(t,t^{-1})$。在单位圆上，这两个特征值模长均为 $1$、乘积为 $1$，故 $E_P\in\mathcal{E}_1$。
+
+::: {.theorem #thm-haah-laurent-factorization title="SU(2) Laurent 环的唯一有序分解" lean="D5/S3/ContinuousObservables/LaurentLoopFactorization.haah_factorization"}
+对每个 $n\ge0$、每个实际次数为 $n$ 的 $F\in\mathcal{E}_n$，存在唯一的 $E_0\in\mathrm{SU}(2)$ 与**长度恰为 $n$ 的有序**秩一正交投影列表 $(P_1,\ldots,P_n)$，使
+
+$$
+F(t)=E_0\prod_{k=1}^{n}\bigl(tP_k+t^{-1}(I-P_k)\bigr).
+$$
+
+乘积按 $k=1,\ldots,n$ 从左到右排列，等式是逐系数的 Laurent 多项式恒等式。$n=0$ 时，$F=C_0$ 是任意的 $\mathrm{SU}(2)$ 常矩阵，$E_0=C_0$、投影列表为空；这里从不对 $t=0$ 求值。反方向，任意 $n$ 个原始因子的乘积都属于 $\mathcal{E}_n$，但实际次数可能小于 $n$。
+:::
+
+::: proof
+**为何能从末端剥去一个因子？** Haah 的 Definition 1 把系数取伴随定义为 $F^{\dagger}(t)=\sum_j C_j^{\dagger}t^j$；它不反转指数。因此在单位圆上应写 $F(\eta)^*=F^{\dagger}(\eta^{-1})$，一般不能写成 $F^{\dagger}(\eta)$。圆上无穷多个取值把幺正与行列式关系提升为 Laurent 恒等式：对每个矩阵元乘以足够高的 $t$ 次幂后，普通多项式在无穷多个点为零，故各系数为零。对于 $n>0$，比较极端系数得到
+
+$$
+\begin{aligned}
+\det C_n&=\det C_{-n}=0,\\
+C_{-n}^{\dagger}C_n&=0,\qquad C_nC_{-n}^{\dagger}=0.
+\end{aligned}
+$$
+
+非零的端点矩阵于是秩为一。文献利用这些关系选出唯一的末端投影 $P$，满足 $C_n(I-P)=0$ 与 $C_{-n}P=0$。在 $n>0$ 且 $C_n\ne0$ 的分支，投影到 $C_n$ 的行空间便给出
+
+$$
+P=P_n=\frac{C_n^{\dagger}C_n}{\Tr(C_n^{\dagger}C_n)}.
+$$
+
+分母在这个分支严格为正；常数情形不使用此式。若选用非零的负端点，文献的平行论证从 $C_{-n}$ 的行空间选出互补投影，同样满足两条消去条件；无需把原假设中的“或”改成额外的正端点假设。
+
+令 $G(t)=F(t)\bigl(t^{-1}P+t(I-P)\bigr)=F(t)E_P(t)^{-1}$。把支撑外的 $C_j$ 约定为零，乘法的系数更新是
+
+$$
+G_j=C_{j+1}P+C_{j-1}(I-P).
+$$
+
+两条消去条件使 $t^{n+1}$ 与 $t^{-n-1}$ 项消失，奇偶支撑再把次数上界降至 $n-1$；单位圆上的 $\mathrm{SU}(2)$ 性质仍保留。次数恰为 $n-1$：否则由 $F=GE_P$、$\deg F\le\deg G+1$ 会与 $F$ 的实际次数 $n$ 矛盾。这样可对 $G\in\mathcal{E}_{n-1}$ 归纳，再在右侧接回 $P_n=P$。任一长度恰为 $n$ 的分解，其末端投影都必须满足同样的端点消去条件，因而被非零端点唯一确定；逐步剥离便得到整个有序列表及剩余常矩阵的唯一性。完整证明由 Lean 内核检查。
+:::
+
+例如直接展开并用 $P(I-P)=0$ 得 $E_P(t)E_{I-P}(t)=I$：人为补长的列表不具有上述唯一性。
+
+**精确合成的边界。** Theorem 2 分解的是已经给定、在整个单位圆上取值于 $\mathrm{SU}(2)$ 且满足上述奇偶条件的完整矩阵环。把有界实目标多项式补全到这样的环、选定 $t$ 与信号变量的相位约定、以及在特定 QSP 约定下由反演对称性限制各 $P_k$ 到布洛赫赤道，仍需额外条件与论证（见 Haah §3.1 及本条前述 Gilyén 等人的补全结果）。再把二维信号作用提升为矩阵奇异值变换，还需块编码与投影桥梁。因此这里的有序投影唯一性不等于实角代表的唯一性，不覆盖补长列表，也不单独给出数值稳定性、效率或硬件实现保证。
 
 ## 16.2.1 静态有向森林：怎样补成一个整圈 {#sec-directed-forest-cycle-completion}
 
@@ -131,9 +139,29 @@ $$
 
 更贴近下面端点、计数与概率表述的出处是 Boaz Tsaban，*Permutation graphs, fast forward permutations, and sampling the cycle structure of a permutation*，*Journal of Algorithms* **47**（2003），104–121，[doi:10.1016/S0196-6774(03)00017-8](https://doi.org/10.1016/S0196-6774(03)00017-8)。该文第 107–109 页的 Lemma 1.1 从无有向循环的部分置换图得到路径分量及其唯一最小、最大端点；Lemma 1.2 通过连接这些端点穷尽单环补全，给出阶乘计数；Lemma 1.3 区分同分量封口与异分量合并；Definition 1.4 与 Lemma 1.5 则给出正、逆向置换查询中的均匀端点选择与查询序列概率。这些端点、计数与概率规律已有文献依据，并非始于本书。
 
-下面将这些经典结果写成同一顶点集上的实际补全集、端点双射与静态条件分布，并保留完整书面证明。Tsaban 的查询模型只涉及置换及逆置换的取值，并不直接覆盖黏合树的完整自适应查询历史。不主张数学新颖性；形式化需求登记于[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11)；下文先给出端点补全的 Lean 核心，再列出范围更广的书面结论。
+下面将这些经典结果写成同一顶点集上的实际补全集、端点双射与静态条件分布，并保留完整书面证明。Tsaban 的查询模型只涉及置换及逆置换的取值，并不直接覆盖黏合树的完整自适应查询历史。不主张数学新颖性；形式化需求登记于[请求 #11](https://github.com/the-omega-institute/trureturing-requests/issues/11)；下文先给出唯一有向路径次序与端点补全的 Lean 结论，再列出范围更广的书面结论。
 
 把每个弱连通分量缩成一点，补全后的整圈就对应分量之间的一个整圈。下面直接从原始边关系定义分量、头尾和补全集；这里的整圈是顶点集上只有一个轨道的置换。
+
+::: {.theorem #thm-directed-forest-component-path-order title="真实分量的唯一有向路径次序" lean="D5/S3/Combinatorics/Graph/LinearForests/DirectedForestPathOrder.component_path_order"}
+设 $V$ 为有限类型，$E:V\to V\to\operatorname{Prop}$ 满足右唯一、左唯一，且 `Relation.TransGen E` 无自反点。令 $\operatorname{Component}(E)=V/\operatorname{EqvGen}(E)$。对每个实际分量 $A\in\operatorname{Component}(E)$，定义其顶点纤维
+
+$$
+V_A=\{x\in V:[x]_E=A\},\qquad m_A=|V_A|.
+$$
+
+则存在唯一的双射 $e_A:\{0,\ldots,m_A-1\}\simeq V_A$，使对任意序位 $i,j$ 都有
+
+$$
+E\bigl(e_A(i),e_A(j)\bigr)\quad\Longleftrightarrow\quad i+1=j.
+$$
+
+这里将纤维元素视为其底层顶点。双射遍历分量的全部顶点且不重复，等价式同时刻画全部有向边。本结论不要求分量数至少为二；孤立分量给出单顶点枚举，空载体没有分量 $A$。
+:::
+
+::: proof
+同一分量的任意两个顶点都能沿有向路径到达该分量的尾。把这两条路径反向，利用前驱唯一性可比较两个顶点；无环性于是使有向可达关系成为纤维上的严格全序。按此序枚举有限纤维。原始边不能跨过中间序位，否则后继唯一性会迫使产生非空有向循环；反之，相邻序位间的非空路径不能含中间顶点，故必是一条原始边。两个满足等价式的枚举之间的序位变换严格递增，而有限全序上的严格递增自映射必为恒等，因此枚举唯一。完整证明由 Lean 内核检查。
+:::
 
 ::: {.theorem #thm-directed-forest-completion-core title="有向线性森林的端点补全核心" lean="D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion"}
 设 $V$ 为有限类型，$E:V\to V\to\operatorname{Prop}$ 同时满足右唯一（每个顶点至多一个出邻点）、左唯一（每个顶点至多一个入邻点）以及 `Relation.TransGen E` 无自反点；再设真实弱连通分量商集 $\operatorname{Component}(E)$ 至少有两个元素。令 $\operatorname{Tail}(E)$ 与 $\operatorname{Head}(E)$ 分别是没有出边与没有入边的顶点子类型，令
@@ -153,7 +181,7 @@ $(|\operatorname{Component}(E)|-1)!$（按自然数截断减法与阶乘），�
 先由有限性、无环性和后继的唯一性确定每个弱分量的尾，对反向关系作同样处理得到头。延拓置换把所有尾双射到所有头；沿头的首次返回识别原置换与分量置换的轨道，从而得到整圈补全之间的等价。等价给出阶乘计数及非空性，有限均匀概率质量的条件化与推前给出同一补全分布；端点等式再把分量后继的边缘概率传回原始顶点。完整证明由 Lean 内核检查。
 :::
 
-下面书面结论中的边数恒等式 $|E|=N-c$ 与显式事件概率比值 $(c-1)!/(N-1)!$ 未在所引 Lean 声明中陈述或核验，仍由后面的完整书面证明承担。交替约束下的静态分类与计数见下一小节；普通无向整圈的实际定向纤维与同图对应见 [@thm-undirected-cycle-orientation-fibers]。交替条件分布、无向概率分布、自适应历史、查询或 `EXIT` 的桥梁仍另需相应的分布与对应证明。
+上述两个 Lean 结论给出唯一的完整有向路径次序及端点补全核心。下面书面结论中的边数恒等式 $|E|=N-c$ 与显式事件概率比值 $(c-1)!/(N-1)!$ 未在这些 Lean 声明中陈述或核验，仍由后面的完整书面证明承担。交替约束下的静态分类与计数见下一小节；普通无向整圈的实际定向纤维与同图对应见 [@thm-undirected-cycle-orientation-fibers]。交替条件分布、无向概率分布、自适应历史、查询或 `EXIT` 的桥梁仍另需相应的分布与对应证明。
 
 ::: {.theorem #thm-directed-forest-cycle-completion title="有向森林的单环补全与静态均匀律" status="written-proof" proof="pf-directed-forest-cycle-completion" doi="10.1007/978-1-4684-0637-5_13" source="Section 8, p. 11" request="https://github.com/the-omega-institute/trureturing-requests/issues/11"}
 设 $V$ 为有 $N\ge2$ 个元素的有限标号集，$E\subseteq V\times V$。假定每个顶点在 $E$ 中至多有一条入边、至多有一条出边，且 $E$ 无有向循环。令 $\mathcal C$ 为 $(V,E)$ 的全部弱连通分量组成的集合，包含每一个孤立顶点，并假定 $c=|\mathcal C|\ge2$。

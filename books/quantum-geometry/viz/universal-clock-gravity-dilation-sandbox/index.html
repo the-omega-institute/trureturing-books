@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="CLOCK//DILATION · Universal Comparison Clock, Light-Speed Precision Floor &amp; Gravitational Information-Density Dilation">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CLOCK//DILATION 普适比较主频、光速精度下限与引力信息密度钟慢</title>
+<meta name="description" content="两位观察者的主频飞轮转得一样快；运动与背景信息负载按勾股预算分走一部分节拍，剩下的自停机通道就是固有时的钟率 dτ/dt = √((1 − η)(1 − β²))。光速把一个往返窗口的拍数封顶在 N = ν₀Δτ，精度下限 1/N。Two observers turn master flywheels at the same rate; motion and background information load take a share of the beats by a Pythagorean budget, and what remains on the self-halting channel is the proper-time rate dτ/dt = √((1 − η)(1 − β²)). The speed of light caps the beats of a round-trip window at N = ν₀Δτ, a precision floor of 1/N.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="universal-clock-gravity-dilation-sandbox">
+<div class="app lab" id="app">
+<header class="top">
+  <div class="brand">
+    <a class="crumb" href="../"><span class="zh">◂ 可视化索引 · 第 39 章 · §39.8</span><span class="en">◂ Visualizations · Ch. 39 · §39.8</span></a>
+    <h1 class="logo" data-text="CLOCK//DILATION">CLOCK<b>//</b>DILATION</h1>
+    <div class="tagline"><span class="zh">普适比较主频与引力信息密度钟慢 · <em>所有观察者的主飞轮转得一样快；运动和背景负载按勾股预算分走的那一份，正是钟慢下来的那一份。</em></span><span class="en">Universal comparison clock and information-density dilation · <em>every observer turns the same master flywheel; the share that motion and background load take by a Pythagorean budget is exactly how much the clock slows.</em></span></div>
+  </div>
+  <div class="status"><span class="pill" id="pillNu">ν₀ <strong>1.000</strong></span><span class="pill hot" id="pillRate">dτ/dt <strong>—</strong></span><div class="langs" role="group" aria-label="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div></div>
+</header>
+<aside class="col deck" id="rail" aria-label="透镜与实验卡" data-aria-en="Lenses and experiment cards">
+  <section class="panel sec">
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">§39.8</span></h2>
+    <div class="lens-toggle" id="lensChips" role="group" aria-label="读法透镜" data-aria-en="Reading lens">
+      <button type="button" data-lens="clock" aria-pressed="true"><span class="zh">比较主频读法</span><span class="en">Comparison-clock lens</span></button><button type="button" data-lens="phys" aria-pressed="false"><span class="zh">物理时空读法</span><span class="en">Spacetime-physics lens</span></button>
+    </div>
+    <div class="presets cards" id="presets">
+      <button class="preset" data-preset="light-cone-precision-floor" data-still="end" aria-pressed="false"><span class="code">CONE · ε = 1/N</span><span class="cn zh">光锥精度下限：20 拍窗口只核验 ½cΔτ 以内的格点</span><span class="cn en">Light-cone precision floor: a 20-tick window verifies only the nodes within ½cΔτ</span></button>
+      <button class="preset" data-preset="kinematic-address-split" data-still="end" aria-pressed="false"><span class="code">MOTION · β = 0.80</span><span class="cn zh">运动分账：同一主频，β² = 64% 拿去跳地址</span><span class="cn en">Kinematic split: one master clock, β² = 64% spent on address hops</span></button>
+      <button class="preset" data-preset="holographic-mass-load" data-still="end" aria-pressed="false"><span class="code">MASS · η = 0.40</span><span class="cn zh">全息质量负载：r = 2.5 r<sub>s</sub> 处背景纠缠占去 40%</span><span class="cn en">Holographic mass load: at r = 2.5 r<sub>s</sub> background entanglement takes 40%</span></button>
+      <button class="preset" data-preset="equivalence-dual-flywheel" data-still="end" aria-pressed="false"><span class="code">EQUIVALENCE · 0.64</span><span class="cn zh">等效双飞轮：三只子时钟同乘 0.64，内部比值不变</span><span class="cn en">Equivalence: three sub-clocks all scale by 0.64, their ratios stay</span></button>
+      <button class="preset" data-preset="horizon-saturation-lock" data-still="end" aria-pressed="false"><span class="code">HORIZON · η = 1</span><span class="cn zh">视界饱和：主飞轮照转，固有时帧冻结</span><span class="cn en">Horizon saturation: the master wheel turns, proper-time frames freeze</span></button>
+    </div>
+    <p class="note" id="presetNote"></p>
+  </section>
+</aside>
+<main class="center">
+  <div class="stage" id="stage" data-thumb aria-label="舞台：雷达光锥与普朗克格点，或两只主频飞轮、固有时帧柱与全息球" data-aria-en="Stage: the radar light cone on the Planck lattice, or two master flywheels, proper-time frame stacks and the holographic sphere">
+    <canvas class="fill" id="cv"></canvas><div class="scan"></div><div class="vig"></div>
+    <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+    <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+      <button class="chip" data-scene="cone" aria-pressed="false"><span class="zh">光锥窗口</span><span class="en">Light cone</span></button><button class="chip" data-scene="clocks" aria-pressed="true"><span class="zh">双飞轮</span><span class="en">Flywheels</span></button>
+    </div>
+    <button type="button" class="handle" id="handle" aria-label="拖动琥珀手柄" data-aria-en="Drag the amber handle" hidden></button>
+    <div class="hud-bl" id="legend"></div>
+  </div>
+  <div class="tour" id="tour"><button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button><div class="what"></div><button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button></div>
+  <div class="strip">
+    <section class="panel"><div class="head"><h2 id="plotATitle"></h2><span id="plotAMeta"></span></div><canvas id="plotA" aria-label="条带小图一：沿时间轴的计数" data-aria-en="Strip plot one: counts along the rail"></canvas></section>
+    <section class="panel"><div class="head"><h2 id="plotBTitle"></h2><span id="plotBMeta"></span></div><canvas id="plotB" aria-label="条带小图二：钟率或精度曲线" data-aria-en="Strip plot two: the rate or precision curve"></canvas></section>
+  </div>
+</main>
+<aside class="col side" id="evidence" aria-label="控制、读数与依据" data-aria-en="Controls, readouts and evidence">
+  <button class="chip" id="infoBtn"><span class="zh">理论接口 · 这不是证明</span><span class="en">Theory interface · not a proof</span></button>
+  <section class="panel sec" id="ctlPanel">
+    <h2><span class="zh">参数与手柄</span><span class="en">Parameters and handle</span></h2>
+    <div class="field"><label for="beta"><span class="zh">B 的速度 β = v/c</span><span class="en">Speed of B, β = v/c</span></label><output id="oBeta" for="beta">0.00</output><input id="beta" type="range" min="0" max="0.99" step="0.01" value="0"></div>
+    <div class="field"><label for="eta"><span class="zh">B 的信息负载 η<sub>info</sub> = r<sub>s</sub>/r</span><span class="en">Information load of B, η<sub>info</sub> = r<sub>s</sub>/r</span></label><output id="oEta" for="eta">0.400</output><input id="eta" type="range" min="0" max="1" step="0.001" value="0.4"></div>
+    <div class="field"><label for="nTicks"><span class="zh">窗口拍数 N<sub>ticks</sub> = ν₀Δτ</span><span class="en">Window ticks N<sub>ticks</sub> = ν₀Δτ</span></label><output id="oN" for="nTicks">20</output><input id="nTicks" type="range" min="4" max="40" step="1" value="20"></div>
+    <div class="grp">
+      <h3><span class="zh">琥珀手柄驱动</span><span class="en">The amber handle drives</span></h3>
+      <div class="chips" id="driveChips" role="group" aria-label="手柄驱动的参数" data-aria-en="Parameter the handle drives"><button class="chip" data-drive="beta" aria-pressed="false">β</button><button class="chip" data-drive="eta" aria-pressed="true">η</button><button class="chip" data-drive="both" aria-pressed="false"><span class="zh">β 与 η</span><span class="en">β and η</span></button></div>
+      <h3><span class="zh">子时钟（神经 · 原子 · 光尺）</span><span class="en">Sub-clocks (neural · atomic · photon ruler)</span></h3>
+      <div class="chips" id="subChips" role="group" aria-label="子时钟" data-aria-en="Sub-clocks"><button class="chip" data-sub="off" aria-pressed="true"><span class="zh">隐藏</span><span class="en">Hide</span></button><button class="chip" data-sub="on" aria-pressed="false"><span class="zh">显示</span><span class="en">Show</span></button></div>
+    </div>
+    <p class="note"><span class="zh">拖舞台上的琥珀手柄：双飞轮场景里它在 B 的转轴尖上，按上面选定的参数倾转飞轮；光锥场景里它在接收事件上，上下拖改变窗口拍数。拖空白处转视角。时间轴是主钟走过的拍数 ν₀t。</span><span class="en">Drag the amber handle on the stage: in the flywheel scene it sits on the tip of the axis of B and tilts the wheel by the parameter chosen above; in the light-cone scene it sits on the reception event and changes the window ticks up and down. Drag empty space to orbit. The rail counts the master beats ν₀t.</span></p>
+  </section>
+  <section class="panel sec" id="readouts" aria-live="polite">
+    <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">NUM</span></h2>
+    <dl class="ro">
+      <div class="key"><dt id="kKey"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+      <div class="v"><dt id="k1"></dt><dd id="ro1">—</dd></div>
+      <div class="c"><dt id="k2"></dt><dd id="ro2">—</dd></div>
+      <div class="m"><dt id="k3"></dt><dd id="ro3">—</dd></div>
+      <div><dt id="k4"></dt><dd id="ro4">—</dd></div>
+      <div class="wide"><dt id="k5"></dt><dd id="ro5">—</dd></div>
+      <div class="wide"><dt id="k6"></dt><dd id="ro6">—</dd></div>
+    </dl>
+    <p class="note" id="roNote"></p>
+  </section>
+  <section class="panel sec" id="leanPanel">
+    <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">零锥刚性：实二次型 S 在闵可夫斯基零锥 t² = |w|² 上处处为零，则 S = S(1, 0)·(t² − |w|²)，对任意空间维数 d 成立。页面取 d = 2，在零锥上取 12 个方向，解出在这些方向上都为零的二次型：解空间只有一维，比例于 t² − x² − y²。于是钟率 dτ/dt = √(1 − β²) 由光锥定到只差一个常数因子：</span><span class="en">Null-cone rigidity: a real quadratic form S that vanishes on the Minkowski null cone t² = |w|² is S = S(1, 0)·(t² − |w|²), in every spatial dimension d. The page takes d = 2 and 12 directions on the null cone and solves for the quadratic forms vanishing on all of them: the solutions form one line, proportional to t² − x² − y². So the light cone fixes the rate dτ/dt = √(1 − β²) up to one constant factor: </span><a data-lean-gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" href="#" target="_blank" rel="noopener"><code>eq_smul_minkowski_of_null</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">正交记录的时间下界（有条件）：单位向量 a、m₀、m₁ 满足 m₀ ⊥ m₁，若 a 到 m₀、m₁ 的富比尼—施图迪角都不超过 Eτ/ħ（E, ħ &gt; 0），则 τ ≥ πħ/(4E)。位移上界是输入，不是证明出的动力学速度极限。页面取 ħ = 1、E = π/4、m₀ = |0⟩、m₁ = |1⟩、a = (|0⟩ + |1⟩)/√2：两个角都是 π/4，界取等号，一次正交记录至少一拍 τ = 1/ν₀ = 1：</span><span class="en">Time bound for orthogonal records (conditional): unit vectors a, m₀, m₁ with m₀ ⊥ m₁, whose Fubini–Study angles from a to m₀ and to m₁ are both at most Eτ/ħ (E, ħ &gt; 0), force τ ≥ πħ/(4E). The displacement bounds are inputs, not a proved dynamical speed limit. The page takes ħ = 1, E = π/4, m₀ = |0⟩, m₁ = |1⟩ and a = (|0⟩ + |1⟩)/√2: both angles are π/4, the bound is attained, and one orthogonal record takes at least one beat τ = 1/ν₀ = 1: </span><a data-lean-gid="D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound" href="#" target="_blank" rel="noopener"><code>record_time_lower_bound</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">记录计数上界（有条件）：N 条正交记录各自满足上面的位移条件、总时长 Στᵢ ≤ T，则 N ≤ 4ET/(πħ)。页面取同一组 ħ = 1、E = π/4 与 T = Δτ = 20：N ≤ 20，一个往返窗口至多 N<sub>ticks</sub> = ν₀Δτ = 20 拍；精度下限 1/N<sub>ticks</sub> = 0.0500 是页面据此取的定义：</span><span class="en">Record-count bound (conditional): N orthogonal records, each meeting the displacement condition above, with total time Στᵢ ≤ T, satisfy N ≤ 4ET/(πħ). With the same ħ = 1, E = π/4 and T = Δτ = 20 the page reads N ≤ 20: a round-trip window holds at most N<sub>ticks</sub> = ν₀Δτ = 20 beats; the precision floor 1/N<sub>ticks</sub> = 0.0500 is the page's definition built on it: </span><a data-lean-gid="D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound" href="#" target="_blank" rel="noopener"><code>record_count_upper_bound</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">拉格朗日恒等式 (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣΣ(uᵢvⱼ − uⱼvᵢ)²。页面取 u = 时间轴 (0, 0, 1)、v = B 飞轮的单位转轴 (√(1 − η)β, √η, √((1 − η)(1 − β²)))：左边是 1 − (dτ/dt)²，右边是品红负载 η + (1 − η)β²，两边逐位相等，于是钟率² + 负载 = 1：</span><span class="en">Lagrange identity (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣΣ(uᵢvⱼ − uⱼvᵢ)². The page takes u = the time axis (0, 0, 1) and v = the unit axis of the flywheel of B, (√(1 − η)β, √η, √((1 − η)(1 − β²))): the left side is 1 − (dτ/dt)², the right side is the magenta load η + (1 − η)β², they agree to the last digit, so rate² + load = 1: </span><a data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">双曲恒等式 |cosh r|² − |sinh r|² = 1。页面取快度 r = artanh β（β = 0.80 时 r = 1.098612）：cosh r = 1.666667、sinh r = 1.333333，于是 dτ/dt = 1/cosh r = √(1 − β²) = 0.600000：</span><span class="en">The hyperbolic identity |cosh r|² − |sinh r|² = 1. The page takes the rapidity r = artanh β (r = 1.098612 at β = 0.80): cosh r = 1.666667 and sinh r = 1.333333, so dτ/dt = 1/cosh r = √(1 − β²) = 0.600000: </span><a data-lean-gid="D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation" href="#" target="_blank" rel="noopener"><code>bogoliubov_norm_conservation</code></a></span></div>
+    <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：狭义相对论的运动钟慢 dτ/dt = √(1 − v²/c²)（Einstein，1905）；施瓦西度规中静止观察者的钟率 √(1 − r<sub>s</sub>/r)，静止观察者测得局部速度 β 时再乘以 √(1 − β²)（Schwarzschild，1916）；等效原理：同一处所有局部时钟按同一因子变慢（Einstein，1907）；引力红移实验（Pound 与 Rebka，1960）。</span><span class="en">Literature results, not formalized in this book: special-relativistic dilation dτ/dt = √(1 − v²/c²) (Einstein, 1905); the rate √(1 − r<sub>s</sub>/r) of a static observer in the Schwarzschild metric, multiplied by √(1 − β²) at a local speed β measured by that observer (Schwarzschild, 1916); the equivalence principle: all local clocks at one place slow by the same factor (Einstein, 1907); the gravitational red-shift experiment (Pound and Rebka, 1960).</span></span></div>
+    <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“所有观察者共享主频 ν₀、钟慢是同一份勾股预算里自停机通道的份额”，以及把 r<sub>s</sub>/r 读作背景信息负载 η<sub>info</sub>、把运动读作地址跳跃，是本书的诠释模型。飞轮的倾角、全息球、品红弧的条数 round(20η)、子时钟的频率 0.25、2、1、地面格距与每个窗口里的拍数都是画面的选择；η = 1 是静止观察者 r → r<sub>s</sub> 的极限，视界上不存在静止观察者。</span><span class="en">“All observers share one master frequency ν₀ and dilation is the share left to the self-halting channel of one Pythagorean budget”, with r<sub>s</sub>/r read as a background information load η<sub>info</sub> and motion read as address hops, is the book’s interpretive model. The tilt of the flywheels, the holographic sphere, the count round(20η) of magenta arcs, the sub-clock frequencies 0.25, 2 and 1, the floor spacing and the beats per window are choices of the picture; η = 1 is the limit r → r<sub>s</sub> of a static observer, and no static observer exists on the horizon.</span></span></div>
+    <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都按双精度当场算出：钟率 √((1 − η)(1 − β²))、三个通道的份额、帧数、快度、格点计数与零锥上的二次型解空间。数值演示，不是证明。</span><span class="en">Every number on the page is computed live in double precision: the rate √((1 − η)(1 − β²)), the three channel shares, frame counts, the rapidity, lattice counts and the solution space of quadratic forms on the null cone. A numerical illustration, not a proof.</span></span></div>
+    <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">开放问题：不预设连续时空，从离散比较几何导出完整的张量形式爱因斯坦场方程与牛顿常数的归一化（<a href="../../zh/ch34-s24-interaction-sign-and-sagitta-composition.html#prob-ch34-gravity-dynamics-and-coupling" target="_top">§34.24 开放问题</a>）。页面只画静止度规给出的钟率因子，不涉及场方程。</span><span class="en">Open problem: derive the full tensorial Einstein field equations and the normalization of Newton’s constant from discrete comparison geometry without presupposing a continuum spacetime (<a href="../../en/ch34-s24-interaction-sign-and-sagitta-composition.html#prob-ch34-gravity-dynamics-and-coupling" target="_top">§34.24 open problem</a>). The page draws only the clock-rate factor of a static metric and says nothing about field equations.</span></span></div>
+  </section>
+</aside>
+<footer class="rail"><div class="transport"><button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button><button class="tbtn" id="play" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▶</button><span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span></div><div class="clock"><span class="tau" id="tau"></span><input type="range" id="now" min="0" max="10" step="any" value="10" aria-label="主钟走过的拍数 ν₀t" data-aria-en="Master beats ν₀t"></div><div class="keys"><span id="hint"></span><span id="formula"></span></div></footer>
+</div>
+<div class="drawer" id="drawer" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 普适主频与钟慢</span><span class="en">Theory interface · the universal clock and dilation</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+  <div class="zh">
+    <p class="lede">这是数值沙盘，不是证明。每个数都由页面当场算出（NUM）；每条 Lean 定理只在依据栏写明的那一个实例上演示。</p>
+    <ol>
+      <li><b>主频。</b>两位观察者 A、B 各有一只紫色主飞轮，按同一个主频 ν₀ = 1 转动：时间轴每走一拍，两只飞轮都转一整圈，转过的角度永远相同。</li>
+      <li><b>勾股预算。</b>飞轮的单位转轴 v = (√(1 − η)β, √η, √((1 − η)(1 − β²))) 在竖直的固有时轴上的投影是青色的钟率 dτ/dt = √((1 − η)(1 − β²))；其余是品红的负载：背景纠缠 η 与地址跳跃 (1 − η)β²。三个通道的份额 η + (1 − η)β² + (1 − η)(1 − β²) = 1，正是拉格朗日恒等式在 u = (0, 0, 1) 上的读法：线² + 面积² = 1。</li>
+      <li><b>帧柱。</b>青色硬币是已经完成的固有时帧：主钟走过 ν₀t 拍时，A 完成 t 帧，B 完成 (dτ/dt)·t 帧。β = 0.80 时十拍里 B 只完成 6 帧；η = 0.40 时完成 7.75 帧；η = 1 时一帧也不完成。</li>
+      <li><b>快度。</b>β = tanh r 时 cosh² r − sinh² r = 1 给出 dτ/dt = 1/cosh r = √(1 − β²)。零锥刚性说明：只要知道光锥，计时的二次型就定到只差一个常数因子。</li>
+      <li><b>光锥窗口。</b>观察者在一拍发出雷达脉冲，N 拍后收到回声：能被往返核验的格点只在半径 R<sub>max</sub> = ½cΔτ = N/2 个格距的圆里（c = ℓ<sub>P</sub>ν₀，一拍一个格距）。N = 20 时圆里有 317 个格点。按记录计数上界，窗口里至多 N 拍，页面取精度下限 ε<sub>self,min</sub> = 1/N。</li>
+      <li><b>等效。</b>神经、原子、光尺三只子时钟在 A 里的频率是 0.25、2、1 拍；在 B 里全部乘同一个钟率因子，B 内部的比值与 A 内部的比值相同，局部比不出差别。</li>
+    </ol>
+    <p class="lede refs">书中：<a href="../../zh/ch39-s08-universal-clock-and-gravitational-dilation.html#sec-ch39-universal-clock-and-gravitational-dilation" target="_top">§39.8 普适比较主频与引力信息密度钟慢</a> · <a href="../../zh/ch17-lorentz-geometry.html#prop-null-cone-rigidity" target="_top">第十七章 零锥决定二次型</a> · <a href="../../zh/ch07-geometric-time-and-speed-limits.html#thm-fubini-study-record-time" target="_top">第七章 记录时间下界</a></p>
+  </div>
+  <div class="en">
+    <p class="lede">This is a numerical sandbox, not a proof. Every number is computed on the page (NUM); each Lean theorem is shown only on the one instance named in the evidence panel.</p>
+    <ol>
+      <li><b>The master clock.</b> Observers A and B each turn a violet master flywheel at the same master frequency ν₀ = 1: with every beat of the rail both wheels turn once round, always through the same angle.</li>
+      <li><b>The Pythagorean budget.</b> The unit axis of a wheel, v = (√(1 − η)β, √η, √((1 − η)(1 − β²))), projects onto the upright proper-time axis as the cyan rate dτ/dt = √((1 − η)(1 − β²)); the rest is the magenta load: background entanglement η and address hops (1 − η)β². The three shares η + (1 − η)β² + (1 − η)(1 − β²) add up to 1, which is the Lagrange identity read at u = (0, 0, 1): line² + area² = 1.</li>
+      <li><b>Frame stacks.</b> The cyan coins are completed proper-time frames: after ν₀t master beats A has completed t frames and B has completed (dτ/dt)·t. At β = 0.80 B completes 6 frames in ten beats; at η = 0.40 it completes 7.75; at η = 1 it completes none.</li>
+      <li><b>Rapidity.</b> With β = tanh r, cosh² r − sinh² r = 1 gives dτ/dt = 1/cosh r = √(1 − β²). Null-cone rigidity says that the light cone alone fixes the quadratic form of timekeeping up to one constant factor.</li>
+      <li><b>The light-cone window.</b> The observer sends a radar pulse at one beat and hears its echo N beats later: the lattice nodes that a round trip can verify lie within the circle of radius R<sub>max</sub> = ½cΔτ = N/2 spacings (c = ℓ<sub>P</sub>ν₀, one spacing per beat). At N = 20 the circle holds 317 nodes. By the record-count bound a window holds at most N beats, and the page takes the precision floor ε<sub>self,min</sub> = 1/N.</li>
+      <li><b>Equivalence.</b> The neural, atomic and photon-ruler sub-clocks run at 0.25, 2 and 1 beats in A; in B every one is multiplied by the same rate factor, so the ratios inside B equal the ratios inside A and no local comparison tells them apart.</li>
+    </ol>
+    <p class="lede refs">In the book: <a href="../../en/ch39-s08-universal-clock-and-gravitational-dilation.html#sec-ch39-universal-clock-and-gravitational-dilation" target="_top">§39.8 Universal comparison clock and gravitational dilation</a> · <a href="../../en/ch17-lorentz-geometry.html#prop-null-cone-rigidity" target="_top">Chapter 17 The null cone fixes the quadratic form</a> · <a href="../../en/ch07-geometric-time-and-speed-limits.html#thm-fubini-study-record-time" target="_top">Chapter 7 The record-time bound</a></p>
+  </div>
+</div></div>
+<script src="main.js"></script>
+</body>
+</html>

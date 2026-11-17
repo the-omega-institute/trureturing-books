@@ -68,60 +68,68 @@ Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 :::
 
 ::: {.remark #rem-qsvt-walks-literature title="Full QSVT Realizability and the Glued-Trees Separation (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** This note records the full literature statements for QSVT and quantum walks. The sufficiency direction of Theorem 3 in the rotation convention, and signed-circle factorization of the same completion, are formalized separately below in [@thm-polynomial-phase-synthesis] and [@thm-signed-circle-phase-factorization]. The full iff characterization, real-part circuits, and query semantics stated here retain their literature status; complex-polynomial lifting on arbitrary raw projected unitaries is treated separately in [@thm-projected-unitary-polynomial-lifting] and [@thm-native-phase-projected-lifting].
+**Literature result, not formalized in this book.** This note records the full literature statements for QSVT and quantum walks. The sufficiency direction of Theorem 3 in the rotation convention, and signed-circle factorization of the same completion, are formalized separately below in [@thm-polynomial-phase-synthesis] and [@thm-signed-circle-phase-factorization]. The full iff characterization, real-part circuits, and query semantics stated here retain their literature status; complex-polynomial lifting on arbitrary raw projected unitaries is treated separately in [@thm-projected-unitary-polynomial-lifting] and [@thm-native-phase-projected-lifting]. Haah's complete ordered Laurent-loop factorization appears separately in [@thm-haah-laurent-factorization].
 
 1. **Quantum Singular Value Transformation (QSVT): complex unitary completion versus real-polynomial extraction** (A. Gilyén, Y. Su, G. H. Low, and N. Wiebe, *Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics*, Proc. 51st ACM STOC, 193–204, 2019, doi:10.1145/3313276.3316366, Theorem 3 and Theorem 17 / Corollary 18): Given a block encoding $\tilde{\Pi} U \Pi = A$ ($\norm{A}_{\mathrm{op}} \le 1$), the literature distinguishes two levels of polynomial realizability:
    - **Direct two-dimensional complex QSP (Theorem 3)**: A pair of complex polynomials $(P_{\mathrm{c}}, Q_{\mathrm{c}}) \in \mathbb{C}[x]^2$ is realized directly as the matrix entries of a single phase-modulated sequence $U_{\Phi}(x)$ if and only if $\deg(P_{\mathrm{c}}) \le d$, $\deg(Q_{\mathrm{c}}) \le d - 1$, $P_{\mathrm{c}}$ has parity $d \bmod 2$, $Q_{\mathrm{c}}$ has opposite parity $(d - 1) \bmod 2$, and $|P_{\mathrm{c}}(x)|^2 + (1 - x^2)|Q_{\mathrm{c}}(x)|^2 = 1$ for all $x \in [-1, 1]$.
    - **General bounded real-polynomial QSVT via complex completion and real-part extraction (Theorem 17 / Corollary 18)**: For a general real target polynomial $P_{\mathrm{target}} \in \mathbb{R}[x]$ of degree $\le d$, definite parity $d \bmod 2$, and uniform bound $\max_{x \in [-1, 1]} |P_{\mathrm{target}}(x)| \le 1$ (for instance $P_{\mathrm{target}}(x) = x/2$, where $P_{\mathrm{target}}(1)^2 = 1/4 < 1$ precludes any real completion $P_{\mathrm{target}}(x)^2 + (1 - x^2)Q(x)^2 = 1$), Fejér–Riesz factorization constructs a complex completion pair $(P_{\mathrm{c}}, Q_{\mathrm{c}}) \in \mathbb{C}[x]^2$ satisfying Theorem 3 with $\operatorname{Re} P_{\mathrm{c}}(x) = P_{\mathrm{target}}(x)$ and $|P_{\mathrm{c}}(x)|^2 + (1 - x^2)|Q_{\mathrm{c}}(x)|^2 = 1$. Introducing one additional $\lvert +\rangle$ control ancilla to superpose the forward and negated phase sequences $\frac{1}{2}(U_{\Phi} + U_{-\Phi})$, followed by ancilla $\langle +\rvert$ projection and the parity-dependent block projection ($\tilde{\Pi}(\cdot)\Pi$ for odd $d$, $\Pi(\cdot)\Pi$ for even $d$), extracts the exact real transformation $P_{\mathrm{target}}^{(\mathrm{SV})}(A)$ across every singular-value $2\times 2$ block using $d$ queries to $U$ and $U^*$.
 
-   **From a whole Laurent loop to ordered factors.** A further layer of QSP decomposition works directly with matrix coefficients: J. Haah, *Product Decomposition of Periodic Functions in Quantum Signal Processing*, Quantum **3**, 190 (2019), [doi:10.22331/q-2019-10-07-190](https://doi.org/10.22331/q-2019-10-07-190), [arXiv:1806.10236v4, Definition 1 and Theorem 2](https://arxiv.org/html/1806.10236v4#Thmlemma1). The statement and induction below are **literature results, not formalized in this book**.
-
-   Let $C:\mathbb{Z}\to M_2(\mathbb{C})$ be any finitely supported coefficient family, defining the formal Laurent polynomial $F(t)=\sum_{j\in\mathbb{Z}}C_jt^j$. Haah's $\mathcal{P}_n$ requires $C_j=0$ for $|j|>n$ and $F(\eta)\in\mathrm{SU}(2)$ for every $|\eta|=1$: explicitly, $F(\eta)^*F(\eta)=I$ and $\det F(\eta)=1$, where the star is the conjugate transpose of the evaluated matrix. The subset $\mathcal{E}_n$ additionally requires support in $\{-n,-n+2,\ldots,n\}$, so every nonzero exponent has the parity of $n$. **Actual degree $n$** means $C_n\ne0$ **or** $C_{-n}\ne0$, rather than merely an upper bound on degree.
-
-   For a rank-one orthogonal projector $P$ ($P^*=P$, $P^2=P$, $\operatorname{rank}P=1$), define the primitive factor
-
-   $$
-   E_P(t)=tP+t^{-1}(I-P).
-   $$
-
-   This multiplies the projected line by $t$ and its orthogonal complement by $t^{-1}$; for $P=\operatorname{diag}(1,0)$ it is simply $\operatorname{diag}(t,t^{-1})$. On the unit circle both eigenvalues have modulus $1$ and their product is $1$, so $E_P\in\mathcal{E}_1$. Haah's Theorem 2 states that, for every $n\ge0$ and every $F\in\mathcal{E}_n$ of actual degree $n$, there are a unique $E_0\in\mathrm{SU}(2)$ and a unique **ordered list of exactly $n$** rank-one orthogonal projectors $(P_1,\ldots,P_n)$ such that
-
-   $$
-   F(t)=E_0\prod_{k=1}^{n}\bigl(tP_k+t^{-1}(I-P_k)\bigr).
-   $$
-
-   Factors appear from left to right in increasing order of $k$, and equality is coefficientwise as a Laurent polynomial. For $n=0$, $F=C_0$ is any constant in $\mathrm{SU}(2)$, $E_0=C_0$, and the projector list is empty; evaluation at $t=0$ is never used. Conversely, any product of $n$ primitive factors belongs to $\mathcal{E}_n$, but its actual degree can be smaller. For example, expansion using $P(I-P)=0$ gives $E_P(t)E_{I-P}(t)=I$: artificially padded lists do not have the stated uniqueness.
-
-   **Why can the last factor be peeled off?** Haah's Definition 1 defines the coefficient adjoint as $F^{\dagger}(t)=\sum_j C_j^{\dagger}t^j$, without reversing exponents. Thus on the unit circle $F(\eta)^*=F^{\dagger}(\eta^{-1})$, generally not $F^{\dagger}(\eta)$. The infinitely many circle values promote unitarity and determinant relations to Laurent identities: multiply each entry by a sufficiently large power of $t$, and an ordinary polynomial vanishing at infinitely many points has all coefficients zero. For $n>0$, comparison of the extreme coefficients gives
-
-   $$
-   \begin{aligned}
-   \det C_n&=\det C_{-n}=0,\\
-   C_{-n}^{\dagger}C_n&=0,\qquad C_nC_{-n}^{\dagger}=0.
-   \end{aligned}
-   $$
-
-   Every nonzero endpoint matrix therefore has rank one. The paper uses these relations to select the unique terminal projector $P$ satisfying $C_n(I-P)=0$ and $C_{-n}P=0$. In the branch $n>0$ and $C_n\ne0$, projection onto the row space of $C_n$ gives
-
-   $$
-   P=P_n=\frac{C_n^{\dagger}C_n}{\Tr(C_n^{\dagger}C_n)}.
-   $$
-
-   The denominator is strictly positive in this branch; the constant case does not use this formula. If the nonzero negative endpoint is used instead, the paper's parallel argument selects the complementary projector from the row space of $C_{-n}$, satisfying the same two cancellation conditions. The original disjunction therefore needs no additional positive-endpoint assumption.
-
-   Set $G(t)=F(t)\bigl(t^{-1}P+t(I-P)\bigr)=F(t)E_P(t)^{-1}$. With coefficients outside the support understood to be zero, multiplication gives the update
-
-   $$
-   G_j=C_{j+1}P+C_{j-1}(I-P).
-   $$
-
-   The two cancellation conditions remove the $t^{n+1}$ and $t^{-n-1}$ terms, and parity reduces the degree bound to $n-1$; the circle values remain in $\mathrm{SU}(2)$. The degree is exactly $n-1$: a smaller degree would contradict the actual degree $n$ of $F$ through $F=GE_P$ and $\deg F\le\deg G+1$. Induction on $G\in\mathcal{E}_{n-1}$ then reconstructs the list by appending $P_n=P$ on the right. In any decomposition of length exactly $n$, the terminal projector must satisfy those same endpoint cancellation conditions and is uniquely determined by a nonzero endpoint. Repeated peeling establishes uniqueness of the entire ordered list and residual constant. This outlines Haah's paper proof; it is not a new kernel proof in this book.
-
-   **Boundaries of exact synthesis.** Theorem 2 factors an already specified whole matrix loop with values in $\mathrm{SU}(2)$ everywhere on the unit circle and the stated parity. Completing a bounded real target polynomial to such a loop, fixing the phase convention relating $t$ to the signal variable, and imposing inversion symmetry to restrict the $P_k$ to the Bloch equator in a particular QSP convention require additional hypotheses and arguments (Haah §3.1 and the Gilyén et al. completion results above). Lifting the two-dimensional signal action to a matrix singular-value transformation also requires the block-encoding and projection bridges. Uniqueness of the ordered projectors here therefore gives neither uniqueness of real angle representatives nor uniqueness for padded lists, and does not by itself guarantee numerical stability, efficiency, or hardware implementation.
-
 2. **Exponential quantum-walk speedup on glued trees and its structural limits** (A. M. Childs, R. Cleve, E. Deotto, E. Farhi, S. Gutmann, and D. A. Spielman, *Exponential algorithmic speedup by a quantum walk*, Proc. 35th ACM STOC, 59–68, 2003, doi:10.1145/780542.780552, arXiv:quant-ph/0209131): On two depth-$n$ binary trees joined by a random cycle of alternating edges at the leaves, a continuous-time quantum walk starting at the entrance root remains confined to the $(2n+2)$-dimensional symmetric column subspace and reaches the `EXIT` root in $\mathrm{poly}(n)$ time, whereas Childs et al. prove that any classical algorithm making at most $2^{n/6}$ oracle queries finds the `EXIT` vertex with probability at most $4\cdot 2^{-n/6}$ (yielding a $2^{\Omega(n)}$ classical query lower bound for bounded success probability). This exponential separation relies critically on graph symmetry, oracle access, and task definition; on general unstructured graphs, interference does not automatically cancel all backtracking paths.
 
 :::
+
+**From a whole Laurent loop to ordered factors.** A further layer of QSP decomposition works directly with matrix coefficients: J. Haah, *Product Decomposition of Periodic Functions in Quantum Signal Processing*, Quantum **3**, 190 (2019), [doi:10.22331/q-2019-10-07-190](https://doi.org/10.22331/q-2019-10-07-190), [arXiv:1806.10236v4, Definition 1 and Theorem 2](https://arxiv.org/html/1806.10236v4#Thmlemma1). The algebraic theorem below is formalized in Lean; completion and implementation retain their separate hypotheses.
+
+Fix $n\in\mathbb{N}$. Let $C:\mathbb{Z}\to M_2(\mathbb{C})$ be any finitely supported coefficient family, defining the formal Laurent polynomial $F(t)=\sum_{j\in\mathbb{Z}}C_jt^j$. Haah's $\mathcal{P}_n$ requires $C_j=0$ for $|j|>n$ and $F(\eta)\in\mathrm{SU}(2)$ for every $|\eta|=1$: explicitly, $F(\eta)^*F(\eta)=I$ and $\det F(\eta)=1$, where the star is the conjugate transpose of the evaluated matrix. The subset $\mathcal{E}_n$ additionally requires support in $\{-n,-n+2,\ldots,n\}$, so every nonzero exponent has the parity of $n$. **Actual degree $n$** means $C_n\ne0$ **or** $C_{-n}\ne0$, rather than merely an upper bound on degree.
+
+For a rank-one orthogonal projector $P$ ($P^*=P$, $P^2=P$, $\operatorname{rank}P=1$), define the primitive factor
+
+$$
+E_P(t)=tP+t^{-1}(I-P).
+$$
+
+This multiplies the projected line by $t$ and its orthogonal complement by $t^{-1}$; for $P=\operatorname{diag}(1,0)$ it is simply $\operatorname{diag}(t,t^{-1})$. On the unit circle both eigenvalues have modulus $1$ and their product is $1$, so $E_P\in\mathcal{E}_1$.
+
+::: {.theorem #thm-haah-laurent-factorization title="Unique Ordered Factorization of an SU(2) Laurent Loop" lean="D5/S3/ContinuousObservables/LaurentLoopFactorization.haah_factorization"}
+For every $n\ge0$ and every $F\in\mathcal{E}_n$ of actual degree $n$, there are a unique $E_0\in\mathrm{SU}(2)$ and a unique **ordered list of exactly $n$** rank-one orthogonal projectors $(P_1,\ldots,P_n)$ such that
+
+$$
+F(t)=E_0\prod_{k=1}^{n}\bigl(tP_k+t^{-1}(I-P_k)\bigr).
+$$
+
+Factors appear from left to right in increasing order of $k$, and equality is coefficientwise as a Laurent polynomial. For $n=0$, $F=C_0$ is any constant in $\mathrm{SU}(2)$, $E_0=C_0$, and the projector list is empty; evaluation at $t=0$ is never used. Conversely, any product of $n$ primitive factors belongs to $\mathcal{E}_n$, but its actual degree can be smaller.
+:::
+
+::: proof
+**Why can the last factor be peeled off?** Haah's Definition 1 defines the coefficient adjoint as $F^{\dagger}(t)=\sum_j C_j^{\dagger}t^j$, without reversing exponents. Thus on the unit circle $F(\eta)^*=F^{\dagger}(\eta^{-1})$, generally not $F^{\dagger}(\eta)$. The infinitely many circle values promote unitarity and determinant relations to Laurent identities: multiply each entry by a sufficiently large power of $t$, and an ordinary polynomial vanishing at infinitely many points has all coefficients zero. For $n>0$, comparison of the extreme coefficients gives
+
+$$
+\begin{aligned}
+\det C_n&=\det C_{-n}=0,\\
+C_{-n}^{\dagger}C_n&=0,\qquad C_nC_{-n}^{\dagger}=0.
+\end{aligned}
+$$
+
+Every nonzero endpoint matrix therefore has rank one. The paper uses these relations to select the unique terminal projector $P$ satisfying $C_n(I-P)=0$ and $C_{-n}P=0$. In the branch $n>0$ and $C_n\ne0$, projection onto the row space of $C_n$ gives
+
+$$
+P=P_n=\frac{C_n^{\dagger}C_n}{\Tr(C_n^{\dagger}C_n)}.
+$$
+
+The denominator is strictly positive in this branch; the constant case does not use this formula. If the nonzero negative endpoint is used instead, the paper's parallel argument selects the complementary projector from the row space of $C_{-n}$, satisfying the same two cancellation conditions. The original disjunction therefore needs no additional positive-endpoint assumption.
+
+Set $G(t)=F(t)\bigl(t^{-1}P+t(I-P)\bigr)=F(t)E_P(t)^{-1}$. With coefficients outside the support understood to be zero, multiplication gives the update
+
+$$
+G_j=C_{j+1}P+C_{j-1}(I-P).
+$$
+
+The two cancellation conditions remove the $t^{n+1}$ and $t^{-n-1}$ terms, and parity reduces the degree bound to $n-1$; the circle values remain in $\mathrm{SU}(2)$. The degree is exactly $n-1$: a smaller degree would contradict the actual degree $n$ of $F$ through $F=GE_P$ and $\deg F\le\deg G+1$. Induction on $G\in\mathcal{E}_{n-1}$ then reconstructs the list by appending $P_n=P$ on the right. In any decomposition of length exactly $n$, the terminal projector must satisfy those same endpoint cancellation conditions and is uniquely determined by a nonzero endpoint. Repeated peeling establishes uniqueness of the entire ordered list and residual constant. The full proof is checked by the Lean kernel.
+:::
+
+For example, expansion using $P(I-P)=0$ gives $E_P(t)E_{I-P}(t)=I$: artificially padded lists do not have the stated uniqueness.
+
+**Boundaries of exact synthesis.** Theorem 2 factors an already specified whole matrix loop with values in $\mathrm{SU}(2)$ everywhere on the unit circle and the stated parity. Completing a bounded real target polynomial to such a loop, fixing the phase convention relating $t$ to the signal variable, and imposing inversion symmetry to restrict the $P_k$ to the Bloch equator in a particular QSP convention require additional hypotheses and arguments (Haah §3.1 and the Gilyén et al. completion results above). Lifting the two-dimensional signal action to a matrix singular-value transformation also requires the block-encoding and projection bridges. Uniqueness of the ordered projectors here therefore gives neither uniqueness of real angle representatives nor uniqueness for padded lists, and does not by itself guarantee numerical stability, efficiency, or hardware implementation.
 
 ## 16.2.1 Static Directed Forests: Completing One Global Cycle {#sec-directed-forest-cycle-completion}
 
@@ -131,9 +139,29 @@ The underlying permutation-contraction correspondence is classical. Gessel, *Gen
 
 A closer source for the endpoints, counts, and probabilities below is Boaz Tsaban, *Permutation graphs, fast forward permutations, and sampling the cycle structure of a permutation*, *Journal of Algorithms* **47** (2003), 104–121, [doi:10.1016/S0196-6774(03)00017-8](https://doi.org/10.1016/S0196-6774(03)00017-8). On pages 107–109, Lemma 1.1 obtains path components with unique minimal and maximal endpoints from an acyclic partial permutation graph; Lemma 1.2 connects these endpoints to exhaust all single-cycle completions and gives their factorial count; Lemma 1.3 distinguishes closing a component from merging distinct components; and Definition 1.4 and Lemma 1.5 give uniform endpoint choices and query-sequence probabilities for forward and inverse permutation queries. These endpoint, counting, and probability laws already appear in the literature; they do not originate in this book.
 
-Below we present these classical results using actual completion sets on the same vertex set, an endpoint bijection, and static conditional distributions, retaining the full written proof. Tsaban's query model concerns values of a permutation and its inverse; it does not directly cover the full adaptive query history of glued trees. No mathematical novelty is claimed. Formalization is registered in [request #11](https://github.com/the-omega-institute/trureturing-requests/issues/11); the endpoint-completion Lean core comes first, followed by the wider written result.
+Below we present these classical results using actual completion sets on the same vertex set, an endpoint bijection, and static conditional distributions, retaining the full written proof. Tsaban's query model concerns values of a permutation and its inverse; it does not directly cover the full adaptive query history of glued trees. No mathematical novelty is claimed. Formalization is registered in [request #11](https://github.com/the-omega-institute/trureturing-requests/issues/11); the Lean results for unique directed path order and endpoint completion come first, followed by the wider written result.
 
 Contracting each weak component to a point turns a completed cycle into a cycle of components. Below, the components, endpoints, and completion sets are defined directly from the original edge relation; a full cycle here means a permutation with exactly one orbit on its vertex set.
+
+::: {.theorem #thm-directed-forest-component-path-order title="The unique directed path order of an actual component" lean="D5/S3/Combinatorics/Graph/LinearForests/DirectedForestPathOrder.component_path_order"}
+Let $V$ be a finite type and let $E:V\to V\to\operatorname{Prop}$ be right-unique, left-unique, and acyclic in the sense that `Relation.TransGen E` is irreflexive. Write $\operatorname{Component}(E)=V/\operatorname{EqvGen}(E)$. For each actual component $A\in\operatorname{Component}(E)$, define its vertex fiber by
+
+$$
+V_A=\{x\in V:[x]_E=A\},\qquad m_A=|V_A|.
+$$
+
+There is a unique bijection $e_A:\{0,\ldots,m_A-1\}\simeq V_A$ such that, for every pair of indices $i,j$,
+
+$$
+E\bigl(e_A(i),e_A(j)\bigr)\quad\Longleftrightarrow\quad i+1=j.
+$$
+
+Fiber elements are identified here with their underlying vertices. The bijection visits every vertex of the component exactly once, and the equivalence characterizes all directed edges. No lower bound of two on the component count is required: an isolated component has a singleton enumeration, and an empty carrier has no component $A$.
+:::
+
+::: proof
+Any two vertices in one component have directed paths to its tail. Reverse these paths and use uniqueness of predecessors to compare the vertices. Acyclicity then makes directed reachability a strict total order on the fiber. Enumerate the finite fiber in this order. An original edge cannot skip an intermediate position: uniqueness of successors would force a nonempty directed cycle. Conversely, a nonempty path between consecutive positions cannot have an intermediate vertex, so it is an original edge. The index change between two enumerations satisfying the equivalence is strictly increasing. A strictly increasing self-map of a finite linear order is the identity, proving uniqueness. The full proof is checked by the Lean kernel.
+:::
 
 ::: {.theorem #thm-directed-forest-completion-core title="The endpoint-completion core for a directed linear forest" lean="D5/S3/Combinatorics/Graph/LinearForests/DirectedForestCompletion.directed_forest_completion"}
 Let $V$ be a finite type and $E:V\to V\to\operatorname{Prop}$ be right-unique (at most one outgoing neighbor), left-unique (at most one incoming neighbor), and acyclic in the sense that `Relation.TransGen E` is irreflexive. Assume that the weak-component quotient $\operatorname{Component}(E)$ has at least two elements. Let $\operatorname{Tail}(E)$ and $\operatorname{Head}(E)$ be the subtypes of vertices with no outgoing and no incoming $E$-edge. Let $\operatorname{CycleCompletion}(E)$ consist of the actual permutations extending $E$ and satisfying `IsCycleOn Set.univ`, and let $\operatorname{FullCycle}(W)$ consist of the actual permutations on $W$ satisfying `IsCycleOn Set.univ`.
@@ -151,7 +179,7 @@ Moreover, $\operatorname{CycleCompletion}(E)$ is nonempty and has finite cardina
 Finiteness, acyclicity, and uniqueness of successors identify a tail in each weak component; applying the same argument to the reversed relation identifies its head. Every extending permutation bijects the tails with the heads. First returns to the heads identify the orbits of the original permutation with those of the component permutation, giving the equivalence between full-cycle completions. This equivalence gives the factorial count and nonemptiness. Conditioning and pushing forward finite uniform probability masses give the same completion law, and the endpoint equation transports component-successor marginals back to the original vertices. The full proof is checked by the Lean kernel.
 :::
 
-The edge identity $|E|=N-c$ and explicit event-probability ratio $(c-1)!/(N-1)!$ in the wider result below are not stated or checked by the cited Lean declaration; the full written proof below remains responsible for them. The next subsection treats static classification and counting under alternation; [@thm-undirected-cycle-orientation-fibers] gives the actual orientation fibers over the same ordinary undirected full cycle. Alternating conditional laws, undirected probability laws, adaptive histories, queries, and `EXIT` still require their own distribution and correspondence proofs.
+The two Lean results above establish the unique exhaustive directed path order and the endpoint-completion core. The edge identity $|E|=N-c$ and explicit event-probability ratio $(c-1)!/(N-1)!$ in the wider result below are not stated or checked by these Lean declarations; the full written proof below remains responsible for them. The next subsection treats static classification and counting under alternation; [@thm-undirected-cycle-orientation-fibers] gives the actual orientation fibers over the same ordinary undirected full cycle. Alternating conditional laws, undirected probability laws, adaptive histories, queries, and `EXIT` still require their own distribution and correspondence proofs.
 
 ::: {.theorem #thm-directed-forest-cycle-completion title="Single-cycle completion of a directed forest and its static uniform law" status="written-proof" proof="pf-directed-forest-cycle-completion" doi="10.1007/978-1-4684-0637-5_13" source="Section 8, p. 11" request="https://github.com/the-omega-institute/trureturing-requests/issues/11"}
 Let $V$ be a finite labelled set of cardinality $N\ge2$, and let $E\subseteq V\times V$. Suppose every vertex has at most one incoming and at most one outgoing edge in $E$, and $E$ has no directed cycle. Let $\mathcal C$ be the set of all weak components of $(V,E)$, including every isolated vertex, and suppose $c=|\mathcal C|\ge2$.

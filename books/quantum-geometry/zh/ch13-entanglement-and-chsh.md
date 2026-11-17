@@ -508,7 +508,7 @@ Bob 的两个答案只有两种关系：
 
 现在两端都钉住了：有限确定性局域模型的 CHSH 值出不了线段 $[-2, 2]$（[@thm-classical-chsh-bound-exact]），而固定 CHSH 算子在量子态上的期望值可以到达 $2\sqrt{2}$（[@cor-fixed-chsh-tsirelson]）。两者之比为 $\sqrt{2}$，这就是 $45^\circ$ 圆弧超出折线的倍数。需要留意各条定理的量词范围：经典一侧针对的是有限纤维集合上的确定性 $\pm 1$ 应答表；量子一侧的可达性针对的是一个固定的双比特算子，上界 $2\sqrt{2}$ 则对一切有限维幺正策略成立（[@thm-unitary-bell-bound] 取 $d = 2$）；一般形式见章末 [@rem-bell-chsh-literature]。
 
-::: {.film src="004-chsh-45-degrees"}
+::: {.film src="chsh-45-degrees"}
 **45°：余弦弧高出玩具经典折线（2 分 23 秒）。** 在 $Z$–$X$ 平面内，夹角 $\theta$ 从 $0^\circ$ 扫到 $180^\circ$，青色的余弦弧与玩具模型的折线 $1 - 2\theta/\pi$ 在 $0^\circ$、$90^\circ$、$180^\circ$ 重合，在 $45^\circ$ 弧高出 $0.207$；Bob 的一对方向转过 $45^\circ$，四段余弦一段段叠到 $2\sqrt{2}$，折线只叠到 $2$；再把 Bob 的一对从 $0^\circ$ 转到 $90^\circ$，值按 $2\sqrt{2}\cos(\varphi - 45^\circ)$ 起落。十六张确定性应答表每张都只给 $\pm 2$，加权平均出不了 $[-2, 2]$（[@thm-classical-chsh-bound-exact]）；$S^2$ 多出的那一项来自两侧的换位子（[@prop-landau-area-square]），两侧都张成直角、Bob 转过 $45^\circ$ 时，贝尔态上的值顶到 $2\sqrt{2}$，任何态都超不过（[@cor-fixed-chsh-tsirelson]）。
 :::
 
