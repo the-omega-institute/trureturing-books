@@ -144,6 +144,144 @@ Together, $\operatorname{flow}(M, N)$ is a $6\times 6$ permutation matrix of ran
 **Together the three bridges tile a $6 \times 6$ permutation matrix exactly.** The cyan cells are the non-zero entries of $\operatorname{flow}(M, N)$, and the number in each is the bridge $r$ that puts it there: bridge $0$ fills the $4$ cells at the top left, bridges $1$ and $2$ add one cell each; the six cells share no row and no column, so the rank is $6$ ([@ex-bridge-two-three]).
 :::
 
+The six-dimensional permutation matrix above satisfies a more precise identity than full rank: its columns are distinct standard basis vectors, so $F^*F=I_6$. Writing the input and output dimensions of the right factors as $c=2q$ and $d=3q$ extends the same construction to every admissible pair of left dimensions. The task is to give each input coordinate a unique output coordinate, with no collisions between different inputs.
+
+::: {.theorem #thm-bridge-native-saturation-iff title="Exact column Gram saturation for a native three-term tensor sum" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeSaturation.native_saturation_iff"}
+For all natural numbers $a,b,q\in\mathbb N$ with $q>0$, there exist complex matrix families
+
+$$
+\begin{aligned}
+M_r&\in M_{a\times b}(\mathbb C),\\
+N_r&\in M_{3q\times2q}(\mathbb C)
+\qquad(r=0,1,2),
+\end{aligned}
+$$
+
+whose tensor sum satisfies
+
+$$
+\begin{aligned}
+F&=\sum_{r=0}^2M_r\otimes N_r,\\
+F^*F&=I_{2bq},
+\end{aligned}
+$$
+
+if and only if $2b\le3a$. Here $F^*$ is the conjugate transpose, the rows of $F$ are indexed by $\operatorname{Fin}a\times\operatorname{Fin}(3q)$, its columns by $\operatorname{Fin}b\times\operatorname{Fin}(2q)$, and $I_{2bq}$ is the identity matrix on this column index set.
+:::
+
+::: {.proof #pf-bridge-native-saturation-iff}
+First prove necessity. If $F^*F=I_{2bq}$, the rank bound for a product and the number of rows of $F$ give
+
+$$
+\begin{aligned}
+2bq&=\operatorname{rank}(F^*F)\\
+&\le\operatorname{rank}F\le3aq.
+\end{aligned}
+$$
+
+Since $q>0$, cancelling $q$ yields $2b\le3a$.
+
+Conversely, suppose $2b\le3a$. Use zero-based indices throughout, with ranges
+
+$$
+\begin{aligned}
+0\le i<a,&\qquad0\le j<b,\\
+0\le\ell<3q,&\qquad0\le k<2q.
+\end{aligned}
+$$
+
+Let $\mathbf1_{\{P\}}$ be $1$ when $P$ holds and $0$ otherwise. Choose the three left slices
+
+$$
+\begin{aligned}
+(M_0)_{ij}&=\mathbf1_{\{i=j\}},\\
+(M_1)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)\}},\\
+(M_2)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)+1\}},
+\end{aligned}
+$$
+
+and the three right slices
+
+$$
+\begin{aligned}
+(N_0)_{\ell k}&=\mathbf1_{\{\ell=k\}},\\
+(N_1)_{\ell k}&=\mathbf1_{\{k<q,\ \ell=2q+k\}},\\
+(N_2)_{\ell k}&=\mathbf1_{\{q\le k,\ \ell=q+k\}}.
+\end{aligned}
+$$
+
+The last two left slices vanish when $j<a$; the difference $j-a$ matters only when $j\ge a$, where it is an ordinary nonnegative integer difference.
+
+To see how the slices move a column, define the output route for an input index $(j,k)$ by
+
+$$
+\rho(j,k)=
+\begin{cases}
+(j,k),&j<a,\\
+\bigl(2(j-a),\,2q+k\bigr),&j\ge a,\ k<q,\\
+\bigl(2(j-a)+1,\,q+k\bigr),&j\ge a,\ q\le k.
+\end{cases}
+$$
+
+Every output lies in the required range. In the first branch, $j<a$ and $k<2q<3q$. In the other two branches put $t=j-a$. Since $j+1\le b$ and $2b\le3a$,
+
+$$
+2(t+1)\le2(b-a)\le a.
+$$
+
+Thus both $2t$ and $2t+1$ are less than $a$, while the second output coordinate lies in $[2q,3q)$. When $b\le a$, every input takes the first branch.
+
+Write the input standard basis as $E_{j,k}=e_j\otimes e_k$ and the output standard basis as $U_{i,\ell}=e_i\otimes e_\ell$. When $j<a$, only term $0$ acts. When $j\ge a$, term $0$ vanishes, and terms $1$ and $2$ divide the inputs according to $k<q$ or $k\ge q$. Hence every column has exactly one nonzero entry, equal to $1$:
+
+$$
+F E_{j,k}=U_{\rho(j,k)}.
+$$
+
+We must also check that different columns never reach the same row. The first branch has second output coordinate below $2q$, disjoint from the other two branches. The latter have even and odd first output coordinates, respectively, so they too are disjoint. Within each branch the output uniquely recovers $j,k$: read both directly in the first branch; in the second recover $t$ from $i=2t$ and set $k=\ell-2q$; in the third recover $t$ from $i=2t+1$ and set $k=\ell-q$. In the last two branches set $j=a+t$. Thus $\rho$ is injective.
+
+This determines the entire column Gram matrix, including every off-diagonal entry. Abbreviate the input indices as $x=(j,k)$ and $y=(j',k')$, and use the usual complex inner product, conjugate-linear in its first argument. Then
+
+$$
+\begin{aligned}
+(F^*F)_{x,y}
+&=\langle F E_x,F E_y\rangle\\
+&=\langle U_{\rho(x)},U_{\rho(y)}\rangle\\
+&=\delta_{x,y}.
+\end{aligned}
+$$
+
+Here $\delta$ is the Kronecker symbol. Expanding the three terms also accounts for every cross term explicitly: term $0$ has a second output coordinate in a range disjoint from those of terms $1$ and $2$, while terms $1$ and $2$ have first output coordinates of opposite parity. Consequently, for $r\ne s$,
+
+$$
+(M_r^*M_s)\otimes(N_r^*N_s)=0.
+$$
+
+Each diagonal term is the coordinate projection onto its input branch, and the three branches partition the entire input index set. Therefore
+
+$$
+\begin{aligned}
+F^*F
+&=\sum_{r,s=0}^2(M_r^*M_s)\otimes(N_r^*N_s)\\
+&=I_{2bq}.
+\end{aligned}
+$$
+
+The zero-dimensional cases are included. If $b=0$, $F$ has no input columns, and both $F^*F$ and $I_0$ are the unique empty square matrix; the identity holds, and $2b\le3a$ always holds. If $a=0$, the threshold forces $b=0$. If instead $b>0$, positivity of $q$ makes the input dimension positive and the output dimension zero, already ruled out by the rank inequality in the necessity argument. The full proof is checked by the Lean kernel.
+:::
+
+Setting $a=2$, $b=3$, and $q=1$ gives exactly the six slices displayed in [@ex-bridge-two-three]: the first four input basis vectors retain their coordinates, and the remaining two follow
+
+$$
+\begin{aligned}
+(2,0)&\longmapsto(0,2),\\
+(2,1)&\longmapsto(1,2)
+\end{aligned}
+$$
+
+completing the six output basis vectors. Thus [@thm-bridge-native-saturation-iff] extends that permutation example across the whole parameter family $c=2q$, $d=3q$. In general, the inputs need only occupy distinct output coordinates; they need not exhaust the output space.
+
+In the range $a<b$ with $2b\le3a$, this family satisfies $3c=6q=2d$. This equality follows directly from choosing $c=2q$ and $d=3q$. The theorem classifies existence of the original matrix triples within this fixed family of right dimensions; the identity column Gram follows directly from the coordinate routing of the displayed factors. This construction alone does not prove that, for arbitrary $c,d$, $a<b$ and the positive scalar column Gram identity $F^*F=\lambda I_{bc}$ ($\lambda>0$) necessarily imply $3c\le2d$. The bound $2c\le d$ in [@thm-bridge-native-rectangular-bound] below uses the strict threshold $3a<2b$, on the opposite side of the threshold from $2b\le3a$ here.
+
 ## 19.3 Cone domains and discrete capacity facets {#sec-discrete-facet-stitching}
 
 In [@ex-bridge-two-three], the internal bridge cut $3ac = 12$ sits well above the outer boundary cuts $ad = bc = 6$. Why do the quadratic cone inequalities $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ lie inside the natural domain where the three-bridge interior never bottlenecks the outer cuts?

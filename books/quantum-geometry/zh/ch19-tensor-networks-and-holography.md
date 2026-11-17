@@ -144,6 +144,144 @@ $$
 **三条桥合起来正好铺满一张 $6 \times 6$ 置换矩阵。** 青色的格是 $\operatorname{flow}(M, N)$ 的非零元，格里的数是放下它的桥 $r$：桥 $0$ 铺满左上的 $4$ 格，桥 $1$、桥 $2$ 各补 $1$ 格；六格互不同行、互不同列，秩为 $6$（[@ex-bridge-two-three]）。
 :::
 
+上面的六阶置换矩阵还满足一个比满秩更精确的等式：它的每一列都是不同的标准基向量，故 $F^*F=I_6$。把右侧因子的输入、输出维数写成 $c=2q$、$d=3q$，同一构造可以延伸到全部允许的左侧维数。关键是把每个输入坐标放到唯一的输出坐标，并保证不同输入不会相撞。
+
+::: {.theorem #thm-bridge-native-saturation-iff title="原生三项张量和的精确列 Gram 饱和条件" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeSaturation.native_saturation_iff"}
+对任意自然数 $a,b,q\in\mathbb N$，若 $q>0$，则存在复矩阵族
+
+$$
+\begin{aligned}
+M_r&\in M_{a\times b}(\mathbb C),\\
+N_r&\in M_{3q\times2q}(\mathbb C)
+\qquad(r=0,1,2),
+\end{aligned}
+$$
+
+使其张量和满足
+
+$$
+\begin{aligned}
+F&=\sum_{r=0}^2M_r\otimes N_r,\\
+F^*F&=I_{2bq},
+\end{aligned}
+$$
+
+当且仅当 $2b\le3a$。这里 $F^*$ 是共轭转置，$F$ 的行指标为 $\operatorname{Fin}a\times\operatorname{Fin}(3q)$，列指标为 $\operatorname{Fin}b\times\operatorname{Fin}(2q)$，而 $I_{2bq}$ 是该列指标集上的单位矩阵。
+:::
+
+::: {.proof #pf-bridge-native-saturation-iff}
+先证必要性。若 $F^*F=I_{2bq}$，由乘积秩上界和 $F$ 的行数可得
+
+$$
+\begin{aligned}
+2bq&=\operatorname{rank}(F^*F)\\
+&\le\operatorname{rank}F\le3aq.
+\end{aligned}
+$$
+
+由于 $q>0$，消去 $q$ 即得 $2b\le3a$。
+
+反过来，设 $2b\le3a$。以下指标全部从 $0$ 开始，范围为
+
+$$
+\begin{aligned}
+0\le i<a,&\qquad0\le j<b,\\
+0\le\ell<3q,&\qquad0\le k<2q.
+\end{aligned}
+$$
+
+用 $\mathbf1_{\{P\}}$ 表示条件 $P$ 成立时为 $1$、否则为 $0$ 的数。取左侧三张切片
+
+$$
+\begin{aligned}
+(M_0)_{ij}&=\mathbf1_{\{i=j\}},\\
+(M_1)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)\}},\\
+(M_2)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)+1\}},
+\end{aligned}
+$$
+
+以及右侧三张切片
+
+$$
+\begin{aligned}
+(N_0)_{\ell k}&=\mathbf1_{\{\ell=k\}},\\
+(N_1)_{\ell k}&=\mathbf1_{\{k<q,\ \ell=2q+k\}},\\
+(N_2)_{\ell k}&=\mathbf1_{\{q\le k,\ \ell=q+k\}}.
+\end{aligned}
+$$
+
+左侧后两式在 $j<a$ 时均为 $0$；其中的差 $j-a$ 只在 $j\ge a$ 时起作用，因而是非负整数差。
+
+先看这些切片如何搬动一列。对输入指标 $(j,k)$，定义输出路由
+
+$$
+\rho(j,k)=
+\begin{cases}
+(j,k),&j<a,\\
+\bigl(2(j-a),\,2q+k\bigr),&j\ge a,\ k<q,\\
+\bigl(2(j-a)+1,\,q+k\bigr),&j\ge a,\ q\le k.
+\end{cases}
+$$
+
+这个输出确实落在规定范围内。第一分支中 $j<a$ 且 $k<2q<3q$。后两分支中令 $t=j-a$；由 $j+1\le b$ 和 $2b\le3a$ 得
+
+$$
+2(t+1)\le2(b-a)\le a.
+$$
+
+所以 $2t$、$2t+1$ 都小于 $a$，而输出第二坐标都落在 $[2q,3q)$。当 $b\le a$ 时，全部输入都走第一分支。
+
+记输入标准基为 $E_{j,k}=e_j\otimes e_k$，输出标准基为 $U_{i,\ell}=e_i\otimes e_\ell$。当 $j<a$ 时，只有第 $0$ 项作用；当 $j\ge a$ 时，第 $0$ 项为零，第 $1$、$2$ 项再按 $k<q$ 或 $k\ge q$ 分工。因此每列恰有一个非零元，且等于 $1$：
+
+$$
+F E_{j,k}=U_{\rho(j,k)}.
+$$
+
+还要检查不同列是否会落到同一行。第一分支的输出第二坐标小于 $2q$，与后两分支不交；后两分支的输出第一坐标分别为偶数和奇数，彼此也不交。在每个分支内，输出又能唯一恢复 $j,k$：第一分支直接读出二者；第二分支由 $i=2t$、$k=\ell-2q$ 恢复；第三分支由 $i=2t+1$、$k=\ell-q$ 恢复，后两者再用 $j=a+t$。故 $\rho$ 是单射。
+
+这就确定了完整的列 Gram，而不只是它的秩。以 $x=(j,k)$、$y=(j',k')$ 简记输入指标，并用通常的复内积（第一变量共轭线性），有
+
+$$
+\begin{aligned}
+(F^*F)_{x,y}
+&=\langle F E_x,F E_y\rangle\\
+&=\langle U_{\rho(x)},U_{\rho(y)}\rangle\\
+&=\delta_{x,y}.
+\end{aligned}
+$$
+
+这里 $\delta$ 是 Kronecker 符号。把三项展开，也能逐一看见全部交叉项的去向：第 $0$ 项与另外两项的输出第二坐标区间不交，第 $1$ 项与第 $2$ 项的输出第一坐标奇偶相异，故 $r\ne s$ 时
+
+$$
+(M_r^*M_s)\otimes(N_r^*N_s)=0.
+$$
+
+每个对角项则是其输入分支上的坐标投影，而三个分支恰好分割全部输入指标。因此
+
+$$
+\begin{aligned}
+F^*F
+&=\sum_{r,s=0}^2(M_r^*M_s)\otimes(N_r^*N_s)\\
+&=I_{2bq}.
+\end{aligned}
+$$
+
+零维情形也包含在内。若 $b=0$，$F$ 没有输入列，$F^*F$ 与 $I_0$ 都是唯一的空方阵，上述等式成立，且 $2b\le3a$ 总成立。若 $a=0$，阈值迫使 $b=0$；若反而 $b>0$，则 $q>0$ 使输入维数为正而输出维数为零，必要性的秩不等式已排除此情形。完整证明由 Lean 内核检查。
+:::
+
+取 $a=2$、$b=3$、$q=1$，这六张切片就是 [@ex-bridge-two-three] 中列出的矩阵：前四个输入基向量保持其坐标，另外两个按
+
+$$
+\begin{aligned}
+(2,0)&\longmapsto(0,2),\\
+(2,1)&\longmapsto(1,2)
+\end{aligned}
+$$
+
+补齐六个输出基向量。[@thm-bridge-native-saturation-iff] 因而是该置换例子在 $c=2q$、$d=3q$ 这一族中的全参数延伸；一般情形只需占据不同的输出坐标，不要求铺满全部输出。
+
+在 $a<b$ 且 $2b\le3a$ 的区间，这族构造有 $3c=6q=2d$。这一等号直接来自所取的 $c=2q$、$d=3q$。定理确定的是这一固定右侧维数族中原始矩阵三元组的存在性，恒等列 Gram 由上述因子的坐标路由直接给出。这一构造本身没有证明：对于任意 $c,d$，$a<b$ 与正标量列 Gram 条件 $F^*F=\lambda I_{bc}$（$\lambda>0$）必然推出 $3c\le2d$。后文 [@thm-bridge-native-rectangular-bound] 的必要界 $2c\le d$ 使用严格阈值 $3a<2b$，其假设与这里的 $2b\le3a$ 分处阈值两侧。
+
 ## 19.3 锥域与离散容量分片的拼接 {#sec-discrete-facet-stitching}
 
 在 [@ex-bridge-two-three] 中，中间桥割容量 $3ac = 12$ 远大于两侧外边界割 $ad = bc = 6$，因此中间桥不会成为卡死流量的瓶颈。为什么二次锥条件 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$ 恰好落在保证中间三桥不构成瓶颈的自然区域之内？
