@@ -52,7 +52,7 @@
 - [Chapter 17 Geometric Demystification of Special Relativity: Hyperbolic Rotors, Null Light Cones, and Spacetime Area](ch17-lorentz-geometry.md)
 - [Chapter 18 Dirac Spinors and Gauge Fields: Why Fermions Detour Through the Sphere and Why Force Is Area Curvature](ch18-spinors-and-gauge-curvature.md)
 - [Chapter 19 Entanglement Weaves Space: Tensor Networks, Holographic Duality, and the Discrete Min-Cut Theorem](ch19-tensor-networks-and-holography.md)
-- [Chapter 20 Gate Complexity as Volume: Black-Hole Interior Growth, Wormhole Bridges, and Computational Complexity Boundaries](ch20-complexity-and-spacetime.md)
+- [Chapter 20 Is Gate Complexity Volume? Black-Hole Interior Growth, Wormhole Bridges, and Computational Complexity Boundaries](ch20-complexity-and-spacetime.md)
 
 # Part VI Crossing the Horizon — Spheres Beyond Spheres: Gödelian Escape, Arithmetic Spectra, and $\psi = \psi(\psi)$
 

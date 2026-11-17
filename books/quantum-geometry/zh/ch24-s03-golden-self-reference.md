@@ -8,7 +8,7 @@ $$
 x_{k+1} = 1 + \frac{1}{x_k}, \qquad x_0>0.
 $$
 
-有限步展开只包含有限层分式，底部仍是初值 $x_0$。无穷连分数 $1+1/(1+1/(\cdots))$ 则表示这些有限截断的极限，须另证收敛；不能把它等同于每个有限的 $x_{k+1}$。下文算例给出收敛的直接依据。
+有限步展开只包含有限层分式，底部仍是初值 $x_0$。无穷连分数 $1+1/(1+1/(\cdots))$ 则表示这些有限截断的极限，须另证收敛；不能把它等同于每个有限的 $x_{k+1}$。收敛可以手算（手工推导）：从任意 $x_0 > 0$ 出发有 $x_1 > 1$，此后各项都不小于 $1$，而 $\lvert x_{k+1} - \varphi\rvert = \lvert 1/x_k - 1/\varphi\rvert = \lvert x_k - \varphi\rvert/(x_k\varphi) \le \lvert x_k - \varphi\rvert/\varphi$，误差每步至少缩到原来的 $1/\varphi \approx 0.618$ 倍。
 
 这正是我们在[第二十三章](ch23-diophantine-definability.md)研究黄金整数佩尔方程时遇到的连分数生成元！在 Lean 模块 `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint` 中，这一倒数残差自指映射被定义为 [`goldenReciprocalMap`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap)。
 
@@ -110,7 +110,7 @@ $$
 每一行恰有一种命运，与 [@thm-self-application-four-fates] 的结论 1 一致；`live` 的两行正是 $\varphi$ 族，不动点系数分别为 $(1, -1, -1)$ 与 $(1, 1, -1)$，与结论 2、3 一致。两个 `live` 映射互为共轭：若 $x = 1 + 1/x$，则 $y = 1/x$ 满足 $y = 1/(1 + y)$。
 :::
 
-所以 $1 + 1/x$ 不是随手挑的。在用 $0$ 和 $1$ 能写出的全部六个非退化分式映射里，一个什么都没说，一个无处可停，两个停在有理数上，只有 $1 + 1/x$ 和它的共轭 $1/(1+x)$ 停在有理数够不到的地方。[@cor-golden-fixed-point-unique] 已经算出前者在正实数上的唯一不动点；后者的对应结论同样有冻结的 Lean 证明。
+所以在系数只取 $0$、$1$ 的分式映射这一范围内，$1 + 1/x$ 不是随手挑的。在用 $0$ 和 $1$ 能写出的全部六个非退化分式映射里，一个什么都没说，一个无处可停，两个停在有理数上，只有 $1 + 1/x$ 和它的共轭 $1/(1+x)$ 停在有理数够不到的地方。[@cor-golden-fixed-point-unique] 已经算出前者在正实数上的唯一不动点；后者的对应结论同样有冻结的 Lean 证明。
 
 ::: {.figure src="ch24-six-maps"}
 **六个映射与对角线的交点。** 每个小图是上表的一行：墨色曲线是 $x \mapsto \frac{ax+b}{cx+d}$，灰色虚线是 $y = x$，交点就是实不动点。`empty` 的曲线与对角线重合；`dead` 与它平行；两个 `collapse` 交在青色的有理点 $0$ 与 $\pm 1$；只有两个 `live` 交在品红的无理点 $\varphi, -\varphi^{-1}$ 与 $\varphi^{-1}, -\varphi$（[@thm-self-application-four-fates]）。

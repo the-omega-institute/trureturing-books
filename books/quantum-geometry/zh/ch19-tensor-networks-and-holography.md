@@ -6,10 +6,10 @@
 
 章首题记正是从这一线性代数事实出发，直指现代量子信息与全息几何交汇处的核心直觉：当我们将考察对象从单根量子态射线升级为由多组张量指标拼接而成的**张量网络**（tensor network）时，跨越网络接口所能传递的“最大纠缠秩（流）”是如何受制于网络内部最窄瓶颈处的“割容量（截面）”的？
 
-遵循全书的三层认识论契约与离散多面体粘接原则（R3），本章严格区分三个层次：
+遵循全书的三层认识论契约与离散分片粘接的写法，本章严格区分三个层次：
 
 1. **Lean 内核验证的有限维桥图与开边界 MPS 定理**：在 `BridgeGraph` 模块族中，针对宽度为 $3$（指标取 $\operatorname{Fin} 3$）的双节点克罗内克桥图收缩 $\operatorname{flow}(M, N) = \sum_{r \in \operatorname{Fin} 3} M_r \otimes N_r$，我们逐条证明最大流可达引理（[@lemma-bridge-flow-attained]）、最大流不超过最小割上界命题（[@prop-bridge-flow-cut-bound]）、二次锥域内的最小割简化推论（[@cor-bridge-cone-mincut]），以及锥域内的离散量子最大流最小割定理（[@thm-bridge-quantum-maxflow-mincut]）；随后在开边界键维数 $2$ 的一维矩阵乘积态（MPS）模块中，证明可观测图表内由三格点前缀边缘矩阵唯一恢复全局相位态（[@thm-mps-observable-phase-recovery]），以及链长 $3 + m \ge 5$ 时任意内部三格点边缘恢复在主开稠密轨迹上的内禀一般性（[@thm-mps-generic-interior-recovery]）；
-2. **离散对数容量分片与接缝粘接图像（R3）**：通过对数腿容量坐标下的三张仿射超平面下包络（[@ex-log-capacity-facets]），展示有限维矩阵秩上界如何在离散格点上拼出多面体分片与瓶颈转移接缝；
+2. **离散对数容量分片与接缝粘接图像**：通过对数腿容量坐标下的三张仿射超平面下包络（[@ex-log-capacity-facets]），展示有限维矩阵秩上界如何在离散格点上拼出多面体分片与瓶颈转移接缝；
 3. **连续统全息对偶的文献边界**：将多尺度纠缠重整化拟设（MERA）与连续统 AdS/CFT 中的 Ryu–Takayanagi（RT）极小曲面公式严格置于文献注记（[@rem-ryu-takayanagi-literature]）内，绝不把特定宽度三桥图的有限维矩阵秩定理夸大为任意张量网络或连续时空全息对偶的普遍证明。
 
 ::: {.figure src="ch19-overview"}
@@ -20,7 +20,7 @@
 
 想象你手里有两块相互纠缠的多体量子区域：左边界输入端与右边界输出端。如果它们之间只靠一根一维标量线相连，那么无论两端各自的希尔伯特空间有多大，跨过这道接口的线性映射至多只有秩 $1$，相当于所有信息都被挤进了一根单模光纤。反之，如果接口处由多条内部张量腿（bond indices）并排桥接，跨越接口的算子秩（即施密特分解中非零奇异值的个数）就能够随内部腿维数的乘积而增长。
 
-如上图左栏（Panel I）所示，在物理文献中，研究者常借助多尺度纠缠重整化拟设（MERA）等层级张量网络来示意边界区域与深层“体空间（bulk）”截面之间的瓶颈关系。然而，在一般张量网络中，量子最大流（跨网络收缩所能达到的最大矩阵秩）甚至**不一定**等于量子最小割（切开网络所需截断的最小腿维数乘积）！因此，要想得到经得起形式化内核检验的精确结论，我们必须先锚定一个结构完全显式、参数边界清清楚楚的有限维桥图模型。
+如上图左栏（Panel I）所示，在物理文献中，研究者常借助多尺度纠缠重整化拟设（MERA）等层级张量网络来示意边界区域与深层“体空间（bulk）”截面之间的瓶颈关系。然而，在一般张量网络中，量子最大流（跨网络收缩所能达到的最大矩阵秩）甚至**不一定**等于量子最小割（切开网络所需截断的最小腿维数乘积）！（文献结果：S. X. Cui、M. H. Freedman、O. Sattath、R. Stong 与 G. Minton，*Quantum max-flow/min-cut*，J. Math. Phys. 57, 062206 (2016)，arXiv:1508.04644。）因此，要想得到经得起形式化内核检验的精确结论，我们必须先锚定一个结构完全显式、参数边界清清楚楚的有限维桥图模型。
 
 ::: {.viz src="layered-network-cut" preset="one" height="500"}
 **一格的区间，割就是它自己那条腿。** 层级网络底边的第 16 格单独成为琥珀色区间，品红标出的最小割只割断它自己那一条腿。只有这一条键穿过割，跨过它的秩至多是这一条键的维数；割断的键越多，秩的上界才是它们维数的乘积。
@@ -32,7 +32,7 @@
 **四格的区间，割从网络里面穿过。** 底边连续 4 格是琥珀色区间。直接剪断它们的 4 条腿不是最省的：品红的最小割钻进网络，只割断 3 条键，青色是割内侧的张量。页面数的是割断的腿，给出的只是秩的上界；正如上文所说，一般网络里最大流可以小于最小割，网络是示意模型。
 :::
 
-在 Lean 的 `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound` 模块中，这一模型由四个自然数维数参数 $a, b, c, d \in \mathbb{N}$ 与宽度为 $3$（指标 $r \in \operatorname{Fin} 3$）的桥接张量收缩给出：
+桥图模型、`QMaxFlow` 与 `QMinCut` 的定义以及下文锥域上“流等于割”的命题，出自 F. Gesmundo、V. Lysikov 与 V. Steffan，*Quantum max-flow in the bridge graph*，Transformation Groups 30 (2025) 1751–1784（DOI: `10.1007/s00031-024-09863-2`，arXiv:2212.09794）；原文记号 $(a, b, a', b')$ 对应这里的 $(a, b, c, d)$，宽度三情形是原文的猜想 3.15，原文命题 3.18 把一般宽度情形归约到它（该归约仍是文献结果，未在本书形式化）。在 Lean 的 `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound` 模块中，这一模型由四个自然数维数参数 $a, b, c, d \in \mathbb{N}$ 与宽度为 $3$（指标 $r \in \operatorname{Fin} 3$）的桥接张量收缩给出：
 
 - 设 $M : \operatorname{Fin} 3 \to M_{a\times b}(\mathbb{C})$ 为三个 $a\times b$ 复矩阵，$N : \operatorname{Fin} 3 \to M_{d\times c}(\mathbb{C})$ 为三个 $d\times c$ 复矩阵；
 - 定义**宽度三桥图流矩阵** `flow` 为三项克罗内克积（Kronecker product）之和：
@@ -68,7 +68,7 @@ $$
 
 ## 19.2 宽度三桥图的秩与割容量 {#sec-bridge-flow-cut}
 
-现在我们来数一数：源码用哪三项割容量上界，来约束 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从左输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到右输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道的秩？
+现在我们来数一数：源码用哪三项割容量上界，来约束 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道的秩？
 
 1. **左外边界割（行空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} a \times \operatorname{Fin} d| = ad$ 行，因此其秩绝不可能超过 $ad$；
 2. **右外边界割（列空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} b \times \operatorname{Fin} c| = bc$ 列，因此其秩绝不可能超过 $bc$；
@@ -146,9 +146,9 @@ $$
 
 ## 19.3 锥域与离散容量分片的拼接 {#sec-discrete-facet-stitching}
 
-在 [@ex-bridge-two-three] 中，中间桥割容量 $3ac = 12$ 远大于两侧外边界割 $ad = bc = 6$，因此中间桥不会成为卡死流量的瓶颈。为什么二次锥条件 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$ 恰好是保证中间三桥不构成瓶颈的自然区域？
+在 [@ex-bridge-two-three] 中，中间桥割容量 $3ac = 12$ 远大于两侧外边界割 $ad = bc = 6$，因此中间桥不会成为卡死流量的瓶颈。为什么二次锥条件 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$ 落在中间三桥不构成瓶颈的区域之内？
 
-不妨做一步初等代数检验：当 $a > 0$ 时，不等式 $a^2 + b^2 \le 3ab$ 意味着 $b^2 < a^2 + b^2 \le 3ab$，消去正因子 $b$（若 $b > 0$）即得 $b < 3a$，同理 $c > 0$ 与 $c^2 + d^2 \le 3cd$ 意味着 $d < 3c$。换言之，两个外边界比值 $b/a$ 与 $d/c$ 都被严格关在宽度因子 $3$ 以内：一旦乘上桥宽 $3$，就有 $3ac > bc$ 且 $3ac > ad$！因此，只要参数 $(a, b)$ 与 $(c, d)$ 落在二次锥域 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$（且 $a > 0, c > 0$）之内，中间割 $3ac$ 就永远大于或等于外边界割 $\min(ad, bc)$，从而最小割公式自动脱去外层的 $3ac$！
+不妨做一步初等代数检验：当 $a > 0$ 时，不等式 $a^2 + b^2 \le 3ab$ 意味着 $b^2 < a^2 + b^2 \le 3ab$，消去正因子 $b$（若 $b > 0$）即得 $b < 3a$，同理 $c > 0$ 与 $c^2 + d^2 \le 3cd$ 意味着 $d < 3c$。换言之，两个外边界比值 $b/a$ 与 $d/c$ 都被严格关在宽度因子 $3$ 以内：一旦乘上桥宽 $3$，就有 $3ac > bc$ 且 $3ac > ad$！因此，只要参数 $(a, b)$ 与 $(c, d)$ 落在二次锥域 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$（且 $a > 0, c > 0$）之内，中间割 $3ac$ 就永远大于或等于外边界割 $\min(ad, bc)$，从而最小割公式自动脱去外层的 $3ac$！锥域只是充分条件：只要 $b \le 3a$ 或 $d \le 3c$，中间桥就已不成瓶颈；锥域更窄，它是下文流等于割定理成立的区域。
 
 ::: {.viz src="eth-horizon-crossover" preset="narrow" height="500"}
 **桥太窄：三条桥成了瓶颈。** 桥图 $(a, b, c, d) = (1, 5, 1, 5)$：两道外割都是 $5$，三条桥却只能过 $3ac = 3$，品红虚线标出的最小割切过腿 $a$、三条桥与腿 $c$。右边的流矩阵是 $5 \times 5$ 的，青色的奇异值在第三个之后归零，秩只有 $3$。$1^2 + 5^2 = 26 > 3 \cdot 1 \cdot 5$，这组维数在锥域之外（[@prop-bridge-flow-cut-bound]）。
@@ -175,7 +175,7 @@ $$
 
 请注意 [@cor-bridge-cone-mincut] 的精确前提：本条推论只要求 $0 < a$、$0 < c$ 及两条二次锥不等式 $a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$，**并不额外要求顺序条件 $a \le b$ 或 $c \le d$**（顺序条件将在下一节构造满秩下界时才引入）。
 
-现在，让我们用本书的**离散分片与粘接视角（R3）**来审视 $\operatorname{QMinCut}(a, b, c, d) = \min(3ac, ad, bc)$ 的几何图景。对正整数维数 $a, b, c, d > 0$，取对数容量坐标
+现在，让我们用本书的**离散分片与粘接视角**来审视 $\operatorname{QMinCut}(a, b, c, d) = \min(3ac, ad, bc)$ 的几何图景。对正整数维数 $a, b, c, d > 0$，取对数容量坐标
 
 $$
 u = \ln a, \qquad v = \ln b, \qquad w = \ln c, \qquad z = \ln d.
@@ -220,7 +220,7 @@ $$
 
 在确立了任意参数下的上界 $\operatorname{QMaxFlow} \le \operatorname{QMinCut}$（[@prop-bridge-flow-cut-bound]）以及锥域内的最小割化简 $\operatorname{QMinCut} = \min(ad, bc)$（[@cor-bridge-cone-mincut]）之后，最后一步硬骨头是反方向的下界：在有序锥域 $0 < a \le b$、$0 < c \le d$ 且 $a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 内，能否总是显式构造出三对矩阵 $(M, N)$，使 $\operatorname{flow}(M, N)$ 的秩精确达到 $\min(ad, bc)$？
 
-Lean 的 `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowMinCut` 模块给出了肯定的形式化证明。在源码中，目标命题 `claim` 展开为对全部六个前提条件的全称蕴含，并由主定理 [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result) 彻底锁定。
+Lean 的 `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowMinCut` 模块给出了肯定的形式化证明，即上述猜想 3.15 的宽度三情形；上游只做过有界的文献检索，未见更早的解决，这不是穷尽的原创性声明。在源码中，目标命题 `claim` 展开为对全部六个前提条件的全称蕴含，并由主定理 [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result) 证明。
 
 ::: {.theorem #thm-bridge-quantum-maxflow-mincut title="离散桥图量子最大流最小割" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"}
 对任意自然数 $a, b, c, d \in \mathbb{N}$，若同时满足正性与顺序条件 $0 < a$、$a \le b$、$0 < c$、$c \le d$ 以及二次锥条件
@@ -620,7 +620,7 @@ $$
 在将本章的离散桥图定理与全息文献作启发式对比时，必须严守两条红线：
 
 1. **绝不将纠缠熵写成双矢量外积 $S(A) = a \wedge b$**，也绝不宣称任意张量网络在任意参数下都普遍达到最小割饱和；
-2. **严守 R3 离散分片边界**：本章从 [@thm-bridge-quantum-maxflow-mincut] 到全息几何的联系，仅限于 [@ex-log-capacity-facets] 所示的“离散对数容量多面体分片、最小割瓶颈与分片接缝粘接”的数学结构示意，并不证明张量网络的连续统极限或连续时空的全息对偶。
+2. **严守离散分片边界**：本章从 [@thm-bridge-quantum-maxflow-mincut] 到全息几何的联系，仅限于 [@ex-log-capacity-facets] 所示的“离散对数容量多面体分片、最小割瓶颈与分片接缝粘接”的数学结构示意，并不证明张量网络的连续统极限或连续时空的全息对偶。
 
 参见 S. Ryu & T. Takayanagi, *Phys. Rev. Lett.* **96**, 181602 (2006), DOI: `10.1103/PhysRevLett.96.181602`；B. Swingle, *Phys. Rev. D* **86**, 065007 (2012), DOI: `10.1103/PhysRevD.86.065007`；以及 J. D. Bekenstein, *Phys. Rev. D* **7**, 2333 (1973), DOI: `10.1103/PhysRevD.7.2333`。
 :::

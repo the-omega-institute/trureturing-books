@@ -8,7 +8,7 @@ $$
 x_{k+1} = 1 + \frac{1}{x_k}, \qquad x_0>0.
 $$
 
-A finite expansion has only finitely many fraction layers, with the initial value $x_0$ still at the bottom. The infinite continued fraction $1+1/(1+1/(\cdots))$ denotes the limit of these truncations, whose convergence must be established separately; it is not equal to every finite $x_{k+1}$. The example below gives a direct convergence argument.
+A finite expansion has only finitely many fraction layers, with the initial value $x_0$ still at the bottom. The infinite continued fraction $1+1/(1+1/(\cdots))$ denotes the limit of these truncations, whose convergence must be established separately; it is not equal to every finite $x_{k+1}$. Convergence can be checked by hand (manual derivation): from any $x_0 > 0$ we get $x_1 > 1$, every later term is at least $1$, and $\lvert x_{k+1} - \varphi\rvert = \lvert 1/x_k - 1/\varphi\rvert = \lvert x_k - \varphi\rvert/(x_k\varphi) \le \lvert x_k - \varphi\rvert/\varphi$, so each step shrinks the error by at least the factor $1/\varphi \approx 0.618$.
 
 In `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint`, this reciprocal residual map is formalized as [`goldenReciprocalMap`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap).
 
@@ -110,7 +110,7 @@ Exactly six quadruples with $a, b, c, d \in \{0, 1\}$ have determinant $ad - bc 
 Every row has exactly one fate, in agreement with claim 1 of [@thm-self-application-four-fates]; the two `live` rows are precisely the $\varphi$-family, with fixed-point coefficients $(1, -1, -1)$ and $(1, 1, -1)$, in agreement with claims 2 and 3. The two `live` maps are conjugate to each other: if $x = 1 + 1/x$, then $y = 1/x$ satisfies $y = 1/(1 + y)$.
 :::
 
-So $1 + 1/x$ was not picked at random. Among all six nondegenerate fractional maps that can be written with $0$ and $1$, one says nothing, one has nowhere to stop, two stop at rational numbers, and only $1 + 1/x$ and its conjugate $1/(1+x)$ stop where the rationals cannot reach. [@cor-golden-fixed-point-unique] already computed the unique positive fixed point of the former; the corresponding statement for the latter also has a frozen Lean proof.
+So, within fractional maps whose coefficients are $0$ or $1$, $1 + 1/x$ was not picked at random. Among all six nondegenerate fractional maps that can be written with $0$ and $1$, one says nothing, one has nowhere to stop, two stop at rational numbers, and only $1 + 1/x$ and its conjugate $1/(1+x)$ stop where the rationals cannot reach. [@cor-golden-fixed-point-unique] already computed the unique positive fixed point of the former; the corresponding statement for the latter also has a frozen Lean proof.
 
 ::: {.figure src="ch24-six-maps"}
 **The six maps and where they meet the diagonal.** Each small plot is one row of the table above: the ink curve is $x \mapsto \frac{ax+b}{cx+d}$, the grey dashed line is $y = x$, and the crossings are the real fixed points. The `empty` curve lies on the diagonal; the `dead` one runs parallel to it; the two `collapse` maps cross it at the cyan rationals $0$ and $\pm 1$; only the two `live` maps cross it at the magenta irrationals $\varphi, -\varphi^{-1}$ and $\varphi^{-1}, -\varphi$ ([@thm-self-application-four-fates]).
