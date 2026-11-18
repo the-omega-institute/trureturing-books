@@ -127,6 +127,25 @@ If the entries of $X$ sum to $1$, let $a_s=\sum_i b_s(i)$. For every $a_s>0$, ta
 
 For the outer product of a complex vector with at most two nonzero coordinates, the diagonal sum minus twice the sum of the real parts of the five edge entries is nonnegative. If the support consists of the endpoints of an edge, this difference is the squared modulus of the difference of the two coordinates. Otherwise the edge terms vanish and only squared moduli remain. Summing over the factors gives the required matrix inequality. For $M$ the difference is $25/55-30/55=-1/11$, so the complex factor width is at least three. The construction attains three. The same matrix still fails the posterior realizability test above.
 
+**The nearest realizable posterior moment at a fixed prior.** Keep the uniform prior and let $M(t)=(1/5-2t)I+tW$ and $\delta=20t-1$. For $1/20\le t\le 11/160$, the unique nearest finite posterior second moment at that prior is $P(t)$, with diagonal, edge and nonedge entries
+
+$$
+\frac1{10}-\frac{\delta}{15},\qquad \frac1{20},\qquad \frac{\delta}{30},
+$$
+
+respectively. The squared Frobenius distance sums squared differences over all $25$ ordered entries. Its minimum is $\delta^2/24$, which equals $1/2904$ at the original example $t=3/55$. Competitors may have positive nonedge entries.
+
+The five-cycle has clique number two. For any probability vector $x$, the Motzkin–Straus theorem gives $\sum_{i\bmod 5}x_i x_{i+1}\le 1/4$. Averaging over posterior outer products yields $\langle N,X\rangle_F\ge-1/5$, where $N=(4/5)J-2W$ and $\langle\cdot,\cdot\rangle_F$ is the sum of entrywise products. Direct summation gives $\langle N,P(t)\rangle_F=-1/5$, $\|N\|_F^2=24$ and $P(t)-M(t)=(\delta/24)N$. Expanding the squared distance gives
+
+$$
+\|X-M(t)\|_F^2=\|X-P(t)\|_F^2+\frac{\delta^2}{24}
++\frac{\delta}{12}\bigl(\langle N,X\rangle_F+1/5\bigr).
+$$
+
+The final term is nonnegative. Equality at the lower bound forces $\|X-P(t)\|_F^2=0$, so $X=P(t)$. [Motzkin–Straus, §1, Theorem 1](https://doi.org/10.4153/CJM-1965-053-6)
+
+Set $w=8\delta/3$. Divide mass $1-w$ equally among the five cyclic shifts of $(1/2,1/2,0,0,0)$, and divide mass $w$ equally among the five shifts of $(1/4,1/2,1/4,0,0)$. Each orbit separately has the uniform barycenter. Their average outer products have entries $(1/10,1/20,0)$ and $(3/40,1/20,1/80)$ on the diagonal, edges and nonedges, respectively. Their mixture therefore realizes $P(t)$. The stated interval guarantees $0\le w\le 1$ and includes endpoints with one orbit of zero mass. The interval describes the scope of this construction. The distance theorem also applies to inputs $M(t)$ that are indefinite within this range.
+
 ## 34.22.2 Benchmarking Four Past-History Memory Maps and the Answer-Table Copy Foil on a Three-Bit History Space: Why Dissipation Does Not Imply Learning {#sec-ch34-22-2}
 
 To contrast raw past-history retention, sliding-window FIFO truncation, target-blind dissipative coarse-graining, sufficient-statistic octave distillation, and an acausal answer-table oracle copy with complete arithmetic transparency, we compute every entropy, impurity, heat, and causality verdict by hand on an explicit $8$-state three-bit history space:
