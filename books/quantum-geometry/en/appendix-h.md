@@ -352,7 +352,7 @@ We trace all five stages on this single system:
      (2k)_3 = \Bigl[\frac{2}{3}\Bigr] = \frac{2}{3} \neq 0 \in \operatorname{AddCircle}(1) \;\Longrightarrow\; K(2k) = 2k \neq 0!
      $$
 
-     Hence $0 \neq 2k \in (H.\mathrm{ker} \sqcap L.\mathrm{ker}).\operatorname{map}(K)$, so the joint blind spot remains nontrivial ($\neq \bot$)! More generally, any single fixed-level coordinate ledger $L_m(x) = x_m$ vanishes on $\operatorname{realFlow}(m)$ at both level $1$ and level $m$ ($[m/1] = [m/m] = 0$) while leaving a nonzero residue $\bigl[\frac{m}{m+1}\bigr] \neq 0$ at level $m + 1$. In pure group-theoretic miniature, **every finite-level ledger genuinely contracts the indistinguishable kernel, yet leaves a residual blind spot in deeper fibers awaiting the next stage of table expansion.**
+     Hence $0 \neq 2k \in (H.\mathrm{ker} \sqcap L.\mathrm{ker}).\operatorname{map}(K)$, so the joint blind spot remains nontrivial ($\neq \bot$)! More generally, any single fixed-level coordinate ledger $L_m(x) = x_m$ vanishes on $\operatorname{realFlow}(m)$ at both level $1$ and level $m$ ($[m/1] = [m/m] = 0$) while leaving a nonzero residue $\bigl[\frac{m}{m+1}\bigr] \neq 0$ at level $m + 1$. In pure group-theoretic miniature, **a finite-level ledger can genuinely contract the indistinguishable kernel, yet a single-level one leaves a residual blind spot in deeper fibers awaiting the next stage of table expansion.**
 :::
 
 The exact hypotheses, verified conclusions, and non-extrapolation guardrails for all five kernel-verified theorems of Appendix H are consolidated in the master audit table below:

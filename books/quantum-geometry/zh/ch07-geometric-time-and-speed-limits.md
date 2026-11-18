@@ -10,10 +10,10 @@
 
 在牛顿与日常经验的世界里，时间被想象成一条均匀流淌的一维标量直线 $t \in \mathbb{R}$：钟摆“滴答、滴答”地敲击出一串排成一列的历史刻度，就像纸带上被打孔机打出的一排离散圆孔。然而，在薛定谔方程 $i\hbar\frac{d}{dt}\lvert\psi(t)\rangle = H\lvert\psi(t)\rangle$ 主宰的微观世界里，只要你不去打孔测量，状态矢量却在复希尔伯特空间里沿着二维相位平面连续旋转，甚至同时横跨多条历史路径发生相干叠加！
 
-为什么同一个宇宙里会有两副截然不同的“时间面孔”？本章将严格证明作者的那句直觉洞见——**“线是经典时间，面积是量子时间”**：
+为什么同一个宇宙里会有两副截然不同的“时间面孔”？本章将用严格证明的定理来展开作者的那句直觉洞见——**“线是经典时间，面积是量子时间”**：
 
 1. **量子时间是二向量有向面积**：连续幺正演化 $U(t) = \exp\bigl((-it/\hbar)H_{\mathrm{op}}\bigr)$ 的无穷小生成元 $G = -(i/\hbar)H_{\mathrm{op}}$ 必为**反自伴算子**（$G^* = -G$），哈密顿量 $H_{\mathrm{op}} = i\hbar G$ 所度量的，恰恰是量子态在单位时间内扫过的**二向量旋转面积率**；
-2. **经典时间是一维幂等投影线**：只有当观察者用幂等投影尺 $P^2 = P$ 去拦截这片旋转面积、每一次翻越 $90^\circ$ 正交墙（$\langle m_0, m_1\rangle = 0$）落下一枚不可混淆的离散记录时，连续扫掠的二维量子面积才被切分成了“滴答、滴答”的一维经典时间刻度！
+2. **经典时间是一维幂等投影线**：只有当观察者用幂等投影尺 $P^2 = P$ 去拦截这片旋转面积、每一次翻越 $90^\circ$ 正交墙（$\langle m_0, m_1\rangle = 0$）落下一枚不可混淆的离散记录时，连续扫掠的二维量子面积才被切分成了“滴答、滴答”的一维经典时间刻度！（这两句是本书的读法，不是某条 Lean 定理的结论；下文的记录时间下界也以两条位移界为前提。）
 
 ::: {.figure src="ch07-overview"}
 **图 7。** 本章地图：第 I 栏，琥珀色的箭头从 $m_0$ 转到与它垂直的 $m_1$，扫过一块品红的四分之一圆，两个端点是两声滴答；第 II 栏，横轴是转角 $\omega t$，灰色虚线是不看时留在 $\lvert 0\rangle$ 的概率，青色的线是测 $4$ 次时的概率，到 $180^\circ$ 还剩 $0.531$；第 III 栏，记账余量 $D_{\mathrm{freeze}} = \Delta E_{\mathrm{pass}} - \Delta S/\beta$ 随逆温度 $\beta$ 变化，在 $\beta_c$ 左边是品红的负余量，右边是青色的正余量。
@@ -31,7 +31,7 @@ $$
 \left.\frac{d}{dt}\bigl(U(t)^* U(t)\bigr)\right|_{t=0} = G^* U(0) + U(0)^* G = G^* + G = 0 \quad\Longrightarrow\quad G^* = -G!
 $$
 
-看清楚了吗？**任何保模长连续演化的真实几何生成元 $G$，天生必然是一个反自伴算子（$G^* = -G$）——也就是第五章证明的二维有向面积旋转生成元（bivector generator）！**
+看清楚了吗？**任何保模长连续演化的真实几何生成元 $G$，天生必然是一个反自伴算子（$G^* = -G$）——也就是第五章证明的二维有向面积旋转生成元（bivector generator；一般维数时是若干张互相对易的旋转面之和）！**
 
 物理学家之所以在薛定谔方程里写出自伴的哈密顿量 $H_{\mathrm{op}}$（满足 $H_{\mathrm{op}}^* = H_{\mathrm{op}}$），仅仅是因为人类习惯用实数能量刻度来给仪表盘标定读数：人为地给反自伴的几何旋转生成元 $G$ 乘上一个旋转 $90^\circ$ 的因子 $i\hbar$（其中 $\hbar \neq 0$ 是把几何弧度换算为物理作用量焦耳·秒的校准常数），定义
 
@@ -45,7 +45,7 @@ $$
 **保模长的生成元只把箭头往垂直方向推。** 在琥珀色箭头 $\psi(t)$ 的尖端，紫色的箭头 $G\psi$ 沿切线，与 $\psi$ 成直角，所以箭头只转不伸缩；淡灰的箭头是之前相隔 $\Delta t$ 的位置，每个 $\Delta t$ 扫过一块同样大的品红扇形。示意：把复相位的转动画成实平面上的转动；自伴性与指数律见 [@thm-calibrated-unitary-group]。
 :::
 
-在 Lean 4 形式化模块 `Quantum/Dynamics/CalibratedUnitaryGroup` 中，下面这条定理在完备复内积空间（希尔伯特空间）$H$ 上一次性严格证明了：从单参数保模长群出发，校准后的哈密顿量 $H_{\mathrm{op}} = (i\hbar)G$ 必自伴、有限时间演化必为指数旋子 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$，且处处满足算子薛定谔微分方程！
+在 Lean 4 形式化模块 `Quantum/Dynamics/CalibratedUnitaryGroup` 中，下面这条定理在完备复内积空间（希尔伯特空间）$H$ 上一次性严格证明了：从单参数保模长群出发，校准后的哈密顿量 $H_{\mathrm{op}} = (i\hbar)G$ 必自伴、有限时间演化必为指数旋子 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$，且处处满足算子薛定谔微分方程！（定理的前提是 $U$ 在 $0$ 处按算子范数可导，即有界生成元，涵盖有限维；无界哈密顿量需要 Stone 定理，属文献结果，未在本书形式化。）
 
 ::: {.theorem #thm-calibrated-unitary-group title="单参数幺正演化群的校准自伴哈密顿量与指数薛定谔方程定理" lean="D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group"}
 设 $H$ 为完备复内积空间，$U : \mathbb{R} \to (H \to_L[\mathbb{C}] H)$ 为连续线性算子构成的单参数族，$G : H \to_L[\mathbb{C}] H$ 为 $U$ 在 $t = 0$ 处的导数（`HasDerivAt U G 0`）。若 $U$ 满足单参数幺正群条件：
@@ -112,7 +112,7 @@ $$
 
 换句话说：**在经典时间轴上每往前迈出一步真正可区分的“滴答”，量子态在射影球面上就必须实打实地翻越一堵 $90^\circ$（$\pi/2$ 弧度）的正交墙！**
 
-在 Lean 模块 `QuantumBounds/FubiniStudyRecordTime` 中，我们先证明了任意三根单位态向量 $a, b, c$ 之间的富比尼—施图迪球面三角不等式 $\theta_{\mathrm{FS}}(a, c) \le \theta_{\mathrm{FS}}(a, b) + \theta_{\mathrm{FS}}(b, c)$（[`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle)）。由此出发，如果从一个锚定中间态 $a$ 到两个正交目标记录态 $m_0, m_1$（$\langle m_0, m_1\rangle_{\mathbb{C}} = 0$）的角位移分别受限于速度上界 $\theta_{\mathrm{FS}}(a, m_k) \le \mathrm{energy}\cdot\tau / \hbar$（$k = 0, 1$），那么两段路程加起来至少要跨过 $\theta_{\mathrm{FS}}(m_0, m_1) = \pi/2$ 的正交鸿沟，从而直接锁死了单步记录时间 $\tau$ 的绝对下界与有限时长 $T$ 内的最大经典记录步数 $N$！
+在 Lean 模块 `QuantumBounds/FubiniStudyRecordTime` 中，我们先证明了任意三根单位态向量 $a, b, c$ 之间的富比尼—施图迪球面三角不等式 $\theta_{\mathrm{FS}}(a, c) \le \theta_{\mathrm{FS}}(a, b) + \theta_{\mathrm{FS}}(b, c)$（[`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle)）。由此出发，如果从一个锚定中间态 $a$ 到两个正交目标记录态 $m_0, m_1$（$\langle m_0, m_1\rangle_{\mathbb{C}} = 0$）的角位移分别受限于速度上界 $\theta_{\mathrm{FS}}(a, m_k) \le \mathrm{energy}\cdot\tau / \hbar$（$k = 0, 1$），那么两段路程加起来至少要跨过 $\theta_{\mathrm{FS}}(m_0, m_1) = \pi/2$ 的正交鸿沟，从而直接锁死了单步记录时间 $\tau$ 的下界与有限时长 $T$ 内的最大经典记录步数 $N$！
 
 ::: {.figure src="ch07-wall"}
 **两段各不超过 $E\tau/\hbar$ 的路，加起来至少要跨过 $90^\circ$。** 赤道上的 $m_0$ 与 $m_1$ 正交，它们之间是品红的 $90^\circ$ 弧；从琥珀色的锚点 $a$ 到两者各有一段青色的弧，每段受速度界 $\le E\tau/\hbar$ 限制（$E$ 即定理中的 $\mathrm{energy}$）。两段青色弧之和不小于品红的弧，于是 $2E\tau/\hbar \ge \frac{\pi}{2}$（[@thm-fubini-study-record-time]）。示意：图中是实单位向量的球面，重叠为正时富比尼—施图迪夹角就是弧长。

@@ -1,6 +1,6 @@
 # 32.4 零背景下的三条创生铁律与机器验证双重闭环 {#sec-ch32-generative-laws}
 
-在[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)至[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)中，我们已经从零背景比较公理 $\mathcal{A}_0$ 与单指令比较机 $\mathrm{CMP}(\mathbf{A}, \mathbf{B}) = \mathbf{A}\cdot\mathbf{B} + \mathbf{A}\wedge\mathbf{B}$ 出发，将逻辑集合、算术素数、内积几何、量子五公设与相对论规范热力学的核心骨架逐条锻造为显式桥接假设下的形式化推论。现在，当这枚比较算子不再外在于被比较的对象、而是彻底折回自身（$\psi = \psi(\psi)$）时，一座无需向自然界赊借闵可夫斯基背景流形、外加复希尔伯特空间或经验拟合常数表的**正交自指统一场模型（`MODEL`）**便水到渠成地立起。全部几何与动力学原语沿着三条递进的创生铁律内生涌现：
+在[第 32.1 节](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)至[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)中，我们已经从零背景比较公理 $\mathcal{A}_0$ 与单指令比较机 $\mathrm{CMP}(\mathbf{A}, \mathbf{B}) = \mathbf{A}\cdot\mathbf{B} + \mathbf{A}\wedge\mathbf{B}$ 出发，将逻辑集合、算术素数、内积几何、量子五公设与相对论规范热力学的核心骨架逐条锻造为显式桥接假设下的形式化推论。现在，当这枚比较算子不再外在于被比较的对象、而是彻底折回自身（$\psi = \psi(\psi)$）时，一座力求不向自然界赊借闵可夫斯基背景流形、外加复希尔伯特空间或经验拟合常数表的**正交自指统一场模型（`MODEL`）**便水到渠成地立起。全部几何与动力学原语沿着三条递进的创生铁律内生涌现：
 
 1. **零号元公理（无背景自指闭环，$\psi = \psi(\psi)$）**：
    彻底砍掉一切置身事外的特权参考点 $C$ 与外部立法者。宇宙底层不存在悬浮在状态之外的“外部定律”——**去丈量与计数的比较算子（动词：量 `liáng` / 数 `shǔ`）与被丈量与记录的状态（名词：量 `liàng` / 数 `shù`）在最底层是同一个本体**。

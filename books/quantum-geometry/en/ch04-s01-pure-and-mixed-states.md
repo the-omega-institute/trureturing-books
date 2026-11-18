@@ -92,16 +92,50 @@ $$
 so $V^{\dagger}\pi(a)V = \operatorname{diag}(a_{00}, a_{11}) = \varphi(a)$. Moreover $V^{\dagger}V = I_2$, in agreement with $\varphi(I_2) = I_2$. This $V$ is exactly the isometry of [@thm-nonselective-marginal] that copies the branch label into the record register: the second factor $\mathbb{C}^2$ is the record. The off-diagonal entries $a_{01}$ and $a_{10}$ have not disappeared; they are still inside $a \otimes I_2$ and are merely sandwiched away by $V$.
 :::
 
-::: {.remark #rem-stinespring-literature title="Stinespring's Dilation Theorem and Microscopic Bath Underdetermination (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** In this chapter, [@thm-nonselective-marginal] constructs an explicit isometric recording dilation for finite orthogonal projective families $\{P_a\}$, and [@thm-reduced-access-defect] gives an explicit two-qubit unitary dilation for controlled copying. For an arbitrary completely positive trace-preserving (CPTP) quantum channel $\mathcal{E} : M_d(\mathbb{C}) \to M_{d'}(\mathbb{C})$, norm-preserving high-dimensional embedding is governed by **Stinespring's dilation theorem** (W. F. Stinespring, *Positive functions on $C^*$-algebras*, Proc. Amer. Math. Soc. **6**, 211–216, 1955):
+Place each Kraus branch in an orthogonal environment slot, and a general finite matrix channel becomes an isometric embedding followed by forgetting the environment. We use environment-first tensor order below, so the partial trace sums over the first factor.
 
-1. **Existence of isometric and unitary dilations**: There exists a finite-dimensional auxiliary environment Hilbert space $\mathcal{H}_{\mathrm{E}}$ (of dimension at most $d d'$, with minimal dimension equal to the Choi rank of $\mathcal{E}$) and a linear isometry $V : \mathcal{H}_{\mathrm{S}} \to \mathcal{H}_{\mathrm{S}'} \otimes \mathcal{H}_{\mathrm{E}}$ ($V^* V = I_{\mathrm{S}}$) such that $\mathcal{E}(\rho) = \Tr_{\mathrm{E}}(V \rho V^*)$ for all $\rho \in M_d(\mathbb{C})$; when $d' = d$, fixing a reference pure ancilla $\lvert e_0\rangle \in \mathcal{H}_{\mathrm{E}}$ and extending $V\lvert\psi\rangle = U(\lvert\psi\rangle \otimes \lvert e_0\rangle)$ to a joint unitary $U$ yields $\mathcal{E}(\rho) = \Tr_{\mathrm{E}}\bigl(U(\rho \otimes \lvert e_0\rangle\langle e_0\rvert)U^*\bigr)$.
-2. **Minimal-isometry unitary equivalence versus physical bath underdetermination**: Any two **minimal** isometric dilations $(\mathcal{H}_{\mathrm{E}_1}, V_1)$ and $(\mathcal{H}_{\mathrm{E}_2}, V_2)$ of the same channel $\mathcal{E}$ (with linearly independent Kraus operators and no uncoupled environment subspace) are related by a unique unitary operator $W : \mathcal{H}_{\mathrm{E}_1} \to \mathcal{H}_{\mathrm{E}_2}$ on the auxiliary environment satisfying $(I_{\mathrm{S}'} \otimes W)V_1 = V_2$. Physically, however, knowing the reduced channel $\mathcal{E}$ alone **underdetermines the actual microscopic bath**: redundant non-minimal bath dimensions, local basis rotations $W$ on $\mathcal{H}_{\mathrm{E}}$, and the continuous-time system–bath Hamiltonian $H_{\mathrm{SE}}(t)$ or interaction history that generated $V$ cannot be uniquely reconstructed from local channel tomography alone.
+::: {.theorem #thm-finite-channel-stinespring title="Kraus Representation and Isometric Partial-Trace Dilation of Every Finite Matrix Channel" lean="D5/S3/Quantum/Entanglement/FiniteSectorPhysicalConstruction.channel_kraus_stinespring"}
+Let $A,B$ be arbitrary finite coordinate types with decidable equality, let $\mathcal E:M_A(\mathbb C)\to M_B(\mathbb C)$ be a completely positive trace-preserving channel, and put $I=B\times A$. Both of the following hold:
 
-Of these, existence in its general C\*-algebraic form (Heisenberg picture, $\varphi(a) = V^{\dagger}\pi(a)V$) is verified by [@thm-stinespring-dilation]. Passing from it to the finite-dimensional Schrödinger-picture form of item 1 takes two further steps: every representation of the matrix algebra $M_{d'}(\mathbb{C})$ is unitarily equivalent to $a \mapsto a \otimes I_{\mathrm{E}}$, and the duality $\Tr(\mathcal{E}(\rho)\,a) = \Tr(\rho\,\varphi(a))$. Trace preservation of $\mathcal{E}$ makes its dual $\varphi$ unital, so $V$ is an isometry in this case. These two steps, the dimension bounds, and the minimal-dilation uniqueness of item 2 are still cited from the classical operator-algebra literature and are not claimed in the book's Lean verification ledger.
+1. There is a family of rectangular Kraus matrices $K_k\in M_{B\times A}(\mathbb C)$, indexed by $k\in I$, such that
+
+   $$
+   \sum_{k\in I}K_k^\dagger K_k=I_A,\qquad
+   \mathcal E(X)=\sum_{k\in I}K_kXK_k^\dagger
+   \quad\text{for every }X\in M_A(\mathbb C).
+   $$
+
+2. There is a linear isometric matrix $V:\mathbb C^A\to\mathbb C^I\otimes\mathbb C^B$ such that
+
+   $$
+   V^\dagger V=I_A,\qquad
+   \mathcal E(X)=\Tr_I(VXV^\dagger)
+   \quad\text{for every }X\in M_A(\mathbb C).
+   $$
+
+Here $\Tr_I$ traces out the environment factor $\mathbb C^I$. If $|A|=d$ and $|B|=d'$, this dilation has environment dimension $|I|=dd'$, giving the existence bound of at most $dd'$. The original statement also allows empty finite coordinate types whenever a channel with those types exists.
 :::
 
-An immediate, far-reaching consequence follows: **apparent local irreversibility is not dynamical destruction — it is an access defect caused by losing the environment key!**
+::: proof
+Complete positivity makes the Choi matrix, ordered by output–input coordinates $B\times A$, positive semidefinite. Reshaping the vectors of its spectral decomposition gives rectangular Kraus matrices. Applying trace preservation to every input matrix unit yields $\sum_kK_k^\dagger K_k=I_A$. Stack the branches as $V_{(k,p),r}=(K_k)_{p,r}$: its adjoint product is exactly this sum, so $V$ is isometric. Summing the environment index $k$ in $VXV^\dagger$ gives $\sum_kK_kXK_k^\dagger$ entry by entry. The matrix-unit identity extends by linearity to every complex matrix. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark #rem-stinespring-literature title="Minimal Dilations, Unitary Extensions, and Microscopic Bath Underdetermination (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** [@thm-finite-channel-stinespring] gives an isometric partial-trace dilation of every finite matrix CPTP channel with an environment of dimension $dd'$. The stronger conclusions below remain part of the classical Stinespring dilation literature (W. F. Stinespring, *Positive functions on $C^*$-algebras*, Proc. Amer. Math. Soc. **6**, 211–216, 1955). Here $d,d'>0$, and the literature statements use output-first order $\mathcal H_{\mathrm S'}\otimes\mathcal H_{\mathrm E}$, obtained by swapping the two factors of the preceding dilation:
+
+1. **Minimum environment dimension**: The minimum isometric-dilation environment dimension for $\mathcal E:M_d(\mathbb C)\to M_{d'}(\mathbb C)$ equals its Choi rank. The $dd'$ environment labels in [@thm-finite-channel-stinespring] provide a dilation; that theorem does not establish its minimality.
+2. **Unique environment-unitary equivalence of minimal dilations and physical bath underdetermination**: For minimal dilations, with linearly independent Kraus operators and no redundant uncoupled environment dimensions, any two minimal isometric dilations $(\mathcal H_{\mathrm E_1},V_1)$ and $(\mathcal H_{\mathrm E_2},V_2)$ of the same channel $\mathcal E$ admit a unique environment unitary $W:\mathcal H_{\mathrm E_1}\to\mathcal H_{\mathrm E_2}$ satisfying $(I_{\mathrm S'}\otimes W)V_1=V_2$. The reduced channel $\mathcal E$ alone nevertheless leaves the actual microscopic bath underdetermined: nonminimal redundant dimensions, environment basis rotations, and the continuous-time system–bath Hamiltonian $H_{\mathrm{SE}}(t)$ or interaction history producing the map are not reconstructed by local channel data.
+3. **Joint unitary extension with a fixed pure environment**: When $d'=d$, fix a unit environment state $\lvert e_0\rangle$. The isometric embedding extends to a joint unitary $U$ with $V\lvert\psi\rangle=U(\lvert\psi\rangle\otimes\lvert e_0\rangle)$, giving
+
+   $$
+   \mathcal E(X)=\Tr_{\mathrm E}\bigl(U(X\otimes\lvert e_0\rangle\langle e_0\rvert)U^\dagger\bigr)
+   \quad\text{for every }X\in M_d(\mathbb C).
+   $$
+
+The general C\*-algebraic representation-compression form is supplied by [@thm-stinespring-dilation]; [@thm-finite-channel-stinespring] obtains the finite matrix Schrodinger-picture form directly from Kraus operators. Minimum dimension, unique equivalence of minimal dilations, fixed-pure-environment unitary extension, and the physical interpretation of microscopic baths retain their respective literature status.
+:::
+
+An immediate, far-reaching consequence follows: **within this model, apparent local irreversibility is not dynamical destruction — it is an access defect caused by losing the environment key!**
 
 Test this on the sharpest possible pair: prepare East $\rho = \lvert +\rangle\langle +\rvert = \frac{1}{2}\bigl(\begin{smallmatrix}1 & 1\\ 1 & 1\end{smallmatrix}\bigr)$ versus West $\sigma = \lvert -\rangle\langle -\rvert = \frac{1}{2}\bigl(\begin{smallmatrix}1 & -1\\ -1 & 1\end{smallmatrix}\bigr)$ alongside a blank environment qubit $\lvert 0\rangle_{\mathrm{env}}$, and apply the reversible controlled-copy unitary $U_{\mathrm{copy}}$ (a CNOT permutation flipping the environment bit $a \mapsto 1 - a$ iff the system bit is $1$). Afterward:
 
@@ -110,7 +144,7 @@ Test this on the sharpest possible pair: prepare East $\rho = \lvert +\rangle\la
 
 The next theorem packages all six parts of this diagnosis into a single kernel-verified statement.
 
-::: {.theorem #thm-reduced-access-defect title="Reduced Irreversibility Is an Environment-Record Access Defect" lean="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"}
+::: {.theorem #thm-reduced-access-defect title="Controlled-Copy Record: Equal Reduced States, Distinguishable Joint States, Global Reversibility" lean="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"}
 Let $\rho, \sigma \in M_2(\mathbb{C})$ be two qubit matrices with identical diagonal entries ($\forall i,\, \rho_{ii} = \sigma_{ii}$) but at least one distinct off-diagonal entry ($\exists i \neq j,\, \rho_{ij} \neq \sigma_{ij}$). Write $U_{\mathrm{copy}} \in M_{\mathrm{Fin}\,2 \times \mathrm{Fin}\,2}(\mathbb{C})$ for the controlled address-copy permutation matrix, $B(\tau) = \tau \otimes \lvert 0\rangle\langle 0\rvert_{\mathrm{env}}$ for the blank-environment joint embedding, $R(\tau)$ for the controlled-record joint state, and $\Tr_{\mathrm{env}}$ for the partial trace over the environment. Then all six statements hold:
 
 1. **Unitarity of global coupling**: $U_{\mathrm{copy}} \in U(\mathrm{Fin}\,2 \times \mathrm{Fin}\,2, \mathbb{C})$;

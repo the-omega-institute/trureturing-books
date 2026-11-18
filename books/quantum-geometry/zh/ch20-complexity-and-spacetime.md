@@ -118,7 +118,7 @@ $$
 
 为什么我们要花力气把 [@thm-open-circuit-min-depth] 与 [@ex-open-circuit-depths] 的组合层序交由 Lean 内核逐行核验？因为即便是如此具体的有限门列表深度问题，单凭直觉归纳和手头小样本外推也极易失手！
 
-在原始文献（`arXiv:2607.02093v1`）中，作者曾针对奇数 $N$ 与偶数 $N$ 分别提出了两条形如线性减法的最小深度猜想公式：`conjectureOne` 预测奇数 $N$ 时最小深度为 $(N + 3)/2 - \kappa$，`conjectureTwo` 预测偶数 $N$ 时最小深度为 $(N + 4)/2 - \kappa$。当 $\kappa = 1$ 时，$\lfloor N/2\rfloor + 1$ 确实与这两条线性公式吻合；但一旦跨到 $\kappa = 2$，多出来的分割点允许把电路切分成 $\kappa + 1 = 3$ 段并行子链，真实最小深度立刻以斜率 $1/(\kappa+1) = 1/3$ 低于斜率 $1/2$ 的原猜想！我们在 [@ex-open-circuit-depths] 中算出的 $N = 8, \kappa = 2$ 与 $N = 11, \kappa = 2$，恰好就是一举击穿这两条原文献公式的精确反例。
+在原始文献（M. García Fernández、C. Paletta 与 A. L. Retore，*Open-boundary integrable quantum circuits with different geometries*，`arXiv:2607.02093v1`）中，作者曾针对奇数 $N$ 与偶数 $N$ 分别提出了两条形如线性减法的最小深度猜想公式：`conjectureOne` 预测奇数 $N$ 时最小深度为 $(N + 3)/2 - \kappa$，`conjectureTwo` 预测偶数 $N$ 时最小深度为 $(N + 4)/2 - \kappa$。当 $\kappa = 1$ 时，$\lfloor N/2\rfloor + 1$ 确实与这两条线性公式吻合；但一旦跨到 $\kappa = 2$，多出来的分割点允许把电路切分成 $\kappa + 1 = 3$ 段并行子链，真实最小深度立刻以斜率 $1/(\kappa+1) = 1/3$ 低于斜率 $1/2$ 的原猜想！我们在 [@ex-open-circuit-depths] 中算出的 $N = 8, \kappa = 2$ 与 $N = 11, \kappa = 2$，恰好就是一举击穿这两条原文献公式的精确反例。
 
 ::: {.lemma #lemma-open-circuit-depth-refutation title="两条深度公式的反例" lean="D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result"}
 定义关于开放边界可积电路最小深度 $\operatorname{minDepth}(N, \kappa)$ 的两条命题及其析取 `claim` 如下：
@@ -196,7 +196,7 @@ $$
 **边界时间往后走，穿过黑洞内部的切片越拉越长；它与门数是否成正比是开放问题。** 示意的双边黑洞彭罗斯图：左右竖边是两个边界，上下锯齿线是奇点，对角虚线是视界。紫色的切片 $\Sigma_t$ 两端钉在边界时刻 $t = 0, 1, 2, 3$ 上，越往后越长（示意，未计算体积）。红色标签是复杂度—体积猜想（[@conj-complexity-equals-volume]），开放问题。
 :::
 
-Lean 的 `D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound` 模块对偶数比特数 $m = 2n$（$n \ge 1$）给出了一个干净利落的肯定定理。让我们先把模块中的电路与门集定义交代清楚：
+这一下界原是 X. Huang、T. Kosugi、H. Nishi 与 Y.-i. Matsushita（*Optimized Synthesis of Circuits for Diagonal Unitary Matrices with Reflection Symmetry*，J. Phys. Soc. Jpn. 93, 054002 (2024)，arXiv:2310.06676）在结论节提出的猜想，该文的算法 1 给出了匹配的上界（文献结果，未在本书形式化）。Lean 的 `D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound` 模块对偶数比特数 $m = 2n$（$n \ge 1$）给出了一个干净利落的肯定定理。让我们先把模块中的电路与门集定义交代清楚：
 
 - 记 $m$ 比特计算基类型为 $\operatorname{Qubits}(m) = (\operatorname{Fin} m \to \operatorname{Bool})$（共 $2^m$ 个布尔位串）；
 - 无辅助比特（ancilla-free）基本门类型 `gate m` 定义为两类门的不交并
@@ -330,7 +330,7 @@ $$
 **文献结果，未在本书形式化。** 在标准计算复杂性理论中，复杂性类 $\mathrm{P}$ 与 $\mathrm{NP}$ 严格定义为在**统一（uniform）确定性图灵机**与**统一非确定性图灵机**上、以固定有限字母表作标准紧凑编码时，可在输入串编码长度 $n = |x|$ 的多项式时间 $\operatorname{poly}(n)$ 内判定的形式语言（判定问题）集合。在这一严格定义下，必须遵守两条铁律：
 
 1. **预处理与查表成本不可逃逸**：任何输入重编码、基变换或构建查找表的预处理过程，其本身消耗的时间与空间资源都必须计入总计算成本。对于编码长度为 $n = |x|$、含 $k$ 个布尔变量的逻辑公式（如 3-SAT），将其全部 $2^k$ 个变量赋值的真值表预先算好存入内存需要指数级 $\Theta(2^k \operatorname{poly}(n))$ 的预处理时间与 $\Theta(2^k)$ 的存储空间（若试图预存所有编码长度为 $n$ 的候选输入实例的答案，更需要 $\Theta(2^n)$ 规模的查找表）；即使放宽到允许随输入长度 $n$ 先验给定提示串 $a_n$ 的**非统一复杂性类 $\mathrm{P/poly}$**，其定义也严格要求**提示串长度受多项式约束 $|a_n| \le \operatorname{poly}(n)$**（等价于多项式规模布尔电路族），指数级大小的预存查找表连 $\mathrm{P/poly}$ 的多项式提示串预算都无法装下，更绝不能由此宣称统一图灵机模型下的 $\mathrm{P} = \mathrm{NP}$。
-2. **酉矩阵精确合成的指数下界不等于 $\mathrm{P} \neq \mathrm{NP}$**：在 [@prop-reflection-cnot-lower-bound] 中，无辅助比特 $\{\mathrm{CNOT}, R_z\}$ 电路精确合成显式反射对称硬相位算子 $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ 需要至少 $2^{2n-1} + 2n - 2$ 个 $\mathrm{CNOT}$ 门，这是因为该显式证人在全部 $2^{2n-1} - 1$ 个非零偶奇偶 Walsh–Hadamard 特征标上均取非平凡值 $-1$，迫使电路逐一生成全部非零偶奇偶标签并完成 $2n - 1$ 次导线奇复原（而在未在本书形式化的量子电路文献中，如 V. V. Shende, S. S. Bullock & I. L. Markov, *Phys. Rev. A* **70**, 012310 (2004)，合成一般 $m$ 比特酉群 $\mathrm{U}(2^m)$ 中的矩阵亦因 $4^m$ 维连续实参数流形维数计数而需要 $\Omega(4^m)$ 个双比特门）。然而，$\mathrm{NP}$ 判定问题是由编码长度为 $n = |x|$ 的紧凑布尔公式或图灵机实例描述的判定问题；无论是针对全空间对角算子 $\theta_{\mathrm{hard}}$ 的指数级奇偶输出计数下界，还是一般酉算子族的连续参数计数下界，都不能阻止某个特定紧凑判定问题拥有 $\operatorname{poly}(n)$ 时间算法，因此不能用来证明 $\mathrm{P} \neq \mathrm{NP}$。
+2. **酉矩阵精确合成的指数下界不等于 $\mathrm{P} \neq \mathrm{NP}$**：在 [@prop-reflection-cnot-lower-bound] 中，无辅助比特 $\{\mathrm{CNOT}, R_z\}$ 电路精确合成显式反射对称硬相位算子 $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ 需要至少 $2^{2n-1} + 2n - 2$ 个 $\mathrm{CNOT}$ 门，这是因为该显式证人在全部 $2^{2n-1} - 1$ 个非零偶奇偶 Walsh–Hadamard 特征标上均取非平凡值 $-1$，迫使电路逐一生成全部非零偶奇偶标签并完成 $2n - 1$ 次导线奇复原（而在未在本书形式化的量子电路文献中，如 V. V. Shende, I. L. Markov & S. S. Bullock, *Phys. Rev. A* **69**, 062321 (2004)，合成一般 $m$ 比特酉群 $\mathrm{U}(2^m)$ 中的矩阵亦因 $4^m$ 维连续实参数流形维数计数而需要 $\Omega(4^m)$ 个双比特门）。然而，$\mathrm{NP}$ 判定问题是由编码长度为 $n = |x|$ 的紧凑布尔公式或图灵机实例描述的判定问题；无论是针对全空间对角算子 $\theta_{\mathrm{hard}}$ 的指数级奇偶输出计数下界，还是一般酉算子族的连续参数计数下界，都不能阻止某个特定紧凑判定问题拥有 $\operatorname{poly}(n)$ 时间算法，因此不能用来证明 $\mathrm{P} \neq \mathrm{NP}$。
 
 参见 S. A. Cook, "The complexity of theorem-proving procedures," *Proc. 3rd Annual ACM Symposium on Theory of Computing (STOC)*, pp. 151–158 (1971), DOI: `10.1145/800157.805047`；以及 S. Aaronson, *The Complexity of Quantum States and Transformations: From Quantum Money to Black Holes* (2016), `arXiv:1607.05256`。
 :::
@@ -355,7 +355,7 @@ $$
 
 这自然引出了一个更深层的本体论与复杂性追问：如果[第十章](ch10-gram-geometry-and-order.md)揭示的格拉姆矩阵重构具有“两两比较、永远一致、顺序无关”的无时间几何刚性，那么为什么局域观察者依然必须承受并行深度 $L$ 的硬下界与 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 的正交视界？在跨越第六部“球外之球”（对角线逃逸、素数谱与 $\psi = \psi(\psi)$）与第七部“机械法典”（无矩阵克利福德引擎、ZYZ 旋转器编译与 Lean 4 源码审计）之后，我们将在**第八部**给出完整的展开：
 
-- **[第二十九章](ch29-timeless-causality-and-gram-space.md)** 将把第十章的格拉姆椭圆体（$\det G \ge 0$）与无时间约束及条件时间切片文献背景（见第二十九章 `remark` 文献注记）合拢，阐明为什么顺序门深度 $L$ 度量的是有限观察者沿半正定矩阵补全（$G_{M+1} \succeq 0$）在静态时间场中一步步选点对齐晶面所需的最小旋转步数；
+- **[第二十九章](ch29-timeless-causality-and-gram-space.md)** 将把第十章的格拉姆椭圆体（$\det G \ge 0$）与无时间约束及条件时间切片文献背景（见第二十九章 `remark` 文献注记）合拢，阐明为什么可以把顺序门深度 $L$ 读作有限观察者沿半正定矩阵补全（$G_{M+1} \succeq 0$）在静态时间场中一步步选点对齐晶面所需的最小旋转步数；
 - **[第三十章](ch30-fields-lines-eth-and-navier-stokes.md)** 将进一步在“全局静态场模型 vs. 场内有限观察者 $\mathrm{P}\neq\mathrm{NP}$（[@conj-p-neq-np]）”以及“$\mathrm{P}$ 是无旋引导场、$\mathrm{NP}$ 是零横截面一维见证丝”的几何框架下，结合专门文献注记审视细粒度复杂性中的张量网络秩约分讨论、宇宙尺度对照与三维流体平流闭合障碍；
 - **[第三十一章](ch31-quantum-fairness.md)** 与 **[第三十二章](ch32-unified-field-and-meta-unification.md)** 则把两子互易、互补勾股、不可克隆、正交视界与环面遍历升华为消除几何特权的五重公平体系（`MODEL`），并在零外部背景的《正交自指统一场》诠释纲领中完成跨领域统一理论的元统一合拢。
 

@@ -59,7 +59,7 @@ $$
 
 This connects the finite remainder recurrence, infinite positional value, and period kernel $999999$. Once the generator $1/7$ is known, another lap supplies no new digit information.
 
-In `trureturing`, the three mathematical pillars of "factoring out redundant fibers via partition topology," "collapsing periodic subgroup sums onto dual annihilators" (echoing period extraction in [Chapter 15](ch15-grover-qft-and-period-finding.md) and generator cancellation in [Chapter 22](ch22-primes-euler-products-and-zeros.md)), and "encoding long-run orbit averages entirely inside the invariant measure of a single torus generator" (echoing [Chapter 31](ch31-quantum-fairness.md)) are united in the four formal theorems below:
+In `trureturing`, the three mathematical pillars of "factoring out redundant fibers via partition topology," "collapsing periodic subgroup sums onto dual annihilators" (echoing period extraction in [Chapter 15](ch15-grover-qft-and-period-finding.md) and generator cancellation in [Chapter 22](ch22-primes-euler-products-and-zeros.md)), and "encoding long-run orbit averages entirely inside the invariant measure of a single torus generator" (echoing [Chapter 31](ch31-quantum-fairness.md)) are pinned down, piece by piece, by the four formal theorems below (they are mutually independent and do not combine into a theorem about understanding or rebirth):
 
 ::: {.theorem #thm-ch36-quotient-annihilator-and-factorization title="Partition-Topology Quotient Factorization, Finite Annihilator Summation, and Compact-Torus Generator Equidistribution" lean="D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition D5/S3/Fourier/FinitePoisson.sum_annihilator_character D5/S3/Fourier/FinitePoisson.finite_poisson_summation D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"}
 Across the frozen observation-topology, finite-group duality, and compact-torus asymptotics modules of `trureturing`, the following four quotient-factorization and generator-reduction theorems hold simultaneously:
@@ -149,8 +149,8 @@ Three total-function and scope boundaries govern [@thm-solenoid-log-charge] and 
 
 We synthesize these three existential and geometric regimes within our interpretive framework (`MODEL`) in the boxed comparison ledger below:
 
-::: {.remark #rem-ch36-samsara-exit-table title="Three-Regime Orthogonal Synthesis Table (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The table below synthesizes inverse Gudermannian rapidity and cosine fixed-point literature ([@ex-ch36-inverse-gudermannian-discrete-staircase] and [@rem-ch36-poincare-disk-gudermannian-literature]) alongside our `MODEL` and formal quotient-annihilator theorems ([@thm-ch36-quotient-annihilator-and-factorization], `LEAN ✓`):
+::: {.remark #rem-ch36-samsara-exit-table title="Three-Regime Orthogonal Synthesis Table (Author's Model Summary, `MODEL`)"}
+**Author's model summary (`MODEL`), not a literature result.** The table below synthesizes inverse Gudermannian rapidity and cosine fixed-point literature ([@ex-ch36-inverse-gudermannian-discrete-staircase] and [@rem-ch36-poincare-disk-gudermannian-literature]) alongside our `MODEL` and formal quotient-annihilator theorems ([@thm-ch36-quotient-annihilator-and-factorization], `LEAN ✓`):
 
 | Regime of Existence (`MODEL`) | Angular & Coupling Law | Fate of 1D Anchor & Lookup Table $T$ | Geometric & Topological Trajectory | Epistemic Verdict |
 | :--- | :--- | :--- | :--- | :--- |

@@ -50,7 +50,7 @@ $$
 这里用到了自伴性 $P_b^* = P_b$（Lean 中由前置引理 `recording_isometry_and_state_blocks` 给出；顺带一提，$V^* V = \sum_a P_a^* P_a = \sum_a P_a = I$ 正表明 $V$ 是保内积等距嵌入）。现在按偏迹定义令 $b = a$ 并对全体 $a \in \mathrm{Outcome}$ 求和，非对角环境交叉块 $(a \neq b)$ 完全不进入对角迹和，剩下的逐元素恰好是 $\sum_{a} (P_a \rho P_a)_{i, j}$。完整证明由 Lean 内核检查。
 :::
 
-在这个正交记录模型中，[@thm-nonselective-marginal] 把“坍缩去相干从何而来”拆解得一清二楚：跨分支干涉项 $P_a \rho P_b$（$a \neq b$）并没有从联合矩阵 $V \rho V^*$ 中消失——它们依然完好无损地躺在环境异号块 $(a, b)$ 里！只是当你执行 $\Tr_{\mathrm{Outcome}}$ 只取环境对角元 $(a, a)$ 时，你的局部账本主动跳过了那些异号块。传统哥本哈根诠释曾在微观系统与宏观仪器之间划下一道神秘的“海森堡切口”，仿佛观察者拥有豁免于量子几何之外的特权；在本书的几何诠释中，等距记录为跨越这道人为切口提供了统一模型——**所以一切都结束了，没有任何例外，连观察者结构都是这样的**：观察者的记忆寄存器也可在此模型中由正交耦合与偏迹描述。“高维长矛的斜影”只是上述等权双分支例子的比喻，不是偏迹的一般向量投影公式。
+在这个正交记录模型中，[@thm-nonselective-marginal] 把“去相干从何而来”拆解得一清二楚：跨分支干涉项 $P_a \rho P_b$（$a \neq b$）并没有从联合矩阵 $V \rho V^*$ 中消失——它们依然完好无损地躺在环境异号块 $(a, b)$ 里！只是当你执行 $\Tr_{\mathrm{Outcome}}$ 只取环境对角元 $(a, a)$ 时，你的局部账本主动跳过了那些异号块。传统哥本哈根诠释曾在微观系统与宏观仪器之间划下一道神秘的“海森堡切口”，仿佛观察者拥有豁免于量子几何之外的特权；在本书的几何诠释中，等距记录为跨越这道人为切口提供了统一模型——**所以一切都结束了，没有任何例外，连观察者结构都是这样的**：观察者的记忆寄存器也可在此模型中由正交耦合与偏迹描述。“高维长矛的斜影”只是上述等权双分支例子的比喻，不是偏迹的一般向量投影公式。
 
 [@thm-nonselective-marginal] 是为一族正交投影亲手搭出来的等距记录扩张。一般完全正映射的 Stinespring 扩张则是表示压缩 $\varphi(a)=V^{\dagger}\pi(a)V$，其中 $V$ 未必等距；它的一般 C\*-代数形式已经冻结在所钉仓库里。这里用的是海森堡图景：映射 $\varphi$ 作用在可观测量上，而不是作用在态上。
 
@@ -92,16 +92,50 @@ $$
 即 $V^{\dagger}\pi(a)V = \operatorname{diag}(a_{00}, a_{11}) = \varphi(a)$。又 $V^{\dagger}V = I_2$，与 $\varphi(I_2) = I_2$ 相符。这里的 $V$ 正是 [@thm-nonselective-marginal] 中把分支标签抄进记录寄存器的那个等距：第二个因子 $\mathbb{C}^2$ 就是记录。非对角元 $a_{01}$、$a_{10}$ 并没有消失，它们留在 $a \otimes I_2$ 里，只是被 $V$ 夹掉了。
 :::
 
-::: {.remark #rem-stinespring-literature title="Stinespring 扩张定理与微观热浴欠定性（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本章的 [@thm-nonselective-marginal] 针对有限正交投影族 $\{P_a\}$ 给出了显式构造的等距记录扩张，而下文的 [@thm-reduced-access-defect] 则对单比特受控拷贝给出了显式幺正扩张。对于任意完全正且保迹（CPTP）的一般量子信道 $\mathcal{E} : M_d(\mathbb{C}) \to M_{d'}(\mathbb{C})$，其高维保范嵌入由算子代数中的经典 **Stinespring 扩张定理**（W. F. Stinespring, *Positive functions on $C^*$-algebras*, Proc. Amer. Math. Soc. **6**, 211–216, 1955）给出：
+把每个 Kraus 分支放进一个正交的环境格子，便能把一般有限矩阵信道写成“先等距嵌入，再忽略环境”。下面采用环境在前、输出系统在后的张量次序；偏迹对第一个因子求和。
 
-1. **等距与幺正扩张的存在性**：必存在有限维辅助环境空间 $\mathcal{H}_{\mathrm{E}}$（维数可取至多 $d d'$，极小扩张维数等于 $\mathcal{E}$ 的 Choi 秩）及保内积等距算子 $V : \mathcal{H}_{\mathrm{S}} \to \mathcal{H}_{\mathrm{S}'} \otimes \mathcal{H}_{\mathrm{E}}$（$V^* V = I_{\mathrm{S}}$），使得对一切 $\rho \in M_d(\mathbb{C})$ 恒有 $\mathcal{E}(\rho) = \Tr_{\mathrm{E}}(V \rho V^*)$；当输入输出同维（$d' = d$）时，固定环境纯初态 $\lvert e_0\rangle \in \mathcal{H}_{\mathrm{E}}$ 并将 $V\lvert\psi\rangle = U(\lvert\psi\rangle \otimes \lvert e_0\rangle)$ 延拓为联合空间上的幺正算子 $U$，即化为联合幺正偏迹形式 $\mathcal{E}(\rho) = \Tr_{\mathrm{E}}\bigl(U(\rho \otimes \lvert e_0\rangle\langle e_0\rvert)U^*\bigr)$。
-2. **极小扩张的环境幺正等价唯一性与物理热浴欠定性**：在极小扩张条件下（即 Kraus 算子线性无关、无冗余未耦合环境维数），同一信道 $\mathcal{E}$ 的任意两个极小等距扩张 $(\mathcal{H}_{\mathrm{E}_1}, V_1)$ 与 $(\mathcal{H}_{\mathrm{E}_2}, V_2)$ 之间差且仅差一个作用在辅助环境上的幺正变换 $W : \mathcal{H}_{\mathrm{E}_1} \to \mathcal{H}_{\mathrm{E}_2}$，满足 $(I_{\mathrm{S}'} \otimes W)V_1 = V_2$。然而在物理层面上，仅凭局部约化信道 $\mathcal{E}$ **无法唯一反推真实的微观环境历史**：非极小热浴的冗余自由度、环境空间局部基的幺正旋转 $W$，以及产生该净映射的连续时间系统—热浴哈密顿量 $H_{\mathrm{SE}}(t)$，对于仅握有局部数据的观察者而言均保持欠定。
+::: {.theorem #thm-finite-channel-stinespring title="任意有限矩阵信道的 Kraus 表示与等距偏迹扩张" lean="D5/S3/Quantum/Entanglement/FiniteSectorPhysicalConstruction.channel_kraus_stinespring"}
+设 $A,B$ 为任意有限可判等坐标类型，$\mathcal E:M_A(\mathbb C)\to M_B(\mathbb C)$ 为完全正保迹信道，令 $I=B\times A$。则下列两项成立：
 
-其中存在性的一般 C\*-代数形式（海森堡图景，$\varphi(a) = V^{\dagger}\pi(a)V$）已由 [@thm-stinespring-dilation] 验证。从它到上面第 1 条的有限维薛定谔图景形式还需要两步：矩阵代数 $M_{d'}(\mathbb{C})$ 的每个表示都酉等价于 $a \mapsto a \otimes I_{\mathrm{E}}$，以及对偶关系 $\Tr(\mathcal{E}(\rho)\,a) = \Tr(\rho\,\varphi(a))$；$\mathcal{E}$ 保迹使其对偶 $\varphi$ 保单位，因而此时 $V$ 等距。这两步连同维数界与第 2 条的极小等距唯一性仍由经典文献给出，不列入本书的 Lean 形式化账本。
+1. 存在矩形 Kraus 矩阵族 $K_k\in M_{B\times A}(\mathbb C)$（$k\in I$），满足
+
+   $$
+   \sum_{k\in I}K_k^\dagger K_k=I_A,\qquad
+   \mathcal E(X)=\sum_{k\in I}K_kXK_k^\dagger
+   \quad\text{对所有 }X\in M_A(\mathbb C).
+   $$
+
+2. 存在线性等距矩阵 $V:\mathbb C^A\to\mathbb C^I\otimes\mathbb C^B$，满足
+
+   $$
+   V^\dagger V=I_A,\qquad
+   \mathcal E(X)=\Tr_I(VXV^\dagger)
+   \quad\text{对所有 }X\in M_A(\mathbb C).
+   $$
+
+这里 $\Tr_I$ 对环境因子 $\mathbb C^I$ 求偏迹。若 $|A|=d$、$|B|=d'$，这组扩张的环境维数为 $|I|=dd'$，因而给出至多 $dd'$ 的存在性界。原陈述也允许空有限坐标类型，条件是相应信道确实存在。
 :::
 
-这立刻引出一个震撼人心的推论：**局部看到的“不可逆退相干”，本质上根本不是动力学不可逆，而是观察者丢掉环境钥匙后的“访问缺陷（access defect）”！**
+::: proof
+完全正性使按输出—输入坐标 $B\times A$ 排列的 Choi 矩阵为半正定；谱分解的向量重新排列为矩形 Kraus 矩阵。把保迹条件作用于每个输入矩阵单位，得到 $\sum_kK_k^\dagger K_k=I_A$。堆叠这些分支，取 $V_{(k,p),r}=(K_k)_{p,r}$，其伴随乘积正是该和，故 $V$ 等距。对环境指标 $k$ 求和，$VXV^\dagger$ 的偏迹逐项成为 $\sum_kK_kXK_k^\dagger$；矩阵单位上的恒等式由线性延伸至所有复矩阵。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-stinespring-literature title="极小扩张、幺正延拓与微观热浴欠定性（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** [@thm-finite-channel-stinespring] 给出任意有限矩阵 CPTP 信道的等距偏迹扩张及 $dd'$ 环境维数界。以下更强结论沿用经典 Stinespring 扩张理论文献（W. F. Stinespring, *Positive functions on $C^*$-algebras*, Proc. Amer. Math. Soc. **6**, 211–216, 1955）。此处取 $d,d'>0$，并在文献陈述中交换前一定理的两个因子，采用输出在前、环境在后的次序 $\mathcal H_{\mathrm S'}\otimes\mathcal H_{\mathrm E}$：
+
+1. **极小环境维数**：$\mathcal E:M_d(\mathbb C)\to M_{d'}(\mathbb C)$ 的极小等距扩张环境维数等于其 Choi 秩。[@thm-finite-channel-stinespring] 的 $dd'$ 个环境标签给出一个可用扩张，其最小性不包含在该定理中。
+2. **极小扩张的环境幺正等价唯一性与物理热浴欠定性**：在极小扩张条件下（即 Kraus 算子线性无关、无冗余未耦合环境维数），同一信道 $\mathcal E$ 的任意两个极小等距扩张 $(\mathcal H_{\mathrm E_1},V_1)$ 与 $(\mathcal H_{\mathrm E_2},V_2)$ 之间存在唯一的环境幺正算子 $W:\mathcal H_{\mathrm E_1}\to\mathcal H_{\mathrm E_2}$，满足 $(I_{\mathrm S'}\otimes W)V_1=V_2$。然而，仅凭局部约化信道 $\mathcal E$，真实微观环境的非极小冗余维数、环境基旋转及产生该映射的连续时间系统—热浴哈密顿量 $H_{\mathrm{SE}}(t)$ 或相互作用历史均保持欠定。
+3. **固定纯环境的联合幺正延拓**：当 $d'=d$ 时，固定单位环境态 $\lvert e_0\rangle$，可将等距嵌入延拓为联合幺正算子 $U$，使 $V\lvert\psi\rangle=U(\lvert\psi\rangle\otimes\lvert e_0\rangle)$，从而
+
+   $$
+   \mathcal E(X)=\Tr_{\mathrm E}\bigl(U(X\otimes\lvert e_0\rangle\langle e_0\rvert)U^\dagger\bigr)
+   \quad\text{对所有 }X\in M_d(\mathbb C).
+   $$
+
+一般 C\*-代数的表示压缩形式由 [@thm-stinespring-dilation] 给出，有限矩阵的薛定谔图景形式由 [@thm-finite-channel-stinespring] 直接通过 Kraus 构造给出。上述极小维数、极小扩张等价唯一性、固定纯环境幺正延拓及微观热浴的物理解释保持各自的文献身份。
+:::
+
+这立刻引出一个震撼人心的推论：**在这个模型里，局部看到的“不可逆退相干”，本质上根本不是动力学不可逆，而是观察者丢掉环境钥匙后的“访问缺陷（access defect）”！**
 
 举个最尖锐的例子：拿正东纯态 $\rho = \lvert +\rangle\langle +\rvert = \frac{1}{2}\bigl(\begin{smallmatrix}1 & 1\\ 1 & 1\end{smallmatrix}\bigr)$ 与正西纯态 $\sigma = \lvert -\rangle\langle -\rvert = \frac{1}{2}\bigl(\begin{smallmatrix}1 & -1\\ -1 & 1\end{smallmatrix}\bigr)$ 分别与空白环境寄存器 $\lvert 0\rangle_{\mathrm{env}}$ 做一次完全可逆的受控地址拷贝幺正门 $U_{\mathrm{copy}}$（即量子计算中最基础的受控非门 CNOT：系统为 $0$ 时环境不动，系统为 $1$ 时翻转环境比特 $a \mapsto 1 - a$）。演化之后：
 
@@ -110,7 +144,7 @@ $$
 
 下面的定理将上述六个环环相扣的论断一次性全部形式化。
 
-::: {.theorem #thm-reduced-access-defect title="局部退相干不可逆性的本质是环境记录访问缺陷" lean="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"}
+::: {.theorem #thm-reduced-access-defect title="受控拷贝记录：约化态相同、联合态可区分且全局可逆" lean="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"}
 设 $\rho, \sigma \in M_2(\mathbb{C})$ 为两个单比特矩阵，满足主对角元处处相等（$\forall i,\, \rho_{ii} = \sigma_{ii}$），但至少有一处非对角相干元不同（$\exists i \neq j,\, \rho_{ij} \neq \sigma_{ij}$）。记受控地址拷贝置换矩阵为 $U_{\mathrm{copy}} \in M_{\mathrm{Fin}\,2 \times \mathrm{Fin}\,2}(\mathbb{C})$，空白环境联合嵌入为 $B(\tau) = \tau \otimes \lvert 0\rangle\langle 0\rvert_{\mathrm{env}}$，受控拷贝后的联合记录态为 $R(\tau)$，对环境求偏迹算子为 $\Tr_{\mathrm{env}}$。则以下六条结论同时成立：
 
 1. **全局耦合幺正性**：$U_{\mathrm{copy}} \in U(\mathrm{Fin}\,2 \times \mathrm{Fin}\,2, \mathbb{C})$；

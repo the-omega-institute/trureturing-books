@@ -172,12 +172,59 @@ $$
 
 Let us audit the real degrees of freedom honestly. At first glance, $(\alpha, \beta)$ carries $4$ real numbers $(a, b, c, d) \in \mathbb{R}^4$ — one dimension more than three-dimensional space! Yet two layers of pure bookkeeping redundancy are hiding inside those four numbers:
 
-::: {.remark #rem-pure-ray-literature title="Pure-State Rays and the Hopf Fibration (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** We use the standard pure-state ray description; for the sphere quotient map, see [Hopf map](https://mathworld.wolfram.com/HopfMap.html).
+::: {.remark #rem-pure-ray-literature title="Pure-State Rays and the Hopf Phase Quotient"}
+**Literature provenance and an application of existing results.** For the classical background, see [Hopf map](https://mathworld.wolfram.com/HopfMap.html). We now turn the picture of “normalize, then remove the common phase” into an actual map between spheres and explain how existing results establish the quotient homeomorphism.
 
-1. **Normalization removes one dimension ($\mathbb{R}^4 \to S^3$)**: Directional comparison cares only where the arrow points, not whether we draw its shaft an inch or a yard long. Enforcing $|\alpha|^2 + |\beta|^2 = a^2 + b^2 + c^2 + d^2 = 1$ slices four-dimensional space down to the three-sphere $S^3$, leaving $3$ real parameters.
-2. **Global phase invariance removes a second dimension ($S^3 / U(1) \cong S^2$)**: Multiplying both components simultaneously by a unit complex phase $e^{i\gamma}$ ($\gamma \in \mathbb{R}$) spins $\alpha$ and $\beta$ by the exact same angle $\gamma$ in lockstep. In standard quantum mechanics, normalized representatives $\lvert\psi\rangle$ and $e^{i\gamma}\lvert\psi\rangle$ of the same pure-state ray give identical measurement probabilities; this phase multiplies the entire state, rather than only one branch. Quotienting $S^3$ by this $U(1)$ phase circle (the celebrated Hopf fibration) strips away one more parameter, leaving $3 - 1 = 2$ real angles — an honest two-dimensional unit sphere $S^2 \subset \mathbb{R}^3$!
+Directional comparison does not depend on how long we draw the arrow. Rename the complex coordinates above as $(a,b)=(\alpha,\beta)$ and write $\operatorname{normSq}(z)=\operatorname{Re}(z)^2+\operatorname{Im}(z)^2=|z|^2$. Normalization leaves the three-dimensional unit sphere in four-dimensional Euclidean space; the target is the two-dimensional unit sphere in three-dimensional Euclidean space:
 
+$$
+\begin{aligned}
+S^3&=\{(a,b)\in\mathbb{C}^2:\operatorname{normSq}(a)+\operatorname{normSq}(b)=1\},\\
+S^2&=\{q=(q_0,q_1,q_2)\in\mathbb{R}^3:q_0^2+q_1^2+q_2^2=1\}.
+\end{aligned}
+$$
+
+Both carry the subspace topologies inherited from the usual Euclidean topologies. The equation for $S^3$ requires the sum of the two squared complex moduli to be $1$; it does not require each component to have modulus $1$. Take the Hopf map
+
+$$
+H(a,b)=\bigl(2\operatorname{Re}(\bar a b),\;2\operatorname{Im}(\bar a b),\;
+\operatorname{normSq}(a)-\operatorname{normSq}(b)\bigr).
+$$
+
+Its image lies in $S^2$: the first two squared coordinates sum to $4|a|^2|b|^2$, and adding the third gives $(|a|^2+|b|^2)^2=1$. This is exactly the unit-spinor Bloch image treated in `NumericalRange` by the existing [`blochPure_norm`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_norm). The matrix is $P_v=vv^*$, where $v=(a,b)$: its off-diagonal entry is $a\bar b$, and the minus sign in the imaginary coordinate of `bloch` gives precisely the positive sign $2\operatorname{Im}(\bar a b)$ used here.
+
+Every sphere point has a preimage as well. For $q\in S^2$ with $q_2\ne-1$, set
+
+$$
+\begin{aligned}
+p&=\sqrt{\frac{1+q_2}{2}}>0,\\
+a&=p,\qquad b=\frac{q_0+iq_1}{2p}.
+\end{aligned}
+$$
+
+Since $q_0^2+q_1^2=1-q_2^2$, we have $|b|^2=(1-q_2)/2$, so $(a,b)\in S^3$ and $H(a,b)=q$. At the south pole $q=(0,0,-1)$, take $(a,b)=(0,1)$; the formula above already gives $(1,0)$ at the north pole. This reuses the original square-root construction and pole split in [`blochPure_surjective`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_surjective), covering the whole sphere.
+
+We must specify exactly what is being removed. Let $U(1)=\{c\in\mathbb{C}:\norm{c}=1\}$ and define on $S^3$
+
+$$
+\begin{aligned}
+(a,b)\sim(a',b')\quad\Longleftrightarrow\quad
+&\exists c\in\mathbb{C},\quad\norm{c}=1,\\
+&a=ca',\qquad b=cb'.
+\end{aligned}
+$$
+
+The **same** complex number $c$ must multiply both components: it turns both arrows together and preserves their relative phase. Substitution gives $H(cv)=H(v)$. Conversely, $H(v)=H(w)$ forces $v\sim w$. The matrices $P_v$ and $P_w$ are Hermitian with trace $1$; the reconstruction identity in `bloch_geometry_of_isHermitian` expresses each through `blochMatrix` with the same trace and Bloch coordinates, so $P_v=P_w$. Regarding the normalized coordinates as `Ket (Fin 2)`, the existing `MState.PhaseEquiv_iff_pure_eq` (equivalently, `MState.pure_eq_pure_iff`) identifies equality of these pure-state matrices with exactly the common unit-complex phase relation above. Thus the fibers of $H$ are precisely these phase circles, rather than merely containing them.
+
+Finally, give $S^3/U(1)$ the **quotient topology**: for $\pi:S^3\to S^3/U(1)$, a set $O$ is open exactly when $\pi^{-1}(O)$ is open in $S^3$. Each real coordinate of $H$ is a quadratic polynomial in four real variables, so $H$ is continuous. Phase invariance therefore induces a continuous map $\bar H([v])=H(v)$. The exact fibers give injectivity, and the construction covering both poles gives surjectivity. Inverse continuity still needs a reason; bijectivity alone does not establish a homeomorphism. The sphere $S^3$ is compact, its continuous quotient image $S^3/U(1)$ is compact, and the Euclidean subspace $S^2$ is Hausdorff. Every closed subset of the quotient is therefore compact, its image under $\bar H$ is compact, and that image is closed in $S^2$. This proves continuity of $\bar H^{-1}$. The very same representative formula consequently gives
+
+$$
+\bar H:S^3/U(1)\simeq_{\mathrm{top}}S^2,\qquad\bar H([(a,b)])=H(a,b).
+$$
+
+This step applies the existing result for a compact domain and a Hausdorff codomain; see Mathlib's [`Continuous.homeoOfEquivCompactToT2`](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Topology/Homeomorph/Lemmas.lean#L474). Intuitively, normalization leaves three real parameters, and removing the common phase circle leaves two independent angles on a sphere. The concrete map, exact fibers, and continuity in both directions make that picture precise.
+
+Standard quantum mechanics interprets normalized representatives of the same ray as the same pure state, with identical measurement probabilities. The mathematical identification of the quotient does not derive this physical convention. The homeomorphism here assigns a sphere point to each phase class; it does not choose a gauge representative within that class or by itself prove the absence of a continuous global section. The quotient of all nonzero vectors by nonzero complex scaling, classification of phase-invariant polynomials, and state-preparation or compression protocols each require further arguments.
 :::
 
 The description of pure states as rays is a standard quantum-mechanical convention. The following algebraic theorem characterizes unitaries preserving rays; it does not derive that physical convention from algebra. We examine complex matrices over an arbitrary finite index type and the complex subspaces spanned by vectors.
@@ -285,4 +332,4 @@ Notice the most revealing geometric clue in this table: $\lvert 0\rangle$ and $\
 **The six poles: two orthogonal states are antipodal on the sphere.** The six poles are three antipodal pairs: $\lvert 0\rangle$ and $\lvert 1\rangle$ at the north and south poles, $\lvert\pm\rangle$ at $\pm\vv{e}_1$, $\lvert\pm i\rangle$ at $\pm\vv{e}_2$. The cyan $A$ sits at the north pole $\lvert 0\rangle$ and the amber $B$ stops due east at $\lvert +\rangle$, $90^\circ$ away; the top left reads the two diagonal entries $\frac{1 \pm b_2}{2}$ of $B$'s projection matrix, both $\frac{1}{2}$ here ([@prop-qubit-bloch-core]). Drag $B$ to the south pole $\lvert 1\rangle$: the angle becomes $180^\circ$ and the diagonal entries become $0$ and $1$.
 :::
 
-With this, our first conceptual housecleaning is complete: there are no isolated "quantum pellets" floating in a void, only directional rays encountering and measuring one another on a sphere; and there are no ghostly four-parameter complex column vectors, within the scope of single-qubit pure states, only real unit arrows $\vv{a} \in S^2$ stripped of normalization and global-phase redundancy (in [Chapter 32 §§32.1–32.3](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison) and [Appendix E](appendix-e.md), we will distill measurement and state evolution all the way down to the Zero-Background Axiom of Comparison $\mathcal{A}_0$ and single-instruction primitive $\mathrm{CMP}(\mathbf{A},\mathbf{B})$). When two such real arrows $\vv{a}$ and $\vv{b}$ meet face to face, how do they compute transition probabilities directly without borrowing any external coordinate frame? Let us open the door to [Chapter 2](ch02-born-rule.md).
+With this, our first conceptual housecleaning is complete: there are no isolated "quantum pellets" floating in a void, only directional rays encountering and measuring one another on a sphere; and there are no ghostly four-parameter complex column vectors, within the scope of single-qubit pure states, only real unit arrows $\vv{a} \in S^2$ stripped of normalization and global-phase redundancy (in [Chapter 32 §§32.1–32.3](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison) and [Appendix E](appendix-e.md), we will distill measurement and state evolution, under bridge hypotheses, all the way down to the Zero-Background Axiom of Comparison $\mathcal{A}_0$ and single-instruction primitive $\mathrm{CMP}(\mathbf{A},\mathbf{B})$). When two such real arrows $\vv{a}$ and $\vv{b}$ meet face to face, how do they compute transition probabilities directly without borrowing any external coordinate frame? Let us open the door to [Chapter 2](ch02-born-rule.md).

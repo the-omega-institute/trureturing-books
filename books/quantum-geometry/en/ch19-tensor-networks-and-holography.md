@@ -20,7 +20,7 @@ In keeping with our three-tier epistemological contract and the discrete facet-s
 
 Suppose two composite quantum subsystems — a left boundary and a right boundary — communicate through an intermediate network of contracted tensor legs. If only a single one-dimensional scalar wire links the two sides, the induced linear map across the cut has rank at most $1$ regardless of how large the boundary Hilbert spaces are. When multiple internal bonds bridge the interface in parallel, the operator rank across the cut (the number of nonzero Schmidt singular values) can grow with the product of the bond dimensions.
 
-As illustrated in Panel I of the figure above, hierarchical tensor networks such as MERA are widely used in the physics literature to motivate a geometric link between boundary entanglement and bulk bottleneck cuts. In general tensor networks, however, the quantum max-flow (the maximum matrix rank achievable by varying local tensors) can be strictly smaller than the quantum min-cut (the minimum product of bond dimensions across a disconnecting cut). To establish a theorem verified by the Lean kernel, we focus on an explicit finite-dimensional bridge network whose parameters and cone domain are completely specified.
+As illustrated in Panel I of the figure above, hierarchical tensor networks such as MERA are widely used in the physics literature to motivate a geometric link between boundary entanglement and bulk bottleneck cuts. In general tensor networks, however, the quantum max-flow (the maximum matrix rank achievable by varying local tensors) can be strictly smaller than the quantum min-cut (the minimum product of bond dimensions across a disconnecting cut). (Literature result: S. X. Cui, M. H. Freedman, O. Sattath, R. Stong and G. Minton, *Quantum max-flow/min-cut*, J. Math. Phys. 57, 062206 (2016), arXiv:1508.04644.) To establish a theorem verified by the Lean kernel, we focus on an explicit finite-dimensional bridge network whose parameters and cone domain are completely specified.
 
 ::: {.viz src="layered-network-cut" preset="one" height="500"}
 **One site: the cut is its own leg.** Site 16 at the bottom of the layered network forms the amber interval on its own, and the magenta minimal cut severs only that one leg. A single bond crosses the cut, so the rank across it is at most the dimension of that bond; only when more bonds are cut does the bound become the product of their dimensions.
@@ -32,7 +32,7 @@ Lengthen the interval from one site to four neighbouring sites: cutting the legs
 **Four sites: the cut runs through the network.** Four neighbouring sites at the bottom form the amber interval. Severing their four legs is not the cheapest option: the magenta minimal cut dips into the network and severs only 3 bonds, with the cyan tensors on its inner side. The page counts severed legs, which only bounds the rank from above; as noted above, in a general network the max-flow can fall short of the min-cut, and the network itself is a schematic model.
 :::
 
-In the Lean module `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound`, fix four natural-number bond dimensions $a, b, c, d \in \mathbb{N}$ and a bridge of width $3$ (indexed by $r \in \operatorname{Fin} 3$):
+The bridge-graph model, the definitions of `QMaxFlow` and `QMinCut`, and the cone-domain "flow equals cut" statement below (the source's Conjecture 3.15) come from F. Gesmundo, V. Lysikov and V. Steffan, *Quantum max-flow in the bridge graph*, Transformation Groups 30 (2025) 1751–1784 (DOI: `10.1007/s00031-024-09863-2`, arXiv:2212.09794); the source letters $(a, b, a', b')$ correspond to our $(a, b, c, d)$. In the Lean module `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound`, fix four natural-number bond dimensions $a, b, c, d \in \mathbb{N}$ and a bridge of width $3$ (indexed by $r \in \operatorname{Fin} 3$):
 
 - Let $M : \operatorname{Fin} 3 \to M_{a\times b}(\mathbb{C})$ be a triple of $a\times b$ complex matrices and $N : \operatorname{Fin} 3 \to M_{d\times c}(\mathbb{C})$ a triple of $d\times c$ complex matrices;
 - Define the **width-three bridge flow matrix** `flow` as the sum of three Kronecker products:
@@ -144,9 +144,320 @@ Together, $\operatorname{flow}(M, N)$ is a $6\times 6$ permutation matrix of ran
 **Together the three bridges tile a $6 \times 6$ permutation matrix exactly.** The cyan cells are the non-zero entries of $\operatorname{flow}(M, N)$, and the number in each is the bridge $r$ that puts it there: bridge $0$ fills the $4$ cells at the top left, bridges $1$ and $2$ add one cell each; the six cells share no row and no column, so the rank is $6$ ([@ex-bridge-two-three]).
 :::
 
+The six-dimensional permutation matrix above satisfies a more precise identity than full rank: its columns are distinct standard basis vectors, so $F^*F=I_6$. Writing the input and output dimensions of the right factors as $c=2q$ and $d=3q$ extends the same construction to every admissible pair of left dimensions. The task is to give each input coordinate a unique output coordinate, with no collisions between different inputs.
+
+::: {.theorem #thm-bridge-native-saturation-iff title="Exact column Gram saturation for a native three-term tensor sum" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeSaturation.native_saturation_iff"}
+For all natural numbers $a,b,q\in\mathbb N$ with $q>0$, there exist complex matrix families
+
+$$
+\begin{aligned}
+M_r&\in M_{a\times b}(\mathbb C),\\
+N_r&\in M_{3q\times2q}(\mathbb C)
+\qquad(r=0,1,2),
+\end{aligned}
+$$
+
+whose tensor sum satisfies
+
+$$
+\begin{aligned}
+F&=\sum_{r=0}^2M_r\otimes N_r,\\
+F^*F&=I_{2bq},
+\end{aligned}
+$$
+
+if and only if $2b\le3a$. Here $F^*$ is the conjugate transpose, the rows of $F$ are indexed by $\operatorname{Fin}a\times\operatorname{Fin}(3q)$, its columns by $\operatorname{Fin}b\times\operatorname{Fin}(2q)$, and $I_{2bq}$ is the identity matrix on this column index set.
+:::
+
+::: {.proof #pf-bridge-native-saturation-iff}
+First prove necessity. If $F^*F=I_{2bq}$, the rank bound for a product and the number of rows of $F$ give
+
+$$
+\begin{aligned}
+2bq&=\operatorname{rank}(F^*F)\\
+&\le\operatorname{rank}F\le3aq.
+\end{aligned}
+$$
+
+Since $q>0$, cancelling $q$ yields $2b\le3a$.
+
+Conversely, suppose $2b\le3a$. Use zero-based indices throughout, with ranges
+
+$$
+\begin{aligned}
+0\le i<a,&\qquad0\le j<b,\\
+0\le\ell<3q,&\qquad0\le k<2q.
+\end{aligned}
+$$
+
+Let $\mathbf1_{\{P\}}$ be $1$ when $P$ holds and $0$ otherwise. Choose the three left slices
+
+$$
+\begin{aligned}
+(M_0)_{ij}&=\mathbf1_{\{i=j\}},\\
+(M_1)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)\}},\\
+(M_2)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)+1\}},
+\end{aligned}
+$$
+
+and the three right slices
+
+$$
+\begin{aligned}
+(N_0)_{\ell k}&=\mathbf1_{\{\ell=k\}},\\
+(N_1)_{\ell k}&=\mathbf1_{\{k<q,\ \ell=2q+k\}},\\
+(N_2)_{\ell k}&=\mathbf1_{\{q\le k,\ \ell=q+k\}}.
+\end{aligned}
+$$
+
+The last two left slices vanish when $j<a$; the difference $j-a$ matters only when $j\ge a$, where it is an ordinary nonnegative integer difference.
+
+To see how the slices move a column, define the output route for an input index $(j,k)$ by
+
+$$
+\rho(j,k)=
+\begin{cases}
+(j,k),&j<a,\\
+\bigl(2(j-a),\,2q+k\bigr),&j\ge a,\ k<q,\\
+\bigl(2(j-a)+1,\,q+k\bigr),&j\ge a,\ q\le k.
+\end{cases}
+$$
+
+Every output lies in the required range. In the first branch, $j<a$ and $k<2q<3q$. In the other two branches put $t=j-a$. Since $j+1\le b$ and $2b\le3a$,
+
+$$
+2(t+1)\le2(b-a)\le a.
+$$
+
+Thus both $2t$ and $2t+1$ are less than $a$, while the second output coordinate lies in $[2q,3q)$. When $b\le a$, every input takes the first branch.
+
+Write the input standard basis as $E_{j,k}=e_j\otimes e_k$ and the output standard basis as $U_{i,\ell}=e_i\otimes e_\ell$. When $j<a$, only term $0$ acts. When $j\ge a$, term $0$ vanishes, and terms $1$ and $2$ divide the inputs according to $k<q$ or $k\ge q$. Hence every column has exactly one nonzero entry, equal to $1$:
+
+$$
+F E_{j,k}=U_{\rho(j,k)}.
+$$
+
+We must also check that different columns never reach the same row. The first branch has second output coordinate below $2q$, disjoint from the other two branches. The latter have even and odd first output coordinates, respectively, so they too are disjoint. Within each branch the output uniquely recovers $j,k$: read both directly in the first branch; in the second recover $t$ from $i=2t$ and set $k=\ell-2q$; in the third recover $t$ from $i=2t+1$ and set $k=\ell-q$. In the last two branches set $j=a+t$. Thus $\rho$ is injective.
+
+This determines the entire column Gram matrix, including every off-diagonal entry. Abbreviate the input indices as $x=(j,k)$ and $y=(j',k')$, and use the usual complex inner product, conjugate-linear in its first argument. Then
+
+$$
+\begin{aligned}
+(F^*F)_{x,y}
+&=\langle F E_x,F E_y\rangle\\
+&=\langle U_{\rho(x)},U_{\rho(y)}\rangle\\
+&=\delta_{x,y}.
+\end{aligned}
+$$
+
+Here $\delta$ is the Kronecker symbol. Expanding the three terms also accounts for every cross term explicitly: term $0$ has a second output coordinate in a range disjoint from those of terms $1$ and $2$, while terms $1$ and $2$ have first output coordinates of opposite parity. Consequently, for $r\ne s$,
+
+$$
+(M_r^*M_s)\otimes(N_r^*N_s)=0.
+$$
+
+Each diagonal term is the coordinate projection onto its input branch, and the three branches partition the entire input index set. Therefore
+
+$$
+\begin{aligned}
+F^*F
+&=\sum_{r,s=0}^2(M_r^*M_s)\otimes(N_r^*N_s)\\
+&=I_{2bq}.
+\end{aligned}
+$$
+
+The zero-dimensional cases are included. If $b=0$, $F$ has no input columns, and both $F^*F$ and $I_0$ are the unique empty square matrix; the identity holds, and $2b\le3a$ always holds. If $a=0$, the threshold forces $b=0$. If instead $b>0$, positivity of $q$ makes the input dimension positive and the output dimension zero, already ruled out by the rank inequality in the necessity argument. The full proof is checked by the Lean kernel.
+:::
+
+Setting $a=2$, $b=3$, and $q=1$ gives exactly the six slices displayed in [@ex-bridge-two-three]: the first four input basis vectors retain their coordinates, and the remaining two follow
+
+$$
+\begin{aligned}
+(2,0)&\longmapsto(0,2),\\
+(2,1)&\longmapsto(1,2)
+\end{aligned}
+$$
+
+completing the six output basis vectors. Thus [@thm-bridge-native-saturation-iff] extends that permutation example across the whole parameter family $c=2q$, $d=3q$. In general, the inputs need only occupy distinct output coordinates; they need not exhaust the output space.
+
+In the range $a<b$ with $2b\le3a$, this family satisfies $3c=6q=2d$. This equality follows directly from choosing $c=2q$ and $d=3q$. The theorem classifies existence of the original matrix triples within this fixed family of right dimensions; the identity column Gram follows directly from the coordinate routing of the displayed factors. This construction alone does not prove that, for arbitrary $c,d$, $a<b$ and the positive scalar column Gram identity $F^*F=\lambda I_{bc}$ ($\lambda>0$) necessarily imply $3c\le2d$. The bound $2c\le d$ in [@thm-bridge-native-rectangular-bound] below uses the strict threshold $3a<2b$, on the opposite side of the threshold from $2b\le3a$ here.
+
+The two right input blocks need not have equal lengths. Split the $c$ input coordinates into blocks of lengths $\lfloor c/2\rfloor$ and $\lceil c/2\rceil$, and give them the even and odd left slots, respectively. The same routing then works. Thus neither even $c$ nor the exact choice $d=3c/2$ is essential to this existence construction: the right output only needs room for the original $c$ rows and an additional strip of $\lceil c/2\rceil$ rows.
+
+::: {.theorem #thm-bridge-native-scalar-gram-exists title="Positive scalar column Gram existence for native three-term tensor sums in the first region" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeScalarGram.native_scalar_gram_exists"}
+For any natural numbers $a,b,c,d\in\mathbb N$ satisfying
+
+$$
+2b\le3a,\qquad3c\le2d,
+$$
+
+and every real number $\lambda$ with $\lambda>0$, there exist complex matrix families
+
+$$
+\begin{aligned}
+M&:\operatorname{Fin}3\longrightarrow M_{a\times b}(\mathbb C),\\
+N&:\operatorname{Fin}3\longrightarrow M_{d\times c}(\mathbb C),
+\end{aligned}
+$$
+
+whose original tensor sum satisfies
+
+$$
+\begin{aligned}
+F&=\sum_{r=0}^2M_r\otimes N_r,\\
+F^*F&=\lambda I_{bc}.
+\end{aligned}
+$$
+
+Here $F^*$ is the conjugate transpose, the rows of $F$ are indexed by $\operatorname{Fin}a\times\operatorname{Fin}d$, and its columns by $\operatorname{Fin}b\times\operatorname{Fin}c$. The matrix $I_{bc}$ is the identity on this column index set, and the real number $\lambda$ is viewed as a complex scalar through the natural embedding. There is no assumption that $a<b$, that $c$ has either parity, that $d$ has a particular exact value, that the factors are linearly independent, or that any dimension is strictly positive.
+:::
+
+::: {.proof #pf-bridge-native-scalar-gram-exists}
+First construct a tensor sum with identity column Gram, then scale by a real scalar. Put
+
+$$
+q=\lfloor c/2\rfloor,\qquad c-q=\lceil c/2\rceil.
+$$
+
+Use indices starting at $0$ throughout, with ranges
+
+$$
+\begin{aligned}
+0\le i<a,&\qquad0\le j<b,\\
+0\le s<d,&\qquad0\le k<c.
+\end{aligned}
+$$
+
+As before, let $\mathbf1_{\{P\}}$ be the indicator of $P$. Take the same three unscaled left slices as in the preceding construction, now denoted by $L_r$:
+
+$$
+\begin{aligned}
+(L_0)_{ij}&=\mathbf1_{\{i=j\}},\\
+(L_1)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)\}},\\
+(L_2)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)+1\}}.
+\end{aligned}
+$$
+
+Choose the $d\times c$ right slices
+
+$$
+\begin{aligned}
+(N_0)_{sk}&=\mathbf1_{\{s=k\}},\\
+(N_1)_{sk}&=\mathbf1_{\{k<q,\ s=c+k\}},\\
+(N_2)_{sk}&=\mathbf1_{\{q\le k,\ s=c+(k-q)\}}.
+\end{aligned}
+$$
+
+The differences $j-a$ and $k-q$ matter only when $j\ge a$ and $k\ge q$, respectively, so both are ordinary nonnegative integer differences. For $G=\sum_{r=0}^2L_r\otimes N_r$, these factors give the route
+
+$$
+\rho(j,k)=
+\begin{cases}
+(j,k),&j<a,\\
+\bigl(2(j-a),\,c+k\bigr),&j\ge a,\ k<q,\\
+\bigl(2(j-a)+1,\,c+(k-q)\bigr),&j\ge a,\ q\le k.
+\end{cases}
+$$
+
+Check the coordinate ranges explicitly. If $j\ge a$, put $t=j-a$. Since $j+1\le b$ and $2b\le3a$,
+
+$$
+2(t+1)\le2(b-a)\le a.
+$$
+
+Thus $2t<a$ and $2t+1<a$. If $b\le a$, there are no inputs in these residual branches: every column takes the first branch.
+
+The required integer bound on the right is
+
+$$
+\begin{aligned}
+d&\ge\lceil3c/2\rceil\\
+&=c+\lceil c/2\rceil=c+(c-q)\ge c.
+\end{aligned}
+$$
+
+This follows exactly from $3c\le2d$. Explicitly, write $c=2q+\varepsilon$, where $\varepsilon\in\{0,1\}$. Then $2d\ge6q+3\varepsilon$, and integrality of $d$ gives $d\ge3q+2\varepsilon=c+(c-q)$. The first branch has $k<c\le d$; the second has
+
+$$
+c\le c+k<c+q\le c+(c-q)\le d;
+$$
+
+and the third has
+
+$$
+c\le c+(k-q)<c+(c-q)\le d.
+$$
+
+Thus $\rho(j,k)$ is always a valid output coordinate. The two right input blocks may differ in length; the additional output strip needs only as many rows as the longer block, namely $c-q$.
+
+Let $E_{j,k}=e_j\otimes e_k$ be the input standard basis and $U_{i,s}=e_i\otimes e_s$ the output standard basis. When $j<a$, the corresponding columns of $L_1,L_2$ vanish, leaving only term $0$. When $j\ge a$, we have $(L_0)_{ij}=0$ because $i<a$, and the other two terms divide the inputs according to $k<q$ and $q\le k$. Every column therefore has exactly one nonzero entry, equal to $1$, and
+
+$$
+G E_{j,k}=U_{\rho(j,k)}.
+$$
+
+Distinct inputs cannot collide. The first branch has second output coordinate below $c$, whereas the other two branches have second coordinate at least $c$. Although the latter share the additional right strip, their first output coordinates are even and odd, respectively, so their images are disjoint. Within each branch the output $(i,s)$ uniquely recovers the input: in the first, $(j,k)=(i,s)$; in the second, $j=a+i/2$ and $k=s-c$; in the third, $j=a+(i-1)/2$ and $k=q+s-c$. The divisions are exact in their respective parity branches. Hence $\rho$ is injective. For any input indices $x,y$, the usual complex inner product now gives
+
+$$
+\begin{aligned}
+(G^*G)_{x,y}
+&=\langle G E_x,G E_y\rangle\\
+&=\langle U_{\rho(x)},U_{\rho(y)}\rangle
+=\delta_{x,y}.
+\end{aligned}
+$$
+
+This determines every Gram entry directly. Finally, the actual original factors are
+
+$$
+\begin{aligned}
+M_r&=\sqrt{\lambda}\,L_r,\qquad N_r\ \text{as specified above},\\
+F&=\sqrt{\lambda}\,G,\\
+F^*F&=\overline{\sqrt{\lambda}}\sqrt{\lambda}\,G^*G
+=\lambda I_{bc},
+\end{aligned}
+$$
+
+because $\lambda>0$ makes $\sqrt{\lambda}$ real with square $\lambda$. Throughout, the argument uses the displayed original $a\times b$ and $d\times c$ factors.
+
+The zero-dimensional cases remain subject to both dimension hypotheses. If $b=0$ or $c=0$, the input index set is empty, and $F^*F$ and $\lambda I_0$ are the unique empty square matrix. If $a=0$, $2b\le3a$ forces $b=0$; if $d=0$, $3c\le2d$ forces $c=0$. Nor is $q>0$ needed: when $c=1$, $q=0$, the second branch is empty, and the third works as written. Zero or linearly dependent factors need not be excluded. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-bridge-native-scalar-gram-odd title="Nine-column routing with an odd right input dimension"}
+Take
+
+$$
+(a,b,c,d,\lambda)=(2,3,3,5,2).
+$$
+
+Then $2b=6=3a$, $3c=9\le10=2d$, and $q=1$; the two right input blocks have lengths $1$ and $2$. The original left factors are three $2\times3$ matrices:
+
+$$
+\begin{aligned}
+M_0&=\sqrt2\begin{pmatrix}1&0&0\\0&1&0\end{pmatrix},\\
+M_1&=\sqrt2\begin{pmatrix}0&0&1\\0&0&0\end{pmatrix},\\
+M_2&=\sqrt2\begin{pmatrix}0&0&0\\0&0&1\end{pmatrix}.
+\end{aligned}
+$$
+
+The original right factors are all $5\times3$ matrices. The nonzero entries of $N_0$ are $(N_0)_{00}=(N_0)_{11}=(N_0)_{22}=1$; $N_1$ has only $(N_1)_{30}=1$; and $N_2$ has only $(N_2)_{31}=(N_2)_{42}=1$. All other entries vanish. Thus $F=\sum_{r=0}^2M_r\otimes N_r$ has $10$ rows and $9$ columns. Its first six columns $(j,k)$, with $j=0,1$ and $k=0,1,2$, are $\sqrt2\,U_{j,k}$; the remaining three are
+
+$$
+\begin{aligned}
+F E_{2,0}&=\sqrt2\,U_{0,3},\\
+F E_{2,1}&=\sqrt2\,U_{1,3},\\
+F E_{2,2}&=\sqrt2\,U_{1,4}.
+\end{aligned}
+$$
+
+The nine output coordinates are distinct, and only $(0,4)$ is unused. Every column therefore has squared norm $2$, and any two distinct columns have inner product zero, giving $F^*F=2I_9$ directly. Unequal right input blocks still allow the original three-term factors to produce an exact scalar column Gram.
+:::
+
+[@thm-bridge-native-scalar-gram-exists] extends the existence construction to arbitrary natural right dimensions satisfying $3c\le2d$, while retaining the left hypothesis $2b\le3a$. It is a sufficient condition: it does not assert that $3c\le2d$ is universally necessary for arbitrary original factors, and it does not give an existence classification in all dimensions. Under $3a<2b$, the later necessary bound gives $2c\le d$ ([@thm-bridge-native-rectangular-bound]); under the stronger threshold $2a<b$, it gives $3c\le d$ ([@thm-bridge-scalar-gram-obstruction]). The result here is an exact Gram identity in the finite native matrix model; it supplies no quantitative gap for approximate spectral flatness, physical realization, or derivation of the RT formula.
+
 ## 19.3 Cone domains and discrete capacity facets {#sec-discrete-facet-stitching}
 
-In [@ex-bridge-two-three], the internal bridge cut $3ac = 12$ sits well above the outer boundary cuts $ad = bc = 6$. Why do the quadratic cone inequalities $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ carve out the natural domain where the three-bridge interior never bottlenecks the outer cuts?
+In [@ex-bridge-two-three], the internal bridge cut $3ac = 12$ sits well above the outer boundary cuts $ad = bc = 6$. Why do the quadratic cone inequalities $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ lie inside the natural domain where the three-bridge interior never bottlenecks the outer cuts?
 
 A one-line algebraic check tells the story: when $a > 0$, $a^2 + b^2 \le 3ab$ forces $b^2 < a^2 + b^2 \le 3ab$, so $b < 3a$ (and similarly $c > 0$ with $c^2 + d^2 \le 3cd$ forces $d < 3c$). Multiplying $b < 3a$ by $c$ gives $bc < 3ac$, and multiplying $d < 3c$ by $a$ gives $ad < 3ac$. Thus, whenever $(a, b)$ and $(c, d)$ lie inside the quadratic cone $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ (with $a > 0$ and $c > 0$), the internal cut $3ac$ never undercuts $\min(ad, bc)$, so $\operatorname{QMinCut}(a, b, c, d)$ simplifies to $\min(ad, bc)$.
 
@@ -601,6 +912,153 @@ The original universal claim requires the same $M,N$ and the same positive $\lam
 :::
 
 This example establishes neither a smallest counterexample, an optimal ratio threshold, nor a complete dimension classification. It supplies no quantitative gap for approximately flat spectra. Its scope remains a finite-dimensional contraction in the fixed row/column bipartition, without a claim of physical realization or saturation of the RT formula.
+
+### 19.4.1 Rectangle partitions and the exact decomposition width of a fixed operator {#sec-bridge-rectangular-partition}
+
+The coordinate routing in [@thm-bridge-native-scalar-gram-exists] gives a sufficient construction with three tensor terms; the subsequent obstructions limit exact spectral flatness with three terms. We now retain the original local input and output spaces while allowing an arbitrary finite number of terms. A partition of the coordinate rectangle into blocks with equally many row and column indices will specify both a unitary and its minimum number of product terms.
+
+::: {.theorem #thm-bridge-rectangular-partition title="Unitary rectangle routing with exact decomposition width" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/RectangularBlockPartition.unitary_exact_width"}
+Let $X,Y,T$ be arbitrary finite sets. For each $t\in T$, let $I_t\subseteq X$, $J_t\subseteq Y$, and let $\phi_t:J_t\to I_t$ be a bijection. Suppose every $(x,y)\in X\times Y$ belongs to exactly one rectangle $I_t\times J_t$. Define $A_t\in M_{X\times Y}(\mathbb C)$ by $(A_t)_{ij}=1$ when $j\in J_t$ and $i=\phi_t(j)$, and zero otherwise. Put
+
+$$
+\begin{aligned}
+U&=\sum_{t\in T}A_t\otimes A_t^*,\\
+U&:\mathbb C^Y\otimes\mathbb C^X\longrightarrow\mathbb C^X\otimes\mathbb C^Y,\\
+T_+&=\{t\in T:J_t\ne\varnothing\}.
+\end{aligned}
+$$
+
+Here $A_t^*$ denotes the conjugate transpose of $A_t$. Define realignment using the original local indices:
+
+$$
+\begin{aligned}
+\mathcal R(U)_{(i,j),(k,l)}&=U_{(i,k),(j,l)},\\
+i,l&\in X,\qquad j,k\in Y.
+\end{aligned}
+$$
+
+Then $U^*U=I_{Y\times X}$, $UU^*=I_{X\times Y}$, and
+
+$$
+\begin{aligned}
+\operatorname{rank}\mathcal R(U)&=|T_+|,\\
+U&=\sum_{t\in T_+}A_t\otimes A_t^*.
+\end{aligned}
+$$
+
+Moreover, there are row and column maps $r:T_+\to X\times Y$ and $s:T_+\to Y\times X$ with $\mathcal R(U)_{r(t),s(u)}=\delta_{tu}$ for all $t,u\in T_+$. For every finite $R$ and arbitrary complex matrices $M_r\in M_{X\times Y}(\mathbb C)$, $N_r\in M_{Y\times X}(\mathbb C)$, a decomposition of this same operator $U=\sum_{r\in R}M_r\otimes N_r$ requires $|T_+|\le|R|$. Index sets and blocks may be empty; the factors in a proposed decomposition need not be linearly independent or nonzero.
+:::
+
+::: {.proof #pf-bridge-rectangular-partition}
+First expand the tensor sum in coordinates:
+
+$$
+U_{(i,k),(j,l)}=
+\sum_{u\in T}(A_u)_{ij}\overline{(A_u)_{lk}}.
+$$
+
+For an input basis index $(j,l)\in Y\times X$, choose its unique block with $l\in I_t$ and $j\in J_t$. A nonzero $u$-summand requires $j\in J_u$ and $l\in I_u$ from the supports of its two factors, so unique coverage forces $u=t$. The remaining summand equals $1$ exactly when $i=\phi_t(j)$ and $k=\phi_t^{-1}(l)$, and vanishes otherwise. Thus each input is routed as
+
+$$
+(j,l)\longmapsto\bigl(\phi_t(j),\phi_t^{-1}(l)\bigr).
+$$
+
+Call this route $\rho$. The output $(i,k)$ stays in the same rectangle $I_t\times J_t$, so unique coverage recovers $t$. Its inverse is
+
+$$
+\rho^{-1}(i,k)=\bigl(\phi_t^{-1}(i),\phi_t(k)\bigr),
+$$
+
+and both compositions are the identity. Hence $U_{w,p}=\delta_{w,\rho(p)}$. For $p,q\in Y\times X$ and $w,z\in X\times Y$, direct calculation gives
+
+$$
+\begin{aligned}
+(U^*U)_{p,q}
+&=\sum_{w\in X\times Y}\overline{U_{w,p}}U_{w,q}\\
+&=\delta_{\rho(p),\rho(q)}=\delta_{p,q},\\
+(UU^*)_{w,z}
+&=\sum_{p\in Y\times X}U_{w,p}\overline{U_{z,p}}\\
+&=\delta_{\rho^{-1}(w),\rho^{-1}(z)}=\delta_{w,z}.
+\end{aligned}
+$$
+
+These are the two Gram identities on the original input and output spaces.
+
+For each nonempty block choose $j_t\in J_t$ and set $i_t=\phi_t(j_t)$. Unique coverage gives
+
+$$
+(A_u)_{i_tj_t}=\delta_{ut}.
+$$
+
+The following actual submatrix of the realignment is therefore an identity:
+
+$$
+\begin{aligned}
+\mathcal R(U)_{(i_t,j_t),(j_s,i_s)}
+&=\sum_u(A_u)_{i_tj_t}\overline{(A_u)_{i_sj_s}}\\
+&=\delta_{ts}.
+\end{aligned}
+$$
+
+The row map is $r(t)=(i_t,j_t)$ and the column map is $s(t)=(j_t,i_t)$. Representatives from distinct blocks are distinct, so both maps are injective. This supplies an actual identity submatrix and gives $\operatorname{rank}\mathcal R(U)\ge|T_+|$. Empty blocks give zero matrices, so dropping them preserves $U$ and supplies an actual decomposition with $|T_+|$ terms.
+
+Finally, any decomposition $U=\sum_{r\in R}M_r\otimes N_r$ gives a factorization $\mathcal R(U)=BC$, where
+
+$$
+\begin{aligned}
+B_{(i,j),r}&=(M_r)_{ij},\\
+C_{r,(k,l)}&=(N_r)_{kl}.
+\end{aligned}
+$$
+
+Here $C$ uses the entries of $N_r$ directly, without conjugation. Hence $\operatorname{rank}\mathcal R(U)\le\operatorname{rank}B\le|R|$. Applied to the nonempty-block decomposition, this gives the matching rank upper bound; applied to arbitrary complex factors, it gives the minimum term count.
+
+If $J_t$ is empty, its bijection makes $I_t$ empty as well, and $A_t=0$. If $X$ or $Y$ is empty, all blocks are empty, $T_+$ is empty, and $U$ is the unique map between two zero-dimensional spaces; both Gram identities are identities of empty square matrices. Conversely, if $T_+$ is empty (in particular, if $T$ is empty), unique coverage forces $X\times Y$ to be empty. The realignment rank is then $0$, the identity submatrix and the achieved decomposition of width $0$ are empty, and the lower bound reads $0\le|R|$. The full proof is checked by the Lean kernel.
+:::
+
+The exact width concerns this constructed operator $U$: it needs precisely $|T_+|$ product terms. Whether another unitary with the same local dimensions admits fewer terms is a separate question. No physical swap is composed with the operator to transfer the result to a different local operator-Schmidt partition.
+
+::: {.example #ex-bridge-rectangular-partition-5-6 title="A thirty-dimensional unitary requiring exactly five terms"}
+Take $X=\{0,1,2,3,4\}$ and $Y=\{0,1,2,3,4,5\}$, partitioned into the five rectangles below:
+
+| $t$ | $I_t$ | $J_t$ | Size |
+| :--- | :--- | :--- | :--- |
+| $0$ | $\{0,1,2\}$ | $\{0,1,2\}$ | $3\times3$ |
+| $1$ | $\{0,1,2\}$ | $\{3,4,5\}$ | $3\times3$ |
+| $2$ | $\{3,4\}$ | $\{0,1\}$ | $2\times2$ |
+| $3$ | $\{3,4\}$ | $\{2,3\}$ | $2\times2$ |
+| $4$ | $\{3,4\}$ | $\{4,5\}$ | $2\times2$ |
+
+For a concrete choice, set, on each respective $J_t$,
+
+$$
+\begin{aligned}
+\phi_0(j)&=j,&\phi_1(j)&=j-3,\\
+\phi_2(j)&=j+3,&\phi_3(j)&=j+1,\\
+\phi_4(j)&=j-1.
+\end{aligned}
+$$
+
+Each is a bijection from the listed $J_t$ to $I_t$; any other choice of bijections within these blocks also works. The first three rows are covered by two $3\times3$ blocks, and the last two rows by three $2\times2$ blocks, with each grid point appearing exactly once. All five blocks are nonempty, so the construction yields
+
+$$
+\begin{aligned}
+U&:\mathbb C^6\otimes\mathbb C^5\longrightarrow
+\mathbb C^5\otimes\mathbb C^6,\\
+\operatorname{rank}\mathcal R(U)&=5.
+\end{aligned}
+$$
+
+For these specific bijections, choose the representative grid points in order as
+
+$$
+(0,0),\quad(0,3),\quad(3,0),\quad(3,2),\quad(3,4).
+$$
+
+Using these as realignment row indices, and reversing each coordinate pair for the column indices, gives an actual $5\times5$ identity submatrix. The five blocks also supply a five-term decomposition, so the lower bound is attained.
+
+This is a thirty-dimensional unitary requiring exactly five terms on the displayed original local partition. It supplies a five-term realization in these dimensions. Whether a different unitary of the same dimensions admits four terms remains open here; the example does not determine the global minimum term count over all such unitaries.
+:::
 
 ::: {.figure src="ch19-discrete-vs-rt"}
 **What this chapter proves stops on the left.** On the left, the width-three bridge graph, with the green tag for max-flow equal to min-cut in the cone ([@thm-bridge-quantum-maxflow-mincut]); on the right, a disc standing for a slice of continuum spacetime, the cyan arc the boundary region $A$ and the violet arc $\gamma_A$ leaving the ends of $A$ at right angles to the rim, the minimal surface of the RT formula (literature result, not formalized in this book). The crossed-out arrow between them: the continuum limit from left to right is not proved in this book.

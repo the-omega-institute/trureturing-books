@@ -75,7 +75,7 @@ $$
 
 沿着两子之间连续几何倾角的图景，为什么我们在计数器中看到的却是离散记录，而本章理想的二结果自旋测量只报出 $+1$ 或 $-1$？
 
-让我们借费曼最偏爱的机械装置打个比方。想象桌面上有一只平滑旋转的连续飞轮，轮缘可以停在 $360^\circ$ 圆周上的任意连续方位角；但你手里用来探测它的仪器，却是一道只开了一条窄缝的**一维双向分拣快门**（就像斯特恩—革拉赫非均匀磁场在竖直轴 $\vv{e}_3$ 上劈开上下两条通道）：凡是通过快门拷问的对象，要么被归入上通道记为 $+1$，要么被归入下通道记为 $-1$。
+让我们借一个费曼式的机械装置打个比方。想象桌面上有一只平滑旋转的连续飞轮，轮缘可以停在 $360^\circ$ 圆周上的任意连续方位角；但你手里用来探测它的仪器，却是一道只开了一条窄缝的**一维双向分拣快门**（就像斯特恩—革拉赫非均匀磁场在竖直轴 $\vv{e}_3$ 上劈开上下两条通道）：凡是通过快门拷问的对象，要么被归入上通道记为 $+1$，要么被归入下通道记为 $-1$。
 
 ::: {.figure src="ch01-shutter"}
 **连续的方向，经过二结果快门只剩两个记录。** 左边飞轮的轮缘一圈都是刻度，琥珀色的箭头可以停在任何角度；中间的快门沿 $\vv{e}_3$ 分出上下两条通道；右边只有两个青色的点，上通道记 $+1$，下通道记 $-1$。这是示意图。
@@ -172,12 +172,59 @@ $$
 
 让我们做一笔最诚实的自由度审计。表面上看，$\alpha$ 和 $\beta$ 含有 $4$ 个实参数 $(a, b, c, d) \in \mathbb{R}^4$，比三维空间还多出一维。但在这 $4$ 个实数里，混进了两层纯粹的冗余记账：
 
-::: {.remark #rem-pure-ray-literature title="纯态射线与霍普夫纤维（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 以下采用标准纯态射线描述；球面的商映射参见 [Hopf map](https://mathworld.wolfram.com/HopfMap.html)。
+::: {.remark #rem-pure-ray-literature title="纯态射线与霍普夫相位商"}
+**文献来源与已有结果的应用。** 经典背景参见 [Hopf map](https://mathworld.wolfram.com/HopfMap.html)。下面把“归一化，再除去共同相位”的几何图像写成实际的球面映射，并说明已有结果如何给出商空间的同胚。
 
-1. **总模长归一化削去一维（$\mathbb{R}^4 \to S^3$）**：方向比较只关心箭头指向哪里，不关心把箭头画成一寸长还是一尺长。约束 $|\alpha|^2 + |\beta|^2 = a^2 + b^2 + c^2 + d^2 = 1$ 把四维欧氏空间削成了三维单位球面 $S^3$，剩下 $3$ 个实自由度。
-2. **全局相位无关性再削去一维（$S^3 / U(1) \cong S^2$）**：将整个列向量同时乘以一个模长为 $1$ 的复相位因子 $e^{i\gamma}$（$\gamma \in \mathbb{R}$），相当于把 $\alpha$ 与 $\beta$ 在各自的复平面里同步拧转同一个角度 $\gamma$。在标准量子力学中，同一纯态射线的两个归一化代表 $\lvert\psi\rangle$ 与 $e^{i\gamma}\lvert\psi\rangle$ 给出相同的测量概率；这里的相位乘在整个态上，而非仅乘在某个分支上。沿着这根 $U(1)$ 相位纤维做商（著名的霍普夫纤维化 Hopf fibration），$3 - 1 = 2$ 个独立实角度脱颖而出——剩下的正好是一颗干干净净的二维球面 $S^2 \subset \mathbb{R}^3$！
+方向比较不关心箭头画得多长。把上面的复坐标重新记作 $(a,b)=(\alpha,\beta)$，并记 $\operatorname{normSq}(z)=\operatorname{Re}(z)^2+\operatorname{Im}(z)^2=|z|^2$。归一化后，舞台是四维欧氏空间中的三维单位球面；目标是三维欧氏空间中的二维单位球面：
 
+$$
+\begin{aligned}
+S^3&=\{(a,b)\in\mathbb{C}^2:\operatorname{normSq}(a)+\operatorname{normSq}(b)=1\},\\
+S^2&=\{q=(q_0,q_1,q_2)\in\mathbb{R}^3:q_0^2+q_1^2+q_2^2=1\}.
+\end{aligned}
+$$
+
+两者均带通常欧氏拓扑的子空间拓扑。这里 $S^3$ 的方程是两个复分量的模平方之和为 $1$，不是分别要求每个分量模长为 $1$。取霍普夫映射
+
+$$
+H(a,b)=\bigl(2\operatorname{Re}(\bar a b),\;2\operatorname{Im}(\bar a b),\;
+\operatorname{normSq}(a)-\operatorname{normSq}(b)\bigr).
+$$
+
+它确实落在 $S^2$ 上：前两个坐标的平方和为 $4|a|^2|b|^2$，加上第三个坐标的平方便得到 $(|a|^2+|b|^2)^2=1$。这正是 `NumericalRange` 中原有 [`blochPure_norm`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_norm) 所处理的单位旋子布洛赫像。其具体矩阵为 $P_v=vv^*$，$v=(a,b)$；非对角元是 $a\bar b$，而 `bloch` 的虚部坐标带负号，因而恰好得到这里的正号 $2\operatorname{Im}(\bar a b)$。
+
+每个球面点也都有原像。对 $q\in S^2$，若 $q_2\ne-1$，令
+
+$$
+\begin{aligned}
+p&=\sqrt{\frac{1+q_2}{2}}>0,\\
+a&=p,\qquad b=\frac{q_0+iq_1}{2p}.
+\end{aligned}
+$$
+
+由 $q_0^2+q_1^2=1-q_2^2$ 得 $|b|^2=(1-q_2)/2$，所以 $(a,b)\in S^3$ 且 $H(a,b)=q$。南极 $q=(0,0,-1)$ 取 $(a,b)=(0,1)$；北极则由上式给出 $(1,0)$。这复用的是 [`blochPure_surjective`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_surjective) 原有的平方根与极点分支论证，覆盖整个球面。
+
+现在明确要除去什么。设 $U(1)=\{c\in\mathbb{C}:\norm{c}=1\}$，在 $S^3$ 上定义
+
+$$
+\begin{aligned}
+(a,b)\sim(a',b')\quad\Longleftrightarrow\quad
+&\exists c\in\mathbb{C},\quad\norm{c}=1,\\
+&a=ca',\qquad b=cb'.
+\end{aligned}
+$$
+
+必须是**同一个**复数 $c$ 乘两个分量：它把两支箭头同步拧转，保留相对相位。代入公式立即得到 $H(cv)=H(v)$。反过来，$H(v)=H(w)$ 也强制 $v\sim w$：$P_v$ 与 $P_w$ 都是迹为 $1$ 的厄米矩阵，`bloch_geometry_of_isHermitian` 的重构式把它们各自写成 `blochMatrix` 作用于同一组迹与布洛赫坐标，故 $P_v=P_w$。把归一化坐标视为 `Ket (Fin 2)` 后，已有的 `MState.PhaseEquiv_iff_pure_eq`（等价地，`MState.pure_eq_pure_iff`）正好把纯态矩阵相等识别为上述共同单位复相位关系。因此 $H$ 的纤维恰好是这些相位圆，而不只是包含它们。
+
+最后给 $S^3/U(1)$ **商拓扑**：令 $\pi:S^3\to S^3/U(1)$，集合 $O$ 开当且仅当 $\pi^{-1}(O)$ 在 $S^3$ 中开。$H$ 的实坐标是四个实变量的二次多项式，故连续；$H$ 的相位不变性使它诱导连续映射 $\bar H([v])=H(v)$。精确纤维保证单射，上面的全极点构造保证满射。这里还必须证明逆映射连续，不能仅凭双射就宣布同胚：$S^3$ 紧，连续商像 $S^3/U(1)$ 也紧，$S^2$ 作为欧氏子空间是 Hausdorff 空间。于是商空间的闭集是紧集，经过 $\bar H$ 的像仍紧，并在 $S^2$ 中闭；这正给出 $\bar H^{-1}$ 的连续性。因此，同一个代表元公式给出
+
+$$
+\bar H:S^3/U(1)\simeq_{\mathrm{top}}S^2,\qquad\bar H([(a,b)])=H(a,b).
+$$
+
+这一步是现有紧空间到 Hausdorff 空间结论的应用，见 Mathlib 的 [`Continuous.homeoOfEquivCompactToT2`](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Topology/Homeomorph/Lemmas.lean#L474)。直觉上，归一化留下三个实参数，共同相位圆再去掉一个，球面上便留下两个独立角度；真正支撑这一图像的是上述具体映射、精确纤维与双向连续性。
+
+标准量子力学把同一射线的归一化代表解释为同一纯态，并赋予它们相同的测量概率；这一物理约定不是由商空间的数学识别推导出来的。这里的同胚只给每个相位类一个球面点，不选择该类中的一个规范代表，也不独自证明不存在连续全局截面。整个非零向量空间按非零复数缩放的商、相位不变多项式的分类，以及态制备或压缩方案，都需要另外的论证。
 :::
 
 纯态的射线描述采用标准量子力学约定；下面的代数定理刻画保持射线的幺正变换，而不从代数导出这一物理约定。我们考察任意有限指标集 $\iota$ 上的复矩阵如何保持向量张成的复子空间不变。
@@ -275,8 +322,8 @@ $$
 | $-\vv{e}_3 = (0, 0, -1)$ | $\lvert 1\rangle = \binom{0}{1}$ | $\begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$ | 南极（$-Z$） |
 | $+\vv{e}_1 = (1, 0, 0)$ | $\lvert +\rangle = \frac{1}{\sqrt{2}}\binom{1}{1}$ | $\frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ | 正东（$+X$） |
 | $-\vv{e}_1 = (-1, 0, 0)$ | $\lvert -\rangle = \frac{1}{\sqrt{2}}\binom{1}{-1}$ | $\frac{1}{2}\begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}$ | 正西（$-X$） |
-| $+\vv{e}_2 = (0, 1, 0)$ | $\lvert +i\rangle = \frac{1}{\sqrt{2}}\binom{1}{i}$ | $\frac{1}{2}\begin{pmatrix} 1 & -i \\ i & 1 \end{pmatrix}$ | 正北偏内（$+Y$） |
-| $-\vv{e}_2 = (0, -1, 0)$ | $\lvert -i\rangle = \frac{1}{\sqrt{2}}\binom{1}{-i}$ | $\frac{1}{2}\begin{pmatrix} 1 & i \\ -i & 1 \end{pmatrix}$ | 正南偏外（$-Y$） |
+| $+\vv{e}_2 = (0, 1, 0)$ | $\lvert +i\rangle = \frac{1}{\sqrt{2}}\binom{1}{i}$ | $\frac{1}{2}\begin{pmatrix} 1 & -i \\ i & 1 \end{pmatrix}$ | 正前（$+Y$） |
+| $-\vv{e}_2 = (0, -1, 0)$ | $\lvert -i\rangle = \frac{1}{\sqrt{2}}\binom{1}{-i}$ | $\frac{1}{2}\begin{pmatrix} 1 & i \\ -i & 1 \end{pmatrix}$ | 正后（$-Y$） |
 
 请留意表中最值得玩味的一个几何细节：在传统记号里正交的 $\lvert 0\rangle$ 与 $\lvert 1\rangle$（内积 $\langle 0\mid 1\rangle = 0$，希尔伯特空间夹角 $90^\circ$），在真实的三维布洛赫球面上并不是互相垂直的东极和北极，而是遥遥相对的**北极 $+\vv{e}_3$ 与南极 $-\vv{e}_3$**（球面夹角 $180^\circ$）！为什么希尔伯特夹角恰好是球面真实夹角的一半（$\theta/2$ 对 $\theta$）？这个著名的“半角之谜”，正是下一章将要揭晓的零冗余内积投影的直接推论。
 :::
@@ -285,4 +332,4 @@ $$
 **六个极点：正交的两个态在球面上对跖。** 六个极点是三对对跖点：$\lvert 0\rangle$、$\lvert 1\rangle$ 在南北极，$\lvert\pm\rangle$ 在 $\pm\vv{e}_1$，$\lvert\pm i\rangle$ 在 $\pm\vv{e}_2$。青色的 $A$ 在北极 $\lvert 0\rangle$，琥珀色的 $B$ 停在正东 $\lvert +\rangle$，夹角 $90^\circ$；左上角读出 $B$ 的投影矩阵的两个对角元 $\frac{1 \pm b_2}{2}$，此刻都是 $\frac{1}{2}$（[@prop-qubit-bloch-core]）。把 $B$ 拖到南极 $\lvert 1\rangle$，夹角变成 $180^\circ$，对角元成了 $0$ 与 $1$。
 :::
 
-至此，我们已经完成了第一场大扫除：没有孤立悬浮的“量子颗粒”，只有两根方向线在球面上的比量相遇；没有不可捉摸的四维复列向量幽灵，在单量子比特纯态的范围内，只有剥去归一化与全局相位冗余后的三维实单位箭头 $\vv{a} \in S^2$（到了全书第八部收官的[第 32 章 §32.1–§32.3](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)与[附录 E](appendix-e.md)，我们将进一步把整个测量与演化大厦彻底蒸馏为唯一一条零背景比较公理 $\mathcal{A}_0$ 与单指令比较原语 $\mathrm{CMP}(\mathbf{A},\mathbf{B})$）。现在，当两根这样的实箭头 $\vv{a}$ 与 $\vv{b}$ 正面相遇时，它们究竟如何不用任何外部坐标架就直接算出彼此的概率？让我们推开[第二章](ch02-born-rule.md)的大门。
+至此，我们已经完成了第一场大扫除：没有孤立悬浮的“量子颗粒”，只有两根方向线在球面上的比量相遇；没有不可捉摸的四维复列向量幽灵，在单量子比特纯态的范围内，只有剥去归一化与全局相位冗余后的三维实单位箭头 $\vv{a} \in S^2$（到了全书第八部收官的[第 32 章 §32.1–§32.3](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)与[附录 E](appendix-e.md)，我们将进一步在桥接假设之下，把整个测量与演化大厦彻底蒸馏为唯一一条零背景比较公理 $\mathcal{A}_0$ 与单指令比较原语 $\mathrm{CMP}(\mathbf{A},\mathbf{B})$）。现在，当两根这样的实箭头 $\vv{a}$ 与 $\vv{b}$ 正面相遇时，它们究竟如何不用任何外部坐标架就直接算出彼此的概率？让我们推开[第二章](ch02-born-rule.md)的大门。

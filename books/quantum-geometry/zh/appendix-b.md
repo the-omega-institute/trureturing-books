@@ -113,7 +113,7 @@ $$
    R_z(\alpha) = \cos\frac{\alpha}{2} - e_{12}\sin\frac{\alpha}{2}, \qquad R_y(\beta) = \cos\frac{\beta}{2} - e_{31}\sin\frac{\beta}{2}.
    $$
 
-   它们满足同轴半角加法律 $R_z(\alpha)R_z(\gamma) = R_z(\alpha + \gamma)$、$R_y(\alpha)R_y(\beta) = R_y(\alpha + \beta)$、逆元相消律 $R_z(\alpha)R_z(-\alpha) = 1$，以及任意单比特门的三因子 ZYZ 合成：
+   它们满足同轴半角加法律 $R_z(\alpha)R_z(\gamma) = R_z(\alpha + \gamma)$、$R_y(\alpha)R_y(\beta) = R_y(\alpha + \beta)$、逆元相消律 $R_z(\alpha)R_z(-\alpha) = 1$，以及任意单比特门的三因子 ZYZ 合成（对任意 $\mathrm{U}(2)$ 门至多相差一个全局相位）：
 
    $$
    R_{\mathrm{ZYZ}}(\alpha, \beta, \gamma) = R_z(\alpha)\,R_y(\beta)\,R_z(\gamma), \qquad R_{\mathrm{ZYZ}}(\alpha, 0, \gamma) = R_z(\alpha + \gamma).
@@ -191,7 +191,7 @@ $$
 ## B.6 核心恒等式与形式化状态总览表 {#sec-appendix-b-identity-catalog}
 
 ::: {.remark #rem-appendix-b-epistemic-boundary title="克利福德速查手册的形式化边界声明"}
-文献结果，未在本书形式化：本速查手册中凡标注 `LEAN ✓` 并附有具体 GID 链接的恒等式（下表 B.1–B.10），均直接对应 `trureturing@dev` 提交 [{commit}](trureturing:) 下经由 Lean 4 内核验证并冻结的定理（详见 [附录 C](appendix-c.md)）。而一般维数克利福德代数 $\mathcal{Cl}_{p,q}(\mathbb{R})$ 的通用分级公理、3 比特掩码 $8\times 8$ 展开表的显式枚举以及四维时空代数 $\mathcal{Cl}_{1,3}(\mathbb{R})$ 的连续李代数括号（下表 B.11，标注为 `definition` 或 `文献结果`）则作为服务读者计算演练的经典代数参考工具呈现：
+本速查手册混合两种证据等级。凡标注 `LEAN ✓` 并附有具体 GID 链接的恒等式（下表 B.1–B.10），均直接对应 `trureturing@dev` 提交 [{commit}](trureturing:) 下经由 Lean 4 内核验证并冻结的定理（详见 [附录 C](appendix-c.md)）。而一般维数克利福德代数 $\mathcal{Cl}_{p,q}(\mathbb{R})$ 的通用分级公理、3 比特掩码 $8\times 8$ 展开表的显式枚举以及四维时空代数 $\mathcal{Cl}_{1,3}(\mathbb{R})$ 的连续李代数括号（下表 B.11，标注为 `definition` 或 `文献结果`）则作为服务读者计算演练的经典代数参考工具呈现：
 
 | 序号 | 代数体系 | 恒等式 / 定律名称 | 精确公式 | 认识论标签与 `trureturing@dev` 锚点 |
 | :---: | :---: | :--- | :--- | :--- |
@@ -203,7 +203,7 @@ $$
 | B.6 | $\mathcal{Cl}_{3,0}$ / Bloch | 厄米量子态的实三维布洛赫分解 | $\rho = \frac{1}{2}(I + r_x X + r_y Y + r_z Z),\; \|\mathbf{r}\| \le \operatorname{Tr}(\rho)$ | `LEAN ✓` ([`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian), [`norm_bloch_le_trace_of_posSemidef`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef)) |
 | B.7 | $\mathbb{F}_2^{2n}$ / Pauli | 多比特泡利词乘法与对易秩恒等式 | $P(a)P(b) = \text{phase}(a,b)\,P(a \oplus b)$ | `LEAN ✓` ([`pauli_word_mul`](lean:D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul)) |
 | B.8 | $\mathrm{SO}(3)$ | 双非共线轴完整转动圆的有限字生成 | $a,b\in\mathbb{R}^3,\ \langle a,b\rangle^2<\|a\|^2\|b\|^2$；任意 $R\in\mathrm{SO}(3)$ 都是绕 $a$ 或 $b$ 的转动组成的某个有限字之积 | `LEAN ✓` ([`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word)) |
-| B.9 | $\mathcal{Cl}_{1,1}$ / $\mathcal{Cl}_{1,3}$ | 博戈留波夫双曲旋量范数守恒 | $\cosh^2 r - \sinh^2 r = 1$（从而双曲旋量保闵氏差 $|\alpha'|^2 - |\beta'|^2 = |\alpha|^2 - |\beta|^2$） | `LEAN ✓` ([`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)) |
+| B.9 | $\mathcal{Cl}_{1,1}$ / $\mathcal{Cl}_{1,3}$ | 博戈留波夫双曲旋量范数守恒 | $\cosh^2 r - \sinh^2 r = 1$（从而双曲旋量保闵氏差 $|\alpha'|^2 - |\beta'|^2 = |\alpha|^2 - |\beta|^2$，这一推论未形式化） | `LEAN ✓` ([`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)) |
 | B.10 | $\mathcal{Cl}_{1,3}$ | $\mathbb R\times\mathbb R^d$ 上实二次型的闵氏零锥刚性 | $\begin{aligned}&(\forall v,\\&\eta(v,v)=0\\&\implies Q(v)=0)\\&\implies\exists c\in\mathbb{R},\\&Q=c\,\eta\end{aligned}$ | `LEAN ✓` ([`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)) |
 | B.11 | $\mathcal{Cl}_{3,0}$ / $\mathcal{Cl}_{1,3}$ | 8 维基片凯莱表、霍奇对偶与洛伦兹李括号 | $E_a E_b = (-1)^{\operatorname{inv}(a,b)}E_{a\oplus b},\; [K_i, K_j] = -\varepsilon_{ijk}J_k$ | `definition` / `文献结果`（标准克利福德代数教材恒等式） |
 

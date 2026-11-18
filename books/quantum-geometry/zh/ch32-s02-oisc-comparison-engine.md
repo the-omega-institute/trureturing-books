@@ -47,10 +47,10 @@ $$
 - **（五）生命演化与科学定律：历史比较结果的快表记忆化（$T \mapsto T(T)$）**。如果在每一拍面对环境变化时都从零做 $O(2^n)$ 次原始逐位硬比，任何有限系统都会瞬间耗尽步数预算。DNA 遗传密码、大脑突触权重与人类数学定理库，在计算本质上都是把亿万次存活下来的高频比较预先编译成前缀路由快表 $T$（[第 35 章](ch35-light-pulse-and-self-referential-table.md)与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)），把指数级硬扫描压缩为深度 $b$ 的低步数前缀命中，同时本文给出的逐位名字比对与字典扫描构造都在显式有限步数上界内完成（下方 [@thm-ch32-paid-name-comparison-and-dictionary]，`LEAN ✓`）。
 
 ::: {.viz src="comparison-oisc-engine" preset="lookup" height="520"}
-**读前 $b$ 位的前缀快表与自比较蛛网：省下的比较位数留下同桶逃逸对。** 十六个四位态只读前 $b$ 位时，深度为 $b$ 的前缀树只需 $b$ 次比较即可命中叶子，但同桶内留下 $16(2^{4-b}-1)$ 个分不开的逃逸对（`escapePairs_without_eq_union` `LEAN ✓`）；右侧时间轴运行自比较 $x_{n+1} = \cos x_n$，蛛网步步收向唯一正不动点 $\theta^* \approx 0.7391$（`rational_inverse_endpoint` `LEAN ✓`）。
+**读前 $b$ 位的前缀快表与自比较蛛网：省下的比较位数留下同桶逃逸对。** 十六个四位态只读前 $b$ 位时，深度为 $b$ 的前缀树只需 $b$ 次比较即可命中叶子，但同桶内留下 $16(2^{4-b}-1)$ 个分不开的逃逸对（按定义直接计数；`escapePairs_without_eq_union` `LEAN ✓` 是相应的逃逸对并集恒等式）；右侧时间轴运行自比较 $x_{n+1} = \cos x_n$，蛛网步步收向唯一正不动点 $\theta^* \approx 0.7391$（`rational_inverse_endpoint` `LEAN ✓`）。
 :::
 
-- **（六）自我意识与观察者涌现：比较算子折回自身的自指不动点**。当一台局部比较子网络不仅比对外界，还把比较指令折回自身——执行 $\mathrm{CMP}(\psi, \psi)$——求同标尺与被量倾角在实轴余弦投影下迎头相撞，收敛于唯一自指平衡角 $\cos\theta^* = \theta^* \approx 0.739085$（[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)与[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md)）。
+- **（六）自我意识与观察者涌现：比较算子折回自身的自指不动点**。当一台局部比较子网络不仅比对外界，还把比较指令折回自身——把求同读数当作下一拍的倾角，反复执行 $x_{n+1} = \cos x_n$——求同标尺与被量倾角在实轴余弦投影下迎头相撞，收敛于唯一自指平衡角 $\cos\theta^* = \theta^* \approx 0.739085$（[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)与[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md)）。
 
 下表将这六重涌现现象统一收束为宇宙单指令集比较机的总账单：
 
@@ -61,11 +61,11 @@ $$
 | **三维空间与弦距度规** | 两两相似度矩阵半正定嵌入 | $G_{ij} = \mathbf{A}_i\cdot\mathbf{A}_j \succeq 0,\; d_{ij} = \sqrt{2(1 - G_{ij})}$（均衡 `3-3-2` 分桶张成八角长方盒） | `文献结果`（Schoenberg 1935）+ `NUM` + `MODEL` |
 | **时间之箭与维度扩张** | 半正定比较表超秩的正交残差立轴 | $G_{D+1} \succeq 0$ 且正交残差 $r = (I - P_{\mathcal{V}_D})w \neq 0$（$\det G_{D+1} = (\det G_D)\sin^2\beta > 0$，秩 $D \to D+1$） | `LEAN ✓`（`finite_layer_projection_escape`）+ `MODEL` |
 | **粗粒化碰撞与搜索屏障** | 有限位比较的同余分桶盲区 | $\mathrm{readout}(x)=\mathrm{readout}(y)$ 碰撞对统计 `EscapePairs`（$M(M-1)$）与系综粗粒化熵 | `LEAN ✓`（`partition_inseparable_iff_kernel`、`escapePairs_without_eq_union`）+ `MODEL` |
-| **生命、知识与自我意识** | 比较结果快表化与自指比较 | 字典扫描步数守恒、$T \mapsto T(T)$ 与自指平衡 $\cos\theta^* = \theta^*$ | `LEAN ✓`（`name_compare_run`、`dictionary_lookup_run`）+ `MODEL` |
+| **生命、知识与自我意识** | 比较结果快表化与自指比较 | 字典扫描步数上界、$T \mapsto T(T)$ 与自指平衡 $\cos\theta^* = \theta^*$ | `LEAN ✓`（`name_compare_run`、`dictionary_lookup_run`）+ `MODEL` |
 
-为了彻底杜绝把“比较”与“查表”浪漫化为零成本神谕的幻觉，`trureturing` 的可计算性模块用多栈有限控制自动机（`FinTM2`）严格构造并验证了**逐位二元名字比较机**与**流式字典查表机**的精确步数守恒与无损纸带复原定理：
+为了彻底杜绝把“比较”与“查表”浪漫化为零成本神谕的幻觉，`trureturing` 的可计算性模块用多栈有限控制自动机（`FinTM2`）严格构造并验证了**逐位二元名字比较机**与**流式字典查表机**的步数上界与无损纸带复原定理：
 
-::: {.theorem #thm-ch32-paid-name-comparison-and-dictionary title="二元名字逐位比较机与查表字典扫描的精确步数守恒" lean="D5/S0/Computability/BinaryNameComparison.name_compare_run D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run"}
+::: {.theorem #thm-ch32-paid-name-comparison-and-dictionary title="二元名字逐位比较机与查表字典扫描的步数上界" lean="D5/S0/Computability/BinaryNameComparison.name_compare_run D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run"}
 在 `trureturing` 冻结的二元名字比较与字典查找可计算性模块中，以下两项有偿运行上界与纸带复原定理同时成立：
 
 1. **逐位二元名字比较机的步数上界与无损复原**（[`name_compare_run`](lean:D5/S0/Computability/BinaryNameComparison.name_compare_run)）：对任意两个二元比特字 $a, b \in \operatorname{List}\;\mathrm{Bool}$（长度不必相等）、已有输出栈 $\mathrm{output}$ 与帧栈 $\mathrm{frame}$，六栈有限控制自动机 `compareMachine` 从初始构型 $(\operatorname{some}\;\mathrm{compare},\, \langle\operatorname{none},\operatorname{none},\mathrm{true}\rangle,\, a,\, b,\, [],\, [],\, \mathrm{output},\, \mathrm{frame})$ 出发，必在至多
@@ -76,7 +76,7 @@ $$
 
    步内停机，将相等判别比特 $\operatorname{decide}(a = b)$ 压入输出栈顶得到 $\operatorname{decide}(a = b) :: \mathrm{output}$，清空两条暂存工作栈，并将左右输入字 $a, b$ 与上下文帧 $\mathrm{frame}$ 原样复原；
 
-2. **二元名字字典扫描机的精确步数界与一元下标定位**（[`dictionary_lookup_run`](lean:D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run)）：对任意二元名字列表 $\mathrm{names} \in \operatorname{List}(\operatorname{List}\;\mathrm{Bool})$、待查字 $\mathrm{query} \in \operatorname{List}\;\mathrm{Bool}$ 与上下文帧 $\mathrm{frame}$，记分隔符编码字典流为 $\operatorname{dictionaryStream}(\mathrm{names})$，则自动机 `dictionaryMachine` 从初始查找构型出发，必在至多
+2. **二元名字字典扫描机的步数上界与一元下标定位**（[`dictionary_lookup_run`](lean:D5/S0/Computability/BinaryNameDictionary.dictionary_lookup_run)）：对任意二元名字列表 $\mathrm{names} \in \operatorname{List}(\operatorname{List}\;\mathrm{Bool})$、待查字 $\mathrm{query} \in \operatorname{List}\;\mathrm{Bool}$ 与上下文帧 $\mathrm{frame}$，记分隔符编码字典流为 $\operatorname{dictionaryStream}(\mathrm{names})$，则自动机 `dictionaryMachine` 从初始查找构型出发，必在至多
 
    $$
    T_{\mathrm{dict}}(\mathrm{names}, \mathrm{query}) \;\le\; \bigl(2\lvert\mathrm{query}\rvert + 12\bigr)\lvert\mathrm{names}\rvert \;+\; 4\bigl\lvert\operatorname{dictionaryStream}(\mathrm{names})\bigr\rvert \;+\; 3
@@ -89,4 +89,4 @@ $$
 第 1 款将 `compareMachine` 的执行拆为扫描比对阶段与回卷复原阶段：在 `compare` 状态逐拍弹出 $a, b$ 首比特压入暂存栈 `savedLeft, savedRight` 并累计匹配标志位（若一侧提前耗尽则置匹配位为 `false` 并转入耗尽清栈分支），随后在 `restore` 阶段将两条暂存栈逐位倒回左、右主栈，总步数精确受限于往返两趟字长之和加常数状态切换开销 $2(\lvert a\rvert + \lvert b\rvert) + 4$。第 2 款在 `dictionaryStream` 上对字典条目数 $\lvert\mathrm{names}\rvert$ 归纳：每读出一个词条，机器调用内嵌逐位比对子例程，由它复原查询字；未命中则追加一元计数符 `true` 后继续，首次命中或字典耗尽时便回卷，将已读历史逐位接回未读后缀之前，复原字典流，累计步数满足线性界 $(2\lvert\mathrm{query}\rvert + 12)\lvert\mathrm{names}\rvert + 4\bigl\lvert\operatorname{dictionaryStream}(\mathrm{names})\bigr\rvert + 3$。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch32-paid-name-comparison-and-dictionary] 为宇宙单指令集比较机提供了一本可核对的步数账（`MODEL`）：**上述两台机器逐位比较、逐项查找，并在给定步数上界内无损复原输入与字典纸带**。该运行保证针对这两项构造；比较算法的普适线性下界还需另行指定成本模型并证明。带着 $\mathcal{A}_0$ 与这台有偿单指令比较机，我们现在进入[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)，将数学与物理的五大公理群正式铸造成经内核验证的推论链。
+[@thm-ch32-paid-name-comparison-and-dictionary] 为宇宙单指令集比较机提供了一本可核对的步数账（`MODEL`）：**上述两台机器逐位比较、逐项查找，并在给定步数上界内无损复原输入与字典纸带**。该运行保证针对这两项构造；比较算法的普适线性下界还需另行指定成本模型并证明。带着 $\mathcal{A}_0$ 与这台有偿单指令比较机，我们现在进入[第 32.3 节](ch32-s03-axioms-as-corollaries.md#sec-ch32-axioms-as-corollaries)，将数学与物理的六大公理群正式铸造成以内核验证引理为锚点的条件推论链。

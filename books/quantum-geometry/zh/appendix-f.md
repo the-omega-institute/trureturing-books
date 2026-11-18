@@ -1,4 +1,4 @@
-# 附录 F 排除球、面极性与自旋因子态锥重构 {#sec-appendix-f}
+# 附录 F 排除球、面极性与自旋因子定向分类 {#sec-appendix-f}
 
 在[第二章](ch02-born-rule.md)中，我们以给定的有限维复矩阵代数 $M_n(\mathbb{C})$ 为舞台，一方面证明密度矩阵与幂等投影算子的迹配对满足概率测度公理（[@thm-born-probability-skeleton]），并从探针上的最小确认剥离出正对偶谱分解（[@def-confirmation-system]、[@thm-positive-dual-generation]）；另一方面通过有限维布施效应定理（[@thm-busch-effect-density]）与 $N \ge 3$ 有限复维格里森表示定理（[@thm-gleason-finite-projection]）回答了“可加读数何时必为迹配对”。随后在[附录 E](appendix-e.md) 中，我们沿两槽比较原语逐层审计了从抽象比较接口通往内积与量子公设的条件桥梁（[@rem-appe-layer-taxonomy]），严防将隐含几何前提当作无条件免费推论。本附录则退后一步，追问一个更底层的凸几何重构问题：**倘若不预先假定复希尔伯特空间与投影格，而是从有限维实向量空间中的一个抽象尖凸态锥 $(C, u)$ 出发，究竟在排除集（exclusion sets）与二元关系配对上施加哪些显式的几何与序论公理，态空间才会呈现出面极性二分、欧氏球图表以及带定向的四维自旋因子与 $2\times 2$ 泡利矩阵接口？**
 
@@ -179,7 +179,7 @@ $$
 三阶厄米态底 $\operatorname{base}(\mathrm{cone}, \mathrm{unit})$ 的每个极点 $p$ 对应 $\mathbb{C}^3$ 中某单位向量所张成的一维正交投影，其确认零核切片精确由支撑在二维复正交补子空间上的迹一半正定算子组成（源码 `HermitianExclusionKernel`）。在正交补子空间上选取一组标准正交基，利用等距截面标架（`SectionROGFrame`）将该二维压缩块等同于 $2 \times 2$ 复厄米矩阵空间。再将欧氏三维向量 $r \in \operatorname{EuclideanSpace}\;\mathbb{R}\;(\operatorname{Fin} 3)$ 通过单比特布洛赫实仿射参数化 $r \mapsto \frac{1}{2}\operatorname{scalarB}(1, r) = \frac{1}{2}(I_2 + r_0\sigma_X + r_1\sigma_Y + r_2\sigma_Z)$ 嵌入 $3 \times 3$ 厄米矩阵空间：泡利矩阵的正交迹关系保证该实仿射映射单射，而 $2 \times 2$ 迹一厄米矩阵半正定的充要条件恰好是 $\norm{r}_2 \le 1$，从而闭单位球的像精确等于 $\operatorname{exclusion}(\mathrm{cone}, \mathrm{unit}, p)$，给出 $a.\mathrm{dim} = 3$ 的 `ExclusionChart`。完整证明由 Lean 内核检查。
 :::
 
-研读 [@thm-appf-hermitian-exclusion-chart] 时务必警惕一处常见的维数混淆：结论中的 $a.\mathrm{dim} = 3$ 是单比特 $2 \times 2$ 布洛赫球的**实仿射维数**（$2^2 - 1 = 3$），**绝不是**外围三能级希尔伯特空间 $\mathbb{C}^3$ 的复维数 $3$！事实上，整个三能级 qutrit 态底的实仿射维数是 $3^2 - 1 = 8$，它本身并不是一颗八维欧氏球（其极点流形是四维实流形 $\mathbb{C}\mathrm{P}^2$，边界充斥着三维排除球面片）；而且该声明固定指标类型为 `Fin 3`，并不声称四阶以上 $N \times N$（$N \ge 4$）厄米态锥的纯态排除面（即 $(N-1)\times(N-1)$ 态空间）仍是欧氏球——当 $N = 4$ 时，排除一个纯态剩下的是整个八维 qutrit 态底，已不再同胚于球体！
+研读 [@thm-appf-hermitian-exclusion-chart] 时务必警惕一处常见的维数混淆：结论中的 $a.\mathrm{dim} = 3$ 是单比特 $2 \times 2$ 布洛赫球的**实仿射维数**（$2^2 - 1 = 3$），**绝不是**外围三能级希尔伯特空间 $\mathbb{C}^3$ 的复维数 $3$！事实上，整个三能级 qutrit 态底的实仿射维数是 $3^2 - 1 = 8$，它本身并不是一颗八维欧氏球（其极点流形是四维实流形 $\mathbb{C}\mathrm{P}^2$，边界充斥着三维排除球面片）；而且该声明固定指标类型为 `Fin 3`，并不声称四阶以上 $N \times N$（$N \ge 4$）厄米态锥的纯态排除面（即 $(N-1)\times(N-1)$ 态空间）仍是欧氏球——当 $N = 4$ 时，排除一个纯态剩下的是整个八维 qutrit 态底，已不再仿射等价于欧氏球！
 
 ---
 
@@ -284,8 +284,8 @@ $$
 | :--- | :--- | :--- | :--- | :--- |
 | **F.1** [@thm-appf-recentered-ball] | [`b_constraint_recenter`](lean:D5/S3/Quantum/OriginExclusionSegmentRigidity.b_constraint_recenter) | 任意实数 $t, b \in \mathbb{R}$（常数除数 $2 \neq 0$，无额外物理假设） | $b^2 \le t(1 - t)$ 与圆心 $(1/2, 0)$、半径 $1/2$ 的欧氏闭圆盘不等式等价 | 纯实平面代数配方恒等式；绝不单凭模块名宣称原点排除已无条件导出量子力学 |
 | **F.2** [@thm-appf-exclusion-face-polarity] | [`exclusion_ball_faces`](lean:D5/S3/Quantum/Foundation/ExclusionBallFaces.exclusion_ball_faces) | 有限维实赋范空间 $V$，闭尖凸锥 $C$，严格正泛函 $u$，线性张成全空间，且满足 `exclusionBalls C u`（第 3 项另需 `pairProper C u`） | 排除集非平凡、紧凸、由单一确认泛函暴露切出；非空真凸极面二分为单点纯态或排除面；在 `pairProper` 下相异纯态对的锥面切片即排除球且具 `wholePairBalls` | 不可省略有限维紧性、`exclusionBalls` 或 `pairProper`；任意凸态锥（如高维经典单纯形或多面体锥）不自动满足排除球公理 |
-| **F.3** [@thm-appf-hermitian-exclusion-chart] | [`all_pure_charts`](lean:D5/S3/Quantum/Foundation/HermitianExclusionBall.all_pure_charts) | 固定 `Fin 3` 上的复厄米半正定锥 `cone` 与实值厄米迹泛函 `unit` | 每个纯态的排除面均存在实仿射维数 $a.\mathrm{dim} = 3$ 的 `ExclusionChart`（嵌入的 $2 \times 2$ 布洛赫球） | 图表实仿射维数 $3$ 绝非希尔伯特复维数 $3$；全 qutrit 态底实维数为 $8$ 且非球体；结论不外推至 $N \ge 4$ 阶厄米锥 |
+| **F.3** [@thm-appf-hermitian-exclusion-chart] | [`all_pure_charts`](lean:D5/S3/Quantum/Foundation/HermitianExclusionBall.all_pure_charts) | 固定 `Fin 3` 上的复厄米半正定锥 `cone` 与实值厄米迹泛函 `unit` | 每个纯态的排除面均存在实仿射维数 $a.\mathrm{dim} = 3$ 的 `ExclusionChart`（嵌入的 $2 \times 2$ 布洛赫球） | 图表实仿射维数 $3$ 绝非希尔伯特复维数 $3$；全 qutrit 态底实维数为 $8$ 且不仿射等价于欧氏球；结论不外推至 $N \ge 4$ 阶厄米锥 |
 | **F.4** [@thm-appf-spin-factor-classification] | [`complete_consequences`](lean:D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences) | 固定四维载体 $E = \mathbb{R} \times (\operatorname{Fin} 3 \to \mathbb{R})$ 上的二元关系 $D$，显式满足二点正性 `P2 D` 与相位平衡 `PB D` | $D$ 必全局等于右手或左手空间叉积 `crossD ε`（$\varepsilon \in \{\mathrm{.plus}, \mathrm{.minus}\}$），并满足 `Consequences D` 与 `MatrixInterfaces (orientationBool ε) D` | `P2` 与 `PB` 是显式输入公理，不能从一张叉积示意图倒推；正锥 `cone` 不含迹一归一化；一般维数自旋因子 $\mathbb{R} \oplus \mathbb{R}^k$（$k \neq 3$）不等同于复量子态空间 |
 
-综合上表可见，量子态空间之所以兼具“局部相干圆盘/布洛赫球截面”与“复矩阵非交换乘法”，在凸锥与关系公理层面精确落定于两道显式门槛：第一，排除集必须摆脱多面体棱角而呈现严格凸的正维欧氏球结构（`exclusionBalls`），在三能级复厄米锥中体现为二维正交补子空间上的三维布洛赫球（[@thm-appf-exclusion-face-polarity]、[@thm-appf-hermitian-exclusion-chart]）；第二，在单个四维自旋因子锥上，若要从实对称约当积跨入复希尔伯特矩阵代数 $M_2(\mathbb{C})$，必须由二点格拉姆正性 `P2` 与相位平衡 `PB` 共同锁定空间三维叉积的模长与全局手征定向（[@thm-appf-spin-factor-classification]）。把每一道门槛如实标出，正是本书认识论诚实契约的题中之义。
+综合上表可见，量子态空间之所以兼具“局部相干圆盘/布洛赫球截面”与“复矩阵非交换乘法”，在本附录的凸锥与关系公理下精确落定于两道显式门槛（充分条件方向）：第一，排除集必须摆脱多面体棱角而呈现严格凸的正维欧氏球结构（`exclusionBalls`），在三能级复厄米锥中体现为二维正交补子空间上的三维布洛赫球（[@thm-appf-exclusion-face-polarity]、[@thm-appf-hermitian-exclusion-chart]）；第二，在单个四维自旋因子锥上，若要从实对称约当积跨入复希尔伯特矩阵代数 $M_2(\mathbb{C})$，由二点格拉姆正性 `P2` 与相位平衡 `PB` 共同锁定空间三维叉积的模长与全局手征定向（[@thm-appf-spin-factor-classification]）。把每一道门槛如实标出，正是本书认识论诚实契约的题中之义。
 :::

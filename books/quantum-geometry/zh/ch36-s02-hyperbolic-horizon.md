@@ -36,8 +36,8 @@
 第 1 款将完备赋范代数上绝对收敛的指数级数 $\exp(z) = \sum_{k=0}^\infty (k!)^{-1}\bullet z^k$ 平移 $n$ 项，使尾差表示为 $\sum_{k=0}^\infty ((k+n)!)^{-1}\bullet z^{k+n}$；利用范数次乘性 $\lVert z^{k+n}\rVert \le r^{k+n}$ 与自然数阶乘整除不等式 $n!\,k! \le (k+n)!$（由二项式整除性 `Nat.factorial_mul_factorial_dvd_factorial_add` 导出），逐项控制通项范数不超过 $\frac{r^n}{n!}\cdot\frac{r^k}{k!}$，再对标量正项级数求和即得 $\frac{r^n}{n!}e^r$。第 2 款先对 $s = 0$ 单独检验（全函数除法给出 $\operatorname{cayleyRatio}(0) = 0$，两端皆假）；当 $s \neq 0$ 时，$\operatorname{normSq}(s) \neq 0$，直接展开复模方商恒等式得精确亏量公式 $\lVert\operatorname{cayleyRatio}(s)\rVert^2 - 1 = \frac{1 - 2\operatorname{Re}(s)}{\operatorname{normSq}(s)}$，结合非负范数性质即证模长为 $1$ 当且仅当 $1 - 2\operatorname{Re}(s) = 0$，即 $\operatorname{Re}(s) = \frac{1}{2}$。完整证明由 Lean 内核检查。
 :::
 
-::: {.remark #rem-ch36-hyperbolic-staircase-figure title="双曲视界圆盘、无穷离散快度阶梯与生成元商空间图解（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本章的无穷离散快度阶梯模型（`MODEL`）结合庞加莱圆盘与古德曼函数文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）及分式临界圆定理（[@thm-ch36-taylor-tail-and-cayley-boundary]，`LEAN ✓`）：角度尺与快度尺的对照见本节开头的两把尺子图，圆盘上一圈圈逼近边缘的阶梯见图 36 第 II 栏，分式变换下贴着单位圆的像圆、快度阶梯与放大镜里不闭合的缝见下文的实验卡；生成元商空间诠释及其定理锚点（[@thm-ch36-quotient-annihilator-and-factorization]）见图 36 第 III 栏与本章最后一节的折叠实验卡；双曲正切与双曲正割随离散步的变化列在 [@ex-ch36-inverse-gudermannian-discrete-staircase] 的步进账本中。
+::: {.remark #rem-ch36-hyperbolic-staircase-figure title="双曲视界圆盘、无穷离散快度阶梯与生成元商空间图解（图解导览，含 `MODEL` 与文献背景）"}
+**图解导览，含 `MODEL` 与文献背景。** 本章的无穷离散快度阶梯模型（`MODEL`）结合庞加莱圆盘与古德曼函数文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）及分式临界圆定理（[@thm-ch36-taylor-tail-and-cayley-boundary]，`LEAN ✓`）：角度尺与快度尺的对照见本节开头的两把尺子图，圆盘上一圈圈逼近边缘的阶梯见图 36 第 II 栏，分式变换下贴着单位圆的像圆、快度阶梯与放大镜里不闭合的缝见下文的实验卡；生成元商空间诠释及其定理锚点（[@thm-ch36-quotient-annihilator-and-factorization]）见图 36 第 III 栏与本章最后一节的折叠实验卡；双曲正切与双曲正割随离散步的变化列在 [@ex-ch36-inverse-gudermannian-discrete-staircase] 的步进账本中。
 :::
 
 对照 [@rem-ch36-hyperbolic-staircase-figure] 所指的图与实验卡，[@thm-ch36-taylor-tail-and-cayley-boundary] 为我们揭示了两条关键定量机制：一方面，任何有限阶多项式截断（阶数 $n \in \mathbb{N}$）与精确指数映射 $\exp(z)$ 之间的逼近误差受显式阶乘尾界 $\frac{r^n}{n!}e^r$ 严格控制；另一方面，由证明中的精确亏量恒等式 $\lVert\operatorname{cayleyRatio}(s)\rVert^2 - 1 = \frac{1 - 2\operatorname{Re}(s)}{\operatorname{normSq}(s)}$（$s \neq 0$）可见，分式共形变换 $\operatorname{cayleyRatio}(s) = (s - 1)/s$ 将无界右开半平面 $\operatorname{Re}(s) > \frac{1}{2}$ 整体收拢进开单位圆盘 $\lVert w\rVert < 1$ 内部，而把临界直线 $\operatorname{Re}(s) = \frac{1}{2}$ 映入单位圆周渐近边界 $\lVert w\rVert = 1$；有限参数的像缺少 $w = 1$，这一点只在无穷远处逼近（在数论语境下亦与[第 22 章](ch22-primes-euler-products-and-zeros.md)相呼应）。
@@ -101,7 +101,7 @@
    $$
 
    令欧氏径向坐标为 $r = \lvert z\rvert = \tanh(\eta / 2) = \tan(\theta / 2) \in [0, 1)$，则从圆心 $z = 0$ 到半径 $r$ 的内禀测地距离精确等于 $\int_0^r \frac{2\,du}{1 - u^2} = 2\operatorname{artanh}(r) = \eta$。当 $r \to 1^-$（对应 $\theta \to (\frac{\pi}{2})^-$）时，内禀测地距离 $\eta \to +\infty$：在外部欧氏纸面上看似有限的单位圆边界 $\lvert z\rvert = 1$，对圆盘内的双曲度规居民而言处于无穷远处，任何有限步等长测地跃迁都绝无可能触及或越过边界；
-3. **埃舍尔《圆极限》双曲镶嵌木刻（M. C. Escher, *Circle Limit I–IV*, 1958–1960；参见 H. S. M. Coxeter, *Leonardo* **12**, 19–25, 1979）**：埃舍尔在与几何学家考克斯特通信后创作的《圆极限》系列版画（尤以《圆极限 III》与《圆极限 IV》著称），在庞加莱圆盘上将双曲面积完全相等的鱼群或天使与魔鬼沿着测地圆弧排列成无穷多层离散阶梯——越靠近外圈圆周，图案在欧氏视觉上缩得越细密，却层层分明、永不触碰外圆边缘，直观再现了“以无穷离散等步阻断边界坠落”的几何奇观。
+3. **埃舍尔《圆极限》双曲镶嵌木刻（M. C. Escher, *Circle Limit I–IV*, 1958–1960；参见 H. S. M. Coxeter, *Leonardo* **12**, 19–25, 1979）**：埃舍尔在与几何学家考克斯特通信后创作的《圆极限》系列版画（尤以《圆极限 III》与《圆极限 IV》著称），在庞加莱圆盘上将双曲面积完全相等的鱼群或天使与魔鬼沿着圆弧排列成无穷多层离散阶梯——越靠近外圈圆周，图案在欧氏视觉上缩得越细密，却层层分明、永不触碰外圆边缘，直观再现了“以无穷离散等步阻断边界坠落”的几何奇观。
 :::
 
 ::: {.viz src="forgetting-rebirth-attractor" preset="klein_vs_poincare" height="500"}

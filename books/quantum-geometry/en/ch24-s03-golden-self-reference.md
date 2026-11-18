@@ -8,7 +8,7 @@ $$
 x_{k+1} = 1 + \frac{1}{x_k}, \qquad x_0>0.
 $$
 
-A finite expansion has only finitely many fraction layers, with the initial value $x_0$ still at the bottom. The infinite continued fraction $1+1/(1+1/(\cdots))$ denotes the limit of these truncations, whose convergence must be established separately; it is not equal to every finite $x_{k+1}$. The example below gives a direct convergence argument.
+A finite expansion has only finitely many fraction layers, with the initial value $x_0$ still at the bottom. The infinite continued fraction $1+1/(1+1/(\cdots))$ denotes the limit of these truncations, whose convergence must be established separately; it is not equal to every finite $x_{k+1}$. Convergence can be checked by hand (manual derivation): from any $x_0 > 0$ we get $x_1 > 1$, every later term is at least $1$, and $\lvert x_{k+1} - \varphi\rvert = \lvert 1/x_k - 1/\varphi\rvert = \lvert x_k - \varphi\rvert/(x_k\varphi) \le \lvert x_k - \varphi\rvert/\varphi$, so each step shrinks the error by at least the factor $1/\varphi \approx 0.618$.
 
 In `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint`, this reciprocal residual map is formalized as [`goldenReciprocalMap`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap).
 

@@ -3,7 +3,7 @@
 如果只有前三层公平，生命仍会面对两重沉重的诘问：
 
 - **第一问（算力博弈之问）**：既然全局无时间静态场在理想化无序模型下呈现 $P = NP$ 式的几何合一（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)），为什么宇宙偏偏要给场内所有有限观察者套上复杂性视界？
-  答案正是**博弈公平（Game-Theoretic / Horizon Fairness，`MODEL`）**！试想：倘若场内局部观察者也能凭多项式步数瞬间算穿整座因果水晶的终局，算力稍占优势的先行者便能在第一秒逆推所有人的底牌、剧透一切悬念、锁死全部博弈走廊，后来者连落子的缝隙都不会剩下。正是高维搜索空间中相干一致放大算子每步受初始重叠率 $p = \sin^2\theta$ 严格制约的平面旋转步幅定律（下方 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款；外部复杂度下界背景见[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]），连同标准计算模型下未决的 $\mathrm{P} \neq \mathrm{NP}$ 开放防火墙（[@conj-p-neq-np]），规定了量子演化必须顺着二维平面一步一个脚印地旋转累加角度——没有任何特权阶层能靠算力霸权绕过几何曲率提前垄断未来。
+  答案正是**博弈公平（Game-Theoretic / Horizon Fairness，`MODEL`）**！试想：倘若场内局部观察者也能凭多项式步数瞬间算穿整座因果水晶的终局，算力稍占优势的先行者便能在第一秒逆推所有人的底牌、剧透一切悬念、锁死全部博弈走廊，后来者连落子的缝隙都不会剩下。正是高维搜索空间中相干一致放大算子每步受初始重叠率 $p = \sin^2\theta$ 严格制约的平面旋转步幅定律（下方 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款；外部复杂度下界背景见[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]），连同标准计算模型下未决的 $\mathrm{P} \neq \mathrm{NP}$ 开放防火墙（[@conj-p-neq-np]），勾勒出量子演化顺着二维平面一步一个脚印地旋转累加角度的图景（旋转定律只担保这一迭代算子每轮转 $2\theta$，本身不给门数下界）——没有任何特权阶层能靠算力霸权绕过几何曲率提前垄断未来。
 - **第二问（境遇宿命之问）**：既然每个有限观察者在时间场里的切入相位不同——正如[终章](coda.md)切投模型中有人某几步恰好踩在窗心顺境，有人落在窗缘风浪之中——**宇宙的终极公平又在哪里？**
 
 把本书的观察者动力学与紧致环面遍历定理展开，答案清澈而温暖：
@@ -138,15 +138,15 @@ $$
 
 在进入 §31.4 拆解固定维度闭盒的三副脚手架之前，我们先将前三节建立的**量子公平五重层级**连同其形式化、文献与认识论状态完整收束于下框总表之中：
 
-::: {.remark #rem-ch31-fivefold-fairness-table title="量子公平五重几何铁律与认识论状态总表（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下表汇总前三节建立的五重公平体系；表中标有 `LEAN ✓` 的子项对应 [@thm-ch31-seat-pythagorean-monogamy-fairness] 与 [@thm-ch31-horizon-landauer-ergodic-fairness] 的冻结定理，标有 `文献结果` 的公式引自 [@rem-ch31-haar-isotropy-landauer-literature]、[@rem-ch31-ckw-monogamy-literature]、[@rem-ch31-weyl-window-equidistribution-literature] 及[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]，标有 `OPEN` 的问题对应未决猜想 [@conj-p-neq-np]，而“五重特权废除”的本体论统摄属本书跨领域哲学诠释模型（`MODEL`）：
+::: {.remark #rem-ch31-fivefold-fairness-table title="量子公平五重几何铁律与认识论状态总表"}
+下表汇总前三节建立的五重公平体系；表中标有 `LEAN ✓` 的子项对应 [@thm-ch31-seat-pythagorean-monogamy-fairness] 与 [@thm-ch31-horizon-landauer-ergodic-fairness] 的冻结定理，标有 `文献结果` 的公式引自 [@rem-ch31-haar-isotropy-landauer-literature]、[@rem-ch31-ckw-monogamy-literature]、[@rem-ch31-weyl-window-equidistribution-literature] 及[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@rem-ch30-query-sos-literature]，标有 `OPEN` 的问题对应未决猜想 [@conj-p-neq-np]，而“五重特权废除”的本体论统摄属本书跨领域哲学诠释模型（`MODEL`）：
 
 | 公平层级 | 底层几何、代数与热力学定律 | 认识论状态 | 它在宇宙中彻底封死了什么“几何特权”？（`MODEL`） |
 | :--- | :--- | :--- | :--- |
 | **一、席位公平 (Seat Fairness)** | 单比特纯态布洛赫单位范数与秩一玻恩配对模方互易 $\|\phi^*\bullet_v\psi\|^2 = \|\psi^*\bullet_v\phi\|^2$（`LEAN ✓`）；高维球面哈尔各向同性（`文献结果`） | `LEAN ✓` / `文献结果` / `MODEL` | 砍掉高高在上的“外部第 3 点 $C$”，封死绝对中心参考系与单向不对等审视 |
 | **二、得失公平 (Gain–Loss Fairness)** | 互补语境中心化纯度勾股守恒（`LEAN ✓`）、$\cos^2\theta + \sin^2\theta = 1$（`文献结果`）与兰道尔热熵平衡界 $-\Delta S \le \beta Q$（`LEAN ✓`，$k_B T \ln 2$ 为 `文献结果`） | `LEAN ✓` / `文献结果` / `MODEL` | 封死“既占尽一维确定刻度、又免费保留无限正交演化潜能”的零成本贪婪 |
 | **三、关系公平 (Relational Fairness)** | 通用克隆内积判据与贝尔纯态混态边缘 $\frac{1}{2}I_2$（`LEAN ✓`）；三量子比特 CKW 单配性 $\tau(\mathbf{A}:\mathbf{B}) + \tau(\mathbf{A}:\mathbf{C}) \le 1 - \|\mathbf{r}_A\|^2 \le 1$（`文献结果`） | `LEAN ✓` / `文献结果` / `MODEL` | 封死叠加纯态的盲目量产与深度二体纠缠的无限批发垄断 |
-| **四、博弈公平 (Horizon Fairness)** | 一致放大旋转步幅定律（`LEAN ✓`）、高维 $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ 与 BBBV $\Omega(2^{n/2})$ 查询下界（`文献结果`）及 $\mathrm{P} \neq \mathrm{NP}$ 边界（`OPEN`） | `LEAN ✓` / `文献结果` / `OPEN` / `MODEL` | 封死算力霸权对全局因果相容晶体的瞬间剧透与赢家通吃，守护选择悬念 |
+| **四、博弈公平 (Horizon Fairness)** | 一致放大旋转步幅定律（`LEAN ✓`）、高维 $\theta = \arcsin\sqrt{p} \approx 2^{-n/2}$（$p = 2^{-n}$）与 BBBV $\Omega(2^{n/2})$ 查询下界（`文献结果`）及 $\mathrm{P} \neq \mathrm{NP}$ 边界（`OPEN`） | `LEAN ✓` / `文献结果` / `OPEN` / `MODEL` | 封死算力霸权对全局因果相容晶体的瞬间剧透与赢家通吃，守护选择悬念 |
 | **五、遍历公平 (Ergodic Fairness)** | 诞生遗忘重置相容余量（`MODEL`）、环面闭子群哈尔均匀分布与正下渐近访问密度有界回归（`LEAN ✓`）及无理平移零边界窗口频率 $\mu(W)$（既有结果的应用，见 [@rem-ch31-weyl-window-equidistribution-literature]） | `LEAN ✓` / `文献结果` / `MODEL` | 封死初始相位偏置造成的永恒阶层固化，实现“短期境遇异而长程天道同”的统计全息 |
 :::
 

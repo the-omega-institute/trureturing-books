@@ -86,8 +86,8 @@ Bringing all thirty-two chapters onto a single canvas, one set of orthogonal pri
 
 Unfolding these six cross-domain readings row by row, the master ledger below aligns the ambient space, Grade-0 inner line, Grade-2 exterior plane, topological seam, finite fairness law, and contractive fixed core across all six domains along with their explicit evidential tiers:
 
-::: {.remark #rem-ch32-six-domain-isomorphism-table title="Six-Domain Holographic Isomorphism Master Ledger of the Orthogonal Self-Referential Unified Field (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The master table below synthesizes structural correspondences across six domains: sub-items tagged `LEAN ✓` cite frozen theorems in `trureturing@dev`, external equations ($H\mathbf{\Psi}=0$, $F_{\mu\nu}$, RT surfaces, Hilbert reciprocity $\prod_v (a,b)_v = +1$, Arnold geodesics, BBBV/ETH bounds, and $\theta^* \approx 0.739085$) cite chapter literature remarks, unproved problems ($\mathrm{P}\neq\mathrm{NP}$, Critical Line $\sigma=1/2$, unforced 3D NS regularity) carry `OPEN`, and the cross-domain unification architecture constitutes our philosophical–geometric `MODEL`:
+::: {.remark #rem-ch32-six-domain-isomorphism-table title="Six-Domain Holographic Isomorphism Master Ledger of the Orthogonal Self-Referential Unified Field (Book Model, Not Formalized in This Book)"}
+**Book model, not formalized in this book.** The master table below synthesizes structural correspondences across six domains: sub-items tagged `LEAN ✓` cite frozen theorems in `trureturing@dev`, external equations ($H\mathbf{\Psi}=0$, $F_{\mu\nu}$, RT surfaces, Hilbert reciprocity $\prod_v (a,b)_v = +1$, Arnold geodesics, BBBV/ETH bounds, and $\theta^* \approx 0.739085$) cite chapter literature remarks, unproved problems ($\mathrm{P}\neq\mathrm{NP}$, Critical Line $\sigma=1/2$, unforced 3D NS regularity) carry `OPEN`, and the cross-domain unification architecture constitutes our philosophical–geometric `MODEL`:
 
 **Static Ambient Space**
 
@@ -164,7 +164,7 @@ Black-hole & $90^\circ$ horizon barrier (`MODEL`)
 Pell $\pm 1$ seam (`LEAN ✓` / `Literature`) & semantic diagonal escape (`LEAN ✓`)
 
 **Complexity & Fluid Fields:**
-3-SAT frustration, local $\mathrm{P} \neq \mathrm{NP}$ & 3D NS vortex stretching (`OPEN` / `LEAN ✓`)
+3-SAT frustration, local $\mathrm{P} \neq \mathrm{NP}$ & 3D NS vortex stretching (`OPEN` / `MODEL`)
 
 **Observer & Soul Dynamics:**
 Cassini $(-1)^{k+1}$ cross-round spiral offset (`LEAN ✓` / `MODEL`)

@@ -2,12 +2,12 @@
 
 推演至此，系统架构的最深处浮现出一道终极追问：**既然每次虚拟地址解引用 `*ptr` 都必须查询页表 $T$ 才能定位本体内存，那么页表 $T$ 本身存放在哪里？又是谁来翻译“页表自己的地址”？**
 
-倘若翻译一级页表 $T_1$ 需要外部预设一张“元页表” $T_2$，翻译 $T_2$ 又需要更外层的 $T_3$，整个宇宙硬件就会瞬间跌入无穷倒退的深渊——那尊被我们千辛万苦砍掉的“外部第 3 点 $C$”，又会披着“终极元页表管理员”的外衣死灰复燃！现代操作系统内核与本书第六部的对角线不动点数学，在这里交汇出了同一个惊心动魄的绝妙解答。我们先将操作系统内核中递归页表自映射与双曲快度正割恒等式的外部文献背景严密界定如下：
+倘若翻译一级页表 $T_1$ 需要外部预设一张“元页表” $T_2$，翻译 $T_2$ 又需要更外层的 $T_3$，整个宇宙硬件就会瞬间跌入无穷倒退的深渊——那尊被我们千辛万苦砍掉的“外部第 3 点 $C$”，又会披着“终极元页表管理员”的外衣死灰复燃！（真实硬件里并不出现这一倒退：根页表的物理基址存于 `CR3` 寄存器，页表项存的是物理帧地址；递归自映射只是让内核用虚拟地址读写页表的技巧，本节的类比只取“表里有一格存着自己的地址”这一点。）现代操作系统内核与本书第六部的对角线不动点数学，在这里交汇出了同一个惊心动魄的绝妙解答。我们先将操作系统内核中递归页表自映射与双曲快度正割恒等式的外部文献背景严密界定如下：
 
 ::: {.remark #rem-ch38-x86-recursive-page-table-literature title="操作系统内核递归页表自映射、双曲正割恒等式与锌火花荧光实验（外部背景）"}
 **外部背景。** 本节关于“零外部元页表自映射”与“离散多级寻址规避清零重置”的模型诠释（`MODEL`）参照以下三项外部计算机工程、经典分析与生物物理文献；离散正割路径的严格正性另由紧随其后的 Lean 定理形式化：
 
-1. **操作系统内核递归页表自映射（Recursive Page Table Mapping；如 x86-64 四级分页架构 `PML4` $\to$ `PDPT` $\to$ `PD` $\to$ `PT`，见 Intel *64 and IA-32 Architectures Software Developer's Manual*, Vol. 3A, Ch. 4）**：在多级硬件分页中，内核无需增设任何外部“元页表寄存器”，只需在顶层页目录（如 `PML4`）的某一固定槽位（例如槽位 `0` 或专用自映射槽 $r$）中直接写入**该顶层页目录自身的物理基地址**。如此一来，硬件地址翻译器每经过一次槽位 $r$ 便原地回环一轮：消耗 $0$ 次回环访问普通数据页，消耗 $1$ 次回环将叶级页表 `PT` 当作普通数据页读写，消耗全部 $4$ 次回环（索引 `[r, r, r, r]`）则直接解引用到顶层 `PML4` 根表自身，以零外部硬件代价彻底终结无穷倒退；
+1. **操作系统内核递归页表自映射（Recursive Page Table Mapping；如 x86-64 四级分页架构 `PML4` $\to$ `PDPT` $\to$ `PD` $\to$ `PT`，见 Intel *64 and IA-32 Architectures Software Developer's Manual*, Vol. 3A, Ch. 4）**：在多级硬件分页中，内核无需增设任何外部“元页表寄存器”，只需在顶层页目录（如 `PML4`）的某一固定槽位（例如槽位 `0` 或专用自映射槽 $r$）中直接写入**该顶层页目录自身的物理基地址**。如此一来，硬件地址翻译器每经过一次槽位 $r$ 便原地回环一轮：消耗 $0$ 次回环访问普通数据页，消耗 $1$ 次回环将叶级页表 `PT` 当作普通数据页读写，消耗全部 $4$ 次回环（索引 `[r, r, r, r]`）则直接解引用到顶层 `PML4` 根表自身，以零外部硬件代价让内核直达各级页表（手册描述的是分页与 `CR3`，递归自映射是操作系统的实现技巧；硬件遍历从 `CR3` 中的物理地址起步，本无无穷倒退需要终结）；
 2. **双曲快度与正割投影恒等式（C. Gudermann, *J. Reine Angew. Math.* **6**, 1–39, 1830；参看[第 17 章](ch17-lorentz-geometry.md)）**：Gudermann 的连续参数化给出 $\cos\theta = \operatorname{sech}\eta := \frac{2}{e^\eta + e^{-\eta}}$ 及其与双曲快度的关系；本章所需的离散有限步严格正性由下述形式化定理承担；
 3. **哺乳动物卵激活时的锌释放与探针荧光观测（E. L. Que et al., *Nat. Chem.* **7**, 130–139, 2015；F. E. Duncan et al., *Sci. Rep.* **6**, 24737, 2016）**：Que 等研究小鼠卵受精／激活时的锌释放，Duncan 等研究诱导的人卵激活；“火花”由外部激发的锌敏感荧光探针记录。这里实测的是锌释放及探针荧光，初始化与光的意象仍属本节 `MODEL`。
 :::
@@ -25,9 +25,9 @@ $$
 **四级都走零号槽，每一跳都回到页目录自己。** 索引 [0, 0, 0, 0]：零号槽里写的是页目录自己的地址 0x1000，青色箭头四次弯回原处（×4），琥珀色的框落在页目录 P 上。这是 [@rem-ch38-x86-recursive-page-table-literature] 第 1 条说的四次回环，画在本章 N = 4 的页目录上。
 :::
 
-在纯数学底层，为什么“无不动点的外部扭转必然逃逸一切有限或无限页表”，而“在表内捕获对角线落点必然在自寻址槽位生成精确不动点”，并在黄金切投尺度下唯一锁定为正不动点 $\varphi = \frac{1 + \sqrt{5}}{2}$？`trureturing` 的对角线逃逸、自作用片段与黄金代数不动点模块给出了毫无缝隙的三联严格证明：
+在纯数学底层，为什么“无不动点的外部扭转必然逃逸一切有限或无限页表”，而“在表内捕获对角线落点必然在自寻址槽位生成精确不动点”，而正倒数映射 $x \mapsto 1 + 1/x$ 又在正半轴上唯一锁定正不动点 $\varphi = \frac{1 + \sqrt{5}}{2}$？`trureturing` 的对角线逃逸、自作用片段与黄金代数不动点模块给出了三条各自独立的严格证明：
 
-::: {.theorem #thm-ch38-self-mapped-diagonal-fixed-point title="自映射页表对角线落点不动点、无不动点普遍逃逸与黄金自指唯一性定理" lean="D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"}
+::: {.theorem #thm-ch38-self-mapped-diagonal-fixed-point title="对角线落点不动点、无不动点普遍逃逸与黄金倒数映射唯一性（三条独立引理）" lean="D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"}
 在 `trureturing` 冻结的对角线计数、定性自作用逃逸与黄金代数不动点模块中，以下三项定理同时成立：
 
 1. **页表对角线落点处的自寻址不动点定理**（[`diagonal_landing_fixed`](lean:D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed)）：对任意类型 $A, Y$、状态自映射 $f : Y \to Y$、二元寻址表 $g : A \to A \to Y$ 及槽位地址 $a_0 \in A$，记扭转对角线为 [`diagonal`](lean:D5/S0/Diagonal/EscapeCount.diagonal)$(f, g) := (a \mapsto f(g(a, a)))$。若第 $a_0$ 行捕获了该扭转对角线，即 $g(a_0) = \operatorname{diagonal}(f, g)$，则其自寻址对角槽位 $(a_0, a_0)$ 必为 $f$ 的精确不动点：

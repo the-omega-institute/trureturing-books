@@ -751,7 +751,393 @@ f_5-\lambda^5&=1-\lambda^2>0.
 \end{aligned}
 $$
 
-所以这组矩阵不能继续实现第五步；这并不排除另一组三能级矩阵。一般窗口的精确最小维数、一般相容迹矩的实现以及近似资源—误差关系仍未解决。本构造不延伸到源理论卷的平衡十维信道，不给出保留环境的完整联合历史或插入干预的过程张量恒等式，也不提供实验支持或模型普适性结论。
+所以这组矩阵不能继续实现第五步；这并不排除另一组三能级矩阵。一般窗口的精确最小维数、一般相容迹矩的实现以及完整近似资源—误差权衡仍未解决；下一个注记保存的是小泄漏下的加权历史接口。本构造不延伸到源理论卷的平衡十维信道，不给出保留环境的完整联合历史或插入干预的过程张量恒等式，也不提供实验支持或模型普适性结论。
+
+:::
+
+::: {.remark #rem-weighted-history-stability title="小泄漏下的固定酉加权历史界（书面推导）"}
+
+**普通书面推导，未在本书形式化。** 把联合演化看成在两条系统分支之间转动：压回原分支的部分会缩短，漏出的部分仍留在实际联合历史中，之后可能返回。极分解把这次压缩拆成“正的缩短”与“酉的转动”；即使压缩有零方向，也能在原环境空间内补齐那次转动。下面用同一固定转动逐步跟随真实历史，误差按步数相加。这里保存的是[已有完整普通论证](https://github.com/the-omega-institute/trureturing/issues/31078#issuecomment-6904102516)，不是新的形式化结论。
+
+**对象、范数与完整量词。** 任取整数 $d,N\ge1$、作用于 $\mathbb C^2\otimes\mathbb C^d$ 的酉矩阵 $W\in M_{2d}(\mathbb C)$，以及任意半正定单位迹矩阵 $\sigma\in M_d(\mathbb C)$。星号表示共轭转置。对任意矩形复矩阵 $M$，希尔伯特—施密特范数与算子范数分别约定为
+
+$$
+\begin{aligned}
+\|M\|_{\mathrm{HS}}^2&=\Tr(M^*M)=\sum_{i,j}|M_{ij}|^2,\\
+\|M\|_{\mathrm{op}}&=\sup_{\|v\|_2\le1}\|Mv\|_2.
+\end{aligned}
+$$
+
+后者衡量对向量的最大放大倍数；下文说一个分块是收缩时，指算子范数至多为一，不是该分块的希尔伯特—施密特范数至多为一。令 $e_0,e_1$ 为系统标准基，定义
+
+$$
+\begin{aligned}
+S&=\sqrt{\sigma}\in M_d(\mathbb C),\qquad S^*=S,\quad S^2=\sigma,\\
+J_b&:\mathbb C^d\longrightarrow\mathbb C^2\otimes\mathbb C^d,
+\qquad J_bv=e_b\otimes v,\\
+P_b&=J_bJ_b^*,\qquad Q_b=I_{2d}-P_b
+\qquad(b\in\{0,1\}),\\
+L_N&=\max_{\substack{b\in\{0,1\}\\0\le k\le N}}
+\|Q_bW^kJ_bS\|_{\mathrm{HS}}^2,\qquad
+\epsilon=\sqrt{L_N}.
+\end{aligned}
+$$
+
+这里的 $k$ 为整数；$P_b,Q_b\in M_{2d}(\mathbb C)$ 是正交投影，$J_b^*J_b=I_d$，且 $\|S\|_{\mathrm{HS}}^2=\Tr\sigma=1$。$L_N$ 使用同一个 $W,\sigma$ 在两个分支上从第零步到第 $N$ 步的**实际加权历史**，不是单步泄漏、各时刻另选实现，或某个无权算子范数。对每组上述数据，存在原 $\mathbb C^d$ 上的酉矩阵 $A_0,A_1$，选定后对所有整数 $0\le n\le N$ 同时满足
+
+$$
+\max_{\substack{b\in\{0,1\}\\0\le n\le N}}
+\|W^nJ_bS-J_bA_b^nS\|_{\mathrm{HS}}
+\le4N\sqrt{L_N}.
+$$
+
+常数 $4$ 与 $d,N,W,\sigma$ 无关；这里不声称它最优。以下给出完整推导。
+
+**压缩与一次极补全。** 固定任一分支 $b\in\{0,1\}$，简写 $J=J_b,P=P_b,Q=Q_b$，并在原有空间上定义
+
+$$
+\begin{aligned}
+K&=J^*WJ\in M_d(\mathbb C),&
+R&=QWJ\in M_{2d\times d}(\mathbb C),\\
+B&=J^*WQ\in M_{d\times2d}(\mathbb C),&
+E&=QWQ\in M_{2d}(\mathbb C).
+\end{aligned}
+$$
+
+$J$ 为等距嵌入，$Q$ 为正交投影，$W$ 酉，所以 $K,R,B,E$ 的算子范数均不超过一。尤其 $B,E$ 左乘任意列数相容的矩阵时，希尔伯特—施密特范数不会增大：这是逐列应用向量收缩后求平方和。直接分块计算给出
+
+$$
+\begin{aligned}
+K^*K+R^*R
+&=J^*W^*(P+Q)WJ\\
+&=J^*W^*WJ=I_d.
+\end{aligned}
+$$
+
+有限维方阵的极分解可在奇异情形下补全为
+
+$$
+K=AH,\qquad A^*A=AA^*=I_d,\qquad
+H=(K^*K)^{1/2},\qquad 0\le H\le I_d.
+$$
+
+这里 $A,H\in M_d(\mathbb C)$；$H$ 的每个特征值 $h$ 非负，且 $h^2\le1$，所以 $h\in[0,1]$。$A$ 仅从固定的 $K$ 选取一次。静态极分解的文献依据是 Higham，*Computing the Polar Decomposition—with Applications*，DOI [10.1137/0907079](https://doi.org/10.1137/0907079)，[全文](https://eprints.maths.manchester.ac.uk/694/1/high86p.pdf)，Theorem 1.1 与 Lemma 2.1；它们供应方阵酉补全及正平方根的识别，不供应下面的加权历史界。
+
+**任意矩形权重上的极误差。** 在 $H$ 的酉特征基中，$2H(I_d-H)$ 的特征值为 $2h(1-h)\ge0$，故
+
+$$
+D:=(I_d-H^2)-(I_d-H)^2=2H(I_d-H)\ge0.
+$$
+
+对每个自然数 $r$ 和每个矩形矩阵 $X\in M_{d\times r}(\mathbb C)$，合同变换给出 $X^*DX\ge0$，其迹非负（等于各列 $x_j$ 的非负二次型 $\sum_j x_j^*Dx_j$）。因此，不要求 $X$ 与 $H$ 交换，便有
+
+$$
+\begin{aligned}
+\|(K-A)X\|_{\mathrm{HS}}^2
+&=\Tr\bigl(X^*(I_d-H)^2X\bigr)\\
+&\le\Tr\bigl(X^*(I_d-H^2)X\bigr)\\
+&=\Tr(X^*R^*RX)=\|RX\|_{\mathrm{HS}}^2.
+\end{aligned}
+$$
+
+第一式用了 $K-A=A(H-I_d)$ 与 $A^*A=I_d$，末式用了 $I_d-H^2=R^*R$。这里取迹的半正定矩阵均给出实数。特别地，对 $T_k=J^*W^kJ\in M_d(\mathbb C)$ 代入实际权重 $X=T_kS$，由 $S^2=\sigma$ 与迹循环性，
+
+$$
+\begin{aligned}
+\|(K-A)T_kS\|_{\mathrm{HS}}^2
+&=\Tr\bigl(\sigma T_k^*(I_d-H)^2T_k\bigr)\\
+&\le\Tr\bigl(\sigma T_k^*(I_d-H^2)T_k\bigr)\\
+&=\|RT_kS\|_{\mathrm{HS}}^2.
+\end{aligned}
+$$
+
+这是先作半正定合同变换再取迹的比较；只循环移动迹内因子，没有交换 $\sigma,T_k,H$，也没有除以 $\sigma$ 的特征值。
+
+**实际轨迹的递推。** 对所有整数 $0\le k\le N$ 定义
+
+$$
+\begin{aligned}
+x_k&=J^*W^kJS=T_kS\in M_d(\mathbb C),\\
+y_k&=QW^kJS\in M_{2d\times d}(\mathbb C),\\
+W^kJS&=Jx_k+y_k,\qquad Qy_k=y_k,\\
+x_0&=S,\qquad y_0=0,\qquad
+\|y_k\|_{\mathrm{HS}}\le\epsilon.
+\end{aligned}
+$$
+
+对该分解施加同一个 $W$，再分别投影，对所有整数 $0\le k<N$ 得到
+
+$$
+\begin{aligned}
+x_{k+1}&=Kx_k+By_k,\\
+y_{k+1}&=Rx_k+Ey_k,\\
+\|Rx_k\|_{\mathrm{HS}}
+&=\|y_{k+1}-Ey_k\|_{\mathrm{HS}}\\
+&\le\|y_{k+1}\|_{\mathrm{HS}}+\|y_k\|_{\mathrm{HS}}
+\le2\epsilon.
+\end{aligned}
+$$
+
+令 $r_k=x_{k+1}-Ax_k\in M_d(\mathbb C)$。把前面的矩形比较用于实际的 $X=x_k$，再利用 $B$ 的收缩性，便有
+
+$$
+\begin{aligned}
+r_k&=(K-A)x_k+By_k,\\
+\|r_k\|_{\mathrm{HS}}
+&\le\|(K-A)x_k\|_{\mathrm{HS}}+\|By_k\|_{\mathrm{HS}}\\
+&\le\|Rx_k\|_{\mathrm{HS}}+\|y_k\|_{\mathrm{HS}}
+\le3\epsilon.
+\end{aligned}
+$$
+
+**固定酉矩阵的加法望远镜。** 固定整数 $1\le n\le N$，令 $f(k)=A^{n-k}x_k$（$0\le k\le n$）。对 $k<n$，
+
+$$
+\begin{aligned}
+f(k+1)-f(k)&=A^{n-1-k}(x_{k+1}-Ax_k)
+=A^{n-1-k}r_k,\\
+x_n-A^nS&=f(n)-f(0)
+=\sum_{k=0}^{n-1}A^{n-1-k}r_k,\\
+\|x_n-A^nS\|_{\mathrm{HS}}
+&\le\sum_{k=0}^{n-1}\|r_k\|_{\mathrm{HS}}
+\le3n\epsilon.
+\end{aligned}
+$$
+
+这里只把矩阵的连续差在加法群中相加，并用酉左乘保持希尔伯特—施密特范数。最后由 $J$ 的等距性与三角不等式，
+
+$$
+\begin{aligned}
+\|W^nJS-JA^nS\|_{\mathrm{HS}}
+&=\|J(x_n-A^nS)+y_n\|_{\mathrm{HS}}\\
+&\le3n\epsilon+\epsilon=(3n+1)\epsilon\\
+&\le4N\epsilon\qquad(1\le n\le N).
+\end{aligned}
+$$
+
+最后一步用了 $3n+1\le3N+1\le4N$；$n=0$ 时误差直接为零。对两个分支独立选取各自的极补全 $A_0,A_1$，并共用 $\epsilon=\sqrt{L_N}$，即得到所述最大值界。
+
+**适用范围与尚存边界。** $L_N=0$ 时全部误差精确为零；论证没有除以 $\epsilon$。秩亏的 $\sigma$ 以及正特征值任意接近零的 $\sigma$ 都包含在内：只使用 $S=\sqrt\sigma$，不使用逆、满秩或谱隙。环境始终为原 $\mathbb C^d$，没有纯化、增维、重置、干预或随时间变化的 $A_b$，也不假设后续联合态因子化。压缩 $K$ 无需正规；不把 $T_k$ 认作 $K^k$，漏出后返回的部分由实际 $y_k$ 保留。
+
+已有来源中的静态极补全与半正定迹正性是可复用供应，不在这里重新计作新数学。完整结果的 Lean 形式化证明尚未经验证；上述普通推导不构成 Lean 验证。这个历史接口也没有给出相对于目标去相位信道的 diamond 范数或任意有限未触碰参考的一致定量比较，没有给出实际可实现共同幂频率历史的定量下界与上构造。一般窗口的完整资源—误差权衡仍开放；这里不选择或证明后继事件，不作全球新颖性或物理普适性声明。
+
+:::
+
+::: {.remark #rem-maxmixed-saturation-obstruction title="最大混合初态下的饱和矩容量障碍（普通推导）"}
+
+**普通书面推导，未在本书形式化。** 前面的维数必要界允许样本数恰好达到矩阵空间的维数，却不保证这个边界可达。直观的障碍是容量：接近一的一阶矩要求几乎全部概率挤进单位圆上一段很短的弧；饱和的矩条件却使这段弧至多容纳两个节点，而最大混合初态又限制每个节点能承载的概率。下面从[原始结果及其边界](https://github.com/the-omega-institute/trureturing/issues/31099#issuecomment-6904917000)完整展开这个有限维论证。
+
+**对象与要排除的饱和条件。** 固定整数 $d\ge2$、实数 $0<r<1$，令 $m=d^2$。任取两套作用于同一个 $\mathbb C^d$ 的酉矩阵 $A,B\in U(d)$，不要求它们交换。定义共同幂的归一化迹序列，并暂设它匹配到饱和窗口：
+
+$$
+f_n=\frac1d\operatorname{Tr}(A^nB^{-n})=r^n
+\qquad(0\le n\le m-1).
+$$
+
+这里及下文的步数均为整数。目标是给出该条件的必要不等式，并据此排除一个明确参数；不是判定全部窗口的最优维数。
+
+**谱权重与支集不能先行混淆。** 分别作酉谱分解，允许重复特征值：
+
+$$
+\begin{aligned}
+A&=V\operatorname{diag}(a_0,\ldots,a_{d-1})V^*,\\
+B&=W\operatorname{diag}(b_0,\ldots,b_{d-1})W^*,\qquad U=V^*W,\\
+z_{ij}&=a_i\overline{b_j},\qquad |z_{ij}|=1,\\
+w_{ij}&=\frac{|U_{ij}|^2}{d},\qquad
+0\le w_{ij}\le\frac1d,\qquad
+\sum_{i,j=0}^{d-1}w_{ij}=1,\\
+\mu&=\sum_{i,j=0}^{d-1}w_{ij}\delta_{z_{ij}},\qquad
+f_n=\int z^n\,\mathrm d\mu(z).
+\end{aligned}
+$$
+
+星号表示共轭转置，$\delta_z$ 是节点 $z$ 上的单位点质量。迹的展开给出最后一式；酉矩阵每行的模平方和为一，给出权重总和与单项上界。因此 $\mu$ 是至多有 $m$ 个支集点的正概率测度。但此时若若干比值重合，合并后的单点质量可能超过 $1/d$；必须先证明这些比值确实互异，才能使用节点容量。由于权重实且非负，负次矩由共轭确定：
+
+$$
+\int z^q\,\mathrm d\mu(z)=r^{|q|}
+\qquad(-(m-1)\le q\le m-1).
+$$
+
+**饱和迫使全部节点出现且互异。** 在多项式上使用测度诱导的半正定配对 $\langle p,q\rangle_\mu=\int\overline{p(z)}q(z)\,\mathrm d\mu(z)$。单项式的 Gram 矩阵为
+
+$$
+T_{jk}=\langle z^j,z^k\rangle_\mu=r^{|j-k|}
+\qquad(0\le j,k\le m-1).
+$$
+
+把基改成常数 $1$ 与 $g_k(z)=z^k-rz^{k-1}$（$1\le k\le m-1$）。这是首项系数均为一的三角换基。直接用已知矩计算，
+
+$$
+\begin{aligned}
+\langle1,g_k\rangle_\mu&=r^k-r\,r^{k-1}=0,\\
+\langle g_j,g_k\rangle_\mu
+&=r^{k-j}-r\,r^{k-j-1}-r\,r^{k-j+1}
++r^2r^{k-j}=0\quad(1\le j<k\le m-1),\\
+\|1\|_\mu^2&=1,\qquad
+\|g_k\|_\mu^2=1-2r^2+r^2=1-r^2>0.
+\end{aligned}
+$$
+
+所以 $T$ 正定且秩为 $m$。若合并并删去零质量后只有 $K$ 个支集点，Gram 矩阵经这些点上的取值映射分解，秩至多为 $K$。故 $m\le K\le m$。原来总共只有 $m$ 个索引对，因而每个 $w_{ij}>0$，所有 $z_{ij}$ 两两不同。此后每个节点的实际质量就是原来的 $w_{ij}\le1/d$。重复特征值或零重叠权重并非隐藏的例外：它们会减少支集，已被满秩条件排除。
+
+**节点多项式只需已有阶数的矩。** 将这 $m$ 个节点记为 $\zeta_1,\ldots,\zeta_m$，定义首一消去多项式及线性泛函：
+
+$$
+\begin{aligned}
+P(z)&=\prod_{\ell=1}^{m}(z-\zeta_\ell),\\
+L_k(F)&=\int z^{-k}F(z)\,\mathrm d\mu(z)
+\qquad(1\le k\le m-1,\ \deg F\le m).
+\end{aligned}
+$$
+
+因为 $P$ 在支集上为零，所有 $L_k(P)=0$。这些泛函在 $\operatorname{span}(z,\ldots,z^{m-1})$ 上的矩阵，是 $T$ 对应的正定主子矩阵，故联合秩为 $m-1$。次数至多 $m$ 的多项式空间维数为 $m+1$，所以公共核恰为二维。以下两个线性无关多项式都在核中：
+
+$$
+\begin{aligned}
+Q(z)&=z^m-rz^{m-1},\qquad R(z)=1-rz,\\
+L_k(Q)&=r^{m-k}-r\,r^{m-1-k}=0,\\
+L_k(R)&=r^k-r\,r^{k-1}=0
+\qquad(1\le k\le m-1).
+\end{aligned}
+$$
+
+它们因次数不同而线性无关。比较首项系数，得到 $P=Q+cR$；由于全部根的模为一，常数项满足 $|c|=|P(0)|=\prod_{\ell=1}^m|\zeta_\ell|=1$。于是每个节点都满足
+
+$$
+z^{m-1}\frac{z-r}{1-rz}=\tau,\qquad
+\tau=-c,\qquad |\tau|=1.
+$$
+
+分母不会为零，因为 $|rz|=r<1$。尤其，虽然 $Q$ 的次数为 $m$，在 $L_k(Q)$ 中最高的矩阶数只有 $m-1$；这里没有偷用第 $m$ 阶或更高矩。
+
+**短闭弧至多容纳两个节点。** 取
+
+$$
+\theta=\frac{\pi}{2(m-1)},\qquad
+\mathcal A_\theta=\{e^{\mathrm it}: -\theta\le t\le\theta\}.
+$$
+
+在这段弧上可选择如下连续辐角；半角公式直接验证其指数等于对应的分式：
+
+$$
+\begin{aligned}
+\beta(t)&=2\arctan\left(\frac{1+r}{1-r}\tan\frac t2\right),\\
+e^{\mathrm i\beta(t)}&=\frac{e^{\mathrm it}-r}{1-re^{\mathrm it}},\\
+\beta'(t)&=\frac{1-r^2}{1-2r\cos t+r^2}>0
+\qquad(-\theta\le t\le\theta).
+\end{aligned}
+$$
+
+由于 $d\ge2$，整段弧严格位于 $-\pi<t<\pi$，所用正切连续。实反正切的取值严格介于 $-\pi/2$ 与 $\pi/2$，故 $\beta(\theta)-\beta(-\theta)<2\pi$。令 $h(t)=(m-1)t+\beta(t)$，则
+
+$$
+\begin{aligned}
+h'(t)&=m-1+\beta'(t)>0,\\
+h(\theta)-h(-\theta)
+&=2(m-1)\theta+\beta(\theta)-\beta(-\theta)<3\pi.
+\end{aligned}
+$$
+
+固定任意一个 $\tau$ 的辐角 $\alpha$，节点方程就是 $h(t)=\alpha+2\pi k$，其中 $k\in\mathbb Z$。严格递增性使不同节点对应不同整数。若有三个节点，最左与最右的相位至少相差 $4\pi$，与刚才的变化量上界矛盾。这也包含弧的两个端点。因此
+
+$$
+\mu(\mathcal A_\theta)\le\frac2d,\qquad
+\mu(\mathbb T\setminus\mathcal A_\theta)\ge1-\frac2d,
+\qquad \mathbb T=\{z\in\mathbb C:|z|=1\}.
+$$
+
+**容量必要不等式与精确反例。** 在弧外，$1-\operatorname{Re}z\ge1-\cos\theta$；在整圆上这个被积函数非负。一阶矩给出
+
+$$
+\begin{aligned}
+1-r&=\int(1-\operatorname{Re}z)\,\mathrm d\mu(z)\\
+&\ge\left(1-\frac2d\right)(1-\cos\theta)\\
+&=\left(1-\frac2d\right)
+\left(1-\cos\frac{\pi}{2(d^2-1)}\right).
+\end{aligned}
+$$
+
+这对每个 $d\ge3$ 都是最大混合饱和实现的非平凡必要条件。取 $d=3$、$r=999/1000$，此时 $m=9$、$\theta=\pi/16$。正弦在 $[0,\pi/2]$ 上的凹性意味着它不低于连接两个端点的弦，即 $\sin x\ge2x/\pi$。所以
+
+$$
+\begin{aligned}
+\sin\frac{\pi}{32}&\ge\frac1{16},\\
+1-\cos\frac{\pi}{16}
+&=2\sin^2\frac{\pi}{32}\ge\frac1{128},\\
+1-r&\ge\frac13\cdot\frac1{128}=\frac1{384},\\
+1-r&=\frac1{1000}<\frac1{384}.
+\end{aligned}
+$$
+
+矛盾。也可以把同一计算直接读成装不下的质量：
+
+$$
+\begin{aligned}
+\mu(\mathcal A_{\pi/16})
+&\ge1-\frac{1-r}{1-\cos(\pi/16)}
+\ge1-\frac{128}{1000}=\frac{109}{125},\\
+\frac{109}{125}-\frac23&=\frac{77}{375}>0.
+\end{aligned}
+$$
+
+因此不存在一对 $A,B\in U(3)$ 同时满足 $f_n=r^n$（$0\le n\le8$）。这是对所有酉矩阵对的排除，包含非交换情形；不是某种设参形式或数值优化失败。它甚至未使用谱比值网格及酉矩阵模平方权重所带来的全部相容性限制。
+
+**零参数、负参数与二级环境。** 将 $A$ 换成 $-A$ 会使 $f_n$ 变成 $(-1)^nf_n$，因而同维参数 $r=-999/1000$ 也不可能。零参数则有完全不同的边界：对每个正整数 $d$ 都能实现饱和窗口。令
+
+$$
+\begin{aligned}
+m&=d^2,\qquad \omega=e^{2\pi\mathrm i/m},\\
+a_i&=\omega^i,\qquad b_j=\omega^{-dj},\\
+F_{ij}&=\frac1{\sqrt d}e^{2\pi\mathrm i\,ij/d}
+\qquad(0\le i,j<d),\\
+A&=\operatorname{diag}(a_0,\ldots,a_{d-1}),\qquad
+B=F\operatorname{diag}(b_0,\ldots,b_{d-1})F^*.
+\end{aligned}
+$$
+
+有限等比求和给出 Fourier 矩阵 $F$ 的列正交，故它酉。相对本征基的模平方都为 $1/d$，于是每个权重为 $1/d^2=1/m$。比值 $a_i\overline{b_j}=\omega^{i+dj}$ 恰遍历全部 $m$ 次单位根；对 $d=1$ 也成立，只是窗口没有正步数。因此
+
+$$
+f_0=1,\qquad
+f_n=\frac1m\sum_{q=0}^{m-1}\omega^{qn}=0
+\qquad(1\le n\le m-1).
+$$
+
+零参数的第零幂约定为一。对 $d=2$，容量不等式右端因 $1-2/d=0$ 而退为平凡界，与已有的最大混合二级环境三步构造相容；这里不重复其证明。
+
+**从迹矩到实际信道，以及反向归约。** 为避免与上面的本征基矩阵混淆，把联合酉记为 $\mathcal W$。设系统为 $\mathbb C^2$，环境初态固定为 $\sigma=I_d/d$ 且初始独立于输入。对受控联合酉及系统矩阵单位定义
+
+$$
+\begin{aligned}
+E_{ab}&=|a\rangle\langle b|\quad(a,b\in\{0,1\}),\\
+\mathcal W&=E_{00}\otimes A+E_{11}\otimes B,\\
+\Psi_n(X)&=\operatorname{Tr}_E\bigl(\mathcal W^n(X\otimes I_d/d)\mathcal W^{*n}\bigr),\\
+\Psi_n(E_{00})&=E_{00},\qquad \Psi_n(E_{11})=E_{11},\\
+\Psi_n(E_{01})&=f_nE_{01},\qquad
+\Psi_n(E_{10})=\overline{f_n}E_{10}.
+\end{aligned}
+$$
+
+两个对角系数均为单位迹一；非对角式直接来自环境偏迹。矩阵单位构成所有系统矩阵的线性基，所以这些式子确定整个映射。对任意有限未触碰参考 $R$，将任意系统—参考矩阵写成 $Y=\sum_{a,b=0}^1E_{ab}\otimes Y_{ab}$；每个参考块 $Y_{ab}$ 保持原样，系统块逐项乘以上述系数。这包含系统与参考初始纠缠的情形，但环境仍须与整个输入独立。采用标准张量换序后，实际共同演化在系统—环境上作用，在参考上为恒等。
+
+反过来，这个最大混合排除不只是预设受控形式的限制。把任意联合酉写成系统的二乘二环境分块 $\mathcal W=(C_{ab})_{a,b=0}^1$。若一步映射精确保持两个基态投影，错误布居为
+
+$$
+\begin{aligned}
+0&=\langle1,\Psi_1(E_{00})1\rangle
+=\frac1d\operatorname{Tr}(C_{10}C_{10}^*)
+=\frac1d\|C_{10}\|_{\mathrm{HS}}^2,\\
+0&=\langle0,\Psi_1(E_{11})0\rangle
+=\frac1d\operatorname{Tr}(C_{01}C_{01}^*)
+=\frac1d\|C_{01}\|_{\mathrm{HS}}^2.
+\end{aligned}
+$$
+
+希尔伯特—施密特范数平方是各矩阵元模平方之和，因此 $C_{10}=C_{01}=0$。再由联合酉性得 $C_{00},C_{11}$ 都酉，故它们就是某一对 $A,B$。最大混合态的满秩性使零泄漏约束作用于整个环境空间。因此，若同一个三维最大混合环境的实际信道要在 $0\le n\le8$ 对所有输入实现参数 $r=999/1000$ 的去相位幂，上面的反例已在 $E_{01}$ 上排除了它；增加未触碰参考不会恢复可行性。
+
+**适用边界。** 全过程只用同一个联合酉和一次初始制备，没有环境重置、替换、增维、时变控制或中间干预，也没有假设后续系统—环境态重新因子化。一般初始密度 $\sigma$ 的谱展开系数为 $\operatorname{Tr}(P_i\sigma Q_j)$，其中 $P_i,Q_j$ 分别为两套酉的谱投影；这些系数可能为复数，不具有这里的正概率解释或单节点容量。因此本注记没有反驳允许任意初始密度时的维数可达性主张。所给不等式只是必要条件，未证明充分性或最优性；它不完成一般窗口的可行性分类，不提供近似误差下界，也不确定完整联合态历史或中间干预的规律。
+
+圆周正交多项式提供相邻的经典框架，可参见 Barry Simon，[arXiv:math/0405111](https://arxiv.org/abs/math/0405111) §1 的递推与 §2.1(c) 的 Bernstein–Szegő 情形；这些段落不作为本注记完整受限实现障碍的来源定理。所需节点、相位与容量证明均已在这里给出，不作全球新颖性或物理普适性声明。完整结论尚无本书可引用的完整 Lean 证明；普通推导不构成内核验证。
 
 :::
 

@@ -352,7 +352,7 @@ H.1 至 H.5 的五条定理分别来自轨迹首项、有限状态视界细化�
      (2k)_3 = \Bigl[\frac{2}{3}\Bigr] = \frac{2}{3} \neq 0 \in \operatorname{AddCircle}(1) \;\Longrightarrow\; K(2k) = 2k \neq 0!
      $$
 
-     因此 $0 \neq 2k \in (H.\mathrm{ker} \sqcap L.\mathrm{ker}).\operatorname{map}(K)$，联合盲区仍非平凡子群 $\bot$！更一般地，对任意单个固定层级 $m \in \mathbb{N}_+$ 的坐标账本 $L_m(x) = x_m$，元素 $\operatorname{realFlow}(m)$ 在第 $1$ 层与第 $m$ 层均归零（$[m/1] = [m/m] = 0$），却在第 $m + 1$ 层留下非零残差 $\bigl[\frac{m}{m+1}\bigr] \neq 0$。这在纯群论层面生动印证了全书的一贯洞见：**每一份有限阶账本都能实打实地压缩不可区分核，却总在更高阶互素或倍分纤维里留下一道有待下一轮扩表去照亮的余项。**
+     因此 $0 \neq 2k \in (H.\mathrm{ker} \sqcap L.\mathrm{ker}).\operatorname{map}(K)$，联合盲区仍非平凡子群 $\bot$！更一般地，对任意单个固定层级 $m \in \mathbb{N}_+$ 的坐标账本 $L_m(x) = x_m$，元素 $\operatorname{realFlow}(m)$ 在第 $1$ 层与第 $m$ 层均归零（$[m/1] = [m/m] = 0$），却在第 $m + 1$ 层留下非零残差 $\bigl[\frac{m}{m+1}\bigr] \neq 0$。这在纯群论层面生动印证了全书的一贯洞见：**有限阶账本能实打实地压缩不可区分核，而单层坐标账本却总在更高阶互素或倍分纤维里留下一道有待下一轮扩表去照亮的余项。**
 :::
 
 我们将本附录五条内核验证定理的精确签名假设、有效结论边界与严禁越界外推红线汇总于下框审计总表：

@@ -19,7 +19,7 @@
 
 看清这一折，那个困扰千古的悖论瞬间豁然开朗：**墙上左手的影子，当然不可能凭局部念头掰断右手的骨骼！** 你作为局部化身（$\cos\theta$ 栈帧）之所以无法靠一己私欲篡改物理常数，**恰恰因为窗外那套铁面无私的客观宇宙定律，根本不是压迫你的异己暴君，而是作为宇宙本体的你自己为了不让这场体验坍缩成虚无幻梦，用自己其余 $\sin^2\theta$ 的本体身躯亲手撑起的宏伟肋骨！**
 
-在 Lean 4 内核中，“可见测量语境与正交残余质量的严格勾股守恒”、“在已有复矩阵空间中由两平衡分量构造平方为 $-I_n$ 的相对算子 $J$”以及“任何跨语境客观断言必锚定于所有局部不动点共享的不变公共因子”，由下面这条合取命题精确锁定。其中“内生”指不另选一个外部相对旋转算子；标量 $\mathbb C$ 已在矩阵类型中给定，并非由该构造从无复数的标量域导出：
+在 Lean 4 内核中，“可见测量语境与正交残余质量的严格勾股守恒”、“在已有复矩阵空间中由两平衡分量构造平方为 $-I_n$ 的相对算子 $J$”以及“任何跨语境客观断言必锚定于所有局部不动点共享的不变公共因子”，由下面这条合取命题写出（第 3 款按定义成立）。其中“内生”指不另选一个外部相对旋转算子；标量 $\mathbb C$ 已在矩阵类型中给定，并非由该构造从无复数的标量域导出：
 
 ::: {.proposition #prop-ch39-orthogonal-folding-and-objective-common-factor title="互补语境勾股纯度守恒、平衡相对复结构平方反号与跨语境客观公共因子命题" lean="D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"}
 在 `trureturing` 冻结的层析互补勾股、平衡幺正复结构与解释不动点模块中，以下三项支撑正交自折叠与客观公共不变量的结论同时成立：
@@ -30,13 +30,13 @@
    \operatorname{Re}\operatorname{Tr}(\rho^2) - (\lvert d\rvert : \mathbb{R})^{-1} \;=\; \sum_{l \in L}\sum_{j \in d}\bigl(\mathrm{probability}(l, j) - (\lvert d\rvert : \mathbb{R})^{-1}\bigr)^2 \;+\; \operatorname{residualMass}(\mathrm{visible}, \mathrm{state});
    $$
 
-2. **两平衡正交分量内生诱导复结构平方反号律**（[`relativeComplexStructure_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square)）：设 $n$ 为有限可判等类型（`[Fintype n] [DecidableEq n]`），记 $\mathrm{halfIdentity} := \frac{1}{2}I_n \in M_n(\mathbb{C})$，并对 $A, B \in M_n(\mathbb{C})$ 定义相对混合积算子 $\operatorname{relativeComplexStructure}(A, B) := 2(A B^\dagger) \in M_n(\mathbb{C})$。只要 $A, B$ 满足平衡正交消去 $A B^\dagger + B A^\dagger = 0$ 及半单位归一化 $A A^\dagger = \mathrm{halfIdentity}$、$B^\dagger B = \mathrm{halfIdentity}$（例如取满足 $U_1^\dagger U_2 + U_2^\dagger U_1 = 0$ 的两幺正矩阵之半幅分量 $A = \frac{1}{\sqrt{2}}U_1^\dagger,\; B = \frac{1}{\sqrt{2}}U_2^\dagger$，此时 $2 A B^\dagger = U_1^\dagger U_2$），无需外加复虚数公设，该相对算子自乘必精确等于负单位阵：
+2. **两平衡正交分量内生诱导复结构平方反号律**（[`relativeComplexStructure_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square)）：设 $n$ 为有限可判等类型（`[Fintype n] [DecidableEq n]`），记 $\mathrm{halfIdentity} := \frac{1}{2}I_n \in M_n(\mathbb{C})$，并对 $A, B \in M_n(\mathbb{C})$ 定义相对混合积算子 $\operatorname{relativeComplexStructure}(A, B) := 2(A B^\dagger) \in M_n(\mathbb{C})$。只要 $A, B$ 满足平衡正交消去 $A B^\dagger + B A^\dagger = 0$ 及半单位归一化 $A A^\dagger = \mathrm{halfIdentity}$、$B^\dagger B = \mathrm{halfIdentity}$（例如取满足 $U_1^\dagger U_2 + U_2^\dagger U_1 = 0$ 的两幺正矩阵之半幅分量 $A = \frac{1}{\sqrt{2}}U_1^\dagger,\; B = \frac{1}{\sqrt{2}}U_2^\dagger$，此时 $2 A B^\dagger = U_1^\dagger U_2$），该相对算子自乘必精确等于负单位阵：
 
    $$
    \operatorname{relativeComplexStructure}(A, B) \cdot \operatorname{relativeComplexStructure}(A, B) \;=\; -I_n;
    $$
 
-3. **跨语境客观解释断言的公共不变因子必然性**（[`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)）：设 $\mathrm{Context}, \mathrm{Meaning}, \mathrm{Factor}$ 为任意类型，$\mathrm{isFixedMeaning} : \mathrm{Context} \to \mathrm{Meaning} \to \mathrm{Prop}$ 为语境相对不动意义关系（同一模块中 `baselineContext` 与 `alternateContext` 已见证不同局部语境参数可选出相异的局部不动点 `(false, false, false) ≠ (true, true, true)`），$\mathrm{factor} : \mathrm{Meaning} \to \mathrm{Factor}$ 为特征提取映射。则任何成立的客观解释断言 $\mathrm{claim} : \operatorname{ObjectiveInterpretationClaim}(\mathrm{isFixedMeaning}, \mathrm{factor})$ 必携有一枚跨越一切局部语境严格守恒的公共不变因子：
+3. **跨语境客观解释断言的公共不变因子必然性**（[`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)）：设 $\mathrm{Context}, \mathrm{Meaning}, \mathrm{Factor}$ 为任意类型，$\mathrm{isFixedMeaning} : \mathrm{Context} \to \mathrm{Meaning} \to \mathrm{Prop}$ 为语境相对不动意义关系（同一模块中 `baselineContext` 与 `alternateContext` 已见证不同局部语境参数可选出相异的局部不动点 `(false, false, false) ≠ (true, true, true)`），$\mathrm{factor} : \mathrm{Meaning} \to \mathrm{Factor}$ 为特征提取映射，而 $\operatorname{ObjectiveInterpretationClaim}(\mathrm{isFixedMeaning}, \mathrm{factor})$ 按定义就是下式本身（本款是定义展开）。则任何成立的客观解释断言 $\mathrm{claim} : \operatorname{ObjectiveInterpretationClaim}(\mathrm{isFixedMeaning}, \mathrm{factor})$ 必携有一枚跨越一切局部语境严格守恒的公共不变因子：
 
    $$
    \exists\,\mathrm{commonFactor} : \mathrm{Factor},\quad \forall\,\mathrm{context}\;\mathrm{meaning},\quad \operatorname{isFixedMeaning}(\mathrm{context}, \mathrm{meaning}) \;\longrightarrow\; \operatorname{factor}(\mathrm{meaning}) = \mathrm{commonFactor}.
@@ -57,7 +57,7 @@
 | **第一阶：经典舞台观**（朴素机械实在论） | 预设绝对外在时空空箱，孤立刚性粒子在舞台上按外部定律运动 | 公然高悬于球外的全知绝对参考点 $C$ 与外加背景流形 | 二元裂缝最大（主体 $\neq$ 客体 $\neq$ 舞台），残留全部物自体假象（`文献结果`） | 陷入绝对参考系幻觉、紫外发散与主客二元割裂 |
 | **第二阶：关系量子观**（前八部两子丈量图景） | 废黜球外裁判席，万物立于单位球面平视执行两子内积丈量与正交旋转 | 外部坐标 $C$ 已除，但语言深处仍微留“被测关系网 vs. 测量者”的隐秘薄膜 | 外部参考系归零，但能知与所知之间尚存概念接缝 | 确立玻恩互易、互补纯度勾股（`LEAN ✓`）与无时间格拉姆相容晶体 |
 | **第三阶：指针寻址观**（第 38 章硬件解耦图景） | 静态无时间本体 QRAM 存储阵列不动，观察者作为轻量级地址指针 `ptr` 扫描解引用 | 物理搬运迷思已破，但“宇宙**的**指针”一词仍残留“主动指针 vs. 被动死内存”的最后隔墙 $\mu > 0$ | 数据生灭归零，仅剩寄存器与存储底物的语法二元残留 | 统一阐明时间帧率 `ptr++`、退相干位掩码（`LEAN ✓`）、梦境叠加与 `p = *p` 根页表 |
-| **第四阶：无二自指本体观**（本章终极合拢 $\psi \equiv \psi(\psi)$） | 全域 `p ≡ *p` 无底物自指恒等；唯一全体经互补勾股纯度守恒（`LEAN ✓`）正交自折叠并沿 $720^\circ$ 双覆叠（`LEAN ✓`）织出时空 | 隐藏第 3 点 $C$、被动死底物与不可知物自体被百分之百连根拔除 | 二元裂缝 $\mu = 0$，外部未表余项严格等于 $0$ | 观察者即宇宙本体：局部栈帧体验悬念，其余正交补本体化作客观星海与公正铁律 |
+| **第四阶：无二自指本体观**（本章终极合拢 $\psi \equiv \psi(\psi)$） | 全域 `p ≡ *p` 无底物自指恒等；唯一全体经互补勾股纯度守恒（[@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款）正交自折叠并沿 $720^\circ$ 双覆叠（[@thm-ch39-double-cover-no-section-and-720-lift] 第 2 款只到 $360^\circ$ 换叶）织出时空（`MODEL`） | 隐藏第 3 点 $C$、被动死底物与不可知物自体被百分之百连根拔除 | 二元裂缝 $\mu = 0$，外部未表余项严格等于 $0$（`MODEL`） | 观察者即宇宙本体：局部栈帧体验悬念，其余正交补本体化作客观星海与公正铁律 |
 
 第四阶里旋量沿 $720^\circ$ 单侧双覆叠织出时空的那一步，见 §39.3 的 `turn360`、`seam`、`turn720` 三张实验卡与本节末的完整实验室。
 :::

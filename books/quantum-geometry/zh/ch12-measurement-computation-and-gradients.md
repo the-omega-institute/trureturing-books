@@ -256,7 +256,7 @@ $$
 
 与上述均匀球面测度集中和随机电路梯度定律**完全独立**，在算子层析与时频集中分析中还有另一类常被对比的数学问题：**当一个非负实数列 $\lambda : \mathbb{N} \to \mathbb{R}$ 可和且满足有限迹恒等式 $\sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$ 时，如何从上界控制它超过给定阈值 $\tau > 0$ 的模式个数？** 在 Lean 模块 `FiniteRankConcentrationModeBound` 中，下面的冻结推论给出了这一**充分计数上界**：任何超过正阈值 $\tau > 0$ 的超水平集 $S_\tau = \{j \in \mathbb{N} \mid \tau \le \lambda_j\}$ 必然是有限集，且其基数受显式上界 $\frac{R W}{\pi \tau}$ 控制。（请务必注意边界：该定理只是一个关于非负可和序列的**充分计数上界**，既不是超水平集有限的必要条件——例如不可和的调和序列 $\lambda_j = \frac{1}{j+1}$ 总和发散，但对每个正阈值 $\tau > 0$ 同样只有有限项满足 $\lambda_j \ge \tau$——也不提供逃离贫瘠高原或保证电路梯度非零的机制，因为有限维密度矩阵天然迹为 $1$，且有限迹预算丝毫不能阻止常数目标函数的梯度恒为零。）
 
-::: {.corollary #cor-finite-trace-mode-budget title="有限迹集中算子的超阈值模式有限性与基数上界" lean="D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound"}
+::: {.corollary #cor-finite-trace-mode-budget title="有限迹集中数列的超阈值模式有限性与基数上界" lean="D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound"}
 设 $\lambda = \operatorname{concentrationEigenvalue} : \mathbb{N} \to \mathbb{R}$ 为实数列，$R = \operatorname{intervalRadius}$、$W = \operatorname{frequencyMeasure}$、$\tau = \operatorname{threshold}$ 为实数。若满足：
 
 1. **非负性**：对一切 $j \in \mathbb{N}$，$0 \le \lambda_j$；
@@ -338,7 +338,7 @@ $$
 
 ### 12.4.1 第三部小结：单球已合拢，多球待交织 {#第三部小结单球已合拢多球待交织}
 
-回望第三部《合拢·从面到球》（[第九章](ch09-axes-and-state-addressing.md)至第十二章），我们用十八条经 Lean 4 内核验证的定理级结论，把单量子比特球面从局部坐标轴一路合拢到了硬件脉冲与注意力计算：
+回望第三部《合拢·从面到球》（[第九章](ch09-axes-and-state-addressing.md)至第十二章），我们用经 Lean 4 内核验证的定理级结论，把单量子比特球面从局部坐标轴一路合拢到了硬件脉冲与注意力计算：
 
 - **第九章**从三维空间任意两向量的公共单位法向量（[@lemma-three-axis-normal]）出发，阐明了北极两角寻址 $R_z(\varphi)R_y(\theta)N$，证明了任意两不共线轴生成 $\mathrm{SO}(3)$ 的有限旋转字存在性（[@thm-two-axis-finite-word]），用 Lie–Trotter 公式（[@thm-lie-trotter]）说明两轴极小转动交替进行的极限是生成元相加后的那一次转动，并用有理六轴构造（[@prop-rational-six-axis-cover]）与拓扑六色下界（[@cor-six-colors-necessary]）锁定了球面无正交对开覆盖的最小块数 $6$；
 - **第十章**区分了物理操作的时间非对易性（[@prop-static-sequential-separation]）、二维球面毛球/霍普障碍与三维旋转器球 $S^3$ 的全局标架，证明了完整复格拉姆矩阵 $B^*B = A^*A$ 在差一个公共外围幺正变换 $U$ 下唯一重构整族状态（[@thm-gram-unitary-reconstruction]、[@lemma-unit-gram-equality]），用同纬度复内积公式（[@cor-latitude-complex-overlap]）将八分球贝里立体角直接写进了格拉姆矩阵元，并证明三点巴格曼迹等于标量部分加三根布洛赫向量的有向体积（[@thm-qubit-bargmann-bloch]）；

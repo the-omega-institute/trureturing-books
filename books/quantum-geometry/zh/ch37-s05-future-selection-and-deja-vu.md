@@ -161,7 +161,7 @@ $$
 
 现在回答更犀利的**第二问：既然如此，为什么绝大多数梦并未能“成真”，也没有在醒来后变成既视感？**
 
-答案在计算机体系结构与 `trureturing` 的概念信息逃逸及信念修正模块里清澈见底：**因为投机预编译只有在“醒来后没有学到推翻预测前提的结构性新信息”时才有效！** 一旦观察者在醒后的清晨读到了一条无法从旧知识闭包中推导出来的**高新颖度事实**，或者遭遇了与昨夜可废止先验正面冲突的新证据，旧预编译缓存就会像预测失败的处理器分支一样被当场**冲刷作废（Pipeline Flush）**。下面三条 `NEW_AT_PIN` 内核定理分别给出了结构新颖度的唯一捕获充要判据、不可由其余核语义恢复的闭包判据，以及冲突重置修正下更新顺序不可交换的精确反例：
+答案在计算机体系结构与 `trureturing` 的概念信息逃逸及信念修正模块里清澈见底：**因为投机预编译只有在“醒来后没有学到推翻预测前提的结构性新信息”时才有效！** 一旦观察者在醒后的清晨读到了一条无法从旧知识闭包中推导出来的**高新颖度事实**，或者遭遇了与昨夜可废止先验正面冲突的新证据，旧预编译缓存就会像预测失败的处理器分支一样被当场**冲刷作废（Pipeline Flush）**。下面三条内核定理分别给出了结构新颖度的唯一捕获充要判据、不可由其余核语义恢复的闭包判据，以及冲突重置修正下更新顺序不可交换的精确反例：
 
 ::: {.theorem #thm-ch37-p2g-novelty-and-revision-noncommutation title="信息逃逸率严格下降的唯一捕获与语义闭包不可恢复充要定理及冲突修正非对易性定理" lean="D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_not_mem_semanticClosureWithout D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation"}
 在 `trureturing` 冻结的概念动力学信息逃逸精确率、结构新颖度与冲突修正模块中，以下两项定理同时成立：

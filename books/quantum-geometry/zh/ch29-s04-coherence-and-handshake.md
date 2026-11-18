@@ -2,7 +2,7 @@
 
 > “逻辑没有什么存在于不存在, 只有相干与去相干, 所以未来对过去有了干涉, 这也不稀奇, 这就是因果”
 
-在前一节（[“顺序无关、无时间之网与几何因果的必然性”](ch29-s03-timeless-gram-causality.md#sec-coda-timeless-causality)）中，我们从单位向量族的 Gram 矩阵刚性（[@thm-ch29-gram-rigidity-and-pell]）看见了无时间关联网络如何消解“前推后”的机械多米诺骨牌时间观。然而，日常直觉之所以一听见“未来对过去发生干涉”便觉得违反逻辑，根源在于把经典布尔逻辑的“存在（`1`）对不存在（`0`）”误当成了宇宙最底层的本体语法。本章收官之际，我们围绕这句收拢因果本质的命题（原话台账见[附录 A](appendix-a-s03-verbatim-ledger.md#sec-appendix-a-verbatim-ledger) `A75`），沿着“正交隐匿与捏合去相干—双端玻恩握手与共同相位锁定—驻相、弱值、延迟擦除无信令与格拉姆端点置换—反相悖论相消与自洽不动点”四根支柱展开严格拆解，并逐项标清 Lean 4 内核定理（`LEAN ✓`）、手工代数推导（`手工推导`）、外部物理文献（`文献结果`）、双精度数值检验（`NUM`）与本书正交几何诠释（`MODEL`）的各自边界。
+在前一节（[“顺序无关、无时间之网与几何因果的必然性”](ch29-s03-timeless-gram-causality.md#sec-coda-timeless-causality)）中，我们从单位向量族的 Gram 矩阵刚性看见了无时间关联网络如何消解“前推后”的机械多米诺骨牌时间观。然而，日常直觉之所以一听见“未来对过去发生干涉”便觉得违反逻辑，根源在于把经典布尔逻辑的“存在（`1`）对不存在（`0`）”误当成了宇宙最底层的本体语法。本章收官之际，我们围绕这句收拢因果本质的命题（原话台账见[附录 A](appendix-a-s03-verbatim-ledger.md#sec-appendix-a-verbatim-ledger) `A75`），沿着“正交隐匿与捏合去相干—双端玻恩握手与共同相位锁定—驻相、弱值、延迟擦除无信令与格拉姆端点置换—反相悖论相消与自洽不动点”四根支柱展开严格拆解，并逐项标清 Lean 4 内核定理（`LEAN ✓`）、手工代数推导（`手工推导`）、外部物理文献（`文献结果`）、双精度数值检验（`NUM`）与本书正交几何诠释（`MODEL`）的各自边界。
 
 ## 29.4.1 破除布尔“存在与不存在”幻觉：正交隐匿、双路相消与捏合去相干 {#sec-ch29-handshake-boolean-illusion}
 
@@ -150,7 +150,7 @@ $$
    $$
 
    即未来的选基只能在事后符合计数中分拣子系综，**绝不可能改写过去屏幕的总计边缘分布或逆时传递超光速信号**。
-5. **三时刻实格拉姆矩阵的首尾端点置换不变性**（`手工推导`，对照单位重叠等价判据 [@thm-ch29-gram-rigidity-and-pell]）：对过去、现在、未来三支实单位向量 $\mathbf{A}_{\mathrm{past}}, \mathbf{B}_{\mathrm{now}}, \mathbf{C}_{\mathrm{future}}$，记 $x = c_{AB}, y = c_{BC}, z = c_{AC}$。用首尾对调置换阵 $P_{13} = \begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix}$ 作双侧合同变换：
+5. **三时刻实格拉姆矩阵的首尾端点置换不变性**（`手工推导`）：对过去、现在、未来三支实单位向量 $\mathbf{A}_{\mathrm{past}}, \mathbf{B}_{\mathrm{now}}, \mathbf{C}_{\mathrm{future}}$，记 $x = c_{AB}, y = c_{BC}, z = c_{AC}$。用首尾对调置换阵 $P_{13} = \begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix}$ 作双侧合同变换：
 
    $$
    G(x, y, z) = \begin{pmatrix} 1 & x & z \\ x & 1 & y \\ z & y & 1 \end{pmatrix} \longmapsto G' = P_{13} G P_{13}^{\mathsf{T}} = \begin{pmatrix} 1 & y & z \\ y & 1 & x \\ z & x & 1 \end{pmatrix} = G(y, x, z).
@@ -171,7 +171,7 @@ $$
 **未来选基擦除分拣与无条件边缘守恒卡（`tsvf-eraser`）**：调节未来标记基角 $\beta \in [0, \pi/2]$ 与可见度 $V \in [0, 1]$，直接由 $4\times 4$ 矩阵迹算出联合分布 $p(j, \pm)$、条件分布 $p(j \mid \pm)$ 与无条件过去总和 $p(j) = q_j$——未来擦除在符合子系综中显影反相条纹却绝不改动过去边缘；右侧弱值子窗展示 $Z_w = \tan\eta$ 并在 $\eta = \pi/2$（$p_{\mathrm{post}} = 0$）处显式标明“无定义”。
 :::
 
-最后回到本章核心的三元格拉姆相容空间（对照 [@thm-ch29-gram-rigidity-and-pell] 与 [@thm-ch29-reversal-access-and-gram-realizability] 第 4 款）：将过去 $\mathbf{A}_{\mathrm{past}}$ 与未来 $\mathbf{C}_{\mathrm{future}}$ 作首尾置换 $P_{13} G P_{13}^{\mathsf{T}}$，非对称输入（如默认 $x = 0.2, y = 0.6, z = 0.1$）下非对角元 $x, y$ 忠实互换，而特征谱、半正定相容性与三维体积平方 $\det G = 0.614$ 毫厘不爽：
+最后回到本章核心的三元格拉姆相容空间（对照 [@thm-ch29-reversal-access-and-gram-realizability] 第 4 款；下面的置换不变性是手工推导）：将过去 $\mathbf{A}_{\mathrm{past}}$ 与未来 $\mathbf{C}_{\mathrm{future}}$ 作首尾置换 $P_{13} G P_{13}^{\mathsf{T}}$，非对称输入（如默认 $x = 0.2, y = 0.6, z = 0.1$）下非对角元 $x, y$ 忠实互换，而特征谱、半正定相容性与三维体积平方 $\det G = 0.614$ 毫厘不爽：
 
 ::: {.viz src="coherence-handshake-causality" preset="gram-symmetry" height="500"}
 **三时刻格拉姆矩阵首尾置换与行列式不变量卡（`gram-symmetry`）**：对实单位向量 $\mathbf{A}_{\mathrm{past}}, \mathbf{B}_{\mathrm{now}}, \mathbf{C}_{\mathrm{future}}$ 执行首尾置换 $G' = P_{13} G P_{13}^{\mathsf{T}}$——当 $x \neq y$ 时矩阵元 $x$ 与 $y$ 互换（$G' \neq G$，切换到对称点 $x = y = 0.5$ 时 $G' = G$），而半正定性、特征值谱与体积平方 $\det G' = \det G = (\mathbf{A}\cdot(\mathbf{B}\times\mathbf{C}))^2 \ge 0$ 全程守恒。
@@ -218,14 +218,14 @@ $$
 至此，我们可以将传统多米诺骨牌式的布尔因果观与本章建立的正交相干—双端握手因果观汇总为一张清晰的四维对照表：
 
 ::: {.remark #rem-ch29-coherence-causality-comparison title="传统多米诺骨牌因果观与正交相干—双端握手因果观的四维对照"}
-**模型综合与三层依据边界说明（`MODEL` / `LEAN ✓` / `文献结果`）。** 下表将日常经典因果直觉与本节四重机制逐项对比；表中凡涉正交投影、记录捏合、模平方配对、幺模逆转、偏迹盲区、正算子格拉姆分解、双覆叠提升与不动点级数之处均以 [@thm-ch29-coherence-complement-and-pinching]–[@thm-ch29-double-cover-fates-and-dottie] 为形式锚点（`LEAN ✓`），凡涉驻相折射、交易诠释、弱值、延迟擦除与 Deutsch CTC 之处均按 [@rem-ch29-transactional-tsvf-eraser-literature] 归入经典物理文献与手工推导（`文献结果` / `手工推导`），而“逻辑只有相干与去相干、因果即双向边界握手”的哲学总括属本书几何诠释模型（`MODEL`）：
+**模型综合与三层依据边界说明（`MODEL` / `LEAN ✓` / `文献结果`）。** 下表将日常经典因果直觉与本节四重机制逐项对比；表中凡涉正交投影、记录捏合、模平方配对、幺模逆转、偏迹盲区、正算子格拉姆分解、双覆叠提升与不动点级数之处均以 [@thm-ch29-coherence-complement-and-pinching]–[@thm-ch29-double-cover-fates-and-dottie] 为形式锚点（`LEAN ✓`），凡涉驻相折射、交易诠释、弱值、延迟擦除、Deutsch CTC 与格拉姆首尾置换之处均按 [@rem-ch29-transactional-tsvf-eraser-literature] 归入经典物理文献与手工推导（`文献结果` / `手工推导`），双端口相消亦为手工推导，而“逻辑只有相干与去相干、因果即双向边界握手”的哲学总括属本书几何诠释模型（`MODEL`）：
 
 | 对照维度 | 传统多米诺骨牌因果观（经典布尔直觉） | 正交相干与双端握手因果观（本书形式—几何综合） |
 | :--- | :--- | :--- |
-| **1. 逻辑底层状态** | 非此即彼的二值布尔开关：读数为 `0` 被等同于本体“不存在”，读数为 `1` 被等同于绝对静态实体 | 无布尔存亡之分，唯有相干保持与去相干捏合：零读数可源于正交子空间隐匿（$\|\mathbf{B}_\perp\|^2 = 1$）或双端口反相分流（$p_+ = 0, p_- = 1$），经典记录则是幂等捏合信道 $\Pi_P \circ \Pi_P = \Pi_P$ 抹去跨块相干后的块对角不动点（[@thm-ch29-coherence-complement-and-pinching]） |
+| **1. 逻辑底层状态** | 非此即彼的二值布尔开关：读数为 `0` 被等同于本体“不存在”，读数为 `1` 被等同于绝对静态实体 | 无布尔存亡之分，唯有相干保持与去相干捏合：零读数可源于正交子空间隐匿（$\|\mathbf{B}_\perp\|^2 = 1$）或双端口反相分流（$p_+ = 0, p_- = 1$），经典记录则是幂等捏合信道 $\Pi_P \circ \Pi_P = \Pi_P$ 抹去跨块相干后的块对角不动点（[@thm-ch29-coherence-complement-and-pinching]；双端口分流为手工推导） |
 | **2. 因果作用机制** | 单向时间箭头里的机械推撞：过去单方面决定未来，单向跃迁振幅似乎无需未来参与即可独立定格 | 首尾共轭配对的双端玻恩握手：单向交叠 $\langle\phi\mid\psi\rangle$ 携带相对相位，唯有乘上共轭回波 $\langle\psi\mid\phi\rangle$ 才结出规范不变的二次厄米权重 $w(\psi\leftrightarrow\phi) = \lvert\langle\phi\mid\psi\rangle\rvert^2 = \operatorname{Tr}(P_\phi P_\psi)$（[@thm-ch29-born-handshake-and-phase-fairness]） |
-| **3. 未来对过去的干涉** | 被视为颠倒先后次序的“逆时改写历史”怪谈，似乎一旦允许未来参与就会触发超光速传信 | 联合相干态的条件切片与格拉姆边界刚性：局部不可逆仅是偏迹丢失关联扇区的访问缺陷；未来选基在符合子系综中分拣互补条纹 $p(j\mid\pm)$，而克劳斯完备性锁死无条件边缘 $p(j) = q_j$ 绝不逆时传信，首尾置换 $P_{13} G P_{13}^{\mathsf{T}}$ 严格保持 $\det G \ge 0$（[@thm-ch29-reversal-access-and-gram-realizability]、[@rem-ch29-transactional-tsvf-eraser-literature]） |
-| **4. 逻辑悖论消解** | 闭合回路一旦遇上自否翻转 $P \leftrightarrow \neg P$ 即陷入无穷振荡与逻辑崩溃 | 相对相位分流与自洽不动点锁定：双覆叠 $2\pi$ 换叶在相干参考臂比对下使反相悖论端口 $\delta = \pi$ 归零并将概率导入互补端口，混合态翻转门满足 $X(I/2)X^\dagger = I/2$，实投影自应用收敛于唯一正根 $\cos\theta^* = \theta^*$（[@thm-ch29-double-cover-fates-and-dottie]） |
+| **3. 未来对过去的干涉** | 被视为颠倒先后次序的“逆时改写历史”怪谈，似乎一旦允许未来参与就会触发超光速传信 | 联合相干态的条件切片与格拉姆边界刚性：局部不可逆仅是偏迹丢失关联扇区的访问缺陷；未来选基在符合子系综中分拣互补条纹 $p(j\mid\pm)$，而克劳斯完备性锁死无条件边缘 $p(j) = q_j$ 绝不逆时传信，首尾置换 $P_{13} G P_{13}^{\mathsf{T}}$ 严格保持 $\det G \ge 0$（访问缺陷见 [@thm-ch29-reversal-access-and-gram-realizability] 第 2 款；条纹分拣、无信令与首尾置换见 [@rem-ch29-transactional-tsvf-eraser-literature]，属文献结果与手工推导） |
+| **4. 逻辑悖论消解** | 闭合回路一旦遇上自否翻转 $P \leftrightarrow \neg P$ 即陷入无穷振荡与逻辑崩溃 | 相对相位分流与自洽不动点锁定：双覆叠 $2\pi$ 换叶在相干参考臂比对下使反相悖论端口 $\delta = \pi$ 归零并将概率导入互补端口，混合态翻转门满足 $X(I/2)X^\dagger = I/2$，实投影自应用收敛于唯一正根 $\cos\theta^* = \theta^*$（$2\pi$ 换叶与正根唯一见 [@thm-ch29-double-cover-fates-and-dottie]；端口归零为手工推导，$X(I/2)X^\dagger = I/2$ 与迭代收敛为文献结果） |
 :::
 
 请进入下方完整交互实验室，在同一座舞台上自由切换全部六个场景，亲手拨动正交夹角、双束相位、捏合保留度、参考相位、折射波长、未来擦除基角、三元格拉姆二面角与闭环相位，核验每一条绿色形式定理、手工守恒残差与文献边界如何严丝合缝地扣合在一起：

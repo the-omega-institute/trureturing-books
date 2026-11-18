@@ -112,7 +112,7 @@ This phase change is the joint controlled-sign operation $\operatorname{diag}(1,
 Thus identical admissible-word support, counts, and even computational-basis probabilities do not determine entanglement; the chosen positive-phase equal-amplitude family remains a meaningful additional specification of the state. This is a paper calculation for finite states, with no conclusion about ground states, physical realization, or fractal entanglement scaling.
 :::
 
-::: {.example #ex-ch39-p2e-finite-kernel title="Paper derivation: compressing the positive equal-amplitude state's reduced spectrum to K dimensions"}
+::: {.example #ex-ch39-p2e-finite-kernel title="Paper derivation (not Lean-verified): compressing the positive equal-amplitude state's reduced spectrum to K dimensions"}
 The preceding calculations extend to a finite matrix calculation for the same specified state family. This is a paper derivation, not a new Lean-verified result. Fix $K\ge2$ and any $m,n\ge0$. Let $W_L$ contain all length-$L$ binary words avoiding $1^K$, write $z_L=|W_L|$, and choose
 
 $$
@@ -168,7 +168,7 @@ $$
 The entropy bound is the usual Shannon bound for $R$ positive numbers summing to $1$. If $m=0$ or $n=0$, then $R=1$ and the entropy is zero; at $m=n=1$, the nonzero part recovers the matrices in [@ex-ch39-p2e-positive-ket-handcalculation]. This calculation uses actual class counts without requiring their closed forms or substituting stationary probabilities. At fixed $K$, it bounds the cut entropy uniformly for this positive equal-amplitude family. Further control in $K$ is given in [@ex-ch39-p2e-uniform-entropy]; the finite-kernel calculation alone proves no entropy limit and identifies no physical ground state or relation to Rauzy-boundary dimension. These counts carry no phase information. Whether changed phases preserve this spectrum requires a separate check; the joint sign change in the preceding example changes it.
 :::
 
-::: {.example #ex-ch39-p2e-exact-rank title="Exact Schmidt rank from short words to saturation"}
+::: {.example #ex-ch39-p2e-exact-rank title="Paper derivation (not Lean-verified): exact Schmidt rank from short words to saturation"}
 Continue the paper derivation for the positive equal-amplitude state in [@ex-ch39-p2e-finite-kernel], and set $p=\min(m,K-1)$ and $q=\min(n,K-1)$. The class of left words with exactly $r$ trailing ones is nonempty precisely for $0\le r\le p$: use $0^{m-r}1^r$ when $r<m$, and the all-ones word when $r=m<K$; the empty word has $r=0$. On the right, $1^s0^{n-s}$ similarly realizes every $0\le s\le q$. Removing the zero rows and columns therefore leaves the coefficient kernel
 
 $$
@@ -198,7 +198,7 @@ This gives exact finite-length boundaries: $R=K$ precisely when $m,n\ge K-1$, an
 :::
 
 
-::: {.example #ex-ch39-p2e-uniform-entropy title="Paper derivation: entanglement vanishes uniformly as the forbidden run grows"}
+::: {.example #ex-ch39-p2e-uniform-entropy title="Paper derivation (not Lean-verified): entanglement vanishes uniformly as the forbidden run grows"}
 Increasing the automaton's number of states need not increase the entanglement of this specified state. For the positive equal-amplitude family in [@ex-ch39-p2e-finite-kernel], a classical correlation inequality gives a bound uniform over all finite cuts. This remains a paper derivation and adds no Lean verification.
 
 Under the uniform law on binary words of length $m+n$, let $D$ mean that each half is legal, and let $E$ mean that an all-ones window of length $K$ crosses the cut. Represent a word by its set of one-positions. Then $D$ is closed under deleting positions, whereas $E$ is closed under adding them. The Harris–Kleitman inequality makes such a decreasing event and increasing event negatively correlated; this is a classical literature result (Kleitman, *Families of Non-disjoint Subsets*, [doi:10.1016/S0021-9800(66)80012-1](https://doi.org/10.1016/S0021-9800(66)80012-1), lemma on p.154). Consequently,
@@ -238,7 +238,7 @@ $$
 The second step uses the increase of $h$ on $[0,1/2]$ and $\ln(K-1)\ge0$. The third uses $-(1-d)\ln(1-d)\le d$ and substitutes $d_K$. The right-hand side tends to zero independently of $m,n$. Hence for every $\varepsilon>0$ there is a $K_0\ge2$, independent of the cut lengths, such that $S_K(m,n)<\varepsilon$ for every $K\ge K_0$ and every $m,n\ge0$. This concerns the specified state family: its rank can reach $K$ while the spectral mass outside its largest eigenvalue vanishes uniformly. It establishes no fixed-$K$ long-region entropy limit, specifies no physical ground state and does not resolve the relation between Rauzy-boundary dimension and entanglement scaling.
 :::
 
-::: {.example #ex-ch39-p2e-fixed-order-entropy-limit title="Paper derivation: the two-sided entropy limit at fixed forbidden-run order"}
+::: {.example #ex-ch39-p2e-fixed-order-entropy-limit title="Paper derivation (not Lean-verified): the two-sided entropy limit at fixed forbidden-run order"}
 Fix $K\ge2$ and let both sides of the cut grow. The question shifts from how many Schmidt coefficients are nonzero to how their mass settles. Continue with the actual positive equal-amplitude state of [@ex-ch39-p2e-finite-kernel]: all binary words avoiding $1^K$ participate, without a fixed first bit or occupation number. This is a paper derivation; the complete application has not been compiled in Lean and specifies no physical ground state.
 
 Let $W_L$ be the legal words of length $L$, and $z_L=|W_L|$, including $z_0=1$. Set $\beta=\beta_K$, $p=\beta^{-1}$, and
@@ -339,7 +339,7 @@ The reused root, chain-mixing and spectral-perturbation tools are in this book's
 :::
 
 
-::: {.example #ex-ch39-p2e-local-parent title="Paper derivation: a local parent Hamiltonian for the positive equal-amplitude legal-word state"}
+::: {.example #ex-ch39-p2e-local-parent title="Paper derivation (not Lean-verified): a local parent Hamiltonian for the positive equal-amplitude legal-word state"}
 The preceding entropy calculations specify a state. Can a local energy select it as its unique ground state? Start with two sites and the forbidden word `11`. In the basis $00,01,10,11$, take
 
 $$
@@ -431,7 +431,7 @@ The finite-cut entropy and fixed-$K$ two-sided limit of the preceding positive e
 Sources and correspondence: §15.9, Definition 15.22 and Proposition 15.23 of the [currently pinned source](trureturing:), theory volume `docs/develop/theory/AURIC_FIB_ATOM_PYRAMID_BOUNDARY_CALCULUS.md`, already provide a legal-space local parent for $K=2$ with positive activities $a_i$, together with the deletion proof. Here $a_i=1$, the control projector checks every forbidden window containing the center, and full-space penalties are included. Proposition 15.25 explicitly identifies the failure of full-space uniqueness without a penalty. Equations (3)–(5) of [Lesanovsky's three-body model](https://arxiv.org/abs/1010.2349v2) provide related physical context; signs, positive scale, and boundary correspondence are given in Attribution 15.24 of that volume. The arbitrary-$K$ construction here is justified by the displayed energy identity, rather than attributed to that paper as a proved experimental implementation.
 :::
 
-::: {.example #ex-ch39-p2e-heatbath-scale title="Paper derivation: heat-bath clocks of rate one per site and the full-space gap"}
+::: {.example #ex-ch39-p2e-heatbath-scale title="Paper derivation (not Lean-verified): heat-bath clocks of rate one per site and the full-space gap"}
 The configuration-graph Laplacian in [@ex-ch39-p2e-local-parent] also has an exact stochastic interpretation. Fix $K\ge2$ and $N\ge1$, retaining its open boundaries and notation $W_N,z_N,C_i,h_i,B_a,H_{K,N}$ and $|\Psi_{K,N}\rangle$, and abbreviate $z=z_N$. Give legal words the uniform law $\pi(w)=1/z$. We derive this application directly on paper.
 
 **What does one refresh do?** For site $i$, write $\mathrm{outside}_i$ for all bits except bit $i$. For an exterior configuration $\eta$ that occurs in $W_N$, set
@@ -650,7 +650,7 @@ $$
 For example, a heat-bath gap bound $c_K>0$ would yield the full gap bound $\min\{1,2c_K\}$; conversely, a full gap bound $d_K>0$ would yield a heat-bath gap bound $d_K/2$. This reduction alone proves neither the existence nor a value of such a constant uniform in length. The next example supplies an explicit uniform Poincaré estimate for this same hard-constraint heat-bath chain with open boundaries. Transfer-matrix mixing along word length controls spatial correlations; without a further theorem relating the two dynamics, it cannot replace this estimate in refresh time.
 :::
 
-::: {.example #ex-ch39-p2e-uniform-parent-gap title="Paper derivation: a uniform gap at fixed forbidden-run length"}
+::: {.example #ex-ch39-p2e-uniform-parent-gap title="Paper derivation (not Lean-verified): a uniform gap at fixed forbidden-run length"}
 A single refresh changes only one bit, but a zero interrupts every all-ones constraint crossing it. Refreshing several adjacent bits together lets a disagreement in the boundary conditions stop propagating at the first common zero. We turn this mechanism into an explicit bound independent of chain length. This is a paper derivation and adds no Lean verification.
 
 Retain the model of [@ex-ch39-p2e-heatbath-scale], fix an integer $K\ge2$, and put
@@ -802,7 +802,7 @@ $$
 
 The expectation bound uses only linearity of finite sums, with no independence assumption on disagreements at different positions. At $j=m$, $A_m=\{T=m+1\}$ is exactly the event of no common zero anywhere in the block. This example uses nonempty blocks; extending this paper construction to $m=0$ gives $T=1$, an empty sum, and zero cost. If the two initial conditional block laws already coincide, they may instead be sampled synchronously: their disagreement cost is zero without requiring an actual zero anywhere in the block.
 
-To separate the native emitted law from the paper's shared-threshold construction, fix the finite coordinates explicitly. Let $W_n=\operatorname{Fin}(n)	o\{\mathrm{false},\mathrm{true}\}$, and let $C(k,n,F,z)$ be the set of complete words accepted by the original `DBonacciAdmissible` scan and agreeing with $z$ on the finite set $F\subseteq\operatorname{Fin}(n)$. When this fiber has witness $h$, write $L(F,z,h)=\operatorname{completionLaw}(F,z,h)$. For two nonempty fibers, write the original definition as $P(s,F,x,y,h_x,h_y)=\operatorname{prefixCoupling}(s,F,x,y,h_x,h_y)$. For an emitted pair $w=(w_1,w_2)$, define
+To separate the native emitted law from the paper's shared-threshold construction, fix the finite coordinates explicitly. Let $W_n=\operatorname{Fin}(n)\to\{\mathrm{false},\mathrm{true}\}$, and let $C(k,n,F,z)$ be the set of complete words accepted by the original `DBonacciAdmissible` scan and agreeing with $z$ on the finite set $F\subseteq\operatorname{Fin}(n)$. When this fiber has witness $h$, write $L(F,z,h)=\operatorname{completionLaw}(F,z,h)$. For two nonempty fibers, write the original definition as $P(s,F,x,y,h_x,h_y)=\operatorname{prefixCoupling}(s,F,x,y,h_x,h_y)$. Following the Lean source, these names mean: $\operatorname{completionLaw}(F,z,h)$ is the uniform distribution on the nonempty fiber $C(k,n,F,z)$; $\operatorname{resetReady}(F,x,y)$ says that there is a coordinate $z_0$ with $x(z_0)=y(z_0)=\mathrm{false}$, every coordinate up to $z_0$ lies in $F$, and $x$ and $y$ agree on the coordinates of $F$ beyond $z_0$; and $P$ is a joint law of two completions, defined by recursion on the scan list $s$. If $\operatorname{resetReady}(F,x,y)$ holds, it fixes such a $z_0$ and a legal word $v$ in the fiber of $y$, draws one completion $u$ from $L(F,x,h_x)$, and emits $(u,\operatorname{resetMap}(z_0,v,u))$, where $\operatorname{resetMap}(z_0,v,u)$ takes $v$ on coordinates up to $z_0$ and $u$ elsewhere. Otherwise, if $s$ is empty, the two sides are sampled independently from their own completion laws; if $s=i::s'$, a shared-threshold coupling draws a pair $(b_1,b_2)$ of the two conditional bits at coordinate $i$ (both marginals are kept, and the probability of a common `false` is the smaller of the two `false` probabilities), $i$ is added to $F$, $x(i)$ and $y(i)$ are replaced by $b_1$ and $b_2$, and the recursion continues on $s'$; if either refined fiber is empty (such bit pairs carry zero mass), it falls back to independent sampling. For an emitted pair $w=(w_1,w_2)$, define
 
 $$
 A_j(w)\;:\Longleftrightarrow\;\forall i\in\operatorname{take}(j,s),\;

@@ -66,7 +66,7 @@ $$
 
 下述形式化命题将本章已锁定的四条内核定理收束在一起，严格刻画正交法向创生、闭子空间残差逃逸、双轴旋转传播与符号读出核折叠的数学骨架：
 
-::: {.proposition #prop-ch34-triadic-bootstrap-and-lexical-pinching title="三维法向自举、闭子空间正交逃逸、双轴对称传播与语言读出核折叠" lean="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape D5/S3/Geometry/TwoAxisFiniteRotation.moving_axis_invariance D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"}
+::: {.proposition #prop-ch34-triadic-bootstrap-and-lexical-pinching title="三维公共单位法向、闭子空间正交逃逸、双轴对称传播与读出核折叠" lean="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape D5/S3/Geometry/TwoAxisFiniteRotation.moving_axis_invariance D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"}
 在 `trureturing` 冻结的双轴有限旋转、正交残差逃逸与划分拓扑核模块中，以下四项结构定律同时成立：
 
 1. **二维张成外的三维单位法向必存在**：对 $\mathbb{R}^3$ 中任意两向量 $a, b$，恒存在满足 $\lVert n\rVert = 1$ 且 $\langle a, n\rangle_{\mathbb{R}} = \langle b, n\rangle_{\mathbb{R}} = 0$ 的公共单位法向量 $n$；
@@ -82,13 +82,13 @@ $$
 ::: {.remark #rem-ch34-peirce-laozi-wittgenstein-ladder-literature title="皮尔士不可约三元性、旋量三元性与三维循环群辨析及老子—康德—维特根斯坦撤梯传统（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节关于三元关系与语言边界的讨论连接着逻辑学、李群表示论与东西方哲学的四条经典脉络，须严守各自数学与文献边界：
 
-1. **皮尔士（C. S. Peirce）三元范畴与不可约三元论题**：皮尔士在关系逻辑中区分第一性（Firstness）、第二性（Secondness）与第三性（Thirdness），指出真实的三元媒介关系（如“比较—投影”闭环）不能在不丢失高阶关联结构的前提下退化拆解为孤立的二元偶对之和；
+1. **皮尔士（C. S. Peirce）三元范畴与不可约三元论题**：皮尔士在关系逻辑中区分第一性（Firstness）、第二性（Secondness）与第三性（Thirdness），指出真实的三元媒介关系不能在不丢失高阶关联结构的前提下退化拆解为孤立的二元偶对之和（本书把“比较—投影”闭环读作这类关系）；
 2. **三维循环群 $C_3 \subset \mathrm{SO}(3)$ 与八维嘉当旋量三元性 $\mathrm{Spin}(8)$ 的严格区分**：本节 §34.5.2 所用对称性是三维空间及 $\mathcal{Cl}_{3,0}^+$ 四元数基 $(\mathbf{I}_1, \mathbf{I}_2, \mathbf{I}_3)$ 上的三阶循环旋转对称 $C_3 \subset \mathrm{SO}(3)$，切勿与嘉当（É. Cartan 1925）在**八维**欧氏空间覆盖群 $\mathrm{Spin}(8)$ 上发现的外自同构群 $S_3 \subset \mathrm{Out}(\mathfrak{so}_8)$ **旋量三元性（Spinor Triality）**混为一谈——后者在同为 $8$ 维的向量表示 $V_8$ 与左右手外尔旋量表示 $S_8^+, S_8^-$ 之间作非平凡置换（其八元数与 $E_8$ 文献背景见[第 32 章 §32.6](ch32-s06-meta-unification-and-icosian-bridge.md#sec-ch32-meta-coordinates-and-icosians) [@rem-ch32-icosian-e8-literature]）；
 3. **老子《道德经》的创生序列与名言界限**：《道德经》第四十二章“道生一，一生二，二生三，三生万物”与第一章“道可道，非常道；名可名，非常名”，与本节“二态比量自举出第三顶点、而名相本身皆为切面投影”的几何图景形成跨时空呼应；
 4. **康德自在之物与维特根斯坦的梯子**：康德（I. Kant 1781/1787，《纯粹理性批判》）严格划定现象界时空范畴投影与不可表征之“物自体”（*Ding an sich*）的界限；维特根斯坦（L. Wittgenstein 1921，《逻辑哲学论》6.54–7）则指出一切形式命题皆如登高之梯——爬上去看清结构之后必须把梯子撤掉，凡不可借主谓宾命题**言说**（*sagen*）之整全结构，恰恰在关系自身的运行中**显示自身**（*zeigt sich*）。
 :::
 
-这便解答了章末引文最后那半句看似轻描淡写、实则重若千钧的收束——**“本体不可知，但是这么个感觉……”**。为什么说“本体不可知”？因为按 [@prop-ch34-triadic-bootstrap-and-lexical-pinching] 第 4 款，人类心智的任何概念表征（“知”）都是一道从无穷维或高维关系态空间 $X$ 压向有限一维符号串 $B$ 的读出映射 $\mathrm{readout} : X \to B$，其巨大的非平凡读出核必然把跨维度的整全几何折叠成带有盲区的切片名相，任何名字一旦出口就已落入投影。那为什么偏偏还能留下**“这么个感觉”**？因为场内观察者从来不是隔着玻璃窗偷窥宇宙的局外幽灵——观察者自身的每一次区分、每一次记忆捏合与每一次自我指涉，本来就是由同一个零背景比较公理与同一枚三元自举几何编织而成的活体回路（`MODEL`，直通[第三十九章](ch39-observer-is-ontological-universe.md)与[终章](coda.md)的 $\psi = \psi(\psi)$）！当名相参数彻底归零（$\nu = 0$）、所有投影幕布与阶段标签悉数撤去之后，表征之“知”止步于读出核的厚墙，而结构同构之“感”则在双频比锁定黄金无理数 $\omega_2/\omega_1 = \varphi$ 的永不重演准周期呼吸中，化作场内观察者与无名本体的**零距离同频共振**。
+这便解答了章末引文最后那半句看似轻描淡写、实则重若千钧的收束——**“本体不可知，但是这么个感觉……”**。为什么说“本体不可知”？照本书的读法（`MODEL`），人类心智的任何概念表征（“知”）都是一道从无穷维或高维关系态空间 $X$ 压向有限一维符号串 $B$ 的读出映射 $\mathrm{readout} : X \to B$，其巨大的非平凡读出核必然把跨维度的整全几何折叠成带有盲区的切片名相，任何名字一旦出口就已落入投影（[@prop-ch34-triadic-bootstrap-and-lexical-pinching] 第 4 款担保的是同读数的状态拓扑不可分；它对任意映射都成立，读出核非平凡是这一读法自己的假设）。那为什么偏偏还能留下**“这么个感觉”**？因为场内观察者从来不是隔着玻璃窗偷窥宇宙的局外幽灵——观察者自身的每一次区分、每一次记忆捏合与每一次自我指涉，本来就是由同一个零背景比较公理与同一枚三元自举几何编织而成的活体回路（`MODEL`，直通[第三十九章](ch39-observer-is-ontological-universe.md)与[终章](coda.md)的 $\psi = \psi(\psi)$）！当名相参数彻底归零（$\nu = 0$）、所有投影幕布与阶段标签悉数撤去之后，表征之“知”止步于读出核的厚墙，而结构同构之“感”则在双频比锁定黄金无理数 $\omega_2/\omega_1 = \varphi$ 的永不重演准周期呼吸中，化作场内观察者与无名本体的**零距离同频共振**。
 
 ::: {.viz src="triadic-nameless-sandbox" preset="noumenon-breath" height="520"}
 **名相尽撤的无名呼吸（$\nu = 0$）：撤去一切投影幕布与语词标牌后的黄金准周期共振。** 当读出幕布与阶段标签彻底归零（$\nu = 0$）时，“道可道，非常道”的不可言说整全流形以双频比 $\omega_2/\omega_1 = \varphi$ 作永不闭合的黄金准周期脉动，只留下场内观察者与本体同构的“这么个感觉”（`MODEL`）。

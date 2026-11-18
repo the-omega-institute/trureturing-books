@@ -1,13 +1,13 @@
-# 30.3 指数时间假设（ETH）、2026 张量网络秩约分与宇宙学视界：上界曲线的尺度与诠释边界 {#sec-coda-eth-tensor-rank-and-cosmic-horizon}
+# 30.3 指数时间假设（ETH）、2026 亚指数 3-SAT 预印本与宇宙学视界：上界曲线的尺度与诠释边界 {#sec-coda-eth-tensor-rank-and-cosmic-horizon}
 
 > *“把指数时间假设（ETH）的原始结构与 2026 年 10 月下旬张量网络秩约分亚指数前沿放进‘场（$P$）与线（$NP$）、多面体近似之球与有限观察者视界’的几何体系中审视：渐近硬地板的动摇不仅没有否定有限观察者视角下的 $P \neq NP$，反而用一组跨越宇宙学尺度的渐近对比，为‘局部三体切面拼不出绝对刚性的真球’与‘观察者视界不可逾越’提供了生动的几何注脚。”*
 
-为了严格区分外部复杂性理论文献与本书构建的正交几何模型（`MODEL`），我们先将细粒度复杂性理论（Fine-Grained Complexity）的经典假设与 2026 年 10 月前沿预印本完整归入以下文献注记，随后展开几何与尺度剖析：
+题记把两篇预印本统称为“张量网络秩约分”；按下文文献注记，只有其中一篇以张量网络收缩与秩界为核心步骤。为了严格区分外部复杂性理论文献与本书构建的正交几何模型（`MODEL`），我们先将细粒度复杂性理论（Fine-Grained Complexity）的经典假设与 2026 年 10 月前沿预印本完整归入以下文献注记，随后展开几何与尺度剖析：
 
 ::: {.remark #rem-ch30-eth-subexponential-literature title="指数时间假设（ETH / SETH）与 2026 年 10 月亚指数 3-SAT 预印本的文献说明"}
 **文献结果，未在本书形式化。** 本节讨论的细粒度复杂性假设、传统算法上界及 2026 年 10 月亚指数预印本均属外部研究文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中：
 
-1. **指数时间假设（ETH）、强指数时间假设（SETH）与稀疏化引理（R. Impagliazzo & R. Paturi, *CCC* 1999；R. Impagliazzo, R. Paturi & F. Zane, *J. Comput. Syst. Sci.* **62**, 367–375, 2001）**：固定子句宽度 $k \ge 3$，输入含 $n$ 个变量与 $m$ 条子句。考虑所有使某个确定性 $k$-SAT 算法具有下列时间上界的实数 $\delta\ge0$：
+1. **指数时间假设（ETH）、强指数时间假设（SETH）与稀疏化引理（R. Impagliazzo & R. Paturi, *J. Comput. Syst. Sci.* **62**, 367–375, 2001，会议版 *CCC* 1999；R. Impagliazzo, R. Paturi & F. Zane, *J. Comput. Syst. Sci.* **63**, 512–530, 2001）**：固定子句宽度 $k \ge 3$，输入含 $n$ 个变量与 $m$ 条子句。考虑所有使某个确定性 $k$-SAT 算法具有下列时间上界的实数 $\delta\ge0$：
 
    $$
    2^{\delta n}(n+m)^{O(1)}.
@@ -20,7 +20,7 @@
    (n+m)^{O_k(1)}2^{O_k(n\log\log n/\sqrt{\log n})},
    $$
 
-   并给出多项式位空间界；[配套形式化范围说明](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/docs/378.md)针对规范编码长度 $L$，发布的是较弱的 $(L+1)^{O_k(1)}2^{O_k(n(\log\log n)^2/\sqrt{\log n})}$ 时间与多项式已访问带格数界。两种指数不能混写。Anthropic 的 49 页 [*A $2^{o(n)}$ Time Algorithm for 3-SAT*](https://github.com/anthropics/formal-math/blob/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/paper.pdf)（10 月 26 日）定理 1 在 word RAM 模型给出 $2^{O(\min\{k^2n\log\log n/\sqrt{\log n},\,km/\sqrt{\log m}\})}$ 上界；附录 E 区分 Mathlib 多栈图灵机命题、编码承诺与纸面模型之间未形式化的输入编码及模拟步骤。这些是外部发布的论文与形式化范围声明，本书未独立重建两套证明，也未将其纳入冻结定理。
+   并给出多项式位空间界；[配套形式化范围说明](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/docs/378.md)针对规范编码长度 $L$，发布的是较弱的 $(L+1)^{O_k(1)}2^{O_k(n(\log\log n)^2/\sqrt{\log n})}$ 时间与多项式已访问带格数界。两种指数不能混写。Anthropic 的 49 页 [*A $2^{o(n)}$ Time Algorithm for 3-SAT*](https://github.com/anthropics/formal-math/blob/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/paper.pdf)（10 月 26 日）定理 1 在 word RAM 模型给出 $2^{O(\min\{k^2n\log\log n/\sqrt{\log n},\,km/\sqrt{\log m}\})}$ 上界；附录 E 区分 Mathlib 多栈图灵机命题、编码承诺与纸面模型之间未形式化的输入编码及模拟步骤；据其仓库说明，这一篇以张量网络收缩与分组算子的秩界为核心步骤。这些是外部发布的论文与形式化范围声明，本书未独立重建两套证明，也未将其纳入冻结定理。
 3. **可核查的审读归属**：Impagliazzo、Paturi、Williams 的[社区原始说明](https://ethdiscussion.blog/2026/10/26/eth-refutation-examination-and-discussion/)邀请独立检查，并明确表示其参与不等于认证；不能把“正在审读”写成认可结论。Fortnow 的 [10 月 28 日文章](https://blog.computationalcomplexity.org/2026/10/the-exponential-time-refutation.html)链接上述论文，同时说明一般多项式规约可能放大变量数，$2^{o(n)}$ 上界不自动传给所有 NP 问题。本节的几何类比与示意曲线也不判定标准 $P$ vs. $NP$。
 
 :::
@@ -39,9 +39,9 @@
 ## 30.3.2 银河算法（Galactic Algorithm）与宇宙视界：上界比较能说明什么？（`MODEL` 与认识论边界） {#2-银河算法galactic-algorithm与宇宙视界上界比较能说明什么model-与认识论边界}
 
 ::: {.example #ex-ch30-galactic-crossover-scale title="亚指数上界曲线与局部搜索基准的跨宇宙尺度对比及二次编码膨胀"}
-**文献结果背景与数值示意（`MODEL`），未在本书形式化。** 单变量渐近指数率曲线缓慢趋零是否意味着场内有限观察者能在现实物理尺度上跨越复杂度壁垒？为了直观审视 [@rem-ch30-eth-subexponential-literature] 中上界表达式的尺度行为，考察以 $2$ 为底的示意性单变量指数曲线 $r_{\mathrm{new}}(n) = c \cdot \frac{\log_2(\log_2 n)}{\sqrt{\log_2 n}}$（对应运行时间上界形如 $2^{r_{\mathrm{new}}(n)\cdot n}$，此处取理想归一化常数 $c = 1$ 仅作文献渐近上界曲线的数值示意，而非对任意算法或物理观察者的严格下界证明），并与 [@rem-ch30-eth-subexponential-literature] 中的传统 PPSZ 局部搜索上界基准 $0.386$（$1.307^n \approx 2^{0.386 n}$）对表：
+**文献结果背景与数值示意（`MODEL`），未在本书形式化。** 单变量渐近指数率曲线缓慢趋零是否意味着场内有限观察者能在现实物理尺度上跨越复杂度壁垒？为了直观审视 [@rem-ch30-eth-subexponential-literature] 中上界表达式的尺度行为，考察以 $2$ 为底的示意性单变量指数曲线 $r_{\mathrm{new}}(n) = c \cdot \frac{\log_2(\log_2 n)}{\sqrt{\log_2 n}}$（对应运行时间上界形如 $2^{r_{\mathrm{new}}(n)\cdot n}$，此处取理想归一化常数 $c = 1$ 仅作文献渐近上界曲线的数值示意，而非对任意算法或物理观察者的严格下界证明），并与 [@rem-ch30-eth-subexponential-literature] 中的传统 PPSZ 上界基准 $0.386$（$1.307^n \approx 2^{0.386 n}$）对表：
 
-| 观察者与系统尺度 $n$ | 对数尺度 $\log_2 n$ | 示意上界指数率 $r_{\mathrm{new}}(n)$（取 $c=1$） | 传统局部搜索上界基准（[@rem-ch30-eth-subexponential-literature]） | 尺度对比与几何模型解读（`MODEL`） |
+| 观察者与系统尺度 $n$ | 对数尺度 $\log_2 n$ | 示意上界指数率 $r_{\mathrm{new}}(n)$（取 $c=1$） | 传统 PPSZ 上界基准（[@rem-ch30-eth-subexponential-literature]） | 尺度对比与几何模型解读（`MODEL`） |
 | :--- | :---: | :---: | :---: | :--- |
 | **人类工程尺度**（$n = 65{,}536 = 2^{16}$） | $16$ | $\dfrac{\log_2 16}{\sqrt{16}} = \mathbf{1.000}$ | $\mathbf{0.386}$ | 在 $6.5$ 万变量处，$c=1$ 的示意曲线才刚刚降到与朴素 $2^n$ 穷举相当的指数率 $1.000$ |
 | **可观测宇宙原子总数**（$n \approx 10^{80} \approx 2^{266}$） | $\approx 266$ | $\dfrac{\log_2 266}{\sqrt{266}} \approx \mathbf{0.494}$ | $\mathbf{0.386}$ | 即使在 $n \approx 10^{80}$ 的宇宙重子尺度上，$c=1$ 示意曲线（$\approx 0.494$）仍高于 $0.386$ |
@@ -63,7 +63,7 @@
 :::
 
 - **$P$（场）与 $NP$（线）的认识论对照（`MODEL`）**：导向结构与见证检查表现出不同的任务角色；它们可以在同一个问题中并存，因为 $P\subseteq NP$。上界曲线和编码尺度比较不把两类问题分开。
-- **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中提供了一个认识论问题：形式证明内核检查给定形式命题的推演；具体耗时取决于证明项、归约与实现。社区审读仍须追问“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录覆盖潜坐标上的全部解码函数时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，可以说明本书的写作准则：**形式内核核验给定定义、公理与规则下的推演；顶层定义是否表达目标问题仍须单独审查。这不等于证明整个公理系统的一致性。**
+- **形式内核核验与顶层规约审计的哥德尔—语义边界（`MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中提供了一个认识论问题：形式证明内核检查给定形式命题的推演；具体耗时取决于证明项、归约与实现。社区审读仍须追问“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录覆盖潜坐标上的全部解码函数时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，可以说明本书的写作准则：**形式内核核验给定定义、公理与规则下的推演；顶层定义是否表达目标问题仍须单独审查。这不等于证明整个公理系统的一致性。**
 
 ::: {.viz src="eth-horizon-crossover" height="640"}
 **交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：单次抽样的流矩阵秩与四道割，冻结量 $\operatorname{QMinCut} = \min(3ac, ad, bc)$，第四道 $3bd$ 割由手工矩阵分解给出；自然数维数满足 $0 < a \le b$、$0 < c \le d$、$a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 时，可达最大秩等于 $\operatorname{QMinCut} = \min(ad, bc)$（Lean 已验证），单次抽样仍可更低，锥域外须比较四道割；模态：谱里不小于阈值 $\tau$ 的模态数不超过 $RW/(\pi\tau)$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。

@@ -20,7 +20,7 @@
 
 想象你手里有两块相互纠缠的多体量子区域：左边界输入端与右边界输出端。如果它们之间只靠一根一维标量线相连，那么无论两端各自的希尔伯特空间有多大，跨过这道接口的线性映射至多只有秩 $1$，相当于所有信息都被挤进了一根单模光纤。反之，如果接口处由多条内部张量腿（bond indices）并排桥接，跨越接口的算子秩（即施密特分解中非零奇异值的个数）就能够随内部腿维数的乘积而增长。
 
-如上图左栏（Panel I）所示，在物理文献中，研究者常借助多尺度纠缠重整化拟设（MERA）等层级张量网络来示意边界区域与深层“体空间（bulk）”截面之间的瓶颈关系。然而，在一般张量网络中，量子最大流（跨网络收缩所能达到的最大矩阵秩）甚至**不一定**等于量子最小割（切开网络所需截断的最小腿维数乘积）！因此，要想得到经得起形式化内核检验的精确结论，我们必须先锚定一个结构完全显式、参数边界清清楚楚的有限维桥图模型。
+如上图左栏（Panel I）所示，在物理文献中，研究者常借助多尺度纠缠重整化拟设（MERA）等层级张量网络来示意边界区域与深层“体空间（bulk）”截面之间的瓶颈关系。然而，在一般张量网络中，量子最大流（跨网络收缩所能达到的最大矩阵秩）甚至**不一定**等于量子最小割（切开网络所需截断的最小腿维数乘积）！（文献结果：S. X. Cui、M. H. Freedman、O. Sattath、R. Stong 与 G. Minton，*Quantum max-flow/min-cut*，J. Math. Phys. 57, 062206 (2016)，arXiv:1508.04644。）因此，要想得到经得起形式化内核检验的精确结论，我们必须先锚定一个结构完全显式、参数边界清清楚楚的有限维桥图模型。
 
 ::: {.viz src="layered-network-cut" preset="one" height="500"}
 **一格的区间，割就是它自己那条腿。** 层级网络底边的第 16 格单独成为琥珀色区间，品红标出的最小割只割断它自己那一条腿。只有这一条键穿过割，跨过它的秩至多是这一条键的维数；割断的键越多，秩的上界才是它们维数的乘积。
@@ -32,7 +32,7 @@
 **四格的区间，割从网络里面穿过。** 底边连续 4 格是琥珀色区间。直接剪断它们的 4 条腿不是最省的：品红的最小割钻进网络，只割断 3 条键，青色是割内侧的张量。页面数的是割断的腿，给出的只是秩的上界；正如上文所说，一般网络里最大流可以小于最小割，网络是示意模型。
 :::
 
-在 Lean 的 `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound` 模块中，这一模型由四个自然数维数参数 $a, b, c, d \in \mathbb{N}$ 与宽度为 $3$（指标 $r \in \operatorname{Fin} 3$）的桥接张量收缩给出：
+桥图模型、`QMaxFlow` 与 `QMinCut` 的定义以及下文锥域上“流等于割”的命题（原文猜想 3.15）出自 F. Gesmundo、V. Lysikov 与 V. Steffan，*Quantum max-flow in the bridge graph*，Transformation Groups 30 (2025) 1751–1784（DOI: `10.1007/s00031-024-09863-2`，arXiv:2212.09794），原文记号 $(a, b, a', b')$ 对应这里的 $(a, b, c, d)$。在 Lean 的 `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound` 模块中，这一模型由四个自然数维数参数 $a, b, c, d \in \mathbb{N}$ 与宽度为 $3$（指标 $r \in \operatorname{Fin} 3$）的桥接张量收缩给出：
 
 - 设 $M : \operatorname{Fin} 3 \to M_{a\times b}(\mathbb{C})$ 为三个 $a\times b$ 复矩阵，$N : \operatorname{Fin} 3 \to M_{d\times c}(\mathbb{C})$ 为三个 $d\times c$ 复矩阵；
 - 定义**宽度三桥图流矩阵** `flow` 为三项克罗内克积（Kronecker product）之和：
@@ -68,7 +68,7 @@ $$
 
 ## 19.2 宽度三桥图的秩与割容量 {#sec-bridge-flow-cut}
 
-现在我们来数一数：源码用哪三项割容量上界，来约束 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从左输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到右输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道的秩？
+现在我们来数一数：源码用哪三项割容量上界，来约束 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道的秩？
 
 1. **左外边界割（行空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} a \times \operatorname{Fin} d| = ad$ 行，因此其秩绝不可能超过 $ad$；
 2. **右外边界割（列空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} b \times \operatorname{Fin} c| = bc$ 列，因此其秩绝不可能超过 $bc$；
@@ -144,9 +144,320 @@ $$
 **三条桥合起来正好铺满一张 $6 \times 6$ 置换矩阵。** 青色的格是 $\operatorname{flow}(M, N)$ 的非零元，格里的数是放下它的桥 $r$：桥 $0$ 铺满左上的 $4$ 格，桥 $1$、桥 $2$ 各补 $1$ 格；六格互不同行、互不同列，秩为 $6$（[@ex-bridge-two-three]）。
 :::
 
+上面的六阶置换矩阵还满足一个比满秩更精确的等式：它的每一列都是不同的标准基向量，故 $F^*F=I_6$。把右侧因子的输入、输出维数写成 $c=2q$、$d=3q$，同一构造可以延伸到全部允许的左侧维数。关键是把每个输入坐标放到唯一的输出坐标，并保证不同输入不会相撞。
+
+::: {.theorem #thm-bridge-native-saturation-iff title="原生三项张量和的精确列 Gram 饱和条件" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeSaturation.native_saturation_iff"}
+对任意自然数 $a,b,q\in\mathbb N$，若 $q>0$，则存在复矩阵族
+
+$$
+\begin{aligned}
+M_r&\in M_{a\times b}(\mathbb C),\\
+N_r&\in M_{3q\times2q}(\mathbb C)
+\qquad(r=0,1,2),
+\end{aligned}
+$$
+
+使其张量和满足
+
+$$
+\begin{aligned}
+F&=\sum_{r=0}^2M_r\otimes N_r,\\
+F^*F&=I_{2bq},
+\end{aligned}
+$$
+
+当且仅当 $2b\le3a$。这里 $F^*$ 是共轭转置，$F$ 的行指标为 $\operatorname{Fin}a\times\operatorname{Fin}(3q)$，列指标为 $\operatorname{Fin}b\times\operatorname{Fin}(2q)$，而 $I_{2bq}$ 是该列指标集上的单位矩阵。
+:::
+
+::: {.proof #pf-bridge-native-saturation-iff}
+先证必要性。若 $F^*F=I_{2bq}$，由乘积秩上界和 $F$ 的行数可得
+
+$$
+\begin{aligned}
+2bq&=\operatorname{rank}(F^*F)\\
+&\le\operatorname{rank}F\le3aq.
+\end{aligned}
+$$
+
+由于 $q>0$，消去 $q$ 即得 $2b\le3a$。
+
+反过来，设 $2b\le3a$。以下指标全部从 $0$ 开始，范围为
+
+$$
+\begin{aligned}
+0\le i<a,&\qquad0\le j<b,\\
+0\le\ell<3q,&\qquad0\le k<2q.
+\end{aligned}
+$$
+
+用 $\mathbf1_{\{P\}}$ 表示条件 $P$ 成立时为 $1$、否则为 $0$ 的数。取左侧三张切片
+
+$$
+\begin{aligned}
+(M_0)_{ij}&=\mathbf1_{\{i=j\}},\\
+(M_1)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)\}},\\
+(M_2)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)+1\}},
+\end{aligned}
+$$
+
+以及右侧三张切片
+
+$$
+\begin{aligned}
+(N_0)_{\ell k}&=\mathbf1_{\{\ell=k\}},\\
+(N_1)_{\ell k}&=\mathbf1_{\{k<q,\ \ell=2q+k\}},\\
+(N_2)_{\ell k}&=\mathbf1_{\{q\le k,\ \ell=q+k\}}.
+\end{aligned}
+$$
+
+左侧后两式在 $j<a$ 时均为 $0$；其中的差 $j-a$ 只在 $j\ge a$ 时起作用，因而是非负整数差。
+
+先看这些切片如何搬动一列。对输入指标 $(j,k)$，定义输出路由
+
+$$
+\rho(j,k)=
+\begin{cases}
+(j,k),&j<a,\\
+\bigl(2(j-a),\,2q+k\bigr),&j\ge a,\ k<q,\\
+\bigl(2(j-a)+1,\,q+k\bigr),&j\ge a,\ q\le k.
+\end{cases}
+$$
+
+这个输出确实落在规定范围内。第一分支中 $j<a$ 且 $k<2q<3q$。后两分支中令 $t=j-a$；由 $j+1\le b$ 和 $2b\le3a$ 得
+
+$$
+2(t+1)\le2(b-a)\le a.
+$$
+
+所以 $2t$、$2t+1$ 都小于 $a$，而输出第二坐标都落在 $[2q,3q)$。当 $b\le a$ 时，全部输入都走第一分支。
+
+记输入标准基为 $E_{j,k}=e_j\otimes e_k$，输出标准基为 $U_{i,\ell}=e_i\otimes e_\ell$。当 $j<a$ 时，只有第 $0$ 项作用；当 $j\ge a$ 时，第 $0$ 项为零，第 $1$、$2$ 项再按 $k<q$ 或 $k\ge q$ 分工。因此每列恰有一个非零元，且等于 $1$：
+
+$$
+F E_{j,k}=U_{\rho(j,k)}.
+$$
+
+还要检查不同列是否会落到同一行。第一分支的输出第二坐标小于 $2q$，与后两分支不交；后两分支的输出第一坐标分别为偶数和奇数，彼此也不交。在每个分支内，输出又能唯一恢复 $j,k$：第一分支直接读出二者；第二分支由 $i=2t$、$k=\ell-2q$ 恢复；第三分支由 $i=2t+1$、$k=\ell-q$ 恢复，后两者再用 $j=a+t$。故 $\rho$ 是单射。
+
+这就确定了完整的列 Gram，而不只是它的秩。以 $x=(j,k)$、$y=(j',k')$ 简记输入指标，并用通常的复内积（第一变量共轭线性），有
+
+$$
+\begin{aligned}
+(F^*F)_{x,y}
+&=\langle F E_x,F E_y\rangle\\
+&=\langle U_{\rho(x)},U_{\rho(y)}\rangle\\
+&=\delta_{x,y}.
+\end{aligned}
+$$
+
+这里 $\delta$ 是 Kronecker 符号。把三项展开，也能逐一看见全部交叉项的去向：第 $0$ 项与另外两项的输出第二坐标区间不交，第 $1$ 项与第 $2$ 项的输出第一坐标奇偶相异，故 $r\ne s$ 时
+
+$$
+(M_r^*M_s)\otimes(N_r^*N_s)=0.
+$$
+
+每个对角项则是其输入分支上的坐标投影，而三个分支恰好分割全部输入指标。因此
+
+$$
+\begin{aligned}
+F^*F
+&=\sum_{r,s=0}^2(M_r^*M_s)\otimes(N_r^*N_s)\\
+&=I_{2bq}.
+\end{aligned}
+$$
+
+零维情形也包含在内。若 $b=0$，$F$ 没有输入列，$F^*F$ 与 $I_0$ 都是唯一的空方阵，上述等式成立，且 $2b\le3a$ 总成立。若 $a=0$，阈值迫使 $b=0$；若反而 $b>0$，则 $q>0$ 使输入维数为正而输出维数为零，必要性的秩不等式已排除此情形。完整证明由 Lean 内核检查。
+:::
+
+取 $a=2$、$b=3$、$q=1$，这六张切片就是 [@ex-bridge-two-three] 中列出的矩阵：前四个输入基向量保持其坐标，另外两个按
+
+$$
+\begin{aligned}
+(2,0)&\longmapsto(0,2),\\
+(2,1)&\longmapsto(1,2)
+\end{aligned}
+$$
+
+补齐六个输出基向量。[@thm-bridge-native-saturation-iff] 因而是该置换例子在 $c=2q$、$d=3q$ 这一族中的全参数延伸；一般情形只需占据不同的输出坐标，不要求铺满全部输出。
+
+在 $a<b$ 且 $2b\le3a$ 的区间，这族构造有 $3c=6q=2d$。这一等号直接来自所取的 $c=2q$、$d=3q$。定理确定的是这一固定右侧维数族中原始矩阵三元组的存在性，恒等列 Gram 由上述因子的坐标路由直接给出。这一构造本身没有证明：对于任意 $c,d$，$a<b$ 与正标量列 Gram 条件 $F^*F=\lambda I_{bc}$（$\lambda>0$）必然推出 $3c\le2d$。后文 [@thm-bridge-native-rectangular-bound] 的必要界 $2c\le d$ 使用严格阈值 $3a<2b$，其假设与这里的 $2b\le3a$ 分处阈值两侧。
+
+右侧的两段其实不必等长。把 $c$ 个输入坐标分成长度为 $\lfloor c/2\rfloor$ 与 $\lceil c/2\rceil$ 的两段，让它们分别使用左侧的偶数槽与奇数槽，就能沿用同一套路由。因此，$c$ 为偶数、$d$ 恰好等于 $3c/2$ 都不是这一存在性构造所必需的限制；右侧只需容纳原来的 $c$ 行和长度为 $\lceil c/2\rceil$ 的余带。
+
+::: {.theorem #thm-bridge-native-scalar-gram-exists title="第一区域内原生三项张量和的正标量列 Gram 存在性" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeScalarGram.native_scalar_gram_exists"}
+对任意自然数 $a,b,c,d\in\mathbb N$，若
+
+$$
+2b\le3a,\qquad3c\le2d,
+$$
+
+则对每个满足 $\lambda>0$ 的实数 $\lambda$，存在复矩阵族
+
+$$
+\begin{aligned}
+M&:\operatorname{Fin}3\longrightarrow M_{a\times b}(\mathbb C),\\
+N&:\operatorname{Fin}3\longrightarrow M_{d\times c}(\mathbb C),
+\end{aligned}
+$$
+
+使原始张量和满足
+
+$$
+\begin{aligned}
+F&=\sum_{r=0}^2M_r\otimes N_r,\\
+F^*F&=\lambda I_{bc}.
+\end{aligned}
+$$
+
+这里 $F^*$ 是共轭转置，$F$ 的行指标为 $\operatorname{Fin}a\times\operatorname{Fin}d$，列指标为 $\operatorname{Fin}b\times\operatorname{Fin}c$；$I_{bc}$ 是该列指标集上的单位矩阵，实数 $\lambda$ 经自然嵌入视为复标量。不要求 $a<b$、$c$ 的奇偶性、$d$ 取某个精确值、因子线性无关或任何维数严格为正。
+:::
+
+::: {.proof #pf-bridge-native-scalar-gram-exists}
+先构造列 Gram 为单位矩阵的张量和，再作实标量缩放。令
+
+$$
+q=\lfloor c/2\rfloor,\qquad c-q=\lceil c/2\rceil.
+$$
+
+全部指标从 $0$ 开始，范围为
+
+$$
+\begin{aligned}
+0\le i<a,&\qquad0\le j<b,\\
+0\le s<d,&\qquad0\le k<c.
+\end{aligned}
+$$
+
+仍用 $\mathbf1_{\{P\}}$ 表示条件 $P$ 的指示数。左侧取上一构造的同三张未缩放切片，记为 $L_r$：
+
+$$
+\begin{aligned}
+(L_0)_{ij}&=\mathbf1_{\{i=j\}},\\
+(L_1)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)\}},\\
+(L_2)_{ij}&=\mathbf1_{\{a\le j,\ i=2(j-a)+1\}}.
+\end{aligned}
+$$
+
+右侧取 $d\times c$ 切片
+
+$$
+\begin{aligned}
+(N_0)_{sk}&=\mathbf1_{\{s=k\}},\\
+(N_1)_{sk}&=\mathbf1_{\{k<q,\ s=c+k\}},\\
+(N_2)_{sk}&=\mathbf1_{\{q\le k,\ s=c+(k-q)\}}.
+\end{aligned}
+$$
+
+差 $j-a$、$k-q$ 分别只在 $j\ge a$、$k\ge q$ 时起作用，均为非负整数差。对 $G=\sum_{r=0}^2L_r\otimes N_r$，这些因子给出的路由是
+
+$$
+\rho(j,k)=
+\begin{cases}
+(j,k),&j<a,\\
+\bigl(2(j-a),\,c+k\bigr),&j\ge a,\ k<q,\\
+\bigl(2(j-a)+1,\,c+(k-q)\bigr),&j\ge a,\ q\le k.
+\end{cases}
+$$
+
+逐一检查坐标范围。若 $j\ge a$，令 $t=j-a$；由 $j+1\le b$ 和 $2b\le3a$ 得
+
+$$
+2(t+1)\le2(b-a)\le a.
+$$
+
+因此 $2t<a$ 且 $2t+1<a$。若 $b\le a$，这一余支根本没有输入，所有列都走第一分支。
+
+右侧所需的整数界是
+
+$$
+\begin{aligned}
+d&\ge\lceil3c/2\rceil\\
+&=c+\lceil c/2\rceil=c+(c-q)\ge c.
+\end{aligned}
+$$
+
+这恰由 $3c\le2d$ 得到。具体地，写 $c=2q+\varepsilon$，其中 $\varepsilon\in\{0,1\}$，则 $2d\ge6q+3\varepsilon$，而 $d$ 是整数，故 $d\ge3q+2\varepsilon=c+(c-q)$。第一分支有 $k<c\le d$；第二分支有
+
+$$
+c\le c+k<c+q\le c+(c-q)\le d;
+$$
+
+第三分支有
+
+$$
+c\le c+(k-q)<c+(c-q)\le d.
+$$
+
+故 $\rho(j,k)$ 总是合法的输出坐标。两段右侧输入的长度可以不同，所需余带只取其中较长的 $c-q$ 行。
+
+令 $E_{j,k}=e_j\otimes e_k$ 为输入标准基，$U_{i,s}=e_i\otimes e_s$ 为输出标准基。当 $j<a$ 时，$L_1,L_2$ 的该列为零，只剩第 $0$ 项；当 $j\ge a$ 时，因 $i<a$ 而有 $(L_0)_{ij}=0$，另外两项又由 $k<q$ 与 $q\le k$ 分开。因此每列恰有一个非零元，等于 $1$，且
+
+$$
+G E_{j,k}=U_{\rho(j,k)}.
+$$
+
+不同输入也不会相撞。第一分支的输出第二坐标小于 $c$，其余两支的第二坐标至少为 $c$。后两支虽共用右侧余带，输出第一坐标却分别为偶数与奇数，故彼此不交。在每支内部，输出 $(i,s)$ 唯一恢复输入：第一支有 $(j,k)=(i,s)$；第二支有 $j=a+i/2$、$k=s-c$；第三支有 $j=a+(i-1)/2$、$k=q+s-c$，其中除法在相应奇偶分支上都是整除。故 $\rho$ 为单射。于是对任意输入指标 $x,y$，通常的复内积给出
+
+$$
+\begin{aligned}
+(G^*G)_{x,y}
+&=\langle G E_x,G E_y\rangle\\
+&=\langle U_{\rho(x)},U_{\rho(y)}\rangle
+=\delta_{x,y}.
+\end{aligned}
+$$
+
+这直接确定全部 Gram 元素。最后实际选取的原始因子为
+
+$$
+\begin{aligned}
+M_r&=\sqrt{\lambda}\,L_r,\qquad N_r\ \text{保持上述取值},\\
+F&=\sqrt{\lambda}\,G,\\
+F^*F&=\overline{\sqrt{\lambda}}\sqrt{\lambda}\,G^*G
+=\lambda I_{bc},
+\end{aligned}
+$$
+
+因为 $\lambda>0$，$\sqrt{\lambda}$ 为实数且平方等于 $\lambda$。整个论证始终使用所列的 $a\times b$ 与 $d\times c$ 原始因子。
+
+零维情形仍在两条维数前提下讨论：若 $b=0$ 或 $c=0$，输入指标集为空，$F^*F$ 与 $\lambda I_0$ 都是唯一的空方阵。若 $a=0$，$2b\le3a$ 迫使 $b=0$；若 $d=0$，$3c\le2d$ 迫使 $c=0$。也不需要 $q>0$：$c=1$ 时 $q=0$，第二分支为空，第三分支按原式工作。零矩阵或线性相关的因子无需排除。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-bridge-native-scalar-gram-odd title="奇数右输入维数的九列路由"}
+取
+
+$$
+(a,b,c,d,\lambda)=(2,3,3,5,2).
+$$
+
+此时 $2b=6=3a$、$3c=9\le10=2d$，$q=1$，两段右侧输入的长度分别为 $1$ 和 $2$。原始左因子是三张 $2\times3$ 矩阵：
+
+$$
+\begin{aligned}
+M_0&=\sqrt2\begin{pmatrix}1&0&0\\0&1&0\end{pmatrix},\\
+M_1&=\sqrt2\begin{pmatrix}0&0&1\\0&0&0\end{pmatrix},\\
+M_2&=\sqrt2\begin{pmatrix}0&0&0\\0&0&1\end{pmatrix}.
+\end{aligned}
+$$
+
+原始右因子都是 $5\times3$ 矩阵。$N_0$ 的非零元为 $(N_0)_{00}=(N_0)_{11}=(N_0)_{22}=1$；$N_1$ 只有 $(N_1)_{30}=1$；$N_2$ 只有 $(N_2)_{31}=(N_2)_{42}=1$，其余元素均为零。由此 $F=\sum_{r=0}^2M_r\otimes N_r$ 有 $10$ 行、$9$ 列。前六列 $(j,k)$（$j=0,1$，$k=0,1,2$）分别等于 $\sqrt2\,U_{j,k}$；其余三列为
+
+$$
+\begin{aligned}
+F E_{2,0}&=\sqrt2\,U_{0,3},\\
+F E_{2,1}&=\sqrt2\,U_{1,3},\\
+F E_{2,2}&=\sqrt2\,U_{1,4}.
+\end{aligned}
+$$
+
+九个输出坐标互异，只有输出坐标 $(0,4)$ 未被占据。因此每列范数平方为 $2$，任意两列内积为零，直接得到 $F^*F=2I_9$。这说明右侧两段不等长时，原始三项因子仍能给出精确的标量列 Gram。
+:::
+
+[@thm-bridge-native-scalar-gram-exists] 把存在性构造延伸到满足 $3c\le2d$ 的任意自然数右侧维数，但仍保留左侧前提 $2b\le3a$。它是充分条件，不把 $3c\le2d$ 宣称为任意原始因子的普遍必要条件，也没有给出全维数的充要分类。后文的必要界分别在 $3a<2b$ 下给出 $2c\le d$（[@thm-bridge-native-rectangular-bound]），在更强的 $2a<b$ 下给出 $3c\le d$（[@thm-bridge-scalar-gram-obstruction]）。这里得到的只是精确有限维原生矩阵模型中的 Gram 恒等式；它不提供近似平坦谱的误差间隙、物理实现或 RT 公式的推导。
+
 ## 19.3 锥域与离散容量分片的拼接 {#sec-discrete-facet-stitching}
 
-在 [@ex-bridge-two-three] 中，中间桥割容量 $3ac = 12$ 远大于两侧外边界割 $ad = bc = 6$，因此中间桥不会成为卡死流量的瓶颈。为什么二次锥条件 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$ 恰好是保证中间三桥不构成瓶颈的自然区域？
+在 [@ex-bridge-two-three] 中，中间桥割容量 $3ac = 12$ 远大于两侧外边界割 $ad = bc = 6$，因此中间桥不会成为卡死流量的瓶颈。为什么二次锥条件 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$ 恰好落在保证中间三桥不构成瓶颈的自然区域之内？
 
 不妨做一步初等代数检验：当 $a > 0$ 时，不等式 $a^2 + b^2 \le 3ab$ 意味着 $b^2 < a^2 + b^2 \le 3ab$，消去正因子 $b$（若 $b > 0$）即得 $b < 3a$，同理 $c > 0$ 与 $c^2 + d^2 \le 3cd$ 意味着 $d < 3c$。换言之，两个外边界比值 $b/a$ 与 $d/c$ 都被严格关在宽度因子 $3$ 以内：一旦乘上桥宽 $3$，就有 $3ac > bc$ 且 $3ac > ad$！因此，只要参数 $(a, b)$ 与 $(c, d)$ 落在二次锥域 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$（且 $a > 0, c > 0$）之内，中间割 $3ac$ 就永远大于或等于外边界割 $\min(ad, bc)$，从而最小割公式自动脱去外层的 $3ac$！
 
@@ -601,6 +912,153 @@ $$
 :::
 
 这一算例没有确定最小反例、最优比值阈值或完整的维数分类，也没有给出近似平坦谱的定量间隙。它仍只讨论既定行列二分下的有限维收缩，不建立物理实现或 RT 公式饱和。
+
+### 19.4.1 矩形分块与同一算子的精确分解宽度 {#sec-bridge-rectangular-partition}
+
+[@thm-bridge-native-scalar-gram-exists] 用坐标路由给出了三项张量和的充分构造，后面的障碍则限制了三项精确平坦谱。现在保留原始局部输入、输出空间，把项数从固定三项放宽为任意有限项：将整个坐标矩形分成两侧等势的分块，块内的双射就能同时给出一个酉算子及其最少乘积项数。
+
+::: {.theorem #thm-bridge-rectangular-partition title="矩形分块的酉路由与精确分解宽度" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/RectangularBlockPartition.unitary_exact_width"}
+设 $X,Y,T$ 为任意有限集。每个 $t\in T$ 给出子集 $I_t\subseteq X$、$J_t\subseteq Y$ 和双射 $\phi_t:J_t\to I_t$，且每个 $(x,y)\in X\times Y$ 恰属于一个矩形 $I_t\times J_t$。定义矩阵 $A_t\in M_{X\times Y}(\mathbb C)$：当 $j\in J_t$ 且 $i=\phi_t(j)$ 时 $(A_t)_{ij}=1$，其余为零。令
+
+$$
+\begin{aligned}
+U&=\sum_{t\in T}A_t\otimes A_t^*,\\
+U&:\mathbb C^Y\otimes\mathbb C^X\longrightarrow\mathbb C^X\otimes\mathbb C^Y,\\
+T_+&=\{t\in T:J_t\ne\varnothing\}.
+\end{aligned}
+$$
+
+这里 $A_t^*$ 表示 $A_t$ 的共轭转置。按原始局部指标定义重排矩阵
+
+$$
+\begin{aligned}
+\mathcal R(U)_{(i,j),(k,l)}&=U_{(i,k),(j,l)},\\
+i,l&\in X,\qquad j,k\in Y.
+\end{aligned}
+$$
+
+则 $U^*U=I_{Y\times X}$、$UU^*=I_{X\times Y}$，且
+
+$$
+\begin{aligned}
+\operatorname{rank}\mathcal R(U)&=|T_+|,\\
+U&=\sum_{t\in T_+}A_t\otimes A_t^*.
+\end{aligned}
+$$
+
+此外，存在行映射 $r:T_+\to X\times Y$、列映射 $s:T_+\to Y\times X$，使 $\mathcal R(U)_{r(t),s(u)}=\delta_{tu}$ 对所有 $t,u\in T_+$ 成立。对任何有限集 $R$ 及任意复矩阵 $M_r\in M_{X\times Y}(\mathbb C)$、$N_r\in M_{Y\times X}(\mathbb C)$，若同一个 $U=\sum_{r\in R}M_r\otimes N_r$，必有 $|T_+|\le|R|$。允许空指标集和空分块；任意分解中的因子无需线性无关或非零。
+:::
+
+::: {.proof #pf-bridge-rectangular-partition}
+先展开张量和的坐标：
+
+$$
+U_{(i,k),(j,l)}=
+\sum_{u\in T}(A_u)_{ij}\overline{(A_u)_{lk}}.
+$$
+
+给定输入标准基指标 $(j,l)\in Y\times X$，选取满足 $l\in I_t$、$j\in J_t$ 的唯一分块。若第 $u$ 项非零，两个因子的支撑分别要求 $j\in J_u$ 和 $l\in I_u$，唯一覆盖便迫使 $u=t$。剩下这一项恰在 $i=\phi_t(j)$、$k=\phi_t^{-1}(l)$ 时等于 $1$，其余为零。因此每个输入被送到
+
+$$
+(j,l)\longmapsto\bigl(\phi_t(j),\phi_t^{-1}(l)\bigr).
+$$
+
+记此路由为 $\rho$。输出 $(i,k)$ 仍属于同一矩形 $I_t\times J_t$，所以可由唯一覆盖恢复 $t$，再用
+
+$$
+\rho^{-1}(i,k)=\bigl(\phi_t^{-1}(i),\phi_t(k)\bigr)
+$$
+
+恢复输入；两种复合都是恒等映射。于是 $U_{w,p}=\delta_{w,\rho(p)}$。对 $p,q\in Y\times X$ 和 $w,z\in X\times Y$，逐项计算得到
+
+$$
+\begin{aligned}
+(U^*U)_{p,q}
+&=\sum_{w\in X\times Y}\overline{U_{w,p}}U_{w,q}\\
+&=\delta_{\rho(p),\rho(q)}=\delta_{p,q},\\
+(UU^*)_{w,z}
+&=\sum_{p\in Y\times X}U_{w,p}\overline{U_{z,p}}\\
+&=\delta_{\rho^{-1}(w),\rho^{-1}(z)}=\delta_{w,z}.
+\end{aligned}
+$$
+
+这就给出原始输入、输出空间上的两侧 Gram 恒等式。
+
+对每个非空块选 $j_t\in J_t$，令 $i_t=\phi_t(j_t)$。唯一覆盖保证
+
+$$
+(A_u)_{i_tj_t}=\delta_{ut}.
+$$
+
+于是重排矩阵的实际子矩阵满足
+
+$$
+\begin{aligned}
+\mathcal R(U)_{(i_t,j_t),(j_s,i_s)}
+&=\sum_u(A_u)_{i_tj_t}\overline{(A_u)_{i_sj_s}}\\
+&=\delta_{ts}.
+\end{aligned}
+$$
+
+所取的行映射为 $r(t)=(i_t,j_t)$，列映射为 $s(t)=(j_t,i_t)$。不同分块的代表格点互异，故两张映射均为单射。这给出所需的实际单位子矩阵，并推出 $\operatorname{rank}\mathcal R(U)\ge|T_+|$。空块对应零矩阵，删去它们不改变 $U$，所以已有 $|T_+|$ 项的实际分解。
+
+最后，任何分解 $U=\sum_{r\in R}M_r\otimes N_r$ 都给出因式分解 $\mathcal R(U)=BC$，其中
+
+$$
+\begin{aligned}
+B_{(i,j),r}&=(M_r)_{ij},\\
+C_{r,(k,l)}&=(N_r)_{kl}.
+\end{aligned}
+$$
+
+这里 $C$ 直接使用 $N_r$ 的矩阵元，不再取共轭。故 $\operatorname{rank}\mathcal R(U)\le\operatorname{rank}B\le|R|$。将这一界用于非空块分解得到相反的秩上界，再用于任意复因子分解得到最少项数下界。
+
+若 $J_t$ 为空，双射也使 $I_t$ 为空，且 $A_t=0$。若 $X$ 或 $Y$ 为空，所有分块都为空，$T_+$ 为空，$U$ 是两个零维空间之间的唯一映射，两侧 Gram 等式都是空方阵上的恒等式。反过来，若 $T_+$ 为空（特别地，若 $T$ 为空），唯一覆盖迫使 $X\times Y$ 为空；此时重排秩为 $0$，单位子矩阵和达到宽度 $0$ 的分解均为空，下界为 $0\le|R|$。完整证明由 Lean 内核检查。
+:::
+
+这里的“精确宽度”针对已构造的同一个 $U$：它的分解恰需 $|T_+|$ 项。另一个具有相同局部维数的酉算子能否使用更少项，仍须另行研究。也没有通过复合一次物理交换操作，把这里的局部空间换成另一种算子 Schmidt 分割。
+
+::: {.example #ex-bridge-rectangular-partition-5-6 title="一个恰需五项的三十维酉算子"}
+取 $X=\{0,1,2,3,4\}$、$Y=\{0,1,2,3,4,5\}$，按下表划分五个矩形：
+
+| $t$ | $I_t$ | $J_t$ | 大小 |
+| :--- | :--- | :--- | :--- |
+| $0$ | $\{0,1,2\}$ | $\{0,1,2\}$ | $3\times3$ |
+| $1$ | $\{0,1,2\}$ | $\{3,4,5\}$ | $3\times3$ |
+| $2$ | $\{3,4\}$ | $\{0,1\}$ | $2\times2$ |
+| $3$ | $\{3,4\}$ | $\{2,3\}$ | $2\times2$ |
+| $4$ | $\{3,4\}$ | $\{4,5\}$ | $2\times2$ |
+
+例如，在各自的 $J_t$ 上具体取
+
+$$
+\begin{aligned}
+\phi_0(j)&=j,&\phi_1(j)&=j-3,\\
+\phi_2(j)&=j+3,&\phi_3(j)&=j+1,\\
+\phi_4(j)&=j-1.
+\end{aligned}
+$$
+
+这些都是从表中 $J_t$ 到 $I_t$ 的双射；表中每块内的任意双射也都适用。前三行被两个 $3\times3$ 块覆盖，后两行被三个 $2\times2$ 块覆盖，每个格点恰出现一次。五个块都非空，所以上述构造给出
+
+$$
+\begin{aligned}
+U&:\mathbb C^6\otimes\mathbb C^5\longrightarrow
+\mathbb C^5\otimes\mathbb C^6,\\
+\operatorname{rank}\mathcal R(U)&=5.
+\end{aligned}
+$$
+
+对上述具体双射，可依次选取代表格点
+
+$$
+(0,0),\quad(0,3),\quad(3,0),\quad(3,2),\quad(3,4).
+$$
+
+以它们为重排矩阵的行指标，以各对坐标颠倒后的格点为列指标，得到实际的 $5\times5$ 单位子矩阵。五个块同时给出五项分解，所以下界确实达到。
+
+这个 $U$ 是三十维酉算子，并且它在所示原始局部分割下恰需五项。此例给出该维数下的五项实现；另一个同维酉算子能否用四项实现，在这里仍是开放问题。此例没有确定所有同维酉算子的全局最小项数。
+:::
 
 ::: {.figure src="ch19-discrete-vs-rt"}
 **本章证明的只到左边为止。** 左边是宽度三桥图，绿色标签是锥域内的最大流等于最小割（[@thm-bridge-quantum-maxflow-mincut]）；右边圆盘是连续体时空的一张切片，青色的弧是边界区域 $A$，紫色的弧 $\gamma_A$ 从 $A$ 两端垂直于边界伸入内部，是 RT 公式里的极小曲面（文献结果，未在本书形式化）。中间被划掉的箭头：从左到右的连续极限，本书没有证明。

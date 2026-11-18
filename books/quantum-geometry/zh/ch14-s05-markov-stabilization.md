@@ -157,7 +157,7 @@ $$
 现在，让我们通过一个四步连贯的具体数值与矩阵算例，把不可克隆内积差、三比特重复码的二元辛综合征、编码态局部布洛赫向量的精确行为以及正交综合征矩阵恢复完整地验算一遍。
 
 ::: {.example #ex-repetition-code-syndrome title="不可克隆数值缺口、三比特重复码综合征奇偶校验与 8×2 正交恢复全流程验算（含文献说明，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本例第一步、第二步与第四步具体验算本章经内核验证的 [@thm-no-cloning-overlap]、[@lemma-pauli-word-phase] 与 [@prop-orthogonal-syndrome-recovery]；而第三步关于满足下述条件的稳定子码单比特约化态的一般判据，以及第四步末尾对比提及的五比特码、七比特 Steane 码与九比特 Shor 码单比特纠错性质，均属量子纠错文献结论（详见下文 [@rem-error-correction-anyons-literature]），未在本书形式化。
+**含文献说明。** 本例第一步、第二步与第四步具体验算本章经内核验证的 [@thm-no-cloning-overlap]、[@lemma-pauli-word-phase] 与 [@prop-orthogonal-syndrome-recovery]；而第三步关于满足下述条件的稳定子码单比特约化态的一般判据，以及第四步末尾对比提及的五比特码、七比特 Steane 码与九比特 Shor 码单比特纠错性质，均属量子纠错文献结论（详见下文 [@rem-error-correction-anyons-literature]），未在本书形式化。
 
 本例分四步手算验证本章的核心定理与物理边界：
 

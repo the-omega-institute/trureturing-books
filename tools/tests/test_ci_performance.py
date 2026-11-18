@@ -4,7 +4,9 @@ from __future__ import annotations
 import argparse
 import copy
 import importlib.util
+import os
 from pathlib import Path
+import tempfile
 import unittest
 from unittest import mock
 
@@ -36,6 +38,10 @@ class TrustedCacheTest(unittest.TestCase):
             return dict(id=3, path=".github/workflows/pages.yml")
         if endpoint.endswith("/ci.yml"):
             return dict(id=4, path=".github/workflows/ci.yml")
+        if "/actions/artifacts?" in endpoint:
+            return {"total_count": 1, "artifacts": [dict(self.artifact, workflow_run={"id": 17})]}
+        if endpoint.endswith("/runs/17"):
+            return self.run
         if "/ci.yml/runs?" in endpoint:
             return {"workflow_runs": self.ci_runs}
         if "/runs?" in endpoint:
@@ -120,6 +126,73 @@ class TrustedCacheTest(unittest.TestCase):
                 raise OSError("not present")
             return self.api(endpoint)
         self.assertEqual(trusted_cache.find("owner/books", "main", api), (17, 42))
+
+    def test_film_store_is_not_shadowed_by_a_newer_export_only_ci(self):
+        self.artifact["name"] = "tbook-film-store"
+        self.run["updated_at"] = "2026-11-17T01:00:00Z"
+        self.ci_runs = [dict(self.run, id=20, workflow_id=4, updated_at="2026-11-17T02:00:00Z")]
+        def api(endpoint):
+            if "/runs/20/artifacts?" in endpoint:
+                return {"artifacts": [dict(self.artifact, id=43, name="tbook-build-store")]}
+            return self.api(endpoint)
+        self.assertEqual(trusted_cache.find("owner/books", "main", api,
+                                          artifact_name="tbook-film-store"), (17, 42))
+        self.run["event"] = "pull_request"
+        self.assertIsNone(trusted_cache.find("owner/books", "main", api,
+                                            artifact_name="tbook-film-store"))
+
+    def test_film_discovery_survives_twenty_newer_export_runs_and_paginates_artifacts(self):
+        self.artifact["name"] = "tbook-film-store"
+        self.ci_runs = [dict(self.run, id=i, workflow_id=4) for i in range(18, 39)]
+        calls = []
+        def api(endpoint):
+            calls.append(endpoint)
+            if "/actions/artifacts?" in endpoint:
+                if endpoint.endswith("page=1"):
+                    return {"total_count": 101, "artifacts": [dict(self.artifact, id=i,
+                            workflow_run={"id": 20}) for i in range(100, 200)]}
+                self.assertTrue(endpoint.endswith("page=2"))
+                return {"total_count": 101, "artifacts": [dict(self.artifact, workflow_run={"id": 17})]}
+            if endpoint.endswith("/runs/20"):
+                return dict(self.run, id=20, event="pull_request")
+            return self.api(endpoint)
+        self.assertEqual(trusted_cache.find("owner/books", "main", api,
+                                          artifact_name="tbook-film-store"), (17, 42))
+        self.assertEqual(calls.count("repos/owner/books/actions/runs/20"), 1)
+        self.assertFalse(any("/runs?" in call for call in calls), "unrelated run volume cannot hide films")
+
+    def test_named_film_artifacts_keep_all_producer_and_expiry_checks(self):
+        self.artifact["name"] = "tbook-film-store"
+        for changes in ({"event": "pull_request"}, {"head_branch": "feature"},
+                        {"head_repository": {"full_name": "fork/books"}}, {"workflow_id": 99},
+                        {"status": "in_progress"}, {"conclusion": "failure"}):
+            original = dict(self.run)
+            self.run.update(changes)
+            with self.subTest(changes=changes):
+                self.assertIsNone(trusted_cache.find("owner/books", "main", self.api,
+                                                    artifact_name="tbook-film-store"))
+            self.run = original
+        self.artifact["expired"] = True
+        self.calls.clear()
+        self.assertIsNone(trusted_cache.find("owner/books", "main", self.api,
+                                            artifact_name="tbook-film-store"))
+        self.assertNotIn("repos/owner/books/actions/runs/17", self.calls)
+
+    def test_film_restore_falls_back_to_legacy_store_at_the_correct_root(self):
+        find = trusted_cache.find
+        for dedicated in (True, False):
+            with self.subTest(dedicated=dedicated), tempfile.TemporaryDirectory() as tmp:
+                self.artifact["name"] = "tbook-film-store" if dedicated else "tbook-build-store"
+                output = Path(tmp) / "output"
+                with mock.patch.dict(os.environ, GITHUB_REPOSITORY="owner/books", DEFAULT_BRANCH="main",
+                                     CACHE_ARTIFACT="tbook-film-store", GITHUB_OUTPUT=str(output)), \
+                     mock.patch.object(trusted_cache, "find", side_effect=lambda *a, **kw:
+                                       find(*a, get=self.api, **kw)), \
+                     mock.patch("builtins.print"):
+                    trusted_cache.main()
+                self.assertEqual(dict(line.split("=", 1) for line in output.read_text().splitlines()),
+                                 {"run-id": "17", "artifact-id": "42",
+                                  "artifact-scope": "films" if dedicated else "all"})
 
 
 class FilmShardsTest(unittest.TestCase):
@@ -425,6 +498,70 @@ class AffectedPlanTest(unittest.TestCase):
                 if path == "trureturing.lock.json":
                     self.assertEqual(len(result["suites"]), 2)
                     self.assertEqual(result["films"], ["one/001-film", "two/001-film"])
+
+    def plain_markdown_change(self):
+        import json
+        # Complete nonreader summaries distinguish book text from engineering docs.
+        # Neither browser suite reads this chapter, so publication must stand alone.
+        for slug in ("one", "two"):
+            self.write(f"books/{slug}/viz/tests/dependencies.json", json.dumps({
+                "schema": planner.DEPENDENCIES, "suites": {"a.test.mjs": [], "b.test.mjs": []}}))
+        path = "books/one/zh/prose.md"
+        self.write(path, "# Chapter\n\nOriginal text.\n")
+        self.base = self.commit()
+        self.write(path, "# Chapter\n\nRevised text.\n")
+        return path, self.commit()
+
+    def assert_markdown_publication(self, result, path):
+        selected = result["selections"]["normal"]
+        self.assertEqual(result["coverage"]["normal"]["paths"], [path])
+        self.assertTrue(result["tasks"]["validate"])
+        self.assertTrue(selected["checks"]["structure"])
+        self.assertEqual(selected["books"], ["one"])
+        self.assertEqual({(x["target"], x["variant"]) for x in selected["exports"]},
+                         {("html", ""), ("pdf", "screen"), ("epub", "")})
+        self.assertTrue(result["tasks"]["build"])
+        self.assertEqual(selected["suites"], [])
+        self.assertFalse(result["tasks"]["viz"])
+        # The stable Check cannot pass after validation/exports unexpectedly skip.
+        needs = {job: {"result": "success"} for job in ("plan", *result["tasks"])}
+        planner.verify_results(result, needs)
+        for job in ("validate", "build"):
+            with self.subTest(job=job), self.assertRaisesRegex(ValueError, job + ": expected success"):
+                planner.verify_results(result, {**needs, job: {"result": "skipped"}})
+
+    def test_only_book_markdown_push_validates_exports_and_selects_pages_without_a_browser_reader(self):
+        import json
+        path, head = self.plain_markdown_change()
+        for baseline in (True, False):
+            with self.subTest(baseline=baseline):
+                result = self.make_plan(baseline=baseline)
+                self.assert_markdown_publication(result, path)
+                output = self.root / "github-output"
+                output.write_text("")
+                with mock.patch.dict(os.environ, GITHUB_OUTPUT=str(output), GITHUB_STEP_SUMMARY=""):
+                    planner.write_outputs(result)
+                fields = dict(line.split("=", 1) for line in output.read_text().splitlines())
+                self.assertTrue(json.loads(fields["validate"]))
+                self.assertTrue(json.loads(fields["build"]))
+                pages = self.make_plan(event="workflow_run", workflow="pages", baseline=baseline)
+                self.assertTrue(pages["site"])
+                self.assertEqual(pages["sha"], head)
+                self.assertEqual(pages["coverage"]["pages"]["paths"], [path])
+
+    def test_only_book_markdown_pr_validates_the_tested_merge(self):
+        path, head = self.plain_markdown_change()
+        self.git("branch", "markdown-head", head)
+        self.git("checkout", "-qb", "tested-merge", self.base)
+        self.git("merge", "--no-ff", "-qm", "merge fixture", "markdown-head")
+        payload = {"pull_request": {"base": {"sha": self.base}, "head": {"sha": head}}}
+        for baseline in (True, False):
+            with self.subTest(baseline=baseline):
+                result = planner.plan(self.root, event="pull_request", payload=payload, repo="owner/books",
+                                      branch="main", ref="refs/pull/1/merge",
+                                      get_baseline=lambda *args: {"sha": self.base} if baseline else None)
+                self.assert_markdown_publication(result, path)
+                self.assertFalse(result["publish"])
 
     def test_link_only_reader_keeps_static_evidence_check_without_unrelated_browser_work(self):
         import json
@@ -1224,6 +1361,38 @@ class ExactRunnerTest(unittest.TestCase):
 
 
 class DeploymentCoverageTest(unittest.TestCase):
+    def test_book_markdown_is_not_filtered_out_of_pr_or_main_push_events(self):
+        import re
+        workflow = Path(__file__).resolve().parents[2] / ".github/workflows/ci.yml"
+        events = re.search(r"^on:\n(.*?)^permissions:", workflow.read_text(), re.M | re.S).group(1)
+        for name in ("pull_request", "push"):
+            block = re.search(rf"^  {name}:\n(.*?)(?=^  \w|\Z)", events, re.M | re.S).group(1)
+            self.assertNotRegex(block, r"(?m)^    (?:paths|paths-ignore):")
+            if name == "push":
+                self.assertIn("branches: [main]", block)
+
+    def test_pages_requires_successful_current_main_push_and_ignores_pr_completion(self):
+        import re
+        from test_verification import gha_if
+        workflow = Path(__file__).resolve().parents[2] / ".github/workflows/pages.yml"
+        condition = " ".join(re.search(r"^    if: >-\n(.*?)^    name:", workflow.read_text(), re.M | re.S).group(1).split())
+        context = {"github.event.workflow_run.conclusion": "success",
+                   "github.event.workflow_run.event": "push",
+                   "github.event.workflow_run.head_repository.full_name": "owner/books",
+                   "github.repository": "owner/books", "github.sha": "current-sha",
+                   "github.event.workflow_run.head_sha": "current-sha"}
+        self.assertTrue(gha_if(condition, event="workflow_run", ref="refs/heads/main", context=context))
+        for change in ({"github.event.workflow_run.conclusion": "cancelled"},
+                       {"github.event.workflow_run.conclusion": "failure"},
+                       {"github.event.workflow_run.event": "pull_request"},
+                       {"github.event.workflow_run.head_repository.full_name": "fork/books"},
+                       {"github.event.workflow_run.head_sha": "older-sha"}):
+            with self.subTest(change=change):
+                self.assertFalse(gha_if(condition, event="workflow_run", ref="refs/heads/main",
+                                        context={**context, **change}))
+        self.assertTrue(gha_if(condition, event="workflow_dispatch", ref="refs/heads/main",
+                               context={name: "" for name in context}))
+
     def test_only_superseded_pull_requests_cancel_running_ci(self):
         import re
         from test_verification import gha_if
