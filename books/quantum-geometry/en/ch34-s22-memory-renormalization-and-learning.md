@@ -91,6 +91,23 @@ $$
 
 At least one term in the finite average reaches or exceeds its mean, so one event of size $m$ retains this fraction of the defect. The coefficient is sharp for every such $n,m$. Take the uniform law on $X=A$, let the fine readout and target be the identity, and let the coarse readout be constant. Each fine fiber is a singleton, giving zero fine impurity for both targets. In the coarse fiber, two independent draws give $n^2$ equally likely ordered pairs. The original target separates $n(n-1)$ pairs, and the binary target separates the $2m(n-m)$ pairs that cross the boundary of $S$. Thus $\Delta=(n-1)/n>0$ and every size-$m$ event gives $\Delta_S=2m(n-m)/n^2$. The guarantee concerns a single event chosen for a given law and coarsening and then used in every fiber. For fixed $m$, the guaranteed fraction tends to zero as $n$ grows.
 
+**What do fixed-size binary events preserve?** Given a readout $s$, sample a fiber by its mass, then make two independent draws within that fiber. Write $Q_s(a,b)$ for the resulting law of the ordered target pair. For each unordered edge $\{a,b\}$ of distinct target values, set
+$w_{ab}=2\bigl(Q_{f\circ r}(a,b)-Q_r(a,b)\bigr)$. Exchangeability of the two draws lets us group ordered pairs into unordered edges, giving $\Delta=\sum_{a<b}w_{ab}$. The same grouping gives $\Delta_S=C_w(S)$, where $C_w(S)$ sums the weights of edges with exactly one endpoint in $S$. The weights may be signed.
+
+Suppose $n\ge4$ and $2\le m\le n-2$. Let $\bar w$ be the mean over all unordered edges. Put
+$u_a=\sum_{b\ne a}(w_{ab}-\bar w)/(n-2)$ and
+$z_{ab}=w_{ab}-\bar w-u_a-u_b$. The residual weights incident to each vertex sum to zero. For a uniform size-$m$ set $S$,
+
+$$
+\operatorname{Var}(C_w(S))
+=\frac{m(n-m)(n-2m)^2}{n(n-1)(n-2)}
+   \sum_{a<b}(u_a+u_b)^2
++\frac{4m(m-1)(n-m)(n-m-1)}{n(n-1)(n-2)(n-3)}
+   \sum_{a<b}z_{ab}^2.
+$$
+
+The probability that both edges cross the cut depends on whether they coincide, share a vertex, or are disjoint. Counting those cases gives a quadratic form on edge weights in terms of vertex incidence. Once the mean is removed, the degree contribution and the zero-degree residual are orthogonal, giving the displayed sum. If $2m\ne n$, both coefficients are positive, so all events give the same increase exactly when the edge weights are constant. If $2m=n$, the degree term vanishes and a zero residual suffices. When edge weights arise by adding the two endpoint contributions $u_a$ and $u_b$, a balanced cut sees only their total sum. These recovery statements concern the edge weights. Distinct probability laws may give the same weights.
+
 ## 34.22.2 Benchmarking Four Past-History Memory Maps and the Answer-Table Copy Foil on a Three-Bit History Space: Why Dissipation Does Not Imply Learning {#sec-ch34-22-2}
 
 To contrast raw past-history retention, sliding-window FIFO truncation, target-blind dissipative coarse-graining, sufficient-statistic octave distillation, and an acausal answer-table oracle copy with complete arithmetic transparency, we compute every entropy, impurity, heat, and causality verdict by hand on an explicit $8$-state three-bit history space:
