@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "cbd1f1d03c810dd0339d6fcad14057727adeff1d",
-  "pinned_at": "2026-11-18T22:20:49Z",
+  "pinned_at": "2026-11-18T22:35:10Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1644,6 +1644,22 @@
       "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
       "line": 133,
       "signature": "theorem objective_claim_requires_invariant_common_factor {Context Meaning Factor : Type*} (isFixedMeaning : Context -> Meaning -> Prop) (factor : Meaning -> Factor) (claim : ObjectiveInterpretationClaim isFixedMeaning factor) : ∃ commonFactor, ∀ context meaning, isFixedMeaning context meaning -> factor meaning = commonFactor"
+    },
+    "D5/S3/ConceptDynamics/ObservationOrder/PosteriorMomentDistance.projected_moment_unique": {
+      "module": "D5/S3/ConceptDynamics/ObservationOrder/PosteriorMomentDistance",
+      "name": "D5.S3.ConceptDynamics.ObservationOrder.PosteriorMomentDistance.projected_moment_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:263f1b0b606da3510e5049fb6c9d8526b2ee3871a11c589755b4d34a69ae58b6",
+      "line": 228,
+      "signature": "theorem projected_moment_unique (t : ℝ) (ht : 1 / 20 ≤ t) (hu : t ≤ 11 / 160) : IsUniformPosteriorMoment (projectedMoment t) ∧ squaredDistance (projectedMoment t) (cycleMoment t) = (20 * t - 1) ^ 2 / 24 ∧ ∀ X, IsUniformPosteriorMoment X → (20 * t - 1) ^ 2 / 24 ≤ squaredDistance X (cycleMoment t) ∧ (squaredDistance X (cycleMoment t) = (20 * t - 1) ^ 2 / 24 → X = projectedMoment t)"
+    },
+    "D5/S3/ConceptDynamics/ObservationOrder/PosteriorMomentObstruction.result": {
+      "module": "D5/S3/ConceptDynamics/ObservationOrder/PosteriorMomentObstruction",
+      "name": "D5.S3.ConceptDynamics.ObservationOrder.PosteriorMomentObstruction.result",
+      "kind": "theorem",
+      "statement_id": "sha256:17bb7cc1a43ca462e9592bf62082d9201597e90ce931aec5cd55c93dcc21ff75",
+      "line": 120,
+      "signature": "theorem result : ¬ claim"
     },
     "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous": {
       "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
@@ -4596,6 +4612,22 @@
       "statement_id": "sha256:321cfd4072bc24c4b5cd7da3ab28b7f9bd01e92602b2efbc23079d595a1c30a5",
       "line": 39,
       "signature": "def scalarB (t : ℝ) (a : EuclideanSpace ℝ (Fin 3)) : Matrix (Fin 2) (Fin 2) ℂ"
+    },
+    "D5/S3/Quantum/Measurement/FactorWidth/FiveCyclePosteriorFactorWidth.cycle_moment_width_exactly_three": {
+      "module": "D5/S3/Quantum/Measurement/FactorWidth/FiveCyclePosteriorFactorWidth",
+      "name": "D5.S3.Quantum.Measurement.FactorWidth.FiveCyclePosteriorFactorWidth.cycle_moment_width_exactly_three",
+      "kind": "theorem",
+      "statement_id": "sha256:92b76f27c8092b74fd5d9cd31d4e9446463090b57ab6f3e477a894cb4358dc96",
+      "line": 216,
+      "signature": "theorem cycle_moment_width_exactly_three : FactorWidthTwoCone.IsKIncoherentSum 3 (moment.map Complex.ofReal) ∧ ¬ FactorWidthTwoCone.IsKIncoherentSum 2 (moment.map Complex.ofReal)"
+    },
+    "D5/S3/Quantum/Measurement/FactorWidth/NonnegativeFactorWidthTwo.nonnegative_two_sparse_gram": {
+      "module": "D5/S3/Quantum/Measurement/FactorWidth/NonnegativeFactorWidthTwo",
+      "name": "D5.S3.Quantum.Measurement.FactorWidth.NonnegativeFactorWidthTwo.nonnegative_two_sparse_gram",
+      "kind": "theorem",
+      "statement_id": "sha256:eed7884116e00c147302b234950bd31fcc06c01e467dca7a61eda695205822b2",
+      "line": 99,
+      "signature": "theorem nonnegative_two_sparse_gram {n : ℕ} {X : Matrix (Fin n) (Fin n) ℝ} (hnonneg : ∀ i j, 0 ≤ X i j) (hgram : FactorWidthTwoCone.IsKIncoherentSum 2 (X.map Complex.ofReal)) : ∃ (k : ℕ) (v : Fin k → Fin n → ℝ), k ≤ n + Nat.choose n 2 ∧ (∀ t i, 0 ≤ v t i) ∧ (∀ t, (Finset.univ.filter fun i => v t i ≠ 0).card ≤ 2) ∧ X = ∑ t, vecMulVec (v t) (v t)"
     },
     "D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal.finite_kraus_instrument_born_marginal": {
       "module": "D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal",
