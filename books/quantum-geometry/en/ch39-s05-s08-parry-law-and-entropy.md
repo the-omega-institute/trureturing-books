@@ -473,7 +473,7 @@ $$
 :::
 
 ::: proof
-The variable $J_0$ counts the consecutive true bits immediately before position $0$, so $J_0=0$ exactly when $r_{-1}=\mathrm{false}$. The one-coordinate suffix cylinder gives the probability of this event. A zero occurs within the next $K$ steps from every position. Partition $A$ by the first-return time. On each part the return map is a fixed iterate of the left shift. The nearest preceding zero determines the inverse branch, so the images are disjoint and cover $A$. Shift invariance then transfers to the conditional probability.
+The variable $J_0$ counts the consecutive true bits immediately before position $0$, so $J_0=0$ exactly when $r_{-1}=\mathrm{false}$. The one-coordinate suffix cylinder gives the probability of this event. A zero occurs within the next $K$ steps from every position. Partition $A$ by the first-return time. On each part the return map is a fixed iterate of the left shift. To invert it, search the image path backward from index $-2$ and shift the first zero found there to index $-1$. This determines a unique inverse branch, so the images are disjoint and cover $A$. Shift invariance then transfers to the conditional probability.
 
 At level $i$, take the paths in $A$ that have taken $i$ steps without yet returning. Shifting them by $i$ gives exactly the paths with $J_0=i$. Shifting back by $i$ recovers the starting point in $A$, and the preceding-zero condition excludes an intervening return. Thus the mass of every measurable event splits by its value of $J_0$. Multiplying the conditional level contributions by $\mu(A)$ and adding them recovers the original event mass. The full proof is checked by the Lean kernel.
 :::
