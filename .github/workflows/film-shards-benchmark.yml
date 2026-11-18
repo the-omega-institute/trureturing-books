@@ -1,0 +1,47 @@
+name: Film shard benchmark
+
+on:
+  push:
+    branches: [ci/benchmark-film-shards-6919307]
+
+permissions:
+  contents: read
+  pages: read
+
+env:
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      films: ${{ steps.plan.outputs.film_matrix }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Select the publication films
+        id: plan
+        run: python3 tools/ci/plan.py --workflow pages --mode full
+
+  films:
+    name: Films (${{ matrix.shard }})
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.films) }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up film tools
+        uses: ./.github/actions/setup
+        with:
+          browsers: 'true'
+          films: 'true'
+          fonts: 'false'
+          mdbook: 'false'
+      - uses: actions/configure-pages@v6
+      - name: Build selected film shard
+        env:
+          TBOOK_CACHE_REMOTE: '0'
+          FILMS_JSON: ${{ toJSON(matrix.items) }}
+        run: python3 tools/ci/films.py --selection-env FILMS_JSON
