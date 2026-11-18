@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "532d4d86f1b1f614b1653aab838d27d0ee3f0f41",
-  "pinned_at": "2026-11-18T12:22:21Z",
+  "commit": "cbd1f1d03c810dd0339d6fcad14057727adeff1d",
+  "pinned_at": "2026-11-18T22:20:49Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1529,7 +1529,7 @@
       "module": "D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity",
       "name": "D5.S3.ConceptDynamics.Information.RefinementImpurityMonotonicity.refinement_impurity_monotone",
       "kind": "theorem",
-      "statement_id": "sha256:2c70048ce03100ccbb2cd7befe9f7709f4de0319f2455ea3fbf0499e73e34dc4",
+      "statement_id": "sha256:129c3d448f1c2f9b088be4bedd1b46771d93abd8d3d27960c5a83c1f6d193a79",
       "line": 536,
       "signature": "theorem refinement_impurity_monotone {X C D A : Type*} (mu : PMF X) (coarse : Concept X C) (refined : Concept X D) (target : Concept X A) (refinement : Refines coarse refined) : conditionalLogicalImpurity mu refined target ≤ conditionalLogicalImpurity mu coarse target"
     },
@@ -6092,6 +6092,14 @@
       "statement_id": "sha256:d32add90330c2dba2e88e15d450db491eb328e05574510558ade7841fba4c9d3",
       "line": 31,
       "signature": "theorem parry_boundary_cylinder_bound (k : ℕ) (hk : 2 ≤ k) (R n : ℕ) (hn : 1 ≤ n) (C : Finset (List (ℕ × ℕ))) (hlen : ∀ cs ∈ C, cs.length = n) (hvalid : ∀ cs ∈ C, ∀ c ∈ cs, 1 ≤ c.1 ∧ 1 ≤ c.2 ∧ c.2 < k) (hfit : ∀ cs ∈ C, 2 + (cs.map (fun c => c.1 + c.2)).sum ≤ R) : let p"
+    },
+    "D5/S3/TotalVariation/ParryFirstReturn.actual_first_return_system": {
+      "module": "D5/S3/TotalVariation/ParryFirstReturn",
+      "name": "D5.S3.TotalVariation.ParryFirstReturn.actual_first_return_system",
+      "kind": "theorem",
+      "statement_id": "sha256:c0a36482d676bb3916240d58945aebd74c4dd371419b3fecae75835330b875bb",
+      "line": 417,
+      "signature": "theorem actual_first_return_system (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
     },
     "D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law": {
       "module": "D5/S3/TotalVariation/ParryResetLaw",
