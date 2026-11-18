@@ -415,6 +415,18 @@ Here $R_I$ is a matrix on all $2^\ell$ prefix occupation strings, and the sum ru
 Moustaj–Krebbekx–Morais Smith, *Anomalous Polarization in One-dimensional Aperiodic Insulators* ([doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003), §§IV–V, §V.C, and Appendix B), study a pumping family with on-site terms and specified fillings; their correlation-matrix method depends on the chosen Slater/Gaussian state and subsystem and does not transfer directly to arbitrary encoded states. Here $\delta_{\rho,j}$ is only the single-particle distance to zero energy; a many-body excitation gap also requires a filling, particle-number sector, and gap convention. The limit addresses only this single-particle spectral premise. Relating physical length $R$ to internal window coordinates, spatial cuts to the Rauzy boundary, and these objects to entropy scaling requires further work; the full question in [@prob-ch39-p2e-fractal-horizon] remains.
 :::
 
+**A calculation for disjoint sites.** On four sites ordered $0,1,2,3$, take the orthonormal orbitals $u=(e_0+e_2)/\sqrt{2}$ and $v=(e_1+e_3)/\sqrt{2}$ and keep $I=\{0,2\}$. The two-row determinants in increasing site order give
+
+$$
+\lvert\Psi\rangle
+=\tfrac12\bigl(\lvert1100\rangle+\lvert1001\rangle
+-\lvert0110\rangle+\lvert0011\rangle\bigr).
+$$
+
+For the ordinary tensor partial trace, group the amplitudes by the occupation string on $(1,3)$. When those sites have string $10$, the retained amplitude vector is $(\lvert10\rangle-\lvert01\rangle)/2$. For string $01$, it is $(\lvert10\rangle+\lvert01\rangle)/2$. The two vectors are orthogonal and each has squared norm $1/2$, so the reduced density matrix has spectrum $(1/2,1/2,0,0)$ and entropy $\log 2$.
+
+The one-particle compression $P_I=u_Iu_I^\dagger$ of the same state has eigenvalues $1,0$. The fermionic mode product formula gives spectrum $(1,0,0,0)$ and zero entropy. Replacing the second orbital with $e_3$ gives exactly the same $P_I$, while the ordinary partial trace now has only the component with discarded string $01$, leaving a pure state on the retained sites. Thus $P_I$ alone cannot determine the ordinary tensor partial-trace spectrum for this disjoint cut. For occupied sites $1,2$, the row order puts the component of $v$ first and the component of $u$ second, giving the negative determinant. For the role of the Jordan–Wigner string between the two blocks in the reduced state, see Fagotti and Calabrese, [*Entanglement entropy of two disjoint blocks in XY chains*, §2, Eqs. (11)–(19)](https://arxiv.org/pdf/1003.1110).
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$

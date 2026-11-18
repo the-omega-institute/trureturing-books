@@ -415,6 +415,18 @@ $$
 Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。上述极限只处理这一单粒子谱前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
 :::
 
+**不连续格点的手算例。** 在按 $0,1,2,3$ 排列的四个格点上取正交归一轨道 $u=(e_0+e_2)/\sqrt{2}$ 和 $v=(e_1+e_3)/\sqrt{2}$，保留 $I=\{0,2\}$。按递增格点顺序取两行的行列式，得到
+
+$$
+\lvert\Psi\rangle
+=\tfrac12\bigl(\lvert1100\rangle+\lvert1001\rangle
+-\lvert0110\rangle+\lvert0011\rangle\bigr).
+$$
+
+在普通张量部分迹中，按 $(1,3)$ 上的占据串分组。被迹去的格点处于 $10$ 时，保留部分的振幅向量为 $(\lvert10\rangle-\lvert01\rangle)/2$。被迹去的格点处于 $01$ 时，向量为 $(\lvert10\rangle+\lvert01\rangle)/2$。这两个向量彼此正交，模平方各为 $1/2$，所以保留区的密度矩阵谱为 $(1/2,1/2,0,0)$，熵为 $\log 2$。
+
+同一态的单粒子压缩 $P_I=u_Iu_I^\dagger$ 有特征值 $1,0$，代入费米模式乘积公式得到谱 $(1,0,0,0)$ 和零熵。把第二个轨道改为 $e_3$，则 $P_I$ 完全相同，而普通部分迹只剩下被迹去格点处于 $01$ 的一个分量，保留区成为纯态。因此，对这个不连续切口，$P_I$ 本身无法确定普通张量部分迹的谱。占据 $1,2$ 时，递增行顺序先取到 $v$ 的分量，再取到 $u$ 的分量，行列式因此带负号。两块之间的 Jordan–Wigner 字符串如何进入约化态，见 Fagotti 与 Calabrese 的 [*Entanglement entropy of two disjoint blocks in XY chains*，§2，式 (11)–(19)](https://arxiv.org/pdf/1003.1110)。
+
 在这个实际词上，普通字母计数的平衡性与按位置奇偶加权的和是不同的量。沿用 $A=0$、$B=1$、$C=2$ 的字母编码，取整数权重
 
 $$
