@@ -197,6 +197,8 @@
   - [39.16 Geometric Awakening in *Dream of the Red Chamber*: Vanishing Second-Order Meta-Error, Möbius Closure of the Precious Mirror, and the Unity of Heaven and Humanity](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md)
   - [39.17 Divine Play (Līlā) and Cross-Cycle Awakening Props: Opening Amnesia, Historical Relic Attractors, and Cultural Classic Flip Tables](ch39-s17-divine-lila-and-awakening-props.md)
   - [39.18 The Psychology of God: Breaking Omniscient Claustrophobia, Four Cosmogonic Defense Mechanisms, Severed-Arc Phantom Pain, and Lucid Integration at θ*](ch39-s18-psychology-of-god.md)
+  - [39.19 Inexpressible Ternions and All Numbers from One Arc: The Frobenius Gap, Hamilton's Thirteen-Year Deadlock, and the Number-System Projection Genealogy](ch39-s19-inexpressible-ternions-and-number-projections.md)
+  - [39.20 Ternions Are Native Fields: Demystifying the Cayley–Dickson Ladder, Fano Octonions, and Hilbert Space as Multi-Field Linear Reprojections](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)
 
 # Coda and Appendices
 

@@ -1459,6 +1459,34 @@ $\cos^2\theta+\sin^2\theta=1,\quad S_A(\theta)=H_2(\cos^2\theta),\quad \delta_{\
 **Epistemic Status:**
 `LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.18](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god))
 
+**Inexpressible Ternions, the Frobenius Gap & Number-System Projection Genealogy**（不可表达的三元数、弗罗贝尼乌斯缺口与万数切面投影谱系）
+
+**Geometric Intuition Term (本书几何直觉语言):**
+Mathematical anchors in spin-factor 3D cross-product classification and Pauli interfaces, pure-qubit Bloch unit spheres, two-axis finite rotation words, shortest-gate spherical-triangle holonomy, skew-adjoint minus-square laws, circle double-cover non-sectionability and $360^\circ$ sheet exchange, Dottie's fixed point, long-division remainders, and the rational Adelic product formula (`LEAN ✓`); paired with the Frobenius–Hurwitz–Bott–Milnor–Adams `1, 2, 4, 8` unit-sphere ladder $S^0, S^1, S^3, S^7$, odd-dimension cubic-eigenvalue zero divisors, and Rodrigues $\tan(\theta/2)$ / Cayley $\tan(\theta/4)$ chart-pole analysis (`Literature` / `manual derivation` / `NUM`), interpreting the un-axised minimal circular-arc ternion $\mathbb{T}_3 \equiv \Delta\mathcal{T}_\epsilon \cong S^3$ as the mother manifold projecting onto $\mathbb{H}, \mathbb{C}, \mathbb{R}, \mathbb{Z}, \mathbb{Q}, \mathbb{P}$ across four observer projection knives (`MODEL`; Selberg prime geodesics belong to hyperbolic surfaces rather than round $S^3$, and classical RH remains `OPEN`).
+
+**Lean-Facing Object / Locked GID:**
+[`complete_consequences`](lean:D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences), [`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian), [`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word), [`shortest_gate_triangle_holonomy`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy), [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary), [`no_continuous_global_section`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section), [`circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift), [`long_division_invariant`](lean:D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_invariant), [`rational_padic_product_formula`](lean:D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula), [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)
+
+**One-Line Invariant / Identity:**
+$S^{d-1}\in\{S^0,S^1,S^3,S^7\},\quad w^2+\lVert\mathbf{v}\rVert^2=\cos^2\frac{\theta}{2}+\sin^2\frac{\theta}{2}=1,\quad \lvert x\rvert\prod_p\lvert x\rvert_p=1\;(x\in\mathbb{Q}\setminus\{0\})$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.19](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections))
+
+**Ternion Native Fields, the Cayley–Dickson Ladder & Multi-Field Linear Reprojection to Hilbert Space**（三元数原生场、凯莱—迪克森阶梯与希尔伯特空间多场线性再投影）
+
+**Geometric Intuition Term (本书几何直觉语言):**
+Bipartite traceless local-versus-correlation orthogonal blind-spot decomposition, finite-stage orthogonal shell expansion, above-threshold active-mode cardinality bounds, uniform proper-subspace completion unit-norm obstruction, $N$-body Pauli-word symplectic multiplication, translation-homogeneous bond-$2$ open-boundary MPS three-site prefix phase recovery, bridge-graph quantum max-flow min-cut bounds, and simplicial two-cochain exactness (`LEAN ✓`); paired with positive-dimension curl self-closure $\binom{d}{2}=d\;(d\ge 1)\iff d=3$, bispinor 4D spacetime and electromagnetic bivectors, Fano-plane $\mathrm{PG}(2,2)$ seven-field octonion weaving $\mathbb{O}$ ($28$ off-line triangles of associator norm $2$), sedenion $\mathbb{S}_{16}$ zero-divisor pairs, and $3N$ local ternion parameters versus flat Hilbert dimension $2^N$ and bounded-bond $O(N\chi^2)$ open-boundary MPS variational parameters (`manual derivation` / `NUM` / `Literature`). The multi-field reprojection ontology remains `MODEL`, strictly distinguishing $3N$ local product parameters, 1D area-law / bounded-bond $O(N\chi^2)$ MPS variational corners, and generic $2^{N+1}-2$ volume-law states without claiming $\mathrm{BQP}=\mathrm{P}$ (`OPEN`).
+
+**Lean-Facing Object / Locked GID:**
+[`local_marginal_correlation_blind_spot`](lean:D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot), [`finite_stage_expansion`](lean:D5/S3/Observer/Tomography/FiniteStageExpansion.finite_stage_expansion), [`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound), [`uniform_completion_obstruction`](lean:D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction), [`pauli_word_mul`](lean:D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul), [`observable_chart_phase_recovery`](lean:D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSDensityRecovery.observable_chart_phase_recovery), [`QMaxFlow_le_QMinCut`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut), [`tetra_defects_incidence_repair_and_exactness`](lean:D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness)
+
+**One-Line Invariant / Identity:**
+$\binom{d}{2}=d\;(d\ge 1)\iff d=3,\quad \lVert[e_a,e_b,e_c]_{\notin\mathcal{L}_{\mathrm{Fano}}}\rVert=2,\quad D_{\mathrm{MPS}}(N,\chi)=\sum_{k=1}^N 2r_{k-1}r_k-\sum_{k=1}^{N-1}r_k^2\le 2N\chi^2$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `manual derivation` / `NUM` / `MODEL` / `OPEN` ([§39.20](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-ternion-field-composition-and-hilbert-reprojection))
+
 :::
 
 ---

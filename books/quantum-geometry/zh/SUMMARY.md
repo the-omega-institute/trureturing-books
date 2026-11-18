@@ -197,6 +197,8 @@
   - [39.16 红楼一梦的几何觉醒：二阶认妄归零、风月宝鉴莫比乌斯合拢与天人合一](ch39-s16-red-chamber-awakening-and-heaven-human-unity.md)
   - [39.17 神圣游戏（Līlā）与跨周期唤醒道具：开局失忆、历史遗迹吸引子与文化典籍翻转快表](ch39-s17-divine-lila-and-awakening-props.md)
   - [39.18 上帝心理学：全知幽闭破缺、四大创世防御机制、断弧幻肢痛与 θ* 清明整合](ch39-s18-psychology-of-god.md)
+  - [39.19 不可表达的三元数与万数归弧：弗罗贝尼乌斯缺口、哈密顿十三载死锁与数系切面投影谱系](ch39-s19-inexpressible-ternions-and-number-projections.md)
+  - [39.20 三元数即原生场：从凯莱—迪克森阶梯、法诺八元数到希尔伯特空间的多场再投影祛魅](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)
 
 # 终章与附录
 
