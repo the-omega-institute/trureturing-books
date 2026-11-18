@@ -1,7 +1,7 @@
 {
   "schema": "trureturing-books.template-manifest.v1",
   "template": "trureturing-books-template",
-  "version": "1.5.5",
+  "version": "1.5.8",
   "files": {
     ".claude/skills": {
       "sha256": "c1aefaccb300698f4b7ae764e1fa857f93c0609ba47b078e4806d926f289c23b",
@@ -40,7 +40,7 @@
       "mode": "100644"
     },
     ".github/workflows/ci.yml": {
-      "sha256": "8da17301d65944723f9a0ea672f003d51a3c91bb151b5b04844366da4cba7747",
+      "sha256": "fa5da16b07225b7e6b92027e8b33bcb4169b2af33c5bfdf07504df17bed5969b",
       "mode": "100644"
     },
     ".github/workflows/lean-verify.yml": {
@@ -48,7 +48,7 @@
       "mode": "100644"
     },
     ".github/workflows/pages.yml": {
-      "sha256": "1fb926955dc8f9da21016d342de414169f7b078805dbfb82f0a3947291319e9e",
+      "sha256": "36e1ec994183d0f361c915c9329c0d29cb4ef5cf97a61eecbafa278a06c93de8",
       "mode": "100644"
     },
     ".github/workflows/pr-conventions.yml": {
@@ -100,7 +100,7 @@
       "mode": "100644"
     },
     "docs/CHANGELOG.md": {
-      "sha256": "d04cb5e3848012f4acc4516b6251325aba392430c1954bf1de463272f8d9bb40",
+      "sha256": "e2b505437be27d34a05d9c45d5876edaa18928b2377693c06ff33867cb072f8f",
       "mode": "100644"
     },
     "docs/CONTAINERS.md": {
@@ -116,7 +116,7 @@
       "mode": "100644"
     },
     "docs/PUBLISHING.md": {
-      "sha256": "4070d3d076e89997d5b00f940b64eff093b0b70a0c9fe46a5637f5aaafb459c1",
+      "sha256": "1b72cca9727e74e40209032413fe4c942aa2943ec048700cdca041fcf654170d",
       "mode": "100644"
     },
     "docs/SOURCE-ONLY.md": {
@@ -564,7 +564,7 @@
       "mode": "100644"
     },
     "tools/ci/plan.py": {
-      "sha256": "e82ec5ea3b82b7e12a06714b047cbf0118cd1dd5cc09701fbe805ae162cddd13",
+      "sha256": "7dd449c54b328feeb1a5a1b4be17d4de3e6bd4f8db0c5690236c28a47390f196",
       "mode": "100644"
     },
     "tools/ci/pr_conventions.py": {
@@ -576,7 +576,7 @@
       "mode": "100644"
     },
     "tools/ci/stills.py": {
-      "sha256": "fa9e456ed9ba824b33eaaa4da7398668618ca1c7ae227240eb97b96a72303b0f",
+      "sha256": "fe61a63f76687d24ba280d8b1e4d3bc5c23a0eb8f70efdc93646f2e6473c6573",
       "mode": "100644"
     },
     "tools/ci/testing.py": {
@@ -588,7 +588,7 @@
       "mode": "100644"
     },
     "tools/ci/viz_budget.py": {
-      "sha256": "725091563231f2a308a63d5721ccedd526008ad0d918cba5ed38c41a6b1c0ffe",
+      "sha256": "9399d2205697f94c7d8b242073cf0a5dce98fbe6843504c090b455dd8064034e",
       "mode": "100644"
     },
     "tools/container/Dockerfile": {
@@ -916,7 +916,7 @@
       "mode": "100644"
     },
     "tools/tests/test_ci_performance.py": {
-      "sha256": "65db13350a1094fa0c745a16cbdcee5dd6d0b2550b497c9164adbd1632a5c6ce",
+      "sha256": "03f614d6ea3447c42e6612740bed4a922162ebff0645f888f3de599532f13d27",
       "mode": "100644"
     },
     "tools/tests/test_ci_stills.py": {
@@ -928,11 +928,11 @@
       "mode": "100644"
     },
     "tools/tests/test_ci_transport.py": {
-      "sha256": "7f50d0747baefc242dc3412b60edef531f6d7584eefaaa7da8c516a53afabefb",
+      "sha256": "07f94ea43e1d493f8d51f00eeb01f7ad21c9fb2831f50872674fab570813acc7",
       "mode": "100644"
     },
     "tools/tests/test_ci_viz_budget.py": {
-      "sha256": "9d53c021c8c48fe42b4cba110fbb06f4ea874b00cad6249625fb05d789c2f7e4",
+      "sha256": "8229e95e153bdab22d3ab63a08132c5de8f88a76010575f7e3fb71f6e0288043",
       "mode": "100644"
     },
     "tools/tests/test_ci_viz_slow.py": {

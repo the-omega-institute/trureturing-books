@@ -753,6 +753,8 @@ $$
 
 所以这组矩阵不能继续实现第五步；这并不排除另一组三能级矩阵。一般窗口的精确最小维数、一般相容迹矩的实现以及完整近似资源—误差权衡仍未解决；下一个注记保存的是小泄漏下的加权历史接口。本构造不延伸到源理论卷的平衡十维信道，不给出保留环境的完整联合历史或插入干预的过程张量恒等式，也不提供实验支持或模型普适性结论。
 
+**有限酉膨胀仍缺哪一步。** 文献结果，未在本书形式化。Farenick 的[有限幂酉膨胀定理，Corollary 3.2](https://doi.org/10.1007/s44146-024-00170-6)给出同一个酉算子来实现任意收缩算子的有限幂窗。给定 $H$ 上的收缩算子 $T$ 和正整数 $d$，存在包含 $H$ 的空间 $K$ 及其上的酉算子 $U$，使得对每个 $1\le k\le d$，都有 $T^k=P_HU^k|_H$，其中 $P_H$ 是到 $H$ 的正交投影。若 $H$ 有限维，$K$ 也可取有限维。该定理允许选择膨胀空间，没有把它固定为这里的三维环境，也没有提供同一对分支酉矩阵与同一个半正定初态。上述第五步问题仍需要一个同时满足这些条件的共同实现。
+
 :::
 
 ::: {.remark #rem-weighted-history-stability title="小泄漏下的固定酉加权历史界（书面推导）"}
@@ -1140,6 +1142,36 @@ $$
 圆周正交多项式提供相邻的经典框架，可参见 Barry Simon，[arXiv:math/0405111](https://arxiv.org/abs/math/0405111) §1 的递推与 §2.1(c) 的 Bernstein–Szegő 情形；这些段落不作为本注记完整受限实现障碍的来源定理。所需节点、相位与容量证明均已在这里给出，不作全球新颖性或物理普适性声明。完整结论尚无本书可引用的完整 Lean 证明；普通推导不构成内核验证。
 
 :::
+
+::: {.theorem #thm-positive-interior-grid-algebraic-obstruction title="正内部谱网格的代数障碍" lean="D5/S3/Quantum/Analysis/PositiveInteriorGridObstruction.positive_interior_grid_algebraic_obstruction"}
+固定 $0<r<1$，取复数 $u,v$ 和实数 $s,t$。以下关系不能同时成立：
+
+$$
+\begin{aligned}
+u+v&=2,\\
+us+vt+st+3-3(s+t)&=0,\\
+s&=|u|^2,\qquad t=|v|^2,\qquad |uv|^2=r^2.
+\end{aligned}
+$$
+
+Lean 声明将前两个复等式分别写成实部与虚部等式，并将模平方写成相应实坐标的平方和。
+:::
+
+::: {.proof #pf-positive-interior-grid-algebraic-obstruction}
+若 $\operatorname{Im}u\ne0$，由 $v=2-u$ 和第二个等式的虚部得到 $s=t$。模平方相等又给出 $\operatorname{Re}u=1$，于是 $r=|uv|=s>1$。若 $u$ 为实数，$v$ 也为实数。令 $q=uv$，用 $u+v=2$ 将 $s+t$ 写成 $4-2q$，将 $us+vt=u^3+v^3$ 写成 $8-6q$，将 $st$ 写成 $q^2$。第二个等式化为 $q^2=1$，与 $r<1$ 矛盾。
+
+完整证明由 Lean 内核检查。
+:::
+
+在上面的最大混合谱网格中，如果饱和把九个不同的比值节点确定为 $P(z)=z^9-rz^8+\eta(1-rz)$ 的根，Newton 恒等式就给出无权网格幂和 $S_k=r^k$（$k=1,2,3$）。设两组三个单位圆因子分别为 $a_i,d_j$，其中 $d_j=b_j^{-1}$，并令 $x=\sum_i a_i$、$y=\sum_j d_j$、$\alpha=\prod_i a_i$、$\beta=\prod_j d_j$。由 $xy=r$ 可定义 $u=x^2/(\alpha\overline{x})$ 和 $v=y^2/(\beta\overline{y})$。两组三根的二次幂和分别为 $x^2-2\alpha\overline x$ 与 $y^2-2\beta\overline y$，三次幂和分别为 $x^3-3\alpha|x|^2+3\alpha$ 与 $y^3-3\beta|y|^2+3\beta$。设 $s=|x|^2$、$t=|y|^2$，因此 $s=|u|^2$、$t=|v|^2$，且 $|uv|=r$。将 $S_2=r^2$ 除以 $x^2y^2$ 得到 $(1-2/u)(1-2/v)=1$，也就是 $u+v=2$。将 $S_3=r^3$ 除以 $x^3y^3$ 并乘以 $uvst$，得到
+
+$$
+(us-3s+3)(vt-3t+3)=uvst.
+$$
+
+展开并用 $u+v=2$ 消去 $st(u+v)$，得到 $us+vt+st+3-3(s+t)=0$。这正是 [@thm-positive-interior-grid-algebraic-obstruction] 的另一个复等式。
+
+这里的 Lean 引用覆盖从约化方程到矛盾这一步。从同一对三阶酉矩阵的迹矩推出饱和节点、网格与约化方程仍属书面推导。任意初始密度与较短窗口的可行性需要各自的论证。[上游证明与适用范围](https://github.com/the-omega-institute/trureturing/pull/31199)
 
 除了“只收腰、不掉高”的相位阻尼外，实验室里还有另一类截然不同的能量耗散过程——**振幅阻尼信道**（amplitude damping，对应自发辐射能量弛豫时间 $T_1$）：处于激发态（南极 $-1$）的量子比特会向低温环境吐出一颗能量光子而跌回基态（北极 $+1$）。因此，在几何上，整颗布洛赫球不仅在往里收缩，而且球心还在往北极 $u = +1$ 方向**整体上漂**：轴向坐标按仿射律 [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$（阻尼率 $0 \le \gamma < 1$）向 $+1$ 聚拢！
 
