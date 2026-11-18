@@ -81,6 +81,16 @@ Here $T$ is also the TV between the original joint law $(d,a)\mapsto M(d)P_d(a)$
 
 **One recoding law shared by all fibers.** Suppose a finite random choice of target recoding $h$ separates each pair of distinct target values with the same probability $q$. For a fixed readout $s$, the expected impurity of $h\circ t$ is $qI(s)$. In the ordered-pair formula, a same-target pair still contributes zero. Each distinct-target pair contributes its mass times $q$, and the readout fiber mass is independent of $h$. Averaging over $h$ before summing the pair masses gives the equality, including zero-mass fibers. All the impurities lie in $[0,1]$. Apply the equality to both readouts with the same recoding law and subtract to obtain the expected Gini increase $q\Delta$.
 
+**A binary event of prescribed size.** Suppose the target alphabet $A$ has $n\ge2$ values, and fix an integer $1\le m<n$. Let $\Delta_S$ be the Gini increase after replacing the target with $x\mapsto\mathbf1_{\{t(x)\in S\}}$. If $S$ is uniform over the $m$-element subsets of $A$, a distinct pair of target values is separated by $2\binom{n-2}{m-1}$ such subsets. Choose which of the two values belongs to $S$, then choose $m-1$ from the remaining $n-2$. It follows that
+
+$$
+\mathbb E_{|S|=m}\Delta_S
+ =\frac{2\binom{n-2}{m-1}}{\binom{n}{m}}\Delta
+ =\frac{2m(n-m)}{n(n-1)}\Delta.
+$$
+
+At least one term in the finite average reaches or exceeds its mean, so one event of size $m$ retains this fraction of the defect. The coefficient is sharp for every such $n,m$. Take the uniform law on $X=A$, let the fine readout and target be the identity, and let the coarse readout be constant. Each fine fiber is a singleton, giving zero fine impurity for both targets. In the coarse fiber, two independent draws give $n^2$ equally likely ordered pairs. The original target separates $n(n-1)$ pairs, and the binary target separates the $2m(n-m)$ pairs that cross the boundary of $S$. Thus $\Delta=(n-1)/n>0$ and every size-$m$ event gives $\Delta_S=2m(n-m)/n^2$. The guarantee concerns a single event chosen for a given law and coarsening and then used in every fiber. For fixed $m$, the guaranteed fraction tends to zero as $n$ grows.
+
 ## 34.22.2 Benchmarking Four Past-History Memory Maps and the Answer-Table Copy Foil on a Three-Bit History Space: Why Dissipation Does Not Imply Learning {#sec-ch34-22-2}
 
 To contrast raw past-history retention, sliding-window FIFO truncation, target-blind dissipative coarse-graining, sufficient-statistic octave distillation, and an acausal answer-table oracle copy with complete arithmetic transparency, we compute every entropy, impurity, heat, and causality verdict by hand on an explicit $8$-state three-bit history space:
