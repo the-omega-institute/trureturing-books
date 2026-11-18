@@ -65,6 +65,18 @@ The mathematical spine of bounded memory distillation and concept renormalizatio
    **Two-bit non-$T$-invariant countercheck (`manual derivation`)**: Embed two-bit states $(x_1, x_2) \in \{0, 1\}^2$ into $E = \mathbb{R}^2$ under instantaneous readout $C(x_1, x_2) = x_1$ and one-step shift dynamics $T(x_1, x_2) = (x_2, 0)$. At $k = 0$, the instantaneous blind subspace is $N_0 = \ker C = \{(0, x_2)\} = \operatorname{span}\{\mathbf{e}_2\}$; yet $T(0, 1) = (1, 0) \notin N_0$, so $N_0$ **is not $T$-invariant**, and the true multi-step unobservable kernel collapses to $K = \ker C \cap \ker(C T) = \operatorname{span}\{\mathbf{e}_2\} \cap \operatorname{span}\{\mathbf{e}_1\} = \{(0, 0)\}$! Erasing $N_0$ at $k = 0$ by folding $(0, 0)$ and $(0, 1)$ into one symbol incurs zero immediate error at $k = 0$, but suffers an immediate prediction discrepancy $C T(0, 0) = 0 \neq 1 = C T(0, 1)$ at $k = 1$.
 :::
 
+**The sharp total variation bound for a finite target set.** For a PMF, refined readout $r$, and deterministic coarsening $f$, write $M(d)$ for refined fiber mass and $P_d$, $Q_{f(d)}$ for the fine and coarse target posteriors. Let $\Delta=I(f\circ r)-I(r)$ in real coordinates. If the target takes values in a set of size $n\ge 2$, write $T=\sum_d M(d)\operatorname{TV}(P_d,Q_{f(d)})$, with $\operatorname{TV}(u,v)=\tfrac12\sum_a|u(a)-v(a)|$. Then
+
+$$
+T^2\le \frac{\lfloor n^2/4\rfloor}{n}\,\Delta.
+$$
+
+In a positive-mass refined fiber, the posterior difference $z=P_d-Q_{f(d)}$ has coordinate sum zero. If $S$ is the set of positive coordinates and $j=|S|$, then $\operatorname{TV}=\sum_{a\in S}z(a)$. Subtracting $j/n$ from the indicator of $S$ preserves this inner product and gives the indicator squared norm $j(n-j)/n$. Cauchy–Schwarz bounds the TV of that fiber. Applying the weighted version across fibers and using the exact impurity increase gives the displayed bound. Fibers of zero mass have zero weight.
+
+The coefficient is attained for every $n$. Let $k=\lfloor n/2\rfloor$ and split the target set into blocks of sizes $k$ and $n-k$, assigning mass $1/2$ uniformly within each block. The refined readout reports the block, and the coarse readout merges the blocks. Each refined posterior has TV $1/2$ from the coarse posterior, and $\Delta=n/[4k(n-k)]$. For even $n$ growing without bound, $\Delta=1/n$ tends to zero while $T$ stays at $1/2$. A uniform upper bound vanishing with $\Delta$ requires a bound on the target-set size or additional structure.
+
+Here $T$ is also the TV between the original joint law $(d,a)\mapsto M(d)P_d(a)$ and the substituted joint law $(d,a)\mapsto M(d)Q_{f(d)}(a)$. Grouping the half sum of absolute differences by refined fiber gives this interpretation. The bound concerns the average prediction error for a fixed probability law and coarsening. Gibbs and Su give the half-$\ell^1$ normalization on [p. 7 of the preprint](https://arxiv.org/pdf/math/0209021#page=7).
+
 ## 34.22.2 Benchmarking Four Past-History Memory Maps and the Answer-Table Copy Foil on a Three-Bit History Space: Why Dissipation Does Not Imply Learning {#sec-ch34-22-2}
 
 To contrast raw past-history retention, sliding-window FIFO truncation, target-blind dissipative coarse-graining, sufficient-statistic octave distillation, and an acausal answer-table oracle copy with complete arithmetic transparency, we compute every entropy, impurity, heat, and causality verdict by hand on an explicit $8$-state three-bit history space:
