@@ -474,6 +474,24 @@ The ordinary reduced state has the four-site spectrum on the image of $E_I$ and 
 
 Write $D=2^{|I|}$. The two reduced states, before and after the replacement, have characteristic polynomials $x^{D-2}(x-1/2)^2$ and $x^{D-1}(x-1)$, respectively, and entropies $\log 2$ and $0$. This written argument shows that, when the filling and the cut are known, the product-spectrum criterion above is also the exact criterion for $P_I$ to determine the reduced spectrum for every Slater state.
 
+**The alternation matrix for several two-site orbitals.** Take $a$ orbitals supported entirely in $I$ and $b$ supported entirely in $J$, each with amplitude $1/\sqrt{2}$ at its two sites. All pairs of sites are disjoint. Order the retained columns first. Use $x\in\mathbb F_2^a$ and $y\in\mathbb F_2^b$ to encode a choice of the earlier or later endpoint of each pair. Every nonzero determinant selects exactly one site from each pair, so the amplitude matrix vanishes on all other occupations. Let $A_{ij}\in\mathbb F_2$ indicate whether retained pair $i$ and discarded pair $j$ have alternating endpoints.
+
+On these occupations, the row permutation contributes its inversion sign. Inversions within either side depend only on that side's choices. For two pairs across the cut, the sum modulo $2$ of the inversion indicators over the four endpoint choices equals the parity of the number of discarded endpoints strictly between the retained endpoints. Thus the mixed coefficient of $x_i,y_j$ is precisely $A_{ij}$. Absorbing the signs that depend on one side alone gives the amplitude matrix
+
+$$
+M_{xy}=2^{-(a+b)/2}(-1)^{x^\mathsf T A y}.
+$$
+
+Summing over $y$ gives $(MM^\dagger)_{xx'}=2^{-a}$ when $A^\mathsf T x=A^\mathsf T x'$. Otherwise, pair each $y$ with the result of flipping a coordinate that reverses the sign, so the sum vanishes. Put $r=\operatorname{rank}_{\mathbb F_2} A$. Each nonempty fiber of $A^\mathsf T$ has $2^{a-r}$ elements. The marginal therefore has $2^r$ constant blocks, each contributing one eigenvalue $2^{-r}$. Including the zero space on all other occupations gives the full characteristic polynomial
+
+$$
+x^{\,2^{|I|}-2^r}(x-2^{-r})^{2^r}.
+$$
+
+The same binary-rank calculation appears for bipartitions of graph states. Here the matrix entries come from the site order in the Slater determinants. [Hein, Eisert and Briegel, Proposition 3](https://arxiv.org/abs/quant-ph/0307130)
+
+Replace each discarded orbital by the coordinate vector at its earlier endpoint. The retained compression stays the same. The discarded side now has one occupation string, so the ordinary marginal is pure and the entropy difference is $r\log 2$. For example, concatenate $m$ four-site blocks ordered $I,J,I,J$. Endpoints from distinct blocks do not alternate, so $A$ is the $m$-dimensional identity. This gives two $2m$-particle Slater states with equal retained compression at the same cut and ordinary marginal entropies $m\log 2$ and zero.
+
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
 
 $$
