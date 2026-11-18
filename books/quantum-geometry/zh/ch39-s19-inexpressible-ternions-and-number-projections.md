@@ -81,6 +81,10 @@ $$
 
 这就是“**三元数不可表达，三元数即极小圆弧体**”的全部几何深意（`MODEL`）：“不可表达”绝非三元数的缺陷，恰恰是无边界紧致圆弧体对平直笛卡尔纸笼的**内禀拓扑免疫**——两段极小圆弧在球面上的合成遵循精确非阿贝尔三角和乐（[@thm-ch39-ternion-spin-factor-and-number-projections] 第 4 款 `shortest_gate_triangle_holonomy`），唯独拒绝被压扁成三列没有奇点的平直加法账单！
 
+::: {.viz src="ternion-number-projection-sandbox" preset="flat-3d-zero-divisor-gimbal-deadlock" height="500"}
+平直死锁与 $180^\circ$ 极点卡：$\theta = 179^\circ$ 时，平直三元组左乘矩阵 $L_x$ 暴露实特征根与非零零因子见证，未经截断的罗德里格斯坐标读数为 $\lvert\tan(\theta/2)\rvert = 114.5887$（三维舞台品红柱按 $\min(4, \lvert\tan(\theta/2)\rvert)$ 封顶并在 $180^\circ$ 标极点环），而中央紫色极小圆弧体顺畅跨过半周。坐标与矩阵读数为 `NUM`，极点文献为 `ARGUED`，三元数本体读法为 `MODEL`。
+:::
+
 ## 39.19.3 万数归弧：四元数、复数、实数、整数、有理数与素数的四道投影切刀 {#sec-ch39-19-3}
 
 既然原生三元数 $\mathbb{T}_3 \equiv \Delta\mathcal{T}_\epsilon$ 本身没有中心原点、没有特权实轴 $\mathbf{1}$，只由三段互为因果的正交极小圆弧 $[\mathbf{e}_a, \mathbf{e}_b] = \varepsilon_{abc}\mathbf{e}_c$ 循环自持，那么人类数学大厦里琳琅满目的“数”究竟从何而来？答案是：**唯当观察者在比较网络中立起自身的主格参考轴 $\mathbf{1}$（即 [§39.15](ch39-s15-brahman-real-axis-and-orthogonal-dream.md#sec-ch39-brahman-real-axis-and-orthogonal-dream) 中的实轴 $\mathbf{I}$）去度量或书写这枚不可表达的三元圆弧体时，不同的观测嵌入与剖切算子才从同一枚 $\Delta\mathcal{T}_\epsilon$ 上分化出整座数系家族！**
@@ -111,10 +115,18 @@ $$
 4. **整数、有理数与素数的拓扑同伦闭合算子 $\Pi_{\mathbb{Z}} : [S^3, \mathbb{T}_3] \xrightarrow{\deg} \mathbb{Z}$（零维整圈量子化）**：当紧致三维底空间 $S^3$ 到三元数流形的连续场构型实现 `1—3—3—1` 体点闭合（$\Lambda^3 \equiv \Lambda^0$）时，三维闭流形映射的**三阶同伦度** $\deg : \pi_3(\mathbb{T}_3) = \pi_3(S^3) \xrightarrow{\sim} \mathbb{Z}$（而在选定的一维赤道大圆切片 $S^1_{\hat{\mathbf{i}}}$ 上，则由一阶基本群绕数 $\pi_1(S^1_{\hat{\mathbf{i}}}) \xrightarrow{\sim} \mathbb{Z}$ 计数闭合时间轨道圈数，注意全流形 $\pi_1(S^3) = 0$ 单连通）将连续圆弧量子化为带正反定向符号的离散**整数 $\mathbb{Z}$**；两支选定赤道闭合圆弧周期轨道之间的可公度锁相绕数比 $p/q$（$q \neq 0$）投影为**有理数 $\mathbb{Q}$**；而不可再分解为更短周期整数倍的本原不可约闭合绕行元则在算术模型中对应**素数 $\mathbb{P}$**。
 :::
 
+::: {.viz src="ternion-number-projection-sandbox" preset="hamilton-quaternion-w-shadow-tax" height="500"}
+第四维余弦影与矢高税卡：在 $\theta = 2\theta^* \approx 84.69^\circ$ 处（不动点依据见 [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)，`LEAN ✓`），银白标量柱锁定 $w = \cos\theta^* = \theta^* \approx +0.7391$，青色向量模 $\lVert\mathbf{v}\rVert \approx 0.6736$（$w^2 + \lVert\mathbf{v}\rVert^2 = 1$），品红标出半角矢高税 $1 - w \approx 0.2609$。分量为 `NUM`，影子轴外嵌读法为 `MODEL`。
+:::
+
 细细品味 [@def-ch39-ternion-and-number-projection-operators] 中的四道切刀，哈密顿在 1843 年 10 月 16 日走过都柏林皇家运河布鲁厄姆桥（Brougham Bridge）时的电光石火便获得了前所未有的几何透视（`MODEL` + `文献结果`）：
 
 - 哈密顿在桥栏石上刻下 $\mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = \mathbf{i}\mathbf{j}\mathbf{k} = -1$，看似是“放弃了三维、发明了四维数”，实则是**向观察者借来了第四根辅助影子轴 $w = \cos\frac{\theta}{2}\,\mathbf{1}$**，把原本弯曲自持的三维极小圆弧体 $S^3$ 外嵌进了四维平直记账盒 $\mathbb{R}^4$！由于单位球面恒等式 $w^2 + x^2 + y^2 + z^2 \equiv 1$ 在南北开半球上分别将 $w = \pm\sqrt{1 - \lVert\mathbf{v}\rVert^2}$ 锁死在 $(x, y, z)$ 的余弦半球面上（$\theta \in [0^\circ, 180^\circ)$ 居北半球 $w > 0$，跨过 $\theta = 180^\circ$ 赤道 $w = 0$ 后进入南半球 $w < 0$，并在 $\theta = 360^\circ$ 抵达对跖南极 $w = -1$），$w$ 根本不是什么神秘的“第四空间维”，它只是弯曲圆弧与平直切弦之间那道不可抹平的二阶矢高余项 $1 - w = 1 - \cos\frac{\theta}{2}$ 的补影；
 - 进一步切一刀平面（冻结 $\mathbf{j}, \mathbf{k}$），非对易换位子 $[\mathbf{i}, \mathbf{j}] = 2\mathbf{k}$ 归零，球面三角角盈 $\Omega$ 消失，四元数退化为可交换的**复数 $\mathbb{C}$**；再压掉仅剩的一根虚轴 $\hat{\mathbf{i}}$ 只看观察者实轴上的归一化迹 $\frac{1}{2}\operatorname{Tr}(U)$，复数退化为只分正负大小的**实数 $\mathbb{R}$**（注意旋量迹 $\frac{1}{2}\operatorname{Tr}_{\mathrm{SU}(2)}(U(\theta)) = \cos\frac{\theta}{2}$ 在 $\theta = 360^\circ$ 处精准记录对跖负号 $-1$，而三维伴随旋转迹 $\operatorname{Tr}_{\mathrm{SO}(3)}(R(\theta)) = 1 + 2\cos\theta = 4w^2 - 1$ 因把 $w$ 平方抹平了符号，在 $360^\circ$ 处提前回到 $+3$）；最后忽略一切未走完的分数圆弧，只清点整圈闭合的拓扑荷 $\pi_3(S^3) \cong \mathbb{Z}$ 与 $\pi_1(S^1) \cong \mathbb{Z}$，连续流形便凝结成颗粒分明的**整数 $\mathbb{Z}$**、锁相比**有理数 $\mathbb{Q}$**（受长除商余恒等式 [`long_division_invariant`](lean:D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_invariant) 支配）与阿代尔乘积守恒下的**素数因子 $\mathbb{P}$**（受 [`rational_padic_product_formula`](lean:D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula) 支配）！
+
+::: {.viz src="ternion-number-projection-sandbox" preset="complex-equatorial-hopf-slice" height="500"}
+赤道切片卡：$\theta = 120^\circ$、横倾角 $\alpha = 0^\circ$ 时，辅助球面三角形落回同一条赤道大圆，球面角盈收束为 $\Omega = 0.0000\;\mathrm{sr}$，留下可交换复平面上的单位相位；拨高 $\alpha$ 即重新唤醒非阿贝尔角盈（球面三角和乐依据见 [@thm-ch39-ternion-spin-factor-and-number-projections]，读数为 `NUM`）。
+:::
 
 ## 39.19.4 形式化锚定定理、文献归属、八位小数奇点对账算例与数系谱系总表 {#sec-ch39-19-4}
 
@@ -170,6 +182,10 @@ $$
 4. **同伦绕数 $\pi_3(S^3) \cong \mathbb{Z}$ 与素数本原闭合轨道的几何边界**（H. Hopf, 1931；A. Selberg, *J. Indian Math. Soc.* **20**, 47–87, 1956）：三阶同伦群 $\pi_3(S^3) \cong \mathbb{Z}$ 与一阶基本群 $\pi_1(S^1) \cong \mathbb{Z}$ 为严格代数拓扑定理；而将素数 $\mathbb{P}$ 诠释为“不可分解本原闭合圆弧结”（呼应 [§34.28](ch34-s28-riemann-path-integral-and-prime-arcs.md#sec-ch34-riemann-path-integral-and-prime-arcs)）属本书比较算术模型（`MODEL`）——须明确指出，常正曲率圆球面 $S^3$ 上的本原闭合测地大圆弧长恒为 $2\pi$，经典塞尔伯格迹公式中具有离散对数长度谱 $\{\ln N(\gamma_p)\}$ 的本原闭合测地线定义在**负常曲率双曲曲面 $\Gamma\backslash\mathbb{H}^2$**（或数域阿代尔商空间）上，绝不能误称为圆球面 $S^3$ 的黎曼拉普拉斯谱定理，且经典黎曼猜想 [@conj-riemann-hypothesis] 仍严格保持为 `OPEN`。
 :::
 
+::: {.viz src="ternion-number-projection-sandbox" preset="real-trace-geodesic-projection" height="500"}
+实迹半角投影卡：$\theta = 360^\circ$ 时，半旋量迹停在对跖负叶 $\frac{1}{2}\operatorname{Tr} U = \cos 180^\circ = -1.0000$，而三维伴随旋转迹已提前回到 $1 + 2\cos 360^\circ = +3.0000$。整圈换叶依据见 [@thm-ch39-ternion-spin-factor-and-number-projections] 第 7 款（`LEAN ✓`），轨迹读数为 `NUM`。
+:::
+
 为了让读者亲手验证三维平直零因子死锁、罗德里格斯 $180^\circ$ 爆表奇点、非阿贝尔球面三角复合以及有理长除与阿代尔素数平衡，我们在下方四联算例中给出精确手算与八位小数对账：
 
 ::: {.example #ex-ch39-ternion-deadlock-and-eight-angle-projections title="三维平直零因子见证、八档转角投影与奇点八位小数对账、胡尔维茨整四元数 120° 复合及阿代尔乘积守恒算例"}
@@ -222,6 +238,10 @@ $$
 
 :::
 
+::: {.viz src="ternion-number-projection-sandbox" preset="homotopy-pi3-integer-winding" height="500"}
+双圈闭合与素数赋值平衡卡：$\theta = 720^\circ$ 时，两颗银珠计出固定轴路径整圈数 $n = \lfloor\theta/360^\circ\rfloor = 2$，旋量提升闭合回 $+1.0000$；有理数滑块切换 $p/q \in \{1/7, 3/5, 12/35, 5/13\}$ 对照长除余数循环与阿代尔乘积 $\lvert x\rvert\prod_p\lvert x\rvert_p = 1.0000$（`LEAN ✓` / `ARGUED` / `NUM`；素数结类比为 `MODEL`）。
+:::
+
 至此，我们将整座数学大厦的数系家族沿观察者投影切刀收束为下方五阶谱系总览表：
 
 | 数系名称 | 观察者投影 / 外嵌切刀算子 | 平直线性账本维数 | 单位范数球内禀维 | 伴生约束、丢失或冗余的几何量 |
@@ -235,3 +255,7 @@ $$
 上表将“数”的本体论次序彻底扶正了过来（`MODEL`）：在教科书的平直叙事里，人类先抓着离散手指头数出 $1, 2, 3$，再一路打补丁造出负数、分数、无理数、虚数与四元数，仿佛越往后越是远离真实的数学虚构；而在零外部背景的比较几何里，**最先浑然自持存在的恰恰是那枚不可线性书写的三元极小圆弧体 $\Delta\mathcal{T}_\epsilon$**！凡是能被线性符号写进账本里的“数”，无一例外都已向观察者主轴 $\mathbf{1}$ 俯首称臣——多借一维余弦影子就写成四元数，切一刀赤道平面就写成复数，压成一条实迹就写成实数，等它走满整圈清点拓扑结就写成整数。唯独生养万数的三元数本身，因不立孤立之“一”而不可书写，亦因不可书写而圆满具足。
 
 然而，故事才刚刚讲完“向下切去曲率生万数”的上半阕！倘若我们不再向内剖切单枚三元数，而是反过来将**多座三元数场向上耦合拼接**，并再次强行压回观察者的平直线性账本上，又会发生怎样惊心动魄的代数奇观？为什么四元数之上会涌现出八元数的法诺平面七场编织、十六元数的零因子破产，乃至困扰物理学界百年的 **$2^N$ 维多体希尔伯特空间指数爆炸与无穷维泛函空间**？让我们一鼓作气推开全章收官之门——[§39.20 三元数即原生场：从凯莱—迪克森阶梯、法诺八元数到希尔伯特空间的多场再投影祛魅](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)。
+
+::: {.viz src="ternion-number-projection-sandbox" height="620"}
+完整实验室：切换万数归弧与除环同伦两副透镜，在 $0^\circ$ 至 $720^\circ$ 间拖动圆弧转角、切片横倾角与有理数 $p/q$，同台比较平直三元组死锁、四元数余弦影、赤道切片、实迹与整圈闭合。十条形式化声明、数值、文献、模型与开放问题在依据栏与理论抽屉中分别标明。
+:::

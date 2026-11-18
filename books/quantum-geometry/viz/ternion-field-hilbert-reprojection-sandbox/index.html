@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="TERNION//HILBERT · Ternion Field Composition &amp; Reprojection Ladder Sandbox: From Quaternions and Fano Octonions to Hilbert Space">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TERNION//HILBERT · 三元数场组合与再投影阶梯沙盘：从四元数、法诺八元数到希尔伯特空间</title>
+<meta name="description" content="拖动透镜，看上层弧面场投向基柱。逐一比较四元数坐标、左右手征场、法诺乘法与十六元数零因子，再用 N 和 χ 对照局部旋转、纯态及张量网络的参数量。 Drag the lens to project curved fields onto a basis. Compare quaternion coordinates, chiral fields, Fano multiplication and sedenion zero divisors, then vary N and χ to compare local rotations, pure rays and tensor-network dimensions.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="ternion-field-hilbert-reprojection-sandbox">
+<div class="app lab" id="app">
+<header class="top">
+  <div class="brand">
+    <a class="crumb" href="../"><span class="zh">◂ 第 39 章 · §39.20</span><span class="en">◂ Ch. 39 · §39.20</span></a>
+    <h1 class="logo" data-text="TERNION//HILBERT">TERNION<span>//</span>HILBERT</h1>
+    <div class="tagline"><span class="zh">把一条场链写成基坐标，需要多少根柱？</span><span class="en">How many basis pillars does it take to write down a chain of fields?</span></div>
+  </div>
+  <div class="langs" role="group" aria-label="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+</header>
+<aside class="col deck" id="rail">
+  <section class="panel sec">
+    <h2><span class="zh">双透镜</span><span class="en">Two lenses</span></h2>
+    <button class="lens-toggle" id="lensToggleBtn" type="button" aria-pressed="false"><span class="seg off"><span class="zh">多场再投影本体读法</span><span class="en">Multi-Field Reprojection Ontology</span></span><span class="seg on"><span class="zh">凯莱—迪克森与张量网络读法</span><span class="en">Cayley–Dickson &amp; Tensor-Network Algebra</span></span></button>
+  </section>
+  <section class="panel sec">
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span></h2>
+    <div class="presets cards" id="presets">
+      <button class="preset" data-preset="native-ternion-curl-field" aria-pressed="false"><span class="code">𝕋₃ → ℍ · 1 + 3 = 4</span><span class="cn zh">原生单场与四元数外嵌</span><span class="cn en">One field in quaternion coordinates</span></button>
+      <button class="preset" data-preset="spin4-chiral-spacetime-bivector" aria-pressed="false"><span class="code">SPIN(4) · 3 + 3</span><span class="cn zh">左右双场、时空与电磁双矢</span><span class="cn en">Chiral fields, spacetime and bivectors</span></button>
+      <button class="preset" data-preset="fano-seven-field-octonion-weave" aria-pressed="false"><span class="code">PG(2,2) · 𝕆 (1 + 7)</span><span class="cn zh">法诺七场与非结合折痕</span><span class="cn en">Seven Fano lines and an associator</span></button>
+      <button class="preset" data-preset="sedenion-zero-divisor-bankruptcy" aria-pressed="false"><span class="code">𝕊₁₆ · u·v = 0</span><span class="cn zh">十六元数零因子与基柱归零</span><span class="cn en">Sedenion zero divisors cancel</span></button>
+      <button class="preset" data-preset="many-body-3n-to-2n-hilbert-pillars" aria-pressed="true"><span class="code">3N → 2ᴺ · HILBERT</span><span class="cn zh">多场耦合、希尔伯特基柱与张量网络</span><span class="cn en">Hilbert basis pillars and tensor bonds</span></button>
+    </div>
+    <p class="note" id="presetNote"></p>
+  </section>
+</aside>
+<main class="center">
+  <div class="stage" id="stage" data-thumb aria-label="三元数场组合本体层与平直线性再投影账本层" data-aria-en="Ontological Ternion-Field Layer and Flat Linear Reprojection Ledger">
+    <canvas class="fill" id="cv"></canvas><div class="vig"></div>
+    <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="hud-tl"><span class="big" id="stageTitle"></span><span class="sub" id="stageSub"></span></div>
+    <button type="button" class="handle" id="lambdaHandle" aria-label="拖动透镜调节 λ" data-aria-en="Drag the lens to adjust λ"></button>
+    <div class="hud-bl" id="legend"></div>
+  </div>
+  <div class="tour" id="tour"><span class="tour-l"><button type="button" class="tbtn" id="tourPrev" aria-label="上一张卡" data-aria-en="Previous experiment" data-tour="prev">◀</button><button type="button" class="tbtn tour-clock" id="rewBtn" aria-label="回到起点" data-aria-en="Rewind">⏮</button><button type="button" class="tbtn tour-clock" id="playBtn" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▷</button></span><div class="what" id="tourBody"></div><button type="button" class="tbtn" id="tourNext" aria-label="下一张卡" data-aria-en="Next experiment" data-tour="next">▶</button></div>
+  <div class="strip"><section class="panel"><div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div><canvas id="plot" aria-label="1 至 300 个比特的参数量，以十为底的对数" data-aria-en="Base-ten logarithms of parameter counts for 1 to 300 qubits"></canvas></section></div>
+</main>
+<aside class="col side" id="evidence">
+  <section class="panel sec" id="ctlPanel">
+    <button class="chip" id="infoBtn" type="button"><span class="zh">理论接口</span><span class="en">Theory interface</span></button>
+    <h2><span class="zh">视角与投影</span><span class="en">View and projection</span></h2>
+    <div class="chips scene-chips" id="camChips" role="group" aria-label="视角" data-aria-en="Camera"><button class="chip" data-cam="split" aria-pressed="true"><span class="zh">上下双界平视</span><span class="en">Split Worlds</span></button><button class="chip" data-cam="ontology" aria-pressed="false"><span class="zh">上方三元场俯视</span><span class="en">Upper Ternion Fields</span></button><button class="chip" data-cam="ledger" aria-pressed="false"><span class="zh">下方基柱账本</span><span class="en">Lower Basis Ledger</span></button></div>
+    <div class="field"><label for="fieldN"><span class="zh">耦合场数 N</span><span class="en">Coupled fields N</span></label><output for="fieldN">6</output><input type="range" id="fieldN" min="1" max="8" step="1" value="6"></div>
+    <div class="field"><label for="flatLambda"><span class="zh">透镜展平强度 λ</span><span class="en">Lens flattening λ</span></label><output for="flatLambda">1.00</output><input type="range" id="flatLambda" min="0" max="1" step="0.01" value="1"></div>
+    <div class="field"><label for="bondChi"><span class="zh">MPS 键维上限 χ</span><span class="en">MPS bond cap χ</span></label><output for="bondChi">2</output><input type="range" id="bondChi" min="0" max="4" step="1" value="1"></div>
+    <div class="chips" id="caseChips" role="group" aria-label="代数示例" data-aria-en="Algebra examples" hidden></div>
+  </section>
+  <section class="panel sec" id="readouts">
+    <h2><span class="zh">账本读数</span><span class="en">Ledger readout</span></h2>
+    <dl class="ro">
+      <div class="v"><dt><span class="zh">上层场体</span><span class="en">Field bodies</span></dt><dd><output id="upperCount">—</output></dd></div>
+      <div class="c"><dt><span class="zh">下层基柱</span><span class="en">Basis pillars</span></dt><dd><output id="pillarCount">—</output></dd></div>
+      <div class=""><dt><span class="zh">局部旋转 · 3N</span><span class="en">Local rotations · 3N</span></dt><dd><output id="localCount">—</output></dd></div>
+      <div class="v"><dt><span class="zh">MPS 纯射线 · 实维数</span><span class="en">MPS ray · real dimension</span></dt><dd><output id="mpsCount">—</output></dd></div>
+      <div class="m"><dt><span class="zh">多体泡利槽位</span><span class="en">Multi-site Pauli slots</span></dt><dd><output id="excessCount">—</output></dd></div>
+    </dl>
+    <p class="note" id="detail"></p>
+  </section>
+  <section class="panel sec">
+    <h2><span class="zh">依据</span><span class="en">Evidence</span></h2>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">在 m × n 双体系统（m,n ≥ 1 且 mn > 1）中，无迹厄米空间正交分解为局部扇区之和与关联扇区，关联扇区的维数为 (m²−1)(n²−1)。双比特（m = n = 2）时，<code>bellDensity</code> 与 <code>classicalCorrelatedDensity</code> 是两个不同的态，它们在两侧的边缘态分别相同。</span><span class="en">For a bipartite m × n system with m,n ≥ 1 and mn > 1, the traceless Hermitian space splits orthogonally into the sum of the local sectors and the correlation sector. The latter has dimension (m²−1)(n²−1). For two qubits (m = n = 2), the distinct states <code>bellDensity</code> and <code>classicalCorrelatedDensity</code> have equal marginals on both sides.</span> <a data-lean-gid="D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot" href="#" target="_blank" rel="noopener"><code>local_marginal_correlation_blind_spot</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">在完备实内积空间中，阶段与壳层都取闭子空间序列。若每个新阶段都是上一阶段与一个新壳层的正交和，则第 n 阶段等于初始子空间与前 n 个壳层之和。第 n 阶段与其正交补之和是整个空间。</span><span class="en">In a complete real inner-product space, let the stages and the shells be sequences of closed subspaces. If each new stage is the orthogonal sum of the previous stage and one shell, stage n is the sum of the initial subspace and the first n shells. Stage n and its orthogonal complement span the whole space.</span> <a data-lean-gid="D5/S3/Observer/Tomography/FiniteStageExpansion.finite_stage_expansion" href="#" target="_blank" rel="noopener"><code>finite_stage_expansion</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">若非负可和特征值之和为 Rμ/π，则超过或等于正阈值 t 的模态有限，个数至多 Rμ/(πt)。</span><span class="en">For nonnegative summable eigenvalues of total trace Rμ/π, finitely many meet a positive threshold t. Their count is at most Rμ/(πt).</span> <a data-lean-gid="D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound" href="#" target="_blank" rel="noopener"><code>finite_rank_concentration_mode_bound</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">每个阶段若都是真子空间且有正交投影 P，则各阶段 ‖I−P‖ = 1，沿非平凡滤子不能一致趋零。</span><span class="en">If every stage is a proper subspace admitting an orthogonal projection P, each has ‖I−P‖ = 1. These norms cannot tend to zero along a nontrivial filter.</span> <a data-lean-gid="D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction" href="#" target="_blank" rel="noopener"><code>uniform_completion_obstruction</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">模数 p 非零时，N 个位点的泡利算子字相乘给出乘积字的算子，附带由 ∑ zₐxᵦ 决定的单位根相位。</span><span class="en">For nonzero modulus p, multiplying N-site Pauli word operators gives the product-word operator times the root-of-unity phase determined by ∑ zₐxᵦ.</span> <a data-lean-gid="D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul" href="#" target="_blank" rel="noopener"><code>pauli_word_mul</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">ψ 与 φ 同属长度 3 + m 的开边界 MPS，且 ψ 满足 ObservableChart m ψ 时，两者的 rawPrefix 3 m 相同当且仅当 φ = zψ，|z| = 1。</span><span class="en">For ψ and φ in openBoundaryMPS (3 + m), assuming ObservableChart m ψ, equality of rawPrefix 3 m is equivalent to φ = zψ for a unit-modulus scalar z.</span> <a data-lean-gid="D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSDensityRecovery.observable_chart_phase_recovery" href="#" target="_blank" rel="noopener"><code>observable_chart_phase_recovery</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对桥图的四个自然数维度 a,b,c,d，量子最大流以量子最小割为上界。</span><span class="en">For the bridge graph with four natural dimensions a,b,c,d, QMaxFlow is bounded above by QMinCut.</span> <a data-lean-gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut" href="#" target="_blank" rel="noopener"><code>QMaxFlow_le_QMinCut</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">非空有限顶点集上取阿贝尔群值的面数据。各根点的面误差之和等于四面体缺陷数；所有交错面和为零当且仅当面数据是边数据的余边界。</span><span class="en">For face data in an additive abelian group on a finite nonempty vertex set, rooted face error counts sum to the tetrahedral defect count. All alternating face sums vanish exactly when the data are an edge coboundary.</span> <a data-lean-gid="D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness" href="#" target="_blank" rel="noopener"><code>tetra_defects_incidence_repair_and_exactness</code></a></span></div>
+    <div class="lean num"><span class="ok">NUM</span><span><span class="zh">有向法诺乘法表逐项给出结合子。十六元数按凯莱—迪克森公式逐项乘。维数曲线由整数公式生成，N 比特的多体泡利槽位数 4ᴺ−1−3N 按泡利字权重作整数计数。三维舞台下层的柱高按本帧最大模长归一化，使每张卡的柱高比例清晰可见。全零时柱高为零。实时读数给出未经缩放的准确范数与维数。</span><span class="en">The oriented Fano table gives the associators. Cayley–Dickson multiplication gives each sedenion coefficient. Integer dimension formulas supply the curves, and exact integer counting by Pauli weight gives the N-qubit multi-site slot count 4ᴺ−1−3N. On the 3D stage, lower-layer pillar heights are normalized to the largest magnitude in the current frame so every preset stays legible. An all-zero frame has zero height throughout. The live readouts give the exact, unscaled norms and dimensions.</span></span></div>
+    <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">Cayley（1845）、Dickson（1919）与 Baez（2002）讨论八元数及倍增构造。Artin 交错代数定理保证任意两元素生成结合子代数。Moreno（1998）研究十六元数零因子；归一化的零因子可用两个正交的单位虚八元数参数化，即 Stiefel 流形 V₂(ℝ⁷)。</span><span class="en">Cayley (1845), Dickson (1919) and Baez (2002) describe octonions and doubling. Artin’s theorem makes every two-generated subalgebra of an alternative algebra associative. Moreno (1998) studies sedenion zero divisors. A normalized zero divisor is parametrized by an orthonormal pair of imaginary octonions, the Stiefel manifold V₂(ℝ⁷).</span></span></div>
+    <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">Fannes–Nachtergaele–Werner（1992）构造有限关联态。Hastings（2007）证明有隙一维局域系统的面积律。Vidal（2007）引入 MERA。Page（1993）给出随机纯态的平均子系统熵，Poulin 等（2011）研究有限时间演化能到达的态。</span><span class="en">Fannes–Nachtergaele–Werner (1992) construct finitely correlated states. Hastings (2007) proves an area law for gapped 1D local systems. Vidal (2007) introduces MERA. Page (1993) computes average subsystem entropy for random pure states. Poulin et al. (2011) study states reachable in finite evolution time.</span></span></div>
+    <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">场体与透镜是几何读法。局部旋转群 SU(2)ᴺ 有 3N 个实参数，乘积纯态射线有 2N 个。受控键维 χ 的 MPS 可描述低纠缠态，参数量为 O(Nχ²)。一般纯态需要 2ᴺ⁺¹−2 个实参数；典型 Haar 态具有体积律纠缠。这些数目没有给出通用高效经典模拟算法。</span><span class="en">The bodies and lens illustrate a geometric reading. Local rotations in SU(2)ᴺ have 3N real parameters and product pure rays have 2N. Bounded-χ MPS describe low-entanglement families with O(Nχ²) parameters. A generic pure ray has 2ᴺ⁺¹−2 real parameters, and typical Haar states have volume-law entanglement. These counts give no general efficient classical simulation.</span></span></div>
+    <div class="lean open"><span class="ok">OPEN</span><span><a class="zh" href="../../zh/ch38-s07-blindspot-and-relativization.html#prob-ch38-unrelativized-p-vs-np-and-independence" target="_top">P 与 NP 及其独立性</a><a class="en" href="../../en/ch38-s07-blindspot-and-relativization.html#prob-ch38-unrelativized-p-vs-np-and-independence" target="_top">P versus NP and independence</a> · <a class="zh" href="../../zh/ch39-s11-af-gut-arc-field-grand-unification.html#prob-ch39-af-gut-threshold-and-proton-stability" target="_top">统一阈值与质子稳定性</a><a class="en" href="../../en/ch39-s11-af-gut-arc-field-grand-unification.html#prob-ch39-af-gut-threshold-and-proton-stability" target="_top">Unification thresholds and proton stability</a></span></div>
+  </section>
+</aside>
+<footer class="rail"><div class="transport"><button type="button" class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Rewind">⏮</button><button type="button" class="tbtn" id="play" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▶</button><span class="chips" id="speedChips" role="group" aria-label="速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span></div><div class="clock"><span class="tau" id="tau"></span><input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="场体相位" data-aria-en="Field phase"></div><div class="keys"><span id="hint"></span><span id="formula"></span></div></footer>
+</div>
+<div class="drawer" id="drawer" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="row"><h2 id="drawerTitle"><span class="zh">如何读这两层</span><span class="en">Reading the two layers</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+  <p class="lede"><span class="zh">这是数值沙盘，不是证明。上层显示场的组合，下层把选定对象写成平直基坐标。每张卡的下层柱高都按本帧最大模长缩放以便辨认，再乘展平强度 λ。实时读数给出未经缩放的准确范数与维数。拖琥珀手柄调整投影强度，拖背景旋转视角。</span><span class="en">This numerical sandbox is not a proof. The upper layer composes fields. The lower layer writes the chosen object in a linear basis. On every card, lower pillar heights are scaled to the largest magnitude in the current frame for legibility, then multiplied by the lens flattening λ. The live readouts give the exact, unscaled norms and dimensions. Drag the amber handle to adjust the projection, or drag the background to orbit.</span></p>
+  <ol>
+    <li><span class="zh">单场的三个轴两两形成三个旋量平面。取单位轴 n，四元数的四个实坐标为 (cos(θ/2), n sin(θ/2))，平方和为 1。</span><span class="en">Three axes determine three pairs and hence three bivector planes. For unit n, the four real quaternion coordinates (cos(θ/2), n sin(θ/2)) have squared sum one.</span></li>
+    <li><span class="zh">Spin(4) 的左右 SU(2) 因子各有三个参数。四维向量有四个坐标，反对称二阶张量有六个；左侧 2 × 2 根柱显示 qᴸ · 1 · q̄ᴿ，右侧两排各三根柱显示一个示例二形式 qᴸ ∧ qᴿ 的电、磁坐标。欧氏 Spin(4) 与洛伦兹时空有不同的度规。</span><span class="en">Each chiral SU(2) factor of Spin(4) has three parameters. A four-vector has four coordinates and a two-form has six. The left 2 × 2 block represents qᴸ · 1 · q̄ᴿ. The right two rows carry electric and magnetic coordinates of the sample two-form qᴸ ∧ qᴿ. Euclidean Spin(4) and Lorentzian spacetime have different metrics.</span></li>
+    <li><span class="zh">有向线 (124) (235) (346) (457) (561) (672) (713) 中，前两基元之积等于第三个。反向变号。结合子 [a,b,c] = (ab)c − a(bc) 在线上为零，其余 28 个无序三元组的范数均为 2。</span><span class="en">On each oriented line (124) (235) (346) (457) (561) (672) (713), the first two basis elements multiply to the third. Reversing them changes the sign. The associator [a,b,c] = (ab)c − a(bc) vanishes on a line and has norm two on all 28 other unordered triples.</span></li>
+    <li><span class="zh">十六元数取 S₁₆ = 𝕆 ⊕ 𝕆e₈。(a,b)(c,d) = (ac − d̄b, da + bc̄)。切换两个输入的组合，可逐项检验范数平方积为 4，输出的十六个坐标全为零。</span><span class="en">Use S₁₆ = 𝕆 ⊕ 𝕆e₈ with (a,b)(c,d) = (ac − d̄b, da + bc̄). Switch input pairs to see two factors of norm √2 cancel in every output coordinate.</span></li>
+    <li><span class="zh">多体卡的柱高取乘积态样本的振幅绝对值。台前的青色与品红线段按单体与多体泡利槽位数分段。N 比特有 2ᴺ 个复振幅，去掉归一化与整体相位后纯态射线的实维数为 2·2ᴺ−2。4ᴺ−1 个非恒等泡利字中有 3N 个单体字。其余是无迹算子空间的关联方向，密度矩阵还须满足正性。</span><span class="en">The many-body pillars show absolute amplitudes of a product-state sample. The cyan and magenta front edge divides one-site from multi-site Pauli slots in proportion to their counts. N qubits have 2ᴺ complex amplitudes. Removing normalization and global phase leaves 2·2ᴺ−2 real pure-ray parameters. Exactly 3N of the 4ᴺ−1 nonidentity Pauli words have weight one. The remainder counts correlation directions in traceless operator space. Physical density matrices also obey positivity.</span></li>
+    <li><span class="zh">在开边界 MPS 一般满秩层，令 rₖ = min(χ,2ᵏ,2ᴺ⁻ᵏ)。原始复参数有 ∑2rₖ₋₁rₖ 个，内部换基占 ∑rₖ² 个复维数（只计内部键）。取差 D 后，纯态射线实维数为 2D−2。较低秩层的维数可更小。</span><span class="en">On the generic full-rank stratum of an open-boundary MPS, let rₖ = min(χ,2ᵏ,2ᴺ⁻ᵏ). Subtract the internal bond gauge dimension ∑rₖ² from the raw complex entry count ∑2rₖ₋₁rₖ to get D. The ray has 2D−2 real parameters. Lower-rank strata can be smaller.</span></li>
+  </ol>
+  <p class="refs"><a class="zh" href="../../zh/ch39-s20-ternion-field-composition-and-hilbert-reprojection.html#sec-ch39-ternion-field-composition-and-hilbert-reprojection" target="_top">§39.20 · 三元数即原生场与希尔伯特再投影</a><a class="en" href="../../en/ch39-s20-ternion-field-composition-and-hilbert-reprojection.html#sec-ch39-ternion-field-composition-and-hilbert-reprojection" target="_top">§39.20 · Ternions as native fields and Hilbert reprojection</a></p>
+</div></div>
+<script src="main.js"></script>
+</body>
+</html>

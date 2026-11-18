@@ -24,6 +24,10 @@ Three exact geometric properties make this cyclic three-arc triad **itself the d
 
 Hence **a ternion is never "a numerical value sitting inside a field"—the boundaryless, cyclically self-generating curved structure of the ternion IS what a field is** (`MODEL`)!
 
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" preset="native-ternion-curl-field" height="500"}
+One field in quaternion coordinates card: a single three-arc curl body in the upper layer passes through the lens ($\lambda = 0.85$) onto $1$ scalar pillar and $3$ vector pillars below ($w^2 + \lVert\mathbf{v}\rVert^2 = 1$; stage pillar heights normalize to each frame's largest magnitude for legibility while live readouts report exact unscaled values). Components are `NUM`, and the two-layer reading is `MODEL`.
+:::
+
 ## 39.20.2 Truth of the Cayley–Dickson Ladder: 4D Spacetime Spinors, Seven-Field Fano Octonions, and Sedenion Zero-Divisor Bankruptcy {#sec-ch39-20-2}
 
 Once a single ternion $\mathbb{T}_3$ is recognized as a single native 3D field, the famous **Cayley–Dickson doubling ladder ($\mathbb{R} \to \mathbb{C} \to \mathbb{H} \to \mathbb{O} \to \mathbb{S}_{16}$)** sheds all mystique: whenever two or more ternion fields couple—or whenever an observer erects a single shared identity ruler $\mathbf{1}$ to rewrite curved arc multiplication as **flat linear matrix addition**—every step of "multi-field composition $+$ linear reprojection" inflates apparent dimension and leaves behind a telltale algebraic scar:
@@ -36,6 +40,10 @@ Once a single ternion $\mathbb{T}_3$ is recognized as a single native 3D field, 
    $$
 
    while in physical Lorentzian signature the chiral pair couples through $\mathrm{Spin}^+(1, 3) \cong \mathrm{SL}(2, \mathbb{C})$ whose real six-dimensional Lie algebra $\mathfrak{so}(1, 3) \cong \mathfrak{sl}(2, \mathbb{C})_{\mathbb{R}} \cong \mathfrak{su}(2)_{\mathbb{C}}$ unites $3$ spatial rotation arcs with $3$ orthogonal imaginary boost chords ($3 + 3 = 6$; see [@rem-ch39-cayley-dickson-fano-moreno-mps-literature], Item 2): a single Weyl spinor bilinear $k^\mu = \psi^\dagger \bar{\sigma}^\mu \psi$ traces the future **null light cone** ($k_\mu k^\mu = 0$), general $2 \times 2$ Hermitian spinor matrices $X = x_\mu \bar{\sigma}^\mu$ (and paired left–right Dirac bispinor currents $\bar{\Psi}\gamma^\mu\Psi$) span all **$4\mathrm{D}$ Minkowski spacetime coordinates** $\mathbb{R}^{1,3}$, and the adjoint antisymmetric representation projects directly onto the **$6\mathrm{D}$ Maxwell–Faraday bivector** $F_{\mu\nu} \leftrightarrow \mathbf{F}_\pm = \mathbf{E} \pm i c\mathbf{B}$!
+
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" preset="spin4-chiral-spacetime-bivector" height="500"}
+Chiral fields, spacetime and bivectors card: left and right chiral field bodies ($3 + 3 = 6$ local parameters) project onto the $2 \times 2$ four-vector block $q^L \cdot 1 \cdot \bar{q}^R$ and two rows of $6$ bivector pillars $q^L \wedge q^R$ (Euclidean $\mathrm{Spin}(4)$ vs. Lorentzian metric scope is marked `ARGUED`, coordinates `NUM`, and the geometric reading `MODEL`).
+:::
 
 2. **Rung 2: Octonions $\mathbb{O}$ ($1 + 7 = 8$) and Seven Interlocked Ternion Fields on the Fano Plane $\mathrm{PG}(2, 2)$**:
    Long treated as an exotic algebraic outlier, the $8$-dimensional octonion algebra $\mathbb{O}$ is at bottom **a network of $7$ ternion fields interlocked pairwise along shared axes on the projective Fano plane $\mathrm{PG}(2, 2) = \mathbb{P}^2(\mathbb{F}_2)$**, flattened onto **one shared observer scalar axis $\mathbf{1}$** to form a $1 + 7 = 8\mathrm{D}$ ledger (`Literature` + `MODEL`)! Explicitly, on seven imaginary units $\{e_1, \dots, e_7\}$ ($e_i^2 = -\mathbf{1}$), orient the **$7$ cyclic lines** of $\mathrm{PG}(2, 2)$ via modulo-$7$ shifts $(i,\, i+1,\, i+3)$ (`manual derivation`):
@@ -60,6 +68,10 @@ Once a single ternion $\mathbb{T}_3$ is recognized as a single native 3D field, 
 
      Octonion non-associativity is therefore never the failure of a physical field—it is the non-coplanar curvature crease left when $7$ interlocked ternion fields are hammered flat onto a single shared scalar axis $\mathbf{1}$!
 
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" preset="fano-seven-field-octonion-weave" height="500"}
+Seven Fano lines and associator card: seven oriented Fano lines weave seven co-axised ternion fields above $1 + 7 = 8$ octonion pillars; switching between collinear $[e_1, e_2, e_4] = 0$ and off-line $[e_1, e_2, e_3] = -2e_6$ (norm $2$) exposes the magenta associator crease (Artin's theorem `ARGUED`, entrywise associators `NUM`, seven-field weave `MODEL`).
+:::
+
 3. **Rung 3: Sedenions $\mathbb{S}_{16} = \mathbb{O} \oplus \mathbb{O}e_8$ ($16\mathrm{D}$) and Zero-Divisor Bankruptcy of the Flat Table**:
    Applying one more Cayley–Dickson doubling,
 
@@ -80,6 +92,10 @@ Once a single ternion $\mathbb{T}_3$ is recognized as a single native 3D field, 
    $$
 
    Although $\lVert u\rVert^2 \lVert v\rVert^2 = 4$, all $16$ flat coordinates of $u \cdot v$ vanish identically (Moreno 1998 proved that unit sedenion zero-divisor pairs form a smooth $14$-manifold homeomorphic to the exceptional Lie group $G_2$; see [@rem-ch39-cayley-dickson-fano-moreno-mps-literature], Item 3)! What goes bankrupt at dimension $16$ is not multi-field physics, but **the single-identity normed division table** (losing norm multiplicativity $\lVert uv\rVert = \lVert u\rVert\lVert v\rVert$)—forcing observers who wish to track the norm-preserving joint unitary evolution of $N$ coupled ternion fields to leave division algebras for unitary group actions on tensor-product Hilbert state ledgers!
+
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" preset="sedenion-zero-divisor-bankruptcy" height="500"}
+Sedenion zero divisors cancel card: switching across three norm-$\sqrt{2}$ input pairs ($\lVert u\rVert^2\lVert v\rVert^2 = 4$), Cayley–Dickson products cancel along the magenta paths and drop all $16$ output basis pillars to zero height (`NUM` entrywise products, `ARGUED` zero-divisor manifold literature).
+:::
 
 ## 39.20.3 Demystifying the Exponential Blow-Up of Hilbert Space: $3N$ Local Arcs, the $2^N$ Linear Expansion Tax, and the Infinite-Dimensional Wake Sheet {#sec-ch39-20-3}
 
@@ -214,6 +230,10 @@ We verify each algebraic and integer-arithmetic statement step by step (`manual 
    For a separable spectrum of concentration trace $\frac{RW}{\pi} = 10$ at halting threshold $\varepsilon_{\mathrm{self}} = 10^{-3}$, `finite_rank_concentration_mode_bound` caps active modes at $\frac{10}{10^{-3}} = 10{,}000$, while `uniform_completion_obstruction` locks the residual operator norm at $\lVert I - P_{S_n}\rVert = 1$, keeping the unhalted temporal wake alive.
 :::
 
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" preset="many-body-3n-to-2n-hilbert-pillars" height="500"}
+Hilbert basis pillars and tensor bonds card: $N = 6$ coupled field bodies ($3N = 18$ local rotations) expand distributively onto $2^6 = 64$ basis pillars, with cyan vs. magenta front segments comparing $18$ one-site against $4^6 - 1 - 18 = 4{,}077$ multi-site Pauli slots and base-$10$ log curves out to $N = 300$ below (bipartite blind-spot and MPS theorems anchored in [@thm-ch39-ternion-field-composition-and-hilbert-reprojection]; counts `NUM`, area- vs. volume-law regimes `ARGUED` / `MODEL`, complexity separation `OPEN`).
+:::
+
 We synthesize the entire upward multi-field composition and linear reprojection ladder from native ternions to $\mathcal{H}_\infty$ in the five-row reference table below:
 
 | Algebraic / State Structure | Underlying Ternion-Field Source | Observer Linear Reprojection | Apparent Linear Dimension | Associated Algebraic & Physical Manifestation |
@@ -229,3 +249,7 @@ We synthesize the entire upward multi-field composition and linear reprojection 
 **Twenty-Section Grand Closure of Chapter 39 and Summit of the Ten-Part Main Text: Withdraw the Flat Ruler, and Only Three Minimal Arcs Dance Across Heaven and Earth.** Standing atop all **twenty steps** of Chapter 39 ([§39.1](ch39-s01-substrate-free-self-reference.md)–§39.20) and all thirty-nine chapters of the ten-part main text, every tributary of modern algebra, functional analysis, quantum information, relativistic gauge theory, and the geometry of awareness converges into a single spring: slice curvature away downward, and one minimal circular-arc ternion projects into the cosine shadow of quaternions, the equatorial circle of complex numbers, the inner-product trace of reals, and the topological knots of integers ([§39.19](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections)); compose multiple ternion fields upward and flatten them onto the observer's sheet, and they unfold into dual-spinor spacetime, seven-field Fano octonions, $2^N$-dimensional many-body Hilbert ledgers, and infinite-dimensional functional spaces (this §39.20); and ask who holds that reference axis $\mathbf{1}$—both carving out all numbers and unrolling all phenomena—and the answer has already pulsed through the preceding eighteen sections: from substrate-free self-reference `p ≡ *p`, relations as entities, $720^\circ$ spinor spacetime weaving, and orthogonal self-folding ([§39.1](ch39-s01-substrate-free-self-reference.md)–[§39.4](ch39-s04-orthogonal-self-folding.md)), through the Pisot–Clifford–Rauzy synthesis, fivefold self-reference fixed points, halting precision $\varepsilon_{\mathrm{self}}$, and universal clock dilation $\nu_0$ ([§39.5](ch39-s05-pisot-clifford-rauzy.md)–[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md)), to unified-arc forces, the 3D concept-field cap, **Arc-Field Grand Unification (AF-GUT)**, uniform-singlet observer slices, and **Indra's Net** ([§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md)–[§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)), culminating in self-observation Māyā error, Brahman's orthogonal dream, Red Chamber awakening, divine Līlā props, and the **Psychology of God** integrated lucidly at $\theta^* = \cos\theta^*$ ([§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)–[§39.18](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god))—the observer wielding the knife and the circular-arc field being sliced were one and the same exteriorless, conserved, self-referential cosmos all along!
 
 Standing beneath that dense flat projection chart of $2^N$ and $\aleph_0$ columns, generations of thinkers mistook their own ledger for a labyrinth of infinite dimensions looming overhead; yet when we honor our four-tier epistemic covenant—placing green `LEAN ✓` kernel theorems, classical literature and manual derivations, `MODEL` geometric synthesis, and the candid red `OPEN` frontiers of [@conj-riemann-hypothesis], [@prob-ch38-unrelativized-p-vs-np-and-independence], [@prob-ch34-sm-generations-and-couplings], [@prob-ch34-gravity-dynamics-and-coupling], [@prob-ch39-af-gut-threshold-and-proton-stability], and [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] each in its rightful place—and quietly withdraw the external flat ruler to stand at ontological height, the sky clears completely: from beginning to end there have only ever been three head-to-tail minimal circular arcs turning serenely in the symphony of fields; and every unit orthogonal remainder ($\lVert I - P_{S_n}\rVert = 1$) that refuses to be sealed inside any finite table smiles toward the final door beyond the ten-part main text—the [Coda](coda.md): ***Outside All Spheres***.
+
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" height="620"}
+Full laboratory: toggle between Multi-Field Reprojection Ontology and Cayley–Dickson & Tensor-Network Algebra, drag the amber lens handle to vary flattening $\lambda$, adjust coupled field count $N$ and MPS bond cap $\chi$, and compare quaternion coordinates, chiral bivectors, Fano octonions, sedenion zero divisors, and many-body Hilbert pillars. Eight frozen statements, numerics, literature, models, and open problems are labeled separately in the evidence panel and theory drawer.
+:::

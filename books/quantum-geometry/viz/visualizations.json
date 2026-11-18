@@ -7600,6 +7600,196 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "ternion-number-projection-sandbox",
+      "code": "TERNION//NUMBERS",
+      "title": "TERNION//NUMBERS · 三元数（极小圆弧体）投影生万数与弗罗贝尼乌斯缺口沙盘",
+      "title_en": "TERNION//NUMBERS · Ternion (Minimal Circular-Arc Body) Number-System Projections & Frobenius Gap Sandbox",
+      "summary": "转到 180°，平直坐标的柱子冲出量程，紫色弧体却能继续转到 720°。在四个投影台比较同一条弧的标量影、赤道相位、迹和整圈数。",
+      "summary_en": "Turn to 180° and the flat coordinate runs off its scale. The violet rotor continues through 720°. Four stations read the scalar shadow, equatorial phase, trace and full turns of the same arc.",
+      "path": "ternion-number-projection-sandbox/",
+      "thumbnail": "ternion-number-projection-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-18",
+      "chapter": 39,
+      "section": "39.19",
+      "presets": [
+        "flat-3d-zero-divisor-gimbal-deadlock",
+        "hamilton-quaternion-w-shadow-tax",
+        "complex-equatorial-hopf-slice",
+        "real-trace-geodesic-projection",
+        "homotopy-pi3-integer-winding"
+      ],
+      "preset_titles": {
+        "flat-3d-zero-divisor-gimbal-deadlock": {
+          "zh": "三维平直死锁与 180° 极点",
+          "en": "Flat triplet and the 180° pole"
+        },
+        "hamilton-quaternion-w-shadow-tax": {
+          "zh": "第四维的余弦影与矢高税",
+          "en": "The fourth coordinate and its sagitta"
+        },
+        "complex-equatorial-hopf-slice": {
+          "zh": "赤道切片消去非对易角盈",
+          "en": "The equatorial slice loses its excess"
+        },
+        "real-trace-geodesic-projection": {
+          "zh": "实迹读出半角投影",
+          "en": "The real trace reads the half-angle"
+        },
+        "homotopy-pi3-integer-winding": {
+          "zh": "双圈闭合与素数赋值平衡",
+          "en": "Two turns close the lift. Prime norms balance."
+        }
+      },
+      "tags": [
+        "三元数",
+        "除代数",
+        "半角投影",
+        "圆双覆叠",
+        "阿代尔乘积"
+      ],
+      "tags_en": [
+        "Ternion",
+        "Division algebra",
+        "Half-angle projection",
+        "Circle double cover",
+        "Adelic product"
+      ],
+      "theory": [
+        {
+          "label": "§39.19 · 不可表达的三元数与万数归弧",
+          "label_en": "§39.19 · Inexpressible ternions and all numbers from one arc",
+          "href": "../zh/ch39-s19-inexpressible-ternions-and-number-projections.html#sec-ch39-inexpressible-ternions-and-number-projections",
+          "href_en": "../en/ch39-s19-inexpressible-ternions-and-number-projections.html#sec-ch39-inexpressible-ternions-and-number-projections"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/SpinFactor/OriginalClassification.complete_consequences"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian"
+        },
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        },
+        {
+          "gid": "D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_invariant"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "ternion-field-hilbert-reprojection-sandbox",
+      "code": "TERNION//HILBERT",
+      "title": "TERNION//HILBERT · 三元数场组合与再投影阶梯沙盘：从四元数、法诺八元数到希尔伯特空间",
+      "title_en": "TERNION//HILBERT · Ternion Field Composition & Reprojection Ladder Sandbox: From Quaternions and Fano Octonions to Hilbert Space",
+      "summary": "拖动透镜，看上层弧面场投向基柱。逐一比较四元数坐标、左右手征场、法诺乘法与十六元数零因子，再用 N 和 χ 对照局部旋转、纯态及张量网络的参数量。",
+      "summary_en": "Drag the lens to project curved fields onto a basis. Compare quaternion coordinates, chiral fields, Fano multiplication and sedenion zero divisors, then vary N and χ to compare local rotations, pure rays and tensor-network dimensions.",
+      "path": "ternion-field-hilbert-reprojection-sandbox/",
+      "thumbnail": "ternion-field-hilbert-reprojection-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-18",
+      "chapter": 39,
+      "section": "39.20",
+      "presets": [
+        "native-ternion-curl-field",
+        "spin4-chiral-spacetime-bivector",
+        "fano-seven-field-octonion-weave",
+        "sedenion-zero-divisor-bankruptcy",
+        "many-body-3n-to-2n-hilbert-pillars"
+      ],
+      "preset_titles": {
+        "native-ternion-curl-field": {
+          "zh": "原生单场与四元数外嵌",
+          "en": "One field in quaternion coordinates"
+        },
+        "spin4-chiral-spacetime-bivector": {
+          "zh": "左右双场、时空与电磁双矢",
+          "en": "Chiral fields, spacetime and bivectors"
+        },
+        "fano-seven-field-octonion-weave": {
+          "zh": "法诺七场与非结合折痕",
+          "en": "Seven Fano lines and an associator"
+        },
+        "sedenion-zero-divisor-bankruptcy": {
+          "zh": "十六元数零因子与基柱归零",
+          "en": "Sedenion zero divisors cancel"
+        },
+        "many-body-3n-to-2n-hilbert-pillars": {
+          "zh": "多场耦合、希尔伯特基柱与张量网络",
+          "en": "Hilbert basis pillars and tensor bonds"
+        }
+      },
+      "tags": [
+        "四元数",
+        "法诺平面",
+        "零因子",
+        "希尔伯特空间",
+        "矩阵乘积态"
+      ],
+      "tags_en": [
+        "Quaternions",
+        "Fano plane",
+        "Zero divisors",
+        "Hilbert space",
+        "Matrix product states"
+      ],
+      "theory": [
+        {
+          "label": "§39.20 · 三元数即原生场与希尔伯特再投影",
+          "label_en": "§39.20 · Ternions as native fields and Hilbert reprojection",
+          "href": "../zh/ch39-s20-ternion-field-composition-and-hilbert-reprojection.html#sec-ch39-ternion-field-composition-and-hilbert-reprojection",
+          "href_en": "../en/ch39-s20-ternion-field-composition-and-hilbert-reprojection.html#sec-ch39-ternion-field-composition-and-hilbert-reprojection"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot"
+        },
+        {
+          "gid": "D5/S3/Observer/Tomography/FiniteStageExpansion.finite_stage_expansion"
+        },
+        {
+          "gid": "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound"
+        },
+        {
+          "gid": "D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction"
+        },
+        {
+          "gid": "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSDensityRecovery.observable_chart_phase_recovery"
+        },
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut"
+        },
+        {
+          "gid": "D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

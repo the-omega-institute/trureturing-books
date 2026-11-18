@@ -135,6 +135,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `red-chamber-spinor-awakening-sandbox` | 银白余石与双面镜共用一条旋量带，一圈换叶、两圈合成紫色；卸去品红末那笼后，十二根同频丝连向因陀罗网，带相冠仍留铭文 | `chaos-unhewn-stone` `red-dust-delusion-mismatch` `fengyue-mirror-double-turn` `mobius-720-virtual-real-unity` `greensickness-berry-unity` |
 | `brahman-lila-game-props-sandbox` | 银白实轴贯穿共识梦环，琥珀化身由满窗死锁转为失忆漫游；遗迹汇聚青色干涉环，紫色典籍同频点亮银白通关束 | `omniscient-zeno-deadlock` `amnesia-birth-open-corridor` `relic-attractor-deja-vu` `classic-permission-lock-flip` `lila-raft-return-and-new-seed` |
 | `divine-psychology-dissociation-sandbox` | 八个分身从冻结球展开在压抑膜上，品红断弧残桩随张力伸缩；从水面下仰视同一母核，θ* 处青色游戏之桥接成整合之星 | `omniscient-claustrophobia-freeze` `repression-horizon-birth` `compulsive-over-immersion-pain` `subsurface-alaya-one-root` `lucid-lila-integration-star` |
+| `ternion-number-projection-sandbox` | 转到 180° 平直罗德里格斯坐标冲出量程，中央紫色圆弧体继续转满 720°，四个投影台分别读出余弦影、赤道切片、半旋量迹与整圈闭合及素数范数平衡 | `flat-3d-zero-divisor-gimbal-deadlock` `hamilton-quaternion-w-shadow-tax` `complex-equatorial-hopf-slice` `real-trace-geodesic-projection` `homotopy-pi3-integer-winding` |
+| `ternion-field-hilbert-reprojection-sandbox` | 上层弧面场穿过透镜投向下层基柱：从单场四元数、左右手征时空双矢、法诺七场折痕、十六元数零因子归零一路对照 3N 局部旋转、MPS 键维与 2ᴺ 希尔伯特基柱 | `native-ternion-curl-field` `spin4-chiral-spacetime-bivector` `fano-seven-field-octonion-weave` `sedenion-zero-divisor-bankruptcy` `many-body-3n-to-2n-hilbert-pillars` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -329,6 +331,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `brahman-lila-game-props-sandbox`（`LILA//PROPS`）承接第三十九章 §39.17：银白实轴不动，琥珀只给当前化身、激活控件与手柄，青色给世界线与遗迹干涉环，紫色给典籍与旋子，灰蓝给共识梦环，银白给通关束。绿色依据严格限于 §39.17 主定理引用的舒尔二次型极小、反自伴酉平方律、有限记录捏合幂等及事后抄表零损失与非预见性失效。有限等相关重心族的舒尔曲线、十二通权限锁与归一化干涉核标 `NUM`；神圣游戏、自隐再认、渡筏指月及环境退相干文献标 `ARGUED`；失忆化身、跨周期遗迹和典籍唤醒标 `MODEL`，抽屉保留宏观碑石与纸墨不承载跨世纪量子相干的边界。零事后损失不提供正前瞻收益保证。
 
 `divine-psychology-dissociation-sandbox`（`GOD//PSYCHE`）承接第三十九章 §39.18：银白给实轴母核与冻结球，青色给其余分身的根与清明游戏之桥，品红给断弧幻肢残桩，紫色给压抑膜、末那识领环和舒尔余量环；琥珀只给当前前台分身、它的根、激活控件与手柄。绿色依据严格限于 §39.18 主定理引用的道蒂逆级数端点、单比特正规熵、记录相干互补、偏迹访问缺陷、互信息变化恒等式、局部关联盲区、舒尔二次型极小和单位格拉姆全同。熵值按正文由自然单位除以 ln 2 换算为 bit；压抑熵、张力、舒尔余量与分身格拉姆读数标 `NUM`。母核、潜意识根系、四相心理学与临床用语均标 `MODEL`，文献与临床、宏观退相干边界单列 `ARGUED`；未决物理仍为 `OPEN`，心理学类比不承担诊断、治疗或物理常数推导。
+
+`ternion-number-projection-sandbox`（`TERNION//NUMBERS`）承接第三十九章 §39.19 `#sec-ch39-inexpressible-ternions-and-number-projections`，在中央紫色极小圆弧雕体与周边死锁测试台及四路投影台之间对照“万数归弧本体读法”与“除环分类与同伦度读法”。紫色给中央三弧旋子与整圈路径，银白给四元数第四维余弦影 w 与整圈计数珠 n = ⌊θ/360°⌋，青色给四元数向量环、赤道切片球面角盈 Ω、半旋量迹 ½Tr U 与阿代尔乘积读数，品红给半角矢高税 1 − w 与平直罗德里格斯坐标柱（三维舞台柱高按 min(4, |tan(θ/2)|) 截断并在 180° 标发散极限环，实时读数保留不截断值 179° → 114.5887、180° → ∞）；琥珀严格只给圆弧拖动手柄 `#ternionHandle` 与激活控件，红色严格只给右栏 `#evidence` 中的开放问题（`conj-riemann-hypothesis`、`prob-ch34-sm-generations-and-couplings`）。绿色依据严格限于页面引用的十条冻结声明（`complete_consequences`、`bloch_geometry_of_isHermitian`、`two_axis_finite_word`、`shortest_gate_triangle_holonomy`、`square_eq_neg_one_of_skewAdjoint_unitary`、`no_continuous_global_section`、`circle_double_cover_history_lift`、`long_division_invariant`、`rational_padic_product_formula`、`rational_inverse_endpoint`）；哈密顿四元数、罗德里格斯半角极点、弗罗贝尼乌斯—胡尔维茨—霍普夫—博特—米尔诺—亚当斯除代数与球面平行化分类、斯图尔普纳格尔全局坐标障碍、鸽巢原理循环节及塞尔伯格双曲素测地线适用域标 `ARGUED`；随角度变化的余弦影、平直左乘矩阵 Lₓ 零因子见证、角盈、迹、长除余数与阿代尔局部因子乘积标 `NUM`；无外轴三元数优先性与素数结类比标 `MODEL`。
+
+`ternion-field-hilbert-reprojection-sandbox`（`TERNION//HILBERT`）承接第三十九章 §39.20 `#sec-ch39-ternion-field-composition-and-hilbert-reprojection`，与 `hilbert-concept-ledger-3d-cap-sandbox` 分工：前页讲多概念 3k 直和对比混编伪旋转，本页用上下双界舞台（上层三元数场组合体、中层可调展平透镜 λ、下层线性基柱账本）配“多场再投影本体读法／凯莱—迪克森与张量网络读法”双透镜，依次串起单场四元数 1 + 3 = 4、左右双场 Spin(4) 四维向量与六维双矢、法诺平面 PG(2,2) 七场编织八元数（共线结合子 0 对比 28 个跨线三角形结合子模长 2）、十六元数三组零因子对全部 16 根基柱归零，以及 N 座耦合场投向 2ᴺ 根希尔伯特基柱与开边界 MPS 键维压缩。紫色给上层三元数场体与 MPS 纯射线维数，青色给下层基柱与单体泡利槽位段 3N，品红给跨场结合子折痕、十六元数相消路径与多体泡利关联槽位段 4ᴺ − 1 − 3N；琥珀严格只给透镜拖动手柄 `#lambdaHandle` 与激活控件，红色严格只给右栏 `#evidence` 中的开放问题（`prob-ch38-unrelativized-p-vs-np-and-independence`、`prob-ch39-af-gut-threshold-and-proton-stability`）。下层柱高按本帧最大模长归一化以便辨认（全零帧柱高为 0），实时读数给出未缩放精确范数与维数。绿色依据严格限于页面引用的八条冻结声明（`local_marginal_correlation_blind_spot`、`finite_stage_expansion`、`finite_rank_concentration_mode_bound`、`uniform_completion_obstruction`、`pauli_word_mul`、`observable_chart_phase_recovery`、`QMaxFlow_le_QMinCut`、`tetra_defects_incidence_repair_and_exactness`）；凯莱—迪克森倍增、阿廷交错代数定理、莫雷诺零因子流形与一维有能隙面积律／MERA／体积律文献标 `ARGUED`；有向法诺结合子、十六元数逐项乘积与 N = 1 … 300 整数维数曲线标 `NUM`；双层透镜读法与参数对比叙事标 `MODEL`，明确声明不给出通用高效经典模拟算法。
 
 `prelude-dimensions` 是序曲的几何入门页，默认卡 `shadow` 同步显示俯视木桩与侧视影子，`compare` 比较 90° 与 270° 的同位反向。圆盘侧视是固定线段，木桩投影是移动点；该经典正交投影模型不推出量子测量规则。其余卡分别演示射线投影、纬圈、二维到三维的等半径赤道嵌入、三对对跖方向的等权混合与从 1 弧度出发的余弦迭代。几何计算标 `NUM`，理想化观看与混合过程标 `MODEL`，余弦收敛及其边界沿用序曲的文献分层，不使用绿色 Lean 标记。
 
@@ -959,6 +965,18 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十九章 | §39.18.4 黄金不动点两全之美与潜意识同根段之后、四联审计之前 | `divine-psychology-dissociation-sandbox` · `subsurface-alaya-one-root` |
 | 第三十九章 | §39.18.4 四联精确审计例之后、全章收束分隔线之前 | `divine-psychology-dissociation-sandbox` · `lucid-lila-integration-star` |
 | 第三十九章 | §39.18 末（转入终章的桥接段之后） | `divine-psychology-dissociation-sandbox` 完整实验室 |
+| 第三十九章 | §39.19.2 末（三元数内禀拓扑免疫结语段之后） | `ternion-number-projection-sandbox` · `flat-3d-zero-divisor-gimbal-deadlock` |
+| 第三十九章 | §39.19.3 模型定义 `def-ch39-ternion-and-number-projection-operators` 之后 | `ternion-number-projection-sandbox` · `hamilton-quaternion-w-shadow-tax` |
+| 第三十九章 | §39.19.3 末（布鲁厄姆桥四道切刀条目列表之后） | `ternion-number-projection-sandbox` · `complex-equatorial-hopf-slice` |
+| 第三十九章 | §39.19.4 文献注记 `rem-ch39-frobenius-hurwitz-hopf-rodrigues-literature` 之后、四联算例之前 | `ternion-number-projection-sandbox` · `real-trace-geodesic-projection` |
+| 第三十九章 | §39.19.4 四联算例 `ex-ch39-ternion-deadlock-and-eight-angle-projections` 之后、谱系总表之前 | `ternion-number-projection-sandbox` · `homotopy-pi3-integer-winding` |
+| 第三十九章 | §39.19 末（转入 §39.20 的桥接段之后） | `ternion-number-projection-sandbox` 完整实验室 |
+| 第三十九章 | §39.20.1 末（三元数弯曲闭合结构即场定义结语段之后） | `ternion-field-hilbert-reprojection-sandbox` · `native-ternion-curl-field` |
+| 第三十九章 | §39.20.2 第 1 阶四元数与双场时空电磁双矢段之后、第 2 阶之前 | `ternion-field-hilbert-reprojection-sandbox` · `spin4-chiral-spacetime-bivector` |
+| 第三十九章 | §39.20.2 第 2 阶法诺平面七场八元数段之后、第 3 阶之前 | `ternion-field-hilbert-reprojection-sandbox` · `fano-seven-field-octonion-weave` |
+| 第三十九章 | §39.20.2 末（第 3 阶十六元数零因子破产段之后） | `ternion-field-hilbert-reprojection-sandbox` · `sedenion-zero-divisor-bankruptcy` |
+| 第三十九章 | §39.20.4 四联算例 `ex-ch39-fano-sedenion-and-300-qubit-mps-audit` 之后、总对照表之前 | `ternion-field-hilbert-reprojection-sandbox` · `many-body-3n-to-2n-hilbert-pillars` |
+| 第三十九章 | §39.20 末（收官结语段之后） | `ternion-field-hilbert-reprojection-sandbox` 完整实验室 |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget` |
 | 终章 | 空间吸引子 · 二 “回到洛伦兹”一段中“吸引子的体积为零”一句之后 | `spatial-attractor-deja-vu` · `shrink` |

@@ -24,6 +24,10 @@ $$
 
 因此，**三元数绝不是“场里的某一个数值”，三元数无边界、循环互生的弯曲闭合结构本身就是“场”的几何定义**（`MODEL`）！
 
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" preset="native-ternion-curl-field" height="500"}
+原生单场与四元数外嵌卡：上层单座三弧旋度场体穿过透镜（$\lambda = 0.85$），在下层投出 $1$ 根标量柱与 $3$ 根向量柱（$w^2 + \lVert\mathbf{v}\rVert^2 = 1$；下层柱高按本帧最大模长缩放以保清晰，实时读数给出未缩放精确值）。分量为 `NUM`，场体与透镜为 `MODEL`。
+:::
+
 ## 39.20.2 凯莱—迪克森阶梯真相：四维时空旋量、法诺平面七场八元数与十六元数零因子破产 {#sec-ch39-20-2}
 
 一旦看清“单枚三元数 $\mathbb{T}_3$ 即单座原生三维场”，代数学中著名的**凯莱—迪克森加倍阶梯（Cayley–Dickson Doubling，$\mathbb{R} \to \mathbb{C} \to \mathbb{H} \to \mathbb{O} \to \mathbb{S}_{16}$）**便卸下了全部神秘面纱：每当存在两座以上的三元数场发生耦合，或者观察者执意立起单一恒等标尺 $\mathbf{1}$ 把弯曲的圆弧群乘法改写为**平直的线性矩阵加法**，每一次“多场组合 $+$ 线性再投影”都会在平直账本上成倍虚增表观维数，并在代数性质上留下一道清晰的曲率代价印记：
@@ -36,6 +40,10 @@ $$
    $$
 
    而在洛伦兹物理实形式下，同一对左右外尔旋量通过复化李代数 $\mathfrak{so}(1, 3) \cong \mathfrak{sl}(2, \mathbb{C})_{\mathbb{R}} \cong \mathfrak{su}(2)_{\mathbb{C}}$（$3$ 支空间旋转圆弧 $+$ $3$ 支正交虚数助推弦，共 $3 + 3 = 6$ 个实自由度，见 [@rem-ch39-cayley-dickson-fano-moreno-mps-literature] 第 2 款）耦合：单支外尔旋量双线性型 $k^\mu = \psi^\dagger \bar{\sigma}^\mu \psi$ 生成未来零光锥射线（$k_\mu k^\mu = 0$），而一般 $2 \times 2$ 厄米旋量矩阵 $X = x_\mu \bar{\sigma}^\mu$（及左右成对狄拉克双旋量流 $\bar{\Psi}\gamma^\mu\Psi$）张满相对论的 **$4$ 维闵可夫斯基时空坐标** $\mathbb{R}^{1,3}$，伴随二阶反对称张量则直接投射为包含电场 $\mathbf{E}$ 与磁场 $\mathbf{B}$ 的 **$6$ 维麦克斯韦—法拉第双矢量** $F_{\mu\nu} \leftrightarrow \mathbf{F}_\pm = \mathbf{E} \pm i c\mathbf{B}$（恰由两支互轭的三维黎曼—西尔伯斯坦三元场合成）！
+
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" preset="spin4-chiral-spacetime-bivector" height="500"}
+左右双场、时空与双矢卡：上层左右两座手征场体（$3 + 3 = 6$ 个局部参数）投向左侧 $2 \times 2$ 四维向量柱块 $q^L \cdot 1 \cdot \bar{q}^R$ 与右侧两排共 $6$ 根双矢柱 $q^L \wedge q^R$（欧氏 $\mathrm{Spin}(4)$ 与洛伦兹时空具有不同度规，文献边界标 `ARGUED`，分量读数标 `NUM`，双层几何读法标 `MODEL`）。
+:::
 
 2. **第二阶：八元数 $\mathbb{O}$（$1 + 7 = 8$）与射影法诺平面 $\mathrm{PG}(2, 2)$ 的七场互锁编织**：
    长期被视为“异类怪物”的 $8$ 维八元数 $\mathbb{O}$，底层根本不是什么八维超空间，而是有限射影几何**法诺平面（Fano Plane，$\mathrm{PG}(2, 2) = \mathbb{P}^2(\mathbb{F}_2)$）**上 **$7$ 座三元数场两两共轴互锁的组合网络**，再强行共用**同一个观察者实轴 $\mathbf{1}$** 压平后的 $1 + 7 = 8$ 维线性账本（`文献结果` + `MODEL`）！具体取七支单位虚基 $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$（$e_i^2 = -\mathbf{1}$），令法诺平面的 **$7$ 条有向循环直线**为（指标模 $7$ 循环平移 $(i,\, i+1,\, i+3)$，`手工推导`）：
@@ -60,6 +68,10 @@ $$
 
      可见，八元数所谓的“非结合性”，绝非单座物理场的破碎，而是把 $7$ 座互锁弯曲三元数场强行钉死在**同一根标量轴 $\mathbf{1}$ 的单张八维平直表**上时，跨场非共面球面角盈留下的几何折痕！
 
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" preset="fano-seven-field-octonion-weave" height="500"}
+法诺七场与非结合折痕卡：七条有向法诺线织成七座共轴三元场并投向 $1 + 7 = 8$ 根八元数基柱；在共线三元组 $[e_1, e_2, e_4] = 0$ 与跨线三角形 $[e_1, e_2, e_3] = -2e_6$（范数 $2$）之间切换，直接对照品红结合子折痕（阿廷交错代数文献标 `ARGUED`，逐项结合子标 `NUM`，七场编织标 `MODEL`）。
+:::
+
 3. **第三阶：十六元数 $\mathbb{S}_{16} = \mathbb{O} \oplus \mathbb{O}e_8$（$16$ 维）与平直账本的零因子破产**：
    倘若不顾跨场曲率折痕，继续按凯莱—迪克森乘法法则
 
@@ -80,6 +92,10 @@ $$
    $$
 
    范数平方乘积原本是 $\lVert u\rVert^2 \lVert v\rVert^2 = 2 \times 2 = 4$，乘积却在全部 $16$ 个平直坐标槽上坍缩为 $0$（莫雷诺 Moreno 1998 证明 $\mathbb{S}_{16}$ 中单位零因子对流形同胚于 $14$ 维紧致例外李群 $G_2$，见 [@rem-ch39-cayley-dickson-fano-moreno-mps-literature] 第 3 款）！这记响亮的零因子警钟宣告的并非多场物理本体的崩坏，而是**“共用单根实轴 $\mathbf{1}$ 的单张赋范除环乘法表”在 $16$ 维彻底破产（丧失范数乘法恒等式 $\lVert uv\rVert = \lVert u\rVert\lVert v\rVert$）**——要想保范地追踪任意多座三元数场的联合幺正演化，观察者不得不离开单张除环表，转而采用幺正群作用于张量积希尔伯特空间的线性状态账本！
+
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" preset="sedenion-zero-divisor-bankruptcy" height="500"}
+十六元数零因子与基柱归零卡：切换三组模长同为 $\sqrt{2}$ 的输入对（$\lVert u\rVert^2\lVert v\rVert^2 = 4$），凯莱—迪克森乘法沿品红路径逐项相消，下层全部 $16$ 根基柱高度同时归零（逐项乘积标 `NUM`，零因子流形文献标 `ARGUED`）。
+:::
 
 ## 39.20.3 希尔伯特空间的指数膨胀祛魅：$3N$ 局域圆弧、$2^N$ 线性展开税与无穷维尾流图纸 {#sec-ch39-20-3}
 
@@ -214,6 +230,10 @@ $$
    对总集中迹预算 $\frac{RW}{\pi} = 10$ 的可分无穷维频谱，在停机精度 $\varepsilon_{\mathrm{self}} = 10^{-3}$ 下，由 `finite_rank_concentration_mode_bound` 知活跃可见模态数严格不超过 $\frac{10}{10^{-3}} = 10{,}000$ 枚；同时由 `uniform_completion_obstruction` 知，该有限阶闭子空间投影 $P_{S_n}$ 与无穷维恒等算子之间始终保持精确单位范数缺口 $\lVert I - P_{S_n}\rVert = 1$，未停机的正交尾流继续驱动下一拍时间步。
 :::
 
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" preset="many-body-3n-to-2n-hilbert-pillars" height="500"}
+多场耦合、希尔伯特基柱与张量网络卡：$N = 6$ 座场体（局部旋转 $3N = 18$）经分配律投向 $2^6 = 64$ 根基柱，台前青色与品红线段对比单体 $18$ 槽与多体 $4^6 - 1 - 18 = 4{,}077$ 槽，条带小图画出 $N = 1\dots 300$ 的参数对数曲线（双体盲区与 MPS 定理依据见 [@thm-ch39-ternion-field-composition-and-hilbert-reprojection]；参数计数标 `NUM`，面积律与体积律边界标 `ARGUED` / `MODEL`，复杂性分离保持 `OPEN`）。
+:::
+
 我们将从单座三元数原生场一路向上组合再投影至无穷维希尔伯特空间的完整五阶谱系收束为下方总对照表：
 
 | 代数 / 状态空间结构 | 底层三元数场组合源 | 观察者线性再投影算子 | 表观平直线性维数 | 投影伴生代数表象与物理落点 |
@@ -229,3 +249,7 @@ $$
 **第三十九章二十节全景合拢与十部曲正文压轴收束：收回平直标尺，天地间唯余极小圆弧从容流转。** 站在第三十九章全部**二十道阶梯**（[§39.1](ch39-s01-substrate-free-self-reference.md)–§39.20）与十部曲三十九章正文的最高峰脊回望，整部现代代数学、泛函分析、量子信息、相对论规范场论与意识几何学的万千支流终于在此汇入同一眼源泉：向下切去曲率，一枚三元极小圆弧体退化为四元数的余弦影、复数的赤道圆、实数的内积迹与整数的拓扑结（[§39.19](ch39-s19-inexpressible-ternions-and-number-projections.md#sec-ch39-inexpressible-ternions-and-number-projections)）；向上拼接耦合再压回观察者的平直纸面，三元数场便舒展为四维时空双旋量、法诺平面七场八元数、$2^N$ 维多体希尔伯特关联账本直至可分无穷维泛函空间（本节 §39.20）；而追问是谁在握着那把参考实轴 $\mathbf{1}$ 既切出万数、又摊开万象，答案早已写在本章前十八节的每一次脉搏里——从无底物自指 `p ≡ *p`、关系即实体、$720^\circ$ 旋量编织时空与正交自折叠（[§39.1](ch39-s01-substrate-free-self-reference.md)–[§39.4](ch39-s04-orthogonal-self-folding.md)），经皮索—克利福德—劳齐八概念综合、五阶自指不动点、自主停机精度 $\varepsilon_{\mathrm{self}}$ 与普适主频钟慢 $\nu_0$（[§39.5](ch39-s05-pisot-clifford-rauzy.md)–[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md)），到万力归弧、三维场封顶、**极小圆弧场大统一（AF-GUT）**、均匀单态观测切面与唯一宇宙场**因陀罗网**（[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md)–[§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)），直至自观测摩耶误差、梵天正交大梦、红楼旋量觉醒、神圣游戏道具与**上帝心理学**在 $\theta^* = \cos\theta^*$ 处的清明整合（[§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)–[§39.18](ch39-s18-psychology-of-god.md#sec-ch39-psychology-of-god)）：握刀的观察者与被切的圆弧场，原本就是同一个无外、守恒、自指的宇宙本体！
 
 前人站在下方那张密密麻麻的 $2^N$ 维与 $\aleph_0$ 维平直投影图纸前仰望，曾误以为头顶耸立着令人窒息的无穷维迷宫；待到我们恪守四层诚实契约——将绿色 `LEAN ✓` 内核定理、经典文献与手算推导、`MODEL` 几何综合诠释以及 [@conj-riemann-hypothesis]、[@prob-ch38-unrelativized-p-vs-np-and-independence]、[@prob-ch34-sm-generations-and-couplings]、[@prob-ch34-gravity-dynamics-and-coupling]、[@prob-ch39-af-gut-threshold-and-proton-stability]、[@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 等红色 `OPEN` 科学界碑清清楚楚各安其位——从容收回外置平直标尺回到本体高度时才豁然看清：天地间自始至终只有那三笔首尾相衔的极小圆弧，在场与场的交响里轻盈流转；而每一道尚未被任何有限投影表封死的单位正交余项（$\lVert I - P_{S_n}\rVert = 1$），都在微笑着指向十部曲正文之后的最后一扇大门——全书[终章](coda.md)：**《在所有的球之外》**。
+
+::: {.viz src="ternion-field-hilbert-reprojection-sandbox" height="620"}
+完整实验室：切换多场再投影与凯莱—迪克森及张量网络两副透镜，拖动琥珀透镜手柄调节展平强度 $\lambda$，拨动耦合场数 $N$ 与 MPS 键维上限 $\chi$，比较单场四元数、双场双矢、法诺七场、十六元数零因子与多体希尔伯特基柱。八条形式化声明、数值、文献、模型与开放问题在依据栏与理论抽屉中分别标明。
+:::
