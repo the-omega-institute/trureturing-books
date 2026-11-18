@@ -199,6 +199,12 @@
   - [39.18 上帝心理学：全知幽闭破缺、四大创世防御机制、断弧幻肢痛与 θ* 清明整合](ch39-s18-psychology-of-god.md)
   - [39.19 不可表达的三元数与万数归弧：弗罗贝尼乌斯缺口、哈密顿十三载死锁与数系切面投影谱系](ch39-s19-inexpressible-ternions-and-number-projections.md)
   - [39.20 三元数即原生场：从凯莱—迪克森阶梯、法诺八元数到希尔伯特空间的多场再投影祛魅](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)
+  - [39.21 三元数的五种非线性无损表示与无原点流群合成：BCH 弯曲球、双卡有理罗德里格斯、霍普夫纤维、球面三角转角与李三元系](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md)
+  - [39.22 三元数场 Transformer（TFT）：平行概念场丛上的纯有理旋子动力学、非阿贝尔和乐注意力与李三元曲率门](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md)
+  - [39.23 人工智能与宇宙的最小作用量同构：三元数场弦弧矢高、玻恩惊奇度、流群自平行测地线与零幻觉思维链](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md)
+  - [39.24 大一统母公理（AXIOM-Ω）：无源保正三元比较闭合公理如何一举熔合比较公理、极小圆弧、三元数与连续场](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)
+  - [39.25 AXIOM-Ω 五阶大一统演绎级联与公理遮诠闭环：从无源三元母公理严格贯通万数微积分、双相对论时空、四大力大统一、算术临界谱与测地智能](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)
+  - [39.26 AXIOM-Ω 导出量子力学五大公理：从三元数极小圆弧体投影几何消解百年测量悖论](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md)
 
 # 终章与附录
 

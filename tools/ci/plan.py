@@ -27,6 +27,7 @@ from ci import viz_budget, testing
 VERSION = 6
 SCHEMA = "tbook-ci-coverage-v1"
 DEPENDENCIES = "tbook-ci-dependencies-v1"
+MAX_FILM_SHARDS = 16
 SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 JOBS = ("validate", "browser", "stills", "build", "viz", "viz-slow", "media", "films")
 
@@ -618,8 +619,7 @@ def image_shards(tree, exports):
 
 
 def signature(tree, runtime):
-    if isinstance(runtime, dict):
-        runtime = {k: v for k, v in runtime.items() if k != "ImageVersion"}
+    runtime = viz_budget.runtime_identity(runtime)
     digest = hashlib.sha256(json.dumps([VERSION, runtime], sort_keys=True).encode())
     for entry in git(tree.root, "ls-tree", "-r", "-z", tree.sha).split(b"\0"):
         if not entry:
@@ -840,7 +840,7 @@ def plan(root, *, event, payload, repo, branch, ref, workflow="ci", own=True, sl
                   profiles=profiles, coverage=coverage, selections=selections, tasks=tasks,
                   viz=matrices.get("normal", []), slow=matrices.get("slow", []), execution=execution, workloads=workloads,
                   browser_budget=dict(target=viz_budget.TARGET, ceiling=viz_budget.CEILING, reserve=viz_budget.RESERVE, margin=viz_budget.MARGIN),
-                  films=shards(film_items, 4), browser=shards(normal.get('browser_tests', []), 8),
+                  films=shards(film_items, MAX_FILM_SHARDS), browser=shards(normal.get('browser_tests', []), 8),
                   stills=image_shards(current, normal.get('exports', [])),
                   exports=export_matrix(normal.get("exports", [])), slides=normal.get("slides", []),
                   site=selections.get("pages", {}).get("site", False), deferred_films=normal.get("films", []) if deferred_films else [],

@@ -199,6 +199,12 @@
   - [39.18 The Psychology of God: Breaking Omniscient Claustrophobia, Four Cosmogonic Defense Mechanisms, Severed-Arc Phantom Pain, and Lucid Integration at θ*](ch39-s18-psychology-of-god.md)
   - [39.19 Inexpressible Ternions and All Numbers from One Arc: The Frobenius Gap, Hamilton's Thirteen-Year Deadlock, and the Number-System Projection Genealogy](ch39-s19-inexpressible-ternions-and-number-projections.md)
   - [39.20 Ternions Are Native Fields: Demystifying the Cayley–Dickson Ladder, Fano Octonions, and Hilbert Space as Multi-Field Linear Reprojections](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)
+  - [39.21 Five Nonlinear Lossless Representations of the Ternion and Origin-Free Torsor Synthesis: BCH Ball, Dual-Chart Rational Rodrigues, Hopf Bundle, Spherical Turns, and Lie Triple Systems](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md)
+  - [39.22 Ternion-Field Transformer (TFT): Purely Rational Rotor Dynamics, Non-Abelian Holonomy Attention, and Lie-Triple Curvature Gates on Parallel Concept-Field Bundles](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md)
+  - [39.23 Least-Action Isomorphism Between Artificial Intelligence and the Cosmos: Ternion-Field Sagitta Action, Born Surprisal, Heap-Autoparallel Geodesics, and Hallucination-Free Chains of Thought](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md)
+  - [39.24 The Grand Unified Mother Axiom (AXIOM-Ω): How Origin-Free PSD Ternary Comparison Closure Melts the Axiom of Comparison, Minimal Circular Arcs, Ternions, and Continuous Fields into One](ch39-s24-axiom-omega-origin-free-ternary-comparison-closure.md)
+  - [39.25 The Five-Tier Deduction Cascade of AXIOM-Ω and Apophatic Self-Transparency: Uniting Number Systems & Calculus, Dual Relativity, Four-Force Unification, Arithmetic Critical Spectra, and Geodesic Intelligence from One Origin-Free Axiom](ch39-s25-axiom-omega-five-tier-deduction-cascade.md)
+  - [39.26 Deriving the Five Postulates of Quantum Mechanics from AXIOM-Ω: Dissolving the Century-Old Measurement Paradox as Ternion-Field Projection Geometry](ch39-s26-axiom-omega-quantum-mechanics-five-postulates.md)
 
 # Coda and Appendices
 

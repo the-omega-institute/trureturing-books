@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "09e37017337791363db2a0603f26c397753d7f5a",
-  "pinned_at": "2026-11-18T07:46:51Z",
+  "commit": "3140b5ba326c84f9e179218fd3968f3a0c6d7f1e",
+  "pinned_at": "2026-11-18T22:27:16Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1529,7 +1529,7 @@
       "module": "D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity",
       "name": "D5.S3.ConceptDynamics.Information.RefinementImpurityMonotonicity.refinement_impurity_monotone",
       "kind": "theorem",
-      "statement_id": "sha256:2c70048ce03100ccbb2cd7befe9f7709f4de0319f2455ea3fbf0499e73e34dc4",
+      "statement_id": "sha256:129c3d448f1c2f9b088be4bedd1b46771d93abd8d3d27960c5a83c1f6d193a79",
       "line": 536,
       "signature": "theorem refinement_impurity_monotone {X C D A : Type*} (mu : PMF X) (coarse : Concept X C) (refined : Concept X D) (target : Concept X A) (refinement : Refines coarse refined) : conditionalLogicalImpurity mu refined target ≤ conditionalLogicalImpurity mu coarse target"
     },
@@ -1644,6 +1644,22 @@
       "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
       "line": 133,
       "signature": "theorem objective_claim_requires_invariant_common_factor {Context Meaning Factor : Type*} (isFixedMeaning : Context -> Meaning -> Prop) (factor : Meaning -> Factor) (claim : ObjectiveInterpretationClaim isFixedMeaning factor) : ∃ commonFactor, ∀ context meaning, isFixedMeaning context meaning -> factor meaning = commonFactor"
+    },
+    "D5/S3/ConceptDynamics/ObservationOrder/PosteriorMomentDistance.projected_moment_unique": {
+      "module": "D5/S3/ConceptDynamics/ObservationOrder/PosteriorMomentDistance",
+      "name": "D5.S3.ConceptDynamics.ObservationOrder.PosteriorMomentDistance.projected_moment_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:263f1b0b606da3510e5049fb6c9d8526b2ee3871a11c589755b4d34a69ae58b6",
+      "line": 228,
+      "signature": "theorem projected_moment_unique (t : ℝ) (ht : 1 / 20 ≤ t) (hu : t ≤ 11 / 160) : IsUniformPosteriorMoment (projectedMoment t) ∧ squaredDistance (projectedMoment t) (cycleMoment t) = (20 * t - 1) ^ 2 / 24 ∧ ∀ X, IsUniformPosteriorMoment X → (20 * t - 1) ^ 2 / 24 ≤ squaredDistance X (cycleMoment t) ∧ (squaredDistance X (cycleMoment t) = (20 * t - 1) ^ 2 / 24 → X = projectedMoment t)"
+    },
+    "D5/S3/ConceptDynamics/ObservationOrder/PosteriorMomentObstruction.result": {
+      "module": "D5/S3/ConceptDynamics/ObservationOrder/PosteriorMomentObstruction",
+      "name": "D5.S3.ConceptDynamics.ObservationOrder.PosteriorMomentObstruction.result",
+      "kind": "theorem",
+      "statement_id": "sha256:17bb7cc1a43ca462e9592bf62082d9201597e90ce931aec5cd55c93dcc21ff75",
+      "line": 120,
+      "signature": "theorem result : ¬ claim"
     },
     "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous": {
       "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
@@ -2028,6 +2044,22 @@
       "statement_id": "sha256:4fd64d7dbc92bb0134150c8bacfdbe38cf3c078e8eb4380e3a295429c085c978",
       "line": 636,
       "signature": "theorem result : claim"
+    },
+    "D5/S3/Divergence/GibbsEquality.kl_divergence_eq_zero_iff": {
+      "module": "D5/S3/Divergence/GibbsEquality",
+      "name": "D5.S3.Divergence.GibbsEquality.kl_divergence_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:6a9bf7b5d8edc1690974862b418561d5311801f83984a2eaf3ba8336acceec22",
+      "line": 35,
+      "signature": "theorem kl_divergence_eq_zero_iff {ι : Type*} [Fintype ι] (p q : ι → ℝ) (hp : (∀ i, 0 ≤ p i) ∧ ∑ i, p i = 1) (hq : (∀ i, 0 ≤ q i) ∧ ∑ i, q i = 1) (hac : ∀ i, q i = 0 → p i = 0) : klDivergence p q = 0 ↔ p = q"
+    },
+    "D5/S3/Divergence/GrandmotherTheorem.kl_divergence_nonneg": {
+      "module": "D5/S3/Divergence/GrandmotherTheorem",
+      "name": "D5.S3.Divergence.GrandmotherTheorem.kl_divergence_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:b52f777c2ca002ac95559fc606af921245fb880b5bdafb1685cd5f927e07f37f",
+      "line": 34,
+      "signature": "theorem kl_divergence_nonneg {ι : Type*} [Fintype ι] (p q : ι → ℝ) (hp : (∀ i, 0 ≤ p i) ∧ ∑ i, p i = 1) (hq : (∀ i, 0 ≤ q i) ∧ ∑ i, q i = 1) (hac : ∀ i, q i = 0 → p i = 0) : 0 ≤ klDivergence p q"
     },
     "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance": {
       "module": "D5/S3/DivergenceSupport/LandauerBound",
@@ -2909,6 +2941,14 @@
       "line": 164,
       "signature": "theorem discounted_prime_time_distance_strong_triangle {I X : Type*} {O : I -> Type*} (J : Finset I) (weight : I -> Real) (readout : forall i, X -> O i) (update : X -> X) (gamma : Real) (hpositive : ∀ i, 0 < weight i) (hgamma : gamma ∈ Set.Ioc 0 1) (x y z : X) : discountedPrimeTimeDistance J weight readout update gamma x z <= max (discountedPrimeTimeDistance J weight readout update gamma x y) (discountedPrimeTimeDistance J weight readout update gamma y z)"
     },
+    "D5/S3/Observer/ProbabilisticClosure/TrajectoryLaws/TwelveStateGhost.visible_eq_of_cylinders": {
+      "module": "D5/S3/Observer/ProbabilisticClosure/TrajectoryLaws/TwelveStateGhost",
+      "name": "D5.S3.Observer.ProbabilisticClosure.TrajectoryLaws.TwelveStateGhost.visible_eq_of_cylinders",
+      "kind": "theorem",
+      "statement_id": "sha256:d98b344a5688fed8a5c755a0b1084e3da24b109e4d0f97029c80be2683b410b3",
+      "line": 110,
+      "signature": "theorem visible_eq_of_cylinders (μ ν : Measure (ℤ → Bool)) [IsFiniteMeasure μ] [IsFiniteMeasure ν] (hc : ∀ (t : ℤ) (n : ℕ) (w : Fin n → Bool), μ.real (visibleCylinder t n w) = ν.real (visibleCylinder t n w)) : μ = ν"
+    },
     "D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment": {
       "module": "D5/S3/Observer/Reversal/QuadraticObservationClosure",
       "name": "D5.S3.Observer.Reversal.QuadraticObservationClosure.observed_increment",
@@ -3549,6 +3589,14 @@
       "line": 94,
       "signature": "theorem displacement_conjugation (a b c d : ZMod M) : displacement M a b * displacement M c d * star (displacement M a b) = windowRoot M ^ (b * c - a * d).val • displacement M c d"
     },
+    "D5/S3/Quantum/Analysis/PositiveInteriorGridObstruction.positive_interior_grid_algebraic_obstruction": {
+      "module": "D5/S3/Quantum/Analysis/PositiveInteriorGridObstruction",
+      "name": "D5.S3.Quantum.Analysis.PositiveInteriorGridObstruction.positive_interior_grid_algebraic_obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:68093d979a2b5e6cf767dcfc4b877ade7ad13096e4203d4f59b09e8dbe576925",
+      "line": 28,
+      "signature": "theorem positive_interior_grid_algebraic_obstruction (r ur ui vr vi s t : ℝ) (hr_pos : 0 < r) (hr_lt_one : r < 1) (hsum_re : ur + vr = 2) (hsum_im : ui + vi = 0) (he_re : ur * s + vr * t + s * t + 3 - 3 * (s + t) = 0) (he_im : ui * s + vi * t = 0) (hs : s = ur ^ 2 + ui ^ 2) (ht : t = vr ^ 2 + vi ^ 2) (hnorm : (ur * vr - ui * vi) ^ 2 + (ur * vi + ui * vr) ^ 2 = r ^ 2) : False"
+    },
     "D5/S3/Quantum/Analysis/TrotterProduct.trotter_product": {
       "module": "D5/S3/Quantum/Analysis/TrotterProduct",
       "name": "NormedSpace.trotter_product",
@@ -3884,6 +3932,14 @@
       "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
       "line": 251,
       "signature": "lemma von_neumann_entropy_basisPinchingState (rho : DensityState n) : vonNeumannEntropy (basisPinchingState rho) = -(∑ i, (densityMatrix rho i i).re * Real.log (densityMatrix rho i i).re)"
+    },
+    "D5/S3/Quantum/Dynamics/KickedIsingNegativityRefutation.trace_local_right": {
+      "module": "D5/S3/Quantum/Dynamics/KickedIsingNegativityRefutation",
+      "name": "D5.S3.Quantum.Dynamics.KickedIsingNegativityRefutation.trace_local_right",
+      "kind": "theorem",
+      "statement_id": "sha256:5ee5a971fd145e8c6c54ef40177972f9d1a4cc122920eafbf838fa88672f3124",
+      "line": 209,
+      "signature": "theorem trace_local_right {a b : Type} [Fintype a] [Fintype b] [DecidableEq a] [DecidableEq b] (ρ : Matrix (a × b) (a × b) ℂ) (U : Matrix a a ℂ) (V : Matrix b b ℂ) (hV : Vᴴ * V = 1) : partialTraceRight ((U ⊗ₖ V) * ρ * (U ⊗ₖ V)ᴴ) = U * partialTraceRight ρ * Uᴴ"
     },
     "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity": {
       "module": "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity",
@@ -4333,11 +4389,19 @@
       "line": 276,
       "signature": "theorem triangle_gram (a b c : Fin 3 → ℝ) (ha : a ⬝ᵥ a = 1) (hb : b ⬝ᵥ b = 1) (hc : c ⬝ᵥ c = 1) : triangleD a b c ^ 2 = 1 + 2 * (a ⬝ᵥ b) * (b ⬝ᵥ c) * (c ⬝ᵥ a) - (a ⬝ᵥ b) ^ 2 - (b ⬝ᵥ c) ^ 2 - (c ⬝ᵥ a) ^ 2"
     },
+    "D5/S3/Quantum/Information/PartialTraceMutualInformation.entropy_eq_spectral": {
+      "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
+      "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.entropy_eq_spectral",
+      "kind": "theorem",
+      "statement_id": "sha256:1ec1d44fa5a10033cc4269b8e0a429a87e0ddc4511a8b9ca19889b4572ad4fd0",
+      "line": 291,
+      "signature": "theorem entropy_eq_spectral (rho : DensityState n) : vonNeumannEntropy rho = spectralEntropy (density_posSemidef rho).isHermitian"
+    },
     "D5/S3/Quantum/Information/PartialTraceMutualInformation.marginalLeft_productState": {
       "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
       "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.marginalLeft_productState",
       "kind": "theorem",
-      "statement_id": "sha256:9ec1df9721285fac407a0803347b9035cea2b264d6c4f81851e81c97a0eb7dd3",
+      "statement_id": "sha256:1ec1d44fa5a10033cc4269b8e0a429a87e0ddc4511a8b9ca19889b4572ad4fd0",
       "line": 145,
       "signature": "theorem marginalLeft_productState {A B : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B] (rho : DensityState A) (sigma : DensityState B) : marginalLeft (productState rho sigma) = sigma"
     },
@@ -4345,15 +4409,23 @@
       "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
       "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.marginalRight_productState",
       "kind": "theorem",
-      "statement_id": "sha256:9ec1df9721285fac407a0803347b9035cea2b264d6c4f81851e81c97a0eb7dd3",
+      "statement_id": "sha256:1ec1d44fa5a10033cc4269b8e0a429a87e0ddc4511a8b9ca19889b4572ad4fd0",
       "line": 155,
       "signature": "theorem marginalRight_productState {A B : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B] (rho : DensityState A) (sigma : DensityState B) : marginalRight (productState rho sigma) = rho"
+    },
+    "D5/S3/Quantum/Information/PartialTraceMutualInformation.partialTraceRight_posSemidef": {
+      "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
+      "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.partialTraceRight_posSemidef",
+      "kind": "theorem",
+      "statement_id": "sha256:1ec1d44fa5a10033cc4269b8e0a429a87e0ddc4511a8b9ca19889b4572ad4fd0",
+      "line": 88,
+      "signature": "theorem partialTraceRight_posSemidef {A B : Type*} [Fintype B] {joint : Matrix (A × B) (A × B) ℂ} (h : joint.PosSemidef) : (partialTraceRight joint).PosSemidef"
     },
     "D5/S3/Quantum/Information/PartialTraceMutualInformation.quantumMutualInformation_productState": {
       "module": "D5/S3/Quantum/Information/PartialTraceMutualInformation",
       "name": "D5.S3.Quantum.Information.PartialTraceMutualInformation.quantumMutualInformation_productState",
       "kind": "theorem",
-      "statement_id": "sha256:9ec1df9721285fac407a0803347b9035cea2b264d6c4f81851e81c97a0eb7dd3",
+      "statement_id": "sha256:1ec1d44fa5a10033cc4269b8e0a429a87e0ddc4511a8b9ca19889b4572ad4fd0",
       "line": 322,
       "signature": "theorem quantumMutualInformation_productState {A B : Type*} [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B] (rho : DensityState A) (sigma : DensityState B) : quantumMutualInformation (productState rho sigma) = 0"
     },
@@ -4548,6 +4620,22 @@
       "statement_id": "sha256:321cfd4072bc24c4b5cd7da3ab28b7f9bd01e92602b2efbc23079d595a1c30a5",
       "line": 39,
       "signature": "def scalarB (t : ℝ) (a : EuclideanSpace ℝ (Fin 3)) : Matrix (Fin 2) (Fin 2) ℂ"
+    },
+    "D5/S3/Quantum/Measurement/FactorWidth/FiveCyclePosteriorFactorWidth.cycle_moment_width_exactly_three": {
+      "module": "D5/S3/Quantum/Measurement/FactorWidth/FiveCyclePosteriorFactorWidth",
+      "name": "D5.S3.Quantum.Measurement.FactorWidth.FiveCyclePosteriorFactorWidth.cycle_moment_width_exactly_three",
+      "kind": "theorem",
+      "statement_id": "sha256:92b76f27c8092b74fd5d9cd31d4e9446463090b57ab6f3e477a894cb4358dc96",
+      "line": 216,
+      "signature": "theorem cycle_moment_width_exactly_three : FactorWidthTwoCone.IsKIncoherentSum 3 (moment.map Complex.ofReal) ∧ ¬ FactorWidthTwoCone.IsKIncoherentSum 2 (moment.map Complex.ofReal)"
+    },
+    "D5/S3/Quantum/Measurement/FactorWidth/NonnegativeFactorWidthTwo.nonnegative_two_sparse_gram": {
+      "module": "D5/S3/Quantum/Measurement/FactorWidth/NonnegativeFactorWidthTwo",
+      "name": "D5.S3.Quantum.Measurement.FactorWidth.NonnegativeFactorWidthTwo.nonnegative_two_sparse_gram",
+      "kind": "theorem",
+      "statement_id": "sha256:eed7884116e00c147302b234950bd31fcc06c01e467dca7a61eda695205822b2",
+      "line": 99,
+      "signature": "theorem nonnegative_two_sparse_gram {n : ℕ} {X : Matrix (Fin n) (Fin n) ℝ} (hnonneg : ∀ i j, 0 ≤ X i j) (hgram : FactorWidthTwoCone.IsKIncoherentSum 2 (X.map Complex.ofReal)) : ∃ (k : ℕ) (v : Fin k → Fin n → ℝ), k ≤ n + Nat.choose n 2 ∧ (∀ t i, 0 ≤ v t i) ∧ (∀ t, (Finset.univ.filter fun i => v t i ≠ 0).card ≤ 2) ∧ X = ∑ t, vecMulVec (v t) (v t)"
     },
     "D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal.finite_kraus_instrument_born_marginal": {
       "module": "D5/S3/Quantum/Measurement/FiniteKrausInstrumentBornMarginal",
@@ -5197,6 +5285,22 @@
       "line": 208,
       "signature": "theorem correctness : (∀ (n : ℕ) (a i : Address n) (e : Bool), leaf n (route n a (clean n e)) i = if i = a then e else false) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (w : Wires n) (r : G), query n D (a, w, r) = (a, w, r + readAmount n D (route n a w))) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] (D : Address n → G) (a : Address n) (r : G), query n D (a, clean n true, r) = (a, clean n true, r + D a)) ∧ (∀ (n : ℕ) (G : Type) [AddCommGroup G] [Fintype G] [DecidableEq G] (D : Address n → G), (queryMatrix n D)ᴴ * queryMatrix n D = 1 ∧ queryMatrix n D * (queryMatrix"
     },
+    "D5/S3/Quantum/Schatten/CompoundMatrices.cauchyBinet": {
+      "module": "D5/S3/Quantum/Schatten/CompoundMatrices",
+      "name": "cauchyBinet",
+      "kind": "theorem",
+      "statement_id": "sha256:8398f8b23ac0815231125a1304c91754b658ebb26e9e24af0ace9c2147f696ce",
+      "line": 149,
+      "signature": "lemma cauchyBinet {m : ℕ} {n : Type*} [Fintype n] [DecidableEq n] [LinearOrder n] {R : Type*} [CommRing R] (A : Matrix (Fin m) n R) (B : Matrix n (Fin m) R) : (A * B).det = ∑ S : {S : Finset n // S.card = m}, (A.submatrix id (S.1.orderEmbOfFin S.2)).det * (B.submatrix (S.1.orderEmbOfFin S.2) id).det"
+    },
+    "D5/S3/Quantum/Schatten/MatrixSimilarity.IsHermitian.eigenvalues_eq_of_unitary_similarity_diagonal": {
+      "module": "D5/S3/Quantum/Schatten/MatrixSimilarity",
+      "name": "Matrix.IsHermitian.eigenvalues_eq_of_unitary_similarity_diagonal",
+      "kind": "theorem",
+      "statement_id": "sha256:626bf96eb08a590ce199c61559a161285de04b90f168f7d8e7cc3452945fc6d5",
+      "line": 73,
+      "signature": "lemma IsHermitian.eigenvalues_eq_of_unitary_similarity_diagonal {d 𝕜 : Type*} [Fintype d] [DecidableEq d] [RCLike 𝕜] {A : Matrix d d 𝕜} (hA : A.IsHermitian) {U : Matrix d d 𝕜} (hU : U ∈ Matrix.unitaryGroup d 𝕜) {f : d → ℝ} (h : A = U * Matrix.diagonal (fun i => (RCLike.ofReal (f i) : 𝕜)) * Matrix.conjTranspose U) : ∃ σ : d ≃ d, hA.eigenvalues ∘ σ = f"
+    },
     "D5/S3/Quantum/ShorContinuedFractions.shor_coprime_candidate": {
       "module": "D5/S3/Quantum/ShorContinuedFractions",
       "name": "QuantumShorContinuedFractions.shor_coprime_candidate",
@@ -5268,6 +5372,22 @@
       "statement_id": "sha256:c94f4874e555b783efb4ad198b4982a94d87d7982fd171732c71c1d3234a293e",
       "line": 26,
       "signature": "theorem sorkin_third_order_cancellation (v : α → R) (A B C : Finset α) (hAB : Disjoint A B) (hAC : Disjoint A C) (hBC : Disjoint B C) : amplitudeWeight v (A ∪ B ∪ C) - amplitudeWeight v (A ∪ B) - amplitudeWeight v (A ∪ C) - amplitudeWeight v (B ∪ C) + amplitudeWeight v A + amplitudeWeight v B + amplitudeWeight v C = 0"
+    },
+    "D5/S3/Quantum/SpinChains/SupersymmetricFermion/HardCoreCompression.fullC_entry": {
+      "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/HardCoreCompression",
+      "name": "D5.S3.Quantum.SpinChains.SupersymmetricFermion.HardCoreCompression.fullC_entry",
+      "kind": "theorem",
+      "statement_id": "sha256:3e65d07cfb35654cbc7ee9b13bc26b8e6e44b46c3406a6601f069007e48f8906",
+      "line": 118,
+      "signature": "theorem fullC_entry {N : ℕ} (j : Fin N) (s t : Assignment N) : fullC j s t = if t j = true ∧ s = Function.update t j false then (-1 : ℂ) ^ prefixCount t j else 0"
+    },
+    "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC": {
+      "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",
+      "name": "D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC",
+      "kind": "def",
+      "statement_id": "sha256:8a81638a530816f83b4da59a0f897af918ed0c6f692bcf286a433be6a5dfa377",
+      "line": 57,
+      "signature": "def fullC {N : ℕ} (j : Fin N) : FullOperator N"
     },
     "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR": {
       "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",
@@ -5956,6 +6076,30 @@
       "statement_id": "sha256:4afe43b854e2458ef67f9357e4f8b808f2257340b1afb27d2212da242bca7b99",
       "line": 416,
       "signature": "theorem sphere_two_open_orthogonality_free_cover_lower_six {k : ℕ} (U : Fin k → Set (sphere (0 : EuclideanSpace ℝ (Fin 3)) 1)) (hopen : ∀ i, IsOpen (U i)) (hcover : ∀ x, ∃ i, x ∈ U i) (hfree : ∀ i, OrthogonalityFree (U i)) : 6 ≤ k"
+    },
+    "D5/S3/TotalVariation/DataProcessing.total_variation_channel_le": {
+      "module": "D5/S3/TotalVariation/DataProcessing",
+      "name": "D5.S3.TotalVariation.DataProcessing.total_variation_channel_le",
+      "kind": "theorem",
+      "statement_id": "sha256:eb61c862385335ddfcc467fb14b692446878ceeb7ddbbb91cae854e006a38859",
+      "line": 29,
+      "signature": "theorem total_variation_channel_le {X Y : Type*} [Fintype X] [Fintype Y] (p q : X → ℝ) (W : X → Y → ℝ) (hW : (∀ x y, 0 ≤ W x y) ∧ ∀ x, ∑ y, W x y = 1) : totalVariation (channelOutput W p) (channelOutput W q) ≤ totalVariation p q"
+    },
+    "D5/S3/TotalVariation/Metric.total_variation_eq_zero_iff": {
+      "module": "D5/S3/TotalVariation/Metric",
+      "name": "D5.S3.TotalVariation.Metric.total_variation_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:a86cbe4fafcd725a00fdd52cae0318093e2dee7b03a19a0dac5b81e99a0c53c1",
+      "line": 35,
+      "signature": "theorem total_variation_eq_zero_iff {ι : Type*} [Fintype ι] (p q : ι → ℝ) : totalVariation p q = 0 ↔ p = q"
+    },
+    "D5/S3/TotalVariation/Metric.total_variation_nonneg": {
+      "module": "D5/S3/TotalVariation/Metric",
+      "name": "D5.S3.TotalVariation.Metric.total_variation_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:a86cbe4fafcd725a00fdd52cae0318093e2dee7b03a19a0dac5b81e99a0c53c1",
+      "line": 29,
+      "signature": "theorem total_variation_nonneg {ι : Type*} [Fintype ι] (p q : ι → ℝ) : 0 ≤ totalVariation p q"
     },
     "D5/S3/TotalVariation/ParryBilateralLaw.bilateral_parry_law": {
       "module": "D5/S3/TotalVariation/ParryBilateralLaw",
