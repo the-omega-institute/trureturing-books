@@ -1,6 +1,6 @@
 # 39.5.8 帕里平稳律、逃逸对计数与分形视界熵问题 {#sec-ch39-p2e-entropy}
 
-在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及遍历论文献中的熵比较。前两者已有对应的 Lean 验证结果；下文的最大熵与诱导回归熵仍按文献结果呈现，分形纠缠标度则保留为开放问题。
+在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及对所有不变概率测度的熵比较。前两者已有对应的 Lean 验证结果；下文在同一双向无符号律上展开最大熵与唯一性的应用推导，另将拓扑熵识别与诱导回归熵保留在各自的文献范围内，分形纠缠标度则保留为开放问题。
 
 在马尔可夫链侧，对任意阶数 $k \ge 2$，令互反帕里参数为 $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$。在带绝对符号位与当前连续 `1` 游程长度的有向状态空间 $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ 上，定义后缀权重 $w_j = \operatorname{suffixWeight}(k, p, j) = \sum_{a=0}^{k-j-1} p^{a+1}$、归一化常数 $Z_k = \sum_{j=0}^{k-1} p^j w_j$、符号翻转对合 $\operatorname{flip}(b, j) = (!b, j)$，以及重置转移核 $P_k = \operatorname{kernel}(k, p)$：从状态 $s = (b, j)$ 出发，以概率 $p / w_j$ 翻转符号并重置游程至 $(!b, 0)$，当 $j + 1 < k$ 时以概率 $p\, w_{j+1} / w_j$ 保持符号并推进游程至 $(b, j + 1)$，其余转移概率为 $0$。对应状态分布定义为
 
@@ -211,7 +211,7 @@ $$
 
 两条柱集公式保留了源码各自的写法：有符号公式对整个实数乘积作一次 $\operatorname{ofReal}$，无符号公式先对每个因子作 $\operatorname{ofReal}$ 再相乘。这里 $\pi_k,P_k,q,Q$ 的各项均非负，因此用普通实数概率表示时，就是初始质量乘以逐步转移概率。$m=0$ 分别给出单点质量 $\pi_k(w_0)$ 与 $q_{v_0}$；任何含零转移的词，包括违反相应重置规则的禁用词，质量都为 $0$。公式适用于所有整数 $\ell$，也适用于负时间。
 
-给定有限维分布的延拓唯一性，只确定这些分布对应的路径律。现在还可以追问：沿时间轴把两个观测窗口拉开，它们之间的概率关联怎样消退？下面的结果把平稳联合律、混合性与符号选择障碍放在同一组存在量词之下。完整柯尔莫哥洛夫—西奈熵、对所有不变竞争测度的熵比较、最大熵等号情形的唯一性及阿布拉莫夫公式，仍须按下方文献注记各自的前提与证据身份阅读。
+给定有限维分布的延拓唯一性，只确定这些分布对应的路径律。现在还可以追问：沿时间轴把两个观测窗口拉开，它们之间的概率关联怎样消退？下面的结果把平稳联合律、混合性与符号选择障碍放在同一组存在量词之下。对所有不变竞争测度的柯尔莫哥洛夫—西奈熵比较与最大熵唯一性另见 [@rem-ch39-p2e-abramov-literature] 的应用推导；那里的拓扑熵识别与阿布拉莫夫公式各自保留独立的文献前提。
 
 沿用上文的 $X_k,Y_k,S=\operatorname{State}(k)$、$\pi_k$、$F_e$ 及公平锚点测度 $u=\operatorname{fairAnchor}$。这里始终以 $P_k=\operatorname{kernel}(k,\operatorname{parryParameter}(k))$ 表示**带符号状态**的转移矩阵；$Q$ 仍专指上一条概率律中的**无符号后缀**转移核。对有限词 $w:\operatorname{Fin}(m+1)\to S$，记
 
@@ -310,16 +310,153 @@ $$
 
 在这一平稳律旁，还有两条各自独立的形式化定量定律共同约束边界碰撞与观测盲区：其一是帕里边界柱集上界定理 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)，它对给定的 $n \ge 1$ 组正游程对集合 $C$（每段 `1` 游程 $< k$ 且编码长度不超过视界 $R$）证明，左右边界选定前缀的平稳质量分别不超过 $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ 与 $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$（这是精确概率不等式，而非分形维数或熵值公式）；其二是与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5 一脉相承的有限竞技场信息逃逸率判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，它证明在基数 $q \ge 2$ 的非退化有限状态集上，观测目录 $S$ 无法区分的有序相异状态对集合 $E(S)$ 定义出归一化有理逃逸率 $e(S) = |E(S)|/[q(q-1)]$，而某项观测 $i$ 严格降低逃逸率当且仅当其唯一捕获对计数 $|U_i| > 0$（且差值恰为 $|U_i|/[q(q-1)]$）。有限有序逃逸对比例 $e(S)$、量子态冯·诺依曼熵 $S(\sigma_b)$ 与无限移位系统的遍历熵在数学定义上彼此独立，绝不可混为一谈。
 
-::: {.remark #rem-ch39-p2e-abramov-literature title="文献结果：帕里最大熵马尔可夫测度与阿布拉莫夫诱导回归熵公式（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 据 M. Pollicott 等人的综述 *The mathematical research of William Parry FRS*（[机构存档 PDF](https://wrap.warwick.ac.uk/id/eprint/682/1/WRAP_pollicott_Parry_research.pdf)，§2.3，pp. 323–324；DOI：[10.1017/S0143385708000102](https://doi.org/10.1017/S0143385708000102)），W. Parry（*Trans. Amer. Math. Soc.* **112**, 1964, 55–66）证明非周期有限型双向子移位存在唯一最大熵测度，且该测度为内禀马尔可夫测度。对这里的禁 $1^K$ 子移位，最大熵是在其上所有移位不变 Borel 概率测度中比较的，竞争测度无需满足马尔可夫性或遍历性；唯一性指只有帕里测度达到最大值，其余不变概率测度的熵均严格更小。采用自然对数时，单步拓扑熵（亦即最大柯尔莫哥洛夫—西奈度量熵）为 $\ln\beta_K = -\ln p$，其中 $p = \beta_K^{-1}$；换成比特单位须除以 $\ln 2$，即 $h_{\mathrm{top}}(\Sigma_K) = \log_2 \beta_K\;\text{bits/step}$（数值计算 `NUM` 给出 $K = 2, 3, 4$ 时依次约为 $0.69424$、$0.87915$、$0.94678\;\text{bits/step}$，随 $\beta_K \nearrow 2$ 单调趋向 $1\;\text{bit/step}$）。
-
-另一方面，L. M. Abramov（*Dokl. Akad. Nauk SSSR* **128**, 1959, 647–650）证明：在保概率遍历动力系统 $(X, \mathcal{B}, \mu, T)$ 中，若可测回访集 $A \in \mathcal{B}$ 满足 $\mu(A) > 0$，记 $T_A$ 为 $A$ 上的首次回归诱导映射、$\mu_A$ 为归一化条件测度，则每次回归的诱导熵满足
+::: {.remark #rem-ch39-p2e-abramov-literature title="实际双向帕里律的最大熵应用与独立文献边界"}
+**应用的对象与结论。** 固定任意整数阶数 $K\ge2$（即上文的 $k=K$），令 $p=\operatorname{parryParameter}(K)$、$X_K=\operatorname{RelationPath}(K)$、$T=\operatorname{relationShift}$，即 $(Tr)_t=r_{t+1}$。取 [@thm-ch39-p2e-native-bilateral-parry-law] 同时给出的 $e,\mu,\nu$，下文始终使用其中同一个无符号概率律 $\mu$。对 $X_K$ 上每个满足 $T_*\rho=\rho$ 的 Borel 概率测度 $\rho$，以下应用推导给出
 
 $$
-h_{\mu_A}(T_A) = \frac{h_\mu(T)}{\mu(A)}.
+\begin{aligned}
+h_{\mathrm{KS}}(\rho,T)&\le-\log p,\\
+h_{\mathrm{KS}}(\mu,T)&=-\log p,\\
+h_{\mathrm{KS}}(\rho,T)=-\log p
+&\quad\Longleftrightarrow\quad\rho=\mu,\\
+\rho\ne\mu&\quad\Longrightarrow\quad h_{\mathrm{KS}}(\rho,T)<-\log p.
+\end{aligned}
 $$
 
-引用这两条文献定理时必须区分单位与前提：[@thm-ch39-p2e-parry-escape-laws] 仅在有向重置状态空间上验证了随机核与平稳分布，并未在当前锁定的源码中形式化柯尔莫哥洛夫—西奈移位熵或阿布拉莫夫公式；而将阿布拉莫夫公式用于每次重置回访事件时，必须区分“每次回归熵 $h_{\mu_A}(T_A)$”与“原始每步熵 $h_\mu(T)$”，不能凭类比直接套用到不可逆读出过程或有限 $p$ 进余数树上。
+对数为自然对数，单位为每原始步的纳特。$h_{\mathrm{KS}}$ 是所有有限可测分割的熵率的上确界，先视为扩展实数；上式同时证明它在这里是有限值。竞争范围是全部不变 Borel 概率测度，不另假定马尔可夫性、遍历性、生成性质、熵极限或唯一性。有符号扩张 $\nu$ 参与构造 $\mu$，但熵比较的载体始终是无符号空间 $X_K$。推导的所属源文见[双向帕里律的论述](https://github.com/the-omega-institute/trureturing/blob/dev/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md)；上面所引定理的陈述本身给出编码、概率律与柱集，并不包含这个熵结论。
+
+**从实际后缀到双向生成分割。** 令 $J_t(r)=J_t^e(r)$，即 $e(\mathrm{false},r)$ 在整数时刻 $t$ 的第二坐标。最近零位刻画使 $J_t$ 恰等于 $t$ 之前的连续真位数，且与符号锚点无关。它对每条合法路径满足
+
+$$
+\begin{aligned}
+J_{t+1}(r)&=\begin{cases}
+0,&r_t=\mathrm{false},\\
+J_t(r)+1,&r_t=\mathrm{true},
+\end{cases}\\
+r_t=\mathrm{false}&\quad\Longleftrightarrow\quad J_{t+1}(r)=0.
+\end{aligned}
+$$
+
+真位分支自动满足 $J_t+1<K$。对任意 $c\in\mathbb Z$，整数平移 $(\theta_c r)_t=r_{t+c}$ 保持 $X_K$，且 $J_t(\theta_c r)=J_{t+c}(r)$。这些是逐路径恒等式，包括零概率路径。
+
+取有限可测分割 $\mathcal P_j=\{r:J_0(r)=j\}$，$j\in\operatorname{Fin}K$。$T=\theta_1$ 的可测逆为 $\theta_{-1}$。$X_K$ 是离散布尔双向乘积空间的闭子集，带其 Borel 可测结构，因而是标准 Borel 空间。每个后缀格可测；反过来，每个关系位事件由上式中的平移零后缀格恢复，所以 $\mathcal P$ 的**所有整数平移**生成整个 Borel $\sigma$-代数。这里应用的是可逆保概率系统的双向有限生成分割定理，得到
+
+$$
+h_{\mathrm{KS}}(\rho,T)=h_\rho(T,\mathcal P).
+$$
+
+所用双向生成定理与整数迭代见 Marcel Morgenstern 的[生成定理](https://github.com/marcmorningstar/lean4-ergodic-theory/blob/040fec2e0ddf4fcba49af9f76c866d295308dd7f/ErgodicTheory/Entropy/GeneratorTheoremTwoSided.lean)及[整数迭代](https://github.com/marcmorningstar/lean4-ergodic-theory/blob/040fec2e0ddf4fcba49af9f76c866d295308dd7f/ErgodicTheory/Krieger/ZIterate.lean)，归属与许可见[熵论依据说明](https://github.com/the-omega-institute/trureturing/blob/dev/Library/Entropy/morgenstern2026ks.md)。这些是库依据，不作为本书新增的冻结定理引用。仅用非负时间的生成条件不能代替这里的双向步骤。
+
+**有限历史与熵率。** 对 $n\ge0$、$w\in(\operatorname{Fin}K)^n$，记
+
+$$
+\begin{aligned}
+A_{\ell,n}(w)&=\{r:\ J_{\ell+i}(r)=w_i\ (0\le i<n)\},\\
+m_n(w)&=\rho(A_{0,n}(w)),\\
+H_n&=-\sum_w m_n(w)\log m_n(w),\\
+c_n&=H_\rho(J_n\mid J_0,\ldots,J_{n-1}).
+\end{aligned}
+$$
+
+空历史给出单格分割，$H_0=0$；$c_0=H_\rho(J_0)$。零质量项按 $0\log0=0$ 解释。有限分割链式法则给出 $H_{n+1}=H_n+c_n$。增加条件不增条件熵，再用同一联合律的平稳性，得到 $c_{n+1}\le c_n$；这里没有用竞争测度的马尔可夫性。平稳有限分割的 $H_n$ 次可加，Fekete 熵率极限定理给出
+
+$$
+\begin{aligned}
+h_\rho(T,\mathcal P)&=\lim_{N\to\infty}\frac{H_N}{N},\\
+H_N&\le H_m+(N-m)c_m\quad(N\ge m),\\
+h_\rho(T,\mathcal P)&\le c_m\quad(m\ge0).
+\end{aligned}
+$$
+
+第二行只是将 $H_N=H_m+\sum_{i=m}^{N-1}c_i$ 逐项估计，第三行随之取极限。这把熵极限与每个有限历史联系起来，并未把极限存在当作额外假设。有限链式法则、条件熵与极限的依据分别见库中的[分割](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/Partition.lean)、[条件化](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/GeneratorConditioning.lean)和[熵率](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/EntropyRate.lean)；它们的分割条件熵恒等式也不等于下面另列的首次回归公式。
+
+**同一联合分布的 KL 缺陷。** 沿用原律的 $Q=\operatorname{suffixKernel}(K)$、$q_j=\operatorname{suffixLaw}(K,j)$，并写 $R_j=w_j=\operatorname{suffixWeight}(K,p,j)$。由 [@thm-ch39-p2e-parry-escape-laws] 的范围与归一化性质，$p>1/2$、$0<R_j\le1$、$R_0=1$，且 $Q$ 非负、每行和为 $1$。在且仅在允许的边 $i\to j$（$j=0$，或存在的 $j=i+1$）上，$Q(i,j)>0$，并有
+
+$$
+\log Q(i,j)=\log p+\log R_j-\log R_i.
+$$
+
+固定任意历史长度 $n\ge1$，在有限指标 $(w,j)$ 上取两个数组
+
+$$
+\begin{aligned}
+a(w,j)&=\rho\bigl(A_{0,n}(w)\cap\{J_n=j\}\bigr),\\
+b(w,j)&=m_n(w)Q(w_{n-1},j).
+\end{aligned}
+$$
+
+它们均非负且总和为 $1$，并满足 $b(w,j)=0\Rightarrow a(w,j)=0$：若 $m_n(w)=0$，其每个扩展质量都为零；若核项为零，后缀递推使这个禁用扩展事件本身为空。因而绝对连续性适用于所有历史，包括零质量历史与禁用转移，而非仅在 $\mu$ 下成立。
+
+对这个实际联合数组，其行和是 $m_n(w)$，下一后缀的列和是 $\rho(J_n=j)$，最后历史后缀的边缘则是 $\rho(J_{n-1}=i)$。后两者由平稳性相同。只在 $a(w,j)>0$ 的项展开对数，零项贡献定义为零，于是
+
+$$
+\begin{aligned}
+D(a\Vert b)
+&=\sum_{a(w,j)>0}a(w,j)\log\frac{a(w,j)}{b(w,j)}\\
+&=-c_n-\sum_{a(w,j)>0}a(w,j)\log Q(w_{n-1},j)\\
+&=-c_n-\log p.
+\end{aligned}
+$$
+
+最后一步中 $\log R$ 的两项期望由上述相同边缘精确抵消。[有限 Gibbs 非负性](lean:D5/S3/Divergence/GrandmotherTheorem.kl_divergence_nonneg)给出 $D(a\Vert b)\ge0$，所以对每个 $n\ge1$ 都有
+
+$$
+h_{\mathrm{KS}}(\rho,T)\le c_n\le-\log p.
+$$
+
+这用的是同一历史—下一后缀联合分布，没有用两个另取的边缘分布替代它。
+
+**等号迫使每段历史服从原核。** 若 $h_{\mathrm{KS}}(\rho,T)=-\log p$，上式迫使每个 $c_n=-\log p$，从而每个历史长度的 $D(a\Vert b)=0$。[Gibbs 等号判据](lean:D5/S3/Divergence/GibbsEquality.kl_divergence_eq_zero_iff)遂给出逐项的 $a=b$。$T$ 可逆且保测度，所以 $\rho$ 在每个 $\theta_\ell$ 下不变；平移后，对所有 $\ell\in\mathbb Z$、$n\ge1$、词 $w$ 与目标后缀 $j$，
+
+$$
+\begin{aligned}
+&\rho\bigl(A_{\ell,n}(w)\cap\{J_{\ell+n}=j\}\bigr)\\
+&\qquad=\rho(A_{\ell,n}(w))Q(w_{n-1},j).
+\end{aligned}
+$$
+
+历史质量为正时可相除，得到给定这段完整有限历史的下一后缀条件分布就是 $Q(w_{n-1},\cdot)$。未相除的恒等式同时保留零历史；这里不需要也没有断言无限过去的条件期望公式。
+
+**原来的 $\mu$ 确实达到上界。** 原律的第 5 项柱集公式直接给出，对每个 $\ell$、$n\ge1$ 与每个词 $w$，
+
+$$
+\mu(A_{\ell,n}(w))=q_{w_0}\prod_{i=0}^{n-2}Q(w_i,w_{i+1}).
+$$
+
+$n=1$ 时乘积为空；含零转移的词仍保留在公式内。把词延长一项即得到上一段的未相除转移恒等式，初始质量仍是同一个 $q$，没有另构造候选律。因此在 $\rho=\mu$ 时，每个 $n\ge1$ 的 KL 缺陷为零，$c_n=-\log p$。单调性还给出 $c_0\ge-\log p$，链式法则于是给出 $H_N\ge N(-\log p)$。应用已给出的 Fekete 极限与普适上界，便得 $h_{\mathrm{KS}}(\mu,T)=-\log p$。
+
+**从平稳边缘到整个概率律的刚性。** 仍设 $\rho$ 达到上界。长度一的转移恒等式与平稳性使 $u_j=\rho(J_0=j)$ 满足 $uQ=u$；原律同样满足 $qQ=q$。这个初始边缘的唯一性无需预设：由于每行 $Q(i,0)=p/R_i\ge1/2$，令
+
+$$
+\begin{aligned}
+d_j&=\tfrac12\mathbf1_{\{j=0\}},\\
+U(i,j)&=2\bigl(Q(i,j)-d_j\bigr).
+\end{aligned}
+$$
+
+$U$ 非负且行和为 $1$。对任意归一化平稳概率行 $u,v$，共同的重置质量抵消，故[总变差的随机信道收缩](lean:D5/S3/TotalVariation/DataProcessing.total_variation_channel_le)给出
+
+$$
+\operatorname{TV}(u,v)
+=\tfrac12\operatorname{TV}(uU,vU)
+\le\tfrac12\operatorname{TV}(u,v).
+$$
+
+结合[非负性](lean:D5/S3/TotalVariation/Metric.total_variation_nonneg)与[零值判据](lean:D5/S3/TotalVariation/Metric.total_variation_eq_zero_iff)，得到 $u=v$，特别地 $u=q$。再从这个共同的初始质量出发，对词长使用未相除的转移恒等式归纳，便得 $\rho$ 与 $\mu$ 在每个整数原点的所有有限后缀柱集上相等；长度零的柱集事件为全空间，质量都是 $1$。
+
+通过 $r_t=\mathrm{false}\Longleftrightarrow J_{t+1}=0$，每个有限关系位窗口是一个有限后缀窗口的可测函数。后缀柱集等式因此给出实际布尔关系路径的所有柱集等式。[双向布尔柱集唯一性](lean:D5/S3/Observer/ProbabilisticClosure/TrajectoryLaws/TwelveStateGhost.visible_eq_of_cylinders)使两测度推到 $\mathrm{Bool}^{\mathbb Z}$ 后相等，再由 $X_K$ 的可测子空间嵌入得到 $\rho=\mu$。反方向就是已证的原律达到上界。这证明等号充要条件；在扩展实数序中，普适上界与排除等号又给出每个 $\rho\ne\mu$ 的严格不等式。这里的严格性逐个测度成立，不提供对所有不同测度共同为正的熵差下界。
+
+**一般帕里定理与拓扑熵识别：文献范围。** 本应用只完成上述实际系统的度量熵 $-\log p$、达到性与刚性。一般有限型子移位的最大熵定理及拓扑熵识别另按文献阅读。M. Pollicott 等人的综述 *The mathematical research of William Parry FRS*（[机构存档 PDF](https://wrap.warwick.ac.uk/id/eprint/682/1/WRAP_pollicott_Parry_research.pdf)，§2.3，pp. 323–324；DOI：[10.1017/S0143385708000102](https://doi.org/10.1017/S0143385708000102)）在有限邻接矩阵**本原，即不可约且非周期**的假设下介绍唯一的内禀马尔可夫最大熵测度；单独的非周期性不代替不可约性。本节阅读的是这篇综述；Parry 的 1964 年原论文（*Trans. Amer. Math. Soc.* **112**, 55–66；DOI：[10.1090/S0002-9947-1964-0161372-1](https://doi.org/10.1090/S0002-9947-1964-0161372-1)）只核对了书目信息，未阅读原文。
+
+对禁 $1^K$ 子移位，通常的拓扑熵识别 $h_{\mathrm{top}}(\Sigma_K)=\log\beta_K=-\log p$ 仍在这里的文献范围内，不由上面的度量熵应用冒充其独立证明。以比特计量时除以 $\log2$，得到 $\log_2\beta_K\;\text{bits/step}$；数值计算 `NUM` 在 $K=2,3,4$ 时依次约为 $0.69424$、$0.87915$、$0.94678\;\text{bits/step}$，随 $\beta_K\nearrow2$ 单调趋向 $1\;\text{bit/step}$。
+
+**首次回归的阿布拉莫夫公式：独立文献结果，未在本书形式化。** L. M. Abramov（*Dokl. Akad. Nauk SSSR* **128**, 1959, 647–650）证明：在保概率遍历动力系统 $(X,\mathcal B,\eta,S)$ 中，若可测回访集 $A\in\mathcal B$ 满足 $\eta(A)>0$，则首次回归时间 $\tau_A(x)=\min\{n\ge1:S^nx\in A\}$ 在 $A$ 上几乎处处有限。以 $S_A(x)=S^{\tau_A(x)}x$ 表示诱导映射，以 $\eta_A(B)=\eta(B\cap A)/\eta(A)$ 表示归一化条件测度，则
+
+$$
+h_{\eta_A}(S_A)=\frac{h_\eta(S)}{\eta(A)}.
+$$
+
+两边须使用相同的对数底；左边以每次回归计量，右边的 $h_\eta(S)$ 以原始每步计量。上面的最大熵应用没有证明这条首次回归公式，也没有据此提供物理实现、不可逆读出或有限 $p$ 进余数树的熵公式。对这些对象应用文献结果，仍须分别建立实际的保测度系统、回访集及对应关系。
 :::
 
 至于横向内部空间的劳齐分形边界维数 $D_F = \dim_H(\partial\mathcal{R}_K)$ 是否会在量子多体切投态中诱导出反常的分形边界纠缠标度，在严格数学物理中仍是一道悬而未决的开放问题：
@@ -328,7 +465,7 @@ $$
 设阶数 $K \ge 3$ 的皮索切投点集或局域受约束多体哈密顿量，其内部接受窗 $\mathcal{R}_K$ 具有豪斯多夫维数严格大于整数余维的拓扑分形边界（例如 $K = 3$ 时文献结果给出 $D_F = \dim_H(\partial\mathcal{R}_3) \approx 1.09336 > 1$）。是否存在严格构造的一族局域有能隙基态或切投编码量子态，当区域特征尺度 $R \to \infty$ 时，其跨边界双体纠缠熵 $S_{\mathrm{ent}}(R)$ 严格服从由内部劳齐边界维数 $D_F$ 支配的反常标度律（如主项 $S_{\mathrm{ent}}(R) \asymp R^{D_F}$ 或精确锁定系数的对数/次主导分形修正项），并能给出标准余维一面积律失效或保持的充要谱间隙与局域性判据？在本书框架内，任何诸如 $S_{\mathrm{ent}} \propto R^{D_F}$ 的“分形视界面积律”表述均作为待证开放问题（`OPEN`）与启发性物理构想（`MODEL`）列出，绝不作为已证形式定理或引力面积律定理宣称。
 :::
 
-::: {.remark #rem-ch39-p2e-physical-tribonacci-interface title="物理 Tribonacci 跃迁链与有限开链接口"}
+::: {.remark #rem-ch39-p2e-physical-tribonacci-interface title="物理 Tribonacci 文献模型与有限 Slater 前缀应用"}
 **文献模型与边界约定。** 一个可供研究的具体物理对象是零在位势的最近邻跃迁链。依 Kolehmainen–Lado–Moustaj，*One-dimensional quasicrystals with tensor-network finite-state automata*（[arXiv:2609.06040v1](https://arxiv.org/pdf/2609.06040v1)，§III 式 (2)–(3)、附录 B.2），取替代规则 $\sigma(A)=AB$、$\sigma(B)=AC$、$\sigma(C)=A$，以及从 $A$ 出发的不动无限词 $W=\lim_{j\to\infty}\sigma^j(A)$，字母从 $W_0$ 编号。固定 $0<\rho<1$，以 $t_C=1$ 为能量单位，令 $t_A=\rho^2$、$t_B=\rho$，即 $t_A/t_B=t_B/t_C=\rho$。对每个整数 $N\ge2$，在单粒子格点空间 $\mathbb{C}^N$ 的基 $\{\lvert i\rangle:0\le i<N\}$ 上定义
 
 $$
@@ -354,7 +491,7 @@ $$
 
 [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 的单独陈述给出每个固定 $\rho\in(0,1)$ 的全序列极限。更强的 [@ex-ch39-p2e-tribonacci-prefix-rate] 保留定量纸面推导：对所有 $j\ge4$、$0<\rho<1$，有 $\delta_{\rho,j}\le73728/N_j$，并由此得到关于 $\rho$ 的一致收敛。整条定量应用仍以纸面证明呈现，不带独立 Lean 验证徽章，也不声称解决外部新猜想。有限矩阵的可逆性、无限体积谱中零点的归属、有限分辨率态密度或 Anderson 局域化意义下的临界性，都不能直接替代这一指定边界与前缀序列的极限证明。Krebbekx–Moustaj–Dajani–Morais Smith 的 *Multifractal Properties of Tribonacci Chains*（[*Phys. Rev. B* **108**, 104204](https://doi.org/10.1103/PhysRevB.108.104204)，§II.B.1、§III.A.1、§V）采用周期逼近与微扰重整化研究物理谱及临界性；本书不将其解释为上述对所有 $\rho\in(0,1)$ 的有限开链结论。
 
-**实际 Slater 态与关联矩阵约定。** 要讨论物理空间切口的熵，还须指定多体哈密顿量、填充及态。以下是文献构造与文献结果，未在本书形式化。让这 $N$ 个原始格点保持自然顺序 $0,\ldots,N-1$，以布尔占据串的占据子集 $S$ 标记正交归一基 $\lvert S\rangle$。选取整数 $0\le k\le N$ 和复矩阵 $V\in\mathbb{C}^{N\times k}$，其列是所占据的正交归一单粒子模式，即 $V^\dagger V=I_k$。对大小为 $k$ 的 $S$，令 $V_S$ 按递增格点顺序保留这些行，列顺序保持不变，定义实际的多体振幅
+**有序 Slater 振幅与字面前缀部分迹。** 下面的有限维应用独立于跃迁参数，允许任意自然数 $N$、$0\le k\le N$ 和复矩阵 $V\in\mathbb{C}^{N\times k}$，只要求 $V^\dagger V=I_k$。让原始格点保持自然顺序 $0,\ldots,N-1$，以布尔占据串的占据子集 $S$ 标记正交归一基 $\lvert S\rangle$。对大小为 $k$ 的 $S$，令 $V_S$ 按递增格点顺序保留这些行，列顺序保持不变，定义同一个实际多体向量
 
 $$
 \langle S\mid\Psi_V\rangle=
@@ -364,53 +501,177 @@ $$
 \end{cases}
 $$
 
-这就是 Slater 行列式在有序占据基中的展开；空行列式取 $1$，所以 $k=0$ 给出真空。这里的占据基已经归一化，振幅不再乘以 $1/\sqrt{k!}$。Dereziński 的 [*Clifford algebras and fermions*](https://www.fuw.edu.pl/~derezins/clifford.pdf)，§7.1–7.2 式 (7.51)–(7.54)，给出 CAR、有序占据基与归一化 Slater 行列式。这一态的选择保留了振幅与费米符号；仅找一个具有所需关联矩阵的密度矩阵不能替代它。把它用于上述跃迁链的基态时，仍须指定所占模式、填充及多体哈密顿量，并核对能量最小性。
-
-令 $P=VV^\dagger$，$\rho_V=\lvert\Psi_V\rangle\langle\Psi_V\rvert$，并令 $c_i$ 为按原始格点顺序定义的费米湮灭算符。关联矩阵的指标约定为
+空行列式取 $1$，所以 $k=0$ 给出真空。占据基已经归一化，振幅不再乘以 $1/\sqrt{k!}$。对 $V^\dagger,V$ 在自然格点次序下应用[矩形柯西–比内恒等式](lean:D5/S3/Quantum/Schatten/CompoundMatrices.cauchyBinet)，得到
 
 $$
-\begin{aligned}
-K_{ij}&=\Tr(\rho_V c_j^\dagger c_i)=P_{ij},\\
-C_{ij}&=\Tr(\rho_V c_i^\dagger c_j)=P_{ji},\qquad C=P^{\mathsf T}.
-\end{aligned}
+\sum_{|S|=k}\overline{\det(V_S)}\det(V_S)
+=\det(V^\dagger V)=1.
 $$
 
-Dereziński 的定理 8.1，特别是式 (8.103) 的 $\omega_\pi(d\Gamma(h))=\Tr(\pi h)$，支持这一二点函数约定。Peschel，[*Calculation of reduced density matrices from correlation functions*](https://arxiv.org/pdf/cond-mat/0212631v1)，式 (7)、(9)–(10)，采用上面的 $C$ 约定；其式 (12) 中的转置不能略去。对实投影矩阵，两种记法可以重合；推广到复模式时必须保留转置区别。Peschel 还明确指出：对非 Slater 态，按同一二点函数重建的自由费米密度矩阵一般不能复现其他期望值。因此，关联矩阵相合本身不能确定一般密度矩阵。
+因而归一化来自列正交性。Dereziński 的 [*Clifford algebras and fermions*](https://www.fuw.edu.pl/~derezins/clifford.pdf)，§7.1–7.2 式 (7.51)–(7.54)，给出 CAR、有序占据基与归一化 Slater 行列式的文献背景。把这个向量用于上述跃迁链的基态时，仍须指定所占模式、填充及多体哈密顿量，并核对能量最小性。
 
-**空间压缩的完整谱。** 对上述 Slater 态，指定由 $\ell$ 个原始格点组成的空间区域 $I$。令 $V_I$ 只保留这些格点的行，并把 $P_I=V_I V_I^\dagger$ 看作作用在该区域上的 $\ell\times\ell$ 压缩矩阵，而不是补集上带额外零空间的 $N\times N$ 矩阵。文献中的费米子系统约定下，若 $\nu_1,\ldots,\nu_\ell\in[0,1]$ 是它的全部特征值，包括 $0$、$1$ 与重复值，则约化密度矩阵 $\rho_I$ 的特征值多重集恰有 $2^\ell$ 项，按所有占据串逐项列为
-
-$$
-\begin{aligned}
-b_a(0)&=1-\nu_a,\qquad b_a(1)=\nu_a,\\
-\lambda_{\boldsymbol n}&=\prod_{a=1}^{\ell}b_a(n_a),\qquad
-\boldsymbol n\in\{0,1\}^{\ell}.
-\end{aligned}
-$$
-
-相同数值按重数保留，零特征值也保留；显式选择两个因子避免了端点处的 $0^0$。例如，一个完全空或完全满的模式仍贡献一对特征值 $1,0$，不能从完整密度谱中删去。$\ell=0$ 时空乘积为 $1$，密度谱只有这一项。使用自然对数，熵为
-
-$$
-\begin{aligned}
-S(\rho_I)&=\sum_{a=1}^{\ell}h(\nu_a),\\
-h(x)&=-x\log x-(1-x)\log(1-x).
-\end{aligned}
-$$
-
-这里 $x\log x$ 在 $x=0$ 时按连续延拓取 $0$，故 $h(0)=h(1)=0$；若以比特计量，需将熵除以 $\log 2$。Peschel 的式 (8)–(11) 给出约化自由费米密度矩阵的模式描述；Klich，[*Lower entropy bounds and particle number fluctuations in a Fermi sea*](https://arxiv.org/pdf/quant-ph/0406068v2)，式 (4) 的投影模式分解、式 (7) 及其后的 $\operatorname{diag}(1-d_i,d_i)$ 约化因子与式 (11)，给出这一乘积谱和熵公式的依据。更一般的粒子数规范不变高斯密度矩阵也有同样配方，此时压缩的是其单粒子关联算符，不要求全空间关联算符为投影。高斯性是这里的假设，不能由所期待的谱公式倒推。含 $0$ 或 $1$ 时，Peschel 式 (12) 的矩阵对数不能直接使用；上述因子与连续延拓保留了这些端点。
-
-占据模式上的 $k\times k$ Gram 矩阵 $V_I^\dagger V_I$ 与 $P_I$ 有相同的非零谱，但两者维数可以不同。只掌握前者的谱还不足以列出空间密度矩阵的全部 $2^\ell$ 个特征值：必须把非零压缩谱按重数保留，再用零补足到 $\ell$ 项。熵求和中零模式贡献为零，容易掩盖这一完整谱的维数差别。这些谱关系是已有文献结论；本书尚需建立它们与具体占据载体的对应。
-
-**尚待形式化的空间接口。** 直接目标限定为 $0\le\ell\le N$ 时的连续前缀 $I=\{0,\ldots,\ell-1\}$。令 $a,a'\in\{0,1\}^{\ell}$ 为前缀占据串，$b\in\{0,1\}^{N-\ell}$ 为尾部占据串；$ab$ 表示按原始格点顺序先接 $a$、再接 $b$。用前面定义的同一个行列式振幅写出普通张量部分迹：
+指定 $0\le\ell\le N$ 和连续前缀 $I=\{0,\ldots,\ell-1\}$。令 $a,a'\in\{0,1\}^{\ell}$、$b\in\{0,1\}^{N-\ell}$；$ab$ 表示按原始格点顺序先接前缀、再接尾部。定义
 
 $$
 \begin{aligned}
 \psi_V(a,b)&:=\langle ab\mid\Psi_V\rangle,\\
-R_I(a,a')&:=\sum_{b\in\{0,1\}^{N-\ell}}
-\psi_V(a,b)\,\overline{\psi_V(a',b)}.
+M_V((a,b),(a',b'))&:=\psi_V(a,b)\overline{\psi_V(a',b')},\\
+R_V(a,a')&:=\sum_{b\in\{0,1\}^{N-\ell}}
+\psi_V(a,b)\overline{\psi_V(a',b)}.
 \end{aligned}
 $$
 
-这里 $R_I$ 是作用在全部 $2^\ell$ 个前缀占据串上的矩阵，求和遍历被迹去的尾部格点占据串。形式化目标是证明这个具体矩阵具有上面的完整谱多重集与端点安全的熵公式，包括 $\ell=0,N$，并使用全部 $\ell$ 个压缩特征值及其重数。Klich 的式 (7) 使用费米张量积。下文从行列式的行顺序出发，推导它与普通张量部分迹何时给出同一个谱。这里的格点切口按物理空间的顺序取，地址数位切口属于另一种分解。
+这是有序格点张量积上的普通部分迹 $R_V=\operatorname{Tr}_{\mathrm{tail}}M_V$，保留全部 $2^\ell$ 个前缀占据串。秩一矩阵 $M_V$ 半正定，[部分迹保半正定性](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.partialTraceRight_posSemidef)给出 $R_V\ge0$；将其对角和按拼接双射重排，前面的归一化给出 $\Tr R_V=1$。以下 $\rho_I$ 就是以这个 $R_V$ 为矩阵的密度态。
+
+**原基中的酉对应与完整谱。** 写 $X=V_I$ 为前 $\ell$ 行、$Y$ 为其余 $N-\ell$ 行，令 $A=XX^\dagger$。全空间投影 $P=VV^\dagger$ 与 $I_N-P$ 均半正定；压缩后得到 $0\le A\le I_\ell$。取 $A$ 的正交归一特征向量矩阵 $Q$，并保留全部 $\ell$ 个特征值 $\nu_i$，于是
+
+$$
+\begin{aligned}
+Q^\dagger Q&=QQ^\dagger=I_\ell,\\
+Q^\dagger A Q&=\operatorname{diag}(\nu_1,\ldots,\nu_\ell),
+\qquad 0\le\nu_i\le1,\\
+\widetilde V&=(Q^\dagger\oplus I_{N-\ell})V.
+\end{aligned}
+$$
+
+这里 $\widetilde V$ 的前缀行是 $\widetilde X=Q^\dagger X$，尾部仍为 $Y$，且 $\widetilde V^\dagger\widetilde V=I_k$。定义作用在全部 $m$ 格点占据串上的矩阵 $\Gamma_m(B)$：当两串占据子集等大时，其条目是 $B$ 在这两个子集上按自然递增行、列取出的子式；大小不等时条目为零。真空扇区的条目是空行列式 $1$。逐粒子数扇区应用柯西–比内恒等式，得到
+
+$$
+\begin{aligned}
+\Gamma_m(BC)&=\Gamma_m(B)\Gamma_m(C),\\
+\Gamma_m(B^\dagger)&=\Gamma_m(B)^\dagger,\qquad
+\Gamma_m(I_m)=I_{2^m}.
+\end{aligned}
+$$
+
+所以单粒子酉矩阵提升为整个布尔占据空间上的酉矩阵。这里始终使用自然次序；若改用固定经典次序的复合矩阵，须在左右占据子集各乘上对应重排的符号，不能直接忽略次序差异。
+
+前缀格点全部先于尾部格点，因此分块子式没有额外交换符号，且
+
+$$
+\Gamma_N(B\oplus I_{N-\ell})(ab,a'b')
+=\Gamma_\ell(B)(a,a')\,\delta_{bb'}.
+$$
+
+对同一个行列式向量应用这个恒等式，再用[局部共轭与部分迹恒等式](lean:D5/S3/Quantum/Dynamics/KickedIsingNegativityRefutation.trace_local_right)（尾部矩阵取恒等），得到实际边缘矩阵之间的关系
+
+$$
+\begin{aligned}
+G&=\Gamma_\ell(Q^\dagger),\qquad G^\dagger G=GG^\dagger=I_{2^\ell},\\
+R_{\widetilde V}&=G R_V G^\dagger.
+\end{aligned}
+$$
+
+这个变换律由振幅与部分迹推出，没有假定关联矩阵变换律或高斯性。
+
+还须计算 $R_{\widetilde V}$ 本身。对等大的前缀占据子集 $S,T$，记 $r=|S|=|T|$，并让 $\widetilde X_S,\widetilde X_T$ 保留各自递增的行。对叠在 $Y$ 上方的这些行赋多项式权重 $t$，对尾部行赋权重 $1$。柯西–比内展开中 $t^r$ 的系数恰好选出包含全部指定前缀行的子式，故
+
+$$
+R_{\widetilde V}(S,T)
+=[t^r]\det\bigl(Y^\dagger Y+t\widetilde X_T^\dagger\widetilde X_S\bigr).
+$$
+
+这里 $[t^r]$ 表示取系数。令 $E_{T,S}$ 把 $S$ 的第 $q$ 个递增坐标送到 $T$ 的第 $q$ 个递增坐标，其余条目为零。利用 $Y^\dagger Y=I_k-\widetilde X^\dagger\widetilde X$，以及 $\det(I+BC)=\det(I+CB)$，上式中的行列式等于
+
+$$
+\det\bigl(I_\ell-D+tE_{T,S}D\bigr),
+\qquad D=\operatorname{diag}(\nu_1,\ldots,\nu_\ell).
+$$
+
+按 $T$ 及其补集分块，$t^r$ 的系数是 $E_{T,S}D$ 在 $T$ 上的主子式，乘以 $\prod_{i\notin T}(1-\nu_i)$。当 $S=T$ 时该主子式为 $\prod_{i\in S}\nu_i$；当 $S\ne T$ 时，$T\setminus S$ 中的坐标给出零列，故系数为零。若 $|S|\ne|T|$，同一尾部占据子集不可能让两个总粒子数同时为 $k$，原部分迹中的每项已经为零。这就逐条计算出
+
+$$
+\begin{aligned}
+b_i(0)&=1-\nu_i,\qquad b_i(1)=\nu_i,\\
+\lambda_a&=\prod_{i=1}^{\ell}b_i(a_i),\qquad a\in\{0,1\}^{\ell},\\
+R_{\widetilde V}&=\operatorname{diag}(\lambda_a),\\
+U&=G^\dagger,\qquad
+R_V=U\operatorname{diag}(\lambda_a)U^\dagger.
+\end{aligned}
+$$
+
+最后一行把结论送回原格点基中的同一个 $R_V$。[厄米矩阵酉相似的谱重排定理](lean:D5/S3/Quantum/Schatten/MatrixSimilarity.IsHermitian.eigenvalues_eq_of_unitary_similarity_diagonal)因此将它的全部特征值按一个布尔占据串的置换与 $\lambda_a$ 逐项对应。谱多重集恰有 $2^\ell$ 项，相同数值、零特征值与不可能占据扇区均按重数保留。完全空或完全满的模式仍贡献一对权重 $1,0$；显式选择两个因子避免了 $0^0$。$\ell=0$ 时空乘积为 $1$，密度谱只有这一项。
+
+占据模式上的 $k\times k$ Gram 矩阵 $X^\dagger X$ 与 $A$ 只有非零谱相同，维数可以不同。完整空间谱必须保留全部 $\ell$ 个空间模式：保留非零压缩谱的重数，再用零补足到 $\ell$ 项，不能把粒子模式数 $k$ 当作空间模式数。上述推导也包括 $N=0$、真空 $k=0$、满填充 $k=N$ 与全前缀 $\ell=N$；全前缀仍是纯态，其密度谱只有一个 $1$，其余为零。
+
+**实际密度态的熵与文献对应。** 对这个由部分迹构造的 $\rho_I$，[谱熵恒等式](lean:D5/S3/Quantum/Information/PartialTraceMutualInformation.entropy_eq_spectral)给出其冯诺依曼熵。将 $x\log x$ 在零点连续延拓为零，则
+
+$$
+\begin{aligned}
+S(\rho_I)&=-\Tr(\rho_I\log\rho_I)
+=-\sum_{a\in\{0,1\}^{\ell}}\lambda_a\log\lambda_a\\
+&=\sum_{i=1}^{\ell}h(\nu_i),\\
+h(x)&=-x\log x-(1-x)\log(1-x).
+\end{aligned}
+$$
+
+这一步使用的密度矩阵就是原基中的 $R_V$，并非另找的谱实现。乘积权重满足 $\sum_a\lambda_a=\prod_i((1-\nu_i)+\nu_i)=1$；按一个布尔坐标拆分求和，再用 $-(xy)\log(xy)=y(-x\log x)+x(-y\log y)$，逐坐标得到最后的二元熵和。此恒等式连同零点约定保留奇异密度态，故 $h(0)=h(1)=0$；对数取自然底，换成比特须除以 $\log2$。这里是原始有限矩阵结果的应用推导，不另立完整 Slater 定理或独立验证徽章。
+
+Peschel，[*Calculation of reduced density matrices from correlation functions*](https://arxiv.org/pdf/cond-mat/0212631v1)，式 (8)–(11)，给出约化自由费米密度矩阵的模式描述。Klich，[*Lower entropy bounds and particle number fluctuations in a Fermi sea*](https://arxiv.org/pdf/quant-ph/0406068v2)，式 (4)、(7) 及其后的 $\operatorname{diag}(1-d_i,d_i)$ 因子与式 (11)，给出对应的投影模式分解、乘积谱与熵公式；这里 $d_i=\nu_i$，而 $\ell$ 是空间区域的格点数。Klich 的式 (7) 使用适当的费米张量积；上面的前缀推导另外明确了自然格点次序与字面张量部分迹之间的对应。
+
+**同一 Slater 态的二点函数。** 仍取上述实际向量，记 $\psi_V(x)=\langle x\mid\Psi_V\rangle$、$\rho_V=\lvert\Psi_V\rangle\langle\Psi_V\rvert$，并使用原格点顺序下的 [`JordanWigner.fullC`](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC) 作为 $c_i$。其[占据基矩阵元](lean:D5/S3/Quantum/SpinChains/SupersymmetricFermion/HardCoreCompression.fullC_entry) 在且仅在输入占据 $i$、输出将该位清空时非零，系数为 $(-1)^{n_S(i)}$，其中 $n_S(i)=|\{a\in S:a<i\}|$。由这些原始算符与行列式振幅可直接得到
+
+$$
+\begin{aligned}
+K_{ij}&=\Tr\bigl((\rho_V c_j^\dagger)c_i\bigr)=P_{ij},\\
+C_{ij}&=\Tr\bigl((\rho_V c_i^\dagger)c_j\bigr)
+=P_{ji}=\overline{P_{ij}},\\
+C&=P^{\mathsf T}.
+\end{aligned}
+$$
+
+为看清交换符号，令 $E_{j,i}$ 只有第 $j$ 行、第 $i$ 列为 $1$，其余为零；在复系数多项式环中置
+
+$$
+\begin{aligned}
+W(X)&=(I_N+XE_{j,i})V,\\
+W(X)_{j,b}&=V_{j,b}+XV_{i,b}.
+\end{aligned}
+$$
+
+其他行不变，$\psi_{W(X)}(x)$ 仍按同一递增行次序取子式，无须假定 $W(X)$ 的列正交。逐个占据词有
+
+$$
+[X]\psi_{W(X)}(x)
+=\bigl(c_j^\dagger c_i\Psi_V\bigr)(x).
+$$
+
+这里 $[X]$ 取一次项系数。错误粒子数的词在两边均为零，因为该算符保持粒子数。以下设 $|S(x)|=k$。若 $j\notin S(x)$，所取子式不含变动行，产生算符在该输出处也为零。若 $j\in S(x)$，置 $R=S(x)\setminus\{j\}$；当 $i\in R$ 时，替换行产生重复行，行列式与湮灭作用都为零。其余情形把替换行移回递增位置，双方都给出
+
+$$
+(-1)^{n_R(j)+n_R(i)}\det V_{R\cup\{i\}}.
+$$
+
+两次计数分别记录移出 $j$ 与插入 $i$ 的行交换次数，因此也覆盖 $i=j$。这一符号对应可由[所钉源码根](trureturing:)中的 `D5/S3/Quantum/Fermionic/PeriodicSshExcessPseudoEntropyRefutation.lean` 的私有 `fullC_sparse`、`fullC_create_sparse`，以及 `D5/S3/Quantum/FermionicCorrelationalBound/PhysicalContractionRdmBridge.lean` 的私有 `sorted_position_count`、`sorted_removeNth` 读出：前两者给出上述稀疏作用，后两者把递增排列中的位置识别为较小元素个数，并保持删去一行后的递增顺序。后两者原以自然数下标陈述；将有限格点映到其自然数值，保持次序，即得到这里的行排列符号。这些是原始源码中的辅助声明，不另设公开声明链接。
+
+现在对 $V^\dagger,W(X)$ 使用同一[柯西–比内恒等式](lean:D5/S3/Quantum/Schatten/CompoundMatrices.cauchyBinet)，这次系数环为 $\mathbb C[X]$，得到
+
+$$
+\begin{aligned}
+F(X)&:=\det\bigl(V^\dagger W(X)\bigr)\\
+&=\sum_{x\in\{0,1\}^N}
+\overline{\psi_V(x)}\,\psi_{W(X)}(x)\\
+&=\det\bigl(I_k+XV^\dagger E_{j,i}V\bigr).
+\end{aligned}
+$$
+
+最后一行只用了 $V^\dagger V=I_k$。行列式展开中一次项来自恰好选取一个对角位置，故 $[X]\det(I+XB)=\Tr B$。在求和一侧提取系数，再将秩一密度矩阵的迹展开，给出
+
+$$
+\begin{aligned}
+[X]F(X)
+&=\sum_x\overline{\psi_V(x)}
+\bigl(c_j^\dagger c_i\Psi_V\bigr)(x)\\
+&=\Tr\bigl((\rho_V c_j^\dagger)c_i\bigr),\\
+[X]F(X)
+&=\Tr\bigl(V^\dagger E_{j,i}V\bigr)\\
+&=\Tr\bigl(E_{j,i}VV^\dagger\bigr)=P_{ij}.
+\end{aligned}
+$$
+
+这证明了同一实际态的 $K_{ij}=P_{ij}$；交换 $i,j$ 并用 $P^\dagger=P$ 得到 $C$ 的公式。没有预设关联矩阵、高斯性或归一化，也没有用另一密度矩阵替换 $\rho_V$。复相位不能丢掉：例如 $N=2,k=1$、$V=(3/5,4\mathrm{i}/5)^{\mathsf T}$ 时，$K_{01}=-12\mathrm{i}/25$ 而 $C_{01}=12\mathrm{i}/25$。上述有限求和同样覆盖真空（$K=0$）、满填充（$K=I_N$）、相同格点与两种不同格点次序；$N=0$ 时没有可选的 $i,j$。这是原始结果的标准应用，不另立完整端点定理或独立验证徽章。
+
+Dereziński 的 [§§7.1–7.2、式 (7.51)–(7.54)](https://www.fuw.edu.pl/~derezins/clifford.pdf) 给出占据基与 Slater 约定；其定理 8.1，特别是式 (8.103) 的 $\omega_\pi(d\Gamma(h))=\Tr(\pi h)$，给出对应的一体期望公式。Peschel 的式 (7)、(9)–(10) 使用 $C$；其式 (12) 中的转置对复模式不能略去。Peschel 还指出，对非 Slater 态，按同一二点函数重建的自由费米密度矩阵一般不能复现其他期望值，故关联矩阵相合不能确定一般密度矩阵。更一般的粒子数规范不变高斯密度矩阵也有上述谱配方，但须另给高斯性假设；这与从指定行列式振幅出发的推导范围不同。含 $0$ 或 $1$ 时，不能直接套用 Peschel 式 (12) 的矩阵对数。任意非前缀格点子集还涉及 Jordan–Wigner 字符串与费米子系统选择，须另行建立对应；地址数位切口也仍不能充当物理空间切口。
 
 Moustaj–Krebbekx–Morais Smith 的 *Anomalous Polarization in One-dimensional Aperiodic Insulators*（[doi:10.3390/condmat10010003](https://doi.org/10.3390/condmat10010003)，§IV–V、§V.C 与附录 B）讨论含在位项的泵浦族及指定填充，其关联矩阵方法依赖所选 Slater／高斯态与子系统，不能直接移用于任意编码态。$\delta_{\rho,j}$ 只是单粒子能量到零的距离；多体激发隙还需填充、粒子数扇区与间隙约定。上述极限只处理这一单粒子谱前提：物理长度 $R$ 与内部窗坐标的对应、空间切口与劳齐边界的联系及熵标度，仍需另外建立；[@prob-ch39-p2e-fractal-horizon] 的完整问题仍然保留。
 :::
@@ -473,6 +734,24 @@ $$
 **单粒子压缩何时足以确定约化谱？** 固定切口和粒子数 $k$。只要上面的乘积谱判据成立，$P_I$ 就决定普通张量部分迹的完整谱。对处于中间填充且含四个交替格点的切口，取刚才的四点构造，并保留固定占据集 $T$。把完全支撑在 $J$ 上的那条轨道替换成其支撑中任一格点的单位向量。两组轨道在 $I$ 上逐列相同，所以给出同一个 $P_I$。替换后，所有非零振幅在 $J$ 上都有同一占据串，即 $T\cap J$ 加上新轨道所在的格点。按 $J$ 上的占据串分组时只剩一个振幅向量，故约化态是纯态。
 
 记 $D=2^{|I|}$。替换前后的两个约化态的特征多项式分别为 $x^{D-2}(x-1/2)^2$ 与 $x^{D-1}(x-1)$，熵分别为 $\log 2$ 与 $0$。这个书面推导表明，填充和切口已知时，$P_I$ 对所有 Slater 态都能确定约化谱的条件，恰好就是上面的乘积谱判据。
+
+**多个两点轨道的交替矩阵。** 取 $a$ 条完全位于 $I$ 的轨道与 $b$ 条完全位于 $J$ 的轨道，每条轨道在自己的一对格点上取振幅 $1/\sqrt{2}$，所有格点对互不相交。把保留侧的列排在前面。用 $x\in\mathbb F_2^a$ 与 $y\in\mathbb F_2^b$ 编码每对取较早还是较晚的端点。每个非零行列式恰好从每对取一个端点，所以振幅矩阵在这些占据串之外为零。令 $A_{ij}\in\mathbb F_2$ 等于第 $i$ 个保留对与第 $j$ 个弃置对的端点交替指示量。
+
+在非零占据串上，行重排的符号由逆序数给出。同一侧内部的符号只依赖该侧的占据串。各取一个保留侧和弃置侧的格点对，四种端点选择的逆序指示之和模 $2$ 等于两个保留端点之间的弃置端点数模 $2$。因此，其关于 $x_i,y_j$ 的混合系数正是 $A_{ij}$。吸收只依赖单侧的符号后，振幅矩阵为
+
+$$
+M_{xy}=2^{-(a+b)/2}(-1)^{x^\mathsf T A y}.
+$$
+
+对 $y$ 求和时，若 $A^\mathsf T x=A^\mathsf T x'$，则 $(MM^\dagger)_{xx'}=2^{-a}$。否则沿一个使指数翻转的坐标将 $y$ 两两配对，求和为零。设 $r=\operatorname{rank}_{\mathbb F_2} A$。映射 $A^\mathsf T$ 的每个非空纤维有 $2^{a-r}$ 个元素，故约化态有 $2^r$ 个常数方块，各给出一个特征值 $2^{-r}$。计入其余占据串上的零空间，完整特征多项式为
+
+$$
+x^{\,2^{|I|}-2^r}(x-2^{-r})^{2^r}.
+$$
+
+这个二元秩公式也出现在图态的二分切口中。此处的矩阵元由实际 Slater 行列式的格点顺序给出。[Hein、Eisert 与 Briegel，命题 3](https://arxiv.org/abs/quant-ph/0307130)
+
+把每条 $J$ 轨道换成该对较早端点的单位向量，保留侧压缩仍相同。弃置侧只剩一个占据串，普通约化态成为纯态，熵差为 $r\log 2$。例如，将 $m$ 个按 $I,J,I,J$ 排列的四点块依次拼接，块间端点不交替，故 $A$ 是 $m$ 阶单位矩阵。这给出固定在 $2m$ 粒子的两个 Slater 态，在同一切口具有相同的单粒子压缩，普通约化熵分别为 $m\log 2$ 与 $0$。
 
 在这个实际词上，普通字母计数的平衡性与按位置奇偶加权的和是不同的量。沿用 $A=0$、$B=1$、$C=2$ 的字母编码，取整数权重
 
@@ -1204,7 +1483,7 @@ $$
 这条单独的收敛定理只陈述每个固定正 $\rho$ 的全序列极限；它的单个逆矩阵条目论证不提供 $1/N_j$ 速率。前面的 [@ex-ch39-p2e-tribonacci-prefix-rate] 已用实际重复窗口与完整逆矩阵质量估计给出更强的 $73728/N_j$ 纸面界及参数一致收敛。两条论证的证据范围须分别保留；物理态、空间切口与分形熵标度仍需另外建立。
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
-**帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`，移位熵与阿布拉莫夫公式属 `文献结果`，分形面积律属 `OPEN`。
+**帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`；卡片的拓扑熵识别与阿布拉莫夫公式属 `文献结果`，实际无符号律的度量熵比较见 [@rem-ch39-p2e-abramov-literature] 的应用推导；分形面积律属 `OPEN`。
 :::
 
 至此，我们可以把本节审视的全部八项概念汇总在一张无折行认识论总表之中，使每一环的形式内核、文献依托与诠释边界清晰对齐：
@@ -1218,7 +1497,7 @@ $$
 | **5. 克利福德线—面分解** | 三次闵可夫斯基实线性坐标嵌入 $E_\parallel^1 \oplus E_\perp^2$ 与内部复平面缩放旋子 $\beta_3^{-1/2}(\cos\vartheta + B_\perp\sin\vartheta)$ | `MODEL`（需显式声明基与度规，观察者线—面词典见 [@rem-ch39-p2e-unification-model]） |
 | **6. 自指收缩尺度对照** | 正实轴余弦端点 $\cos\theta^* = \theta^*$ [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) 与三阶共轭范数 $|\alpha| = \beta_3^{-1/2}$ [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) | `LEAN ✓`（各自端点与恒等式）+ `文献结果`（$\theta^*$ 超越性）+ `NUM`（$\approx 0.234\%$ 数值邻近，严格不等）+ `MODEL`（$\psi=\psi(\psi)$ 母题，[@ex-ch39-p2e-pisot-dottie-numerics]） |
 | **7. 跨切口编码纠缠秩** | 跨切口条件 $\tau(x)+\iota(y)<K$ 下的可达页秩充要矩形 $1 \le r_b \le R_b$ 与最大页熵 $\ln R_b$ [`complete_original_direct_rank_entropy`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy)（[@thm-ch39-p2e-direct-encoder-ranks]）及谱阻塞 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) | `LEAN ✓`（秩等于 $K$ 仅在 $K \le R_b$ 时条件可达，非普适恒等）+ `NUM`（如 $R_0=6, R_1=5$）+ `文献结果`（黄金链与里德堡实验，[@rem-ch39-p2e-rydberg-anyon-literature]） |
-| **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓`（有限与马尔可夫定律）+ `文献结果`（$\log_2\beta_K$ 与阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `OPEN`（分形视界纠缠标度，[@prob-ch39-p2e-fractal-horizon]） |
+| **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、实际双向律与柱集（[@thm-ch39-p2e-native-bilateral-parry-law]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓`（所引概率律与计数）+ 应用推导（同一无符号律的 KS 上界、达到性与唯一性）+ `文献结果`（拓扑熵识别与首次回归阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `OPEN`（分形视界纠缠标度，[@prob-ch39-p2e-fractal-horizon]） |
 
 当我们在下面的综合实验室中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，整章自指本体论 $\psi \equiv \psi(\psi)$ 的多切面几何结构便清清楚楚地浮现出来：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核锁定的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核构成了坚硬的绿色骨架，支撑起周围明确标界的经典文献、数值实验与跨学科几何诠释。穿越这座离散自指沙盘之后，本章后六节将沿 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md) 贯通五阶自指不动点谱系、主动停机精度与时间长河谱排序、普适比较主频钟慢以及极小圆弧体万力合流，再在 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) 确立三维概念场封顶原理、希尔伯特多概念混编账本与极小圆弧场大统一理论（AF-GUT），并在峰顶推开正文的最后一道门扉，步入[终章](coda.md)《在所有的球之外》。
 
