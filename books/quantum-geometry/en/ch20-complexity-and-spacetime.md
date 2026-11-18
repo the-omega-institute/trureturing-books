@@ -65,7 +65,7 @@ $$
 
 Geometrically, removing exactly the $\kappa$ ascending edges $(k, k + 1)$ with $k + 1 \in S$ from the path on $N + 1$ gates leaves $\kappa + 1$ nonempty vertex blocks, including singleton blocks where removed edges meet or touch an endpoint. Every retained internal edge satisfies $g(k + 1) < g(k)$, so the gates within each block require distinct layers. The largest block contains at least $\lceil (N + 1)/(\kappa + 1)\rceil = \lfloor N/(\kappa + 1)\rfloor + 1$ gates and therefore requires at least that many layers. This gives a lower bound for every configuration; equality is supplied by the specific configurations and valid layer schedules constructed below.
 
-2. **Explicit upper bound via recursive split placement (`exists_pathLayers` and `minDepth_upper`)**: Fixing $q = \lfloor N / (\kappa + 1)\rfloor$, `exists_pathLayers` recurses on the remaining split count $k$ (and current remaining prefix length $n$ satisfying $2k \le n \le (k + 1)q + k$): at $k = 0$ it takes $S = \emptyset$ and $g(i) = n - i < q + 1$; at the successor step $k = j + 1$, it sets
+2. **Explicit upper bound via recursive split placement (`exists_pathLayers`)**: Fixing $q = \lfloor N / (\kappa + 1)\rfloor$, `exists_pathLayers` recurses on the remaining split count $k$ (and current remaining prefix length $n$ satisfying $2k \le n \le (k + 1)q + k$): at $k = 0$ it takes $S = \emptyset$ and $g(i) = n - i < q + 1$; at the successor step $k = j + 1$, it sets
 
 $$
 d = \min(q,\, n - 2j - 1), \qquad M = n - d - 1,

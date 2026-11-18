@@ -65,7 +65,7 @@ $$
 
 直观而言，在 $N + 1$ 道门组成的路径上，删去恰好 $\kappa$ 条上升边 $(k, k + 1)$（即 $k + 1 \in S$），就留下 $\kappa + 1$ 个非空顶点块；删边相邻或位于路径端点时形成的单门块也计入。每块保留的内部边都满足 $g(k + 1) < g(k)$，因此同一块中的门必须分占不同层。最大的块至少含 $\lceil (N + 1)/(\kappa + 1)\rceil = \lfloor N/(\kappa + 1)\rfloor + 1$ 道门，故至少需要这么多层。这是对任意配置成立的下界；等号由下面的特定配置及其合法层调度实现。
 
-2. **递归分割的显式上界构造（`exists_pathLayers` 与 `minDepth_upper`）**：固定 $q = \lfloor N / (\kappa + 1)\rfloor$，源码在 `exists_pathLayers` 中对剩余分割点数 $k$（及当前剩余前缀长度 $n$，满足 $2k \le n \le (k + 1)q + k$）作递归构造：当 $k = 0$ 时取 $S = \emptyset$ 与单调层函数 $g(i) = n - i < q + 1$；当 $k = j + 1$ 时，令当前步跨度为
+2. **递归分割的显式上界构造（`exists_pathLayers`）**：固定 $q = \lfloor N / (\kappa + 1)\rfloor$，源码在 `exists_pathLayers` 中对剩余分割点数 $k$（及当前剩余前缀长度 $n$，满足 $2k \le n \le (k + 1)q + k$）作递归构造：当 $k = 0$ 时取 $S = \emptyset$ 与单调层函数 $g(i) = n - i < q + 1$；当 $k = j + 1$ 时，令当前步跨度为
 
 $$
 d = \min(q,\, n - 2j - 1), \qquad M = n - d - 1,
