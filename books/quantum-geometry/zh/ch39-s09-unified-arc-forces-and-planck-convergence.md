@@ -681,7 +681,7 @@ $P$ 为空间片上的规范平均 $(P\psi)(X) = \int\psi(X^g)\,\mathrm{d}g$，$
 **手工推导；一般紧李群的 Kogut–Susskind 哈密顿量为文献结果，未在本书形式化。** 取各向异性格点：时间方向的小方格用 $\beta_t$，空间小方格用 $\beta_s$，时间格距 $a_0$，空间格距 $a$。
 
 1. **有限格距。** 由 [@rem-ch39-reflection-positivity-transfer-matrix] 第 4 条，$T = \mathcal{V}_s^{1/2}K_tP\,\mathcal{V}_s^{1/2}$ 精确成立：$\mathcal{V}_s$ 是空间小方格的权重之积，$K_t$ 是每条链上的卷积，在 $r$ 的 $d_r^2$ 维矩阵元块上的本征值为 $f_r(\beta_t)$。
-2. **有限群。** 设 $F$ 忠实，$v = 1 - \operatorname{Re}\chi_F/d_F$，$v_{\min} < v_2$ 为 $v$ 最小的两个正值，$C_{\min} = \{g : v(g) = v_{\min}\}$（共轭类之并，对取逆封闭），$\lambda = e^{-\beta_tv_{\min}}$。由 $f_r/f_0 = \left(\sum_ge^{-\beta_tv(g)}\chi_r(g)/d_r\right)/\left(\sum_ge^{-\beta_tv(g)}\right)$ 展开，
+2. **有限群。** 设 $G$ 为非平凡有限群，$F$ 为其忠实表示。令 $v = 1 - \operatorname{Re}\chi_F/d_F$，记其最小正值为 $v_{\min}$。若还有更大的值，记其中最小者为 $v_2$。若只有一个正值，下式的余项为 $O(\lambda^2)$。令 $C_{\min} = \{g : v(g) = v_{\min}\}$（共轭类之并，对取逆封闭），$\lambda = e^{-\beta_tv_{\min}}$。由 $f_r/f_0 = \left(\sum_ge^{-\beta_tv(g)}\chi_r(g)/d_r\right)/\left(\sum_ge^{-\beta_tv(g)}\right)$ 展开，
 
    $$
    1 - \frac{f_r(\beta_t)}{f_0(\beta_t)} = \lambda\sum_{g \in C_{\min}}\left(1 - \frac{\operatorname{Re}\chi_r(g)}{d_r}\right) + O\left(\lambda^2 + e^{-\beta_tv_2}\right).
