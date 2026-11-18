@@ -753,6 +753,8 @@ $$
 
 Thus these matrices fail at the fifth step; they do not exclude another qutrit construction. Exact minimum dimensions for general windows, realization of general compatible trace moments, and the full approximate resource–error tradeoff remain unresolved; the next remark preserves the weighted history interface under small leakage. This construction does not extend to the balanced ten-dimensional source channel. It supplies neither a full retained-environment joint-history identity nor a process-tensor identity with inserted interventions, and it establishes no experimental support or model universality.
 
+**What finite unitary dilation still leaves to prove.** Literature result, not formalized in this book. Farenick's [finite-power unitary dilation theorem, Corollary 3.2](https://doi.org/10.1007/s44146-024-00170-6), represents any prescribed finite window of powers of a contraction as compressions of the powers of one unitary on a containing space. If the original space is finite-dimensional, the dilating space can also be chosen finite-dimensional. The theorem permits a choice of dilating space; it does not fix the three-dimensional environment required here or supply one pair of branch unitaries and one positive semidefinite initial state. Finite-power dilatability therefore does not yet answer the fifth-step question. The missing construction must preserve these common-realization constraints, beyond the existence of scalar moments.
+
 :::
 
 ::: {.remark #rem-weighted-history-stability title="Weighted histories under small leakage with fixed unitaries (written derivation)"}
@@ -1140,6 +1142,36 @@ The squared Hilbert–Schmidt norm is the sum of the squared moduli of all entri
 Orthogonal polynomials on the unit circle provide a neighboring classical framework: see Barry Simon, [arXiv:math/0405111](https://arxiv.org/abs/math/0405111), §1 for the recurrence and §2.1(c) for the Bernstein–Szegő case. Those passages are not cited as a theorem supplying this entire obstruction to the restricted realization. All node, phase, and capacity arguments needed here have been given explicitly. No worldwide novelty or physical universality is claimed. No complete Lean proof of this conclusion is available for citation in the book; this ordinary derivation does not constitute kernel verification.
 
 :::
+
+::: {.theorem #thm-positive-interior-grid-algebraic-obstruction title="An algebraic obstruction for an interior spectral grid" lean="D5/S3/Quantum/Analysis/PositiveInteriorGridObstruction.positive_interior_grid_algebraic_obstruction"}
+Fix $0<r<1$, take complex numbers $u,v$, and take real numbers $s,t$. The following relations are incompatible:
+
+$$
+\begin{aligned}
+u+v&=2,\\
+us+vt+st+3-3(s+t)&=0,\\
+s&=|u|^2,\qquad t=|v|^2,\qquad |uv|^2=r^2.
+\end{aligned}
+$$
+
+The Lean statement splits the first two complex equations into real and imaginary parts and expresses each squared modulus as a sum of squares in real coordinates.
+:::
+
+::: {.proof #pf-positive-interior-grid-algebraic-obstruction}
+If $\operatorname{Im}u\ne0$, then $v=2-u$ and the imaginary part of the second equation give $s=t$. Equal squared moduli force $\operatorname{Re}u=1$, so $r=|uv|=s>1$. If $u$ is real, then $v$ is real as well. Set $q=uv$ and use $u+v=2$ to write $s+t=4-2q$, $us+vt=u^3+v^3=8-6q$, and $st=q^2$. The second equation reduces to $q^2=1$, contradicting $r<1$.
+
+The full proof is checked by the Lean kernel.
+:::
+
+In the maximally mixed spectral grid above, suppose saturation identifies nine distinct ratio nodes as the roots of $P(z)=z^9-rz^8+\eta(1-rz)$. Newton's identities give the unweighted grid sums $S_k=r^k$ for $k=1,2,3$. Write the two triples of unit-circle factors as $a_i,d_j$, with $d_j=b_j^{-1}$, and set $x=\sum_i a_i$, $y=\sum_j d_j$, $\alpha=\prod_i a_i$, and $\beta=\prod_j d_j$. Since $xy=r$, we can set $u=x^2/(\alpha\overline{x})$ and $v=y^2/(\beta\overline{y})$. The two second power sums are $x^2-2\alpha\overline x$ and $y^2-2\beta\overline y$. The third power sums are $x^3-3\alpha|x|^2+3\alpha$ and $y^3-3\beta|y|^2+3\beta$. Set $s=|x|^2$ and $t=|y|^2$, so $s=|u|^2$, $t=|v|^2$, and $|uv|=r$. Dividing $S_2=r^2$ by $x^2y^2$ gives $(1-2/u)(1-2/v)=1$, hence $u+v=2$. Dividing $S_3=r^3$ by $x^3y^3$ and multiplying by $uvst$ gives
+
+$$
+(us-3s+3)(vt-3t+3)=uvst.
+$$
+
+Expanding and substituting $u+v=2$ in the term $st(u+v)$ gives $us+vt+st+3-3(s+t)=0$, the other complex equation in [@thm-positive-interior-grid-algebraic-obstruction].
+
+The Lean reference covers the contradiction from the reduced equations. The passage from trace moments of one pair of qutrit unitaries to saturated nodes, the grid, and the reduced equations remains a written derivation. Feasibility for arbitrary initial densities and shorter windows requires separate arguments. [Upstream proof and scope](https://github.com/the-omega-institute/trureturing/pull/31199)
 
 Alongside energy-conserving $T_2$ dephasing stands energy-relaxing **amplitude damping** ($T_1$ spontaneous emission): an excited state at the south pole ($-1$) emits a quantum of energy into a cold bath and relaxes toward the ground state at the north pole ($+1$). Geometrically, the Bloch ball does not merely shrink around the origin — its center **drifts upward** along the vertical axis via the affine map [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$ ($0 \le \gamma < 1$).
 
