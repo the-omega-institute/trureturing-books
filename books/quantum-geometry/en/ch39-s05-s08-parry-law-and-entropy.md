@@ -443,13 +443,13 @@ If four alternating sites exist, put the two orbitals from the example above on 
 
 **The criterion at a given filling.** For a given particle number $k$, the product formula holds for every Slater state at every cut if $k\le 1$ or $N-k\le 1$. For $2\le k\le N-2$, it holds for every Slater state at a cut exactly when $I$ or $J$ is an interval.
 
-When $k\le 1$, every nonzero amplitude has $c(a,b)=0$. At full filling there is just one occupation string, so the reordering sign is a global phase. When $k=N-1$, each nonzero amplitude satisfies $a=I$ or $b=J$, depending on which side contains the single hole. In either case,
+Write the holes as $a^{\mathrm h}=I\setminus a$ and $b^{\mathrm h}=J\setminus b$. Partition $I\times J$ according to whether each endpoint is occupied or empty, and count the pairs with $j<i$. This gives
 
 $$
-c(a,b)=c(a,J)+c(I,b)-c(I,J).
+c(a,b)+c(I,J)=c(a,J)+c(I,b)+c(a^{\mathrm h},b^{\mathrm h}).
 $$
 
-The reordering sign thus factors into $(-1)^{c(a,J)}$ on the retained side and $(-1)^{c(I,b)+c(I,J)}$ on the traced side. The retained factor acts by diagonal unitary conjugation, and the traced factor cancels in the partial trace.
+The reordering sign of an occupation string and that of the corresponding hole string therefore differ by the separate factors $(-1)^{c(a,J)}$ and $(-1)^{c(I,b)+c(I,J)}$. The first gives diagonal unitary conjugation on the retained side, and the second cancels in the trace over $b$. This accounts for the two filling limits. When $k\le1$, every nonzero amplitude has $c(a,b)=0$. When $N-k\le1$, at least one side has no holes, so the hole term $c(a^{\mathrm h},b^{\mathrm h})$ vanishes.
 
 For $2\le k\le N-2$, choose $k-2$ sites outside the four alternating sites and call their set $T$. Append the unit vectors at those sites to the original two orbitals. A nonzero determinant must occupy all of $T$ and two of the four alternating sites. In computing it, move the rows from $T$ to the end in the order of the appended columns. Each occupied alternating site $i$ contributes a phase $(-1)^{|\{s\in T\mid s<i\}|}$. These phases factor by side, so the two nonzero eigenvalues $1/2,1/2$ of the four-site calculation are preserved. The sites with fixed occupation only pad the ordinary reduced spectrum with zeros. The compression $P_I$ is a projection of rank $1+|T\cap I|$. All its eigenvalues are $0$ or $1$, so the fermionic product spectrum still has just one nonzero eigenvalue, $1$.
 
