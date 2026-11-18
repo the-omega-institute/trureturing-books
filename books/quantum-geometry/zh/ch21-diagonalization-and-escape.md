@@ -158,7 +158,7 @@ $$
 将 [`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective) 与 [@thm-complete-diagonal-not-continuous]、[@lem-complete-diagonal-separation-deficit]、[@prop-complete-diagonal-strict-refinement] 逐项合取即得。完整证明由 Lean 内核检查。
 :::
 
-为了让这四条抽象定理变成你指尖可以触摸的具体算术，让我们亲手在一个最小的有限布尔模型上把这张对角线逃逸表一格一格算出来。
+为了让这四条抽象定理变成你指尖可以触摸的具体算术，让我们亲手在一个四地址有限布尔模型上把这张对角线逃逸表一格一格算出来。当潜坐标与输出均为单比特布尔集时，完备解码目录必须容纳全部 $2^2 = 4$ 个函数，四个地址才是这一设定下的最少所需。
 
 ::: {.example #ex-cantor-godel-diagonal-table title="四地址一比特潜坐标下的相对对角线逃逸与纤维劈裂手算"}
 取潜坐标空间为单比特布尔集 $\mathrm{Coordinate} = \{0, 1\}$，输出空间亦为 $\mathrm{Output} = \{0, 1\}$，无不动点翻转取逻辑非 $\operatorname{twist}(o) = 1 - o$（满足 $\operatorname{twist}(0) = 1 \neq 0$，$\operatorname{twist}(1) = 0 \neq 1$）。从 $\mathrm{Coordinate}$ 到 $\mathrm{Output}$ 的函数共有 $2^2 = 4$ 个，故取四元地址集 $\mathrm{Address} = \{a_0, a_1, a_2, a_3\}$ 以构成满射解码目录：
@@ -290,7 +290,7 @@ $\exp z$ 是级数 $\sum_k z^k/k!$ 的和（`NormedSpace.exp_series_hasSum_exp'`
 每一行的实际余项都落在界内，也都严格为正。
 :::
 
-**有限记录的弓形残差。** 第 2 条论断说，有限步操作得到的只是内接多面体，平坦的面与球皮之间留着弓形残差。所钉仓库里有两条冻结定理，给这句话一个字面意义上的版本：把“有限的门计数”换成“只有有限格的记录指针”，残差的下界恰好由正多边形的弓高给出（相干损失至少为弓高，恢复误差至少为弓高的一半）。
+**有限记录的弓形残差。** 第 2 条论断说，有限步操作得到的只是内接多面体，平坦的面与球皮之间留着弓形残差。所钉仓库里有两条冻结定理，给这句话一个字面意义上的版本：把“有限的门计数”换成“只有有限格的记录指针”，在下文 $m \ge 1$ 的情形，重叠模长的上界是正多边形的边心距，相干模长的相对损失至少为弓高，而每个恢复信道的最坏输入误差至少为弓高的一半。
 
 物理图像是这样的。一台记录指针有 $N + 1$ 格，振幅为 $c(0), \dots, c(N)$。系统的第 $i$ 个分支带一个整数标签 $q_i$，记录的方式是把指针平移 $q_i$ 格。两个标签相差 $\ell$ 的分支，记录之后它们之间的相干项被乘上一个因子：指针与它自己平移 $\ell$ 格之后的重叠
 
@@ -298,7 +298,7 @@ $$
 \gamma(\ell) \;=\; \sum_{k \in \mathbb{Z}} c(k + \ell)\,\overline{c(k)} .
 $$
 
-若 $\lvert\gamma(\ell)\rvert = 1$，平移前后的指针无法区分，这次记录什么也没记下，相干性完好；若 $\lvert\gamma(\ell)\rvert < 1$，相干性受损。问题是：有限格的指针能不能让 $\lvert\gamma(\ell)\rvert$ 等于 $1$？
+若 $\lvert\gamma(\ell)\rvert = 1$，两分支对应的指针态无法区分，这次记录无法区分它们，相干项的模长不变；若 $\lvert\gamma(\ell)\rvert < 1$，两分支间的非零相干项便被压低。问题是：有限格的指针在非零平移后能不能让 $\lvert\gamma(\ell)\rvert$ 等于 $1$？
 
 ::: {.lemma #lem-finite-support-autocorrelation-cosine title="有限支撑单位序列的自相关模长不超过割圆角的余弦" lean="D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine"}
 设 $N \in \mathbb{N}$，$c : \mathbb{Z} \to \mathbb{C}$ 满足：
@@ -319,7 +319,7 @@ $$
 记 $d = \lvert\ell\rvert$，$m = \lfloor N/d\rfloor$。把支撑 $\{0, \dots, N\}$ 按模 $d$ 的剩余类分成 $d$ 条链，每条链上相邻两个下标恰好相差 $d$，链长不超过 $m + 1$；自相关的模长不超过各链上“相邻两项模长乘积之和”的总和，而各链的模长平方和加起来等于 $\sum_k \lVert c(k)\rVert^2$（`residue_block_bounds`）。在每条链上使用路径不等式 $\sum_{k<m} x_k x_{k+1} \le \cos\frac{\pi}{m+2}\sum_{k \le m} x_k^2$（`path_correlation_le_cos`，由最近邻平均的二次型界与柯西—施瓦茨不等式得到），对各链求和并代入归一化条件即得结论。完整证明由 Lean 内核检查。
 :::
 
-右端的 $\cos\frac{\pi}{m+2}$ 正是单位圆内接正 $(m+2)$ 边形的边心距（[@ex-liu-hui-polygon-sagitta]），它严格小于 $1$。所以答案是否定的：有限格的指针一旦被平移，就一定留下痕迹。下面的定理把这道痕迹换算成任何恢复操作都补不回来的误差。
+记 $m = \lfloor N/\lvert\ell\rvert\rfloor$。当 $m \ge 1$ 时，右端的 $\cos\frac{\pi}{m+2}$ 正是单位圆内接正 $(m+2)$ 边形的边心距（[@ex-liu-hui-polygon-sagitta]）；它是重叠模长的上界，并非每个指针都取到的值。当 $m = 0$，即 $\lvert\ell\rvert > N$ 时，支撑区间与平移后的副本不相交，$\gamma(\ell) = 0$。两种情形下重叠模长都严格小于 $1$。所以答案是否定的：有限格的指针一旦被非零平移，就一定留下痕迹。下面的定理把这道痕迹换算成对每个恢复信道都成立的输入误差上确界下界。
 
 ::: {.theorem #thm-finite-record-cosine-obstruction title="有限记录信道的恢复误差具有严格为正的余弦下界" lean="D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction"}
 设 $\iota$ 为有限类型（`[Fintype ι]`、`[DecidableEq ι]`），$N \in \mathbb{N}$，$c : \mathbb{Z} \to \mathbb{C}$，$q : \iota \to \mathbb{Z}$，并设 $c$ 满足 [@lem-finite-support-autocorrelation-cosine] 的两条前提 `hsupport` 与 `hnorm`。记
@@ -359,10 +359,12 @@ $$
 \mathrm{bound} \;=\; \frac12\Bigl(1 - \cos\frac{\pi}{m + 2}\Bigr), \qquad m = \Bigl\lfloor \frac{N}{\lvert\ell\rvert} \Bigr\rfloor,
 $$
 
-是单位圆内接正 $(m+2)$ 边形弓高的一半。$m = 0$（指针一步就被移出自己的支撑）时它等于 $\frac12$；$m = 1, 2, 4, 10, 98$ 时分别为 $0.2500$、$0.1464$、$0.0670$、$0.0170$、$2.47\times10^{-4}$；$m$ 很大时它按 $\frac{\pi^2}{4(m+2)^2}$ 趋于零。指针越长，记录可以越轻，留下的不可恢复误差越小，但对每个有限的 $N$ 它都严格为正。这条定理只针对这一种平移记录信道与一对标签差非零的分支，并不断言其他编码方式下也有同样的下界。
+当 $m \ge 1$ 时，它是单位圆内接正 $(m+2)$ 边形弓高的一半。$m = 0$（指针一步就被移出自己的支撑）时它恰为 $\frac12$；$m = 1, 2, 4, 10, 98$ 时的下界按所示精度四舍五入后分别为 $0.2500$、$0.1464$、$0.0670$、$0.0170$、$2.47\times10^{-4}$（其中 $m = 1$ 时的 $0.2500$ 为精确值）；$m$ 很大时它按 $\frac{\pi^2}{4(m+2)^2}$ 趋于零。固定非零平移 $\ell$，增加允许的指针格数只使这一下界阶梯式不增：只有 $m$ 增大时，下界才下降；这并不保证实际恢复误差变小。对每个有限的 $N$，下界都严格为正。
+
+例如取归一化指针 $c(0) = 1$、其余 $c(k) = 0$，它对任意允许的 $N \ge 0$ 都满足支撑条件，而对每个非零平移都有 $\gamma(\ell) = 0$；只增加允许的格数，重叠与记录信道均不改变。还要留意量词：下界针对每个恢复信道在所有输入上的误差上确界，不是每个输入的误差，也不声称取等号。事实上，标签基底中的对角密度态经记录后不变，取恒等恢复信道时误差为零。这条定理只针对这一种平移记录信道与一对标签差非零的分支，并不断言其他编码方式下也有同样的下界。
 
 ::: {.viz src="sphere-escape" preset="pointer" height="500"}
-**有限指针的重叠就是多边形的边心距。** 青色是 $9$ 格指针的正弦形振幅，品红的轮廓是它平移 $\ell = 1$ 格的副本；两者的重叠 $\lvert\gamma(1)\rvert = 0.9511$（琥珀色的点）恰好落在正 $10$ 边形的边上，即边心距 $\cos\frac{\pi}{10}$，离圆上的 $1$ 还差一段品红的弓高。换指针的形状与长度、加大 $\ell$，琥珀色的点都越不过那条边（[@lem-finite-support-autocorrelation-cosine]、[@thm-finite-record-cosine-obstruction]；正弦形取到等号是页面的数值结果）。
+**有限指针的重叠不超过相应多边形的边心距。** 默认青色是 $9$ 格指针的正弦形振幅，品红的轮廓是它平移 $\ell = 1$ 格的副本；两者的重叠 $\lvert\gamma(1)\rvert = \cos\frac{\pi}{10} \approx 0.9511$（琥珀色的点）恰好落在正 $10$ 边形的边上，离圆上的 $1$ 还差一段品红的弓高。换指针的形状与长度、加大 $\ell$，应按当前 $m = \lfloor N/\lvert\ell\rvert\rfloor$ 重算多边形；琥珀色的点都越不过相应的边。页面仅支持 $1 \le \ell \le N$，故始终有 $m \ge 1$（[@lem-finite-support-autocorrelation-cosine]、[@thm-finite-record-cosine-obstruction]；默认正弦形在 $\ell = 1$ 取到等号是页面的数值结果）。
 :::
 
 **有限门计数的硬下界。** 回到第 2 条论断本身。那里只说内接多面体与球皮之间“留着”残差，没有说至少留多少。一行球冠面积就能给出答案。
@@ -400,7 +402,7 @@ $$
 **反过来读。** 要让球面上每一点离可达点集的角距离都小于 $\varepsilon$，必须 $2^{L+1} - 1 \ge \frac{2}{1 - \cos\varepsilon}$，即 $L \ge \log_2\bigl(\frac{2}{1 - \cos\varepsilon} + 1\bigr) - 1 \approx 2\log_2\frac{1}{\varepsilon} + 1$。对 $\varepsilon = 10^{-2}, 10^{-3}, 10^{-6}$（弧度）分别给出 $L \ge 15, 21, 41$。这是一个只靠计数得到的下界：门长至少随 $\log\frac{1}{\varepsilon}$ 线性增长。Solovay–Kitaev 定理（[@rem-solovay-kitaev-literature]，文献结果）给出的是与之配对的上界：$L = O\bigl(\log^c\frac{1}{\varepsilon}\bigr)$，$c \approx 3.97$，关于 $\log\frac{1}{\varepsilon}$ 是多项式而不是线性的。
 :::
 
-把四种残差尺度并排放：正 $n$ 边形的弓高为 $1 - \cos\frac{\pi}{n} = 2\sin^2\frac{\pi}{2n}$（[@ex-liu-hui-polygon-sagitta]）；$N + 1$ 格指针的不可恢复误差至少是正 $(m+2)$ 边形弓高的一半（[@thm-finite-record-cosine-obstruction]）；$N$ 个顶点的内接多面体覆盖下界见 [@ex-cap-covering-gate-count]；前 $N$ 项余弦多项式的余项受 [@lem-exp-tail-le] 的阶乘界 $\frac{|\theta|^{2N}}{(2N)!}e^{|\theta|}$ 控制（数值对照见 [@ex-taylor-remainder-three-bounds]）。它们都随资源增长而趋于零，而对有限记录信道与有限算例均呈严格正残差。序曲里那句“我们以为我们得到了一个球，但实际只是近似得到一个球”，在这四个场合各有一个可以核对的数。
+把四种残差尺度并排放：正 $n$ 边形的弓高为 $1 - \cos\frac{\pi}{n} = 2\sin^2\frac{\pi}{2n}$（[@ex-liu-hui-polygon-sagitta]）；$N + 1$ 格指针信道对每个恢复信道的输入误差上确界，至少是正 $(m+2)$ 边形弓高的一半（$m \ge 1$；$m = 0$ 时下界为 $\frac12$，见 [@thm-finite-record-cosine-obstruction]）；$N$ 个顶点的内接多面体覆盖下界见 [@ex-cap-covering-gate-count]；前 $N$ 项余弦多项式的余项受 [@lem-exp-tail-le] 的阶乘界 $\frac{|\theta|^{2N}}{(2N)!}e^{|\theta|}$ 控制（数值对照见 [@ex-taylor-remainder-three-bounds]）。固定非零平移 $\ell$ 与角度 $\theta$，随各自资源增长，上述弓高、指针误差下界、覆盖下界与余项上界均趋于零；下界趋零并不保证实际残差趋零。有限记录下界始终为正，表中算例的实际残差也严格为正。序曲里那句“我们以为我们得到了一个球，但实际只是近似得到一个球”，在这四个场合各有一个可以核对的数。
 
 ::: {.viz src="sphere-escape" preset="liuhui" height="500"}
 **刘徽割圆。** 边数从 $6$ 翻倍到 $192$，多边形越来越像圆；右侧的放大镜始终把一条边与圆弧之间的缝放大到看得见。这条缝 $1 - \cos\frac{\pi}{n}$ 每翻一倍缩到约四分之一，对任何有限的 $n$ 都大于零（[@ex-liu-hui-polygon-sagitta]）。
@@ -424,7 +426,7 @@ $$
    $$
 
    例如，正二十面体（icosahedron）拥有 $V = 12$ 个顶点、$E = 30$ 条棱与 $F = 20$ 个正三角形面，精确满足 $12 - 30 + 20 = 2$。
-2. **笛卡尔总角亏定理与 $12 \times 60^\circ = 720^\circ = 4\pi$ 五边形缺陷锁（Descartes's total angular defect）**：需要严格区分**光滑圆球面上的球面测地线三角形**与**分片平坦（piecewise-Euclidean）多面体表面上的欧氏平面三角形**——在常曲率 $+1$ 的光滑圆球面 $S^2$ 上，非退化球面测地线三角形具有正的球面角盈 $\alpha + \beta + \gamma > \pi$（例如球面正二十面体剖分中每个球面正三角形内角为 $72^\circ$，$5$ 个角在光滑顶点处拼成 $5 \times 72^\circ = 360^\circ$，因为 $4\pi$ 的高斯曲率均匀分布在弯曲面片内部）；相反，考察同胚于 $S^2$ 的**封闭分片欧氏等边三角剖分多面体表面**，其每个面都是内角为 $\pi/3 = 60^\circ$ 的平坦欧氏等边三角形，所有高斯曲率都浓缩为顶点处的离散角亏。若某个顶点周围汇集了 $6$ 个平坦等边三角形（度为 $6$），其环绕内角和为 $6 \times 60^\circ = 360^\circ = 2\pi$，局部角亏（angular defect）为 $\delta_6 = 0$，因此纯由度 $6$ 顶点组成的平坦三角网格只能铺成欧氏平面或平坦环面（$\chi(T^2) = 0$），绝不可能合拢成封闭球面！若该封闭分片欧氏等边三角剖分球面仅含度 $5$ 与度 $6$ 顶点，则每个度为 $5$ 的顶点处环绕内角和为 $5 \times 60^\circ = 300^\circ$，留出局部正角亏
+2. **笛卡尔总角亏定理与 $12 \times 60^\circ = 720^\circ = 4\pi$ 五边形缺陷锁（Descartes's total angular defect）**：需要严格区分**光滑圆球面上的球面测地线三角形**与**分片平坦（piecewise-Euclidean）多面体表面上的欧氏平面三角形**——在常曲率 $+1$ 的光滑圆球面 $S^2$ 上，非退化球面测地线三角形具有正的球面角盈 $\alpha + \beta + \gamma > \pi$（例如球面正二十面体剖分中每个球面正三角形内角为 $72^\circ$，$5$ 个角在光滑顶点处拼成 $5 \times 72^\circ = 360^\circ$，因为 $4\pi$ 的高斯曲率均匀分布在弯曲面片内部）；相反，考察同胚于 $S^2$ 的**封闭分片欧氏等边三角剖分多面体表面**，其每个面都是内角为 $\pi/3 = 60^\circ$ 的平坦欧氏等边三角形，所有高斯曲率都浓缩为顶点处的离散角亏。若某个顶点周围汇集了 $6$ 个平坦等边三角形（度为 $6$），其环绕内角和为 $6 \times 60^\circ = 360^\circ = 2\pi$，局部角亏（angular defect）为 $\delta_6 = 0$，因此顶点全为度 $6$ 的封闭等边三角剖分曲面总角亏为 $0$，故 $\chi = 0$，绝不可能合拢成 $\chi(S^2) = 2$ 的球面！欧氏平面与平坦环面（$\chi(T^2) = 0$）是这种局部平坦网格的例子。若该封闭分片欧氏等边三角剖分球面仅含度 $5$ 与度 $6$ 顶点，则每个度为 $5$ 的顶点处环绕内角和为 $5 \times 60^\circ = 300^\circ$，留出局部正角亏
 
    $$
    \delta_5 = 2\pi - 5\times\frac{\pi}{3} = \frac{\pi}{3} = 60^\circ.

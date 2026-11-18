@@ -201,7 +201,7 @@ check(
     entry.theory[0].href_en === '../en/' + THEORY
 );
 /* ---------- helpers on the page ---------- */
-const state = (p = page) => p.evaluate(() => window.TERNION_DEBUG.state);
+const state = (p = page) => p.evaluate(() => window.TERNION_NUMBERS_DEBUG.state);
 async function input(selector, value, p = page) {
   await p.locator(selector).evaluate((el, v) => {
     el.value = String(v);
@@ -222,7 +222,7 @@ async function pick(card, p = page) {
   await until(
     p,
     (id) => {
-      const s = window.TERNION_DEBUG.state;
+      const s = window.TERNION_NUMBERS_DEBUG.state;
       return s.preset === id && !s.blending;
     },
     card
@@ -469,6 +469,58 @@ function verifyRatio(m) {
       near(actual.product, 1)
   );
 }
+const superscript = (n) => String(n).replace(/\d/g, (d) => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
+/* 2 × 2 complex matrices from the Pauli matrices, written here: [re, im] entries */
+const cx = (re, im = 0) => [re, im];
+const cmul = (a, b) => [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]];
+const madd = (A, B) => A.map((row, i) => row.map((x, j) => [x[0] + B[i][j][0], x[1] + B[i][j][1]]));
+const mscale = (A, z) => A.map((row) => row.map((x) => cmul(x, z)));
+const mmul = (A, B) =>
+  A.map((row, i) => B[0].map((_, j) => row.reduce((s, x, k) => [s[0] + cmul(x, B[k][j])[0], s[1] + cmul(x, B[k][j])[1]], [0, 0])));
+const dagger = (A) => A[0].map((_, j) => A.map((row) => [row[j][0], -row[j][1]]));
+const mgap = (A, B) => Math.max(...A.flatMap((row, i) => row.map((x, j) => Math.hypot(x[0] - B[i][j][0], x[1] - B[i][j][1]))));
+const SX = [[cx(0), cx(1)], [cx(1), cx(0)]],
+  SY = [[cx(0), cx(0, -1)], [cx(0, 1), cx(0)]],
+  ID2 = [[cx(1), cx(0)], [cx(0), cx(1)]];
+const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+/** The instances the evidence panel names, checked against algebra written here. */
+function verifyInstances(m, label) {
+  const I = m.leanInstances,
+    a = m.tiltDeg * DEG;
+  // the axis û = i cos α + j sin α as a 2 × 2 matrix under i ↦ −iσx, j ↦ −iσy
+  const R = mscale(madd(mscale(SX, cx(Math.cos(a))), mscale(SY, cx(Math.sin(a)))), cx(0, -1));
+  const neg = (A) => mscale(A, cx(-1));
+  check(
+    label + ' skew-adjoint unitary axis squares to −1',
+    mgap(I.axis.R, R) < 1e-12 &&
+      mgap(dagger(R), neg(R)) < 1e-12 &&
+      mgap(mmul(R, dagger(R)), ID2) < 1e-12 &&
+      mgap(I.axis.R2, neg(ID2)) < 1e-12 &&
+      I.axis.skew < 1e-12 && I.axis.unitary < 1e-12 && I.axis.square < 1e-12
+  );
+  // the arc body U = w I + sin(θ/2) R has half trace w
+  const h = (m.thetaDeg * DEG) / 2,
+    U = madd(mscale(ID2, cx(Math.cos(h))), mscale(R, cx(Math.sin(h))));
+  check(label + ' half trace of U is w', near((U[0][0][0] + U[1][1][0]) / 2, m.w) && mgap(mmul(U, dagger(U)), ID2) < 1e-12);
+  // the shortest-gate triangle: S, D, S² + D² = 2(1 + a·b)(1 + b·c)(1 + c·a), phase argument −Ω/2
+  const [A, B, C] = m.triangle,
+    S = 1 + dot(A, B) + dot(B, C) + dot(C, A),
+    D = dot(A, cross(B, C)),
+    rhs = 2 * (1 + dot(A, B)) * (1 + dot(B, C)) * (1 + dot(C, A));
+  check(
+    label + ' triangle holonomy S² + D² and return phase',
+    near(I.holonomy.S, S) && near(I.holonomy.D, D) && near(S * S + D * D, rhs) && near(I.holonomy.lhs, I.holonomy.rhs) &&
+      rhs > 0 && near(Math.atan2(I.holonomy.phase[1], I.holonomy.phase[0]), -m.omega / 2, 1e-9)
+  );
+  // the lift z = e^{iθ/2} of z² = e^{iθ}; one turn from +1 ends at −1
+  check(
+    label + ' history lift squares to the base point',
+    near(I.lift.z[0] ** 2 - I.lift.z[1] ** 2, Math.cos(2 * h)) && near(2 * I.lift.z[0] * I.lift.z[1], Math.sin(2 * h)) &&
+      near(I.lift.z[0], Math.cos(h)) && I.lift.turns === Math.floor(m.thetaDeg / 360)
+  );
+  check(label + ' flat zero divisor residual', I.flat.residual < 1e-12 && near(I.flat.lambda, Math.cos(h)));
+  check(label + ' cosine fixed point', near(I.fixedPoint.thetaStar, TS, 1e-12) && I.fixedPoint.residual < 1e-12);
+}
 async function verifyCard(p, id) {
   const m = await state(p),
     c = CARDS[id];
@@ -482,6 +534,37 @@ async function verifyCard(p, id) {
 await T.goto(BOOK, ID, '?lang=en');
 await settle(page);
 check('quaternion card opens by default', (await state()).preset === DEFAULT);
+check(
+  'three-column lab shell, panel badges, tagline, fonts and evidence spans',
+  await page.evaluate(() => {
+    const q = (s) => document.querySelector(s);
+    const asides = [...document.querySelectorAll('.sec h2 .aside')].map((el) => el.textContent.trim());
+    return (
+      !!q('.app.lab > header.top .status #scenePill') && !!q('.app.lab > header.top .status #keyPill') &&
+      !!q('#rail #lensPanel .lens-toggle') && !!q('#rail #presets') && !!q('#rail #ctlPanel #camChips') &&
+      !!q('main.center > #stage > .scan') && !!q('main.center > #stage > .vig') && !!q('#stage > #hudTl #hudBig') &&
+      !!q('main.center > .strip #plot') && !q('#stage .strip') &&
+      !!q('aside.col.side > #readouts') && q('aside.col.side > #evidence').firstElementChild.id === 'infoBtn' &&
+      ['§39.19', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x)) &&
+      [...document.querySelectorAll('.tagline > span')].every((el) => el.querySelector('em') && el.firstChild.nodeType === 3) &&
+      !!q('link[href*="fonts.googleapis.com/css2?family=Chakra+Petch"]') &&
+      [...document.querySelectorAll('#evidence .lean')].every((el) => el.children.length === 2 && [...el.children].every((c) => c.tagName === 'SPAN')) &&
+      [...document.querySelectorAll('#drawer .sheet > div.zh, #drawer .sheet > div.en')].every((el) => el.querySelector('p.lede') && el.querySelector('ol li b') && el.querySelector('p.lede.refs a'))
+    );
+  })
+);
+check(
+  'a card click starts a θ/α blend instead of a hard cut',
+  await page.evaluate(() => {
+    document.querySelector('[data-preset="homotopy-pi3-integer-winding"]').click();
+    const s = window.TERNION_NUMBERS_DEBUG.state;
+    return s.blending && s.thetaDeg < 720;
+  })
+);
+await settle(page);
+await until(page, () => !window.TERNION_NUMBERS_DEBUG.state.blending);
+check('the blend ends on the card', near((await state()).thetaDeg, 720) && !(await state()).blending);
+
 for (const lang of ['zh', 'en']) {
   await page.click('[data-lang-set="' + lang + '"]');
   await settle(page);
@@ -526,9 +609,21 @@ for (const lang of ['zh', 'en']) {
     await layout(page, lang + '/' + id);
     const readings = await page.locator('#readouts output').allTextContents();
     check(
-      lang + '/' + id + ' all ten readings populated',
-      readings.length === 10 && readings.every((t) => t && !/NaN|undefined|^—$/.test(t))
+      lang + '/' + id + ' one key and six readouts, all populated',
+      readings.length === 7 &&
+        (await page.locator('#readouts dl.ro > div').count()) === 7 &&
+        (await page.locator('#readouts dl.ro > div.key').count()) === 1 &&
+        readings.every((t) => t && !/NaN|undefined|^—$/.test(t))
     );
+    const m = await state();
+    check(
+      lang + '/' + id + ' HUD title, status pills and key readout show the scalar shadow',
+      (await textOf('hudBig')).includes(f4(Math.abs(m.w))) &&
+        (await textOf('keyPill')).includes(f4(Math.abs(m.w))) &&
+        (await textOf('roKey')).includes(f4(Math.abs(m.w))) &&
+        (await textOf('hudSub')).trim().length > 0
+    );
+    verifyInstances(m, lang + '/' + id);
   }
 }
 for (const angle of [
@@ -540,11 +635,12 @@ for (const angle of [
   check('angle slider ' + angle, near(m.thetaDeg, want, 1e-10) && !m.playing && m.preset === null);
   verifyMath(m, 'θ=' + angle);
   check('Rodrigues readout ' + angle, (await textOf('roRod')).includes(m.pole ? '∞' : f4(m.rod)));
-  const shadow = await textOf('roShadow');
+  const shadow = (await textOf('roKey')) + (await textOf('roKeySub'));
   check(
-    'shadow and traces ' + angle,
-    [m.w, m.v, m.tax, m.unit].every((x) => shadow.includes(f4(x))) && (await textOf('roTrace')).includes(f4(m.trace))
+    'shadow, sagitta and traces ' + angle,
+    [m.w, m.v, m.tax].every((x) => shadow.includes(f4(x))) && (await textOf('roTrace')).includes(f4(m.trace))
   );
+  verifyInstances(m, 'θ=' + angle);
 }
 for (const angle of [0, 1, 35, 60, 90]) {
   await input('#sliceTilt', angle);
@@ -556,7 +652,18 @@ for (let k = 0; k < 4; k++) {
   verifyRatio(m);
   check(
     'ratio selector ' + k,
-    (await textOf('roDecimal')).includes(pairs[k].join('/')) && (await textOf('roProduct')).includes('1.0000')
+    (await textOf('roRatio')).includes(pairs[k].join('/')) && (await textOf('roRatio')).includes('1.0000')
+  );
+  const [p, q] = pairs[k],
+    digits = expectedDecimal(p, q).rs.length - 1,
+    scaled = BigInt(p) * 10n ** BigInt(digits),
+    identity = q + ' × ' + scaled / BigInt(q) + ' + ' + scaled % BigInt(q) + ' = 10' + superscript(digits) + ' × ' + p;
+  check(
+    'long-division invariant in the note ' + p + '/' + q,
+    (await textOf('roNote')).includes(identity) &&
+      m.leanInstances.division.lhs === m.leanInstances.division.rhs &&
+      m.leanInstances.division.prefix === Number(scaled / BigInt(q)),
+    identity
   );
 }
 await pick(DEFAULT);
@@ -597,8 +704,8 @@ await page.locator('#stage').scrollIntoViewIfNeeded();
 await settle(page);
 const here = await state(),
   box = await page.locator('#ternionHandle').boundingBox();
-const start = await page.evaluate(() => TERNION_DEBUG.dragTarget(TERNION_DEBUG.state.thetaDeg));
-const end = await page.evaluate(() => TERNION_DEBUG.dragTarget(124));
+const start = await page.evaluate(() => TERNION_NUMBERS_DEBUG.dragTarget(TERNION_NUMBERS_DEBUG.state.thetaDeg));
+const end = await page.evaluate(() => TERNION_NUMBERS_DEBUG.dragTarget(124));
 check(
   'projected handle lies on the active arc',
   !!box && Math.hypot(box.x + box.width / 2 - start.x, box.y + box.height / 2 - start.y) < 1.5
@@ -628,7 +735,7 @@ for (const id of Object.keys(CARDS)) {
       await playsAfter(
         page,
         () => page.click('[data-preset="' + id + '"]'),
-        () => window.TERNION_DEBUG.state
+        () => window.TERNION_NUMBERS_DEBUG.state
       )
     );
   else {
@@ -667,12 +774,12 @@ const prism = await page.evaluate(() => {
   } finally {
     TRV.kit.plot = plot;
   }
-  const { cyan, violet, magenta, amber } = TRV.palette;
-  return { traces, cyan, violet, magenta, amber };
+  const { sigma, cyan, violet, magenta, amber } = TRV.palette;
+  return { traces, sigma, cyan, violet, magenta, amber };
 });
 for (const [role, expected] of [
-  [prism.cyan, (h) => Math.cos(h)],
-  [prism.violet, (h) => Math.abs(Math.sin(h))],
+  [prism.sigma, (h) => Math.cos(h)],
+  [prism.cyan, (h) => Math.abs(Math.sin(h))],
   [prism.magenta, (h) => Math.min(4, Math.abs(Math.tan(h)))]
 ]) {
   const trace = prism.traces.find(([method, pts, color]) => method === 'line' && color === role);
@@ -684,10 +791,11 @@ for (const [role, expected] of [
       trace[1].every(([angle, value]) => near(value, expected((angle * DEG) / 2)))
   );
 }
-const cursors = prism.traces.filter(([method]) => method === 'dot' || method === 'vline');
+const cursors = prism.traces.filter(([method, ...rest]) => (method === 'dot' || method === 'vline') && rest.includes(prism.amber));
+const poles = prism.traces.filter(([method, x, color]) => method === 'vline' && color === prism.magenta).map((row) => row[1]);
 check(
-  'strip cursor tracks the selected angle',
-  cursors.length === 2 && cursors.every((row) => near(row[1], STAR2_DEG) && row.includes(prism.amber))
+  'strip cursor tracks the selected angle and dashed lines mark the poles',
+  cursors.length === 2 && cursors.every((row) => near(row[1], STAR2_DEG)) && same(poles, [180, 540])
 );
 const badColors = await domColours(page);
 check('semantic badge and readout colours', !badColors.length, badColors.slice(0, 3).join(' | '));

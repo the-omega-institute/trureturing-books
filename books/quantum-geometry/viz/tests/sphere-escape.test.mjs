@@ -111,7 +111,7 @@ const ptrModel = (N, shape, l) => {
 };
 await pick('pointer'); s = await state();
 const p0 = ptrModel(8, 'sine', 1);
-check('POINTER card: N = 8, sine shape, ℓ = 1, |γ| = cos(π/10) = 0.9511', s.scene === 'ptr' && s.pN === 8 && s.shape === 'sine' && s.ell === 1
+check('POINTER card: N = 8, sine shape, ℓ = 1, |γ(1)| = cos(π/10) ≈ 0.9511', s.scene === 'ptr' && s.pN === 8 && s.shape === 'sine' && s.ell === 1
   && Math.abs(s.gammaAbs - p0.gamma) < 1e-12 && Math.abs(s.gammaAbs - Math.cos(Math.PI / 10)) < 1e-12 && Math.abs(s.bound - p0.bound) < 1e-15);
 let pOk = true, pMax = 0, eqOk = true;
 for (const shape of ['sine', 'tri', 'flat']) {

@@ -84,7 +84,48 @@ await T.goto(BOOK, ID, '?lang=en');
 await settle(page);
 const state = (p = page) => p.evaluate(() => window.TERNION_HILBERT.state);
 const initial = await state();
-check('fresh entry opens six fields above 64 basis slots', initial.preset === presets[4][0] && initial.upperCount === 6 && initial.pillarValues.length === 64);
+check('fresh entry opens six fields above 64 basis slots, parked on its still frame',
+  initial.preset === presets[4][0] && initial.upperCount === 6 && initial.pillarValues.length === 64
+  && !initial.play && near(initial.tau, 0.45) && !initial.blending);
+check('three-column lab shell, status pills, panel badges, tagline, fonts and evidence spans', await page.evaluate(() => {
+  const q = (s) => document.querySelector(s);
+  const asides = [...document.querySelectorAll('.sec h2 .aside')].map((el) => el.textContent.trim());
+  return !!q('.app.lab > header.top .status #scenePill') && !!q('.app.lab > header.top .status #keyPill')
+    && !!q('.app.lab > header.top .status .langs')
+    && !!q('aside#rail.col.deck #lensPanel .lens-toggle') && !!q('#rail #presets') && !!q('#rail #ctlPanel #camChips')
+    && !!q('#rail #ctlPanel #fieldN') && !q('aside.col.side #ctlPanel')
+    && !!q('main.center > #stage > .scan') && !!q('main.center > #stage > .vig') && !!q('#stage > #hudTl #hudBig')
+    && !q('aside#evidence') && !!q('aside.col.side > section.panel.sec#evidence')
+    && q('#evidence').firstElementChild.id === 'infoBtn' && !!q('aside.col.side > #readouts')
+    && getComputedStyle(q('#stage')).containerType === 'inline-size'
+    && ['§39.20', '5', 'NUM', 'trureturing'].every((x) => asides.includes(x))
+    && [...document.querySelectorAll('.tagline > span')].every((el) => el.querySelector('em') && el.firstChild.nodeType === 3)
+    && !!q('link[href*="fonts.googleapis.com/css2?family=Chakra+Petch"]')
+    && document.querySelectorAll('#readouts dl.ro > div').length === 7 && document.querySelectorAll('#readouts dl.ro > div.key').length === 1
+    && [...document.querySelectorAll('#evidence .lean')].every((el) => el.children.length === 2 && [...el.children].every((c) => c.tagName === 'SPAN'))
+    && [...document.querySelectorAll('#drawer .sheet > div.zh, #drawer .sheet > div.en')].every((el) => el.querySelector('p.lede') && el.querySelector('ol li b') && el.querySelector('p.lede.refs a'));
+}));
+check('green LEAN ✓ boxes keep the shared green border', await page.evaluate(() => {
+  const probe = document.createElement('span');
+  probe.style.color = 'var(--ok)';
+  document.body.appendChild(probe);
+  const ok = getComputedStyle(probe).color;
+  probe.remove();
+  const boxes = [...document.querySelectorAll('#evidence .lean:not(.num):not(.model):not(.argued):not(.open):not(.frozen)')];
+  return boxes.length === 8 && boxes.every((b) => getComputedStyle(b.querySelector('.ok')).color === ok
+    && getComputedStyle(b).borderLeftColor !== getComputedStyle(document.querySelector('#evidence .lean.model')).borderLeftColor);
+}));
+check('HUD title, sub line and status pills name the scene and its pillars', await page.evaluate(() =>
+  document.querySelector('#hudBig').textContent.includes('64') && document.querySelector('#hudSub').textContent.includes('4,077')
+  && document.querySelector('#keyPill strong').textContent === '64' && document.querySelector('#scenePill strong').textContent.length > 0
+  && document.querySelector('#roKey').textContent === '64'));
+check('a card click lifts the pillars with a transition instead of a hard cut', await page.evaluate(() => {
+  document.querySelector('[data-preset="native-ternion-curl-field"]').click();
+  const s = window.TERNION_HILBERT.state;
+  return s.blending && s.grow < 1 && s.pillarValues.length === 4;
+}));
+await settle(page);
+check('the transition ends with full pillars', await until(page, () => !window.TERNION_HILBERT.state.blending && window.TERNION_HILBERT.state.grow === 1));
 check('stage, strip, controls and evidence occupy their intended regions', await page.evaluate(() =>
   !!document.querySelector('.app.lab #rail .lens-toggle') && !!document.querySelector('#stage .handle')
   && !!document.querySelector('.center > .strip canvas') && !document.querySelector('#stage .strip')
@@ -213,9 +254,9 @@ const cases = page.locator('#caseChips button');
 check('Fano line and off-line triangle are selectable', await cases.count() >= 2);
 if (await cases.count() >= 2) {
   await cases.nth(0).click(); await settle(page);
-  const line = await page.locator('#detail').innerText();
+  const line = await page.locator('#roAlgebra').innerText();
   await cases.nth(1).click(); await settle(page);
-  check('changing Fano incidence changes the associator readout', line !== await page.locator('#detail').innerText());
+  check('changing Fano incidence changes the associator readout', line !== await page.locator('#roAlgebra').innerText());
 }
 await select(presets[3][0]);
 check('three independent zero-divisor examples available', await cases.count() === 3);
@@ -250,7 +291,7 @@ for (const n of [1,2,3,4,5,6,7,8]) {
     const s = await state();
     check('Hilbert and gauge-fixed MPS dimensions N=' + n + ', χ=' + 2 ** index, s.N === n && s.upperCount === n
       && s.pillarValues.length === 2 ** n && s.chi === 2 ** index && s.mpsCount === rayDimension(n, s.chi)
-      && s.excessCount === multiSite(n) && Number((await page.locator('#pillarCount').innerText()).replaceAll(',', '')) === 2 ** n);
+      && s.excessCount === multiSite(n) && Number((await page.locator('#roKey').innerText()).replaceAll(',', '')) === 2 ** n);
   }
 }
 const long = await page.evaluate(() => [1,2,4,8,16].map((chi) => window.TERNION_HILBERT.mpsCount(300, chi)));

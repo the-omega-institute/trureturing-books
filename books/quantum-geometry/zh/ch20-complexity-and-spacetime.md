@@ -24,7 +24,7 @@
 - 右边界单格点门 $\operatorname{Gate.K1}$，仅作用于格点 $\{1\}$；
 - 左边界单格点门 $\operatorname{Gate.KN}$，仅作用于格点 $\{N\}$。
 
-对于携带负谱参数 $-\kappa$ 的 $\kappa$ 个格点组成的任意配置子集 $S \subseteq \{1, \dots, N\}$（$|S| = \kappa$），模块定义了反射杨—巴克斯特（Yang–Baxter）传递矩阵对应的有序门序列 `circuit N S`。若存在层分配映射 $f : \mathbb{N} \to \{0, 1, \dots, L-1\}$，使得列表中任意两个支撑格点集有交集（即共用至少一个格点）的门都严格保持原有的先后层序（$i < j \implies f(i) < f(j)$），则称该门列表可在 $L$ 层内并行运行（`RunsIn N w L`）。单个电路 $w$ 的深度 $\operatorname{depth}(N, w)$ 是其可运行的最小层数 $L$，而固定 $(N, \kappa)$ 下的**配置最优最小并行深度** `minDepth` 则定义为遍历所有 $|S| = \kappa$ 配置的下确界：
+对于携带负谱参数 $-\kappa$ 的 $\kappa$ 个格点组成的任意配置子集 $S \subseteq \{1, \dots, N\}$（$|S| = \kappa$），模块定义了反射杨—巴克斯特（Yang–Baxter）传递矩阵对应的有序门序列 `circuit N S`。若存在层分配映射 $f : \mathbb{N} \to \mathbb{N}$，对列表 $w$ 的每个有效位置 $0 \le i < |w|$ 都有 $f(i) < L$，且对任意满足 $0 \le i < j < |w|$、门 $w[i]$ 与 $w[j]$ 的支撑格点集有交集（即共用至少一个格点）的下标都有 $f(i) < f(j)$，则称该门列表可在 $L$ 层内并行运行（`RunsIn N w L`）。这里 $|w|$ 是列表长度；列表之外的位置不受约束，故空列表在 $L = 0$ 时也满足定义。单个电路 $w$ 的深度 $\operatorname{depth}(N, w)$ 是其可运行的最小层数 $L$，而固定 $(N, \kappa)$ 下的**配置最优最小并行深度** `minDepth` 则定义为遍历所有 $|S| = \kappa$ 配置的下确界：
 
 $$
 \operatorname{minDepth}(N, \kappa) = \inf\bigl\{\, \operatorname{depth}\bigl(N, \operatorname{circuit}(N, S)\bigr) \;\big|\; S \subseteq \{1, \dots, N\},\; |S| = \kappa \,\bigr\}.
@@ -33,7 +33,7 @@ $$
 通过把不共用格点的内部门与边界门并行打包，下面的定理给出了 $\operatorname{minDepth}(N, \kappa)$ 的精确闭式解。
 
 ::: {.figure src="ch20-turning-points"}
-**折返点把门链切成 $\kappa + 1$ 段，每段里的门各占一层。** $N = 11$、$S = \{4, 8\}$：$12$ 道门是 $12$ 块青色的砖，排成三段向右下降的台阶，每段 $4$ 块；灰色箭头从先执行的门指向后执行的门，品红三角标出折返点 $U_4$、$U_8$。门数是 $12$，层数只有 $4 = \lfloor 11/3\rfloor + 1$（[@thm-open-circuit-min-depth]）。
+**删去 $\kappa$ 条上升边后，门链留下 $\kappa + 1$ 个顶点块，每块里的门必须分占不同层。** $N = 11$、$S = \{4, 8\}$：$12$ 道门是 $12$ 块青色的砖，排成三段向右下降的台阶，每段 $4$ 块；灰色箭头从先执行的门指向后执行的门，品红三角标出折返点 $U_4$、$U_8$。门数是 $12$，层数只有 $4 = \lfloor 11/3\rfloor + 1$（[@thm-open-circuit-min-depth]）。
 :::
 
 ::: {.theorem #thm-open-circuit-min-depth title="开放边界电路的最小深度" lean="D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result"}
@@ -63,9 +63,9 @@ $$
 N \le N + g(N) \le \kappa L + g(0) < \kappa L + L = (\kappa + 1)L.
 $$
 
-直观而言，$N + 1$ 道门之间的 $N$ 步相邻因果依赖被 $\kappa$ 个属于 $S$ 的折返点切分为 $\kappa + 1$ 段单调因果切片，故必有一段切片至少跨越 $\lfloor N / (\kappa + 1)\rfloor + 1$ 个串行层；由自然数整除性 $N < (\kappa + 1)L$ 直接推出 $L \ge \lfloor N / (\kappa + 1)\rfloor + 1$。
+直观而言，在 $N + 1$ 道门组成的路径上，删去恰好 $\kappa$ 条上升边 $(k, k + 1)$（即 $k + 1 \in S$），就留下 $\kappa + 1$ 个非空顶点块；删边相邻或位于路径端点时形成的单门块也计入。每块保留的内部边都满足 $g(k + 1) < g(k)$，因此同一块中的门必须分占不同层。最大的块至少含 $\lceil (N + 1)/(\kappa + 1)\rceil = \lfloor N/(\kappa + 1)\rfloor + 1$ 道门，故至少需要这么多层。这是对任意配置成立的下界；等号由下面的特定配置及其合法层调度实现。
 
-2. **递归分割的显式上界构造（`exists_pathLayers` 与 `minDepth_upper`）**：固定 $q = \lfloor N / (\kappa + 1)\rfloor$，源码在 `exists_pathLayers` 中对剩余分割点数 $k$（及当前剩余前缀长度 $n$，满足 $2k \le n \le (k + 1)q + k$）作递归构造：当 $k = 0$ 时取 $S = \emptyset$ 与单调层函数 $g(i) = n - i < q + 1$；当 $k = j + 1$ 时，令当前步跨度为
+2. **递归分割的显式上界构造（`exists_pathLayers`）**：固定 $q = \lfloor N / (\kappa + 1)\rfloor$，源码在 `exists_pathLayers` 中对剩余分割点数 $k$（及当前剩余前缀长度 $n$，满足 $2k \le n \le (k + 1)q + k$）作递归构造：当 $k = 0$ 时取 $S = \emptyset$ 与单调层函数 $g(i) = n - i < q + 1$；当 $k = j + 1$ 时，令当前步跨度为
 
 $$
 d = \min(q,\, n - 2j - 1), \qquad M = n - d - 1,
@@ -254,7 +254,7 @@ $$
 \operatorname{cnotCount}(\mathit{circuit}) \ge |\operatorname{evenOutputs}| + \operatorname{returns} \ge (2^{2n-1} - 1) + (2n - 1) = 2^{2n-1} + 2n - 2.
 $$
 
-（例如当 $n = 1$ 即 $2n = 2$ 比特时，唯一反射配对 $(0, 1)$ 只有 $2^1 - 1 = 1$ 个非零偶奇偶模式 $z_0 \oplus z_1$，至少需要 $1$ 个偶诞生 $\mathrm{CNOT}$ 步在 `evenOutputs` 中生成 $z_0 \oplus z_1$ 供 $R_z$ 门注入相位，随后还必须至少再用 $2(1) - 1 = 1$ 个奇复原 $\mathrm{CNOT}$ 步在 `returns` 中把导线标签拆回单比特奇偶 $[z_0, z_1]$，合计至少 $1 + 1 = 2$ 个 $\mathrm{CNOT}$ 门。）完整证明由 Lean 内核检查。
+（例如当 $n = 1$ 即 $2n = 2$ 比特时，逐位取反有两个反射轨道 $\{00, 11\}$ 与 $\{01, 10\}$；非零偶奇偶标签则有 $2^1 - 1 = 1$ 个，即 $11$，对应 $z_0 \oplus z_1$。至少需要 $1$ 个偶诞生 $\mathrm{CNOT}$ 步在 `evenOutputs` 中生成 $z_0 \oplus z_1$ 供 $R_z$ 门注入相位，随后还必须至少再用 $2(1) - 1 = 1$ 个奇复原 $\mathrm{CNOT}$ 步在 `returns` 中把导线标签拆回单比特奇偶 $[z_0, z_1]$，合计至少 $1 + 1 = 2$ 个 $\mathrm{CNOT}$ 门。）完整证明由 Lean 内核检查。
 :::
 
 ::: {.figure src="ch20-parity-labels"}

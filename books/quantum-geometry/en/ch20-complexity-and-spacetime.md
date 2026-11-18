@@ -24,7 +24,7 @@ Begin with an exact parallel-depth problem solved completely in the Lean module 
 - A right-boundary single-site gate $\operatorname{Gate.K1}$ acting on site $\{1\}$;
 - A left-boundary single-site gate $\operatorname{Gate.KN}$ acting on site $\{N\}$.
 
-For any subset $S \subseteq \{1, \dots, N\}$ of cardinality $|S| = \kappa$ (recording the sites carrying spectral parameter $-\kappa$), the module defines the time-ordered integrable transfer-matrix gate list `circuit N S`. A gate list $w$ fits in $L$ parallel layers (`RunsIn N w L`) if there exists a layer assignment $f : \mathbb{N} \to \{0, 1, \dots, L - 1\}$ such that any two gates sharing a site preserve their sequential order ($i < j \implies f(i) < f(j)$). Writing $\operatorname{depth}(N, w)$ for the least $L$ with `RunsIn N w L`, the **configuration-optimal minimum parallel depth** `minDepth` is defined by minimizing over all subsets $S$ of size $\kappa$:
+For any subset $S \subseteq \{1, \dots, N\}$ of cardinality $|S| = \kappa$ (recording the sites carrying spectral parameter $-\kappa$), the module defines the time-ordered integrable transfer-matrix gate list `circuit N S`. A gate list $w$ fits in $L$ parallel layers (`RunsIn N w L`) if there exists a layer assignment $f : \mathbb{N} \to \mathbb{N}$ such that $f(i) < L$ for every valid position $0 \le i < |w|$, and $f(i) < f(j)$ for all indices $0 \le i < j < |w|$ whose gates $w[i]$ and $w[j]$ share a site. Here $|w|$ is the list length; positions outside the list are unconstrained, so the empty list also fits in $L = 0$ layers. Writing $\operatorname{depth}(N, w)$ for the least $L$ with `RunsIn N w L`, the **configuration-optimal minimum parallel depth** `minDepth` is defined by minimizing over all subsets $S$ of size $\kappa$:
 
 $$
 \operatorname{minDepth}(N, \kappa) = \inf\bigl\{\, \operatorname{depth}\bigl(N, \operatorname{circuit}(N, S)\bigr) \;\big|\; S \subseteq \{1, \dots, N\},\; |S| = \kappa \,\bigr\}.
@@ -33,7 +33,7 @@ $$
 By packing non-overlapping bulk and boundary gates into parallel layers, our first theorem establishes the exact closed-form formula for $\operatorname{minDepth}(N, \kappa)$.
 
 ::: {.figure src="ch20-turning-points"}
-**The turning points cut the chain of gates into $\kappa + 1$ runs, one layer per gate in each run.** $N = 11$, $S = \{4, 8\}$: the $12$ gates are $12$ cyan bricks forming three staircases that step down to the right, four bricks each; grey arrows point from the gate that runs first to the one after it, and magenta triangles mark the turning points $U_4$ and $U_8$. The gate count is $12$, the depth only $4 = \lfloor 11/3\rfloor + 1$ ([@thm-open-circuit-min-depth]).
+**Removing the $\kappa$ ascending edges leaves $\kappa + 1$ vertex blocks, with gates in each block requiring distinct layers.** $N = 11$, $S = \{4, 8\}$: the $12$ gates are $12$ cyan bricks forming three staircases that step down to the right, four bricks each; grey arrows point from the gate that runs first to the one after it, and magenta triangles mark the turning points $U_4$ and $U_8$. The gate count is $12$, the depth only $4 = \lfloor 11/3\rfloor + 1$ ([@thm-open-circuit-min-depth]).
 :::
 
 ::: {.theorem #thm-open-circuit-min-depth title="Minimum open-boundary circuit depth" lean="D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result"}
@@ -63,9 +63,9 @@ $$
 N \le N + g(N) \le \kappa L + g(0) < \kappa L + L = (\kappa + 1)L.
 $$
 
-Geometrically, the $N$ nearest-neighbor dependencies across the $N + 1$ path gates are partitioned by the $\kappa$ reversal points in $S$ into $\kappa + 1$ monotone causal slices, forcing at least one slice to span at least $\lfloor N / (\kappa + 1)\rfloor + 1$ serial layers; by natural-number division, $N < (\kappa + 1)L$ directly implies $L \ge \lfloor N / (\kappa + 1)\rfloor + 1$.
+Geometrically, removing exactly the $\kappa$ ascending edges $(k, k + 1)$ with $k + 1 \in S$ from the path on $N + 1$ gates leaves $\kappa + 1$ nonempty vertex blocks, including singleton blocks where removed edges meet or touch an endpoint. Every retained internal edge satisfies $g(k + 1) < g(k)$, so the gates within each block require distinct layers. The largest block contains at least $\lceil (N + 1)/(\kappa + 1)\rceil = \lfloor N/(\kappa + 1)\rfloor + 1$ gates and therefore requires at least that many layers. This gives a lower bound for every configuration; equality is supplied by the specific configurations and valid layer schedules constructed below.
 
-2. **Explicit upper bound via recursive split placement (`exists_pathLayers` and `minDepth_upper`)**: Fixing $q = \lfloor N / (\kappa + 1)\rfloor$, `exists_pathLayers` recurses on the remaining split count $k$ (and current remaining prefix length $n$ satisfying $2k \le n \le (k + 1)q + k$): at $k = 0$ it takes $S = \emptyset$ and $g(i) = n - i < q + 1$; at the successor step $k = j + 1$, it sets
+2. **Explicit upper bound via recursive split placement (`exists_pathLayers`)**: Fixing $q = \lfloor N / (\kappa + 1)\rfloor$, `exists_pathLayers` recurses on the remaining split count $k$ (and current remaining prefix length $n$ satisfying $2k \le n \le (k + 1)q + k$): at $k = 0$ it takes $S = \emptyset$ and $g(i) = n - i < q + 1$; at the successor step $k = j + 1$, it sets
 
 $$
 d = \min(q,\, n - 2j - 1), \qquad M = n - d - 1,
@@ -254,7 +254,7 @@ $$
 \operatorname{cnotCount}(\mathit{circuit}) \ge |\operatorname{evenOutputs}| + \operatorname{returns} \ge (2^{2n-1} - 1) + (2n - 1) = 2^{2n-1} + 2n - 2.
 $$
 
-(For example, at $n = 1$ on $2n = 2$ qubits, the single reflection pair $(0, 1)$ has $2^1 - 1 = 1$ nonzero even parity $z_0 \oplus z_1$, requiring at least $1$ even-birth $\mathrm{CNOT}$ step in `evenOutputs` to generate $z_0 \oplus z_1$ for the $R_z$ phase rotation and at least $2(1) - 1 = 1$ odd-return $\mathrm{CNOT}$ step in `returns` to restore the single-wire parities $[z_0, z_1]$, totaling at least $1 + 1 = 2$ $\mathrm{CNOT}$ gates.) The full proof is checked by the Lean kernel.
+(For example, at $n = 1$ on $2n = 2$ qubits, bitwise negation has two reflection orbits, $\{00, 11\}$ and $\{01, 10\}$. The number of nonzero even parity labels is $2^1 - 1 = 1$: the sole label $11$ corresponds to $z_0 \oplus z_1$. At least $1$ even-birth $\mathrm{CNOT}$ step in `evenOutputs` is required to generate $z_0 \oplus z_1$ for the $R_z$ phase rotation and at least $2(1) - 1 = 1$ odd-return $\mathrm{CNOT}$ step in `returns` to restore the single-wire parities $[z_0, z_1]$, totaling at least $1 + 1 = 2$ $\mathrm{CNOT}$ gates.) The full proof is checked by the Lean kernel.
 :::
 
 ::: {.figure src="ch20-parity-labels"}
