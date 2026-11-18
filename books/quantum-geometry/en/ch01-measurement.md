@@ -191,7 +191,7 @@ H(a,b)=\bigl(2\operatorname{Re}(\bar a b),\;2\operatorname{Im}(\bar a b),\;
 \operatorname{normSq}(a)-\operatorname{normSq}(b)\bigr).
 $$
 
-Its image lies in $S^2$: the first two squared coordinates sum to $4|a|^2|b|^2$, and adding the third gives $(|a|^2+|b|^2)^2=1$. This is exactly the unit-spinor Bloch image treated in `NumericalRange` by the existing `blochPure_norm`. The matrix is $P_v=vv^*$, where $v=(a,b)$: its off-diagonal entry is $a\bar b$, and the minus sign in the imaginary coordinate of `bloch` gives precisely the positive sign $2\operatorname{Im}(\bar a b)$ used here.
+Its image lies in $S^2$: the first two squared coordinates sum to $4|a|^2|b|^2$, and adding the third gives $(|a|^2+|b|^2)^2=1$. This is exactly the unit-spinor Bloch image treated in `NumericalRange` by the existing [`blochPure_norm`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_norm). The matrix is $P_v=vv^*$, where $v=(a,b)$: its off-diagonal entry is $a\bar b$, and the minus sign in the imaginary coordinate of `bloch` gives precisely the positive sign $2\operatorname{Im}(\bar a b)$ used here.
 
 Every sphere point has a preimage as well. For $q\in S^2$ with $q_2\ne-1$, set
 
@@ -202,7 +202,7 @@ a&=p,\qquad b=\frac{q_0+iq_1}{2p}.
 \end{aligned}
 $$
 
-Since $q_0^2+q_1^2=1-q_2^2$, we have $|b|^2=(1-q_2)/2$, so $(a,b)\in S^3$ and $H(a,b)=q$. At the south pole $q=(0,0,-1)$, take $(a,b)=(0,1)$; the formula above already gives $(1,0)$ at the north pole. This reuses the original square-root construction and pole split in `blochPure_surjective`, covering the whole sphere.
+Since $q_0^2+q_1^2=1-q_2^2$, we have $|b|^2=(1-q_2)/2$, so $(a,b)\in S^3$ and $H(a,b)=q$. At the south pole $q=(0,0,-1)$, take $(a,b)=(0,1)$; the formula above already gives $(1,0)$ at the north pole. This reuses the original square-root construction and pole split in [`blochPure_surjective`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_surjective), covering the whole sphere.
 
 We must specify exactly what is being removed. Let $U(1)=\{c\in\mathbb{C}:\norm{c}=1\}$ and define on $S^3$
 

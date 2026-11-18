@@ -191,7 +191,7 @@ H(a,b)=\bigl(2\operatorname{Re}(\bar a b),\;2\operatorname{Im}(\bar a b),\;
 \operatorname{normSq}(a)-\operatorname{normSq}(b)\bigr).
 $$
 
-它确实落在 $S^2$ 上：前两个坐标的平方和为 $4|a|^2|b|^2$，加上第三个坐标的平方便得到 $(|a|^2+|b|^2)^2=1$。这正是 `NumericalRange` 中原有 `blochPure_norm` 所处理的单位旋子布洛赫像。其具体矩阵为 $P_v=vv^*$，$v=(a,b)$；非对角元是 $a\bar b$，而 `bloch` 的虚部坐标带负号，因而恰好得到这里的正号 $2\operatorname{Im}(\bar a b)$。
+它确实落在 $S^2$ 上：前两个坐标的平方和为 $4|a|^2|b|^2$，加上第三个坐标的平方便得到 $(|a|^2+|b|^2)^2=1$。这正是 `NumericalRange` 中原有 [`blochPure_norm`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_norm) 所处理的单位旋子布洛赫像。其具体矩阵为 $P_v=vv^*$，$v=(a,b)$；非对角元是 $a\bar b$，而 `bloch` 的虚部坐标带负号，因而恰好得到这里的正号 $2\operatorname{Im}(\bar a b)$。
 
 每个球面点也都有原像。对 $q\in S^2$，若 $q_2\ne-1$，令
 
@@ -202,7 +202,7 @@ a&=p,\qquad b=\frac{q_0+iq_1}{2p}.
 \end{aligned}
 $$
 
-由 $q_0^2+q_1^2=1-q_2^2$ 得 $|b|^2=(1-q_2)/2$，所以 $(a,b)\in S^3$ 且 $H(a,b)=q$。南极 $q=(0,0,-1)$ 取 $(a,b)=(0,1)$；北极则由上式给出 $(1,0)$。这复用的是 `blochPure_surjective` 原有的平方根与极点分支论证，覆盖整个球面。
+由 $q_0^2+q_1^2=1-q_2^2$ 得 $|b|^2=(1-q_2)/2$，所以 $(a,b)\in S^3$ 且 $H(a,b)=q$。南极 $q=(0,0,-1)$ 取 $(a,b)=(0,1)$；北极则由上式给出 $(1,0)$。这复用的是 [`blochPure_surjective`](lean:D5/S3/Quantum/Matrix/NumericalRange.blochPure_surjective) 原有的平方根与极点分支论证，覆盖整个球面。
 
 现在明确要除去什么。设 $U(1)=\{c\in\mathbb{C}:\norm{c}=1\}$，在 $S^3$ 上定义
 
