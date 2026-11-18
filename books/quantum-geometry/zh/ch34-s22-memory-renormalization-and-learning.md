@@ -43,9 +43,21 @@ $$
    \operatorname{conditionalLogicalImpurity}(\mu, \mathrm{refined}, \mathrm{target}) \;\le\; \operatorname{conditionalLogicalImpurity}(\mu, \mathrm{coarse}, \mathrm{target}).
    $$
 
-   因此任何盲目粗粒化都会面临推高目标混杂度的风险；区别于 `refinement_impurity_monotone` 的不等式本身，由 Gini 混杂度的严格凹性可知，粗化保持零附加 Gini 混杂度损失（上式取等）当且仅当每一粗纤维内被合并的各正概率细子纤维共享完全一致的目标后验分布（预测充分统计条件，`手工推导`）。
+   因此任何盲目粗粒化都会面临推高目标混杂度的风险；区别于 `refinement_impurity_monotone` 的不等式本身，由 Gini 混杂度的严格凹性可知，粗化保持零附加 Gini 混杂度损失（上式取等）当且仅当每一粗纤维内被合并的各正概率细子纤维共享完全一致的目标后验分布（预测充分统计条件，也可由下文的精确恒等式导出）。
 
-   **二次评分的文献与适用范围。** Gneiting–Raftery 的 [Example 1](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf#page=5)（DOI: `10.1198/016214506000001437`）将多类别二次评分的散度识别为后验概率向量之间的平方欧氏距离。Bröcker 的 [§3、式 (15) 与附录 C](https://arxiv.org/pdf/0806.0813v2#page=7)（期刊 DOI: `10.1002/qj.456`）给出预测充分性下的期望散度分解；其 §2 明确假设目标值集合有限。这些结果解释了有限目标情形中“没有额外二次预测损失”与“后验一致”的联系，不把可靠性、充分性与确定性混为一谈。Steinwart–Ziegel 的[定理 1.1、式 (4)](https://arxiv.org/html/1712.05279#S1.Thmthm1)（期刊 DOI `10.1016/j.acha.2019.11.005`）把可测核的期望评分差写成核均值嵌入距离平方的一半。对可数离散目标，取两目标相同则为 1、否则为 0 的核，均值嵌入就是各目标的概率坐标。PMF 的正质量支撑可数，其目标像也可数，因此可在这个目标像上使用该核。在 Lean 中仍需把各粗纤维内的后验混合与全局 ENNReal 取等相连，并处理零质量纤维。上文取等刻画仍是手工推导，所引 `refinement_impurity_monotone` 证明的是不等式。
+   **二次评分的文献与适用范围。** Gneiting–Raftery 的 [Example 1](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf#page=5)（DOI: `10.1198/016214506000001437`）将多类别二次评分的散度识别为后验概率向量之间的平方欧氏距离。Bröcker 的 [§3、式 (15) 与附录 C](https://arxiv.org/pdf/0806.0813v2#page=7)（期刊 DOI: `10.1002/qj.456`）给出预测充分性下的期望散度分解；其 §2 明确假设目标值集合有限。这些结果解释了有限目标情形中“没有额外二次预测损失”与“后验一致”的联系，不把可靠性、充分性与确定性混为一谈。Steinwart–Ziegel 的[定理 1.1、式 (4)](https://arxiv.org/html/1712.05279#S1.Thmthm1)（期刊 DOI `10.1016/j.acha.2019.11.005`）对可测正定核，在两分布下 $\sqrt{k(x,x)}$ 均可积时，把期望评分差写成核均值嵌入距离平方的一半。对可数离散目标，取两目标相同则为 1、否则为 0 的核，均值嵌入就是各目标的概率坐标。PMF 的正质量支撑可数，其目标像也可数，因此可在这个目标像上使用该核。下文给出对应的概率质量函数恒等式。
+
+   **粗化损失的精确大小（[`conditional_gini_exact_defect`](lean:D5/S3/ConceptDynamics/Information/ConditionalGiniDefect.conditional_gini_exact_defect)）。** 令 $r:X	o D$ 为细读出，$f:D	o C$ 为粗化，$t:X	o A$ 为目标。对同一个任意概率质量函数，记 $M(d)$ 为细纤维质量，$P_d(a)$ 与 $Q_c(a)$ 分别为细、粗纤维中的目标后验。每个后验坐标按联合质量除以对应纤维质量定义，零质量时取 $0$。若 $I(s)$ 表示读出 $s$ 的条件逻辑混杂度，则有
+   $$
+   I(f\circ r)=I(r)+\sum_d\sum_a M(d)\,\operatorname{ofReal}\!\left[
+      \bigl(\operatorname{toReal}P_d(a)-\operatorname{toReal}Q_{f(d)}(a)\bigr)^2
+   \right].
+   $$
+
+   对每个目标值，后验坐标在正质量纤维上给出目标指标函数的条件期望。粗、细条件期望的勾股分解给出这一坐标的平方损失增量。对所有目标值求和时，指标函数的条件平方损失之和恰是原定义的成对混杂度。对一个正质量纤维，令 $q_a$ 为其后验，则这个和是 $\sum_a q_a(1-q_a)=1-\sum_a q_a^2$，即两次独立按该后验取样时目标不同的概率。按细纤维分组即得到右侧加权和。
+
+   右侧求和使用扩展非负实数，每项在取平方前先把两个后验转为实数。零质量纤维的贡献为零。对每个正质量细纤维，零损失恰要求它的后验等于所属粗纤维的后验。由于粗后验是各正质量细后验按质量加权的平均，这等价于同一个粗纤维内所有正质量细后验一致。结论适用于任意类型上的概率质量函数和确定性读出。
+
 3. **支撑感知量子相对熵的信道数据处理不等式（[`extended_quantum_relative_entropy_channel_dpi`](lean:D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi)）**：对非空有限可判等指标集 $a, b$、任意完全正保迹量子信道 $\Phi : \operatorname{QuantumChannel}(a, b)$ 及密度态 $\rho, \sigma : \operatorname{DensityState} a$，带支撑约定的相对熵满足 $D_{\mathrm{ext}}\bigl(\Phi(\rho) \,\|\, \Phi(\sigma)\bigr) \le D_{\mathrm{ext}}(\rho \,\|\, \sigma)$。将 `extended_quantum_relative_entropy_channel_dpi` 作用于经典—量子联合态（$\rho_{YH}$ 对照 $\rho_Y \otimes \rho_H$）上的目标保持信道 $(\mathrm{id}_Y \otimes \mathcal{E}_M)$，即导出预测互信息单调不增 $I(Y; \mathcal{E}_M(H)) \le I(Y; H)$（`手工推导`应用）：一旦第二阶段物理擦除误删了携带目标关联的纤维分量，后续任何局域算法或后处理信道均不可能凭空找回已散失的预测信息。
 4. **热浴与幺正收支下的精确兰道尔恒等式（[`landauer_identity_from_balances`](lean:D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances)）**：对实数 $\beta, Q, \Delta S_{\mathrm{sys}}, \Delta S_{\mathrm{res}}, I_{\mathrm{mut}}, D_{\mathrm{res}} \in \mathbb{R}$，只要满足热浴热量—熵平衡 $\beta Q = \Delta S_{\mathrm{res}} + D_{\mathrm{res}}$ 与双体幺正熵平衡 $I_{\mathrm{mut}} = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$，恒有精确等式
 
@@ -64,6 +76,47 @@ $$
 6. **有限未来期望词的正交残差刻画与双比特非不变核反例（[`future_word_orthogonal_residual`](lean:D5/S3/Quantum/Algebra/FutureWordOrthogonalResidual.future_word_orthogonal_residual) + `手工推导`）**：在标量域 $\mathbb{K}$ 上的有限维内积空间 $E$ 中，对可见效应族 $\mathrm{effect} : \operatorname{Fin}(m+1) \to E$ 与状态表示 $X : \mathrm{State} \to E$，两态 $\rho, \sigma$ 的有限未来期望词相等 $\operatorname{futureExpectationWord}(\mathrm{effect}, X, \rho) = \operatorname{futureExpectationWord}(\mathrm{effect}, X, \sigma)$ 当且仅当 $X(\rho) - X(\sigma) \in (\operatorname{span}_{\mathbb{K}}\operatorname{range}(\mathrm{effect}))^\perp$，亦当且仅当二者在可见效应子空间上的正交投影相等。由有限指标 $\operatorname{Fin}(m+1)$ 的 `future_word_orthogonal_residual` 过渡到全时间海森堡轨道 $\{(T^*)^k \mathrm{effect}_j\}_{k \ge 0}$ 依赖 $\dim E < \infty$ 下的有限维张成稳定化（有限步长即可张成整条轨道），其公共正交残差遂给出 $T$-不变不可观测核 $K = \bigcap_{k \ge 0}\ker(C T^k)$（卡尔曼可观测性分解，`手工推导` + `文献结果`）。
    **双比特非 $T$-不变反例检核（`手工推导`）**：在 $E = \mathbb{R}^2$ 上取双比特嵌入态 $(x_1, x_2) \in \{0, 1\}^2$，设单拍即时读出为 $C(x_1, x_2) = x_1$，单步移位动力学为 $T(x_1, x_2) = (x_2, 0)$。在 $k = 0$ 时刻，单步即时盲区为 $N_0 = \ker C = \{(0, x_2)\} = \operatorname{span}\{\mathbf{e}_2\}$；但 $T(0, 1) = (1, 0) \notin N_0$，故 $N_0$ **不是 $T$-不变子空间**，真正的多步不可观测核是 $K = \ker C \cap \ker(C T) = \operatorname{span}\{\mathbf{e}_2\} \cap \operatorname{span}\{\mathbf{e}_1\} = \{(0, 0)\}$！若观察者在 $k = 0$ 误把 $N_0$ 当作冗余纤维擦除（将 $(0, 0)$ 与 $(0, 1)$ 折叠为同一概念），在 $k = 0$ 虽无即时误差，到 $k = 1$ 时刻却立刻出现 $C T(0, 0) = 0 \neq 1 = C T(0, 1)$ 的预测失效。
 :::
+
+**有限目标集上的最佳总变差界。** [Lean 总变差界](lean:D5/S3/ConceptDynamics/Information/ConditionalGiniTV.weighted_posterior_totalVariation_sq_le_gini_defect) 对概率质量函数、细读出 $r$ 和确定性粗化 $f$，记 $M(d)$ 为细纤维质量，$P_d$ 与 $Q_{f(d)}$ 为细、粗目标后验。每一坐标取联合质量除以对应的纤维质量，零质量时取零。令 $I(s)$ 表示固定目标下读出 $s$ 的条件逻辑混杂度，$\Delta=I(f\circ r)-I(r)$，所有差值用实数计算。设目标值集合有 $n\ge 2$ 个元素，记 $T=\sum_d M(d)\operatorname{TV}(P_d,Q_{f(d)})$，其中 $\operatorname{TV}(u,v)=\tfrac12\sum_a|u(a)-v(a)|$。则
+
+$$
+T^2\le \frac{\lfloor n^2/4\rfloor}{n}\,\Delta.
+$$
+
+在正质量细纤维中，后验之差 $z=P_d-Q_{f(d)}$ 的坐标和为零。若 $S$ 是 $z$ 的正坐标集，$j=|S|$，则 $\operatorname{TV}=\sum_{a\in S}z(a)$。从 $S$ 的指标中减去 $j/n$，这一内积保持原值，指标的平方范数成为 $j(n-j)/n$。柯西–施瓦茨不等式给出该纤维的界，再按细纤维质量加权并使用精确混杂度增量，即得上式。零质量纤维的权重为零。
+
+常数在每个 $n$ 都可达到。令 $k=\lfloor n/2\rfloor$，把目标集分成大小为 $k$ 和 $n-k$ 的两块，在每块内均匀分配总质量 $1/2$。细读出报告所属块，粗读出把两块合并。每个细后验与粗后验的总变差都是 $1/2$，且 $\Delta=n/[4k(n-k)]$。因此当偶数 $n$ 增大时，$\Delta=1/n$ 趋向零，$T$ 始终为 $1/2$。任何随 $\Delta$ 趋于零而趋于零的统一上界，都需要限制目标集的大小或引入额外结构。 [Lean 取等构造](lean:D5/S3/ConceptDynamics/Information/ConditionalGiniTV.conditional_gini_tv_attained)
+
+$T$ 也等于原联合律 $(d,a)\mapsto M(d)P_d(a)$ 与替换后的联合律 $(d,a)\mapsto M(d)Q_{f(d)}(a)$ 之间的总变差。按细纤维分组半绝对差和即可得到这一解释。这是给定概率律和给定粗化的平均后验总变差，也等于联合事件概率变化的最大值。总变差的半 $\ell^1$ 约定见 Gibbs 与 Su 的[原文第 7 页](https://arxiv.org/pdf/math/0209021#page=7)。
+
+**各纤维共用同一个重编码分布。** 若从有限个目标重编码 $h$ 中随机选择，并且每一对不同的目标值都以同一个概率 $q$ 被分开，则对固定读出 $s$，目标改用 $h\circ t$ 后的期望混杂度是 $qI(s)$。在有序对公式中，目标相同的对仍贡献零，目标不同的对则按其质量乘以 $q$。读出纤维的质量与 $h$ 无关，因此可以先对重编码取平均再累加质量，零质量纤维也包含在等式内。各混杂度均在 $[0,1]$ 内。对使用同一重编码分布的细、粗读出分别应用等式并相减，得到期望 Gini 混杂度增量 $q\Delta$。
+
+**指定大小的二值事件。** 若目标字母表 $A$ 有 $n\ge2$ 个值，固定整数 $1\le m<n$，并令 $\Delta_S$ 表示用 $x\mapsto\mathbf1_{\{t(x)\in S\}}$ 替换目标后所得的 Gini 增量。在所有 $m$ 元子集 $S\subset A$ 中均匀抽取时，一对不同的目标值被分开的方式有 $2\binom{n-2}{m-1}$ 种。先选这两个值中的哪一个在 $S$ 中，再从其余 $n-2$ 个值选 $m-1$ 个。因此
+
+$$
+\mathbb E_{|S|=m}\Delta_S
+ =\frac{2\binom{n-2}{m-1}}{\binom{n}{m}}\Delta
+ =\frac{2m(n-m)}{n(n-1)}\Delta.
+$$
+
+有限平均中至少有一项达到或超过该值，所以一个大小为 $m$ 的事件即可保留这一比例的缺陷。此系数对任意给定的 $n,m$ 都是最优的。取 $X=A$ 上的均匀分布，让细读出和目标都是恒等映射，并令粗读出为常值。细读出的每个纤维是单点，两种目标的细混杂度均为零。粗纤维中，两次独立抽样的有序对共有 $n^2$ 个等可能取值。原目标有 $n(n-1)$ 个不同值对，二值目标有 $2m(n-m)$ 个跨越 $S$ 边界的对。于是 $\Delta=(n-1)/n>0$，且每个大小为 $m$ 的 $S$ 都给出 $\Delta_S=2m(n-m)/n^2$。这个保证适用于给定概率律与粗化后选出的单个事件，该事件在所有纤维中相同。当 $m$ 固定而 $n$ 增大时，保证比例趋于零。
+
+**固定大小的二划分保留哪些信息？** [Lean 加权割方差公式](lean:D5/S3/Combinatorics/Graph/Incidence/FixedSizeCutVariance.fixed_size_cut_variance) 对每个读出 $s$，先按读出纤维的质量抽取一个纤维，再从该纤维独立抽取两次。记所得目标有序对的联合律为 $Q_s(a,b)$。对不同目标值构成的无向边 $\{a,b\}$，赋权
+$w_{ab}=2\bigl(Q_{f\circ r}(a,b)-Q_r(a,b)\bigr)$。两次抽样的顺序可交换，因此把有序对按无向边分组即得 $\Delta=\sum_{a<b}w_{ab}$。同一推导给出 $\Delta_S=C_w(S)$，其中 $C_w(S)$ 是恰有一个端点在 $S$ 内的边权总和。边权允许为负。
+
+设 $n\ge4$ 且 $2\le m\le n-2$。记 $\bar w$ 为全部无向边的平均权，令
+$u_a=\sum_{b\ne a}(w_{ab}-\bar w)/(n-2)$，再令
+$z_{ab}=w_{ab}-\bar w-u_a-u_b$。每个顶点的残差边权总和为零。均匀抽取大小为 $m$ 的集合 $S$ 时，
+
+$$
+\operatorname{Var}(C_w(S))
+=\frac{m(n-m)(n-2m)^2}{n(n-1)(n-2)}
+   \sum_{a<b}(u_a+u_b)^2
++\frac{4m(m-1)(n-m)(n-m-1)}{n(n-1)(n-2)(n-3)}
+   \sum_{a<b}z_{ab}^2.
+$$
+
+两条边同时跨越 $S$ 边界的概率取决于它们重合、相交于一个顶点还是不相交。按这三类计数可将方差写成关于无向边权和顶点关联的二次型。去掉边权均值后，度数贡献与零度数残差正交，得到上式。若 $2m\ne n$，两个系数都为正，各事件的缺陷增量完全相同当且仅当边权恒定。若 $2m=n$，度数项消失，此时零度数残差为零已足够。给每个顶点加上一项 $u_a$，并将两端的贡献相加到边上，均衡二划分只读到该项的总和。这里的恢复结论针对边权。不同概率律还可能给出同一组边权。
 
 **哪些二阶矩能来自同一个后验混合？** 若信号 $s$ 的权重为 $\lambda_s$，后验概率向量为 $v_s$，则先验与二阶矩满足
 $p=\sum_s\lambda_s v_s$ 和 $M=\sum_s\lambda_s v_s v_s^{\mathsf T}$。因此 $M$ 逐项非负，行和为 $p$，且 $M-pp^{\mathsf T}$ 半正定。后一条件来自后验向量围绕 $p$ 的协方差。给定一组具有该重心的有限后验，可在状态 $(s,a)$ 上赋质量 $\lambda_s v_s(a)$，以 $s$ 为读出、$a$ 为目标实现它。这是 Kamenica 与 Gentzkow 所用的有限后验分裂构造。 [原文命题 1 与附录 A](https://web.stanford.edu/~gentzkow/research/BayesianPersuasion.pdf#page=6)

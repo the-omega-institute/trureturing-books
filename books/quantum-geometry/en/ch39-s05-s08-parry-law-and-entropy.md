@@ -459,6 +459,25 @@ $$
 Both sides must use the same logarithm base. The left side is entropy per return, while $h_\eta(S)$ on the right is entropy per original step. The maximal-entropy application above does not prove this first-return formula or supply an entropy formula for a physical realization, irreversible readout, or finite $p$-adic remainder tree. Applying the literature result to such objects still requires the actual probability-preserving system, return set, and correspondence to be established separately.
 :::
 
+In the bilateral Parry system above, take the return section to consist of paths that have just read a zero. Every path encounters another zero within $K$ steps. The conditional measure on this section reconstructs the original measure.
+
+::: {.theorem #thm-ch39-p2e-native-parry-first-return title="First Return and Occupation Measure of the Bilateral Parry Source" lean="D5/S3/TotalVariation/ParryFirstReturn.actual_first_return_system"}
+Let $K\ge2$. On $X_K$ let $T$ be the left shift and let $J_t$ be the suffix length at time $t$ under the bilateral coding above. Take a coding and probability $\mu$ that satisfy the preceding-zero condition, shift invariance and the suffix-cylinder formula of [@thm-ch39-p2e-native-bilateral-parry-law]. Set $A=\{r:r_{-1}=\mathrm{false}\}$. Then $A=\{J_0=0\}$ and $\mu(A)=1/\operatorname{normalizer}(K)>0$, where $\operatorname{normalizer}(K)=\sum_{j=0}^{K-1}p^jR_j$.
+
+For each $r\in X_K$, let $\tau(r)$ be the least positive integer for which $T^{\tau(r)}r\in A$. It satisfies $1\le\tau(r)\le K$. The map $T_A(r)=T^{\tau(r)}r$ preserves the probability $\mu_A=\mu|_A/\mu(A)$, represented as a measure on $X_K$ supported on $A$. The original probability satisfies the measure identity
+
+$$
+\mu=\mu(A)\sum_{i=0}^{K-1}(T^i)_*
+  \bigl(\mu_A|_{\{r:\,i<\tau(r)\}}\bigr).
+$$
+:::
+
+::: proof
+The variable $J_0$ counts the consecutive true bits immediately before position $0$, so $J_0=0$ exactly when $r_{-1}=\mathrm{false}$. The one-coordinate suffix cylinder gives the probability of this event. A zero occurs within the next $K$ steps from every position. Partition $A$ by the first-return time. On each part the return map is a fixed iterate of the left shift. To invert it, search the image path backward from index $-2$ and shift the first zero found there to index $-1$. This determines a unique inverse branch, so the images are disjoint and cover $A$. Shift invariance then transfers to the conditional probability.
+
+At level $i$, take the paths in $A$ that have taken $i$ steps without yet returning. Shifting them by $i$ gives exactly the paths with $J_0=i$. Shifting back by $i$ recovers the starting point in $A$, and the preceding-zero condition excludes an intervening return. Thus the mass of every measurable event splits by its value of $J_0$. Multiplying the conditional level contributions by $\mu(A)$ and adding them recovers the original event mass. The full proof is checked by the Lean kernel.
+:::
+
 Whether the transverse Rauzy boundary Hausdorff dimension $D_F = \dim_H(\partial\mathcal{R}_K)$ governs anomalous entanglement scaling in Pisot cut-and-project quantum many-body states remains an open mathematical-physics problem:
 
 ::: {.problem #prob-ch39-p2e-fractal-horizon title="Open Problem: Rauzy Fractal-Horizon Entanglement Scaling in Pisot Cut-and-Project Quantum Many-Body Systems"}
