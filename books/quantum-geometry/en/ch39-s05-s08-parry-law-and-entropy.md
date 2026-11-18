@@ -478,6 +478,23 @@ The variable $J_0$ counts the consecutive true bits immediately before position 
 At level $i$, take the paths in $A$ that have taken $i$ steps without yet returning. Shifting them by $i$ gives exactly the paths with $J_0=i$. Shifting back by $i$ recovers the starting point in $A$, and the preceding-zero condition excludes an intervening return. Thus the mass of every measurable event splits by its value of $J_0$. Multiplying the conditional level contributions by $\mu(A)$ and adding them recovers the original event mass. The full proof is checked by the Lean kernel.
 :::
 
+A return orbit records how many steps it takes to read each successive zero. On the zero section, the joint probability of these durations can be computed directly from a suffix cylinder of the original path.
+
+::: {.theorem #thm-ch39-p2e-parry-return-durations title="Joint Distribution of Return Durations in the Bilateral Parry Source" lean="D5/S3/TotalVariation/ParryFirstReturn.return_time_cylinder_probability"}
+Use the same $K$, coding and probability $\mu$, zero section $A$, first-return time $\tau$, return map $T_A$, and conditional probability $\mu_A$ as in [@thm-ch39-p2e-native-parry-first-return]. Set $p=\beta_K^{-1}$. For every finite sequence of durations $d_0,\ldots,d_{m-1}\in\{1,\ldots,K\}$,
+
+$$
+\mu_A\bigl(\{r\in A:\tau(T_A^i r)=d_i\ \text{for every }0\le i<m\}\bigr)
+=\prod_{i=0}^{m-1}p^{d_i}.
+$$
+
+For $m=0$ the event is the entire section and the empty product is $1$.
+:::
+
+::: proof
+A return of duration $d$ traces the suffix sequence $0,1,\ldots,d-1,0$. Its final zero also starts the next return. Joining successive blocks at their common zeros identifies the duration event with one suffix cylinder on the original path. Each allowed transition contributes a factor $p$ times the ratio of the destination and origin weights. The ratios telescope because the initial and final suffixes are both zero. Conditioning divides out the initial cylinder mass $\mu(A)$ and leaves one factor $p^d$ per return. The full proof is checked by the Lean kernel.
+:::
+
 Whether the transverse Rauzy boundary Hausdorff dimension $D_F = \dim_H(\partial\mathcal{R}_K)$ governs anomalous entanglement scaling in Pisot cut-and-project quantum many-body states remains an open mathematical-physics problem:
 
 ::: {.problem #prob-ch39-p2e-fractal-horizon title="Open Problem: Rauzy Fractal-Horizon Entanglement Scaling in Pisot Cut-and-Project Quantum Many-Body Systems"}
