@@ -45,7 +45,19 @@ $$
 
    因此任何盲目粗粒化都会面临推高目标混杂度的风险；区别于 `refinement_impurity_monotone` 的不等式本身，由 Gini 混杂度的严格凹性可知，粗化保持零附加 Gini 混杂度损失（上式取等）当且仅当每一粗纤维内被合并的各正概率细子纤维共享完全一致的目标后验分布（预测充分统计条件，`手工推导`）。
 
-   **二次评分的文献与适用范围。** Gneiting–Raftery 的 [Example 1](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf#page=5)（DOI: `10.1198/016214506000001437`）将多类别二次评分的散度识别为后验概率向量之间的平方欧氏距离。Bröcker 的 [§3、式 (15) 与附录 C](https://arxiv.org/pdf/0806.0813v2#page=7)（期刊 DOI: `10.1002/qj.456`）给出预测充分性下的期望散度分解；其 §2 明确假设目标值集合有限。这些结果解释了有限目标情形中“没有额外二次预测损失”与“后验一致”的联系，不把可靠性、充分性与确定性混为一谈。Steinwart–Ziegel 的[定理 1.1、式 (4)](https://arxiv.org/html/1712.05279#S1.Thmthm1)（期刊 DOI `10.1016/j.acha.2019.11.005`）把可测核的期望评分差写成核均值嵌入距离平方的一半。对可数离散目标，取两目标相同则为 1、否则为 0 的核，均值嵌入就是各目标的概率坐标。PMF 的正质量支撑可数，其目标像也可数，因此可在这个目标像上使用该核。在 Lean 中仍需把各粗纤维内的后验混合与全局 ENNReal 取等相连，并处理零质量纤维。上文取等刻画仍是手工推导，所引 `refinement_impurity_monotone` 证明的是不等式。
+   **二次评分的文献与适用范围。** Gneiting–Raftery 的 [Example 1](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf#page=5)（DOI: `10.1198/016214506000001437`）将多类别二次评分的散度识别为后验概率向量之间的平方欧氏距离。Bröcker 的 [§3、式 (15) 与附录 C](https://arxiv.org/pdf/0806.0813v2#page=7)（期刊 DOI: `10.1002/qj.456`）给出预测充分性下的期望散度分解；其 §2 明确假设目标值集合有限。这些结果解释了有限目标情形中“没有额外二次预测损失”与“后验一致”的联系，不把可靠性、充分性与确定性混为一谈。Steinwart–Ziegel 的[定理 1.1、式 (4)](https://arxiv.org/html/1712.05279#S1.Thmthm1)（期刊 DOI `10.1016/j.acha.2019.11.005`）把可测核的期望评分差写成核均值嵌入距离平方的一半。对可数离散目标，取两目标相同则为 1、否则为 0 的核，均值嵌入就是各目标的概率坐标。PMF 的正质量支撑可数，其目标像也可数，因此可在这个目标像上使用该核。下文给出对应的概率质量函数恒等式。
+
+   **粗化损失的精确大小。** 令 $r:X	o D$ 为细读出，$f:D	o C$ 为粗化，$t:X	o A$ 为目标。对同一个任意概率质量函数，记 $M(d)$ 为细纤维质量，$P_d(a)$ 与 $Q_c(a)$ 分别为细、粗纤维中的目标后验。每个后验坐标按联合质量除以对应纤维质量定义，零质量时取 $0$。若 $I(s)$ 表示读出 $s$ 的条件逻辑混杂度，则有
+   $$
+   I(f\circ r)=I(r)+\sum_d\sum_a M(d)\,\operatorname{ofReal}\!\left[
+      \bigl(\operatorname{toReal}P_d(a)-\operatorname{toReal}Q_{f(d)}(a)\bigr)^2
+   \right].
+   $$
+
+   对每个目标值，后验坐标是目标指标函数的条件期望。粗、细条件期望的勾股分解给出这一坐标的平方损失增量。对所有目标值求和时，指标函数的条件平方损失之和恰是原定义的成对混杂度。对一个正质量纤维，令 $q_a$ 为其后验，则这个和是 $\sum_a q_a(1-q_a)=1-\sum_a q_a^2$，即两次独立按该后验取样时目标不同的概率。按细纤维分组即得到右侧加权和。
+
+   右侧求和使用扩展非负实数，每项在取平方前先把两个后验转为实数。零质量纤维的贡献为零。对每个正质量细纤维，零损失恰要求它的后验等于所属粗纤维的后验。由于粗后验是各正质量细后验按质量加权的平均，这等价于同一个粗纤维内所有正质量细后验一致。结论适用于任意类型上的概率质量函数和确定性读出。
+
 3. **支撑感知量子相对熵的信道数据处理不等式（[`extended_quantum_relative_entropy_channel_dpi`](lean:D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi)）**：对非空有限可判等指标集 $a, b$、任意完全正保迹量子信道 $\Phi : \operatorname{QuantumChannel}(a, b)$ 及密度态 $\rho, \sigma : \operatorname{DensityState} a$，带支撑约定的相对熵满足 $D_{\mathrm{ext}}\bigl(\Phi(\rho) \,\|\, \Phi(\sigma)\bigr) \le D_{\mathrm{ext}}(\rho \,\|\, \sigma)$。将 `extended_quantum_relative_entropy_channel_dpi` 作用于经典—量子联合态（$\rho_{YH}$ 对照 $\rho_Y \otimes \rho_H$）上的目标保持信道 $(\mathrm{id}_Y \otimes \mathcal{E}_M)$，即导出预测互信息单调不增 $I(Y; \mathcal{E}_M(H)) \le I(Y; H)$（`手工推导`应用）：一旦第二阶段物理擦除误删了携带目标关联的纤维分量，后续任何局域算法或后处理信道均不可能凭空找回已散失的预测信息。
 4. **热浴与幺正收支下的精确兰道尔恒等式（[`landauer_identity_from_balances`](lean:D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances)）**：对实数 $\beta, Q, \Delta S_{\mathrm{sys}}, \Delta S_{\mathrm{res}}, I_{\mathrm{mut}}, D_{\mathrm{res}} \in \mathbb{R}$，只要满足热浴热量—熵平衡 $\beta Q = \Delta S_{\mathrm{res}} + D_{\mathrm{res}}$ 与双体幺正熵平衡 $I_{\mathrm{mut}} = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$，恒有精确等式
 
