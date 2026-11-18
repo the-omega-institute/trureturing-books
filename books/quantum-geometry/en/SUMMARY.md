@@ -29,6 +29,10 @@
 # Part IV Entangled Spheres — Quantum Entanglement, Fault-Tolerant Codes, and Grand Unification of Algorithms
 
 - [Chapter 13 Quantum Entanglement and the Bell 45° Violation: How the Cosine Arc Defeats the Classical Polygonal Line](ch13-entanglement-and-chsh.md)
+  - [13.1 Local Lines and Correlation Areas: 6 + 9 = 15](ch13-s01-local-and-correlation.md)
+  - [13.2 Bell States: Central Marginals and Shared Correlations](ch13-s02-bell-states.md)
+  - [13.3 The CHSH Square: Its Commutator Area Term](ch13-s03-chsh-commutator-area.md)
+  - [13.4 The 45° Cosine and the Fixed CHSH Maximum](ch13-s04-tsirelson-cosine-bound.md)
 - [Chapter 14 Hiding Fragile Lines in Higher-Dimensional Areas: Quantum Error-Correcting Codes and Anyonic Topological Braids](ch14-cloning-codes-and-braids.md)
   - [14.1 No Cloning: Preserving an Overlap and Squaring It](ch14-s01-no-cloning.md)
   - [14.2 Pauli Words and Stabilizer Syndromes](ch14-s02-pauli-syndromes.md)
@@ -36,6 +40,10 @@
   - [14.4 Planar Braids and the Third Orthogonal Direction](ch14-s04-braids-and-third-axis.md)
   - [14.5 Closing the Braid: Markov Stabilization and Coloring Counts](ch14-s05-markov-stabilization.md)
 - [Chapter 15 Invariant-Plane Rotations and Equatorial Area Gears: Grover Search, QFT, and Shor Factoring](ch15-grover-qft-and-period-finding.md)
+  - [15.1 Grover: The Common Invariant Plane of Two Reflections](ch15-s01-grover-invariant-plane.md)
+  - [15.2 Phase Kickback and the Binary Gears of the QFT](ch15-s02-qft-phase-gears.md)
+  - [15.3 Finite Character Orthogonality and Nonresonant Cancellation](ch15-s03-character-cancellation.md)
+  - [15.4 Finite Period Sampling and Order Reconstruction in Shor’s Algorithm](ch15-s04-shor-order-reconstruction.md)
 - [Chapter 16 Grand Unification of Quantum Algorithms (QSVT), Quantum Walks, and Gate-Compilation Polytopes](ch16-qsvt-walks-and-compilation.md)
   - [16.1 QSVT: Two-Dimensional Blocks and Chebyshev Recurrences](ch16-s01-qsvt-chebyshev-blocks.md)
   - [16.2 Quantum Walks: Coherent Superposition and Its Limits](ch16-s02-quantum-walks.md)
@@ -52,6 +60,11 @@
 - [Chapter 17 Geometric Demystification of Special Relativity: Hyperbolic Rotors, Null Light Cones, and Spacetime Area](ch17-lorentz-geometry.md)
 - [Chapter 18 Dirac Spinors and Gauge Fields: Why Fermions Detour Through the Sphere and Why Force Is Area Curvature](ch18-spinors-and-gauge-curvature.md)
 - [Chapter 19 Entanglement Weaves Space: Tensor Networks, Holographic Duality, and the Discrete Min-Cut Theorem](ch19-tensor-networks-and-holography.md)
+  - [19.1 Entanglement hierarchies and finite tensor networks](ch19-s01-mera-hierarchy.md)
+  - [19.2 Rank and cut capacity in a width-three bridge graph](ch19-s02-bridge-flow-cut.md)
+  - [19.3 Cone domains and discrete capacity facets](ch19-s03-discrete-facet-stitching.md)
+  - [19.4 From discrete bridge graphs to the RT literature](ch19-s04-rt-literature-bridge.md)
+  - [19.5 Open-boundary matrix product states: three-site marginal recovery and intrinsic genericity](ch19-s05-open-boundary-mps.md)
 - [Chapter 20 Gate Complexity as Volume: Black-Hole Interior Growth, Wormhole Bridges, and Computational Complexity Boundaries](ch20-complexity-and-spacetime.md)
 
 # Part VI Crossing the Horizon — Spheres Beyond Spheres: Gödelian Escape, Arithmetic Spectra, and $\psi = \psi(\psi)$

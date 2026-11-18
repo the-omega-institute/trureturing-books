@@ -29,6 +29,10 @@
 # 第四部 交织·多球共振：量子纠缠、容错编码与算法大一统
 
 - [第十三章 量子纠缠与贝尔 45° 破缺：余弦圆弧如何击败经典折线？](ch13-entanglement-and-chsh.md)
+  - [13.1 局域线与关联面：6 + 9 = 15](ch13-s01-local-and-correlation.md)
+  - [13.2 贝尔态：球心边缘态与共享关联](ch13-s02-bell-states.md)
+  - [13.3 CHSH 平方：正交面积的换位子项](ch13-s03-chsh-commutator-area.md)
+  - [13.4 45° 余弦与固定 CHSH 极值](ch13-s04-tsirelson-cosine-bound.md)
 - [第十四章 把脆弱的线藏进高维的面：量子纠错码与任意子拓扑死结](ch14-cloning-codes-and-braids.md)
   - [14.1 不可克隆：保内积与平方内积](ch14-s01-no-cloning.md)
   - [14.2 Pauli 字与稳定子综合征](ch14-s02-pauli-syndromes.md)
@@ -36,6 +40,10 @@
   - [14.4 二维编织与第三正交方向](ch14-s04-braids-and-third-axis.md)
   - [14.5 把编织首尾相接：Markov 稳定化与着色计数](ch14-s05-markov-stabilization.md)
 - [第十五章 夹角平面旋转与赤道面积齿轮：Grover 搜索、QFT 与 Shor 大数分解](ch15-grover-qft-and-period-finding.md)
+  - [15.1 Grover：两次反射的共同不变平面](ch15-s01-grover-invariant-plane.md)
+  - [15.2 相位反冲与 QFT 二进制齿轮](ch15-s02-qft-phase-gears.md)
+  - [15.3 有限字符正交与非共振相消](ch15-s03-character-cancellation.md)
+  - [15.4 有限周期采样与 Shor 阶重建](ch15-s04-shor-order-reconstruction.md)
 - [第十六章 算法大一统（QSVT）、图上游走与门编译的因式约分](ch16-qsvt-walks-and-compilation.md)
   - [16.1 QSVT：二维块与切比雪夫递推](ch16-s01-qsvt-chebyshev-blocks.md)
   - [16.2 图上游走：相干叠加与适用边界](ch16-s02-quantum-walks.md)
@@ -52,6 +60,11 @@
 - [第十七章 狭义相对论的几何脱魅：双曲旋转、光锥零线与时空面积](ch17-lorentz-geometry.md)
 - [第十八章 狄拉克旋量与规范场：为什么粒子要在球外绕行，为什么力是面积的曲率？](ch18-spinors-and-gauge-curvature.md)
 - [第十九章 纠缠编织空间：张量网络、全息对偶与离散最小割定理](ch19-tensor-networks-and-holography.md)
+  - [19.1 纠缠层级与有限张量网络](ch19-s01-mera-hierarchy.md)
+  - [19.2 宽度三桥图的秩与割容量](ch19-s02-bridge-flow-cut.md)
+  - [19.3 锥域与离散容量分片的拼接](ch19-s03-discrete-facet-stitching.md)
+  - [19.4 从离散桥图到 RT 文献边界](ch19-s04-rt-literature-bridge.md)
+  - [19.5 开边界矩阵乘积态：三格点边缘恢复与内禀一般性](ch19-s05-open-boundary-mps.md)
 - [第二十章 门复杂度即体积：黑洞内部生长、虫洞桥与计算复杂性边界](ch20-complexity-and-spacetime.md)
 
 # 第六部 越界·球外之球：哥德尔逃逸、算术频谱与 $\psi = \psi(\psi)$

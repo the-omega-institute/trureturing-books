@@ -205,14 +205,14 @@ s = await state();
 check('English: the HUD reads “hidden-direction model · k/360 give +2” with the count of the stop', (await page.textContent('#hudSub')).includes(`hidden-direction model · ${toy(s.dirs).per.filter((c) => c > 0).length}/360 give +2`));
 
 /* ---------- the cited stills: the frame each figure shows against its caption and its card note ---------- */
-const chapter = (lang) => fs.readFileSync(new URL(`../../${lang}/ch13-entanglement-and-chsh.md`, import.meta.url), 'utf8');
-const caption = (lang, card) => { const m = new RegExp(`::: \\{\\.viz src="chsh-dial" preset="${card}"[^}]*\\}\\n([\\s\\S]*?)\\n:::`).exec(chapter(lang)); return m ? m[1] : ''; };
 const shot = await T.newPage();
 for (const lang of ['zh', 'en']) {
   await T.goto(BOOK, ID, `?shot=1&lang=${lang}&preset=hidden`, shot); await settle(shot);
   const h = await shot.evaluate(() => window.CHSH_DEBUG.state), t = toy(h.dirs);
   const plus = t.per.filter((c) => c === 2).length, minus = t.per.filter((c) => c === -2).length;
-  const bell = expect(opOf(h.dirs)), cap = caption(lang, 'hidden'), note = await shot.textContent('#presetNote');
+  const section = fs.readFileSync(new URL(`../../${lang}/ch13-s04-tsirelson-cosine-bound.md`, import.meta.url), 'utf8');
+  const cap = /::: \{\.viz src="chsh-dial" preset="hidden"[^}]*\}\n([\s\S]*?)\n:::/.exec(section)?.[1] ?? '';
+  const bell = expect(opOf(h.dirs)), note = await shot.textContent('#presetNote');
   check(`HIDDEN still (${lang}): both colours on the ring (vector signs: ${plus} give +2, ${minus} give −2) and the page agrees`, plus > 0 && minus > 0 && plus + minus === 360 && h.classical.plus === plus && close(h.classical.S, t.S, 1e-12), `${plus}/${minus}`);
   const nums = [`${plus}`, `${minus}`, `${Math.round(h.phi)}^\\circ`, t.S.toFixed(3), bell.toFixed(3), `(${plus} \\cdot 2 - ${minus} \\cdot 2)/360`];
   check(`HIDDEN still (${lang}): the caption names the stop φ, the two counts, the mean ${t.S.toFixed(3)} and the Bell value ${bell.toFixed(3)}`, nums.every((x) => cap.includes(x)), nums.filter((x) => !cap.includes(x)).join(' '));

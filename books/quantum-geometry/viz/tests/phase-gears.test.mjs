@@ -86,7 +86,7 @@ check('ONE CELL stops at x = 5', await stopsAt(5));
     // the angle as a reduced fraction of π, written the way the caption writes it
     let p = Math.round(ang / PI * b.Q), q = b.Q; const gcd = (u, v) => (v ? gcd(v, u % v) : u); const d = gcd(p, q); p /= d; q /= d;
     const tex = q === 1 ? `${p === 1 ? '' : p}\\pi` : `\\frac{${p === 1 ? '' : p}\\pi}{${q}}`;
-    const md = fs.readFileSync(new URL(`../../${lang}/ch15-grover-qft-and-period-finding.md`, import.meta.url), 'utf8');
+    const md = fs.readFileSync(new URL(`../../${lang}/ch15-s02-qft-phase-gears.md`, import.meta.url), 'utf8');
     const cap = (/::: \{\.viz src="phase-gears" preset="basis"[^}]*\}\n([\s\S]*?)\n:::/.exec(md) || [, ''])[1];
     check(`ONE CELL still (${lang}): one cyan arrow on the chain and no ink sum over it`, b.chain.length === 2 && b.chainInk === false && close(ang, want, 1e-12));
     check(`ONE CELL still (${lang}): the caption names the arrow's angle ${tex} and the flat bars 1/${b.Q}`, cap.includes(tex) && cap.includes(`\\frac{1}{${b.Q}}`) && b.probs.every((x) => close(x, 1 / b.Q, 1e-12)), tex);
@@ -321,7 +321,7 @@ const entry = JSON.parse(readFileSync(new URL('viz/visualizations.json', BOOKDIR
 const regMiss = [...has(entry.summary, ['完整陪集（x₀ < r）', '只有一部分 sQ/r 落在整数上', '有限和', '例如 Q = 64、r = 6、x₀ = 0', '截短的梳子未必集中在 sQ/r 附近', '只剩一格时谱是平的', '只是候选']),
   ...has(entry.summary_en, ['complete coset (x₀ < r)', 'only some of the values sQ/r are integers', 'finite sum', 'for example, at Q = 64, r = 6, x₀ = 0', 'a truncated comb need not concentrate near sQ/r', 'a single cell gives a flat spectrum', 'only a candidate'])];
 check('registry: summary and summary_en state the same conditions', regMiss.length === 0 && !/r 不整除 Q 时峰摊在 sQ\/r 附近，用连分数|when r does not divide Q the peaks spread near sQ\/r, and continued|长梳子|long comb/i.test(entry.summary + entry.summary_en), regMiss.join(' | '));
-const lab = (lang) => { const md = readFileSync(new URL(`${lang}/ch15-grover-qft-and-period-finding.md`, BOOKDIR), 'utf8'), i = md.indexOf('::: {.viz src="phase-gears" height="560"}'); return i < 0 ? '' : md.slice(i, md.indexOf('\n:::', i + 10)); };
+const lab = (lang) => { const md = readFileSync(new URL(`${lang}/ch15-s04-shor-order-reconstruction.md`, BOOKDIR), 'utf8'), i = md.indexOf('::: {.viz src="phase-gears" height="560"}'); return i < 0 ? '' : md.slice(i, md.indexOf('\n:::', i + 10)); };
 const capZh = lab('zh'), capEn = lab('en');
 const capMiss = [...has(capZh, ['完整陪集（起点 $x_0<r$）', '[@prop-finite-character-cancellation]', '有限和', 'Shor 的设定', '起点 $x_0<r$、梳子铺到寄存器末端', '$Q \\ge N^2 > r^2$', '仍要检验', '这种总集中保持文献身份', '[@thm-shor-nearest-candidate] 只在实际参数、分辨率和最近条件成立时保证候选成员资格', '截短的梳子可以没有这种集中', '只剩一格时谱是平的']),
   ...has(capEn, ['complete coset (offset $x_0<r$)', '[@prop-finite-character-cancellation]', 'finite sum', "Shor's setting", 'offset $x_0<r$, the comb running to the end of the register', '$Q \\ge N^2 > r^2$', 'must still be checked', 'this aggregate concentration retains its literature status', '[@thm-shor-nearest-candidate] guarantees only candidate membership under the actual parameter, resolution, and nearestness hypotheses', 'a truncated comb can lose that concentration', 'a single cell gives a flat spectrum'])];

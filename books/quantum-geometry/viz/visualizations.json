@@ -433,8 +433,8 @@
         {
           "label": "第 19 章 · 宽度三桥图的秩与割容量",
           "label_en": "Chapter 19 · Rank and cut capacity of the width-three bridge",
-          "href": "../zh/ch19-tensor-networks-and-holography.html#sec-bridge-flow-cut",
-          "href_en": "../en/ch19-tensor-networks-and-holography.html#sec-bridge-flow-cut"
+          "href": "../zh/ch19-s02-bridge-flow-cut.html#sec-bridge-flow-cut",
+          "href_en": "../en/ch19-s02-bridge-flow-cut.html#sec-bridge-flow-cut"
         },
         {
           "label": "Lean：桥图的量子最大流最小割",
@@ -1272,14 +1272,14 @@
         {
           "label": "第十三章 · CHSH 平方：正交面积的换位子项",
           "label_en": "Chapter 13 · The CHSH square: its commutator area term",
-          "href": "../zh/ch13-entanglement-and-chsh.html#sec-chsh-commutator-area",
-          "href_en": "../en/ch13-entanglement-and-chsh.html#sec-chsh-commutator-area"
+          "href": "../zh/ch13-s03-chsh-commutator-area.html#sec-chsh-commutator-area",
+          "href_en": "../en/ch13-s03-chsh-commutator-area.html#sec-chsh-commutator-area"
         },
         {
           "label": "第十三章 · 45° 余弦与固定 CHSH 极值",
           "label_en": "Chapter 13 · The 45° cosine and the fixed CHSH maximum",
-          "href": "../zh/ch13-entanglement-and-chsh.html#sec-bell-45-tsirelson",
-          "href_en": "../en/ch13-entanglement-and-chsh.html#sec-bell-45-tsirelson"
+          "href": "../zh/ch13-s04-tsirelson-cosine-bound.html#sec-bell-45-tsirelson",
+          "href_en": "../en/ch13-s04-tsirelson-cosine-bound.html#sec-bell-45-tsirelson"
         },
         {
           "label": "Lean · QuantumBounds/ClassicalFiberBound",
@@ -1543,8 +1543,8 @@
         {
           "label": "第十五章 · 两次反射的共同不变平面",
           "label_en": "Chapter 15 · The common invariant plane of two reflections",
-          "href": "../zh/ch15-grover-qft-and-period-finding.html#sec-grover-invariant-plane",
-          "href_en": "../en/ch15-grover-qft-and-period-finding.html#sec-grover-invariant-plane"
+          "href": "../zh/ch15-s01-grover-invariant-plane.html#sec-grover-invariant-plane",
+          "href_en": "../en/ch15-s01-grover-invariant-plane.html#sec-grover-invariant-plane"
         },
         {
           "label": "Lean · Quantum/Recovery/CoherentUniformAmplification",
@@ -1590,14 +1590,14 @@
         {
           "label": "第十五章 · 相位反冲与 QFT 二进制齿轮",
           "label_en": "Chapter 15 · Phase kickback and the binary gears of the QFT",
-          "href": "../zh/ch15-grover-qft-and-period-finding.html#sec-qft-phase-gears",
-          "href_en": "../en/ch15-grover-qft-and-period-finding.html#sec-qft-phase-gears"
+          "href": "../zh/ch15-s02-qft-phase-gears.html#sec-qft-phase-gears",
+          "href_en": "../en/ch15-s02-qft-phase-gears.html#sec-qft-phase-gears"
         },
         {
           "label": "第十五章 · 有限字符正交与非共振相消",
           "label_en": "Chapter 15 · Finite character orthogonality and nonresonant cancellation",
-          "href": "../zh/ch15-grover-qft-and-period-finding.html#sec-period-frequency-cancellation",
-          "href_en": "../en/ch15-grover-qft-and-period-finding.html#sec-period-frequency-cancellation"
+          "href": "../zh/ch15-s03-character-cancellation.html#sec-period-frequency-cancellation",
+          "href_en": "../en/ch15-s03-character-cancellation.html#sec-period-frequency-cancellation"
         },
         {
           "label": "Lean · Fourier/FinitePoisson",
@@ -1752,14 +1752,14 @@
         {
           "label": "第十九章 · 纠缠层级与有限张量网络",
           "label_en": "Chapter 19 · Entanglement hierarchies and finite tensor networks",
-          "href": "../zh/ch19-tensor-networks-and-holography.html#sec-mera-hierarchy",
-          "href_en": "../en/ch19-tensor-networks-and-holography.html#sec-mera-hierarchy"
+          "href": "../zh/ch19-s01-mera-hierarchy.html#sec-mera-hierarchy",
+          "href_en": "../en/ch19-s01-mera-hierarchy.html#sec-mera-hierarchy"
         },
         {
           "label": "第十九章 · 从离散桥图到 RT 文献边界",
           "label_en": "Chapter 19 · From the discrete bridge graph to the RT literature boundary",
-          "href": "../zh/ch19-tensor-networks-and-holography.html#sec-rt-literature-bridge",
-          "href_en": "../en/ch19-tensor-networks-and-holography.html#sec-rt-literature-bridge"
+          "href": "../zh/ch19-s04-rt-literature-bridge.html#sec-rt-literature-bridge",
+          "href_en": "../en/ch19-s04-rt-literature-bridge.html#sec-rt-literature-bridge"
         },
         {
           "label": "Lean 源码 · QuantumMaxFlowBound",
@@ -3025,8 +3025,8 @@
         {
           "label": "第十三章 · 贝尔纯态的球心混态边缘与盲区分解",
           "label_en": "Chapter 13 · Maximally mixed Bell marginals and blind-spot sectors",
-          "href": "../zh/ch13-entanglement-and-chsh.html#sec-bell-local-zero",
-          "href_en": "../en/ch13-entanglement-and-chsh.html#sec-bell-local-zero"
+          "href": "../zh/ch13-s02-bell-states.html#sec-bell-local-zero",
+          "href_en": "../en/ch13-s02-bell-states.html#sec-bell-local-zero"
         },
         {
           "label": "第八章 · 相干删除相对熵与熵产生恒等式",
@@ -3437,8 +3437,8 @@
         {
           "label": "第十三章 · 局域边缘扇区与关联扇区的正交分解及边缘盲区定理",
           "label_en": "Chapter 13 · Orthogonal split of local-marginal and correlation sectors",
-          "href": "../zh/ch13-entanglement-and-chsh.html#thm-local-correlation-sectors",
-          "href_en": "../en/ch13-entanglement-and-chsh.html#thm-local-correlation-sectors"
+          "href": "../zh/ch13-s01-local-and-correlation.html#thm-local-correlation-sectors",
+          "href_en": "../en/ch13-s01-local-and-correlation.html#thm-local-correlation-sectors"
         },
         {
           "label": "Blueprint · ConceptDynamics/InformationEscape/EscapePairs",
