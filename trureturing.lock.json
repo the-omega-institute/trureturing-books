@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "dced13146f8cf58712909e548dafb29196846343",
-  "pinned_at": "2026-11-18T23:25:03Z",
+  "commit": "21417d1d3ec9ee39711efa80bda1c8649b50170b",
+  "pinned_at": "2026-11-18T23:56:01Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6169,9 +6169,17 @@
       "module": "D5/S3/TotalVariation/ParryFirstReturn",
       "name": "D5.S3.TotalVariation.ParryFirstReturn.actual_first_return_system",
       "kind": "theorem",
-      "statement_id": "sha256:c0a36482d676bb3916240d58945aebd74c4dd371419b3fecae75835330b875bb",
-      "line": 417,
+      "statement_id": "sha256:132af6fdc0bd6c6c91088f4e0d0823f870f0fca5cf1f3825aee17b0171fd3f2a",
+      "line": 418,
       "signature": "theorem actual_first_return_system (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
+    },
+    "D5/S3/TotalVariation/ParryFirstReturn.return_time_cylinder_probability": {
+      "module": "D5/S3/TotalVariation/ParryFirstReturn",
+      "name": "D5.S3.TotalVariation.ParryFirstReturn.return_time_cylinder_probability",
+      "kind": "theorem",
+      "statement_id": "sha256:132af6fdc0bd6c6c91088f4e0d0823f870f0fca5cf1f3825aee17b0171fd3f2a",
+      "line": 832,
+      "signature": "theorem return_time_cylinder_probability (hk : 2 ≤ k) (e : (Bool × RelationPath k) ≃ᵐ ResetPath k) (μ : ProbabilityMeasure (RelationPath k)) (hsuffix : ∀ (z : Bool × RelationPath k) (t : ℤ), let j"
     },
     "D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law": {
       "module": "D5/S3/TotalVariation/ParryResetLaw",
