@@ -547,6 +547,24 @@ $$
 埃利策定理见 S. Elitzur（*Phys. Rev. D* **12**, 3978–3982, 1975, DOI `10.1103/PhysRevD.12.3978`）；格点阿贝尔希格斯—基布尔模型中的严格证明见 G. F. De Angelis、D. de Falco 与 F. Guerra（*Phys. Rev. D* **17**, 1624–1628, 1978, DOI `10.1103/PhysRevD.17.1624`）。
 :::
 
+强耦合展开的第一步与格点无关：它是 $\mathbb{F}_2$ 上任意关联矩阵都满足的一个恒等式，已在所钉仓库冻结。
+
+::: {.proposition #prop-ch39-z2-high-temperature-expansion title="$\mathbb{F}_2$ 上的高温展开：对链求和只留下边界为给定闭路的小方格集合" lean="D5/S3/StatisticalMechanics/ZTwoHighTemperatureExpansion.sum_sgn_mul_prod_one_add_eq"}
+设 $E$、$P$ 是有限集，$M$ 是以 $P$ 为行、$E$ 为列的 $\mathbb{F}_2$ 矩阵，$R$ 是交换环，$t: P \to R$，$c \in \mathbb{F}_2^E$。记 $\operatorname{sgn}(0) = 1$、$\operatorname{sgn}(1) = -1$（取值在 $R$ 中）。则
+
+$$
+\sum_{\sigma \in \mathbb{F}_2^E}\operatorname{sgn}(c \cdot \sigma)\prod_{p \in P}\left(1 + t_p\operatorname{sgn}\left((M\sigma)_p\right)\right) = 2^{\lvert E\rvert}\sum_{S:\,M^{\mathsf T}S = c}\ \prod_{p:\,S_p \neq 0}t_p,
+$$
+
+右端对满足 $M^{\mathsf T}S = c$ 的 $S \in \mathbb{F}_2^P$ 求和。
+:::
+
+::: proof
+把乘积按 $S \in \mathbb{F}_2^P$ 展开：$\prod_p\left(1 + t_p\operatorname{sgn}(x_p)\right) = \sum_S\left(\prod_{p:\,S_p \neq 0}t_p\right)\operatorname{sgn}(S \cdot x)$，这里用了 $\operatorname{sgn}(a + b) = \operatorname{sgn}(a)\operatorname{sgn}(b)$。取 $x = M\sigma$，则 $S \cdot (M\sigma) = (M^{\mathsf T}S) \cdot \sigma$。再对 $\sigma$ 求和：$\sum_\sigma\operatorname{sgn}(v \cdot \sigma) = \prod_{e \in E}\left(1 + \operatorname{sgn}(v_e)\right)$，$v = 0$ 时为 $2^{\lvert E\rvert}$，否则有一个因子是 $1 + (-1) = 0$；取 $v = c + M^{\mathsf T}S$。这一步不需要 $R$ 是整环。完整证明由 Lean 内核检查。
+:::
+
+读法（手工推导）：$E$ 为链、$P$ 为小方格，$M_{pe} = 1$ 当且仅当链 $e$ 在小方格 $p$ 的边界上；$\sigma_e \in \mathbb{F}_2$ 给出链变量 $\operatorname{sgn}(\sigma_e) = \pm 1$，小方格的值是 $\operatorname{sgn}((M\sigma)_p)$，$S$ 是小方格集合，$M^{\mathsf T}S$ 是它模 $2$ 的边界。由 $e^{\beta_p\sigma} = \cosh\beta_p\,(1 + \tanh\beta_p\,\sigma)$（$\sigma = \pm 1$）取 $t_p = \tanh\beta_p$：$c = 0$ 给出配分函数 $Z = 2^{\lvert E\rvert}\prod_p\cosh\beta_p\sum_{\partial S = 0}\prod_{p \in S}\tanh\beta_p$；$c$ 取闭路 $C$ 的指示向量给出 $Z\,\mathbb{E}[W_C]$，求和换成 $\partial S = C$；$C$ 模 $2$ 不是边界时右端是空和，$\mathbb{E}[W_C] = 0$。下面三处用到它：[@rem-ch39-strong-coupling-higher-dimensions] 第 1 条的证明，[@rem-ch39-wegner-duality-finite-identity] 第 1、3 条；各小方格可以带不同的 $\beta_p$，例如 [@rem-ch39-hamiltonian-limit-kinetic-laplacian] 中的 $\beta_t$ 与 $\beta_s$。
+
 二维的面积律对一切 $\beta$ 精确成立；在三维与四维，能证明的是强耦合端：
 
 ::: {.remark #rem-ch39-strong-coupling-higher-dimensions title="三维及更高维：强耦合首项与已知的相图（手工推导与文献结果）"}
@@ -558,7 +576,7 @@ $$
    \mathbb{E}[W_C] = t^A\left(1 + c_1t^4 + O(t^6)\right),
    $$
 
-   $c_1$ 是恰有一个面属于 $S_0$ 的单位立方体的个数（$S_0$ 所在平面不是盒子表面时 $c_1 = 2A$，在盒子表面上时 $c_1 = A$）。证明：由 $e^{\beta\sigma} = \cosh\beta\,(1 + t\sigma)$ 展开并对链求和，$\mathbb{E}[W_C] = \left(\sum_{\partial S = C}t^{\lvert S\rvert}\right)/\left(\sum_{\partial S = 0}t^{\lvert S\rvert}\right)$，$S$ 取遍小方格集合（$\mathbb{Z}/2$ 系数）。盒子可缩，闭的 $S$ 恰为唯一的立方体集合 $Q$ 的边界 $\partial Q$，以 $C$ 为边界的 $S$ 恰为 $S_0 \triangle \partial Q$，且 $\lvert S_0 \triangle \partial Q\rvert = A + \lvert\partial Q\rvert - 2\lvert S_0 \cap \partial Q\rvert$。设 $S_0$ 水平。沿每一竖列立方体，$\partial Q$ 含偶数个水平面，其中至多一个属于 $S_0$，所以每列对 $\lvert\partial Q \setminus S_0\rvert - \lvert\partial Q \cap S_0\rvert$ 的水平贡献非负；竖直面都不属于 $S_0$，而 $Q \ne \varnothing$ 时某一层的横截面非空，其周长至少为 $4$，等号当且仅当 $Q$ 是一个立方体。所以 $Q \ne \varnothing$ 时 $\lvert\partial Q\rvert - 2\lvert S_0 \cap \partial Q\rvert \ge 4$，等号当且仅当 $Q$ 是恰有一个面属于 $S_0$ 的单个立方体；这个量总是偶数，其余情形至少为 $6$，分母中 $Q \ne \varnothing$ 的项为 $O(t^6)$。特别地，$S_0$ 是以 $C$ 为边界的唯一最小曲面，首项是最小面积铺砌项 $t^A = w^A$，修正的相对量级为 $t^4$。
+   $c_1$ 是恰有一个面属于 $S_0$ 的单位立方体的个数（$S_0$ 所在平面不是盒子表面时 $c_1 = 2A$，在盒子表面上时 $c_1 = A$）。证明：由 $e^{\beta\sigma} = \cosh\beta\,(1 + t\sigma)$ 展开并对链求和（[@prop-ch39-z2-high-temperature-expansion]），$\mathbb{E}[W_C] = \left(\sum_{\partial S = C}t^{\lvert S\rvert}\right)/\left(\sum_{\partial S = 0}t^{\lvert S\rvert}\right)$，$S$ 取遍小方格集合（$\mathbb{Z}/2$ 系数）。盒子可缩，闭的 $S$ 恰为唯一的立方体集合 $Q$ 的边界 $\partial Q$，以 $C$ 为边界的 $S$ 恰为 $S_0 \triangle \partial Q$，且 $\lvert S_0 \triangle \partial Q\rvert = A + \lvert\partial Q\rvert - 2\lvert S_0 \cap \partial Q\rvert$。设 $S_0$ 水平。沿每一竖列立方体，$\partial Q$ 含偶数个水平面，其中至多一个属于 $S_0$，所以每列对 $\lvert\partial Q \setminus S_0\rvert - \lvert\partial Q \cap S_0\rvert$ 的水平贡献非负；竖直面都不属于 $S_0$，而 $Q \ne \varnothing$ 时某一层的横截面非空，其周长至少为 $4$，等号当且仅当 $Q$ 是一个立方体。所以 $Q \ne \varnothing$ 时 $\lvert\partial Q\rvert - 2\lvert S_0 \cap \partial Q\rvert \ge 4$，等号当且仅当 $Q$ 是恰有一个面属于 $S_0$ 的单个立方体；这个量总是偶数，其余情形至少为 $6$，分母中 $Q \ne \varnothing$ 的项为 $O(t^6)$。特别地，$S_0$ 是以 $C$ 为边界的唯一最小曲面，首项是最小面积铺砌项 $t^A = w^A$，修正的相对量级为 $t^4$。
 2. **数值核对（`NUM`）。** 精确多项式：单个立方体上 $\mathbb{E}[W] = \frac{t + t^5}{1 + t^6}$；$2 \times 2 \times 1$ 盒子表面上 $A = 4$ 为 $t^4 + 4t^8 + 7t^{12} + \cdots$；$2 \times 2 \times 2$ 盒子中间平面上 $A = 1, 2, 4$ 分别为 $t + 2t^5 - 2t^7 + \cdots$、$t^2 + 4t^6 - 2t^8 + \cdots$、$t^4 + 8t^8 + 26t^{12} + \cdots$；$3 \times 3 \times 2$ 与 $2 \times 3 \times 3$ 盒子内部平面上 $A = 1, 2, 3$ 的 $c_1$ 也与第 1 条一致。
 3. **一般维数与一般群（文献结果）。** K. Osterwalder 与 E. Seiler（*Ann. Phys.* **110**, 440–471, 1978, DOI `10.1016/0003-4916(78)90039-8`）对紧规范群的格点规范理论证明了强耦合（小 $\beta$）展开的收敛，并在小 $\beta$ 时于任意维数给出威尔逊圈的面积律上界；其精确条件（表示、界的形式）见原文，本书不复述。强耦合展开的系统论述见 J.-M. Drouffe 与 J.-B. Zuber（*Phys. Rep.* **102**, 1–119, 1983, DOI `10.1016/0370-1573(83)90034-0`）。
 4. **小 $\beta$ 的面积律不一定延续到一切 $\beta$（文献结果）。** 四维 $\mathrm{U}(1)$ 在大 $\beta$ 处存在不禁闭的相：A. H. Guth（*Phys. Rev. D* **21**, 2291–2307, 1980, DOI `10.1103/PhysRevD.21.2291`）；J. Fröhlich 与 T. Spencer（*Commun. Math. Phys.* **83**, 411–454, 1982, DOI `10.1007/BF01213610`）。三维 $\mathrm{U}(1)$ 对一切 $\beta$ 禁闭：M. Göpfert 与 G. Mack（*Commun. Math. Phys.* **82**, 545–606, 1982, DOI `10.1007/BF01961240`）。三维 $\mathbb{Z}_2$ 规范理论经对偶与三维伊辛模型对应，有相变：F. J. Wegner（*J. Math. Phys.* **12**, 2259–2272, 1971, DOI `10.1063/1.1665530`）。
@@ -619,7 +637,7 @@ $P$ 为空间片上的规范平均 $(P\psi)(X) = \int\psi(X^g)\,\mathrm{d}g$，$
    Z_G(\beta) = 2^{3N - 1}(\cosh\beta)^{3N}e^{-3NK}\sum_{\varepsilon \in \{0, 1\}^3}Z_I^{\varepsilon}(K).
    $$
 
-   证明：由 $e^{\beta\sigma} = \cosh\beta\,(1 + t\sigma)$，$t = \tanh\beta$，对链求和得 $Z_G = 2^{3N}(\cosh\beta)^{3N}\sum_{S \in \mathcal{Z}_2}t^{\lvert S\rvert}$，$\mathcal{Z}_2$ 为每条链都属于其中偶数个小方格的小方格集合（$\mathbb{Z}/2$ 系数的 $2$-闭链）。伊辛一侧，扇区 $\varepsilon$ 中 $s$ 的不满足键的集合是 $\delta s + D_\varepsilon$（模 $2$），$\delta s$ 为两侧自旋不同的键，$D_\varepsilon$ 为反周期方向的接缝平面之和；$s \mapsto \delta s$ 是到立方体集合之边界构成的 $\mathcal{B}_2$ 上的二对一满射，而 $H_2(T^3; \mathbb{Z}/2) \cong (\mathbb{Z}/2)^3$ 由三个坐标平面生成，所以 $\mathcal{Z}_2$ 是八个陪集 $D_\varepsilon + \mathcal{B}_2$ 的不交并，$\sum_\varepsilon Z_I^{\varepsilon} = 2e^{3NK}\sum_{S \in \mathcal{Z}_2}e^{-2K\lvert S\rvert}$。八个扇区都需要：把 $\sum_\varepsilon Z_I^{\varepsilon}$ 换成 $2Z_I^{0}$，在 $2 \times 2 \times 2$ 环面上 $\beta = 0.761$ 时得到的值只有 $Z_G$ 的 $0.493$ 倍（`NUM`）。
+   证明：由 $e^{\beta\sigma} = \cosh\beta\,(1 + t\sigma)$，$t = \tanh\beta$，对链求和（[@prop-ch39-z2-high-temperature-expansion]，$c = 0$）得 $Z_G = 2^{3N}(\cosh\beta)^{3N}\sum_{S \in \mathcal{Z}_2}t^{\lvert S\rvert}$，$\mathcal{Z}_2$ 为每条链都属于其中偶数个小方格的小方格集合（$\mathbb{Z}/2$ 系数的 $2$-闭链）。伊辛一侧，扇区 $\varepsilon$ 中 $s$ 的不满足键的集合是 $\delta s + D_\varepsilon$（模 $2$），$\delta s$ 为两侧自旋不同的键，$D_\varepsilon$ 为反周期方向的接缝平面之和；$s \mapsto \delta s$ 是到立方体集合之边界构成的 $\mathcal{B}_2$ 上的二对一满射，而 $H_2(T^3; \mathbb{Z}/2) \cong (\mathbb{Z}/2)^3$ 由三个坐标平面生成，所以 $\mathcal{Z}_2$ 是八个陪集 $D_\varepsilon + \mathcal{B}_2$ 的不交并，$\sum_\varepsilon Z_I^{\varepsilon} = 2e^{3NK}\sum_{S \in \mathcal{Z}_2}e^{-2K\lvert S\rvert}$。八个扇区都需要：把 $\sum_\varepsilon Z_I^{\varepsilon}$ 换成 $2Z_I^{0}$，在 $2 \times 2 \times 2$ 环面上 $\beta = 0.761$ 时得到的值只有 $Z_G$ 的 $0.493$ 倍（`NUM`）。
 2. **矢高的读法。** 记小方格矢高 $v_p = 1 - \sigma_p$、对偶键矢高 $u_b = 1 - J_bs\,s'$，两者都取值于 $\{0, 2\}$。第 1 条等价于
 
    $$

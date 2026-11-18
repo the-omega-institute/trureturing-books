@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "ecbe7cf4578750ce655d46da8a7c4c7425a3b884",
-  "pinned_at": "2026-11-17T23:24:33Z",
+  "commit": "621ecdf71780ec39cfb9b4a002f89b17aa534784",
+  "pinned_at": "2026-11-18T01:26:38Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -3233,7 +3233,7 @@
       "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
       "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.common_plane",
       "kind": "theorem",
-      "statement_id": "sha256:17ace9e49ed128f58b14260ed84b9c5c2277248d1c815efe523e4d4a6328e26b",
+      "statement_id": "sha256:bd01854fd1427c53b70dc412066deb7bfefe3b5933e99129dad8724498e9e016",
       "line": 951,
       "signature": "theorem common_plane (X : Fin 3 → Matrix (Fin 3) (Fin 5) ℂ) (hX : LinearIndependent ℂ X) (hinj : Function.Injective (stack X).mulVecLin) : ∃ L : Submodule ℂ (Fin 3 → ℂ), finrank ℂ L = 2 ∧ ∀ T : Matrix (Fin 3) (Fin 3) ℂ, T.IsHermitian → (stack X)ᴴ * Matrix.kronecker T (1 : Matrix (Fin 3) (Fin 3) ℂ) * stack X = 0 → ∀ u ∈ L, ∀ v ∈ L, star u ⬝ᵥ (T *ᵥ v) = 0"
     },
@@ -3241,7 +3241,7 @@
       "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
       "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.compression",
       "kind": "def",
-      "statement_id": "sha256:17ace9e49ed128f58b14260ed84b9c5c2277248d1c815efe523e4d4a6328e26b",
+      "statement_id": "sha256:bd01854fd1427c53b70dc412066deb7bfefe3b5933e99129dad8724498e9e016",
       "line": 42,
       "signature": "def compression {a b : ℕ} (X : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (T : Matrix (Fin 3) (Fin 3) ℂ)"
     },
@@ -3249,7 +3249,7 @@
       "module": "D5/S3/Quantum/Algebra/CommonCoefficientPlane",
       "name": "D5.S3.Quantum.Algebra.CommonCoefficientPlane.compression_eq_sum",
       "kind": "theorem",
-      "statement_id": "sha256:17ace9e49ed128f58b14260ed84b9c5c2277248d1c815efe523e4d4a6328e26b",
+      "statement_id": "sha256:bd01854fd1427c53b70dc412066deb7bfefe3b5933e99129dad8724498e9e016",
       "line": 50,
       "signature": "theorem compression_eq_sum {a b : ℕ} (X : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (T : Matrix (Fin 3) (Fin 3) ℂ) : compression X T = ∑ r, ∑ s, T r s • ((X r)ᴴ * X s)"
     },
@@ -3369,7 +3369,7 @@
       "module": "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation",
       "name": "D5.S3.Quantum.Algebra.NativeWidthAtMostThreeRefutation.claim",
       "kind": "def",
-      "statement_id": "sha256:f696694523af91857b7b4cd6f118727f1d6a43446cbdf6f0cd6d418faad9823a",
+      "statement_id": "sha256:e8aab5c73a170cd76e602987788fda74fe155f254deabe8fe8dc719350d193a2",
       "line": 212,
       "signature": "def claim : Prop"
     },
@@ -3377,7 +3377,7 @@
       "module": "D5/S3/Quantum/Algebra/NativeWidthAtMostThreeRefutation",
       "name": "D5.S3.Quantum.Algebra.NativeWidthAtMostThreeRefutation.positive_scalar_obstruction",
       "kind": "theorem",
-      "statement_id": "sha256:f696694523af91857b7b4cd6f118727f1d6a43446cbdf6f0cd6d418faad9823a",
+      "statement_id": "sha256:e8aab5c73a170cd76e602987788fda74fe155f254deabe8fe8dc719350d193a2",
       "line": 977,
       "signature": "theorem positive_scalar_obstruction (M : MatM 3) (N : MatN 3) (lambda : ℝ) (hlambda : 0 < lambda) : ¬ ((∑ r, Matrix.kronecker (M r) (N r))ᴴ * (∑ r, Matrix.kronecker (M r) (N r)) = (lambda : ℂ) • (1 : Matrix (Fin 5 × Fin 3) (Fin 5 × Fin 3) ℂ))"
     },
@@ -5281,7 +5281,7 @@
       "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeRectangularBound",
       "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.NativeRectangularBound.bound",
       "kind": "theorem",
-      "statement_id": "sha256:f905171e6d60ef935199ac6d507d1081c2b56f0e18415b7c853307c3c5655de5",
+      "statement_id": "sha256:5b023a6556bb6d0da4f02879ab32d472716373c11ef0f9b585460b0084028fd1",
       "line": 698,
       "signature": "theorem bound {a b c d : ℕ} (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin d) (Fin c) ℂ) (lambda : ℝ) (hlambda : 0 < lambda) (hab : 3 * a < 2 * b) (hF : (∑ r, Matrix.kronecker (M r) (N r))ᴴ * (∑ r, Matrix.kronecker (M r) (N r)) = (lambda : ℂ) • (1 : Matrix (Fin b × Fin c) (Fin b × Fin c) ℂ)) : 2 * c ≤ d"
     },
@@ -5836,6 +5836,14 @@
       "statement_id": "sha256:39bcfa26c19a9b2e02629b0d2cfac639d73a751e262b2e279fdc6550c39d3fdf",
       "line": 259,
       "signature": "theorem separable_cone_residual_witness {R : CompositeMatrix m n} (hR : R.PosSemidef) : let P"
+    },
+    "D5/S3/StatisticalMechanics/ZTwoHighTemperatureExpansion.sum_sgn_mul_prod_one_add_eq": {
+      "module": "D5/S3/StatisticalMechanics/ZTwoHighTemperatureExpansion",
+      "name": "D5.S3.StatisticalMechanics.ZTwoHighTemperatureExpansion.sum_sgn_mul_prod_one_add_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:1007e54a32b81432975d2a2398584ad4e7bd887f2b8bc12276738d1ecd71ac96",
+      "line": 115,
+      "signature": "theorem sum_sgn_mul_prod_one_add_eq {E P : Type*} [Fintype E] [DecidableEq E] [Fintype P] [DecidableEq P] (M : Matrix P E (ZMod 2)) (t : P → R) (c : E → ZMod 2) : ∑ σ : E → ZMod 2, sgn R (c ⬝ᵥ σ) * ∏ p, (1 + t p * sgn R ((M *ᵥ σ) p)) = 2 ^ Fintype.card E * ∑ S ∈ Finset.univ.filter (fun S : P → ZMod 2 => Mᵀ *ᵥ S = c), ∏ p ∈ Finset.univ.filter (fun p => S p ≠ 0), t p"
     },
     "D5/S3/Topology/QuandleMarkovColoring.ClosedColorings": {
       "module": "D5/S3/Topology/QuandleMarkovColoring",
