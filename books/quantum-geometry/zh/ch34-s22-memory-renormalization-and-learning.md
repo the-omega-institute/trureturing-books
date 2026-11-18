@@ -45,7 +45,7 @@ $$
 
    因此任何盲目粗粒化都会面临推高目标混杂度的风险；区别于 `refinement_impurity_monotone` 的不等式本身，由 Gini 混杂度的严格凹性可知，粗化保持零附加 Gini 混杂度损失（上式取等）当且仅当每一粗纤维内被合并的各正概率细子纤维共享完全一致的目标后验分布（预测充分统计条件，也可由下文的精确恒等式导出）。
 
-   **二次评分的文献与适用范围。** Gneiting–Raftery 的 [Example 1](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf#page=5)（DOI: `10.1198/016214506000001437`）将多类别二次评分的散度识别为后验概率向量之间的平方欧氏距离。Bröcker 的 [§3、式 (15) 与附录 C](https://arxiv.org/pdf/0806.0813v2#page=7)（期刊 DOI: `10.1002/qj.456`）给出预测充分性下的期望散度分解；其 §2 明确假设目标值集合有限。这些结果解释了有限目标情形中“没有额外二次预测损失”与“后验一致”的联系，不把可靠性、充分性与确定性混为一谈。Steinwart–Ziegel 的[定理 1.1、式 (4)](https://arxiv.org/html/1712.05279#S1.Thmthm1)（期刊 DOI `10.1016/j.acha.2019.11.005`）把可测核的期望评分差写成核均值嵌入距离平方的一半。对可数离散目标，取两目标相同则为 1、否则为 0 的核，均值嵌入就是各目标的概率坐标。PMF 的正质量支撑可数，其目标像也可数，因此可在这个目标像上使用该核。下文给出对应的概率质量函数恒等式。
+   **二次评分的文献与适用范围。** Gneiting–Raftery 的 [Example 1](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf#page=5)（DOI: `10.1198/016214506000001437`）将多类别二次评分的散度识别为后验概率向量之间的平方欧氏距离。Bröcker 的 [§3、式 (15) 与附录 C](https://arxiv.org/pdf/0806.0813v2#page=7)（期刊 DOI: `10.1002/qj.456`）给出预测充分性下的期望散度分解；其 §2 明确假设目标值集合有限。这些结果解释了有限目标情形中“没有额外二次预测损失”与“后验一致”的联系，不把可靠性、充分性与确定性混为一谈。Steinwart–Ziegel 的[定理 1.1、式 (4)](https://arxiv.org/html/1712.05279#S1.Thmthm1)（期刊 DOI `10.1016/j.acha.2019.11.005`）对可测正定核，在两分布下 $\sqrt{k(x,x)}$ 均可积时，把期望评分差写成核均值嵌入距离平方的一半。对可数离散目标，取两目标相同则为 1、否则为 0 的核，均值嵌入就是各目标的概率坐标。PMF 的正质量支撑可数，其目标像也可数，因此可在这个目标像上使用该核。下文给出对应的概率质量函数恒等式。
 
    **粗化损失的精确大小（[`conditional_gini_exact_defect`](lean:D5/S3/ConceptDynamics/Information/ConditionalGiniDefect.conditional_gini_exact_defect)）。** 令 $r:X	o D$ 为细读出，$f:D	o C$ 为粗化，$t:X	o A$ 为目标。对同一个任意概率质量函数，记 $M(d)$ 为细纤维质量，$P_d(a)$ 与 $Q_c(a)$ 分别为细、粗纤维中的目标后验。每个后验坐标按联合质量除以对应纤维质量定义，零质量时取 $0$。若 $I(s)$ 表示读出 $s$ 的条件逻辑混杂度，则有
    $$
