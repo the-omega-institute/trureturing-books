@@ -1,6 +1,6 @@
 # 39.5.8 Parry Stationary Law, Escape-Pair Counting, and the Fractal Horizon Entropy Problem {#sec-ch39-p2e-entropy}
 
-Before discussing entropy, distinguish three levels: finite-state Markov laws, measurable coordinate reconstruction of complete paths on integer time, and entropy comparison in ergodic theory. The first two have corresponding Lean-verified results. Maximal entropy and induced-return entropy below remain literature results, while fractal entanglement scaling remains an open problem.
+Before discussing entropy, distinguish three levels: finite-state Markov laws, measurable coordinate reconstruction of complete paths on integer time, and entropy comparison over all invariant probability measures. The first two have corresponding Lean-verified results. Below we derive maximality and uniqueness as an application on the same bilateral unsigned law, retaining topological-entropy identification and induced-return entropy within their separate literature scopes. Fractal entanglement scaling remains an open problem.
 
 On the Markov-chain side, for each integer order $k \ge 2$, let $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$ be the reciprocal Perron parameter. On the signed run-length state space $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ recording an absolute sign bit together with the current run length of `1`s, define the right-eigenvector suffix weights $w_j = \operatorname{suffixWeight}(k, p, j) = \sum_{a=0}^{k-j-1} p^{a+1}$, normalizer $Z_k = \sum_{j=0}^{k-1} p^j w_j$, sign involution $\operatorname{flip}(b, j) = (!b, j)$, and reset transition kernel $P_k = \operatorname{kernel}(k, p)$: from $s = (b, j)$, the chain flips sign and resets to $(!b, 0)$ with probability $p / w_j$, advances to $(b, j + 1)$ with probability $p\, w_{j+1} / w_j$ whenever $j + 1 < k$, and assigns probability $0$ to all other transitions. Define the signed stationary distribution
 
@@ -211,7 +211,7 @@ The existential quantifier chooses $e,\mu,\nu$ together; the statement does not 
 
 The cylinder formulas retain their distinct source forms: the signed formula applies $\operatorname{ofReal}$ once to the entire real product, while the unsigned formula applies it to each factor before multiplication. All entries of $\pi_k,P_k,q,Q$ here are nonnegative, so ordinary real probabilities are the initial mass times the successive transition probabilities. At $m=0$ the formulas give the one-coordinate masses $\pi_k(w_0)$ and $q_{v_0}$. Any word containing a zero transition, including words forbidden by the corresponding reset rules, has mass $0$. Every integer $\ell$ is covered, including negative times.
 
-Uniqueness of an extension with prescribed finite-dimensional distributions determines the path law for those distributions. We can now ask how probability correlations between two observation windows decay as the windows move apart along the time axis. The next result places the stationary joint law, mixing, and the obstruction to sign selection under a single set of existential quantifiers. Full Kolmogorov–Sinai entropy, entropy comparison over all invariant competitors, uniqueness in the maximal-entropy equality case, and Abramov's formula retain the hypotheses and evidence status of the literature remark below.
+Uniqueness of an extension with prescribed finite-dimensional distributions determines the path law for those distributions. We can now ask how probability correlations between two observation windows decay as the windows move apart along the time axis. The next result places the stationary joint law, mixing, and the obstruction to sign selection under a single set of existential quantifiers. The application in [@rem-ch39-p2e-abramov-literature] separately derives Kolmogorov–Sinai entropy comparison against all invariant competitors and uniqueness of the maximizer; topological-entropy identification and Abramov's formula there retain their own literature hypotheses.
 
 Retain $X_k,Y_k,S=\operatorname{State}(k)$, $\pi_k$, $F_e$, and the fair anchor measure $u=\operatorname{fairAnchor}$ from above. Throughout this passage, $P_k=\operatorname{kernel}(k,\operatorname{parryParameter}(k))$ is the transition matrix on **signed states**; $Q$ continues to denote the **unsigned suffix** kernel in the preceding law. For a finite word $w:\operatorname{Fin}(m+1)\to S$, write
 
@@ -310,16 +310,153 @@ The existential quantifier chooses one triple $e,\mu,\nu$ carrying all conclusio
 
 Alongside this stationary reset law stand two independent formal quantitative bounds governing boundary collisions and observational blind spots: first, the boundary cylinder inequality [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound), which proves for any finite collection $C$ of $n \ge 1$ positive run-length pairs (with each `1`-run $< k$ and encoded length at most $R$) that the left- and right-boundary selected-prefix stationary masses are bounded above by $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ and $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$ respectively (an exact probability inequality, not a Hausdorff-dimension or entropy formula); second, continuing the ledger of [Chapter 38](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5, the finite-arena information-escape criterion [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos), which proves on a nondegenerate finite arena of cardinality $q \ge 2$ that the set $E(S)$ of ordered distinct state pairs indistinguishable under catalog $S$ defines a normalized rational escape rate $e(S) = |E(S)|/[q(q-1)]$, and that observation $i$ strictly lowers escape rate if and only if its unique-capture count satisfies $|U_i| > 0$ (with exact drop $|U_i|/[q(q-1)]$). Rational ordered-pair escape rate $e(S)$, von Neumann page entropy $S(\sigma_b)$, and infinite-shift ergodic entropy are distinct mathematical quantities and are never conflated here.
 
-::: {.remark #rem-ch39-p2e-abramov-literature title="Literature Result: Parry's Maximal-Entropy Markov Measure and Abramov's Induced-Return Entropy Formula (Literature result, not formalized in this book)"}
-**Literature result, not formalized in this book.** As recounted in M. Pollicott et al.'s survey *The mathematical research of William Parry FRS* ([institutional PDF](https://wrap.warwick.ac.uk/id/eprint/682/1/WRAP_pollicott_Parry_research.pdf), §2.3, pp. 323–324; DOI: [10.1017/S0143385708000102](https://doi.org/10.1017/S0143385708000102)), W. Parry (*Trans. Amer. Math. Soc.* **112**, 1964, 55–66) proved that an aperiodic two-sided subshift of finite type carries a unique measure of maximal entropy, which is an intrinsic Markov measure. For the $1^K$-free subshift considered here, maximality compares all shift-invariant Borel probability measures on that subshift; competitors need not be Markov or ergodic. Uniqueness means that only the Parry measure attains the maximum, while every other invariant probability measure has strictly smaller entropy. With natural logarithms, the topological (and maximal Kolmogorov–Sinai) entropy per step is $\ln\beta_K = -\ln p$, where $p = \beta_K^{-1}$; dividing by $\ln 2$ gives the value in bits, $h_{\mathrm{top}}(\Sigma_K) = \log_2 \beta_K\;\text{bits/step}$ (`NUM`: approximately $0.69424$, $0.87915$, and $0.94678\;\text{bits/step}$ at $K = 2, 3, 4$, rising monotonically toward $1\;\text{bit/step}$ as $\beta_K \nearrow 2$).
-
-Separately, L. M. Abramov (*Dokl. Akad. Nauk SSSR* **128**, 1959, 647–650) proved that for a probability-preserving ergodic system $(X, \mathcal{B}, \mu, T)$ and a measurable return set $A \in \mathcal{B}$ with $\mu(A) > 0$, the first-return induced transformation $T_A$ under normalized conditional measure $\mu_A$ satisfies
+::: {.remark #rem-ch39-p2e-abramov-literature title="Maximal-Entropy Application of the Actual Bilateral Parry Law and Separate Literature Boundaries"}
+**The application and its objects.** Fix any integer order $K\ge2$ (the preceding $k=K$), and put $p=\operatorname{parryParameter}(K)$, $X_K=\operatorname{RelationPath}(K)$, and $T=\operatorname{relationShift}$, so $(Tr)_t=r_{t+1}$. Take the joint witness $e,\mu,\nu$ from [@thm-ch39-p2e-native-bilateral-parry-law]; throughout, $\mu$ is that same unsigned probability law. For every Borel probability measure $\rho$ on $X_K$ with $T_*\rho=\rho$, the application below gives
 
 $$
-h_{\mu_A}(T_A) = \frac{h_\mu(T)}{\mu(A)}.
+\begin{aligned}
+h_{\mathrm{KS}}(\rho,T)&\le-\log p,\\
+h_{\mathrm{KS}}(\mu,T)&=-\log p,\\
+h_{\mathrm{KS}}(\rho,T)=-\log p
+&\quad\Longleftrightarrow\quad\rho=\mu,\\
+\rho\ne\mu&\quad\Longrightarrow\quad h_{\mathrm{KS}}(\rho,T)<-\log p.
+\end{aligned}
 $$
 
-Applying either literature theorem requires respecting its hypotheses and units: [@thm-ch39-p2e-parry-escape-laws] certifies the stochastic kernel and stationary weights on $\operatorname{State}(k)$ without formalizing Kolmogorov–Sinai shift entropy or Abramov's theorem in the inspected lock, and any induced-return calculation must keep entropy *per return* $h_{\mu_A}(T_A)$ distinct from entropy *per original step* $h_\mu(T)$ rather than transferring it by analogy to irreversible readouts or finite $p$-adic trees.
+Logarithms are natural, and the unit is nats per original step. Here $h_{\mathrm{KS}}$ is the supremum of entropy rates over all finite measurable partitions, initially regarded as an extended real number; the conclusion also proves that it is finite in this system. Competitors range over all invariant Borel probabilities, with no additional Markov, ergodicity, generation, entropy-limit, or uniqueness assumption. The signed extension $\nu$ helps construct $\mu$, while the entropy comparison takes place on the unsigned space $X_K$. The owning exposition is the [bilateral Parry law discussion](https://github.com/the-omega-institute/trureturing/blob/dev/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md). The cited theorem statement supplies coding, laws, and cylinders; its statement itself does not include this entropy conclusion.
+
+**From the actual suffix to a two-sided generator.** Set $J_t(r)=J_t^e(r)$, the second coordinate of $e(\mathrm{false},r)$ at integer time $t$. The nearest-zero characterization makes $J_t$ exactly the length of the true run immediately preceding $t$, independently of the sign anchor. On every admissible path,
+
+$$
+\begin{aligned}
+J_{t+1}(r)&=\begin{cases}
+0,&r_t=\mathrm{false},\\
+J_t(r)+1,&r_t=\mathrm{true},
+\end{cases}\\
+r_t=\mathrm{false}&\quad\Longleftrightarrow\quad J_{t+1}(r)=0.
+\end{aligned}
+$$
+
+The true branch automatically has $J_t+1<K$. For every $c\in\mathbb Z$, translation $(\theta_c r)_t=r_{t+c}$ preserves $X_K$ and satisfies $J_t(\theta_c r)=J_{t+c}(r)$. These are pathwise identities, including on paths of probability zero.
+
+Take the finite measurable partition $\mathcal P_j=\{r:J_0(r)=j\}$, $j\in\operatorname{Fin}K$. The measurable inverse of $T=\theta_1$ is $\theta_{-1}$. The space $X_K$ is a closed subset of the bilateral product of discrete Boolean spaces, with its Borel structure, so it is standard Borel. Every suffix cell is measurable. Conversely, the displayed identity recovers every relation-coordinate event from a translated zero-suffix cell. Thus **all integer translates** of $\mathcal P$ generate the entire Borel $\sigma$-algebra. The two-sided finite-generator theorem for invertible probability-preserving systems therefore gives
+
+$$
+h_{\mathrm{KS}}(\rho,T)=h_\rho(T,\mathcal P).
+$$
+
+The two-sided generator and integer-iterate suppliers are Marcel Morgenstern's [generator theorem](https://github.com/marcmorningstar/lean4-ergodic-theory/blob/040fec2e0ddf4fcba49af9f76c866d295308dd7f/ErgodicTheory/Entropy/GeneratorTheoremTwoSided.lean) and [integer iterates](https://github.com/marcmorningstar/lean4-ergodic-theory/blob/040fec2e0ddf4fcba49af9f76c866d295308dd7f/ErgodicTheory/Krieger/ZIterate.lean); attribution and licensing are recorded in the [entropy supplier note](https://github.com/the-omega-institute/trureturing/blob/dev/Library/Entropy/morgenstern2026ks.md). These are library sources, cited here without presenting them as newly frozen theorems of this book. A condition using only nonnegative iterates cannot replace this bilateral step.
+
+**Finite histories and the entropy rate.** For $n\ge0$ and $w\in(\operatorname{Fin}K)^n$, write
+
+$$
+\begin{aligned}
+A_{\ell,n}(w)&=\{r:\ J_{\ell+i}(r)=w_i\ (0\le i<n)\},\\
+m_n(w)&=\rho(A_{0,n}(w)),\\
+H_n&=-\sum_w m_n(w)\log m_n(w),\\
+c_n&=H_\rho(J_n\mid J_0,\ldots,J_{n-1}).
+\end{aligned}
+$$
+
+The empty history is the one-cell partition, so $H_0=0$ and $c_0=H_\rho(J_0)$. Zero-mass terms use $0\log0=0$. The finite partition chain rule gives $H_{n+1}=H_n+c_n$. Conditioning on more information cannot increase conditional entropy; stationarity of this same joint law then gives $c_{n+1}\le c_n$, without assuming that the competitor is Markov. Stationarity also makes $H_n$ subadditive, and the Fekete entropy-rate limit gives
+
+$$
+\begin{aligned}
+h_\rho(T,\mathcal P)&=\lim_{N\to\infty}\frac{H_N}{N},\\
+H_N&\le H_m+(N-m)c_m\quad(N\ge m),\\
+h_\rho(T,\mathcal P)&\le c_m\quad(m\ge0).
+\end{aligned}
+$$
+
+The second line bounds each summand in $H_N=H_m+\sum_{i=m}^{N-1}c_i$; the third follows by taking the limit. This connects the entropy rate to every finite history and derives existence of the limit rather than assuming it. The finite chain rule, conditioning, and limit suppliers appear in the library's [partition](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/Partition.lean), [conditioning](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/GeneratorConditioning.lean), and [entropy-rate](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/EntropyRate.lean) modules. Their partition conditional-entropy identities are distinct from the first-return formula stated separately below.
+
+**A KL defect for the same joint distribution.** Keep the original law's $Q=\operatorname{suffixKernel}(K)$ and $q_j=\operatorname{suffixLaw}(K,j)$, and set $R_j=w_j=\operatorname{suffixWeight}(K,p,j)$. The bounds and normalization in [@thm-ch39-p2e-parry-escape-laws] give $p>1/2$, $0<R_j\le1$, $R_0=1$, and nonnegative stochastic rows of $Q$. Exactly on the allowed edges $i\to j$, namely $j=0$ or the available $j=i+1$, we have $Q(i,j)>0$ and
+
+$$
+\log Q(i,j)=\log p+\log R_j-\log R_i.
+$$
+
+For any history length $n\ge1$, define two arrays on the finite index set $(w,j)$:
+
+$$
+\begin{aligned}
+a(w,j)&=\rho\bigl(A_{0,n}(w)\cap\{J_n=j\}\bigr),\\
+b(w,j)&=m_n(w)Q(w_{n-1},j).
+\end{aligned}
+$$
+
+Both arrays are nonnegative and sum to $1$. They satisfy $b(w,j)=0\Rightarrow a(w,j)=0$: a zero-mass history has only zero-mass extensions, and a zero kernel entry makes the forbidden extension event itself empty by the suffix recurrence. Absolute continuity therefore covers all histories, including zero-mass histories and forbidden transitions, under every competitor.
+
+The actual joint array has row masses $m_n(w)$ and next-suffix column masses $\rho(J_n=j)$; its last-history-suffix marginal is $\rho(J_{n-1}=i)$. Stationarity equates the last two marginals. Expand logarithms only where $a(w,j)>0$, defining zero terms to contribute zero. Then
+
+$$
+\begin{aligned}
+D(a\Vert b)
+&=\sum_{a(w,j)>0}a(w,j)\log\frac{a(w,j)}{b(w,j)}\\
+&=-c_n-\sum_{a(w,j)>0}a(w,j)\log Q(w_{n-1},j)\\
+&=-c_n-\log p.
+\end{aligned}
+$$
+
+The two expected $\log R$ terms cancel exactly because those marginals agree. [Finite Gibbs nonnegativity](lean:D5/S3/Divergence/GrandmotherTheorem.kl_divergence_nonneg) gives $D(a\Vert b)\ge0$, so for every $n\ge1$,
+
+$$
+h_{\mathrm{KS}}(\rho,T)\le c_n\le-\log p.
+$$
+
+This uses the actual history/next-suffix joint distribution throughout, with no substitution by separately chosen marginals.
+
+**Equality forces the original kernel after every history.** If $h_{\mathrm{KS}}(\rho,T)=-\log p$, the preceding inequalities force $c_n=-\log p$ and hence $D(a\Vert b)=0$ at every history length. [The Gibbs equality criterion](lean:D5/S3/Divergence/GibbsEquality.kl_divergence_eq_zero_iff) gives $a=b$ pointwise. Since $T$ is invertible and preserves $\rho$, every $\theta_\ell$ preserves $\rho$. Translation therefore gives, for all $\ell\in\mathbb Z$, $n\ge1$, words $w$, and destination suffixes $j$,
+
+$$
+\begin{aligned}
+&\rho\bigl(A_{\ell,n}(w)\cap\{J_{\ell+n}=j\}\bigr)\\
+&\qquad=\rho(A_{\ell,n}(w))Q(w_{n-1},j).
+\end{aligned}
+$$
+
+Dividing by a positive history mass identifies the conditional next-suffix distribution given that entire finite history as $Q(w_{n-1},\cdot)$. The undivided identity also retains zero histories. No infinite-past conditional-expectation formula is needed or asserted.
+
+**The original $\mu$ attains the bound.** Clause 5 of the original law directly gives, for every $\ell$, $n\ge1$, and word $w$,
+
+$$
+\mu(A_{\ell,n}(w))=q_{w_0}\prod_{i=0}^{n-2}Q(w_i,w_{i+1}).
+$$
+
+At $n=1$ the product is empty; words with zero transitions remain in the formula. Extending the word by one entry gives the preceding undivided transition identity, with the same initial mass $q$ and without constructing another candidate law. Thus for $\rho=\mu$, every KL defect at $n\ge1$ vanishes and $c_n=-\log p$. Monotonicity also gives $c_0\ge-\log p$, so the chain rule yields $H_N\ge N(-\log p)$. The established Fekete limit and universal upper bound now give $h_{\mathrm{KS}}(\mu,T)=-\log p$.
+
+**Rigidity from stationary marginals to the full law.** Continue to suppose that $\rho$ attains the bound. The length-one transition identity and stationarity imply that $u_j=\rho(J_0=j)$ satisfies $uQ=u$; the original law likewise has $qQ=q$. Uniqueness of this initial marginal need not be assumed. Every row has $Q(i,0)=p/R_i\ge1/2$, so put
+
+$$
+\begin{aligned}
+d_j&=\tfrac12\mathbf1_{\{j=0\}},\\
+U(i,j)&=2\bigl(Q(i,j)-d_j\bigr).
+\end{aligned}
+$$
+
+The kernel $U$ is nonnegative and stochastic. For any normalized stationary probability rows $u,v$, the common reset mass cancels, and [total-variation contraction under a stochastic channel](lean:D5/S3/TotalVariation/DataProcessing.total_variation_channel_le) gives
+
+$$
+\operatorname{TV}(u,v)
+=\tfrac12\operatorname{TV}(uU,vU)
+\le\tfrac12\operatorname{TV}(u,v).
+$$
+
+[Nonnegativity](lean:D5/S3/TotalVariation/Metric.total_variation_nonneg) and [the zero criterion](lean:D5/S3/TotalVariation/Metric.total_variation_eq_zero_iff) imply $u=v$, hence $u=q$. Starting from this common initial mass, induction on word length using the undivided transition identity gives agreement of $\rho$ and $\mu$ on all finite suffix cylinders at every integer origin. The cylinder for a length-zero window is the whole space and has mass $1$ under both laws.
+
+The identity $r_t=\mathrm{false}\Longleftrightarrow J_{t+1}=0$ makes each finite relation-bit window a measurable function of a finite suffix window. Equality of suffix cylinders therefore gives equality of all cylinders of the actual Boolean relation paths. [Bilateral Boolean cylinder uniqueness](lean:D5/S3/Observer/ProbabilisticClosure/TrajectoryLaws/TwelveStateGhost.visible_eq_of_cylinders) identifies the pushforward measures on $\mathrm{Bool}^{\mathbb Z}$; the measurable subtype embedding of $X_K$ then gives $\rho=\mu$. Conversely, equality with $\mu$ gives the attainment already proved. This establishes the equality criterion. In the extended-real order, the universal upper bound together with exclusion of equality gives the strict inequality for each $\rho\ne\mu$. This strictness is pointwise in the measure and supplies no common positive entropy gap for all distinct measures.
+
+**The general Parry theorem and topological entropy: literature scope.** The application establishes metric entropy $-\log p$, attainment, and rigidity for the actual system above. The general finite-type theorem and the topological-entropy identification retain their separate literature scope. M. Pollicott et al.'s survey *The mathematical research of William Parry FRS* ([institutional PDF](https://wrap.warwick.ac.uk/id/eprint/682/1/WRAP_pollicott_Parry_research.pdf), §2.3, pp. 323–324; DOI: [10.1017/S0143385708000102](https://doi.org/10.1017/S0143385708000102)) describes the unique intrinsic Markov measure of maximal entropy under a **primitive finite adjacency matrix, that is, irreducibility and aperiodicity**. Aperiodicity alone does not replace irreducibility. This section used that survey; for Parry's 1964 original paper (*Trans. Amer. Math. Soc.* **112**, 55–66; DOI: [10.1090/S0002-9947-1964-0161372-1](https://doi.org/10.1090/S0002-9947-1964-0161372-1)), only bibliographic information was checked, and the original text was not read.
+
+For the $1^K$-free subshift, the usual topological identification $h_{\mathrm{top}}(\Sigma_K)=\log\beta_K=-\log p$ remains a literature result here; the metric-entropy application does not serve as a separate proof of that identification. Dividing by $\log2$ gives $\log_2\beta_K\;\text{bits/step}$. Numerical evaluation `NUM` gives approximately $0.69424$, $0.87915$, and $0.94678\;\text{bits/step}$ at $K=2,3,4$, increasing monotonically toward $1\;\text{bit/step}$ as $\beta_K\nearrow2$.
+
+**Abramov's first-return formula: a separate literature result, not formalized in this book.** L. M. Abramov (*Dokl. Akad. Nauk SSSR* **128**, 1959, 647–650) proved that in a probability-preserving ergodic system $(X,\mathcal B,\eta,S)$, for a measurable return set $A\in\mathcal B$ with $\eta(A)>0$, the first-return time $\tau_A(x)=\min\{n\ge1:S^nx\in A\}$ is finite almost everywhere on $A$. With induced map $S_A(x)=S^{\tau_A(x)}x$ and normalized conditional measure $\eta_A(B)=\eta(B\cap A)/\eta(A)$,
+
+$$
+h_{\eta_A}(S_A)=\frac{h_\eta(S)}{\eta(A)}.
+$$
+
+Both sides must use the same logarithm base. The left side is entropy per return, while $h_\eta(S)$ on the right is entropy per original step. The maximal-entropy application above does not prove this first-return formula or supply an entropy formula for a physical realization, irreversible readout, or finite $p$-adic remainder tree. Applying the literature result to such objects still requires the actual probability-preserving system, return set, and correspondence to be established separately.
 :::
 
 Whether the transverse Rauzy boundary Hausdorff dimension $D_F = \dim_H(\partial\mathcal{R}_K)$ governs anomalous entanglement scaling in Pisot cut-and-project quantum many-body states remains an open mathematical-physics problem:
@@ -1316,7 +1453,7 @@ The full proof is checked by the Lean kernel.
 This standalone convergence theorem states only the full-sequence limit for each fixed positive $\rho$; its single-inverse-entry argument supplies no $1/N_j$ rate. The preceding [@ex-ch39-p2e-tribonacci-prefix-rate] already gives the stronger paper bound $73728/N_j$ and convergence uniform in the parameter, using actual repeated windows and full-inverse mass. The evidence scopes of the two arguments remain distinct; physical states, spatial cuts, and fractal entropy scaling still require further work.
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
-**Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`, shift entropy and Abramov's formula carry status `Literature`, and fractal area scaling carries status `OPEN`.
+**Parry Stationary Weights, Finite Escape Pairs, and Induced-Return Entropy Card (`entropy`)**: Displays side-by-side the cyan Parry stationary weights $\pi_K$ of the signed reset chain, magenta indistinguishable escape pairs $E(S)$ on a finite observation arena, and separately badged readouts for shift entropy $\log_2\beta_K$ and induced-return entropy; amber marks the active order $K$, and a red badge marks the open fractal-horizon scaling problem ([@prob-ch39-p2e-fractal-horizon]). Stationary weights and escape-pair counts carry status `LEAN ✓`; the card's topological-entropy identification and Abramov formula carry status `Literature`, while metric-entropy comparison for the actual unsigned law is derived in the application in [@rem-ch39-p2e-abramov-literature]. Fractal area scaling carries status `OPEN`.
 :::
 
 We can now gather all eight concepts into a single line-break-free epistemic alignment table so that the formal core, classical literature, numerical evaluations, and interpretive boundaries of every link stand side by side:
@@ -1330,7 +1467,7 @@ We can now gather all eight concepts into a single line-break-free epistemic ali
 | **5. Clifford Line–Plane Split** | Cubic Minkowski real-linear coordinate embedding $E_\parallel^1 \oplus E_\perp^2$ and internal damped rotor $\beta_3^{-1/2}(\cos\vartheta + B_\perp\sin\vartheta)$ | `MODEL` (requires declared basis/metric; observer line–plane dictionary in [@rem-ch39-p2e-unification-model]) |
 | **6. Self-Referential Scale Comparison** | Positive cosine fixed-point endpoint $\cos\theta^* = \theta^*$ [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) alongside Tribonacci conjugate norm $|\alpha| = \beta_3^{-1/2}$ [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) | `LEAN ✓` (separate identities) + `Literature` (transcendence of $\theta^*$) + `NUM` ($\approx 0.234\%$ proximity, strictly unequal) + `MODEL` ($\psi=\psi(\psi)$ motif, [@ex-ch39-p2e-pisot-dottie-numerics]) |
 | **7. Cross-Cut Direct-Encoder Ranks** | Attainable page-rank rectangle $1 \le r_b \le R_b$ and sharp entropy bound $\ln R_b$ under $\tau(x)+\iota(y)<K$ [`complete_original_direct_rank_entropy`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy) ([@thm-ch39-p2e-direct-encoder-ranks]) with spectral necessity [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) | `LEAN ✓` (rank $K$ conditional on $K \le R_b$, not universal) + `NUM` (e.g. $R_0=6, R_1=5$) + `Literature` (golden chain & Rydberg arrays, [@rem-ch39-p2e-rydberg-anyon-literature]) |
-| **8. Parry Law, Escape Pairs & Entropy** | Signed reset-chain Parry stationary law [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law) ([@thm-ch39-p2e-parry-escape-laws]), boundary cylinder bound [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound), and finite escape-pair criterion [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓` (finite & Markovian laws) + `Literature` ($\log_2\beta_K$ & Abramov formula, [@rem-ch39-p2e-abramov-literature]) + `OPEN` (fractal-horizon scaling, [@prob-ch39-p2e-fractal-horizon]) |
+| **8. Parry Law, Escape Pairs & Entropy** | Signed reset-chain Parry stationary law [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law) ([@thm-ch39-p2e-parry-escape-laws]), actual bilateral law and cylinders ([@thm-ch39-p2e-native-bilateral-parry-law]), boundary cylinder bound [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound), and finite escape-pair criterion [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓` (cited probability laws & counts) + application derivation (KS bound, attainment, and uniqueness for the same unsigned law) + `Literature` (topological-entropy identification & first-return Abramov formula, [@rem-ch39-p2e-abramov-literature]) + `OPEN` (fractal-horizon scaling, [@prob-ch39-p2e-fractal-horizon]) |
 
 Stepping the order dial from $K = 2$ to $K = 3$ and beyond in the full laboratory below brings the multi-facet geometry of Chapter 39's self-referential ontology $\psi \equiv \psi(\psi)$ into immediate visual focus: at $K = 2$, the transverse contracting space is still a one-dimensional segment; the instant $K$ reaches $3$, complex conjugate roots spin out the three-branch self-covering, null-boundary Rauzy fractal window in the orthogonal plane; and across every order, kernel-verified counts, unit-disk root bounds, refinement ultrametrics, attainable rank rectangles, and Parry stationary weights form the green formal backbone supporting clearly demarcated classical literature, numerical experiments, and geometric synthesis. Beyond this discrete self-referential sandtable, the remaining six sections of Chapter 39 ascend through [§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md) (fivefold fixed-point spectra, self-halting time-river sorting, universal clock dilation, and unified arc forces) into [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) (the three-dimensional concept-field cap, Hilbert multi-concept ledger, and Arc-Field Grand Unified Theory, AF-GUT) before opening the final door of the main text into the [Coda](coda.md), *Outside All Spheres*.
 

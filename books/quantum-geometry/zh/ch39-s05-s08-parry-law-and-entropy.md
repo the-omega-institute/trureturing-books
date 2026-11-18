@@ -1,6 +1,6 @@
 # 39.5.8 帕里平稳律、逃逸对计数与分形视界熵问题 {#sec-ch39-p2e-entropy}
 
-在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及遍历论文献中的熵比较。前两者已有对应的 Lean 验证结果；下文的最大熵与诱导回归熵仍按文献结果呈现，分形纠缠标度则保留为开放问题。
+在讨论“熵”之前，先区分三个层次：有限状态的马尔可夫定律、整数时间轴上完整路径的可测坐标重建，以及对所有不变概率测度的熵比较。前两者已有对应的 Lean 验证结果；下文在同一双向无符号律上展开最大熵与唯一性的应用推导，另将拓扑熵识别与诱导回归熵保留在各自的文献范围内，分形纠缠标度则保留为开放问题。
 
 在马尔可夫链侧，对任意阶数 $k \ge 2$，令互反帕里参数为 $p = \operatorname{parryParameter}(k) = \beta_k^{-1}$。在带绝对符号位与当前连续 `1` 游程长度的有向状态空间 $\operatorname{State}(k) = \mathrm{Bool} \times \operatorname{Fin} k$ 上，定义后缀权重 $w_j = \operatorname{suffixWeight}(k, p, j) = \sum_{a=0}^{k-j-1} p^{a+1}$、归一化常数 $Z_k = \sum_{j=0}^{k-1} p^j w_j$、符号翻转对合 $\operatorname{flip}(b, j) = (!b, j)$，以及重置转移核 $P_k = \operatorname{kernel}(k, p)$：从状态 $s = (b, j)$ 出发，以概率 $p / w_j$ 翻转符号并重置游程至 $(!b, 0)$，当 $j + 1 < k$ 时以概率 $p\, w_{j+1} / w_j$ 保持符号并推进游程至 $(b, j + 1)$，其余转移概率为 $0$。对应状态分布定义为
 
@@ -211,7 +211,7 @@ $$
 
 两条柱集公式保留了源码各自的写法：有符号公式对整个实数乘积作一次 $\operatorname{ofReal}$，无符号公式先对每个因子作 $\operatorname{ofReal}$ 再相乘。这里 $\pi_k,P_k,q,Q$ 的各项均非负，因此用普通实数概率表示时，就是初始质量乘以逐步转移概率。$m=0$ 分别给出单点质量 $\pi_k(w_0)$ 与 $q_{v_0}$；任何含零转移的词，包括违反相应重置规则的禁用词，质量都为 $0$。公式适用于所有整数 $\ell$，也适用于负时间。
 
-给定有限维分布的延拓唯一性，只确定这些分布对应的路径律。现在还可以追问：沿时间轴把两个观测窗口拉开，它们之间的概率关联怎样消退？下面的结果把平稳联合律、混合性与符号选择障碍放在同一组存在量词之下。完整柯尔莫哥洛夫—西奈熵、对所有不变竞争测度的熵比较、最大熵等号情形的唯一性及阿布拉莫夫公式，仍须按下方文献注记各自的前提与证据身份阅读。
+给定有限维分布的延拓唯一性，只确定这些分布对应的路径律。现在还可以追问：沿时间轴把两个观测窗口拉开，它们之间的概率关联怎样消退？下面的结果把平稳联合律、混合性与符号选择障碍放在同一组存在量词之下。对所有不变竞争测度的柯尔莫哥洛夫—西奈熵比较与最大熵唯一性另见 [@rem-ch39-p2e-abramov-literature] 的应用推导；那里的拓扑熵识别与阿布拉莫夫公式各自保留独立的文献前提。
 
 沿用上文的 $X_k,Y_k,S=\operatorname{State}(k)$、$\pi_k$、$F_e$ 及公平锚点测度 $u=\operatorname{fairAnchor}$。这里始终以 $P_k=\operatorname{kernel}(k,\operatorname{parryParameter}(k))$ 表示**带符号状态**的转移矩阵；$Q$ 仍专指上一条概率律中的**无符号后缀**转移核。对有限词 $w:\operatorname{Fin}(m+1)\to S$，记
 
@@ -310,16 +310,153 @@ $$
 
 在这一平稳律旁，还有两条各自独立的形式化定量定律共同约束边界碰撞与观测盲区：其一是帕里边界柱集上界定理 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound)，它对给定的 $n \ge 1$ 组正游程对集合 $C$（每段 `1` 游程 $< k$ 且编码长度不超过视界 $R$）证明，左右边界选定前缀的平稳质量分别不超过 $\operatorname{stationaryWordMass}(10)\cdot(1 - S + M)$ 与 $\operatorname{stationaryWordMass}(01)\cdot(1 - S + M)$（这是精确概率不等式，而非分形维数或熵值公式）；其二是与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md) §38.5 一脉相承的有限竞技场信息逃逸率判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos)，它证明在基数 $q \ge 2$ 的非退化有限状态集上，观测目录 $S$ 无法区分的有序相异状态对集合 $E(S)$ 定义出归一化有理逃逸率 $e(S) = |E(S)|/[q(q-1)]$，而某项观测 $i$ 严格降低逃逸率当且仅当其唯一捕获对计数 $|U_i| > 0$（且差值恰为 $|U_i|/[q(q-1)]$）。有限有序逃逸对比例 $e(S)$、量子态冯·诺依曼熵 $S(\sigma_b)$ 与无限移位系统的遍历熵在数学定义上彼此独立，绝不可混为一谈。
 
-::: {.remark #rem-ch39-p2e-abramov-literature title="文献结果：帕里最大熵马尔可夫测度与阿布拉莫夫诱导回归熵公式（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 据 M. Pollicott 等人的综述 *The mathematical research of William Parry FRS*（[机构存档 PDF](https://wrap.warwick.ac.uk/id/eprint/682/1/WRAP_pollicott_Parry_research.pdf)，§2.3，pp. 323–324；DOI：[10.1017/S0143385708000102](https://doi.org/10.1017/S0143385708000102)），W. Parry（*Trans. Amer. Math. Soc.* **112**, 1964, 55–66）证明非周期有限型双向子移位存在唯一最大熵测度，且该测度为内禀马尔可夫测度。对这里的禁 $1^K$ 子移位，最大熵是在其上所有移位不变 Borel 概率测度中比较的，竞争测度无需满足马尔可夫性或遍历性；唯一性指只有帕里测度达到最大值，其余不变概率测度的熵均严格更小。采用自然对数时，单步拓扑熵（亦即最大柯尔莫哥洛夫—西奈度量熵）为 $\ln\beta_K = -\ln p$，其中 $p = \beta_K^{-1}$；换成比特单位须除以 $\ln 2$，即 $h_{\mathrm{top}}(\Sigma_K) = \log_2 \beta_K\;\text{bits/step}$（数值计算 `NUM` 给出 $K = 2, 3, 4$ 时依次约为 $0.69424$、$0.87915$、$0.94678\;\text{bits/step}$，随 $\beta_K \nearrow 2$ 单调趋向 $1\;\text{bit/step}$）。
-
-另一方面，L. M. Abramov（*Dokl. Akad. Nauk SSSR* **128**, 1959, 647–650）证明：在保概率遍历动力系统 $(X, \mathcal{B}, \mu, T)$ 中，若可测回访集 $A \in \mathcal{B}$ 满足 $\mu(A) > 0$，记 $T_A$ 为 $A$ 上的首次回归诱导映射、$\mu_A$ 为归一化条件测度，则每次回归的诱导熵满足
+::: {.remark #rem-ch39-p2e-abramov-literature title="实际双向帕里律的最大熵应用与独立文献边界"}
+**应用的对象与结论。** 固定任意整数阶数 $K\ge2$（即上文的 $k=K$），令 $p=\operatorname{parryParameter}(K)$、$X_K=\operatorname{RelationPath}(K)$、$T=\operatorname{relationShift}$，即 $(Tr)_t=r_{t+1}$。取 [@thm-ch39-p2e-native-bilateral-parry-law] 同时给出的 $e,\mu,\nu$，下文始终使用其中同一个无符号概率律 $\mu$。对 $X_K$ 上每个满足 $T_*\rho=\rho$ 的 Borel 概率测度 $\rho$，以下应用推导给出
 
 $$
-h_{\mu_A}(T_A) = \frac{h_\mu(T)}{\mu(A)}.
+\begin{aligned}
+h_{\mathrm{KS}}(\rho,T)&\le-\log p,\\
+h_{\mathrm{KS}}(\mu,T)&=-\log p,\\
+h_{\mathrm{KS}}(\rho,T)=-\log p
+&\quad\Longleftrightarrow\quad\rho=\mu,\\
+\rho\ne\mu&\quad\Longrightarrow\quad h_{\mathrm{KS}}(\rho,T)<-\log p.
+\end{aligned}
 $$
 
-引用这两条文献定理时必须区分单位与前提：[@thm-ch39-p2e-parry-escape-laws] 仅在有向重置状态空间上验证了随机核与平稳分布，并未在当前锁定的源码中形式化柯尔莫哥洛夫—西奈移位熵或阿布拉莫夫公式；而将阿布拉莫夫公式用于每次重置回访事件时，必须区分“每次回归熵 $h_{\mu_A}(T_A)$”与“原始每步熵 $h_\mu(T)$”，不能凭类比直接套用到不可逆读出过程或有限 $p$ 进余数树上。
+对数为自然对数，单位为每原始步的纳特。$h_{\mathrm{KS}}$ 是所有有限可测分割的熵率的上确界，先视为扩展实数；上式同时证明它在这里是有限值。竞争范围是全部不变 Borel 概率测度，不另假定马尔可夫性、遍历性、生成性质、熵极限或唯一性。有符号扩张 $\nu$ 参与构造 $\mu$，但熵比较的载体始终是无符号空间 $X_K$。推导的所属源文见[双向帕里律的论述](https://github.com/the-omega-institute/trureturing/blob/dev/Blueprint/D5/S3/TotalVariation/ParryBilateralLaw.md)；上面所引定理的陈述本身给出编码、概率律与柱集，并不包含这个熵结论。
+
+**从实际后缀到双向生成分割。** 令 $J_t(r)=J_t^e(r)$，即 $e(\mathrm{false},r)$ 在整数时刻 $t$ 的第二坐标。最近零位刻画使 $J_t$ 恰等于 $t$ 之前的连续真位数，且与符号锚点无关。它对每条合法路径满足
+
+$$
+\begin{aligned}
+J_{t+1}(r)&=\begin{cases}
+0,&r_t=\mathrm{false},\\
+J_t(r)+1,&r_t=\mathrm{true},
+\end{cases}\\
+r_t=\mathrm{false}&\quad\Longleftrightarrow\quad J_{t+1}(r)=0.
+\end{aligned}
+$$
+
+真位分支自动满足 $J_t+1<K$。对任意 $c\in\mathbb Z$，整数平移 $(\theta_c r)_t=r_{t+c}$ 保持 $X_K$，且 $J_t(\theta_c r)=J_{t+c}(r)$。这些是逐路径恒等式，包括零概率路径。
+
+取有限可测分割 $\mathcal P_j=\{r:J_0(r)=j\}$，$j\in\operatorname{Fin}K$。$T=\theta_1$ 的可测逆为 $\theta_{-1}$。$X_K$ 是离散布尔双向乘积空间的闭子集，带其 Borel 可测结构，因而是标准 Borel 空间。每个后缀格可测；反过来，每个关系位事件由上式中的平移零后缀格恢复，所以 $\mathcal P$ 的**所有整数平移**生成整个 Borel $\sigma$-代数。这里应用的是可逆保概率系统的双向有限生成分割定理，得到
+
+$$
+h_{\mathrm{KS}}(\rho,T)=h_\rho(T,\mathcal P).
+$$
+
+所用双向生成定理与整数迭代见 Marcel Morgenstern 的[生成定理](https://github.com/marcmorningstar/lean4-ergodic-theory/blob/040fec2e0ddf4fcba49af9f76c866d295308dd7f/ErgodicTheory/Entropy/GeneratorTheoremTwoSided.lean)及[整数迭代](https://github.com/marcmorningstar/lean4-ergodic-theory/blob/040fec2e0ddf4fcba49af9f76c866d295308dd7f/ErgodicTheory/Krieger/ZIterate.lean)，归属与许可见[熵论依据说明](https://github.com/the-omega-institute/trureturing/blob/dev/Library/Entropy/morgenstern2026ks.md)。这些是库依据，不作为本书新增的冻结定理引用。仅用非负时间的生成条件不能代替这里的双向步骤。
+
+**有限历史与熵率。** 对 $n\ge0$、$w\in(\operatorname{Fin}K)^n$，记
+
+$$
+\begin{aligned}
+A_{\ell,n}(w)&=\{r:\ J_{\ell+i}(r)=w_i\ (0\le i<n)\},\\
+m_n(w)&=\rho(A_{0,n}(w)),\\
+H_n&=-\sum_w m_n(w)\log m_n(w),\\
+c_n&=H_\rho(J_n\mid J_0,\ldots,J_{n-1}).
+\end{aligned}
+$$
+
+空历史给出单格分割，$H_0=0$；$c_0=H_\rho(J_0)$。零质量项按 $0\log0=0$ 解释。有限分割链式法则给出 $H_{n+1}=H_n+c_n$。增加条件不增条件熵，再用同一联合律的平稳性，得到 $c_{n+1}\le c_n$；这里没有用竞争测度的马尔可夫性。平稳有限分割的 $H_n$ 次可加，Fekete 熵率极限定理给出
+
+$$
+\begin{aligned}
+h_\rho(T,\mathcal P)&=\lim_{N\to\infty}\frac{H_N}{N},\\
+H_N&\le H_m+(N-m)c_m\quad(N\ge m),\\
+h_\rho(T,\mathcal P)&\le c_m\quad(m\ge0).
+\end{aligned}
+$$
+
+第二行只是将 $H_N=H_m+\sum_{i=m}^{N-1}c_i$ 逐项估计，第三行随之取极限。这把熵极限与每个有限历史联系起来，并未把极限存在当作额外假设。有限链式法则、条件熵与极限的依据分别见库中的[分割](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/Partition.lean)、[条件化](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/GeneratorConditioning.lean)和[熵率](https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Entropy/KolmogorovSinai/EntropyRate.lean)；它们的分割条件熵恒等式也不等于下面另列的首次回归公式。
+
+**同一联合分布的 KL 缺陷。** 沿用原律的 $Q=\operatorname{suffixKernel}(K)$、$q_j=\operatorname{suffixLaw}(K,j)$，并写 $R_j=w_j=\operatorname{suffixWeight}(K,p,j)$。由 [@thm-ch39-p2e-parry-escape-laws] 的范围与归一化性质，$p>1/2$、$0<R_j\le1$、$R_0=1$，且 $Q$ 非负、每行和为 $1$。在且仅在允许的边 $i\to j$（$j=0$，或存在的 $j=i+1$）上，$Q(i,j)>0$，并有
+
+$$
+\log Q(i,j)=\log p+\log R_j-\log R_i.
+$$
+
+固定任意历史长度 $n\ge1$，在有限指标 $(w,j)$ 上取两个数组
+
+$$
+\begin{aligned}
+a(w,j)&=\rho\bigl(A_{0,n}(w)\cap\{J_n=j\}\bigr),\\
+b(w,j)&=m_n(w)Q(w_{n-1},j).
+\end{aligned}
+$$
+
+它们均非负且总和为 $1$，并满足 $b(w,j)=0\Rightarrow a(w,j)=0$：若 $m_n(w)=0$，其每个扩展质量都为零；若核项为零，后缀递推使这个禁用扩展事件本身为空。因而绝对连续性适用于所有历史，包括零质量历史与禁用转移，而非仅在 $\mu$ 下成立。
+
+对这个实际联合数组，其行和是 $m_n(w)$，下一后缀的列和是 $\rho(J_n=j)$，最后历史后缀的边缘则是 $\rho(J_{n-1}=i)$。后两者由平稳性相同。只在 $a(w,j)>0$ 的项展开对数，零项贡献定义为零，于是
+
+$$
+\begin{aligned}
+D(a\Vert b)
+&=\sum_{a(w,j)>0}a(w,j)\log\frac{a(w,j)}{b(w,j)}\\
+&=-c_n-\sum_{a(w,j)>0}a(w,j)\log Q(w_{n-1},j)\\
+&=-c_n-\log p.
+\end{aligned}
+$$
+
+最后一步中 $\log R$ 的两项期望由上述相同边缘精确抵消。[有限 Gibbs 非负性](lean:D5/S3/Divergence/GrandmotherTheorem.kl_divergence_nonneg)给出 $D(a\Vert b)\ge0$，所以对每个 $n\ge1$ 都有
+
+$$
+h_{\mathrm{KS}}(\rho,T)\le c_n\le-\log p.
+$$
+
+这用的是同一历史—下一后缀联合分布，没有用两个另取的边缘分布替代它。
+
+**等号迫使每段历史服从原核。** 若 $h_{\mathrm{KS}}(\rho,T)=-\log p$，上式迫使每个 $c_n=-\log p$，从而每个历史长度的 $D(a\Vert b)=0$。[Gibbs 等号判据](lean:D5/S3/Divergence/GibbsEquality.kl_divergence_eq_zero_iff)遂给出逐项的 $a=b$。$T$ 可逆且保测度，所以 $\rho$ 在每个 $\theta_\ell$ 下不变；平移后，对所有 $\ell\in\mathbb Z$、$n\ge1$、词 $w$ 与目标后缀 $j$，
+
+$$
+\begin{aligned}
+&\rho\bigl(A_{\ell,n}(w)\cap\{J_{\ell+n}=j\}\bigr)\\
+&\qquad=\rho(A_{\ell,n}(w))Q(w_{n-1},j).
+\end{aligned}
+$$
+
+历史质量为正时可相除，得到给定这段完整有限历史的下一后缀条件分布就是 $Q(w_{n-1},\cdot)$。未相除的恒等式同时保留零历史；这里不需要也没有断言无限过去的条件期望公式。
+
+**原来的 $\mu$ 确实达到上界。** 原律的第 5 项柱集公式直接给出，对每个 $\ell$、$n\ge1$ 与每个词 $w$，
+
+$$
+\mu(A_{\ell,n}(w))=q_{w_0}\prod_{i=0}^{n-2}Q(w_i,w_{i+1}).
+$$
+
+$n=1$ 时乘积为空；含零转移的词仍保留在公式内。把词延长一项即得到上一段的未相除转移恒等式，初始质量仍是同一个 $q$，没有另构造候选律。因此在 $\rho=\mu$ 时，每个 $n\ge1$ 的 KL 缺陷为零，$c_n=-\log p$。单调性还给出 $c_0\ge-\log p$，链式法则于是给出 $H_N\ge N(-\log p)$。应用已给出的 Fekete 极限与普适上界，便得 $h_{\mathrm{KS}}(\mu,T)=-\log p$。
+
+**从平稳边缘到整个概率律的刚性。** 仍设 $\rho$ 达到上界。长度一的转移恒等式与平稳性使 $u_j=\rho(J_0=j)$ 满足 $uQ=u$；原律同样满足 $qQ=q$。这个初始边缘的唯一性无需预设：由于每行 $Q(i,0)=p/R_i\ge1/2$，令
+
+$$
+\begin{aligned}
+d_j&=\tfrac12\mathbf1_{\{j=0\}},\\
+U(i,j)&=2\bigl(Q(i,j)-d_j\bigr).
+\end{aligned}
+$$
+
+$U$ 非负且行和为 $1$。对任意归一化平稳概率行 $u,v$，共同的重置质量抵消，故[总变差的随机信道收缩](lean:D5/S3/TotalVariation/DataProcessing.total_variation_channel_le)给出
+
+$$
+\operatorname{TV}(u,v)
+=\tfrac12\operatorname{TV}(uU,vU)
+\le\tfrac12\operatorname{TV}(u,v).
+$$
+
+结合[非负性](lean:D5/S3/TotalVariation/Metric.total_variation_nonneg)与[零值判据](lean:D5/S3/TotalVariation/Metric.total_variation_eq_zero_iff)，得到 $u=v$，特别地 $u=q$。再从这个共同的初始质量出发，对词长使用未相除的转移恒等式归纳，便得 $\rho$ 与 $\mu$ 在每个整数原点的所有有限后缀柱集上相等；长度零的柱集事件为全空间，质量都是 $1$。
+
+通过 $r_t=\mathrm{false}\Longleftrightarrow J_{t+1}=0$，每个有限关系位窗口是一个有限后缀窗口的可测函数。后缀柱集等式因此给出实际布尔关系路径的所有柱集等式。[双向布尔柱集唯一性](lean:D5/S3/Observer/ProbabilisticClosure/TrajectoryLaws/TwelveStateGhost.visible_eq_of_cylinders)使两测度推到 $\mathrm{Bool}^{\mathbb Z}$ 后相等，再由 $X_K$ 的可测子空间嵌入得到 $\rho=\mu$。反方向就是已证的原律达到上界。这证明等号充要条件；在扩展实数序中，普适上界与排除等号又给出每个 $\rho\ne\mu$ 的严格不等式。这里的严格性逐个测度成立，不提供对所有不同测度共同为正的熵差下界。
+
+**一般帕里定理与拓扑熵识别：文献范围。** 本应用只完成上述实际系统的度量熵 $-\log p$、达到性与刚性。一般有限型子移位的最大熵定理及拓扑熵识别另按文献阅读。M. Pollicott 等人的综述 *The mathematical research of William Parry FRS*（[机构存档 PDF](https://wrap.warwick.ac.uk/id/eprint/682/1/WRAP_pollicott_Parry_research.pdf)，§2.3，pp. 323–324；DOI：[10.1017/S0143385708000102](https://doi.org/10.1017/S0143385708000102)）在有限邻接矩阵**本原，即不可约且非周期**的假设下介绍唯一的内禀马尔可夫最大熵测度；单独的非周期性不代替不可约性。本节阅读的是这篇综述；Parry 的 1964 年原论文（*Trans. Amer. Math. Soc.* **112**, 55–66；DOI：[10.1090/S0002-9947-1964-0161372-1](https://doi.org/10.1090/S0002-9947-1964-0161372-1)）只核对了书目信息，未阅读原文。
+
+对禁 $1^K$ 子移位，通常的拓扑熵识别 $h_{\mathrm{top}}(\Sigma_K)=\log\beta_K=-\log p$ 仍在这里的文献范围内，不由上面的度量熵应用冒充其独立证明。以比特计量时除以 $\log2$，得到 $\log_2\beta_K\;\text{bits/step}$；数值计算 `NUM` 在 $K=2,3,4$ 时依次约为 $0.69424$、$0.87915$、$0.94678\;\text{bits/step}$，随 $\beta_K\nearrow2$ 单调趋向 $1\;\text{bit/step}$。
+
+**首次回归的阿布拉莫夫公式：独立文献结果，未在本书形式化。** L. M. Abramov（*Dokl. Akad. Nauk SSSR* **128**, 1959, 647–650）证明：在保概率遍历动力系统 $(X,\mathcal B,\eta,S)$ 中，若可测回访集 $A\in\mathcal B$ 满足 $\eta(A)>0$，则首次回归时间 $\tau_A(x)=\min\{n\ge1:S^nx\in A\}$ 在 $A$ 上几乎处处有限。以 $S_A(x)=S^{\tau_A(x)}x$ 表示诱导映射，以 $\eta_A(B)=\eta(B\cap A)/\eta(A)$ 表示归一化条件测度，则
+
+$$
+h_{\eta_A}(S_A)=\frac{h_\eta(S)}{\eta(A)}.
+$$
+
+两边须使用相同的对数底；左边以每次回归计量，右边的 $h_\eta(S)$ 以原始每步计量。上面的最大熵应用没有证明这条首次回归公式，也没有据此提供物理实现、不可逆读出或有限 $p$ 进余数树的熵公式。对这些对象应用文献结果，仍须分别建立实际的保测度系统、回访集及对应关系。
 :::
 
 至于横向内部空间的劳齐分形边界维数 $D_F = \dim_H(\partial\mathcal{R}_K)$ 是否会在量子多体切投态中诱导出反常的分形边界纠缠标度，在严格数学物理中仍是一道悬而未决的开放问题：
@@ -1316,7 +1453,7 @@ $$
 这条单独的收敛定理只陈述每个固定正 $\rho$ 的全序列极限；它的单个逆矩阵条目论证不提供 $1/N_j$ 速率。前面的 [@ex-ch39-p2e-tribonacci-prefix-rate] 已用实际重复窗口与完整逆矩阵质量估计给出更强的 $73728/N_j$ 纸面界及参数一致收敛。两条论证的证据范围须分别保留；物理态、空间切口与分形熵标度仍需另外建立。
 
 ::: {.viz src="pisot-clifford-rauzy-sandtable" preset="entropy" height="500"}
-**帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`，移位熵与阿布拉莫夫公式属 `文献结果`，分形面积律属 `OPEN`。
+**帕里平稳权重、有限逃逸对与回归熵对照卡（`entropy`）**：分栏呈现有向重置链的青色帕里平稳分布权重 $\pi_K$、有限观测竞技场中被品红标出的未区分逃逸对 $E(S)$，以及单独标注依据等级的移位熵 $\log_2\beta_K$ 与诱导回归熵读数；琥珀色标出当前选定的阶数 $K$，红色标签标示分形视界标度开放问题（[@prob-ch39-p2e-fractal-horizon]）。平稳律与逃逸对计数属 `LEAN ✓`；卡片的拓扑熵识别与阿布拉莫夫公式属 `文献结果`，实际无符号律的度量熵比较见 [@rem-ch39-p2e-abramov-literature] 的应用推导；分形面积律属 `OPEN`。
 :::
 
 至此，我们可以把本节审视的全部八项概念汇总在一张无折行认识论总表之中，使每一环的形式内核、文献依托与诠释边界清晰对齐：
@@ -1330,7 +1467,7 @@ $$
 | **5. 克利福德线—面分解** | 三次闵可夫斯基实线性坐标嵌入 $E_\parallel^1 \oplus E_\perp^2$ 与内部复平面缩放旋子 $\beta_3^{-1/2}(\cos\vartheta + B_\perp\sin\vartheta)$ | `MODEL`（需显式声明基与度规，观察者线—面词典见 [@rem-ch39-p2e-unification-model]） |
 | **6. 自指收缩尺度对照** | 正实轴余弦端点 $\cos\theta^* = \theta^*$ [`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) 与三阶共轭范数 $|\alpha| = \beta_3^{-1/2}$ [`tribonacci_secondary_root_mul_conjugate`](lean:D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate) | `LEAN ✓`（各自端点与恒等式）+ `文献结果`（$\theta^*$ 超越性）+ `NUM`（$\approx 0.234\%$ 数值邻近，严格不等）+ `MODEL`（$\psi=\psi(\psi)$ 母题，[@ex-ch39-p2e-pisot-dottie-numerics]） |
 | **7. 跨切口编码纠缠秩** | 跨切口条件 $\tau(x)+\iota(y)<K$ 下的可达页秩充要矩形 $1 \le r_b \le R_b$ 与最大页熵 $\ln R_b$ [`complete_original_direct_rank_entropy`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy)（[@thm-ch39-p2e-direct-encoder-ranks]）及谱阻塞 [`actual_encoder_spectral_obstruction`](lean:D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction) | `LEAN ✓`（秩等于 $K$ 仅在 $K \le R_b$ 时条件可达，非普适恒等）+ `NUM`（如 $R_0=6, R_1=5$）+ `文献结果`（黄金链与里德堡实验，[@rem-ch39-p2e-rydberg-anyon-literature]） |
-| **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓`（有限与马尔可夫定律）+ `文献结果`（$\log_2\beta_K$ 与阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `OPEN`（分形视界纠缠标度，[@prob-ch39-p2e-fractal-horizon]） |
+| **8. 平稳核、逃逸对与熵** | 有向重置链帕里平稳律 [`parry_stationary_law`](lean:D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law)（[@thm-ch39-p2e-parry-escape-laws]）、实际双向律与柱集（[@thm-ch39-p2e-native-bilateral-parry-law]）、边界柱集不等式 [`parry_boundary_cylinder_bound`](lean:D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound) 与有限逃逸对判据 [`lowersEscape_iff_uniqueCaptureCount_pos`](lean:D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos) | `LEAN ✓`（所引概率律与计数）+ 应用推导（同一无符号律的 KS 上界、达到性与唯一性）+ `文献结果`（拓扑熵识别与首次回归阿布拉莫夫公式，[@rem-ch39-p2e-abramov-literature]）+ `OPEN`（分形视界纠缠标度，[@prob-ch39-p2e-fractal-horizon]） |
 
 当我们在下面的综合实验室中把阶数从 $K = 2$ 拨向 $K = 3$ 再继续上推时，整章自指本体论 $\psi \equiv \psi(\psi)$ 的多切面几何结构便清清楚楚地浮现出来：$K = 2$ 时内部收缩空间还只是一条实轴线段；跨入 $K = 3$ 的瞬间，复共轭根在二维正交平面上旋出三支精确自覆盖、平面边界零测的劳齐分形内窗；而在每一个阶数上，已被 Lean 内核锁定的离散计数、多项式根圆盘、细化超度量、可达纠缠秩矩形与帕里平稳核构成了坚硬的绿色骨架，支撑起周围明确标界的经典文献、数值实验与跨学科几何诠释。穿越这座离散自指沙盘之后，本章后六节将沿 [§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md) 贯通五阶自指不动点谱系、主动停机精度与时间长河谱排序、普适比较主频钟慢以及极小圆弧体万力合流，再在 [§39.10](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md) 确立三维概念场封顶原理、希尔伯特多概念混编账本与极小圆弧场大统一理论（AF-GUT），并在峰顶推开正文的最后一道门扉，步入[终章](coda.md)《在所有的球之外》。
 

@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "0bebd19bdce4ec6d874d487726e4026fb6d05de5",
-  "pinned_at": "2026-11-18T21:23:28Z",
+  "pinned_at": "2026-11-18T21:52:31Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -2045,6 +2045,22 @@
       "line": 636,
       "signature": "theorem result : claim"
     },
+    "D5/S3/Divergence/GibbsEquality.kl_divergence_eq_zero_iff": {
+      "module": "D5/S3/Divergence/GibbsEquality",
+      "name": "D5.S3.Divergence.GibbsEquality.kl_divergence_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:6a9bf7b5d8edc1690974862b418561d5311801f83984a2eaf3ba8336acceec22",
+      "line": 35,
+      "signature": "theorem kl_divergence_eq_zero_iff {ι : Type*} [Fintype ι] (p q : ι → ℝ) (hp : (∀ i, 0 ≤ p i) ∧ ∑ i, p i = 1) (hq : (∀ i, 0 ≤ q i) ∧ ∑ i, q i = 1) (hac : ∀ i, q i = 0 → p i = 0) : klDivergence p q = 0 ↔ p = q"
+    },
+    "D5/S3/Divergence/GrandmotherTheorem.kl_divergence_nonneg": {
+      "module": "D5/S3/Divergence/GrandmotherTheorem",
+      "name": "D5.S3.Divergence.GrandmotherTheorem.kl_divergence_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:b52f777c2ca002ac95559fc606af921245fb880b5bdafb1685cd5f927e07f37f",
+      "line": 34,
+      "signature": "theorem kl_divergence_nonneg {ι : Type*} [Fintype ι] (p q : ι → ℝ) (hp : (∀ i, 0 ≤ p i) ∧ ∑ i, p i = 1) (hq : (∀ i, 0 ≤ q i) ∧ ∑ i, q i = 1) (hac : ∀ i, q i = 0 → p i = 0) : 0 ≤ klDivergence p q"
+    },
     "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance": {
       "module": "D5/S3/DivergenceSupport/LandauerBound",
       "name": "D5.S3.DivergenceSupport.LandauerBound.landauer_bound_of_balance",
@@ -2924,6 +2940,14 @@
       "statement_id": "sha256:bab6939d17f39cf200971589b5b9971a1edb34f7810727695edb2893232dcd2b",
       "line": 164,
       "signature": "theorem discounted_prime_time_distance_strong_triangle {I X : Type*} {O : I -> Type*} (J : Finset I) (weight : I -> Real) (readout : forall i, X -> O i) (update : X -> X) (gamma : Real) (hpositive : ∀ i, 0 < weight i) (hgamma : gamma ∈ Set.Ioc 0 1) (x y z : X) : discountedPrimeTimeDistance J weight readout update gamma x z <= max (discountedPrimeTimeDistance J weight readout update gamma x y) (discountedPrimeTimeDistance J weight readout update gamma y z)"
+    },
+    "D5/S3/Observer/ProbabilisticClosure/TrajectoryLaws/TwelveStateGhost.visible_eq_of_cylinders": {
+      "module": "D5/S3/Observer/ProbabilisticClosure/TrajectoryLaws/TwelveStateGhost",
+      "name": "D5.S3.Observer.ProbabilisticClosure.TrajectoryLaws.TwelveStateGhost.visible_eq_of_cylinders",
+      "kind": "theorem",
+      "statement_id": "sha256:d98b344a5688fed8a5c755a0b1084e3da24b109e4d0f97029c80be2683b410b3",
+      "line": 110,
+      "signature": "theorem visible_eq_of_cylinders (μ ν : Measure (ℤ → Bool)) [IsFiniteMeasure μ] [IsFiniteMeasure ν] (hc : ∀ (t : ℤ) (n : ℕ) (w : Fin n → Bool), μ.real (visibleCylinder t n w) = ν.real (visibleCylinder t n w)) : μ = ν"
     },
     "D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment": {
       "module": "D5/S3/Observer/Reversal/QuadraticObservationClosure",
@@ -6044,6 +6068,30 @@
       "statement_id": "sha256:4afe43b854e2458ef67f9357e4f8b808f2257340b1afb27d2212da242bca7b99",
       "line": 416,
       "signature": "theorem sphere_two_open_orthogonality_free_cover_lower_six {k : ℕ} (U : Fin k → Set (sphere (0 : EuclideanSpace ℝ (Fin 3)) 1)) (hopen : ∀ i, IsOpen (U i)) (hcover : ∀ x, ∃ i, x ∈ U i) (hfree : ∀ i, OrthogonalityFree (U i)) : 6 ≤ k"
+    },
+    "D5/S3/TotalVariation/DataProcessing.total_variation_channel_le": {
+      "module": "D5/S3/TotalVariation/DataProcessing",
+      "name": "D5.S3.TotalVariation.DataProcessing.total_variation_channel_le",
+      "kind": "theorem",
+      "statement_id": "sha256:eb61c862385335ddfcc467fb14b692446878ceeb7ddbbb91cae854e006a38859",
+      "line": 29,
+      "signature": "theorem total_variation_channel_le {X Y : Type*} [Fintype X] [Fintype Y] (p q : X → ℝ) (W : X → Y → ℝ) (hW : (∀ x y, 0 ≤ W x y) ∧ ∀ x, ∑ y, W x y = 1) : totalVariation (channelOutput W p) (channelOutput W q) ≤ totalVariation p q"
+    },
+    "D5/S3/TotalVariation/Metric.total_variation_eq_zero_iff": {
+      "module": "D5/S3/TotalVariation/Metric",
+      "name": "D5.S3.TotalVariation.Metric.total_variation_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:a86cbe4fafcd725a00fdd52cae0318093e2dee7b03a19a0dac5b81e99a0c53c1",
+      "line": 35,
+      "signature": "theorem total_variation_eq_zero_iff {ι : Type*} [Fintype ι] (p q : ι → ℝ) : totalVariation p q = 0 ↔ p = q"
+    },
+    "D5/S3/TotalVariation/Metric.total_variation_nonneg": {
+      "module": "D5/S3/TotalVariation/Metric",
+      "name": "D5.S3.TotalVariation.Metric.total_variation_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:a86cbe4fafcd725a00fdd52cae0318093e2dee7b03a19a0dac5b81e99a0c53c1",
+      "line": 29,
+      "signature": "theorem total_variation_nonneg {ι : Type*} [Fintype ι] (p q : ι → ℝ) : 0 ≤ totalVariation p q"
     },
     "D5/S3/TotalVariation/ParryBilateralLaw.bilateral_parry_law": {
       "module": "D5/S3/TotalVariation/ParryBilateralLaw",
