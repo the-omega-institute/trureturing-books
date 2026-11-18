@@ -8,7 +8,7 @@
 
 遵循全书的三层认识论契约与离散多面体粘接原则（R3），本章严格区分三个层次：
 
-1. **Lean 内核验证的有限维桥图与开边界 MPS 定理**：在 `BridgeGraph` 模块族中，针对宽度为 $3$（指标取 $\operatorname{Fin} 3$）的双节点克罗内克桥图收缩 $\operatorname{flow}(M, N) = \sum_{r \in \operatorname{Fin} 3} M_r \otimes N_r$，我们逐条证明最大流可达引理（[@lemma-bridge-flow-attained]）、最大流不超过最小割上界命题（[@prop-bridge-flow-cut-bound]）、二次锥域内的最小割简化推论（[@cor-bridge-cone-mincut]），以及锥域内的离散量子最大流最小割定理（[@thm-bridge-quantum-maxflow-mincut]）；随后在开边界键维数 $2$ 的一维矩阵乘积态（MPS）模块中，证明可观测图表内由三格点前缀边缘矩阵唯一恢复全局相位态（[@thm-mps-observable-phase-recovery]），以及链长 $3 + m \ge 5$ 时任意内部三格点边缘恢复在主开稠密轨迹上的内禀一般性（[@thm-mps-generic-interior-recovery]）；
+1. **Lean 内核验证的有限维桥图与开边界 MPS 定理**：在 `BridgeGraph` 模块族中，针对宽度为 $3$（指标取 $\operatorname{Fin} 3$）的双节点克罗内克桥图收缩 $\operatorname{flow}(M, N) = \sum_{r \in \operatorname{Fin} 3} M_r \otimes N_r$，我们逐条证明最大流可达引理（[@lemma-bridge-flow-attained]）、最大流不超过最小割上界命题（[@prop-bridge-flow-cut-bound]）、二次锥域内的最小割简化推论（[@cor-bridge-cone-mincut]），以及锥域内的离散量子最大流最小割定理（[@thm-bridge-quantum-maxflow-mincut]）；随后在键维数 $2$ 的一维齐次开边界矩阵乘积态（MPS）模块中，证明可观测图表内由三格点未归一化前缀边缘矩阵恢复全局纯态，至多相差一个全局单位相位（[@thm-mps-observable-phase-recovery]），以及链长 $3 + m \ge 5$ 时任意内部三格点未归一化边缘在非空开稠密主轨迹上具有同样恢复性质的内禀一般性（[@thm-mps-generic-interior-recovery]）；
 2. **离散对数容量分片与接缝粘接图像（R3）**：通过对数腿容量坐标下的三张仿射超平面下包络（[@ex-log-capacity-facets]），展示有限维矩阵秩上界如何在离散格点上拼出多面体分片与瓶颈转移接缝；
 3. **连续统全息对偶的文献边界**：将多尺度纠缠重整化拟设（MERA）与连续统 AdS/CFT 中的 Ryu–Takayanagi（RT）极小曲面公式严格置于文献注记（[@rem-ryu-takayanagi-literature]）内，绝不把特定宽度三桥图的有限维矩阵秩定理夸大为任意张量网络或连续时空全息对偶的普遍证明。
 
@@ -1095,7 +1095,7 @@ $$
 
 ## 19.5 开边界矩阵乘积态：三格点边缘恢复与内禀一般性 {#sec-open-boundary-mps-recovery}
 
-宽度三桥图刻画了固定拓扑截面上纠缠秩的容量上限；而在一维多体物理中，由键维数 $2$ 的局部核张量串联而成的**开边界矩阵乘积态**（open-boundary matrix product state, MPS）进一步回答了另一个关键的反问题：**仅凭一条局部连续三格点窗口的未归一化约化矩阵，何时足以在差一个全局单位相位 $z$（$\|z\| = 1$）的意义下唯一锁死整条链的全局纯态？**
+宽度三桥图刻画了固定拓扑截面上纠缠秩的容量上限；而在一维多体物理中，由同一组键维数 $2$ 的局部核张量串联而成的**齐次开边界矩阵乘积态**（homogeneous open-boundary matrix product state, MPS）进一步回答了另一个关键的反问题：**仅凭一条局部连续三格点窗口的未归一化约化矩阵，何时足以在差一个全局单位相位 $z$（$\|z\| = 1$）的意义下唯一锁死整条链的全局纯态？**
 
 按源码精确记号，设键矩阵空间为 `Bond := Matrix (Fin 2) (Fin 2) ℂ`，链长 $n$ 的比特词空间为 `Word n := Fin n → Fin 2`。给定局部核对 $a_0, a_1 \in \mathrm{Bond}$ 与左右开边界向量 $b_0, b_1 \in \mathbb{C}^2$，开边界 MPS 态矢与态集定义为
 
@@ -1113,9 +1113,9 @@ $$
 
 为排除奇异退化点，对任意核族 $A : \mathrm{Fin}\,2 \to \mathrm{Bond}$ 定义完全正转移映射 $\operatorname{transfer}(A)(X) := \sum_{i \in \mathrm{Fin}\,2} A_i X A_i^*$ 与对偶转移映射 $\operatorname{dualTransfer}(A)(X) := \sum_{i \in \mathrm{Fin}\,2} A_i^* X A_i$。在三格点切片 $t : \mathrm{Word}\,3 \to \mathbb{C}$ 上，源码由子式与伴随多项式构造有理重构核 $\operatorname{canonicalCore}(t) : \mathrm{Fin}\,2 \to \mathrm{Bond}$ 及判别多项式 `chartPoly : MvPolynomial (Word 3) ℂ`，并定义**可观测图表条件** `ObservableChart m ψ` 为：存在探测向量 $v : \mathrm{Word}\,3 \to \mathbb{C}$，记 $t := \operatorname{rawPrefix}(3, m, \psi) *_{\mathrm{v}} v$，使得 $\operatorname{eval}_t(\mathrm{chartPoly}) \neq 0$ 且线性映射 $\operatorname{transfer}(\operatorname{canonicalCore}(t))$ 在 $M_2(\mathbb{C})$ 上单射。
 
-这个对角例还能检验图表的两个条件。记 $D=\operatorname{diag}(1,2)$。转移算子 $X\mapsto X+DXD$ 在矩阵单位 $E_{11},E_{12},E_{21},E_{22}$ 上分别乘以 $2,3,3,5$，因而可逆。振幅只取决于词中 $1$ 的个数，三格点全态 $\psi$ 对格点置换对称。此时 $t=(\psi\psi^*)v$ 是 $\psi$ 的标量倍数，故 $t_{001}=t_{010}=t_{100}$。三阶子式 `minorPoly` 的第一列是 $(t_{000},t_{010},t_{100})^T$，第三列是 $-(t_{000},t_{001},t_{010})^T$，两列互为相反数，因而对每个 $v$ 都有 $\operatorname{eval}_t(\mathrm{chartPoly})=0$。尽管图表条件失效，这条三格点链的前三格点已经包含全态，$\psi\psi^*$ 仍确定 $\psi$ 至多相差一个单位相位。
+这个对角例需要区分给定核与重构核的转移算子。记 $D=\operatorname{diag}(1,2)$。给定核 $(I_2,D)$ 的转移算子 $X\mapsto X+DXD$ 在矩阵单位 $E_{11},E_{12},E_{21},E_{22}$ 上分别乘以 $2,3,3,5$，因而可逆。可观测图表检验的则是 $\operatorname{transfer}(\operatorname{canonicalCore}(t))$ 的单射性，并同时要求 $\operatorname{eval}_t(\mathrm{chartPoly})\ne0$。振幅只取决于词中 $1$ 的个数，三格点全态 $\psi$ 对格点置换对称。此时 $t=(\psi\psi^*)v$ 是 $\psi$ 的标量倍数，故 $t_{001}=t_{010}=t_{100}$。三阶子式 `minorPoly` 的第一列是 $(t_{000},t_{010},t_{100})^T$，第三列是 $-(t_{000},t_{001},t_{010})^T$，两列互为相反数，因而对每个 $v$ 都有 $\operatorname{eval}_t(\mathrm{chartPoly})=0$。尽管图表条件失效，这条三格点链的前三格点已经包含全态，$\psi\psi^*$ 仍确定 $\psi$ 至多相差一个单位相位。
 
-::: {.theorem #thm-mps-observable-phase-recovery title="可观测图表内的 MPS 相位恢复" lean="D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSDensityRecovery.observable_chart_phase_recovery"}
+::: {.theorem #thm-mps-observable-phase-recovery title="可观测图表内的 MPS 态恢复：至多差一个全局单位相位" lean="D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSDensityRecovery.observable_chart_phase_recovery"}
 设 $m \in \mathbb{N}$，$\psi, \varphi : \mathrm{Word}\,(3 + m) \to \mathbb{C}$ 均属于开边界键维数 $2$ 矩阵乘积态集 $\operatorname{openBoundaryMPS}(3 + m)$，且 $\psi$ 满足可观测图表条件 $\operatorname{ObservableChart}(m, \psi)$。则两态的前三格点未归一化约化矩阵相等，当且仅当两态仅相差一个模长为 $1$ 的全局复相位因子：
 
 $$
@@ -1135,7 +1135,7 @@ $$
 $$
 
 ::: {.theorem #thm-mps-generic-interior-recovery title="MPS 内部恢复的内禀一般性" lean="D5/S3/Quantum/TensorNetworks/OpenBoundaryMPSInteriorGenericity.intrinsic_interior_recovery"}
-对任意满足 $2 \le m$ 的自然数 $m \in \mathbb{N}$（即开边界链总长度 $3 + m \ge 5$），内禀一般性命题 $\operatorname{intrinsicInteriorRecovery}(m)$ 成立：存在关于前三格点约化矩阵实虚部坐标的非零实多项式 $R \neq 0$，其在子空间 $\operatorname{openBoundaryMPS}(3 + m)$ 中切出的主非零轨迹非空、开、稠密且对全局单位相位不变，且该轨迹上的每个态不仅具备典范正代表重构、两格点张成性、单射转移算子与正定迭代边界格拉姆矩阵，而且可由任意满足 $p \ge 1, q \ge 1, p + q = m$ 的内部连续三格点未归一化约化矩阵在 $\operatorname{openBoundaryMPS}(3 + m)$ 内唯一恢复至全局单位相位。
+对任意满足 $2 \le m$ 的自然数 $m \in \mathbb{N}$（即开边界链总长度 $3 + m \ge 5$），内禀一般性命题 $\operatorname{intrinsicInteriorRecovery}(m)$ 成立：存在关于前三格点约化矩阵实虚部坐标的非零实多项式 $R \neq 0$，其在子空间 $\operatorname{openBoundaryMPS}(3 + m)$ 中切出的主非零轨迹非空、开、稠密且对全局单位相位不变，且该轨迹上的每个态不仅具备典范正代表重构、两格点张成性、单射转移算子与正定迭代边界格拉姆矩阵，而且可由任意满足 $p \ge 1, q \ge 1, p + q = m$ 的内部连续三格点未归一化约化矩阵在 $\operatorname{openBoundaryMPS}(3 + m)$ 内恢复，至多差一个全局单位相位。
 :::
 
 ::: proof
@@ -1144,7 +1144,7 @@ $$
 
 在解读 [@thm-mps-observable-phase-recovery] 与 [@thm-mps-generic-interior-recovery] 时，必须严守三条精确边界：第一，$\operatorname{rawPrefix}$ 与 $\operatorname{rawInterior}$ 均为**未归一化**振幅外积（定理无需预设 $\|\psi\| = 1$，其迹直接携带范数平方 $\|\psi\|^2$）；第二，图表与主非零轨迹给出恢复的充分条件。在它们之外，唯一性要另行判断。例如，五格点 GHZ 态 $\lvert G_\pm\rangle=(\lvert 00000\rangle\pm\lvert 11111\rangle)/\sqrt{2}$ 可由键矩阵 $E_{11},E_{22}$、左边界 $(1,1)$ 与右边界 $(1,\pm1)^T/\sqrt{2}$ 表示。两态正交，迹去任意两格点却消去了交叉项，留下相同的三格点约化矩阵。第三，这里的“一般性”严格指子空间拓扑下的开集与稠密性（`IsOpen` 与 `Dense`），既未引入概率测度声称“测度为 $1$”，也不等同于抗噪数值层析的多项式时间复杂度上界。
 
-在宽度三桥图与一维开边界 MPS 链上，我们已经看到局部键维数如何一面通过最小割容量 $\min(ad, bc)$ 约束跨截面秩（[@thm-bridge-quantum-maxflow-mincut]），一面在非退化主轨迹上凭三格点边缘锁死全局纯态相位（[@thm-mps-observable-phase-recovery]、[@thm-mps-generic-interior-recovery]）。秩饱和并不保证纠缠熵饱和，[@ex-bridge-two-five-flat-spectrum] 已给出精确反例。若在后续模型中额外假设纠缠熵已达到割容量对数给出的上限，这仍是独立的情景假设，并不等同于热平衡。接下来转向量子电路的深度与门计数：它们受到哪些严格限制，与全息复杂性的猜想又有怎样的边界？进入第五部的收官之章——[第二十章](ch20-complexity-and-spacetime.md)。
+在宽度三桥图与键维数 $2$ 的一维齐次开边界 MPS 链上，我们已经看到：前者在有序锥域假设下的最大可达秩为 $\min(ad, bc)$（[@thm-bridge-quantum-maxflow-mincut]）；后者在可观测图表内由三格点未归一化前缀边缘确定纯态，至多相差一个全局单位相位（[@thm-mps-observable-phase-recovery]），而链长至少为 $5$ 时，主非零轨迹上的态也可由任意内部连续三格点未归一化边缘作同样恢复（[@thm-mps-generic-interior-recovery]）。秩饱和并不保证纠缠熵饱和，[@ex-bridge-two-five-flat-spectrum] 已给出精确反例。若在后续模型中额外假设纠缠熵已达到割容量对数给出的上限，这仍是独立的情景假设，并不等同于热平衡。接下来转向量子电路的深度与门计数：它们受到哪些严格限制，与全息复杂性的猜想又有怎样的边界？进入第五部的收官之章——[第二十章](ch20-complexity-and-spacetime.md)。
 
 ::: {.viz src="layered-network-cut" height="560"}
 层级网络与割的完整实验室：在底边拖动一段或两段区间，看品红的最小割怎样穿过网络、割断几条键。网络是示意模型，割的条数由页面算出；RT 公式与 MERA 的类比是文献结果，未在本书形式化，绿色只给 [@prop-bridge-flow-cut-bound]。
