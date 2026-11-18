@@ -21,7 +21,7 @@
 
 ## 39.24.2 大一统母公理（AXIOM-Ω）：无源三元比较迁移与双向保正守恒律 {#sec-ch39-24-2}
 
-在零外部背景、零特权坐标且不预设维数“$3$”的起点上，显式声明 $\mathrm{AXIOM}\text{-}\Omega$ 的连续流形载体条件并与[附录 E](appendix-e.md) 的 `H1–H3` 桥接对齐（`MODEL`）：设经过 `H1`（`T1`）比较不可分外延商化（[`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel)；[附录 E §E.2](appendix-e.md#sec-appe-logic)）与 `H3` 柯西度量完备化（若抽去 `H3` 完备性，可数有理子流群 $S^3(\mathbb{Q})$ 将构成非流形反例）后的状态域，建模为一非平凡连通且单连通（$\pi_1(\mathcal{M}) = 0$）的有限维拓扑流形 $\mathcal{M}$（在局部欧氏拓扑流形上，连续流群诱导的拓扑群结构由蒙哥马利—齐平定理自动升格为实解析李流形，无需预先假定紧致性）。其上仅设两个连续原语——**无源三元比较迁移** $[-, -, -] : \mathcal{M} \times \mathcal{M} \times \mathcal{M} \to \mathcal{M}$（语义为：“以 $y$ 为局部参照桥，将 $x$ 相对于 $y$ 的比较关系无损施加于 $z$”）与 $C^2$ **对称保真度读数** $\kappa : \mathcal{M} \times \mathcal{M} \to [0, 1]$，服从三条不可分割的内禀法则（`MODEL`，其中法则 II 内建 `H2` 格拉姆半正定）：
+在零外部背景、零特权坐标且不预设维数“$3$”的起点上，显式声明 $\mathrm{AXIOM}\text{-}\Omega$ 的连续流形载体条件并与[附录 E](appendix-e.md) 的 `H1–H3` 桥接对齐（`MODEL`）：设经过 `H1`（`T1`）比较不可分外延商化（[`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel)；[附录 E §E.2](appendix-e-s02-logic-and-quotients.md#sec-appe-logic)）与 `H3` 柯西度量完备化（若抽去 `H3` 完备性，可数有理子流群 $S^3(\mathbb{Q})$ 将构成非流形反例）后的状态域，建模为一非平凡连通且单连通（$\pi_1(\mathcal{M}) = 0$）的有限维拓扑流形 $\mathcal{M}$（在局部欧氏拓扑流形上，连续流群诱导的拓扑群结构由蒙哥马利—齐平定理自动升格为实解析李流形，无需预先假定紧致性）。其上仅设两个连续原语——**无源三元比较迁移** $[-, -, -] : \mathcal{M} \times \mathcal{M} \times \mathcal{M} \to \mathcal{M}$（语义为：“以 $y$ 为局部参照桥，将 $x$ 相对于 $y$ 的比较关系无损施加于 $z$”）与 $C^2$ **对称保真度读数** $\kappa : \mathcal{M} \times \mathcal{M} \to [0, 1]$，服从三条不可分割的内禀法则（`MODEL`，其中法则 II 内建 `H2` 格拉姆半正定）：
 
 1. **法则 (I) 无源求同消去与结合律**：对一切 $x, y, z, u, v \in \mathcal{M}$，
 
@@ -41,7 +41,7 @@
    \exists\, x, y, z \in \mathcal{M},\quad [x, y, z] \neq [z, y, x], \qquad (\dim\mathcal{M},\, \operatorname{rank}\mathcal{H}_\kappa) \to \min_{\mathrm{lex}}.
    $$
 
-审视这组母公理的纯粹性：全式**没有外部造物主原点 $\mathbf{1}$**（任意一点 $y$ 皆可临时充当局部比较桥，摆渡完毕即由 $[x, x, z] = z$ 自指归零消去），**没有线性加法 $+$**，**没有手工填入数字“$3$”**。法则 (II) 的两项严密约束与[附录 E §E.1](appendix-e.md#sec-appe-layers) 逐条对应：**左右双侧**流群不变性在非阿贝尔群上锁定类函数共轭不变性 $\varphi(h g h^{-1}) = \varphi(g)$，而外延分离 $\kappa(x, y) = 1 \iff x = y$、单槽二阶海森非退化与触零下确界 $\inf\kappa = 0$ 则排除常值核 $\kappa \equiv 1$ 及加权偏置核。
+审视这组母公理的纯粹性：全式**没有外部造物主原点 $\mathbf{1}$**（任意一点 $y$ 皆可临时充当局部比较桥，摆渡完毕即由 $[x, x, z] = z$ 自指归零消去），**没有线性加法 $+$**，**没有手工填入数字“$3$”**。法则 (II) 的两项严密约束与[附录 E §E.1](appendix-e-s01-layers.md#sec-appe-layers) 逐条对应：**左右双侧**流群不变性在非阿贝尔群上锁定类函数共轭不变性 $\varphi(h g h^{-1}) = \varphi(g)$，而外延分离 $\kappa(x, y) = 1 \iff x = y$、单槽二阶海森非退化与触零下确界 $\inf\kappa = 0$ 则排除常值核 $\kappa \equiv 1$ 及加权偏置核。
 
 ## 39.24.3 一生四相：三步非循环数学推导依次锁定三元数 $S^3$、极小圆弧核与闭合场 {#sec-ch39-24-3}
 
@@ -116,7 +116,7 @@
 :::
 
 ::: proof
-第 1 款前半直接展开诱导拓扑邻域交集，后半由 $\lVert u - v\rVert^2 = 2 - 2\operatorname{Re}\langle u, v\rangle$ 得出（见[附录 E §E.2](appendix-e.md#sec-appe-logic)）。第 2 款在完备复内积空间上由正算子连续泛函演算平方根给出 $O = Q^{1/2}$，并对 $3\times 3$ 实格拉姆矩阵展开行列式与核空间平凡性判据（见[第 29 章](ch29-timeless-causality-and-gram-space.md)）。第 3 款前两项同 [@thm-ch39-nonlinear-ternion-representations-and-torsor] 第 1–2 款；第三项展开 $I = S S^\dagger = (A + B)(A^\dagger + B^\dagger) = A A^\dagger + B B^\dagger + A B^\dagger + B A^\dagger = I + A B^\dagger + (A B^\dagger)^\dagger$，消去 $I$ 即得 $(A B^\dagger)^\dagger = -A B^\dagger$。第 4 款同 [@thm-ch39-af-gut-arc-field-unification] 与 [@thm-ch39-ternion-field-composition-and-hilbert-reprojection] 对应拓扑正合条款。完整证明由 Lean 内核检查。
+第 1 款前半直接展开诱导拓扑邻域交集，后半由 $\lVert u - v\rVert^2 = 2 - 2\operatorname{Re}\langle u, v\rangle$ 得出（见[附录 E §E.2](appendix-e-s02-logic-and-quotients.md#sec-appe-logic)）。第 2 款在完备复内积空间上由正算子连续泛函演算平方根给出 $O = Q^{1/2}$，并对 $3\times 3$ 实格拉姆矩阵展开行列式与核空间平凡性判据（见[第 29 章](ch29-timeless-causality-and-gram-space.md)）。第 3 款前两项同 [@thm-ch39-nonlinear-ternion-representations-and-torsor] 第 1–2 款；第三项展开 $I = S S^\dagger = (A + B)(A^\dagger + B^\dagger) = A A^\dagger + B B^\dagger + A B^\dagger + B A^\dagger = I + A B^\dagger + (A B^\dagger)^\dagger$，消去 $I$ 即得 $(A B^\dagger)^\dagger = -A B^\dagger$。第 4 款同 [@thm-ch39-af-gut-arc-field-unification] 与 [@thm-ch39-ternion-field-composition-and-hilbert-reprojection] 对应拓扑正合条款。完整证明由 Lean 内核检查。
 :::
 
 ::: {.remark #rem-ch39-axiom-omega-prufer-cartan-bochner-literature title="普吕弗—贝尔—瑟坦三元流群、蒙哥马利—齐平定理、嘉当—米尔诺双不变度规分类与彼得—外尔正定核文献及附录 E 对齐说明"}

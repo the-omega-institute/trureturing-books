@@ -49,7 +49,7 @@ $$
 
 ## 34.24.2 合成法则分岔与四个动力学反例检核 {#sec-ch34-24-2}
 
-既然在单枚原胞上 $d(\epsilon) = 2\sin^2(\epsilon/2) > 0$ 且 $\det G(\epsilon) = \sin^4\epsilon > 0$ 恒不取负值，我们能否就此宣称“仅凭比较公理的局部运动学正定性，已经无假设推出了万有引力的普适 $1/r$ 吸引定律”？答案是**绝对不能**（参见[附录 E §E.4](appendix-e.md#sec-appe-geometry)、[§E.6](appendix-e.md#sec-appe-spacetime) 与 [§E.7](appendix-e.md#sec-appe-audit-table)）。局部标量残差非负只是“正源同号”的运动学必要前提；一旦混淆合成规则或忽略场传播子与相对论应力，立刻会撞上下列四个精确反例：
+既然在单枚原胞上 $d(\epsilon) = 2\sin^2(\epsilon/2) > 0$ 且 $\det G(\epsilon) = \sin^4\epsilon > 0$ 恒不取负值，我们能否就此宣称“仅凭比较公理的局部运动学正定性，已经无假设推出了万有引力的普适 $1/r$ 吸引定律”？答案是**绝对不能**（参见[附录 E §E.4](appendix-e-s04-metric-and-gram-curvature.md#sec-appe-geometry)、[§E.6](appendix-e-s06-spacetime-gauge-and-thermodynamics.md#sec-appe-spacetime) 与 [§E.7](appendix-e-s07-intermediate-hypotheses-audit.md#sec-appe-audit-table)）。局部标量残差非负只是“正源同号”的运动学必要前提；一旦混淆合成规则或忽略场传播子与相对论应力，立刻会撞上下列四个精确反例：
 
 ::: {.example #ex-ch34-orientation-and-composition-countermodels title="独立原胞源可加性与引力动力学欠定的四个手工反例"}
 **手工推导。** 以下四个显式算例逐一标定了局部运动学矢高 $d(\epsilon) \ge 0$ 通往宏观相互作用定律时不可省略的物理桥接条件：
@@ -134,7 +134,7 @@ $$
 我们将从离散比较几何通往四维相对论引力动力学的完整未决桥接任务正式立案如下：
 
 ::: {.problem #prob-ch34-gravity-dynamics-and-coupling title="离散比较几何导出四维洛伦兹自旋-2 引力动力学与牛顿常数归一化的开放问题"}
-在[附录 E](appendix-e.md#sec-appe-audit-table) 桥接假设 `H8` 与 `H9` 的严格审视下，如何不预设连续四维伪黎曼流形与爱因斯坦—希尔伯特作用量，而从离散比较复形、粗粒化记录捏合熵（[§E.6](appendix-e.md#sec-appe-spacetime)）与局域因果视界出发，严格完成以下三步推导：
+在[附录 E](appendix-e-s07-intermediate-hypotheses-audit.md#sec-appe-audit-table) 桥接假设 `H8` 与 `H9` 的严格审视下，如何不预设连续四维伪黎曼流形与爱因斯坦—希尔伯特作用量，而从离散比较复形、粗粒化记录捏合熵（[§E.6](appendix-e-s06-spacetime-gauge-and-thermodynamics.md#sec-appe-spacetime)）与局域因果视界出发，严格完成以下三步推导：
 
 1. **洛伦兹无质量自旋-$2$ 有效动力学与规避温伯格—威滕禁戒**：证明多原胞比较网络在宏观连续统极限下涌现出微分同胚协变的 $3+1$ 维洛伦兹度规动力学，在不违背温伯格—威滕定理的前提下导出无质量自旋-$2$ 传播子（从而由动力学而非人为假定同时锁定长程律 $\mu = 0$ 与静态吸引号 $\sigma = -1$）；
 2. **完整相对论能动张量 $T_{\mu\nu}$ 的普适耦合**：导出离散物质激发与几何角亏/视界熵流之间的变分耦合恒等式，使引力源精确收敛于包含相对论压强与剪切应力的完整守恒张量 $T_{\mu\nu}$（兼容雷乔杜里聚焦与真空负压宇宙学效应）；

@@ -101,7 +101,7 @@ Consolidating the type-signature audit and the three countermodels above, we org
 We record the quantitative gap between discrete comparison geometry and the Standard Model parameter spectrum as the closing open problem of this six-section epistemic stress-test corridor:
 
 ::: {.problem #prob-ch34-sm-generations-and-couplings title="Deriving Three Chiral Fermion Generations and Continuous Standard Model Couplings from Discrete Comparison Geometry"}
-Without post-hoc numerical fitting and respecting the continuum bridge audit of [Appendix E](appendix-e.md#sec-appe-audit-table), can one construct a UV-complete discrete comparison or noncommutative/Clifford geometric field theory that rigorously solves all three tasks below:
+Without post-hoc numerical fitting and respecting the continuum bridge audit of [Appendix E](appendix-e-s07-intermediate-hypotheses-audit.md#sec-appe-audit-table), can one construct a UV-complete discrete comparison or noncommutative/Clifford geometric field theory that rigorously solves all three tasks below:
 
 1. **Non-perturbative chiral Standard Model realization without fermion doubling**: Realize a single chiral anomaly-free generation of $G_{\mathrm{SM}} = \mathrm{SU}(3)_c \times \mathrm{SU}(2)_L \times \mathrm{U}(1)_Y$ Weyl fermions non-perturbatively on a discrete complex or finite algebraic substrate while evading the Nielsen–Ninomiya lattice doubling obstruction;
 2. **Exact truncation theorem selecting $N_{\mathrm{gen}} = 3$**: Establish a Dirac index theorem, cohomology rank, or discrete Brillouin-zone topological invariant that dynamically eliminates the anomaly-free branches $N_{\mathrm{gen}} \in \{1, 2\}$ and $N_{\mathrm{gen}} \ge 4$ together with higher spatial cavity harmonics;

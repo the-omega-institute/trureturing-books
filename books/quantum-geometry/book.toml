@@ -33,6 +33,15 @@ academic_paper = "a4"
 [epub]
 embed_fonts = false
 
-# 终章及其子页不占章号；定理环境使用独立的 Coda.n 前缀。
+# 终章、附录及其子页不占章号；定理环境使用各自的前缀。
 [numbering.unnumbered]
 "coda.md" = "Coda"
+"appendix-a.md" = "A"
+"appendix-b.md" = "B"
+"appendix-c.md" = "C"
+"appendix-d.md" = "D"
+"appendix-e.md" = "E"
+"appendix-f.md" = "F"
+"appendix-g.md" = "G"
+"appendix-h.md" = "H"
+"appendix-i.md" = "I"
