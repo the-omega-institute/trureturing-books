@@ -10,7 +10,7 @@
 
 让我们先用最朴素的线性代数回答第一个根本追问：**既然唯一本体 $\mathbf{I}$ 本自具足（单位归一 $\lVert\mathbf{I}\rVert^2 = 1$，自比较幂等 $\mathbf{I}^2 = +\mathbf{1}$），它为什么不在实轴自身上直接演化出大千世界，而非要拐进 $90^\circ$ 正交虚空间 $\hat{\mathbf{i}}$ 不可？**
 
-答案是一道冷峻的**实轴耗散与爆裂禁律**（`手工推导`，呼应 [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-born-and-imaginary-blindspot) 的去留 `i` 对照）：倘若本体试图沿着实轴 $\mathbf{I}$ 自身施加任何实标量生成元 $-\gamma \in \mathbb{R}$，微分方程 $\partial_t \Phi_{\mathrm{real}}(t) = -\gamma\,\Phi_{\mathrm{real}}(t)$ 的唯一解为纯实指数流 $\Phi_{\mathrm{real}}(t) = e^{-\gamma t}\mathbf{I}$，其模方预算为
+答案是一道冷峻的**实轴耗散与爆裂禁律**（`手工推导`，呼应 [§34.19](ch34-s19-roundtrip-projection-and-imaginary-blindspot.md#sec-ch34-roundtrip-projection-and-imaginary-blindspot) 的去留 `i` 对照）：倘若本体试图沿着实轴 $\mathbf{I}$ 自身施加任何实标量生成元 $-\gamma \in \mathbb{R}$，微分方程 $\partial_t \Phi_{\mathrm{real}}(t) = -\gamma\,\Phi_{\mathrm{real}}(t)$ 的唯一解为纯实指数流 $\Phi_{\mathrm{real}}(t) = e^{-\gamma t}\mathbf{I}$，其模方预算为
 
 $$
 \bigl\lVert\Phi_{\mathrm{real}}(t)\bigr\rVert^2 \;=\; e^{-2\gamma t}\,\lVert\mathbf{I}\rVert^2 \;=\; e^{-2\gamma t}.
