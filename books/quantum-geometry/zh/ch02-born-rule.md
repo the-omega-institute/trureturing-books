@@ -87,7 +87,17 @@ $$
   $$
 
 ::: {.remark #rem-povm-effect-converse-literature title="广义 POVM 效应界与锐利投影极值边界（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 这里值得精确区分一般广义测量与锐利投影测量的算子边界：对任意算子 $E \in M_n(\mathbb{C})$ 而言，对一切密度态 $\rho$ 恒有 $\Tr(\rho E) \in [0, 1]$ 的充要条件是 $E$ 满足自伴正半定**效应界** $0 \le E \le I$（即广义 POVM 效应元；例如无偏抛币效应 $E = \frac{1}{2}I$ 虽不幂等 $E^2 = \frac{1}{4}I \neq E$，仍恒给出合法概率权重 $\Tr(\rho E) = \frac{1}{2} \in [0, 1]$，详见章末 [@rem-gleason-literature]）。而在凸效应集 $\{E : 0 \le E \le I\}$ 内部，自伴律 $P^* = P$ 加上幂等律 $P^2 = P$（谱值严格落于 $\{0, 1\}$）不仅自动蕴涵 $0 \le P \le I$，更精准刻画了其中无内在模糊度的一类极值边界——**锐利投影效应**。在本书采用的吕德斯（Lüders）测后更新下，若两次测量之间没有额外演化，就能保证立即复核同一结果；效应元只确定结果概率，并不单独确定测后态。
+**文献背景与上游定理应用，未作为本书的冻结定理引用。** 先区分概率界与锐利性：对任意有限维复矩阵 $E \in M_n(\mathbb{C})$，对一切密度态 $\rho$ 恒有 $\Tr(\rho E) \in [0,1]$，当且仅当 $E$ 满足自伴正半定**效应界** $0 \le E \le I$。这是关于所有密度态的迹配对的文献逆命题。例如在 $n>0$ 时，无偏抛币效应 $E = \frac{1}{2}I$ 虽不幂等，$E^2 = \frac{1}{4}I \neq E$，仍对每个密度态给出 $\Tr(\rho E) = \frac{1}{2}$（另见 [@rem-gleason-literature]）。
+
+效应区间 $\mathcal{E}_n = \{E \in M_n(\mathbb{C}) : 0 \le E \le I\}$ 中的序是算子序：$A \le B$ 表示 $B-A$ 自伴正半定，即对所有复向量 $x$ 都有 $x^*(B-A)x \ge 0$。因此效应本身已经自伴，且其特征值都在 $[0,1]$ 中。这里取欧氏空间 $\mathbb{C}^n$ 上的算子范数；对非负的 $E$，$\norm{E} \le 1$ 恰好等价于 $E \le I$，在正维时这是因为算子范数就是最大特征值。于是效应区间正是“非负锥与闭单位球的交集”；这里不能任意替换成逐元素范数或其他矩阵范数。
+
+所谓 $P$ 是 $\mathcal{E}_n$ 的**极点**，是指 $P \in \mathcal{E}_n$，且对任意 $A,B \in \mathcal{E}_n$ 和任意实数 $0<t<1$，只要 $P=tA+(1-t)B$，就必有 $A=B=P$。矩阵与向量仍在复数域上；只有混合权重取实数。这一实凸意义下的极点恰好是满足 $P^*=P$、$P^2=P$ 的**锐利投影效应**，包括 $0$、$I$ 以及任意中间秩的正交投影。零维时区间只含唯一的零矩阵，刻画仍成立。
+
+可以直接看清两方向的机制。若 $E$ 是效应，那么 $E^2$ 与 $2E-E^2$ 也都是效应：它们的特征值分别为 $\lambda^2$ 与 $2\lambda-\lambda^2$，当 $0\le\lambda\le1$ 时都在 $[0,1]$ 中。又因 $E=\frac{1}{2}E^2+\frac{1}{2}(2E-E^2)$，当 $E$ 是极点时便得到 $E^2=E$。反过来，自伴幂等矩阵 $P$ 在正交特征基下的每个特征值都满足 $\lambda^2=\lambda$，故只能是 $0$ 或 $1$，所以 $P$ 确为效应。设 $P=tA+(1-t)B$，其中 $A,B$ 是效应、$0<t<1$。对 $x\in\ker P$，非负数 $x^*Ax$ 与 $x^*Bx$ 的正权和为零，故两者都为零，进而 $Ax=Bx=0$；这里用到正半定矩阵的二次型为零时该向量就在其核中，这在非负特征值的正交特征基下立即可见。对 $x\in\operatorname{ran}P$，把同一论证用于 $I-P=t(I-A)+(1-t)(I-B)$，得到 $Ax=Bx=x$。核与像正交直和为整个空间，所以 $A=B=P$。
+
+极值性这一句直接复用所钉上游依赖 Mathlib 的[极点定理](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/CStarAlgebra/Extreme.lean#L27)，声明名为 `isStarProjection_iff_mem_extremePoints_setOfPred_nonneg_inter_unitClosedBall`。它在更一般的复 C\*-代数中给出上述等价，文件列出的文献来源为 Sakai 的《C\*-algebras and W\*-algebras》。矩阵应用的接口分别来自[算子范数下的复矩阵 C\*-代数实例](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/CStarAlgebra/Matrix.lean#L304)、[`MatrixOrder` 的正半定序](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/Matrix/Order.lean#L44)与[非负元的范数／序等价](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Order.lean#L247)；矩阵的星运算是[共轭转置](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean#L418)，而 [`IsStarProjection`](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Algebra/Star/StarProjection.lean#L24) 的两个条件就是自伴与幂等。这是对已有上游结果的应用与解释，不是新的原创极值定理，也没有把整条注记变成本书的一条冻结定理。
+
+测后重复性另有边界：对一组两两正交、总和为 $I$ 的投影构成的测量，在本书采用的吕德斯（Lüders）更新下，若所获结果的概率非零、两次测量之间没有额外演化，立即重复同一测量就会以概率 $1$ 得到同一结果。这个结论依赖所选测量仪器及其更新规则；效应元只确定结果概率，并不单独确定测后态。效应区间的极点定理本身既不陈述前面的全密度态迹逆命题，也不陈述这里的测后重复性。
 :::
 
 ## 2.2 到底什么是“点 C”？ {#sec-ch02-2}

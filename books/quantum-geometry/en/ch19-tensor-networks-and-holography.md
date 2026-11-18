@@ -913,6 +913,153 @@ The original universal claim requires the same $M,N$ and the same positive $\lam
 
 This example establishes neither a smallest counterexample, an optimal ratio threshold, nor a complete dimension classification. It supplies no quantitative gap for approximately flat spectra. Its scope remains a finite-dimensional contraction in the fixed row/column bipartition, without a claim of physical realization or saturation of the RT formula.
 
+### 19.4.1 Rectangle partitions and the exact decomposition width of a fixed operator {#sec-bridge-rectangular-partition}
+
+The coordinate routing in [@thm-bridge-native-scalar-gram-exists] gives a sufficient construction with three tensor terms; the subsequent obstructions limit exact spectral flatness with three terms. We now retain the original local input and output spaces while allowing an arbitrary finite number of terms. A partition of the coordinate rectangle into blocks with equally many row and column indices will specify both a unitary and its minimum number of product terms.
+
+::: {.theorem #thm-bridge-rectangular-partition title="Unitary rectangle routing with exact decomposition width" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/RectangularBlockPartition.unitary_exact_width"}
+Let $X,Y,T$ be arbitrary finite sets. For each $t\in T$, let $I_t\subseteq X$, $J_t\subseteq Y$, and let $\phi_t:J_t\to I_t$ be a bijection. Suppose every $(x,y)\in X\times Y$ belongs to exactly one rectangle $I_t\times J_t$. Define $A_t\in M_{X\times Y}(\mathbb C)$ by $(A_t)_{ij}=1$ when $j\in J_t$ and $i=\phi_t(j)$, and zero otherwise. Put
+
+$$
+\begin{aligned}
+U&=\sum_{t\in T}A_t\otimes A_t^*,\\
+U&:\mathbb C^Y\otimes\mathbb C^X\longrightarrow\mathbb C^X\otimes\mathbb C^Y,\\
+T_+&=\{t\in T:J_t\ne\varnothing\}.
+\end{aligned}
+$$
+
+Here $A_t^*$ denotes the conjugate transpose of $A_t$. Define realignment using the original local indices:
+
+$$
+\begin{aligned}
+\mathcal R(U)_{(i,j),(k,l)}&=U_{(i,k),(j,l)},\\
+i,l&\in X,\qquad j,k\in Y.
+\end{aligned}
+$$
+
+Then $U^*U=I_{Y\times X}$, $UU^*=I_{X\times Y}$, and
+
+$$
+\begin{aligned}
+\operatorname{rank}\mathcal R(U)&=|T_+|,\\
+U&=\sum_{t\in T_+}A_t\otimes A_t^*.
+\end{aligned}
+$$
+
+Moreover, there are row and column maps $r:T_+\to X\times Y$ and $s:T_+\to Y\times X$ with $\mathcal R(U)_{r(t),s(u)}=\delta_{tu}$ for all $t,u\in T_+$. For every finite $R$ and arbitrary complex matrices $M_r\in M_{X\times Y}(\mathbb C)$, $N_r\in M_{Y\times X}(\mathbb C)$, a decomposition of this same operator $U=\sum_{r\in R}M_r\otimes N_r$ requires $|T_+|\le|R|$. Index sets and blocks may be empty; the factors in a proposed decomposition need not be linearly independent or nonzero.
+:::
+
+::: {.proof #pf-bridge-rectangular-partition}
+First expand the tensor sum in coordinates:
+
+$$
+U_{(i,k),(j,l)}=
+\sum_{u\in T}(A_u)_{ij}\overline{(A_u)_{lk}}.
+$$
+
+For an input basis index $(j,l)\in Y\times X$, choose its unique block with $l\in I_t$ and $j\in J_t$. A nonzero $u$-summand requires $j\in J_u$ and $l\in I_u$ from the supports of its two factors, so unique coverage forces $u=t$. The remaining summand equals $1$ exactly when $i=\phi_t(j)$ and $k=\phi_t^{-1}(l)$, and vanishes otherwise. Thus each input is routed as
+
+$$
+(j,l)\longmapsto\bigl(\phi_t(j),\phi_t^{-1}(l)\bigr).
+$$
+
+Call this route $\rho$. The output $(i,k)$ stays in the same rectangle $I_t\times J_t$, so unique coverage recovers $t$. Its inverse is
+
+$$
+\rho^{-1}(i,k)=\bigl(\phi_t^{-1}(i),\phi_t(k)\bigr),
+$$
+
+and both compositions are the identity. Hence $U_{w,p}=\delta_{w,\rho(p)}$. For $p,q\in Y\times X$ and $w,z\in X\times Y$, direct calculation gives
+
+$$
+\begin{aligned}
+(U^*U)_{p,q}
+&=\sum_{w\in X\times Y}\overline{U_{w,p}}U_{w,q}\\
+&=\delta_{\rho(p),\rho(q)}=\delta_{p,q},\\
+(UU^*)_{w,z}
+&=\sum_{p\in Y\times X}U_{w,p}\overline{U_{z,p}}\\
+&=\delta_{\rho^{-1}(w),\rho^{-1}(z)}=\delta_{w,z}.
+\end{aligned}
+$$
+
+These are the two Gram identities on the original input and output spaces.
+
+For each nonempty block choose $j_t\in J_t$ and set $i_t=\phi_t(j_t)$. Unique coverage gives
+
+$$
+(A_u)_{i_tj_t}=\delta_{ut}.
+$$
+
+The following actual submatrix of the realignment is therefore an identity:
+
+$$
+\begin{aligned}
+\mathcal R(U)_{(i_t,j_t),(j_s,i_s)}
+&=\sum_u(A_u)_{i_tj_t}\overline{(A_u)_{i_sj_s}}\\
+&=\delta_{ts}.
+\end{aligned}
+$$
+
+The row map is $r(t)=(i_t,j_t)$ and the column map is $s(t)=(j_t,i_t)$. Representatives from distinct blocks are distinct, so both maps are injective. This supplies an actual identity submatrix and gives $\operatorname{rank}\mathcal R(U)\ge|T_+|$. Empty blocks give zero matrices, so dropping them preserves $U$ and supplies an actual decomposition with $|T_+|$ terms.
+
+Finally, any decomposition $U=\sum_{r\in R}M_r\otimes N_r$ gives a factorization $\mathcal R(U)=BC$, where
+
+$$
+\begin{aligned}
+B_{(i,j),r}&=(M_r)_{ij},\\
+C_{r,(k,l)}&=(N_r)_{kl}.
+\end{aligned}
+$$
+
+Here $C$ uses the entries of $N_r$ directly, without conjugation. Hence $\operatorname{rank}\mathcal R(U)\le\operatorname{rank}B\le|R|$. Applied to the nonempty-block decomposition, this gives the matching rank upper bound; applied to arbitrary complex factors, it gives the minimum term count.
+
+If $J_t$ is empty, its bijection makes $I_t$ empty as well, and $A_t=0$. If $X$ or $Y$ is empty, all blocks are empty, $T_+$ is empty, and $U$ is the unique map between two zero-dimensional spaces; both Gram identities are identities of empty square matrices. Conversely, if $T_+$ is empty (in particular, if $T$ is empty), unique coverage forces $X\times Y$ to be empty. The realignment rank is then $0$, the identity submatrix and the achieved decomposition of width $0$ are empty, and the lower bound reads $0\le|R|$. The full proof is checked by the Lean kernel.
+:::
+
+The exact width concerns this constructed operator $U$: it needs precisely $|T_+|$ product terms. Whether another unitary with the same local dimensions admits fewer terms is a separate question. No physical swap is composed with the operator to transfer the result to a different local operator-Schmidt partition.
+
+::: {.example #ex-bridge-rectangular-partition-5-6 title="A thirty-dimensional unitary requiring exactly five terms"}
+Take $X=\{0,1,2,3,4\}$ and $Y=\{0,1,2,3,4,5\}$, partitioned into the five rectangles below:
+
+| $t$ | $I_t$ | $J_t$ | Size |
+| :--- | :--- | :--- | :--- |
+| $0$ | $\{0,1,2\}$ | $\{0,1,2\}$ | $3\times3$ |
+| $1$ | $\{0,1,2\}$ | $\{3,4,5\}$ | $3\times3$ |
+| $2$ | $\{3,4\}$ | $\{0,1\}$ | $2\times2$ |
+| $3$ | $\{3,4\}$ | $\{2,3\}$ | $2\times2$ |
+| $4$ | $\{3,4\}$ | $\{4,5\}$ | $2\times2$ |
+
+For a concrete choice, set, on each respective $J_t$,
+
+$$
+\begin{aligned}
+\phi_0(j)&=j,&\phi_1(j)&=j-3,\\
+\phi_2(j)&=j+3,&\phi_3(j)&=j+1,\\
+\phi_4(j)&=j-1.
+\end{aligned}
+$$
+
+Each is a bijection from the listed $J_t$ to $I_t$; any other choice of bijections within these blocks also works. The first three rows are covered by two $3\times3$ blocks, and the last two rows by three $2\times2$ blocks, with each grid point appearing exactly once. All five blocks are nonempty, so the construction yields
+
+$$
+\begin{aligned}
+U&:\mathbb C^6\otimes\mathbb C^5\longrightarrow
+\mathbb C^5\otimes\mathbb C^6,\\
+\operatorname{rank}\mathcal R(U)&=5.
+\end{aligned}
+$$
+
+For these specific bijections, choose the representative grid points in order as
+
+$$
+(0,0),\quad(0,3),\quad(3,0),\quad(3,2),\quad(3,4).
+$$
+
+Using these as realignment row indices, and reversing each coordinate pair for the column indices, gives an actual $5\times5$ identity submatrix. The five blocks also supply a five-term decomposition, so the lower bound is attained.
+
+This is a thirty-dimensional unitary requiring exactly five terms on the displayed original local partition. It supplies a five-term realization in these dimensions. Whether a different unitary of the same dimensions admits four terms remains open here; the example does not determine the global minimum term count over all such unitaries.
+:::
+
 ::: {.figure src="ch19-discrete-vs-rt"}
 **What this chapter proves stops on the left.** On the left, the width-three bridge graph, with the green tag for max-flow equal to min-cut in the cone ([@thm-bridge-quantum-maxflow-mincut]); on the right, a disc standing for a slice of continuum spacetime, the cyan arc the boundary region $A$ and the violet arc $\gamma_A$ leaving the ends of $A$ at right angles to the rim, the minimal surface of the RT formula (literature result, not formalized in this book). The crossed-out arrow between them: the continuum limit from left to right is not proved in this book.
 :::

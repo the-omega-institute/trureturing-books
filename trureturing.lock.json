@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "d3edcc3d8d43615d173c36e0a5234cb886497344",
-  "pinned_at": "2026-11-17T22:27:02Z",
+  "commit": "ecbe7cf4578750ce655d46da8a7c4c7425a3b884",
+  "pinned_at": "2026-11-17T23:24:33Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -828,6 +828,30 @@
       "statement_id": "sha256:6f6101e7470801560c512e83fdf8d975662b22179ec8f6fe0828de26c337faa5",
       "line": 67,
       "signature": "theorem forall_pos_eval_T_iff_one_le (s : ℝ) : (∀ n : ℕ, 1 ≤ n → 0 < (Chebyshev.T ℝ (n : ℤ)).eval s) ↔ 1 ≤ s"
+    },
+    "D5/S3/Analytic/Fourier/PositiveDefinite/Closure.cos": {
+      "module": "D5/S3/Analytic/Fourier/PositiveDefinite/Closure",
+      "name": "D5.S3.Analytic.Fourier.PositiveDefinite.Closure.cos",
+      "kind": "theorem",
+      "statement_id": "sha256:025fb59352444e3a6f3da2fa86b4371e27f0667d1ec5ac8a5623b3e79e9fd143",
+      "line": 76,
+      "signature": "theorem cos (s : ℝ) : PositiveDefinite (fun t => (Real.cos (s * t) : ℂ))"
+    },
+    "D5/S3/Analytic/Fourier/PositiveDefinite/Closure.exp": {
+      "module": "D5/S3/Analytic/Fourier/PositiveDefinite/Closure",
+      "name": "D5.S3.Analytic.Fourier.PositiveDefinite.Closure.exp",
+      "kind": "theorem",
+      "statement_id": "sha256:025fb59352444e3a6f3da2fa86b4371e27f0667d1ec5ac8a5623b3e79e9fd143",
+      "line": 102,
+      "signature": "theorem exp {f : ℝ → ℂ} (hf : PositiveDefinite f) : PositiveDefinite (fun t => Complex.exp (f t))"
+    },
+    "D5/S3/Analytic/Fourier/PositiveDefinite/Closure.smul": {
+      "module": "D5/S3/Analytic/Fourier/PositiveDefinite/Closure",
+      "name": "D5.S3.Analytic.Fourier.PositiveDefinite.Closure.smul",
+      "kind": "theorem",
+      "statement_id": "sha256:025fb59352444e3a6f3da2fa86b4371e27f0667d1ec5ac8a5623b3e79e9fd143",
+      "line": 24,
+      "signature": "theorem smul {f : ℝ → ℂ} (hf : PositiveDefinite f) {a : ℝ} (ha : 0 ≤ a) : PositiveDefinite (fun t => (a : ℂ) * f t)"
     },
     "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_hankel_rank": {
       "module": "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction",
@@ -1740,6 +1764,14 @@
       "statement_id": "sha256:f5e0857a6af4673b8e6b849c8e3f46c5021a9c9fa548482a34028639cba1d5e0",
       "line": 28,
       "signature": "theorem no_continuous_global_section : ¬ ∃ s : Circle → Circle, Continuous s ∧ ∀ z : Circle, s z ^ 2 = z"
+    },
+    "D5/S3/Constants/InnerProducts/FractionalReciprocalInnerProduct.fractional_reciprocal_inner_product": {
+      "module": "D5/S3/Constants/InnerProducts/FractionalReciprocalInnerProduct",
+      "name": "D5.S3.Constants.InnerProducts.FractionalReciprocalInnerProduct.fractional_reciprocal_inner_product",
+      "kind": "theorem",
+      "statement_id": "sha256:836f94f48f6f12385dd9d441540fc152c1a805d053e730ecf3c71eff65490252",
+      "line": 299,
+      "signature": "theorem fractional_reciprocal_inner_product (a : ℤ) (ha : 1 ≤ a) : @inner ℝ (Lp ℝ 2 positiveMeasure) _ unitIntervalIndicator (integerFractionalReciprocal a ha) = (Real.log (a : ℝ) + 1 - Real.eulerMascheroniConstant) / (a : ℝ)"
     },
     "D5/S3/Constants/Irrationality/LogNaturalIrrationality.irrational_log_natCast": {
       "module": "D5/S3/Constants/Irrationality/LogNaturalIrrationality",
@@ -2844,6 +2876,22 @@
       "statement_id": "sha256:87b5091d203eefbccc2aa6cb991527f1196fa514d04fe5915e105009a6f7ed85",
       "line": 42,
       "signature": "theorem zeckendorf_real_thread_injective : Function.Injective zeckendorfRealThread"
+    },
+    "D5/S3/Observer/Hilbert/NymanBeurlingFiniteGramDistance.nyman_beurling_finite_gram_distance": {
+      "module": "D5/S3/Observer/Hilbert/NymanBeurlingFiniteGramDistance",
+      "name": "D5.S3.Observer.Hilbert.NymanBeurlingFiniteGramDistance.nyman_beurling_finite_gram_distance",
+      "kind": "theorem",
+      "statement_id": "sha256:d482a2fc0f3f22eaf7bb8908e49ce75c11fe75eb2d0060168a44dd94d565d390",
+      "line": 121,
+      "signature": "theorem nyman_beurling_finite_gram_distance (N : ℕ) : (shell N).starProjection = (synthesis N).comp ((moorePenroseInverse (gramOperator N)).toContinuousLinearMap.comp (synthesis N).adjoint) ∧ (distance N ^ 2 : ℂ) = 1 - inner ℂ (correlations N) (moorePenroseInverse (gramOperator N) (correlations N)) ∧ ∀ G : EuclideanSpace ℂ (Fin N) ≃ₗ[ℂ] EuclideanSpace ℂ (Fin N), G.toLinearMap = gramOperator N → (distance N ^ 2 : ℂ) = 1 - inner ℂ (correlations N) (G.symm (correlations N))"
+    },
+    "D5/S3/Observer/Hilbert/NymanHalflineZeroSeparation.nyman_halfline_distance_bound": {
+      "module": "D5/S3/Observer/Hilbert/NymanHalflineZeroSeparation",
+      "name": "D5.S3.Observer.Hilbert.NymanHalflineZeroSeparation.nyman_halfline_distance_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:5e4d22a2c754769586fe72b57486e68ac9d67bf4ddcd08f19c782352851207e7",
+      "line": 151,
+      "signature": "theorem nyman_halfline_distance_bound (rho : ℂ) (hz : Zeta23.IsNontrivialZero rho) (hb : 1 / 2 < rho.re) (N : ℕ) : 1 / (‖rho‖ ^ 2 * (1 / (2 * rho.re - 1) + 1 / ‖rho - 1‖ ^ 2)) ≤ distance N ^ 2"
     },
     "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le": {
       "module": "D5/S3/Observer/Linear/ExactTaylorObservationRemainder",
@@ -5285,6 +5333,14 @@
       "line": 116,
       "signature": "theorem result : claim"
     },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/RectangularBlockPartition.unitary_exact_width": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/RectangularBlockPartition",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.RectangularBlockPartition.unitary_exact_width",
+      "kind": "theorem",
+      "statement_id": "sha256:cfc696ee4ef771dcb64cc0287dbd10ce4720101a316842281207cb07757dbca7",
+      "line": 221,
+      "signature": "theorem unitary_exact_width (h : ∀ x y, ∃! t, x ∈ I t ∧ y ∈ J t) : (operator I J φ)ᴴ * operator I J φ = 1 ∧ operator I J φ * (operator I J φ)ᴴ = 1 ∧ (realign (operator I J φ)).rank = Fintype.card (Active J) ∧ operator I J φ = ∑ t : Active J, kronecker (block I J φ t.val) (block I J φ t.val)ᴴ ∧ (∃ (rows : Active J → X × Y) (cols : Active J → Y × X), (realign (operator I J φ)).submatrix rows cols = 1) ∧ ∀ (R : Type z) [Fintype R] (M : R → Matrix X Y ℂ) (N : R → Matrix Y X ℂ), operator I J φ = ∑ r, kronecker (M r) (N r) → Fintype.card (Active J) ≤ Fintype.card R"
+    },
     "D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum.obstruction": {
       "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/RestrictedFlatSpectrum",
       "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.RestrictedFlatSpectrum.obstruction",
@@ -6180,6 +6236,14 @@
       "statement_id": "sha256:0c230a6759a124696a2512db419424da8cec03eefde3f5514acdc29e7f51bce3",
       "line": 143,
       "signature": "theorem golden_right_half_strip_implies_rh (hRight : forall rho : Complex, riemannZeta rho = 0 -> (1 : Real) / 2 < rho.re -> rho.re < 1 -> False) : RiemannHypothesis"
+    },
+    "D5/S3/Weil/ZetaPntBounds/NymanFractionalMellin.fractionalMellin_eq_zeta": {
+      "module": "D5/S3/Weil/ZetaPntBounds/NymanFractionalMellin",
+      "name": "D5.S3.Weil.ZetaPntBounds.NymanFractionalMellin.fractionalMellin_eq_zeta",
+      "kind": "theorem",
+      "statement_id": "sha256:440d9d61cb34665094fc15a3f03a87c29586ab881b81e88845fb2215d802b5d1",
+      "line": 356,
+      "signature": "theorem fractionalMellin_eq_zeta (theta : ℝ) (htheta : 0 < theta) (htheta1 : theta ≤ 1) (s : ℂ) (hs : 0 < s.re) (hs_lt : s.re < 1) : (∫ x in Ioo (0 : ℝ) 1, ((Int.fract (theta / x) : ℝ) : ℂ) * (x : ℂ) ^ (s - 1)) = (theta : ℂ) / (s - 1) - (theta : ℂ) ^ s * riemannZeta s / s"
     },
     "D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower.norm_zeta_product_ge_one": {
       "module": "D5/S3/Weil/ZetaPntBounds/ZetaBoundsLower",

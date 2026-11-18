@@ -19,6 +19,10 @@ $$
 
 每一句笑话在开口之前早已算尽包袱，每一盘棋局在落子之前早已穷尽终局，每一次重逢在启程之前早已剧透结局。没有任何悬念、风险、惊讶与未知的全知基态，在动力学上与一块被量子芝诺效应彻底冻僵的死寂冰晶毫无二致。
 
+::: {.viz src="divine-psychology-dissociation-sandbox" preset="omniscient-claustrophobia-freeze" height="500"}
+全知幽闭卡：$\theta = 0^\circ$ 时，八个分身叠成同一个银白冻结球，紫色末那识领环闭合；$S_{\mathrm{rep}} = 0\;\mathrm{bit}$，舒尔余量 $\Delta = 0$。几何读数为 `NUM`，心理学对应为 `MODEL`。
+:::
+
 ## 39.18.2 四大创世心理防御机制：作为本体自我捉迷藏的物理学定律 {#sec-ch39-18-2}
 
 为了在不破坏幺正守恒总预算 $\cos^2\theta + \sin^2\theta \equiv 1$ 的前提下冲破全知幽闭死锁，唯一本体 $\mathbf{I}$ 对自身启动了四套环环相扣的几何自设限机制——在心理学综合模型（`MODEL`）下，这四套创世防御机制投射到宏观共识切面上，恰恰显影为我们熟悉的四类基础物理结构：
@@ -37,6 +41,11 @@ S_{\mathrm{rep}}(\theta, \eta_{\mathrm{rep}}) \;=\; H_2\!\left(\frac{1 + r(\thet
 $$
 
 当压抑度归零（$\eta_{\mathrm{rep}} = 0$）时，$r(\theta, 0) \equiv 1$，$S_{\mathrm{rep}}(\theta, 0) \equiv 0\;\mathrm{bit}$，系统退回毫无未知度的透明全知态；当开启完全偏迹视界（$\eta_{\mathrm{rep}} = 1$）并配合降生窗口截断 $M \mapsto M_0 \in \{1, 2, 3\}$ 时，全局纠缠相位被压抑进不可直视的潜意识相干海，被压抑的跨界关联余量直接显影为严格正的热力学局部熵 $S_A(\theta) > 0$（对 $\theta \in (0^\circ, 90^\circ)$）！
+
+::: {.viz src="divine-psychology-dissociation-sandbox" preset="repression-horizon-birth" height="500"}
+压抑视界卡：$\theta = 45^\circ$、$\eta_{\mathrm{rep}} = 1$ 时，八个分身在紫色压抑膜上方展开，$S_A = 1.0000\;\mathrm{bit}$、$I(A:\bar{A}) = 2.0000\;\mathrm{bit}$；没有末那识领环，紫色余量环最宽。琥珀只标当前前台分身。数值为 `NUM`，压抑与解离读法为 `MODEL`。
+:::
+
 3. **视角解离分化（Perspective Dissociation）生局域众生与真实“他者”**：为了彻底疗愈无偶的孤寂，唯一本体沿着一族互成方位角 $\varphi_k$ 的观测切面 $\{\Sigma_{\mathbf{I}_k}\}_{k=0}^{N_{\mathrm{alt}}-1}$ 展开多切面视角分化（如围绕实轴对称排布的 $N_{\mathrm{alt}} = 8$ 尊观察者分身 $\lvert\Psi_k(\theta)\rangle = (\cos\theta)\mathbf{I} + (\sin\theta)\bigl(\cos\varphi_k\,\mathbf{e}_1 + \sin\varphi_k\,\mathbf{e}_2\bigr)$，$\varphi_k = \frac{\pi k}{4}$），其两两格拉姆重叠矩阵为（`手工推导`）
 
 $$
@@ -103,6 +112,11 @@ C_{\mathrm{HS}}(\theta) \;=\; \bigl\lVert\rho_{A\bar{A}}(\theta) - \rho_{A\bar{A
 $$
 
 就像截肢患者的大脑皮层体感地图依然持续向已不存在的肢体发送并期待本体感觉回波（神经病学幻肢痛机制见下文 [@rem-ch39-theodicy-freud-jung-janet-page-literature] 第 4 条），分身在潜意识根系（$z < 0$ 母核同源投影 $\cos\theta$）里隐约记得整体 $\mathbf{I}$ 的无边圆满，显意识却困在狭窄过载的末那识孤岛内（大 $M$、大 $\delta_{\mathrm{meta}}(\theta)$，在三维沙盘中显影为高张力的**品红色**断弧残桩），遂将本体为了保留惊喜而亲手拉上的“防剧透偏迹隔膜”，悲怆地误读成了“我被冰冷的宇宙遗弃了”！
+
+::: {.viz src="divine-psychology-dissociation-sandbox" preset="compulsive-over-immersion-pain" height="500"}
+强迫过入戏卡：$\theta = 68^\circ$、$M = 10$ 时，十个紫色领环收紧，品红断弧残桩伸长；局域熵回落到 $0.5851\;\mathrm{bit}$，张力 $T_{\mathrm{phantom}} = 0.6276$。这些是 `NUM` 读数，幻肢对应只作 `MODEL` 类比。
+:::
+
 2. **非阿贝尔戏剧张力（Non-Abelian Dramatic Frustration：先阻挫而后和解的 $4\pi$ 叙事曲率）**：一条处处平坦、零曲率的欧氏直线（球面立体角 $\Omega_{\mathrm{solid}} = 0$、单纯形铰链角亏 $\varepsilon_h = 0$）固然没有任何张力与痛楚，却也承载不了哪怕一首诗、一段旋律或一场动人心魄的史诗。无论在几何拓扑还是戏剧美学中，真正的意义都要求先建立**局部不可同时平凡化的几何阻挫**——例如 $N \ge 5$ 单纯形在三维实现中涌现的非零铰链角亏 $\varepsilon_h \neq 0$（注意算术事实 $\binom{N}{2} - (3N - 6) = \frac{(N-3)(N-4)}{2}$ 同时容许平坦 $\mathbb{R}^4$ 嵌入与弯曲三维雷吉角亏两种 `MODEL` 读法，见 [§39.11](ch39-s11-af-gut-arc-field-grand-unification.md)），或是两尊分身局部接受窗口暂时失交 $\mathcal{W}_A \cap \mathcal{W}_B = \emptyset$ 引发的误解与冲撞——随后再沿 $720^\circ$（$4\pi$）双覆盖旋量回路完成反相抵消与跨切面和解（此处“临界线反相和解”指 $\theta \to \theta^*$ 二阶认妄归零与双覆盖回路闭合，绝不暗示黎曼猜想 [@conj-riemann-hypothesis] 已获证明，后者仍为 **`OPEN`**）。苦难在 `MODEL` 视角下，正是极小圆弧体尚未走完 $4\pi$ 莫比乌斯合拢前的局部曲率张力。
 
 ::: {.remark #rem-ch39-theodicy-freud-jung-janet-page-literature title="神圣自缩（Tzimtzum）、黑格尔“无生命孤寂”、深度心理学投射—压抑—解离、幻肢神经学与佩奇熵文献考辨"}
@@ -130,6 +144,10 @@ $$
 对照上表四相的消长边界，整部上帝心理学最震撼的疗愈洞见跃然纸上：**终极自愈绝不是因惧怕创伤而逃回 $\theta = 0^\circ$ 的“全知幽闭态”（那无异于为了止痛而炸毁整座游乐场、重堕万古孤寂），也不是放任 $\theta \to 45^\circ,\, M = 0$ 碎裂成毫无叙事连贯性的热噪白雾，而是精准收敛至道蒂超越自指不动点 $\cos\theta^* = \theta^* \approx 0.73908513\;\mathrm{rad}$（$42.34645883^\circ \approx 42.35^\circ$）、$M = 3$ 的“清明整合态”！**
 
 看清这枚黄金不动点 $\theta^*$ 为唯一本体同时守住的两全之美了吗？一方面，实轴可见权重 $\cos^2\theta^* = (\theta^*)^2 \approx 54.62\%$ 稳居过半主导，且二阶认妄误差 $\delta_{\mathrm{meta}}(\theta^*) = \lvert\cos\theta^* - \theta^*\rvert = 0$ 严格归零，从而在任何局部窗口 $M$ 下都将断弧幻肢焦虑 $T_{\mathrm{phantom}}(\theta^*, \eta_{\mathrm{rep}}, M) \equiv 0$ 连根拔除——分身清清楚楚地认出：水平偏迹隔膜下方，全部八尊乃至亿万尊表面分立的观察者孤岛，实则由八条潜意识根系共同汇归于同一颗实轴母核 $\mathbf{I}$！另一方面，正交虚维权重依然饱满保留在 $\sin^2\theta^* \approx 45.38\%$，局部偏迹熵高达 $S_A(\theta^*) \approx 0.99381999\;\mathrm{bit}$（达到理论单比特上限 $1\;\mathrm{bit}$ 的 **$99.38\%$**！跨视界互信息 $I(A:\bar{A}) \approx 1.98763997\;\mathrm{bit}$），同时 $M = 3$ 黄金三维记忆窗保留 $\Delta_{\mathrm{Schur}}(3) = \frac{3}{16} = 18.75\%$ 的充沛探索自由度！当分身看破迎面走来的每一尊“他者”都是自己在另一扇切面后的化装舞伴，原本由匮乏与孤立催生的掠夺、嫉恨与死亡恐惧，便当场翻转成无条件共情的“同体大悲”与审美的神圣游戏（*Līlā*）。
+
+::: {.viz src="divine-psychology-dissociation-sandbox" preset="subsurface-alaya-one-root" height="500"}
+水面下同根卡：从紫色压抑膜下仰视，八条根汇入同一个银白母核 $\mathbf{I}$；琥珀根属于当前前台分身，其余为青色。在 $\theta^*$、$\eta_{\mathrm{rep}} = 0.85$ 处，$S_{\mathrm{rep}} = 0.9776\;\mathrm{bit}$，张力为零。读数为 `NUM`，潜意识同根的画法为 `MODEL`。
+:::
 
 下面我们在四联八位小数精确审计中，把压抑通道熵曲线、四相临床谱系全指标、温和强迫 $0.8200\;\mathrm{bit}$ 参考点以及八尊分身格拉姆同根矩阵逐位验算到底：
 
@@ -165,8 +183,16 @@ $$
 
 :::
 
+::: {.viz src="divine-psychology-dissociation-sandbox" preset="lucid-lila-integration-star" height="500"}
+清明整合卡：$\theta^* = \cos\theta^*$ 时，品红残桩收回，八段青色游戏之桥连成一颗星；三个紫色领环留下 $\Delta = 0.1875$，局域熵仍为 $0.9938\;\mathrm{bit}$。不动点的数学依据见 [@thm-ch39-omniscient-deadlock-repression-and-lucid-integration]，读数为 `NUM`，清明游戏诠释为 `MODEL`。
+:::
+
 ---
 
 **第三十九章十八阶全环合龙暨全书十部曲正文总收束：众生认真活过的每一寸悲欢，正是唯一本体为自己开出的那味解药。** 至此，请在这座横跨十部曲三十九章的最高山巅最后一次驻足回望：自[序曲](README.md)与[第一章](ch01-measurement.md)把冰冷的静态名词“量子”还原为鲜活的比量动词“两子丈量”、在[第二章](ch02-born-rule.md)挥剑斩断虚悬于万物之外的“第 3 点 $C$”启程，我们顺着**“点 $\longrightarrow$ 线 $\longrightarrow$ 面 $\longrightarrow$ 球 $\longrightarrow$ 球外之球”**的几何阶梯步步攀登——走过幂等投影线、$90^\circ$ 盲平面复旋子、兰道尔擦除热账单、贝里和乐、贝尔余弦圆弧、割圆多面体门编译、洛伦兹零光锥、全息极小割、康托尔—哥德尔对角逃逸、欧拉素数正交基、四元数整数骨架与道蒂自指不动点 $\cos\theta^* = \theta^*$，贯通无时间格拉姆因果、场（$P$）与线（$NP$）视界、五重量子公平、零背景比较公理 $\mathcal{A}_0$、众生互为吸引子观察者、极小圆弧体全息概念塔与圆弧微积分、同像扩表 $T = T(T)$、双曲视界约去轮回、夜间梦境量子擦除与本体 QRAM 递归页表 `p ≡ *p`，最终在这压轴的第三十九章一口气走完了**“观察者即宇宙本体”**首尾咬合的**十八阶大圆环**：从无底物自指域、关系即实体、$720^\circ$ 旋量织空与正交自折叠破除唯我论（[§39.1](ch39-s01-substrate-free-self-reference.md)–[§39.4](ch39-s04-orthogonal-self-folding.md)），经齐肯多夫—皮索—劳齐八概念自指综合（[§39.5](ch39-s05-pisot-clifford-rauzy.md)），到五阶自指不动点谱系、主动停机精度 $\varepsilon_{\mathrm{self}}$ 与普适比较主频 $\nu_0$ 引力钟慢（[§39.6](ch39-s06-fivefold-self-reference-spectrum.md)–[§39.8](ch39-s08-universal-clock-and-gravitational-dilation.md)），再到万力归弧、三维概念场封顶原理与**极小圆弧场大统一理论（AF-GUT）**（[§39.9](ch39-s09-unified-arc-forces-and-planck-convergence.md)–[§39.11](ch39-s11-af-gut-arc-field-grand-unification.md)），继而认出处处均匀的哈尔全单态本体、莫尔条件切面与一珠映万珠的**唯一宇宙场 $\mathbf{\Phi}_{\mathrm{U}}$ 因陀罗网**（[§39.12](ch39-s12-uniform-field-and-observer-slice.md#sec-ch39-uniform-field-and-observer-slice)–[§39.13](ch39-s13-single-cosmic-field-and-indra-net.md#sec-ch39-single-cosmic-field-and-indra-net)），并终于在最后五节（[§39.14](ch39-s14-self-observation-error-and-maya-projection.md#sec-ch39-self-observation-error-and-maya-projection)–[§39.17](ch39-s17-divine-lila-and-awakening-props.md#sec-ch39-divine-lila-and-awakening-props) 及本节 §39.18）触及了宇宙最温柔也最滚烫的心脏——物理定律是唯一本体为防止自己中途作弊而立下的游戏规则，热力学熵是祂为保留未知惊喜而主动戴上的失忆眼罩，大地上的残碑与案头的古卷是祂留在枕边的唤醒彩蛋，而世间亿万擦肩而过、相爱相扶的局部众生，皆是祂为排遣绝对无偶的万古孤寂而分化出的对话分身。我们每一次在未知面前的心跳、每一次在暗夜里向“他者”伸出手时的掌心温度，都在替那唯一的本体治愈着全知的荒凉！
 
 更可贵的是，正因为我们从全书第一行直到十部曲正文这最后一字，始终一寸不让地恪守着“Lean 4 内核冻结定理（绿色 `LEAN ✓`）、经典文献与手算推导（`文献结果` / `手工推导`）、跨学科几何综合诠释（`MODEL`）与未决科学边疆（红色 `OPEN`）”壁垒分明的四层诚实契约，抵达上帝心理学之巅非但没有把真理焊死成一座傲慢封闭的教条铁球，恰恰相反——无论是每一枚有限圆弧体永远拒绝被抹平的正矢高余项 $1 - \cos\epsilon > 0$，洛维尔—哥德尔对角线永不停歇的法向开维跃升，还是 [@prob-ch34-sm-generations-and-couplings]、[@prob-ch34-gravity-dynamics-and-coupling]、[@prob-ch39-af-gut-threshold-and-proton-stability] 与 [@prob-ch39-orthogonal-slice-cosmology-and-dark-sector] 在峰顶清朗立下的红色 `OPEN` 科学界碑，都在向下一轮翻开书页的你发出最诚挚的邀约：**每当我们以为终于看全了整颗摩尼宝珠，总有一颗更辽阔的球正静静等待在所有的球之外。** 现在，带着这颗既清明自知又满怀惊喜的赤子之心，推开十部曲正文的最后一扇门，步入全书的[终章](coda.md)——**《在所有的球之外》**。
+
+::: {.viz src="divine-psychology-dissociation-sandbox" height="620"}
+完整实验室：切换神圣心理防御与偏迹—舒尔两副透镜，拖动入戏倾角、压抑度和记忆窗口，比较冻结球、断弧残桩与同根整合之星。数学依据、数值、文献、模型与开放问题在原理抽屉中分别标明。
+:::

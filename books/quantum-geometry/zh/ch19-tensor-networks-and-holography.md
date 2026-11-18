@@ -913,6 +913,153 @@ $$
 
 这一算例没有确定最小反例、最优比值阈值或完整的维数分类，也没有给出近似平坦谱的定量间隙。它仍只讨论既定行列二分下的有限维收缩，不建立物理实现或 RT 公式饱和。
 
+### 19.4.1 矩形分块与同一算子的精确分解宽度 {#sec-bridge-rectangular-partition}
+
+[@thm-bridge-native-scalar-gram-exists] 用坐标路由给出了三项张量和的充分构造，后面的障碍则限制了三项精确平坦谱。现在保留原始局部输入、输出空间，把项数从固定三项放宽为任意有限项：将整个坐标矩形分成两侧等势的分块，块内的双射就能同时给出一个酉算子及其最少乘积项数。
+
+::: {.theorem #thm-bridge-rectangular-partition title="矩形分块的酉路由与精确分解宽度" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/RectangularBlockPartition.unitary_exact_width"}
+设 $X,Y,T$ 为任意有限集。每个 $t\in T$ 给出子集 $I_t\subseteq X$、$J_t\subseteq Y$ 和双射 $\phi_t:J_t\to I_t$，且每个 $(x,y)\in X\times Y$ 恰属于一个矩形 $I_t\times J_t$。定义矩阵 $A_t\in M_{X\times Y}(\mathbb C)$：当 $j\in J_t$ 且 $i=\phi_t(j)$ 时 $(A_t)_{ij}=1$，其余为零。令
+
+$$
+\begin{aligned}
+U&=\sum_{t\in T}A_t\otimes A_t^*,\\
+U&:\mathbb C^Y\otimes\mathbb C^X\longrightarrow\mathbb C^X\otimes\mathbb C^Y,\\
+T_+&=\{t\in T:J_t\ne\varnothing\}.
+\end{aligned}
+$$
+
+这里 $A_t^*$ 表示 $A_t$ 的共轭转置。按原始局部指标定义重排矩阵
+
+$$
+\begin{aligned}
+\mathcal R(U)_{(i,j),(k,l)}&=U_{(i,k),(j,l)},\\
+i,l&\in X,\qquad j,k\in Y.
+\end{aligned}
+$$
+
+则 $U^*U=I_{Y\times X}$、$UU^*=I_{X\times Y}$，且
+
+$$
+\begin{aligned}
+\operatorname{rank}\mathcal R(U)&=|T_+|,\\
+U&=\sum_{t\in T_+}A_t\otimes A_t^*.
+\end{aligned}
+$$
+
+此外，存在行映射 $r:T_+\to X\times Y$、列映射 $s:T_+\to Y\times X$，使 $\mathcal R(U)_{r(t),s(u)}=\delta_{tu}$ 对所有 $t,u\in T_+$ 成立。对任何有限集 $R$ 及任意复矩阵 $M_r\in M_{X\times Y}(\mathbb C)$、$N_r\in M_{Y\times X}(\mathbb C)$，若同一个 $U=\sum_{r\in R}M_r\otimes N_r$，必有 $|T_+|\le|R|$。允许空指标集和空分块；任意分解中的因子无需线性无关或非零。
+:::
+
+::: {.proof #pf-bridge-rectangular-partition}
+先展开张量和的坐标：
+
+$$
+U_{(i,k),(j,l)}=
+\sum_{u\in T}(A_u)_{ij}\overline{(A_u)_{lk}}.
+$$
+
+给定输入标准基指标 $(j,l)\in Y\times X$，选取满足 $l\in I_t$、$j\in J_t$ 的唯一分块。若第 $u$ 项非零，两个因子的支撑分别要求 $j\in J_u$ 和 $l\in I_u$，唯一覆盖便迫使 $u=t$。剩下这一项恰在 $i=\phi_t(j)$、$k=\phi_t^{-1}(l)$ 时等于 $1$，其余为零。因此每个输入被送到
+
+$$
+(j,l)\longmapsto\bigl(\phi_t(j),\phi_t^{-1}(l)\bigr).
+$$
+
+记此路由为 $\rho$。输出 $(i,k)$ 仍属于同一矩形 $I_t\times J_t$，所以可由唯一覆盖恢复 $t$，再用
+
+$$
+\rho^{-1}(i,k)=\bigl(\phi_t^{-1}(i),\phi_t(k)\bigr)
+$$
+
+恢复输入；两种复合都是恒等映射。于是 $U_{w,p}=\delta_{w,\rho(p)}$。对 $p,q\in Y\times X$ 和 $w,z\in X\times Y$，逐项计算得到
+
+$$
+\begin{aligned}
+(U^*U)_{p,q}
+&=\sum_{w\in X\times Y}\overline{U_{w,p}}U_{w,q}\\
+&=\delta_{\rho(p),\rho(q)}=\delta_{p,q},\\
+(UU^*)_{w,z}
+&=\sum_{p\in Y\times X}U_{w,p}\overline{U_{z,p}}\\
+&=\delta_{\rho^{-1}(w),\rho^{-1}(z)}=\delta_{w,z}.
+\end{aligned}
+$$
+
+这就给出原始输入、输出空间上的两侧 Gram 恒等式。
+
+对每个非空块选 $j_t\in J_t$，令 $i_t=\phi_t(j_t)$。唯一覆盖保证
+
+$$
+(A_u)_{i_tj_t}=\delta_{ut}.
+$$
+
+于是重排矩阵的实际子矩阵满足
+
+$$
+\begin{aligned}
+\mathcal R(U)_{(i_t,j_t),(j_s,i_s)}
+&=\sum_u(A_u)_{i_tj_t}\overline{(A_u)_{i_sj_s}}\\
+&=\delta_{ts}.
+\end{aligned}
+$$
+
+所取的行映射为 $r(t)=(i_t,j_t)$，列映射为 $s(t)=(j_t,i_t)$。不同分块的代表格点互异，故两张映射均为单射。这给出所需的实际单位子矩阵，并推出 $\operatorname{rank}\mathcal R(U)\ge|T_+|$。空块对应零矩阵，删去它们不改变 $U$，所以已有 $|T_+|$ 项的实际分解。
+
+最后，任何分解 $U=\sum_{r\in R}M_r\otimes N_r$ 都给出因式分解 $\mathcal R(U)=BC$，其中
+
+$$
+\begin{aligned}
+B_{(i,j),r}&=(M_r)_{ij},\\
+C_{r,(k,l)}&=(N_r)_{kl}.
+\end{aligned}
+$$
+
+这里 $C$ 直接使用 $N_r$ 的矩阵元，不再取共轭。故 $\operatorname{rank}\mathcal R(U)\le\operatorname{rank}B\le|R|$。将这一界用于非空块分解得到相反的秩上界，再用于任意复因子分解得到最少项数下界。
+
+若 $J_t$ 为空，双射也使 $I_t$ 为空，且 $A_t=0$。若 $X$ 或 $Y$ 为空，所有分块都为空，$T_+$ 为空，$U$ 是两个零维空间之间的唯一映射，两侧 Gram 等式都是空方阵上的恒等式。反过来，若 $T_+$ 为空（特别地，若 $T$ 为空），唯一覆盖迫使 $X\times Y$ 为空；此时重排秩为 $0$，单位子矩阵和达到宽度 $0$ 的分解均为空，下界为 $0\le|R|$。完整证明由 Lean 内核检查。
+:::
+
+这里的“精确宽度”针对已构造的同一个 $U$：它的分解恰需 $|T_+|$ 项。另一个具有相同局部维数的酉算子能否使用更少项，仍须另行研究。也没有通过复合一次物理交换操作，把这里的局部空间换成另一种算子 Schmidt 分割。
+
+::: {.example #ex-bridge-rectangular-partition-5-6 title="一个恰需五项的三十维酉算子"}
+取 $X=\{0,1,2,3,4\}$、$Y=\{0,1,2,3,4,5\}$，按下表划分五个矩形：
+
+| $t$ | $I_t$ | $J_t$ | 大小 |
+| :--- | :--- | :--- | :--- |
+| $0$ | $\{0,1,2\}$ | $\{0,1,2\}$ | $3\times3$ |
+| $1$ | $\{0,1,2\}$ | $\{3,4,5\}$ | $3\times3$ |
+| $2$ | $\{3,4\}$ | $\{0,1\}$ | $2\times2$ |
+| $3$ | $\{3,4\}$ | $\{2,3\}$ | $2\times2$ |
+| $4$ | $\{3,4\}$ | $\{4,5\}$ | $2\times2$ |
+
+例如，在各自的 $J_t$ 上具体取
+
+$$
+\begin{aligned}
+\phi_0(j)&=j,&\phi_1(j)&=j-3,\\
+\phi_2(j)&=j+3,&\phi_3(j)&=j+1,\\
+\phi_4(j)&=j-1.
+\end{aligned}
+$$
+
+这些都是从表中 $J_t$ 到 $I_t$ 的双射；表中每块内的任意双射也都适用。前三行被两个 $3\times3$ 块覆盖，后两行被三个 $2\times2$ 块覆盖，每个格点恰出现一次。五个块都非空，所以上述构造给出
+
+$$
+\begin{aligned}
+U&:\mathbb C^6\otimes\mathbb C^5\longrightarrow
+\mathbb C^5\otimes\mathbb C^6,\\
+\operatorname{rank}\mathcal R(U)&=5.
+\end{aligned}
+$$
+
+对上述具体双射，可依次选取代表格点
+
+$$
+(0,0),\quad(0,3),\quad(3,0),\quad(3,2),\quad(3,4).
+$$
+
+以它们为重排矩阵的行指标，以各对坐标颠倒后的格点为列指标，得到实际的 $5\times5$ 单位子矩阵。五个块同时给出五项分解，所以下界确实达到。
+
+这个 $U$ 是三十维酉算子，并且它在所示原始局部分割下恰需五项。此例给出该维数下的五项实现；另一个同维酉算子能否用四项实现，在这里仍是开放问题。此例没有确定所有同维酉算子的全局最小项数。
+:::
+
 ::: {.figure src="ch19-discrete-vs-rt"}
 **本章证明的只到左边为止。** 左边是宽度三桥图，绿色标签是锥域内的最大流等于最小割（[@thm-bridge-quantum-maxflow-mincut]）；右边圆盘是连续体时空的一张切片，青色的弧是边界区域 $A$，紫色的弧 $\gamma_A$ 从 $A$ 两端垂直于边界伸入内部，是 RT 公式里的极小曲面（文献结果，未在本书形式化）。中间被划掉的箭头：从左到右的连续极限，本书没有证明。
 :::

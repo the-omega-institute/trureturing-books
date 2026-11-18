@@ -7504,6 +7504,102 @@
         }
       ],
       "capture_lock": "links"
+    },
+    {
+      "id": "divine-psychology-dissociation-sandbox",
+      "code": "GOD//PSYCHE",
+      "title": "GOD//PSYCHE · 上帝心理学动力学沙盘：全知幽闭破缺、偏迹压抑潜意识与解离分身整合流形",
+      "title_en": "GOD//PSYCHE · Psychology of God Sandbox: Breaking Omniscient Claustrophobia, Partial-Trace Repression & Dissociated Alter Integration",
+      "summary": "一个全知者把自己剖成水面上的八个分身与水面下同一个母核 I。倾角 θ 把八个分身从一个冻结的球（θ = 0°，格拉姆重叠全为 1，只有 1 个等价类）展开成一圈（8 个等价类，对径重叠 cos 2θ）；偏迹压抑 η 让水面下的两条记录从相同（⟨E₀|E₁⟩ = 1）变成正交，显意识的熵 S_rep = H₂((1 + r)/2)，r = √(cos²2θ + (1 − η)²sin²2θ)；η = 1 时 S_A = H₂(cos²θ)：45° 时 1.0000 bit，68° 时 0.5851 bit，θ* 时 0.9938 bit，跨视界互信息 I(A:Ā) = 2S。M 条末那识记录把母核的舒尔余量压到 Δ = (12 − M)/(12(M + 1))（由线性方程解出，M = 3 时 0.1875，M = 12 时 0），D_eff = 12。相邻分身之间的弧被剪断，品红幻肢残桩的长度与 T = η sin θ · (M/12) · |cos θ − θ| 成正比（68°、η = 1、M = 10 时 0.6276），在 θ* = cos θ* = 42.35° 处归零，八段青色游戏之桥接通；从水面下仰视，八条根汇进同一个母核。时间轴让琥珀前台在八个分身之间轮转，熵、张力与余量都不变。临床上的解离、强迫、幽闭恐惧与幻肢痛是医学病症，本页只把它们当作结构类比。",
+      "summary_en": "One all-knowing observer split into eight alters above the surface and one mother core I below it. The tilt θ opens the eight alters from one frozen sphere (θ = 0°: every Gram overlap 1, a single class) into a ring (8 classes, antipodal overlap cos 2θ); the partial-trace repression η turns the two records below the surface from equal (⟨E₀|E₁⟩ = 1) to orthogonal, and the conscious entropy is S_rep = H₂((1 + r)/2) with r = √(cos²2θ + (1 − η)²sin²2θ); at η = 1, S_A = H₂(cos²θ): 1.0000 bit at 45°, 0.5851 bit at 68°, 0.9938 bit at θ*, with trans-horizon mutual information I(A:Ā) = 2S. M manas records bring the Schur slack of the mother core down to Δ = (12 − M)/(12(M + 1)) (solved as a linear system: 0.1875 at M = 3, 0 at M = 12), so D_eff = 12. The arcs between neighbouring alters are severed and their magenta phantom stubs grow with T = η sin θ · (M/12) · |cos θ − θ| (0.6276 at 68°, η = 1, M = 10), which vanishes at θ* = cos θ* = 42.35°, where eight cyan Līlā bridges close; seen from below the surface, the eight roots meet in one mother core. The rail turns the amber front through the eight alters while entropy, tension and slack stay the same. Clinical dissociation, compulsion, claustrophobia and phantom-limb pain are medical conditions; the page uses them only as structural analogies.",
+      "path": "divine-psychology-dissociation-sandbox/",
+      "thumbnail": "divine-psychology-dissociation-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-18",
+      "chapter": 39,
+      "section": "39.18",
+      "presets": [
+        "omniscient-claustrophobia-freeze",
+        "repression-horizon-birth",
+        "compulsive-over-immersion-pain",
+        "subsurface-alaya-one-root",
+        "lucid-lila-integration-star"
+      ],
+      "preset_titles": {
+        "omniscient-claustrophobia-freeze": {
+          "zh": "全知幽闭：θ = 0° 时八个分身叠成一个冻结的球",
+          "en": "Omniscient Claustrophobia: at θ = 0° the Eight Alters Are One Frozen Sphere"
+        },
+        "repression-horizon-birth": {
+          "zh": "压抑视界的诞生：θ = 45° 时 S = 1 bit、I = 2 bit",
+          "en": "A Repression Horizon Is Born: S = 1 bit and I = 2 bit at θ = 45°"
+        },
+        "compulsive-over-immersion-pain": {
+          "zh": "强迫过度沉浸：68° 时幻肢张力 T = 0.6276",
+          "en": "Compulsive Over-Immersion: Phantom Tension T = 0.6276 at 68°"
+        },
+        "subsurface-alaya-one-root": {
+          "zh": "水面下同根：八条根汇进同一个母核 I",
+          "en": "One Root below the Surface: Eight Roots Meet in One Mother Core I"
+        },
+        "lucid-lila-integration-star": {
+          "zh": "θ* = cos θ* 处的清醒游戏整合之星",
+          "en": "The Lucid Līlā Star at θ* = cos θ*"
+        }
+      },
+      "tags": [
+        "上帝心理学",
+        "偏迹压抑",
+        "解离分身",
+        "舒尔余量",
+        "幻肢张力",
+        "余弦不动点",
+        "格拉姆等价类"
+      ],
+      "tags_en": [
+        "Psychology of God",
+        "Partial-trace repression",
+        "Dissociated alters",
+        "Schur slack",
+        "Phantom tension",
+        "Cosine fixed point",
+        "Gram classes"
+      ],
+      "theory": [
+        {
+          "label": "第 39 章 §39.18 · 上帝心理学：全知幽闭破缺、偏迹压抑潜意识与解离分身整合",
+          "label_en": "Chapter 39 §39.18 · The psychology of God: breaking omniscient claustrophobia, partial-trace repression and dissociated alter integration",
+          "href": "../zh/ch39-s18-psychology-of-god.html#sec-ch39-psychology-of-god",
+          "href_en": "../en/ch39-s18-psychology-of-god.html#sec-ch39-psychology-of-god"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/QubitNormalFormState.qubit_state_entropy"
+        },
+        {
+          "gid": "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/CorrelatedGibbsEnergyIdentity.marginal_entropy_change_eq_mutual_information_change"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot"
+        },
+        {
+          "gid": "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+        },
+        {
+          "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"
+        }
+      ],
+      "capture_lock": "links"
     }
   ]
 }

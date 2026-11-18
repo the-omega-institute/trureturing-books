@@ -565,13 +565,127 @@ $$
 5. **边界。** 二维的精确性（[@rem-ch39-tree-gauge-plaquette-independence]）来自平面上小方格变量的独立；三维及以上，每个立方体上的小方格满足比安基关系（[@rem-ch39-cube-bianchi-sagitta]），独立性不成立，第 1 条只给出强耦合端的首项。四维非阿贝尔理论在一切 $\beta$ 的面积律与质量间隙，见下面的开放问题（`OPEN`）。
 :::
 
+到这里的结论都是统计力学的陈述。量子力学的希尔伯特空间与哈密顿量从哪里来，取决于相邻两个时间片之间的转移核是否半正定：
+
+::: {.remark #rem-ch39-reflection-positivity-transfer-matrix title="反射正性与转移矩阵：时间片之间的矢高权重是正定核（手工推导与文献结果）"}
+**手工推导与 `NUM`；与 Osterwalder–Seiler、Lüscher 等人结果的对应为文献结果，未在本书形式化。** 设 $G$ 为有限群（紧李群见第 5 条末），格点为 $\mathbb{Z}_{L_0} \times \Lambda_s$，$\Lambda_s$ 是 $d - 1 \ge 1$ 维的空间环面，$L_0 = 2n$ 为偶数。小方格权重 $\phi$ 同 [@rem-ch39-tree-gauge-plaquette-independence]（威尔逊权重在这里允许 $\beta$ 取任意实数），$f_r = \frac{1}{d_r}\int_G\phi\,\bar{\chi}_r\,\mathrm{d}U$ 同 [@rem-ch39-torus-area-law-correction] 第 4 条；由 $\phi(U^{-1}) = \phi(U)$，$f_r$ 是实数且 $f_{\bar{r}} = f_r$。记 $B^{(t)}$ 为第 $t$ 片的空间链，$V^{(t)}_x$ 为从 $(t, x)$ 到 $(t + 1, x)$ 的时间链；单片的函数空间是 $L^2(G^{E_s})$，$E_s$ 为一片的空间链数，每条链取归一哈尔测度。对两个空间构型 $X, Y$ 令
+
+$$
+K(X, Y) = \prod_b\phi\left(Y_bX_b^{-1}\right), \qquad Q(X, Y) = \int\prod_x\mathrm{d}V_x\prod_{b = (x, y)}\phi\left(V_xY_bV_y^{-1}X_b^{-1}\right),
+$$
+
+$P$ 为空间片上的规范平均 $(P\psi)(X) = \int\psi(X^g)\,\mathrm{d}g$，$(X^g)_b = g_xX_bg_y^{-1}$，$\mathcal{V}(X)$ 为空间小方格权重之积（$d = 2$ 时 $\mathcal{V} = 1$）。由 $\phi = e^{\beta}e^{-\beta v}$，$v = 1 - \operatorname{Re}\chi_F/d_F$ 为矢高，$K$ 是两片之间逐链比较 $Y_bX_b^{-1}$ 的矢高的玻尔兹曼因子。
+
+1. **核的谱。** $Q = KP = PK$，$K$ 自伴；单条链上的卷积在不可约表示 $r$ 的 $d_r^2$ 维矩阵元块上作用为乘以 $f_r$。所以 $K \ge 0$ 当且仅当一切 $f_r \ge 0$，当且仅当 $\phi$ 是 $G$ 上的正定函数：对任意 $g_1, \dots, g_m \in G$，矩阵 $[\phi(g_ig_j^{-1})]$ 半正定。推导：取 $V_x = g_x^{-1}$ 并用 $\phi$ 是类函数，得 $Q(X, Y) = \int K(X, Y^{g^{-1}})\,\mathrm{d}g$；$K(X^g, Y^g) = K(X, Y)$ 给出 $KP = PK$；由舒尔引理 $\int_G\phi(c)\,r(c)\,\mathrm{d}c = f_r\mathbf{1}$；$\phi = \sum_rd_rf_r\chi_r$，而 $\chi_r(g_ig_j^{-1})$ 是矩阵元向量的格拉姆矩阵；反过来，$[\phi(gh^{-1})]_{g, h \in G}$ 的本征值是 $\lvert G\rvert f_r$。
+2. **威尔逊权重。** $\beta \ge 0$ 时一切 $f_r \ge 0$：$\operatorname{Re}\chi_F$ 是 $F \oplus \bar{F}$ 的特征标的一半，它的各次幂是不可约特征标的非负整系数组合。若 $F$ 忠实且 $\beta > 0$，则一切 $f_r > 0$（每个不可约表示都出现在某个 $(F \oplus \bar{F})^{\otimes k}$ 中，有限群为 Burnside–Brauer 定理，`文献结果`）。$\beta < 0$ 时可以出现负系数：$\mathbb{Z}_3$ 的 $f_1 = \frac{1}{3}\left(e^{\beta} - e^{-\beta/2}\right)$，$\mathbb{Z}_2$ 的 $f_1 = \sinh\beta$。阿贝尔情形可以由冻结结论直接读出：由 [`cos`](lean:D5/S3/Analytic/Fourier/PositiveDefinite/Closure.cos)、[`smul`](lean:D5/S3/Analytic/Fourier/PositiveDefinite/Closure.smul) 与 [`exp`](lean:D5/S3/Analytic/Fourier/PositiveDefinite/Closure.exp)，$\beta \ge 0$ 时对任意实数 $x_1, \dots, x_m$，矩阵 $\left[e^{\beta\cos(x_j - x_i)}\right]$ 半正定；取 $x_i$ 为 $\mathrm{U}(1)$ 中元素的辐角（$\mathbb{Z}_N$ 取 $\chi_F(k) = e^{2\pi ik/N}$ 时为 $2\pi k_i/N$），就得到 $\mathrm{U}(1)$ 与 $\mathbb{Z}_N$ 的威尔逊权重正定。把 $\omega(g) = \phi(g)/\phi(1)$ 线性延拓到群代数 $\mathbb{C}[G]$，对 $a = \sum_g\alpha_gg$ 有 $\omega(a^*a) = \sum_{g, h}\bar{\alpha}_g\alpha_h\,\omega(g^{-1}h)$，所以“$\phi$ 正定”就是“$\omega$ 是正泛函”；由正泛函得到半正定格拉姆矩阵的一步与 [@rem-appe-gram-from-flatness] 相同。
+3. **链反射正性。** 设 $\theta$ 为 $t \mapsto 1 - t$ 的反射（反射面 $t = \frac{1}{2}$ 与 $t = n + \frac{1}{2}$ 不含格点），$(\theta U)_{B^{(t)}_b} = U_{B^{(1 - t)}_b}$，$(\theta U)_{V^{(t)}_x} = U_{V^{(-t)}_x}^{-1}$，$(\theta F)(U) = \overline{F(\theta U)}$；$\mathcal{A}_+$ 为只依赖于两端都在第 $1, \dots, n$ 片的链的有界函数。若 $Q \ge 0$（例如 $\phi$ 正定，威尔逊权重取 $\beta \ge 0$），则对 $F, F' \in \mathcal{A}_+$
+
+   $$
+   Z\,\mathbb{E}\left[\theta(F)\,F'\right] = \operatorname{Tr}\left(\left(Q^{1/2}M_FQ^{1/2}\right)^*\left(Q^{1/2}M_{F'}Q^{1/2}\right)\right),
+   $$
+
+   特别地 $\mathbb{E}[\theta(F)F] \ge 0$。这里 $Z = \int\prod_p\phi(U_p)\prod_\ell\mathrm{d}U_\ell$，$M_F(Y, Y')$ 是固定 $B^{(1)} = Y$、$B^{(n)} = Y'$ 后，对 $\mathcal{A}_+$ 的其余链积分 $F$ 与全部链都在正侧的小方格权重之积（$n = 1$ 时 $M_F$ 是乘以 $F\mathcal{V}$ 的算子）。推导：小方格分成全在正侧的、它们在 $\theta$ 下的像、以及第 $0, 1$ 片之间与第 $n, n + 1$ 片之间的时间方向小方格；对其余链积分，正侧给出 $M_{F'}$，负侧给出 $\overline{M_F}$（哈尔测度在 $V \mapsto V^{-1}$ 下不变，权重是实的），两层穿越反射面的小方格各给出一个 $Q$，于是左端等于 $\operatorname{Tr}(M_F^*QM_{F'}Q)$。所以 $\mathbb{E}[\theta(F)F']$ 是 $\mathcal{A}_+$ 上的半正定埃尔米特型，对其零空间作商并完备化即得物理希尔伯特空间。
+4. **转移矩阵。** $T = \mathcal{V}^{1/2}Q\,\mathcal{V}^{1/2} = \mathcal{V}^{1/2}KP\,\mathcal{V}^{1/2}$ 自伴，$T = PTP$，$Z = \operatorname{Tr}T^{L_0}$；对规范不变的片函数 $A, A'$，$\mathbb{E}[A(B^{(0)})A'(B^{(t)})] = \operatorname{Tr}\left(T^{L_0 - t}AT^tA'\right)/\operatorname{Tr}T^{L_0}$。$T \ge 0$ 当且仅当 $Q \ge 0$。$F$ 忠实且 $\beta > 0$ 时 $T$ 在 $PL^2$ 上严格正，$T/\lVert T\rVert$ 是正的压缩，$H = -\log(T/\lVert T\rVert) \ge 0$ 是规范不变片函数上的哈密顿量。这些对每个维数 $d \ge 2$、每个有限格点成立。
+5. **过格点的反射与 $\beta < 0$。** 对反射 $t \mapsto -t$（$\mathcal{A}_+$ 取两端都在第 $0, \dots, n$ 片的链），没有小方格穿过反射面，$Z\,\mathbb{E}[\theta(F)F]$ 是反射面上的非负权重乘以 $\lvert\Phi_F\rvert^2$ 的积分，对一切实数 $\beta$ 都非负；它推不出 $T \ge 0$。链反射的推导只用到 $Q \ge 0$。$d = 2$ 时 $Q$ 在 $PL^2$ 上的本征值是 $f_r^L$（[@rem-ch39-two-dimensional-transfer-spectrum] 第 1 条），所以空间长度 $L$ 为偶数时，对任何有限群与一切实数 $\beta$ 链反射都正；$L$ 为奇数时它可以失败（`NUM`：对全部构型穷举矩阵 $\left[\mathbb{E}\left[\mathbf{1}\{\theta U\vert_+ = a\}\,\mathbf{1}\{U\vert_+ = b\}\right]\right]_{a, b}$ 的最小本征值，$\beta = -0.7$）：$\mathbb{Z}_3$、$L_0 = 4$、$L = 1$ 时为 $-1.65 \times 10^{-2}$，同一格点上 $S_3$ 的二维表示权重为 $-9.2 \times 10^{-4}$，$\mathbb{Z}_2$、$L_0 = 6$、$L = 1$ 时为 $-5.99 \times 10^{-2}$，$\mathbb{Z}_2$、$L_0 = 4$、$L = 3$ 时为 $-1.85 \times 10^{-3}$；而 $\mathbb{Z}_3$ 与 $S_3$ 在 $L_0 = 2$、$L = 2$、$\beta = -0.7, -1.5$ 时都半正定。$G$ 为紧李群时第 1、3、4 条的推导不变（$\phi$ 实解析，$\sum_rd_r^2\lvert f_r\rvert < \infty$，$K$ 是迹类算子）；第 2 条中每个不可约表示出现在某个 $(F \oplus \bar{F})^{\otimes k}$ 中，由彼得—外尔定理与斯通—魏尔斯特拉斯定理得到（`文献结果`）。
+
+**文献结果。** K. Osterwalder 与 E. Seiler（1978，见 [@rem-ch39-strong-coupling-higher-dimensions]）证明了格点规范理论的反射正性，P. Menotti 与 A. Pelissetto（*Commun. Math. Phys.* **113**, 369–373, 1987, DOI `10.1007/BF01221251`）把他们的证明推广到反射面含格点、带费米子的情形；自伴、严格正的转移矩阵由 M. Lüscher（*Commun. Math. Phys.* **54**, 283–292, 1977, DOI `10.1007/BF01614090`）构造；系统论述见 E. Seiler（*Lecture Notes in Physics* **159**, 1982, DOI `10.1007/3-540-11559-5`）；反射正性在重建量子理论中的作用见 K. Osterwalder 与 R. Schrader（*Commun. Math. Phys.* **31**, 83–112, 1973, DOI `10.1007/BF01645738`）。第 4 条只说每个有限格点上希尔伯特空间与正的转移矩阵存在；与体积无关的能隙与连续统极限不由它给出。
+:::
+
+二维时转移矩阵可以完全对角化，面积律就是一根通量弦的能量：
+
+::: {.remark #rem-ch39-two-dimensional-transfer-spectrum title="二维转移矩阵的精确谱：弦张力是通量环每单位长度的能量（手工推导与数值核验）"}
+**手工推导与 `NUM`。** 设 $d = 2$，空间是由 $L$ 条链 $B_1, \dots, B_L$ 组成的圆周，时间方向周期为 $L_0$，记号同 [@rem-ch39-reflection-positivity-transfer-matrix]。
+
+1. **谱。** 规范不变的片函数恰是空间和乐 $h = B_1\cdots B_L$ 的类函数，$\psi_r = \chi_r(B_1\cdots B_L)$ 是它们的标准正交基；$T\psi_r = f_r^L\psi_r$，$T$ 在其正交补上为零。推导：令 $Y_b = c_bX_b$，$(K\psi_r)(X) = \int\prod_b\phi(c_b)\,\mathrm{d}c_b\,\chi_r(c_1X_1\cdots c_LX_L)$，由舒尔引理每个 $c_b$ 换成 $f_r$。所以 $Z = \sum_rf_r^{LL_0}$，即 [@rem-ch39-torus-area-law-correction] 第 4 条中 $n = LL_0$ 时的分母。
+2. **能量与能隙。** 设 $F$ 忠实且 $\beta > 0$，于是一切 $f_r > 0$。记 $\sigma_r = -\log(f_r/f_0)$，则 $E_r - E_0 = L\sigma_r$；$r = F$ 时 $f_F/f_0$ 就是 [@rem-ch39-tree-gauge-plaquette-independence] 的 $w$，$\sigma_F$ 就是那里的弦张力。由 $\phi > 0$，非平凡的 $r$ 都有 $f_r < f_0$，所以真空唯一，能隙是 $L\min_{r \ne 0}\sigma_r$；取到最小值的 $r$ 依赖于 $G$、$F$ 与 $\beta$（$S_3$ 取二维 $F$、$\beta = 0.8$ 时 $\sigma_F = 1.4403$，符号表示为 $2.4508$）。态 $\psi_F = \chi_F(h)$ 是绕圆周一圈、表示为 $F$ 的通量环，它在每个 $\beta$、每个 $L$ 都是精确的本征态，能量比真空高 $L\sigma_F$：面积律中的 $\sigma$ 是这根弦每单位长度、每个时间步的代价。
+3. **两条缠绕圈的关联。** 记 $h_t$ 为第 $t$ 片的空间和乐，$N_{rF}^{\,s}$ 为 $s$ 在 $r \otimes F$ 中的重数，$0 \le t \le L_0$，则
+
+   $$
+   \mathbb{E}\left[\chi_F(h_0)\,\overline{\chi_F(h_t)}\right] = \frac{\sum_{r, s}\left(N_{rF}^{\,s}\right)^2f_s^{\,Lt}f_r^{\,L(L_0 - t)}}{\sum_rf_r^{\,LL_0}}.
+   $$
+
+   推导：在基 $\psi_r$ 中计算 $\operatorname{Tr}\left(\chi_FT^t\bar{\chi}_FT^{L_0 - t}\right)$，$\langle\psi_s, \bar{\chi}_F\psi_r\rangle$ 是 $r$ 在 $s \otimes F$ 中的重数，再用 $f_{\bar{r}} = f_r$。$L_0 \to \infty$ 时右端趋于 $w^{Lt}$，即面积为 $Lt$ 的环带的面积律。$G$ 阿贝尔时它与 [@rem-ch39-torus-area-law-correction] 的公式一致（取 $D$ 为环带中的 $Lt$ 个小方格；那里的证明只用到 $\theta_C = \sum_{p \in D}\theta_p$）；$G$ 非阿贝尔时它是两个迹之积，与那里第 4 条的可缩矩形是不同的观测量，这里给出的是它的格点证明。
+4. **穷举核对（`NUM`）。** 直接对时间链求和构造 $Q$（不用特征标）：它对称，非零谱与 $\{f_r^L\}$ 一致到 $11$ 位；对全部构型求和的 $Z$ 与 $\operatorname{Tr}Q^{L_0}$、$\sum_rf_r^{LL_0}$ 的相对差不超过 $10^{-15}$；第 3 条对每个 $t$ 与全构型穷举之差不超过 $5 \times 10^{-16}$。所用格点：$\mathbb{Z}_2$（$L = 2, 3$，$L_0 = 3$；$L = 2$，$L_0 = 4$），$\mathbb{Z}_3$（$L = 2$，$L_0 = 3$；$L = 1$，$L_0 = 4$），$S_3$ 的二维表示权重（$L = 1$，$L_0 = 3, 4$；$L = 2$，$L_0 = 2$），以及 $S_3$ 的符号表示权重（$L = 1$，$L_0 = 3$；这时 $F$ 不忠实，二维表示的 $f_r = 0$，$T$ 在 $PL^2$ 上有核）。
+:::
+
+三维 $\mathbb{Z}_2$ 理论没有二维那样的精确解，但它与三维伊辛模型之间有一个在有限环面上精确成立的恒等式：
+
+::: {.remark #rem-ch39-wegner-duality-finite-identity title="韦格纳对偶的有限形式：小方格矢高与对偶键矢高（手工推导与数值核验）"}
+**手工推导与 `NUM`；对偶本身为文献结果（Wegner 1971），这里给出有限环面与有限盒子上的精确形式。** 设格点为 $L_1 \times L_2 \times L_3$ 周期环面（$L_i \ge 2$），有 $N$ 个格点，链与小方格各 $3N$ 个，立方体 $N$ 个；$Z_G(\beta) = \sum_{\sigma \in \{\pm 1\}^{3N}}\prod_pe^{\beta\sigma_p}$。对偶伊辛模型的自旋放在立方体上，每个小方格给出一条连接其两侧立方体的键；对 $\varepsilon \in \{0, 1\}^3$，$Z_I^{\varepsilon}(K) = \sum_s\prod_be^{KJ_bs\,s'}$，其中穿过平面 $x_i = 0$ 的键在 $\varepsilon_i = 1$ 时取 $J_b = -1$（反周期），其余 $J_b = 1$。
+
+1. **环面恒等式。** 若 $e^{-2K} = \tanh\beta$（等价地 $\tanh K = e^{-2\beta}$），则
+
+   $$
+   Z_G(\beta) = 2^{3N - 1}(\cosh\beta)^{3N}e^{-3NK}\sum_{\varepsilon \in \{0, 1\}^3}Z_I^{\varepsilon}(K).
+   $$
+
+   证明：由 $e^{\beta\sigma} = \cosh\beta\,(1 + t\sigma)$，$t = \tanh\beta$，对链求和得 $Z_G = 2^{3N}(\cosh\beta)^{3N}\sum_{S \in \mathcal{Z}_2}t^{\lvert S\rvert}$，$\mathcal{Z}_2$ 为每条链都属于其中偶数个小方格的小方格集合（$\mathbb{Z}/2$ 系数的 $2$-闭链）。伊辛一侧，扇区 $\varepsilon$ 中 $s$ 的不满足键的集合是 $\delta s + D_\varepsilon$（模 $2$），$\delta s$ 为两侧自旋不同的键，$D_\varepsilon$ 为反周期方向的接缝平面之和；$s \mapsto \delta s$ 是到立方体集合之边界构成的 $\mathcal{B}_2$ 上的二对一满射，而 $H_2(T^3; \mathbb{Z}/2) \cong (\mathbb{Z}/2)^3$ 由三个坐标平面生成，所以 $\mathcal{Z}_2$ 是八个陪集 $D_\varepsilon + \mathcal{B}_2$ 的不交并，$\sum_\varepsilon Z_I^{\varepsilon} = 2e^{3NK}\sum_{S \in \mathcal{Z}_2}e^{-2K\lvert S\rvert}$。八个扇区都需要：把 $\sum_\varepsilon Z_I^{\varepsilon}$ 换成 $2Z_I^{0}$，在 $2 \times 2 \times 2$ 环面上 $\beta = 0.761$ 时得到的值只有 $Z_G$ 的 $0.493$ 倍（`NUM`）。
+2. **矢高的读法。** 记小方格矢高 $v_p = 1 - \sigma_p$、对偶键矢高 $u_b = 1 - J_bs\,s'$，两者都取值于 $\{0, 2\}$。第 1 条等价于
+
+   $$
+   \sum_\sigma e^{-\beta\sum_pv_p} = 2^{3N - 1}\left(e^{-\beta}\cosh\beta\right)^{3N}\sum_\varepsilon\sum_se^{-K\sum_bu_b}.
+   $$
+
+   规范一侧，展开中闭曲面上的每个小方格贡献因子 $\tanh\beta$；伊辛一侧，每条矢高为 $2$ 的键贡献因子 $e^{-2K}$；恒等式说的是这两个数相等。
+3. **威尔逊圈是无序算子。** 若链闭路 $C$ 模 $2$ 是某个小方格集合 $S_0$ 的边界，则 $\mathbb{E}_G[W_C] = \left(\sum_\varepsilon Z_I^{\varepsilon}[S_0]\right)/\left(\sum_\varepsilon Z_I^{\varepsilon}\right)$，其中 $Z_I^{\varepsilon}[S_0]$ 把与 $S_0$ 对偶的键的 $J_b$ 反号；结果与 $S_0$ 的选取无关。若 $C$ 模 $2$ 不是边界（例如绕环面一圈），$\mathbb{E}_G[W_C] = 0$。
+4. **自由边界盒子。** 对由 $L_1 \times L_2 \times L_3$ 个立方体组成的自由边界盒子（$E$ 条链、$P$ 个小方格），$Z_G = 2^E(\cosh\beta)^Pe^{-KP}Z_I^+(K)$，其中 $Z_I^+$ 里每个边界小方格是连到盒外一个固定为 $+1$ 的自旋的键；第 3 条的比值相应改为 $Z_I^+[S_0]/Z_I^+$。盒子可缩，闭曲面恰是唯一立方体集合的边界，固定的盒外自旋去掉了因子 $2$。
+5. **精确核对（`NUM`）。** 在 $2 \times 2 \times 2$ 与 $2 \times 2 \times 3$ 环面上沿一棵生成树固定规范，按受挫小方格数对其余 $2^{17}$ 与 $2^{25}$ 个构型精确计数，伊辛一侧对全部自旋计数：第 1 条两端化成 $e^{2\beta}$ 的整系数多项式后逐项相等；第 3 条对 $1 \times 1$ 闭路及一个以两个相邻小方格为 $S_0$ 的闭路逐项成立；第 4 条在 $2 \times 2 \times 1$ 与 $3 \times 2 \times 1$ 盒子上同样逐项成立。$3 \times 3 \times 3$ 与 $3 \times 3 \times 4$ 环面上两侧各用转移矩阵计算，$\beta = 0.3, 0.761, 1.4$ 时相对差不超过 $2 \times 10^{-14}$。
+
+**文献结果。** F. J. Wegner（1971，见 [@rem-ch39-strong-coupling-higher-dimensions]）；综述见 J. B. Kogut（*Rev. Mod. Phys.* **51**, 659–713, 1979, DOI `10.1103/RevModPhys.51.659`）与 R. Savit（*Rev. Mod. Phys.* **52**, 453–487, 1980, DOI `10.1103/RevModPhys.52.453`）；二维伊辛模型的自对偶见 H. A. Kramers 与 G. H. Wannier（*Phys. Rev.* **60**, 252–262, 1941, DOI `10.1103/PhysRev.60.252`）。
+:::
+
+由这个恒等式，规范理论的强、弱耦合两端与伊辛模型的有序、无序两端互换：
+
+::: {.remark #rem-ch39-wegner-duality-consequences title="对偶的后果：自由能、相变点、大 $\beta$ 的周长首项与二维情形（手工推导、数值与文献结果）"}
+**手工推导；相变的存在、伊辛临界耦合的数值与对一切闭路一致的周长律为文献结果，未在本书形式化。** 记号同 [@rem-ch39-wegner-duality-finite-identity]。
+
+1. **自由能。** 由伊辛模型的高温展开，扭转扇区的每一项都不超过周期扇区的对应项，故 $Z_I^{0} \le \sum_\varepsilon Z_I^{\varepsilon} \le 8Z_I^{0}$。于是沿 $L_1 = L_2 = L_3 \to \infty$，
+
+   $$
+   \lim\frac{1}{N}\log Z_G(\beta) = 3\log(2\cosh\beta) - 3K(\beta) + f_I(K(\beta)), \qquad f_I(K) = \lim\frac{1}{N}\log Z_I^{0}(K),
+   $$
+
+   其中 $K(\beta) = -\frac{1}{2}\log\tanh\beta$ 是 $(0, \infty)$ 到自身的实解析递减双射，逆映射也实解析。所以规范理论的自由能密度在 $\beta$ 处实解析，当且仅当伊辛模型的自由能密度在 $K(\beta)$ 处实解析：小 $\beta$（强耦合、面积律）对应大 $K$（有序相），大 $\beta$ 对应小 $K$（无序相）。
+2. **相变点（`NUM`，文献结果）。** 三维简立方伊辛模型的临界耦合 $K_c = 0.221654626(5)$ 来自蒙特卡罗模拟与有限尺度标度（A. M. Ferrenberg、J. Xu 与 D. P. Landau，*Phys. Rev. E* **97**, 043301, 2018, DOI `10.1103/PhysRevE.97.043301`），由第 1 条的换算对应 $\beta_c = -\frac{1}{2}\log\tanh K_c = 0.76141329(1)$。三维伊辛模型在 $K_c$ 处的相变，以及它在规范一侧对应的高、低温相中闭路关联的不同行为，是文献结果（Wegner 1971）；本书只做数值换算。
+3. **大 $\beta$：周长首项。** 设环面各边 $L_i \ge 3$，$C$ 是模 $2$ 为边界的简单闭路，$\lvert C\rvert$ 为其链数，$x = e^{-2\beta}$。则对固定的格点与 $C$，$\beta \to \infty$ 时
+
+   $$
+   \mathbb{E}[W_C] = 1 - 2\lvert C\rvert x^4 + O(x^6).
+   $$
+
+   证明：$\sigma \mapsto \omega = \{p : \sigma_p = -1\}$ 的各纤维大小相同，像是上边缘集合 $\mathcal{B}^2$，权重为 $e^{3N\beta}x^{\lvert\omega\rvert}$，且 $W_C = (-1)^{\lvert\omega \cap S_0\rvert}$。在对偶格点中 $\omega$ 是同调平凡的偶子图（它与每个闭曲面相交偶数次），$\lvert\omega\rvert$ 为偶数（每条链属于四个小方格）；$L_i \ge 3$ 时对偶格点没有重键，长为 $3$ 或 $4$ 的闭路要么绕环面一圈（与某个坐标平面相交奇数次，不在 $\mathcal{B}^2$ 中），要么是一个对偶小方格的边界。所以 $\lvert\omega\rvert \le 4$ 的非零 $\omega$ 恰是 $3N$ 个“围绕一条链的四个小方格”，它与 $S_0$ 相交奇数次当且仅当这条链在 $C$ 上；分子为 $1 + (3N - 2\lvert C\rvert)x^4 + O(x^6)$，分母为 $1 + 3Nx^4 + O(x^6)$。于是 $-\log\mathbb{E}[W_C] = 2\lvert C\rvert e^{-8\beta} + O(e^{-12\beta})$ 与周长成正比，而小 $\beta$ 时首项 $A\log(1/\tanh\beta)$ 与面积成正比（[@rem-ch39-strong-coupling-higher-dimensions]）。数值（`NUM`）：$3 \times 3 \times 3$ 环面上由伊辛一侧的精确计数得 $\mathbb{E}[W_C] = 1 - 8x^4 - 104x^6 + O(x^8)$（$1 \times 1$ 闭路，$\lvert C\rvert = 4$）与 $1 - 12x^4 - 176x^6 + O(x^8)$（$1 \times 2$ 闭路，$\lvert C\rvert = 6$），与规范一侧转移矩阵在 $\beta = 1.5, 2, 2.5, 3$ 的数值一致；$3 \times 3 \times 4$ 环面上的转移矩阵数值同样符合首项。$L_i \ge 3$ 不能去掉：$2 \times 2 \times 2$ 环面上 $1 \times 1$ 闭路为 $1 - 14x^4 + O(x^6)$。这一条也只对环面陈述：在自由边界盒子里，受挫小方格的集合可以终止在盒子表面，三个小方格就能使 $W_C$ 反号，例如 $2 \times 1 \times 2$ 盒子中间平面上 $A = 1, 2$ 时 $\mathbb{E}[W_C] = 1 - 32x^3 + O(x^4)$、$1 - 64x^3 + O(x^4)$。对一切闭路一致的周长律不由这里的有限展开给出；低温展开见 R. Balian、J.-M. Drouffe 与 C. Itzykson（*Phys. Rev. D* **11**, 2098–2103, 1975, DOI `10.1103/PhysRevD.11.2098`），用收敛展开研究这个模型的相结构见 R. Marra 与 S. Miracle-Sole（*Commun. Math. Phys.* **67**, 233–240, 1979, DOI `10.1007/BF01238846`），本书不复述其结论。
+4. **二维。** 二维环面（$n$ 个小方格）上模 $2$ 的 $2$-闭链只有空集与整个环面，$Z_G = 2^{2n}(\cosh\beta)^n(1 + t^n)$，与 [@rem-ch39-two-dimensional-transfer-spectrum] 第 1 条一致：对偶一侧只剩一个整体的 $\mathbb{Z}_2$ 变量；平面区域上它被边界固定，以 $C$ 为边界的曲面只有内部，给出 [@rem-ch39-tree-gauge-plaquette-independence] 的 $t^A$。这时 $T = KP$，$K$ 在每条空间链上是转移矩阵为 $\begin{pmatrix}e^{\beta} & e^{-\beta}\\ e^{-\beta} & e^{\beta}\end{pmatrix}$ 的伊辛链，本征值 $2\cosh\beta$、$2\sinh\beta$ 是 $\beta$ 的解析函数；去掉高斯律投影 $P$，理论就是 $L$ 条互不耦合、长为 $L_0$ 的周期伊辛链。
+:::
+
+时间方向的格距趋于零时，转移矩阵给出哈密顿量：
+
+::: {.remark #rem-ch39-hamiltonian-limit-kinetic-laplacian title="哈密顿极限：动能是群上由最小矢高层决定的拉普拉斯算子（手工推导与文献结果）"}
+**手工推导；一般紧李群的 Kogut–Susskind 哈密顿量为文献结果，未在本书形式化。** 取各向异性格点：时间方向的小方格用 $\beta_t$，空间小方格用 $\beta_s$，时间格距 $a_0$，空间格距 $a$。
+
+1. **有限格距。** 由 [@rem-ch39-reflection-positivity-transfer-matrix] 第 4 条，$T = \mathcal{V}_s^{1/2}K_tP\,\mathcal{V}_s^{1/2}$ 精确成立：$\mathcal{V}_s$ 是空间小方格的权重之积，$K_t$ 是每条链上的卷积，在 $r$ 的 $d_r^2$ 维矩阵元块上的本征值为 $f_r(\beta_t)$。
+2. **有限群。** 设 $F$ 忠实，$v = 1 - \operatorname{Re}\chi_F/d_F$，$v_{\min} < v_2$ 为 $v$ 最小的两个正值，$C_{\min} = \{g : v(g) = v_{\min}\}$（共轭类之并，对取逆封闭），$\lambda = e^{-\beta_tv_{\min}}$。由 $f_r/f_0 = \left(\sum_ge^{-\beta_tv(g)}\chi_r(g)/d_r\right)/\left(\sum_ge^{-\beta_tv(g)}\right)$ 展开，
+
+   $$
+   1 - \frac{f_r(\beta_t)}{f_0(\beta_t)} = \lambda\sum_{g \in C_{\min}}\left(1 - \frac{\operatorname{Re}\chi_r(g)}{d_r}\right) + O\left(\lambda^2 + e^{-\beta_tv_2}\right).
+   $$
+
+   所以 $a_0 \to 0$、$\beta_t \to \infty$ 且 $\lambda/a_0 \to \kappa$ 时，$(\mathbf{1} - K_t/f_0^{E_s})/a_0$ 趋于 $\kappa\sum_b\Delta_b$，$\Delta = \lvert C_{\min}\rvert - \sum_{g \in C_{\min}}L_g$ 是凯莱图 $\operatorname{Cay}(G, C_{\min})$ 的拉普拉斯算子（$L_g$ 为左平移）。例：$\mathbb{Z}_2$ 为 $1 - \sigma^x$；$\mathbb{Z}_N$（$N \ge 3$）为 $2 - X - X^{-1}$，本征值 $2 - 2\cos(2\pi r/N)$；$S_3$ 取二维 $F$ 时 $C_{\min}$ 是三个对换（$v = 1$；三轮换的 $v = \frac{3}{2}$），本征值为 $0$（平凡）、$3$（二维）、$6$（符号）。数值（`NUM`）：$\mathbb{Z}_5$、$\beta_t = 24$、$r = 1$ 时左端为 $8.676304 \times 10^{-8}$，右端首项为 $8.676305 \times 10^{-8}$。
+3. **$\mathrm{U}(1)$ 与 $\mathrm{SU}(2)$。** $\mathrm{U}(1)$ 时 $f_r/f_0 = I_r(\beta_t)/I_0(\beta_t)$；$\mathrm{SU}(2)$（$\phi = e^{\frac{\beta}{2}\operatorname{Tr}U}$）时 $d_jf_j = I_{2j}(\beta) - I_{2j+2}(\beta) = \frac{2(2j + 1)}{\beta}I_{2j+1}(\beta)$，$f_j/f_0 = I_{2j+1}/I_1$。由贝塞尔函数的大宗量展开（`文献结果`），$-\log(f_r/f_0) = \frac{r^2}{2\beta_t} + O(\beta_t^{-2})$，$-\log(f_j/f_0) = \frac{2j(j + 1)}{\beta_t} + O(\beta_t^{-2})$：动能谱正比于卡西米尔值 $r^2$ 与 $j(j + 1)$。
+4. **二维能量。** 由 [@rem-ch39-two-dimensional-transfer-spectrum] 第 2 条，每单位物理时间的能量精确地是 $E_r - E_0 = \frac{L}{a_0}\sigma_r(\beta_t)$。有限群时它趋于 $L\kappa\sum_{g \in C_{\min}}(1 - \operatorname{Re}\chi_r(g)/d_r)$；$\mathrm{SU}(2)$ 取 $\beta_t = 4/(g^2aa_0)$ 时趋于 $\frac{g^2}{2}j(j + 1)\cdot La$，$\mathrm{U}(1)$ 取 $\beta_t = 1/(g^2aa_0)$ 时趋于 $\frac{g^2}{2}r^2\cdot La$。这是 [@rem-ch39-tree-gauge-plaquette-independence] 第 4 条 $\sigma/a^2 \to \frac{1}{2}g^2C_2(F)$ 沿时间方向的读法。
+5. **与附录 E 的关系。** 这与 [@rem-appe-generator-chord-sagitta] 不是同一个陈述：那里沿单参数酉群 $u_t = e^{-itH}$，矢高率 $v_t/t^2$ 趋于 $H^2/2$；这里是链矢高的玻尔兹曼因子 $e^{-\beta_tv(g)}$ 在群上积分得到的卷积，生成元是群上的拉普拉斯算子，有限群时由最小的正矢高层决定。
+
+**文献结果。** J. Kogut 与 L. Susskind（*Phys. Rev. D* **11**, 395–408, 1975, DOI `10.1103/PhysRevD.11.395`）；格点规范理论的转移矩阵另见 M. Creutz（*Phys. Rev. D* **15**, 1128–1136, 1977, DOI `10.1103/PhysRevD.15.1128`）。
+:::
+
+四维的情形仍未解决：
+
 ::: {.problem #prob-ch39-four-dimensional-area-law-and-mass-gap title="四维非阿贝尔格点规范理论在一切耦合下的面积律与连续统质量间隙（开放问题）"}
 **`OPEN`。** 设 $G = \mathrm{SU}(N)$，$N \ge 2$，取四维超立方格点上的威尔逊作用量。
 
 1. 证明或否定：对每个 $\beta > 0$，存在 $\sigma(\beta) > 0$ 与常数 $c$，使得在任一无限体积极限（有限体积测度的弱极限点）中，定义表示的 $R \times T$ 矩形威尔逊圈对一切 $R, T$ 满足 $\frac{1}{N}\lvert\mathbb{E}[\operatorname{Tr}W_{R \times T}]\rvert \le ce^{-\sigma(\beta)RT}$。
 2. 构造非平凡的四维连续统量子杨—米尔斯理论并证明其质量间隙为正；对一般紧单群，这是克雷数学研究所的千禧年问题之一（问题陈述由 A. Jaffe 与 E. Witten 撰写）。
 
-已知的部分：二维在一切 $\beta$ 精确成立（[@rem-ch39-tree-gauge-plaquette-independence]）；小 $\beta$ 时在任意维数成立（Osterwalder 与 Seiler 1978，在其所述条件下）；四维 $\mathrm{U}(1)$ 在大 $\beta$ 处不成立（Guth 1980；Fröhlich 与 Spencer 1982）。本书的任何结果都不蕴含第 1、2 款。
+已知的部分：二维在一切 $\beta$ 精确成立（[@rem-ch39-tree-gauge-plaquette-independence]）；小 $\beta$ 时在任意维数成立（Osterwalder 与 Seiler 1978，在其所述条件下）；四维 $\mathrm{U}(1)$ 在大 $\beta$ 处不成立（Guth 1980；Fröhlich 与 Spencer 1982）。在每个有限格点与每个 $\beta > 0$，转移矩阵自伴且在规范不变的片函数上严格正，物理希尔伯特空间与非负的哈密顿量存在（[@rem-ch39-reflection-positivity-transfer-matrix]）；第 2 款要求的是与体积无关的正能隙及其连续统极限，这一点不由它给出。本书的任何结果都不蕴含第 1、2 款。
 :::
 
 我们在下框中对电子与质子引力—电磁等级比、引力耦合向普朗克单胞的二次攀升以及最小标准模型单圈重整化群三条两两交点作完整显式手算对账：
