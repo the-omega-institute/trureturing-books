@@ -98,10 +98,10 @@ $$
 
    （模去每座场的局部 $\mathrm{U}(1)$ 纤维相位后，乘积纯态射线流形 $(S^2)^N$ 的实参数维数为 $2N$）；
 
-2. **有限维多体希尔伯特线性再投影算子 $\Pi_{\mathrm{linear}}^{(N)}$ 与“展开维数税”**：当观察者选定参考基态射线 $\lvert 0\rangle^{\otimes N}$ 并在复观测切面 $\Sigma_{\mathbf{I}\oplus\hat{\mathbf{i}}} \cong \mathbb{C}$ 上用**一阶线性算符（叠加原理）**读出全部 $N$ 座场的联合比较干涉时，每座局部旋子作用于 $\lvert 0\rangle_a$ 生成单场态 $\cos\frac{\theta_a}{2}\lvert 0\rangle_a + e^{i\varphi_a}\sin\frac{\theta_a}{2}\lvert 1\rangle_a$，将 $N$ 场张量连乘积按分配律强行摊平为线性基和：
+2. **有限维多体希尔伯特线性再投影算子 $\Pi_{\mathrm{linear}}^{(N)}$ 与“展开维数税”**。选定参考态 $\lvert 0\rangle^{\otimes N}$ 后，各局部旋子把参考射线转到布洛赫球上的一点。以 $\vartheta_a,\varphi_a$ 表示该点的极角与方位角。若旋子绕 $z$ 轴转过 $\theta_a$，$\lvert 0\rangle_a$ 只获得一个相位，极角仍为 $\vartheta_a=0$。在复观测切面 $\Sigma_{\mathbf{I}\oplus\hat{\mathbf{i}}}\cong\mathbb C$ 上为各射线选定相位代表，便可将乘积态按张量积基展开。
 
    $$
-   \bigotimes_{a=1}^{N} \Bigl(\cos\tfrac{\theta_a}{2}\,\lvert 0\rangle_a + e^{i\varphi_a}\sin\tfrac{\theta_a}{2}\,\lvert 1\rangle_a\Bigr) \;=\; \sum_{s_1,\dots,s_N \in \{0,1\}} c_{s_1\dots s_N}\,\lvert s_1 \dots s_N\rangle \;\in\; \mathcal{H}_{2^N} := (\mathbb{C}^2)^{\otimes N},
+   \bigotimes_{a=1}^{N} \Bigl(\cos\tfrac{\vartheta_a}{2}\,\lvert 0\rangle_a + e^{i\varphi_a}\sin\tfrac{\vartheta_a}{2}\,\lvert 1\rangle_a\Bigr) \;=\; \sum_{s_1,\dots,s_N \in \{0,1\}} c_{s_1\dots s_N}\,\lvert s_1 \dots s_N\rangle \;\in\; \mathcal{H}_{2^N} := (\mathbb{C}^2)^{\otimes N}
    $$
 
    为了把左端非线性的余弦—正弦交叉乘积改写为右端的平直向量加法，账本不得不为每一种局部基选择 `0`（余弦支）与 `1`（正弦支）的 $N$ 位二元组合单独开辟一根正交坐标轴，从而生出 **$2^N$ 维复希尔伯特空间**（射影纯态流形 $\mathbb{CP}^{2^N-1}$ 含 $2^{N+1} - 2$ 个实参数；无迹厄米泡利算符总表含 $4^N - 1 = \sum_{w=1}^N \binom{N}{w} 3^w$ 个实方向，其中单场局域边缘占 $3N$ 个方向，余下 $(4^N - 1) - 3N$ 个方向承载多点乘积与不可约跨场关联）；

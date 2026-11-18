@@ -98,7 +98,9 @@ $$
 
    乘以正径向标度 $r \ge 0$ 张满 $\mathbb{H} = \{r\,\iota_{\mathbb{H}}(U) \mid r \ge 0,\; U \in \mathbb{T}_3\}$，其中标量偏移 $v_{1/2}(\theta) := 1 - w = 2\sin^2\frac{\theta}{4}$ 称为三元圆弧体换取 $4 \times 4$ 实线性矩阵乘法所缴纳的**半角余弦矢高投影税**；
 
-2. **复数赤道切片算子 $\Pi_{\mathbb{C}}^{(\hat{\mathbf{i}})} : \mathbb{H} \twoheadrightarrow \mathbb{C}_{\hat{\mathbf{i}}} := \mathbf{1}\oplus\mathbb{R}\hat{\mathbf{i}}$（二维大圆平面剖切与霍普夫底投影）**：选定单一单位盲轴 $\hat{\mathbf{i}} \in \operatorname{Im}\mathbb{H}$（$\hat{\mathbf{i}}^2 = -\mathbf{1}$），正交投去另外两根横向圆弧轴分量 $(u_2, u_3) \mapsto (0, 0)$，或在三元数内部限制于单参数大圆子群 $S^1_{\hat{\mathbf{i}}} = \{\cos\phi\,\mathbf{1} + \sin\phi\,\hat{\mathbf{i}}\}$（对偶地，沿霍普夫纤维化 $S^3 \xrightarrow{S^1} S^2$ 再作去北极球极投影 $\Pi_{\mathrm{stereo}} : S^2 \setminus \{N\} \xrightarrow{\sim} \mathbb{C},\; (\psi_0, \psi_1) \mapsto \psi_1/\psi_0$），使两横向轴间的非阿贝尔球面角盈归零（$\Omega \to 0$），退化为可交换的二维复数域 $\mathbb{C}$；
+2. **复数赤道切片 $\Pi_{\mathbb C}^{(\hat{\mathbf i})}$ 与霍普夫底空间的复坐标**。取 $\hat{\mathbf i}=\mathbf i$，四元数 $q=w+x\mathbf i+y\mathbf j+z\mathbf k$ 在复平面 $\mathbb C_{\mathbf i}=\mathbb R\mathbf1\oplus\mathbb R\mathbf i$ 上的正交投影为 $\Pi_{\mathbb C}^{(\mathbf i)}(q)=w+x\mathbf i$。单位四元数 $S^3$ 的投影填满闭单位圆盘，而 $S^3$ 与该平面相交所得的大圆 $S^1_{\mathbf i}$ 是可交换的单位复数乘法群。允许径向缩放，就得到整个复平面。
+
+   [第 1 章的霍普夫映射](ch01-measurement.md#rem-pure-ray-literature)把归一化旋量 $(\psi_0,\psi_1)$ 送到布洛赫球上的射线。当 $\psi_0\ne0$ 时，这条射线有复坐标 $\zeta=\psi_1/\psi_0$，分子和分母中的共同相位在比值中抵消。北极 $[1:0]$ 对应 $\zeta=0$，南极 $[0:1]$ 在另一张图中取坐标 $\psi_0/\psi_1=0$。
 
 3. **实数内积迹算子 $\Pi_{\mathbb{R}}^{\mathrm{tr}} : \mathbb{T}_3 \to [-1, 1] \subset \mathbb{R}$（一维观察者实轴迹与测地弧长拉直）**：对三元数的 $2 \times 2$ 幺正旋量表示 $U \in \mathrm{SU}(2)$ 取观察者恒等基准上的归一化内积迹
 
@@ -114,7 +116,7 @@ $$
 细细品味 [@def-ch39-ternion-and-number-projection-operators] 中的四道切刀，哈密顿在 1843 年 10 月 16 日走过都柏林皇家运河布鲁厄姆桥（Brougham Bridge）时的电光石火便获得了前所未有的几何透视（`MODEL` + `文献结果`）：
 
 - 哈密顿在桥栏石上刻下 $\mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = \mathbf{i}\mathbf{j}\mathbf{k} = -1$，看似是“放弃了三维、发明了四维数”，实则是**向观察者借来了第四根辅助影子轴 $w = \cos\frac{\theta}{2}\,\mathbf{1}$**，把原本弯曲自持的三维极小圆弧体 $S^3$ 外嵌进了四维平直记账盒 $\mathbb{R}^4$！由于单位球面恒等式 $w^2 + x^2 + y^2 + z^2 \equiv 1$ 在南北开半球上分别将 $w = \pm\sqrt{1 - \lVert\mathbf{v}\rVert^2}$ 锁死在 $(x, y, z)$ 的余弦半球面上（$\theta \in [0^\circ, 180^\circ)$ 居北半球 $w > 0$，跨过 $\theta = 180^\circ$ 赤道 $w = 0$ 后进入南半球 $w < 0$，并在 $\theta = 360^\circ$ 抵达对跖南极 $w = -1$），$w$ 根本不是什么神秘的“第四空间维”，它只是弯曲圆弧与平直切弦之间那道不可抹平的二阶矢高余项 $1 - w = 1 - \cos\frac{\theta}{2}$ 的补影；
-- 进一步切一刀平面（冻结 $\mathbf{j}, \mathbf{k}$），非对易换位子 $[\mathbf{i}, \mathbf{j}] = 2\mathbf{k}$ 归零，球面三角角盈 $\Omega$ 消失，四元数退化为可交换的**复数 $\mathbb{C}$**；再压掉仅剩的一根虚轴 $\hat{\mathbf{i}}$ 只看观察者实轴上的归一化迹 $\frac{1}{2}\operatorname{Tr}(U)$，复数退化为只分正负大小的**实数 $\mathbb{R}$**（注意旋量迹 $\frac{1}{2}\operatorname{Tr}_{\mathrm{SU}(2)}(U(\theta)) = \cos\frac{\theta}{2}$ 在 $\theta = 360^\circ$ 处精准记录对跖负号 $-1$，而三维伴随旋转迹 $\operatorname{Tr}_{\mathrm{SO}(3)}(R(\theta)) = 1 + 2\cos\theta = 4w^2 - 1$ 因把 $w$ 平方抹平了符号，在 $360^\circ$ 处提前回到 $+3$）；最后忽略一切未走完的分数圆弧，只清点整圈闭合的拓扑荷 $\pi_3(S^3) \cong \mathbb{Z}$ 与 $\pi_1(S^1) \cong \mathbb{Z}$，连续流形便凝结成颗粒分明的**整数 $\mathbb{Z}$**、锁相比**有理数 $\mathbb{Q}$**（受长除商余恒等式 [`long_division_invariant`](lean:D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_invariant) 支配）与阿代尔乘积守恒下的**素数因子 $\mathbb{P}$**（受 [`rational_padic_product_formula`](lean:D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula) 支配）！
+- 进一步把乘法限制在 $\mathbf{1},\mathbf{i}$ 张成的平面内，任意两个元素的换位子都为零。这一平面在四元数乘法下就是**复数域 $\mathbb{C}$**；再压掉仅剩的一根虚轴 $\hat{\mathbf{i}}$ 只看观察者实轴上的归一化迹 $\frac{1}{2}\operatorname{Tr}(U)$，复数退化为只分正负大小的**实数 $\mathbb{R}$**（注意旋量迹 $\frac{1}{2}\operatorname{Tr}_{\mathrm{SU}(2)}(U(\theta)) = \cos\frac{\theta}{2}$ 在 $\theta = 360^\circ$ 处精准记录对跖负号 $-1$，而三维伴随旋转迹 $\operatorname{Tr}_{\mathrm{SO}(3)}(R(\theta)) = 1 + 2\cos\theta = 4w^2 - 1$ 因把 $w$ 平方抹平了符号，在 $360^\circ$ 处提前回到 $+3$）；最后忽略一切未走完的分数圆弧，只清点整圈闭合的拓扑荷 $\pi_3(S^3) \cong \mathbb{Z}$ 与 $\pi_1(S^1) \cong \mathbb{Z}$，连续流形便凝结成颗粒分明的**整数 $\mathbb{Z}$**、锁相比**有理数 $\mathbb{Q}$**（受长除商余恒等式 [`long_division_invariant`](lean:D5/S3/Arith/RepeatingDecimal/RepeatingDecimalQuotient.long_division_invariant) 支配）与阿代尔乘积守恒下的**素数因子 $\mathbb{P}$**（受 [`rational_padic_product_formula`](lean:D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula) 支配）！
 
 ## 39.19.4 形式化锚定定理、文献归属、八位小数奇点对账算例与数系谱系总表 {#sec-ch39-19-4}
 
@@ -228,7 +230,7 @@ $$
 | :--- | :--- | :---: | :---: | :--- |
 | **原生三元数 $\mathbb{T}_3 \equiv \Delta\mathcal{T}_\epsilon$** | 无切刀纯弯曲圆弧闭合 | **不可线性表**（奇维零因子与图册极点禁律） | **$3$ 维（$S^3 \cong \mathrm{SU}(2)$）** | 零冗余、无外置实轴 $\mathbf{1}$，完整保留三轴非阿贝尔角盈 |
 | **四元数 $\mathbb{H}$** | 外添第四维余弦阴影轴 $\iota_{\mathbb{H}} : w = \cos\frac{\theta}{2}$ | $4$ 维实线性（$1 + 3$） | $3$ 维（$S^3$） | 冗余 $1$ 维受球面约束 $w^2 + \lVert\mathbf{v}\rVert^2 = 1$ 的标量影（矢高税 $1-w$） |
-| **复数 $\mathbb{C}$** | 单平面赤道大圆切片 $\Pi_{\mathbb{C}}^{(\hat{\mathbf{i}})}$ | $2$ 维实线性（$1 + 1$） | $1$ 维（$S^1$） | 冻结两支横向圆弧轴，丢失跨轴非对易球面角盈 $\Omega \to 0$ |
+| **复数 $\mathbb{C}$** | 限制在 $\mathbf{1},\mathbf{i}$ 张成的子代数 | $2$ 维实线性（$1 + 1$） | $1$ 维（$S^1$） | 平面与 $S^3$ 相交于单位圆，$S^3$ 在平面上的正交投影填满闭圆盘 |
 | **实数 $\mathbb{R}$** | 实轴归一化内积迹 $\Pi_{\mathbb{R}}^{\mathrm{tr}} = \frac{1}{2}\operatorname{Tr}(U)$ | $1$ 维实线性 | $0$ 维（$S^0 = \{\pm 1\}$） | 滤除全部 $90^\circ$ 正交盲区转向方位，仅留连续正负幅值 |
 | **整数、有理数与素数 $\mathbb{Z}, \mathbb{Q}, \mathbb{P}$** | 同伦整圈绕数 $\pi_3(S^3) \cong \mathbb{Z}$ 与锁相比 | $0$ 维离散格 / 商域 | 离散拓扑荷 | 滤除未闭合连续分数圆弧，仅留整圈拓扑荷、锁相周期与素因子 |
 
