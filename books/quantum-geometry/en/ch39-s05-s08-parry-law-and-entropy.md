@@ -815,18 +815,48 @@ Hermisson's discussion of multi-letter substitutions with marginal renormalizati
 [@thm-ch39-p2e-tribonacci-prefix-log-refutation] rules out using the uniform logarithmic interval bound as a premise for an inverse-matrix estimate. [@thm-ch39-p2e-tribonacci-uniform-log-squared] supplies control of alternating charge on the actual word, uniformly over starts. Together with the finite-product identity above, it provides a combinatorial input for analyzing hopping ratios. It gives no full-inverse norm or mass estimate by itself and does not refute a polynomial spectral-gap bound. [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] instead uses explicit positive-charge prefixes and one full-inverse entry to prove $\delta_{\rho,j}\to0$; below, [@ex-ch39-p2e-tribonacci-prefix-rate] already assembles the same actual hoppings, odd repeated windows, and full-inverse mass estimate into the stronger paper application $73728/N_j$, with convergence uniform in the parameter. This does not follow from the alternating-charge bound alone. For the Slater-state route described above, spatial entanglement additionally requires construction of the actual occupied projector and analysis of its spatial compression. Relating physical states, spatial cuts, and the Rauzy boundary, and establishing the entropy scaling in [@prob-ch39-p2e-fractal-horizon], remain separate tasks.
 :::
 
-::: {.remark #rem-ch39-p2e-tridiagonal-localization title="Tridiagonal Localization with Boundary Residuals (Literature result, not formalized in this book)"}
-**Literature result, not formalized in this book.** Abruptly cutting a whole-line vector to a finite interval leaves residuals at both ends; a taper of sine weights controls that cost quantitatively. Chandler-Wilde–Chonchaiya–Lindner, *On spectral inclusion sets and computing the spectra and pseudospectra of bounded linear operators* ([*J. Spectr. Theory* **14**, 719–804](https://doi.org/10.4171/JST/514), §5.1, Corollaries 5.2 and 5.4), supply the following tool. Let $A$ be a bounded tridiagonal operator on $\ell^2(\mathbb{Z})$, with $M_\pm=\sup_{i\in\mathbb{Z}}|A_{i,i\pm1}|$. For a bounded operator $B$ with nonzero domain, write $\nu(B)=\inf_{\|x\|_2=1}\|Bx\|_2$. For every integer $n\ge1$, let $E_{n,k}$ be the space of vectors supported on sites $k+1,\ldots,k+n$. Then
+::: {.remark #rem-ch39-p2e-tridiagonal-localization title="Localizing the Lower Norm of a Tridiagonal Operator with Both Boundary Residuals"}
+Let $A$ be a bounded complex-linear operator on $H=\ell^2(\mathbb Z;\mathbb C)$. Assume only that its matrix entries $A_{ij}=(Ae_j)_i$ vanish for $|i-j|>1$, where $e_j$ is the coordinate unit vector at $j$. Even an input on a single site $j$ can produce output on all three sites $j-1,j,j+1$. For each integer $n\ge1$ and $k\in\mathbb Z$, let $E_{n,k}$ be the subspace of vectors supported on $k+1,\ldots,k+n$. The restriction $A|_{E_{n,k}}$ still takes values in $H$. Its $(n+2)\times n$ matrix retains rows $k$ and $k+n+1$ in the output norm. Taking the $n\times n$ principal submatrix would discard both rows.
+
+Read the three coefficient sequences directly from $A$ as $a_i=A_{i,i-1}$, $b_i=A_{ii}$ and $c_i=A_{i,i+1}$. All three are bounded because $|A_{ij}|\le\|Ae_j\|\le\|A\|$. Write $M_-=\sup_i|a_i|$ and $M_+=\sup_i|c_i|$, with both suprema over $\mathbb Z$. Let $(Ux)_i=x_{i-1}$ and let $M_f$ denote coordinatewise multiplication by $f$. The bilateral shift $U$ preserves the norm (`updateLinearIsometryEquiv`), and the multiplication operator has norm equal to the supremum norm of its coefficients (`diagonalOperator_norm`). The three terms agree with $A$ on every $e_j$. By `lp.ext_continuousLinearMap` in the pinned Mathlib, the identity extends to all of $H$,
 
 $$
 \begin{aligned}
-\inf_{k\in\mathbb{Z}}\nu\!\left(A|_{E_{n,k}}\right)
-&\le \nu(A)+\varepsilon_n,\\
-\varepsilon_n&=2(M_-+M_+)\sin\frac{\pi}{2(n+1)}.
+A &= M_a U+M_b+M_c U^{-1},\\
+(Ax)_i &= a_i x_{i-1}+b_i x_i+c_i x_{i+1}.
 \end{aligned}
 $$
 
-Only the input support is restricted; the output remains on the whole line. The corresponding $(n+2)\times n$ matrix retains both outgoing residual rows and cannot be replaced by the $n\times n$ compression that discards them. The bound takes an infimum over positions; an actual interval and unit vector can be chosen with arbitrary positive slack. This supplies an $\ell^2$ localization tool of order $1/n$. Studying the finite Tribonacci open chains by this whole-line route would still require zero-spectrum membership for the corresponding whole-line model, transplantation of an actual word interval with its neighboring sites into the specified finite open prefixes, and checks of length ratios and small scales. Those interfaces remain unverified in this book; the finite-matrix proof of [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] does not depend on them.
+For a bounded operator $B$ with nonzero domain, write $\nu(B)=\inf_{\|x\|=1}\|Bx\|$ for its lower norm. Each window contains the unit vector $e_{k+1}$. For a given window length $n$, the lower norms satisfy
+
+$$
+\begin{aligned}
+\inf_{k\in\mathbb Z}\nu(A|_{E_{n,k}})&\le \nu(A)+\delta_n,\\
+\delta_n&=2(M_-+M_+)\sin\frac{\pi}{2(n+1)}.
+\end{aligned}
+$$
+
+For fixed $A$, the error bound is $O(1/n)$. The sine factor measures the cost of shifting the window weights by one site. Put $\theta=\pi/(n+1)$ and take $w_j=\sin(j\theta)$ for $1\le j\le n$, with $w_j=0$ elsewhere. Multiply the sine recurrence $w_{j-1}+w_{j+1}=2\cos(\theta)w_j$ (`sine_reference_eigenvector`) by $w_j$ and sum over the window. Writing $S=\|w\|^2>0$ and expanding the squared differences gives
+
+$$
+\begin{aligned}
+T=\|Uw-w\|^2 &= \sum_{j=0}^{n}(w_{j+1}-w_j)^2\\
+&=2(1-\cos\theta)S=4\sin^2(\theta/2)S .
+\end{aligned}
+$$
+
+For $n=1$ the weights rise from $0$ to $1$ and fall back to $0$, so each end contributes one squared difference. For any $x\in H$, form the windowed vectors $(D_kx)_i=w_{i-k}x_i$. At fixed $i$, summing over $k$ gives a total squared mass of $S|x_i|^2$. Hence $\sum_k\|D_kx\|^2=S\|x\|^2$, even for $x$ of infinite support. In $AD_kx-D_kAx$ the diagonal terms cancel. By the shift-difference formula in [@thm-observer-read-update-commutator] and its bounded-operator factorization `readout_update_commutator_factorization`, the two off-diagonals contribute backward and forward differences of the weights. Both differences have norm $\sqrt T$. Applying the triangle inequality to the entire family of outputs in $\ell^2(\mathbb Z;H)$ gives
+
+$$
+\left(\sum_k\|AD_kx\|^2\right)^{1/2}
+\le \sqrt S\,\|Ax\|+(M_-+M_+)\sqrt T\,\|x\|.
+$$
+
+Given any $\eta>0$, choose a unit vector $x$ with $\|Ax\|<\nu(A)+\eta/2$ and put $q=\|Ax\|+\delta_n+\eta/2$. If $\|AD_kx\|\ge q\|D_kx\|$ held for every window, the left side would be at least $q\sqrt S$, while the right side equals $(q-\eta/2)\sqrt S$. Thus some integer $k$ satisfies the strict reverse inequality and $D_kx\ne0$. Normalizing $D_kx$ gives a specific $u\in E_{n,k}$ with $\|u\|=1$ and $\|Au\|<\nu(A)+\delta_n+\eta$. Taking the infimum over positions and letting $\eta$ tend to zero gives the stated bound. The argument applies when an infimum is unattained, when $A$ is nonselfadjoint, and when either or both off-diagonals vanish identically.
+
+This scalar complex Hilbert-space application uses the localization estimate of Chandler-Wilde, Chonchaiya and Lindner (§5.1, Proposition 5.1 and Corollary 5.2, pp. 765–766, with the sine window on p. 767). Spectral inclusion and optimality of the error constant each require a separate argument. [*On spectral inclusion sets and computing the spectra and pseudospectra of bounded linear operators*, *J. Spectr. Theory* **14**, 719–804](https://doi.org/10.4171/JST/514)
+
+A gap estimate for finite Tribonacci open chains via this route would still require proving that zero belongs to the spectrum of the corresponding whole-line model, transplanting the actual word interval together with one neighboring site on each side into the specified finite open prefixes, and checking length ratios and small scales. The proof of [@thm-ch39-p2e-tribonacci-open-chain-zero-gap] works directly with finite matrices. Relating physical states and spatial cuts to the Rauzy boundary and establishing the entanglement-entropy scaling in [@prob-ch39-p2e-fractal-horizon] remain separate problems.
 :::
 
 A second finite-matrix route uses an odd repeated block. An odd shift exchanges even and odd bonds, allowing two strings of hopping ratios from forward substitution to be paired. The following bound expresses that cancellation in entries of the actual inverse matrix.

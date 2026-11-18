@@ -815,18 +815,48 @@ Hermisson 对多字母替代的边缘重整化特征值与无穷动力学指数�
 [@thm-ch39-p2e-tribonacci-prefix-log-refutation] 排除了把该统一对数区段界当作逆矩阵估计前提的路线。[@thm-ch39-p2e-tribonacci-uniform-log-squared] 提供的是实际词上、对起点一致的交替电荷控制；结合前面的有限乘积恒等式，它可作为分析跃迁比值的组合输入。它本身没有给出完整逆矩阵的范数或质量估计，也没有反驳某个多项式谱隙界。[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 另用具体正电荷前缀和一个完整逆矩阵元素证明 $\delta_{\rho,j}\to0$；下文 [@ex-ch39-p2e-tribonacci-prefix-rate] 已按同一组实际跃迁、奇数重复窗口与完整逆矩阵质量估计的前提，完成更强的 $73728/N_j$ 纸面应用，并给出参数一致收敛；它不由交替电荷界单独推出。沿前述 Slater 态路线讨论空间纠缠时，还须构造实际占据投影并分析空间压缩；物理态、空间切口与劳齐边界的对应及 [@prob-ch39-p2e-fractal-horizon] 的熵标度仍需独立建立。
 :::
 
-::: {.remark #rem-ch39-p2e-tridiagonal-localization title="保留端点残差的三对角局部化（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 将一个整轴向量硬截成有限区段，会在区段两端留下残差；逐渐收窄的正弦权窗可以定量控制这项代价。Chandler-Wilde–Chonchaiya–Lindner，*On spectral inclusion sets and computing the spectra and pseudospectra of bounded linear operators*（[*J. Spectr. Theory* **14**, 719–804](https://doi.org/10.4171/JST/514)，§5.1，推论 5.2、5.4）给出如下工具。设 $A$ 是 $\ell^2(\mathbb{Z})$ 上的有界三对角算子，$M_\pm=\sup_{i\in\mathbb{Z}}|A_{i,i\pm1}|$；对任意非零定义域的有界算子 $B$，记 $\nu(B)=\inf_{\|x\|_2=1}\|Bx\|_2$。对每个整数 $n\ge1$，令 $E_{n,k}$ 为仅支撑在站点 $k+1,\ldots,k+n$ 上的向量空间，则
+::: {.remark #rem-ch39-p2e-tridiagonal-localization title="保留两端残差的三对角算子下范数局部化"}
+设 $A$ 是 $H=\ell^2(\mathbb Z;\mathbb C)$ 上的有界复线性算子。只假设其矩阵元 $A_{ij}=(Ae_j)_i$ 在 $|i-j|>1$ 时为零，其中 $e_j$ 是第 $j$ 个坐标单位向量。即使输入只占一个站点 $j$，输出也可能占据 $j-1,j,j+1$ 三个站点。对每个整数 $n\ge1$ 和 $k\in\mathbb Z$，令 $E_{n,k}$ 为支撑在 $k+1,\ldots,k+n$ 上的向量子空间。限制 $A|_{E_{n,k}}$ 的陪域仍是 $H$。计算输出范数时，$(n+2)\times n$ 矩阵保留第 $k$ 与第 $k+n+1$ 行，取 $n\times n$ 主子矩阵会丢掉这两行。
+
+从 $A$ 的三条对角线读出 $a_i=A_{i,i-1}$、$b_i=A_{ii}$、$c_i=A_{i,i+1}$。由 $|A_{ij}|\le\|Ae_j\|\le\|A\|$，三个系数序列都有界。记 $M_-=\sup_i|a_i|$、$M_+=\sup_i|c_i|$，上确界均取遍 $\mathbb Z$。令 $(Ux)_i=x_{i-1}$，以 $M_f$ 表示逐坐标乘以 $f$。双向移位 $U$ 保持范数（`updateLinearIsometryEquiv`），乘法算子的范数等于系数的上确界范数（`diagonalOperator_norm`）。在每个 $e_j$ 上核对三项，再用所钉 Mathlib 的 `lp.ext_continuousLinearMap` 将等式延拓到整个 $H$，得到
 
 $$
 \begin{aligned}
-\inf_{k\in\mathbb{Z}}\nu\!\left(A|_{E_{n,k}}\right)
-&\le \nu(A)+\varepsilon_n,\\
-\varepsilon_n&=2(M_-+M_+)\sin\frac{\pi}{2(n+1)}.
+A &= M_a U+M_b+M_c U^{-1},\\
+(Ax)_i &= a_i x_{i-1}+b_i x_i+c_i x_{i+1}.
 \end{aligned}
 $$
 
-这里仅限制输入支撑，输出仍在整轴上：对应的 $(n+2)\times n$ 矩阵保留两条向外的残差行，不能将它换成丢弃这两行的 $n\times n$ 压缩。该式对位置取下确界；选取实际区段与单位向量时可保留任意正余量。它提供了 $1/n$ 量级的 $\ell^2$ 局部化工具。若沿此整轴路线研究 Tribonacci 有限开链，仍须证明相应整轴模型的零谱前提，并把连同一层邻接站点的实际词区段转植进指定的有限开前缀，核对长度比例与小尺度情形。这些接口在本书中仍未验证；[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 的有限矩阵证明不依赖它们。
+对定义域非零的有界算子 $B$，记 $\nu(B)=\inf_{\|x\|=1}\|Bx\|$。每个窗口都含单位向量 $e_{k+1}$。给定窗口长度 $n$，下范数的局部化估计为
+
+$$
+\begin{aligned}
+\inf_{k\in\mathbb Z}\nu(A|_{E_{n,k}})&\le \nu(A)+\delta_n,\\
+\delta_n&=2(M_-+M_+)\sin\frac{\pi}{2(n+1)}.
+\end{aligned}
+$$
+
+对固定的 $A$，这个误差界是 $O(1/n)$。正弦因子来自窗权平移一格的代价。取 $\theta=\pi/(n+1)$，在 $1\le j\le n$ 置 $w_j=\sin(j\theta)$，在其余整数上置零。将正弦递推 $w_{j-1}+w_{j+1}=2\cos(\theta)w_j$（`sine_reference_eigenvector`）乘以 $w_j$，对窗内站点求和。写 $S=\|w\|^2>0$，展开平方差即得
+
+$$
+\begin{aligned}
+T=\|Uw-w\|^2 &= \sum_{j=0}^{n}(w_{j+1}-w_j)^2\\
+&=2(1-\cos\theta)S=4\sin^2(\theta/2)S .
+\end{aligned}
+$$
+
+在 $n=1$ 时，窗权从 $0$ 升到 $1$ 再降到 $0$，两端各贡献一个平方项。对任意 $x\in H$，用 $(D_kx)_i=w_{i-k}x_i$ 加窗。固定 $i$ 后对 $k$ 求和，每个坐标的平方质量都出现为 $S|x_i|^2$，因而 $\sum_k\|D_kx\|^2=S\|x\|^2$，这对无限支撑也成立。在 $AD_kx-D_kAx$ 中，对角项抵消。由 [@thm-observer-read-update-commutator] 的移位差公式及其有界算子分解 `readout_update_commutator_factorization`，两条副对角线分别给出向左、向右差分的窗权。两种差分的范数都是 $\sqrt T$。对整族输出在 $\ell^2(\mathbb Z;H)$ 中用三角不等式，得到
+
+$$
+\left(\sum_k\|AD_kx\|^2\right)^{1/2}
+\le \sqrt S\,\|Ax\|+(M_-+M_+)\sqrt T\,\|x\|.
+$$
+
+给定任意 $\eta>0$，选单位向量 $x$ 使 $\|Ax\|<\nu(A)+\eta/2$。令 $q=\|Ax\|+\delta_n+\eta/2$。若每个窗口都满足 $\|AD_kx\|\ge q\|D_kx\|$，则上式左端至少为 $q\sqrt S$，而右端等于 $(q-\eta/2)\sqrt S$。故存在整数 $k$ 使不等式严格反向，且 $D_kx\ne0$。将它归一化便得到一个实际的 $u\in E_{n,k}$，满足 $\|u\|=1$ 与 $\|Au\|<\nu(A)+\delta_n+\eta$。对位置取下确界并令 $\eta$ 趋于零，即得上述估计。即使下确界未取到、$A$ 非自伴或任一条乃至两条副对角线恒为零，这一选窗论证仍成立。
+
+这一标量复 Hilbert 空间应用对应 Chandler-Wilde、Chonchaiya 与 Lindner 的局部化估计（§5.1，命题 5.1、推论 5.2，第 765–766 页，第 767 页取正弦窗）。谱包含关系及误差常数的最优性各需另证。[文献原文，*J. Spectr. Theory* **14**, 719–804](https://doi.org/10.4171/JST/514)
+
+若要沿此路线推出 Tribonacci 有限开链的谱隙界，仍须证明 $0$ 属于相应整轴模型的谱，把实际词区段连同两侧各一层邻接站点转植进指定的有限开前缀，并核对长度比例及小尺度情形。[@thm-ch39-p2e-tribonacci-open-chain-zero-gap] 直接在有限矩阵上证明。物理态、空间切口与劳齐边界的对应，以及 [@prob-ch39-p2e-fractal-horizon] 的纠缠熵标度，仍是独立问题。
 :::
 
 另一条有限矩阵路线利用奇数长度的重复：奇数平移把偶数键与奇数键互换，前代入中的两串跃迁比值因而可以配对。下面的下界把这一抵消机制写成实际逆矩阵的定量结论。
