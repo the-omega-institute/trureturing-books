@@ -912,9 +912,13 @@ $$
 x^{\,2^{|I|}-2^r}(x-2^{-r})^{2^r}.
 $$
 
+[Equal-weight characteristic polynomial](lean:D5/S3/Quantum/Fermionic/SlaterPairCutRank.orderedCut_pair_charpoly)
+
 The same binary-rank calculation appears for bipartitions of graph states. Here the matrix entries come from the site order in the Slater determinants. [Hein, Eisert and Briegel, Proposition 3](https://arxiv.org/abs/quant-ph/0307130)
 
 Replace each discarded orbital by the coordinate vector at its earlier endpoint. The retained compression stays the same. The discarded side now has one occupation string, so the ordinary marginal is pure and the entropy difference is $r\log 2$. For example, concatenate $m$ four-site blocks ordered $I,J,I,J$. Endpoints from distinct blocks do not alternate, so $A$ is the $m$-dimensional identity. This gives two $2m$-particle Slater states with equal retained compression at the same cut and ordinary marginal entropies $m\log 2$ and zero.
+
+[Coordinate replacement and its characteristic polynomial](lean:D5/S3/Quantum/Fermionic/SlaterPairCutRank.coordinate_replacement)
 
 **The entropy bound for unequal endpoint weights and when it is attained (written proof).** Keep the cut and disjoint pairs above, and allow arbitrary complex amplitudes on the two endpoints of each normalized orbital. An orbital with zero amplitude at one endpoint must occupy the other. Fix all such endpoints and delete the corresponding rows and columns of the alternation matrix. Write $A$ for the resulting matrix and $a,b$ for the remaining pair counts on each side. Let $p_i,q_j$ be the probabilities of selecting the later endpoint, given by the squared moduli of the corresponding amplitudes. Put $r=\operatorname{rank}_{\mathbb F_2}A$. The ordinary marginal has rank $2^r$ and entropy at most $r\log 2$. Equality holds exactly when the rows with $p_i=1/2$ span the row space of $A$ and the columns with $q_j=1/2$ span its column space, both over $\mathbb F_2$.
 
