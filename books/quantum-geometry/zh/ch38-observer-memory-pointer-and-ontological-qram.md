@@ -18,8 +18,8 @@
 8. **自指盲点球极投影、相对化屏障与四句离相**（[§36.8](ch38-s07-blindspot-and-relativization.md)）：阐明为何“球外有球、时间扩张、永不闭合”与“闭合全知”同属观察者北极自指盲点 $\{N\}$ 穿孔前后的双生球极投影，并结合一阶量词不对称与 Baker–Gill–Solovay 相对化、自然证明、代数化三大屏障说明为何现象追逐 $P = NP$ 绝不许断言非相对化的 $P \neq NP$；
 9. **五阶自指不动点谱系与主动停机正交折叠**（[§36.9](ch39-s06-fivefold-self-reference-spectrum.md)–[§36.10](ch39-s07-self-halting-precision-and-spectral-sorting.md)）：贯通从“地址 = 内容”到量子门蒸馏重整的五阶不动点阶梯，并揭示自指主动停机孔径 $\varepsilon_{\mathrm{self}}$ 如何将一维时间长河正交折叠为测量基特征谱排序。
 
-::: {.figure src="ch38-overview"}
-**图 36。** 本章地图（示意模型，`MODEL`）：第 I 栏，一块从不移动的内存阵列，指针寄存器 `ptr` 的青色光束落在琥珀色的当前格上，这是一次解引用 `*ptr`，灰色虚线箭头把读头推向下一格，这是 `ptr++`；第 II 栏，三枚指针 $\mathrm{ptr}_A$、$\mathrm{ptr}_B$、$\mathrm{ptr}_C$ 以共享借用 `&State` 指向同一页，旁边被划掉的虚线页是不可克隆判据排除的、对未知态的通用精确拷贝 `memcpy`（[@thm-ch38-pointer-width-and-no-deep-copy]）；第 III 栏，四格页目录 $P$ 的零号槽写着它自己的地址 `0x1000`，青色箭头绕回 $P$ 本身，即 `p = *p`；抽象的三种遍历行为由 [@thm-ch38-recursive-page-table-walk] 形式化，第 1–3 格通向具体示意中的叶页表 $T_1$–$T_3$（[@ex-ch38-recursive-page-table-dereference]）。
+::: {.figure src="ch36-overview"}
+**图 36。静态本体内存指针解引用、禁深拷贝共享借用与递归自映射页表。** 全图为示意模型（`MODEL`）：第 I 栏，一块从不移动的内存阵列，指针寄存器 `ptr` 的青色光束落在琥珀色的当前格上，这是一次解引用 `*ptr`，灰色虚线箭头把读头推向下一格，这是 `ptr++`；第 II 栏，三枚指针 $\mathrm{ptr}_A$、$\mathrm{ptr}_B$、$\mathrm{ptr}_C$ 以共享借用 `&State` 指向同一页，旁边被划掉的虚线页是不可克隆判据排除的、对未知态的通用精确拷贝 `memcpy`（[@thm-ch38-pointer-width-and-no-deep-copy]）；第 III 栏，四格页目录 $P$ 的零号槽写着它自己的地址 `0x1000`，青色箭头绕回 $P$ 本身，即 `p = *p`；抽象的三种遍历行为由 [@thm-ch38-recursive-page-table-walk] 形式化，第 1–3 格通向具体示意中的叶页表 $T_1$–$T_3$（[@ex-ch38-recursive-page-table-dereference]）。
 :::
 
 ---

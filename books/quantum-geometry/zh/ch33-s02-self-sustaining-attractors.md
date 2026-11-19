@@ -46,7 +46,7 @@
 细读 [@thm-ch33-contextual-attractor-and-common-factor] 的第 3 款与第 4 款（二者是定义展开，下面借其记号表述本书的读法），观察者势阱的几何品格豁然开朗：在我们的 **`MODEL`（模型诠释）** 中，哪怕面对同一座静态宇宙母格（同一份 `text` 与同一套正交几何 `interpretationRule`），携带不同内部窗口参数 $u_A \neq u_B$（对应不同的 `readerAdmission`、`background` 与 `evaluationGoal`）的两位观察者 $\mathcal{O}_A$ 与 $\mathcal{O}_B$，可以对应不同的局部不动点切片；而要想在其间建立真正的“客观公共事实”，绝不能靠某一方强权宣布自己代表绝对点 $C$，而须在声明的语境与意义族上选定因子提取映射，证明它对所有入选的不动点意义恒取同一**不变公因子（`commonFactor`）**！下框注明双观察者接受窗重联与孤立、互指两种收敛轨迹分别画在哪里：
 
 ::: {.remark #rem-ch33-mutual-attractor-figure title="互吸引子接受窗重联与余弦互指单调锁死图解（图解索引，未在本书形式化）"}
-**图解索引，未在本书形式化。** 双观察者吸引子重联模型（`MODEL`）建立在切投准晶接受窗文献背景（[@rem-ch32-icosian-e8-literature]）与桥图极小割定理（[@prop-ch33-bridge-reconnection-mincut]，`LEAN ✓`）之上：两扇接受窗的交集画在下文“接受窗交集”一节的图里，极小割的重联画在该节的两张实验卡里。下文实分析算例 [@ex-ch33-mutual-cosine-monotonic-lock] 中孤立余弦迭代与二阶互指复合迭代的蛛网轨迹对比画在图 33 第 III 栏与下一节的实验卡里：孤立序列按单步计时，互指序列按含两次余弦求值的完整复合轮计时，对应同步互指的偶数拍采样。
+**图解索引，未在本书形式化。** 双观察者吸引子重联模型（`MODEL`）建立在切投准晶接受窗文献背景（[@rem-ch32-icosian-e8-literature]）与桥图极小割定理（[@prop-ch33-bridge-reconnection-mincut]，`LEAN ✓`）之上：两扇接受窗的交集画在下文“接受窗交集”一节的图里，极小割的重联画在该节的两张实验卡里。下文实分析算例 [@ex-ch33-mutual-cosine-monotonic-lock] 中孤立余弦迭代与二阶互指复合迭代的蛛网轨迹对比画在图 34 第 III 栏与下一节的实验卡里：孤立序列按单步计时，互指序列按含两次余弦求值的完整复合轮计时，对应同步互指的偶数拍采样。
 :::
 
 ---

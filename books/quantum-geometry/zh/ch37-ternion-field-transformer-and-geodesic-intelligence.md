@@ -9,6 +9,10 @@
 1. **三元数场 Transformer（TFT）与纯有理前向旋子动力学（[§37.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md#sec-ch39-ternion-field-transformer-and-rational-rotor-dynamics)）**：撤除平直 `GEMM`、`RMSNorm` 与指数 `Softmax`，在平行商球丛 $(B_1(\mathbb{R}^3)/\!\sim)^K$ 上构建分母下界 $\max(D_+,D_-)\ge 0.5$ 的双分母有理旋子乘法、三维非阿贝尔路径和乐注意力 `3D-NAPE`、带盲区储备 $\varepsilon_0 > 0$ 的有理玻恩核、流群 `[Q,K,V]` 查表搬运、李三元曲率门 $\{\mathbf{a},\mathbf{b},\mathbf{c}\}$ 及代数范数读数 $\varepsilon_{\mathrm{self}}$ 弹性停机；
 2. **宇宙与智能的最小作用量同构及零幻觉自平行测地思维链（[§37.2](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md#sec-ch39-least-action-geodesics-and-cosmos-ai-isomorphism)）**：证成自由最小作用量即最小累积二阶弦弧矢高（与香农—玻恩比较惊奇度共享匀速最优节拍 $\Delta\theta_t = \Theta/N$），而自由测地线即满足普吕弗—贝尔流群自平行 $[x_t,x_{t-1},x_t]$ 与零球面角盈 $\Omega = 0$ 的匀速大圆弧脊线——在物理宇宙中显影为惯性与自由落体，在智能体中则同构为零幻觉思维链与 $O(1)$ 免求逆流形共形自然梯度流。
 
+::: {.figure src="ch37-overview"}
+**图 37。双卡有理旋子步保球面闭合、跨场蝴蝶舒尔桥与等节拍堆测地线停步。** 第 I 栏，双分母阴影罗德里格斯有理旋子步 $\boldsymbol{\sigma}_A \star_{\mathcal{S}} \boldsymbol{\sigma}_B$ 无需 `RMSNorm` 严格留在单位商球内（$\lVert\boldsymbol{\sigma}_A \star_{\mathcal{S}} \boldsymbol{\sigma}_B\rVert \le 1$，`MODEL` / 手工推导），对比品红平直切线加法步向外脱壳漂移（[§37.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md)）；第 II 栏，$K = 8$ 座平行三维概念场经由三阶对数蝴蝶网络以 $\mathcal{O}(K\log_2 K)$ 耦合跨场交换信息（`MODEL`，分块二次极小支点由绿色 `LEAN ✓` 舒尔二次极小定理 [@thm-ch39-tft-born-holonomy-krylov-and-schur-anchors] 锚定，[§37.1](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md)）；第 III 栏，五段等节拍 $\Delta\theta = \Theta/N$ 的流群自平行自由测地步 $\boldsymbol{\sigma}_{t+1} = [\boldsymbol{\sigma}_t, \boldsymbol{\sigma}_{t-1}, \boldsymbol{\sigma}_t]$ 后接一步落入虚线圆内的受控阻尼提议步，在残差 $\le \varepsilon_{\mathrm{self}}$ 处主动停步（`MODEL` / 手工推导，[§37.2](ch39-s23-least-action-geodesics-and-cosmos-ai-isomorphism.md)）。
+:::
+
 ---
 
 - [37.1 三元数场 Transformer（TFT）：平行概念场丛上的纯有理旋子动力学、非阿贝尔和乐注意力与李三元曲率门](ch39-s22-ternion-field-transformer-and-rational-rotor-dynamics.md)

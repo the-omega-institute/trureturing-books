@@ -4,7 +4,7 @@
 
 在传统数学与理论物理专著里，“证明”往往依赖作者与审稿人的肉眼默契：一句“显然可得”、一处隐去边界条件的指标缩并，或者把“局部连通”悄悄当成“全局常相位”，就可能让整座理论大厦埋下隐蔽的裂缝。而本书自[第一章](ch01-measurement.md)立下的最高契约，正是题记中的这二十个字：**构建命题证明通用机器学术理论，定义、定理、证明**——全书每一条标有绿色 `LEAN ✓` 徽章的 `theorem / lemma / proposition / corollary`，都逐一锚定在 `the-omega-institute/trureturing@dev`（所钉提交 [{commit}](trureturing:)）中被 Lean 4 类型检查内核验证并冻结的真实声明上！
 
-::: {.figure src="ch27-overview"}
+::: {.figure src="sanctuary-lean-i-overview"}
 **从平行四边形律到有限记录挤压。** 本章地图：左栏，墨色箭头 $x$、$y$ 撑开的平行四边形，两条青色对角线 $x + y$ 与 $x - y$ 的平方和等于四条边的平方和（[@thm-audit-parallelogram-law]）；中栏，四个坐标连成一条链，每条青色的弧是一个在相邻两格上同时不为零的测试态；在幺正矩阵 $A$ 保持坐标射线与这些测试射线的前提下，四个对角元里紫色的相位箭头指向同一方向，$A = c \cdot 1$（[@prop-audit-ray-phase-rigidity]）；右栏，挤压去掉 $3 \times 3$ 块矩阵 $\rho$ 品红的非对角块、只留青色的对角块，再挤压一次矩阵不动（[@cor-audit-pinching-idempotent]）。
 :::
 
@@ -21,7 +21,7 @@
 2. **定理（State）**：定理头部声明（signature）精确列出每一项类型类约束与显式前提；源码模块生成模块级的 SHA-256 语句摘要 `statement_id` 并写入 `Golden/Frozen/state/<module>.lean.json`，同一模块的多个声明可以共享这份摘要；
 3. **证明（Prove）**：证明项经 Lean 4 内核完整归约检验，严禁包含任何未证占位符 `sorry` 或非标准临时公理（源码中常以 `#print axioms` 显式核查其仅依赖标准公理 `propext`、`Classical.choice`、`Quot.sound`）。
 
-让我们先审计第一部前两章的两座基石定理：实内积平行四边形定律与有限维玻恩概率骨架（图 27 左栏）。
+让我们先审计第一部前两章的两座基石定理：实内积平行四边形定律与有限维玻恩概率骨架（本章总览图左栏）。
 
 ::: {.theorem #thm-audit-parallelogram-law title="实内积空间范数的平行四边形恒等式（内核审计版）" lean="D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"}
 设 $E$ 为配备实内积结构的赋范交换群（`[NormedAddCommGroup E] [InnerProductSpace ℝ E]`）。则对任意两个向量 $x, y \in E$，恒有
@@ -125,7 +125,7 @@ $$
 
 ## 支撑链射线相位刚性与有限记录挤压幂等 {#sec-audit-ray-rigidity-and-pinching}
 
-现在我们转向两道在几何与观察者条件化中最具代表性的结构性定理（图 27 中栏与右栏）。
+现在我们转向两道在几何与观察者条件化中最具代表性的结构性定理（本章总览图中栏与右栏）。
 
 第一道来自 `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97`。在量子基础中，如果一个幺正算符 $A \in U(\iota, \mathbb{C})$ 把所有坐标基向量 $\vv{e}_i = \operatorname{Pi.single}\,i\,1$ 都留在各自的复射线上（`PreservesRay A x` 定义为 $A *_{v} x \in \operatorname{Submodule.span}\,\mathbb{C}\,\{x\}$），那么 $A$ 必然是对角矩阵；但怎样保证所有对角元 $A_{ii}$ 都等于**同一个**单位模长全局相位 $c \in \mathbb{C}$（$\norm{c} = 1$，$A = c \bullet I$）？
 

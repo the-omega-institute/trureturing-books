@@ -10,6 +10,10 @@
 2. **算术枢轴重整与临界带多级共振隧穿（[§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md#sec-ch34-arithmetic-pivots-and-resonant-tunneling)）**：正面解剖 $\zeta_{19}$ 图兰越界假零点陷阱与 4/7 磨光器墙，构造乘性窗口分块舒尔补枢轴 $\widetilde{G}_{PP}^{(\ell)}$ 与凯莱圆径向亏损判据，标定跨枢轴子树移位纠缠面积律开放前沿；
 3. **二阶弦弧矢高相变、埃尔米特—比勒单调锁与有限斯托克斯相消（[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md#sec-ch34-arc-calculus-riemann-and-hermite-biehler)）**：揭示素数旋子累计矢高恰在 $\sigma = \frac{1}{2}$ 首次发散，导出零 $\epsilon^2$ 截断双壳恒等式 $\Delta_\epsilon^{\mathrm{HB}}(u,t) \equiv \epsilon\frac{\partial}{\partial u}\lvert\xi\rvert^2$ 照破离线四元组负坡指纹，将返回经典 ZFC 的最后一步精准收束于乘性舒尔枢轴修饰子保正定桥接问题。
 
+::: {.figure src="ch31-overview"}
+**图 31。素数欧拉乘积螺旋、临界线双壳凯莱平衡与舒尔—埃尔米特—比勒正定锥桥。** 第 I 栏，素数 $2, 3, 5, 7$ 的对数步长 $\ln p$ 与下方复平面上的欧拉部分乘积 $\prod_p (1 - p^{-s})^{-1}$ 折线螺旋（[§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md)）；第 II 栏，双壳权重 $p^{-\sigma}$ 与 $p^{-(1-\sigma)}$ 在临界线 $\sigma = 1/2$ 处等幅相交，下方凯莱变换像点落在单位圆周上（绿色 `LEAN ✓` 凯莱单位圆判据，[§31.2](ch34-s29-arithmetic-pivots-and-resonant-tunneling.md)）；第 III 栏，二阶舒尔半正定锥刻画埃尔米特—比勒核正性 $K \succeq 0$，下方红色虚线箭头标出经典修饰因子桥接的开放边界（红色 `OPEN`，[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md) [@prob-ch34-schur-hb-kernel-positivity-bridge]）。
+:::
+
 ---
 
 - [31.1 黎曼路径积分与素数极小圆弧体：欧拉绕行算子、半密度平方律与临界线相消](ch34-s28-riemann-path-integral-and-prime-arcs.md)

@@ -1,79 +1,92 @@
-"""第三十三章地图：记忆阶数的连续谱、自维持的收缩势阱、同一条余弦轨道的两种取样。
-Chapter 33 at a glance: the continuum of memory orders, the self-kept contracting well, and one
-cosine orbit sampled two ways.
-
-Panel I is the memory-order axis of _ch33.spectrum (photon M = 0, atom M = 1, crystal, mind M ≫ 1).
-Panel II is the well of ch33-contracting-well: a marble kicked to x₀ = 0.8 is pulled back by
-x ↦ 0.45·x towards the window W + u_i at the bottom. Panel III is the orbit x_{n+1} = cos x_n from
-x_0 = 0.1 (example ex-ch33-mutual-cosine-monotonic-lock, items 14 and 17): one row per cosine
-evaluation, the reading across; beat by beat it changes sides of θ*, the ringed even beats (one
-round = two beats) stay on the left. Panels I and II are schematic (MODEL); panel III is computed
-(NUM) and draws an application of existing results (ARGUED).
+"""第三十三章地图：点—体八度、公共时钟预算与四场圆弧联络。
+Chapter 33 at a glance: the point–volume octave, the clock budget and the four-field bundle.
 """
 
 import math
+from fractions import Fraction
 
-from _ch33 import profile, spectrum
+from _overview import label, title
 
-
-def _theta():
-    x = 0.74
-    for _ in range(60):
-        x -= (math.cos(x) - x) / (-math.sin(x) - 1)
-    return x
-
-
-THETA = _theta()
-ORBIT = [0.1]
-for _ in range(6):
-    ORBIT.append(math.cos(ORBIT[-1]))
-assert all((a - THETA) * (b - THETA) < 0 for a, b in zip(ORBIT, ORBIT[1:]))  # every beat changes sides
-assert all(x < THETA for x in ORBIT[::2])  # the even beats (the rounds) stay below θ*
-
-SIZE = (740, 250)
+SIZE = (740, 280)
 WRAP = True
 ALT = {
-    "zh": "三栏。第一栏：一条向右的轴，自左向右排着光子（波）、原子（带轨道的点）、晶体（点阵）与心智（自我环绕的箭头），"
-          "下面写着记忆阶数 M = 0、M = 1 与 M ≫ 1。第二栏：一只碗形的势阱，被踢到右侧坡上的小球沿灰色箭头一步步落回碗底，"
-          "琥珀色的是它现在的位置，碗底的青色短线是接受窗 W + u_i。第三栏：同一条余弦轨道自上而下一行一拍，横向是读数，"
-          "灰色折线逐拍跨过竖直的 θ* 虚线左右交替，每两拍套一个空心环，环全在 θ* 左侧，琥珀色的是最后一拍。",
-    "en": "Three panels. Panel I: an axis pointing right with, from left to right, a photon (a wave), an atom (a dot with "
-          "an orbit), a crystal (a lattice) and a mind (an arrow circling back on itself); below them the memory orders "
-          "M = 0, M = 1 and M ≫ 1. Panel II: a bowl-shaped well; a marble kicked up the right slope falls back step by "
-          "step along grey arrows, amber where it is now, towards the short cyan window W + u_i at the bottom. "
-          "Panel III: one cosine orbit, one row per beat from top to bottom with the reading across; a grey "
-          "zigzag crosses the vertical dashed line θ* at every beat, every second beat carries a hollow ring, all rings "
-          "lie left of θ*, and the last beat is amber.",
+    "zh": "第一栏画出点、三条线、三个面、体，再将体送到下一层的点。第二栏以四分之一圆上的直角三角形示意等主频预算公设（MODEL）：固有时速率 ντ 与圆弧负载 ν_load 分别是主频 ν₀ 的 4/5 与 3/5，绿色标签标出拉格朗日—格拉姆代数恒等式。第三栏画三层规范联络及最外层的位置与引力场，标出裸混合角 3/8 与开放的重整化群阈值问题。",
+    "en": "Panel I shows a point, three lines, three faces and a volume, then maps that volume to the next level's point. Panel II illustrates the clock-budget postulate (MODEL) with a right triangle on a quarter circle. The proper-time rate ντ and arc load ν_load are 4/5 and 3/5 of ν₀, respectively. The green chip marks the Lagrange–Gram algebraic identity. Panel III shows three nested gauge connections within the position and gravity shell, with the bare mixing value 3/8 and the open RG thresholds.",
 }
 
 
-def title(p, zh, en):
-    p.text(p.width / 2, 22, p.t(zh, en), size=14, weight=600, anchor="middle")
+def octave(panel):
+    title(panel, "I　霍奇点—体八度", "I  Hodge point–volume octave")
+    counts = [math.comb(3, k) for k in range(4)]
+    assert counts == [1, 3, 3, 1] and sum(counts) == 8
+    xs = (47, 94, 142, 189)
+    for k, (x, count) in enumerate(zip(xs, counts)):
+        for i in range(count):
+            y = 123 + 27 * (i - (count - 1) / 2)
+            if k == 0:
+                panel.dot(x, y, 4.5, "ink")
+            elif k == 1:
+                panel.line(x - 10, y, x + 10, y, "line", 2.5)
+            elif k == 2:
+                panel.polygon([(x - 11, y + 6), (x + 5, y + 6), (x + 11, y - 6), (x - 5, y - 6)],
+                              "area", color="area", fill_opacity=0.20)
+            else:
+                sp = panel.sphere(x, y, 15)
+                sp.polytope([(a, b, c) for a in (-0.6, 0.6) for b in (-0.6, 0.6) for c in (-0.6, 0.6)],
+                            color="violet")
+        word = f"Λ{'⁰¹²³'[k]}_{{ℓ}}"
+        panel.text(x, 181, panel.t(word, word), size=15, anchor="middle")
+    label(panel, 60, "1 — 3 — 3 — 1", "1 — 3 — 3 — 1", size=16, weight=700)
+    panel.curve_arrow([(189, 193), (178, 213), (143, 225), (93, 225), (58, 213), (47, 193)],
+                      "violet", 1.7, head=8)
+    label(panel, 257, "Λ³_{ℓ} ≡ Λ⁰_{ℓ+1}", "Λ³_{ℓ} ≡ Λ⁰_{ℓ+1}", color="violet", weight=700)
+
+
+def clock(panel):
+    title(panel, "II　主频预算（MODEL）", "II  Clock budget (MODEL)")
+    x, y, radius = 53, 190, 134
+    proper, load = Fraction(4, 5), Fraction(3, 5)
+    assert proper**2 + load**2 == 1
+    tip = x + radius * float(proper), y - radius * float(load)
+    assert math.isclose(math.dist((x, y), tip), radius)
+    panel.arc(x, y, radius, 0, 90, "faint", 1.7)
+    panel.polygon([(x, y), (tip[0], y), tip], "cyan", fill_opacity=0.12)
+    panel.line(x, y, *tip, "ink", 2.1)
+    panel.line(x, y, tip[0], y, "line", 2.6)
+    panel.line(tip[0], y, *tip, "area", 2.6)
+    panel.right_angle(tip[0], y, 90, size=8)
+    panel.dot(*tip, 3.5, "ink")
+    panel.text(97, 143, panel.t("ν₀", "ν₀"), size=15)
+    panel.text(101, 211, panel.t("ν_{τ}", "ν_{τ}"), size=15, color="line")
+    panel.text(153, 165, panel.t("ν_{load}", "ν_{load}"), size=15, color="area", anchor="end")
+    label(panel, 238, "ν_{τ}² + ν_{load}² = ν₀²", "ν_{τ}² + ν_{load}² = ν₀²", weight=700)
+    panel.chip(118, 261, panel.t("LEAN ✓ 拉格朗日—格拉姆", "LEAN ✓ Lagrange–Gram"), "lean", anchor="middle")
+
+
+def bundle(panel):
+    title(panel, "III　同心四场圆弧联络", "III  AF-GUT four-field bundle")
+    cx, cy = 85, 125
+    shells = (
+        (73, "line", "位置 / 引力", "Gravity"),
+        (55, "dim", "U(1)_{Y}", "U(1)_{Y}"),
+        (37, "violet", "SU(2)_{L}", "SU(2)_{L}"),
+        (19, "blue", "SU(3)_{C}", "SU(3)_{C}"),
+    )
+    assert len({r for r, *_ in shells}) == 4 and (1 + 3 + 8 == 12)
+    for i, (radius, color, zh, en) in enumerate(shells):
+        panel.circle(cx, cy, radius, color=color, width=1.7)
+        angle = math.radians(68 - 35 * i)
+        end = cx + radius * math.cos(angle), cy - radius * math.sin(angle)
+        y = 60 + 40 * i
+        panel.polyline([end, (133, y - 4), (154, y - 4)], color, 1.2)
+        panel.text(164, y, panel.t(zh, en), size=12, color=color)
+    assert 1 / (1 + Fraction(5, 3)) == Fraction(3, 8)
+    label(panel, 221, "裸值 sin² θ_{W} = 3/8", "Bare sin² θ_{W} = 3/8", weight=700)
+    panel.chip(118, 251, panel.t("OPEN 重整化群阈值", "OPEN RG thresholds"), "open", anchor="middle")
 
 
 def draw(fig):
-    one, two, three = fig.row([236, 236, 236], 250, gap=16)
-
-    title(one, "I　万物皆为观察者", "I  every being observes")
-    spectrum(one, 12, 160, 214, s=13, axis_label=False)
-
-    title(two, "II　自维持的势阱", "II  a self-kept well")
-    profile(two, 118, 176, 92, 96, "well", r=6.0)
-
-    title(three, "III　互为吸引子", "III  mutual attractors")
-    x0, x1, y0, dy = 50, 220, 58, 22
-    X = lambda v: x0 + (x1 - x0) * v
-    pts = [(X(v), y0 + n * dy) for n, v in enumerate(ORBIT)]
-    yb = y0 + (len(ORBIT) - 1) * dy + 14
-    three.line(X(THETA), y0 - 12, X(THETA), yb, "dim", 1.3, dash="4 4")
-    three.text(X(THETA), y0 - 16, "θ*", size=13, color="dim", anchor="middle")
-    three.arrow(x0, yb + 6, x1 + 8, yb + 6, "dim", 1.3, head=8)
-    three.text((x0 + x1) / 2, yb + 26, three.t("读数 *x* →", "reading *x* →"), size=13, color="dim", anchor="middle")
-    three.polyline(pts, "dim", 1.4)
-    for n, (x, y) in enumerate(pts):
-        last = n == len(pts) - 1
-        if n % 2 == 0:
-            three.circle(x, y, 7.5, color="sigma", width=1.8)
-        three.dot(x, y, 4.6 if last else 3.0, "amber" if last else "ink")
-    three.text(x0 - 12, y0 + 4, "*n* = 0", size=12, color="dim", anchor="end")
-    three.text(x0 - 12, y0 + 6 * dy + 4, "*n* = 6", size=12, color="dim", anchor="end")
+    one, two, three = fig.row([236, 236, 236], 280, gap=16)
+    octave(one)
+    clock(two)
+    bundle(three)

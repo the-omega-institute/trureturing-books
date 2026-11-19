@@ -63,7 +63,7 @@
 :::
 
 ::: {.remark #rem-ch34-localization-figure title="球面两步正交寻址极轴反演与八分球面旋子盲区图解（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 结合正交法轴与对偶拉回定理（[@thm-ch34-perpendicular-axis-and-pullback]，`LEAN ✓`）的球面两步寻址极轴反演（[@ex-ch34-spherical-addressing-and-octant-rotors]）画在图 34 第 I 栏与本节的 `meridian`、`sweep` 两张实验卡里；八分球面旋子和乐与几何相位文献背景（[@ex-ch34-spherical-addressing-and-octant-rotors] 与 [@rem-ch34-virtual-z-berry-relativity-literature]）画在图 34 第 II 栏、下一节的 `hops`、`equator`、`tilted`、`frames` 四张实验卡，以及后文的八分球面回路卡里。
+**文献结果，未在本书形式化。** 结合正交法轴与对偶拉回定理（[@thm-ch34-perpendicular-axis-and-pullback]，`LEAN ✓`）的球面两步寻址极轴反演（[@ex-ch34-spherical-addressing-and-octant-rotors]）画在图 29 第 I 栏与本节的 `meridian`、`sweep` 两张实验卡里；八分球面旋子和乐与几何相位文献背景（[@ex-ch34-spherical-addressing-and-octant-rotors] 与 [@rem-ch34-virtual-z-berry-relativity-literature]）画在图 29 第 II 栏、下一节的 `hops`、`equator`、`tilted`、`frames` 四张实验卡，以及后文的八分球面回路卡里。
 :::
 
 ---

@@ -1,26 +1,33 @@
-"""第二十九章地图：四级数系突围、模 4 表盘上空着的第 3 格、两条余弦锁住第三条的格拉姆窗口。
-Chapter 29 at a glance: the four tiers of numbers, the empty cell 3 of the mod 4 dial, and the Gram
-window in which two cosines lock the third.
+"""第二十九章地图：同一纬圈上的点在极轴上只投下一个影子；看不见的那块面与它的法轴；黄金切片与它看不见的内部方向。
+Chapter 29 at a glance: every point of a latitude circle casts one shadow on the polar axis; the
+hidden plane and its normal axis; the golden slice and the internal direction it cannot see.
 
-Panel I is the staircase of ch29-four-tiers without its pictures; panel II is the dial of
-ch29-mod-four-dial; panel III is the slice of ch29-gram-window. All three reuse _ch29.
+Panel I: the latitude circle at polar angle θ = 60°; v₁ (φ = 0, filled) and v₂(φ) for φ = 90°, 180°, 270°
+(hollow) all project to the one point cos θ = 1/2 on the polar axis (asserted in _ch34). Panel II:
+the equatorial disc e₁∧e₂ with the 90° turn of the octant holonomy, and its normal +e₃ where the
+observer stands. Panel III: the golden cut-and-project scheme in the lattice plane Z² (b right, a
+up): the amber slice E∥ along (φ, 1), the cyan window −φ⁻² ≤ a − b/φ ≤ φ⁻¹, and the magenta
+projection along E⊥. Panels I and II are the chapter's worked example; Panel III is the lattice of
+the chapter's proposition, read through the chapter's interpretive model (MODEL).
 """
 
-from _ch29 import TIERS, dial, gram_window
+from _ch34 import golden_slice, hidden_plane, shadow_sphere
 
-SIZE = (740, 272)
+SIZE = (740, 262)
 WRAP = True
 ALT = {
-    "zh": "三栏。第一栏：四级台阶从左向右升高，依次写着 ℚ、√2、π、θ*，ℚ 是青色，其余三个是品红。"
-          "第二栏：分成四格的模 4 表盘，第 0、1、2 格是青色，第 3 格是品红虚线围出的空格。"
-          "第三栏：c_AB = cos 60° 时的格拉姆窗口，一块紫色的倾斜椭圆，边上 det G = 0，里面 det G > 0；一段琥珀色竖线是 c_BC = cos 45° 时 c_AC 的窗口。",
-    "en": "Three panels. Panel I: four steps rise from left to right, carrying ℚ, √2, π and θ*; ℚ is cyan, the other "
-          "three magenta. Panel II: the mod 4 dial in four cells, cells 0, 1, 2 cyan and cell 3 an empty cell outlined in "
-          "dashed magenta. Panel III: the Gram window for c_AB = cos 60°, a tilted violet ellipse with det G = 0 on its rim "
-          "and det G > 0 inside; an amber vertical segment is the window for c_AC at c_BC = cos 45°.",
+    "zh": "三栏。第一栏：一颗球，紫色竖轴上站着琥珀色的观察者 O；极角 θ = 60° 的品红纬圈上有一个实心点和三个空心圈，"
+          "四条青色虚线都汇到竖轴上同一个青色点 cos θ。第二栏：同一颗球，赤道面是一块品红的圆盘，盘里一段品红弧从 e₁ 转到 e₂，标着 90°；"
+          "琥珀色的观察者 O 站在圆盘的法轴顶端。第三栏：方格点阵上一条琥珀色的斜线 E∥，两侧是一条青色的窄带；带里的点是青色的，"
+          "各自沿品红短线落到斜线上，品红虚线是与斜线垂直的内部方向 E⊥。",
+    "en": "Three panels. Panel I: a sphere with the amber observer O on the violet vertical axis; on the magenta latitude "
+          "circle at polar angle θ = 60° sit one filled dot and three hollow rings, and four cyan dashed lines all meet at the one cyan "
+          "point cos θ on the axis. Panel II: the same sphere with the equatorial plane as a magenta disc; a magenta arc "
+          "inside it turns from e₁ to e₂, marked 90°; the amber observer O stands at the top of the disc's normal axis. "
+          "Panel III: a square lattice with an amber slanted line E∥ inside a narrow cyan strip; the points in the strip "
+          "are cyan and drop along short magenta lines onto the line; the magenta dashed line is the internal direction "
+          "E⊥, perpendicular to the slice.",
 }
-
-SYMBOLS = ["ℚ", "√2", "π", "θ*"]
 
 
 def title(p, zh, en):
@@ -28,28 +35,19 @@ def title(p, zh, en):
 
 
 def draw(fig):
-    one, two, three = fig.row([236, 236, 236], 272, gap=16)
+    one, two, three = fig.row([236, 236, 236], 262, gap=16)
 
-    # ---- I: four tiers, each broken open by the next
-    title(one, "I　四级突围", "I  four tiers")
-    w, base, top0, rise = 54, 254, 210, 40
-    x0 = (one.width - 4 * w) / 2
-    for k, (zh, en, _, _) in enumerate(TIERS):
-        top = top0 - k * rise
-        x = x0 + k * w
-        one.rect(x + 2, top, w - 4, base - top, color="edge", fill="panel", width=1.2, rx=3)
-        one.text(x + w / 2, top - 14, SYMBOLS[k], size=17, color="line" if k == 0 else "area", anchor="middle",
-                 weight=700)
-        one.text(x + w / 2, top + 18, str(k + 1), size=13, color="dim", anchor="middle")
+    title(one, "I　一圈纬线，一个影子", "I  one circle, one shadow")
+    shadow_sphere(one, 118, 148, 88)
 
-    # ---- II: the mod 4 dial
-    title(two, "II　模 4 的空格", "II  the empty cell")
-    dial(two, two.width / 2, 152, 92)
+    title(two, "II　看不见的面，所站的轴", "II  the hidden plane, its axis")
+    hidden_plane(two, 118, 148, 88)
 
-    # ---- III: the Gram window
-    title(three, "III　格拉姆窗口", "III  the Gram window")
-    ax, top, bot = gram_window(three, 38, 46, 180, 180, ticks=False)
-    ax.cv.rect(ax.x, ax.y, ax.w, ax.h, color="faint", width=1.0)
-    three.text(ax.X(-0.02), ax.Y(0.0), "det *G* > 0", size=13, color="violet", anchor="middle", middle=True, halo=True,
-               weight=600)
-    three.text(three.width / 2, 252, "*c*_{AB} = cos 60°", size=13, color="dim", anchor="middle")
+    title(three, "III　黄金切片", "III  the golden slice")
+    step = 26
+    P, ea, eb, (ka, kb), acc = golden_slice(three, 118 - 3.5 * step, 222, step)
+    x, y = P(*eb)
+    three.text(x - 4, y - 10, "*E*_{∥}", size=14, color="now", weight=600, anchor="end")
+    top = ka if ka[1] > kb[1] else kb
+    x, y = P(*top)
+    three.text(x + 8, y + 6, "*E*_{⊥}", size=14, color="magenta")

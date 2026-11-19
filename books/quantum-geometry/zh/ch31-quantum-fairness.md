@@ -14,8 +14,8 @@
 4. **博弈公平（Horizon Fairness）**：相干一致旋转的固定步幅定律（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款）与有限观察者复杂性防火墙（以[第 26 章](ch30-fields-lines-eth-and-navier-stokes.md)的开放猜想 [@conj-p-neq-np] 成立为前提；外部背景见 [@rem-ch30-query-sos-literature]）阻止算力垄断者提前剧透生命终局；
 5. **遍历公平（Ergodic Fairness）**：诞生遗忘重置相容自由度（`MODEL`），而紧致环面闭子群轨道均匀分布与有界间隙回归定理（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款；窗口应用与边界见 [@rem-ch31-weyl-window-equidistribution-literature]）支撑“长程旅程共享统计全息星光”的本体诠释。
 
-::: {.figure src="ch31-overview"}
-**图 27。** 本章地图：第 I 栏，墨色的 $\phi$ 与 $\psi$ 互相丈量，各自投到对方上的青色影子一样长，都是 $\cos\theta$，上方的第 3 点 $C$ 被划掉；第 II 栏，墨色对角线 $y = x$ 与青色抛物线 $y = x^2$ 只在 $0$（$\phi \perp \psi$）与 $1$（$\phi = \psi$）相交，这是克隆机强加给内积的锁；第 III 栏，圆上按黄金角排开的 $21$ 个点里有 $8$ 个落进占圆周 $2 - \varphi \approx 0.382$ 的青色窗口，长程份额趋于窗口所占的 $2 - \varphi$（示意；零边界窗口的频率是既有结果的应用，见 [@rem-ch31-weyl-window-equidistribution-literature]）。
+::: {.figure src="ch27-overview"}
+**图 27。平视互易丈量、不可克隆内积锁与黄金角圆周均匀遍历。** 第 I 栏，墨色的 $\phi$ 与 $\psi$ 互相丈量，各自投到对方上的青色影子一样长，都是 $\cos\theta$，上方的第 3 点 $C$ 被划掉；第 II 栏，墨色对角线 $y = x$ 与青色抛物线 $y = x^2$ 只在 $0$（$\phi \perp \psi$）与 $1$（$\phi = \psi$）相交，这是克隆机强加给内积的锁；第 III 栏，圆上按黄金角排开的 $21$ 个点里有 $8$ 个落进占圆周 $2 - \varphi \approx 0.382$ 的青色窗口，长程份额趋于窗口所占的 $2 - \varphi$（示意；零边界窗口的频率是既有结果的应用，见 [@rem-ch31-weyl-window-equidistribution-literature]）。
 :::
 
 ---

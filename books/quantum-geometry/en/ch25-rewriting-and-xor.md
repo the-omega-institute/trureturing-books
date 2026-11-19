@@ -13,7 +13,7 @@ Not at all! Once we strip away matrix redundancy, the entire algebraic engine re
 
 This chapter establishes four frozen Lean 4 theorems — the qubit Weyl star identities, the no-character theorem, the absence of common Pauli eigenvectors, and the traceless Bloch operator formula — adds a fifth, the composition, adjoint and conjugation laws of Weyl displacement words, as the kernel-checked basis of the "XOR plus sign" multiplication of Pauli words, and then builds the complete runnable zero-dependency Python 3 `GeometricState` engine.
 
-::: {.figure src="ch25-overview"}
+::: {.figure src="sanctuary-xor-overview"}
 **Bitwise blade multiplication and anticommutation.** The chapter at a glance. Panel I: the masks $010_2$ and $001_2$ of $e_2 \cdot e_1$ XOR bit by bit into the cyan $011_2$, and two magenta strands cross once, so the result is $-e_{12}$. Panel II: two cyan dashed mirrors in the plane of state vectors; the amber $u$ reflected in $X$ then $Z$, or in $Z$ then $X$, gives two dark arrows at opposite ends ([@thm-qubit-weyl-star]). Panel III: the amber vector $a$ splits into a vertical cyan part and a horizontal part; the vertical $\pm a_2$ goes on the diagonal of the matrix, the horizontal $a_0 \mp i a_1$ in the two corners ([@cor-bloch-operator-core]).
 :::
 
@@ -163,7 +163,7 @@ Instead of storing $2\times 2$ matrices, we represent the $2^3 = 8$ basis blades
 **The colours of the diagonal.** With e₁₂ · e₁₂ chosen, the right panel shows the right e₁ moving past the left e₂: the two magenta lines cross once, then e₁e₁ and e₂e₂ each cancel to a cyan +1, and the result is −1. Along the dashed diagonal the cells of 1, e₁, e₂, e₃ are cyan (square +1) and those of e₁₂, e₁₃, e₂₃, I₃ magenta (square −1), as in the “Square” column of the table above.
 :::
 
-With this 3-bit encoding, the geometric product of any two basis blades $E_{\mathrm{left}}$ and $E_{\mathrm{right}}$ reduces to two bitwise operations (Panel I of Figure 25):
+With this 3-bit encoding, the geometric product of any two basis blades $E_{\mathrm{left}}$ and $E_{\mathrm{right}}$ reduces to two bitwise operations (Panel I of the chapter overview figure):
 
 1. **Target blade mask via bitwise XOR**: Whenever a basis vector $e_i$ appears in both $\mathrm{left}$ and $\mathrm{right}$, $e_i^2 = +1$ cancels that bit; basis vectors appearing in only one operand survive. Thus the product blade has mask
    $$

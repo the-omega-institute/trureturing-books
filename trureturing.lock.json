@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "d36a3792a95b50d48dbe1b08b15f1f249461d860",
-  "pinned_at": "2026-11-19T03:41:45Z",
+  "pinned_at": "2026-11-19T03:59:29Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6204,6 +6204,14 @@
       "statement_id": "sha256:f1def1d45a7ded5fabde68f7c2080b1b30564fff83957726a06255dc4ca220a4",
       "line": 51,
       "signature": "theorem parry_stationary_law (k : ℕ) (hk : 2 ≤ k) : let p"
+    },
+    "D5/S3/TotalVariation/ParryTopologicalEntropy.bilateral_entropy": {
+      "module": "D5/S3/TotalVariation/ParryTopologicalEntropy",
+      "name": "D5.S3.TotalVariation.ParryTopologicalEntropy.bilateral_entropy",
+      "kind": "theorem",
+      "statement_id": "sha256:05e39a8ea12179134b1b51665e07c490b9a44e3980d21b30305b146aafc3d871",
+      "line": 226,
+      "signature": "theorem bilateral_entropy (k : ℕ) (hk : 2 ≤ k) : coverEntropy (FullShift.shift (1 : ℤ)) {x | allowedPath k x = true} = (Real.log (dbonacciPerronRoot k) : EReal)"
     },
     "D5/S3/TotalVariation/Pinsker.pinsker_inequality": {
       "module": "D5/S3/TotalVariation/Pinsker",

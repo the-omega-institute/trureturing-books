@@ -1,6 +1,6 @@
 # 29.2 八分球面与旋子曲率：看不见哪块面积，你就站在哪根轴上 {#sec-ch34-octant-rotor-holonomy}
 
-如果说球面点寻址还只是“静态向量投影”，那么当我们把目光投向图 34 第 II 栏的**八分球面正交回路模型（`MODEL`）**（一步路径与两步路径的旋子乘积、和乐差异与赤道测试态对比完整封装于下文归属算例 [@ex-ch34-spherical-addressing-and-octant-rotors] 第 2 部分，连续几何相位文献背景见 [@rem-ch34-virtual-z-berry-relativity-literature]）时，“一次正交 vs. 两次正交”的反演威力更会上升到**算子读出核与换位子盲区**的层面。
+如果说球面点寻址还只是“静态向量投影”，那么当我们顺着图 29 第 II 栏中极轴观察者看不见的赤道圆盘 $90^\circ$ 旋转面积，进一步走入**八分球面正交回路模型（`MODEL`）**（一步路径与两步路径的旋子乘积、和乐差异与赤道测试态对比完整封装于下文归属算例 [@ex-ch34-spherical-addressing-and-octant-rotors] 第 2 部分，连续几何相位文献背景见 [@rem-ch34-virtual-z-berry-relativity-literature]）时，“一次正交 vs. 两次正交”的反演威力更会上升到**算子读出核与换位子盲区**的层面。
 
 ::: {.viz src="spherical-degeneracy-radar" preset="hops" height="500"}
 **一步与两步：终点相同，随行的小旗差 90°。** 实线一步沿 $\mathbf{e}_1\wedge\mathbf{e}_3$ 直上 $+\mathbf{e}_3$，虚线两步先到 $\mathbf{e}_2$ 再上 $+\mathbf{e}_3$；两面小旗（$\mathbf{e}_2$ 的像）在 $\mathbf{e}_1\wedge\mathbf{e}_2$ 面里差出品红的 $90^\circ$，右下角紫色的差旋子 $\exp(-\frac{\pi}{4}\mathbf{e}_1\mathbf{e}_2)$ 整个落在这个面里（[@ex-ch34-spherical-addressing-and-octant-rotors]）。

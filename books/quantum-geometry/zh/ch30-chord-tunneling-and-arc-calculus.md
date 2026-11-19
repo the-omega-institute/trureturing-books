@@ -10,6 +10,10 @@
 2. **正交虚空间割弦隧穿与阿秒时间双缝自干涉（[§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md#sec-ch34-imaginary-chord-tunneling-and-temporal-double-slit)）**：打通纳米势垒 $90^\circ$ 虚空间内割弦穿透与时域双缝能谱频率梳 $\Delta E = h/\Delta t$，核算中途捏合记录对跨时刻干涉条纹的精确抹除；
 3. **以旋代差、矢高相变与有限精度斯托克斯定理（[§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md#sec-ch34-arc-body-calculus-and-finite-stokes)）**：建立无相减复步旋子导数、赫尔德粗糙度指数 $\alpha \in (0, 1]$ 支配的累计矢高四相区相变，以及 `1—3—3—1` 离散外微分复形上零上链截断误差的广义斯托克斯与高斯—博内定理，为下一章直入黎曼临界带铸好全套微积分利器。
 
+::: {.figure src="ch30-overview"}
+**图 30。内割弦与外弧矢高对比、虚空间隧穿与时间双缝频谱梳及有限网格内棱对消。** 第 I 栏，单位圆上对比青色内割弦 $2\sin\theta$、品红外弧 $2\theta$ 与正交矢高 $1 - \cos\theta$（[§30.1](ch34-s26-chord-tunneling-and-pivot-renormalization.md)）；第 II 栏，拐入 $90^\circ$ 正交虚空间后穿过宽度 $L$ 势垒的指数衰减振幅 $\exp(-\kappa L)$，以及下方周期为 $2\pi/\Delta t$ 的时间双缝频谱梳（[§30.2](ch34-s27-imaginary-chord-tunneling-and-temporal-double-slit.md)，`MODEL` / 手工推导）；第 III 栏，有限开口旋子差商 $\sin(\kappa\epsilon)/\epsilon$ 与两枚定向三角形沿公共内边成对相消 $\partial^2 = 0$（绿色 `LEAN ✓` 标记单纯二上链正合锚点，[§30.3](ch34-s30-arc-body-calculus-and-finite-stokes.md)）。
+:::
+
 ---
 
 - [30.1 极小圆弧体内割弦面、打破排序壁垒的枢轴八度重整化与瞬子隧穿](ch34-s26-chord-tunneling-and-pivot-renormalization.md)

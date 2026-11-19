@@ -63,7 +63,7 @@ Taken together, the three clauses of [@thm-ch34-perpendicular-axis-and-pullback]
 :::
 
 ::: {.remark #rem-ch34-localization-figure title="Polar-Axis Inversion and Octant Rotor Blind-Spot Diagram (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Two-step spherical addressing inversion ([@ex-ch34-spherical-addressing-and-octant-rotors]), combined with the formal perpendicular-axis and adjoint-pullback laws ([@thm-ch34-perpendicular-axis-and-pullback], `LEAN ✓`), is drawn in Panel I of Figure 34 and in this section's two lab cards `meridian` and `sweep`; octant rotor holonomy and its geometric-phase background ([@ex-ch34-spherical-addressing-and-octant-rotors] and [@rem-ch34-virtual-z-berry-relativity-literature]) are drawn in Panel II of Figure 34, in the next section's four lab cards `hops`, `equator`, `tilted` and `frames`, and in the octant-loop card further on.
+**Literature result, not formalized in this book.** Two-step spherical addressing inversion ([@ex-ch34-spherical-addressing-and-octant-rotors]), combined with the formal perpendicular-axis and adjoint-pullback laws ([@thm-ch34-perpendicular-axis-and-pullback], `LEAN ✓`), is drawn in Panel I of Figure 29 and in this section's two lab cards `meridian` and `sweep`; octant rotor holonomy and its geometric-phase background ([@ex-ch34-spherical-addressing-and-octant-rotors] and [@rem-ch34-virtual-z-berry-relativity-literature]) are drawn in Panel II of Figure 29, in the next section's four lab cards `hops`, `equator`, `tilted` and `frames`, and in the octant-loop card further on.
 :::
 
 ---

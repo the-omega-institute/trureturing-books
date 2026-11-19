@@ -11,6 +11,10 @@
 3. **三元数即原生场与希尔伯特空间的多场再投影祛魅（[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md#sec-ch39-ternion-field-composition-and-hilbert-reprojection)）**：追踪双旋量四维时空、法诺平面七场编织八元数 $\mathbb{O}$ 与十六元数零因子破产，量化 $N$ 座三元数场局部 $3N$ 参数展开为 $2^N$ 维平直希尔伯特账本时的指数维数税及有界键维张量网络的逆向拆税；
 4. **三元数的五种非线性无损表示与无原点流群合成（[§32.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md#sec-ch39-nonlinear-ternion-representations-and-torsor-synthesis)）**：给出指数圆弧 BCH 弯曲合成、双卡有理修正罗德里格斯分式（配 $1\;\mathrm{bit}$ 旋量叶标志）、霍普夫纤维联络、无坐标球面三角转角以及普吕弗—贝尔无原点流群 $[x,y,z]=xy^{-1}z$ 与李三元系曲率括号五种等价无损表示，为物理场统一与三元数场人工智能奠定严密运算语法。
 
+::: {.figure src="ch32-overview"}
+**图 32。三维旋度自闭合封顶、三元数四路数系切面与多场再投影流群搬运。** 第 I 栏，三张有向平面各自配对唯一法向轴，正维数中仅 $d = 3$ 满足旋度自闭合 $\binom{d}{2} = d$（绿色 `LEAN ✓` 叉乘分类，[§32.1](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)）；第 II 栏，实可除代数单位球阶梯 $S^0, S^1, S^3, S^7$ 与原生三元数 $T_3 \cong S^3$ 分出的四条切刀支路：四元数嵌入、复投影、实标量与整数绕数（[§32.2](ch39-s19-inexpressible-ternions-and-number-projections.md)）；第 III 栏，对比希尔伯特重投影的 $2^N$ 复维数税与原生 $3N$ 实参数账本（[§32.3](ch39-s20-ternion-field-composition-and-hilbert-reprojection.md)），下方圆弧示意无原点流群三元搬运 $[a, b, c] = a b^{-1} c$ 保持同一相对转角（[§32.4](ch39-s21-nonlinear-ternion-representations-and-torsor-synthesis.md)）。
+:::
+
 ---
 
 - [32.1 三维概念场封顶原理与希尔伯特多概念混编账本：为什么“三维以上”只是独立三维场的并置投影](ch39-s10-three-dimensional-field-cap-and-hilbert-ledger.md)

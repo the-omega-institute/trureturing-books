@@ -8,13 +8,13 @@
 
 本篇作为《[铸器与圣殿](sanctuary.md)》形式化公理圣殿审计的下篇，将逐行解剖连接纯态内积模方、迹配对权重、吕德斯条件态完备性与未读不动点充要判据的四条核心源码，并给出覆盖第四部至第六部代表性冻结声明的**全景源码审计表**。
 
-::: {.figure src="ch28-overview"}
+::: {.figure src="sanctuary-lean-ii-overview"}
 **从玻恩权重到未读态不动点。** 本章地图：左栏，琥珀色的箭头 $\psi$ 在青色的线 $\phi$ 上落下青色的影子 $\lvert\langle\phi\mid\psi\rangle\rvert = 3/5$，以影子为边的青色正方形就是记录权重 $9/25$（[@thm-audit-rank-one-born]）；中栏上半，长为 $1$ 的横条按权重 $w_0 = 9/25$、$w_1 = 16/25$ 分成两段，合起来是未读态（[@lemma-audit-born-pairing-weight]）；中栏下半，每段除以自己的权重，各自撑满一整根，条件态的迹回到 $1$（[@prop-audit-conditional-state]）；右栏，带品红交叉块的 $\rho$ 被挤压改变，交叉块划掉的 $\rho'$ 是不动点（[@cor-audit-unread-fixed-iff]）。数值取自本章末尾的例子。
 :::
 
 ## 秩一玻恩模方归约与三合取配对桥的源码解剖 {#sec-audit-rank-one-born-and-pairing}
 
-在[第一章](ch01-measurement.md)与[第二章](ch02-born-rule.md)中，我们曾指出：纯态 $\rho = \lvert\psi\rangle\langle\psi\rvert$ 在秩一投影 $P_k = \lvert\phi\rangle\langle\phi\rvert$ 下的迹配对 $\Tr(\rho P_k)$ 之所以化为内积模方 $\lvert\langle\phi \mid \psi\rangle\rvert^2$，完全源于外积矩阵 `Matrix.vecMulVec` 的乘法结合律与迹收缩恒等式。现在让我们打开 `D5/S3/Observer/BornReduction.lean:27`，审视其精确的 Lean 4 声明与内核证明（图 28 左栏）。
+在[第一章](ch01-measurement.md)与[第二章](ch02-born-rule.md)中，我们曾指出：纯态 $\rho = \lvert\psi\rangle\langle\psi\rvert$ 在秩一投影 $P_k = \lvert\phi\rangle\langle\phi\rvert$ 下的迹配对 $\Tr(\rho P_k)$ 之所以化为内积模方 $\lvert\langle\phi \mid \psi\rangle\rvert^2$，完全源于外积矩阵 `Matrix.vecMulVec` 的乘法结合律与迹收缩恒等式。现在让我们打开 `D5/S3/Observer/BornReduction.lean:27`，审视其精确的 Lean 4 声明与内核证明（本章总览图左栏）。
 
 在 Mathlib 与 `Conditioning.lean` 中，对于任意有限指标类型 $n$（`[Fintype n]`）与复向量 $\phi, \psi : n \to \mathbb{C}$，秩一外积定义为 $\operatorname{vecMulVec}(\psi, \operatorname{star}\psi)_{ij} = \psi_i \overline{\psi_j}$，复厄米（Hermite）内积记作点积 `star phi ⬝ᵥ psi` $= \sum_{i \in n} \overline{\phi_i}\psi_i$，而记录权重定义为
 
@@ -69,7 +69,7 @@ theorem rank_one_pure_state_modulus_square_reduction
 **秩一归约是一条六步的重写链。** 从上往下，每个箭头旁是证明里那一步用的引理：迹先被拆成两个外积 $\lvert\psi\rangle\langle\psi\rvert$、$\lvert\phi\rangle\langle\phi\rvert$，外积相乘收缩出一个内积，取迹再收缩出另一个内积，两者正好互为共轭，乘起来是青色的 $\lvert z\rvert^2$，$z = \langle\phi\mid\psi\rangle$；链的终点是绿色的 [@thm-audit-rank-one-born]。
 :::
 
-更进一步，在 `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean:36` 中，单分支的秩一模方公式被无缝桥接到全套有限记录测量系综的分解定理上（图 28 中上栏）。
+更进一步，在 `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean:36` 中，单分支的秩一模方公式被无缝桥接到全套有限记录测量系综的分解定理上（本章总览图中上栏）。
 
 ::: {.lemma #lemma-audit-born-pairing-weight title="秩一玻恩配对权重与未读条件态凸组合的三合取桥接引理（内核审计版）" lean="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"}
 设 $n$ 为具有可判等性的有限指标类型（`[Fintype n] [DecidableEq n]`），$\kappa$ 为有限结果类型（`[Fintype kappa]`），$P : \kappa \to M_n(\mathbb{C})$ 满足记录测量公理 `hP : IsRecordMeasurement P`，$\rho \in M_n(\mathbb{C})$ 满足正半定与单位迹条件 `hState : rho.PosSemidef ∧ Matrix.trace rho = 1`。若对指定结果 $k \in \kappa$ 及向量 $\phi, \psi : n \to \mathbb{C}$ 有
@@ -106,7 +106,7 @@ $$
 
 ## 吕德斯条件态完备性与未读不动点充要判据 {#sec-audit-conditional-state-and-fixed-point}
 
-现在我们打开 `D5/S3/Observer/Conditioning.lean` 的第 108 行与第 143 行，审计观察者条件化理论中最核心的两条定理（图 28 中下栏与右栏）。
+现在我们打开 `D5/S3/Observer/Conditioning.lean` 的第 108 行与第 143 行，审计观察者条件化理论中最核心的两条定理（本章总览图中下栏与右栏）。
 
 在 `Conditioning.lean:137` 中，给定结果 $k \in \kappa$ 后的**吕德斯条件态**（Lüders conditional state）定义为
 
@@ -144,7 +144,7 @@ $$
 **条件态完备性的四步，第三步借用[圣殿上篇](ch27-reading-frozen-proofs-i.md)的玻恩骨架。** 右列自上而下是证明的四步，每步旁是所用的引理；左边虚线圈里的前提各喂进一步，绿色的 [@lemma-audit-born-skeleton] 喂进第 ③ 步，给出权重非负。链的终点是绿色的 [@prop-audit-conditional-state]；图中 $\rho_k$ 即 $\operatorname{conditionalState}(P, \rho, k)$，$w_k$ 即 $\operatorname{recordWeight}(P, \rho, k)$。
 :::
 
-最后，我们审计 `Conditioning.lean:108` 的**未读测量不动点充要定理**。这正是作者用来连接量子测量与自指方程 $\psi = \psi(\psi)$ 的严格算子判据（图 28 右栏）：把测量信道 $\mathcal{E}_P(\rho) = \operatorname{unreadState}(P, \rho)$ 视为观察者对自身状态空间的投影自映射，那么 $\rho$ 成为不动点 $\mathcal{E}_P(\rho) = \rho$ 的充要条件，恰好是所有异指标交叉块 $P_k \rho P_l$（$k \neq l$）全部消失。
+最后，我们审计 `Conditioning.lean:108` 的**未读测量不动点充要定理**。这正是作者用来连接量子测量与自指方程 $\psi = \psi(\psi)$ 的严格算子判据（本章总览图右栏）：把测量信道 $\mathcal{E}_P(\rho) = \operatorname{unreadState}(P, \rho)$ 视为观察者对自身状态空间的投影自映射，那么 $\rho$ 成为不动点 $\mathcal{E}_P(\rho) = \rho$ 的充要条件，恰好是所有异指标交叉块 $P_k \rho P_l$（$k \neq l$）全部消失。
 
 ::: {.figure src="ch28-fixed-skeleton"}
 **不动点判据的两个方向，各三步。** 左列“⇒”从 $U(\rho) = \rho$ 出发，把 $\rho$ 换成 $U(\rho)$，左投影吸收后由正交性归零；右列“⇐”从交叉块为零出发，用完备性把 $P_k\rho$ 展开成和式，和式只剩对角那一项，再对 $k$ 求和回到 $\rho$。两列汇入绿色的 [@cor-audit-unread-fixed-iff]；图中 $U(\rho)$ 即 $\operatorname{unreadState}(P, \rho)$。
