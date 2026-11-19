@@ -956,6 +956,8 @@ $$
 
 The $d$ sign functions form an orthogonal basis of the functions on $U$. For orthogonality, sum a nontrivial sign function by pairing each point with its translate by a vector at which the functional is $1$. Thus $P$ is uniform exactly when every nonzero $\ell$ has zero expectation. The product vanishes precisely when some row with $\ell(a_i)=1$ has $p_i=1/2$. If the balanced rows span $U$, every nonzero $\ell$ takes value $1$ on some such row. If they span a proper subspace, extend a basis of that subspace to a basis of $U$ to obtain a nonzero functional vanishing on every balanced row. Applying the same argument to $Q$ and the columns of $A$ gives the condition on the other side. When $r=0$, each group index has a single possible value, the marginal is pure, and both spanning conditions hold automatically. This includes the case where either side has no remaining orbitals.
 
+The [uniformity criterion for binary endpoint laws](lean:D5/S3/Combinatorics/Probability/BinaryEndpointLaw.mass_eq_uniform_iff_span) applies to both $P$ and $Q$.
+
 For example, take retained pairs $(0,4)$ and $(1,3)$ and a discarded pair $(2,5)$. Both rows of $A$ are $(1)$. If either one of the retained orbitals is balanced and the discarded orbital is balanced, the entropy is $\log 2$. The other retained orbital may have any positive endpoint probabilities.
 
 For this literal word, ordinary letter-count balance and a sum weighted by position parity are different observables. Retain the letter encoding $A=0$, $B=1$, $C=2$ and take integer weights
