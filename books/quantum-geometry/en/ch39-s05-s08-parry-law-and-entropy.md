@@ -471,6 +471,8 @@ Appending zeros extends each admissible finite word to a one-sided path. Let $a_
 Reading the entire forward tail from any nonpositive integer origin maps the bilateral space onto the same one-sided subshift and intertwines the shifts. Moving the origin to the left includes any prescribed finite set of coordinates. Thus every entourage of the bilateral product uniformity can be controlled by one forward-tail reading, and the two cover entropies agree. The full proof is checked by the Lean kernel.
 :::
 
+Complementing bits identifies this model with the finite $S$-gap shift for $S=\{0,\ldots,K-1\}$. The entropy formula then also follows from Ahmadi Dastjerdi and Jangjoo’s entropy function. [Computations on Sofic S-gap Shifts](https://doi.org/10.1007/s12346-013-0096-2)
+
 Dividing by $\log 2$ gives $\log_2\beta_K$ bits per step. Numerical evaluation gives approximately $0.69424$, $0.87915$, and $0.94678$ bits per step at $K=2,3,4$. As $\beta_K\nearrow2$, the value increases to one bit per step.
 
 In the bilateral Parry system above, take the return section to consist of paths that have just read a zero. Every path encounters another zero within $K$ steps. The conditional measure on this section reconstructs the original measure.
