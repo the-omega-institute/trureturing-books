@@ -495,6 +495,28 @@ For $m=0$ the event is the entire section and the empty product is $1$.
 A return of duration $d$ traces the suffix sequence $0,1,\ldots,d-1,0$. Its final zero also starts the next return. Joining successive blocks at their common zeros identifies the duration event with one suffix cylinder on the original path. Each allowed transition contributes a factor $p$ times the ratio of the destination and origin weights. The ratios telescope because the initial and final suffixes are both zero. Conditioning divides out the initial cylinder mass $\mu(A)$ and leaves one factor $p^d$ per return. The full proof is checked by the Lean kernel.
 :::
 
+The duration distribution also determines the entropy of the induced system. One step here is one return and may span several steps of the original shift.
+
+::: {.theorem #thm-ch39-p2e-parry-induced-entropy title="Kolmogorov–Sinai Entropy of the Induced Parry Return Map" lean="D5/S3/TotalVariation/ParryInducedEntropy.actual_return_entropy"}
+Under the hypotheses of [@thm-ch39-p2e-native-parry-first-return], let $T_A$ be the actual first-return map on the same zero section, with normalized conditional probability $\mu_A$. Put $p=\beta_K^{-1}$. With natural logarithms,
+
+$$
+h_{\mu_A}(T_A)
+=-\sum_{d=1}^{K}p^d\log(p^d)
+=\frac{-\log p}{\mu(A)}.
+$$
+
+The entropy is in nats per return.
+:::
+
+::: proof
+By [@thm-ch39-p2e-parry-return-durations], the joint entropy of the first $n$ durations is $n$ times the entropy of one duration. The duration partition therefore gives a lower bound on the Kolmogorov–Sinai entropy.
+
+For the upper bound, observe the relation bits within radius $m$ at each of the first $n$ return points. A duration $d$ determines the block $1^{d-1}0$. The $m$ bits before the starting point and the first $n+m$ durations determine all these windows. The initial bits contribute at most $m\log 2$ to the entropy bound. Dividing by $n$ and taking the limit bounds the rate for each fixed window by the entropy of one duration. As the radius increases, the windows generate the measurable structure of the full bilateral path. The same upper bound then applies to the supremum over all finite measurable partitions.
+
+Finally, expand the stationary suffix weights. The term $p^d$ appears exactly $d$ times in the normalizing sum, so $\sum_{d=1}^K d\,p^d=\operatorname{normalizer}(K)=1/\mu(A)$. Substitution of $\log(p^d)=d\log p$ gives the second equality. The full proof is checked by the Lean kernel.
+:::
+
 Whether the transverse Rauzy boundary Hausdorff dimension $D_F = \dim_H(\partial\mathcal{R}_K)$ governs anomalous entanglement scaling in Pisot cut-and-project quantum many-body states remains an open mathematical-physics problem:
 
 ::: {.problem #prob-ch39-p2e-fractal-horizon title="Open Problem: Rauzy Fractal-Horizon Entanglement Scaling in Pisot Cut-and-Project Quantum Many-Body Systems"}
