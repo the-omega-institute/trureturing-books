@@ -503,7 +503,7 @@ There are uniform probability masses $\mu$ on $\mathcal L(F)$ and $\nu$ on $\mat
 :::
 
 ::: proof
-Choose the outgoing direction at one vertex of a completed cycle. If two successor permutations agree there, they also agree at the next vertex, since going back would create a two-cycle. Agreement propagates along the entire cycle. The two possible directions are inverse permutations, each forcing the directions of all edges of $F$. Summing the two equal lift masses over each completed graph gives the same graph mass.
+Choose the outgoing direction at one vertex of a completed cycle. If two successor permutations agree there, they also agree at the next vertex, since going back would create a two-cycle. Agreement propagates along the entire cycle. The two possible directions are inverse permutations, each forcing the directions of all edges of $F$. Summing the two equal lift masses over each completed graph gives the same graph mass. The full proof is checked by the Lean kernel.
 :::
 
 The probability law concerns one fixed $F$. For instance, when $F$ is already a full cycle, the two lifts each have mass one half and both project to that cycle. When $F$ is a completable spanning path, the two lifts close it in opposite directions and project to the same completed graph.
