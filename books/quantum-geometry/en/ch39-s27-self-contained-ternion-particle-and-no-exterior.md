@@ -159,7 +159,7 @@ Item 1 follows from edge-incidence expansion and $V - E + F = 2$ rank-nullity on
 ::: {.remark #rem-ch39-composite-spheres-and-soldering title="Composite State Spheres Carry No Origin-Free Transport; a Soldering Form Ties the Space of Dichotomies to the Heap's Own Parallelism"}
 **State spheres of composites (`manual derivation`).** The unit state sphere of $N$ composed structures is $S^{2^{N+1} - 1} \subset (\mathbb{C}^2)^{\otimes N}$; for $N \ge 2$ it carries no continuous ternary transport satisfying Law (I) (the sphere obstruction of Step 3 in §39.1.3). The origin-free transport of ternions therefore belongs to a single structure, and what composites keep is the round-trip law ([@rem-ch39-axiom-omega-composites-round-trip]). If the ontological manifold $\mathcal{M}_{\mathrm{ont}}$ above is read as the composite state space, it is no longer a heap.
 
-**Soldering form (`manual derivation`).** On the space of dichotomies $dS_4$ of [@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter], with the cap radius $a$ and the cap centre $n \in S^3$ as coordinates, the coframe
+**Soldering form (`manual derivation`).** On the space of dichotomies of configurations $dS_4$ of [@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter], with the cap radius $a$ and the cap centre $n \in S^3$ as coordinates, the coframe
 
 $$
 e^0 \;=\; \frac{da}{\sin a}, \qquad e^i \;=\; \frac{\theta^i}{\sin a} \qquad (i = 1, 2, 3)

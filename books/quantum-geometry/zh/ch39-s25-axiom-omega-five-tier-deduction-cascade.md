@@ -33,22 +33,22 @@
 道蒂不动点与共享主频预算卡：第二阶台座上二阶认妄归零收敛至 $\theta^* \approx 0.739085$，同时琥珀态点 $(\sqrt{0.48}, 0.40, 0.60) \approx (0.6928, 0.4000, 0.6000)$ 严格停在第一卦限单位球面上，其三项平方预算份额 $(0.48, 0.16, 0.36)$ 恒合为 $1$（`rational_inverse_endpoint`、`record_time_lower_bound`、`eq_smul_minkowski_of_null` 与 `bogoliubov_norm_conservation` 为 `LEAN ✓`，预算核验标 `NUM`，引力负载标定标 `MODEL`）。
 :::
 
-::: {.remark #rem-ch39-axiom-omega-tier2-velocity-and-de-sitter title="第二阶的精确对应：布洛赫球内部是双曲空间，二分检验构成 de Sitter 时空"}
+::: {.remark #rem-ch39-axiom-omega-tier2-velocity-and-de-sitter title="第二阶的精确对应：布洛赫球内部是双曲空间，构型二分构成 de Sitter 空间"}
 **态空间的速度几何（`手工推导`）。** 布洛赫球内部 $\{\rho_r : \lvert r\rvert < 1\}$ 在滤波作用 $\rho \mapsto g\rho g^\dagger / \operatorname{Tr}(g\rho g^\dagger)$（$g \in \mathrm{SL}(2, \mathbb{C})$）下是贝尔特拉米—克莱因模型中的双曲三维空间，距离为
 
 $$
 \cosh d(\rho_r, \rho_{r'}) \;=\; \frac{1 - \langle r, r'\rangle}{\sqrt{(1 - \lvert r\rvert^2)(1 - \lvert r'\rvert^2)}} .
 $$
 
-把球心带到 $\rho_r$ 的正定滤波对应参数为 $r$ 的纯洛伦兹推进，两次滤波复合为参数按爱因斯坦速度加法合成的推进再接一个转动（J.-L. Chen & A. A. Ungar, *Found. Phys.* **32**, 531–565, 2002，`文献结果`），且 $\cosh d(\rho_0, \rho_r) = \gamma(r) = (1 - \lvert r\rvert^2)^{-1/2}$。若 $\rho_r$ 是双比特纯态 $\psi$ 的边缘态，则 $\gamma(r)^{-1}$ 等于 $\psi$ 的共生度 $C(\psi) = 2\lvert\det\psi\rvert$，即 $\lvert r\rvert^2 + C^2 = 1$；对检验轴 $r_p$，记 $P := \lvert\langle r, r_p\rangle\rvert$、$V := \lvert r - \langle r, r_p\rangle r_p\rvert$，则 $P^2 + V^2 + C^2 = 1$（M. Jakob & J. A. Bergou, *Opt. Commun.* **283**, 827–830, 2010）。上文三项预算 $(d\tau/dt)^2 + \eta_{\mathrm{kin,eff}}^2 + \eta_{\mathrm{grav}}^2 = 1$ 在态空间里的精确对应物就是这条恒等式；把 $\lvert r\rvert$ 称作速度，是对一条态空间定理的读法。
+把球心带到 $\rho_r$ 的正定滤波对应参数为 $r$ 的纯洛伦兹推进，两次滤波复合为参数按爱因斯坦速度加法合成的推进再接一个转动（J.-L. Chen & A. A. Ungar, *Found. Phys.* **32**, 531–565, 2002，`文献结果`），且 $\cosh d(\rho_0, \rho_r) = \gamma(r) = (1 - \lvert r\rvert^2)^{-1/2}$。在 §39.3 的复合系统公设（`MODEL`）下，若 $\rho_r$ 是双比特纯态 $\psi$ 的边缘态，则 $\gamma(r)^{-1}$ 等于 $\psi$ 的共生度 $C(\psi) = 2\lvert\det\psi\rvert$，即 $\lvert r\rvert^2 + C^2 = 1$；对检验轴 $r_p$，记 $P := \lvert\langle r, r_p\rangle\rvert$、$V := \lvert r - \langle r, r_p\rangle r_p\rvert$，则 $P^2 + V^2 + C^2 = 1$（M. Jakob & J. A. Bergou, *Opt. Commun.* **283**, 827–830, 2010）。上文三项预算 $(d\tau/dt)^2 + \eta_{\mathrm{kin,eff}}^2 + \eta_{\mathrm{grav}}^2 = 1$ 在态空间里的精确对应物就是这条恒等式；把 $\lvert r\rvert$ 称作速度，是对一条态空间定理的读法。
 
-**二分检验构成 de Sitter 时空（`手工推导` + `MODEL`）。** $S^3(1)$ 上以 $n$ 为心、测地半径 $a \in (0, \pi)$ 的开球冠与满足 $\lvert v\rvert^2 - t^2 = 1$ 的点 $\xi = (t, v) = (-\cot a,\; n/\sin a)$ 一一对应，记 $\xi$ 对应的球冠为 $C_\xi$；这些点构成 de Sitter 空间 $dS_4$，度规为
+**构型二分构成 de Sitter 空间（`文献结果` + `MODEL`）。** $S^3(1)$ 上以 $n$ 为心、测地半径 $a \in (0, \pi)$ 的开球冠是构型的二分，即以参照点 $n$ 为阈值的比较 $\{x : \kappa(n, x) > \cos^2\frac{a}{2}\}$，与测量意义下的检验是两回事。开球冠与满足 $\lvert v\rvert^2 - t^2 = 1$ 的点 $\xi = (t, v) = (-\cot a,\; n/\sin a)$ 一一对应，记 $\xi$ 对应的球冠为 $C_\xi$；这些点构成 de Sitter 空间 $dS_4$，度规为
 
 $$
 g \;=\; \frac{-da^2 + g_{S^3}}{\sin^2 a} \;=\; -ds^2 + \cosh^2 s\; g_{S^3} \qquad (\sinh s = -\cot a),
 $$
 
-标度因子为 $\cosh s$，截面曲率为 $1$，里奇张量为 $3g$，即以 $S^3$ 的半径为单位 $\Lambda = 3$；球冠的包含关系恰为因果序：$C_\xi \subseteq C_\eta$ 当且仅当 $\eta$ 位于 $\xi$ 的因果未来。物理事件就是这些二分检验，这一点是 `MODEL` 假设；$\Lambda$ 的数值大小需要把 $S^3$ 的半径换算成物理长度，本结构不提供这个长度；度规的动力学及其与物质的耦合保持 `OPEN`。
+标度因子为 $\cosh s$，截面曲率为 $1$，里奇张量为 $3g$，即以 $S^3$ 的半径为单位 $\Lambda = 3$；球冠的包含关系恰为因果序：$C_\xi \subseteq C_\eta$ 当且仅当 $\eta$ 位于 $\xi$ 的因果未来。以 de Sitter 空间描述球面上的球、以包含为因果序，是经典的结论（默比乌斯几何，见 U. Hertrich-Jeromin, *Introduction to Möbius Differential Geometry*, Cambridge, 2003；运动学空间文献见 B. Czech, L. Lamprou, S. McCandlish & J. Sully, *JHEP* **10**, 175, 2015；J. de Boer, F. M. Haehl, M. P. Heller & R. C. Myers, *JHEP* **08**, 162, 2016）。物理事件就是这些构型二分，这一点是 `MODEL` 假设；$\Lambda$ 的数值大小需要把 $S^3$ 的半径换算成物理长度，本结构不提供这个长度；度规的动力学及其与物质的耦合保持 `OPEN`。
 :::
 
 ## 39.2.2 第三阶与第四阶推导：平行三元场丛四大力大统一（AF-GUT）与算术临界谱机制 {#sec-ch39-25-2}
@@ -74,7 +74,7 @@ $$
 
 **一对闭合结构（`手工推导`）。** 一对结构的核空间 $V_2 = \mathbb{C}^2 \otimes \mathbb{C}^2$ 中，反对称单位向量 $\omega$ 张成唯一在联合迁移下不变的射线，其正交补为 $\mathrm{Sym}^2 V \cong \mathbb{C}^3$；$\omega$ 在 $\mathrm{SU}(V_2) \cong \mathrm{SU}(4)$ 中的稳定子是 $\mathrm{SU}(3)$，在 $\mathrm{Sym}^2 V$ 上取定义表示。
 
-**三个结构（`MODEL`）。** 假设规范群为 $\mathrm{SU}(V_2) \times \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$（后两个因子是第三个结构的左、右迁移），物质多重态为 $(4, 2, 1)$ 与 $(4, 1, 2)$，破缺构型为 $\Xi = \omega \otimes v$（$v$ 为第三个结构上的一点）。则 $\Xi$ 的稳定子的李代数为 $\mathfrak{su}(3) \oplus \mathfrak{su}(2)_L \oplus \mathfrak{u}(1)_Y$，其中 $Y = T_{3R} + \frac{1}{2}(B - L)$，忠实作用的整体形式为 $(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1))/\mathbb{Z}_6$。$Y$ 在左手多重态上取 $-\frac{1}{2}$（轻子）与 $\frac{1}{6}$（夸克），在右手多重态上取 $0, -1$（轻子）与 $\frac{2}{3}, -\frac{1}{3}$（夸克），正是含右手中微子的一代费米子的超荷，轻子沿 $\omega$、夸克沿 $\mathrm{Sym}^2 V$。以单一迹形式归一并令三个因子耦合相等，得 $\sin^2\theta_W = \operatorname{Tr}T_{3L}^2 / \operatorname{Tr}Q^2 = \frac{3}{8}$；若超荷就是单个结构的时钟生成元 $T_{3R}$，同一归一给出 $\frac{1}{2}$。按标准模型一圈跑动（不计阈值），$\sin^2\theta_W$ 约在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 达到 $\frac{3}{8}$、约在 $5.4 \times 10^{20}\;\mathrm{GeV}$ 达到 $\frac{1}{2}$；在前一能标上强耦合与另两个耦合在一圈下并不汇合。以上就是 Pati–Salam 嵌入（J. C. Pati & A. Salam, *Phys. Rev. D* **10**, 275–289, 1974）与 Georgi–Quinn–Weinberg（1974）的取值，`文献结果`；新增的只是把各要素对应到比较结构的对象上。规范群的这条假设由母公理之外给出；代的数目、能标与耦合常数保持 `OPEN`（[@prob-ch39-af-gut-threshold-and-proton-stability]、[@prob-ch34-sm-generations-and-couplings]）。
+**三个结构（`MODEL`）。** 以下每一项都是假设：规范群为 $\mathrm{SU}(V_2) \times \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$（后两个因子是第三个结构的左、右迁移），物质多重态为 $(4, 2, 1)$ 与 $(4, 1, 2)$，破缺构型为 $\Xi = \omega \otimes v$（$v$ 为第三个结构上的一点）。则 $\Xi$ 的稳定子的李代数为 $\mathfrak{su}(3) \oplus \mathfrak{su}(2)_L \oplus \mathfrak{u}(1)_Y$，其中 $Y = T_{3R} + \frac{1}{2}(B - L)$，忠实作用的整体形式为 $(\mathrm{SU}(3) \times \mathrm{SU}(2) \times \mathrm{U}(1))/\mathbb{Z}_6$。$Y$ 在左手多重态上取 $-\frac{1}{2}$（轻子）与 $\frac{1}{6}$（夸克），在右手多重态上取 $0, -1$（轻子）与 $\frac{2}{3}, -\frac{1}{3}$（夸克），正是含右手中微子的一代费米子的超荷，轻子沿 $\omega$、夸克沿 $\mathrm{Sym}^2 V$。再假设以单一迹形式归一且三个因子耦合相等（同属 `MODEL` 假设），得 $\sin^2\theta_W = \operatorname{Tr}T_{3L}^2 / \operatorname{Tr}Q^2 = \frac{3}{8}$；若超荷就是单个结构的时钟生成元 $T_{3R}$，同一归一给出 $\frac{1}{2}$。按标准模型一圈跑动（不计阈值），$\sin^2\theta_W$ 约在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 达到 $\frac{3}{8}$、约在 $5.4 \times 10^{20}\;\mathrm{GeV}$ 达到 $\frac{1}{2}$；但以标准模型的物质内容，一圈下没有任何能标实现三个耦合相等：在 $1.0 \times 10^{13}\;\mathrm{GeV}$ 处 $\alpha_3^{-1} = 36.8$，而 $\alpha_2^{-1} = 42.4$。所以 $\frac{3}{8}$ 与 $\frac{1}{2}$ 只是群论边界值，不是对低能值的预言。以上就是 Pati–Salam 嵌入（J. C. Pati & A. Salam, *Phys. Rev. D* **10**, 275–289, 1974）与 Georgi–Quinn–Weinberg（1974）的取值，`文献结果`；新增的只是把各要素对应到比较结构的对象上。规范群的这条假设由母公理之外给出；代的数目、能标与耦合常数保持 `OPEN`（[@prob-ch39-af-gut-threshold-and-proton-stability]、[@prob-ch34-sm-generations-and-couplings]）。
 :::
 
 2. **第四阶推导：算术谱半密度矢高相变与舒尔正定脊线（Tier 4，呼应 [§31.1](ch34-s28-riemann-path-integral-and-prime-arcs.md)–[§31.3](ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)）**：

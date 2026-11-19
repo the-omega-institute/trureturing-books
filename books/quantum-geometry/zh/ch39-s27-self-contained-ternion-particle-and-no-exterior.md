@@ -156,16 +156,16 @@
    - **在有限截断/分片逼近与条件自应用逃逸层面（[终章](coda.md)）**：一旦驻留于本体内部的受限观察者在有限停机精度 $\varepsilon_{\mathrm{self}} > 0$ 下对光滑球面作有限构造逼近（[C.1](coda-s01-polyhedral-remainders.md)），各类有限逼近分别留下精确对应的数学余项——任意有限阶余弦泰勒截断多项式 $P_{2m}(\theta) = \sum_{k=0}^{m}(-1)^k\theta^{2k}/(2k)!$ 在 $\mathbb{R}$ 上作为函数与 $\cos\theta$ 恒不相同，且在交错收敛区间 $0 < \theta \le 2$ 内逐点留下严格非零**代数截断尾项**（见 [第 24 章](ch24-cosine-fixed-points-and-self-reference.md)，尽管低阶多项式可在孤立点如 $P_0(2\pi) = 1 = \cos(2\pi)$ 处与真值相交）；有限逆封闭离散门集 $\mathcal{G} = \mathcal{G}^{-1} \subset \mathrm{SU}(2)$ 生成的全部有限字在连续旋转群 $\mathrm{SU}(2)$ 中至多构成可数子群 $\langle\mathcal{G}\rangle$（故对子群外任意连续目标旋转 $U \notin \langle\mathcal{G}\rangle$ 均不存在精确有限字合成，尽管当 $\langle\mathcal{G}\rangle$ 在 $\mathrm{SU}(2)$ 中稠密时随字长预算无界增长有 $\inf_w d(U, U_w) = 0$，见 [§16.9](ch16-s09-compilation-error-and-count.md)），而在任意固定有限字长预算 $\lvert w\rvert \le L$ 下，该有限字母表生成的有限可达门集 $\mathcal{G}_{\le L}$ 对每个集外目标 $U \notin \mathcal{G}_{\le L}$ 均留下严格正的最小**门合成逼近距** $\min_{\lvert w\rvert \le L} d(U, U_w) > 0$；而非退化有限顶点**分片平直弦面多面体网格**则相对光滑球面留下非零**弦弧矢高（径向）逼近差**：在二维球面切片（如布洛赫球 $S^2$ 或希高德赤道面 $S^2_{\mathrm{eq}}$）上，任何与之同胚的闭合凸多面体表面虽拓扑封闭无破洞，却把总内禀高斯曲率集中为笛卡尔顶点角亏守恒 $\sum_v \delta_v = 4\pi = 720^\circ$（`文献结果`，[@rem-coda-polyhedral-topology-literature]；三维 $S^3$ 的分片平直单纯形逼近则类比地将内禀曲率集中于一维雷吉骨铰链，`文献结果` / `MODEL` 类比）；与此同时，在逻辑自指侧，洛维尔自应用包 [`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package)（`LEAN ✓`）完整并列四款结论——（i）逐点对角求值恒等式 $\operatorname{diagonal}(f, h)(a) = f(h(a, a))$、（ii）逃逸等价刻画 `IsEscaped f h ↔ diagonal f h ∉ range h`、（iii）**只要扭转自映射 $f : Y \to Y$ 无不动点**（$\forall y,\; f(y) \neq y$），任何指标化列表 $h : A \to A \to Y$ 均无法捕获 `diagonal f h` 的普遍逃逸律，以及（iv）撤去无不动点前提时的独立显式布尔/单元捕获见证 `∃ (f₀ : Bool → Bool) (g₀ : Unit → Unit → Bool), ¬IsEscaped f₀ g₀`。将这些有限逼近余项与无不动点对角逃逸诠释为指向“一切有限分片多面体之外”那颗光滑无边三元数本体的认识论路标，正是收束全书的 **`MODEL`** 双层桥梁！
 :::
 
-::: {.remark #rem-ch39-composite-spheres-and-soldering title="复合态球面没有无源迁移；焊接形式把二分检验空间接到流群自身的平行化上"}
+::: {.remark #rem-ch39-composite-spheres-and-soldering title="复合态球面没有无源迁移；焊接形式把构型二分空间接到流群自身的平行化上"}
 **复合系统的态球面（`手工推导`）。** $N$ 个结构复合后的单位态球面是 $(\mathbb{C}^2)^{\otimes N}$ 中的 $S^{2^{N+1} - 1}$；当 $N \ge 2$ 时它不承载满足法则 (I) 的连续三元迁移（§39.1.3 第三步的球面障碍），所以三元数的无源迁移只属于单个结构，复合系统保留的是往返律（[@rem-ch39-axiom-omega-composites-round-trip]）。上文的本体流形 $\mathcal{M}_{\mathrm{ont}}$ 若指复合态空间，它不再是一个流群。
 
-**焊接形式（`手工推导`）。** 在 [@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter] 的二分检验空间 $dS_4$ 上，以球冠半径 $a$ 与球冠中心 $n \in S^3$ 为坐标，余标架
+**焊接形式（`手工推导`）。** 在 [@rem-ch39-axiom-omega-tier2-velocity-and-de-sitter] 的构型二分空间 $dS_4$ 上，以球冠半径 $a$ 与球冠中心 $n \in S^3$ 为坐标，余标架
 
 $$
 e^0 \;=\; \frac{da}{\sin a}, \qquad e^i \;=\; \frac{\theta^i}{\sin a} \qquad (i = 1, 2, 3)
 $$
 
-（$\theta^i$ 为 $S^3$ 上的左不变余标架）给出度规 $g = -(e^0)^2 + \sum_i (e^i)^2$。对偶标架的空间部分是生成右迁移的左不变向量场除以标度因子，因而对流群的左平行化平行；这把二分检验的空间与流群自身的平行化接在一起，与它平行的平坦度量联络的挠率空间部分正是流群左平行化的挠率除以标度因子，时间部分是膨胀率 $\tanh s$。这些二分检验是否就是物理事件，仍按 `MODEL` 假设处理。
+（$\theta^i$ 为 $S^3$ 上的左不变余标架）给出度规 $g = -(e^0)^2 + \sum_i (e^i)^2$。对偶标架的空间部分是生成右迁移的左不变向量场除以标度因子，因而对流群的左平行化平行；这把构型二分的空间与流群自身的平行化接在一起，与它平行的平坦度量联络的挠率空间部分正是流群左平行化的挠率除以标度因子，时间部分是膨胀率 $\tanh s$。这些构型二分是否就是物理事件，仍按 `MODEL` 假设处理。
 :::
 
 ::: {.example #ex-ch39-self-contained-ternion-wavefront-and-origin-audit title="定量核验：单位 S³(1) 测地波前扩张—赤道达峰—对跖归零全表与平直和/反射脱壳对比弯曲流群二点自足"}

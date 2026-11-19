@@ -94,11 +94,11 @@
 :::
 
 ::: {.remark #rem-ch39-axiom-omega-composites-round-trip title="复合系统中的往返律：纠缠被迫出现，仪器来自辅助系统，单次结果不由结构给出"}
-**往返律延续到复合系统时纠缠被迫出现（`手工推导`）。** 设振幅在乘积构型上相乘，并要求复合系统的态集合含全体乘积单位向量、且对任意两态 $x, w$ 都有一个态 $s_x(w)$ 对一切乘积检验态 $y$ 满足 §39.1 的干涉律 $c(y, s_x w) + c(y, w) = 2c(w, x)\,c(y, x)$（`MODEL` 公设）。则 $s_x(w) = 2c(x, w)\,x - w$，全部单位向量都是态，纯态构成 $\mathbb{CP}^{2^N - 1}$，这些反射生成 $\mathrm{O}(V_N)$，其中与复合时钟对易者构成 $\mathrm{U}(2^N)$：每个幺正变换都是往返反射的乘积。例：$N = 2$、$x = \lvert 00\rangle$、$w = \lvert{+}{+}\rangle$ 时 $s_x(w) = \frac{1}{2}(\lvert 00\rangle - \lvert 01\rangle - \lvert 10\rangle - \lvert 11\rangle)$，共生度为 $1$，即最大纠缠；逐分量反射给出乘积态 $\lvert{-}{-}\rangle$，而 $\kappa_2(w, \lvert{-}{-}\rangle) = \frac{1}{2} \ne \frac{1}{4} = c_2(w, x)^2$，违反往返律。
+**往返律延续到复合系统时纠缠被迫出现（`手工推导`）。** 以下三条都是 `MODEL` 假设：复合系统有一个只带单一时钟的核空间；独立射线检验的概率相乘（即振幅在乘积构型上相乘）；复合系统也满足干涉律，即态集合含全体乘积单位向量，且对任意两态 $x, w$ 都有一个态 $s_x(w)$ 对一切乘积检验态 $y$ 满足 §39.1 的干涉律 $c(y, s_x w) + c(y, w) = 2c(w, x)\,c(y, x)$，这相当于一条受限的叠加原理。则 $s_x(w) = 2c(x, w)\,x - w$，全部单位向量都是态，纯态构成 $\mathbb{CP}^{2^N - 1}$，这些反射生成 $\mathrm{O}(V_N)$，其中与复合时钟对易者构成 $\mathrm{U}(2^N)$：每个幺正变换都是往返反射的乘积。例：$N = 2$、$x = \lvert 00\rangle$、$w = \lvert{+}{+}\rangle$ 时 $s_x(w) = \frac{1}{2}(\lvert 00\rangle - \lvert 01\rangle - \lvert 10\rangle - \lvert 11\rangle)$，共生度为 $1$，即最大纠缠；逐分量反射给出乘积态 $\lvert{-}{-}\rangle$，而 $\kappa_2(w, \lvert{-}{-}\rangle) = \frac{1}{2} \ne \frac{1}{4} = c_2(w, x)^2$，违反往返律。
 
-**效应、仪器与完全正性来自辅助系统（`手工推导`）。** 把系统与处于态 $\alpha_0$ 的辅助系统联合，施加幺正 $U$，再对辅助系统做完备检验 $(a)$，令 $K_a\psi := (U(\psi \otimes \alpha_0))_a$（相对态）。则 $\sum_a K_a^\dagger K_a = \mathbf{1}$，结果 $a$ 的玻恩权重为 $\langle\psi, K_a^\dagger K_a\psi\rangle$，给定 $a$ 后的条件态为 $K_a\psi / \lVert K_a\psi\rVert$，$\rho \mapsto \sum_{a \in e} K_a\rho K_a^\dagger$ 完全正；反过来每个克劳斯族都可如此实现，于是所得效应恰为全体 $0 \le E \le \mathbf{1}$。玻恩权重的唯一性需要辅助系统：只对单个系统要求“依赖于射线对、完备检验上和为一、自身射线取一”时，$f(x) = 3x^2 - 2x^3$ 满足 $f(x) + f(1 - x) = 1$，同样合格；再要求权重在添加辅助系统后不变，才唯一锁定玻恩权重。
+**效应、仪器与完全正性来自辅助系统（`手工推导`）。** 把系统与处于态 $\alpha_0$ 的辅助系统联合，施加幺正 $U$，再对辅助系统做完备检验 $(a)$，令 $K_a\psi := (U(\psi \otimes \alpha_0))_a$（相对态）。则 $\sum_a K_a^\dagger K_a = \mathbf{1}$，结果 $a$ 的玻恩权重为 $\langle\psi, K_a^\dagger K_a\psi\rangle$，给定 $a$ 后的条件态为 $K_a\psi / \lVert K_a\psi\rVert$，$\rho \mapsto \sum_{a \in e} K_a\rho K_a^\dagger$ 完全正；反过来每个克劳斯族都可如此实现，于是所得效应恰为全体 $0 \le E \le \mathbf{1}$。玻恩权重的唯一性（`文献结果`）：在 $\beta$ 的非负函数之中，借助格里森型定理（A. M. Gleason, *J. Math. Mech.* **6**, 885–893, 1957）并要求权重在添加辅助系统后不变，玻恩权重唯一；只对单个系统要求“依赖于射线对、完备检验上和为一、自身射线取一”时，$f(x) = 3x^2 - 2x^3$ 满足 $f(x) + f(1 - x) = 1$，同样合格，所以辅助系统不可少。
 
-**单次结果（`手工推导` + `OPEN`）。** 不存在在对称性下协变的选支规则：取 $q$ 使 $\beta(q, p) = \frac{1}{2}$，绕 $r_q$ 转 $\pi$ 的旋转固定 $q$ 而交换 $p$ 与 $p^\perp$，任何协变规则都无从选出其一。给定结果时条件态是确定的；出现哪个结果，结构本身不提供，这与上文 [@prob-ch34-single-outcome-realization] 的 `OPEN` 定位一致。
+**单次结果（`手工推导` + `OPEN`）。** 障碍出现在等权重处：取 $q$ 使 $\beta(q, p) = \frac{1}{2}$，绕 $r_q$ 转 $\pi$ 的旋转固定 $q$ 而交换 $p$ 与 $p^\perp$，所以在等权重的检验上不存在协变的选支规则。给定结果时条件态是确定的；出现哪个结果，结构本身不提供，这与上文 [@prob-ch34-single-outcome-realization] 的 `OPEN` 定位一致。
 :::
 
 ## 39.3.3 形式化锚定主定理、文献与附录 E 边界、五大公理定量核验与迈向无外三元数本体终章 {#sec-ch39-26-3}
@@ -150,7 +150,7 @@ $$
 \bigl\lvert\langle\phi\mid\psi\rangle\bigr\rvert^2 \;=\; \max_{\chi}\bigl(2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1\bigr)^2 \;=\; 2\cdot\frac{1}{2\pi}\int_0^{2\pi}\bigl(2\kappa_{S^3}(e^{\hat{\mathbf{i}}\chi}\psi, \phi) - 1\bigr)^2\,d\chi .
 $$
 
-玻恩概率是 $(2\kappa_{S^3} - 1)^2$ 沿盲区纤维的最大值，也是其纤维平均的两倍。由 [@rem-ch39-axiom-omega-round-trip-closing-law] 的往返律，$(2\kappa(w, x) - 1)^2 = \kappa\bigl(w, [x, w, x]\bigr)$，所以玻恩概率又等于沿盲区纤维取最大的往返读数 $\max_\chi \kappa\bigl(\phi, [e^{\hat{\mathbf{i}}\chi}\psi, \phi, e^{\hat{\mathbf{i}}\chi}\psi]\bigr)$；§39.3.2 所说“往返双投影”在母核上的精确含义即此。
+玻恩概率是 $(2\kappa_{S^3} - 1)^2$ 沿盲区纤维的最大值，也是其纤维平均的两倍。由 [@rem-ch39-axiom-omega-round-trip-closing-law] 的往返律，$(2\kappa(w, x) - 1)^2 = \kappa\bigl(w, [x, w, x]\bigr)$，所以玻恩概率又等于沿盲区纤维取最大的往返读数 $\max_\chi \kappa\bigl(\phi, [e^{\hat{\mathbf{i}}\chi}\psi, \phi, e^{\hat{\mathbf{i}}\chi}\psi]\bigr)$；§39.3.2 所说“往返双投影”在母核上的精确含义即此。玻恩权重因而是母核在时钟（盲区相位）作用下的领头不变量，这一恒等式是 `手工推导`；把它读作概率是一项约定，把纯态读作时钟轨道（盲区纤维）是单个系统层面的一项选择，二者都标为 `MODEL`。
 :::
 
 下面我们在单一具体算例中对五大公设的关键几何不变量做一行一式精确对账：
